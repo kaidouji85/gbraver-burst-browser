@@ -17,8 +17,8 @@ import {NPCEnding} from "./npc-ending/npc-ending";
 import {PlayerSelect} from "./player-select";
 import type {StageTitleParam} from "./stage-title/stage-title";
 import {StageTitle} from "./stage-title/stage-title";
-import type {TitleParams} from "./title/title";
-import {Title} from "./title/title";
+import type {TitleParams} from "./title";
+import {Title} from "./title";
 import type {TutorialStage} from "./tutorial-selector/tutoria-stage-element";
 import {TutorialSelector} from "./tutorial-selector/tutorial-selector";
 
