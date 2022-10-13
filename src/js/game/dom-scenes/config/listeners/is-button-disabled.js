@@ -2,7 +2,7 @@
 import type {ConfigProps} from "../props";
 
 /**
- * 本シーンの入力要素が操作可能であるか否かの設定をする
+ * 本シーンの入力要素が操作可能であるか否かの設定をするヘルパー関数
  *
  * @param props 画面プロパティ
  * @param isDisabled trueで操作可能である

@@ -11,7 +11,7 @@ import type {GbraverBurstBrowserConfig} from "../../../config/browser-config";
 import type {ConfigProps} from "../props";
 
 /**
- * 画面の入力値から設定オブジェクトをパースする
+ * 画面の入力値から設定オブジェクトをパースするヘルパー関数
  *
  * @return パース結果
  */
