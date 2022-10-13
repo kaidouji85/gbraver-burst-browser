@@ -1,13 +1,12 @@
 // @flow
 import {pop} from "../../../dom/animation";
-import type {InputDOM, PushDOM} from "../../../dom/event-stream";
+import type {PushDOM} from "../../../dom/event-stream";
 import {inputDOMStream, pushDOMStream} from "../../../dom/event-stream";
 import type {Resources} from "../../../resource";
 import type {Stream, Unsubscriber} from "../../../stream/stream";
 import type {GbraverBurstBrowserConfig} from "../../config/browser-config";
 import {
   BattleAnimationTimeScales,
-  isConfigChanged,
   parseBattleAnimationTimeScale,
   parseSoundVolume,
   parseWebGLPixelRatio,
@@ -16,6 +15,7 @@ import {
 } from "../../config/browser-config";
 import type {DOMScene} from "../dom-scene";
 import {onBGMVolumeChange} from "./listeners/on-bgm-volume-change";
+import {onPrevButtonPush} from "./listeners/on-prev-button-push";
 import {onSEVolumeChange} from "./listeners/on-se-volume-change";
 import type {ConfigProps} from "./props";
 import {createConfigProps} from "./props";
@@ -41,7 +41,7 @@ export class Config implements DOMScene {
         onSEVolumeChange(this.#props, action);
       }),
       pushDOMStream(this.#props.prevButton).subscribe(action => {
-        this.#onPrevButtonPush(action);
+        onPrevButtonPush(this.#props, action);
       }),
       pushDOMStream(this.#props.configChangeButton).subscribe(action => {
         this.#onConfigChangeButtonPush(action);
@@ -87,28 +87,6 @@ export class Config implements DOMScene {
    */
   configChangeNotifier(): Stream<GbraverBurstBrowserConfig> {
     return this.#props.configChange;
-  }
-
-  /**
-   * 戻るボタンを押した際の処理
-   *
-   * @param action アクション
-   */
-  #onPrevButtonPush(action: PushDOM): void {
-    action.event.preventDefault();
-    action.event.stopPropagation();
-    this.#props.exclusive.execute(async () => {
-      await Promise.all([
-        pop(this.#props.prevButton),
-        this.#props.changeValue.play()
-      ]);
-      const updatedConfig = this.#parseConfig();
-      if (isConfigChanged(this.#props.originConfig, updatedConfig)) {
-        this.#props.dialog.show();
-        return;
-      }
-      this.#props.prev.next();
-    });
   }
 
   /**
