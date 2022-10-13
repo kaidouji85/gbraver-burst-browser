@@ -1,5 +1,5 @@
 // @flow
-import {INVISIBLE_ACCOUNT_MENU_CLASS} from "../doms";
+import {INVISIBLE_ACCOUNT_MENU_CLASS} from "../dom/class-name";
 import type {TitleProps} from "../props";
 
 /**

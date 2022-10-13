@@ -1,5 +1,5 @@
 // @flow
-import {ACCOUNT_MENU_CLASS} from "../doms";
+import {ACCOUNT_MENU_CLASS} from "../dom/class-name";
 import type {TitleProps} from "../props";
 
 /**
