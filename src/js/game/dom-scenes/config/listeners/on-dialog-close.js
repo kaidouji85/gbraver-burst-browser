@@ -1,5 +1,5 @@
 // @flow
-import type {ConfigProps} from "../../config/props";
+import type {ConfigProps} from "../props";
 
 /**
  * 設定変更通知ダイアログを閉じた時の処理
