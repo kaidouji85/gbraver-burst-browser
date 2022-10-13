@@ -3,7 +3,7 @@
 import * as THREE from 'three';
 import {HorizontalAnimationMesh} from "../../../mesh/horizontal-animation";
 import type {Resources} from "../../../resource";
-import {TEXTURE_IDS} from "../../../resource/texture";
+import {TEXTURE_IDS} from "../../../resource/texture/ids";
 import {
   ARMDOZER_EFFECT_STANDARD_X,
   ARMDOZER_EFFECT_STANDARD_Y,
