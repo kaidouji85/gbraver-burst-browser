@@ -15,8 +15,8 @@ import {
   WebGLPixelRatios
 } from "../../config/browser-config";
 import type {DOMScene} from "../dom-scene";
-import {soundVolumeLabel} from "./doms";
 import {onBGMVolumeChange} from "./listeners/on-bgm-volume-change";
+import {onSEVolumeChange} from "./listeners/on-se-volume-change";
 import type {ConfigProps} from "./props";
 import {createConfigProps} from "./props";
 
@@ -38,7 +38,7 @@ export class Config implements DOMScene {
         onBGMVolumeChange(this.#props, action);
       }),
       inputDOMStream(this.#props.seVolumeSelector).subscribe(action => {
-        this.#onSEVolumeChange(action);
+        onSEVolumeChange(this.#props, action);
       }),
       pushDOMStream(this.#props.prevButton).subscribe(action => {
         this.#onPrevButtonPush(action);
@@ -87,20 +87,6 @@ export class Config implements DOMScene {
    */
   configChangeNotifier(): Stream<GbraverBurstBrowserConfig> {
     return this.#props.configChange;
-  }
-
-  /**
-   * SE音量を変更した際の処理
-   *
-   * @param action アクション
-   */
-  #onSEVolumeChange(action: InputDOM): void {
-    action.event.preventDefault();
-    action.event.stopPropagation();
-    this.#props.exclusive.execute(async () => {
-      const value = parseSoundVolume(this.#props.seVolumeSelector.value) ?? 1;
-      this.#props.seVolumeValue.innerText = soundVolumeLabel(value);
-    });
   }
 
   /**
