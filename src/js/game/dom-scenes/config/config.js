@@ -12,6 +12,7 @@ import {
   WebGLPixelRatios
 } from "../../config/browser-config";
 import type {DOMScene} from "../dom-scene";
+import {onDialogClose} from "../title/listeners/on-dialog-close";
 import {onBGMVolumeChange} from "./listeners/on-bgm-volume-change";
 import {onConfigChangeButtonPush} from "./listeners/on-config-change-button-push";
 import {onPrevButtonPush} from "./listeners/on-prev-button-push";
@@ -46,7 +47,7 @@ export class Config implements DOMScene {
         onConfigChangeButtonPush(this.#props, action);
       }),
       this.#props.dialog.closeNotifier().subscribe(() => {
-        this.#onDialogClose();
+        onDialogClose(this.#props);
       }),
       this.#props.dialog.discardNotifier().subscribe(() => {
         this.#onDiscardConfigChange();
@@ -86,15 +87,6 @@ export class Config implements DOMScene {
    */
   configChangeNotifier(): Stream<GbraverBurstBrowserConfig> {
     return this.#props.configChange;
-  }
-
-  /**
-   * 設定変更通知ダイアログを閉じた時の処理
-   */
-  #onDialogClose() {
-    this.#props.exclusive.execute(async () => {
-      this.#props.dialog.hidden();
-    });
   }
 
   /**
