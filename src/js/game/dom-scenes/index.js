@@ -8,7 +8,7 @@ import {createStreamSource} from "../../stream/stream";
 import {waitTime} from "../../wait/wait-time";
 import type {GbraverBurstBrowserConfig} from "../config/browser-config";
 import type {GameAction} from "../game-actions";
-import {Config} from "./config/config";
+import {Config} from "./config";
 import type {DOMScene} from "./dom-scene";
 import {Loading} from "./loading";
 import {MailVerifiedIncomplete} from "./mail-verified-incomplete/mail-verified-incomplete";
