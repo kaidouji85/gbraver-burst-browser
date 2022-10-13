@@ -1,34 +1,19 @@
 // @flow
-import {Howl} from "howler";
 import {pop} from "../../../../dom/animation";
 import type {PushDOM} from "../../../../dom/event-stream";
 import {pushDOMStream} from "../../../../dom/event-stream";
-import {Exclusive} from "../../../../exclusive/exclusive";
 import type {Resources} from "../../../../resource";
-import {SOUND_IDS} from "../../../../resource/sound";
-import type {Stream, StreamSource, Unsubscriber} from "../../../../stream/stream";
-import {createStreamSource} from "../../../../stream/stream";
-import {domUuid} from "../../../../uuid/dom-uuid";
+import type {Stream, Unsubscriber} from "../../../../stream/stream";
 import {ROOT_CLASS, ROOT_CLASS_INVISIBLE} from "./dom/class-name";
-import {extractElements} from "./dom/elements";
-import {rootInnerHTML} from "./dom/root-inner-html";
+import type {ConfigChangedDialogProps} from "./props";
+import {createConfigChangedDialogProps} from "./props";
 
 /**
  * 設定変更通知ダイアログ
  * 本ダイアログは設定画面から呼び出されることを想定している
  */
 export class ConfigChangedDialog {
-  #root: HTMLElement;
-  #backGround: HTMLElement;
-  #closer: HTMLElement;
-  #discard: HTMLElement;
-  #accept: HTMLElement;
-  #exclusive: Exclusive;
-  #changeValue: typeof Howl;
-  #pushButton: typeof Howl;
-  #closeStream: StreamSource<void>;
-  #acceptStream: StreamSource<void>;
-  #discardStream: StreamSource<void>;
+  #props: ConfigChangedDialogProps;
   #unsbusscriber: Unsubscriber[];
 
   /**
@@ -38,35 +23,18 @@ export class ConfigChangedDialog {
    * @param resources リソース管理オブジェクト
    */
   constructor(resources: Resources) {
-    const ids = {backGround: domUuid(), closer: domUuid(), discard: domUuid(), accept: domUuid()};
-    this.#root = document.createElement('div');
-    this.#root.className = ROOT_CLASS_INVISIBLE;
-    this.#root.innerHTML = rootInnerHTML(resources, ids);
-
-    const elements = extractElements(this.#root, ids);
-    this.#backGround = elements.backGround;
-    this.#closer = elements.closer;
-    this.#discard = elements.discard;
-    this.#accept = elements.accept;
-
-    this.#pushButton = resources.sounds.find(v => v.id === SOUND_IDS.PUSH_BUTTON)?.sound ?? new Howl();
-    this.#changeValue = resources.sounds.find(v => v.id === SOUND_IDS.CHANGE_VALUE)?.sound ?? new Howl();
-
-    this.#exclusive = new Exclusive();
-    this.#closeStream = createStreamSource();
-    this.#acceptStream = createStreamSource();
-    this.#discardStream = createStreamSource();
+    this.#props = createConfigChangedDialogProps(resources);
     this.#unsbusscriber = [
-      pushDOMStream(this.#backGround).subscribe(action => {
+      pushDOMStream(this.#props.backGround).subscribe(action => {
         this.#onBackGroundPush(action);
       }),
-      pushDOMStream(this.#closer).subscribe(action => {
+      pushDOMStream(this.#props.closer).subscribe(action => {
         this.#onCloserPush(action);
       }),
-      pushDOMStream(this.#discard).subscribe(action => {
+      pushDOMStream(this.#props.discard).subscribe(action => {
         this.#onDiscardPush(action)
       }),
-      pushDOMStream(this.#accept).subscribe(action => {
+      pushDOMStream(this.#props.accept).subscribe(action => {
         this.#onAcceptPush(action);
       })
     ];
@@ -85,14 +53,14 @@ export class ConfigChangedDialog {
    * ダイアログを表示する
    */
   show(): void {
-    this.#root.className = ROOT_CLASS;
+    this.#props.root.className = ROOT_CLASS;
   }
 
   /**
    * ダイアログを非表示にする
    */
   hidden(): void {
-    this.#root.className = ROOT_CLASS_INVISIBLE;
+    this.#props.root.className = ROOT_CLASS_INVISIBLE;
   }
 
   /**
@@ -101,7 +69,7 @@ export class ConfigChangedDialog {
    * @return 取得結果
    */
   getRootHTMLElement(): HTMLElement {
-    return this.#root;
+    return this.#props.root;
   }
 
   /**
@@ -110,7 +78,7 @@ export class ConfigChangedDialog {
    * @return 通知ストリーム
    */
   closeNotifier(): Stream<void> {
-    return this.#closeStream;
+    return this.#props.closeStream;
   }
 
   /**
@@ -119,7 +87,7 @@ export class ConfigChangedDialog {
    * @return 通知ストリーム
    */
   acceptNotifier(): Stream<void> {
-    return this.#acceptStream;
+    return this.#props.acceptStream;
   }
 
   /**
@@ -128,7 +96,7 @@ export class ConfigChangedDialog {
    * @return 通知ストリーム
    */
   discardNotifier(): Stream<void> {
-    return this.#discardStream;
+    return this.#props.discardStream;
   }
 
   /**
@@ -139,9 +107,9 @@ export class ConfigChangedDialog {
   #onBackGroundPush(action: PushDOM): void {
     action.event.preventDefault();
     action.event.stopPropagation();
-    this.#exclusive.execute(async () => {
-      await this.#changeValue.play();
-      this.#closeStream.next();
+    this.#props.exclusive.execute(async () => {
+      await this.#props.changeValue.play();
+      this.#props.closeStream.next();
     });
   }
 
@@ -153,12 +121,12 @@ export class ConfigChangedDialog {
   #onCloserPush(action: PushDOM): void {
     action.event.preventDefault();
     action.event.stopPropagation();
-    this.#exclusive.execute(async () => {
+    this.#props.exclusive.execute(async () => {
       await Promise.all([
-        pop(this.#closer, 1.3),
-        this.#changeValue.play()
+        pop(this.#props.closer, 1.3),
+        this.#props.changeValue.play()
       ]);
-      this.#closeStream.next();
+      this.#props.closeStream.next();
     });
   }
 
@@ -170,12 +138,12 @@ export class ConfigChangedDialog {
   #onDiscardPush(action: PushDOM): void {
     action.event.preventDefault();
     action.event.stopPropagation();
-    this.#exclusive.execute(async () => {
+    this.#props.exclusive.execute(async () => {
       await Promise.all([
-        pop(this.#discard),
-        this.#changeValue.play()
+        pop(this.#props.discard),
+        this.#props.changeValue.play()
       ]);
-      this.#discardStream.next();
+      this.#props.discardStream.next();
     });
   }
 
@@ -187,12 +155,12 @@ export class ConfigChangedDialog {
   #onAcceptPush(action: PushDOM): void {
     action.event.preventDefault();
     action.event.stopPropagation();
-    this.#exclusive.execute(async () => {
+    this.#props.exclusive.execute(async () => {
       await Promise.all([
-        pop(this.#accept),
-        this.#pushButton.play()
+        pop(this.#props.accept),
+        this.#props.pushButton.play()
       ]);
-      this.#acceptStream.next();
+      this.#props.acceptStream.next();
     });
   }
 }
