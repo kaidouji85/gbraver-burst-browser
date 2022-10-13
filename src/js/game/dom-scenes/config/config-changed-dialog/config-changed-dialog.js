@@ -1,10 +1,9 @@
 // @flow
-import {pop} from "../../../../dom/animation";
-import type {PushDOM} from "../../../../dom/event-stream";
 import {pushDOMStream} from "../../../../dom/event-stream";
 import type {Resources} from "../../../../resource";
 import type {Stream, Unsubscriber} from "../../../../stream/stream";
 import {ROOT_CLASS, ROOT_CLASS_INVISIBLE} from "./dom/class-name";
+import {onAcceptPush} from "./listeners/on-accept-push";
 import {onBackGroundPush} from "./listeners/on-back-ground-push";
 import {onCloserPush} from "./listeners/on-closer-push";
 import {onDiscardPush} from "./listeners/on-discard-push";
@@ -38,7 +37,7 @@ export class ConfigChangedDialog {
         onDiscardPush(this.#props, action)
       }),
       pushDOMStream(this.#props.accept).subscribe(action => {
-        this.#onAcceptPush(action);
+        onAcceptPush(this.#props, action);
       })
     ];
   }
@@ -100,22 +99,5 @@ export class ConfigChangedDialog {
    */
   discardNotifier(): Stream<void> {
     return this.#props.discardStream;
-  }
-
-  /**
-   * 設定変更受け入れボタンを押した時の処理
-   *
-   * @param action アクション
-   */
-  #onAcceptPush(action: PushDOM): void {
-    action.event.preventDefault();
-    action.event.stopPropagation();
-    this.#props.exclusive.execute(async () => {
-      await Promise.all([
-        pop(this.#props.accept),
-        this.#props.pushButton.play()
-      ]);
-      this.#props.acceptStream.next();
-    });
   }
 }
