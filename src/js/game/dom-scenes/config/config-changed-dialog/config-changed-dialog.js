@@ -1,15 +1,15 @@
 // @flow
 import {Howl} from "howler";
-import {pop} from "../../../dom/animation";
-import type {PushDOM} from "../../../dom/event-stream";
-import {pushDOMStream} from "../../../dom/event-stream";
-import {Exclusive} from "../../../exclusive/exclusive";
-import type {Resources} from "../../../resource";
-import {PathIds} from "../../../resource/path";
-import {SOUND_IDS} from "../../../resource/sound";
-import type {Stream, StreamSource, Unsubscriber} from "../../../stream/stream";
-import {createStreamSource} from "../../../stream/stream";
-import {domUuid} from "../../../uuid/dom-uuid";
+import {pop} from "../../../../dom/animation";
+import type {PushDOM} from "../../../../dom/event-stream";
+import {pushDOMStream} from "../../../../dom/event-stream";
+import {Exclusive} from "../../../../exclusive/exclusive";
+import type {Resources} from "../../../../resource";
+import {PathIds} from "../../../../resource/path";
+import {SOUND_IDS} from "../../../../resource/sound";
+import type {Stream, StreamSource, Unsubscriber} from "../../../../stream/stream";
+import {createStreamSource} from "../../../../stream/stream";
+import {domUuid} from "../../../../uuid/dom-uuid";
 
 /** ルート要素のclass属性 */
 const ROOT_CLASS = 'config-changed';
