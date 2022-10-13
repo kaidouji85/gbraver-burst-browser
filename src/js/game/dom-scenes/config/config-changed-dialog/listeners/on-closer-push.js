@@ -9,7 +9,7 @@ import type {ConfigChangedDialogProps} from "../props";
  * @param props ダイアログプロパティ
  * @param action アクション
  */
-export function onCloserPush(props: ConfigChangedDialogProps, action: PushDOM): void {
+export function onCloserPush(props: ConfigChangedDialogProps, action: $ReadOnly<PushDOM>): void {
   action.event.preventDefault();
   action.event.stopPropagation();
   props.exclusive.execute(async () => {
