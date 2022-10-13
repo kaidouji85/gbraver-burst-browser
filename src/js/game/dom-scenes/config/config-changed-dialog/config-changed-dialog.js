@@ -5,72 +5,15 @@ import type {PushDOM} from "../../../../dom/event-stream";
 import {pushDOMStream} from "../../../../dom/event-stream";
 import {Exclusive} from "../../../../exclusive/exclusive";
 import type {Resources} from "../../../../resource";
-import {PathIds} from "../../../../resource/path";
 import {SOUND_IDS} from "../../../../resource/sound";
 import type {Stream, StreamSource, Unsubscriber} from "../../../../stream/stream";
 import {createStreamSource} from "../../../../stream/stream";
 import {domUuid} from "../../../../uuid/dom-uuid";
-
-/** ルート要素のclass属性 */
-const ROOT_CLASS = 'config-changed';
-
-/** ルート要素非表示時のclass属性 */
-const ROOT_CLASS_INVISIBLE = `${ROOT_CLASS}--invisible`;
-
-/** data-idを集めたもの */
-type DataIDs = {
-  backGround: string,
-  closer: string,
-  discard: string,
-  accept: string,
-};
+import {ROOT_CLASS, ROOT_CLASS_INVISIBLE} from "./dom/class-name";
+import {extractElements} from "./dom/elements";
+import {rootInnerHTML} from "./dom/root-inner-html";
 
 /**
- * ルート要素のinnerHTML
- *
- * @param resources リソース管理オブジェクト
- * @param ids data-idを集めたもの
- * @return innerHTML
- */
-function rootInnerHTML(resources: Resources, ids: DataIDs): string {
-  const closerPath = resources.paths.find(v => v.id === PathIds.CLOSER)?.path ?? '';
-  return `
-    <div class="${ROOT_CLASS}__background" data-id="${ids.backGround}"></div>
-    <div class="${ROOT_CLASS}__dialog">
-      <img class="${ROOT_CLASS}__closer" alt="閉じる" src="${closerPath}" data-id="${ids.closer}">
-      <span class="${ROOT_CLASS}__caption">設定が変更されています</span>
-      <div class="${ROOT_CLASS}__controllers">
-        <button class="${ROOT_CLASS}__discard" data-id="${ids.discard}">設定変更を破棄</button>
-        <button class="${ROOT_CLASS}__accept" data-id="${ids.accept}">この設定にする</button>
-      </div>
-    </div>
-  `;
-}
-
-/** ルート要素の子孫要素 */
-type Elements = {
-  backGround: HTMLElement,
-  closer: HTMLElement,
-  discard: HTMLElement,
-  accept: HTMLElement,
-}
-
-/**
- * ルート要素から子孫要素を抽出する
- *
- * @param root ルート要素
- * @param ids data-idを集めたもの
- * @return 抽出結果
- */
-function extractElements(root: HTMLElement, ids: DataIDs): Elements {
-  const backGround = root.querySelector(`[data-id="${ids.backGround}"]`) ?? document.createElement('div');
-  const closer = root.querySelector(`[data-id="${ids.closer}"]`) ?? document.createElement('div');
-  const discard = root.querySelector(`[data-id="${ids.discard}"]`) ?? document.createElement('div');
-  const accept = root.querySelector(`[data-id="${ids.accept}"]`) ?? document.createElement('div');
-  return {backGround, closer, discard, accept};
-}
-
-/** 
  * 設定変更通知ダイアログ
  * 本ダイアログは設定画面から呼び出されることを想定している
  */
