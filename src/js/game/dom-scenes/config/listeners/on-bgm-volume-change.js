@@ -1,7 +1,7 @@
 // @flow
 import type {InputDOM} from "../../../../dom/event-stream";
 import {parseSoundVolume} from "../../../config/browser-config";
-import {soundVolumeLabel} from "../doms";
+import {soundVolumeLabel} from "../doms/sound-volume-label";
 import type {ConfigProps} from "../props";
 
 /**
