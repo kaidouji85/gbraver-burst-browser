@@ -1,40 +1,17 @@
 // @flow
-import {escapeHTML} from "../../../dom/escape-html";
-import type {TitleAccount} from "./title-account";
-
-/** ルート要素 class属性 */
-export const ROOT_CLASS = 'title';
-/** ログインボタン class属性 */
-export const LOGIN_CLASS = `${ROOT_CLASS}__login`;
-/** ログインボタン 非表示 class属性 */
-export const INVISIBLE_LOGIN_CLASS = `${LOGIN_CLASS}--invisible`;
-/** アカウント情報 class属性 */
-export const ACCOUNT_CLASS = `${ROOT_CLASS}__account`;
-/** アカウント情報 非表示 class属性 */
-export const INVISIBLE_ACCOUNT_CLASS = `${ACCOUNT_CLASS}--invisible`;
-/** アカウントメニュー class属性 */
-export const ACCOUNT_MENU_CLASS = `${ROOT_CLASS}__account-menu`;
-/** アカウントメニュー 非表示 class属性 */
-export const INVISIBLE_ACCOUNT_MENU_CLASS = `${ACCOUNT_MENU_CLASS}--invisible`;
-/** カジュアルマッチボタン class属性 */
-export const CASUAL_MATCH_CLASS = `${ROOT_CLASS}__casual-match`;
-/** カジュアルマッチボタン 非表示 class属性 */
-export const INVISIBLE_CASUAL_MATCH_CLASS = `${CASUAL_MATCH_CLASS}--invisible`;
-
-/** data-idを集めたもの */
-type DataIDs = {
-  login: string,
-  accountMenu: string,
-  avatar: string,
-  deleteAccount: string,
-  logout: string,
-  logo: string,
-  tutorial: string,
-  arcade: string,
-  casualMatch: string,
-  howToPlay: string,
-  config: string,
-};
+import {escapeHTML} from "../../../../dom/escape-html";
+import type {TitleAccount} from "../title-account";
+import {
+  ACCOUNT_CLASS,
+  CASUAL_MATCH_CLASS,
+  INVISIBLE_ACCOUNT_CLASS,
+  INVISIBLE_ACCOUNT_MENU_CLASS,
+  INVISIBLE_CASUAL_MATCH_CLASS,
+  INVISIBLE_LOGIN_CLASS,
+  LOGIN_CLASS,
+  ROOT_CLASS
+} from "./class-name";
+import type {DataIDs} from "./daga-ids";
 
 /** data-id以外のinnerHTMLジェネレータパラメータ */
 export type RootInnerHTMLParams = {
@@ -99,43 +76,4 @@ export function rootInnerHTML(ids: DataIDs, params: RootInnerHTMLParams): string
       <a class="${ROOT_CLASS}__contact" href="${params.contactURL}" target="_blank" rel="noopener">問い合わせ</a>
     </div>
   `;
-}
-
-/** ルート要素の子孫要素 */
-type Elements = {
-  login: HTMLElement,
-  accountMenu: HTMLElement,
-  avatar: HTMLImageElement,
-  deleteAccount: HTMLElement,
-  logout: HTMLElement,
-  logo: HTMLImageElement,
-  tutorial: HTMLElement,
-  arcade: HTMLElement,
-  casualMatch: HTMLElement,
-  howToPlay: HTMLElement,
-  config: HTMLElement,
-};
-
-/**
- * ルート要素から子孫要素を抽出する
- * 
- * @param root ルート要素
- * @param ids data-idを集めたもの
- * @return 抽出結果
- */
-export function extractElements(root: HTMLElement, ids: DataIDs): Elements {
-  const login = root.querySelector(`[data-id="${ids.login}"]`) ?? document.createElement('div');
-  const accountMenu = root.querySelector(`[data-id="${ids.accountMenu}"]`) ?? document.createElement('div');
-  const avatarElement = root.querySelector(`[data-id="${ids.avatar}"]`);
-  const avatar = (avatarElement instanceof HTMLImageElement) ? avatarElement : new Image();
-  const deleteAccount = root.querySelector(`[data-id="${ids.deleteAccount}"]`) ?? document.createElement('div');
-  const logout = root.querySelector(`[data-id="${ids.logout}"]`) ?? document.createElement('div');
-  const logoElement = root.querySelector(`[data-id="${ids.logo}"]`);
-  const logo = (logoElement instanceof HTMLImageElement) ? logoElement : new Image();
-  const tutorial = root.querySelector(`[data-id="${ids.tutorial}"]`) ?? document.createElement('div');
-  const arcade = root.querySelector(`[data-id="${ids.arcade}"]`) ?? document.createElement('div');
-  const casualMatch = root.querySelector(`[data-id="${ids.casualMatch}"]`) ?? document.createElement('div');
-  const howToPlay = root.querySelector(`[data-id="${ids.howToPlay}"]`) ?? document.createElement('div');
-  const config = root.querySelector(`[data-id="${ids.config}"]`) ?? document.createElement('div');
-  return {login, accountMenu, avatar, deleteAccount, logout, logo, tutorial, arcade, casualMatch, howToPlay, config};
 }

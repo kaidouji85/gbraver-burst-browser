@@ -8,36 +8,64 @@ import type {StreamSource} from "../../../stream/stream";
 import {createStreamSource} from "../../../stream/stream";
 import {domUuid} from "../../../uuid/dom-uuid";
 import {waitElementLoaded} from "../../../wait/wait-element-loaded";
-import type {RootInnerHTMLParams} from "./doms";
-import {extractElements, rootInnerHTML, ROOT_CLASS} from "./doms";
+import {ROOT_CLASS} from "./dom/class-name";
+import {extractElements} from "./dom/elements";
+import type {RootInnerHTMLParams} from "./dom/root-inner-html";
+import {rootInnerHTML} from "./dom/root-inner-html";
 
 /** タイトル画面プロパティ */
 export type TitleProps = {
+  /** 排他制御 */
   exclusive: Exclusive,
+  /** アカウントメニューを開いているか否か、trueで開いている */
   isAccountMenuOpen: boolean,
+  /** ルートHTML要素 */
   root: HTMLElement,
+  /** ログイン */
   login: HTMLElement,
+  /** アカウントメニュー */
   accountMenu: HTMLElement,
+  /** アバター */
   avatar: HTMLImageElement,
+  /** アカウント削除 */
   deleteAccount: HTMLElement,
+  /** ログアウト */
   logout: HTMLElement,
+  /** チュートリアル */
   tutorial: HTMLElement,
+  /** アーケード */
   arcade: HTMLElement,
+  /** カジュアルマッチ */
   casualMatch: HTMLElement,
+  /** 遊び方 */
   howToPlay: HTMLElement,
+  /** 設定 */
   config: HTMLElement,
+  /** タイトルバック画像を読み込んだら発火するPromise */
   isTitleBackLoaded: Promise<void>,
+  /** アバター画像を読み込んだら発火するPromise */
   isAvatarLoaded: Promise<void>,
+  /** ロゴ画像を読み込んだら発火するPromise */
   isLogoLoaded: Promise<void>,
+  /** SE 値変更 */
   changeValue: typeof Howl,
+  /** SE ボタン押下 */
   pushButton: typeof Howl,
+  /** ログイン押下ストリーム */
   pushLogin: StreamSource<void>,
+  /** 削除押下ストリーム */
   pushDeleteAccount: StreamSource<void>,
+  /** ログアウト押下ストリーム */
   pushLogout: StreamSource<void>,
+  /** チュートリアル押下ストリーム */
   pushTutorial: StreamSource<void>,
+  /** アーケード押下ストリーム */
   pushArcade: StreamSource<void>,
+  /** カジュアルマッチ押下ストリーム */
   pushCasualMatch: StreamSource<void>,
+  /** 遊び方押下ストリーム */
   pushHowToPlay: StreamSource<void>,
+  /** 設定押下ストリーム */
   pushConfig: StreamSource<void>,
 };
 
