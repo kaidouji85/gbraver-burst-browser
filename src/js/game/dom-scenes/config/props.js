@@ -7,7 +7,7 @@ import type {StreamSource} from "../../../stream/stream";
 import {createStreamSource} from "../../../stream/stream";
 import {domUuid} from "../../../uuid/dom-uuid";
 import type {GbraverBurstBrowserConfig} from "../../config/browser-config";
-import {ConfigChangedDialog} from "./config-changed-dialog/config-changed-dialog";
+import {ConfigChangedDialog} from "./config-changed-dialog";
 import {ROOT_CLASS} from "./dom/class-name";
 import {extractElements} from "./dom/elements";
 import {rootInnerHTML} from "./dom/root-inner-html";
