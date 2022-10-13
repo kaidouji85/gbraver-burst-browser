@@ -4,7 +4,7 @@ import * as THREE from 'three';
 import type {PreRender} from "../../../../game-loop/pre-render";
 import {HorizontalAnimationMesh} from "../../../../mesh/horizontal-animation";
 import type {Resources} from "../../../../resource";
-import {TEXTURE_IDS} from "../../../../resource/texture";
+import {TEXTURE_IDS} from "../../../../resource/texture/ids";
 import {HUD_CUT_IN_ZNIDEX} from "../../../hud-zindex";
 import {HUDCutInScale} from "../../../scale";
 import type {RaitoModel} from "../model/raito-model";

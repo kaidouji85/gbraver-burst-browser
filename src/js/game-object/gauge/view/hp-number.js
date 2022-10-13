@@ -4,7 +4,7 @@ import * as R from 'ramda';
 import * as THREE from "three";
 import {HorizontalAnimationMesh} from "../../../mesh/horizontal-animation";
 import type {Resources} from "../../../resource";
-import {TEXTURE_IDS} from "../../../resource/texture";
+import {TEXTURE_IDS} from "../../../resource/texture/ids";
 
 export const NUMBER_OF_DIGITS = 4;
 export const MAX_ANIMATION = 16;

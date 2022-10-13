@@ -1,7 +1,7 @@
 // @flow
 import * as THREE from "three";
 import type {Resources} from "../../../resource";
-import {TEXTURE_IDS} from "../../../resource/texture";
+import {TEXTURE_IDS} from "../../../resource/texture/ids";
 import type {ResultIndicatorView} from "./result-indicator-view";
 import {SimpleIndicatorView} from "./simple-result-indicator";
 
