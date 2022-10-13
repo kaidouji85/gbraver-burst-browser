@@ -13,6 +13,7 @@ import {
 } from "../../config/browser-config";
 import type {DOMScene} from "../dom-scene";
 import {onDialogClose} from "../title/listeners/on-dialog-close";
+import {onDiscardConfigChange} from "../title/listeners/on-discard-config-change";
 import {onBGMVolumeChange} from "./listeners/on-bgm-volume-change";
 import {onConfigChangeButtonPush} from "./listeners/on-config-change-button-push";
 import {onPrevButtonPush} from "./listeners/on-prev-button-push";
@@ -50,7 +51,7 @@ export class Config implements DOMScene {
         onDialogClose(this.#props);
       }),
       this.#props.dialog.discardNotifier().subscribe(() => {
-        this.#onDiscardConfigChange();
+        onDiscardConfigChange(this.#props);
       }),
       this.#props.dialog.acceptNotifier().subscribe(() => {
         this.#onAcceptConfigChange();
@@ -87,15 +88,6 @@ export class Config implements DOMScene {
    */
   configChangeNotifier(): Stream<GbraverBurstBrowserConfig> {
     return this.#props.configChange;
-  }
-
-  /**
-   * 設定変更ダイアログで「設定変更を破棄」を選択した時の処理
-   */
-  #onDiscardConfigChange() {
-    this.#props.exclusive.execute(async () => {
-      this.#props.prev.next();
-    });
   }
 
   /**
