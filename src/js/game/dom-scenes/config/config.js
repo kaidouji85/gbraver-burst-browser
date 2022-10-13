@@ -16,6 +16,7 @@ import {
 } from "../../config/browser-config";
 import type {DOMScene} from "../dom-scene";
 import {soundVolumeLabel} from "./doms";
+import {onBGMVolumeChange} from "./listeners/on-bgm-volume-change";
 import type {ConfigProps} from "./props";
 import {createConfigProps} from "./props";
 
@@ -34,7 +35,7 @@ export class Config implements DOMScene {
     this.#props = createConfigProps(resources, config);
     this.#unsubscriber = [
       inputDOMStream(this.#props.bgmVolumeSelector).subscribe(action => {
-        this.#onBGMVolumeChange(action);
+        onBGMVolumeChange(this.#props, action);
       }),
       inputDOMStream(this.#props.seVolumeSelector).subscribe(action => {
         this.#onSEVolumeChange(action);
@@ -86,20 +87,6 @@ export class Config implements DOMScene {
    */
   configChangeNotifier(): Stream<GbraverBurstBrowserConfig> {
     return this.#props.configChange;
-  }
-
-  /**
-   * BGM音量を変更した際の処理
-   *
-   * @param action アクション
-   */
-  #onBGMVolumeChange(action: InputDOM): void {
-    action.event.preventDefault();
-    action.event.stopPropagation();
-    this.#props.exclusive.execute(async () => {
-      const value = parseSoundVolume(this.#props.bgmVolumeSelector.value) ?? 1;
-      this.#props.bgmVolumeValue.innerText = soundVolumeLabel(value);
-    });
   }
 
   /**
