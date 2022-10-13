@@ -1,14 +1,9 @@
 // @flow
-import {Howl} from "howler";
 import {pop} from "../../../dom/animation";
 import type {InputDOM, PushDOM} from "../../../dom/event-stream";
 import {inputDOMStream, pushDOMStream} from "../../../dom/event-stream";
-import {Exclusive} from "../../../exclusive/exclusive";
 import type {Resources} from "../../../resource";
-import {SOUND_IDS} from "../../../resource/sound";
-import type {Stream, StreamSource, Unsubscriber} from "../../../stream/stream";
-import {createStreamSource} from "../../../stream/stream";
-import {domUuid} from "../../../uuid/dom-uuid";
+import type {Stream, Unsubscriber} from "../../../stream/stream";
 import type {GbraverBurstBrowserConfig} from "../../config/browser-config";
 import {
   BattleAnimationTimeScales,
@@ -20,27 +15,13 @@ import {
   WebGLPixelRatios
 } from "../../config/browser-config";
 import type {DOMScene} from "../dom-scene";
-import {ConfigChangedDialog} from "./config-changed-dialog";
-import {extractElements, ROOT_CLASS, rootInnerHTML, soundVolumeLabel} from "./doms";
+import {soundVolumeLabel} from "./doms";
+import type {ConfigProps} from "./props";
+import {createConfigProps} from "./props";
 
 /** 設定画面 */
 export class Config implements DOMScene {
-  #originConfig: GbraverBurstBrowserConfig;
-  #root: HTMLElement;
-  #battleAnimationTimeScaleSelector: HTMLSelectElement;
-  #webGLPixelRatioSelector: HTMLSelectElement;
-  #bgmVolumeSelector: HTMLInputElement;
-  #bgmVolumeValue: HTMLElement;
-  #seVolumeSelector: HTMLInputElement;
-  #seVolumeValue: HTMLElement;
-  #prevButton: HTMLElement;
-  #configChangeButton: HTMLElement;
-  #dialog: ConfigChangedDialog;
-  #changeValue: typeof Howl;
-  #pushButton: typeof Howl;
-  #exclusive: Exclusive;
-  #prev: StreamSource<void>;
-  #configChange: StreamSource<GbraverBurstBrowserConfig>;
+  #props: ConfigProps;
   #unsubscriber: Unsubscriber[];
 
   /**
@@ -50,51 +31,27 @@ export class Config implements DOMScene {
    * @param config Gブレイバーバースト ブラウザ側設定項目
    */
   constructor(resources: Resources, config: GbraverBurstBrowserConfig) {
-    this.#originConfig = config;
-    const ids = {battleAnimationTimeScaleSelector: domUuid(), webGLPixelRatioSelector: domUuid(),
-      bgmVolumeSelector: domUuid(), bgmVolumeValue: domUuid(), seVolumeSelector: domUuid(), seVolumeValue: domUuid(),
-      prev: domUuid(), configChange: domUuid()};
-    this.#root = document.createElement('div');
-    this.#root.innerHTML = rootInnerHTML(ids, config);
-    this.#root.className = ROOT_CLASS;
-    const elements = extractElements(this.#root, ids);
-    this.#battleAnimationTimeScaleSelector = elements.battleAnimationTimeScaleSelector;
-    this.#webGLPixelRatioSelector = elements.webGLPixelRatioSelector;
-    this.#bgmVolumeSelector = elements.bgmVolumeSelector;
-    this.#bgmVolumeValue = elements.bgmVolumeValue;
-    this.#seVolumeSelector = elements.seVolumeSelector;
-    this.#seVolumeValue = elements.seVolumeValue;
-    this.#prevButton = elements.prev;
-    this.#configChangeButton = elements.configChange;
-    this.#pushButton = resources.sounds.find(v => v.id === SOUND_IDS.PUSH_BUTTON)?.sound ?? new Howl();
-    this.#changeValue = resources.sounds.find(v => v.id === SOUND_IDS.CHANGE_VALUE)?.sound ?? new Howl();
-
-    this.#dialog = new ConfigChangedDialog(resources);
-    this.#root.appendChild(this.#dialog.getRootHTMLElement());
-
-    this.#exclusive = new Exclusive();
-    this.#prev = createStreamSource();
-    this.#configChange = createStreamSource();
+    this.#props = createConfigProps(resources, config);
     this.#unsubscriber = [
-      inputDOMStream(this.#bgmVolumeSelector).subscribe(action => {
+      inputDOMStream(this.#props.bgmVolumeSelector).subscribe(action => {
         this.#onBGMVolumeChange(action);
       }),
-      inputDOMStream(this.#seVolumeSelector).subscribe(action => {
+      inputDOMStream(this.#props.seVolumeSelector).subscribe(action => {
         this.#onSEVolumeChange(action);
       }),
-      pushDOMStream(this.#prevButton).subscribe(action => {
+      pushDOMStream(this.#props.prevButton).subscribe(action => {
         this.#onPrevButtonPush(action);
       }),
-      pushDOMStream(this.#configChangeButton).subscribe(action => {
+      pushDOMStream(this.#props.configChangeButton).subscribe(action => {
         this.#onConfigChangeButtonPush(action);
       }),
-      this.#dialog.closeNotifier().subscribe(() => {
+      this.#props.dialog.closeNotifier().subscribe(() => {
         this.#onDialogClose();
       }),
-      this.#dialog.discardNotifier().subscribe(() => {
+      this.#props.dialog.discardNotifier().subscribe(() => {
         this.#onDiscardConfigChange();
       }),
-      this.#dialog.acceptNotifier().subscribe(() => {
+      this.#props.dialog.acceptNotifier().subscribe(() => {
         this.#onAcceptConfigChange();
       }),
     ];
@@ -105,12 +62,12 @@ export class Config implements DOMScene {
     this.#unsubscriber.forEach(v => {
       v.unsubscribe();
     });
-    this.#dialog.destructor();
+    this.#props.dialog.destructor();
   }
 
   /** @override */
   getRootHTMLElement(): HTMLElement {
-    return this.#root;
+    return this.#props.root;
   }
 
   /**
@@ -119,7 +76,7 @@ export class Config implements DOMScene {
    * @return 通知ストリーム
    */
   prevNotifier(): Stream<void> {
-    return this.#prev;
+    return this.#props.prev;
   }
 
   /**
@@ -128,7 +85,7 @@ export class Config implements DOMScene {
    * @return 通知ストリーム
    */
   configChangeNotifier(): Stream<GbraverBurstBrowserConfig> {
-    return this.#configChange;
+    return this.#props.configChange;
   }
 
   /**
@@ -139,9 +96,9 @@ export class Config implements DOMScene {
   #onBGMVolumeChange(action: InputDOM): void {
     action.event.preventDefault();
     action.event.stopPropagation();
-    this.#exclusive.execute(async () => {
-      const value = parseSoundVolume(this.#bgmVolumeSelector.value) ?? 1;
-      this.#bgmVolumeValue.innerText = soundVolumeLabel(value);
+    this.#props.exclusive.execute(async () => {
+      const value = parseSoundVolume(this.#props.bgmVolumeSelector.value) ?? 1;
+      this.#props.bgmVolumeValue.innerText = soundVolumeLabel(value);
     });
   }
 
@@ -153,9 +110,9 @@ export class Config implements DOMScene {
   #onSEVolumeChange(action: InputDOM): void {
     action.event.preventDefault();
     action.event.stopPropagation();
-    this.#exclusive.execute(async () => {
-      const value = parseSoundVolume(this.#seVolumeSelector.value) ?? 1;
-      this.#seVolumeValue.innerText = soundVolumeLabel(value);
+    this.#props.exclusive.execute(async () => {
+      const value = parseSoundVolume(this.#props.seVolumeSelector.value) ?? 1;
+      this.#props.seVolumeValue.innerText = soundVolumeLabel(value);
     });
   }
 
@@ -167,17 +124,17 @@ export class Config implements DOMScene {
   #onPrevButtonPush(action: PushDOM): void {
     action.event.preventDefault();
     action.event.stopPropagation();
-    this.#exclusive.execute(async () => {
+    this.#props.exclusive.execute(async () => {
       await Promise.all([
-        pop(this.#prevButton),
-        this.#changeValue.play()
+        pop(this.#props.prevButton),
+        this.#props.changeValue.play()
       ]);
       const updatedConfig = this.#parseConfig();
-      if (isConfigChanged(this.#originConfig, updatedConfig)) {
-        this.#dialog.show();
+      if (isConfigChanged(this.#props.originConfig, updatedConfig)) {
+        this.#props.dialog.show();
         return;
       }
-      this.#prev.next();
+      this.#props.prev.next();
     });
   }
 
@@ -189,14 +146,14 @@ export class Config implements DOMScene {
   #onConfigChangeButtonPush(action: PushDOM): void {
     action.event.preventDefault();
     action.event.stopPropagation();
-    this.#exclusive.execute(async () => {
+    this.#props.exclusive.execute(async () => {
       this.#isInputDisabled(true);
       await Promise.all([
-        pop(this.#configChangeButton),
-        this.#pushButton.play()
+        pop(this.#props.configChangeButton),
+        this.#props.pushButton.play()
       ]);
       const config = this.#parseConfig();
-      this.#configChange.next(config);
+      this.#props.configChange.next(config);
     });
   }
 
@@ -204,8 +161,8 @@ export class Config implements DOMScene {
    * 設定変更通知ダイアログを閉じた時の処理
    */
   #onDialogClose() {
-    this.#exclusive.execute(async () => {
-      this.#dialog.hidden();
+    this.#props.exclusive.execute(async () => {
+      this.#props.dialog.hidden();
     });
   }
 
@@ -213,8 +170,8 @@ export class Config implements DOMScene {
    * 設定変更ダイアログで「設定変更を破棄」を選択した時の処理
    */
   #onDiscardConfigChange() {
-    this.#exclusive.execute(async () => {
-      this.#prev.next();
+    this.#props.exclusive.execute(async () => {
+      this.#props.prev.next();
     });
   }
 
@@ -222,9 +179,9 @@ export class Config implements DOMScene {
    * 設定変更ダイアログで「この設定にする」を選択した時の処理
    */
   #onAcceptConfigChange() {
-    this.#exclusive.execute(async () => {
+    this.#props.exclusive.execute(async () => {
       const config = this.#parseConfig();
-      this.#configChange.next(config);
+      this.#props.configChange.next(config);
     });
   }
 
@@ -234,10 +191,10 @@ export class Config implements DOMScene {
    * @param isDisabled trueで操作可能である
    */
   #isInputDisabled(isDisabled: boolean): void {
-    this.#webGLPixelRatioSelector.disabled = isDisabled;
-    this.#battleAnimationTimeScaleSelector.disabled = isDisabled;
-    this.#bgmVolumeSelector.disabled = isDisabled;
-    this.#seVolumeSelector.disabled = isDisabled;
+    this.#props.webGLPixelRatioSelector.disabled = isDisabled;
+    this.#props.battleAnimationTimeScaleSelector.disabled = isDisabled;
+    this.#props.bgmVolumeSelector.disabled = isDisabled;
+    this.#props.seVolumeSelector.disabled = isDisabled;
   }
 
   /**
@@ -246,10 +203,10 @@ export class Config implements DOMScene {
    * @return パース結果
    */
   #parseConfig(): GbraverBurstBrowserConfig {
-    const battleAnimationTimeScale = parseBattleAnimationTimeScale(this.#battleAnimationTimeScaleSelector.value) ?? BattleAnimationTimeScales[0];
-    const webGLPixelRatio = parseWebGLPixelRatio(this.#webGLPixelRatioSelector.value) ?? WebGLPixelRatios[0];
-    const bgmVolume = parseSoundVolume(this.#bgmVolumeSelector.value) ?? SoundVolumes[0];
-    const seVolume = parseSoundVolume(this.#seVolumeSelector.value) ?? SoundVolumes[0];
+    const battleAnimationTimeScale = parseBattleAnimationTimeScale(this.#props.battleAnimationTimeScaleSelector.value) ?? BattleAnimationTimeScales[0];
+    const webGLPixelRatio = parseWebGLPixelRatio(this.#props.webGLPixelRatioSelector.value) ?? WebGLPixelRatios[0];
+    const bgmVolume = parseSoundVolume(this.#props.bgmVolumeSelector.value) ?? SoundVolumes[0];
+    const seVolume = parseSoundVolume(this.#props.seVolumeSelector.value) ?? SoundVolumes[0];
     return {battleAnimationTimeScale, webGLPixelRatio, bgmVolume, seVolume};
   }
 }
