@@ -1,6 +1,4 @@
 // @flow
-import {pop} from "../../../dom/animation";
-import type {PushDOM} from "../../../dom/event-stream";
 import {inputDOMStream, pushDOMStream} from "../../../dom/event-stream";
 import type {Resources} from "../../../resource";
 import type {Stream, Unsubscriber} from "../../../stream/stream";
@@ -15,6 +13,7 @@ import {
 } from "../../config/browser-config";
 import type {DOMScene} from "../dom-scene";
 import {onBGMVolumeChange} from "./listeners/on-bgm-volume-change";
+import {onConfigChangeButtonPush} from "./listeners/on-config-change-button-push";
 import {onPrevButtonPush} from "./listeners/on-prev-button-push";
 import {onSEVolumeChange} from "./listeners/on-se-volume-change";
 import type {ConfigProps} from "./props";
@@ -44,7 +43,7 @@ export class Config implements DOMScene {
         onPrevButtonPush(this.#props, action);
       }),
       pushDOMStream(this.#props.configChangeButton).subscribe(action => {
-        this.#onConfigChangeButtonPush(action);
+        onConfigChangeButtonPush(this.#props, action);
       }),
       this.#props.dialog.closeNotifier().subscribe(() => {
         this.#onDialogClose();
@@ -90,25 +89,6 @@ export class Config implements DOMScene {
   }
 
   /**
-   * 設定変更するボタンを押した際の処理
-   *
-   * @param action アクション
-   */
-  #onConfigChangeButtonPush(action: PushDOM): void {
-    action.event.preventDefault();
-    action.event.stopPropagation();
-    this.#props.exclusive.execute(async () => {
-      this.#isInputDisabled(true);
-      await Promise.all([
-        pop(this.#props.configChangeButton),
-        this.#props.pushButton.play()
-      ]);
-      const config = this.#parseConfig();
-      this.#props.configChange.next(config);
-    });
-  }
-
-  /**
    * 設定変更通知ダイアログを閉じた時の処理
    */
   #onDialogClose() {
@@ -134,18 +114,6 @@ export class Config implements DOMScene {
       const config = this.#parseConfig();
       this.#props.configChange.next(config);
     });
-  }
-
-  /**
-   * 本シーンの入力要素が操作可能であるか否かの設定をする
-   *
-   * @param isDisabled trueで操作可能である
-   */
-  #isInputDisabled(isDisabled: boolean): void {
-    this.#props.webGLPixelRatioSelector.disabled = isDisabled;
-    this.#props.battleAnimationTimeScaleSelector.disabled = isDisabled;
-    this.#props.bgmVolumeSelector.disabled = isDisabled;
-    this.#props.seVolumeSelector.disabled = isDisabled;
   }
 
   /**
