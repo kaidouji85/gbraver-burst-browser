@@ -6,6 +6,7 @@ import type {Resources} from "../../../../resource";
 import type {Stream, Unsubscriber} from "../../../../stream/stream";
 import {ROOT_CLASS, ROOT_CLASS_INVISIBLE} from "./dom/class-name";
 import {onBackGroundPush} from "./listeners/on-back-ground-push";
+import {onCloserPush} from "./listeners/on-closer-push";
 import type {ConfigChangedDialogProps} from "./props";
 import {createConfigChangedDialogProps} from "./props";
 
@@ -30,7 +31,7 @@ export class ConfigChangedDialog {
         onBackGroundPush(this.#props, action);
       }),
       pushDOMStream(this.#props.closer).subscribe(action => {
-        this.#onCloserPush(action);
+        onCloserPush(this.#props, action);
       }),
       pushDOMStream(this.#props.discard).subscribe(action => {
         this.#onDiscardPush(action)
@@ -98,23 +99,6 @@ export class ConfigChangedDialog {
    */
   discardNotifier(): Stream<void> {
     return this.#props.discardStream;
-  }
-
-  /**
-   * クロージャを押した時の処理
-   *
-   * @param action アクション
-   */
-  #onCloserPush(action: PushDOM): void {
-    action.event.preventDefault();
-    action.event.stopPropagation();
-    this.#props.exclusive.execute(async () => {
-      await Promise.all([
-        pop(this.#props.closer, 1.3),
-        this.#props.changeValue.play()
-      ]);
-      this.#props.closeStream.next();
-    });
   }
 
   /**
