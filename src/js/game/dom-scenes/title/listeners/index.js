@@ -17,7 +17,7 @@ import {onTutorialPush} from "./on-tutorial-push";
  * タイトル画面にイベントリスナをバインドする
  * 
  * @param props 画面プロパティ
- * @return 購読停止オブジェクトをあつめたもの
+ * @return バインドしたイベントリスナのアンサブスクライバ
  */
 export function bindEventListeners(props: TitleProps): Unsubscriber[] {
   return [
