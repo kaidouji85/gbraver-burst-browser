@@ -8,9 +8,9 @@ import {createStreamSource} from "../../../stream/stream";
 import {domUuid} from "../../../uuid/dom-uuid";
 import type {GbraverBurstBrowserConfig} from "../../config/browser-config";
 import {ConfigChangedDialog} from "./config-changed-dialog";
-import {ROOT_CLASS} from "./doms/class-name";
-import {extractElements} from "./doms/elements";
-import {rootInnerHTML} from "./doms/root-inner-html";
+import {ROOT_CLASS} from "./dom/class-name";
+import {extractElements} from "./dom/elements";
+import {rootInnerHTML} from "./dom/root-inner-html";
 
 /** 設定画面プロパティ */
 export type ConfigProps = {
