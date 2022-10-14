@@ -22,6 +22,7 @@ import type {TitleParams} from "./scene/title";
 import {Title} from "./scene/title";
 import type {TutorialStage} from "./scene/tutorial-selector/tutoria-stage-element";
 import {TutorialSelector} from "./scene/tutorial-selector/tutorial-selector";
+import {startConfig} from "./start/start-config";
 import {startLoading} from "./start/start-loading";
 import {startMailVerifiedIncomplete} from "./start/start-mail-verified-incomplete";
 import {startMatchCard} from "./start/start-match-card";
@@ -142,18 +143,7 @@ export class DOMScenes {
    * @return 開始された設定画面
    */
   startConfig(resources: Resources, config: GbraverBurstBrowserConfig): Config {
-    discardCurrentScene(this.#props);
-    const scene = new Config(resources, config);
-    bindScene(this.#props, scene);
-    this.#props.unsubscribers = [
-      scene.prevNotifier().subscribe(() => {
-        this.#props.gameAction.next({type: 'ConfigChangeCancel'});
-      }),
-      scene.configChangeNotifier().subscribe(config => {
-        this.#props.gameAction.next({type: 'ConfigChangeComplete', config});
-      })
-    ];
-    return scene;
+    return startConfig(this.#props, resources, config);
   }
 
   /**
