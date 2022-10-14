@@ -9,7 +9,7 @@ import { createStreamSource } from "../../stream/stream";
 export type DOMScenesProps = {
   /** DomScenesルートHTML要素、本要素にシーンをバインドする */
   root: HTMLElement,
-  /** 現在表示しているシーン、初期状態では何もシーンが表示されていないのでnullがセットされている */
+  /** 現在表示しているシーン、シーンが表示されていない場合はnullをセットする */
   scene: ?DOMScene,
   /** ゲームアクション通知ストリーム */
   gameAction: StreamSource<GameAction>,
