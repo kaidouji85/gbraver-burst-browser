@@ -20,6 +20,7 @@ import type {DOMScenesProps} from "./props";
 import {createDOMScenesProps} from "./props";
 import {startLoading} from "./start/start-loading";
 import {startMailVerifiedIncomplete} from "./start/start-mail-verified-incomplete";
+import {startPlayerSelect} from "./start/start-player-select";
 import {startTitle} from "./start/start-title";
 import type {StageTitleParam} from "./scene/stage-title/stage-title";
 import {StageTitle} from "./scene/stage-title/stage-title";
@@ -95,19 +96,7 @@ export class DOMScenes {
    * @return 開始されたプレイヤー選択画面
    */
   async startPlayerSelect(resources: Resources): Promise<PlayerSelect> {
-    discardCurrentScene(this.#props);
-    const scene = new PlayerSelect(resources);
-    bindScene(this.#props, scene);
-    this.#props.unsubscribers = [
-      scene.decideNotifier().subscribe(v => {
-        this.#props.gameAction.next({type: 'SelectionComplete', armdozerId: v.armdozerId, pilotId: v.pilotId});
-      }),
-      scene.prevNotifier().subscribe(() => {
-        this.#props.gameAction.next({type: 'SelectionCancel'});
-      }),
-    ];
-    await Promise.race([scene.waitUntilLoaded(), waitTime(MAX_LOADING_TIME)]);
-    return scene;
+    return await startPlayerSelect(this.#props, resources);
   }
 
   /**
