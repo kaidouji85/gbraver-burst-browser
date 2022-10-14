@@ -22,6 +22,7 @@ import {startLoading} from "./start/start-loading";
 import {startMailVerifiedIncomplete} from "./start/start-mail-verified-incomplete";
 import {startMatchCard} from "./start/start-match-card";
 import {startPlayerSelect} from "./start/start-player-select";
+import {startStageTitle} from "./start/start-stage-title";
 import {startTitle} from "./start/start-title";
 import type {StageTitleParam} from "./scene/stage-title/stage-title";
 import {StageTitle} from "./scene/stage-title/stage-title";
@@ -120,11 +121,7 @@ export class DOMScenes {
    * @returns 開始されたNPCステージタイトル画面
    */
   async startStageTitle(param: StageTitleParam): Promise<StageTitle> {
-    discardCurrentScene(this.#props);
-    const scene = new StageTitle(param);
-    bindScene(this.#props, scene);
-    await Promise.race([scene.waitUntilLoaded(), waitTime(MAX_LOADING_TIME)]);
-    return scene;
+    return await startStageTitle(this.#props, param);
   }
 
   /**
