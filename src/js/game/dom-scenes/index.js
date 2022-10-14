@@ -13,21 +13,18 @@ import {discardCurrentScene} from "./discard-current-scene";
 import {Loading} from "./loading";
 import {MailVerifiedIncomplete} from "./mail-verified-incomplete/mail-verified-incomplete";
 import {MatchCard} from "./match-card";
+import {MAX_LOADING_TIME} from "./max-loading-time";
 import {NPCEnding} from "./npc-ending/npc-ending";
 import {PlayerSelect} from "./player-select";
 import type {DOMScenesProps} from "./props";
 import {createDOMScenesProps} from "./props";
+import {startTitle} from "./scene-start/start-title";
 import type {StageTitleParam} from "./stage-title/stage-title";
 import {StageTitle} from "./stage-title/stage-title";
 import type {TitleParams} from "./title";
 import {Title} from "./title";
 import type {TutorialStage} from "./tutorial-selector/tutoria-stage-element";
 import {TutorialSelector} from "./tutorial-selector/tutorial-selector";
-
-/**
- * 最大読み込み待機時間(ミリ秒)
- */
-const MAX_LOADING_TIME = 10000;
 
 /**
  * HTMLオンリーで生成されたシーンを集めたもの
@@ -43,7 +40,9 @@ export class DOMScenes {
     this.#props = createDOMScenesProps();
   }
 
-  /** デストラクタ相当の処理 */
+  /** 
+   * デストラクタ相当の処理
+   */
   destructor() {
     discardCurrentScene(this.#props);
   }
@@ -98,37 +97,7 @@ export class DOMScenes {
    * @return 開始されたタイトル画面
    */
   async startTitle(params: TitleParams): Promise<Title> {
-    discardCurrentScene(this.#props);
-    const scene = new Title(params);
-    bindScene(this.#props, scene);
-    this.#props.unsubscribers = [
-      scene.pushLoginNotifier().subscribe(() => {
-        this.#props.gameAction.next({type: 'UniversalLogin'});
-      }),
-      scene.pushLogoutNotifier().subscribe(() => {
-        this.#props.gameAction.next({type: 'Logout'});
-      }),
-      scene.pushDeleteAccountNotifier().subscribe(() => {
-        this.#props.gameAction.next({type: 'AccountDeleteConsent'});
-      }),
-      scene.pushArcadeNotifier().subscribe(() => {
-        this.#props.gameAction.next({type: 'ArcadeStart'});
-      }),
-      scene.pushHowToPlayNotifier().subscribe(() => {
-        this.#props.gameAction.next({type: 'ShowHowToPlay'});
-      }),
-      scene.pushCasualMatchNotifier().subscribe(() => {
-        this.#props.gameAction.next({type: 'CasualMatchStart'});
-      }),
-      scene.pushConfigNotifier().subscribe(() => {
-        this.#props.gameAction.next({type: 'ConfigChangeStart'});
-      }),
-      scene.pushTutorialNotifier().subscribe(() => {
-        this.#props.gameAction.next({type: 'TutorialStart'});
-      })
-    ];
-    await Promise.race([scene.waitUntilLoaded(), waitTime(MAX_LOADING_TIME)]);
-    return scene;
+    return await startTitle(this.#props, params);
   }
 
   /**
