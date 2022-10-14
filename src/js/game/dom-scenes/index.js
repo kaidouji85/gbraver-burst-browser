@@ -3,18 +3,18 @@ import type {ArmDozerId} from "gbraver-burst-core";
 import type {BGMManager} from '../../bgm/bgm-manager';
 import type {Resources} from "../../resource";
 import type {LoadingActions} from "../../resource/loading-actions";
-import type {Stream, StreamSource, Unsubscriber} from "../../stream/stream";
-import {createStreamSource} from "../../stream/stream";
+import type {Stream} from "../../stream/stream";
 import {waitTime} from "../../wait/wait-time";
 import type {GbraverBurstBrowserConfig} from "../config/browser-config";
 import type {GameAction} from "../game-actions";
 import {Config} from "./config";
-import type {DOMScene} from "./dom-scene";
 import {Loading} from "./loading";
 import {MailVerifiedIncomplete} from "./mail-verified-incomplete/mail-verified-incomplete";
 import {MatchCard} from "./match-card";
 import {NPCEnding} from "./npc-ending/npc-ending";
 import {PlayerSelect} from "./player-select";
+import type {DOMScenesProps} from "./props";
+import {createDOMScenesProps} from "./props";
 import type {StageTitleParam} from "./stage-title/stage-title";
 import {StageTitle} from "./stage-title/stage-title";
 import type {TitleParams} from "./title";
@@ -32,16 +32,10 @@ const MAX_LOADING_TIME = 10000;
  * 本クラス配下のいずれか1シーンのみが表示される想定
  */
 export class DOMScenes {
-  #root: HTMLElement;
-  #scene: ?DOMScene;
-  #gameAction: StreamSource<GameAction>;
-  #unsubscribers: Unsubscriber[];
+  #props: DOMScenesProps;
 
   constructor() {
-    this.#root = document.createElement('div');
-    this.#gameAction = createStreamSource();
-    this.#scene = null;
-    this.#unsubscribers = [];
+    this.#props = createDOMScenesProps();
   }
 
   /** デストラクタ相当の処理 */
@@ -55,7 +49,7 @@ export class DOMScenes {
    * @return 通知ストリーム
    */
   gameActionNotifier(): Stream<GameAction> {
-    return this.#gameAction;
+    return this.#props.gameAction;
   }
 
   /**
@@ -68,17 +62,17 @@ export class DOMScenes {
     this.#removeCurrentScene();
 
     const scene = new MailVerifiedIncomplete(mailAddress);
-    this.#root.appendChild(scene.getRootHTMLElement());
-    this.#unsubscribers = [
+    this.#props.root.appendChild(scene.getRootHTMLElement());
+    this.#props.unsubscribers = [
       scene.gotoTitleNotifier().subscribe(() => {
-        this.#gameAction.next({type: 'ExitMailVerifiedIncomplete'});
+        this.#props.gameAction.next({type: 'ExitMailVerifiedIncomplete'});
       }),
       scene.reloadNotifier().subscribe(() => {
-        this.#gameAction.next({type: 'ReloadRequest'});
+        this.#props.gameAction.next({type: 'ReloadRequest'});
       })
     ];
 
-    this.#scene = scene;
+    this.#props.scene = scene;
     return scene;
   }
 
@@ -91,9 +85,9 @@ export class DOMScenes {
   startLoading(loading: Stream<LoadingActions>): Loading {
     this.#removeCurrentScene();
     const scene = new Loading(loading);
-    this.#root.appendChild(scene.getRootHTMLElement());
+    this.#props.root.appendChild(scene.getRootHTMLElement());
 
-    this.#scene = scene
+    this.#props.scene = scene
     return scene;
   }
 
@@ -107,39 +101,39 @@ export class DOMScenes {
     this.#removeCurrentScene();
 
     const scene = new Title(params);
-    this.#unsubscribers = [
+    this.#props.unsubscribers = [
       scene.pushLoginNotifier().subscribe(() => {
-        this.#gameAction.next({type: 'UniversalLogin'});
+        this.#props.gameAction.next({type: 'UniversalLogin'});
       }),
       scene.pushLogoutNotifier().subscribe(() => {
-        this.#gameAction.next({type: 'Logout'});
+        this.#props.gameAction.next({type: 'Logout'});
       }),
       scene.pushDeleteAccountNotifier().subscribe(() => {
-        this.#gameAction.next({type: 'AccountDeleteConsent'});
+        this.#props.gameAction.next({type: 'AccountDeleteConsent'});
       }),
       scene.pushArcadeNotifier().subscribe(() => {
-        this.#gameAction.next({type: 'ArcadeStart'});
+        this.#props.gameAction.next({type: 'ArcadeStart'});
       }),
       scene.pushHowToPlayNotifier().subscribe(() => {
-        this.#gameAction.next({type: 'ShowHowToPlay'});
+        this.#props.gameAction.next({type: 'ShowHowToPlay'});
       }),
       scene.pushCasualMatchNotifier().subscribe(() => {
-        this.#gameAction.next({type: 'CasualMatchStart'});
+        this.#props.gameAction.next({type: 'CasualMatchStart'});
       }),
       scene.pushConfigNotifier().subscribe(() => {
-        this.#gameAction.next({type: 'ConfigChangeStart'});
+        this.#props.gameAction.next({type: 'ConfigChangeStart'});
       }),
       scene.pushTutorialNotifier().subscribe(() => {
-        this.#gameAction.next({type: 'TutorialStart'});
+        this.#props.gameAction.next({type: 'TutorialStart'});
       })
     ];
-    this.#root.appendChild(scene.getRootHTMLElement());
+    this.#props.root.appendChild(scene.getRootHTMLElement());
     await Promise.race([
       scene.waitUntilLoaded(),
       waitTime(MAX_LOADING_TIME)
     ]);
 
-    this.#scene = scene;
+    this.#props.scene = scene;
     return scene;
   }
 
@@ -153,25 +147,25 @@ export class DOMScenes {
     this.#removeCurrentScene();
 
     const scene = new PlayerSelect(resources);
-    this.#unsubscribers = [
+    this.#props.unsubscribers = [
       scene.decideNotifier().subscribe(v => {
-        this.#gameAction.next({
+        this.#props.gameAction.next({
           type: 'SelectionComplete',
           armdozerId: v.armdozerId,
           pilotId: v.pilotId,
         });
       }),
       scene.prevNotifier().subscribe(() => {
-        this.#gameAction.next({type: 'SelectionCancel'});
+        this.#props.gameAction.next({type: 'SelectionCancel'});
       }),
     ];
-    this.#root.appendChild(scene.getRootHTMLElement());
+    this.#props.root.appendChild(scene.getRootHTMLElement());
     await Promise.race([
       scene.waitUntilLoaded(),
       waitTime(MAX_LOADING_TIME),
     ]);
 
-    this.#scene = scene;
+    this.#props.scene = scene;
     return scene;
   }
 
@@ -193,13 +187,13 @@ export class DOMScenes {
       enemy: enemy,
       caption: caption
     });
-    this.#root.appendChild(scene.getRootHTMLElement());
+    this.#props.root.appendChild(scene.getRootHTMLElement());
     await Promise.race([
       scene.waitUntilLoaded(),
       waitTime(MAX_LOADING_TIME),
     ]);
 
-    this.#scene = scene;
+    this.#props.scene = scene;
     return scene;
   }
 
@@ -213,13 +207,13 @@ export class DOMScenes {
     this.#removeCurrentScene();
 
     const scene = new StageTitle(param);
-    this.#root.appendChild(scene.getRootHTMLElement());
+    this.#props.root.appendChild(scene.getRootHTMLElement());
     await Promise.race([
       scene.waitUntilLoaded(),
       waitTime(MAX_LOADING_TIME),
     ]);
 
-    this.#scene = scene;
+    this.#props.scene = scene;
     return scene;
   }
 
@@ -234,10 +228,10 @@ export class DOMScenes {
     this.#removeCurrentScene();
 
     const scene = new NPCEnding(resources, bgm);
-    this.#root.appendChild(scene.getRootHTMLElement());
-    this.#unsubscribers = [
+    this.#props.root.appendChild(scene.getRootHTMLElement());
+    this.#props.unsubscribers = [
       scene.endNPCEndingNotifier().subscribe(() => {
-        this.#gameAction.next({type: 'EndNPCEnding'});
+        this.#props.gameAction.next({type: 'EndNPCEnding'});
       })
     ];
     await Promise.race([
@@ -245,7 +239,7 @@ export class DOMScenes {
       waitTime(MAX_LOADING_TIME),
     ]);
 
-    this.#scene = scene;
+    this.#props.scene = scene;
     return scene;
   }
 
@@ -260,16 +254,16 @@ export class DOMScenes {
     this.#removeCurrentScene();
 
     const scene = new Config(resources, config);
-    this.#root.appendChild(scene.getRootHTMLElement());
-    this.#unsubscribers = [
+    this.#props.root.appendChild(scene.getRootHTMLElement());
+    this.#props.unsubscribers = [
       scene.prevNotifier().subscribe(() => {
-        this.#gameAction.next({type: 'ConfigChangeCancel'});
+        this.#props.gameAction.next({type: 'ConfigChangeCancel'});
       }),
       scene.configChangeNotifier().subscribe(config => {
-        this.#gameAction.next({type: 'ConfigChangeComplete', config});
+        this.#props.gameAction.next({type: 'ConfigChangeComplete', config});
       })
     ];
-    this.#scene = scene;
+    this.#props.scene = scene;
     return scene;
   }
 
@@ -284,16 +278,16 @@ export class DOMScenes {
     this.#removeCurrentScene();
 
     const scene = new TutorialSelector(resources, stages);
-    this.#root.appendChild(scene.getRootHTMLElement());
-    this.#unsubscribers = [
+    this.#props.root.appendChild(scene.getRootHTMLElement());
+    this.#props.unsubscribers = [
       scene.prevNotifier().subscribe(() => {
-        this.#gameAction.next({type: 'CancelTutorialSelect'});
+        this.#props.gameAction.next({type: 'CancelTutorialSelect'});
       }),
       scene.stageSelectNotifier().subscribe(stageSelect => {
-        this.#gameAction.next({...stageSelect, type: 'SelectTutorialStage'});
+        this.#props.gameAction.next({...stageSelect, type: 'SelectTutorialStage'});
       })
     ];
-    this.#scene = scene;
+    this.#props.scene = scene;
     return scene;
   }
 
@@ -311,20 +305,20 @@ export class DOMScenes {
    * @return 取得結果
    */
   getRootHTMLElement(): HTMLElement {
-    return this.#root;
+    return this.#props.root;
   }
 
   /**
    * 現在表示しているシーンを取り除く
    */
   #removeCurrentScene(): void {
-    this.#scene && this.#scene.destructor();
-    this.#scene && this.#scene.getRootHTMLElement().remove();
-    this.#scene = null;
+    this.#props.scene && this.#props.scene.destructor();
+    this.#props.scene && this.#props.scene.getRootHTMLElement().remove();
+    this.#props.scene = null;
 
-    this.#unsubscribers.forEach(v => {
+    this.#props.unsubscribers.forEach(v => {
       v.unsubscribe();
     });
-    this.#unsubscribers = [];
+    this.#props.unsubscribers = [];
   }
 }
