@@ -18,6 +18,7 @@ import {NPCEnding} from "./scene/npc-ending/npc-ending";
 import {PlayerSelect} from "./scene/player-select";
 import type {DOMScenesProps} from "./props";
 import {createDOMScenesProps} from "./props";
+import {startLoading} from "./start/start-loading";
 import {startMailVerifiedIncomplete} from "./start/start-mail-verified-incomplete";
 import {startTitle} from "./start/start-title";
 import type {StageTitleParam} from "./scene/stage-title/stage-title";
@@ -74,10 +75,7 @@ export class DOMScenes {
    * @return 開始されたローディング画面
    */
   startLoading(loading: Stream<LoadingActions>): Loading {
-    discardCurrentScene(this.#props);
-    const scene = new Loading(loading);
-    bindScene(this.#props, scene);
-    return scene;
+    return startLoading(this.#props, loading);
   }
 
   /**
