@@ -6,7 +6,6 @@ import type {LoadingActions} from "../../resource/loading-actions";
 import type {Stream} from "../../stream/stream";
 import type {GbraverBurstBrowserConfig} from "../config/browser-config";
 import type {GameAction} from "../game-actions";
-import {bindScene} from "./bind-scene";
 import {discardCurrentScene} from "./discard-current-scene";
 import type {DOMScenesProps} from "./props";
 import {createDOMScenesProps} from "./props";
@@ -30,6 +29,7 @@ import {startNPCEnding} from "./start/start-npc-ending";
 import {startPlayerSelect} from "./start/start-player-select";
 import {startStageTitle} from "./start/start-stage-title";
 import {startTitle} from "./start/start-title";
+import {startTutorialSelector} from "./start/start-tutorial-selector";
 
 /**
  * HTMLオンリーで生成されたシーンを集めたもの
@@ -154,18 +154,7 @@ export class DOMScenes {
    * @return 開始された設定画面
    */
   startTutorialSelector(resources: Resources, stages: TutorialStage[]): TutorialSelector {
-    discardCurrentScene(this.#props);
-    const scene = new TutorialSelector(resources, stages);
-    bindScene(this.#props, scene);
-    this.#props.unsubscribers = [
-      scene.prevNotifier().subscribe(() => {
-        this.#props.gameAction.next({type: 'CancelTutorialSelect'});
-      }),
-      scene.stageSelectNotifier().subscribe(stageSelect => {
-        this.#props.gameAction.next({...stageSelect, type: 'SelectTutorialStage'});
-      })
-    ];
-    return scene;
+    return startTutorialSelector(this.#props, resources, stages);
   }
 
   /**
