@@ -8,23 +8,23 @@ import {waitTime} from "../../wait/wait-time";
 import type {GbraverBurstBrowserConfig} from "../config/browser-config";
 import type {GameAction} from "../game-actions";
 import {bindScene} from "./bind-scene";
-import {Config} from "./config";
+import {Config} from "./scene/config";
 import {discardCurrentScene} from "./discard-current-scene";
-import {Loading} from "./loading";
-import {MailVerifiedIncomplete} from "./mail-verified-incomplete/mail-verified-incomplete";
-import {MatchCard} from "./match-card";
+import {Loading} from "./scene/loading";
+import {MailVerifiedIncomplete} from "./scene/mail-verified-incomplete/mail-verified-incomplete";
+import {MatchCard} from "./scene/match-card";
 import {MAX_LOADING_TIME} from "./max-loading-time";
-import {NPCEnding} from "./npc-ending/npc-ending";
-import {PlayerSelect} from "./player-select";
+import {NPCEnding} from "./scene/npc-ending/npc-ending";
+import {PlayerSelect} from "./scene/player-select";
 import type {DOMScenesProps} from "./props";
 import {createDOMScenesProps} from "./props";
-import {startTitle} from "./scene-start/start-title";
-import type {StageTitleParam} from "./stage-title/stage-title";
-import {StageTitle} from "./stage-title/stage-title";
-import type {TitleParams} from "./title";
-import {Title} from "./title";
-import type {TutorialStage} from "./tutorial-selector/tutoria-stage-element";
-import {TutorialSelector} from "./tutorial-selector/tutorial-selector";
+import {startTitle} from "./start/start-title";
+import type {StageTitleParam} from "./scene/stage-title/stage-title";
+import {StageTitle} from "./scene/stage-title/stage-title";
+import type {TitleParams} from "./scene/title";
+import {Title} from "./scene/title";
+import type {TutorialStage} from "./scene/tutorial-selector/tutoria-stage-element";
+import {TutorialSelector} from "./scene/tutorial-selector/tutorial-selector";
 
 /**
  * HTMLオンリーで生成されたシーンを集めたもの
