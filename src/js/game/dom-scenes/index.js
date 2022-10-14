@@ -15,6 +15,7 @@ import {NPCEnding} from "./npc-ending/npc-ending";
 import {PlayerSelect} from "./player-select";
 import type {DOMScenesProps} from "./props";
 import {createDOMScenesProps} from "./props";
+import {removeCurrentScene} from "./remove-current-scene";
 import type {StageTitleParam} from "./stage-title/stage-title";
 import {StageTitle} from "./stage-title/stage-title";
 import type {TitleParams} from "./title";
@@ -34,13 +35,16 @@ const MAX_LOADING_TIME = 10000;
 export class DOMScenes {
   #props: DOMScenesProps;
 
+  /**
+   * コンストラクタ
+   */
   constructor() {
     this.#props = createDOMScenesProps();
   }
 
   /** デストラクタ相当の処理 */
   destructor() {
-    this.#removeCurrentScene();
+    removeCurrentScene(this.#props);
   }
 
   /**
@@ -59,7 +63,7 @@ export class DOMScenes {
    * @return 開始されたメール認証未完了画面
    */
   startMailVerifiedIncomplete(mailAddress: string): MailVerifiedIncomplete {
-    this.#removeCurrentScene();
+    removeCurrentScene(this.#props);
 
     const scene = new MailVerifiedIncomplete(mailAddress);
     this.#props.root.appendChild(scene.getRootHTMLElement());
@@ -83,7 +87,7 @@ export class DOMScenes {
    * @return 開始されたローディング画面
    */
   startLoading(loading: Stream<LoadingActions>): Loading {
-    this.#removeCurrentScene();
+    removeCurrentScene(this.#props);
     const scene = new Loading(loading);
     this.#props.root.appendChild(scene.getRootHTMLElement());
 
@@ -98,7 +102,7 @@ export class DOMScenes {
    * @return 開始されたタイトル画面
    */
   async startTitle(params: TitleParams): Promise<Title> {
-    this.#removeCurrentScene();
+    removeCurrentScene(this.#props);
 
     const scene = new Title(params);
     this.#props.unsubscribers = [
@@ -144,7 +148,7 @@ export class DOMScenes {
    * @return 開始されたプレイヤー選択画面
    */
   async startPlayerSelect(resources: Resources): Promise<PlayerSelect> {
-    this.#removeCurrentScene();
+    removeCurrentScene(this.#props);
 
     const scene = new PlayerSelect(resources);
     this.#props.unsubscribers = [
@@ -179,7 +183,7 @@ export class DOMScenes {
    * @return 開始された対戦カード画面
    */
   async startMatchCard(resources: Resources, player: ArmDozerId, enemy: ArmDozerId, caption: string): Promise<MatchCard> {
-    this.#removeCurrentScene();
+    removeCurrentScene(this.#props);
 
     const scene = new MatchCard({
       resources: resources,
@@ -204,7 +208,7 @@ export class DOMScenes {
    * @returns 開始されたNPCステージタイトル画面
    */
   async startStageTitle(param: StageTitleParam): Promise<StageTitle> {
-    this.#removeCurrentScene();
+    removeCurrentScene(this.#props);
 
     const scene = new StageTitle(param);
     this.#props.root.appendChild(scene.getRootHTMLElement());
@@ -225,7 +229,7 @@ export class DOMScenes {
    * @return 開始されたNPCエンディング画面
    */
   async startNPCEnding(resources: Resources, bgm: BGMManager): Promise<NPCEnding> {
-    this.#removeCurrentScene();
+    removeCurrentScene(this.#props);
 
     const scene = new NPCEnding(resources, bgm);
     this.#props.root.appendChild(scene.getRootHTMLElement());
@@ -251,7 +255,7 @@ export class DOMScenes {
    * @return 開始された設定画面
    */
   startConfig(resources: Resources, config: GbraverBurstBrowserConfig): Config {
-    this.#removeCurrentScene();
+    removeCurrentScene(this.#props);
 
     const scene = new Config(resources, config);
     this.#props.root.appendChild(scene.getRootHTMLElement());
@@ -275,7 +279,7 @@ export class DOMScenes {
    * @return 開始された設定画面
    */
   startTutorialSelector(resources: Resources, stages: TutorialStage[]): TutorialSelector {
-    this.#removeCurrentScene();
+    removeCurrentScene(this.#props);
 
     const scene = new TutorialSelector(resources, stages);
     this.#props.root.appendChild(scene.getRootHTMLElement());
@@ -296,7 +300,7 @@ export class DOMScenes {
    * 本メソッドは、3Dシーンを表示する前に呼ばれる想定である
    */
   hidden(): void {
-    this.#removeCurrentScene();
+    removeCurrentScene(this.#props);
   }
 
   /**
@@ -306,19 +310,5 @@ export class DOMScenes {
    */
   getRootHTMLElement(): HTMLElement {
     return this.#props.root;
-  }
-
-  /**
-   * 現在表示しているシーンを取り除く
-   */
-  #removeCurrentScene(): void {
-    this.#props.scene && this.#props.scene.destructor();
-    this.#props.scene && this.#props.scene.getRootHTMLElement().remove();
-    this.#props.scene = null;
-
-    this.#props.unsubscribers.forEach(v => {
-      v.unsubscribe();
-    });
-    this.#props.unsubscribers = [];
   }
 }
