@@ -18,6 +18,7 @@ import {NPCEnding} from "./scene/npc-ending/npc-ending";
 import {PlayerSelect} from "./scene/player-select";
 import type {DOMScenesProps} from "./props";
 import {createDOMScenesProps} from "./props";
+import {startMailVerifiedIncomplete} from "./start/start-mail-verified-incomplete";
 import {startTitle} from "./start/start-title";
 import type {StageTitleParam} from "./scene/stage-title/stage-title";
 import {StageTitle} from "./scene/stage-title/stage-title";
@@ -63,18 +64,7 @@ export class DOMScenes {
    * @return 開始されたメール認証未完了画面
    */
   startMailVerifiedIncomplete(mailAddress: string): MailVerifiedIncomplete {
-    discardCurrentScene(this.#props);
-    const scene = new MailVerifiedIncomplete(mailAddress);
-    bindScene(this.#props, scene);
-    this.#props.unsubscribers = [
-      scene.gotoTitleNotifier().subscribe(() => {
-        this.#props.gameAction.next({type: 'ExitMailVerifiedIncomplete'});
-      }),
-      scene.reloadNotifier().subscribe(() => {
-        this.#props.gameAction.next({type: 'ReloadRequest'});
-      })
-    ];
-    return scene;
+    return startMailVerifiedIncomplete(this.#props, mailAddress);
   }
 
   /**
