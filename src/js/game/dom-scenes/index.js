@@ -20,6 +20,7 @@ import type {DOMScenesProps} from "./props";
 import {createDOMScenesProps} from "./props";
 import {startLoading} from "./start/start-loading";
 import {startMailVerifiedIncomplete} from "./start/start-mail-verified-incomplete";
+import {startMatchCard} from "./start/start-match-card";
 import {startPlayerSelect} from "./start/start-player-select";
 import {startTitle} from "./start/start-title";
 import type {StageTitleParam} from "./scene/stage-title/stage-title";
@@ -109,11 +110,7 @@ export class DOMScenes {
    * @return 開始された対戦カード画面
    */
   async startMatchCard(resources: Resources, player: ArmDozerId, enemy: ArmDozerId, caption: string): Promise<MatchCard> {
-    discardCurrentScene(this.#props);
-    const scene = new MatchCard({resources, player, enemy, caption});
-    bindScene(this.#props, scene);
-    await Promise.race([scene.waitUntilLoaded(), waitTime(MAX_LOADING_TIME)]);
-    return scene;
+    return await startMatchCard(this.#props, resources, player, enemy, caption);
   }
 
   /**
