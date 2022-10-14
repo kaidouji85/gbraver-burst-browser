@@ -7,7 +7,9 @@ import type {Stream} from "../../stream/stream";
 import {waitTime} from "../../wait/wait-time";
 import type {GbraverBurstBrowserConfig} from "../config/browser-config";
 import type {GameAction} from "../game-actions";
+import {bindScene} from "./bind-scene";
 import {Config} from "./config";
+import {discardCurrentScene} from "./discard-current-scene";
 import {Loading} from "./loading";
 import {MailVerifiedIncomplete} from "./mail-verified-incomplete/mail-verified-incomplete";
 import {MatchCard} from "./match-card";
@@ -15,7 +17,6 @@ import {NPCEnding} from "./npc-ending/npc-ending";
 import {PlayerSelect} from "./player-select";
 import type {DOMScenesProps} from "./props";
 import {createDOMScenesProps} from "./props";
-import {removeCurrentScene} from "./remove-current-scene";
 import type {StageTitleParam} from "./stage-title/stage-title";
 import {StageTitle} from "./stage-title/stage-title";
 import type {TitleParams} from "./title";
@@ -44,7 +45,7 @@ export class DOMScenes {
 
   /** デストラクタ相当の処理 */
   destructor() {
-    removeCurrentScene(this.#props);
+    discardCurrentScene(this.#props);
   }
 
   /**
@@ -63,10 +64,9 @@ export class DOMScenes {
    * @return 開始されたメール認証未完了画面
    */
   startMailVerifiedIncomplete(mailAddress: string): MailVerifiedIncomplete {
-    removeCurrentScene(this.#props);
-
+    discardCurrentScene(this.#props);
     const scene = new MailVerifiedIncomplete(mailAddress);
-    this.#props.root.appendChild(scene.getRootHTMLElement());
+    bindScene(this.#props, scene);
     this.#props.unsubscribers = [
       scene.gotoTitleNotifier().subscribe(() => {
         this.#props.gameAction.next({type: 'ExitMailVerifiedIncomplete'});
@@ -75,8 +75,6 @@ export class DOMScenes {
         this.#props.gameAction.next({type: 'ReloadRequest'});
       })
     ];
-
-    this.#props.scene = scene;
     return scene;
   }
 
@@ -87,11 +85,9 @@ export class DOMScenes {
    * @return 開始されたローディング画面
    */
   startLoading(loading: Stream<LoadingActions>): Loading {
-    removeCurrentScene(this.#props);
+    discardCurrentScene(this.#props);
     const scene = new Loading(loading);
-    this.#props.root.appendChild(scene.getRootHTMLElement());
-
-    this.#props.scene = scene
+    bindScene(this.#props, scene);
     return scene;
   }
 
@@ -102,9 +98,9 @@ export class DOMScenes {
    * @return 開始されたタイトル画面
    */
   async startTitle(params: TitleParams): Promise<Title> {
-    removeCurrentScene(this.#props);
-
+    discardCurrentScene(this.#props);
     const scene = new Title(params);
+    bindScene(this.#props, scene);
     this.#props.unsubscribers = [
       scene.pushLoginNotifier().subscribe(() => {
         this.#props.gameAction.next({type: 'UniversalLogin'});
@@ -131,13 +127,7 @@ export class DOMScenes {
         this.#props.gameAction.next({type: 'TutorialStart'});
       })
     ];
-    this.#props.root.appendChild(scene.getRootHTMLElement());
-    await Promise.race([
-      scene.waitUntilLoaded(),
-      waitTime(MAX_LOADING_TIME)
-    ]);
-
-    this.#props.scene = scene;
+    await Promise.race([scene.waitUntilLoaded(), waitTime(MAX_LOADING_TIME)]);
     return scene;
   }
 
@@ -148,28 +138,18 @@ export class DOMScenes {
    * @return 開始されたプレイヤー選択画面
    */
   async startPlayerSelect(resources: Resources): Promise<PlayerSelect> {
-    removeCurrentScene(this.#props);
-
+    discardCurrentScene(this.#props);
     const scene = new PlayerSelect(resources);
+    bindScene(this.#props, scene);
     this.#props.unsubscribers = [
       scene.decideNotifier().subscribe(v => {
-        this.#props.gameAction.next({
-          type: 'SelectionComplete',
-          armdozerId: v.armdozerId,
-          pilotId: v.pilotId,
-        });
+        this.#props.gameAction.next({type: 'SelectionComplete', armdozerId: v.armdozerId, pilotId: v.pilotId});
       }),
       scene.prevNotifier().subscribe(() => {
         this.#props.gameAction.next({type: 'SelectionCancel'});
       }),
     ];
-    this.#props.root.appendChild(scene.getRootHTMLElement());
-    await Promise.race([
-      scene.waitUntilLoaded(),
-      waitTime(MAX_LOADING_TIME),
-    ]);
-
-    this.#props.scene = scene;
+    await Promise.race([scene.waitUntilLoaded(), waitTime(MAX_LOADING_TIME)]);
     return scene;
   }
 
@@ -183,21 +163,10 @@ export class DOMScenes {
    * @return 開始された対戦カード画面
    */
   async startMatchCard(resources: Resources, player: ArmDozerId, enemy: ArmDozerId, caption: string): Promise<MatchCard> {
-    removeCurrentScene(this.#props);
-
-    const scene = new MatchCard({
-      resources: resources,
-      player: player,
-      enemy: enemy,
-      caption: caption
-    });
-    this.#props.root.appendChild(scene.getRootHTMLElement());
-    await Promise.race([
-      scene.waitUntilLoaded(),
-      waitTime(MAX_LOADING_TIME),
-    ]);
-
-    this.#props.scene = scene;
+    discardCurrentScene(this.#props);
+    const scene = new MatchCard({resources, player, enemy, caption});
+    bindScene(this.#props, scene);
+    await Promise.race([scene.waitUntilLoaded(), waitTime(MAX_LOADING_TIME)]);
     return scene;
   }
 
@@ -208,16 +177,10 @@ export class DOMScenes {
    * @returns 開始されたNPCステージタイトル画面
    */
   async startStageTitle(param: StageTitleParam): Promise<StageTitle> {
-    removeCurrentScene(this.#props);
-
+    discardCurrentScene(this.#props);
     const scene = new StageTitle(param);
-    this.#props.root.appendChild(scene.getRootHTMLElement());
-    await Promise.race([
-      scene.waitUntilLoaded(),
-      waitTime(MAX_LOADING_TIME),
-    ]);
-
-    this.#props.scene = scene;
+    bindScene(this.#props, scene);
+    await Promise.race([scene.waitUntilLoaded(), waitTime(MAX_LOADING_TIME)]);
     return scene;
   }
 
@@ -229,21 +192,15 @@ export class DOMScenes {
    * @return 開始されたNPCエンディング画面
    */
   async startNPCEnding(resources: Resources, bgm: BGMManager): Promise<NPCEnding> {
-    removeCurrentScene(this.#props);
-
+    discardCurrentScene(this.#props);
     const scene = new NPCEnding(resources, bgm);
-    this.#props.root.appendChild(scene.getRootHTMLElement());
+    bindScene(this.#props, scene);
     this.#props.unsubscribers = [
       scene.endNPCEndingNotifier().subscribe(() => {
         this.#props.gameAction.next({type: 'EndNPCEnding'});
       })
     ];
-    await Promise.race([
-      scene.waitUntilLoaded(),
-      waitTime(MAX_LOADING_TIME),
-    ]);
-
-    this.#props.scene = scene;
+    await Promise.race([scene.waitUntilLoaded(), waitTime(MAX_LOADING_TIME)]);
     return scene;
   }
 
@@ -255,10 +212,9 @@ export class DOMScenes {
    * @return 開始された設定画面
    */
   startConfig(resources: Resources, config: GbraverBurstBrowserConfig): Config {
-    removeCurrentScene(this.#props);
-
+    discardCurrentScene(this.#props);
     const scene = new Config(resources, config);
-    this.#props.root.appendChild(scene.getRootHTMLElement());
+    bindScene(this.#props, scene);
     this.#props.unsubscribers = [
       scene.prevNotifier().subscribe(() => {
         this.#props.gameAction.next({type: 'ConfigChangeCancel'});
@@ -267,7 +223,6 @@ export class DOMScenes {
         this.#props.gameAction.next({type: 'ConfigChangeComplete', config});
       })
     ];
-    this.#props.scene = scene;
     return scene;
   }
 
@@ -279,10 +234,9 @@ export class DOMScenes {
    * @return 開始された設定画面
    */
   startTutorialSelector(resources: Resources, stages: TutorialStage[]): TutorialSelector {
-    removeCurrentScene(this.#props);
-
+    discardCurrentScene(this.#props);
     const scene = new TutorialSelector(resources, stages);
-    this.#props.root.appendChild(scene.getRootHTMLElement());
+    bindScene(this.#props, scene);
     this.#props.unsubscribers = [
       scene.prevNotifier().subscribe(() => {
         this.#props.gameAction.next({type: 'CancelTutorialSelect'});
@@ -291,7 +245,6 @@ export class DOMScenes {
         this.#props.gameAction.next({...stageSelect, type: 'SelectTutorialStage'});
       })
     ];
-    this.#props.scene = scene;
     return scene;
   }
 
@@ -300,7 +253,7 @@ export class DOMScenes {
    * 本メソッドは、3Dシーンを表示する前に呼ばれる想定である
    */
   hidden(): void {
-    removeCurrentScene(this.#props);
+    discardCurrentScene(this.#props);
   }
 
   /**

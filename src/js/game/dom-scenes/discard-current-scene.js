@@ -6,7 +6,7 @@ import type {DOMScenesProps} from "./props";
  * 
  * @param props DomScenesプロパティ
  */
-export function removeCurrentScene(props: DOMScenesProps): void {
+export function discardCurrentScene(props: DOMScenesProps): void {
   props.scene && props.scene.destructor();
   props.scene && props.scene.getRootHTMLElement().remove();
   props.scene = null;
