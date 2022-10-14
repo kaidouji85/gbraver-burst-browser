@@ -4,32 +4,31 @@ import type {BGMManager} from '../../bgm/bgm-manager';
 import type {Resources} from "../../resource";
 import type {LoadingActions} from "../../resource/loading-actions";
 import type {Stream} from "../../stream/stream";
-import {waitTime} from "../../wait/wait-time";
 import type {GbraverBurstBrowserConfig} from "../config/browser-config";
 import type {GameAction} from "../game-actions";
 import {bindScene} from "./bind-scene";
-import {Config} from "./scene/config";
 import {discardCurrentScene} from "./discard-current-scene";
+import type {DOMScenesProps} from "./props";
+import {createDOMScenesProps} from "./props";
+import {Config} from "./scene/config";
 import {Loading} from "./scene/loading";
 import {MailVerifiedIncomplete} from "./scene/mail-verified-incomplete/mail-verified-incomplete";
 import {MatchCard} from "./scene/match-card";
-import {MAX_LOADING_TIME} from "./max-loading-time";
 import {NPCEnding} from "./scene/npc-ending/npc-ending";
 import {PlayerSelect} from "./scene/player-select";
-import type {DOMScenesProps} from "./props";
-import {createDOMScenesProps} from "./props";
-import {startLoading} from "./start/start-loading";
-import {startMailVerifiedIncomplete} from "./start/start-mail-verified-incomplete";
-import {startMatchCard} from "./start/start-match-card";
-import {startPlayerSelect} from "./start/start-player-select";
-import {startStageTitle} from "./start/start-stage-title";
-import {startTitle} from "./start/start-title";
 import type {StageTitleParam} from "./scene/stage-title/stage-title";
 import {StageTitle} from "./scene/stage-title/stage-title";
 import type {TitleParams} from "./scene/title";
 import {Title} from "./scene/title";
 import type {TutorialStage} from "./scene/tutorial-selector/tutoria-stage-element";
 import {TutorialSelector} from "./scene/tutorial-selector/tutorial-selector";
+import {startLoading} from "./start/start-loading";
+import {startMailVerifiedIncomplete} from "./start/start-mail-verified-incomplete";
+import {startMatchCard} from "./start/start-match-card";
+import {startNPCEnding} from "./start/start-npc-ending";
+import {startPlayerSelect} from "./start/start-player-select";
+import {startStageTitle} from "./start/start-stage-title";
+import {startTitle} from "./start/start-title";
 
 /**
  * HTMLオンリーで生成されたシーンを集めたもの
@@ -132,16 +131,7 @@ export class DOMScenes {
    * @return 開始されたNPCエンディング画面
    */
   async startNPCEnding(resources: Resources, bgm: BGMManager): Promise<NPCEnding> {
-    discardCurrentScene(this.#props);
-    const scene = new NPCEnding(resources, bgm);
-    bindScene(this.#props, scene);
-    this.#props.unsubscribers = [
-      scene.endNPCEndingNotifier().subscribe(() => {
-        this.#props.gameAction.next({type: 'EndNPCEnding'});
-      })
-    ];
-    await Promise.race([scene.waitUntilLoaded(), waitTime(MAX_LOADING_TIME)]);
-    return scene;
+    return await startNPCEnding(this.#props, resources, bgm);
   }
 
   /**
