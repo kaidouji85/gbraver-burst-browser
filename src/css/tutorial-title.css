@@ -30,7 +30,17 @@
   --width: calc(var(--vh) * 200);
   position: absolute;
   top: calc(var(--vh) * -10);
-  right: calc(var(--width) * -0.3);
+  right: calc(-0.3 * var(--width));
   width: var(--width);
-  filter: brightness(50%);
+  filter: brightness(20%);
+  z-index: 1;
+}
+
+.tutorial-title__shin-braver-stand {
+  --width: calc(100 * var(--vh));
+  position: absolute;
+  right: calc(-0.2 * var(--width));
+  top: calc(0.2 * var(--width));
+  width: var(--width);
+  z-index: 2;
 }

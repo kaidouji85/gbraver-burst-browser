@@ -10,7 +10,9 @@ import {ROOT_CASS} from "./class-name";
  */
 export function rootInnerHtml(resources: Resources): string {
   const bustShot = resources.paths.find(v => v.id === PathIds.SHIN_BRAVER_BUST_SHOT)?.path ?? '';
+  const stand = resources.paths.find(v => v.id === PathIds.SHIN_BRAVER_STAND)?.path ?? '';
   return ` 
+    <img class="${ROOT_CASS}__shin-braver-stand" src="${stand}">
     <img class="${ROOT_CASS}__shin-braver-bust-shot" src="${bustShot}">
   `;
 }
