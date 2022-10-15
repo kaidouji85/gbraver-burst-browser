@@ -3,9 +3,9 @@
  */
 @media (orientation: landscape) {
   .tutorial-title {
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    --zindex-bust-shot: 0;
+    --zindex-stand: 1;
+    --zindex-title: 2;
     width: var(--screen-width);
     height: var(--screen-height);
     background-color: var(--background-color);
@@ -26,6 +26,40 @@
   }
 }
 
+.tutorial-title__title {
+  position: absolute;
+  font-size: calc(var(--responsive-font-size) * 1.3);
+  z-index: var(--zindex-title);
+  top: calc(25 * var(--vh));
+  right: 50vw;
+}
+
+.tutorial-title__stage {
+  display: flex;
+  align-items: baseline;
+}
+
+.tutorial-title__stage-prefix--capitalized {
+  font-size: calc(var(--responsive-font-size) * 2.5);
+  font-weight: bold;
+}
+
+.tutorial-title__stage-level {
+  font-size: calc(var(--responsive-font-size) * 2);
+  font-weight: bold;
+}
+
+.tutorial-title__caption {
+  display: flex;
+  align-items: baseline;
+  margin-left: calc(var(--responsive-font-size) * 2);
+}
+
+.tutorial-title__caption-clause--capitalized {
+  font-size: calc(var(--responsive-font-size) * 2.5);
+  font-weight: bold;
+}
+
 .tutorial-title__shin-braver-bust-shot {
   --width: calc(var(--vh) * 200);
   position: absolute;
@@ -33,7 +67,7 @@
   right: calc(-0.3 * var(--width));
   width: var(--width);
   filter: brightness(20%);
-  z-index: 1;
+  z-index: var(--zindex-bust-shot);
 }
 
 .tutorial-title__shin-braver-stand {
@@ -42,5 +76,5 @@
   right: calc(-0.2 * var(--width));
   top: calc(0.2 * var(--width));
   width: var(--width);
-  z-index: 2;
+  z-index: var(--zindex-stand);
 }

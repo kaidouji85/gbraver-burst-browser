@@ -1,6 +1,6 @@
 // @flow
 import type {Resources} from "../../../../resource";
-import {ROOT_CASS} from "./dom/class-name";
+import {ROOT_CLASS} from "./dom/class-name";
 import {rootInnerHtml} from "./dom/root-inner-html";
 
 /** チュートリアルタイトル画面プロパティ */
@@ -17,7 +17,7 @@ export type TutorialTitleProps = {
  */
 export function createTutorialTitleProps(resources: Resources): TutorialTitleProps {
   const root = document.createElement('div');
-  root.className = ROOT_CASS;
+  root.className = ROOT_CLASS;
   root.innerHTML = rootInnerHtml(resources);
   return {root};
 }
