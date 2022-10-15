@@ -21,6 +21,8 @@ import type {TitleParams} from "./scene/title";
 import {Title} from "./scene/title";
 import type {TutorialStage} from "./scene/tutorial-selector/tutoria-stage-element";
 import {TutorialSelector} from "./scene/tutorial-selector/tutorial-selector";
+import type {TutorialTitleParams} from "./scene/tutorial-title";
+import {TutorialTitle} from "./scene/tutorial-title";
 import {startConfig} from "./start/start-config";
 import {startLoading} from "./start/start-loading";
 import {startMailVerifiedIncomplete} from "./start/start-mail-verified-incomplete";
@@ -30,6 +32,7 @@ import {startPlayerSelect} from "./start/start-player-select";
 import {startStageTitle} from "./start/start-stage-title";
 import {startTitle} from "./start/start-title";
 import {startTutorialSelector} from "./start/start-tutorial-selector";
+import {startTutorialTitle} from "./start/start-tutorial-title";
 
 /**
  * HTMLオンリーで生成されたシーンを集めたもの
@@ -155,6 +158,16 @@ export class DOMScenes {
    */
   startTutorialSelector(resources: Resources, stages: TutorialStage[]): TutorialSelector {
     return startTutorialSelector(this.#props, resources, stages);
+  }
+
+  /**
+   * チュートリアルタイトル画面を開始する
+   *
+   * @param params 画面パラメータ
+   * @return 開始されたチュートリアルタイトル画面
+   */
+  async startTutorialTitle(params: TutorialTitleParams): Promise<TutorialTitle> {
+    return await startTutorialTitle(this.#props, params);
   }
 
   /**

@@ -31,6 +31,7 @@ export const PathIds = {
   LOGO: 'LOGO',
   SHIN_BRAVER_ICON: 'SHIN_BRAVER_ICON',
   SHIN_BRAVER_BUST_SHOT: 'SHIN_BRAVER_BUST_SHOT',
+  SHIN_BRAVER_STAND: 'SHIN_BRAVER_STAND',
   NEO_LANDOZER_ICON: 'NEO_LANDOZER_ICON',
   NEO_LANDOZER_BUST_SHOT: 'NEO_LANDOZER_BUST_SHOT',
   LIGHTNING_DOZER_ICON: 'LIGHTNING_DOZER_ICON',
@@ -75,6 +76,10 @@ export const PathConfigs: PathConfig[] = [
   {
     id: PathIds.SHIN_BRAVER_BUST_SHOT,
     path: root => `${root.get()}/armdozer/shin-braver/bust-shot.webp`
+  },
+  {
+    id: PathIds.SHIN_BRAVER_STAND,
+    path: root => `${root.get()}/armdozer/shin-braver/stand.webp`
   },
   {
     id: PathIds.NEO_LANDOZER_ICON,
