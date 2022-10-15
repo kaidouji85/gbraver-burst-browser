@@ -1,7 +1,7 @@
 // @flow
 import type {DOMScene} from "../../dom-scene";
-import {createTutorialTitleProps} from "./props";
 import type {CreatePropsParams, TutorialTitleProps} from "./props";
+import {createTutorialTitleProps} from "./props";
 
 /** チュートリアルタイトル画面パラメータ */
 export type TutorialTitleParams = CreatePropsParams;
