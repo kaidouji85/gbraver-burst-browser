@@ -1,10 +1,12 @@
 // @flow
-import type {Resources} from "../../../../resource";
 import type {DOMScene} from "../../dom-scene";
 import {createTutorialTitleProps} from "./props";
-import type {TutorialTitleProps} from "./props";
+import type {CreatePropsParams, TutorialTitleProps} from "./props";
 
-/** チュートリアルタイトル画面 */
+/** チュートリアルタイトル画面パラメータ */
+type TutorialTitleParams = CreatePropsParams;
+
+/** チュートリアル タイトル画面 */
 export class TutorialTitle implements DOMScene {
   /** プロパティ */
   #props: TutorialTitleProps;
@@ -12,10 +14,10 @@ export class TutorialTitle implements DOMScene {
   /**
    * コンストラクタ
    *
-   * @param resources リソース管理オブジェクト
+   * @param params パラメータ
    */
-  constructor(resources: Resources) {
-    this.#props = createTutorialTitleProps(resources);
+  constructor(params: TutorialTitleParams) {
+    this.#props = createTutorialTitleProps(params);
   }
 
   /** @override */
