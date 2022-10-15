@@ -17,8 +17,7 @@ import type {TutorialStage} from "../tutorial-stages";
 export async function startTutorial(props: $ReadOnly<GameProps>, level: number, stage: TutorialStage): Promise<void> {
   const npcBattle = new NPCBattleRoom(stage.player, stage.npc);
   await props.fader.fadeOut();
-  await props.domScenes.startStageTitle({resources: props.resources, stagePrefix: 'Tutorial', level, caption: stage.title,
-    armDozerId: npcBattle.enemy.armdozer.id});
+  await props.domScenes.startTutorialTitle({resources: props.resources, title: stage.title.join('')});
   await props.fader.fadeIn();
 
   const startTutorialStageTime = Date.now();
