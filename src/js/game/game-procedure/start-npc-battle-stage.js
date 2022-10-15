@@ -1,5 +1,5 @@
 // @flow
-import type {Player} from "gbraver-burst-core";
+import type {Command, Player} from "gbraver-burst-core";
 import {fadeOut, stop} from "../../bgm/bgm-operators";
 import {NPCBattleRoom} from "../../npc/npc-battle-room";
 import {waitAnimationFrame} from "../../wait/wait-animation-frame";
@@ -24,7 +24,7 @@ export async function startNPCBattleStage(props: $ReadOnly<GameProps>, player: P
   await props.fader.fadeIn();
 
   const startNPCStageTitleTime = Date.now();
-  const battleProgress = {progress: v => Promise.resolve(npcBattle.progress(v))}
+  const battleProgress = {progress: (v: Command) => Promise.resolve(npcBattle.progress(v))}
   const config = await props.config.load();
   const battleScene = props.tdScenes.startBattle({resources: props.resources, bgm: props.bgm, playingBGM: stage.bgm,
     pixelRatio: config.webGLPixelRatio, initialAnimationTimeScale: config.battleAnimationTimeScale ,battleProgress,

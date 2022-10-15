@@ -1,6 +1,6 @@
 // @flow
-import type {GameProps} from "../game-props";
 import {Title} from "../dom-scenes/scene/title";
+import type {GameProps} from "../game-props";
 
 /**
  * タイトル画面を開始するヘルパー関数

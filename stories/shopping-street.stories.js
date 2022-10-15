@@ -2,6 +2,7 @@
 import {Illumination} from "../src/js/game-object/illumination/illumination";
 import ShoppingStreet from "../src/js/game-object/stage/shopping-street/shopping-street";
 import {skyBox as createSkyBox} from "../src/js/game/td-scenes/battle/view/td/sky-box";
+import type {Object3DsGeneratorParams} from "./stub/still-image-stub";
 import {stillImageStub} from "./stub/still-image-stub";
 import {TDGameObjectStub} from "./stub/td-game-object-stub";
 
@@ -27,7 +28,7 @@ export const highResolutionStillImage = (): HTMLElement => {
   const position = {x: 0, y: 220 * distanceScale, z: 300 * distanceScale};
   const target = {x: 0, y: 200 * distanceScale, z: 0};
   const camera = {position, target};
-  const creator = ({resources, emptyGameObjectAction}) => {
+  const creator = ({resources, emptyGameObjectAction}: Object3DsGeneratorParams) => {
     const illumination = new Illumination(emptyGameObjectAction);
     const shoppingStreet = new ShoppingStreet(resources);
     const objects = [...illumination.getObject3Ds(), ...shoppingStreet.getThreeJsObjects()];
