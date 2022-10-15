@@ -4,8 +4,8 @@ import {bindScene} from "../bind-scene";
 import {discardCurrentScene} from "../discard-current-scene";
 import {MAX_LOADING_TIME} from "../max-loading-time";
 import type {DOMScenesProps} from "../props";
-import {StageTitle} from "../scene/stage-title/stage-title";
 import type {StageTitleParam} from "../scene/stage-title/stage-title";
+import {StageTitle} from "../scene/stage-title/stage-title";
 
 /**
  * ステージタイトル画面を開始する

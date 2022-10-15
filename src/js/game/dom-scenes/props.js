@@ -1,9 +1,8 @@
 // @flow
 import type {StreamSource, Unsubscriber} from "../../stream/stream";
+import {createStreamSource} from "../../stream/stream";
 import type {GameAction} from "../game-actions";
 import type {DOMScene} from "./dom-scene";
-
-import { createStreamSource } from "../../stream/stream";
 
 /** DomScenesプロパティ */
 export type DOMScenesProps = {

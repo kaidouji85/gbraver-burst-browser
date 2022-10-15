@@ -1,7 +1,7 @@
 // @flow
+import {pop} from "../../../../../dom/animation";
 import type {PushDOM} from "../../../../../dom/event-stream";
 import type {TitleProps} from "../props";
-import {pop} from "../../../../../dom/animation";
 
 /**
  * カジュアルマッチが押された時の処理
