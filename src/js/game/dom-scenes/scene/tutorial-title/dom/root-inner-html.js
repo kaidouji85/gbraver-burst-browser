@@ -16,7 +16,7 @@ export type RootInnerHTMLParams = {
 function stageClause(title: string[]): string {
   return title.map(v => `
     <div class="${ROOT_CLASS}__caption-clause--capitalized">${v.slice(0, 1)}</div>
-    <div class="${ROOT_CLASS}__stage-clause">${v.slice(1)}</div>
+    <div class="${ROOT_CLASS}__caption-clause">${v.slice(1)}</div>
   `).join('');
 }
 

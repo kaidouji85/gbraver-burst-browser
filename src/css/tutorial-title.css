@@ -32,7 +32,7 @@
   font-size: var(--font-size);
   z-index: var(--zindex-title);
   left: 50vw;
-  top: 50vh;
+  top: 30vh;
   transform: translate(-50%, -50%);
 }
 
@@ -57,9 +57,14 @@
   margin-left: calc(var(--responsive-font-size) * 2);
 }
 
+.tutorial-title__caption-clause {
+  white-space: nowrap
+}
+
 .tutorial-title__caption-clause--capitalized {
   font-size: calc(var(--font-size) * 1.5);
   font-weight: bold;
+  white-space: nowrap
 }
 
 .tutorial-title__shin-braver-bust-shot {
