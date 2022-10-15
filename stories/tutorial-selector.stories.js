@@ -1,7 +1,7 @@
 // @flow
 import {TutorialSelector} from "../src/js/game/dom-scenes/scene/tutorial-selector/tutorial-selector";
-import {domStub} from "./stub/dom-stub";
 import type {DOMStubStory} from "./stub/dom-stub";
+import {domStub} from "./stub/dom-stub";
 
 export default {
   title: 'tutorial-selector',

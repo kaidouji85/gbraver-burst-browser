@@ -1,5 +1,5 @@
 // @flow
-import type {Battle,BatteryDeclaration, GameEnd, GameState, GameStateX, InputCommand} from "gbraver-burst-core";
+import type {BatteryDeclaration, Battle, GameEnd, GameState, GameStateX, InputCommand} from "gbraver-burst-core";
 
 /**
  * GameStateX<Battle>にキャストする
