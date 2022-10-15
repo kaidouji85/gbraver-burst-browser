@@ -13,5 +13,6 @@ export type TutorialTitleProps = {
  */
 export function createTutorialTitleProps(): TutorialTitleProps {
   const root = document.createElement('div');
+  root.innerText = 'hello';
   return {root};
 }
