@@ -1,5 +1,8 @@
 // @flow
+import {domUuid} from "../../../../uuid/dom-uuid";
+import {waitElementLoaded} from "../../../../wait/wait-element-loaded";
 import {ROOT_CLASS} from "./dom/class-name";
+import {extractElements} from "./dom/elements";
 import type {RootInnerHTMLParams} from "./dom/root-inner-html";
 import {rootInnerHtml} from "./dom/root-inner-html";
 
@@ -7,6 +10,10 @@ import {rootInnerHtml} from "./dom/root-inner-html";
 export type TutorialTitleProps = {
   /** ルートHTML要素 */
   root: HTMLElement,
+  /** 立ち画像を読み込んだら発火するPromise */
+  isStandLoaded: Promise<void>,
+  /** バストショット画像を読み込んだら発火するPromise */
+  isBustShotLoaded: Promise<void>,
 };
 
 /** プロパティ生成パラメータ */
@@ -19,8 +26,12 @@ export type CreatePropsParams = RootInnerHTMLParams;
  * @return 生成した画面プロパティ
  */
 export function createTutorialTitleProps(params: CreatePropsParams): TutorialTitleProps {
+  const ids = {stand: domUuid(), bustShot: domUuid()};
   const root = document.createElement('div');
   root.className = ROOT_CLASS;
-  root.innerHTML = rootInnerHtml(params);
-  return {root};
+  root.innerHTML = rootInnerHtml(ids, params);
+  const {stand, bustShot} = extractElements(root, ids);
+  const isStandLoaded = waitElementLoaded(stand);
+  const isBustShotLoaded = waitElementLoaded(bustShot);
+  return {root, isStandLoaded, isBustShotLoaded};
 }
