@@ -3,50 +3,53 @@ import type {ArmDozerId} from "gbraver-burst-core";
 import type {BGMManager} from '../../bgm/bgm-manager';
 import type {Resources} from "../../resource";
 import type {LoadingActions} from "../../resource/loading-actions";
-import type {Stream, StreamSource, Unsubscriber} from "../../stream/stream";
-import {createStreamSource} from "../../stream/stream";
-import {waitTime} from "../../wait/wait-time";
+import type {Stream} from "../../stream/stream";
 import type {GbraverBurstBrowserConfig} from "../config/browser-config";
 import type {GameAction} from "../game-actions";
-import {Config} from "./config";
-import type {DOMScene} from "./dom-scene";
-import {Loading} from "./loading";
-import {MailVerifiedIncomplete} from "./mail-verified-incomplete/mail-verified-incomplete";
-import {MatchCard} from "./match-card";
-import {NPCEnding} from "./npc-ending/npc-ending";
-import {PlayerSelect} from "./player-select";
-import type {StageTitleParam} from "./stage-title/stage-title";
-import {StageTitle} from "./stage-title/stage-title";
-import type {TitleParams} from "./title";
-import {Title} from "./title";
-import type {TutorialStage} from "./tutorial-selector/tutoria-stage-element";
-import {TutorialSelector} from "./tutorial-selector/tutorial-selector";
-
-/**
- * 最大読み込み待機時間(ミリ秒)
- */
-const MAX_LOADING_TIME = 10000;
+import {discardCurrentScene} from "./discard-current-scene";
+import type {DOMScenesProps} from "./props";
+import {createDOMScenesProps} from "./props";
+import {Config} from "./scene/config";
+import {Loading} from "./scene/loading";
+import {MailVerifiedIncomplete} from "./scene/mail-verified-incomplete/mail-verified-incomplete";
+import {MatchCard} from "./scene/match-card";
+import {NPCEnding} from "./scene/npc-ending/npc-ending";
+import {PlayerSelect} from "./scene/player-select";
+import type {StageTitleParam} from "./scene/stage-title/stage-title";
+import {StageTitle} from "./scene/stage-title/stage-title";
+import type {TitleParams} from "./scene/title";
+import {Title} from "./scene/title";
+import type {TutorialStage} from "./scene/tutorial-selector/tutoria-stage-element";
+import {TutorialSelector} from "./scene/tutorial-selector/tutorial-selector";
+import {startConfig} from "./start/start-config";
+import {startLoading} from "./start/start-loading";
+import {startMailVerifiedIncomplete} from "./start/start-mail-verified-incomplete";
+import {startMatchCard} from "./start/start-match-card";
+import {startNPCEnding} from "./start/start-npc-ending";
+import {startPlayerSelect} from "./start/start-player-select";
+import {startStageTitle} from "./start/start-stage-title";
+import {startTitle} from "./start/start-title";
+import {startTutorialSelector} from "./start/start-tutorial-selector";
 
 /**
  * HTMLオンリーで生成されたシーンを集めたもの
  * 本クラス配下のいずれか1シーンのみが表示される想定
  */
 export class DOMScenes {
-  #root: HTMLElement;
-  #scene: ?DOMScene;
-  #gameAction: StreamSource<GameAction>;
-  #unsubscribers: Unsubscriber[];
+  #props: DOMScenesProps;
 
+  /**
+   * コンストラクタ
+   */
   constructor() {
-    this.#root = document.createElement('div');
-    this.#gameAction = createStreamSource();
-    this.#scene = null;
-    this.#unsubscribers = [];
+    this.#props = createDOMScenesProps();
   }
 
-  /** デストラクタ相当の処理 */
+  /** 
+   * デストラクタ相当の処理
+   */
   destructor() {
-    this.#removeCurrentScene();
+    discardCurrentScene(this.#props);
   }
 
   /**
@@ -55,7 +58,7 @@ export class DOMScenes {
    * @return 通知ストリーム
    */
   gameActionNotifier(): Stream<GameAction> {
-    return this.#gameAction;
+    return this.#props.gameAction;
   }
 
   /**
@@ -65,21 +68,7 @@ export class DOMScenes {
    * @return 開始されたメール認証未完了画面
    */
   startMailVerifiedIncomplete(mailAddress: string): MailVerifiedIncomplete {
-    this.#removeCurrentScene();
-
-    const scene = new MailVerifiedIncomplete(mailAddress);
-    this.#root.appendChild(scene.getRootHTMLElement());
-    this.#unsubscribers = [
-      scene.gotoTitleNotifier().subscribe(() => {
-        this.#gameAction.next({type: 'ExitMailVerifiedIncomplete'});
-      }),
-      scene.reloadNotifier().subscribe(() => {
-        this.#gameAction.next({type: 'ReloadRequest'});
-      })
-    ];
-
-    this.#scene = scene;
-    return scene;
+    return startMailVerifiedIncomplete(this.#props, mailAddress);
   }
 
   /**
@@ -89,12 +78,7 @@ export class DOMScenes {
    * @return 開始されたローディング画面
    */
   startLoading(loading: Stream<LoadingActions>): Loading {
-    this.#removeCurrentScene();
-    const scene = new Loading(loading);
-    this.#root.appendChild(scene.getRootHTMLElement());
-
-    this.#scene = scene
-    return scene;
+    return startLoading(this.#props, loading);
   }
 
   /**
@@ -104,43 +88,7 @@ export class DOMScenes {
    * @return 開始されたタイトル画面
    */
   async startTitle(params: TitleParams): Promise<Title> {
-    this.#removeCurrentScene();
-
-    const scene = new Title(params);
-    this.#unsubscribers = [
-      scene.pushLoginNotifier().subscribe(() => {
-        this.#gameAction.next({type: 'UniversalLogin'});
-      }),
-      scene.pushLogoutNotifier().subscribe(() => {
-        this.#gameAction.next({type: 'Logout'});
-      }),
-      scene.pushDeleteAccountNotifier().subscribe(() => {
-        this.#gameAction.next({type: 'AccountDeleteConsent'});
-      }),
-      scene.pushArcadeNotifier().subscribe(() => {
-        this.#gameAction.next({type: 'ArcadeStart'});
-      }),
-      scene.pushHowToPlayNotifier().subscribe(() => {
-        this.#gameAction.next({type: 'ShowHowToPlay'});
-      }),
-      scene.pushCasualMatchNotifier().subscribe(() => {
-        this.#gameAction.next({type: 'CasualMatchStart'});
-      }),
-      scene.pushConfigNotifier().subscribe(() => {
-        this.#gameAction.next({type: 'ConfigChangeStart'});
-      }),
-      scene.pushTutorialNotifier().subscribe(() => {
-        this.#gameAction.next({type: 'TutorialStart'});
-      })
-    ];
-    this.#root.appendChild(scene.getRootHTMLElement());
-    await Promise.race([
-      scene.waitUntilLoaded(),
-      waitTime(MAX_LOADING_TIME)
-    ]);
-
-    this.#scene = scene;
-    return scene;
+    return await startTitle(this.#props, params);
   }
 
   /**
@@ -150,29 +98,7 @@ export class DOMScenes {
    * @return 開始されたプレイヤー選択画面
    */
   async startPlayerSelect(resources: Resources): Promise<PlayerSelect> {
-    this.#removeCurrentScene();
-
-    const scene = new PlayerSelect(resources);
-    this.#unsubscribers = [
-      scene.decideNotifier().subscribe(v => {
-        this.#gameAction.next({
-          type: 'SelectionComplete',
-          armdozerId: v.armdozerId,
-          pilotId: v.pilotId,
-        });
-      }),
-      scene.prevNotifier().subscribe(() => {
-        this.#gameAction.next({type: 'SelectionCancel'});
-      }),
-    ];
-    this.#root.appendChild(scene.getRootHTMLElement());
-    await Promise.race([
-      scene.waitUntilLoaded(),
-      waitTime(MAX_LOADING_TIME),
-    ]);
-
-    this.#scene = scene;
-    return scene;
+    return await startPlayerSelect(this.#props, resources);
   }
 
   /**
@@ -185,22 +111,7 @@ export class DOMScenes {
    * @return 開始された対戦カード画面
    */
   async startMatchCard(resources: Resources, player: ArmDozerId, enemy: ArmDozerId, caption: string): Promise<MatchCard> {
-    this.#removeCurrentScene();
-
-    const scene = new MatchCard({
-      resources: resources,
-      player: player,
-      enemy: enemy,
-      caption: caption
-    });
-    this.#root.appendChild(scene.getRootHTMLElement());
-    await Promise.race([
-      scene.waitUntilLoaded(),
-      waitTime(MAX_LOADING_TIME),
-    ]);
-
-    this.#scene = scene;
-    return scene;
+    return await startMatchCard(this.#props, resources, player, enemy, caption);
   }
 
   /**
@@ -210,17 +121,7 @@ export class DOMScenes {
    * @returns 開始されたNPCステージタイトル画面
    */
   async startStageTitle(param: StageTitleParam): Promise<StageTitle> {
-    this.#removeCurrentScene();
-
-    const scene = new StageTitle(param);
-    this.#root.appendChild(scene.getRootHTMLElement());
-    await Promise.race([
-      scene.waitUntilLoaded(),
-      waitTime(MAX_LOADING_TIME),
-    ]);
-
-    this.#scene = scene;
-    return scene;
+    return await startStageTitle(this.#props, param);
   }
 
   /**
@@ -231,22 +132,7 @@ export class DOMScenes {
    * @return 開始されたNPCエンディング画面
    */
   async startNPCEnding(resources: Resources, bgm: BGMManager): Promise<NPCEnding> {
-    this.#removeCurrentScene();
-
-    const scene = new NPCEnding(resources, bgm);
-    this.#root.appendChild(scene.getRootHTMLElement());
-    this.#unsubscribers = [
-      scene.endNPCEndingNotifier().subscribe(() => {
-        this.#gameAction.next({type: 'EndNPCEnding'});
-      })
-    ];
-    await Promise.race([
-      scene.waitUntilLoaded(),
-      waitTime(MAX_LOADING_TIME),
-    ]);
-
-    this.#scene = scene;
-    return scene;
+    return await startNPCEnding(this.#props, resources, bgm);
   }
 
   /**
@@ -257,20 +143,7 @@ export class DOMScenes {
    * @return 開始された設定画面
    */
   startConfig(resources: Resources, config: GbraverBurstBrowserConfig): Config {
-    this.#removeCurrentScene();
-
-    const scene = new Config(resources, config);
-    this.#root.appendChild(scene.getRootHTMLElement());
-    this.#unsubscribers = [
-      scene.prevNotifier().subscribe(() => {
-        this.#gameAction.next({type: 'ConfigChangeCancel'});
-      }),
-      scene.configChangeNotifier().subscribe(config => {
-        this.#gameAction.next({type: 'ConfigChangeComplete', config});
-      })
-    ];
-    this.#scene = scene;
-    return scene;
+    return startConfig(this.#props, resources, config);
   }
 
   /**
@@ -281,20 +154,7 @@ export class DOMScenes {
    * @return 開始された設定画面
    */
   startTutorialSelector(resources: Resources, stages: TutorialStage[]): TutorialSelector {
-    this.#removeCurrentScene();
-
-    const scene = new TutorialSelector(resources, stages);
-    this.#root.appendChild(scene.getRootHTMLElement());
-    this.#unsubscribers = [
-      scene.prevNotifier().subscribe(() => {
-        this.#gameAction.next({type: 'CancelTutorialSelect'});
-      }),
-      scene.stageSelectNotifier().subscribe(stageSelect => {
-        this.#gameAction.next({...stageSelect, type: 'SelectTutorialStage'});
-      })
-    ];
-    this.#scene = scene;
-    return scene;
+    return startTutorialSelector(this.#props, resources, stages);
   }
 
   /**
@@ -302,7 +162,7 @@ export class DOMScenes {
    * 本メソッドは、3Dシーンを表示する前に呼ばれる想定である
    */
   hidden(): void {
-    this.#removeCurrentScene();
+    discardCurrentScene(this.#props);
   }
 
   /**
@@ -311,20 +171,6 @@ export class DOMScenes {
    * @return 取得結果
    */
   getRootHTMLElement(): HTMLElement {
-    return this.#root;
-  }
-
-  /**
-   * 現在表示しているシーンを取り除く
-   */
-  #removeCurrentScene(): void {
-    this.#scene && this.#scene.destructor();
-    this.#scene && this.#scene.getRootHTMLElement().remove();
-    this.#scene = null;
-
-    this.#unsubscribers.forEach(v => {
-      v.unsubscribe();
-    });
-    this.#unsubscribers = [];
+    return this.#props.root;
   }
 }
