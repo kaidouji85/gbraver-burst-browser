@@ -16,5 +16,6 @@ export async function startTutorialTitle(props: DOMScenesProps, params: Tutorial
   discardCurrentScene(props);
   const scene = new TutorialTitle(params);
   bindScene(props, scene);
+  await scene.waitUntilLoaded();
   return scene;
 }

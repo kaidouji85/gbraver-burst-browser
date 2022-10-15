@@ -29,4 +29,13 @@ export class TutorialTitle implements DOMScene {
   getRootHTMLElement(): HTMLElement {
     return this.#props.root;
   }
+
+  /**
+   * 各種リソースの読み込みが完了するまで待つ
+   *
+   * @return 待機結果
+   */
+  async waitUntilLoaded(): Promise<void> {
+    await Promise.all([this.#props.isStandLoaded, this.#props.isBustShotLoaded]);
+  }
 }
