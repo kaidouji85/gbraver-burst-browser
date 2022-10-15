@@ -1,4 +1,5 @@
 // @flow
+import {ROOT_CASS} from "./dom/class-name";
 
 /** チュートリアルタイトル画面プロパティ */
 export type TutorialTitleProps = {
@@ -13,6 +14,6 @@ export type TutorialTitleProps = {
  */
 export function createTutorialTitleProps(): TutorialTitleProps {
   const root = document.createElement('div');
-  root.innerText = 'hello';
+  root.className = ROOT_CASS;
   return {root};
 }

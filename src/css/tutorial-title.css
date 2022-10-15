@@ -1,0 +1,27 @@
+/**
+ * チュートリアルタイトル画面
+ */
+@media (orientation: landscape) {
+  .tutorial-title {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: var(--screen-width);
+    height: var(--screen-height);
+    background-color: var(--background-color);
+    color: var(--font-color);
+    box-sizing: border-box;
+    padding-top: var(--screen-padding-top);
+    padding-left: var(--screen-padding-left);
+    padding-right: var(--screen-padding-right);
+    padding-bottom: var(--screen-padding-bottom);
+    background-size: cover;
+    background-position: 50% 0;
+  }
+}
+
+@media (orientation: portrait) {
+  .tutorial-title {
+    display: none;
+  }
+}
