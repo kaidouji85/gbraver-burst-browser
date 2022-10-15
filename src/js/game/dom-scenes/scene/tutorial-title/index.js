@@ -4,7 +4,7 @@ import {createTutorialTitleProps} from "./props";
 import type {CreatePropsParams, TutorialTitleProps} from "./props";
 
 /** チュートリアルタイトル画面パラメータ */
-type TutorialTitleParams = CreatePropsParams;
+export type TutorialTitleParams = CreatePropsParams;
 
 /** チュートリアル タイトル画面 */
 export class TutorialTitle implements DOMScene {
