@@ -8,6 +8,6 @@ export default {
 };
 
 export const scene: DOMStubStory = domStub(resources => {
-  const scene = new TutorialTitle({resources, title: 'バッテリーシステム基礎'});
+  const scene = new TutorialTitle({resources, title: 'バッテリーシステム基礎', level: 1});
   return scene.getRootHTMLElement();
 });

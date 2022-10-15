@@ -8,7 +8,9 @@ export type RootInnerHTMLParams = {
   /** リソース管理オブジェクト */
   resources: Resources,
   /** タイトル */
-  title: string
+  title: string,
+  /** チュートリアルレベル */
+  level: number,
 };
 
 /**
@@ -24,7 +26,7 @@ export function rootInnerHtml(params: RootInnerHTMLParams): string {
       <div class="${ROOT_CLASS}__stage">
         <div class="${ROOT_CLASS}__stage-prefix--capitalized">T</div>      
         <div class="${ROOT_CLASS}__stage-prefix">uorial</div>
-        <div class="${ROOT_CLASS}__stage-level">1</div>
+        <div class="${ROOT_CLASS}__stage-level">${params.level}</div>
       </div>
       <div class="${ROOT_CLASS}__caption">${params.title}</div>
     </div>
