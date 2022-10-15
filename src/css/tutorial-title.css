@@ -25,3 +25,12 @@
     display: none;
   }
 }
+
+.tutorial-title__shin-braver-bust-shot {
+  --width: calc(var(--vh) * 200);
+  position: absolute;
+  top: calc(var(--vh) * -10);
+  right: calc(var(--width) * -0.3);
+  width: var(--width);
+  filter: brightness(50%);
+}

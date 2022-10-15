@@ -8,6 +8,6 @@ export default {
 };
 
 export const scene: DOMStubStory = domStub(resources => {
-  const scene = new TutorialTitle();
+  const scene = new TutorialTitle(resources);
   return scene.getRootHTMLElement();
 });
