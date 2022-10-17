@@ -4,14 +4,14 @@ import type {Resize} from "../window/resize";
 import {getViewPortHeight} from "../view-port/view-port-size";
 
 /** CSSカムタムプロパティ ビューポート高 */
-export const VH = '--vh';
+const VH = '--vh';
 
 /**
  * CSSカムタムプロパティ ビューポート高 の値を更新する
  *
  * @param viewPortHeight 更新する値
  */
-export function setVH(viewPortHeight: number): void {
+function setVH(viewPortHeight: number): void {
   const vh = viewPortHeight * 0.01;
   if(document.documentElement) {
     document.documentElement.style.setProperty(VH, `${vh}px`);
