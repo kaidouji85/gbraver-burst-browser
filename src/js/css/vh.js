@@ -1,8 +1,7 @@
 // @flow
-
 import type {Stream, Unsubscriber} from "../stream/stream";
 import type {Resize} from "../window/resize";
-import {getViewPortHeight} from "./view-port-size";
+import {getViewPortHeight} from "../view-port/view-port-size";
 
 /** CSSカムタムプロパティ ビューポート高 */
 export const VH = '--vh';
@@ -26,17 +25,24 @@ export function setVH(viewPortHeight: number): void {
  * --vh
  */
 export class CssVH {
+  /** アンサブスクライバ */
   _unsubscriber: Unsubscriber;
 
+  /**
+   * コンストラクタ
+   *
+   * @param resize リサイズストリーム
+   */
   constructor(resize: Stream<Resize>) {
     this._unsubscriber = resize.subscribe(action => {
-      this._onResize(action);
+      this.#onResize(action);
     });
-
     setVH(getViewPortHeight());
   }
 
-  /** デストラクタ相当の処理 */
+  /**
+   * デストラクタ相当の処理
+   */
   destructor(): void {
     this._unsubscriber.unsubscribe();
   }
@@ -46,7 +52,7 @@ export class CssVH {
    *
    * @param action アクション
    */
-  _onResize(action: Resize): void {
+  #onResize(action: Resize): void {
     setVH(action.height);
   }
 }
