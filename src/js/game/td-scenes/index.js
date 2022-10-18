@@ -42,12 +42,14 @@ type StartBattleParams = {
 };
 
 /**
- * 3Dシーン生成関数
+ * 3Dシーン・ゲームアクション接続関数
  *
- * @param action ゲームアクション通知
- * @return 生成結果
+ * @template X シーンのデータ型
+ * @param scene 3Dシーン
+ * @param gameAction ゲームアクションストリーム
+ * @return ゲームションションのアンサブスクライブ
  */
-export type TDSceneGenerator<X: TDScene> = (action: StreamSource<GameAction>) => [X, Unsubscriber[]];
+export type GameActionConnector<X: TDScene> = (scene: X, gameAction: StreamSource<GameAction>) => Unsubscriber[];
 
 /** three.js系シーンをバインドする */
 export class TDSceneBinder {
@@ -99,15 +101,14 @@ export class TDSceneBinder {
   /**
    * 3D系シーンをバインドする
    *
-   * @param generator 3Dシーン生成関数
+   * @param scene バインドするシーン
+   * @param connector
    * @return 生成したシーン
    */
-  bind<X: TDScene>(generator: TDSceneGenerator<X>): X {
+  bind<X: TDScene>(scene: X, connector: GameActionConnector<X>): void {
     this.#disposeScene();
-    const [scene, unsubscribers] = generator(this.#gameAction);
     this.#scene = scene;
-    this.#unsubscribers = unsubscribers;
-    return scene;
+    this.#unsubscribers = connector(scene, this.#gameAction);
   }
 
   /**
