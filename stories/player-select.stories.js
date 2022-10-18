@@ -1,10 +1,10 @@
 // @flow
 
 import {ArmDozerIds, PilotIds} from "gbraver-burst-core";
-import {PlayerSelect} from "../src/js/game/dom-scenes/player-select";
-import {ArmdozerSelector} from "../src/js/game/dom-scenes/player-select/armdozer-selector";
-import {PilotSelector} from "../src/js/game/dom-scenes/player-select/pilot-selector";
-import {createPilotIcon} from "../src/js/game/dom-scenes/player-select/pilot-selector/create-pilot-icon";
+import {PlayerSelect} from "../src/js/game/dom-scenes/scene/player-select";
+import {ArmdozerSelector} from "../src/js/game/dom-scenes/scene/player-select/armdozer-selector";
+import {PilotSelector} from "../src/js/game/dom-scenes/scene/player-select/pilot-selector";
+import {createPilotIcon} from "../src/js/game/dom-scenes/scene/player-select/pilot-selector/create-pilot-icon";
 import type {DOMStubStory} from "./stub/dom-stub";
 import {domStub} from "./stub/dom-stub";
 

@@ -54,6 +54,33 @@ export function activeRightMessageWindow(props: CustomBattleEventProps): void {
 }
 
 /**
+ * バッテリーセレクタ隣メッセージウインドウをアクティブ表示する
+ *
+ * @param props イベントプロパティ
+ */
+export function activeNearBatterySelectorMessageWindow(props: CustomBattleEventProps): void {
+  activeMessageWindow(props.view.dom.nearBatterySelectorMessageWindow);
+}
+
+/**
+ * バーストボタン隣メッセージウインドウをアクティブ表示する
+ *
+ * @param props イベントプロパティ
+ */
+export function activeNearBurstButtonMessageWindow(props: CustomBattleEventProps): void {
+  activeMessageWindow(props.view.dom.nearBurstButtonMessageWindow);
+}
+
+/**
+ * パイロットボタン隣メッセージウインドウをアクティブ表示する
+ *
+ * @param props イベントプロパティ
+ */
+export function activeNearPilotButtonMessageWindow(props: CustomBattleEventProps): void {
+  activeMessageWindow(props.view.dom.nearPilotButtonMessageWindow);
+}
+
+/**
  * 左メッセージウインドウを顔画像ありアクティブ表示する
  *
  * @param props イベントプロパティ

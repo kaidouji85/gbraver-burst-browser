@@ -1,0 +1,24 @@
+// @flow
+import type {CustomBattleEventProps} from "../../../game/td-scenes/battle/custom-battle-event";
+import {activeLeftMessageWindowWithFace, activeRightMessageWindowWithFace} from "../../active-message-window";
+import {scrollLeftMessages, scrollRightMessages} from "../../scroll-messages";
+
+/**
+ * ストーリー プレイヤーの敗北
+ * @param props イベントプロパティ
+ * @return ストーリーが完了したら発火するPromise
+ */
+export async function lose(props: CustomBattleEventProps) {
+  activeRightMessageWindowWithFace(props, 'Shinya');
+  await scrollRightMessages(props, [
+    ['シンヤ', '「あともう少しで勝てたのに」']
+  ]);
+  props.view.dom.rightMessageWindow.darken();
+
+  activeLeftMessageWindowWithFace(props, 'Tsubasa');
+  await scrollLeftMessages(props, [
+    ['ツバサ', '「はじめてにしては 悪くなかったぞ'],
+    ['これからも精進あるのみだな」']
+  ]);
+  props.view.dom.leftMessageWindow.darken();
+}

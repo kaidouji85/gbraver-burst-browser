@@ -18,6 +18,15 @@ const ROOT_CLASS_LEFT = `${ROOT_CLASS}--left`;
 /** ルート要素が右側表示されている時のclass属性 */
 const ROOT_CLASS_RIGHT = `${ROOT_CLASS}--right`;
 
+/** ルート要素がバッテリーセレクタの隣に表示されている時のclass属性 */
+const ROOT_CLASS_NEAR_BATTERY_SELECTOR = `${ROOT_CLASS}--near-battery-selector`;
+
+/** ルート要素がバーストボタンの隣に表示されている時のclass属性 */
+const ROOT_CLASS_NEAR_BURST_BUTTON = `${ROOT_CLASS}--near-burst-button`;
+
+/** ルート要素がパイロットボタンの隣に表示されている時のclass属性 */
+const ROOT_CLASS_NEAR_PILOT_BUTTON = `${ROOT_CLASS}--near-pilot-button`;
+
 /** 次メッセージアイコンのclass属性 */
 const NEXT_MESSAGE_ICON_CLASS = `${ROOT_CLASS}__next-message-icon`;
 
@@ -25,7 +34,7 @@ const NEXT_MESSAGE_ICON_CLASS = `${ROOT_CLASS}__next-message-icon`;
 const NEXT_MESSAGE_ICON_CLASS_INVISIBLE = `${NEXT_MESSAGE_ICON_CLASS}--invisible`;
 
 /** メッセージウインドウ位置 */
-type Position = 'Center' | 'Right' | 'Left';
+type Position = 'Center' | 'Right' | 'Left' | 'NearBatterySelector' | 'NearBurstButton' | 'NearPilotButton';
 
 /** 顔画像表示位置 */
 type FacePosition = 'Right' | 'Left';
@@ -47,6 +56,12 @@ function toRootClass(position: Position): string {
       return ROOT_CLASS_LEFT;
     case 'Right':
       return ROOT_CLASS_RIGHT;
+    case 'NearBatterySelector':
+      return ROOT_CLASS_NEAR_BATTERY_SELECTOR;
+    case 'NearBurstButton':
+      return ROOT_CLASS_NEAR_BURST_BUTTON;
+    case 'NearPilotButton':
+      return ROOT_CLASS_NEAR_PILOT_BUTTON;
     default:
       return ROOT_CLASS_INVISIBLE;
   }

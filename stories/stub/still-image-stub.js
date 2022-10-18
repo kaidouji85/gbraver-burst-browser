@@ -48,7 +48,7 @@ type Object3Ds = {
 };
 
 /** three.jsオブジェクトジェネレータのパラメータ */
-type Object3DsGeneratorParams = {
+export type Object3DsGeneratorParams = {
   /** リソース管理オブジェクト */
   resources: Resources,
   /** 空のゲームオブジェクトアクション */
@@ -61,7 +61,7 @@ type Object3DsGeneratorParams = {
  * @param params パラメータ
  * @return スタブに追加するオブジェクト群
  */
-type Object3DsGenerator = (params: Object3DsGeneratorParams) => Object3Ds;
+export type Object3DsGenerator = (params: Object3DsGeneratorParams) => Object3Ds;
 
 /** スタブのパラメータ */
 type StubParams = {

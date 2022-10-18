@@ -4,7 +4,7 @@ import {HorizontalAnimationMesh} from "../../../mesh/horizontal-animation";
 import {SimpleImageMesh} from "../../../mesh/simple-image-mesh";
 import type {Resources} from "../../../resource";
 import {CANVAS_IMAGE_IDS} from "../../../resource/canvas-image";
-import {TEXTURE_IDS} from "../../../resource/texture";
+import {TEXTURE_IDS} from "../../../resource/texture/ids";
 import type {Stream, Unsubscriber} from "../../../stream/stream";
 import type {GameObjectAction} from "../../action/game-object-action";
 import type {PushDetector} from "../../push-detector/push-detector";

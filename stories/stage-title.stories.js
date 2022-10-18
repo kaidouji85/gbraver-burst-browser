@@ -1,7 +1,7 @@
 // @flow
 
 import {ArmDozerIds} from "gbraver-burst-core";
-import {StageTitle} from "../src/js/game/dom-scenes/stage-title/stage-title";
+import {StageTitle} from "../src/js/game/dom-scenes/scene/stage-title/stage-title";
 import type {DOMStubStory} from "./stub/dom-stub";
 import {domStub} from "./stub/dom-stub";
 

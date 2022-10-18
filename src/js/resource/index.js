@@ -2,7 +2,7 @@
 import type {Stream} from "../stream/stream";
 import {createStreamSource} from "../stream/stream";
 import type {CanvasImageConfig, CanvasImageResource} from "./canvas-image";
-import {CANVAS_IMAGE_CONFIGS, loadCanvasImage,} from "./canvas-image";
+import {CANVAS_IMAGE_CONFIGS, loadCanvasImage} from "./canvas-image";
 import type {CubeTextureConfig, CubeTextureResource} from "./cube-texture";
 import {CUBE_TEXTURE_CONFIGS, loadCubeTexture} from "./cube-texture";
 import type {GlTFConfig, GlTFResource} from "./gltf";
@@ -13,8 +13,9 @@ import {getAllPaths} from "./path";
 import type {ResourceRoot} from "./resource-root";
 import type {SoundConfig, SoundResource} from "./sound";
 import {loadSound, SOUND_CONFIGS, SOUND_IDS} from "./sound";
-import type {TextureConfig, TextureResource} from "./texture";
-import {loadTexture, TEXTURE_CONFIGS} from "./texture";
+import {TEXTURE_CONFIGS} from "./texture/configs";
+import {loadTexture} from "./texture/load";
+import type {TextureConfig, TextureResource} from "./texture/resource";
 
 /**
  * ゲームで使うリソースを集めたもの

@@ -1,6 +1,7 @@
 // @flow
 import type {GameState, Player} from "gbraver-burst-core";
 import type {BGMManager} from "../../bgm/bgm-manager";
+import {CssHUDUIScale} from "../../css/hud-ui-scale";
 import type {GameLoop} from "../../game-loop/game-loop";
 import {gameLoopStream} from "../../game-loop/game-loop";
 import {Renderer} from "../../render";
@@ -42,13 +43,23 @@ type StartBattleParams = {
 
 /** three.js系シーンを集めたもの */
 export class TDScenes {
+  /** ゲームアクション */
   #gameAction: StreamSource<GameAction>;
+  /** ゲームループ */
   #gameLoop: Stream<GameLoop>;
+  /** リサイズ */
   #resize: Stream<Resize>;
+  /** ウインドウ押下 */
   #pushWindow: Stream<PushWindow>;
+  /** レンダラ管理オブジェクト */
   #renderer: Renderer;
+  /** cssカスタムプロパティ --hud-ui-scale */
+  #hudUIScale: CssHUDUIScale;
+  /** DOMレイヤーをバインドするHTML要素 */
   #rootHTMLElement: HTMLElement;
+  /** 現在表示中のシーン、何も表示していない場合はnullがセットされる */
   #scene: ?Scene;
+  /** アンサブスクライバ */
   #unsubscriber: Unsubscriber[];
 
   /**
@@ -63,6 +74,7 @@ export class TDScenes {
     this.#renderer = new Renderer(this.#resize);
     this.#gameAction = createStreamSource();
     this.#gameLoop = gameLoopStream();
+    this.#hudUIScale = new CssHUDUIScale(this.#renderer.getRendererDOM(), resize);
     this.#scene = null;
     this.#rootHTMLElement = document.createElement('div');
     this.#unsubscriber = [];
@@ -71,6 +83,7 @@ export class TDScenes {
   /** デストラクタ相当の処理 */
   destructor(): void {
     this.#disposeScene();
+    this.#hudUIScale.destructor();
   }
 
   /**
@@ -105,6 +118,9 @@ export class TDScenes {
         this.#gameAction.next({type: 'EndBattle', gameEnd: v.gameEnd, animationTimeScale: v.animationTimeScale});
       })
     ];
+    // iPadOS 15.7で--hud-ui-scaleに正しい値がセットされないことがあった
+    // なので、3Dシーンが始まる前に強制的に値を更新している
+    this.#hudUIScale.update();
     return scene;
   }
 

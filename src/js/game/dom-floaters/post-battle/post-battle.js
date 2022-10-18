@@ -8,7 +8,7 @@ import {SOUND_IDS} from "../../../resource/sound";
 import type {Stream, StreamSource, Unsubscriber} from "../../../stream/stream";
 import {createStreamSource} from "../../../stream/stream";
 import type {PostBattle} from "../../post-battle";
-import type {PostBattleButtonConfig} from "./post-battle-button-config";
+import type {ButtonStyle, PostBattleButtonConfig} from "./post-battle-button-config";
 
 /** ルートHTML要素のclass属性 */
 const ROOT_CLASS = 'post-battle';
@@ -124,7 +124,7 @@ export class PostBattleFloater {
   #createActionButtons(resources: Resources, buttons: PostBattleButtonConfig[]): ActionButton[] {
     const pushButton = resources.sounds.find(v => v.id === SOUND_IDS.PUSH_BUTTON)?.sound ?? new Howl();
     const changeValue = resources.sounds.find(v => v.id === SOUND_IDS.CHANGE_VALUE)?.sound ?? new Howl();
-    const createButtonStyle = style => {
+    const createButtonStyle = (style: ButtonStyle) => {
       switch(style) {
         case 'MainButton':
           return {className: `${ROOT_CLASS}__main-action`, sound: pushButton};

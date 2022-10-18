@@ -1,5 +1,5 @@
 // @flow
-import {Title} from "../dom-scenes/title/title";
+import {Title} from "../dom-scenes/scene/title";
 import type {GameProps} from "../game-props";
 
 /**

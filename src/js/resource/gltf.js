@@ -1,5 +1,4 @@
 // @flow
-
 import * as THREE from 'three';
 import {GLTFLoader} from "three/examples/jsm/loaders/GLTFLoader";
 import type {ResourceRoot} from "./resource-root";
@@ -54,12 +53,9 @@ const loader = new GLTFLoader();
 export function loadGlTF(resourceRoot: ResourceRoot, config: GlTFConfig): Promise<GlTFResource> {
   return new Promise((resolve, reject) => {
     const fullPath = `${resourceRoot.get()}/${config.path}`;
-    const onLoad = (object) => resolve({
-      id: config.id,
-      object: object.scene
-    });
+    const onLoad = (object: {scene: typeof THREE.Scene}) => resolve({id: config.id, object: object.scene});
     const onProgress = () => {}; //NOP
-    const onFail = err => reject(err);
+    const onFail = (err: any) => reject(err);
     loader.load(fullPath, onLoad, onProgress, onFail);
   });
 }

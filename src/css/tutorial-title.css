@@ -1,0 +1,89 @@
+/**
+ * チュートリアルタイトル画面
+ */
+@media (orientation: landscape) {
+  .tutorial-title {
+    --zindex-bust-shot: 0;
+    --zindex-stand: 1;
+    --zindex-title: 2;
+    --font-size: calc(var(--responsive-font-size) * 2);
+    width: var(--screen-width);
+    height: var(--screen-height);
+    background-color: var(--background-color);
+    color: var(--font-color);
+    box-sizing: border-box;
+    padding-top: var(--screen-padding-top);
+    padding-left: var(--screen-padding-left);
+    padding-right: var(--screen-padding-right);
+    padding-bottom: var(--screen-padding-bottom);
+    background-size: cover;
+    background-position: 50% 0;
+  }
+}
+
+@media (orientation: portrait) {
+  .tutorial-title {
+    display: none;
+  }
+}
+
+.tutorial-title__title {
+  position: absolute;
+  font-size: var(--font-size);
+  z-index: var(--zindex-title);
+  left: max(var(--safe-area-left), calc(var(--font-size) * 2));
+  top: max(var(--safe-area-top), calc(var(--font-size) * 2));
+  transform: translate(0, 0%);
+}
+
+.tutorial-title__stage {
+  display: flex;
+  align-items: baseline;
+}
+
+.tutorial-title__stage-prefix--capitalized {
+  font-size: calc(var(--font-size) * 1.5);
+  font-weight: bold;
+}
+
+.tutorial-title__stage-level {
+  font-size: calc(var(--font-size) * 1.5);
+  font-weight: bold;
+}
+
+.tutorial-title__caption {
+  display: flex;
+  align-items: baseline;
+  margin-left: calc(var(--responsive-font-size) * 2);
+}
+
+.tutorial-title__caption-clause {
+  white-space: nowrap
+}
+
+.tutorial-title__caption-clause--capitalized {
+  font-size: calc(var(--font-size) * 1.5);
+  font-weight: bold;
+  white-space: nowrap
+}
+
+.tutorial-title__shin-braver-bust-shot {
+  --width: calc(var(--vh) * 200);
+  position: absolute;
+  top: calc(var(--vh) * -10);
+  right: calc(-0.2 * var(--width));
+  width: var(--width);
+  filter: brightness(20%);
+  z-index: var(--zindex-bust-shot);
+}
+
+.tutorial-title__shin-braver-stand {
+  --size: calc(140 * var(--vh));
+  position: absolute;
+  right: calc(-0.2 * var(--size));
+  bottom: 0;
+  transform: translateY(25%);
+  width: var(--size);
+  height: var(--size);
+  z-index: var(--zindex-stand);
+}
