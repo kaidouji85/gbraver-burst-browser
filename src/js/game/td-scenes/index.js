@@ -42,7 +42,8 @@ type StartBattleParams = {
 };
 
 /**
- * 3Dシーン・ゲームアクション接続関数
+ * ゲームアクションコネクタ
+ * 3Dシーンとゲームアクションを関連付ける
  *
  * @template X シーンのデータ型
  * @param scene 3Dシーン
@@ -102,13 +103,21 @@ export class TDSceneBinder {
    * 3D系シーンをバインドする
    *
    * @param scene バインドするシーン
-   * @param connector
+   * @param connector ゲームアクションコネクタ
+   * @param pixelRatio シーンのピクセルレート
    * @return 生成したシーン
    */
-  bind<X: TDScene>(scene: X, connector: GameActionConnector<X>): void {
+  bind<X: TDScene>(scene: X, connector: GameActionConnector<X>, pixelRatio: number): void {
     this.#disposeScene();
+    this.#renderer.setPixelRatio(pixelRatio);
     this.#scene = scene;
+    scene.getDOMLayerElements().forEach(element => {
+      this.#domLayerElement.appendChild(element);
+    });
     this.#unsubscribers = connector(scene, this.#gameAction);
+    // iPadOS 15.7で--hud-ui-scaleに正しい値がセットされないことがあった
+    // なので、3Dシーンが始まる前に強制的に値を更新している
+    this.#hudUIScale.update();
   }
 
   /**
