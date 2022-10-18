@@ -72,6 +72,15 @@ export function activeNearBurstButtonMessageWindow(props: CustomBattleEventProps
 }
 
 /**
+ * パイロットボタン隣メッセージウインドウをアクティブ表示する
+ *
+ * @param props イベントプロパティ
+ */
+export function activeNearPilotButtonMessageWindow(props: CustomBattleEventProps): void {
+  activeMessageWindow(props.view.dom.nearPilotButtonMessageWindow);
+}
+
+/**
  * 左メッセージウインドウを顔画像ありアクティブ表示する
  *
  * @param props イベントプロパティ

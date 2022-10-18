@@ -1,7 +1,7 @@
 // @flow
 import type {Stream, Unsubscriber} from "../stream/stream";
-import type {Resize} from "../window/resize";
 import {getViewPortHeight} from "../view-port/view-port-size";
+import type {Resize} from "../window/resize";
 
 /** CSSカムタムプロパティ ビューポート高 */
 const VH = '--vh';

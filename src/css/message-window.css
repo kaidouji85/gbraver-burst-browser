@@ -49,12 +49,12 @@
 
   .message-window--near-burst-button {
     --left-margin: max(10px, var(--safe-area-left));
-    left: calc(var(--left-margin) + var(--hud-ui-scale) * 250px)
+    left: calc(var(--left-margin) + var(--hud-ui-scale) * 250px);
   }
 
   .message-window--near-pilot-button {
     --left-margin: max(10px, var(--safe-area-left));
-    left: 0px;
+    left: calc(var(--left-margin) + var(--hud-ui-scale) * 160px);
   }
 
   .message-window__messages-wrapper {
