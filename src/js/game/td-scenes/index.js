@@ -1,6 +1,7 @@
 // @flow
 import {CssHUDUIScale} from "../../css/hud-ui-scale";
 import {Renderer} from "../../render";
+import {createStreamSource} from "../../stream/stream";
 import type {Stream, StreamSource, Unsubscriber} from "../../stream/stream";
 import type {GameAction} from "../game-actions";
 import type {TDScene} from "./td-scene";
@@ -41,6 +42,7 @@ export class TDSceneBinder {
     this.#renderer = renderer;
     this.#hudUIScale = hudUIScale;
     this.#scene = null;
+    this.#gameAction = createStreamSource();
     this.#domLayerElement = document.createElement('div');
     this.#unsubscribers = [];
   }
