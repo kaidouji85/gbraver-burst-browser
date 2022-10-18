@@ -4,7 +4,8 @@
 @media (orientation: landscape) {
   .message-window, 
   .message-window--left,
-  .message-window--right {
+  .message-window--right,
+  .message-window--near-battery-selector {
     --brightness: brightness(1);  /** 本カスタムプロパティはJavaScriptから変更される */
     --margin-x: max(3vw, var(--safe-area-left), var(--safe-area-right));
     box-sizing: border-box;
@@ -37,6 +38,10 @@
 
   .message-window--right {
     right: var(--margin-x);
+  }
+
+  .message-window--near-battery-selector {
+    right: 0;
   }
 
   .message-window__messages-wrapper {
