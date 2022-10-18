@@ -1,5 +1,5 @@
 // @flow
-import type {CustomBattleEventProps} from "../game/td-scenes/battle/custom-battle-event";
+import type {CustomBattleEventProps} from "../td-scenes/battle/custom-battle-event";
 import {waitTime} from "../wait/wait-time";
 
 /**

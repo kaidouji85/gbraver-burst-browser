@@ -1,5 +1,5 @@
 // @flow
-import type {BurstCommandSelected, CommandCanceled} from "../../../game/td-scenes/battle/custom-battle-event";
+import type {BurstCommandSelected, CommandCanceled} from "../../../td-scenes/battle/custom-battle-event";
 import {focusOutBurstButton} from "../../focus";
 import type {SelectableCommands, ZeroDefenseTutorialState} from "../state";
 

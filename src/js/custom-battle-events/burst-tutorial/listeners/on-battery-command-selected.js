@@ -1,6 +1,6 @@
 // @flow
 import type {GameState} from "gbraver-burst-core";
-import type {BatteryCommandSelected, CommandCanceled,} from "../../../game/td-scenes/battle/custom-battle-event";
+import type {BatteryCommandSelected, CommandCanceled,} from "../../../td-scenes/battle/custom-battle-event";
 import {focusInBurstButton, focusInPilotButton} from "../../focus";
 import {shouldBurst, shouldPilotSkill} from "../captions";
 import type {BurstTutorialState, SelectableCommands} from "../state";

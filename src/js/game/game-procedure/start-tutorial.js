@@ -4,6 +4,8 @@ import {NPCBattleRoom} from "../../npc/npc-battle-room";
 import {waitAnimationFrame} from "../../wait/wait-animation-frame";
 import {waitTime} from "../../wait/wait-time";
 import type {GameProps} from "../game-props";
+import {BattleScene} from "../../td-scenes/battle";
+import {battleSceneConnector} from "../td-scene-binder/battle-scene-connector";
 import type {TutorialStage} from "../tutorial-stages";
 
 /**
@@ -22,9 +24,13 @@ export async function startTutorial(props: $ReadOnly<GameProps>, level: number, 
 
   const startTutorialStageTime = Date.now();
   const config = await props.config.load();
-  const battleScene = props.tdScenes.startBattle({resources: props.resources, bgm: props.bgm,
-    playingBGM: stage.bgm, pixelRatio: config.webGLPixelRatio, initialAnimationTimeScale: config.battleAnimationTimeScale,
-    battleProgress: npcBattle, player: npcBattle.player, enemy: npcBattle.enemy, initialState: npcBattle.stateHistory(), customBattleEvent: stage.event()});
+  props.renderer.setPixelRatio(config.webGLPixelRatio);
+  const battleScene = new BattleScene({resources: props.resources, bgm: props.bgm,
+    playingBGM: stage.bgm, initialAnimationTimeScale: config.battleAnimationTimeScale,
+    battleProgress: npcBattle, player: npcBattle.player, enemy: npcBattle.enemy, initialState: npcBattle.stateHistory(), customBattleEvent: stage.event(),
+    resize: props.resize, pushWindow: props.pushWindow, gameLoop: props.gameLoop, renderer: props.renderer
+  });
+  props.tdBinder.bind(battleScene, battleSceneConnector);
   await waitAnimationFrame();
   const latency = Date.now() - startTutorialStageTime;
   await waitTime(3000- latency);

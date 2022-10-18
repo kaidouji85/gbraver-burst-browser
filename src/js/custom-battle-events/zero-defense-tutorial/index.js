@@ -6,7 +6,7 @@ import type {
   CustomBattleEvent,
   LastState,
   PilotSkillCommandSelected
-} from "../../game/td-scenes/battle/custom-battle-event";
+} from "../../td-scenes/battle/custom-battle-event";
 import {EmptyCustomBattleEvent} from "../empty-custom-battle-event";
 import {afterLastState} from "./listeners/after-last-state";
 import {beforeLastState} from "./listeners/before-last-state";

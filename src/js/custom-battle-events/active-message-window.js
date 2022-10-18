@@ -1,7 +1,7 @@
 // @flow
 import type {FaceType} from "../game-dom/message-window/face-graphic";
 import type {MessageWindow} from "../game-dom/message-window/message-window";
-import type {CustomBattleEventProps,} from "../game/td-scenes/battle/custom-battle-event";
+import type {CustomBattleEventProps,} from "../td-scenes/battle/custom-battle-event";
 
 /**
  * メッセージウインドウをアクティブ表示する

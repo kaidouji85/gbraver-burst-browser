@@ -1,5 +1,5 @@
 // @flow
-import type {CustomBattleEventProps} from "../../../game/td-scenes/battle/custom-battle-event";
+import type {CustomBattleEventProps} from "../../../td-scenes/battle/custom-battle-event";
 import {activeRightMessageWindowWithFace} from "../../active-message-window";
 import {refreshConversation} from "../../invisible-all-message-windows";
 import {scrollRightMessages} from "../../scroll-messages";

@@ -1,6 +1,6 @@
 // @flow
 import {HUD_ATTENTION_ZINDEX} from "../game-object/hud-zindex";
-import type {CustomBattleEventProps} from "../game/td-scenes/battle/custom-battle-event";
+import type {CustomBattleEventProps} from "../td-scenes/battle/custom-battle-event";
 
 /**
  * バッテリーセレクタに注目する

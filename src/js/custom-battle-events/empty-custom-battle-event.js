@@ -6,7 +6,7 @@ import type {
   CustomBattleEvent,
   LastState,
   PilotSkillCommandSelected,
-} from "../game/td-scenes/battle/custom-battle-event";
+} from "../td-scenes/battle/custom-battle-event";
 
 /**
  * 空のカスタムバトルイベント

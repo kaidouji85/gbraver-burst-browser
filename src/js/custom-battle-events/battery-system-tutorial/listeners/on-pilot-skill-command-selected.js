@@ -1,5 +1,5 @@
 // @flow
-import type {CommandCanceled, PilotSkillCommandSelected} from "../../../game/td-scenes/battle/custom-battle-event";
+import type {CommandCanceled, PilotSkillCommandSelected} from "../../../td-scenes/battle/custom-battle-event";
 import {focusOutPilotButton} from "../../focus";
 import type {BatterySystemTutorialState, SelectableCommands} from "../state";
 

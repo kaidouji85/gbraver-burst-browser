@@ -1,7 +1,7 @@
 // @flow
 import type {MessageWindow} from "../game-dom/message-window/message-window";
-import type {CustomBattleEventProps} from "../game/td-scenes/battle/custom-battle-event";
-import {BattleSceneSounds} from "../game/td-scenes/battle/sounds/sounds";
+import type {CustomBattleEventProps} from "../td-scenes/battle/custom-battle-event";
+import {BattleSceneSounds} from "../td-scenes/battle/sounds/sounds";
 import type {Stream} from "../stream/stream";
 import type {PushWindow} from "../window/push-window";
 import {waitUntilWindowPushWithStream} from "./wait-until-window-push";

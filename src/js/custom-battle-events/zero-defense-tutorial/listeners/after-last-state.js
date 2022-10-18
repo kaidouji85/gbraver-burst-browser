@@ -1,6 +1,6 @@
 // @flow
 import type {BatteryDeclaration, GameEnd, GameOver, GameStateX} from "gbraver-burst-core";
-import type {LastState} from "../../../game/td-scenes/battle/custom-battle-event";
+import type {LastState} from "../../../td-scenes/battle/custom-battle-event";
 import {extractBatteryDeclaration, extractGameEnd} from "../../game-state-extractor";
 import {refreshConversation} from "../../invisible-all-message-windows";
 import type {ZeroDefenseTutorialState} from "../state";

@@ -7,7 +7,9 @@ import type {SelectionComplete} from "../game-actions";
 import type {GameProps} from "../game-props";
 import type {CasualMatch} from "../in-progress/casual-match";
 import type {NPCBattle} from "../in-progress/npc-battle";
-import type {BattleProgress} from "../td-scenes/battle/battle-progress";
+import {BattleScene} from "../../td-scenes/battle";
+import {battleSceneConnector} from "../td-scene-binder/battle-scene-connector";
+import type {BattleProgress} from "../../td-scenes/battle/battle-progress";
 
 /**
  * プレイヤーキャラクター 選択完了時の処理
@@ -57,9 +59,13 @@ export async function onSelectionComplete(props: GameProps,  action: SelectionCo
 
     const battleProgress = createBattleProgress(battle);
     const config = await props.config.load();
-    const battleScene = props.tdScenes.startBattle({resources: props.resources, bgm: props.bgm,
-      playingBGM: SOUND_IDS.BATTLE_BGM_01, pixelRatio: config.webGLPixelRatio, initialAnimationTimeScale: config.battleAnimationTimeScale,
-      battleProgress, player: battle.player, enemy: battle.enemy, initialState: battle.initialState});
+    props.renderer.setPixelRatio(config.webGLPixelRatio);
+    const battleScene = new BattleScene({resources: props.resources, bgm: props.bgm,
+      playingBGM: SOUND_IDS.BATTLE_BGM_01, initialAnimationTimeScale: config.battleAnimationTimeScale,
+      battleProgress, player: battle.player, enemy: battle.enemy, initialState: battle.initialState,
+      resize: props.resize, pushWindow: props.pushWindow, gameLoop: props.gameLoop, renderer: props.renderer
+    });
+    props.tdBinder.bind(battleScene, battleSceneConnector);
     await waitAnimationFrame();
     await Promise.all([(async () => {
       await props.fader.fadeOut();

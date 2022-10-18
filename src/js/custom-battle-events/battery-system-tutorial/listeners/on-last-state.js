@@ -1,6 +1,6 @@
 // @flow
 import type {GameState} from "gbraver-burst-core";
-import type {LastState} from "../../../game/td-scenes/battle/custom-battle-event";
+import type {LastState} from "../../../td-scenes/battle/custom-battle-event";
 import {focusInBatterySelector} from "../../focus";
 import {attackBatteryCaption, defenseBatteryCaption} from "../captions";
 import type {BatterySystemTutorialState} from "../state";

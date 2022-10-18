@@ -16,7 +16,11 @@ import type {
 import type {BGMManager} from "../bgm/bgm-manager";
 import {createBGMManager} from "../bgm/bgm-manager";
 import {DOMFader} from "../components/dom-fader/dom-fader";
+import {CssHUDUIScale} from "../css/hud-ui-scale";
 import {CssVH} from "../css/vh";
+import {gameLoopStream} from "../game-loop/game-loop";
+import type {GameLoop} from "../game-loop/game-loop";
+import {Renderer} from "../render";
 import type {Resources} from "../resource";
 import {emptyResources} from "../resource";
 import type {ResourceRoot} from "../resource/resource-root";
@@ -32,7 +36,7 @@ import {DOMScenes} from "./dom-scenes";
 import {FutureSuddenlyBattleEnd} from "./future-suddenly-battle-end";
 import type {InProgress} from "./in-progress/in-progress";
 import {InterruptScenes} from "./innterrupt-scenes";
-import {TDScenes} from "./td-scenes";
+import {TDSceneBinder} from "./td-scene-binder";
 
 /** ゲーム管理オブジェクトで利用するAPIサーバの機能 */
 export interface GameAPI extends UniversalLogin, LoginCheck, CasualMatchSDK, Logout, LoggedInUserDelete,
@@ -70,8 +74,12 @@ export interface GameProps {
   resize: Stream<Resize>;
   /** window押下 */
   pushWindow: Stream<PushWindow>;
+  /** ゲームループ */
+  gameLoop: Stream<GameLoop>;
   /** cssカスタムプロパティ --vh */
   vh: CssVH;
+  /** cssカスタムプロパティ --hud-ui-scale */
+  hudUIScale: CssHUDUIScale;
   /** DOMフェーダ */
   fader: DOMFader;
   /** 強制割込シーン管理オブジェクト */
@@ -82,8 +90,10 @@ export interface GameProps {
   domDialogs: DOMDialogs;
   /** DOMフローター管理オブジェクト */
   domFloaters: DOMFloaters;
-  /** 3Dシーン管理オブジェクト */
-  tdScenes: TDScenes;
+  /** レンダラ管理オブジェクト */
+  renderer: Renderer;
+  /** 3Dシーンバインダー */
+  tdBinder: TDSceneBinder;
   /** リソースルート */
   resourceRoot: ResourceRoot;
   /** リソース管理オブジェクト */
@@ -133,6 +143,9 @@ export type GamePropsGeneratorParam = {
 export function generateGameProps(param: GamePropsGeneratorParam): GameProps {
   const resize = resizeStream();
   const pushWindow = pushWindowsStream();
+  const renderer = new Renderer(resize);
+  const gameLoop = gameLoopStream();
+  const hudUIScale= new CssHUDUIScale(renderer.getRendererDOM(), resize)
   return {
     resourceRoot: param.resourceRoot,
     resources: emptyResources(param.resourceRoot),
@@ -147,7 +160,9 @@ export function generateGameProps(param: GamePropsGeneratorParam): GameProps {
     inProgress: {type: 'None'},
     resize,
     pushWindow,
+    gameLoop,
     vh: new CssVH(resize),
+    hudUIScale: new CssHUDUIScale(renderer.getRendererDOM(), resize),
     api: param.api,
     config: param.config,
     suddenlyBattleEnd: new FutureSuddenlyBattleEnd(),
@@ -156,7 +171,8 @@ export function generateGameProps(param: GamePropsGeneratorParam): GameProps {
     domScenes: new DOMScenes(),
     domDialogs: new DOMDialogs(),
     domFloaters: new DOMFloaters(),
-    tdScenes: new TDScenes(resize, pushWindow),
+    renderer,
+    tdBinder: new TDSceneBinder(renderer, hudUIScale),
     serviceWorker: null,
     bgm: createBGMManager(),
     canPlayTutorialInDevelopment: param.canPlayTutorialInDevelopment
