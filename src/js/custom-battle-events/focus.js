@@ -1,8 +1,9 @@
 // @flow
 import type {CustomBattleEventProps} from "../game/td-scenes/battle/custom-battle-event";
 import {
-  activeNearBatterySelectorMessageWindow, activeNearBurstButtonMessageWindow,
-  activeRightMessageWindow
+  activeNearBatterySelectorMessageWindow,
+  activeNearBurstButtonMessageWindow,
+  activeNearPilotButtonMessageWindow,
 } from "./active-message-window";
 import {
   attentionBatterySelector,
@@ -73,8 +74,8 @@ export const focusOutBurstButton = async (props: CustomBattleEventProps) => {
 export const focusInPilotButton = async (props: CustomBattleEventProps, caption: string[]) => {
   attentionPilotButton(props);
   invisibleAllMessageWindows(props);
-  activeRightMessageWindow(props);
-  props.view.dom.rightMessageWindow.messages(caption);
+  activeNearPilotButtonMessageWindow(props);
+  props.view.dom.nearPilotButtonMessageWindow.messages(caption);
   await props.view.hud.gameObjects.frontmostFader.opacity(0.7, 200).play();
 }
 
@@ -84,7 +85,7 @@ export const focusInPilotButton = async (props: CustomBattleEventProps, caption:
  * @return 処理が完了したら発火するPromise
  */
 export const focusOutPilotButton = async (props: CustomBattleEventProps) => {
-  props.view.dom.rightMessageWindow.visible(false);
+  props.view.dom.nearPilotButtonMessageWindow.visible(false);
   await props.view.hud.gameObjects.frontmostFader.opacity(0, 200).play();
   unattentionPilotButton(props);
 }
