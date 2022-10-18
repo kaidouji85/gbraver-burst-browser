@@ -22,7 +22,7 @@ const ROOT_CLASS_RIGHT = `${ROOT_CLASS}--right`;
 const ROOT_CLASS_NEAR_BATTERY_SELECTOR = `${ROOT_CLASS}--near-battery-selector`;
 
 /** ルート要素がバーストボタンの隣に表示されている時のclass属性 */
-const ROOT_CLASS_NEAR_BURST_BUTTON = `${ROOT_CLASS_RIGHT}--near-burst-button`;
+const ROOT_CLASS_NEAR_BURST_BUTTON = `${ROOT_CLASS}--near-burst-button`;
 
 /** 次メッセージアイコンのclass属性 */
 const NEXT_MESSAGE_ICON_CLASS = `${ROOT_CLASS}__next-message-icon`;

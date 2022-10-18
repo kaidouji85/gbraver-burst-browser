@@ -63,6 +63,15 @@ export function activeNearBatterySelectorMessageWindow(props: CustomBattleEventP
 }
 
 /**
+ * バーストボタン隣メッセージウインドウをアクティブ表示する
+ *
+ * @param props イベントプロパティ
+ */
+export function activeNearBurstButtonMessageWindow(props: CustomBattleEventProps): void {
+  activeMessageWindow(props.view.dom.nearBurstButtonMessageWindow);
+}
+
+/**
  * 左メッセージウインドウを顔画像ありアクティブ表示する
  *
  * @param props イベントプロパティ
