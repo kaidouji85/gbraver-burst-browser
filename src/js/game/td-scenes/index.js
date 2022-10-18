@@ -106,12 +106,10 @@ export class TDSceneBinder {
    *
    * @param scene バインドするシーン
    * @param connector ゲームアクションコネクタ
-   * @param pixelRatio シーンのピクセルレート
    * @return 生成したシーン
    */
-  bind<X: TDScene>(scene: X, connector: GameActionConnector<X>, pixelRatio: number): void {
+  bind<X: TDScene>(scene: X, connector: GameActionConnector<X>): void {
     this.#disposeScene();
-    this.#renderer.setPixelRatio(pixelRatio);
     this.#scene = scene;
     scene.getDOMLayerElements().forEach(element => {
       this.#domLayerElement.appendChild(element);
