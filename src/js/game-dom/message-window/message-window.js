@@ -19,7 +19,10 @@ const ROOT_CLASS_LEFT = `${ROOT_CLASS}--left`;
 const ROOT_CLASS_RIGHT = `${ROOT_CLASS}--right`;
 
 /** ルート要素がバッテリーセレクタの隣に表示されている時のclass属性 */
-const ROOT_CLASS_NERT_BATTERY_SELECTOR = `${ROOT_CLASS}--near-battery-selector`;
+const ROOT_CLASS_NEAR_BATTERY_SELECTOR = `${ROOT_CLASS}--near-battery-selector`;
+
+/** ルート要素がバーストボタンの隣に表示されている時のclass属性 */
+const ROOT_CLASS_NEAR_BURST_BUTTON = `${ROOT_CLASS}--near-burst-button`;
 
 /** 次メッセージアイコンのclass属性 */
 const NEXT_MESSAGE_ICON_CLASS = `${ROOT_CLASS}__next-message-icon`;
@@ -28,7 +31,7 @@ const NEXT_MESSAGE_ICON_CLASS = `${ROOT_CLASS}__next-message-icon`;
 const NEXT_MESSAGE_ICON_CLASS_INVISIBLE = `${NEXT_MESSAGE_ICON_CLASS}--invisible`;
 
 /** メッセージウインドウ位置 */
-type Position = 'Center' | 'Right' | 'Left' | 'NearBatterySelector';
+type Position = 'Center' | 'Right' | 'Left' | 'NearBatterySelector' | 'NearBurstButton';
 
 /** 顔画像表示位置 */
 type FacePosition = 'Right' | 'Left';
@@ -51,7 +54,9 @@ function toRootClass(position: Position): string {
     case 'Right':
       return ROOT_CLASS_RIGHT;
     case 'NearBatterySelector':
-      return ROOT_CLASS_NERT_BATTERY_SELECTOR;
+      return ROOT_CLASS_NEAR_BATTERY_SELECTOR;
+    case 'NearBurstButton':
+      return ROOT_CLASS_NEAR_BURST_BUTTON;
     default:
       return ROOT_CLASS_INVISIBLE;
   }

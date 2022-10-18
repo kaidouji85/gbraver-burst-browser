@@ -5,7 +5,8 @@
   .message-window, 
   .message-window--left,
   .message-window--right,
-  .message-window--near-battery-selector {
+  .message-window--near-battery-selector,
+  .message-window--near-burst-button {
     --brightness: brightness(1);  /** 本カスタムプロパティはJavaScriptから変更される */
     --margin-x: max(3vw, var(--safe-area-left), var(--safe-area-right));
     box-sizing: border-box;
@@ -41,8 +42,13 @@
   }
 
   .message-window--near-battery-selector {
-    --right-padding: max(10px, var(--safe-area-right));
-    right: calc(var(--right-padding) + var(--hud-ui-scale) * 220px);
+    --right-margin: max(10px, var(--safe-area-right));
+    right: calc(var(--right-margin) + var(--hud-ui-scale) * 220px);
+  }
+
+  .message-window--near-burst-button {
+    --left-margin: max(10px, var(--safe-area-left));
+    left: calc(var(--left-margin) + var(--hud-ui-scale) * 250px)
   }
 
   .message-window__messages-wrapper {
