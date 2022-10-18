@@ -172,7 +172,7 @@ export function generateGameProps(param: GamePropsGeneratorParam): GameProps {
     domDialogs: new DOMDialogs(),
     domFloaters: new DOMFloaters(),
     renderer,
-    tdScenes: new TDSceneBinder(resize, pushWindow, renderer, gameLoop, hudUIScale),
+    tdScenes: new TDSceneBinder(renderer, hudUIScale),
     serviceWorker: null,
     bgm: createBGMManager(),
     canPlayTutorialInDevelopment: param.canPlayTutorialInDevelopment

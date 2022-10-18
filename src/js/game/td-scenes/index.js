@@ -1,44 +1,9 @@
 // @flow
-import type {GameState, Player} from "gbraver-burst-core";
-import type {BGMManager} from "../../bgm/bgm-manager";
 import {CssHUDUIScale} from "../../css/hud-ui-scale";
-import type {GameLoop} from "../../game-loop/game-loop";
 import {Renderer} from "../../render";
-import type {Resources} from "../../resource";
-import type {SoundId} from "../../resource/sound";
 import type {Stream, StreamSource, Unsubscriber} from "../../stream/stream";
-import {createStreamSource} from "../../stream/stream";
-import type {PushWindow} from "../../window/push-window";
-import type {Resize} from "../../window/resize";
 import type {GameAction} from "../game-actions";
-import {BattleScene} from "./battle";
-import type {BattleProgress} from "./battle/battle-progress";
-import type {CustomBattleEvent} from "./battle/custom-battle-event";
 import type {TDScene} from "./td-scene";
-
-/** @deprecated 戦闘シーン開始パラメータ */
-type StartBattleParams = {
-  /** リソース管理オブジェクト */
-  resources: Resources,
-  /** BGM管理オブジェクト */
-  bgm: BGMManager,
-  /** 再生するBGM */
-  playingBGM: SoundId,
-  /** ピクセルレート */
-  pixelRatio: number,
-  /** アニメーションタイムスケール初期値 */
-  initialAnimationTimeScale: number,
-  /** バトル進行オブジェクト */
-  battleProgress: BattleProgress,
-  /** プレイヤー情報 */
-  player: Player,
-  /** 敵情報 */
-  enemy: Player,
-  /** 初期ゲームステート */
-  initialState: GameState[],
-  /** カスタムバトルイベント */
-  customBattleEvent?: CustomBattleEvent,
-};
 
 /**
  * ゲームアクションコネクタ
@@ -53,14 +18,6 @@ export type GameActionConnector<X: TDScene> = (scene: X, gameAction: StreamSourc
 
 /** three.js系シーンをバインドする */
 export class TDSceneBinder {
-  /** @deprecated ゲームループ */
-  #gameLoop: Stream<GameLoop>;
-  /** @deprecated リサイズ */
-  #resize: Stream<Resize>;
-  /** @deprecated ウインドウ押下 */
-  #pushWindow: Stream<PushWindow>;
-  /** @deprecated レンダラ管理オブジェクト */
-  #renderer: Renderer;
   /** ゲームアクション */
   #gameAction: StreamSource<GameAction>;
   /** DOMレイヤーをバインドするHTML要素 */
@@ -69,24 +26,19 @@ export class TDSceneBinder {
   #scene: ?TDScene;
   /** cssカスタムプロパティ --hud-ui-scale */
   #hudUIScale: CssHUDUIScale;
+  /** レンダラ管理オブジェクト */
+  #renderer: Renderer;
   /** アンサブスクライバ */
   #unsubscribers: Unsubscriber[];
 
   /**
    * コンストラクタ
    *
-   * @param resize リサイズストリーム
-   * @param pushWindow window押下ストリーム
    * @param renderer レンダラ管理オブジェクト
-   * @param gameLoop ゲームループストリーム
    * @param hudUIScale cssカスタムプロパティ --hud-ui-scale
    */
-  constructor(resize: Stream<Resize>, pushWindow: Stream<PushWindow>, renderer: Renderer, gameLoop: Stream<GameLoop>, hudUIScale: CssHUDUIScale) {
-    this.#resize = resize;
-    this.#pushWindow = pushWindow;
+  constructor(renderer: Renderer, hudUIScale: CssHUDUIScale) {
     this.#renderer = renderer;
-    this.#gameAction = createStreamSource();
-    this.#gameLoop = gameLoop;
     this.#hudUIScale = hudUIScale;
     this.#scene = null;
     this.#domLayerElement = document.createElement('div');
@@ -130,36 +82,6 @@ export class TDSceneBinder {
   }
 
   /**
-   * @deprecated
-   * 戦闘シーンを開始する
-   *
-   * @param params 戦闘シーン開始パラメータ
-   * @return 生成した戦闘シーン
-   */
-  startBattle(params: StartBattleParams): BattleScene {
-    this.#disposeScene();
-
-    this.#renderer.setPixelRatio(params.pixelRatio);
-    const scene = new BattleScene({resources: params.resources, bgm: params.bgm, playingBGM: params.playingBGM,
-      renderer: this.#renderer, battleProgress: params.battleProgress, initialAnimationTimeScale: params.initialAnimationTimeScale,
-      player: params.player, enemy: params.enemy, initialState: params.initialState, gameLoop: this.#gameLoop, resize: this.#resize,
-      pushWindow: this.#pushWindow, customBattleEvent: params.customBattleEvent});
-    this.#scene = scene;
-    scene.getDOMLayerElements().forEach(element => {
-      this.#domLayerElement.appendChild(element);
-    });
-    this.#unsubscribers = [
-      scene.gameEndNotifier().subscribe(v => {
-        this.#gameAction.next({type: 'EndBattle', gameEnd: v.gameEnd, animationTimeScale: v.animationTimeScale});
-      })
-    ];
-    // iPadOS 15.7で--hud-ui-scaleに正しい値がセットされないことがあった
-    // なので、3Dシーンが始まる前に強制的に値を更新している
-    this.#hudUIScale.update();
-    return scene;
-  }
-
-  /**
    * 3Dシーンを非表示にする
    */
   hidden(): void {
@@ -167,11 +89,11 @@ export class TDSceneBinder {
   }
 
   /**
-   * 本クラスで利用している全HTML要素を取得する
+   * DOMレイヤーのルートHTML要素を取得する
    *
-   * @return 本クラスで利用している全HTML要素
+   * @return 取得結果
    */
-  getHTMLElements(): HTMLElement[] {
+  getDOMLayerElements(): HTMLElement[] {
     return [this.#domLayerElement];
   }
 
