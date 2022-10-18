@@ -5,7 +5,7 @@ import {waitAnimationFrame} from "../../wait/wait-animation-frame";
 import {waitTime} from "../../wait/wait-time";
 import type {GameProps} from "../game-props";
 import {BattleScene} from "../../td-scenes/battle";
-import {battleSceneConnector} from "../td-scenes/battle-scene-connector";
+import {battleSceneConnector} from "../td-scene-binder/battle-scene-connector";
 import type {TutorialStage} from "../tutorial-stages";
 
 /**

@@ -1,21 +1,11 @@
 // @flow
 import {CssHUDUIScale} from "../../css/hud-ui-scale";
 import {Renderer} from "../../render";
-import {createStreamSource} from "../../stream/stream";
 import type {Stream, StreamSource, Unsubscriber} from "../../stream/stream";
-import type {GameAction} from "../game-actions";
+import {createStreamSource} from "../../stream/stream";
 import type {TDScene} from "../../td-scenes/td-scene";
-
-/**
- * ゲームアクションコネクタ
- * 3Dシーンとゲームアクションを関連付ける
- *
- * @template X シーンのデータ型
- * @param scene 3Dシーン
- * @param gameAction ゲームアクションストリーム
- * @return ゲームションションのアンサブスクライブ
- */
-export type GameActionConnector<X: TDScene> = (scene: X, gameAction: StreamSource<GameAction>) => Unsubscriber[];
+import type {GameAction} from "../game-actions";
+import type {GameActionConnector} from "./game-action-connector";
 
 /** three.js系シーンをバインドする */
 export class TDSceneBinder {

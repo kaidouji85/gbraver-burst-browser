@@ -8,7 +8,7 @@ import type {GameProps} from "../game-props";
 import type {CasualMatch} from "../in-progress/casual-match";
 import type {NPCBattle} from "../in-progress/npc-battle";
 import {BattleScene} from "../../td-scenes/battle";
-import {battleSceneConnector} from "../td-scenes/battle-scene-connector";
+import {battleSceneConnector} from "../td-scene-binder/battle-scene-connector";
 import type {BattleProgress} from "../../td-scenes/battle/battle-progress";
 
 /**

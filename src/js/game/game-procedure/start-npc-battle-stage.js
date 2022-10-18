@@ -7,7 +7,7 @@ import {waitTime} from "../../wait/wait-time";
 import type {GameProps} from "../game-props";
 import type {NPCBattleStage} from "../npc-battle";
 import {BattleScene} from "../../td-scenes/battle";
-import {battleSceneConnector} from "../td-scenes/battle-scene-connector";
+import {battleSceneConnector} from "../td-scene-binder/battle-scene-connector";
 
 /**
  * NPCバトルのステージを開始するヘルパー関数

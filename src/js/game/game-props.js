@@ -36,7 +36,7 @@ import {DOMScenes} from "./dom-scenes";
 import {FutureSuddenlyBattleEnd} from "./future-suddenly-battle-end";
 import type {InProgress} from "./in-progress/in-progress";
 import {InterruptScenes} from "./innterrupt-scenes";
-import {TDSceneBinder} from "./td-scenes";
+import {TDSceneBinder} from "./td-scene-binder";
 
 /** ゲーム管理オブジェクトで利用するAPIサーバの機能 */
 export interface GameAPI extends UniversalLogin, LoginCheck, CasualMatchSDK, Logout, LoggedInUserDelete,
