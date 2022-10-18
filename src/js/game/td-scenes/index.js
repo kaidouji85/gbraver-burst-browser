@@ -118,6 +118,7 @@ export class TDScenes {
         this.#gameAction.next({type: 'EndBattle', gameEnd: v.gameEnd, animationTimeScale: v.animationTimeScale});
       })
     ];
+    this.#hudUIScale.updateRendererDOM(this.#renderer.getRendererDOM());
     return scene;
   }
 
