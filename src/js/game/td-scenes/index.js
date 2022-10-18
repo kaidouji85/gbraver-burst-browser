@@ -15,7 +15,7 @@ import type {GameAction} from "../game-actions";
 import {BattleScene} from "./battle";
 import type {BattleProgress} from "./battle/battle-progress";
 import type {CustomBattleEvent} from "./battle/custom-battle-event";
-import type {Scene} from "./scene";
+import type {TDScene} from "./td-scene";
 
 /** 戦闘シーン開始パラメータ */
 type StartBattleParams = {
@@ -56,9 +56,9 @@ export class TDScenes {
   /** cssカスタムプロパティ --hud-ui-scale */
   #hudUIScale: CssHUDUIScale;
   /** DOMレイヤーをバインドするHTML要素 */
-  #rootHTMLElement: HTMLElement;
+  #domLayerElement: HTMLElement;
   /** 現在表示中のシーン、何も表示していない場合はnullがセットされる */
-  #scene: ?Scene;
+  #scene: ?TDScene;
   /** アンサブスクライバ */
   #unsubscriber: Unsubscriber[];
 
@@ -76,7 +76,7 @@ export class TDScenes {
     this.#gameLoop = gameLoopStream();
     this.#hudUIScale = new CssHUDUIScale(this.#renderer.getRendererDOM(), resize);
     this.#scene = null;
-    this.#rootHTMLElement = document.createElement('div');
+    this.#domLayerElement = document.createElement('div');
     this.#unsubscriber = [];
   }
 
@@ -110,8 +110,8 @@ export class TDScenes {
       player: params.player, enemy: params.enemy, initialState: params.initialState, gameLoop: this.#gameLoop, resize: this.#resize,
       pushWindow: this.#pushWindow, customBattleEvent: params.customBattleEvent});
     this.#scene = scene;
-    scene.getHTMLElements().forEach(element => {
-      this.#rootHTMLElement.appendChild(element);
+    scene.getDOMLayerElements().forEach(element => {
+      this.#domLayerElement.appendChild(element);
     });
     this.#unsubscriber = [
       scene.gameEndNotifier().subscribe(v => {
@@ -137,7 +137,7 @@ export class TDScenes {
    * @return 本クラスで利用している全HTML要素
    */
   getHTMLElements(): HTMLElement[] {
-    return [this.#rootHTMLElement, this.#renderer.getRendererDOM()];
+    return [this.#domLayerElement, this.#renderer.getRendererDOM()];
   }
 
   /**
@@ -146,7 +146,7 @@ export class TDScenes {
   #disposeScene(): void {
     this.#scene && this.#scene.destructor();
     this.#renderer.disposeRenders();
-    this.#rootHTMLElement.innerHTML = '';
+    this.#domLayerElement.innerHTML = '';
     this.#unsubscriber.forEach(v => {
       v.unsubscribe();
     });
