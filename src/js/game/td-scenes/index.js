@@ -118,6 +118,9 @@ export class TDScenes {
         this.#gameAction.next({type: 'EndBattle', gameEnd: v.gameEnd, animationTimeScale: v.animationTimeScale});
       })
     ];
+    // iPadOS 15.7で--hud-ui-scaleに正しい値がセットされないことがあった
+    // なので、3Dシーンが始まる前に強制的に値を更新している
+    this.#hudUIScale.update();
     return scene;
   }
 

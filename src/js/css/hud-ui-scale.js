@@ -1,5 +1,6 @@
 // @flow
 import {HUDUIScale} from "../game-object/scale";
+import type {SafeAreaInset} from "../safe-area/safe-area-inset";
 import {createSafeAreaInset} from "../safe-area/safe-area-inset";
 import type {Stream, Unsubscriber} from "../stream/stream";
 import type {Resize} from "../window/resize";
@@ -22,6 +23,8 @@ function setHUDUIScale(value: number) {
 export class CssHUDUIScale {
   /** レンダラHTML要素 */
   #rendererDOM: HTMLElement;
+  /** safe-area-inset 情報 */
+  #safeAreaInset: SafeAreaInset;
   /** アンサブスクライバー */
   #unsubscriver: Unsubscriber;
 
@@ -33,7 +36,8 @@ export class CssHUDUIScale {
    */
   constructor(rendererDOM: HTMLElement, resize: Stream<Resize>) {
     this.#rendererDOM = rendererDOM;
-    const scale = HUDUIScale(rendererDOM, createSafeAreaInset());
+    this.#safeAreaInset = createSafeAreaInset();
+    const scale = HUDUIScale(this.#rendererDOM, this.#safeAreaInset);
     setHUDUIScale(scale);
     this.#unsubscriver = resize.subscribe(action => {
       this.#onResize(action);
@@ -48,12 +52,21 @@ export class CssHUDUIScale {
   }
 
   /**
+   * --hud-ui-scaleをアップデートする
+   */
+  update(): void {
+    const scale = HUDUIScale(this.#rendererDOM, this.#safeAreaInset);
+    setHUDUIScale(scale);
+  }
+
+  /**
    * リサイズ時の処理
    *
    * @param action アクション
    */
   #onResize(action: Resize): void {
-    const scale = HUDUIScale(this.#rendererDOM, action.safeAreaInset);
+    this.#safeAreaInset = action.safeAreaInset;
+    const scale = HUDUIScale(this.#rendererDOM, this.#safeAreaInset);
     setHUDUIScale(scale);
   }
 }
