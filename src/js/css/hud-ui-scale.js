@@ -52,12 +52,9 @@ export class CssHUDUIScale {
   }
 
   /**
-   * レンダラHTML要素を更新する
-   *
-   * @param rendererDOM 更新内容
+   * --hud-ui-scaleをアップデートする
    */
-  updateRendererDOM(rendererDOM: HTMLElement): void {
-    this.#rendererDOM = rendererDOM;
+  update(): void {
     const scale = HUDUIScale(this.#rendererDOM, this.#safeAreaInset);
     setHUDUIScale(scale);
   }
