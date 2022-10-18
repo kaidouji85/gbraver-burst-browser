@@ -1,5 +1,5 @@
 // @flow
-import type {CustomBattleEventProps} from "../game/td-scenes/battle/custom-battle-event";
+import type {CustomBattleEventProps} from "../td-scenes/battle/custom-battle-event";
 import {first} from "../stream/operator";
 import type {Stream} from "../stream/stream";
 import type {PushWindow} from "../window/push-window";

@@ -4,7 +4,7 @@ import {Renderer} from "../../render";
 import {createStreamSource} from "../../stream/stream";
 import type {Stream, StreamSource, Unsubscriber} from "../../stream/stream";
 import type {GameAction} from "../game-actions";
-import type {TDScene} from "./td-scene";
+import type {TDScene} from "../../td-scenes/td-scene";
 
 /**
  * ゲームアクションコネクタ

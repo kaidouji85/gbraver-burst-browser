@@ -1,6 +1,6 @@
 // @flow
 import type {GameState, PlayerState} from "gbraver-burst-core";
-import type {BatteryCommandSelected, CommandCanceled} from "../../../game/td-scenes/battle/custom-battle-event";
+import type {BatteryCommandSelected, CommandCanceled} from "../../../td-scenes/battle/custom-battle-event";
 import {unattentionBurstButton} from "../../attention";
 import {focusInBatterySelector, focusInBurstButton, focusInPilotButton, focusOutBatterySelector} from "../../focus";
 import {refreshConversation} from "../../invisible-all-message-windows";

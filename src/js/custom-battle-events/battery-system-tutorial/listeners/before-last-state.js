@@ -1,5 +1,5 @@
 // @flow
-import type {LastState} from "../../../game/td-scenes/battle/custom-battle-event";
+import type {LastState} from "../../../td-scenes/battle/custom-battle-event";
 import {waitTime} from "../../../wait/wait-time";
 import {extractBattle, extractGameEnd} from "../../game-state-extractor";
 import {invisibleAllMessageWindows} from "../../invisible-all-message-windows";

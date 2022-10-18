@@ -11,7 +11,7 @@ import {zeroDefenseTutorialNPC} from "../npc/zero-defense-tutorial";
 import type {SoundId} from "../resource/sound";
 import {SOUND_IDS} from "../resource/sound";
 import {playerUuid} from "../uuid/player";
-import type {CustomBattleEvent} from "./td-scenes/battle/custom-battle-event";
+import type {CustomBattleEvent} from "../td-scenes/battle/custom-battle-event";
 
 /** チュートリアルステージID */
 export type TutorialStageID = string;

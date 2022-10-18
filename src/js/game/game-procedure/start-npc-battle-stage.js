@@ -6,7 +6,7 @@ import {waitAnimationFrame} from "../../wait/wait-animation-frame";
 import {waitTime} from "../../wait/wait-time";
 import type {GameProps} from "../game-props";
 import type {NPCBattleStage} from "../npc-battle";
-import {BattleScene} from "../td-scenes/battle";
+import {BattleScene} from "../../td-scenes/battle";
 import {battleSceneConnector} from "../td-scenes/battle-scene-connector";
 
 /**
