@@ -3,7 +3,7 @@
 import '../../src/css/style.css';
 import type {Resources} from "../../src/js/resource";
 import {fullResourceLoading} from "../../src/js/resource";
-import {CssVH} from "../../src/js/view-port/vh";
+import {CssVH} from "../../src/js/css/vh";
 import {resizeStream} from "../../src/js/window/resize";
 import {StorybookResourceRoot} from "../storybook-resource-root";
 

@@ -10,6 +10,7 @@ import {waitTime} from "../wait/wait-time";
 export function invisibleAllMessageWindows(props: CustomBattleEventProps): void {
   props.view.dom.leftMessageWindow.visible(false);
   props.view.dom.rightMessageWindow.visible(false);
+  props.view.dom.nearBatterySelectorMessageWindow.visible(false);
 }
 
 /**
