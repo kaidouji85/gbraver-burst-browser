@@ -30,7 +30,7 @@ export async function startTutorial(props: $ReadOnly<GameProps>, level: number, 
     battleProgress: npcBattle, player: npcBattle.player, enemy: npcBattle.enemy, initialState: npcBattle.stateHistory(), customBattleEvent: stage.event(),
     resize: props.resize, pushWindow: props.pushWindow, gameLoop: props.gameLoop, renderer: props.renderer
   });
-  props.tdScenes.bind(battleScene, battleSceneConnector);
+  props.tdBinder.bind(battleScene, battleSceneConnector);
   await waitAnimationFrame();
   const latency = Date.now() - startTutorialStageTime;
   await waitTime(3000- latency);

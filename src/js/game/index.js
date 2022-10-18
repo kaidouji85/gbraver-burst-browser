@@ -25,7 +25,7 @@ export class Game {
     const body = document.body || document.createElement('div');
     const elements = [this.#props.fader.getRootHTMLElement(), this.#props.interruptScenes.getRootHTMLElement(),
       this.#props.domDialogs.getRootHTMLElement(), this.#props.domScenes.getRootHTMLElement(),
-      this.#props.domFloaters.getRootHTMLElement(), this.#props.renderer.getRendererDOM(), ...this.#props.tdScenes.getDOMLayerElements()];
+      this.#props.domFloaters.getRootHTMLElement(), this.#props.renderer.getRendererDOM(), ...this.#props.tdBinder.getDOMLayerElements()];
     elements.forEach(element => {
       body.appendChild(element);
     });
@@ -35,7 +35,7 @@ export class Game {
       .chain(map(error => ({type: 'WebSocketAPIError', error})))
     const WebSocketAPIUnintentionalClose = createStream(this.#props.api.websocketUnintentionalCloseNotifier())
       .chain(map(error => ({type: 'WebSocketAPIUnintentionalClose', error})));
-    const gameActionStreams = [this.#props.tdScenes.gameActionNotifier(), this.#props.domScenes.gameActionNotifier(),
+    const gameActionStreams = [this.#props.tdBinder.gameActionNotifier(), this.#props.domScenes.gameActionNotifier(),
       this.#props.domDialogs.gameActionNotifier(), this.#props.domFloaters.gameActionNotifier(), suddenlyBattleEnd,
       webSocketAPIError, WebSocketAPIUnintentionalClose];
     this.#unsubscribers = gameActionStreams.map(v => v.subscribe(action => {

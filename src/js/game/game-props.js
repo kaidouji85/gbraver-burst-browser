@@ -92,8 +92,8 @@ export interface GameProps {
   domFloaters: DOMFloaters;
   /** レンダラ管理オブジェクト */
   renderer: Renderer;
-  /** 3Dシーン管理オブジェクト */
-  tdScenes: TDSceneBinder;
+  /** 3Dシーンバインダー */
+  tdBinder: TDSceneBinder;
   /** リソースルート */
   resourceRoot: ResourceRoot;
   /** リソース管理オブジェクト */
@@ -172,7 +172,7 @@ export function generateGameProps(param: GamePropsGeneratorParam): GameProps {
     domDialogs: new DOMDialogs(),
     domFloaters: new DOMFloaters(),
     renderer,
-    tdScenes: new TDSceneBinder(renderer, hudUIScale),
+    tdBinder: new TDSceneBinder(renderer, hudUIScale),
     serviceWorker: null,
     bgm: createBGMManager(),
     canPlayTutorialInDevelopment: param.canPlayTutorialInDevelopment

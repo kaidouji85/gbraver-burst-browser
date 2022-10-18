@@ -43,7 +43,7 @@ const gotoTitle = async (props: $ReadOnly<GameProps>) => {
 const gotoEnding = async (props: $ReadOnly<GameProps>) => {
   props.domFloaters.hiddenPostBattle();
   await props.fader.fadeOut();
-  props.tdScenes.hidden();
+  props.tdBinder.hidden();
   const ending = await props.domScenes.startNPCEnding(props.resources, props.bgm);
   await props.fader.fadeIn();
   ending.playBGM();

@@ -65,7 +65,7 @@ export async function onSelectionComplete(props: GameProps,  action: SelectionCo
       battleProgress, player: battle.player, enemy: battle.enemy, initialState: battle.initialState,
       resize: props.resize, pushWindow: props.pushWindow, gameLoop: props.gameLoop, renderer: props.renderer
     });
-    props.tdScenes.bind(battleScene, battleSceneConnector);
+    props.tdBinder.bind(battleScene, battleSceneConnector);
     await waitAnimationFrame();
     await Promise.all([(async () => {
       await props.fader.fadeOut();
