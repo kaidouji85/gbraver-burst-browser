@@ -17,7 +17,7 @@ import type {BattleProgress} from "./battle/battle-progress";
 import type {CustomBattleEvent} from "./battle/custom-battle-event";
 import type {TDScene} from "./td-scene";
 
-/** 戦闘シーン開始パラメータ */
+/** @deprecated 戦闘シーン開始パラメータ */
 type StartBattleParams = {
   /** リソース管理オブジェクト */
   resources: Resources,
@@ -41,8 +41,16 @@ type StartBattleParams = {
   customBattleEvent?: CustomBattleEvent,
 };
 
-/** three.js系シーンを集めたもの */
-export class TDScenes {
+/**
+ * 3Dシーン生成関数
+ *
+ * @param action ゲームアクション通知
+ * @return 生成結果
+ */
+export type TDSceneGenerator<X: TDScene> = (action: StreamSource<GameAction>) => [X, Unsubscriber[]];
+
+/** three.js系シーンをバインドする */
+export class TDSceneBinder {
   /** ゲームアクション */
   #gameAction: StreamSource<GameAction>;
   /** ゲームループ */
@@ -60,7 +68,7 @@ export class TDScenes {
   /** 現在表示中のシーン、何も表示していない場合はnullがセットされる */
   #scene: ?TDScene;
   /** アンサブスクライバ */
-  #unsubscriber: Unsubscriber[];
+  #unsubscribers: Unsubscriber[];
 
   /**
    * コンストラクタ
@@ -77,13 +85,29 @@ export class TDScenes {
     this.#hudUIScale = new CssHUDUIScale(this.#renderer.getRendererDOM(), resize);
     this.#scene = null;
     this.#domLayerElement = document.createElement('div');
-    this.#unsubscriber = [];
+    this.#unsubscribers = [];
   }
 
-  /** デストラクタ相当の処理 */
+  /**
+   * デストラクタ相当の処理
+   */
   destructor(): void {
     this.#disposeScene();
     this.#hudUIScale.destructor();
+  }
+
+  /**
+   * 3D系シーンをバインドする
+   *
+   * @param generator 3Dシーン生成関数
+   * @return 生成したシーン
+   */
+  bind<X: TDScene>(generator: TDSceneGenerator<X>): X {
+    this.#disposeScene();
+    const [scene, unsubscribers] = generator(this.#gameAction);
+    this.#scene = scene;
+    this.#unsubscribers = unsubscribers;
+    return scene;
   }
 
   /**
@@ -96,6 +120,7 @@ export class TDScenes {
   }
 
   /**
+   * @deprecated
    * 戦闘シーンを開始する
    *
    * @param params 戦闘シーン開始パラメータ
@@ -113,7 +138,7 @@ export class TDScenes {
     scene.getDOMLayerElements().forEach(element => {
       this.#domLayerElement.appendChild(element);
     });
-    this.#unsubscriber = [
+    this.#unsubscribers = [
       scene.gameEndNotifier().subscribe(v => {
         this.#gameAction.next({type: 'EndBattle', gameEnd: v.gameEnd, animationTimeScale: v.animationTimeScale});
       })
@@ -147,7 +172,7 @@ export class TDScenes {
     this.#scene && this.#scene.destructor();
     this.#renderer.disposeRenders();
     this.#domLayerElement.innerHTML = '';
-    this.#unsubscriber.forEach(v => {
+    this.#unsubscribers.forEach(v => {
       v.unsubscribe();
     });
   }

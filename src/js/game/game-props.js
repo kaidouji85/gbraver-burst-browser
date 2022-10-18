@@ -32,7 +32,7 @@ import {DOMScenes} from "./dom-scenes";
 import {FutureSuddenlyBattleEnd} from "./future-suddenly-battle-end";
 import type {InProgress} from "./in-progress/in-progress";
 import {InterruptScenes} from "./innterrupt-scenes";
-import {TDScenes} from "./td-scenes";
+import {TDSceneBinder} from "./td-scenes";
 
 /** ゲーム管理オブジェクトで利用するAPIサーバの機能 */
 export interface GameAPI extends UniversalLogin, LoginCheck, CasualMatchSDK, Logout, LoggedInUserDelete,
@@ -83,7 +83,7 @@ export interface GameProps {
   /** DOMフローター管理オブジェクト */
   domFloaters: DOMFloaters;
   /** 3Dシーン管理オブジェクト */
-  tdScenes: TDScenes;
+  tdScenes: TDSceneBinder;
   /** リソースルート */
   resourceRoot: ResourceRoot;
   /** リソース管理オブジェクト */
@@ -156,7 +156,7 @@ export function generateGameProps(param: GamePropsGeneratorParam): GameProps {
     domScenes: new DOMScenes(),
     domDialogs: new DOMDialogs(),
     domFloaters: new DOMFloaters(),
-    tdScenes: new TDScenes(resize, pushWindow),
+    tdScenes: new TDSceneBinder(resize, pushWindow),
     serviceWorker: null,
     bgm: createBGMManager(),
     canPlayTutorialInDevelopment: param.canPlayTutorialInDevelopment
