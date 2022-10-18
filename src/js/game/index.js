@@ -25,7 +25,7 @@ export class Game {
     const body = document.body || document.createElement('div');
     const elements = [this.#props.fader.getRootHTMLElement(), this.#props.interruptScenes.getRootHTMLElement(),
       this.#props.domDialogs.getRootHTMLElement(), this.#props.domScenes.getRootHTMLElement(),
-      this.#props.domFloaters.getRootHTMLElement(), ...this.#props.tdScenes.getHTMLElements()];
+      this.#props.domFloaters.getRootHTMLElement(), this.#props.renderer.getRendererDOM(), ...this.#props.tdScenes.getHTMLElements()];
     elements.forEach(element => {
       body.appendChild(element);
     });

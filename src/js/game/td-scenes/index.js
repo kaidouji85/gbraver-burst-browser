@@ -3,7 +3,6 @@ import type {GameState, Player} from "gbraver-burst-core";
 import type {BGMManager} from "../../bgm/bgm-manager";
 import {CssHUDUIScale} from "../../css/hud-ui-scale";
 import type {GameLoop} from "../../game-loop/game-loop";
-import {gameLoopStream} from "../../game-loop/game-loop";
 import {Renderer} from "../../render";
 import type {Resources} from "../../resource";
 import type {SoundId} from "../../resource/sound";
@@ -54,22 +53,22 @@ export type GameActionConnector<X: TDScene> = (scene: X, gameAction: StreamSourc
 
 /** three.js系シーンをバインドする */
 export class TDSceneBinder {
+  /** @deprecated ゲームループ */
+  #gameLoop: Stream<GameLoop>;
+  /** @deprecated リサイズ */
+  #resize: Stream<Resize>;
+  /** @deprecated ウインドウ押下 */
+  #pushWindow: Stream<PushWindow>;
+  /** @deprecated レンダラ管理オブジェクト */
+  #renderer: Renderer;
   /** ゲームアクション */
   #gameAction: StreamSource<GameAction>;
-  /** ゲームループ */
-  #gameLoop: Stream<GameLoop>;
-  /** リサイズ */
-  #resize: Stream<Resize>;
-  /** ウインドウ押下 */
-  #pushWindow: Stream<PushWindow>;
-  /** レンダラ管理オブジェクト */
-  #renderer: Renderer;
-  /** cssカスタムプロパティ --hud-ui-scale */
-  #hudUIScale: CssHUDUIScale;
   /** DOMレイヤーをバインドするHTML要素 */
   #domLayerElement: HTMLElement;
   /** 現在表示中のシーン、何も表示していない場合はnullがセットされる */
   #scene: ?TDScene;
+  /** cssカスタムプロパティ --hud-ui-scale */
+  #hudUIScale: CssHUDUIScale;
   /** アンサブスクライバ */
   #unsubscribers: Unsubscriber[];
 
@@ -78,14 +77,17 @@ export class TDSceneBinder {
    *
    * @param resize リサイズストリーム
    * @param pushWindow window押下ストリーム
+   * @param renderer レンダラ管理オブジェクト
+   * @param gameLoop ゲームループストリーム
+   * @param hudUIScale cssカスタムプロパティ --hud-ui-scale
    */
-  constructor(resize: Stream<Resize>, pushWindow: Stream<PushWindow>) {
+  constructor(resize: Stream<Resize>, pushWindow: Stream<PushWindow>, renderer: Renderer, gameLoop: Stream<GameLoop>, hudUIScale: CssHUDUIScale) {
     this.#resize = resize;
     this.#pushWindow = pushWindow;
-    this.#renderer = new Renderer(this.#resize);
+    this.#renderer = renderer;
     this.#gameAction = createStreamSource();
-    this.#gameLoop = gameLoopStream();
-    this.#hudUIScale = new CssHUDUIScale(this.#renderer.getRendererDOM(), resize);
+    this.#gameLoop = gameLoop;
+    this.#hudUIScale = hudUIScale;
     this.#scene = null;
     this.#domLayerElement = document.createElement('div');
     this.#unsubscribers = [];
@@ -172,7 +174,7 @@ export class TDSceneBinder {
    * @return 本クラスで利用している全HTML要素
    */
   getHTMLElements(): HTMLElement[] {
-    return [this.#domLayerElement, this.#renderer.getRendererDOM()];
+    return [this.#domLayerElement];
   }
 
   /**
