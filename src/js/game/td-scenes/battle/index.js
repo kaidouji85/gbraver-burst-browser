@@ -1,6 +1,6 @@
 // @flow
 import type {Stream, Unsubscriber} from "../../../stream/stream";
-import type {Scene} from "../scene";
+import type {TDScene} from "../td-scene";
 import type {BattleEnd, BattleSceneProps, BattleScenePropsCreatorParams} from "./battle-scene-props";
 import {createBattleSceneProps} from "./battle-scene-props";
 import {onBurst} from "./procedure/on-burst";
@@ -13,7 +13,7 @@ import {start} from "./procedure/start";
 type BattleSceneParams = BattleScenePropsCreatorParams;
 
 /** 戦闘シーン */
-export class BattleScene implements Scene {
+export class BattleScene implements TDScene {
   #props: BattleSceneProps;
   #unsubscriber: Unsubscriber[];
 
@@ -47,6 +47,11 @@ export class BattleScene implements Scene {
     });
   }
 
+  /** @override */
+  getDOMLayerElements(): HTMLElement[] {
+    return this.#props.view.dom.getHTMLElements();
+  }
+
   /**
    * ゲーム終了通知
    *
@@ -64,14 +69,5 @@ export class BattleScene implements Scene {
    */
   async start(): Promise<void> {
     await start(this.#props);
-  }
-
-  /**
-   * 本シーンが利用している全てのHTML要素を返す
-   *
-   * @return 本シーンが利用している全てのHTML要素
-   */
-  getHTMLElements(): HTMLElement[] {
-    return this.#props.view.dom.getHTMLElements();
   }
 }
