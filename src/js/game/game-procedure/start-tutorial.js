@@ -24,8 +24,9 @@ export async function startTutorial(props: $ReadOnly<GameProps>, level: number, 
 
   const startTutorialStageTime = Date.now();
   const config = await props.config.load();
+  props.renderer.setPixelRatio(config.webGLPixelRatio);
   const battleScene = new BattleScene({resources: props.resources, bgm: props.bgm,
-    playingBGM: stage.bgm, pixelRatio: config.webGLPixelRatio, initialAnimationTimeScale: config.battleAnimationTimeScale,
+    playingBGM: stage.bgm, initialAnimationTimeScale: config.battleAnimationTimeScale,
     battleProgress: npcBattle, player: npcBattle.player, enemy: npcBattle.enemy, initialState: npcBattle.stateHistory(), customBattleEvent: stage.event(),
     resize: props.resize, pushWindow: props.pushWindow, gameLoop: props.gameLoop, renderer: props.renderer
   });
