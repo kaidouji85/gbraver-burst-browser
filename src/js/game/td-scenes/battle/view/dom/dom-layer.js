@@ -12,6 +12,8 @@ export class DOMLayer {
   nearBatterySelectorMessageWindow: MessageWindow;
   /** メッセージウインドウ バーストボタン隣 */
   nearBurstButtonMessageWindow: MessageWindow;
+  /** メッセージウインドウ パイロットボタン隣 */
+  nearPilotButtonMessageWindow: MessageWindow;
 
   /**
    * コンストラクタ
@@ -30,6 +32,9 @@ export class DOMLayer {
 
     this.nearBurstButtonMessageWindow = new MessageWindow({resources, position: 'NearBurstButton', facePosition: 'Right', faceOrientation: 'Left'});
     this.nearBurstButtonMessageWindow.visible(false);
+
+    this.nearPilotButtonMessageWindow = new MessageWindow({resources, position: 'NearPilotButton', facePosition: 'Right', faceOrientation: 'Left'});
+    this.nearPilotButtonMessageWindow.visible(false);
   }
 
   /**
@@ -39,6 +44,7 @@ export class DOMLayer {
    */
   getHTMLElements(): HTMLElement[] {
     return [this.rightMessageWindow.getRootHTMLElement(), this.leftMessageWindow.getRootHTMLElement(),
-      this.nearBatterySelectorMessageWindow.getRootHTMLElement(), this.nearBurstButtonMessageWindow.getRootHTMLElement()];
+      this.nearBatterySelectorMessageWindow.getRootHTMLElement(), this.nearBurstButtonMessageWindow.getRootHTMLElement(),
+      this.nearPilotButtonMessageWindow.getRootHTMLElement()];
   }
 }
