@@ -1,12 +1,13 @@
 // @flow
 import * as THREE from "three";
-import type {TouchRaycastContainer} from "../../raycaster/touch-raycaster";
-import {createTouchEventRaycaster} from "../../raycaster/touch-raycaster";
-import type {TouchStart} from "../dom-event/touch";
+
+import type { TouchRaycastContainer } from "../../raycaster/touch-raycaster";
+import { createTouchEventRaycaster } from "../../raycaster/touch-raycaster";
+import type { TouchStart } from "../dom-event/touch";
 
 /** タッチスタートレイキャスター */
 export type TouchStartRaycaster = {
-  type: 'touchStartRaycaster',
+  type: "touchStartRaycaster",
   /** タッチレイキャスターコンテナ */
   touch: TouchRaycastContainer,
   /** タッチイベント */
@@ -19,7 +20,11 @@ export type TouchStartRaycaster = {
  * @param origin 変換元
  * @return 変換結果
  */
-export function toTouchStartRaycaster(origin: TouchStart, renderer: typeof THREE.WebGLRenderer, camera: typeof THREE.Camera): TouchStartRaycaster {
+export function toTouchStartRaycaster(
+  origin: TouchStart,
+  renderer: typeof THREE.WebGLRenderer,
+  camera: typeof THREE.Camera
+): TouchStartRaycaster {
   const touch = createTouchEventRaycaster(origin.event, renderer, camera);
-  return {type: 'touchStartRaycaster', touch, event: origin.event};
+  return { type: "touchStartRaycaster", touch, event: origin.event };
 }

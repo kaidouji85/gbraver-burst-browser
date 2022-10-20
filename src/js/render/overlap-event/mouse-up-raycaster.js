@@ -1,12 +1,13 @@
 // @flow
 import * as THREE from "three";
-import type {MouseRaycaster} from "../../raycaster/mouse-raycaster";
-import {createMouseRaycaster} from "../../raycaster/mouse-raycaster";
-import type {MouseUp} from "../dom-event/mouse";
+
+import type { MouseRaycaster } from "../../raycaster/mouse-raycaster";
+import { createMouseRaycaster } from "../../raycaster/mouse-raycaster";
+import type { MouseUp } from "../dom-event/mouse";
 
 /** マウスアップレイキャスター*/
 export type MouseUpRaycaster = {
-  type: 'mouseUpRaycaster',
+  type: "mouseUpRaycaster",
   /** マウスレイキャスター */
   mouse: MouseRaycaster,
   /** マウスイベント */
@@ -19,7 +20,19 @@ export type MouseUpRaycaster = {
  * @param origin 変換元
  * @return 変換結果
  */
-export function toMouseUpRaycaster(origin: MouseUp, renderer: typeof THREE.WebGLRenderer, camera: typeof THREE.Camera): MouseUpRaycaster {
-  const mouseRaycaster: MouseRaycaster = createMouseRaycaster(origin.event, renderer, camera);
-  return {type: 'mouseUpRaycaster', mouse: mouseRaycaster, event: origin.event};
+export function toMouseUpRaycaster(
+  origin: MouseUp,
+  renderer: typeof THREE.WebGLRenderer,
+  camera: typeof THREE.Camera
+): MouseUpRaycaster {
+  const mouseRaycaster: MouseRaycaster = createMouseRaycaster(
+    origin.event,
+    renderer,
+    camera
+  );
+  return {
+    type: "mouseUpRaycaster",
+    mouse: mouseRaycaster,
+    event: origin.event,
+  };
 }

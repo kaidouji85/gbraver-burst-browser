@@ -1,11 +1,11 @@
 // @flow
 
-import type {Resources} from "../../../resource";
-import type {Stream} from "../../../stream/stream";
-import type {GameObjectAction} from "../../action/game-object-action";
-import {NeoLandozerCutIn} from "./neo-landozer-cutin";
-import {EnemyNeoLandozerCutInView} from "./view/enemy-neo-landozer-cutin-view";
-import {PlayerNeoLandozerCutInView} from "./view/player-neo-landozer-cutin-view";
+import type { Resources } from "../../../resource";
+import type { Stream } from "../../../stream/stream";
+import type { GameObjectAction } from "../../action/game-object-action";
+import { NeoLandozerCutIn } from "./neo-landozer-cutin";
+import { EnemyNeoLandozerCutInView } from "./view/enemy-neo-landozer-cutin-view";
+import { PlayerNeoLandozerCutInView } from "./view/player-neo-landozer-cutin-view";
 
 /**
  * プレイヤー側 ネオランドーザ カットイン
@@ -14,7 +14,10 @@ import {PlayerNeoLandozerCutInView} from "./view/player-neo-landozer-cutin-view"
  * @param gameObjectAction ゲームオブジェクトアクション
  * @return 生成結果
  */
-export function playerNeoLandozerCutIn(resources: Resources, gameObjectAction: Stream<GameObjectAction>): NeoLandozerCutIn {
+export function playerNeoLandozerCutIn(
+  resources: Resources,
+  gameObjectAction: Stream<GameObjectAction>
+): NeoLandozerCutIn {
   const view = new PlayerNeoLandozerCutInView(resources);
   return new NeoLandozerCutIn(view, gameObjectAction);
 }
@@ -26,7 +29,10 @@ export function playerNeoLandozerCutIn(resources: Resources, gameObjectAction: S
  * @param gameObjectAction ゲームオブジェクトアクション
  * @return 生成結果
  */
-export function enemyNeoLandozerCutIn(resources: Resources, gameObjectAction: Stream<GameObjectAction>): NeoLandozerCutIn {
+export function enemyNeoLandozerCutIn(
+  resources: Resources,
+  gameObjectAction: Stream<GameObjectAction>
+): NeoLandozerCutIn {
   const view = new EnemyNeoLandozerCutInView(resources);
   return new NeoLandozerCutIn(view, gameObjectAction);
 }

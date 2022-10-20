@@ -4,8 +4,8 @@ import type {
   BuffPowerSkill,
   DamageHalvedSkill,
   PilotSkill,
-  RecoverBatterySkill
-} from 'gbraver-burst-core';
+  RecoverBatterySkill,
+} from "gbraver-burst-core";
 
 /**
  * パイロットスキルのテンプレート
@@ -14,15 +14,15 @@ import type {
  * @return スキル文言
  */
 export function pilotSkillTemplate(skill: PilotSkill): string[] {
-  switch(skill.type)  {
-    case 'RecoverBatterySkill':
+  switch (skill.type) {
+    case "RecoverBatterySkill":
       return recoverBatterySkillTemplate(skill);
-    case 'BuffPowerSkill':
+    case "BuffPowerSkill":
       return buffPowerSkillTemplate(skill);
-    case 'BatteryEnchantmentSkill':
+    case "BatteryEnchantmentSkill":
       return batteryEnchantmentSkillTemplate(skill);
-    case 'DamageHalvedSkill':
-      return damageHalvedSkillTemplate(skill);  
+    case "DamageHalvedSkill":
+      return damageHalvedSkillTemplate(skill);
     default:
       return [];
   }
@@ -54,7 +54,9 @@ function buffPowerSkillTemplate(skill: BuffPowerSkill): string[] {
  * @param skill スキル詳細
  * @return スキル文言
  */
-function batteryEnchantmentSkillTemplate(skill: BatteryEnchantmentSkill): string[] {
+function batteryEnchantmentSkillTemplate(
+  skill: BatteryEnchantmentSkill
+): string[] {
   return [
     `${skill.duration}ターンだけ、0より大きいバッテリーを出した場合にバッテリー+${skill.batteryEnchantment}する。`,
     `ただしバーストによる攻撃力アップが半減する。`,
@@ -68,7 +70,5 @@ function batteryEnchantmentSkillTemplate(skill: BatteryEnchantmentSkill): string
  * @return スキル文言
  */
 function damageHalvedSkillTemplate(skill: DamageHalvedSkill): string[] {
-  return [
-    `${skill.duration}ターンだけ、全てのダメージを1/2にする。`
-  ];
+  return [`${skill.duration}ターンだけ、全てのダメージを1/2にする。`];
 }

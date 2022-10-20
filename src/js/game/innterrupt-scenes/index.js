@@ -1,6 +1,6 @@
 // @flow
-import type {Resources} from "../../resource";
-import {PlayInLandscape} from "./play-in-landscape/play-in-landscape";
+import type { Resources } from "../../resource";
+import { PlayInLandscape } from "./play-in-landscape/play-in-landscape";
 
 /** 割り込みで表示されるシーンをあつめたもの */
 export class InterruptScenes {
@@ -10,7 +10,7 @@ export class InterruptScenes {
    * コンストラクタ
    */
   constructor() {
-    this.#root = document.createElement('div');
+    this.#root = document.createElement("div");
   }
 
   /**

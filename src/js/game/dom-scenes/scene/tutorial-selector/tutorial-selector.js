@@ -1,22 +1,32 @@
 // @flow
-import {pop} from "../../../../dom/animation";
-import type {PushDOM} from "../../../../dom/event-stream";
-import {pushDOMStream} from "../../../../dom/event-stream";
-import {Exclusive} from "../../../../exclusive/exclusive";
-import type {Resources} from "../../../../resource";
-import type {SoundResource} from "../../../../resource/sound";
-import {createEmptySoundResource, SOUND_IDS} from "../../../../resource/sound";
-import type {Stream, StreamSource, Unsubscriber} from "../../../../stream/stream";
-import {createStreamSource} from "../../../../stream/stream";
-import {domUuid} from "../../../../uuid/dom-uuid";
-import type {DOMScene} from "../../dom-scene";
-import type {TutorialStage, TutorialStageSelect} from "./tutoria-stage-element";
-import {TutorialStageElement} from "./tutoria-stage-element";
+import { pop } from "../../../../dom/animation";
+import type { PushDOM } from "../../../../dom/event-stream";
+import { pushDOMStream } from "../../../../dom/event-stream";
+import { Exclusive } from "../../../../exclusive/exclusive";
+import type { Resources } from "../../../../resource";
+import type { SoundResource } from "../../../../resource/sound";
+import {
+  createEmptySoundResource,
+  SOUND_IDS,
+} from "../../../../resource/sound";
+import type {
+  Stream,
+  StreamSource,
+  Unsubscriber,
+} from "../../../../stream/stream";
+import { createStreamSource } from "../../../../stream/stream";
+import { domUuid } from "../../../../uuid/dom-uuid";
+import type { DOMScene } from "../../dom-scene";
+import type {
+  TutorialStage,
+  TutorialStageSelect,
+} from "./tutoria-stage-element";
+import { TutorialStageElement } from "./tutoria-stage-element";
 
 /** ROOT要素class属性*/
-const ROOT_CLASS = 'tutorial-selector';
+const ROOT_CLASS = "tutorial-selector";
 /** data-idを集めたもの */
-type DataIDs = {stages: string, prevButton: string};
+type DataIDs = { stages: string, prevButton: string };
 
 /**
  * ルート要素のinnerHTML
@@ -32,7 +42,7 @@ export function rootInnerHTML(ids: DataIDs): string {
 }
 
 /** ルート要素の子孫要素 */
-type Elements = {stages: HTMLElement, prevButton: HTMLElement};
+type Elements = { stages: HTMLElement, prevButton: HTMLElement };
 
 /**
  * ルート要素から子孫要素を抽出する
@@ -42,9 +52,13 @@ type Elements = {stages: HTMLElement, prevButton: HTMLElement};
  * @return 抽出結果
  */
 function extractElements(root: HTMLElement, ids: DataIDs): Elements {
-  const stages = root.querySelector(`[data-id="${ids.stages}"]`) ?? document.createElement('div');
-  const prevButton = root.querySelector(`[data-id="${ids.prevButton}"]`) ?? document.createElement('div');
-  return {stages, prevButton};
+  const stages =
+    root.querySelector(`[data-id="${ids.stages}"]`) ??
+    document.createElement("div");
+  const prevButton =
+    root.querySelector(`[data-id="${ids.prevButton}"]`) ??
+    document.createElement("div");
+  return { stages, prevButton };
 }
 
 /** チュートリアルステージセレクト画面 */
@@ -65,8 +79,8 @@ export class TutorialSelector implements DOMScene {
    * @param stages チュートリアルステージ情報
    */
   constructor(resources: Resources, stages: TutorialStage[]) {
-    const ids = {stages: domUuid(), prevButton: domUuid()};
-    this.#root = document.createElement('div');
+    const ids = { stages: domUuid(), prevButton: domUuid() };
+    this.#root = document.createElement("div");
     this.#root.className = ROOT_CLASS;
     this.#root.innerHTML = rootInnerHTML(ids);
 
@@ -76,27 +90,31 @@ export class TutorialSelector implements DOMScene {
     this.#exclusive = new Exclusive();
     this.#prev = createStreamSource();
     this.#stageSelect = createStreamSource();
-    this.#changeValue = resources.sounds.find(v => v.id === SOUND_IDS.CHANGE_VALUE) ?? createEmptySoundResource();
+    this.#changeValue =
+      resources.sounds.find((v) => v.id === SOUND_IDS.CHANGE_VALUE) ??
+      createEmptySoundResource();
 
-    const stageElements = stages.map((stage, index) => new TutorialStageElement(resources, stage, index + 1));
-    stageElements.forEach((stage => {
+    const stageElements = stages.map(
+      (stage, index) => new TutorialStageElement(resources, stage, index + 1)
+    );
+    stageElements.forEach((stage) => {
       this.#stages.appendChild(stage.getRootHTMLElement());
-    }));
+    });
     this.#unsubscribers = [
-      pushDOMStream(this.#prevButton).subscribe(action => {
+      pushDOMStream(this.#prevButton).subscribe((action) => {
         this.#onPrevPush(action);
       }),
-      ...stageElements.map(stage =>
+      ...stageElements.map((stage) =>
         stage.stageSelectNotifier().subscribe(() => {
           this.#onTutorialStageSelect(stage);
         })
-      )
+      ),
     ];
   }
 
   /** @override */
   destructor(): void {
-    this.#unsubscribers.forEach(unsubscriber => {
+    this.#unsubscribers.forEach((unsubscriber) => {
       unsubscriber.unsubscribe();
     });
   }
@@ -147,7 +165,7 @@ export class TutorialSelector implements DOMScene {
   #onTutorialStageSelect(stage: TutorialStageElement): void {
     this.#exclusive.execute(async () => {
       await stage.selected();
-      this.#stageSelect.next({id: stage.id, level: stage.level});
+      this.#stageSelect.next({ id: stage.id, level: stage.level });
     });
   }
 }

@@ -1,11 +1,12 @@
 // @flow
 import * as THREE from "three";
-import {isMeshOverlap} from "../../overlap/mesh-overlap";
-import type {MouseDownRaycaster} from "../../render/overlap-event/mouse-down-raycaster";
-import type {TouchStartRaycaster} from "../../render/overlap-event/touch-start-raycaster";
-import type {Stream, StreamSource, Unsubscriber} from "../../stream/stream";
-import {createStreamSource} from "../../stream/stream";
-import type {GameObjectAction} from "../action/game-object-action";
+
+import { isMeshOverlap } from "../../overlap/mesh-overlap";
+import type { MouseDownRaycaster } from "../../render/overlap-event/mouse-down-raycaster";
+import type { TouchStartRaycaster } from "../../render/overlap-event/touch-start-raycaster";
+import type { Stream, StreamSource, Unsubscriber } from "../../stream/stream";
+import { createStreamSource } from "../../stream/stream";
+import type { GameObjectAction } from "../action/game-object-action";
 
 /** プッシュ検出 */
 export interface PushDetector {
@@ -42,7 +43,7 @@ type SimplePushDetectorParam = {
   geometry: typeof THREE.Geometry,
   /** ゲームオブジェクトアクション */
   gameObjectAction: Stream<GameObjectAction>,
-  /** 
+  /**
    * デバッグ用途で当たり判定を表示・非表示するフラグ
    * trueで当たり判定を表示する
    */
@@ -62,16 +63,16 @@ class SimplePushDetector implements PushDetector {
    */
   constructor(param: SimplePushDetectorParam) {
     const material = new THREE.MeshBasicMaterial({
-      color: new THREE.Color('rgb(0, 255, 0)'),
+      color: new THREE.Color("rgb(0, 255, 0)"),
       visible: param.visible ?? false,
     });
     this.#mesh = new THREE.Mesh(param.geometry, material);
 
     this.#push = createStreamSource();
-    this.#unsubscriber = param.gameObjectAction.subscribe(action => {
-      if (action.type === 'mouseDownRaycaster') {
+    this.#unsubscriber = param.gameObjectAction.subscribe((action) => {
+      if (action.type === "mouseDownRaycaster") {
         this.#mouseDownRaycaster(action);
-      } else if (action.type === 'touchStartRaycaster') {
+      } else if (action.type === "touchStartRaycaster") {
         this.#touchStartRaycaster(action);
       }
     });
@@ -99,9 +100,9 @@ class SimplePushDetector implements PushDetector {
     return this.#push;
   }
 
-  /** 
+  /**
    * マウスダウン時の処理
-   * 
+   *
    * @param action アクション
    */
   #mouseDownRaycaster(action: MouseDownRaycaster): void {
@@ -110,14 +111,15 @@ class SimplePushDetector implements PushDetector {
     }
   }
 
-  /** 
+  /**
    * タッチスタート時の処理
-   * 
+   *
    * @param action アクション
    */
   #touchStartRaycaster(action: TouchStartRaycaster): void {
-    const overlapTouches = action.touch.targetTouches
-      .filter(v => isMeshOverlap(v.raycaster, this.#mesh));
+    const overlapTouches = action.touch.targetTouches.filter((v) =>
+      isMeshOverlap(v.raycaster, this.#mesh)
+    );
     const isTouchOverlap = 0 < overlapTouches.length;
     if (isTouchOverlap) {
       this.#push.next(action.event);
@@ -146,11 +148,13 @@ type CirclePushDetectorParam = {
  * @param param パラメータ
  * @return プッシュ検出
  */
-export function circlePushDetector(param: CirclePushDetectorParam): PushDetector {
+export function circlePushDetector(
+  param: CirclePushDetectorParam
+): PushDetector {
   const geometry = new THREE.CircleGeometry(param.radius, param.segments);
   return new SimplePushDetector({
     geometry: geometry,
     gameObjectAction: param.gameObjectAction,
-    visible: param.visible
+    visible: param.visible,
   });
 }

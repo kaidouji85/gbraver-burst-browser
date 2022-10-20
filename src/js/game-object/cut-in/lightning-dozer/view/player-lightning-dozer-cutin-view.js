@@ -1,14 +1,18 @@
 // @flow
 
 import * as THREE from "three";
-import type {PreRender} from "../../../../game-loop/pre-render";
-import {HorizontalAnimationMesh} from "../../../../mesh/horizontal-animation";
-import type {Resources} from "../../../../resource";
-import {TEXTURE_IDS} from "../../../../resource/texture/ids";
-import {HUD_CUT_IN_ZNIDEX} from "../../../hud-zindex";
-import {HUDCutInScale} from "../../../scale";
-import type {AnimationType, LightningDozerCutInModel} from "../model/lightning-dozer-cutin-model";
-import type {LightningDozerCutInView} from "./lightning-dozer-cutin-view";
+
+import type { PreRender } from "../../../../game-loop/pre-render";
+import { HorizontalAnimationMesh } from "../../../../mesh/horizontal-animation";
+import type { Resources } from "../../../../resource";
+import { TEXTURE_IDS } from "../../../../resource/texture/ids";
+import { HUD_CUT_IN_ZNIDEX } from "../../../hud-zindex";
+import { HUDCutInScale } from "../../../scale";
+import type {
+  AnimationType,
+  LightningDozerCutInModel,
+} from "../model/lightning-dozer-cutin-model";
+import type { LightningDozerCutInView } from "./lightning-dozer-cutin-view";
 
 /** メッシュの大きさ */
 export const MESH_SIZE = 900;
@@ -32,8 +36,9 @@ export class PlayerLightningDozerCutInView implements LightningDozerCutInView {
   constructor(resources: Resources) {
     this.#group = new THREE.Group();
 
-    const cutInUpResource = resources.textures
-      .find(v => v.id === TEXTURE_IDS.LIGHTNING_DOZER_CUTIN_UP);
+    const cutInUpResource = resources.textures.find(
+      (v) => v.id === TEXTURE_IDS.LIGHTNING_DOZER_CUTIN_UP
+    );
     const cutInUp = cutInUpResource
       ? cutInUpResource.texture
       : new THREE.Texture();
@@ -41,11 +46,12 @@ export class PlayerLightningDozerCutInView implements LightningDozerCutInView {
       texture: cutInUp,
       width: MESH_SIZE,
       height: MESH_SIZE,
-      maxAnimation: 4
+      maxAnimation: 4,
     });
 
-    const cutInDownResource = resources.textures
-      .find(v => v.id === TEXTURE_IDS.LIGHTNING_DOZER_CUTIN_DOWN);
+    const cutInDownResource = resources.textures.find(
+      (v) => v.id === TEXTURE_IDS.LIGHTNING_DOZER_CUTIN_DOWN
+    );
     const cutInDown = cutInDownResource
       ? cutInDownResource.texture
       : new THREE.Texture();
@@ -53,10 +59,10 @@ export class PlayerLightningDozerCutInView implements LightningDozerCutInView {
       texture: cutInDown,
       width: MESH_SIZE,
       height: MESH_SIZE,
-      maxAnimation: 4
+      maxAnimation: 4,
     });
-    
-    this.#getMeshes().forEach(mesh => {
+
+    this.#getMeshes().forEach((mesh) => {
       this.#group.add(mesh.getObject3D());
     });
   }
@@ -65,7 +71,7 @@ export class PlayerLightningDozerCutInView implements LightningDozerCutInView {
    * デストラクタ相当の処理
    */
   destructor(): void {
-    this.#getMeshes().forEach(mesh => {
+    this.#getMeshes().forEach((mesh) => {
       mesh.destructor();
     });
   }
@@ -81,13 +87,14 @@ export class PlayerLightningDozerCutInView implements LightningDozerCutInView {
     activeMesh.animate(model.animation.frame);
     activeMesh.setOpacity(model.opacity);
 
-    const disActiveMeshes = this.#getMeshes()
-      .filter(v => v !== activeMesh);
-    disActiveMeshes.forEach(v => {
+    const disActiveMeshes = this.#getMeshes().filter((v) => v !== activeMesh);
+    disActiveMeshes.forEach((v) => {
       v.setOpacity(0);
     });
 
-    const scale = HUDCutInScale(preRender.rendererDOM, preRender.safeAreaInset) * model.scale;
+    const scale =
+      HUDCutInScale(preRender.rendererDOM, preRender.safeAreaInset) *
+      model.scale;
     this.#group.position.x = model.tracking.x;
     this.#group.position.y = model.tracking.y - BASE_PADDING_TOP * scale;
     this.#group.position.z = HUD_CUT_IN_ZNIDEX;
@@ -112,10 +119,7 @@ export class PlayerLightningDozerCutInView implements LightningDozerCutInView {
    * @return 取得結果
    */
   #getMeshes(): HorizontalAnimationMesh[] {
-    return [
-      this.#cutInUp,
-      this.#cutInDown,
-    ];
+    return [this.#cutInUp, this.#cutInDown];
   }
 
   /**

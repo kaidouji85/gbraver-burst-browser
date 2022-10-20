@@ -1,16 +1,17 @@
 // @flow
 
-import * as THREE from 'three';
-import {Animate} from "../../animation/animate";
-import type {PreRender} from "../../game-loop/pre-render";
-import type {Resources} from "../../resource";
-import type {Stream, Unsubscriber} from "../../stream/stream";
-import type {GameObjectAction} from "../action/game-object-action";
-import {popUp} from "./animation/pop-up";
-import type {ContinuousAttackModel} from "./model/continuous-attack-model";
-import {createInitialValue} from "./model/initial-value";
-import {ContinuousAttackSounds} from "./sounds/continuous-attack-sounds";
-import type {ContinuousAttackView} from "./view/continuous-attack-view";
+import * as THREE from "three";
+
+import { Animate } from "../../animation/animate";
+import type { PreRender } from "../../game-loop/pre-render";
+import type { Resources } from "../../resource";
+import type { Stream, Unsubscriber } from "../../stream/stream";
+import type { GameObjectAction } from "../action/game-object-action";
+import { popUp } from "./animation/pop-up";
+import type { ContinuousAttackModel } from "./model/continuous-attack-model";
+import { createInitialValue } from "./model/initial-value";
+import { ContinuousAttackSounds } from "./sounds/continuous-attack-sounds";
+import type { ContinuousAttackView } from "./view/continuous-attack-view";
 
 /**
  * 連続攻撃
@@ -28,14 +29,18 @@ export class ContinuousAttackIndicator {
    * @param resources リソース管理オブジェクト
    * @param gameObjectAction ゲームオブジェクトアクション
    */
-  constructor(view: ContinuousAttackView, resources: Resources, gameObjectAction: Stream<GameObjectAction>) {
+  constructor(
+    view: ContinuousAttackView,
+    resources: Resources,
+    gameObjectAction: Stream<GameObjectAction>
+  ) {
     this.#model = createInitialValue();
     this.#view = view;
     this.#sounds = new ContinuousAttackSounds(resources);
-    this.#unsubscriber = gameObjectAction.subscribe(action => {
-      if (action.type === 'Update') {
+    this.#unsubscriber = gameObjectAction.subscribe((action) => {
+      if (action.type === "Update") {
         this.#onUpdate();
-      } else if (action.type === 'PreRender') {
+      } else if (action.type === "PreRender") {
         this.#onPreRender(action);
       }
     });
@@ -49,7 +54,7 @@ export class ContinuousAttackIndicator {
 
   /**
    * ポップアップ
-   * 
+   *
    * @return アニメーション
    */
   popUp(): Animate {

@@ -1,7 +1,8 @@
 // @flow
 
-import * as THREE from 'three';
-import type {LightningDozerModel} from "../model/lightning-dozer-model";
+import * as THREE from "three";
+
+import type { LightningDozerModel } from "../model/lightning-dozer-model";
 
 /**
  * ライトニングドーザビュー
@@ -31,7 +32,7 @@ export interface LightningDozerView {
    */
   getObject3D(): typeof THREE.Object3D;
 
-  /** 
+  /**
    * カメラの真正面を向く
    *
    * @param camera カメラ

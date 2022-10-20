@@ -6,7 +6,7 @@
  * @return 実行結果
  */
 export function waitAnimationFrame(): Promise<void> {
-  return new Promise(resolve => {
+  return new Promise((resolve) => {
     requestAnimationFrame(() => {
       resolve();
     });

@@ -12,6 +12,6 @@ export type RaitoModel = {
 
   /** 位置 */
   position: {
-    x: number
-  }
+    x: number,
+  },
 };

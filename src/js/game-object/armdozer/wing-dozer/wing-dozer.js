@@ -1,28 +1,29 @@
 // @flow
 
 import * as THREE from "three";
-import {Animate} from "../../../animation/animate";
-import type {PreRender} from "../../../game-loop/pre-render";
-import type {Resources} from "../../../resource";
-import type {Stream, Unsubscriber} from "../../../stream/stream";
-import type {GameObjectAction} from "../../action/game-object-action";
-import type {ArmDozerSprite} from "../armdozer-sprite";
-import {avoid} from "./animation/avoid";
-import {charge} from "./animation/charge";
-import {dash} from "./animation/dash";
-import {dashToStand} from "./animation/dash-to-stand";
-import {down} from "./animation/down";
-import {frontStep} from "./animation/front-step";
-import {guard} from "./animation/guard";
-import {guardToStand} from "./animation/guard-to-stand";
-import {knockBack} from "./animation/knock-back";
-import {knockBackToStand} from "./animation/knock-back-to-stand";
-import {upper} from "./animation/upper";
-import {upperToStand} from "./animation/upper-to-stand";
-import {createInitialValue} from "./model/initial-value";
-import type {WingDozerModel} from "./model/wing-dozer-model";
-import {WingDozerSounds} from "./sounds/wing-dozer-sounds";
-import type {WingDozerView} from "./view/wing-dozer-view";
+
+import { Animate } from "../../../animation/animate";
+import type { PreRender } from "../../../game-loop/pre-render";
+import type { Resources } from "../../../resource";
+import type { Stream, Unsubscriber } from "../../../stream/stream";
+import type { GameObjectAction } from "../../action/game-object-action";
+import type { ArmDozerSprite } from "../armdozer-sprite";
+import { avoid } from "./animation/avoid";
+import { charge } from "./animation/charge";
+import { dash } from "./animation/dash";
+import { dashToStand } from "./animation/dash-to-stand";
+import { down } from "./animation/down";
+import { frontStep } from "./animation/front-step";
+import { guard } from "./animation/guard";
+import { guardToStand } from "./animation/guard-to-stand";
+import { knockBack } from "./animation/knock-back";
+import { knockBackToStand } from "./animation/knock-back-to-stand";
+import { upper } from "./animation/upper";
+import { upperToStand } from "./animation/upper-to-stand";
+import { createInitialValue } from "./model/initial-value";
+import type { WingDozerModel } from "./model/wing-dozer-model";
+import { WingDozerSounds } from "./sounds/wing-dozer-sounds";
+import type { WingDozerView } from "./view/wing-dozer-view";
 
 /**
  * ウィングドーザ
@@ -40,14 +41,18 @@ export class WingDozer implements ArmDozerSprite {
    * @param resources リソース管理オブジェクト
    * @param gameObjectAction ゲームオブジェクトアクション
    */
-  constructor(view: WingDozerView, resources: Resources, gameObjectAction: Stream<GameObjectAction>): void {
+  constructor(
+    view: WingDozerView,
+    resources: Resources,
+    gameObjectAction: Stream<GameObjectAction>
+  ): void {
     this.#model = createInitialValue();
     this.#view = view;
     this.#sounds = new WingDozerSounds(resources);
-    this.#unsubscriber = gameObjectAction.subscribe(action => {
-      if (action.type === 'Update') {
+    this.#unsubscriber = gameObjectAction.subscribe((action) => {
+      if (action.type === "Update") {
         this.#onUpdate();
-      } else if (action.type === 'PreRender') {
+      } else if (action.type === "PreRender") {
         this.#onPreRender(action);
       }
     });
@@ -124,7 +129,7 @@ export class WingDozer implements ArmDozerSprite {
     return guard(this.#model);
   }
 
-  /** 
+  /**
    * ガード -> 立ちポーズ
    *
    * @return アニメーション

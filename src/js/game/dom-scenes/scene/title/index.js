@@ -1,9 +1,9 @@
 // @flow
-import type {Stream, Unsubscriber} from "../../../../stream/stream";
-import type {DOMScene} from "../../dom-scene";
-import {bindEventListeners} from "./listeners";
-import type {CreateTitlePropsParams, TitleProps} from "./props";
-import {createTitleProps} from "./props";
+import type { Stream, Unsubscriber } from "../../../../stream/stream";
+import type { DOMScene } from "../../dom-scene";
+import { bindEventListeners } from "./listeners";
+import type { CreateTitlePropsParams, TitleProps } from "./props";
+import { createTitleProps } from "./props";
 
 /** タイトル画面コンストラクタパラメータ */
 export type TitleParams = CreateTitlePropsParams;
@@ -25,7 +25,7 @@ export class Title implements DOMScene {
 
   /** @override */
   destructor(): void {
-    this.#unsubscribers.forEach(v => {
+    this.#unsubscribers.forEach((v) => {
       v.unsubscribe();
     });
   }

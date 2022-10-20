@@ -1,29 +1,34 @@
 // @flow
-import type {ArmDozerId} from "gbraver-burst-core";
-import {Howl} from 'howler';
-import {pop} from "../../../../../dom/animation";
-import type {PushDOM} from "../../../../../dom/event-stream";
-import {pushDOMStream} from "../../../../../dom/event-stream";
-import {replaceDOM} from "../../../../../dom/replace-dom";
-import {Exclusive} from "../../../../../exclusive/exclusive";
-import type {Resources} from "../../../../../resource";
-import {SOUND_IDS} from "../../../../../resource/sound";
-import type {Stream, StreamSource, Unsubscriber} from "../../../../../stream/stream";
-import {createStreamSource} from "../../../../../stream/stream";
-import {domUuid} from "../../../../../uuid/dom-uuid";
-import {ArmdozerIcon} from "./armdozer-icon";
-import {ArmdozerStatus} from "./armdozer-status";
-import {createArmdozerIcon} from "./create-armdozer-icon";
+import type { ArmDozerId } from "gbraver-burst-core";
+import { Howl } from "howler";
+
+import { pop } from "../../../../../dom/animation";
+import type { PushDOM } from "../../../../../dom/event-stream";
+import { pushDOMStream } from "../../../../../dom/event-stream";
+import { replaceDOM } from "../../../../../dom/replace-dom";
+import { Exclusive } from "../../../../../exclusive/exclusive";
+import type { Resources } from "../../../../../resource";
+import { SOUND_IDS } from "../../../../../resource/sound";
+import type {
+  Stream,
+  StreamSource,
+  Unsubscriber,
+} from "../../../../../stream/stream";
+import { createStreamSource } from "../../../../../stream/stream";
+import { domUuid } from "../../../../../uuid/dom-uuid";
+import { ArmdozerIcon } from "./armdozer-icon";
+import { ArmdozerStatus } from "./armdozer-status";
+import { createArmdozerIcon } from "./create-armdozer-icon";
 
 /** ルートHTML要素 class */
-const ROOT_CLASS_NAME = 'armdozer-selector';
+const ROOT_CLASS_NAME = "armdozer-selector";
 
 /** data-idを集めたもの */
 type DataIDs = {
   dummyStatus: string,
   okButton: string,
   prevButton: string,
-  icons: string
+  icons: string,
 };
 
 /**
@@ -48,8 +53,8 @@ type Elements = {
   dummyStatus: HTMLElement,
   okButton: HTMLElement,
   prevButton: HTMLElement,
-  icons: HTMLElement
-}
+  icons: HTMLElement,
+};
 
 /**
  * ルート要素から子孫要素を抽出する
@@ -59,15 +64,19 @@ type Elements = {
  * @return 抽出結果
  */
 function extractElements(root: HTMLElement, ids: DataIDs): Elements {
-  const dummyStatus = root.querySelector(`[data-id="${ids.dummyStatus}"]`)
-    ?? document.createElement('div');
-  const icons = root.querySelector(`[data-id="${ids.icons}"]`)
-    ?? document.createElement('div');
-  const okButton = root.querySelector(`[data-id="${ids.okButton}"]`)
-    ?? document.createElement('button');
-  const prevButton = root.querySelector(`[data-id="${ids.prevButton}"]`)
-    ?? document.createElement('button');
-  return {dummyStatus, icons, okButton, prevButton};
+  const dummyStatus =
+    root.querySelector(`[data-id="${ids.dummyStatus}"]`) ??
+    document.createElement("div");
+  const icons =
+    root.querySelector(`[data-id="${ids.icons}"]`) ??
+    document.createElement("div");
+  const okButton =
+    root.querySelector(`[data-id="${ids.okButton}"]`) ??
+    document.createElement("button");
+  const prevButton =
+    root.querySelector(`[data-id="${ids.prevButton}"]`) ??
+    document.createElement("button");
+  return { dummyStatus, icons, okButton, prevButton };
 }
 
 /** アームドーザアイコン関連オブジェクト */
@@ -99,7 +108,11 @@ export class ArmdozerSelector {
    * @param armDozerIds アームドーザIDリスト
    * @param initialArmdozerId アームドーザID初期値
    */
-  constructor(resources: Resources, armDozerIds: ArmDozerId[], initialArmdozerId: ArmDozerId) {
+  constructor(
+    resources: Resources,
+    armDozerIds: ArmDozerId[],
+    initialArmdozerId: ArmDozerId
+  ) {
     this.#armdozerId = initialArmdozerId;
 
     this.#exclusive = new Exclusive();
@@ -108,13 +121,20 @@ export class ArmdozerSelector {
     this.#decide = createStreamSource();
     this.#prev = createStreamSource();
 
-    this.#changeValueSound = resources.sounds.find(v => v.id === SOUND_IDS.CHANGE_VALUE)
-      ?.sound ?? new Howl();
-    this.#decideSound = resources.sounds.find(v => v.id === SOUND_IDS.PUSH_BUTTON)
-      ?.sound ?? new Howl();
+    this.#changeValueSound =
+      resources.sounds.find((v) => v.id === SOUND_IDS.CHANGE_VALUE)?.sound ??
+      new Howl();
+    this.#decideSound =
+      resources.sounds.find((v) => v.id === SOUND_IDS.PUSH_BUTTON)?.sound ??
+      new Howl();
 
-    const dataIDs = {dummyStatus: domUuid(), okButton: domUuid(), prevButton: domUuid(), icons: domUuid()};
-    this.#root = document.createElement('div');
+    const dataIDs = {
+      dummyStatus: domUuid(),
+      okButton: domUuid(),
+      prevButton: domUuid(),
+      icons: domUuid(),
+    };
+    this.#root = document.createElement("div");
     this.#root.className = ROOT_CLASS_NAME;
     this.#root.innerHTML = rootInnerHTML(dataIDs);
     const elements = extractElements(this.#root, dataIDs);
@@ -123,25 +143,28 @@ export class ArmdozerSelector {
     this.#armdozerStatus.switch(this.#armdozerId);
     replaceDOM(elements.dummyStatus, this.#armdozerStatus.getRootHTMLElement());
 
-    this.#armdozerIcons = armDozerIds
-      .map(v => ({armdozerId: v, icon: createArmdozerIcon(resources, v)}));
-    this.#armdozerIcons.forEach(v => {
-        v.icon.selected(v.armdozerId === initialArmdozerId);
-        elements.icons.appendChild(v.icon.getRootHTMLElement());
-      });
+    this.#armdozerIcons = armDozerIds.map((v) => ({
+      armdozerId: v,
+      icon: createArmdozerIcon(resources, v),
+    }));
+    this.#armdozerIcons.forEach((v) => {
+      v.icon.selected(v.armdozerId === initialArmdozerId);
+      elements.icons.appendChild(v.icon.getRootHTMLElement());
+    });
 
     this.#okButton = elements.okButton;
     this.#prevButton = elements.prevButton;
 
     this.#unsubscribers = [
-      ...this.#armdozerIcons.map(v =>
+      ...this.#armdozerIcons.map((v) =>
         v.icon.selectedNotifier().subscribe(() => {
           this.#onArmdozerSelect(v.armdozerId);
-        })),
-      pushDOMStream(this.#okButton).subscribe(action => {
+        })
+      ),
+      pushDOMStream(this.#okButton).subscribe((action) => {
         this.#onOkButtonPush(action);
       }),
-      pushDOMStream(this.#prevButton).subscribe(action => {
+      pushDOMStream(this.#prevButton).subscribe((action) => {
         this.#onPrevButtonPush(action);
       }),
     ];
@@ -151,7 +174,7 @@ export class ArmdozerSelector {
    * デストラクタ相当の処理
    */
   destructor(): void {
-    this.#unsubscribers.forEach(v => {
+    this.#unsubscribers.forEach((v) => {
       v.unsubscribe();
     });
   }
@@ -176,9 +199,7 @@ export class ArmdozerSelector {
    * @return 待機結果
    */
   async waitUntilLoaded(): Promise<void> {
-    await Promise.all(
-      this.#armdozerIcons.map(v => v.icon.waitUntilLoaded())
-    );
+    await Promise.all(this.#armdozerIcons.map((v) => v.icon.waitUntilLoaded()));
   }
 
   /**
@@ -223,7 +244,7 @@ export class ArmdozerSelector {
    * @return 処理結果
    */
   #onArmdozerSelect(armdozerId: ArmDozerId): void {
-    this.#exclusive.execute(async (): Promise<void> =>  {
+    this.#exclusive.execute(async (): Promise<void> => {
       if (this.#armdozerId !== armdozerId) {
         this.#armdozerId = armdozerId;
         this.#armdozerStatus.switch(armdozerId);
@@ -231,13 +252,15 @@ export class ArmdozerSelector {
       }
 
       this.#changeValueSound.play();
-      this.#armdozerIcons.filter(v => v.armdozerId === armdozerId)
-        .forEach(v => {
+      this.#armdozerIcons
+        .filter((v) => v.armdozerId === armdozerId)
+        .forEach((v) => {
           v.icon.pop();
           v.icon.selected(true);
         });
-      this.#armdozerIcons.filter(v => v.armdozerId !== armdozerId)
-        .forEach(v => {
+      this.#armdozerIcons
+        .filter((v) => v.armdozerId !== armdozerId)
+        .forEach((v) => {
           v.icon.selected(false);
         });
     });
@@ -245,7 +268,7 @@ export class ArmdozerSelector {
 
   /**
    * 決定ボタンが押された時の処理
-   * 
+   *
    * @param action アクション
    */
   #onOkButtonPush(action: PushDOM): void {
@@ -259,7 +282,7 @@ export class ArmdozerSelector {
 
   /**
    * 戻るボタンが押された時の処理
-   * 
+   *
    * @param action アクション
    */
   #onPrevButtonPush(action: PushDOM): void {

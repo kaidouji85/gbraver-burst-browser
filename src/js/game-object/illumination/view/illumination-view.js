@@ -1,7 +1,8 @@
 // @flow
 
 import * as THREE from "three";
-import type {IlluminationModel} from "../model/illumination-model";
+
+import type { IlluminationModel } from "../model/illumination-model";
 
 /**
  * ステージ全体の照明のビュー
@@ -14,19 +15,19 @@ export class IlluminationView {
   #ambientLight: typeof THREE.AmbientLight;
 
   constructor() {
-    this.#directionalLight1 = new THREE.DirectionalLight(0xAAAAAA);
+    this.#directionalLight1 = new THREE.DirectionalLight(0xaaaaaa);
     this.#directionalLight1.position.set(1, 1, 1);
 
-    this.#directionalLight2 = new THREE.DirectionalLight(0xAAAAAA);
+    this.#directionalLight2 = new THREE.DirectionalLight(0xaaaaaa);
     this.#directionalLight2.position.set(-1, 1, 1);
 
-    this.#directionalLight3 = new THREE.DirectionalLight(0xAAAAAA);
+    this.#directionalLight3 = new THREE.DirectionalLight(0xaaaaaa);
     this.#directionalLight3.position.set(1, -1, 1);
 
-    this.#directionalLight4 = new THREE.DirectionalLight(0xAAAAAA);
+    this.#directionalLight4 = new THREE.DirectionalLight(0xaaaaaa);
     this.#directionalLight4.position.set(-1, -1, 1);
 
-    this.#ambientLight = new THREE.AmbientLight(0xAAAAAA);
+    this.#ambientLight = new THREE.AmbientLight(0xaaaaaa);
   }
 
   /**

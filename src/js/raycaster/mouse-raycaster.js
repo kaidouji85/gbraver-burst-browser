@@ -1,12 +1,13 @@
 // @flow
 
 import * as THREE from "three";
-import {createRaycaster} from "./raycaster";
-import {getScreenPosition} from "./screen-position";
+
+import { createRaycaster } from "./raycaster";
+import { getScreenPosition } from "./screen-position";
 
 /** マウスのレイキャスト */
 export type MouseRaycaster = {
-  raycaster: typeof THREE.Raycaster
+  raycaster: typeof THREE.Raycaster,
 };
 
 /**
@@ -17,10 +18,14 @@ export type MouseRaycaster = {
  * @param camera カメラ
  * @return マウスのレイキャスト
  */
-export function createMouseRaycaster(event: MouseEvent, rendererDOM: HTMLElement, camera: typeof THREE.Camera): MouseRaycaster {
+export function createMouseRaycaster(
+  event: MouseEvent,
+  rendererDOM: HTMLElement,
+  camera: typeof THREE.Camera
+): MouseRaycaster {
   const mousePos = getMousePosition(event, rendererDOM);
   return {
-    raycaster: createRaycaster(mousePos, camera)
+    raycaster: createRaycaster(mousePos, camera),
   };
 }
 
@@ -30,6 +35,14 @@ export function createMouseRaycaster(event: MouseEvent, rendererDOM: HTMLElement
  * @param event マウスイベント
  * @param rendererDOM レンダラがバインドされているHTML要素
  */
-export function getMousePosition(event: MouseEvent, rendererDOM: HTMLElement): typeof THREE.Vector2 {
-  return getScreenPosition(event.clientX, event.clientY, rendererDOM.clientWidth, rendererDOM.clientHeight);
+export function getMousePosition(
+  event: MouseEvent,
+  rendererDOM: HTMLElement
+): typeof THREE.Vector2 {
+  return getScreenPosition(
+    event.clientX,
+    event.clientY,
+    rendererDOM.clientWidth,
+    rendererDOM.clientHeight
+  );
 }

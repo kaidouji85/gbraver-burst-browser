@@ -1,8 +1,8 @@
 // @flow
 
-import type {Resources} from "../../../../resource";
-import type {WingDozerModel} from "../model/wing-dozer-model";
-import {PlayerWingDozerView} from "./player-wing-dozer-view";
+import type { Resources } from "../../../../resource";
+import type { WingDozerModel } from "../model/wing-dozer-model";
+import { PlayerWingDozerView } from "./player-wing-dozer-view";
 
 /**
  * 敵側 ウィングドーザ ビュー
@@ -24,7 +24,7 @@ export class EnemyWingDozerView extends PlayerWingDozerView {
    */
   engage(model: WingDozerModel): void {
     super.engage(model);
-    
+
     const object = super.getObject3D();
     object.position.x *= -1;
     object.scale.x = -1;

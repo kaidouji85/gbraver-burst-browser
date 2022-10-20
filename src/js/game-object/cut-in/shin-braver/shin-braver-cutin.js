@@ -1,16 +1,17 @@
 // @flow
 
-import * as THREE from 'three';
-import {Animate} from "../../../animation/animate";
-import type {PreRender} from "../../../game-loop/pre-render";
-import type {Stream, Unsubscriber} from "../../../stream/stream";
-import type {HUDTracking} from "../../../tracking/hud-tracking";
-import type {GameObjectAction} from "../../action/game-object-action";
-import {hidden} from "./animation/hidden";
-import {show} from "./animation/show";
-import {createInitialValue} from "./model/initial-value";
-import type {ShinBraverCutInModel} from "./model/shin-braver-cutin-model";
-import type {ShinBraverCutInView} from "./view/shin-braver-cutin-view";
+import * as THREE from "three";
+
+import { Animate } from "../../../animation/animate";
+import type { PreRender } from "../../../game-loop/pre-render";
+import type { Stream, Unsubscriber } from "../../../stream/stream";
+import type { HUDTracking } from "../../../tracking/hud-tracking";
+import type { GameObjectAction } from "../../action/game-object-action";
+import { hidden } from "./animation/hidden";
+import { show } from "./animation/show";
+import { createInitialValue } from "./model/initial-value";
+import type { ShinBraverCutInModel } from "./model/shin-braver-cutin-model";
+import type { ShinBraverCutInView } from "./view/shin-braver-cutin-view";
 
 /**
  * シンブレイバーカットイン
@@ -26,11 +27,14 @@ export class ShinBraverCutIn implements HUDTracking {
    * @param view ビュー
    * @param gameObjectAction ゲームオブジェクトアクション
    */
-  constructor(view: ShinBraverCutInView, gameObjectAction: Stream<GameObjectAction>) {
+  constructor(
+    view: ShinBraverCutInView,
+    gameObjectAction: Stream<GameObjectAction>
+  ) {
     this.#model = createInitialValue();
     this.#view = view;
-    this.#unsubscriber = gameObjectAction.subscribe(action => {
-      if (action.type === 'PreRender') {
+    this.#unsubscriber = gameObjectAction.subscribe((action) => {
+      if (action.type === "PreRender") {
         this.#onPreRender(action);
       }
     });

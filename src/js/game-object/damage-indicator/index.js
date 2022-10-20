@@ -1,11 +1,11 @@
 // @flow
 
-import type {Resources} from "../../resource";
-import type {Stream} from "../../stream/stream";
-import type {GameObjectAction} from "../action/game-object-action";
-import {DamageIndicator} from "./damage-indicator";
-import {EnemyDamageIndicatorView} from "./view/enemy-damage-indicator-view";
-import {PlayerDamageIndicatorView} from "./view/player-damage-indicator-view";
+import type { Resources } from "../../resource";
+import type { Stream } from "../../stream/stream";
+import type { GameObjectAction } from "../action/game-object-action";
+import { DamageIndicator } from "./damage-indicator";
+import { EnemyDamageIndicatorView } from "./view/enemy-damage-indicator-view";
+import { PlayerDamageIndicatorView } from "./view/player-damage-indicator-view";
 
 /**
  * プレイヤーのダメージインジケータ
@@ -14,9 +14,12 @@ import {PlayerDamageIndicatorView} from "./view/player-damage-indicator-view";
  * @param gameObjectAction ゲームオブジェクトアクション
  * @return ダメージインジケータ
  */
-export function playerDamageIndicator(resources: Resources, gameObjectAction: Stream<GameObjectAction>): DamageIndicator {
+export function playerDamageIndicator(
+  resources: Resources,
+  gameObjectAction: Stream<GameObjectAction>
+): DamageIndicator {
   const view = new PlayerDamageIndicatorView(resources);
-  return new DamageIndicator(view , gameObjectAction);
+  return new DamageIndicator(view, gameObjectAction);
 }
 
 /**
@@ -26,7 +29,10 @@ export function playerDamageIndicator(resources: Resources, gameObjectAction: St
  * @param gameObjectAction ゲームオブジェクトアクション
  * @return ダメージインジケータ
  */
-export function enemyDamageIndicator(resources: Resources, gameObjectAction: Stream<GameObjectAction>): DamageIndicator {
+export function enemyDamageIndicator(
+  resources: Resources,
+  gameObjectAction: Stream<GameObjectAction>
+): DamageIndicator {
   const view = new EnemyDamageIndicatorView(resources);
   return new DamageIndicator(view, gameObjectAction);
 }

@@ -1,8 +1,9 @@
 // @flow
 
-import type {Player, PlayerId} from "gbraver-burst-core";
-import * as THREE from 'three';
-import type {HUDArmdozerObjects} from "./hud-armdozer-ibjects";
+import type { Player, PlayerId } from "gbraver-burst-core";
+import * as THREE from "three";
+
+import type { HUDArmdozerObjects } from "./hud-armdozer-ibjects";
 
 /**
  * 空のHUDレイヤーアームドーザ固有オブジェクト

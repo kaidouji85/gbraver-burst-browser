@@ -1,7 +1,7 @@
 // @flow
 
 /** ルート要素 class属性 */
-export const ROOT_CLASS = 'title';
+export const ROOT_CLASS = "title";
 /** ログインボタン class属性 */
 export const LOGIN_CLASS = `${ROOT_CLASS}__login`;
 /** ログインボタン 非表示 class属性 */

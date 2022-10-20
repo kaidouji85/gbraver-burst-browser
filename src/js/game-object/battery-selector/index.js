@@ -1,29 +1,30 @@
 // @flow
 
-import TWEEN from '@tweenjs/tween.js';
-import {Howl} from 'howler';
+import TWEEN from "@tweenjs/tween.js";
+import { Howl } from "howler";
 import * as THREE from "three";
-import {Animate} from "../../animation/animate";
-import type {PreRender} from "../../game-loop/pre-render";
-import type {Update} from "../../game-loop/update";
-import type {Resources} from "../../resource";
-import {SOUND_IDS} from "../../resource/sound";
-import type {Stream, Unsubscriber} from "../../stream/stream";
-import type {GameObjectAction} from "../action/game-object-action";
-import {batteryMinusPop} from "./animation/battery-minus-pop";
-import {batteryPlusPop} from "./animation/battery-plus-pop";
-import {changeNeedle} from "./animation/change-needle";
-import {close} from './animation/close';
-import {decide} from './animation/decide';
-import {open} from './animation/open';
-import type {BatterySelectorModel} from "./model";
-import {MAX_BATTERY} from "./model";
-import type {ButtonLabel} from "./model/button-label";
-import {canBatteryMinus} from "./model/can-battery-minus";
-import {canBatteryPlus} from "./model/can-battery-plus";
-import {initialValue} from "./model/initial-value";
-import {getNeedleValue} from "./model/needle-value";
-import {BatterySelectorView} from "./view";
+
+import { Animate } from "../../animation/animate";
+import type { PreRender } from "../../game-loop/pre-render";
+import type { Update } from "../../game-loop/update";
+import type { Resources } from "../../resource";
+import { SOUND_IDS } from "../../resource/sound";
+import type { Stream, Unsubscriber } from "../../stream/stream";
+import type { GameObjectAction } from "../action/game-object-action";
+import { batteryMinusPop } from "./animation/battery-minus-pop";
+import { batteryPlusPop } from "./animation/battery-plus-pop";
+import { changeNeedle } from "./animation/change-needle";
+import { close } from "./animation/close";
+import { decide } from "./animation/decide";
+import { open } from "./animation/open";
+import type { BatterySelectorModel } from "./model";
+import { MAX_BATTERY } from "./model";
+import type { ButtonLabel } from "./model/button-label";
+import { canBatteryMinus } from "./model/can-battery-minus";
+import { canBatteryPlus } from "./model/can-battery-plus";
+import { initialValue } from "./model/initial-value";
+import { getNeedleValue } from "./model/needle-value";
+import { BatterySelectorView } from "./view";
 
 /** コンストラクタのパラメータ */
 type Param = {
@@ -38,7 +39,7 @@ type Param = {
    * @param battery 変更後のバッテリー値
    */
   onBatteryChange: (battery: number) => void,
-  /** 
+  /**
    * 決定ボタンが押された時に呼ばれるコールバック関数
    * @param event イベント情報
    */
@@ -67,20 +68,24 @@ export class BatterySelector {
     this.#batteryMinusTween = new TWEEN.Group();
     this.#batteryPlusTween = new TWEEN.Group();
 
-    const pushButtonResource = param.resources.sounds.find(v => v.id === SOUND_IDS.PUSH_BUTTON);
+    const pushButtonResource = param.resources.sounds.find(
+      (v) => v.id === SOUND_IDS.PUSH_BUTTON
+    );
     this.#pushButtonSound = pushButtonResource
       ? pushButtonResource.sound
       : new Howl();
 
-    const batteryChangeResource = param.resources.sounds.find(v => v.id === SOUND_IDS.CHANGE_VALUE);
+    const batteryChangeResource = param.resources.sounds.find(
+      (v) => v.id === SOUND_IDS.CHANGE_VALUE
+    );
     this.#batteryChangeSound = batteryChangeResource
       ? batteryChangeResource.sound
       : new Howl();
 
-    this.#unsubscriber = param.gameObjectAction.subscribe(action => {
-      if (action.type === 'Update') {
+    this.#unsubscriber = param.gameObjectAction.subscribe((action) => {
+      if (action.type === "Update") {
         this.#update(action);
-      } else if (action.type === 'PreRender') {
+      } else if (action.type === "PreRender") {
         this.#preRender(action);
       }
     });
@@ -88,7 +93,7 @@ export class BatterySelector {
     this.#view = new BatterySelectorView({
       resources: param.resources,
       gameObjectAction: param.gameObjectAction,
-      onOkPush: event => {
+      onOkPush: (event) => {
         if (this.#model.disabled) {
           return;
         }
@@ -112,7 +117,7 @@ export class BatterySelector {
         this.#batteryMinusPop();
         this.#batteryChange(this.#model.battery - 1);
         param.onBatteryChange(this.#model.battery);
-      }
+      },
     });
   }
 

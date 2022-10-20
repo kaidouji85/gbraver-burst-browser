@@ -1,5 +1,5 @@
 // @flow
-import type {Command} from "gbraver-burst-core";
+import type { Command } from "gbraver-burst-core";
 
 /**
  * パイロットボタンが押せるか否かを判定する
@@ -8,6 +8,8 @@ import type {Command} from "gbraver-burst-core";
  * @return 判定結果、trueでボタンが押せる
  */
 export function canPilotButtonPush(commands: Command[]): boolean {
-  const burstCommands = commands.filter(v => v.type === 'PILOT_SKILL_COMMAND');
+  const burstCommands = commands.filter(
+    (v) => v.type === "PILOT_SKILL_COMMAND"
+  );
   return 1 <= burstCommands.length;
 }

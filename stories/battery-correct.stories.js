@@ -1,37 +1,42 @@
 // @flow
 
-import {delay} from "../src/js/animation/delay";
-import {enemyBatteryCorrect, playerBatteryCorrect} from "../src/js/game-object/battery-correct";
-import {TDGameObjectStub} from "./stub/td-game-object-stub";
+import { delay } from "../src/js/animation/delay";
+import {
+  enemyBatteryCorrect,
+  playerBatteryCorrect,
+} from "../src/js/game-object/battery-correct";
+import { TDGameObjectStub } from "./stub/td-game-object-stub";
 
 export default {
-  title: 'battery-correct'
+  title: "battery-correct",
 };
 
-export const player = (): HTMLElement=> {
-  const stub = new TDGameObjectStub(({resources, gameObjectAction}) => {
+export const player = (): HTMLElement => {
+  const stub = new TDGameObjectStub(({ resources, gameObjectAction }) => {
     const batteryCorrect = playerBatteryCorrect(resources, gameObjectAction);
-    batteryCorrect.popUp(1)
+    batteryCorrect
+      .popUp(1)
       .chain(delay(1000))
       .chain(batteryCorrect.popUp(-1))
       .chain(delay(1000))
       .loop();
-    return {objects: [batteryCorrect.getObject3D()]};
+    return { objects: [batteryCorrect.getObject3D()] };
   });
   stub.start();
   return stub.domElement();
-}
+};
 
-export const enemy = (): HTMLElement=> {
-  const stub = new TDGameObjectStub(({resources, gameObjectAction}) => {
+export const enemy = (): HTMLElement => {
+  const stub = new TDGameObjectStub(({ resources, gameObjectAction }) => {
     const batteryCorrect = enemyBatteryCorrect(resources, gameObjectAction);
-    batteryCorrect.popUp(1)
+    batteryCorrect
+      .popUp(1)
       .chain(delay(1000))
       .chain(batteryCorrect.popUp(-1))
       .chain(delay(1000))
       .loop();
-    return {objects: [batteryCorrect.getObject3D()]};
+    return { objects: [batteryCorrect.getObject3D()] };
   });
   stub.start();
   return stub.domElement();
-}
+};

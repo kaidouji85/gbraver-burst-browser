@@ -1,13 +1,14 @@
 // @flow
 
 import * as THREE from "three";
-import {Animate} from "../../animation/animate";
-import type {Stream, Unsubscriber} from "../../stream/stream";
-import type {GameObjectAction} from "../action/game-object-action";
-import {brightness} from "./animation/brightness";
-import {createInitialValue} from "./model/initial-value";
-import type {SkyBrightnessModel} from "./model/sky-brightness-model";
-import {SkyBrightnessView} from "./view/sky-brightness-view";
+
+import { Animate } from "../../animation/animate";
+import type { Stream, Unsubscriber } from "../../stream/stream";
+import type { GameObjectAction } from "../action/game-object-action";
+import { brightness } from "./animation/brightness";
+import { createInitialValue } from "./model/initial-value";
+import type { SkyBrightnessModel } from "./model/sky-brightness-model";
+import { SkyBrightnessView } from "./view/sky-brightness-view";
 
 /** 空の明るさ */
 export class SkyBrightness {
@@ -26,8 +27,8 @@ export class SkyBrightness {
     this.#view = new SkyBrightnessView();
     this.#view.engage(this.#model);
 
-    this.#unsubscriber = gameObjectAction.subscribe(action => {
-      if (action.type === 'Update') {
+    this.#unsubscriber = gameObjectAction.subscribe((action) => {
+      if (action.type === "Update") {
         this.#onUpdate();
       }
     });

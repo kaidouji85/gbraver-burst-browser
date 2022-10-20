@@ -1,21 +1,26 @@
 // @flow
-import type {ArmDozerId, PilotId} from "gbraver-burst-core";
-import {ArmDozerIds, PilotIds} from "gbraver-burst-core";
-import type {Resources} from "../../../../resource";
-import type {Stream, StreamSource, Unsubscriber} from "../../../../stream/stream";
-import {createStreamSource} from "../../../../stream/stream";
-import {domUuid} from "../../../../uuid/dom-uuid";
-import type {DOMScene} from "../../dom-scene";
-import {ArmdozerBustShotContainer} from "./armdozer-bust-shot";
-import {ArmdozerSelector} from "./armdozer-selector";
-import {getDedicatedPilot} from "./dedicated-pilot";
-import {PilotBustShotContainer} from "./pilot-bust-shot";
-import {PilotSelector} from "./pilot-selector";
+import type { ArmDozerId, PilotId } from "gbraver-burst-core";
+import { ArmDozerIds, PilotIds } from "gbraver-burst-core";
+
+import type { Resources } from "../../../../resource";
+import type {
+  Stream,
+  StreamSource,
+  Unsubscriber,
+} from "../../../../stream/stream";
+import { createStreamSource } from "../../../../stream/stream";
+import { domUuid } from "../../../../uuid/dom-uuid";
+import type { DOMScene } from "../../dom-scene";
+import { ArmdozerBustShotContainer } from "./armdozer-bust-shot";
+import { ArmdozerSelector } from "./armdozer-selector";
+import { getDedicatedPilot } from "./dedicated-pilot";
+import { PilotBustShotContainer } from "./pilot-bust-shot";
+import { PilotSelector } from "./pilot-selector";
 
 /** data-idを集めたもの */
 type DataIDs = {
   selector: string,
-  working: string
+  working: string,
 };
 
 /**
@@ -45,17 +50,19 @@ type Elements = {
  * @return 抽出結果
  */
 function extractElements(root: HTMLElement, ids: DataIDs): Elements {
-  const working = root.querySelector(`[data-id="${ids.working}"]`)
-    ?? document.createElement('div');
-  const selector = root.querySelector(`[data-id="${ids.selector}"]`)
-    ?? document.createElement('div');
-  return {working, selector};
+  const working =
+    root.querySelector(`[data-id="${ids.working}"]`) ??
+    document.createElement("div");
+  const selector =
+    root.querySelector(`[data-id="${ids.selector}"]`) ??
+    document.createElement("div");
+  return { working, selector };
 }
 
 /** プレイヤーの選択内容 */
 type PlayerDecide = {
   armdozerId: ArmDozerId,
-  pilotId: PilotId
+  pilotId: PilotId,
 };
 
 /** プレイヤーセレクト */
@@ -89,26 +96,38 @@ export class PlayerSelect implements DOMScene {
       PilotIds.GAI,
       PilotIds.RAITO,
     ];
-    this.#armdozerId = ArmDozerIds.SHIN_BRAVER
+    this.#armdozerId = ArmDozerIds.SHIN_BRAVER;
     this.#pilotId = PilotIds.SHINYA;
 
     this.#playerDecide = createStreamSource();
     this.#prev = createStreamSource();
 
-    const dataIDs = {selector: domUuid(), working: domUuid()};
-    this.#root = document.createElement('div');
-    this.#root.className = 'player-select';
+    const dataIDs = { selector: domUuid(), working: domUuid() };
+    this.#root = document.createElement("div");
+    this.#root.className = "player-select";
     this.#root.innerHTML = rootInnerHTML(dataIDs);
     const elements = extractElements(this.#root, dataIDs);
 
-    this.#armdozerBustShot = new ArmdozerBustShotContainer(resources, armDozerIds, this.#armdozerId);
+    this.#armdozerBustShot = new ArmdozerBustShotContainer(
+      resources,
+      armDozerIds,
+      this.#armdozerId
+    );
     elements.working.appendChild(this.#armdozerBustShot.getRootHTMLElement());
 
-    this.#pilotBustShot = new PilotBustShotContainer(resources, pilotIds, this.#pilotId);
+    this.#pilotBustShot = new PilotBustShotContainer(
+      resources,
+      pilotIds,
+      this.#pilotId
+    );
     this.#pilotBustShot.hidden();
     elements.working.appendChild(this.#pilotBustShot.getRootHTMLElement());
 
-    this.#armdozerSelector = new ArmdozerSelector(resources,armDozerIds, this.#armdozerId);
+    this.#armdozerSelector = new ArmdozerSelector(
+      resources,
+      armDozerIds,
+      this.#armdozerId
+    );
     elements.selector.appendChild(this.#armdozerSelector.getRootHTMLElement());
 
     this.#pilotSelector = new PilotSelector(resources, pilotIds, this.#pilotId);
@@ -116,24 +135,24 @@ export class PlayerSelect implements DOMScene {
     elements.selector.appendChild(this.#pilotSelector.getRootHTMLElement());
 
     this.#unsubscribers = [
-      this.#armdozerSelector.changeNotifier().subscribe(v => {
+      this.#armdozerSelector.changeNotifier().subscribe((v) => {
         this.#onArmdozerChange(v);
       }),
-      this.#armdozerSelector.decideNotifier().subscribe(v => {
+      this.#armdozerSelector.decideNotifier().subscribe((v) => {
         this.#onArmdozerDecided(v);
       }),
       this.#armdozerSelector.prevNotifier().subscribe(() => {
         this.#onArmdozerSelectorPrev();
       }),
-      this.#pilotSelector.changeNotifier().subscribe(v => {
+      this.#pilotSelector.changeNotifier().subscribe((v) => {
         this.#onPilotChange(v);
       }),
-      this.#pilotSelector.decideNotifier().subscribe(v => {
+      this.#pilotSelector.decideNotifier().subscribe((v) => {
         this.#onPilotDecided(v);
       }),
       this.#pilotSelector.prevNotifier().subscribe(() => {
         this.#onPilotSelectorPrev();
-      })
+      }),
     ];
   }
 
@@ -143,9 +162,9 @@ export class PlayerSelect implements DOMScene {
   destructor(): void {
     this.#armdozerSelector.destructor();
     this.#pilotSelector.destructor();
-    this.#unsubscribers.forEach(v => {
+    this.#unsubscribers.forEach((v) => {
       v.unsubscribe();
-    })
+    });
   }
 
   /**
@@ -167,7 +186,7 @@ export class PlayerSelect implements DOMScene {
       this.#armdozerBustShot.waitUntilLoaded(),
       this.#armdozerSelector.waitUntilLoaded(),
       this.#pilotBustShot.waitUnlillLoaded(),
-      this.#pilotSelector.waitUntilLoaded()
+      this.#pilotSelector.waitUntilLoaded(),
     ]);
   }
 
@@ -187,7 +206,7 @@ export class PlayerSelect implements DOMScene {
   prevNotifier(): Stream<void> {
     return this.#prev;
   }
-  
+
   /**
    * アームドーザを変更した時の処理
    *
@@ -204,7 +223,7 @@ export class PlayerSelect implements DOMScene {
    */
   #onArmdozerDecided(armdozerId: ArmDozerId): void {
     this.#armdozerId = armdozerId;
-    this.#pilotId = getDedicatedPilot(this.#armdozerId)
+    this.#pilotId = getDedicatedPilot(this.#armdozerId);
     this.#pilotBustShot.switch(this.#pilotId);
     this.#pilotSelector.show(this.#pilotId);
 
@@ -237,7 +256,7 @@ export class PlayerSelect implements DOMScene {
     this.#pilotId = pilotId;
     this.#playerDecide.next({
       armdozerId: this.#armdozerId,
-      pilotId: this.#pilotId
+      pilotId: this.#pilotId,
     });
   }
 

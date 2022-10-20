@@ -1,18 +1,22 @@
 // @flow
 
 import * as THREE from "three";
-import {Animate} from "../../../animation/animate";
-import {onResizePerspectiveCamera} from "../../../camera/resize";
-import type {Update} from "../../../game-loop/update";
-import type {Stream, Unsubscriber} from "../../../stream/stream";
-import {getViewPortHeight, getViewPortWidth} from "../../../view-port/view-port-size";
-import type {Resize} from "../../../window/resize";
-import {lookAt} from "./animation/look-at";
-import {move} from "./animation/move";
-import {engage} from "./engauge";
-import {createInitialValue} from "./model/initial-value";
-import type {Battle3DCameraModel} from "./model/model";
-import type {Position} from './position';
+
+import { Animate } from "../../../animation/animate";
+import { onResizePerspectiveCamera } from "../../../camera/resize";
+import type { Update } from "../../../game-loop/update";
+import type { Stream, Unsubscriber } from "../../../stream/stream";
+import {
+  getViewPortHeight,
+  getViewPortWidth,
+} from "../../../view-port/view-port-size";
+import type { Resize } from "../../../window/resize";
+import { lookAt } from "./animation/look-at";
+import { move } from "./animation/move";
+import { engage } from "./engauge";
+import { createInitialValue } from "./model/initial-value";
+import type { Battle3DCameraModel } from "./model/model";
+import type { Position } from "./position";
 
 // TODO カメラ位置、カメラ視点をコンストラクタから渡す
 /** 戦闘シーン3Dレイヤー用カメラ */
@@ -35,9 +39,9 @@ export class TDCamera {
       update.subscribe(() => {
         this.#update();
       }),
-      resize.subscribe(action => {
+      resize.subscribe((action) => {
         this.#resize(action);
-      })
+      }),
     ];
   }
 
@@ -45,9 +49,9 @@ export class TDCamera {
    * デストラクタ
    */
   destructor(): void {
-    this.#unsubscriber.forEach(v => {
+    this.#unsubscriber.forEach((v) => {
       v.unsubscribe();
-    })
+    });
   }
 
   /**

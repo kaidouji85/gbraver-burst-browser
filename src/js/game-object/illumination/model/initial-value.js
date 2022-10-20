@@ -1,6 +1,6 @@
 // @flow
 
-import type {IlluminationModel} from "./illumination-model";
+import type { IlluminationModel } from "./illumination-model";
 
 /**
  * ステージ全体照明モデルの初期値を生成する

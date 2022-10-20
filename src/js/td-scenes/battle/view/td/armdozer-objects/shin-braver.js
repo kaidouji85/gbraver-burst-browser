@@ -1,14 +1,18 @@
 // @flow
 
-import type {Player, PlayerId} from "gbraver-burst-core";
+import type { Player, PlayerId } from "gbraver-burst-core";
 import * as THREE from "three";
-import type {GameObjectAction} from "../../../../../game-object/action/game-object-action";
-import type {ArmDozerSprite} from "../../../../../game-object/armdozer/armdozer-sprite";
-import {EnemyShinBraver, PlayerShinBraver} from "../../../../../game-object/armdozer/shin-braver";
-import {ShinBraver} from "../../../../../game-object/armdozer/shin-braver/shin-braver";
-import type {Resources} from "../../../../../resource";
-import type {Stream} from "../../../../../stream/stream";
-import type {TDArmdozerObjects} from "./armdozer-objects";
+
+import type { GameObjectAction } from "../../../../../game-object/action/game-object-action";
+import type { ArmDozerSprite } from "../../../../../game-object/armdozer/armdozer-sprite";
+import {
+  EnemyShinBraver,
+  PlayerShinBraver,
+} from "../../../../../game-object/armdozer/shin-braver";
+import { ShinBraver } from "../../../../../game-object/armdozer/shin-braver/shin-braver";
+import type { Resources } from "../../../../../resource";
+import type { Stream } from "../../../../../stream/stream";
+import type { TDArmdozerObjects } from "./armdozer-objects";
 
 /**
  * 3Dレイヤー シンブレイバー 3Dレイヤー フィールド
@@ -58,9 +62,7 @@ export class ShinBraverTD implements ShinBraverTDField, TDArmdozerObjects {
    * @return シーンに追加するオブジェクト
    */
   getObject3Ds(): typeof THREE.Object3D[] {
-    return [
-      this.shinBraver.getObject3D()
-    ];
+    return [this.shinBraver.getObject3D()];
   }
 }
 
@@ -72,9 +74,13 @@ export class ShinBraverTD implements ShinBraverTDField, TDArmdozerObjects {
  * @param state プレイヤー情報
  * @return 生成結果
  */
-export function playerShinBraverTD(resources: Resources, gameObjectAction: Stream<GameObjectAction>, state: Player): ShinBraverTD {
+export function playerShinBraverTD(
+  resources: Resources,
+  gameObjectAction: Stream<GameObjectAction>,
+  state: Player
+): ShinBraverTD {
   return new ShinBraverTD(state.playerId, {
-    shinBraver: PlayerShinBraver(resources, gameObjectAction)
+    shinBraver: PlayerShinBraver(resources, gameObjectAction),
   });
 }
 
@@ -86,8 +92,12 @@ export function playerShinBraverTD(resources: Resources, gameObjectAction: Strea
  * @param state プレイヤー情報
  * @return 生成結果
  */
-export function enemyShinBraverTD(resources: Resources, gameObjectAction: Stream<GameObjectAction>, state: Player): ShinBraverTD {
+export function enemyShinBraverTD(
+  resources: Resources,
+  gameObjectAction: Stream<GameObjectAction>,
+  state: Player
+): ShinBraverTD {
   return new ShinBraverTD(state.playerId, {
-    shinBraver: EnemyShinBraver(resources, gameObjectAction)
+    shinBraver: EnemyShinBraver(resources, gameObjectAction),
   });
 }

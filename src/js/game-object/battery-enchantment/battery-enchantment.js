@@ -1,16 +1,17 @@
 // @flow
 
-import * as THREE from 'three';
-import {Animate} from "../../animation/animate";
-import type {PreRender} from "../../game-loop/pre-render";
-import type {Resources} from "../../resource";
-import type {Stream, Unsubscriber} from "../../stream/stream";
-import type {GameObjectAction} from "../action/game-object-action";
-import {popUp} from "./animation/pop-up";
-import type {BatteryEnchantmentModel} from "./model/battery-enchantment-model";
-import {createInitialValue} from "./model/initial-value";
-import {BatteryEnchantmentSounds} from "./sounds/battery-enchantment-sounds";
-import type {BatteryEnchantmentView} from "./view/battery-enchantment-view";
+import * as THREE from "three";
+
+import { Animate } from "../../animation/animate";
+import type { PreRender } from "../../game-loop/pre-render";
+import type { Resources } from "../../resource";
+import type { Stream, Unsubscriber } from "../../stream/stream";
+import type { GameObjectAction } from "../action/game-object-action";
+import { popUp } from "./animation/pop-up";
+import type { BatteryEnchantmentModel } from "./model/battery-enchantment-model";
+import { createInitialValue } from "./model/initial-value";
+import { BatteryEnchantmentSounds } from "./sounds/battery-enchantment-sounds";
+import type { BatteryEnchantmentView } from "./view/battery-enchantment-view";
 
 /**
  * バッテリー増強
@@ -28,14 +29,18 @@ export class BatteryEnchantment {
    * @param resources リソース管理オブジェクト
    * @param gameObjectAction ゲームオブジェクトアクション
    */
-  constructor(view: BatteryEnchantmentView, resources: Resources, gameObjectAction: Stream<GameObjectAction>) {
+  constructor(
+    view: BatteryEnchantmentView,
+    resources: Resources,
+    gameObjectAction: Stream<GameObjectAction>
+  ) {
     this.#model = createInitialValue();
     this.#view = view;
     this.#sounds = new BatteryEnchantmentSounds(resources);
-    this.#unsubscriber = gameObjectAction.subscribe(action => {
-      if (action.type === 'Update') {
+    this.#unsubscriber = gameObjectAction.subscribe((action) => {
+      if (action.type === "Update") {
         this.#onUpdate();
-      } else if (action.type === 'PreRender') {
+      } else if (action.type === "PreRender") {
         this.#onPreRender(action);
       }
     });
@@ -49,7 +54,7 @@ export class BatteryEnchantment {
 
   /**
    * ポップアップ
-   * 
+   *
    * @return アニメーション
    */
   popUp(): Animate {

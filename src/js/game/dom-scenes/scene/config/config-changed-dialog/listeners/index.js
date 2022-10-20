@@ -1,11 +1,11 @@
 // @flow
-import {pushDOMStream} from "../../../../../../dom/event-stream";
-import type {Unsubscriber} from "../../../../../../stream/stream";
-import type {ConfigChangedDialogProps} from "../props";
-import {onAcceptPush} from "./on-accept-push";
-import {onBackGroundPush} from "./on-back-ground-push";
-import {onCloserPush} from "./on-closer-push";
-import {onDiscardPush} from "./on-discard-push";
+import { pushDOMStream } from "../../../../../../dom/event-stream";
+import type { Unsubscriber } from "../../../../../../stream/stream";
+import type { ConfigChangedDialogProps } from "../props";
+import { onAcceptPush } from "./on-accept-push";
+import { onBackGroundPush } from "./on-back-ground-push";
+import { onCloserPush } from "./on-closer-push";
+import { onDiscardPush } from "./on-discard-push";
 
 /**
  * ダイアログにイベントリスナをバインドする
@@ -13,19 +13,21 @@ import {onDiscardPush} from "./on-discard-push";
  * @param props 画面プロパティ
  * @return バインドしたイベントリスナのアンサブスクライバ
  */
-export function bindEventListeners(props: ConfigChangedDialogProps): Unsubscriber[] {
+export function bindEventListeners(
+  props: ConfigChangedDialogProps
+): Unsubscriber[] {
   return [
-    pushDOMStream(props.backGround).subscribe(action => {
+    pushDOMStream(props.backGround).subscribe((action) => {
       onBackGroundPush(props, action);
     }),
-    pushDOMStream(props.closer).subscribe(action => {
+    pushDOMStream(props.closer).subscribe((action) => {
       onCloserPush(props, action);
     }),
-    pushDOMStream(props.discard).subscribe(action => {
-      onDiscardPush(props, action)
+    pushDOMStream(props.discard).subscribe((action) => {
+      onDiscardPush(props, action);
     }),
-    pushDOMStream(props.accept).subscribe(action => {
+    pushDOMStream(props.accept).subscribe((action) => {
       onAcceptPush(props, action);
-    })
-  ]
+    }),
+  ];
 }

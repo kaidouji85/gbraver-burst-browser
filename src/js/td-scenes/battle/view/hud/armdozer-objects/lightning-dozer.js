@@ -1,16 +1,17 @@
 // @flow
 
-import type {Player, PlayerId} from "gbraver-burst-core";
+import type { Player, PlayerId } from "gbraver-burst-core";
 import * as THREE from "three";
-import type {GameObjectAction} from "../../../../../game-object/action/game-object-action";
+
+import type { GameObjectAction } from "../../../../../game-object/action/game-object-action";
 import {
   enemyLightningiDozerCutIn,
-  playerLightningDozerCutIn
+  playerLightningDozerCutIn,
 } from "../../../../../game-object/cut-in/lightning-dozer";
-import {LightningDozerCutIn} from "../../../../../game-object/cut-in/lightning-dozer/lightning-dozer-cutin";
-import type {Resources} from "../../../../../resource";
-import type {Stream} from "../../../../../stream/stream";
-import type {HUDArmdozerObjects} from "./hud-armdozer-ibjects";
+import { LightningDozerCutIn } from "../../../../../game-object/cut-in/lightning-dozer/lightning-dozer-cutin";
+import type { Resources } from "../../../../../resource";
+import type { Stream } from "../../../../../stream/stream";
+import type { HUDArmdozerObjects } from "./hud-armdozer-ibjects";
 
 /**
  * HUDレイヤー ライトニングドーザ固有オブジェクト フィールド
@@ -22,7 +23,9 @@ interface LightningDozerHUDField {
 /**
  * HUDレイヤー ライトニングドーザ固有オブジェクト
  */
-export class LightningDozerHUD implements HUDArmdozerObjects, LightningDozerHUDField{
+export class LightningDozerHUD
+  implements HUDArmdozerObjects, LightningDozerHUDField
+{
   playerId: PlayerId;
   cutIn: LightningDozerCutIn;
 
@@ -50,9 +53,7 @@ export class LightningDozerHUD implements HUDArmdozerObjects, LightningDozerHUDF
    * @return シーンに追加するオブジェクト
    */
   getObject3Ds(): typeof THREE.Object3D[] {
-    return [
-      this.cutIn.getObject3D()
-    ];
+    return [this.cutIn.getObject3D()];
   }
 }
 
@@ -64,9 +65,13 @@ export class LightningDozerHUD implements HUDArmdozerObjects, LightningDozerHUDF
  * @param state プレイヤー情報
  * @return 生成結果
  */
-export function playerLightningDozerHUD(resources: Resources, gameObjectAction: Stream<GameObjectAction>, state: Player): LightningDozerHUD {
+export function playerLightningDozerHUD(
+  resources: Resources,
+  gameObjectAction: Stream<GameObjectAction>,
+  state: Player
+): LightningDozerHUD {
   return new LightningDozerHUD(state.playerId, {
-    cutIn: playerLightningDozerCutIn(resources, gameObjectAction)
+    cutIn: playerLightningDozerCutIn(resources, gameObjectAction),
   });
 }
 
@@ -78,8 +83,12 @@ export function playerLightningDozerHUD(resources: Resources, gameObjectAction: 
  * @param state プレイヤー情報
  * @return 生成結果
  */
-export function enemyLightningDozerHUD(resources: Resources, gameObjectAction: Stream<GameObjectAction>, state: Player): LightningDozerHUD {
+export function enemyLightningDozerHUD(
+  resources: Resources,
+  gameObjectAction: Stream<GameObjectAction>,
+  state: Player
+): LightningDozerHUD {
   return new LightningDozerHUD(state.playerId, {
-    cutIn: enemyLightningiDozerCutIn(resources, gameObjectAction)
+    cutIn: enemyLightningiDozerCutIn(resources, gameObjectAction),
   });
 }

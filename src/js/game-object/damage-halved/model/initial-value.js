@@ -1,5 +1,5 @@
 // @flow
-import type {DamageHalvedModel} from "./damage-halved-model";
+import type { DamageHalvedModel } from "./damage-halved-model";
 
 /**
  * モデルの初期値を生成する
@@ -7,5 +7,5 @@ import type {DamageHalvedModel} from "./damage-halved-model";
  * @return 初期値
  */
 export function createInitialValue(): DamageHalvedModel {
-  return {opacity: 0, scale: 1};
+  return { opacity: 0, scale: 1 };
 }

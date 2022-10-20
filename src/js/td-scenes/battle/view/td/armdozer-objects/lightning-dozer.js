@@ -1,15 +1,19 @@
 // @flow
 
-import type {Player, PlayerId} from "gbraver-burst-core";
+import type { Player, PlayerId } from "gbraver-burst-core";
 import * as THREE from "three";
-import type {GameObjectAction} from "../../../../../game-object/action/game-object-action";
-import type {ArmDozerSprite} from "../../../../../game-object/armdozer/armdozer-sprite";
-import {EnemyLightningDozer, PlayerLightningDozer} from "../../../../../game-object/armdozer/lightning-dozer";
-import {LightningDozer} from "../../../../../game-object/armdozer/lightning-dozer/lightning-dozer";
-import {LightningBarrierGameEffect} from "../../../../../game-object/barrier/lightning/lightning-barrier";
-import type {Resources} from "../../../../../resource";
-import type {Stream} from "../../../../../stream/stream";
-import type {TDArmdozerObjects} from "./armdozer-objects";
+
+import type { GameObjectAction } from "../../../../../game-object/action/game-object-action";
+import type { ArmDozerSprite } from "../../../../../game-object/armdozer/armdozer-sprite";
+import {
+  EnemyLightningDozer,
+  PlayerLightningDozer,
+} from "../../../../../game-object/armdozer/lightning-dozer";
+import { LightningDozer } from "../../../../../game-object/armdozer/lightning-dozer/lightning-dozer";
+import { LightningBarrierGameEffect } from "../../../../../game-object/barrier/lightning/lightning-barrier";
+import type { Resources } from "../../../../../resource";
+import type { Stream } from "../../../../../stream/stream";
+import type { TDArmdozerObjects } from "./armdozer-objects";
 
 /**
  * 3Dレイヤー ライトニングドーザ 固有オブジェクト フィールド
@@ -25,7 +29,9 @@ interface LightningDozerTDField {
 /**
  * 3Dレイヤー ライトニングドーザ 固有オブジェクト 実装
  */
-export class LightningDozerTD implements TDArmdozerObjects, LightningDozerTDField {
+export class LightningDozerTD
+  implements TDArmdozerObjects, LightningDozerTDField
+{
   playerId: PlayerId;
   lightningDozer: LightningDozer;
   lightningBarrier: LightningBarrierGameEffect;
@@ -68,9 +74,7 @@ export class LightningDozerTD implements TDArmdozerObjects, LightningDozerTDFiel
    * @return シーンに追加するオブジェクト
    */
   getObject3Ds(): typeof THREE.Object3D[] {
-    return [
-      this.lightningDozer.getObject3D()
-    ];
+    return [this.lightningDozer.getObject3D()];
   }
 }
 
@@ -82,10 +86,17 @@ export class LightningDozerTD implements TDArmdozerObjects, LightningDozerTDFiel
  * @param state プレイヤー情報
  * @return 生成結果
  */
-export function playerLightningDozerTD(resources: Resources, gameObjectAction: Stream<GameObjectAction>, state: Player): LightningDozerTD {
+export function playerLightningDozerTD(
+  resources: Resources,
+  gameObjectAction: Stream<GameObjectAction>,
+  state: Player
+): LightningDozerTD {
   return new LightningDozerTD(state.playerId, {
     lightningDozer: PlayerLightningDozer(resources, gameObjectAction),
-    lightningBarrier: new LightningBarrierGameEffect(resources, gameObjectAction)
+    lightningBarrier: new LightningBarrierGameEffect(
+      resources,
+      gameObjectAction
+    ),
   });
 }
 
@@ -97,9 +108,16 @@ export function playerLightningDozerTD(resources: Resources, gameObjectAction: S
  * @param state プレイヤー情報
  * @return 生成結果
  */
-export function enemyLightningDozerTD(resources: Resources, gameObjectAction: Stream<GameObjectAction>, state: Player): LightningDozerTD {
+export function enemyLightningDozerTD(
+  resources: Resources,
+  gameObjectAction: Stream<GameObjectAction>,
+  state: Player
+): LightningDozerTD {
   return new LightningDozerTD(state.playerId, {
     lightningDozer: EnemyLightningDozer(resources, gameObjectAction),
-    lightningBarrier: new LightningBarrierGameEffect(resources, gameObjectAction)
+    lightningBarrier: new LightningBarrierGameEffect(
+      resources,
+      gameObjectAction
+    ),
   });
 }

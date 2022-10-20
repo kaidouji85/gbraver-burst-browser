@@ -1,11 +1,11 @@
 // @flow
 
-import type {Resources} from "../../../resource";
-import type {Stream} from "../../../stream/stream";
-import type {GameObjectAction} from "../../action/game-object-action";
-import {TsubasaCutIn} from "./tsubasa";
-import {EnemyTsubasaView} from "./view/enemy-tsubasa-view";
-import {PlayerTsubasaView} from "./view/player-tsubasa-view";
+import type { Resources } from "../../../resource";
+import type { Stream } from "../../../stream/stream";
+import type { GameObjectAction } from "../../action/game-object-action";
+import { TsubasaCutIn } from "./tsubasa";
+import { EnemyTsubasaView } from "./view/enemy-tsubasa-view";
+import { PlayerTsubasaView } from "./view/player-tsubasa-view";
 
 /**
  * プレイヤー側 ツバサ カットイン
@@ -14,7 +14,10 @@ import {PlayerTsubasaView} from "./view/player-tsubasa-view";
  * @param gameObjectAction ゲームオブジェクトアクション
  * @return ツバサ カットイン
  */
-export function playerTsubasaCutIn(resources: Resources, gameObjectAction: Stream<GameObjectAction>): TsubasaCutIn {
+export function playerTsubasaCutIn(
+  resources: Resources,
+  gameObjectAction: Stream<GameObjectAction>
+): TsubasaCutIn {
   const view = new PlayerTsubasaView(resources);
   return new TsubasaCutIn(view, resources, gameObjectAction);
 }
@@ -26,7 +29,10 @@ export function playerTsubasaCutIn(resources: Resources, gameObjectAction: Strea
  * @param gameObjectAction ゲームオブジェクトアクション
  * @return ツバサ カットイン
  */
-export function enemyTsubasaCutIn(resources: Resources, gameObjectAction: Stream<GameObjectAction>): TsubasaCutIn {
+export function enemyTsubasaCutIn(
+  resources: Resources,
+  gameObjectAction: Stream<GameObjectAction>
+): TsubasaCutIn {
   const view = new EnemyTsubasaView(resources);
   return new TsubasaCutIn(view, resources, gameObjectAction);
 }

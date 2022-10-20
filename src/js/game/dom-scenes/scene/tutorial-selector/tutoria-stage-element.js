@@ -1,19 +1,22 @@
 // @flow
-import {pop} from "../../../../dom/animation";
-import {pushDOMStream} from "../../../../dom/event-stream";
-import type {Resources} from "../../../../resource";
-import type {SoundResource} from "../../../../resource/sound";
-import {createEmptySoundResource, SOUND_IDS} from "../../../../resource/sound";
-import {map} from "../../../../stream/operator";
-import type {Stream} from "../../../../stream/stream";
-import {domUuid} from "../../../../uuid/dom-uuid";
-import type {TutorialStageID} from "../../../tutorial-stages";
+import { pop } from "../../../../dom/animation";
+import { pushDOMStream } from "../../../../dom/event-stream";
+import type { Resources } from "../../../../resource";
+import type { SoundResource } from "../../../../resource/sound";
+import {
+  createEmptySoundResource,
+  SOUND_IDS,
+} from "../../../../resource/sound";
+import { map } from "../../../../stream/operator";
+import type { Stream } from "../../../../stream/stream";
+import { domUuid } from "../../../../uuid/dom-uuid";
+import type { TutorialStageID } from "../../../tutorial-stages";
 
 /** ルートHTML class属性 */
-const ROOT_CLASS = 'tutorial-stage';
+const ROOT_CLASS = "tutorial-stage";
 
 /** data-idを集めたもの */
-type DataIDs = {selectButton: string};
+type DataIDs = { selectButton: string };
 
 /**
  * ルート要素のinnerHTML
@@ -30,7 +33,7 @@ function rootInnerHTML(ids: DataIDs, title: string): string {
 }
 
 /** ルート要素の子孫要素 */
-type Elements = {selectButton: HTMLElement};
+type Elements = { selectButton: HTMLElement };
 
 /**
  * ルート要素から子孫要素を抽出する
@@ -40,8 +43,10 @@ type Elements = {selectButton: HTMLElement};
  * @return 抽出結果
  */
 function extractElements(root: HTMLElement, ids: DataIDs): Elements {
-  const selectButton = root.querySelector(`[data-id="${ids.selectButton}"]`) ?? document.createElement('div');
-  return {selectButton};
+  const selectButton =
+    root.querySelector(`[data-id="${ids.selectButton}"]`) ??
+    document.createElement("div");
+  return { selectButton };
 }
 
 /** チュートリアルステージ情報 */
@@ -49,7 +54,7 @@ export type TutorialStage = {
   /** チュートリアルステージID */
   id: TutorialStageID,
   /** チュートリアルステージタイトル */
-  title: string
+  title: string,
 };
 
 /** チュートリアルステージ選択情報 */
@@ -79,21 +84,25 @@ export class TutorialStageElement {
    * @param level ステージレベル
    */
   constructor(resources: Resources, stage: TutorialStage, level: number) {
-    const ids = {selectButton: domUuid()};
+    const ids = { selectButton: domUuid() };
     this.id = stage.id;
     this.level = level;
-    this.#pushButton = resources.sounds.find(v => v.id === SOUND_IDS.PUSH_BUTTON) ?? createEmptySoundResource();
+    this.#pushButton =
+      resources.sounds.find((v) => v.id === SOUND_IDS.PUSH_BUTTON) ??
+      createEmptySoundResource();
 
-    this.#root = document.createElement('li');
+    this.#root = document.createElement("li");
     this.#root.className = ROOT_CLASS;
     this.#root.innerHTML = rootInnerHTML(ids, stage.title);
     const elements = extractElements(this.#root, ids);
     this.#selectButton = elements.selectButton;
 
-    this.#select = pushDOMStream(this.#selectButton).chain(map(action => {
-      action.event.preventDefault();
-      action.event.stopPropagation();
-    }));
+    this.#select = pushDOMStream(this.#selectButton).chain(
+      map((action) => {
+        action.event.preventDefault();
+        action.event.stopPropagation();
+      })
+    );
   }
 
   /**

@@ -1,20 +1,24 @@
 // @flow
 
-import type {Player, PlayerId} from "gbraver-burst-core";
+import type { Player, PlayerId } from "gbraver-burst-core";
 import * as THREE from "three";
-import type {GameObjectAction} from "../../../../../game-object/action/game-object-action";
-import {enemyShinyaCutIn, playerShinyaCutIn} from "../../../../../game-object/cut-in/shinya";
-import {ShinyaCutIn} from "../../../../../game-object/cut-in/shinya/shinya";
-import type {Resources} from "../../../../../resource";
-import type {Stream} from "../../../../../stream/stream";
-import type {HUDPilotObjects} from "./hud-pilot-objects";
+
+import type { GameObjectAction } from "../../../../../game-object/action/game-object-action";
+import {
+  enemyShinyaCutIn,
+  playerShinyaCutIn,
+} from "../../../../../game-object/cut-in/shinya";
+import { ShinyaCutIn } from "../../../../../game-object/cut-in/shinya/shinya";
+import type { Resources } from "../../../../../resource";
+import type { Stream } from "../../../../../stream/stream";
+import type { HUDPilotObjects } from "./hud-pilot-objects";
 
 /**
  * コンストラクタのパラメータ
  */
 type Params = {
   playerId: PlayerId,
-  cutIn: ShinyaCutIn
+  cutIn: ShinyaCutIn,
 };
 
 /**
@@ -47,9 +51,7 @@ export class ShinyaHUD implements HUDPilotObjects {
    * @return シーンに追加するオブジェクト
    */
   getObject3Ds(): typeof THREE.Object3D[] {
-    return [
-      this.cutIn.getObject3D()
-    ];
+    return [this.cutIn.getObject3D()];
   }
 }
 
@@ -61,11 +63,15 @@ export class ShinyaHUD implements HUDPilotObjects {
  * @param state プレイヤーの状態
  * @return シンヤHUD
  */
-export function playerShinyaHUD(resources: Resources, gameObjectAction: Stream<GameObjectAction>, state: Player): ShinyaHUD {
-  return new ShinyaHUD( {
+export function playerShinyaHUD(
+  resources: Resources,
+  gameObjectAction: Stream<GameObjectAction>,
+  state: Player
+): ShinyaHUD {
+  return new ShinyaHUD({
     playerId: state.playerId,
-    cutIn: playerShinyaCutIn(resources, gameObjectAction)
-  })
+    cutIn: playerShinyaCutIn(resources, gameObjectAction),
+  });
 }
 
 /**
@@ -76,9 +82,13 @@ export function playerShinyaHUD(resources: Resources, gameObjectAction: Stream<G
  * @param state プレイヤーの状態
  * @return シンヤHUD
  */
-export function enemyShinyaHUD(resources: Resources, gameObjectAction: Stream<GameObjectAction>, state: Player): ShinyaHUD {
-  return new ShinyaHUD( {
+export function enemyShinyaHUD(
+  resources: Resources,
+  gameObjectAction: Stream<GameObjectAction>,
+  state: Player
+): ShinyaHUD {
+  return new ShinyaHUD({
     playerId: state.playerId,
-    cutIn: enemyShinyaCutIn(resources, gameObjectAction)
-  })
+    cutIn: enemyShinyaCutIn(resources, gameObjectAction),
+  });
 }

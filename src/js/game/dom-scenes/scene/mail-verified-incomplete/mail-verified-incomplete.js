@@ -1,16 +1,20 @@
 // @flow
-import {pop} from "../../../../dom/animation";
-import {escapeHTML} from "../../../../dom/escape-html";
-import type {PushDOM} from "../../../../dom/event-stream";
-import {pushDOMStream} from "../../../../dom/event-stream";
-import {Exclusive} from "../../../../exclusive/exclusive";
-import type {Stream, StreamSource, Unsubscriber} from "../../../../stream/stream";
-import {createStreamSource} from "../../../../stream/stream";
-import {domUuid} from "../../../../uuid/dom-uuid";
-import type {DOMScene} from "../../dom-scene";
+import { pop } from "../../../../dom/animation";
+import { escapeHTML } from "../../../../dom/escape-html";
+import type { PushDOM } from "../../../../dom/event-stream";
+import { pushDOMStream } from "../../../../dom/event-stream";
+import { Exclusive } from "../../../../exclusive/exclusive";
+import type {
+  Stream,
+  StreamSource,
+  Unsubscriber,
+} from "../../../../stream/stream";
+import { createStreamSource } from "../../../../stream/stream";
+import { domUuid } from "../../../../uuid/dom-uuid";
+import type { DOMScene } from "../../dom-scene";
 
 /** ルート要素 class属性 */
-const ROOT_CLASS = 'mail-verified-incomplete';
+const ROOT_CLASS = "mail-verified-incomplete";
 
 /** data-idを集めたもの */
 type DataIDs = {
@@ -56,9 +60,13 @@ type Elements = {
  * @return 抽出結果
  */
 function extractElements(root: HTMLElement, ids: DataIDs): Elements {
-  const gotoTitle = root.querySelector(`[data-id="${ids.gotoTitle}"]`) ?? document.createElement('div');
-  const reload = root.querySelector(`[data-id="${ids.reload}"]`) ?? document.createElement('div');
-  return {gotoTitle, reload};
+  const gotoTitle =
+    root.querySelector(`[data-id="${ids.gotoTitle}"]`) ??
+    document.createElement("div");
+  const reload =
+    root.querySelector(`[data-id="${ids.reload}"]`) ??
+    document.createElement("div");
+  return { gotoTitle, reload };
 }
 
 /** メール認証未完了画面 */
@@ -77,8 +85,8 @@ export class MailVerifiedIncomplete implements DOMScene {
    * @param mailAddress 認証メール送信先アドレス
    */
   constructor(mailAddress: string): void {
-    const ids = {gotoTitle: domUuid(), reload: domUuid()};
-    this.#root = document.createElement('div');
+    const ids = { gotoTitle: domUuid(), reload: domUuid() };
+    this.#root = document.createElement("div");
     this.#root.className = ROOT_CLASS;
     this.#root.innerHTML = rootInnerHTML(ids, mailAddress);
 
@@ -87,10 +95,10 @@ export class MailVerifiedIncomplete implements DOMScene {
     this.#reloadButton = elements.reload;
 
     this.#unsubscribers = [
-      pushDOMStream(this.#gotoTitleButton).subscribe(action => {
+      pushDOMStream(this.#gotoTitleButton).subscribe((action) => {
         this.#onGotoTitleButtonPush(action);
       }),
-      pushDOMStream(this.#reloadButton).subscribe(action => {
+      pushDOMStream(this.#reloadButton).subscribe((action) => {
         this.#onReloadButtonPush(action);
       }),
     ];
@@ -102,7 +110,7 @@ export class MailVerifiedIncomplete implements DOMScene {
 
   /** @override */
   destructor(): void {
-    this.#unsubscribers.forEach(v => {
+    this.#unsubscribers.forEach((v) => {
       v.unsubscribe();
     });
   }

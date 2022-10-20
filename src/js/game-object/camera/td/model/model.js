@@ -6,12 +6,12 @@ export type Battle3DCameraModel = {
   position: {
     x: number,
     y: number,
-    z: number
+    z: number,
   },
   // カメラの注視点
   target: {
     x: number,
     y: number,
-    z: number
-  }
+    z: number,
+  },
 };

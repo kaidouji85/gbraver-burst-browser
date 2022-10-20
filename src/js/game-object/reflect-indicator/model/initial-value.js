@@ -1,6 +1,6 @@
 // @flow
 
-import type {ReflectIndocatorModel} from "./reflect-indocator-model";
+import type { ReflectIndocatorModel } from "./reflect-indocator-model";
 
 /**
  * モデルの初期値を生成する

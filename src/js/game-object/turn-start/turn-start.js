@@ -1,16 +1,17 @@
 // @flow
 
-import * as THREE from 'three';
-import {Animate} from "../../animation/animate";
-import type {PreRender} from "../../game-loop/pre-render";
-import type {Resources} from "../../resource";
-import type {Stream, Unsubscriber} from "../../stream/stream";
-import type {GameObjectAction} from "../action/game-object-action";
-import {hidden} from './animation/hidden';
-import {show} from './animation/show';
-import {createInitialValue} from "./model/initial-value";
-import type {TurnStartModel} from "./model/turn-start-model";
-import type {TurnStartView} from "./view/turn-start-view";
+import * as THREE from "three";
+
+import { Animate } from "../../animation/animate";
+import type { PreRender } from "../../game-loop/pre-render";
+import type { Resources } from "../../resource";
+import type { Stream, Unsubscriber } from "../../stream/stream";
+import type { GameObjectAction } from "../action/game-object-action";
+import { hidden } from "./animation/hidden";
+import { show } from "./animation/show";
+import { createInitialValue } from "./model/initial-value";
+import type { TurnStartModel } from "./model/turn-start-model";
+import type { TurnStartView } from "./view/turn-start-view";
 
 /**
  * ターンスタート
@@ -27,11 +28,15 @@ export class TurnStart {
    * @param resources リソース管理オブジェクト
    * @param gameObjectAction ゲームオブジェクトアクション
    */
-  constructor(view: TurnStartView, resources: Resources, gameObjectAction: Stream<GameObjectAction>) {
+  constructor(
+    view: TurnStartView,
+    resources: Resources,
+    gameObjectAction: Stream<GameObjectAction>
+  ) {
     this.#model = createInitialValue();
     this.#view = view;
-    this.#unsubscriber = gameObjectAction.subscribe(action => {
-      if (action.type === 'PreRender') {
+    this.#unsubscriber = gameObjectAction.subscribe((action) => {
+      if (action.type === "PreRender") {
         this.#onPreRender(action);
       }
     });

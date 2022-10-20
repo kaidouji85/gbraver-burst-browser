@@ -1,11 +1,19 @@
 // @flow
-import {playerUuid} from "../../uuid/player";
-import type {DifficultySelectionComplete} from "../game-actions";
-import type {GameProps} from "../game-props";
-import type {DifficultySelect, NPCBattle} from "../in-progress/npc-battle";
-import {createNPCBattleState, getCurrentNPCStage, getNPCStageLevel} from "../npc-battle";
-import {DefaultStage, DefaultStages, NPCBattleCourses} from "../npc-battle-courses";
-import {startNPCBattleStage} from "./start-npc-battle-stage";
+import { playerUuid } from "../../uuid/player";
+import type { DifficultySelectionComplete } from "../game-actions";
+import type { GameProps } from "../game-props";
+import type { DifficultySelect, NPCBattle } from "../in-progress/npc-battle";
+import {
+  createNPCBattleState,
+  getCurrentNPCStage,
+  getNPCStageLevel,
+} from "../npc-battle";
+import {
+  DefaultStage,
+  DefaultStages,
+  NPCBattleCourses,
+} from "../npc-battle-courses";
+import { startNPCBattleStage } from "./start-npc-battle-stage";
 
 /**
  * 難易度選択完了時のイベント
@@ -15,18 +23,36 @@ import {startNPCBattleStage} from "./start-npc-battle-stage";
  * @param action アクション
  * @return 処理が完了したら発火するPromise
  */
-export async function onDifficultySelectionComplete(props: GameProps, action: DifficultySelectionComplete): Promise<void> {
-  if (!(props.inProgress.type === 'NPCBattle' && props.inProgress.subFlow.type === 'DifficultySelect')) {
+export async function onDifficultySelectionComplete(
+  props: GameProps,
+  action: DifficultySelectionComplete
+): Promise<void> {
+  if (
+    !(
+      props.inProgress.type === "NPCBattle" &&
+      props.inProgress.subFlow.type === "DifficultySelect"
+    )
+  ) {
     return;
   }
 
   const npcBattle: NPCBattle = props.inProgress;
   const difficultySelect: DifficultySelect = props.inProgress.subFlow;
-  const {armdozerId, pilotId} = difficultySelect;
-  const stages = NPCBattleCourses
-    .find(v => v.armdozerId === armdozerId && v.difficulty === action.difficulty)?.stages ?? DefaultStages;
-  const npcBattleState = createNPCBattleState(playerUuid() ,armdozerId, pilotId, stages);
-  props.inProgress = {...npcBattle, subFlow: {type: 'PlayingNPCBattle', state: npcBattleState}};
+  const { armdozerId, pilotId } = difficultySelect;
+  const stages =
+    NPCBattleCourses.find(
+      (v) => v.armdozerId === armdozerId && v.difficulty === action.difficulty
+    )?.stages ?? DefaultStages;
+  const npcBattleState = createNPCBattleState(
+    playerUuid(),
+    armdozerId,
+    pilotId,
+    stages
+  );
+  props.inProgress = {
+    ...npcBattle,
+    subFlow: { type: "PlayingNPCBattle", state: npcBattleState },
+  };
   const stage = getCurrentNPCStage(npcBattleState) ?? DefaultStage;
   const level = getNPCStageLevel(npcBattleState);
   await startNPCBattleStage(props, npcBattleState.player, stage, level);

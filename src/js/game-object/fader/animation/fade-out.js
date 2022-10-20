@@ -1,9 +1,9 @@
 // @flow
 
-import {Animate} from "../../../animation/animate";
-import {process} from "../../../animation/process";
-import {tween} from "../../../animation/tween";
-import type {FaderModel} from "../model/fader-model";
+import { Animate } from "../../../animation/animate";
+import { process } from "../../../animation/process";
+import { tween } from "../../../animation/tween";
+import type { FaderModel } from "../model/fader-model";
 
 /**
  * フェードアウト
@@ -14,7 +14,5 @@ import type {FaderModel} from "../model/fader-model";
 export function fadeOut(model: FaderModel): Animate {
   return process(() => {
     model.opacity = 0;
-  }).chain(tween(model, t => t
-    .to({opacity: 1}, 500)
-  ));
+  }).chain(tween(model, (t) => t.to({ opacity: 1 }, 500)));
 }

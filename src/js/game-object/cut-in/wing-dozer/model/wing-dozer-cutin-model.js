@@ -3,9 +3,7 @@
 /**
  * アニメーションタイプ
  */
-export type AnimationType =
-  'BURST_UP' |
-  'BURST_DOWN';
+export type AnimationType = "BURST_UP" | "BURST_DOWN";
 
 /**
  * ウィングドーザカットイン モデル
@@ -16,7 +14,7 @@ export type WingDozerCutInModel = {
     /** アニメーションタイプ */
     type: AnimationType,
     /** 0〜1で指定するアニメーションフレーム */
-    frame: number
+    frame: number,
   },
 
   /** トラッキング */
@@ -28,4 +26,4 @@ export type WingDozerCutInModel = {
   opacity: number,
   /** 拡大率 */
   scale: number,
-}
+};

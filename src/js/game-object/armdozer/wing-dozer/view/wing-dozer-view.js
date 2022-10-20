@@ -1,7 +1,8 @@
 // @flow
 
-import * as THREE from 'three';
-import type {WingDozerModel} from "../model/wing-dozer-model";
+import * as THREE from "three";
+
+import type { WingDozerModel } from "../model/wing-dozer-model";
 
 /**
  * ウィングドーザ ビュー
@@ -32,7 +33,6 @@ export interface WingDozerView {
    * @param camera カメラ
    */
   lookAt(camera: typeof THREE.Camera): void;
-
 
   /**
    * スプライト配下のオブジェクトを追加する

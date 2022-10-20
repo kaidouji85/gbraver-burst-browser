@@ -1,20 +1,23 @@
 // @flow
 
-import {LoginDialog} from '../src/js/game/dom-dialogs/login/login-dialog'
-import type {DOMStubStory} from "./stub/dom-stub";
-import {domStub} from "./stub/dom-stub";
+import { LoginDialog } from "../src/js/game/dom-dialogs/login/login-dialog";
+import type { DOMStubStory } from "./stub/dom-stub";
+import { domStub } from "./stub/dom-stub";
 
 export default {
-  title: 'login-dialog',
+  title: "login-dialog",
 };
 
-export const dialog: DOMStubStory = domStub(resources => {  
-  const dialog = new LoginDialog(resources, 'ネット対戦をするにはログインしてください');
+export const dialog: DOMStubStory = domStub((resources) => {
+  const dialog = new LoginDialog(
+    resources,
+    "ネット対戦をするにはログインしてください"
+  );
   dialog.loginNotifier().subscribe(() => {
-    console.log('login');
+    console.log("login");
   });
   dialog.closeDialogNotifier().subscribe(() => {
-    console.log('close');
+    console.log("close");
   });
   return dialog.getRootHTMLElement();
 });

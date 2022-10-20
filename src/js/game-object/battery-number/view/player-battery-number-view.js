@@ -1,16 +1,17 @@
 // @flow
 
-import * as THREE from 'three';
-import {HorizontalAnimationMesh} from "../../../mesh/horizontal-animation";
-import type {Resources} from "../../../resource";
-import {TEXTURE_IDS} from "../../../resource/texture/ids";
+import * as THREE from "three";
+
+import { HorizontalAnimationMesh } from "../../../mesh/horizontal-animation";
+import type { Resources } from "../../../resource";
+import { TEXTURE_IDS } from "../../../resource/texture/ids";
 import {
   ARMDOZER_EFFECT_STANDARD_X,
   ARMDOZER_EFFECT_STANDARD_Y,
-  ARMDOZER_EFFECT_STANDARD_Z
+  ARMDOZER_EFFECT_STANDARD_Z,
 } from "../../armdozer/position";
-import type {BatteryNumberModel} from "../model/battery-number-model";
-import type {BatteryNumberView} from "./battery-number-view";
+import type { BatteryNumberModel } from "../model/battery-number-model";
+import type { BatteryNumberView } from "./battery-number-view";
 
 export const MESH_SIZE = 100;
 export const MAX_BATTERY_ANIMATION = 16;
@@ -21,7 +22,9 @@ export class PlayerBatteryNumberView implements BatteryNumberView {
   #numberMesh: HorizontalAnimationMesh;
 
   constructor(resources: Resources) {
-    const batteryNumberResource = resources.textures.find(v => v.id === TEXTURE_IDS.BATTERY_NUMBER);
+    const batteryNumberResource = resources.textures.find(
+      (v) => v.id === TEXTURE_IDS.BATTERY_NUMBER
+    );
     const batteryNumber = batteryNumberResource
       ? batteryNumberResource.texture
       : new THREE.Texture();
@@ -44,7 +47,8 @@ export class PlayerBatteryNumberView implements BatteryNumberView {
    * @param model モデル
    */
   engage(model: BatteryNumberModel): void {
-    const battery = Math.min(model.battery, MAX_BATTERY_VALUE) / MAX_BATTERY_ANIMATION;
+    const battery =
+      Math.min(model.battery, MAX_BATTERY_VALUE) / MAX_BATTERY_ANIMATION;
     this.#numberMesh.animate(battery);
 
     this.#numberMesh.setOpacity(model.opacity);
@@ -53,7 +57,9 @@ export class PlayerBatteryNumberView implements BatteryNumberView {
     this.#numberMesh.getObject3D().position.y = ARMDOZER_EFFECT_STANDARD_Y;
     this.#numberMesh.getObject3D().position.z = ARMDOZER_EFFECT_STANDARD_Z;
 
-    this.#numberMesh.getObject3D().scale.set(model.scale, model.scale, model.scale);
+    this.#numberMesh
+      .getObject3D()
+      .scale.set(model.scale, model.scale, model.scale);
   }
 
   /** カメラの方向を向く */

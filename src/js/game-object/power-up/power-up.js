@@ -1,16 +1,17 @@
 // @flow
 
-import * as THREE from 'three';
-import {Animate} from "../../animation/animate";
-import type {PreRender} from "../../game-loop/pre-render";
-import type {Resources} from "../../resource";
-import type {Stream, Unsubscriber} from "../../stream/stream";
-import type {GameObjectAction} from "../action/game-object-action";
-import {popUp} from "./animation/pop-up";
-import {createInitialValue} from "./model/initial-value";
-import type {PowerUpModel} from "./model/power-up-model";
-import {PowerUpSounds} from "./sounds/power-up-sounds";
-import type {PowerUpView} from "./view/power-up-view";
+import * as THREE from "three";
+
+import { Animate } from "../../animation/animate";
+import type { PreRender } from "../../game-loop/pre-render";
+import type { Resources } from "../../resource";
+import type { Stream, Unsubscriber } from "../../stream/stream";
+import type { GameObjectAction } from "../action/game-object-action";
+import { popUp } from "./animation/pop-up";
+import { createInitialValue } from "./model/initial-value";
+import type { PowerUpModel } from "./model/power-up-model";
+import { PowerUpSounds } from "./sounds/power-up-sounds";
+import type { PowerUpView } from "./view/power-up-view";
 
 /**
  * 攻撃アップ
@@ -28,14 +29,18 @@ export class PowerUp {
    * @param resources リソース管理オブジェクト
    * @param gameObjectAction ゲームオブジェクトアクション
    */
-  constructor(view: PowerUpView, resources: Resources, gameObjectAction: Stream<GameObjectAction>) {
+  constructor(
+    view: PowerUpView,
+    resources: Resources,
+    gameObjectAction: Stream<GameObjectAction>
+  ) {
     this.#model = createInitialValue();
     this.#view = view;
     this.#sounds = new PowerUpSounds(resources);
-    this.#unsubscriber = gameObjectAction.subscribe(action => {
-      if (action.type === 'Update') {
+    this.#unsubscriber = gameObjectAction.subscribe((action) => {
+      if (action.type === "Update") {
         this.#onUpdate();
-      } else if (action.type === 'PreRender') {
+      } else if (action.type === "PreRender") {
         this.#onPreRender(action);
       }
     });
@@ -49,7 +54,7 @@ export class PowerUp {
 
   /**
    * ポップアップ
-   * 
+   *
    * @return アニメーション
    */
   popUp(): Animate {

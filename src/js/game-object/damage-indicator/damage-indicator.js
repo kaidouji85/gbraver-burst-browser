@@ -1,14 +1,15 @@
 // @flow
 
-import * as THREE from 'three';
-import {Animate} from "../../animation/animate";
-import type {PreRender} from "../../game-loop/pre-render";
-import type {Stream, Unsubscriber} from "../../stream/stream";
-import type {GameObjectAction} from "../action/game-object-action";
-import {popUp} from "./animation/pop-up";
-import type {DamageIndicatorModel} from "./model/damage-indicator-model";
-import {createInitialValue} from "./model/initial-value";
-import type {DamageIndicatorView} from "./view/damage-indicator-view";
+import * as THREE from "three";
+
+import { Animate } from "../../animation/animate";
+import type { PreRender } from "../../game-loop/pre-render";
+import type { Stream, Unsubscriber } from "../../stream/stream";
+import type { GameObjectAction } from "../action/game-object-action";
+import { popUp } from "./animation/pop-up";
+import type { DamageIndicatorModel } from "./model/damage-indicator-model";
+import { createInitialValue } from "./model/initial-value";
+import type { DamageIndicatorView } from "./view/damage-indicator-view";
 
 /** ダメージインジケータ */
 export class DamageIndicator {
@@ -22,13 +23,16 @@ export class DamageIndicator {
    * @param view ビュー
    * @param gameObjectAction Stream<GameObjectAction>
    */
-  constructor(view: DamageIndicatorView, gameObjectAction: Stream<GameObjectAction>) {
+  constructor(
+    view: DamageIndicatorView,
+    gameObjectAction: Stream<GameObjectAction>
+  ) {
     this.#view = view;
     this.#model = createInitialValue();
-    this.#unsubscriber = gameObjectAction.subscribe(action => {
-      if (action.type === 'Update') {
+    this.#unsubscriber = gameObjectAction.subscribe((action) => {
+      if (action.type === "Update") {
         this.#update();
-      } else if (action.type === 'PreRender') {
+      } else if (action.type === "PreRender") {
         this.#preRender(action);
       }
     });

@@ -1,6 +1,12 @@
 // @flow
 
-import type {BuffPower, Burst, ContinuousAttack, LightningBarrier, RecoverBattery} from "gbraver-burst-core";
+import type {
+  BuffPower,
+  Burst,
+  ContinuousAttack,
+  LightningBarrier,
+  RecoverBattery,
+} from "gbraver-burst-core";
 
 /**
  * バーストの説明文テンプレート
@@ -9,14 +15,14 @@ import type {BuffPower, Burst, ContinuousAttack, LightningBarrier, RecoverBatter
  * @return 説明文
  */
 export function burstTemplate(burst: Burst): string[] {
-  switch(burst.type) {
-    case 'RecoverBattery':
+  switch (burst.type) {
+    case "RecoverBattery":
       return recoverBatteryTemplate(burst);
-    case 'BuffPower':
+    case "BuffPower":
       return powerBuffTemplate(burst);
-    case 'LightningBarrier':
+    case "LightningBarrier":
       return lightningBarrierTemplate(burst);
-    case 'ContinuousAttack':
+    case "ContinuousAttack":
       return continuousAttackTemplate(burst);
     default:
       return [];

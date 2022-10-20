@@ -1,7 +1,7 @@
 // @flow
 
-import {waitFinishAnimation} from "../../../../../dom/animation";
-import {waitElementLoaded} from "../../../../../wait/wait-element-loaded";
+import { waitFinishAnimation } from "../../../../../dom/animation";
+import { waitElementLoaded } from "../../../../../wait/wait-element-loaded";
 
 /**
  * パイロットバストショット
@@ -17,7 +17,7 @@ export class PilotBustShot {
    * @param className cssクラス名
    */
   constructor(path: string, className: string) {
-    this.#image = document.createElement('img');
+    this.#image = document.createElement("img");
     this.#image.src = path;
     this.#image.className = className;
     this.#isLoaded = waitElementLoaded(this.#image);
@@ -45,14 +45,14 @@ export class PilotBustShot {
    * 非表示にする
    */
   hidden(): void {
-    this.#image.style.opacity = '0';
+    this.#image.style.opacity = "0";
   }
 
   /**
    * 表示する
    */
   show(): void {
-    this.#image.style.opacity = '1';
+    this.#image.style.opacity = "1";
   }
 
   /**
@@ -61,14 +61,14 @@ export class PilotBustShot {
    * @return アニメーション
    */
   enter(): Promise<void> {
-    const animation = this.#image.animate([
-      {transform: 'translateX(5em)'},
-      {transform: 'translateX(0)'},
-    ], {
-      duration: 200,
-      fill: "forwards",
-      easing: 'ease'
-    });
+    const animation = this.#image.animate(
+      [{ transform: "translateX(5em)" }, { transform: "translateX(0)" }],
+      {
+        duration: 200,
+        fill: "forwards",
+        easing: "ease",
+      }
+    );
     return waitFinishAnimation(animation);
   }
 
@@ -78,15 +78,14 @@ export class PilotBustShot {
    * @return アニメーション
    */
   exit(): Promise<void> {
-    const animation = this.#image.animate([
-      {transform: 'translateX(0)'},
-      {transform: 'translateX(15em)'},
-    ], {
-      duration: 200,
-      fill: "forwards",
-      easing: 'ease'
-    });
+    const animation = this.#image.animate(
+      [{ transform: "translateX(0)" }, { transform: "translateX(15em)" }],
+      {
+        duration: 200,
+        fill: "forwards",
+        easing: "ease",
+      }
+    );
     return waitFinishAnimation(animation);
   }
 }
-

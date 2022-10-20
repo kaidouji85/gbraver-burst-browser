@@ -1,9 +1,10 @@
 // @flow
 
-import type {ArmDozerId} from "gbraver-burst-core";
-import {ArmDozerIds} from "gbraver-burst-core";
-import type {PathId} from "../resource/path";
-import {PathIds} from "../resource/path";
+import type { ArmDozerId } from "gbraver-burst-core";
+import { ArmDozerIds } from "gbraver-burst-core";
+
+import type { PathId } from "../resource/path";
+import { PathIds } from "../resource/path";
 
 /**
  * アームドーザIDに対応するアイコンのパスIDを返す
@@ -14,7 +15,7 @@ import {PathIds} from "../resource/path";
 export function getArmdozerIconPathId(armDozerId: ArmDozerId): PathId {
   switch (armDozerId) {
     case ArmDozerIds.SHIN_BRAVER:
-      return PathIds.SHIN_BRAVER_ICON
+      return PathIds.SHIN_BRAVER_ICON;
     case ArmDozerIds.NEO_LANDOZER:
       return PathIds.NEO_LANDOZER_ICON;
     case ArmDozerIds.LIGHTNING_DOZER:

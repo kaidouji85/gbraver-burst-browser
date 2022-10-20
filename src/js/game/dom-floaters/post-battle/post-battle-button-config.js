@@ -1,8 +1,8 @@
 // @flow
-import type {PostBattle} from "../../post-battle";
+import type { PostBattle } from "../../post-battle";
 
 /** ボタンのスタイル */
-export type ButtonStyle = 'MainButton' | 'SubButton';
+export type ButtonStyle = "MainButton" | "SubButton";
 
 /** 戦闘終了後アクショボタン設定 */
 export type PostBattleButtonConfig = {

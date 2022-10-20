@@ -1,12 +1,12 @@
 // @flow
-import {HUDUIScale} from "../game-object/scale";
-import type {SafeAreaInset} from "../safe-area/safe-area-inset";
-import {createSafeAreaInset} from "../safe-area/safe-area-inset";
-import type {Stream, Unsubscriber} from "../stream/stream";
-import type {Resize} from "../window/resize";
+import { HUDUIScale } from "../game-object/scale";
+import type { SafeAreaInset } from "../safe-area/safe-area-inset";
+import { createSafeAreaInset } from "../safe-area/safe-area-inset";
+import type { Stream, Unsubscriber } from "../stream/stream";
+import type { Resize } from "../window/resize";
 
 /** cssカスタムプロパティ --hud-ui-scale */
-const HUD_UI_SCALE = '--hud-ui-scale';
+const HUD_UI_SCALE = "--hud-ui-scale";
 
 /**
  * --hud-ui-scaleに値をセットするヘルパー関数
@@ -39,7 +39,7 @@ export class CssHUDUIScale {
     this.#safeAreaInset = createSafeAreaInset();
     const scale = HUDUIScale(this.#rendererDOM, this.#safeAreaInset);
     setHUDUIScale(scale);
-    this.#unsubscriver = resize.subscribe(action => {
+    this.#unsubscriver = resize.subscribe((action) => {
       this.#onResize(action);
     });
   }

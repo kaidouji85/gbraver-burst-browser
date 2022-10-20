@@ -1,12 +1,13 @@
 // @flow
-import {Howl} from 'howler';
-import type {Resources} from "../../../resource";
-import {SOUND_IDS} from "../../../resource/sound";
+import { Howl } from "howler";
+
+import type { Resources } from "../../../resource";
+import { SOUND_IDS } from "../../../resource/sound";
 
 /** タイムスケールボタンサウンド */
 export type TimeScaleButtonSounds = {
   /** 値変更 */
-  changeValue: typeof Howl;
+  changeValue: typeof Howl,
 };
 
 /**
@@ -15,7 +16,11 @@ export type TimeScaleButtonSounds = {
  * @param resources リソース管理オブジェクト
  * @return 生成結果
  */
-export function createTimeScaleButtonSounds(resources: Resources): TimeScaleButtonSounds {
-  const changeValue = resources.sounds.find(v => v.id === SOUND_IDS.CHANGE_VALUE)?.sound ?? new Howl();
-  return {changeValue};
+export function createTimeScaleButtonSounds(
+  resources: Resources
+): TimeScaleButtonSounds {
+  const changeValue =
+    resources.sounds.find((v) => v.id === SOUND_IDS.CHANGE_VALUE)?.sound ??
+    new Howl();
+  return { changeValue };
 }

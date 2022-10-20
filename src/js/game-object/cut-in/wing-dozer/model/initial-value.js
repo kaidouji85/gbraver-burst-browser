@@ -1,6 +1,6 @@
 // @flow
 
-import type {WingDozerCutInModel} from "./wing-dozer-cutin-model";
+import type { WingDozerCutInModel } from "./wing-dozer-cutin-model";
 
 /**
  * モデルの初期値を生成する
@@ -10,8 +10,8 @@ import type {WingDozerCutInModel} from "./wing-dozer-cutin-model";
 export function createInitialValue(): WingDozerCutInModel {
   return {
     animation: {
-      type: 'BURST_UP',
-      frame: 0
+      type: "BURST_UP",
+      frame: 0,
     },
     tracking: {
       x: 0,
@@ -19,5 +19,5 @@ export function createInitialValue(): WingDozerCutInModel {
     },
     opacity: 0,
     scale: 1,
-  }
+  };
 }

@@ -1,28 +1,29 @@
 // @flow
 
 import * as THREE from "three";
-import {Animate} from "../../../animation/animate";
-import type {PreRender} from "../../../game-loop/pre-render";
-import type {Resources} from "../../../resource";
-import type {Stream, Unsubscriber} from "../../../stream/stream";
-import type {GameObjectAction} from "../../action/game-object-action";
-import type {ArmDozerSprite} from "../armdozer-sprite";
-import {armHammer} from "./animation/arm-hammer";
-import {avoid} from "./animation/avoid";
-import {charge} from "./animation/charge";
-import {down} from "./animation/down";
-import {frontStep} from "./animation/front-step";
-import {guard} from "./animation/guard";
-import {guardToStand} from "./animation/guard-to-stand";
-import {guts} from "./animation/guts";
-import {gutsToStand} from "./animation/guts-to-stand";
-import {hmToStand} from "./animation/hm-to-stand";
-import {knockBack} from "./animation/knock-back";
-import {knockBackToStand} from "./animation/knock-back-to-stand";
-import {createInitialValue} from "./model/initial-value";
-import type {LightningDozerModel} from "./model/lightning-dozer-model";
-import {LightningDozerSounds} from "./sounds/lightning-dozer-sounds";
-import type {LightningDozerView} from "./view/lightning-dozer-view";
+
+import { Animate } from "../../../animation/animate";
+import type { PreRender } from "../../../game-loop/pre-render";
+import type { Resources } from "../../../resource";
+import type { Stream, Unsubscriber } from "../../../stream/stream";
+import type { GameObjectAction } from "../../action/game-object-action";
+import type { ArmDozerSprite } from "../armdozer-sprite";
+import { armHammer } from "./animation/arm-hammer";
+import { avoid } from "./animation/avoid";
+import { charge } from "./animation/charge";
+import { down } from "./animation/down";
+import { frontStep } from "./animation/front-step";
+import { guard } from "./animation/guard";
+import { guardToStand } from "./animation/guard-to-stand";
+import { guts } from "./animation/guts";
+import { gutsToStand } from "./animation/guts-to-stand";
+import { hmToStand } from "./animation/hm-to-stand";
+import { knockBack } from "./animation/knock-back";
+import { knockBackToStand } from "./animation/knock-back-to-stand";
+import { createInitialValue } from "./model/initial-value";
+import type { LightningDozerModel } from "./model/lightning-dozer-model";
+import { LightningDozerSounds } from "./sounds/lightning-dozer-sounds";
+import type { LightningDozerView } from "./view/lightning-dozer-view";
 
 /**
  * ライトニングドーザ
@@ -40,15 +41,19 @@ export class LightningDozer implements ArmDozerSprite {
    * @param gameObjectAction ゲームオブジェクトアクション
    * @param view ビュー
    */
-  constructor(resources: Resources, gameObjectAction: Stream<GameObjectAction>, view: LightningDozerView) {
+  constructor(
+    resources: Resources,
+    gameObjectAction: Stream<GameObjectAction>,
+    view: LightningDozerView
+  ) {
     this.#model = createInitialValue();
     this.#view = view;
     this.#sounds = new LightningDozerSounds(resources);
 
-    this.#unsubscriber = gameObjectAction.subscribe(action => {
-      if (action.type === 'Update') {
+    this.#unsubscriber = gameObjectAction.subscribe((action) => {
+      if (action.type === "Update") {
         this.#onUpdate();
-      } else if (action.type === 'PreRender') {
+      } else if (action.type === "PreRender") {
         this.#onPreRender(action);
       }
     });
@@ -107,7 +112,7 @@ export class LightningDozer implements ArmDozerSprite {
 
   /**
    * ガッツ
-   * 
+   *
    * @return アニメーション
    */
   guts(): Animate {

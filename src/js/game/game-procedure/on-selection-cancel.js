@@ -1,6 +1,6 @@
 // @flow
-import type {GameProps} from "../game-props";
-import {startTitle} from "./start-title";
+import type { GameProps } from "../game-props";
+import { startTitle } from "./start-title";
 
 /**
  * プレイヤー選択がキャンセルされた時のイベント
@@ -10,7 +10,7 @@ import {startTitle} from "./start-title";
  * @return 処理が完了すると発火するPromise
  */
 export async function onSelectionCancel(props: GameProps): Promise<void> {
-  props.inProgress = {type: 'None'};
+  props.inProgress = { type: "None" };
   await props.fader.fadeOut();
   await startTitle(props);
   await props.fader.fadeIn();

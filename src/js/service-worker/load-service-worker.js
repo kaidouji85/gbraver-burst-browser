@@ -11,6 +11,6 @@ export async function loadServiceWorker(): Promise<ServiceWorkerRegistration | n
     return null;
   }
 
-  const sw = await navigator.serviceWorker.register('./sw.js');
+  const sw = await navigator.serviceWorker.register("./sw.js");
   return sw;
 }

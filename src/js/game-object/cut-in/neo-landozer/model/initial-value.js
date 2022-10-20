@@ -1,6 +1,6 @@
 // @flow
 
-import type {NeoLandozerCutInModel} from "./neo-landozer-cutin-model";
+import type { NeoLandozerCutInModel } from "./neo-landozer-cutin-model";
 
 /**
  * モデルの初期値を生成する
@@ -10,7 +10,7 @@ import type {NeoLandozerCutInModel} from "./neo-landozer-cutin-model";
 export function createInitialValue(): NeoLandozerCutInModel {
   return {
     animation: {
-      type: 'CUT_IN_DOWN',
+      type: "CUT_IN_DOWN",
       frame: 1,
     },
     tracking: {
@@ -18,6 +18,6 @@ export function createInitialValue(): NeoLandozerCutInModel {
       y: 0,
     },
     opacity: 0,
-    scale: 1
+    scale: 1,
   };
 }

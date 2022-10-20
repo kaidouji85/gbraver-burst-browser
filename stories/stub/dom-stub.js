@@ -1,11 +1,12 @@
 // @flow
 
-import '../../src/css/style.css';
-import type {Resources} from "../../src/js/resource";
-import {fullResourceLoading} from "../../src/js/resource";
-import {CssVH} from "../../src/js/css/vh";
-import {resizeStream} from "../../src/js/window/resize";
-import {StorybookResourceRoot} from "../storybook-resource-root";
+import "../../src/css/style.css";
+
+import { CssVH } from "../../src/js/css/vh";
+import type { Resources } from "../../src/js/resource";
+import { fullResourceLoading } from "../../src/js/resource";
+import { resizeStream } from "../../src/js/window/resize";
+import { StorybookResourceRoot } from "../storybook-resource-root";
 
 /**
  * HTML要素生成コールバック関数
@@ -28,17 +29,19 @@ export type DOMStubStory = () => HTMLElement;
  * @param creator HTML要素生成コールバック関数
  * @return ストーリー
  */
-export const domStub = (creator: DOMCreator): DOMStubStory => () => {
-  const root = document.createElement('div');
-  const resize = resizeStream();
-  new CssVH(resize);
+export const domStub =
+  (creator: DOMCreator): DOMStubStory =>
+  () => {
+    const root = document.createElement("div");
+    const resize = resizeStream();
+    new CssVH(resize);
 
-  const resourceRoot = new StorybookResourceRoot();
-  const resourceLoading = fullResourceLoading(resourceRoot);
-  resourceLoading.resources.then(resources => {
-    const component = creator(resources);
-    root.appendChild(component);
-  });
+    const resourceRoot = new StorybookResourceRoot();
+    const resourceLoading = fullResourceLoading(resourceRoot);
+    resourceLoading.resources.then((resources) => {
+      const component = creator(resources);
+      root.appendChild(component);
+    });
 
-  return root;
-}
+    return root;
+  };

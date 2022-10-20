@@ -7,11 +7,11 @@ export type TextureId = string;
 /** テクスチャ設定 */
 export type TextureConfig = {
   id: TextureId,
-  path: string
+  path: string,
 };
 
 /** テクスチャリソース */
 export type TextureResource = {
   id: TextureId,
-  texture: typeof THREE.Texture
+  texture: typeof THREE.Texture,
 };

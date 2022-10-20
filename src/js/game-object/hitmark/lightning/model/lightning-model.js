@@ -13,8 +13,8 @@ export type LightningModel = {
   /** アニメーション */
   animation: {
     /** 0〜1で指定するアニメーションフレーム */
-    frame: number
+    frame: number,
   },
   /** 0〜1で指定する不透明度 */
-  opacity: number
-}
+  opacity: number,
+};

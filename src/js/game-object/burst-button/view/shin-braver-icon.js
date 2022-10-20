@@ -1,10 +1,11 @@
 // @flow
 
-import * as THREE from 'three';
-import {HorizontalAnimationMesh} from "../../../mesh/horizontal-animation";
-import type {Resources} from "../../../resource";
-import {TEXTURE_IDS} from "../../../resource/texture/ids";
-import type {ArmdozerIcon} from "./armdozer-icon";
+import * as THREE from "three";
+
+import { HorizontalAnimationMesh } from "../../../mesh/horizontal-animation";
+import type { Resources } from "../../../resource";
+import { TEXTURE_IDS } from "../../../resource/texture/ids";
+import type { ArmdozerIcon } from "./armdozer-icon";
 
 /**
  * シンブレイバーアイコン
@@ -21,8 +22,10 @@ export class ShinBraverIcon implements ArmdozerIcon {
   constructor(resources: Resources) {
     this.#group = new THREE.Group();
 
-    const shinBraver = resources.textures.find(v => v.id === TEXTURE_IDS.SHIN_BRAVER_BURST_BUTTON_ICON)
-      ?.texture ?? new THREE.Texture();
+    const shinBraver =
+      resources.textures.find(
+        (v) => v.id === TEXTURE_IDS.SHIN_BRAVER_BURST_BUTTON_ICON
+      )?.texture ?? new THREE.Texture();
     this.#mesh = new HorizontalAnimationMesh({
       texture: shinBraver,
       maxAnimation: 1,

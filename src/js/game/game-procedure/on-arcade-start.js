@@ -1,6 +1,6 @@
 // @flow
-import type {GameProps} from "../game-props";
-import {fullResourceLoading} from "./full-resource-loading";
+import type { GameProps } from "../game-props";
+import { fullResourceLoading } from "./full-resource-loading";
 
 /**
  * アーケードモード開始
@@ -14,7 +14,7 @@ export async function onArcadeStart(props: GameProps): Promise<void> {
     await fullResourceLoading(props);
   }
 
-  props.inProgress = {type: 'NPCBattle', subFlow: {type: 'PlayerSelect'}};
+  props.inProgress = { type: "NPCBattle", subFlow: { type: "PlayerSelect" } };
   await props.fader.fadeOut();
   await props.domScenes.startPlayerSelect(props.resources);
   await props.fader.fadeIn();

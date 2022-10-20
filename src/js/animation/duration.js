@@ -1,5 +1,5 @@
 // @flow
-import TWEEN from '@tweenjs/tween.js';
+import TWEEN from "@tweenjs/tween.js";
 
 /**
  * Tween単体の再生時間を計算する
@@ -24,7 +24,11 @@ export function tweenDuration(tween: typeof TWEEN.Tween): number {
  * @param scale スケール係数
  * @param scaledTweens 再生時間スケールが完了したTween
  */
-export function scaleTweenDuration(tween: typeof TWEEN.Tween, scale: number, scaledTweens: typeof TWEEN.Tween[] = []): void {
+export function scaleTweenDuration(
+  tween: typeof TWEEN.Tween,
+  scale: number,
+  scaledTweens: typeof TWEEN.Tween[] = []
+): void {
   if (scaledTweens.includes(tween)) {
     return;
   }

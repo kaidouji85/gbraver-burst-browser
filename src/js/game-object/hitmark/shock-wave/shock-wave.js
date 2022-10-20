@@ -1,17 +1,18 @@
 // @flow
 
-import {Howl} from 'howler';
-import * as THREE from 'three';
-import {Animate} from "../../../animation/animate";
-import {process} from '../../../animation/process';
-import type {PreRender} from "../../../game-loop/pre-render";
-import type {Resources} from "../../../resource";
-import {SOUND_IDS} from "../../../resource/sound";
-import type {Stream, Unsubscriber} from "../../../stream/stream";
-import type {GameObjectAction} from "../../action/game-object-action";
-import {popUp} from "./animation/pop-up";
-import type {ShockWaveModel} from "./model/shock-wave-model";
-import type {ShockWaveView} from "./view/shock-wave-view";
+import { Howl } from "howler";
+import * as THREE from "three";
+
+import { Animate } from "../../../animation/animate";
+import { process } from "../../../animation/process";
+import type { PreRender } from "../../../game-loop/pre-render";
+import type { Resources } from "../../../resource";
+import { SOUND_IDS } from "../../../resource/sound";
+import type { Stream, Unsubscriber } from "../../../stream/stream";
+import type { GameObjectAction } from "../../action/game-object-action";
+import { popUp } from "./animation/pop-up";
+import type { ShockWaveModel } from "./model/shock-wave-model";
+import type { ShockWaveView } from "./view/shock-wave-view";
 
 /**
  * 衝撃波
@@ -30,19 +31,24 @@ export class ShockWave {
    * @param resources リソース管理オブジェクト
    * @param gameObjectAction ゲームオブジェクトアクション
    */
-  constructor(view: ShockWaveView, initialModel: ShockWaveModel, resources: Resources, gameObjectAction: Stream<GameObjectAction>) {
+  constructor(
+    view: ShockWaveView,
+    initialModel: ShockWaveModel,
+    resources: Resources,
+    gameObjectAction: Stream<GameObjectAction>
+  ) {
     this.#model = initialModel;
     this.#view = view;
 
-    const hitResource = resources.sounds.find(v => v.id === SOUND_IDS.MECHA_IMPACT);
-    this.#hitSound = hitResource
-      ? hitResource.sound
-      : new Howl();
+    const hitResource = resources.sounds.find(
+      (v) => v.id === SOUND_IDS.MECHA_IMPACT
+    );
+    this.#hitSound = hitResource ? hitResource.sound : new Howl();
 
-    this.#unsubscriber = gameObjectAction.subscribe(action => {
-      if (action.type === 'Update') {
+    this.#unsubscriber = gameObjectAction.subscribe((action) => {
+      if (action.type === "Update") {
         this.#onUpdate();
-      } else if (action.type === 'PreRender') {
+      } else if (action.type === "PreRender") {
         this.#onPreRender(action);
       }
     });
@@ -64,8 +70,7 @@ export class ShockWave {
   popUp(): Animate {
     return process(() => {
       this.#hitSound.play();
-    })
-      .chain(popUp(this.#model));
+    }).chain(popUp(this.#model));
   }
 
   /**

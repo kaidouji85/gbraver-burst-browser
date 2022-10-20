@@ -1,14 +1,15 @@
 // @flow
-import {Tween} from '@tweenjs/tween.js';
-import {scaleTweenDuration} from "../../../src/js/animation/duration";
+import { Tween } from "@tweenjs/tween.js";
 
-test('Tween Durationがスケールされている', () => {
+import { scaleTweenDuration } from "../../../src/js/animation/duration";
+
+test("Tween Durationがスケールされている", () => {
   const t1 = new Tween({}).to({}, 400);
   scaleTweenDuration(t1, 0.5);
   expect(t1._duration).toBe(200);
 });
 
-test('チェインしたTween Durationがスケールされている', () => {
+test("チェインしたTween Durationがスケールされている", () => {
   const t1 = new Tween({}).to({}, 500);
   const t2 = new Tween({}).to({}, 300);
   t1.chain(t2);
@@ -17,7 +18,7 @@ test('チェインしたTween Durationがスケールされている', () => {
   expect(t2._duration).toBe(150);
 });
 
-test('ループしたTweenでもDurationがスケールされている', () => {
+test("ループしたTweenでもDurationがスケールされている", () => {
   const t1 = new Tween({}).to({}, 600);
   const t2 = new Tween({}).to({}, 400);
   t1.chain(t2);
@@ -27,16 +28,13 @@ test('ループしたTweenでもDurationがスケールされている', () => {
   expect(t2._duration).toBe(200);
 });
 
-test('複雑にチェインしたTweenでもDurationがスケールされている', () => {
+test("複雑にチェインしたTweenでもDurationがスケールされている", () => {
   const t1 = new Tween({}).to({}, 100);
   const t2 = new Tween({}).to({}, 200);
   const t3 = new Tween({}).to({}, 300);
   const t4 = new Tween({}).to({}, 400);
   const t5 = new Tween({}).to({}, 500);
-  t1.chain(
-    t2.chain(t3.chain(t5)),
-    t4
-  );
+  t1.chain(t2.chain(t3.chain(t5)), t4);
 
   scaleTweenDuration(t1, 0.5);
   expect(t1._duration).toBe(50);

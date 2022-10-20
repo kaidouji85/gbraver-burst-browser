@@ -1,9 +1,9 @@
 // @flow
 
-import type {PreRender} from "../../../game-loop/pre-render";
-import type {Resources} from "../../../resource";
-import type {BatteryCorrectModel} from "../model/battery-correct-model";
-import {PlayerBatteryCorrectView} from "./player-battery-correct-view";
+import type { PreRender } from "../../../game-loop/pre-render";
+import type { Resources } from "../../../resource";
+import type { BatteryCorrectModel } from "../model/battery-correct-model";
+import { PlayerBatteryCorrectView } from "./player-battery-correct-view";
 
 /** 敵側バッテリー補正ビュー */
 export class EnemyBatteryCorrectView extends PlayerBatteryCorrectView {

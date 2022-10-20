@@ -8,6 +8,6 @@ export type TurnStartModel = {
   scale: number,
   position: {
     x: number,
-    y: number
-  }
+    y: number,
+  },
 };

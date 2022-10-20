@@ -1,8 +1,8 @@
 // @flow
-import type {Resources} from "../../../../../../resource";
-import {PathIds} from "../../../../../../resource/path";
-import {ROOT_CLASS} from "./class-name";
-import type {DataIDs} from "./data-ids";
+import type { Resources } from "../../../../../../resource";
+import { PathIds } from "../../../../../../resource/path";
+import { ROOT_CLASS } from "./class-name";
+import type { DataIDs } from "./data-ids";
 
 /**
  * ルート要素のinnerHTML
@@ -12,7 +12,8 @@ import type {DataIDs} from "./data-ids";
  * @return innerHTML
  */
 export function rootInnerHTML(resources: Resources, ids: DataIDs): string {
-  const closerPath = resources.paths.find(v => v.id === PathIds.CLOSER)?.path ?? '';
+  const closerPath =
+    resources.paths.find((v) => v.id === PathIds.CLOSER)?.path ?? "";
   return `
     <div class="${ROOT_CLASS}__background" data-id="${ids.backGround}"></div>
     <div class="${ROOT_CLASS}__dialog">

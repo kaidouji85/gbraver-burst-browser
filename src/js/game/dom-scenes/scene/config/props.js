@@ -1,16 +1,17 @@
 // @flow
-import {Howl} from "howler";
-import {Exclusive} from "../../../../exclusive/exclusive";
-import type {Resources} from "../../../../resource";
-import {SOUND_IDS} from "../../../../resource/sound";
-import type {StreamSource} from "../../../../stream/stream";
-import {createStreamSource} from "../../../../stream/stream";
-import {domUuid} from "../../../../uuid/dom-uuid";
-import type {GbraverBurstBrowserConfig} from "../../../config/browser-config";
-import {ConfigChangedDialog} from "./config-changed-dialog";
-import {ROOT_CLASS} from "./dom/class-name";
-import {extractElements} from "./dom/elements";
-import {rootInnerHTML} from "./dom/root-inner-html";
+import { Howl } from "howler";
+
+import { Exclusive } from "../../../../exclusive/exclusive";
+import type { Resources } from "../../../../resource";
+import { SOUND_IDS } from "../../../../resource/sound";
+import type { StreamSource } from "../../../../stream/stream";
+import { createStreamSource } from "../../../../stream/stream";
+import { domUuid } from "../../../../uuid/dom-uuid";
+import type { GbraverBurstBrowserConfig } from "../../../config/browser-config";
+import { ConfigChangedDialog } from "./config-changed-dialog";
+import { ROOT_CLASS } from "./dom/class-name";
+import { extractElements } from "./dom/elements";
+import { rootInnerHTML } from "./dom/root-inner-html";
 
 /** 設定画面プロパティ */
 export type ConfigProps = {
@@ -55,11 +56,21 @@ export type ConfigProps = {
  * @param config ブラウザ設定
  * @return 生成した設定画面プロパティ
  */
-export function createConfigProps(resources: Resources, config: GbraverBurstBrowserConfig): ConfigProps {
-  const ids = {battleAnimationTimeScaleSelector: domUuid(), webGLPixelRatioSelector: domUuid(),
-    bgmVolumeSelector: domUuid(), bgmVolumeValue: domUuid(), seVolumeSelector: domUuid(), seVolumeValue: domUuid(),
-    prev: domUuid(), configChange: domUuid()};
-  const root = document.createElement('div');
+export function createConfigProps(
+  resources: Resources,
+  config: GbraverBurstBrowserConfig
+): ConfigProps {
+  const ids = {
+    battleAnimationTimeScaleSelector: domUuid(),
+    webGLPixelRatioSelector: domUuid(),
+    bgmVolumeSelector: domUuid(),
+    bgmVolumeValue: domUuid(),
+    seVolumeSelector: domUuid(),
+    seVolumeValue: domUuid(),
+    prev: domUuid(),
+    configChange: domUuid(),
+  };
+  const root = document.createElement("div");
   root.innerHTML = rootInnerHTML(ids, config);
   root.className = ROOT_CLASS;
   const elements = extractElements(root, ids);
@@ -77,11 +88,14 @@ export function createConfigProps(resources: Resources, config: GbraverBurstBrow
     prevButton: elements.prev,
     configChangeButton: elements.configChange,
     dialog,
-    pushButton: resources.sounds.find(v => v.id === SOUND_IDS.PUSH_BUTTON)?.sound ?? new Howl(),
-    changeValue: resources.sounds.find(v => v.id === SOUND_IDS.CHANGE_VALUE)?.sound ?? new Howl(),
+    pushButton:
+      resources.sounds.find((v) => v.id === SOUND_IDS.PUSH_BUTTON)?.sound ??
+      new Howl(),
+    changeValue:
+      resources.sounds.find((v) => v.id === SOUND_IDS.CHANGE_VALUE)?.sound ??
+      new Howl(),
     exclusive: new Exclusive(),
     prev: createStreamSource(),
     configChange: createStreamSource(),
-
   };
 }

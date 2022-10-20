@@ -14,6 +14,6 @@ export type ShinyaModel = {
 
   /** 位置 */
   position: {
-    x: number
-  }
+    x: number,
+  },
 };

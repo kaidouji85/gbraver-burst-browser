@@ -1,10 +1,10 @@
 // @flow
 
-import {Animate} from "../../../animation/animate";
-import {delay} from "../../../animation/delay";
-import {process} from '../../../animation/process';
-import {tween} from "../../../animation/tween";
-import type {DamageIndicatorModel} from "../model/damage-indicator-model";
+import { Animate } from "../../../animation/animate";
+import { delay } from "../../../animation/delay";
+import { process } from "../../../animation/process";
+import { tween } from "../../../animation/tween";
+import type { DamageIndicatorModel } from "../model/damage-indicator-model";
 
 /**
  * ダメージを表示する
@@ -19,7 +19,7 @@ export function popUp(model: DamageIndicatorModel, damage: number): Animate {
     model.damage = damage;
     model.scale = 1.1;
   })
-    .chain(tween(model, t => t.to({opacity: 1, scale: 1}, 200)))
+    .chain(tween(model, (t) => t.to({ opacity: 1, scale: 1 }, 200)))
     .chain(delay(1300))
-    .chain(tween(model, t => t.to({opacity: 0, scale: 1.05}, 200)));
+    .chain(tween(model, (t) => t.to({ opacity: 0, scale: 1.05 }, 200)));
 }

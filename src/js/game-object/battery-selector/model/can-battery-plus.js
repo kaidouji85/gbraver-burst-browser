@@ -1,7 +1,7 @@
 // @flow
 
-import type {BatterySelectorModel} from "./index";
-import {MAX_BATTERY} from "./index";
+import type { BatterySelectorModel } from "./index";
+import { MAX_BATTERY } from "./index";
 
 /**
  * バッテリーメーター+1できるか否かを判定する

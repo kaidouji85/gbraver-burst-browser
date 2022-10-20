@@ -1,13 +1,13 @@
 // @flow
-import {waitFinishAnimation} from "../../dom/animation";
-import {replaceDOM} from "../../dom/replace-dom";
-import type {Resources} from "../../resource";
-import {domUuid} from "../../uuid/dom-uuid";
-import type {FaceOrientation, FaceType} from "./face-graphic";
-import {FaceGraphic} from "./face-graphic";
+import { waitFinishAnimation } from "../../dom/animation";
+import { replaceDOM } from "../../dom/replace-dom";
+import type { Resources } from "../../resource";
+import { domUuid } from "../../uuid/dom-uuid";
+import type { FaceOrientation, FaceType } from "./face-graphic";
+import { FaceGraphic } from "./face-graphic";
 
 /** ルートHTML要素のclass属性 */
-const ROOT_CLASS = 'message-window';
+const ROOT_CLASS = "message-window";
 
 /** ルートHTML要素が非表示の際のclass属性 */
 const ROOT_CLASS_INVISIBLE = `${ROOT_CLASS}--invisible`;
@@ -34,33 +34,39 @@ const NEXT_MESSAGE_ICON_CLASS = `${ROOT_CLASS}__next-message-icon`;
 const NEXT_MESSAGE_ICON_CLASS_INVISIBLE = `${NEXT_MESSAGE_ICON_CLASS}--invisible`;
 
 /** メッセージウインドウ位置 */
-type Position = 'Center' | 'Right' | 'Left' | 'NearBatterySelector' | 'NearBurstButton' | 'NearPilotButton';
+type Position =
+  | "Center"
+  | "Right"
+  | "Left"
+  | "NearBatterySelector"
+  | "NearBurstButton"
+  | "NearPilotButton";
 
 /** 顔画像表示位置 */
-type FacePosition = 'Right' | 'Left';
+type FacePosition = "Right" | "Left";
 
 /** CSSカスタムプロパティ --brightness */
-const CSS_PROPS_BRIGHTNESS = '--brightness';
+const CSS_PROPS_BRIGHTNESS = "--brightness";
 
 /**
  * メッセージウインドウ位置に対応したroot要素class属性を取得する
- * 
+ *
  * @param position メッセージウインドウ位置
  * @return root要素のclass属性
  */
 function toRootClass(position: Position): string {
-  switch(position) {
-    case 'Center':
+  switch (position) {
+    case "Center":
       return ROOT_CLASS;
-    case 'Left':
+    case "Left":
       return ROOT_CLASS_LEFT;
-    case 'Right':
+    case "Right":
       return ROOT_CLASS_RIGHT;
-    case 'NearBatterySelector':
+    case "NearBatterySelector":
       return ROOT_CLASS_NEAR_BATTERY_SELECTOR;
-    case 'NearBurstButton':
+    case "NearBurstButton":
       return ROOT_CLASS_NEAR_BURST_BUTTON;
-    case 'NearPilotButton':
+    case "NearPilotButton":
       return ROOT_CLASS_NEAR_PILOT_BUTTON;
     default:
       return ROOT_CLASS_INVISIBLE;
@@ -68,7 +74,11 @@ function toRootClass(position: Position): string {
 }
 
 /** data-idを集めたもの */
-type DataIDs = {messages: string, leftFaceGraphic: string, rightFaceGraphic: string};
+type DataIDs = {
+  messages: string,
+  leftFaceGraphic: string,
+  rightFaceGraphic: string,
+};
 
 /**
  * ルートHTML要素のinnerHTML
@@ -87,7 +97,11 @@ function rootInnerHTML(ids: DataIDs): string {
 }
 
 /** ルート要素の子孫要素 */
-type Elements = {messages: HTMLElement, leftFaceGraphic: HTMLElement, rightFaceGraphic: HTMLElement};
+type Elements = {
+  messages: HTMLElement,
+  leftFaceGraphic: HTMLElement,
+  rightFaceGraphic: HTMLElement,
+};
 
 /**
  * ルート要素から子孫要素を抽出する
@@ -97,10 +111,16 @@ type Elements = {messages: HTMLElement, leftFaceGraphic: HTMLElement, rightFaceG
  * @return 抽出結果
  */
 export function extractElements(root: HTMLElement, ids: DataIDs): Elements {
-  const messages = root.querySelector(`[data-id="${ids.messages}"]`) ?? document.createElement('div');
-  const leftFaceGraphic = root.querySelector(`[data-id="${ids.leftFaceGraphic}"]`) ?? document.createElement('div');
-  const rightFaceGraphic = root.querySelector(`[data-id="${ids.rightFaceGraphic}"]`) ?? document.createElement('div');
-  return {messages, leftFaceGraphic, rightFaceGraphic};
+  const messages =
+    root.querySelector(`[data-id="${ids.messages}"]`) ??
+    document.createElement("div");
+  const leftFaceGraphic =
+    root.querySelector(`[data-id="${ids.leftFaceGraphic}"]`) ??
+    document.createElement("div");
+  const rightFaceGraphic =
+    root.querySelector(`[data-id="${ids.rightFaceGraphic}"]`) ??
+    document.createElement("div");
+  return { messages, leftFaceGraphic, rightFaceGraphic };
 }
 
 /** コンストラクタのパラメータ */
@@ -132,18 +152,25 @@ export class MessageWindow {
    * @param params パラメータ
    */
   constructor(params: Params) {
-    const ids = {messages: domUuid(), leftFaceGraphic: domUuid(), rightFaceGraphic: domUuid()};
-    this.#root = document.createElement('div');
-    this.#position = params?.position ?? 'Center';
-    this.#facePosition = params?.facePosition ?? 'Right';
-    this.#faceOrientation = params?.faceOrientation ?? 'Left';
+    const ids = {
+      messages: domUuid(),
+      leftFaceGraphic: domUuid(),
+      rightFaceGraphic: domUuid(),
+    };
+    this.#root = document.createElement("div");
+    this.#position = params?.position ?? "Center";
+    this.#facePosition = params?.facePosition ?? "Right";
+    this.#faceOrientation = params?.faceOrientation ?? "Left";
     this.#root.className = toRootClass(this.#position);
     this.#root.innerHTML = rootInnerHTML(ids);
-    const {messages, leftFaceGraphic, rightFaceGraphic} = extractElements(this.#root, ids);
+    const { messages, leftFaceGraphic, rightFaceGraphic } = extractElements(
+      this.#root,
+      ids
+    );
     this.#messages = messages;
-    this.#nextMessageIcon = document.createElement('span');
+    this.#nextMessageIcon = document.createElement("span");
     this.#nextMessageIcon.className = NEXT_MESSAGE_ICON_CLASS_INVISIBLE;
-    this.#nextMessageIcon.innerText = '▼';
+    this.#nextMessageIcon.innerText = "▼";
     this.#leftFaceGraphic = new FaceGraphic(params.resources);
     replaceDOM(leftFaceGraphic, this.#leftFaceGraphic.getRootHTMLElement());
     this.#rightFaceGraphic = new FaceGraphic(params.resources);
@@ -165,7 +192,9 @@ export class MessageWindow {
    * @param isVisible trueで表示する
    */
   visible(isVisible: boolean): void {
-    this.#root.className = isVisible ? toRootClass(this.#position) : ROOT_CLASS_INVISIBLE;
+    this.#root.className = isVisible
+      ? toRootClass(this.#position)
+      : ROOT_CLASS_INVISIBLE;
   }
 
   /**
@@ -176,20 +205,21 @@ export class MessageWindow {
    */
   messages(values: string[]): void {
     const createParagraph = (message: string) => {
-      const div = document.createElement('div');
+      const div = document.createElement("div");
       div.className = `${ROOT_CLASS}__paragraph`;
       div.innerText = message;
       return div;
     };
 
     this.#messages.innerHTML = "";
-    const paragraphs = values.map(message => createParagraph(message));
+    const paragraphs = values.map((message) => createParagraph(message));
     const lastParagraph: ?HTMLElement = paragraphs[paragraphs.length - 1];
     if (!lastParagraph) {
       return;
     }
-    paragraphs.filter(v => v !== lastParagraph)
-      .forEach(paragraph => {
+    paragraphs
+      .filter((v) => v !== lastParagraph)
+      .forEach((paragraph) => {
         this.#messages.appendChild(paragraph);
       });
     lastParagraph.appendChild(this.#nextMessageIcon);
@@ -202,12 +232,14 @@ export class MessageWindow {
    * @return アニメーションが完了したら発火するPromise
    */
   async scrollUp(): Promise<void> {
-    await waitFinishAnimation(this.#messages.animate([
-      {transform: 'translateY(2vh)'},
-      {transform: 'translateY(0%)'},
-    ], {
-      duration: 100,
-    }));
+    await waitFinishAnimation(
+      this.#messages.animate(
+        [{ transform: "translateY(2vh)" }, { transform: "translateY(0%)" }],
+        {
+          duration: 100,
+        }
+      )
+    );
   }
 
   /**
@@ -236,7 +268,9 @@ export class MessageWindow {
    * @param isNextMessageIconVisible 次メッセージアイコンを表示するか、trueで表示する
    */
   nextMessageIconVisible(isNextMessageIconVisible: boolean): void {
-    this.#nextMessageIcon.className = isNextMessageIconVisible ? NEXT_MESSAGE_ICON_CLASS : NEXT_MESSAGE_ICON_CLASS_INVISIBLE;
+    this.#nextMessageIcon.className = isNextMessageIconVisible
+      ? NEXT_MESSAGE_ICON_CLASS
+      : NEXT_MESSAGE_ICON_CLASS_INVISIBLE;
   }
 
   /**
@@ -259,6 +293,8 @@ export class MessageWindow {
    * @return 取得結果
    */
   #getTargetFaceGraphic(): FaceGraphic {
-    return this.#facePosition === 'Left' ? this.#leftFaceGraphic : this.#rightFaceGraphic;
+    return this.#facePosition === "Left"
+      ? this.#leftFaceGraphic
+      : this.#rightFaceGraphic;
   }
 }

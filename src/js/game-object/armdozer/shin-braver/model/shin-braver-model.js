@@ -1,5 +1,5 @@
 // @flow
-import type {AnimationType} from "./animation-type";
+import type { AnimationType } from "./animation-type";
 
 /** シンブレイバーのモデル */
 export interface ShinBraverModel {
@@ -7,13 +7,13 @@ export interface ShinBraverModel {
   position: {
     x: number,
     y: number,
-    z: number
-  },
+    z: number,
+  };
   /** アニメーション */
   animation: {
     /** アニメーションの種類 */
     type: AnimationType,
     /** 0〜1で指定するアニメーションフレーム */
     frame: number,
-  }
+  };
 }

@@ -1,6 +1,6 @@
 // @flow
 
-import type {FaderModel} from "./fader-model";
+import type { FaderModel } from "./fader-model";
 
 /**
  * モデルの初期値を生成する
@@ -10,9 +10,7 @@ import type {FaderModel} from "./fader-model";
  */
 export function createInitialValue(isVisible: boolean): FaderModel {
   return {
-    opacity: isVisible
-      ? 1
-      : 0,
+    opacity: isVisible ? 1 : 0,
     width: 1,
     height: 1,
   };

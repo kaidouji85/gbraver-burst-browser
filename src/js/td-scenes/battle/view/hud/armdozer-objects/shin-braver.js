@@ -1,13 +1,17 @@
 // @flow
 
-import type {Player, PlayerId} from "gbraver-burst-core";
-import * as THREE from 'three';
-import type {GameObjectAction} from "../../../../../game-object/action/game-object-action";
-import {enemyShinBraverCutIn, playerShinBraverCutIn} from "../../../../../game-object/cut-in/shin-braver";
-import {ShinBraverCutIn} from "../../../../../game-object/cut-in/shin-braver/shin-braver-cutin";
-import type {Resources} from "../../../../../resource";
-import type {Stream} from "../../../../../stream/stream";
-import type {HUDArmdozerObjects} from "./hud-armdozer-ibjects";
+import type { Player, PlayerId } from "gbraver-burst-core";
+import * as THREE from "three";
+
+import type { GameObjectAction } from "../../../../../game-object/action/game-object-action";
+import {
+  enemyShinBraverCutIn,
+  playerShinBraverCutIn,
+} from "../../../../../game-object/cut-in/shin-braver";
+import { ShinBraverCutIn } from "../../../../../game-object/cut-in/shin-braver/shin-braver-cutin";
+import type { Resources } from "../../../../../resource";
+import type { Stream } from "../../../../../stream/stream";
+import type { HUDArmdozerObjects } from "./hud-armdozer-ibjects";
 
 /** コンストラクタのパラメータ */
 type Param = {
@@ -40,9 +44,7 @@ export class ShinBraverHUD implements HUDArmdozerObjects {
    * @return シーンに追加するオブジェクト
    */
   getObject3Ds(): typeof THREE.Object3D[] {
-    return [
-      this.cutIn.getObject3D(),
-    ];
+    return [this.cutIn.getObject3D()];
   }
 }
 
@@ -54,7 +56,11 @@ export class ShinBraverHUD implements HUDArmdozerObjects {
  * @param state プレイヤーの状態
  * @return シンブレイバーHUD
  */
-export function playerShinBraverHUD(resources: Resources, gameObjectAction: Stream<GameObjectAction>, state: Player): HUDArmdozerObjects {
+export function playerShinBraverHUD(
+  resources: Resources,
+  gameObjectAction: Stream<GameObjectAction>,
+  state: Player
+): HUDArmdozerObjects {
   return new ShinBraverHUD({
     playerId: state.playerId,
     cutIn: playerShinBraverCutIn(resources, gameObjectAction),
@@ -69,9 +75,13 @@ export function playerShinBraverHUD(resources: Resources, gameObjectAction: Stre
  * @param state プレイヤーの状態
  * @return シンブレイバーHUD
  */
-export function enemyShinBraverHUD(resources: Resources, gameObjectAction: Stream<GameObjectAction>, state: Player): HUDArmdozerObjects {
+export function enemyShinBraverHUD(
+  resources: Resources,
+  gameObjectAction: Stream<GameObjectAction>,
+  state: Player
+): HUDArmdozerObjects {
   return new ShinBraverHUD({
     playerId: state.playerId,
-    cutIn: enemyShinBraverCutIn(resources, gameObjectAction)
+    cutIn: enemyShinBraverCutIn(resources, gameObjectAction),
   });
 }

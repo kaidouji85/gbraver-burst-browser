@@ -1,11 +1,11 @@
 // @flow
 
-import type {Resources} from "../../../resource";
-import type {Stream} from "../../../stream/stream";
-import type {GameObjectAction} from "../../action/game-object-action";
-import {ShinyaCutIn} from "./shinya";
-import {EnemyShinyaView} from "./view/enemy-shinya-view";
-import {PlayerShinyaView} from "./view/player-shinya-view";
+import type { Resources } from "../../../resource";
+import type { Stream } from "../../../stream/stream";
+import type { GameObjectAction } from "../../action/game-object-action";
+import { ShinyaCutIn } from "./shinya";
+import { EnemyShinyaView } from "./view/enemy-shinya-view";
+import { PlayerShinyaView } from "./view/player-shinya-view";
 
 /**
  * プレイヤー側 シンヤ カットイン
@@ -14,7 +14,10 @@ import {PlayerShinyaView} from "./view/player-shinya-view";
  * @param gameObjectAction ゲームオブジェクトアクション
  * @return シンヤ カットイン
  */
-export function playerShinyaCutIn(resources: Resources, gameObjectAction: Stream<GameObjectAction>): ShinyaCutIn {
+export function playerShinyaCutIn(
+  resources: Resources,
+  gameObjectAction: Stream<GameObjectAction>
+): ShinyaCutIn {
   const view = new PlayerShinyaView(resources);
   return new ShinyaCutIn(view, resources, gameObjectAction);
 }
@@ -26,7 +29,10 @@ export function playerShinyaCutIn(resources: Resources, gameObjectAction: Stream
  * @param gameObjectAction ゲームオブジェクトアクション
  * @return シンヤ カットイン
  */
-export function enemyShinyaCutIn(resources: Resources, gameObjectAction: Stream<GameObjectAction>): ShinyaCutIn {
+export function enemyShinyaCutIn(
+  resources: Resources,
+  gameObjectAction: Stream<GameObjectAction>
+): ShinyaCutIn {
   const view = new EnemyShinyaView(resources);
   return new ShinyaCutIn(view, resources, gameObjectAction);
 }

@@ -1,14 +1,18 @@
 // @flow
 
-import type {Player, PlayerId} from "gbraver-burst-core";
+import type { Player, PlayerId } from "gbraver-burst-core";
 import * as THREE from "three";
-import type {GameObjectAction} from "../../../../../game-object/action/game-object-action";
-import type {ArmDozerSprite} from "../../../../../game-object/armdozer/armdozer-sprite";
-import {EnemyNeoLandozer, PlayerNeoLandozer} from "../../../../../game-object/armdozer/neo-landozer";
-import {NeoLandozer} from "../../../../../game-object/armdozer/neo-landozer/neo-landozer";
-import type {Resources} from "../../../../../resource";
-import type {Stream} from "../../../../../stream/stream";
-import type {TDArmdozerObjects} from "./armdozer-objects";
+
+import type { GameObjectAction } from "../../../../../game-object/action/game-object-action";
+import type { ArmDozerSprite } from "../../../../../game-object/armdozer/armdozer-sprite";
+import {
+  EnemyNeoLandozer,
+  PlayerNeoLandozer,
+} from "../../../../../game-object/armdozer/neo-landozer";
+import { NeoLandozer } from "../../../../../game-object/armdozer/neo-landozer/neo-landozer";
+import type { Resources } from "../../../../../resource";
+import type { Stream } from "../../../../../stream/stream";
+import type { TDArmdozerObjects } from "./armdozer-objects";
 
 /**
  * 3Dレイヤー ネオランドーザ 3Dレイヤー フィールド
@@ -58,9 +62,7 @@ export class NeoLandozerTD implements NeoLandozerTDField, TDArmdozerObjects {
    * @return シーンに追加するオブジェクト
    */
   getObject3Ds(): typeof THREE.Object3D[] {
-    return [
-      this.neoLandozer.getObject3D()
-    ];
+    return [this.neoLandozer.getObject3D()];
   }
 }
 
@@ -72,9 +74,13 @@ export class NeoLandozerTD implements NeoLandozerTDField, TDArmdozerObjects {
  * @param state プレイヤー情報
  * @return 生成結果
  */
-export function playerNeoLandozerTD(resources: Resources, gameObjectAction: Stream<GameObjectAction>, state: Player): NeoLandozerTD {
+export function playerNeoLandozerTD(
+  resources: Resources,
+  gameObjectAction: Stream<GameObjectAction>,
+  state: Player
+): NeoLandozerTD {
   return new NeoLandozerTD(state.playerId, {
-    neoLandozer: PlayerNeoLandozer(resources, gameObjectAction)
+    neoLandozer: PlayerNeoLandozer(resources, gameObjectAction),
   });
 }
 
@@ -86,8 +92,12 @@ export function playerNeoLandozerTD(resources: Resources, gameObjectAction: Stre
  * @param state プレイヤー情報
  * @return 生成結果
  */
-export function enemyNeoLandozerTD(resources: Resources, gameObjectAction: Stream<GameObjectAction>, state: Player): NeoLandozerTD {
+export function enemyNeoLandozerTD(
+  resources: Resources,
+  gameObjectAction: Stream<GameObjectAction>,
+  state: Player
+): NeoLandozerTD {
   return new NeoLandozerTD(state.playerId, {
-    neoLandozer: EnemyNeoLandozer(resources, gameObjectAction)
+    neoLandozer: EnemyNeoLandozer(resources, gameObjectAction),
   });
 }

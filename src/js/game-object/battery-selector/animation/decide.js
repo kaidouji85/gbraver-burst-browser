@@ -1,8 +1,8 @@
 // @flow
 
-import {Animate} from "../../../animation/animate";
-import {tween} from "../../../animation/tween";
-import type {BatterySelectorModel} from "../model";
+import { Animate } from "../../../animation/animate";
+import { tween } from "../../../animation/tween";
+import type { BatterySelectorModel } from "../model";
 
 /**
  * バッテリー決定アニメーション
@@ -11,6 +11,7 @@ import type {BatterySelectorModel} from "../model";
  * @return アニメーション
  */
 export function decide(model: BatterySelectorModel): Animate {
-  return tween(model, t => t.to({batteryButtonScale: 1.1}, 100))
-    .chain(tween(model, t => t.to({batteryButtonScale: 1}, 100)))
+  return tween(model, (t) => t.to({ batteryButtonScale: 1.1 }, 100)).chain(
+    tween(model, (t) => t.to({ batteryButtonScale: 1 }, 100))
+  );
 }

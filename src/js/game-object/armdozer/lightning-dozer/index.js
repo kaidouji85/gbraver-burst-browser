@@ -1,11 +1,11 @@
 // @flow
 
-import type {Resources} from "../../../resource";
-import type {Stream} from "../../../stream/stream";
-import type {GameObjectAction} from "../../action/game-object-action";
-import {LightningDozer} from "./lightning-dozer";
-import {EnemyLightningDozerView} from "./view/enemy-lightning-dozer-view";
-import {PlayerLightingDozerView} from "./view/player-lighting-dozer-view";
+import type { Resources } from "../../../resource";
+import type { Stream } from "../../../stream/stream";
+import type { GameObjectAction } from "../../action/game-object-action";
+import { LightningDozer } from "./lightning-dozer";
+import { EnemyLightningDozerView } from "./view/enemy-lightning-dozer-view";
+import { PlayerLightingDozerView } from "./view/player-lighting-dozer-view";
 
 /**
  * プレイヤー側のライトニングドーザを生成する
@@ -14,7 +14,10 @@ import {PlayerLightingDozerView} from "./view/player-lighting-dozer-view";
  * @param gameObjectAction ゲームオブジェクトアクション
  * @return プレイヤー側のライトニングドーザ
  */
-export function PlayerLightningDozer(resources: Resources, gameObjectAction: Stream<GameObjectAction>): LightningDozer {
+export function PlayerLightningDozer(
+  resources: Resources,
+  gameObjectAction: Stream<GameObjectAction>
+): LightningDozer {
   const view = new PlayerLightingDozerView(resources);
   return new LightningDozer(resources, gameObjectAction, view);
 }
@@ -26,7 +29,10 @@ export function PlayerLightningDozer(resources: Resources, gameObjectAction: Str
  * @param gameObjectAction ゲームオブジェクトアクション
  * @return 敵側のライトニングドーザ
  */
-export function EnemyLightningDozer(resources: Resources, gameObjectAction: Stream<GameObjectAction>): LightningDozer {
+export function EnemyLightningDozer(
+  resources: Resources,
+  gameObjectAction: Stream<GameObjectAction>
+): LightningDozer {
   const view = new EnemyLightningDozerView(resources);
   return new LightningDozer(resources, gameObjectAction, view);
 }

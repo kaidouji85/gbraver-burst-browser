@@ -1,9 +1,9 @@
 // @flow
 
-import {Animate} from "../../../animation/animate";
-import {process} from "../../../animation/process";
-import {tween} from "../../../animation/tween";
-import type {PilotButtonModel} from "../model/pilot-button-model";
+import { Animate } from "../../../animation/animate";
+import { process } from "../../../animation/process";
+import { tween } from "../../../animation/tween";
+import type { PilotButtonModel } from "../model/pilot-button-model";
 
 /**
  * パイロットボタンを表示する
@@ -18,8 +18,10 @@ export function open(model: PilotButtonModel, canPilot: boolean): Animate {
     model.canPilot = canPilot;
     model.opacity = 0;
   })
-    .chain(tween(model, t => t.to({opacity: 1}, 200)))
-    .chain(process(() => {
-      model.disabled = false;
-    }));
+    .chain(tween(model, (t) => t.to({ opacity: 1 }, 200)))
+    .chain(
+      process(() => {
+        model.disabled = false;
+      })
+    );
 }

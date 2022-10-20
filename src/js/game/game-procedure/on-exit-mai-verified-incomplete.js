@@ -1,12 +1,14 @@
 // @flow
-import type {GameProps} from "../game-props";
+import type { GameProps } from "../game-props";
 
 /**
  * メール認証未完了画面を抜ける時の処理
  *
  * @return 処理が完了したら発火するPromise
  */
-export async function onExitMailVerifiedIncomplete(props: $ReadOnly<GameProps>): Promise<void> {
+export async function onExitMailVerifiedIncomplete(
+  props: $ReadOnly<GameProps>
+): Promise<void> {
   await props.fader.fadeOut();
   await props.api.logout();
 }

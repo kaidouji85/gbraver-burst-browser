@@ -1,11 +1,11 @@
 // @flow
 
-import type {Resources} from "../../../resource";
-import type {Stream} from "../../../stream/stream";
-import type {GameObjectAction} from "../../action/game-object-action";
-import {NeoLandozer} from './neo-landozer';
-import {EnemyNeoLandozerView} from "./view/enemy-neo-landozer-view";
-import {PlayerNeoLandozerView} from "./view/player-neo-landozer-view";
+import type { Resources } from "../../../resource";
+import type { Stream } from "../../../stream/stream";
+import type { GameObjectAction } from "../../action/game-object-action";
+import { NeoLandozer } from "./neo-landozer";
+import { EnemyNeoLandozerView } from "./view/enemy-neo-landozer-view";
+import { PlayerNeoLandozerView } from "./view/player-neo-landozer-view";
 
 /**
  * プレイヤー側ネオランドーザ
@@ -14,7 +14,10 @@ import {PlayerNeoLandozerView} from "./view/player-neo-landozer-view";
  * @param gameObjectAction ゲームオブジェクトアクション
  * @return ネオランドーザ
  */
-export function PlayerNeoLandozer(resources: Resources, gameObjectAction: Stream<GameObjectAction>): NeoLandozer {
+export function PlayerNeoLandozer(
+  resources: Resources,
+  gameObjectAction: Stream<GameObjectAction>
+): NeoLandozer {
   const view = new PlayerNeoLandozerView(resources);
   return new NeoLandozer(view, resources, gameObjectAction);
 }
@@ -26,7 +29,10 @@ export function PlayerNeoLandozer(resources: Resources, gameObjectAction: Stream
  * @param gameObjectAction ゲームオブジェクトアクション
  * @return ネオランドーザ
  */
-export function EnemyNeoLandozer(resources: Resources, gameObjectAction: Stream<GameObjectAction>): NeoLandozer {
+export function EnemyNeoLandozer(
+  resources: Resources,
+  gameObjectAction: Stream<GameObjectAction>
+): NeoLandozer {
   const view = new EnemyNeoLandozerView(resources);
   return new NeoLandozer(view, resources, gameObjectAction);
 }

@@ -1,5 +1,5 @@
 // @flow
-import type {SoundVolume} from "../../../../config/browser-config";
+import type { SoundVolume } from "../../../../config/browser-config";
 
 /**
  * 音量を画面表示用にパースするヘルパー関数

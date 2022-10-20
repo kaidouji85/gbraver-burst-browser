@@ -1,6 +1,6 @@
 // @flow
 
-import type {PlayerId} from "gbraver-burst-core";
+import type { PlayerId } from "gbraver-burst-core";
 import * as THREE from "three";
 
 /**

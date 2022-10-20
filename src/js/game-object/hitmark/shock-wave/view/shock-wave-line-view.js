@@ -1,11 +1,12 @@
 // @flow
 
-import * as THREE from 'three';
-import {SPRITE_RENDER_ORDER} from "../../../../render/render-order/td-render-order";
-import type {Resources} from "../../../../resource";
-import {TEXTURE_IDS} from "../../../../resource/texture/ids";
-import type {ShockWaveLineModel} from "../model/shock-wave-model";
-import {LINE_Z_INDEX} from "./z-index";
+import * as THREE from "three";
+
+import { SPRITE_RENDER_ORDER } from "../../../../render/render-order/td-render-order";
+import type { Resources } from "../../../../resource";
+import { TEXTURE_IDS } from "../../../../resource/texture/ids";
+import type { ShockWaveLineModel } from "../model/shock-wave-model";
+import { LINE_Z_INDEX } from "./z-index";
 
 /** メッシュ幅 */
 export const WIDTH = 100;
@@ -22,7 +23,9 @@ export class ShockWaveLineView {
   constructor(resources: Resources) {
     this.#group = new THREE.Group();
 
-    const textureResource = resources.textures.find(v => v.id === TEXTURE_IDS.HITMARK_SHOCK_WAVE_LINE);
+    const textureResource = resources.textures.find(
+      (v) => v.id === TEXTURE_IDS.HITMARK_SHOCK_WAVE_LINE
+    );
     const texture = textureResource
       ? textureResource.texture
       : new THREE.Texture();
@@ -61,11 +64,7 @@ export class ShockWaveLineView {
       LINE_Z_INDEX
     );
     this.#group.rotation.z = model.rotate;
-    this.#group.scale.set(
-      model.scale,
-      1,
-      1
-    );
+    this.#group.scale.set(model.scale, 1, 1);
   }
   /**
    * シーンに追加するオブジェクトを返す
