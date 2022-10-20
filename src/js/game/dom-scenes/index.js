@@ -1,5 +1,6 @@
 // @flow
 import type { ArmDozerId } from "gbraver-burst-core";
+
 import type { BGMManager } from "../../bgm/bgm-manager";
 import type { Resources } from "../../resource";
 import type { LoadingActions } from "../../resource/loading-actions";

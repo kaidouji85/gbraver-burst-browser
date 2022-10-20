@@ -1,6 +1,7 @@
 // @flow
 
 import * as THREE from "three";
+
 import type { ContinuousAttackModel } from "../model/continuous-attack-model";
 
 /**

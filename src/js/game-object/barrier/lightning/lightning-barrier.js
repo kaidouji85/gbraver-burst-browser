@@ -2,6 +2,7 @@
 
 import TWEEN from "@tweenjs/tween.js";
 import * as THREE from "three";
+
 import { Animate } from "../../../animation/animate";
 import type { PreRender } from "../../../game-loop/pre-render";
 import type { Update } from "../../../game-loop/update";

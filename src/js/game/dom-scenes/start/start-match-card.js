@@ -1,5 +1,6 @@
 // @flow
 import type { ArmDozerId } from "gbraver-burst-core";
+
 import type { Resources } from "../../../resource";
 import { waitTime } from "../../../wait/wait-time";
 import { bindScene } from "../bind-scene";

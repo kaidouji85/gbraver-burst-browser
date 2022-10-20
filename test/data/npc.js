@@ -1,6 +1,7 @@
 // @flow
 import type { Armdozer, Command, Pilot } from "gbraver-burst-core";
 import { ArmDozers, Pilots } from "gbraver-burst-core";
+
 import type { NPC } from "../../src/js/npc/npc";
 
 /** 空NPCのシンプルな実装 */

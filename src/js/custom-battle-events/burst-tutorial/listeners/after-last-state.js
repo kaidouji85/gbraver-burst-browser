@@ -1,5 +1,6 @@
 // @flow
 import type { GameEnd, GameOver } from "gbraver-burst-core";
+
 import type { LastState } from "../../../td-scenes/battle/custom-battle-event";
 import type { BurstTutorialState } from "../state";
 import { playerLose } from "../stories/player-lose";

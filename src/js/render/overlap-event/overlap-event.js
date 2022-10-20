@@ -1,6 +1,7 @@
 // @flow
 
 import * as THREE from "three";
+
 import { filter, map, share } from "../../stream/operator";
 import type { Stream } from "../../stream/stream";
 import type { RendererDOMEvent } from "../dom-event/dom-event";

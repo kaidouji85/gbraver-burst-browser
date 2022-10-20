@@ -1,6 +1,7 @@
 // @flow
 
 import * as THREE from "three";
+
 import type { Resources } from "../../../../resource";
 import type { ArmdozerAnimation } from "../../mesh/armdozer-animation";
 import { shinBraverBackStep } from "../mesh/back-step";

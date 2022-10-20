@@ -1,5 +1,6 @@
 // @flow
 import type { ArmDozerId, GameEnd, PilotId } from "gbraver-burst-core";
+
 import type { GbraverBurstBrowserConfig } from "./config/browser-config";
 import type { NPCBattleCourseDifficulty } from "./npc-battle-courses";
 import type { PostBattle } from "./post-battle";

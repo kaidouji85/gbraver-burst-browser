@@ -1,6 +1,7 @@
 // @flow
 import TWEEN from "@tweenjs/tween.js";
 import type { Player, PlayerId } from "gbraver-burst-core";
+
 import type { GameLoop } from "../../../game-loop/game-loop";
 import type { PreRender } from "../../../game-loop/pre-render";
 import type { Update } from "../../../game-loop/update";

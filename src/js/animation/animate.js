@@ -1,6 +1,7 @@
 // @flow
 
 import TWEEN from "@tweenjs/tween.js";
+
 import { scaleTweenDuration } from "./duration";
 
 /**

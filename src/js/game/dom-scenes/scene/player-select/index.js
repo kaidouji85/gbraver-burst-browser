@@ -1,6 +1,7 @@
 // @flow
 import type { ArmDozerId, PilotId } from "gbraver-burst-core";
 import { ArmDozerIds, PilotIds } from "gbraver-burst-core";
+
 import type { Resources } from "../../../../resource";
 import type {
   Stream,

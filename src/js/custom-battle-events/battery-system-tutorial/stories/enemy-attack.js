@@ -1,5 +1,6 @@
 // @flow
 import type { BattleResult } from "gbraver-burst-core";
+
 import type { CustomBattleEventProps } from "../../../td-scenes/battle/custom-battle-event";
 import {
   activeLeftMessageWindowWithFace,

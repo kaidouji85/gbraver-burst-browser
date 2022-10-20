@@ -1,5 +1,6 @@
 // @flow
 import type { Battle, GameState } from "gbraver-burst-core";
+
 import type { LastState } from "../../../td-scenes/battle/custom-battle-event";
 import type { BurstTutorialState } from "../state";
 import { failReflectDamage } from "../stories/fail-reflect-damage";

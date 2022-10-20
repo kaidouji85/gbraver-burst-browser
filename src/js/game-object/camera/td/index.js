@@ -1,6 +1,7 @@
 // @flow
 
 import * as THREE from "three";
+
 import { Animate } from "../../../animation/animate";
 import { onResizePerspectiveCamera } from "../../../camera/resize";
 import type { Update } from "../../../game-loop/update";

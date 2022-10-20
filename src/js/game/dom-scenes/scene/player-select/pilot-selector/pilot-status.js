@@ -2,6 +2,7 @@
 
 import type { PilotId } from "gbraver-burst-core";
 import { Pilots } from "gbraver-burst-core";
+
 import { domUuid } from "../../../../../uuid/dom-uuid";
 import { pilotSkillTemplate } from "./status-template";
 

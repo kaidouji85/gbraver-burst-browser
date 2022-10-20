@@ -1,5 +1,6 @@
 // @flow
 import { Tween } from "@tweenjs/tween.js";
+
 import { scaleTweenDuration } from "../../../src/js/animation/duration";
 
 test("Tween Durationがスケールされている", () => {

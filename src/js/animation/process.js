@@ -1,6 +1,7 @@
 // @flow
 
 import TWEEN from "@tweenjs/tween.js";
+
 import { Animate } from "./animate";
 import { tween } from "./tween";
 

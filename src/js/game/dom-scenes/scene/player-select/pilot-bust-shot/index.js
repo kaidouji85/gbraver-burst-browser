@@ -1,6 +1,7 @@
 // @flow
 
 import type { PilotId } from "gbraver-burst-core";
+
 import type { Resources } from "../../../../../resource";
 import { createPilotBustShot } from "./create-bust-shot";
 import { PilotBustShot } from "./pilot-bust-shot";

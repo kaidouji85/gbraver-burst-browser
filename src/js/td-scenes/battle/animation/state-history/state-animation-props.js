@@ -1,5 +1,6 @@
 // @flow
 import type { PlayerId } from "gbraver-burst-core";
+
 import type { BGMManager } from "../../../../bgm/bgm-manager";
 import { BattleSceneSounds } from "../../sounds/sounds";
 import { BattleSceneView } from "../../view";

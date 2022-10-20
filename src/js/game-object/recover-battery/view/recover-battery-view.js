@@ -1,6 +1,7 @@
 // @flow
 
 import * as THREE from "three";
+
 import type { RecoverBatteryModel } from "../model/recover-battery-model";
 
 /** バッテリー回復 */

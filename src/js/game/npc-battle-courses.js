@@ -1,6 +1,7 @@
 // @flow
 import type { ArmDozerId } from "gbraver-burst-core";
 import { ArmDozerIds } from "gbraver-burst-core";
+
 import {
   attack3Defense2LightningDozerNPC,
   attack3Defense2ShinBraverNPC,

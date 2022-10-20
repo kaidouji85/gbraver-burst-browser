@@ -1,6 +1,7 @@
 // @flow
 
 import * as THREE from "three";
+
 import type { IlluminationModel } from "../model/illumination-model";
 
 /**

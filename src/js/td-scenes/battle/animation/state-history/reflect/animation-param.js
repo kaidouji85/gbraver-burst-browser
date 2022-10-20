@@ -1,5 +1,6 @@
 // @flow
 import type { PlayerState, Reflect } from "gbraver-burst-core";
+
 import type { ArmDozerSprite } from "../../../../../game-object/armdozer/armdozer-sprite";
 import { HUDPlayer } from "../../../view/hud/player";
 import type { TDPlayer } from "../../../view/td/player";

@@ -1,6 +1,7 @@
 // @flow
 
 import type { CriticalHit, Guard, NormalHit } from "gbraver-burst-core";
+
 import { all } from "../../../../../../animation/all";
 import { Animate } from "../../../../../../animation/animate";
 import { empty } from "../../../../../../animation/delay";

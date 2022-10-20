@@ -1,5 +1,6 @@
 // @flow
 import type { GameEnd, GameState, Player, PlayerId } from "gbraver-burst-core";
+
 import type { BGMManager } from "../../bgm/bgm-manager";
 import { Exclusive } from "../../exclusive/exclusive";
 import type { GameLoop } from "../../game-loop/game-loop";

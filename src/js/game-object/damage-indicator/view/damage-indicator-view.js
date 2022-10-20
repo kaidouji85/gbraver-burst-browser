@@ -1,6 +1,7 @@
 // @flow
 
 import * as THREE from "three";
+
 import type { DamageIndicatorModel } from "../model/damage-indicator-model";
 
 /** ダメージインジケータのビュー*/

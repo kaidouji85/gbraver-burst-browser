@@ -1,6 +1,7 @@
 // @flow
 
 import * as THREE from "three";
+
 import type { PreRender } from "../../../../game-loop/pre-render";
 import type { ShinBraverCutInModel } from "../model/shin-braver-cutin-model";
 

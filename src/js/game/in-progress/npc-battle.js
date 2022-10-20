@@ -1,5 +1,6 @@
 // @flow
 import type { ArmDozerId, PilotId } from "gbraver-burst-core";
+
 import type { NPCBattleState } from "../npc-battle";
 
 /** プレイヤー選択 */

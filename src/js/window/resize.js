@@ -1,6 +1,7 @@
 // @flow
 
 import { Observable } from "rxjs";
+
 import type { SafeAreaInset } from "../safe-area/safe-area-inset";
 import { createSafeAreaInset } from "../safe-area/safe-area-inset";
 import type { Stream } from "../stream/stream";

@@ -1,5 +1,6 @@
 // @flow
 import type { Battle, GameStateX } from "gbraver-burst-core";
+
 import { Animate } from "../../../../../animation/animate";
 import { empty } from "../../../../../animation/delay";
 import type { StateAnimationProps } from "../state-animation-props";

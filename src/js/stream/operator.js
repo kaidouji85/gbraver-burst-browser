@@ -8,6 +8,7 @@ import {
   share as shareRXJS,
   tap as tapRXJS,
 } from "rxjs/operators";
+
 import type { Operator, Stream } from "./stream";
 import { createStream } from "./stream";
 

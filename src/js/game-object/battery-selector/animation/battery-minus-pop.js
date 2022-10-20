@@ -1,6 +1,7 @@
 // @flow
 
 import * as TWEEN from "@tweenjs/tween.js";
+
 import { Animate } from "../../../animation/animate";
 import { tween } from "../../../animation/tween";
 import type { BatterySelectorModel } from "../model";

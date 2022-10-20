@@ -1,5 +1,6 @@
 // @flow
 import type { GameEndResult, GameOver } from "gbraver-burst-core";
+
 import {
   BattleAnimationTimeScales,
   parseBattleAnimationTimeScale,

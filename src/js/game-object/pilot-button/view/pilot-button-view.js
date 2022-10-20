@@ -1,5 +1,6 @@
 // @flow
 import * as THREE from "three";
+
 import type { PreRender } from "../../../game-loop/pre-render";
 import { SimpleImageMesh } from "../../../mesh/simple-image-mesh";
 import type { Resources } from "../../../resource";

@@ -1,5 +1,6 @@
 // @flow
 import { ArmDozerIds, ArmDozers, PilotIds, Pilots } from "gbraver-burst-core";
+
 import { createNPCBattleState } from "../../../src/js/game/npc-battle";
 import { DefaultStage } from "../../../src/js/game/npc-battle-courses";
 

@@ -1,6 +1,7 @@
 // @flow
 
 import { Tween } from "@tweenjs/tween.js";
+
 import { tweenDuration } from "../../../src/js/animation/duration";
 
 test("シンプルなTweenの再生時間計算が正しい", () => {

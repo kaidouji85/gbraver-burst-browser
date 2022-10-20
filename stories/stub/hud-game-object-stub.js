@@ -1,6 +1,7 @@
 // @flow
 import TWEEN from "@tweenjs/tween.js";
 import * as THREE from "three";
+
 import type { GameLoop } from "../../src/js/game-loop/game-loop";
 import { gameLoopStream } from "../../src/js/game-loop/game-loop";
 import type { PreRender } from "../../src/js/game-loop/pre-render";

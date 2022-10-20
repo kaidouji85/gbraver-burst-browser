@@ -2,6 +2,7 @@
 
 import * as THREE from "three";
 import { Group } from "three";
+
 import type { Resources } from "../../../../resource";
 import type { ArmdozerAnimation } from "../../mesh/armdozer-animation";
 import { wingDozerBackStep } from "../mesh/back-step";

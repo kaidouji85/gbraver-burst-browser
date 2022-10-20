@@ -1,5 +1,6 @@
 // @flow
 import { ArmDozerIds, ArmDozers, PilotIds, Pilots } from "gbraver-burst-core";
+
 import type { NPC } from "./npc";
 import type { SimpleRoutine } from "./simple-npc";
 import { SimpleNPC } from "./simple-npc";

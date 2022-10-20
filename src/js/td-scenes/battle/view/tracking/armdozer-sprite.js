@@ -1,6 +1,7 @@
 // @flow
 
 import * as THREE from "three";
+
 import type { ArmDozerSprite } from "../../../../game-object/armdozer/armdozer-sprite";
 import { ARMDOZER_EFFECT_STANDARD_Y } from "../../../../game-object/armdozer/position";
 import type { Coordinate } from "../../../../tracking/coordinate";

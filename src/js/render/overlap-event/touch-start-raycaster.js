@@ -1,5 +1,6 @@
 // @flow
 import * as THREE from "three";
+
 import type { TouchRaycastContainer } from "../../raycaster/touch-raycaster";
 import { createTouchEventRaycaster } from "../../raycaster/touch-raycaster";
 import type { TouchStart } from "../dom-event/touch";

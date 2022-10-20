@@ -1,5 +1,6 @@
 // @flow
 import type { GameStateX, PilotSkillEffect } from "gbraver-burst-core";
+
 import { Animate } from "../../../../../animation/animate";
 import { empty } from "../../../../../animation/delay";
 import { GaiHUD } from "../../../view/hud/pilot-objects/gai";

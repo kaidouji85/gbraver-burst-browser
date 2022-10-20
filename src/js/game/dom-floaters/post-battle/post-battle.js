@@ -1,5 +1,6 @@
 // @flow
 import { Howl } from "howler";
+
 import { pop, waitFinishAnimation } from "../../../dom/animation";
 import { pushDOMStream } from "../../../dom/event-stream";
 import { Exclusive } from "../../../exclusive/exclusive";

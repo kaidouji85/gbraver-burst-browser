@@ -1,5 +1,6 @@
 // @flow
 import { Howl } from "howler";
+
 import { Exclusive } from "../../../../exclusive/exclusive";
 import type { Resources } from "../../../../resource";
 import { SOUND_IDS } from "../../../../resource/sound";

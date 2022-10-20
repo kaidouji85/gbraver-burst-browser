@@ -1,5 +1,6 @@
 // @flow
 import * as THREE from "three";
+
 import {
   getViewPortHeight,
   getViewPortWidth,

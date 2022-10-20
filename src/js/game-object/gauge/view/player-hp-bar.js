@@ -1,6 +1,7 @@
 // @flow
 
 import * as THREE from "three";
+
 import { CanvasMesh } from "../../../mesh/canvas-mesh";
 import { SPRITE_RENDER_ORDER } from "../../../render/render-order/td-render-order";
 import type { Resources } from "../../../resource";

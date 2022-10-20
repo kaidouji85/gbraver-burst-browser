@@ -1,5 +1,6 @@
 // @flow
 import * as THREE from "three";
+
 import type { ResourceRoot } from "../resource-root";
 import type { TextureConfig, TextureResource } from "./resource";
 

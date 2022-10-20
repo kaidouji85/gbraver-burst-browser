@@ -1,6 +1,7 @@
 // @flow
 import { Howl } from "howler";
 import * as THREE from "three";
+
 import { Animate } from "../../animation/animate";
 import type { PreRender } from "../../game-loop/pre-render";
 import type { Resources } from "../../resource";

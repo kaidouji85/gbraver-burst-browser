@@ -1,6 +1,7 @@
 // @flow
 
 import * as THREE from "three";
+
 import { FADE_RENDER_ORDER } from "../../../render/render-order/hud-render-order";
 import type { FaderModel } from "../model/fader-model";
 

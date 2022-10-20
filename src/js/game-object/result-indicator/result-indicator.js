@@ -1,5 +1,6 @@
 // @flow
 import * as THREE from "three";
+
 import { Animate } from "../../animation/animate";
 import type { PreRender } from "../../game-loop/pre-render";
 import type { Stream, Unsubscriber } from "../../stream/stream";

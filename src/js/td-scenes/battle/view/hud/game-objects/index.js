@@ -1,6 +1,7 @@
 // @flow
 import type { Player } from "gbraver-burst-core";
 import * as THREE from "three";
+
 import type { GameObjectAction } from "../../../../../game-object/action/game-object-action";
 import { BatterySelector } from "../../../../../game-object/battery-selector";
 import { BurstButton } from "../../../../../game-object/burst-button/burst-button";

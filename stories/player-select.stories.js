@@ -1,6 +1,7 @@
 // @flow
 
 import { ArmDozerIds, PilotIds } from "gbraver-burst-core";
+
 import { PlayerSelect } from "../src/js/game/dom-scenes/scene/player-select";
 import { ArmdozerSelector } from "../src/js/game/dom-scenes/scene/player-select/armdozer-selector";
 import { PilotSelector } from "../src/js/game/dom-scenes/scene/player-select/pilot-selector";

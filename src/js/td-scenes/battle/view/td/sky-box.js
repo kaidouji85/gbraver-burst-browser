@@ -1,6 +1,7 @@
 // @flow
 
 import * as THREE from "three";
+
 import type { Resources } from "../../../../resource";
 import { CUBE_TEXTURE_IDS } from "../../../../resource/cube-texture";
 

@@ -1,5 +1,6 @@
 // @flow
 import type { Player } from "gbraver-burst-core";
+
 import { fadeOut, stop } from "../../bgm/bgm-operators";
 import type { PostBattleAction } from "../game-actions";
 import type { GameProps } from "../game-props";

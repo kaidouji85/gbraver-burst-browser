@@ -1,5 +1,6 @@
 // @flow
 import type { GameStateX, UpdateRemainingTurn } from "gbraver-burst-core";
+
 import { all } from "../../../../animation/all";
 import { Animate } from "../../../../animation/animate";
 import { empty } from "../../../../animation/delay";

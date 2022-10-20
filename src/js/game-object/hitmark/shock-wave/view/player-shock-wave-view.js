@@ -2,6 +2,7 @@
 
 import * as R from "ramda";
 import * as THREE from "three";
+
 import type { Resources } from "../../../../resource";
 import type {
   ShockWaveLineModel,

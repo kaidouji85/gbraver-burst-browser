@@ -1,6 +1,7 @@
 // @flow
 
 import * as THREE from "three";
+
 import type { PreRender } from "../../../game-loop/pre-render";
 import { HorizontalAnimationMesh } from "../../../mesh/horizontal-animation";
 import type { Resources } from "../../../resource";

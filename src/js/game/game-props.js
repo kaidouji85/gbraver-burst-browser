@@ -13,13 +13,14 @@ import type {
   WebsocketErrorNotifier,
   WebsocketUnintentionalCloseNotifier,
 } from "@gbraver-burst-network/browser-core";
+
 import type { BGMManager } from "../bgm/bgm-manager";
 import { createBGMManager } from "../bgm/bgm-manager";
 import { DOMFader } from "../components/dom-fader/dom-fader";
 import { CssHUDUIScale } from "../css/hud-ui-scale";
 import { CssVH } from "../css/vh";
-import { gameLoopStream } from "../game-loop/game-loop";
 import type { GameLoop } from "../game-loop/game-loop";
+import { gameLoopStream } from "../game-loop/game-loop";
 import { Renderer } from "../render";
 import type { Resources } from "../resource";
 import { emptyResources } from "../resource";

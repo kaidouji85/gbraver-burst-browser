@@ -8,6 +8,7 @@ import type {
   PlayerId,
   PlayerState,
 } from "gbraver-burst-core";
+
 import type { NPC } from "./npc";
 
 /** 0バッテリー */

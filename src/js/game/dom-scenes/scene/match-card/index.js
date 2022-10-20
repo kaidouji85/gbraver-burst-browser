@@ -1,6 +1,7 @@
 // @flow
 
 import type { ArmDozerId } from "gbraver-burst-core";
+
 import type { Resources } from "../../../../resource";
 import type { DOMScene } from "../../dom-scene";
 import { MatchCardPresentation } from "./presentation";
