@@ -1,22 +1,24 @@
 // @flow
-import {ArmDozerIds, ArmDozers, PilotIds, Pilots} from "gbraver-burst-core";
-import type {NPC} from "./npc";
-import type {SimpleRoutine} from "./simple-npc";
-import {SimpleNPC} from "./simple-npc";
+import { ArmDozerIds, ArmDozers, PilotIds, Pilots } from "gbraver-burst-core";
+import type { NPC } from "./npc";
+import type { SimpleRoutine } from "./simple-npc";
+import { SimpleNPC } from "./simple-npc";
 
 /** 0バッテリー */
 const ZERO_BATTERY = {
-  type: 'BATTERY_COMMAND',
-  battery: 0
+  type: "BATTERY_COMMAND",
+  battery: 0,
 };
 
 /**
  * @override
  * 攻撃ルーチン
  */
-const attackRoutine: SimpleRoutine = ({commands, enemy, player}) => {
-  const battery1 = commands.find(v => v.type === 'BATTERY_COMMAND' && v.battery === 1);
-  if (battery1 && (player.armdozer.battery < enemy.armdozer.battery)) {
+const attackRoutine: SimpleRoutine = ({ commands, enemy, player }) => {
+  const battery1 = commands.find(
+    (v) => v.type === "BATTERY_COMMAND" && v.battery === 1
+  );
+  if (battery1 && player.armdozer.battery < enemy.armdozer.battery) {
     return battery1;
   }
   return ZERO_BATTERY;
@@ -26,19 +28,28 @@ const attackRoutine: SimpleRoutine = ({commands, enemy, player}) => {
  * @override
  * 防御ルーチン
  */
-const defenseRoutine: SimpleRoutine = ({commands, enemy, player}) => {
-  const oneGreaterThanPlayer = commands.find(v => v.type === 'BATTERY_COMMAND' && v.battery === player.armdozer.battery + 1);
+const defenseRoutine: SimpleRoutine = ({ commands, enemy, player }) => {
+  const oneGreaterThanPlayer = commands.find(
+    (v) =>
+      v.type === "BATTERY_COMMAND" && v.battery === player.armdozer.battery + 1
+  );
   if (oneGreaterThanPlayer) {
     return oneGreaterThanPlayer;
   }
 
-  const sameSaPlayer = commands.find(v => v.type === 'BATTERY_COMMAND' && v.battery === player.armdozer.battery);
+  const sameSaPlayer = commands.find(
+    (v) => v.type === "BATTERY_COMMAND" && v.battery === player.armdozer.battery
+  );
   if (sameSaPlayer) {
     return sameSaPlayer;
   }
 
-  const maxBattery = commands.find(v => v.type === 'BATTERY_COMMAND' && v.battery === enemy.armdozer.battery);
-  const battery1 = commands.find(v => v.type === 'BATTERY_COMMAND' && v.battery === 1);
+  const maxBattery = commands.find(
+    (v) => v.type === "BATTERY_COMMAND" && v.battery === enemy.armdozer.battery
+  );
+  const battery1 = commands.find(
+    (v) => v.type === "BATTERY_COMMAND" && v.battery === 1
+  );
   return maxBattery ?? battery1 ?? ZERO_BATTERY;
 };
 
@@ -48,8 +59,9 @@ const defenseRoutine: SimpleRoutine = ({commands, enemy, player}) => {
  * @return NPC
  */
 export function prioritizeDefenseWingDozer(): NPC {
-  const armdozer = ArmDozers.find(v => v.id === ArmDozerIds.WING_DOZER) ?? ArmDozers[0];
-  const pilot = Pilots.find(v => v.id === PilotIds.RAITO) ?? Pilots[0];
+  const armdozer =
+    ArmDozers.find((v) => v.id === ArmDozerIds.WING_DOZER) ?? ArmDozers[0];
+  const pilot = Pilots.find((v) => v.id === PilotIds.RAITO) ?? Pilots[0];
   return new SimpleNPC(armdozer, pilot, attackRoutine, defenseRoutine);
 }
 
@@ -59,7 +71,8 @@ export function prioritizeDefenseWingDozer(): NPC {
  * @return NPC
  */
 export function prioritizeDefenseShinBraverNPC(): NPC {
-  const armdozer = ArmDozers.find(v => v.id === ArmDozerIds.SHIN_BRAVER) ?? ArmDozers[0];
-  const pilot = Pilots.find(v => v.id === PilotIds.SHINYA) ?? Pilots[0];
+  const armdozer =
+    ArmDozers.find((v) => v.id === ArmDozerIds.SHIN_BRAVER) ?? ArmDozers[0];
+  const pilot = Pilots.find((v) => v.id === PilotIds.SHINYA) ?? Pilots[0];
   return new SimpleNPC(armdozer, pilot, attackRoutine, defenseRoutine);
 }

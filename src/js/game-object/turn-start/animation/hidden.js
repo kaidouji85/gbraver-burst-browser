@@ -1,8 +1,8 @@
 // @flow
 
-import {Animate} from "../../../animation/animate";
-import {tween} from "../../../animation/tween";
-import type {TurnStartModel} from "../model/turn-start-model";
+import { Animate } from "../../../animation/animate";
+import { tween } from "../../../animation/tween";
+import type { TurnStartModel } from "../model/turn-start-model";
 
 /**
  * 非表示アニメーション
@@ -11,5 +11,5 @@ import type {TurnStartModel} from "../model/turn-start-model";
  * @return アニメーション
  */
 export function hidden(model: TurnStartModel): Animate {
-  return tween(model, t => t.to({opacity: 0}, 200));
+  return tween(model, (t) => t.to({ opacity: 0 }, 200));
 }

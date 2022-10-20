@@ -1,5 +1,5 @@
 // @flow
-import type {ConfigProps} from "../props";
+import type { ConfigProps } from "../props";
 
 /**
  * 設定変更ダイアログで「設定変更を破棄」を選択した時の処理

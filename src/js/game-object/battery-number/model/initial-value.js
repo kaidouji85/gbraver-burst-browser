@@ -1,6 +1,6 @@
 // @flow
 
-import type {BatteryNumberModel} from "./battery-number-model";
+import type { BatteryNumberModel } from "./battery-number-model";
 
 /**
  * バッテリー数字モデルの初期値を生成する
@@ -11,6 +11,6 @@ export function createInitialValue(): BatteryNumberModel {
   return {
     opacity: 0,
     scale: 1,
-    battery: 0
+    battery: 0,
   };
 }

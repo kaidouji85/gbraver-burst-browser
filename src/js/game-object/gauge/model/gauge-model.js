@@ -3,7 +3,7 @@
 /** バッテリーゲージの1マス分のモデル */
 export type Battery = {
   value: number,
-  opacity: number
+  opacity: number,
 };
 
 /** ゲージのモデル */
@@ -14,6 +14,5 @@ export type GaugeModel = {
   tracking: {
     x: number,
     y: number,
-  }
+  },
 };
-

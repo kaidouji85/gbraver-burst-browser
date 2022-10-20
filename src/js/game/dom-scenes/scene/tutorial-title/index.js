@@ -1,7 +1,7 @@
 // @flow
-import type {DOMScene} from "../../dom-scene";
-import type {CreatePropsParams, TutorialTitleProps} from "./props";
-import {createTutorialTitleProps} from "./props";
+import type { DOMScene } from "../../dom-scene";
+import type { CreatePropsParams, TutorialTitleProps } from "./props";
+import { createTutorialTitleProps } from "./props";
 
 /** チュートリアルタイトル画面パラメータ */
 export type TutorialTitleParams = CreatePropsParams;
@@ -36,6 +36,9 @@ export class TutorialTitle implements DOMScene {
    * @return 待機結果
    */
   async waitUntilLoaded(): Promise<void> {
-    await Promise.all([this.#props.isStandLoaded, this.#props.isBustShotLoaded]);
+    await Promise.all([
+      this.#props.isStandLoaded,
+      this.#props.isBustShotLoaded,
+    ]);
   }
 }

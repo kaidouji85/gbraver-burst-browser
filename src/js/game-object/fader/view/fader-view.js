@@ -1,8 +1,8 @@
 // @flow
 
-import * as THREE from 'three';
-import {FADE_RENDER_ORDER} from "../../../render/render-order/hud-render-order";
-import type {FaderModel} from "../model/fader-model";
+import * as THREE from "three";
+import { FADE_RENDER_ORDER } from "../../../render/render-order/hud-render-order";
+import type { FaderModel } from "../model/fader-model";
 
 export const MESH_WIDTH = 1;
 export const MESH_HEIGHT = 1;
@@ -14,8 +14,8 @@ export class FaderView {
   constructor(z: number) {
     const geometry = new THREE.PlaneGeometry(MESH_WIDTH, MESH_HEIGHT);
     const material = new THREE.MeshBasicMaterial({
-      color: 'rgb(23, 23, 23)',
-      transparent: true
+      color: "rgb(23, 23, 23)",
+      transparent: true,
     });
     this.#mesh = new THREE.Mesh(geometry, material);
     this.#mesh.position.z = z;
@@ -46,11 +46,7 @@ export class FaderView {
     this.#mesh.material.opacity = model.opacity;
 
     const isTransparent = 0 < model.opacity;
-    this.#mesh.scale.x = isTransparent
-      ? model.width / MESH_WIDTH
-      : 1;
-    this.#mesh.scale.y = isTransparent
-      ? model.height / MESH_HEIGHT
-      : 1;
+    this.#mesh.scale.x = isTransparent ? model.width / MESH_WIDTH : 1;
+    this.#mesh.scale.y = isTransparent ? model.height / MESH_HEIGHT : 1;
   }
 }

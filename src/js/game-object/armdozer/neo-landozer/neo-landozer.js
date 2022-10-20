@@ -1,28 +1,28 @@
 // @flow
 
 import * as THREE from "three";
-import {Animate} from "../../../animation/animate";
-import type {PreRender} from "../../../game-loop/pre-render";
-import type {Resources} from "../../../resource";
-import type {Stream, Unsubscriber} from "../../../stream/stream";
-import type {GameObjectAction} from "../../action/game-object-action";
-import type {ArmDozerSprite} from '../armdozer-sprite';
-import {armHammer} from "./animation/arm-hammer";
-import {avoid} from "./animation/avoid";
-import {charge} from "./animation/charge";
-import {down} from "./animation/down";
-import {frontStep} from "./animation/front-step";
-import {guard} from './animation/guard';
-import {guardToStand} from './animation/guard-to-stand';
-import {guts} from "./animation/guts";
-import {gutsToStand} from "./animation/guts-to-stand";
-import {hmToStand} from "./animation/hm-to-stand";
-import {knockBack} from "./animation/knock-back";
-import {knockBackToStand} from "./animation/knock-back-to-stand";
-import {createInitialValue} from "./model/initial-value";
-import type {NeoLandozerModel} from "./model/neo-landozer-model";
-import {NeoLandozerSounds} from "./sounds/neo-landozer-sounds";
-import type {NeoLandozerView} from "./view/neo-landozer-view";
+import { Animate } from "../../../animation/animate";
+import type { PreRender } from "../../../game-loop/pre-render";
+import type { Resources } from "../../../resource";
+import type { Stream, Unsubscriber } from "../../../stream/stream";
+import type { GameObjectAction } from "../../action/game-object-action";
+import type { ArmDozerSprite } from "../armdozer-sprite";
+import { armHammer } from "./animation/arm-hammer";
+import { avoid } from "./animation/avoid";
+import { charge } from "./animation/charge";
+import { down } from "./animation/down";
+import { frontStep } from "./animation/front-step";
+import { guard } from "./animation/guard";
+import { guardToStand } from "./animation/guard-to-stand";
+import { guts } from "./animation/guts";
+import { gutsToStand } from "./animation/guts-to-stand";
+import { hmToStand } from "./animation/hm-to-stand";
+import { knockBack } from "./animation/knock-back";
+import { knockBackToStand } from "./animation/knock-back-to-stand";
+import { createInitialValue } from "./model/initial-value";
+import type { NeoLandozerModel } from "./model/neo-landozer-model";
+import { NeoLandozerSounds } from "./sounds/neo-landozer-sounds";
+import type { NeoLandozerView } from "./view/neo-landozer-view";
 
 /** ネオランドーザのゲームオブジェクト */
 export class NeoLandozer implements ArmDozerSprite {
@@ -38,15 +38,19 @@ export class NeoLandozer implements ArmDozerSprite {
    * @param resources リソース管理オブジェクト
    * @param gameObjectAction ゲームオブジェクトアクション
    */
-  constructor(view: NeoLandozerView, resources: Resources, gameObjectAction: Stream<GameObjectAction>) {
+  constructor(
+    view: NeoLandozerView,
+    resources: Resources,
+    gameObjectAction: Stream<GameObjectAction>
+  ) {
     this.#model = createInitialValue();
     this.#view = view;
     this.#sounds = new NeoLandozerSounds(resources);
 
-    this.#unsubscriber = gameObjectAction.subscribe(action => {
-      if (action.type === 'Update') {
+    this.#unsubscriber = gameObjectAction.subscribe((action) => {
+      if (action.type === "Update") {
         this.#update();
-      } else if (action.type === 'PreRender') {
+      } else if (action.type === "PreRender") {
         this.#preRender(action);
       }
     });
@@ -99,7 +103,7 @@ export class NeoLandozer implements ArmDozerSprite {
   gutsToStand(): Animate {
     return gutsToStand(this.#model, this.#sounds);
   }
-  
+
   /** ノックバック */
   knockBack(): Animate {
     return knockBack(this.#model);

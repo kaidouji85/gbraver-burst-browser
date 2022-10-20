@@ -1,7 +1,7 @@
 // @flow
-import * as THREE from 'three';
-import {createRaycaster} from "./raycaster";
-import {getScreenPosition} from "./screen-position";
+import * as THREE from "three";
+import { createRaycaster } from "./raycaster";
+import { getScreenPosition } from "./screen-position";
 
 /** タッチのレイキャストを集めたもの */
 export type TouchRaycastContainer = {
@@ -18,7 +18,7 @@ export type TouchRaycaster = {
   /** タッチごとに割り当てられるユニークID */
   identifier: number,
   /** タッチのレイキャスト */
-  raycaster: typeof THREE.Raycaster
+  raycaster: typeof THREE.Raycaster,
 };
 
 /**
@@ -29,17 +29,20 @@ export type TouchRaycaster = {
  * @param camera カメラ
  * @return タッチイベントから作成したレイキャスト
  */
-export function createTouchEventRaycaster(event: TouchEvent, rendererDOM: HTMLElement, camera: typeof THREE.Camera): TouchRaycastContainer {
+export function createTouchEventRaycaster(
+  event: TouchEvent,
+  rendererDOM: HTMLElement,
+  camera: typeof THREE.Camera
+): TouchRaycastContainer {
   const touchToRaycaster = (touchList: TouchList): TouchRaycaster[] =>
-    Object.values(touchList)
-      .map(v => {
-        const touch: Touch = v instanceof Touch ? v : new Touch();
-        const position = getTouchPosition(touch, rendererDOM);
-        return {
-          identifier: touch.identifier,
-          raycaster: createRaycaster(position, camera)
-        };
-      });
+    Object.values(touchList).map((v) => {
+      const touch: Touch = v instanceof Touch ? v : new Touch();
+      const position = getTouchPosition(touch, rendererDOM);
+      return {
+        identifier: touch.identifier,
+        raycaster: createRaycaster(position, camera),
+      };
+    });
 
   return {
     changedTouches: touchToRaycaster(event.changedTouches),
@@ -54,6 +57,14 @@ export function createTouchEventRaycaster(event: TouchEvent, rendererDOM: HTMLEl
  * @param touch タッチ情報
  * @param rendererDOM レンダラがバインドされているHTML要素
  */
-export function getTouchPosition(touch: Touch, rendererDOM: HTMLElement): typeof THREE.Vector2 {
-  return getScreenPosition(touch.clientX, touch.clientY, rendererDOM.clientWidth, rendererDOM.clientHeight);
+export function getTouchPosition(
+  touch: Touch,
+  rendererDOM: HTMLElement
+): typeof THREE.Vector2 {
+  return getScreenPosition(
+    touch.clientX,
+    touch.clientY,
+    rendererDOM.clientWidth,
+    rendererDOM.clientHeight
+  );
 }

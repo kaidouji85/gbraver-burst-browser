@@ -1,10 +1,10 @@
 // @flow
 
-import {Animate} from "../../../../animation/animate";
-import {process} from "../../../../animation/process";
-import {tween} from "../../../../animation/tween";
-import type {NeoLandozerModel} from "../model/neo-landozer-model";
-import {NeoLandozerSounds} from "../sounds/neo-landozer-sounds";
+import { Animate } from "../../../../animation/animate";
+import { process } from "../../../../animation/process";
+import { tween } from "../../../../animation/tween";
+import type { NeoLandozerModel } from "../model/neo-landozer-model";
+import { NeoLandozerSounds } from "../sounds/neo-landozer-sounds";
 
 /**
  * チャージ
@@ -13,14 +13,13 @@ import {NeoLandozerSounds} from "../sounds/neo-landozer-sounds";
  * @param sounds 音
  * @return アニメーション
  */
-export function charge(model: NeoLandozerModel, sounds: NeoLandozerSounds): Animate {
+export function charge(
+  model: NeoLandozerModel,
+  sounds: NeoLandozerSounds
+): Animate {
   return process(() => {
-    model.animation.type = 'HM_CHARGE';
+    model.animation.type = "HM_CHARGE";
     model.animation.frame = 0;
     sounds.motor.play();
-  }).chain(
-    tween(model.animation, t => t
-      .to({frame: 1}, 300)
-    )
-  );
+  }).chain(tween(model.animation, (t) => t.to({ frame: 1 }, 300)));
 }

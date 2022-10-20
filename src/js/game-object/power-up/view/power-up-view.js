@@ -1,7 +1,7 @@
 // @flow
 
-import * as THREE from 'three';
-import type {PowerUpModel} from "../model/power-up-model";
+import * as THREE from "three";
+import type { PowerUpModel } from "../model/power-up-model";
 
 /**
  * ポップアップ ビュー

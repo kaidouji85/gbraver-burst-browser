@@ -1,7 +1,7 @@
 // @flow
 
 import * as THREE from "three";
-import type {SkyBrightnessModel} from "../model/sky-brightness-model";
+import type { SkyBrightnessModel } from "../model/sky-brightness-model";
 
 /** 全体の大きさ */
 export const SIZE = 5000;
@@ -13,7 +13,7 @@ export class SkyBrightnessView {
   constructor() {
     const geometry = new THREE.BoxGeometry(SIZE, SIZE, SIZE);
     const material = new THREE.MeshBasicMaterial({
-      color: 'rgb(0, 0, 0)',
+      color: "rgb(0, 0, 0)",
       side: THREE.BackSide,
       transparent: true,
     });

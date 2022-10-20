@@ -1,14 +1,17 @@
 // @flow
 
-import * as THREE from 'three';
-import type {PreRender} from "../../../../game-loop/pre-render";
-import {HorizontalAnimationMesh} from "../../../../mesh/horizontal-animation";
-import type {Resources} from "../../../../resource";
-import {TEXTURE_IDS} from "../../../../resource/texture/ids";
-import {HUD_CUT_IN_ZNIDEX} from "../../../hud-zindex";
-import {HUDCutInScale} from "../../../scale";
-import type {AnimationType, ShinBraverCutInModel} from "../model/shin-braver-cutin-model";
-import type {ShinBraverCutInView} from "./shin-braver-cutin-view";
+import * as THREE from "three";
+import type { PreRender } from "../../../../game-loop/pre-render";
+import { HorizontalAnimationMesh } from "../../../../mesh/horizontal-animation";
+import type { Resources } from "../../../../resource";
+import { TEXTURE_IDS } from "../../../../resource/texture/ids";
+import { HUD_CUT_IN_ZNIDEX } from "../../../hud-zindex";
+import { HUDCutInScale } from "../../../scale";
+import type {
+  AnimationType,
+  ShinBraverCutInModel,
+} from "../model/shin-braver-cutin-model";
+import type { ShinBraverCutInView } from "./shin-braver-cutin-view";
 
 /** メッシュの大きさ */
 export const MESH_SIZE = 800;
@@ -27,8 +30,9 @@ export class PlayerShinBraverCutInView implements ShinBraverCutInView {
   constructor(resources: Resources) {
     this.#group = new THREE.Group();
 
-    const cutInUpResource = resources.textures
-      .find(v => v.id === TEXTURE_IDS.SHIN_BRAVER_CUTIN_UP);
+    const cutInUpResource = resources.textures.find(
+      (v) => v.id === TEXTURE_IDS.SHIN_BRAVER_CUTIN_UP
+    );
     const cutInUp = cutInUpResource
       ? cutInUpResource.texture
       : new THREE.Texture();
@@ -36,11 +40,12 @@ export class PlayerShinBraverCutInView implements ShinBraverCutInView {
       texture: cutInUp,
       width: MESH_SIZE,
       height: MESH_SIZE,
-      maxAnimation: 4
+      maxAnimation: 4,
     });
 
-    const cutInDownResource = resources.textures
-      .find(v => v.id === TEXTURE_IDS.SHIN_BRAVER_CUTIN_DOWN);
+    const cutInDownResource = resources.textures.find(
+      (v) => v.id === TEXTURE_IDS.SHIN_BRAVER_CUTIN_DOWN
+    );
     const cutInDown = cutInDownResource
       ? cutInDownResource.texture
       : new THREE.Texture();
@@ -48,10 +53,10 @@ export class PlayerShinBraverCutInView implements ShinBraverCutInView {
       texture: cutInDown,
       width: MESH_SIZE,
       height: MESH_SIZE,
-      maxAnimation: 4
+      maxAnimation: 4,
     });
 
-    this.#getMeshes().forEach(v => {
+    this.#getMeshes().forEach((v) => {
       this.#group.add(v.getObject3D());
     });
   }
@@ -60,7 +65,7 @@ export class PlayerShinBraverCutInView implements ShinBraverCutInView {
    * デストラクタ相当の処理
    */
   destructor(): void {
-    this.#getMeshes().forEach(v => {
+    this.#getMeshes().forEach((v) => {
       v.destructor();
     });
   }
@@ -77,13 +82,14 @@ export class PlayerShinBraverCutInView implements ShinBraverCutInView {
     activeMesh.animate(model.animation.frame);
     activeMesh.setOpacity(model.opacity);
 
-    const disActiveMeshes = this.#getMeshes()
-      .filter(v => v !== activeMesh);
-    disActiveMeshes.forEach(v => {
+    const disActiveMeshes = this.#getMeshes().filter((v) => v !== activeMesh);
+    disActiveMeshes.forEach((v) => {
       v.setOpacity(0);
     });
 
-    const scale = HUDCutInScale(preRender.rendererDOM, preRender.safeAreaInset) * model.scale;
+    const scale =
+      HUDCutInScale(preRender.rendererDOM, preRender.safeAreaInset) *
+      model.scale;
     this.#group.position.x = model.tracking.x;
     this.#group.position.y = model.tracking.y - BASE_PADDING_TOP * scale;
     this.#group.position.z = HUD_CUT_IN_ZNIDEX;
@@ -108,10 +114,7 @@ export class PlayerShinBraverCutInView implements ShinBraverCutInView {
    * @return 管理する全メッシュ
    */
   #getMeshes(): HorizontalAnimationMesh[] {
-    return [
-      this.#cutInUp,
-      this.#cutInDown,
-    ];
+    return [this.#cutInUp, this.#cutInDown];
   }
 
   /**
@@ -122,9 +125,9 @@ export class PlayerShinBraverCutInView implements ShinBraverCutInView {
    */
   #getActiveMesh(type: AnimationType): HorizontalAnimationMesh {
     switch (type) {
-      case 'CUT_IN_UP':
+      case "CUT_IN_UP":
         return this.#cutInUp;
-      case 'CUT_IN_DOWN':
+      case "CUT_IN_DOWN":
       default:
         return this.#cutInDown;
     }

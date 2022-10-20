@@ -1,13 +1,13 @@
 // @flow
 
-import type {Resources} from "../../resource";
-import type {Stream} from "../../stream/stream";
-import type {GameObjectAction} from "../action/game-object-action";
-import {BurstButton} from "./burst-button";
-import {LightningDozerIcon} from "./view/lightning-dozer-icon";
-import {NeoLandozerIcon} from "./view/neo-landozer-icon";
-import {ShinBraverIcon} from "./view/shin-braver-icon";
-import {WingDozerIcon} from "./view/wing-dozer-icon";
+import type { Resources } from "../../resource";
+import type { Stream } from "../../stream/stream";
+import type { GameObjectAction } from "../action/game-object-action";
+import { BurstButton } from "./burst-button";
+import { LightningDozerIcon } from "./view/lightning-dozer-icon";
+import { NeoLandozerIcon } from "./view/neo-landozer-icon";
+import { ShinBraverIcon } from "./view/shin-braver-icon";
+import { WingDozerIcon } from "./view/wing-dozer-icon";
 
 /**
  * シンブレイバー バーストボタンを生成する
@@ -16,7 +16,10 @@ import {WingDozerIcon} from "./view/wing-dozer-icon";
  * @param gameObjectAction ゲームオブジェクトアクション
  * @return バーストボタン
  */
-export function shinBraverBurstButton(resources: Resources, gameObjectAction: Stream<GameObjectAction>): BurstButton {
+export function shinBraverBurstButton(
+  resources: Resources,
+  gameObjectAction: Stream<GameObjectAction>
+): BurstButton {
   const armdozerIcon = new ShinBraverIcon(resources);
   return new BurstButton(resources, gameObjectAction, armdozerIcon);
 }
@@ -28,9 +31,12 @@ export function shinBraverBurstButton(resources: Resources, gameObjectAction: St
  * @param gameObjectAction ゲームオブジェクトアクション
  * @return バーストボタン
  */
-export function neoLandozerBurstButton(resources: Resources, gameObjectAction: Stream<GameObjectAction>): BurstButton {
-  const armdozerIcon = new NeoLandozerIcon(resources)
-  return new BurstButton(resources, gameObjectAction, armdozerIcon,);
+export function neoLandozerBurstButton(
+  resources: Resources,
+  gameObjectAction: Stream<GameObjectAction>
+): BurstButton {
+  const armdozerIcon = new NeoLandozerIcon(resources);
+  return new BurstButton(resources, gameObjectAction, armdozerIcon);
 }
 
 /**
@@ -40,7 +46,10 @@ export function neoLandozerBurstButton(resources: Resources, gameObjectAction: S
  * @param gameObjectAction ゲームオブジェクトアクション
  * @return バーストボタン
  */
-export function lightningDozerBurstButton(resources: Resources, gameObjectAction: Stream<GameObjectAction>): BurstButton {
+export function lightningDozerBurstButton(
+  resources: Resources,
+  gameObjectAction: Stream<GameObjectAction>
+): BurstButton {
   const armdozerIcon = new LightningDozerIcon(resources);
   return new BurstButton(resources, gameObjectAction, armdozerIcon);
 }
@@ -52,7 +61,10 @@ export function lightningDozerBurstButton(resources: Resources, gameObjectAction
  * @param gameObjectAction ゲームオブジェクトアクション
  * @return バーストボタン
  */
-export function wingDozerBurstButton(resources: Resources, gameObjectAction: Stream<GameObjectAction>): BurstButton {
+export function wingDozerBurstButton(
+  resources: Resources,
+  gameObjectAction: Stream<GameObjectAction>
+): BurstButton {
   const armdozerIcon = new WingDozerIcon(resources);
   return new BurstButton(resources, gameObjectAction, armdozerIcon);
 }

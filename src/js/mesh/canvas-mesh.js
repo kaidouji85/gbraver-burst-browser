@@ -1,7 +1,7 @@
 // @flow
 
 import * as THREE from "three";
-import {SPRITE_RENDER_ORDER} from "../render/render-order/td-render-order";
+import { SPRITE_RENDER_ORDER } from "../render/render-order/td-render-order";
 
 /** パラメータ */
 type Params = {
@@ -26,7 +26,7 @@ export class CanvasMesh {
   canvas: ?HTMLCanvasElement;
 
   constructor(params: Params) {
-    const canvas = document.createElement('canvas');
+    const canvas = document.createElement("canvas");
     canvas.width = params.canvasWidth;
     canvas.height = params.canvasHeight;
     this.canvas = canvas;
@@ -34,9 +34,12 @@ export class CanvasMesh {
     this.texture = new THREE.Texture(canvas);
     const material = new THREE.MeshBasicMaterial({
       map: this.texture,
-      transparent: true
+      transparent: true,
     });
-    const planeGeometry = new THREE.PlaneGeometry(params.meshWidth, params.meshHeight);
+    const planeGeometry = new THREE.PlaneGeometry(
+      params.meshWidth,
+      params.meshHeight
+    );
 
     this.mesh = new THREE.Mesh(planeGeometry, material);
     this.mesh.renderOrder = SPRITE_RENDER_ORDER;
@@ -50,7 +53,7 @@ export class CanvasMesh {
     this.mesh.material.dispose();
     this.canvas = null;
   }
-  
+
   /**
    * キャンバステクスチャに描画するヘルパー関数
    *
@@ -67,7 +70,7 @@ export class CanvasMesh {
     // https://stackoverflow.com/a/18474767/7808745
     this.mesh.material.map.needsUpdate = true;
 
-    const context = this.canvas.getContext('2d');
+    const context = this.canvas.getContext("2d");
     drawFunc(context);
   }
 

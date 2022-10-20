@@ -1,9 +1,9 @@
 // @flow
 
-import type {PreRender} from "../../../../game-loop/pre-render";
-import type {Resources} from "../../../../resource";
-import type {ShinBraverCutInModel} from "../model/shin-braver-cutin-model";
-import {PlayerShinBraverCutInView} from "./player-shin-braver-cutin-view";
+import type { PreRender } from "../../../../game-loop/pre-render";
+import type { Resources } from "../../../../resource";
+import type { ShinBraverCutInModel } from "../model/shin-braver-cutin-model";
+import { PlayerShinBraverCutInView } from "./player-shin-braver-cutin-view";
 
 /**
  * 敵側 シンブレイバー カットインビュー

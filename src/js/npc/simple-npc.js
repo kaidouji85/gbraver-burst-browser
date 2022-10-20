@@ -1,10 +1,17 @@
 // @flow
 
-import type {Armdozer, Command, GameState, Pilot, PlayerId, PlayerState} from "gbraver-burst-core";
-import type {NPC} from "./npc";
+import type {
+  Armdozer,
+  Command,
+  GameState,
+  Pilot,
+  PlayerId,
+  PlayerState,
+} from "gbraver-burst-core";
+import type { NPC } from "./npc";
 
 /** 0バッテリー */
-const ZERO_BATTERY = {type: 'BATTERY_COMMAND', battery: 0};
+const ZERO_BATTERY = { type: "BATTERY_COMMAND", battery: 0 };
 
 /** シンプルなルーチンに渡されるデータ */
 export type SimpleRoutineData = {
@@ -39,7 +46,12 @@ export class SimpleNPC implements NPC {
    * @param attackRoutine 攻撃ルーチン
    * @param defenseRoutine 防御ルーチン
    */
-  constructor(armdozer: Armdozer, pilot: Pilot, attackRoutine: SimpleRoutine, defenseRoutine: SimpleRoutine) {
+  constructor(
+    armdozer: Armdozer,
+    pilot: Pilot,
+    attackRoutine: SimpleRoutine,
+    defenseRoutine: SimpleRoutine
+  ) {
     this.armdozer = armdozer;
     this.pilot = pilot;
     this.attackRoutine = attackRoutine;
@@ -53,13 +65,15 @@ export class SimpleNPC implements NPC {
     }
 
     const lastState = gameStateHistory[gameStateHistory.length - 1];
-    if (lastState.effect.name !== 'InputCommand') {
+    if (lastState.effect.name !== "InputCommand") {
       return ZERO_BATTERY;
     }
 
-    const enableCommand = lastState.effect.players.find(v => v.playerId === enemyId);
-    const enemy = lastState.players.find(v => v.playerId === enemyId);
-    const player = lastState.players.find(v => v.playerId !== enemyId);
+    const enableCommand = lastState.effect.players.find(
+      (v) => v.playerId === enemyId
+    );
+    const enemy = lastState.players.find((v) => v.playerId === enemyId);
+    const player = lastState.players.find((v) => v.playerId !== enemyId);
     if (!enableCommand || !enemy || !player) {
       return ZERO_BATTERY;
     }
@@ -70,6 +84,8 @@ export class SimpleNPC implements NPC {
 
     const commands: Command[] = enableCommand.command;
     const isAttacker = lastState.activePlayerId === enemyId;
-    return isAttacker ? this.attackRoutine({commands, enemy, player}) : this.defenseRoutine({commands, enemy, player});
+    return isAttacker
+      ? this.attackRoutine({ commands, enemy, player })
+      : this.defenseRoutine({ commands, enemy, player });
   }
 }

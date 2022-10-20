@@ -1,7 +1,7 @@
 // @flow
-import {Animate} from "../../../animation/animate";
-import {process} from '../../../animation/process';
-import type {ResultIndicatorModel} from "../model/result-indicator-model";
+import { Animate } from "../../../animation/animate";
+import { process } from "../../../animation/process";
+import type { ResultIndicatorModel } from "../model/result-indicator-model";
 
 /**
  * 非表示
@@ -12,5 +12,5 @@ import type {ResultIndicatorModel} from "../model/result-indicator-model";
 export function hidden(model: ResultIndicatorModel): Animate {
   return process(() => {
     model.opacity = 0;
-  })
+  });
 }

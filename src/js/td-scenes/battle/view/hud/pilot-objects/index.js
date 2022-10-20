@@ -1,15 +1,15 @@
 // @flow
 
-import type {Player} from "gbraver-burst-core";
-import {PilotIds} from "gbraver-burst-core";
-import type {GameObjectAction} from "../../../../../game-object/action/game-object-action";
-import type {Resources} from "../../../../../resource";
-import type {Stream} from "../../../../../stream/stream";
-import {enemyGaiHUD, playerGaiHUD} from "./gai";
-import type {HUDPilotObjects} from "./hud-pilot-objects";
-import {enemyRaitoHUD, playerRaitoHUD} from "./raito";
-import {enemyShinyaHUD, playerShinyaHUD} from "./shinya";
-import {enemyTsubasaHUD, playerTsubasaHUD} from "./tsubasa";
+import type { Player } from "gbraver-burst-core";
+import { PilotIds } from "gbraver-burst-core";
+import type { GameObjectAction } from "../../../../../game-object/action/game-object-action";
+import type { Resources } from "../../../../../resource";
+import type { Stream } from "../../../../../stream/stream";
+import { enemyGaiHUD, playerGaiHUD } from "./gai";
+import type { HUDPilotObjects } from "./hud-pilot-objects";
+import { enemyRaitoHUD, playerRaitoHUD } from "./raito";
+import { enemyShinyaHUD, playerShinyaHUD } from "./shinya";
+import { enemyTsubasaHUD, playerTsubasaHUD } from "./tsubasa";
 
 /**
  * プレイヤー側 HUDパイロット
@@ -19,7 +19,11 @@ import {enemyTsubasaHUD, playerTsubasaHUD} from "./tsubasa";
  * @param state プレイヤー状態
  * @return HUDパイロット
  */
-export function playerHUDPilotObjects(resources: Resources, gameObjectAction: Stream<GameObjectAction>, state: Player): HUDPilotObjects {
+export function playerHUDPilotObjects(
+  resources: Resources,
+  gameObjectAction: Stream<GameObjectAction>,
+  state: Player
+): HUDPilotObjects {
   switch (state.pilot.id) {
     case PilotIds.SHINYA:
       return playerShinyaHUD(resources, gameObjectAction, state);
@@ -42,7 +46,11 @@ export function playerHUDPilotObjects(resources: Resources, gameObjectAction: St
  * @param state プレイヤー状態
  * @return HUDパイロット
  */
-export function enemyHUDPilotObjects(resources: Resources, gameObjectAction: Stream<GameObjectAction>, state: Player): HUDPilotObjects {
+export function enemyHUDPilotObjects(
+  resources: Resources,
+  gameObjectAction: Stream<GameObjectAction>,
+  state: Player
+): HUDPilotObjects {
   switch (state.pilot.id) {
     case PilotIds.SHINYA:
       return enemyShinyaHUD(resources, gameObjectAction, state);

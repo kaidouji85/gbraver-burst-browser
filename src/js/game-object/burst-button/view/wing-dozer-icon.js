@@ -1,10 +1,10 @@
 // @flow
 
-import * as THREE from 'three';
-import {HorizontalAnimationMesh} from "../../../mesh/horizontal-animation";
-import type {Resources} from "../../../resource";
-import {TEXTURE_IDS} from "../../../resource/texture/ids";
-import type {ArmdozerIcon} from "./armdozer-icon";
+import * as THREE from "three";
+import { HorizontalAnimationMesh } from "../../../mesh/horizontal-animation";
+import type { Resources } from "../../../resource";
+import { TEXTURE_IDS } from "../../../resource/texture/ids";
+import type { ArmdozerIcon } from "./armdozer-icon";
 
 /**
  * ウィングドーザアイコン
@@ -21,8 +21,10 @@ export class WingDozerIcon implements ArmdozerIcon {
   constructor(resources: Resources) {
     this.#group = new THREE.Group();
 
-    const neoLandozer = resources.textures.find(v => v.id === TEXTURE_IDS.WING_DOZER_BURST_BUTTON_ICON)
-      ?.texture ?? new THREE.Texture();
+    const neoLandozer =
+      resources.textures.find(
+        (v) => v.id === TEXTURE_IDS.WING_DOZER_BURST_BUTTON_ICON
+      )?.texture ?? new THREE.Texture();
     this.#mesh = new HorizontalAnimationMesh({
       texture: neoLandozer,
       maxAnimation: 1,

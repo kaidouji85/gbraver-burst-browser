@@ -1,7 +1,7 @@
 // @flow
 
-import * as THREE from 'three';
-import type {BatteryEnchantmentModel} from "../model/battery-enchantment-model";
+import * as THREE from "three";
+import type { BatteryEnchantmentModel } from "../model/battery-enchantment-model";
 
 /**
  * バッテリー増強 ビュー

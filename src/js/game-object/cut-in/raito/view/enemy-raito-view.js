@@ -1,15 +1,14 @@
 // @flow
 
-import type {PreRender} from "../../../../game-loop/pre-render";
-import type {Resources} from "../../../../resource";
-import type {RaitoModel} from "../model/raito-model";
-import {PlayerRaitoView} from "./player-raito-view";
+import type { PreRender } from "../../../../game-loop/pre-render";
+import type { Resources } from "../../../../resource";
+import type { RaitoModel } from "../model/raito-model";
+import { PlayerRaitoView } from "./player-raito-view";
 
 /**
  * 敵側 ライト ビュー
  */
 export class EnemyRaitoView extends PlayerRaitoView {
-
   /**
    * コンストラクタ
    *

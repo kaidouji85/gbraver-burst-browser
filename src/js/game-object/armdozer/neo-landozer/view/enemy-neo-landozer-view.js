@@ -1,8 +1,8 @@
 // @flow
 
-import type {Resources} from "../../../../resource";
-import type {NeoLandozerModel} from "../model/neo-landozer-model";
-import {PlayerNeoLandozerView} from "./player-neo-landozer-view";
+import type { Resources } from "../../../../resource";
+import type { NeoLandozerModel } from "../model/neo-landozer-model";
+import { PlayerNeoLandozerView } from "./player-neo-landozer-view";
 
 /**
  *  敵側ネオランドーザ

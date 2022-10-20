@@ -1,24 +1,30 @@
 // @flow
 
-import {ArmDozerIds, ArmDozers, PilotIds, Pilots} from "gbraver-burst-core";
-import type {NPC} from "./npc";
-import type {SimpleRoutine} from "./simple-npc";
-import {SimpleNPC} from "./simple-npc";
+import { ArmDozerIds, ArmDozers, PilotIds, Pilots } from "gbraver-burst-core";
+import type { NPC } from "./npc";
+import type { SimpleRoutine } from "./simple-npc";
+import { SimpleNPC } from "./simple-npc";
 
 /** 0バッテリー */
 const ZERO_BATTERY = {
-  type: 'BATTERY_COMMAND',
-  battery: 0
+  type: "BATTERY_COMMAND",
+  battery: 0,
 };
 
 /**
  * @override
  * 攻撃ルーチン
  */
-const attackRoutine: SimpleRoutine = data => {
-  const battery5 = data.commands.find(v => v.type === 'BATTERY_COMMAND' && v.battery === 5);
-  const allBatteryMinusOne = data.commands.find(v => v.type === 'BATTERY_COMMAND' && v.battery === data.enemy.armdozer.battery - 1);
-  const burst = data.commands.find(v => v.type === 'BURST_COMMAND');
+const attackRoutine: SimpleRoutine = (data) => {
+  const battery5 = data.commands.find(
+    (v) => v.type === "BATTERY_COMMAND" && v.battery === 5
+  );
+  const allBatteryMinusOne = data.commands.find(
+    (v) =>
+      v.type === "BATTERY_COMMAND" &&
+      v.battery === data.enemy.armdozer.battery - 1
+  );
+  const burst = data.commands.find((v) => v.type === "BURST_COMMAND");
 
   if (battery5 && burst) {
     return battery5;
@@ -35,10 +41,14 @@ const attackRoutine: SimpleRoutine = data => {
  * @override
  * 防御ルーチン
  */
-const defenseRoutine: SimpleRoutine = data => {
-  const burst = data.commands.find(v => v.type === 'BURST_COMMAND');
-  const battery1 = data.commands.find(v => v.type === 'BATTERY_COMMAND' && v.battery === 1);
-  const battery3 = data.commands.find(v => v.type === 'BATTERY_COMMAND' && v.battery === 3);
+const defenseRoutine: SimpleRoutine = (data) => {
+  const burst = data.commands.find((v) => v.type === "BURST_COMMAND");
+  const battery1 = data.commands.find(
+    (v) => v.type === "BATTERY_COMMAND" && v.battery === 1
+  );
+  const battery3 = data.commands.find(
+    (v) => v.type === "BATTERY_COMMAND" && v.battery === 3
+  );
 
   if (data.enemy.armdozer.battery === 5 && burst && battery3) {
     return battery3;
@@ -61,7 +71,8 @@ const defenseRoutine: SimpleRoutine = data => {
  * @returns NPC
  */
 export function hardLightningDozer(): NPC {
-  const armdozer = ArmDozers.find(v => v.id === ArmDozerIds.LIGHTNING_DOZER) ?? ArmDozers[0];
-  const pilot = Pilots.find(v => v.id === PilotIds.RAITO) ?? Pilots[0];
+  const armdozer =
+    ArmDozers.find((v) => v.id === ArmDozerIds.LIGHTNING_DOZER) ?? ArmDozers[0];
+  const pilot = Pilots.find((v) => v.id === PilotIds.RAITO) ?? Pilots[0];
   return new SimpleNPC(armdozer, pilot, attackRoutine, defenseRoutine);
 }

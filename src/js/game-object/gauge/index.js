@@ -1,11 +1,11 @@
 // @flow
 
-import type {Resources} from "../../resource";
-import type {Stream} from "../../stream/stream";
-import type {GameObjectAction} from "../action/game-object-action";
-import {Gauge} from "./gauge";
-import {EnemyGaugeView} from "./view/enemy-gauge-view";
-import {PlayerGaugeView} from "./view/player-gauge-view";
+import type { Resources } from "../../resource";
+import type { Stream } from "../../stream/stream";
+import type { GameObjectAction } from "../action/game-object-action";
+import { Gauge } from "./gauge";
+import { EnemyGaugeView } from "./view/enemy-gauge-view";
+import { PlayerGaugeView } from "./view/player-gauge-view";
 
 /** ゲージのパラメータ */
 type Param = {
@@ -16,7 +16,7 @@ type Param = {
   /** 最大HP */
   hp: number,
   /** 最大バッテリー */
-  battery: number
+  battery: number,
 };
 
 /**
@@ -32,7 +32,7 @@ export function playerGauge(param: Param): Gauge {
     resources: param.resources,
     gameObjectAction: param.gameObjectAction,
     hp: param.hp,
-    battery: param.battery
+    battery: param.battery,
   });
 }
 
@@ -49,6 +49,6 @@ export function enemyGauge(param: Param): Gauge {
     gameObjectAction: param.gameObjectAction,
     resources: param.resources,
     hp: param.hp,
-    battery: param.battery
+    battery: param.battery,
   });
 }

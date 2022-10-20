@@ -11,37 +11,47 @@ import type {
   UserPictureGet,
   WebsocketDisconnect,
   WebsocketErrorNotifier,
-  WebsocketUnintentionalCloseNotifier
+  WebsocketUnintentionalCloseNotifier,
 } from "@gbraver-burst-network/browser-core";
-import type {BGMManager} from "../bgm/bgm-manager";
-import {createBGMManager} from "../bgm/bgm-manager";
-import {DOMFader} from "../components/dom-fader/dom-fader";
-import {CssHUDUIScale} from "../css/hud-ui-scale";
-import {CssVH} from "../css/vh";
-import {gameLoopStream} from "../game-loop/game-loop";
-import type {GameLoop} from "../game-loop/game-loop";
-import {Renderer} from "../render";
-import type {Resources} from "../resource";
-import {emptyResources} from "../resource";
-import type {ResourceRoot} from "../resource/resource-root";
-import type {Stream} from "../stream/stream";
-import type {PushWindow} from "../window/push-window";
-import {pushWindowsStream} from "../window/push-window";
-import type {Resize} from "../window/resize";
-import {resizeStream} from "../window/resize";
-import type {GbraverBurstBrowserConfigRepository} from "./config/browser-config";
-import {DOMDialogs} from "./dom-dialogs";
-import {DOMFloaters} from "./dom-floaters/dom-floaters";
-import {DOMScenes} from "./dom-scenes";
-import {FutureSuddenlyBattleEnd} from "./future-suddenly-battle-end";
-import type {InProgress} from "./in-progress/in-progress";
-import {InterruptScenes} from "./innterrupt-scenes";
-import {TDSceneBinder} from "./td-scene-binder";
+import type { BGMManager } from "../bgm/bgm-manager";
+import { createBGMManager } from "../bgm/bgm-manager";
+import { DOMFader } from "../components/dom-fader/dom-fader";
+import { CssHUDUIScale } from "../css/hud-ui-scale";
+import { CssVH } from "../css/vh";
+import { gameLoopStream } from "../game-loop/game-loop";
+import type { GameLoop } from "../game-loop/game-loop";
+import { Renderer } from "../render";
+import type { Resources } from "../resource";
+import { emptyResources } from "../resource";
+import type { ResourceRoot } from "../resource/resource-root";
+import type { Stream } from "../stream/stream";
+import type { PushWindow } from "../window/push-window";
+import { pushWindowsStream } from "../window/push-window";
+import type { Resize } from "../window/resize";
+import { resizeStream } from "../window/resize";
+import type { GbraverBurstBrowserConfigRepository } from "./config/browser-config";
+import { DOMDialogs } from "./dom-dialogs";
+import { DOMFloaters } from "./dom-floaters/dom-floaters";
+import { DOMScenes } from "./dom-scenes";
+import { FutureSuddenlyBattleEnd } from "./future-suddenly-battle-end";
+import type { InProgress } from "./in-progress/in-progress";
+import { InterruptScenes } from "./innterrupt-scenes";
+import { TDSceneBinder } from "./td-scene-binder";
 
 /** ゲーム管理オブジェクトで利用するAPIサーバの機能 */
-export interface GameAPI extends UniversalLogin, LoginCheck, CasualMatchSDK, Logout, LoggedInUserDelete,
-  UserNameGet, UserPictureGet, MailVerify, UserMailGet, WebsocketDisconnect,
-  WebsocketErrorNotifier, WebsocketUnintentionalCloseNotifier {}
+export interface GameAPI
+  extends UniversalLogin,
+    LoginCheck,
+    CasualMatchSDK,
+    Logout,
+    LoggedInUserDelete,
+    UserNameGet,
+    UserPictureGet,
+    MailVerify,
+    UserMailGet,
+    WebsocketDisconnect,
+    WebsocketErrorNotifier,
+    WebsocketUnintentionalCloseNotifier {}
 
 /**
  * ゲームプロパティ
@@ -131,7 +141,7 @@ export type GamePropsGeneratorParam = {
   /** ブラウザ設定リポジトリ */
   config: GbraverBurstBrowserConfigRepository,
   /** 開発中のチュートリアルをプレイできるか否かのフラグ、trueでプレイできる */
-  canPlayTutorialInDevelopment: boolean;
+  canPlayTutorialInDevelopment: boolean,
 };
 
 /**
@@ -145,7 +155,7 @@ export function generateGameProps(param: GamePropsGeneratorParam): GameProps {
   const pushWindow = pushWindowsStream();
   const renderer = new Renderer(resize);
   const gameLoop = gameLoopStream();
-  const hudUIScale= new CssHUDUIScale(renderer.getRendererDOM(), resize)
+  const hudUIScale = new CssHUDUIScale(renderer.getRendererDOM(), resize);
   return {
     resourceRoot: param.resourceRoot,
     resources: emptyResources(param.resourceRoot),
@@ -157,7 +167,7 @@ export function generateGameProps(param: GamePropsGeneratorParam): GameProps {
     privacyPolicyURL: param.privacyPolicyURL,
     contactURL: param.contactURL,
     isAPIServerEnable: param.isAPIServerEnable,
-    inProgress: {type: 'None'},
+    inProgress: { type: "None" },
     resize,
     pushWindow,
     gameLoop,
@@ -175,6 +185,6 @@ export function generateGameProps(param: GamePropsGeneratorParam): GameProps {
     tdBinder: new TDSceneBinder(renderer, hudUIScale),
     serviceWorker: null,
     bgm: createBGMManager(),
-    canPlayTutorialInDevelopment: param.canPlayTutorialInDevelopment
+    canPlayTutorialInDevelopment: param.canPlayTutorialInDevelopment,
   };
 }

@@ -1,10 +1,10 @@
 // @flow
 
 import * as THREE from "three";
-import {HorizontalAnimationMesh} from "../../../../mesh/horizontal-animation";
-import type {Resources} from "../../../../resource";
-import {TEXTURE_IDS} from "../../../../resource/texture/ids";
-import type {LightningBarrierModel} from "../model/lightning-barrier-model";
+import { HorizontalAnimationMesh } from "../../../../mesh/horizontal-animation";
+import type { Resources } from "../../../../resource";
+import { TEXTURE_IDS } from "../../../../resource/texture/ids";
+import type { LightningBarrierModel } from "../model/lightning-barrier-model";
 
 /** メッシュ幅 */
 const WIDTH = 500;
@@ -22,7 +22,9 @@ export class LightningBarrierView {
   #mesh: HorizontalAnimationMesh;
 
   constructor(resources: Resources) {
-    const textureResource = resources.textures.find(v => v.id === TEXTURE_IDS.BARRIER_LIGHTNING);
+    const textureResource = resources.textures.find(
+      (v) => v.id === TEXTURE_IDS.BARRIER_LIGHTNING
+    );
     const texture = textureResource
       ? textureResource.texture
       : new THREE.Texture();
@@ -48,17 +50,13 @@ export class LightningBarrierView {
    */
   engage(model: LightningBarrierModel): void {
     const target = this.getObject3D();
-    target.position.set(
-      model.position.x,
-      model.position.y,
-      model.position.z
-    );
+    target.position.set(model.position.x, model.position.y, model.position.z);
     target.scale.set(model.scale, model.scale, model.scale);
     this.#mesh.setOpacity(model.opacity);
     this.#mesh.animate(model.animation.frame);
   }
 
-  /** 
+  /**
    * カメラの真正面を向く
    *
    * @param camera カメラ

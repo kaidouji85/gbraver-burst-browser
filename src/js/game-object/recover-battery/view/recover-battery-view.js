@@ -1,7 +1,7 @@
 // @flow
 
-import * as THREE from 'three';
-import type {RecoverBatteryModel} from "../model/recover-battery-model";
+import * as THREE from "three";
+import type { RecoverBatteryModel } from "../model/recover-battery-model";
 
 /** バッテリー回復 */
 export interface RecoverBatteryView {
@@ -17,7 +17,7 @@ export interface RecoverBatteryView {
 
   /**
    * カメラの方向を向く
-   * 
+   *
    * @param camera カメラ
    */
   lookAt(camera: typeof THREE.Camera): void;

@@ -1,5 +1,5 @@
 // @flow
-import type {ConfigProps} from "../props";
+import type { ConfigProps } from "../props";
 
 /**
  * 本シーンの入力要素が操作可能であるか否かの設定をするヘルパー関数

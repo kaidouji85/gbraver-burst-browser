@@ -1,17 +1,17 @@
 // @flow
 
-import type {PilotId} from "gbraver-burst-core";
-import {PilotIds} from "gbraver-burst-core";
-import type {GameObjectAction} from "../../../../../game-object/action/game-object-action";
+import type { PilotId } from "gbraver-burst-core";
+import { PilotIds } from "gbraver-burst-core";
+import type { GameObjectAction } from "../../../../../game-object/action/game-object-action";
 import {
   gaiPilotButton,
   raitoPilotButton,
   shinyaPilotButton,
-  tsubasaPilotButton
+  tsubasaPilotButton,
 } from "../../../../../game-object/pilot-button";
-import {PilotButton} from "../../../../../game-object/pilot-button/pilot-button";
-import type {Resources} from "../../../../../resource";
-import type {Stream} from "../../../../../stream/stream";
+import { PilotButton } from "../../../../../game-object/pilot-button/pilot-button";
+import type { Resources } from "../../../../../resource";
+import type { Stream } from "../../../../../stream/stream";
 
 /**
  * パイロットIDに対応したパイロットボタンを生成する
@@ -21,7 +21,11 @@ import type {Stream} from "../../../../../stream/stream";
  * @param pilotId パイロットID
  * @return パイロットボタン
  */
-export function createPilotButton(resources: Resources, gameObjectAction: Stream<GameObjectAction>, pilotId: PilotId): PilotButton {
+export function createPilotButton(
+  resources: Resources,
+  gameObjectAction: Stream<GameObjectAction>,
+  pilotId: PilotId
+): PilotButton {
   switch (pilotId) {
     case PilotIds.SHINYA:
       return shinyaPilotButton(resources, gameObjectAction);

@@ -1,9 +1,9 @@
 // @flow
 
-import {all} from "../../../animation/all";
-import {Animate} from "../../../animation/animate";
-import {tween} from "../../../animation/tween";
-import type {GaugeModel} from "../model/gauge-model";
+import { all } from "../../../animation/all";
+import { Animate } from "../../../animation/animate";
+import { tween } from "../../../animation/tween";
+import type { GaugeModel } from "../model/gauge-model";
 
 /**
  * バッテリーを変更するアニメーション
@@ -13,9 +13,9 @@ import type {GaugeModel} from "../model/gauge-model";
  * @return アニメーション
  */
 export function battery(model: GaugeModel, value: number): Animate {
-  const animations = model.batteryList.map(v => {
+  const animations = model.batteryList.map((v) => {
     const opacity = v.value <= value ? 1 : 0;
-    return tween(v, t => t.to({opacity: opacity}, 300));
+    return tween(v, (t) => t.to({ opacity: opacity }, 300));
   });
   return all(...animations);
 }

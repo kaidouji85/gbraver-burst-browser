@@ -1,8 +1,8 @@
 // @flow
-import type {InputDOM} from "../../../../../dom/event-stream";
-import {parseSoundVolume} from "../../../../config/browser-config";
-import {soundVolumeLabel} from "../dom/sound-volume-label";
-import type {ConfigProps} from "../props";
+import type { InputDOM } from "../../../../../dom/event-stream";
+import { parseSoundVolume } from "../../../../config/browser-config";
+import { soundVolumeLabel } from "../dom/sound-volume-label";
+import type { ConfigProps } from "../props";
 
 /**
  * SE音量を変更した際の処理
@@ -10,7 +10,10 @@ import type {ConfigProps} from "../props";
  * @param props 画面プロパティ
  * @param action アクション
  */
-export function onSEVolumeChange(props: ConfigProps, action: $ReadOnly<InputDOM>): void {
+export function onSEVolumeChange(
+  props: ConfigProps,
+  action: $ReadOnly<InputDOM>
+): void {
   action.event.preventDefault();
   action.event.stopPropagation();
   props.exclusive.execute(async () => {

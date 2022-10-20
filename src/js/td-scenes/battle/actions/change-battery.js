@@ -2,6 +2,6 @@
 
 /** バッテリーセレクタのバッテリーゲージが変更された */
 export type ChangeBattery = {
-  type: 'changeBattery',
-  battery: number
+  type: "changeBattery",
+  battery: number,
 };

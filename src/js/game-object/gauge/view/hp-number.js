@@ -1,10 +1,10 @@
 // @flow
 
-import * as R from 'ramda';
+import * as R from "ramda";
 import * as THREE from "three";
-import {HorizontalAnimationMesh} from "../../../mesh/horizontal-animation";
-import type {Resources} from "../../../resource";
-import {TEXTURE_IDS} from "../../../resource/texture/ids";
+import { HorizontalAnimationMesh } from "../../../mesh/horizontal-animation";
+import type { Resources } from "../../../resource";
+import { TEXTURE_IDS } from "../../../resource/texture/ids";
 
 export const NUMBER_OF_DIGITS = 4;
 export const MAX_ANIMATION = 16;
@@ -20,11 +20,13 @@ export class HpNumber {
   constructor(resources: Resources) {
     this.#group = new THREE.Group();
 
-    const hpNumberResource = resources.textures.find(v => v.id === TEXTURE_IDS.HP_NUMBER);
+    const hpNumberResource = resources.textures.find(
+      (v) => v.id === TEXTURE_IDS.HP_NUMBER
+    );
     const hpNumber = hpNumberResource
       ? hpNumberResource.texture
       : new THREE.Texture();
-    this.#meshList = R.times(v => {
+    this.#meshList = R.times((v) => {
       const mesh = new HorizontalAnimationMesh({
         texture: hpNumber,
         maxAnimation: MAX_ANIMATION,
@@ -33,15 +35,15 @@ export class HpNumber {
       });
       mesh.getObject3D().position.x = -v * 32;
       return mesh;
-    },NUMBER_OF_DIGITS);
-    this.#meshList.forEach(v => {
+    }, NUMBER_OF_DIGITS);
+    this.#meshList.forEach((v) => {
       this.#group.add(v.getObject3D());
     });
   }
 
   /** デストラクタ相当の処理 */
   destructor(): void {
-    this.#meshList.forEach(v => {
+    this.#meshList.forEach((v) => {
       v.destructor();
     });
   }
@@ -52,18 +54,18 @@ export class HpNumber {
    * @param value 設定する値
    */
   setValue(value: number): void {
-    this.#meshList.forEach(v => {
+    this.#meshList.forEach((v) => {
       v.setOpacity(0);
     });
 
     const correctValue = this.#correctValue(value);
     const values = String(correctValue)
-      .split('')
+      .split("")
       .reverse()
-      .map(v => Number(v));
+      .map((v) => Number(v));
     R.zip(this.#meshList, values)
-      .map(v => ({mesh: v[0], value: v[1]}))
-      .forEach((v: {mesh: HorizontalAnimationMesh, value: number}) => {
+      .map((v) => ({ mesh: v[0], value: v[1] }))
+      .forEach((v: { mesh: HorizontalAnimationMesh, value: number }) => {
         v.mesh.animate(v.value / MAX_ANIMATION);
         v.mesh.setOpacity(1);
       });

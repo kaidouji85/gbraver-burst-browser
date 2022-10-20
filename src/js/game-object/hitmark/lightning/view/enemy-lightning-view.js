@@ -1,8 +1,8 @@
 // @flow
 
-import type {Resources} from "../../../../resource";
-import type {LightningModel} from "../model/lightning-model";
-import {PlayerLightningView} from "./player-lightning-view";
+import type { Resources } from "../../../../resource";
+import type { LightningModel } from "../model/lightning-model";
+import { PlayerLightningView } from "./player-lightning-view";
 
 /**
  * 敵側 電撃ヒットマーク ビュー

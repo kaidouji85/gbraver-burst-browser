@@ -1,11 +1,11 @@
 // @flow
 
-import type {Resources} from "../../resource";
-import type {Stream} from "../../stream/stream";
-import type {GameObjectAction} from "../action/game-object-action";
-import {ReflectIndicator} from './reflect-indicator';
-import {EnemyReflectIndicatorView} from "./view/enemy-reflect-indicator-view";
-import {PlayerReflectIndicatorView} from "./view/player-reflect-indicator-view";
+import type { Resources } from "../../resource";
+import type { Stream } from "../../stream/stream";
+import type { GameObjectAction } from "../action/game-object-action";
+import { ReflectIndicator } from "./reflect-indicator";
+import { EnemyReflectIndicatorView } from "./view/enemy-reflect-indicator-view";
+import { PlayerReflectIndicatorView } from "./view/player-reflect-indicator-view";
 
 /**
  * プレイヤー ダメージ反射
@@ -14,7 +14,10 @@ import {PlayerReflectIndicatorView} from "./view/player-reflect-indicator-view";
  * @param gameObjectAction ゲームオブジェクトアクション
  * @return 生成結果
  */
-export function playerReflectIndicator(resources: Resources, gameObjectAction: Stream<GameObjectAction>): ReflectIndicator {
+export function playerReflectIndicator(
+  resources: Resources,
+  gameObjectAction: Stream<GameObjectAction>
+): ReflectIndicator {
   const view = new PlayerReflectIndicatorView(resources);
   return new ReflectIndicator(view, gameObjectAction);
 }
@@ -26,7 +29,10 @@ export function playerReflectIndicator(resources: Resources, gameObjectAction: S
  * @param gameObjectAction ゲームオブジェクトアクション
  * @return 生成結果
  */
-export function enemyReflectIndicator(resources: Resources, gameObjectAction: Stream<GameObjectAction>): ReflectIndicator {
+export function enemyReflectIndicator(
+  resources: Resources,
+  gameObjectAction: Stream<GameObjectAction>
+): ReflectIndicator {
   const view = new EnemyReflectIndicatorView(resources);
   return new ReflectIndicator(view, gameObjectAction);
 }

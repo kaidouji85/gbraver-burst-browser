@@ -1,6 +1,6 @@
 // @flow
 
-import type {PilotButtonModel} from "./pilot-button-model";
+import type { PilotButtonModel } from "./pilot-button-model";
 
 /**
  * パイロットボタン モデル 初期値を生成する

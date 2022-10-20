@@ -1,15 +1,14 @@
 // @flow
 
-import type {PreRender} from "../../../../game-loop/pre-render";
-import type {Resources} from "../../../../resource";
-import type {ShinyaModel} from "../model/shinya-model";
-import {PlayerShinyaView} from "./player-shinya-view";
+import type { PreRender } from "../../../../game-loop/pre-render";
+import type { Resources } from "../../../../resource";
+import type { ShinyaModel } from "../model/shinya-model";
+import { PlayerShinyaView } from "./player-shinya-view";
 
 /**
  * 敵側 シンヤ ビュー
  */
 export class EnemyShinyaView extends PlayerShinyaView {
-
   /**
    * コンストラクタ
    *

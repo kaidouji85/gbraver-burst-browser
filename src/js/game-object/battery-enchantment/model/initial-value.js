@@ -1,6 +1,6 @@
 // @flow
 
-import type {BatteryEnchantmentModel} from "./battery-enchantment-model";
+import type { BatteryEnchantmentModel } from "./battery-enchantment-model";
 
 /**
  * モデルの初期値を生成する

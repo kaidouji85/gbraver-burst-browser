@@ -1,21 +1,28 @@
 // @flow
-import {Howl} from 'howler';
-import type {BGMManager} from "../../../../bgm/bgm-manager";
-import {fadeIn, play} from "../../../../bgm/bgm-operators";
-import type {PushDOM} from "../../../../dom/event-stream";
-import {pushDOMStream} from "../../../../dom/event-stream";
-import type {Resources} from "../../../../resource";
-import {PathIds} from "../../../../resource/path";
-import type {SoundResource} from "../../../../resource/sound";
-import {createEmptySoundResource, SOUND_IDS} from "../../../../resource/sound";
-import type {Stream, StreamSource, Unsubscriber} from "../../../../stream/stream";
-import {createStreamSource} from "../../../../stream/stream";
-import {domUuid} from "../../../../uuid/dom-uuid";
-import {waitElementLoaded} from "../../../../wait/wait-element-loaded";
-import type {DOMScene} from "../../dom-scene";
+import { Howl } from "howler";
+import type { BGMManager } from "../../../../bgm/bgm-manager";
+import { fadeIn, play } from "../../../../bgm/bgm-operators";
+import type { PushDOM } from "../../../../dom/event-stream";
+import { pushDOMStream } from "../../../../dom/event-stream";
+import type { Resources } from "../../../../resource";
+import { PathIds } from "../../../../resource/path";
+import type { SoundResource } from "../../../../resource/sound";
+import {
+  createEmptySoundResource,
+  SOUND_IDS,
+} from "../../../../resource/sound";
+import type {
+  Stream,
+  StreamSource,
+  Unsubscriber,
+} from "../../../../stream/stream";
+import { createStreamSource } from "../../../../stream/stream";
+import { domUuid } from "../../../../uuid/dom-uuid";
+import { waitElementLoaded } from "../../../../wait/wait-element-loaded";
+import type { DOMScene } from "../../dom-scene";
 
 /** ルート要素のclass属性 */
-const ROOT_CLASS = 'npc-ending';
+const ROOT_CLASS = "npc-ending";
 
 /** data-idを集めたもの */
 type DataIDs = {
@@ -51,10 +58,16 @@ type Elements = {
  */
 function extractElements(root: HTMLElement, ids: DataIDs): Elements {
   const selectedEnd = root.querySelector(`[data-id="${ids.end}"]`);
-  const end = (selectedEnd instanceof HTMLImageElement) ? selectedEnd : document.createElement('img');
+  const end =
+    selectedEnd instanceof HTMLImageElement
+      ? selectedEnd
+      : document.createElement("img");
   const selectedLogo = root.querySelector(`[data-id="${ids.logo}"]`);
-  const logo = (selectedLogo instanceof HTMLImageElement) ? selectedLogo : document.createElement('img');
-  return {end, logo};
+  const logo =
+    selectedLogo instanceof HTMLImageElement
+      ? selectedLogo
+      : document.createElement("img");
+  return { end, logo };
 }
 
 /** NPCルート エンディング */
@@ -77,29 +90,36 @@ export class NPCEnding implements DOMScene {
    * @param bgm BGM管理オブジェクト
    */
   constructor(resources: Resources, bgm: BGMManager) {
-    const ids = {end: domUuid(), logo: domUuid()};
-    this.#root = document.createElement('div');
+    const ids = { end: domUuid(), logo: domUuid() };
+    this.#root = document.createElement("div");
     this.#root.className = ROOT_CLASS;
     this.#root.innerHTML = rootInnerHTML(ids);
 
     const elements = extractElements(this.#root, ids);
     const titleBackImage = new Image();
-    titleBackImage.src = resources.paths.find(v => v.id === PathIds.END_CARD)?.path ?? '';
+    titleBackImage.src =
+      resources.paths.find((v) => v.id === PathIds.END_CARD)?.path ?? "";
     this.#isEndCardLoaded = waitElementLoaded(titleBackImage).then(() => {
       this.#root.style.backgroundImage = `url(${titleBackImage.src})`;
     });
     this.#isEndLoaded = waitElementLoaded(elements.end);
-    elements.end.src = resources.paths.find(v => v.id === PathIds.END)?.path ?? '';
+    elements.end.src =
+      resources.paths.find((v) => v.id === PathIds.END)?.path ?? "";
     this.#isLogoLoader = waitElementLoaded(elements.logo);
-    elements.logo.src = resources.paths.find(v => v.id === PathIds.LOGO)?.path ?? '';
+    elements.logo.src =
+      resources.paths.find((v) => v.id === PathIds.LOGO)?.path ?? "";
 
-    this.#pushButtonSound = resources.sounds.find(v => v.id === SOUND_IDS.PUSH_BUTTON)?.sound ?? new Howl();
+    this.#pushButtonSound =
+      resources.sounds.find((v) => v.id === SOUND_IDS.PUSH_BUTTON)?.sound ??
+      new Howl();
     this.#bgm = bgm;
-    this.#endingBGM = resources.sounds.find(v => v.id === SOUND_IDS.NPC_ENDING) ?? createEmptySoundResource();
+    this.#endingBGM =
+      resources.sounds.find((v) => v.id === SOUND_IDS.NPC_ENDING) ??
+      createEmptySoundResource();
     this.#canOperation = true;
     this.#endNPCEnding = createStreamSource();
     this.#unsubscriber = [
-      pushDOMStream(this.#root).subscribe(action => {
+      pushDOMStream(this.#root).subscribe((action) => {
         this.#onScreenPush(action);
       }),
     ];
@@ -107,9 +127,9 @@ export class NPCEnding implements DOMScene {
 
   /** @override */
   destructor(): void {
-    this.#unsubscriber.forEach(v => {
+    this.#unsubscriber.forEach((v) => {
       v.unsubscribe();
-    })
+    });
   }
 
   /** @override */
@@ -142,7 +162,11 @@ export class NPCEnding implements DOMScene {
    * @return 待機結果
    */
   async waitUntilLoaded(): Promise<void> {
-    await Promise.all([this.#isEndLoaded, this.#isEndCardLoaded, this.#isLogoLoader]);
+    await Promise.all([
+      this.#isEndLoaded,
+      this.#isEndCardLoaded,
+      this.#isLogoLoader,
+    ]);
   }
 
   /**

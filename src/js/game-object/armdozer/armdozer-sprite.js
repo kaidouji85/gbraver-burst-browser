@@ -1,7 +1,7 @@
 // @flow
 
 import * as THREE from "three";
-import {Animate} from "../../animation/animate";
+import { Animate } from "../../animation/animate";
 
 /** アームドーザスプライト */
 export interface ArmDozerSprite {

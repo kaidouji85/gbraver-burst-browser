@@ -1,11 +1,11 @@
 // @flow
-import {CssHUDUIScale} from "../../css/hud-ui-scale";
-import {Renderer} from "../../render";
-import type {Stream, StreamSource, Unsubscriber} from "../../stream/stream";
-import {createStreamSource} from "../../stream/stream";
-import type {TDScene} from "../../td-scenes/td-scene";
-import type {GameAction} from "../game-actions";
-import type {GameActionConnector} from "./game-action-connector";
+import { CssHUDUIScale } from "../../css/hud-ui-scale";
+import { Renderer } from "../../render";
+import type { Stream, StreamSource, Unsubscriber } from "../../stream/stream";
+import { createStreamSource } from "../../stream/stream";
+import type { TDScene } from "../../td-scenes/td-scene";
+import type { GameAction } from "../game-actions";
+import type { GameActionConnector } from "./game-action-connector";
 
 /** three.js系シーンをバインドする */
 export class TDSceneBinder {
@@ -33,7 +33,7 @@ export class TDSceneBinder {
     this.#hudUIScale = hudUIScale;
     this.#scene = null;
     this.#gameAction = createStreamSource();
-    this.#domLayerElement = document.createElement('div');
+    this.#domLayerElement = document.createElement("div");
     this.#unsubscribers = [];
   }
 
@@ -55,7 +55,7 @@ export class TDSceneBinder {
   bind<X: TDScene>(scene: X, connector: GameActionConnector<X>): void {
     this.#disposeScene();
     this.#scene = scene;
-    scene.getDOMLayerElements().forEach(element => {
+    scene.getDOMLayerElements().forEach((element) => {
       this.#domLayerElement.appendChild(element);
     });
     this.#unsubscribers = connector(scene, this.#gameAction);
@@ -95,8 +95,8 @@ export class TDSceneBinder {
   #disposeScene(): void {
     this.#scene && this.#scene.destructor();
     this.#renderer.disposeRenders();
-    this.#domLayerElement.innerHTML = '';
-    this.#unsubscribers.forEach(v => {
+    this.#domLayerElement.innerHTML = "";
+    this.#unsubscribers.forEach((v) => {
       v.unsubscribe();
     });
   }

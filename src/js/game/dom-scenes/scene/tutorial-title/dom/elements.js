@@ -1,5 +1,5 @@
 // @flow
-import type {DataIDs} from "./data-ids";
+import type { DataIDs } from "./data-ids";
 
 /** ルートHTML要素の子孫要素 */
 export type Elements = {
@@ -16,8 +16,10 @@ export type Elements = {
  */
 export function extractElements(root: HTMLElement, ids: DataIDs): Elements {
   const foundStand = root.querySelector(`[data-id="${ids.stand}"]`);
-  const stand = (foundStand instanceof HTMLImageElement) ? foundStand : new Image();
+  const stand =
+    foundStand instanceof HTMLImageElement ? foundStand : new Image();
   const foundBustShot = root.querySelector(`[data-id="${ids.bustShot}"]`);
-  const bustShot = (foundBustShot instanceof HTMLImageElement) ? foundBustShot : new Image();
-  return {stand, bustShot};
+  const bustShot =
+    foundBustShot instanceof HTMLImageElement ? foundBustShot : new Image();
+  return { stand, bustShot };
 }

@@ -1,14 +1,14 @@
 // @flow
 
-import * as THREE from 'three';
-import type {PreRender} from "../../../../game-loop/pre-render";
-import {HorizontalAnimationMesh} from "../../../../mesh/horizontal-animation";
-import type {Resources} from "../../../../resource";
-import {TEXTURE_IDS} from "../../../../resource/texture/ids";
-import {HUD_CUT_IN_ZNIDEX} from "../../../hud-zindex";
-import {HUDCutInScale} from "../../../scale";
-import type {GaiModel} from "../model/gai-model";
-import type {GaiView} from "./gai-view";
+import * as THREE from "three";
+import type { PreRender } from "../../../../game-loop/pre-render";
+import { HorizontalAnimationMesh } from "../../../../mesh/horizontal-animation";
+import type { Resources } from "../../../../resource";
+import { TEXTURE_IDS } from "../../../../resource/texture/ids";
+import { HUD_CUT_IN_ZNIDEX } from "../../../hud-zindex";
+import { HUDCutInScale } from "../../../scale";
+import type { GaiModel } from "../model/gai-model";
+import type { GaiView } from "./gai-view";
 
 /** メッシュの大きさ */
 export const MESH_SIZE = 550;
@@ -31,7 +31,9 @@ export class PlayerGaiView implements GaiView {
    * @param resources リソース管理オブジェクト
    */
   constructor(resources: Resources) {
-    const gaiResource = resources.textures.find(v => v.id === TEXTURE_IDS.GAI_CUTIN);
+    const gaiResource = resources.textures.find(
+      (v) => v.id === TEXTURE_IDS.GAI_CUTIN
+    );
     const gai = gaiResource?.texture ?? new THREE.Texture();
     this.#mesh = new HorizontalAnimationMesh({
       texture: gai,
@@ -55,9 +57,12 @@ export class PlayerGaiView implements GaiView {
    * @param preRender プリレンダー情報
    */
   engage(model: GaiModel, preRender: PreRender): void {
-    const scale = HUDCutInScale(preRender.rendererDOM, preRender.safeAreaInset) * model.scale;
-    const x = preRender.rendererDOM.clientWidth / 2
-      + (model.position.x - PADDING_RIGHT) * scale;
+    const scale =
+      HUDCutInScale(preRender.rendererDOM, preRender.safeAreaInset) *
+      model.scale;
+    const x =
+      preRender.rendererDOM.clientWidth / 2 +
+      (model.position.x - PADDING_RIGHT) * scale;
     this.#mesh.getObject3D().scale.set(scale, scale, scale);
     this.#mesh.getObject3D().position.set(x, 0, HUD_CUT_IN_ZNIDEX);
     this.#mesh.setOpacity(model.opacity);

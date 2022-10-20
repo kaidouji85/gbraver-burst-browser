@@ -1,17 +1,17 @@
 // @flow
 
-import * as THREE from 'three';
-import {Animate} from "../../../animation/animate";
-import type {PreRender} from "../../../game-loop/pre-render";
-import type {Resources} from "../../../resource";
-import type {Stream, Unsubscriber} from "../../../stream/stream";
-import type {GameObjectAction} from "../../action/game-object-action";
-import {hidden} from "./animation/hidden";
-import {show} from "./animation/show";
-import type {GaiModel} from "./model/gai-model";
-import {createInitialValue} from "./model/initial-value";
-import {GaiSounds} from "./sounds/gai-sounds";
-import type {GaiView} from "./view/gai-view";
+import * as THREE from "three";
+import { Animate } from "../../../animation/animate";
+import type { PreRender } from "../../../game-loop/pre-render";
+import type { Resources } from "../../../resource";
+import type { Stream, Unsubscriber } from "../../../stream/stream";
+import type { GameObjectAction } from "../../action/game-object-action";
+import { hidden } from "./animation/hidden";
+import { show } from "./animation/show";
+import type { GaiModel } from "./model/gai-model";
+import { createInitialValue } from "./model/initial-value";
+import { GaiSounds } from "./sounds/gai-sounds";
+import type { GaiView } from "./view/gai-view";
 
 /**
  * ガイ カットイン
@@ -29,12 +29,16 @@ export class GaiCutIn {
    * @param resources リソース管理オブジェクト
    * @param gameObjectAction ゲームオブジェクトアクション
    */
-  constructor(view: GaiView, resources: Resources, gameObjectAction: Stream<GameObjectAction>) {
+  constructor(
+    view: GaiView,
+    resources: Resources,
+    gameObjectAction: Stream<GameObjectAction>
+  ) {
     this.#model = createInitialValue();
     this.#view = view;
     this.#sounds = new GaiSounds(resources);
-    this.#unsubscriber = gameObjectAction.subscribe(action => {
-      if (action.type === 'PreRender') {
+    this.#unsubscriber = gameObjectAction.subscribe((action) => {
+      if (action.type === "PreRender") {
         this.#onPreRender(action);
       }
     });

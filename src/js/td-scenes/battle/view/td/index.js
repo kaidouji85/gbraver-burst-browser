@@ -1,23 +1,23 @@
 // @flow
 
-import type {Player} from "gbraver-burst-core";
-import * as THREE from 'three';
-import type {PreRender} from "../../../../game-loop/pre-render";
-import type {Update} from "../../../../game-loop/update";
-import type {GameObjectAction} from "../../../../game-object/action/game-object-action";
-import {gameObjectStream} from "../../../../game-object/action/game-object-action";
-import {TDCamera} from "../../../../game-object/camera/td";
-import type {OverlapEvent} from "../../../../render/overlap-event/overlap-event";
-import type {OverlapNotifier} from "../../../../render/overlap-notifier";
-import type {Resources} from '../../../../resource';
-import type {Stream} from "../../../../stream/stream";
-import type {Resize} from "../../../../window/resize";
-import {enemyTDArmdozer, playerTDArmdozer} from "./armdozer-objects";
-import type {TDArmdozerObjects} from "./armdozer-objects/armdozer-objects";
-import {TDGameObjects} from "./game-objects";
-import type {TDPlayer} from "./player";
-import {enemyTDObject, playerTDObjects} from "./player";
-import {skyBox} from "./sky-box";
+import type { Player } from "gbraver-burst-core";
+import * as THREE from "three";
+import type { PreRender } from "../../../../game-loop/pre-render";
+import type { Update } from "../../../../game-loop/update";
+import type { GameObjectAction } from "../../../../game-object/action/game-object-action";
+import { gameObjectStream } from "../../../../game-object/action/game-object-action";
+import { TDCamera } from "../../../../game-object/camera/td";
+import type { OverlapEvent } from "../../../../render/overlap-event/overlap-event";
+import type { OverlapNotifier } from "../../../../render/overlap-notifier";
+import type { Resources } from "../../../../resource";
+import type { Stream } from "../../../../stream/stream";
+import type { Resize } from "../../../../window/resize";
+import { enemyTDArmdozer, playerTDArmdozer } from "./armdozer-objects";
+import type { TDArmdozerObjects } from "./armdozer-objects/armdozer-objects";
+import { TDGameObjects } from "./game-objects";
+import type { TDPlayer } from "./player";
+import { enemyTDObject, playerTDObjects } from "./player";
+import { skyBox } from "./sky-box";
 
 /** コンストラクタのパラメータ */
 type Param = {
@@ -51,31 +51,42 @@ export class ThreeDimensionLayer {
 
     this.camera = new TDCamera(param.update, param.resize);
 
-    this.#overlap = param.renderer.createOverlapNotifier(this.camera.getCamera());
-    this.#gameObjectAction = gameObjectStream(param.update, param.preRender, this.#overlap);
+    this.#overlap = param.renderer.createOverlapNotifier(
+      this.camera.getCamera()
+    );
+    this.#gameObjectAction = gameObjectStream(
+      param.update,
+      param.preRender,
+      this.#overlap
+    );
 
     this.players = [
       playerTDObjects(param.resources, param.player, this.#gameObjectAction),
-      enemyTDObject(param.resources, param.enemy, this.#gameObjectAction)
+      enemyTDObject(param.resources, param.enemy, this.#gameObjectAction),
     ];
-    this.players.map(v => v.getObject3Ds())
+    this.players
+      .map((v) => v.getObject3Ds())
       .flat()
-      .forEach(v => {
+      .forEach((v) => {
         this.scene.add(v);
       });
 
     this.armdozerObjects = [
       playerTDArmdozer(param.resources, this.#gameObjectAction, param.player),
-      enemyTDArmdozer(param.resources, this.#gameObjectAction, param.enemy)
+      enemyTDArmdozer(param.resources, this.#gameObjectAction, param.enemy),
     ];
-    this.armdozerObjects.map(v => v.getObject3Ds())
+    this.armdozerObjects
+      .map((v) => v.getObject3Ds())
       .flat()
-      .forEach(v => {
+      .forEach((v) => {
         this.scene.add(v);
       });
 
-    this.gameObjects = new TDGameObjects(param.resources, this.#gameObjectAction);
-    this.gameObjects.getObject3Ds().forEach(object => {
+    this.gameObjects = new TDGameObjects(
+      param.resources,
+      this.#gameObjectAction
+    );
+    this.gameObjects.getObject3Ds().forEach((object) => {
       this.scene.add(object);
     });
   }
@@ -83,19 +94,19 @@ export class ThreeDimensionLayer {
   /** デストラクタ */
   destructor(): void {
     const removeTargets: typeof THREE.Object3D[] = [
-      ...this.players.flatMap(v => v.getObject3Ds()),
-      ...this.armdozerObjects.flatMap(v => v.getObject3Ds()),
-      ...this.gameObjects.getObject3Ds()
+      ...this.players.flatMap((v) => v.getObject3Ds()),
+      ...this.armdozerObjects.flatMap((v) => v.getObject3Ds()),
+      ...this.gameObjects.getObject3Ds(),
     ];
-    removeTargets.forEach(v => {
+    removeTargets.forEach((v) => {
       this.scene.remove(v);
     });
 
     this.scene.background.dispose();
-    this.players.forEach(player => {
+    this.players.forEach((player) => {
       player.destructor();
     });
-    this.armdozerObjects.forEach(armdozer => {
+    this.armdozerObjects.forEach((armdozer) => {
       armdozer.destructor();
     });
     this.gameObjects.destructor();

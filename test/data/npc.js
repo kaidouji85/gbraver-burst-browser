@@ -1,7 +1,7 @@
 // @flow
-import type {Armdozer, Command, Pilot} from "gbraver-burst-core";
-import {ArmDozers, Pilots} from "gbraver-burst-core";
-import type {NPC} from "../../src/js/npc/npc";
+import type { Armdozer, Command, Pilot } from "gbraver-burst-core";
+import { ArmDozers, Pilots } from "gbraver-burst-core";
+import type { NPC } from "../../src/js/npc/npc";
 
 /** 空NPCのシンプルな実装 */
 class SimpleEmptyNPC implements NPC {
@@ -18,13 +18,13 @@ class SimpleEmptyNPC implements NPC {
 
   /** @override */
   routine(): Command {
-    return {type: 'BATTERY_COMMAND', battery: 0};
+    return { type: "BATTERY_COMMAND", battery: 0 };
   }
 }
 
 /**
  * 空NPCを生成する
- * 
+ *
  * @return 生成結果
  */
 export function createEmptyNPC(): NPC {

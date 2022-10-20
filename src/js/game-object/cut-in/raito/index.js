@@ -1,11 +1,11 @@
 // @flow
 
-import type {Resources} from "../../../resource";
-import type {Stream} from "../../../stream/stream";
-import type {GameObjectAction} from "../../action/game-object-action";
-import {RaitoCutIn} from "./raito";
-import {EnemyRaitoView} from "./view/enemy-raito-view";
-import {PlayerRaitoView} from "./view/player-raito-view";
+import type { Resources } from "../../../resource";
+import type { Stream } from "../../../stream/stream";
+import type { GameObjectAction } from "../../action/game-object-action";
+import { RaitoCutIn } from "./raito";
+import { EnemyRaitoView } from "./view/enemy-raito-view";
+import { PlayerRaitoView } from "./view/player-raito-view";
 
 /**
  * プレイヤー側 ライト カットイン
@@ -14,7 +14,10 @@ import {PlayerRaitoView} from "./view/player-raito-view";
  * @param gameObjectAction ゲームオブジェクトアクション
  * @return ライト カットイン
  */
-export function playerRaitoCutIn(resources: Resources, gameObjectAction: Stream<GameObjectAction>): RaitoCutIn {
+export function playerRaitoCutIn(
+  resources: Resources,
+  gameObjectAction: Stream<GameObjectAction>
+): RaitoCutIn {
   const view = new PlayerRaitoView(resources);
   return new RaitoCutIn(view, resources, gameObjectAction);
 }
@@ -26,7 +29,10 @@ export function playerRaitoCutIn(resources: Resources, gameObjectAction: Stream<
  * @param gameObjectAction ゲームオブジェクトアクション
  * @return ライト カットイン
  */
-export function enemyRaitoCutIn(resources: Resources, gameObjectAction: Stream<GameObjectAction>): RaitoCutIn {
+export function enemyRaitoCutIn(
+  resources: Resources,
+  gameObjectAction: Stream<GameObjectAction>
+): RaitoCutIn {
   const view = new EnemyRaitoView(resources);
   return new RaitoCutIn(view, resources, gameObjectAction);
 }

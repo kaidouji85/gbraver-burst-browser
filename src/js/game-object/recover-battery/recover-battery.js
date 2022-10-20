@@ -1,16 +1,16 @@
 // @flow
 
-import * as THREE from 'three';
-import {Animate} from "../../animation/animate";
-import type {PreRender} from "../../game-loop/pre-render";
-import type {Resources} from "../../resource";
-import type {Stream, Unsubscriber} from "../../stream/stream";
-import type {GameObjectAction} from "../action/game-object-action";
-import {hidden, popUp, show} from "./animation/pop-up";
-import {createInitialValue} from "./model/initial-value";
-import type {RecoverBatteryModel} from "./model/recover-battery-model";
-import {RecoverBatterySounds} from "./sounds/recover-battery-sounds";
-import type {RecoverBatteryView} from "./view/recover-battery-view";
+import * as THREE from "three";
+import { Animate } from "../../animation/animate";
+import type { PreRender } from "../../game-loop/pre-render";
+import type { Resources } from "../../resource";
+import type { Stream, Unsubscriber } from "../../stream/stream";
+import type { GameObjectAction } from "../action/game-object-action";
+import { hidden, popUp, show } from "./animation/pop-up";
+import { createInitialValue } from "./model/initial-value";
+import type { RecoverBatteryModel } from "./model/recover-battery-model";
+import { RecoverBatterySounds } from "./sounds/recover-battery-sounds";
+import type { RecoverBatteryView } from "./view/recover-battery-view";
 
 /**
  * コンストラクタのパラメータ
@@ -42,13 +42,13 @@ export class RecoverBattery {
     this.#model = createInitialValue();
     this.#view = param.view;
     this.#sounds = new RecoverBatterySounds(param.resources);
-    this.#unsubscriber = param.gameObjectAction.subscribe(action => {
-      if (action.type === 'Update') {
+    this.#unsubscriber = param.gameObjectAction.subscribe((action) => {
+      if (action.type === "Update") {
         this.#update();
-      } else if (action.type === 'PreRender') {
+      } else if (action.type === "PreRender") {
         this.#preRender(action);
       }
-    })
+    });
   }
 
   /** デストラクタ */
@@ -108,6 +108,6 @@ export class RecoverBattery {
    * @param action アクション
    */
   #preRender(action: PreRender): void {
-    this.#view.lookAt(action.camera)
+    this.#view.lookAt(action.camera);
   }
 }

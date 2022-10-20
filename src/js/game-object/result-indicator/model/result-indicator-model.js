@@ -19,5 +19,5 @@ export type ResultIndicatorModel = {
     x: number,
     /** オブジェクト中心からY軸方向の距離 */
     y: number,
-  }
+  },
 };

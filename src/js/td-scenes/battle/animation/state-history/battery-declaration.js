@@ -1,13 +1,13 @@
 // @flow
 
-import type {BatteryDeclaration, GameStateX} from "gbraver-burst-core";
-import {all} from "../../../../animation/all";
-import {Animate} from "../../../../animation/animate";
-import {delay, empty} from "../../../../animation/delay";
-import {process} from '../../../../animation/process';
-import {BattleSceneSounds} from "../../sounds/sounds";
-import type {TDPlayer} from "../../view/td/player";
-import type {StateAnimationProps} from "./state-animation-props";
+import type { BatteryDeclaration, GameStateX } from "gbraver-burst-core";
+import { all } from "../../../../animation/all";
+import { Animate } from "../../../../animation/animate";
+import { delay, empty } from "../../../../animation/delay";
+import { process } from "../../../../animation/process";
+import { BattleSceneSounds } from "../../sounds/sounds";
+import type { TDPlayer } from "../../view/td/player";
+import type { StateAnimationProps } from "./state-animation-props";
 
 /**
  * バッテリー宣言アニメーション
@@ -17,8 +17,7 @@ import type {StateAnimationProps} from "./state-animation-props";
  * @return アニメーション
  */
 function declaration(td: TDPlayer, value: number): Animate {
-  return td.batteryNumber.show(value)
-    .chain(delay(800));
+  return td.batteryNumber.show(value).chain(delay(800));
 }
 
 /**
@@ -44,13 +43,19 @@ function declarationSound(sounds: BattleSceneSounds): Animate {
  * @param value 出したバッテリー
  * @return アニメーション
  */
-function declarationWithCorrect(td: TDPlayer, origin: number, correct: number, value: number): Animate {
-  return td.batteryNumber.show(origin)
+function declarationWithCorrect(
+  td: TDPlayer,
+  origin: number,
+  correct: number,
+  value: number
+): Animate {
+  return td.batteryNumber
+    .show(origin)
     .chain(delay(300))
-    .chain(all(
-      td.batteryNumber.change(value),
-      td.batteryCorrect.popUp(correct)
-    )).chain(delay(200));
+    .chain(
+      all(td.batteryNumber.change(value), td.batteryCorrect.popUp(correct))
+    )
+    .chain(delay(200));
 }
 
 /**
@@ -65,9 +70,11 @@ function declarationSoundWithCorrect(sounds: BattleSceneSounds): Animate {
     sounds.batteryDeclaration.play();
   })
     .chain(delay(600))
-    .chain(process(()=> {
-      sounds.batteryDeclaration.play();
-    }))
+    .chain(
+      process(() => {
+        sounds.batteryDeclaration.play();
+      })
+    );
 }
 
 /**
@@ -77,34 +84,67 @@ function declarationSoundWithCorrect(sounds: BattleSceneSounds): Animate {
  * @param gameState ゲームの状態
  * @return アニメーション
  */
-export function batteryDeclarationAnimation(props: StateAnimationProps, gameState: GameStateX<BatteryDeclaration>): Animate {
-  const attacker = gameState.players.find(v => v.playerId === gameState.activePlayerId);
-  const defender = gameState.players.find(v => v.playerId !== gameState.activePlayerId);
+export function batteryDeclarationAnimation(
+  props: StateAnimationProps,
+  gameState: GameStateX<BatteryDeclaration>
+): Animate {
+  const attacker = gameState.players.find(
+    (v) => v.playerId === gameState.activePlayerId
+  );
+  const defender = gameState.players.find(
+    (v) => v.playerId !== gameState.activePlayerId
+  );
   if (!attacker || !defender) {
     return empty();
   }
 
-  const attackerTD = props.view.td.players.find(v => v.playerId === attacker.playerId);
-  const attackerHUD = props.view.hud.players.find(v => v.playerId === attacker.playerId);
-  const defenderTD = props.view.td.players.find(v => v.playerId === defender.playerId);
-  const defenderHUD = props.view.hud.players.find(v => v.playerId === defender.playerId);
+  const attackerTD = props.view.td.players.find(
+    (v) => v.playerId === attacker.playerId
+  );
+  const attackerHUD = props.view.hud.players.find(
+    (v) => v.playerId === attacker.playerId
+  );
+  const defenderTD = props.view.td.players.find(
+    (v) => v.playerId === defender.playerId
+  );
+  const defenderHUD = props.view.hud.players.find(
+    (v) => v.playerId === defender.playerId
+  );
   if (!attackerTD || !attackerHUD || !defenderTD || !defenderHUD) {
     return empty();
   }
 
   const isAttacker = gameState.effect.attacker === props.playerId;
-  const {attackerBattery, originalBatteryOfAttacker, defenderBattery, originalBatteryOfDefender} = gameState.effect;
+  const {
+    attackerBattery,
+    originalBatteryOfAttacker,
+    defenderBattery,
+    originalBatteryOfDefender,
+  } = gameState.effect;
   const attackerCorrect = attackerBattery - originalBatteryOfAttacker;
-  const attackerDeclaration = attackerCorrect !== 0
-    ? declarationWithCorrect(attackerTD, originalBatteryOfAttacker, attackerCorrect, attackerBattery)
-    : declaration(attackerTD, attackerBattery);
+  const attackerDeclaration =
+    attackerCorrect !== 0
+      ? declarationWithCorrect(
+          attackerTD,
+          originalBatteryOfAttacker,
+          attackerCorrect,
+          attackerBattery
+        )
+      : declaration(attackerTD, attackerBattery);
   const defenderCorrect = defenderBattery - originalBatteryOfDefender;
-  const defenderDeclaration = defenderCorrect !== 0
-    ? declarationWithCorrect(defenderTD, originalBatteryOfDefender, defenderCorrect, defenderBattery)
-    : declaration(defenderTD, defenderBattery);
-  const sound = (attackerCorrect !== 0) || (defenderCorrect !== 0)
-    ? declarationSoundWithCorrect(props.sounds)
-    : declarationSound(props.sounds);
+  const defenderDeclaration =
+    defenderCorrect !== 0
+      ? declarationWithCorrect(
+          defenderTD,
+          originalBatteryOfDefender,
+          defenderCorrect,
+          defenderBattery
+        )
+      : declaration(defenderTD, defenderBattery);
+  const sound =
+    attackerCorrect !== 0 || defenderCorrect !== 0
+      ? declarationSoundWithCorrect(props.sounds)
+      : declarationSound(props.sounds);
 
   return all(
     sound,
@@ -112,7 +152,7 @@ export function batteryDeclarationAnimation(props: StateAnimationProps, gameStat
     attackerHUD.gauge.battery(attacker.armdozer.battery),
     attackerDeclaration,
     defenderHUD.gauge.battery(defender.armdozer.battery),
-    defenderDeclaration,
+    defenderDeclaration
   ).chain(
     delay(0),
     attackerTD.batteryNumber.hidden(),

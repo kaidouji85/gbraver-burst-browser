@@ -1,5 +1,5 @@
 // @flow
-import type {GameProps} from "../game-props";
+import type { GameProps } from "../game-props";
 
 /**
  * アカウント削除キャンセル

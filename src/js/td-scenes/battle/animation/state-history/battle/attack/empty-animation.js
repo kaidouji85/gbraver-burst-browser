@@ -1,11 +1,14 @@
 // @flow
 
-import type {CriticalHit, Guard, NormalHit} from "gbraver-burst-core";
-import {all} from "../../../../../../animation/all";
-import {Animate} from "../../../../../../animation/animate";
-import {empty} from "../../../../../../animation/delay";
-import type {ArmDozerSprite} from "../../../../../../game-object/armdozer/armdozer-sprite";
-import type {BattleAnimationParam, BattleAnimationParamX} from "../animation-param";
+import type { CriticalHit, Guard, NormalHit } from "gbraver-burst-core";
+import { all } from "../../../../../../animation/all";
+import { Animate } from "../../../../../../animation/animate";
+import { empty } from "../../../../../../animation/delay";
+import type { ArmDozerSprite } from "../../../../../../game-object/armdozer/armdozer-sprite";
+import type {
+  BattleAnimationParam,
+  BattleAnimationParamX,
+} from "../animation-param";
 
 /**
  * 数字表示だけをする戦闘アニメーション
@@ -14,19 +17,19 @@ import type {BattleAnimationParam, BattleAnimationParamX} from "../animation-par
  * @return アニメーション
  */
 export function emptyAttackAnimation(param: BattleAnimationParam): Animate {
-  if (param.result.name === 'NormalHit') {
+  if (param.result.name === "NormalHit") {
     const result = (param.result: NormalHit);
-    return viewDamage({...param, result});
+    return viewDamage({ ...param, result });
   }
 
-  if (param.result.name === 'CriticalHit') {
+  if (param.result.name === "CriticalHit") {
     const result = (param.result: CriticalHit);
-    return viewDamage({...param, result});
+    return viewDamage({ ...param, result });
   }
 
-  if (param.result.name === 'Guard') {
+  if (param.result.name === "Guard") {
     const result = (param.result: Guard);
-    return viewDamage({...param, result});
+    return viewDamage({ ...param, result });
   }
 
   return empty();
@@ -41,7 +44,9 @@ type ViewDamageResult = NormalHit | CriticalHit | Guard;
  * @param param アニメーションパラメータ
  * @return アニメーション
  */
-function viewDamage(param: BattleAnimationParamX<ArmDozerSprite, ViewDamageResult>): Animate {
+function viewDamage(
+  param: BattleAnimationParamX<ArmDozerSprite, ViewDamageResult>
+): Animate {
   return all(
     param.defenderTD.damageIndicator.popUp(param.result.damage),
     param.defenderHUD.gauge.hp(param.defenderState.armdozer.hp)

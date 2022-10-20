@@ -1,19 +1,23 @@
 // @flow
-import {Howl} from 'howler';
-import {pop} from "../../../dom/animation";
-import type {PushDOM} from "../../../dom/event-stream";
-import {pushDOMStream} from "../../../dom/event-stream";
-import {Exclusive} from "../../../exclusive/exclusive";
-import type {Resources} from "../../../resource";
-import {PathIds} from "../../../resource/path";
-import {SOUND_IDS} from "../../../resource/sound";
-import type {Stream, StreamSource, Unsubscriber} from "../../../stream/stream";
-import {createStreamSource} from "../../../stream/stream";
-import {domUuid} from "../../../uuid/dom-uuid";
-import type {DOMDialog} from "../dialog";
+import { Howl } from "howler";
+import { pop } from "../../../dom/animation";
+import type { PushDOM } from "../../../dom/event-stream";
+import { pushDOMStream } from "../../../dom/event-stream";
+import { Exclusive } from "../../../exclusive/exclusive";
+import type { Resources } from "../../../resource";
+import { PathIds } from "../../../resource/path";
+import { SOUND_IDS } from "../../../resource/sound";
+import type {
+  Stream,
+  StreamSource,
+  Unsubscriber,
+} from "../../../stream/stream";
+import { createStreamSource } from "../../../stream/stream";
+import { domUuid } from "../../../uuid/dom-uuid";
+import type { DOMDialog } from "../dialog";
 
 /** ルート要素のcssクラス名 */
-const ROOT_CLASS_NAME = 'login';
+const ROOT_CLASS_NAME = "login";
 
 /** data-idを集めたもの */
 type DataIDs = {
@@ -31,9 +35,13 @@ type DataIDs = {
  * @param caption キャプション
  * @return innerHTML
  */
-function rootInnerHTML(ids: DataIDs, resources: Resources, caption: string): string {
-  const closerPath = resources.paths.find(v => v.id === PathIds.CLOSER)
-    ?.path ?? '';
+function rootInnerHTML(
+  ids: DataIDs,
+  resources: Resources,
+  caption: string
+): string {
+  const closerPath =
+    resources.paths.find((v) => v.id === PathIds.CLOSER)?.path ?? "";
   return `
     <div class="${ROOT_CLASS_NAME}__background" data-id="${ids.backGround}"></div>
     <img class="${ROOT_CLASS_NAME}__closer" alt="閉じる" src="${closerPath}" data-id="${ids.closer}">
@@ -64,13 +72,28 @@ type Elements = {
  */
 function extractElements(root: HTMLElement, ids: DataIDs): Elements {
   const closerElement = root.querySelector(`[data-id="${ids.closer}"]`);
-  const closer = (closerElement instanceof HTMLImageElement) ? closerElement : document.createElement('img');
-  const backGround = root.querySelector(`[data-id="${ids.backGround}"]`) ?? document.createElement('div');
-  const loginButtonElement = root.querySelector(`[data-id="${ids.loginButton}"]`);
-  const loginButton = (loginButtonElement instanceof HTMLButtonElement) ? loginButtonElement : document.createElement('button');
-  const closeButtonElement = root.querySelector(`[data-id="${ids.closeButton}"]`);
-  const closeButton = (closeButtonElement instanceof HTMLButtonElement) ? closeButtonElement : document.createElement('button');
-  return {closer, backGround, loginButton, closeButton};
+  const closer =
+    closerElement instanceof HTMLImageElement
+      ? closerElement
+      : document.createElement("img");
+  const backGround =
+    root.querySelector(`[data-id="${ids.backGround}"]`) ??
+    document.createElement("div");
+  const loginButtonElement = root.querySelector(
+    `[data-id="${ids.loginButton}"]`
+  );
+  const loginButton =
+    loginButtonElement instanceof HTMLButtonElement
+      ? loginButtonElement
+      : document.createElement("button");
+  const closeButtonElement = root.querySelector(
+    `[data-id="${ids.closeButton}"]`
+  );
+  const closeButton =
+    closeButtonElement instanceof HTMLButtonElement
+      ? closeButtonElement
+      : document.createElement("button");
+  return { closer, backGround, loginButton, closeButton };
 }
 
 /** ログイン ダイアログ */
@@ -86,55 +109,62 @@ export class LoginDialog implements DOMDialog {
   #pushButton: typeof Howl;
   #exclusive: Exclusive;
 
-  /** 
+  /**
    * コンストラクタ
-   * 
+   *
    * @param resources リソース管理オブジェクト
    * @param caption 入力フォームに表示されるメッセージ
    */
   constructor(resources: Resources, caption: string) {
-    const dataIDs = {closer: domUuid(), backGround: domUuid(), loginButton: domUuid(), closeButton: domUuid()};
-    this.#root = document.createElement('div');
+    const dataIDs = {
+      closer: domUuid(),
+      backGround: domUuid(),
+      loginButton: domUuid(),
+      closeButton: domUuid(),
+    };
+    this.#root = document.createElement("div");
     this.#root.className = ROOT_CLASS_NAME;
     this.#root.innerHTML = rootInnerHTML(dataIDs, resources, caption);
 
     const elements = extractElements(this.#root, dataIDs);
-    this.#closer =elements.closer;
+    this.#closer = elements.closer;
     this.#loginButton = elements.loginButton;
     this.#closeButton = elements.closeButton;
 
     this.#closeDialog = createStreamSource();
     this.#login = createStreamSource();
     this.#unsubscribers = [
-      pushDOMStream(this.#loginButton).subscribe(action => {
+      pushDOMStream(this.#loginButton).subscribe((action) => {
         this.#onLoginButtonPush(action);
       }),
-      pushDOMStream(this.#closeButton).subscribe(action => {
+      pushDOMStream(this.#closeButton).subscribe((action) => {
         this.#onCloseButtonPush(action);
       }),
-      pushDOMStream(this.#closer).subscribe(action => {
+      pushDOMStream(this.#closer).subscribe((action) => {
         this.#onCloserPush(action);
       }),
-      pushDOMStream(elements.backGround).subscribe(action => {
+      pushDOMStream(elements.backGround).subscribe((action) => {
         this.#onPushOutsideOfDialog(action);
       }),
     ];
 
-    this.#changeValue = resources.sounds.find(v => v.id === SOUND_IDS.CHANGE_VALUE)
-      ?.sound ?? new Howl();
-    this.#pushButton = resources.sounds.find(v => v.id === SOUND_IDS.PUSH_BUTTON)
-      ?.sound ?? new Howl();
+    this.#changeValue =
+      resources.sounds.find((v) => v.id === SOUND_IDS.CHANGE_VALUE)?.sound ??
+      new Howl();
+    this.#pushButton =
+      resources.sounds.find((v) => v.id === SOUND_IDS.PUSH_BUTTON)?.sound ??
+      new Howl();
     this.#exclusive = new Exclusive();
   }
 
   /**
    * デストラクタ相当の処理
    */
-   destructor(): void {
-     this.#unsubscribers.forEach(v => {
-       v.unsubscribe();
-     });
-   }
+  destructor(): void {
+    this.#unsubscribers.forEach((v) => {
+      v.unsubscribe();
+    });
+  }
 
   /**
    * ルートHTML要素を取得する
@@ -147,7 +177,7 @@ export class LoginDialog implements DOMDialog {
 
   /**
    * ダイアログ閉じる通知
-   * 
+   *
    * @return 通知ストリーム
    */
   closeDialogNotifier(): Stream<void> {
@@ -165,59 +195,50 @@ export class LoginDialog implements DOMDialog {
 
   /**
    * ログインボタンを押した時の処理
-   * 
+   *
    * @param action アクション
    */
   #onLoginButtonPush(action: PushDOM): void {
     this.#exclusive.execute(async () => {
       action.event.preventDefault();
-      await Promise.all([
-        pop(this.#loginButton),
-        this.#pushButton.play()
-      ]);
+      await Promise.all([pop(this.#loginButton), this.#pushButton.play()]);
       this.#login.next();
     });
   }
 
   /**
    * 閉じるボタンを押した時の処理
-   * 
+   *
    * @param action アクション
    */
   #onCloseButtonPush(action: PushDOM): void {
     this.#exclusive.execute(async () => {
       action.event.preventDefault();
-      await Promise.all([
-        pop(this.#closeButton),
-        this.#changeValue.play()
-      ]);
+      await Promise.all([pop(this.#closeButton), this.#changeValue.play()]);
       this.#closeDialog.next();
     });
   }
 
   /**
    * クローザーを押した時の処理
-   * 
+   *
    * @param action アクション
    */
   #onCloserPush(action: PushDOM): void {
     this.#exclusive.execute(async () => {
       action.event.preventDefault();
-      await Promise.all([
-        pop(this.#closer, 1.3),
-        this.#changeValue.play()
-      ]);
+      await Promise.all([pop(this.#closer, 1.3), this.#changeValue.play()]);
       this.#closeDialog.next();
     });
   }
 
   /**
    * ダイアログ外を押した時の処理
-   * 
+   *
    * @param action アクション
    */
   #onPushOutsideOfDialog(action: PushDOM): void {
-    this.#exclusive.execute(async (): Promise<void>=> {
+    this.#exclusive.execute(async (): Promise<void> => {
       action.event.preventDefault();
       await this.#changeValue.play();
       this.#closeDialog.next();

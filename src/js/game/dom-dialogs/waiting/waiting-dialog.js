@@ -1,9 +1,9 @@
 // @flow
 
-import type {DOMDialog} from "../dialog";
+import type { DOMDialog } from "../dialog";
 
 /** ルート要素のcssクラス名 */
-const ROOT_CLASS_NAME = 'waiting';
+const ROOT_CLASS_NAME = "waiting";
 
 /**
  * ルート要素のinnerHTML
@@ -30,7 +30,7 @@ export class WaitingDialog implements DOMDialog {
    * @param caption ダイアログに表示する文言
    */
   constructor(caption: string) {
-    this.#root = document.createElement('div');
+    this.#root = document.createElement("div");
     this.#root.className = ROOT_CLASS_NAME;
     this.#root.innerHTML = rootInnerHTML(caption);
   }

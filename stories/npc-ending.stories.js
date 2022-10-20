@@ -1,15 +1,15 @@
 // @flow
 
-import {createBGMManager} from "../src/js/bgm/bgm-manager";
-import {NPCEnding} from "../src/js/game/dom-scenes/scene/npc-ending/npc-ending";
-import type {DOMStubStory} from "./stub/dom-stub";
-import {domStub} from "./stub/dom-stub";
+import { createBGMManager } from "../src/js/bgm/bgm-manager";
+import { NPCEnding } from "../src/js/game/dom-scenes/scene/npc-ending/npc-ending";
+import type { DOMStubStory } from "./stub/dom-stub";
+import { domStub } from "./stub/dom-stub";
 
 export default {
-  title: 'npc-ending'
+  title: "npc-ending",
 };
 
-export const Scene: DOMStubStory = domStub(resources => {
+export const Scene: DOMStubStory = domStub((resources) => {
   const bgm = createBGMManager();
   const scene = new NPCEnding(resources, bgm);
   scene.playBGM();

@@ -1,10 +1,10 @@
 // @flow
-import type {Resources} from "../../../../../resource";
-import type {Stream, Unsubscriber} from "../../../../../stream/stream";
-import {ROOT_CLASS, ROOT_CLASS_INVISIBLE} from "./dom/class-name";
-import {bindEventListeners} from "./listeners";
-import type {ConfigChangedDialogProps} from "./props";
-import {createConfigChangedDialogProps} from "./props";
+import type { Resources } from "../../../../../resource";
+import type { Stream, Unsubscriber } from "../../../../../stream/stream";
+import { ROOT_CLASS, ROOT_CLASS_INVISIBLE } from "./dom/class-name";
+import { bindEventListeners } from "./listeners";
+import type { ConfigChangedDialogProps } from "./props";
+import { createConfigChangedDialogProps } from "./props";
 
 /**
  * 設定変更通知ダイアログ
@@ -29,7 +29,7 @@ export class ConfigChangedDialog {
    * デストラクタ相当の処理
    */
   destructor(): void {
-    this.#unsbusscriber.forEach(v => {
+    this.#unsbusscriber.forEach((v) => {
       v.unsubscribe();
     });
   }

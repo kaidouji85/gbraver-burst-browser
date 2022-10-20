@@ -1,12 +1,12 @@
 // @flow
 
-import type {ArmDozerId} from "gbraver-burst-core";
-import {ArmDozers} from "gbraver-burst-core";
-import {domUuid} from "../../../../../uuid/dom-uuid";
-import {burstTemplate} from "./status-template";
+import type { ArmDozerId } from "gbraver-burst-core";
+import { ArmDozers } from "gbraver-burst-core";
+import { domUuid } from "../../../../../uuid/dom-uuid";
+import { burstTemplate } from "./status-template";
 
 /**ルート要素のクラス名 */
-const ROOT_CLASS_NAME = 'armdozer-status';
+const ROOT_CLASS_NAME = "armdozer-status";
 
 /** data-idを集めたもの */
 type DataIDs = {
@@ -14,7 +14,7 @@ type DataIDs = {
   hp: string,
   power: string,
   speed: string,
-  burst: string
+  burst: string,
 };
 
 /**
@@ -47,7 +47,7 @@ type Elements = {
   hp: HTMLElement,
   power: HTMLElement,
   speed: HTMLElement,
-  burst: HTMLElement
+  burst: HTMLElement,
 };
 
 /**
@@ -58,17 +58,22 @@ type Elements = {
  * @return 抽出結果
  */
 function extractElements(root: HTMLElement, ids: DataIDs): Elements {
-  const name = root.querySelector(`[data-id="${ids.name}"]`)
-    ?? document.createElement('div');
-  const hp= root.querySelector(`[data-id="${ids.hp}"]`)
-    ?? document.createElement('div');
-  const power= root.querySelector(`[data-id="${ids.power}"]`)
-    ?? document.createElement('div');
-  const speed= root.querySelector(`[data-id="${ids.speed}"]`)
-    ?? document.createElement('div');
-  const burst = root.querySelector(`[data-id="${ids.burst}"]`)
-    ?? document.createElement('div');
-  return {name, hp, power, speed, burst};
+  const name =
+    root.querySelector(`[data-id="${ids.name}"]`) ??
+    document.createElement("div");
+  const hp =
+    root.querySelector(`[data-id="${ids.hp}"]`) ??
+    document.createElement("div");
+  const power =
+    root.querySelector(`[data-id="${ids.power}"]`) ??
+    document.createElement("div");
+  const speed =
+    root.querySelector(`[data-id="${ids.speed}"]`) ??
+    document.createElement("div");
+  const burst =
+    root.querySelector(`[data-id="${ids.burst}"]`) ??
+    document.createElement("div");
+  return { name, hp, power, speed, burst };
 }
 
 /** アームドーザステータス */
@@ -84,16 +89,22 @@ export class ArmdozerStatus {
    * コンストラクタ
    */
   constructor() {
-    const dataIDs = {name: domUuid(), hp: domUuid(), power: domUuid(), speed: domUuid(), burst: domUuid()};
-    this.#root = document.createElement('div');
+    const dataIDs = {
+      name: domUuid(),
+      hp: domUuid(),
+      power: domUuid(),
+      speed: domUuid(),
+      burst: domUuid(),
+    };
+    this.#root = document.createElement("div");
     this.#root.className = ROOT_CLASS_NAME;
     this.#root.innerHTML = rootInnerHTML(dataIDs);
     const elements = extractElements(this.#root, dataIDs);
 
-    this.#name = elements.name
-    this.#hp= elements.hp;
+    this.#name = elements.name;
+    this.#hp = elements.hp;
     this.#power = elements.power;
-    this.#speed= elements.speed;
+    this.#speed = elements.speed;
     this.#burst = elements.burst;
   }
 
@@ -112,7 +123,7 @@ export class ArmdozerStatus {
    * @param armdozerId 表示するアームドーザID
    */
   switch(armdozerId: ArmDozerId) {
-    const target = ArmDozers.find(v => v.id === armdozerId);
+    const target = ArmDozers.find((v) => v.id === armdozerId);
     if (!target) {
       return;
     }
@@ -122,7 +133,10 @@ export class ArmdozerStatus {
     this.#power.innerText = `${target.power}`;
     this.#speed.innerText = `${target.speed}`;
     this.#burst.innerHTML = burstTemplate(target.burst)
-      .map(v => `<span class="${ROOT_CLASS_NAME}__burst__content__line">${v}</span>`)
+      .map(
+        (v) =>
+          `<span class="${ROOT_CLASS_NAME}__burst__content__line">${v}</span>`
+      )
       .reduce((a, b) => a + b);
   }
 }

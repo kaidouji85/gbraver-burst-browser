@@ -2,7 +2,7 @@
 
 /** タイムスケール変更通知 */
 export type ToggleTimeScale = {
-  type: 'toggleTimeScale',
+  type: "toggleTimeScale",
   /** 変更するタイムスケール */
-  timeScale: number
+  timeScale: number,
 };

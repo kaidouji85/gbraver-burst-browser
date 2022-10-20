@@ -1,17 +1,17 @@
 // @flow
-import type {Resources} from "../../resource";
-import type {Stream, StreamSource, Unsubscriber} from "../../stream/stream";
-import {createStreamSource} from "../../stream/stream";
-import type {GameAction} from "../game-actions";
-import type {PostNetworkError} from '../post-network-error';
-import {DeleteAccountConsentDialog} from "./delete-account-consent/delete-account-consent-dialog";
-import type {DOMDialog} from "./dialog";
-import {DifficultyDialog} from "./difficulty/difficulty-dialog";
-import {HowToPlay} from "./how-to-play/how-to-play-dialog";
-import {LoginDialog} from './login/login-dialog';
-import {MatchingDialog} from "./matching/matching-dialog";
-import {NetworkErrorDialog} from './network-error/network-error-dialog';
-import {WaitingDialog} from "./waiting/waiting-dialog";
+import type { Resources } from "../../resource";
+import type { Stream, StreamSource, Unsubscriber } from "../../stream/stream";
+import { createStreamSource } from "../../stream/stream";
+import type { GameAction } from "../game-actions";
+import type { PostNetworkError } from "../post-network-error";
+import { DeleteAccountConsentDialog } from "./delete-account-consent/delete-account-consent-dialog";
+import type { DOMDialog } from "./dialog";
+import { DifficultyDialog } from "./difficulty/difficulty-dialog";
+import { HowToPlay } from "./how-to-play/how-to-play-dialog";
+import { LoginDialog } from "./login/login-dialog";
+import { MatchingDialog } from "./matching/matching-dialog";
+import { NetworkErrorDialog } from "./network-error/network-error-dialog";
+import { WaitingDialog } from "./waiting/waiting-dialog";
 
 /** HTML ダイアログをあつめたもの */
 export class DOMDialogs {
@@ -24,7 +24,7 @@ export class DOMDialogs {
    * コンストラクタ
    */
   constructor() {
-    this.#root = document.createElement('div');
+    this.#root = document.createElement("div");
     this.#dialog = null;
     this.#gameAction = createStreamSource();
     this.#unsubscribers = [];
@@ -42,8 +42,8 @@ export class DOMDialogs {
     const howToPlay = new HowToPlay(resources, movieURL);
     this.#unsubscribers = [
       howToPlay.closeNotifier().subscribe(() => {
-        this.#gameAction.next({type: 'EndHowToPlay'});
-      })
+        this.#gameAction.next({ type: "EndHowToPlay" });
+      }),
     ];
     this.#root.appendChild(howToPlay.getRootHTMLElement());
     this.#dialog = howToPlay;
@@ -61,10 +61,10 @@ export class DOMDialogs {
     const login = new LoginDialog(resources, caption);
     this.#unsubscribers = [
       login.loginNotifier().subscribe(() => {
-        this.#gameAction.next({type: 'UniversalLogin'});
+        this.#gameAction.next({ type: "UniversalLogin" });
       }),
       login.closeDialogNotifier().subscribe(() => {
-        this.#gameAction.next({type: 'LoginCancel'});
+        this.#gameAction.next({ type: "LoginCancel" });
       }),
     ];
     this.#root.appendChild(login.getRootHTMLElement());
@@ -90,14 +90,17 @@ export class DOMDialogs {
    * @param resources リソース管理オブジェクト
    * @param postNetworkError 通信エラーの後処理情報
    */
-  startNetworkError(resources: Resources, postNetworkError: PostNetworkError): void {
+  startNetworkError(
+    resources: Resources,
+    postNetworkError: PostNetworkError
+  ): void {
     this.#removeCurrentDialog();
-    
+
     const networkError = new NetworkErrorDialog(resources, postNetworkError);
     this.#unsubscribers = [
       networkError.postNetworkErrorNotifier().subscribe((postNetworkError) => {
-        this.#gameAction.next({type: 'EndNetworkError', postNetworkError});
-      })
+        this.#gameAction.next({ type: "EndNetworkError", postNetworkError });
+      }),
     ];
     this.#root.appendChild(networkError.getRootHTMLElement());
     this.#dialog = networkError;
@@ -105,7 +108,7 @@ export class DOMDialogs {
 
   /**
    * アカウント削除同意ダイアログを表示する
-   * 
+   *
    * @param resources リソース管理オブジェクト
    */
   startDeleteAccountConsent(resources: Resources): void {
@@ -114,10 +117,10 @@ export class DOMDialogs {
     const deleteAccountConsent = new DeleteAccountConsentDialog(resources);
     this.#unsubscribers = [
       deleteAccountConsent.deleteAccountNotifier().subscribe(() => {
-        this.#gameAction.next({type: 'DeleteAccount'});
+        this.#gameAction.next({ type: "DeleteAccount" });
       }),
       deleteAccountConsent.closeDialogNotifier().subscribe(() => {
-        this.#gameAction.next({type: 'CancelAccountDeletion'});
+        this.#gameAction.next({ type: "CancelAccountDeletion" });
       }),
     ];
     this.#root.appendChild(deleteAccountConsent.getRootHTMLElement());
@@ -134,12 +137,15 @@ export class DOMDialogs {
 
     const degreeOfDifficulty = new DifficultyDialog(resources);
     this.#unsubscribers = [
-      degreeOfDifficulty.selectionCompleteNotifier().subscribe(difficulty => {
-        this.#gameAction.next({type: 'DifficultySelectionComplete', difficulty});
+      degreeOfDifficulty.selectionCompleteNotifier().subscribe((difficulty) => {
+        this.#gameAction.next({
+          type: "DifficultySelectionComplete",
+          difficulty,
+        });
       }),
       degreeOfDifficulty.closeDialogNotifier().subscribe(() => {
-        this.#gameAction.next({type: 'DifficultySelectionCancel'});
-      })
+        this.#gameAction.next({ type: "DifficultySelectionCancel" });
+      }),
     ];
     this.#root.appendChild(degreeOfDifficulty.getRootHTMLElement());
     this.#dialog = degreeOfDifficulty;
@@ -156,8 +162,8 @@ export class DOMDialogs {
     const matchingDialog = new MatchingDialog(resources);
     this.#unsubscribers = [
       matchingDialog.matchingCanceledNotifier().subscribe(() => {
-        this.#gameAction.next({type: 'MatchingCanceled'});
-      })
+        this.#gameAction.next({ type: "MatchingCanceled" });
+      }),
     ];
     this.#root.appendChild(matchingDialog.getRootHTMLElement());
     this.#dialog = matchingDialog;
@@ -196,7 +202,7 @@ export class DOMDialogs {
     this.#dialog && this.#dialog.getRootHTMLElement().remove();
     this.#dialog = null;
 
-    this.#unsubscribers.forEach(v => {
+    this.#unsubscribers.forEach((v) => {
       v.unsubscribe();
     });
     this.#unsubscribers = [];

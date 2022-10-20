@@ -7,5 +7,5 @@
  * @return バッテリーセレクタの初期値
  */
 export function getInitialBattery(enableMaxBattery: number): number {
-  return (0 < enableMaxBattery) ? 1 : 0;
+  return 0 < enableMaxBattery ? 1 : 0;
 }

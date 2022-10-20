@@ -1,14 +1,14 @@
 // @flow
 
-import * as THREE from 'three';
-import type {PreRender} from "../../../../game-loop/pre-render";
-import {HorizontalAnimationMesh} from "../../../../mesh/horizontal-animation";
-import type {Resources} from "../../../../resource";
-import {TEXTURE_IDS} from "../../../../resource/texture/ids";
-import {HUD_CUT_IN_ZNIDEX} from "../../../hud-zindex";
-import {HUDCutInScale} from "../../../scale";
-import type {TsubasaModel} from "../model/tsubasa-model";
-import type {TsubasaView} from "./tsubasa-view";
+import * as THREE from "three";
+import type { PreRender } from "../../../../game-loop/pre-render";
+import { HorizontalAnimationMesh } from "../../../../mesh/horizontal-animation";
+import type { Resources } from "../../../../resource";
+import { TEXTURE_IDS } from "../../../../resource/texture/ids";
+import { HUD_CUT_IN_ZNIDEX } from "../../../hud-zindex";
+import { HUDCutInScale } from "../../../scale";
+import type { TsubasaModel } from "../model/tsubasa-model";
+import type { TsubasaView } from "./tsubasa-view";
 
 /** メッシュの大きさ */
 export const MESH_SIZE = 550;
@@ -31,8 +31,9 @@ export class PlayerTsubasaView implements TsubasaView {
    * @param resources リソース管理オブジェクト
    */
   constructor(resources: Resources) {
-    const tsubasa = resources.textures.find(v => v.id === TEXTURE_IDS.TSUBASA_CUTIN)
-      ?.texture ?? new THREE.Texture();
+    const tsubasa =
+      resources.textures.find((v) => v.id === TEXTURE_IDS.TSUBASA_CUTIN)
+        ?.texture ?? new THREE.Texture();
     this.#mesh = new HorizontalAnimationMesh({
       texture: tsubasa,
       maxAnimation: MAX_ANIMATION,
@@ -55,9 +56,12 @@ export class PlayerTsubasaView implements TsubasaView {
    * @param preRender プリレンダー情報
    */
   engage(model: TsubasaModel, preRender: PreRender): void {
-    const scale = HUDCutInScale(preRender.rendererDOM, preRender.safeAreaInset) * model.scale;
-    const x = preRender.rendererDOM.clientWidth / 2
-      + (model.position.x - PADDING_RIGHT) * scale;
+    const scale =
+      HUDCutInScale(preRender.rendererDOM, preRender.safeAreaInset) *
+      model.scale;
+    const x =
+      preRender.rendererDOM.clientWidth / 2 +
+      (model.position.x - PADDING_RIGHT) * scale;
     this.#mesh.getObject3D().scale.set(scale, scale, scale);
     this.#mesh.getObject3D().position.set(x, 0, HUD_CUT_IN_ZNIDEX);
     this.#mesh.setOpacity(model.opacity);

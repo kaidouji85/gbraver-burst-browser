@@ -1,8 +1,8 @@
 // @flow
 
-import * as THREE from 'three';
-import {drawImageInCenter} from "../canvas/draw/image-drawer";
-import {CanvasMesh} from "./canvas-mesh";
+import * as THREE from "three";
+import { drawImageInCenter } from "../canvas/draw/image-drawer";
+import { CanvasMesh } from "./canvas-mesh";
 
 /** コンストラクタのパラメータ */
 type Param = {
@@ -36,7 +36,7 @@ export class SimpleImageMesh {
       meshWidth: param.meshSize,
       meshHeight: param.meshSize,
     });
-    this._mesh.draw(context => {
+    this._mesh.draw((context) => {
       const dx = context.canvas.width / 2;
       const dy = context.canvas.height / 2;
       drawImageInCenter(context, param.image, dx, dy, param.imageWidth);

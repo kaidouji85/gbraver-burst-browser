@@ -1,10 +1,10 @@
 // @flow
 
-import type {Resources} from "../../../../resource";
-import {TEXTURE_IDS} from "../../../../resource/texture/ids";
-import type {ArmdozerAnimation} from "../../mesh/armdozer-animation";
-import {HorizontalArmdozerAnimation} from "../../mesh/horizontal-animation";
-import {MESH_Y} from "./position";
+import type { Resources } from "../../../../resource";
+import { TEXTURE_IDS } from "../../../../resource/texture/ids";
+import type { ArmdozerAnimation } from "../../mesh/armdozer-animation";
+import { HorizontalArmdozerAnimation } from "../../mesh/horizontal-animation";
+import { MESH_Y } from "./position";
 
 export const MAX_ANIMATION = 4;
 export const MESH_WIDTH = 600;
@@ -17,7 +17,7 @@ export function neoLandozerHMAttack(resources: Resources): ArmdozerAnimation {
     maxAnimation: MAX_ANIMATION,
     resources: resources,
     width: MESH_WIDTH,
-    height: MESH_HEIGHT
+    height: MESH_HEIGHT,
   });
   const object = ret.getObject3D();
   object.position.y = MESH_Y;

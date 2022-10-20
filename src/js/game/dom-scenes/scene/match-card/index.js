@@ -1,9 +1,9 @@
 // @flow
 
-import type {ArmDozerId} from "gbraver-burst-core";
-import type {Resources} from "../../../../resource";
-import type {DOMScene} from "../../dom-scene";
-import {MatchCardPresentation} from "./presentation";
+import type { ArmDozerId } from "gbraver-burst-core";
+import type { Resources } from "../../../../resource";
+import type { DOMScene } from "../../dom-scene";
+import { MatchCardPresentation } from "./presentation";
 
 /**
  * コンストラクタのパラメータ
@@ -27,9 +27,14 @@ export class MatchCard implements DOMScene {
    * @param param パラメータ
    */
   constructor(param: Param): void {
-    this.#presentation = new MatchCardPresentation(param.resources, param.player, param.enemy, param.caption);
+    this.#presentation = new MatchCardPresentation(
+      param.resources,
+      param.player,
+      param.enemy,
+      param.caption
+    );
   }
-  
+
   /**
    * デストラクタ相当の処理
    */

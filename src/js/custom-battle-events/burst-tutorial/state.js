@@ -1,9 +1,9 @@
 // @flow
 
-import type {GameState} from "gbraver-burst-core";
+import type { GameState } from "gbraver-burst-core";
 
 /** 選択可能なコマンド */
-export type SelectableCommands = 'BurstOnly' | 'PilotSkillOnly' | 'All';
+export type SelectableCommands = "BurstOnly" | "PilotSkillOnly" | "All";
 
 /** バーストチュートリアルのステート */
 export type BurstTutorialState = {

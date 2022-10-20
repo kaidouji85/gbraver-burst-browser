@@ -1,8 +1,8 @@
 // @flow
 
-import * as THREE from 'three';
-import type {PreRender} from "../../../../game-loop/pre-render";
-import type {LightningDozerCutInModel} from "../model/lightning-dozer-cutin-model";
+import * as THREE from "three";
+import type { PreRender } from "../../../../game-loop/pre-render";
+import type { LightningDozerCutInModel } from "../model/lightning-dozer-cutin-model";
 
 /**
  * ライトニングドーザ カットイン

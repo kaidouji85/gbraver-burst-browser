@@ -1,6 +1,6 @@
 // @flow
-import type {BGM} from "./bgm";
-import type {BGMOperator} from "./bgm-operators";
+import type { BGM } from "./bgm";
+import type { BGMOperator } from "./bgm-operators";
 
 /** BGM管理オブジェクト */
 export interface BGMManager {
@@ -22,7 +22,7 @@ class SimpleBGMManager implements BGMManager {
    * コンストラクタ
    */
   constructor() {
-    this._bgm = {type: 'NoBGM'};
+    this._bgm = { type: "NoBGM" };
     this._lastOperation = Promise.resolve(this._bgm);
   }
 
@@ -38,7 +38,7 @@ class SimpleBGMManager implements BGMManager {
 
 /**
  * BGM管理オブジェクトを生成する
- * 
+ *
  * @return 生成結果
  */
 export function createBGMManager(): BGMManager {

@@ -1,12 +1,12 @@
 // @flow
 
-import type {PilotId} from "gbraver-burst-core";
-import {Pilots} from "gbraver-burst-core";
-import {domUuid} from "../../../../../uuid/dom-uuid";
-import {pilotSkillTemplate} from "./status-template";
+import type { PilotId } from "gbraver-burst-core";
+import { Pilots } from "gbraver-burst-core";
+import { domUuid } from "../../../../../uuid/dom-uuid";
+import { pilotSkillTemplate } from "./status-template";
 
 /** ルート要素のクラス名 */
-const ROOT_CLASS_NAME = 'pilot-status';
+const ROOT_CLASS_NAME = "pilot-status";
 
 /** data-idを集めたもの */
 type DataIDs = {
@@ -44,11 +44,13 @@ type Elements = {
  * @return 抽出結果
  */
 function extractElements(root: HTMLElement, ids: DataIDs): Elements {
-  const name = root.querySelector(`[data-id="${ids.name}"]`)
-    ?? document.createElement('div');
-  const skill = root.querySelector(`[data-id="${ids.skill}"]`)
-    ?? document.createElement('div');
-  return {name, skill};
+  const name =
+    root.querySelector(`[data-id="${ids.name}"]`) ??
+    document.createElement("div");
+  const skill =
+    root.querySelector(`[data-id="${ids.skill}"]`) ??
+    document.createElement("div");
+  return { name, skill };
 }
 
 /** パイロットステータス */
@@ -61,8 +63,8 @@ export class PilotStatus {
    * コンストラクタ
    */
   constructor() {
-    const dataIDs = {name: domUuid(), skill: domUuid()};
-    this.#root = document.createElement('div');
+    const dataIDs = { name: domUuid(), skill: domUuid() };
+    this.#root = document.createElement("div");
     this.#root.className = ROOT_CLASS_NAME;
     this.#root.innerHTML = rootInnerHTML(dataIDs);
 
@@ -85,14 +87,17 @@ export class PilotStatus {
    * @param pilotId 切り替えるパイロットのID
    */
   switch(pilotId: PilotId): void {
-    const target = Pilots.find(v => v.id === pilotId);
+    const target = Pilots.find((v) => v.id === pilotId);
     if (!target) {
       return;
     }
 
     this.#name.innerText = target.name;
     this.#skill.innerHTML = pilotSkillTemplate(target.skill)
-      .map(v => `<span class="${ROOT_CLASS_NAME}__skill__content__line">${v}</span>`)
+      .map(
+        (v) =>
+          `<span class="${ROOT_CLASS_NAME}__skill__content__line">${v}</span>`
+      )
       .reduce((a, b) => a + b);
   }
 }

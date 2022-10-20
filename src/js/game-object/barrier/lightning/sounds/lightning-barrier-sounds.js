@@ -1,8 +1,8 @@
 // @flow
 
-import {Howl} from 'howler';
-import type {Resources} from "../../../../resource";
-import {SOUND_IDS} from "../../../../resource/sound";
+import { Howl } from "howler";
+import type { Resources } from "../../../../resource";
+import { SOUND_IDS } from "../../../../resource/sound";
 
 /**
  * 電撃バリア 音
@@ -16,7 +16,9 @@ export class LightningBarrierSounds {
    * @param resources リソース管理オブジェクト
    */
   constructor(resources: Resources) {
-    const lightningResource = resources.sounds.find(v => v.id === SOUND_IDS.LIGHTNING_BARRIER);
+    const lightningResource = resources.sounds.find(
+      (v) => v.id === SOUND_IDS.LIGHTNING_BARRIER
+    );
     this.lightningBarrier = lightningResource
       ? lightningResource.sound
       : new Howl();

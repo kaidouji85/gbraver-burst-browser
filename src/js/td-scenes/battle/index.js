@@ -1,13 +1,17 @@
 // @flow
-import type {Stream, Unsubscriber} from "../../stream/stream";
-import type {TDScene} from "../td-scene";
-import type {BattleEnd, BattleSceneProps, BattleScenePropsCreatorParams} from "./battle-scene-props";
-import {createBattleSceneProps} from "./battle-scene-props";
-import {onBurst} from "./procedure/on-burst";
-import {onDecideBattery} from "./procedure/on-decide-battery";
-import {onPilotSkill} from "./procedure/on-pilot-skill";
-import {onToggleTimeScale} from "./procedure/on-toggle-time-scale";
-import {start} from "./procedure/start";
+import type { Stream, Unsubscriber } from "../../stream/stream";
+import type { TDScene } from "../td-scene";
+import type {
+  BattleEnd,
+  BattleSceneProps,
+  BattleScenePropsCreatorParams,
+} from "./battle-scene-props";
+import { createBattleSceneProps } from "./battle-scene-props";
+import { onBurst } from "./procedure/on-burst";
+import { onDecideBattery } from "./procedure/on-decide-battery";
+import { onPilotSkill } from "./procedure/on-pilot-skill";
+import { onToggleTimeScale } from "./procedure/on-toggle-time-scale";
+import { start } from "./procedure/start";
 
 /** コンストラクタのパラメータ */
 type BattleSceneParams = BattleScenePropsCreatorParams;
@@ -25,24 +29,24 @@ export class BattleScene implements TDScene {
   constructor(params: BattleSceneParams) {
     this.#props = createBattleSceneProps(params);
     this.#unsubscriber = [
-      this.#props.view.battleActionNotifier().subscribe(action => {
-        if (action.type === 'decideBattery') {
+      this.#props.view.battleActionNotifier().subscribe((action) => {
+        if (action.type === "decideBattery") {
           onDecideBattery(this.#props, action);
-        } else if (action.type === 'doBurst') {
+        } else if (action.type === "doBurst") {
           onBurst(this.#props, action);
-        } else if (action.type === 'doPilotSkill') {
+        } else if (action.type === "doPilotSkill") {
           onPilotSkill(this.#props, action);
-        } else if (action.type === 'toggleTimeScale') {
+        } else if (action.type === "toggleTimeScale") {
           onToggleTimeScale(this.#props, action);
         }
-      })
+      }),
     ];
   }
 
   /** @override */
   destructor(): void {
     this.#props.view.destructor();
-    this.#unsubscriber.forEach(v => {
+    this.#unsubscriber.forEach((v) => {
       v.unsubscribe();
     });
   }

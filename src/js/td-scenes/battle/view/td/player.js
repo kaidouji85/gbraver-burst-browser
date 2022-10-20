@@ -1,32 +1,62 @@
 // @flow
 
-import type {Player, PlayerId} from "gbraver-burst-core";
+import type { Player, PlayerId } from "gbraver-burst-core";
 import * as THREE from "three";
-import type {GameObjectAction} from "../../../../game-object/action/game-object-action";
-import {enemyBatteryCorrect, playerBatteryCorrect} from "../../../../game-object/battery-correct";
-import {BatteryCorrect} from "../../../../game-object/battery-correct/battery-correct";
-import {enemyBatteryEnchantment, playerBatteryEnchantment} from "../../../../game-object/battery-enchantment";
-import {BatteryEnchantment} from "../../../../game-object/battery-enchantment/battery-enchantment";
-import {enemyBatteryNumber, playerBatteryNumber} from "../../../../game-object/battery-number";
-import {BatteryNumber} from "../../../../game-object/battery-number/battery-number";
-import {enemyContinuousAttack, playerContinuousAttack} from "../../../../game-object/continuous-attack";
-import {ContinuousAttackIndicator} from "../../../../game-object/continuous-attack/continuous-attack-indicator";
-import {enemyDamageHalved, playerDamageHalved} from "../../../../game-object/damage-halved";
-import {DamageHalved} from "../../../../game-object/damage-halved/damage-halved";
-import {enemyDamageIndicator, playerDamageIndicator} from "../../../../game-object/damage-indicator";
-import {DamageIndicator} from "../../../../game-object/damage-indicator/damage-indicator";
-import {enemyLightning, playerLightning} from "../../../../game-object/hitmark/lightning";
-import {Lightning} from "../../../../game-object/hitmark/lightning/lightning";
-import {enemyShockWave, playerShockWave} from "../../../../game-object/hitmark/shock-wave";
-import {ShockWave} from "../../../../game-object/hitmark/shock-wave/shock-wave";
-import {enemyPowerUp, playerPowerUp} from "../../../../game-object/power-up";
-import {PowerUp} from "../../../../game-object/power-up/power-up";
-import {enemyRecoverBattery, playerRecoverBattery} from "../../../../game-object/recover-battery";
-import {RecoverBattery} from "../../../../game-object/recover-battery/recover-battery";
-import {enemyReflectIndicator, playerReflectIndicator} from "../../../../game-object/reflect-indicator";
-import {ReflectIndicator} from "../../../../game-object/reflect-indicator/reflect-indicator";
-import type {Resources} from "../../../../resource";
-import type {Stream} from "../../../../stream/stream";
+import type { GameObjectAction } from "../../../../game-object/action/game-object-action";
+import {
+  enemyBatteryCorrect,
+  playerBatteryCorrect,
+} from "../../../../game-object/battery-correct";
+import { BatteryCorrect } from "../../../../game-object/battery-correct/battery-correct";
+import {
+  enemyBatteryEnchantment,
+  playerBatteryEnchantment,
+} from "../../../../game-object/battery-enchantment";
+import { BatteryEnchantment } from "../../../../game-object/battery-enchantment/battery-enchantment";
+import {
+  enemyBatteryNumber,
+  playerBatteryNumber,
+} from "../../../../game-object/battery-number";
+import { BatteryNumber } from "../../../../game-object/battery-number/battery-number";
+import {
+  enemyContinuousAttack,
+  playerContinuousAttack,
+} from "../../../../game-object/continuous-attack";
+import { ContinuousAttackIndicator } from "../../../../game-object/continuous-attack/continuous-attack-indicator";
+import {
+  enemyDamageHalved,
+  playerDamageHalved,
+} from "../../../../game-object/damage-halved";
+import { DamageHalved } from "../../../../game-object/damage-halved/damage-halved";
+import {
+  enemyDamageIndicator,
+  playerDamageIndicator,
+} from "../../../../game-object/damage-indicator";
+import { DamageIndicator } from "../../../../game-object/damage-indicator/damage-indicator";
+import {
+  enemyLightning,
+  playerLightning,
+} from "../../../../game-object/hitmark/lightning";
+import { Lightning } from "../../../../game-object/hitmark/lightning/lightning";
+import {
+  enemyShockWave,
+  playerShockWave,
+} from "../../../../game-object/hitmark/shock-wave";
+import { ShockWave } from "../../../../game-object/hitmark/shock-wave/shock-wave";
+import { enemyPowerUp, playerPowerUp } from "../../../../game-object/power-up";
+import { PowerUp } from "../../../../game-object/power-up/power-up";
+import {
+  enemyRecoverBattery,
+  playerRecoverBattery,
+} from "../../../../game-object/recover-battery";
+import { RecoverBattery } from "../../../../game-object/recover-battery/recover-battery";
+import {
+  enemyReflectIndicator,
+  playerReflectIndicator,
+} from "../../../../game-object/reflect-indicator";
+import { ReflectIndicator } from "../../../../game-object/reflect-indicator/reflect-indicator";
+import type { Resources } from "../../../../resource";
+import type { Stream } from "../../../../stream/stream";
 
 /**
  * 3Dレイヤー プレイヤー関係オブジェクト フィールド
@@ -145,12 +175,16 @@ export class TDPlayerImpl implements TDPlayer {
  * @param gameObjectAction ゲームオブジェクトアクション
  * @return 3Dプレイヤーオブジェクト
  */
-export function playerTDObjects(resources: Resources, state: Player, gameObjectAction: Stream<GameObjectAction>): TDPlayer {
+export function playerTDObjects(
+  resources: Resources,
+  state: Player,
+  gameObjectAction: Stream<GameObjectAction>
+): TDPlayer {
   return new TDPlayerImpl({
     playerId: state.playerId,
     hitMark: {
       shockWave: playerShockWave(resources, gameObjectAction),
-      lightning: playerLightning(resources, gameObjectAction)
+      lightning: playerLightning(resources, gameObjectAction),
     },
     armdozerEffects: {
       powerUp: playerPowerUp(resources, gameObjectAction),
@@ -174,12 +208,16 @@ export function playerTDObjects(resources: Resources, state: Player, gameObjectA
  * @param gameObjectAction ゲームオブジェクトアクション
  * @return 3Dプレイヤーオブジェクト
  */
-export function enemyTDObject(resources: Resources, state: Player, gameObjectAction: Stream<GameObjectAction>): TDPlayer {
+export function enemyTDObject(
+  resources: Resources,
+  state: Player,
+  gameObjectAction: Stream<GameObjectAction>
+): TDPlayer {
   return new TDPlayerImpl({
     playerId: state.playerId,
     hitMark: {
       shockWave: enemyShockWave(resources, gameObjectAction),
-      lightning: enemyLightning(resources, gameObjectAction)
+      lightning: enemyLightning(resources, gameObjectAction),
     },
     armdozerEffects: {
       powerUp: enemyPowerUp(resources, gameObjectAction),

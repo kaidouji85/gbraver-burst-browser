@@ -1,8 +1,8 @@
 // @flow
-import type {StreamSource, Unsubscriber} from "../../stream/stream";
-import {createStreamSource} from "../../stream/stream";
-import type {GameAction} from "../game-actions";
-import type {DOMScene} from "./dom-scene";
+import type { StreamSource, Unsubscriber } from "../../stream/stream";
+import { createStreamSource } from "../../stream/stream";
+import type { GameAction } from "../game-actions";
+import type { DOMScene } from "./dom-scene";
 
 /** DomScenesプロパティ */
 export type DOMScenesProps = {
@@ -18,13 +18,13 @@ export type DOMScenesProps = {
 
 /**
  * DomScenesプロパティを生成する
- * 
+ *
  * @return 生成したプロパティ
  */
 export function createDOMScenesProps(): DOMScenesProps {
-  const root = document.createElement('div');
+  const root = document.createElement("div");
   const gameAction = createStreamSource();
   const scene = null;
   const unsubscribers = [];
-  return {root, gameAction, scene, unsubscribers};
+  return { root, gameAction, scene, unsubscribers };
 }

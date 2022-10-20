@@ -1,6 +1,6 @@
 // @flow
-import {fadeOut} from "../../bgm/bgm-operators";
-import type {GameProps} from "../game-props";
+import { fadeOut } from "../../bgm/bgm-operators";
+import type { GameProps } from "../game-props";
 
 /**
  * 遊び方ダイアログ表示

@@ -1,6 +1,6 @@
 // @flow
 
-import type {Command, GameState} from "gbraver-burst-core";
+import type { Command, GameState } from "gbraver-burst-core";
 
 /** バトル進行オブジェクト */
 export interface BattleProgress {
@@ -10,5 +10,5 @@ export interface BattleProgress {
    * @param command プレイヤーが入力したコマンド
    * @return 結果
    */
-  progress(command: Command): Promise<GameState[]>
+  progress(command: Command): Promise<GameState[]>;
 }

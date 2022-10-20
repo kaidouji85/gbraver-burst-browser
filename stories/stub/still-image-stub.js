@@ -1,11 +1,11 @@
 // @flow
 import * as THREE from "three";
-import type {GameObjectAction} from "../../src/js/game-object/action/game-object-action";
-import type {Resources} from "../../src/js/resource";
-import {fullResourceLoading} from "../../src/js/resource";
-import type {Stream} from "../../src/js/stream/stream";
-import {createStreamSource} from "../../src/js/stream/stream";
-import {StorybookResourceRoot} from "../storybook-resource-root";
+import type { GameObjectAction } from "../../src/js/game-object/action/game-object-action";
+import type { Resources } from "../../src/js/resource";
+import { fullResourceLoading } from "../../src/js/resource";
+import type { Stream } from "../../src/js/stream/stream";
+import { createStreamSource } from "../../src/js/stream/stream";
+import { StorybookResourceRoot } from "../storybook-resource-root";
 
 /** レンダラ設定 */
 type Renderer = {
@@ -26,7 +26,7 @@ type Camera = {
     /** y座標 */
     y: number,
     /** z座標 */
-    z: number
+    z: number,
   },
   /** 注視点 */
   target: {
@@ -35,7 +35,7 @@ type Camera = {
     /** y座標 */
     y: number,
     /** z座標 */
-    z: number
+    z: number,
   },
 };
 
@@ -61,7 +61,9 @@ export type Object3DsGeneratorParams = {
  * @param params パラメータ
  * @return スタブに追加するオブジェクト群
  */
-export type Object3DsGenerator = (params: Object3DsGeneratorParams) => Object3Ds;
+export type Object3DsGenerator = (
+  params: Object3DsGeneratorParams
+) => Object3Ds;
 
 /** スタブのパラメータ */
 type StubParams = {
@@ -70,7 +72,7 @@ type StubParams = {
   /** カメラ設定 */
   camera: Camera,
   /** three.jsオブジェクトジェネレータ */
-  creator: Object3DsGenerator
+  creator: Object3DsGenerator,
 };
 
 /**
@@ -81,14 +83,14 @@ type StubParams = {
  */
 export function stillImageStub(params: StubParams): HTMLElement {
   const renderer = new THREE.WebGLRenderer();
-  const {pixelRatio, width, height} = params.renderer;
+  const { pixelRatio, width, height } = params.renderer;
   renderer.setPixelRatio(pixelRatio);
   renderer.setSize(width, height);
 
   (async () => {
     const aspect = width / height;
     const camera = new THREE.PerspectiveCamera(75, aspect, 1, 10000);
-    const {position, target} = params.camera;
+    const { position, target } = params.camera;
     camera.position.x = position.x;
     camera.position.y = position.y;
     camera.position.z = position.z;
@@ -97,10 +99,14 @@ export function stillImageStub(params: StubParams): HTMLElement {
     const resourceRoot = new StorybookResourceRoot();
     const resourceLoading = fullResourceLoading(resourceRoot);
     const resources = await resourceLoading.resources;
-    const emptyGameObjectAction: Stream<GameObjectAction> = createStreamSource();
-    const {objects, skyBox} = params.creator({resources, emptyGameObjectAction});
+    const emptyGameObjectAction: Stream<GameObjectAction> =
+      createStreamSource();
+    const { objects, skyBox } = params.creator({
+      resources,
+      emptyGameObjectAction,
+    });
     const scene = new THREE.Scene();
-    objects.forEach(v => {
+    objects.forEach((v) => {
       scene.add(v);
     });
     scene.background = skyBox ?? null;

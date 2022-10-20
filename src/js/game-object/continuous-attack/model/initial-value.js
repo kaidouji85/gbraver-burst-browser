@@ -1,6 +1,6 @@
 // @flow
 
-import type {ContinuousAttackModel} from "./continuous-attack-model";
+import type { ContinuousAttackModel } from "./continuous-attack-model";
 
 /**
  * モデルの初期値を生成する

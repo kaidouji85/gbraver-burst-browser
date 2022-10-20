@@ -1,7 +1,7 @@
 // @flow
-import {fullResourceLoadingFrom} from "../../resource";
-import type {GameProps} from "../game-props";
-import {reflectSoundVolume} from "../reflect-sound-volume";
+import { fullResourceLoadingFrom } from "../../resource";
+import type { GameProps } from "../game-props";
+import { reflectSoundVolume } from "../reflect-sound-volume";
 
 /**
  * 全リソース読み込みを行うヘルパー関数

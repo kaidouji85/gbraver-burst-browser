@@ -1,5 +1,5 @@
 // @flow
-import type {Command} from "gbraver-burst-core";
+import type { Command } from "gbraver-burst-core";
 
 /**
  * バーストが操作可能か否かを判定する
@@ -8,6 +8,6 @@ import type {Command} from "gbraver-burst-core";
  * @return 判定結果、trueで操作可能
  */
 export function canBurstButtonPush(commands: Command[]): boolean {
-  const burstCommands = commands.filter(v => v.type === 'BURST_COMMAND');
+  const burstCommands = commands.filter((v) => v.type === "BURST_COMMAND");
   return 1 <= burstCommands.length;
 }

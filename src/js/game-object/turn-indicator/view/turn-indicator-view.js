@@ -1,20 +1,30 @@
 // @flow
 
-import * as THREE from 'three';
-import {SimpleImageMesh} from "../../../mesh/simple-image-mesh";
-import type {Resources} from "../../../resource";
-import {CANVAS_IMAGE_IDS} from "../../../resource/canvas-image";
-import {ARMDOZER_EFFECT_STANDARD_Y, ARMDOZER_EFFECT_STANDARD_Z} from "../../armdozer/position";
-import type {TurnIndicatorModel} from "../model/turn-indicator-model";
+import * as THREE from "three";
+import { SimpleImageMesh } from "../../../mesh/simple-image-mesh";
+import type { Resources } from "../../../resource";
+import { CANVAS_IMAGE_IDS } from "../../../resource/canvas-image";
+import {
+  ARMDOZER_EFFECT_STANDARD_Y,
+  ARMDOZER_EFFECT_STANDARD_Z,
+} from "../../armdozer/position";
+import type { TurnIndicatorModel } from "../model/turn-indicator-model";
 
 /** ターンインジケータービュー */
 export class TurnIndicatorView {
   #mesh: SimpleImageMesh;
 
   constructor(resources: Resources) {
-    const turnIndicator = resources.canvasImages
-      .find(v => v.id === CANVAS_IMAGE_IDS.TURN_INDICATOR)?.image ?? new Image();
-    this.#mesh = new SimpleImageMesh({canvasSize: 512, meshSize: 200, image: turnIndicator, imageWidth: 512});
+    const turnIndicator =
+      resources.canvasImages.find(
+        (v) => v.id === CANVAS_IMAGE_IDS.TURN_INDICATOR
+      )?.image ?? new Image();
+    this.#mesh = new SimpleImageMesh({
+      canvasSize: 512,
+      meshSize: 200,
+      image: turnIndicator,
+      imageWidth: 512,
+    });
   }
 
   /** デストラクタ */
@@ -26,7 +36,7 @@ export class TurnIndicatorView {
   engage(model: TurnIndicatorModel): void {
     const object = this.#mesh.getObject3D();
 
-    const scale = (model.animation * 0.3 + 0.7);
+    const scale = model.animation * 0.3 + 0.7;
     object.scale.x = model.isPlayerTurn ? scale : -scale;
     object.scale.y = scale;
 

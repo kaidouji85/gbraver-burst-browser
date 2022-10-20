@@ -1,20 +1,23 @@
 // @flow
 
-import type {Player, PlayerId} from "gbraver-burst-core";
+import type { Player, PlayerId } from "gbraver-burst-core";
 import * as THREE from "three";
-import type {GameObjectAction} from "../../../../../game-object/action/game-object-action";
-import {enemyRaitoCutIn, playerRaitoCutIn} from "../../../../../game-object/cut-in/raito";
-import {RaitoCutIn} from "../../../../../game-object/cut-in/raito/raito";
-import type {Resources} from "../../../../../resource";
-import type {Stream} from "../../../../../stream/stream";
-import type {HUDPilotObjects} from "./hud-pilot-objects";
+import type { GameObjectAction } from "../../../../../game-object/action/game-object-action";
+import {
+  enemyRaitoCutIn,
+  playerRaitoCutIn,
+} from "../../../../../game-object/cut-in/raito";
+import { RaitoCutIn } from "../../../../../game-object/cut-in/raito/raito";
+import type { Resources } from "../../../../../resource";
+import type { Stream } from "../../../../../stream/stream";
+import type { HUDPilotObjects } from "./hud-pilot-objects";
 
 /**
  * コンストラクタのパラメータ
  */
 type Params = {
   playerId: PlayerId,
-  cutIn: RaitoCutIn
+  cutIn: RaitoCutIn,
 };
 
 /**
@@ -47,9 +50,7 @@ export class RaitoHUD implements HUDPilotObjects {
    * @return シーンに追加するオブジェクト
    */
   getObject3Ds(): typeof THREE.Object3D[] {
-    return [
-      this.cutIn.getObject3D()
-    ];
+    return [this.cutIn.getObject3D()];
   }
 }
 
@@ -61,10 +62,14 @@ export class RaitoHUD implements HUDPilotObjects {
  * @param state プレイヤーの状態
  * @return ライトHUD
  */
-export function playerRaitoHUD(resources: Resources, gameObjectAction: Stream<GameObjectAction>, state: Player): RaitoHUD {
+export function playerRaitoHUD(
+  resources: Resources,
+  gameObjectAction: Stream<GameObjectAction>,
+  state: Player
+): RaitoHUD {
   return new RaitoHUD({
     playerId: state.playerId,
-    cutIn: playerRaitoCutIn(resources, gameObjectAction)
+    cutIn: playerRaitoCutIn(resources, gameObjectAction),
   });
 }
 
@@ -76,9 +81,13 @@ export function playerRaitoHUD(resources: Resources, gameObjectAction: Stream<Ga
  * @param state プレイヤーの状態
  * @return ライトHUD
  */
-export function enemyRaitoHUD(resources: Resources, gameObjectAction: Stream<GameObjectAction>, state: Player): RaitoHUD {
+export function enemyRaitoHUD(
+  resources: Resources,
+  gameObjectAction: Stream<GameObjectAction>,
+  state: Player
+): RaitoHUD {
   return new RaitoHUD({
     playerId: state.playerId,
-    cutIn: enemyRaitoCutIn(resources, gameObjectAction)
+    cutIn: enemyRaitoCutIn(resources, gameObjectAction),
   });
 }

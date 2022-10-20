@@ -1,14 +1,14 @@
 // @flow
 
 import * as THREE from "three";
-import type {GameObjectAction} from "../../../../game-object/action/game-object-action";
-import {Illumination} from "../../../../game-object/illumination/illumination";
-import {SkyBrightness} from "../../../../game-object/sky-brightness/sky-brightness";
+import type { GameObjectAction } from "../../../../game-object/action/game-object-action";
+import { Illumination } from "../../../../game-object/illumination/illumination";
+import { SkyBrightness } from "../../../../game-object/sky-brightness/sky-brightness";
 import SchoolField from "../../../../game-object/stage/shopping-street/shopping-street";
-import type {Stage} from "../../../../game-object/stage/stage";
-import {TurnIndicator} from "../../../../game-object/turn-indicator/turn-indicator";
-import type {Resources} from "../../../../resource";
-import type {Stream} from "../../../../stream/stream";
+import type { Stage } from "../../../../game-object/stage/stage";
+import { TurnIndicator } from "../../../../game-object/turn-indicator/turn-indicator";
+import type { Resources } from "../../../../resource";
+import type { Stream } from "../../../../stream/stream";
 
 /**
  * 3Dレイヤーのゲームオブジェクト
@@ -25,12 +25,15 @@ export class TDGameObjects {
    * @param resources リソース管理オブジェクト
    * @param gameObjectAction ゲームオブジェクトアクション
    */
-  constructor(resources: Resources, gameObjectAction: Stream<GameObjectAction>) {
+  constructor(
+    resources: Resources,
+    gameObjectAction: Stream<GameObjectAction>
+  ) {
     this.stage = new SchoolField(resources);
     this.turnIndicator = new TurnIndicator({
-        gameObjectAction: gameObjectAction,
-        resources: resources
-      });
+      gameObjectAction: gameObjectAction,
+      resources: resources,
+    });
     this.skyBrightness = new SkyBrightness(gameObjectAction);
     this.illumination = new Illumination(gameObjectAction);
   }
@@ -55,7 +58,7 @@ export class TDGameObjects {
       ...this.stage.getThreeJsObjects(),
       this.turnIndicator.getObject3D(),
       this.skyBrightness.getObject3D(),
-      ...this.illumination.getObject3Ds()
+      ...this.illumination.getObject3Ds(),
     ];
   }
 }

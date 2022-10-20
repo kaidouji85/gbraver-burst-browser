@@ -1,11 +1,11 @@
 // @flow
 
-import type {Resources} from "../../../resource";
-import type {Stream} from "../../../stream/stream";
-import type {GameObjectAction} from "../../action/game-object-action";
-import {LightningDozerCutIn} from "./lightning-dozer-cutin";
-import {EnemyLightningDozerCutInView} from "./view/enemy-lightning-dozer-cutin-view";
-import {PlayerLightningDozerCutInView} from "./view/player-lightning-dozer-cutin-view";
+import type { Resources } from "../../../resource";
+import type { Stream } from "../../../stream/stream";
+import type { GameObjectAction } from "../../action/game-object-action";
+import { LightningDozerCutIn } from "./lightning-dozer-cutin";
+import { EnemyLightningDozerCutInView } from "./view/enemy-lightning-dozer-cutin-view";
+import { PlayerLightningDozerCutInView } from "./view/player-lightning-dozer-cutin-view";
 
 /**
  * プレイヤー ライトニングドーザ カットイン
@@ -14,7 +14,10 @@ import {PlayerLightningDozerCutInView} from "./view/player-lightning-dozer-cutin
  * @param gameObjectAction ゲームオブジェクトアクション
  * @return 生成結果
  */
-export function playerLightningDozerCutIn(resources: Resources, gameObjectAction: Stream<GameObjectAction>): LightningDozerCutIn {
+export function playerLightningDozerCutIn(
+  resources: Resources,
+  gameObjectAction: Stream<GameObjectAction>
+): LightningDozerCutIn {
   const view = new PlayerLightningDozerCutInView(resources);
   return new LightningDozerCutIn(view, gameObjectAction);
 }
@@ -26,7 +29,10 @@ export function playerLightningDozerCutIn(resources: Resources, gameObjectAction
  * @param gameObjectAction ゲームオブジェクトアクション
  * @return 生成結果
  */
-export function enemyLightningiDozerCutIn(resources: Resources, gameObjectAction: Stream<GameObjectAction>): LightningDozerCutIn {
+export function enemyLightningiDozerCutIn(
+  resources: Resources,
+  gameObjectAction: Stream<GameObjectAction>
+): LightningDozerCutIn {
   const view = new EnemyLightningDozerCutInView(resources);
   return new LightningDozerCutIn(view, gameObjectAction);
 }

@@ -1,8 +1,8 @@
 // @flow
 
-import * as THREE from 'three';
-import type {PreRender} from "../../../../game-loop/pre-render";
-import type {WingDozerCutInModel} from "../model/wing-dozer-cutin-model";
+import * as THREE from "three";
+import type { PreRender } from "../../../../game-loop/pre-render";
+import type { WingDozerCutInModel } from "../model/wing-dozer-cutin-model";
 
 /**
  * ウィングドーザ カットイン ビュー

@@ -1,9 +1,9 @@
 // @flow
 import * as THREE from "three";
-import {HorizontalAnimationMesh} from "../../../mesh/horizontal-animation";
-import type {Resources} from "../../../resource";
-import type {TextureId} from "../../../resource/texture/resource";
-import type {ArmdozerAnimation} from "./armdozer-animation";
+import { HorizontalAnimationMesh } from "../../../mesh/horizontal-animation";
+import type { Resources } from "../../../resource";
+import type { TextureId } from "../../../resource/texture/resource";
+import type { ArmdozerAnimation } from "./armdozer-animation";
 
 type Param = {
   id: TextureId,
@@ -18,8 +18,12 @@ export class HorizontalArmdozerAnimation implements ArmdozerAnimation {
   #animation: HorizontalAnimationMesh;
 
   constructor(param: Param) {
-    const textureResource = param.resources.textures.find(v => v.id === param.id);
-    const texture = textureResource ? textureResource.texture : new THREE.Texture();
+    const textureResource = param.resources.textures.find(
+      (v) => v.id === param.id
+    );
+    const texture = textureResource
+      ? textureResource.texture
+      : new THREE.Texture();
     this.#animation = new HorizontalAnimationMesh({
       texture: texture,
       maxAnimation: param.maxAnimation,

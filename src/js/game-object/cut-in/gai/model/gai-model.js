@@ -15,5 +15,5 @@ export type GaiModel = {
   /** 位置 */
   position: {
     x: number,
-  }
+  },
 };

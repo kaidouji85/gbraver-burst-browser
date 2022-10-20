@@ -1,21 +1,21 @@
 // @flow
 
-import TWEEN from '@tweenjs/tween.js';
-import * as THREE from 'three';
-import {Animate} from "../../../animation/animate";
-import type {PreRender} from "../../../game-loop/pre-render";
-import type {Update} from "../../../game-loop/update";
-import type {Resources} from "../../../resource";
-import type {Stream, Unsubscriber} from "../../../stream/stream";
-import {firstUpdate} from "../../action/first-update";
-import type {GameObjectAction} from "../../action/game-object-action";
-import {electrification} from "./animation/electrification";
-import {hidden} from "./animation/hidden";
-import {show} from "./animation/show";
-import {createInitialValue} from "./model/initial-value";
-import type {LightningBarrierModel} from "./model/lightning-barrier-model";
-import {LightningBarrierSounds} from "./sounds/lightning-barrier-sounds";
-import {LightningBarrierView} from "./view/lightning-barrier-view";
+import TWEEN from "@tweenjs/tween.js";
+import * as THREE from "three";
+import { Animate } from "../../../animation/animate";
+import type { PreRender } from "../../../game-loop/pre-render";
+import type { Update } from "../../../game-loop/update";
+import type { Resources } from "../../../resource";
+import type { Stream, Unsubscriber } from "../../../stream/stream";
+import { firstUpdate } from "../../action/first-update";
+import type { GameObjectAction } from "../../action/game-object-action";
+import { electrification } from "./animation/electrification";
+import { hidden } from "./animation/hidden";
+import { show } from "./animation/show";
+import { createInitialValue } from "./model/initial-value";
+import type { LightningBarrierModel } from "./model/lightning-barrier-model";
+import { LightningBarrierSounds } from "./sounds/lightning-barrier-sounds";
+import { LightningBarrierView } from "./view/lightning-barrier-view";
 
 /**
  * 電撃バリア
@@ -33,23 +33,26 @@ export class LightningBarrierGameEffect {
    * @param resources リソース管理オブジェクト
    * @param gameObjectAction ゲームオブジェクトアクション
    */
-  constructor(resources: Resources, gameObjectAction: Stream<GameObjectAction>) {
+  constructor(
+    resources: Resources,
+    gameObjectAction: Stream<GameObjectAction>
+  ) {
     this.#model = createInitialValue();
     this.#view = new LightningBarrierView(resources);
     this.#sounds = new LightningBarrierSounds(resources);
     this.#tweenGroup = new TWEEN.Group();
     this.#unsubscribers = [
-      gameObjectAction.subscribe(action => {
-        if (action.type === 'Update') {
+      gameObjectAction.subscribe((action) => {
+        if (action.type === "Update") {
           this.#onUpdate(action);
-        } else if (action.type === 'PreRender') {
+        } else if (action.type === "PreRender") {
           this.#onPreRender(action);
         }
       }),
 
       firstUpdate(gameObjectAction).subscribe(() => {
         this.#onFirstUpdate();
-      })
+      }),
     ];
   }
 
@@ -58,7 +61,7 @@ export class LightningBarrierGameEffect {
    */
   destructor(): void {
     this.#view.destructor();
-    this.#unsubscribers.forEach(v => {
+    this.#unsubscribers.forEach((v) => {
       v.unsubscribe();
     });
     this.#tweenGroup.removeAll();
@@ -84,7 +87,7 @@ export class LightningBarrierGameEffect {
 
   /**
    * バリアを消す
-   * 
+   *
    * @return アニメーション
    */
   hidden(): Animate {

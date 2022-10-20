@@ -1,8 +1,8 @@
 // @flow
 
-import {Animate} from "../../../../animation/animate";
-import {tween} from "../../../../animation/tween";
-import type {LightningBarrierModel} from "../model/lightning-barrier-model";
+import { Animate } from "../../../../animation/animate";
+import { tween } from "../../../../animation/tween";
+import type { LightningBarrierModel } from "../model/lightning-barrier-model";
 
 /**
  * バリアを消す
@@ -11,5 +11,5 @@ import type {LightningBarrierModel} from "../model/lightning-barrier-model";
  * @return アニメーション
  */
 export function hidden(model: LightningBarrierModel): Animate {
-  return tween(model, t => t.to({opacity: 0}, 1000))
+  return tween(model, (t) => t.to({ opacity: 0 }, 1000));
 }

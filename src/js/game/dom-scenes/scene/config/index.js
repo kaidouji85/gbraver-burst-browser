@@ -1,11 +1,11 @@
 // @flow
-import type {Resources} from "../../../../resource";
-import type {Stream, Unsubscriber} from "../../../../stream/stream";
-import type {GbraverBurstBrowserConfig} from "../../../config/browser-config";
-import type {DOMScene} from "../../dom-scene";
-import {bindEventListeners} from "./listeners";
-import type {ConfigProps} from "./props";
-import {createConfigProps} from "./props";
+import type { Resources } from "../../../../resource";
+import type { Stream, Unsubscriber } from "../../../../stream/stream";
+import type { GbraverBurstBrowserConfig } from "../../../config/browser-config";
+import type { DOMScene } from "../../dom-scene";
+import { bindEventListeners } from "./listeners";
+import type { ConfigProps } from "./props";
+import { createConfigProps } from "./props";
 
 /** 設定画面 */
 export class Config implements DOMScene {
@@ -25,7 +25,7 @@ export class Config implements DOMScene {
 
   /** @override */
   destructor(): void {
-    this.#unsubscriber.forEach(v => {
+    this.#unsubscriber.forEach((v) => {
       v.unsubscribe();
     });
     this.#props.dialog.destructor();

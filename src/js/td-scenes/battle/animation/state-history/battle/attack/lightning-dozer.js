@@ -1,19 +1,29 @@
 // @flow
-import type {BattleResult, CriticalHit, Feint, Guard, Miss, NormalHit} from "gbraver-burst-core";
-import {all} from "../../../../../../animation/all";
-import {Animate} from "../../../../../../animation/animate";
-import {delay, empty} from "../../../../../../animation/delay";
-import {LightningDozer} from "../../../../../../game-object/armdozer/lightning-dozer/lightning-dozer";
-import {TDCamera} from "../../../../../../game-object/camera/td";
-import {dolly, toInitial, track} from "../../../td-camera";
-import type {BattleAnimationParamX} from "../animation-param";
+import type {
+  BattleResult,
+  CriticalHit,
+  Feint,
+  Guard,
+  Miss,
+  NormalHit,
+} from "gbraver-burst-core";
+import { all } from "../../../../../../animation/all";
+import { Animate } from "../../../../../../animation/animate";
+import { delay, empty } from "../../../../../../animation/delay";
+import { LightningDozer } from "../../../../../../game-object/armdozer/lightning-dozer/lightning-dozer";
+import { TDCamera } from "../../../../../../game-object/camera/td";
+import { dolly, toInitial, track } from "../../../td-camera";
+import type { BattleAnimationParamX } from "../animation-param";
 
 /**
  * ライトニングドーザ 戦闘アニメーション パラメータ
  *
  * @template RESULT 戦闘結果
  */
-export type LightningDozerBattle<RESULT> = BattleAnimationParamX<LightningDozer, RESULT>
+export type LightningDozerBattle<RESULT> = BattleAnimationParamX<
+  LightningDozer,
+  RESULT
+>;
 
 /**
  * ライトニングドーザ 戦闘アニメーション
@@ -21,45 +31,47 @@ export type LightningDozerBattle<RESULT> = BattleAnimationParamX<LightningDozer,
  * @param param パラメーター
  * @return アニメーション
  */
-export function lightningDozerAttack(param: LightningDozerBattle<BattleResult>): Animate {
-  if (param.isDeath && param.result.name === 'NormalHit') {
+export function lightningDozerAttack(
+  param: LightningDozerBattle<BattleResult>
+): Animate {
+  if (param.isDeath && param.result.name === "NormalHit") {
     const result = (param.result: NormalHit);
-    return down({...param, result});
+    return down({ ...param, result });
   }
 
-  if (param.isDeath && param.result.name === 'CriticalHit') {
+  if (param.isDeath && param.result.name === "CriticalHit") {
     const result = (param.result: CriticalHit);
-    return down({...param, result});
+    return down({ ...param, result });
   }
 
-  if (param.isDeath && param.result.name === 'Guard') {
+  if (param.isDeath && param.result.name === "Guard") {
     const result = (param.result: Guard);
-    return down({...param, result});
+    return down({ ...param, result });
   }
 
-  if (param.result.name === 'NormalHit') {
+  if (param.result.name === "NormalHit") {
     const result = (param.result: NormalHit);
-    return attack({...param, result});
+    return attack({ ...param, result });
   }
 
-  if (param.result.name === 'CriticalHit') {
+  if (param.result.name === "CriticalHit") {
     const result = (param.result: CriticalHit);
-    return attack({...param, result});
+    return attack({ ...param, result });
   }
 
-  if (param.result.name === 'Guard') {
+  if (param.result.name === "Guard") {
     const result = (param.result: Guard);
-    return guard({...param, result});
+    return guard({ ...param, result });
   }
 
-  if (param.result.name === 'Miss') {
+  if (param.result.name === "Miss") {
     const result = (param.result: Miss);
-    return miss({...param, result});
+    return miss({ ...param, result });
   }
 
-  if (param.result.name === 'Feint') {
+  if (param.result.name === "Feint") {
     const result = (param.result: Feint);
-    return feint({...param, result});
+    return feint({ ...param, result });
   }
 
   return empty();
@@ -77,7 +89,7 @@ function focusToAttacker(camera: TDCamera, attacker: LightningDozer): Animate {
   const duration = 400;
   return all(
     track(camera, attacker.getObject3D().position.x * 0.6, duration),
-    dolly(camera, '-30', duration)
+    dolly(camera, "-30", duration)
   );
 }
 
@@ -94,21 +106,20 @@ type AttackResult = NormalHit | CriticalHit;
  */
 function attack(param: LightningDozerBattle<AttackResult>): Animate {
   return all(
-    param.attackerSprite.charge()
-      .chain(delay(500)),
+    param.attackerSprite.charge().chain(delay(500)),
     focusToAttacker(param.tdCamera, param.attackerSprite)
   )
     .chain(param.attackerSprite.armHammer())
-    .chain(all(
-      delay(1000)
-        .chain(param.attackerSprite.hmToStand())
-        .chain(delay(500)),
-      toInitial(param.tdCamera, 100),
-      param.defenderTD.damageIndicator.popUp(param.result.damage),
-      param.defenderSprite.knockBack(),
-      param.defenderTD.hitMark.shockWave.popUp(),
-      param.defenderHUD.gauge.hp(param.defenderState.armdozer.hp)
-    ));
+    .chain(
+      all(
+        delay(1000).chain(param.attackerSprite.hmToStand()).chain(delay(500)),
+        toInitial(param.tdCamera, 100),
+        param.defenderTD.damageIndicator.popUp(param.result.damage),
+        param.defenderSprite.knockBack(),
+        param.defenderTD.hitMark.shockWave.popUp(),
+        param.defenderHUD.gauge.hp(param.defenderState.armdozer.hp)
+      )
+    );
 }
 
 /**
@@ -118,18 +129,19 @@ function attack(param: LightningDozerBattle<AttackResult>): Animate {
  * @return アニメーション
  */
 function guard(param: LightningDozerBattle<Guard>): Animate {
-  return param.attackerSprite.charge()
+  return param.attackerSprite
+    .charge()
     .chain(delay(500))
     .chain(param.attackerSprite.armHammer())
-    .chain(all(
-      delay(1000)
-        .chain(param.attackerSprite.hmToStand())
-        .chain(delay(500)),
-      param.defenderTD.damageIndicator.popUp(param.result.damage),
-      param.defenderSprite.guard(),
-      param.defenderTD.hitMark.shockWave.popUp(),
-      param.defenderHUD.gauge.hp(param.defenderState.armdozer.hp)
-    ));
+    .chain(
+      all(
+        delay(1000).chain(param.attackerSprite.hmToStand()).chain(delay(500)),
+        param.defenderTD.damageIndicator.popUp(param.result.damage),
+        param.defenderSprite.guard(),
+        param.defenderTD.hitMark.shockWave.popUp(),
+        param.defenderHUD.gauge.hp(param.defenderState.armdozer.hp)
+      )
+    );
 }
 
 /**
@@ -139,7 +151,8 @@ function guard(param: LightningDozerBattle<Guard>): Animate {
  * @return アニメーション
  */
 function miss(param: LightningDozerBattle<Miss>): Animate {
-  return param.attackerSprite.charge()
+  return param.attackerSprite
+    .charge()
     .chain(delay(500))
     .chain(param.attackerSprite.armHammer())
     .chain(param.defenderSprite.avoid())
@@ -159,24 +172,24 @@ type DownResult = NormalHit | Guard | CriticalHit;
  */
 function down(param: LightningDozerBattle<DownResult>): Animate {
   return all(
-    param.attackerSprite.charge()
-      .chain(delay(500)),
+    param.attackerSprite.charge().chain(delay(500)),
     focusToAttacker(param.tdCamera, param.attackerSprite)
   )
     .chain(param.attackerSprite.armHammer())
-    .chain(all(
-      delay(1500)
-        .chain(param.attackerSprite.hmToStand())
-        .chain(delay(500)),
-      param.attackerHUD.resultIndicator.slideIn()
-        .chain(delay(500))
-        .chain(param.attackerHUD.resultIndicator.moveToEdge()),
-      toInitial(param.tdCamera, 100),
-      param.defenderTD.damageIndicator.popUp(param.result.damage),
-      param.defenderSprite.down(),
-      param.defenderTD.hitMark.shockWave.popUp(),
-      param.defenderHUD.gauge.hp(param.defenderState.armdozer.hp)
-    ));
+    .chain(
+      all(
+        delay(1500).chain(param.attackerSprite.hmToStand()).chain(delay(500)),
+        param.attackerHUD.resultIndicator
+          .slideIn()
+          .chain(delay(500))
+          .chain(param.attackerHUD.resultIndicator.moveToEdge()),
+        toInitial(param.tdCamera, 100),
+        param.defenderTD.damageIndicator.popUp(param.result.damage),
+        param.defenderSprite.down(),
+        param.defenderTD.hitMark.shockWave.popUp(),
+        param.defenderHUD.gauge.hp(param.defenderState.armdozer.hp)
+      )
+    );
 }
 
 /**
@@ -190,6 +203,5 @@ function feint(param: LightningDozerBattle<Feint>): Animate {
     return empty();
   }
 
-  return param.defenderSprite.avoid()
-    .chain(delay(500));
+  return param.defenderSprite.avoid().chain(delay(500));
 }

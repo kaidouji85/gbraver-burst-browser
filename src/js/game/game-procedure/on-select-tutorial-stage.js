@@ -1,9 +1,12 @@
 // @flow
-import type {SelectTutorialStage} from "../game-actions";
-import type {GameProps} from "../game-props";
-import type {Tutorial} from "../in-progress/tutorial";
-import {TutorialStages, TutorialStagesInDevelopment} from "../tutorial-stages";
-import {startTutorial} from "./start-tutorial";
+import type { SelectTutorialStage } from "../game-actions";
+import type { GameProps } from "../game-props";
+import type { Tutorial } from "../in-progress/tutorial";
+import {
+  TutorialStages,
+  TutorialStagesInDevelopment,
+} from "../tutorial-stages";
+import { startTutorial } from "./start-tutorial";
 
 /**
  * チュートリアルステージ選択時の処理
@@ -13,14 +16,23 @@ import {startTutorial} from "./start-tutorial";
  * @param action アクション
  * @return 処理が完了したら発火するPromise
  */
-export async function onSelectTutorialStage(props: GameProps, action: SelectTutorialStage): Promise<void> {
-  if (props.inProgress.type !== 'Tutorial') {
+export async function onSelectTutorialStage(
+  props: GameProps,
+  action: SelectTutorialStage
+): Promise<void> {
+  if (props.inProgress.type !== "Tutorial") {
     return;
   }
 
   const inProgress = (props.inProgress: Tutorial);
-  const tutorialStages = props.canPlayTutorialInDevelopment ? TutorialStagesInDevelopment : TutorialStages;
-  const stage = tutorialStages.find(v => v.id === action.id) ?? tutorialStages[0];
-  props.inProgress = {...inProgress, subFlow: {type: 'PlayingTutorialStage', stage, level: action.level}};
+  const tutorialStages = props.canPlayTutorialInDevelopment
+    ? TutorialStagesInDevelopment
+    : TutorialStages;
+  const stage =
+    tutorialStages.find((v) => v.id === action.id) ?? tutorialStages[0];
+  props.inProgress = {
+    ...inProgress,
+    subFlow: { type: "PlayingTutorialStage", stage, level: action.level },
+  };
   await startTutorial(props, action.level, stage);
 }

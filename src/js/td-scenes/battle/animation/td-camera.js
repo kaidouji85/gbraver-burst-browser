@@ -1,8 +1,8 @@
 // @flow
 
-import {all} from "../../../animation/all";
-import {Animate} from "../../../animation/animate";
-import {TDCamera} from "../../../game-object/camera/td";
+import { all } from "../../../animation/all";
+import { Animate } from "../../../animation/animate";
+import { TDCamera } from "../../../game-object/camera/td";
 
 /** カメラ初期位置 X */
 export const INITIAL_CAMERA_POSITION_X: number = 0;
@@ -27,16 +27,22 @@ export const INITIAL_VIEW_POINT_Z = 0;
  */
 export function toInitial(camera: TDCamera, duration: number): Animate {
   return all(
-    camera.move({
-      x: INITIAL_CAMERA_POSITION_X,
-      y: INITIAL_CAMERA_POSITION_Y,
-      z: INITIAL_CAMERA_POSITION_Z
-    }, duration),
-    camera.lookAt({
-      x: INITIAL_VIEW_POINT_X,
-      y: INITIAL_VIEW_POINT_Y,
-      z: INITIAL_VIEW_POINT_Z,
-    }, duration)
+    camera.move(
+      {
+        x: INITIAL_CAMERA_POSITION_X,
+        y: INITIAL_CAMERA_POSITION_Y,
+        z: INITIAL_CAMERA_POSITION_Z,
+      },
+      duration
+    ),
+    camera.lookAt(
+      {
+        x: INITIAL_VIEW_POINT_X,
+        y: INITIAL_VIEW_POINT_Y,
+        z: INITIAL_VIEW_POINT_Z,
+      },
+      duration
+    )
   );
 }
 
@@ -48,10 +54,14 @@ export function toInitial(camera: TDCamera, duration: number): Animate {
  * @param duration 移動時間
  * @return アニメーション
  */
-export function dolly(camera: TDCamera, z: number | string, duration: number): Animate {
+export function dolly(
+  camera: TDCamera,
+  z: number | string,
+  duration: number
+): Animate {
   return all(
-    camera.move({z: z}, duration),
-    camera.lookAt({z: z}, duration),
+    camera.move({ z: z }, duration),
+    camera.lookAt({ z: z }, duration)
   );
 }
 
@@ -63,9 +73,13 @@ export function dolly(camera: TDCamera, z: number | string, duration: number): A
  * @param duration 移動時間
  * @return アニメーション
  */
-export function track(camera: TDCamera, x: number | string, duration: number): Animate {
+export function track(
+  camera: TDCamera,
+  x: number | string,
+  duration: number
+): Animate {
   return all(
-    camera.move({x: x}, duration),
-    camera.lookAt({x: x}, duration),
+    camera.move({ x: x }, duration),
+    camera.lookAt({ x: x }, duration)
   );
 }

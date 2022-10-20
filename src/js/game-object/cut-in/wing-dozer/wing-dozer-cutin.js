@@ -1,16 +1,16 @@
 // @flow
 
 import * as THREE from "three";
-import {Animate} from "../../../animation/animate";
-import type {PreRender} from "../../../game-loop/pre-render";
-import type {Stream, Unsubscriber} from "../../../stream/stream";
-import type {HUDTracking} from "../../../tracking/hud-tracking";
-import type {GameObjectAction} from "../../action/game-object-action";
-import {hidden} from "./animation/hidden";
-import {show} from "./animation/show";
-import {createInitialValue} from "./model/initial-value";
-import type {WingDozerCutInModel} from "./model/wing-dozer-cutin-model";
-import type {WingDozerCutInView} from "./view/wing-dozer-cutin-view";
+import { Animate } from "../../../animation/animate";
+import type { PreRender } from "../../../game-loop/pre-render";
+import type { Stream, Unsubscriber } from "../../../stream/stream";
+import type { HUDTracking } from "../../../tracking/hud-tracking";
+import type { GameObjectAction } from "../../action/game-object-action";
+import { hidden } from "./animation/hidden";
+import { show } from "./animation/show";
+import { createInitialValue } from "./model/initial-value";
+import type { WingDozerCutInModel } from "./model/wing-dozer-cutin-model";
+import type { WingDozerCutInView } from "./view/wing-dozer-cutin-view";
 
 /**
  * ウィングドーザ カットイン
@@ -26,11 +26,14 @@ export class WingDozerCutIn implements HUDTracking {
    * @param view ビュー
    * @param gameObjectAction ゲームオブジェクトアクション
    */
-  constructor(view: WingDozerCutInView, gameObjectAction: Stream<GameObjectAction>) {
+  constructor(
+    view: WingDozerCutInView,
+    gameObjectAction: Stream<GameObjectAction>
+  ) {
     this.#model = createInitialValue();
     this.#view = view;
-    this.#unsubscriber = gameObjectAction.subscribe(action => {
-      if (action.type === 'PreRender') {
+    this.#unsubscriber = gameObjectAction.subscribe((action) => {
+      if (action.type === "PreRender") {
         this.#onPreRender(action);
       }
     });

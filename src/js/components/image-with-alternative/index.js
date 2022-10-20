@@ -12,14 +12,14 @@ export class ImageWithAlternative {
    * コンストラクタ
    */
   constructor() {
-    this._root = document.createElement('div');
+    this._root = document.createElement("div");
 
-    this._alternative = document.createElement('div');
+    this._alternative = document.createElement("div");
     this._root.appendChild(this._alternative);
 
-    this._image = document.createElement('img');
-    this._image.addEventListener('load', () => {
-      this._alternative.style.display = 'none';
+    this._image = document.createElement("img");
+    this._image.addEventListener("load", () => {
+      this._alternative.style.display = "none";
     });
     this._root.appendChild(this._image);
   }

@@ -1,7 +1,10 @@
 // @flow
-import type {BurstCommandSelected, CommandCanceled} from "../../../td-scenes/battle/custom-battle-event";
-import {focusOutBurstButton} from "../../focus";
-import type {BatterySystemTutorialState, SelectableCommands} from "../state";
+import type {
+  BurstCommandSelected,
+  CommandCanceled,
+} from "../../../td-scenes/battle/custom-battle-event";
+import { focusOutBurstButton } from "../../focus";
+import type { BatterySystemTutorialState, SelectableCommands } from "../state";
 
 /** イベント終了情報 */
 type Ret = {
@@ -18,17 +21,25 @@ type Ret = {
  * @param state ステート
  * @return コマンドキャンセル情報
  */
-export async function onBurstCommandSelected(props: $ReadOnly<BurstCommandSelected>, state: BatterySystemTutorialState): Promise<Ret> {
-  const enableBurstCommand: SelectableCommands[] = ['BurstOnly', 'All'];
+export async function onBurstCommandSelected(
+  props: $ReadOnly<BurstCommandSelected>,
+  state: BatterySystemTutorialState
+): Promise<Ret> {
+  const enableBurstCommand: SelectableCommands[] = ["BurstOnly", "All"];
   if (!enableBurstCommand.includes(state.selectableCommands)) {
-    return {state, cancel: {isCommandCanceled: true}};
+    return { state, cancel: { isCommandCanceled: true } };
   }
 
-  if (state.selectableCommands === 'BurstOnly') {
+  if (state.selectableCommands === "BurstOnly") {
     focusOutBurstButton(props);
-    const selectableCommands = state.isBatterySystemDescriptionComplete  ? 'All' : 'BatteryOnly';
-    return {state: {...state, selectableCommands}, cancel: {isCommandCanceled: false}};
+    const selectableCommands = state.isBatterySystemDescriptionComplete
+      ? "All"
+      : "BatteryOnly";
+    return {
+      state: { ...state, selectableCommands },
+      cancel: { isCommandCanceled: false },
+    };
   }
 
-  return {state, cancel: {isCommandCanceled: false}};
+  return { state, cancel: { isCommandCanceled: false } };
 }

@@ -1,5 +1,5 @@
 // @flow
-import Stats from 'stats.js';
+import Stats from "stats.js";
 
 /**
  * パフォーマンス情報を表示する

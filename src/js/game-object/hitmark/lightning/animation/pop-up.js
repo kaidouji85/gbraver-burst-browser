@@ -1,11 +1,11 @@
 // @flow
 
-import {all} from "../../../../animation/all";
-import {Animate} from "../../../../animation/animate";
-import {process} from '../../../../animation/process';
-import {tween} from "../../../../animation/tween";
-import type {LightningModel} from "../model/lightning-model";
-import {LightningSounds} from "../sounds/lightning-sounds";
+import { all } from "../../../../animation/all";
+import { Animate } from "../../../../animation/animate";
+import { process } from "../../../../animation/process";
+import { tween } from "../../../../animation/tween";
+import type { LightningModel } from "../model/lightning-model";
+import { LightningSounds } from "../sounds/lightning-sounds";
 
 /**
  * エフェクトを一瞬だけ表示する
@@ -19,9 +19,12 @@ export function popUp(model: LightningModel, sounds: LightningSounds): Animate {
     model.animation.frame = 0;
     model.opacity = 1;
     sounds.lightning.play();
-  }).chain(all(
-    tween(model.animation, t => t.to({frame: 1}, 700)),
-    tween(model, t => t.to({opacity:0.5}, 600))
-      .chain(tween(model, t => t.to({opacity: 0}, 100))),
-  ));
+  }).chain(
+    all(
+      tween(model.animation, (t) => t.to({ frame: 1 }, 700)),
+      tween(model, (t) => t.to({ opacity: 0.5 }, 600)).chain(
+        tween(model, (t) => t.to({ opacity: 0 }, 100))
+      )
+    )
+  );
 }

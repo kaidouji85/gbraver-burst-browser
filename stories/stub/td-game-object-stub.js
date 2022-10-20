@@ -1,24 +1,28 @@
 // @flow
 import TWEEN from "@tweenjs/tween.js";
 import * as THREE from "three";
-import type {GameLoop} from "../../src/js/game-loop/game-loop";
-import {gameLoopStream} from "../../src/js/game-loop/game-loop";
-import type {PreRender} from "../../src/js/game-loop/pre-render";
-import type {Update} from "../../src/js/game-loop/update";
-import type {GameObjectAction} from "../../src/js/game-object/action/game-object-action";
-import {gameObjectStream} from "../../src/js/game-object/action/game-object-action";
-import {TDCamera} from "../../src/js/game-object/camera/td";
-import {Renderer} from "../../src/js/render";
-import type {OverlapEvent} from "../../src/js/render/overlap-event/overlap-event";
-import type {Resources} from "../../src/js/resource";
-import {fullResourceLoading} from "../../src/js/resource";
-import type {SafeAreaInset} from "../../src/js/safe-area/safe-area-inset";
-import {createSafeAreaInset} from "../../src/js/safe-area/safe-area-inset";
-import type {Stream, StreamSource, Unsubscriber} from "../../src/js/stream/stream";
-import {createStreamSource} from "../../src/js/stream/stream";
-import type {Resize} from "../../src/js/window/resize";
-import {resizeStream} from "../../src/js/window/resize";
-import {StorybookResourceRoot} from "../storybook-resource-root";
+import type { GameLoop } from "../../src/js/game-loop/game-loop";
+import { gameLoopStream } from "../../src/js/game-loop/game-loop";
+import type { PreRender } from "../../src/js/game-loop/pre-render";
+import type { Update } from "../../src/js/game-loop/update";
+import type { GameObjectAction } from "../../src/js/game-object/action/game-object-action";
+import { gameObjectStream } from "../../src/js/game-object/action/game-object-action";
+import { TDCamera } from "../../src/js/game-object/camera/td";
+import { Renderer } from "../../src/js/render";
+import type { OverlapEvent } from "../../src/js/render/overlap-event/overlap-event";
+import type { Resources } from "../../src/js/resource";
+import { fullResourceLoading } from "../../src/js/resource";
+import type { SafeAreaInset } from "../../src/js/safe-area/safe-area-inset";
+import { createSafeAreaInset } from "../../src/js/safe-area/safe-area-inset";
+import type {
+  Stream,
+  StreamSource,
+  Unsubscriber,
+} from "../../src/js/stream/stream";
+import { createStreamSource } from "../../src/js/stream/stream";
+import type { Resize } from "../../src/js/window/resize";
+import { resizeStream } from "../../src/js/window/resize";
+import { StorybookResourceRoot } from "../storybook-resource-root";
 
 /** Object3D生成関数パラメータ */
 type Object3DCreatorParams = {
@@ -27,7 +31,7 @@ type Object3DCreatorParams = {
   /** ゲームオブジェクトアクション */
   gameObjectAction: Stream<GameObjectAction>,
   /** カメラ */
-  camera: TDCamera
+  camera: TDCamera,
 };
 
 /** スタブに追加するthree.jsオブジェクト */
@@ -79,12 +83,18 @@ export class TDGameObjectStub {
     this._scene = new THREE.Scene();
     this._camera = new TDCamera(this._update, this._resize);
 
-    this._overlap = this._renderer.createOverlapNotifier(this._camera.getCamera());
-    this._gameObjectAction = gameObjectStream(this._update, this._preRender, this._overlap);
+    this._overlap = this._renderer.createOverlapNotifier(
+      this._camera.getCamera()
+    );
+    this._gameObjectAction = gameObjectStream(
+      this._update,
+      this._preRender,
+      this._overlap
+    );
     this._unsubscriber = [
-      this._gameLoop.subscribe(v => {
+      this._gameLoop.subscribe((v) => {
         this._onGameLoop(v);
-      })
+      }),
     ];
   }
 
@@ -97,9 +107,13 @@ export class TDGameObjectStub {
     const resourceRoot = new StorybookResourceRoot();
     const resourceLoading = fullResourceLoading(resourceRoot);
     const resources = await resourceLoading.resources;
-    const {objects, skyBox} = this._creator({resources, gameObjectAction: this._gameObjectAction,
-      scene: this._scene, camera: this._camera});
-    objects.forEach(object3D => {
+    const { objects, skyBox } = this._creator({
+      resources,
+      gameObjectAction: this._gameObjectAction,
+      scene: this._scene,
+      camera: this._camera,
+    });
+    objects.forEach((object3D) => {
       this._scene.add(object3D);
     });
     this._scene.background = skyBox ?? null;
@@ -110,7 +124,7 @@ export class TDGameObjectStub {
    *
    * @return レンダリング対象HTML要素
    */
-  domElement(): HTMLElement{
+  domElement(): HTMLElement {
     return this._renderer.getRendererDOM();
   }
 
@@ -121,9 +135,13 @@ export class TDGameObjectStub {
    */
   _onGameLoop(action: GameLoop): void {
     TWEEN.update(action.time);
-    this._update.next({type: 'Update', time: action.time});
-    this._preRender.next({type: 'PreRender', camera: this._camera.getCamera(),
-      rendererDOM: this._renderer.getRendererDOM(), safeAreaInset: this._safeAreaInset});
+    this._update.next({ type: "Update", time: action.time });
+    this._preRender.next({
+      type: "PreRender",
+      camera: this._camera.getCamera(),
+      rendererDOM: this._renderer.getRendererDOM(),
+      safeAreaInset: this._safeAreaInset,
+    });
     this._renderer.rendering(this._scene, this._camera.getCamera());
   }
 }

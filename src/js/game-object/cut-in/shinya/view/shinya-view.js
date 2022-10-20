@@ -1,8 +1,8 @@
 // @flow
 
-import * as THREE from 'three';
-import type {PreRender} from "../../../../game-loop/pre-render";
-import type {ShinyaModel} from "../model/shinya-model";
+import * as THREE from "three";
+import type { PreRender } from "../../../../game-loop/pre-render";
+import type { ShinyaModel } from "../model/shinya-model";
 
 /**
  * シンヤ ビュー

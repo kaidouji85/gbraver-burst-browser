@@ -1,6 +1,6 @@
 // @flow
 
-import type {TurnIndicatorModel} from "./turn-indicator-model";
+import type { TurnIndicatorModel } from "./turn-indicator-model";
 
 /**
  * ターンインジケーターの初期値を生成する

@@ -1,13 +1,13 @@
 // @flow
 
 import * as THREE from "three";
-import {Animate} from "../../animation/animate";
-import type {Stream, Unsubscriber} from "../../stream/stream";
-import type {GameObjectAction} from "../action/game-object-action";
-import {intensity} from "./animation/intensity";
-import type {IlluminationModel} from "./model/illumination-model";
-import {createInitialValue} from "./model/initial-value";
-import {IlluminationView} from "./view/illumination-view";
+import { Animate } from "../../animation/animate";
+import type { Stream, Unsubscriber } from "../../stream/stream";
+import type { GameObjectAction } from "../action/game-object-action";
+import { intensity } from "./animation/intensity";
+import type { IlluminationModel } from "./model/illumination-model";
+import { createInitialValue } from "./model/initial-value";
+import { IlluminationView } from "./view/illumination-view";
 
 /**
  * ステージ全体の照明
@@ -28,8 +28,8 @@ export class Illumination {
     this.#view = new IlluminationView();
     this.#view.engage(this.#model);
 
-    this.#unsubscriber = gameObjectAction.subscribe(action => {
-      if (action.type === 'Update') {
+    this.#unsubscriber = gameObjectAction.subscribe((action) => {
+      if (action.type === "Update") {
         this.#onUpdate();
       }
     });

@@ -1,9 +1,12 @@
 // @flow
 
-import type {LoadingActions, LoadingProgress} from "../../../../resource/loading-actions";
-import type {Stream, Unsubscriber} from "../../../../stream/stream";
-import type {DOMScene} from "../../dom-scene";
-import {LoadingPresentation} from "./presentation";
+import type {
+  LoadingActions,
+  LoadingProgress,
+} from "../../../../resource/loading-actions";
+import type { Stream, Unsubscriber } from "../../../../stream/stream";
+import type { DOMScene } from "../../dom-scene";
+import { LoadingPresentation } from "./presentation";
 
 /**
  * ローディング
@@ -21,8 +24,8 @@ export class Loading implements DOMScene {
   constructor(loading: Stream<LoadingActions>) {
     this.#completedRate = 0;
     this.#presentation = new LoadingPresentation();
-    this.#unsubscriber = loading.subscribe(action => {
-      if (action.type === 'LoadingProgress') {
+    this.#unsubscriber = loading.subscribe((action) => {
+      if (action.type === "LoadingProgress") {
         this.#onLoadingProgress(action);
       }
     });

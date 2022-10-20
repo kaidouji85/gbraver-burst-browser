@@ -1,9 +1,9 @@
 // @flow
 
-import {Animate} from "../../../animation/animate";
-import {process} from "../../../animation/process";
-import {tween} from "../../../animation/tween";
-import type {BatteryNumberModel} from "../model/battery-number-model";
+import { Animate } from "../../../animation/animate";
+import { process } from "../../../animation/process";
+import { tween } from "../../../animation/tween";
+import type { BatteryNumberModel } from "../model/battery-number-model";
 
 /**
  * 数字を変更する
@@ -16,6 +16,6 @@ export function change(model: BatteryNumberModel, battery: number): Animate {
   return process(() => {
     model.battery = battery;
   })
-    .chain(tween(model, t => t.to({scale: 1.2}, 200)))
-    .chain(tween(model, t => t.to({scale: 1}, 200)));
+    .chain(tween(model, (t) => t.to({ scale: 1.2 }, 200)))
+    .chain(tween(model, (t) => t.to({ scale: 1 }, 200)));
 }

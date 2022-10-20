@@ -1,6 +1,6 @@
 // @flow
-import type {GameProps} from "../game-props";
-import {fullResourceLoading} from "./full-resource-loading";
+import type { GameProps } from "../game-props";
+import { fullResourceLoading } from "./full-resource-loading";
 
 /**
  * カジュアルマッチ開始
@@ -14,22 +14,28 @@ export async function onCasualMatchStart(props: GameProps): Promise<void> {
     try {
       return await props.api.isLogin();
     } catch (e) {
-      props.domDialogs.startNetworkError(props.resources, {type: 'Close'});
+      props.domDialogs.startNetworkError(props.resources, { type: "Close" });
       throw e;
     }
   };
   const gotoPlayerSelect = async (): Promise<void> => {
-    props.inProgress = {type: 'CasualMatch', subFlow: {type: 'PlayerSelect'}};
+    props.inProgress = {
+      type: "CasualMatch",
+      subFlow: { type: "PlayerSelect" },
+    };
     props.domDialogs.hidden();
     await props.fader.fadeOut();
     await props.domScenes.startPlayerSelect(props.resources);
     await props.fader.fadeIn();
   };
   const showLoginDialog = () => {
-    props.domDialogs.startLogin(props.resources, 'ネット対戦をするにはログインをしてください');
+    props.domDialogs.startLogin(
+      props.resources,
+      "ネット対戦をするにはログインをしてください"
+    );
   };
 
-  props.domDialogs.startWaiting('ログインチェック中......');
+  props.domDialogs.startWaiting("ログインチェック中......");
   const isLogin = await callLoginCheckAPI();
   props.domDialogs.hidden();
   if (!isLogin) {

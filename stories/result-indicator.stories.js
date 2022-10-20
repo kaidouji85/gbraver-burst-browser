@@ -1,14 +1,18 @@
 // @flow
-import {delay} from '../src/js/animation/delay';
-import {drawIndicator, loseIndicator, winIndicator} from "../src/js/game-object/result-indicator";
-import {HUDGameObjectStub} from "./stub/hud-game-object-stub";
+import { delay } from "../src/js/animation/delay";
+import {
+  drawIndicator,
+  loseIndicator,
+  winIndicator,
+} from "../src/js/game-object/result-indicator";
+import { HUDGameObjectStub } from "./stub/hud-game-object-stub";
 
 export default {
-  title: 'result-indicator',
+  title: "result-indicator",
 };
 
 export const win = (): HTMLElement => {
-  const stub = new HUDGameObjectStub(({resources, gameObjectAction}) => {
+  const stub = new HUDGameObjectStub(({ resources, gameObjectAction }) => {
     const indicator = winIndicator(resources, gameObjectAction);
     delay(1000)
       .chain(indicator.slideIn())
@@ -21,10 +25,10 @@ export const win = (): HTMLElement => {
   });
   stub.start();
   return stub.domElement();
-}
+};
 
 export const lose = (): HTMLElement => {
-  const stub = new HUDGameObjectStub(({resources, gameObjectAction}) => {
+  const stub = new HUDGameObjectStub(({ resources, gameObjectAction }) => {
     const indicator = loseIndicator(resources, gameObjectAction);
     delay(1000)
       .chain(indicator.slideIn())
@@ -37,10 +41,10 @@ export const lose = (): HTMLElement => {
   });
   stub.start();
   return stub.domElement();
-}
+};
 
 export const draw = (): HTMLElement => {
-  const stub = new HUDGameObjectStub(({resources, gameObjectAction}) => {
+  const stub = new HUDGameObjectStub(({ resources, gameObjectAction }) => {
     const indicator = drawIndicator(resources, gameObjectAction);
     delay(1000)
       .chain(indicator.slideIn())
@@ -53,4 +57,4 @@ export const draw = (): HTMLElement => {
   });
   stub.start();
   return stub.domElement();
-}
+};

@@ -1,10 +1,10 @@
 // @flow
 
-import * as THREE from 'three';
-import {HorizontalAnimationMesh} from "../../../mesh/horizontal-animation";
-import type {Resources} from "../../../resource";
-import {TEXTURE_IDS} from "../../../resource/texture/ids";
-import type {PilotIcon} from "./pilot-icon";
+import * as THREE from "three";
+import { HorizontalAnimationMesh } from "../../../mesh/horizontal-animation";
+import type { Resources } from "../../../resource";
+import { TEXTURE_IDS } from "../../../resource/texture/ids";
+import type { PilotIcon } from "./pilot-icon";
 
 /**
  * ライト パイロットアイコン
@@ -21,9 +21,9 @@ export class RaitoIcon implements PilotIcon {
   constructor(resources: Resources) {
     this.#group = new THREE.Group();
 
-    const texture = resources.textures
-      .find(v => v.id === TEXTURE_IDS.RAITO_CUTIN)
-      ?.texture ?? new THREE.Texture();
+    const texture =
+      resources.textures.find((v) => v.id === TEXTURE_IDS.RAITO_CUTIN)
+        ?.texture ?? new THREE.Texture();
     this.#mesh = new HorizontalAnimationMesh({
       texture: texture,
       maxAnimation: 1,

@@ -1,6 +1,6 @@
 // @flow
 
-import {MAX_BATTERY} from "./index";
+import { MAX_BATTERY } from "./index";
 
 /**
  * バッテリー値からメーター針の値を計算する

@@ -1,22 +1,24 @@
 // @flow
 
-import {ArmDozerIds, ArmDozers, PilotIds, Pilots} from "gbraver-burst-core";
-import type {NPC} from "./npc";
-import type {SimpleRoutine} from "./simple-npc";
-import {SimpleNPC} from "./simple-npc";
+import { ArmDozerIds, ArmDozers, PilotIds, Pilots } from "gbraver-burst-core";
+import type { NPC } from "./npc";
+import type { SimpleRoutine } from "./simple-npc";
+import { SimpleNPC } from "./simple-npc";
 
 /** 0バッテリー */
 const ZERO_BATTERY = {
-  type: 'BATTERY_COMMAND',
-  battery: 0
+  type: "BATTERY_COMMAND",
+  battery: 0,
 };
 
 /**
  * @override
  * 攻撃ルーチン
  */
-const attackRoutine: SimpleRoutine = data => {
-  const battery3 = data.commands.find(v => v.type === 'BATTERY_COMMAND' && v.battery === 3);
+const attackRoutine: SimpleRoutine = (data) => {
+  const battery3 = data.commands.find(
+    (v) => v.type === "BATTERY_COMMAND" && v.battery === 3
+  );
   return battery3 ?? ZERO_BATTERY;
 };
 
@@ -24,9 +26,13 @@ const attackRoutine: SimpleRoutine = data => {
  * @override
  * 防御ルーチン
  */
-const defenseRoutine: SimpleRoutine = data => {
-  const battery2 = data.commands.find(v => v.type === 'BATTERY_COMMAND' && v.battery === 2);
-  const battery1 = data.commands.find(v => v.type === 'BATTERY_COMMAND' && v.battery === 1);
+const defenseRoutine: SimpleRoutine = (data) => {
+  const battery2 = data.commands.find(
+    (v) => v.type === "BATTERY_COMMAND" && v.battery === 2
+  );
+  const battery1 = data.commands.find(
+    (v) => v.type === "BATTERY_COMMAND" && v.battery === 1
+  );
   return battery2 ?? battery1 ?? ZERO_BATTERY;
 };
 
@@ -36,8 +42,9 @@ const defenseRoutine: SimpleRoutine = data => {
  * @return NPC
  */
 export function attack3Defense2LightningDozerNPC(): NPC {
-  const armdozer = ArmDozers.find(v => v.id === ArmDozerIds.LIGHTNING_DOZER) ?? ArmDozers[0];
-  const pilot = Pilots.find(v => v.id === PilotIds.RAITO) ?? Pilots[0];
+  const armdozer =
+    ArmDozers.find((v) => v.id === ArmDozerIds.LIGHTNING_DOZER) ?? ArmDozers[0];
+  const pilot = Pilots.find((v) => v.id === PilotIds.RAITO) ?? Pilots[0];
   return new SimpleNPC(armdozer, pilot, attackRoutine, defenseRoutine);
 }
 
@@ -47,7 +54,8 @@ export function attack3Defense2LightningDozerNPC(): NPC {
  * @return NPC
  */
 export function attack3Defense2ShinBraverNPC(): NPC {
-  const armdozer = ArmDozers.find(v => v.id === ArmDozerIds.SHIN_BRAVER) ?? ArmDozers[0];
-  const pilot = Pilots.find(v => v.id === PilotIds.SHINYA) ?? Pilots[0];
+  const armdozer =
+    ArmDozers.find((v) => v.id === ArmDozerIds.SHIN_BRAVER) ?? ArmDozers[0];
+  const pilot = Pilots.find((v) => v.id === PilotIds.SHINYA) ?? Pilots[0];
   return new SimpleNPC(armdozer, pilot, attackRoutine, defenseRoutine);
 }

@@ -1,16 +1,16 @@
 // @flow
 
-import * as THREE from 'three';
-import {HorizontalAnimationMesh} from "../../../mesh/horizontal-animation";
-import type {Resources} from "../../../resource";
-import {TEXTURE_IDS} from "../../../resource/texture/ids";
+import * as THREE from "three";
+import { HorizontalAnimationMesh } from "../../../mesh/horizontal-animation";
+import type { Resources } from "../../../resource";
+import { TEXTURE_IDS } from "../../../resource/texture/ids";
 import {
   ARMDOZER_EFFECT_STANDARD_X,
   ARMDOZER_EFFECT_STANDARD_Y,
-  ARMDOZER_EFFECT_STANDARD_Z
+  ARMDOZER_EFFECT_STANDARD_Z,
 } from "../../armdozer/position";
-import type {RecoverBatteryModel} from "../model/recover-battery-model";
-import type {RecoverBatteryView} from "./recover-battery-view";
+import type { RecoverBatteryModel } from "../model/recover-battery-model";
+import type { RecoverBatteryView } from "./recover-battery-view";
 
 export const MESH_SIZE = 100;
 export const MAX_ANIMATION = 16;
@@ -28,7 +28,9 @@ export class PlayerRecoverBatteryView implements RecoverBatteryView {
   constructor(resources: Resources) {
     this.#group = new THREE.Group();
 
-    const batteryNumberResource = resources.textures.find(v => v.id === TEXTURE_IDS.BATTERY_NUMBER);
+    const batteryNumberResource = resources.textures.find(
+      (v) => v.id === TEXTURE_IDS.BATTERY_NUMBER
+    );
     const batteryNumber = batteryNumberResource
       ? batteryNumberResource.texture
       : new THREE.Texture();

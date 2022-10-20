@@ -1,15 +1,19 @@
 // @flow
-import type {GameState} from "gbraver-burst-core";
+import type { GameState } from "gbraver-burst-core";
 
 /** 選択可能なコマンド */
-export type SelectableCommands = 'BatteryOnly' | 'BurstOnly' | 'PilotSkillOnly' | 'All';
+export type SelectableCommands =
+  | "BatteryOnly"
+  | "BurstOnly"
+  | "PilotSkillOnly"
+  | "All";
 
 /** バッテリーシステムチュートリアル ステート */
 export type BatterySystemTutorialState = {
   /** ステートヒストリー、 beforeLastState開始時に更新される */
-  stateHistory: GameState[];
+  stateHistory: GameState[],
   /** 選択可能なコマンド */
-  selectableCommands: SelectableCommands;
+  selectableCommands: SelectableCommands,
   /** バッテリーシステムの解説が完了しているか、trueで完了している */
-  isBatterySystemDescriptionComplete: boolean;
-}
+  isBatterySystemDescriptionComplete: boolean,
+};

@@ -1,15 +1,18 @@
 // @flow
 
-import type {Player} from "gbraver-burst-core";
-import {ArmDozerIds} from "gbraver-burst-core";
-import type {GameObjectAction} from "../../../../../game-object/action/game-object-action";
-import type {Resources} from "../../../../../resource";
-import type {Stream} from "../../../../../stream/stream";
-import type {TDArmdozerObjects} from "./armdozer-objects";
-import {enemyLightningDozerTD, playerLightningDozerTD} from "./lightning-dozer";
-import {enemyNeoLandozerTD, playerNeoLandozerTD} from "./neo-landozer";
-import {enemyShinBraverTD, playerShinBraverTD} from "./shin-braver";
-import {enemyWingDozerTD, playerWingDozerTD} from "./wing-dozer";
+import type { Player } from "gbraver-burst-core";
+import { ArmDozerIds } from "gbraver-burst-core";
+import type { GameObjectAction } from "../../../../../game-object/action/game-object-action";
+import type { Resources } from "../../../../../resource";
+import type { Stream } from "../../../../../stream/stream";
+import type { TDArmdozerObjects } from "./armdozer-objects";
+import {
+  enemyLightningDozerTD,
+  playerLightningDozerTD,
+} from "./lightning-dozer";
+import { enemyNeoLandozerTD, playerNeoLandozerTD } from "./neo-landozer";
+import { enemyShinBraverTD, playerShinBraverTD } from "./shin-braver";
+import { enemyWingDozerTD, playerWingDozerTD } from "./wing-dozer";
 
 /**
  * プレイヤー側  3Dレイヤー アームドーザ固有オブジェクト
@@ -19,7 +22,11 @@ import {enemyWingDozerTD, playerWingDozerTD} from "./wing-dozer";
  * @param state プレイヤーの状態
  * @return 生成結果
  */
-export function playerTDArmdozer(resources: Resources, gameObjectAction: Stream<GameObjectAction>, state: Player): TDArmdozerObjects {
+export function playerTDArmdozer(
+  resources: Resources,
+  gameObjectAction: Stream<GameObjectAction>,
+  state: Player
+): TDArmdozerObjects {
   switch (state.armdozer.id) {
     case ArmDozerIds.SHIN_BRAVER:
       return playerShinBraverTD(resources, gameObjectAction, state);
@@ -42,7 +49,11 @@ export function playerTDArmdozer(resources: Resources, gameObjectAction: Stream<
  * @param state プレイヤーの状態
  * @return 生成結果
  */
-export function enemyTDArmdozer(resources: Resources, gameObjectAction: Stream<GameObjectAction>, state: Player): TDArmdozerObjects {
+export function enemyTDArmdozer(
+  resources: Resources,
+  gameObjectAction: Stream<GameObjectAction>,
+  state: Player
+): TDArmdozerObjects {
   switch (state.armdozer.id) {
     case ArmDozerIds.SHIN_BRAVER:
       return enemyShinBraverTD(resources, gameObjectAction, state);

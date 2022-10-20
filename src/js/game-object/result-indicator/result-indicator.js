@@ -1,15 +1,15 @@
 // @flow
 import * as THREE from "three";
-import {Animate} from "../../animation/animate";
-import type {PreRender} from "../../game-loop/pre-render";
-import type {Stream, Unsubscriber} from "../../stream/stream";
-import type {GameObjectAction} from "../action/game-object-action";
-import {hidden} from "./animation/hidden";
-import {moveToEdge} from "./animation/move-to-edge";
-import {slideIn} from "./animation/slide-in";
-import {createInitialValue} from "./model/initial-value";
-import type {ResultIndicatorModel} from "./model/result-indicator-model";
-import type {ResultIndicatorView} from "./view/result-indicator-view";
+import { Animate } from "../../animation/animate";
+import type { PreRender } from "../../game-loop/pre-render";
+import type { Stream, Unsubscriber } from "../../stream/stream";
+import type { GameObjectAction } from "../action/game-object-action";
+import { hidden } from "./animation/hidden";
+import { moveToEdge } from "./animation/move-to-edge";
+import { slideIn } from "./animation/slide-in";
+import { createInitialValue } from "./model/initial-value";
+import type { ResultIndicatorModel } from "./model/result-indicator-model";
+import type { ResultIndicatorView } from "./view/result-indicator-view";
 
 /** リザルトインジケータ */
 export class ResultIndicator {
@@ -23,11 +23,14 @@ export class ResultIndicator {
    * @param view ビュー
    * @param gameObjectAction ゲームオブジェクトアクション
    */
-  constructor(view: ResultIndicatorView, gameObjectAction: Stream<GameObjectAction>) {
+  constructor(
+    view: ResultIndicatorView,
+    gameObjectAction: Stream<GameObjectAction>
+  ) {
     this.#view = view;
     this.#model = createInitialValue();
-    this.#unsubscriber = gameObjectAction.subscribe(action => {
-      if (action.type === 'PreRender') {
+    this.#unsubscriber = gameObjectAction.subscribe((action) => {
+      if (action.type === "PreRender") {
         this.#onPreRender(action);
       }
     });

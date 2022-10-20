@@ -2,7 +2,7 @@
 
 /** 3Dシーン */
 export interface TDScene {
-  /** 
+  /**
    * デストラクタ相当の処理
    */
   destructor(): void;

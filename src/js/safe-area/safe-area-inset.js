@@ -11,20 +11,20 @@
  */
 
 /** CSSカスタムプロパティ セーフエリアトップ */
-export const SAFE_AREA_TOP = '--safe-area-top';
+export const SAFE_AREA_TOP = "--safe-area-top";
 /** CSSカスタムプロパティ セーフエリアボトム */
-export const SAFE_AREA_BOTTOM = '--safe-area-bottom';
+export const SAFE_AREA_BOTTOM = "--safe-area-bottom";
 /** CSSカスタムプロパティ セーフエリアライト */
-export const SAFE_AREA_RIGHT = '--safe-area-right';
+export const SAFE_AREA_RIGHT = "--safe-area-right";
 /** CSSカスタムプロパティ セーフエリアレフト */
-export const SAFE_AREA_LEFT = '--safe-area-left';
+export const SAFE_AREA_LEFT = "--safe-area-left";
 
 /** セーフエリアインセット */
 export type SafeAreaInset = {
-  top: number;
-  bottom: number;
-  right: number;
-  left: number;
+  top: number,
+  bottom: number,
+  right: number,
+  left: number,
 };
 
 /** 空のセーフエリアインセット */
@@ -77,7 +77,7 @@ export function createSafeAreaInset(): SafeAreaInset {
 export function getSize(origin: string): number {
   const reg = /(?<size>[+-]?([0-9]+(\.[0-9]*)?|\.[0-9]+)([eE][+-]?[0-9]+)?)px/;
   const result = origin.match(reg);
-  if (!result || !result.groups || !('size' in result.groups)) {
+  if (!result || !result.groups || !("size" in result.groups)) {
     return 0;
   }
 

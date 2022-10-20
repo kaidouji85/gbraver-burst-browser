@@ -1,7 +1,7 @@
 // @flow
-import * as THREE from 'three';
-import {GLTFLoader} from "three/examples/jsm/loaders/GLTFLoader";
-import type {ResourceRoot} from "./resource-root";
+import * as THREE from "three";
+import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
+import type { ResourceRoot } from "./resource-root";
 
 /** glTFリソースID */
 export type GlTFId = string;
@@ -19,20 +19,20 @@ export type GlTFResource = {
   /** ID */
   id: GlTFId,
   /** glTFモデル */
-  object: typeof THREE.Scene
+  object: typeof THREE.Scene,
 };
 
 /** IDリスト */
 export const GLTF_IDS = {
-  SHOPPING_STREET: 'SHOPPING_STREET',
+  SHOPPING_STREET: "SHOPPING_STREET",
 };
 
 /** 設定集 */
 export const GLTF_CONFIGS: GlTFConfig[] = [
   {
     id: GLTF_IDS.SHOPPING_STREET,
-    path: 'model/shopping-street/shopping-street.glb'
-  }
+    path: "model/shopping-street/shopping-street.glb",
+  },
 ];
 
 /**
@@ -50,10 +50,14 @@ const loader = new GLTFLoader();
  * @param config 設定
  * @return glTFリソース
  */
-export function loadGlTF(resourceRoot: ResourceRoot, config: GlTFConfig): Promise<GlTFResource> {
+export function loadGlTF(
+  resourceRoot: ResourceRoot,
+  config: GlTFConfig
+): Promise<GlTFResource> {
   return new Promise((resolve, reject) => {
     const fullPath = `${resourceRoot.get()}/${config.path}`;
-    const onLoad = (object: {scene: typeof THREE.Scene}) => resolve({id: config.id, object: object.scene});
+    const onLoad = (object: { scene: typeof THREE.Scene }) =>
+      resolve({ id: config.id, object: object.scene });
     const onProgress = () => {}; //NOP
     const onFail = (err: any) => reject(err);
     loader.load(fullPath, onLoad, onProgress, onFail);
@@ -62,11 +66,11 @@ export function loadGlTF(resourceRoot: ResourceRoot, config: GlTFConfig): Promis
 
 /**
  * GLTFリソースを解放する
- * 
+ *
  * @param target 解放対象
  */
 export function disposeGltfModel(target: GlTFResource): void {
-  target.object.traverse(v => {
+  target.object.traverse((v) => {
     if (v instanceof THREE.Mesh) {
       v.geometry.dispose();
       v.material.dispose();

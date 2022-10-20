@@ -1,15 +1,15 @@
 // @flow
-import * as THREE from 'three';
-import {Animate} from "../../animation/animate";
-import type {PreRender} from "../../game-loop/pre-render";
-import type {Resources} from "../../resource";
-import type {Stream, Unsubscriber} from "../../stream/stream";
-import type {GameObjectAction} from "../action/game-object-action";
-import {popUp} from "./animation/pop-up";
-import type {DamageHalvedModel} from "./model/damage-halved-model";
-import {createInitialValue} from "./model/initial-value";
-import {DamageHalvedSounds} from "./sounds/damage-halved-sounds";
-import type {DamageHalvedView} from "./view/damage-halved-view";
+import * as THREE from "three";
+import { Animate } from "../../animation/animate";
+import type { PreRender } from "../../game-loop/pre-render";
+import type { Resources } from "../../resource";
+import type { Stream, Unsubscriber } from "../../stream/stream";
+import type { GameObjectAction } from "../action/game-object-action";
+import { popUp } from "./animation/pop-up";
+import type { DamageHalvedModel } from "./model/damage-halved-model";
+import { createInitialValue } from "./model/initial-value";
+import { DamageHalvedSounds } from "./sounds/damage-halved-sounds";
+import type { DamageHalvedView } from "./view/damage-halved-view";
 
 /** ダメージ半減 */
 export class DamageHalved {
@@ -25,14 +25,18 @@ export class DamageHalved {
    * @param resources リソース管理オブジェクト
    * @param gameObjectAction ゲームオブジェクトアクション
    */
-  constructor(view: DamageHalvedView, resources: Resources, gameObjectAction: Stream<GameObjectAction>) {
+  constructor(
+    view: DamageHalvedView,
+    resources: Resources,
+    gameObjectAction: Stream<GameObjectAction>
+  ) {
     this.#model = createInitialValue();
     this.#view = view;
     this.#sounds = new DamageHalvedSounds(resources);
-    this.#unsubscriber = gameObjectAction.subscribe(action => {
-      if (action.type === 'Update') {
+    this.#unsubscriber = gameObjectAction.subscribe((action) => {
+      if (action.type === "Update") {
         this.#onUpdate();
-      } else if (action.type === 'PreRender') {
+      } else if (action.type === "PreRender") {
         this.#onPreRender(action);
       }
     });
@@ -48,7 +52,7 @@ export class DamageHalved {
 
   /**
    * ポップアップ
-   * 
+   *
    * @return アニメーション
    */
   popUp(): Animate {

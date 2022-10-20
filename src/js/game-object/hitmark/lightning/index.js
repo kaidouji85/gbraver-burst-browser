@@ -1,11 +1,11 @@
 // @flow
 
-import type {Resources} from "../../../resource";
-import type {Stream} from "../../../stream/stream";
-import type {GameObjectAction} from "../../action/game-object-action";
-import {Lightning} from "./lightning";
-import {EnemyLightningView} from "./view/enemy-lightning-view";
-import {PlayerLightningView} from "./view/player-lightning-view";
+import type { Resources } from "../../../resource";
+import type { Stream } from "../../../stream/stream";
+import type { GameObjectAction } from "../../action/game-object-action";
+import { Lightning } from "./lightning";
+import { EnemyLightningView } from "./view/enemy-lightning-view";
+import { PlayerLightningView } from "./view/player-lightning-view";
 
 /**
  * プレイヤー側 電撃ヒットマーク
@@ -14,7 +14,10 @@ import {PlayerLightningView} from "./view/player-lightning-view";
  * @param gameObjectAction ゲームオブジェクトアクション
  * @return 生成結果
  */
-export function playerLightning(resources: Resources, gameObjectAction: Stream<GameObjectAction>): Lightning {
+export function playerLightning(
+  resources: Resources,
+  gameObjectAction: Stream<GameObjectAction>
+): Lightning {
   const view = new PlayerLightningView(resources);
   return new Lightning(view, resources, gameObjectAction);
 }
@@ -26,7 +29,10 @@ export function playerLightning(resources: Resources, gameObjectAction: Stream<G
  * @param gameObjectAction ゲームオブジェクトアクション
  * @return 生成結果
  */
-export function enemyLightning(resources: Resources, gameObjectAction: Stream<GameObjectAction>): Lightning {
+export function enemyLightning(
+  resources: Resources,
+  gameObjectAction: Stream<GameObjectAction>
+): Lightning {
   const view = new EnemyLightningView(resources);
   return new Lightning(view, resources, gameObjectAction);
 }

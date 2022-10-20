@@ -1,6 +1,6 @@
 // @flow
 
-import {domUuid} from "../../../../uuid/dom-uuid";
+import { domUuid } from "../../../../uuid/dom-uuid";
 
 /**
  * ローディングシーン プレゼンテーション
@@ -17,7 +17,7 @@ export class LoadingPresentation {
     const textId = domUuid();
     const barId = domUuid();
 
-    this.#root = document.createElement('div');
+    this.#root = document.createElement("div");
     this.#root.innerHTML = `
       <div class="loading__progress">
         <div class="loading__progress-rate" data-id="${textId}"></div>
@@ -26,11 +26,15 @@ export class LoadingPresentation {
         </div>
       </div>
     `;
-    this.#root.className = 'loading';
-    this.#root.style.display = 'flex';
+    this.#root.className = "loading";
+    this.#root.style.display = "flex";
 
-    this.#text = this.#root.querySelector(`[data-id="${textId}"]`) || document.createElement('div');
-    this.#bar = this.#root.querySelector(`[data-id="${barId}"]`) || document.createElement('div');
+    this.#text =
+      this.#root.querySelector(`[data-id="${textId}"]`) ||
+      document.createElement("div");
+    this.#bar =
+      this.#root.querySelector(`[data-id="${barId}"]`) ||
+      document.createElement("div");
 
     this.setCompletedRate(0);
   }
@@ -42,7 +46,7 @@ export class LoadingPresentation {
    */
   setCompletedRate(completedRate: number): void {
     this.#text.innerText = `LOADING... ${Math.floor(completedRate * 100)}%`;
-    this.#bar.style.width = `${completedRate * 100}%`
+    this.#bar.style.width = `${completedRate * 100}%`;
   }
 
   /**

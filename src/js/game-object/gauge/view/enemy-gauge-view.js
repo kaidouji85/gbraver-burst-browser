@@ -1,16 +1,16 @@
 // @flow
 
-import * as THREE from 'three';
-import type {PreRender} from "../../../game-loop/pre-render";
-import {SimpleImageMesh} from "../../../mesh/simple-image-mesh";
-import type {Resources} from "../../../resource";
-import {CANVAS_IMAGE_IDS} from "../../../resource/canvas-image";
-import {HUDUIScale} from "../../scale";
-import type {GaugeModel} from "../model/gauge-model";
-import {EnemyBatteryGauge} from "./enemy-battery-gauge";
-import {EnemyHpBar} from "./enemy-hp-bar";
-import type {GaugeView} from "./gauge-view";
-import {HpNumber} from "./hp-number";
+import * as THREE from "three";
+import type { PreRender } from "../../../game-loop/pre-render";
+import { SimpleImageMesh } from "../../../mesh/simple-image-mesh";
+import type { Resources } from "../../../resource";
+import { CANVAS_IMAGE_IDS } from "../../../resource/canvas-image";
+import { HUDUIScale } from "../../scale";
+import type { GaugeModel } from "../model/gauge-model";
+import { EnemyBatteryGauge } from "./enemy-battery-gauge";
+import { EnemyHpBar } from "./enemy-hp-bar";
+import type { GaugeView } from "./gauge-view";
+import { HpNumber } from "./hp-number";
 
 /** 基本拡大率 */
 export const BASE_SCALE = 0.3;
@@ -31,13 +31,20 @@ export class EnemyGaugeView implements GaugeView {
     this.#group = new THREE.Group();
     this.#group.scale.set(BASE_SCALE, BASE_SCALE, BASE_SCALE);
 
-    const gaugeBase = resources.canvasImages
-      .find(v => v.id === CANVAS_IMAGE_IDS.ENEMY_GAUGE_BASE)?.image ?? new Image();
-    this.#base = new SimpleImageMesh({canvasSize: 1024, meshSize: 1024, image: gaugeBase, imageWidth: 549});
+    const gaugeBase =
+      resources.canvasImages.find(
+        (v) => v.id === CANVAS_IMAGE_IDS.ENEMY_GAUGE_BASE
+      )?.image ?? new Image();
+    this.#base = new SimpleImageMesh({
+      canvasSize: 1024,
+      meshSize: 1024,
+      image: gaugeBase,
+      imageWidth: 549,
+    });
     this.#group.add(this.#base.getObject3D());
 
     this.#hpBar = new EnemyHpBar(resources);
-    this.#hpBar.getObject3D().position.set(213 ,30.5, 1);
+    this.#hpBar.getObject3D().position.set(213, 30.5, 1);
     this.#group.add(this.#hpBar.getObject3D());
 
     this.#hpNumber = new HpNumber(resources);
@@ -47,7 +54,7 @@ export class EnemyGaugeView implements GaugeView {
     this.#maxHpNumber = new HpNumber(resources);
     this.#maxHpNumber.getObject3D().position.set(10, 52, 1);
     this.#group.add(this.#maxHpNumber.getObject3D());
-    
+
     this.#batteryGauge = new EnemyBatteryGauge(resources);
     this.#batteryGauge.getObject3D().position.set(169.5, -55.5, 1);
     this.#group.add(this.#batteryGauge.getObject3D());
@@ -64,12 +71,15 @@ export class EnemyGaugeView implements GaugeView {
 
   /**
    * モデルをビューに反映させる
-   * 
+   *
    * @param model モデル
    * @param preRender プリレンダー
    */
   engage(model: GaugeModel, preRender: PreRender): void {
-    const devicePerScale = HUDUIScale(preRender.rendererDOM, preRender.safeAreaInset);
+    const devicePerScale = HUDUIScale(
+      preRender.rendererDOM,
+      preRender.safeAreaInset
+    );
 
     this.#hpBar.setValue(model.hp / model.maxHp);
     this.#hpNumber.setValue(model.hp);
@@ -82,10 +92,11 @@ export class EnemyGaugeView implements GaugeView {
       BASE_SCALE * devicePerScale
     );
 
-    const minY = preRender.rendererDOM.clientHeight / 2
-      - MIN_PADDING_TOP * devicePerScale;
-    const safeAreaY = preRender.rendererDOM.clientHeight / 2
-      - preRender.safeAreaInset.top * devicePerScale;
+    const minY =
+      preRender.rendererDOM.clientHeight / 2 - MIN_PADDING_TOP * devicePerScale;
+    const safeAreaY =
+      preRender.rendererDOM.clientHeight / 2 -
+      preRender.safeAreaInset.top * devicePerScale;
     this.#group.position.x = model.tracking.x;
     this.#group.position.y = Math.min(minY, safeAreaY, model.tracking.y);
     this.#group.position.z = 0;

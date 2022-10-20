@@ -1,21 +1,28 @@
 // @flow
-import type {Player} from "gbraver-burst-core";
+import type { Player } from "gbraver-burst-core";
 import * as THREE from "three";
-import type {GameObjectAction} from "../../../../../game-object/action/game-object-action";
-import {BatterySelector} from "../../../../../game-object/battery-selector";
-import {BurstButton} from "../../../../../game-object/burst-button/burst-button";
-import {frontmostFader, rearmostFader} from "../../../../../game-object/fader";
-import {Fader} from "../../../../../game-object/fader/fader";
-import {PilotButton} from "../../../../../game-object/pilot-button/pilot-button";
-import {drawIndicator} from "../../../../../game-object/result-indicator";
-import {ResultIndicator} from "../../../../../game-object/result-indicator/result-indicator";
-import {TimeScaleButton} from "../../../../../game-object/time-scale-button/time-scale-button";
-import type {Resources} from "../../../../../resource";
-import type {Stream, StreamSource, Unsubscriber} from "../../../../../stream/stream";
-import {createStreamSource} from "../../../../../stream/stream";
-import type {BattleSceneAction} from "../../../actions";
-import {createBurstButton} from "./burst-button";
-import {createPilotButton} from "./pilot-button";
+import type { GameObjectAction } from "../../../../../game-object/action/game-object-action";
+import { BatterySelector } from "../../../../../game-object/battery-selector";
+import { BurstButton } from "../../../../../game-object/burst-button/burst-button";
+import {
+  frontmostFader,
+  rearmostFader,
+} from "../../../../../game-object/fader";
+import { Fader } from "../../../../../game-object/fader/fader";
+import { PilotButton } from "../../../../../game-object/pilot-button/pilot-button";
+import { drawIndicator } from "../../../../../game-object/result-indicator";
+import { ResultIndicator } from "../../../../../game-object/result-indicator/result-indicator";
+import { TimeScaleButton } from "../../../../../game-object/time-scale-button/time-scale-button";
+import type { Resources } from "../../../../../resource";
+import type {
+  Stream,
+  StreamSource,
+  Unsubscriber,
+} from "../../../../../stream/stream";
+import { createStreamSource } from "../../../../../stream/stream";
+import type { BattleSceneAction } from "../../../actions";
+import { createBurstButton } from "./burst-button";
+import { createPilotButton } from "./pilot-button";
 
 /**
  * HUDレイヤーのゲームオブジェクト
@@ -38,7 +45,11 @@ export class HUDGameObjects {
    * @param gameObjectAction ゲームオブジェクトアクション
    * @param playerInfo プレイヤー情報
    */
-  constructor(resources: Resources, gameObjectAction: Stream<GameObjectAction>, playerInfo: Player) {
+  constructor(
+    resources: Resources,
+    gameObjectAction: Stream<GameObjectAction>,
+    playerInfo: Player
+  ) {
     this.#battleAction = createStreamSource();
 
     this.batterySelector = new BatterySelector({
@@ -47,20 +58,28 @@ export class HUDGameObjects {
       resources: resources,
       onBatteryChange: (battery: number) => {
         this.#battleAction.next({
-          type: 'changeBattery',
-          battery: battery
+          type: "changeBattery",
+          battery: battery,
         });
       },
-      onOkButtonPush: event => {
+      onOkButtonPush: (event) => {
         this.#battleAction.next({
-          type: 'decideBattery',
+          type: "decideBattery",
           battery: this.batterySelector.getBattery(),
-          event
+          event,
         });
-      }
+      },
     });
-    this.burstButton = createBurstButton(resources, gameObjectAction, playerInfo.armdozer.id);
-    this.pilotButton = createPilotButton(resources, gameObjectAction, playerInfo.pilot.id);
+    this.burstButton = createBurstButton(
+      resources,
+      gameObjectAction,
+      playerInfo.armdozer.id
+    );
+    this.pilotButton = createPilotButton(
+      resources,
+      gameObjectAction,
+      playerInfo.pilot.id
+    );
     this.timeScaleButton = new TimeScaleButton(resources, gameObjectAction);
 
     this.frontmostFader = frontmostFader({
@@ -75,15 +94,15 @@ export class HUDGameObjects {
     this.drawIndicator = drawIndicator(resources, gameObjectAction);
 
     this.#unsubscribers = [
-      this.burstButton.pushButtonNotifier().subscribe(event => {
-        this.#battleAction.next({type: 'doBurst', event});
+      this.burstButton.pushButtonNotifier().subscribe((event) => {
+        this.#battleAction.next({ type: "doBurst", event });
       }),
-      this.pilotButton.pushButtonNotifier().subscribe(event => {
-        this.#battleAction.next({type: 'doPilotSkill', event});
+      this.pilotButton.pushButtonNotifier().subscribe((event) => {
+        this.#battleAction.next({ type: "doPilotSkill", event });
       }),
-      this.timeScaleButton.toggleNotifier().subscribe(timeScale => {
-        this.#battleAction.next({type: 'toggleTimeScale', timeScale});
-      })
+      this.timeScaleButton.toggleNotifier().subscribe((timeScale) => {
+        this.#battleAction.next({ type: "toggleTimeScale", timeScale });
+      }),
     ];
   }
 
@@ -98,7 +117,7 @@ export class HUDGameObjects {
     this.rearmostFader.destructor();
     this.frontmostFader.destructor();
     this.drawIndicator.destructor();
-    this.#unsubscribers.forEach(v => {
+    this.#unsubscribers.forEach((v) => {
       v.unsubscribe();
     });
   }

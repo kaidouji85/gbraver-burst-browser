@@ -1,16 +1,19 @@
 // @flow
-import {pop} from "../../../../../dom/animation";
-import type {PushDOM} from "../../../../../dom/event-stream";
-import type {TitleProps} from "../props";
-import {openAccountMenu} from "./open-account-menu";
+import { pop } from "../../../../../dom/animation";
+import type { PushDOM } from "../../../../../dom/event-stream";
+import type { TitleProps } from "../props";
+import { openAccountMenu } from "./open-account-menu";
 
 /**
  * アバターが押された時の処理
- * 
+ *
  * @param props 画面プロパティ
  * @param action アクション
  */
-export function onAvatarPush(props: TitleProps, action: $ReadOnly<PushDOM>): void {
+export function onAvatarPush(
+  props: TitleProps,
+  action: $ReadOnly<PushDOM>
+): void {
   action.event.preventDefault();
   if (!props.isAccountMenuOpen) {
     action.event.stopPropagation();

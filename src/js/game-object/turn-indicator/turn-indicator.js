@@ -1,27 +1,27 @@
 // @flow
 
-import TWEEN from '@tweenjs/tween.js';
-import * as THREE from 'three';
-import {Animate} from "../../animation/animate";
-import type {PreRender} from "../../game-loop/pre-render";
-import type {Update} from "../../game-loop/update";
-import type {Resources} from "../../resource";
-import type {Stream, Unsubscriber} from "../../stream/stream";
-import {firstUpdate} from "../action/first-update";
-import type {GameObjectAction} from "../action/game-object-action";
-import {invisible} from "./animation/invisible";
-import {turnChange} from "./animation/turn-change";
-import {waiting} from "./animation/waiting";
-import {createInitialValue} from "./model/initial-value";
-import type {TurnIndicatorModel} from "./model/turn-indicator-model";
-import {TurnIndicatorView} from "./view/turn-indicator-view";
+import TWEEN from "@tweenjs/tween.js";
+import * as THREE from "three";
+import { Animate } from "../../animation/animate";
+import type { PreRender } from "../../game-loop/pre-render";
+import type { Update } from "../../game-loop/update";
+import type { Resources } from "../../resource";
+import type { Stream, Unsubscriber } from "../../stream/stream";
+import { firstUpdate } from "../action/first-update";
+import type { GameObjectAction } from "../action/game-object-action";
+import { invisible } from "./animation/invisible";
+import { turnChange } from "./animation/turn-change";
+import { waiting } from "./animation/waiting";
+import { createInitialValue } from "./model/initial-value";
+import type { TurnIndicatorModel } from "./model/turn-indicator-model";
+import { TurnIndicatorView } from "./view/turn-indicator-view";
 
 /** コンストラクタのパラメータ */
 type Param = {
   /** リソース管理オブジェクト */
   resources: Resources,
   /** ゲームオブジェクトアクション */
-  gameObjectAction: Stream<GameObjectAction>
+  gameObjectAction: Stream<GameObjectAction>,
 };
 
 /** ターンインジケーター */
@@ -33,7 +33,7 @@ export class TurnIndicator {
 
   /**
    * コンストラクタ
-   * 
+   *
    * @param param パラメータ
    */
   constructor(param: Param) {
@@ -42,24 +42,24 @@ export class TurnIndicator {
     this.#view = new TurnIndicatorView(param.resources);
 
     this.#unsubscribers = [
-      param.gameObjectAction.subscribe(action => {
-        if (action.type === 'Update') {
+      param.gameObjectAction.subscribe((action) => {
+        if (action.type === "Update") {
           this.#onUpdate(action);
-        } else if (action.type === 'PreRender') {
+        } else if (action.type === "PreRender") {
           this.#onPreRender(action);
         }
       }),
 
       firstUpdate(param.gameObjectAction).subscribe(() => {
         this.#onFirstUpdate();
-      })
+      }),
     ];
   }
 
   /** デストラクタ */
   destructor(): void {
     this.#view.destructor();
-    this.#unsubscribers.forEach(v => {
+    this.#unsubscribers.forEach((v) => {
       v.unsubscribe();
     });
     this.#tweenGroup.removeAll();

@@ -1,20 +1,23 @@
 // @flow
 
-import type {Player, PlayerId} from "gbraver-burst-core";
+import type { Player, PlayerId } from "gbraver-burst-core";
 import * as THREE from "three";
-import type {GameObjectAction} from "../../../../../game-object/action/game-object-action";
-import {enemyTsubasaCutIn, playerTsubasaCutIn} from "../../../../../game-object/cut-in/tsubasa";
-import {TsubasaCutIn} from "../../../../../game-object/cut-in/tsubasa/tsubasa";
-import type {Resources} from "../../../../../resource";
-import type {Stream} from "../../../../../stream/stream";
-import type {HUDPilotObjects} from "./hud-pilot-objects";
+import type { GameObjectAction } from "../../../../../game-object/action/game-object-action";
+import {
+  enemyTsubasaCutIn,
+  playerTsubasaCutIn,
+} from "../../../../../game-object/cut-in/tsubasa";
+import { TsubasaCutIn } from "../../../../../game-object/cut-in/tsubasa/tsubasa";
+import type { Resources } from "../../../../../resource";
+import type { Stream } from "../../../../../stream/stream";
+import type { HUDPilotObjects } from "./hud-pilot-objects";
 
 /**
  * コンストラクタのパラメータ
  */
 type Params = {
   playerId: PlayerId,
-  cutIn: TsubasaCutIn
+  cutIn: TsubasaCutIn,
 };
 
 /**
@@ -47,9 +50,7 @@ export class TsubasaHUD implements HUDPilotObjects {
    * @return シーンに追加するオブジェクト
    */
   getObject3Ds(): typeof THREE.Object3D[] {
-    return [
-      this.cutIn.getObject3D()
-    ];
+    return [this.cutIn.getObject3D()];
   }
 }
 
@@ -61,11 +62,15 @@ export class TsubasaHUD implements HUDPilotObjects {
  * @param state プレイヤーの状態
  * @return ツバサHUD
  */
-export function playerTsubasaHUD(resources: Resources, gameObjectAction: Stream<GameObjectAction>, state: Player): TsubasaHUD {
-  return new TsubasaHUD( {
+export function playerTsubasaHUD(
+  resources: Resources,
+  gameObjectAction: Stream<GameObjectAction>,
+  state: Player
+): TsubasaHUD {
+  return new TsubasaHUD({
     playerId: state.playerId,
-    cutIn: playerTsubasaCutIn(resources, gameObjectAction)
-  })
+    cutIn: playerTsubasaCutIn(resources, gameObjectAction),
+  });
 }
 
 /**
@@ -76,9 +81,13 @@ export function playerTsubasaHUD(resources: Resources, gameObjectAction: Stream<
  * @param state プレイヤーの状態
  * @return ツバサHUD
  */
-export function enemyTsubasaHUD(resources: Resources, gameObjectAction: Stream<GameObjectAction>, state: Player): TsubasaHUD {
-  return new TsubasaHUD( {
+export function enemyTsubasaHUD(
+  resources: Resources,
+  gameObjectAction: Stream<GameObjectAction>,
+  state: Player
+): TsubasaHUD {
+  return new TsubasaHUD({
     playerId: state.playerId,
-    cutIn: enemyTsubasaCutIn(resources, gameObjectAction)
-  })
+    cutIn: enemyTsubasaCutIn(resources, gameObjectAction),
+  });
 }
