@@ -28,6 +28,9 @@
     "lint": "eslint src/js",
     "lint:test": "eslint test",
     "lint:storybook": "eslint stories",
+    "code-format": "prettier --write src/js",
+    "code-format:test": "prettier --write test",
+    "code-format:storybook": "prettier --write stories",
     "code-analysis": "codehawk src/js",
     "scale-down-mobile-images": "node scale-down-mobile-images.js",
     "generate-icons": "node generate-icons.js"
