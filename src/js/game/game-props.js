@@ -33,7 +33,7 @@ import { resizeStream } from "../window/resize";
 import type { GbraverBurstBrowserConfigRepository } from "./config/browser-config";
 import { DOMDialogs } from "./dom-dialogs";
 import { DOMFloaters } from "./dom-floaters/dom-floaters";
-import { DOMScenes } from "./dom-scenes";
+import { DOMSceneBinder } from "./dom-scene-binder";
 import { FutureSuddenlyBattleEnd } from "./future-suddenly-battle-end";
 import type { InProgress } from "./in-progress/in-progress";
 import { InterruptScenes } from "./innterrupt-scenes";
@@ -95,8 +95,8 @@ export interface GameProps {
   fader: DOMFader;
   /** 強制割込シーン管理オブジェクト */
   interruptScenes: InterruptScenes;
-  /** DOMシーン管理オブジェクト */
-  domScenes: DOMScenes;
+  /** DOMシーンバインダー */
+  domSceneBinder: DOMSceneBinder;
   /** DOMダイアログ管理オブジェクト */
   domDialogs: DOMDialogs;
   /** DOMフローター管理オブジェクト */
@@ -179,7 +179,7 @@ export function generateGameProps(param: GamePropsGeneratorParam): GameProps {
     suddenlyBattleEnd: new FutureSuddenlyBattleEnd(),
     fader: new DOMFader(),
     interruptScenes: new InterruptScenes(),
-    domScenes: new DOMScenes(),
+    domSceneBinder: new DOMSceneBinder(),
     domDialogs: new DOMDialogs(),
     domFloaters: new DOMFloaters(),
     renderer,

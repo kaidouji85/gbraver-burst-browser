@@ -50,7 +50,6 @@ export class TDSceneBinder {
    *
    * @param scene バインドするシーン
    * @param connector ゲームアクションコネクタ
-   * @return 生成したシーン
    */
   bind<X: TDScene>(scene: X, connector: GameActionConnector<X>): void {
     this.#disposeScene();

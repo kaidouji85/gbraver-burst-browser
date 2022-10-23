@@ -1,5 +1,7 @@
 // @flow
+import { Loading } from "../../dom-scenes/loading";
 import { fullResourceLoadingFrom } from "../../resource";
+import { loadingConnector } from "../dom-scene-binder/action-connector/loading-connector";
 import type { GameProps } from "../game-props";
 import { reflectSoundVolume } from "../reflect-sound-volume";
 
@@ -15,7 +17,8 @@ import { reflectSoundVolume } from "../reflect-sound-volume";
 export async function fullResourceLoading(props: GameProps): Promise<void> {
   await props.fader.fadeOut();
   const resourceLoading = fullResourceLoadingFrom(props.resources);
-  props.domScenes.startLoading(resourceLoading.loading);
+  const scene = new Loading(resourceLoading.loading);
+  props.domSceneBinder.bind(scene, loadingConnector);
   await props.fader.fadeIn();
   props.resources = await resourceLoading.resources;
   const config = await props.config.load();

@@ -2,6 +2,10 @@
 import type { Player } from "gbraver-burst-core";
 
 import { fadeOut, stop } from "../../bgm/bgm-operators";
+import { NPCEnding } from "../../dom-scenes/npc-ending/npc-ending";
+import { waitTime } from "../../wait/wait-time";
+import { npcEndingConnector } from "../dom-scene-binder/action-connector/npc-ending-connector";
+import { MAX_LOADING_TIME } from "../dom-scene-binder/max-loading-time";
 import type { PostBattleAction } from "../game-actions";
 import type { GameProps } from "../game-props";
 import type { InProgress } from "../in-progress/in-progress";
@@ -48,12 +52,11 @@ const gotoEnding = async (props: $ReadOnly<GameProps>) => {
   props.domFloaters.hiddenPostBattle();
   await props.fader.fadeOut();
   props.tdBinder.hidden();
-  const ending = await props.domScenes.startNPCEnding(
-    props.resources,
-    props.bgm
-  );
+  const scene = new NPCEnding(props.resources, props.bgm);
+  props.domSceneBinder.bind(scene, npcEndingConnector);
+  await Promise.race([scene.waitUntilLoaded(), waitTime(MAX_LOADING_TIME)]);
   await props.fader.fadeIn();
-  ending.playBGM();
+  scene.playBGM();
 };
 
 /**

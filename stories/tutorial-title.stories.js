@@ -1,5 +1,5 @@
 // @flow
-import { TutorialTitle } from "../src/js/game/dom-scenes/scene/tutorial-title";
+import { TutorialTitle } from "../src/js/dom-scenes/tutorial-title";
 import type { DOMStubStory } from "./stub/dom-stub";
 import { domStub } from "./stub/dom-stub";
 

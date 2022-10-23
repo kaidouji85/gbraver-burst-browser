@@ -2,7 +2,7 @@
 
 import { ArmDozerIds } from "gbraver-burst-core";
 
-import { MatchCard } from "../src/js/game/dom-scenes/scene/match-card";
+import { MatchCard } from "../src/js/dom-scenes/match-card";
 import type { DOMStubStory } from "./stub/dom-stub";
 import { domStub } from "./stub/dom-stub";
 

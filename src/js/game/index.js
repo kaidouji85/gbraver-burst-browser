@@ -27,7 +27,7 @@ export class Game {
       this.#props.fader.getRootHTMLElement(),
       this.#props.interruptScenes.getRootHTMLElement(),
       this.#props.domDialogs.getRootHTMLElement(),
-      this.#props.domScenes.getRootHTMLElement(),
+      this.#props.domSceneBinder.getRootHTMLElement(),
       this.#props.domFloaters.getRootHTMLElement(),
       this.#props.renderer.getRendererDOM(),
       ...this.#props.tdBinder.getDOMLayerElements(),
@@ -48,7 +48,7 @@ export class Game {
     );
     const gameActionStreams = [
       this.#props.tdBinder.gameActionNotifier(),
-      this.#props.domScenes.gameActionNotifier(),
+      this.#props.domSceneBinder.gameActionNotifier(),
       this.#props.domDialogs.gameActionNotifier(),
       this.#props.domFloaters.gameActionNotifier(),
       suddenlyBattleEnd,

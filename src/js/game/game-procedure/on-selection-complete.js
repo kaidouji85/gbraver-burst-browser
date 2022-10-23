@@ -2,10 +2,14 @@
 import type { Battle as BattleSDK } from "@gbraver-burst-network/browser-core";
 
 import { fadeOut, stop } from "../../bgm/bgm-operators";
+import { MatchCard } from "../../dom-scenes/match-card";
 import { SOUND_IDS } from "../../resource/sound";
 import { BattleScene } from "../../td-scenes/battle";
 import type { BattleProgress } from "../../td-scenes/battle/battle-progress";
 import { waitAnimationFrame } from "../../wait/wait-animation-frame";
+import { waitTime } from "../../wait/wait-time";
+import { matchCardConnector } from "../dom-scene-binder/action-connector/match-card-connector";
+import { MAX_LOADING_TIME } from "../dom-scene-binder/max-loading-time";
 import type { SelectionComplete } from "../game-actions";
 import type { GameProps } from "../game-props";
 import type { CasualMatch } from "../in-progress/casual-match";
@@ -74,12 +78,14 @@ export async function onSelectionComplete(
 
     await props.fader.fadeOut();
     props.domDialogs.hidden();
-    await props.domScenes.startMatchCard(
-      props.resources,
-      battle.player.armdozer.id,
-      battle.enemy.armdozer.id,
-      "CASUAL MATCH"
-    );
+    const scene = new MatchCard({
+      resources: props.resources,
+      player: battle.player.armdozer.id,
+      enemy: battle.enemy.armdozer.id,
+      caption: "CASUAL MATCH",
+    });
+    props.domSceneBinder.bind(scene, matchCardConnector);
+    await Promise.race([scene.waitUntilLoaded(), waitTime(MAX_LOADING_TIME)]);
     await props.fader.fadeIn();
 
     const battleProgress = createBattleProgress(battle);
@@ -104,7 +110,7 @@ export async function onSelectionComplete(
     await Promise.all([
       (async () => {
         await props.fader.fadeOut();
-        props.domScenes.hidden();
+        props.domSceneBinder.hidden();
       })(),
       (async () => {
         await props.bgm.do(fadeOut);
