@@ -14,7 +14,7 @@ import type { SelectionComplete } from "../game-actions";
 import type { GameProps } from "../game-props";
 import type { CasualMatch } from "../in-progress/casual-match";
 import type { NPCBattle } from "../in-progress/npc-battle";
-import { battleSceneConnector } from "../td-scene-binder/battle-scene-connector";
+import { battleSceneConnector } from "../td-scene-binder/action-connector/battle-scene-connector";
 
 /**
  * プレイヤーキャラクター 選択完了時の処理

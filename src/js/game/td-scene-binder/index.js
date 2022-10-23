@@ -5,7 +5,7 @@ import type { Stream, StreamSource, Unsubscriber } from "../../stream/stream";
 import { createStreamSource } from "../../stream/stream";
 import type { TDScene } from "../../td-scenes/td-scene";
 import type { GameAction } from "../game-actions";
-import type { GameActionConnector } from "./game-action-connector";
+import type { TDSceneActionConnector } from "./action-connector/td-scene-action-connector";
 
 /** three.js系シーンをバインドする */
 export class TDSceneBinder {
@@ -51,7 +51,7 @@ export class TDSceneBinder {
    * @param scene バインドするシーン
    * @param connector ゲームアクションコネクタ
    */
-  bind<X: TDScene>(scene: X, connector: GameActionConnector<X>): void {
+  bind<X: TDScene>(scene: X, connector: TDSceneActionConnector<X>): void {
     this.#disposeScene();
     this.#scene = scene;
     scene.getDOMLayerElements().forEach((element) => {
