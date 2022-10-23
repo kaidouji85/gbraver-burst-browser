@@ -9,9 +9,11 @@ import type { BattleProgress } from "../../td-scenes/battle/battle-progress";
 import { waitAnimationFrame } from "../../wait/wait-animation-frame";
 import { waitTime } from "../../wait/wait-time";
 import { difficultyDialogConnector } from "../dom-dialogs/action-connector/difficulty-dialog-connector";
+import { matchingDialogConnector } from "../dom-dialogs/action-connector/matching-dialog-connector";
 import { networkErrorDialogConnector } from "../dom-dialogs/action-connector/network-error-dialog-connector";
 import { waitingDialogConnector } from "../dom-dialogs/action-connector/waiting-dialog-connector";
 import { DifficultyDialog } from "../dom-dialogs/difficulty/difficulty-dialog";
+import { MatchingDialog } from "../dom-dialogs/matching/matching-dialog";
 import { NetworkErrorDialog } from "../dom-dialogs/network-error/network-error-dialog";
 import { WaitingDialog } from "../dom-dialogs/waiting/waiting-dialog";
 import { matchCardConnector } from "../dom-scene-binder/action-connector/match-card-connector";
@@ -81,7 +83,8 @@ export async function onSelectionComplete(
     },
   });
   const startMatching = async (origin: CasualMatch): Promise<void> => {
-    props.domDialogs.startMatching(props.resources);
+    const dialog = new MatchingDialog(props.resources);
+    props.domDialogs.bind(dialog, matchingDialogConnector);
     const battle = await waitUntilMatching();
     props.suddenlyBattleEnd.bind(battle);
     props.inProgress = { ...origin, subFlow: { type: "Battle" } };

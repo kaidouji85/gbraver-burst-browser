@@ -1,12 +1,10 @@
 // @flow
 
-import type { Resources } from "../../resource";
 import type { Stream, StreamSource, Unsubscriber } from "../../stream/stream";
 import { createStreamSource } from "../../stream/stream";
 import type { GameAction } from "../game-actions";
 import type { DomDialogActionConnector } from "./action-connector/dom-dialog-action-connector";
 import type { DOMDialog } from "./dialog";
-import { MatchingDialog } from "./matching/matching-dialog";
 
 /** HTML ダイアログをあつめたもの */
 export class DOMDialogs {
@@ -41,25 +39,6 @@ export class DOMDialogs {
     this.#unsubscribers = connector(dialog, this.#gameAction);
     this.#root.appendChild(dialog.getRootHTMLElement());
     this.#dialog = dialog;
-  }
-
-  /**
-   * @deprecated
-   * マッチングダイアログを表示する
-   *
-   * @param resources リソース管理オブジェクト
-   */
-  startMatching(resources: Resources): void {
-    this.#removeCurrentDialog();
-
-    const matchingDialog = new MatchingDialog(resources);
-    this.#unsubscribers = [
-      matchingDialog.matchingCanceledNotifier().subscribe(() => {
-        this.#gameAction.next({ type: "MatchingCanceled" });
-      }),
-    ];
-    this.#root.appendChild(matchingDialog.getRootHTMLElement());
-    this.#dialog = matchingDialog;
   }
 
   /**
