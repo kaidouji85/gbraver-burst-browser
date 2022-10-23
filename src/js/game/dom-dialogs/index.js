@@ -8,7 +8,6 @@ import type { DomDialogActionConnector } from "./action-connector/dom-dialog-act
 import { DeleteAccountConsentDialog } from "./delete-account-consent/delete-account-consent-dialog";
 import type { DOMDialog } from "./dialog";
 import { DifficultyDialog } from "./difficulty/difficulty-dialog";
-import { LoginDialog } from "./login/login-dialog";
 import { MatchingDialog } from "./matching/matching-dialog";
 import { NetworkErrorDialog } from "./network-error/network-error-dialog";
 import { WaitingDialog } from "./waiting/waiting-dialog";
@@ -46,29 +45,6 @@ export class DOMDialogs {
     this.#unsubscribers = connector(dialog, this.#gameAction);
     this.#root.appendChild(dialog.getRootHTMLElement());
     this.#dialog = dialog;
-  }
-
-  /**
-   * @deprecated
-   * ログインダイアログを表示する
-   *
-   * @param resources リソース管理オブジェクト
-   * @param caption キャプション
-   */
-  startLogin(resources: Resources, caption: string): void {
-    this.#removeCurrentDialog();
-
-    const login = new LoginDialog(resources, caption);
-    this.#unsubscribers = [
-      login.loginNotifier().subscribe(() => {
-        this.#gameAction.next({ type: "UniversalLogin" });
-      }),
-      login.closeDialogNotifier().subscribe(() => {
-        this.#gameAction.next({ type: "LoginCancel" });
-      }),
-    ];
-    this.#root.appendChild(login.getRootHTMLElement());
-    this.#dialog = login;
   }
 
   /**
@@ -175,7 +151,6 @@ export class DOMDialogs {
   }
 
   /**
-   * @deprecated
    * 現在表示しているダイアログを非表示にする
    */
   hidden(): void {
