@@ -1,5 +1,4 @@
 // @flow
-import type { ArmDozerId } from "gbraver-burst-core";
 
 import type { BGMManager } from "../../bgm/bgm-manager";
 import type { Resources } from "../../resource";
@@ -12,7 +11,6 @@ import type { DOMScene } from "./dom-scene";
 import type { DOMScenesProps } from "./props";
 import { createDOMScenesProps } from "./props";
 import { Config } from "./scene/config";
-import { MatchCard } from "./scene/match-card";
 import { NPCEnding } from "./scene/npc-ending/npc-ending";
 import type { StageTitleParam } from "./scene/stage-title/stage-title";
 import { StageTitle } from "./scene/stage-title/stage-title";
@@ -21,7 +19,6 @@ import { TutorialSelector } from "./scene/tutorial-selector/tutorial-selector";
 import type { TutorialTitleParams } from "./scene/tutorial-title";
 import { TutorialTitle } from "./scene/tutorial-title";
 import { startConfig } from "./start/start-config";
-import { startMatchCard } from "./start/start-match-card";
 import { startNPCEnding } from "./start/start-npc-ending";
 import { startStageTitle } from "./start/start-stage-title";
 import { startTutorialSelector } from "./start/start-tutorial-selector";
@@ -67,25 +64,6 @@ export class DOMScenes {
    */
   gameActionNotifier(): Stream<GameAction> {
     return this.#props.gameAction;
-  }
-
-  /**
-   * @deprecated
-   * 新しく対戦カード画面を開始する
-   *
-   * @param resources リソース管理オブジェクト
-   * @param player プレイヤー側 アームドーザID
-   * @param enemy 敵側 アームドーザID
-   * @param caption ステージ名
-   * @return 開始された対戦カード画面
-   */
-  async startMatchCard(
-    resources: Resources,
-    player: ArmDozerId,
-    enemy: ArmDozerId,
-    caption: string
-  ): Promise<MatchCard> {
-    return await startMatchCard(this.#props, resources, player, enemy, caption);
   }
 
   /**
