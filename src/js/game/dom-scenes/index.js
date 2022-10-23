@@ -14,7 +14,6 @@ import type { DOMScenesProps } from "./props";
 import { createDOMScenesProps } from "./props";
 import { Config } from "./scene/config";
 import { Loading } from "./scene/loading";
-import { MailVerifiedIncomplete } from "./scene/mail-verified-incomplete/mail-verified-incomplete";
 import { MatchCard } from "./scene/match-card";
 import { NPCEnding } from "./scene/npc-ending/npc-ending";
 import { PlayerSelect } from "./scene/player-select";
@@ -28,7 +27,6 @@ import type { TutorialTitleParams } from "./scene/tutorial-title";
 import { TutorialTitle } from "./scene/tutorial-title";
 import { startConfig } from "./start/start-config";
 import { startLoading } from "./start/start-loading";
-import { startMailVerifiedIncomplete } from "./start/start-mail-verified-incomplete";
 import { startMatchCard } from "./start/start-match-card";
 import { startNPCEnding } from "./start/start-npc-ending";
 import { startPlayerSelect } from "./start/start-player-select";
@@ -77,17 +75,6 @@ export class DOMScenes {
    */
   gameActionNotifier(): Stream<GameAction> {
     return this.#props.gameAction;
-  }
-
-  /**
-   * @deprecated
-   * メール認証未完了画面を開始する
-   *
-   * @param mailAddress 認証メール送信先
-   * @return 開始されたメール認証未完了画面
-   */
-  startMailVerifiedIncomplete(mailAddress: string): MailVerifiedIncomplete {
-    return startMailVerifiedIncomplete(this.#props, mailAddress);
   }
 
   /**

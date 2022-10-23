@@ -4,6 +4,8 @@ import { titleResourceLoading } from "../../resource";
 import { loadServiceWorker } from "../../service-worker/load-service-worker";
 import { viewPerformanceStats } from "../../stats/view-performance-stats";
 import { waitTime } from "../../wait/wait-time";
+import { mailVerifiedIncompleteConnector } from "../dom-scenes/mail-verified-incomplete-connector";
+import { MailVerifiedIncomplete } from "../dom-scenes/scene/mail-verified-incomplete/mail-verified-incomplete";
 import type { GameProps } from "../game-props";
 import { reflectSoundVolume } from "../reflect-sound-volume";
 import { playTitleBGM } from "./play-title-bgm";
@@ -32,7 +34,8 @@ export async function initialize(props: GameProps): Promise<void> {
   ]);
   if (isLogin && !isMailVerified) {
     const mailAddress = await props.api.getMail();
-    props.domScenes.startMailVerifiedIncomplete(mailAddress);
+    const scene = new MailVerifiedIncomplete(mailAddress);
+    props.domScenes.bind(scene, mailVerifiedIncompleteConnector);
     invisibleFirstView();
     await props.fader.fadeIn();
     return;
