@@ -8,6 +8,8 @@ import type { Stream } from "../../stream/stream";
 import type { GbraverBurstBrowserConfig } from "../config/browser-config";
 import type { GameAction } from "../game-actions";
 import { discardCurrentScene } from "./discard-current-scene";
+import type { DOMScene } from "./dom-scene";
+import type { DOMSceneActionConnector } from "./dom-scene-action-connector";
 import type { DOMScenesProps } from "./props";
 import { createDOMScenesProps } from "./props";
 import { Config } from "./scene/config";
@@ -55,6 +57,18 @@ export class DOMScenes {
   destructor() {
     discardCurrentScene(this.#props);
   }
+  /**
+   * DOMシーンをバインドする
+   *
+   * @param scene バインドするシーン
+   * @param connector ゲームアクションコネクタ
+   */
+  bind<X: DOMScene>(scene: X, connector: DOMSceneActionConnector<X>): void {
+    discardCurrentScene(this.#props);
+    this.#props.scene = scene;
+    this.#props.root.appendChild(scene.getRootHTMLElement());
+    this.#props.unsubscribers = connector(scene, this.#props.gameAction);
+  }
 
   /**
    * ゲームアクション通知
@@ -66,6 +80,7 @@ export class DOMScenes {
   }
 
   /**
+   * @deprecated
    * メール認証未完了画面を開始する
    *
    * @param mailAddress 認証メール送信先
@@ -76,6 +91,7 @@ export class DOMScenes {
   }
 
   /**
+   * @deprecated
    * 新しくローディング画面を開始する
    *
    * @param loading 読み込み状況ストリーム
@@ -86,6 +102,7 @@ export class DOMScenes {
   }
 
   /**
+   * @deprecated
    * 新しくタイトル画面を開始する
    *
    * @param params タイトル画面コンストラクタパラメータ
@@ -96,6 +113,7 @@ export class DOMScenes {
   }
 
   /**
+   * @deprecated
    * 新しくプレイヤー選択画面を開始する
    *
    * @param resources リソース管理オブジェクト
@@ -106,6 +124,7 @@ export class DOMScenes {
   }
 
   /**
+   * @deprecated
    * 新しく対戦カード画面を開始する
    *
    * @param resources リソース管理オブジェクト
@@ -124,6 +143,7 @@ export class DOMScenes {
   }
 
   /**
+   * @deprecated
    * ステージタイトル画面を開始する
    *
    * @param param パラメータ
@@ -134,6 +154,7 @@ export class DOMScenes {
   }
 
   /**
+   * @deprecated
    * 新しくNPCエンディング画面を開始する
    *
    * @param resources リソース管理オブジェクト
@@ -148,6 +169,7 @@ export class DOMScenes {
   }
 
   /**
+   * @deprecated
    * 設定画面を開始する
    *
    * @param resources リソース管理オブジェクト
@@ -159,6 +181,7 @@ export class DOMScenes {
   }
 
   /**
+   * @deprecated
    * チュートリアル選択画面を開始する
    *
    * @param resources リソース管理オブジェクト
@@ -173,6 +196,7 @@ export class DOMScenes {
   }
 
   /**
+   * @deprecated
    * チュートリアルタイトル画面を開始する
    *
    * @param params 画面パラメータ

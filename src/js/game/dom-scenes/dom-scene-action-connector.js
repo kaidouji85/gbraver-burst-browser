@@ -1,0 +1,18 @@
+// @flow
+import type { StreamSource, Unsubscriber } from "../../stream/stream";
+import type { GameAction } from "../game-actions";
+import type { DOMScene } from "./dom-scene";
+
+/**
+ * ゲームアクションコネクタ
+ * DOMシーンとゲームアクションを関連付ける
+ *
+ * @template X シーンのデータ型
+ * @param scene DOMシーン
+ * @param gameAction ゲームアクションストリーム
+ * @return ゲームションションのアンサブスクライブ
+ */
+export type DOMSceneActionConnector<X: DOMScene> = (
+  scene: X,
+  gameAction: StreamSource<GameAction>
+) => Unsubscriber[];
