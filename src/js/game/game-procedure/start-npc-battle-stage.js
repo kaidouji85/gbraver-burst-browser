@@ -6,6 +6,9 @@ import { NPCBattleRoom } from "../../npc/npc-battle-room";
 import { BattleScene } from "../../td-scenes/battle";
 import { waitAnimationFrame } from "../../wait/wait-animation-frame";
 import { waitTime } from "../../wait/wait-time";
+import { stageTitleConnector } from "../dom-scenes/action-connector/stage-title-connector";
+import { MAX_LOADING_TIME } from "../dom-scenes/max-loading-time";
+import { StageTitle } from "../dom-scenes/scene/stage-title/stage-title";
 import type { GameProps } from "../game-props";
 import type { NPCBattleStage } from "../npc-battle";
 import { battleSceneConnector } from "../td-scene-binder/battle-scene-connector";
@@ -27,13 +30,15 @@ export async function startNPCBattleStage(
   const npcBattle = new NPCBattleRoom(player, stage.npc);
   await props.fader.fadeOut();
   props.domDialogs.hidden();
-  await props.domScenes.startStageTitle({
+  const scene = new StageTitle({
     resources: props.resources,
     stagePrefix: "NPCBattle",
     level,
     caption: stage.caption,
     armDozerId: npcBattle.enemy.armdozer.id,
   });
+  props.domScenes.bind(scene, stageTitleConnector);
+  await Promise.race([scene.waitUntilLoaded(), waitTime(MAX_LOADING_TIME)]);
   await props.fader.fadeIn();
 
   const startNPCStageTitleTime = Date.now();
