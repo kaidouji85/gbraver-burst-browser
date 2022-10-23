@@ -25,7 +25,7 @@ export async function onCasualMatchStart(props: GameProps): Promise<void> {
       return await props.api.isLogin();
     } catch (e) {
       const dialog = new NetworkErrorDialog(props.resources, { type: "Close" });
-      props.domDialogs.bind(dialog, networkErrorDialogConnector);
+      props.domDialogBinder.bind(dialog, networkErrorDialogConnector);
       throw e;
     }
   };
@@ -34,7 +34,7 @@ export async function onCasualMatchStart(props: GameProps): Promise<void> {
       type: "CasualMatch",
       subFlow: { type: "PlayerSelect" },
     };
-    props.domDialogs.hidden();
+    props.domDialogBinder.hidden();
     await props.fader.fadeOut();
     const scene = new PlayerSelect(props.resources);
     props.domSceneBinder.bind(scene, playerSelectConnector);
@@ -46,13 +46,13 @@ export async function onCasualMatchStart(props: GameProps): Promise<void> {
       props.resources,
       "ネット対戦をするにはログインをしてください"
     );
-    props.domDialogs.bind(dialog, loginDialogConnector);
+    props.domDialogBinder.bind(dialog, loginDialogConnector);
   };
 
   const dialog = new WaitingDialog("ログインチェック中......");
-  props.domDialogs.bind(dialog, waitingDialogConnector);
+  props.domDialogBinder.bind(dialog, waitingDialogConnector);
   const isLogin = await callLoginCheckAPI();
-  props.domDialogs.hidden();
+  props.domDialogBinder.hidden();
   if (!isLogin) {
     showLoginDialog();
     return;

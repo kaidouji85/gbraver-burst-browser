@@ -19,11 +19,11 @@ export async function onEndNetworkError(
 ): Promise<void> {
   const close = async () => {
     props.inProgress = { type: "None" };
-    props.domDialogs.hidden();
+    props.domDialogBinder.hidden();
   };
   const gotoTitle = async () => {
     props.inProgress = { type: "None" };
-    props.domDialogs.hidden();
+    props.domDialogBinder.hidden();
     await Promise.all([
       (async () => {
         await props.fader.fadeOut();

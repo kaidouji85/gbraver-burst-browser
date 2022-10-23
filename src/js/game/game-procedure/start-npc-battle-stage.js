@@ -29,7 +29,7 @@ export async function startNPCBattleStage(
 ) {
   const npcBattle = new NPCBattleRoom(player, stage.npc);
   await props.fader.fadeOut();
-  props.domDialogs.hidden();
+  props.domDialogBinder.hidden();
   const scene = new StageTitle({
     resources: props.resources,
     stagePrefix: "NPCBattle",

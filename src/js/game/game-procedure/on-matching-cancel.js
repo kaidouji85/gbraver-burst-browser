@@ -13,7 +13,7 @@ export async function onMatchingCanceled(
   props: $ReadOnly<GameProps>
 ): Promise<void> {
   const dialog = new WaitingDialog("通信中......");
-  props.domDialogs.bind(dialog, waitingDialogConnector);
+  props.domDialogBinder.bind(dialog, waitingDialogConnector);
   await props.api.disconnectWebsocket();
-  props.domDialogs.hidden();
+  props.domDialogBinder.hidden();
 }

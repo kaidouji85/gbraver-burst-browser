@@ -15,6 +15,6 @@ export function onWebSocketAPIError(
   action: WebSocketAPIError
 ): void {
   const dialog = new NetworkErrorDialog(props.resources, { type: "GotoTitle" });
-  props.domDialogs.bind(dialog, networkErrorDialogConnector);
+  props.domDialogBinder.bind(dialog, networkErrorDialogConnector);
   throw action;
 }

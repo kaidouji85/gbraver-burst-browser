@@ -13,7 +13,7 @@ export async function onSuddenlyEndBattle(
   props: $ReadOnly<GameProps>
 ): Promise<void> {
   const dialog = new NetworkErrorDialog(props.resources, { type: "GotoTitle" });
-  props.domDialogs.bind(dialog, networkErrorDialogConnector);
+  props.domDialogBinder.bind(dialog, networkErrorDialogConnector);
   props.suddenlyBattleEnd.unbind();
   await props.api.disconnectWebsocket();
 }

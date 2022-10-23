@@ -97,8 +97,8 @@ export interface GameProps {
   interruptScenes: InterruptScenes;
   /** DOMシーンバインダー */
   domSceneBinder: DOMSceneBinder;
-  /** DOMダイアログ管理オブジェクト */
-  domDialogs: DOMDialogBinder;
+  /** DOMダイアログバインダー */
+  domDialogBinder: DOMDialogBinder;
   /** DOMフローター管理オブジェクト */
   domFloaters: DOMFloaters;
   /** レンダラ管理オブジェクト */
@@ -180,7 +180,7 @@ export function generateGameProps(param: GamePropsGeneratorParam): GameProps {
     fader: new DOMFader(),
     interruptScenes: new InterruptScenes(),
     domSceneBinder: new DOMSceneBinder(),
-    domDialogs: new DOMDialogBinder(),
+    domDialogBinder: new DOMDialogBinder(),
     domFloaters: new DOMFloaters(),
     renderer,
     tdBinder: new TDSceneBinder(renderer, hudUIScale),

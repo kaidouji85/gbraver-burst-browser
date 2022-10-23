@@ -12,5 +12,5 @@ import type { GameProps } from "../game-props";
 export function onShowHowToPlay(props: $ReadOnly<GameProps>): void {
   props.bgm.do(fadeOut);
   const dialog = new HowToPlay(props.resources, props.howToPlayMovieURL);
-  props.domDialogs.bind(dialog, howToPlayConnector);
+  props.domDialogBinder.bind(dialog, howToPlayConnector);
 }

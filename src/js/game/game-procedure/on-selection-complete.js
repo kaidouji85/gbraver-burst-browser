@@ -48,7 +48,7 @@ export async function onSelectionComplete(
       },
     };
     const dialog = new DifficultyDialog(props.resources);
-    props.domDialogs.bind(dialog, difficultyDialogConnector);
+    props.domDialogBinder.bind(dialog, difficultyDialogConnector);
   };
   const waitUntilMatching = async (): Promise<BattleSDK> => {
     try {
@@ -61,7 +61,7 @@ export async function onSelectionComplete(
       const dialog = new NetworkErrorDialog(props.resources, {
         type: "GotoTitle",
       });
-      props.domDialogs.bind(dialog, networkErrorDialogConnector);
+      props.domDialogBinder.bind(dialog, networkErrorDialogConnector);
       throw e;
     }
   };
@@ -69,28 +69,28 @@ export async function onSelectionComplete(
     progress: async (v) => {
       try {
         const dialog = new WaitingDialog("通信中......");
-        props.domDialogs.bind(dialog, waitingDialogConnector);
+        props.domDialogBinder.bind(dialog, waitingDialogConnector);
         const update = await battle.progress(v);
-        props.domDialogs.hidden();
+        props.domDialogBinder.hidden();
         return update;
       } catch (e) {
         const dialog = new NetworkErrorDialog(props.resources, {
           type: "GotoTitle",
         });
-        props.domDialogs.bind(dialog, networkErrorDialogConnector);
+        props.domDialogBinder.bind(dialog, networkErrorDialogConnector);
         throw e;
       }
     },
   });
   const startMatching = async (origin: CasualMatch): Promise<void> => {
     const dialog = new MatchingDialog(props.resources);
-    props.domDialogs.bind(dialog, matchingDialogConnector);
+    props.domDialogBinder.bind(dialog, matchingDialogConnector);
     const battle = await waitUntilMatching();
     props.suddenlyBattleEnd.bind(battle);
     props.inProgress = { ...origin, subFlow: { type: "Battle" } };
 
     await props.fader.fadeOut();
-    props.domDialogs.hidden();
+    props.domDialogBinder.hidden();
     const scene = new MatchCard({
       resources: props.resources,
       player: battle.player.armdozer.id,

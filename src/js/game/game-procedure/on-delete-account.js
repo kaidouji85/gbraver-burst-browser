@@ -13,7 +13,7 @@ export async function onDeleteAccount(
   props: $ReadOnly<GameProps>
 ): Promise<void> {
   const dialog = new WaitingDialog("アカウント削除中");
-  props.domDialogs.bind(dialog, waitingDialogConnector);
+  props.domDialogBinder.bind(dialog, waitingDialogConnector);
   await props.api.deleteLoggedInUser();
   await props.fader.fadeOut();
   await props.api.logout();
