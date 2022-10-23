@@ -1,6 +1,6 @@
 // @flow
 
-import { Config } from "../scene/config";
+import { Config } from "../../../dom-scenes/config";
 import type { DOMSceneActionConnector } from "./dom-scene-action-connector";
 
 /** アクションコネクタのデータ型 */

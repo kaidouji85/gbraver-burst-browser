@@ -1,6 +1,6 @@
 // @flow
+import { TutorialSelector } from "../../dom-scenes/tutorial-selector/tutorial-selector";
 import { tutorialSelectorConnector } from "../dom-scene-binder/action-connector/tutorial-selector-connection";
-import { TutorialSelector } from "../dom-scene-binder/scene/tutorial-selector/tutorial-selector";
 import type { GameProps } from "../game-props";
 import {
   TutorialStages,
@@ -23,6 +23,6 @@ export async function startTutorialSelector(props: $ReadOnly<GameProps>) {
     title: stage.title.join(""),
   }));
   const scene = new TutorialSelector(props.resources, stages);
-  props.domScenes.bind(scene, tutorialSelectorConnector);
+  props.domSceneBinder.bind(scene, tutorialSelectorConnector);
   await props.fader.fadeIn();
 }

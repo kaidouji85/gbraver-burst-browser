@@ -1,5 +1,6 @@
 // @flow
 
+import type { DOMScene } from "../../dom-scenes/dom-scene";
 import type { Stream } from "../../stream/stream";
 import type { GameAction } from "../game-actions";
 import type { DOMSceneActionConnector } from "./action-connector/dom-scene-action-connector";
@@ -7,12 +8,8 @@ import { bind } from "./bind";
 import { discardCurrentScene } from "./discard-current-scene";
 import type { DOMSceneBinderProps } from "./props";
 import { createDOMSceneBinderProps } from "./props";
-import type { DOMScene } from "./scene/dom-scene";
 
-/**
- * HTMLオンリーで生成されたシーンを集めたもの
- * 本クラス配下のいずれか1シーンのみが表示される想定
- */
+/** DOMシーンバインダー */
 export class DOMSceneBinder {
   #props: DOMSceneBinderProps;
 

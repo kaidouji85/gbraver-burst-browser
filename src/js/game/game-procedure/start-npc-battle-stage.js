@@ -2,13 +2,13 @@
 import type { Command, Player } from "gbraver-burst-core";
 
 import { fadeOut, stop } from "../../bgm/bgm-operators";
+import { StageTitle } from "../../dom-scenes/stage-title/stage-title";
 import { NPCBattleRoom } from "../../npc/npc-battle-room";
 import { BattleScene } from "../../td-scenes/battle";
 import { waitAnimationFrame } from "../../wait/wait-animation-frame";
 import { waitTime } from "../../wait/wait-time";
 import { stageTitleConnector } from "../dom-scene-binder/action-connector/stage-title-connector";
 import { MAX_LOADING_TIME } from "../dom-scene-binder/max-loading-time";
-import { StageTitle } from "../dom-scene-binder/scene/stage-title/stage-title";
 import type { GameProps } from "../game-props";
 import type { NPCBattleStage } from "../npc-battle";
 import { battleSceneConnector } from "../td-scene-binder/battle-scene-connector";
@@ -37,7 +37,7 @@ export async function startNPCBattleStage(
     caption: stage.caption,
     armDozerId: npcBattle.enemy.armdozer.id,
   });
-  props.domScenes.bind(scene, stageTitleConnector);
+  props.domSceneBinder.bind(scene, stageTitleConnector);
   await Promise.race([scene.waitUntilLoaded(), waitTime(MAX_LOADING_TIME)]);
   await props.fader.fadeIn();
 
@@ -69,7 +69,7 @@ export async function startNPCBattleStage(
   await Promise.all([
     (async () => {
       await props.fader.fadeOut();
-      props.domScenes.hidden();
+      props.domSceneBinder.hidden();
     })(),
     (async () => {
       await props.bgm.do(fadeOut);

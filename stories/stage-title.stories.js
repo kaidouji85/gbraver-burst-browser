@@ -2,7 +2,7 @@
 
 import { ArmDozerIds } from "gbraver-burst-core";
 
-import { StageTitle } from "../src/js/game/dom-scene-binder/scene/stage-title/stage-title";
+import { StageTitle } from "../src/js/dom-scenes/stage-title/stage-title";
 import type { DOMStubStory } from "./stub/dom-stub";
 import { domStub } from "./stub/dom-stub";
 

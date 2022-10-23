@@ -1,9 +1,9 @@
 // @flow
 
+import type { DOMScene } from "../../dom-scenes/dom-scene";
 import type { DOMSceneActionConnector } from "./action-connector/dom-scene-action-connector";
 import { discardCurrentScene } from "./discard-current-scene";
 import type { DOMSceneBinderProps } from "./props";
-import type { DOMScene } from "./scene/dom-scene";
 
 /**
  * DOMシーンをバインドする

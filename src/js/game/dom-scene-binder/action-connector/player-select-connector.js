@@ -1,6 +1,6 @@
 // @flow
 
-import { PlayerSelect } from "../scene/player-select";
+import { PlayerSelect } from "../../../dom-scenes/player-select";
 import type { DOMSceneActionConnector } from "./dom-scene-action-connector";
 
 /** アクションコネクタのデータ型 */

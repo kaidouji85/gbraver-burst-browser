@@ -95,8 +95,8 @@ export interface GameProps {
   fader: DOMFader;
   /** 強制割込シーン管理オブジェクト */
   interruptScenes: InterruptScenes;
-  /** DOMシーン管理オブジェクト */
-  domScenes: DOMSceneBinder;
+  /** DOMシーンバインダー */
+  domSceneBinder: DOMSceneBinder;
   /** DOMダイアログ管理オブジェクト */
   domDialogs: DOMDialogs;
   /** DOMフローター管理オブジェクト */
@@ -179,7 +179,7 @@ export function generateGameProps(param: GamePropsGeneratorParam): GameProps {
     suddenlyBattleEnd: new FutureSuddenlyBattleEnd(),
     fader: new DOMFader(),
     interruptScenes: new InterruptScenes(),
-    domScenes: new DOMSceneBinder(),
+    domSceneBinder: new DOMSceneBinder(),
     domDialogs: new DOMDialogs(),
     domFloaters: new DOMFloaters(),
     renderer,

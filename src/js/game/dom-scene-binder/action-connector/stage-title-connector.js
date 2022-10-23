@@ -1,6 +1,6 @@
 // @flow
 
-import { StageTitle } from "../scene/stage-title/stage-title";
+import { StageTitle } from "../../../dom-scenes/stage-title/stage-title";
 import type { DOMSceneActionConnector } from "./dom-scene-action-connector";
 
 /** アクションコネクタのデータ型 */

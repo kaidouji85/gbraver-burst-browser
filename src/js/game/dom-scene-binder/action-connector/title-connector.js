@@ -1,6 +1,6 @@
 // @flow
 
-import { Title } from "../scene/title";
+import { Title } from "../../../dom-scenes/title";
 import type { DOMSceneActionConnector } from "./dom-scene-action-connector";
 
 /** アクションコネクタのデータ型 */

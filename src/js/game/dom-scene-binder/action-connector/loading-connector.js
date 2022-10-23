@@ -1,6 +1,6 @@
 // @flow
 
-import { Loading } from "../scene/loading";
+import { Loading } from "../../../dom-scenes/loading";
 import type { DOMSceneActionConnector } from "./dom-scene-action-connector";
 
 /** アクションコネクタのデータ型 */

@@ -1,6 +1,6 @@
 // @flow
 
-import { MailVerifiedIncomplete } from "../scene/mail-verified-incomplete/mail-verified-incomplete";
+import { MailVerifiedIncomplete } from "../../../dom-scenes/mail-verified-incomplete/mail-verified-incomplete";
 import type { DOMSceneActionConnector } from "./dom-scene-action-connector";
 
 /** アクションコネクタのデータ型 */

@@ -1,6 +1,6 @@
 // @flow
 
-import { MatchCard } from "../scene/match-card";
+import { MatchCard } from "../../../dom-scenes/match-card";
 import type { DOMSceneActionConnector } from "./dom-scene-action-connector";
 
 /** アクションコネクタのデータ型 */
