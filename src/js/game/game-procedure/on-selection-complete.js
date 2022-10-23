@@ -8,7 +8,9 @@ import { BattleScene } from "../../td-scenes/battle";
 import type { BattleProgress } from "../../td-scenes/battle/battle-progress";
 import { waitAnimationFrame } from "../../wait/wait-animation-frame";
 import { waitTime } from "../../wait/wait-time";
+import { networkErrorDialogConnector } from "../dom-dialogs/action-connector/network-error-dialog-connector";
 import { waitingDialogConnector } from "../dom-dialogs/action-connector/waiting-dialog-connector";
+import { NetworkErrorDialog } from "../dom-dialogs/network-error/network-error-dialog";
 import { WaitingDialog } from "../dom-dialogs/waiting/waiting-dialog";
 import { matchCardConnector } from "../dom-scene-binder/action-connector/match-card-connector";
 import { MAX_LOADING_TIME } from "../dom-scene-binder/max-loading-time";
@@ -51,9 +53,10 @@ export async function onSelectionComplete(
         action.pilotId
       );
     } catch (e) {
-      props.domDialogs.startNetworkError(props.resources, {
+      const dialog = new NetworkErrorDialog(props.resources, {
         type: "GotoTitle",
       });
+      props.domDialogs.bind(dialog, networkErrorDialogConnector);
       throw e;
     }
   };
@@ -66,9 +69,10 @@ export async function onSelectionComplete(
         props.domDialogs.hidden();
         return update;
       } catch (e) {
-        props.domDialogs.startNetworkError(props.resources, {
+        const dialog = new NetworkErrorDialog(props.resources, {
           type: "GotoTitle",
         });
+        props.domDialogs.bind(dialog, networkErrorDialogConnector);
         throw e;
       }
     },

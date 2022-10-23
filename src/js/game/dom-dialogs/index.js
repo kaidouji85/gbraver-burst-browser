@@ -4,13 +4,11 @@ import type { Resources } from "../../resource";
 import type { Stream, StreamSource, Unsubscriber } from "../../stream/stream";
 import { createStreamSource } from "../../stream/stream";
 import type { GameAction } from "../game-actions";
-import type { PostNetworkError } from "../post-network-error";
 import type { DomDialogActionConnector } from "./action-connector/dom-dialog-action-connector";
 import { DeleteAccountConsentDialog } from "./delete-account-consent/delete-account-consent-dialog";
 import type { DOMDialog } from "./dialog";
 import { DifficultyDialog } from "./difficulty/difficulty-dialog";
 import { MatchingDialog } from "./matching/matching-dialog";
-import { NetworkErrorDialog } from "./network-error/network-error-dialog";
 
 /** HTML ダイアログをあつめたもの */
 export class DOMDialogs {
@@ -45,29 +43,6 @@ export class DOMDialogs {
     this.#unsubscribers = connector(dialog, this.#gameAction);
     this.#root.appendChild(dialog.getRootHTMLElement());
     this.#dialog = dialog;
-  }
-
-  /**
-   * @deprecated
-   * 通信エラーダイアログを表示する
-   *
-   * @param resources リソース管理オブジェクト
-   * @param postNetworkError 通信エラーの後処理情報
-   */
-  startNetworkError(
-    resources: Resources,
-    postNetworkError: PostNetworkError
-  ): void {
-    this.#removeCurrentDialog();
-
-    const networkError = new NetworkErrorDialog(resources, postNetworkError);
-    this.#unsubscribers = [
-      networkError.postNetworkErrorNotifier().subscribe((postNetworkError) => {
-        this.#gameAction.next({ type: "EndNetworkError", postNetworkError });
-      }),
-    ];
-    this.#root.appendChild(networkError.getRootHTMLElement());
-    this.#dialog = networkError;
   }
 
   /**

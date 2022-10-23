@@ -2,8 +2,10 @@
 import { PlayerSelect } from "../../dom-scenes/player-select";
 import { waitTime } from "../../wait/wait-time";
 import { loginDialogConnector } from "../dom-dialogs/action-connector/login-dialog-connector";
+import { networkErrorDialogConnector } from "../dom-dialogs/action-connector/network-error-dialog-connector";
 import { waitingDialogConnector } from "../dom-dialogs/action-connector/waiting-dialog-connector";
 import { LoginDialog } from "../dom-dialogs/login/login-dialog";
+import { NetworkErrorDialog } from "../dom-dialogs/network-error/network-error-dialog";
 import { WaitingDialog } from "../dom-dialogs/waiting/waiting-dialog";
 import { playerSelectConnector } from "../dom-scene-binder/action-connector/player-select-connector";
 import { MAX_LOADING_TIME } from "../dom-scene-binder/max-loading-time";
@@ -22,7 +24,8 @@ export async function onCasualMatchStart(props: GameProps): Promise<void> {
     try {
       return await props.api.isLogin();
     } catch (e) {
-      props.domDialogs.startNetworkError(props.resources, { type: "Close" });
+      const dialog = new NetworkErrorDialog(props.resources, { type: "Close" });
+      props.domDialogs.bind(dialog, networkErrorDialogConnector);
       throw e;
     }
   };

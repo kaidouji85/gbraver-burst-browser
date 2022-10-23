@@ -1,4 +1,6 @@
 // @flow
+import { networkErrorDialogConnector } from "../dom-dialogs/action-connector/network-error-dialog-connector";
+import { NetworkErrorDialog } from "../dom-dialogs/network-error/network-error-dialog";
 import type { WebSocketAPIUnintentionalClose } from "../game-actions";
 import type { GameProps } from "../game-props";
 
@@ -12,6 +14,7 @@ export function onWebSocketAPIUnintentionalClose(
   props: $ReadOnly<GameProps>,
   action: WebSocketAPIUnintentionalClose
 ): void {
-  props.domDialogs.startNetworkError(props.resources, { type: "GotoTitle" });
+  const dialog = new NetworkErrorDialog(props.resources, { type: "GotoTitle" });
+  props.domDialogs.bind(dialog, networkErrorDialogConnector);
   throw action;
 }
