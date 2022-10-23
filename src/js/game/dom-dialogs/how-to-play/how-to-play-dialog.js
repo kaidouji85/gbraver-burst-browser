@@ -18,7 +18,7 @@ import { domUuid } from "../../../uuid/dom-uuid";
 import type { DOMDialog } from "../dialog";
 
 /**
- * 遊び方ダイアログ プレゼンテーション
+ * 遊び方ダイアログ
  */
 export class HowToPlay implements DOMDialog {
   #root: HTMLElement;

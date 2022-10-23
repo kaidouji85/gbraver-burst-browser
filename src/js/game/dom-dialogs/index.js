@@ -8,7 +8,6 @@ import type { DomDialogActionConnector } from "./action-connector/dom-dialog-act
 import { DeleteAccountConsentDialog } from "./delete-account-consent/delete-account-consent-dialog";
 import type { DOMDialog } from "./dialog";
 import { DifficultyDialog } from "./difficulty/difficulty-dialog";
-import { HowToPlay } from "./how-to-play/how-to-play-dialog";
 import { LoginDialog } from "./login/login-dialog";
 import { MatchingDialog } from "./matching/matching-dialog";
 import { NetworkErrorDialog } from "./network-error/network-error-dialog";
@@ -47,26 +46,6 @@ export class DOMDialogs {
     this.#unsubscribers = connector(dialog, this.#gameAction);
     this.#root.appendChild(dialog.getRootHTMLElement());
     this.#dialog = dialog;
-  }
-
-  /**
-   * @deprecated
-   * 遊び方ダイアログを表示する
-   *
-   * @param resources リソース管理オブジェクト
-   * @param movieURL 動画のURL
-   */
-  startHowToPlay(resources: Resources, movieURL: string): void {
-    this.#removeCurrentDialog();
-
-    const howToPlay = new HowToPlay(resources, movieURL);
-    this.#unsubscribers = [
-      howToPlay.closeNotifier().subscribe(() => {
-        this.#gameAction.next({ type: "EndHowToPlay" });
-      }),
-    ];
-    this.#root.appendChild(howToPlay.getRootHTMLElement());
-    this.#dialog = howToPlay;
   }
 
   /**
