@@ -1,7 +1,7 @@
 // @flow
 
+import { MailVerifiedIncomplete } from "../scene/mail-verified-incomplete/mail-verified-incomplete";
 import type { DOMSceneActionConnector } from "./dom-scene-action-connector";
-import { MailVerifiedIncomplete } from "./scene/mail-verified-incomplete/mail-verified-incomplete";
 
 /** アクションコネクタのデータ型 */
 type Connector = DOMSceneActionConnector<MailVerifiedIncomplete>;

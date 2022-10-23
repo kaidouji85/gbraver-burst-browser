@@ -1,7 +1,7 @@
 // @flow
-import type { StreamSource, Unsubscriber } from "../../stream/stream";
-import type { GameAction } from "../game-actions";
-import type { DOMScene } from "./dom-scene";
+import type { StreamSource, Unsubscriber } from "../../../stream/stream";
+import type { GameAction } from "../../game-actions";
+import type { DOMScene } from "../dom-scene";
 
 /**
  * ゲームアクションコネクタ

@@ -3,17 +3,15 @@ import type { ArmDozerId } from "gbraver-burst-core";
 
 import type { BGMManager } from "../../bgm/bgm-manager";
 import type { Resources } from "../../resource";
-import type { LoadingActions } from "../../resource/loading-actions";
 import type { Stream } from "../../stream/stream";
 import type { GbraverBurstBrowserConfig } from "../config/browser-config";
 import type { GameAction } from "../game-actions";
+import type { DOMSceneActionConnector } from "./action-connector/dom-scene-action-connector";
 import { discardCurrentScene } from "./discard-current-scene";
 import type { DOMScene } from "./dom-scene";
-import type { DOMSceneActionConnector } from "./dom-scene-action-connector";
 import type { DOMScenesProps } from "./props";
 import { createDOMScenesProps } from "./props";
 import { Config } from "./scene/config";
-import { Loading } from "./scene/loading";
 import { MatchCard } from "./scene/match-card";
 import { NPCEnding } from "./scene/npc-ending/npc-ending";
 import { PlayerSelect } from "./scene/player-select";
@@ -26,7 +24,6 @@ import { TutorialSelector } from "./scene/tutorial-selector/tutorial-selector";
 import type { TutorialTitleParams } from "./scene/tutorial-title";
 import { TutorialTitle } from "./scene/tutorial-title";
 import { startConfig } from "./start/start-config";
-import { startLoading } from "./start/start-loading";
 import { startMatchCard } from "./start/start-match-card";
 import { startNPCEnding } from "./start/start-npc-ending";
 import { startPlayerSelect } from "./start/start-player-select";
@@ -75,17 +72,6 @@ export class DOMScenes {
    */
   gameActionNotifier(): Stream<GameAction> {
     return this.#props.gameAction;
-  }
-
-  /**
-   * @deprecated
-   * 新しくローディング画面を開始する
-   *
-   * @param loading 読み込み状況ストリーム
-   * @return 開始されたローディング画面
-   */
-  startLoading(loading: Stream<LoadingActions>): Loading {
-    return startLoading(this.#props, loading);
   }
 
   /**

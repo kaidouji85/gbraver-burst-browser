@@ -3,6 +3,7 @@ import type { DOMScene } from "./dom-scene";
 import type { DOMScenesProps } from "./props";
 
 /**
+ * @deprecated
  * ルートHTML要素にシーンをバインドするヘルパー関数
  *
  * @param props DOMScenesプロパティ
