@@ -8,8 +8,10 @@ import { BattleScene } from "../../td-scenes/battle";
 import type { BattleProgress } from "../../td-scenes/battle/battle-progress";
 import { waitAnimationFrame } from "../../wait/wait-animation-frame";
 import { waitTime } from "../../wait/wait-time";
+import { difficultyDialogConnector } from "../dom-dialogs/action-connector/difficulty-dialog-connector";
 import { networkErrorDialogConnector } from "../dom-dialogs/action-connector/network-error-dialog-connector";
 import { waitingDialogConnector } from "../dom-dialogs/action-connector/waiting-dialog-connector";
+import { DifficultyDialog } from "../dom-dialogs/difficulty/difficulty-dialog";
 import { NetworkErrorDialog } from "../dom-dialogs/network-error/network-error-dialog";
 import { WaitingDialog } from "../dom-dialogs/waiting/waiting-dialog";
 import { matchCardConnector } from "../dom-scene-binder/action-connector/match-card-connector";
@@ -43,7 +45,8 @@ export async function onSelectionComplete(
         pilotId: action.pilotId,
       },
     };
-    props.domDialogs.startDifficulty(props.resources);
+    const dialog = new DifficultyDialog(props.resources);
+    props.domDialogs.bind(dialog, difficultyDialogConnector);
   };
   const waitUntilMatching = async (): Promise<BattleSDK> => {
     try {

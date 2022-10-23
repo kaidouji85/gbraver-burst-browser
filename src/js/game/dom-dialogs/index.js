@@ -6,7 +6,6 @@ import { createStreamSource } from "../../stream/stream";
 import type { GameAction } from "../game-actions";
 import type { DomDialogActionConnector } from "./action-connector/dom-dialog-action-connector";
 import type { DOMDialog } from "./dialog";
-import { DifficultyDialog } from "./difficulty/difficulty-dialog";
 import { MatchingDialog } from "./matching/matching-dialog";
 
 /** HTML ダイアログをあつめたもの */
@@ -42,31 +41,6 @@ export class DOMDialogs {
     this.#unsubscribers = connector(dialog, this.#gameAction);
     this.#root.appendChild(dialog.getRootHTMLElement());
     this.#dialog = dialog;
-  }
-
-  /**
-   * @deprecated
-   * 難易度選択ダイアログを表示する
-   *
-   * @param resources リソース管理オブジェクト
-   */
-  startDifficulty(resources: Resources): void {
-    this.#removeCurrentDialog();
-
-    const degreeOfDifficulty = new DifficultyDialog(resources);
-    this.#unsubscribers = [
-      degreeOfDifficulty.selectionCompleteNotifier().subscribe((difficulty) => {
-        this.#gameAction.next({
-          type: "DifficultySelectionComplete",
-          difficulty,
-        });
-      }),
-      degreeOfDifficulty.closeDialogNotifier().subscribe(() => {
-        this.#gameAction.next({ type: "DifficultySelectionCancel" });
-      }),
-    ];
-    this.#root.appendChild(degreeOfDifficulty.getRootHTMLElement());
-    this.#dialog = degreeOfDifficulty;
   }
 
   /**
