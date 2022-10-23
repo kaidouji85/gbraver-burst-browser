@@ -1,6 +1,5 @@
 // @flow
 
-import type { BGMManager } from "../../bgm/bgm-manager";
 import type { Resources } from "../../resource";
 import type { Stream } from "../../stream/stream";
 import type { GameAction } from "../game-actions";
@@ -9,12 +8,10 @@ import { discardCurrentScene } from "./discard-current-scene";
 import type { DOMScene } from "./dom-scene";
 import type { DOMScenesProps } from "./props";
 import { createDOMScenesProps } from "./props";
-import { NPCEnding } from "./scene/npc-ending/npc-ending";
 import type { TutorialStage } from "./scene/tutorial-selector/tutoria-stage-element";
 import { TutorialSelector } from "./scene/tutorial-selector/tutorial-selector";
 import type { TutorialTitleParams } from "./scene/tutorial-title";
 import { TutorialTitle } from "./scene/tutorial-title";
-import { startNPCEnding } from "./start/start-npc-ending";
 import { startTutorialSelector } from "./start/start-tutorial-selector";
 import { startTutorialTitle } from "./start/start-tutorial-title";
 
@@ -58,21 +55,6 @@ export class DOMScenes {
    */
   gameActionNotifier(): Stream<GameAction> {
     return this.#props.gameAction;
-  }
-
-  /**
-   * @deprecated
-   * 新しくNPCエンディング画面を開始する
-   *
-   * @param resources リソース管理オブジェクト
-   * @param bgm BGM管理オブジェクト
-   * @return 開始されたNPCエンディング画面
-   */
-  async startNPCEnding(
-    resources: Resources,
-    bgm: BGMManager
-  ): Promise<NPCEnding> {
-    return await startNPCEnding(this.#props, resources, bgm);
   }
 
   /**
