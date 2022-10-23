@@ -3,6 +3,7 @@
 import type { Stream } from "../../stream/stream";
 import type { GameAction } from "../game-actions";
 import type { DOMSceneActionConnector } from "./action-connector/dom-scene-action-connector";
+import { bind } from "./bind";
 import { discardCurrentScene } from "./discard-current-scene";
 import type { DOMScene } from "./dom-scene";
 import type { DOMScenesProps } from "./props";
@@ -28,6 +29,7 @@ export class DOMScenes {
   destructor() {
     discardCurrentScene(this.#props);
   }
+
   /**
    * DOMシーンをバインドする
    *
@@ -35,10 +37,7 @@ export class DOMScenes {
    * @param connector ゲームアクションコネクタ
    */
   bind<X: DOMScene>(scene: X, connector: DOMSceneActionConnector<X>): void {
-    discardCurrentScene(this.#props);
-    this.#props.scene = scene;
-    this.#props.root.appendChild(scene.getRootHTMLElement());
-    this.#props.unsubscribers = connector(scene, this.#props.gameAction);
+    bind(this.#props, scene, connector);
   }
 
   /**
