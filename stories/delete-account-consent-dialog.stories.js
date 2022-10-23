@@ -1,6 +1,6 @@
 // @flow
 
-import { DeleteAccountConsentDialog } from "../src/js/game/dom-dialogs/delete-account-consent/delete-account-consent-dialog";
+import { DeleteAccountConsentDialog } from "../src/js/dom-dialogs/delete-account-consent/delete-account-consent-dialog";
 import type { DOMStubStory } from "./stub/dom-stub";
 import { domStub } from "./stub/dom-stub";
 

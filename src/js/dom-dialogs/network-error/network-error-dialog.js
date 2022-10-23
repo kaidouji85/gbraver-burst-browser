@@ -1,20 +1,16 @@
 // @flow
 import { Howl } from "howler";
 
-import { pop } from "../../../dom/animation";
-import type { PushDOM } from "../../../dom/event-stream";
-import { pushDOMStream } from "../../../dom/event-stream";
-import { Exclusive } from "../../../exclusive/exclusive";
-import type { Resources } from "../../../resource";
-import { SOUND_IDS } from "../../../resource/sound";
-import type {
-  Stream,
-  StreamSource,
-  Unsubscriber,
-} from "../../../stream/stream";
-import { createStreamSource } from "../../../stream/stream";
-import { domUuid } from "../../../uuid/dom-uuid";
-import type { PostNetworkError } from "../../post-network-error";
+import { pop } from "../../dom/animation";
+import type { PushDOM } from "../../dom/event-stream";
+import { pushDOMStream } from "../../dom/event-stream";
+import { Exclusive } from "../../exclusive/exclusive";
+import type { PostNetworkError } from "../../game/post-network-error";
+import type { Resources } from "../../resource";
+import { SOUND_IDS } from "../../resource/sound";
+import type { Stream, StreamSource, Unsubscriber } from "../../stream/stream";
+import { createStreamSource } from "../../stream/stream";
+import { domUuid } from "../../uuid/dom-uuid";
 import type { DOMDialog } from "../dialog";
 
 /** ルート要素のcssクラス名 */

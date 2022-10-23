@@ -1,6 +1,6 @@
 // @flow
 
-import { NetworkErrorDialog } from "../src/js/game/dom-dialogs/network-error/network-error-dialog";
+import { NetworkErrorDialog } from "../src/js/dom-dialogs/network-error/network-error-dialog";
 import type { DOMStubStory } from "./stub/dom-stub";
 import { domStub } from "./stub/dom-stub";
 

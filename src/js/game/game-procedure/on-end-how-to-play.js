@@ -9,5 +9,5 @@ import type { GameProps } from "../game-props";
  */
 export function onEndHowToPlay(props: $ReadOnly<GameProps>): void {
   props.bgm.do(fadeIn);
-  props.domDialogs.hidden();
+  props.domDialogBinder.hidden();
 }

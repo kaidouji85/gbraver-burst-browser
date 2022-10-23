@@ -1,4 +1,6 @@
 // @flow
+import { WaitingDialog } from "../../dom-dialogs/waiting/waiting-dialog";
+import { waitingDialogConnector } from "../dom-dialog-binder/action-connector/waiting-dialog-connector";
 import type { GameProps } from "../game-props";
 
 /**
@@ -10,7 +12,8 @@ import type { GameProps } from "../game-props";
 export async function onDeleteAccount(
   props: $ReadOnly<GameProps>
 ): Promise<void> {
-  props.domDialogs.startWaiting("アカウント削除中");
+  const dialog = new WaitingDialog("アカウント削除中");
+  props.domDialogBinder.bind(dialog, waitingDialogConnector);
   await props.api.deleteLoggedInUser();
   await props.fader.fadeOut();
   await props.api.logout();

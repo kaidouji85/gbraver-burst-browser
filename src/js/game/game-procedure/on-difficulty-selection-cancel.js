@@ -18,5 +18,5 @@ export function onDifficultySelectionCancel(props: GameProps): void {
   }
 
   props.inProgress = { ...props.inProgress, subFlow: { type: "PlayerSelect" } };
-  props.domDialogs.hidden();
+  props.domDialogBinder.hidden();
 }

@@ -8,6 +8,7 @@ import type { DOMSceneBinderProps } from "./props";
 /**
  * DOMシーンをバインドする
  *
+ * @template X シーンのデータ型
  * @param props DomSceneBinderプロパティ
  * @param scene バインドするシーン
  * @param connector ゲームアクションコネクタ

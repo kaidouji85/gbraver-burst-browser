@@ -1,5 +1,7 @@
 // @flow
 import { fadeOut } from "../../bgm/bgm-operators";
+import { HowToPlay } from "../../dom-dialogs/how-to-play/how-to-play-dialog";
+import { howToPlayConnector } from "../dom-dialog-binder/action-connector/how-to-play-connector";
 import type { GameProps } from "../game-props";
 
 /**
@@ -9,5 +11,6 @@ import type { GameProps } from "../game-props";
  */
 export function onShowHowToPlay(props: $ReadOnly<GameProps>): void {
   props.bgm.do(fadeOut);
-  props.domDialogs.startHowToPlay(props.resources, props.howToPlayMovieURL);
+  const dialog = new HowToPlay(props.resources, props.howToPlayMovieURL);
+  props.domDialogBinder.bind(dialog, howToPlayConnector);
 }

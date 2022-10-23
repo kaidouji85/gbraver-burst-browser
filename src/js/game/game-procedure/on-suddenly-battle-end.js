@@ -1,4 +1,6 @@
 // @flow
+import { NetworkErrorDialog } from "../../dom-dialogs/network-error/network-error-dialog";
+import { networkErrorDialogConnector } from "../dom-dialog-binder/action-connector/network-error-dialog-connector";
 import type { GameProps } from "../game-props";
 
 /**
@@ -10,7 +12,8 @@ import type { GameProps } from "../game-props";
 export async function onSuddenlyEndBattle(
   props: $ReadOnly<GameProps>
 ): Promise<void> {
-  props.domDialogs.startNetworkError(props.resources, { type: "GotoTitle" });
+  const dialog = new NetworkErrorDialog(props.resources, { type: "GotoTitle" });
+  props.domDialogBinder.bind(dialog, networkErrorDialogConnector);
   props.suddenlyBattleEnd.unbind();
   await props.api.disconnectWebsocket();
 }

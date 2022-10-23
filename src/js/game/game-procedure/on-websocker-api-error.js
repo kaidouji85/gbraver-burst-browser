@@ -1,4 +1,6 @@
 // @flow
+import { NetworkErrorDialog } from "../../dom-dialogs/network-error/network-error-dialog";
+import { networkErrorDialogConnector } from "../dom-dialog-binder/action-connector/network-error-dialog-connector";
 import type { WebSocketAPIError } from "../game-actions";
 import type { GameProps } from "../game-props";
 
@@ -12,6 +14,7 @@ export function onWebSocketAPIError(
   props: $ReadOnly<GameProps>,
   action: WebSocketAPIError
 ): void {
-  props.domDialogs.startNetworkError(props.resources, { type: "GotoTitle" });
+  const dialog = new NetworkErrorDialog(props.resources, { type: "GotoTitle" });
+  props.domDialogBinder.bind(dialog, networkErrorDialogConnector);
   throw action;
 }

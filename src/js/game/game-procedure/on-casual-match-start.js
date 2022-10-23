@@ -1,6 +1,12 @@
 // @flow
+import { LoginDialog } from "../../dom-dialogs/login/login-dialog";
+import { NetworkErrorDialog } from "../../dom-dialogs/network-error/network-error-dialog";
+import { WaitingDialog } from "../../dom-dialogs/waiting/waiting-dialog";
 import { PlayerSelect } from "../../dom-scenes/player-select";
 import { waitTime } from "../../wait/wait-time";
+import { loginDialogConnector } from "../dom-dialog-binder/action-connector/login-dialog-connector";
+import { networkErrorDialogConnector } from "../dom-dialog-binder/action-connector/network-error-dialog-connector";
+import { waitingDialogConnector } from "../dom-dialog-binder/action-connector/waiting-dialog-connector";
 import { playerSelectConnector } from "../dom-scene-binder/action-connector/player-select-connector";
 import { MAX_LOADING_TIME } from "../dom-scene-binder/max-loading-time";
 import type { GameProps } from "../game-props";
@@ -18,7 +24,8 @@ export async function onCasualMatchStart(props: GameProps): Promise<void> {
     try {
       return await props.api.isLogin();
     } catch (e) {
-      props.domDialogs.startNetworkError(props.resources, { type: "Close" });
+      const dialog = new NetworkErrorDialog(props.resources, { type: "Close" });
+      props.domDialogBinder.bind(dialog, networkErrorDialogConnector);
       throw e;
     }
   };
@@ -27,7 +34,7 @@ export async function onCasualMatchStart(props: GameProps): Promise<void> {
       type: "CasualMatch",
       subFlow: { type: "PlayerSelect" },
     };
-    props.domDialogs.hidden();
+    props.domDialogBinder.hidden();
     await props.fader.fadeOut();
     const scene = new PlayerSelect(props.resources);
     props.domSceneBinder.bind(scene, playerSelectConnector);
@@ -35,15 +42,17 @@ export async function onCasualMatchStart(props: GameProps): Promise<void> {
     await props.fader.fadeIn();
   };
   const showLoginDialog = () => {
-    props.domDialogs.startLogin(
+    const dialog = new LoginDialog(
       props.resources,
       "ネット対戦をするにはログインをしてください"
     );
+    props.domDialogBinder.bind(dialog, loginDialogConnector);
   };
 
-  props.domDialogs.startWaiting("ログインチェック中......");
+  const dialog = new WaitingDialog("ログインチェック中......");
+  props.domDialogBinder.bind(dialog, waitingDialogConnector);
   const isLogin = await callLoginCheckAPI();
-  props.domDialogs.hidden();
+  props.domDialogBinder.hidden();
   if (!isLogin) {
     showLoginDialog();
     return;

@@ -7,5 +7,5 @@ import type { GameProps } from "../game-props";
  * @param props ゲームプロパティ
  */
 export function onLoginCancel(props: $ReadOnly<GameProps>): void {
-  props.domDialogs.hidden();
+  props.domDialogBinder.hidden();
 }
