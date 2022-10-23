@@ -30,6 +30,7 @@ export class DOMSceneBinder {
   /**
    * DOMシーンをバインドする
    *
+   * @template X シーンのデータ型
    * @param scene バインドするシーン
    * @param connector ゲームアクションコネクタ
    */

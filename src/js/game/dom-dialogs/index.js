@@ -4,6 +4,7 @@ import type { Stream, StreamSource, Unsubscriber } from "../../stream/stream";
 import { createStreamSource } from "../../stream/stream";
 import type { GameAction } from "../game-actions";
 import type { PostNetworkError } from "../post-network-error";
+import type { DomDialogActionConnector } from "./action-connector/dom-dialog-action-connector";
 import { DeleteAccountConsentDialog } from "./delete-account-consent/delete-account-consent-dialog";
 import type { DOMDialog } from "./dialog";
 import { DifficultyDialog } from "./difficulty/difficulty-dialog";
@@ -15,9 +16,13 @@ import { WaitingDialog } from "./waiting/waiting-dialog";
 
 /** HTML ダイアログをあつめたもの */
 export class DOMDialogs {
+  /** ルートHTML要素 */
   #root: HTMLElement;
+  /** 現在表示しているダイアログ、何も表示していない場合はnullがセットされる */
   #dialog: ?DOMDialog;
+  /** ゲームアクションストリーム */
   #gameAction: StreamSource<GameAction>;
+  /** 案サブスクライバ */
   #unsubscribers: Unsubscriber[];
 
   /**
@@ -31,6 +36,21 @@ export class DOMDialogs {
   }
 
   /**
+   * DOMダイアログをバインドする
+   *
+   * @template X ダイアログデータ型
+   * @param dialog ダイアログ
+   * @param connector アクションコネクタ
+   */
+  bind<X: DOMDialog>(dialog: X, connector: DomDialogActionConnector<X>): void {
+    this.#removeCurrentDialog();
+    this.#unsubscribers = connector(dialog, this.#gameAction);
+    this.#root.appendChild(dialog.getRootHTMLElement());
+    this.#dialog = dialog;
+  }
+
+  /**
+   * @deprecated
    * 遊び方ダイアログを表示する
    *
    * @param resources リソース管理オブジェクト
@@ -50,6 +70,7 @@ export class DOMDialogs {
   }
 
   /**
+   * @deprecated
    * ログインダイアログを表示する
    *
    * @param resources リソース管理オブジェクト
@@ -72,6 +93,7 @@ export class DOMDialogs {
   }
 
   /**
+   * @deprecated
    * 作業待ちダイアログを表示する
    *
    * @param caption ダイアログに表示する文言
@@ -85,6 +107,7 @@ export class DOMDialogs {
   }
 
   /**
+   * @deprecated
    * 通信エラーダイアログを表示する
    *
    * @param resources リソース管理オブジェクト
@@ -107,6 +130,7 @@ export class DOMDialogs {
   }
 
   /**
+   * @deprecated
    * アカウント削除同意ダイアログを表示する
    *
    * @param resources リソース管理オブジェクト
@@ -128,6 +152,7 @@ export class DOMDialogs {
   }
 
   /**
+   * @deprecated
    * 難易度選択ダイアログを表示する
    *
    * @param resources リソース管理オブジェクト
@@ -152,6 +177,7 @@ export class DOMDialogs {
   }
 
   /**
+   * @deprecated
    * マッチングダイアログを表示する
    *
    * @param resources リソース管理オブジェクト
@@ -170,6 +196,7 @@ export class DOMDialogs {
   }
 
   /**
+   * @deprecated
    * 現在表示しているダイアログを非表示にする
    */
   hidden(): void {
