@@ -11,7 +11,7 @@ import { stageTitleConnector } from "../dom-scene-binder/action-connector/stage-
 import { MAX_LOADING_TIME } from "../dom-scene-binder/max-loading-time";
 import type { GameProps } from "../game-props";
 import type { NPCBattleStage } from "../npc-battle";
-import { battleSceneConnector } from "../td-scene-binder/battle-scene-connector";
+import { battleSceneConnector } from "../td-scene-binder/action-connector/battle-scene-connector";
 
 /**
  * NPCバトルのステージを開始するヘルパー関数
