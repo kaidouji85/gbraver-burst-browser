@@ -1,6 +1,6 @@
 // @flow
 
-import { HowToPlay } from "../how-to-play/how-to-play-dialog";
+import { HowToPlay } from "../../../dom-dialogs/how-to-play/how-to-play-dialog";
 import type { DomDialogActionConnector } from "./dom-dialog-action-connector";
 
 /** コネクターのデータ型 */

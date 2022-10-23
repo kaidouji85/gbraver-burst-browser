@@ -1,6 +1,6 @@
 // @flow
 
-import { LoginDialog } from "../login/login-dialog";
+import { LoginDialog } from "../../../dom-dialogs/login/login-dialog";
 import type { DomDialogActionConnector } from "./dom-dialog-action-connector";
 
 /** コネクタのデータ型 */

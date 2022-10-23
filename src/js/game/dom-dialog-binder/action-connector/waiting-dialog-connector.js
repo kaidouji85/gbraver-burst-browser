@@ -1,6 +1,6 @@
 // @flow
 
-import { WaitingDialog } from "../waiting/waiting-dialog";
+import { WaitingDialog } from "../../../dom-dialogs/waiting/waiting-dialog";
 import type { DomDialogActionConnector } from "./dom-dialog-action-connector";
 
 /** コネクタのデータ型 */

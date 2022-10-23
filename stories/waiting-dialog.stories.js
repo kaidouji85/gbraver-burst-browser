@@ -1,6 +1,6 @@
 // @flow
 
-import { WaitingDialog } from "../src/js/game/dom-dialogs/waiting/waiting-dialog";
+import { WaitingDialog } from "../src/js/dom-dialogs/waiting/waiting-dialog";
 import type { DOMStubStory } from "./stub/dom-stub";
 import { domStub } from "./stub/dom-stub";
 

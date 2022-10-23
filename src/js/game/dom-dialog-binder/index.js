@@ -1,13 +1,13 @@
 // @flow
 
+import type { DOMDialog } from "../../dom-dialogs/dialog";
 import type { Stream, StreamSource, Unsubscriber } from "../../stream/stream";
 import { createStreamSource } from "../../stream/stream";
 import type { GameAction } from "../game-actions";
 import type { DomDialogActionConnector } from "./action-connector/dom-dialog-action-connector";
-import type { DOMDialog } from "./dialog";
 
-/** HTML ダイアログをあつめたもの */
-export class DOMDialogs {
+/** HTMLダイアログバインダー */
+export class DOMDialogBinder {
   /** ルートHTML要素 */
   #root: HTMLElement;
   /** 現在表示しているダイアログ、何も表示していない場合はnullがセットされる */

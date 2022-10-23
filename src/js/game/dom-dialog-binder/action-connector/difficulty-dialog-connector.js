@@ -1,6 +1,6 @@
 // @flow
 
-import { DifficultyDialog } from "../difficulty/difficulty-dialog";
+import { DifficultyDialog } from "../../../dom-dialogs/difficulty/difficulty-dialog";
 import type { DomDialogActionConnector } from "./dom-dialog-action-connector";
 
 /** コネクタのデータ型 */

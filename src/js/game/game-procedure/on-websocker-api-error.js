@@ -1,6 +1,6 @@
 // @flow
-import { networkErrorDialogConnector } from "../dom-dialogs/action-connector/network-error-dialog-connector";
-import { NetworkErrorDialog } from "../dom-dialogs/network-error/network-error-dialog";
+import { NetworkErrorDialog } from "../../dom-dialogs/network-error/network-error-dialog";
+import { networkErrorDialogConnector } from "../dom-dialog-binder/action-connector/network-error-dialog-connector";
 import type { WebSocketAPIError } from "../game-actions";
 import type { GameProps } from "../game-props";
 

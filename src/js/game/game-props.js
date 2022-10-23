@@ -31,7 +31,7 @@ import { pushWindowsStream } from "../window/push-window";
 import type { Resize } from "../window/resize";
 import { resizeStream } from "../window/resize";
 import type { GbraverBurstBrowserConfigRepository } from "./config/browser-config";
-import { DOMDialogs } from "./dom-dialogs";
+import { DOMDialogBinder } from "./dom-dialog-binder";
 import { DOMFloaters } from "./dom-floaters/dom-floaters";
 import { DOMSceneBinder } from "./dom-scene-binder";
 import { FutureSuddenlyBattleEnd } from "./future-suddenly-battle-end";
@@ -98,7 +98,7 @@ export interface GameProps {
   /** DOMシーンバインダー */
   domSceneBinder: DOMSceneBinder;
   /** DOMダイアログ管理オブジェクト */
-  domDialogs: DOMDialogs;
+  domDialogs: DOMDialogBinder;
   /** DOMフローター管理オブジェクト */
   domFloaters: DOMFloaters;
   /** レンダラ管理オブジェクト */
@@ -180,7 +180,7 @@ export function generateGameProps(param: GamePropsGeneratorParam): GameProps {
     fader: new DOMFader(),
     interruptScenes: new InterruptScenes(),
     domSceneBinder: new DOMSceneBinder(),
-    domDialogs: new DOMDialogs(),
+    domDialogs: new DOMDialogBinder(),
     domFloaters: new DOMFloaters(),
     renderer,
     tdBinder: new TDSceneBinder(renderer, hudUIScale),

@@ -2,20 +2,20 @@
 import type { Battle as BattleSDK } from "@gbraver-burst-network/browser-core";
 
 import { fadeOut, stop } from "../../bgm/bgm-operators";
+import { DifficultyDialog } from "../../dom-dialogs/difficulty/difficulty-dialog";
+import { MatchingDialog } from "../../dom-dialogs/matching/matching-dialog";
+import { NetworkErrorDialog } from "../../dom-dialogs/network-error/network-error-dialog";
+import { WaitingDialog } from "../../dom-dialogs/waiting/waiting-dialog";
 import { MatchCard } from "../../dom-scenes/match-card";
 import { SOUND_IDS } from "../../resource/sound";
 import { BattleScene } from "../../td-scenes/battle";
 import type { BattleProgress } from "../../td-scenes/battle/battle-progress";
 import { waitAnimationFrame } from "../../wait/wait-animation-frame";
 import { waitTime } from "../../wait/wait-time";
-import { difficultyDialogConnector } from "../dom-dialogs/action-connector/difficulty-dialog-connector";
-import { matchingDialogConnector } from "../dom-dialogs/action-connector/matching-dialog-connector";
-import { networkErrorDialogConnector } from "../dom-dialogs/action-connector/network-error-dialog-connector";
-import { waitingDialogConnector } from "../dom-dialogs/action-connector/waiting-dialog-connector";
-import { DifficultyDialog } from "../dom-dialogs/difficulty/difficulty-dialog";
-import { MatchingDialog } from "../dom-dialogs/matching/matching-dialog";
-import { NetworkErrorDialog } from "../dom-dialogs/network-error/network-error-dialog";
-import { WaitingDialog } from "../dom-dialogs/waiting/waiting-dialog";
+import { difficultyDialogConnector } from "../dom-dialog-binder/action-connector/difficulty-dialog-connector";
+import { matchingDialogConnector } from "../dom-dialog-binder/action-connector/matching-dialog-connector";
+import { networkErrorDialogConnector } from "../dom-dialog-binder/action-connector/network-error-dialog-connector";
+import { waitingDialogConnector } from "../dom-dialog-binder/action-connector/waiting-dialog-connector";
 import { matchCardConnector } from "../dom-scene-binder/action-connector/match-card-connector";
 import { MAX_LOADING_TIME } from "../dom-scene-binder/max-loading-time";
 import type { SelectionComplete } from "../game-actions";

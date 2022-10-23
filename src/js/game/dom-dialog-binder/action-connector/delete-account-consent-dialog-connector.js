@@ -1,6 +1,6 @@
 // @flow
 
-import { DeleteAccountConsentDialog } from "../delete-account-consent/delete-account-consent-dialog";
+import { DeleteAccountConsentDialog } from "../../../dom-dialogs/delete-account-consent/delete-account-consent-dialog";
 import type { DomDialogActionConnector } from "./dom-dialog-action-connector";
 
 /** コネクタのデータ型 */

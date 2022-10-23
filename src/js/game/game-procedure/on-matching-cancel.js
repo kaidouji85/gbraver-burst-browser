@@ -1,6 +1,6 @@
 // @flow
-import { waitingDialogConnector } from "../dom-dialogs/action-connector/waiting-dialog-connector";
-import { WaitingDialog } from "../dom-dialogs/waiting/waiting-dialog";
+import { WaitingDialog } from "../../dom-dialogs/waiting/waiting-dialog";
+import { waitingDialogConnector } from "../dom-dialog-binder/action-connector/waiting-dialog-connector";
 import type { GameProps } from "../game-props";
 
 /**

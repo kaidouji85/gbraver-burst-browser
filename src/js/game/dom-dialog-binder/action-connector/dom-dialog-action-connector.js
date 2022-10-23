@@ -1,7 +1,7 @@
 // @flow
+import type { DOMDialog } from "../../../dom-dialogs/dialog";
 import type { StreamSource, Unsubscriber } from "../../../stream/stream";
 import type { GameAction } from "../../game-actions";
-import type { DOMDialog } from "../dialog";
 
 /**
  * ゲームアクションコネクタ

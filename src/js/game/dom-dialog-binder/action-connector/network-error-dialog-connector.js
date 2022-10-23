@@ -1,6 +1,6 @@
 // @flow
 
-import { NetworkErrorDialog } from "../network-error/network-error-dialog";
+import { NetworkErrorDialog } from "../../../dom-dialogs/network-error/network-error-dialog";
 import type { DomDialogActionConnector } from "./dom-dialog-action-connector";
 
 /** コネクタのデータ型 */

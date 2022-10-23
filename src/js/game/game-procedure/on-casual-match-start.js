@@ -1,12 +1,12 @@
 // @flow
+import { LoginDialog } from "../../dom-dialogs/login/login-dialog";
+import { NetworkErrorDialog } from "../../dom-dialogs/network-error/network-error-dialog";
+import { WaitingDialog } from "../../dom-dialogs/waiting/waiting-dialog";
 import { PlayerSelect } from "../../dom-scenes/player-select";
 import { waitTime } from "../../wait/wait-time";
-import { loginDialogConnector } from "../dom-dialogs/action-connector/login-dialog-connector";
-import { networkErrorDialogConnector } from "../dom-dialogs/action-connector/network-error-dialog-connector";
-import { waitingDialogConnector } from "../dom-dialogs/action-connector/waiting-dialog-connector";
-import { LoginDialog } from "../dom-dialogs/login/login-dialog";
-import { NetworkErrorDialog } from "../dom-dialogs/network-error/network-error-dialog";
-import { WaitingDialog } from "../dom-dialogs/waiting/waiting-dialog";
+import { loginDialogConnector } from "../dom-dialog-binder/action-connector/login-dialog-connector";
+import { networkErrorDialogConnector } from "../dom-dialog-binder/action-connector/network-error-dialog-connector";
+import { waitingDialogConnector } from "../dom-dialog-binder/action-connector/waiting-dialog-connector";
 import { playerSelectConnector } from "../dom-scene-binder/action-connector/player-select-connector";
 import { MAX_LOADING_TIME } from "../dom-scene-binder/max-loading-time";
 import type { GameProps } from "../game-props";

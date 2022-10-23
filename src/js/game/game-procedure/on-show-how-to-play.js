@@ -1,7 +1,7 @@
 // @flow
 import { fadeOut } from "../../bgm/bgm-operators";
-import { howToPlayConnector } from "../dom-dialogs/action-connector/how-to-play-connector";
-import { HowToPlay } from "../dom-dialogs/how-to-play/how-to-play-dialog";
+import { HowToPlay } from "../../dom-dialogs/how-to-play/how-to-play-dialog";
+import { howToPlayConnector } from "../dom-dialog-binder/action-connector/how-to-play-connector";
 import type { GameProps } from "../game-props";
 
 /**
