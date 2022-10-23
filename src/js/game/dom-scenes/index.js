@@ -1,6 +1,5 @@
 // @flow
 
-import type { Resources } from "../../resource";
 import type { Stream } from "../../stream/stream";
 import type { GameAction } from "../game-actions";
 import type { DOMSceneActionConnector } from "./action-connector/dom-scene-action-connector";
@@ -8,11 +7,8 @@ import { discardCurrentScene } from "./discard-current-scene";
 import type { DOMScene } from "./dom-scene";
 import type { DOMScenesProps } from "./props";
 import { createDOMScenesProps } from "./props";
-import type { TutorialStage } from "./scene/tutorial-selector/tutoria-stage-element";
-import { TutorialSelector } from "./scene/tutorial-selector/tutorial-selector";
 import type { TutorialTitleParams } from "./scene/tutorial-title";
 import { TutorialTitle } from "./scene/tutorial-title";
-import { startTutorialSelector } from "./start/start-tutorial-selector";
 import { startTutorialTitle } from "./start/start-tutorial-title";
 
 /**
@@ -55,21 +51,6 @@ export class DOMScenes {
    */
   gameActionNotifier(): Stream<GameAction> {
     return this.#props.gameAction;
-  }
-
-  /**
-   * @deprecated
-   * チュートリアル選択画面を開始する
-   *
-   * @param resources リソース管理オブジェクト
-   * @param stages ステージ情報
-   * @return 開始された設定画面
-   */
-  startTutorialSelector(
-    resources: Resources,
-    stages: TutorialStage[]
-  ): TutorialSelector {
-    return startTutorialSelector(this.#props, resources, stages);
   }
 
   /**
