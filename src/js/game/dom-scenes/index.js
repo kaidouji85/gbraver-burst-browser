@@ -14,7 +14,6 @@ import { createDOMScenesProps } from "./props";
 import { Config } from "./scene/config";
 import { MatchCard } from "./scene/match-card";
 import { NPCEnding } from "./scene/npc-ending/npc-ending";
-import { PlayerSelect } from "./scene/player-select";
 import type { StageTitleParam } from "./scene/stage-title/stage-title";
 import { StageTitle } from "./scene/stage-title/stage-title";
 import type { TutorialStage } from "./scene/tutorial-selector/tutoria-stage-element";
@@ -24,7 +23,6 @@ import { TutorialTitle } from "./scene/tutorial-title";
 import { startConfig } from "./start/start-config";
 import { startMatchCard } from "./start/start-match-card";
 import { startNPCEnding } from "./start/start-npc-ending";
-import { startPlayerSelect } from "./start/start-player-select";
 import { startStageTitle } from "./start/start-stage-title";
 import { startTutorialSelector } from "./start/start-tutorial-selector";
 import { startTutorialTitle } from "./start/start-tutorial-title";
@@ -69,17 +67,6 @@ export class DOMScenes {
    */
   gameActionNotifier(): Stream<GameAction> {
     return this.#props.gameAction;
-  }
-
-  /**
-   * @deprecated
-   * 新しくプレイヤー選択画面を開始する
-   *
-   * @param resources リソース管理オブジェクト
-   * @return 開始されたプレイヤー選択画面
-   */
-  async startPlayerSelect(resources: Resources): Promise<PlayerSelect> {
-    return await startPlayerSelect(this.#props, resources);
   }
 
   /**

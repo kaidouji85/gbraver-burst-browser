@@ -1,4 +1,8 @@
 // @flow
+import { waitTime } from "../../wait/wait-time";
+import { playerSelectConnector } from "../dom-scenes/action-connector/player-select-connector";
+import { MAX_LOADING_TIME } from "../dom-scenes/max-loading-time";
+import { PlayerSelect } from "../dom-scenes/scene/player-select";
 import type { GameProps } from "../game-props";
 import { fullResourceLoading } from "./full-resource-loading";
 
@@ -25,7 +29,9 @@ export async function onCasualMatchStart(props: GameProps): Promise<void> {
     };
     props.domDialogs.hidden();
     await props.fader.fadeOut();
-    await props.domScenes.startPlayerSelect(props.resources);
+    const scene = new PlayerSelect(props.resources);
+    props.domScenes.bind(scene, playerSelectConnector);
+    await Promise.race([scene.waitUntilLoaded(), waitTime(MAX_LOADING_TIME)]);
     await props.fader.fadeIn();
   };
   const showLoginDialog = () => {
