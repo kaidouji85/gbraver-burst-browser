@@ -4,7 +4,7 @@ import { LoginDialog } from "../login/login-dialog";
 import type { DomDialogActionConnector } from "./dom-dialog-action-connector";
 
 /** ログインダイアログとゲームアクションを関連付ける */
-export const loginConnector: DomDialogActionConnector<LoginDialog> = (
+export const loginDialogConnector: DomDialogActionConnector<LoginDialog> = (
   dialog,
   gameAction
 ) => [

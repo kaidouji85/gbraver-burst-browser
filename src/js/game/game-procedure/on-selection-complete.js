@@ -8,6 +8,8 @@ import { BattleScene } from "../../td-scenes/battle";
 import type { BattleProgress } from "../../td-scenes/battle/battle-progress";
 import { waitAnimationFrame } from "../../wait/wait-animation-frame";
 import { waitTime } from "../../wait/wait-time";
+import { waitingDialogConnector } from "../dom-dialogs/action-connector/waiting-dialog-connector";
+import { WaitingDialog } from "../dom-dialogs/waiting/waiting-dialog";
 import { matchCardConnector } from "../dom-scene-binder/action-connector/match-card-connector";
 import { MAX_LOADING_TIME } from "../dom-scene-binder/max-loading-time";
 import type { SelectionComplete } from "../game-actions";
@@ -58,7 +60,8 @@ export async function onSelectionComplete(
   const createBattleProgress = (battle: BattleSDK): BattleProgress => ({
     progress: async (v) => {
       try {
-        props.domDialogs.startWaiting("通信中......");
+        const dialog = new WaitingDialog("通信中......");
+        props.domDialogs.bind(dialog, waitingDialogConnector);
         const update = await battle.progress(v);
         props.domDialogs.hidden();
         return update;

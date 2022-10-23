@@ -1,8 +1,10 @@
 // @flow
 import { PlayerSelect } from "../../dom-scenes/player-select";
 import { waitTime } from "../../wait/wait-time";
-import { loginConnector } from "../dom-dialogs/action-connector/login-connector";
+import { loginDialogConnector } from "../dom-dialogs/action-connector/login-dialog-connector";
+import { waitingDialogConnector } from "../dom-dialogs/action-connector/waiting-dialog-connector";
 import { LoginDialog } from "../dom-dialogs/login/login-dialog";
+import { WaitingDialog } from "../dom-dialogs/waiting/waiting-dialog";
 import { playerSelectConnector } from "../dom-scene-binder/action-connector/player-select-connector";
 import { MAX_LOADING_TIME } from "../dom-scene-binder/max-loading-time";
 import type { GameProps } from "../game-props";
@@ -41,10 +43,11 @@ export async function onCasualMatchStart(props: GameProps): Promise<void> {
       props.resources,
       "ネット対戦をするにはログインをしてください"
     );
-    props.domDialogs.bind(dialog, loginConnector);
+    props.domDialogs.bind(dialog, loginDialogConnector);
   };
 
-  props.domDialogs.startWaiting("ログインチェック中......");
+  const dialog = new WaitingDialog("ログインチェック中......");
+  props.domDialogs.bind(dialog, waitingDialogConnector);
   const isLogin = await callLoginCheckAPI();
   props.domDialogs.hidden();
   if (!isLogin) {

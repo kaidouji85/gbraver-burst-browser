@@ -1,4 +1,6 @@
 // @flow
+import { waitingDialogConnector } from "../dom-dialogs/action-connector/waiting-dialog-connector";
+import { WaitingDialog } from "../dom-dialogs/waiting/waiting-dialog";
 import type { GameProps } from "../game-props";
 
 /**
@@ -10,7 +12,8 @@ import type { GameProps } from "../game-props";
 export async function onMatchingCanceled(
   props: $ReadOnly<GameProps>
 ): Promise<void> {
-  props.domDialogs.startWaiting("通信中......");
+  const dialog = new WaitingDialog("通信中......");
+  props.domDialogs.bind(dialog, waitingDialogConnector);
   await props.api.disconnectWebsocket();
   props.domDialogs.hidden();
 }

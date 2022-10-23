@@ -1,4 +1,5 @@
 // @flow
+
 import type { Resources } from "../../resource";
 import type { Stream, StreamSource, Unsubscriber } from "../../stream/stream";
 import { createStreamSource } from "../../stream/stream";
@@ -10,7 +11,6 @@ import type { DOMDialog } from "./dialog";
 import { DifficultyDialog } from "./difficulty/difficulty-dialog";
 import { MatchingDialog } from "./matching/matching-dialog";
 import { NetworkErrorDialog } from "./network-error/network-error-dialog";
-import { WaitingDialog } from "./waiting/waiting-dialog";
 
 /** HTML ダイアログをあつめたもの */
 export class DOMDialogs {
@@ -45,20 +45,6 @@ export class DOMDialogs {
     this.#unsubscribers = connector(dialog, this.#gameAction);
     this.#root.appendChild(dialog.getRootHTMLElement());
     this.#dialog = dialog;
-  }
-
-  /**
-   * @deprecated
-   * 作業待ちダイアログを表示する
-   *
-   * @param caption ダイアログに表示する文言
-   */
-  startWaiting(caption: string): void {
-    this.#removeCurrentDialog();
-
-    const waiting = new WaitingDialog(caption);
-    this.#root.appendChild(waiting.getRootHTMLElement());
-    this.#dialog = waiting;
   }
 
   /**
