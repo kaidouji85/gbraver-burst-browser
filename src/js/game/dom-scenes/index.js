@@ -17,8 +17,6 @@ import { NPCEnding } from "./scene/npc-ending/npc-ending";
 import { PlayerSelect } from "./scene/player-select";
 import type { StageTitleParam } from "./scene/stage-title/stage-title";
 import { StageTitle } from "./scene/stage-title/stage-title";
-import type { TitleParams } from "./scene/title";
-import { Title } from "./scene/title";
 import type { TutorialStage } from "./scene/tutorial-selector/tutoria-stage-element";
 import { TutorialSelector } from "./scene/tutorial-selector/tutorial-selector";
 import type { TutorialTitleParams } from "./scene/tutorial-title";
@@ -28,7 +26,6 @@ import { startMatchCard } from "./start/start-match-card";
 import { startNPCEnding } from "./start/start-npc-ending";
 import { startPlayerSelect } from "./start/start-player-select";
 import { startStageTitle } from "./start/start-stage-title";
-import { startTitle } from "./start/start-title";
 import { startTutorialSelector } from "./start/start-tutorial-selector";
 import { startTutorialTitle } from "./start/start-tutorial-title";
 
@@ -72,17 +69,6 @@ export class DOMScenes {
    */
   gameActionNotifier(): Stream<GameAction> {
     return this.#props.gameAction;
-  }
-
-  /**
-   * @deprecated
-   * 新しくタイトル画面を開始する
-   *
-   * @param params タイトル画面コンストラクタパラメータ
-   * @return 開始されたタイトル画面
-   */
-  async startTitle(params: TitleParams): Promise<Title> {
-    return await startTitle(this.#props, params);
   }
 
   /**

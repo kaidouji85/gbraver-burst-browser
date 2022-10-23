@@ -1,4 +1,7 @@
 // @flow
+import { waitTime } from "../../wait/wait-time";
+import { titleConnector } from "../dom-scenes/action-connector/title-connector";
+import { MAX_LOADING_TIME } from "../dom-scenes/max-loading-time";
 import { Title } from "../dom-scenes/scene/title";
 import type { GameProps } from "../game-props";
 
@@ -23,7 +26,8 @@ export async function startTitle(props: $ReadOnly<GameProps>): Promise<Title> {
   const account = isLogin
     ? await createLoggedInAccount()
     : { type: "GuestAccount" };
-  return props.domScenes.startTitle({
+
+  const scene = new Title({
     resources: props.resources,
     account,
     isApiServerEnable: props.isAPIServerEnable,
@@ -31,4 +35,7 @@ export async function startTitle(props: $ReadOnly<GameProps>): Promise<Title> {
     privacyPolicyURL: props.privacyPolicyURL,
     contactURL: props.contactURL,
   });
+  props.domScenes.bind(scene, titleConnector);
+  await Promise.race([scene.waitUntilLoaded(), waitTime(MAX_LOADING_TIME)]);
+  return scene;
 }
