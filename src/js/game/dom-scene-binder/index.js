@@ -5,22 +5,22 @@ import type { GameAction } from "../game-actions";
 import type { DOMSceneActionConnector } from "./action-connector/dom-scene-action-connector";
 import { bind } from "./bind";
 import { discardCurrentScene } from "./discard-current-scene";
-import type { DOMScene } from "./dom-scene";
-import type { DOMScenesProps } from "./props";
-import { createDOMScenesProps } from "./props";
+import type { DOMSceneBinderProps } from "./props";
+import { createDOMSceneBinderProps } from "./props";
+import type { DOMScene } from "./scene/dom-scene";
 
 /**
  * HTMLオンリーで生成されたシーンを集めたもの
  * 本クラス配下のいずれか1シーンのみが表示される想定
  */
-export class DOMScenes {
-  #props: DOMScenesProps;
+export class DOMSceneBinder {
+  #props: DOMSceneBinderProps;
 
   /**
    * コンストラクタ
    */
   constructor() {
-    this.#props = createDOMScenesProps();
+    this.#props = createDOMSceneBinderProps();
   }
 
   /**

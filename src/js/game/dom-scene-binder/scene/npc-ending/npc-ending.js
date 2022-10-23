@@ -20,7 +20,7 @@ import type {
 import { createStreamSource } from "../../../../stream/stream";
 import { domUuid } from "../../../../uuid/dom-uuid";
 import { waitElementLoaded } from "../../../../wait/wait-element-loaded";
-import type { DOMScene } from "../../dom-scene";
+import type { DOMScene } from "../dom-scene";
 
 /** ルート要素のclass属性 */
 const ROOT_CLASS = "npc-ending";

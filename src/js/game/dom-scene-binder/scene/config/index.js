@@ -2,7 +2,7 @@
 import type { Resources } from "../../../../resource";
 import type { Stream, Unsubscriber } from "../../../../stream/stream";
 import type { GbraverBurstBrowserConfig } from "../../../config/browser-config";
-import type { DOMScene } from "../../dom-scene";
+import type { DOMScene } from "../dom-scene";
 import { bindEventListeners } from "./listeners";
 import type { ConfigProps } from "./props";
 import { createConfigProps } from "./props";

@@ -3,9 +3,9 @@ import type { Player } from "gbraver-burst-core";
 
 import { fadeOut, stop } from "../../bgm/bgm-operators";
 import { waitTime } from "../../wait/wait-time";
-import { npcEndingConnector } from "../dom-scenes/action-connector/npc-ending-connector";
-import { MAX_LOADING_TIME } from "../dom-scenes/max-loading-time";
-import { NPCEnding } from "../dom-scenes/scene/npc-ending/npc-ending";
+import { npcEndingConnector } from "../dom-scene-binder/action-connector/npc-ending-connector";
+import { MAX_LOADING_TIME } from "../dom-scene-binder/max-loading-time";
+import { NPCEnding } from "../dom-scene-binder/scene/npc-ending/npc-ending";
 import type { PostBattleAction } from "../game-actions";
 import type { GameProps } from "../game-props";
 import type { InProgress } from "../in-progress/in-progress";

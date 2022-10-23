@@ -1,6 +1,6 @@
 // @flow
 import type { Stream, Unsubscriber } from "../../../../stream/stream";
-import type { DOMScene } from "../../dom-scene";
+import type { DOMScene } from "../dom-scene";
 import { bindEventListeners } from "./listeners";
 import type { CreateTitlePropsParams, TitleProps } from "./props";
 import { createTitleProps } from "./props";

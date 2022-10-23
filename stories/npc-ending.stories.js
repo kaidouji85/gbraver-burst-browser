@@ -1,7 +1,7 @@
 // @flow
 
 import { createBGMManager } from "../src/js/bgm/bgm-manager";
-import { NPCEnding } from "../src/js/game/dom-scenes/scene/npc-ending/npc-ending";
+import { NPCEnding } from "../src/js/game/dom-scene-binder/scene/npc-ending/npc-ending";
 import type { DOMStubStory } from "./stub/dom-stub";
 import { domStub } from "./stub/dom-stub";
 

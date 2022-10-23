@@ -6,7 +6,7 @@ import { getArmdozerIconPathId } from "../../../../path/armdozer-icon-path";
 import type { Resources } from "../../../../resource";
 import { domUuid } from "../../../../uuid/dom-uuid";
 import { waitElementLoaded } from "../../../../wait/wait-element-loaded";
-import type { DOMScene } from "../../dom-scene";
+import type { DOMScene } from "../dom-scene";
 
 /** ルート要素 class属性 */
 const ROOT_CLASS = "stage-title";

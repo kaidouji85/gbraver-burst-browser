@@ -2,11 +2,11 @@
 import type { StreamSource, Unsubscriber } from "../../stream/stream";
 import { createStreamSource } from "../../stream/stream";
 import type { GameAction } from "../game-actions";
-import type { DOMScene } from "./dom-scene";
+import type { DOMScene } from "./scene/dom-scene";
 
-/** DomScenesプロパティ */
-export type DOMScenesProps = {
-  /** DomScenesルートHTML要素、本要素にシーンをバインドする */
+/** DomSceneBinderプロパティ */
+export type DOMSceneBinderProps = {
+  /** DomSceneBinderルートHTML要素、本要素にシーンをバインドする */
   root: HTMLElement,
   /** 現在表示しているシーン、シーンが表示されていない場合はnullをセットする */
   scene: ?DOMScene,
@@ -17,11 +17,11 @@ export type DOMScenesProps = {
 };
 
 /**
- * DomScenesプロパティを生成する
+ * DomSceneBinderプロパティを生成する
  *
  * @return 生成したプロパティ
  */
-export function createDOMScenesProps(): DOMScenesProps {
+export function createDOMSceneBinderProps(): DOMSceneBinderProps {
   const root = document.createElement("div");
   const gameAction = createStreamSource();
   const scene = null;

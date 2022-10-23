@@ -5,7 +5,7 @@ import type {
   LoadingProgress,
 } from "../../../../resource/loading-actions";
 import type { Stream, Unsubscriber } from "../../../../stream/stream";
-import type { DOMScene } from "../../dom-scene";
+import type { DOMScene } from "../dom-scene";
 import { LoadingPresentation } from "./presentation";
 
 /**

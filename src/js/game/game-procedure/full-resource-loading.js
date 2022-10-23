@@ -1,7 +1,7 @@
 // @flow
 import { fullResourceLoadingFrom } from "../../resource";
-import { loadingConnector } from "../dom-scenes/action-connector/loading-connector";
-import { Loading } from "../dom-scenes/scene/loading";
+import { loadingConnector } from "../dom-scene-binder/action-connector/loading-connector";
+import { Loading } from "../dom-scene-binder/scene/loading";
 import type { GameProps } from "../game-props";
 import { reflectSoundVolume } from "../reflect-sound-volume";
 

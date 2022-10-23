@@ -10,7 +10,7 @@ import type {
 } from "../../../../stream/stream";
 import { createStreamSource } from "../../../../stream/stream";
 import { domUuid } from "../../../../uuid/dom-uuid";
-import type { DOMScene } from "../../dom-scene";
+import type { DOMScene } from "../dom-scene";
 import { ArmdozerBustShotContainer } from "./armdozer-bust-shot";
 import { ArmdozerSelector } from "./armdozer-selector";
 import { getDedicatedPilot } from "./dedicated-pilot";

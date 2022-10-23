@@ -1,5 +1,5 @@
 // @flow
-import type { DOMScene } from "../../dom-scene";
+import type { DOMScene } from "../dom-scene";
 import type { CreatePropsParams, TutorialTitleProps } from "./props";
 import { createTutorialTitleProps } from "./props";
 

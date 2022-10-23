@@ -1,7 +1,7 @@
 // @flow
 
-import { Config } from "../src/js/game/dom-scenes/scene/config";
-import { ConfigChangedDialog } from "../src/js/game/dom-scenes/scene/config/config-changed-dialog";
+import { Config } from "../src/js/game/dom-scene-binder/scene/config";
+import { ConfigChangedDialog } from "../src/js/game/dom-scene-binder/scene/config/config-changed-dialog";
 import type { DOMStubStory } from "./stub/dom-stub";
 import { domStub } from "./stub/dom-stub";
 

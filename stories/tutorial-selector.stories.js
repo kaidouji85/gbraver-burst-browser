@@ -1,5 +1,5 @@
 // @flow
-import { TutorialSelector } from "../src/js/game/dom-scenes/scene/tutorial-selector/tutorial-selector";
+import { TutorialSelector } from "../src/js/game/dom-scene-binder/scene/tutorial-selector/tutorial-selector";
 import type { DOMStubStory } from "./stub/dom-stub";
 import { domStub } from "./stub/dom-stub";
 

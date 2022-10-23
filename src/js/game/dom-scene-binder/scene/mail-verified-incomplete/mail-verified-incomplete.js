@@ -11,7 +11,7 @@ import type {
 } from "../../../../stream/stream";
 import { createStreamSource } from "../../../../stream/stream";
 import { domUuid } from "../../../../uuid/dom-uuid";
-import type { DOMScene } from "../../dom-scene";
+import type { DOMScene } from "../dom-scene";
 
 /** ルート要素 class属性 */
 const ROOT_CLASS = "mail-verified-incomplete";

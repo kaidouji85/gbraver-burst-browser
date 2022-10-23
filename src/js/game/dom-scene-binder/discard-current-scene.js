@@ -1,12 +1,12 @@
 // @flow
-import type { DOMScenesProps } from "./props";
+import type { DOMSceneBinderProps } from "./props";
 
 /**
  * 現在表示しているシーンを破棄するヘルパー関数
  *
- * @param props DomScenesプロパティ
+ * @param props DomSceneBinderプロパティ
  */
-export function discardCurrentScene(props: DOMScenesProps): void {
+export function discardCurrentScene(props: DOMSceneBinderProps): void {
   props.scene && props.scene.destructor();
   props.scene && props.scene.getRootHTMLElement().remove();
   props.scene = null;
