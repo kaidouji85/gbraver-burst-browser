@@ -5,7 +5,6 @@ import type { Stream, StreamSource, Unsubscriber } from "../../stream/stream";
 import { createStreamSource } from "../../stream/stream";
 import type { GameAction } from "../game-actions";
 import type { DomDialogActionConnector } from "./action-connector/dom-dialog-action-connector";
-import { DeleteAccountConsentDialog } from "./delete-account-consent/delete-account-consent-dialog";
 import type { DOMDialog } from "./dialog";
 import { DifficultyDialog } from "./difficulty/difficulty-dialog";
 import { MatchingDialog } from "./matching/matching-dialog";
@@ -43,28 +42,6 @@ export class DOMDialogs {
     this.#unsubscribers = connector(dialog, this.#gameAction);
     this.#root.appendChild(dialog.getRootHTMLElement());
     this.#dialog = dialog;
-  }
-
-  /**
-   * @deprecated
-   * アカウント削除同意ダイアログを表示する
-   *
-   * @param resources リソース管理オブジェクト
-   */
-  startDeleteAccountConsent(resources: Resources): void {
-    this.#removeCurrentDialog();
-
-    const deleteAccountConsent = new DeleteAccountConsentDialog(resources);
-    this.#unsubscribers = [
-      deleteAccountConsent.deleteAccountNotifier().subscribe(() => {
-        this.#gameAction.next({ type: "DeleteAccount" });
-      }),
-      deleteAccountConsent.closeDialogNotifier().subscribe(() => {
-        this.#gameAction.next({ type: "CancelAccountDeletion" });
-      }),
-    ];
-    this.#root.appendChild(deleteAccountConsent.getRootHTMLElement());
-    this.#dialog = deleteAccountConsent;
   }
 
   /**
