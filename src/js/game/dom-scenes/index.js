@@ -3,14 +3,12 @@
 import type { BGMManager } from "../../bgm/bgm-manager";
 import type { Resources } from "../../resource";
 import type { Stream } from "../../stream/stream";
-import type { GbraverBurstBrowserConfig } from "../config/browser-config";
 import type { GameAction } from "../game-actions";
 import type { DOMSceneActionConnector } from "./action-connector/dom-scene-action-connector";
 import { discardCurrentScene } from "./discard-current-scene";
 import type { DOMScene } from "./dom-scene";
 import type { DOMScenesProps } from "./props";
 import { createDOMScenesProps } from "./props";
-import { Config } from "./scene/config";
 import { NPCEnding } from "./scene/npc-ending/npc-ending";
 import type { StageTitleParam } from "./scene/stage-title/stage-title";
 import { StageTitle } from "./scene/stage-title/stage-title";
@@ -18,7 +16,6 @@ import type { TutorialStage } from "./scene/tutorial-selector/tutoria-stage-elem
 import { TutorialSelector } from "./scene/tutorial-selector/tutorial-selector";
 import type { TutorialTitleParams } from "./scene/tutorial-title";
 import { TutorialTitle } from "./scene/tutorial-title";
-import { startConfig } from "./start/start-config";
 import { startNPCEnding } from "./start/start-npc-ending";
 import { startStageTitle } from "./start/start-stage-title";
 import { startTutorialSelector } from "./start/start-tutorial-selector";
@@ -90,18 +87,6 @@ export class DOMScenes {
     bgm: BGMManager
   ): Promise<NPCEnding> {
     return await startNPCEnding(this.#props, resources, bgm);
-  }
-
-  /**
-   * @deprecated
-   * 設定画面を開始する
-   *
-   * @param resources リソース管理オブジェクト
-   * @param config Gブレイバーバースト ブラウザ側設定項目
-   * @return 開始された設定画面
-   */
-  startConfig(resources: Resources, config: GbraverBurstBrowserConfig): Config {
-    return startConfig(this.#props, resources, config);
   }
 
   /**

@@ -1,4 +1,6 @@
 // @flow
+import { configConnector } from "../dom-scenes/action-connector/config-connector";
+import { Config } from "../dom-scenes/scene/config";
 import type { GameProps } from "../game-props";
 
 /**
@@ -12,6 +14,7 @@ export async function onConfigChangeStart(
 ): Promise<void> {
   await props.fader.fadeOut();
   const config = await props.config.load();
-  props.domScenes.startConfig(props.resources, config);
+  const scene = new Config(props.resources, config);
+  props.domScenes.bind(scene, configConnector);
   await props.fader.fadeIn();
 }
