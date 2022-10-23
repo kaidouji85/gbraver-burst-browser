@@ -4,6 +4,9 @@ import { NPCBattleRoom } from "../../npc/npc-battle-room";
 import { BattleScene } from "../../td-scenes/battle";
 import { waitAnimationFrame } from "../../wait/wait-animation-frame";
 import { waitTime } from "../../wait/wait-time";
+import { tutorialTitleConnector } from "../dom-scenes/action-connector/tutorial-title-connector";
+import { MAX_LOADING_TIME } from "../dom-scenes/max-loading-time";
+import { TutorialTitle } from "../dom-scenes/scene/tutorial-title";
 import type { GameProps } from "../game-props";
 import { battleSceneConnector } from "../td-scene-binder/battle-scene-connector";
 import type { TutorialStage } from "../tutorial-stages";
@@ -23,11 +26,13 @@ export async function startTutorial(
 ): Promise<void> {
   const npcBattle = new NPCBattleRoom(stage.player, stage.npc);
   await props.fader.fadeOut();
-  await props.domScenes.startTutorialTitle({
+  const scene = new TutorialTitle({
     resources: props.resources,
     level,
     title: stage.title,
   });
+  props.domScenes.bind(scene, tutorialTitleConnector);
+  await Promise.race([scene.waitUntilLoaded(), waitTime(MAX_LOADING_TIME)]);
   await props.fader.fadeIn();
 
   const startTutorialStageTime = Date.now();

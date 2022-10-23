@@ -7,9 +7,6 @@ import { discardCurrentScene } from "./discard-current-scene";
 import type { DOMScene } from "./dom-scene";
 import type { DOMScenesProps } from "./props";
 import { createDOMScenesProps } from "./props";
-import type { TutorialTitleParams } from "./scene/tutorial-title";
-import { TutorialTitle } from "./scene/tutorial-title";
-import { startTutorialTitle } from "./start/start-tutorial-title";
 
 /**
  * HTMLオンリーで生成されたシーンを集めたもの
@@ -51,19 +48,6 @@ export class DOMScenes {
    */
   gameActionNotifier(): Stream<GameAction> {
     return this.#props.gameAction;
-  }
-
-  /**
-   * @deprecated
-   * チュートリアルタイトル画面を開始する
-   *
-   * @param params 画面パラメータ
-   * @return 開始されたチュートリアルタイトル画面
-   */
-  async startTutorialTitle(
-    params: TutorialTitleParams
-  ): Promise<TutorialTitle> {
-    return await startTutorialTitle(this.#props, params);
   }
 
   /**

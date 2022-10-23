@@ -7,8 +7,6 @@ import {
   TutorialStagesInDevelopment,
 } from "../tutorial-stages";
 
-
-
 /**
  * チュートリアルステージセレクタを開始するヘルパー関数
  *
