@@ -7,6 +7,7 @@ import type { NPCBattleCourseDifficulty } from "../../game/npc-battle-courses";
 import type { Resources } from "../../resource";
 import type { Stream, Unsubscriber } from "../../stream/stream";
 import type { DOMDialog } from "../dialog";
+import { onEasyPush } from "./listeners/on-easy-push";
 import type { DifficultyDialogProps } from "./props";
 import { createDifficultyDialogProps } from "./props";
 
@@ -32,7 +33,7 @@ export class DifficultyDialog implements DOMDialog {
         this.#onCloserPush(action);
       }),
       pushDOMStream(this.#props.easy).subscribe((action) => {
-        this.#onEasyPush(action);
+        onEasyPush(this.#props, action);
       }),
       pushDOMStream(this.#props.normal).subscribe((action) => {
         this.#onNormalPush(action);
@@ -74,21 +75,6 @@ export class DifficultyDialog implements DOMDialog {
    */
   closeDialogNotifier(): Stream<void> {
     return this.#props.closeDialog;
-  }
-
-  /**
-   * Easyが押された際の処理
-   *
-   * @param action アクション
-   */
-  #onEasyPush(action: PushDOM): void {
-    action.event.preventDefault();
-    action.event.stopPropagation();
-    this.#props.exclusive.execute(async () => {
-      this.#props.pushButton.play();
-      await pop(this.#props.easyButton);
-      this.#props.selectionComplete.next("Easy");
-    });
   }
 
   /**
