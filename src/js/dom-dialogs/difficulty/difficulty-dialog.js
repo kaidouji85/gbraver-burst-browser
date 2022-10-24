@@ -8,6 +8,7 @@ import type { Resources } from "../../resource";
 import type { Stream, Unsubscriber } from "../../stream/stream";
 import type { DOMDialog } from "../dialog";
 import { onEasyPush } from "./listeners/on-easy-push";
+import { onHardPush } from "./listeners/on-hard-push";
 import { onNormalPush } from "./listeners/on-nprmal-push";
 import type { DifficultyDialogProps } from "./props";
 import { createDifficultyDialogProps } from "./props";
@@ -40,7 +41,7 @@ export class DifficultyDialog implements DOMDialog {
         onNormalPush(this.#props, action);
       }),
       pushDOMStream(this.#props.hard).subscribe((action) => {
-        this.#onHardPush(action);
+        onHardPush(this.#props, action);
       }),
       pushDOMStream(this.#props.veryHard).subscribe((action) => {
         this.#onVeryHardPush(action);
@@ -76,21 +77,6 @@ export class DifficultyDialog implements DOMDialog {
    */
   closeDialogNotifier(): Stream<void> {
     return this.#props.closeDialog;
-  }
-
-  /**
-   * Hardが押された際の処理
-   *
-   * @param action アクション
-   */
-  #onHardPush(action: PushDOM): void {
-    action.event.preventDefault();
-    action.event.stopPropagation();
-    this.#props.exclusive.execute(async () => {
-      this.#props.pushButton.play();
-      await pop(this.#props.hardButton);
-      this.#props.selectionComplete.next("Hard");
-    });
   }
 
   /**
