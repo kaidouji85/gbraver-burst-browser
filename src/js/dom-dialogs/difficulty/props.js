@@ -25,17 +25,17 @@ export type DifficultyDialogProps = {
   easy: HTMLElement,
   /** Easyボタン */
   easyButton: HTMLElement,
-  /** Normal */
+  /** Normalロゴ */
   normal: HTMLElement,
   /** Normalボタン */
   normalButton: HTMLElement,
-  /** Hard */
+  /** Hardロゴ */
   hard: HTMLElement,
   /** Hardボタン */
   hardButton: HTMLElement,
-  /** Very Hard */
+  /** VeryHardロゴ */
   veryHard: HTMLElement,
-  /** Vert Hard ボタン */
+  /** VertHardボタン */
   veryHardButton: HTMLElement,
   /** 排他制御 */
   exclusive: Exclusive,
