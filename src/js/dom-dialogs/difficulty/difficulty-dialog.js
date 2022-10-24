@@ -1,39 +1,21 @@
 // @flow
-import { Howl } from "howler";
 
 import { pop } from "../../dom/animation";
 import type { PushDOM } from "../../dom/event-stream";
 import { pushDOMStream } from "../../dom/event-stream";
-import { Exclusive } from "../../exclusive/exclusive";
 import type { NPCBattleCourseDifficulty } from "../../game/npc-battle-courses";
 import type { Resources } from "../../resource";
-import { SOUND_IDS } from "../../resource/sound";
-import type { Stream, StreamSource, Unsubscriber } from "../../stream/stream";
-import { createStreamSource } from "../../stream/stream";
-import { domUuid } from "../../uuid/dom-uuid";
+import type { Stream, Unsubscriber } from "../../stream/stream";
 import type { DOMDialog } from "../dialog";
-import { ROOT_CLASS } from "./dom/class-name";
-import { extractElements } from "./dom/elements";
-import { rootInnerHTML } from "./dom/root-inner-html";
+import type { DifficultyDialogProps } from "./props";
+import { createDifficultyDialogProps } from "./props";
 
 /** 難易度選択ダイアログ */
 export class DifficultyDialog implements DOMDialog {
-  #root: HTMLElement;
-  #closer: HTMLElement;
-  #easy: HTMLElement;
-  #easyButton: HTMLElement;
-  #normal: HTMLElement;
-  #normalButton: HTMLElement;
-  #hard: HTMLElement;
-  #hardButton: HTMLElement;
-  #veryHard: HTMLElement;
-  #veryHardButton: HTMLElement;
-  #exclusive: Exclusive;
-  #selectionComplete: StreamSource<NPCBattleCourseDifficulty>;
-  #closeDialog: StreamSource<void>;
+  /** プロパティ */
+  #props: DifficultyDialogProps;
+  /** アンサブスクライバ */
   #unsubscribers: Unsubscriber[];
-  #changeValue: typeof Howl;
-  #pushButton: typeof Howl;
 
   /**
    * コンストラクタ
@@ -41,62 +23,27 @@ export class DifficultyDialog implements DOMDialog {
    * @param resources リソース管理オブジェクト
    */
   constructor(resources: Resources) {
-    const ids = {
-      backGround: domUuid(),
-      closer: domUuid(),
-      easy: domUuid(),
-      easyButton: domUuid(),
-      normal: domUuid(),
-      normalButton: domUuid(),
-      hard: domUuid(),
-      hardButton: domUuid(),
-      veryHard: domUuid(),
-      veryHardButton: domUuid(),
-    };
-    this.#root = document.createElement("div");
-    this.#root.className = ROOT_CLASS;
-    this.#root.innerHTML = rootInnerHTML(resources, ids);
-
-    const elements = extractElements(this.#root, ids);
-    this.#closer = elements.closer;
-    this.#easy = elements.easy;
-    this.#easyButton = elements.easyButton;
-    this.#normal = elements.normal;
-    this.#normalButton = elements.normalButton;
-    this.#hard = elements.hard;
-    this.#hardButton = elements.hardButton;
-    this.#veryHard = elements.veryHard;
-    this.#veryHardButton = elements.veryHardButton;
+    this.#props = createDifficultyDialogProps(resources);
     this.#unsubscribers = [
-      pushDOMStream(elements.backGround).subscribe((action) => {
+      pushDOMStream(this.#props.backGround).subscribe((action) => {
         this.#onBackGroundPush(action);
       }),
-      pushDOMStream(this.#closer).subscribe((action) => {
+      pushDOMStream(this.#props.closer).subscribe((action) => {
         this.#onCloserPush(action);
       }),
-      pushDOMStream(this.#easy).subscribe((action) => {
+      pushDOMStream(this.#props.easy).subscribe((action) => {
         this.#onEasyPush(action);
       }),
-      pushDOMStream(this.#normal).subscribe((action) => {
+      pushDOMStream(this.#props.normal).subscribe((action) => {
         this.#onNormalPush(action);
       }),
-      pushDOMStream(this.#hard).subscribe((action) => {
+      pushDOMStream(this.#props.hard).subscribe((action) => {
         this.#onHardPush(action);
       }),
-      pushDOMStream(this.#veryHard).subscribe((action) => {
+      pushDOMStream(this.#props.veryHard).subscribe((action) => {
         this.#onVeryHardPush(action);
       }),
     ];
-
-    this.#selectionComplete = createStreamSource();
-    this.#closeDialog = createStreamSource();
-    this.#exclusive = new Exclusive();
-    this.#changeValue =
-      resources.sounds.find((v) => v.id === SOUND_IDS.CHANGE_VALUE)?.sound ??
-      new Howl();
-    this.#pushButton =
-      resources.sounds.find((v) => v.id === SOUND_IDS.PUSH_BUTTON)?.sound ??
-      new Howl();
   }
 
   /** @override */
@@ -108,7 +55,7 @@ export class DifficultyDialog implements DOMDialog {
 
   /** @override */
   getRootHTMLElement(): HTMLElement {
-    return this.#root;
+    return this.#props.root;
   }
 
   /**
@@ -117,7 +64,7 @@ export class DifficultyDialog implements DOMDialog {
    * @return 通知ストリーム
    */
   selectionCompleteNotifier(): Stream<NPCBattleCourseDifficulty> {
-    return this.#selectionComplete;
+    return this.#props.selectionComplete;
   }
 
   /**
@@ -126,7 +73,7 @@ export class DifficultyDialog implements DOMDialog {
    * @return 通知ストリーム
    */
   closeDialogNotifier(): Stream<void> {
-    return this.#closeDialog;
+    return this.#props.closeDialog;
   }
 
   /**
@@ -137,10 +84,10 @@ export class DifficultyDialog implements DOMDialog {
   #onEasyPush(action: PushDOM): void {
     action.event.preventDefault();
     action.event.stopPropagation();
-    this.#exclusive.execute(async () => {
-      this.#pushButton.play();
-      await pop(this.#easyButton);
-      this.#selectionComplete.next("Easy");
+    this.#props.exclusive.execute(async () => {
+      this.#props.pushButton.play();
+      await pop(this.#props.easyButton);
+      this.#props.selectionComplete.next("Easy");
     });
   }
 
@@ -152,10 +99,10 @@ export class DifficultyDialog implements DOMDialog {
   #onNormalPush(action: PushDOM): void {
     action.event.preventDefault();
     action.event.stopPropagation();
-    this.#exclusive.execute(async () => {
-      this.#pushButton.play();
-      await pop(this.#normalButton);
-      this.#selectionComplete.next("Normal");
+    this.#props.exclusive.execute(async () => {
+      this.#props.pushButton.play();
+      await pop(this.#props.normalButton);
+      this.#props.selectionComplete.next("Normal");
     });
   }
 
@@ -167,10 +114,10 @@ export class DifficultyDialog implements DOMDialog {
   #onHardPush(action: PushDOM): void {
     action.event.preventDefault();
     action.event.stopPropagation();
-    this.#exclusive.execute(async () => {
-      this.#pushButton.play();
-      await pop(this.#hardButton);
-      this.#selectionComplete.next("Hard");
+    this.#props.exclusive.execute(async () => {
+      this.#props.pushButton.play();
+      await pop(this.#props.hardButton);
+      this.#props.selectionComplete.next("Hard");
     });
   }
 
@@ -182,10 +129,10 @@ export class DifficultyDialog implements DOMDialog {
   #onVeryHardPush(action: PushDOM): void {
     action.event.preventDefault();
     action.event.stopPropagation();
-    this.#exclusive.execute(async () => {
-      this.#pushButton.play();
-      await pop(this.#veryHardButton);
-      this.#selectionComplete.next("VeryHard");
+    this.#props.exclusive.execute(async () => {
+      this.#props.pushButton.play();
+      await pop(this.#props.veryHardButton);
+      this.#props.selectionComplete.next("VeryHard");
     });
   }
 
@@ -197,10 +144,10 @@ export class DifficultyDialog implements DOMDialog {
   #onCloserPush(action: PushDOM): void {
     action.event.preventDefault();
     action.event.stopPropagation();
-    this.#exclusive.execute(async () => {
-      this.#changeValue.play();
-      await pop(this.#closer, 1.3);
-      this.#closeDialog.next();
+    this.#props.exclusive.execute(async () => {
+      this.#props.changeValue.play();
+      await pop(this.#props.closer, 1.3);
+      this.#props.closeDialog.next();
     });
   }
 
@@ -212,9 +159,9 @@ export class DifficultyDialog implements DOMDialog {
   #onBackGroundPush(action: PushDOM): void {
     action.event.preventDefault();
     action.event.stopPropagation();
-    this.#exclusive.execute(async () => {
-      await this.#changeValue.play();
-      this.#closeDialog.next();
+    this.#props.exclusive.execute(async () => {
+      await this.#props.changeValue.play();
+      this.#props.closeDialog.next();
     });
   }
 }

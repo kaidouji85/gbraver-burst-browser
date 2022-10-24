@@ -19,6 +19,8 @@ export type DifficultyDialogProps = {
   root: HTMLElement,
   /** クロージャHTML要素 */
   closer: HTMLElement,
+  /** 背景HTML要素 */
+  backGround: HTMLElement,
   /** Easyロゴ */
   easy: HTMLElement,
   /** Easyボタン */
@@ -74,6 +76,7 @@ export function createDifficultyDialogProps(
 
   const elements = extractElements(root, ids);
   const closer = elements.closer;
+  const backGround = elements.backGround;
   const easy = elements.easy;
   const easyButton = elements.easyButton;
   const normal = elements.normal;
@@ -95,6 +98,7 @@ export function createDifficultyDialogProps(
   return {
     root,
     closer,
+    backGround,
     easy,
     easyButton,
     normal,
