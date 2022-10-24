@@ -1,11 +1,11 @@
 // @flow
 
-import type { PushDOM } from "../../dom/event-stream";
 import { pushDOMStream } from "../../dom/event-stream";
 import type { NPCBattleCourseDifficulty } from "../../game/npc-battle-courses";
 import type { Resources } from "../../resource";
 import type { Stream, Unsubscriber } from "../../stream/stream";
 import type { DOMDialog } from "../dialog";
+import { onBackGroundPush } from "./listeners/on-back-ground-push";
 import { onCloserPush } from "./listeners/on-closer-push";
 import { onEasyPush } from "./listeners/on-easy-push";
 import { onHardPush } from "./listeners/on-hard-push";
@@ -30,7 +30,7 @@ export class DifficultyDialog implements DOMDialog {
     this.#props = createDifficultyDialogProps(resources);
     this.#unsubscribers = [
       pushDOMStream(this.#props.backGround).subscribe((action) => {
-        this.#onBackGroundPush(action);
+        onBackGroundPush(this.#props, action);
       }),
       pushDOMStream(this.#props.closer).subscribe((action) => {
         onCloserPush(this.#props, action);
@@ -78,19 +78,5 @@ export class DifficultyDialog implements DOMDialog {
    */
   closeDialogNotifier(): Stream<void> {
     return this.#props.closeDialog;
-  }
-
-  /**
-   * バックグラウンドが押された際の処理
-   *
-   * @param action アクション
-   */
-  #onBackGroundPush(action: PushDOM): void {
-    action.event.preventDefault();
-    action.event.stopPropagation();
-    this.#props.exclusive.execute(async () => {
-      await this.#props.changeValue.play();
-      this.#props.closeDialog.next();
-    });
   }
 }
