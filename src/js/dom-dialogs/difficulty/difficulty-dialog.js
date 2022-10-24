@@ -1,16 +1,10 @@
 // @flow
 
-import { pushDOMStream } from "../../dom/event-stream";
 import type { NPCBattleCourseDifficulty } from "../../game/npc-battle-courses";
 import type { Resources } from "../../resource";
 import type { Stream, Unsubscriber } from "../../stream/stream";
 import type { DOMDialog } from "../dialog";
-import { onBackGroundPush } from "./listeners/on-back-ground-push";
-import { onCloserPush } from "./listeners/on-closer-push";
-import { onEasyPush } from "./listeners/on-easy-push";
-import { onHardPush } from "./listeners/on-hard-push";
-import { onNormalPush } from "./listeners/on-normal-push";
-import { onVeryHardPush } from "./listeners/on-very-hard-push";
+import { bindEventListeners } from "./listeners";
 import type { DifficultyDialogProps } from "./props";
 import { createDifficultyDialogProps } from "./props";
 
@@ -28,26 +22,7 @@ export class DifficultyDialog implements DOMDialog {
    */
   constructor(resources: Resources) {
     this.#props = createDifficultyDialogProps(resources);
-    this.#unsubscribers = [
-      pushDOMStream(this.#props.backGround).subscribe((action) => {
-        onBackGroundPush(this.#props, action);
-      }),
-      pushDOMStream(this.#props.closer).subscribe((action) => {
-        onCloserPush(this.#props, action);
-      }),
-      pushDOMStream(this.#props.easy).subscribe((action) => {
-        onEasyPush(this.#props, action);
-      }),
-      pushDOMStream(this.#props.normal).subscribe((action) => {
-        onNormalPush(this.#props, action);
-      }),
-      pushDOMStream(this.#props.hard).subscribe((action) => {
-        onHardPush(this.#props, action);
-      }),
-      pushDOMStream(this.#props.veryHard).subscribe((action) => {
-        onVeryHardPush(this.#props, action);
-      }),
-    ];
+    this.#unsubscribers = bindEventListeners(this.#props);
   }
 
   /** @override */
