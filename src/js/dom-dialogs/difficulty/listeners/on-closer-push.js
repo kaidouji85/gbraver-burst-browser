@@ -5,20 +5,20 @@ import type { PushDOM } from "../../../dom/event-stream";
 import type { DifficultyDialogProps } from "../props";
 
 /**
- * VeryHardが押された際の処理
+ * 閉じるボタンが押された際の処理
  *
  * @param props ダイアログプロパティ
  * @param action アクション
  */
-export function onVeryHardPush(
+export function onCloserPush(
   props: DifficultyDialogProps,
   action: PushDOM
 ): void {
   action.event.preventDefault();
   action.event.stopPropagation();
   props.exclusive.execute(async () => {
-    props.pushButton.play();
-    await pop(props.veryHardButton);
-    props.selectionComplete.next("VeryHard");
+    props.changeValue.play();
+    await pop(props.closer, 1.3);
+    props.closeDialog.next();
   });
 }

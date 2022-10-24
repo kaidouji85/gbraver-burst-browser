@@ -1,12 +1,12 @@
 // @flow
 
-import { pop } from "../../dom/animation";
 import type { PushDOM } from "../../dom/event-stream";
 import { pushDOMStream } from "../../dom/event-stream";
 import type { NPCBattleCourseDifficulty } from "../../game/npc-battle-courses";
 import type { Resources } from "../../resource";
 import type { Stream, Unsubscriber } from "../../stream/stream";
 import type { DOMDialog } from "../dialog";
+import { onCloserPush } from "./listeners/on-closer-push";
 import { onEasyPush } from "./listeners/on-easy-push";
 import { onHardPush } from "./listeners/on-hard-push";
 import { onNormalPush } from "./listeners/on-normal-push";
@@ -33,7 +33,7 @@ export class DifficultyDialog implements DOMDialog {
         this.#onBackGroundPush(action);
       }),
       pushDOMStream(this.#props.closer).subscribe((action) => {
-        this.#onCloserPush(action);
+        onCloserPush(this.#props, action);
       }),
       pushDOMStream(this.#props.easy).subscribe((action) => {
         onEasyPush(this.#props, action);
@@ -78,21 +78,6 @@ export class DifficultyDialog implements DOMDialog {
    */
   closeDialogNotifier(): Stream<void> {
     return this.#props.closeDialog;
-  }
-
-  /**
-   * 閉じるボタンが押された際の処理
-   *
-   * @param action アクション
-   */
-  #onCloserPush(action: PushDOM): void {
-    action.event.preventDefault();
-    action.event.stopPropagation();
-    this.#props.exclusive.execute(async () => {
-      this.#props.changeValue.play();
-      await pop(this.#props.closer, 1.3);
-      this.#props.closeDialog.next();
-    });
   }
 
   /**
