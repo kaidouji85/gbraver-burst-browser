@@ -57,11 +57,8 @@ export class HUDGameObjects {
       gameObjectAction: gameObjectAction,
       maxBattery: playerInfo.armdozer.maxBattery,
       resources: resources,
-      onBatteryChange: (battery: number) => {
-        this.#battleAction.next({
-          type: "changeBattery",
-          battery: battery,
-        });
+      onBatteryChange: () => {
+        // NOP
       },
       onOkButtonPush: (event) => {
         this.#battleAction.next({
