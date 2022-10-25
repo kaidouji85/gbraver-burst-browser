@@ -60,12 +60,8 @@ export class HUDGameObjects {
       onBatteryChange: () => {
         // NOP
       },
-      onOkButtonPush: (event) => {
-        this.#battleAction.next({
-          type: "decideBattery",
-          battery: this.batterySelector.getBattery(),
-          event,
-        });
+      onOkButtonPush: () => {
+        // NOP
       },
     });
     this.burstButton = createBurstButton(
@@ -92,6 +88,19 @@ export class HUDGameObjects {
     this.drawIndicator = drawIndicator(resources, gameObjectAction);
 
     this.#unsubscribers = [
+      this.batterySelector.batteryPlusPushNotifier().subscribe(() => {
+        this.#battleAction.next({ type: "plusBattery" });
+      }),
+      this.batterySelector.batteryMinusPushNotifier().subscribe(() => {
+        this.#battleAction.next({ type: "minusBattery" });
+      }),
+      this.batterySelector.decidePushNotifier().subscribe((event) => {
+        this.#battleAction.next({
+          type: "decideBattery",
+          battery: this.batterySelector.getBattery(),
+          event,
+        });
+      }),
       this.burstButton.pushButtonNotifier().subscribe((event) => {
         this.#battleAction.next({ type: "doBurst", event });
       }),
