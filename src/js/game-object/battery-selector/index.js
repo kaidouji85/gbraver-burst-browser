@@ -37,18 +37,6 @@ type Param = {
   gameObjectAction: Stream<GameObjectAction>,
   /** 最大バッテリー */
   maxBattery: number,
-  /**
-   * @deprecated
-   * バッテリー変更時に呼ばれるのコールバック関数
-   * @param battery 変更後のバッテリー値
-   */
-  onBatteryChange: (battery: number) => void,
-  /**
-   * @deprecated
-   * 決定ボタンが押された時に呼ばれるコールバック関数
-   * @param event イベント情報
-   */
-  onOkButtonPush: (event: Event) => void,
 };
 
 /** バッテリーセレクタ */

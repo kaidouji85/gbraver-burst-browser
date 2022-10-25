@@ -57,12 +57,6 @@ export class HUDGameObjects {
       gameObjectAction: gameObjectAction,
       maxBattery: playerInfo.armdozer.maxBattery,
       resources: resources,
-      onBatteryChange: () => {
-        // NOP
-      },
-      onOkButtonPush: () => {
-        // NOP
-      },
     });
     this.burstButton = createBurstButton(
       resources,
