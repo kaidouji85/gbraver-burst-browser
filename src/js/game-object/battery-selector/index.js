@@ -5,6 +5,7 @@ import * as THREE from "three";
 
 import { all } from "../../animation/all";
 import { Animate } from "../../animation/animate";
+import { empty } from "../../animation/delay";
 import { process } from "../../animation/process";
 import type { PreRender } from "../../game-loop/pre-render";
 import type { Update } from "../../game-loop/update";
@@ -145,10 +146,15 @@ export class BatterySelector {
 
   /**
    * バッテリープラス
+   * メモリ最大値の場合は空のアニメーションを返す
    *
    * @return アニメーション
    */
   batteryPlus(): Animate {
+    if (!canBatteryPlus(this.#model)) {
+      return empty();
+    }
+
     return all(
       this.#batteryPlusPop(),
       this.#batteryChange(this.#model.battery + 1)
@@ -157,10 +163,15 @@ export class BatterySelector {
 
   /**
    * バッテリーマイナス
+   * メモリ最小値の場合は空のアニメーションを返す
    *
    * @return アニメーション
    */
   batteryMinus(): Animate {
+    if (!canBatteryMinus(this.#model)) {
+      return empty();
+    }
+
     return all(
       this.#batteryMinusPop(),
       this.#batteryChange(this.#model.battery - 1)
