@@ -1,7 +1,6 @@
 // @flow
 
 import TWEEN from "@tweenjs/tween.js";
-import { Howl } from "howler";
 import * as THREE from "three";
 
 import { all } from "../../animation/all";
@@ -9,7 +8,6 @@ import { Animate } from "../../animation/animate";
 import type { PreRender } from "../../game-loop/pre-render";
 import type { Update } from "../../game-loop/update";
 import type { Resources } from "../../resource";
-import { SOUND_IDS } from "../../resource/sound";
 import type { Stream, StreamSource, Unsubscriber } from "../../stream/stream";
 import { createStreamSource } from "../../stream/stream";
 import type { GameObjectAction } from "../action/game-object-action";
@@ -26,6 +24,8 @@ import { canBatteryMinus } from "./model/can-battery-minus";
 import { canBatteryPlus } from "./model/can-battery-plus";
 import { initialValue } from "./model/initial-value";
 import { getNeedleValue } from "./model/needle-value";
+import type { BatterySelectorSounds } from "./sounds/battery-selector-sounds";
+import { createBatterySelectorSounds } from "./sounds/battery-selector-sounds";
 import { BatterySelectorView } from "./view";
 
 /** コンストラクタのパラメータ */
@@ -56,10 +56,8 @@ export class BatterySelector {
   #model: BatterySelectorModel;
   /** ビュー */
   #view: BatterySelectorView;
-  /** 効果音ボタン押下 */
-  #pushButtonSound: typeof Howl;
-  /** 効果音値変更 */
-  #batteryChangeSound: typeof Howl;
+  /** 効果音 */
+  #sounds: BatterySelectorSounds;
   /** バッテリー変更TweenGroup */
   #batteryChangeTween: typeof TWEEN.Group;
   /** -ボタンTweenGroup */
@@ -88,20 +86,7 @@ export class BatterySelector {
     this.#decidePush = createStreamSource();
     this.#batteryMinusPush = createStreamSource();
     this.#batteryPlusPush = createStreamSource();
-
-    const pushButtonResource = param.resources.sounds.find(
-      (v) => v.id === SOUND_IDS.PUSH_BUTTON
-    );
-    this.#pushButtonSound = pushButtonResource
-      ? pushButtonResource.sound
-      : new Howl();
-
-    const batteryChangeResource = param.resources.sounds.find(
-      (v) => v.id === SOUND_IDS.CHANGE_VALUE
-    );
-    this.#batteryChangeSound = batteryChangeResource
-      ? batteryChangeResource.sound
-      : new Howl();
+    this.#sounds = createBatterySelectorSounds(param.resources);
 
     this.#unsubscriber = param.gameObjectAction.subscribe((action) => {
       if (action.type === "Update") {
@@ -172,7 +157,7 @@ export class BatterySelector {
    * @return アニメーション
    */
   decide(): Animate {
-    this.#pushButtonSound.play();
+    this.#sounds.pushButtonSound.play();
     return decide(this.#model);
   }
 
@@ -267,7 +252,7 @@ export class BatterySelector {
     this.#batteryMinusTween.update();
     this.#batteryMinusTween.removeAll();
 
-    this.#batteryChangeSound.play();
+    this.#sounds.batteryChangeSound.play();
     return batteryMinusPop(this.#model, this.#batteryMinusTween);
   }
 
@@ -280,7 +265,7 @@ export class BatterySelector {
     this.#batteryPlusTween.update();
     this.#batteryPlusTween.removeAll();
 
-    this.#batteryChangeSound.play();
+    this.#sounds.batteryChangeSound.play();
     return batteryPlusPop(this.#model, this.#batteryPlusTween);
   }
 
