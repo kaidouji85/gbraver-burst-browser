@@ -9,7 +9,8 @@ import type { PreRender } from "../../game-loop/pre-render";
 import type { Update } from "../../game-loop/update";
 import type { Resources } from "../../resource";
 import { SOUND_IDS } from "../../resource/sound";
-import type { Stream, Unsubscriber } from "../../stream/stream";
+import type { Stream, StreamSource, Unsubscriber } from "../../stream/stream";
+import { createStreamSource } from "../../stream/stream";
 import type { GameObjectAction } from "../action/game-object-action";
 import { batteryMinusPop } from "./animation/battery-minus-pop";
 import { batteryPlusPop } from "./animation/battery-plus-pop";
@@ -58,12 +59,18 @@ export class BatterySelector {
   #pushButtonSound: typeof Howl;
   /** 効果音値変更 */
   #batteryChangeSound: typeof Howl;
-  /** 決定ボタンTweenGroup */
+  /** バッテリー変更TweenGroup */
   #batteryChangeTween: typeof TWEEN.Group;
   /** -ボタンTweenGroup */
   #batteryMinusTween: typeof TWEEN.Group;
   /** +ボタンTweenGroup */
   #batteryPlusTween: typeof TWEEN.Group;
+  /** 決定ボタン押下通知ストリーム */
+  #okButtonPush: StreamSource<Event>;
+  /** +ボタン押下通知ストリーム */
+  #plusButtonPush: StreamSource<void>;
+  /** -ボタン押下通知ストリーム */
+  #minusButtonPush: StreamSource<void>;
   /** アンサブスクライバ */
   #unsubscriber: Unsubscriber;
 
@@ -77,6 +84,9 @@ export class BatterySelector {
     this.#batteryChangeTween = new TWEEN.Group();
     this.#batteryMinusTween = new TWEEN.Group();
     this.#batteryPlusTween = new TWEEN.Group();
+    this.#okButtonPush = createStreamSource();
+    this.#minusButtonPush = createStreamSource();
+    this.#plusButtonPush = createStreamSource();
 
     const pushButtonResource = param.resources.sounds.find(
       (v) => v.id === SOUND_IDS.PUSH_BUTTON
@@ -131,7 +141,9 @@ export class BatterySelector {
     });
   }
 
-  /** デストラクタ */
+  /**
+   * デストラクタ相当の処理
+   */
   destructor(): void {
     this.#view.destructor();
     this.#unsubscriber.unsubscribe();
@@ -176,6 +188,33 @@ export class BatterySelector {
   /** シーンに追加するthree.jsオブジェクトを取得する */
   getObject3D(): typeof THREE.Object3D {
     return this.#view.getObject3D();
+  }
+
+  /**
+   * 決定ボタン押下ストリーム
+   *
+   * @return 通知ストリーム
+   */
+  okButtonPushNotifier(): Stream<Event> {
+    return this.#okButtonPush;
+  }
+
+  /**
+   * +ボタン押下ストリーム
+   *
+   * @return 通知ストリーム
+   */
+  plusButtonPushNotifier(): Stream<void> {
+    return this.#plusButtonPush;
+  }
+
+  /**
+   * -ボタン押下ストリーム
+   *
+   * @return 通知ストリーム
+   */
+  minusButtonPushNotifier(): Stream<void> {
+    return this.#minusButtonPush;
   }
 
   /** 状態更新 */
