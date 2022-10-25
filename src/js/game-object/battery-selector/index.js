@@ -35,11 +35,13 @@ type Param = {
   /** 最大バッテリー */
   maxBattery: number,
   /**
+   * @deprecated
    * バッテリー変更時に呼ばれるのコールバック関数
    * @param battery 変更後のバッテリー値
    */
   onBatteryChange: (battery: number) => void,
   /**
+   * @deprecated
    * 決定ボタンが押された時に呼ばれるコールバック関数
    * @param event イベント情報
    */
@@ -48,13 +50,21 @@ type Param = {
 
 /** バッテリーセレクタ */
 export class BatterySelector {
+  /** モデル */
   #model: BatterySelectorModel;
+  /** ビュー */
   #view: BatterySelectorView;
+  /** 効果音ボタン押下 */
   #pushButtonSound: typeof Howl;
+  /** 効果音値変更 */
   #batteryChangeSound: typeof Howl;
+  /** 決定ボタンTweenGroup */
   #batteryChangeTween: typeof TWEEN.Group;
+  /** -ボタンTweenGroup */
   #batteryMinusTween: typeof TWEEN.Group;
+  /** +ボタンTweenGroup */
   #batteryPlusTween: typeof TWEEN.Group;
+  /** アンサブスクライバ */
   #unsubscriber: Unsubscriber;
 
   /**
