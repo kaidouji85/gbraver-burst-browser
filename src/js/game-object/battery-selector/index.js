@@ -5,6 +5,7 @@ import * as THREE from "three";
 
 import { all } from "../../animation/all";
 import { Animate } from "../../animation/animate";
+import { process } from "../../animation/process";
 import type { PreRender } from "../../game-loop/pre-render";
 import type { Update } from "../../game-loop/update";
 import type { Resources } from "../../resource";
@@ -251,9 +252,7 @@ export class BatterySelector {
   #batteryMinusPop(): Animate {
     this.#batteryMinusTween.update();
     this.#batteryMinusTween.removeAll();
-
-    this.#sounds.batteryChangeSound.play();
-    return batteryMinusPop(this.#model, this.#batteryMinusTween);
+    return batteryMinusPop(this.#model, this.#sounds, this.#batteryMinusTween);
   }
 
   /**
@@ -264,9 +263,7 @@ export class BatterySelector {
   #batteryPlusPop(): Animate {
     this.#batteryPlusTween.update();
     this.#batteryPlusTween.removeAll();
-
-    this.#sounds.batteryChangeSound.play();
-    return batteryPlusPop(this.#model, this.#batteryPlusTween);
+    return batteryPlusPop(this.#model, this.#sounds, this.#batteryPlusTween);
   }
 
   /**
@@ -278,9 +275,12 @@ export class BatterySelector {
   #batteryChange(battery: number): Animate {
     this.#batteryChangeTween.update();
     this.#batteryChangeTween.removeAll();
-
-    this.#model.battery = battery;
     const needle = getNeedleValue(battery);
-    return changeNeedle(this.#model, this.#batteryChangeTween, needle);
+    return all(
+      process(() => {
+        this.#model.battery = battery;
+      }),
+      changeNeedle(this.#model, this.#batteryChangeTween, needle)
+    );
   }
 }
