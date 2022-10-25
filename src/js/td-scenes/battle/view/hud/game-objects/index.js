@@ -57,19 +57,6 @@ export class HUDGameObjects {
       gameObjectAction: gameObjectAction,
       maxBattery: playerInfo.armdozer.maxBattery,
       resources: resources,
-      onBatteryChange: (battery: number) => {
-        this.#battleAction.next({
-          type: "changeBattery",
-          battery: battery,
-        });
-      },
-      onOkButtonPush: (event) => {
-        this.#battleAction.next({
-          type: "decideBattery",
-          battery: this.batterySelector.getBattery(),
-          event,
-        });
-      },
     });
     this.burstButton = createBurstButton(
       resources,
@@ -95,6 +82,19 @@ export class HUDGameObjects {
     this.drawIndicator = drawIndicator(resources, gameObjectAction);
 
     this.#unsubscribers = [
+      this.batterySelector.batteryPlusPushNotifier().subscribe(() => {
+        this.#battleAction.next({ type: "plusBattery" });
+      }),
+      this.batterySelector.batteryMinusPushNotifier().subscribe(() => {
+        this.#battleAction.next({ type: "minusBattery" });
+      }),
+      this.batterySelector.decidePushNotifier().subscribe((event) => {
+        this.#battleAction.next({
+          type: "decideBattery",
+          battery: this.batterySelector.getBattery(),
+          event,
+        });
+      }),
       this.burstButton.pushButtonNotifier().subscribe((event) => {
         this.#battleAction.next({ type: "doBurst", event });
       }),
