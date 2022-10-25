@@ -101,29 +101,13 @@ export class BatterySelector {
       resources: param.resources,
       gameObjectAction: param.gameObjectAction,
       onOkPush: (event) => {
-        if (this.#model.disabled) {
-          return;
-        }
-
-        param.onOkButtonPush(event);
+        this.#onOKPush(event);
       },
       onPlusPush: () => {
-        if (this.#model.disabled || !canBatteryPlus(this.#model)) {
-          return;
-        }
-
-        this.#batteryPlusPop();
-        this.#batteryChange(this.#model.battery + 1);
-        param.onBatteryChange(this.#model.battery);
+        this.#onBatteryPlusPush();
       },
       onMinusPush: () => {
-        if (this.#model.disabled || !canBatteryMinus(this.#model)) {
-          return;
-        }
-
-        this.#batteryMinusPop();
-        this.#batteryChange(this.#model.battery - 1);
-        param.onBatteryChange(this.#model.battery);
+        this.#onBatteryMinusPush();
       },
     });
   }
@@ -242,6 +226,38 @@ export class BatterySelector {
   /** プリレンダー */
   #preRender(action: PreRender): void {
     this.#view.engage(this.#model, action);
+  }
+
+  /**
+   * 決定ボタン押下時の処理
+   *
+   * @param event イベント
+   */
+  #onOKPush(event: Event): void {
+    if (this.#model.disabled) {
+      return;
+    }
+    this.#decidePush.next(event);
+  }
+
+  /**
+   * バッテリープラスボタン押下時の処理
+   */
+  #onBatteryPlusPush(): void {
+    if (this.#model.disabled || !canBatteryPlus(this.#model)) {
+      return;
+    }
+    this.#batteryPlusPush.next();
+  }
+
+  /**
+   * バッテリーマイナスボタン押下時の処理
+   */
+  #onBatteryMinusPush(): void {
+    if (this.#model.disabled || !canBatteryMinus(this.#model)) {
+      return;
+    }
+    this.#batteryMinusPush.next();
   }
 
   /**
