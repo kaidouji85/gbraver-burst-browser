@@ -3,6 +3,7 @@
 import TWEEN from "@tweenjs/tween.js";
 import { Howl } from "howler";
 import * as THREE from "three";
+import {all} from "../../animation/all";
 
 import { Animate } from "../../animation/animate";
 import type { PreRender } from "../../game-loop/pre-render";
@@ -66,11 +67,11 @@ export class BatterySelector {
   /** +ボタンTweenGroup */
   #batteryPlusTween: typeof TWEEN.Group;
   /** 決定ボタン押下通知ストリーム */
-  #okButtonPush: StreamSource<Event>;
-  /** +ボタン押下通知ストリーム */
-  #plusButtonPush: StreamSource<void>;
-  /** -ボタン押下通知ストリーム */
-  #minusButtonPush: StreamSource<void>;
+  #decidePush: StreamSource<Event>;
+  /** バッテリープラスボタン押下通知ストリーム */
+  #batteryPlusPush: StreamSource<void>;
+  /** バッテリーマイナスボタン押下通知ストリーム */
+  #batteryMinusPush: StreamSource<void>;
   /** アンサブスクライバ */
   #unsubscriber: Unsubscriber;
 
@@ -84,9 +85,9 @@ export class BatterySelector {
     this.#batteryChangeTween = new TWEEN.Group();
     this.#batteryMinusTween = new TWEEN.Group();
     this.#batteryPlusTween = new TWEEN.Group();
-    this.#okButtonPush = createStreamSource();
-    this.#minusButtonPush = createStreamSource();
-    this.#plusButtonPush = createStreamSource();
+    this.#decidePush = createStreamSource();
+    this.#batteryMinusPush = createStreamSource();
+    this.#batteryPlusPush = createStreamSource();
 
     const pushButtonResource = param.resources.sounds.find(
       (v) => v.id === SOUND_IDS.PUSH_BUTTON
@@ -175,9 +176,37 @@ export class BatterySelector {
     return decide(this.#model);
   }
 
-  /** バッテリーセレクタを閉じる */
+  /**
+   * バッテリーセレクタを閉じる
+   *
+   * @return アニメーション
+   */
   close(): Animate {
     return close(this.#model);
+  }
+
+  /**
+   * バッテリープラス
+   *
+   * @return アニメーション
+   */
+  batteryPlus(): Animate {
+    return all(
+      this.#batteryPlusPop(),
+      this.#batteryChange(this.#model.battery + 1)
+    );
+  }
+
+  /**
+   * バッテリーマイナス
+   *
+   * @return アニメーション
+   */
+  batteryMinus(): Animate {
+    return all(
+      this.#batteryMinusPop(),
+      this.#batteryChange(this.#model.battery - 1)
+    );
   }
 
   /** 現在のバッテリー値を取得する */
@@ -195,26 +224,26 @@ export class BatterySelector {
    *
    * @return 通知ストリーム
    */
-  okButtonPushNotifier(): Stream<Event> {
-    return this.#okButtonPush;
+  decidePushNotifier(): Stream<Event> {
+    return this.#decidePush;
   }
 
   /**
-   * +ボタン押下ストリーム
+   * バッテリープラスボタン押下ストリーム
    *
    * @return 通知ストリーム
    */
-  plusButtonPushNotifier(): Stream<void> {
-    return this.#plusButtonPush;
+  batteryPlusPushNotifier(): Stream<void> {
+    return this.#batteryPlusPush;
   }
 
   /**
-   * -ボタン押下ストリーム
+   * バッテリーマイナスボタン押下ストリーム
    *
    * @return 通知ストリーム
    */
-  minusButtonPushNotifier(): Stream<void> {
-    return this.#minusButtonPush;
+  batteryMinusPushNotifier(): Stream<void> {
+    return this.#batteryMinusPush;
   }
 
   /** 状態更新 */
@@ -231,37 +260,42 @@ export class BatterySelector {
 
   /**
    * バッテリーマイナスボタン ポップ
+   *
+   * @return アニメーション
    */
-  #batteryMinusPop(): void {
+  #batteryMinusPop(): Animate {
     this.#batteryMinusTween.update();
     this.#batteryMinusTween.removeAll();
 
     this.#batteryChangeSound.play();
-    batteryMinusPop(this.#model, this.#batteryMinusTween).play();
+    return batteryMinusPop(this.#model, this.#batteryMinusTween);
   }
 
   /**
    * バッテリープラスボタン ポップ
+   *
+   * @return アニメーション
    */
-  #batteryPlusPop(): void {
+  #batteryPlusPop(): Animate {
     this.#batteryPlusTween.update();
     this.#batteryPlusTween.removeAll();
 
     this.#batteryChangeSound.play();
-    batteryPlusPop(this.#model, this.#batteryPlusTween).play();
+    return batteryPlusPop(this.#model, this.#batteryPlusTween);
   }
 
   /**
    * バッテリー値を変更するヘルパー関数
    *
    * @param battery 変更するバッテリー値
+   * @return アニメーション
    */
-  #batteryChange(battery: number): void {
+  #batteryChange(battery: number): Animate {
     this.#batteryChangeTween.update();
     this.#batteryChangeTween.removeAll();
 
     this.#model.battery = battery;
     const needle = getNeedleValue(battery);
-    changeNeedle(this.#model, this.#batteryChangeTween, needle).play();
+    return changeNeedle(this.#model, this.#batteryChangeTween, needle);
   }
 }
