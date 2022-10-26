@@ -9,6 +9,7 @@ import {
   attentionBatterySelector,
   attentionBurstButton,
   attentionPilotButton,
+  unAttentionAllButtons,
   unattentionBatterySelector,
   unattentionBurstButton,
   unattentionPilotButton,
@@ -25,6 +26,7 @@ export const focusInBatterySelector = async (
   props: CustomBattleEventProps,
   caption: string[]
 ) => {
+  unAttentionAllButtons(props);
   attentionBatterySelector(props);
   invisibleAllMessageWindows(props);
   activeNearBatterySelectorMessageWindow(props);
@@ -55,6 +57,7 @@ export const focusInBurstButton = async (
   props: CustomBattleEventProps,
   caption: string[]
 ) => {
+  unAttentionAllButtons(props);
   attentionBurstButton(props);
   invisibleAllMessageWindows(props);
   activeNearBurstButtonMessageWindow(props);
@@ -83,6 +86,7 @@ export const focusInPilotButton = async (
   props: CustomBattleEventProps,
   caption: string[]
 ) => {
+  unAttentionAllButtons(props);
   attentionPilotButton(props);
   invisibleAllMessageWindows(props);
   activeNearPilotButtonMessageWindow(props);
