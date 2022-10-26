@@ -60,3 +60,14 @@ export function attentionPilotButton(props: CustomBattleEventProps): void {
 export function unattentionPilotButton(props: CustomBattleEventProps): void {
   props.view.hud.gameObjects.pilotButton.getObject3D().position.z = 0;
 }
+
+/**
+ * 全ボタンの注目を解除する
+ *
+ * @param props イベントプロパティ
+ */
+export function unAttentionAllButtons(props: CustomBattleEventProps): void {
+  unattentionBatterySelector(props);
+  unattentionBurstButton(props);
+  unattentionPilotButton(props);
+}

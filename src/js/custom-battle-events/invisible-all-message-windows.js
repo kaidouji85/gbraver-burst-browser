@@ -14,6 +14,7 @@ export function invisibleAllMessageWindows(
   props.view.dom.rightMessageWindow.visible(false);
   props.view.dom.nearBatterySelectorMessageWindow.visible(false);
   props.view.dom.nearBurstButtonMessageWindow.visible(false);
+  props.view.dom.nearPilotButtonMessageWindow.visible(false);
 }
 
 /**
