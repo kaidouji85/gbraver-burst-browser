@@ -17,6 +17,10 @@ export async function onLastState(
   props: $ReadOnly<LastState>,
   state: BatterySystemTutorialState
 ): Promise<BatterySystemTutorialState> {
+  if (state.isBatterySystemDescriptionComplete) {
+    return state;
+  }
+
   const foundLastState = props.update[props.update.length - 1];
   if (!foundLastState) {
     return state;
@@ -27,11 +31,11 @@ export async function onLastState(
     return state;
   }
 
-  if (!state.isBatterySystemDescriptionComplete) {
-    const isMyTurn = lastState.activePlayerId === props.playerId;
-    const caption = isMyTurn ? attackBatteryCaption : defenseBatteryCaption;
-    await focusInBatterySelector(props, caption);
+  const isMyTurn = lastState.activePlayerId === props.playerId;
+  if (isMyTurn) {
+    await focusInBatterySelector(props, attackBatteryCaption);
+  } else {
+    await focusInBatterySelector(props, defenseBatteryCaption);
   }
-
   return state;
 }
