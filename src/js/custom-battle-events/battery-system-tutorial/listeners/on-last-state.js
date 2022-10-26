@@ -1,28 +1,12 @@
 // @flow
+
 import type { GameState } from "gbraver-burst-core";
 
 import type { LastState } from "../../../td-scenes/battle/custom-battle-event";
 import { focusInBatterySelector } from "../../focus";
-import { attackBatteryCaption, defenseBatteryCaption } from "../captions";
+import { defenseBatteryCaption } from "../captions";
 import type { BatterySystemTutorialState } from "../state";
-import { waitTime } from "../../../wait/wait-time";
-
-/**
- * 攻撃説明ストーリー
- *
- * @param props イベントプロパティ
- * @return ストーリーが完了したら発火するPromise
- */
-async function attackDescription(props: $ReadOnly<LastState>): Promise<void> {
-  await focusInBatterySelector(props, attackBatteryCaption);
-  await props.view.hud.gameObjects.batterySelector.batteryPlus().play();
-  await waitTime(200);
-  await props.view.hud.gameObjects.batterySelector.batteryPlus().play();
-  await waitTime(200);
-  await props.view.hud.gameObjects.batterySelector.batteryPlus().play();
-  await waitTime(200);
-  await props.view.hud.gameObjects.batterySelector.batteryMinus().play();
-}
+import { attackDescription } from "../stories/attack-description";
 
 /**
  * 最終ステートイベント
