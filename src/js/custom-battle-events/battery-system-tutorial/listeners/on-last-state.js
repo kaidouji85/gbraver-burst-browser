@@ -1,10 +1,12 @@
 // @flow
+
 import type { GameState } from "gbraver-burst-core";
 
 import type { LastState } from "../../../td-scenes/battle/custom-battle-event";
 import { focusInBatterySelector } from "../../focus";
-import { attackBatteryCaption, defenseBatteryCaption } from "../captions";
+import { defenseBatteryCaption } from "../captions";
 import type { BatterySystemTutorialState } from "../state";
+import { attackDescription } from "../stories/attack-description";
 
 /**
  * 最終ステートイベント
@@ -17,6 +19,10 @@ export async function onLastState(
   props: $ReadOnly<LastState>,
   state: BatterySystemTutorialState
 ): Promise<BatterySystemTutorialState> {
+  if (state.isBatterySystemDescriptionComplete) {
+    return state;
+  }
+
   const foundLastState = props.update[props.update.length - 1];
   if (!foundLastState) {
     return state;
@@ -27,11 +33,11 @@ export async function onLastState(
     return state;
   }
 
-  if (!state.isBatterySystemDescriptionComplete) {
-    const isMyTurn = lastState.activePlayerId === props.playerId;
-    const caption = isMyTurn ? attackBatteryCaption : defenseBatteryCaption;
-    await focusInBatterySelector(props, caption);
+  const isMyTurn = lastState.activePlayerId === props.playerId;
+  if (isMyTurn) {
+    await attackDescription(props);
+  } else {
+    await focusInBatterySelector(props, defenseBatteryCaption);
   }
-
   return state;
 }
