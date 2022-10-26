@@ -4,6 +4,7 @@ import {
   activeLeftMessageWindowWithFace,
   activeRightMessageWindowWithFace,
 } from "../../active-message-window";
+import { invisibleAllMessageWindows } from "../../invisible-all-message-windows";
 import { scrollLeftMessages, scrollRightMessages } from "../../scroll-messages";
 
 /**
@@ -13,6 +14,7 @@ import { scrollLeftMessages, scrollRightMessages } from "../../scroll-messages";
  * @return ストーリーが完了したら発火するPromise
  */
 export async function noZeroBatteryDefense(props: CustomBattleEventProps) {
+  invisibleAllMessageWindows(props);
   activeLeftMessageWindowWithFace(props, "Tsubasa");
   await scrollLeftMessages(props, [
     ["ツバサ", "「待て シンヤ!! 0防御はまずい」"],
