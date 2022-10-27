@@ -30,6 +30,7 @@ class ZeroDefenseTutorialEvent extends EmptyCustomBattleEvent {
       selectableCommands: "All",
       isIntroductionComplete: false,
       isDamageRaceComplete: false,
+      isZeroBatteryChangeComplete: false,
     };
   }
 

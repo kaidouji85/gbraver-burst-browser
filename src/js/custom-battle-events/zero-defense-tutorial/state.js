@@ -14,4 +14,6 @@ export type ZeroDefenseTutorialState = {
   isIntroductionComplete: boolean,
   /** ダメージレースストーリーを再生したか、trueで再生した */
   isDamageRaceComplete: boolean,
+  /** 0バッテリーチャンスを再生したか、trueで再生した */
+  isZeroBatteryChangeComplete: boolean,
 };
