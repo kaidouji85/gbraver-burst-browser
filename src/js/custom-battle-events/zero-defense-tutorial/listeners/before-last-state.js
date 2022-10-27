@@ -30,7 +30,7 @@ async function doDamageRaceOrNothing(
   const isEnemyAttack = battle.effect.attacker !== props.playerId;
   if (player && enemy && isEnemyAttack && !state.isDamageRaceComplete) {
     await damageRace(props, player.armdozer.hp, enemy.armdozer.hp);
-    return { ...state, isIntroductionComplete: true };
+    return { ...state, isDamageRaceComplete: true };
   }
 
   return state;
