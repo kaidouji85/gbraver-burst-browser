@@ -4,6 +4,7 @@ import type { GameState, PlayerState } from "gbraver-burst-core";
 import type {
   BatteryCommandSelected,
   CommandCanceled,
+  CustomBattleEventProps,
 } from "../../../td-scenes/battle/custom-battle-event";
 import { unattentionBurstButton } from "../../attention";
 import {
@@ -35,6 +36,57 @@ type Ret = {
 };
 
 /**
+ * ゼロ防御した時の処理
+ *
+ * @param props イベントプロパティ
+ * @param state ステート
+ * @param player プレイヤー情報
+ * @return 終了情報
+ */
+async function onZeroDefense(
+  props: $ReadOnly<CustomBattleEventProps>,
+  state: BatterySystemTutorialState,
+  player: PlayerState
+): Promise<Ret> {
+  const isZeroBattery = player.armdozer.battery === 0;
+  const enableBurst = player.armdozer.enableBurst;
+  const enablePilotSkill = player.pilot.enableSkill;
+
+  if (isZeroBattery && !enableBurst && !enablePilotSkill) {
+    await zeroBatteryDefenseBecauseNoBatteryRecover(props);
+    refreshConversation(props);
+    return { state, cancel: { isCommandCanceled: false } };
+  }
+
+  if (isZeroBattery && !enableBurst && enablePilotSkill) {
+    await doPilotSkillBecauseZeroBattery(props);
+    refreshConversation(props);
+    await focusInPilotButton(props, pilotSkillCaption);
+    return {
+      state: { ...state, selectableCommands: "PilotSkillOnly" },
+      cancel: { isCommandCanceled: true },
+    };
+  }
+
+  if (isZeroBattery && enableBurst) {
+    await doBurstBecauseZeroBattery(props);
+    refreshConversation(props);
+    unattentionBurstButton(props);
+    await focusInBurstButton(props, burstCaption);
+    return {
+      state: { ...state, selectableCommands: "BurstOnly" },
+      cancel: { isCommandCanceled: true },
+    };
+  }
+
+  await cancelZeroBatteryDefense(props);
+  refreshConversation(props);
+  state.selectableCommands === "BatteryOnly" &&
+    (await focusInBatterySelector(props, defenseBatteryCaption));
+  return { state, cancel: { isCommandCanceled: true } };
+}
+
+/**
  * バッテリーコマンド選択イベント
  *
  * @param props イベントプロパティ
@@ -54,46 +106,14 @@ export async function onBatteryCommandSelected(
   const foundPlayer = (foundLastState?.players ?? []).find(
     (v) => v.playerId === props.playerId
   );
+
   const isZeroBatteryCommand = props.battery.battery === 0;
   if (isZeroBatteryCommand && foundLastState && foundPlayer) {
     const lastState: GameState = foundLastState;
     const player: PlayerState = foundPlayer;
     const isEnemyTurn = lastState.activePlayerId !== props.playerId;
-    const isZeroBattery = player.armdozer.battery === 0;
-    const enableBurst = player.armdozer.enableBurst;
-    const enablePilotSkill = player.pilot.enableSkill;
-    if (isEnemyTurn && isZeroBattery && !enableBurst && !enablePilotSkill) {
-      await zeroBatteryDefenseBecauseNoBatteryRecover(props);
-      refreshConversation(props);
-      return { state, cancel: { isCommandCanceled: false } };
-    } else if (
-      isEnemyTurn &&
-      isZeroBattery &&
-      !enableBurst &&
-      enablePilotSkill
-    ) {
-      await doPilotSkillBecauseZeroBattery(props);
-      refreshConversation(props);
-      await focusInPilotButton(props, pilotSkillCaption);
-      return {
-        state: { ...state, selectableCommands: "PilotSkillOnly" },
-        cancel: { isCommandCanceled: true },
-      };
-    } else if (isEnemyTurn && isZeroBattery && enableBurst) {
-      await doBurstBecauseZeroBattery(props);
-      refreshConversation(props);
-      unattentionBurstButton(props);
-      await focusInBurstButton(props, burstCaption);
-      return {
-        state: { ...state, selectableCommands: "BurstOnly" },
-        cancel: { isCommandCanceled: true },
-      };
-    } else if (isEnemyTurn) {
-      await cancelZeroBatteryDefense(props);
-      refreshConversation(props);
-      state.selectableCommands === "BatteryOnly" &&
-        (await focusInBatterySelector(props, defenseBatteryCaption));
-      return { state, cancel: { isCommandCanceled: true } };
+    if (isEnemyTurn) {
+      return await onZeroDefense(props, state, player);
     }
   }
 
