@@ -19,6 +19,10 @@ async function doDamageRaceOrNothing(
   props: $ReadOnly<LastState>,
   state: ZeroDefenseTutorialState
 ): Promise<ZeroDefenseTutorialState> {
+  if (state.isDamageRaceComplete) {
+    return state;
+  }
+
   const extractedBattle = extractBattle(props.update);
   if (!extractedBattle) {
     return state;
@@ -28,9 +32,9 @@ async function doDamageRaceOrNothing(
   const player = battle.players.find((v) => v.playerId === props.playerId);
   const enemy = battle.players.find((v) => v.playerId !== props.playerId);
   const isEnemyAttack = battle.effect.attacker !== props.playerId;
-  if (player && enemy && isEnemyAttack && !state.isDamageRaceComplete) {
+  if (player && enemy && isEnemyAttack) {
     await damageRace(props, player.armdozer.hp, enemy.armdozer.hp);
-    return { ...state, isIntroductionComplete: true };
+    return { ...state, isDamageRaceComplete: true };
   }
 
   return state;
@@ -40,26 +44,35 @@ async function doDamageRaceOrNothing(
  * 条件を満たした場合、0バッテリーチャンスを再生する
  *
  * @param props イベントプロパティ
- * @return 処理が完了したら発火するプロパティ
+ * @param state ステート
+ * @return ステート更新結果
  */
 async function doZeroBatteryChangeOrNothing(
-  props: $ReadOnly<LastState>
-): Promise<void> {
+  props: $ReadOnly<LastState>,
+  state: ZeroDefenseTutorialState
+): Promise<ZeroDefenseTutorialState> {
+  if (state.isZeroBatteryChangeComplete) {
+    return state;
+  }
+
   const foundLastState = props.update[props.update.length - 1];
   if (!foundLastState) {
-    return;
+    return state;
   }
 
   const lastState: GameState = foundLastState;
   const enemy = lastState.players.find((v) => v.playerId !== props.playerId);
   if (!enemy) {
-    return;
+    return state;
   }
 
   const isPlayerTurn = lastState.activePlayerId === props.playerId;
   if (isPlayerTurn && enemy.armdozer.battery === 0 && 0 < enemy.armdozer.hp) {
     await zeroBatteryChance(props);
+    return { ...state, isZeroBatteryChangeComplete: true };
   }
+
+  return state;
 }
 
 /**
@@ -90,6 +103,5 @@ export async function beforeLastState(
     props,
     updatedStateHistory
   );
-  await doZeroBatteryChangeOrNothing(props);
-  return updatedByDamageRace;
+  return await doZeroBatteryChangeOrNothing(props, updatedByDamageRace);
 }
