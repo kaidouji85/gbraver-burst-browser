@@ -5,7 +5,7 @@ import type {
   CommandCanceled,
 } from "../../../td-scenes/battle/custom-battle-event";
 import { focusOutBurstButton } from "../../focus";
-import { turnCount } from "../../turn-count";
+import { extractLastPlayer } from "../../last-player-extractor";
 import type { BurstTutorialState, SelectableCommands } from "../state";
 import { burstIsTrumpCard } from "../stories/burst-is-trump-card";
 
@@ -33,18 +33,21 @@ export async function onBurstCommandSelected(
     return { state, cancel: { isCommandCanceled: true } };
   }
 
-  const turn = turnCount(state.stateHistory);
-  if (turn === 1) {
-    await burstIsTrumpCard(props);
-    return { state, cancel: { isCommandCanceled: true } };
-  }
-
   if (state.selectableCommands === "BurstOnly") {
     focusOutBurstButton(props);
     return {
       state: { ...state, selectableCommands: "All" },
       cancel: { isCommandCanceled: false },
     };
+  }
+
+  const lastPlayer = extractLastPlayer(props, state.stateHistory);
+  if (
+    lastPlayer &&
+    lastPlayer.armdozer.battery === lastPlayer.armdozer.maxBattery
+  ) {
+    await burstIsTrumpCard(props);
+    return { state, cancel: { isCommandCanceled: true } };
   }
 
   return { state, cancel: { isCommandCanceled: false } };
