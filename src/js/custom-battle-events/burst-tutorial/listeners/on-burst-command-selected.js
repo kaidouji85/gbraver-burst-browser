@@ -1,10 +1,13 @@
 // @flow
+
 import type {
   BurstCommandSelected,
   CommandCanceled,
 } from "../../../td-scenes/battle/custom-battle-event";
 import { focusOutBurstButton } from "../../focus";
+import { turnCount } from "../../turn-count";
 import type { BurstTutorialState, SelectableCommands } from "../state";
+import { burstIsTrumpCard } from "../stories/burst-is-trump-card";
 
 /** イベント終了情報 */
 type Ret = {
@@ -27,6 +30,12 @@ export async function onBurstCommandSelected(
 ): Promise<Ret> {
   const enableBurstCommand: SelectableCommands[] = ["BurstOnly", "All"];
   if (!enableBurstCommand.includes(state.selectableCommands)) {
+    return { state, cancel: { isCommandCanceled: true } };
+  }
+
+  const turn = turnCount(state.stateHistory);
+  if (turn === 1) {
+    await burstIsTrumpCard(props);
     return { state, cancel: { isCommandCanceled: true } };
   }
 
