@@ -8,6 +8,7 @@ import type { Resources } from "../../../resource";
 import type { Stream, Unsubscriber } from "../../../stream/stream";
 import type { GameObjectAction } from "../../action/game-object-action";
 import type { ArmDozerSprite } from "../armdozer-sprite";
+import { EmptyArmDozerSprite } from "../empty-armdozer-sprite";
 import { armHammer } from "./animation/arm-hammer";
 import { avoid } from "./animation/avoid";
 import { charge } from "./animation/charge";
@@ -25,18 +26,22 @@ import type { LightningDozerModel } from "./model/lightning-dozer-model";
 import { LightningDozerSounds } from "./sounds/lightning-dozer-sounds";
 import type { LightningDozerView } from "./view/lightning-dozer-view";
 
-/**
- * ライトニングドーザ
- */
-export class LightningDozer implements ArmDozerSprite {
+/** ライトニングドーザ */
+export class LightningDozer
+  extends EmptyArmDozerSprite
+  implements ArmDozerSprite
+{
+  /** モデル */
   #model: LightningDozerModel;
+  /** ビュー */
   #view: LightningDozerView;
+  /** サウンド */
   #sounds: LightningDozerSounds;
+  /** アンサブスクライバ */
   #unsubscriber: Unsubscriber;
 
   /**
    * コンストラクタ
-   *
    * @param resources リソース管理オブジェクト
    * @param gameObjectAction ゲームオブジェクトアクション
    * @param view ビュー
@@ -46,6 +51,7 @@ export class LightningDozer implements ArmDozerSprite {
     gameObjectAction: Stream<GameObjectAction>,
     view: LightningDozerView
   ) {
+    super();
     this.#model = createInitialValue();
     this.#view = view;
     this.#sounds = new LightningDozerSounds(resources);
@@ -59,33 +65,24 @@ export class LightningDozer implements ArmDozerSprite {
     });
   }
 
-  /** デストラクタ相当の処理 */
+  /** @override */
   destructor() {
     this.#view.destructor();
     this.#unsubscriber.unsubscribe();
   }
 
-  /**
-   * シーンに追加するオブジェクトを取得する
-   *
-   * @return シーンに追加するオブジェクト
-   */
+  /** @override */
   getObject3D(): typeof THREE.Object3D {
     return this.#view.getObject3D();
   }
 
-  /**
-   * スプライト配下のオブジェクトを追加する
-   *
-   * @param object オブジェクト
-   */
+  /** @override */
   addObject3D(object: typeof THREE.Object3D): void {
     this.#view.addObject3D(object);
   }
 
   /**
    * チャージ
-   *
    * @return アニメーション
    */
   charge(): Animate {
@@ -94,7 +91,6 @@ export class LightningDozer implements ArmDozerSprite {
 
   /**
    * アームハンマー
-   *
    * @return アニメーション
    */
   armHammer(): Animate {
@@ -103,7 +99,6 @@ export class LightningDozer implements ArmDozerSprite {
 
   /**
    * アームハンマー -> 立ち
-   *
    * @return アニメーション
    */
   hmToStand(): Animate {
@@ -112,7 +107,6 @@ export class LightningDozer implements ArmDozerSprite {
 
   /**
    * ガッツ
-   *
    * @return アニメーション
    */
   guts(): Animate {
@@ -121,58 +115,56 @@ export class LightningDozer implements ArmDozerSprite {
 
   /**
    * ガッツ -> 立ち
-   *
    * @return アニメーション
    */
   gutsToStand(): Animate {
     return gutsToStand(this.#model, this.#sounds);
   }
 
-  /** ノックバック */
+  /** @override */
   knockBack(): Animate {
     return knockBack(this.#model);
   }
 
-  /** ノックバック -> 立ちポーズ */
+  /** @override */
   knockBackToStand(): Animate {
     return knockBackToStand(this.#model, this.#sounds);
   }
 
-  /** ガード */
+  /** @override */
   guard(): Animate {
     return guard(this.#model);
   }
 
-  /** ガード -> 立ちポーズ */
+  /** @override */
   guardToStand(): Animate {
     return guardToStand(this.#model, this.#sounds);
   }
 
-  /** 避け */
+  /** @override */
   avoid(): Animate {
     return avoid(this.#model, this.#sounds);
   }
 
-  /** 避け -> 立ち */
+  /** @override */
   avoidToStand(): Animate {
     return frontStep(this.#model, this.#sounds);
   }
 
-  /** ダウン */
+  /** @override */
   down(): Animate {
     return down(this.#model);
   }
 
   /**
-   * アップデート
+   * Update時の処理
    */
   #onUpdate(): void {
     this.#view.engage(this.#model);
   }
 
   /**
-   * プリレンダー
-   *
+   * PreRender時の処理
    * @param action アクション
    */
   #onPreRender(action: PreRender): void {
