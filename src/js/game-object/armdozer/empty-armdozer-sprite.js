@@ -10,7 +10,7 @@ import type { ArmDozerSprite } from "./armdozer-sprite";
  * 空のアームドーザスプライト
  * ArmDozerSpriteのデフォルト実装を定義する目的で、本クラスを利用すること
  */
-export class EmptyArmdozerSprite implements ArmDozerSprite {
+export class EmptyArmDozerSprite implements ArmDozerSprite {
   /** @override */
   destructor(): void {
     // NOP
