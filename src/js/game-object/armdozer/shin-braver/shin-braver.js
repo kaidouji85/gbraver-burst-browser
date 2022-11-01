@@ -173,7 +173,7 @@ export class ShinBraver extends EmptyArmDozerSprite implements ArmDozerSprite {
 
   /**
    * PreRender時の処理
-   * @param action アクション情報
+   * @param action アクション
    */
   #preRender(action: PreRender): void {
     this.#view.lookAt(action.camera);
