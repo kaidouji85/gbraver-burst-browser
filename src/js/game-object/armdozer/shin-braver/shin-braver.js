@@ -30,9 +30,13 @@ import type { ShinBraverView } from "./view/shin-braver-view";
 
 /** シンブレイバーのゲームオブジェクト */
 export class ShinBraver extends EmptyArmDozerSprite implements ArmDozerSprite {
+  /** モデル */
   #model: ShinBraverModel;
+  /** ビュー */
   #view: ShinBraverView;
+  /** サウンド */
   #sounds: ShinBraverSounds;
+  /** アンサブスクライバ */
   #unsubscriber: Unsubscriber;
 
   /**

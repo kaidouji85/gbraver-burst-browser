@@ -32,7 +32,7 @@ export class WingDozer extends EmptyArmDozerSprite implements ArmDozerSprite {
   #model: WingDozerModel;
   /** ビュー */
   #view: WingDozerView;
-  /** 音素材 */
+  /** サウンド */
   #sounds: WingDozerSounds;
   /** アンサブスクライバ */
   #unsubscriber: Unsubscriber;

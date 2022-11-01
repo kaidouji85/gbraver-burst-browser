@@ -31,9 +31,13 @@ export class LightningDozer
   extends EmptyArmDozerSprite
   implements ArmDozerSprite
 {
+  /** モデル */
   #model: LightningDozerModel;
+  /** ビュー */
   #view: LightningDozerView;
+  /** サウンド */
   #sounds: LightningDozerSounds;
+  /** アンサブスクライバ */
   #unsubscriber: Unsubscriber;
 
   /**

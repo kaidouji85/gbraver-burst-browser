@@ -28,9 +28,13 @@ import type { NeoLandozerView } from "./view/neo-landozer-view";
 
 /** ネオランドーザのゲームオブジェクト */
 export class NeoLandozer extends EmptyArmDozerSprite implements ArmDozerSprite {
+  /** モデル */
   #model: NeoLandozerModel;
+  /** ビュー */
   #view: NeoLandozerView;
+  /** サウンド */
   #sounds: NeoLandozerSounds;
+  /** アンサブスクライバ */
   #unsubscriber: Unsubscriber;
 
   /**
