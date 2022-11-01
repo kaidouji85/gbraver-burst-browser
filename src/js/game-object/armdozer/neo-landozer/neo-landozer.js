@@ -8,6 +8,7 @@ import type { Resources } from "../../../resource";
 import type { Stream, Unsubscriber } from "../../../stream/stream";
 import type { GameObjectAction } from "../../action/game-object-action";
 import type { ArmDozerSprite } from "../armdozer-sprite";
+import { EmptyArmDozerSprite } from "../empty-armdozer-sprite";
 import { armHammer } from "./animation/arm-hammer";
 import { avoid } from "./animation/avoid";
 import { charge } from "./animation/charge";
@@ -26,7 +27,7 @@ import { NeoLandozerSounds } from "./sounds/neo-landozer-sounds";
 import type { NeoLandozerView } from "./view/neo-landozer-view";
 
 /** ネオランドーザのゲームオブジェクト */
-export class NeoLandozer implements ArmDozerSprite {
+export class NeoLandozer extends EmptyArmDozerSprite implements ArmDozerSprite {
   #model: NeoLandozerModel;
   #view: NeoLandozerView;
   #sounds: NeoLandozerSounds;
@@ -34,7 +35,6 @@ export class NeoLandozer implements ArmDozerSprite {
 
   /**
    * コンストラクタ
-   *
    * @param view ビュー
    * @param resources リソース管理オブジェクト
    * @param gameObjectAction ゲームオブジェクトアクション
@@ -44,6 +44,7 @@ export class NeoLandozer implements ArmDozerSprite {
     resources: Resources,
     gameObjectAction: Stream<GameObjectAction>
   ) {
+    super();
     this.#model = createInitialValue();
     this.#view = view;
     this.#sounds = new NeoLandozerSounds(resources);
@@ -57,39 +58,43 @@ export class NeoLandozer implements ArmDozerSprite {
     });
   }
 
-  /** デストラクタ */
+  /** @overview */
   destructor(): void {
     this.#view.destructor();
     this.#unsubscriber.unsubscribe();
   }
 
-  /**
-   * スプライト配下のオブジェクトを追加する
-   *
-   * @param object オブジェクト
-   */
+  /** @overview */
   addObject3D(object: typeof THREE.Object3D): void {
     this.#view.addObject3D(object);
   }
 
-  /** チャージ */
+  /**
+   * チャージ
+   * @return アニメーション
+   */
   charge(): Animate {
     return charge(this.#model, this.#sounds);
   }
 
-  /** アームハンマー */
+  /**
+   * アームハンマー
+   * @return アニメーション
+   */
   armHammer(): Animate {
     return armHammer(this.#model);
   }
 
-  /** アームハンマー -> 立ち */
+  /**
+   * アームハンマー -> 立ち
+   * @return アニメーション
+   */
   hmToStand(): Animate {
     return hmToStand(this.#model, this.#sounds);
   }
 
   /**
    * ガッツ
-   *
    * @return アニメーション
    */
   guts(): Animate {
@@ -98,59 +103,63 @@ export class NeoLandozer implements ArmDozerSprite {
 
   /**
    * ガッツ -> 立ち
-   *
    * @return アニメーション
    */
   gutsToStand(): Animate {
     return gutsToStand(this.#model, this.#sounds);
   }
 
-  /** ノックバック */
+  /** @override */
   knockBack(): Animate {
     return knockBack(this.#model);
   }
 
-  /** ノックバック -> 立ち*/
+  /** @override */
   knockBackToStand(): Animate {
     return knockBackToStand(this.#model, this.#sounds);
   }
 
-  /** ガード */
+  /** @override */
   guard(): Animate {
     return guard(this.#model);
   }
 
-  /** ガード -> 立ちポーズ */
+  /** @override */
   guardToStand(): Animate {
     return guardToStand(this.#model, this.#sounds);
   }
 
-  /** 避け */
+  /** @override */
   avoid(): Animate {
     return avoid(this.#model, this.#sounds);
   }
 
-  /** 避け -> 立ち */
+  /** @override */
   avoidToStand(): Animate {
     return frontStep(this.#model, this.#sounds);
   }
 
-  /** ダウン */
+  /** @override */
   down(): Animate {
     return down(this.#model);
   }
 
-  /** シーンに追加するオブジェクトを取得する */
+  /** @override */
   getObject3D(): typeof THREE.Object3D {
     return this.#view.getObject3D();
   }
 
-  /** 状態更新 */
+  /**
+   * Update時の処理
+   */
   #update(): void {
     this.#view.engage(this.#model);
   }
 
-  /** レンダリング直前の処理 */
+  /**
+   * PreRender時の処理
+   * @param action アクション
+   */
   #preRender(action: PreRender): void {
     this.#view.lookAt(action.camera);
   }
