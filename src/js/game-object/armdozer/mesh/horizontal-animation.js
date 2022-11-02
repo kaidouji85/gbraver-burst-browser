@@ -66,3 +66,23 @@ export class HorizontalArmdozerAnimation implements ArmdozerAnimation {
     return this.#animation.getObject3D();
   }
 }
+
+/**
+ * リソース管理オブジェクトからHorizontalArmdozerAnimationを生成する
+ * @param params パラメータ
+ * @return 生成結果
+ */
+export function createHorizontalAnimationFromResources(params: {
+  /** テクスチャID */
+  id: TextureId,
+  /** リソース管理オブジェクト */
+  resources: Resources,
+  /** アニメーション枚数 */
+  maxAnimation: number,
+  /** 横 */
+  width: number,
+  /** 縦 */
+  height: number,
+}): ArmdozerAnimation {
+  return new HorizontalArmdozerAnimation(params);
+}

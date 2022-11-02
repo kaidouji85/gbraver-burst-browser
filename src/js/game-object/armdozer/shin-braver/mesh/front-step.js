@@ -3,7 +3,7 @@
 import type { Resources } from "../../../../resource";
 import { TEXTURE_IDS } from "../../../../resource/texture/ids";
 import type { ArmdozerAnimation } from "../../mesh/armdozer-animation";
-import { HorizontalArmdozerAnimation } from "../../mesh/horizontal-animation";
+import { createHorizontalAnimationFromResources } from "../../mesh/horizontal-animation";
 import { MESH_Y } from "./position";
 
 export const MESH_WIDTH = 600;
@@ -12,7 +12,7 @@ export const MAX_ANIMATION = 4;
 
 /** フロントステップ */
 export function shinBraverFrontStep(resources: Resources): ArmdozerAnimation {
-  const ret = new HorizontalArmdozerAnimation({
+  const ret = createHorizontalAnimationFromResources({
     id: TEXTURE_IDS.SHIN_BRAVER_FRONT_STEP,
     maxAnimation: MAX_ANIMATION,
     resources: resources,
