@@ -8,11 +8,9 @@ import type { TextureId } from "../../../resource/texture/resource";
 import type { ArmdozerAnimation } from "./armdozer-animation";
 
 /** コンストラクタのパラメータ */
-type Param = {
-  /** テクスチャID */
-  id: TextureId,
-  /** リソース管理オブジェクト */
-  resources: Resources,
+type ConstructorParam = {
+  /** テクスチャ */
+  texture: typeof THREE.Texture,
   /** アニメーション枚数 */
   maxAnimation: number,
   /** 横 */
@@ -22,7 +20,7 @@ type Param = {
 };
 
 /** アームドーザアニメーション水平方向テクスチャ版 */
-export class HorizontalArmdozerAnimation implements ArmdozerAnimation {
+class HorizontalArmdozerAnimation implements ArmdozerAnimation {
   /** アニメーションメッシュ */
   #animation: HorizontalAnimationMesh;
 
@@ -31,15 +29,9 @@ export class HorizontalArmdozerAnimation implements ArmdozerAnimation {
    *
    * @param param パラメータ
    */
-  constructor(param: Param) {
-    const textureResource = param.resources.textures.find(
-      (v) => v.id === param.id
-    );
-    const texture = textureResource
-      ? textureResource.texture
-      : new THREE.Texture();
+  constructor(param: ConstructorParam) {
     this.#animation = new HorizontalAnimationMesh({
-      texture: texture,
+      texture: param.texture,
       maxAnimation: param.maxAnimation,
       width: param.width,
       height: param.height,
@@ -67,12 +59,22 @@ export class HorizontalArmdozerAnimation implements ArmdozerAnimation {
   }
 }
 
+/** createHorizontalAnimationのパラメータ */
+type CreatorParam = ConstructorParam;
+
 /**
- * リソース管理オブジェクトからHorizontalArmdozerAnimationを生成する
- * @param params パラメータ
+ * HorizontalArmdozerAnimationを生成する
+ * @param param パラメータ
  * @return 生成結果
  */
-export function createHorizontalAnimationFromResources(params: {
+export function createHorizontalAnimation(
+  param: CreatorParam
+): ArmdozerAnimation {
+  return new HorizontalArmdozerAnimation(param);
+}
+
+/** createHorizontalAnimationFromResourcesのパラメータ */
+type ParamWhenCreateFromResource = {
   /** テクスチャID */
   id: TextureId,
   /** リソース管理オブジェクト */
@@ -83,6 +85,23 @@ export function createHorizontalAnimationFromResources(params: {
   width: number,
   /** 縦 */
   height: number,
-}): ArmdozerAnimation {
-  return new HorizontalArmdozerAnimation(params);
+};
+
+/**
+ * リソース管理オブジェクトからHorizontalArmdozerAnimationを生成する
+ * @param params パラメータ
+ * @return 生成結果
+ */
+export function createHorizontalAnimationFromResources(
+  param: ParamWhenCreateFromResource
+): ArmdozerAnimation {
+  const texture =
+    param.resources.textures.find((v) => v.id === param.id)?.texture ??
+    new THREE.Texture();
+  return new HorizontalArmdozerAnimation({
+    texture,
+    maxAnimation: param.maxAnimation,
+    width: param.width,
+    height: param.height,
+  });
 }
