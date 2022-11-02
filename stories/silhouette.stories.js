@@ -3,6 +3,7 @@
 import * as THREE from "three";
 
 import { toSilhouette } from "../src/js/canvas/silhouette/to-silhouette";
+import { CANVAS_IMAGE_IDS } from "../src/js/resource/canvas-image";
 import { TEXTURE_IDS } from "../src/js/resource/texture/ids";
 import type { DOMStubStory } from "./stub/dom-stub";
 import { domStub } from "./stub/dom-stub";
@@ -17,5 +18,13 @@ export const texture: DOMStubStory = domStub((resources) => {
       ?.texture ?? new THREE.Texture();
   const image = texture.image;
   const canvas = toSilhouette(image, 255, 0, 0);
+  return canvas;
+});
+
+export const canvasImage: DOMStubStory = domStub((resources) => {
+  const image =
+    resources.canvasImages.find((v) => v.id === CANVAS_IMAGE_IDS.BURST_BUTTON)
+      ?.image ?? new Image();
+  const canvas = toSilhouette(image, 0, 0, 255);
   return canvas;
 });
