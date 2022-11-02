@@ -3,7 +3,7 @@
 import type { Resources } from "../../../../resource";
 import { TEXTURE_IDS } from "../../../../resource/texture/ids";
 import type { ArmdozerAnimation } from "../../mesh/armdozer-animation";
-import { HorizontalArmdozerAnimation } from "../../mesh/horizontal-animation";
+import { createHorizontalAnimationFromResources } from "../../mesh/horizontal-animation";
 import { MESH_HEIGHT, MESH_WIDTH } from "./mesh-size";
 import { MESH_Y } from "./position";
 
@@ -16,7 +16,7 @@ export const MAX_ANIMATION = 4;
  * @return メッシュ
  */
 export function wingDozerBackStep(resources: Resources): ArmdozerAnimation {
-  const ret = new HorizontalArmdozerAnimation({
+  const ret = createHorizontalAnimationFromResources({
     id: TEXTURE_IDS.WING_DOZER_BACK_STEP,
     maxAnimation: MAX_ANIMATION,
     resources: resources,

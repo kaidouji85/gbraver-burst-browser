@@ -3,7 +3,7 @@
 import type { Resources } from "../../../../resource";
 import { TEXTURE_IDS } from "../../../../resource/texture/ids";
 import type { ArmdozerAnimation } from "../../mesh/armdozer-animation";
-import { HorizontalArmdozerAnimation } from "../../mesh/horizontal-animation";
+import { createHorizontalAnimationFromResources } from "../../mesh/horizontal-animation";
 import { MESH_Y } from "./position";
 
 export const MESH_WIDTH = 600;
@@ -19,7 +19,7 @@ export const MAX_ANIMATION = 4;
 export function lightningDozerHmAttack(
   resources: Resources
 ): ArmdozerAnimation {
-  const ret = new HorizontalArmdozerAnimation({
+  const ret = createHorizontalAnimationFromResources({
     id: TEXTURE_IDS.LIGHTNING_DOZER_HM_ATTACK,
     maxAnimation: MAX_ANIMATION,
     resources: resources,
