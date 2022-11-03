@@ -102,6 +102,9 @@ export function batteryDeclarationAnimation(
   const attackerTD = props.view.td.players.find(
     (v) => v.playerId === attacker.playerId
   );
+  const attackerTDArmdozer = props.view.td.armdozerObjects.find(
+    (v) => v.playerId === attacker.playerId
+  );
   const attackerHUD = props.view.hud.players.find(
     (v) => v.playerId === attacker.playerId
   );
@@ -111,7 +114,13 @@ export function batteryDeclarationAnimation(
   const defenderHUD = props.view.hud.players.find(
     (v) => v.playerId === defender.playerId
   );
-  if (!attackerTD || !attackerHUD || !defenderTD || !defenderHUD) {
+  if (
+    !attackerTD ||
+    !attackerTDArmdozer ||
+    !attackerHUD ||
+    !defenderTD ||
+    !defenderHUD
+  ) {
     return empty();
   }
 
@@ -152,6 +161,7 @@ export function batteryDeclarationAnimation(
     props.view.td.gameObjects.turnIndicator.turnChange(isAttacker),
     attackerHUD.gauge.battery(attacker.armdozer.battery),
     attackerDeclaration,
+    attackerTDArmdozer.sprite().endActive(),
     defenderHUD.gauge.battery(defender.armdozer.battery),
     defenderDeclaration
   ).chain(
