@@ -18,6 +18,7 @@ import { burst } from "./animation/burst";
 import { burstToStand } from "./animation/burst-to-stand";
 import { charge } from "./animation/charge";
 import { down } from "./animation/down";
+import { endActive } from "./animation/end-active";
 import { frontStep } from "./animation/front-step";
 import { guard } from "./animation/guard";
 import { guardToStand } from "./animation/guard-to-stand";
@@ -26,6 +27,7 @@ import { gutsToStand } from "./animation/guts-to-stand";
 import { knockBack } from "./animation/knock-back";
 import { knockBackToStand } from "./animation/knock-back-to-stand";
 import { punchToStand } from "./animation/punch-to-stand";
+import { startActive } from "./animation/start-active";
 import { straightPunch } from "./animation/straight-punch";
 import { createInitialValue } from "./model/initial-value";
 import type { ShinBraverModel } from "./model/shin-braver-model";
@@ -89,6 +91,16 @@ export class ShinBraver extends EmptyArmDozerSprite implements ArmDozerSprite {
   /** @override */
   addObject3D(object: typeof THREE.Object3D): void {
     this.#view.addObject3D(object);
+  }
+
+  /** @override */
+  startActive(): Animate {
+    return startActive(this.#model);
+  }
+
+  /** @override */
+  endActive(): Animate {
+    return endActive(this.#model);
   }
 
   /**

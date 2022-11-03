@@ -53,5 +53,6 @@ export function shinBraverActiveStand(resources: Resources): ArmdozerAnimation {
   });
   const object = ret.getObject3D();
   object.position.y = MESH_Y;
+  object.position.z = 0.01;
   return ret;
 }
