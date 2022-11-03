@@ -16,7 +16,7 @@ export function activeFlash(
   model: ShinBraverModel,
   group: typeof TWEEN.Group
 ): Animate {
-  return tween(model, (t) => t.to({ active: 1 }, 800), group).chain(
-    tween(model, (t) => t.to({ active: 0 }, 800), group)
+  return tween(model.active, (t) => t.to({ strength: 1 }, 800), group).chain(
+    tween(model.active, (t) => t.to({ strength: 0 }, 800), group)
   );
 }
