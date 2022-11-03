@@ -84,11 +84,11 @@ export class PlayerShinBraverView implements ShinBraverView {
       .filter((v) => v !== currentMesh)
       .filter((v) => v !== currentActiveMesh)
       .forEach((v) => {
-        v.visible(false);
+        v.opacity(0);
       });
 
-    currentMesh.visible(true);
-    currentActiveMesh && currentActiveMesh.visible(true);
+    currentMesh.opacity(1);
+    currentActiveMesh && currentActiveMesh.opacity(0.2);
     currentMesh.animate(model.animation.frame);
   }
 

@@ -54,6 +54,11 @@ class HorizontalArmdozerAnimation implements ArmdozerAnimation {
   }
 
   /** @override */
+  opacity(value: number): void {
+    this.#animation.mesh.material.opacity = value;
+  }
+
+  /** @override */
   getObject3D(): typeof THREE.Object3D {
     return this.#animation.getObject3D();
   }

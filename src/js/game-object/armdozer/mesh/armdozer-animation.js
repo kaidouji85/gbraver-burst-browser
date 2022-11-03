@@ -17,11 +17,18 @@ export interface ArmdozerAnimation {
   animate(animation: number): void;
 
   /**
+   * @deprecated
    * 表示、非表示を設定する
    *
    * @param isVisible trueで表示する
    */
   visible(isVisible: boolean): void;
+
+  /**
+   * 透明度を設定する
+   * @param value 設定値
+   */
+  opacity(value: number): void;
 
   /**
    * シーンに追加するオブジェクトを取得する
