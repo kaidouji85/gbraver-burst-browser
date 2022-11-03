@@ -9,6 +9,7 @@ import type { Stream, Unsubscriber } from "../../../stream/stream";
 import type { GameObjectAction } from "../../action/game-object-action";
 import type { ArmDozerSprite } from "../armdozer-sprite";
 import { EmptyArmDozerSprite } from "../empty-armdozer-sprite";
+import { activeFlash } from "./animation/active-flash";
 import { avoid } from "./animation/avoid";
 import { burst } from "./animation/burst";
 import { burstToStand } from "./animation/burst-to-stand";
@@ -55,6 +56,7 @@ export class ShinBraver extends EmptyArmDozerSprite implements ArmDozerSprite {
     this.#model = createInitialValue();
     this.#view = view;
     this.#sounds = new ShinBraverSounds(resources);
+    activeFlash(this.#model).loop(); // TODO 止められるようにする
     this.#unsubscriber = gameObjectAction.subscribe((action) => {
       if (action.type === "Update") {
         this.#update();
