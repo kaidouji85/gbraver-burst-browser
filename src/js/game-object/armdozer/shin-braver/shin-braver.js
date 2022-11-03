@@ -1,11 +1,14 @@
 // @flow
 
+import TWEEN from "@tweenjs/tween.js";
 import * as THREE from "three";
 
 import { Animate } from "../../../animation/animate";
 import type { PreRender } from "../../../game-loop/pre-render";
+import type { Update } from "../../../game-loop/update";
 import type { Resources } from "../../../resource";
 import type { Stream, Unsubscriber } from "../../../stream/stream";
+import { firstUpdate } from "../../action/first-update";
 import type { GameObjectAction } from "../../action/game-object-action";
 import type { ArmDozerSprite } from "../armdozer-sprite";
 import { EmptyArmDozerSprite } from "../empty-armdozer-sprite";
@@ -37,8 +40,10 @@ export class ShinBraver extends EmptyArmDozerSprite implements ArmDozerSprite {
   #view: ShinBraverView;
   /** サウンド */
   #sounds: ShinBraverSounds;
+  /** アクティブフラッシュTweenグループ */
+  #activeFlashTween: typeof TWEEN.Group;
   /** アンサブスクライバ */
-  #unsubscriber: Unsubscriber;
+  #unsubscribers: Unsubscriber[];
 
   /**
    * コンストラクタ
@@ -56,20 +61,29 @@ export class ShinBraver extends EmptyArmDozerSprite implements ArmDozerSprite {
     this.#model = createInitialValue();
     this.#view = view;
     this.#sounds = new ShinBraverSounds(resources);
-    activeFlash(this.#model).loop(); // TODO 止められるようにする
-    this.#unsubscriber = gameObjectAction.subscribe((action) => {
-      if (action.type === "Update") {
-        this.#update();
-      } else if (action.type === "PreRender") {
-        this.#preRender(action);
-      }
-    });
+    this.#activeFlashTween = new TWEEN.Group();
+    this.#unsubscribers = [
+      gameObjectAction.subscribe((action) => {
+        if (action.type === "Update") {
+          this.#onUpdate(action);
+        } else if (action.type === "PreRender") {
+          this.#onPreRender(action);
+        }
+      }),
+
+      firstUpdate(gameObjectAction).subscribe(() => {
+        this.#onFirstUpdate();
+      }),
+    ];
   }
 
   /** @override */
   destructor(): void {
     this.#view.destructor();
-    this.#unsubscriber.unsubscribe();
+    this.#unsubscribers.forEach((v) => {
+      v.unsubscribe();
+    });
+    this.#activeFlashTween.removeAll();
   }
 
   /** @override */
@@ -173,15 +187,23 @@ export class ShinBraver extends EmptyArmDozerSprite implements ArmDozerSprite {
   /**
    * Update時の処理
    */
-  #update(): void {
+  #onUpdate(action: Update): void {
+    this.#activeFlashTween.update(action.time);
     this.#view.engage(this.#model);
+  }
+
+  /**
+   * 最初のUpdate時だけ実行する処理
+   */
+  #onFirstUpdate(): void {
+    activeFlash(this.#model, this.#activeFlashTween).loop();
   }
 
   /**
    * PreRender時の処理
    * @param action アクション
    */
-  #preRender(action: PreRender): void {
+  #onPreRender(action: PreRender): void {
     this.#view.lookAt(action.camera);
   }
 }
