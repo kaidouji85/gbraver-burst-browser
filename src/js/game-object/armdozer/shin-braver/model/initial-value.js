@@ -20,7 +20,7 @@ export function createInitialValue(): ShinBraverModel {
     },
     active: {
       strength: 0,
-      opacity: 1,
+      opacity: 0,
     },
   };
 }
