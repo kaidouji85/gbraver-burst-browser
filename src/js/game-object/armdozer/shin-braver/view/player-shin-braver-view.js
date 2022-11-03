@@ -38,6 +38,10 @@ export class PlayerShinBraverView implements ShinBraverView {
   #backStep: ArmdozerAnimation;
   #frontStep: ArmdozerAnimation;
 
+  /**
+   * コンストラクタ
+   * @param resources リソース管理オブジェクト
+   */
   constructor(resources: Resources) {
     this.#group = new THREE.Group();
     this.#stand = shinBraverStand(resources);
@@ -59,18 +63,18 @@ export class PlayerShinBraverView implements ShinBraverView {
     });
   }
 
-  /** デストラクタ */
+  /** @override */
   destructor(): void {
     this.#getAllMeshes().forEach((v) => {
       v.destructor();
     });
   }
 
-  /** モデルをビューに反映させる */
+  /** @override */
   engage(model: ShinBraverModel): void {
     this.#refreshPos(model);
 
-    const activeMesh = this.#getActiveMesh(model.animation.type);
+    const activeMesh = this.#getMeshAccordingTo(model.animation.type);
     this.#getAllMeshes()
       .filter((v) => v !== activeMesh)
       .forEach((v) => {
@@ -81,26 +85,25 @@ export class PlayerShinBraverView implements ShinBraverView {
     activeMesh.animate(model.animation.frame);
   }
 
-  /**
-   * スプライト配下のオブジェクトを追加する
-   *
-   * @param object 追加するオブジェクト
-   */
+  /** @override */
   addObject3D(object: typeof THREE.Object3D): void {
     this.#group.add(object);
   }
 
-  /** カメラの真正面を向く */
+  /** @override */
   lookAt(camera: typeof THREE.Camera): void {
     this.#group.quaternion.copy(camera.quaternion);
   }
 
-  /** シーンに追加するオブジェクトを返す */
+  /** @override */
   getObject3D(): typeof THREE.Object3D {
     return this.#group;
   }
 
-  /** 本クラスが持つ全メッシュを返す */
+  /**
+   * 本クラスが持つ全メッシュを返す
+   * @return 取得結果
+   */
   #getAllMeshes(): ArmdozerAnimation[] {
     return [
       this.#stand,
@@ -119,7 +122,10 @@ export class PlayerShinBraverView implements ShinBraverView {
     ];
   }
 
-  /** 座標を更新する */
+  /**
+   * 座標を更新する
+   * @param model モデル
+   */
   #refreshPos(model: ShinBraverModel): void {
     this.#group.position.set(
       model.position.x,
@@ -128,8 +134,11 @@ export class PlayerShinBraverView implements ShinBraverView {
     );
   }
 
-  /** アクティブなメッシュを取得 */
-  #getActiveMesh(animationType: AnimationType): ArmdozerAnimation {
+  /**
+   * アクティブなメッシュを取得
+   * @return 取得結果
+   */
+  #getMeshAccordingTo(animationType: AnimationType): ArmdozerAnimation {
     switch (animationType) {
       case "STAND":
         return this.#stand;
