@@ -16,4 +16,6 @@ export interface ShinBraverModel {
     /** 0〜1で指定するアニメーションフレーム */
     frame: number,
   };
+  /** アクティブレイヤーの強度 */
+  active: number;
 }

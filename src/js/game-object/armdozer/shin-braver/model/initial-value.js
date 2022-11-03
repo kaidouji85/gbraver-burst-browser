@@ -18,5 +18,6 @@ export function createInitialValue(): ShinBraverModel {
       type: "STAND",
       frame: 0,
     },
+    active: 0,
   };
 }

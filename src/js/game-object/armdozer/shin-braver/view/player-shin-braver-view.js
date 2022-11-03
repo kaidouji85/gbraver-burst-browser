@@ -88,7 +88,7 @@ export class PlayerShinBraverView implements ShinBraverView {
       });
 
     currentMesh.opacity(1);
-    currentActiveMesh && currentActiveMesh.opacity(0.2);
+    currentActiveMesh && currentActiveMesh.opacity(model.active * 0.2);
     currentMesh.animate(model.animation.frame);
   }
 
