@@ -16,7 +16,7 @@ import { shinBraverKnockBack } from "../mesh/knock-back";
 import { shinBraverSPAttack } from "../mesh/sp-attack";
 import { shinBraverSPCharge } from "../mesh/sp-charge";
 import { shinBraverSPToStand } from "../mesh/sp-to-stand";
-import { shinBraverStand } from "../mesh/stand";
+import { shinBraverActiveStand, shinBraverStand } from "../mesh/stand";
 import type { AnimationType } from "../model/animation-type";
 import type { ShinBraverModel } from "../model/shin-braver-model";
 import type { ShinBraverView } from "./shin-braver-view";
@@ -24,6 +24,7 @@ import type { ShinBraverView } from "./shin-braver-view";
 /** プレイヤー側シンブレイバーのビュー */
 export class PlayerShinBraverView implements ShinBraverView {
   #group: typeof THREE.Group;
+  #activeStand: ArmdozerAnimation;
   #stand: ArmdozerAnimation;
   #spCharge: ArmdozerAnimation;
   #spAttack: ArmdozerAnimation;
@@ -45,6 +46,7 @@ export class PlayerShinBraverView implements ShinBraverView {
   constructor(resources: Resources) {
     this.#group = new THREE.Group();
     this.#stand = shinBraverStand(resources);
+    this.#activeStand = shinBraverActiveStand(resources);
     this.#spCharge = shinBraverSPCharge(resources);
     this.#spAttack = shinBraverSPAttack(resources);
     this.#spToStand = shinBraverSPToStand(resources);
@@ -74,15 +76,20 @@ export class PlayerShinBraverView implements ShinBraverView {
   engage(model: ShinBraverModel): void {
     this.#refreshPos(model);
 
-    const activeMesh = this.#getMeshAccordingTo(model.animation.type);
+    const currentMesh = this.#getMeshAccordingTo(model.animation.type);
+    const currentActiveMesh = this.#getActiveMeshAccordingTo(
+      model.animation.type
+    );
     this.#getAllMeshes()
-      .filter((v) => v !== activeMesh)
+      .filter((v) => v !== currentMesh)
+      .filter((v) => v !== currentActiveMesh)
       .forEach((v) => {
         v.visible(false);
       });
 
-    activeMesh.visible(true);
-    activeMesh.animate(model.animation.frame);
+    currentMesh.visible(true);
+    currentActiveMesh && currentActiveMesh.visible(true);
+    currentMesh.animate(model.animation.frame);
   }
 
   /** @override */
@@ -107,6 +114,7 @@ export class PlayerShinBraverView implements ShinBraverView {
   #getAllMeshes(): ArmdozerAnimation[] {
     return [
       this.#stand,
+      this.#activeStand,
       this.#spCharge,
       this.#spAttack,
       this.#spToStand,
@@ -135,7 +143,8 @@ export class PlayerShinBraverView implements ShinBraverView {
   }
 
   /**
-   * アクティブなメッシュを取得
+   * アニメーションタイプに応じたメッシュを取得する
+   * @param animationType アニメーションタイプ
    * @return 取得結果
    */
   #getMeshAccordingTo(animationType: AnimationType): ArmdozerAnimation {
@@ -168,6 +177,20 @@ export class PlayerShinBraverView implements ShinBraverView {
         return this.#frontStep;
       default:
         return this.#stand;
+    }
+  }
+
+  /**
+   * アニメーション対応に応じたアクティブメッシュを取得する
+   * @param animationType アニメーションタイプ
+   * @return 取得結果、対応するアクティブメッシュがない場合はnullを返す
+   */
+  #getActiveMeshAccordingTo(animationType: AnimationType): ?ArmdozerAnimation {
+    switch (animationType) {
+      case "STAND":
+        return this.#activeStand;
+      default:
+        return null;
     }
   }
 }
