@@ -1,16 +1,17 @@
 // @flow
 
-import * as THREE from 'three';
-import {Animate} from "../../animation/animate";
-import type {PreRender} from "../../game-loop/pre-render";
-import type {Stream, Unsubscriber} from "../../stream/stream";
-import type {HUDTracking} from "../../tracking/hud-tracking";
-import type {GameObjectAction} from "../action/game-object-action";
-import {battery} from './animation/battery';
-import {hp} from "./animation/hp";
-import type {GaugeModel} from "./model/gauge-model";
-import {initialValue} from "./model/initial-value";
-import type {GaugeView} from "./view/gauge-view";
+import * as THREE from "three";
+
+import { Animate } from "../../animation/animate";
+import type { PreRender } from "../../game-loop/pre-render";
+import type { Stream, Unsubscriber } from "../../stream/stream";
+import type { HUDTracking } from "../../tracking/hud-tracking";
+import type { GameObjectAction } from "../action/game-object-action";
+import { battery } from "./animation/battery";
+import { hp } from "./animation/hp";
+import type { GaugeModel } from "./model/gauge-model";
+import { initialValue } from "./model/initial-value";
+import type { GaugeView } from "./view/gauge-view";
 
 /** コンストラクタのパラメータ */
 type Param = {
@@ -21,7 +22,7 @@ type Param = {
   /** 最大HP */
   hp: number,
   /** 最大バッテリー */
-  battery: number
+  battery: number,
 };
 
 /** ゲージ */
@@ -39,8 +40,8 @@ export class Gauge implements HUDTracking {
     this.#view = param.view;
     this.#model = initialValue(param.hp, param.battery);
 
-    this.#unsubscriber = param.gameObjectAction.subscribe(action => {
-      if (action.type === 'PreRender') {
+    this.#unsubscriber = param.gameObjectAction.subscribe((action) => {
+      if (action.type === "PreRender") {
         this.#preRender(action);
       }
     });

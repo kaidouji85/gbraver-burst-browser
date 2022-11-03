@@ -11,33 +11,48 @@ import type {
   UserPictureGet,
   WebsocketDisconnect,
   WebsocketErrorNotifier,
-  WebsocketUnintentionalCloseNotifier
+  WebsocketUnintentionalCloseNotifier,
 } from "@gbraver-burst-network/browser-core";
-import type {BGMManager} from "../bgm/bgm-manager";
-import {createBGMManager} from "../bgm/bgm-manager";
-import {DOMFader} from "../components/dom-fader/dom-fader";
-import {CssVH} from "../css/vh";
-import type {Resources} from "../resource";
-import {emptyResources} from "../resource";
-import type {ResourceRoot} from "../resource/resource-root";
-import type {Stream} from "../stream/stream";
-import type {PushWindow} from "../window/push-window";
-import {pushWindowsStream} from "../window/push-window";
-import type {Resize} from "../window/resize";
-import {resizeStream} from "../window/resize";
-import type {GbraverBurstBrowserConfigRepository} from "./config/browser-config";
-import {DOMDialogs} from "./dom-dialogs";
-import {DOMFloaters} from "./dom-floaters/dom-floaters";
-import {DOMScenes} from "./dom-scenes";
-import {FutureSuddenlyBattleEnd} from "./future-suddenly-battle-end";
-import type {InProgress} from "./in-progress/in-progress";
-import {InterruptScenes} from "./innterrupt-scenes";
-import {TDScenes} from "./td-scenes";
+
+import type { BGMManager } from "../bgm/bgm-manager";
+import { createBGMManager } from "../bgm/bgm-manager";
+import { DOMFader } from "../components/dom-fader/dom-fader";
+import { CssHUDUIScale } from "../css/hud-ui-scale";
+import { CssVH } from "../css/vh";
+import type { GameLoop } from "../game-loop/game-loop";
+import { gameLoopStream } from "../game-loop/game-loop";
+import { Renderer } from "../render";
+import type { Resources } from "../resource";
+import { emptyResources } from "../resource";
+import type { ResourceRoot } from "../resource/resource-root";
+import type { Stream } from "../stream/stream";
+import type { PushWindow } from "../window/push-window";
+import { pushWindowsStream } from "../window/push-window";
+import type { Resize } from "../window/resize";
+import { resizeStream } from "../window/resize";
+import type { GbraverBurstBrowserConfigRepository } from "./config/browser-config";
+import { DOMDialogBinder } from "./dom-dialog-binder";
+import { DOMFloaters } from "./dom-floaters/dom-floaters";
+import { DOMSceneBinder } from "./dom-scene-binder";
+import { FutureSuddenlyBattleEnd } from "./future-suddenly-battle-end";
+import type { InProgress } from "./in-progress/in-progress";
+import { InterruptScenes } from "./innterrupt-scenes";
+import { TDSceneBinder } from "./td-scene-binder";
 
 /** ゲーム管理オブジェクトで利用するAPIサーバの機能 */
-export interface GameAPI extends UniversalLogin, LoginCheck, CasualMatchSDK, Logout, LoggedInUserDelete,
-  UserNameGet, UserPictureGet, MailVerify, UserMailGet, WebsocketDisconnect,
-  WebsocketErrorNotifier, WebsocketUnintentionalCloseNotifier {}
+export interface GameAPI
+  extends UniversalLogin,
+    LoginCheck,
+    CasualMatchSDK,
+    Logout,
+    LoggedInUserDelete,
+    UserNameGet,
+    UserPictureGet,
+    MailVerify,
+    UserMailGet,
+    WebsocketDisconnect,
+    WebsocketErrorNotifier,
+    WebsocketUnintentionalCloseNotifier {}
 
 /**
  * ゲームプロパティ
@@ -70,20 +85,26 @@ export interface GameProps {
   resize: Stream<Resize>;
   /** window押下 */
   pushWindow: Stream<PushWindow>;
+  /** ゲームループ */
+  gameLoop: Stream<GameLoop>;
   /** cssカスタムプロパティ --vh */
   vh: CssVH;
+  /** cssカスタムプロパティ --hud-ui-scale */
+  hudUIScale: CssHUDUIScale;
   /** DOMフェーダ */
   fader: DOMFader;
   /** 強制割込シーン管理オブジェクト */
   interruptScenes: InterruptScenes;
-  /** DOMシーン管理オブジェクト */
-  domScenes: DOMScenes;
-  /** DOMダイアログ管理オブジェクト */
-  domDialogs: DOMDialogs;
+  /** DOMシーンバインダー */
+  domSceneBinder: DOMSceneBinder;
+  /** DOMダイアログバインダー */
+  domDialogBinder: DOMDialogBinder;
   /** DOMフローター管理オブジェクト */
   domFloaters: DOMFloaters;
-  /** 3Dシーン管理オブジェクト */
-  tdScenes: TDScenes;
+  /** レンダラ管理オブジェクト */
+  renderer: Renderer;
+  /** 3Dシーンバインダー */
+  tdBinder: TDSceneBinder;
   /** リソースルート */
   resourceRoot: ResourceRoot;
   /** リソース管理オブジェクト */
@@ -121,7 +142,7 @@ export type GamePropsGeneratorParam = {
   /** ブラウザ設定リポジトリ */
   config: GbraverBurstBrowserConfigRepository,
   /** 開発中のチュートリアルをプレイできるか否かのフラグ、trueでプレイできる */
-  canPlayTutorialInDevelopment: boolean;
+  canPlayTutorialInDevelopment: boolean,
 };
 
 /**
@@ -133,6 +154,9 @@ export type GamePropsGeneratorParam = {
 export function generateGameProps(param: GamePropsGeneratorParam): GameProps {
   const resize = resizeStream();
   const pushWindow = pushWindowsStream();
+  const renderer = new Renderer(resize);
+  const gameLoop = gameLoopStream();
+  const hudUIScale = new CssHUDUIScale(renderer.getRendererDOM(), resize);
   return {
     resourceRoot: param.resourceRoot,
     resources: emptyResources(param.resourceRoot),
@@ -144,21 +168,24 @@ export function generateGameProps(param: GamePropsGeneratorParam): GameProps {
     privacyPolicyURL: param.privacyPolicyURL,
     contactURL: param.contactURL,
     isAPIServerEnable: param.isAPIServerEnable,
-    inProgress: {type: 'None'},
+    inProgress: { type: "None" },
     resize,
     pushWindow,
+    gameLoop,
     vh: new CssVH(resize),
+    hudUIScale: new CssHUDUIScale(renderer.getRendererDOM(), resize),
     api: param.api,
     config: param.config,
     suddenlyBattleEnd: new FutureSuddenlyBattleEnd(),
     fader: new DOMFader(),
     interruptScenes: new InterruptScenes(),
-    domScenes: new DOMScenes(),
-    domDialogs: new DOMDialogs(),
+    domSceneBinder: new DOMSceneBinder(),
+    domDialogBinder: new DOMDialogBinder(),
     domFloaters: new DOMFloaters(),
-    tdScenes: new TDScenes(resize, pushWindow),
+    renderer,
+    tdBinder: new TDSceneBinder(renderer, hudUIScale),
     serviceWorker: null,
     bgm: createBGMManager(),
-    canPlayTutorialInDevelopment: param.canPlayTutorialInDevelopment
+    canPlayTutorialInDevelopment: param.canPlayTutorialInDevelopment,
   };
 }

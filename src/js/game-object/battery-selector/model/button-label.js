@@ -1,4 +1,4 @@
 // @flow
 
 /** ボタンのラベル */
-export type ButtonLabel = 'Attack' | 'Defense';
+export type ButtonLabel = "Attack" | "Defense";

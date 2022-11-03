@@ -1,12 +1,12 @@
 // @flow
 
-import type {BatterySelectorModel} from "../../src/js/game-object/battery-selector/model";
+import type { BatterySelectorModel } from "../../src/js/game-object/battery-selector/model";
 
 export const EMPTY_BATTERY_SELECTOR: BatterySelectorModel = {
   battery: 0,
   enableMaxBattery: 0,
   needle: 0,
-  label: 'Attack',
+  label: "Attack",
   opacity: 1,
   minusButtonScale: 1,
   plusButtonScale: 1,

@@ -1,20 +1,21 @@
 // @flow
-import {Howl} from 'howler';
-import * as THREE from 'three';
-import {Animate} from "../../animation/animate";
-import type {PreRender} from "../../game-loop/pre-render";
-import type {Resources} from "../../resource";
-import {SOUND_IDS} from "../../resource/sound";
-import type {Stream, StreamSource, Unsubscriber} from "../../stream/stream";
-import {createStreamSource} from "../../stream/stream";
-import type {GameObjectAction} from "../action/game-object-action";
-import {close} from './animation/close';
-import {decide} from "./animation/decide";
-import {open} from './animation/open';
-import type {BurstButtonModel} from "./model/burst-button-model";
-import {createInitialValue} from "./model/initial-value";
-import type {ArmdozerIcon} from "./view/armdozer-icon";
-import {BurstButtonView} from "./view/burst-button-view";
+import { Howl } from "howler";
+import * as THREE from "three";
+
+import { Animate } from "../../animation/animate";
+import type { PreRender } from "../../game-loop/pre-render";
+import type { Resources } from "../../resource";
+import { SOUND_IDS } from "../../resource/sound";
+import type { Stream, StreamSource, Unsubscriber } from "../../stream/stream";
+import { createStreamSource } from "../../stream/stream";
+import type { GameObjectAction } from "../action/game-object-action";
+import { close } from "./animation/close";
+import { decide } from "./animation/decide";
+import { open } from "./animation/open";
+import type { BurstButtonModel } from "./model/burst-button-model";
+import { createInitialValue } from "./model/initial-value";
+import type { ArmdozerIcon } from "./view/armdozer-icon";
+import { BurstButtonView } from "./view/burst-button-view";
 
 /** バーストボタン */
 export class BurstButton {
@@ -31,8 +32,14 @@ export class BurstButton {
    * @param gameObjectAction ゲームオブジェクトアクション
    * @param armdozerIcon アームドーザアイコン
    */
-  constructor(resources: Resources, gameObjectAction: Stream<GameObjectAction>, armdozerIcon: ArmdozerIcon) {
-    const pushButtonResource = resources.sounds.find(v => v.id === SOUND_IDS.PUSH_BUTTON);
+  constructor(
+    resources: Resources,
+    gameObjectAction: Stream<GameObjectAction>,
+    armdozerIcon: ArmdozerIcon
+  ) {
+    const pushButtonResource = resources.sounds.find(
+      (v) => v.id === SOUND_IDS.PUSH_BUTTON
+    );
     this.#pushButtonSound = pushButtonResource
       ? pushButtonResource.sound
       : new Howl();
@@ -43,15 +50,15 @@ export class BurstButton {
       resources: resources,
       gameObjectAction: gameObjectAction,
       armdozerIcon: armdozerIcon,
-      onPush: event => {
+      onPush: (event) => {
         if (this.#model.disabled || !this.#model.canBurst) {
           return;
         }
         this.#pushButton.next(event);
-      }
+      },
     });
-    this.#unsubscriber = gameObjectAction.subscribe(action => {
-      if (action.type === 'PreRender') {
+    this.#unsubscriber = gameObjectAction.subscribe((action) => {
+      if (action.type === "PreRender") {
         this.#preRender(action);
       }
     });
@@ -92,9 +99,9 @@ export class BurstButton {
     return close(this.#model);
   }
 
-  /** 
+  /**
    * three.jsオブジェクトを取得する
-   * 
+   *
    * @return 取得結果
    */
   getObject3D(): typeof THREE.Object3D {

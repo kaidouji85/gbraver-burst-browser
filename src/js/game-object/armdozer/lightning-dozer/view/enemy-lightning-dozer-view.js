@@ -1,8 +1,8 @@
 // @flow
 
-import type {Resources} from "../../../../resource";
-import type {LightningDozerModel} from "../model/lightning-dozer-model";
-import {PlayerLightingDozerView} from "./player-lighting-dozer-view";
+import type { Resources } from "../../../../resource";
+import type { LightningDozerModel } from "../model/lightning-dozer-model";
+import { PlayerLightingDozerView } from "./player-lighting-dozer-view";
 
 /**
  * 敵側のライトニングドーザビュー
@@ -23,6 +23,4 @@ export class EnemyLightningDozerView extends PlayerLightingDozerView {
     target.position.x *= -1;
     target.scale.x = -1;
   }
-
-
 }

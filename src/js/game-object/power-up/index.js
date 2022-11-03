@@ -1,11 +1,11 @@
 // @flow
 
-import type {Resources} from "../../resource";
-import type {Stream} from "../../stream/stream";
-import type {GameObjectAction} from "../action/game-object-action";
-import {PowerUp} from "./power-up";
-import {EnemyPowerUpView} from "./view/enemy-power-up-view";
-import {PlayerPowerUpView} from "./view/player-power-up-view";
+import type { Resources } from "../../resource";
+import type { Stream } from "../../stream/stream";
+import type { GameObjectAction } from "../action/game-object-action";
+import { PowerUp } from "./power-up";
+import { EnemyPowerUpView } from "./view/enemy-power-up-view";
+import { PlayerPowerUpView } from "./view/player-power-up-view";
 
 /**
  * プレイヤー 攻撃アップ ポップアップ
@@ -14,7 +14,10 @@ import {PlayerPowerUpView} from "./view/player-power-up-view";
  * @param gameObjectAction ゲームオブジェクトアクション
  * @return 生成結果
  */
-export function playerPowerUp(resources: Resources, gameObjectAction: Stream<GameObjectAction>): PowerUp {
+export function playerPowerUp(
+  resources: Resources,
+  gameObjectAction: Stream<GameObjectAction>
+): PowerUp {
   const view = new PlayerPowerUpView(resources);
   return new PowerUp(view, resources, gameObjectAction);
 }
@@ -26,7 +29,10 @@ export function playerPowerUp(resources: Resources, gameObjectAction: Stream<Gam
  * @param gameObjectAction ゲームオブジェクトアクション
  * @return 生成結果
  */
-export function enemyPowerUp(resources: Resources, gameObjectAction: Stream<GameObjectAction>): PowerUp {
+export function enemyPowerUp(
+  resources: Resources,
+  gameObjectAction: Stream<GameObjectAction>
+): PowerUp {
   const view = new EnemyPowerUpView(resources);
   return new PowerUp(view, resources, gameObjectAction);
 }

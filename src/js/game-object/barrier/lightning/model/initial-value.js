@@ -1,7 +1,7 @@
 // @flow
 
-import {ARMDOZER_EFFECT_STANDARD_Y,} from "../../../armdozer/position";
-import type {LightningBarrierModel} from "./lightning-barrier-model";
+import { ARMDOZER_EFFECT_STANDARD_Y } from "../../../armdozer/position";
+import type { LightningBarrierModel } from "./lightning-barrier-model";
 
 /**
  * 初期値を生成する
@@ -13,12 +13,12 @@ export function createInitialValue(): LightningBarrierModel {
     position: {
       x: 0,
       y: ARMDOZER_EFFECT_STANDARD_Y,
-      z: 1
+      z: 1,
     },
     opacity: 0,
     scale: 1,
     animation: {
-      frame: 0
-    }
+      frame: 0,
+    },
   };
 }

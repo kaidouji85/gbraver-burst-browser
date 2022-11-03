@@ -1,11 +1,11 @@
 // @flow
 
-import type {Resources} from "../../resource";
-import type {Stream} from "../../stream/stream";
-import type {GameObjectAction} from "../action/game-object-action";
-import {BatteryEnchantment} from "./battery-enchantment";
-import {EnemyBatteryEnchantmentView} from "./view/enemy-battery-enchantment-view";
-import {PlayerBatteryEnchantmentView} from "./view/player-battery-enchantment-view";
+import type { Resources } from "../../resource";
+import type { Stream } from "../../stream/stream";
+import type { GameObjectAction } from "../action/game-object-action";
+import { BatteryEnchantment } from "./battery-enchantment";
+import { EnemyBatteryEnchantmentView } from "./view/enemy-battery-enchantment-view";
+import { PlayerBatteryEnchantmentView } from "./view/player-battery-enchantment-view";
 
 /**
  * プレイヤー バッテリー増強 ポップアップ
@@ -14,7 +14,10 @@ import {PlayerBatteryEnchantmentView} from "./view/player-battery-enchantment-vi
  * @param gameObjectAction ゲームオブジェクトアクション
  * @return 生成結果
  */
-export function playerBatteryEnchantment(resources: Resources, gameObjectAction: Stream<GameObjectAction>): BatteryEnchantment {
+export function playerBatteryEnchantment(
+  resources: Resources,
+  gameObjectAction: Stream<GameObjectAction>
+): BatteryEnchantment {
   const view = new PlayerBatteryEnchantmentView(resources);
   return new BatteryEnchantment(view, resources, gameObjectAction);
 }
@@ -26,7 +29,10 @@ export function playerBatteryEnchantment(resources: Resources, gameObjectAction:
  * @param gameObjectAction ゲームオブジェクトアクション
  * @return 生成結果
  */
-export function enemyBatteryEnchantment(resources: Resources, gameObjectAction: Stream<GameObjectAction>): BatteryEnchantment {
+export function enemyBatteryEnchantment(
+  resources: Resources,
+  gameObjectAction: Stream<GameObjectAction>
+): BatteryEnchantment {
   const view = new EnemyBatteryEnchantmentView(resources);
   return new BatteryEnchantment(view, resources, gameObjectAction);
 }

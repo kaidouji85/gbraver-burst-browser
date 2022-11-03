@@ -1,5 +1,5 @@
 // @flow
-import type {GameProps} from "../game-props";
+import type { GameProps } from "../game-props";
 
 /**
  * アカウント削除キャンセル
@@ -7,5 +7,5 @@ import type {GameProps} from "../game-props";
  * @param props ゲームプロパティ
  */
 export function onCancelAccountDeletion(props: $ReadOnly<GameProps>): void {
-  props.domDialogs.hidden();
+  props.domDialogBinder.hidden();
 }

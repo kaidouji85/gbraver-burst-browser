@@ -1,11 +1,12 @@
 // @flow
 
 import * as THREE from "three";
-import {HorizontalAnimationMesh} from "../../../../mesh/horizontal-animation";
-import type {Resources} from "../../../../resource";
-import {TEXTURE_IDS} from "../../../../resource/texture/ids";
-import type {LightningModel} from "../model/lightning-model";
-import type {LightningView} from "./lightning-view";
+
+import { HorizontalAnimationMesh } from "../../../../mesh/horizontal-animation";
+import type { Resources } from "../../../../resource";
+import { TEXTURE_IDS } from "../../../../resource/texture/ids";
+import type { LightningModel } from "../model/lightning-model";
+import type { LightningView } from "./lightning-view";
 
 /** メッシュ幅 */
 const WIDTH = 350;
@@ -21,7 +22,9 @@ export class PlayerLightningView implements LightningView {
   #mesh: HorizontalAnimationMesh;
 
   constructor(resources: Resources) {
-    const textureResource = resources.textures.find(v => v.id === TEXTURE_IDS.HITMARK_LIGHTNING_RING);
+    const textureResource = resources.textures.find(
+      (v) => v.id === TEXTURE_IDS.HITMARK_LIGHTNING_RING
+    );
     const texture = textureResource
       ? textureResource.texture
       : new THREE.Texture();
@@ -47,11 +50,7 @@ export class PlayerLightningView implements LightningView {
    */
   engage(model: LightningModel): void {
     const object3D = this.#mesh.getObject3D();
-    object3D.position.set(
-      model.position.x,
-      model.position.y,
-      model.position.z,
-    );
+    object3D.position.set(model.position.x, model.position.y, model.position.z);
     object3D.scale.set(1, 1, 1);
     this.#mesh.setOpacity(model.opacity);
     this.#mesh.animate(model.animation.frame);

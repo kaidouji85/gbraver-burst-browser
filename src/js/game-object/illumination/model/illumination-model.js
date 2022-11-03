@@ -6,5 +6,5 @@ export type IlluminationModel = {
    * 照明の強さ
    * 大きいほど明るくなる
    */
-  intensity: number
+  intensity: number,
 };

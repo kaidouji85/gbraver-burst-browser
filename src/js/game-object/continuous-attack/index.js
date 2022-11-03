@@ -1,11 +1,11 @@
 // @flow
 
-import type {Resources} from "../../resource";
-import type {Stream} from "../../stream/stream";
-import type {GameObjectAction} from "../action/game-object-action";
-import {ContinuousAttackIndicator} from "./continuous-attack-indicator";
-import {EnemyContinuousAttackView} from "./view/enemy-continuous-attack-view";
-import {PlayerContinuousAttackView} from "./view/player-continuous-attack-view";
+import type { Resources } from "../../resource";
+import type { Stream } from "../../stream/stream";
+import type { GameObjectAction } from "../action/game-object-action";
+import { ContinuousAttackIndicator } from "./continuous-attack-indicator";
+import { EnemyContinuousAttackView } from "./view/enemy-continuous-attack-view";
+import { PlayerContinuousAttackView } from "./view/player-continuous-attack-view";
 
 /**
  * プレイヤー側 連続攻撃
@@ -14,7 +14,10 @@ import {PlayerContinuousAttackView} from "./view/player-continuous-attack-view";
  * @param gameObjectAction ゲームオブジェクトアクション
  * @return 生成結果
  */
-export function playerContinuousAttack(resources: Resources, gameObjectAction: Stream<GameObjectAction>): ContinuousAttackIndicator {
+export function playerContinuousAttack(
+  resources: Resources,
+  gameObjectAction: Stream<GameObjectAction>
+): ContinuousAttackIndicator {
   const view = new PlayerContinuousAttackView(resources);
   return new ContinuousAttackIndicator(view, resources, gameObjectAction);
 }
@@ -26,7 +29,10 @@ export function playerContinuousAttack(resources: Resources, gameObjectAction: S
  * @param gameObjectAction ゲームオブジェクトアクション
  * @return 生成結果
  */
-export function enemyContinuousAttack(resources: Resources, gameObjectAction: Stream<GameObjectAction>): ContinuousAttackIndicator {
+export function enemyContinuousAttack(
+  resources: Resources,
+  gameObjectAction: Stream<GameObjectAction>
+): ContinuousAttackIndicator {
   const view = new EnemyContinuousAttackView(resources);
   return new ContinuousAttackIndicator(view, resources, gameObjectAction);
 }

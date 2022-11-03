@@ -1,7 +1,8 @@
 // @flow
 
-import * as THREE from 'three';
-import type {ContinuousAttackModel} from "../model/continuous-attack-model";
+import * as THREE from "three";
+
+import type { ContinuousAttackModel } from "../model/continuous-attack-model";
 
 /**
  * 連続攻撃 ビュー

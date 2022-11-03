@@ -1,28 +1,29 @@
 // @flow
 
 import * as THREE from "three";
-import {Group} from "three";
-import type {Resources} from "../../../../resource";
-import type {ArmdozerAnimation} from "../../mesh/armdozer-animation";
-import {wingDozerBackStep} from "../mesh/back-step";
-import {wingDozerDashDown} from "../mesh/dash-down";
-import {wingDozerDashToStand} from "../mesh/dash-to-stand";
-import {wingDozerDashUp} from "../mesh/dash-up";
-import {wingDozerDown} from "../mesh/down";
-import {wingDozerFrontStep} from "../mesh/front-step";
-import {wingDozerGuard} from "../mesh/guard";
-import {wingDozerKnockBack} from "../mesh/knock-back";
-import {wingDozerStand} from "../mesh/stand";
-import {wingDozerUpperAttack} from "../mesh/upper-attack";
-import {wingDozerUpperCharge} from "../mesh/upper-charge";
-import {wingDozerUpperToStand} from "../mesh/upper-to-stand";
-import type {AnimationType, WingDozerModel} from "../model/wing-dozer-model";
-import type {WingDozerView} from "./wing-dozer-view";
+import { Group } from "three";
+
+import type { Resources } from "../../../../resource";
+import type { ArmdozerAnimation } from "../../mesh/armdozer-animation";
+import { wingDozerBackStep } from "../mesh/back-step";
+import { wingDozerDashDown } from "../mesh/dash-down";
+import { wingDozerDashToStand } from "../mesh/dash-to-stand";
+import { wingDozerDashUp } from "../mesh/dash-up";
+import { wingDozerDown } from "../mesh/down";
+import { wingDozerFrontStep } from "../mesh/front-step";
+import { wingDozerGuard } from "../mesh/guard";
+import { wingDozerKnockBack } from "../mesh/knock-back";
+import { wingDozerStand } from "../mesh/stand";
+import { wingDozerUpperAttack } from "../mesh/upper-attack";
+import { wingDozerUpperCharge } from "../mesh/upper-charge";
+import { wingDozerUpperToStand } from "../mesh/upper-to-stand";
+import type { AnimationType, WingDozerModel } from "../model/wing-dozer-model";
+import type { WingDozerView } from "./wing-dozer-view";
 
 /**
  * プレイヤー側 ウィングドーザ ビュー
  */
-export class PlayerWingDozerView implements WingDozerView{
+export class PlayerWingDozerView implements WingDozerView {
   #stand: ArmdozerAnimation;
   #upperCharge: ArmdozerAnimation;
   #upperAttack: ArmdozerAnimation;
@@ -57,7 +58,7 @@ export class PlayerWingDozerView implements WingDozerView{
     this.#guard = wingDozerGuard(resources);
 
     this.#group = new Group();
-    this.#getAllMeshes().forEach(mesh => {
+    this.#getAllMeshes().forEach((mesh) => {
       this.#group.add(mesh.getObject3D());
     });
   }
@@ -66,7 +67,7 @@ export class PlayerWingDozerView implements WingDozerView{
    * デストラクタ
    */
   destructor(): void {
-    this.#getAllMeshes().forEach(mesh => {
+    this.#getAllMeshes().forEach((mesh) => {
       mesh.destructor();
     });
   }
@@ -93,14 +94,13 @@ export class PlayerWingDozerView implements WingDozerView{
     this.#group.scale.x = 1;
     this.#group.scale.y = 1;
     this.#group.scale.z = 1;
-    
+
     const activeMesh = this.#getActiveMesh(model.animation.type);
     activeMesh.animate(model.animation.frame);
     activeMesh.visible(true);
 
-    const disActiveMesh = this.#getAllMeshes()
-      .filter(v => v !== activeMesh);
-    disActiveMesh.forEach(v => v.visible(false));
+    const disActiveMesh = this.#getAllMeshes().filter((v) => v !== activeMesh);
+    disActiveMesh.forEach((v) => v.visible(false));
   }
 
   /**
@@ -126,7 +126,7 @@ export class PlayerWingDozerView implements WingDozerView{
    *
    * @return 全メッシュ
    */
-  #getAllMeshes(): ArmdozerAnimation [] {
+  #getAllMeshes(): ArmdozerAnimation[] {
     return [
       this.#stand,
       this.#upperCharge,
@@ -150,30 +150,30 @@ export class PlayerWingDozerView implements WingDozerView{
    * @return メッシュ
    */
   #getActiveMesh(type: AnimationType): ArmdozerAnimation {
-    switch(type) {
-      case 'STAND':
+    switch (type) {
+      case "STAND":
         return this.#stand;
-      case 'UPPER_CHARGE':
+      case "UPPER_CHARGE":
         return this.#upperCharge;
-      case 'UPPER_ATTACK':
+      case "UPPER_ATTACK":
         return this.#upperAttack;
-      case 'UPPER_TO_STAND':
+      case "UPPER_TO_STAND":
         return this.#upperToStand;
-      case 'DASH_UP':
+      case "DASH_UP":
         return this.#dashUp;
-      case 'DASH_DOWN':
+      case "DASH_DOWN":
         return this.#dashDown;
-      case 'DASH_TO_STAND':
+      case "DASH_TO_STAND":
         return this.#dashToStand;
-      case 'KNOCK_BACK':
+      case "KNOCK_BACK":
         return this.#knockBack;
-      case 'DOWN':
+      case "DOWN":
         return this.#down;
-      case 'BACK_STEP':
+      case "BACK_STEP":
         return this.#backStep;
-      case 'FRONT_STEP':
+      case "FRONT_STEP":
         return this.#frontStep;
-      case 'GUARD':
+      case "GUARD":
         return this.#guard;
       default:
         return this.#stand;

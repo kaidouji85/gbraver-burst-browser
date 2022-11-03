@@ -1,24 +1,25 @@
 // @flow
 
-import {delay} from "../src/js/animation/delay";
+import { delay } from "../src/js/animation/delay";
 import {
   gaiPilotButton,
   raitoPilotButton,
   shinyaPilotButton,
-  tsubasaPilotButton
+  tsubasaPilotButton,
 } from "../src/js/game-object/pilot-button";
-import {HUDGameObjectStub} from "./stub/hud-game-object-stub";
+import { HUDGameObjectStub } from "./stub/hud-game-object-stub";
 
 export default {
-  title: 'pilot-button',
+  title: "pilot-button",
 };
 
 export const shinya = (): HTMLElement => {
-  const stub = new HUDGameObjectStub(({resources, gameObjectAction}) => {
+  const stub = new HUDGameObjectStub(({ resources, gameObjectAction }) => {
     const button = shinyaPilotButton(resources, gameObjectAction);
     button.pushButtonNotifier().subscribe(() => {
-      console.log('push button!!');
-      const animation = button.decide()
+      console.log("push button!!");
+      const animation = button
+        .decide()
         .chain(delay(1000))
         .chain(button.close())
         .chain(delay(1000))
@@ -30,14 +31,15 @@ export const shinya = (): HTMLElement => {
   });
   stub.start();
   return stub.domElement();
-}
+};
 
 export const gai = (): HTMLElement => {
-  const stub = new HUDGameObjectStub(({resources, gameObjectAction}) => {
+  const stub = new HUDGameObjectStub(({ resources, gameObjectAction }) => {
     const button = gaiPilotButton(resources, gameObjectAction);
     button.pushButtonNotifier().subscribe(() => {
-      console.log('push button!!');
-      const animation = button.decide()
+      console.log("push button!!");
+      const animation = button
+        .decide()
         .chain(delay(1000))
         .chain(button.close())
         .chain(delay(1000))
@@ -49,14 +51,15 @@ export const gai = (): HTMLElement => {
   });
   stub.start();
   return stub.domElement();
-}
+};
 
 export const raito = (): HTMLElement => {
-  const stub = new HUDGameObjectStub(({resources, gameObjectAction}) => {
+  const stub = new HUDGameObjectStub(({ resources, gameObjectAction }) => {
     const button = raitoPilotButton(resources, gameObjectAction);
     button.pushButtonNotifier().subscribe(() => {
-      console.log('push button!!');
-      const animation = button.decide()
+      console.log("push button!!");
+      const animation = button
+        .decide()
         .chain(delay(1000))
         .chain(button.close())
         .chain(delay(1000))
@@ -68,14 +71,15 @@ export const raito = (): HTMLElement => {
   });
   stub.start();
   return stub.domElement();
-}
+};
 
 export const tsubasa = (): HTMLElement => {
-  const stub = new HUDGameObjectStub(({resources, gameObjectAction}) => {
+  const stub = new HUDGameObjectStub(({ resources, gameObjectAction }) => {
     const button = tsubasaPilotButton(resources, gameObjectAction);
     button.pushButtonNotifier().subscribe(() => {
-      console.log('push button!!');
-      const animation = button.decide()
+      console.log("push button!!");
+      const animation = button
+        .decide()
         .chain(delay(1000))
         .chain(button.close())
         .chain(delay(1000))
@@ -87,4 +91,4 @@ export const tsubasa = (): HTMLElement => {
   });
   stub.start();
   return stub.domElement();
-}
+};

@@ -1,5 +1,7 @@
 // @flow
-import type {GameProps} from "../game-props";
+import { Config } from "../../dom-scenes/config";
+import { configConnector } from "../dom-scene-binder/action-connector/config-connector";
+import type { GameProps } from "../game-props";
 
 /**
  * 設定変更開始時の処理
@@ -7,9 +9,12 @@ import type {GameProps} from "../game-props";
  * @param props ゲームプロパティ
  * @return 処理が完了したら発火するPromise
  */
-export async function onConfigChangeStart(props: $ReadOnly<GameProps>): Promise<void> {
+export async function onConfigChangeStart(
+  props: $ReadOnly<GameProps>
+): Promise<void> {
   await props.fader.fadeOut();
   const config = await props.config.load();
-  props.domScenes.startConfig(props.resources, config);
+  const scene = new Config(props.resources, config);
+  props.domSceneBinder.bind(scene, configConnector);
   await props.fader.fadeIn();
 }

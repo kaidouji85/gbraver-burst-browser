@@ -1,8 +1,9 @@
 // @flow
 
-import * as THREE from 'three';
-import type {PreRender} from "../../../game-loop/pre-render";
-import type {TurnStartModel} from "../model/turn-start-model";
+import * as THREE from "three";
+
+import type { PreRender } from "../../../game-loop/pre-render";
+import type { TurnStartModel } from "../model/turn-start-model";
 
 /**
  * ターンスタート ビュー
@@ -13,7 +14,7 @@ export interface TurnStartView {
 
   /**
    * モデルをビューに反映させる
-   * 
+   *
    * @param model モデル
    * @param preRender プリレンダー情報
    */

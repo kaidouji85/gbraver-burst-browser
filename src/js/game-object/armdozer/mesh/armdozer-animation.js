@@ -1,10 +1,12 @@
 // @flow
 
-import * as THREE from 'three';
+import * as THREE from "three";
 
 /** アームドーザアニメーション */
 export interface ArmdozerAnimation {
-  /** デストラクタ */
+  /**
+   * デストラクタ相当の処理
+   */
   destructor(): void;
 
   /**
@@ -14,9 +16,17 @@ export interface ArmdozerAnimation {
    */
   animate(animation: number): void;
 
-  /** 表示、非表示を設定する */
+  /**
+   * 表示、非表示を設定する
+   *
+   * @param isVisible trueで表示する
+   */
   visible(isVisible: boolean): void;
 
-  /** シーンに追加するオブジェクトを取得する */
+  /**
+   * シーンに追加するオブジェクトを取得する
+   *
+   * @return 取得結果
+   */
   getObject3D(): typeof THREE.Object3D;
 }

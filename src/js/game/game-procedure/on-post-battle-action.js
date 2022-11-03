@@ -1,35 +1,43 @@
 // @flow
-import type {Player} from 'gbraver-burst-core';
-import {fadeOut, stop} from "../../bgm/bgm-operators";
-import type {PostBattleAction} from "../game-actions";
-import type {GameProps} from "../game-props";
-import type {InProgress} from "../in-progress/in-progress";
-import type {PlayingTutorialStage} from "../in-progress/tutorial";
-import type {NPCBattleStage, NPCBattleState} from "../npc-battle";
-import {getCurrentNPCStage, getNPCStageLevel} from "../npc-battle";
-import {DefaultStage} from "../npc-battle-courses";
-import type {TutorialStage} from "../tutorial-stages";
-import {playTitleBGM} from "./play-title-bgm";
-import {startNPCBattleStage} from "./start-npc-battle-stage";
-import {startTitle} from "./start-title";
-import {startTutorial} from "./start-tutorial";
-import {startTutorialSelector} from "./start-tutorial-selector";
+import type { Player } from "gbraver-burst-core";
+
+import { fadeOut, stop } from "../../bgm/bgm-operators";
+import { NPCEnding } from "../../dom-scenes/npc-ending/npc-ending";
+import { waitTime } from "../../wait/wait-time";
+import { npcEndingConnector } from "../dom-scene-binder/action-connector/npc-ending-connector";
+import { MAX_LOADING_TIME } from "../dom-scene-binder/max-loading-time";
+import type { PostBattleAction } from "../game-actions";
+import type { GameProps } from "../game-props";
+import type { InProgress } from "../in-progress/in-progress";
+import type { PlayingTutorialStage } from "../in-progress/tutorial";
+import type { NPCBattleStage, NPCBattleState } from "../npc-battle";
+import { getCurrentNPCStage, getNPCStageLevel } from "../npc-battle";
+import { DefaultStage } from "../npc-battle-courses";
+import type { TutorialStage } from "../tutorial-stages";
+import { playTitleBGM } from "./play-title-bgm";
+import { startNPCBattleStage } from "./start-npc-battle-stage";
+import { startTitle } from "./start-title";
+import { startTutorial } from "./start-tutorial";
+import { startTutorialSelector } from "./start-tutorial-selector";
 
 /**
  * タイトルに遷移する
  *
  * @param props ゲームプロパティ
- * @return 処理が完了したら発火するPromise 
+ * @return 処理が完了したら発火するPromise
  */
 const gotoTitle = async (props: $ReadOnly<GameProps>) => {
   props.domFloaters.hiddenPostBattle();
-  await Promise.all([(async () => {
-    await props.fader.fadeOut();
-    return await startTitle(props);
-  })(), (async () => {
-    await props.bgm.do(fadeOut);
-    await props.bgm.do(stop);
-  })()]);
+  await Promise.all([
+    (async () => {
+      await props.fader.fadeOut();
+      return await startTitle(props);
+    })(),
+    (async () => {
+      await props.bgm.do(fadeOut);
+      await props.bgm.do(stop);
+    })(),
+  ]);
   await props.fader.fadeIn();
   playTitleBGM(props);
 };
@@ -38,15 +46,17 @@ const gotoTitle = async (props: $ReadOnly<GameProps>) => {
  * エンディングに遷移する
  *
  * @param props ゲームプロパティ
- * @return 処理が完了したら発火するPromise 
+ * @return 処理が完了したら発火するPromise
  */
 const gotoEnding = async (props: $ReadOnly<GameProps>) => {
   props.domFloaters.hiddenPostBattle();
   await props.fader.fadeOut();
-  props.tdScenes.hidden();
-  const ending = await props.domScenes.startNPCEnding(props.resources, props.bgm);
+  props.tdBinder.hidden();
+  const scene = new NPCEnding(props.resources, props.bgm);
+  props.domSceneBinder.bind(scene, npcEndingConnector);
+  await Promise.race([scene.waitUntilLoaded(), waitTime(MAX_LOADING_TIME)]);
   await props.fader.fadeIn();
-  ending.playBGM();
+  scene.playBGM();
 };
 
 /**
@@ -56,14 +66,17 @@ const gotoEnding = async (props: $ReadOnly<GameProps>) => {
  * @return 生成結果、NPCバトル中でない場合はnullを返す
  */
 const createNPCBattle = (inProgress: InProgress) => {
-  if (inProgress.type !== 'NPCBattle' || inProgress.subFlow.type !== 'PlayingNPCBattle') {
+  if (
+    inProgress.type !== "NPCBattle" ||
+    inProgress.subFlow.type !== "PlayingNPCBattle"
+  ) {
     return null;
   }
   const state = (inProgress.subFlow.state: NPCBattleState);
   const stage = getCurrentNPCStage(state) ?? DefaultStage;
   const level = getNPCStageLevel(state);
   const player = state.player;
-  return {player, stage, level};
+  return { player, stage, level };
 };
 
 /**
@@ -75,7 +88,12 @@ const createNPCBattle = (inProgress: InProgress) => {
  * @param level レベル
  * @return 処理が完了したら発火するPromise
  */
-const gotoNPCBattleStage = async (props: $ReadOnly<GameProps>, player: Player, stage: NPCBattleStage, level: number) => {
+const gotoNPCBattleStage = async (
+  props: $ReadOnly<GameProps>,
+  player: Player,
+  stage: NPCBattleStage,
+  level: number
+) => {
   props.domFloaters.hiddenPostBattle();
   await startNPCBattleStage(props, player, stage, level);
 };
@@ -88,7 +106,11 @@ const gotoNPCBattleStage = async (props: $ReadOnly<GameProps>, player: Player, s
  * @param stage チュートリアルステージ
  * @return 処理が完了したら発火するPromise
  */
-const gotoTutorial = async (props: $ReadOnly<GameProps>, level: number, stage: TutorialStage) => {
+const gotoTutorial = async (
+  props: $ReadOnly<GameProps>,
+  level: number,
+  stage: TutorialStage
+) => {
   props.domFloaters.hiddenPostBattle();
   await startTutorial(props, level, stage);
 };
@@ -113,21 +135,39 @@ const gotoTutorialSelector = async (props: $ReadOnly<GameProps>) => {
  * @param action アクション
  * @return 処理が完了したら発火するPromise
  */
-export async function onPostBattleAction(props: GameProps, action: PostBattleAction): Promise<void> {
+export async function onPostBattleAction(
+  props: GameProps,
+  action: PostBattleAction
+): Promise<void> {
   const npcBattle = createNPCBattle(props.inProgress);
-  if (action.action.type === 'GotoTitle') {
-    props.inProgress = {type: 'None'};
+  if (action.action.type === "GotoTitle") {
+    props.inProgress = { type: "None" };
     await gotoTitle(props);
-  } else if (action.action.type === 'GotoEnding') {
-    props.inProgress = {type: 'None'};
+  } else if (action.action.type === "GotoEnding") {
+    props.inProgress = { type: "None" };
     await gotoEnding(props);
-  } else if (npcBattle && (action.action.type === 'NextStage' || action.action.type === 'Retry')) {
-    await gotoNPCBattleStage(props, npcBattle.player, npcBattle.stage, npcBattle.level);
-  } else if (action.action.type === 'Retry' && props.inProgress.type === 'Tutorial' && props.inProgress.subFlow.type === 'PlayingTutorialStage') {
+  } else if (
+    npcBattle &&
+    (action.action.type === "NextStage" || action.action.type === "Retry")
+  ) {
+    await gotoNPCBattleStage(
+      props,
+      npcBattle.player,
+      npcBattle.stage,
+      npcBattle.level
+    );
+  } else if (
+    action.action.type === "Retry" &&
+    props.inProgress.type === "Tutorial" &&
+    props.inProgress.subFlow.type === "PlayingTutorialStage"
+  ) {
     const playingTutorial = (props.inProgress.subFlow: PlayingTutorialStage);
     await gotoTutorial(props, playingTutorial.level, playingTutorial.stage);
-  } else if (action.action.type === 'GotoTutorialSelect') {
-    props.inProgress = {type: 'Tutorial', subFlow: {type: 'TutorialStageSelect'}};
+  } else if (action.action.type === "GotoTutorialSelect") {
+    props.inProgress = {
+      type: "Tutorial",
+      subFlow: { type: "TutorialStageSelect" },
+    };
     await gotoTutorialSelector(props);
   }
 }

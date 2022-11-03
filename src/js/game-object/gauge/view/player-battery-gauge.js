@@ -1,11 +1,12 @@
 // @flow
 
-import * as R from 'ramda';
-import * as THREE from 'three';
-import {SimpleImageMesh} from "../../../mesh/simple-image-mesh";
-import type {Resources} from "../../../resource";
-import {CANVAS_IMAGE_IDS} from "../../../resource/canvas-image";
-import type {Battery} from "../model/gauge-model";
+import * as R from "ramda";
+import * as THREE from "three";
+
+import { SimpleImageMesh } from "../../../mesh/simple-image-mesh";
+import type { Resources } from "../../../resource";
+import { CANVAS_IMAGE_IDS } from "../../../resource/canvas-image";
+import type { Battery } from "../model/gauge-model";
 
 /** バッテリー最大値 */
 export const MAX_BATTERY = 5;
@@ -23,8 +24,9 @@ export class PlayerBatteryGauge {
   constructor(resources: Resources) {
     this.#group = new THREE.Group();
 
-    this.#gaugeList = R.times(v => v + 1, MAX_BATTERY)
-      .map(v => new BatteryGaugeUnit(resources, v));
+    this.#gaugeList = R.times((v) => v + 1, MAX_BATTERY).map(
+      (v) => new BatteryGaugeUnit(resources, v)
+    );
     this.#gaugeList.forEach((gauge, index) => {
       gauge.getObject3D().position.x = index * 95;
       this.#group.add(gauge.getObject3D());
@@ -33,7 +35,7 @@ export class PlayerBatteryGauge {
 
   /** デストラクタ相当の処理 */
   destructor(): void {
-    this.#gaugeList.forEach(v => {
+    this.#gaugeList.forEach((v) => {
       v.destructor();
     });
   }
@@ -44,8 +46,10 @@ export class PlayerBatteryGauge {
    * @param batteryList モデル
    */
   engage(batteryList: Battery[]): void {
-    batteryList.forEach(v => {
-      const gauge = this.#gaugeList.find(gauge => gauge.getValue() === v.value);
+    batteryList.forEach((v) => {
+      const gauge = this.#gaugeList.find(
+        (gauge) => gauge.getValue() === v.value
+      );
       if (!gauge) {
         return;
       }
@@ -80,15 +84,29 @@ class BatteryGaugeUnit {
     this.#group = new THREE.Group();
     this.#value = value;
 
-    const gaugeImage = resources.canvasImages
-      .find(v => v.id === CANVAS_IMAGE_IDS.BATTERY_GAUGE)?.image ?? new Image();
-    this.#gauge = new SimpleImageMesh({image: gaugeImage, imageWidth:88, meshSize: 128, canvasSize: 128});
+    const gaugeImage =
+      resources.canvasImages.find(
+        (v) => v.id === CANVAS_IMAGE_IDS.BATTERY_GAUGE
+      )?.image ?? new Image();
+    this.#gauge = new SimpleImageMesh({
+      image: gaugeImage,
+      imageWidth: 88,
+      meshSize: 128,
+      canvasSize: 128,
+    });
     this.#gauge.getObject3D().position.z = 1;
     this.#group.add(this.#gauge.getObject3D());
 
-    const backImage = resources.canvasImages
-      .find(v => v.id === CANVAS_IMAGE_IDS.BATTERY_GAUGE_BACK)?.image ?? new Image();
-    this.#back = new SimpleImageMesh({image: backImage, imageWidth: 88, meshSize: 128, canvasSize: 128});
+    const backImage =
+      resources.canvasImages.find(
+        (v) => v.id === CANVAS_IMAGE_IDS.BATTERY_GAUGE_BACK
+      )?.image ?? new Image();
+    this.#back = new SimpleImageMesh({
+      image: backImage,
+      imageWidth: 88,
+      meshSize: 128,
+      canvasSize: 128,
+    });
     this.#back.getObject3D().position.z = 0;
     this.#group.add(this.#back.getObject3D());
   }

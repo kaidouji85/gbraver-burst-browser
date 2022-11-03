@@ -1,7 +1,7 @@
 // @flow
-import type {GameProps} from "../game-props";
-import {fullResourceLoading} from "./full-resource-loading";
-import {startTutorialSelector} from "./start-tutorial-selector";
+import type { GameProps } from "../game-props";
+import { fullResourceLoading } from "./full-resource-loading";
+import { startTutorialSelector } from "./start-tutorial-selector";
 
 /**
  * チュートリアル開始時の処理
@@ -16,5 +16,8 @@ export async function onTutorialStart(props: GameProps): Promise<void> {
   }
 
   await startTutorialSelector(props);
-  props.inProgress = {type: 'Tutorial', subFlow: {type: 'TutorialStageSelect'}};
+  props.inProgress = {
+    type: "Tutorial",
+    subFlow: { type: "TutorialStageSelect" },
+  };
 }

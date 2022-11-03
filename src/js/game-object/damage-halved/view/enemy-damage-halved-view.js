@@ -1,8 +1,8 @@
 // @flow
 
-import type {Resources} from "../../../resource";
-import type {DamageHalvedModel} from "../model/damage-halved-model";
-import {PlayerDamageHalvedView} from "./player-damage-halved-view";
+import type { Resources } from "../../../resource";
+import type { DamageHalvedModel } from "../model/damage-halved-model";
+import { PlayerDamageHalvedView } from "./player-damage-halved-view";
 
 /** 敵 ダメージ半減 ビュー */
 export class EnemyDamageHalvedView extends PlayerDamageHalvedView {

@@ -1,8 +1,8 @@
 // @flow
 
-import type {Resources} from "../../../../resource";
-import type {ShockWaveModel} from "../model/shock-wave-model";
-import {PlayerShockWaveView} from "./player-shock-wave-view";
+import type { Resources } from "../../../../resource";
+import type { ShockWaveModel } from "../model/shock-wave-model";
+import { PlayerShockWaveView } from "./player-shock-wave-view";
 
 /**
  * 敵の衝撃波ビュー

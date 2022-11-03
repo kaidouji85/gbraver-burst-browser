@@ -1,5 +1,13 @@
 // @flow
-import type {BatteryDeclaration, Battle, GameEnd, GameState, GameStateX, InputCommand} from "gbraver-burst-core";
+
+import type {
+  BatteryDeclaration,
+  Battle,
+  GameEnd,
+  GameState,
+  GameStateX,
+  InputCommand,
+} from "gbraver-burst-core";
 
 /**
  * GameStateX<Battle>にキャストする
@@ -9,9 +17,9 @@ import type {BatteryDeclaration, Battle, GameEnd, GameState, GameStateX, InputCo
  * @return キャスト結果
  */
 export function castBattle(state: GameState): ?GameStateX<Battle> {
-  if (state.effect.name === 'Battle') {
+  if (state.effect.name === "Battle") {
     const effect: Battle = state.effect;
-    return {...state, effect};
+    return { ...state, effect };
   }
   return null;
 }
@@ -24,7 +32,7 @@ export function castBattle(state: GameState): ?GameStateX<Battle> {
  * @return 抽出結果
  */
 export function extractBattle(stateHistory: GameState[]): ?GameStateX<Battle> {
-  const foundState = stateHistory.find(v => v.effect.name === 'Battle');
+  const foundState = stateHistory.find((v) => v.effect.name === "Battle");
   return foundState ? castBattle(foundState) : null;
 }
 
@@ -36,9 +44,9 @@ export function extractBattle(stateHistory: GameState[]): ?GameStateX<Battle> {
  * @return キャスト結果
  */
 export function castInputCommand(state: GameState): ?GameStateX<InputCommand> {
-  if (state.effect.name === 'InputCommand') {
+  if (state.effect.name === "InputCommand") {
     const effect: InputCommand = state.effect;
-    return {...state, effect};
+    return { ...state, effect };
   }
   return null;
 }
@@ -50,8 +58,10 @@ export function castInputCommand(state: GameState): ?GameStateX<InputCommand> {
  * @param stateHistory ステートヒストリー
  * @return 抽出結果
  */
-export function extractInputCommand(stateHistory: GameState[]): ?GameStateX<InputCommand> {
-  const foundState = stateHistory.find(v => v.effect.name === 'InputCommand');
+export function extractInputCommand(
+  stateHistory: GameState[]
+): ?GameStateX<InputCommand> {
+  const foundState = stateHistory.find((v) => v.effect.name === "InputCommand");
   return foundState ? castInputCommand(foundState) : null;
 }
 
@@ -62,10 +72,12 @@ export function extractInputCommand(stateHistory: GameState[]): ?GameStateX<Inpu
  * @param state キャスト元
  * @return キャスト結果
  */
-export function castBatteryDeclaration(state: GameState): ?GameStateX<BatteryDeclaration> {
-  if (state.effect.name === 'BatteryDeclaration') {
+export function castBatteryDeclaration(
+  state: GameState
+): ?GameStateX<BatteryDeclaration> {
+  if (state.effect.name === "BatteryDeclaration") {
     const effect: BatteryDeclaration = state.effect;
-    return {...state, effect};
+    return { ...state, effect };
   }
   return null;
 }
@@ -77,8 +89,12 @@ export function castBatteryDeclaration(state: GameState): ?GameStateX<BatteryDec
  * @param stateHistory ステートヒストリー
  * @return 抽出結果
  */
-export function extractBatteryDeclaration(stateHistory: GameState[]): ?GameStateX<BatteryDeclaration> {
-  const foundState = stateHistory.find(v => v.effect.name === 'BatteryDeclaration');
+export function extractBatteryDeclaration(
+  stateHistory: GameState[]
+): ?GameStateX<BatteryDeclaration> {
+  const foundState = stateHistory.find(
+    (v) => v.effect.name === "BatteryDeclaration"
+  );
   return foundState ? castBatteryDeclaration(foundState) : null;
 }
 
@@ -90,9 +106,9 @@ export function extractBatteryDeclaration(stateHistory: GameState[]): ?GameState
  * @return キャスト結果
  */
 export function castGameEnd(state: GameState): ?GameStateX<GameEnd> {
-  if (state.effect.name === 'GameEnd') {
+  if (state.effect.name === "GameEnd") {
     const effect: GameEnd = state.effect;
-    return {...state, effect};
+    return { ...state, effect };
   }
   return null;
 }
@@ -104,7 +120,9 @@ export function castGameEnd(state: GameState): ?GameStateX<GameEnd> {
  * @param stateHistory ステートヒストリー
  * @return 抽出結果
  */
-export function extractGameEnd(stateHistory: GameState[]): ?GameStateX<GameEnd> {
-  const foundState = stateHistory.find(v => v.effect.name === 'GameEnd');
+export function extractGameEnd(
+  stateHistory: GameState[]
+): ?GameStateX<GameEnd> {
+  const foundState = stateHistory.find((v) => v.effect.name === "GameEnd");
   return foundState ? castGameEnd(foundState) : null;
 }

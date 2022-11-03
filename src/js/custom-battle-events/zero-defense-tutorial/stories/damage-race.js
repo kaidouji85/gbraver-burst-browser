@@ -1,8 +1,8 @@
 // @flow
-import type {CustomBattleEventProps} from "../../../game/td-scenes/battle/custom-battle-event";
-import {activeLeftMessageWindowWithFace} from "../../active-message-window";
-import {refreshConversation} from "../../invisible-all-message-windows";
-import {scrollLeftMessages} from "../../scroll-messages";
+import type { CustomBattleEventProps } from "../../../td-scenes/battle/custom-battle-event";
+import { activeLeftMessageWindowWithFace } from "../../active-message-window";
+import { refreshConversation } from "../../invisible-all-message-windows";
+import { scrollLeftMessages } from "../../scroll-messages";
 
 /**
  * ストーリー ダメージレースイーブン
@@ -10,10 +10,10 @@ import {scrollLeftMessages} from "../../scroll-messages";
  * @return ストーリーが完了したら発火するPromise
  */
 const damageRaceEven = async (props: CustomBattleEventProps) => {
-  activeLeftMessageWindowWithFace(props, 'Gai');
+  activeLeftMessageWindowWithFace(props, "Gai");
   await scrollLeftMessages(props, [
-    ['ガイ', '「ダメージレースはイーブンか'],
-    ['面白い そうこなくてはな」'],
+    ["ガイ", "「ダメージレースはイーブンか"],
+    ["面白い そうこなくてはな」"],
   ]);
   await refreshConversation(props);
 };
@@ -24,10 +24,10 @@ const damageRaceEven = async (props: CustomBattleEventProps) => {
  * @return ストーリーが完了したら発火するPromise
  */
 const damageRaceAdvantage = async (props: CustomBattleEventProps) => {
-  activeLeftMessageWindowWithFace(props, 'Gai');
+  activeLeftMessageWindowWithFace(props, "Gai");
   await scrollLeftMessages(props, [
-    ['ガイ', '「何？ 俺がダメージレースで負けているだと'],
-    ['少しは本気を出さんとな」'],
+    ["ガイ", "「何？ 俺がダメージレースで負けているだと"],
+    ["少しは本気を出さんとな」"],
   ]);
   await refreshConversation(props);
 };
@@ -38,11 +38,11 @@ const damageRaceAdvantage = async (props: CustomBattleEventProps) => {
  * @return ストーリーが完了したら発火するPromise
  */
 const damageRaceDisadvantage = async (props: CustomBattleEventProps) => {
-  activeLeftMessageWindowWithFace(props, 'Gai');
+  activeLeftMessageWindowWithFace(props, "Gai");
   await scrollLeftMessages(props, [
-    ['ガイ', '「フハハハハ 見ろシンヤ！！'],
-    ['ダメージレースは俺の優勢'],
-    ['このまま勝利をいただくぞ」'],
+    ["ガイ", "「フハハハハ 見ろシンヤ！！"],
+    ["ダメージレースは俺の優勢"],
+    ["このまま勝利をいただくぞ」"],
   ]);
   await refreshConversation(props);
 };
@@ -54,7 +54,11 @@ const damageRaceDisadvantage = async (props: CustomBattleEventProps) => {
  * @param enemyHP 敵HP
  * @return ストーリーが完了したら発火するPromise
  */
-export const damageRace = async (props: CustomBattleEventProps, playerHP: number, enemyHP: number) => {
+export const damageRace = async (
+  props: CustomBattleEventProps,
+  playerHP: number,
+  enemyHP: number
+) => {
   const hpDiff = playerHP - enemyHP;
   const isHpNearlyEqual = Math.abs(hpDiff) <= 500;
   if (isHpNearlyEqual) {

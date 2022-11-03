@@ -6,7 +6,7 @@ import type {
   CustomBattleEvent,
   LastState,
   PilotSkillCommandSelected,
-} from "../game/td-scenes/battle/custom-battle-event";
+} from "../td-scenes/battle/custom-battle-event";
 
 /**
  * 空のカスタムバトルイベント
@@ -14,32 +14,50 @@ import type {
  */
 export class EmptyCustomBattleEvent implements CustomBattleEvent {
   /** @override */
-  async beforeLastState(props: LastState): Promise<void> { // eslint-disable-line no-unused-vars
+  /* eslint-disable no-unused-vars */
+  async beforeLastState(props: LastState): Promise<void> {
+    /* eslint-enable no-unused-vars */
     // NOP
   }
 
   /** @override */
-  async onLastState(props: LastState): Promise<void> { // eslint-disable-line no-unused-vars
+  /* eslint-disable no-unused-vars */
+  async onLastState(props: LastState): Promise<void> {
+    /* eslint-enable no-unused-vars */
     // NOP
   }
 
   /** @override */
-  async afterLastState(props: LastState): Promise<void> { // eslint-disable-line no-unused-vars
+  /* eslint-disable no-unused-vars */
+  async afterLastState(props: LastState): Promise<void> {
+    /* eslint-enable no-unused-vars */
     // NOP
   }
 
   /** @override */
-  async onBatteryCommandSelected(props: BatteryCommandSelected): Promise<CommandCanceled> { // eslint-disable-line no-unused-vars
-    return {isCommandCanceled: false};
+  /* eslint-disable no-unused-vars */
+  async onBatteryCommandSelected(
+    props: BatteryCommandSelected
+  ): Promise<CommandCanceled> {
+    /* eslint-enable no-unused-vars */
+    return { isCommandCanceled: false };
   }
 
   /** @override */
-  async onBurstCommandSelected(props: BurstCommandSelected): Promise<CommandCanceled> { // eslint-disable-line no-unused-vars
-    return {isCommandCanceled: false};
+  /* eslint-disable no-unused-vars */
+  async onBurstCommandSelected(
+    props: BurstCommandSelected
+  ): Promise<CommandCanceled> {
+    /* eslint-enable no-unused-vars */
+    return { isCommandCanceled: false };
   }
 
   /** @override */
-  async onPilotSkillCommandSelected(props: PilotSkillCommandSelected): Promise<CommandCanceled> { // eslint-disable-line no-unused-vars
-    return {isCommandCanceled: false};
+  /* eslint-disable no-unused-vars */
+  async onPilotSkillCommandSelected(
+    props: PilotSkillCommandSelected
+  ): Promise<CommandCanceled> {
+    /* eslint-enable no-unused-vars */
+    return { isCommandCanceled: false };
   }
 }

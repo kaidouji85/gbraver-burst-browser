@@ -1,50 +1,107 @@
 // @flow
-import * as THREE from "three";
-import {HorizontalAnimationMesh} from "../../../mesh/horizontal-animation";
-import type {Resources} from "../../../resource";
-import type {TextureId} from "../../../resource/texture/resource";
-import type {ArmdozerAnimation} from "./armdozer-animation";
 
-type Param = {
-  id: TextureId,
-  resources: Resources,
+import * as THREE from "three";
+
+import { HorizontalAnimationMesh } from "../../../mesh/horizontal-animation";
+import type { Resources } from "../../../resource";
+import type { TextureId } from "../../../resource/texture/resource";
+import type { ArmdozerAnimation } from "./armdozer-animation";
+
+/** コンストラクタのパラメータ */
+type ConstructorParam = {
+  /** テクスチャ */
+  texture: typeof THREE.Texture,
+  /** アニメーション枚数 */
   maxAnimation: number,
+  /** 横 */
   width: number,
+  /** 縦 */
   height: number,
 };
 
 /** アームドーザアニメーション水平方向テクスチャ版 */
-export class HorizontalArmdozerAnimation implements ArmdozerAnimation {
+class HorizontalArmdozerAnimation implements ArmdozerAnimation {
+  /** アニメーションメッシュ */
   #animation: HorizontalAnimationMesh;
 
-  constructor(param: Param) {
-    const textureResource = param.resources.textures.find(v => v.id === param.id);
-    const texture = textureResource ? textureResource.texture : new THREE.Texture();
+  /**
+   * コンストラクタ
+   *
+   * @param param パラメータ
+   */
+  constructor(param: ConstructorParam) {
     this.#animation = new HorizontalAnimationMesh({
-      texture: texture,
+      texture: param.texture,
       maxAnimation: param.maxAnimation,
       width: param.width,
       height: param.height,
     });
   }
 
-  /** デストラクタ */
+  /** @override */
   destructor(): void {
     this.#animation.destructor();
   }
 
-  /** アニメーション進捗を変更する */
+  /** @override */
   animate(animation: number): void {
     this.#animation.animate(animation);
   }
 
-  /** 表示、非表示を設定する */
+  /** @override */
   visible(isVisible: boolean): void {
     this.#animation.mesh.material.opacity = isVisible ? 1 : 0;
   }
 
-  /** シーンに追加するオブジェクトを取得する */
+  /** @override */
   getObject3D(): typeof THREE.Object3D {
     return this.#animation.getObject3D();
   }
+}
+
+/** createHorizontalAnimationのパラメータ */
+type CreatorParam = ConstructorParam;
+
+/**
+ * HorizontalArmdozerAnimationを生成する
+ * @param param パラメータ
+ * @return 生成結果
+ */
+export function createHorizontalAnimation(
+  param: CreatorParam
+): ArmdozerAnimation {
+  return new HorizontalArmdozerAnimation(param);
+}
+
+/** createHorizontalAnimationFromResourcesのパラメータ */
+type ParamWhenCreateFromResource = {
+  /** テクスチャID */
+  id: TextureId,
+  /** リソース管理オブジェクト */
+  resources: Resources,
+  /** アニメーション枚数 */
+  maxAnimation: number,
+  /** 横 */
+  width: number,
+  /** 縦 */
+  height: number,
+};
+
+/**
+ * リソース管理オブジェクトからHorizontalArmdozerAnimationを生成する
+ * @param params パラメータ
+ * @return 生成結果
+ */
+export function createHorizontalAnimationFromResources(
+  param: ParamWhenCreateFromResource
+): ArmdozerAnimation {
+  const texture =
+    param.resources.textures.find((v) => v.id === param.id)?.texture ??
+    new THREE.Texture();
+  return new HorizontalArmdozerAnimation({
+    texture,
+    maxAnimation: param.maxAnimation,
+    width: param.width,
+    height: param.height,
+  });
 }

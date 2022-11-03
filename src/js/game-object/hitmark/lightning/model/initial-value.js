@@ -3,9 +3,9 @@
 import {
   ARMDOZER_EFFECT_STANDARD_X,
   ARMDOZER_EFFECT_STANDARD_Y,
-  ARMDOZER_EFFECT_STANDARD_Z
+  ARMDOZER_EFFECT_STANDARD_Z,
 } from "../../../armdozer/position";
-import type {LightningModel} from "./lightning-model";
+import type { LightningModel } from "./lightning-model";
 
 /**
  * 電撃ヒットマークモデルの初期値を生成する
@@ -20,8 +20,8 @@ export function createInitialValue(): LightningModel {
       z: ARMDOZER_EFFECT_STANDARD_Z,
     },
     animation: {
-      frame: 0
+      frame: 0,
     },
-    opacity: 0
+    opacity: 0,
   };
 }

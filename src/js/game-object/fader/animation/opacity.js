@@ -1,8 +1,8 @@
 // @flow
 
-import {Animate} from "../../../animation/animate";
-import {tween} from "../../../animation/tween";
-import type {FaderModel} from "../model/fader-model";
+import { Animate } from "../../../animation/animate";
+import { tween } from "../../../animation/tween";
+import type { FaderModel } from "../model/fader-model";
 
 /**
  * 透明度を変更
@@ -12,6 +12,10 @@ import type {FaderModel} from "../model/fader-model";
  * @param duration アニメーション時間
  * @return アニメーション
  */
-export function opacity(value: FaderModel, opacity: number, duration: number): Animate {
-  return tween(value, t => t.to({opacity: opacity}, duration));
+export function opacity(
+  value: FaderModel,
+  opacity: number,
+  duration: number
+): Animate {
+  return tween(value, (t) => t.to({ opacity: opacity }, duration));
 }

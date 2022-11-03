@@ -1,8 +1,8 @@
 // @flow
 
-import type {Resources} from "../../../resource";
-import type {PowerUpModel} from "../model/power-up-model";
-import {PlayerPowerUpView} from "./player-power-up-view";
+import type { Resources } from "../../../resource";
+import type { PowerUpModel } from "../model/power-up-model";
+import { PlayerPowerUpView } from "./player-power-up-view";
 
 /**
  * 敵 攻撃アップ ビュー

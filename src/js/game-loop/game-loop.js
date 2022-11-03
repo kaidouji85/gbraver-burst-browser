@@ -1,11 +1,11 @@
 // @flow
-import type {Stream} from "../stream/stream";
-import {createStreamSource} from "../stream/stream";
+import type { Stream } from "../stream/stream";
+import { createStreamSource } from "../stream/stream";
 
 /** ゲームループ */
 export type GameLoop = {
-  type: 'GameLoop',
-  time: DOMHighResTimeStamp
+  type: "GameLoop",
+  time: DOMHighResTimeStamp,
 };
 
 /**
@@ -18,8 +18,8 @@ export function gameLoopStream(): Stream<GameLoop> {
   const gameLoop = (time: DOMHighResTimeStamp) => {
     requestAnimationFrame(gameLoop);
     source.next({
-      type: 'GameLoop',
-      time: time
+      type: "GameLoop",
+      time: time,
     });
   };
   requestAnimationFrame(gameLoop);

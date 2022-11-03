@@ -1,7 +1,8 @@
 // @flow
 
-import * as THREE from 'three';
-import type {ReflectIndocatorModel} from "../model/reflect-indocator-model";
+import * as THREE from "three";
+
+import type { ReflectIndocatorModel } from "../model/reflect-indocator-model";
 
 /**
  * ダメージ反射 ビュー

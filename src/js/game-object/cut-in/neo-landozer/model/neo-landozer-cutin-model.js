@@ -3,9 +3,7 @@
 /**
  * アニメーションタイプ
  */
-export type AnimationType =
-  'CUT_IN_UP' |
-  'CUT_IN_DOWN';
+export type AnimationType = "CUT_IN_UP" | "CUT_IN_DOWN";
 
 /**
  * ネオランドーザカットイン モデル
@@ -16,7 +14,7 @@ export type NeoLandozerCutInModel = {
     /** アニメーションタイプ */
     type: AnimationType,
     /** アニメーションフレーム */
-    frame: number
+    frame: number,
   },
 
   /**

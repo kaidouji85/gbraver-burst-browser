@@ -1,5 +1,5 @@
 // @flow
-import {Observable, Subject, Subscription} from "rxjs";
+import { Observable, Subject, Subscription } from "rxjs";
 
 /**
  * 購読停止オブジェクト
@@ -150,7 +150,7 @@ function createUnSubscriber(subscription: typeof Subscription): Unsubscriber {
   return {
     unsubscribe(): void {
       subscription.unsubscribe();
-    }
+    },
   };
 }
 

@@ -1,8 +1,8 @@
 // @flow
 
-import type {Resources} from "../../../resource";
-import type {RecoverBatteryModel} from "../model/recover-battery-model";
-import {PlayerRecoverBatteryView} from "./player-recover-battery-view";
+import type { Resources } from "../../../resource";
+import type { RecoverBatteryModel } from "../model/recover-battery-model";
+import { PlayerRecoverBatteryView } from "./player-recover-battery-view";
 
 /** 敵の回復バッテリー */
 export class EnemyRecoverBatteryView extends PlayerRecoverBatteryView {

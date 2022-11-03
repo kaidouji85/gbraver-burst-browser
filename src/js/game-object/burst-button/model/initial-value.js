@@ -1,6 +1,6 @@
 // @flow
 
-import type {BurstButtonModel} from "./burst-button-model";
+import type { BurstButtonModel } from "./burst-button-model";
 
 export function createInitialValue(): BurstButtonModel {
   return {
@@ -8,5 +8,5 @@ export function createInitialValue(): BurstButtonModel {
     disabled: true,
     scale: 1,
     canBurst: false,
-  }
+  };
 }

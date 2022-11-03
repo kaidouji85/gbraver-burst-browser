@@ -1,7 +1,8 @@
 // @flow
 
-import TWEEN from '@tweenjs/tween.js';
-import {scaleTweenDuration} from "./duration";
+import TWEEN from "@tweenjs/tween.js";
+
+import { scaleTweenDuration } from "./duration";
 
 /**
  * アニメーション
@@ -62,7 +63,11 @@ export class Animate {
    * @param end 連続したTweenの最後
    * @param time 全体の再生時間
    */
-  constructor(start: typeof TWEEN.Tween, end: typeof TWEEN.Tween, time: number) {
+  constructor(
+    start: typeof TWEEN.Tween,
+    end: typeof TWEEN.Tween,
+    time: number
+  ) {
     this._start = start;
     this._end = end;
     this._time = time;
@@ -70,7 +75,7 @@ export class Animate {
 
   /** アニメーションを再生する */
   play(): Promise<void> {
-    return new Promise(resolve => {
+    return new Promise((resolve) => {
       this._start.start();
       this._end.onComplete(() => {
         resolve();
@@ -96,7 +101,7 @@ export class Animate {
    * @return 結合後アニメーション
    */
   chain(next: Animate, ...pararells: Animate[]): Animate {
-    const pararellTweens = pararells.map(v => v._start);
+    const pararellTweens = pararells.map((v) => v._start);
     this._end.chain(next._start, ...pararellTweens);
     this._end = next._end;
     this._time += next._time;

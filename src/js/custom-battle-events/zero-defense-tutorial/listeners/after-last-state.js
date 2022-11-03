@@ -1,12 +1,21 @@
 // @flow
-import type {BatteryDeclaration, GameEnd, GameOver, GameStateX} from "gbraver-burst-core";
-import type {LastState} from "../../../game/td-scenes/battle/custom-battle-event";
-import {extractBatteryDeclaration, extractGameEnd} from "../../game-state-extractor";
-import {refreshConversation} from "../../invisible-all-message-windows";
-import type {ZeroDefenseTutorialState} from "../state";
-import {gameEndThanks} from "../stories/game-end-thanks";
-import {playerLose} from "../stories/player-lose";
-import {zeroDefenseWin} from "../stories/zero-defense-win";
+import type {
+  BatteryDeclaration,
+  GameEnd,
+  GameOver,
+  GameStateX,
+} from "gbraver-burst-core";
+
+import type { LastState } from "../../../td-scenes/battle/custom-battle-event";
+import {
+  extractBatteryDeclaration,
+  extractGameEnd,
+} from "../../game-state-extractor";
+import { refreshConversation } from "../../invisible-all-message-windows";
+import type { ZeroDefenseTutorialState } from "../state";
+import { gameEndThanks } from "../stories/game-end-thanks";
+import { playerLose } from "../stories/player-lose";
+import { zeroDefenseWin } from "../stories/zero-defense-win";
 
 /**
  * 最終ステート完了後イベント
@@ -15,16 +24,20 @@ import {zeroDefenseWin} from "../stories/zero-defense-win";
  * @param state ステート
  * @return ステート更新結果
  */
-export async function afterLastState(props: $ReadOnly<LastState>, state: ZeroDefenseTutorialState): Promise<ZeroDefenseTutorialState> {
+export async function afterLastState(
+  props: $ReadOnly<LastState>,
+  state: ZeroDefenseTutorialState
+): Promise<ZeroDefenseTutorialState> {
   const extractedBatteryDeclaration = extractBatteryDeclaration(props.update);
-  const extractedGameEnd =  extractGameEnd(props.update);
+  const extractedGameEnd = extractGameEnd(props.update);
   if (!extractedBatteryDeclaration || !extractedGameEnd) {
     return state;
   }
 
-  const batteryDeclaration: GameStateX<BatteryDeclaration> = extractedBatteryDeclaration;
+  const batteryDeclaration: GameStateX<BatteryDeclaration> =
+    extractedBatteryDeclaration;
   const gameEnd: GameStateX<GameEnd> = extractedGameEnd;
-  if (gameEnd.effect.result.type !== 'GameOver') {
+  if (gameEnd.effect.result.type !== "GameOver") {
     return state;
   }
 

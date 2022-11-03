@@ -4,5 +4,5 @@
  * 現在進行中のフローはない
  */
 export type None = {
-  type: 'None'
+  type: "None",
 };

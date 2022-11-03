@@ -1,6 +1,6 @@
 // @flow
 
-import type {SkyBrightnessModel} from "./sky-brightness-model";
+import type { SkyBrightnessModel } from "./sky-brightness-model";
 
 /**
  * 空の明るさモデルを初期値を生成する

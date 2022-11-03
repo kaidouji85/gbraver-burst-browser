@@ -13,5 +13,5 @@ export type TsubasaModel = {
   /** 位置 */
   position: {
     x: number,
-  }
+  },
 };

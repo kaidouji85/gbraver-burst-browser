@@ -1,7 +1,8 @@
 // @flow
 
-import * as THREE from 'three';
-import type {LightningModel} from "../model/lightning-model";
+import * as THREE from "three";
+
+import type { LightningModel } from "../model/lightning-model";
 
 /**
  * 電撃ヒットマークのビュー

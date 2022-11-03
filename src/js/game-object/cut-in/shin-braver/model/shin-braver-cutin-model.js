@@ -3,9 +3,7 @@
 /**
  * アニメーションタイプ
  */
-export type AnimationType =
-  'CUT_IN_UP' |
-  'CUT_IN_DOWN';
+export type AnimationType = "CUT_IN_UP" | "CUT_IN_DOWN";
 
 /**
  * シンブレイバーバーストのモデル
@@ -16,7 +14,7 @@ export type ShinBraverCutInModel = {
     /** アニメーションタイプ */
     type: AnimationType,
     /** 0〜1で指定するアニメーションフレーム */
-    frame: number
+    frame: number,
   },
   /** トラッキング */
   tracking: {

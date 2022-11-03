@@ -1,6 +1,6 @@
 // @flow
 
-import type {GaiModel} from "./gai-model";
+import type { GaiModel } from "./gai-model";
 
 /**
  * モデルの初期値を生成する
@@ -12,7 +12,7 @@ export function createInitialValue(): GaiModel {
     opacity: 0,
     scale: 1,
     position: {
-      x: 0
-    }
+      x: 0,
+    },
   };
 }

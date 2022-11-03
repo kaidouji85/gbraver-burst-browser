@@ -1,6 +1,6 @@
 // @flow
 
-import type {PowerUpModel} from "./power-up-model";
+import type { PowerUpModel } from "./power-up-model";
 
 /**
  * モデルの初期値を生成する

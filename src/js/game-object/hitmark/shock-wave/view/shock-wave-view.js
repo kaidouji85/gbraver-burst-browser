@@ -1,7 +1,8 @@
 // @flow
 
-import * as THREE from 'three';
-import type {ShockWaveModel} from "../model/shock-wave-model";
+import * as THREE from "three";
+
+import type { ShockWaveModel } from "../model/shock-wave-model";
 
 /**
  * 衝撃波のビュー

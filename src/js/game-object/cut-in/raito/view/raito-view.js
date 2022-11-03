@@ -1,8 +1,9 @@
 // @flow
 
-import * as THREE from 'three';
-import type {PreRender} from "../../../../game-loop/pre-render";
-import type {RaitoModel} from "../model/raito-model";
+import * as THREE from "three";
+
+import type { PreRender } from "../../../../game-loop/pre-render";
+import type { RaitoModel } from "../model/raito-model";
 
 /**
  * ライト ビュー

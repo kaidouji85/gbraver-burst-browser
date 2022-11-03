@@ -1,7 +1,8 @@
 // @flow
 
-import * as THREE from 'three';
-import type {BatteryNumberModel} from "../model/battery-number-model";
+import * as THREE from "three";
+
+import type { BatteryNumberModel } from "../model/battery-number-model";
 
 /** バッテリー数字のビュー */
 export interface BatteryNumberView {

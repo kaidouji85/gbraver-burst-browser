@@ -1,9 +1,12 @@
 // @flow
-import type {GameState} from "gbraver-burst-core";
-import type {LastState} from "../../../game/td-scenes/battle/custom-battle-event";
-import {focusInBatterySelector} from "../../focus";
-import {attackBatteryCaption, defenseBatteryCaption} from "../captions";
-import type {BatterySystemTutorialState} from "../state";
+
+import type { GameState } from "gbraver-burst-core";
+
+import type { LastState } from "../../../td-scenes/battle/custom-battle-event";
+import { focusInBatterySelector } from "../../focus";
+import { defenseBatteryCaption } from "../captions";
+import type { BatterySystemTutorialState } from "../state";
+import { attackDescription } from "../stories/attack-description";
 
 /**
  * 最終ステートイベント
@@ -12,22 +15,29 @@ import type {BatterySystemTutorialState} from "../state";
  * @param state ステート
  * @return ステート更新結果
  */
-export async function onLastState(props: $ReadOnly<LastState>, state: BatterySystemTutorialState): Promise<BatterySystemTutorialState> {
+export async function onLastState(
+  props: $ReadOnly<LastState>,
+  state: BatterySystemTutorialState
+): Promise<BatterySystemTutorialState> {
+  if (state.isBatterySystemDescriptionComplete) {
+    return state;
+  }
+
   const foundLastState = props.update[props.update.length - 1];
   if (!foundLastState) {
     return state;
   }
 
   const lastState: GameState = foundLastState;
-  if (lastState.effect.name !== 'InputCommand') {
+  if (lastState.effect.name !== "InputCommand") {
     return state;
   }
 
-  if (!state.isBatterySystemDescriptionComplete) {
-    const isMyTurn = lastState.activePlayerId === props.playerId;
-    const caption = isMyTurn ? attackBatteryCaption : defenseBatteryCaption;
-    await focusInBatterySelector(props, caption);
+  const isMyTurn = lastState.activePlayerId === props.playerId;
+  if (isMyTurn) {
+    await attackDescription(props);
+  } else {
+    await focusInBatterySelector(props, defenseBatteryCaption);
   }
-
   return state;
 }

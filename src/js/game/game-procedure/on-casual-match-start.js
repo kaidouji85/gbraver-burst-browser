@@ -1,6 +1,16 @@
 // @flow
-import type {GameProps} from "../game-props";
-import {fullResourceLoading} from "./full-resource-loading";
+import { LoginDialog } from "../../dom-dialogs/login/login-dialog";
+import { NetworkErrorDialog } from "../../dom-dialogs/network-error/network-error-dialog";
+import { WaitingDialog } from "../../dom-dialogs/waiting/waiting-dialog";
+import { PlayerSelect } from "../../dom-scenes/player-select";
+import { waitTime } from "../../wait/wait-time";
+import { loginDialogConnector } from "../dom-dialog-binder/action-connector/login-dialog-connector";
+import { networkErrorDialogConnector } from "../dom-dialog-binder/action-connector/network-error-dialog-connector";
+import { waitingDialogConnector } from "../dom-dialog-binder/action-connector/waiting-dialog-connector";
+import { playerSelectConnector } from "../dom-scene-binder/action-connector/player-select-connector";
+import { MAX_LOADING_TIME } from "../dom-scene-binder/max-loading-time";
+import type { GameProps } from "../game-props";
+import { fullResourceLoading } from "./full-resource-loading";
 
 /**
  * カジュアルマッチ開始
@@ -14,24 +24,35 @@ export async function onCasualMatchStart(props: GameProps): Promise<void> {
     try {
       return await props.api.isLogin();
     } catch (e) {
-      props.domDialogs.startNetworkError(props.resources, {type: 'Close'});
+      const dialog = new NetworkErrorDialog(props.resources, { type: "Close" });
+      props.domDialogBinder.bind(dialog, networkErrorDialogConnector);
       throw e;
     }
   };
   const gotoPlayerSelect = async (): Promise<void> => {
-    props.inProgress = {type: 'CasualMatch', subFlow: {type: 'PlayerSelect'}};
-    props.domDialogs.hidden();
+    props.inProgress = {
+      type: "CasualMatch",
+      subFlow: { type: "PlayerSelect" },
+    };
+    props.domDialogBinder.hidden();
     await props.fader.fadeOut();
-    await props.domScenes.startPlayerSelect(props.resources);
+    const scene = new PlayerSelect(props.resources);
+    props.domSceneBinder.bind(scene, playerSelectConnector);
+    await Promise.race([scene.waitUntilLoaded(), waitTime(MAX_LOADING_TIME)]);
     await props.fader.fadeIn();
   };
   const showLoginDialog = () => {
-    props.domDialogs.startLogin(props.resources, 'ネット対戦をするにはログインをしてください');
+    const dialog = new LoginDialog(
+      props.resources,
+      "ネット対戦をするにはログインをしてください"
+    );
+    props.domDialogBinder.bind(dialog, loginDialogConnector);
   };
 
-  props.domDialogs.startWaiting('ログインチェック中......');
+  const dialog = new WaitingDialog("ログインチェック中......");
+  props.domDialogBinder.bind(dialog, waitingDialogConnector);
   const isLogin = await callLoginCheckAPI();
-  props.domDialogs.hidden();
+  props.domDialogBinder.hidden();
   if (!isLogin) {
     showLoginDialog();
     return;

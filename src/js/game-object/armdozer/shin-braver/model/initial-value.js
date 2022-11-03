@@ -1,7 +1,11 @@
 // @flow
 
-import {ARMDOZER_SPRITE_STANDARD_X, ARMDOZER_SPRITE_STANDARD_Y, ARMDOZER_SPRITE_STANDARD_Z} from "../../position";
-import type {ShinBraverModel} from "./shin-braver-model";
+import {
+  ARMDOZER_SPRITE_STANDARD_X,
+  ARMDOZER_SPRITE_STANDARD_Y,
+  ARMDOZER_SPRITE_STANDARD_Z,
+} from "../../position";
+import type { ShinBraverModel } from "./shin-braver-model";
 
 export function createInitialValue(): ShinBraverModel {
   return {
@@ -11,8 +15,8 @@ export function createInitialValue(): ShinBraverModel {
       z: ARMDOZER_SPRITE_STANDARD_Z,
     },
     animation: {
-      type: 'STAND',
-      frame: 0
-    }
-  }
+      type: "STAND",
+      frame: 0,
+    },
+  };
 }

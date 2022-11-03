@@ -1,16 +1,17 @@
 // @flow
 
 import * as THREE from "three";
-import {HorizontalAnimationMesh} from "../../../mesh/horizontal-animation";
-import type {Resources} from "../../../resource";
-import {TEXTURE_IDS} from "../../../resource/texture/ids";
+
+import { HorizontalAnimationMesh } from "../../../mesh/horizontal-animation";
+import type { Resources } from "../../../resource";
+import { TEXTURE_IDS } from "../../../resource/texture/ids";
 import {
   ARMDOZER_EFFECT_STANDARD_X,
   ARMDOZER_EFFECT_STANDARD_Y,
-  ARMDOZER_EFFECT_STANDARD_Z
+  ARMDOZER_EFFECT_STANDARD_Z,
 } from "../../armdozer/position";
-import type {ContinuousAttackModel} from "../model/continuous-attack-model";
-import type {ContinuousAttackView} from "./continuous-attack-view";
+import type { ContinuousAttackModel } from "../model/continuous-attack-model";
+import type { ContinuousAttackView } from "./continuous-attack-view";
 
 export const MESH_SIZE = 300;
 
@@ -21,7 +22,9 @@ export class PlayerContinuousAttackView implements ContinuousAttackView {
   #mesh: HorizontalAnimationMesh;
 
   constructor(resources: Resources) {
-    const playerTurnResource = resources.textures.find(v => v.id === TEXTURE_IDS.CONTINUOUS_ATTACK);
+    const playerTurnResource = resources.textures.find(
+      (v) => v.id === TEXTURE_IDS.CONTINUOUS_ATTACK
+    );
     const playerTurn = playerTurnResource
       ? playerTurnResource.texture
       : new THREE.Texture();
@@ -57,7 +60,7 @@ export class PlayerContinuousAttackView implements ContinuousAttackView {
 
     this.#mesh.setOpacity(model.opacity);
     target.position.x = ARMDOZER_EFFECT_STANDARD_X;
-    target.position.y = ARMDOZER_EFFECT_STANDARD_Y +10;
+    target.position.y = ARMDOZER_EFFECT_STANDARD_Y + 10;
     target.position.z = ARMDOZER_EFFECT_STANDARD_Z + 40;
     target.scale.x = model.scale;
     target.scale.y = model.scale;

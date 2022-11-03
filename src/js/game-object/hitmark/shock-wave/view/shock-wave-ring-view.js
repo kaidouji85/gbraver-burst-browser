@@ -1,11 +1,12 @@
 // @flow
 
-import * as THREE from 'three';
-import {SPRITE_RENDER_ORDER} from "../../../../render/render-order/td-render-order";
-import type {Resources} from "../../../../resource";
-import {TEXTURE_IDS} from "../../../../resource/texture/ids";
-import type {ShockWaveRingModel} from "../model/shock-wave-model";
-import {RING_Z_INDEX} from "./z-index";
+import * as THREE from "three";
+
+import { SPRITE_RENDER_ORDER } from "../../../../render/render-order/td-render-order";
+import type { Resources } from "../../../../resource";
+import { TEXTURE_IDS } from "../../../../resource/texture/ids";
+import type { ShockWaveRingModel } from "../model/shock-wave-model";
+import { RING_Z_INDEX } from "./z-index";
 
 /** メッシュ幅 */
 export const WIDTH = 300;
@@ -19,7 +20,9 @@ export class ShockWaveRingView {
   #mesh: typeof THREE.Mesh;
 
   constructor(resources: Resources) {
-    const textureResource = resources.textures.find(v => v.id === TEXTURE_IDS.HITMARK_SHOCK_WAVE_RING);
+    const textureResource = resources.textures.find(
+      (v) => v.id === TEXTURE_IDS.HITMARK_SHOCK_WAVE_RING
+    );
     const texture = textureResource
       ? textureResource.texture
       : new THREE.Texture();
@@ -49,11 +52,7 @@ export class ShockWaveRingView {
    * @param model モデル
    */
   engage(model: ShockWaveRingModel): void {
-    this.#mesh.scale.set(
-      model.scale,
-      model.scale,
-      model.scale
-    );
+    this.#mesh.scale.set(model.scale, model.scale, model.scale);
     this.#mesh.material.opacity = model.opacity;
     this.#mesh.position.z = RING_Z_INDEX;
   }

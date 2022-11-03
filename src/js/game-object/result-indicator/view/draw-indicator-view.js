@@ -1,9 +1,10 @@
 // @flow
 import * as THREE from "three";
-import type {Resources} from "../../../resource";
-import {TEXTURE_IDS} from "../../../resource/texture/ids";
-import type {ResultIndicatorView} from "./result-indicator-view";
-import {SimpleIndicatorView} from "./simple-result-indicator";
+
+import type { Resources } from "../../../resource";
+import { TEXTURE_IDS } from "../../../resource/texture/ids";
+import type { ResultIndicatorView } from "./result-indicator-view";
+import { SimpleIndicatorView } from "./simple-result-indicator";
 
 /**
  * DRAWビューを生成する
@@ -12,6 +13,8 @@ import {SimpleIndicatorView} from "./simple-result-indicator";
  * @return 生成結果
  */
 export function drawIndicatorView(resources: Resources): ResultIndicatorView {
-  const texture = resources.textures.find(v => v.id === TEXTURE_IDS.DRAW)?.texture ?? new THREE.Texture();
+  const texture =
+    resources.textures.find((v) => v.id === TEXTURE_IDS.DRAW)?.texture ??
+    new THREE.Texture();
   return new SimpleIndicatorView(texture, 150, 60);
 }

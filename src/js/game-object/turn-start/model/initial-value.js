@@ -1,6 +1,6 @@
 // @flow
 
-import type {TurnStartModel} from "./turn-start-model";
+import type { TurnStartModel } from "./turn-start-model";
 
 /**
  * モデルの初期値を生成する
@@ -13,7 +13,7 @@ export function createInitialValue(): TurnStartModel {
     scale: 1,
     position: {
       x: 0,
-      y: 0
-    }
+      y: 0,
+    },
   };
 }

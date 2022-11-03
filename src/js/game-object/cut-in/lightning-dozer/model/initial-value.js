@@ -1,6 +1,6 @@
 // @flow
 
-import type {LightningDozerCutInModel} from "./lightning-dozer-cutin-model";
+import type { LightningDozerCutInModel } from "./lightning-dozer-cutin-model";
 
 /**
  * モデルの初期値を生成する
@@ -10,7 +10,7 @@ import type {LightningDozerCutInModel} from "./lightning-dozer-cutin-model";
 export function createInitialValue(): LightningDozerCutInModel {
   return {
     animation: {
-      type: 'CUT_IN_DOWN',
+      type: "CUT_IN_DOWN",
       frame: 1,
     },
     tracking: {

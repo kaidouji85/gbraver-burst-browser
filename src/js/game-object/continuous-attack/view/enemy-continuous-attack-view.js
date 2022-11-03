@@ -1,8 +1,8 @@
 // @flow
 
-import type {Resources} from "../../../resource";
-import type {ContinuousAttackModel} from "../model/continuous-attack-model";
-import {PlayerContinuousAttackView} from "./player-continuous-attack-view";
+import type { Resources } from "../../../resource";
+import type { ContinuousAttackModel } from "../model/continuous-attack-model";
+import { PlayerContinuousAttackView } from "./player-continuous-attack-view";
 
 /**
  * 敵 攻撃アップ ビュー

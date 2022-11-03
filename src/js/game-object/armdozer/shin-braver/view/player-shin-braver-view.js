@@ -1,24 +1,25 @@
 // @flow
 
 import * as THREE from "three";
-import type {Resources} from "../../../../resource";
-import type {ArmdozerAnimation} from "../../mesh/armdozer-animation";
-import {shinBraverBackStep} from "../mesh/back-step";
-import {shinBraverBurstDown} from "../mesh/burst-down";
-import {shinBraverBurstUp} from "../mesh/burst-up";
-import {shinBraverDown} from "../mesh/down";
-import {shinBraverFrontStep} from "../mesh/front-step";
-import {shinBraverGuard} from "../mesh/guard";
-import {shinBraverGutsDown} from "../mesh/guts-down";
-import {shinBraverGutsUp} from "../mesh/guts-up";
-import {shinBraverKnockBack} from "../mesh/knock-back";
-import {shinBraverSPAttack,} from "../mesh/sp-attack";
-import {shinBraverSPCharge} from "../mesh/sp-charge";
-import {shinBraverSPToStand} from "../mesh/sp-to-stand";
-import {shinBraverStand} from "../mesh/stand";
-import type {AnimationType} from "../model/animation-type";
-import type {ShinBraverModel} from "../model/shin-braver-model";
-import type {ShinBraverView} from './shin-braver-view';
+
+import type { Resources } from "../../../../resource";
+import type { ArmdozerAnimation } from "../../mesh/armdozer-animation";
+import { shinBraverBackStep } from "../mesh/back-step";
+import { shinBraverBurstDown } from "../mesh/burst-down";
+import { shinBraverBurstUp } from "../mesh/burst-up";
+import { shinBraverDown } from "../mesh/down";
+import { shinBraverFrontStep } from "../mesh/front-step";
+import { shinBraverGuard } from "../mesh/guard";
+import { shinBraverGutsDown } from "../mesh/guts-down";
+import { shinBraverGutsUp } from "../mesh/guts-up";
+import { shinBraverKnockBack } from "../mesh/knock-back";
+import { shinBraverSPAttack } from "../mesh/sp-attack";
+import { shinBraverSPCharge } from "../mesh/sp-charge";
+import { shinBraverSPToStand } from "../mesh/sp-to-stand";
+import { shinBraverStand } from "../mesh/stand";
+import type { AnimationType } from "../model/animation-type";
+import type { ShinBraverModel } from "../model/shin-braver-model";
+import type { ShinBraverView } from "./shin-braver-view";
 
 /** プレイヤー側シンブレイバーのビュー */
 export class PlayerShinBraverView implements ShinBraverView {
@@ -53,14 +54,14 @@ export class PlayerShinBraverView implements ShinBraverView {
     this.#backStep = shinBraverBackStep(resources);
     this.#frontStep = shinBraverFrontStep(resources);
 
-    this.#getAllMeshes().forEach(v => {
+    this.#getAllMeshes().forEach((v) => {
       this.#group.add(v.getObject3D());
     });
   }
 
   /** デストラクタ */
   destructor(): void {
-    this.#getAllMeshes().forEach(v => {
+    this.#getAllMeshes().forEach((v) => {
       v.destructor();
     });
   }
@@ -71,8 +72,8 @@ export class PlayerShinBraverView implements ShinBraverView {
 
     const activeMesh = this.#getActiveMesh(model.animation.type);
     this.#getAllMeshes()
-      .filter(v => v !== activeMesh)
-      .forEach(v => {
+      .filter((v) => v !== activeMesh)
+      .forEach((v) => {
         v.visible(false);
       });
 
@@ -129,32 +130,32 @@ export class PlayerShinBraverView implements ShinBraverView {
 
   /** アクティブなメッシュを取得 */
   #getActiveMesh(animationType: AnimationType): ArmdozerAnimation {
-    switch(animationType) {
-      case 'STAND':
+    switch (animationType) {
+      case "STAND":
         return this.#stand;
-      case 'SP_CHARGE':
+      case "SP_CHARGE":
         return this.#spCharge;
-      case 'SP_ATTACK':
+      case "SP_ATTACK":
         return this.#spAttack;
-      case 'SP_TO_STAND':
+      case "SP_TO_STAND":
         return this.#spToStand;
-      case 'KNOCK_BACK':
+      case "KNOCK_BACK":
         return this.#knockBack;
-      case 'GUARD':
+      case "GUARD":
         return this.#guard;
-      case 'DOWN':
+      case "DOWN":
         return this.#down;
-      case 'GUTS_UP':
+      case "GUTS_UP":
         return this.#gutsUp;
-      case 'GUTS_DOWN':
+      case "GUTS_DOWN":
         return this.#gutsDown;
-      case 'BURST_UP':
+      case "BURST_UP":
         return this.#burstUp;
-      case 'BURST_DOWN':
+      case "BURST_DOWN":
         return this.#burstDown;
-      case 'BACK_STEP':
+      case "BACK_STEP":
         return this.#backStep;
-      case 'FRONT_STEP':
+      case "FRONT_STEP":
         return this.#frontStep;
       default:
         return this.#stand;

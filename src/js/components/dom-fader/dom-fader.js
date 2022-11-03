@@ -1,6 +1,6 @@
 // @flow
 
-import {waitFinishAnimation} from "../../dom/animation";
+import { waitFinishAnimation } from "../../dom/animation";
 
 /**
  * HTML要素で作られたフェーダ
@@ -12,8 +12,8 @@ export class DOMFader {
    * コンストラクタ
    */
   constructor() {
-    this._root = document.createElement('div');
-    this._root.className = 'dom-fader';
+    this._root = document.createElement("div");
+    this._root.className = "dom-fader";
   }
 
   /**
@@ -29,7 +29,7 @@ export class DOMFader {
    * フェーダーを即座に消す
    */
   hidden(): void {
-    this._root.style.display = 'none';
+    this._root.style.display = "none";
   }
 
   /**
@@ -38,19 +38,22 @@ export class DOMFader {
    * @return アニメーション
    */
   async fadeIn(): Promise<void> {
-    this._root.style.display = 'block';
+    this._root.style.display = "block";
 
-    const animation = this._root.animate([
-      {opacity: 1, display: 'block'},
-      {opacity: 0, display: 'none'}
-    ], {
-      duration: 500,
-      fill: "forwards",
-      easing: 'ease'
-    });
+    const animation = this._root.animate(
+      [
+        { opacity: 1, display: "block" },
+        { opacity: 0, display: "none" },
+      ],
+      {
+        duration: 500,
+        fill: "forwards",
+        easing: "ease",
+      }
+    );
     await waitFinishAnimation(animation);
 
-    this._root.style.display = 'none';
+    this._root.style.display = "none";
   }
 
   /**
@@ -59,15 +62,12 @@ export class DOMFader {
    * @return アニメーション
    */
   async fadeOut(): Promise<void> {
-    this._root.style.display = 'block';
+    this._root.style.display = "block";
 
-    const animation = this._root.animate([
-      {opacity: 0},
-      {opacity: 1}
-    ], {
+    const animation = this._root.animate([{ opacity: 0 }, { opacity: 1 }], {
       duration: 500,
       fill: "forwards",
-      easing: 'ease'
+      easing: "ease",
     });
     await waitFinishAnimation(animation);
   }

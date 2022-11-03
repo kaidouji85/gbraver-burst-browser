@@ -1,15 +1,14 @@
 // @flow
 
-import type {PreRender} from "../../../../game-loop/pre-render";
-import type {Resources} from "../../../../resource";
-import type {TsubasaModel} from "../model/tsubasa-model";
-import {PlayerTsubasaView} from "./player-tsubasa-view";
+import type { PreRender } from "../../../../game-loop/pre-render";
+import type { Resources } from "../../../../resource";
+import type { TsubasaModel } from "../model/tsubasa-model";
+import { PlayerTsubasaView } from "./player-tsubasa-view";
 
 /**
  * 敵側 ツバサ ビュー
  */
 export class EnemyTsubasaView extends PlayerTsubasaView {
-
   /**
    * コンストラクタ
    *

@@ -1,15 +1,15 @@
 // @flow
-import type {LastState} from "../../../game/td-scenes/battle/custom-battle-event";
-import {waitTime} from "../../../wait/wait-time";
-import {extractBattle, extractGameEnd} from "../../game-state-extractor";
-import {invisibleAllMessageWindows} from "../../invisible-all-message-windows";
-import {turnCount} from "../../turn-count";
-import type {BatterySystemTutorialState} from "../state";
-import {batteryRuleDescription} from "../stories/battery-rule-description";
-import {completeAttackAndDefense} from "../stories/complete-attack-and-defense";
-import {enemyAttack} from "../stories/enemy-attack";
-import {introduction} from "../stories/introduction";
-import {playerAttack} from "../stories/player-attack";
+import type { LastState } from "../../../td-scenes/battle/custom-battle-event";
+import { waitTime } from "../../../wait/wait-time";
+import { extractBattle, extractGameEnd } from "../../game-state-extractor";
+import { invisibleAllMessageWindows } from "../../invisible-all-message-windows";
+import { turnCount } from "../../turn-count";
+import type { BatterySystemTutorialState } from "../state";
+import { batteryRuleDescription } from "../stories/battery-rule-description";
+import { completeAttackAndDefense } from "../stories/complete-attack-and-defense";
+import { enemyAttack } from "../stories/enemy-attack";
+import { introduction } from "../stories/introduction";
+import { playerAttack } from "../stories/player-attack";
 
 /**
  * 最終ステート直前イベント
@@ -18,8 +18,14 @@ import {playerAttack} from "../stories/player-attack";
  * @param state チュートリアルステート
  * @return ステート更新結果
  */
-export async function beforeLastState(props: $ReadOnly<LastState>, state: $ReadOnly<BatterySystemTutorialState>): Promise<BatterySystemTutorialState> {
-  const updatedStateHistory = {...state, stateHistory: [...state.stateHistory, ...props.update]};
+export async function beforeLastState(
+  props: $ReadOnly<LastState>,
+  state: $ReadOnly<BatterySystemTutorialState>
+): Promise<BatterySystemTutorialState> {
+  const updatedStateHistory = {
+    ...state,
+    stateHistory: [...state.stateHistory, ...props.update],
+  };
   const extractedGameEnd = extractGameEnd(props.update);
   if (extractedGameEnd) {
     return updatedStateHistory;
@@ -35,7 +41,9 @@ export async function beforeLastState(props: $ReadOnly<LastState>, state: $ReadO
   if (extractedBattle) {
     const battle = extractedBattle.effect;
     const isPlayerAttack = battle.attacker === props.playerId;
-    isPlayerAttack ? await playerAttack(props, battle.result) : await enemyAttack(props, battle.result);
+    isPlayerAttack
+      ? await playerAttack(props, battle.result)
+      : await enemyAttack(props, battle.result);
     invisibleAllMessageWindows(props);
   }
 
@@ -45,11 +53,15 @@ export async function beforeLastState(props: $ReadOnly<LastState>, state: $ReadO
     return updatedStateHistory;
   }
 
-  if (turn === 3  && extractedBattle) {
+  if (turn === 3 && extractedBattle) {
     await waitTime(200);
     await completeAttackAndDefense(props);
     invisibleAllMessageWindows(props);
-    return {...updatedStateHistory, selectableCommands: 'All', isBatterySystemDescriptionComplete: true};
+    return {
+      ...updatedStateHistory,
+      selectableCommands: "All",
+      isBatterySystemDescriptionComplete: true,
+    };
   }
 
   return updatedStateHistory;

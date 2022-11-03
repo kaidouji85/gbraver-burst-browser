@@ -1,6 +1,6 @@
 // @flow
 
-import type {ButtonLabel} from "./button-label";
+import type { ButtonLabel } from "./button-label";
 
 /** バッテリー最大値 */
 export const MAX_BATTERY = 5;

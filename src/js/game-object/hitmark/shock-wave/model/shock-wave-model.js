@@ -37,7 +37,7 @@ export type ShockWaveModel = {
   position: {
     x: number,
     y: number,
-    z: number
+    z: number,
   },
   /** リング */
   ring: ShockWaveRingModel,

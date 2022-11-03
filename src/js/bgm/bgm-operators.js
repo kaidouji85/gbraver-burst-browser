@@ -1,8 +1,8 @@
 // @flow
-import type {SoundResource} from "../resource/sound";
-import {howlVolume} from "../resource/sound";
-import {waitTime} from "../wait/wait-time";
-import type {BGM} from "./bgm";
+import type { SoundResource } from "../resource/sound";
+import { howlVolume } from "../resource/sound";
+import { waitTime } from "../wait/wait-time";
+import type { BGM } from "./bgm";
 
 /**
  * BGMオペレータ
@@ -14,7 +14,7 @@ export type BGMOperator = (bgm: BGM) => Promise<BGM>;
 
 /** フェードアウト */
 export const fadeOut: BGMOperator = async (bgm: BGM): Promise<BGM> => {
-  if (bgm.type === 'NowPlayingBGM') {
+  if (bgm.type === "NowPlayingBGM") {
     const duration = 500;
     bgm.resource.sound.fade(howlVolume(bgm.resource), 0, duration);
     await waitTime(duration);
@@ -24,7 +24,7 @@ export const fadeOut: BGMOperator = async (bgm: BGM): Promise<BGM> => {
 
 /** フェードイン */
 export const fadeIn: BGMOperator = async (bgm: BGM): Promise<BGM> => {
-  if (bgm.type === 'NowPlayingBGM') {
+  if (bgm.type === "NowPlayingBGM") {
     const duration = 500;
     bgm.resource.sound.fade(0, howlVolume(bgm.resource), duration);
     await waitTime(duration);
@@ -34,8 +34,8 @@ export const fadeIn: BGMOperator = async (bgm: BGM): Promise<BGM> => {
 
 /** BGM停止 */
 export const stop = async (bgm: BGM): Promise<BGM> => {
-  bgm.type === 'NowPlayingBGM' && bgm.resource.sound.stop();
-  return {type: 'NoBGM'};
+  bgm.type === "NowPlayingBGM" && bgm.resource.sound.stop();
+  return { type: "NoBGM" };
 };
 
 /**
@@ -45,10 +45,12 @@ export const stop = async (bgm: BGM): Promise<BGM> => {
  * @param resource 再生するBGMの音リソース
  * @return BGMオペレータ
  */
-export const play = (resource: SoundResource): BGMOperator => async (bgm: BGM): Promise<BGM> => {
-  bgm.type === 'NowPlayingBGM' && bgm.resource.sound.stop();
-  resource.sound.play();
-  resource.sound.loop(true);
-  resource.sound.volume(howlVolume(resource));
-  return {type: 'NowPlayingBGM', resource};
-}
+export const play =
+  (resource: SoundResource): BGMOperator =>
+  async (bgm: BGM): Promise<BGM> => {
+    bgm.type === "NowPlayingBGM" && bgm.resource.sound.stop();
+    resource.sound.play();
+    resource.sound.loop(true);
+    resource.sound.volume(howlVolume(resource));
+    return { type: "NowPlayingBGM", resource };
+  };

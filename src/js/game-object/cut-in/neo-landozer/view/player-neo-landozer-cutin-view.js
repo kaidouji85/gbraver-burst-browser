@@ -1,14 +1,18 @@
 // @flow
 
 import * as THREE from "three";
-import type {PreRender} from "../../../../game-loop/pre-render";
-import {HorizontalAnimationMesh} from "../../../../mesh/horizontal-animation";
-import type {Resources} from "../../../../resource";
-import {TEXTURE_IDS} from "../../../../resource/texture/ids";
-import {HUD_CUT_IN_ZNIDEX} from "../../../hud-zindex";
-import {HUDCutInScale} from "../../../scale";
-import type {AnimationType, NeoLandozerCutInModel} from "../model/neo-landozer-cutin-model";
-import type {NeoLandozerCutInView} from "./neo-landozer-cutin-view";
+
+import type { PreRender } from "../../../../game-loop/pre-render";
+import { HorizontalAnimationMesh } from "../../../../mesh/horizontal-animation";
+import type { Resources } from "../../../../resource";
+import { TEXTURE_IDS } from "../../../../resource/texture/ids";
+import { HUD_CUT_IN_ZNIDEX } from "../../../hud-zindex";
+import { HUDCutInScale } from "../../../scale";
+import type {
+  AnimationType,
+  NeoLandozerCutInModel,
+} from "../model/neo-landozer-cutin-model";
+import type { NeoLandozerCutInView } from "./neo-landozer-cutin-view";
 
 export const MAX_ANIMATION = 4;
 export const WIDTH = 800;
@@ -26,7 +30,9 @@ export class PlayerNeoLandozerCutInView implements NeoLandozerCutInView {
     this.#group = new THREE.Group();
     this.#group.position.z = HUD_CUT_IN_ZNIDEX;
 
-    const cutInUpResource = resources.textures.find(v => v.id === TEXTURE_IDS.NEO_LANDOZER_CUTIN_UP);
+    const cutInUpResource = resources.textures.find(
+      (v) => v.id === TEXTURE_IDS.NEO_LANDOZER_CUTIN_UP
+    );
     const cutInUp = cutInUpResource
       ? cutInUpResource.texture
       : new THREE.Texture();
@@ -37,7 +43,9 @@ export class PlayerNeoLandozerCutInView implements NeoLandozerCutInView {
       height: HEIGHT,
     });
 
-    const cutInDownResource = resources.textures.find(v => v.id === TEXTURE_IDS.NEO_LANDOZER_CUTIN_DOWN);
+    const cutInDownResource = resources.textures.find(
+      (v) => v.id === TEXTURE_IDS.NEO_LANDOZER_CUTIN_DOWN
+    );
     const cutInDown = cutInDownResource
       ? cutInDownResource.texture
       : new THREE.Texture();
@@ -48,7 +56,7 @@ export class PlayerNeoLandozerCutInView implements NeoLandozerCutInView {
       height: HEIGHT,
     });
 
-    this.#getAllMeshes().forEach(v => {
+    this.#getAllMeshes().forEach((v) => {
       this.#group.add(v.getObject3D());
     });
   }
@@ -57,7 +65,7 @@ export class PlayerNeoLandozerCutInView implements NeoLandozerCutInView {
    * デストラクタ相当の処理
    */
   destructor(): void {
-    this.#getAllMeshes().forEach(v => {
+    this.#getAllMeshes().forEach((v) => {
       v.destructor();
     });
   }
@@ -74,12 +82,14 @@ export class PlayerNeoLandozerCutInView implements NeoLandozerCutInView {
     activeMesh.animate(model.animation.frame);
 
     this.#getAllMeshes()
-      .filter(v => v !== activeMesh)
-      .forEach(v => {
+      .filter((v) => v !== activeMesh)
+      .forEach((v) => {
         v.setOpacity(0);
       });
 
-    const scale = model.scale * HUDCutInScale(preRender.rendererDOM, preRender.safeAreaInset);
+    const scale =
+      model.scale *
+      HUDCutInScale(preRender.rendererDOM, preRender.safeAreaInset);
     this.#group.scale.set(scale, scale, scale);
     this.#group.position.x = model.tracking.x;
     this.#group.position.y = model.tracking.y;
@@ -100,10 +110,7 @@ export class PlayerNeoLandozerCutInView implements NeoLandozerCutInView {
    * @return 本クラスの全メッシュ
    */
   #getAllMeshes(): HorizontalAnimationMesh[] {
-    return [
-      this.#cutInUp,
-      this.#cutInDown,
-    ];
+    return [this.#cutInUp, this.#cutInDown];
   }
 
   /**
@@ -114,9 +121,9 @@ export class PlayerNeoLandozerCutInView implements NeoLandozerCutInView {
    */
   #getActiveMesh(type: AnimationType): HorizontalAnimationMesh {
     switch (type) {
-      case 'CUT_IN_DOWN':
+      case "CUT_IN_DOWN":
         return this.#cutInDown;
-      case 'CUT_IN_UP':
+      case "CUT_IN_UP":
       default:
         return this.#cutInUp;
     }

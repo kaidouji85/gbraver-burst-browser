@@ -1,13 +1,14 @@
 // @flow
 
 import * as THREE from "three";
-import type {PreRender} from "../../../game-loop/pre-render";
-import {HorizontalAnimationMesh} from "../../../mesh/horizontal-animation";
-import type {Resources} from "../../../resource";
-import {TEXTURE_IDS} from "../../../resource/texture/ids";
-import {ARMDOZER_EFFECT_STANDARD_Z} from "../../armdozer/position";
-import type {BatteryCorrectModel} from "../model/battery-correct-model";
-import type {BatteryCorrectView} from "./battery-correct-view";
+
+import type { PreRender } from "../../../game-loop/pre-render";
+import { HorizontalAnimationMesh } from "../../../mesh/horizontal-animation";
+import type { Resources } from "../../../resource";
+import { TEXTURE_IDS } from "../../../resource/texture/ids";
+import { ARMDOZER_EFFECT_STANDARD_Z } from "../../armdozer/position";
+import type { BatteryCorrectModel } from "../model/battery-correct-model";
+import type { BatteryCorrectView } from "./battery-correct-view";
 
 /** メッシュの大きさ */
 const MESH_SIZE = 50;
@@ -34,8 +35,9 @@ export class PlayerBatteryCorrectView implements BatteryCorrectView {
   constructor(resources: Resources) {
     this.#group = new THREE.Group();
 
-    const batteryNumber = resources.textures.find(v => v.id === TEXTURE_IDS.BATTERY_NUMBER)
-      ?.texture ?? new THREE.Texture();
+    const batteryNumber =
+      resources.textures.find((v) => v.id === TEXTURE_IDS.BATTERY_NUMBER)
+        ?.texture ?? new THREE.Texture();
 
     this.#value = new HorizontalAnimationMesh({
       texture: batteryNumber,
@@ -69,11 +71,14 @@ export class PlayerBatteryCorrectView implements BatteryCorrectView {
 
   /** @override */
   engage(model: BatteryCorrectModel, preRender: PreRender): void {
-    const absoluteValue = Math.min(Math.abs(model.correctValue), MAX_ABSOLUTE_VALUE);
+    const absoluteValue = Math.min(
+      Math.abs(model.correctValue),
+      MAX_ABSOLUTE_VALUE
+    );
     const value = absoluteValue / MAX_BATTERY_ANIMATION;
     this.#value.animate(value);
 
-    const sign = (0 <= model.correctValue) ? PLUS_SIGN : MINUS_SIGN;
+    const sign = 0 <= model.correctValue ? PLUS_SIGN : MINUS_SIGN;
     this.#sign.animate(sign);
 
     this.#group.position.x = model.position.x;

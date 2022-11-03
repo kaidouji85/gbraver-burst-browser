@@ -1,8 +1,8 @@
 // @flow
 
-import type {Resources} from "../../../resource";
-import type {DamageIndicatorModel} from "../model/damage-indicator-model";
-import {PlayerDamageIndicatorView} from "./player-damage-indicator-view";
+import type { Resources } from "../../../resource";
+import type { DamageIndicatorModel } from "../model/damage-indicator-model";
+import { PlayerDamageIndicatorView } from "./player-damage-indicator-view";
 
 /** 敵のダメージインジケータ */
 export class EnemyDamageIndicatorView extends PlayerDamageIndicatorView {
