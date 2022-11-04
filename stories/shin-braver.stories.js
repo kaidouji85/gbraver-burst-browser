@@ -54,3 +54,19 @@ export const activeKnockBack = (): HTMLElement => {
   stub.start();
   return stub.domElement();
 };
+
+export const activeGuard = (): HTMLElement => {
+  const stub = new TDGameObjectStub(({ resources, gameObjectAction }) => {
+    const sprite = PlayerShinBraver(resources, gameObjectAction);
+    sprite.startActive().play();
+    const animation = sprite
+      .guard()
+      .chain(delay(2000))
+      .chain(sprite.guardToStand())
+      .chain(delay(2000));
+    animation.loop();
+    return { objects: [sprite.getObject3D()] };
+  });
+  stub.start();
+  return stub.domElement();
+};
