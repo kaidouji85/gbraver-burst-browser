@@ -34,8 +34,7 @@ export async function onBurst(
         props.view.hud.gameObjects.burstButton.decide(),
         props.view.hud.gameObjects.batterySelector.close(),
         props.view.hud.gameObjects.pilotButton.close(),
-        props.view.hud.gameObjects.timeScaleButton.close(),
-        ...props.view.td.armdozerObjects.map((v) => v.sprite().endActive())
+        props.view.hud.gameObjects.timeScaleButton.close()
       )
         .chain(delay(500))
         .chain(props.view.hud.gameObjects.burstButton.close())
