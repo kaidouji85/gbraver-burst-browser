@@ -4,7 +4,10 @@ import * as THREE from "three";
 
 import type { Resources } from "../../../../resource";
 import type { ArmdozerAnimation } from "../../mesh/armdozer-animation";
-import { shinBraverBackStep } from "../mesh/back-step";
+import {
+  shinBraverActiveBackStep,
+  shinBraverBackStep,
+} from "../mesh/back-step";
 import {
   shinBraverActiveBurstDown,
   shinBraverBurstDown,
@@ -68,6 +71,8 @@ export class PlayerShinBraverView implements ShinBraverView {
   #activeBurstDown: ArmdozerAnimation;
   /** バックステップ */
   #backStep: ArmdozerAnimation;
+  /** アクティブバックステップ */
+  #activeBackStep: ArmdozerAnimation;
   /** フロントステップ */
   #frontStep: ArmdozerAnimation;
   /** アクティブフロントステップ */
@@ -96,6 +101,7 @@ export class PlayerShinBraverView implements ShinBraverView {
     this.#burstDown = shinBraverBurstDown(resources);
     this.#activeBurstDown = shinBraverActiveBurstDown(resources);
     this.#backStep = shinBraverBackStep(resources);
+    this.#activeBackStep = shinBraverActiveBackStep(resources);
     this.#frontStep = shinBraverFrontStep(resources);
     this.#activeFrontStep = shinBraverActiveFrontStep(resources);
 
@@ -175,6 +181,7 @@ export class PlayerShinBraverView implements ShinBraverView {
       this.#burstDown,
       this.#activeBurstDown,
       this.#backStep,
+      this.#activeBackStep,
       this.#frontStep,
       this.#activeFrontStep,
     ];
@@ -247,6 +254,8 @@ export class PlayerShinBraverView implements ShinBraverView {
         return this.#activeBurstUp;
       case "BURST_DOWN":
         return this.#activeBurstDown;
+      case "BACK_STEP":
+        return this.#activeBackStep;
       case "FRONT_STEP":
         return this.#activeFrontStep;
       default:
