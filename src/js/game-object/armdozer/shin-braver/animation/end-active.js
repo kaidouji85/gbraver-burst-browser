@@ -10,5 +10,5 @@ import type { ShinBraverModel } from "../model/shin-braver-model";
  * @return アニメーション
  */
 export function endActive(model: ShinBraverModel): Animate {
-  return tween(model.active, (t) => t.to({ opacity: 0 }, 800));
+  return tween(model.active, (t) => t.to({ opacity: 0 }, 400));
 }
