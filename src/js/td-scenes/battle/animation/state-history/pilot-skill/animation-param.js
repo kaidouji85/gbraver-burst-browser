@@ -24,14 +24,25 @@ export type PilotSkillAnimationParamX<
   SKILL: PilotSkill,
   PILOT: HUDPilotObjects
 > = {
+  /** スキル情報 */
   skill: SKILL,
+  /** スキル発動パイロットHUD */
   pilot: PILOT,
+  /** スキル発動者がアクティブプレイヤーであるか否か、trueでアクティブプレイヤー */
+  isActivePlayer: boolean,
+  /** スキル発動プレイヤーステート */
   invokerState: PlayerState,
+  /** スキル発動3Dプレイヤー */
   invokerTD: TDPlayer,
+  /** スキル発動HUDプレイヤー */
   invokerHUD: HUDPlayer,
+  /** スキル発動アームドーザスプライト */
   invokerSprite: ArmDozerSprite,
+  /** スキル発動3Dゲームオブジェクト */
   tdObjects: TDGameObjects,
+  /** スキル発動HUDオブジェクト */
   hudObjects: HUDGameObjects,
+  /** 3Dカメラ */
   tdCamera: TDCamera,
 };
 
@@ -84,6 +95,7 @@ export function toPilotSkillAnimationParam(
   return {
     skill: effect.skill,
     pilot: pilot,
+    isActivePlayer: invokerState.playerId === gameState.activePlayerId,
     invokerState: invokerState,
     invokerSprite: invokerArmdozer.sprite(),
     invokerTD: invokerTD,
