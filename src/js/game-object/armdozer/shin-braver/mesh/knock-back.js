@@ -1,4 +1,5 @@
 // @flow
+
 import * as THREE from "three";
 
 import { toSilhouette } from "../../../../canvas/silhouette/to-silhouette";
@@ -11,8 +12,11 @@ import {
 } from "../../mesh/horizontal-animation";
 import { MESH_Y } from "./position";
 
+/** メッシュ幅 */
 export const MESH_WIDTH = 600;
+/** メッシュ高 */
 export const MESH_HEIGHT = 600;
+/** アニメーション枚数 */
 export const MAX_ANIMATION = 4;
 
 /**

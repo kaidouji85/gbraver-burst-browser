@@ -11,7 +11,10 @@ import {
 } from "../mesh/burst-down";
 import { shinBraverActiveBurstUp, shinBraverBurstUp } from "../mesh/burst-up";
 import { shinBraverDown } from "../mesh/down";
-import { shinBraverFrontStep } from "../mesh/front-step";
+import {
+  shinBraverActiveFrontStep,
+  shinBraverFrontStep,
+} from "../mesh/front-step";
 import { shinBraverActiveGuard, shinBraverGuard } from "../mesh/guard";
 import { shinBraverGutsDown } from "../mesh/guts-down";
 import { shinBraverGutsUp } from "../mesh/guts-up";
@@ -67,6 +70,8 @@ export class PlayerShinBraverView implements ShinBraverView {
   #backStep: ArmdozerAnimation;
   /** フロントステップ */
   #frontStep: ArmdozerAnimation;
+  /** アクティブフロントステップ */
+  #activeFrontStep: ArmdozerAnimation;
 
   /**
    * コンストラクタ
@@ -92,6 +97,7 @@ export class PlayerShinBraverView implements ShinBraverView {
     this.#activeBurstDown = shinBraverActiveBurstDown(resources);
     this.#backStep = shinBraverBackStep(resources);
     this.#frontStep = shinBraverFrontStep(resources);
+    this.#activeFrontStep = shinBraverActiveFrontStep(resources);
 
     this.#getAllMeshes().forEach((v) => {
       this.#group.add(v.getObject3D());
@@ -170,6 +176,7 @@ export class PlayerShinBraverView implements ShinBraverView {
       this.#activeBurstDown,
       this.#backStep,
       this.#frontStep,
+      this.#activeFrontStep,
     ];
   }
 
@@ -240,6 +247,8 @@ export class PlayerShinBraverView implements ShinBraverView {
         return this.#activeBurstUp;
       case "BURST_DOWN":
         return this.#activeBurstDown;
+      case "FRONT_STEP":
+        return this.#activeFrontStep;
       default:
         return null;
     }
