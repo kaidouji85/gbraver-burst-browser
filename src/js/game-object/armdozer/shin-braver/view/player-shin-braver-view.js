@@ -9,7 +9,7 @@ import {
   shinBraverActiveBurstDown,
   shinBraverBurstDown,
 } from "../mesh/burst-down";
-import { shinBraverBurstUp } from "../mesh/burst-up";
+import { shinBraverActiveBurstUp, shinBraverBurstUp } from "../mesh/burst-up";
 import { shinBraverDown } from "../mesh/down";
 import { shinBraverFrontStep } from "../mesh/front-step";
 import { shinBraverGuard } from "../mesh/guard";
@@ -50,6 +50,8 @@ export class PlayerShinBraverView implements ShinBraverView {
   #gutsDown: ArmdozerAnimation;
   /** バーストアップ */
   #burstUp: ArmdozerAnimation;
+  /** アクティブバーストアップ */
+  #activeBurstUp: ArmdozerAnimation;
   /** バーストダウン */
   #burstDown: ArmdozerAnimation;
   /** アクティブバーストダウン */
@@ -76,6 +78,7 @@ export class PlayerShinBraverView implements ShinBraverView {
     this.#gutsUp = shinBraverGutsUp(resources);
     this.#gutsDown = shinBraverGutsDown(resources);
     this.#burstUp = shinBraverBurstUp(resources);
+    this.#activeBurstUp = shinBraverActiveBurstUp(resources);
     this.#burstDown = shinBraverBurstDown(resources);
     this.#activeBurstDown = shinBraverActiveBurstDown(resources);
     this.#backStep = shinBraverBackStep(resources);
@@ -151,6 +154,7 @@ export class PlayerShinBraverView implements ShinBraverView {
       this.#gutsUp,
       this.#gutsDown,
       this.#burstUp,
+      this.#activeBurstUp,
       this.#burstDown,
       this.#activeBurstDown,
       this.#backStep,
@@ -217,6 +221,8 @@ export class PlayerShinBraverView implements ShinBraverView {
     switch (animationType) {
       case "STAND":
         return this.#activeStand;
+      case "BURST_UP":
+        return this.#activeBurstUp;
       case "BURST_DOWN":
         return this.#activeBurstDown;
       default:
