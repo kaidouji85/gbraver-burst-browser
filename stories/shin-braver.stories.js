@@ -22,3 +22,19 @@ export const guts = (): HTMLElement => {
   stub.start();
   return stub.domElement();
 };
+
+export const activeBurst = (): HTMLElement => {
+  const stub = new TDGameObjectStub(({ resources, gameObjectAction }) => {
+    const sprite = PlayerShinBraver(resources, gameObjectAction);
+    sprite.startActive().play();
+    const animation = sprite
+      .burst()
+      .chain(delay(2000))
+      .chain(sprite.burstToStand())
+      .chain(delay(2000));
+    animation.loop();
+    return { objects: [sprite.getObject3D()] };
+  });
+  stub.start();
+  return stub.domElement();
+};

@@ -5,7 +5,10 @@ import * as THREE from "three";
 import type { Resources } from "../../../../resource";
 import type { ArmdozerAnimation } from "../../mesh/armdozer-animation";
 import { shinBraverBackStep } from "../mesh/back-step";
-import { shinBraverBurstDown } from "../mesh/burst-down";
+import {
+  shinBraverActiveBurstDown,
+  shinBraverBurstDown,
+} from "../mesh/burst-down";
 import { shinBraverBurstUp } from "../mesh/burst-up";
 import { shinBraverDown } from "../mesh/down";
 import { shinBraverFrontStep } from "../mesh/front-step";
@@ -23,20 +26,37 @@ import type { ShinBraverView } from "./shin-braver-view";
 
 /** プレイヤー側シンブレイバーのビュー */
 export class PlayerShinBraverView implements ShinBraverView {
+  /** グループ */
   #group: typeof THREE.Group;
+  /** アクティブスタンド */
   #activeStand: ArmdozerAnimation;
+  /** スタンド */
   #stand: ArmdozerAnimation;
+  /** ストレートパンチチャージ */
   #spCharge: ArmdozerAnimation;
+  /** ストレートパンチ */
   #spAttack: ArmdozerAnimation;
+  /** ストレートパンチ -> スタンド */
   #spToStand: ArmdozerAnimation;
+  /** ノックバック */
   #knockBack: ArmdozerAnimation;
+  /** ガード */
   #guard: ArmdozerAnimation;
+  /** ダウン */
   #down: ArmdozerAnimation;
+  /** ガッツアップ */
   #gutsUp: ArmdozerAnimation;
+  /** ガッツダウン */
   #gutsDown: ArmdozerAnimation;
+  /** バーストアップ */
   #burstUp: ArmdozerAnimation;
+  /** バーストダウン */
   #burstDown: ArmdozerAnimation;
+  /** アクティブバーストダウン */
+  #activeBurstDown: ArmdozerAnimation;
+  /** バックステップ */
   #backStep: ArmdozerAnimation;
+  /** フロントステップ */
   #frontStep: ArmdozerAnimation;
 
   /**
@@ -57,6 +77,7 @@ export class PlayerShinBraverView implements ShinBraverView {
     this.#gutsDown = shinBraverGutsDown(resources);
     this.#burstUp = shinBraverBurstUp(resources);
     this.#burstDown = shinBraverBurstDown(resources);
+    this.#activeBurstDown = shinBraverActiveBurstDown(resources);
     this.#backStep = shinBraverBackStep(resources);
     this.#frontStep = shinBraverFrontStep(resources);
 
@@ -127,6 +148,7 @@ export class PlayerShinBraverView implements ShinBraverView {
       this.#gutsDown,
       this.#burstUp,
       this.#burstDown,
+      this.#activeBurstDown,
       this.#backStep,
       this.#frontStep,
     ];
@@ -191,6 +213,8 @@ export class PlayerShinBraverView implements ShinBraverView {
     switch (animationType) {
       case "STAND":
         return this.#activeStand;
+      case "BURST_DOWN":
+        return this.#activeBurstDown;
       default:
         return null;
     }
