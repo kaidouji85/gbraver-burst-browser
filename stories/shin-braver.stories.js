@@ -38,3 +38,19 @@ export const activeBurst = (): HTMLElement => {
   stub.start();
   return stub.domElement();
 };
+
+export const activeKnockBack = (): HTMLElement => {
+  const stub = new TDGameObjectStub(({ resources, gameObjectAction }) => {
+    const sprite = PlayerShinBraver(resources, gameObjectAction);
+    sprite.startActive().play();
+    const animation = sprite
+      .knockBack()
+      .chain(delay(2000))
+      .chain(sprite.knockBackToStand())
+      .chain(delay(2000));
+    animation.loop();
+    return { objects: [sprite.getObject3D()] };
+  });
+  stub.start();
+  return stub.domElement();
+};

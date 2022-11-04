@@ -15,7 +15,10 @@ import { shinBraverFrontStep } from "../mesh/front-step";
 import { shinBraverGuard } from "../mesh/guard";
 import { shinBraverGutsDown } from "../mesh/guts-down";
 import { shinBraverGutsUp } from "../mesh/guts-up";
-import { shinBraverKnockBack } from "../mesh/knock-back";
+import {
+  shinBraverActiveKnockBack,
+  shinBraverKnockBack,
+} from "../mesh/knock-back";
 import { shinBraverSPAttack } from "../mesh/sp-attack";
 import { shinBraverSPCharge } from "../mesh/sp-charge";
 import { shinBraverSPToStand } from "../mesh/sp-to-stand";
@@ -40,6 +43,8 @@ export class PlayerShinBraverView implements ShinBraverView {
   #spToStand: ArmdozerAnimation;
   /** ノックバック */
   #knockBack: ArmdozerAnimation;
+  /** アクティブノックバック */
+  #activeKnockBack: ArmdozerAnimation;
   /** ガード */
   #guard: ArmdozerAnimation;
   /** ダウン */
@@ -73,6 +78,7 @@ export class PlayerShinBraverView implements ShinBraverView {
     this.#spAttack = shinBraverSPAttack(resources);
     this.#spToStand = shinBraverSPToStand(resources);
     this.#knockBack = shinBraverKnockBack(resources);
+    this.#activeKnockBack = shinBraverActiveKnockBack(resources);
     this.#guard = shinBraverGuard(resources);
     this.#down = shinBraverDown(resources);
     this.#gutsUp = shinBraverGutsUp(resources);
@@ -149,6 +155,7 @@ export class PlayerShinBraverView implements ShinBraverView {
       this.#spAttack,
       this.#spToStand,
       this.#knockBack,
+      this.#activeKnockBack,
       this.#guard,
       this.#down,
       this.#gutsUp,
@@ -221,6 +228,8 @@ export class PlayerShinBraverView implements ShinBraverView {
     switch (animationType) {
       case "STAND":
         return this.#activeStand;
+      case "KNOCK_BACK":
+        return this.#activeKnockBack;
       case "BURST_UP":
         return this.#activeBurstUp;
       case "BURST_DOWN":
