@@ -28,8 +28,6 @@ export type PilotSkillAnimationParamX<
   skill: SKILL,
   /** スキル発動パイロットHUD */
   pilot: PILOT,
-  /** スキル発動者がアクティブプレイヤーであるか否か、trueでアクティブプレイヤー */
-  isActivePlayer: boolean,
   /** スキル発動プレイヤーステート */
   invokerState: PlayerState,
   /** スキル発動3Dプレイヤー */
@@ -95,7 +93,6 @@ export function toPilotSkillAnimationParam(
   return {
     skill: effect.skill,
     pilot: pilot,
-    isActivePlayer: invokerState.playerId === gameState.activePlayerId,
     invokerState: invokerState,
     invokerSprite: invokerArmdozer.sprite(),
     invokerTD: invokerTD,

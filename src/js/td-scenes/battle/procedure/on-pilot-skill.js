@@ -34,7 +34,8 @@ export async function onPilotSkill(
         props.view.hud.gameObjects.pilotButton.decide(),
         props.view.hud.gameObjects.burstButton.close(),
         props.view.hud.gameObjects.batterySelector.close(),
-        props.view.hud.gameObjects.timeScaleButton.close()
+        props.view.hud.gameObjects.timeScaleButton.close(),
+        ...props.view.td.armdozerObjects.map((v) => v.sprite().endActive())
       )
         .chain(delay(500))
         .chain(props.view.hud.gameObjects.pilotButton.close())

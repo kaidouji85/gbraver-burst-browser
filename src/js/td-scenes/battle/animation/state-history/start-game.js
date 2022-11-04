@@ -17,13 +17,10 @@ export function startGameAnimation(
   props: StateAnimationProps,
   gameState: GameStateX<StartGame>
 ): Animate {
-  const activeTDArmdozer = props.view.td.armdozerObjects.find(
-    (v) => v.playerId === gameState.activePlayerId
-  );
   const activeHUDPlayer = props.view.hud.players.find(
     (v) => v.playerId === gameState.activePlayerId
   );
-  if (!activeTDArmdozer || !activeHUDPlayer) {
+  if (!activeHUDPlayer) {
     return empty();
   }
 
@@ -35,7 +32,6 @@ export function startGameAnimation(
     activeHUDPlayer.turnStart
       .show()
       .chain(delay(400))
-      .chain(activeHUDPlayer.turnStart.hidden()),
-    activeTDArmdozer.sprite().startActive()
+      .chain(activeHUDPlayer.turnStart.hidden())
   );
 }

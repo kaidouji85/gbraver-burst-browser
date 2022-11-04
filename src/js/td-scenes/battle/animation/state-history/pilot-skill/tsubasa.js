@@ -45,7 +45,6 @@ function tsubasaBatteryEnchantment(
 ): Animate {
   return all(
     param.pilot.cutIn.show(),
-    param.isActivePlayer ? param.invokerSprite.endActive() : empty(),
     track(param.tdCamera, param.invokerSprite.getObject3D().position.x, 500),
     dolly(param.tdCamera, "-40", 500),
     param.tdObjects.skyBrightness.brightness(0.2, 500),
@@ -58,7 +57,6 @@ function tsubasaBatteryEnchantment(
     .chain(param.invokerTD.armdozerEffects.batteryEnchantment.popUp())
     .chain(
       all(
-        param.isActivePlayer ? param.invokerSprite.startActive() : empty(),
         toInitial(param.tdCamera, 500),
         param.tdObjects.skyBrightness.brightness(1, 500),
         param.tdObjects.illumination.intensity(1, 500)
