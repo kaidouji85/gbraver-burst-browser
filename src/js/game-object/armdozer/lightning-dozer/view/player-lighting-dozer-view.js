@@ -15,7 +15,7 @@ import { lightningDozerHmAttack } from "../mesh/hm-attack";
 import { lightningDozerHmCharge } from "../mesh/hm-charge";
 import { lightningDozerHmToStand } from "../mesh/hm-to-stand";
 import { lightningDozerKnockBack } from "../mesh/knock-back";
-import {lightningDozerActiveStand, lightningDozerStand} from "../mesh/stand";
+import { lightningDozerActiveStand, lightningDozerStand } from "../mesh/stand";
 import type {
   AnimationType,
   LightningDozerModel,
@@ -104,9 +104,9 @@ export class PlayerLightingDozerView implements LightningDozerView {
       currentActiveMesh.animate(model.animation.frame);
     }
 
-    const disActiveMeshes = this.#getAllMeshes().filter(
-      (v) => v !== currentMesh
-    );
+    const disActiveMeshes = this.#getAllMeshes()
+      .filter((v) => v !== currentMesh)
+      .filter(v => v !== currentActiveMesh)
     disActiveMeshes.forEach((v) => {
       v.opacity(0);
     });
@@ -190,7 +190,7 @@ export class PlayerLightingDozerView implements LightningDozerView {
    * @return 取得結果、対応するメッシュがない場合はnullを返す
    */
   #getActiveMesh(type: AnimationType): ?ArmdozerAnimation {
-    switch(type) {
+    switch (type) {
       case "STAND":
         return this.#activeStand;
       default:

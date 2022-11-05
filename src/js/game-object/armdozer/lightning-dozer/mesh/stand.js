@@ -1,11 +1,15 @@
 // @flow
 
 import * as THREE from "three";
-import {toSilhouette} from "../../../../canvas/silhouette/to-silhouette";
+
+import { toSilhouette } from "../../../../canvas/silhouette/to-silhouette";
 import type { Resources } from "../../../../resource";
 import { TEXTURE_IDS } from "../../../../resource/texture/ids";
 import type { ArmdozerAnimation } from "../../mesh/armdozer-animation";
-import {createHorizontalAnimation, createHorizontalAnimationFromResources} from "../../mesh/horizontal-animation";
+import {
+  createHorizontalAnimation,
+  createHorizontalAnimationFromResources,
+} from "../../mesh/horizontal-animation";
 import { MESH_Y } from "./position";
 
 /** アニメーション枚数 */
@@ -38,7 +42,9 @@ export function lightningDozerStand(resources: Resources): ArmdozerAnimation {
  * @param resources リソース管理オブジェクト
  * @return メッシュ
  */
-export function lightningDozerActiveStand(resources: Resources): ArmdozerAnimation {
+export function lightningDozerActiveStand(
+  resources: Resources
+): ArmdozerAnimation {
   const texture =
     resources.textures.find((v) => v.id === TEXTURE_IDS.LIGHTNING_DOZER_STAND)
       ?.texture ?? new THREE.Texture();

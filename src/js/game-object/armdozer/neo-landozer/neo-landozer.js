@@ -81,6 +81,7 @@ export class NeoLandozer extends EmptyArmDozerSprite implements ArmDozerSprite {
     this.#unsubscribers.forEach((v) => {
       v.unsubscribe();
     });
+    this.#activeFlashTween.removeAll();
   }
 
   /** @override */

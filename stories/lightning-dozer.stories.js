@@ -24,3 +24,13 @@ export const armHammer = (): HTMLElement => {
   stub.start();
   return stub.domElement();
 };
+
+export const activeStand = (): HTMLElement => {
+  const stub = new TDGameObjectStub(({ resources, gameObjectAction }) => {
+    const sprite = PlayerLightningDozer(resources, gameObjectAction);
+    sprite.startActive().play();
+    return { objects: [sprite.getObject3D()] };
+  });
+  stub.start();
+  return stub.domElement();
+};
