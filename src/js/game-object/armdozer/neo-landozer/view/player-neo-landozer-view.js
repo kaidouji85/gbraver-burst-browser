@@ -209,11 +209,11 @@ export class PlayerNeoLandozerView implements NeoLandozerView {
 
   /**
    * アニメーションタイプに応じたアクティブメッシュを返す
-   * @param type アニメーションタイプ
+   * @param animationType アニメーションタイプ
    * @return 取得結果、対応するものがない場合はnullを返す
    */
-  #getActiveMesh(type: AnimationType): ?ArmdozerAnimation {
-    switch (type) {
+  #getActiveMesh(animationType: AnimationType): ?ArmdozerAnimation {
+    switch (animationType) {
       case "STAND":
         return this.#activeStand;
       case "KNOCK_BACK":
