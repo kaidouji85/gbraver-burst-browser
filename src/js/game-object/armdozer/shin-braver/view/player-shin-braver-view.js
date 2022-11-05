@@ -121,8 +121,8 @@ export class PlayerShinBraverView implements ShinBraverView {
   engage(model: ShinBraverModel): void {
     this.#refreshPos(model);
 
-    const currentMesh = this.#getMeshAccordingTo(model.animation.type);
-    const currentActiveMesh = this.#getActiveMeshAccordingTo(
+    const currentMesh = this.#getMesh(model.animation.type);
+    const currentActiveMesh = this.#getActiveMesh(
       model.animation.type
     );
     this.#getAllMeshes()
@@ -204,7 +204,7 @@ export class PlayerShinBraverView implements ShinBraverView {
    * @param animationType アニメーションタイプ
    * @return 取得結果
    */
-  #getMeshAccordingTo(animationType: AnimationType): ArmdozerAnimation {
+  #getMesh(animationType: AnimationType): ArmdozerAnimation {
     switch (animationType) {
       case "STAND":
         return this.#stand;
@@ -242,7 +242,7 @@ export class PlayerShinBraverView implements ShinBraverView {
    * @param animationType アニメーションタイプ
    * @return 取得結果、対応するアクティブメッシュがない場合はnullを返す
    */
-  #getActiveMeshAccordingTo(animationType: AnimationType): ?ArmdozerAnimation {
+  #getActiveMesh(animationType: AnimationType): ?ArmdozerAnimation {
     switch (animationType) {
       case "STAND":
         return this.#activeStand;
