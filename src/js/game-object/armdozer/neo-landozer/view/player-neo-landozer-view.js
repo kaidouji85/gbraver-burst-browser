@@ -14,29 +14,44 @@ import { neoLandozerHMAttack } from "../mesh/hm-attack";
 import { neoLandozerHMCharge } from "../mesh/hm-charge";
 import { neoLandozerHMToStand } from "../mesh/hm-to-stand";
 import { neoLandozerKnockBack } from "../mesh/knock-back";
-import { neoLandozerStand } from "../mesh/stand";
+import { neoLandozerActiveStand, neoLandozerStand } from "../mesh/stand";
 import type { AnimationType } from "../model/animation-type";
 import type { NeoLandozerModel } from "../model/neo-landozer-model";
 import type { NeoLandozerView } from "./neo-landozer-view";
 
 /** プレイヤー側ネオランドーザのビュー */
 export class PlayerNeoLandozerView implements NeoLandozerView {
+  /** グループ */
   #group: typeof THREE.Group;
+  /** 立ち */
   #stand: ArmdozerAnimation;
+  /** アクティブ立ち */
+  #activeStand: ArmdozerAnimation;
+  /** ノックバック */
   #knockBack: ArmdozerAnimation;
+  /** ガード */
   #guard: ArmdozerAnimation;
+  /** アームハンマーチャージ */
   #hmCharge: ArmdozerAnimation;
+  /** アームハンマー */
   #hmAttack: ArmdozerAnimation;
+  /** アームハンマー->立ち */
   #hmToStand: ArmdozerAnimation;
+  /** ダウン */
   #down: ArmdozerAnimation;
+  /** ガッツアップ */
   #gutsUp: ArmdozerAnimation;
+  /** ガッツダウン */
   #gutsDown: ArmdozerAnimation;
+  /** バックステップ */
   #backStep: ArmdozerAnimation;
+  /** フロントステップ */
   #frontStep: ArmdozerAnimation;
 
   constructor(resources: Resources) {
     this.#group = new THREE.Group();
     this.#stand = neoLandozerStand(resources);
+    this.#activeStand = neoLandozerActiveStand(resources);
     this.#knockBack = neoLandozerKnockBack(resources);
     this.#guard = neoLandozerGuard(resources);
     this.#hmCharge = neoLandozerHMCharge(resources);
@@ -53,49 +68,57 @@ export class PlayerNeoLandozerView implements NeoLandozerView {
     });
   }
 
-  /** デストラクタ */
+  /** @override */
   destructor(): void {
     this.#getAllMeshes().forEach((v) => {
       v.destructor();
     });
   }
 
-  /** モデルをビューに反映させる */
+  /** @override */
   engage(model: NeoLandozerModel): void {
-    const activeMesh = this.#getActiveMesh(model.animation.type);
+    const currentMesh = this.#getMesh(model.animation.type);
+    const currentActiveMesh = this.#getActiveMesh(model.animation.type);
     this.#getAllMeshes()
-      .filter((v) => v !== activeMesh)
+      .filter((v) => v !== currentMesh)
+      .filter((v) => v !== currentActiveMesh)
       .forEach((v) => {
-        v.visible(false);
+        v.opacity(0);
       });
-    activeMesh.visible(true);
-    activeMesh.animate(model.animation.frame);
+    currentMesh.opacity(1);
+    currentMesh.animate(model.animation.frame);
+    if (currentActiveMesh) {
+      const activeOpacity =
+        (0.2 + model.active.strength * 0.05) * model.active.opacity;
+      currentActiveMesh.opacity(activeOpacity);
+      currentActiveMesh.animate(model.animation.frame);
+    }
     this.#refreshPos(model);
   }
 
-  /** カメラの真正面を向く */
+  /** @override */
   lookAt(camera: typeof THREE.Camera): void {
     this.#group.quaternion.copy(camera.quaternion);
   }
 
-  /** シーンに追加するオブジェクトを取得する */
+  /** @override */
   getObject3D(): typeof THREE.Object3D {
     return this.#group;
   }
 
-  /**
-   * スプライト配下にオブジェクトを追加する
-   *
-   * @param object 追加するオブジェクト
-   */
+  /** @override */
   addObject3D(object: typeof THREE.Object3D): void {
     this.#group.add(object);
   }
 
-  /** 本クラスが保持する全メッシュを返す */
+  /**
+   * 本クラスが保持する全メッシュを返す
+   * @return 取得結果
+   */
   #getAllMeshes(): ArmdozerAnimation[] {
     return [
       this.#stand,
+      this.#activeStand,
       this.#knockBack,
       this.#guard,
       this.#hmCharge,
@@ -109,7 +132,10 @@ export class PlayerNeoLandozerView implements NeoLandozerView {
     ];
   }
 
-  /** 座標を更新する */
+  /**
+   * 座標を更新する
+   * @param model モデル
+   */
   #refreshPos(model: NeoLandozerModel): void {
     this.#group.position.set(
       model.position.x,
@@ -118,8 +144,12 @@ export class PlayerNeoLandozerView implements NeoLandozerView {
     );
   }
 
-  /** アニメーションタイプに応じたメッシュを返す */
-  #getActiveMesh(type: AnimationType): ArmdozerAnimation {
+  /**
+   * アニメーションタイプに応じたメッシュを返す
+   * @param type アニメーションタイプ
+   * @return メッシュ
+   */
+  #getMesh(type: AnimationType): ArmdozerAnimation {
     switch (type) {
       case "STAND":
         return this.#stand;
@@ -145,6 +175,20 @@ export class PlayerNeoLandozerView implements NeoLandozerView {
         return this.#frontStep;
       default:
         return this.#stand;
+    }
+  }
+
+  /**
+   * アニメーションタイプに応じたアクティブメッシュを返す
+   * @param type アニメーションタイプ
+   * @return 取得結果、対応するものがない場合はnullを返す
+   */
+  #getActiveMesh(type: AnimationType): ?ArmdozerAnimation {
+    switch (type) {
+      case "STAND":
+        return this.#activeStand;
+      default:
+        return null;
     }
   }
 }
