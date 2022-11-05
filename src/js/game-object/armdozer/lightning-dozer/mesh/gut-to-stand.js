@@ -11,7 +11,7 @@ export const MESH_HEIGHT = 600;
 export const MAX_ANIMATION = 4;
 
 /**
- * ライトニングドーザ ガッツ -> 立ち
+ * ライトニングドーザ ガッツ -> 立ち メッシュ生成
  *
  * @param resources リソース管理オブジェクト
  * @return メッシュ

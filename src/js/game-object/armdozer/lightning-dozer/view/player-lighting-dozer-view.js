@@ -6,8 +6,8 @@ import type { Resources } from "../../../../resource";
 import type { ArmdozerAnimation } from "../../mesh/armdozer-animation";
 import { lightningDozerBackStep } from "../mesh/back-step";
 import { lightningDozerDown } from "../mesh/down";
-import { lightningDozerFrontStep } from "../mesh/front-step";
-import { lightningDozerGuard } from "../mesh/guard";
+import {lightningDozerActiveFrontStep, lightningDozerFrontStep} from "../mesh/front-step";
+import {lightningDozerActiveGuard, lightningDozerGuard} from "../mesh/guard";
 import { lightningDozerGutsToStand } from "../mesh/gut-to-stand";
 import { lightningDozerGutsDown } from "../mesh/guts-down";
 import { lightningDozerGutsUp } from "../mesh/guts-up";
@@ -48,10 +48,14 @@ export class PlayerLightingDozerView implements LightningDozerView {
   #gutsToStand: ArmdozerAnimation;
   /** ガード */
   #guard: ArmdozerAnimation;
+  /** アクティブガード */
+  #activeGuard: ArmdozerAnimation;
   /** バックステップ */
   #backStep: ArmdozerAnimation;
   /** フロントステップ */
   #frontStep: ArmdozerAnimation;
+  /** アクティブフロントステップ */
+  #activeFrontStep: ArmdozerAnimation;
 
   /**
    * コンストラクタ
@@ -70,8 +74,10 @@ export class PlayerLightingDozerView implements LightningDozerView {
     this.#gutsDown = lightningDozerGutsDown(resources);
     this.#gutsToStand = lightningDozerGutsToStand(resources);
     this.#guard = lightningDozerGuard(resources);
+    this.#activeGuard = lightningDozerActiveGuard(resources);
     this.#backStep = lightningDozerBackStep(resources);
     this.#frontStep = lightningDozerFrontStep(resources);
+    this.#activeFrontStep = lightningDozerActiveFrontStep(resources);
     this.#getAllMeshes().forEach((v) => {
       this.#group.add(v.getObject3D());
     });
@@ -144,8 +150,10 @@ export class PlayerLightingDozerView implements LightningDozerView {
       this.#gutsDown,
       this.#gutsToStand,
       this.#guard,
+      this.#activeGuard,
       this.#backStep,
       this.#frontStep,
+      this.#activeFrontStep,
     ];
   }
 
@@ -191,6 +199,10 @@ export class PlayerLightingDozerView implements LightningDozerView {
    */
   #getActiveMesh(animationType: AnimationType): ?ArmdozerAnimation {
     switch (animationType) {
+      case "FRONT_STEP":
+        return this.#activeFrontStep;
+      case "GUARD":
+        return this.#activeGuard;
       case "STAND":
         return this.#activeStand;
       default:
