@@ -1,11 +1,15 @@
 // @flow
 
 import * as THREE from "three";
-import {toSilhouette} from "../../../../canvas/silhouette/to-silhouette";
+
+import { toSilhouette } from "../../../../canvas/silhouette/to-silhouette";
 import type { Resources } from "../../../../resource";
 import { TEXTURE_IDS } from "../../../../resource/texture/ids";
 import type { ArmdozerAnimation } from "../../mesh/armdozer-animation";
-import {createHorizontalAnimation, createHorizontalAnimationFromResources} from "../../mesh/horizontal-animation";
+import {
+  createHorizontalAnimation,
+  createHorizontalAnimationFromResources,
+} from "../../mesh/horizontal-animation";
 import { MESH_Y } from "./position";
 
 /** メッシュ幅 */
@@ -38,7 +42,9 @@ export function lightningDozerGuard(resources: Resources): ArmdozerAnimation {
  * @param resources リソース管理オブジェクト
  * @return メッシュ
  */
-export function lightningDozerActiveGuard(resources: Resources): ArmdozerAnimation {
+export function lightningDozerActiveGuard(
+  resources: Resources
+): ArmdozerAnimation {
   const texture =
     resources.textures.find((v) => v.id === TEXTURE_IDS.LIGHTNING_DOZER_GUARD)
       ?.texture ?? new THREE.Texture();
@@ -55,4 +61,3 @@ export function lightningDozerActiveGuard(resources: Resources): ArmdozerAnimati
   object.position.z = 0.01;
   return ret;
 }
-

@@ -6,11 +6,23 @@ import type { Resources } from "../../../../resource";
 import type { ArmdozerAnimation } from "../../mesh/armdozer-animation";
 import { lightningDozerBackStep } from "../mesh/back-step";
 import { lightningDozerDown } from "../mesh/down";
-import {lightningDozerActiveFrontStep, lightningDozerFrontStep} from "../mesh/front-step";
-import {lightningDozerActiveGuard, lightningDozerGuard} from "../mesh/guard";
-import { lightningDozerGutsToStand } from "../mesh/gut-to-stand";
-import { lightningDozerGutsDown } from "../mesh/guts-down";
-import { lightningDozerGutsUp } from "../mesh/guts-up";
+import {
+  lightningDozerActiveFrontStep,
+  lightningDozerFrontStep,
+} from "../mesh/front-step";
+import { lightningDozerActiveGuard, lightningDozerGuard } from "../mesh/guard";
+import {
+  lightningDozerActiveGutsToStand,
+  lightningDozerGutsToStand,
+} from "../mesh/gut-to-stand";
+import {
+  lightningDozerActiveGutsDown,
+  lightningDozerGutsDown,
+} from "../mesh/guts-down";
+import {
+  lightningDozerActiveGutsUp,
+  lightningDozerGutsUp,
+} from "../mesh/guts-up";
 import { lightningDozerHmAttack } from "../mesh/hm-attack";
 import { lightningDozerHmCharge } from "../mesh/hm-charge";
 import { lightningDozerHmToStand } from "../mesh/hm-to-stand";
@@ -42,10 +54,16 @@ export class PlayerLightingDozerView implements LightningDozerView {
   #down: ArmdozerAnimation;
   /** ガッツアップ */
   #gutsUp: ArmdozerAnimation;
+  /** アクティブガッツアップ */
+  #activeGutsUp: ArmdozerAnimation;
   /** ガッツダウン */
   #gutsDown: ArmdozerAnimation;
+  /** アクティブガッツダウン */
+  #activeGutsDown: ArmdozerAnimation;
   /** ガッツ->立ち */
   #gutsToStand: ArmdozerAnimation;
+  /** アクティブガッツ->立ち */
+  #activeGutsToStand: ArmdozerAnimation;
   /** ガード */
   #guard: ArmdozerAnimation;
   /** アクティブガード */
@@ -71,8 +89,11 @@ export class PlayerLightingDozerView implements LightningDozerView {
     this.#knockBack = lightningDozerKnockBack(resources);
     this.#down = lightningDozerDown(resources);
     this.#gutsUp = lightningDozerGutsUp(resources);
+    this.#activeGutsUp = lightningDozerActiveGutsUp(resources);
     this.#gutsDown = lightningDozerGutsDown(resources);
+    this.#activeGutsDown = lightningDozerActiveGutsDown(resources);
     this.#gutsToStand = lightningDozerGutsToStand(resources);
+    this.#activeGutsToStand = lightningDozerActiveGutsToStand(resources);
     this.#guard = lightningDozerGuard(resources);
     this.#activeGuard = lightningDozerActiveGuard(resources);
     this.#backStep = lightningDozerBackStep(resources);
@@ -112,7 +133,7 @@ export class PlayerLightingDozerView implements LightningDozerView {
 
     const disActiveMeshes = this.#getAllMeshes()
       .filter((v) => v !== currentMesh)
-      .filter(v => v !== currentActiveMesh)
+      .filter((v) => v !== currentActiveMesh);
     disActiveMeshes.forEach((v) => {
       v.opacity(0);
     });
@@ -147,8 +168,11 @@ export class PlayerLightingDozerView implements LightningDozerView {
       this.#knockBack,
       this.#down,
       this.#gutsUp,
+      this.#activeGutsUp,
       this.#gutsDown,
+      this.#activeGutsDown,
       this.#gutsToStand,
+      this.#activeGutsToStand,
       this.#guard,
       this.#activeGuard,
       this.#backStep,
@@ -201,6 +225,12 @@ export class PlayerLightingDozerView implements LightningDozerView {
     switch (animationType) {
       case "FRONT_STEP":
         return this.#activeFrontStep;
+      case "GUTS_UP":
+        return this.#activeGutsUp;
+      case "GUTS_DOWN":
+        return this.#activeGutsDown;
+      case "GUTS_TO_STAND":
+        return this.#activeGutsToStand;
       case "GUARD":
         return this.#activeGuard;
       case "STAND":

@@ -1,11 +1,15 @@
 // @flow
 
 import * as THREE from "three";
-import {toSilhouette} from "../../../../canvas/silhouette/to-silhouette";
+
+import { toSilhouette } from "../../../../canvas/silhouette/to-silhouette";
 import type { Resources } from "../../../../resource";
 import { TEXTURE_IDS } from "../../../../resource/texture/ids";
 import type { ArmdozerAnimation } from "../../mesh/armdozer-animation";
-import {createHorizontalAnimation, createHorizontalAnimationFromResources} from "../../mesh/horizontal-animation";
+import {
+  createHorizontalAnimation,
+  createHorizontalAnimationFromResources,
+} from "../../mesh/horizontal-animation";
 import { MESH_Y } from "./position";
 
 /** メッシュ幅 */
@@ -44,8 +48,9 @@ export function lightningDozerActiveFrontStep(
   resources: Resources
 ): ArmdozerAnimation {
   const texture =
-    resources.textures.find((v) => v.id === TEXTURE_IDS.LIGHTNING_DOZER_FRONT_STEP)
-      ?.texture ?? new THREE.Texture();
+    resources.textures.find(
+      (v) => v.id === TEXTURE_IDS.LIGHTNING_DOZER_FRONT_STEP
+    )?.texture ?? new THREE.Texture();
   const canvas = toSilhouette(texture.image, 255, 255, 255);
   const silhouetteTexture = new THREE.Texture(canvas);
   const ret = createHorizontalAnimation({

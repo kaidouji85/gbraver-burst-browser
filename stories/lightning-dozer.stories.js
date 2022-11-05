@@ -64,3 +64,18 @@ export const activeGuard = (): HTMLElement => {
   stub.start();
   return stub.domElement();
 };
+
+export const activeGuts = (): HTMLElement => {
+  const stub = new TDGameObjectStub(({ resources, gameObjectAction }) => {
+    const sprite = PlayerLightningDozer(resources, gameObjectAction);
+    sprite.startActive().play();
+    delay(1000)
+      .chain(sprite.guts())
+      .chain(delay(1000))
+      .chain(sprite.gutsToStand())
+      .loop();
+    return { objects: [sprite.getObject3D()] };
+  });
+  stub.start();
+  return stub.domElement();
+};
