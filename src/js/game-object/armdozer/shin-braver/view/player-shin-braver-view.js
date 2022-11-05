@@ -122,9 +122,7 @@ export class PlayerShinBraverView implements ShinBraverView {
     this.#refreshPos(model);
 
     const currentMesh = this.#getMesh(model.animation.type);
-    const currentActiveMesh = this.#getActiveMesh(
-      model.animation.type
-    );
+    const currentActiveMesh = this.#getActiveMesh(model.animation.type);
     this.#getAllMeshes()
       .filter((v) => v !== currentMesh)
       .filter((v) => v !== currentActiveMesh)
