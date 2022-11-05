@@ -37,10 +37,10 @@ import type { ShinBraverView } from "./shin-braver-view";
 export class PlayerShinBraverView implements ShinBraverView {
   /** グループ */
   #group: typeof THREE.Group;
-  /** アクティブスタンド */
-  #activeStand: ArmdozerAnimation;
   /** スタンド */
   #stand: ArmdozerAnimation;
+  /** アクティブスタンド */
+  #activeStand: ArmdozerAnimation;
   /** ストレートパンチチャージ */
   #spCharge: ArmdozerAnimation;
   /** ストレートパンチ */

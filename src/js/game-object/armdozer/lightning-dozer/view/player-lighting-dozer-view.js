@@ -15,35 +15,52 @@ import { lightningDozerHmAttack } from "../mesh/hm-attack";
 import { lightningDozerHmCharge } from "../mesh/hm-charge";
 import { lightningDozerHmToStand } from "../mesh/hm-to-stand";
 import { lightningDozerKnockBack } from "../mesh/knock-back";
-import { lightningDozerStand } from "../mesh/stand";
+import {lightningDozerActiveStand, lightningDozerStand} from "../mesh/stand";
 import type {
   AnimationType,
   LightningDozerModel,
 } from "../model/lightning-dozer-model";
 import type { LightningDozerView } from "./lightning-dozer-view";
 
-/**
- * プレイヤー側のライトニングドーザビュー
- */
+/** プレイヤー側のライトニングドーザビュー */
 export class PlayerLightingDozerView implements LightningDozerView {
+  /** グループ */
   #group: typeof THREE.Group;
+  /** 立ち */
   #stand: ArmdozerAnimation;
+  /** アクティブ立ち */
+  #activeStand: ArmdozerAnimation;
+  /** アームハンマーチャージ */
   #hmCharge: ArmdozerAnimation;
+  /** アームハンマー */
   #hmAttack: ArmdozerAnimation;
+  /** アームハンマー->立ち */
   #hmToStand: ArmdozerAnimation;
+  /** ノックバック */
   #knockBack: ArmdozerAnimation;
+  /** ダウン */
   #down: ArmdozerAnimation;
+  /** ガッツアップ */
   #gutsUp: ArmdozerAnimation;
+  /** ガッツダウン */
   #gutsDown: ArmdozerAnimation;
+  /** ガッツ->立ち */
   #gutsToStand: ArmdozerAnimation;
+  /** ガード */
   #guard: ArmdozerAnimation;
+  /** バックステップ */
   #backStep: ArmdozerAnimation;
+  /** フロントステップ */
   #frontStep: ArmdozerAnimation;
 
+  /**
+   * コンストラクタ
+   * @param resources リソース管理オブジェクト
+   */
   constructor(resources: Resources) {
     this.#group = new THREE.Group();
-
     this.#stand = lightningDozerStand(resources);
+    this.#activeStand = lightningDozerActiveStand(resources);
     this.#hmCharge = lightningDozerHmCharge(resources);
     this.#hmAttack = lightningDozerHmAttack(resources);
     this.#hmToStand = lightningDozerHmToStand(resources);
@@ -55,24 +72,19 @@ export class PlayerLightingDozerView implements LightningDozerView {
     this.#guard = lightningDozerGuard(resources);
     this.#backStep = lightningDozerBackStep(resources);
     this.#frontStep = lightningDozerFrontStep(resources);
-
     this.#getAllMeshes().forEach((v) => {
       this.#group.add(v.getObject3D());
     });
   }
 
-  /** デストラクタ相当の処理 */
+  /** @override */
   destructor(): void {
     this.#getAllMeshes().forEach((v) => {
       v.destructor();
     });
   }
 
-  /**
-   * モデルをビューに反映させる
-   *
-   * @param model モデル
-   */
+  /** @override */
   engage(model: LightningDozerModel): void {
     this.#group.position.set(
       model.position.x,
@@ -80,53 +92,49 @@ export class PlayerLightingDozerView implements LightningDozerView {
       model.position.z
     );
 
-    const activeMesh = this.#getActiveMesh(model.animation.type);
-    activeMesh.visible(true);
-    activeMesh.animate(model.animation.frame);
+    const currentMesh = this.#getMesh(model.animation.type);
+    currentMesh.opacity(1);
+    currentMesh.animate(model.animation.frame);
+
+    const currentActiveMesh = this.#getActiveMesh(model.animation.type);
+    if (currentActiveMesh) {
+      const activeOpacity =
+        (0.2 + model.active.strength * 0.05) * model.active.opacity;
+      currentActiveMesh.opacity(activeOpacity);
+      currentActiveMesh.animate(model.animation.frame);
+    }
 
     const disActiveMeshes = this.#getAllMeshes().filter(
-      (v) => v !== activeMesh
+      (v) => v !== currentMesh
     );
     disActiveMeshes.forEach((v) => {
-      v.visible(false);
+      v.opacity(0);
     });
   }
 
-  /**
-   * スプライト配下のオブジェクトを追加する
-   *
-   * @param object オブジェクト
-   */
+  /** @override */
   addObject3D(object: typeof THREE.Object3D): void {
     this.#group.add(object);
   }
 
-  /**
-   * シーンに追加するオブジェクトを取得する
-   *
-   * @return シーンに追加するオブジェクト
-   */
+  /** @override */
   getObject3D(): typeof THREE.Object3D {
     return this.#group;
   }
 
-  /**
-   * カメラの真正面を向く
-   *
-   * @param camera カメラ
-   */
+  /** @override */
   lookAt(camera: typeof THREE.Camera): void {
     this.#group.quaternion.copy(camera.quaternion);
   }
 
   /**
    * 本ビューの全メッシュを取得する
-   *
    * @return 本ビューの全メッシュ
    */
   #getAllMeshes(): ArmdozerAnimation[] {
     return [
       this.#stand,
+      this.#activeStand,
       this.#hmCharge,
       this.#hmAttack,
       this.#hmToStand,
@@ -143,11 +151,10 @@ export class PlayerLightingDozerView implements LightningDozerView {
 
   /**
    * アニメ種別に対応するメッシュを返す
-   *
    * @param animationType アニメ種別
    * @return アニメ種別に対応するメッシュ
    */
-  #getActiveMesh(animationType: AnimationType): ArmdozerAnimation {
+  #getMesh(animationType: AnimationType): ArmdozerAnimation {
     switch (animationType) {
       case "HM_CHARGE":
         return this.#hmCharge;
@@ -174,6 +181,20 @@ export class PlayerLightingDozerView implements LightningDozerView {
       case "STAND":
       default:
         return this.#stand;
+    }
+  }
+
+  /**
+   * アニメーションタイプに応じたアクティブメッシュを返す
+   * @param type アニメーションタイプ
+   * @return 取得結果、対応するメッシュがない場合はnullを返す
+   */
+  #getActiveMesh(type: AnimationType): ?ArmdozerAnimation {
+    switch(type) {
+      case "STAND":
+        return this.#activeStand;
+      default:
+        return null;
     }
   }
 }
