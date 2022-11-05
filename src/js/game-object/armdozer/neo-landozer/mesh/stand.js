@@ -20,7 +20,7 @@ export const MESH_WIDTH = 600;
 export const MESH_HEIGHT = 600;
 
 /**
- * ネオラインドーザ立ちポーズメッシュを生成
+ * ネオラインドーザ 立ち メッシュ生成
  * @param resources リソース管理オブジェクト
  * @return メッシュ
  */
@@ -38,7 +38,7 @@ export function neoLandozerStand(resources: Resources): ArmdozerAnimation {
 }
 
 /**
- * ネオラインドーザアクティブ立ちポーズメッシュを生成
+ * ネオラインドーザ アクティブ立ち メッシュを生成
  * @param resources リソース管理オブジェクト
  * @return メッシュ
  */

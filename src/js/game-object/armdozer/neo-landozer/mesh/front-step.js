@@ -20,7 +20,7 @@ export const MESH_WIDTH = 600;
 export const MESH_HEIGHT = 600;
 
 /**
- * ネオラインドーザ フロントステップ
+ * ネオラインドーザ フロントステップ メッシュ生成
  * @param resources リソース管理オブジェクト
  * @return メッシュ
  */
@@ -38,7 +38,7 @@ export function neoLandozerFrontStep(resources: Resources): ArmdozerAnimation {
 }
 
 /**
- * ネオラインドーザ アクティブフロントステップ
+ * ネオラインドーザ アクティブフロントステップ メッシュ生成
  * @param resources リソース管理オブジェクト
  * @return メッシュ
  */

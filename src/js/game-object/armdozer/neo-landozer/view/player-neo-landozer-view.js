@@ -10,13 +10,19 @@ import {
   neoLandozerActiveFrontStep,
   neoLandozerFrontStep,
 } from "../mesh/front-step";
-import { neoLandozerGuard } from "../mesh/guard";
-import { neoLandozerGutsDown } from "../mesh/guts-down";
-import { neoLandozerGutsUp } from "../mesh/guts-up";
+import { neoLandozerActiveGuard, neoLandozerGuard } from "../mesh/guard";
+import {
+  neoLandozerActiveGutsDown,
+  neoLandozerGutsDown,
+} from "../mesh/guts-down";
+import { neoLandozerActiveGutsUp, neoLandozerGutsUp } from "../mesh/guts-up";
 import { neoLandozerHMAttack } from "../mesh/hm-attack";
 import { neoLandozerHMCharge } from "../mesh/hm-charge";
 import { neoLandozerHMToStand } from "../mesh/hm-to-stand";
-import { neoLandozerKnockBack } from "../mesh/knock-back";
+import {
+  neoLandozerActiveKnockBack,
+  neoLandozerKnockBack,
+} from "../mesh/knock-back";
 import { neoLandozerActiveStand, neoLandozerStand } from "../mesh/stand";
 import type { AnimationType } from "../model/animation-type";
 import type { NeoLandozerModel } from "../model/neo-landozer-model";
@@ -32,8 +38,12 @@ export class PlayerNeoLandozerView implements NeoLandozerView {
   #activeStand: ArmdozerAnimation;
   /** ノックバック */
   #knockBack: ArmdozerAnimation;
+  /** アクティブノックバック */
+  #activeKnockBack: ArmdozerAnimation;
   /** ガード */
   #guard: ArmdozerAnimation;
+  /** アクティブガード */
+  #activeGuard: ArmdozerAnimation;
   /** アームハンマーチャージ */
   #hmCharge: ArmdozerAnimation;
   /** アームハンマー */
@@ -44,8 +54,12 @@ export class PlayerNeoLandozerView implements NeoLandozerView {
   #down: ArmdozerAnimation;
   /** ガッツアップ */
   #gutsUp: ArmdozerAnimation;
+  /** アクティブガッツアップ */
+  #activeGutsUp: ArmdozerAnimation;
   /** ガッツダウン */
   #gutsDown: ArmdozerAnimation;
+  /** アクティブガッツダウン */
+  #activeGutsDown: ArmdozerAnimation;
   /** バックステップ */
   #backStep: ArmdozerAnimation;
   /** フロントステップ */
@@ -58,13 +72,17 @@ export class PlayerNeoLandozerView implements NeoLandozerView {
     this.#stand = neoLandozerStand(resources);
     this.#activeStand = neoLandozerActiveStand(resources);
     this.#knockBack = neoLandozerKnockBack(resources);
+    this.#activeKnockBack = neoLandozerActiveKnockBack(resources);
     this.#guard = neoLandozerGuard(resources);
+    this.#activeGuard = neoLandozerActiveGuard(resources);
     this.#hmCharge = neoLandozerHMCharge(resources);
     this.#hmAttack = neoLandozerHMAttack(resources);
     this.#hmToStand = neoLandozerHMToStand(resources);
     this.#down = neoLandozerDown(resources);
     this.#gutsUp = neoLandozerGutsUp(resources);
+    this.#activeGutsUp = neoLandozerActiveGutsUp(resources);
     this.#gutsDown = neoLandozerGutsDown(resources);
+    this.#activeGutsDown = neoLandozerActiveGutsDown(resources);
     this.#backStep = neoLandozerBackStep(resources);
     this.#frontStep = neoLandozerFrontStep(resources);
     this.#activeFrontStep = neoLandozerActiveFrontStep(resources);
@@ -126,13 +144,17 @@ export class PlayerNeoLandozerView implements NeoLandozerView {
       this.#stand,
       this.#activeStand,
       this.#knockBack,
+      this.#activeKnockBack,
       this.#guard,
+      this.#activeGuard,
       this.#hmCharge,
       this.#hmAttack,
       this.#hmToStand,
       this.#down,
       this.#gutsUp,
+      this.#activeGutsUp,
       this.#gutsDown,
+      this.#activeGutsDown,
       this.#backStep,
       this.#frontStep,
       this.#activeFrontStep,
@@ -194,6 +216,14 @@ export class PlayerNeoLandozerView implements NeoLandozerView {
     switch (type) {
       case "STAND":
         return this.#activeStand;
+      case "KNOCK_BACK":
+        return this.#activeKnockBack;
+      case "GUARD":
+        return this.#activeGuard;
+      case "GUTS_UP":
+        return this.#activeGutsUp;
+      case "GUTS_DOWN":
+        return this.#activeGutsDown;
       case "FRONT_STEP":
         return this.#activeFrontStep;
       default:

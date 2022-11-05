@@ -41,3 +41,48 @@ export const activeAvoid = (): HTMLElement => {
   stub.start();
   return stub.domElement();
 };
+
+export const activeGuard = (): HTMLElement => {
+  const stub = new TDGameObjectStub(({ resources, gameObjectAction }) => {
+    const sprite = PlayerNeoLandozer(resources, gameObjectAction);
+    sprite.startActive().play();
+    delay(1000)
+      .chain(sprite.guard())
+      .chain(delay(1000))
+      .chain(sprite.guardToStand())
+      .loop();
+    return { objects: [sprite.getObject3D()] };
+  });
+  stub.start();
+  return stub.domElement();
+};
+
+export const activeGuts = (): HTMLElement => {
+  const stub = new TDGameObjectStub(({ resources, gameObjectAction }) => {
+    const sprite = PlayerNeoLandozer(resources, gameObjectAction);
+    sprite.startActive().play();
+    delay(1000)
+      .chain(sprite.guts())
+      .chain(delay(1000))
+      .chain(sprite.gutsToStand())
+      .loop();
+    return { objects: [sprite.getObject3D()] };
+  });
+  stub.start();
+  return stub.domElement();
+};
+
+export const activeKnockBack = (): HTMLElement => {
+  const stub = new TDGameObjectStub(({ resources, gameObjectAction }) => {
+    const sprite = PlayerNeoLandozer(resources, gameObjectAction);
+    sprite.startActive().play();
+    delay(1000)
+      .chain(sprite.knockBack())
+      .chain(delay(1000))
+      .chain(sprite.knockBackToStand())
+      .loop();
+    return { objects: [sprite.getObject3D()] };
+  });
+  stub.start();
+  return stub.domElement();
+};
