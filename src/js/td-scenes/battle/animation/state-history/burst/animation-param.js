@@ -44,6 +44,8 @@ export type BurstAnimationParamX<
   burstArmdozerHUD: HUD_ARMDOZER,
   /** バースト発動側3Dアームドーザ */
   burstArmdozerTD: TD_ARMDOZER,
+  /** バースト発動側でない3Dアームドーザ */
+  anotherArmdozerTD: TDArmdozerObjects,
   /** 3Dレイヤーオブジェクト */
   tdObjects: TDGameObjects,
   /** 3Dカメラ */
@@ -88,12 +90,16 @@ export function toBurstAnimationParam(
   const burstArmdozerTD = props.view.td.armdozerObjects.find(
     (v) => v.playerId === effect.burstPlayer
   );
+  const anotherArmdozerTD = props.view.td.armdozerObjects.find(
+    (v) => v.playerId !== effect.burstPlayer
+  );
   if (
     !burstPlayerState ||
     !burstPlayerTD ||
     !burstPlayerHUD ||
     !burstArmdozerHUD ||
-    !burstArmdozerTD
+    !burstArmdozerTD ||
+    !anotherArmdozerTD
   ) {
     return null;
   }
@@ -106,6 +112,7 @@ export function toBurstAnimationParam(
     burstPlayerHUD,
     burstArmdozerHUD,
     burstArmdozerTD,
+    anotherArmdozerTD,
     tdObjects: props.view.td.gameObjects,
     tdCamera: props.view.td.camera,
     hudObjects: props.view.hud.gameObjects,
