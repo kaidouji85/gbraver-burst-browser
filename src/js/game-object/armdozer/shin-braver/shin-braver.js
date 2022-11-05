@@ -73,8 +73,8 @@ export class ShinBraver extends EmptyArmDozerSprite implements ArmDozerSprite {
         }
       }),
 
-      firstUpdate(gameObjectAction).subscribe(() => {
-        this.#onFirstUpdate();
+      firstUpdate(gameObjectAction).subscribe((action) => {
+        this.#onFirstUpdate(action);
       }),
     ];
   }
@@ -198,6 +198,7 @@ export class ShinBraver extends EmptyArmDozerSprite implements ArmDozerSprite {
 
   /**
    * Update時の処理
+   * @param action アクション
    */
   #onUpdate(action: Update): void {
     this.#activeFlashTween.update(action.time);
@@ -206,9 +207,10 @@ export class ShinBraver extends EmptyArmDozerSprite implements ArmDozerSprite {
 
   /**
    * 最初のUpdate時だけ実行する処理
+   * @param action アクション
    */
-  #onFirstUpdate(): void {
-    activeFlash(this.#model, this.#activeFlashTween).loop();
+  #onFirstUpdate(action: Update): void {
+    activeFlash(this.#model, this.#activeFlashTween).loop(action.time);
   }
 
   /**

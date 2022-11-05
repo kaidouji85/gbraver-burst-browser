@@ -3,6 +3,8 @@
 import TWEEN from "@tweenjs/tween.js";
 
 import { Animate } from "../../../../animation/animate";
+import { delay } from "../../../../animation/delay";
+import { process } from "../../../../animation/process";
 import { tween } from "../../../../animation/tween";
 import type { ShinBraverModel } from "../model/shin-braver-model";
 
@@ -16,7 +18,11 @@ export function activeFlash(
   model: ShinBraverModel,
   group: typeof TWEEN.Group
 ): Animate {
-  return tween(model.active, (t) => t.to({ strength: 1 }, 800), group).chain(
-    tween(model.active, (t) => t.to({ strength: 0 }, 800), group)
-  );
+  return process(() => {
+    model.active.strength = 0;
+  })
+    .chain(tween(model.active, (t) => t.to({ strength: 1 }, 500), group))
+    .chain(delay(150, group))
+    .chain(tween(model.active, (t) => t.to({ strength: 0 }, 500), group))
+    .chain(delay(150, group));
 }
