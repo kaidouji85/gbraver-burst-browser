@@ -26,6 +26,9 @@ export function inputCommandAnimation(
   const playerCommand = gameState.effect.players.find(
     (v) => v.playerId === props.playerId
   );
+  const playerTDArmdozer = props.view.td.armdozerObjects.find(
+    (v) => v.playerId === props.playerId
+  );
   const playerHUD = props.view.hud.players.find(
     (v) => v.playerId === props.playerId
   );
@@ -33,7 +36,14 @@ export function inputCommandAnimation(
   const enemyHUD = props.view.hud.players.find(
     (v) => v.playerId !== props.playerId
   );
-  if (!player || !playerCommand || !playerHUD || !enemy || !enemyHUD) {
+  if (
+    !player ||
+    !playerTDArmdozer ||
+    !playerCommand ||
+    !playerHUD ||
+    !enemy ||
+    !enemyHUD
+  ) {
     return empty();
   }
 
@@ -48,6 +58,7 @@ export function inputCommandAnimation(
   const canBurst = canBurstButtonPush(playerCommand.command);
   const canPilotSkill = canPilotButtonPush(playerCommand.command);
   return all(
+    isPlayerTurn ? playerTDArmdozer.sprite().startActive() : empty(),
     playerHUD.gauge.hp(player.armdozer.hp),
     playerHUD.gauge.battery(player.armdozer.battery),
     enemyHUD.gauge.hp(enemy.armdozer.hp),

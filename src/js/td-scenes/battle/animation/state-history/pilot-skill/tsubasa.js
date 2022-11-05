@@ -58,7 +58,6 @@ function tsubasaBatteryEnchantment(
     .chain(param.invokerTD.armdozerEffects.batteryEnchantment.popUp())
     .chain(
       all(
-        param.isActivePlayer ? param.invokerSprite.startActive() : empty(),
         toInitial(param.tdCamera, 500),
         param.tdObjects.skyBrightness.brightness(1, 500),
         param.tdObjects.illumination.intensity(1, 500)
