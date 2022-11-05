@@ -1,18 +1,23 @@
 // @flow
 
+import TWEEN from "@tweenjs/tween.js";
 import * as THREE from "three";
 
 import { Animate } from "../../../animation/animate";
 import type { PreRender } from "../../../game-loop/pre-render";
+import type { Update } from "../../../game-loop/update";
 import type { Resources } from "../../../resource";
 import type { Stream, Unsubscriber } from "../../../stream/stream";
+import { firstUpdate } from "../../action/first-update";
 import type { GameObjectAction } from "../../action/game-object-action";
 import type { ArmDozerSprite } from "../armdozer-sprite";
 import { EmptyArmDozerSprite } from "../empty-armdozer-sprite";
+import { activeFlash } from "./animation/active-flash";
 import { armHammer } from "./animation/arm-hammer";
 import { avoid } from "./animation/avoid";
 import { charge } from "./animation/charge";
 import { down } from "./animation/down";
+import { endActive } from "./animation/end-active";
 import { frontStep } from "./animation/front-step";
 import { guard } from "./animation/guard";
 import { guardToStand } from "./animation/guard-to-stand";
@@ -21,6 +26,7 @@ import { gutsToStand } from "./animation/guts-to-stand";
 import { hmToStand } from "./animation/hm-to-stand";
 import { knockBack } from "./animation/knock-back";
 import { knockBackToStand } from "./animation/knock-back-to-stand";
+import { startActive } from "./animation/start-active";
 import { createInitialValue } from "./model/initial-value";
 import type { NeoLandozerModel } from "./model/neo-landozer-model";
 import { NeoLandozerSounds } from "./sounds/neo-landozer-sounds";
@@ -34,8 +40,10 @@ export class NeoLandozer extends EmptyArmDozerSprite implements ArmDozerSprite {
   #view: NeoLandozerView;
   /** サウンド */
   #sounds: NeoLandozerSounds;
+  /** アクティブフラッシュTweenグループ */
+  #activeFlashTween: typeof TWEEN.Group;
   /** アンサブスクライバ */
-  #unsubscriber: Unsubscriber;
+  #unsubscribers: Unsubscriber[];
 
   /**
    * コンストラクタ
@@ -52,25 +60,42 @@ export class NeoLandozer extends EmptyArmDozerSprite implements ArmDozerSprite {
     this.#model = createInitialValue();
     this.#view = view;
     this.#sounds = new NeoLandozerSounds(resources);
-
-    this.#unsubscriber = gameObjectAction.subscribe((action) => {
-      if (action.type === "Update") {
-        this.#update();
-      } else if (action.type === "PreRender") {
-        this.#preRender(action);
-      }
-    });
+    this.#activeFlashTween = new TWEEN.Group();
+    this.#unsubscribers = [
+      gameObjectAction.subscribe((action) => {
+        if (action.type === "Update") {
+          this.#update(action);
+        } else if (action.type === "PreRender") {
+          this.#preRender(action);
+        }
+      }),
+      firstUpdate(gameObjectAction).subscribe((action) => {
+        this.#onFirstUpdate(action);
+      }),
+    ];
   }
 
   /** @overview */
   destructor(): void {
     this.#view.destructor();
-    this.#unsubscriber.unsubscribe();
+    this.#unsubscribers.forEach((v) => {
+      v.unsubscribe();
+    });
   }
 
-  /** @overview */
+  /** @override */
   addObject3D(object: typeof THREE.Object3D): void {
     this.#view.addObject3D(object);
+  }
+
+  /** @override */
+  startActive(): Animate {
+    return startActive(this.#model);
+  }
+
+  /** @override */
+  endActive(): Animate {
+    return endActive(this.#model);
   }
 
   /**
@@ -155,9 +180,19 @@ export class NeoLandozer extends EmptyArmDozerSprite implements ArmDozerSprite {
 
   /**
    * Update時の処理
+   * @param action アクション
    */
-  #update(): void {
+  #update(action: Update): void {
+    this.#activeFlashTween.update(action.time);
     this.#view.engage(this.#model);
+  }
+
+  /**
+   * 最初のUpdate時だけ実行する処理
+   * @param action アクション
+   */
+  #onFirstUpdate(action: Update): void {
+    activeFlash(this.#model, this.#activeFlashTween).loop(action.time);
   }
 
   /**

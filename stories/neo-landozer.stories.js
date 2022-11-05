@@ -1,25 +1,25 @@
 // @flow
 
 import { PlayerNeoLandozer } from "../src/js/game-object/armdozer/neo-landozer";
-import { PlayerShinBraver } from "../src/js/game-object/armdozer/shin-braver";
 import { TDGameObjectStub } from "./stub/td-game-object-stub";
 
 export default {
-  title: "armdozers",
+  title: "neo-landozer",
 };
 
-export const shinBraver = (): HTMLElement => {
+export const stand = (): HTMLElement => {
   const stub = new TDGameObjectStub(({ resources, gameObjectAction }) => {
-    const sprite = PlayerShinBraver(resources, gameObjectAction);
+    const sprite = PlayerNeoLandozer(resources, gameObjectAction);
     return { objects: [sprite.getObject3D()] };
   });
   stub.start();
   return stub.domElement();
 };
 
-export const neoLandozer = (): HTMLElement => {
+export const activeStand = (): HTMLElement => {
   const stub = new TDGameObjectStub(({ resources, gameObjectAction }) => {
     const sprite = PlayerNeoLandozer(resources, gameObjectAction);
+    sprite.startActive().play();
     return { objects: [sprite.getObject3D()] };
   });
   stub.start();
