@@ -49,11 +49,6 @@ class HorizontalArmdozerAnimation implements ArmdozerAnimation {
   }
 
   /** @override */
-  visible(isVisible: boolean): void {
-    this.#animation.mesh.material.opacity = isVisible ? 1 : 0;
-  }
-
-  /** @override */
   opacity(value: number): void {
     this.#animation.mesh.material.opacity = value;
   }
