@@ -8,6 +8,16 @@ export default {
   title: "lightning-dozer",
 };
 
+export const activeStand = (): HTMLElement => {
+  const stub = new TDGameObjectStub(({ resources, gameObjectAction }) => {
+    const sprite = PlayerLightningDozer(resources, gameObjectAction);
+    sprite.startActive().play();
+    return { objects: [sprite.getObject3D()] };
+  });
+  stub.start();
+  return stub.domElement();
+};
+
 export const armHammer = (): HTMLElement => {
   const stub = new TDGameObjectStub(({ resources, gameObjectAction }) => {
     const sprite = PlayerLightningDozer(resources, gameObjectAction);
@@ -19,16 +29,6 @@ export const armHammer = (): HTMLElement => {
       .chain(sprite.hmToStand())
       .chain(delay(2000));
     animation.loop();
-    return { objects: [sprite.getObject3D()] };
-  });
-  stub.start();
-  return stub.domElement();
-};
-
-export const activeStand = (): HTMLElement => {
-  const stub = new TDGameObjectStub(({ resources, gameObjectAction }) => {
-    const sprite = PlayerLightningDozer(resources, gameObjectAction);
-    sprite.startActive().play();
     return { objects: [sprite.getObject3D()] };
   });
   stub.start();
@@ -65,21 +65,6 @@ export const activeGuard = (): HTMLElement => {
   return stub.domElement();
 };
 
-export const activeGuts = (): HTMLElement => {
-  const stub = new TDGameObjectStub(({ resources, gameObjectAction }) => {
-    const sprite = PlayerLightningDozer(resources, gameObjectAction);
-    sprite.startActive().play();
-    delay(1000)
-      .chain(sprite.guts())
-      .chain(delay(1000))
-      .chain(sprite.gutsToStand())
-      .loop();
-    return { objects: [sprite.getObject3D()] };
-  });
-  stub.start();
-  return stub.domElement();
-};
-
 export const activeKnockBack = (): HTMLElement => {
   const stub = new TDGameObjectStub(({ resources, gameObjectAction }) => {
     const sprite = PlayerLightningDozer(resources, gameObjectAction);
@@ -88,6 +73,21 @@ export const activeKnockBack = (): HTMLElement => {
       .chain(sprite.knockBack())
       .chain(delay(1000))
       .chain(sprite.knockBackToStand())
+      .loop();
+    return { objects: [sprite.getObject3D()] };
+  });
+  stub.start();
+  return stub.domElement();
+};
+
+export const activeGuts = (): HTMLElement => {
+  const stub = new TDGameObjectStub(({ resources, gameObjectAction }) => {
+    const sprite = PlayerLightningDozer(resources, gameObjectAction);
+    sprite.startActive().play();
+    delay(1000)
+      .chain(sprite.guts())
+      .chain(delay(1000))
+      .chain(sprite.gutsToStand())
       .loop();
     return { objects: [sprite.getObject3D()] };
   });
