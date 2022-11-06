@@ -8,6 +8,32 @@ export default {
   title: "shin-braver",
 };
 
+export const activeStand = (): HTMLElement => {
+  const stub = new TDGameObjectStub(({ resources, gameObjectAction }) => {
+    const sprite = PlayerShinBraver(resources, gameObjectAction);
+    sprite.startActive().play();
+    return { objects: [sprite.getObject3D()] };
+  });
+  stub.start();
+  return stub.domElement();
+};
+
+export const straightPunch = (): HTMLElement => {
+  const stub = new TDGameObjectStub(({ resources, gameObjectAction }) => {
+    const sprite = PlayerShinBraver(resources, gameObjectAction);
+    delay(1000)
+      .chain(sprite.charge())
+      .chain(delay(1000))
+      .chain(sprite.straightPunch())
+      .chain(delay(1000))
+      .chain(sprite.punchToStand())
+      .loop();
+    return { objects: [sprite.getObject3D()] };
+  });
+  stub.start();
+  return stub.domElement();
+};
+
 export const guts = (): HTMLElement => {
   const stub = new TDGameObjectStub(({ resources, gameObjectAction }) => {
     const sprite = PlayerShinBraver(resources, gameObjectAction);
