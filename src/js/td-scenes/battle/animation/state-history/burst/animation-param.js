@@ -1,4 +1,5 @@
 // @flow
+
 import type {
   Burst,
   BurstEffect,
@@ -29,16 +30,30 @@ export type BurstAnimationParamX<
   HUD_ARMDOZER: HUDArmdozerObjects,
   BURST: Burst
 > = {
+  /** バースト発動側ステート */
   burstPlayerState: PlayerState,
-  burstPlayerTD: TDPlayer,
-  burstPlayerHUD: HUDPlayer,
-  burstArmdozerHUD: HUD_ARMDOZER,
-  burstArmdozerTD: TD_ARMDOZER,
-  tdObjects: TDGameObjects,
-  tdCamera: TDCamera,
-  hudObjects: HUDGameObjects,
-  hudCamera: PlainHUDCamera,
+  /** バースト情報 */
   burst: BURST,
+  /** バースト発動側がアクティブプレイヤーか否か、trueでアクティブプレイヤー */
+  isActive: boolean,
+  /** バースト発動側3Dプレイヤーオブジェクト */
+  burstPlayerTD: TDPlayer,
+  /** バースト発動側HUDプレイヤーオブジェクト */
+  burstPlayerHUD: HUDPlayer,
+  /** バースト発動側HUDアームドーザ */
+  burstArmdozerHUD: HUD_ARMDOZER,
+  /** バースト発動側3Dアームドーザ */
+  burstArmdozerTD: TD_ARMDOZER,
+  /** バースト発動側でない3Dアームドーザ */
+  anotherArmdozerTD: TDArmdozerObjects,
+  /** 3Dレイヤーオブジェクト */
+  tdObjects: TDGameObjects,
+  /** 3Dカメラ */
+  tdCamera: TDCamera,
+  /** HUDレイヤーオブジェクト */
+  hudObjects: HUDGameObjects,
+  /** HUDカメラ */
+  hudCamera: PlainHUDCamera,
 };
 
 /** バーストアニメーションのパラメータ */
@@ -75,26 +90,32 @@ export function toBurstAnimationParam(
   const burstArmdozerTD = props.view.td.armdozerObjects.find(
     (v) => v.playerId === effect.burstPlayer
   );
+  const anotherArmdozerTD = props.view.td.armdozerObjects.find(
+    (v) => v.playerId !== effect.burstPlayer
+  );
   if (
     !burstPlayerState ||
     !burstPlayerTD ||
     !burstPlayerHUD ||
     !burstArmdozerHUD ||
-    !burstArmdozerTD
+    !burstArmdozerTD ||
+    !anotherArmdozerTD
   ) {
     return null;
   }
 
   return {
-    burstPlayerState: burstPlayerState,
-    burstPlayerTD: burstPlayerTD,
-    burstPlayerHUD: burstPlayerHUD,
-    burstArmdozerHUD: burstArmdozerHUD,
-    burstArmdozerTD: burstArmdozerTD,
+    burstPlayerState,
+    burst: effect.burst,
+    isActive: gameState.activePlayerId === burstPlayerState.playerId,
+    burstPlayerTD,
+    burstPlayerHUD,
+    burstArmdozerHUD,
+    burstArmdozerTD,
+    anotherArmdozerTD,
     tdObjects: props.view.td.gameObjects,
     tdCamera: props.view.td.camera,
     hudObjects: props.view.hud.gameObjects,
     hudCamera: props.view.hud.camera,
-    burst: effect.burst,
   };
 }

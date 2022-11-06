@@ -48,6 +48,9 @@ function lightningBarrier(
 ): Animate {
   return all(
     param.burstArmdozerTD.lightningDozer.guts(),
+    param.isActive
+      ? param.burstArmdozerTD.lightningDozer.endActive()
+      : param.anotherArmdozerTD.sprite().endActive(),
     param.burstArmdozerHUD.cutIn.show(),
     track(
       param.tdCamera,

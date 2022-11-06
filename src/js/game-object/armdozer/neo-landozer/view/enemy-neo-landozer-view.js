@@ -9,10 +9,15 @@ import { PlayerNeoLandozerView } from "./player-neo-landozer-view";
  *  プレイヤー版のものを左右反転させただけである
  */
 export class EnemyNeoLandozerView extends PlayerNeoLandozerView {
+  /**
+   * コンストラクタ
+   * @param resources リソース管理オブジェクト
+   */
   constructor(resources: Resources) {
     super(resources);
   }
 
+  /** @override */
   engage(model: NeoLandozerModel): void {
     super.engage(model);
     this.getObject3D().position.x *= -1;

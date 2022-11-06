@@ -1,24 +1,16 @@
 // @flow
 
 import { delay } from "../src/js/animation/delay";
-import { PlayerLightningDozer } from "../src/js/game-object/armdozer/lightning-dozer";
+import { PlayerNeoLandozer } from "../src/js/game-object/armdozer/neo-landozer";
 import { TDGameObjectStub } from "./stub/td-game-object-stub";
 
 export default {
-  title: "lightning-dozer",
+  title: "neo-landozer",
 };
 
-export const armHammer = (): HTMLElement => {
+export const stand = (): HTMLElement => {
   const stub = new TDGameObjectStub(({ resources, gameObjectAction }) => {
-    const sprite = PlayerLightningDozer(resources, gameObjectAction);
-    const animation = sprite
-      .charge()
-      .chain(delay(1000))
-      .chain(sprite.armHammer())
-      .chain(delay(2000))
-      .chain(sprite.hmToStand())
-      .chain(delay(2000));
-    animation.loop();
+    const sprite = PlayerNeoLandozer(resources, gameObjectAction);
     return { objects: [sprite.getObject3D()] };
   });
   stub.start();
@@ -27,7 +19,7 @@ export const armHammer = (): HTMLElement => {
 
 export const activeStand = (): HTMLElement => {
   const stub = new TDGameObjectStub(({ resources, gameObjectAction }) => {
-    const sprite = PlayerLightningDozer(resources, gameObjectAction);
+    const sprite = PlayerNeoLandozer(resources, gameObjectAction);
     sprite.startActive().play();
     return { objects: [sprite.getObject3D()] };
   });
@@ -37,7 +29,7 @@ export const activeStand = (): HTMLElement => {
 
 export const activeAvoid = (): HTMLElement => {
   const stub = new TDGameObjectStub(({ resources, gameObjectAction }) => {
-    const sprite = PlayerLightningDozer(resources, gameObjectAction);
+    const sprite = PlayerNeoLandozer(resources, gameObjectAction);
     sprite.startActive().play();
     delay(1000)
       .chain(sprite.avoid())
@@ -52,7 +44,7 @@ export const activeAvoid = (): HTMLElement => {
 
 export const activeGuard = (): HTMLElement => {
   const stub = new TDGameObjectStub(({ resources, gameObjectAction }) => {
-    const sprite = PlayerLightningDozer(resources, gameObjectAction);
+    const sprite = PlayerNeoLandozer(resources, gameObjectAction);
     sprite.startActive().play();
     delay(1000)
       .chain(sprite.guard())
@@ -67,7 +59,7 @@ export const activeGuard = (): HTMLElement => {
 
 export const activeGuts = (): HTMLElement => {
   const stub = new TDGameObjectStub(({ resources, gameObjectAction }) => {
-    const sprite = PlayerLightningDozer(resources, gameObjectAction);
+    const sprite = PlayerNeoLandozer(resources, gameObjectAction);
     sprite.startActive().play();
     delay(1000)
       .chain(sprite.guts())
@@ -82,7 +74,7 @@ export const activeGuts = (): HTMLElement => {
 
 export const activeKnockBack = (): HTMLElement => {
   const stub = new TDGameObjectStub(({ resources, gameObjectAction }) => {
-    const sprite = PlayerLightningDozer(resources, gameObjectAction);
+    const sprite = PlayerNeoLandozer(resources, gameObjectAction);
     sprite.startActive().play();
     delay(1000)
       .chain(sprite.knockBack())

@@ -85,10 +85,11 @@ export class Animate {
 
   /**
    * アニメーションを無限ループ再生する
+   * @param time 再生開始時間
    */
-  loop(): void {
+  loop(time?: number): void {
     this._end.chain(this._start);
-    this._start.start();
+    this._start.start(time);
   }
 
   /**

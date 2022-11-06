@@ -23,12 +23,18 @@ export type LightningDozerModel = {
     y: number,
     z: number,
   },
-
   /** アニメーション */
   animation: {
     /** 種別 */
     type: AnimationType,
     /** 0〜1で指定するフレーム */
     frame: number,
+  },
+  /** アクティブレイヤ */
+  active: {
+    /** 0〜1で指定するアクティブレイヤーの強さ */
+    strength: number,
+    /** 透明度 */
+    opacity: number,
   },
 };

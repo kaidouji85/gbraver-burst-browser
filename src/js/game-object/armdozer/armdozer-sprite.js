@@ -24,6 +24,18 @@ export interface ArmDozerSprite {
   addObject3D(object: typeof THREE.Object3D): void;
 
   /**
+   * アクティブ状態開始
+   * @return アニメーション
+   */
+  startActive(): Animate;
+
+  /**
+   * アクティブ状態終了
+   * @return アニメーション
+   */
+  endActive(): Animate;
+
+  /**
    * ノックバック
    * @return アニメーション
    */

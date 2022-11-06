@@ -7,7 +7,10 @@ import {
 } from "../../position";
 import type { NeoLandozerModel } from "./neo-landozer-model";
 
-/** モデルの初期値を生成する */
+/**
+ * モデルの初期値を生成する
+ * @return 生成結果
+ */
 export function createInitialValue(): NeoLandozerModel {
   return {
     position: {
@@ -18,6 +21,10 @@ export function createInitialValue(): NeoLandozerModel {
     animation: {
       type: "STAND",
       frame: 0,
+    },
+    active: {
+      strength: 0,
+      opacity: 0,
     },
   };
 }

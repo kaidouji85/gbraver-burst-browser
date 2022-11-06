@@ -71,3 +71,73 @@ export const down = (): HTMLElement => {
   stub.start();
   return stub.domElement();
 };
+
+export const activeStand = (): HTMLElement => {
+  const stub = new TDGameObjectStub(({ resources, gameObjectAction }) => {
+    const sprite = PlayerWingDozer(resources, gameObjectAction);
+    sprite.startActive().play();
+    return { objects: [sprite.getObject3D()] };
+  });
+  stub.start();
+  return stub.domElement();
+};
+
+export const activeDash = (): HTMLElement => {
+  const stub = new TDGameObjectStub(({ resources, gameObjectAction }) => {
+    const sprite = PlayerWingDozer(resources, gameObjectAction);
+    sprite.startActive().play();
+    delay(1000)
+      .chain(sprite.dash())
+      .chain(delay(1000))
+      .chain(sprite.dashToStand())
+      .loop();
+    return { objects: [sprite.getObject3D()] };
+  });
+  stub.start();
+  return stub.domElement();
+};
+
+export const activeAvoid = (): HTMLElement => {
+  const stub = new TDGameObjectStub(({ resources, gameObjectAction }) => {
+    const sprite = PlayerWingDozer(resources, gameObjectAction);
+    sprite.startActive().play();
+    delay(1000)
+      .chain(sprite.avoid())
+      .chain(delay(1000))
+      .chain(sprite.avoidToStand())
+      .loop();
+    return { objects: [sprite.getObject3D()] };
+  });
+  stub.start();
+  return stub.domElement();
+};
+
+export const activeGuard = (): HTMLElement => {
+  const stub = new TDGameObjectStub(({ resources, gameObjectAction }) => {
+    const sprite = PlayerWingDozer(resources, gameObjectAction);
+    sprite.startActive().play();
+    delay(1000)
+      .chain(sprite.guard())
+      .chain(delay(1000))
+      .chain(sprite.guardToStand())
+      .loop();
+    return { objects: [sprite.getObject3D()] };
+  });
+  stub.start();
+  return stub.domElement();
+};
+
+export const activeKnockBack = (): HTMLElement => {
+  const stub = new TDGameObjectStub(({ resources, gameObjectAction }) => {
+    const sprite = PlayerWingDozer(resources, gameObjectAction);
+    sprite.startActive().play();
+    delay(1000)
+      .chain(sprite.knockBack())
+      .chain(delay(1000))
+      .chain(sprite.knockBackToStand())
+      .loop();
+    return { objects: [sprite.getObject3D()] };
+  });
+  stub.start();
+  return stub.domElement();
+};
