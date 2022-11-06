@@ -51,11 +51,6 @@ export class PlayerShinBraverView implements ShinBraverView {
       currentMesh.mesh.opacity(1);
       currentMesh.mesh.animate(model.animation.frame);
     }
-    this.#meshes
-      .filter((v) => v !== currentMesh)
-      .forEach(({ mesh }) => {
-        mesh.opacity(0);
-      });
 
     const currentActiveMesh = this.#activeMeshes.find(
       (v) => v.type === model.animation.type
@@ -66,7 +61,9 @@ export class PlayerShinBraverView implements ShinBraverView {
       currentActiveMesh.mesh.opacity(activeOpacity);
       currentActiveMesh.mesh.animate(model.animation.frame);
     }
-    this.#activeMeshes
+
+    [...this.#meshes, ...this.#activeMeshes]
+      .filter((v) => v !== currentMesh)
       .filter((v) => v !== currentActiveMesh)
       .forEach(({ mesh }) => {
         mesh.opacity(0);
