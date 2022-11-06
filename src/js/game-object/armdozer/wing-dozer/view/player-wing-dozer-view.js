@@ -6,9 +6,12 @@ import { Group } from "three";
 import type { Resources } from "../../../../resource";
 import type { ArmdozerAnimation } from "../../mesh/armdozer-animation";
 import { wingDozerBackStep } from "../mesh/back-step";
-import { wingDozerDashDown } from "../mesh/dash-down";
-import { wingDozerDashToStand } from "../mesh/dash-to-stand";
-import { wingDozerDashUp } from "../mesh/dash-up";
+import { wingDozerActiveDashDown, wingDozerDashDown } from "../mesh/dash-down";
+import {
+  wingDozerActiveDashToStand,
+  wingDozerDashToStand,
+} from "../mesh/dash-to-stand";
+import { wingDozerActiveDashUp, wingDozerDashUp } from "../mesh/dash-up";
 import { wingDozerDown } from "../mesh/down";
 import { wingDozerFrontStep } from "../mesh/front-step";
 import { wingDozerGuard } from "../mesh/guard";
@@ -34,10 +37,16 @@ export class PlayerWingDozerView implements WingDozerView {
   #upperToStand: ArmdozerAnimation;
   /** ダッシュアップ */
   #dashUp: ArmdozerAnimation;
+  /** アクティブダッシュアップ */
+  #activeDashUp: ArmdozerAnimation;
   /** ダッシュダウン */
   #dashDown: ArmdozerAnimation;
+  /** アクティブダッシュダウン */
+  #activeDashDown: ArmdozerAnimation;
   /** ダッシュ->立ち */
   #dashToStand: ArmdozerAnimation;
+  /** アクティブダッシュ->立ち */
+  #activeDashToStand: ArmdozerAnimation;
   /** ノックバック */
   #knockBack: ArmdozerAnimation;
   /** ダウン */
@@ -63,8 +72,11 @@ export class PlayerWingDozerView implements WingDozerView {
     this.#upperAttack = wingDozerUpperAttack(resources);
     this.#upperToStand = wingDozerUpperToStand(resources);
     this.#dashUp = wingDozerDashUp(resources);
+    this.#activeDashUp = wingDozerActiveDashUp(resources);
     this.#dashDown = wingDozerDashDown(resources);
+    this.#activeDashDown = wingDozerActiveDashDown(resources);
     this.#dashToStand = wingDozerDashToStand(resources);
+    this.#activeDashToStand = wingDozerActiveDashToStand(resources);
     this.#knockBack = wingDozerKnockBack(resources);
     this.#down = wingDozerDown(resources);
     this.#backStep = wingDozerBackStep(resources);
@@ -139,8 +151,11 @@ export class PlayerWingDozerView implements WingDozerView {
       this.#upperAttack,
       this.#upperToStand,
       this.#dashUp,
+      this.#activeDashUp,
       this.#dashDown,
+      this.#activeDashDown,
       this.#dashToStand,
+      this.#activeDashToStand,
       this.#knockBack,
       this.#down,
       this.#backStep,
@@ -194,6 +209,12 @@ export class PlayerWingDozerView implements WingDozerView {
     switch (animationType) {
       case "STAND":
         return this.#activeStand;
+      case "DASH_UP":
+        return this.#activeDashUp;
+      case "DASH_DOWN":
+        return this.#activeDashDown;
+      case "DASH_TO_STAND":
+        return this.#activeDashToStand;
       default:
         return null;
     }
