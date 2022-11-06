@@ -71,3 +71,13 @@ export const down = (): HTMLElement => {
   stub.start();
   return stub.domElement();
 };
+
+export const activeStand = (): HTMLElement => {
+  const stub = new TDGameObjectStub(({ resources, gameObjectAction }) => {
+    const sprite = PlayerWingDozer(resources, gameObjectAction);
+    sprite.startActive().play();
+    return { objects: [sprite.getObject3D()] };
+  });
+  stub.start();
+  return stub.domElement();
+};

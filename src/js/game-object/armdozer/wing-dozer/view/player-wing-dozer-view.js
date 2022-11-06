@@ -13,29 +13,42 @@ import { wingDozerDown } from "../mesh/down";
 import { wingDozerFrontStep } from "../mesh/front-step";
 import { wingDozerGuard } from "../mesh/guard";
 import { wingDozerKnockBack } from "../mesh/knock-back";
-import { wingDozerStand } from "../mesh/stand";
+import { wingDozerActiveStand, wingDozerStand } from "../mesh/stand";
 import { wingDozerUpperAttack } from "../mesh/upper-attack";
 import { wingDozerUpperCharge } from "../mesh/upper-charge";
 import { wingDozerUpperToStand } from "../mesh/upper-to-stand";
 import type { AnimationType, WingDozerModel } from "../model/wing-dozer-model";
 import type { WingDozerView } from "./wing-dozer-view";
 
-/**
- * プレイヤー側 ウィングドーザ ビュー
- */
+/** プレイヤー側 ウィングドーザ ビュー */
 export class PlayerWingDozerView implements WingDozerView {
+  /** 立ち */
   #stand: ArmdozerAnimation;
+  /** アクティブ立ち */
+  #activeStand: ArmdozerAnimation;
+  /** アッパーチャージ */
   #upperCharge: ArmdozerAnimation;
+  /** アッパー */
   #upperAttack: ArmdozerAnimation;
+  /** アッパー->立ち */
   #upperToStand: ArmdozerAnimation;
+  /** ダッシュアップ */
   #dashUp: ArmdozerAnimation;
+  /** ダッシュダウン */
   #dashDown: ArmdozerAnimation;
+  /** ダッシュ->立ち */
   #dashToStand: ArmdozerAnimation;
+  /** ノックバック */
   #knockBack: ArmdozerAnimation;
+  /** ダウン */
   #down: ArmdozerAnimation;
+  /** バックステップ */
   #backStep: ArmdozerAnimation;
+  /** フロントステップ */
   #frontStep: ArmdozerAnimation;
+  /** ガード */
   #guard: ArmdozerAnimation;
+  /** グループ */
   #group: typeof THREE.Group;
 
   /**
@@ -45,6 +58,7 @@ export class PlayerWingDozerView implements WingDozerView {
    */
   constructor(resources: Resources): void {
     this.#stand = wingDozerStand(resources);
+    this.#activeStand = wingDozerActiveStand(resources);
     this.#upperCharge = wingDozerUpperCharge(resources);
     this.#upperAttack = wingDozerUpperAttack(resources);
     this.#upperToStand = wingDozerUpperToStand(resources);
@@ -63,29 +77,19 @@ export class PlayerWingDozerView implements WingDozerView {
     });
   }
 
-  /**
-   * デストラクタ
-   */
+  /** @override */
   destructor(): void {
     this.#getAllMeshes().forEach((mesh) => {
       mesh.destructor();
     });
   }
 
-  /**
-   * シーンに追加するオブジェクトを取得する
-   *
-   * @return シーンに追加するオブジェクト
-   */
+  /** @override */
   getObject3D(): typeof THREE.Object3D {
     return this.#group;
   }
 
-  /**
-   * モデルをビューに反映させる
-   *
-   * @param model モデル
-   */
+  /** @override */
   engage(model: WingDozerModel): void {
     this.#group.position.x = model.position.x;
     this.#group.position.y = model.position.y;
@@ -95,40 +99,42 @@ export class PlayerWingDozerView implements WingDozerView {
     this.#group.scale.y = 1;
     this.#group.scale.z = 1;
 
-    const activeMesh = this.#getActiveMesh(model.animation.type);
-    activeMesh.animate(model.animation.frame);
-    activeMesh.visible(true);
+    const currentMesh = this.#getMesh(model.animation.type);
+    currentMesh.animate(model.animation.frame);
+    currentMesh.opacity(1);
 
-    const disActiveMesh = this.#getAllMeshes().filter((v) => v !== activeMesh);
-    disActiveMesh.forEach((v) => v.visible(false));
+    const currentActiveMesh = this.#getActiveMesh(model.animation.type);
+    if (currentActiveMesh) {
+      const activeOpacity =
+        (0.2 + model.active.strength * 0.05) * model.active.opacity;
+      currentActiveMesh.opacity(activeOpacity);
+      currentActiveMesh.animate(model.animation.frame);
+    }
+
+    const disActiveMesh = this.#getAllMeshes()
+      .filter((v) => v !== currentMesh)
+      .filter((v) => v !== currentActiveMesh);
+    disActiveMesh.forEach((v) => v.opacity(0));
   }
 
-  /**
-   * カメラの真正面を向く
-   *
-   * @param camera カメラ
-   */
+  /** @override */
   lookAt(camera: typeof THREE.Camera): void {
     this.#group.quaternion.copy(camera.quaternion);
   }
 
-  /**
-   * スプライト配下のオブジェクトを追加する
-   *
-   * @param object 追加するオブジェクト
-   */
+  /** @override */
   addObject3D(object: typeof THREE.Object3D): void {
     this.#group.add(object);
   }
 
   /**
    * 本ビューに含まれる全メッシュを返す
-   *
    * @return 全メッシュ
    */
   #getAllMeshes(): ArmdozerAnimation[] {
     return [
       this.#stand,
+      this.#activeStand,
       this.#upperCharge,
       this.#upperAttack,
       this.#upperToStand,
@@ -145,11 +151,10 @@ export class PlayerWingDozerView implements WingDozerView {
 
   /**
    * アニメーションタイプに応じたメッシュを返す
-   *
-   * @param type あアニメーションタイプ
+   * @param type アニメーションタイプ
    * @return メッシュ
    */
-  #getActiveMesh(type: AnimationType): ArmdozerAnimation {
+  #getMesh(type: AnimationType): ArmdozerAnimation {
     switch (type) {
       case "STAND":
         return this.#stand;
@@ -177,6 +182,20 @@ export class PlayerWingDozerView implements WingDozerView {
         return this.#guard;
       default:
         return this.#stand;
+    }
+  }
+
+  /**
+   * アニメーションタイプに応じたアクティブメッシュを返す
+   * @param animationType アニメーションタイプ
+   * @return 取得結果、対応するものがない場合はnullを返す
+   */
+  #getActiveMesh(animationType: AnimationType): ?ArmdozerAnimation {
+    switch (animationType) {
+      case "STAND":
+        return this.#activeStand;
+      default:
+        return null;
     }
   }
 }
