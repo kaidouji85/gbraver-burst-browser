@@ -113,7 +113,7 @@ export class PlayerNeoLandozerView implements NeoLandozerView {
     currentMesh.animate(model.animation.frame);
     if (currentActiveMesh) {
       const activeOpacity =
-        (0.2 + model.active.strength * 0.05) * model.active.opacity;
+        (0.4 + model.active.strength * 0.1) * model.active.opacity;
       currentActiveMesh.opacity(activeOpacity);
       currentActiveMesh.animate(model.animation.frame);
     }
