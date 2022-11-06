@@ -10,6 +10,7 @@ import {
   createHorizontalAnimation,
   createHorizontalAnimationFromResources,
 } from "../../mesh/horizontal-animation";
+import { ACTIVE_COLOR_B, ACTIVE_COLOR_G, ACTIVE_COLOR_R } from "./active-color";
 import { MESH_Y } from "./position";
 
 /** アニメーション枚数 */
@@ -48,7 +49,12 @@ export function lightningDozerActiveStand(
   const texture =
     resources.textures.find((v) => v.id === TEXTURE_IDS.LIGHTNING_DOZER_STAND)
       ?.texture ?? new THREE.Texture();
-  const canvas = toSilhouette(texture.image, 255, 255, 255);
+  const canvas = toSilhouette(
+    texture.image,
+    ACTIVE_COLOR_R,
+    ACTIVE_COLOR_G,
+    ACTIVE_COLOR_B
+  );
   const silhouetteTexture = new THREE.Texture(canvas);
   const ret = createHorizontalAnimation({
     texture: silhouetteTexture,
