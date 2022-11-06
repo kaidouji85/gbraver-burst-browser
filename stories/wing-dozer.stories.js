@@ -96,3 +96,18 @@ export const activeDash = (): HTMLElement => {
   stub.start();
   return stub.domElement();
 };
+
+export const activeAvoid = (): HTMLElement => {
+  const stub = new TDGameObjectStub(({ resources, gameObjectAction }) => {
+    const sprite = PlayerWingDozer(resources, gameObjectAction);
+    sprite.startActive().play();
+    delay(1000)
+      .chain(sprite.avoid())
+      .chain(delay(1000))
+      .chain(sprite.avoidToStand())
+      .loop();
+    return { objects: [sprite.getObject3D()] };
+  });
+  stub.start();
+  return stub.domElement();
+};

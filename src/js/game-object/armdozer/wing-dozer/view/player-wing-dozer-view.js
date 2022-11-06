@@ -13,7 +13,10 @@ import {
 } from "../mesh/dash-to-stand";
 import { wingDozerActiveDashUp, wingDozerDashUp } from "../mesh/dash-up";
 import { wingDozerDown } from "../mesh/down";
-import { wingDozerFrontStep } from "../mesh/front-step";
+import {
+  wingDozerActiveFrontStep,
+  wingDozerFrontStep,
+} from "../mesh/front-step";
 import { wingDozerGuard } from "../mesh/guard";
 import { wingDozerKnockBack } from "../mesh/knock-back";
 import { wingDozerActiveStand, wingDozerStand } from "../mesh/stand";
@@ -55,6 +58,8 @@ export class PlayerWingDozerView implements WingDozerView {
   #backStep: ArmdozerAnimation;
   /** フロントステップ */
   #frontStep: ArmdozerAnimation;
+  /** アクティブフロントステップ */
+  #activeFrontStep: ArmdozerAnimation;
   /** ガード */
   #guard: ArmdozerAnimation;
   /** グループ */
@@ -81,6 +86,7 @@ export class PlayerWingDozerView implements WingDozerView {
     this.#down = wingDozerDown(resources);
     this.#backStep = wingDozerBackStep(resources);
     this.#frontStep = wingDozerFrontStep(resources);
+    this.#activeFrontStep = wingDozerActiveFrontStep(resources);
     this.#guard = wingDozerGuard(resources);
 
     this.#group = new Group();
@@ -160,6 +166,7 @@ export class PlayerWingDozerView implements WingDozerView {
       this.#down,
       this.#backStep,
       this.#frontStep,
+      this.#activeFrontStep,
       this.#guard,
     ];
   }
@@ -215,6 +222,8 @@ export class PlayerWingDozerView implements WingDozerView {
         return this.#activeDashDown;
       case "DASH_TO_STAND":
         return this.#activeDashToStand;
+      case "FRONT_STEP":
+        return this.#activeFrontStep;
       default:
         return null;
     }
