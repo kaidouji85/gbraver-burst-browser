@@ -26,7 +26,10 @@ import {
 import { lightningDozerHmAttack } from "../mesh/hm-attack";
 import { lightningDozerHmCharge } from "../mesh/hm-charge";
 import { lightningDozerHmToStand } from "../mesh/hm-to-stand";
-import { lightningDozerKnockBack } from "../mesh/knock-back";
+import {
+  lightningDozerActiveKnockBack,
+  lightningDozerKnockBack,
+} from "../mesh/knock-back";
 import { lightningDozerActiveStand, lightningDozerStand } from "../mesh/stand";
 import type {
   AnimationType,
@@ -50,6 +53,8 @@ export class PlayerLightingDozerView implements LightningDozerView {
   #hmToStand: ArmdozerAnimation;
   /** ノックバック */
   #knockBack: ArmdozerAnimation;
+  /** アクティブノックバック */
+  #activeKnockBack: ArmdozerAnimation;
   /** ダウン */
   #down: ArmdozerAnimation;
   /** ガッツアップ */
@@ -87,6 +92,7 @@ export class PlayerLightingDozerView implements LightningDozerView {
     this.#hmAttack = lightningDozerHmAttack(resources);
     this.#hmToStand = lightningDozerHmToStand(resources);
     this.#knockBack = lightningDozerKnockBack(resources);
+    this.#activeKnockBack = lightningDozerActiveKnockBack(resources);
     this.#down = lightningDozerDown(resources);
     this.#gutsUp = lightningDozerGutsUp(resources);
     this.#activeGutsUp = lightningDozerActiveGutsUp(resources);
@@ -166,6 +172,7 @@ export class PlayerLightingDozerView implements LightningDozerView {
       this.#hmAttack,
       this.#hmToStand,
       this.#knockBack,
+      this.#activeKnockBack,
       this.#down,
       this.#gutsUp,
       this.#activeGutsUp,
@@ -223,8 +230,8 @@ export class PlayerLightingDozerView implements LightningDozerView {
    */
   #getActiveMesh(animationType: AnimationType): ?ArmdozerAnimation {
     switch (animationType) {
-      case "FRONT_STEP":
-        return this.#activeFrontStep;
+      case "KNOCK_BACK":
+        return this.#activeKnockBack;
       case "GUTS_UP":
         return this.#activeGutsUp;
       case "GUTS_DOWN":
@@ -233,6 +240,8 @@ export class PlayerLightingDozerView implements LightningDozerView {
         return this.#activeGutsToStand;
       case "GUARD":
         return this.#activeGuard;
+      case "FRONT_STEP":
+        return this.#activeFrontStep;
       case "STAND":
         return this.#activeStand;
       default:
