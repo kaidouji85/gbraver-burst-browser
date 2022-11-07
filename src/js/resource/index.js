@@ -153,6 +153,7 @@ const PRE_FETCH_PATH_IDS: PathId[] = [
   PathIds.NPC_COURSE_NORMAL_ICON,
   PathIds.NPC_COURSE_HARD_ICON,
   PathIds.NPC_COURSE_VERY_HARD_ICON,
+  PathIds.CLOSER,
 ];
 
 /**
