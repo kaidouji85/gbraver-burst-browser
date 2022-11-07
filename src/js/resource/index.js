@@ -1,4 +1,5 @@
 // @flow
+
 import type { Stream } from "../stream/stream";
 import { createStreamSource } from "../stream/stream";
 import type { CanvasImageConfig, CanvasImageResource } from "./canvas-image";
@@ -8,8 +9,8 @@ import { CUBE_TEXTURE_CONFIGS, loadCubeTexture } from "./cube-texture";
 import type { GlTFConfig, GlTFResource } from "./gltf";
 import { GLTF_CONFIGS, loadGlTF } from "./gltf";
 import type { LoadingActions } from "./loading-actions";
-import type { Path } from "./path";
-import { getAllPaths } from "./path";
+import type { Path, PathId } from "./path";
+import { getAllPaths, PathConfigs, PathIds } from "./path";
 import type { ResourceRoot } from "./resource-root";
 import type { SoundConfig, SoundResource } from "./sound";
 import { loadSound, SOUND_CONFIGS, SOUND_IDS } from "./sound";
@@ -67,6 +68,8 @@ export type ResourceLoading = {
 type ResourceLoadingParams = {
   /** リソースルート */
   resourceRoot: ResourceRoot,
+  /** プリフェッチするパス */
+  preFetchPaths: PathId[],
   /** 読み込むGLTFモデル */
   gltfConfigs: GlTFConfig[],
   /** 読み込むテクスチャ */
@@ -81,12 +84,13 @@ type ResourceLoadingParams = {
 
 /**
  * リソースを読み込む
- * なお、本関数ではリソースパスのプリフェッチは行わない
- *
  * @param params 読み込みパラメータ
  * @return リソース読み込みオブジェクト
  */
 function resourceLoading(params: ResourceLoadingParams): ResourceLoading {
+  const preFetchPaths = PathConfigs.filter((v) =>
+    params.preFetchPaths.includes(v.id)
+  ).map((v) => fetch(v.path(params.resourceRoot)));
   const gltfLoadings = params.gltfConfigs.map((v) =>
     loadGlTF(params.resourceRoot, v)
   );
@@ -105,6 +109,7 @@ function resourceLoading(params: ResourceLoadingParams): ResourceLoading {
 
   const loadingActions = createStreamSource();
   const allLoading = [
+    ...preFetchPaths,
     ...gltfLoadings,
     ...textureLoadings,
     ...cubeTextureLoadings,
@@ -142,6 +147,14 @@ function resourceLoading(params: ResourceLoadingParams): ResourceLoading {
   return { loading: loadingActions, resources };
 }
 
+/** 全リソース読み込みでのプリフェッチ対象パス */
+const PRE_FETCH_PATH_IDS: PathId[] = [
+  PathIds.NPC_COURSE_EASY_ICON,
+  PathIds.NPC_COURSE_NORMAL_ICON,
+  PathIds.NPC_COURSE_HARD_ICON,
+  PathIds.NPC_COURSE_VERY_HARD_ICON,
+];
+
 /**
  * 全リソースを読み込む
  * なお、本関数ではリソースパスのプリフェッチは行わない
@@ -154,6 +167,7 @@ export function fullResourceLoading(
 ): ResourceLoading {
   return resourceLoading({
     resourceRoot,
+    preFetchPaths: PRE_FETCH_PATH_IDS,
     gltfConfigs: GLTF_CONFIGS,
     textureConfigs: TEXTURE_CONFIGS,
     cubeTextureConfigs: CUBE_TEXTURE_CONFIGS,
@@ -189,6 +203,7 @@ export function fullResourceLoadingFrom(resources: Resources): ResourceLoading {
   const soundConfigs = SOUND_CONFIGS.filter((v) => !soundIDs.includes(v.id));
   const loading = resourceLoading({
     resourceRoot: resources.rootPath,
+    preFetchPaths: PRE_FETCH_PATH_IDS,
     gltfConfigs,
     textureConfigs,
     cubeTextureConfigs,
@@ -241,6 +256,7 @@ export function titleResourceLoading(
   );
   return resourceLoading({
     resourceRoot,
+    preFetchPaths: [],
     gltfConfigs: [],
     textureConfigs: [],
     cubeTextureConfigs: [],
