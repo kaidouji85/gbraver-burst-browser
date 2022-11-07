@@ -93,3 +93,16 @@ export const armHammer = (): HTMLElement => {
   stub.start();
   return stub.domElement();
 };
+
+export const down = (): HTMLElement => {
+  const stub = new TDGameObjectStub(({ resources, gameObjectAction }) => {
+    const sprite = PlayerNeoLandozer(resources, gameObjectAction);
+    delay(1000)
+      .chain(sprite.down())
+      .chain(delay(1000))
+      .loop();
+    return { objects: [sprite.getObject3D()] };
+  });
+  stub.start();
+  return stub.domElement();
+};
