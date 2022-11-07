@@ -98,10 +98,7 @@ export const activeGuts = (): HTMLElement => {
 export const down = (): HTMLElement => {
   const stub = new TDGameObjectStub(({ resources, gameObjectAction }) => {
     const sprite = PlayerLightningDozer(resources, gameObjectAction);
-    delay(1000)
-      .chain(sprite.down())
-      .chain(delay(1000))
-      .loop();
+    delay(1000).chain(sprite.down()).chain(delay(1000)).loop();
     return { objects: [sprite.getObject3D()] };
   });
   stub.start();
