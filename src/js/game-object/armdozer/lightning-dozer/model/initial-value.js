@@ -23,5 +23,9 @@ export function createInitialValue(): LightningDozerModel {
       type: "STAND",
       frame: 0,
     },
+    active: {
+      strength: 0,
+      opacity: 0,
+    },
   };
 }

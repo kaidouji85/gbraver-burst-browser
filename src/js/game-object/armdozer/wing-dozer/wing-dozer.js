@@ -1,24 +1,30 @@
 // @flow
 
+import TWEEN from "@tweenjs/tween.js";
 import * as THREE from "three";
 
 import { Animate } from "../../../animation/animate";
 import type { PreRender } from "../../../game-loop/pre-render";
+import type { Update } from "../../../game-loop/update";
 import type { Resources } from "../../../resource";
 import type { Stream, Unsubscriber } from "../../../stream/stream";
+import { firstUpdate } from "../../action/first-update";
 import type { GameObjectAction } from "../../action/game-object-action";
 import type { ArmDozerSprite } from "../armdozer-sprite";
 import { EmptyArmDozerSprite } from "../empty-armdozer-sprite";
+import { activeFlash } from "./animation/active-flash";
 import { avoid } from "./animation/avoid";
 import { charge } from "./animation/charge";
 import { dash } from "./animation/dash";
 import { dashToStand } from "./animation/dash-to-stand";
 import { down } from "./animation/down";
+import { endActive } from "./animation/end-active";
 import { frontStep } from "./animation/front-step";
 import { guard } from "./animation/guard";
 import { guardToStand } from "./animation/guard-to-stand";
 import { knockBack } from "./animation/knock-back";
 import { knockBackToStand } from "./animation/knock-back-to-stand";
+import { startActive } from "./animation/start-active";
 import { upper } from "./animation/upper";
 import { upperToStand } from "./animation/upper-to-stand";
 import { createInitialValue } from "./model/initial-value";
@@ -34,8 +40,10 @@ export class WingDozer extends EmptyArmDozerSprite implements ArmDozerSprite {
   #view: WingDozerView;
   /** サウンド */
   #sounds: WingDozerSounds;
+  /** アクティブフラッシュTweenグループ */
+  #activeFlashTween: typeof TWEEN.Group;
   /** アンサブスクライバ */
-  #unsubscriber: Unsubscriber;
+  #unsubscribers: Unsubscriber[];
 
   /**
    * コンストラクタ
@@ -52,19 +60,28 @@ export class WingDozer extends EmptyArmDozerSprite implements ArmDozerSprite {
     this.#model = createInitialValue();
     this.#view = view;
     this.#sounds = new WingDozerSounds(resources);
-    this.#unsubscriber = gameObjectAction.subscribe((action) => {
-      if (action.type === "Update") {
-        this.#onUpdate();
-      } else if (action.type === "PreRender") {
-        this.#onPreRender(action);
-      }
-    });
+    this.#activeFlashTween = new TWEEN.Group();
+    this.#unsubscribers = [
+      gameObjectAction.subscribe((action) => {
+        if (action.type === "Update") {
+          this.#onUpdate(action);
+        } else if (action.type === "PreRender") {
+          this.#onPreRender(action);
+        }
+      }),
+
+      firstUpdate(gameObjectAction).subscribe((action) => {
+        this.#onFirstUpdate(action);
+      }),
+    ];
   }
 
   /** @override */
   destructor(): void {
     this.#view.destructor();
-    this.#unsubscriber.unsubscribe();
+    this.#unsubscribers.forEach((v) => {
+      v.unsubscribe();
+    });
   }
 
   /** @override */
@@ -75,6 +92,16 @@ export class WingDozer extends EmptyArmDozerSprite implements ArmDozerSprite {
   /** @override */
   addObject3D(object: typeof THREE.Object3D): void {
     this.#view.addObject3D(object);
+  }
+
+  /** @override */
+  startActive(): Animate {
+    return startActive(this.#model);
+  }
+
+  /** @override */
+  endActive(): Animate {
+    return endActive(this.#model);
   }
 
   /**
@@ -154,9 +181,19 @@ export class WingDozer extends EmptyArmDozerSprite implements ArmDozerSprite {
 
   /**
    * Update時の処理
+   * @param action アクション
    */
-  #onUpdate(): void {
+  #onUpdate(action: Update): void {
+    this.#activeFlashTween.update(action.time);
     this.#view.engage(this.#model);
+  }
+
+  /**
+   * 最初のUpdate時だけ実行する処理
+   * @param action アクション
+   */
+  #onFirstUpdate(action: Update): void {
+    activeFlash(this.#model, this.#activeFlashTween).loop(action.time);
   }
 
   /**

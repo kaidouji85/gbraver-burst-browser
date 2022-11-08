@@ -4,9 +4,7 @@ import * as THREE from "three";
 
 import type { WingDozerModel } from "../model/wing-dozer-model";
 
-/**
- * ウィングドーザ ビュー
- */
+/**ウィングドーザ ビュー */
 export interface WingDozerView {
   /**
    * デストラクタ相当の処理

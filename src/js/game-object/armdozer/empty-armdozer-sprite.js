@@ -29,6 +29,16 @@ export class EmptyArmDozerSprite implements ArmDozerSprite {
   }
 
   /** @override */
+  startActive(): Animate {
+    return empty();
+  }
+
+  /** @override */
+  endActive(): Animate {
+    return empty();
+  }
+
+  /** @override */
   knockBack(): Animate {
     return empty();
   }

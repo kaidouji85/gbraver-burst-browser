@@ -11,15 +11,6 @@ export default {
   title: "wing-dozer",
 };
 
-export const stand = (): HTMLElement => {
-  const stub = new TDGameObjectStub(({ resources, gameObjectAction }) => {
-    const sprite = PlayerWingDozer(resources, gameObjectAction);
-    return { objects: [sprite.getObject3D()] };
-  });
-  stub.start();
-  return stub.domElement();
-};
-
 export const enemy = (): HTMLElement => {
   const stub = new TDGameObjectStub(({ resources, gameObjectAction }) => {
     const sprite = EnemyWingDozer(resources, gameObjectAction);
@@ -29,7 +20,17 @@ export const enemy = (): HTMLElement => {
   return stub.domElement();
 };
 
-export const attack = (): HTMLElement => {
+export const activeStand = (): HTMLElement => {
+  const stub = new TDGameObjectStub(({ resources, gameObjectAction }) => {
+    const sprite = PlayerWingDozer(resources, gameObjectAction);
+    sprite.startActive().play();
+    return { objects: [sprite.getObject3D()] };
+  });
+  stub.start();
+  return stub.domElement();
+};
+
+export const upper = (): HTMLElement => {
   const stub = new TDGameObjectStub(({ resources, gameObjectAction }) => {
     const sprite = PlayerWingDozer(resources, gameObjectAction);
     const animation = sprite
@@ -46,15 +47,16 @@ export const attack = (): HTMLElement => {
   return stub.domElement();
 };
 
-export const dash = (): HTMLElement => {
+export const activeDash = (): HTMLElement => {
   const stub = new TDGameObjectStub(({ resources, gameObjectAction }) => {
     const sprite = PlayerWingDozer(resources, gameObjectAction);
-    const animation = sprite
+    sprite.startActive().play();
+    sprite
       .dash()
       .chain(delay(2000))
       .chain(sprite.dashToStand())
-      .chain(delay(2000));
-    animation.loop();
+      .chain(delay(2000))
+      .loop();
     return { objects: [sprite.getObject3D()] };
   });
   stub.start();
@@ -66,6 +68,51 @@ export const down = (): HTMLElement => {
     const sprite = PlayerWingDozer(resources, gameObjectAction);
     const animation = sprite.down().chain(delay(2000));
     animation.loop();
+    return { objects: [sprite.getObject3D()] };
+  });
+  stub.start();
+  return stub.domElement();
+};
+
+export const activeAvoid = (): HTMLElement => {
+  const stub = new TDGameObjectStub(({ resources, gameObjectAction }) => {
+    const sprite = PlayerWingDozer(resources, gameObjectAction);
+    sprite.startActive().play();
+    delay(1000)
+      .chain(sprite.avoid())
+      .chain(delay(1000))
+      .chain(sprite.avoidToStand())
+      .loop();
+    return { objects: [sprite.getObject3D()] };
+  });
+  stub.start();
+  return stub.domElement();
+};
+
+export const activeGuard = (): HTMLElement => {
+  const stub = new TDGameObjectStub(({ resources, gameObjectAction }) => {
+    const sprite = PlayerWingDozer(resources, gameObjectAction);
+    sprite.startActive().play();
+    delay(1000)
+      .chain(sprite.guard())
+      .chain(delay(1000))
+      .chain(sprite.guardToStand())
+      .loop();
+    return { objects: [sprite.getObject3D()] };
+  });
+  stub.start();
+  return stub.domElement();
+};
+
+export const activeKnockBack = (): HTMLElement => {
+  const stub = new TDGameObjectStub(({ resources, gameObjectAction }) => {
+    const sprite = PlayerWingDozer(resources, gameObjectAction);
+    sprite.startActive().play();
+    delay(1000)
+      .chain(sprite.knockBack())
+      .chain(delay(1000))
+      .chain(sprite.knockBackToStand())
+      .loop();
     return { objects: [sprite.getObject3D()] };
   });
   stub.start();

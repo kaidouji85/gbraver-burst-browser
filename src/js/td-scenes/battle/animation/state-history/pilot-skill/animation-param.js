@@ -24,14 +24,27 @@ export type PilotSkillAnimationParamX<
   SKILL: PilotSkill,
   PILOT: HUDPilotObjects
 > = {
+  /** スキル情報 */
   skill: SKILL,
+  /** スキル発動側パイロットHUD */
   pilot: PILOT,
+  /** スキル発動者がアクティブプレイヤーであるか否か、trueでアクティブプレイヤー */
+  isActivePlayer: boolean,
+  /** スキル発動側プレイヤーステート */
   invokerState: PlayerState,
+  /** スキル発動側3Dプレイヤー */
   invokerTD: TDPlayer,
+  /** スキル発動側HUDプレイヤー */
   invokerHUD: HUDPlayer,
+  /** スキル発動側アームドーザスプライト */
   invokerSprite: ArmDozerSprite,
+  /** スキル発動側でないアームドーザスプライト */
+  anotherSprite: ArmDozerSprite,
+  /** 3Dゲームオブジェクト */
   tdObjects: TDGameObjects,
+  /** HUDオブジェクト */
   hudObjects: HUDGameObjects,
+  /** 3Dカメラ */
   tdCamera: TDCamera,
 };
 
@@ -71,12 +84,16 @@ export function toPilotSkillAnimationParam(
   const invokerHUD = props.view.hud.players.find(
     (v) => v.playerId === effect.invokerId
   );
+  const anotherArmdozer = props.view.td.armdozerObjects.find(
+    (v) => v.playerId !== effect.invokerId
+  );
   if (
     !invokerState ||
     !pilot ||
     !invokerArmdozer ||
     !invokerTD ||
-    !invokerHUD
+    !invokerHUD ||
+    !anotherArmdozer
   ) {
     return null;
   }
@@ -84,10 +101,12 @@ export function toPilotSkillAnimationParam(
   return {
     skill: effect.skill,
     pilot: pilot,
+    isActivePlayer: invokerState.playerId === gameState.activePlayerId,
     invokerState: invokerState,
     invokerSprite: invokerArmdozer.sprite(),
     invokerTD: invokerTD,
     invokerHUD: invokerHUD,
+    anotherSprite: anotherArmdozer.sprite(),
     tdObjects: props.view.td.gameObjects,
     hudObjects: props.view.hud.gameObjects,
     tdCamera: props.view.td.camera,

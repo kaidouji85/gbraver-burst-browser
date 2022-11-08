@@ -34,7 +34,6 @@ export class TurnIndicator {
 
   /**
    * コンストラクタ
-   *
    * @param param パラメータ
    */
   constructor(param: Param) {
@@ -51,13 +50,15 @@ export class TurnIndicator {
         }
       }),
 
-      firstUpdate(param.gameObjectAction).subscribe(() => {
-        this.#onFirstUpdate();
+      firstUpdate(param.gameObjectAction).subscribe((action) => {
+        this.#onFirstUpdate(action);
       }),
     ];
   }
 
-  /** デストラクタ */
+  /**
+   * デストラクタ相当の処理
+   */
   destructor(): void {
     this.#view.destructor();
     this.#unsubscribers.forEach((v) => {
@@ -68,7 +69,6 @@ export class TurnIndicator {
 
   /**
    * ターン変更
-   *
    * @param isPlayerTurn プレイヤーターンか否かのフラグ、trueでプレイヤーターン
    * @return アニメーション
    */
@@ -78,28 +78,30 @@ export class TurnIndicator {
 
   /**
    * 非表示にする
-   *
    * @return アニメーション
    */
   invisible(): Animate {
     return invisible(this.#model);
   }
 
-  /** ターンインジケーターで使うthree.jsオブジェクトを返す */
+  /**
+   * ターンインジケーターで使うthree.jsオブジェクトを返す
+   * @return 取得結果
+   */
   getObject3D(): typeof THREE.Object3D {
     return this.#view.getObject3D();
   }
 
   /**
    * 初回のアップデート時にのみ実行される処理
+   * @param action アクション
    */
-  #onFirstUpdate(): void {
-    waiting(this.#model, this.#tweenGroup).loop();
+  #onFirstUpdate(action: Update): void {
+    waiting(this.#model, this.#tweenGroup).loop(action.time);
   }
 
   /**
    * アップデート時の処理
-   *
    * @param action アクション
    */
   #onUpdate(action: Update): void {
@@ -109,7 +111,6 @@ export class TurnIndicator {
 
   /**
    * プリレンダー時の処理
-   *
    * @param action アクション
    */
   #onPreRender(action: PreRender): void {

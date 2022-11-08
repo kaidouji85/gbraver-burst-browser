@@ -21,6 +21,18 @@ export const texture: DOMStubStory = domStub((resources) => {
   return canvas;
 });
 
+export const horizontalTexture: DOMStubStory = domStub((resources) => {
+  const root = document.createElement("div");
+  const texture =
+    resources.textures.find((v) => v.id === TEXTURE_IDS.SHIN_BRAVER_BURST_DOWN)
+      ?.texture ?? new THREE.Texture();
+  const image = texture.image;
+  const canvas = toSilhouette(image, 255, 0, 0);
+  root.appendChild(image);
+  root.appendChild(canvas);
+  return root;
+});
+
 export const canvasImage: DOMStubStory = domStub((resources) => {
   const image =
     resources.canvasImages.find((v) => v.id === CANVAS_IMAGE_IDS.BURST_BUTTON)

@@ -34,4 +34,11 @@ export type WingDozerModel = {
     /** 0〜1で指定するアニメーションフレーム */
     frame: number,
   },
+  /** アクティブレイヤ */
+  active: {
+    /** 0〜1で指定するアクティブレイヤーの強さ */
+    strength: number,
+    /** 透明度 */
+    opacity: number,
+  },
 };
