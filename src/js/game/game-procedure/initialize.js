@@ -1,7 +1,7 @@
 // @flow
 import { MailVerifiedIncomplete } from "../../dom-scenes/mail-verified-incomplete/mail-verified-incomplete";
 import { invisibleFirstView } from "../../first-view/first-view-visible";
-import { titleResourceLoading } from "../../resource";
+import { titleResourceLoading } from "../../resource/loading/title-resource-loading";
 import { loadServiceWorker } from "../../service-worker/load-service-worker";
 import { viewPerformanceStats } from "../../stats/view-performance-stats";
 import { waitTime } from "../../wait/wait-time";
