@@ -12,7 +12,6 @@ import { PlainHUDCamera } from "../../src/js/game-object/camera/plain-hud/plain-
 import { Renderer } from "../../src/js/render";
 import type { OverlapEvent } from "../../src/js/render/overlap-event/overlap-event";
 import type { Resources } from "../../src/js/resource";
-import { fullResourceLoading } from "../../src/js/resource";
 import type { SafeAreaInset } from "../../src/js/safe-area/safe-area-inset";
 import { createSafeAreaInset } from "../../src/js/safe-area/safe-area-inset";
 import type {
@@ -24,6 +23,7 @@ import { createStreamSource } from "../../src/js/stream/stream";
 import type { Resize } from "../../src/js/window/resize";
 import { resizeStream } from "../../src/js/window/resize";
 import { StorybookResourceRoot } from "../storybook-resource-root";
+import { fullResourceLoading } from "../../src/js/resource/loading/full-resource-loading";
 
 /** Object3D生成関数パラメータ */
 type Object3DParams = {

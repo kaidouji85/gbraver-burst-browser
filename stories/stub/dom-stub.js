@@ -4,9 +4,9 @@ import "../../src/css/style.css";
 
 import { CssVH } from "../../src/js/css/vh";
 import type { Resources } from "../../src/js/resource";
-import { fullResourceLoading } from "../../src/js/resource";
 import { resizeStream } from "../../src/js/window/resize";
 import { StorybookResourceRoot } from "../storybook-resource-root";
+import { fullResourceLoading } from "../../src/js/resource/loading/full-resource-loading";
 
 /**
  * HTML要素生成コールバック関数

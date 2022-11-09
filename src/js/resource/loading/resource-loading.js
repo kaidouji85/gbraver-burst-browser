@@ -1,20 +1,30 @@
 // @flow
 
-import { createStreamSource } from "../stream/stream";
-import type { ResourceLoading, Resources } from ".";
-import type { CanvasImageConfig } from "./canvas-image";
-import { loadCanvasImage } from "./canvas-image";
-import type { CubeTextureConfig } from "./cube-texture";
-import { loadCubeTexture } from "./cube-texture";
-import type { GlTFConfig } from "./gltf";
-import { loadGlTF } from "./gltf";
-import type { PathId } from "./path";
-import { getAllPaths, PathConfigs } from "./path";
-import type { ResourceRoot } from "./resource-root";
-import type { SoundConfig } from "./sound";
-import { loadSound } from "./sound";
-import { loadTexture } from "./texture/load";
-import type { TextureConfig } from "./texture/resource";
+import type { Stream } from "../../stream/stream";
+import { createStreamSource } from "../../stream/stream";
+import type { Resources } from "..";
+import type { CanvasImageConfig } from "../canvas-image";
+import { loadCanvasImage } from "../canvas-image";
+import type { CubeTextureConfig } from "../cube-texture";
+import { loadCubeTexture } from "../cube-texture";
+import type { GlTFConfig } from "../gltf";
+import { loadGlTF } from "../gltf";
+import type { PathId } from "../path";
+import { getAllPaths, PathConfigs } from "../path";
+import type { ResourceRoot } from "../resource-root";
+import type { SoundConfig } from "../sound";
+import { loadSound } from "../sound";
+import { loadTexture } from "../texture/load";
+import type { TextureConfig } from "../texture/resource";
+import type { LoadingActions } from "./loading-actions";
+
+/** リソース読み込みオブジェクト */
+export type ResourceLoading = {
+  /** 読み込みストリーム */
+  loading: Stream<LoadingActions>,
+  /** 読み込んだリソース管理オブジェクト */
+  resources: Promise<Resources>,
+};
 
 /** リソース読み込みパラメータ */
 type ResourceLoadingParams = {
