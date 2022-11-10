@@ -88,7 +88,7 @@ export class TutorialStageElement {
       resources.sounds.find((v) => v.id === SOUND_IDS.PUSH_BUTTON) ??
       createEmptySoundResource();
 
-    this.#root = document.createElement("li");
+    this.#root = document.createElement("div");
     this.#root.className = ROOT_CLASS;
     this.#root.innerHTML = rootInnerHTML(ids, stage.title);
     const elements = extractElements(this.#root, ids);

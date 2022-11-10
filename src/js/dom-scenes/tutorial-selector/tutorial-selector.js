@@ -29,7 +29,7 @@ type DataIDs = { stages: string, prevButton: string };
 export function rootInnerHTML(ids: DataIDs): string {
   return `
     <div class="${ROOT_CLASS}__title">チュートリアル</div>
-    <ol class="${ROOT_CLASS}__stages" data-id="${ids.stages}"></ol>
+    <div class="${ROOT_CLASS}__stages" data-id="${ids.stages}"></div>
     <button class="${ROOT_CLASS}__prev" data-id="${ids.prevButton}">戻る</button> 
   `;
 }
