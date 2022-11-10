@@ -4,9 +4,10 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
+    background-color: var(--button-background-color);
     width: calc(var(--responsive-font-size) * 20);
     min-height: calc(var(--responsive-font-size) * 5);
-    border: var(--dialog-border);
+    border-color: darken(var(--button-background-color), 40%);
     border-radius: var(--dialog-border-radius);
     box-sizing: border-box;
     font-size: var(--responsive-font-size);
@@ -23,8 +24,10 @@
 
 .tutorial-stage__prefix {
   border-bottom: 1px var(--font-color) solid;
+  margin-bottom: calc(var(--responsive-font-size) * 0.5);
 }
 
 .tutorial-stage__title {
   min-width: calc(var(--responsive-font-size) * 14);
+  margin-left: var(--responsive-font-size);
 }
