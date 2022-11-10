@@ -20,8 +20,8 @@ const ROOT_CLASS = "tutorial-stage";
  */
 function rootInnerHTML(level: number, title: string): string {
   return `
-    <span class="${ROOT_CLASS}__level">${level}</span>
-    <span class="${ROOT_CLASS}__title">${title}</span>
+    <div class="${ROOT_CLASS}__prefix">Tutorial ${level}</div>
+    <div class="${ROOT_CLASS}__title">${title}</div>
   `;
 }
 

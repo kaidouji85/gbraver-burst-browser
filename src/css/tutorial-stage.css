@@ -1,10 +1,11 @@
 /** チュートリアルステージ情報 */
 @media (orientation: landscape) {
   .tutorial-stage {
-    align-items: center;
     display: flex;
+    flex-direction: column;
+    justify-content: center;
     width: calc(var(--responsive-font-size) * 20);
-    min-height: calc(var(--responsive-font-size) * 4);
+    min-height: calc(var(--responsive-font-size) * 5);
     border: var(--dialog-border);
     border-radius: var(--dialog-border-radius);
     box-sizing: border-box;
@@ -20,17 +21,10 @@
   }
 }
 
-.tutorial-stage__title {
-  min-width: calc(var(--responsive-font-size) * 14);
+.tutorial-stage__prefix {
+  border-bottom: 1px var(--font-color) solid;
 }
 
-.tutorial-stage__select {
-  width: calc(var(--responsive-font-size) * 5);
-  height: calc(var(--responsive-font-size) * 3);
-  background-color: var(--button-background-color);
-  color: var(--button-font-color);
-  font-size: var(--responsive-font-size);
-  border: var(--button-border);
-  box-shadow: var(--button-box-shadow);
-  border-radius: var(--button-border-radius);
+.tutorial-stage__title {
+  min-width: calc(var(--responsive-font-size) * 14);
 }
