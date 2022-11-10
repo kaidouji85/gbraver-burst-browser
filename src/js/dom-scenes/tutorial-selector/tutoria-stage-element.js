@@ -12,38 +12,17 @@ import { domUuid } from "../../uuid/dom-uuid";
 /** ルートHTML class属性 */
 const ROOT_CLASS = "tutorial-stage";
 
-/** data-idを集めたもの */
-type DataIDs = { selectButton: string };
-
 /**
  * ルート要素のinnerHTML
- *
- * @param ids data-idを集めたもの
+ * @param level ステージレベル
  * @param title ステージタイトル
  * @return innerHTML
  */
-function rootInnerHTML(ids: DataIDs, title: string): string {
+function rootInnerHTML(level: number, title: string): string {
   return `
+    <span class="${ROOT_CLASS}__level">${level}</span>
     <span class="${ROOT_CLASS}__title">${title}</span>
-    <button class="${ROOT_CLASS}__select" data-id="${ids.selectButton}">選択</button>
   `;
-}
-
-/** ルート要素の子孫要素 */
-type Elements = { selectButton: HTMLElement };
-
-/**
- * ルート要素から子孫要素を抽出する
- *
- * @param root ルート要素
- * @param ids data-idを集めたもの
- * @return 抽出結果
- */
-function extractElements(root: HTMLElement, ids: DataIDs): Elements {
-  const selectButton =
-    root.querySelector(`[data-id="${ids.selectButton}"]`) ??
-    document.createElement("div");
-  return { selectButton };
 }
 
 /** チュートリアルステージ情報 */
@@ -68,9 +47,11 @@ export class TutorialStageElement {
   +id: TutorialStageID;
   /** ステージレベル */
   +level: number;
+  /** ルートHTML要素 */
   #root: HTMLElement;
-  #selectButton: HTMLElement;
+  /** プッシュボタン効果音 */
   #pushButton: SoundResource;
+  /** 選択通知ストリーム */
   #select: Stream<void>;
 
   /**
@@ -81,7 +62,6 @@ export class TutorialStageElement {
    * @param level ステージレベル
    */
   constructor(resources: Resources, stage: TutorialStage, level: number) {
-    const ids = { selectButton: domUuid() };
     this.id = stage.id;
     this.level = level;
     this.#pushButton =
@@ -90,11 +70,9 @@ export class TutorialStageElement {
 
     this.#root = document.createElement("div");
     this.#root.className = ROOT_CLASS;
-    this.#root.innerHTML = rootInnerHTML(ids, stage.title);
-    const elements = extractElements(this.#root, ids);
-    this.#selectButton = elements.selectButton;
+    this.#root.innerHTML = rootInnerHTML(level, stage.title);
 
-    this.#select = pushDOMStream(this.#selectButton).chain(
+    this.#select = pushDOMStream(this.#root).chain(
       map((action) => {
         action.event.preventDefault();
         action.event.stopPropagation();
@@ -127,6 +105,6 @@ export class TutorialStageElement {
    */
   async selected(): Promise<void> {
     this.#pushButton.sound.play();
-    await pop(this.#selectButton);
+    await pop(this.#root);
   }
 }
