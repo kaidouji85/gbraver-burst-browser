@@ -63,7 +63,7 @@ docker build ./
 ### デプロイコマンド
 
 ```shell script
-./deploy.sh <アップロードするS3バケット名> <CloudFrontのdistributionId> <assetlinks.jsonのS3 URI>
+./deploy.bash <アップロードするS3バケット名> <CloudFrontのdistributionId> <assetlinks.jsonのS3 URI>
 ```
 
 ## CodeBuild設定
