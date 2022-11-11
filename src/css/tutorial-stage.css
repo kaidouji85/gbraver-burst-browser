@@ -12,7 +12,7 @@
     box-sizing: border-box;
     font-size: var(--responsive-font-size);
     padding: calc(var(--responsive-font-size) * 0.5);
-    margin: calc(var(--responsive-font-size) * 1) 0;
+    margin-bottom: calc(var(--responsive-font-size) * 0.5);
   }
 }
 
