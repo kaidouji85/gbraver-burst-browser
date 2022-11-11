@@ -1,6 +1,7 @@
 /** チュートリアルステージセレクト画面 */
 @media (orientation: landscape) {
   .tutorial-selector {
+    --controllers-z-index: 1;
     display: grid;
     grid-template-rows: auto 1fr auto;
     grid-template-columns: 1fr auto;
@@ -40,8 +41,7 @@
   --height: calc(var(--vh) * 70);
   width: calc(var(--height) * 16 / 9);
   height: var(--height);
-  /* height: 100%; */
-  /* width: 150%; */
+  filter: brightness(0.6);
   position: absolute;
 }
 
@@ -51,7 +51,7 @@
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
-  z-index: 1;
+  z-index: var(--controllers-z-index);
 }
 
 .tutorial-selector__prev {
@@ -65,5 +65,5 @@
   color: var(--button-font-color);
   border: var(--button-border);
   box-shadow: var(--button-box-shadow);
-  z-index: 1;
+  z-index: var(--controllers-z-index);
 }
