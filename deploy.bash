@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash -e
 
 if [ $# != 3 ]; then
   echo 'invalid param'
@@ -12,5 +12,5 @@ OWN_PATH=`cd $(dirname ${0}) && pwd`
 
 npm run build:production
 aws s3 cp "${ASSETLINKS_JSON_URI}" "${OWN_PATH}/build/production/.well-known/assetlinks.json"
-"${OWN_PATH}/upload-module.sh" "${S3_BUCKET}"
-"${OWN_PATH}/clear-cdn.sh" "${DISTRIBUTION_ID}"
+"${OWN_PATH}/upload-module.bash" "${S3_BUCKET}"
+"${OWN_PATH}/clear-cdn.bash" "${DISTRIBUTION_ID}"

@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash -e
 
 if [ $# != 1 ]; then
   echo 'invalid param'
