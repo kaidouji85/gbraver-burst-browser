@@ -32,10 +32,14 @@ export function rootInnerHTML(ids: DataIDs, resources: Resources): string {
   const imageCut01 =
     resources.paths.find((v) => v.id === PathIds.TUTORIAL_IMAGE_CUT_01)?.path ??
     "";
+  const imageCut02 =
+    resources.paths.find((v) => v.id === PathIds.TUTORIAL_IMAGE_CUT_02)?.path ??
+    "";
   return `
     <div class="${ROOT_CLASS}__title">チュートリアル</div>
     <div class="${ROOT_CLASS}__image-cuts">
       <img class="${ROOT_CLASS}__cut-01" src="${imageCut01}">
+      <img class="${ROOT_CLASS}__cut-02" src="${imageCut02}">
     </div>
     <div class="${ROOT_CLASS}__stages" data-id="${ids.stages}"></div>
     <button class="${ROOT_CLASS}__prev" data-id="${ids.prevButton}">戻る</button> 

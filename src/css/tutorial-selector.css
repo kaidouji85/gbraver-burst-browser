@@ -45,6 +45,54 @@
   position: absolute;
 }
 
+.tutorial-selector__cut-01 {
+  animation: cut-01 6s infinite ease;
+}
+
+.tutorial-selector__cut-02 {
+  animation: cut-02 6s infinite ease;
+}
+
+@keyframes cut-01 {
+  0% {
+    opacity: 1
+  }
+
+  50% {
+    opacity: 1
+  }
+
+  60% {
+    opacity: 0
+  }
+
+  90% {
+    opacity: 0
+  }
+}
+
+@keyframes cut-02 {
+  0% {
+    opacity: 1
+  }
+
+  10% {
+    opacity: 0
+  }
+
+  40% {
+    opacity: 0
+  }
+
+  50% {
+    opacity: 1
+  }
+
+  100% {
+    opacity: 1
+  }
+}
+
 .tutorial-selector__stages {
   grid-row: 2;
   grid-column: 2;
