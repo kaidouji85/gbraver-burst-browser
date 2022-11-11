@@ -1,4 +1,6 @@
-#!/bin/bash -e
+#!/bin/bash
+set -Ceu
+cd "$(dirname "${0}")"
 
 if [ $# != 1 ]; then
   echo 'invalid param'
