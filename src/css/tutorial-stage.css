@@ -13,6 +13,7 @@
     font-size: var(--responsive-font-size);
     padding: calc(var(--responsive-font-size) * 0.5);
     margin-bottom: calc(var(--responsive-font-size) * 0.5);
+    box-shadow: var(--button-box-shadow);
   }
 }
 
