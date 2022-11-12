@@ -1,6 +1,8 @@
 // @flow
 import { TutorialSelector } from "../../dom-scenes/tutorial-selector/tutorial-selector";
+import { waitTime } from "../../wait/wait-time";
 import { tutorialSelectorConnector } from "../dom-scene-binder/action-connector/tutorial-selector-connection";
+import { MAX_LOADING_TIME } from "../dom-scene-binder/max-loading-time";
 import type { GameProps } from "../game-props";
 import {
   TutorialStages,
@@ -24,5 +26,6 @@ export async function startTutorialSelector(props: $ReadOnly<GameProps>) {
   }));
   const scene = new TutorialSelector(props.resources, stages);
   props.domSceneBinder.bind(scene, tutorialSelectorConnector);
+  await Promise.race([scene.waitUntilLoaded(), waitTime(MAX_LOADING_TIME)]);
   await props.fader.fadeIn();
 }

@@ -10,6 +10,7 @@ import { createEmptySoundResource, SOUND_IDS } from "../../resource/sound";
 import type { Stream, StreamSource, Unsubscriber } from "../../stream/stream";
 import { createStreamSource } from "../../stream/stream";
 import { domUuid } from "../../uuid/dom-uuid";
+import { waitElementLoaded } from "../../wait/wait-element-loaded";
 import type { DOMScene } from "../dom-scene";
 import type {
   TutorialStage,
@@ -19,8 +20,9 @@ import { TutorialStageElement } from "./tutoria-stage-element";
 
 /** ROOT要素class属性*/
 const ROOT_CLASS = "tutorial-selector";
+
 /** data-idを集めたもの */
-type DataIDs = { stages: string, prevButton: string };
+type DataIDs = { stages: string, imageCuts: string, prevButton: string };
 
 /**
  * ルート要素のinnerHTML
@@ -49,7 +51,7 @@ export function rootInnerHTML(ids: DataIDs, resources: Resources): string {
     "";
   return `
     <div class="${ROOT_CLASS}__title">チュートリアル</div>
-    <div class="${ROOT_CLASS}__image-cuts">
+    <div class="${ROOT_CLASS}__image-cuts" data-id="${ids.imageCuts}">
       <img class="${ROOT_CLASS}__cut-01" src="${imageCut01}">
       <img class="${ROOT_CLASS}__cut-02" src="${imageCut02}">
       <img class="${ROOT_CLASS}__cut-03" src="${imageCut03}">
@@ -63,11 +65,14 @@ export function rootInnerHTML(ids: DataIDs, resources: Resources): string {
 }
 
 /** ルート要素の子孫要素 */
-type Elements = { stages: HTMLElement, prevButton: HTMLElement };
+type Elements = {
+  stages: HTMLElement,
+  imageCuts: HTMLElement,
+  prevButton: HTMLElement,
+};
 
 /**
  * ルート要素から子孫要素を抽出する
- *
  * @param root ルート要素
  * @param ids data-idを集めたもの
  * @return 抽出結果
@@ -76,10 +81,13 @@ function extractElements(root: HTMLElement, ids: DataIDs): Elements {
   const stages =
     root.querySelector(`[data-id="${ids.stages}"]`) ??
     document.createElement("div");
+  const imageCuts =
+    root.querySelector(`[data-id="${ids.imageCuts}"]`) ??
+    document.createElement("div");
   const prevButton =
     root.querySelector(`[data-id="${ids.prevButton}"]`) ??
     document.createElement("div");
-  return { stages, prevButton };
+  return { stages, imageCuts, prevButton };
 }
 
 /** チュートリアルステージセレクト画面 */
@@ -91,16 +99,20 @@ export class TutorialSelector implements DOMScene {
   #prev: StreamSource<void>;
   #stageSelect: StreamSource<TutorialStageSelect>;
   #changeValue: SoundResource;
+  #isImageCutsLoaded: Promise<any>;
   #unsubscribers: Unsubscriber[];
 
   /**
    * コンストラクタ
-   *
    * @param resources リソース管理オブジェクト
    * @param stages チュートリアルステージ情報
    */
   constructor(resources: Resources, stages: TutorialStage[]) {
-    const ids = { stages: domUuid(), prevButton: domUuid() };
+    const ids = {
+      stages: domUuid(),
+      imageCuts: domUuid(),
+      prevButton: domUuid(),
+    };
     this.#root = document.createElement("div");
     this.#root.className = ROOT_CLASS;
     this.#root.innerHTML = rootInnerHTML(ids, resources);
@@ -114,6 +126,11 @@ export class TutorialSelector implements DOMScene {
     this.#changeValue =
       resources.sounds.find((v) => v.id === SOUND_IDS.CHANGE_VALUE) ??
       createEmptySoundResource();
+    this.#isImageCutsLoaded = Promise.all(
+      Array.from(elements.imageCuts.children).map((img) =>
+        waitElementLoaded(img)
+      )
+    );
 
     const stageElements = stages.map(
       (stage, index) => new TutorialStageElement(resources, stage, index + 1)
@@ -146,8 +163,15 @@ export class TutorialSelector implements DOMScene {
   }
 
   /**
+   * 各種リソースの読み込みが完了するまで待つ
+   * @return 待機結果
+   */
+  async waitUntilLoaded(): Promise<void> {
+    await this.#isImageCutsLoaded;
+  }
+
+  /**
    * 戻るボタン押下通知
-   *
    * @return 通知ストリーム
    */
   prevNotifier(): Stream<void> {
@@ -156,7 +180,6 @@ export class TutorialSelector implements DOMScene {
 
   /**
    * チュートリアルステージ選択通知
-   *
    * @return 通知ストリーム
    */
   stageSelectNotifier(): Stream<TutorialStageSelect> {
@@ -165,7 +188,6 @@ export class TutorialSelector implements DOMScene {
 
   /**
    * 戻るボタンを押した時の処理
-   *
    * @param action アクション
    */
   #onPrevPush(action: PushDOM): void {
@@ -180,7 +202,6 @@ export class TutorialSelector implements DOMScene {
 
   /**
    * チュートリアルステージ選択
-   *
    * @param stage チュートリアルステージ HTML要素
    */
   #onTutorialStageSelect(stage: TutorialStageElement): void {
