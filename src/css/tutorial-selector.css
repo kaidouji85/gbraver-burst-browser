@@ -67,14 +67,17 @@
   animation: var(--animation);
   animation-delay: var(--cut-03-delay);
 }
+
 .tutorial-selector__cut-04 {
   animation: var(--animation);
   animation-delay: var(--cut-04-delay);
 }
+
 .tutorial-selector__cut-05 {
   animation: var(--animation);
   animation-delay: var(--cut-05-delay);
 }
+
 .tutorial-selector__cut-06 {
   animation: var(--animation);
   animation-delay: var(--cut-06-delay);
