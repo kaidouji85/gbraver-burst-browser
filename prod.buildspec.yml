@@ -30,9 +30,7 @@ phases:
   pre_build:
     commands:
       - npm ci
-      - npm run type-check
-      - npm run test
   build:
     commands:
       - . ./buildspec-env
-      - ./deploy.sh "${S3_BUCKET}" "${DISTRIBUTION_ID}" "${ASSETLINKS_JSON_URI}"
+      - ./deploy.bash "${S3_BUCKET}" "${DISTRIBUTION_ID}" "${ASSETLINKS_JSON_URI}"

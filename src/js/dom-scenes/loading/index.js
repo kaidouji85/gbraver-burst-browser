@@ -3,7 +3,7 @@
 import type {
   LoadingActions,
   LoadingProgress,
-} from "../../resource/loading-actions";
+} from "../../resource/loading/loading-actions";
 import type { Stream, Unsubscriber } from "../../stream/stream";
 import type { DOMScene } from "../dom-scene";
 import { LoadingPresentation } from "./presentation";
