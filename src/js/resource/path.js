@@ -55,6 +55,12 @@ export const PathIds = {
   NPC_COURSE_NORMAL_ICON: "NPC_COURSE_NORMAL_ICON",
   NPC_COURSE_HARD_ICON: "NPC_COURSE_HARD_ICON",
   NPC_COURSE_VERY_HARD_ICON: "NPC_COURSE_VERY_HARD_ICON",
+  TUTORIAL_IMAGE_CUT_01: "TUTORIAL_IMAGE_CUT_01",
+  TUTORIAL_IMAGE_CUT_02: "TUTORIAL_IMAGE_CUT_02",
+  TUTORIAL_IMAGE_CUT_03: "TUTORIAL_IMAGE_CUT_03",
+  TUTORIAL_IMAGE_CUT_04: "TUTORIAL_IMAGE_CUT_04",
+  TUTORIAL_IMAGE_CUT_05: "TUTORIAL_IMAGE_CUT_05",
+  TUTORIAL_IMAGE_CUT_06: "TUTORIAL_IMAGE_CUT_06",
 };
 
 /**
@@ -172,6 +178,30 @@ export const PathConfigs: PathConfig[] = [
   {
     id: PathIds.NPC_COURSE_VERY_HARD_ICON,
     path: (root) => `${root.get()}/npc-course/very-hard.svg`,
+  },
+  {
+    id: PathIds.TUTORIAL_IMAGE_CUT_01,
+    path: (root) => `${root.get()}/tutorial/image-cut-01.webp`,
+  },
+  {
+    id: PathIds.TUTORIAL_IMAGE_CUT_02,
+    path: (root) => `${root.get()}/tutorial/image-cut-02.webp`,
+  },
+  {
+    id: PathIds.TUTORIAL_IMAGE_CUT_03,
+    path: (root) => `${root.get()}/tutorial/image-cut-03.webp`,
+  },
+  {
+    id: PathIds.TUTORIAL_IMAGE_CUT_04,
+    path: (root) => `${root.get()}/tutorial/image-cut-04.webp`,
+  },
+  {
+    id: PathIds.TUTORIAL_IMAGE_CUT_05,
+    path: (root) => `${root.get()}/tutorial/image-cut-05.webp`,
+  },
+  {
+    id: PathIds.TUTORIAL_IMAGE_CUT_06,
+    path: (root) => `${root.get()}/tutorial/image-cut-06.webp`,
   },
 ];
 

@@ -4,6 +4,7 @@ import type { PushDOM } from "../../dom/event-stream";
 import { pushDOMStream } from "../../dom/event-stream";
 import { Exclusive } from "../../exclusive/exclusive";
 import type { Resources } from "../../resource";
+import { PathIds } from "../../resource/path";
 import type { SoundResource } from "../../resource/sound";
 import { createEmptySoundResource, SOUND_IDS } from "../../resource/sound";
 import type { Stream, StreamSource, Unsubscriber } from "../../stream/stream";
@@ -24,12 +25,39 @@ type DataIDs = { stages: string, prevButton: string };
 /**
  * ルート要素のinnerHTML
  * @param ids data-idを集めたもの
+ * @param resources リソース管理オブジェクト
  * @return innerHTML
  */
-export function rootInnerHTML(ids: DataIDs): string {
+export function rootInnerHTML(ids: DataIDs, resources: Resources): string {
+  const imageCut01 =
+    resources.paths.find((v) => v.id === PathIds.TUTORIAL_IMAGE_CUT_01)?.path ??
+    "";
+  const imageCut02 =
+    resources.paths.find((v) => v.id === PathIds.TUTORIAL_IMAGE_CUT_02)?.path ??
+    "";
+  const imageCut03 =
+    resources.paths.find((v) => v.id === PathIds.TUTORIAL_IMAGE_CUT_03)?.path ??
+    "";
+  const imageCut04 =
+    resources.paths.find((v) => v.id === PathIds.TUTORIAL_IMAGE_CUT_04)?.path ??
+    "";
+  const imageCut05 =
+    resources.paths.find((v) => v.id === PathIds.TUTORIAL_IMAGE_CUT_05)?.path ??
+    "";
+  const imageCut06 =
+    resources.paths.find((v) => v.id === PathIds.TUTORIAL_IMAGE_CUT_06)?.path ??
+    "";
   return `
     <div class="${ROOT_CLASS}__title">チュートリアル</div>
-    <ol class="${ROOT_CLASS}__stages" data-id="${ids.stages}"></ol>
+    <div class="${ROOT_CLASS}__image-cuts">
+      <img class="${ROOT_CLASS}__cut-01" src="${imageCut01}">
+      <img class="${ROOT_CLASS}__cut-02" src="${imageCut02}">
+      <img class="${ROOT_CLASS}__cut-03" src="${imageCut03}">
+      <img class="${ROOT_CLASS}__cut-04" src="${imageCut04}">
+      <img class="${ROOT_CLASS}__cut-05" src="${imageCut05}">
+      <img class="${ROOT_CLASS}__cut-06" src="${imageCut06}">
+    </div>
+    <div class="${ROOT_CLASS}__stages" data-id="${ids.stages}"></div>
     <button class="${ROOT_CLASS}__prev" data-id="${ids.prevButton}">戻る</button> 
   `;
 }
@@ -75,7 +103,7 @@ export class TutorialSelector implements DOMScene {
     const ids = { stages: domUuid(), prevButton: domUuid() };
     this.#root = document.createElement("div");
     this.#root.className = ROOT_CLASS;
-    this.#root.innerHTML = rootInnerHTML(ids);
+    this.#root.innerHTML = rootInnerHTML(ids, resources);
 
     const elements = extractElements(this.#root, ids);
     this.#stages = elements.stages;
