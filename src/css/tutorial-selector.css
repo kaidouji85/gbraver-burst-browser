@@ -43,53 +43,54 @@
   height: var(--height);
   filter: brightness(0.6);
   position: absolute;
+  opacity: 0;
 }
 
 .tutorial-selector__cut-01 {
-  animation: cut-01 6s infinite ease;
+  animation: slide 6s infinite ease;
 }
 
 .tutorial-selector__cut-02 {
-  animation: cut-02 6s infinite ease;
+  animation: slide 6s infinite ease;
+  animation-delay: 1s;
 }
 
-@keyframes cut-01 {
-  0% {
-    opacity: 1
-  }
-
-  50% {
-    opacity: 1
-  }
-
-  60% {
-    opacity: 0
-  }
-
-  90% {
-    opacity: 0
-  }
+.tutorial-selector__cut-03 {
+  animation: slide 6s infinite ease;
+  animation-delay: 2s;
+}
+.tutorial-selector__cut-04 {
+  animation: slide 6s infinite ease;
+  animation-delay: 3s;
+}
+.tutorial-selector__cut-05 {
+  animation: slide 6s infinite ease;
+  animation-delay: 4s;
+}
+.tutorial-selector__cut-06 {
+  animation: slide 6s infinite ease;
+  animation-delay: 5s;
 }
 
-@keyframes cut-02 {
+@keyframes slide {
   0% {
-    opacity: 1
+    opacity: 0;
   }
 
-  10% {
-    opacity: 0
+  5% {
+    opacity: 1;
   }
 
-  40% {
-    opacity: 0
+  17% {
+    opacity: 1;
   }
 
-  50% {
-    opacity: 1
+  22% {
+    opacity: 0;
   }
 
   100% {
-    opacity: 1
+    opacity: 0;
   }
 }
 
