@@ -38,8 +38,6 @@
 }
 
 .tutorial-selector__image-cuts img {
-  --animation-name: slide;
-  
   --animation: slide 18s infinite ease;
   --cut-01-delay: 0s;
   --cut-02-delay: 3s;
