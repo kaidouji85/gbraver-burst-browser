@@ -38,6 +38,15 @@
 }
 
 .tutorial-selector__image-cuts img {
+  --animation-name: slide;
+  
+  --animation: slide 18s infinite ease;
+  --cut-01-delay: 0s;
+  --cut-02-delay: 3s;
+  --cut-03-delay: 6s;
+  --cut-04-delay: 9s;
+  --cut-05-delay: 12s;
+  --cut-06-delay: 15s;
   --height: calc(var(--vh) * 70);
   width: calc(var(--height) * 16 / 9);
   height: var(--height);
@@ -47,29 +56,30 @@
 }
 
 .tutorial-selector__cut-01 {
-  animation: slide 6s infinite ease;
+  animation: var(--animation);
+  animation-delay: var(--cut-01-delay);
 }
 
 .tutorial-selector__cut-02 {
-  animation: slide 6s infinite ease;
-  animation-delay: 1s;
+  animation: var(--animation);
+  animation-delay: var(--cut-02-delay);
 }
 
 .tutorial-selector__cut-03 {
-  animation: slide 6s infinite ease;
-  animation-delay: 2s;
+  animation: var(--animation);
+  animation-delay: var(--cut-03-delay);
 }
 .tutorial-selector__cut-04 {
-  animation: slide 6s infinite ease;
-  animation-delay: 3s;
+  animation: var(--animation);
+  animation-delay: var(--cut-04-delay);
 }
 .tutorial-selector__cut-05 {
-  animation: slide 6s infinite ease;
-  animation-delay: 4s;
+  animation: var(--animation);
+  animation-delay: var(--cut-05-delay);
 }
 .tutorial-selector__cut-06 {
-  animation: slide 6s infinite ease;
-  animation-delay: 5s;
+  animation: var(--animation);
+  animation-delay: var(--cut-06-delay);
 }
 
 @keyframes slide {
