@@ -1,6 +1,7 @@
 // @flow
 
 import * as THREE from "three";
+import type { GenesisBraverModel } from "../model/genesis-braver-model";
 
 /** ジェネシスブレイバービュー */
 export interface GenesisBraverView {
@@ -13,7 +14,13 @@ export interface GenesisBraverView {
    * シーンに追加するオブジェクトを取得する
    * @return 取得結果
    */
-  getObject3D(): typeof HREE.Object3D;
+  getObject3D(): typeof THREE.Object3D;
+
+  /**
+   * モデルをビューに反映させる
+   * @param model モデル
+   */
+  engage(model: GenesisBraverModel): void;
 
   /**
    * カメラの真正面を向く

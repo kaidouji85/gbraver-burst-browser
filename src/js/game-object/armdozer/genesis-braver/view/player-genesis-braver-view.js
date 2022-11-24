@@ -6,6 +6,7 @@ import type { Resources } from "../../../../resource";
 import { TEXTURE_IDS } from "../../../../resource/texture/ids";
 import type { ArmdozerAnimation } from "../../mesh/armdozer-animation";
 import { createHorizontalAnimation } from "../../mesh/horizontal-animation";
+import type { GenesisBraverModel } from "../model/genesis-braver-model";
 import type { GenesisBraverView } from "./genesis-braver-view";
 
 /** スプライト幅 */
@@ -37,6 +38,13 @@ export class PlayerGenesisBraverView implements GenesisBraverView {
   /** @override */
   getObject3D(): typeof THREE.Object3D {
     return this.#sprite.getObject3D();
+  }
+
+  /** @override */
+  engage(model: GenesisBraverModel): void {
+    this.#sprite.getObject3D().position.x = model.position.x;
+    this.#sprite.getObject3D().position.y = model.position.y;
+    this.#sprite.getObject3D().position.z = model.position.z;
   }
 
   /** @override */
