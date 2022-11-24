@@ -1,6 +1,6 @@
 // @flow
 
-import { GenesisBraver } from "../src/js/game-object/armdozer/genesis-braver/genesis-braver";
+import { playerGenesisBraver } from "../src/js/game-object/armdozer/genesis-braver";
 import { TDGameObjectStub } from "./stub/td-game-object-stub";
 
 export default {
@@ -9,7 +9,7 @@ export default {
 
 export const playerStand = (): HTMLElement => {
   const stub = new TDGameObjectStub(({ resources, gameObjectAction }) => {
-    const sprite = new GenesisBraver(resources, gameObjectAction);
+    const sprite = playerGenesisBraver(resources, gameObjectAction);
     return { objects: [sprite.getObject3D()] };
   });
   stub.start();
