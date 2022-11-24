@@ -1,6 +1,7 @@
 // @flow
 
 import * as THREE from "three";
+
 import type { GenesisBraverModel } from "../model/genesis-braver-model";
 
 /** ジェネシスブレイバービュー */
