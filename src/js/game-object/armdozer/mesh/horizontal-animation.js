@@ -88,8 +88,9 @@ type ParamWhenCreateFromResource = {
 };
 
 /**
+ * @deprecated
  * リソース管理オブジェクトからHorizontalArmdozerAnimationを生成する
- * @param params パラメータ
+ * @param param パラメータ
  * @return 生成結果
  */
 export function createHorizontalAnimationFromResources(
