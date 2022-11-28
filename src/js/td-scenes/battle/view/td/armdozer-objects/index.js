@@ -7,6 +7,7 @@ import type { GameObjectAction } from "../../../../../game-object/action/game-ob
 import type { Resources } from "../../../../../resource";
 import type { Stream } from "../../../../../stream/stream";
 import type { TDArmdozerObjects } from "./armdozer-objects";
+import { enemyGenesisBraverTD, playerGenesisBraverTD } from "./genesis-braver";
 import {
   enemyLightningDozerTD,
   playerLightningDozerTD,
@@ -37,6 +38,8 @@ export function playerTDArmdozer(
       return playerWingDozerTD(resources, gameObjectAction, state);
     case ArmDozerIds.NEO_LANDOZER:
       return playerNeoLandozerTD(resources, gameObjectAction, state);
+    case ArmDozerIds.GENESIS_BRAVER:
+      return playerGenesisBraverTD(resources, gameObjectAction, state);
     default:
       return playerShinBraverTD(resources, gameObjectAction, state);
   }
@@ -64,6 +67,8 @@ export function enemyTDArmdozer(
       return enemyWingDozerTD(resources, gameObjectAction, state);
     case ArmDozerIds.NEO_LANDOZER:
       return enemyNeoLandozerTD(resources, gameObjectAction, state);
+    case ArmDozerIds.GENESIS_BRAVER:
+      return enemyGenesisBraverTD(resources, gameObjectAction, state);
     default:
       return enemyShinBraverTD(resources, gameObjectAction, state);
   }
