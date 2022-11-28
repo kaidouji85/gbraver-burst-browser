@@ -14,24 +14,21 @@ import type { Resources } from "../../../../../resource";
 import type { Stream } from "../../../../../stream/stream";
 import type { TDArmdozerObjects } from "./armdozer-objects";
 
-/**
- * 3Dレイヤー シンブレイバー 3Dレイヤー フィールド
- */
+/**3Dレイヤー シンブレイバー 3Dレイヤー フィールド */
 interface ShinBraverTDField {
   /** シンブレイバー */
   shinBraver: ShinBraver;
 }
 
-/**
- * 3Dレイヤー シンブレイバー 3Dレイヤー
- */
+/** シンブレイバー 3Dレイヤー */
 export class ShinBraverTD implements ShinBraverTDField, TDArmdozerObjects {
+  /** @override */
   playerId: PlayerId;
+  /** @override */
   shinBraver: ShinBraver;
 
   /**
    * コンストラクタ
-   *
    * @param playerId プレイヤーID
    * @param field フィールド
    */
@@ -40,35 +37,24 @@ export class ShinBraverTD implements ShinBraverTDField, TDArmdozerObjects {
     this.shinBraver = field.shinBraver;
   }
 
-  /**
-   * デストラクタ相当の処理
-   */
+  /** @override */
   destructor(): void {
     this.shinBraver.destructor();
   }
 
-  /**
-   * アームドーザスプライトにダウンキャストする
-   *
-   * @return アームドーザスプライト
-   */
+  /** @override */
   sprite(): ArmDozerSprite {
     return this.shinBraver;
   }
 
-  /**
-   * シーンに追加するオブジェクトを取得する
-   *
-   * @return シーンに追加するオブジェクト
-   */
+  /** @override */
   getObject3Ds(): typeof THREE.Object3D[] {
     return [this.shinBraver.getObject3D()];
   }
 }
 
 /**
- * プレイヤー 3Dレイヤー シンブレイバー 3Dレイヤー
- *
+ * プレイヤー シンブレイバー 3Dレイヤー
  * @param resources リソース管理オブジェクト
  * @param gameObjectAction ゲームオブジェクトアクション
  * @param state プレイヤー情報
@@ -85,8 +71,7 @@ export function playerShinBraverTD(
 }
 
 /**
- * 敵 3Dレイヤー シンブレイバー 3Dレイヤー
- *
+ * 敵 シンブレイバー 3Dレイヤー
  * @param resources リソース管理オブジェクト
  * @param gameObjectAction ゲームオブジェクトアクション
  * @param state プレイヤー情報
