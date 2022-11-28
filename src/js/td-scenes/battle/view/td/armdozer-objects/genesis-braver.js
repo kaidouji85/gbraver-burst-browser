@@ -6,83 +6,85 @@ import * as THREE from "three";
 import type { GameObjectAction } from "../../../../../game-object/action/game-object-action";
 import type { ArmDozerSprite } from "../../../../../game-object/armdozer/armdozer-sprite";
 import {
-  EnemyShinBraver,
-  PlayerShinBraver,
-} from "../../../../../game-object/armdozer/shin-braver";
-import { ShinBraver } from "../../../../../game-object/armdozer/shin-braver/shin-braver";
+  EnemyGenesisBraver,
+  PlayerGenesisBraver,
+} from "../../../../../game-object/armdozer/genesis-braver";
+import { GenesisBraver } from "../../../../../game-object/armdozer/genesis-braver/genesis-braver";
 import type { Resources } from "../../../../../resource";
 import type { Stream } from "../../../../../stream/stream";
 import type { TDArmdozerObjects } from "./armdozer-objects";
 
-/**3Dレイヤー シンブレイバー 3Dレイヤー フィールド */
-interface ShinBraverTDField {
-  /** シンブレイバー */
-  shinBraver: ShinBraver;
+/** ジェネシスブレイバー 3Dレイヤー フィールド */
+interface GenesisBraverTDField {
+  /** スプライト */
+  genesisBraver: GenesisBraver;
 }
 
-/** シンブレイバー 3Dレイヤー */
-export class ShinBraverTD implements ShinBraverTDField, TDArmdozerObjects {
+/** ジェネシスブレイバー 3Dレイヤー */
+export class GenesisBraverTD
+  implements GenesisBraverTDField, TDArmdozerObjects
+{
   /** @override */
   playerId: PlayerId;
   /** @override */
-  shinBraver: ShinBraver;
+  genesisBraver: GenesisBraver;
 
   /**
    * コンストラクタ
    * @param playerId プレイヤーID
    * @param field フィールド
    */
-  constructor(playerId: PlayerId, field: ShinBraverTDField) {
+  constructor(playerId: PlayerId, field: GenesisBraverTDField) {
     this.playerId = playerId;
-    this.shinBraver = field.shinBraver;
+    this.genesisBraver = field.genesisBraver;
   }
 
   /** @override */
   destructor(): void {
-    this.shinBraver.destructor();
+    this.genesisBraver.destructor();
   }
 
   /** @override */
   sprite(): ArmDozerSprite {
-    return this.shinBraver;
+    return this.genesisBraver;
   }
 
   /** @override */
   getObject3Ds(): typeof THREE.Object3D[] {
-    return [this.shinBraver.getObject3D()];
+    return [this.genesisBraver.getObject3D()];
   }
 }
 
 /**
- * プレイヤー シンブレイバー 3Dレイヤー
+ * プレイヤー ジェネシスブレイバー 3Dレイヤー
  * @param resources リソース管理オブジェクト
  * @param gameObjectAction ゲームオブジェクトアクション
  * @param state プレイヤー情報
  * @return 生成結果
  */
-export function playerShinBraverTD(
+export function playerGenesisBraverTD(
   resources: Resources,
   gameObjectAction: Stream<GameObjectAction>,
   state: Player
-): ShinBraverTD {
-  return new ShinBraverTD(state.playerId, {
-    shinBraver: PlayerShinBraver(resources, gameObjectAction),
+): GenesisBraverTD {
+  return new GenesisBraverTD(state.playerId, {
+    genesisBraver: PlayerGenesisBraver(resources, gameObjectAction),
   });
 }
 
 /**
- * 敵 シンブレイバー 3Dレイヤー
+ * 敵 ジェネシスブレイバー 3Dレイヤー
  * @param resources リソース管理オブジェクト
  * @param gameObjectAction ゲームオブジェクトアクション
  * @param state プレイヤー情報
  * @return 生成結果
  */
-export function enemyShinBraverTD(
+export function enemyGenesisBraverTD(
   resources: Resources,
   gameObjectAction: Stream<GameObjectAction>,
   state: Player
-): ShinBraverTD {
-  return new ShinBraverTD(state.playerId, {
-    shinBraver: EnemyShinBraver(resources, gameObjectAction),
+): GenesisBraverTD {
+  return new GenesisBraverTD(state.playerId, {
+    genesisBraver: EnemyGenesisBraver(resources, gameObjectAction),
   });
 }

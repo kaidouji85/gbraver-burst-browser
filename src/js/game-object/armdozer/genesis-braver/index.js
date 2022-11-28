@@ -13,7 +13,7 @@ import { PlayerGenesisBraverView } from "./view/player-genesis-braver-view";
  * @param gameObjectAction ゲームオブジェクトアクション
  * @return 生成結果
  */
-export function playerGenesisBraver(
+export function PlayerGenesisBraver(
   resources: Resources,
   gameObjectAction: Stream<GameObjectAction>
 ): GenesisBraver {
@@ -27,7 +27,7 @@ export function playerGenesisBraver(
  * @param gameObjectAction ゲームオブジェクトアクション
  * @return 生成結果
  */
-export function enemyGenesisBraver(
+export function EnemyGenesisBraver(
   resources: Resources,
   gameObjectAction: Stream<GameObjectAction>
 ): GenesisBraver {
