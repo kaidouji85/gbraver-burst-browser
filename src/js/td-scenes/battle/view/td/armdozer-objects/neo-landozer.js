@@ -14,24 +14,21 @@ import type { Resources } from "../../../../../resource";
 import type { Stream } from "../../../../../stream/stream";
 import type { TDArmdozerObjects } from "./armdozer-objects";
 
-/**
- * 3Dレイヤー ネオランドーザ 3Dレイヤー フィールド
- */
+/** ネオランドーザ 3Dレイヤー フィールド */
 interface NeoLandozerTDField {
   /** ネオランドーザ */
   neoLandozer: NeoLandozer;
 }
 
-/**
- * 3Dレイヤー ネオランドーザ 3Dレイヤー
- */
+/** ネオランドーザ 3Dレイヤー */
 export class NeoLandozerTD implements NeoLandozerTDField, TDArmdozerObjects {
+  /** @override */
   playerId: PlayerId;
+  /** @override */
   neoLandozer: NeoLandozer;
 
   /**
    * コンストラクタ
-   *
    * @param playerId プレイヤーID
    * @param field フィールド
    */
@@ -40,27 +37,17 @@ export class NeoLandozerTD implements NeoLandozerTDField, TDArmdozerObjects {
     this.neoLandozer = field.neoLandozer;
   }
 
-  /**
-   * デストラクタ相当の処理
-   */
+  /** @override */
   destructor(): void {
     this.neoLandozer.destructor();
   }
 
-  /**
-   * アームドーザスプライトにダウンキャストする
-   *
-   * @return アームドーザスプライト
-   */
+  /** @override */
   sprite(): ArmDozerSprite {
     return this.neoLandozer;
   }
 
-  /**
-   * シーンに追加するオブジェクトを取得する
-   *
-   * @return シーンに追加するオブジェクト
-   */
+  /** @override */
   getObject3Ds(): typeof THREE.Object3D[] {
     return [this.neoLandozer.getObject3D()];
   }
@@ -68,7 +55,6 @@ export class NeoLandozerTD implements NeoLandozerTDField, TDArmdozerObjects {
 
 /**
  * プレイヤー 3Dレイヤー ネオランドーザ 3Dレイヤー
- *
  * @param resources リソース管理オブジェクト
  * @param gameObjectAction ゲームオブジェクトアクション
  * @param state プレイヤー情報
@@ -86,7 +72,6 @@ export function playerNeoLandozerTD(
 
 /**
  * 敵 3Dレイヤー ネオランドーザ 3Dレイヤー
- *
  * @param resources リソース管理オブジェクト
  * @param gameObjectAction ゲームオブジェクトアクション
  * @param state プレイヤー情報

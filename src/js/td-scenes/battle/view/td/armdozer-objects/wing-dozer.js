@@ -14,24 +14,21 @@ import type { Resources } from "../../../../../resource";
 import type { Stream } from "../../../../../stream/stream";
 import type { TDArmdozerObjects } from "./armdozer-objects";
 
-/**
- * 3Dレイヤー ウィングドーザ 3Dレイヤー フィールド
- */
+/** ウィングドーザ 3Dレイヤー フィールド */
 interface WingDozerTDField {
   /** ウィングドーザ */
   wingDozer: WingDozer;
 }
 
-/**
- * 3Dレイヤー ウィングドーザ 3Dレイヤー
- */
+/** ウィングドーザ 3Dレイヤー */
 export class WingDozerTD implements WingDozerTDField, TDArmdozerObjects {
+  /** @override */
   playerId: PlayerId;
+  /** @override */
   wingDozer: WingDozer;
 
   /**
    * コンストラクタ
-   *
    * @param playerId プレイヤーID
    * @param field フィールド
    */
@@ -40,27 +37,17 @@ export class WingDozerTD implements WingDozerTDField, TDArmdozerObjects {
     this.wingDozer = field.wingDozer;
   }
 
-  /**
-   * デストラクタ相当の処理
-   */
+  /** @override */
   destructor(): void {
     this.wingDozer.destructor();
   }
 
-  /**
-   * アームドーザスプライトにダウンキャストする
-   *
-   * @return アームドーザスプライト
-   */
+  /** @override */
   sprite(): ArmDozerSprite {
     return this.wingDozer;
   }
 
-  /**
-   * シーンに追加するオブジェクトを取得する
-   *
-   * @return シーンに追加するオブジェクト
-   */
+  /** @override */
   getObject3Ds(): typeof THREE.Object3D[] {
     return [this.wingDozer.getObject3D()];
   }
@@ -68,7 +55,6 @@ export class WingDozerTD implements WingDozerTDField, TDArmdozerObjects {
 
 /**
  * プレイヤー 3Dレイヤー ウィングドーザ 3Dレイヤー
- *
  * @param resources リソース管理オブジェクト
  * @param gameObjectAction ゲームオブジェクトアクション
  * @param state プレイヤー情報
@@ -86,7 +72,6 @@ export function playerWingDozerTD(
 
 /**
  * 敵 3Dレイヤー ウィングドーザ 3Dレイヤー
- *
  * @param resources リソース管理オブジェクト
  * @param gameObjectAction ゲームオブジェクトアクション
  * @param state プレイヤー情報
