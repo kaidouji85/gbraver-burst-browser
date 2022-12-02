@@ -1,7 +1,5 @@
 // @flow
 
-import { loadPartialConfig } from "@babel/core";
-
 import type { Resources } from "..";
 import { CANVAS_IMAGE_CONFIGS } from "../canvas-image";
 import { CUBE_TEXTURE_CONFIGS } from "../cube-texture";
