@@ -7,8 +7,8 @@ import type { GlTFConfig } from "../gltf";
 import type { SoundConfig } from "../sound";
 import type { TextureConfig } from "../texture/resource";
 
-/** リソースをあつめたもの */
-type ResourceConfigs = {
+/** リソース設定をあつめたもの */
+type Configs = {
   /** 読み込むGLTFモデル */
   gltfConfigs: GlTFConfig[],
   /** 読み込むテクスチャ */
@@ -28,9 +28,9 @@ type ResourceConfigs = {
  * @return 抽出結果
  */
 export function extractUnloadedResorceConfigs(
-  configs: ResourceConfigs,
+  configs: Configs,
   resources: Resources
-): ResourceConfigs {
+): Configs {
   const loadedGltfIDs = resources.gltfs.map((v) => v.id);
   const loadedTextureIDs = resources.textures.map((v) => v.id);
   const loadedCubeTextureIDs = resources.cubeTextures.map((v) => v.id);
