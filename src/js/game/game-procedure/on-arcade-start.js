@@ -4,7 +4,7 @@ import { waitTime } from "../../wait/wait-time";
 import { playerSelectConnector } from "../dom-scene-binder/action-connector/player-select-connector";
 import { MAX_LOADING_TIME } from "../dom-scene-binder/max-loading-time";
 import type { GameProps } from "../game-props";
-import { fullResourceLoading } from "./full-resource-loading";
+import { loadFullResource } from "./load-full-resource";
 
 /**
  * アーケードモード開始
@@ -15,7 +15,7 @@ import { fullResourceLoading } from "./full-resource-loading";
  */
 export async function onArcadeStart(props: GameProps): Promise<void> {
   if (!props.isFullResourceLoaded) {
-    await fullResourceLoading(props);
+    await loadFullResource(props);
   }
 
   props.inProgress = { type: "NPCBattle", subFlow: { type: "PlayerSelect" } };
