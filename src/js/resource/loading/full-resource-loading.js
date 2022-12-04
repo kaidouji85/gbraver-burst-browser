@@ -8,7 +8,10 @@ import type { PathId } from "../path";
 import { PathIds } from "../path";
 import type { ResourceRoot } from "../resource-root";
 import { SOUND_CONFIGS } from "../sound";
-import { TEXTURE_CONFIGS } from "../texture/configs";
+import {
+  DEVELOPING_TEXTURE_CONFIGS,
+  TEXTURE_CONFIGS,
+} from "../texture/configs";
 import { extractUnloadedResorceConfigs } from "./extract-unloaded-resorce-configs";
 import { mergeResources } from "./merge-resources";
 import type { ResourceLoading } from "./resource-loading";
@@ -32,9 +35,17 @@ const FULL_RESOURCE_CONFIGS = {
   soundConfigs: SOUND_CONFIGS,
 };
 
+/** 開発中素材も含めたフルリソース設定 */
+const DEVELOPING_FULL_RESOURCE_CONFIGS = {
+  gltfConfigs: GLTF_CONFIGS,
+  textureConfigs: [...TEXTURE_CONFIGS, ...DEVELOPING_TEXTURE_CONFIGS],
+  cubeTextureConfigs: CUBE_TEXTURE_CONFIGS,
+  canvasImageConfigs: CANVAS_IMAGE_CONFIGS,
+  soundConfigs: SOUND_CONFIGS,
+};
+
 /**
  * フルリソースを読み込む
- *
  * @param resourceRoot リソースルート
  * @return リソース読み込みオブジェクト
  */
@@ -49,10 +60,24 @@ export function fullResourceLoading(
 }
 
 /**
+ * 開発中素材も含めたフルリソースを読み込む
+ * @param resourceRoot リソースルート
+ * @return リソース読み込みオブジェクト
+ */
+export function developingFullResourceLoading(
+  resourceRoot: ResourceRoot
+): ResourceLoading {
+  return resourceLoading({
+    ...DEVELOPING_FULL_RESOURCE_CONFIGS,
+    resourceRoot,
+    preFetchPaths: PRE_FETCH_PATH_IDS,
+  });
+}
+
+/**
  * フルリソースの差分読み込み
  * 引数のリソース管理オブジェクトで読み込まれたものはスキップする
  * なお、本関数ではリソースパスのプリフェッチは行わない
- *
  * @param resources リソース管理オブジェクト
  * @return リソース読み込みオブジェクト
  */
