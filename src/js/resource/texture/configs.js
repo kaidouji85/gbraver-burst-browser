@@ -248,11 +248,6 @@ export const TEXTURE_CONFIGS: TextureConfig[] = [
     id: TEXTURE_IDS.WING_DOZER_BURST_BUTTON_ICON,
     path: "armdozer/wing-dozer/burst-button-icon.webp",
   },
-  // ジェネシスブレイバー関連
-  {
-    id: TEXTURE_IDS.GENESIS_BRAVER_STAND,
-    path: "armdozer/genesis-braver/stand.PNG",
-  },
   // シンヤ関連
   {
     id: TEXTURE_IDS.SHINYA_CUTIN,
@@ -363,5 +358,14 @@ export const TEXTURE_CONFIGS: TextureConfig[] = [
   {
     id: TEXTURE_IDS.DRAW,
     path: "result/draw.png",
+  },
+];
+
+/** 開発中のテクスチャリソース設定をあつめたもの */
+export const DEVELOPING_TEXTURE_CONFIGS: TextureConfig[] = [
+  // ジェネシスブレイバー関連
+  {
+    id: TEXTURE_IDS.GENESIS_BRAVER_STAND,
+    path: "armdozer/genesis-braver/stand.PNG",
   },
 ];
