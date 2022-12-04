@@ -4,7 +4,7 @@ import "../../src/css/style.css";
 
 import { CssVH } from "../../src/js/css/vh";
 import type { Resources } from "../../src/js/resource";
-import { fullResourceLoading } from "../../src/js/resource/loading/full-resource-loading";
+import { developingFullResourceLoading } from "../../src/js/resource/loading/full-resource-loading";
 import { resizeStream } from "../../src/js/window/resize";
 import { StorybookResourceRoot } from "../storybook-resource-root";
 
@@ -37,7 +37,7 @@ export const domStub =
     new CssVH(resize);
 
     const resourceRoot = new StorybookResourceRoot();
-    const resourceLoading = fullResourceLoading(resourceRoot);
+    const resourceLoading = developingFullResourceLoading(resourceRoot);
     resourceLoading.resources.then((resources) => {
       const component = creator(resources);
       root.appendChild(component);
