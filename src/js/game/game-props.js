@@ -117,6 +117,8 @@ export interface GameProps {
   bgm: BGMManager;
   /** 開発中のチュートリアルをプレイできるか否かのフラグ、trueでプレイできる */
   canPlayTutorialInDevelopment: boolean;
+  /** 開発中のリソースをロードするか否かのフラグ、trueでロードする */
+  shouldLoadDevelopingResource: boolean;
 }
 
 /** GamePropsジェネレータパラメータ */
@@ -143,6 +145,8 @@ export type GamePropsGeneratorParam = {
   config: GbraverBurstBrowserConfigRepository,
   /** 開発中のチュートリアルをプレイできるか否かのフラグ、trueでプレイできる */
   canPlayTutorialInDevelopment: boolean,
+  /** 開発中のリソースをロードするか否かのフラグ、trueでロードする */
+  shouldLoadDevelopingResource: boolean,
 };
 
 /**
@@ -187,5 +191,6 @@ export function generateGameProps(param: GamePropsGeneratorParam): GameProps {
     serviceWorker: null,
     bgm: createBGMManager(),
     canPlayTutorialInDevelopment: param.canPlayTutorialInDevelopment,
+    shouldLoadDevelopingResource: param.shouldLoadDevelopingResource,
   };
 }

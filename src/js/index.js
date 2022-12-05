@@ -40,6 +40,8 @@ async function main(): Promise<void> {
     isAPIServerEnable: GBRAVER_BURST_IS_API_SERVER_ENABLE === "true",
     canPlayTutorialInDevelopment:
       GBRAVER_BURST_CAN_PLAY_TUTORIAL_IN_DEVELOPMENT === "true",
+    shouldLoadDevelopingResource:
+      GBRAVER_BURST_SHOULD_LOAD_DEVELOPING_RESOURCE === "true",
   });
   await game.initialize();
 }
