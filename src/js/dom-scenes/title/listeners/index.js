@@ -6,7 +6,6 @@ import { onArcadePush } from "./on-arcade-push";
 import { onAvatarPush } from "./on-avatar-push";
 import { onCasualMatchPush } from "./on-casual-match-push";
 import { onConfigPush } from "./on-config-push";
-import { onHowToPlayPush } from "./on-how-to-play-push";
 import { onLoginPush } from "./on-login-push";
 import { onLogoutPush } from "./on-logout-push";
 import { onPushDeleteAccount } from "./on-push-delete-account";
@@ -44,9 +43,6 @@ export function bindEventListeners(props: TitleProps): Unsubscriber[] {
     }),
     pushDOMStream(props.casualMatch).subscribe((action) => {
       onCasualMatchPush(props, action);
-    }),
-    pushDOMStream(props.howToPlay).subscribe((action) => {
-      onHowToPlayPush(props, action);
     }),
     pushDOMStream(props.config).subscribe((action) => {
       onConfigPush(props, action);
