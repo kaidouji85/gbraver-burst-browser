@@ -38,7 +38,7 @@ export type TitleProps = {
   arcade: HTMLElement,
   /** カジュアルマッチ */
   casualMatch: HTMLElement,
-  /** 遊び方 */
+  /** @deprecated 遊び方 */
   howToPlay: HTMLElement,
   /** 設定 */
   config: HTMLElement,
@@ -64,7 +64,7 @@ export type TitleProps = {
   pushArcade: StreamSource<void>,
   /** カジュアルマッチ押下ストリーム */
   pushCasualMatch: StreamSource<void>,
-  /** 遊び方押下ストリーム */
+  /** @deprecated 遊び方押下ストリーム */
   pushHowToPlay: StreamSource<void>,
   /** 設定押下ストリーム */
   pushConfig: StreamSource<void>,
