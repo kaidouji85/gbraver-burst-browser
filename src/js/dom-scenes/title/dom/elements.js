@@ -12,7 +12,6 @@ type Elements = {
   tutorial: HTMLElement,
   arcade: HTMLElement,
   casualMatch: HTMLElement,
-  howToPlay: HTMLElement,
   config: HTMLElement,
 };
 
@@ -51,9 +50,6 @@ export function extractElements(root: HTMLElement, ids: DataIDs): Elements {
   const casualMatch =
     root.querySelector(`[data-id="${ids.casualMatch}"]`) ??
     document.createElement("div");
-  const howToPlay =
-    root.querySelector(`[data-id="${ids.howToPlay}"]`) ??
-    document.createElement("div");
   const config =
     root.querySelector(`[data-id="${ids.config}"]`) ??
     document.createElement("div");
@@ -67,7 +63,6 @@ export function extractElements(root: HTMLElement, ids: DataIDs): Elements {
     tutorial,
     arcade,
     casualMatch,
-    howToPlay,
     config,
   };
 }

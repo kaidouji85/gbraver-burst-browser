@@ -19,6 +19,8 @@ export type RootInnerHTMLParams = {
   account: TitleAccount,
   /** APIサーバが利用可能か否か、trueで利用可能である */
   isApiServerEnable: boolean,
+  /** 遊び方スライドのURL */
+  howToPlayURL: string,
   /** 利用規約ページのURL */
   termsOfServiceURL: string,
   /** プライバシーポリシーページのURL */
@@ -84,7 +86,7 @@ export function rootInnerHTML(
         <span class="${ROOT_CLASS}__copy-rights-owner">Pegass85</span>
       </small>
       <small class="${ROOT_CLASS}__music">音楽 魔王魂</small>
-      <a class="${ROOT_CLASS}__how-to-play" data-id="${ids.howToPlay}">遊び方</a>
+      <a class="${ROOT_CLASS}__how-to-play" href="${params.howToPlayURL}" target="_blank" rel="noopener">遊び方</a>
       <a class="${ROOT_CLASS}__terms-of-service" href="${params.termsOfServiceURL}" target="_blank" rel="noopener">利用規約</a>
       <a class="${ROOT_CLASS}__privacy-policy" href="${params.privacyPolicyURL}" target="_blank" rel="noopener">プライバシーポリシー</a>
       <a class="${ROOT_CLASS}__contact" href="${params.contactURL}" target="_blank" rel="noopener">問い合わせ</a>

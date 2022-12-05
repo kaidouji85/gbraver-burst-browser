@@ -11,6 +11,5 @@ export type DataIDs = {
   tutorial: string,
   arcade: string,
   casualMatch: string,
-  howToPlay: string,
   config: string,
 };

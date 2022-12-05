@@ -85,15 +85,6 @@ export class Title implements DOMScene {
   }
 
   /**
-   * 遊び方ボタン押下通知
-   *
-   * @return イベント通知ストリーム
-   */
-  pushHowToPlayNotifier(): Stream<void> {
-    return this.#props.pushHowToPlay;
-  }
-
-  /**
    * 設定ボタン押下通知
    *
    * @return イベント通知ストリーム

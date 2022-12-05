@@ -32,16 +32,6 @@ export type MatchingCanceled = {
   type: "MatchingCanceled",
 };
 
-/** 遊び方動画を表示 */
-export type ShowHowToPlay = {
-  type: "ShowHowToPlay",
-};
-
-/** 遊び方ダイアログを閉じる */
-export type EndHowToPlay = {
-  type: "EndHowToPlay",
-};
-
 /**
  * プレイヤー選択完了
  */
@@ -200,8 +190,6 @@ export type GameAction =
   | ArcadeStart
   | CasualMatchStart
   | MatchingCanceled
-  | ShowHowToPlay
-  | EndHowToPlay
   | SelectionComplete
   | SelectionCancel
   | DifficultySelectionComplete

@@ -13,7 +13,6 @@ import { onDeleteAccount } from "./on-delete-account";
 import { onDifficultySelectionCancel } from "./on-difficulty-selection-cancel";
 import { onDifficultySelectionComplete } from "./on-difficulty-selection-complete";
 import { onEndBattle } from "./on-end-battle";
-import { onEndHowToPlay } from "./on-end-how-to-play";
 import { onEndNetworkError } from "./on-end-network-error";
 import { onEndNPCEnding } from "./on-end-npc-ending";
 import { onExitMailVerifiedIncomplete } from "./on-exit-mai-verified-incomplete";
@@ -25,7 +24,6 @@ import { onReloadRequest } from "./on-reload-request";
 import { onSelectTutorialStage } from "./on-select-tutorial-stage";
 import { onSelectionCancel } from "./on-selection-cancel";
 import { onSelectionComplete } from "./on-selection-complete";
-import { onShowHowToPlay } from "./on-show-how-to-play";
 import { onSuddenlyEndBattle } from "./on-suddenly-battle-end";
 import { onTutorialStart } from "./on-tutorial-start";
 import { onUniversalLogin } from "./on-universal-login";
@@ -55,8 +53,6 @@ export function onGameAction(props: GameProps, action: GameAction) {
     onCasualMatchStart(props);
   } else if (action.type === "MatchingCanceled") {
     onMatchingCanceled(props);
-  } else if (action.type === "ShowHowToPlay") {
-    onShowHowToPlay(props);
   } else if (action.type === "SelectionComplete") {
     onSelectionComplete(props, action);
   } else if (action.type === "SelectionCancel") {
@@ -67,8 +63,6 @@ export function onGameAction(props: GameProps, action: GameAction) {
     onDifficultySelectionCancel(props);
   } else if (action.type === "EndNPCEnding") {
     onEndNPCEnding(props);
-  } else if (action.type === "EndHowToPlay") {
-    onEndHowToPlay(props);
   } else if (action.type === "UniversalLogin") {
     onUniversalLogin(props);
   } else if (action.type === "Logout") {
