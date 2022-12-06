@@ -16,7 +16,7 @@
 }
 
 .armdozer-status__name {
-  min-width: calc(var(--responsive-font-size) * 10);
+  flex: auto 1 1;
 }
 
 .armdozer-status__parameters {
