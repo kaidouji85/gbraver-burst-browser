@@ -37,9 +37,13 @@ function rootInnerHTML(ids: DataIDs): string {
         <span class="${ROOT_CLASS_NAME}__speed-value" data-id="${ids.speed}" ></span>
       </div>
     </div>
-    <div class="${ROOT_CLASS_NAME}__burst">
-      <span class="${ROOT_CLASS_NAME}__burst-label">バースト</span>
-      <span class="${ROOT_CLASS_NAME}__burst-description" data-id="${ids.burst}"></span>
+    <div class="${ROOT_CLASS_NAME}__burst-overview">
+      <span class="${ROOT_CLASS_NAME}__burst-overview-label">バースト</span>
+      <span class="${ROOT_CLASS_NAME}__burst-overview-contents">ここにバーストの概要を書く、最大でも2行程度</span>
+    </div>
+    <div class="${ROOT_CLASS_NAME}__burst-detail">
+     <span class="${ROOT_CLASS_NAME}__burst-detail-label">詳細</span>
+     <span class="${ROOT_CLASS_NAME}__burst-detail-contents" data-id="${ids.burst}"></span>
     </div>
   `;
 }

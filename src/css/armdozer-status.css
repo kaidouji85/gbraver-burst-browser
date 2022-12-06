@@ -3,7 +3,7 @@
   font-size: calc(var(--responsive-font-size) * 0.8);
   width: 50vw;
   box-sizing: border-box;
-  height: calc(var(--responsive-font-size) * 8);
+  min-height: calc(var(--responsive-font-size) * 8);
   padding: calc(var(--responsive-font-size) * 0.5);
   background-color: rgba(10, 10, 10, 0.7);
   border: var(--dialog-border);
@@ -13,6 +13,8 @@
 
 .armdozer-status__basic-status {
   display: flex;
+  border-bottom: 1px dashed var(--font-color);
+  padding-bottom: calc(var(--responsive-font-size) * 0.5);
 }
 
 .armdozer-status__name {
@@ -31,12 +33,21 @@
 }
 
 .armdozer-status__hp-value,
-.armdozer-status__power-value,
-.armdozer-status__speed-value {
-  border-bottom: 1px solid var(--button-background-color);
+.armdozer-status__power-value {
+  margin-right: var(--responsive-font-size);
 }
 
-.armdozer-status__hp-value,
-.armdozer-status__power-value {
-  margin-right: calc(var(--responsive-font-size) * 1);
+.armdozer-status__burst-overview {
+  margin-top: calc(var(--responsive-font-size) * 0.5);
+  margin-bottom: calc(var(--responsive-font-size) * 0.5);
+}
+
+.armdozer-status__burst-overview-label {
+  background-color: var(--button-background-color);
+  padding: calc(var(--responsive-font-size) * 0.2);
+}
+
+.armdozer-status__burst-detail-label {
+  background-color: var(--sub-button-background-color);
+  padding: calc(var(--responsive-font-size) * 0.2);
 }
