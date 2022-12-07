@@ -4,7 +4,8 @@ import type { ArmDozerId } from "gbraver-burst-core";
 import { ArmDozers } from "gbraver-burst-core";
 
 import { domUuid } from "../../../uuid/dom-uuid";
-import { burstTemplate } from "./status-template";
+import { burstDetail } from "./burst-detail";
+import { burstOverview } from "./burst-overview";
 
 /**ルート要素のクラス名 */
 const ROOT_CLASS_NAME = "armdozer-status";
@@ -15,7 +16,8 @@ type DataIDs = {
   hp: string,
   power: string,
   speed: string,
-  burst: string,
+  burstOverview: string,
+  burstDetail: string,
 };
 
 /**
@@ -26,18 +28,22 @@ type DataIDs = {
  */
 function rootInnerHTML(ids: DataIDs): string {
   return `
-    <div class="${ROOT_CLASS_NAME}__name" data-id="${ids.name}"></div>
     <div class="${ROOT_CLASS_NAME}__basic-status">
+      <div class="${ROOT_CLASS_NAME}__name" data-id="${ids.name}"></div>
       <span class="${ROOT_CLASS_NAME}__hp-label">HP</span>
       <span class="${ROOT_CLASS_NAME}__hp-value" data-id="${ids.hp}"></span>
       <span class="${ROOT_CLASS_NAME}__power-label">攻撃</span>
       <span class="${ROOT_CLASS_NAME}__power-value" data-id="${ids.power}" ></span>
-      <span class="${ROOT_CLASS_NAME}__power-label">機動</span>
-      <span class="${ROOT_CLASS_NAME}__power-value" data-id="${ids.speed}" ></span>
+      <span class="${ROOT_CLASS_NAME}__speed-label">機動</span>
+      <span class="${ROOT_CLASS_NAME}__speed-value" data-id="${ids.speed}" ></span>
     </div>
-    <div class="${ROOT_CLASS_NAME}__burst">
-      <span class="${ROOT_CLASS_NAME}__burst-label">バースト</span>
-      <span class="${ROOT_CLASS_NAME}__burst-description" data-id="${ids.burst}"></span>
+    <div class="${ROOT_CLASS_NAME}__burst-overview">
+      <span class="${ROOT_CLASS_NAME}__burst-overview-label">バースト</span>
+      <span class="${ROOT_CLASS_NAME}__burst-overview-contents" data-id="${ids.burstOverview}"></span>
+    </div>
+    <div class="${ROOT_CLASS_NAME}__burst-detail">
+     <span class="${ROOT_CLASS_NAME}__burst-detail-label">詳細</span>
+     <span class="${ROOT_CLASS_NAME}__burst-detail-contents" data-id="${ids.burstDetail}"></span>
     </div>
   `;
 }
@@ -48,7 +54,8 @@ type Elements = {
   hp: HTMLElement,
   power: HTMLElement,
   speed: HTMLElement,
-  burst: HTMLElement,
+  burstOverview: HTMLElement,
+  burstDetail: HTMLElement,
 };
 
 /**
@@ -71,10 +78,13 @@ function extractElements(root: HTMLElement, ids: DataIDs): Elements {
   const speed =
     root.querySelector(`[data-id="${ids.speed}"]`) ??
     document.createElement("div");
-  const burst =
-    root.querySelector(`[data-id="${ids.burst}"]`) ??
+  const burstOverview =
+    root.querySelector(`[data-id="${ids.burstOverview}"]`) ??
     document.createElement("div");
-  return { name, hp, power, speed, burst };
+  const burstDetail =
+    root.querySelector(`[data-id="${ids.burstDetail}"]`) ??
+    document.createElement("div");
+  return { name, hp, power, speed, burstOverview, burstDetail };
 }
 
 /** アームドーザステータス */
@@ -84,7 +94,8 @@ export class ArmdozerStatus {
   #hp: HTMLElement;
   #power: HTMLElement;
   #speed: HTMLElement;
-  #burst: HTMLElement;
+  #burstOverview: HTMLElement;
+  #burstDetail: HTMLElement;
 
   /**
    * コンストラクタ
@@ -95,7 +106,8 @@ export class ArmdozerStatus {
       hp: domUuid(),
       power: domUuid(),
       speed: domUuid(),
-      burst: domUuid(),
+      burstOverview: domUuid(),
+      burstDetail: domUuid(),
     };
     this.#root = document.createElement("div");
     this.#root.className = ROOT_CLASS_NAME;
@@ -106,7 +118,8 @@ export class ArmdozerStatus {
     this.#hp = elements.hp;
     this.#power = elements.power;
     this.#speed = elements.speed;
-    this.#burst = elements.burst;
+    this.#burstOverview = elements.burstOverview;
+    this.#burstDetail = elements.burstDetail;
   }
 
   /**
@@ -133,7 +146,8 @@ export class ArmdozerStatus {
     this.#hp.innerText = `${target.maxHp}`;
     this.#power.innerText = `${target.power}`;
     this.#speed.innerText = `${target.speed}`;
-    this.#burst.innerHTML = burstTemplate(target.burst)
+    this.#burstOverview.innerText = burstOverview(target.burst);
+    this.#burstDetail.innerHTML = burstDetail(target.burst)
       .map(
         (v) =>
           `<span class="${ROOT_CLASS_NAME}__burst__content__line">${v}</span>`
