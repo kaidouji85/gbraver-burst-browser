@@ -9,43 +9,40 @@ import type {
 } from "gbraver-burst-core";
 
 /**
- * バーストの説明文テンプレート
- *
- * @param burst バースト詳細
+ * バースト詳細を生成する
+ * @param burst 情報
  * @return 説明文
  */
-export function burstTemplate(burst: Burst): string[] {
+export function burstDetail(burst: Burst): string[] {
   switch (burst.type) {
     case "RecoverBattery":
-      return recoverBatteryTemplate(burst);
+      return recoverBatteryDetail(burst);
     case "BuffPower":
-      return powerBuffTemplate(burst);
+      return powerBuffDetail(burst);
     case "LightningBarrier":
-      return lightningBarrierTemplate(burst);
+      return lightningBarrierDetail(burst);
     case "ContinuousAttack":
-      return continuousAttackTemplate(burst);
+      return continuousAttackDetail(burst);
     default:
       return [];
   }
 }
 
 /**
- * バッテリー回復の説明文テンプレート
- *
- * @param burst バースト詳細
+ * バッテリー回復詳細
+ * @param burst バースト情報
  * @return 説明文
  */
-function recoverBatteryTemplate(burst: RecoverBattery): string[] {
+function recoverBatteryDetail(burst: RecoverBattery): string[] {
   return [`バッテリーを${burst.recoverBattery}回復する。`];
 }
 
 /**
- * 攻撃バフの説明文テンプレート
- *
- * @param burst バースト詳細
+ * 攻撃バフ詳細
+ * @param burst バースト情報
  * @return 説明文
  */
-function powerBuffTemplate(burst: BuffPower): string[] {
+function powerBuffDetail(burst: BuffPower): string[] {
   return [
     `バッテリーを${burst.recoverBattery}回復する。`,
     `${burst.duration}ターンだけ、攻撃+${burst.buffPower}する。`,
@@ -53,12 +50,11 @@ function powerBuffTemplate(burst: BuffPower): string[] {
 }
 
 /**
- * ダメージ反射の説明文テンプレート
- *
- * @param burst バースト詳細
+ * ダメージ反射詳細
+ * @param burst バースト情報
  * @return 説明文
  */
-function lightningBarrierTemplate(burst: LightningBarrier): string[] {
+function lightningBarrierDetail(burst: LightningBarrier): string[] {
   return [
     `バッテリーを${burst.recoverBattery}回復する。`,
     `${burst.duration}ターンだけ、相手の攻撃がヒットした場合、相手に${burst.damage}ダメージを与える。`,
@@ -66,12 +62,11 @@ function lightningBarrierTemplate(burst: LightningBarrier): string[] {
 }
 
 /**
- * 連続攻撃の説明文テンプレート
- *
- * @param burst バースト詳細
+ * 連続攻撃詳細
+ * @param burst バースト情報
  * @return 説明文
  */
-function continuousAttackTemplate(burst: ContinuousAttack): string[] {
+function continuousAttackDetail(burst: ContinuousAttack): string[] {
   return [
     `バッテリーを${burst.recoverBattery}回復する。`,
     `自分ターン終了時に、バッテリー回復なしで再び自分ターンとなる。`,

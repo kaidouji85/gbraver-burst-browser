@@ -5,7 +5,7 @@ import { ArmDozers } from "gbraver-burst-core";
 
 import { domUuid } from "../../../uuid/dom-uuid";
 import { burstOverview } from "./burst-overview";
-import { burstTemplate } from "./status-template";
+import { burstDetail } from "./burst-detail";
 
 /**ルート要素のクラス名 */
 const ROOT_CLASS_NAME = "armdozer-status";
@@ -149,7 +149,7 @@ export class ArmdozerStatus {
     this.#power.innerText = `${target.power}`;
     this.#speed.innerText = `${target.speed}`;
     this.#burstOverview.innerText = burstOverview(target.burst);
-    this.#burst.innerHTML = burstTemplate(target.burst)
+    this.#burst.innerHTML = burstDetail(target.burst)
       .map(
         (v) =>
           `<span class="${ROOT_CLASS_NAME}__burst__content__line">${v}</span>`
