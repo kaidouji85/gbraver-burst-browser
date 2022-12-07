@@ -19,10 +19,6 @@
   padding-bottom: calc(var(--responsive-font-size) * 0.5);
 }
 
-.armdozer-status__name {
-  flex: auto 1 1;
-}
-
 .armdozer-status__hp-label,
 .armdozer-status__power-label,
 .armdozer-status__speed-label {
