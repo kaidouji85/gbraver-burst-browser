@@ -17,7 +17,7 @@ type DataIDs = {
   power: string,
   speed: string,
   burstOverview: string,
-  burst: string,
+  burstDetail: string,
 };
 
 /**
@@ -45,7 +45,7 @@ function rootInnerHTML(ids: DataIDs): string {
     </div>
     <div class="${ROOT_CLASS_NAME}__burst-detail">
      <span class="${ROOT_CLASS_NAME}__burst-detail-label">詳細</span>
-     <span class="${ROOT_CLASS_NAME}__burst-detail-contents" data-id="${ids.burst}"></span>
+     <span class="${ROOT_CLASS_NAME}__burst-detail-contents" data-id="${ids.burstDetail}"></span>
     </div>
   `;
 }
@@ -57,7 +57,7 @@ type Elements = {
   power: HTMLElement,
   speed: HTMLElement,
   burstOverview: HTMLElement,
-  burst: HTMLElement,
+  burstDetail: HTMLElement,
 };
 
 /**
@@ -83,10 +83,10 @@ function extractElements(root: HTMLElement, ids: DataIDs): Elements {
   const burstOverview =
     root.querySelector(`[data-id="${ids.burstOverview}"]`) ??
     document.createElement("div");
-  const burst =
-    root.querySelector(`[data-id="${ids.burst}"]`) ??
+  const burstDetail =
+    root.querySelector(`[data-id="${ids.burstDetail}"]`) ??
     document.createElement("div");
-  return { name, hp, power, speed, burstOverview, burst };
+  return { name, hp, power, speed, burstOverview, burstDetail };
 }
 
 /** アームドーザステータス */
@@ -97,7 +97,7 @@ export class ArmdozerStatus {
   #power: HTMLElement;
   #speed: HTMLElement;
   #burstOverview: HTMLElement;
-  #burst: HTMLElement;
+  #burstDetail: HTMLElement;
 
   /**
    * コンストラクタ
@@ -109,7 +109,7 @@ export class ArmdozerStatus {
       power: domUuid(),
       speed: domUuid(),
       burstOverview: domUuid(),
-      burst: domUuid(),
+      burstDetail: domUuid(),
     };
     this.#root = document.createElement("div");
     this.#root.className = ROOT_CLASS_NAME;
@@ -121,7 +121,7 @@ export class ArmdozerStatus {
     this.#power = elements.power;
     this.#speed = elements.speed;
     this.#burstOverview = elements.burstOverview;
-    this.#burst = elements.burst;
+    this.#burstDetail = elements.burstDetail;
   }
 
   /**
@@ -149,7 +149,7 @@ export class ArmdozerStatus {
     this.#power.innerText = `${target.power}`;
     this.#speed.innerText = `${target.speed}`;
     this.#burstOverview.innerText = burstOverview(target.burst);
-    this.#burst.innerHTML = burstDetail(target.burst)
+    this.#burstDetail.innerHTML = burstDetail(target.burst)
       .map(
         (v) =>
           `<span class="${ROOT_CLASS_NAME}__burst__content__line">${v}</span>`
