@@ -51,7 +51,7 @@ function powerBuffOverview(burst: BuffPower): string {
  * @return 説明文
  */
 function lightningBarrierOverview(burst: LightningBarrier): string {
-  return `バッテリー${burst.recoverBattery}、${burst.damage}ダメージのカウンター`;
+  return `バッテリー${burst.recoverBattery}回復、${burst.damage}ダメージのカウンター`;
 }
 
 /**
