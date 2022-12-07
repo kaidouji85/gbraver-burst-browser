@@ -1,5 +1,6 @@
 /** プレイヤー選択画面 アームドーザステータスウインドウ */
 .armdozer-status{
+  --parameter-value-width: calc(var(--responsive-font-size) * 3);
   font-size: calc(var(--responsive-font-size) * 0.8);
   width: 50vw;
   box-sizing: border-box;
@@ -12,7 +13,8 @@
 }
 
 .armdozer-status__basic-status {
-  display: flex;
+  display: grid;
+  grid-template-columns: 1fr auto var(--parameter-value-width) auto var(--parameter-value-width) auto var(--parameter-value-width);
   border-bottom: 1px dashed var(--font-color);
   padding-bottom: calc(var(--responsive-font-size) * 0.5);
 }
@@ -21,20 +23,11 @@
   flex: auto 1 1;
 }
 
-.armdozer-status__parameters {
-  display: flex;
-}
-
 .armdozer-status__hp-label,
 .armdozer-status__power-label,
 .armdozer-status__speed-label {
   background-color: var(--button-background-color);
   padding: 0 calc(var(--responsive-font-size) * 0.2);
-}
-
-.armdozer-status__hp-value,
-.armdozer-status__power-value {
-  margin-right: var(--responsive-font-size);
 }
 
 .armdozer-status__burst-overview {
