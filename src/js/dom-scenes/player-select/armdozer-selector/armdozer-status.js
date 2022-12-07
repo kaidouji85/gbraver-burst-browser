@@ -4,6 +4,7 @@ import type { ArmDozerId } from "gbraver-burst-core";
 import { ArmDozers } from "gbraver-burst-core";
 
 import { domUuid } from "../../../uuid/dom-uuid";
+import { burstOverview } from "./burst-overview";
 import { burstTemplate } from "./status-template";
 
 /**ルート要素のクラス名 */
@@ -15,6 +16,7 @@ type DataIDs = {
   hp: string,
   power: string,
   speed: string,
+  burstOverview: string,
   burst: string,
 };
 
@@ -39,7 +41,7 @@ function rootInnerHTML(ids: DataIDs): string {
     </div>
     <div class="${ROOT_CLASS_NAME}__burst-overview">
       <span class="${ROOT_CLASS_NAME}__burst-overview-label">バースト</span>
-      <span class="${ROOT_CLASS_NAME}__burst-overview-contents">ここにバーストの概要を書く、最大でも2行程度</span>
+      <span class="${ROOT_CLASS_NAME}__burst-overview-contents" data-id="${ids.burstOverview}"></span>
     </div>
     <div class="${ROOT_CLASS_NAME}__burst-detail">
      <span class="${ROOT_CLASS_NAME}__burst-detail-label">詳細</span>
@@ -54,6 +56,7 @@ type Elements = {
   hp: HTMLElement,
   power: HTMLElement,
   speed: HTMLElement,
+  burstOverview: HTMLElement,
   burst: HTMLElement,
 };
 
@@ -77,10 +80,13 @@ function extractElements(root: HTMLElement, ids: DataIDs): Elements {
   const speed =
     root.querySelector(`[data-id="${ids.speed}"]`) ??
     document.createElement("div");
+  const burstOverview =
+    root.querySelector(`[data-id="${ids.burstOverview}"]`) ??
+    document.createElement("div");
   const burst =
     root.querySelector(`[data-id="${ids.burst}"]`) ??
     document.createElement("div");
-  return { name, hp, power, speed, burst };
+  return { name, hp, power, speed, burstOverview, burst };
 }
 
 /** アームドーザステータス */
@@ -90,6 +96,7 @@ export class ArmdozerStatus {
   #hp: HTMLElement;
   #power: HTMLElement;
   #speed: HTMLElement;
+  #burstOverview: HTMLElement;
   #burst: HTMLElement;
 
   /**
@@ -101,6 +108,7 @@ export class ArmdozerStatus {
       hp: domUuid(),
       power: domUuid(),
       speed: domUuid(),
+      burstOverview: domUuid(),
       burst: domUuid(),
     };
     this.#root = document.createElement("div");
@@ -112,6 +120,7 @@ export class ArmdozerStatus {
     this.#hp = elements.hp;
     this.#power = elements.power;
     this.#speed = elements.speed;
+    this.#burstOverview = elements.burstOverview;
     this.#burst = elements.burst;
   }
 
@@ -139,6 +148,7 @@ export class ArmdozerStatus {
     this.#hp.innerText = `${target.maxHp}`;
     this.#power.innerText = `${target.power}`;
     this.#speed.innerText = `${target.speed}`;
+    this.#burstOverview.innerText = burstOverview(target.burst);
     this.#burst.innerHTML = burstTemplate(target.burst)
       .map(
         (v) =>
