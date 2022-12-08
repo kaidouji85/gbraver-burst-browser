@@ -12,17 +12,16 @@
 }
 
 .armdozer-status__basic-status {
-  --parameter-label-width: calc(var(--responsive-font-size) * 2.5);
-  --parameter-value-width: calc(var(--responsive-font-size) * 3);
+  --parameter-label-width: calc(var(--responsive-font-size) * 2.2);
   display: grid;
   grid-template-columns: 
     1fr
     var(--parameter-label-width)
-    var(--parameter-value-width)
+    auto
     var(--parameter-label-width)
-    var(--parameter-value-width)
+    auto
     var(--parameter-label-width)
-    var(--parameter-value-width);
+    auto;
   border-bottom: 1px dashed var(--font-color);
   padding-bottom: calc(var(--responsive-font-size) * 0.5);
 }
@@ -33,6 +32,12 @@
   background-color: var(--button-background-color);
   text-align: center;
 }
+
+.armdozer-status__hp-value,
+.armdozer-status__power-value {
+  margin-right: calc(var(--responsive-font-size) * 0.2);
+}
+
 
 .armdozer-status__burst-overview {
   margin-top: calc(var(--responsive-font-size) * 0.5);
