@@ -366,6 +366,6 @@ export const DEVELOPING_TEXTURE_CONFIGS: TextureConfig[] = [
   // ジェネシスブレイバー関連
   {
     id: TEXTURE_IDS.GENESIS_BRAVER_STAND,
-    path: "armdozer/genesis-braver/stand.PNG",
+    path: "armdozer/genesis-braver/stand.webp",
   },
 ];
