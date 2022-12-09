@@ -14,7 +14,7 @@ const ROOT_CLASS_NAME = "pilot-status";
 type DataIDs = {
   name: string,
   skillOverview: string,
-  skill: string,
+  skillDetail: string,
 };
 
 /**
@@ -34,7 +34,7 @@ function rootInnerHTML(ids: DataIDs): string {
     </div>
     <div class="${ROOT_CLASS_NAME}__skill-detail">
       <span class="${ROOT_CLASS_NAME}__skill-detail-label">詳細</span>
-      <span class="${ROOT_CLASS_NAME}__skill-detail-contents" data-id="${ids.skill}"></span>
+      <span class="${ROOT_CLASS_NAME}__skill-detail-contents" data-id="${ids.skillDetail}"></span>
     </div>
   `;
 }
@@ -43,7 +43,7 @@ function rootInnerHTML(ids: DataIDs): string {
 type Elements = {
   name: HTMLElement,
   skillOverview: HTMLElement,
-  skill: HTMLElement,
+  skillDetail: HTMLElement,
 };
 
 /**
@@ -60,10 +60,10 @@ function extractElements(root: HTMLElement, ids: DataIDs): Elements {
   const skillOverview =
     root.querySelector(`[data-id="${ids.skillOverview}"]`) ??
     document.createElement("div");
-  const skill =
-    root.querySelector(`[data-id="${ids.skill}"]`) ??
+  const skillDetail =
+    root.querySelector(`[data-id="${ids.skillDetail}"]`) ??
     document.createElement("div");
-  return { name, skillOverview, skill };
+  return { name, skillOverview, skillDetail };
 }
 
 /** パイロットステータス */
@@ -71,7 +71,7 @@ export class PilotStatus {
   #root: HTMLElement;
   #name: HTMLElement;
   #skillOverview: HTMLElement;
-  #skill: HTMLElement;
+  #skillDetail: HTMLElement;
 
   /**
    * コンストラクタ
@@ -80,7 +80,7 @@ export class PilotStatus {
     const dataIDs = {
       name: domUuid(),
       skillOverview: domUuid(),
-      skill: domUuid(),
+      skillDetail: domUuid(),
     };
     this.#root = document.createElement("div");
     this.#root.className = ROOT_CLASS_NAME;
@@ -89,7 +89,7 @@ export class PilotStatus {
     const elements = extractElements(this.#root, dataIDs);
     this.#name = elements.name;
     this.#skillOverview = elements.skillOverview;
-    this.#skill = elements.skill;
+    this.#skillDetail = elements.skillDetail;
   }
 
   /**
@@ -113,7 +113,7 @@ export class PilotStatus {
 
     this.#name.innerText = target.name;
     this.#skillOverview.innerText = pilotSkillOverview(target.skill);
-    this.#skill.innerHTML = pilotSkillDetail(target.skill)
+    this.#skillDetail.innerHTML = pilotSkillDetail(target.skill)
       .map(
         (v) =>
           `<span class="${ROOT_CLASS_NAME}__skill__content__line">${v}</span>`
