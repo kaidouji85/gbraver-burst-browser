@@ -4,7 +4,8 @@ import type { PilotId } from "gbraver-burst-core";
 import { Pilots } from "gbraver-burst-core";
 
 import { domUuid } from "../../../uuid/dom-uuid";
-import { pilotSkillTemplate } from "./status-template";
+import { pilotSkillDetail } from "./pilot-skill-detail";
+import { pilotSkillOverview } from "./pilot-skill-overview";
 
 /** ルート要素のクラス名 */
 const ROOT_CLASS_NAME = "pilot-status";
@@ -12,7 +13,8 @@ const ROOT_CLASS_NAME = "pilot-status";
 /** data-idを集めたもの */
 type DataIDs = {
   name: string,
-  skill: string,
+  skillOverview: string,
+  skillDetail: string,
 };
 
 /**
@@ -23,10 +25,16 @@ type DataIDs = {
  */
 function rootInnerHTML(ids: DataIDs): string {
   return `
-    <div class="${ROOT_CLASS_NAME}__name" data-id="${ids.name}"></div>
-    <div class="${ROOT_CLASS_NAME}__skill">
-      <span class="${ROOT_CLASS_NAME}__skill-label">スキル</span>
-      <span class="${ROOT_CLASS_NAME}__skill-description" data-id="${ids.skill}"></span>
+    <div class="${ROOT_CLASS_NAME}__basic-status">
+      <div class="${ROOT_CLASS_NAME}__name" data-id="${ids.name}"></div>
+    </div>
+    <div class="${ROOT_CLASS_NAME}__skill-overview">
+      <span class="${ROOT_CLASS_NAME}__skill-overview-label">スキル</span>
+      <span class="${ROOT_CLASS_NAME}__skill-overview-contents" data-id="${ids.skillOverview}"></span>
+    </div>
+    <div class="${ROOT_CLASS_NAME}__skill-detail">
+      <span class="${ROOT_CLASS_NAME}__skill-detail-label">詳細</span>
+      <span class="${ROOT_CLASS_NAME}__skill-detail-contents" data-id="${ids.skillDetail}"></span>
     </div>
   `;
 }
@@ -34,7 +42,8 @@ function rootInnerHTML(ids: DataIDs): string {
 /** ルート要素の子孫要素 */
 type Elements = {
   name: HTMLElement,
-  skill: HTMLElement,
+  skillOverview: HTMLElement,
+  skillDetail: HTMLElement,
 };
 
 /**
@@ -48,30 +57,39 @@ function extractElements(root: HTMLElement, ids: DataIDs): Elements {
   const name =
     root.querySelector(`[data-id="${ids.name}"]`) ??
     document.createElement("div");
-  const skill =
-    root.querySelector(`[data-id="${ids.skill}"]`) ??
+  const skillOverview =
+    root.querySelector(`[data-id="${ids.skillOverview}"]`) ??
     document.createElement("div");
-  return { name, skill };
+  const skillDetail =
+    root.querySelector(`[data-id="${ids.skillDetail}"]`) ??
+    document.createElement("div");
+  return { name, skillOverview, skillDetail };
 }
 
 /** パイロットステータス */
 export class PilotStatus {
   #root: HTMLElement;
   #name: HTMLElement;
-  #skill: HTMLElement;
+  #skillOverview: HTMLElement;
+  #skillDetail: HTMLElement;
 
   /**
    * コンストラクタ
    */
   constructor() {
-    const dataIDs = { name: domUuid(), skill: domUuid() };
+    const dataIDs = {
+      name: domUuid(),
+      skillOverview: domUuid(),
+      skillDetail: domUuid(),
+    };
     this.#root = document.createElement("div");
     this.#root.className = ROOT_CLASS_NAME;
     this.#root.innerHTML = rootInnerHTML(dataIDs);
 
     const elements = extractElements(this.#root, dataIDs);
     this.#name = elements.name;
-    this.#skill = elements.skill;
+    this.#skillOverview = elements.skillOverview;
+    this.#skillDetail = elements.skillDetail;
   }
 
   /**
@@ -94,7 +112,8 @@ export class PilotStatus {
     }
 
     this.#name.innerText = target.name;
-    this.#skill.innerHTML = pilotSkillTemplate(target.skill)
+    this.#skillOverview.innerText = pilotSkillOverview(target.skill);
+    this.#skillDetail.innerHTML = pilotSkillDetail(target.skill)
       .map(
         (v) =>
           `<span class="${ROOT_CLASS_NAME}__skill__content__line">${v}</span>`

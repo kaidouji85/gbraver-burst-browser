@@ -1,11 +1,9 @@
 /** プレイヤー選択画面 パイロットステータスウインドウ */
 .pilot-status {
-  display: flex;
-  flex-direction: column;
   font-size: calc(var(--responsive-font-size) * 0.8);
   width: 50vw;
   box-sizing: border-box;
-  height: calc(var(--responsive-font-size) * 8);
+  min-height: calc(var(--responsive-font-size) * 8);
   padding: calc(var(--responsive-font-size) * 0.5);
   background-color: rgba(10, 10, 10, 0.7);
   border: var(--dialog-border);
@@ -13,11 +11,28 @@
   margin-bottom: calc(var(--responsive-font-size) * 0.5);
 }
 
-.pilot-status__skill {
-  display: flex;
-  flex-direction: column;
+.pilot-status__basic-status {
+  border-bottom: 1px dashed var(--font-color);
+  padding-bottom: calc(var(--responsive-font-size) * 0.5);
 }
 
-.pilot-status__skill-description {
-  padding-left: var(--responsive-font-size);
+.pilot-status__skill-overview {
+  margin-top: calc(var(--responsive-font-size) * 0.5);
+  margin-bottom: calc(var(--responsive-font-size) * 0.5);
+}
+
+.pilot-status__skill-overview-label,
+.pilot-status__skill-detail-label {
+  display: inline-block;
+  min-width: calc(var(--responsive-font-size) * 6);
+  text-align: center;
+  border-radius: calc(var(--responsive-font-size) * 0.2);
+}
+
+.pilot-status__skill-overview-label {
+  background-color: var(--button-background-color);
+}
+
+.pilot-status__skill-detail-label {
+  background-color: var(--sub-button-background-color);
 }
