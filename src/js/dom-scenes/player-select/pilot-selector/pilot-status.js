@@ -23,10 +23,16 @@ type DataIDs = {
  */
 function rootInnerHTML(ids: DataIDs): string {
   return `
-    <div class="${ROOT_CLASS_NAME}__name" data-id="${ids.name}"></div>
-    <div class="${ROOT_CLASS_NAME}__skill">
-      <span class="${ROOT_CLASS_NAME}__skill-label">スキル</span>
-      <span class="${ROOT_CLASS_NAME}__skill-description" data-id="${ids.skill}"></span>
+    <div class="${ROOT_CLASS_NAME}__basic-status">
+      <div class="${ROOT_CLASS_NAME}__name" data-id="${ids.name}"></div>
+    </div>
+    <div class="${ROOT_CLASS_NAME}__skill-overview">
+      <span class="${ROOT_CLASS_NAME}__skill-overview-label">スキル</span>
+      <span class="${ROOT_CLASS_NAME}__skill-overview-contents">ここにスキル概要を書く</span>
+    </div>
+    <div class="${ROOT_CLASS_NAME}__skill-detail">
+      <span class="${ROOT_CLASS_NAME}__skill-detail-label">詳細</span>
+      <span class="${ROOT_CLASS_NAME}__skill-detail-contents" data-id="${ids.skill}"></span>
     </div>
   `;
 }
