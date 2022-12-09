@@ -4,6 +4,7 @@ import type { PilotId } from "gbraver-burst-core";
 import { Pilots } from "gbraver-burst-core";
 
 import { domUuid } from "../../../uuid/dom-uuid";
+import { pilotSkillOverview } from "./skill-overview";
 import { pilotSkillTemplate } from "./status-template";
 
 /** ルート要素のクラス名 */
@@ -12,6 +13,7 @@ const ROOT_CLASS_NAME = "pilot-status";
 /** data-idを集めたもの */
 type DataIDs = {
   name: string,
+  skillOverview: string,
   skill: string,
 };
 
@@ -28,7 +30,7 @@ function rootInnerHTML(ids: DataIDs): string {
     </div>
     <div class="${ROOT_CLASS_NAME}__skill-overview">
       <span class="${ROOT_CLASS_NAME}__skill-overview-label">スキル</span>
-      <span class="${ROOT_CLASS_NAME}__skill-overview-contents">ここにスキル概要を書く</span>
+      <span class="${ROOT_CLASS_NAME}__skill-overview-contents" data-id="${ids.skillOverview}"></span>
     </div>
     <div class="${ROOT_CLASS_NAME}__skill-detail">
       <span class="${ROOT_CLASS_NAME}__skill-detail-label">詳細</span>
@@ -40,6 +42,7 @@ function rootInnerHTML(ids: DataIDs): string {
 /** ルート要素の子孫要素 */
 type Elements = {
   name: HTMLElement,
+  skillOverview: HTMLElement,
   skill: HTMLElement,
 };
 
@@ -54,29 +57,38 @@ function extractElements(root: HTMLElement, ids: DataIDs): Elements {
   const name =
     root.querySelector(`[data-id="${ids.name}"]`) ??
     document.createElement("div");
+  const skillOverview =
+    root.querySelector(`[data-id="${ids.skillOverview}"]`) ??
+    document.createElement("div");
   const skill =
     root.querySelector(`[data-id="${ids.skill}"]`) ??
     document.createElement("div");
-  return { name, skill };
+  return { name, skillOverview, skill };
 }
 
 /** パイロットステータス */
 export class PilotStatus {
   #root: HTMLElement;
   #name: HTMLElement;
+  #skillOverview: HTMLElement;
   #skill: HTMLElement;
 
   /**
    * コンストラクタ
    */
   constructor() {
-    const dataIDs = { name: domUuid(), skill: domUuid() };
+    const dataIDs = {
+      name: domUuid(),
+      skillOverview: domUuid(),
+      skill: domUuid(),
+    };
     this.#root = document.createElement("div");
     this.#root.className = ROOT_CLASS_NAME;
     this.#root.innerHTML = rootInnerHTML(dataIDs);
 
     const elements = extractElements(this.#root, dataIDs);
     this.#name = elements.name;
+    this.#skillOverview = elements.skillOverview;
     this.#skill = elements.skill;
   }
 
@@ -100,6 +112,7 @@ export class PilotStatus {
     }
 
     this.#name.innerText = target.name;
+    this.#skillOverview.innerText = pilotSkillOverview(target.skill);
     this.#skill.innerHTML = pilotSkillTemplate(target.skill)
       .map(
         (v) =>

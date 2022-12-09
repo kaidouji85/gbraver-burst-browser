@@ -12,7 +12,7 @@ import type {
  * @param skill スキル情報
  * @return 説明文
  */
-export function pilotSkillTemplate(skill: PilotSkill): string {
+export function pilotSkillOverview(skill: PilotSkill): string {
   switch (skill.type) {
     case "RecoverBatterySkill":
       return recoverBatterySkill(skill);
@@ -21,7 +21,7 @@ export function pilotSkillTemplate(skill: PilotSkill): string {
     case "BatteryEnchantmentSkill":
       return batteryEnchantmentSkillTemplate(skill);
     case "DamageHalvedSkill":
-      return damageHalvedSkillTemplate(skill);
+      return damageHalvedSkillTemplate();
     default:
       return "";
   }
