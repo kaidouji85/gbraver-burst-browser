@@ -4,8 +4,8 @@ import type { PilotId } from "gbraver-burst-core";
 import { Pilots } from "gbraver-burst-core";
 
 import { domUuid } from "../../../uuid/dom-uuid";
-import { pilotSkillOverview } from "./skill-overview";
-import { pilotSkillTemplate } from "./status-template";
+import { pilotSkillDetail } from "./pilot-skill-detail";
+import { pilotSkillOverview } from "./pilot-skill-overview";
 
 /** ルート要素のクラス名 */
 const ROOT_CLASS_NAME = "pilot-status";
@@ -113,7 +113,7 @@ export class PilotStatus {
 
     this.#name.innerText = target.name;
     this.#skillOverview.innerText = pilotSkillOverview(target.skill);
-    this.#skill.innerHTML = pilotSkillTemplate(target.skill)
+    this.#skill.innerHTML = pilotSkillDetail(target.skill)
       .map(
         (v) =>
           `<span class="${ROOT_CLASS_NAME}__skill__content__line">${v}</span>`
