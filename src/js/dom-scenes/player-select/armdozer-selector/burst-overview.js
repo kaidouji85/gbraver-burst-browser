@@ -29,7 +29,6 @@ export function burstOverview(burst: Burst): string {
 
 /**
  * バッテリー回復概要
- * @param burst バースト情報
  * @return 説明文
  */
 function recoverBatteryOverview(): string {
