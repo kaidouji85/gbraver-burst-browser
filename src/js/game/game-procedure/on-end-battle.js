@@ -5,7 +5,6 @@ import {
   BattleAnimationTimeScales,
   parseBattleAnimationTimeScale,
 } from "../config/browser-config";
-import { postBattleConnector } from "../dom-floaters/action-connector/post-battle-connector";
 import type { PostBattleButtonConfig } from "../dom-floaters/post-battle/post-battle-button-config";
 import {
   PostNetworkBattleButtons,
@@ -52,8 +51,7 @@ const endCasualMatch = async (props: $ReadOnly<GameProps>) => {
   await props.api.disconnectWebsocket();
   await props.domFloaters.showPostBattle(
     props.resources,
-    PostNetworkBattleButtons,
-    postBattleConnector
+    PostNetworkBattleButtons
   );
 };
 
@@ -118,11 +116,7 @@ const endNPCBattleStage = async (
   props: $ReadOnly<GameProps>,
   postBattleButtons: PostBattleButtonConfig[]
 ) => {
-  await props.domFloaters.showPostBattle(
-    props.resources,
-    postBattleButtons,
-    postBattleConnector
-  );
+  await props.domFloaters.showPostBattle(props.resources, postBattleButtons);
 };
 
 /**
@@ -165,11 +159,7 @@ const endTutorial = async (
   props: $ReadOnly<GameProps>,
   postBattleButtons: PostBattleButtonConfig[]
 ) => {
-  await props.domFloaters.showPostBattle(
-    props.resources,
-    postBattleButtons,
-    postBattleConnector
-  );
+  await props.domFloaters.showPostBattle(props.resources, postBattleButtons);
 };
 
 /**

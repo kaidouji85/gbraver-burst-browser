@@ -8,39 +8,44 @@ import type { DomFloaterActionConnector } from "./action-connector/dom-floater-a
 import { PostBattleFloater } from "./post-battle/post-battle";
 import type { PostBattleButtonConfig } from "./post-battle/post-battle-button-config";
 
-/** 本クラスで扱う全フローターをまとめたもの */
-type AllFloater = PostBattleFloater;
-
-/** フローターに対応したアンサブスクライバ */
-type FloaterUnsubscriber = {
-  floater: AllFloater,
-  unsubscriber: Unsubscriber,
+/** コンストラクタのパラメータ */
+type Params = {
+  /** バトル終了後行動選択フローターのアクションコネクタ */
+  postBattleConnector: DomFloaterActionConnector<PostBattleFloater>,
 };
 
 /** DOMフローター管理オブジェクト */
 export class DOMFloaters {
+  /** ルートHTML要素 */
   #root: HTMLElement;
+  /** バトル終了後行動選択フローター */
   #postBattle: PostBattleFloater;
+  /** ゲームアクションストリーム */
   #gameAction: StreamSource<GameAction>;
-  #unsubscribers: FloaterUnsubscriber[];
+  /** アンサブスクライバ */
+  #unsubscribers: Unsubscriber[];
 
   /**
    * コンストラクタ
+   * @param params パラメータ
    */
-  constructor() {
+  constructor(params: Params) {
     this.#root = document.createElement("div");
     this.#gameAction = createStreamSource();
-    this.#unsubscribers = [];
 
     this.#postBattle = new PostBattleFloater();
     this.#root.appendChild(this.#postBattle.getRootHTMLElement());
+
+    this.#unsubscribers = [
+      ...params.postBattleConnector(this.#postBattle, this.#gameAction),
+    ];
   }
 
   /**
    * デストラクタ相当の処理
    */
   destructor(): void {
-    this.#unsubscribers.forEach(({ unsubscriber }) => {
+    this.#unsubscribers.forEach((unsubscriber) => {
       unsubscriber.unsubscribe();
     });
     this.#postBattle.destructor();
@@ -66,44 +71,19 @@ export class DOMFloaters {
    * バトル終了後行動選択フローターをアニメ付きで表示する
    * @param resources リソース管理オブジェクト
    * @param buttons アクションボタン設定
-   * @param connector アクションコネクタ
    * @return アニメが完了したら発火するPromise
    */
   async showPostBattle(
     resources: Resources,
-    buttons: PostBattleButtonConfig[],
-    connector: DomFloaterActionConnector<PostBattleFloater>
+    buttons: PostBattleButtonConfig[]
   ): Promise<void> {
-    this.#unsubscribe(this.#postBattle);
     await this.#postBattle.show(resources, buttons);
-    this.#unsubscribers = connector(this.#postBattle, this.#gameAction).map(
-      (unsubscriber) => ({
-        unsubscriber,
-        floater: this.#postBattle,
-      })
-    );
   }
 
   /**
    * バトル終了後行動選択フローターを非表示にする
    */
   hiddenPostBattle(): void {
-    this.#unsubscribe(this.#postBattle);
     this.#postBattle.hidden();
-  }
-
-  /**
-   * 指定したフローターをアンサブスクライブする
-   * @param target フローター
-   */
-  #unsubscribe(target: AllFloater): void {
-    this.#unsubscribers
-      .filter(({ floater }) => floater === target)
-      .forEach(({ unsubscriber }) => {
-        unsubscriber.unsubscribe();
-      });
-    this.#unsubscribers = this.#unsubscribers.filter(
-      ({ floater }) => floater !== target
-    );
   }
 }
