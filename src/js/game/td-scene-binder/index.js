@@ -5,7 +5,7 @@ import type { Stream, StreamSource, Unsubscriber } from "../../stream/stream";
 import { createStreamSource } from "../../stream/stream";
 import type { TDScene } from "../../td-scenes/td-scene";
 import type { GameAction } from "../game-actions";
-import type { TDSceneActionConnector } from "./action-connector/td-scene-action-connector";
+import type { TDSceneActionConnector } from "./td-scene-action-connector";
 
 /** three.js系シーンをバインドする */
 export class TDSceneBinder {

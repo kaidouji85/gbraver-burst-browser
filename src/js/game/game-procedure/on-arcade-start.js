@@ -1,7 +1,7 @@
 // @flow
 import { PlayerSelect } from "../../dom-scenes/player-select";
 import { waitTime } from "../../wait/wait-time";
-import { playerSelectConnector } from "../dom-scene-binder/action-connector/player-select-connector";
+import { playerSelectConnector } from "../action-connector/player-select-connector";
 import { MAX_LOADING_TIME } from "../dom-scene-binder/max-loading-time";
 import type { GameProps } from "../game-props";
 import { loadFullResource } from "./load-full-resource";

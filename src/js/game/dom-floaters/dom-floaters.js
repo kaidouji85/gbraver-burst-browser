@@ -4,7 +4,7 @@ import type { Resources } from "../../resource";
 import type { Stream, StreamSource, Unsubscriber } from "../../stream/stream";
 import { createStreamSource } from "../../stream/stream";
 import type { GameAction } from "../game-actions";
-import type { DomFloaterActionConnector } from "./action-connector/dom-floater-action-connector";
+import type { DomFloaterActionConnector } from "./dom-floater-action-connector";
 import { PostBattleFloater } from "./post-battle/post-battle";
 import type { PostBattleButtonConfig } from "./post-battle/post-battle-button-config";
 

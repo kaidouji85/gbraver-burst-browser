@@ -1,6 +1,6 @@
 // @flow
 import { NetworkErrorDialog } from "../../dom-dialogs/network-error/network-error-dialog";
-import { networkErrorDialogConnector } from "../dom-dialog-binder/action-connector/network-error-dialog-connector";
+import { networkErrorDialogConnector } from "../action-connector/network-error-dialog-connector";
 import type { GameProps } from "../game-props";
 
 /**
