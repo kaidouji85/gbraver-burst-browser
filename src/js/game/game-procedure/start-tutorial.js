@@ -5,10 +5,10 @@ import { NPCBattleRoom } from "../../npc/npc-battle-room";
 import { BattleScene } from "../../td-scenes/battle";
 import { waitAnimationFrame } from "../../wait/wait-animation-frame";
 import { waitTime } from "../../wait/wait-time";
-import { tutorialTitleConnector } from "../dom-scene-binder/action-connector/tutorial-title-connector";
+import { battleSceneConnector } from "../action-connector/battle-scene-connector";
+import { tutorialTitleConnector } from "../action-connector/tutorial-title-connector";
 import { MAX_LOADING_TIME } from "../dom-scene-binder/max-loading-time";
 import type { GameProps } from "../game-props";
-import { battleSceneConnector } from "../td-scene-binder/action-connector/battle-scene-connector";
 import type { TutorialStage } from "../tutorial-stages";
 
 /**

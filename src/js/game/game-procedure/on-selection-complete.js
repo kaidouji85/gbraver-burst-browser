@@ -12,17 +12,17 @@ import { BattleScene } from "../../td-scenes/battle";
 import type { BattleProgress } from "../../td-scenes/battle/battle-progress";
 import { waitAnimationFrame } from "../../wait/wait-animation-frame";
 import { waitTime } from "../../wait/wait-time";
-import { difficultyDialogConnector } from "../dom-dialog-binder/action-connector/difficulty-dialog-connector";
-import { matchingDialogConnector } from "../dom-dialog-binder/action-connector/matching-dialog-connector";
-import { networkErrorDialogConnector } from "../dom-dialog-binder/action-connector/network-error-dialog-connector";
-import { waitingDialogConnector } from "../dom-dialog-binder/action-connector/waiting-dialog-connector";
-import { matchCardConnector } from "../dom-scene-binder/action-connector/match-card-connector";
+import { battleSceneConnector } from "../action-connector/battle-scene-connector";
+import { difficultyDialogConnector } from "../action-connector/difficulty-dialog-connector";
+import { matchCardConnector } from "../action-connector/match-card-connector";
+import { matchingDialogConnector } from "../action-connector/matching-dialog-connector";
+import { networkErrorDialogConnector } from "../action-connector/network-error-dialog-connector";
+import { waitingDialogConnector } from "../action-connector/waiting-dialog-connector";
 import { MAX_LOADING_TIME } from "../dom-scene-binder/max-loading-time";
 import type { SelectionComplete } from "../game-actions";
 import type { GameProps } from "../game-props";
 import type { CasualMatch } from "../in-progress/casual-match";
 import type { NPCBattle } from "../in-progress/npc-battle";
-import { battleSceneConnector } from "../td-scene-binder/action-connector/battle-scene-connector";
 
 /**
  * プレイヤーキャラクター 選択完了時の処理

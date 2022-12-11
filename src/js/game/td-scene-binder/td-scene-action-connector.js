@@ -1,7 +1,7 @@
 // @flow
-import type { StreamSource, Unsubscriber } from "../../../stream/stream";
-import type { TDScene } from "../../../td-scenes/td-scene";
-import type { GameAction } from "../../game-actions";
+import type { StreamSource, Unsubscriber } from "../../stream/stream";
+import type { TDScene } from "../../td-scenes/td-scene";
+import type { GameAction } from "../game-actions";
 
 /**
  * ゲームアクションコネクタ

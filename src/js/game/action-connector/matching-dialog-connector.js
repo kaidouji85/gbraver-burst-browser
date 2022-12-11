@@ -1,7 +1,7 @@
 // @flow
 
-import { MatchingDialog } from "../../../dom-dialogs/matching/matching-dialog";
-import type { DomDialogActionConnector } from "./dom-dialog-action-connector";
+import { MatchingDialog } from "../../dom-dialogs/matching/matching-dialog";
+import type { DomDialogActionConnector } from "../dom-dialog-binder/dom-dialog-action-connector";
 
 /** コネクタのデータ型 */
 type Connector = DomDialogActionConnector<MatchingDialog>;

@@ -1,6 +1,6 @@
 // @flow
 import { Config } from "../../dom-scenes/config";
-import { configConnector } from "../dom-scene-binder/action-connector/config-connector";
+import { configConnector } from "../action-connector/config-connector";
 import type { GameProps } from "../game-props";
 
 /**

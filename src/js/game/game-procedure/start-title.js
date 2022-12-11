@@ -1,7 +1,7 @@
 // @flow
 import { Title } from "../../dom-scenes/title";
 import { waitTime } from "../../wait/wait-time";
-import { titleConnector } from "../dom-scene-binder/action-connector/title-connector";
+import { titleConnector } from "../action-connector/title-connector";
 import { MAX_LOADING_TIME } from "../dom-scene-binder/max-loading-time";
 import type { GameProps } from "../game-props";
 
