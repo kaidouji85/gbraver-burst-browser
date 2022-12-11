@@ -3,28 +3,20 @@
 import type { Stream } from "../../stream/stream";
 import { createStreamSource } from "../../stream/stream";
 import type { Resources } from "..";
-import type { CanvasImageConfig } from "../canvas-image";
+import type { CanvasImageConfig, CanvasImageResource } from "../canvas-image";
 import { loadCanvasImage } from "../canvas-image";
-import type { CubeTextureConfig } from "../cube-texture";
+import type { CubeTextureConfig, CubeTextureResource } from "../cube-texture";
 import { loadCubeTexture } from "../cube-texture";
-import type { GlTFConfig } from "../gltf";
+import type { GlTFConfig, GlTFResource } from "../gltf";
 import { loadGlTF } from "../gltf";
 import type { PathId } from "../path";
 import { getAllPaths, PathConfigs } from "../path";
 import type { ResourceRoot } from "../resource-root";
-import type { SoundConfig } from "../sound";
+import type { SoundConfig, SoundResource } from "../sound";
 import { loadSound } from "../sound";
 import { loadTexture } from "../texture/load";
-import type { TextureConfig } from "../texture/resource";
+import type { TextureConfig, TextureResource } from "../texture/resource";
 import type { LoadingActions } from "./loading-actions";
-
-/** リソース読み込みオブジェクト */
-export type ResourceLoading = {
-  /** 読み込みストリーム */
-  loading: Stream<LoadingActions>,
-  /** 読み込んだリソース管理オブジェクト */
-  resources: Promise<Resources>,
-};
 
 /** リソース読み込みパラメータ */
 type ResourceLoadingParams = {
@@ -44,6 +36,114 @@ type ResourceLoadingParams = {
   soundConfigs: SoundConfig[],
 };
 
+/** 読み込みPromiseをあつめたもの */
+type Loadings = {
+  /** プリフェッチPromise */
+  preFetchPaths: Promise<Response>[],
+  /** GLTFモデル読み込みPromise */
+  gltfLoadings: Promise<GlTFResource>[],
+  /** テクスチャ読み込みPromise */
+  textureLoadings: Promise<TextureResource>[],
+  /** キューブテクスチャ読み込みPromise */
+  cubeTextureLoadings: Promise<CubeTextureResource>[],
+  /** キャンバス用画像読み込みPromise */
+  canvasImageLoadings: Promise<CanvasImageResource>[],
+  /** 音声読み込みPromise */
+  soundLoadings: Promise<SoundResource>[],
+};
+
+/**
+ * 読み込みPromiseを生成するヘルパー関数
+ * @param params パラメータ
+ * @return 生成結果
+ */
+function createLoadings(params: ResourceLoadingParams): Loadings {
+  return {
+    preFetchPaths: PathConfigs.filter((v) =>
+      params.preFetchPaths.includes(v.id)
+    ).map((v) => fetch(v.path(params.resourceRoot))),
+    gltfLoadings: params.gltfConfigs.map((v) =>
+      loadGlTF(params.resourceRoot, v)
+    ),
+    textureLoadings: params.textureConfigs.map((v) =>
+      loadTexture(params.resourceRoot, v)
+    ),
+    cubeTextureLoadings: params.cubeTextureConfigs.map((v) =>
+      loadCubeTexture(params.resourceRoot, v)
+    ),
+    canvasImageLoadings: params.canvasImageConfigs.map((v) =>
+      loadCanvasImage(params.resourceRoot, v)
+    ),
+    soundLoadings: params.soundConfigs.map((v) =>
+      loadSound(params.resourceRoot, v)
+    ),
+  };
+}
+
+/**
+ * 読み込みアクションストリームを生成する
+ * @param loadings 読み込みPromise
+ * @return 生成結果
+ */
+function createLoadingActions(loadings: Loadings): Stream<LoadingActions> {
+  const loadingActions = createStreamSource();
+  const allLoadings = [
+    ...loadings.preFetchPaths,
+    ...loadings.gltfLoadings,
+    ...loadings.textureLoadings,
+    ...loadings.cubeTextureLoadings,
+    ...loadings.canvasImageLoadings,
+    ...loadings.soundLoadings,
+  ];
+  let completedLoadingCounts = 0;
+  allLoadings.forEach((loading) => {
+    loading.then(() => {
+      completedLoadingCounts++;
+      const completedRate = completedLoadingCounts / allLoadings.length;
+      loadingActions.next({ type: "LoadingProgress", completedRate });
+    });
+  });
+  return loadingActions;
+}
+
+/**
+ * リソース管理オブジェクトを生成するヘルパー関数
+ * @param loading 読み込みPromise
+ * @param resourceRoot リソースルート
+ * @return 生成結果
+ */
+async function createResources(
+  loading: Loadings,
+  resourceRoot: ResourceRoot
+): Promise<Resources> {
+  const [gltfs, textures, cubeTextures, canvasImages, sounds] =
+    await Promise.all([
+      Promise.all(loading.gltfLoadings),
+      Promise.all(loading.textureLoadings),
+      Promise.all(loading.cubeTextureLoadings),
+      Promise.all(loading.canvasImageLoadings),
+      Promise.all(loading.soundLoadings),
+    ]);
+  const paths = getAllPaths(resourceRoot);
+  return {
+    rootPath: resourceRoot,
+    gltfs,
+    textures,
+    cubeTextures,
+    canvasImages,
+    sounds,
+    paths,
+  };
+}
+
+/** リソース読み込みオブジェクト */
+export type ResourceLoading = {
+  /** 読み込みストリーム */
+  loading: Stream<LoadingActions>,
+  /** 読み込んだリソース管理オブジェクト */
+  resources: Promise<Resources>,
+};
+
 /**
  * リソースを読み込む
  * @param params 読み込みパラメータ
@@ -52,61 +152,9 @@ type ResourceLoadingParams = {
 export function resourceLoading(
   params: ResourceLoadingParams
 ): ResourceLoading {
-  const preFetchPaths = PathConfigs.filter((v) =>
-    params.preFetchPaths.includes(v.id)
-  ).map((v) => fetch(v.path(params.resourceRoot)));
-  const gltfLoadings = params.gltfConfigs.map((v) =>
-    loadGlTF(params.resourceRoot, v)
-  );
-  const textureLoadings = params.textureConfigs.map((v) =>
-    loadTexture(params.resourceRoot, v)
-  );
-  const cubeTextureLoadings = params.cubeTextureConfigs.map((v) =>
-    loadCubeTexture(params.resourceRoot, v)
-  );
-  const canvasImageLoadings = params.canvasImageConfigs.map((v) =>
-    loadCanvasImage(params.resourceRoot, v)
-  );
-  const soundLoadings = params.soundConfigs.map((v) =>
-    loadSound(params.resourceRoot, v)
-  );
-
-  const loadingActions = createStreamSource();
-  const allLoading = [
-    ...preFetchPaths,
-    ...gltfLoadings,
-    ...textureLoadings,
-    ...cubeTextureLoadings,
-    ...canvasImageLoadings,
-    ...soundLoadings,
-  ];
-  let completedLoadingCounts = 0;
-  allLoading.forEach((loading) => {
-    loading.then(() => {
-      completedLoadingCounts++;
-      const completedRate = completedLoadingCounts / allLoading.length;
-      loadingActions.next({ type: "LoadingProgress", completedRate });
-    });
-  });
-  const resources = (async (): Promise<Resources> => {
-    const [gltfs, textures, cubeTextures, canvasImages, sounds] =
-      await Promise.all([
-        Promise.all(gltfLoadings),
-        Promise.all(textureLoadings),
-        Promise.all(cubeTextureLoadings),
-        Promise.all(canvasImageLoadings),
-        Promise.all(soundLoadings),
-      ]);
-    const paths = getAllPaths(params.resourceRoot);
-    return {
-      rootPath: params.resourceRoot,
-      gltfs,
-      textures,
-      cubeTextures,
-      canvasImages,
-      sounds,
-      paths,
-    };
-  })();
-  return { loading: loadingActions, resources };
+  const loadings = createLoadings(params);
+  return {
+    loading: createLoadingActions(loadings),
+    resources: createResources(loadings, params.resourceRoot),
+  };
 }

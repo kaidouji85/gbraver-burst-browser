@@ -1,6 +1,6 @@
 // @flow
 import type { GameProps } from "../game-props";
-import { fullResourceLoading } from "./full-resource-loading";
+import { loadFullResource } from "./load-full-resource";
 import { startTutorialSelector } from "./start-tutorial-selector";
 
 /**
@@ -12,7 +12,7 @@ import { startTutorialSelector } from "./start-tutorial-selector";
  */
 export async function onTutorialStart(props: GameProps): Promise<void> {
   if (!props.isFullResourceLoaded) {
-    await fullResourceLoading(props);
+    await loadFullResource(props);
   }
 
   await startTutorialSelector(props);

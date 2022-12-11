@@ -46,3 +46,7 @@
     --responsive-font-size: max(3vh, 1rem);
   }
 }
+
+html {
+  text-size-adjust: none;
+}

@@ -30,6 +30,7 @@ export async function startTitle(props: $ReadOnly<GameProps>): Promise<Title> {
   const scene = new Title({
     resources: props.resources,
     account,
+    howToPlayURL: props.howToPlayURL,
     isApiServerEnable: props.isAPIServerEnable,
     termsOfServiceURL: props.termsOfServiceURL,
     privacyPolicyURL: props.privacyPolicyURL,

@@ -20,9 +20,6 @@ export const titleConnector: Connector = (scene, gameAction) => [
   scene.pushArcadeNotifier().subscribe(() => {
     gameAction.next({ type: "ArcadeStart" });
   }),
-  scene.pushHowToPlayNotifier().subscribe(() => {
-    gameAction.next({ type: "ShowHowToPlay" });
-  }),
   scene.pushCasualMatchNotifier().subscribe(() => {
     gameAction.next({ type: "CasualMatchStart" });
   }),

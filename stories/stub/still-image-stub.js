@@ -3,7 +3,7 @@ import * as THREE from "three";
 
 import type { GameObjectAction } from "../../src/js/game-object/action/game-object-action";
 import type { Resources } from "../../src/js/resource";
-import { fullResourceLoading } from "../../src/js/resource/loading/full-resource-loading";
+import { developingFullResourceLoading } from "../../src/js/resource/loading/full-resource-loading";
 import type { Stream } from "../../src/js/stream/stream";
 import { createStreamSource } from "../../src/js/stream/stream";
 import { StorybookResourceRoot } from "../storybook-resource-root";
@@ -98,7 +98,7 @@ export function stillImageStub(params: StubParams): HTMLElement {
     camera.lookAt(target.x, target.y, target.z);
 
     const resourceRoot = new StorybookResourceRoot();
-    const resourceLoading = fullResourceLoading(resourceRoot);
+    const resourceLoading = developingFullResourceLoading(resourceRoot);
     const resources = await resourceLoading.resources;
     const emptyGameObjectAction: Stream<GameObjectAction> =
       createStreamSource();

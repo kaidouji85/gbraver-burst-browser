@@ -30,7 +30,7 @@ async function main(): Promise<void> {
     resourceRoot,
     api: api,
     config: createLocalStorageConfigRepository(),
-    howToPlayMovieURL: GBRAVER_BURST_HOW_TO_PLAY,
+    howToPlayURL: GBRAVER_BURST_HOW_TO_PLAY,
     termsOfServiceURL: GBRAVER_BURST_TERMS_OF_SERVICE_URL,
     privacyPolicyURL: GBRAVER_BURST_PRIVACY_POLICY_URL,
     contactURL: GBRAVER_BURST_CONTACT_URL,
@@ -40,6 +40,8 @@ async function main(): Promise<void> {
     isAPIServerEnable: GBRAVER_BURST_IS_API_SERVER_ENABLE === "true",
     canPlayTutorialInDevelopment:
       GBRAVER_BURST_CAN_PLAY_TUTORIAL_IN_DEVELOPMENT === "true",
+    shouldLoadDevelopingResource:
+      GBRAVER_BURST_SHOULD_LOAD_DEVELOPING_RESOURCE === "true",
   });
   await game.initialize();
 }

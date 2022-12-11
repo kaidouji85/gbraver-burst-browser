@@ -1,11 +1,9 @@
 /** プレイヤー選択画面 アームドーザステータスウインドウ */
 .armdozer-status{
-  display: flex;
-  flex-direction: column;
   font-size: calc(var(--responsive-font-size) * 0.8);
   width: 50vw;
   box-sizing: border-box;
-  height: calc(var(--responsive-font-size) * 8);
+  min-height: calc(var(--responsive-font-size) * 8);
   padding: calc(var(--responsive-font-size) * 0.5);
   background-color: rgba(10, 10, 10, 0.7);
   border: var(--dialog-border);
@@ -13,24 +11,52 @@
   margin-bottom: calc(var(--responsive-font-size) * 0.5);
 }
 
+.armdozer-status__basic-status {
+  --parameter-label-width: calc(var(--responsive-font-size) * 2.2);
+  display: grid;
+  grid-template-columns: 
+    1fr
+    var(--parameter-label-width)
+    auto
+    var(--parameter-label-width)
+    auto
+    var(--parameter-label-width)
+    auto;
+  border-bottom: 1px dashed var(--font-color);
+  padding-bottom: calc(var(--responsive-font-size) * 0.5);
+}
+
 .armdozer-status__hp-label,
 .armdozer-status__power-label,
-.armdozer-status__speed-label
-{
-  margin-right: calc(var(--responsive-font-size) * 0.2);
+.armdozer-status__speed-label {
+  background-color: var(--button-background-color);
+  text-align: center;
+  border-radius: calc(var(--responsive-font-size) * 0.2);
 }
 
 .armdozer-status__hp-value,
-.armdozer-status__power-value
-{
-  margin-right: calc(var(--responsive-font-size));
+.armdozer-status__power-value {
+  margin-right: calc(var(--responsive-font-size) * 0.2);
 }
 
-.armdozer-status__burst {
-  display: flex;
-  flex-direction: column;
+
+.armdozer-status__burst-overview {
+  margin-top: calc(var(--responsive-font-size) * 0.5);
+  margin-bottom: calc(var(--responsive-font-size) * 0.5);
 }
 
-.armdozer-status__burst-description {
-  padding-left: var(--responsive-font-size);
+.armdozer-status__burst-overview-label,
+.armdozer-status__burst-detail-label {
+  display: inline-block;
+  min-width: calc(var(--responsive-font-size) * 6);
+  text-align: center;
+  border-radius: calc(var(--responsive-font-size) * 0.2);
+}
+
+.armdozer-status__burst-overview-label {
+  background-color: var(--button-background-color);
+}
+
+.armdozer-status__burst-detail-label {
+  background-color: var(--sub-button-background-color);
 }

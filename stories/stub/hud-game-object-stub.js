@@ -12,7 +12,7 @@ import { PlainHUDCamera } from "../../src/js/game-object/camera/plain-hud/plain-
 import { Renderer } from "../../src/js/render";
 import type { OverlapEvent } from "../../src/js/render/overlap-event/overlap-event";
 import type { Resources } from "../../src/js/resource";
-import { fullResourceLoading } from "../../src/js/resource/loading/full-resource-loading";
+import { developingFullResourceLoading } from "../../src/js/resource/loading/full-resource-loading";
 import type { SafeAreaInset } from "../../src/js/safe-area/safe-area-inset";
 import { createSafeAreaInset } from "../../src/js/safe-area/safe-area-inset";
 import type {
@@ -98,7 +98,7 @@ export class HUDGameObjectStub {
    */
   async start(): Promise<void> {
     const resourceRoot = new StorybookResourceRoot();
-    const resourceLoading = fullResourceLoading(resourceRoot);
+    const resourceLoading = developingFullResourceLoading(resourceRoot);
     const resources = await resourceLoading.resources;
     const object3Ds = this._creator({
       resources,

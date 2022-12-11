@@ -4,6 +4,8 @@ env:
     IS_SEARCH_ENGINE_NO_INDEX: false
     IS_SERVICE_WORKER_USED: true
     IS_APP_ICON_DEV_ENABLE: false
+    SHOULD_LOAD_DEVELOPING_RESOURCE: false
+    CAN_PLAY_TUTORIAL_IN_DEVELOPMENT: false
   parameter-store:
     SERVICE: /GbraverBurst/prod/service
     STAGE: /GbraverBurst/prod/stage
@@ -22,7 +24,6 @@ env:
     AUTH0_DOMAIN: /GbraverBurst/prod/auth0Domain
     AUTH0_CLIENT_ID: /GbraverBurst/prod/auth0ClientId
     AUTH0_AUDIENCE: /GbraverBurst/prod/auth0Audience
-    CAN_PLAY_TUTORIAL_IN_DEVELOPMENT: /GbraverBurst/prod/canPlayTutorialInDevelopment
 phases:
   install:
     runtime-versions:

@@ -10,7 +10,7 @@ import { waitingDialogConnector } from "../dom-dialog-binder/action-connector/wa
 import { playerSelectConnector } from "../dom-scene-binder/action-connector/player-select-connector";
 import { MAX_LOADING_TIME } from "../dom-scene-binder/max-loading-time";
 import type { GameProps } from "../game-props";
-import { fullResourceLoading } from "./full-resource-loading";
+import { loadFullResource } from "./load-full-resource";
 
 /**
  * カジュアルマッチ開始
@@ -59,7 +59,7 @@ export async function onCasualMatchStart(props: GameProps): Promise<void> {
   }
 
   if (!props.isFullResourceLoaded) {
-    await fullResourceLoading(props);
+    await loadFullResource(props);
   }
 
   await gotoPlayerSelect();

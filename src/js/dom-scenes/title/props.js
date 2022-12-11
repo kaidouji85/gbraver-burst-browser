@@ -38,8 +38,6 @@ export type TitleProps = {
   arcade: HTMLElement,
   /** カジュアルマッチ */
   casualMatch: HTMLElement,
-  /** 遊び方 */
-  howToPlay: HTMLElement,
   /** 設定 */
   config: HTMLElement,
   /** タイトルバック画像を読み込んだら発火するPromise */
@@ -64,8 +62,6 @@ export type TitleProps = {
   pushArcade: StreamSource<void>,
   /** カジュアルマッチ押下ストリーム */
   pushCasualMatch: StreamSource<void>,
-  /** 遊び方押下ストリーム */
-  pushHowToPlay: StreamSource<void>,
   /** 設定押下ストリーム */
   pushConfig: StreamSource<void>,
 };
@@ -93,7 +89,6 @@ export function createTitleProps(params: CreateTitlePropsParams): TitleProps {
     tutorial: domUuid(),
     arcade: domUuid(),
     casualMatch: domUuid(),
-    howToPlay: domUuid(),
     config: domUuid(),
   };
   const root = document.createElement("div");
@@ -132,7 +127,6 @@ export function createTitleProps(params: CreateTitlePropsParams): TitleProps {
     tutorial: elements.tutorial,
     arcade: elements.arcade,
     casualMatch: elements.casualMatch,
-    howToPlay: elements.howToPlay,
     config: elements.config,
     isLogoLoaded,
     isAvatarLoaded,
@@ -148,7 +142,6 @@ export function createTitleProps(params: CreateTitlePropsParams): TitleProps {
     pushLogout: createStreamSource(),
     pushTutorial: createStreamSource(),
     pushArcade: createStreamSource(),
-    pushHowToPlay: createStreamSource(),
     pushCasualMatch: createStreamSource(),
     pushConfig: createStreamSource(),
   };
