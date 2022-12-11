@@ -3,6 +3,7 @@ import type { Resources } from "../../resource";
 import type { Stream, StreamSource, Unsubscriber } from "../../stream/stream";
 import { createStreamSource } from "../../stream/stream";
 import type { GameAction } from "../game-actions";
+import type { DomFloaterActionConnector } from "./action-connector/dom-floater-action-connector";
 import { PostBattleFloater } from "./post-battle/post-battle";
 import type { PostBattleButtonConfig } from "./post-battle/post-battle-button-config";
 
@@ -63,13 +64,16 @@ export class DOMFloaters {
    *
    * @param resources リソース管理オブジェクト
    * @param buttons アクションボタン設定
+   * @param connector アクションコネクタ
    * @return アニメが完了したら発火するPromise
    */
   async showPostBattle(
     resources: Resources,
-    buttons: PostBattleButtonConfig[]
+    buttons: PostBattleButtonConfig[],
+    connector: DomFloaterActionConnector<PostBattleFloater>
   ): Promise<void> {
     await this.#postBattle.show(resources, buttons);
+    this.#unsubscribers = connector(this.#postBattle, this.#gameAction);
   }
 
   /**
