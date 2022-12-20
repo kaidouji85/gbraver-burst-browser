@@ -1,6 +1,6 @@
 // @flow
 import { DeleteAccountConsentDialog } from "../../dom-dialogs/delete-account-consent/delete-account-consent-dialog";
-import { deleteAccountConsentDialogConnector } from "../dom-dialog-binder/action-connector/delete-account-consent-dialog-connector";
+import { deleteAccountConsentDialogConnector } from "../action-connector/delete-account-consent-dialog-connector";
 import type { GameProps } from "../game-props";
 
 /**

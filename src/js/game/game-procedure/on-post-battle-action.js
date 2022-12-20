@@ -4,7 +4,7 @@ import type { Player } from "gbraver-burst-core";
 import { fadeOut, stop } from "../../bgm/bgm-operators";
 import { NPCEnding } from "../../dom-scenes/npc-ending/npc-ending";
 import { waitTime } from "../../wait/wait-time";
-import { npcEndingConnector } from "../dom-scene-binder/action-connector/npc-ending-connector";
+import { npcEndingConnector } from "../action-connector/npc-ending-connector";
 import { MAX_LOADING_TIME } from "../dom-scene-binder/max-loading-time";
 import type { PostBattleAction } from "../game-actions";
 import type { GameProps } from "../game-props";
@@ -143,10 +143,16 @@ export async function onPostBattleAction(
   if (action.action.type === "GotoTitle") {
     props.inProgress = { type: "None" };
     await gotoTitle(props);
-  } else if (action.action.type === "GotoEnding") {
+    return;
+  }
+
+  if (action.action.type === "GotoEnding") {
     props.inProgress = { type: "None" };
     await gotoEnding(props);
-  } else if (
+    return;
+  }
+
+  if (
     npcBattle &&
     (action.action.type === "NextStage" || action.action.type === "Retry")
   ) {
@@ -156,7 +162,10 @@ export async function onPostBattleAction(
       npcBattle.stage,
       npcBattle.level
     );
-  } else if (
+    return;
+  }
+
+  if (
     action.action.type === "Retry" &&
     props.inProgress.type === "Tutorial" &&
     props.inProgress.subFlow.type === "PlayingTutorialStage"

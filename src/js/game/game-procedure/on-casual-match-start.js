@@ -4,10 +4,10 @@ import { NetworkErrorDialog } from "../../dom-dialogs/network-error/network-erro
 import { WaitingDialog } from "../../dom-dialogs/waiting/waiting-dialog";
 import { PlayerSelect } from "../../dom-scenes/player-select";
 import { waitTime } from "../../wait/wait-time";
-import { loginDialogConnector } from "../dom-dialog-binder/action-connector/login-dialog-connector";
-import { networkErrorDialogConnector } from "../dom-dialog-binder/action-connector/network-error-dialog-connector";
-import { waitingDialogConnector } from "../dom-dialog-binder/action-connector/waiting-dialog-connector";
-import { playerSelectConnector } from "../dom-scene-binder/action-connector/player-select-connector";
+import { loginDialogConnector } from "../action-connector/login-dialog-connector";
+import { networkErrorDialogConnector } from "../action-connector/network-error-dialog-connector";
+import { playerSelectConnector } from "../action-connector/player-select-connector";
+import { waitingDialogConnector } from "../action-connector/waiting-dialog-connector";
 import { MAX_LOADING_TIME } from "../dom-scene-binder/max-loading-time";
 import type { GameProps } from "../game-props";
 import { loadFullResource } from "./load-full-resource";

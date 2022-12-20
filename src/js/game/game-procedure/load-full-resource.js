@@ -5,7 +5,7 @@ import {
   developingFullResourceDifferentialLoad,
   fullResourceDifferentialLoad,
 } from "../../resource/loading/full-resource-loading";
-import { loadingConnector } from "../dom-scene-binder/action-connector/loading-connector";
+import { loadingConnector } from "../action-connector/loading-connector";
 import type { GameProps } from "../game-props";
 import { reflectSoundVolume } from "../reflect-sound-volume";
 

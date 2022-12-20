@@ -30,6 +30,7 @@ import type { PushWindow } from "../window/push-window";
 import { pushWindowsStream } from "../window/push-window";
 import type { Resize } from "../window/resize";
 import { resizeStream } from "../window/resize";
+import { postBattleConnector } from "./action-connector/post-battle-connector";
 import type { GbraverBurstBrowserConfigRepository } from "./config/browser-config";
 import { DOMDialogBinder } from "./dom-dialog-binder";
 import { DOMFloaters } from "./dom-floaters/dom-floaters";
@@ -185,7 +186,7 @@ export function generateGameProps(param: GamePropsGeneratorParam): GameProps {
     interruptScenes: new InterruptScenes(),
     domSceneBinder: new DOMSceneBinder(),
     domDialogBinder: new DOMDialogBinder(),
-    domFloaters: new DOMFloaters(),
+    domFloaters: new DOMFloaters({ postBattleConnector }),
     renderer,
     tdBinder: new TDSceneBinder(renderer, hudUIScale),
     serviceWorker: null,

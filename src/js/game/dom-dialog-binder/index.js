@@ -4,7 +4,7 @@ import type { DOMDialog } from "../../dom-dialogs/dialog";
 import type { Stream, StreamSource, Unsubscriber } from "../../stream/stream";
 import { createStreamSource } from "../../stream/stream";
 import type { GameAction } from "../game-actions";
-import type { DomDialogActionConnector } from "./action-connector/dom-dialog-action-connector";
+import type { DomDialogActionConnector } from "./dom-dialog-action-connector";
 
 /** HTMLダイアログバインダー */
 export class DOMDialogBinder {

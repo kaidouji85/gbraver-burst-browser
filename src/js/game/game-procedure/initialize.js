@@ -5,7 +5,7 @@ import { titleResourceLoading } from "../../resource/loading/title-resource-load
 import { loadServiceWorker } from "../../service-worker/load-service-worker";
 import { viewPerformanceStats } from "../../stats/view-performance-stats";
 import { waitTime } from "../../wait/wait-time";
-import { mailVerifiedIncompleteConnector } from "../dom-scene-binder/action-connector/mail-verified-incomplete-connector";
+import { mailVerifiedIncompleteConnector } from "../action-connector/mail-verified-incomplete-connector";
 import type { GameProps } from "../game-props";
 import { reflectSoundVolume } from "../reflect-sound-volume";
 import { playTitleBGM } from "./play-title-bgm";

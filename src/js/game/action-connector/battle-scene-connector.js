@@ -1,8 +1,8 @@
 // @flow
-import type { StreamSource } from "../../../stream/stream";
-import { BattleScene } from "../../../td-scenes/battle";
-import type { GameAction } from "../../game-actions";
-import type { TDSceneActionConnector } from "./td-scene-action-connector";
+import type { StreamSource } from "../../stream/stream";
+import { BattleScene } from "../../td-scenes/battle";
+import type { GameAction } from "../game-actions";
+import type { TDSceneActionConnector } from "../td-scene-binder/td-scene-action-connector";
 
 /** 戦闘シーンとゲームアクションを関連付ける */
 export const battleSceneConnector: TDSceneActionConnector<BattleScene> = (
