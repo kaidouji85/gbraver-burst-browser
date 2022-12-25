@@ -10,6 +10,8 @@ import type { ArmDozerSprite } from "../armdozer-sprite";
 import { EmptyArmDozerSprite } from "../empty-armdozer-sprite";
 import type { GenesisBraverModel } from "./model/genesis-braver-model";
 import { createInitialValue } from "./model/initial-value";
+import type { GenesisBraverSounds } from "./sounds/genesis-braver-sounds";
+import { createGenesisBraverSounds } from "./sounds/genesis-braver-sounds";
 import type { GenesisBraverView } from "./view/genesis-braver-view";
 
 /** ジェネシスブレイバースプライト */
@@ -19,6 +21,8 @@ export class GenesisBraver
 {
   /** ビュー */
   #view: GenesisBraverView;
+  /** 効果音 */
+  #sounds: GenesisBraverSounds;
   /** モデル */
   #model: GenesisBraverModel;
   /** アンサブスクライバ */
@@ -37,6 +41,7 @@ export class GenesisBraver
   ) {
     super();
     this.#view = view;
+    this.#sounds = createGenesisBraverSounds(resources);
     this.#model = createInitialValue();
     this.#unsubscribers = [
       gameAction.subscribe((action) => {
