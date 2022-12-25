@@ -2,12 +2,15 @@
 
 import * as THREE from "three";
 
+import { Animate } from "../../../animation/animate";
 import type { PreRender } from "../../../game-loop/pre-render";
 import type { Resources } from "../../../resource";
 import type { Stream, Unsubscriber } from "../../../stream/stream";
 import type { GameObjectAction } from "../../action/game-object-action";
 import type { ArmDozerSprite } from "../armdozer-sprite";
 import { EmptyArmDozerSprite } from "../empty-armdozer-sprite";
+import { charge } from "./animation/charge";
+import { straightPunch } from "./animation/straight-punch";
 import type { GenesisBraverModel } from "./model/genesis-braver-model";
 import { createInitialValue } from "./model/initial-value";
 import type { GenesisBraverSounds } from "./sounds/genesis-braver-sounds";
@@ -60,6 +63,22 @@ export class GenesisBraver
     this.#unsubscribers.forEach((v) => {
       v.unsubscribe();
     });
+  }
+
+  /**
+   * チャージ
+   * @return アニメーション
+   */
+  charge(): Animate {
+    return charge(this.#model, this.#sounds);
+  }
+
+  /**
+   * ストレートパンチ
+   * @return アニメーション
+   */
+  straightPunch(): Animate {
+    return straightPunch(this.#model);
   }
 
   /** @override */
