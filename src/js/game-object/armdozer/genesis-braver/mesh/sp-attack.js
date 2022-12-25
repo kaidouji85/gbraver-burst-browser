@@ -23,7 +23,7 @@ export const MAX_ANIMATION = 4;
 export function genesisBraverSPAttack(resources: Resources): ArmdozerAnimation {
   const texture =
     resources.textures.find(
-      (v) => v.id === TEXTURE_IDS.GENESIS_BRAVER_SP_CHARGE
+      (v) => v.id === TEXTURE_IDS.GENESIS_BRAVER_SP_ATTACK
     )?.texture ?? new THREE.Texture();
   const mesh = createHorizontalAnimation({
     texture,
