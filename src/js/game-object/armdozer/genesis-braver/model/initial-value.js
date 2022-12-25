@@ -13,6 +13,10 @@ import type { GenesisBraverModel } from "./genesis-braver-model";
  */
 export function createInitialValue(): GenesisBraverModel {
   return {
+    animation: {
+      type: "STAND",
+      frame: 0,
+    },
     position: {
       x: ARMDOZER_SPRITE_STANDARD_X,
       y: ARMDOZER_SPRITE_STANDARD_Y,
