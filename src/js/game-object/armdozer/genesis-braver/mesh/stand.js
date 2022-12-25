@@ -16,7 +16,7 @@ export const HEIGHT = 600;
 export const MAX_ANIMATION = 1;
 
 /**
- * ジェネシスブレイバー立ちメッシュを生成
+ * ジェネシスブレイバー 立ち メッシュを生成
  * @param resources リソース管理オブジェクト
  * @return 生成結果
  */

@@ -16,14 +16,15 @@ export const HEIGHT = 600;
 export const MAX_ANIMATION = 4;
 
 /**
- * ジェネシスブレイバーアタックスプライトを生成
+ * ジェネシスブレイバー アタック スプライトを生成
  * @param resources リソース管理オブジェクト
  * @return 生成結果
  */
 export function genesisBraverSPAttack(resources: Resources): ArmdozerAnimation {
   const texture =
-    resources.textures.find((v) => v.id === TEXTURE_IDS.GENESIS_BRAVER_SP_CHARGE)
-      ?.texture ?? new THREE.Texture();
+    resources.textures.find(
+      (v) => v.id === TEXTURE_IDS.GENESIS_BRAVER_SP_CHARGE
+    )?.texture ?? new THREE.Texture();
   const mesh = createHorizontalAnimation({
     texture,
     maxAnimation: MAX_ANIMATION,

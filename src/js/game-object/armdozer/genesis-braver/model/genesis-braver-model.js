@@ -1,6 +1,6 @@
 // @flow
 
-import type {AnimationType} from "./animation-type";
+import type { AnimationType } from "./animation-type";
 
 /** ジェネシスブレイバーモデル */
 export type GenesisBraverModel = {
@@ -10,7 +10,7 @@ export type GenesisBraverModel = {
     type: AnimationType,
     /** 0〜1で指定するアニメーションフレーム */
     frame: number,
-  };
+  },
   /** 座標 */
   position: {
     x: number,
