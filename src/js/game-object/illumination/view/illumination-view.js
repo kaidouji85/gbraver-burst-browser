@@ -4,9 +4,7 @@ import * as THREE from "three";
 
 import type { IlluminationModel } from "../model/illumination-model";
 
-/**
- * ステージ全体の照明のビュー
- */
+/** ステージ全体の照明 ビュー */
 export class IlluminationView {
   #directionalLight1: typeof THREE.DirectionalLight;
   #directionalLight2: typeof THREE.DirectionalLight;
@@ -14,6 +12,9 @@ export class IlluminationView {
   #directionalLight4: typeof THREE.DirectionalLight;
   #ambientLight: typeof THREE.AmbientLight;
 
+  /**
+   * コンストラクタ
+   */
   constructor() {
     this.#directionalLight1 = new THREE.DirectionalLight(0xaaaaaa);
     this.#directionalLight1.position.set(1, 1, 1);
@@ -31,8 +32,18 @@ export class IlluminationView {
   }
 
   /**
+   * デストラクタ相当の処理
+   */
+  destructor(): void {
+    this.#directionalLight1.dispose();
+    this.#directionalLight2.dispose();
+    this.#directionalLight3.dispose();
+    this.#directionalLight4.dispose();
+    this.#ambientLight.dispose();
+  }
+
+  /**
    * シーンに追加するオブジェクトを配列で返す
-   *
    * @return シーンに追加するオブジェクト
    */
   getObject3Ds(): typeof THREE.Object3D[] {
@@ -47,19 +58,9 @@ export class IlluminationView {
 
   /**
    * モデルをビューに反映させる
-   *
    * @param model モデル
    */
   engage(model: IlluminationModel): void {
-    this.#updateIntensity(model);
-  }
-
-  /**
-   * 照明の明るさを更新する
-   *
-   * @param model モデル
-   */
-  #updateIntensity(model: IlluminationModel): void {
     this.#directionalLight1.intensity = model.intensity * 0.8;
     this.#directionalLight2.intensity = model.intensity * 0.8;
     this.#directionalLight3.intensity = model.intensity * 0.6;

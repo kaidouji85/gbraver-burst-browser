@@ -104,6 +104,7 @@ export class ThreeDimensionLayer {
     });
 
     this.scene.background.dispose();
+    this.scene.background = null;
     this.players.forEach((player) => {
       player.destructor();
     });
