@@ -36,8 +36,11 @@ export class Illumination {
     });
   }
 
-  /** デストラクタ相当の処理 */
+  /**
+   * デストラクタ相当の処理
+   */
   destructor(): void {
+    this.#view.destructor();
     this.#unsubscriber.unsubscribe();
   }
 

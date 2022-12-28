@@ -65,5 +65,7 @@ function batteryEnchantmentSkillDetail(
  * @return 説明文
  */
 function damageHalvedSkillDetail(skill: DamageHalvedSkill): string[] {
-  return [`${skill.duration}ターンだけ、全ての被ダメージを1/2にする。この効果は、0防御した時に無効となる。`];
+  return [
+    `${skill.duration}ターンだけ、全ての被ダメージを1/2にする。この効果は、0防御した時に無効となる。`,
+  ];
 }
