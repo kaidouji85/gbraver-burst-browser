@@ -379,5 +379,5 @@ export const DEVELOPING_TEXTURE_CONFIGS: TextureConfig[] = [
   {
     id: TEXTURE_IDS.GENESIS_BRAVER_SP_TO_STAND,
     path: "armdozer/genesis-braver/sp-to-stand.webp",
-  }
+  },
 ];

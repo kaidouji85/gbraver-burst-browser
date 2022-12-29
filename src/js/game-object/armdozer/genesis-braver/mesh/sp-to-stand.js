@@ -13,14 +13,16 @@ export const WIDTH = 600;
 /** スプライト高 */
 export const HEIGHT = 600;
 /** アニメーション枚数 */
-export const MAX_ANIMATION = 4;
+export const MAX_ANIMATION = 8;
 
 /**
- * ジェネシスブレイバー ストレートパンチ スプライトを生成
+ * ジェネシスブレイバー ストレートパンチ -> 立ち スプライトを生成
  * @param resources リソース管理オブジェクト
  * @return 生成結果
  */
-export function genesisBraverSPCharge(resources: Resources): ArmdozerAnimation {
+export function genesisBraverSPTOStand(
+  resources: Resources
+): ArmdozerAnimation {
   const texture =
     resources.textures.find(
       (v) => v.id === TEXTURE_IDS.GENESIS_BRAVER_SP_CHARGE

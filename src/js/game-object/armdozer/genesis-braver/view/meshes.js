@@ -2,7 +2,8 @@
 
 import type { Resources } from "../../../../resource";
 import { genesisBraverSPAttack } from "../mesh/sp-attack";
-import { genesisBraverStraightPunch } from "../mesh/sp-charge";
+import { genesisBraverSPCharge } from "../mesh/sp-charge";
+import { genesisBraverSPTOStand } from "../mesh/sp-to-stand";
 import { genesisBraverStand } from "../mesh/stand";
 import type { AnimationMeshMapping } from "./animation-mesh-mapping";
 
@@ -14,7 +15,8 @@ import type { AnimationMeshMapping } from "./animation-mesh-mapping";
 export function createMeshes(resources: Resources): AnimationMeshMapping[] {
   return [
     { type: "STAND", mesh: genesisBraverStand(resources) },
-    { type: "SP_CHARGE", mesh: genesisBraverStraightPunch(resources) },
+    { type: "SP_CHARGE", mesh: genesisBraverSPCharge(resources) },
     { type: "SP_ATTACK", mesh: genesisBraverSPAttack(resources) },
+    { type: "SP_TO_STAND", mesh: genesisBraverSPTOStand(resources) },
   ];
 }

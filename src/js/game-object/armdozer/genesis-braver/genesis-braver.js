@@ -10,6 +10,7 @@ import type { GameObjectAction } from "../../action/game-object-action";
 import type { ArmDozerSprite } from "../armdozer-sprite";
 import { EmptyArmDozerSprite } from "../empty-armdozer-sprite";
 import { charge } from "./animation/charge";
+import { spToStand } from "./animation/sp-to-stand";
 import { straightPunch } from "./animation/straight-punch";
 import type { GenesisBraverModel } from "./model/genesis-braver-model";
 import { createInitialValue } from "./model/initial-value";
@@ -79,6 +80,14 @@ export class GenesisBraver
    */
   straightPunch(): Animate {
     return straightPunch(this.#model);
+  }
+
+  /**
+   * ストレートパンチ -> 立ち
+   * @return アニメーション
+   */
+  spToStand(): Animate {
+    return spToStand(this.#model, this.#sounds);
   }
 
   /** @override */
