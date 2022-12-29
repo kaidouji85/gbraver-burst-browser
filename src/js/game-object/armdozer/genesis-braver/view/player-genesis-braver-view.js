@@ -3,15 +3,15 @@
 import * as THREE from "three";
 
 import type { Resources } from "../../../../resource";
-import type { ArmdozerAnimation } from "../../mesh/armdozer-animation";
-import { genesisBraverStand } from "../mesh/stand";
 import type { GenesisBraverModel } from "../model/genesis-braver-model";
+import type { AnimationMeshMapping } from "./animation-mesh-mapping";
 import type { GenesisBraverView } from "./genesis-braver-view";
+import { createMeshes } from "./meshes";
 
 /** プレイヤー ジェネシスブレイバービュー */
 export class PlayerGenesisBraverView implements GenesisBraverView {
-  /** 立ち */
-  #stand: ArmdozerAnimation;
+  /** メッシュ */
+  #meshes: AnimationMeshMapping[];
   /** グループ */
   #group: typeof THREE.Group;
 
@@ -21,14 +21,17 @@ export class PlayerGenesisBraverView implements GenesisBraverView {
    */
   constructor(resources: Resources) {
     this.#group = new THREE.Group();
-
-    this.#stand = genesisBraverStand(resources);
-    this.#group.add(this.#stand.getObject3D());
+    this.#meshes = createMeshes(resources);
+    this.#meshes.forEach(({ mesh }) => {
+      this.#group.add(mesh.getObject3D());
+    });
   }
 
   /** @override */
   destructor() {
-    this.#stand.destructor();
+    this.#meshes.forEach(({ mesh }) => {
+      mesh.destructor();
+    });
   }
 
   /** @override */
@@ -41,6 +44,20 @@ export class PlayerGenesisBraverView implements GenesisBraverView {
     this.#group.position.x = model.position.x;
     this.#group.position.y = model.position.y;
     this.#group.position.z = model.position.z;
+
+    const currentMesh = this.#meshes.find(
+      (v) => v.type === model.animation.type
+    );
+    if (currentMesh) {
+      currentMesh.mesh.opacity(1);
+      currentMesh.mesh.animate(model.animation.frame);
+    }
+
+    this.#meshes
+      .filter((v) => v !== currentMesh)
+      .forEach(({ mesh }) => {
+        mesh.opacity(0);
+      });
   }
 
   /** @override */

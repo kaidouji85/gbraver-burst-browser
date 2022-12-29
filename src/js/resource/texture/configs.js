@@ -368,4 +368,16 @@ export const DEVELOPING_TEXTURE_CONFIGS: TextureConfig[] = [
     id: TEXTURE_IDS.GENESIS_BRAVER_STAND,
     path: "armdozer/genesis-braver/stand.webp",
   },
+  {
+    id: TEXTURE_IDS.GENESIS_BRAVER_SP_CHARGE,
+    path: "armdozer/genesis-braver/sp-charge.webp",
+  },
+  {
+    id: TEXTURE_IDS.GENESIS_BRAVER_SP_ATTACK,
+    path: "armdozer/genesis-braver/sp-attack.webp",
+  },
+  {
+    id: TEXTURE_IDS.GENESIS_BRAVER_SP_TO_STAND,
+    path: "armdozer/genesis-braver/sp-to-stand.webp",
+  },
 ];
