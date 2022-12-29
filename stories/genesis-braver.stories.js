@@ -27,6 +27,9 @@ export const playerStraightPunch = (): HTMLElement => {
       .chain(sprite.charge())
       .chain(delay(1000))
       .chain(sprite.straightPunch())
+      .chain(delay(1000))
+      .chain(sprite.spToStand())
+      .chain(delay(1000))
       .loop();
     return { objects: [sprite.getObject3D()] };
   });

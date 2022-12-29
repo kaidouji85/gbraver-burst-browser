@@ -25,7 +25,7 @@ export function genesisBraverSPTOStand(
 ): ArmdozerAnimation {
   const texture =
     resources.textures.find(
-      (v) => v.id === TEXTURE_IDS.GENESIS_BRAVER_SP_CHARGE
+      (v) => v.id === TEXTURE_IDS.GENESIS_BRAVER_SP_TO_STAND
     )?.texture ?? new THREE.Texture();
   const mesh = createHorizontalAnimation({
     texture,
