@@ -1,4 +1,5 @@
 // @flow
+
 import type {
   BattleResult,
   CriticalHit,
@@ -18,14 +19,139 @@ import type { BattleAnimationParamX } from "../animation-param";
 
 /**
  * ウィングドーザ 戦闘アニメーション パラメータ
- *
  * @type Result 戦闘結果
  */
 export type WingDozerBattle<Result> = BattleAnimationParamX<WingDozer, Result>;
 
 /**
+ * アタッカーにフォーカスを合わせる
+ * attentionArmDozerよりもカメラ移動は控えめ
+ * @param camera カメラ
+ * @param attacker アタッカーのスプライト
+ * @return アニメーション
+ */
+function focusToAttacker(camera: TDCamera, attacker: WingDozer): Animate {
+  const duration = 400;
+  return all(
+    track(camera, attacker.getObject3D().position.x * 0.6, duration),
+    dolly(camera, "-20", duration)
+  );
+}
+
+/** attackが受け取れる戦闘結果 */
+type AttackResult = NormalHit | CriticalHit;
+
+/**
+ * ウィングドーザ 攻撃ヒット
+ * @param param パラメータ
+ * @return アニメーション
+ */
+function attack(param: WingDozerBattle<AttackResult>): Animate {
+  return all(
+    param.attackerSprite.charge().chain(delay(600)),
+    focusToAttacker(param.tdCamera, param.attackerSprite)
+  )
+    .chain(param.attackerSprite.upper())
+    .chain(
+      all(
+        delay(1000)
+          .chain(param.attackerSprite.upperToStand())
+          .chain(delay(500)),
+        toInitial(param.tdCamera, 100),
+        param.defenderTD.damageIndicator.popUp(param.result.damage),
+        param.defenderSprite.knockBack(),
+        param.defenderTD.hitMark.shockWave.popUp(),
+        param.defenderHUD.gauge.hp(param.defenderState.armdozer.hp)
+      )
+    );
+}
+
+/**
+ * ウィングドーザ 攻撃ガード
+ * @param param パラメータ
+ * @return アニメーション
+ */
+function guard(param: WingDozerBattle<Guard>): Animate {
+  return param.attackerSprite
+    .charge()
+    .chain(delay(600))
+    .chain(param.attackerSprite.upper())
+    .chain(
+      all(
+        delay(1000)
+          .chain(param.attackerSprite.upperToStand())
+          .chain(delay(500)),
+        param.defenderTD.damageIndicator.popUp(param.result.damage),
+        param.defenderSprite.guard(),
+        param.defenderTD.hitMark.shockWave.popUp(),
+        param.defenderHUD.gauge.hp(param.defenderState.armdozer.hp)
+      )
+    );
+}
+
+/**
+ * ウィングドーザ 攻撃ミス
+ * @param param パラメータ
+ * @return アニメーション
+ */
+function miss(param: WingDozerBattle<Miss>): Animate {
+  return param.attackerSprite
+    .charge()
+    .chain(delay(600))
+    .chain(param.attackerSprite.upper())
+    .chain(param.defenderSprite.avoid())
+    .chain(delay(500))
+    .chain(param.attackerSprite.upperToStand())
+    .chain(delay(500));
+}
+
+/**
+ * フェイント
+ * @param param パラメータ
+ * @return アニメーション
+ */
+function feint(param: WingDozerBattle<Feint>): Animate {
+  if (!param.result.isDefenderMoved) {
+    return empty();
+  }
+
+  return param.defenderSprite.avoid().chain(delay(500));
+}
+
+/** downが受け取れる戦闘結果 */
+type DownResult = NormalHit | CriticalHit | Guard;
+
+/**
+ * とどめ
+ * @param param パラメータ
+ * @return アニメーション
+ */
+function down(param: WingDozerBattle<DownResult>): Animate {
+  return all(
+    param.attackerSprite.charge().chain(delay(600)),
+    focusToAttacker(param.tdCamera, param.attackerSprite)
+  )
+    .chain(param.attackerSprite.upper())
+    .chain(
+      all(
+        delay(1500)
+          .chain(param.attackerSprite.upperToStand())
+          .chain(delay(500)),
+        param.attackerHUD.resultIndicator
+          .slideIn()
+          .chain(delay(500))
+          .chain(param.attackerHUD.resultIndicator.moveToEdge()),
+        toInitial(param.tdCamera, 100),
+        param.defenderTD.damageIndicator.popUp(param.result.damage),
+        param.defenderSprite.down(),
+        param.defenderTD.hitMark.shockWave.popUp(),
+        param.defenderHUD.gauge.hp(param.defenderState.armdozer.hp)
+      )
+    );
+}
+
+/**
  * ウィングドーザ 戦闘アニメーション
- *
  * @param param パラメータ
  * @return アニメーション
  */
@@ -71,139 +197,4 @@ export function wingDozerAttack(param: WingDozerBattle<BattleResult>): Animate {
   }
 
   return empty();
-}
-
-/**
- * アタッカーにフォーカスを合わせる
- * attentionArmDozerよりもカメラ移動は控えめ
- *
- * @param camera カメラ
- * @param attacker アタッカーのスプライト
- * @return アニメーション
- */
-function focusToAttacker(camera: TDCamera, attacker: WingDozer): Animate {
-  const duration = 400;
-  return all(
-    track(camera, attacker.getObject3D().position.x * 0.6, duration),
-    dolly(camera, "-20", duration)
-  );
-}
-
-/**
- * attackが受け取れる戦闘結果
- */
-type AttackResult = NormalHit | CriticalHit;
-
-/**
- * ウィングドーザ 攻撃ヒット
- *
- * @param param パラメータ
- * @return アニメーション
- */
-function attack(param: WingDozerBattle<AttackResult>): Animate {
-  return all(
-    param.attackerSprite.charge().chain(delay(600)),
-    focusToAttacker(param.tdCamera, param.attackerSprite)
-  )
-    .chain(param.attackerSprite.upper())
-    .chain(
-      all(
-        delay(1000)
-          .chain(param.attackerSprite.upperToStand())
-          .chain(delay(500)),
-        toInitial(param.tdCamera, 100),
-        param.defenderTD.damageIndicator.popUp(param.result.damage),
-        param.defenderSprite.knockBack(),
-        param.defenderTD.hitMark.shockWave.popUp(),
-        param.defenderHUD.gauge.hp(param.defenderState.armdozer.hp)
-      )
-    );
-}
-
-/**
- * ウィングドーザ 攻撃ガード
- *
- * @param param パラメータ
- * @return アニメーション
- */
-function guard(param: WingDozerBattle<Guard>): Animate {
-  return param.attackerSprite
-    .charge()
-    .chain(delay(600))
-    .chain(param.attackerSprite.upper())
-    .chain(
-      all(
-        delay(1000)
-          .chain(param.attackerSprite.upperToStand())
-          .chain(delay(500)),
-        param.defenderTD.damageIndicator.popUp(param.result.damage),
-        param.defenderSprite.guard(),
-        param.defenderTD.hitMark.shockWave.popUp(),
-        param.defenderHUD.gauge.hp(param.defenderState.armdozer.hp)
-      )
-    );
-}
-
-/**
- * ウィングドーザ 攻撃ミス
- *
- * @param param パラメータ
- * @return アニメーション
- */
-function miss(param: WingDozerBattle<Miss>): Animate {
-  return param.attackerSprite
-    .charge()
-    .chain(delay(600))
-    .chain(param.attackerSprite.upper())
-    .chain(param.defenderSprite.avoid())
-    .chain(delay(500))
-    .chain(param.attackerSprite.upperToStand())
-    .chain(delay(500));
-}
-
-/**
- * フェイント
- *
- * @param param パラメータ
- * @return アニメーション
- */
-function feint(param: WingDozerBattle<Feint>): Animate {
-  if (!param.result.isDefenderMoved) {
-    return empty();
-  }
-
-  return param.defenderSprite.avoid().chain(delay(500));
-}
-
-/** downが受け取れる戦闘結果 */
-type DownResult = NormalHit | CriticalHit | Guard;
-
-/**
- * とどめ
- *
- * @param param パラメータ
- * @return アニメーション
- */
-function down(param: WingDozerBattle<DownResult>): Animate {
-  return all(
-    param.attackerSprite.charge().chain(delay(600)),
-    focusToAttacker(param.tdCamera, param.attackerSprite)
-  )
-    .chain(param.attackerSprite.upper())
-    .chain(
-      all(
-        delay(1500)
-          .chain(param.attackerSprite.upperToStand())
-          .chain(delay(500)),
-        param.attackerHUD.resultIndicator
-          .slideIn()
-          .chain(delay(500))
-          .chain(param.attackerHUD.resultIndicator.moveToEdge()),
-        toInitial(param.tdCamera, 100),
-        param.defenderTD.damageIndicator.popUp(param.result.damage),
-        param.defenderSprite.down(),
-        param.defenderTD.hitMark.shockWave.popUp(),
-        param.defenderHUD.gauge.hp(param.defenderState.armdozer.hp)
-      )
-    );
 }

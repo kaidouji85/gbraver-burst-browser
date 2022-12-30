@@ -27,8 +27,133 @@ export type ShinBraverBattle<RESULT> = BattleAnimationParamX<
 >;
 
 /**
+ * アタッカーにフォーカスを合わせる
+ * @param camera カメラ
+ * @param attacker スプライト
+ * @return アニメーション
+ */
+function focusToAttacker(camera: TDCamera, attacker: ShinBraver): Animate {
+  const duration = 400;
+  return all(
+    track(camera, attacker.getObject3D().position.x * 0.6, duration),
+    dolly(camera, "-30", duration)
+  );
+}
+
+/** attackが受け取れる戦闘結果 */
+type AttackResult = NormalHit | CriticalHit;
+
+/**
+ * 攻撃ヒット
+ * @param param パラメータ
+ * @return アニメーション
+ */
+function attack(param: ShinBraverBattle<AttackResult>): Animate {
+  return all(
+    param.attackerSprite.charge().chain(delay(500)),
+    focusToAttacker(param.tdCamera, param.attackerSprite)
+  )
+    .chain(param.attackerSprite.straightPunch())
+    .chain(
+      all(
+        delay(1000)
+          .chain(param.attackerSprite.punchToStand())
+          .chain(delay(500)),
+        toInitial(param.tdCamera, 100),
+        param.defenderTD.damageIndicator.popUp(param.result.damage),
+        param.defenderSprite.knockBack(),
+        param.defenderTD.hitMark.shockWave.popUp(),
+        param.defenderHUD.gauge.hp(param.defenderState.armdozer.hp)
+      )
+    );
+}
+
+/**
+ * ガード
+ * @param param パラメータ
+ * @return アニメーション
+ */
+function guard(param: ShinBraverBattle<Guard>): Animate {
+  return param.attackerSprite
+    .charge()
+    .chain(delay(500))
+    .chain(param.attackerSprite.straightPunch())
+    .chain(
+      all(
+        delay(1000)
+          .chain(param.attackerSprite.punchToStand())
+          .chain(delay(500)),
+        param.defenderTD.damageIndicator.popUp(param.result.damage),
+        param.defenderSprite.guard(),
+        param.defenderTD.hitMark.shockWave.popUp(),
+        param.defenderHUD.gauge.hp(param.defenderState.armdozer.hp)
+      )
+    );
+}
+
+/**
+ * ミス
+ * @param param パラメータ
+ * @return アニメーション
+ */
+function miss(param: ShinBraverBattle<Miss>): Animate {
+  return param.attackerSprite
+    .charge()
+    .chain(delay(500))
+    .chain(param.attackerSprite.straightPunch())
+    .chain(param.defenderSprite.avoid())
+    .chain(delay(500))
+    .chain(param.attackerSprite.punchToStand())
+    .chain(delay(500));
+}
+
+/**
+ * フェイント
+ * @param param パラメータ
+ * @return アニメーション
+ */
+function feint(param: ShinBraverBattle<Feint>): Animate {
+  if (!param.result.isDefenderMoved) {
+    return empty();
+  }
+
+  return param.defenderSprite.avoid().chain(delay(500));
+}
+
+/** downが受け取れる戦闘結果 */
+type DownResult = NormalHit | CriticalHit | Guard;
+
+/**
+ * とどめ
+ * @param param パラメータ
+ * @return アニメーション
+ */
+function down(param: ShinBraverBattle<DownResult>): Animate {
+  return all(
+    param.attackerSprite.charge().chain(delay(500)),
+    focusToAttacker(param.tdCamera, param.attackerSprite)
+  )
+    .chain(param.attackerSprite.straightPunch())
+    .chain(
+      all(
+        delay(1500)
+          .chain(param.attackerSprite.punchToStand())
+          .chain(delay(500)),
+        param.attackerHUD.resultIndicator
+          .slideIn()
+          .chain(delay(500))
+          .chain(param.attackerHUD.resultIndicator.moveToEdge()),
+        toInitial(param.tdCamera, 100),
+        param.defenderTD.damageIndicator.popUp(param.result.damage),
+        param.defenderSprite.down(),
+        param.defenderTD.hitMark.shockWave.popUp(),
+        param.defenderHUD.gauge.hp(param.defenderState.armdozer.hp)
+      )
+    );
+}
+
+/**
  * シンブレイバーの攻撃アニメーション
- *
  * @param param パラメータ
  * @return アニメーション
  */
@@ -76,136 +201,4 @@ export function shinBraverAttack(
   }
 
   return empty();
-}
-
-/**
- * アタッカーにフォーカスを合わせる
- *
- * @param camera カメラ
- * @param attacker スプライト
- * @return アニメーション
- */
-function focusToAttacker(camera: TDCamera, attacker: ShinBraver): Animate {
-  const duration = 400;
-  return all(
-    track(camera, attacker.getObject3D().position.x * 0.6, duration),
-    dolly(camera, "-30", duration)
-  );
-}
-
-/** attackが受け取れる戦闘結果 */
-type AttackResult = NormalHit | CriticalHit;
-
-/**
- * 攻撃ヒット
- *
- * @param param パラメータ
- * @return アニメーション
- */
-function attack(param: ShinBraverBattle<AttackResult>): Animate {
-  return all(
-    param.attackerSprite.charge().chain(delay(500)),
-    focusToAttacker(param.tdCamera, param.attackerSprite)
-  )
-    .chain(param.attackerSprite.straightPunch())
-    .chain(
-      all(
-        delay(1000)
-          .chain(param.attackerSprite.punchToStand())
-          .chain(delay(500)),
-        toInitial(param.tdCamera, 100),
-        param.defenderTD.damageIndicator.popUp(param.result.damage),
-        param.defenderSprite.knockBack(),
-        param.defenderTD.hitMark.shockWave.popUp(),
-        param.defenderHUD.gauge.hp(param.defenderState.armdozer.hp)
-      )
-    );
-}
-
-/**
- * ガード
- *
- * @param param パラメータ
- * @return アニメーション
- */
-function guard(param: ShinBraverBattle<Guard>): Animate {
-  return param.attackerSprite
-    .charge()
-    .chain(delay(500))
-    .chain(param.attackerSprite.straightPunch())
-    .chain(
-      all(
-        delay(1000)
-          .chain(param.attackerSprite.punchToStand())
-          .chain(delay(500)),
-        param.defenderTD.damageIndicator.popUp(param.result.damage),
-        param.defenderSprite.guard(),
-        param.defenderTD.hitMark.shockWave.popUp(),
-        param.defenderHUD.gauge.hp(param.defenderState.armdozer.hp)
-      )
-    );
-}
-
-/**
- * ミス
- *
- * @param param パラメータ
- * @return アニメーション
- */
-function miss(param: ShinBraverBattle<Miss>): Animate {
-  return param.attackerSprite
-    .charge()
-    .chain(delay(500))
-    .chain(param.attackerSprite.straightPunch())
-    .chain(param.defenderSprite.avoid())
-    .chain(delay(500))
-    .chain(param.attackerSprite.punchToStand())
-    .chain(delay(500));
-}
-
-/**
- * フェイント
- *
- * @param param パラメータ
- * @return アニメーション
- */
-function feint(param: ShinBraverBattle<Feint>): Animate {
-  if (!param.result.isDefenderMoved) {
-    return empty();
-  }
-
-  return param.defenderSprite.avoid().chain(delay(500));
-}
-
-/** downが受け取れる戦闘結果 */
-type DownResult = NormalHit | CriticalHit | Guard;
-
-/**
- * とどめ
- *
- * @param param パラメータ
- * @return アニメーション
- */
-function down(param: ShinBraverBattle<DownResult>): Animate {
-  return all(
-    param.attackerSprite.charge().chain(delay(500)),
-    focusToAttacker(param.tdCamera, param.attackerSprite)
-  )
-    .chain(param.attackerSprite.straightPunch())
-    .chain(
-      all(
-        delay(1500)
-          .chain(param.attackerSprite.punchToStand())
-          .chain(delay(500)),
-        param.attackerHUD.resultIndicator
-          .slideIn()
-          .chain(delay(500))
-          .chain(param.attackerHUD.resultIndicator.moveToEdge()),
-        toInitial(param.tdCamera, 100),
-        param.defenderTD.damageIndicator.popUp(param.result.damage),
-        param.defenderSprite.down(),
-        param.defenderTD.hitMark.shockWave.popUp(),
-        param.defenderHUD.gauge.hp(param.defenderState.armdozer.hp)
-      )
-    );
 }
