@@ -32,5 +32,6 @@ export function genesisBraverSPAttack(resources: Resources): ArmdozerAnimation {
     height: HEIGHT,
   });
   mesh.getObject3D().position.y = MESH_Y;
+  mesh.getObject3D().position.z = 1;
   return mesh;
 }
