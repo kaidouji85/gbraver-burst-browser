@@ -1,4 +1,5 @@
 // @flow
+
 import type {
   BattleAnimationTimeScale,
   GbraverBurstBrowserConfig,
@@ -61,7 +62,6 @@ class LocalStorageConfigRepository
 
 /**
  * ブラウザ設定リポジトリLocalStorage実装を生成する
- *
  * @return 生成結果
  */
 export function createLocalStorageConfigRepository(): GbraverBurstBrowserConfigRepository {

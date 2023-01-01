@@ -1,4 +1,5 @@
 // @flow
+
 import { map } from "../stream/operator";
 import type { Unsubscriber } from "../stream/stream";
 import { createStream } from "../stream/stream";
