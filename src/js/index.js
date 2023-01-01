@@ -1,4 +1,5 @@
 // @flow
+
 import "../css/style.css";
 
 import { createBrowserSDK } from "@gbraver-burst-network/browser-sdk";
