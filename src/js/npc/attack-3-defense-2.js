@@ -39,7 +39,6 @@ const defenseRoutine: SimpleRoutine = (data) => {
 
 /**
  * 3攻撃、2防御、ライトニングドーザNPC
- *
  * @return NPC
  */
 export function attack3Defense2LightningDozerNPC(): NPC {
@@ -51,12 +50,22 @@ export function attack3Defense2LightningDozerNPC(): NPC {
 
 /**
  * 3攻撃、2防御、シンブレイバーNPC
- *
  * @return NPC
  */
 export function attack3Defense2ShinBraverNPC(): NPC {
   const armdozer =
     ArmDozers.find((v) => v.id === ArmDozerIds.SHIN_BRAVER) ?? ArmDozers[0];
+  const pilot = Pilots.find((v) => v.id === PilotIds.SHINYA) ?? Pilots[0];
+  return new SimpleNPC(armdozer, pilot, attackRoutine, defenseRoutine);
+}
+
+/**
+ * 3攻撃、2防御、ジェネシスブレイバーNPC
+ * @return NPC
+ */
+export function attack3Defense2GenesisBraverNPC(): NPC {
+  const armdozer =
+    ArmDozers.find((v) => v.id === ArmDozerIds.GENESIS_BRAVER) ?? ArmDozers[0];
   const pilot = Pilots.find((v) => v.id === PilotIds.SHINYA) ?? Pilots[0];
   return new SimpleNPC(armdozer, pilot, attackRoutine, defenseRoutine);
 }
