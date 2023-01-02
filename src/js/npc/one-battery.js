@@ -24,7 +24,6 @@ const oneBatteryRoutine: SimpleRoutine = (data) => {
 
 /**
  * バッテリー1をひたすら出す、ネオランドーザNPC
- *
  * @return NPC
  */
 export function oneBatteryNeoLandozerNPC(): NPC {
@@ -36,12 +35,22 @@ export function oneBatteryNeoLandozerNPC(): NPC {
 
 /**
  * バッテリー1をひたすら出す、シンブレイバーNPC
- *
  * @return NPC
  */
 export function oneBatteryShinBraverNPC(): NPC {
   const armdozer =
     ArmDozers.find((v) => v.id === ArmDozerIds.SHIN_BRAVER) ?? ArmDozers[0];
+  const pilot = Pilots.find((v) => v.id === PilotIds.SHINYA) ?? Pilots[0];
+  return new SimpleNPC(armdozer, pilot, oneBatteryRoutine, oneBatteryRoutine);
+}
+
+/**
+ * バッテリー1をひたすら出す、ジェネシスブレイバーNPC
+ * @return NPC
+ */
+export function oneBatteryGenesisBraverNPC(): NPC {
+  const armdozer =
+    ArmDozers.find((v) => v.id === ArmDozerIds.GENESIS_BRAVER) ?? ArmDozers[0];
   const pilot = Pilots.find((v) => v.id === PilotIds.SHINYA) ?? Pilots[0];
   return new SimpleNPC(armdozer, pilot, oneBatteryRoutine, oneBatteryRoutine);
 }
