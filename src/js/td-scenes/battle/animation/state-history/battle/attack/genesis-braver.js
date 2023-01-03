@@ -1,6 +1,13 @@
 // @flow
 
-import type {BattleResult, CriticalHit, Feint, Guard, Miss, NormalHit} from "gbraver-burst-core";
+import type {
+  BattleResult,
+  CriticalHit,
+  Feint,
+  Guard,
+  Miss,
+  NormalHit,
+} from "gbraver-burst-core";
 
 import { all } from "../../../../../../animation/all";
 import { Animate } from "../../../../../../animation/animate";
@@ -31,6 +38,36 @@ function focusToAttacker(camera: TDCamera, attacker: GenesisBraver): Animate {
     track(camera, attacker.getObject3D().position.x * 0.6, duration),
     dolly(camera, "-30", duration)
   );
+}
+
+/** downが受け取れる戦闘結果 */
+type DownResult = NormalHit | CriticalHit | Guard;
+
+/**
+ * とどめ
+ * @param param パラメータ
+ * @return アニメーション
+ */
+function down(param: GenesisBraverBattle<DownResult>): Animate {
+  return all(
+    param.attackerSprite.charge().chain(delay(500)),
+    focusToAttacker(param.tdCamera, param.attackerSprite)
+  )
+    .chain(param.attackerSprite.straightPunch())
+    .chain(
+      all(
+        delay(1500).chain(param.attackerSprite.spToStand()).chain(delay(500)),
+        param.attackerHUD.resultIndicator
+          .slideIn()
+          .chain(delay(500))
+          .chain(param.attackerHUD.resultIndicator.moveToEdge()),
+        toInitial(param.tdCamera, 100),
+        param.defenderTD.damageIndicator.popUp(param.result.damage),
+        param.defenderSprite.down(),
+        param.defenderTD.hitMark.shockWave.popUp(),
+        param.defenderHUD.gauge.hp(param.defenderState.armdozer.hp)
+      )
+    );
 }
 
 /** attackが受け取れる戦闘結果 */
@@ -71,9 +108,7 @@ function guard(param: GenesisBraverBattle<Guard>): Animate {
     .chain(param.attackerSprite.straightPunch())
     .chain(
       all(
-        delay(1000)
-          .chain(param.attackerSprite.spToStand())
-          .chain(delay(500)),
+        delay(1000).chain(param.attackerSprite.spToStand()).chain(delay(500)),
         param.defenderTD.damageIndicator.popUp(param.result.damage),
         param.defenderSprite.guard(),
         param.defenderTD.hitMark.shockWave.popUp(),
@@ -119,14 +154,29 @@ function feint(param: GenesisBraverBattle<Feint>): Animate {
 export function genesisBraverAttack(
   param: GenesisBraverBattle<BattleResult>
 ): Animate {
+  if (param.isDeath && param.result.name === "NormalHit") {
+    const result = (param.result: NormalHit);
+    return down({ ...param, result });
+  }
+
   if (param.result.name === "NormalHit") {
     const result = (param.result: NormalHit);
     return attack({ ...param, result });
   }
 
+  if (param.isDeath && param.result.name === "CriticalHit") {
+    const result = (param.result: CriticalHit);
+    return down({ ...param, result });
+  }
+
   if (param.result.name === "CriticalHit") {
     const result = (param.result: CriticalHit);
     return attack({ ...param, result });
+  }
+
+  if (param.isDeath && param.result.name === "Guard") {
+    const result = (param.result: Guard);
+    return down({ ...param, result });
   }
 
   if (param.result.name === "Guard") {
@@ -143,6 +193,6 @@ export function genesisBraverAttack(
     const result = (param.result: Feint);
     return feint({ ...param, result });
   }
-  
+
   return empty();
 }
