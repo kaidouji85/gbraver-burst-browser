@@ -1,6 +1,6 @@
 // @flow
 
-import type { BattleResult, CriticalHit, NormalHit } from "gbraver-burst-core";
+import type {BattleResult, CriticalHit, Guard, NormalHit} from "gbraver-burst-core";
 
 import { all } from "../../../../../../animation/all";
 import { Animate } from "../../../../../../animation/animate";
@@ -60,6 +60,29 @@ function attack(param: GenesisBraverBattle<AttackResult>): Animate {
 }
 
 /**
+ * ガード
+ * @param param パラメータ
+ * @return アニメーション
+ */
+function guard(param: GenesisBraverBattle<Guard>): Animate {
+  return param.attackerSprite
+    .charge()
+    .chain(delay(500))
+    .chain(param.attackerSprite.straightPunch())
+    .chain(
+      all(
+        delay(1000)
+          .chain(param.attackerSprite.spToStand())
+          .chain(delay(500)),
+        param.defenderTD.damageIndicator.popUp(param.result.damage),
+        param.defenderSprite.guard(),
+        param.defenderTD.hitMark.shockWave.popUp(),
+        param.defenderHUD.gauge.hp(param.defenderState.armdozer.hp)
+      )
+    );
+}
+
+/**
  * ジェネシスブレイバー 攻撃アニメーション
  * @param param パラメータ
  * @return アニメーション
@@ -75,6 +98,11 @@ export function genesisBraverAttack(
   if (param.result.name === "CriticalHit") {
     const result = (param.result: CriticalHit);
     return attack({ ...param, result });
+  }
+
+  if (param.result.name === "Guard") {
+    const result = (param.result: Guard);
+    return guard({ ...param, result });
   }
 
   return empty();
