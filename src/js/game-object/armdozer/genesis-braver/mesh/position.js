@@ -1,4 +1,4 @@
 // @flow
 
 /** メッシュ基準Y座標 */
-export const MESH_Y = 170;
+export const MESH_Y = 162;
