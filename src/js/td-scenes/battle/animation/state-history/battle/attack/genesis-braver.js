@@ -1,6 +1,6 @@
 // @flow
 
-import type {BattleResult, CriticalHit, Guard, NormalHit} from "gbraver-burst-core";
+import type {BattleResult, CriticalHit, Guard, Miss, NormalHit} from "gbraver-burst-core";
 
 import { all } from "../../../../../../animation/all";
 import { Animate } from "../../../../../../animation/animate";
@@ -83,6 +83,22 @@ function guard(param: GenesisBraverBattle<Guard>): Animate {
 }
 
 /**
+ * ミス
+ * @param param パラメータ
+ * @return アニメーション
+ */
+function miss(param: GenesisBraverBattle<Miss>): Animate {
+  return param.attackerSprite
+    .charge()
+    .chain(delay(500))
+    .chain(param.attackerSprite.straightPunch())
+    .chain(param.defenderSprite.avoid())
+    .chain(delay(500))
+    .chain(param.attackerSprite.spToStand())
+    .chain(delay(500));
+}
+
+/**
  * ジェネシスブレイバー 攻撃アニメーション
  * @param param パラメータ
  * @return アニメーション
@@ -103,6 +119,11 @@ export function genesisBraverAttack(
   if (param.result.name === "Guard") {
     const result = (param.result: Guard);
     return guard({ ...param, result });
+  }
+
+  if (param.result.name === "Miss") {
+    const result = (param.result: Miss);
+    return miss({ ...param, result });
   }
 
   return empty();
