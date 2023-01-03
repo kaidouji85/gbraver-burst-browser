@@ -1,6 +1,6 @@
 // @flow
 
-import type {BattleResult, CriticalHit, Guard, Miss, NormalHit} from "gbraver-burst-core";
+import type {BattleResult, CriticalHit, Feint, Guard, Miss, NormalHit} from "gbraver-burst-core";
 
 import { all } from "../../../../../../animation/all";
 import { Animate } from "../../../../../../animation/animate";
@@ -99,6 +99,19 @@ function miss(param: GenesisBraverBattle<Miss>): Animate {
 }
 
 /**
+ * フェイント
+ * @param param パラメータ
+ * @return アニメーション
+ */
+function feint(param: GenesisBraverBattle<Feint>): Animate {
+  if (!param.result.isDefenderMoved) {
+    return empty();
+  }
+
+  return param.defenderSprite.avoid().chain(delay(500));
+}
+
+/**
  * ジェネシスブレイバー 攻撃アニメーション
  * @param param パラメータ
  * @return アニメーション
@@ -126,5 +139,10 @@ export function genesisBraverAttack(
     return miss({ ...param, result });
   }
 
+  if (param.result.name === "Feint") {
+    const result = (param.result: Feint);
+    return feint({ ...param, result });
+  }
+  
   return empty();
 }
