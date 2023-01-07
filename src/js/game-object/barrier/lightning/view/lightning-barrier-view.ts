@@ -55,7 +55,7 @@ export class LightningBarrierView {
    *
    * @param camera カメラ
    */
-  lookAt(camera: typeof THREE.Camera): void {
+  lookAt(camera: THREE.Camera): void {
     this.getObject3D().quaternion.copy(camera.quaternion);
   }
 
@@ -64,7 +64,7 @@ export class LightningBarrierView {
    *
    * @return シーンに追加するオブジェクト
    */
-  getObject3D(): typeof THREE.Object3D {
+  getObject3D(): THREE.Object3D {
     return this.#mesh.getObject3D();
   }
 

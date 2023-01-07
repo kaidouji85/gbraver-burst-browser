@@ -6,7 +6,7 @@ import { SOUND_IDS } from "../../../../resource/sound";
  * 電撃バリア 音
  */
 export class LightningBarrierSounds {
-  lightningBarrier: typeof Howl;
+  lightningBarrier: Howl;
 
   /**
    * コンストラクタ
@@ -15,7 +15,7 @@ export class LightningBarrierSounds {
    */
   constructor(resources: Resources) {
     const lightningResource = resources.sounds.find(v => v.id === SOUND_IDS.LIGHTNING_BARRIER);
-    this.lightningBarrier = lightningResource ? lightningResource.sound : new Howl();
+    this.lightningBarrier = lightningResource ? lightningResource.sound : new Howl({src: ""});
   }
 
 }

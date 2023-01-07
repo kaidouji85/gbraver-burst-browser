@@ -45,12 +45,12 @@ export class PlayerBatteryNumberView implements BatteryNumberView {
   }
 
   /** カメラの方向を向く */
-  lookAt(camera: typeof THREE.Camera): void {
+  lookAt(camera: THREE.Camera): void {
     this.#numberMesh.getObject3D().quaternion.copy(camera.quaternion);
   }
 
   /** シーンに追加するオブジェクトを返す */
-  getObject3D(): typeof THREE.Object3D {
+  getObject3D(): THREE.Object3D {
     return this.#numberMesh.getObject3D();
   }
 

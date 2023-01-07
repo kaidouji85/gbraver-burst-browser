@@ -1,4 +1,4 @@
-import TWEEN from "@tweenjs/tween.js";
+import TWEEN, {Group} from "@tweenjs/tween.js";
 import * as THREE from "three";
 import { all } from "../../animation/all";
 import { Animate } from "../../animation/animate";
@@ -51,13 +51,13 @@ export class BatterySelector {
   #sounds: BatterySelectorSounds;
 
   /** バッテリー変更TweenGroup */
-  #batteryChangeTween: typeof TWEEN.Group;
+  #batteryChangeTween: Group;
 
   /** -ボタンTweenGroup */
-  #batteryMinusTween: typeof TWEEN.Group;
+  #batteryMinusTween: Group;
 
   /** +ボタンTweenGroup */
-  #batteryPlusTween: typeof TWEEN.Group;
+  #batteryPlusTween: Group;
 
   /** 決定ボタン押下通知ストリーム */
   #decidePush: StreamSource<Event>;

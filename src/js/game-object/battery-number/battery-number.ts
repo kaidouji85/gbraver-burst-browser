@@ -70,7 +70,7 @@ export class BatteryNumber {
   }
 
   /** シーンに追加するオブジェクトを返す */
-  getObject3D(): typeof THREE.Object3D {
+  getObject3D(): THREE.Object3D {
     return this.#view.getObject3D();
   }
 

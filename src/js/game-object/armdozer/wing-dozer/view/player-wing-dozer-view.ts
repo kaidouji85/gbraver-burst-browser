@@ -10,7 +10,7 @@ import type { WingDozerView } from "./wing-dozer-view";
 /** プレイヤー側 ウィングドーザ ビュー */
 export class PlayerWingDozerView implements WingDozerView {
   /** グループ */
-  #group: typeof THREE.Group;
+  #group: THREE.Group;
 
   /** メッシュ */
   #meshes: AnimationMeshMapping[];
@@ -23,7 +23,7 @@ export class PlayerWingDozerView implements WingDozerView {
    *
    * @param resources リソース管理オブジェクト
    */
-  constructor(resources: Resources): void {
+  constructor(resources: Resources) {
     this.#group = new Group();
     this.#meshes = createMeshes(resources);
     this.#activeMeshes = createActiveMeshes(resources);
@@ -44,7 +44,7 @@ export class PlayerWingDozerView implements WingDozerView {
   }
 
   /** @override */
-  getObject3D(): typeof THREE.Object3D {
+  getObject3D(): THREE.Object3D {
     return this.#group;
   }
 
@@ -77,12 +77,12 @@ export class PlayerWingDozerView implements WingDozerView {
   }
 
   /** @override */
-  lookAt(camera: typeof THREE.Camera): void {
+  lookAt(camera: THREE.Camera): void {
     this.#group.quaternion.copy(camera.quaternion);
   }
 
   /** @override */
-  addObject3D(object: typeof THREE.Object3D): void {
+  addObject3D(object: THREE.Object3D): void {
     this.#group.add(object);
   }
 

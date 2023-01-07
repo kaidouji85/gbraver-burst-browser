@@ -37,7 +37,7 @@ export class BatterySelectorView {
   #meter: BatteryMeter;
   #plus: BatteryPlus;
   #minus: BatteryMinus;
-  #group: typeof THREE.Group;
+  #group: THREE.Group;
 
   constructor(param: Param) {
     this.#group = new THREE.Group();
@@ -82,7 +82,7 @@ export class BatterySelectorView {
   }
 
   /** シーンに追加するオブジェクトを取得する */
-  getObject3D(): typeof THREE.Object3D {
+  getObject3D(): THREE.Object3D {
     return this.#group;
   }
 

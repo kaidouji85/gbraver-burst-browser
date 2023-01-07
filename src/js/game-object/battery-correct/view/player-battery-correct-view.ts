@@ -26,7 +26,7 @@ const MINUS_SIGN = 11 / MAX_BATTERY_ANIMATION;
 export class PlayerBatteryCorrectView implements BatteryCorrectView {
   #value: HorizontalAnimationMesh;
   #sign: HorizontalAnimationMesh;
-  #group: typeof THREE.Group;
+  #group: THREE.Group;
 
   /**
    * コンストラクタ
@@ -61,7 +61,7 @@ export class PlayerBatteryCorrectView implements BatteryCorrectView {
   }
 
   /** @override */
-  getObject3D(): typeof THREE.Object3D {
+  getObject3D(): THREE.Object3D {
     return this.#group;
   }
 

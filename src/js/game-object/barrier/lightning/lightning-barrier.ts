@@ -1,4 +1,4 @@
-import TWEEN from "@tweenjs/tween.js";
+import TWEEN, {Group} from "@tweenjs/tween.js";
 import * as THREE from "three";
 import { Animate } from "../../../animation/animate";
 import type { PreRender } from "../../../game-loop/pre-render";
@@ -22,7 +22,7 @@ export class LightningBarrierGameEffect {
   #model: LightningBarrierModel;
   #view: LightningBarrierView;
   #sounds: LightningBarrierSounds;
-  #tweenGroup: typeof TWEEN.Group;
+  #tweenGroup: Group;
   #unsubscribers: Unsubscriber[];
 
   /**
@@ -63,7 +63,7 @@ export class LightningBarrierGameEffect {
    *
    * @return シーンに追加するオブジェクト
    */
-  getObject3D(): typeof THREE.Object3D {
+  getObject3D(): THREE.Object3D {
     return this.#view.getObject3D();
   }
 

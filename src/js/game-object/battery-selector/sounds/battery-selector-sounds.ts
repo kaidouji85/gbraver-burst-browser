@@ -5,10 +5,10 @@ import { SOUND_IDS } from "../../../resource/sound";
 /** バッテリーセレクタ効果音 */
 export type BatterySelectorSounds = {
   /** 効果音ボタン押下 */
-  pushButtonSound: typeof Howl;
+  pushButtonSound: Howl;
 
   /** 効果音値変更 */
-  batteryChangeSound: typeof Howl;
+  batteryChangeSound: Howl;
 };
 
 /**
@@ -18,8 +18,8 @@ export type BatterySelectorSounds = {
  * @return 生成結果
  */
 export function createBatterySelectorSounds(resources: Resources): BatterySelectorSounds {
-  const pushButtonSound = resources.sounds.find(v => v.id === SOUND_IDS.PUSH_BUTTON)?.sound ?? new Howl();
-  const batteryChangeSound = resources.sounds.find(v => v.id === SOUND_IDS.CHANGE_VALUE)?.sound ?? new Howl();
+  const pushButtonSound = resources.sounds.find(v => v.id === SOUND_IDS.PUSH_BUTTON)?.sound ?? new Howl({src: ""});
+  const batteryChangeSound = resources.sounds.find(v => v.id === SOUND_IDS.CHANGE_VALUE)?.sound ?? new Howl({src: ""});
   return {
     pushButtonSound,
     batteryChangeSound
