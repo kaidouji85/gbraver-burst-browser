@@ -1,4 +1,4 @@
-import TWEEN from "@tweenjs/tween.js";
+import TWEEN, {Group} from "@tweenjs/tween.js";
 import * as THREE from "three";
 import { Animate } from "../../../animation/animate";
 import type { PreRender } from "../../../game-loop/pre-render";
@@ -43,7 +43,7 @@ export class ShinBraver extends EmptyArmDozerSprite implements ArmDozerSprite {
   #sounds: ShinBraverSounds;
 
   /** アクティブフラッシュTweenグループ */
-  #activeFlashTween: typeof TWEEN.Group;
+  #activeFlashTween: Group;
 
   /** アンサブスクライバ */
   #unsubscribers: Unsubscriber[];
@@ -82,7 +82,7 @@ export class ShinBraver extends EmptyArmDozerSprite implements ArmDozerSprite {
   }
 
   /** @override */
-  addObject3D(object: typeof THREE.Object3D): void {
+  addObject3D(object: THREE.Object3D): void {
     this.#view.addObject3D(object);
   }
 
@@ -185,7 +185,7 @@ export class ShinBraver extends EmptyArmDozerSprite implements ArmDozerSprite {
   }
 
   /** @override */
-  getObject3D(): typeof THREE.Object3D {
+  getObject3D(): THREE.Object3D {
     return this.#view.getObject3D();
   }
 

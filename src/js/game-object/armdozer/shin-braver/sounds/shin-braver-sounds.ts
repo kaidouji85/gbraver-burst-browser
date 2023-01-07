@@ -6,7 +6,7 @@ import { SOUND_IDS } from "../../../../resource/sound";
  * シンブレイバー 効果音
  */
 export class ShinBraverSounds {
-  motor: typeof Howl;
+  motor: Howl;
 
   /**
    * コンストラクタ
@@ -15,7 +15,7 @@ export class ShinBraverSounds {
    */
   constructor(resources: Resources) {
     const motorResource = resources.sounds.find(v => v.id === SOUND_IDS.MOTOR);
-    this.motor = motorResource ? motorResource.sound : new Howl();
+    this.motor = motorResource ? motorResource.sound : new Howl({src: ""});
   }
 
 }

@@ -9,7 +9,7 @@ import type { ShinBraverView } from "./shin-braver-view";
 /** プレイヤー側シンブレイバーのビュー */
 export class PlayerShinBraverView implements ShinBraverView {
   /** グループ */
-  #group: typeof THREE.Group;
+  #group: THREE.Group;
 
   /** メッシュ */
   #meshes: AnimationMeshMapping[];
@@ -69,17 +69,17 @@ export class PlayerShinBraverView implements ShinBraverView {
   }
 
   /** @override */
-  addObject3D(object: typeof THREE.Object3D): void {
+  addObject3D(object: THREE.Object3D): void {
     this.#group.add(object);
   }
 
   /** @override */
-  lookAt(camera: typeof THREE.Camera): void {
+  lookAt(camera: THREE.Camera): void {
     this.#group.quaternion.copy(camera.quaternion);
   }
 
   /** @override */
-  getObject3D(): typeof THREE.Object3D {
+  getObject3D(): THREE.Object3D {
     return this.#group;
   }
 

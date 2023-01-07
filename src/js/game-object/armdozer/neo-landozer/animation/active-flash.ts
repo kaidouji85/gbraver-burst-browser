@@ -1,4 +1,4 @@
-import TWEEN from "@tweenjs/tween.js";
+import TWEEN, {Group} from "@tweenjs/tween.js";
 import { Animate } from "../../../../animation/animate";
 import { delay } from "../../../../animation/delay";
 import { process } from "../../../../animation/process";
@@ -11,7 +11,7 @@ import type { NeoLandozerModel } from "../model/neo-landozer-model";
  * @param group TWEENグループ
  * @return アニメーション
  */
-export function activeFlash(model: NeoLandozerModel, group: typeof TWEEN.Group): Animate {
+export function activeFlash(model: NeoLandozerModel, group: Group): Animate {
   return process(() => {
     model.active.strength = 0;
   }).chain(tween(model.active, t => t.to({

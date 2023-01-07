@@ -13,7 +13,7 @@ export interface WingDozerView {
    *
    * @return シーンに追加するオブジェクト
    */
-  getObject3D(): typeof THREE.Object3D;
+  getObject3D(): THREE.Object3D;
 
   /**
    * モデルをビューに反映させる
@@ -27,12 +27,12 @@ export interface WingDozerView {
    *
    * @param camera カメラ
    */
-  lookAt(camera: typeof THREE.Camera): void;
+  lookAt(camera: THREE.Camera): void;
 
   /**
    * スプライト配下のオブジェクトを追加する
    *
    * @param object 追加するオブジェクト
    */
-  addObject3D(object: typeof THREE.Object3D): void;
+  addObject3D(object: THREE.Object3D): void;
 }

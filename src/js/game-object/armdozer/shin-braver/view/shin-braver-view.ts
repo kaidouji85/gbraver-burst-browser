@@ -18,17 +18,17 @@ export interface ShinBraverView {
    * カメラの真正面を向く
    * @param camera カメラ
    */
-  lookAt(camera: typeof THREE.Camera): void;
+  lookAt(camera: THREE.Camera): void;
 
   /**
    * Sceneに追加するThree.jsオブジェクトを取得する
    * @return 取得結果
    */
-  getObject3D(): typeof THREE.Object3D;
+  getObject3D(): THREE.Object3D;
 
   /**
    * スプライト配下のオブジェクトを追加する
    * @param object 追加するオブジェクト
    */
-  addObject3D(object: typeof THREE.Object3D): void;
+  addObject3D(object: THREE.Object3D): void;
 }
