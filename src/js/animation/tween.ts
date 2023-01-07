@@ -16,7 +16,7 @@ import { tweenDuration } from "./duration";
  * @param group Tweenグループ
  * @return アニメーション
  */
-export function tween<T extends Record<string, any>>(model: T, create: (t: Tween<any>) => Tween<any>, group: Group | undefined): Animate {
+export function tween<T extends Record<string, any>>(model: T, create: (t: Tween<any>) => Tween<any>, group?: Group): Animate {
   const origin = new Tween(model, group);
   const t = create(origin);
   return new Animate(t, t, tweenDuration(origin));
