@@ -12,5 +12,5 @@ export type TextureConfig = {
 /** テクスチャリソース */
 export type TextureResource = {
   id: TextureId;
-  texture: typeof THREE.Texture;
+  texture: THREE.Texture;
 };

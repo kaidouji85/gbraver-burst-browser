@@ -18,8 +18,8 @@ type ConstructorParam = {
   /** 縦 */
   height: number;
 };
-/** アームドーザアニメーション水平方向テクスチャ版 */
 
+/** アームドーザアニメーション水平方向テクスチャ版 */
 class HorizontalArmdozerAnimation implements ArmdozerAnimation {
   /** アニメーションメッシュ */
   #animation: HorizontalAnimationMesh;
