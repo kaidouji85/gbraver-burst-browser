@@ -18,7 +18,7 @@ export type CubeTextureConfig = {
 /** キューブテクスチャリソース */
 export type CubeTextureResource = {
   id: CuteTextureId;
-  texture: typeof THREE.CubeTexture;
+  texture: THREE.CubeTexture;
 };
 
 /** キューブテクスチャIDをまとめたもの */
@@ -47,7 +47,7 @@ export const CUBE_TEXTURE_CONFIGS: CubeTextureConfig[] = [{
 export function loadCubeTexture(resourceRoot: ResourceRoot, config: CubeTextureConfig): Promise<CubeTextureResource> {
   return new Promise((resolve, reject) => {
     const loader = new THREE.CubeTextureLoader();
-    loader.load([`${resourceRoot.get()}/${config.px}`, `${resourceRoot.get()}/${config.nx}`, `${resourceRoot.get()}/${config.py}`, `${resourceRoot.get()}/${config.ny}`, `${resourceRoot.get()}/${config.pz}`, `${resourceRoot.get()}/${config.nz}`], (texture: typeof THREE.CubeTexture) => {
+    loader.load([`${resourceRoot.get()}/${config.px}`, `${resourceRoot.get()}/${config.nx}`, `${resourceRoot.get()}/${config.py}`, `${resourceRoot.get()}/${config.ny}`, `${resourceRoot.get()}/${config.pz}`, `${resourceRoot.get()}/${config.nz}`], (texture: THREE.CubeTexture) => {
       resolve({
         id: config.id,
         texture: texture

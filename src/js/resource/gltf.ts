@@ -54,7 +54,7 @@ export function loadGlTF(resourceRoot: ResourceRoot, config: GlTFConfig): Promis
     const fullPath = `${resourceRoot.get()}/${config.path}`;
 
     const onLoad = (object: {
-      scene: typeof THREE.Scene;
+      scene: THREE.Scene;
     }) => resolve({
       id: config.id,
       object: object.scene

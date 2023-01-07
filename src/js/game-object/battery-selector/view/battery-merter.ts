@@ -82,7 +82,7 @@ export class BatteryMeter {
  * @param texture テクスチャ
  * @return バッテリーセレクタ数字
  */
-function batteryNumber(value: number, texture: typeof THREE.Texture): HorizontalAnimationMesh {
+function batteryNumber(value: number, texture: THREE.Texture): HorizontalAnimationMesh {
   const maxAnimation = 8;
   const numberMesh = new HorizontalAnimationMesh({
     texture,
