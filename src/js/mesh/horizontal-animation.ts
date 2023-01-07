@@ -2,8 +2,9 @@ import * as THREE from "three";
 import { SPRITE_RENDER_ORDER } from "../render/render-order/td-render-order";
 import { animatedTexture } from "../texture/animation/texture-animation";
 import { normalizeTextureOffset } from "../texture/animation/texture-offset";
+
 type Param = {
-  texture: typeof THREE.Texture;
+  texture: THREE.Texture;
   maxAnimation: number;
   width: number;
   height: number;
@@ -14,13 +15,15 @@ type Param = {
  * 本クラスで使用するテクスチャは、横方向にのみアニメーション連結されたものである
  */
 export class HorizontalAnimationMesh {
-  texture: typeof THREE.Texture;
-  mesh: typeof THREE.Mesh;
+  texture: THREE.Texture;
+  mesh: THREE.Mesh<THREE.PlaneGeometry, THREE.MeshBasicMaterial>;
   width: number;
   height: number;
   maxAnimation: number;
 
   constructor(param: Param) {
+    this.width = param.width;
+    this.height = param.height;
     this.texture = param.texture.clone();
     animatedTexture(this.texture, param.maxAnimation, 1);
     this.texture.needsUpdate = true;
@@ -59,7 +62,7 @@ export class HorizontalAnimationMesh {
   }
 
   /** シーンに追加するオブジェクトを取得する */
-  getObject3D(): typeof THREE.Object3D {
+  getObject3D(): THREE.Object3D {
     return this.mesh;
   }
 

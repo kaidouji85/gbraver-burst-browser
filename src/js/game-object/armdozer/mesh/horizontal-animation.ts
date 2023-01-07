@@ -7,7 +7,7 @@ import type { ArmdozerAnimation } from "./armdozer-animation";
 /** コンストラクタのパラメータ */
 type ConstructorParam = {
   /** テクスチャ */
-  texture: typeof THREE.Texture;
+  texture: THREE.Texture;
 
   /** アニメーション枚数 */
   maxAnimation: number;
@@ -54,7 +54,7 @@ class HorizontalArmdozerAnimation implements ArmdozerAnimation {
   }
 
   /** @override */
-  getObject3D(): typeof THREE.Object3D {
+  getObject3D(): THREE.Object3D {
     return this.#animation.getObject3D();
   }
 

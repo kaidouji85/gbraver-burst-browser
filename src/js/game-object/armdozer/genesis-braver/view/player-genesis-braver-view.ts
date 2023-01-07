@@ -11,7 +11,7 @@ export class PlayerGenesisBraverView implements GenesisBraverView {
   #meshes: AnimationMeshMapping[];
 
   /** グループ */
-  #group: typeof THREE.Group;
+  #group: THREE.Group;
 
   /**
    * コンストラクタ
@@ -37,7 +37,7 @@ export class PlayerGenesisBraverView implements GenesisBraverView {
   }
 
   /** @override */
-  getObject3D(): typeof THREE.Object3D {
+  getObject3D(): THREE.Object3D {
     return this.#group;
   }
 
@@ -61,7 +61,7 @@ export class PlayerGenesisBraverView implements GenesisBraverView {
   }
 
   /** @override */
-  lookAt(camera: typeof THREE.Camera): void {
+  lookAt(camera: THREE.Camera): void {
     this.#group.quaternion.copy(camera.quaternion);
   }
 

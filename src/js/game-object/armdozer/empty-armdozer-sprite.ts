@@ -13,14 +13,14 @@ export class EmptyArmDozerSprite implements ArmDozerSprite {
   }
 
   /** @override */
-  getObject3D(): typeof THREE.Object3D {
+  getObject3D(): THREE.Object3D {
     return new THREE.Object3D();
   }
 
   /** @override */
 
   /* eslint-disable no-unused-vars */
-  addObject3D(object: typeof THREE.Object3D): void {
+  addObject3D(object: THREE.Object3D): void {
     /* eslint-enable no-unused-vars */
     // NOP
   }

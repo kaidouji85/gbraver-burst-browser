@@ -25,5 +25,5 @@ export interface ArmdozerAnimation {
    *
    * @return 取得結果
    */
-  getObject3D(): typeof THREE.Object3D;
+  getObject3D(): THREE.Object3D;
 }
