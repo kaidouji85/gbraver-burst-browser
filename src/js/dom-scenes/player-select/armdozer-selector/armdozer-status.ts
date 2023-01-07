@@ -63,12 +63,12 @@ type Elements = {
  * @return 抽出結果
  */
 function extractElements(root: HTMLElement, ids: DataIDs): Elements {
-  const name = root.querySelector(`[data-id="${ids.name}"]`) ?? document.createElement("div");
-  const hp = root.querySelector(`[data-id="${ids.hp}"]`) ?? document.createElement("div");
-  const power = root.querySelector(`[data-id="${ids.power}"]`) ?? document.createElement("div");
-  const speed = root.querySelector(`[data-id="${ids.speed}"]`) ?? document.createElement("div");
-  const burstOverview = root.querySelector(`[data-id="${ids.burstOverview}"]`) ?? document.createElement("div");
-  const burstDetail = root.querySelector(`[data-id="${ids.burstDetail}"]`) ?? document.createElement("div");
+  const name: HTMLElement = root.querySelector(`[data-id="${ids.name}"]`) ?? document.createElement("div");
+  const hp: HTMLElement = root.querySelector(`[data-id="${ids.hp}"]`) ?? document.createElement("div");
+  const power: HTMLElement = root.querySelector(`[data-id="${ids.power}"]`) ?? document.createElement("div");
+  const speed: HTMLElement = root.querySelector(`[data-id="${ids.speed}"]`) ?? document.createElement("div");
+  const burstOverview: HTMLElement = root.querySelector(`[data-id="${ids.burstOverview}"]`) ?? document.createElement("div");
+  const burstDetail: HTMLElement = root.querySelector(`[data-id="${ids.burstDetail}"]`) ?? document.createElement("div");
   return {
     name,
     hp,

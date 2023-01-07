@@ -55,8 +55,8 @@ type Elements = {
  * @return 抽出結果
  */
 function extractElements(root: HTMLElement, ids: DataIDs): Elements {
-  const gotoTitle = root.querySelector(`[data-id="${ids.gotoTitle}"]`) ?? document.createElement("div");
-  const reload = root.querySelector(`[data-id="${ids.reload}"]`) ?? document.createElement("div");
+  const gotoTitle: HTMLElement= root.querySelector(`[data-id="${ids.gotoTitle}"]`) ?? document.createElement("div");
+  const reload: HTMLElement = root.querySelector(`[data-id="${ids.reload}"]`) ?? document.createElement("div");
   return {
     gotoTitle,
     reload

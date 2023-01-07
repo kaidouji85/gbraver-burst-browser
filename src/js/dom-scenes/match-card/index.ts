@@ -24,7 +24,7 @@ export class MatchCard implements DOMScene {
    *
    * @param param パラメータ
    */
-  constructor(param: Param): void {
+  constructor(param: Param) {
     this.#presentation = new MatchCardPresentation(param.resources, param.player, param.enemy, param.caption);
   }
 

@@ -44,8 +44,8 @@ type Elements = {
  * @return 抽出結果
  */
 function extractElements(root: HTMLElement, ids: DataIDs): Elements {
-  const working = root.querySelector(`[data-id="${ids.working}"]`) ?? document.createElement("div");
-  const selector = root.querySelector(`[data-id="${ids.selector}"]`) ?? document.createElement("div");
+  const working: HTMLElement = root.querySelector(`[data-id="${ids.working}"]`) ?? document.createElement("div");
+  const selector: HTMLElement = root.querySelector(`[data-id="${ids.selector}"]`) ?? document.createElement("div");
   return {
     working,
     selector

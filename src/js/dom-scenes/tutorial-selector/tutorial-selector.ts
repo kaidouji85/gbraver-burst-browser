@@ -66,9 +66,9 @@ type Elements = {
  * @return 抽出結果
  */
 function extractElements(root: HTMLElement, ids: DataIDs): Elements {
-  const stages = root.querySelector(`[data-id="${ids.stages}"]`) ?? document.createElement("div");
-  const imageCuts = root.querySelector(`[data-id="${ids.imageCuts}"]`) ?? document.createElement("div");
-  const prevButton = root.querySelector(`[data-id="${ids.prevButton}"]`) ?? document.createElement("div");
+  const stages: HTMLElement = root.querySelector(`[data-id="${ids.stages}"]`) ?? document.createElement("div");
+  const imageCuts: HTMLElement = root.querySelector(`[data-id="${ids.imageCuts}"]`) ?? document.createElement("div");
+  const prevButton: HTMLElement = root.querySelector(`[data-id="${ids.prevButton}"]`) ?? document.createElement("div");
   return {
     stages,
     imageCuts,

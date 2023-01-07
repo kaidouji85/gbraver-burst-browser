@@ -51,9 +51,9 @@ type Elements = {
  * @return 抽出結果
  */
 function extractElements(root: HTMLElement, ids: DataIDs): Elements {
-  const name = root.querySelector(`[data-id="${ids.name}"]`) ?? document.createElement("div");
-  const skillOverview = root.querySelector(`[data-id="${ids.skillOverview}"]`) ?? document.createElement("div");
-  const skillDetail = root.querySelector(`[data-id="${ids.skillDetail}"]`) ?? document.createElement("div");
+  const name: HTMLElement = root.querySelector(`[data-id="${ids.name}"]`) ?? document.createElement("div");
+  const skillOverview: HTMLElement = root.querySelector(`[data-id="${ids.skillOverview}"]`) ?? document.createElement("div");
+  const skillDetail: HTMLElement = root.querySelector(`[data-id="${ids.skillDetail}"]`) ?? document.createElement("div");
   return {
     name,
     skillOverview,

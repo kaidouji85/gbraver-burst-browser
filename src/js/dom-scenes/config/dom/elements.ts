@@ -26,12 +26,12 @@ export function extractElements(root: HTMLElement, ids: DataIDs): Elements {
   const webGLPixelRatioSelector = extractedWebGlPixelRatioSelector instanceof HTMLSelectElement ? extractedWebGlPixelRatioSelector : document.createElement("select");
   const extractedBGMVolumeSelector = root.querySelector(`[data-id="${ids.bgmVolumeSelector}"]`);
   const bgmVolumeSelector = extractedBGMVolumeSelector instanceof HTMLInputElement ? extractedBGMVolumeSelector : document.createElement("input");
-  const bgmVolumeValue = root.querySelector(`[data-id="${ids.bgmVolumeValue}"]`) ?? document.createElement("div");
+  const bgmVolumeValue: HTMLElement = root.querySelector(`[data-id="${ids.bgmVolumeValue}"]`) ?? document.createElement("div");
   const extractedSeVolumeSelector = root.querySelector(`[data-id="${ids.seVolumeSelector}"]`);
   const seVolumeSelector = extractedSeVolumeSelector instanceof HTMLInputElement ? extractedSeVolumeSelector : document.createElement("input");
-  const seVolumeValue = root.querySelector(`[data-id="${ids.seVolumeValue}"]`) ?? document.createElement("div");
-  const prev = root.querySelector(`[data-id="${ids.prev}"]`) ?? document.createElement("button");
-  const configChange = root.querySelector(`[data-id="${ids.configChange}"]`) ?? document.createElement("button");
+  const seVolumeValue: HTMLElement = root.querySelector(`[data-id="${ids.seVolumeValue}"]`) ?? document.createElement("div");
+  const prev: HTMLElement = root.querySelector(`[data-id="${ids.prev}"]`) ?? document.createElement("button");
+  const configChange: HTMLElement = root.querySelector(`[data-id="${ids.configChange}"]`) ?? document.createElement("button");
   return {
     battleAnimationTimeScaleSelector,
     webGLPixelRatioSelector,

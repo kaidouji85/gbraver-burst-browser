@@ -52,7 +52,7 @@ type Elements = {
  * @return 抽出結果
  */
 function extractElements(root: HTMLElement, ids: DataIDs): Elements {
-  const caption = root.querySelector(`[data-id="${ids.caption}"]`) ?? document.createElement("div");
+  const caption: HTMLElement = root.querySelector(`[data-id="${ids.caption}"]`) ?? document.createElement("div");
   const armDozerIconElement = root.querySelector(`[data-id="${ids.armDozerIcon}"]`);
   const armDozerIcon = armDozerIconElement instanceof HTMLImageElement ? armDozerIconElement : document.createElement("img");
   return {
