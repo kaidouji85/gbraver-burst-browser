@@ -42,7 +42,7 @@ export interface Stream<T> {
    *
    * @return rxjs Observable
    */
-  getRxjsObservable(): typeof Observable;
+  getRxjsObservable(): Observable<T>;
 }
 
 /**
@@ -62,14 +62,14 @@ export interface StreamSource<T> extends Stream<T> {
  */
 
 class RxjsStream<T> implements Stream<T> {
-  _observable: typeof Observable;
+  _observable: Observable<T>;
 
   /**
    * コンストラクタ
    *
    * @param observable RXJS Observable
    */
-  constructor(observable: typeof Observable) {
+  constructor(observable: Observable<T>) {
     this._observable = observable;
   }
 
@@ -86,7 +86,7 @@ class RxjsStream<T> implements Stream<T> {
   }
 
   /** @override */
-  getRxjsObservable(): typeof Observable {
+  getRxjsObservable(): Observable<T> {
     return this._observable;
   }
 
@@ -98,7 +98,7 @@ class RxjsStream<T> implements Stream<T> {
 
 
 class RxjsStreamSource<T> implements StreamSource<T> {
-  _subject: typeof Subject;
+  _subject: Subject<T>;
 
   /**
    * コンストラクタ
@@ -127,7 +127,7 @@ class RxjsStreamSource<T> implements StreamSource<T> {
   }
 
   /** @override */
-  getRxjsObservable(): typeof Observable {
+  getRxjsObservable(): Observable<T> {
     return this._subject;
   }
 
@@ -141,7 +141,7 @@ class RxjsStreamSource<T> implements StreamSource<T> {
  */
 
 
-export function createStream<T>(observable: typeof Observable): Stream<T> {
+export function createStream<T>(observable: Observable<T>): Stream<T> {
   return new RxjsStream<T>(observable);
 }
 
@@ -151,7 +151,7 @@ export function createStream<T>(observable: typeof Observable): Stream<T> {
  * @param subscription RXJS Subscription
  * @return 生成結果
  */
-function createUnSubscriber(subscription: typeof Subscription): Unsubscriber {
+function createUnSubscriber(subscription: Subscription): Unsubscriber {
   return {
     unsubscribe(): void {
       subscription.unsubscribe();
