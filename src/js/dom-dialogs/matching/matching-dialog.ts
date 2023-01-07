@@ -61,8 +61,8 @@ function extractElements(root: HTMLElement, ids: DataIDs): Elements {
 export class MatchingDialog implements DOMDialog {
   #root: HTMLElement;
   #closer: HTMLImageElement;
-  #changeValue: typeof Howl;
-  #pushButton: typeof Howl;
+  #changeValue: Howl;
+  #pushButton: Howl;
   #exclusive: Exclusive;
   #matchingCanceled: StreamSource<void>;
   #unsubscribers: Unsubscriber[];
@@ -82,8 +82,8 @@ export class MatchingDialog implements DOMDialog {
     this.#root.innerHTML = rootInnerHTML(ids, resources);
     const elements = extractElements(this.#root, ids);
     this.#closer = elements.closer;
-    this.#changeValue = resources.sounds.find(v => v.id === SOUND_IDS.CHANGE_VALUE)?.sound ?? new Howl();
-    this.#pushButton = resources.sounds.find(v => v.id === SOUND_IDS.PUSH_BUTTON)?.sound ?? new Howl();
+    this.#changeValue = resources.sounds.find(v => v.id === SOUND_IDS.CHANGE_VALUE)?.sound ?? new Howl({src: ""});
+    this.#pushButton = resources.sounds.find(v => v.id === SOUND_IDS.PUSH_BUTTON)?.sound ?? new Howl({src: ""});
     this.#exclusive = new Exclusive();
     this.#matchingCanceled = createStreamSource();
     this.#unsubscribers = [pushDOMStream(this.#closer).subscribe(action => {
