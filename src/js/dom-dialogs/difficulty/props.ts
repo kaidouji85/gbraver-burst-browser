@@ -55,10 +55,10 @@ export type DifficultyDialogProps = {
   closeDialog: StreamSource<void>;
 
   /** 効果音 値変更 */
-  changeValue: typeof Howl;
+  changeValue: Howl;
 
   /** 効果音 ボタン押下 */
-  pushButton: typeof Howl;
+  pushButton: Howl;
 };
 
 /**
@@ -94,11 +94,11 @@ export function createDifficultyDialogProps(resources: Resources): DifficultyDia
   const hardButton = elements.hardButton;
   const veryHard = elements.veryHard;
   const veryHardButton = elements.veryHardButton;
-  const selectionComplete = createStreamSource();
-  const closeDialog = createStreamSource();
+  const selectionComplete = createStreamSource<NPCBattleCourseDifficulty>();
+  const closeDialog = createStreamSource<void>();
   const exclusive = new Exclusive();
-  const changeValue = resources.sounds.find(v => v.id === SOUND_IDS.CHANGE_VALUE)?.sound ?? new Howl();
-  const pushButton = resources.sounds.find(v => v.id === SOUND_IDS.PUSH_BUTTON)?.sound ?? new Howl();
+  const changeValue = resources.sounds.find(v => v.id === SOUND_IDS.CHANGE_VALUE)?.sound ?? new Howl({src: ""});
+  const pushButton = resources.sounds.find(v => v.id === SOUND_IDS.PUSH_BUTTON)?.sound ?? new Howl({src: ""});
   return {
     root,
     closer,

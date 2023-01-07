@@ -12,5 +12,5 @@ export interface OverlapNotifier {
    * @param camera カメラ
    * @return 生成結果
    */
-  createOverlapNotifier(camera: typeof THREE.Camera): Stream<OverlapEvent>;
+  createOverlapNotifier(camera: THREE.Camera): Stream<OverlapEvent>;
 }
