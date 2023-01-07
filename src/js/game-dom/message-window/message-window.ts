@@ -110,9 +110,9 @@ type Elements = {
  * @return 抽出結果
  */
 export function extractElements(root: HTMLElement, ids: DataIDs): Elements {
-  const messages = root.querySelector(`[data-id="${ids.messages}"]`) ?? document.createElement("div");
-  const leftFaceGraphic = root.querySelector(`[data-id="${ids.leftFaceGraphic}"]`) ?? document.createElement("div");
-  const rightFaceGraphic = root.querySelector(`[data-id="${ids.rightFaceGraphic}"]`) ?? document.createElement("div");
+  const messages: HTMLElement = root.querySelector(`[data-id="${ids.messages}"]`) ?? document.createElement("div");
+  const leftFaceGraphic: HTMLElement = root.querySelector(`[data-id="${ids.leftFaceGraphic}"]`) ?? document.createElement("div");
+  const rightFaceGraphic: HTMLElement = root.querySelector(`[data-id="${ids.rightFaceGraphic}"]`) ?? document.createElement("div");
   return {
     messages,
     leftFaceGraphic,

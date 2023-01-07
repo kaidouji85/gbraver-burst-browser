@@ -109,7 +109,7 @@ export class TutorialSelector implements DOMScene {
     this.#prev = createStreamSource();
     this.#stageSelect = createStreamSource();
     this.#changeValue = resources.sounds.find(v => v.id === SOUND_IDS.CHANGE_VALUE) ?? createEmptySoundResource();
-    this.#isImageCutsLoaded = Promise.all(Array.from(elements.imageCuts.children).map(img => waitElementLoaded(img)));
+    this.#isImageCutsLoaded = Promise.all(Array.from(elements.imageCuts.children).map(img => waitElementLoaded(img as HTMLElement)));
     const stageElements = stages.map((stage, index) => new TutorialStageElement(resources, stage, index + 1));
     stageElements.forEach(stage => {
       this.#stages.appendChild(stage.getRootHTMLElement());

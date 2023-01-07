@@ -78,7 +78,7 @@ export class MailVerifiedIncomplete implements DOMScene {
    *
    * @param mailAddress 認証メール送信先アドレス
    */
-  constructor(mailAddress: string): void {
+  constructor(mailAddress: string) {
     const ids = {
       gotoTitle: domUuid(),
       reload: domUuid()
