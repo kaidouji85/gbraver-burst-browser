@@ -24,7 +24,7 @@
     "webpack:sw": "webpack --config webpack.sw.js",
     "webpack:clear-sw": "webpack --config webpack.clear.sw.js",
     "storybook-static": "build-storybook -s ./src/resources -o build/storybook-static",
-    "type-check": "flow check",
+    "type-check": "tsc --noEmit",
     "lint": "eslint src/js",
     "lint:test": "eslint test",
     "lint:storybook": "eslint stories",

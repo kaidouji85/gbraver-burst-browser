@@ -1,12 +1,12 @@
-import TWEEN from "@tweenjs/tween.js";
+import {Tween} from "@tweenjs/tween.js";
 
 /**
  * Tween単体の再生時間を計算する
  *
  * @return 再生時間
  */
-export function tweenDuration(tween: typeof TWEEN.Tween): number {
-  return tween._duration + tween._delayTime + tween._repeat * tween._duration;
+export function tweenDuration(tween: Tween<any>): number {
+  return (tween as any)._duration + (tween as any)._delayTime + (tween as any)._repeat * (tween as any)._duration;
 }
 
 /**
@@ -23,15 +23,15 @@ export function tweenDuration(tween: typeof TWEEN.Tween): number {
  * @param scale スケール係数
  * @param scaledTweens 再生時間スケールが完了したTween
  */
-export function scaleTweenDuration(tween: typeof TWEEN.Tween, scale: number, scaledTweens: typeof TWEEN.Tween[] = []): void {
+export function scaleTweenDuration(tween: Tween<any>, scale: number, scaledTweens: Tween<any>[] = []): void {
   if (scaledTweens.includes(tween)) {
     return;
   }
 
   const newScaledTweens = [...scaledTweens, tween];
-  tween._duration = tween._duration * scale;
+  (tween as any)._duration = (tween as any)._duration * scale;
 
-  tween._chainedTweens.forEach((child: typeof TWEEN.Tween) => {
+  (tween as any)._chainedTweens.forEach((child: Tween<any>) => {
     scaleTweenDuration(child, scale, newScaledTweens);
   });
 }

@@ -1,4 +1,4 @@
-import TWEEN from "@tweenjs/tween.js";
+import {Tween} from "@tweenjs/tween.js";
 import { scaleTweenDuration } from "./duration";
 
 /**
@@ -49,8 +49,8 @@ import { scaleTweenDuration } from "./duration";
  * animation.play();
  */
 export class Animate {
-  _start: typeof TWEEN.Tween;
-  _end: typeof TWEEN.Tween;
+  _start: Tween<any>;
+  _end: Tween<any>;
   _time: number;
 
   /**
@@ -60,7 +60,7 @@ export class Animate {
    * @param end 連続したTweenの最後
    * @param time 全体の再生時間
    */
-  constructor(start: typeof TWEEN.Tween, end: typeof TWEEN.Tween, time: number) {
+  constructor(start: Tween<any>, end: Tween<any>, time: number) {
     this._start = start;
     this._end = end;
     this._time = time;
