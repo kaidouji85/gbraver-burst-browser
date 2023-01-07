@@ -81,7 +81,7 @@ export class NetworkErrorDialog implements DOMDialog {
   #postNetworkErrorButton: HTMLButtonElement;
   #postNetworkError: PostNetworkError;
   #postNetworkErrorSource: StreamSource<PostNetworkError>;
-  #pushButton: typeof Howl;
+  #pushButton: Howl;
   #unsubscribers: Unsubscriber[];
   #exclusive: Exclusive;
 
@@ -107,7 +107,7 @@ export class NetworkErrorDialog implements DOMDialog {
       this.#onPostNetworkErrorButtonPush(action);
     })];
     this.#exclusive = new Exclusive();
-    this.#pushButton = resources.sounds.find(v => v.id === SOUND_IDS.PUSH_BUTTON)?.sound ?? new Howl();
+    this.#pushButton = resources.sounds.find(v => v.id === SOUND_IDS.PUSH_BUTTON)?.sound ?? new Howl({src: ""});
   }
 
   /**
