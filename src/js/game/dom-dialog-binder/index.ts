@@ -10,7 +10,7 @@ export class DOMDialogBinder {
   #root: HTMLElement;
 
   /** 現在表示しているダイアログ、何も表示していない場合はnullがセットされる */
-  #dialog: ?DOMDialog;
+  #dialog: DOMDialog | null;
 
   /** ゲームアクションストリーム */
   #gameAction: StreamSource<GameAction>;

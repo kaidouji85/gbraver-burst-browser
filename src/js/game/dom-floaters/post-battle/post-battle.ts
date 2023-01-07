@@ -123,8 +123,8 @@ export class PostBattleFloater {
    * @return 生成結果
    */
   #createActionButtons(resources: Resources, buttons: PostBattleButtonConfig[]): ActionButton[] {
-    const pushButton = resources.sounds.find(v => v.id === SOUND_IDS.PUSH_BUTTON)?.sound ?? new Howl();
-    const changeValue = resources.sounds.find(v => v.id === SOUND_IDS.CHANGE_VALUE)?.sound ?? new Howl();
+    const pushButton = resources.sounds.find(v => v.id === SOUND_IDS.PUSH_BUTTON)?.sound ?? new Howl({src: ""});
+    const changeValue = resources.sounds.find(v => v.id === SOUND_IDS.CHANGE_VALUE)?.sound ?? new Howl({src: ""});
 
     const createButtonStyle = (style: ButtonStyle) => {
       switch (style) {

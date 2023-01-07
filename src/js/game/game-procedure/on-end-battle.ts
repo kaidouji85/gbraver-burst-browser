@@ -31,7 +31,7 @@ const saveAnimationTimeScale = async (props: Readonly<GameProps>, animationTimeS
  * @param props ゲームプロパティ
  * @return 処理が完了したら発火するPromise
  */
-const endCasualMatch = async (props: Readpnly<GameProps>) => {
+const endCasualMatch = async (props: Readonly<GameProps>) => {
   props.suddenlyBattleEnd.unbind();
   await props.api.disconnectWebsocket();
   await props.domFloaters.showPostBattle(props.resources, PostNetworkBattleButtons);

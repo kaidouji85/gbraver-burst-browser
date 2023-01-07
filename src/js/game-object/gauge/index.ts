@@ -30,7 +30,6 @@ export function playerGauge(param: Param): Gauge {
   const view = new PlayerGaugeView(param.resources);
   return new Gauge({
     view: view,
-    resources: param.resources,
     gameObjectAction: param.gameObjectAction,
     hp: param.hp,
     battery: param.battery
@@ -48,7 +47,6 @@ export function enemyGauge(param: Param): Gauge {
   return new Gauge({
     view: view,
     gameObjectAction: param.gameObjectAction,
-    resources: param.resources,
     hp: param.hp,
     battery: param.battery
   });

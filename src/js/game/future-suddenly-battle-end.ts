@@ -5,7 +5,7 @@ import { createStream, createStreamSource } from "../stream/stream";
 /** 将来生成されるバトル管理オブジェクトからバトル強制終了ストリームを取り出す */
 export class FutureSuddenlyBattleEnd {
   #notifier: StreamSource<void>;
-  #unsubscriber: ?Unsubscriber;
+  #unsubscriber: Unsubscriber | null;
 
   /**
    * コンストラクタ

@@ -25,13 +25,12 @@ export type DOMSceneBinderProps = {
  */
 export function createDOMSceneBinderProps(): DOMSceneBinderProps {
   const root = document.createElement("div");
-  const gameAction = createStreamSource();
+  const gameAction = createStreamSource<GameAction>();
   const scene = null;
-  const unsubscribers = [];
   return {
     root,
     gameAction,
     scene,
-    unsubscribers
+    unsubscribers: []
   };
 }

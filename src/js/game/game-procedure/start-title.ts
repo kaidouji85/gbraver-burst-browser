@@ -3,6 +3,7 @@ import { waitTime } from "../../wait/wait-time";
 import { titleConnector } from "../action-connector/title-connector";
 import { MAX_LOADING_TIME } from "../dom-scene-binder/max-loading-time";
 import type { GameProps } from "../game-props";
+import {GuestAccount, LoggedInAccount, TitleAccount} from "../../dom-scenes/title/title-account";
 
 /**
  * タイトル画面を開始するヘルパー関数
@@ -13,7 +14,7 @@ import type { GameProps } from "../game-props";
  * @return 開始したタイトル画面
  */
 export async function startTitle(props: Readonly<GameProps>): Promise<Title> {
-  const createLoggedInAccount = async () => {
+  const createLoggedInAccount = async (): Promise<LoggedInAccount> => {
     const [name, pictureURL] = await Promise.all([props.api.getUserName(), props.api.getUserPictureURL()]);
     return {
       type: "LoggedInAccount",
@@ -23,7 +24,7 @@ export async function startTitle(props: Readonly<GameProps>): Promise<Title> {
   };
 
   const isLogin = await props.api.isLogin();
-  const account = isLogin ? await createLoggedInAccount() : {
+  const account: TitleAccount = isLogin ? await createLoggedInAccount() : {
     type: "GuestAccount"
   };
   const scene = new Title({
