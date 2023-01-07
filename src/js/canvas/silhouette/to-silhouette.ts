@@ -7,11 +7,11 @@
  * @param b 塗りつぶしBlue
  * @return 生成したCanvas
  */
-export function toSilhouette(image: Image, r: number, g: number, b: number): HTMLCanvasElement {
+export function toSilhouette(image: HTMLImageElement, r: number, g: number, b: number): HTMLCanvasElement {
   const canvas = document.createElement("canvas");
   canvas.width = image.width;
   canvas.height = image.height;
-  const context = canvas.getContext("2d");
+  const context = canvas.getContext("2d") || new CanvasRenderingContext2D();
   context.drawImage(image, 0, 0);
   const imageData = context.getImageData(0, 0, canvas.width, canvas.height);
   const pix = imageData.data;
