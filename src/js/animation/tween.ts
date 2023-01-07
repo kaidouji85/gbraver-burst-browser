@@ -1,4 +1,4 @@
-import TWEEN from "@tweenjs/tween.js";
+import {Group, Tween} from "@tweenjs/tween.js";
 import { Animate } from "./animate";
 import { tweenDuration } from "./duration";
 
@@ -16,8 +16,8 @@ import { tweenDuration } from "./duration";
  * @param group Tweenグループ
  * @return アニメーション
  */
-export function tween<T>(model: T, create: (t: typeof TWEEN.Tween) => typeof TWEEN.Tween, group: typeof TWEEN.Group | null | undefined): Animate {
-  const origin = new TWEEN.Tween(model, group);
+export function tween<T extends Record<string, any>>(model: T, create: (t: Tween<any>) => Tween<any>, group: Group | undefined): Animate {
+  const origin = new Tween(model, group);
   const t = create(origin);
   return new Animate(t, t, tweenDuration(origin));
 }
