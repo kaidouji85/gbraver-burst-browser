@@ -15,7 +15,7 @@ export class TDSceneBinder {
   #domLayerElement: HTMLElement;
 
   /** 現在表示中のシーン、何も表示していない場合はnullがセットされる */
-  #scene: ?TDScene;
+  #scene: TDScene | null;
 
   /** cssカスタムプロパティ --hud-ui-scale */
   #hudUIScale: CssHUDUIScale;
