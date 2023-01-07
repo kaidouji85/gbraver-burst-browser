@@ -73,7 +73,7 @@ export class CanvasMesh {
   }
 
   /** シーンに追加するオブジェクトを取得する */
-  getObject3D(): typeof THREE.Object3D {
+  getObject3D(): THREE.Object3D {
     return this.mesh;
   }
 

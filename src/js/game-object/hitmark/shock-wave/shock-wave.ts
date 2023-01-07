@@ -17,7 +17,7 @@ import type { ShockWaveView } from "./view/shock-wave-view";
 export class ShockWave {
   #model: ShockWaveModel;
   #view: ShockWaveView;
-  #hitSound: typeof Howl;
+  #hitSound: Howl;
   #unsubscriber: Unsubscriber;
 
   /**
@@ -32,7 +32,7 @@ export class ShockWave {
     this.#model = initialModel;
     this.#view = view;
     const hitResource = resources.sounds.find(v => v.id === SOUND_IDS.MECHA_IMPACT);
-    this.#hitSound = hitResource ? hitResource.sound : new Howl();
+    this.#hitSound = hitResource ? hitResource.sound : new Howl({src: ""});
     this.#unsubscriber = gameObjectAction.subscribe(action => {
       if (action.type === "Update") {
         this.#onUpdate();
@@ -66,7 +66,7 @@ export class ShockWave {
    *
    * @return シーンに追加するオブジェクト
    */
-  getObject3D(): typeof THREE.Object3D {
+  getObject3D(): THREE.Object3D {
     return this.#view.getObject3D();
   }
 

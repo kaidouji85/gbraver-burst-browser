@@ -8,7 +8,7 @@ import type { PilotIcon } from "./pilot-icon";
  * ガイ パイロットアイコン
  */
 export class GaiIcon implements PilotIcon {
-  #group: typeof THREE.Group;
+  #group: THREE.Group;
   #mesh: HorizontalAnimationMesh;
 
   /**
@@ -42,7 +42,7 @@ export class GaiIcon implements PilotIcon {
    *
    * @return 取得結果
    */
-  getObject3D(): typeof THREE.Object3D {
+  getObject3D(): THREE.Object3D {
     return this.#group;
   }
 

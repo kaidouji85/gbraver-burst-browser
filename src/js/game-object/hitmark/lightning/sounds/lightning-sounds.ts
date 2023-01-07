@@ -6,7 +6,7 @@ import { SOUND_IDS } from "../../../../resource/sound";
  * 電撃 音
  */
 export class LightningSounds {
-  lightning: typeof Howl;
+  lightning: Howl;
 
   /**
    * コンストラクタ
@@ -15,7 +15,7 @@ export class LightningSounds {
    */
   constructor(resources: Resources) {
     const lightningResource = resources.sounds.find(v => v.id === SOUND_IDS.LIGHTNING_ATTACK);
-    this.lightning = lightningResource ? lightningResource.sound : new Howl();
+    this.lightning = lightningResource ? lightningResource.sound : new Howl({src: ""});
   }
 
 }

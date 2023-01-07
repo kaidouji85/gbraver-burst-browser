@@ -18,7 +18,7 @@ export const MIN_PADDING_TOP = 50;
 
 /** 敵のビュー */
 export class EnemyGaugeView implements GaugeView {
-  #group: typeof THREE.Group;
+  #group: THREE.Group;
   #base: SimpleImageMesh;
   #hpBar: EnemyHpBar;
   #hpNumber: HpNumber;
@@ -81,7 +81,7 @@ export class EnemyGaugeView implements GaugeView {
   }
 
   /** シーンに追加するオブジェクトを取得する */
-  getObject3D(): typeof THREE.Object3D {
+  getObject3D(): THREE.Object3D {
     return this.#group;
   }
 

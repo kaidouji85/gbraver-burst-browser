@@ -6,7 +6,7 @@ import { SOUND_IDS } from "../../../resource/sound";
  * パイロットボタン 効果音
  */
 export class PilotButtonSounds {
-  pushButton: typeof Howl;
+  pushButton: Howl;
 
   /**
    * コンストラクタ
@@ -15,7 +15,7 @@ export class PilotButtonSounds {
    */
   constructor(resources: Resources) {
     const pushButtonResource = resources.sounds.find(v => v.id === SOUND_IDS.PUSH_BUTTON);
-    this.pushButton = pushButtonResource?.sound ?? new Howl();
+    this.pushButton = pushButtonResource?.sound ?? new Howl({src: ""});
   }
 
 }

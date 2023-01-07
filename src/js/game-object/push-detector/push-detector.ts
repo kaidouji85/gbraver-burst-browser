@@ -38,7 +38,7 @@ export interface PushDetector {
 /** SimplePushDetectorコンストラクタのパラメータ */
 type SimplePushDetectorParam = {
   /** 当たり判定のジオメトリー */
-  geometry: typeof THREE.Geometry;
+  geometry: THREE.Geometry;
 
   /** ゲームオブジェクトアクション */
   gameObjectAction: Stream<GameObjectAction>;
@@ -52,7 +52,7 @@ type SimplePushDetectorParam = {
 /** プッシュ検出のシンプルな実装 */
 
 class SimplePushDetector implements PushDetector {
-  #mesh: typeof THREE.Mesh;
+  #mesh: THREE.Mesh;
   #push: StreamSource<Event>;
   #unsubscriber: Unsubscriber;
 
@@ -90,7 +90,7 @@ class SimplePushDetector implements PushDetector {
   }
 
   /** @override */
-  getObject3D(): typeof THREE.Object3D {
+  getObject3D(): THREE.Object3D {
     return this.#mesh;
   }
 

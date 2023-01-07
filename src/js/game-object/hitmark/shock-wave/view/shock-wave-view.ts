@@ -22,12 +22,12 @@ export interface ShockWaveView {
    *
    * @param camera カメラ
    */
-  lookAt(camera: typeof THREE.Camera): void;
+  lookAt(camera: THREE.Camera): void;
 
   /**
    * シーンに追加するオブジェクトを返す
    *
    * @return シーンに追加するオブジェクト
    */
-  getObject3D(): typeof THREE.Object3D;
+  getObject3D(): THREE.Object3D;
 }

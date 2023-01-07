@@ -75,7 +75,7 @@ export class Gauge implements HUDTracking {
   }
 
   /** ゲージで使われているthree.jsオブジェクトを取得する */
-  getObject3D(): typeof THREE.Object3D {
+  getObject3D(): THREE.Object3D {
     return this.#view.getObject3D();
   }
 

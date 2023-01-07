@@ -16,7 +16,7 @@ import type { PilotIcon } from "./pilot-icon";
  * パイロットボタン ビュー
  */
 export class PilotButtonView {
-  #group: typeof THREE.Group;
+  #group: THREE.Group;
   #button: SimpleImageMesh;
   #label: SimpleImageMesh;
   #pilotIcon: PilotIcon;
@@ -120,7 +120,7 @@ export class PilotButtonView {
    *
    * @return シーンに追加するオブジェクト
    */
-  getObject3D(): typeof THREE.Object3D {
+  getObject3D(): THREE.Object3D {
     return this.#group;
   }
 

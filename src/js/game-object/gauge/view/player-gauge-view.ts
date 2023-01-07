@@ -18,7 +18,7 @@ export const MIN_PADDING_TOP = 50;
 
 /** プレイヤーゲージのビュー */
 export class PlayerGaugeView implements GaugeView {
-  #group: typeof THREE.Group;
+  #group: THREE.Group;
   #base: SimpleImageMesh;
   #hpBar: PlayerHpBar;
   #hpNumber: HpNumber;
@@ -87,7 +87,7 @@ export class PlayerGaugeView implements GaugeView {
    *
    * @return シーンに追加するオブジェクト
    */
-  getObject3D(): typeof THREE.Object3D {
+  getObject3D(): THREE.Object3D {
     return this.#group;
   }
 

@@ -11,7 +11,7 @@ export const MIN_HP = 0;
 
 /** HP数字 */
 export class HpNumber {
-  #group: typeof THREE.Group;
+  #group: THREE.Group;
   #meshList: HorizontalAnimationMesh[];
 
   constructor(resources: Resources) {
@@ -68,7 +68,7 @@ export class HpNumber {
    *
    * @return シーンに追加するオブジェクト
    */
-  getObject3D(): typeof THREE.Object3D {
+  getObject3D(): THREE.Object3D {
     return this.#group;
   }
 

@@ -22,10 +22,10 @@ export const BAR_WIDTH = 472;
 
 /** プレイヤーのHPバー */
 export class PlayerHpBar {
-  #texture: typeof THREE.CanvasTexture;
-  #mesh: typeof THREE.Mesh;
+  #texture: THREE.CanvasTexture;
+  #mesh: THREE.Mesh<THREE.PlaneGeometry, THREE.MeshBasicMaterial>;
   #back: CanvasMesh;
-  #group: typeof THREE.Group;
+  #group: THREE.Group;
 
   /**
    * コンストラクタ
@@ -37,7 +37,7 @@ export class PlayerHpBar {
     const canvas = document.createElement("canvas");
     canvas.width = BAR_CANVAS_WIDTH;
     canvas.height = BAR_CANVAS_HEIGHT;
-    const context = canvas.getContext("2d");
+    const context = canvas.getContext("2d") || new CanvasRenderingContext2D();
     const bar = resources.canvasImages.find(v => v.id === CANVAS_IMAGE_IDS.HP_BAR)?.image ?? new Image();
     const barHeight = bar.height * BAR_WIDTH / bar.width;
     context.drawImage(bar, 0, context.canvas.height / 2, BAR_WIDTH, barHeight);
@@ -96,7 +96,7 @@ export class PlayerHpBar {
    *
    * @return シーンに追加するオブジェクト
    */
-  getObject3D(): typeof THREE.Object3D {
+  getObject3D(): THREE.Object3D {
     return this.#group;
   }
 
