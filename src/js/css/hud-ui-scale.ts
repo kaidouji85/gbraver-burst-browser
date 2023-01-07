@@ -70,5 +70,4 @@ export class CssHUDUIScale {
     const scale = HUDUIScale(this.#rendererDOM, this.#safeAreaInset);
     setHUDUIScale(scale);
   }
-
 }

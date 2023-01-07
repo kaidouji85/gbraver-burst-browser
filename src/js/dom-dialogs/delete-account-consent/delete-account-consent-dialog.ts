@@ -66,7 +66,7 @@ type Elements = {
 function extractElements(root: HTMLElement, ids: DataIDs): Elements {
   const closerElement = root.querySelector(`[data-id="${ids.closer}"]`);
   const closer = closerElement instanceof HTMLImageElement ? closerElement : document.createElement("img");
-  const backGround = root.querySelector(`[data-id="${ids.backGround}"]`) ?? document.createElement("div");
+  const backGround: HTMLElement = root.querySelector(`[data-id="${ids.backGround}"]`) ?? document.createElement("div");
   const deleteAccountButtonElement = root.querySelector(`[data-id="${ids.deleteAccountButton}"]`);
   const deleteAccountButton = deleteAccountButtonElement instanceof HTMLButtonElement ? deleteAccountButtonElement : document.createElement("button");
   const closeButtonElement = root.querySelector(`[data-id="${ids.closeButton}"]`);
@@ -89,8 +89,8 @@ export class DeleteAccountConsentDialog implements DOMDialog {
   #deleteAccount: StreamSource<void>;
   #closeDialog: StreamSource<void>;
   #unsubscribers: Unsubscriber[];
-  #changeValue: typeof Howl;
-  #pushButton: typeof Howl;
+  #changeValue: Howl;
+  #pushButton: Howl;
   #exclusive: Exclusive;
 
   /**
@@ -124,8 +124,8 @@ export class DeleteAccountConsentDialog implements DOMDialog {
     }), pushDOMStream(this.#closeButton).subscribe(action => {
       this.#onCloseButtonPush(action);
     })];
-    this.#changeValue = resources.sounds.find(v => v.id === SOUND_IDS.CHANGE_VALUE)?.sound ?? new Howl();
-    this.#pushButton = resources.sounds.find(v => v.id === SOUND_IDS.PUSH_BUTTON)?.sound ?? new Howl();
+    this.#changeValue = resources.sounds.find(v => v.id === SOUND_IDS.CHANGE_VALUE)?.sound ?? new Howl({src: ""});
+    this.#pushButton = resources.sounds.find(v => v.id === SOUND_IDS.PUSH_BUTTON)?.sound ?? new Howl({src: ""});
     this.#exclusive = new Exclusive();
   }
 

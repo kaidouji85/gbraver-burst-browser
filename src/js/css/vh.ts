@@ -55,5 +55,4 @@ export class CssVH {
   #onResize(action: Resize): void {
     setVH(action.height);
   }
-
 }

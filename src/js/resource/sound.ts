@@ -37,7 +37,7 @@ export type SoundResource = {
   type: SoundType;
 
   /** 音声データ */
-  sound: typeof Howl;
+  sound: Howl;
 
   /**
    * ボリューム
@@ -222,6 +222,7 @@ export function createEmptySoundResource(): SoundResource {
     id: "EmptyResource",
     type: "SE",
     sound: new Howl({
+      src: "",
       mute: true
     }),
     volume: 1,
