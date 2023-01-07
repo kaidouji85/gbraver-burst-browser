@@ -49,67 +49,67 @@ export function stateHistoryAnimation(props: StateAnimationProps, gameStateHisto
 export function stateAnimation(props: StateAnimationProps, gameState: GameState): Animate {
   if (gameState.effect.name === "StartGame") {
     const effect: StartGame = gameState.effect;
-    const state = ((gameState as any) as GameStateX<typeof effect>);
+    const state = gameState as GameStateX<typeof effect>;
     return startGameAnimation(props, state);
   }
 
   if (gameState.effect.name === "InputCommand") {
     const effect: InputCommand = gameState.effect;
-    const state = ((gameState as any) as GameStateX<typeof effect>);
+    const state = gameState as GameStateX<typeof effect>;
     return inputCommandAnimation(props, state);
   }
 
   if (gameState.effect.name === "BatteryDeclaration") {
     const effect: BatteryDeclaration = gameState.effect;
-    const state = ((gameState as any) as GameStateX<typeof effect>);
+    const state = gameState as GameStateX<typeof effect>;
     return batteryDeclarationAnimation(props, state);
   }
 
   if (gameState.effect.name === "Battle") {
     const effect: Battle = gameState.effect;
-    const state = ((gameState as any) as GameStateX<typeof effect>);
+    const state = gameState as GameStateX<typeof effect>;
     return battleAnimation(props, state);
   }
 
   if (gameState.effect.name === "TurnChange") {
     const effect: TurnChange = gameState.effect;
-    const state = ((gameState as any) as GameStateX<typeof effect>);
+    const state = gameState as GameStateX<typeof effect>;
     return turnChangeAnimation(props, state);
   }
 
   if (gameState.effect.name === "BurstEffect") {
     const effect: BurstEffect = gameState.effect;
-    const state = ((gameState as any) as GameStateX<typeof effect>);
+    const state = gameState as GameStateX<typeof effect>;
     return burstAnimation(props, state);
   }
 
   if (gameState.effect.name === "Reflect") {
     const effect: Reflect = gameState.effect;
-    const state = ((gameState as any) as GameStateX<typeof effect>);
+    const state = gameState as GameStateX<typeof effect>;
     return reflectAnimation(props, state);
   }
 
   if (gameState.effect.name === "UpdateRemainingTurn") {
     const effect: UpdateRemainingTurn = gameState.effect;
-    const state = ((gameState as any) as GameStateX<typeof effect>);
+    const state = gameState as GameStateX<typeof effect>;
     return updateRemainingTurnAnimation(props, state);
   }
 
   if (gameState.effect.name === "GameEnd") {
     const effect: GameEnd = gameState.effect;
-    const state = ((gameState as any) as GameStateX<typeof effect>);
+    const state = gameState as GameStateX<typeof effect>;
     return gameEndAnimation(props, state);
   }
 
   if (gameState.effect.name === "RightItself") {
     const effect: RightItself = gameState.effect;
-    const state = ((gameState as any) as GameStateX<typeof effect>);
+    const state = gameState as GameStateX<typeof effect>;
     return rightItselfAnimation(props, state);
   }
 
   if (gameState.effect.name === "PilotSkillEffect") {
     const effect: PilotSkillEffect = gameState.effect;
-    const state = ((gameState as any) as GameStateX<typeof effect>);
+    const state = gameState as GameStateX<typeof effect>;
     return pilotSkillAnimation(props, state);
   }
 

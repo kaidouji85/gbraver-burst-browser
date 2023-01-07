@@ -43,7 +43,7 @@ export class GenesisBraverTD implements GenesisBraverTDField, TDArmdozerObjects 
   }
 
   /** @override */
-  getObject3Ds(): typeof THREE.Object3D[] {
+  getObject3Ds(): THREE.Object3D[] {
     return [this.genesisBraver.getObject3D()];
   }
 

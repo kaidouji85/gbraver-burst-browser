@@ -62,7 +62,7 @@ export interface TDPlayer extends TDPlayerField {
    *
    * @return シーンに追加するオブジェクト
    */
-  getObject3Ds(): typeof THREE.Object3D[];
+  getObject3Ds(): THREE.Object3D[];
 }
 
 /**
@@ -118,7 +118,7 @@ export class TDPlayerImpl implements TDPlayer {
    *
    * @return シーンに追加するオブジェクト
    */
-  getObject3Ds(): typeof THREE.Object3D[] {
+  getObject3Ds(): THREE.Object3D[] {
     return [this.hitMark.shockWave.getObject3D(), this.hitMark.lightning.getObject3D(), this.armdozerEffects.powerUp.getObject3D(), this.armdozerEffects.reflect.getObject3D(), this.armdozerEffects.continuousAttack.getObject3D(), this.armdozerEffects.damageHalved.getObject3D(), this.armdozerEffects.batteryEnchantment.getObject3D(), this.batteryNumber.getObject3D(), this.batteryCorrect.getObject3D(), this.recoverBattery.getObject3D(), this.damageIndicator.getObject3D()];
   }
 

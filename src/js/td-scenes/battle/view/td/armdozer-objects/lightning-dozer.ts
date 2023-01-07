@@ -53,7 +53,7 @@ export class LightningDozerTD implements TDArmdozerObjects, LightningDozerTDFiel
   }
 
   /** @override */
-  getObject3Ds(): typeof THREE.Object3D[] {
+  getObject3Ds(): THREE.Object3D[] {
     return [this.lightningDozer.getObject3D()];
   }
 

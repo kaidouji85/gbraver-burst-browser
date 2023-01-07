@@ -109,7 +109,7 @@ function getTracksFromWingDozerHUD(wingDozerHUD: WingDozerHUD): HUDTracking[] {
  * @param sprite トラッキングするスプライト
  * @return 変換結果
  */
-function toCutInHUDPos(tdCamera: typeof THREE.Camera, rendererDOM: HTMLElement, sprite: ArmDozerSprite): Coordinate {
+function toCutInHUDPos(tdCamera: THREE.PerspectiveCamera, rendererDOM: HTMLElement, sprite: ArmDozerSprite): Coordinate {
   const target = sprite.getObject3D();
   const tdPosition = {
     x: target.position.x,

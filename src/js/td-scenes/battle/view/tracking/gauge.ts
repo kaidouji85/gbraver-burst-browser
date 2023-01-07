@@ -44,7 +44,7 @@ function getTracksFromHUDPlayer(hudPlayer: HUDPlayer): HUDTracking[] {
  * @param rendererDOM レンダラDOM
  * @return 変換結果
  */
-function toPlayerGaugeHUDPos(tdCamera: typeof THREE.Camera, rendererDOM: HTMLElement): Coordinate {
+function toPlayerGaugeHUDPos(tdCamera: THREE.PerspectiveCamera, rendererDOM: HTMLElement): Coordinate {
   const tdCoordinate = {
     x: ARMDOZER_EFFECT_STANDARD_X,
     y: ARMDOZER_EFFECT_STANDARD_Y + 200,
@@ -60,7 +60,7 @@ function toPlayerGaugeHUDPos(tdCamera: typeof THREE.Camera, rendererDOM: HTMLEle
  * @param rendererDOM レンダラDOM
  * @return 変換結果
  */
-function toEnemyGaugeHUDPos(tdCamera: typeof THREE.Camera, rendererDOM: HTMLElement): Coordinate {
+function toEnemyGaugeHUDPos(tdCamera: THREE.PerspectiveCamera, rendererDOM: HTMLElement): Coordinate {
   const tdCoordinate = {
     x: -ARMDOZER_EFFECT_STANDARD_X,
     y: ARMDOZER_EFFECT_STANDARD_Y + 200,

@@ -5,8 +5,8 @@ import { createEmptySoundResource, SOUND_IDS } from "../../../resource/sound";
 
 /** 戦闘シーン 効果音 */
 export class BattleSceneSounds {
-  batteryDeclaration: typeof Howl;
-  batteryRecover: typeof Howl;
+  batteryDeclaration: Howl;
+  batteryRecover: Howl;
   sendMessage: SoundResource;
   bgm: SoundResource;
 
@@ -17,8 +17,8 @@ export class BattleSceneSounds {
    * @param playingBGM 再生するBGMのID
    */
   constructor(resources: Resources, playingBGM: SoundId) {
-    this.batteryDeclaration = resources.sounds.find(v => v.id === SOUND_IDS.BATTERY_DECLARATION)?.sound ?? new Howl();
-    this.batteryRecover = resources.sounds.find(v => v.id === SOUND_IDS.BATTERY_RECOVER)?.sound ?? new Howl();
+    this.batteryDeclaration = resources.sounds.find(v => v.id === SOUND_IDS.BATTERY_DECLARATION)?.sound ?? new Howl({src: ""});
+    this.batteryRecover = resources.sounds.find(v => v.id === SOUND_IDS.BATTERY_RECOVER)?.sound ?? new Howl({src: ""});
     this.sendMessage = resources.sounds.find(v => v.id === SOUND_IDS.SEND_MESSAGE) ?? createEmptySoundResource();
     this.bgm = resources.sounds.find(v => v.id === playingBGM) ?? createEmptySoundResource();
   }

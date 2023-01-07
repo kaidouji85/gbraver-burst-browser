@@ -43,7 +43,7 @@ export class WingDozerTD implements WingDozerTDField, TDArmdozerObjects {
   }
 
   /** @override */
-  getObject3Ds(): typeof THREE.Object3D[] {
+  getObject3Ds(): THREE.Object3D[] {
     return [this.wingDozer.getObject3D()];
   }
 

@@ -43,7 +43,7 @@ export class ShinBraverTD implements ShinBraverTDField, TDArmdozerObjects {
   }
 
   /** @override */
-  getObject3Ds(): typeof THREE.Object3D[] {
+  getObject3Ds(): THREE.Object3D[] {
     return [this.shinBraver.getObject3D()];
   }
 

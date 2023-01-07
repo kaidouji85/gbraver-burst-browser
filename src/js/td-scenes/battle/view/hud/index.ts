@@ -33,7 +33,7 @@ export type Param = {
  * HUDレイヤーで使用するオブジェクトを全て集めたもの
  */
 export class HudLayer {
-  scene: typeof THREE.Scene;
+  scene: THREE.Scene;
   camera: PlainHUDCamera;
   players: HUDPlayer[];
   armdozers: HUDArmdozerObjects[];
@@ -67,7 +67,7 @@ export class HudLayer {
 
   /** デストラクタ */
   destructor(): void {
-    const removeTargets: typeof THREE.Object3D[] = [...this.gameObjects.getObject3Ds(), ...this.armdozers.flatMap(v => v.getObject3Ds()), ...this.players.flatMap(v => v.getObject3Ds()), ...this.pilots.flatMap(v => v.getObject3Ds())];
+    const removeTargets: THREE.Object3D[] = [...this.gameObjects.getObject3Ds(), ...this.armdozers.flatMap(v => v.getObject3Ds()), ...this.players.flatMap(v => v.getObject3Ds()), ...this.pilots.flatMap(v => v.getObject3Ds())];
     removeTargets.forEach(v => {
       this.scene.remove(v);
     });

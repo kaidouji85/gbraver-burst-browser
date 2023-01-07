@@ -30,7 +30,7 @@ type Param = {
 
 /** 3Dレイヤー */
 export class ThreeDimensionLayer {
-  scene: typeof THREE.Scene;
+  scene: THREE.Scene;
   camera: TDCamera;
   players: TDPlayer[];
   armdozerObjects: TDArmdozerObjects[];
@@ -65,11 +65,13 @@ export class ThreeDimensionLayer {
 
   /** デストラクタ */
   destructor(): void {
-    const removeTargets: typeof THREE.Object3D[] = [...this.players.flatMap(v => v.getObject3Ds()), ...this.armdozerObjects.flatMap(v => v.getObject3Ds()), ...this.gameObjects.getObject3Ds()];
+    const removeTargets: THREE.Object3D[] = [...this.players.flatMap(v => v.getObject3Ds()), ...this.armdozerObjects.flatMap(v => v.getObject3Ds()), ...this.gameObjects.getObject3Ds()];
     removeTargets.forEach(v => {
       this.scene.remove(v);
     });
-    this.scene.background.dispose();
+    if (this.scene.background instanceof THREE.Texture) {
+      this.scene.background.dispose();
+    }
     this.scene.background = null;
     this.players.forEach(player => {
       player.destructor();

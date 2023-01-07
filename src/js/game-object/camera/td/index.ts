@@ -72,7 +72,7 @@ export class TDCamera {
    *
    * @return カメラ
    */
-  getCamera(): THREE.Camera {
+  getCamera(): THREE.PerspectiveCamera {
     return this.#camera;
   }
 

@@ -109,7 +109,7 @@ export class HUDGameObjects {
    *
    * @return シーンに追加するオブジェクト
    */
-  getObject3Ds(): typeof THREE.Object3D {
+  getObject3Ds(): THREE.Object3D[] {
     return [this.batterySelector.getObject3D(), this.burstButton.getObject3D(), this.pilotButton.getObject3D(), this.timeScaleButton.getObject3D(), this.rearmostFader.getObject3D(), this.frontmostFader.getObject3D(), this.drawIndicator.getObject3D()];
   }
 
