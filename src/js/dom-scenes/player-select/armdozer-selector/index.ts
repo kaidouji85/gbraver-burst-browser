@@ -58,10 +58,10 @@ type Elements = {
  * @return 抽出結果
  */
 function extractElements(root: HTMLElement, ids: DataIDs): Elements {
-  const dummyStatus = root.querySelector(`[data-id="${ids.dummyStatus}"]`) ?? document.createElement("div");
-  const icons = root.querySelector(`[data-id="${ids.icons}"]`) ?? document.createElement("div");
-  const okButton = root.querySelector(`[data-id="${ids.okButton}"]`) ?? document.createElement("button");
-  const prevButton = root.querySelector(`[data-id="${ids.prevButton}"]`) ?? document.createElement("button");
+  const dummyStatus: HTMLElement = root.querySelector(`[data-id="${ids.dummyStatus}"]`) ?? document.createElement("div");
+  const icons: HTMLElement = root.querySelector(`[data-id="${ids.icons}"]`) ?? document.createElement("div");
+  const okButton: HTMLElement = root.querySelector(`[data-id="${ids.okButton}"]`) ?? document.createElement("button");
+  const prevButton: HTMLElement = root.querySelector(`[data-id="${ids.prevButton}"]`) ?? document.createElement("button");
   return {
     dummyStatus,
     icons,
@@ -85,8 +85,8 @@ export class ArmdozerSelector {
   #armdozerIcons: IconObjects[];
   #okButton: HTMLElement;
   #prevButton: HTMLElement;
-  #changeValueSound: typeof Howl;
-  #decideSound: typeof Howl;
+  #changeValueSound: Howl;
+  #decideSound: Howl;
   #change: StreamSource<ArmDozerId>;
   #decide: StreamSource<ArmDozerId>;
   #prev: StreamSource<void>;
@@ -105,8 +105,8 @@ export class ArmdozerSelector {
     this.#change = createStreamSource();
     this.#decide = createStreamSource();
     this.#prev = createStreamSource();
-    this.#changeValueSound = resources.sounds.find(v => v.id === SOUND_IDS.CHANGE_VALUE)?.sound ?? new Howl();
-    this.#decideSound = resources.sounds.find(v => v.id === SOUND_IDS.PUSH_BUTTON)?.sound ?? new Howl();
+    this.#changeValueSound = resources.sounds.find(v => v.id === SOUND_IDS.CHANGE_VALUE)?.sound ?? new Howl({src: ""});
+    this.#decideSound = resources.sounds.find(v => v.id === SOUND_IDS.PUSH_BUTTON)?.sound ?? new Howl({src: ""});
     const dataIDs = {
       dummyStatus: domUuid(),
       okButton: domUuid(),

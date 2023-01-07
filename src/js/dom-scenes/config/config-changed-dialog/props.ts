@@ -30,10 +30,10 @@ export type ConfigChangedDialogProps = {
   exclusive: Exclusive;
 
   /** SE 値変更 */
-  changeValue: typeof Howl;
+  changeValue: Howl;
 
   /** SE ボタン押下 */
-  pushButton: typeof Howl;
+  pushButton: Howl;
 
   /** 閉じるストリーム */
   closeStream: StreamSource<void>;
@@ -66,12 +66,12 @@ export function createConfigChangedDialogProps(resources: Resources): ConfigChan
   const closer = elements.closer;
   const discard = elements.discard;
   const accept = elements.accept;
-  const pushButton = resources.sounds.find(v => v.id === SOUND_IDS.PUSH_BUTTON)?.sound ?? new Howl();
-  const changeValue = resources.sounds.find(v => v.id === SOUND_IDS.CHANGE_VALUE)?.sound ?? new Howl();
+  const pushButton = resources.sounds.find(v => v.id === SOUND_IDS.PUSH_BUTTON)?.sound ?? new Howl({src: ""});
+  const changeValue = resources.sounds.find(v => v.id === SOUND_IDS.CHANGE_VALUE)?.sound ?? new Howl({src: ""});
   const exclusive = new Exclusive();
-  const closeStream = createStreamSource();
-  const acceptStream = createStreamSource();
-  const discardStream = createStreamSource();
+  const closeStream = createStreamSource<void>();
+  const acceptStream = createStreamSource<void>();
+  const discardStream = createStreamSource<void>();
   return {
     root,
     backGround,

@@ -47,10 +47,10 @@ export type ConfigProps = {
   dialog: ConfigChangedDialog;
 
   /** SE 値変更 */
-  changeValue: typeof Howl;
+  changeValue: Howl;
 
   /** SE ボタン押下 */
-  pushButton: typeof Howl;
+  pushButton: Howl;
 
   /** 排他制御 */
   exclusive: Exclusive;
@@ -98,8 +98,8 @@ export function createConfigProps(resources: Resources, config: GbraverBurstBrow
     prevButton: elements.prev,
     configChangeButton: elements.configChange,
     dialog,
-    pushButton: resources.sounds.find(v => v.id === SOUND_IDS.PUSH_BUTTON)?.sound ?? new Howl(),
-    changeValue: resources.sounds.find(v => v.id === SOUND_IDS.CHANGE_VALUE)?.sound ?? new Howl(),
+    pushButton: resources.sounds.find(v => v.id === SOUND_IDS.PUSH_BUTTON)?.sound ?? new Howl({src: ""}),
+    changeValue: resources.sounds.find(v => v.id === SOUND_IDS.CHANGE_VALUE)?.sound ?? new Howl({src: ""}),
     exclusive: new Exclusive(),
     prev: createStreamSource(),
     configChange: createStreamSource()

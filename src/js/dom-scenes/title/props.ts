@@ -60,10 +60,10 @@ export type TitleProps = {
   isLogoLoaded: Promise<void>;
 
   /** SE 値変更 */
-  changeValue: typeof Howl;
+  changeValue: Howl;
 
   /** SE ボタン押下 */
-  pushButton: typeof Howl;
+  pushButton: Howl;
 
   /** ログイン押下ストリーム */
   pushLogin: StreamSource<void>;
@@ -142,8 +142,8 @@ export function createTitleProps(params: CreateTitlePropsParams): TitleProps {
     isLogoLoaded,
     isAvatarLoaded,
     isTitleBackLoaded,
-    pushButton: params.resources.sounds.find(v => v.id === SOUND_IDS.PUSH_BUTTON)?.sound ?? new Howl(),
-    changeValue: params.resources.sounds.find(v => v.id === SOUND_IDS.CHANGE_VALUE)?.sound ?? new Howl(),
+    pushButton: params.resources.sounds.find(v => v.id === SOUND_IDS.PUSH_BUTTON)?.sound ?? new Howl({src: ""}),
+    changeValue: params.resources.sounds.find(v => v.id === SOUND_IDS.CHANGE_VALUE)?.sound ?? new Howl({src: ""}),
     pushLogin: createStreamSource(),
     pushDeleteAccount: createStreamSource(),
     pushLogout: createStreamSource(),

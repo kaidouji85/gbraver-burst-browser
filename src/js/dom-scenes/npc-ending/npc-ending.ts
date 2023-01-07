@@ -65,7 +65,7 @@ export class NPCEnding implements DOMScene {
   #isEndCardLoaded: Promise<void>;
   #isEndLoaded: Promise<void>;
   #isLogoLoader: Promise<void>;
-  #pushButtonSound: typeof Howl;
+  #pushButtonSound: Howl;
   #bgm: BGMManager;
   #endingBGM: SoundResource;
   #canOperation: boolean;
@@ -96,7 +96,7 @@ export class NPCEnding implements DOMScene {
     elements.end.src = resources.paths.find(v => v.id === PathIds.END)?.path ?? "";
     this.#isLogoLoader = waitElementLoaded(elements.logo);
     elements.logo.src = resources.paths.find(v => v.id === PathIds.LOGO)?.path ?? "";
-    this.#pushButtonSound = resources.sounds.find(v => v.id === SOUND_IDS.PUSH_BUTTON)?.sound ?? new Howl();
+    this.#pushButtonSound = resources.sounds.find(v => v.id === SOUND_IDS.PUSH_BUTTON)?.sound ?? new Howl({src: ""});
     this.#bgm = bgm;
     this.#endingBGM = resources.sounds.find(v => v.id === SOUND_IDS.NPC_ENDING) ?? createEmptySoundResource();
     this.#canOperation = true;
