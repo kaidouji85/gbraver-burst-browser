@@ -9,7 +9,7 @@ import type { ArmdozerIcon } from "./armdozer-icon";
  */
 export class NeoLandozerIcon implements ArmdozerIcon {
   #mesh: HorizontalAnimationMesh;
-  #group: typeof THREE.Group;
+  #group: THREE.Group;
 
   /**
    * コンストラクタ
@@ -42,7 +42,7 @@ export class NeoLandozerIcon implements ArmdozerIcon {
    *
    * @return シーンに追加するオブジェクト
    */
-  getObject3D(): typeof THREE.Object3D {
+  getObject3D(): THREE.Object3D {
     return this.#group;
   }
 

@@ -32,7 +32,7 @@ export class PlayerDamageHalvedView implements DamageHalvedView {
   }
 
   /** @override */
-  getObject3D(): typeof THREE.Object3D {
+  getObject3D(): THREE.Object3D {
     return this.#mesh.getObject3D();
   }
 
@@ -48,7 +48,7 @@ export class PlayerDamageHalvedView implements DamageHalvedView {
   }
 
   /** @override */
-  lookAt(camera: typeof THREE.Camera): void {
+  lookAt(camera: THREE.Camera): void {
     this.#mesh.getObject3D().quaternion.copy(camera.quaternion);
   }
 

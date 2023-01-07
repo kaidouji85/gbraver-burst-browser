@@ -65,7 +65,7 @@ export class PlayerGaiView implements GaiView {
    *
    * @return シーンに追加するオブジェクト
    */
-  getObject3D(): typeof THREE.Object3D {
+  getObject3D(): THREE.Object3D {
     return this.#mesh.getObject3D();
   }
 

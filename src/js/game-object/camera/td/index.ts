@@ -16,7 +16,7 @@ import type { Position } from "./position";
 /** 戦闘シーン3Dレイヤー用カメラ */
 export class TDCamera {
   #model: Battle3DCameraModel;
-  #camera: typeof THREE.PerspectiveCamera;
+  #camera: THREE.PerspectiveCamera;
   #unsubscriber: Unsubscriber[];
 
   /**
@@ -72,7 +72,7 @@ export class TDCamera {
    *
    * @return カメラ
    */
-  getCamera(): typeof THREE.Camera {
+  getCamera(): THREE.Camera {
     return this.#camera;
   }
 

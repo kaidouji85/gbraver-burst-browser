@@ -36,7 +36,7 @@ export class BurstButtonView {
   #label: SimpleImageMesh;
   #buttonDisabled: SimpleImageMesh;
   #pushDetector: PushDetector;
-  #group: typeof THREE.Group;
+  #group: THREE.Group;
   #unsubscribers: Unsubscriber[];
 
   /**
@@ -126,7 +126,7 @@ export class BurstButtonView {
    *
    * @return
    */
-  getObject3D(): typeof THREE.Object3D {
+  getObject3D(): THREE.Object3D {
     return this.#group;
   }
 

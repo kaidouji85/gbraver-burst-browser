@@ -20,7 +20,7 @@ export const BASE_PADDING_TOP = 100;
 export class PlayerWingDozerCutInView implements WingDozerCutInView {
   #burstUp: HorizontalAnimationMesh;
   #burstDown: HorizontalAnimationMesh;
-  #group: typeof THREE.Group;
+  #group: THREE.Group;
 
   /**
    * コンストラクタ
@@ -64,7 +64,7 @@ export class PlayerWingDozerCutInView implements WingDozerCutInView {
    *
    * @return シーンに追加するオブジェクト
    */
-  getObject3D(): typeof THREE.Object3D {
+  getObject3D(): THREE.Object3D {
     return this.#group;
   }
 

@@ -18,7 +18,7 @@ export const BASE_PADDING_TOP = 60;
  * プレイヤー ライトニングドーザ カットイン
  */
 export class PlayerLightningDozerCutInView implements LightningDozerCutInView {
-  #group: typeof THREE.Group;
+  #group: THREE.Group;
   #cutInUp: HorizontalAnimationMesh;
   #cutInDown: HorizontalAnimationMesh;
 
@@ -87,7 +87,7 @@ export class PlayerLightningDozerCutInView implements LightningDozerCutInView {
    *
    * @return シーンに追加するオブジェクト
    */
-  getObject3D(): typeof THREE.Object3D {
+  getObject3D(): THREE.Object3D {
     return this.#group;
   }
 

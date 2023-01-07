@@ -14,7 +14,7 @@ export interface ArmdozerIcon {
    *
    * @return シーンに追加するオブジェクト
    */
-  getObject3D(): typeof THREE.Object3D;
+  getObject3D(): THREE.Object3D;
 
   /**
    * 透明度を設定する

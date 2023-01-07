@@ -13,7 +13,7 @@ export const GROUP_PADDING = 30;
 
 /** プレイヤーのダメージインジケータビュー */
 export class PlayerDamageIndicatorView implements DamageIndicatorView {
-  #group: typeof THREE.Group;
+  #group: THREE.Group;
   #numbers: HorizontalAnimationMesh[];
 
   constructor(resources: Resources) {
@@ -56,12 +56,12 @@ export class PlayerDamageIndicatorView implements DamageIndicatorView {
   }
 
   /** カメラの方向を向く */
-  lookAt(camera: typeof THREE.Camera): void {
+  lookAt(camera: THREE.Camera): void {
     this.#group.quaternion.copy(camera.quaternion);
   }
 
   /** シーンに追加するオブジェクトを取得する */
-  getObject3D(): typeof THREE.Object3D {
+  getObject3D(): THREE.Object3D {
     return this.#group;
   }
 

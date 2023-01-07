@@ -19,7 +19,7 @@ import { BurstButtonView } from "./view/burst-button-view";
 export class BurstButton {
   #model: BurstButtonModel;
   #view: BurstButtonView;
-  #pushButtonSound: typeof Howl;
+  #pushButtonSound: Howl;
   #pushButton: StreamSource<Event>;
   #unsubscriber: Unsubscriber;
 
@@ -32,7 +32,7 @@ export class BurstButton {
    */
   constructor(resources: Resources, gameObjectAction: Stream<GameObjectAction>, armdozerIcon: ArmdozerIcon) {
     const pushButtonResource = resources.sounds.find(v => v.id === SOUND_IDS.PUSH_BUTTON);
-    this.#pushButtonSound = pushButtonResource ? pushButtonResource.sound : new Howl();
+    this.#pushButtonSound = pushButtonResource ? pushButtonResource.sound : new Howl({src: ""});
     this.#pushButton = createStreamSource();
     this.#model = createInitialValue();
     this.#view = new BurstButtonView({
@@ -94,7 +94,7 @@ export class BurstButton {
    *
    * @return 取得結果
    */
-  getObject3D(): typeof THREE.Object3D {
+  getObject3D(): THREE.Object3D {
     return this.#view.getObject3D();
   }
 
