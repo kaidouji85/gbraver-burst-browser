@@ -1,5 +1,5 @@
 import * as THREE from "three";
-import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
+import {GLTF, GLTFLoader} from "three/examples/jsm/loaders/GLTFLoader";
 import type { ResourceRoot } from "./resource-root";
 
 /** glTFリソースID */
@@ -20,7 +20,7 @@ export type GlTFResource = {
   id: GlTFId;
 
   /** glTFモデル */
-  object: THREE.Scene;
+  object: THREE.Group;
 };
 
 /** IDリスト */
@@ -53,11 +53,9 @@ export function loadGlTF(resourceRoot: ResourceRoot, config: GlTFConfig): Promis
   return new Promise((resolve, reject) => {
     const fullPath = `${resourceRoot.get()}/${config.path}`;
 
-    const onLoad = (object: {
-      scene: THREE.Scene;
-    }) => resolve({
+    const onLoad = (gltf: GLTF) => resolve({
       id: config.id,
-      object: object.scene
+      object: gltf.scene
     });
 
     const onProgress = () => {}; //NOP
