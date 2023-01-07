@@ -4,7 +4,7 @@ import { getScreenPosition } from "./screen-position";
 
 /** マウスのレイキャスト */
 export type MouseRaycaster = {
-  raycaster: typeof THREE.Raycaster;
+  raycaster: THREE.Raycaster;
 };
 
 /**

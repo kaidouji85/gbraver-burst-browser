@@ -20,7 +20,7 @@ export type TouchRaycaster = {
   identifier: number;
 
   /** タッチのレイキャスト */
-  raycaster: typeof THREE.Raycaster;
+  raycaster: THREE.Raycaster;
 };
 
 /**
