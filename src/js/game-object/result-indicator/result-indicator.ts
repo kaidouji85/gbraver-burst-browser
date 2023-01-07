@@ -45,7 +45,7 @@ export class ResultIndicator {
    *
    * @return 取得結果
    */
-  getObject3D(): typeof THREE.Object3D {
+  getObject3D(): THREE.Object3D {
     return this.#view.getObject3D();
   }
 

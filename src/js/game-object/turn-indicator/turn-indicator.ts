@@ -1,4 +1,4 @@
-import TWEEN from "@tweenjs/tween.js";
+import TWEEN, {Group} from "@tweenjs/tween.js";
 import * as THREE from "three";
 import { Animate } from "../../animation/animate";
 import type { PreRender } from "../../game-loop/pre-render";
@@ -25,7 +25,7 @@ type Param = {
 
 /** ターンインジケーター */
 export class TurnIndicator {
-  #tweenGroup: typeof TWEEN.Group;
+  #tweenGroup: Group;
   #model: TurnIndicatorModel;
   #view: TurnIndicatorView;
   #unsubscribers: Unsubscriber[];
@@ -81,7 +81,7 @@ export class TurnIndicator {
    * ターンインジケーターで使うthree.jsオブジェクトを返す
    * @return 取得結果
    */
-  getObject3D(): typeof THREE.Object3D {
+  getObject3D(): THREE.Object3D {
     return this.#view.getObject3D();
   }
 

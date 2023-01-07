@@ -13,7 +13,7 @@ import type { Rendering } from "./rendering";
 
 /** レンダラ管理オブジェクト */
 export class Renderer implements OverlapNotifier, RendererDomGetter, Rendering {
-  _threeJsRender: typeof THREE.WebGLRenderer;
+  _threeJsRender: THREE.WebGLRenderer;
   _domEvent: Stream<RendererDOMEvent>;
   _unsubscriber: Unsubscriber[];
 
@@ -50,7 +50,7 @@ export class Renderer implements OverlapNotifier, RendererDomGetter, Rendering {
    * @param camera カメラ
    * @return 生成結果
    */
-  createOverlapNotifier(camera: typeof THREE.Camera): Stream<OverlapEvent> {
+  createOverlapNotifier(camera: THREE.Camera): Stream<OverlapEvent> {
     return toOverlapStream(this._domEvent, this.getRendererDOM(), camera);
   }
 
@@ -59,7 +59,7 @@ export class Renderer implements OverlapNotifier, RendererDomGetter, Rendering {
    *
    * @return デバッグ用情報
    */
-  info(): typeof WebGLInfo {
+  info(): WebGLInfo {
     return this._threeJsRender.info;
   }
 
@@ -89,7 +89,7 @@ export class Renderer implements OverlapNotifier, RendererDomGetter, Rendering {
    * @param scene シーン
    * @param camera カメラ
    */
-  rendering(scene: typeof THREE.Scene, camera: typeof THREE.Camera): void {
+  rendering(scene: THREE.Scene, camera: THREE.Camera): void {
     this._threeJsRender.render(scene, camera);
   }
 

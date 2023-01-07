@@ -28,7 +28,7 @@ export type OverlapEvent = MouseDownRaycaster | MouseMoveRaycaster | MouseUpRayc
  * @param camera カメラ
  * @return 当たり判定ストリーム
  */
-export function toOverlapStream(origin: Stream<RendererDOMEvent>, rendererDOM: HTMLElement, camera: typeof THREE.Camera): Stream<OverlapEvent> {
+export function toOverlapStream(origin: Stream<RendererDOMEvent>, rendererDOM: HTMLElement, camera: THREE.Camera): Stream<OverlapEvent> {
   return origin.chain(map(v => {
     switch (v.type) {
       case "mouseDown":

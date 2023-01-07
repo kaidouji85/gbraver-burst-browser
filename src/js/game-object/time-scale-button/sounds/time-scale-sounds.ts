@@ -5,7 +5,7 @@ import { SOUND_IDS } from "../../../resource/sound";
 /** タイムスケールボタンサウンド */
 export type TimeScaleButtonSounds = {
   /** 値変更 */
-  changeValue: typeof Howl;
+  changeValue: Howl;
 };
 
 /**
@@ -15,7 +15,7 @@ export type TimeScaleButtonSounds = {
  * @return 生成結果
  */
 export function createTimeScaleButtonSounds(resources: Resources): TimeScaleButtonSounds {
-  const changeValue = resources.sounds.find(v => v.id === SOUND_IDS.CHANGE_VALUE)?.sound ?? new Howl();
+  const changeValue = resources.sounds.find(v => v.id === SOUND_IDS.CHANGE_VALUE)?.sound ?? new Howl({src: ""});
   return {
     changeValue
   };

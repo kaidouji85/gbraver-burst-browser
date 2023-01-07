@@ -12,10 +12,10 @@ type Params = {
 /** キャンバスメッシュおよび関連オブジェクトを集めたクラス */
 export class CanvasMesh {
   /** メッシュ */
-  mesh: typeof THREE.Mesh;
+  mesh: THREE.Mesh<THREE.PlaneGeometry, THREE.MeshBasicMaterial>;
 
   /** テクスチャ  */
-  texture: typeof THREE.CanvasTexture;
+  texture: THREE.Texture;
 
   /**
    * 描画を行うキャンバス
@@ -62,8 +62,8 @@ export class CanvasMesh {
     //
     // 詳細
     // https://stackoverflow.com/a/18474767/7808745
-    this.mesh.material.map.needsUpdate = true;
-    const context = this.canvas.getContext("2d");
+    (this.mesh.material.map ?? new THREE.Texture()).needsUpdate = true;
+    const context = this.canvas.getContext("2d") || new CanvasRenderingContext2D();
     drawFunc(context);
   }
 

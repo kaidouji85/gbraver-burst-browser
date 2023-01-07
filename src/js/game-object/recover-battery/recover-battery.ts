@@ -38,7 +38,7 @@ export class RecoverBattery {
    *
    * @param param パラメータ
    */
-  constructor(param: Param): void {
+  constructor(param: Param) {
     this.#model = createInitialValue();
     this.#view = param.view;
     this.#sounds = new RecoverBatterySounds(param.resources);
@@ -91,7 +91,7 @@ export class RecoverBattery {
    *
    * @return シーンに追加するオブジェクト
    */
-  getObject3D(): typeof THREE.Object3D {
+  getObject3D(): THREE.Object3D {
     return this.#view.getObject3D();
   }
 

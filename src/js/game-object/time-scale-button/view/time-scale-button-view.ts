@@ -19,7 +19,7 @@ const MESH_SIZE = 70;
 
 /** アニメーションタイムスケールボタンビュー */
 export class TimeScaleButtonView {
-  #group: typeof THREE.Group;
+  #group: THREE.Group;
   #button: SimpleImageMesh;
   #timeScale100: SimpleImageMesh;
   #timeScale050: SimpleImageMesh;
@@ -100,7 +100,7 @@ export class TimeScaleButtonView {
    *
    * @return シーンに追加するオブジェクト
    */
-  getObject3D(): typeof THREE.Object3D {
+  getObject3D(): THREE.Object3D {
     return this.#group;
   }
 

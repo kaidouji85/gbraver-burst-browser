@@ -33,7 +33,7 @@ export default class ShoppingStreet implements Stage {
    *
    * @return 配列にまとめた結果
    */
-  getThreeJsObjects(): typeof THREE.Object3D[] {
+  getThreeJsObjects(): THREE.Object3D[] {
     return [this.#gltf.object];
   }
 

@@ -6,7 +6,7 @@ export const SIZE = 5000;
 
 /** 空の明るさビュー */
 export class SkyBrightnessView {
-  #mesh: typeof THREE.Mesh;
+  #mesh: THREE.Mesh<THREE.BoxGeometry, THREE.MeshBasicMaterial>;
 
   constructor() {
     const geometry = new THREE.BoxGeometry(SIZE, SIZE, SIZE);
@@ -29,7 +29,7 @@ export class SkyBrightnessView {
    *
    * @return シーンに追加するオブジェクト
    */
-  getObject3D(): typeof THREE.Object3D {
+  getObject3D(): THREE.Object3D {
     return this.#mesh;
   }
 

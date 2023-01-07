@@ -11,7 +11,7 @@ type Param = {
   meshSize: number;
 
   /** 画像データ */
-  image: Image;
+  image: HTMLImageElement;
 
   /**
    * 画像の横幅をピクセル単位で指定する

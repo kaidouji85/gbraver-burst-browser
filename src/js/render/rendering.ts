@@ -10,5 +10,5 @@ export interface Rendering {
    * @param scene シーン
    * @param camera カメラ
    */
-  rendering(scene: typeof THREE.Scene, camera: typeof THREE.Camera): void;
+  rendering(scene: THREE.Scene, camera: THREE.Camera): void;
 }

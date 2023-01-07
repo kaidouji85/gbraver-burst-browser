@@ -31,9 +31,8 @@ export type TouchRaycaster = {
  * @param camera カメラ
  * @return タッチイベントから作成したレイキャスト
  */
-export function createTouchEventRaycaster(event: TouchEvent, rendererDOM: HTMLElement, camera: typeof THREE.Camera): TouchRaycastContainer {
-  const touchToRaycaster = (touchList: TouchList): TouchRaycaster[] => Object.values(touchList).map(v => {
-    const touch: Touch = v instanceof Touch ? v : new Touch();
+export function createTouchEventRaycaster(event: TouchEvent, rendererDOM: HTMLElement, camera: THREE.Camera): TouchRaycastContainer {
+  const touchToRaycaster = (touchList: TouchList): TouchRaycaster[] => Object.values(touchList).map(touch => {
     const position = getTouchPosition(touch, rendererDOM);
     return {
       identifier: touch.identifier,
@@ -54,6 +53,6 @@ export function createTouchEventRaycaster(event: TouchEvent, rendererDOM: HTMLEl
  * @param touch タッチ情報
  * @param rendererDOM レンダラがバインドされているHTML要素
  */
-export function getTouchPosition(touch: Touch, rendererDOM: HTMLElement): typeof THREE.Vector2 {
+export function getTouchPosition(touch: Touch, rendererDOM: HTMLElement): THREE.Vector2 {
   return getScreenPosition(touch.clientX, touch.clientY, rendererDOM.clientWidth, rendererDOM.clientHeight);
 }

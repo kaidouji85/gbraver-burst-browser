@@ -1,4 +1,4 @@
-import TWEEN from "@tweenjs/tween.js";
+import TWEEN, {Group} from "@tweenjs/tween.js";
 import * as THREE from "three";
 import type { Animate } from "../../animation/animate";
 import type { PreRender } from "../../game-loop/pre-render";
@@ -22,7 +22,7 @@ export class TimeScaleButton {
   #model: TimeScaleButtonModel;
   #view: TimeScaleButtonView;
   #sounds: TimeScaleButtonSounds;
-  #toggleTween: typeof TWEEN.Group;
+  #toggleTween: Group;
   #toggle: StreamSource<number>;
   #unsubscribers: Unsubscriber[];
 
@@ -64,7 +64,7 @@ export class TimeScaleButton {
    *
    * @return シーンに追加するオブジェクト
    */
-  getObject3D(): typeof THREE.Object3D {
+  getObject3D(): THREE.Object3D {
     return this.#view.getObject3D();
   }
 

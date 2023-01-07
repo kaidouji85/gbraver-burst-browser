@@ -22,7 +22,7 @@ export class SimpleIndicatorView implements ResultIndicatorView {
    * @param paddingX X方向のパディング
    * @param paddingY Y方向のパディング
    */
-  constructor(texture: typeof THREE.Texture, paddingX: number, paddingY: number) {
+  constructor(texture: THREE.Texture, paddingX: number, paddingY: number) {
     this.#mesh = new HorizontalAnimationMesh({
       texture,
       maxAnimation: 1,
@@ -54,7 +54,7 @@ export class SimpleIndicatorView implements ResultIndicatorView {
   }
 
   /** @override */
-  getObject3D(): typeof THREE.Object3D {
+  getObject3D(): THREE.Object3D {
     return this.#mesh.getObject3D();
   }
 
