@@ -1,10 +1,11 @@
 import { map } from "../stream/operator";
-import type { Unsubscriber } from "../stream/stream";
+import type {Stream, Unsubscriber} from "../stream/stream";
 import { createStream } from "../stream/stream";
 import { initialize } from "./game-procedure/initialize";
 import { onGameAction } from "./game-procedure/on-game-action";
 import type { GameProps, GamePropsGeneratorParam } from "./game-props";
 import { generateGameProps } from "./game-props";
+import {GameAction} from "./game-actions";
 
 /** コンストラクタのパラメータ */
 type Param = GamePropsGeneratorParam;
@@ -26,18 +27,18 @@ export class Game {
     elements.forEach(element => {
       body.appendChild(element);
     });
-    const suddenlyBattleEnd = this.#props.suddenlyBattleEnd.stream().chain(map(() => ({
+    const suddenlyBattleEnd: Stream<GameAction> = this.#props.suddenlyBattleEnd.stream().chain(map(() => ({
       type: "SuddenlyBattleEnd"
     })));
-    const webSocketAPIError = createStream(this.#props.api.websocketErrorNotifier()).chain(map(error => ({
+    const webSocketAPIError: Stream<GameAction> = createStream(this.#props.api.websocketErrorNotifier()).chain(map(error => ({
       type: "WebSocketAPIError",
       error
     })));
-    const WebSocketAPIUnintentionalClose = createStream(this.#props.api.websocketUnintentionalCloseNotifier()).chain(map(error => ({
+    const WebSocketAPIUnintentionalClose: Stream<GameAction> = createStream(this.#props.api.websocketUnintentionalCloseNotifier()).chain(map(error => ({
       type: "WebSocketAPIUnintentionalClose",
       error
     })));
-    const gameActionStreams = [this.#props.tdBinder.gameActionNotifier(), this.#props.domSceneBinder.gameActionNotifier(), this.#props.domDialogBinder.gameActionNotifier(), this.#props.domFloaters.gameActionNotifier(), suddenlyBattleEnd, webSocketAPIError, WebSocketAPIUnintentionalClose];
+    const gameActionStreams: Stream<GameAction>[] = [this.#props.tdBinder.gameActionNotifier(), this.#props.domSceneBinder.gameActionNotifier(), this.#props.domDialogBinder.gameActionNotifier(), this.#props.domFloaters.gameActionNotifier(), suddenlyBattleEnd, webSocketAPIError, WebSocketAPIUnintentionalClose];
     this.#unsubscribers = gameActionStreams.map(v => v.subscribe(action => {
       onGameAction(this.#props, action);
     }));
