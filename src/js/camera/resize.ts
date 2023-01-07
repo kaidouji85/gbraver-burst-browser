@@ -10,7 +10,7 @@ import * as THREE from "three";
  * @param width リサイズ後の画面幅
  * @param height リサイズ後の画面高
  */
-export function onResizePerspectiveCamera(camera: typeof THREE.PerspectiveCamera, width: number, height: number): void {
+export function onResizePerspectiveCamera(camera: THREE.PerspectiveCamera, width: number, height: number): void {
   camera.aspect = width / height;
   camera.updateProjectionMatrix();
 }
@@ -23,7 +23,7 @@ export function onResizePerspectiveCamera(camera: typeof THREE.PerspectiveCamera
  * @param width リサイズ後の画面幅
  * @param height リサイズ後の画面高
  */
-export function onResizeOrthographicCamera(camera: typeof THREE.OrthographicCamera, width: number, height: number): void {
+export function onResizeOrthographicCamera(camera: THREE.OrthographicCamera, width: number, height: number): void {
   camera.left = -width / 2;
   camera.right = width / 2;
   camera.top = height / 2;
