@@ -1,4 +1,3 @@
-import { $ReadOnly } from "utility-types";
 import type { Command, Player } from "gbraver-burst-core";
 import { fadeOut, stop } from "../../bgm/bgm-operators";
 import { StageTitle } from "../../dom-scenes/stage-title/stage-title";
@@ -20,7 +19,7 @@ import type { NPCBattleStage } from "../npc-battle";
  * @param stage NPCバトルステージ
  * @param level ステージレベル
  */
-export async function startNPCBattleStage(props: $ReadOnly<GameProps>, player: Player, stage: NPCBattleStage, level: number) {
+export async function startNPCBattleStage(props: Readonly<GameProps>, player: Player, stage: NPCBattleStage, level: number) {
   const npcBattle = new NPCBattleRoom(player, stage.npc);
   await props.fader.fadeOut();
   props.domDialogBinder.hidden();

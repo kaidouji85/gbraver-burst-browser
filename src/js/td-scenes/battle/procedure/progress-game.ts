@@ -1,4 +1,3 @@
-import { $ReadOnly } from "utility-types";
 import type { Command, GameEnd, GameState } from "gbraver-burst-core";
 import { fadeOut, stop } from "../../../bgm/bgm-operators";
 import { stateAnimation, stateHistoryAnimation } from "../animation/state-history";
@@ -12,7 +11,7 @@ import type { BattleSceneProps } from "../battle-scene-props";
  * @param command プレイヤーが入力したコマンド
  * @return 処理が完了したら発火するPromise
  */
-const repeatProgressWhenUnselectable = async (props: $ReadOnly<BattleSceneProps>, command: Command): Promise<GameState | null | undefined> => {
+const repeatProgressWhenUnselectable = async (props: Readonly<BattleSceneProps>, command: Command): Promise<GameState | null | undefined> => {
   let lastCommand: Command = command;
   const maxProgressCount = 100;
 
@@ -56,7 +55,7 @@ const repeatProgressWhenUnselectable = async (props: $ReadOnly<BattleSceneProps>
  * @param gameEnd ゲーム終了情報
  * @return 処理が完了したら発火するPromise
  */
-const onGameEnd = async (props: $ReadOnly<BattleSceneProps>, gameEnd: GameEnd): Promise<void> => {
+const onGameEnd = async (props: Readonly<BattleSceneProps>, gameEnd: GameEnd): Promise<void> => {
   await props.bgm.do(fadeOut);
   await props.bgm.do(stop);
   props.endBattle.next({
@@ -71,7 +70,7 @@ const onGameEnd = async (props: $ReadOnly<BattleSceneProps>, gameEnd: GameEnd): 
  * @param command プレイヤーが入力したコマンド
  * @return 処理が完了したら発火するPromise
  */
-export async function progressGame(props: $ReadOnly<BattleSceneProps>, command: Command): Promise<void> {
+export async function progressGame(props: Readonly<BattleSceneProps>, command: Command): Promise<void> {
   const lastState = await repeatProgressWhenUnselectable(props, command);
 
   if (lastState && lastState.effect.name === "GameEnd") {

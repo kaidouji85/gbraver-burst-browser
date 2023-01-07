@@ -1,4 +1,3 @@
-import { $ReadOnly } from "utility-types";
 import type { GameProps } from "../game-props";
 import { startTitle } from "./start-title";
 
@@ -8,7 +7,7 @@ import { startTitle } from "./start-title";
  * @param props ゲームプロパティ
  * @return 処理が完了したら発火するPromise
  */
-export async function onConfigChangeCancel(props: $ReadOnly<GameProps>): Promise<void> {
+export async function onConfigChangeCancel(props: Readonly<GameProps>): Promise<void> {
   await props.fader.fadeOut();
   await startTitle(props);
   await props.fader.fadeIn();

@@ -1,4 +1,3 @@
-import { $ReadOnly } from "utility-types";
 import { all } from "../../../animation/all";
 import { delay } from "../../../animation/delay";
 import type { DoBurst } from "../actions/do-burst";
@@ -13,7 +12,7 @@ import { progressGame } from "./progress-game";
  * @param action バースト発動アクション
  * @return 処理が完了したら発火するPromise
  */
-export async function onBurst(props: $ReadOnly<BattleSceneProps>, action: DoBurst): Promise<void> {
+export async function onBurst(props: Readonly<BattleSceneProps>, action: DoBurst): Promise<void> {
   props.exclusive.execute(async () => {
     action.event.stopPropagation();
     const burstCommand = {

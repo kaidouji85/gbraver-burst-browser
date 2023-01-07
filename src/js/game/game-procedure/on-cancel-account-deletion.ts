@@ -1,4 +1,3 @@
-import { $ReadOnly } from "utility-types";
 import type { GameProps } from "../game-props";
 
 /**
@@ -6,6 +5,6 @@ import type { GameProps } from "../game-props";
  *
  * @param props ゲームプロパティ
  */
-export function onCancelAccountDeletion(props: $ReadOnly<GameProps>): void {
+export function onCancelAccountDeletion(props: Readonly<GameProps>): void {
   props.domDialogBinder.hidden();
 }

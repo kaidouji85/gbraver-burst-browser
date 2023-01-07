@@ -1,4 +1,3 @@
-import { $ReadOnly } from "utility-types";
 import { pop } from "../../../dom/animation";
 import type { PushDOM } from "../../../dom/event-stream";
 import { isConfigChanged } from "../../../game/config/browser-config";
@@ -11,7 +10,7 @@ import { parseConfig } from "./parse-config";
  * @param props 画面プロパティ
  * @param action アクション
  */
-export function onPrevButtonPush(props: ConfigProps, action: $ReadOnly<PushDOM>): void {
+export function onPrevButtonPush(props: ConfigProps, action: Readonly<PushDOM>): void {
   action.event.preventDefault();
   action.event.stopPropagation();
   props.exclusive.execute(async () => {

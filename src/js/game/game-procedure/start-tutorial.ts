@@ -1,4 +1,3 @@
-import { $ReadOnly } from "utility-types";
 import { fadeOut, stop } from "../../bgm/bgm-operators";
 import { TutorialTitle } from "../../dom-scenes/tutorial-title";
 import { NPCBattleRoom } from "../../npc/npc-battle-room";
@@ -19,7 +18,7 @@ import type { TutorialStage } from "../tutorial-stages";
  * @param stage チュートリアルステージ
  * @return 処理が完了したら発火するPromise
  */
-export async function startTutorial(props: $ReadOnly<GameProps>, level: number, stage: TutorialStage): Promise<void> {
+export async function startTutorial(props: Readonly<GameProps>, level: number, stage: TutorialStage): Promise<void> {
   const npcBattle = new NPCBattleRoom(stage.player, stage.npc);
   await props.fader.fadeOut();
   const scene = new TutorialTitle({

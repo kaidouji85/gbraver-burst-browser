@@ -1,4 +1,3 @@
-import { $ReadOnly } from "utility-types";
 import { NetworkErrorDialog } from "../../dom-dialogs/network-error/network-error-dialog";
 import { networkErrorDialogConnector } from "../action-connector/network-error-dialog-connector";
 import type { WebSocketAPIError } from "../game-actions";
@@ -10,7 +9,7 @@ import type { GameProps } from "../game-props";
  * @param props ゲームプロパティ
  * @param action アクション
  */
-export function onWebSocketAPIError(props: $ReadOnly<GameProps>, action: WebSocketAPIError): void {
+export function onWebSocketAPIError(props: Readonly<GameProps>, action: WebSocketAPIError): void {
   const dialog = new NetworkErrorDialog(props.resources, {
     type: "GotoTitle"
   });

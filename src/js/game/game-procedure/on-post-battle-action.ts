@@ -1,4 +1,3 @@
-import { $ReadOnly } from "utility-types";
 import type { Player } from "gbraver-burst-core";
 import { fadeOut, stop } from "../../bgm/bgm-operators";
 import { NPCEnding } from "../../dom-scenes/npc-ending/npc-ending";
@@ -25,7 +24,7 @@ import { startTutorialSelector } from "./start-tutorial-selector";
  * @param props ゲームプロパティ
  * @return 処理が完了したら発火するPromise
  */
-const gotoTitle = async (props: $ReadOnly<GameProps>) => {
+const gotoTitle = async (props: Readonly<GameProps>) => {
   props.domFloaters.hiddenPostBattle();
   await Promise.all([(async () => {
     await props.fader.fadeOut();
@@ -44,7 +43,7 @@ const gotoTitle = async (props: $ReadOnly<GameProps>) => {
  * @param props ゲームプロパティ
  * @return 処理が完了したら発火するPromise
  */
-const gotoEnding = async (props: $ReadOnly<GameProps>) => {
+const gotoEnding = async (props: Readonly<GameProps>) => {
   props.domFloaters.hiddenPostBattle();
   await props.fader.fadeOut();
   props.tdBinder.hidden();
@@ -86,7 +85,7 @@ const createNPCBattle = (inProgress: InProgress) => {
  * @param level レベル
  * @return 処理が完了したら発火するPromise
  */
-const gotoNPCBattleStage = async (props: $ReadOnly<GameProps>, player: Player, stage: NPCBattleStage, level: number) => {
+const gotoNPCBattleStage = async (props: Readonly<GameProps>, player: Player, stage: NPCBattleStage, level: number) => {
   props.domFloaters.hiddenPostBattle();
   await startNPCBattleStage(props, player, stage, level);
 };
@@ -99,7 +98,7 @@ const gotoNPCBattleStage = async (props: $ReadOnly<GameProps>, player: Player, s
  * @param stage チュートリアルステージ
  * @return 処理が完了したら発火するPromise
  */
-const gotoTutorial = async (props: $ReadOnly<GameProps>, level: number, stage: TutorialStage) => {
+const gotoTutorial = async (props: Readonly<GameProps>, level: number, stage: TutorialStage) => {
   props.domFloaters.hiddenPostBattle();
   await startTutorial(props, level, stage);
 };
@@ -110,7 +109,7 @@ const gotoTutorial = async (props: $ReadOnly<GameProps>, level: number, stage: T
  * @param props ゲームプロパティ
  * @return 処理が完了したら発火するPromise
  */
-const gotoTutorialSelector = async (props: $ReadOnly<GameProps>) => {
+const gotoTutorialSelector = async (props: Readonly<GameProps>) => {
   props.domFloaters.hiddenPostBattle();
   await startTutorialSelector(props);
   playTitleBGM(props);

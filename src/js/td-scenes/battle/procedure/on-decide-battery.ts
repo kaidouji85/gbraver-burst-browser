@@ -1,4 +1,3 @@
-import { $ReadOnly } from "utility-types";
 import { all } from "../../../animation/all";
 import { delay } from "../../../animation/delay";
 import type { DecideBattery } from "../actions/decide-battery";
@@ -13,7 +12,7 @@ import { progressGame } from "./progress-game";
  * @param action バッテリー決定アクション
  * @return 処理が完了したら発火するPromise
  */
-export async function onDecideBattery(props: $ReadOnly<BattleSceneProps>, action: DecideBattery): Promise<void> {
+export async function onDecideBattery(props: Readonly<BattleSceneProps>, action: DecideBattery): Promise<void> {
   await props.exclusive.execute(async (): Promise<void> => {
     action.event.stopPropagation();
     const batteryCommand = {

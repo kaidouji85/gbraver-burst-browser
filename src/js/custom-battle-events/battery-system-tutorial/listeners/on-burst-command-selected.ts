@@ -1,4 +1,3 @@
-import { $ReadOnly } from "utility-types";
 import type { BurstCommandSelected, CommandCanceled } from "../../../td-scenes/battle/custom-battle-event";
 import { focusOutBurstButton } from "../../focus";
 import type { BatterySystemTutorialState, SelectableCommands } from "../state";
@@ -19,7 +18,7 @@ type Ret = {
  * @param state ステート
  * @return コマンドキャンセル情報
  */
-export async function onBurstCommandSelected(props: $ReadOnly<BurstCommandSelected>, state: BatterySystemTutorialState): Promise<Ret> {
+export async function onBurstCommandSelected(props: Readonly<BurstCommandSelected>, state: BatterySystemTutorialState): Promise<Ret> {
   const enableBurstCommand: SelectableCommands[] = ["BurstOnly", "All"];
 
   if (!enableBurstCommand.includes(state.selectableCommands)) {

@@ -1,4 +1,3 @@
-import { $ReadOnly } from "utility-types";
 import type { Battle, GameState, GameStateX } from "gbraver-burst-core";
 import type { LastState } from "../../../td-scenes/battle/custom-battle-event";
 import { extractBattle, extractGameEnd } from "../../game-state-extractor";
@@ -14,7 +13,7 @@ import { zeroBatteryChance } from "../stories/zero-battery-chance";
  * @param state ステート
  * @return ステート更新結果
  */
-async function doDamageRaceOrNothing(props: $ReadOnly<LastState>, state: ZeroDefenseTutorialState): Promise<ZeroDefenseTutorialState> {
+async function doDamageRaceOrNothing(props: Readonly<LastState>, state: ZeroDefenseTutorialState): Promise<ZeroDefenseTutorialState> {
   if (state.isDamageRaceComplete) {
     return state;
   }
@@ -47,7 +46,7 @@ async function doDamageRaceOrNothing(props: $ReadOnly<LastState>, state: ZeroDef
  * @param state ステート
  * @return ステート更新結果
  */
-async function doZeroBatteryChangeOrNothing(props: $ReadOnly<LastState>, state: ZeroDefenseTutorialState): Promise<ZeroDefenseTutorialState> {
+async function doZeroBatteryChangeOrNothing(props: Readonly<LastState>, state: ZeroDefenseTutorialState): Promise<ZeroDefenseTutorialState> {
   if (state.isZeroBatteryChangeComplete) {
     return state;
   }
@@ -84,7 +83,7 @@ async function doZeroBatteryChangeOrNothing(props: $ReadOnly<LastState>, state: 
  * @param state ステート
  * @return ステート更新結果
  */
-export async function beforeLastState(props: $ReadOnly<LastState>, state: ZeroDefenseTutorialState): Promise<ZeroDefenseTutorialState> {
+export async function beforeLastState(props: Readonly<LastState>, state: ZeroDefenseTutorialState): Promise<ZeroDefenseTutorialState> {
   const updatedStateHistory = { ...state,
     stateHistory: [...state.stateHistory, ...props.update]
   };

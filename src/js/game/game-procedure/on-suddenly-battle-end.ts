@@ -1,4 +1,3 @@
-import { $ReadOnly } from "utility-types";
 import { NetworkErrorDialog } from "../../dom-dialogs/network-error/network-error-dialog";
 import { networkErrorDialogConnector } from "../action-connector/network-error-dialog-connector";
 import type { GameProps } from "../game-props";
@@ -9,7 +8,7 @@ import type { GameProps } from "../game-props";
  * @param props ゲームプロパティ
  * @return 処理が終了すると発火するPromise
  */
-export async function onSuddenlyEndBattle(props: $ReadOnly<GameProps>): Promise<void> {
+export async function onSuddenlyEndBattle(props: Readonly<GameProps>): Promise<void> {
   const dialog = new NetworkErrorDialog(props.resources, {
     type: "GotoTitle"
   });

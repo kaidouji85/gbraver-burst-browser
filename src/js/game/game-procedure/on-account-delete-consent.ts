@@ -1,4 +1,3 @@
-import { $ReadOnly } from "utility-types";
 import { DeleteAccountConsentDialog } from "../../dom-dialogs/delete-account-consent/delete-account-consent-dialog";
 import { deleteAccountConsentDialogConnector } from "../action-connector/delete-account-consent-dialog-connector";
 import type { GameProps } from "../game-props";
@@ -8,7 +7,7 @@ import type { GameProps } from "../game-props";
  *
  * @param props ゲームプロパティ
  */
-export function onAccountDeleteConsent(props: $ReadOnly<GameProps>): void {
+export function onAccountDeleteConsent(props: Readonly<GameProps>): void {
   const dialog = new DeleteAccountConsentDialog(props.resources);
   props.domDialogBinder.bind(dialog, deleteAccountConsentDialogConnector);
 }

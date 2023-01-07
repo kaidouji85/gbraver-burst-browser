@@ -1,4 +1,3 @@
-import { $ReadOnly } from "utility-types";
 import type { GameEnd, GameStateX } from "gbraver-burst-core";
 import type { LastState } from "../../../td-scenes/battle/custom-battle-event";
 import { extractGameEnd } from "../../game-state-extractor";
@@ -15,7 +14,7 @@ import { victory } from "../stories/victory";
  * @param state ステート
  * @return ステート更新結果
  */
-export async function afterLastState(props: $ReadOnly<LastState>, state: BatterySystemTutorialState): Promise<BatterySystemTutorialState> {
+export async function afterLastState(props: Readonly<LastState>, state: BatterySystemTutorialState): Promise<BatterySystemTutorialState> {
   const extractedGameEnd = extractGameEnd(props.update);
 
   if (!extractedGameEnd) {

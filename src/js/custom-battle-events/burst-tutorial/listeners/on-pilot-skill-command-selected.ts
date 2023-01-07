@@ -1,4 +1,3 @@
-import { $ReadOnly } from "utility-types";
 import type { CommandCanceled, PilotSkillCommandSelected } from "../../../td-scenes/battle/custom-battle-event";
 import { focusOutPilotButton } from "../../focus";
 import type { BurstTutorialState, SelectableCommands } from "../state";
@@ -19,7 +18,7 @@ type Ret = {
  * @param state ステート
  * @return イベント終了情報
  */
-export async function onPilotSkillCommandSelected(props: $ReadOnly<PilotSkillCommandSelected>, state: BurstTutorialState): Promise<Ret> {
+export async function onPilotSkillCommandSelected(props: Readonly<PilotSkillCommandSelected>, state: BurstTutorialState): Promise<Ret> {
   const enablePilotSkillCommand: SelectableCommands[] = ["PilotSkillOnly", "All"];
 
   if (!enablePilotSkillCommand.includes(state.selectableCommands)) {

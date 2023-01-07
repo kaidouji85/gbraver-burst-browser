@@ -1,4 +1,3 @@
-import { $ReadOnly } from "utility-types";
 import type { GameState, PlayerState } from "gbraver-burst-core";
 import type { BatteryCommandSelected, CommandCanceled, CustomBattleEventProps } from "../../../td-scenes/battle/custom-battle-event";
 import { unattentionBurstButton } from "../../attention";
@@ -25,7 +24,7 @@ type Ret = {
  * @param player プレイヤー情報
  * @return 終了情報
  */
-async function onZeroDefense(props: $ReadOnly<CustomBattleEventProps>, state: BatterySystemTutorialState, player: PlayerState): Promise<Ret> {
+async function onZeroDefense(props: Readonly<CustomBattleEventProps>, state: BatterySystemTutorialState, player: PlayerState): Promise<Ret> {
   const isZeroBattery = player.armdozer.battery === 0;
   const enableBurst = player.armdozer.enableBurst;
   const enablePilotSkill = player.pilot.enableSkill;
@@ -88,7 +87,7 @@ async function onZeroDefense(props: $ReadOnly<CustomBattleEventProps>, state: Ba
  * @param state ステート
  * @return 終了情報
  */
-export async function onBatteryCommandSelected(props: $ReadOnly<BatteryCommandSelected>, state: BatterySystemTutorialState): Promise<Ret> {
+export async function onBatteryCommandSelected(props: Readonly<BatteryCommandSelected>, state: BatterySystemTutorialState): Promise<Ret> {
   const enableBatteryCommand: SelectableCommands[] = ["BatteryOnly", "All"];
 
   if (!enableBatteryCommand.includes(state.selectableCommands)) {

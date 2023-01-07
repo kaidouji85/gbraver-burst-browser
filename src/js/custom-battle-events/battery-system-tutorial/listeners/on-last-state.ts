@@ -1,4 +1,3 @@
-import { $ReadOnly } from "utility-types";
 import type { GameState } from "gbraver-burst-core";
 import type { LastState } from "../../../td-scenes/battle/custom-battle-event";
 import { focusInBatterySelector } from "../../focus";
@@ -13,7 +12,7 @@ import { attackDescription } from "../stories/attack-description";
  * @param state ステート
  * @return ステート更新結果
  */
-export async function onLastState(props: $ReadOnly<LastState>, state: BatterySystemTutorialState): Promise<BatterySystemTutorialState> {
+export async function onLastState(props: Readonly<LastState>, state: BatterySystemTutorialState): Promise<BatterySystemTutorialState> {
   if (state.isBatterySystemDescriptionComplete) {
     return state;
   }

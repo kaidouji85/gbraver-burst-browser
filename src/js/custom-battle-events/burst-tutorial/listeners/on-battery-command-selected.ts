@@ -1,4 +1,3 @@
-import { $ReadOnly } from "utility-types";
 import type { GameState } from "gbraver-burst-core";
 import type { BatteryCommandSelected, CommandCanceled } from "../../../td-scenes/battle/custom-battle-event";
 import { focusInBurstButton, focusInPilotButton } from "../../focus";
@@ -19,7 +18,7 @@ import { shouldDefense5Again } from "../stories/should-defense5-again";
  * @param state ステート
  * @return 処理が完了したら発火するPromise
  */
-async function defense5(props: $ReadOnly<BatteryCommandSelected>, state: BurstTutorialState): Promise<void> {
+async function defense5(props: Readonly<BatteryCommandSelected>, state: BurstTutorialState): Promise<void> {
   state.isLoseIfNoDefense5Complete ? await shouldDefense5Again(props) : await shouldDefense5(props);
 }
 
@@ -39,7 +38,7 @@ type Ret = {
  * @param state ステート
  * @return イベント終了情報
  */
-export async function onBatteryCommandSelected(props: $ReadOnly<BatteryCommandSelected>, state: BurstTutorialState): Promise<Ret> {
+export async function onBatteryCommandSelected(props: Readonly<BatteryCommandSelected>, state: BurstTutorialState): Promise<Ret> {
   const enableBurstCommand: SelectableCommands[] = ["All"];
 
   if (!enableBurstCommand.includes(state.selectableCommands)) {

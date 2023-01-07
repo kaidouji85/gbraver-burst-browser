@@ -1,4 +1,3 @@
-import { $ReadOnly } from "utility-types";
 import { Animate } from "../../animation/animate";
 import type { BattleSceneProps } from "./battle-scene-props";
 
@@ -22,6 +21,6 @@ type AnimationPlayer = {
  * @param props 戦闘シーンプロパティ
  * @return 生成したアニメーションプレイヤー
  */
-export const animationPlayer = (props: $ReadOnly<BattleSceneProps>): AnimationPlayer => ({
+export const animationPlayer = (props: Readonly<BattleSceneProps>): AnimationPlayer => ({
   play: (animate: Animate) => animate.timeScale(props.animationTimeScale).play()
 });

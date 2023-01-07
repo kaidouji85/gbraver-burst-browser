@@ -1,4 +1,3 @@
-import { $ReadOnly } from "utility-types";
 import type { GameEndResult, GameOver } from "gbraver-burst-core";
 import { BattleAnimationTimeScales, parseBattleAnimationTimeScale } from "../config/browser-config";
 import type { PostBattleButtonConfig } from "../dom-floaters/post-battle/post-battle-button-config";
@@ -17,7 +16,7 @@ import { updateNPCBattleState } from "../npc-battle";
  * @param props ゲームプロパティ
  * @param animationTimeScale 反映するタイムスケール
  */
-const saveAnimationTimeScale = async (props: $ReadOnly<GameProps>, animationTimeScale: number) => {
+const saveAnimationTimeScale = async (props: Readonly<GameProps>, animationTimeScale: number) => {
   const battleAnimationTimeScale = parseBattleAnimationTimeScale(animationTimeScale) ?? BattleAnimationTimeScales[0];
   const origin = await props.config.load();
   const update = { ...origin,
@@ -32,7 +31,7 @@ const saveAnimationTimeScale = async (props: $ReadOnly<GameProps>, animationTime
  * @param props ゲームプロパティ
  * @return 処理が完了したら発火するPromise
  */
-const endCasualMatch = async (props: $ReadOnly<GameProps>) => {
+const endCasualMatch = async (props: Readpnly<GameProps>) => {
   props.suddenlyBattleEnd.unbind();
   await props.api.disconnectWebsocket();
   await props.domFloaters.showPostBattle(props.resources, PostNetworkBattleButtons);
@@ -97,7 +96,7 @@ const createNPCBattle = (inProgress: InProgress, gameEndResult: GameEndResult) =
  * @param postBattleButtons 戦闘終了後アクションボタン設定
  * @return 処理が完了したら発火するPromise
  */
-const endNPCBattleStage = async (props: $ReadOnly<GameProps>, postBattleButtons: PostBattleButtonConfig[]) => {
+const endNPCBattleStage = async (props: Readonly<GameProps>, postBattleButtons: PostBattleButtonConfig[]) => {
   await props.domFloaters.showPostBattle(props.resources, postBattleButtons);
 };
 
@@ -129,7 +128,7 @@ const createTutorial = (inProgress: InProgress, gameEndResult: GameEndResult) =>
  * @param postBattleButtons 戦闘終了後アクションボタン設定
  * @return 処理が完了したら発火するPromise
  */
-const endTutorial = async (props: $ReadOnly<GameProps>, postBattleButtons: PostBattleButtonConfig[]) => {
+const endTutorial = async (props: Readonly<GameProps>, postBattleButtons: PostBattleButtonConfig[]) => {
   await props.domFloaters.showPostBattle(props.resources, postBattleButtons);
 };
 

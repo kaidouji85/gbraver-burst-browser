@@ -1,4 +1,3 @@
-import { $ReadOnly } from "utility-types";
 import type { PushDOM } from "../../../dom/event-stream";
 import type { TitleProps } from "../props";
 
@@ -8,7 +7,7 @@ import type { TitleProps } from "../props";
  * @param props 画面プロパティ
  * @param action アクション
  */
-export function onLogoutPush(props: TitleProps, action: $ReadOnly<PushDOM>): void {
+export function onLogoutPush(props: TitleProps, action: Readonly<PushDOM>): void {
   action.event.preventDefault();
   props.changeValue.play();
   props.pushLogout.next();

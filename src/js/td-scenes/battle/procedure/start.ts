@@ -1,4 +1,3 @@
-import { $ReadOnly } from "utility-types";
 import type { GameState } from "gbraver-burst-core";
 import { play } from "../../../bgm/bgm-operators";
 import { stateAnimation, stateHistoryAnimation } from "../animation/state-history";
@@ -11,7 +10,7 @@ import type { BattleSceneProps } from "../battle-scene-props";
  * @param props 戦闘シーンプロパティ
  * @return 処理が完了したら発火するPromise
  */
-export async function start(props: $ReadOnly<BattleSceneProps>): Promise<void> {
+export async function start(props: Readonly<BattleSceneProps>): Promise<void> {
   return props.exclusive.execute(async (): Promise<void> => {
     props.bgm.do(play(props.sounds.bgm));
 

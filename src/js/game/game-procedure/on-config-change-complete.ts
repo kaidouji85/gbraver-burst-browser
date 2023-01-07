@@ -1,4 +1,3 @@
-import { $ReadOnly } from "utility-types";
 import { isSoundConfigChanged } from "../config/browser-config";
 import type { ConfigChangeComplete } from "../game-actions";
 import type { GameProps } from "../game-props";
@@ -12,7 +11,7 @@ import { startTitle } from "./start-title";
  * @param action アクション
  * @return 処理が完了したら発火するPromise
  */
-export async function onConfigChangeComplete(props: $ReadOnly<GameProps>, action: ConfigChangeComplete): Promise<void> {
+export async function onConfigChangeComplete(props: Readonly<GameProps>, action: ConfigChangeComplete): Promise<void> {
   await props.fader.fadeOut();
   const origin = await props.config.load();
   isSoundConfigChanged(origin, action.config) && reflectSoundVolume(props.resources, action.config);

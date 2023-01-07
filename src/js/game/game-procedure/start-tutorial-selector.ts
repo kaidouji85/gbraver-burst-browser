@@ -1,4 +1,3 @@
-import { $ReadOnly } from "utility-types";
 import { TutorialSelector } from "../../dom-scenes/tutorial-selector/tutorial-selector";
 import { waitTime } from "../../wait/wait-time";
 import { tutorialSelectorConnector } from "../action-connector/tutorial-selector-connection";
@@ -12,7 +11,7 @@ import { TutorialStages, TutorialStagesInDevelopment } from "../tutorial-stages"
  * @param props ゲームプロパティ
  * @return 処理が完了したら発火するPromise
  */
-export async function startTutorialSelector(props: $ReadOnly<GameProps>) {
+export async function startTutorialSelector(props: Readonly<GameProps>) {
   await props.fader.fadeOut();
   const tutorialStages = props.canPlayTutorialInDevelopment ? TutorialStagesInDevelopment : TutorialStages;
   const stages = tutorialStages.map(stage => ({

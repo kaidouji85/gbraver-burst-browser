@@ -1,4 +1,3 @@
-import { $ReadOnly } from "utility-types";
 import type { LastState } from "../../../td-scenes/battle/custom-battle-event";
 import { waitTime } from "../../../wait/wait-time";
 import { extractBattle, extractGameEnd } from "../../game-state-extractor";
@@ -18,7 +17,7 @@ import { playerAttack } from "../stories/player-attack";
  * @param state チュートリアルステート
  * @return ステート更新結果
  */
-export async function beforeLastState(props: $ReadOnly<LastState>, state: $ReadOnly<BatterySystemTutorialState>): Promise<BatterySystemTutorialState> {
+export async function beforeLastState(props: Readonly<LastState>, state: Readonly<BatterySystemTutorialState>): Promise<BatterySystemTutorialState> {
   const updatedStateHistory = { ...state,
     stateHistory: [...state.stateHistory, ...props.update]
   };

@@ -1,4 +1,3 @@
-import { $ReadOnly } from "utility-types";
 import type { Battle, GameState } from "gbraver-burst-core";
 import type { LastState } from "../../../td-scenes/battle/custom-battle-event";
 import type { BurstTutorialState } from "../state";
@@ -12,7 +11,7 @@ import { successReflectDamage } from "../stories/success-reflect-damage";
  * @param props イベントプロパティ
  * @return 処理が完了したら発火するPromise
  */
-async function doReflectOrNothing(props: $ReadOnly<LastState>): Promise<void> {
+async function doReflectOrNothing(props: Readonly<LastState>): Promise<void> {
   const foundLastBattle = props.update.find(v => v.effect.name === "Battle");
 
   if (!foundLastBattle) {
@@ -46,7 +45,7 @@ async function doReflectOrNothing(props: $ReadOnly<LastState>): Promise<void> {
  * @param state ステート
  * @return ステート更新結果
  */
-export async function beforeLastState(props: $ReadOnly<LastState>, state: BurstTutorialState): Promise<BurstTutorialState> {
+export async function beforeLastState(props: Readonly<LastState>, state: BurstTutorialState): Promise<BurstTutorialState> {
   const updatedStateHistory = { ...state,
     stateHistory: [...state.stateHistory, ...props.update]
   };

@@ -1,4 +1,3 @@
-import { $ReadOnly } from "utility-types";
 import { Title } from "../../dom-scenes/title";
 import { waitTime } from "../../wait/wait-time";
 import { titleConnector } from "../action-connector/title-connector";
@@ -13,7 +12,7 @@ import type { GameProps } from "../game-props";
  * @param props ゲームプロパティ
  * @return 開始したタイトル画面
  */
-export async function startTitle(props: $ReadOnly<GameProps>): Promise<Title> {
+export async function startTitle(props: Readonly<GameProps>): Promise<Title> {
   const createLoggedInAccount = async () => {
     const [name, pictureURL] = await Promise.all([props.api.getUserName(), props.api.getUserPictureURL()]);
     return {

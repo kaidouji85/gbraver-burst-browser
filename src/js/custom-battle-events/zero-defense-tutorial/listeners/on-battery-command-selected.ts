@@ -1,4 +1,3 @@
-import { $ReadOnly } from "utility-types";
 import type { GameState } from "gbraver-burst-core";
 import type { BatteryCommandSelected, CommandCanceled } from "../../../td-scenes/battle/custom-battle-event";
 import { unattentionBurstButton, unattentionPilotButton } from "../../attention";
@@ -24,7 +23,7 @@ type Ret = {
  * @param state ステート
  * @return イベント終了情報
  */
-export async function onBatteryCommandSelected(props: $ReadOnly<BatteryCommandSelected>, state: ZeroDefenseTutorialState): Promise<Ret> {
+export async function onBatteryCommandSelected(props: Readonly<BatteryCommandSelected>, state: ZeroDefenseTutorialState): Promise<Ret> {
   const enableBatteryCommand: SelectableCommands[] = ["All"];
 
   if (!enableBatteryCommand.includes(state.selectableCommands)) {

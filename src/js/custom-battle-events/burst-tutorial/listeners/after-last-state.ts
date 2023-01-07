@@ -1,4 +1,3 @@
-import { $ReadOnly } from "utility-types";
 import type { GameEnd, GameOver } from "gbraver-burst-core";
 import type { LastState } from "../../../td-scenes/battle/custom-battle-event";
 import type { BurstTutorialState } from "../state";
@@ -12,7 +11,7 @@ import { playerWin } from "../stories/player-win";
  * @param state ステート
  * @return ステート更新結果
  */
-export async function afterLastState(props: $ReadOnly<LastState>, state: BurstTutorialState): Promise<BurstTutorialState> {
+export async function afterLastState(props: Readonly<LastState>, state: BurstTutorialState): Promise<BurstTutorialState> {
   const foundGameEnd = props.update.find(v => v.effect.name === "GameEnd");
 
   if (!foundGameEnd || foundGameEnd.effect.name !== "GameEnd") {

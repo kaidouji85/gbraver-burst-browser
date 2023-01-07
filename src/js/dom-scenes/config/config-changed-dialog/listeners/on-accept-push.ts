@@ -1,4 +1,3 @@
-import { $ReadOnly } from "utility-types";
 import { pop } from "../../../../dom/animation";
 import type { PushDOM } from "../../../../dom/event-stream";
 import type { ConfigChangedDialogProps } from "../props";
@@ -9,7 +8,7 @@ import type { ConfigChangedDialogProps } from "../props";
  * @param props ダイアログプロパティ
  * @param action アクション
  */
-export function onAcceptPush(props: ConfigChangedDialogProps, action: $ReadOnly<PushDOM>): void {
+export function onAcceptPush(props: ConfigChangedDialogProps, action: Readonly<PushDOM>): void {
   action.event.preventDefault();
   action.event.stopPropagation();
   props.exclusive.execute(async () => {
