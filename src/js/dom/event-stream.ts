@@ -1,4 +1,4 @@
-import { fromEvent } from "rxjs";
+import {fromEvent, Observable} from "rxjs";
 import { map, merge } from "../stream/operator";
 import type { Stream } from "../stream/stream";
 import { createStream } from "../stream/stream";
@@ -19,14 +19,14 @@ export type PushDOM = {
  */
 export function pushDOMStream(dom: HTMLElement): Stream<PushDOM> {
   const clickRXJS = fromEvent(dom, "click");
-  const click = createStream<MouseEvent>(clickRXJS).chain(map(event => {
+  const click: Stream<PushDOM> = createStream<MouseEvent>(clickRXJS as Observable<MouseEvent>).chain(map(event => {
     return {
       type: "PushDOM",
       event
     };
   }));
   const touchStartRXJS = fromEvent(dom, "touchstart");
-  const touchStart = createStream<TouchEvent>(touchStartRXJS).chain(map(event => {
+  const touchStart: Stream<PushDOM>  = createStream<TouchEvent>(touchStartRXJS as Observable<TouchEvent>).chain(map(event => {
     return {
       type: "PushDOM",
       event
@@ -50,7 +50,7 @@ export type InputDOM = {
  * @returns 生成結果
  */
 export function inputDOMStream(dom: HTMLInputElement): Stream<InputDOM> {
-  return createStream(fromEvent(dom, "input")).chain(map(event => ({
+  return createStream(fromEvent(dom, "input") as Observable<InputEvent>).chain(map(event => ({
     type: "ChangeDOM",
     event
   })));
