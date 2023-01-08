@@ -57,7 +57,6 @@ export class BattleSceneView {
     this.td = new ThreeDimensionLayer({
       resources: param.resources,
       renderer: param.renderer,
-      safeAreaInset: this.#safeAreaInset,
       player: param.player,
       enemy: param.enemy,
       resize: param.resize,

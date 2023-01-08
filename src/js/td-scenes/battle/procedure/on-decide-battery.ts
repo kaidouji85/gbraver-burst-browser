@@ -4,6 +4,7 @@ import type { DecideBattery } from "../actions/decide-battery";
 import { animationPlayer } from "../animation-player";
 import type { BattleSceneProps } from "../battle-scene-props";
 import { progressGame } from "./progress-game";
+import {BatteryCommand} from "gbraver-burst-core";
 
 /**
  * バッテリー決定時の処理
@@ -15,7 +16,7 @@ import { progressGame } from "./progress-game";
 export async function onDecideBattery(props: Readonly<BattleSceneProps>, action: DecideBattery): Promise<void> {
   await props.exclusive.execute(async (): Promise<void> => {
     action.event.stopPropagation();
-    const batteryCommand = {
+    const batteryCommand: BatteryCommand = {
       type: "BATTERY_COMMAND",
       battery: action.battery
     };

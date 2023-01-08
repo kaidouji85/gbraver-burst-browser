@@ -4,6 +4,7 @@ import type { DoPilotSkill } from "../actions/do-pilot-skill";
 import { animationPlayer } from "../animation-player";
 import type { BattleSceneProps } from "../battle-scene-props";
 import { progressGame } from "./progress-game";
+import {PilotSkillCommand} from "gbraver-burst-core";
 
 /**
  * パイロットスキル発動時の処理
@@ -15,7 +16,7 @@ import { progressGame } from "./progress-game";
 export async function onPilotSkill(props: Readonly<BattleSceneProps>, action: DoPilotSkill): Promise<void> {
   await props.exclusive.execute(async () => {
     action.event.stopPropagation();
-    const pilotSkillCommand = {
+    const pilotSkillCommand: PilotSkillCommand = {
       type: "PILOT_SKILL_COMMAND"
     };
     const {
