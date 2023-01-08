@@ -83,7 +83,7 @@ function createLoadings(params: ResourceLoadingParams): Loadings {
  * @return 生成結果
  */
 function createLoadingActions(loadings: Loadings): Stream<LoadingActions> {
-  const loadingActions = createStreamSource();
+  const loadingActions = createStreamSource<LoadingActions>();
   const allLoadings = [...loadings.preFetchPaths, ...loadings.gltfLoadings, ...loadings.textureLoadings, ...loadings.cubeTextureLoadings, ...loadings.canvasImageLoadings, ...loadings.soundLoadings];
   let completedLoadingCounts = 0;
   allLoadings.forEach(loading => {

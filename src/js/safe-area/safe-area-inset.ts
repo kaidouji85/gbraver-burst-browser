@@ -84,10 +84,5 @@ export function getSize(origin: string): number {
   }
 
   const size = result.groups.size;
-
-  if (isNaN(size)) {
-    return 0;
-  }
-
   return Number(size);
 }

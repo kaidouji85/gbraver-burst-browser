@@ -13,7 +13,7 @@ export type CanvasImageConfig = {
 /** キャンバス用画像リソース */
 export type CanvasImageResource = {
   id: CanvasImageId;
-  image: Image;
+  image: HTMLImageElement;
 };
 
 /** キャンバス用画像IDリストをあつめたもの */
@@ -129,7 +129,7 @@ export const CANVAS_IMAGE_CONFIGS: CanvasImageConfig[] = [{
 export function loadCanvasImage(resourceRoot: ResourceRoot, config: CanvasImageConfig): Promise<CanvasImageResource> {
   return new Promise((resolve, reject) => {
     const loader = new THREE.ImageLoader();
-    loader.load(`${resourceRoot.get()}/${config.path}`, (image: Image) => {
+    loader.load(`${resourceRoot.get()}/${config.path}`, (image: HTMLImageElement) => {
       resolve({
         id: config.id,
         image: image

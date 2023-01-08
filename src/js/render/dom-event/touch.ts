@@ -1,4 +1,4 @@
-import { fromEvent } from "rxjs";
+import {fromEvent, Observable} from "rxjs";
 import { map } from "../../stream/operator";
 import type { Stream } from "../../stream/stream";
 import { createStream } from "../../stream/stream";
@@ -28,7 +28,7 @@ export type TouchEnd = {
  * @return ストリーム
  */
 export function createTouchStartStream(renderDom: HTMLElement): Stream<TouchStart> {
-  const observable = fromEvent(renderDom, "touchstart");
+  const observable = fromEvent(renderDom, "touchstart") as Observable<TouchEvent>;
   return createStream<TouchEvent>(observable).chain(map(v => {
     v.preventDefault();
     return {
@@ -45,7 +45,7 @@ export function createTouchStartStream(renderDom: HTMLElement): Stream<TouchStar
  * @return ストリーム
  */
 export function createTouchMoveStream(renderDom: HTMLElement): Stream<TouchMove> {
-  const observable = fromEvent(renderDom, "touchmove");
+  const observable = fromEvent(renderDom, "touchmove") as Observable<TouchEvent>;
   return createStream<TouchEvent>(observable).chain(map(v => {
     v.preventDefault();
     return {
@@ -62,7 +62,7 @@ export function createTouchMoveStream(renderDom: HTMLElement): Stream<TouchMove>
  * @return ストリーム
  */
 export function createTouchEndStream(renderDom: HTMLElement): Stream<TouchEnd> {
-  const observable = fromEvent(renderDom, "touchend");
+  const observable = fromEvent(renderDom, "touchend") as Observable<TouchEvent>;
   return createStream<TouchEvent>(observable).chain(map(v => {
     v.preventDefault();
     return {
