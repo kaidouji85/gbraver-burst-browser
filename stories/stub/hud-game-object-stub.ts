@@ -34,7 +34,7 @@ type Object3DParams = {
  * @param params パラメータ
  * @return シーンに追加するObject3D
  */
-export type Object3DCreator = (params: Object3DParams) => typeof THREE.Object3D[];
+export type Object3DCreator = (params: Object3DParams) => THREE.Object3D[];
 
 /** HUDレイヤー ゲームオブジェクト スタブ */
 export class HUDGameObjectStub {
@@ -46,7 +46,7 @@ export class HUDGameObjectStub {
   _preRender: StreamSource<PreRender>;
   _renderer: Renderer;
   _camera: PlainHUDCamera;
-  _scene: typeof THREE.Scene;
+  _scene: THREE.Scene;
   _overlap: Stream<OverlapEvent>;
   _gameObjectAction: Stream<GameObjectAction>;
   _unsubscriber: Unsubscriber[];

@@ -58,7 +58,7 @@ export class TDGameObjectStub {
   _preRender: StreamSource<PreRender>;
   _renderer: Renderer;
   _camera: TDCamera;
-  _scene: typeof THREE.Scene;
+  _scene: THREE.Scene;
   _overlap: Stream<OverlapEvent>;
   _gameObjectAction: Stream<GameObjectAction>;
   _unsubscriber: Unsubscriber[];

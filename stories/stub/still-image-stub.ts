@@ -48,10 +48,10 @@ type Camera = {
 /** スタブに追加するthree.jsオブジェクト */
 type Object3Ds = {
   /** スタブに追加するオブジェクト */
-  objects: typeof THREE.Object3D[];
+  objects: THREE.Object3D[];
 
   /** スタブのスカイボックス */
-  skyBox?: typeof THREE.CubeTexture;
+  skyBox?: THREE.CubeTexture;
 };
 
 /** three.jsオブジェクトジェネレータのパラメータ */
