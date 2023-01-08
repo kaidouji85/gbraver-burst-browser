@@ -1,12 +1,10 @@
 import type { Stream } from "../stream/stream";
 import { createStreamSource } from "../stream/stream";
 
-type DOMHighResTimeStamp = number;
-
 /** ゲームループ */
 export type GameLoop = {
   type: "GameLoop";
-  time: DOMHighResTimeStamp;
+  time: number;
 };
 
 /**
@@ -17,7 +15,7 @@ export type GameLoop = {
 export function gameLoopStream(): Stream<GameLoop> {
   const source = createStreamSource<GameLoop>();
 
-  const gameLoop = (time: DOMHighResTimeStamp) => {
+  const gameLoop = (time: number) => {
     requestAnimationFrame(gameLoop);
     source.next({
       type: "GameLoop",

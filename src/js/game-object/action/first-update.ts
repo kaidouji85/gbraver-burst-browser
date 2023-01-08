@@ -10,5 +10,7 @@ import type { GameObjectAction } from "./game-object-action";
  * @return 生成結果
  */
 export function firstUpdate(gameObjectAction: Stream<GameObjectAction>): Stream<Update> {
+  /* eslint-disable @typescript-eslint/no-explicit-any */
   return gameObjectAction.chain(filter(v => v.type === "Update")).chain(map(v => ((v as any) as Update))).chain(first());
+  /* eslint-enable */
 }

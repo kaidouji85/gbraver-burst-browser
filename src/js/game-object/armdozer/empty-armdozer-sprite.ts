@@ -20,9 +20,9 @@ export class EmptyArmDozerSprite implements ArmDozerSprite {
 
   /** @override */
 
-  /* eslint-disable no-unused-vars */
+  /* eslint-disable @typescript-eslint/no-unused-vars */
   addObject3D(object: THREE.Object3D): void {
-    /* eslint-enable no-unused-vars */
+    /* eslint-enable */
     // NOP
   }
 

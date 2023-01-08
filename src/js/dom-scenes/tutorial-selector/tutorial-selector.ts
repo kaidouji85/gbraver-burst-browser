@@ -85,7 +85,9 @@ export class TutorialSelector implements DOMScene {
   #prev: StreamSource<void>;
   #stageSelect: StreamSource<TutorialStageSelect>;
   #changeValue: SoundResource;
+  /* eslint-disable @typescript-eslint/no-explicit-any */
   #isImageCutsLoaded: Promise<any>;
+  /* eslint-enable */
   #unsubscribers: Unsubscriber[];
 
   /**

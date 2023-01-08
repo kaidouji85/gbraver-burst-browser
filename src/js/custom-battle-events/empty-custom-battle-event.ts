@@ -7,33 +7,33 @@ import type { BatteryCommandSelected, BurstCommandSelected, CommandCanceled, Cus
 export class EmptyCustomBattleEvent implements CustomBattleEvent {
   /** @override */
 
-  /* eslint-disable no-unused-vars */
+  /* eslint-disable @typescript-eslint/no-unused-vars */
   async beforeLastState(props: LastState): Promise<void> {
-    /* eslint-enable no-unused-vars */
+    /* eslint-enable @typescript-eslint/no-unused-vars */
     // NOP
   }
 
   /** @override */
 
-  /* eslint-disable no-unused-vars */
+  /* eslint-disable @typescript-eslint/no-unused-vars */
   async onLastState(props: LastState): Promise<void> {
-    /* eslint-enable no-unused-vars */
+    /* eslint-enable @typescript-eslint/no-unused-vars */
     // NOP
   }
 
   /** @override */
 
-  /* eslint-disable no-unused-vars */
+  /* eslint-disable @typescript-eslint/no-unused-vars */
   async afterLastState(props: LastState): Promise<void> {
-    /* eslint-enable no-unused-vars */
+    /* eslint-enable @typescript-eslint/no-unused-vars */
     // NOP
   }
 
   /** @override */
 
-  /* eslint-disable no-unused-vars */
+  /* eslint-disable @typescript-eslint/no-unused-vars */
   async onBatteryCommandSelected(props: BatteryCommandSelected): Promise<CommandCanceled> {
-    /* eslint-enable no-unused-vars */
+    /* eslint-enable @typescript-eslint/no-unused-vars */
     return {
       isCommandCanceled: false
     };
@@ -41,9 +41,9 @@ export class EmptyCustomBattleEvent implements CustomBattleEvent {
 
   /** @override */
 
-  /* eslint-disable no-unused-vars */
+  /* eslint-disable @typescript-eslint/no-unused-vars */
   async onBurstCommandSelected(props: BurstCommandSelected): Promise<CommandCanceled> {
-    /* eslint-enable no-unused-vars */
+    /* eslint-enable @typescript-eslint/no-unused-vars */
     return {
       isCommandCanceled: false
     };
@@ -51,9 +51,9 @@ export class EmptyCustomBattleEvent implements CustomBattleEvent {
 
   /** @override */
 
-  /* eslint-disable no-unused-vars */
+  /* eslint-disable @typescript-eslint/no-unused-vars */
   async onPilotSkillCommandSelected(props: PilotSkillCommandSelected): Promise<CommandCanceled> {
-    /* eslint-enable no-unused-vars */
+    /* eslint-enable @typescript-eslint/no-unused-vars */
     return {
       isCommandCanceled: false
     };

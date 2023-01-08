@@ -1,4 +1,4 @@
-import TWEEN, {Group} from "@tweenjs/tween.js";
+import {Group} from "@tweenjs/tween.js";
 
 import type { Animate } from "../../../animation/animate";
 import { process } from "../../../animation/process";
