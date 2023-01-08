@@ -59,11 +59,12 @@ export function loadGlTF(resourceRoot: ResourceRoot, config: GlTFConfig): Promis
       object: gltf.scene
     });
 
-    const onProgress = () => {}; //NOP
-
-
+    const onProgress = () => {
+      //NOP
+    };
+    /* eslint-disable @typescript-eslint/no-explicit-any */
     const onFail = (err: any) => reject(err);
-
+    /* eslint-enable */
     loader.load(fullPath, onLoad, onProgress, onFail);
   });
 }

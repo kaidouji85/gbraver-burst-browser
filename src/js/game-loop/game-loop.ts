@@ -1,6 +1,8 @@
 import type { Stream } from "../stream/stream";
 import { createStreamSource } from "../stream/stream";
 
+type DOMHighResTimeStamp = number;
+
 /** ゲームループ */
 export type GameLoop = {
   type: "GameLoop";

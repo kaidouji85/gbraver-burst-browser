@@ -5,9 +5,14 @@ import {Tween} from "@tweenjs/tween.js";
  *
  * @return 再生時間
  */
+/* eslint-disable @typescript-eslint/no-explicit-any */
 export function tweenDuration(tween: Tween<any>): number {
   return (tween as any)._duration + (tween as any)._delayTime + (tween as any)._repeat * (tween as any)._duration;
+  /* eslint-enable */
 }
+
+
+
 
 /**
  * Tween再生時間をスケールする
@@ -23,15 +28,21 @@ export function tweenDuration(tween: Tween<any>): number {
  * @param scale スケール係数
  * @param scaledTweens 再生時間スケールが完了したTween
  */
+/* eslint-disable @typescript-eslint/no-explicit-any */
 export function scaleTweenDuration(tween: Tween<any>, scale: number, scaledTweens: Tween<any>[] = []): void {
+  /* eslint-enable */
   if (scaledTweens.includes(tween)) {
     return;
   }
 
   const newScaledTweens = [...scaledTweens, tween];
+  /* eslint-disable @typescript-eslint/no-explicit-any */
   (tween as any)._duration = (tween as any)._duration * scale;
+  /* eslint-enable */
 
+  /* eslint-disable @typescript-eslint/no-explicit-any */
   (tween as any)._chainedTweens.forEach((child: Tween<any>) => {
+    /* eslint-enable */
     scaleTweenDuration(child, scale, newScaledTweens);
   });
 }
