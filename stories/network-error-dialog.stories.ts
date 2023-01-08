@@ -1,7 +1,7 @@
 import { NetworkErrorDialog } from "../src/js/dom-dialogs/network-error/network-error-dialog";
+import {Close} from "../src/js/game/post-network-error";
 import type { DOMStubStory } from "./stub/dom-stub";
 import { domStub } from "./stub/dom-stub";
-import {Close} from "../src/js/game/post-network-error";
 
 export default {
   title: "network-error-dialog"

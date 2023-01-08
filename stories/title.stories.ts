@@ -1,7 +1,7 @@
 import { Title } from "../src/js/dom-scenes/title";
+import {GuestAccount, LoggedInAccount} from "../src/js/dom-scenes/title/title-account";
 import type { DOMStubStory } from "./stub/dom-stub";
 import { domStub } from "./stub/dom-stub";
-import {GuestAccount, LoggedInAccount} from "../src/js/dom-scenes/title/title-account";
 
 export default {
   title: "title"
