@@ -5,7 +5,7 @@ const uuid = require('uuid');
 
 module.exports = {
   mode: 'production',
-  entry: path.resolve(__dirname, 'src/js/sw.js'),
+  entry: path.resolve(__dirname, 'src/js/sw.ts'),
   output: {
     path: config.output.path,
     filename: 'sw.js'
@@ -13,9 +13,9 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.js$/,
+        test: /\.ts$/,
         exclude: /node_modules/,
-        loader: 'babel-loader'
+        loader: 'ts-loader'
       }
     ]
   },
@@ -23,5 +23,8 @@ module.exports = {
     new webpack.DefinePlugin({
       GBRAVER_BURST_SW_BUILD_HASH: JSON.stringify(uuid.v4())
     }),
-  ]
+  ],
+  resolve: {
+    extensions: ['.js', '.ts']
+  },
 }
