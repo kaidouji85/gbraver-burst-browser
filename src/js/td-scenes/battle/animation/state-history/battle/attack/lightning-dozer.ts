@@ -11,7 +11,7 @@ import type { BattleAnimationParamX } from "../animation-param";
  * ライトニングドーザ 戦闘アニメーション パラメータ
  * @template RESULT 戦闘結果
  */
-export type LightningDozerBattle<RESULT> = BattleAnimationParamX<LightningDozer, RESULT>;
+export type LightningDozerBattle<RESULT extends BattleResult> = BattleAnimationParamX<LightningDozer, RESULT>;
 
 /**
  * アタッカーにフォーカスを合わせる

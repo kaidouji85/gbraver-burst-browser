@@ -11,7 +11,7 @@ import type { BattleAnimationParamX } from "../animation-param";
  * ネオランドーザ 戦闘アニメーション パラメータ
  * @template RESULT 戦闘結果
  */
-export type NeoLandozerBattle<RESULT> = BattleAnimationParamX<NeoLandozer, RESULT>;
+export type NeoLandozerBattle<RESULT extends BattleResult> = BattleAnimationParamX<NeoLandozer, RESULT>;
 
 /**
  * アタッカーにフォーカスを合わせる

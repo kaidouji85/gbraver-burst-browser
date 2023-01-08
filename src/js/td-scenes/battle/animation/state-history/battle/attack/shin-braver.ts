@@ -12,7 +12,7 @@ import type { BattleAnimationParamX } from "../animation-param";
  *
  * @template RESULT 戦闘結果
  */
-export type ShinBraverBattle<RESULT> = BattleAnimationParamX<ShinBraver, RESULT>;
+export type ShinBraverBattle<RESULT extends BattleResult> = BattleAnimationParamX<ShinBraver, RESULT>;
 
 /**
  * アタッカーにフォーカスを合わせる

@@ -11,7 +11,7 @@ import type { BurstAnimationParamX } from "./animation-param";
  * シンブレイバー バーストアニメーション パラメータ
  * @template BURST バースト種別
  */
-export type ShinBraverBurst<BURST> = BurstAnimationParamX<ShinBraverTD, ShinBraverHUD, BURST>;
+export type ShinBraverBurst<BURST extends Burst> = BurstAnimationParamX<ShinBraverTD, ShinBraverHUD, BURST>;
 
 /**
  * シンブレイバーのバーストアニメーション

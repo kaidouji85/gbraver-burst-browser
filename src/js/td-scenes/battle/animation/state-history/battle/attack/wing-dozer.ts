@@ -11,7 +11,7 @@ import type { BattleAnimationParamX } from "../animation-param";
  * ウィングドーザ 戦闘アニメーション パラメータ
  * @type Result 戦闘結果
  */
-export type WingDozerBattle<Result> = BattleAnimationParamX<WingDozer, Result>;
+export type WingDozerBattle<Result extends BattleResult> = BattleAnimationParamX<WingDozer, Result>;
 
 /**
  * アタッカーにフォーカスを合わせる

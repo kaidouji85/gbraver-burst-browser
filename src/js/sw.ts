@@ -2,6 +2,10 @@ import { ExpirationPlugin } from "workbox-expiration";
 import * as PreCaching from "workbox-precaching";
 import * as Routing from "workbox-routing";
 import * as Strategies from "workbox-strategies";
+
+/** webpack.sw.jsで定義したグローバル変数 */
+declare var GBRAVER_BURST_SW_BUILD_HASH: string;
+
 PreCaching.precacheAndRoute([{
   url: "./index.html",
   revision: GBRAVER_BURST_SW_BUILD_HASH
@@ -30,12 +34,14 @@ PreCaching.precacheAndRoute([{
   url: "./pegass85.webp",
   revision: GBRAVER_BURST_SW_BUILD_HASH
 }]);
+
 Routing.registerRoute(/\.(?:js)$/, new Strategies.NetworkFirst({
   cacheName: "js-cache",
   plugins: [new ExpirationPlugin({
     maxAgeSeconds: 3 * 24 * 60 * 60
   })]
 }));
+
 Routing.registerRoute(/\/resources\/.*\.(?:png|glb|mp3|svg|webp)$/, new Strategies.CacheFirst({
   cacheName: "resource-cache",
   plugins: [new ExpirationPlugin({

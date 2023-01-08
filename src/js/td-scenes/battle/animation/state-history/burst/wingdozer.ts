@@ -12,7 +12,7 @@ import type { BurstAnimationParamX } from "./animation-param";
  *
  * @template BURST バースト
  */
-export type WingDozerBurst<BURST> = BurstAnimationParamX<WingDozerTD, WingDozerHUD, BURST>;
+export type WingDozerBurst<BURST extends Burst> = BurstAnimationParamX<WingDozerTD, WingDozerHUD, BURST>;
 
 /**
  * ウィングドーザのバーストアニメーション

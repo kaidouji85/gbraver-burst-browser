@@ -12,7 +12,7 @@ import type { BurstAnimationParamX } from "./animation-param";
  *
  * @template BURST バースト
  */
-type NeoLandozerBurst<BURST> = BurstAnimationParamX<NeoLandozerTD, NeoLandozerHUD, BURST>;
+type NeoLandozerBurst<BURST extends Burst> = BurstAnimationParamX<NeoLandozerTD, NeoLandozerHUD, BURST>;
 
 /**
  * ネオランドーザ バースト アニメーション
