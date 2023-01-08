@@ -1,11 +1,11 @@
-import { ArmDozerIds, ArmDozers, PilotIds, Pilots, totalCorrectPower } from "gbraver-burst-core";
+import {ArmDozerIds, ArmDozers, Command, PilotIds, Pilots, totalCorrectPower} from "gbraver-burst-core";
 import { canBeatDown } from "./can-beat-down";
 import type { NPC } from "./npc";
 import type { SimpleRoutine } from "./simple-npc";
 import { SimpleNPC } from "./simple-npc";
 
 /** 0バッテリー */
-const ZERO_BATTERY = {
+const ZERO_BATTERY: Command = {
   type: "BATTERY_COMMAND",
   battery: 0
 };

@@ -2,7 +2,7 @@ import type { Armdozer, Command, GameState, Pilot, PlayerId, PlayerState } from 
 import type { NPC } from "./npc";
 
 /** 0バッテリー */
-const ZERO_BATTERY = {
+const ZERO_BATTERY: Command = {
   type: "BATTERY_COMMAND",
   battery: 0
 };
