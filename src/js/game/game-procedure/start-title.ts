@@ -1,5 +1,5 @@
 import { Title } from "../../dom-scenes/title";
-import {GuestAccount, LoggedInAccount, TitleAccount} from "../../dom-scenes/title/title-account";
+import {LoggedInAccount, TitleAccount} from "../../dom-scenes/title/title-account";
 import { waitTime } from "../../wait/wait-time";
 import { titleConnector } from "../action-connector/title-connector";
 import { MAX_LOADING_TIME } from "../dom-scene-binder/max-loading-time";

@@ -53,5 +53,5 @@ export function toOverlapStream(origin: Stream<RendererDOMEvent>, rendererDOM: H
       default:
         return null;
     }
-  })).chain(filter(v => !!v)).chain(map(v => ((v as any) as OverlapEvent))).chain(share());
+  })).chain(filter(v => !!v)).chain(map(v => (v as OverlapEvent))).chain(share());
 }

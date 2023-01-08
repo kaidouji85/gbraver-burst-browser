@@ -11,7 +11,9 @@ export const WebGLPixelRatios: WebGLPixelRatio[] = [0.5, 0.75, 1, 2];
  * @param origin パース元
  * @return パース結果
  */
+/* eslint-disable @typescript-eslint/no-explicit-any */
 export function parseWebGLPixelRatio(origin: any): WebGLPixelRatio | null {
+  /* eslint-enable */
   const value = Number(origin);
 
   if (isNaN(value)) {
@@ -34,7 +36,9 @@ export const BattleAnimationTimeScales: BattleAnimationTimeScale[] = [1, 0.5, 0.
  * @param origin パース元
  * @return パース結果
  */
+/* eslint-disable @typescript-eslint/no-explicit-any */
 export function parseBattleAnimationTimeScale(origin: any): BattleAnimationTimeScale | null {
+  /* eslint-enable */
   const value = Number(origin);
 
   if (isNaN(value)) {
@@ -57,7 +61,9 @@ export const SoundVolumes: SoundVolume[] = [0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7
  * @param origin パース元
  * @return パース結果
  */
+/* eslint-disable @typescript-eslint/no-explicit-any */
 export function parseSoundVolume(origin: any): SoundVolume | null {
+  /* eslint-enable */
   if (origin === null || origin === undefined || origin === "") {
     return null;
   }
