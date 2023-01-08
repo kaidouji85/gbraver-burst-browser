@@ -26,7 +26,7 @@ export const RESIZE_DELAY = 50;
  * @return ストリーム
  */
 export function resizeStream(): Stream<Resize> {
-  const origin = new Observable(subscriber => {
+  const origin = new Observable<Resize>(subscriber => {
     window.addEventListener("resize", () => {
       setTimeout(() => {
         subscriber.next({
