@@ -1,4 +1,5 @@
 import * as THREE from "three";
+
 import { Animate } from "../../animation/animate";
 import type { Stream, Unsubscriber } from "../../stream/stream";
 import type { GameObjectAction } from "../action/game-object-action";

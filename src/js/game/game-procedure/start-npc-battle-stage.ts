@@ -1,4 +1,5 @@
 import type { Command, Player } from "gbraver-burst-core";
+
 import { fadeOut, stop } from "../../bgm/bgm-operators";
 import { StageTitle } from "../../dom-scenes/stage-title/stage-title";
 import { NPCBattleRoom } from "../../npc/npc-battle-room";

@@ -1,10 +1,11 @@
+import {BatteryCommand} from "gbraver-burst-core";
+
 import { all } from "../../../animation/all";
 import { delay } from "../../../animation/delay";
 import type { DecideBattery } from "../actions/decide-battery";
 import { animationPlayer } from "../animation-player";
 import type { BattleSceneProps } from "../battle-scene-props";
 import { progressGame } from "./progress-game";
-import {BatteryCommand} from "gbraver-burst-core";
 
 /**
  * バッテリー決定時の処理

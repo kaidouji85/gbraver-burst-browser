@@ -1,4 +1,5 @@
 import type { Battle as BattleSDK } from "@gbraver-burst-network/browser-core";
+
 import { fadeOut, stop } from "../../bgm/bgm-operators";
 import { DifficultyDialog } from "../../dom-dialogs/difficulty";
 import { MatchingDialog } from "../../dom-dialogs/matching/matching-dialog";

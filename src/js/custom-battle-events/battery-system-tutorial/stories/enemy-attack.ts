@@ -1,4 +1,5 @@
 import type { BattleResult } from "gbraver-burst-core";
+
 import type { CustomBattleEventProps } from "../../../td-scenes/battle/custom-battle-event";
 import { activeLeftMessageWindowWithFace, activeRightMessageWindowWithFace } from "../../active-message-window";
 import { scrollLeftMessages, scrollRightMessages } from "../../scroll-messages";

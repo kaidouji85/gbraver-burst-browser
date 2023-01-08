@@ -1,4 +1,5 @@
 import * as R from "ramda";
+
 import type { GaugeModel } from "./gauge-model";
 
 /**

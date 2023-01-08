@@ -1,10 +1,11 @@
 import * as TWEEN from "@tweenjs/tween.js";
+import {Group} from "@tweenjs/tween.js";
+
 import { Animate } from "../../../animation/animate";
 import { process } from "../../../animation/process";
 import { tween } from "../../../animation/tween";
 import type { BatterySelectorModel } from "../model";
 import type { BatterySelectorSounds } from "../sounds/battery-selector-sounds";
-import {Group} from "@tweenjs/tween.js";
 
 /**
  * プラスボタン ポップ

@@ -1,4 +1,5 @@
 import * as THREE from "three";
+
 import type { Resources } from "../../../../resource";
 import { TEXTURE_IDS } from "../../../../resource/texture/ids";
 import type { ArmdozerAnimation } from "../../mesh/armdozer-animation";

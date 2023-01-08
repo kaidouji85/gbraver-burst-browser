@@ -1,4 +1,5 @@
 import * as THREE from "three";
+
 import type { ShockWaveModel } from "../model/shock-wave-model";
 
 /**

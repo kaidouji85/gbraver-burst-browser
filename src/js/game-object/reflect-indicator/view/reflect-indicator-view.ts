@@ -1,4 +1,5 @@
 import * as THREE from "three";
+
 import type { ReflectIndocatorModel } from "../model/reflect-indocator-model";
 
 /**

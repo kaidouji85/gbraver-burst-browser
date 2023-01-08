@@ -1,4 +1,5 @@
 import * as THREE from "three";
+
 import { Animate } from "../../animation/animate";
 import { empty } from "../../animation/delay";
 import type { ArmDozerSprite } from "./armdozer-sprite";

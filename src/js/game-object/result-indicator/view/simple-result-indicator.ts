@@ -1,4 +1,5 @@
 import * as THREE from "three";
+
 import type { PreRender } from "../../../game-loop/pre-render";
 import { HorizontalAnimationMesh } from "../../../mesh/horizontal-animation";
 import { HUD_RESULT_INDICATOR_ZINDEX } from "../../hud-zindex";

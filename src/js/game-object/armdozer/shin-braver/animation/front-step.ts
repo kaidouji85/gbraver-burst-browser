@@ -14,7 +14,7 @@ import { ShinBraverSounds } from "../sounds/shin-braver-sounds";
  * @param distance 移動距離を絶対値で指定する
  * @return アニメーション
  */
-export function frontStep(model: ShinBraverModel, sounds: ShinBraverSounds, distance: number = 100): Animate {
+export function frontStep(model: ShinBraverModel, sounds: ShinBraverSounds, distance = 100): Animate {
   return process(() => {
     model.animation.type = "FRONT_STEP";
     model.animation.frame = 0;

@@ -1,5 +1,6 @@
 import TWEEN, {Group} from "@tweenjs/tween.js";
 import * as THREE from "three";
+
 import { all } from "../../animation/all";
 import { Animate } from "../../animation/animate";
 import { empty } from "../../animation/delay";

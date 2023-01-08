@@ -4,7 +4,7 @@ import * as Routing from "workbox-routing";
 import * as Strategies from "workbox-strategies";
 
 /** webpack.sw.jsで定義したグローバル変数 */
-declare var GBRAVER_BURST_SW_BUILD_HASH: string;
+declare let GBRAVER_BURST_SW_BUILD_HASH: string;
 
 PreCaching.precacheAndRoute([{
   url: "./index.html",

@@ -1,4 +1,5 @@
 import { Howl } from "howler";
+
 import { Exclusive } from "../../exclusive/exclusive";
 import type { GbraverBurstBrowserConfig } from "../../game/config/browser-config";
 import type { Resources } from "../../resource";

@@ -1,4 +1,5 @@
 import type { BurstEffect, GameStateX } from "gbraver-burst-core";
+
 import { Animate } from "../../../../../animation/animate";
 import { empty } from "../../../../../animation/delay";
 import { LightningDozerHUD } from "../../../view/hud/armdozer-objects/lightning-dozer";

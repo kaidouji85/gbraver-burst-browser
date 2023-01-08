@@ -1,4 +1,5 @@
 import {ArmDozerIds, ArmDozers, Command, PilotIds, Pilots, totalCorrectPower} from "gbraver-burst-core";
+
 import { canBeatDown } from "./can-beat-down";
 import type { NPC } from "./npc";
 import type { SimpleRoutine } from "./simple-npc";

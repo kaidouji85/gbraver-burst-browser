@@ -1,4 +1,5 @@
 import { Howl } from "howler";
+
 import type { ResourceRoot } from "./resource-root";
 
 /** 音リソースのユニークID */

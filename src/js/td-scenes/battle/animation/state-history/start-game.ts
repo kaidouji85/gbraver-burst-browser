@@ -1,4 +1,5 @@
 import type { GameStateX, StartGame } from "gbraver-burst-core";
+
 import { Animate } from "../../../../animation/animate";
 import { delay, empty } from "../../../../animation/delay";
 import { process } from "../../../../animation/process";

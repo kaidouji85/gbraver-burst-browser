@@ -3,13 +3,13 @@ import { Animate } from "../../../animation/animate";
 import { TDCamera } from "../../../game-object/camera/td";
 
 /** カメラ初期位置 X */
-export const INITIAL_CAMERA_POSITION_X: number = 0;
+export const INITIAL_CAMERA_POSITION_X = 0;
 
 /** カメラ初期位置 Y */
-export const INITIAL_CAMERA_POSITION_Y: number = 220;
+export const INITIAL_CAMERA_POSITION_Y = 220;
 
 /** カメラ初期位置 Z */
-export const INITIAL_CAMERA_POSITION_Z: number = 300;
+export const INITIAL_CAMERA_POSITION_Z = 300;
 
 /** カメラ視点初期位置 X */
 export const INITIAL_VIEW_POINT_X = 0;

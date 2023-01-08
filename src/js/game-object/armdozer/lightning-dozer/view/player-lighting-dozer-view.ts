@@ -1,4 +1,5 @@
 import * as THREE from "three";
+
 import type { Resources } from "../../../../resource";
 import type { LightningDozerModel } from "../model/lightning-dozer-model";
 import { createActiveMeshes } from "./active-meshes";

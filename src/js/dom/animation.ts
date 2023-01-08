@@ -19,7 +19,7 @@ export function waitFinishAnimation(animation: Animation): Promise<void> {
  * @param scale ポップする大きさ
  * @return アニメーション
  */
-export async function pop(element: HTMLElement, scale: number = 1.1): Promise<void> {
+export async function pop(element: HTMLElement, scale = 1.1): Promise<void> {
   const animation = element.animate([{
     transform: "scale(1)"
   }, {

@@ -1,5 +1,6 @@
 import TWEEN, {Group} from "@tweenjs/tween.js";
 import * as THREE from "three";
+
 import type { Animate } from "../../animation/animate";
 import type { PreRender } from "../../game-loop/pre-render";
 import type { Update } from "../../game-loop/update";

@@ -1,4 +1,5 @@
 import * as THREE from "three";
+
 import type { PreRender } from "../../../game-loop/pre-render";
 import type { ResultIndicatorModel } from "../model/result-indicator-model";
 

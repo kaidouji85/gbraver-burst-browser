@@ -1,4 +1,5 @@
 import { fromEvent } from "rxjs";
+
 import { map, merge } from "../stream/operator";
 import type { Stream } from "../stream/stream";
 import { createStream } from "../stream/stream";

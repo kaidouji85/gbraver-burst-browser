@@ -1,4 +1,5 @@
 import * as THREE from "three";
+
 import type { SkyBrightnessModel } from "../model/sky-brightness-model";
 
 /** 全体の大きさ */

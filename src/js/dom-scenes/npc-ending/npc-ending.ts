@@ -1,4 +1,5 @@
 import { Howl } from "howler";
+
 import type { BGMManager } from "../../bgm/bgm-manager";
 import { fadeIn, play } from "../../bgm/bgm-operators";
 import type { PushDOM } from "../../dom/event-stream";

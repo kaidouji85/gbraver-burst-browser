@@ -1,11 +1,11 @@
 import { map } from "../stream/operator";
 import type {Stream, Unsubscriber} from "../stream/stream";
 import { createStream } from "../stream/stream";
+import {GameAction} from "./game-actions";
 import { initialize } from "./game-procedure/initialize";
 import { onGameAction } from "./game-procedure/on-game-action";
 import type { GameProps, GamePropsGeneratorParam } from "./game-props";
 import { generateGameProps } from "./game-props";
-import {GameAction} from "./game-actions";
 
 /** コンストラクタのパラメータ */
 type Param = GamePropsGeneratorParam;

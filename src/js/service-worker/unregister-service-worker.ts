@@ -8,7 +8,7 @@ export async function unregisterServiceWorker(): Promise<void> {
 
   const registrations = await navigator.serviceWorker.getRegistrations();
 
-  for (let registration of registrations) {
+  for (const registration of registrations) {
     await registration.unregister();
   }
 }

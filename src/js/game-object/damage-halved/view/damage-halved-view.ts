@@ -1,4 +1,5 @@
 import * as THREE from "three";
+
 import type { DamageHalvedModel } from "../model/damage-halved-model";
 
 /** ダメージ半減ビュー */

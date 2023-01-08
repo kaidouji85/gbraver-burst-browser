@@ -1,4 +1,5 @@
 import * as THREE from "three";
+
 import type { ResourceRoot } from "../resource-root";
 import type { TextureConfig, TextureResource } from "./resource";
 
@@ -10,7 +11,7 @@ import type { TextureConfig, TextureResource } from "./resource";
  * @return 読み込み結果
  */
 export function loadTexture(resourceRoot: ResourceRoot, config: TextureConfig): Promise<TextureResource> {
-  let loader = new THREE.TextureLoader();
+  const loader = new THREE.TextureLoader();
   return new Promise((resolve, reject) => {
     loader.load(`${resourceRoot.get()}/${config.path}`, texture => resolve({
       id: config.id,

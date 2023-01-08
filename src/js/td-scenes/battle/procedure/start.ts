@@ -1,4 +1,5 @@
 import type { GameState } from "gbraver-burst-core";
+
 import { play } from "../../../bgm/bgm-operators";
 import { stateAnimation, stateHistoryAnimation } from "../animation/state-history";
 import { animationPlayer } from "../animation-player";

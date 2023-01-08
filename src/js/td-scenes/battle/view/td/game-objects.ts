@@ -1,4 +1,5 @@
 import * as THREE from "three";
+
 import type { GameObjectAction } from "../../../../game-object/action/game-object-action";
 import { Illumination } from "../../../../game-object/illumination/illumination";
 import { SkyBrightness } from "../../../../game-object/sky-brightness/sky-brightness";

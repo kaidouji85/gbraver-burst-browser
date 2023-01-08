@@ -1,4 +1,5 @@
 import * as THREE from "three";
+
 import type { ResourceRoot } from "./resource-root";
 
 /** キャンバス用画像ID */

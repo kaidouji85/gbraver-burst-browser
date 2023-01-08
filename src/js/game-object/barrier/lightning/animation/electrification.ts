@@ -1,4 +1,5 @@
 import TWEEN, {Group} from "@tweenjs/tween.js";
+
 import { Animate } from "../../../../animation/animate";
 import { process } from "../../../../animation/process";
 import { tween } from "../../../../animation/tween";

@@ -14,7 +14,7 @@ import { LightningDozerSounds } from "../sounds/lightning-dozer-sounds";
  * @param distance 移動距離を絶対値で指定する
  * @return アニメーション
  */
-export function frontStep(model: LightningDozerModel, sounds: LightningDozerSounds, distance: number = 100): Animate {
+export function frontStep(model: LightningDozerModel, sounds: LightningDozerSounds, distance = 100): Animate {
   return process(() => {
     model.animation.type = "FRONT_STEP";
     model.animation.frame = 0;

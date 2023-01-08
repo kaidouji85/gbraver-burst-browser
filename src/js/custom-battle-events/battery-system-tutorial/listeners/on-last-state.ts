@@ -1,4 +1,5 @@
 import type { GameState } from "gbraver-burst-core";
+
 import type { LastState } from "../../../td-scenes/battle/custom-battle-event";
 import { focusInBatterySelector } from "../../focus";
 import { defenseBatteryCaption } from "../captions";

@@ -1,4 +1,5 @@
 import * as THREE from "three";
+
 import type { Stream } from "../stream/stream";
 import type { OverlapEvent } from "./overlap-event/overlap-event";
 

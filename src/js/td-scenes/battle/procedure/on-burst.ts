@@ -1,10 +1,11 @@
+import {BurstCommand} from "gbraver-burst-core";
+
 import { all } from "../../../animation/all";
 import { delay } from "../../../animation/delay";
 import type { DoBurst } from "../actions/do-burst";
 import { animationPlayer } from "../animation-player";
 import type { BattleSceneProps } from "../battle-scene-props";
 import { progressGame } from "./progress-game";
-import {BurstCommand} from "gbraver-burst-core";
 
 /**
  * バースト時の処理

@@ -14,7 +14,7 @@ import { WingDozerSounds } from "../sounds/wing-dozer-sounds";
  * @param distance 移動距離を絶対値で指定
  * @return アニメーション
  */
-export function frontStep(model: WingDozerModel, sounds: WingDozerSounds, distance: number = 100): Animate {
+export function frontStep(model: WingDozerModel, sounds: WingDozerSounds, distance = 100): Animate {
   return process(() => {
     model.animation.type = "FRONT_STEP";
     model.animation.frame = 0;

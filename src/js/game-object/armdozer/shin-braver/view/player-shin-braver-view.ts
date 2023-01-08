@@ -1,4 +1,5 @@
 import * as THREE from "three";
+
 import type { Resources } from "../../../../resource";
 import type { ShinBraverModel } from "../model/shin-braver-model";
 import { createActiveMeshes } from "./active-meshes";

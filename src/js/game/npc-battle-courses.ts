@@ -1,5 +1,6 @@
 import type { ArmDozerId } from "gbraver-burst-core";
 import { ArmDozerIds } from "gbraver-burst-core";
+
 import { attack3Defense2LightningDozerNPC, attack3Defense2ShinBraverNPC } from "../npc/attack-3-defense-2";
 import { attack4Defense1LightningDozerNPC, attack4Defense1ShinBraverNPC } from "../npc/attack-4-defense-1";
 import { burstAttack5NeoLandozer } from "../npc/burst-attack-5-neo-landozer";

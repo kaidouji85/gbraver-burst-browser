@@ -1,4 +1,5 @@
 import {Group, Tween} from "@tweenjs/tween.js";
+
 import { Animate } from "./animate";
 import { tweenDuration } from "./duration";
 

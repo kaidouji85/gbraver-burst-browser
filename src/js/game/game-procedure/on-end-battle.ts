@@ -1,4 +1,5 @@
 import type { GameEndResult, GameOver } from "gbraver-burst-core";
+
 import { BattleAnimationTimeScales, parseBattleAnimationTimeScale } from "../config/browser-config";
 import type { PostBattleButtonConfig } from "../dom-floaters/post-battle/post-battle-button-config";
 import { PostNetworkBattleButtons, PostNPCBattleComplete, PostNPCBattleLoseButtons, PostNPCBattleWinButtons, PostTutorialLoseButtons, PostTutorialWinButtons } from "../dom-floaters/post-battle/post-battle-buttons";

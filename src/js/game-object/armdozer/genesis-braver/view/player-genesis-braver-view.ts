@@ -1,4 +1,5 @@
 import * as THREE from "three";
+
 import type { Resources } from "../../../../resource";
 import type { GenesisBraverModel } from "../model/genesis-braver-model";
 import type { AnimationMeshMapping } from "./animation-mesh-mapping";

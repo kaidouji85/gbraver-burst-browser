@@ -1,5 +1,6 @@
 import type { Player } from "gbraver-burst-core";
 import { ArmDozerIds, ArmDozers, PilotIds, Pilots } from "gbraver-burst-core";
+
 import { createBatterySystemTutorialEvent } from "../custom-battle-events/battery-system-tutorial";
 import { createBurstTutorialEvent } from "../custom-battle-events/burst-tutorial";
 import { createZeroDefenseTutorialEvent } from "../custom-battle-events/zero-defense-tutorial";

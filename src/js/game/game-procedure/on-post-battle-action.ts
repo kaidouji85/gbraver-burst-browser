@@ -1,4 +1,5 @@
 import type { Player } from "gbraver-burst-core";
+
 import { fadeOut, stop } from "../../bgm/bgm-operators";
 import { NPCEnding } from "../../dom-scenes/npc-ending/npc-ending";
 import { waitTime } from "../../wait/wait-time";

@@ -1,4 +1,5 @@
 import * as THREE from "three";
+
 import type { Battle3DCameraModel } from "./model/model";
 
 /**

@@ -1,11 +1,11 @@
 /** アームドーザスプライト 基準X座標 */
-export const ARMDOZER_SPRITE_STANDARD_X: number = 170;
+export const ARMDOZER_SPRITE_STANDARD_X = 170;
 
 /** アームドーザスプライト 基準Y座標 */
-export const ARMDOZER_SPRITE_STANDARD_Y: number = 0;
+export const ARMDOZER_SPRITE_STANDARD_Y = 0;
 
 /** アームドーザスプライト 基準Z座標 */
-export const ARMDOZER_SPRITE_STANDARD_Z: number = 0;
+export const ARMDOZER_SPRITE_STANDARD_Z = 0;
 
 /** アームドーザエフェクト 基準X座標 */
 export const ARMDOZER_EFFECT_STANDARD_X: number = ARMDOZER_SPRITE_STANDARD_X;

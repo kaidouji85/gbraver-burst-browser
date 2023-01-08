@@ -1,4 +1,5 @@
 import type { Battle } from "@gbraver-burst-network/browser-core";
+
 import type { Stream, StreamSource, Unsubscriber } from "../stream/stream";
 import { createStream, createStreamSource } from "../stream/stream";
 

@@ -1,4 +1,5 @@
 import * as THREE from "three";
+
 import { toSilhouette } from "../../../../canvas/silhouette/to-silhouette";
 import type { Resources } from "../../../../resource";
 import { TEXTURE_IDS } from "../../../../resource/texture/ids";

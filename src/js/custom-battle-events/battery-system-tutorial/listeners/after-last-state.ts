@@ -1,4 +1,5 @@
 import type { GameEnd, GameStateX } from "gbraver-burst-core";
+
 import type { LastState } from "../../../td-scenes/battle/custom-battle-event";
 import { extractGameEnd } from "../../game-state-extractor";
 import { invisibleAllMessageWindows, refreshConversation } from "../../invisible-all-message-windows";

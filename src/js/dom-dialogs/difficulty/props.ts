@@ -1,4 +1,5 @@
 import { Howl } from "howler";
+
 import { Exclusive } from "../../exclusive/exclusive";
 import type { NPCBattleCourseDifficulty } from "../../game/npc-battle-courses";
 import type { Resources } from "../../resource";

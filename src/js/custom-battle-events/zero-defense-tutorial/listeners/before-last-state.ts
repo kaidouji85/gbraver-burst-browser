@@ -1,4 +1,5 @@
 import type { Battle, GameState, GameStateX } from "gbraver-burst-core";
+
 import type { LastState } from "../../../td-scenes/battle/custom-battle-event";
 import { extractBattle, extractGameEnd } from "../../game-state-extractor";
 import type { ZeroDefenseTutorialState } from "../state";

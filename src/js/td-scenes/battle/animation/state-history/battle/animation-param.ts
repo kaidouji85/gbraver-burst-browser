@@ -1,4 +1,5 @@
 import type { Battle, BattleResult, GameStateX, PlayerState } from "gbraver-burst-core";
+
 import type { ArmDozerSprite } from "../../../../../game-object/armdozer/armdozer-sprite";
 import { PlainHUDCamera } from "../../../../../game-object/camera/plain-hud/plain-hud-camera";
 import { TDCamera } from "../../../../../game-object/camera/td";

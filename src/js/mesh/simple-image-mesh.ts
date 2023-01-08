@@ -1,4 +1,5 @@
 import * as THREE from "three";
+
 import { drawImageInCenter } from "../canvas/draw/image-drawer";
 import { CanvasMesh } from "./canvas-mesh";
 

@@ -1,5 +1,6 @@
 import * as THREE from "three";
 import { Group } from "three";
+
 import type { Resources } from "../../../../resource";
 import type { WingDozerModel } from "../model/wing-dozer-model";
 import { createActiveMeshes } from "./active-meshes";

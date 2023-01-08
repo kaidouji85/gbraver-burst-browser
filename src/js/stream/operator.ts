@@ -1,5 +1,6 @@
 import { merge as mergeRXJS } from "rxjs";
 import { filter as filterRXJS, first as firstRXJS, map as mapRXJS, share as shareRXJS, tap as tapRXJS } from "rxjs/operators";
+
 import type { Operator, Stream } from "./stream";
 import { createStream } from "./stream";
 

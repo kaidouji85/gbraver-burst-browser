@@ -1,5 +1,6 @@
 import type { Player } from "gbraver-burst-core";
 import * as THREE from "three";
+
 import type { PreRender } from "../../../../game-loop/pre-render";
 import type { Update } from "../../../../game-loop/update";
 import type { GameObjectAction } from "../../../../game-object/action/game-object-action";

@@ -1,4 +1,5 @@
 import type { BatteryDeclaration, Battle, BurstEffect, GameEnd, GameState, GameStateX, InputCommand, PilotSkillEffect, Reflect, RightItself, StartGame, TurnChange, UpdateRemainingTurn } from "gbraver-burst-core";
+
 import { Animate } from "../../../../animation/animate";
 import { empty } from "../../../../animation/delay";
 import { batteryDeclarationAnimation } from "./battery-declaration";
