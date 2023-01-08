@@ -50,8 +50,10 @@ import { scaleTweenDuration } from "./duration";
  * animation.play();
  */
 export class Animate {
+  /* eslint-disable @typescript-eslint/no-explicit-any */
   _start: Tween<any>;
   _end: Tween<any>;
+  /* eslint-enable */
   _time: number;
 
   /**
@@ -61,7 +63,9 @@ export class Animate {
    * @param end 連続したTweenの最後
    * @param time 全体の再生時間
    */
+  /* eslint-disable @typescript-eslint/no-explicit-any */
   constructor(start: Tween<any>, end: Tween<any>, time: number) {
+    /* eslint-enable */
     this._start = start;
     this._end = end;
     this._time = time;
