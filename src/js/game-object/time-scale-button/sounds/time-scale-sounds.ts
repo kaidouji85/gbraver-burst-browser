@@ -15,9 +15,13 @@ export type TimeScaleButtonSounds = {
  * @param resources リソース管理オブジェクト
  * @return 生成結果
  */
-export function createTimeScaleButtonSounds(resources: Resources): TimeScaleButtonSounds {
-  const changeValue = resources.sounds.find(v => v.id === SOUND_IDS.CHANGE_VALUE)?.sound ?? new Howl({src: ""});
+export function createTimeScaleButtonSounds(
+  resources: Resources
+): TimeScaleButtonSounds {
+  const changeValue =
+    resources.sounds.find((v) => v.id === SOUND_IDS.CHANGE_VALUE)?.sound ??
+    new Howl({ src: "" });
   return {
-    changeValue
+    changeValue,
   };
 }

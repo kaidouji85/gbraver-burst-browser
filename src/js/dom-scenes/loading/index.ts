@@ -1,4 +1,7 @@
-import type { LoadingActions, LoadingProgress } from "../../resource/loading/loading-actions";
+import type {
+  LoadingActions,
+  LoadingProgress,
+} from "../../resource/loading/loading-actions";
 import type { Stream, Unsubscriber } from "../../stream/stream";
 import type { DOMScene } from "../dom-scene";
 import { LoadingPresentation } from "./presentation";
@@ -19,7 +22,7 @@ export class Loading implements DOMScene {
   constructor(loading: Stream<LoadingActions>) {
     this.#completedRate = 0;
     this.#presentation = new LoadingPresentation();
-    this.#unsubscriber = loading.subscribe(action => {
+    this.#unsubscriber = loading.subscribe((action) => {
       if (action.type === "LoadingProgress") {
         this.#onLoadingProgress(action);
       }
@@ -49,5 +52,4 @@ export class Loading implements DOMScene {
     this.#completedRate = Math.max(action.completedRate, this.#completedRate);
     this.#presentation.setCompletedRate(this.#completedRate);
   }
-
 }

@@ -20,5 +20,4 @@ export class EnemyContinuousAttackView extends PlayerContinuousAttackView {
     const target = super.getObject3D();
     target.position.x *= -1;
   }
-
 }

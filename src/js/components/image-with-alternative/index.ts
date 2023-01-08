@@ -50,5 +50,4 @@ export class ImageWithAlternative {
   getAlternative(): HTMLElement {
     return this._alternative;
   }
-
 }

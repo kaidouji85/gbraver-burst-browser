@@ -21,7 +21,10 @@ import { tsubasaAnimation } from "./tsubasa";
  * @param gameState ゲーム状態
  * @return アニメーション
  */
-export function pilotSkillAnimation(props: StateAnimationProps, gameState: GameStateX<PilotSkillEffect>): Animate {
+export function pilotSkillAnimation(
+  props: StateAnimationProps,
+  gameState: GameStateX<PilotSkillEffect>
+): Animate {
   const param = toPilotSkillAnimationParam(props, gameState);
 
   if (!param) {
@@ -40,30 +43,22 @@ export function pilotSkillAnimation(props: StateAnimationProps, gameState: GameS
 function cutIn(param: PilotSkillAnimationParam): Animate {
   if (param.pilot instanceof ShinyaHUD) {
     const pilot: ShinyaHUD = param.pilot;
-    return shinyaAnimation({ ...param,
-      pilot
-    });
+    return shinyaAnimation({ ...param, pilot });
   }
 
   if (param.pilot instanceof GaiHUD) {
     const pilot: GaiHUD = param.pilot;
-    return gaiAnimation({ ...param,
-      pilot
-    });
+    return gaiAnimation({ ...param, pilot });
   }
 
   if (param.pilot instanceof RaitoHUD) {
     const pilot: RaitoHUD = param.pilot;
-    return raitoAnimation({ ...param,
-      pilot
-    });
+    return raitoAnimation({ ...param, pilot });
   }
 
   if (param.pilot instanceof TsubasaHUD) {
     const pilot: TsubasaHUD = param.pilot;
-    return tsubasaAnimation({ ...param,
-      pilot
-    });
+    return tsubasaAnimation({ ...param, pilot });
   }
 
   return empty();

@@ -55,11 +55,15 @@ type Elements = {
  * @return 抽出結果
  */
 function extractElements(root: HTMLElement, ids: DataIDs): Elements {
-  const gotoTitle: HTMLElement= root.querySelector(`[data-id="${ids.gotoTitle}"]`) ?? document.createElement("div");
-  const reload: HTMLElement = root.querySelector(`[data-id="${ids.reload}"]`) ?? document.createElement("div");
+  const gotoTitle: HTMLElement =
+    root.querySelector(`[data-id="${ids.gotoTitle}"]`) ??
+    document.createElement("div");
+  const reload: HTMLElement =
+    root.querySelector(`[data-id="${ids.reload}"]`) ??
+    document.createElement("div");
   return {
     gotoTitle,
-    reload
+    reload,
   };
 }
 
@@ -81,7 +85,7 @@ export class MailVerifiedIncomplete implements DOMScene {
   constructor(mailAddress: string) {
     const ids = {
       gotoTitle: domUuid(),
-      reload: domUuid()
+      reload: domUuid(),
     };
     this.#root = document.createElement("div");
     this.#root.className = ROOT_CLASS;
@@ -89,11 +93,14 @@ export class MailVerifiedIncomplete implements DOMScene {
     const elements = extractElements(this.#root, ids);
     this.#gotoTitleButton = elements.gotoTitle;
     this.#reloadButton = elements.reload;
-    this.#unsubscribers = [pushDOMStream(this.#gotoTitleButton).subscribe(action => {
-      this.#onGotoTitleButtonPush(action);
-    }), pushDOMStream(this.#reloadButton).subscribe(action => {
-      this.#onReloadButtonPush(action);
-    })];
+    this.#unsubscribers = [
+      pushDOMStream(this.#gotoTitleButton).subscribe((action) => {
+        this.#onGotoTitleButtonPush(action);
+      }),
+      pushDOMStream(this.#reloadButton).subscribe((action) => {
+        this.#onReloadButtonPush(action);
+      }),
+    ];
     this.#gotoTitle = createStreamSource();
     this.#reload = createStreamSource();
     this.#exclusive = new Exclusive();
@@ -101,7 +108,7 @@ export class MailVerifiedIncomplete implements DOMScene {
 
   /** @override */
   destructor(): void {
-    this.#unsubscribers.forEach(v => {
+    this.#unsubscribers.forEach((v) => {
       v.unsubscribe();
     });
   }
@@ -156,5 +163,4 @@ export class MailVerifiedIncomplete implements DOMScene {
       this.#reload.next();
     });
   }
-
 }

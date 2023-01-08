@@ -40,12 +40,15 @@ export class ArmdozerIcon {
     this.#check = document.createElement("img");
     this.#check.className = CHECK_CLASS_NAME;
     this.#isCheckLoaded = waitElementLoaded(this.#check);
-    this.#check.src = resources.paths.find(v => v.id === PathIds.CHECK)?.path ?? "";
+    this.#check.src =
+      resources.paths.find((v) => v.id === PathIds.CHECK)?.path ?? "";
     this.#check.hidden = true;
     this.#root.appendChild(this.#check);
-    this.#select = pushDOMStream(this.#root).chain(tap(action => {
-      action.event.preventDefault();
-    }));
+    this.#select = pushDOMStream(this.#root).chain(
+      tap((action) => {
+        action.event.preventDefault();
+      })
+    );
   }
 
   /**
@@ -90,8 +93,9 @@ export class ArmdozerIcon {
    * @param isSelected 選択されたか否かのフラグ、trueで選択された
    */
   selected(isSelected: boolean): void {
-    this.#image.className = isSelected ? `${IMAGE_CLASS_NAME}--selected` : IMAGE_CLASS_NAME;
+    this.#image.className = isSelected
+      ? `${IMAGE_CLASS_NAME}--selected`
+      : IMAGE_CLASS_NAME;
     this.#check.hidden = !isSelected;
   }
-
 }

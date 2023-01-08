@@ -13,15 +13,37 @@ import type { WingDozerModel } from "../model/wing-dozer-model";
  * @return アニメーション
  */
 export function down(model: WingDozerModel): Animate {
-  return all(process(() => {
-    model.animation.type = "KNOCK_BACK";
-    model.animation.frame = 1;
-  }).chain(delay(500)).chain(process(() => {
-    model.animation.type = "DOWN";
-    model.animation.frame = 0;
-  })).chain(tween(model.animation, t => t.to({
-    frame: 1
-  }, 350))), tween(model.position, t => t.to({
-    x: "+70"
-  }, 1000).easing(TWEEN.Easing.Quadratic.Out)));
+  return all(
+    process(() => {
+      model.animation.type = "KNOCK_BACK";
+      model.animation.frame = 1;
+    })
+      .chain(delay(500))
+      .chain(
+        process(() => {
+          model.animation.type = "DOWN";
+          model.animation.frame = 0;
+        })
+      )
+      .chain(
+        tween(model.animation, (t) =>
+          t.to(
+            {
+              frame: 1,
+            },
+            350
+          )
+        )
+      ),
+    tween(model.position, (t) =>
+      t
+        .to(
+          {
+            x: "+70",
+          },
+          1000
+        )
+        .easing(TWEEN.Easing.Quadratic.Out)
+    )
+  );
 }

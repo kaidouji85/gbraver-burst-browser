@@ -111,22 +111,28 @@ export function createTitleProps(params: CreateTitlePropsParams): TitleProps {
     tutorial: domUuid(),
     arcade: domUuid(),
     casualMatch: domUuid(),
-    config: domUuid()
+    config: domUuid(),
   };
   const root = document.createElement("div");
   root.innerHTML = rootInnerHTML(dataIDs, params);
   root.className = ROOT_CLASS;
   const elements = extractElements(root, dataIDs);
   const avatar = elements.avatar;
-  const isAvatarLoaded = params.account.type === "LoggedInAccount" ? waitElementLoaded(avatar) : Promise.resolve();
-  avatar.src = params.account.type === "LoggedInAccount" ? params.account.pictureURL : "";
+  const isAvatarLoaded =
+    params.account.type === "LoggedInAccount"
+      ? waitElementLoaded(avatar)
+      : Promise.resolve();
+  avatar.src =
+    params.account.type === "LoggedInAccount" ? params.account.pictureURL : "";
   const isLogoLoaded = waitElementLoaded(elements.logo);
-  elements.logo.src = params.resources.paths.find(v => v.id === PathIds.LOGO)?.path ?? "";
+  elements.logo.src =
+    params.resources.paths.find((v) => v.id === PathIds.LOGO)?.path ?? "";
   const titleBackImage = new Image();
   const isTitleBackLoaded = waitElementLoaded(titleBackImage).then(() => {
     root.style.backgroundImage = `url(${titleBackImage.src})`;
   });
-  titleBackImage.src = params.resources.paths.find(v => v.id === PathIds.TITLE_BACK)?.path ?? "";
+  titleBackImage.src =
+    params.resources.paths.find((v) => v.id === PathIds.TITLE_BACK)?.path ?? "";
   return {
     exclusive: new Exclusive(),
     isAccountMenuOpen: false,
@@ -143,14 +149,18 @@ export function createTitleProps(params: CreateTitlePropsParams): TitleProps {
     isLogoLoaded,
     isAvatarLoaded,
     isTitleBackLoaded,
-    pushButton: params.resources.sounds.find(v => v.id === SOUND_IDS.PUSH_BUTTON)?.sound ?? new Howl({src: ""}),
-    changeValue: params.resources.sounds.find(v => v.id === SOUND_IDS.CHANGE_VALUE)?.sound ?? new Howl({src: ""}),
+    pushButton:
+      params.resources.sounds.find((v) => v.id === SOUND_IDS.PUSH_BUTTON)
+        ?.sound ?? new Howl({ src: "" }),
+    changeValue:
+      params.resources.sounds.find((v) => v.id === SOUND_IDS.CHANGE_VALUE)
+        ?.sound ?? new Howl({ src: "" }),
     pushLogin: createStreamSource(),
     pushDeleteAccount: createStreamSource(),
     pushLogout: createStreamSource(),
     pushTutorial: createStreamSource(),
     pushArcade: createStreamSource(),
     pushCasualMatch: createStreamSource(),
-    pushConfig: createStreamSource()
+    pushConfig: createStreamSource(),
   };
 }

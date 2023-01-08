@@ -43,7 +43,7 @@ export class RecoverBattery {
     this.#model = createInitialValue();
     this.#view = param.view;
     this.#sounds = new RecoverBatterySounds(param.resources);
-    this.#unsubscriber = param.gameObjectAction.subscribe(action => {
+    this.#unsubscriber = param.gameObjectAction.subscribe((action) => {
       if (action.type === "Update") {
         this.#update();
       } else if (action.type === "PreRender") {
@@ -111,5 +111,4 @@ export class RecoverBattery {
   #preRender(action: PreRender): void {
     this.#view.lookAt(action.camera);
   }
-
 }

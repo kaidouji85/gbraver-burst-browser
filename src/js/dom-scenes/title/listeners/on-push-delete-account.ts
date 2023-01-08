@@ -7,7 +7,10 @@ import type { TitleProps } from "../props";
  * @param props 画面プロパティ
  * @param action アクション
  */
-export function onPushDeleteAccount(props: TitleProps, action: Readonly<PushDOM>): void {
+export function onPushDeleteAccount(
+  props: TitleProps,
+  action: Readonly<PushDOM>
+): void {
   action.event.preventDefault();
   props.changeValue.play();
   props.pushDeleteAccount.next();

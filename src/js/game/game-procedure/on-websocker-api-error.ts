@@ -9,9 +9,12 @@ import type { GameProps } from "../game-props";
  * @param props ゲームプロパティ
  * @param action アクション
  */
-export function onWebSocketAPIError(props: Readonly<GameProps>, action: WebSocketAPIError): void {
+export function onWebSocketAPIError(
+  props: Readonly<GameProps>,
+  action: WebSocketAPIError
+): void {
   const dialog = new NetworkErrorDialog(props.resources, {
-    type: "GotoTitle"
+    type: "GotoTitle",
   });
   props.domDialogBinder.bind(dialog, networkErrorDialogConnector);
   throw action;

@@ -13,6 +13,6 @@ export const EMPTY_ARMDOZER: Armdozer = {
   speed: 2000,
   burst: {
     type: "RecoverBattery",
-    recoverBattery: 3
-  }
+    recoverBattery: 3,
+  },
 };

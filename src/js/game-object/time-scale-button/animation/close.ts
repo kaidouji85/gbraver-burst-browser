@@ -13,7 +13,14 @@ export function close(model: TimeScaleButtonModel): Animate {
   return process(() => {
     model.disabled = true;
     model.opacity = 1;
-  }).chain(tween(model, t => t.to({
-    opacity: 0
-  }, 200)));
+  }).chain(
+    tween(model, (t) =>
+      t.to(
+        {
+          opacity: 0,
+        },
+        200
+      )
+    )
+  );
 }

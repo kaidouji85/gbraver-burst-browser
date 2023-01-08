@@ -1,67 +1,81 @@
 import type { PostBattleButtonConfig } from "./post-battle-button-config";
 
 /** NPCバトル勝利後のアクションボタン */
-export const PostNPCBattleWinButtons: PostBattleButtonConfig[] = [{
-  style: "MainButton",
-  action: {
-    type: "NextStage"
+export const PostNPCBattleWinButtons: PostBattleButtonConfig[] = [
+  {
+    style: "MainButton",
+    action: {
+      type: "NextStage",
+    },
+    label: "次のステージ",
   },
-  label: "次のステージ"
-}];
+];
 
 /** NPCバトル敗北後のアクションボタン */
-export const PostNPCBattleLoseButtons: PostBattleButtonConfig[] = [{
-  style: "SubButton",
-  action: {
-    type: "GotoTitle"
+export const PostNPCBattleLoseButtons: PostBattleButtonConfig[] = [
+  {
+    style: "SubButton",
+    action: {
+      type: "GotoTitle",
+    },
+    label: "タイトルへ",
   },
-  label: "タイトルへ"
-}, {
-  style: "MainButton",
-  action: {
-    type: "Retry"
+  {
+    style: "MainButton",
+    action: {
+      type: "Retry",
+    },
+    label: "リトライ",
   },
-  label: "リトライ"
-}];
+];
 
 /** NPCバトル完全クリア後のアクションボタン */
-export const PostNPCBattleComplete: PostBattleButtonConfig[] = [{
-  style: "MainButton",
-  action: {
-    type: "GotoEnding"
+export const PostNPCBattleComplete: PostBattleButtonConfig[] = [
+  {
+    style: "MainButton",
+    action: {
+      type: "GotoEnding",
+    },
+    label: "エンディングへ",
   },
-  label: "エンディングへ"
-}];
+];
 
 /** ネット対戦終了後のアクションボタン */
-export const PostNetworkBattleButtons: PostBattleButtonConfig[] = [{
-  style: "MainButton",
-  action: {
-    type: "GotoTitle"
+export const PostNetworkBattleButtons: PostBattleButtonConfig[] = [
+  {
+    style: "MainButton",
+    action: {
+      type: "GotoTitle",
+    },
+    label: "タイトルへ",
   },
-  label: "タイトルへ"
-}];
+];
 
 /** チュートリアル勝利後のアクションボタン */
-export const PostTutorialWinButtons: PostBattleButtonConfig[] = [{
-  style: "MainButton",
-  action: {
-    type: "GotoTutorialSelect"
+export const PostTutorialWinButtons: PostBattleButtonConfig[] = [
+  {
+    style: "MainButton",
+    action: {
+      type: "GotoTutorialSelect",
+    },
+    label: "ステージ選択へ",
   },
-  label: "ステージ選択へ"
-}];
+];
 
 /** チュートリアル敗北後のアクションボタン */
-export const PostTutorialLoseButtons: PostBattleButtonConfig[] = [{
-  style: "SubButton",
-  action: {
-    type: "GotoTutorialSelect"
+export const PostTutorialLoseButtons: PostBattleButtonConfig[] = [
+  {
+    style: "SubButton",
+    action: {
+      type: "GotoTutorialSelect",
+    },
+    label: "ステージ選択へ",
   },
-  label: "ステージ選択へ"
-}, {
-  style: "MainButton",
-  action: {
-    type: "Retry"
+  {
+    style: "MainButton",
+    action: {
+      type: "Retry",
+    },
+    label: "リトライ",
   },
-  label: "リトライ"
-}];
+];

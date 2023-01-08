@@ -14,12 +14,18 @@ import { toGameOverParam } from "./game-over/game-over-param";
  * @param gameState ゲームの状態
  * @return アニメーション
  */
-export function gameEndAnimation(props: StateAnimationProps, gameState: GameStateX<GameEnd>): Animate {
+export function gameEndAnimation(
+  props: StateAnimationProps,
+  gameState: GameStateX<GameEnd>
+): Animate {
   if (gameState.effect.result.type === "EvenMatch") {
     return evenMatchAnimation(props);
   }
 
-  const gameOverParam = gameState.effect.result.type === "GameOver" ? toGameOverParam(props, gameState.effect.result) : null;
+  const gameOverParam =
+    gameState.effect.result.type === "GameOver"
+      ? toGameOverParam(props, gameState.effect.result)
+      : null;
 
   if (gameOverParam) {
     return gameOverAnimation(gameOverParam);

@@ -1,4 +1,4 @@
-import {Tween} from "@tweenjs/tween.js";
+import { Tween } from "@tweenjs/tween.js";
 
 /**
  * Tween単体の再生時間を計算する
@@ -7,12 +7,13 @@ import {Tween} from "@tweenjs/tween.js";
  */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 export function tweenDuration(tween: Tween<any>): number {
-  return (tween as any)._duration + (tween as any)._delayTime + (tween as any)._repeat * (tween as any)._duration;
+  return (
+    (tween as any)._duration +
+    (tween as any)._delayTime +
+    (tween as any)._repeat * (tween as any)._duration
+  );
   /* eslint-enable */
 }
-
-
-
 
 /**
  * Tween再生時間をスケールする
@@ -29,7 +30,11 @@ export function tweenDuration(tween: Tween<any>): number {
  * @param scaledTweens 再生時間スケールが完了したTween
  */
 /* eslint-disable @typescript-eslint/no-explicit-any */
-export function scaleTweenDuration(tween: Tween<any>, scale: number, scaledTweens: Tween<any>[] = []): void {
+export function scaleTweenDuration(
+  tween: Tween<any>,
+  scale: number,
+  scaledTweens: Tween<any>[] = []
+): void {
   /* eslint-enable */
   if (scaledTweens.includes(tween)) {
     return;

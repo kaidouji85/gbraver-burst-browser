@@ -62,7 +62,7 @@ export class BattleSceneView {
       enemy: param.enemy,
       resize: param.resize,
       update: this.#updateTD,
-      preRender: this.#preRenderTD
+      preRender: this.#preRenderTD,
     });
     this.hud = new HudLayer({
       resources: param.resources,
@@ -71,10 +71,10 @@ export class BattleSceneView {
       enemy: param.enemy,
       resize: param.resize,
       update: this.#updateHUD,
-      preRender: this.#preRenderHUD
+      preRender: this.#preRenderHUD,
     });
     this.dom = new DOMLayer(param.resources);
-    param.gameLoop.subscribe(action => {
+    param.gameLoop.subscribe((action) => {
       this.#gameLoop(action);
     });
   }
@@ -104,27 +104,31 @@ export class BattleSceneView {
     TWEEN.update(action.time);
     this.#updateTD.next({
       type: "Update",
-      time: action.time
+      time: action.time,
     });
     this.#preRenderTD.next({
       type: "PreRender",
       camera: this.td.camera.getCamera(),
       rendererDOM: this.#renderer.getRendererDOM(),
-      safeAreaInset: this.#safeAreaInset
+      safeAreaInset: this.#safeAreaInset,
     });
     this.#renderer.rendering(this.td.scene, this.td.camera.getCamera());
     this.#updateHUD.next({
       type: "Update",
-      time: action.time
+      time: action.time,
     });
-    tracking(this.td, this.hud, this.#playerId, this.#renderer.getRendererDOM());
+    tracking(
+      this.td,
+      this.hud,
+      this.#playerId,
+      this.#renderer.getRendererDOM()
+    );
     this.#preRenderHUD.next({
       type: "PreRender",
       camera: this.hud.camera.getCamera(),
       rendererDOM: this.#renderer.getRendererDOM(),
-      safeAreaInset: this.#safeAreaInset
+      safeAreaInset: this.#safeAreaInset,
     });
     this.#renderer.rendering(this.hud.scene, this.hud.camera.getCamera());
   }
-
 }

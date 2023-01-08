@@ -55,10 +55,13 @@ export class TDSceneBinder {
    * @param scene バインドするシーン
    * @param connector ゲームアクションコネクタ
    */
-  bind<X extends TDScene>(scene: X, connector: TDSceneActionConnector<X>): void {
+  bind<X extends TDScene>(
+    scene: X,
+    connector: TDSceneActionConnector<X>
+  ): void {
     this.#disposeScene();
     this.#scene = scene;
-    scene.getDOMLayerElements().forEach(element => {
+    scene.getDOMLayerElements().forEach((element) => {
       this.#domLayerElement.appendChild(element);
     });
     this.#unsubscribers = connector(scene, this.#gameAction);
@@ -99,9 +102,8 @@ export class TDSceneBinder {
     this.#scene && this.#scene.destructor();
     this.#renderer.disposeRenders();
     this.#domLayerElement.innerHTML = "";
-    this.#unsubscribers.forEach(v => {
+    this.#unsubscribers.forEach((v) => {
       v.unsubscribe();
     });
   }
-
 }

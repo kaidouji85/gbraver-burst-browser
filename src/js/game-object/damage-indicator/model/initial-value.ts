@@ -5,6 +5,6 @@ export function createInitialValue(): DamageIndicatorModel {
   return {
     damage: 0,
     opacity: 0,
-    scale: 1
+    scale: 1,
   };
 }

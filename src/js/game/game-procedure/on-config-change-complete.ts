@@ -11,10 +11,14 @@ import { startTitle } from "./start-title";
  * @param action アクション
  * @return 処理が完了したら発火するPromise
  */
-export async function onConfigChangeComplete(props: Readonly<GameProps>, action: ConfigChangeComplete): Promise<void> {
+export async function onConfigChangeComplete(
+  props: Readonly<GameProps>,
+  action: ConfigChangeComplete
+): Promise<void> {
   await props.fader.fadeOut();
   const origin = await props.config.load();
-  isSoundConfigChanged(origin, action.config) && reflectSoundVolume(props.resources, action.config);
+  isSoundConfigChanged(origin, action.config) &&
+    reflectSoundVolume(props.resources, action.config);
   await props.config.save(action.config);
   await startTitle(props);
   await props.fader.fadeIn();

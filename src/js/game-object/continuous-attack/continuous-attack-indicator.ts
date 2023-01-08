@@ -27,11 +27,15 @@ export class ContinuousAttackIndicator {
    * @param resources リソース管理オブジェクト
    * @param gameObjectAction ゲームオブジェクトアクション
    */
-  constructor(view: ContinuousAttackView, resources: Resources, gameObjectAction: Stream<GameObjectAction>) {
+  constructor(
+    view: ContinuousAttackView,
+    resources: Resources,
+    gameObjectAction: Stream<GameObjectAction>
+  ) {
     this.#model = createInitialValue();
     this.#view = view;
     this.#sounds = new ContinuousAttackSounds(resources);
-    this.#unsubscriber = gameObjectAction.subscribe(action => {
+    this.#unsubscriber = gameObjectAction.subscribe((action) => {
       if (action.type === "Update") {
         this.#onUpdate();
       } else if (action.type === "PreRender") {
@@ -79,5 +83,4 @@ export class ContinuousAttackIndicator {
   #onPreRender(action: PreRender): void {
     this.#view.lookAt(action.camera);
   }
-
 }

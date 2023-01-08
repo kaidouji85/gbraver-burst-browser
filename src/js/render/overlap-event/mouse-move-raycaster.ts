@@ -18,12 +18,20 @@ export type MouseMoveRaycaster = {
  * @param origin 変換元
  * @return 変換結果
  */
-export function toMouseMoveRaycaster(origin: MouseMove, renderer: HTMLElement, camera: THREE.Camera): MouseMoveRaycaster {
-  const mouseRaycaster: MouseRaycaster = createMouseRaycaster(origin.event, renderer, camera);
+export function toMouseMoveRaycaster(
+  origin: MouseMove,
+  renderer: HTMLElement,
+  camera: THREE.Camera
+): MouseMoveRaycaster {
+  const mouseRaycaster: MouseRaycaster = createMouseRaycaster(
+    origin.event,
+    renderer,
+    camera
+  );
   const isLeftButtonClicked = isMouseLeftButtonPushed(origin.event);
   return {
     type: "mouseMoveRaycaster",
     mouse: mouseRaycaster,
-    isLeftButtonClicked: isLeftButtonClicked
+    isLeftButtonClicked: isLeftButtonClicked,
   };
 }

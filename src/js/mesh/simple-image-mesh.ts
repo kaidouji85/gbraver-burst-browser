@@ -36,10 +36,10 @@ export class SimpleImageMesh {
       canvasWidth: param.canvasSize,
       canvasHeight: param.canvasSize,
       meshWidth: param.meshSize,
-      meshHeight: param.meshSize
+      meshHeight: param.meshSize,
     });
 
-    this._mesh.draw(context => {
+    this._mesh.draw((context) => {
       const dx = context.canvas.width / 2;
       const dy = context.canvas.height / 2;
       drawImageInCenter(context, param.image, dx, dy, param.imageWidth);
@@ -60,5 +60,4 @@ export class SimpleImageMesh {
   getObject3D(): THREE.Object3D {
     return this._mesh.mesh;
   }
-
 }

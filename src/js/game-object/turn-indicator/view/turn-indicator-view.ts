@@ -3,7 +3,10 @@ import * as THREE from "three";
 import { SimpleImageMesh } from "../../../mesh/simple-image-mesh";
 import type { Resources } from "../../../resource";
 import { CANVAS_IMAGE_IDS } from "../../../resource/canvas-image";
-import { ARMDOZER_EFFECT_STANDARD_Y, ARMDOZER_EFFECT_STANDARD_Z } from "../../armdozer/position";
+import {
+  ARMDOZER_EFFECT_STANDARD_Y,
+  ARMDOZER_EFFECT_STANDARD_Z,
+} from "../../armdozer/position";
 import type { TurnIndicatorModel } from "../model/turn-indicator-model";
 
 /** ターンインジケータービュー */
@@ -11,12 +14,15 @@ export class TurnIndicatorView {
   #mesh: SimpleImageMesh;
 
   constructor(resources: Resources) {
-    const turnIndicator = resources.canvasImages.find(v => v.id === CANVAS_IMAGE_IDS.TURN_INDICATOR)?.image ?? new Image();
+    const turnIndicator =
+      resources.canvasImages.find(
+        (v) => v.id === CANVAS_IMAGE_IDS.TURN_INDICATOR
+      )?.image ?? new Image();
     this.#mesh = new SimpleImageMesh({
       canvasSize: 512,
       meshSize: 200,
       image: turnIndicator,
-      imageWidth: 512
+      imageWidth: 512,
     });
   }
 
@@ -47,5 +53,4 @@ export class TurnIndicatorView {
   getObject3D(): THREE.Object3D {
     return this.#mesh.getObject3D();
   }
-
 }

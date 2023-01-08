@@ -16,14 +16,22 @@ type Elements = {
  * @return 抽出結果
  */
 export function extractElements(root: HTMLElement, ids: DataIDs): Elements {
-  const backGround: HTMLElement = root.querySelector(`[data-id="${ids.backGround}"]`) ?? document.createElement("div");
-  const closer: HTMLElement = root.querySelector(`[data-id="${ids.closer}"]`) ?? document.createElement("div");
-  const discard: HTMLElement = root.querySelector(`[data-id="${ids.discard}"]`) ?? document.createElement("div");
-  const accept: HTMLElement = root.querySelector(`[data-id="${ids.accept}"]`) ?? document.createElement("div");
+  const backGround: HTMLElement =
+    root.querySelector(`[data-id="${ids.backGround}"]`) ??
+    document.createElement("div");
+  const closer: HTMLElement =
+    root.querySelector(`[data-id="${ids.closer}"]`) ??
+    document.createElement("div");
+  const discard: HTMLElement =
+    root.querySelector(`[data-id="${ids.discard}"]`) ??
+    document.createElement("div");
+  const accept: HTMLElement =
+    root.querySelector(`[data-id="${ids.accept}"]`) ??
+    document.createElement("div");
   return {
     backGround,
     closer,
     discard,
-    accept
+    accept,
   };
 }

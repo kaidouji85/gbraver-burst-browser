@@ -1,4 +1,4 @@
-import TWEEN, {Group} from "@tweenjs/tween.js";
+import TWEEN, { Group } from "@tweenjs/tween.js";
 import * as THREE from "three";
 
 import { Animate } from "../../../animation/animate";
@@ -56,27 +56,34 @@ export class ShinBraver extends EmptyArmDozerSprite implements ArmDozerSprite {
    * @param resources リソース管理オブジェクト
    * @param gameObjectAction ゲームオブジェクトアクション
    */
-  constructor(view: ShinBraverView, resources: Resources, gameObjectAction: Stream<GameObjectAction>) {
+  constructor(
+    view: ShinBraverView,
+    resources: Resources,
+    gameObjectAction: Stream<GameObjectAction>
+  ) {
     super();
     this.#model = createInitialValue();
     this.#view = view;
     this.#sounds = new ShinBraverSounds(resources);
     this.#activeFlashTween = new TWEEN.Group();
-    this.#unsubscribers = [gameObjectAction.subscribe(action => {
-      if (action.type === "Update") {
-        this.#onUpdate(action);
-      } else if (action.type === "PreRender") {
-        this.#onPreRender(action);
-      }
-    }), firstUpdate(gameObjectAction).subscribe(action => {
-      this.#onFirstUpdate(action);
-    })];
+    this.#unsubscribers = [
+      gameObjectAction.subscribe((action) => {
+        if (action.type === "Update") {
+          this.#onUpdate(action);
+        } else if (action.type === "PreRender") {
+          this.#onPreRender(action);
+        }
+      }),
+      firstUpdate(gameObjectAction).subscribe((action) => {
+        this.#onFirstUpdate(action);
+      }),
+    ];
   }
 
   /** @override */
   destructor(): void {
     this.#view.destructor();
-    this.#unsubscribers.forEach(v => {
+    this.#unsubscribers.forEach((v) => {
       v.unsubscribe();
     });
     this.#activeFlashTween.removeAll();
@@ -214,5 +221,4 @@ export class ShinBraver extends EmptyArmDozerSprite implements ArmDozerSprite {
   #onPreRender(action: PreRender): void {
     this.#view.lookAt(action.camera);
   }
-
 }

@@ -23,10 +23,13 @@ export class BatteryNumber {
    * @param view ビュー
    * @param gameObjectAction ゲームオブジェクトアクション
    */
-  constructor(view: BatteryNumberView, gameObjectAction: Stream<GameObjectAction>) {
+  constructor(
+    view: BatteryNumberView,
+    gameObjectAction: Stream<GameObjectAction>
+  ) {
     this.#model = createInitialValue();
     this.#view = view;
-    this.#unsubscriber = gameObjectAction.subscribe(action => {
+    this.#unsubscriber = gameObjectAction.subscribe((action) => {
       if (action.type === "Update") {
         this.#update();
       } else if (action.type === "PreRender") {
@@ -84,5 +87,4 @@ export class BatteryNumber {
   #preRender(action: PreRender): void {
     this.#view.lookAt(action.camera);
   }
-
 }

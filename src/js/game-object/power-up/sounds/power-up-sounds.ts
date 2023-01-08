@@ -10,7 +10,8 @@ export class PowerUpSounds {
   benefitEffect: Howl;
 
   constructor(resources: Resources) {
-    this.benefitEffect = resources.sounds.find(v => v.id === SOUND_IDS.BENEFIT_EFFECT)?.sound ?? new Howl({src: ""});
+    this.benefitEffect =
+      resources.sounds.find((v) => v.id === SOUND_IDS.BENEFIT_EFFECT)?.sound ??
+      new Howl({ src: "" });
   }
-
 }

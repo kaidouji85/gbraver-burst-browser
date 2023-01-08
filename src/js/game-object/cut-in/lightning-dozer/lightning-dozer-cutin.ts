@@ -25,10 +25,13 @@ export class LightningDozerCutIn implements HUDTracking {
    * @param view ビュー
    * @param gameObjectAction ゲームオブジェクトアクション
    */
-  constructor(view: LightningDozerCutInView, gameObjectAction: Stream<GameObjectAction>) {
+  constructor(
+    view: LightningDozerCutInView,
+    gameObjectAction: Stream<GameObjectAction>
+  ) {
     this.#view = view;
     this.#model = createInitialValue();
-    this.#unsubscriber = gameObjectAction.subscribe(action => {
+    this.#unsubscriber = gameObjectAction.subscribe((action) => {
       if (action.type === "PreRender") {
         this.#onPreRender(action);
       }
@@ -90,5 +93,4 @@ export class LightningDozerCutIn implements HUDTracking {
   #onPreRender(action: PreRender): void {
     this.#view.engage(this.#model, action);
   }
-
 }

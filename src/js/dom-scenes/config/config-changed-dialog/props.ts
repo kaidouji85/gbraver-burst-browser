@@ -52,12 +52,14 @@ export type ConfigChangedDialogProps = {
  * @param resources リソース管理オブジェクト
  * @return 生成したダイアログプロパティ
  */
-export function createConfigChangedDialogProps(resources: Resources): ConfigChangedDialogProps {
+export function createConfigChangedDialogProps(
+  resources: Resources
+): ConfigChangedDialogProps {
   const ids = {
     backGround: domUuid(),
     closer: domUuid(),
     discard: domUuid(),
-    accept: domUuid()
+    accept: domUuid(),
   };
   const root = document.createElement("div");
   root.className = ROOT_CLASS_INVISIBLE;
@@ -67,8 +69,12 @@ export function createConfigChangedDialogProps(resources: Resources): ConfigChan
   const closer = elements.closer;
   const discard = elements.discard;
   const accept = elements.accept;
-  const pushButton = resources.sounds.find(v => v.id === SOUND_IDS.PUSH_BUTTON)?.sound ?? new Howl({src: ""});
-  const changeValue = resources.sounds.find(v => v.id === SOUND_IDS.CHANGE_VALUE)?.sound ?? new Howl({src: ""});
+  const pushButton =
+    resources.sounds.find((v) => v.id === SOUND_IDS.PUSH_BUTTON)?.sound ??
+    new Howl({ src: "" });
+  const changeValue =
+    resources.sounds.find((v) => v.id === SOUND_IDS.CHANGE_VALUE)?.sound ??
+    new Howl({ src: "" });
   const exclusive = new Exclusive();
   const closeStream = createStreamSource<void>();
   const acceptStream = createStreamSource<void>();
@@ -84,6 +90,6 @@ export function createConfigChangedDialogProps(resources: Resources): ConfigChan
     exclusive,
     closeStream,
     acceptStream,
-    discardStream
+    discardStream,
   };
 }

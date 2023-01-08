@@ -11,12 +11,27 @@ import type { LightningDozerModel } from "../model/lightning-dozer-model";
  * @return アニメーション
  */
 export function guard(model: LightningDozerModel): Animate {
-  return all(process(() => {
-    model.animation.frame = 1;
-    model.animation.type = "GUARD";
-  }), tween(model.position, t => t.to({
-    x: "+20"
-  }, 100)).chain(tween(model.position, t => t.to({
-    x: "-20"
-  }, 100))));
+  return all(
+    process(() => {
+      model.animation.frame = 1;
+      model.animation.type = "GUARD";
+    }),
+    tween(model.position, (t) =>
+      t.to(
+        {
+          x: "+20",
+        },
+        100
+      )
+    ).chain(
+      tween(model.position, (t) =>
+        t.to(
+          {
+            x: "-20",
+          },
+          100
+        )
+      )
+    )
+  );
 }

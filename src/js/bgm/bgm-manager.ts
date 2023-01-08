@@ -22,7 +22,7 @@ class SimpleBGMManager implements BGMManager {
    */
   constructor() {
     this._bgm = {
-      type: "NoBGM"
+      type: "NoBGM",
     };
     this._lastOperation = Promise.resolve(this._bgm);
   }
@@ -35,14 +35,12 @@ class SimpleBGMManager implements BGMManager {
     this._bgm = await this._lastOperation;
     return this._bgm;
   }
-
 }
 /**
  * BGM管理オブジェクトを生成する
  *
  * @return 生成結果
  */
-
 
 export function createBGMManager(): BGMManager {
   return new SimpleBGMManager();

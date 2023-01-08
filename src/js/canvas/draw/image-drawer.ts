@@ -11,9 +11,15 @@
  * @param dy 描画Y
  * @param width 描画する横幅(ピクセル)
  */
-export function drawImageInCenter(context: CanvasRenderingContext2D, image: HTMLImageElement, dx: number, dy: number, width?: number): void {
+export function drawImageInCenter(
+  context: CanvasRenderingContext2D,
+  image: HTMLImageElement,
+  dx: number,
+  dy: number,
+  width?: number
+): void {
   const correctWidth = width ?? image.width;
-  const correctHeight = image.height * correctWidth / image.width;
+  const correctHeight = (image.height * correctWidth) / image.width;
   const x = dx - correctWidth / 2;
   const y = dy - correctHeight / 2;
   context.drawImage(image, x, y, correctWidth, correctHeight);

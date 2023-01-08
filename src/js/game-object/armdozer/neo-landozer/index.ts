@@ -12,7 +12,10 @@ import { PlayerNeoLandozerView } from "./view/player-neo-landozer-view";
  * @param gameObjectAction ゲームオブジェクトアクション
  * @return ネオランドーザ
  */
-export function PlayerNeoLandozer(resources: Resources, gameObjectAction: Stream<GameObjectAction>): NeoLandozer {
+export function PlayerNeoLandozer(
+  resources: Resources,
+  gameObjectAction: Stream<GameObjectAction>
+): NeoLandozer {
   const view = new PlayerNeoLandozerView(resources);
   return new NeoLandozer(view, resources, gameObjectAction);
 }
@@ -24,7 +27,10 @@ export function PlayerNeoLandozer(resources: Resources, gameObjectAction: Stream
  * @param gameObjectAction ゲームオブジェクトアクション
  * @return ネオランドーザ
  */
-export function EnemyNeoLandozer(resources: Resources, gameObjectAction: Stream<GameObjectAction>): NeoLandozer {
+export function EnemyNeoLandozer(
+  resources: Resources,
+  gameObjectAction: Stream<GameObjectAction>
+): NeoLandozer {
   const view = new EnemyNeoLandozerView(resources);
   return new NeoLandozer(view, resources, gameObjectAction);
 }

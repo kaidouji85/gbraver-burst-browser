@@ -3,7 +3,11 @@ import * as THREE from "three";
 import { HorizontalAnimationMesh } from "../../../mesh/horizontal-animation";
 import type { Resources } from "../../../resource";
 import { TEXTURE_IDS } from "../../../resource/texture/ids";
-import { ARMDOZER_EFFECT_STANDARD_X, ARMDOZER_EFFECT_STANDARD_Y, ARMDOZER_EFFECT_STANDARD_Z } from "../../armdozer/position";
+import {
+  ARMDOZER_EFFECT_STANDARD_X,
+  ARMDOZER_EFFECT_STANDARD_Y,
+  ARMDOZER_EFFECT_STANDARD_Z,
+} from "../../armdozer/position";
 import type { RecoverBatteryModel } from "../model/recover-battery-model";
 import type { RecoverBatteryView } from "./recover-battery-view";
 export const MESH_SIZE = 100;
@@ -21,20 +25,24 @@ export class PlayerRecoverBatteryView implements RecoverBatteryView {
 
   constructor(resources: Resources) {
     this.#group = new THREE.Group();
-    const batteryNumberResource = resources.textures.find(v => v.id === TEXTURE_IDS.BATTERY_NUMBER);
-    const batteryNumber = batteryNumberResource ? batteryNumberResource.texture : new THREE.Texture();
+    const batteryNumberResource = resources.textures.find(
+      (v) => v.id === TEXTURE_IDS.BATTERY_NUMBER
+    );
+    const batteryNumber = batteryNumberResource
+      ? batteryNumberResource.texture
+      : new THREE.Texture();
     this.#signMesh = new HorizontalAnimationMesh({
       texture: batteryNumber,
       width: MESH_SIZE,
       height: MESH_SIZE,
-      maxAnimation: MAX_ANIMATION
+      maxAnimation: MAX_ANIMATION,
     });
     this.#group.add(this.#signMesh.getObject3D());
     this.#numberMesh = new HorizontalAnimationMesh({
       texture: batteryNumber,
       width: MESH_SIZE,
       height: MESH_SIZE,
-      maxAnimation: MAX_ANIMATION
+      maxAnimation: MAX_ANIMATION,
     });
     this.#group.add(this.#numberMesh.getObject3D());
   }
@@ -79,5 +87,4 @@ export class PlayerRecoverBatteryView implements RecoverBatteryView {
   getObject3D(): THREE.Object3D {
     return this.#group;
   }
-
 }

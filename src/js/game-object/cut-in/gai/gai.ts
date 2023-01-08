@@ -28,11 +28,15 @@ export class GaiCutIn {
    * @param resources リソース管理オブジェクト
    * @param gameObjectAction ゲームオブジェクトアクション
    */
-  constructor(view: GaiView, resources: Resources, gameObjectAction: Stream<GameObjectAction>) {
+  constructor(
+    view: GaiView,
+    resources: Resources,
+    gameObjectAction: Stream<GameObjectAction>
+  ) {
     this.#model = createInitialValue();
     this.#view = view;
     this.#sounds = new GaiSounds(resources);
-    this.#unsubscriber = gameObjectAction.subscribe(action => {
+    this.#unsubscriber = gameObjectAction.subscribe((action) => {
       if (action.type === "PreRender") {
         this.#onPreRender(action);
       }
@@ -82,5 +86,4 @@ export class GaiCutIn {
   #onPreRender(action: PreRender): void {
     this.#view.engage(this.#model, action);
   }
-
 }

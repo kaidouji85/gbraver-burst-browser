@@ -12,7 +12,10 @@ import { PilotIcon } from "./pilot-icon";
  * @param pilotId パイロットID
  * @return 生成結果
  */
-export function createPilotIcon(resources: Resources, pilotId: PilotId): PilotIcon {
+export function createPilotIcon(
+  resources: Resources,
+  pilotId: PilotId
+): PilotIcon {
   switch (pilotId) {
     case PilotIds.SHINYA:
       return shinyaIcon(resources);
@@ -38,7 +41,8 @@ export function createPilotIcon(resources: Resources, pilotId: PilotId): PilotIc
  * @return 生成結果
  */
 function shinyaIcon(resources: Resources): PilotIcon {
-  const path = resources.paths.find(v => v.id === PathIds.SHINYA_ICON)?.path ?? "";
+  const path =
+    resources.paths.find((v) => v.id === PathIds.SHINYA_ICON)?.path ?? "";
   return new PilotIcon(resources, path, "シンヤ アイコン");
 }
 
@@ -50,7 +54,8 @@ function shinyaIcon(resources: Resources): PilotIcon {
  * @return 生成結果
  */
 function gaiIcon(resources: Resources): PilotIcon {
-  const path = resources.paths.find(v => v.id === PathIds.GAI_ICON)?.path ?? "";
+  const path =
+    resources.paths.find((v) => v.id === PathIds.GAI_ICON)?.path ?? "";
   return new PilotIcon(resources, path, "ガイ アイコン");
 }
 
@@ -61,7 +66,8 @@ function gaiIcon(resources: Resources): PilotIcon {
  * @return 生成結果
  */
 function raitoIcon(resources: Resources): PilotIcon {
-  const path = resources.paths.find(v => v.id === PathIds.RAITO_ICON)?.path ?? "";
+  const path =
+    resources.paths.find((v) => v.id === PathIds.RAITO_ICON)?.path ?? "";
   return new PilotIcon(resources, path, "ライト アイコン");
 }
 
@@ -72,6 +78,7 @@ function raitoIcon(resources: Resources): PilotIcon {
  * @return 生成結果
  */
 function tsubasaIcon(resources: Resources): PilotIcon {
-  const path = resources.paths.find(v => v.id === PathIds.TSUBASA_ICON)?.path ?? "";
+  const path =
+    resources.paths.find((v) => v.id === PathIds.TSUBASA_ICON)?.path ?? "";
   return new PilotIcon(resources, path, "ツバサ アイコン");
 }

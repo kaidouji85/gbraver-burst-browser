@@ -12,7 +12,10 @@ import { WingDozer } from "./wing-dozer";
  * @param gameObjectAction ゲームオブジェクトアクション
  * @return 生成結果
  */
-export function PlayerWingDozer(resources: Resources, gameObjectAction: Stream<GameObjectAction>): WingDozer {
+export function PlayerWingDozer(
+  resources: Resources,
+  gameObjectAction: Stream<GameObjectAction>
+): WingDozer {
   const view = new PlayerWingDozerView(resources);
   return new WingDozer(view, resources, gameObjectAction);
 }
@@ -24,7 +27,10 @@ export function PlayerWingDozer(resources: Resources, gameObjectAction: Stream<G
  * @param gameObjectAction ゲームオブジェクトアクション
  * @return 生成結果
  */
-export function EnemyWingDozer(resources: Resources, gameObjectAction: Stream<GameObjectAction>): WingDozer {
+export function EnemyWingDozer(
+  resources: Resources,
+  gameObjectAction: Stream<GameObjectAction>
+): WingDozer {
   const view = new EnemyWingDozerView(resources);
   return new WingDozer(view, resources, gameObjectAction);
 }

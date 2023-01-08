@@ -12,7 +12,10 @@ import { PlayerRaitoView } from "./view/player-raito-view";
  * @param gameObjectAction ゲームオブジェクトアクション
  * @return ライト カットイン
  */
-export function playerRaitoCutIn(resources: Resources, gameObjectAction: Stream<GameObjectAction>): RaitoCutIn {
+export function playerRaitoCutIn(
+  resources: Resources,
+  gameObjectAction: Stream<GameObjectAction>
+): RaitoCutIn {
   const view = new PlayerRaitoView(resources);
   return new RaitoCutIn(view, resources, gameObjectAction);
 }
@@ -24,7 +27,10 @@ export function playerRaitoCutIn(resources: Resources, gameObjectAction: Stream<
  * @param gameObjectAction ゲームオブジェクトアクション
  * @return ライト カットイン
  */
-export function enemyRaitoCutIn(resources: Resources, gameObjectAction: Stream<GameObjectAction>): RaitoCutIn {
+export function enemyRaitoCutIn(
+  resources: Resources,
+  gameObjectAction: Stream<GameObjectAction>
+): RaitoCutIn {
   const view = new EnemyRaitoView(resources);
   return new RaitoCutIn(view, resources, gameObjectAction);
 }

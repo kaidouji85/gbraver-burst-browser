@@ -17,26 +17,30 @@ export class HpNumber {
 
   constructor(resources: Resources) {
     this.#group = new THREE.Group();
-    const hpNumberResource = resources.textures.find(v => v.id === TEXTURE_IDS.HP_NUMBER);
-    const hpNumber = hpNumberResource ? hpNumberResource.texture : new THREE.Texture();
-    this.#meshList = R.times(v => {
+    const hpNumberResource = resources.textures.find(
+      (v) => v.id === TEXTURE_IDS.HP_NUMBER
+    );
+    const hpNumber = hpNumberResource
+      ? hpNumberResource.texture
+      : new THREE.Texture();
+    this.#meshList = R.times((v) => {
       const mesh = new HorizontalAnimationMesh({
         texture: hpNumber,
         maxAnimation: MAX_ANIMATION,
         width: MESH_SIZE,
-        height: MESH_SIZE
+        height: MESH_SIZE,
       });
       mesh.getObject3D().position.x = -v * 32;
       return mesh;
     }, NUMBER_OF_DIGITS);
-    this.#meshList.forEach(v => {
+    this.#meshList.forEach((v) => {
       this.#group.add(v.getObject3D());
     });
   }
 
   /** デストラクタ相当の処理 */
   destructor(): void {
-    this.#meshList.forEach(v => {
+    this.#meshList.forEach((v) => {
       v.destructor();
     });
   }
@@ -47,21 +51,23 @@ export class HpNumber {
    * @param value 設定する値
    */
   setValue(value: number): void {
-    this.#meshList.forEach(v => {
+    this.#meshList.forEach((v) => {
       v.setOpacity(0);
     });
     const correctValue = this.#correctValue(value);
-    const values = String(correctValue).split("").reverse().map(v => Number(v));
-    R.zip(this.#meshList, values).map(v => ({
-      mesh: v[0],
-      value: v[1]
-    })).forEach((v: {
-      mesh: HorizontalAnimationMesh;
-      value: number;
-    }) => {
-      v.mesh.animate(v.value / MAX_ANIMATION);
-      v.mesh.setOpacity(1);
-    });
+    const values = String(correctValue)
+      .split("")
+      .reverse()
+      .map((v) => Number(v));
+    R.zip(this.#meshList, values)
+      .map((v) => ({
+        mesh: v[0],
+        value: v[1],
+      }))
+      .forEach((v: { mesh: HorizontalAnimationMesh; value: number }) => {
+        v.mesh.animate(v.value / MAX_ANIMATION);
+        v.mesh.setOpacity(1);
+      });
   }
 
   /**
@@ -88,5 +94,4 @@ export class HpNumber {
       return Math.floor(value);
     }
   }
-
 }

@@ -3,7 +3,7 @@ import { waitTime } from "../src/js/wait/wait-time";
 import type { DOMStubStory } from "./stub/dom-stub";
 import { domStub } from "./stub/dom-stub";
 export default {
-  title: "dom-fader"
+  title: "dom-fader",
 };
 export const Scene: DOMStubStory = domStub(() => {
   const fader = new DOMFader();

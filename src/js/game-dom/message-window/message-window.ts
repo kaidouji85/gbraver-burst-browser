@@ -33,7 +33,13 @@ const NEXT_MESSAGE_ICON_CLASS = `${ROOT_CLASS}__next-message-icon`;
 const NEXT_MESSAGE_ICON_CLASS_INVISIBLE = `${NEXT_MESSAGE_ICON_CLASS}--invisible`;
 
 /** メッセージウインドウ位置 */
-type Position = "Center" | "Right" | "Left" | "NearBatterySelector" | "NearBurstButton" | "NearPilotButton";
+type Position =
+  | "Center"
+  | "Right"
+  | "Left"
+  | "NearBatterySelector"
+  | "NearBurstButton"
+  | "NearPilotButton";
 
 /** 顔画像表示位置 */
 type FacePosition = "Right" | "Left";
@@ -110,13 +116,19 @@ type Elements = {
  * @return 抽出結果
  */
 export function extractElements(root: HTMLElement, ids: DataIDs): Elements {
-  const messages: HTMLElement = root.querySelector(`[data-id="${ids.messages}"]`) ?? document.createElement("div");
-  const leftFaceGraphic: HTMLElement = root.querySelector(`[data-id="${ids.leftFaceGraphic}"]`) ?? document.createElement("div");
-  const rightFaceGraphic: HTMLElement = root.querySelector(`[data-id="${ids.rightFaceGraphic}"]`) ?? document.createElement("div");
+  const messages: HTMLElement =
+    root.querySelector(`[data-id="${ids.messages}"]`) ??
+    document.createElement("div");
+  const leftFaceGraphic: HTMLElement =
+    root.querySelector(`[data-id="${ids.leftFaceGraphic}"]`) ??
+    document.createElement("div");
+  const rightFaceGraphic: HTMLElement =
+    root.querySelector(`[data-id="${ids.rightFaceGraphic}"]`) ??
+    document.createElement("div");
   return {
     messages,
     leftFaceGraphic,
-    rightFaceGraphic
+    rightFaceGraphic,
   };
 }
 
@@ -155,7 +167,7 @@ export class MessageWindow {
     const ids = {
       messages: domUuid(),
       leftFaceGraphic: domUuid(),
-      rightFaceGraphic: domUuid()
+      rightFaceGraphic: domUuid(),
     };
     this.#root = document.createElement("div");
     this.#position = params?.position ?? "Center";
@@ -163,11 +175,10 @@ export class MessageWindow {
     this.#faceOrientation = params?.faceOrientation ?? "Left";
     this.#root.className = toRootClass(this.#position);
     this.#root.innerHTML = rootInnerHTML(ids);
-    const {
-      messages,
-      leftFaceGraphic,
-      rightFaceGraphic
-    } = extractElements(this.#root, ids);
+    const { messages, leftFaceGraphic, rightFaceGraphic } = extractElements(
+      this.#root,
+      ids
+    );
     this.#messages = messages;
     this.#nextMessageIcon = document.createElement("span");
     this.#nextMessageIcon.className = NEXT_MESSAGE_ICON_CLASS_INVISIBLE;
@@ -193,7 +204,9 @@ export class MessageWindow {
    * @param isVisible trueで表示する
    */
   visible(isVisible: boolean): void {
-    this.#root.className = isVisible ? toRootClass(this.#position) : ROOT_CLASS_INVISIBLE;
+    this.#root.className = isVisible
+      ? toRootClass(this.#position)
+      : ROOT_CLASS_INVISIBLE;
   }
 
   /**
@@ -211,16 +224,19 @@ export class MessageWindow {
     };
 
     this.#messages.innerHTML = "";
-    const paragraphs = values.map(message => createParagraph(message));
-    const lastParagraph: HTMLElement | null | undefined = paragraphs[paragraphs.length - 1];
+    const paragraphs = values.map((message) => createParagraph(message));
+    const lastParagraph: HTMLElement | null | undefined =
+      paragraphs[paragraphs.length - 1];
 
     if (!lastParagraph) {
       return;
     }
 
-    paragraphs.filter(v => v !== lastParagraph).forEach(paragraph => {
-      this.#messages.appendChild(paragraph);
-    });
+    paragraphs
+      .filter((v) => v !== lastParagraph)
+      .forEach((paragraph) => {
+        this.#messages.appendChild(paragraph);
+      });
     lastParagraph.appendChild(this.#nextMessageIcon);
     this.#messages.appendChild(lastParagraph);
   }
@@ -231,13 +247,21 @@ export class MessageWindow {
    * @return アニメーションが完了したら発火するPromise
    */
   async scrollUp(): Promise<void> {
-    await waitFinishAnimation(this.#messages.animate([{
-      transform: "translateY(2vh)"
-    }, {
-      transform: "translateY(0%)"
-    }], {
-      duration: 100
-    }));
+    await waitFinishAnimation(
+      this.#messages.animate(
+        [
+          {
+            transform: "translateY(2vh)",
+          },
+          {
+            transform: "translateY(0%)",
+          },
+        ],
+        {
+          duration: 100,
+        }
+      )
+    );
   }
 
   /**
@@ -266,7 +290,9 @@ export class MessageWindow {
    * @param isNextMessageIconVisible 次メッセージアイコンを表示するか、trueで表示する
    */
   nextMessageIconVisible(isNextMessageIconVisible: boolean): void {
-    this.#nextMessageIcon.className = isNextMessageIconVisible ? NEXT_MESSAGE_ICON_CLASS : NEXT_MESSAGE_ICON_CLASS_INVISIBLE;
+    this.#nextMessageIcon.className = isNextMessageIconVisible
+      ? NEXT_MESSAGE_ICON_CLASS
+      : NEXT_MESSAGE_ICON_CLASS_INVISIBLE;
   }
 
   /**
@@ -289,7 +315,8 @@ export class MessageWindow {
    * @return 取得結果
    */
   #getTargetFaceGraphic(): FaceGraphic {
-    return this.#facePosition === "Left" ? this.#leftFaceGraphic : this.#rightFaceGraphic;
+    return this.#facePosition === "Left"
+      ? this.#leftFaceGraphic
+      : this.#rightFaceGraphic;
   }
-
 }

@@ -12,7 +12,10 @@ import { PlayerDamageIndicatorView } from "./view/player-damage-indicator-view";
  * @param gameObjectAction ゲームオブジェクトアクション
  * @return ダメージインジケータ
  */
-export function playerDamageIndicator(resources: Resources, gameObjectAction: Stream<GameObjectAction>): DamageIndicator {
+export function playerDamageIndicator(
+  resources: Resources,
+  gameObjectAction: Stream<GameObjectAction>
+): DamageIndicator {
   const view = new PlayerDamageIndicatorView(resources);
   return new DamageIndicator(view, gameObjectAction);
 }
@@ -24,7 +27,10 @@ export function playerDamageIndicator(resources: Resources, gameObjectAction: St
  * @param gameObjectAction ゲームオブジェクトアクション
  * @return ダメージインジケータ
  */
-export function enemyDamageIndicator(resources: Resources, gameObjectAction: Stream<GameObjectAction>): DamageIndicator {
+export function enemyDamageIndicator(
+  resources: Resources,
+  gameObjectAction: Stream<GameObjectAction>
+): DamageIndicator {
   const view = new EnemyDamageIndicatorView(resources);
   return new DamageIndicator(view, gameObjectAction);
 }

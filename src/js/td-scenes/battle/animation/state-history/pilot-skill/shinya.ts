@@ -11,7 +11,8 @@ import type { PilotSkillAnimationParamX } from "./animation-param";
  * パイロットスキル シンヤ アニメーションパラメータ
  * @template SKILL パイロットスキル
  */
-export type ShinyaAnimationParamX<SKILL extends PilotSkill> = PilotSkillAnimationParamX<SKILL, ShinyaHUD>;
+export type ShinyaAnimationParamX<SKILL extends PilotSkill> =
+  PilotSkillAnimationParamX<SKILL, ShinyaHUD>;
 
 /**
  * パイロットスキル シンヤ アニメーションパラメータ
@@ -26,9 +27,7 @@ export type ShinyaAnimationParam = ShinyaAnimationParamX<PilotSkill>;
 export function shinyaAnimation(param: ShinyaAnimationParam): Animate {
   if (param.skill.type === "RecoverBatterySkill") {
     const skill: RecoverBatterySkill = param.skill;
-    return shinyaRecoverBattery({ ...param,
-      skill
-    });
+    return shinyaRecoverBattery({ ...param, skill });
   }
 
   return empty();
@@ -40,6 +39,35 @@ export function shinyaAnimation(param: ShinyaAnimationParam): Animate {
  * @param param パラメータ
  * @return アニメーション
  */
-function shinyaRecoverBattery(param: ShinyaAnimationParamX<RecoverBatterySkill>): Animate {
-  return all(param.pilot.cutIn.show(), param.isActivePlayer ? param.invokerSprite.endActive() : param.anotherSprite.endActive(), track(param.tdCamera, param.invokerSprite.getObject3D().position.x, 500), dolly(param.tdCamera, "-40", 500), param.tdObjects.skyBrightness.brightness(0.2, 500), param.tdObjects.illumination.intensity(0.2, 500), param.tdObjects.turnIndicator.invisible()).chain(delay(800)).chain(param.pilot.cutIn.hidden()).chain(delay(200)).chain(all(param.invokerHUD.gauge.battery(param.invokerState.armdozer.battery), param.invokerTD.recoverBattery.popUp(param.skill.recoverBattery))).chain(all(toInitial(param.tdCamera, 500), param.tdObjects.skyBrightness.brightness(1, 500), param.tdObjects.illumination.intensity(1, 500))).chain(delay(200));
+function shinyaRecoverBattery(
+  param: ShinyaAnimationParamX<RecoverBatterySkill>
+): Animate {
+  return all(
+    param.pilot.cutIn.show(),
+    param.isActivePlayer
+      ? param.invokerSprite.endActive()
+      : param.anotherSprite.endActive(),
+    track(param.tdCamera, param.invokerSprite.getObject3D().position.x, 500),
+    dolly(param.tdCamera, "-40", 500),
+    param.tdObjects.skyBrightness.brightness(0.2, 500),
+    param.tdObjects.illumination.intensity(0.2, 500),
+    param.tdObjects.turnIndicator.invisible()
+  )
+    .chain(delay(800))
+    .chain(param.pilot.cutIn.hidden())
+    .chain(delay(200))
+    .chain(
+      all(
+        param.invokerHUD.gauge.battery(param.invokerState.armdozer.battery),
+        param.invokerTD.recoverBattery.popUp(param.skill.recoverBattery)
+      )
+    )
+    .chain(
+      all(
+        toInitial(param.tdCamera, 500),
+        param.tdObjects.skyBrightness.brightness(1, 500),
+        param.tdObjects.illumination.intensity(1, 500)
+      )
+    )
+    .chain(delay(200));
 }

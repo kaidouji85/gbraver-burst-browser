@@ -24,7 +24,7 @@ export class Config implements DOMScene {
 
   /** @override */
   destructor(): void {
-    this.#unsubscriber.forEach(v => {
+    this.#unsubscriber.forEach((v) => {
       v.unsubscribe();
     });
     this.#props.dialog.destructor();
@@ -52,5 +52,4 @@ export class Config implements DOMScene {
   configChangeNotifier(): Stream<GbraverBurstBrowserConfig> {
     return this.#props.configChange;
   }
-
 }

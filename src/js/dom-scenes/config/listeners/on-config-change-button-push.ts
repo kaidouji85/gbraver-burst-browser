@@ -10,7 +10,10 @@ import { parseConfig } from "./parse-config";
  * @param props 画面プロパティ
  * @param action アクション
  */
-export function onConfigChangeButtonPush(props: ConfigProps, action: Readonly<PushDOM>): void {
+export function onConfigChangeButtonPush(
+  props: ConfigProps,
+  action: Readonly<PushDOM>
+): void {
   action.event.preventDefault();
   action.event.stopPropagation();
   props.exclusive.execute(async () => {

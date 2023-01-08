@@ -9,7 +9,12 @@ import type { LightningBarrierModel } from "../model/lightning-barrier-model";
  * @return アニメーション
  */
 export function hidden(model: LightningBarrierModel): Animate {
-  return tween(model, t => t.to({
-    opacity: 0
-  }, 1000));
+  return tween(model, (t) =>
+    t.to(
+      {
+        opacity: 0,
+      },
+      1000
+    )
+  );
 }

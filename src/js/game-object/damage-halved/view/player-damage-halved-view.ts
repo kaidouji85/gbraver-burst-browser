@@ -3,7 +3,11 @@ import * as THREE from "three";
 import { HorizontalAnimationMesh } from "../../../mesh/horizontal-animation";
 import type { Resources } from "../../../resource";
 import { TEXTURE_IDS } from "../../../resource/texture/ids";
-import { ARMDOZER_EFFECT_STANDARD_X, ARMDOZER_EFFECT_STANDARD_Y, ARMDOZER_EFFECT_STANDARD_Z } from "../../armdozer/position";
+import {
+  ARMDOZER_EFFECT_STANDARD_X,
+  ARMDOZER_EFFECT_STANDARD_Y,
+  ARMDOZER_EFFECT_STANDARD_Z,
+} from "../../armdozer/position";
 import type { DamageHalvedModel } from "../model/damage-halved-model";
 import type { DamageHalvedView } from "./damage-halved-view";
 export const MESH_SIZE = 300;
@@ -18,12 +22,14 @@ export class PlayerDamageHalvedView implements DamageHalvedView {
    * @param resources リソース管理オブジェクト
    */
   constructor(resources: Resources) {
-    const playerTurn = resources.textures.find(v => v.id === TEXTURE_IDS.DAMAGE_HALVED)?.texture ?? new THREE.Texture();
+    const playerTurn =
+      resources.textures.find((v) => v.id === TEXTURE_IDS.DAMAGE_HALVED)
+        ?.texture ?? new THREE.Texture();
     this.#mesh = new HorizontalAnimationMesh({
       texture: playerTurn,
       maxAnimation: 1,
       width: MESH_SIZE,
-      height: MESH_SIZE
+      height: MESH_SIZE,
     });
   }
 
@@ -52,5 +58,4 @@ export class PlayerDamageHalvedView implements DamageHalvedView {
   lookAt(camera: THREE.Camera): void {
     this.#mesh.getObject3D().quaternion.copy(camera.quaternion);
   }
-
 }

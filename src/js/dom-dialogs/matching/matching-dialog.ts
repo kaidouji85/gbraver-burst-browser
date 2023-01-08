@@ -28,7 +28,8 @@ type DataIDs = {
  * @return innerHTML
  */
 function rootInnerHTML(ids: DataIDs, resources: Resources): string {
-  const closerPath = resources.paths.find(v => v.id === PathIds.CLOSER)?.path ?? "";
+  const closerPath =
+    resources.paths.find((v) => v.id === PathIds.CLOSER)?.path ?? "";
   return `
     <div class="${ROOT_CLASS}__background"></div>
     <div class="${ROOT_CLASS}__dialog">
@@ -52,9 +53,12 @@ type Elements = {
  */
 function extractElements(root: HTMLElement, ids: DataIDs): Elements {
   const closerElement = root.querySelector(`[data-id="${ids.closer}"]`);
-  const closer = closerElement instanceof HTMLImageElement ? closerElement : document.createElement("img");
+  const closer =
+    closerElement instanceof HTMLImageElement
+      ? closerElement
+      : document.createElement("img");
   return {
-    closer
+    closer,
   };
 }
 
@@ -76,27 +80,33 @@ export class MatchingDialog implements DOMDialog {
   constructor(resources: Resources) {
     const ids = {
       closer: domUuid(),
-      cancel: domUuid()
+      cancel: domUuid(),
     };
     this.#root = document.createElement("div");
     this.#root.className = ROOT_CLASS;
     this.#root.innerHTML = rootInnerHTML(ids, resources);
     const elements = extractElements(this.#root, ids);
     this.#closer = elements.closer;
-    this.#changeValue = resources.sounds.find(v => v.id === SOUND_IDS.CHANGE_VALUE)?.sound ?? new Howl({src: ""});
-    this.#pushButton = resources.sounds.find(v => v.id === SOUND_IDS.PUSH_BUTTON)?.sound ?? new Howl({src: ""});
+    this.#changeValue =
+      resources.sounds.find((v) => v.id === SOUND_IDS.CHANGE_VALUE)?.sound ??
+      new Howl({ src: "" });
+    this.#pushButton =
+      resources.sounds.find((v) => v.id === SOUND_IDS.PUSH_BUTTON)?.sound ??
+      new Howl({ src: "" });
     this.#exclusive = new Exclusive();
     this.#matchingCanceled = createStreamSource();
-    this.#unsubscribers = [pushDOMStream(this.#closer).subscribe(action => {
-      this.#onCloserPush(action);
-    })];
+    this.#unsubscribers = [
+      pushDOMStream(this.#closer).subscribe((action) => {
+        this.#onCloserPush(action);
+      }),
+    ];
   }
 
   /**
    * デストラクタ相当の処理
    */
   destructor(): void {
-    this.#unsubscribers.forEach(v => {
+    this.#unsubscribers.forEach((v) => {
       v.unsubscribe();
     });
   }
@@ -133,5 +143,4 @@ export class MatchingDialog implements DOMDialog {
       this.#matchingCanceled.next();
     });
   }
-
 }

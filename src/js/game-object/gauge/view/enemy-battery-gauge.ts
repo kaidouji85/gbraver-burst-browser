@@ -7,5 +7,4 @@ export class EnemyBatteryGauge extends PlayerBatteryGauge {
     super(resources);
     this.getObject3D().scale.x *= -1;
   }
-
 }

@@ -9,6 +9,6 @@ export function createInitialValue(): TurnIndicatorModel {
   return {
     isPlayerTurn: true,
     opacity: 0,
-    animation: 0
+    animation: 0,
   };
 }

@@ -3,7 +3,10 @@ import { waitTime } from "../../wait/wait-time";
 import { tutorialSelectorConnector } from "../action-connector/tutorial-selector-connection";
 import { MAX_LOADING_TIME } from "../dom-scene-binder/max-loading-time";
 import type { GameProps } from "../game-props";
-import { TutorialStages, TutorialStagesInDevelopment } from "../tutorial-stages";
+import {
+  TutorialStages,
+  TutorialStagesInDevelopment,
+} from "../tutorial-stages";
 
 /**
  * チュートリアルステージセレクタを開始するヘルパー関数
@@ -13,10 +16,12 @@ import { TutorialStages, TutorialStagesInDevelopment } from "../tutorial-stages"
  */
 export async function startTutorialSelector(props: Readonly<GameProps>) {
   await props.fader.fadeOut();
-  const tutorialStages = props.canPlayTutorialInDevelopment ? TutorialStagesInDevelopment : TutorialStages;
-  const stages = tutorialStages.map(stage => ({
+  const tutorialStages = props.canPlayTutorialInDevelopment
+    ? TutorialStagesInDevelopment
+    : TutorialStages;
+  const stages = tutorialStages.map((stage) => ({
     id: stage.id,
-    title: stage.title.join("")
+    title: stage.title.join(""),
   }));
   const scene = new TutorialSelector(props.resources, stages);
   props.domSceneBinder.bind(scene, tutorialSelectorConnector);

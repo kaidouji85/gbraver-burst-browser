@@ -27,5 +27,4 @@ export class EnemyWingDozerCutInView extends PlayerWingDozerCutInView {
     const target = this.getObject3D();
     target.scale.x *= -1;
   }
-
 }

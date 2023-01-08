@@ -35,7 +35,7 @@ class HorizontalArmdozerAnimation implements ArmdozerAnimation {
       texture: param.texture,
       maxAnimation: param.maxAnimation,
       width: param.width,
-      height: param.height
+      height: param.height,
     });
   }
 
@@ -58,10 +58,8 @@ class HorizontalArmdozerAnimation implements ArmdozerAnimation {
   getObject3D(): THREE.Object3D {
     return this.#animation.getObject3D();
   }
-
 }
 /** createHorizontalAnimationのパラメータ */
-
 
 type CreatorParam = ConstructorParam;
 
@@ -70,7 +68,9 @@ type CreatorParam = ConstructorParam;
  * @param param パラメータ
  * @return 生成結果
  */
-export function createHorizontalAnimation(param: CreatorParam): ArmdozerAnimation {
+export function createHorizontalAnimation(
+  param: CreatorParam
+): ArmdozerAnimation {
   return new HorizontalArmdozerAnimation(param);
 }
 
@@ -98,12 +98,16 @@ type ParamWhenCreateFromResource = {
  * @param param パラメータ
  * @return 生成結果
  */
-export function createHorizontalAnimationFromResources(param: ParamWhenCreateFromResource): ArmdozerAnimation {
-  const texture = param.resources.textures.find(v => v.id === param.id)?.texture ?? new THREE.Texture();
+export function createHorizontalAnimationFromResources(
+  param: ParamWhenCreateFromResource
+): ArmdozerAnimation {
+  const texture =
+    param.resources.textures.find((v) => v.id === param.id)?.texture ??
+    new THREE.Texture();
   return new HorizontalArmdozerAnimation({
     texture,
     maxAnimation: param.maxAnimation,
     width: param.width,
-    height: param.height
+    height: param.height,
   });
 }

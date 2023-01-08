@@ -10,7 +10,8 @@ export class RecoverBatterySounds {
   recoverBattery: Howl;
 
   constructor(resources: Resources) {
-    this.recoverBattery = resources.sounds.find(v => v.id === SOUND_IDS.BATTERY_RECOVER)?.sound ?? new Howl({src: ""});
+    this.recoverBattery =
+      resources.sounds.find((v) => v.id === SOUND_IDS.BATTERY_RECOVER)?.sound ??
+      new Howl({ src: "" });
   }
-
 }

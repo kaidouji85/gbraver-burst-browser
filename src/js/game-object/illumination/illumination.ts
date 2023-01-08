@@ -25,7 +25,7 @@ export class Illumination {
     this.#model = createInitialValue();
     this.#view = new IlluminationView();
     this.#view.engage(this.#model);
-    this.#unsubscriber = gameObjectAction.subscribe(action => {
+    this.#unsubscriber = gameObjectAction.subscribe((action) => {
       if (action.type === "Update") {
         this.#onUpdate();
       }
@@ -66,5 +66,4 @@ export class Illumination {
   #onUpdate(): void {
     this.#view.engage(this.#model);
   }
-
 }

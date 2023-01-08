@@ -18,7 +18,7 @@ export async function onTutorialStart(props: GameProps): Promise<void> {
   props.inProgress = {
     type: "Tutorial",
     subFlow: {
-      type: "TutorialStageSelect"
-    }
+      type: "TutorialStageSelect",
+    },
   };
 }

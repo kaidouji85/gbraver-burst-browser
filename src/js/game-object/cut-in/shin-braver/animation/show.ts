@@ -12,23 +12,61 @@ import type { ShinBraverCutInModel } from "../model/shin-braver-cutin-model";
  * @return アニメーション
  */
 export function show(model: ShinBraverCutInModel): Animate {
-  return all(process(() => {
-    model.animation.type = "CUT_IN_UP";
-    model.animation.frame = 0;
-  }).chain(tween(model.animation, t => t.to({
-    frame: 1
-  }, 200))).chain(delay(500)).chain(process(() => {
-    model.animation.type = "CUT_IN_DOWN";
-    model.animation.frame = 0;
-  })).chain(tween(model.animation, t => t.to({
-    frame: 1
-  }, 200))), process(() => {
-    model.opacity = 0;
-  }).chain(tween(model, t => t.to({
-    opacity: 1
-  }, 600))), process(() => {
-    model.scale = 0.9;
-  }).chain(tween(model, t => t.to({
-    scale: 1
-  }, 300))));
+  return all(
+    process(() => {
+      model.animation.type = "CUT_IN_UP";
+      model.animation.frame = 0;
+    })
+      .chain(
+        tween(model.animation, (t) =>
+          t.to(
+            {
+              frame: 1,
+            },
+            200
+          )
+        )
+      )
+      .chain(delay(500))
+      .chain(
+        process(() => {
+          model.animation.type = "CUT_IN_DOWN";
+          model.animation.frame = 0;
+        })
+      )
+      .chain(
+        tween(model.animation, (t) =>
+          t.to(
+            {
+              frame: 1,
+            },
+            200
+          )
+        )
+      ),
+    process(() => {
+      model.opacity = 0;
+    }).chain(
+      tween(model, (t) =>
+        t.to(
+          {
+            opacity: 1,
+          },
+          600
+        )
+      )
+    ),
+    process(() => {
+      model.scale = 0.9;
+    }).chain(
+      tween(model, (t) =>
+        t.to(
+          {
+            scale: 1,
+          },
+          300
+        )
+      )
+    )
+  );
 }

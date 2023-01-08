@@ -89,13 +89,11 @@ class RxjsStream<T> implements Stream<T> {
   getRxjsObservable(): Observable<T> {
     return this._observable;
   }
-
 }
 /**
  * RXJSストリームソース
  * @template T データ型
  */
-
 
 class RxjsStreamSource<T> implements StreamSource<T> {
   _subject: Subject<T>;
@@ -130,7 +128,6 @@ class RxjsStreamSource<T> implements StreamSource<T> {
   getRxjsObservable(): Observable<T> {
     return this._subject;
   }
-
 }
 /**
  * Streamを生成する
@@ -139,7 +136,6 @@ class RxjsStreamSource<T> implements StreamSource<T> {
  * @param observable RXJS Observable
  * @return 生成結果
  */
-
 
 export function createStream<T>(observable: Observable<T>): Stream<T> {
   return new RxjsStream<T>(observable);
@@ -155,8 +151,7 @@ function createUnSubscriber(subscription: Subscription): Unsubscriber {
   return {
     unsubscribe(): void {
       subscription.unsubscribe();
-    }
-
+    },
   };
 }
 

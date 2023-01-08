@@ -4,6 +4,6 @@ export function createInitialValue(): BurstButtonModel {
     opacity: 0,
     disabled: true,
     scale: 1,
-    canBurst: false
+    canBurst: false,
   };
 }

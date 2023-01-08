@@ -22,13 +22,17 @@ export class PlayerLightningView implements LightningView {
   #mesh: HorizontalAnimationMesh;
 
   constructor(resources: Resources) {
-    const textureResource = resources.textures.find(v => v.id === TEXTURE_IDS.HITMARK_LIGHTNING_RING);
-    const texture = textureResource ? textureResource.texture : new THREE.Texture();
+    const textureResource = resources.textures.find(
+      (v) => v.id === TEXTURE_IDS.HITMARK_LIGHTNING_RING
+    );
+    const texture = textureResource
+      ? textureResource.texture
+      : new THREE.Texture();
     this.#mesh = new HorizontalAnimationMesh({
       texture: texture,
       maxAnimation: MAX_ANIMATION,
       width: WIDTH,
-      height: HEIGHT
+      height: HEIGHT,
     });
   }
 
@@ -60,5 +64,4 @@ export class PlayerLightningView implements LightningView {
   getObject3D(): THREE.Object3D {
     return this.#mesh.getObject3D();
   }
-
 }

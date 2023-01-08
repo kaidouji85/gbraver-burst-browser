@@ -12,7 +12,10 @@ import { PlayerBatteryCorrectView } from "./view/player-battery-correct-view";
  * @param gameObjectAction ゲームオブジェクトアクション
  * @return バッテリー補正
  */
-export function playerBatteryCorrect(resources: Resources, gameObjectAction: Stream<GameObjectAction>): BatteryCorrect {
+export function playerBatteryCorrect(
+  resources: Resources,
+  gameObjectAction: Stream<GameObjectAction>
+): BatteryCorrect {
   const view = new PlayerBatteryCorrectView(resources);
   return new BatteryCorrect(view, gameObjectAction);
 }
@@ -24,7 +27,10 @@ export function playerBatteryCorrect(resources: Resources, gameObjectAction: Str
  * @param gameObjectAction ゲームオブジェクトアクション
  * @return バッテリー補正
  */
-export function enemyBatteryCorrect(resources: Resources, gameObjectAction: Stream<GameObjectAction>): BatteryCorrect {
+export function enemyBatteryCorrect(
+  resources: Resources,
+  gameObjectAction: Stream<GameObjectAction>
+): BatteryCorrect {
   const view = new EnemyBatteryCorrectView(resources);
   return new BatteryCorrect(view, gameObjectAction);
 }

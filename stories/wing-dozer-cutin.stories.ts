@@ -1,21 +1,25 @@
 import { Animate } from "../src/js/animation/animate";
 import { delay } from "../src/js/animation/delay";
-import { enemyWingDozerCutIn, playerWingDozerCutIn } from "../src/js/game-object/cut-in/wing-dozer";
+import {
+  enemyWingDozerCutIn,
+  playerWingDozerCutIn,
+} from "../src/js/game-object/cut-in/wing-dozer";
 import { WingDozerCutIn } from "../src/js/game-object/cut-in/wing-dozer/wing-dozer-cutin";
 import { HUDGameObjectStub } from "./stub/hud-game-object-stub";
 export default {
-  title: "wing-dozer-cutin"
+  title: "wing-dozer-cutin",
 };
 
 function cutInAnimation(cutIn: WingDozerCutIn): Animate {
-  return cutIn.show().chain(delay(2000)).chain(cutIn.hidden()).chain(delay(2000));
+  return cutIn
+    .show()
+    .chain(delay(2000))
+    .chain(cutIn.hidden())
+    .chain(delay(2000));
 }
 
 export const Player = (): HTMLElement => {
-  const stub = new HUDGameObjectStub(({
-    resources,
-    gameObjectAction
-  }) => {
+  const stub = new HUDGameObjectStub(({ resources, gameObjectAction }) => {
     const cutIn = playerWingDozerCutIn(resources, gameObjectAction);
     cutInAnimation(cutIn).loop();
     return [cutIn.getObject3D()];
@@ -24,10 +28,7 @@ export const Player = (): HTMLElement => {
   return stub.domElement();
 };
 export const Enemy = (): HTMLElement => {
-  const stub = new HUDGameObjectStub(({
-    resources,
-    gameObjectAction
-  }) => {
+  const stub = new HUDGameObjectStub(({ resources, gameObjectAction }) => {
     const cutIn = enemyWingDozerCutIn(resources, gameObjectAction);
     cutInAnimation(cutIn).loop();
     return [cutIn.getObject3D()];

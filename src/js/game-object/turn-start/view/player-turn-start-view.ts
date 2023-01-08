@@ -14,13 +14,17 @@ export class PlayerTurnStartView implements TurnStartView {
   #mesh: HorizontalAnimationMesh;
 
   constructor(resources: Resources) {
-    const playerTurnResource = resources.textures.find(v => v.id === TEXTURE_IDS.PLAYER_TURN);
-    const playerTurn = playerTurnResource ? playerTurnResource.texture : new THREE.Texture();
+    const playerTurnResource = resources.textures.find(
+      (v) => v.id === TEXTURE_IDS.PLAYER_TURN
+    );
+    const playerTurn = playerTurnResource
+      ? playerTurnResource.texture
+      : new THREE.Texture();
     this.#mesh = new HorizontalAnimationMesh({
       texture: playerTurn,
       maxAnimation: 1,
       width: MESH_SIZE,
-      height: MESH_SIZE
+      height: MESH_SIZE,
     });
   }
 
@@ -46,14 +50,22 @@ export class PlayerTurnStartView implements TurnStartView {
    */
   engage(model: TurnStartModel, preRender: PreRender): void {
     const target = this.#mesh.getObject3D();
-    const devicePerScale = HUDCutInScale(preRender.rendererDOM, preRender.safeAreaInset);
-    target.position.x = preRender.rendererDOM.clientWidth / 2 - preRender.safeAreaInset.right + (model.position.x - MESH_SIZE / 2) * devicePerScale;
-    target.position.y = -preRender.rendererDOM.clientHeight / 2 + preRender.safeAreaInset.bottom + (model.position.y + 60) * devicePerScale;
+    const devicePerScale = HUDCutInScale(
+      preRender.rendererDOM,
+      preRender.safeAreaInset
+    );
+    target.position.x =
+      preRender.rendererDOM.clientWidth / 2 -
+      preRender.safeAreaInset.right +
+      (model.position.x - MESH_SIZE / 2) * devicePerScale;
+    target.position.y =
+      -preRender.rendererDOM.clientHeight / 2 +
+      preRender.safeAreaInset.bottom +
+      (model.position.y + 60) * devicePerScale;
     target.position.z = 0;
     target.scale.x = model.scale * devicePerScale;
     target.scale.y = model.scale * devicePerScale;
     this.#mesh.setOpacity(model.opacity);
     this.#mesh.getObject3D().quaternion.copy(preRender.camera.quaternion);
   }
-
 }

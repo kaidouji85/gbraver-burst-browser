@@ -26,7 +26,7 @@ export class DifficultyDialog implements DOMDialog {
 
   /** @override */
   destructor(): void {
-    this.#unsubscribers.forEach(v => {
+    this.#unsubscribers.forEach((v) => {
       v.unsubscribe();
     });
   }
@@ -53,5 +53,4 @@ export class DifficultyDialog implements DOMDialog {
   closeDialogNotifier(): Stream<void> {
     return this.#props.closeDialog;
   }
-
 }

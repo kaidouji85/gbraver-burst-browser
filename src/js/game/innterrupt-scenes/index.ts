@@ -30,5 +30,4 @@ export class InterruptScenes {
   getRootHTMLElement(): HTMLElement {
     return this.#root;
   }
-
 }

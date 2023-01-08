@@ -7,7 +7,10 @@ import type { DifficultyDialogProps } from "../props";
  * @param props ダイアログプロパティ
  * @param action アクション
  */
-export function onBackGroundPush(props: DifficultyDialogProps, action: PushDOM): void {
+export function onBackGroundPush(
+  props: DifficultyDialogProps,
+  action: PushDOM
+): void {
   action.event.preventDefault();
   action.event.stopPropagation();
   props.exclusive.execute(async () => {

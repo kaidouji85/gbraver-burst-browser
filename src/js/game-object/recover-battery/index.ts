@@ -12,12 +12,15 @@ import { PlayerRecoverBatteryView } from "./view/player-recover-battery-view";
  * @param gameObjectAction ゲームオブジェクトアクション
  * @return バッテリー回復
  */
-export function playerRecoverBattery(resources: Resources, gameObjectAction: Stream<GameObjectAction>): RecoverBattery {
+export function playerRecoverBattery(
+  resources: Resources,
+  gameObjectAction: Stream<GameObjectAction>
+): RecoverBattery {
   const view = new PlayerRecoverBatteryView(resources);
   return new RecoverBattery({
     resources: resources,
     gameObjectAction: gameObjectAction,
-    view: view
+    view: view,
   });
 }
 
@@ -28,11 +31,14 @@ export function playerRecoverBattery(resources: Resources, gameObjectAction: Str
  * @param gameObjectAction ゲームオブジェクトアクション
  * @return バッテリー回復
  */
-export function enemyRecoverBattery(resources: Resources, gameObjectAction: Stream<GameObjectAction>): RecoverBattery {
+export function enemyRecoverBattery(
+  resources: Resources,
+  gameObjectAction: Stream<GameObjectAction>
+): RecoverBattery {
   const view = new EnemyRecoverBatteryView(resources);
   return new RecoverBattery({
     resources: resources,
     gameObjectAction: gameObjectAction,
-    view: view
+    view: view,
   });
 }

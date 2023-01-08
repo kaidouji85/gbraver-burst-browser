@@ -5,7 +5,7 @@
  * @return 待機結果
  */
 export function waitElementLoaded(element: HTMLElement): Promise<void> {
-  return new Promise(resolve => {
+  return new Promise((resolve) => {
     element.addEventListener("load", () => {
       resolve();
     });

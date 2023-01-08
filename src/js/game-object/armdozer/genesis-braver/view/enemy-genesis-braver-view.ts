@@ -18,5 +18,4 @@ export class EnemyGenesisBraverView extends PlayerGenesisBraverView {
     this.getObject3D().position.x *= -1;
     this.getObject3D().scale.x = -1;
   }
-
 }

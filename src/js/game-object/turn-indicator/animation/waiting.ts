@@ -1,4 +1,4 @@
-import {Group} from "@tweenjs/tween.js";
+import { Group } from "@tweenjs/tween.js";
 
 import { Animate } from "../../../animation/animate";
 import { delay } from "../../../animation/delay";
@@ -16,7 +16,19 @@ import type { TurnIndicatorModel } from "../model/turn-indicator-model";
 export function waiting(model: TurnIndicatorModel, group: Group): Animate {
   return process(() => {
     model.animation = 0;
-  }, group).chain(tween(model, t => t.to({
-    animation: 1
-  }, 500), group)).chain(delay(150, group));
+  }, group)
+    .chain(
+      tween(
+        model,
+        (t) =>
+          t.to(
+            {
+              animation: 1,
+            },
+            500
+          ),
+        group
+      )
+    )
+    .chain(delay(150, group));
 }

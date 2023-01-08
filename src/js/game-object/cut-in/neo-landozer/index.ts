@@ -12,7 +12,10 @@ import { PlayerNeoLandozerCutInView } from "./view/player-neo-landozer-cutin-vie
  * @param gameObjectAction ゲームオブジェクトアクション
  * @return 生成結果
  */
-export function playerNeoLandozerCutIn(resources: Resources, gameObjectAction: Stream<GameObjectAction>): NeoLandozerCutIn {
+export function playerNeoLandozerCutIn(
+  resources: Resources,
+  gameObjectAction: Stream<GameObjectAction>
+): NeoLandozerCutIn {
   const view = new PlayerNeoLandozerCutInView(resources);
   return new NeoLandozerCutIn(view, gameObjectAction);
 }
@@ -24,7 +27,10 @@ export function playerNeoLandozerCutIn(resources: Resources, gameObjectAction: S
  * @param gameObjectAction ゲームオブジェクトアクション
  * @return 生成結果
  */
-export function enemyNeoLandozerCutIn(resources: Resources, gameObjectAction: Stream<GameObjectAction>): NeoLandozerCutIn {
+export function enemyNeoLandozerCutIn(
+  resources: Resources,
+  gameObjectAction: Stream<GameObjectAction>
+): NeoLandozerCutIn {
   const view = new EnemyNeoLandozerCutInView(resources);
   return new NeoLandozerCutIn(view, gameObjectAction);
 }

@@ -9,8 +9,13 @@ import type { WingDozerCutInModel } from "../model/wing-dozer-cutin-model";
  * @return アニメーション
  */
 export function hidden(model: WingDozerCutInModel): Animate {
-  return tween(model, t => t.to({
-    opacity: 0,
-    scale: 1.1
-  }, 300));
+  return tween(model, (t) =>
+    t.to(
+      {
+        opacity: 0,
+        scale: 1.1,
+      },
+      300
+    )
+  );
 }

@@ -29,12 +29,15 @@ export class EnemyGaugeView implements GaugeView {
   constructor(resources: Resources) {
     this.#group = new THREE.Group();
     this.#group.scale.set(BASE_SCALE, BASE_SCALE, BASE_SCALE);
-    const gaugeBase = resources.canvasImages.find(v => v.id === CANVAS_IMAGE_IDS.ENEMY_GAUGE_BASE)?.image ?? new Image();
+    const gaugeBase =
+      resources.canvasImages.find(
+        (v) => v.id === CANVAS_IMAGE_IDS.ENEMY_GAUGE_BASE
+      )?.image ?? new Image();
     this.#base = new SimpleImageMesh({
       canvasSize: 1024,
       meshSize: 1024,
       image: gaugeBase,
-      imageWidth: 549
+      imageWidth: 549,
     });
     this.#group.add(this.#base.getObject3D());
     this.#hpBar = new EnemyHpBar(resources);
@@ -67,14 +70,24 @@ export class EnemyGaugeView implements GaugeView {
    * @param preRender プリレンダー
    */
   engage(model: GaugeModel, preRender: PreRender): void {
-    const devicePerScale = HUDUIScale(preRender.rendererDOM, preRender.safeAreaInset);
+    const devicePerScale = HUDUIScale(
+      preRender.rendererDOM,
+      preRender.safeAreaInset
+    );
     this.#hpBar.setValue(model.hp / model.maxHp);
     this.#hpNumber.setValue(model.hp);
     this.#maxHpNumber.setValue(model.maxHp);
     this.#batteryGauge.engage(model.batteryList);
-    this.#group.scale.set(BASE_SCALE * devicePerScale, BASE_SCALE * devicePerScale, BASE_SCALE * devicePerScale);
-    const minY = preRender.rendererDOM.clientHeight / 2 - MIN_PADDING_TOP * devicePerScale;
-    const safeAreaY = preRender.rendererDOM.clientHeight / 2 - preRender.safeAreaInset.top * devicePerScale;
+    this.#group.scale.set(
+      BASE_SCALE * devicePerScale,
+      BASE_SCALE * devicePerScale,
+      BASE_SCALE * devicePerScale
+    );
+    const minY =
+      preRender.rendererDOM.clientHeight / 2 - MIN_PADDING_TOP * devicePerScale;
+    const safeAreaY =
+      preRender.rendererDOM.clientHeight / 2 -
+      preRender.safeAreaInset.top * devicePerScale;
     this.#group.position.x = model.tracking.x;
     this.#group.position.y = Math.min(minY, safeAreaY, model.tracking.y);
     this.#group.position.z = 0;
@@ -85,5 +98,4 @@ export class EnemyGaugeView implements GaugeView {
   getObject3D(): THREE.Object3D {
     return this.#group;
   }
-
 }

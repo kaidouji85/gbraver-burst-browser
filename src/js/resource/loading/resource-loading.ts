@@ -68,12 +68,24 @@ type Loadings = {
  */
 function createLoadings(params: ResourceLoadingParams): Loadings {
   return {
-    preFetchPaths: PathConfigs.filter(v => params.preFetchPaths.includes(v.id)).map(v => fetch(v.path(params.resourceRoot))),
-    gltfLoadings: params.gltfConfigs.map(v => loadGlTF(params.resourceRoot, v)),
-    textureLoadings: params.textureConfigs.map(v => loadTexture(params.resourceRoot, v)),
-    cubeTextureLoadings: params.cubeTextureConfigs.map(v => loadCubeTexture(params.resourceRoot, v)),
-    canvasImageLoadings: params.canvasImageConfigs.map(v => loadCanvasImage(params.resourceRoot, v)),
-    soundLoadings: params.soundConfigs.map(v => loadSound(params.resourceRoot, v))
+    preFetchPaths: PathConfigs.filter((v) =>
+      params.preFetchPaths.includes(v.id)
+    ).map((v) => fetch(v.path(params.resourceRoot))),
+    gltfLoadings: params.gltfConfigs.map((v) =>
+      loadGlTF(params.resourceRoot, v)
+    ),
+    textureLoadings: params.textureConfigs.map((v) =>
+      loadTexture(params.resourceRoot, v)
+    ),
+    cubeTextureLoadings: params.cubeTextureConfigs.map((v) =>
+      loadCubeTexture(params.resourceRoot, v)
+    ),
+    canvasImageLoadings: params.canvasImageConfigs.map((v) =>
+      loadCanvasImage(params.resourceRoot, v)
+    ),
+    soundLoadings: params.soundConfigs.map((v) =>
+      loadSound(params.resourceRoot, v)
+    ),
   };
 }
 
@@ -84,15 +96,22 @@ function createLoadings(params: ResourceLoadingParams): Loadings {
  */
 function createLoadingActions(loadings: Loadings): Stream<LoadingActions> {
   const loadingActions = createStreamSource<LoadingActions>();
-  const allLoadings = [...loadings.preFetchPaths, ...loadings.gltfLoadings, ...loadings.textureLoadings, ...loadings.cubeTextureLoadings, ...loadings.canvasImageLoadings, ...loadings.soundLoadings];
+  const allLoadings = [
+    ...loadings.preFetchPaths,
+    ...loadings.gltfLoadings,
+    ...loadings.textureLoadings,
+    ...loadings.cubeTextureLoadings,
+    ...loadings.canvasImageLoadings,
+    ...loadings.soundLoadings,
+  ];
   let completedLoadingCounts = 0;
-  allLoadings.forEach(loading => {
+  allLoadings.forEach((loading) => {
     loading.then(() => {
       completedLoadingCounts++;
       const completedRate = completedLoadingCounts / allLoadings.length;
       loadingActions.next({
         type: "LoadingProgress",
-        completedRate
+        completedRate,
       });
     });
   });
@@ -105,8 +124,18 @@ function createLoadingActions(loadings: Loadings): Stream<LoadingActions> {
  * @param resourceRoot リソースルート
  * @return 生成結果
  */
-async function createResources(loading: Loadings, resourceRoot: ResourceRoot): Promise<Resources> {
-  const [gltfs, textures, cubeTextures, canvasImages, sounds] = await Promise.all([Promise.all(loading.gltfLoadings), Promise.all(loading.textureLoadings), Promise.all(loading.cubeTextureLoadings), Promise.all(loading.canvasImageLoadings), Promise.all(loading.soundLoadings)]);
+async function createResources(
+  loading: Loadings,
+  resourceRoot: ResourceRoot
+): Promise<Resources> {
+  const [gltfs, textures, cubeTextures, canvasImages, sounds] =
+    await Promise.all([
+      Promise.all(loading.gltfLoadings),
+      Promise.all(loading.textureLoadings),
+      Promise.all(loading.cubeTextureLoadings),
+      Promise.all(loading.canvasImageLoadings),
+      Promise.all(loading.soundLoadings),
+    ]);
   const paths = getAllPaths(resourceRoot);
   return {
     rootPath: resourceRoot,
@@ -115,7 +144,7 @@ async function createResources(loading: Loadings, resourceRoot: ResourceRoot): P
     cubeTextures,
     canvasImages,
     sounds,
-    paths
+    paths,
   };
 }
 
@@ -133,10 +162,12 @@ export type ResourceLoading = {
  * @param params 読み込みパラメータ
  * @return リソース読み込みオブジェクト
  */
-export function resourceLoading(params: ResourceLoadingParams): ResourceLoading {
+export function resourceLoading(
+  params: ResourceLoadingParams
+): ResourceLoading {
   const loadings = createLoadings(params);
   return {
     loading: createLoadingActions(loadings),
-    resources: createResources(loadings, params.resourceRoot)
+    resources: createResources(loadings, params.resourceRoot),
   };
 }

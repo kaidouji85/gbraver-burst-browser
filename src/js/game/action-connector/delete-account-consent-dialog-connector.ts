@@ -5,12 +5,18 @@ import type { DomDialogActionConnector } from "../dom-dialog-binder/dom-dialog-a
 type Connector = DomDialogActionConnector<DeleteAccountConsentDialog>;
 
 /** アカウント削除同意ダイアログとゲームアクションを関連付ける */
-export const deleteAccountConsentDialogConnector: Connector = (dialog, gameAction) => [dialog.deleteAccountNotifier().subscribe(() => {
-  gameAction.next({
-    type: "DeleteAccount"
-  });
-}), dialog.closeDialogNotifier().subscribe(() => {
-  gameAction.next({
-    type: "CancelAccountDeletion"
-  });
-})];
+export const deleteAccountConsentDialogConnector: Connector = (
+  dialog,
+  gameAction
+) => [
+  dialog.deleteAccountNotifier().subscribe(() => {
+    gameAction.next({
+      type: "DeleteAccount",
+    });
+  }),
+  dialog.closeDialogNotifier().subscribe(() => {
+    gameAction.next({
+      type: "CancelAccountDeletion",
+    });
+  }),
+];

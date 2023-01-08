@@ -22,7 +22,7 @@ export class PlainHUDCamera {
   constructor(resize: Stream<Resize>) {
     this.#camera = createHUDCamera();
     this.#camera.position.z = HUD_CAMERA_ZINDEX;
-    this.#unsubscriber = resize.subscribe(action => {
+    this.#unsubscriber = resize.subscribe((action) => {
       this.#resize(action);
     });
   }
@@ -51,5 +51,4 @@ export class PlainHUDCamera {
   #resize(action: Resize): void {
     onResizeOrthographicCamera(this.#camera, action.width, action.height);
   }
-
 }

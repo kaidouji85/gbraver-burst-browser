@@ -12,7 +12,10 @@ import { PlayerPowerUpView } from "./view/player-power-up-view";
  * @param gameObjectAction ゲームオブジェクトアクション
  * @return 生成結果
  */
-export function playerPowerUp(resources: Resources, gameObjectAction: Stream<GameObjectAction>): PowerUp {
+export function playerPowerUp(
+  resources: Resources,
+  gameObjectAction: Stream<GameObjectAction>
+): PowerUp {
   const view = new PlayerPowerUpView(resources);
   return new PowerUp(view, resources, gameObjectAction);
 }
@@ -24,7 +27,10 @@ export function playerPowerUp(resources: Resources, gameObjectAction: Stream<Gam
  * @param gameObjectAction ゲームオブジェクトアクション
  * @return 生成結果
  */
-export function enemyPowerUp(resources: Resources, gameObjectAction: Stream<GameObjectAction>): PowerUp {
+export function enemyPowerUp(
+  resources: Resources,
+  gameObjectAction: Stream<GameObjectAction>
+): PowerUp {
   const view = new EnemyPowerUpView(resources);
   return new PowerUp(view, resources, gameObjectAction);
 }

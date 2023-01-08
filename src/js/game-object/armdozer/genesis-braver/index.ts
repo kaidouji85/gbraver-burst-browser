@@ -11,7 +11,10 @@ import { PlayerGenesisBraverView } from "./view/player-genesis-braver-view";
  * @param gameObjectAction ゲームオブジェクトアクション
  * @return 生成結果
  */
-export function PlayerGenesisBraver(resources: Resources, gameObjectAction: Stream<GameObjectAction>): GenesisBraver {
+export function PlayerGenesisBraver(
+  resources: Resources,
+  gameObjectAction: Stream<GameObjectAction>
+): GenesisBraver {
   const view = new PlayerGenesisBraverView(resources);
   return new GenesisBraver(view, resources, gameObjectAction);
 }
@@ -22,7 +25,10 @@ export function PlayerGenesisBraver(resources: Resources, gameObjectAction: Stre
  * @param gameObjectAction ゲームオブジェクトアクション
  * @return 生成結果
  */
-export function EnemyGenesisBraver(resources: Resources, gameObjectAction: Stream<GameObjectAction>): GenesisBraver {
+export function EnemyGenesisBraver(
+  resources: Resources,
+  gameObjectAction: Stream<GameObjectAction>
+): GenesisBraver {
   const view = new EnemyGenesisBraverView(resources);
   return new GenesisBraver(view, resources, gameObjectAction);
 }

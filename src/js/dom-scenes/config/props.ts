@@ -70,7 +70,10 @@ export type ConfigProps = {
  * @param config ブラウザ設定
  * @return 生成した設定画面プロパティ
  */
-export function createConfigProps(resources: Resources, config: GbraverBurstBrowserConfig): ConfigProps {
+export function createConfigProps(
+  resources: Resources,
+  config: GbraverBurstBrowserConfig
+): ConfigProps {
   const ids = {
     battleAnimationTimeScaleSelector: domUuid(),
     webGLPixelRatioSelector: domUuid(),
@@ -79,7 +82,7 @@ export function createConfigProps(resources: Resources, config: GbraverBurstBrow
     seVolumeSelector: domUuid(),
     seVolumeValue: domUuid(),
     prev: domUuid(),
-    configChange: domUuid()
+    configChange: domUuid(),
   };
   const root = document.createElement("div");
   root.innerHTML = rootInnerHTML(ids, config);
@@ -99,10 +102,14 @@ export function createConfigProps(resources: Resources, config: GbraverBurstBrow
     prevButton: elements.prev,
     configChangeButton: elements.configChange,
     dialog,
-    pushButton: resources.sounds.find(v => v.id === SOUND_IDS.PUSH_BUTTON)?.sound ?? new Howl({src: ""}),
-    changeValue: resources.sounds.find(v => v.id === SOUND_IDS.CHANGE_VALUE)?.sound ?? new Howl({src: ""}),
+    pushButton:
+      resources.sounds.find((v) => v.id === SOUND_IDS.PUSH_BUTTON)?.sound ??
+      new Howl({ src: "" }),
+    changeValue:
+      resources.sounds.find((v) => v.id === SOUND_IDS.CHANGE_VALUE)?.sound ??
+      new Howl({ src: "" }),
     exclusive: new Exclusive(),
     prev: createStreamSource(),
-    configChange: createStreamSource()
+    configChange: createStreamSource(),
   };
 }

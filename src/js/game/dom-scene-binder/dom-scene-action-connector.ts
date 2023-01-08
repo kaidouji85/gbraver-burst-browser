@@ -11,4 +11,7 @@ import type { GameAction } from "../game-actions";
  * @param gameAction ゲームアクションストリーム
  * @return ゲームションションのアンサブスクライブ
  */
-export type DOMSceneActionConnector<X extends DOMScene> = (scene: X, gameAction: StreamSource<GameAction>) => Unsubscriber[];
+export type DOMSceneActionConnector<X extends DOMScene> = (
+  scene: X,
+  gameAction: StreamSource<GameAction>
+) => Unsubscriber[];

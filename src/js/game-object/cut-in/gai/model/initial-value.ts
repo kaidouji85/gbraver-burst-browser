@@ -10,7 +10,7 @@ export function createInitialValue(): GaiModel {
     opacity: 0,
     scale: 1,
     position: {
-      x: 0
-    }
+      x: 0,
+    },
   };
 }

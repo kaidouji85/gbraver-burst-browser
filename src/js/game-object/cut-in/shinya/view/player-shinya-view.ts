@@ -30,13 +30,15 @@ export class PlayerShinyaView implements ShinyaView {
    * @param resources リソース管理オブジェクト
    */
   constructor(resources: Resources) {
-    const shinyaResource = resources.textures.find(v => v.id === TEXTURE_IDS.SHINYA_CUTIN);
+    const shinyaResource = resources.textures.find(
+      (v) => v.id === TEXTURE_IDS.SHINYA_CUTIN
+    );
     const shinya = shinyaResource?.texture ?? new THREE.Texture();
     this.#mesh = new HorizontalAnimationMesh({
       texture: shinya,
       maxAnimation: MAX_ANIMATION,
       width: MESH_SIZE,
-      height: MESH_SIZE
+      height: MESH_SIZE,
     });
   }
 
@@ -54,8 +56,12 @@ export class PlayerShinyaView implements ShinyaView {
    * @param preRender プリレンダー情報
    */
   engage(model: ShinyaModel, preRender: PreRender): void {
-    const scale = HUDCutInScale(preRender.rendererDOM, preRender.safeAreaInset) * model.scale;
-    const x = preRender.rendererDOM.clientWidth / 2 + (model.position.x - PADDING_RIGHT) * scale;
+    const scale =
+      HUDCutInScale(preRender.rendererDOM, preRender.safeAreaInset) *
+      model.scale;
+    const x =
+      preRender.rendererDOM.clientWidth / 2 +
+      (model.position.x - PADDING_RIGHT) * scale;
     this.#mesh.getObject3D().scale.set(scale, scale, scale);
     this.#mesh.getObject3D().position.set(x, 0, HUD_CUT_IN_ZNIDEX);
     this.#mesh.setOpacity(model.opacity);
@@ -69,5 +75,4 @@ export class PlayerShinyaView implements ShinyaView {
   getObject3D(): THREE.Object3D {
     return this.#mesh.getObject3D();
   }
-
 }

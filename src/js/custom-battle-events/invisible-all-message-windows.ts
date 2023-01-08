@@ -6,7 +6,9 @@ import { waitTime } from "../wait/wait-time";
  *
  * @param props イベントプロパティ
  */
-export function invisibleAllMessageWindows(props: CustomBattleEventProps): void {
+export function invisibleAllMessageWindows(
+  props: CustomBattleEventProps
+): void {
   props.view.dom.leftMessageWindow.visible(false);
   props.view.dom.rightMessageWindow.visible(false);
   props.view.dom.nearBatterySelectorMessageWindow.visible(false);
@@ -21,7 +23,10 @@ export function invisibleAllMessageWindows(props: CustomBattleEventProps): void 
  * @param wait 待ち時間
  * @return 仕切り直しが完了したら発火するPromise
  */
-export const refreshConversation = async (props: CustomBattleEventProps, wait = 200) => {
+export const refreshConversation = async (
+  props: CustomBattleEventProps,
+  wait = 200
+) => {
   invisibleAllMessageWindows(props);
   await waitTime(wait);
 };

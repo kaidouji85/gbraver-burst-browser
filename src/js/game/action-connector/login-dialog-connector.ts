@@ -5,12 +5,15 @@ import type { DomDialogActionConnector } from "../dom-dialog-binder/dom-dialog-a
 type Connector = DomDialogActionConnector<LoginDialog>;
 
 /** ログインダイアログとゲームアクションを関連付ける */
-export const loginDialogConnector: Connector = (dialog, gameAction) => [dialog.loginNotifier().subscribe(() => {
-  gameAction.next({
-    type: "UniversalLogin"
-  });
-}), dialog.closeDialogNotifier().subscribe(() => {
-  gameAction.next({
-    type: "LoginCancel"
-  });
-})];
+export const loginDialogConnector: Connector = (dialog, gameAction) => [
+  dialog.loginNotifier().subscribe(() => {
+    gameAction.next({
+      type: "UniversalLogin",
+    });
+  }),
+  dialog.closeDialogNotifier().subscribe(() => {
+    gameAction.next({
+      type: "LoginCancel",
+    });
+  }),
+];

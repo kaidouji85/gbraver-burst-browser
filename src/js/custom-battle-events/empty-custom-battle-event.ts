@@ -1,4 +1,11 @@
-import type { BatteryCommandSelected, BurstCommandSelected, CommandCanceled, CustomBattleEvent, LastState, PilotSkillCommandSelected } from "../td-scenes/battle/custom-battle-event";
+import type {
+  BatteryCommandSelected,
+  BurstCommandSelected,
+  CommandCanceled,
+  CustomBattleEvent,
+  LastState,
+  PilotSkillCommandSelected,
+} from "../td-scenes/battle/custom-battle-event";
 
 /**
  * 空のカスタムバトルイベント
@@ -32,31 +39,36 @@ export class EmptyCustomBattleEvent implements CustomBattleEvent {
   /** @override */
 
   /* eslint-disable @typescript-eslint/no-unused-vars */
-  async onBatteryCommandSelected(props: BatteryCommandSelected): Promise<CommandCanceled> {
+  async onBatteryCommandSelected(
+    props: BatteryCommandSelected
+  ): Promise<CommandCanceled> {
     /* eslint-enable @typescript-eslint/no-unused-vars */
     return {
-      isCommandCanceled: false
+      isCommandCanceled: false,
     };
   }
 
   /** @override */
 
   /* eslint-disable @typescript-eslint/no-unused-vars */
-  async onBurstCommandSelected(props: BurstCommandSelected): Promise<CommandCanceled> {
+  async onBurstCommandSelected(
+    props: BurstCommandSelected
+  ): Promise<CommandCanceled> {
     /* eslint-enable @typescript-eslint/no-unused-vars */
     return {
-      isCommandCanceled: false
+      isCommandCanceled: false,
     };
   }
 
   /** @override */
 
   /* eslint-disable @typescript-eslint/no-unused-vars */
-  async onPilotSkillCommandSelected(props: PilotSkillCommandSelected): Promise<CommandCanceled> {
+  async onPilotSkillCommandSelected(
+    props: PilotSkillCommandSelected
+  ): Promise<CommandCanceled> {
     /* eslint-enable @typescript-eslint/no-unused-vars */
     return {
-      isCommandCanceled: false
+      isCommandCanceled: false,
     };
   }
-
 }

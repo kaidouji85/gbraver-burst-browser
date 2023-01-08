@@ -68,14 +68,18 @@ export class TutorialStageElement {
   constructor(resources: Resources, stage: TutorialStage, level: number) {
     this.id = stage.id;
     this.level = level;
-    this.#pushButton = resources.sounds.find(v => v.id === SOUND_IDS.PUSH_BUTTON) ?? createEmptySoundResource();
+    this.#pushButton =
+      resources.sounds.find((v) => v.id === SOUND_IDS.PUSH_BUTTON) ??
+      createEmptySoundResource();
     this.#root = document.createElement("div");
     this.#root.className = ROOT_CLASS;
     this.#root.innerHTML = rootInnerHTML(level, stage.title);
-    this.#select = pushDOMStream(this.#root).chain(map(action => {
-      action.event.preventDefault();
-      action.event.stopPropagation();
-    }));
+    this.#select = pushDOMStream(this.#root).chain(
+      map((action) => {
+        action.event.preventDefault();
+        action.event.stopPropagation();
+      })
+    );
   }
 
   /**
@@ -105,5 +109,4 @@ export class TutorialStageElement {
     this.#pushButton.sound.play();
     await pop(this.#root);
   }
-
 }

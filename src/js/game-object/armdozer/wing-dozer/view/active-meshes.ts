@@ -13,27 +13,37 @@ import type { AnimationMeshMapping } from "./animation-mesh-mapping";
  * @param resources リソース管理オブジェクト
  * @return 生成結果
  */
-export function createActiveMeshes(resources: Resources): AnimationMeshMapping[] {
-  return [{
-    type: "STAND",
-    mesh: wingDozerActiveStand(resources)
-  }, {
-    type: "DASH_UP",
-    mesh: wingDozerActiveDashUp(resources)
-  }, {
-    type: "DASH_DOWN",
-    mesh: wingDozerActiveDashDown(resources)
-  }, {
-    type: "DASH_TO_STAND",
-    mesh: wingDozerActiveDashToStand(resources)
-  }, {
-    type: "FRONT_STEP",
-    mesh: wingDozerActiveFrontStep(resources)
-  }, {
-    type: "GUARD",
-    mesh: wingDozerActiveGuard(resources)
-  }, {
-    type: "KNOCK_BACK",
-    mesh: wingDozerActiveKnockBack(resources)
-  }];
+export function createActiveMeshes(
+  resources: Resources
+): AnimationMeshMapping[] {
+  return [
+    {
+      type: "STAND",
+      mesh: wingDozerActiveStand(resources),
+    },
+    {
+      type: "DASH_UP",
+      mesh: wingDozerActiveDashUp(resources),
+    },
+    {
+      type: "DASH_DOWN",
+      mesh: wingDozerActiveDashDown(resources),
+    },
+    {
+      type: "DASH_TO_STAND",
+      mesh: wingDozerActiveDashToStand(resources),
+    },
+    {
+      type: "FRONT_STEP",
+      mesh: wingDozerActiveFrontStep(resources),
+    },
+    {
+      type: "GUARD",
+      mesh: wingDozerActiveGuard(resources),
+    },
+    {
+      type: "KNOCK_BACK",
+      mesh: wingDozerActiveKnockBack(resources),
+    },
+  ];
 }

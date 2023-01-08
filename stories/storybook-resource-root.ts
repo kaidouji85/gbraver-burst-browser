@@ -12,5 +12,4 @@ export class StorybookResourceRoot implements ResourceRoot {
   get(): string {
     return "";
   }
-
 }

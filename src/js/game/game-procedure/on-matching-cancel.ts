@@ -8,7 +8,9 @@ import type { GameProps } from "../game-props";
  * @param props ゲームプロパティ
  * @return 処理が完了したら発火するPromise
  */
-export async function onMatchingCanceled(props: Readonly<GameProps>): Promise<void> {
+export async function onMatchingCanceled(
+  props: Readonly<GameProps>
+): Promise<void> {
   const dialog = new WaitingDialog("通信中......");
   props.domDialogBinder.bind(dialog, waitingDialogConnector);
   await props.api.disconnectWebsocket();

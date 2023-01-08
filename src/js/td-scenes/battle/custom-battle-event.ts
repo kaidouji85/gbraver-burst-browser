@@ -1,4 +1,10 @@
-import type { BatteryCommand, BurstCommand, GameState, PilotSkillCommand, PlayerId } from "gbraver-burst-core";
+import type {
+  BatteryCommand,
+  BurstCommand,
+  GameState,
+  PilotSkillCommand,
+  PlayerId,
+} from "gbraver-burst-core";
 
 import type { Stream } from "../../stream/stream";
 import type { PushWindow } from "../../window/push-window";
@@ -86,7 +92,9 @@ export interface CustomBattleEvent {
    * @param props イベントプロパティ
    * @return コマンドキャンセル情報
    */
-  onBatteryCommandSelected(props: BatteryCommandSelected): Promise<CommandCanceled>;
+  onBatteryCommandSelected(
+    props: BatteryCommandSelected
+  ): Promise<CommandCanceled>;
 
   /**
    * バーストコマンド選択イベント
@@ -102,5 +110,7 @@ export interface CustomBattleEvent {
    * @param props イベントプロパティ
    * @return コマンドキャンセル情報
    */
-  onPilotSkillCommandSelected(props: PilotSkillCommandSelected): Promise<CommandCanceled>;
+  onPilotSkillCommandSelected(
+    props: PilotSkillCommandSelected
+  ): Promise<CommandCanceled>;
 }

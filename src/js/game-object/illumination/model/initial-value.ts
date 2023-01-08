@@ -7,6 +7,6 @@ import type { IlluminationModel } from "./illumination-model";
  */
 export function createInitialValue(): IlluminationModel {
   return {
-    intensity: 1
+    intensity: 1,
   };
 }

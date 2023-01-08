@@ -11,7 +11,10 @@ import { createStreamSource } from "../../stream/stream";
 import { domUuid } from "../../uuid/dom-uuid";
 import { waitElementLoaded } from "../../wait/wait-element-loaded";
 import type { DOMScene } from "../dom-scene";
-import type { TutorialStage, TutorialStageSelect } from "./tutoria-stage-element";
+import type {
+  TutorialStage,
+  TutorialStageSelect,
+} from "./tutoria-stage-element";
 import { TutorialStageElement } from "./tutoria-stage-element";
 
 /** ROOT要素class属性*/
@@ -31,12 +34,24 @@ type DataIDs = {
  * @return innerHTML
  */
 export function rootInnerHTML(ids: DataIDs, resources: Resources): string {
-  const imageCut01 = resources.paths.find(v => v.id === PathIds.TUTORIAL_IMAGE_CUT_01)?.path ?? "";
-  const imageCut02 = resources.paths.find(v => v.id === PathIds.TUTORIAL_IMAGE_CUT_02)?.path ?? "";
-  const imageCut03 = resources.paths.find(v => v.id === PathIds.TUTORIAL_IMAGE_CUT_03)?.path ?? "";
-  const imageCut04 = resources.paths.find(v => v.id === PathIds.TUTORIAL_IMAGE_CUT_04)?.path ?? "";
-  const imageCut05 = resources.paths.find(v => v.id === PathIds.TUTORIAL_IMAGE_CUT_05)?.path ?? "";
-  const imageCut06 = resources.paths.find(v => v.id === PathIds.TUTORIAL_IMAGE_CUT_06)?.path ?? "";
+  const imageCut01 =
+    resources.paths.find((v) => v.id === PathIds.TUTORIAL_IMAGE_CUT_01)?.path ??
+    "";
+  const imageCut02 =
+    resources.paths.find((v) => v.id === PathIds.TUTORIAL_IMAGE_CUT_02)?.path ??
+    "";
+  const imageCut03 =
+    resources.paths.find((v) => v.id === PathIds.TUTORIAL_IMAGE_CUT_03)?.path ??
+    "";
+  const imageCut04 =
+    resources.paths.find((v) => v.id === PathIds.TUTORIAL_IMAGE_CUT_04)?.path ??
+    "";
+  const imageCut05 =
+    resources.paths.find((v) => v.id === PathIds.TUTORIAL_IMAGE_CUT_05)?.path ??
+    "";
+  const imageCut06 =
+    resources.paths.find((v) => v.id === PathIds.TUTORIAL_IMAGE_CUT_06)?.path ??
+    "";
   return `
     <div class="${ROOT_CLASS}__title">チュートリアル</div>
     <div class="${ROOT_CLASS}__image-cuts" data-id="${ids.imageCuts}">
@@ -66,13 +81,19 @@ type Elements = {
  * @return 抽出結果
  */
 function extractElements(root: HTMLElement, ids: DataIDs): Elements {
-  const stages: HTMLElement = root.querySelector(`[data-id="${ids.stages}"]`) ?? document.createElement("div");
-  const imageCuts: HTMLElement = root.querySelector(`[data-id="${ids.imageCuts}"]`) ?? document.createElement("div");
-  const prevButton: HTMLElement = root.querySelector(`[data-id="${ids.prevButton}"]`) ?? document.createElement("div");
+  const stages: HTMLElement =
+    root.querySelector(`[data-id="${ids.stages}"]`) ??
+    document.createElement("div");
+  const imageCuts: HTMLElement =
+    root.querySelector(`[data-id="${ids.imageCuts}"]`) ??
+    document.createElement("div");
+  const prevButton: HTMLElement =
+    root.querySelector(`[data-id="${ids.prevButton}"]`) ??
+    document.createElement("div");
   return {
     stages,
     imageCuts,
-    prevButton
+    prevButton,
   };
 }
 
@@ -99,7 +120,7 @@ export class TutorialSelector implements DOMScene {
     const ids = {
       stages: domUuid(),
       imageCuts: domUuid(),
-      prevButton: domUuid()
+      prevButton: domUuid(),
     };
     this.#root = document.createElement("div");
     this.#root.className = ROOT_CLASS;
@@ -110,22 +131,35 @@ export class TutorialSelector implements DOMScene {
     this.#exclusive = new Exclusive();
     this.#prev = createStreamSource();
     this.#stageSelect = createStreamSource();
-    this.#changeValue = resources.sounds.find(v => v.id === SOUND_IDS.CHANGE_VALUE) ?? createEmptySoundResource();
-    this.#isImageCutsLoaded = Promise.all(Array.from(elements.imageCuts.children).map(img => waitElementLoaded(img as HTMLElement)));
-    const stageElements = stages.map((stage, index) => new TutorialStageElement(resources, stage, index + 1));
-    stageElements.forEach(stage => {
+    this.#changeValue =
+      resources.sounds.find((v) => v.id === SOUND_IDS.CHANGE_VALUE) ??
+      createEmptySoundResource();
+    this.#isImageCutsLoaded = Promise.all(
+      Array.from(elements.imageCuts.children).map((img) =>
+        waitElementLoaded(img as HTMLElement)
+      )
+    );
+    const stageElements = stages.map(
+      (stage, index) => new TutorialStageElement(resources, stage, index + 1)
+    );
+    stageElements.forEach((stage) => {
       this.#stages.appendChild(stage.getRootHTMLElement());
     });
-    this.#unsubscribers = [pushDOMStream(this.#prevButton).subscribe(action => {
-      this.#onPrevPush(action);
-    }), ...stageElements.map(stage => stage.stageSelectNotifier().subscribe(() => {
-      this.#onTutorialStageSelect(stage);
-    }))];
+    this.#unsubscribers = [
+      pushDOMStream(this.#prevButton).subscribe((action) => {
+        this.#onPrevPush(action);
+      }),
+      ...stageElements.map((stage) =>
+        stage.stageSelectNotifier().subscribe(() => {
+          this.#onTutorialStageSelect(stage);
+        })
+      ),
+    ];
   }
 
   /** @override */
   destructor(): void {
-    this.#unsubscribers.forEach(unsubscriber => {
+    this.#unsubscribers.forEach((unsubscriber) => {
       unsubscriber.unsubscribe();
     });
   }
@@ -182,9 +216,8 @@ export class TutorialSelector implements DOMScene {
       await stage.selected();
       this.#stageSelect.next({
         id: stage.id,
-        level: stage.level
+        level: stage.level,
       });
     });
   }
-
 }

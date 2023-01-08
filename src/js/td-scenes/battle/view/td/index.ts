@@ -48,40 +48,64 @@ export class ThreeDimensionLayer {
     this.scene = new THREE.Scene();
     this.scene.background = skyBox(param.resources);
     this.camera = new TDCamera(param.update, param.resize);
-    this.#overlap = param.renderer.createOverlapNotifier(this.camera.getCamera());
-    this.#gameObjectAction = gameObjectStream(param.update, param.preRender, this.#overlap);
-    this.players = [playerTDObjects(param.resources, param.player, this.#gameObjectAction), enemyTDObject(param.resources, param.enemy, this.#gameObjectAction)];
-    this.players.map(v => v.getObject3Ds()).flat().forEach(v => {
-      this.scene.add(v);
-    });
-    this.armdozerObjects = [playerTDArmdozer(param.resources, this.#gameObjectAction, param.player), enemyTDArmdozer(param.resources, this.#gameObjectAction, param.enemy)];
-    this.armdozerObjects.map(v => v.getObject3Ds()).flat().forEach(v => {
-      this.scene.add(v);
-    });
-    this.gameObjects = new TDGameObjects(param.resources, this.#gameObjectAction);
-    this.gameObjects.getObject3Ds().forEach(object => {
+    this.#overlap = param.renderer.createOverlapNotifier(
+      this.camera.getCamera()
+    );
+    this.#gameObjectAction = gameObjectStream(
+      param.update,
+      param.preRender,
+      this.#overlap
+    );
+    this.players = [
+      playerTDObjects(param.resources, param.player, this.#gameObjectAction),
+      enemyTDObject(param.resources, param.enemy, this.#gameObjectAction),
+    ];
+    this.players
+      .map((v) => v.getObject3Ds())
+      .flat()
+      .forEach((v) => {
+        this.scene.add(v);
+      });
+    this.armdozerObjects = [
+      playerTDArmdozer(param.resources, this.#gameObjectAction, param.player),
+      enemyTDArmdozer(param.resources, this.#gameObjectAction, param.enemy),
+    ];
+    this.armdozerObjects
+      .map((v) => v.getObject3Ds())
+      .flat()
+      .forEach((v) => {
+        this.scene.add(v);
+      });
+    this.gameObjects = new TDGameObjects(
+      param.resources,
+      this.#gameObjectAction
+    );
+    this.gameObjects.getObject3Ds().forEach((object) => {
       this.scene.add(object);
     });
   }
 
   /** デストラクタ */
   destructor(): void {
-    const removeTargets: THREE.Object3D[] = [...this.players.flatMap(v => v.getObject3Ds()), ...this.armdozerObjects.flatMap(v => v.getObject3Ds()), ...this.gameObjects.getObject3Ds()];
-    removeTargets.forEach(v => {
+    const removeTargets: THREE.Object3D[] = [
+      ...this.players.flatMap((v) => v.getObject3Ds()),
+      ...this.armdozerObjects.flatMap((v) => v.getObject3Ds()),
+      ...this.gameObjects.getObject3Ds(),
+    ];
+    removeTargets.forEach((v) => {
       this.scene.remove(v);
     });
     if (this.scene.background instanceof THREE.Texture) {
       this.scene.background.dispose();
     }
     this.scene.background = null;
-    this.players.forEach(player => {
+    this.players.forEach((player) => {
       player.destructor();
     });
-    this.armdozerObjects.forEach(armdozer => {
+    this.armdozerObjects.forEach((armdozer) => {
       armdozer.destructor();
     });
     this.gameObjects.destructor();
     this.camera.destructor();
   }
-
 }

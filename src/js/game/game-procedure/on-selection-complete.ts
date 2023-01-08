@@ -31,14 +31,20 @@ import type { NPCBattle } from "../in-progress/npc-battle";
  * @param action アクション
  * @return 処理が完了したら発火するPromise
  */
-export async function onSelectionComplete(props: GameProps, action: SelectionComplete): Promise<void> {
-  const courseDifficultySelect = async (npcBattle: NPCBattle): Promise<void> => {
-    props.inProgress = { ...npcBattle,
+export async function onSelectionComplete(
+  props: GameProps,
+  action: SelectionComplete
+): Promise<void> {
+  const courseDifficultySelect = async (
+    npcBattle: NPCBattle
+  ): Promise<void> => {
+    props.inProgress = {
+      ...npcBattle,
       subFlow: {
         type: "DifficultySelect",
         armdozerId: action.armdozerId,
-        pilotId: action.pilotId
-      }
+        pilotId: action.pilotId,
+      },
     };
     const dialog = new DifficultyDialog(props.resources);
     props.domDialogBinder.bind(dialog, difficultyDialogConnector);
@@ -47,10 +53,13 @@ export async function onSelectionComplete(props: GameProps, action: SelectionCom
   const waitUntilMatching = async (): Promise<BattleSDK> => {
     try {
       await props.api.disconnectWebsocket();
-      return await props.api.startCasualMatch(action.armdozerId, action.pilotId);
+      return await props.api.startCasualMatch(
+        action.armdozerId,
+        action.pilotId
+      );
     } catch (e) {
       const dialog = new NetworkErrorDialog(props.resources, {
-        type: "GotoTitle"
+        type: "GotoTitle",
       });
       props.domDialogBinder.bind(dialog, networkErrorDialogConnector);
       throw e;
@@ -58,7 +67,7 @@ export async function onSelectionComplete(props: GameProps, action: SelectionCom
   };
 
   const createBattleProgress = (battle: BattleSDK): BattleProgress => ({
-    progress: async v => {
+    progress: async (v) => {
       try {
         const dialog = new WaitingDialog("通信中......");
         props.domDialogBinder.bind(dialog, waitingDialogConnector);
@@ -67,12 +76,12 @@ export async function onSelectionComplete(props: GameProps, action: SelectionCom
         return update;
       } catch (e) {
         const dialog = new NetworkErrorDialog(props.resources, {
-          type: "GotoTitle"
+          type: "GotoTitle",
         });
         props.domDialogBinder.bind(dialog, networkErrorDialogConnector);
         throw e;
       }
-    }
+    },
   });
 
   const startMatching = async (origin: CasualMatch): Promise<void> => {
@@ -80,10 +89,11 @@ export async function onSelectionComplete(props: GameProps, action: SelectionCom
     props.domDialogBinder.bind(dialog, matchingDialogConnector);
     const battle = await waitUntilMatching();
     props.suddenlyBattleEnd.bind(battle);
-    props.inProgress = { ...origin,
+    props.inProgress = {
+      ...origin,
       subFlow: {
-        type: "Battle"
-      }
+        type: "Battle",
+      },
     };
     await props.fader.fadeOut();
     props.domDialogBinder.hidden();
@@ -91,7 +101,7 @@ export async function onSelectionComplete(props: GameProps, action: SelectionCom
       resources: props.resources,
       player: battle.player.armdozer.id,
       enemy: battle.enemy.armdozer.id,
-      caption: "CASUAL MATCH"
+      caption: "CASUAL MATCH",
     });
     props.domSceneBinder.bind(scene, matchCardConnector);
     await Promise.race([scene.waitUntilLoaded(), waitTime(MAX_LOADING_TIME)]);
@@ -111,17 +121,20 @@ export async function onSelectionComplete(props: GameProps, action: SelectionCom
       resize: props.resize,
       pushWindow: props.pushWindow,
       gameLoop: props.gameLoop,
-      renderer: props.renderer
+      renderer: props.renderer,
     });
     props.tdBinder.bind(battleScene, battleSceneConnector);
     await waitAnimationFrame();
-    await Promise.all([(async () => {
-      await props.fader.fadeOut();
-      props.domSceneBinder.hidden();
-    })(), (async () => {
-      await props.bgm.do(fadeOut);
-      await props.bgm.do(stop);
-    })()]);
+    await Promise.all([
+      (async () => {
+        await props.fader.fadeOut();
+        props.domSceneBinder.hidden();
+      })(),
+      (async () => {
+        await props.bgm.do(fadeOut);
+        await props.bgm.do(stop);
+      })(),
+    ]);
     await props.fader.fadeIn();
     await battleScene.start();
   };

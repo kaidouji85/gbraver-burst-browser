@@ -14,9 +14,20 @@ export function open(model: BurstButtonModel, canBurst: boolean): Animate {
     model.disabled = true;
     model.canBurst = canBurst;
     model.opacity = 0;
-  }).chain(tween(model, t => t.to({
-    opacity: 1
-  }, 200))).chain(process(() => {
-    model.disabled = false;
-  }));
+  })
+    .chain(
+      tween(model, (t) =>
+        t.to(
+          {
+            opacity: 1,
+          },
+          200
+        )
+      )
+    )
+    .chain(
+      process(() => {
+        model.disabled = false;
+      })
+    );
 }

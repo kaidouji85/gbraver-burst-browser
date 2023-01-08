@@ -1,4 +1,4 @@
-import TWEEN, {Group} from "@tweenjs/tween.js";
+import TWEEN, { Group } from "@tweenjs/tween.js";
 import * as THREE from "three";
 
 import { Animate } from "../../../animation/animate";
@@ -53,27 +53,34 @@ export class NeoLandozer extends EmptyArmDozerSprite implements ArmDozerSprite {
    * @param resources リソース管理オブジェクト
    * @param gameObjectAction ゲームオブジェクトアクション
    */
-  constructor(view: NeoLandozerView, resources: Resources, gameObjectAction: Stream<GameObjectAction>) {
+  constructor(
+    view: NeoLandozerView,
+    resources: Resources,
+    gameObjectAction: Stream<GameObjectAction>
+  ) {
     super();
     this.#model = createInitialValue();
     this.#view = view;
     this.#sounds = new NeoLandozerSounds(resources);
     this.#activeFlashTween = new TWEEN.Group();
-    this.#unsubscribers = [gameObjectAction.subscribe(action => {
-      if (action.type === "Update") {
-        this.#update(action);
-      } else if (action.type === "PreRender") {
-        this.#preRender(action);
-      }
-    }), firstUpdate(gameObjectAction).subscribe(action => {
-      this.#onFirstUpdate(action);
-    })];
+    this.#unsubscribers = [
+      gameObjectAction.subscribe((action) => {
+        if (action.type === "Update") {
+          this.#update(action);
+        } else if (action.type === "PreRender") {
+          this.#preRender(action);
+        }
+      }),
+      firstUpdate(gameObjectAction).subscribe((action) => {
+        this.#onFirstUpdate(action);
+      }),
+    ];
   }
 
   /** @overview */
   destructor(): void {
     this.#view.destructor();
-    this.#unsubscribers.forEach(v => {
+    this.#unsubscribers.forEach((v) => {
       v.unsubscribe();
     });
     this.#activeFlashTween.removeAll();
@@ -198,5 +205,4 @@ export class NeoLandozer extends EmptyArmDozerSprite implements ArmDozerSprite {
   #preRender(action: PreRender): void {
     this.#view.lookAt(action.camera);
   }
-
 }

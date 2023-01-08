@@ -23,7 +23,9 @@ export class FutureSuddenlyBattleEnd {
    */
   bind(battle: Battle): void {
     this.unbind();
-    this.#unsubscriber = createStream(battle.suddenlyBattleNotifier()).subscribe(() => {
+    this.#unsubscriber = createStream(
+      battle.suddenlyBattleNotifier()
+    ).subscribe(() => {
       this.#notifier.next();
     });
   }
@@ -48,5 +50,4 @@ export class FutureSuddenlyBattleEnd {
   stream(): Stream<void> {
     return this.#notifier;
   }
-
 }

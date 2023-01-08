@@ -10,7 +10,10 @@ import { scrollLeftMessages } from "../../scroll-messages";
  */
 const damageRaceEven = async (props: CustomBattleEventProps) => {
   activeLeftMessageWindowWithFace(props, "Gai");
-  await scrollLeftMessages(props, [["ガイ", "「ダメージレースはイーブンか"], ["面白い そうこなくてはな」"]]);
+  await scrollLeftMessages(props, [
+    ["ガイ", "「ダメージレースはイーブンか"],
+    ["面白い そうこなくてはな」"],
+  ]);
   await refreshConversation(props);
 };
 
@@ -21,7 +24,10 @@ const damageRaceEven = async (props: CustomBattleEventProps) => {
  */
 const damageRaceAdvantage = async (props: CustomBattleEventProps) => {
   activeLeftMessageWindowWithFace(props, "Gai");
-  await scrollLeftMessages(props, [["ガイ", "「何？ 俺がダメージレースで負けているだと"], ["少しは本気を出さんとな」"]]);
+  await scrollLeftMessages(props, [
+    ["ガイ", "「何？ 俺がダメージレースで負けているだと"],
+    ["少しは本気を出さんとな」"],
+  ]);
   await refreshConversation(props);
 };
 
@@ -32,7 +38,11 @@ const damageRaceAdvantage = async (props: CustomBattleEventProps) => {
  */
 const damageRaceDisadvantage = async (props: CustomBattleEventProps) => {
   activeLeftMessageWindowWithFace(props, "Gai");
-  await scrollLeftMessages(props, [["ガイ", "「フハハハハ 見ろシンヤ！！"], ["ダメージレースは俺の優勢"], ["このまま勝利をいただくぞ」"]]);
+  await scrollLeftMessages(props, [
+    ["ガイ", "「フハハハハ 見ろシンヤ！！"],
+    ["ダメージレースは俺の優勢"],
+    ["このまま勝利をいただくぞ」"],
+  ]);
   await refreshConversation(props);
 };
 
@@ -43,7 +53,11 @@ const damageRaceDisadvantage = async (props: CustomBattleEventProps) => {
  * @param enemyHP 敵HP
  * @return ストーリーが完了したら発火するPromise
  */
-export const damageRace = async (props: CustomBattleEventProps, playerHP: number, enemyHP: number) => {
+export const damageRace = async (
+  props: CustomBattleEventProps,
+  playerHP: number,
+  enemyHP: number
+) => {
   const hpDiff = playerHP - enemyHP;
   const isHpNearlyEqual = Math.abs(hpDiff) <= 500;
 

@@ -1,5 +1,10 @@
 /** 戦闘終了後の挙動の一覧 */
-export type PostBattle = GotoTitle | NextStage | GotoTutorialSelect | Retry | GotoEnding;
+export type PostBattle =
+  | GotoTitle
+  | NextStage
+  | GotoTutorialSelect
+  | Retry
+  | GotoEnding;
 
 /** タイトルへ */
 export type GotoTitle = {

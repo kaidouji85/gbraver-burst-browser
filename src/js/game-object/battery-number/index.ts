@@ -12,7 +12,10 @@ import { PlayerBatteryNumberView } from "./view/player-battery-number-view";
  * @param gameObjectAction ゲームオブジェクトアクション
  * @return バッテリービュー
  */
-export function playerBatteryNumber(resources: Resources, gameObjectAction: Stream<GameObjectAction>): BatteryNumber {
+export function playerBatteryNumber(
+  resources: Resources,
+  gameObjectAction: Stream<GameObjectAction>
+): BatteryNumber {
   const view = new PlayerBatteryNumberView(resources);
   return new BatteryNumber(view, gameObjectAction);
 }
@@ -24,7 +27,10 @@ export function playerBatteryNumber(resources: Resources, gameObjectAction: Stre
  * @param gameObjectAction ゲームオブジェクトアクション
  * @return バッテリービュー
  */
-export function enemyBatteryNumber(resources: Resources, gameObjectAction: Stream<GameObjectAction>): BatteryNumber {
+export function enemyBatteryNumber(
+  resources: Resources,
+  gameObjectAction: Stream<GameObjectAction>
+): BatteryNumber {
   const view = new EnemyBatteryNumberView(resources);
   return new BatteryNumber(view, gameObjectAction);
 }

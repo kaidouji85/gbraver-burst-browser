@@ -35,14 +35,16 @@ export class DOMFloaters {
     this.#gameAction = createStreamSource();
     this.#postBattle = new PostBattleFloater();
     this.#root.appendChild(this.#postBattle.getRootHTMLElement());
-    this.#unsubscribers = [...params.postBattleConnector(this.#postBattle, this.#gameAction)];
+    this.#unsubscribers = [
+      ...params.postBattleConnector(this.#postBattle, this.#gameAction),
+    ];
   }
 
   /**
    * デストラクタ相当の処理
    */
   destructor(): void {
-    this.#unsubscribers.forEach(unsubscriber => {
+    this.#unsubscribers.forEach((unsubscriber) => {
       unsubscriber.unsubscribe();
     });
     this.#postBattle.destructor();
@@ -70,7 +72,10 @@ export class DOMFloaters {
    * @param buttons アクションボタン設定
    * @return アニメが完了したら発火するPromise
    */
-  async showPostBattle(resources: Resources, buttons: PostBattleButtonConfig[]): Promise<void> {
+  async showPostBattle(
+    resources: Resources,
+    buttons: PostBattleButtonConfig[]
+  ): Promise<void> {
     await this.#postBattle.show(resources, buttons);
   }
 
@@ -80,5 +85,4 @@ export class DOMFloaters {
   hiddenPostBattle(): void {
     this.#postBattle.hidden();
   }
-
 }

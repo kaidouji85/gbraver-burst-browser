@@ -19,13 +19,17 @@ export class ShockWaveRingView {
   #mesh: THREE.Mesh<THREE.PlaneGeometry, THREE.MeshBasicMaterial>;
 
   constructor(resources: Resources) {
-    const textureResource = resources.textures.find(v => v.id === TEXTURE_IDS.HITMARK_SHOCK_WAVE_RING);
-    const texture = textureResource ? textureResource.texture : new THREE.Texture();
+    const textureResource = resources.textures.find(
+      (v) => v.id === TEXTURE_IDS.HITMARK_SHOCK_WAVE_RING
+    );
+    const texture = textureResource
+      ? textureResource.texture
+      : new THREE.Texture();
     const material = new THREE.MeshBasicMaterial({
       side: THREE.FrontSide,
       blending: THREE.AdditiveBlending,
       transparent: true,
-      map: texture
+      map: texture,
     });
     const geometry = new THREE.PlaneGeometry(WIDTH, HEIGHT, 1, 1);
     this.#mesh = new THREE.Mesh(geometry, material);
@@ -59,5 +63,4 @@ export class ShockWaveRingView {
   getObject3D(): THREE.Object3D {
     return this.#mesh;
   }
-
 }

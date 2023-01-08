@@ -21,5 +21,4 @@ export class EnemyLightningDozerView extends PlayerLightingDozerView {
     target.position.x *= -1;
     target.scale.x = -1;
   }
-
 }

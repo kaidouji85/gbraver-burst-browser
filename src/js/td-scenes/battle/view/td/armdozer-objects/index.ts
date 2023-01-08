@@ -6,7 +6,10 @@ import type { Resources } from "../../../../../resource";
 import type { Stream } from "../../../../../stream/stream";
 import type { TDArmdozerObjects } from "./armdozer-objects";
 import { enemyGenesisBraverTD, playerGenesisBraverTD } from "./genesis-braver";
-import { enemyLightningDozerTD, playerLightningDozerTD } from "./lightning-dozer";
+import {
+  enemyLightningDozerTD,
+  playerLightningDozerTD,
+} from "./lightning-dozer";
 import { enemyNeoLandozerTD, playerNeoLandozerTD } from "./neo-landozer";
 import { enemyShinBraverTD, playerShinBraverTD } from "./shin-braver";
 import { enemyWingDozerTD, playerWingDozerTD } from "./wing-dozer";
@@ -19,7 +22,11 @@ import { enemyWingDozerTD, playerWingDozerTD } from "./wing-dozer";
  * @param state プレイヤーの状態
  * @return 生成結果
  */
-export function playerTDArmdozer(resources: Resources, gameObjectAction: Stream<GameObjectAction>, state: Player): TDArmdozerObjects {
+export function playerTDArmdozer(
+  resources: Resources,
+  gameObjectAction: Stream<GameObjectAction>,
+  state: Player
+): TDArmdozerObjects {
   switch (state.armdozer.id) {
     case ArmDozerIds.SHIN_BRAVER:
       return playerShinBraverTD(resources, gameObjectAction, state);
@@ -49,7 +56,11 @@ export function playerTDArmdozer(resources: Resources, gameObjectAction: Stream<
  * @param state プレイヤーの状態
  * @return 生成結果
  */
-export function enemyTDArmdozer(resources: Resources, gameObjectAction: Stream<GameObjectAction>, state: Player): TDArmdozerObjects {
+export function enemyTDArmdozer(
+  resources: Resources,
+  gameObjectAction: Stream<GameObjectAction>,
+  state: Player
+): TDArmdozerObjects {
   switch (state.armdozer.id) {
     case ArmDozerIds.SHIN_BRAVER:
       return enemyShinBraverTD(resources, gameObjectAction, state);

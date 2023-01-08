@@ -11,5 +11,13 @@ import type { GameOverParamX } from "./game-over-param";
  * @return アニメーション
  */
 export function wingDozerWin(param: GameOverParamX<WingDozerTD>): Animate {
-  return all(param.winnerTdArmdozer.wingDozer.dash(), track(param.tdCamera, param.winnerTdArmdozer.wingDozer.getObject3D().position.x, 800), dolly(param.tdCamera, "-60", 800));
+  return all(
+    param.winnerTdArmdozer.wingDozer.dash(),
+    track(
+      param.tdCamera,
+      param.winnerTdArmdozer.wingDozer.getObject3D().position.x,
+      800
+    ),
+    dolly(param.tdCamera, "-60", 800)
+  );
 }

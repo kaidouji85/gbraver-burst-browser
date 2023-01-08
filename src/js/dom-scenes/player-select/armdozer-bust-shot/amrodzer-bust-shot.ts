@@ -64,16 +64,21 @@ export class ArmdozerBustShot {
    * @return アニメーション
    */
   move(): Promise<void> {
-    const animation = this.#image.animate([{
-      transform: "translateX(5em)"
-    }, {
-      transform: "translateX(0)"
-    }], {
-      duration: 200,
-      fill: "forwards",
-      easing: "ease"
-    });
+    const animation = this.#image.animate(
+      [
+        {
+          transform: "translateX(5em)",
+        },
+        {
+          transform: "translateX(0)",
+        },
+      ],
+      {
+        duration: 200,
+        fill: "forwards",
+        easing: "ease",
+      }
+    );
     return waitFinishAnimation(animation);
   }
-
 }

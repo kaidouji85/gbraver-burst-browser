@@ -18,38 +18,50 @@ import type { AnimationMeshMapping } from "./animation-mesh-mapping";
  * @return 生成結果
  */
 export function createMeshes(resources: Resources): AnimationMeshMapping[] {
-  return [{
-    type: "STAND",
-    mesh: neoLandozerStand(resources)
-  }, {
-    type: "KNOCK_BACK",
-    mesh: neoLandozerKnockBack(resources)
-  }, {
-    type: "GUARD",
-    mesh: neoLandozerGuard(resources)
-  }, {
-    type: "HM_CHARGE",
-    mesh: neoLandozerHMCharge(resources)
-  }, {
-    type: "HM_ATTACK",
-    mesh: neoLandozerHMAttack(resources)
-  }, {
-    type: "HM_TO_STAND",
-    mesh: neoLandozerHMToStand(resources)
-  }, {
-    type: "DOWN",
-    mesh: neoLandozerDown(resources)
-  }, {
-    type: "GUTS_UP",
-    mesh: neoLandozerGutsUp(resources)
-  }, {
-    type: "GUTS_DOWN",
-    mesh: neoLandozerGutsDown(resources)
-  }, {
-    type: "BACK_STEP",
-    mesh: neoLandozerBackStep(resources)
-  }, {
-    type: "FRONT_STEP",
-    mesh: neoLandozerFrontStep(resources)
-  }];
+  return [
+    {
+      type: "STAND",
+      mesh: neoLandozerStand(resources),
+    },
+    {
+      type: "KNOCK_BACK",
+      mesh: neoLandozerKnockBack(resources),
+    },
+    {
+      type: "GUARD",
+      mesh: neoLandozerGuard(resources),
+    },
+    {
+      type: "HM_CHARGE",
+      mesh: neoLandozerHMCharge(resources),
+    },
+    {
+      type: "HM_ATTACK",
+      mesh: neoLandozerHMAttack(resources),
+    },
+    {
+      type: "HM_TO_STAND",
+      mesh: neoLandozerHMToStand(resources),
+    },
+    {
+      type: "DOWN",
+      mesh: neoLandozerDown(resources),
+    },
+    {
+      type: "GUTS_UP",
+      mesh: neoLandozerGutsUp(resources),
+    },
+    {
+      type: "GUTS_DOWN",
+      mesh: neoLandozerGutsDown(resources),
+    },
+    {
+      type: "BACK_STEP",
+      mesh: neoLandozerBackStep(resources),
+    },
+    {
+      type: "FRONT_STEP",
+      mesh: neoLandozerFrontStep(resources),
+    },
+  ];
 }

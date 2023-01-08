@@ -26,13 +26,19 @@ export class MatchCard implements DOMScene {
    * @param param パラメータ
    */
   constructor(param: Param) {
-    this.#presentation = new MatchCardPresentation(param.resources, param.player, param.enemy, param.caption);
+    this.#presentation = new MatchCardPresentation(
+      param.resources,
+      param.player,
+      param.enemy,
+      param.caption
+    );
   }
 
   /**
    * デストラクタ相当の処理
    */
-  destructor(): void {// NOP
+  destructor(): void {
+    // NOP
   }
 
   /**
@@ -52,5 +58,4 @@ export class MatchCard implements DOMScene {
   getRootHTMLElement(): HTMLElement {
     return this.#presentation.getRootHTMLElement();
   }
-
 }

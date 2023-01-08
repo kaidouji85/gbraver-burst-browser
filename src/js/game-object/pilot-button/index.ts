@@ -13,7 +13,10 @@ import { TsubasaIcon } from "./view/tsubasa";
  * @param gameObjectAction ゲームオブジェクトアクション
  * @return パイロットボタン
  */
-export function shinyaPilotButton(resources: Resources, gameObjectAction: Stream<GameObjectAction>): PilotButton {
+export function shinyaPilotButton(
+  resources: Resources,
+  gameObjectAction: Stream<GameObjectAction>
+): PilotButton {
   const icon = new ShinyaIcon(resources);
   return new PilotButton(resources, icon, gameObjectAction);
 }
@@ -24,7 +27,10 @@ export function shinyaPilotButton(resources: Resources, gameObjectAction: Stream
  * @param gameObjectAction ゲームオブジェクトアクション
  * @return パイロットボタン
  */
-export function gaiPilotButton(resources: Resources, gameObjectAction: Stream<GameObjectAction>): PilotButton {
+export function gaiPilotButton(
+  resources: Resources,
+  gameObjectAction: Stream<GameObjectAction>
+): PilotButton {
   const icon = new GaiIcon(resources);
   return new PilotButton(resources, icon, gameObjectAction);
 }
@@ -35,7 +41,10 @@ export function gaiPilotButton(resources: Resources, gameObjectAction: Stream<Ga
  * @param gameObjectAction ゲームオブジェクトアクション
  * @return パイロットボタン
  */
-export function raitoPilotButton(resources: Resources, gameObjectAction: Stream<GameObjectAction>): PilotButton {
+export function raitoPilotButton(
+  resources: Resources,
+  gameObjectAction: Stream<GameObjectAction>
+): PilotButton {
   const icon = new RaitoIcon(resources);
   return new PilotButton(resources, icon, gameObjectAction);
 }
@@ -46,7 +55,10 @@ export function raitoPilotButton(resources: Resources, gameObjectAction: Stream<
  * @param gameObjectAction ゲームオブジェクトアクション
  * @return パイロットボタン
  */
-export function tsubasaPilotButton(resources: Resources, gameObjectAction: Stream<GameObjectAction>): PilotButton {
+export function tsubasaPilotButton(
+  resources: Resources,
+  gameObjectAction: Stream<GameObjectAction>
+): PilotButton {
   const icon = new TsubasaIcon(resources);
   return new PilotButton(resources, icon, gameObjectAction);
 }

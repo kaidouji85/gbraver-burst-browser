@@ -13,13 +13,15 @@ export const MAX_ANIMATION = 4;
  * @param resources リソース管理オブジェクト
  * @return メッシュ
  */
-export function lightningDozerHmAttack(resources: Resources): ArmdozerAnimation {
+export function lightningDozerHmAttack(
+  resources: Resources
+): ArmdozerAnimation {
   const ret = createHorizontalAnimationFromResources({
     id: TEXTURE_IDS.LIGHTNING_DOZER_HM_ATTACK,
     maxAnimation: MAX_ANIMATION,
     resources: resources,
     width: MESH_WIDTH,
-    height: MESH_HEIGHT
+    height: MESH_HEIGHT,
   });
   const object = ret.getObject3D();
   object.position.y = MESH_Y;

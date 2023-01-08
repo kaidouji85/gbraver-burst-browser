@@ -40,7 +40,7 @@ export class Gauge implements HUDTracking {
   constructor(param: Param) {
     this.#view = param.view;
     this.#model = initialValue(param.hp, param.battery);
-    this.#unsubscriber = param.gameObjectAction.subscribe(action => {
+    this.#unsubscriber = param.gameObjectAction.subscribe((action) => {
       if (action.type === "PreRender") {
         this.#preRender(action);
       }
@@ -84,5 +84,4 @@ export class Gauge implements HUDTracking {
   #preRender(action: PreRender): void {
     this.#view.engage(this.#model, action);
   }
-
 }

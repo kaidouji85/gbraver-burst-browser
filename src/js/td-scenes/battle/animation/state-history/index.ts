@@ -1,4 +1,18 @@
-import type { BatteryDeclaration, Battle, BurstEffect, GameEnd, GameState, GameStateX, InputCommand, PilotSkillEffect, Reflect, RightItself, StartGame, TurnChange, UpdateRemainingTurn } from "gbraver-burst-core";
+import type {
+  BatteryDeclaration,
+  Battle,
+  BurstEffect,
+  GameEnd,
+  GameState,
+  GameStateX,
+  InputCommand,
+  PilotSkillEffect,
+  Reflect,
+  RightItself,
+  StartGame,
+  TurnChange,
+  UpdateRemainingTurn,
+} from "gbraver-burst-core";
 
 import { Animate } from "../../../../animation/animate";
 import { empty } from "../../../../animation/delay";
@@ -19,7 +33,11 @@ import { updateRemainingTurnAnimation } from "./update-remaining-turn";
  * 同時再生する効果
  * 以下効果が連続した場合、アニメーションは並列再生される
  */
-const parallelPlayEffects = ["TurnChange", "RightItself", "UpdateRemainingTurn"];
+const parallelPlayEffects = [
+  "TurnChange",
+  "RightItself",
+  "UpdateRemainingTurn",
+];
 
 /**
  * ゲームステート履歴を戦闘アニメーションに変換する
@@ -28,16 +46,30 @@ const parallelPlayEffects = ["TurnChange", "RightItself", "UpdateRemainingTurn"]
  * @param gameStateHistory 変換対象のゲームステートヒストリー
  * @return アニメーション
  */
-export function stateHistoryAnimation(props: StateAnimationProps, gameStateHistory: GameState[]): Animate {
-  return gameStateHistory.map((gameState, index) => {
-    const next = gameStateHistory[index + 1];
-    const isParallel = next && parallelPlayEffects.includes(next.effect.name) && parallelPlayEffects.includes(gameState.effect.name);
-    const anime = stateAnimation(props, gameState);
-    return {
-      anime,
-      isParallel
-    };
-  }).reduce((previous, current) => current.isParallel ? previous.chain(empty(), current.anime) : previous.chain(current.anime), empty());
+export function stateHistoryAnimation(
+  props: StateAnimationProps,
+  gameStateHistory: GameState[]
+): Animate {
+  return gameStateHistory
+    .map((gameState, index) => {
+      const next = gameStateHistory[index + 1];
+      const isParallel =
+        next &&
+        parallelPlayEffects.includes(next.effect.name) &&
+        parallelPlayEffects.includes(gameState.effect.name);
+      const anime = stateAnimation(props, gameState);
+      return {
+        anime,
+        isParallel,
+      };
+    })
+    .reduce(
+      (previous, current) =>
+        current.isParallel
+          ? previous.chain(empty(), current.anime)
+          : previous.chain(current.anime),
+      empty()
+    );
 }
 
 /**
@@ -47,7 +79,10 @@ export function stateHistoryAnimation(props: StateAnimationProps, gameStateHisto
  * @param gameState 変換対象のゲームステート
  * @return アニメーション
  */
-export function stateAnimation(props: StateAnimationProps, gameState: GameState): Animate {
+export function stateAnimation(
+  props: StateAnimationProps,
+  gameState: GameState
+): Animate {
   if (gameState.effect.name === "StartGame") {
     const effect: StartGame = gameState.effect;
     const state = gameState as GameStateX<typeof effect>;

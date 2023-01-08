@@ -10,10 +10,17 @@ import type { DataIDs } from "./data-ids";
  * @return 生成したHTMLタグ
  */
 function captionClauses(title: string[]): string {
-  return title.map(v => `
-    <div class="${ROOT_CLASS}__caption-clause--capitalized">${v.slice(0, 1)}</div>
+  return title
+    .map(
+      (v) => `
+    <div class="${ROOT_CLASS}__caption-clause--capitalized">${v.slice(
+        0,
+        1
+      )}</div>
     <div class="${ROOT_CLASS}__caption-clause">${v.slice(1)}</div>
-  `).join("");
+  `
+    )
+    .join("");
 }
 
 /** ルート要素innerHTMLのパラメータ */
@@ -35,20 +42,34 @@ export type RootInnerHTMLParams = {
  * @param params パラメータ
  * @return innerHTML
  */
-export function rootInnerHtml(ids: DataIDs, params: RootInnerHTMLParams): string {
+export function rootInnerHtml(
+  ids: DataIDs,
+  params: RootInnerHTMLParams
+): string {
   const prefix = "Tutorial";
-  const bustShot = params.resources.paths.find(v => v.id === PathIds.SHIN_BRAVER_BUST_SHOT)?.path ?? "";
-  const stand = params.resources.paths.find(v => v.id === PathIds.SHIN_BRAVER_STAND)?.path ?? "";
+  const bustShot =
+    params.resources.paths.find((v) => v.id === PathIds.SHIN_BRAVER_BUST_SHOT)
+      ?.path ?? "";
+  const stand =
+    params.resources.paths.find((v) => v.id === PathIds.SHIN_BRAVER_STAND)
+      ?.path ?? "";
   return `
     <div class="${ROOT_CLASS}__title">
       <div class="${ROOT_CLASS}__stage">
-        <div class="${ROOT_CLASS}__stage-prefix--capitalized">${prefix.slice(0, 1)}</div>      
+        <div class="${ROOT_CLASS}__stage-prefix--capitalized">${prefix.slice(
+    0,
+    1
+  )}</div>      
         <div class="${ROOT_CLASS}__stage-prefix">${prefix.slice(1)}</div>
         <div class="${ROOT_CLASS}__stage-level">${params.level}</div>
       </div>
       <div class="${ROOT_CLASS}__caption">${captionClauses(params.title)}</div>
     </div>
-    <img class="${ROOT_CLASS}__shin-braver-stand" data-id="${ids.stand}" src="${stand}">
-    <img class="${ROOT_CLASS}__shin-braver-bust-shot" data-id="${ids.bustShot}" src="${bustShot}">
+    <img class="${ROOT_CLASS}__shin-braver-stand" data-id="${
+    ids.stand
+  }" src="${stand}">
+    <img class="${ROOT_CLASS}__shin-braver-bust-shot" data-id="${
+    ids.bustShot
+  }" src="${bustShot}">
   `;
 }

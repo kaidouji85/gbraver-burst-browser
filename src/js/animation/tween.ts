@@ -1,4 +1,4 @@
-import {Group, Tween} from "@tweenjs/tween.js";
+import { Group, Tween } from "@tweenjs/tween.js";
 
 import { Animate } from "./animate";
 import { tweenDuration } from "./duration";
@@ -18,7 +18,11 @@ import { tweenDuration } from "./duration";
  * @return アニメーション
  */
 /* eslint-disable @typescript-eslint/no-explicit-any */
-export function tween<T extends Record<string, any>>(model: T, create: (t: Tween<any>) => Tween<any>, group?: Group): Animate {
+export function tween<T extends Record<string, any>>(
+  model: T,
+  create: (t: Tween<any>) => Tween<any>,
+  group?: Group
+): Animate {
   /* eslint-enable */
   const origin = new Tween(model, group);
   const t = create(origin);

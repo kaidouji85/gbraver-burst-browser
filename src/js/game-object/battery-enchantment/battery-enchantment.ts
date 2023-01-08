@@ -27,11 +27,15 @@ export class BatteryEnchantment {
    * @param resources リソース管理オブジェクト
    * @param gameObjectAction ゲームオブジェクトアクション
    */
-  constructor(view: BatteryEnchantmentView, resources: Resources, gameObjectAction: Stream<GameObjectAction>) {
+  constructor(
+    view: BatteryEnchantmentView,
+    resources: Resources,
+    gameObjectAction: Stream<GameObjectAction>
+  ) {
     this.#model = createInitialValue();
     this.#view = view;
     this.#sounds = new BatteryEnchantmentSounds(resources);
-    this.#unsubscriber = gameObjectAction.subscribe(action => {
+    this.#unsubscriber = gameObjectAction.subscribe((action) => {
       if (action.type === "Update") {
         this.#onUpdate();
       } else if (action.type === "PreRender") {
@@ -79,5 +83,4 @@ export class BatteryEnchantment {
   #onPreRender(action: PreRender): void {
     this.#view.lookAt(action.camera);
   }
-
 }

@@ -28,18 +28,14 @@ export class PlayerWingDozerView implements WingDozerView {
     this.#group = new Group();
     this.#meshes = createMeshes(resources);
     this.#activeMeshes = createActiveMeshes(resources);
-    [...this.#meshes, ...this.#activeMeshes].forEach(({
-      mesh
-    }) => {
+    [...this.#meshes, ...this.#activeMeshes].forEach(({ mesh }) => {
       this.#group.add(mesh.getObject3D());
     });
   }
 
   /** @override */
   destructor(): void {
-    [...this.#meshes, ...this.#activeMeshes].forEach(({
-      mesh
-    }) => {
+    [...this.#meshes, ...this.#activeMeshes].forEach(({ mesh }) => {
       mesh.destructor();
     });
   }
@@ -57,24 +53,30 @@ export class PlayerWingDozerView implements WingDozerView {
     this.#group.scale.x = 1;
     this.#group.scale.y = 1;
     this.#group.scale.z = 1;
-    const currentMesh = this.#meshes.find(v => v.type === model.animation.type);
+    const currentMesh = this.#meshes.find(
+      (v) => v.type === model.animation.type
+    );
 
     if (currentMesh) {
       currentMesh.mesh.animate(model.animation.frame);
       currentMesh.mesh.opacity(1);
     }
 
-    const currentActiveMesh = this.#activeMeshes.find(v => v.type === model.animation.type);
+    const currentActiveMesh = this.#activeMeshes.find(
+      (v) => v.type === model.animation.type
+    );
 
     if (currentActiveMesh) {
-      const activeOpacity = (0.25 + model.active.strength * 0.07) * model.active.opacity;
+      const activeOpacity =
+        (0.25 + model.active.strength * 0.07) * model.active.opacity;
       currentActiveMesh.mesh.opacity(activeOpacity);
       currentActiveMesh.mesh.animate(model.animation.frame);
     }
 
-    [...this.#meshes, ...this.#activeMeshes].filter(v => v !== currentMesh).filter(v => v !== currentActiveMesh).forEach(({
-      mesh
-    }) => mesh.opacity(0));
+    [...this.#meshes, ...this.#activeMeshes]
+      .filter((v) => v !== currentMesh)
+      .filter((v) => v !== currentActiveMesh)
+      .forEach(({ mesh }) => mesh.opacity(0));
   }
 
   /** @override */
@@ -86,5 +88,4 @@ export class PlayerWingDozerView implements WingDozerView {
   addObject3D(object: THREE.Object3D): void {
     this.#group.add(object);
   }
-
 }

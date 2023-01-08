@@ -12,19 +12,26 @@ import type { StateAnimationProps } from "./state-animation-props";
  * @param gameState ゲーム状態
  * @return アニメーション
  */
-export function rightItselfAnimation(props: StateAnimationProps, gameState: GameStateX<RightItself>): Animate {
+export function rightItselfAnimation(
+  props: StateAnimationProps,
+  gameState: GameStateX<RightItself>
+): Animate {
   if (gameState.effect.name !== "RightItself") {
     return empty();
   }
 
   const effect: RightItself = gameState.effect;
-  const defenderArmdozer = props.view.td.armdozerObjects.find(v => v.playerId === effect.defender);
+  const defenderArmdozer = props.view.td.armdozerObjects.find(
+    (v) => v.playerId === effect.defender
+  );
 
   if (!defenderArmdozer) {
     return empty();
   }
 
-  return getMotion(defenderArmdozer.sprite(), effect.battleResult).chain(delay(300));
+  return getMotion(defenderArmdozer.sprite(), effect.battleResult).chain(
+    delay(300)
+  );
 }
 
 /**
@@ -34,7 +41,10 @@ export function rightItselfAnimation(props: StateAnimationProps, gameState: Game
  * @param battleResult 戦闘結果
  * @return アニメーション
  */
-function getMotion(sprite: ArmDozerSprite, battleResult: BattleResult): Animate {
+function getMotion(
+  sprite: ArmDozerSprite,
+  battleResult: BattleResult
+): Animate {
   if (battleResult.name === "NormalHit") {
     return sprite.knockBackToStand();
   }

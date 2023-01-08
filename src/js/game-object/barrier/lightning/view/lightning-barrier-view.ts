@@ -21,13 +21,17 @@ export class LightningBarrierView {
   #mesh: HorizontalAnimationMesh;
 
   constructor(resources: Resources) {
-    const textureResource = resources.textures.find(v => v.id === TEXTURE_IDS.BARRIER_LIGHTNING);
-    const texture = textureResource ? textureResource.texture : new THREE.Texture();
+    const textureResource = resources.textures.find(
+      (v) => v.id === TEXTURE_IDS.BARRIER_LIGHTNING
+    );
+    const texture = textureResource
+      ? textureResource.texture
+      : new THREE.Texture();
     this.#mesh = new HorizontalAnimationMesh({
       texture: texture,
       maxAnimation: MAX_ANIMATION,
       width: WIDTH,
-      height: HEIGHT
+      height: HEIGHT,
     });
   }
 
@@ -68,5 +72,4 @@ export class LightningBarrierView {
   getObject3D(): THREE.Object3D {
     return this.#mesh.getObject3D();
   }
-
 }

@@ -19,7 +19,12 @@ type Paragraph = string[];
  * @param paragraphs 表示するメッセージ
  * @return 処理が完了したら発火するPromise
  */
-async function scrollMessages(messageWindow: MessageWindow, pushWindow: Stream<PushWindow>, sounds: BattleSceneSounds, paragraphs: Paragraph[]): Promise<void> {
+async function scrollMessages(
+  messageWindow: MessageWindow,
+  pushWindow: Stream<PushWindow>,
+  sounds: BattleSceneSounds,
+  paragraphs: Paragraph[]
+): Promise<void> {
   messageWindow.nextMessageIconVisible(true);
 
   for (let i = 0; i < paragraphs.length; i++) {
@@ -39,8 +44,16 @@ async function scrollMessages(messageWindow: MessageWindow, pushWindow: Stream<P
  * @param paragraphs 表示するメッセージ
  * @return 処理が完了したら発火するPromise
  */
-export async function scrollLeftMessages(props: CustomBattleEventProps, paragraphs: Paragraph[]): Promise<void> {
-  await scrollMessages(props.view.dom.leftMessageWindow, props.pushWindow, props.sounds, paragraphs);
+export async function scrollLeftMessages(
+  props: CustomBattleEventProps,
+  paragraphs: Paragraph[]
+): Promise<void> {
+  await scrollMessages(
+    props.view.dom.leftMessageWindow,
+    props.pushWindow,
+    props.sounds,
+    paragraphs
+  );
 }
 
 /**
@@ -50,6 +63,14 @@ export async function scrollLeftMessages(props: CustomBattleEventProps, paragrap
  * @param paragraphs 表示するメッセージ
  * @return 処理が完了したら発火するPromise
  */
-export async function scrollRightMessages(props: CustomBattleEventProps, paragraphs: Paragraph[]): Promise<void> {
-  await scrollMessages(props.view.dom.rightMessageWindow, props.pushWindow, props.sounds, paragraphs);
+export async function scrollRightMessages(
+  props: CustomBattleEventProps,
+  paragraphs: Paragraph[]
+): Promise<void> {
+  await scrollMessages(
+    props.view.dom.rightMessageWindow,
+    props.pushWindow,
+    props.sounds,
+    paragraphs
+  );
 }

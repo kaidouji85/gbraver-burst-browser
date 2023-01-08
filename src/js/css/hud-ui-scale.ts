@@ -40,7 +40,7 @@ export class CssHUDUIScale {
     this.#safeAreaInset = createSafeAreaInset();
     const scale = HUDUIScale(this.#rendererDOM, this.#safeAreaInset);
     setHUDUIScale(scale);
-    this.#unsubscriver = resize.subscribe(action => {
+    this.#unsubscriver = resize.subscribe((action) => {
       this.#onResize(action);
     });
   }

@@ -10,9 +10,11 @@ import type { PushWindow } from "../window/push-window";
  * @param pushWindow 画面押下ストリーム
  * @return 画面押下したら発火するPromise
  */
-export function waitUntilWindowPushWithStream(pushWindow: Stream<PushWindow>): Promise<void> {
-  return new Promise(resolve => {
-    const unsubscriber = pushWindow.chain(first()).subscribe(action => {
+export function waitUntilWindowPushWithStream(
+  pushWindow: Stream<PushWindow>
+): Promise<void> {
+  return new Promise((resolve) => {
+    const unsubscriber = pushWindow.chain(first()).subscribe((action) => {
       action.event.preventDefault();
       unsubscriber.unsubscribe();
       resolve();
@@ -27,6 +29,8 @@ export function waitUntilWindowPushWithStream(pushWindow: Stream<PushWindow>): P
  * @param props イベントプロパティ
  * @return 画面押下したら発火するPromise
  */
-export async function waitUntilWindowPush(props: CustomBattleEventProps): Promise<void> {
+export async function waitUntilWindowPush(
+  props: CustomBattleEventProps
+): Promise<void> {
   await waitUntilWindowPushWithStream(props.pushWindow);
 }

@@ -13,15 +13,34 @@ import { deathLightning, lightning } from "./lightning";
  * @param gameState ゲームステート
  * @return アニメーション
  */
-export function reflectAnimation(props: StateAnimationProps, gameState: GameStateX<Reflect>): Animate {
+export function reflectAnimation(
+  props: StateAnimationProps,
+  gameState: GameStateX<Reflect>
+): Animate {
   const effect: Reflect = gameState.effect;
-  const stateOfDamaged = gameState.players.find(v => v.playerId === effect.damagedPlayer);
-  const tdArmdozerOfDamaged = props.view.td.armdozerObjects.find(v => v.playerId === effect.damagedPlayer);
-  const tdPlayerOfDamaged = props.view.td.players.find(v => v.playerId === effect.damagedPlayer);
-  const hudPlayerOfDamaged = props.view.hud.players.find(v => v.playerId === effect.damagedPlayer);
-  const hudPlayerOfReflecting = props.view.hud.players.find(v => v.playerId !== effect.damagedPlayer);
+  const stateOfDamaged = gameState.players.find(
+    (v) => v.playerId === effect.damagedPlayer
+  );
+  const tdArmdozerOfDamaged = props.view.td.armdozerObjects.find(
+    (v) => v.playerId === effect.damagedPlayer
+  );
+  const tdPlayerOfDamaged = props.view.td.players.find(
+    (v) => v.playerId === effect.damagedPlayer
+  );
+  const hudPlayerOfDamaged = props.view.hud.players.find(
+    (v) => v.playerId === effect.damagedPlayer
+  );
+  const hudPlayerOfReflecting = props.view.hud.players.find(
+    (v) => v.playerId !== effect.damagedPlayer
+  );
 
-  if (!stateOfDamaged || !tdArmdozerOfDamaged || !tdPlayerOfDamaged || !hudPlayerOfDamaged || !hudPlayerOfReflecting) {
+  if (
+    !stateOfDamaged ||
+    !tdArmdozerOfDamaged ||
+    !tdPlayerOfDamaged ||
+    !hudPlayerOfDamaged ||
+    !hudPlayerOfReflecting
+  ) {
     return empty();
   }
 
@@ -29,15 +48,15 @@ export function reflectAnimation(props: StateAnimationProps, gameState: GameStat
     state: stateOfDamaged,
     sprite: tdArmdozerOfDamaged.sprite(),
     td: tdPlayerOfDamaged,
-    hud: hudPlayerOfDamaged
+    hud: hudPlayerOfDamaged,
   };
   const reflecting = {
-    hud: hudPlayerOfReflecting
+    hud: hudPlayerOfReflecting,
   };
   const animationParam: ReflectAnimationParam = {
     effect,
     damaged,
-    reflecting
+    reflecting,
   };
 
   if (effect.effect === "Lightning" && effect.isDeath) {

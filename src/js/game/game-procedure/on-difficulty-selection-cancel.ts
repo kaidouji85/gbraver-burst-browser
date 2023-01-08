@@ -7,14 +7,20 @@ import type { GameProps } from "../game-props";
  * @param props ゲームプロパティ
  */
 export function onDifficultySelectionCancel(props: GameProps): void {
-  if (!(props.inProgress.type === "NPCBattle" && props.inProgress.subFlow.type === "DifficultySelect")) {
+  if (
+    !(
+      props.inProgress.type === "NPCBattle" &&
+      props.inProgress.subFlow.type === "DifficultySelect"
+    )
+  ) {
     return;
   }
 
-  props.inProgress = { ...props.inProgress,
+  props.inProgress = {
+    ...props.inProgress,
     subFlow: {
-      type: "PlayerSelect"
-    }
+      type: "PlayerSelect",
+    },
   };
   props.domDialogBinder.hidden();
 }

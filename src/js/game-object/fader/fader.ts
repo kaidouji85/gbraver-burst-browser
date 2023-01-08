@@ -37,7 +37,7 @@ export class Fader {
   constructor(param: Param) {
     this.#model = createInitialValue(param.isVisible);
     this.#view = new FaderView(param.z);
-    this.#unsubscriber = param.gameObjectAction.subscribe(action => {
+    this.#unsubscriber = param.gameObjectAction.subscribe((action) => {
       if (action.type === "PreRender") {
         this.#onPreRender(action);
       }
@@ -98,5 +98,4 @@ export class Fader {
     this.#model.height = action.rendererDOM.clientHeight;
     this.#view.engage(this.#model);
   }
-
 }

@@ -12,7 +12,10 @@ import { PlayerContinuousAttackView } from "./view/player-continuous-attack-view
  * @param gameObjectAction ゲームオブジェクトアクション
  * @return 生成結果
  */
-export function playerContinuousAttack(resources: Resources, gameObjectAction: Stream<GameObjectAction>): ContinuousAttackIndicator {
+export function playerContinuousAttack(
+  resources: Resources,
+  gameObjectAction: Stream<GameObjectAction>
+): ContinuousAttackIndicator {
   const view = new PlayerContinuousAttackView(resources);
   return new ContinuousAttackIndicator(view, resources, gameObjectAction);
 }
@@ -24,7 +27,10 @@ export function playerContinuousAttack(resources: Resources, gameObjectAction: S
  * @param gameObjectAction ゲームオブジェクトアクション
  * @return 生成結果
  */
-export function enemyContinuousAttack(resources: Resources, gameObjectAction: Stream<GameObjectAction>): ContinuousAttackIndicator {
+export function enemyContinuousAttack(
+  resources: Resources,
+  gameObjectAction: Stream<GameObjectAction>
+): ContinuousAttackIndicator {
   const view = new EnemyContinuousAttackView(resources);
   return new ContinuousAttackIndicator(view, resources, gameObjectAction);
 }

@@ -9,8 +9,13 @@ import type { BatteryNumberModel } from "../model/battery-number-model";
  * @return アニメーション
  */
 export function hidden(model: BatteryNumberModel): Animate {
-  return tween(model, t => t.to({
-    opacity: 0,
-    scale: 1.1
-  }, 200));
+  return tween(model, (t) =>
+    t.to(
+      {
+        opacity: 0,
+        scale: 1.1,
+      },
+      200
+    )
+  );
 }

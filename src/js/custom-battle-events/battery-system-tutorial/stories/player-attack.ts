@@ -1,7 +1,10 @@
 import type { BattleResult } from "gbraver-burst-core";
 
 import type { CustomBattleEventProps } from "../../../td-scenes/battle/custom-battle-event";
-import { activeLeftMessageWindowWithFace, activeRightMessageWindowWithFace } from "../../active-message-window";
+import {
+  activeLeftMessageWindowWithFace,
+  activeRightMessageWindowWithFace,
+} from "../../active-message-window";
 import { scrollLeftMessages, scrollRightMessages } from "../../scroll-messages";
 
 /**
@@ -15,7 +18,10 @@ export async function playerAttackHit(props: CustomBattleEventProps) {
   await scrollRightMessages(props, [["シンヤ", "「手応えありッス」"]]);
   props.view.dom.rightMessageWindow.darken();
   activeLeftMessageWindowWithFace(props, "Tsubasa");
-  await scrollLeftMessages(props, [["ツバサ", "「見事な攻撃だな シンヤ"], ["君が私よりも大きいバッテリーを出したので 攻撃がヒットしたぞ」"]]);
+  await scrollLeftMessages(props, [
+    ["ツバサ", "「見事な攻撃だな シンヤ"],
+    ["君が私よりも大きいバッテリーを出したので 攻撃がヒットしたぞ」"],
+  ]);
   props.view.dom.leftMessageWindow.darken();
 }
 
@@ -30,7 +36,12 @@ export async function playerAttackGuarded(props: CustomBattleEventProps) {
   await scrollRightMessages(props, [["シンヤ", "「よし 攻撃ヒット」"]]);
   props.view.dom.rightMessageWindow.darken();
   activeLeftMessageWindowWithFace(props, "Tsubasa");
-  await scrollLeftMessages(props, [["ツバサ", "「甘いぞ シンヤ"], ["君は私と同じバッテリーを出したので 攻撃をガード ダメージを半減させてもらった」"]]);
+  await scrollLeftMessages(props, [
+    ["ツバサ", "「甘いぞ シンヤ"],
+    [
+      "君は私と同じバッテリーを出したので 攻撃をガード ダメージを半減させてもらった」",
+    ],
+  ]);
   props.view.dom.leftMessageWindow.darken();
 }
 
@@ -44,7 +55,10 @@ export async function playerAttackMiss(props: CustomBattleEventProps) {
   await scrollRightMessages(props, [["シンヤ", "「しまった 避けられた」"]]);
   props.view.dom.rightMessageWindow.darken();
   activeLeftMessageWindowWithFace(props, "Tsubasa");
-  await scrollLeftMessages(props, [["ツバサ", "「まだまだ だな シンヤ"], ["私の方が君より大きいバッテリーを出したので 攻撃を回避させてもらった」"]]);
+  await scrollLeftMessages(props, [
+    ["ツバサ", "「まだまだ だな シンヤ"],
+    ["私の方が君より大きいバッテリーを出したので 攻撃を回避させてもらった」"],
+  ]);
   props.view.dom.leftMessageWindow.darken();
 }
 
@@ -55,8 +69,14 @@ export async function playerAttackMiss(props: CustomBattleEventProps) {
  * @param battleResult 戦闘結果
  * @return ストーリーが完了したら発火するPromise
  */
-export async function playerAttack(props: CustomBattleEventProps, battleResult: BattleResult) {
-  if (battleResult.name === "NormalHit" || battleResult.name === "CriticalHit") {
+export async function playerAttack(
+  props: CustomBattleEventProps,
+  battleResult: BattleResult
+) {
+  if (
+    battleResult.name === "NormalHit" ||
+    battleResult.name === "CriticalHit"
+  ) {
     await playerAttackHit(props);
   } else if (battleResult.name === "Guard") {
     await playerAttackGuarded(props);

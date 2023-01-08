@@ -1,6 +1,15 @@
 import { escapeHTML } from "../../../dom/escape-html";
 import type { TitleAccount } from "../title-account";
-import { ACCOUNT_CLASS, CASUAL_MATCH_CLASS, INVISIBLE_ACCOUNT_CLASS, INVISIBLE_ACCOUNT_MENU_CLASS, INVISIBLE_CASUAL_MATCH_CLASS, INVISIBLE_LOGIN_CLASS, LOGIN_CLASS, ROOT_CLASS } from "./class-name";
+import {
+  ACCOUNT_CLASS,
+  CASUAL_MATCH_CLASS,
+  INVISIBLE_ACCOUNT_CLASS,
+  INVISIBLE_ACCOUNT_MENU_CLASS,
+  INVISIBLE_CASUAL_MATCH_CLASS,
+  INVISIBLE_LOGIN_CLASS,
+  LOGIN_CLASS,
+  ROOT_CLASS,
+} from "./class-name";
 import type { DataIDs } from "./daga-ids";
 
 /** data-id以外のinnerHTMLジェネレータパラメータ */
@@ -30,11 +39,25 @@ export type RootInnerHTMLParams = {
  * @param params ids以外のパラメータ
  * @return innerHTML
  */
-export function rootInnerHTML(ids: DataIDs, params: RootInnerHTMLParams): string {
-  const loginClassName = params.isApiServerEnable && params.account.type === "GuestAccount" ? LOGIN_CLASS : INVISIBLE_LOGIN_CLASS;
-  const accountName = params.account.type === "LoggedInAccount" ? escapeHTML(params.account.name) : "";
-  const accountClassName = params.isApiServerEnable && params.account.type === "LoggedInAccount" ? ACCOUNT_CLASS : INVISIBLE_ACCOUNT_CLASS;
-  const casualMatchClassName = params.isApiServerEnable ? CASUAL_MATCH_CLASS : INVISIBLE_CASUAL_MATCH_CLASS;
+export function rootInnerHTML(
+  ids: DataIDs,
+  params: RootInnerHTMLParams
+): string {
+  const loginClassName =
+    params.isApiServerEnable && params.account.type === "GuestAccount"
+      ? LOGIN_CLASS
+      : INVISIBLE_LOGIN_CLASS;
+  const accountName =
+    params.account.type === "LoggedInAccount"
+      ? escapeHTML(params.account.name)
+      : "";
+  const accountClassName =
+    params.isApiServerEnable && params.account.type === "LoggedInAccount"
+      ? ACCOUNT_CLASS
+      : INVISIBLE_ACCOUNT_CLASS;
+  const casualMatchClassName = params.isApiServerEnable
+    ? CASUAL_MATCH_CLASS
+    : INVISIBLE_CASUAL_MATCH_CLASS;
   return `
     <div class="${ROOT_CLASS}__header">
       <button data-id="${ids.login}" class="${loginClassName}">ログイン</button>

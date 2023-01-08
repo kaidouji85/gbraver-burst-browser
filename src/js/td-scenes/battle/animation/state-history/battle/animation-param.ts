@@ -1,4 +1,9 @@
-import type { Battle, BattleResult, GameStateX, PlayerState } from "gbraver-burst-core";
+import type {
+  Battle,
+  BattleResult,
+  GameStateX,
+  PlayerState,
+} from "gbraver-burst-core";
 
 import type { ArmDozerSprite } from "../../../../../game-object/armdozer/armdozer-sprite";
 import { PlainHUDCamera } from "../../../../../game-object/camera/plain-hud/plain-hud-camera";
@@ -16,7 +21,10 @@ import type { StateAnimationProps } from "../state-animation-props";
  * @type SPRITE 攻撃側スプライト
  * @type RESULT 戦闘結果
  */
-export type BattleAnimationParamX<SPRITE extends ArmDozerSprite, RESULT extends BattleResult> = {
+export type BattleAnimationParamX<
+  SPRITE extends ArmDozerSprite,
+  RESULT extends BattleResult
+> = {
   attackerState: PlayerState;
   attackerTD: TDPlayer;
   attackerHUD: HUDPlayer;
@@ -34,7 +42,10 @@ export type BattleAnimationParamX<SPRITE extends ArmDozerSprite, RESULT extends 
 };
 
 /** 戦闘アニメーション共通で使うパラメータ */
-export type BattleAnimationParam = BattleAnimationParamX<ArmDozerSprite, BattleResult>;
+export type BattleAnimationParam = BattleAnimationParamX<
+  ArmDozerSprite,
+  BattleResult
+>;
 
 /**
  * 各種オブジェクトから戦闘アニメパラメータを生成する
@@ -43,18 +54,46 @@ export type BattleAnimationParam = BattleAnimationParamX<ArmDozerSprite, BattleR
  * @param gameState ゲームステート
  * @return 戦闘アニメパラメータ
  */
-export function toBattleAnimationParam(props: StateAnimationProps, gameState: GameStateX<Battle>): BattleAnimationParam | null | undefined {
+export function toBattleAnimationParam(
+  props: StateAnimationProps,
+  gameState: GameStateX<Battle>
+): BattleAnimationParam | null | undefined {
   const battle: Battle = gameState.effect;
-  const attackerState = gameState.players.find(v => v.playerId === battle.attacker);
-  const attackerTD = props.view.td.players.find(v => v.playerId === battle.attacker);
-  const attackerHUD = props.view.hud.players.find(v => v.playerId === battle.attacker);
-  const attackerArmdozer = props.view.td.armdozerObjects.find(v => v.playerId === battle.attacker);
-  const defenderState = gameState.players.find(v => v.playerId !== battle.attacker);
-  const defenderTD = props.view.td.players.find(v => v.playerId !== battle.attacker);
-  const defenderHUD = props.view.hud.players.find(v => v.playerId !== battle.attacker);
-  const defenderArmdozer = props.view.td.armdozerObjects.find(v => v.playerId !== battle.attacker);
+  const attackerState = gameState.players.find(
+    (v) => v.playerId === battle.attacker
+  );
+  const attackerTD = props.view.td.players.find(
+    (v) => v.playerId === battle.attacker
+  );
+  const attackerHUD = props.view.hud.players.find(
+    (v) => v.playerId === battle.attacker
+  );
+  const attackerArmdozer = props.view.td.armdozerObjects.find(
+    (v) => v.playerId === battle.attacker
+  );
+  const defenderState = gameState.players.find(
+    (v) => v.playerId !== battle.attacker
+  );
+  const defenderTD = props.view.td.players.find(
+    (v) => v.playerId !== battle.attacker
+  );
+  const defenderHUD = props.view.hud.players.find(
+    (v) => v.playerId !== battle.attacker
+  );
+  const defenderArmdozer = props.view.td.armdozerObjects.find(
+    (v) => v.playerId !== battle.attacker
+  );
 
-  if (!attackerState || !attackerTD || !attackerHUD || !attackerArmdozer || !defenderState || !defenderTD || !defenderHUD || !defenderArmdozer) {
+  if (
+    !attackerState ||
+    !attackerTD ||
+    !attackerHUD ||
+    !attackerArmdozer ||
+    !defenderState ||
+    !defenderTD ||
+    !defenderHUD ||
+    !defenderArmdozer
+  ) {
     return null;
   }
 
@@ -72,6 +111,6 @@ export function toBattleAnimationParam(props: StateAnimationProps, gameState: Ga
     hudObjects: props.view.hud.gameObjects,
     hudCamera: props.view.hud.camera,
     isDeath: battle.isDeath,
-    result: battle.result
+    result: battle.result,
   };
 }

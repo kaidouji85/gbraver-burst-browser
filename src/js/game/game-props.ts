@@ -1,4 +1,17 @@
-import type { CasualMatch as CasualMatchSDK, LoggedInUserDelete, LoginCheck, Logout, MailVerify, UniversalLogin, UserMailGet, UserNameGet, UserPictureGet, WebsocketDisconnect, WebsocketErrorNotifier, WebsocketUnintentionalCloseNotifier } from "@gbraver-burst-network/browser-core";
+import type {
+  CasualMatch as CasualMatchSDK,
+  LoggedInUserDelete,
+  LoginCheck,
+  Logout,
+  MailVerify,
+  UniversalLogin,
+  UserMailGet,
+  UserNameGet,
+  UserPictureGet,
+  WebsocketDisconnect,
+  WebsocketErrorNotifier,
+  WebsocketUnintentionalCloseNotifier,
+} from "@gbraver-burst-network/browser-core";
 
 import type { BGMManager } from "../bgm/bgm-manager";
 import { createBGMManager } from "../bgm/bgm-manager";
@@ -27,7 +40,19 @@ import { InterruptScenes } from "./innterrupt-scenes";
 import { TDSceneBinder } from "./td-scene-binder";
 
 /** ゲーム管理オブジェクトで利用するAPIサーバの機能 */
-export interface GameAPI extends UniversalLogin, LoginCheck, CasualMatchSDK, Logout, LoggedInUserDelete, UserNameGet, UserPictureGet, MailVerify, UserMailGet, WebsocketDisconnect, WebsocketErrorNotifier, WebsocketUnintentionalCloseNotifier {}
+export interface GameAPI
+  extends UniversalLogin,
+    LoginCheck,
+    CasualMatchSDK,
+    Logout,
+    LoggedInUserDelete,
+    UserNameGet,
+    UserPictureGet,
+    MailVerify,
+    UserMailGet,
+    WebsocketDisconnect,
+    WebsocketErrorNotifier,
+    WebsocketUnintentionalCloseNotifier {}
 
 /**
  * ゲームプロパティ
@@ -188,7 +213,7 @@ export function generateGameProps(param: GamePropsGeneratorParam): GameProps {
     contactURL: param.contactURL,
     isAPIServerEnable: param.isAPIServerEnable,
     inProgress: {
-      type: "None"
+      type: "None",
     },
     resize,
     pushWindow,
@@ -203,13 +228,13 @@ export function generateGameProps(param: GamePropsGeneratorParam): GameProps {
     domSceneBinder: new DOMSceneBinder(),
     domDialogBinder: new DOMDialogBinder(),
     domFloaters: new DOMFloaters({
-      postBattleConnector
+      postBattleConnector,
     }),
     renderer,
     tdBinder: new TDSceneBinder(renderer, hudUIScale),
     serviceWorker: null,
     bgm: createBGMManager(),
     canPlayTutorialInDevelopment: param.canPlayTutorialInDevelopment,
-    shouldLoadDevelopingResource: param.shouldLoadDevelopingResource
+    shouldLoadDevelopingResource: param.shouldLoadDevelopingResource,
   };
 }

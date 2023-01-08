@@ -5,12 +5,18 @@ import type { DOMSceneActionConnector } from "../dom-scene-binder/dom-scene-acti
 type Connector = DOMSceneActionConnector<MailVerifiedIncomplete>;
 
 /** メール認証未完了画面とゲームアクションを関連付ける */
-export const mailVerifiedIncompleteConnector: Connector = (scene, gameAction) => [scene.gotoTitleNotifier().subscribe(() => {
-  gameAction.next({
-    type: "ExitMailVerifiedIncomplete"
-  });
-}), scene.reloadNotifier().subscribe(() => {
-  gameAction.next({
-    type: "ReloadRequest"
-  });
-})];
+export const mailVerifiedIncompleteConnector: Connector = (
+  scene,
+  gameAction
+) => [
+  scene.gotoTitleNotifier().subscribe(() => {
+    gameAction.next({
+      type: "ExitMailVerifiedIncomplete",
+    });
+  }),
+  scene.reloadNotifier().subscribe(() => {
+    gameAction.next({
+      type: "ReloadRequest",
+    });
+  }),
+];

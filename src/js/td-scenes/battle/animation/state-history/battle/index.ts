@@ -13,7 +13,10 @@ import { attackAnimation } from "./attack";
  * @param gameState ゲームステート
  * @return アニメーション
  */
-export function battleAnimation(props: StateAnimationProps, gameState: GameStateX<Battle>): Animate {
+export function battleAnimation(
+  props: StateAnimationProps,
+  gameState: GameStateX<Battle>
+): Animate {
   const param = toBattleAnimationParam(props, gameState);
 
   if (!param) {

@@ -24,11 +24,14 @@ export class TDGameObjects {
    * @param resources リソース管理オブジェクト
    * @param gameObjectAction ゲームオブジェクトアクション
    */
-  constructor(resources: Resources, gameObjectAction: Stream<GameObjectAction>) {
+  constructor(
+    resources: Resources,
+    gameObjectAction: Stream<GameObjectAction>
+  ) {
     this.stage = new SchoolField(resources);
     this.turnIndicator = new TurnIndicator({
       gameObjectAction: gameObjectAction,
-      resources: resources
+      resources: resources,
     });
     this.skyBrightness = new SkyBrightness(gameObjectAction);
     this.illumination = new Illumination(gameObjectAction);
@@ -50,7 +53,11 @@ export class TDGameObjects {
    * @return シーンに追加するオブジェクト
    */
   getObject3Ds(): THREE.Object3D[] {
-    return [...this.stage.getThreeJsObjects(), this.turnIndicator.getObject3D(), this.skyBrightness.getObject3D(), ...this.illumination.getObject3Ds()];
+    return [
+      ...this.stage.getThreeJsObjects(),
+      this.turnIndicator.getObject3D(),
+      this.skyBrightness.getObject3D(),
+      ...this.illumination.getObject3Ds(),
+    ];
   }
-
 }

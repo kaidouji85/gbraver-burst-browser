@@ -15,9 +15,20 @@ export function open(model: TimeScaleButtonModel, timeScale: number): Animate {
     model.disabled = true;
     model.opacity = 0;
     model.timeScale = timeScale;
-  }).chain(tween(model, t => t.to({
-    opacity: 1
-  }, 200))).chain(process(() => {
-    model.disabled = false;
-  }));
+  })
+    .chain(
+      tween(model, (t) =>
+        t.to(
+          {
+            opacity: 1,
+          },
+          200
+        )
+      )
+    )
+    .chain(
+      process(() => {
+        model.disabled = false;
+      })
+    );
 }

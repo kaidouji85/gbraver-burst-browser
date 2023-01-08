@@ -2,7 +2,10 @@ import type { Player, PlayerId } from "gbraver-burst-core";
 import * as THREE from "three";
 
 import type { GameObjectAction } from "../../../../../game-object/action/game-object-action";
-import { enemyWingDozerCutIn, playerWingDozerCutIn } from "../../../../../game-object/cut-in/wing-dozer";
+import {
+  enemyWingDozerCutIn,
+  playerWingDozerCutIn,
+} from "../../../../../game-object/cut-in/wing-dozer";
 import { WingDozerCutIn } from "../../../../../game-object/cut-in/wing-dozer/wing-dozer-cutin";
 import type { Resources } from "../../../../../resource";
 import type { Stream } from "../../../../../stream/stream";
@@ -41,7 +44,6 @@ export class WingDozerHUD implements HUDArmdozerObjects {
   getObject3Ds(): THREE.Object3D[] {
     return [this.cutIn.getObject3D()];
   }
-
 }
 
 /**
@@ -52,10 +54,14 @@ export class WingDozerHUD implements HUDArmdozerObjects {
  * @param state プレイヤーの状態
  * @return ウィングドーザHUD
  */
-export function playerWingDozerHUD(resources: Resources, gameObjectAction: Stream<GameObjectAction>, state: Player): WingDozerHUD {
+export function playerWingDozerHUD(
+  resources: Resources,
+  gameObjectAction: Stream<GameObjectAction>,
+  state: Player
+): WingDozerHUD {
   return new WingDozerHUD({
     playerId: state.playerId,
-    cutIn: playerWingDozerCutIn(resources, gameObjectAction)
+    cutIn: playerWingDozerCutIn(resources, gameObjectAction),
   });
 }
 
@@ -67,9 +73,13 @@ export function playerWingDozerHUD(resources: Resources, gameObjectAction: Strea
  * @param state プレイヤーの状態
  * @return ウィングドーザHUD
  */
-export function enemyWingDozerHUD(resources: Resources, gameObjectAction: Stream<GameObjectAction>, state: Player): WingDozerHUD {
+export function enemyWingDozerHUD(
+  resources: Resources,
+  gameObjectAction: Stream<GameObjectAction>,
+  state: Player
+): WingDozerHUD {
   return new WingDozerHUD({
     playerId: state.playerId,
-    cutIn: enemyWingDozerCutIn(resources, gameObjectAction)
+    cutIn: enemyWingDozerCutIn(resources, gameObjectAction),
   });
 }

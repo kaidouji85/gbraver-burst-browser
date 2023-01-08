@@ -2,7 +2,12 @@ import type { ArmDozerId } from "gbraver-burst-core";
 import { ArmDozerIds } from "gbraver-burst-core";
 
 import type { GameObjectAction } from "../../../../../game-object/action/game-object-action";
-import { lightningDozerBurstButton, neoLandozerBurstButton, shinBraverBurstButton, wingDozerBurstButton } from "../../../../../game-object/burst-button";
+import {
+  lightningDozerBurstButton,
+  neoLandozerBurstButton,
+  shinBraverBurstButton,
+  wingDozerBurstButton,
+} from "../../../../../game-object/burst-button";
 import { BurstButton } from "../../../../../game-object/burst-button/burst-button";
 import type { Resources } from "../../../../../resource";
 import type { Stream } from "../../../../../stream/stream";
@@ -15,7 +20,11 @@ import type { Stream } from "../../../../../stream/stream";
  * @param armDozerId アームドーザID
  * @return バーストボタン
  */
-export function createBurstButton(resources: Resources, gameObjectAction: Stream<GameObjectAction>, armDozerId: ArmDozerId): BurstButton {
+export function createBurstButton(
+  resources: Resources,
+  gameObjectAction: Stream<GameObjectAction>,
+  armDozerId: ArmDozerId
+): BurstButton {
   switch (armDozerId) {
     case ArmDozerIds.SHIN_BRAVER:
       return shinBraverBurstButton(resources, gameObjectAction);

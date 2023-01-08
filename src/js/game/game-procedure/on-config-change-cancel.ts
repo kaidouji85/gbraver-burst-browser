@@ -7,7 +7,9 @@ import { startTitle } from "./start-title";
  * @param props ゲームプロパティ
  * @return 処理が完了したら発火するPromise
  */
-export async function onConfigChangeCancel(props: Readonly<GameProps>): Promise<void> {
+export async function onConfigChangeCancel(
+  props: Readonly<GameProps>
+): Promise<void> {
   await props.fader.fadeOut();
   await startTitle(props);
   await props.fader.fadeIn();

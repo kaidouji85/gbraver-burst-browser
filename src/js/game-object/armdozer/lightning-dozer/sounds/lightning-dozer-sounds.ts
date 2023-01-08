@@ -15,8 +15,9 @@ export class LightningDozerSounds {
    * @param resources リソース管理オブジェクト
    */
   constructor(resources: Resources) {
-    const motorResource = resources.sounds.find(v => v.id === SOUND_IDS.MOTOR);
-    this.motor = motorResource ? motorResource.sound : new Howl({src: ""});
+    const motorResource = resources.sounds.find(
+      (v) => v.id === SOUND_IDS.MOTOR
+    );
+    this.motor = motorResource ? motorResource.sound : new Howl({ src: "" });
   }
-
 }

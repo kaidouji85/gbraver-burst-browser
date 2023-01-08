@@ -19,41 +19,54 @@ import type { AnimationMeshMapping } from "./animation-mesh-mapping";
  * @return 生成結果
  */
 export function createMeshes(resources: Resources): AnimationMeshMapping[] {
-  return [{
-    type: "HM_CHARGE",
-    mesh: lightningDozerHmCharge(resources)
-  }, {
-    type: "HM_ATTACK",
-    mesh: lightningDozerHmAttack(resources)
-  }, {
-    type: "HM_TO_STAND",
-    mesh: lightningDozerHmToStand(resources)
-  }, {
-    type: "KNOCK_BACK",
-    mesh: lightningDozerKnockBack(resources)
-  }, {
-    type: "DOWN",
-    mesh: lightningDozerDown(resources)
-  }, {
-    type: "GUTS_UP",
-    mesh: lightningDozerGutsUp(resources)
-  }, {
-    type: "GUTS_DOWN",
-    mesh: lightningDozerGutsDown(resources)
-  }, {
-    type: "GUTS_TO_STAND",
-    mesh: lightningDozerGutsToStand(resources)
-  }, {
-    type: "GUARD",
-    mesh: lightningDozerGuard(resources)
-  }, {
-    type: "BACK_STEP",
-    mesh: lightningDozerBackStep(resources)
-  }, {
-    type: "FRONT_STEP",
-    mesh: lightningDozerFrontStep(resources)
-  }, {
-    type: "STAND",
-    mesh: lightningDozerStand(resources)
-  }];
+  return [
+    {
+      type: "HM_CHARGE",
+      mesh: lightningDozerHmCharge(resources),
+    },
+    {
+      type: "HM_ATTACK",
+      mesh: lightningDozerHmAttack(resources),
+    },
+    {
+      type: "HM_TO_STAND",
+      mesh: lightningDozerHmToStand(resources),
+    },
+    {
+      type: "KNOCK_BACK",
+      mesh: lightningDozerKnockBack(resources),
+    },
+    {
+      type: "DOWN",
+      mesh: lightningDozerDown(resources),
+    },
+    {
+      type: "GUTS_UP",
+      mesh: lightningDozerGutsUp(resources),
+    },
+    {
+      type: "GUTS_DOWN",
+      mesh: lightningDozerGutsDown(resources),
+    },
+    {
+      type: "GUTS_TO_STAND",
+      mesh: lightningDozerGutsToStand(resources),
+    },
+    {
+      type: "GUARD",
+      mesh: lightningDozerGuard(resources),
+    },
+    {
+      type: "BACK_STEP",
+      mesh: lightningDozerBackStep(resources),
+    },
+    {
+      type: "FRONT_STEP",
+      mesh: lightningDozerFrontStep(resources),
+    },
+    {
+      type: "STAND",
+      mesh: lightningDozerStand(resources),
+    },
+  ];
 }

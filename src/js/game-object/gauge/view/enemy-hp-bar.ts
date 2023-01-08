@@ -7,5 +7,4 @@ export class EnemyHpBar extends PlayerHpBar {
     super(resources);
     this.getObject3D().scale.x = -1;
   }
-
 }

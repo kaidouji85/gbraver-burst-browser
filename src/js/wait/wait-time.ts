@@ -5,7 +5,7 @@
  * @return 待機Promise
  */
 export function waitTime(ms: number): Promise<void> {
-  return new Promise(resolve => {
+  return new Promise((resolve) => {
     setTimeout(() => {
       resolve();
     }, ms);

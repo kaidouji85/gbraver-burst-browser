@@ -21,10 +21,13 @@ export class DamageIndicator {
    * @param view ビュー
    * @param gameObjectAction Stream<GameObjectAction>
    */
-  constructor(view: DamageIndicatorView, gameObjectAction: Stream<GameObjectAction>) {
+  constructor(
+    view: DamageIndicatorView,
+    gameObjectAction: Stream<GameObjectAction>
+  ) {
     this.#view = view;
     this.#model = createInitialValue();
-    this.#unsubscriber = gameObjectAction.subscribe(action => {
+    this.#unsubscriber = gameObjectAction.subscribe((action) => {
       if (action.type === "Update") {
         this.#update();
       } else if (action.type === "PreRender") {
@@ -58,5 +61,4 @@ export class DamageIndicator {
   #preRender(action: PreRender): void {
     this.#view.lookAt(action.camera);
   }
-
 }

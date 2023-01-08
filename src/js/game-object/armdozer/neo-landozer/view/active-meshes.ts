@@ -12,24 +12,33 @@ import type { AnimationMeshMapping } from "./animation-mesh-mapping";
  * @param resources リソース管理オブジェクト
  * @return 生成結果
  */
-export function createActiveMeshes(resources: Resources): AnimationMeshMapping[] {
-  return [{
-    type: "STAND",
-    mesh: neoLandozerActiveStand(resources)
-  }, {
-    type: "KNOCK_BACK",
-    mesh: neoLandozerActiveKnockBack(resources)
-  }, {
-    type: "GUARD",
-    mesh: neoLandozerActiveGuard(resources)
-  }, {
-    type: "GUTS_UP",
-    mesh: neoLandozerGutsUp(resources)
-  }, {
-    type: "GUTS_DOWN",
-    mesh: neoLandozerGutsDown(resources)
-  }, {
-    type: "FRONT_STEP",
-    mesh: neoLandozerActiveFrontStep(resources)
-  }];
+export function createActiveMeshes(
+  resources: Resources
+): AnimationMeshMapping[] {
+  return [
+    {
+      type: "STAND",
+      mesh: neoLandozerActiveStand(resources),
+    },
+    {
+      type: "KNOCK_BACK",
+      mesh: neoLandozerActiveKnockBack(resources),
+    },
+    {
+      type: "GUARD",
+      mesh: neoLandozerActiveGuard(resources),
+    },
+    {
+      type: "GUTS_UP",
+      mesh: neoLandozerGutsUp(resources),
+    },
+    {
+      type: "GUTS_DOWN",
+      mesh: neoLandozerGutsDown(resources),
+    },
+    {
+      type: "FRONT_STEP",
+      mesh: neoLandozerActiveFrontStep(resources),
+    },
+  ];
 }

@@ -27,15 +27,17 @@ export type DOMStubStory = () => HTMLElement;
  * @param creator HTML要素生成コールバック関数
  * @return ストーリー
  */
-export const domStub = (creator: DOMCreator): DOMStubStory => () => {
-  const root = document.createElement("div");
-  const resize = resizeStream();
-  new CssVH(resize);
-  const resourceRoot = new StorybookResourceRoot();
-  const resourceLoading = developingFullResourceLoading(resourceRoot);
-  resourceLoading.resources.then(resources => {
-    const component = creator(resources);
-    root.appendChild(component);
-  });
-  return root;
-};
+export const domStub =
+  (creator: DOMCreator): DOMStubStory =>
+  () => {
+    const root = document.createElement("div");
+    const resize = resizeStream();
+    new CssVH(resize);
+    const resourceRoot = new StorybookResourceRoot();
+    const resourceLoading = developingFullResourceLoading(resourceRoot);
+    resourceLoading.resources.then((resources) => {
+      const component = creator(resources);
+      root.appendChild(component);
+    });
+    return root;
+  };

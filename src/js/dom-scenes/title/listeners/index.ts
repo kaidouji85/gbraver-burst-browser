@@ -18,23 +18,33 @@ import { onTutorialPush } from "./on-tutorial-push";
  * @return バインドしたイベントリスナのアンサブスクライバ
  */
 export function bindEventListeners(props: TitleProps): Unsubscriber[] {
-  return [pushDOMStream(props.root).subscribe(action => {
-    onRootPush(props, action);
-  }), pushDOMStream(props.login).subscribe(action => {
-    onLoginPush(props, action);
-  }), pushDOMStream(props.avatar).subscribe(action => {
-    onAvatarPush(props, action);
-  }), pushDOMStream(props.deleteAccount).subscribe(action => {
-    onPushDeleteAccount(props, action);
-  }), pushDOMStream(props.logout).subscribe(action => {
-    onLogoutPush(props, action);
-  }), pushDOMStream(props.tutorial).subscribe(action => {
-    onTutorialPush(props, action);
-  }), pushDOMStream(props.arcade).subscribe(action => {
-    onArcadePush(props, action);
-  }), pushDOMStream(props.casualMatch).subscribe(action => {
-    onCasualMatchPush(props, action);
-  }), pushDOMStream(props.config).subscribe(action => {
-    onConfigPush(props, action);
-  })];
+  return [
+    pushDOMStream(props.root).subscribe((action) => {
+      onRootPush(props, action);
+    }),
+    pushDOMStream(props.login).subscribe((action) => {
+      onLoginPush(props, action);
+    }),
+    pushDOMStream(props.avatar).subscribe((action) => {
+      onAvatarPush(props, action);
+    }),
+    pushDOMStream(props.deleteAccount).subscribe((action) => {
+      onPushDeleteAccount(props, action);
+    }),
+    pushDOMStream(props.logout).subscribe((action) => {
+      onLogoutPush(props, action);
+    }),
+    pushDOMStream(props.tutorial).subscribe((action) => {
+      onTutorialPush(props, action);
+    }),
+    pushDOMStream(props.arcade).subscribe((action) => {
+      onArcadePush(props, action);
+    }),
+    pushDOMStream(props.casualMatch).subscribe((action) => {
+      onCasualMatchPush(props, action);
+    }),
+    pushDOMStream(props.config).subscribe((action) => {
+      onConfigPush(props, action);
+    }),
+  ];
 }

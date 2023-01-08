@@ -5,7 +5,10 @@
  * @param oldElement 古いHTML要素
  * @param newElement 新しいHTML要素
  */
-export function replaceDOM(oldElement: HTMLElement, newElement: HTMLElement): void {
+export function replaceDOM(
+  oldElement: HTMLElement,
+  newElement: HTMLElement
+): void {
   const parent = oldElement.parentElement;
 
   if (!parent) {

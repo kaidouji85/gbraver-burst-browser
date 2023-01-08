@@ -2,7 +2,10 @@ import type { Player, PlayerId } from "gbraver-burst-core";
 import * as THREE from "three";
 
 import type { GameObjectAction } from "../../../../../game-object/action/game-object-action";
-import { enemyGaiCutIn, playerGaiCutIn } from "../../../../../game-object/cut-in/gai";
+import {
+  enemyGaiCutIn,
+  playerGaiCutIn,
+} from "../../../../../game-object/cut-in/gai";
 import { GaiCutIn } from "../../../../../game-object/cut-in/gai/gai";
 import type { Resources } from "../../../../../resource";
 import type { Stream } from "../../../../../stream/stream";
@@ -48,7 +51,6 @@ export class GaiHUD implements HUDPilotObjects {
   getObject3Ds(): THREE.Object3D[] {
     return [this.cutIn.getObject3D()];
   }
-
 }
 
 /**
@@ -59,10 +61,14 @@ export class GaiHUD implements HUDPilotObjects {
  * @param state プレイヤーの状態
  * @return ガイHUD
  */
-export function playerGaiHUD(resources: Resources, gameObjectAction: Stream<GameObjectAction>, state: Player): GaiHUD {
+export function playerGaiHUD(
+  resources: Resources,
+  gameObjectAction: Stream<GameObjectAction>,
+  state: Player
+): GaiHUD {
   return new GaiHUD({
     playerId: state.playerId,
-    cutIn: playerGaiCutIn(resources, gameObjectAction)
+    cutIn: playerGaiCutIn(resources, gameObjectAction),
   });
 }
 
@@ -74,9 +80,13 @@ export function playerGaiHUD(resources: Resources, gameObjectAction: Stream<Game
  * @param state プレイヤーの状態
  * @return ガイHUD
  */
-export function enemyGaiHUD(resources: Resources, gameObjectAction: Stream<GameObjectAction>, state: Player): GaiHUD {
+export function enemyGaiHUD(
+  resources: Resources,
+  gameObjectAction: Stream<GameObjectAction>,
+  state: Player
+): GaiHUD {
   return new GaiHUD({
     playerId: state.playerId,
-    cutIn: enemyGaiCutIn(resources, gameObjectAction)
+    cutIn: enemyGaiCutIn(resources, gameObjectAction),
   });
 }

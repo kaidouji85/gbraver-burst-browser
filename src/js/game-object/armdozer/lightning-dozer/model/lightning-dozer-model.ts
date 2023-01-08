@@ -1,5 +1,17 @@
 /** アニメーション種別 */
-export type AnimationType = "STAND" | "HM_CHARGE" | "HM_ATTACK" | "HM_TO_STAND" | "KNOCK_BACK" | "DOWN" | "GUTS_UP" | "GUTS_DOWN" | "GUTS_TO_STAND" | "GUARD" | "BACK_STEP" | "FRONT_STEP";
+export type AnimationType =
+  | "STAND"
+  | "HM_CHARGE"
+  | "HM_ATTACK"
+  | "HM_TO_STAND"
+  | "KNOCK_BACK"
+  | "DOWN"
+  | "GUTS_UP"
+  | "GUTS_DOWN"
+  | "GUTS_TO_STAND"
+  | "GUARD"
+  | "BACK_STEP"
+  | "FRONT_STEP";
 
 /** ライトニングドーザのモデル */
 export type LightningDozerModel = {

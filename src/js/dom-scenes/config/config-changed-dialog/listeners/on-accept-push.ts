@@ -8,7 +8,10 @@ import type { ConfigChangedDialogProps } from "../props";
  * @param props ダイアログプロパティ
  * @param action アクション
  */
-export function onAcceptPush(props: ConfigChangedDialogProps, action: Readonly<PushDOM>): void {
+export function onAcceptPush(
+  props: ConfigChangedDialogProps,
+  action: Readonly<PushDOM>
+): void {
   action.event.preventDefault();
   action.event.stopPropagation();
   props.exclusive.execute(async () => {

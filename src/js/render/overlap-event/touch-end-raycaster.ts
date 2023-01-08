@@ -21,11 +21,15 @@ export type TouchEndRaycaster = {
  * @param origin 変換元
  * @return 変換結果
  */
-export function toTouchEndRaycaster(origin: TouchEnd, renderer: HTMLElement, camera: THREE.Camera): TouchEndRaycaster {
+export function toTouchEndRaycaster(
+  origin: TouchEnd,
+  renderer: HTMLElement,
+  camera: THREE.Camera
+): TouchEndRaycaster {
   const touch = createTouchEventRaycaster(origin.event, renderer, camera);
   return {
     type: "touchEndRaycaster",
     touch,
-    event: origin.event
+    event: origin.event,
   };
 }

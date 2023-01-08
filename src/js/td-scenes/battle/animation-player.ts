@@ -21,6 +21,9 @@ type AnimationPlayer = {
  * @param props 戦闘シーンプロパティ
  * @return 生成したアニメーションプレイヤー
  */
-export const animationPlayer = (props: Readonly<BattleSceneProps>): AnimationPlayer => ({
-  play: (animate: Animate) => animate.timeScale(props.animationTimeScale).play()
+export const animationPlayer = (
+  props: Readonly<BattleSceneProps>
+): AnimationPlayer => ({
+  play: (animate: Animate) =>
+    animate.timeScale(props.animationTimeScale).play(),
 });

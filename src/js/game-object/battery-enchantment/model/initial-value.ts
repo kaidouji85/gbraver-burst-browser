@@ -8,6 +8,6 @@ import type { BatteryEnchantmentModel } from "./battery-enchantment-model";
 export function createInitialValue(): BatteryEnchantmentModel {
   return {
     opacity: 0,
-    scale: 1
+    scale: 1,
   };
 }

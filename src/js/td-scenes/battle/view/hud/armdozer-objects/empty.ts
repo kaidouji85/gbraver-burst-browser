@@ -17,7 +17,8 @@ export class EmptyHUDArmdozer implements HUDArmdozerObjects {
   /**
    * デストラクタ相当の処理
    */
-  destructor(): void {// NOP
+  destructor(): void {
+    // NOP
   }
 
   /**
@@ -28,5 +29,4 @@ export class EmptyHUDArmdozer implements HUDArmdozerObjects {
   getObject3Ds(): THREE.Object3D[] {
     return [];
   }
-
 }

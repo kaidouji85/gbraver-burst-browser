@@ -8,6 +8,6 @@ import type { ReflectIndocatorModel } from "./reflect-indocator-model";
 export function createInitialValue(): ReflectIndocatorModel {
   return {
     opacity: 0,
-    scale: 1
+    scale: 1,
   };
 }

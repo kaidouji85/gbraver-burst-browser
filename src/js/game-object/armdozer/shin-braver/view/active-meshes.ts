@@ -13,27 +13,37 @@ import type { AnimationMeshMapping } from "./animation-mesh-mapping";
  * @param resources リソース管理オブジェクト
  * @return 生成結果
  */
-export function createActiveMeshes(resources: Resources): AnimationMeshMapping[] {
-  return [{
-    type: "STAND",
-    mesh: shinBraverActiveStand(resources)
-  }, {
-    type: "KNOCK_BACK",
-    mesh: shinBraverActiveKnockBack(resources)
-  }, {
-    type: "GUARD",
-    mesh: shinBraverActiveGuard(resources)
-  }, {
-    type: "BURST_UP",
-    mesh: shinBraverActiveBurstUp(resources)
-  }, {
-    type: "BURST_DOWN",
-    mesh: shinBraverActiveBurstDown(resources)
-  }, {
-    type: "BACK_STEP",
-    mesh: shinBraverBackStep(resources)
-  }, {
-    type: "FRONT_STEP",
-    mesh: shinBraverActiveFrontStep(resources)
-  }];
+export function createActiveMeshes(
+  resources: Resources
+): AnimationMeshMapping[] {
+  return [
+    {
+      type: "STAND",
+      mesh: shinBraverActiveStand(resources),
+    },
+    {
+      type: "KNOCK_BACK",
+      mesh: shinBraverActiveKnockBack(resources),
+    },
+    {
+      type: "GUARD",
+      mesh: shinBraverActiveGuard(resources),
+    },
+    {
+      type: "BURST_UP",
+      mesh: shinBraverActiveBurstUp(resources),
+    },
+    {
+      type: "BURST_DOWN",
+      mesh: shinBraverActiveBurstDown(resources),
+    },
+    {
+      type: "BACK_STEP",
+      mesh: shinBraverBackStep(resources),
+    },
+    {
+      type: "FRONT_STEP",
+      mesh: shinBraverActiveFrontStep(resources),
+    },
+  ];
 }

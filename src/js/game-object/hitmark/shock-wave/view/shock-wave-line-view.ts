@@ -21,13 +21,17 @@ export class ShockWaveLineView {
 
   constructor(resources: Resources) {
     this.#group = new THREE.Group();
-    const textureResource = resources.textures.find(v => v.id === TEXTURE_IDS.HITMARK_SHOCK_WAVE_LINE);
-    const texture = textureResource ? textureResource.texture : new THREE.Texture();
+    const textureResource = resources.textures.find(
+      (v) => v.id === TEXTURE_IDS.HITMARK_SHOCK_WAVE_LINE
+    );
+    const texture = textureResource
+      ? textureResource.texture
+      : new THREE.Texture();
     const material = new THREE.MeshBasicMaterial({
       side: THREE.FrontSide,
       blending: THREE.AdditiveBlending,
       transparent: true,
-      map: texture
+      map: texture,
     });
     const geometry = new THREE.PlaneGeometry(WIDTH, HEIGHT, 1, 1);
     this.#mesh = new THREE.Mesh(geometry, material);
@@ -51,7 +55,11 @@ export class ShockWaveLineView {
    */
   engage(model: ShockWaveLineModel): void {
     this.#mesh.material.opacity = model.opacity;
-    this.#group.position.set(model.distance * Math.cos(model.rotate), model.distance * Math.sin(model.rotate), LINE_Z_INDEX);
+    this.#group.position.set(
+      model.distance * Math.cos(model.rotate),
+      model.distance * Math.sin(model.rotate),
+      LINE_Z_INDEX
+    );
     this.#group.rotation.z = model.rotate;
     this.#group.scale.set(model.scale, 1, 1);
   }
@@ -64,5 +72,4 @@ export class ShockWaveLineView {
   getObject3D(): THREE.Object3D {
     return this.#group;
   }
-
 }

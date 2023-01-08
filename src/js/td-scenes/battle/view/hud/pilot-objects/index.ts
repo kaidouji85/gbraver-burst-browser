@@ -18,7 +18,11 @@ import { enemyTsubasaHUD, playerTsubasaHUD } from "./tsubasa";
  * @param state プレイヤー状態
  * @return HUDパイロット
  */
-export function playerHUDPilotObjects(resources: Resources, gameObjectAction: Stream<GameObjectAction>, state: Player): HUDPilotObjects {
+export function playerHUDPilotObjects(
+  resources: Resources,
+  gameObjectAction: Stream<GameObjectAction>,
+  state: Player
+): HUDPilotObjects {
   switch (state.pilot.id) {
     case PilotIds.SHINYA:
       return playerShinyaHUD(resources, gameObjectAction, state);
@@ -45,7 +49,11 @@ export function playerHUDPilotObjects(resources: Resources, gameObjectAction: St
  * @param state プレイヤー状態
  * @return HUDパイロット
  */
-export function enemyHUDPilotObjects(resources: Resources, gameObjectAction: Stream<GameObjectAction>, state: Player): HUDPilotObjects {
+export function enemyHUDPilotObjects(
+  resources: Resources,
+  gameObjectAction: Stream<GameObjectAction>,
+  state: Player
+): HUDPilotObjects {
   switch (state.pilot.id) {
     case PilotIds.SHINYA:
       return enemyShinyaHUD(resources, gameObjectAction, state);

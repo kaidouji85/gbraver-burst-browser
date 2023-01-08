@@ -1,4 +1,10 @@
-import type { BuffPower, Burst, ContinuousAttack, LightningBarrier, RecoverBattery } from "gbraver-burst-core";
+import type {
+  BuffPower,
+  Burst,
+  ContinuousAttack,
+  LightningBarrier,
+  RecoverBattery,
+} from "gbraver-burst-core";
 
 /**
  * バースト詳細を生成する
@@ -39,7 +45,10 @@ function recoverBatteryDetail(burst: RecoverBattery): string[] {
  * @return 説明文
  */
 function powerBuffDetail(burst: BuffPower): string[] {
-  return [`バッテリーを${burst.recoverBattery}回復する。`, `${burst.duration}ターンだけ、攻撃+${burst.buffPower}する。`];
+  return [
+    `バッテリーを${burst.recoverBattery}回復する。`,
+    `${burst.duration}ターンだけ、攻撃+${burst.buffPower}する。`,
+  ];
 }
 
 /**
@@ -48,7 +57,10 @@ function powerBuffDetail(burst: BuffPower): string[] {
  * @return 説明文
  */
 function lightningBarrierDetail(burst: LightningBarrier): string[] {
-  return [`バッテリーを${burst.recoverBattery}回復する。`, `${burst.duration}ターンだけ、相手の攻撃がヒットした場合、相手に${burst.damage}ダメージを与える。`];
+  return [
+    `バッテリーを${burst.recoverBattery}回復する。`,
+    `${burst.duration}ターンだけ、相手の攻撃がヒットした場合、相手に${burst.damage}ダメージを与える。`,
+  ];
 }
 
 /**
@@ -57,5 +69,8 @@ function lightningBarrierDetail(burst: LightningBarrier): string[] {
  * @return 説明文
  */
 function continuousAttackDetail(burst: ContinuousAttack): string[] {
-  return [`バッテリーを${burst.recoverBattery}回復する。`, `自分ターン終了時に、バッテリー回復なしで再び自分ターンとなる。`];
+  return [
+    `バッテリーを${burst.recoverBattery}回復する。`,
+    `自分ターン終了時に、バッテリー回復なしで再び自分ターンとなる。`,
+  ];
 }

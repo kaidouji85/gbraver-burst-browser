@@ -17,9 +17,13 @@ import { playerAttack } from "../stories/player-attack";
  * @param state チュートリアルステート
  * @return ステート更新結果
  */
-export async function beforeLastState(props: Readonly<LastState>, state: Readonly<BatterySystemTutorialState>): Promise<BatterySystemTutorialState> {
-  const updatedStateHistory = { ...state,
-    stateHistory: [...state.stateHistory, ...props.update]
+export async function beforeLastState(
+  props: Readonly<LastState>,
+  state: Readonly<BatterySystemTutorialState>
+): Promise<BatterySystemTutorialState> {
+  const updatedStateHistory = {
+    ...state,
+    stateHistory: [...state.stateHistory, ...props.update],
   };
   const extractedGameEnd = extractGameEnd(props.update);
 
@@ -39,7 +43,9 @@ export async function beforeLastState(props: Readonly<LastState>, state: Readonl
   if (extractedBattle) {
     const battle = extractedBattle.effect;
     const isPlayerAttack = battle.attacker === props.playerId;
-    isPlayerAttack ? await playerAttack(props, battle.result) : await enemyAttack(props, battle.result);
+    isPlayerAttack
+      ? await playerAttack(props, battle.result)
+      : await enemyAttack(props, battle.result);
     invisibleAllMessageWindows(props);
   }
 
@@ -53,9 +59,10 @@ export async function beforeLastState(props: Readonly<LastState>, state: Readonl
     await waitTime(200);
     await completeAttackAndDefense(props);
     invisibleAllMessageWindows(props);
-    return { ...updatedStateHistory,
+    return {
+      ...updatedStateHistory,
       selectableCommands: "All",
-      isBatterySystemDescriptionComplete: true
+      isBatterySystemDescriptionComplete: true,
     };
   }
 

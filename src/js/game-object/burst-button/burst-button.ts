@@ -31,24 +31,32 @@ export class BurstButton {
    * @param gameObjectAction ゲームオブジェクトアクション
    * @param armdozerIcon アームドーザアイコン
    */
-  constructor(resources: Resources, gameObjectAction: Stream<GameObjectAction>, armdozerIcon: ArmdozerIcon) {
-    const pushButtonResource = resources.sounds.find(v => v.id === SOUND_IDS.PUSH_BUTTON);
-    this.#pushButtonSound = pushButtonResource ? pushButtonResource.sound : new Howl({src: ""});
+  constructor(
+    resources: Resources,
+    gameObjectAction: Stream<GameObjectAction>,
+    armdozerIcon: ArmdozerIcon
+  ) {
+    const pushButtonResource = resources.sounds.find(
+      (v) => v.id === SOUND_IDS.PUSH_BUTTON
+    );
+    this.#pushButtonSound = pushButtonResource
+      ? pushButtonResource.sound
+      : new Howl({ src: "" });
     this.#pushButton = createStreamSource();
     this.#model = createInitialValue();
     this.#view = new BurstButtonView({
       resources: resources,
       gameObjectAction: gameObjectAction,
       armdozerIcon: armdozerIcon,
-      onPush: event => {
+      onPush: (event) => {
         if (this.#model.disabled || !this.#model.canBurst) {
           return;
         }
 
         this.#pushButton.next(event);
-      }
+      },
     });
-    this.#unsubscriber = gameObjectAction.subscribe(action => {
+    this.#unsubscriber = gameObjectAction.subscribe((action) => {
       if (action.type === "PreRender") {
         this.#preRender(action);
       }
@@ -112,5 +120,4 @@ export class BurstButton {
   #preRender(action: PreRender): void {
     this.#view.engage(this.#model, action);
   }
-
 }

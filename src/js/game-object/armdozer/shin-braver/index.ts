@@ -12,7 +12,10 @@ import { PlayerShinBraverView } from "./view/player-shin-braver-view";
  * @param gameObjectAction ゲームオブジェクトアクション
  * @return シンブレイバー
  */
-export function PlayerShinBraver(resources: Resources, gameObjectAction: Stream<GameObjectAction>): ShinBraver {
+export function PlayerShinBraver(
+  resources: Resources,
+  gameObjectAction: Stream<GameObjectAction>
+): ShinBraver {
   const view = new PlayerShinBraverView(resources);
   return new ShinBraver(view, resources, gameObjectAction);
 }
@@ -24,7 +27,10 @@ export function PlayerShinBraver(resources: Resources, gameObjectAction: Stream<
  * @param gameObjectAction ゲームオブジェクトアクション
  * @return シンブレイバー
  */
-export function EnemyShinBraver(resources: Resources, gameObjectAction: Stream<GameObjectAction>): ShinBraver {
+export function EnemyShinBraver(
+  resources: Resources,
+  gameObjectAction: Stream<GameObjectAction>
+): ShinBraver {
   const view = new EnemyShinBraverView(resources);
   return new ShinBraver(view, resources, gameObjectAction);
 }

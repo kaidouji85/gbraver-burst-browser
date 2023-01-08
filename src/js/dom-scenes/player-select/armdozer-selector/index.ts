@@ -8,7 +8,11 @@ import { replaceDOM } from "../../../dom/replace-dom";
 import { Exclusive } from "../../../exclusive/exclusive";
 import type { Resources } from "../../../resource";
 import { SOUND_IDS } from "../../../resource/sound";
-import type { Stream, StreamSource, Unsubscriber } from "../../../stream/stream";
+import type {
+  Stream,
+  StreamSource,
+  Unsubscriber,
+} from "../../../stream/stream";
 import { createStreamSource } from "../../../stream/stream";
 import { domUuid } from "../../../uuid/dom-uuid";
 import { ArmdozerIcon } from "./armdozer-icon";
@@ -59,15 +63,23 @@ type Elements = {
  * @return 抽出結果
  */
 function extractElements(root: HTMLElement, ids: DataIDs): Elements {
-  const dummyStatus: HTMLElement = root.querySelector(`[data-id="${ids.dummyStatus}"]`) ?? document.createElement("div");
-  const icons: HTMLElement = root.querySelector(`[data-id="${ids.icons}"]`) ?? document.createElement("div");
-  const okButton: HTMLElement = root.querySelector(`[data-id="${ids.okButton}"]`) ?? document.createElement("button");
-  const prevButton: HTMLElement = root.querySelector(`[data-id="${ids.prevButton}"]`) ?? document.createElement("button");
+  const dummyStatus: HTMLElement =
+    root.querySelector(`[data-id="${ids.dummyStatus}"]`) ??
+    document.createElement("div");
+  const icons: HTMLElement =
+    root.querySelector(`[data-id="${ids.icons}"]`) ??
+    document.createElement("div");
+  const okButton: HTMLElement =
+    root.querySelector(`[data-id="${ids.okButton}"]`) ??
+    document.createElement("button");
+  const prevButton: HTMLElement =
+    root.querySelector(`[data-id="${ids.prevButton}"]`) ??
+    document.createElement("button");
   return {
     dummyStatus,
     icons,
     okButton,
-    prevButton
+    prevButton,
   };
 }
 
@@ -100,19 +112,27 @@ export class ArmdozerSelector {
    * @param armDozerIds アームドーザIDリスト
    * @param initialArmdozerId アームドーザID初期値
    */
-  constructor(resources: Resources, armDozerIds: ArmDozerId[], initialArmdozerId: ArmDozerId) {
+  constructor(
+    resources: Resources,
+    armDozerIds: ArmDozerId[],
+    initialArmdozerId: ArmDozerId
+  ) {
     this.#armdozerId = initialArmdozerId;
     this.#exclusive = new Exclusive();
     this.#change = createStreamSource();
     this.#decide = createStreamSource();
     this.#prev = createStreamSource();
-    this.#changeValueSound = resources.sounds.find(v => v.id === SOUND_IDS.CHANGE_VALUE)?.sound ?? new Howl({src: ""});
-    this.#decideSound = resources.sounds.find(v => v.id === SOUND_IDS.PUSH_BUTTON)?.sound ?? new Howl({src: ""});
+    this.#changeValueSound =
+      resources.sounds.find((v) => v.id === SOUND_IDS.CHANGE_VALUE)?.sound ??
+      new Howl({ src: "" });
+    this.#decideSound =
+      resources.sounds.find((v) => v.id === SOUND_IDS.PUSH_BUTTON)?.sound ??
+      new Howl({ src: "" });
     const dataIDs = {
       dummyStatus: domUuid(),
       okButton: domUuid(),
       prevButton: domUuid(),
-      icons: domUuid()
+      icons: domUuid(),
     };
     this.#root = document.createElement("div");
     this.#root.className = ROOT_CLASS_NAME;
@@ -121,30 +141,36 @@ export class ArmdozerSelector {
     this.#armdozerStatus = new ArmdozerStatus();
     this.#armdozerStatus.switch(this.#armdozerId);
     replaceDOM(elements.dummyStatus, this.#armdozerStatus.getRootHTMLElement());
-    this.#armdozerIcons = armDozerIds.map(v => ({
+    this.#armdozerIcons = armDozerIds.map((v) => ({
       armdozerId: v,
-      icon: createArmdozerIcon(resources, v)
+      icon: createArmdozerIcon(resources, v),
     }));
-    this.#armdozerIcons.forEach(v => {
+    this.#armdozerIcons.forEach((v) => {
       v.icon.selected(v.armdozerId === initialArmdozerId);
       elements.icons.appendChild(v.icon.getRootHTMLElement());
     });
     this.#okButton = elements.okButton;
     this.#prevButton = elements.prevButton;
-    this.#unsubscribers = [...this.#armdozerIcons.map(v => v.icon.selectedNotifier().subscribe(() => {
-      this.#onArmdozerSelect(v.armdozerId);
-    })), pushDOMStream(this.#okButton).subscribe(action => {
-      this.#onOkButtonPush(action);
-    }), pushDOMStream(this.#prevButton).subscribe(action => {
-      this.#onPrevButtonPush(action);
-    })];
+    this.#unsubscribers = [
+      ...this.#armdozerIcons.map((v) =>
+        v.icon.selectedNotifier().subscribe(() => {
+          this.#onArmdozerSelect(v.armdozerId);
+        })
+      ),
+      pushDOMStream(this.#okButton).subscribe((action) => {
+        this.#onOkButtonPush(action);
+      }),
+      pushDOMStream(this.#prevButton).subscribe((action) => {
+        this.#onPrevButtonPush(action);
+      }),
+    ];
   }
 
   /**
    * デストラクタ相当の処理
    */
   destructor(): void {
-    this.#unsubscribers.forEach(v => {
+    this.#unsubscribers.forEach((v) => {
       v.unsubscribe();
     });
   }
@@ -169,7 +195,7 @@ export class ArmdozerSelector {
    * @return 待機結果
    */
   async waitUntilLoaded(): Promise<void> {
-    await Promise.all(this.#armdozerIcons.map(v => v.icon.waitUntilLoaded()));
+    await Promise.all(this.#armdozerIcons.map((v) => v.icon.waitUntilLoaded()));
   }
 
   /**
@@ -222,13 +248,17 @@ export class ArmdozerSelector {
       }
 
       this.#changeValueSound.play();
-      this.#armdozerIcons.filter(v => v.armdozerId === armdozerId).forEach(v => {
-        v.icon.pop();
-        v.icon.selected(true);
-      });
-      this.#armdozerIcons.filter(v => v.armdozerId !== armdozerId).forEach(v => {
-        v.icon.selected(false);
-      });
+      this.#armdozerIcons
+        .filter((v) => v.armdozerId === armdozerId)
+        .forEach((v) => {
+          v.icon.pop();
+          v.icon.selected(true);
+        });
+      this.#armdozerIcons
+        .filter((v) => v.armdozerId !== armdozerId)
+        .forEach((v) => {
+          v.icon.selected(false);
+        });
     });
   }
 
@@ -259,5 +289,4 @@ export class ArmdozerSelector {
       this.#prev.next();
     });
   }
-
 }

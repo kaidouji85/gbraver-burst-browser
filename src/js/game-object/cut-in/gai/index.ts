@@ -12,7 +12,10 @@ import { PlayerGaiView } from "./view/player-gai-view";
  * @param gameObjectAction ゲームオブジェクトアクション
  * @return ガイ カットイン
  */
-export function playerGaiCutIn(resources: Resources, gameObjectAction: Stream<GameObjectAction>): GaiCutIn {
+export function playerGaiCutIn(
+  resources: Resources,
+  gameObjectAction: Stream<GameObjectAction>
+): GaiCutIn {
   const view = new PlayerGaiView(resources);
   return new GaiCutIn(view, resources, gameObjectAction);
 }
@@ -24,7 +27,10 @@ export function playerGaiCutIn(resources: Resources, gameObjectAction: Stream<Ga
  * @param gameObjectAction ゲームオブジェクトアクション
  * @return ガイ カットイン
  */
-export function enemyGaiCutIn(resources: Resources, gameObjectAction: Stream<GameObjectAction>): GaiCutIn {
+export function enemyGaiCutIn(
+  resources: Resources,
+  gameObjectAction: Stream<GameObjectAction>
+): GaiCutIn {
   const view = new EnemyGaiView(resources);
   return new GaiCutIn(view, resources, gameObjectAction);
 }

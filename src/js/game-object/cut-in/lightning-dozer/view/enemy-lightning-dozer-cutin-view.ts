@@ -27,5 +27,4 @@ export class EnemyLightningDozerCutInView extends PlayerLightningDozerCutInView 
     const target = this.getObject3D();
     target.scale.x *= -1;
   }
-
 }

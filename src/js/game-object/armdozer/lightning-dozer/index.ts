@@ -12,7 +12,10 @@ import { PlayerLightingDozerView } from "./view/player-lighting-dozer-view";
  * @param gameObjectAction ゲームオブジェクトアクション
  * @return プレイヤー側のライトニングドーザ
  */
-export function PlayerLightningDozer(resources: Resources, gameObjectAction: Stream<GameObjectAction>): LightningDozer {
+export function PlayerLightningDozer(
+  resources: Resources,
+  gameObjectAction: Stream<GameObjectAction>
+): LightningDozer {
   const view = new PlayerLightingDozerView(resources);
   return new LightningDozer(resources, gameObjectAction, view);
 }
@@ -24,7 +27,10 @@ export function PlayerLightningDozer(resources: Resources, gameObjectAction: Str
  * @param gameObjectAction ゲームオブジェクトアクション
  * @return 敵側のライトニングドーザ
  */
-export function EnemyLightningDozer(resources: Resources, gameObjectAction: Stream<GameObjectAction>): LightningDozer {
+export function EnemyLightningDozer(
+  resources: Resources,
+  gameObjectAction: Stream<GameObjectAction>
+): LightningDozer {
   const view = new EnemyLightningDozerView(resources);
   return new LightningDozer(resources, gameObjectAction, view);
 }

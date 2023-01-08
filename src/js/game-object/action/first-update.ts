@@ -9,8 +9,13 @@ import type { GameObjectAction } from "./game-object-action";
  * @param gameObjectAction ストリーム生成元
  * @return 生成結果
  */
-export function firstUpdate(gameObjectAction: Stream<GameObjectAction>): Stream<Update> {
+export function firstUpdate(
+  gameObjectAction: Stream<GameObjectAction>
+): Stream<Update> {
   /* eslint-disable @typescript-eslint/no-explicit-any */
-  return gameObjectAction.chain(filter(v => v.type === "Update")).chain(map(v => ((v as any) as Update))).chain(first());
+  return gameObjectAction
+    .chain(filter((v) => v.type === "Update"))
+    .chain(map((v) => v as any as Update))
+    .chain(first());
   /* eslint-enable */
 }

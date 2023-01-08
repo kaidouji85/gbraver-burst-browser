@@ -10,10 +10,10 @@ test("NPCバトルステートを正しく作ることができる", () => {
   expect(createNPCBattleState(playerId, armdozerId, pilotId, stages)).toEqual({
     player: {
       playerId,
-      armdozer: ArmDozers.find(v => v.id === armdozerId),
-      pilot: Pilots.find(v => v.id === pilotId)
+      armdozer: ArmDozers.find((v) => v.id === armdozerId),
+      pilot: Pilots.find((v) => v.id === pilotId),
     },
     stages,
-    stageIndex: 0
+    stageIndex: 0,
   });
 });

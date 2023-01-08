@@ -11,11 +11,17 @@ import type { StateAnimationProps } from "../../state-animation-props";
  */
 export function evenMatchAnimation(props: StateAnimationProps): Animate {
   return all(
-    props.view.hud.gameObjects.drawIndicator.slideIn()
+    props.view.hud.gameObjects.drawIndicator
+      .slideIn()
       .chain(delay(500))
       .chain(props.view.hud.gameObjects.drawIndicator.moveToEdge()),
     delay(700)
       // TODO データ型を厳密に書く
-      .chain(...(props.view.hud.players.map(v => v.resultIndicator.hidden()) as [Animate, Animate]))
+      .chain(
+        ...(props.view.hud.players.map((v) => v.resultIndicator.hidden()) as [
+          Animate,
+          Animate
+        ])
+      )
   );
 }

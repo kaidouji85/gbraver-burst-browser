@@ -1,4 +1,4 @@
-import TWEEN, {Group} from "@tweenjs/tween.js";
+import TWEEN, { Group } from "@tweenjs/tween.js";
 import * as THREE from "three";
 
 import { all } from "../../animation/all";
@@ -86,7 +86,7 @@ export class BatterySelector {
     this.#batteryMinusPush = createStreamSource();
     this.#batteryPlusPush = createStreamSource();
     this.#sounds = createBatterySelectorSounds(param.resources);
-    this.#unsubscriber = param.gameObjectAction.subscribe(action => {
+    this.#unsubscriber = param.gameObjectAction.subscribe((action) => {
       if (action.type === "Update") {
         this.#update(action);
       } else if (action.type === "PreRender") {
@@ -96,7 +96,7 @@ export class BatterySelector {
     this.#view = new BatterySelectorView({
       resources: param.resources,
       gameObjectAction: param.gameObjectAction,
-      onOkPush: event => {
+      onOkPush: (event) => {
         this.#onOKPush(event);
       },
       onPlusPush: () => {
@@ -104,7 +104,7 @@ export class BatterySelector {
       },
       onMinusPush: () => {
         this.#onBatteryMinusPush();
-      }
+      },
     });
   }
 
@@ -162,7 +162,10 @@ export class BatterySelector {
       return empty();
     }
 
-    return all(this.#batteryPlusPop(), this.#batteryChange(this.#model.battery + 1));
+    return all(
+      this.#batteryPlusPop(),
+      this.#batteryChange(this.#model.battery + 1)
+    );
   }
 
   /**
@@ -176,7 +179,10 @@ export class BatterySelector {
       return empty();
     }
 
-    return all(this.#batteryMinusPop(), this.#batteryChange(this.#model.battery - 1));
+    return all(
+      this.#batteryMinusPop(),
+      this.#batteryChange(this.#model.battery - 1)
+    );
   }
 
   /** 現在のバッテリー値を取得する */
@@ -295,9 +301,11 @@ export class BatterySelector {
     this.#batteryChangeTween.update();
     this.#batteryChangeTween.removeAll();
     const needle = getNeedleValue(battery);
-    return all(process(() => {
-      this.#model.battery = battery;
-    }), changeNeedle(this.#model, this.#batteryChangeTween, needle));
+    return all(
+      process(() => {
+        this.#model.battery = battery;
+      }),
+      changeNeedle(this.#model, this.#batteryChangeTween, needle)
+    );
   }
-
 }

@@ -8,6 +8,9 @@ import type { BattleSceneProps } from "../battle-scene-props";
  * @param props 戦闘シーンプロパティ
  * @param action タイムスケール変更アクション
  */
-export function onToggleTimeScale(props: BattleSceneProps, action: ToggleTimeScale): void {
+export function onToggleTimeScale(
+  props: BattleSceneProps,
+  action: ToggleTimeScale
+): void {
   props.animationTimeScale = action.timeScale;
 }

@@ -15,11 +15,13 @@ export type Elements = {
  */
 export function extractElements(root: HTMLElement, ids: DataIDs): Elements {
   const foundStand = root.querySelector(`[data-id="${ids.stand}"]`);
-  const stand = foundStand instanceof HTMLImageElement ? foundStand : new Image();
+  const stand =
+    foundStand instanceof HTMLImageElement ? foundStand : new Image();
   const foundBustShot = root.querySelector(`[data-id="${ids.bustShot}"]`);
-  const bustShot = foundBustShot instanceof HTMLImageElement ? foundBustShot : new Image();
+  const bustShot =
+    foundBustShot instanceof HTMLImageElement ? foundBustShot : new Image();
   return {
     stand,
-    bustShot
+    bustShot,
   };
 }

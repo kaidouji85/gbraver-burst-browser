@@ -30,5 +30,4 @@ export class Exclusive {
       this._canExecute = true;
     }
   }
-
 }

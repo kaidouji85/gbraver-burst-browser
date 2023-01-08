@@ -1,4 +1,4 @@
-import {Group} from "@tweenjs/tween.js";
+import { Group } from "@tweenjs/tween.js";
 
 import { Animate } from "../../../../animation/animate";
 import { delay } from "../../../../animation/delay";
@@ -15,9 +15,33 @@ import type { NeoLandozerModel } from "../model/neo-landozer-model";
 export function activeFlash(model: NeoLandozerModel, group: Group): Animate {
   return process(() => {
     model.active.strength = 0;
-  }).chain(tween(model.active, t => t.to({
-    strength: 1
-  }, 500), group)).chain(delay(150, group)).chain(tween(model.active, t => t.to({
-    strength: 0
-  }, 500), group)).chain(delay(150, group));
+  })
+    .chain(
+      tween(
+        model.active,
+        (t) =>
+          t.to(
+            {
+              strength: 1,
+            },
+            500
+          ),
+        group
+      )
+    )
+    .chain(delay(150, group))
+    .chain(
+      tween(
+        model.active,
+        (t) =>
+          t.to(
+            {
+              strength: 0,
+            },
+            500
+          ),
+        group
+      )
+    )
+    .chain(delay(150, group));
 }

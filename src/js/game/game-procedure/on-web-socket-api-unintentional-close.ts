@@ -9,9 +9,12 @@ import type { GameProps } from "../game-props";
  * @param props ゲームプロパティ
  * @param action アクション
  */
-export function onWebSocketAPIUnintentionalClose(props: Readonly<GameProps>, action: WebSocketAPIUnintentionalClose): void {
+export function onWebSocketAPIUnintentionalClose(
+  props: Readonly<GameProps>,
+  action: WebSocketAPIUnintentionalClose
+): void {
   const dialog = new NetworkErrorDialog(props.resources, {
-    type: "GotoTitle"
+    type: "GotoTitle",
   });
   props.domDialogBinder.bind(dialog, networkErrorDialogConnector);
   throw action;

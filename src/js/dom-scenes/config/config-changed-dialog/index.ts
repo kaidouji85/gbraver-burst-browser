@@ -28,7 +28,7 @@ export class ConfigChangedDialog {
    * デストラクタ相当の処理
    */
   destructor(): void {
-    this.#unsbusscriber.forEach(v => {
+    this.#unsbusscriber.forEach((v) => {
       v.unsubscribe();
     });
   }
@@ -82,5 +82,4 @@ export class ConfigChangedDialog {
   discardNotifier(): Stream<void> {
     return this.#props.discardStream;
   }
-
 }

@@ -8,7 +8,11 @@ import { replaceDOM } from "../../../dom/replace-dom";
 import { Exclusive } from "../../../exclusive/exclusive";
 import type { Resources } from "../../../resource";
 import { SOUND_IDS } from "../../../resource/sound";
-import type { Stream, StreamSource, Unsubscriber } from "../../../stream/stream";
+import type {
+  Stream,
+  StreamSource,
+  Unsubscriber,
+} from "../../../stream/stream";
 import { createStreamSource } from "../../../stream/stream";
 import { domUuid } from "../../../uuid/dom-uuid";
 import { createPilotIcon } from "./create-pilot-icon";
@@ -59,15 +63,23 @@ type Elements = {
  * @return 抽出結果
  */
 function extractElements(root: HTMLElement, ids: DataIDs): Elements {
-  const dummyStatus: HTMLElement = root.querySelector(`[data-id="${ids.dummyStatus}"]`) ?? document.createElement("div");
-  const icons: HTMLElement = root.querySelector(`[data-id="${ids.icons}"]`) ?? document.createElement("div");
-  const okButton: HTMLElement = root.querySelector(`[data-id="${ids.okButton}"]`) ?? document.createElement("button");
-  const prevButton: HTMLElement = root.querySelector(`[data-id="${ids.prevButton}"]`) ?? document.createElement("button");
+  const dummyStatus: HTMLElement =
+    root.querySelector(`[data-id="${ids.dummyStatus}"]`) ??
+    document.createElement("div");
+  const icons: HTMLElement =
+    root.querySelector(`[data-id="${ids.icons}"]`) ??
+    document.createElement("div");
+  const okButton: HTMLElement =
+    root.querySelector(`[data-id="${ids.okButton}"]`) ??
+    document.createElement("button");
+  const prevButton: HTMLElement =
+    root.querySelector(`[data-id="${ids.prevButton}"]`) ??
+    document.createElement("button");
   return {
     dummyStatus,
     icons,
     okButton,
-    prevButton
+    prevButton,
   };
 }
 
@@ -78,8 +90,8 @@ export class PilotSelector {
   #root: HTMLElement;
   #pilotStatus: PilotStatus;
   #pilotIcons: Array<{
-    pilotId: PilotId,
-    icon: PilotIcon,
+    pilotId: PilotId;
+    icon: PilotIcon;
   }>;
   #okButton: HTMLElement;
   #prevButton: HTMLElement;
@@ -97,19 +109,27 @@ export class PilotSelector {
    * @param pilotIds 選択可能なパイロットIDリスト
    * @param initialPilotId パイロットIDの初期値
    */
-  constructor(resources: Resources, pilotIds: PilotId[], initialPilotId: PilotId) {
+  constructor(
+    resources: Resources,
+    pilotIds: PilotId[],
+    initialPilotId: PilotId
+  ) {
     this.#pilotId = initialPilotId;
     this.#exclusive = new Exclusive();
     this.#change = createStreamSource();
     this.#decide = createStreamSource();
     this.#prev = createStreamSource();
-    this.#changeValueSound = resources.sounds.find(v => v.id === SOUND_IDS.CHANGE_VALUE)?.sound ?? new Howl({src: ""});
-    this.#decideSound = resources.sounds.find(v => v.id === SOUND_IDS.PUSH_BUTTON)?.sound ?? new Howl({src: ""});
+    this.#changeValueSound =
+      resources.sounds.find((v) => v.id === SOUND_IDS.CHANGE_VALUE)?.sound ??
+      new Howl({ src: "" });
+    this.#decideSound =
+      resources.sounds.find((v) => v.id === SOUND_IDS.PUSH_BUTTON)?.sound ??
+      new Howl({ src: "" });
     const dataIDs = {
       dummyStatus: domUuid(),
       icons: domUuid(),
       okButton: domUuid(),
-      prevButton: domUuid()
+      prevButton: domUuid(),
     };
     this.#root = document.createElement("div");
     this.#root.className = ROOT_CLASS_NAME;
@@ -118,30 +138,36 @@ export class PilotSelector {
     this.#pilotStatus = new PilotStatus();
     this.#pilotStatus.switch(this.#pilotId);
     replaceDOM(elements.dummyStatus, this.#pilotStatus.getRootHTMLElement());
-    this.#pilotIcons = pilotIds.map(v => ({
+    this.#pilotIcons = pilotIds.map((v) => ({
       pilotId: v,
-      icon: createPilotIcon(resources, v)
+      icon: createPilotIcon(resources, v),
     }));
-    this.#pilotIcons.forEach(v => {
+    this.#pilotIcons.forEach((v) => {
       v.icon.selected(v.pilotId === initialPilotId);
       elements.icons.appendChild(v.icon.getRootHTMLElement());
     });
     this.#okButton = elements.okButton;
     this.#prevButton = elements.prevButton;
-    this.#unsubscribers = [...this.#pilotIcons.map(v => v.icon.selectedNotifier().subscribe(() => {
-      this.#onPilotChange(v.pilotId);
-    })), pushDOMStream(this.#okButton).subscribe(action => {
-      this.#onOkButtonPush(action);
-    }), pushDOMStream(this.#prevButton).subscribe(action => {
-      this.#onPrevButtonPush(action);
-    })];
+    this.#unsubscribers = [
+      ...this.#pilotIcons.map((v) =>
+        v.icon.selectedNotifier().subscribe(() => {
+          this.#onPilotChange(v.pilotId);
+        })
+      ),
+      pushDOMStream(this.#okButton).subscribe((action) => {
+        this.#onOkButtonPush(action);
+      }),
+      pushDOMStream(this.#prevButton).subscribe((action) => {
+        this.#onPrevButtonPush(action);
+      }),
+    ];
   }
 
   /**
    * デストラクタ相当の処理
    */
   destructor(): void {
-    this.#unsubscribers.forEach(v => {
+    this.#unsubscribers.forEach((v) => {
       v.unsubscribe();
     });
   }
@@ -153,7 +179,7 @@ export class PilotSelector {
    */
   show(pilotId?: PilotId): void {
     this.#root.className = ROOT_CLASS_NAME;
-    const selected = this.#pilotIcons.find(v => v.pilotId === pilotId);
+    const selected = this.#pilotIcons.find((v) => v.pilotId === pilotId);
 
     if (!pilotId || !selected) {
       return;
@@ -162,9 +188,11 @@ export class PilotSelector {
     this.#pilotId = pilotId;
     selected.icon.selected(true);
     this.#pilotStatus.switch(pilotId);
-    this.#pilotIcons.filter(v => v.pilotId !== pilotId).forEach(v => {
-      v.icon.selected(false);
-    });
+    this.#pilotIcons
+      .filter((v) => v.pilotId !== pilotId)
+      .forEach((v) => {
+        v.icon.selected(false);
+      });
   }
 
   /**
@@ -180,7 +208,7 @@ export class PilotSelector {
    * @return 待機結果
    */
   async waitUntilLoaded(): Promise<void> {
-    await Promise.all(this.#pilotIcons.map(v => v.icon.waitUntilLoaded()));
+    await Promise.all(this.#pilotIcons.map((v) => v.icon.waitUntilLoaded()));
   }
 
   /**
@@ -225,7 +253,7 @@ export class PilotSelector {
    */
   #onPilotChange(pilotId: PilotId): void {
     this.#exclusive.execute(async (): Promise<void> => {
-      const selected = this.#pilotIcons.find(v => v.pilotId === pilotId);
+      const selected = this.#pilotIcons.find((v) => v.pilotId === pilotId);
 
       if (!selected) {
         return;
@@ -240,9 +268,11 @@ export class PilotSelector {
       selected.icon.pop();
       this.#changeValueSound.play();
       selected.icon.selected(true);
-      this.#pilotIcons.filter(v => v.pilotId !== pilotId).forEach(v => {
-        v.icon.selected(false);
-      });
+      this.#pilotIcons
+        .filter((v) => v.pilotId !== pilotId)
+        .forEach((v) => {
+          v.icon.selected(false);
+        });
     });
   }
 
@@ -273,5 +303,4 @@ export class PilotSelector {
       this.#prev.next();
     });
   }
-
 }

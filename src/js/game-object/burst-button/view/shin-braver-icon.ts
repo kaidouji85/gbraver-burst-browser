@@ -19,12 +19,15 @@ export class ShinBraverIcon implements ArmdozerIcon {
    */
   constructor(resources: Resources) {
     this.#group = new THREE.Group();
-    const shinBraver = resources.textures.find(v => v.id === TEXTURE_IDS.SHIN_BRAVER_BURST_BUTTON_ICON)?.texture ?? new THREE.Texture();
+    const shinBraver =
+      resources.textures.find(
+        (v) => v.id === TEXTURE_IDS.SHIN_BRAVER_BURST_BUTTON_ICON
+      )?.texture ?? new THREE.Texture();
     this.#mesh = new HorizontalAnimationMesh({
       texture: shinBraver,
       maxAnimation: 1,
       width: 350,
-      height: 350
+      height: 350,
     });
     this.#mesh.animate(1);
     this.#mesh.getObject3D().position.x = 0;
@@ -56,5 +59,4 @@ export class ShinBraverIcon implements ArmdozerIcon {
   setOpacity(opacity: number): void {
     this.#mesh.setOpacity(opacity);
   }
-
 }

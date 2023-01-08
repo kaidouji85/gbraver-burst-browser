@@ -10,6 +10,6 @@ export function createInitialValue(isVisible: boolean): FaderModel {
   return {
     opacity: isVisible ? 1 : 0,
     width: 1,
-    height: 1
+    height: 1,
   };
 }

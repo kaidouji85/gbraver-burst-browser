@@ -19,12 +19,14 @@ export class ShinyaIcon implements PilotIcon {
    */
   constructor(resources: Resources) {
     this.#group = new THREE.Group();
-    const texture = resources.textures.find(v => v.id === TEXTURE_IDS.SHINYA_CUTIN)?.texture ?? new THREE.Texture();
+    const texture =
+      resources.textures.find((v) => v.id === TEXTURE_IDS.SHINYA_CUTIN)
+        ?.texture ?? new THREE.Texture();
     this.#mesh = new HorizontalAnimationMesh({
       texture: texture,
       maxAnimation: 1,
       width: 400,
-      height: 400
+      height: 400,
     });
     this.#mesh.getObject3D().position.x = -10;
     this.#mesh.getObject3D().position.y = 120;
@@ -55,5 +57,4 @@ export class ShinyaIcon implements PilotIcon {
   setOpacity(opacity: number): void {
     this.#mesh.setOpacity(opacity);
   }
-
 }

@@ -20,7 +20,7 @@ export type TutorialStageID = string;
 export const TutorialStageIDs = {
   BATTERY_SYSTEM: "BATTERY_SYSTEM",
   ZERO_DEFENSE: "ZERO_DEFENSE",
-  BURST: "BURST"
+  BURST: "BURST",
 };
 
 /** チュートリアルステージ */
@@ -45,46 +45,51 @@ export type TutorialStage = {
 };
 
 /** シンブレイバー */
-const shinBraver = ArmDozers.find(v => v.id === ArmDozerIds.SHIN_BRAVER) ?? ArmDozers[0];
+const shinBraver =
+  ArmDozers.find((v) => v.id === ArmDozerIds.SHIN_BRAVER) ?? ArmDozers[0];
 
 /** シンヤ */
-const shinya = Pilots.find(v => v.id === PilotIds.SHINYA) ?? Pilots[0];
+const shinya = Pilots.find((v) => v.id === PilotIds.SHINYA) ?? Pilots[0];
 
 /** チュートリアルステージを集めたもの */
-export const TutorialStages: TutorialStage[] = [{
-  id: TutorialStageIDs.BATTERY_SYSTEM,
-  title: ["バッテリーシステムの基本"],
-  player: {
-    playerId: playerUuid(),
-    armdozer: shinBraver,
-    pilot: shinya
+export const TutorialStages: TutorialStage[] = [
+  {
+    id: TutorialStageIDs.BATTERY_SYSTEM,
+    title: ["バッテリーシステムの基本"],
+    player: {
+      playerId: playerUuid(),
+      armdozer: shinBraver,
+      pilot: shinya,
+    },
+    npc: batterySystemTutorialNPC(),
+    event: createBatterySystemTutorialEvent,
+    bgm: SOUND_IDS.TUTORIAL_BGM,
   },
-  npc: batterySystemTutorialNPC(),
-  event: createBatterySystemTutorialEvent,
-  bgm: SOUND_IDS.TUTORIAL_BGM
-}, {
-  id: TutorialStageIDs.ZERO_DEFENSE,
-  title: ["ゼロ防御だと即", "死する"],
-  player: {
-    playerId: playerUuid(),
-    armdozer: shinBraver,
-    pilot: shinya
+  {
+    id: TutorialStageIDs.ZERO_DEFENSE,
+    title: ["ゼロ防御だと即", "死する"],
+    player: {
+      playerId: playerUuid(),
+      armdozer: shinBraver,
+      pilot: shinya,
+    },
+    npc: zeroDefenseTutorialNPC(),
+    event: createZeroDefenseTutorialEvent,
+    bgm: SOUND_IDS.BATTLE_BGM_01,
   },
-  npc: zeroDefenseTutorialNPC(),
-  event: createZeroDefenseTutorialEvent,
-  bgm: SOUND_IDS.BATTLE_BGM_01
-}, {
-  id: TutorialStageIDs.BURST,
-  title: ["バーストで一発", "逆転"],
-  player: {
-    playerId: playerUuid(),
-    armdozer: shinBraver,
-    pilot: shinya
+  {
+    id: TutorialStageIDs.BURST,
+    title: ["バーストで一発", "逆転"],
+    player: {
+      playerId: playerUuid(),
+      armdozer: shinBraver,
+      pilot: shinya,
+    },
+    npc: burstTutorialNPC(),
+    event: createBurstTutorialEvent,
+    bgm: SOUND_IDS.BATTLE_BGM_03,
   },
-  npc: burstTutorialNPC(),
-  event: createBurstTutorialEvent,
-  bgm: SOUND_IDS.BATTLE_BGM_03
-}];
+];
 
 /** 開発中のチュートリアルのステージをあつめたもの */
 export const TutorialStagesInDevelopment: TutorialStage[] = TutorialStages;

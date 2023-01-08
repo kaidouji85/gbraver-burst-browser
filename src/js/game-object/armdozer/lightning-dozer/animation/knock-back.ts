@@ -11,12 +11,27 @@ import type { LightningDozerModel } from "../model/lightning-dozer-model";
  * @return アニメーション
  */
 export function knockBack(model: LightningDozerModel): Animate {
-  return all(process(() => {
-    model.animation.type = "KNOCK_BACK";
-    model.animation.frame = 1;
-  }), tween(model.position, t => t.to({
-    x: "+20"
-  }, 100)).chain(tween(model.position, t => t.to({
-    x: "-20"
-  }, 100))));
+  return all(
+    process(() => {
+      model.animation.type = "KNOCK_BACK";
+      model.animation.frame = 1;
+    }),
+    tween(model.position, (t) =>
+      t.to(
+        {
+          x: "+20",
+        },
+        100
+      )
+    ).chain(
+      tween(model.position, (t) =>
+        t.to(
+          {
+            x: "-20",
+          },
+          100
+        )
+      )
+    )
+  );
 }

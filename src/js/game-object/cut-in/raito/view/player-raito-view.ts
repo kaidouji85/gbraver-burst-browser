@@ -30,12 +30,14 @@ export class PlayerRaitoView implements RaitoView {
    * @param resources リソース管理オブジェクト
    */
   constructor(resources: Resources) {
-    const raito = resources.textures.find(v => v.id === TEXTURE_IDS.RAITO_CUTIN)?.texture ?? new THREE.Texture();
+    const raito =
+      resources.textures.find((v) => v.id === TEXTURE_IDS.RAITO_CUTIN)
+        ?.texture ?? new THREE.Texture();
     this.#mesh = new HorizontalAnimationMesh({
       texture: raito,
       maxAnimation: MAX_ANIMATION,
       width: MESH_SIZE,
-      height: MESH_SIZE
+      height: MESH_SIZE,
     });
   }
 
@@ -53,8 +55,12 @@ export class PlayerRaitoView implements RaitoView {
    * @param preRender プリレンダー情報
    */
   engage(model: RaitoModel, preRender: PreRender): void {
-    const scale = HUDCutInScale(preRender.rendererDOM, preRender.safeAreaInset) * model.scale;
-    const x = preRender.rendererDOM.clientWidth / 2 + (model.position.x - PADDING_RIGHT) * scale;
+    const scale =
+      HUDCutInScale(preRender.rendererDOM, preRender.safeAreaInset) *
+      model.scale;
+    const x =
+      preRender.rendererDOM.clientWidth / 2 +
+      (model.position.x - PADDING_RIGHT) * scale;
     this.#mesh.getObject3D().scale.set(scale, scale, scale);
     this.#mesh.getObject3D().position.set(x, 0, HUD_CUT_IN_ZNIDEX);
     this.#mesh.setOpacity(model.opacity);
@@ -68,5 +74,4 @@ export class PlayerRaitoView implements RaitoView {
   getObject3D(): THREE.Object3D {
     return this.#mesh.getObject3D();
   }
-
 }

@@ -30,8 +30,11 @@ function getVolume(sound: SoundResource, config: GbraverBurstBrowserConfig) {
  * @param resources リソース管理オブジェクト
  * @param config 反映するブラウザ設定
  */
-export function reflectSoundVolume(resources: Resources, config: GbraverBurstBrowserConfig): void {
-  resources.sounds.forEach(sound => {
+export function reflectSoundVolume(
+  resources: Resources,
+  config: GbraverBurstBrowserConfig
+): void {
+  resources.sounds.forEach((sound) => {
     sound.volume = getVolume(sound, config);
     sound.sound.volume(howlVolume(sound));
   });

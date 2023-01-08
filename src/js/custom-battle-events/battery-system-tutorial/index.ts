@@ -1,4 +1,11 @@
-import type { BatteryCommandSelected, BurstCommandSelected, CommandCanceled, CustomBattleEvent, LastState, PilotSkillCommandSelected } from "../../td-scenes/battle/custom-battle-event";
+import type {
+  BatteryCommandSelected,
+  BurstCommandSelected,
+  CommandCanceled,
+  CustomBattleEvent,
+  LastState,
+  PilotSkillCommandSelected,
+} from "../../td-scenes/battle/custom-battle-event";
 import { EmptyCustomBattleEvent } from "../empty-custom-battle-event";
 import { afterLastState } from "./listeners/after-last-state";
 import { beforeLastState } from "./listeners/before-last-state";
@@ -21,7 +28,7 @@ class BatterySystemTutorialEvent extends EmptyCustomBattleEvent {
     this.state = {
       stateHistory: [],
       selectableCommands: "BatteryOnly",
-      isBatterySystemDescriptionComplete: false
+      isBatterySystemDescriptionComplete: false,
     };
   }
 
@@ -41,42 +48,40 @@ class BatterySystemTutorialEvent extends EmptyCustomBattleEvent {
   }
 
   /** @override */
-  async onBatteryCommandSelected(props: BatteryCommandSelected): Promise<CommandCanceled> {
-    const {
-      state,
-      cancel
-    } = await onBatteryCommandSelected(props, this.state);
+  async onBatteryCommandSelected(
+    props: BatteryCommandSelected
+  ): Promise<CommandCanceled> {
+    const { state, cancel } = await onBatteryCommandSelected(props, this.state);
     this.state = state;
     return cancel;
   }
 
   /** @override */
-  async onBurstCommandSelected(props: BurstCommandSelected): Promise<CommandCanceled> {
-    const {
-      state,
-      cancel
-    } = await onBurstCommandSelected(props, this.state);
+  async onBurstCommandSelected(
+    props: BurstCommandSelected
+  ): Promise<CommandCanceled> {
+    const { state, cancel } = await onBurstCommandSelected(props, this.state);
     this.state = state;
     return cancel;
   }
 
   /** @override */
-  async onPilotSkillCommandSelected(props: PilotSkillCommandSelected): Promise<CommandCanceled> {
-    const {
-      state,
-      cancel
-    } = await onPilotSkillCommandSelected(props, this.state);
+  async onPilotSkillCommandSelected(
+    props: PilotSkillCommandSelected
+  ): Promise<CommandCanceled> {
+    const { state, cancel } = await onPilotSkillCommandSelected(
+      props,
+      this.state
+    );
     this.state = state;
     return cancel;
   }
-
 }
 /**
  * バッテリーシステムチュートリアル用のカスタバトルイベントを生成する
  *
  * @return 生成したカスタムバトルイベント
  */
-
 
 export function createBatterySystemTutorialEvent(): CustomBattleEvent {
   return new BatterySystemTutorialEvent();

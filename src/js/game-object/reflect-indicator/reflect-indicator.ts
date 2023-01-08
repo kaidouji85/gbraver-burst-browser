@@ -23,10 +23,13 @@ export class ReflectIndicator {
    * @param view ビュー
    * @param gameObjectAction ゲームオブジェクトアクション
    */
-  constructor(view: ReflectIndicatorView, gameObjectAction: Stream<GameObjectAction>) {
+  constructor(
+    view: ReflectIndicatorView,
+    gameObjectAction: Stream<GameObjectAction>
+  ) {
     this.#model = createInitialValue();
     this.#view = view;
-    this.#unsubscriber = gameObjectAction.subscribe(action => {
+    this.#unsubscriber = gameObjectAction.subscribe((action) => {
       if (action.type === "Update") {
         this.#onUpdate();
       } else if (action.type === "PreRender") {
@@ -74,5 +77,4 @@ export class ReflectIndicator {
   #onPreRender(action: PreRender): void {
     this.#view.lookAt(action.camera);
   }
-
 }

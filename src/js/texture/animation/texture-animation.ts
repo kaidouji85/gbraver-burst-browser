@@ -14,7 +14,11 @@ import * as THREE from "three";
  * @param horizonDividedNum 横の分割数
  * @param verticalDividedNum 縦の分割数
  */
-export function animatedTexture(texture: THREE.Texture, horizonDividedNum: number, verticalDividedNum: number): void {
+export function animatedTexture(
+  texture: THREE.Texture,
+  horizonDividedNum: number,
+  verticalDividedNum: number
+): void {
   texture.wrapS = THREE.RepeatWrapping;
   texture.wrapT = THREE.RepeatWrapping;
   texture.repeat.set(1 / horizonDividedNum, 1 / verticalDividedNum);

@@ -25,10 +25,13 @@ export class NeoLandozerCutIn implements HUDTracking {
    * @param view ビュー
    * @param gameObjectAction ゲームオブジェクトアクション
    */
-  constructor(view: NeoLandozerCutInView, gameObjectAction: Stream<GameObjectAction>) {
+  constructor(
+    view: NeoLandozerCutInView,
+    gameObjectAction: Stream<GameObjectAction>
+  ) {
     this.#model = createInitialValue();
     this.#view = view;
-    this.#unsubscriber = gameObjectAction.subscribe(action => {
+    this.#unsubscriber = gameObjectAction.subscribe((action) => {
       if (action.type === "PreRender") {
         this.#onPreRender(action);
       }
@@ -90,5 +93,4 @@ export class NeoLandozerCutIn implements HUDTracking {
   #onPreRender(action: PreRender): void {
     this.#view.engage(this.#model, action);
   }
-
 }

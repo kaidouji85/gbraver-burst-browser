@@ -13,7 +13,12 @@ import { trackingGauges } from "./gauge";
  * @param activePlayerId このゲームを操作しているプレイヤーID
  * @param rendererDOM レンダリング対象のDOM
  */
-export function tracking(td: ThreeDimensionLayer, hud: HudLayer, activePlayerId: PlayerId, rendererDOM: HTMLElement): void {
+export function tracking(
+  td: ThreeDimensionLayer,
+  hud: HudLayer,
+  activePlayerId: PlayerId,
+  rendererDOM: HTMLElement
+): void {
   trackingGauges(td, hud, activePlayerId, rendererDOM);
   trackingArmdozerSprites(td, hud, rendererDOM);
 }

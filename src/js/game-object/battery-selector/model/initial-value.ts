@@ -16,6 +16,6 @@ export function initialValue(): BatterySelectorModel {
     minusButtonScale: 1,
     plusButtonScale: 1,
     batteryButtonScale: 1,
-    disabled: true
+    disabled: true,
   };
 }

@@ -14,7 +14,11 @@ import type { Resources } from "../../src/js/resource";
 import { developingFullResourceLoading } from "../../src/js/resource/loading/full-resource-loading";
 import type { SafeAreaInset } from "../../src/js/safe-area/safe-area-inset";
 import { createSafeAreaInset } from "../../src/js/safe-area/safe-area-inset";
-import type { Stream, StreamSource, Unsubscriber } from "../../src/js/stream/stream";
+import type {
+  Stream,
+  StreamSource,
+  Unsubscriber,
+} from "../../src/js/stream/stream";
 import { createStreamSource } from "../../src/js/stream/stream";
 import type { Resize } from "../../src/js/window/resize";
 import { resizeStream } from "../../src/js/window/resize";
@@ -67,11 +71,19 @@ export class HUDGameObjectStub {
     this._renderer = new Renderer(this._resize);
     this._scene = new THREE.Scene();
     this._camera = new PlainHUDCamera(this._resize);
-    this._overlap = this._renderer.createOverlapNotifier(this._camera.getCamera());
-    this._gameObjectAction = gameObjectStream(this._update, this._preRender, this._overlap);
-    this._unsubscriber = [this._gameLoop.subscribe(v => {
-      this._onGameLoop(v);
-    })];
+    this._overlap = this._renderer.createOverlapNotifier(
+      this._camera.getCamera()
+    );
+    this._gameObjectAction = gameObjectStream(
+      this._update,
+      this._preRender,
+      this._overlap
+    );
+    this._unsubscriber = [
+      this._gameLoop.subscribe((v) => {
+        this._onGameLoop(v);
+      }),
+    ];
   }
 
   /**
@@ -89,7 +101,7 @@ export class HUDGameObjectStub {
       gameObjectAction: this._gameObjectAction,
     });
 
-    object3Ds.forEach(object3D => {
+    object3Ds.forEach((object3D) => {
       this._scene.add(object3D);
     });
   }
@@ -113,17 +125,16 @@ export class HUDGameObjectStub {
 
     this._update.next({
       type: "Update",
-      time: action.time
+      time: action.time,
     });
 
     this._preRender.next({
       type: "PreRender",
       camera: this._camera.getCamera(),
       rendererDOM: this._renderer.getRendererDOM(),
-      safeAreaInset: this._safeAreaInset
+      safeAreaInset: this._safeAreaInset,
     });
 
     this._renderer.rendering(this._scene, this._camera.getCamera());
   }
-
 }

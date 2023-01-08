@@ -20,5 +20,4 @@ export class EnemyPowerUpView extends PlayerPowerUpView {
     const target = super.getObject3D();
     target.position.x *= -1;
   }
-
 }

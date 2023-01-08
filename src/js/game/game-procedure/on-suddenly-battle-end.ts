@@ -8,9 +8,11 @@ import type { GameProps } from "../game-props";
  * @param props ゲームプロパティ
  * @return 処理が終了すると発火するPromise
  */
-export async function onSuddenlyEndBattle(props: Readonly<GameProps>): Promise<void> {
+export async function onSuddenlyEndBattle(
+  props: Readonly<GameProps>
+): Promise<void> {
   const dialog = new NetworkErrorDialog(props.resources, {
-    type: "GotoTitle"
+    type: "GotoTitle",
   });
   props.domDialogBinder.bind(dialog, networkErrorDialogConnector);
   props.suddenlyBattleEnd.unbind();

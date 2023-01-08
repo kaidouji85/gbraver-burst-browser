@@ -1,4 +1,4 @@
-import TWEEN, {Group} from "@tweenjs/tween.js";
+import TWEEN, { Group } from "@tweenjs/tween.js";
 import * as THREE from "three";
 
 import { Animate } from "../../../animation/animate";
@@ -31,7 +31,10 @@ import { LightningDozerSounds } from "./sounds/lightning-dozer-sounds";
 import type { LightningDozerView } from "./view/lightning-dozer-view";
 
 /** ライトニングドーザ */
-export class LightningDozer extends EmptyArmDozerSprite implements ArmDozerSprite {
+export class LightningDozer
+  extends EmptyArmDozerSprite
+  implements ArmDozerSprite
+{
   /** モデル */
   #model: LightningDozerModel;
 
@@ -53,27 +56,34 @@ export class LightningDozer extends EmptyArmDozerSprite implements ArmDozerSprit
    * @param gameObjectAction ゲームオブジェクトアクション
    * @param view ビュー
    */
-  constructor(resources: Resources, gameObjectAction: Stream<GameObjectAction>, view: LightningDozerView) {
+  constructor(
+    resources: Resources,
+    gameObjectAction: Stream<GameObjectAction>,
+    view: LightningDozerView
+  ) {
     super();
     this.#model = createInitialValue();
     this.#view = view;
     this.#sounds = new LightningDozerSounds(resources);
     this.#activeFlashTween = new TWEEN.Group();
-    this.#unsubscribers = [gameObjectAction.subscribe(action => {
-      if (action.type === "Update") {
-        this.#onUpdate(action);
-      } else if (action.type === "PreRender") {
-        this.#onPreRender(action);
-      }
-    }), firstUpdate(gameObjectAction).subscribe(action => {
-      this.#onFirstUpdate(action);
-    })];
+    this.#unsubscribers = [
+      gameObjectAction.subscribe((action) => {
+        if (action.type === "Update") {
+          this.#onUpdate(action);
+        } else if (action.type === "PreRender") {
+          this.#onPreRender(action);
+        }
+      }),
+      firstUpdate(gameObjectAction).subscribe((action) => {
+        this.#onFirstUpdate(action);
+      }),
+    ];
   }
 
   /** @override */
   destructor() {
     this.#view.destructor();
-    this.#unsubscribers.forEach(v => {
+    this.#unsubscribers.forEach((v) => {
       v.unsubscribe();
     });
     this.#activeFlashTween.removeAll();
@@ -198,5 +208,4 @@ export class LightningDozer extends EmptyArmDozerSprite implements ArmDozerSprit
   #onPreRender(action: PreRender): void {
     this.#view.lookAt(action.camera);
   }
-
 }

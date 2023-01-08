@@ -23,7 +23,7 @@ export class SkyBrightness {
     this.#model = createInitialValue();
     this.#view = new SkyBrightnessView();
     this.#view.engage(this.#model);
-    this.#unsubscriber = gameObjectAction.subscribe(action => {
+    this.#unsubscriber = gameObjectAction.subscribe((action) => {
       if (action.type === "Update") {
         this.#onUpdate();
       }
@@ -62,5 +62,4 @@ export class SkyBrightness {
   #onUpdate(): void {
     this.#view.engage(this.#model);
   }
-
 }

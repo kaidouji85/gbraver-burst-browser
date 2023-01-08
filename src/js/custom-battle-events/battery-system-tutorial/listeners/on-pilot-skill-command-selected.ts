@@ -1,4 +1,7 @@
-import type { CommandCanceled, PilotSkillCommandSelected } from "../../../td-scenes/battle/custom-battle-event";
+import type {
+  CommandCanceled,
+  PilotSkillCommandSelected,
+} from "../../../td-scenes/battle/custom-battle-event";
 import { focusOutPilotButton } from "../../focus";
 import type { BatterySystemTutorialState, SelectableCommands } from "../state";
 
@@ -18,15 +21,21 @@ type Ret = {
  * @param state ステート
  * @return イベント終了情報
  */
-export async function onPilotSkillCommandSelected(props: Readonly<PilotSkillCommandSelected>, state: BatterySystemTutorialState): Promise<Ret> {
-  const enablePilotSkillCommand: SelectableCommands[] = ["All", "PilotSkillOnly"];
+export async function onPilotSkillCommandSelected(
+  props: Readonly<PilotSkillCommandSelected>,
+  state: BatterySystemTutorialState
+): Promise<Ret> {
+  const enablePilotSkillCommand: SelectableCommands[] = [
+    "All",
+    "PilotSkillOnly",
+  ];
 
   if (!enablePilotSkillCommand.includes(state.selectableCommands)) {
     return {
       state,
       cancel: {
-        isCommandCanceled: true
-      }
+        isCommandCanceled: true,
+      },
     };
   }
 
@@ -34,19 +43,17 @@ export async function onPilotSkillCommandSelected(props: Readonly<PilotSkillComm
     focusOutPilotButton(props);
     const selectableCommands = "All";
     return {
-      state: { ...state,
-        selectableCommands
-      },
+      state: { ...state, selectableCommands },
       cancel: {
-        isCommandCanceled: false
-      }
+        isCommandCanceled: false,
+      },
     };
   }
 
   return {
     state,
     cancel: {
-      isCommandCanceled: false
-    }
+      isCommandCanceled: false,
+    },
   };
 }

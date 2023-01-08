@@ -19,12 +19,15 @@ export class NeoLandozerIcon implements ArmdozerIcon {
    */
   constructor(resources: Resources) {
     this.#group = new THREE.Group();
-    const neoLandozer = resources.textures.find(v => v.id === TEXTURE_IDS.NEO_LANDOZER_BURST_BUTTON_ICON)?.texture ?? new THREE.Texture();
+    const neoLandozer =
+      resources.textures.find(
+        (v) => v.id === TEXTURE_IDS.NEO_LANDOZER_BURST_BUTTON_ICON
+      )?.texture ?? new THREE.Texture();
     this.#mesh = new HorizontalAnimationMesh({
       texture: neoLandozer,
       maxAnimation: 1,
       width: 350,
-      height: 350
+      height: 350,
     });
     this.#mesh.animate(1);
     this.#mesh.getObject3D().position.y = 160;
@@ -55,5 +58,4 @@ export class NeoLandozerIcon implements ArmdozerIcon {
   setOpacity(opacity: number): void {
     this.#mesh.setOpacity(opacity);
   }
-
 }

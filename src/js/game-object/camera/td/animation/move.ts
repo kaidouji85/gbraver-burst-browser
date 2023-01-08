@@ -11,6 +11,10 @@ import type { Position } from "../position";
  * @param duration 移動時間
  * @return アニメーション
  */
-export function move(model: Battle3DCameraModel, position: Position, duration: number): Animate {
-  return tween(model.position, t => t.to(position, duration));
+export function move(
+  model: Battle3DCameraModel,
+  position: Position,
+  duration: number
+): Animate {
+  return tween(model.position, (t) => t.to(position, duration));
 }

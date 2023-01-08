@@ -19,41 +19,54 @@ import type { AnimationMeshMapping } from "./animation-mesh-mapping";
  * @return 生成結果
  */
 export function createMeshes(resources: Resources): AnimationMeshMapping[] {
-  return [{
-    type: "STAND",
-    mesh: wingDozerStand(resources)
-  }, {
-    type: "UPPER_CHARGE",
-    mesh: wingDozerUpperCharge(resources)
-  }, {
-    type: "UPPER_ATTACK",
-    mesh: wingDozerUpperAttack(resources)
-  }, {
-    type: "UPPER_TO_STAND",
-    mesh: wingDozerUpperToStand(resources)
-  }, {
-    type: "DASH_UP",
-    mesh: wingDozerDashUp(resources)
-  }, {
-    type: "DASH_DOWN",
-    mesh: wingDozerDashDown(resources)
-  }, {
-    type: "DASH_TO_STAND",
-    mesh: wingDozerDashToStand(resources)
-  }, {
-    type: "KNOCK_BACK",
-    mesh: wingDozerKnockBack(resources)
-  }, {
-    type: "DOWN",
-    mesh: wingDozerDown(resources)
-  }, {
-    type: "BACK_STEP",
-    mesh: wingDozerBackStep(resources)
-  }, {
-    type: "FRONT_STEP",
-    mesh: wingDozerFrontStep(resources)
-  }, {
-    type: "GUARD",
-    mesh: wingDozerGuard(resources)
-  }];
+  return [
+    {
+      type: "STAND",
+      mesh: wingDozerStand(resources),
+    },
+    {
+      type: "UPPER_CHARGE",
+      mesh: wingDozerUpperCharge(resources),
+    },
+    {
+      type: "UPPER_ATTACK",
+      mesh: wingDozerUpperAttack(resources),
+    },
+    {
+      type: "UPPER_TO_STAND",
+      mesh: wingDozerUpperToStand(resources),
+    },
+    {
+      type: "DASH_UP",
+      mesh: wingDozerDashUp(resources),
+    },
+    {
+      type: "DASH_DOWN",
+      mesh: wingDozerDashDown(resources),
+    },
+    {
+      type: "DASH_TO_STAND",
+      mesh: wingDozerDashToStand(resources),
+    },
+    {
+      type: "KNOCK_BACK",
+      mesh: wingDozerKnockBack(resources),
+    },
+    {
+      type: "DOWN",
+      mesh: wingDozerDown(resources),
+    },
+    {
+      type: "BACK_STEP",
+      mesh: wingDozerBackStep(resources),
+    },
+    {
+      type: "FRONT_STEP",
+      mesh: wingDozerFrontStep(resources),
+    },
+    {
+      type: "GUARD",
+      mesh: wingDozerGuard(resources),
+    },
+  ];
 }

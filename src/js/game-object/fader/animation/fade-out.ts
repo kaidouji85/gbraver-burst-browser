@@ -12,7 +12,14 @@ import type { FaderModel } from "../model/fader-model";
 export function fadeOut(model: FaderModel): Animate {
   return process(() => {
     model.opacity = 0;
-  }).chain(tween(model, t => t.to({
-    opacity: 1
-  }, 500)));
+  }).chain(
+    tween(model, (t) =>
+      t.to(
+        {
+          opacity: 1,
+        },
+        500
+      )
+    )
+  );
 }

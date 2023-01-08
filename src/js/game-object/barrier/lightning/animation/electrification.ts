@@ -1,4 +1,4 @@
-import {Group} from "@tweenjs/tween.js";
+import { Group } from "@tweenjs/tween.js";
 
 import { Animate } from "../../../../animation/animate";
 import { process } from "../../../../animation/process";
@@ -12,10 +12,23 @@ import type { LightningBarrierModel } from "../model/lightning-barrier-model";
  * @param group Tweenグループ
  * @return アニメーション
  */
-export function electrification(model: LightningBarrierModel, group: Group): Animate {
+export function electrification(
+  model: LightningBarrierModel,
+  group: Group
+): Animate {
   return process(() => {
     model.animation.frame = 0;
-  }, group).chain(tween(model.animation, t => t.to({
-    frame: 1
-  }, 1500), group));
+  }, group).chain(
+    tween(
+      model.animation,
+      (t) =>
+        t.to(
+          {
+            frame: 1,
+          },
+          1500
+        ),
+      group
+    )
+  );
 }

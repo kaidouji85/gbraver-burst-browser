@@ -11,13 +11,32 @@ import { PilotButtonSounds } from "../sounds/pilot-button-sounds";
  * @param sounds 効果音
  * @return アニメーション
  */
-export function decide(model: PilotButtonModel, sounds: PilotButtonSounds): Animate {
+export function decide(
+  model: PilotButtonModel,
+  sounds: PilotButtonSounds
+): Animate {
   return process(() => {
     model.disabled = true;
     sounds.pushButton.play();
-  }).chain(tween(model, t => t.to({
-    scale: 1.1
-  }, 100))).chain(tween(model, t => t.to({
-    scale: 1
-  }, 100)));
+  })
+    .chain(
+      tween(model, (t) =>
+        t.to(
+          {
+            scale: 1.1,
+          },
+          100
+        )
+      )
+    )
+    .chain(
+      tween(model, (t) =>
+        t.to(
+          {
+            scale: 1,
+          },
+          100
+        )
+      )
+    );
 }

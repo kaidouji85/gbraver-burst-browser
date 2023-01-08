@@ -22,5 +22,4 @@ export class EnemyNeoLandozerCutInView extends PlayerNeoLandozerCutInView {
     const target = this.getObject3D();
     target.scale.x *= -1;
   }
-
 }

@@ -27,7 +27,10 @@ function activeMessageWindow(messageWindow: MessageWindow): void {
  * @param messageWindow 設定対象のメッセージウインドウ
  * @param faceType 顔画像タイプ
  */
-function activeMessageWindowWithFace(messageWindow: MessageWindow, faceType: FaceType): void {
+function activeMessageWindowWithFace(
+  messageWindow: MessageWindow,
+  faceType: FaceType
+): void {
   messageWindow.visible(true);
   messageWindow.face(faceType);
   messageWindow.faceVisible(true);
@@ -57,7 +60,9 @@ export function activeRightMessageWindow(props: CustomBattleEventProps): void {
  *
  * @param props イベントプロパティ
  */
-export function activeNearBatterySelectorMessageWindow(props: CustomBattleEventProps): void {
+export function activeNearBatterySelectorMessageWindow(
+  props: CustomBattleEventProps
+): void {
   activeMessageWindow(props.view.dom.nearBatterySelectorMessageWindow);
 }
 
@@ -66,7 +71,9 @@ export function activeNearBatterySelectorMessageWindow(props: CustomBattleEventP
  *
  * @param props イベントプロパティ
  */
-export function activeNearBurstButtonMessageWindow(props: CustomBattleEventProps): void {
+export function activeNearBurstButtonMessageWindow(
+  props: CustomBattleEventProps
+): void {
   activeMessageWindow(props.view.dom.nearBurstButtonMessageWindow);
 }
 
@@ -75,7 +82,9 @@ export function activeNearBurstButtonMessageWindow(props: CustomBattleEventProps
  *
  * @param props イベントプロパティ
  */
-export function activeNearPilotButtonMessageWindow(props: CustomBattleEventProps): void {
+export function activeNearPilotButtonMessageWindow(
+  props: CustomBattleEventProps
+): void {
   activeMessageWindow(props.view.dom.nearPilotButtonMessageWindow);
 }
 
@@ -85,7 +94,10 @@ export function activeNearPilotButtonMessageWindow(props: CustomBattleEventProps
  * @param props イベントプロパティ
  * @param faceType 顔画像タイプ
  */
-export function activeLeftMessageWindowWithFace(props: CustomBattleEventProps, faceType: FaceType): void {
+export function activeLeftMessageWindowWithFace(
+  props: CustomBattleEventProps,
+  faceType: FaceType
+): void {
   activeMessageWindowWithFace(props.view.dom.leftMessageWindow, faceType);
 }
 
@@ -95,6 +107,9 @@ export function activeLeftMessageWindowWithFace(props: CustomBattleEventProps, f
  * @param props イベントプロパティ
  * @param faceType 顔画像タイプ
  */
-export function activeRightMessageWindowWithFace(props: CustomBattleEventProps, faceType: FaceType): void {
+export function activeRightMessageWindowWithFace(
+  props: CustomBattleEventProps,
+  faceType: FaceType
+): void {
   activeMessageWindowWithFace(props.view.dom.rightMessageWindow, faceType);
 }

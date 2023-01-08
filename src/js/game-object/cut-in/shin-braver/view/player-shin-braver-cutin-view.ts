@@ -6,7 +6,10 @@ import type { Resources } from "../../../../resource";
 import { TEXTURE_IDS } from "../../../../resource/texture/ids";
 import { HUD_CUT_IN_ZNIDEX } from "../../../hud-zindex";
 import { HUDCutInScale } from "../../../scale";
-import type { AnimationType, ShinBraverCutInModel } from "../model/shin-braver-cutin-model";
+import type {
+  AnimationType,
+  ShinBraverCutInModel,
+} from "../model/shin-braver-cutin-model";
 import type { ShinBraverCutInView } from "./shin-braver-cutin-view";
 
 /** メッシュの大きさ */
@@ -25,23 +28,31 @@ export class PlayerShinBraverCutInView implements ShinBraverCutInView {
 
   constructor(resources: Resources) {
     this.#group = new THREE.Group();
-    const cutInUpResource = resources.textures.find(v => v.id === TEXTURE_IDS.SHIN_BRAVER_CUTIN_UP);
-    const cutInUp = cutInUpResource ? cutInUpResource.texture : new THREE.Texture();
+    const cutInUpResource = resources.textures.find(
+      (v) => v.id === TEXTURE_IDS.SHIN_BRAVER_CUTIN_UP
+    );
+    const cutInUp = cutInUpResource
+      ? cutInUpResource.texture
+      : new THREE.Texture();
     this.#cutInUp = new HorizontalAnimationMesh({
       texture: cutInUp,
       width: MESH_SIZE,
       height: MESH_SIZE,
-      maxAnimation: 4
+      maxAnimation: 4,
     });
-    const cutInDownResource = resources.textures.find(v => v.id === TEXTURE_IDS.SHIN_BRAVER_CUTIN_DOWN);
-    const cutInDown = cutInDownResource ? cutInDownResource.texture : new THREE.Texture();
+    const cutInDownResource = resources.textures.find(
+      (v) => v.id === TEXTURE_IDS.SHIN_BRAVER_CUTIN_DOWN
+    );
+    const cutInDown = cutInDownResource
+      ? cutInDownResource.texture
+      : new THREE.Texture();
     this.#cutInDown = new HorizontalAnimationMesh({
       texture: cutInDown,
       width: MESH_SIZE,
       height: MESH_SIZE,
-      maxAnimation: 4
+      maxAnimation: 4,
     });
-    this.#getMeshes().forEach(v => {
+    this.#getMeshes().forEach((v) => {
       this.#group.add(v.getObject3D());
     });
   }
@@ -50,7 +61,7 @@ export class PlayerShinBraverCutInView implements ShinBraverCutInView {
    * デストラクタ相当の処理
    */
   destructor(): void {
-    this.#getMeshes().forEach(v => {
+    this.#getMeshes().forEach((v) => {
       v.destructor();
     });
   }
@@ -66,11 +77,13 @@ export class PlayerShinBraverCutInView implements ShinBraverCutInView {
     const activeMesh = this.#getActiveMesh(model.animation.type);
     activeMesh.animate(model.animation.frame);
     activeMesh.setOpacity(model.opacity);
-    const disActiveMeshes = this.#getMeshes().filter(v => v !== activeMesh);
-    disActiveMeshes.forEach(v => {
+    const disActiveMeshes = this.#getMeshes().filter((v) => v !== activeMesh);
+    disActiveMeshes.forEach((v) => {
       v.setOpacity(0);
     });
-    const scale = HUDCutInScale(preRender.rendererDOM, preRender.safeAreaInset) * model.scale;
+    const scale =
+      HUDCutInScale(preRender.rendererDOM, preRender.safeAreaInset) *
+      model.scale;
     this.#group.position.x = model.tracking.x;
     this.#group.position.y = model.tracking.y - BASE_PADDING_TOP * scale;
     this.#group.position.z = HUD_CUT_IN_ZNIDEX;
@@ -113,5 +126,4 @@ export class PlayerShinBraverCutInView implements ShinBraverCutInView {
         return this.#cutInDown;
     }
   }
-
 }

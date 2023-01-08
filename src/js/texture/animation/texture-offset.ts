@@ -9,7 +9,10 @@
  * @param maxAnimation アニメーションの最大数
  * @return 正規化したオフセット値
  */
-export function normalizeTextureOffset(offset: number, maxAnimation: number): number {
+export function normalizeTextureOffset(
+  offset: number,
+  maxAnimation: number
+): number {
   const min = 0;
   const max = (maxAnimation - 1) / maxAnimation;
   const textureOffset = Math.floor(offset * maxAnimation) / maxAnimation;

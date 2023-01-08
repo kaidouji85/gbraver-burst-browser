@@ -24,7 +24,7 @@ export class Title implements DOMScene {
 
   /** @override */
   destructor(): void {
-    this.#unsubscribers.forEach(v => {
+    this.#unsubscribers.forEach((v) => {
       v.unsubscribe();
     });
   }
@@ -107,7 +107,10 @@ export class Title implements DOMScene {
    * @return 待機結果
    */
   async waitUntilLoaded(): Promise<void> {
-    await Promise.all([this.#props.isTitleBackLoaded, this.#props.isAvatarLoaded, this.#props.isLogoLoaded]);
+    await Promise.all([
+      this.#props.isTitleBackLoaded,
+      this.#props.isAvatarLoaded,
+      this.#props.isLogoLoaded,
+    ]);
   }
-
 }

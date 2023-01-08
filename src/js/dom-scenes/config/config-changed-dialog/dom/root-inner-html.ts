@@ -11,7 +11,8 @@ import type { DataIDs } from "./data-ids";
  * @return innerHTML
  */
 export function rootInnerHTML(resources: Resources, ids: DataIDs): string {
-  const closerPath = resources.paths.find(v => v.id === PathIds.CLOSER)?.path ?? "";
+  const closerPath =
+    resources.paths.find((v) => v.id === PathIds.CLOSER)?.path ?? "";
   return `
     <div class="${ROOT_CLASS}__background" data-id="${ids.backGround}"></div>
     <div class="${ROOT_CLASS}__dialog">

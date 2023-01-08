@@ -1,9 +1,12 @@
 import { delay } from "../src/js/animation/delay";
-import { enemyLightningiDozerCutIn, playerLightningDozerCutIn } from "../src/js/game-object/cut-in/lightning-dozer";
+import {
+  enemyLightningiDozerCutIn,
+  playerLightningDozerCutIn,
+} from "../src/js/game-object/cut-in/lightning-dozer";
 import { LightningDozerCutIn } from "../src/js/game-object/cut-in/lightning-dozer/lightning-dozer-cutin";
 import { HUDGameObjectStub } from "./stub/hud-game-object-stub";
 export default {
-  title: "lightning-dozer-cutin"
+  title: "lightning-dozer-cutin",
 };
 /**
  * ライトニングドーザ カットイン ループアニメーション
@@ -12,15 +15,16 @@ export default {
  */
 
 function loopAnimation(cutIn: LightningDozerCutIn): void {
-  const animation = cutIn.show().chain(delay(2000)).chain(cutIn.hidden()).chain(delay(1000));
+  const animation = cutIn
+    .show()
+    .chain(delay(2000))
+    .chain(cutIn.hidden())
+    .chain(delay(1000));
   animation.loop();
 }
 
 export const Player = (): HTMLElement => {
-  const stub = new HUDGameObjectStub(({
-    resources,
-    gameObjectAction
-  }) => {
+  const stub = new HUDGameObjectStub(({ resources, gameObjectAction }) => {
     const cutIn = playerLightningDozerCutIn(resources, gameObjectAction);
     loopAnimation(cutIn);
     return [cutIn.getObject3D()];
@@ -29,10 +33,7 @@ export const Player = (): HTMLElement => {
   return stub.domElement();
 };
 export const Enemy = (): HTMLElement => {
-  const stub = new HUDGameObjectStub(({
-    resources,
-    gameObjectAction
-  }) => {
+  const stub = new HUDGameObjectStub(({ resources, gameObjectAction }) => {
     const cutIn = enemyLightningiDozerCutIn(resources, gameObjectAction);
     loopAnimation(cutIn);
     return [cutIn.getObject3D()];

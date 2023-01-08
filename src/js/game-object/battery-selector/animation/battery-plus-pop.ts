@@ -1,4 +1,4 @@
-import {Group} from "@tweenjs/tween.js";
+import { Group } from "@tweenjs/tween.js";
 
 import { Animate } from "../../../animation/animate";
 import { process } from "../../../animation/process";
@@ -14,12 +14,38 @@ import type { BatterySelectorSounds } from "../sounds/battery-selector-sounds";
  * @param group Tweenグループ
  * @return アニメーション
  */
-export function batteryPlusPop(model: BatterySelectorModel, sounds: BatterySelectorSounds, group: Group): Animate {
+export function batteryPlusPop(
+  model: BatterySelectorModel,
+  sounds: BatterySelectorSounds,
+  group: Group
+): Animate {
   return process(() => {
     sounds.batteryChangeSound.play();
-  }).chain(tween(model, t => t.to({
-    plusButtonScale: 1.1
-  }, 100), group)).chain(tween(model, t => t.to({
-    plusButtonScale: 1
-  }, 100), group));
+  })
+    .chain(
+      tween(
+        model,
+        (t) =>
+          t.to(
+            {
+              plusButtonScale: 1.1,
+            },
+            100
+          ),
+        group
+      )
+    )
+    .chain(
+      tween(
+        model,
+        (t) =>
+          t.to(
+            {
+              plusButtonScale: 1,
+            },
+            100
+          ),
+        group
+      )
+    );
 }

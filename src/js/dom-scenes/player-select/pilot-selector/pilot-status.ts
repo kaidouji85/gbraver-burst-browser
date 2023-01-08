@@ -52,13 +52,19 @@ type Elements = {
  * @return 抽出結果
  */
 function extractElements(root: HTMLElement, ids: DataIDs): Elements {
-  const name: HTMLElement = root.querySelector(`[data-id="${ids.name}"]`) ?? document.createElement("div");
-  const skillOverview: HTMLElement = root.querySelector(`[data-id="${ids.skillOverview}"]`) ?? document.createElement("div");
-  const skillDetail: HTMLElement = root.querySelector(`[data-id="${ids.skillDetail}"]`) ?? document.createElement("div");
+  const name: HTMLElement =
+    root.querySelector(`[data-id="${ids.name}"]`) ??
+    document.createElement("div");
+  const skillOverview: HTMLElement =
+    root.querySelector(`[data-id="${ids.skillOverview}"]`) ??
+    document.createElement("div");
+  const skillDetail: HTMLElement =
+    root.querySelector(`[data-id="${ids.skillDetail}"]`) ??
+    document.createElement("div");
   return {
     name,
     skillOverview,
-    skillDetail
+    skillDetail,
   };
 }
 
@@ -76,7 +82,7 @@ export class PilotStatus {
     const dataIDs = {
       name: domUuid(),
       skillOverview: domUuid(),
-      skillDetail: domUuid()
+      skillDetail: domUuid(),
     };
     this.#root = document.createElement("div");
     this.#root.className = ROOT_CLASS_NAME;
@@ -101,7 +107,7 @@ export class PilotStatus {
    * @param pilotId 切り替えるパイロットのID
    */
   switch(pilotId: PilotId): void {
-    const target = Pilots.find(v => v.id === pilotId);
+    const target = Pilots.find((v) => v.id === pilotId);
 
     if (!target) {
       return;
@@ -109,7 +115,11 @@ export class PilotStatus {
 
     this.#name.innerText = target.name;
     this.#skillOverview.innerText = pilotSkillOverview(target.skill);
-    this.#skillDetail.innerHTML = pilotSkillDetail(target.skill).map(v => `<span class="${ROOT_CLASS_NAME}__skill__content__line">${v}</span>`).reduce((a, b) => a + b);
+    this.#skillDetail.innerHTML = pilotSkillDetail(target.skill)
+      .map(
+        (v) =>
+          `<span class="${ROOT_CLASS_NAME}__skill__content__line">${v}</span>`
+      )
+      .reduce((a, b) => a + b);
   }
-
 }

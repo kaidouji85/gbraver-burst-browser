@@ -3,7 +3,10 @@ import * as THREE from "three";
 
 import type { GameObjectAction } from "../../../../../game-object/action/game-object-action";
 import type { ArmDozerSprite } from "../../../../../game-object/armdozer/armdozer-sprite";
-import { EnemyWingDozer, PlayerWingDozer } from "../../../../../game-object/armdozer/wing-dozer";
+import {
+  EnemyWingDozer,
+  PlayerWingDozer,
+} from "../../../../../game-object/armdozer/wing-dozer";
 import { WingDozer } from "../../../../../game-object/armdozer/wing-dozer/wing-dozer";
 import type { Resources } from "../../../../../resource";
 import type { Stream } from "../../../../../stream/stream";
@@ -47,7 +50,6 @@ export class WingDozerTD implements WingDozerTDField, TDArmdozerObjects {
   getObject3Ds(): THREE.Object3D[] {
     return [this.wingDozer.getObject3D()];
   }
-
 }
 
 /**
@@ -57,9 +59,13 @@ export class WingDozerTD implements WingDozerTDField, TDArmdozerObjects {
  * @param state プレイヤー情報
  * @return 生成結果
  */
-export function playerWingDozerTD(resources: Resources, gameObjectAction: Stream<GameObjectAction>, state: Player): WingDozerTD {
+export function playerWingDozerTD(
+  resources: Resources,
+  gameObjectAction: Stream<GameObjectAction>,
+  state: Player
+): WingDozerTD {
   return new WingDozerTD(state.playerId, {
-    wingDozer: PlayerWingDozer(resources, gameObjectAction)
+    wingDozer: PlayerWingDozer(resources, gameObjectAction),
   });
 }
 
@@ -70,8 +76,12 @@ export function playerWingDozerTD(resources: Resources, gameObjectAction: Stream
  * @param state プレイヤー情報
  * @return 生成結果
  */
-export function enemyWingDozerTD(resources: Resources, gameObjectAction: Stream<GameObjectAction>, state: Player): WingDozerTD {
+export function enemyWingDozerTD(
+  resources: Resources,
+  gameObjectAction: Stream<GameObjectAction>,
+  state: Player
+): WingDozerTD {
   return new WingDozerTD(state.playerId, {
-    wingDozer: EnemyWingDozer(resources, gameObjectAction)
+    wingDozer: EnemyWingDozer(resources, gameObjectAction),
   });
 }

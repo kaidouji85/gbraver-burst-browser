@@ -12,15 +12,30 @@ import type { StateAnimationProps } from "./state-animation-props";
  * @param gameState ゲームの状態
  * @return アニメーション
  */
-export function startGameAnimation(props: StateAnimationProps, gameState: GameStateX<StartGame>): Animate {
-  const activeTDArmdozer = props.view.td.armdozerObjects.find(v => v.playerId === gameState.activePlayerId);
-  const activeHUDPlayer = props.view.hud.players.find(v => v.playerId === gameState.activePlayerId);
+export function startGameAnimation(
+  props: StateAnimationProps,
+  gameState: GameStateX<StartGame>
+): Animate {
+  const activeTDArmdozer = props.view.td.armdozerObjects.find(
+    (v) => v.playerId === gameState.activePlayerId
+  );
+  const activeHUDPlayer = props.view.hud.players.find(
+    (v) => v.playerId === gameState.activePlayerId
+  );
 
   if (!activeTDArmdozer || !activeHUDPlayer) {
     return empty();
   }
 
-  return empty().chain(delay(800), process(() => {
-    props.sounds.batteryRecover.play();
-  }), activeHUDPlayer.turnStart.show().chain(delay(400)).chain(activeHUDPlayer.turnStart.hidden()), activeTDArmdozer.sprite().startActive());
+  return empty().chain(
+    delay(800),
+    process(() => {
+      props.sounds.batteryRecover.play();
+    }),
+    activeHUDPlayer.turnStart
+      .show()
+      .chain(delay(400))
+      .chain(activeHUDPlayer.turnStart.hidden()),
+    activeTDArmdozer.sprite().startActive()
+  );
 }

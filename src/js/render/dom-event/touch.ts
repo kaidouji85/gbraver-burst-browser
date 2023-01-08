@@ -1,4 +1,4 @@
-import {fromEvent, Observable} from "rxjs";
+import { fromEvent, Observable } from "rxjs";
 
 import { map } from "../../stream/operator";
 import type { Stream } from "../../stream/stream";
@@ -28,15 +28,22 @@ export type TouchEnd = {
  * @param renderDom レンダラーDOM
  * @return ストリーム
  */
-export function createTouchStartStream(renderDom: HTMLElement): Stream<TouchStart> {
-  const observable = fromEvent(renderDom, "touchstart") as Observable<TouchEvent>;
-  return createStream<TouchEvent>(observable).chain(map(v => {
-    v.preventDefault();
-    return {
-      type: "touchStart",
-      event: v
-    };
-  }));
+export function createTouchStartStream(
+  renderDom: HTMLElement
+): Stream<TouchStart> {
+  const observable = fromEvent(
+    renderDom,
+    "touchstart"
+  ) as Observable<TouchEvent>;
+  return createStream<TouchEvent>(observable).chain(
+    map((v) => {
+      v.preventDefault();
+      return {
+        type: "touchStart",
+        event: v,
+      };
+    })
+  );
 }
 
 /**
@@ -45,15 +52,22 @@ export function createTouchStartStream(renderDom: HTMLElement): Stream<TouchStar
  * @param renderDom レンダラーDOM
  * @return ストリーム
  */
-export function createTouchMoveStream(renderDom: HTMLElement): Stream<TouchMove> {
-  const observable = fromEvent(renderDom, "touchmove") as Observable<TouchEvent>;
-  return createStream<TouchEvent>(observable).chain(map(v => {
-    v.preventDefault();
-    return {
-      type: "touchMove",
-      event: v
-    };
-  }));
+export function createTouchMoveStream(
+  renderDom: HTMLElement
+): Stream<TouchMove> {
+  const observable = fromEvent(
+    renderDom,
+    "touchmove"
+  ) as Observable<TouchEvent>;
+  return createStream<TouchEvent>(observable).chain(
+    map((v) => {
+      v.preventDefault();
+      return {
+        type: "touchMove",
+        event: v,
+      };
+    })
+  );
 }
 
 /**
@@ -64,11 +78,13 @@ export function createTouchMoveStream(renderDom: HTMLElement): Stream<TouchMove>
  */
 export function createTouchEndStream(renderDom: HTMLElement): Stream<TouchEnd> {
   const observable = fromEvent(renderDom, "touchend") as Observable<TouchEvent>;
-  return createStream<TouchEvent>(observable).chain(map(v => {
-    v.preventDefault();
-    return {
-      type: "touchEnd",
-      event: v
-    };
-  }));
+  return createStream<TouchEvent>(observable).chain(
+    map((v) => {
+      v.preventDefault();
+      return {
+        type: "touchEnd",
+        event: v,
+      };
+    })
+  );
 }

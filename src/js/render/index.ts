@@ -2,7 +2,10 @@ import * as THREE from "three";
 import { WebGLInfo } from "three";
 
 import type { Stream, Unsubscriber } from "../stream/stream";
-import { getViewPortHeight, getViewPortWidth } from "../view-port/view-port-size";
+import {
+  getViewPortHeight,
+  getViewPortWidth,
+} from "../view-port/view-port-size";
 import type { Resize } from "../window/resize";
 import type { RendererDOMEvent } from "./dom-event/dom-event";
 import { createDOMEventStream } from "./dom-event/dom-event";
@@ -32,9 +35,11 @@ export class Renderer implements OverlapNotifier, RendererDomGetter, Rendering {
     this._threeJsRender.setPixelRatio(window.devicePixelRatio);
 
     this._domEvent = createDOMEventStream(this._threeJsRender.domElement);
-    this._unsubscriber = [resize.subscribe(action => {
-      this._resize(action);
-    })];
+    this._unsubscriber = [
+      resize.subscribe((action) => {
+        this._resize(action);
+      }),
+    ];
   }
 
   /**
@@ -98,5 +103,4 @@ export class Renderer implements OverlapNotifier, RendererDomGetter, Rendering {
   _resize(action: Resize): void {
     this._threeJsRender.setSize(action.width, action.height);
   }
-
 }

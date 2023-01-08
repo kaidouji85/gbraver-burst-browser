@@ -28,7 +28,7 @@ export class SimpleIndicatorView implements ResultIndicatorView {
       texture,
       maxAnimation: 1,
       width: MESH_SIZE,
-      height: MESH_SIZE
+      height: MESH_SIZE,
     });
     this.#paddingX = paddingX;
     this.#paddingY = paddingY;
@@ -42,11 +42,30 @@ export class SimpleIndicatorView implements ResultIndicatorView {
   /** @override */
   engage(model: ResultIndicatorModel, preRender: PreRender): void {
     const target = this.#mesh.getObject3D();
-    const devicePerScale = HUDCutInScale(preRender.rendererDOM, preRender.safeAreaInset);
-    const safeAreaX = 0 < model.worldCoordinate.x ? preRender.safeAreaInset.right : preRender.safeAreaInset.left;
-    target.position.x = model.localCoordinate.x * devicePerScale + model.worldCoordinate.x * (preRender.rendererDOM.clientWidth / 2 - safeAreaX - this.#paddingX * devicePerScale);
-    const safeAreaY = 0 < model.worldCoordinate.y ? preRender.safeAreaInset.top : preRender.safeAreaInset.bottom;
-    target.position.y = model.localCoordinate.y * devicePerScale + model.worldCoordinate.y * (preRender.rendererDOM.clientHeight / 2 - safeAreaY - this.#paddingY * devicePerScale);
+    const devicePerScale = HUDCutInScale(
+      preRender.rendererDOM,
+      preRender.safeAreaInset
+    );
+    const safeAreaX =
+      0 < model.worldCoordinate.x
+        ? preRender.safeAreaInset.right
+        : preRender.safeAreaInset.left;
+    target.position.x =
+      model.localCoordinate.x * devicePerScale +
+      model.worldCoordinate.x *
+        (preRender.rendererDOM.clientWidth / 2 -
+          safeAreaX -
+          this.#paddingX * devicePerScale);
+    const safeAreaY =
+      0 < model.worldCoordinate.y
+        ? preRender.safeAreaInset.top
+        : preRender.safeAreaInset.bottom;
+    target.position.y =
+      model.localCoordinate.y * devicePerScale +
+      model.worldCoordinate.y *
+        (preRender.rendererDOM.clientHeight / 2 -
+          safeAreaY -
+          this.#paddingY * devicePerScale);
     target.position.z = HUD_RESULT_INDICATOR_ZINDEX;
     target.scale.x = model.scale * devicePerScale;
     target.scale.y = model.scale * devicePerScale;
@@ -58,5 +77,4 @@ export class SimpleIndicatorView implements ResultIndicatorView {
   getObject3D(): THREE.Object3D {
     return this.#mesh.getObject3D();
   }
-
 }

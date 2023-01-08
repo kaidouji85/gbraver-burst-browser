@@ -16,16 +16,37 @@ import type { StateAnimationProps } from "./state-animation-props";
  * @param gameState ゲーム状態
  * @return アニメーション
  */
-export function inputCommandAnimation(props: StateAnimationProps, gameState: GameStateX<InputCommand>): Animate {
-  const player = gameState.players.find(v => v.playerId === props.playerId);
-  const playerCommand = gameState.effect.players.find(v => v.playerId === props.playerId);
-  const playerTDArmdozer = props.view.td.armdozerObjects.find(v => v.playerId === props.playerId);
-  const playerHUD = props.view.hud.players.find(v => v.playerId === props.playerId);
-  const enemy = gameState.players.find(v => v.playerId !== props.playerId);
-  const enemyTDArmdozer = props.view.td.armdozerObjects.find(v => v.playerId !== props.playerId);
-  const enemyHUD = props.view.hud.players.find(v => v.playerId !== props.playerId);
+export function inputCommandAnimation(
+  props: StateAnimationProps,
+  gameState: GameStateX<InputCommand>
+): Animate {
+  const player = gameState.players.find((v) => v.playerId === props.playerId);
+  const playerCommand = gameState.effect.players.find(
+    (v) => v.playerId === props.playerId
+  );
+  const playerTDArmdozer = props.view.td.armdozerObjects.find(
+    (v) => v.playerId === props.playerId
+  );
+  const playerHUD = props.view.hud.players.find(
+    (v) => v.playerId === props.playerId
+  );
+  const enemy = gameState.players.find((v) => v.playerId !== props.playerId);
+  const enemyTDArmdozer = props.view.td.armdozerObjects.find(
+    (v) => v.playerId !== props.playerId
+  );
+  const enemyHUD = props.view.hud.players.find(
+    (v) => v.playerId !== props.playerId
+  );
 
-  if (!player || !playerTDArmdozer || !playerCommand || !playerHUD || !enemy || !enemyTDArmdozer || !enemyHUD) {
+  if (
+    !player ||
+    !playerTDArmdozer ||
+    !playerCommand ||
+    !playerHUD ||
+    !enemy ||
+    !enemyTDArmdozer ||
+    !enemyHUD
+  ) {
     return empty();
   }
 
@@ -39,5 +60,22 @@ export function inputCommandAnimation(props: StateAnimationProps, gameState: Gam
   const okButtonLabel = isPlayerTurn ? "Attack" : "Defense";
   const canBurst = canBurstButtonPush(playerCommand.command);
   const canPilotSkill = canPilotButtonPush(playerCommand.command);
-  return all(isPlayerTurn ? playerTDArmdozer.sprite().startActive() : enemyTDArmdozer.sprite().startActive(), playerHUD.gauge.hp(player.armdozer.hp), playerHUD.gauge.battery(player.armdozer.battery), enemyHUD.gauge.hp(enemy.armdozer.hp), enemyHUD.gauge.battery(enemy.armdozer.battery), props.view.td.gameObjects.turnIndicator.turnChange(isPlayerTurn), props.view.hud.gameObjects.batterySelector.open(initialValue, enableMax, okButtonLabel), props.view.hud.gameObjects.burstButton.open(canBurst), props.view.hud.gameObjects.pilotButton.open(canPilotSkill), props.view.hud.gameObjects.timeScaleButton.open(props.animationTimeScale));
+  return all(
+    isPlayerTurn
+      ? playerTDArmdozer.sprite().startActive()
+      : enemyTDArmdozer.sprite().startActive(),
+    playerHUD.gauge.hp(player.armdozer.hp),
+    playerHUD.gauge.battery(player.armdozer.battery),
+    enemyHUD.gauge.hp(enemy.armdozer.hp),
+    enemyHUD.gauge.battery(enemy.armdozer.battery),
+    props.view.td.gameObjects.turnIndicator.turnChange(isPlayerTurn),
+    props.view.hud.gameObjects.batterySelector.open(
+      initialValue,
+      enableMax,
+      okButtonLabel
+    ),
+    props.view.hud.gameObjects.burstButton.open(canBurst),
+    props.view.hud.gameObjects.pilotButton.open(canPilotSkill),
+    props.view.hud.gameObjects.timeScaleButton.open(props.animationTimeScale)
+  );
 }

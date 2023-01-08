@@ -9,14 +9,19 @@ import { startTitle } from "./start-title";
  * @param props ゲームプロパティ
  * @return 処理が完了したら発火するPromise
  */
-export async function onEndNPCEnding(props: Readonly<GameProps>): Promise<void> {
-  await Promise.all([(async () => {
-    await props.fader.fadeOut();
-    return await startTitle(props);
-  })(), (async () => {
-    await props.bgm.do(fadeOut);
-    await props.bgm.do(stop);
-  })()]);
+export async function onEndNPCEnding(
+  props: Readonly<GameProps>
+): Promise<void> {
+  await Promise.all([
+    (async () => {
+      await props.fader.fadeOut();
+      return await startTitle(props);
+    })(),
+    (async () => {
+      await props.bgm.do(fadeOut);
+      await props.bgm.do(stop);
+    })(),
+  ]);
   await props.fader.fadeIn();
   playTitleBGM(props);
 }

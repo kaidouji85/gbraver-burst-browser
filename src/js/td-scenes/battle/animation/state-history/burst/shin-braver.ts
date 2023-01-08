@@ -12,7 +12,11 @@ import type { BurstAnimationParamX } from "./animation-param";
  * シンブレイバー バーストアニメーション パラメータ
  * @template BURST バースト種別
  */
-export type ShinBraverBurst<BURST extends Burst> = BurstAnimationParamX<ShinBraverTD, ShinBraverHUD, BURST>;
+export type ShinBraverBurst<BURST extends Burst> = BurstAnimationParamX<
+  ShinBraverTD,
+  ShinBraverHUD,
+  BURST
+>;
 
 /**
  * シンブレイバーのバーストアニメーション
@@ -23,9 +27,7 @@ export type ShinBraverBurst<BURST extends Burst> = BurstAnimationParamX<ShinBrav
 export function shinBraverBurst(param: ShinBraverBurst<Burst>): Animate {
   if (param.burst.type === "RecoverBattery") {
     const burst: RecoverBattery = param.burst;
-    return recoverBattery({ ...param,
-      burst
-    });
+    return recoverBattery({ ...param, burst });
   }
 
   return empty();
@@ -38,5 +40,46 @@ export function shinBraverBurst(param: ShinBraverBurst<Burst>): Animate {
  * @return アニメーション
  */
 function recoverBattery(param: ShinBraverBurst<RecoverBattery>): Animate {
-  return all(param.burstArmdozerHUD.cutIn.show(), param.burstArmdozerTD.shinBraver.burst(), param.isActive ? param.burstArmdozerTD.shinBraver.endActive() : param.anotherArmdozerTD.sprite().endActive(), track(param.tdCamera, param.burstArmdozerTD.shinBraver.getObject3D().position.x, 500), dolly(param.tdCamera, "-60", 500), param.tdObjects.skyBrightness.brightness(0.2, 500), param.tdObjects.illumination.intensity(0.2, 500), param.hudObjects.rearmostFader.opacity(0.6, 500), param.tdObjects.turnIndicator.invisible()).chain(delay(800)).chain(all(param.hudObjects.rearmostFader.opacity(0, 300), param.burstArmdozerHUD.cutIn.hidden())).chain(delay(300)).chain(all(param.burstPlayerHUD.gauge.battery(param.burstPlayerState.armdozer.battery), param.burstPlayerTD.recoverBattery.popUp(param.burst.recoverBattery))).chain(all(param.burstArmdozerTD.shinBraver.burstToStand(), toInitial(param.tdCamera, 500), param.tdObjects.skyBrightness.brightness(1, 500), param.tdObjects.illumination.intensity(1, 500))).chain(delay(200));
+  return all(
+    param.burstArmdozerHUD.cutIn.show(),
+    param.burstArmdozerTD.shinBraver.burst(),
+    param.isActive
+      ? param.burstArmdozerTD.shinBraver.endActive()
+      : param.anotherArmdozerTD.sprite().endActive(),
+    track(
+      param.tdCamera,
+      param.burstArmdozerTD.shinBraver.getObject3D().position.x,
+      500
+    ),
+    dolly(param.tdCamera, "-60", 500),
+    param.tdObjects.skyBrightness.brightness(0.2, 500),
+    param.tdObjects.illumination.intensity(0.2, 500),
+    param.hudObjects.rearmostFader.opacity(0.6, 500),
+    param.tdObjects.turnIndicator.invisible()
+  )
+    .chain(delay(800))
+    .chain(
+      all(
+        param.hudObjects.rearmostFader.opacity(0, 300),
+        param.burstArmdozerHUD.cutIn.hidden()
+      )
+    )
+    .chain(delay(300))
+    .chain(
+      all(
+        param.burstPlayerHUD.gauge.battery(
+          param.burstPlayerState.armdozer.battery
+        ),
+        param.burstPlayerTD.recoverBattery.popUp(param.burst.recoverBattery)
+      )
+    )
+    .chain(
+      all(
+        param.burstArmdozerTD.shinBraver.burstToStand(),
+        toInitial(param.tdCamera, 500),
+        param.tdObjects.skyBrightness.brightness(1, 500),
+        param.tdObjects.illumination.intensity(1, 500)
+      )
+    )
+    .chain(delay(200));
 }

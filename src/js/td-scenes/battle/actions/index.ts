@@ -7,4 +7,11 @@ import type { StartBattleScene } from "./start-battle-scene";
 import type { ToggleTimeScale } from "./toggle-time-scale";
 
 /** 戦闘シーンアクション */
-export type BattleSceneAction = StartBattleScene | PlusBattery | MinusBattery | DecideBattery | DoBurst | DoPilotSkill | ToggleTimeScale;
+export type BattleSceneAction =
+  | StartBattleScene
+  | PlusBattery
+  | MinusBattery
+  | DecideBattery
+  | DoBurst
+  | DoPilotSkill
+  | ToggleTimeScale;

@@ -1,4 +1,4 @@
-import {Tween} from "@tweenjs/tween.js";
+import { Tween } from "@tweenjs/tween.js";
 
 import { scaleTweenDuration } from "./duration";
 
@@ -73,7 +73,7 @@ export class Animate {
 
   /** アニメーションを再生する */
   play(): Promise<void> {
-    return new Promise(resolve => {
+    return new Promise((resolve) => {
       this._start.start();
 
       this._end.onComplete(() => {
@@ -102,7 +102,7 @@ export class Animate {
    * @return 結合後アニメーション
    */
   chain(next: Animate, ...pararells: Animate[]): Animate {
-    const pararellTweens = pararells.map(v => v._start);
+    const pararellTweens = pararells.map((v) => v._start);
 
     this._end.chain(next._start, ...pararellTweens);
 
@@ -122,5 +122,4 @@ export class Animate {
     scaleTweenDuration(this._start, scale);
     return this;
   }
-
 }

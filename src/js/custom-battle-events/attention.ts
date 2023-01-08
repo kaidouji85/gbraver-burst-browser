@@ -7,7 +7,8 @@ import type { CustomBattleEventProps } from "../td-scenes/battle/custom-battle-e
  * @param props イベントプロパティ
  */
 export function attentionBatterySelector(props: CustomBattleEventProps): void {
-  props.view.hud.gameObjects.batterySelector.getObject3D().position.z = HUD_ATTENTION_ZINDEX;
+  props.view.hud.gameObjects.batterySelector.getObject3D().position.z =
+    HUD_ATTENTION_ZINDEX;
 }
 
 /**
@@ -15,7 +16,9 @@ export function attentionBatterySelector(props: CustomBattleEventProps): void {
  *
  * @param props イベントプロパティ
  */
-export function unattentionBatterySelector(props: CustomBattleEventProps): void {
+export function unattentionBatterySelector(
+  props: CustomBattleEventProps
+): void {
   props.view.hud.gameObjects.batterySelector.getObject3D().position.z = 0;
 }
 
@@ -25,7 +28,8 @@ export function unattentionBatterySelector(props: CustomBattleEventProps): void 
  * @param props イベントプロパティ
  */
 export function attentionBurstButton(props: CustomBattleEventProps): void {
-  props.view.hud.gameObjects.burstButton.getObject3D().position.z = HUD_ATTENTION_ZINDEX;
+  props.view.hud.gameObjects.burstButton.getObject3D().position.z =
+    HUD_ATTENTION_ZINDEX;
 }
 
 /**
@@ -43,7 +47,8 @@ export function unattentionBurstButton(props: CustomBattleEventProps): void {
  * @param props イベントプロパティ
  */
 export function attentionPilotButton(props: CustomBattleEventProps): void {
-  props.view.hud.gameObjects.pilotButton.getObject3D().position.z = HUD_ATTENTION_ZINDEX;
+  props.view.hud.gameObjects.pilotButton.getObject3D().position.z =
+    HUD_ATTENTION_ZINDEX;
 }
 
 /**

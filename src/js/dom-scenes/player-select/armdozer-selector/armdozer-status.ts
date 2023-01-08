@@ -64,19 +64,31 @@ type Elements = {
  * @return 抽出結果
  */
 function extractElements(root: HTMLElement, ids: DataIDs): Elements {
-  const name: HTMLElement = root.querySelector(`[data-id="${ids.name}"]`) ?? document.createElement("div");
-  const hp: HTMLElement = root.querySelector(`[data-id="${ids.hp}"]`) ?? document.createElement("div");
-  const power: HTMLElement = root.querySelector(`[data-id="${ids.power}"]`) ?? document.createElement("div");
-  const speed: HTMLElement = root.querySelector(`[data-id="${ids.speed}"]`) ?? document.createElement("div");
-  const burstOverview: HTMLElement = root.querySelector(`[data-id="${ids.burstOverview}"]`) ?? document.createElement("div");
-  const burstDetail: HTMLElement = root.querySelector(`[data-id="${ids.burstDetail}"]`) ?? document.createElement("div");
+  const name: HTMLElement =
+    root.querySelector(`[data-id="${ids.name}"]`) ??
+    document.createElement("div");
+  const hp: HTMLElement =
+    root.querySelector(`[data-id="${ids.hp}"]`) ??
+    document.createElement("div");
+  const power: HTMLElement =
+    root.querySelector(`[data-id="${ids.power}"]`) ??
+    document.createElement("div");
+  const speed: HTMLElement =
+    root.querySelector(`[data-id="${ids.speed}"]`) ??
+    document.createElement("div");
+  const burstOverview: HTMLElement =
+    root.querySelector(`[data-id="${ids.burstOverview}"]`) ??
+    document.createElement("div");
+  const burstDetail: HTMLElement =
+    root.querySelector(`[data-id="${ids.burstDetail}"]`) ??
+    document.createElement("div");
   return {
     name,
     hp,
     power,
     speed,
     burstOverview,
-    burstDetail
+    burstDetail,
   };
 }
 
@@ -100,7 +112,7 @@ export class ArmdozerStatus {
       power: domUuid(),
       speed: domUuid(),
       burstOverview: domUuid(),
-      burstDetail: domUuid()
+      burstDetail: domUuid(),
     };
     this.#root = document.createElement("div");
     this.#root.className = ROOT_CLASS_NAME;
@@ -129,7 +141,7 @@ export class ArmdozerStatus {
    * @param armdozerId 表示するアームドーザID
    */
   switch(armdozerId: ArmDozerId) {
-    const target = ArmDozers.find(v => v.id === armdozerId);
+    const target = ArmDozers.find((v) => v.id === armdozerId);
 
     if (!target) {
       return;
@@ -140,7 +152,11 @@ export class ArmdozerStatus {
     this.#power.innerText = `${target.power}`;
     this.#speed.innerText = `${target.speed}`;
     this.#burstOverview.innerText = burstOverview(target.burst);
-    this.#burstDetail.innerHTML = burstDetail(target.burst).map(v => `<span class="${ROOT_CLASS_NAME}__burst__content__line">${v}</span>`).reduce((a, b) => a + b);
+    this.#burstDetail.innerHTML = burstDetail(target.burst)
+      .map(
+        (v) =>
+          `<span class="${ROOT_CLASS_NAME}__burst__content__line">${v}</span>`
+      )
+      .reduce((a, b) => a + b);
   }
-
 }

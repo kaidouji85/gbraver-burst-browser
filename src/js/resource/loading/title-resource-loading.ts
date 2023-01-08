@@ -4,7 +4,11 @@ import type { ResourceLoading } from "./resource-loading";
 import { resourceLoading } from "./resource-loading";
 
 /** タイトルで利用する音声 */
-const TITLE_SOUND_IDS = [SOUND_IDS.PUSH_BUTTON, SOUND_IDS.CHANGE_VALUE, SOUND_IDS.TITLE_BGM];
+const TITLE_SOUND_IDS = [
+  SOUND_IDS.PUSH_BUTTON,
+  SOUND_IDS.CHANGE_VALUE,
+  SOUND_IDS.TITLE_BGM,
+];
 
 /**
  * タイトルで利用するリソースを読み込む
@@ -12,8 +16,12 @@ const TITLE_SOUND_IDS = [SOUND_IDS.PUSH_BUTTON, SOUND_IDS.CHANGE_VALUE, SOUND_ID
  * @param resourceRoot リソースルート
  * @return リソース読み込みオブジェクト
  */
-export function titleResourceLoading(resourceRoot: ResourceRoot): ResourceLoading {
-  const soundConfigs = SOUND_CONFIGS.filter(v => TITLE_SOUND_IDS.includes(v.id));
+export function titleResourceLoading(
+  resourceRoot: ResourceRoot
+): ResourceLoading {
+  const soundConfigs = SOUND_CONFIGS.filter((v) =>
+    TITLE_SOUND_IDS.includes(v.id)
+  );
   return resourceLoading({
     resourceRoot,
     preFetchPaths: [],
@@ -21,6 +29,6 @@ export function titleResourceLoading(resourceRoot: ResourceRoot): ResourceLoadin
     textureConfigs: [],
     cubeTextureConfigs: [],
     canvasImageConfigs: [],
-    soundConfigs
+    soundConfigs,
   });
 }

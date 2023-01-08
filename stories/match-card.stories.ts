@@ -4,14 +4,14 @@ import { MatchCard } from "../src/js/dom-scenes/match-card";
 import type { DOMStubStory } from "./stub/dom-stub";
 import { domStub } from "./stub/dom-stub";
 export default {
-  title: "match-card"
+  title: "match-card",
 };
-export const Scene: DOMStubStory = domStub(resources => {
+export const Scene: DOMStubStory = domStub((resources) => {
   const scene = new MatchCard({
     resources: resources,
     player: ArmDozerIds.LIGHTNING_DOZER,
     enemy: ArmDozerIds.NEO_LANDOZER,
-    caption: "STAGE X"
+    caption: "STAGE X",
   });
   return scene.getRootHTMLElement();
 });

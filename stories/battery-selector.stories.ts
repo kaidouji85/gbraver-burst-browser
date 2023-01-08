@@ -1,20 +1,17 @@
 import { BatterySelector } from "../src/js/game-object/battery-selector";
 import { HUDGameObjectStub } from "./stub/hud-game-object-stub";
 export default {
-  title: "battery-selector"
+  title: "battery-selector",
 };
 export const batterySelector = (): HTMLElement => {
-  const stub = new HUDGameObjectStub(({
-    resources,
-    gameObjectAction
-  }) => {
+  const stub = new HUDGameObjectStub(({ resources, gameObjectAction }) => {
     const selector = new BatterySelector({
       resources: resources,
       gameObjectAction: gameObjectAction,
-      maxBattery: 5
+      maxBattery: 5,
     });
     selector.open(1, 5, "Attack").play();
-    selector.decidePushNotifier().subscribe(event => {
+    selector.decidePushNotifier().subscribe((event) => {
       event.preventDefault();
       event.stopPropagation();
       selector.decide().play();

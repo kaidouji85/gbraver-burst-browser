@@ -37,7 +37,7 @@ export const fadeIn: BGMOperator = async (bgm: BGM): Promise<BGM> => {
 export const stop = async (bgm: BGM): Promise<BGM> => {
   bgm.type === "NowPlayingBGM" && bgm.resource.sound.stop();
   return {
-    type: "NoBGM"
+    type: "NoBGM",
   };
 };
 
@@ -48,13 +48,15 @@ export const stop = async (bgm: BGM): Promise<BGM> => {
  * @param resource 再生するBGMの音リソース
  * @return BGMオペレータ
  */
-export const play = (resource: SoundResource): BGMOperator => async (bgm: BGM): Promise<BGM> => {
-  bgm.type === "NowPlayingBGM" && bgm.resource.sound.stop();
-  resource.sound.play();
-  resource.sound.loop(true);
-  resource.sound.volume(howlVolume(resource));
-  return {
-    type: "NowPlayingBGM",
-    resource
+export const play =
+  (resource: SoundResource): BGMOperator =>
+  async (bgm: BGM): Promise<BGM> => {
+    bgm.type === "NowPlayingBGM" && bgm.resource.sound.stop();
+    resource.sound.play();
+    resource.sound.loop(true);
+    resource.sound.volume(howlVolume(resource));
+    return {
+      type: "NowPlayingBGM",
+      resource,
+    };
   };
-};

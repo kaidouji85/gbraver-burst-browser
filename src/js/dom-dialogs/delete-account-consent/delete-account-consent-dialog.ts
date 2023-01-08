@@ -31,7 +31,8 @@ type DataIDs = {
  * @return innerHTML
  */
 function rootInnerHTML(ids: DataIDs, resources: Resources): string {
-  const closerPath = resources.paths.find(v => v.id === PathIds.CLOSER)?.path ?? "";
+  const closerPath =
+    resources.paths.find((v) => v.id === PathIds.CLOSER)?.path ?? "";
   return `
     <div class="${ROOT_CLASS}__background" data-id="${ids.backGround}"></div>
     <img class="${ROOT_CLASS}__closer" alt="閉じる" src="${closerPath}" data-id="${ids.closer}">
@@ -66,17 +67,32 @@ type Elements = {
  */
 function extractElements(root: HTMLElement, ids: DataIDs): Elements {
   const closerElement = root.querySelector(`[data-id="${ids.closer}"]`);
-  const closer = closerElement instanceof HTMLImageElement ? closerElement : document.createElement("img");
-  const backGround: HTMLElement = root.querySelector(`[data-id="${ids.backGround}"]`) ?? document.createElement("div");
-  const deleteAccountButtonElement = root.querySelector(`[data-id="${ids.deleteAccountButton}"]`);
-  const deleteAccountButton = deleteAccountButtonElement instanceof HTMLButtonElement ? deleteAccountButtonElement : document.createElement("button");
-  const closeButtonElement = root.querySelector(`[data-id="${ids.closeButton}"]`);
-  const closeButton = closeButtonElement instanceof HTMLButtonElement ? closeButtonElement : document.createElement("button");
+  const closer =
+    closerElement instanceof HTMLImageElement
+      ? closerElement
+      : document.createElement("img");
+  const backGround: HTMLElement =
+    root.querySelector(`[data-id="${ids.backGround}"]`) ??
+    document.createElement("div");
+  const deleteAccountButtonElement = root.querySelector(
+    `[data-id="${ids.deleteAccountButton}"]`
+  );
+  const deleteAccountButton =
+    deleteAccountButtonElement instanceof HTMLButtonElement
+      ? deleteAccountButtonElement
+      : document.createElement("button");
+  const closeButtonElement = root.querySelector(
+    `[data-id="${ids.closeButton}"]`
+  );
+  const closeButton =
+    closeButtonElement instanceof HTMLButtonElement
+      ? closeButtonElement
+      : document.createElement("button");
   return {
     closer,
     backGround,
     deleteAccountButton,
-    closeButton
+    closeButton,
   };
 }
 
@@ -104,7 +120,7 @@ export class DeleteAccountConsentDialog implements DOMDialog {
       backGround: domUuid(),
       closer: domUuid(),
       deleteAccountButton: domUuid(),
-      closeButton: domUuid()
+      closeButton: domUuid(),
     };
     this.#root = document.createElement("div");
     this.#root.innerHTML = rootInnerHTML(ids, resources);
@@ -116,23 +132,32 @@ export class DeleteAccountConsentDialog implements DOMDialog {
     this.#closeButton = elements.closeButton;
     this.#deleteAccount = createStreamSource();
     this.#closeDialog = createStreamSource();
-    this.#unsubscribers = [pushDOMStream(this.#backGround).subscribe(action => {
-      this.#onPushOutsideOfDialog(action);
-    }), pushDOMStream(this.#closer).subscribe(action => {
-      this.#onCloserPush(action);
-    }), pushDOMStream(this.#deleteAccountButton).subscribe(action => {
-      this.#onDeleteAccountButtonPush(action);
-    }), pushDOMStream(this.#closeButton).subscribe(action => {
-      this.#onCloseButtonPush(action);
-    })];
-    this.#changeValue = resources.sounds.find(v => v.id === SOUND_IDS.CHANGE_VALUE)?.sound ?? new Howl({src: ""});
-    this.#pushButton = resources.sounds.find(v => v.id === SOUND_IDS.PUSH_BUTTON)?.sound ?? new Howl({src: ""});
+    this.#unsubscribers = [
+      pushDOMStream(this.#backGround).subscribe((action) => {
+        this.#onPushOutsideOfDialog(action);
+      }),
+      pushDOMStream(this.#closer).subscribe((action) => {
+        this.#onCloserPush(action);
+      }),
+      pushDOMStream(this.#deleteAccountButton).subscribe((action) => {
+        this.#onDeleteAccountButtonPush(action);
+      }),
+      pushDOMStream(this.#closeButton).subscribe((action) => {
+        this.#onCloseButtonPush(action);
+      }),
+    ];
+    this.#changeValue =
+      resources.sounds.find((v) => v.id === SOUND_IDS.CHANGE_VALUE)?.sound ??
+      new Howl({ src: "" });
+    this.#pushButton =
+      resources.sounds.find((v) => v.id === SOUND_IDS.PUSH_BUTTON)?.sound ??
+      new Howl({ src: "" });
     this.#exclusive = new Exclusive();
   }
 
   /** @override */
   destructor(): void {
-    this.#unsubscribers.forEach(v => {
+    this.#unsubscribers.forEach((v) => {
       v.unsubscribe();
     });
   }
@@ -196,7 +221,10 @@ export class DeleteAccountConsentDialog implements DOMDialog {
     this.#exclusive.execute(async (): Promise<void> => {
       action.event.preventDefault();
       action.event.stopPropagation();
-      await Promise.all([pop(this.#deleteAccountButton), this.#pushButton.play()]);
+      await Promise.all([
+        pop(this.#deleteAccountButton),
+        this.#pushButton.play(),
+      ]);
       this.#deleteAccount.next();
     });
   }
@@ -214,5 +242,4 @@ export class DeleteAccountConsentDialog implements DOMDialog {
       this.#closeDialog.next();
     });
   }
-
 }

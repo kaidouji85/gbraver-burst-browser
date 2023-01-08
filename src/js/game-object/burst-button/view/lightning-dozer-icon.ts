@@ -19,12 +19,15 @@ export class LightningDozerIcon implements ArmdozerIcon {
    */
   constructor(resources: Resources) {
     this.#group = new THREE.Group();
-    const lightningDozer = resources.textures.find(v => v.id === TEXTURE_IDS.LIGHTNING_DOZER_BURST_BUTTON_ICON)?.texture ?? new THREE.Texture();
+    const lightningDozer =
+      resources.textures.find(
+        (v) => v.id === TEXTURE_IDS.LIGHTNING_DOZER_BURST_BUTTON_ICON
+      )?.texture ?? new THREE.Texture();
     this.#mesh = new HorizontalAnimationMesh({
       texture: lightningDozer,
       maxAnimation: 1,
       width: 420,
-      height: 420
+      height: 420,
     });
     this.#mesh.animate(1);
     this.#mesh.getObject3D().position.x = -15;
@@ -56,5 +59,4 @@ export class LightningDozerIcon implements ArmdozerIcon {
   setOpacity(opacity: number): void {
     this.#mesh.setOpacity(opacity);
   }
-
 }

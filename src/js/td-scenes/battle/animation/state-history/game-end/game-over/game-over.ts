@@ -19,30 +19,22 @@ import { wingDozerWin } from "./wing-dozer";
 export function gameOverAnimation(param: GameOverParam): Animate {
   if (param.winnerTdArmdozer instanceof ShinBraverTD) {
     const winnerTdArmdozer: ShinBraverTD = param.winnerTdArmdozer;
-    return shinBraverWin({ ...param,
-      winnerTdArmdozer
-    });
+    return shinBraverWin({ ...param, winnerTdArmdozer });
   }
 
   if (param.winnerTdArmdozer instanceof NeoLandozerTD) {
     const winnerTdArmdozer: NeoLandozerTD = param.winnerTdArmdozer;
-    return neoLandozerWin({ ...param,
-      winnerTdArmdozer
-    });
+    return neoLandozerWin({ ...param, winnerTdArmdozer });
   }
 
   if (param.winnerTdArmdozer instanceof LightningDozerTD) {
     const winnerTdArmdozer: LightningDozerTD = param.winnerTdArmdozer;
-    return lightningDozerWin({ ...param,
-      winnerTdArmdozer
-    });
+    return lightningDozerWin({ ...param, winnerTdArmdozer });
   }
 
   if (param.winnerTdArmdozer instanceof WingDozerTD) {
     const winnerTdArmdozer: WingDozerTD = param.winnerTdArmdozer;
-    return wingDozerWin({ ...param,
-      winnerTdArmdozer
-    });
+    return wingDozerWin({ ...param, winnerTdArmdozer });
   }
 
   return empty();

@@ -11,6 +11,10 @@ import type { Position } from "../position";
  * @param position 移動先座標
  * @return アニメーション
  */
-export function lookAt(model: Battle3DCameraModel, position: Position, duration: number): Animate {
-  return tween(model.target, t => t.to(position, duration));
+export function lookAt(
+  model: Battle3DCameraModel,
+  position: Position,
+  duration: number
+): Animate {
+  return tween(model.target, (t) => t.to(position, duration));
 }

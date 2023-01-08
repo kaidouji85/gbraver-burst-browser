@@ -10,6 +10,6 @@ export function createInitialValue(): PilotButtonModel {
     opacity: 0,
     disabled: true,
     scale: 1,
-    canPilot: true
+    canPilot: true,
   };
 }

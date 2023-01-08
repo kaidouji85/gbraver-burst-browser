@@ -9,7 +9,9 @@ import { attackBatteryCaption } from "../captions";
  * @param props イベントプロパティ
  * @return ストーリーが完了したら発火するPromise
  */
-export async function attackDescription(props: Readonly<LastState>): Promise<void> {
+export async function attackDescription(
+  props: Readonly<LastState>
+): Promise<void> {
   await focusInBatterySelector(props, attackBatteryCaption);
   await props.view.hud.gameObjects.batterySelector.batteryPlus().play();
   await waitTime(200);

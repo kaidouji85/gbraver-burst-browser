@@ -1,4 +1,10 @@
-import type { ArmDozerId, GameEndResult, PilotId, Player, PlayerId } from "gbraver-burst-core";
+import type {
+  ArmDozerId,
+  GameEndResult,
+  PilotId,
+  Player,
+  PlayerId,
+} from "gbraver-burst-core";
 import { ArmDozers, Pilots } from "gbraver-burst-core";
 
 import type { NPC } from "../npc/npc";
@@ -43,18 +49,23 @@ export type NPCBattleState = {
  * @param stages 全ステージ
  * @return NPCバトルステート
  */
-export function createNPCBattleState(playerId: PlayerId, armdozerId: ArmDozerId, pilotId: PilotId, stages: NPCBattleStage[]): NPCBattleState {
-  const armdozer = ArmDozers.find(v => v.id === armdozerId) ?? ArmDozers[0];
-  const pilot = Pilots.find(v => v.id === pilotId) ?? Pilots[0];
+export function createNPCBattleState(
+  playerId: PlayerId,
+  armdozerId: ArmDozerId,
+  pilotId: PilotId,
+  stages: NPCBattleStage[]
+): NPCBattleState {
+  const armdozer = ArmDozers.find((v) => v.id === armdozerId) ?? ArmDozers[0];
+  const pilot = Pilots.find((v) => v.id === pilotId) ?? Pilots[0];
   const player = {
     playerId,
     armdozer,
-    pilot
+    pilot,
   };
   return {
     player,
     stages: stages,
-    stageIndex: 0
+    stageIndex: 0,
   };
 }
 
@@ -75,7 +86,9 @@ export function getNPCStageLevel(state: NPCBattleState): number {
  * @param origin NPCバトルステート
  * @return ステージ
  */
-export function getCurrentNPCStage(origin: NPCBattleState): NPCBattleStage | null | undefined {
+export function getCurrentNPCStage(
+  origin: NPCBattleState
+): NPCBattleStage | null | undefined {
   return origin.stages[origin.stageIndex] ?? null;
 }
 
@@ -89,7 +102,10 @@ export type NPCBattleResult = "StageClear" | "StageMiss" | "NPCBattleComplete";
  * @param isLastStage ラストステージか否かのフラグ、trueでラストステージ
  * @return 判定結果
  */
-function getNPCBattleResult(isStageClear: boolean, isLastStage: boolean): NPCBattleResult {
+function getNPCBattleResult(
+  isStageClear: boolean,
+  isLastStage: boolean
+): NPCBattleResult {
   if (isStageClear && isLastStage) {
     return "NPCBattleComplete";
   } else if (isStageClear && !isLastStage) {
@@ -115,22 +131,26 @@ export type UpdatedNPCBattleState = {
  * @param gameEndResult 戦闘結果
  * @return NPCバトル更新結果
  */
-export function updateNPCBattleState(origin: NPCBattleState, gameEndResult: GameEndResult): UpdatedNPCBattleState | null | undefined {
+export function updateNPCBattleState(
+  origin: NPCBattleState,
+  gameEndResult: GameEndResult
+): UpdatedNPCBattleState | null | undefined {
   const stage = getCurrentNPCStage(origin);
 
   if (!stage) {
     return null;
   }
 
-  const isStageClear = gameEndResult.type === "GameOver" && gameEndResult.winner === origin.player.playerId;
+  const isStageClear =
+    gameEndResult.type === "GameOver" &&
+    gameEndResult.winner === origin.player.playerId;
   const isLastStage = origin.stageIndex === origin.stages.length - 1;
   const result = getNPCBattleResult(isStageClear, isLastStage);
-  const nextStageIndex = result === "StageClear" ? origin.stageIndex + 1 : origin.stageIndex;
-  const updatedState = { ...origin,
-    stageIndex: nextStageIndex
-  };
+  const nextStageIndex =
+    result === "StageClear" ? origin.stageIndex + 1 : origin.stageIndex;
+  const updatedState = { ...origin, stageIndex: nextStageIndex };
   return {
     state: updatedState,
-    result
+    result,
   };
 }

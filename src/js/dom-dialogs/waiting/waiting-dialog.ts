@@ -36,7 +36,8 @@ export class WaitingDialog implements DOMDialog {
   /**
    * デストラクタ相当の処理
    */
-  destructor(): void {// NOP
+  destructor(): void {
+    // NOP
   }
 
   /**
@@ -47,5 +48,4 @@ export class WaitingDialog implements DOMDialog {
   getRootHTMLElement(): HTMLElement {
     return this.#root;
   }
-
 }

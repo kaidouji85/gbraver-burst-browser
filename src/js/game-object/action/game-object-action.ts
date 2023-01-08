@@ -15,6 +15,14 @@ export type GameObjectAction = Update | PreRender | OverlapEvent;
  * @param overlap 当たり判定
  * @return 生成したストリーム
  */
-export function gameObjectStream(update: Stream<Update>, preRender: Stream<PreRender>, overlap: Stream<OverlapEvent>): Stream<GameObjectAction> {
-  return update.chain(merge(preRender)).chain(merge(overlap)).chain(map(v => (v as GameObjectAction))).chain(share());
+export function gameObjectStream(
+  update: Stream<Update>,
+  preRender: Stream<PreRender>,
+  overlap: Stream<OverlapEvent>
+): Stream<GameObjectAction> {
+  return update
+    .chain(merge(preRender))
+    .chain(merge(overlap))
+    .chain(map((v) => v as GameObjectAction))
+    .chain(share());
 }

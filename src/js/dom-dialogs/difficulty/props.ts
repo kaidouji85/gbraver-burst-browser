@@ -68,7 +68,9 @@ export type DifficultyDialogProps = {
  * @param resources リソース管理オブジェクト
  * @return 生成したプロパティ
  */
-export function createDifficultyDialogProps(resources: Resources): DifficultyDialogProps {
+export function createDifficultyDialogProps(
+  resources: Resources
+): DifficultyDialogProps {
   const ids = {
     backGround: domUuid(),
     closer: domUuid(),
@@ -79,7 +81,7 @@ export function createDifficultyDialogProps(resources: Resources): DifficultyDia
     hard: domUuid(),
     hardButton: domUuid(),
     veryHard: domUuid(),
-    veryHardButton: domUuid()
+    veryHardButton: domUuid(),
   };
   const root = document.createElement("div");
   root.className = ROOT_CLASS;
@@ -98,8 +100,12 @@ export function createDifficultyDialogProps(resources: Resources): DifficultyDia
   const selectionComplete = createStreamSource<NPCBattleCourseDifficulty>();
   const closeDialog = createStreamSource<void>();
   const exclusive = new Exclusive();
-  const changeValue = resources.sounds.find(v => v.id === SOUND_IDS.CHANGE_VALUE)?.sound ?? new Howl({src: ""});
-  const pushButton = resources.sounds.find(v => v.id === SOUND_IDS.PUSH_BUTTON)?.sound ?? new Howl({src: ""});
+  const changeValue =
+    resources.sounds.find((v) => v.id === SOUND_IDS.CHANGE_VALUE)?.sound ??
+    new Howl({ src: "" });
+  const pushButton =
+    resources.sounds.find((v) => v.id === SOUND_IDS.PUSH_BUTTON)?.sound ??
+    new Howl({ src: "" });
   return {
     root,
     closer,
@@ -116,6 +122,6 @@ export function createDifficultyDialogProps(resources: Resources): DifficultyDia
     closeDialog,
     exclusive,
     changeValue,
-    pushButton
+    pushButton,
   };
 }

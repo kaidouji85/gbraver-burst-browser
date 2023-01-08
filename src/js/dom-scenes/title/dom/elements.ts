@@ -22,18 +22,36 @@ type Elements = {
  * @return 抽出結果
  */
 export function extractElements(root: HTMLElement, ids: DataIDs): Elements {
-  const login: HTMLElement = root.querySelector(`[data-id="${ids.login}"]`) ?? document.createElement("div");
-  const accountMenu: HTMLElement = root.querySelector(`[data-id="${ids.accountMenu}"]`) ?? document.createElement("div");
+  const login: HTMLElement =
+    root.querySelector(`[data-id="${ids.login}"]`) ??
+    document.createElement("div");
+  const accountMenu: HTMLElement =
+    root.querySelector(`[data-id="${ids.accountMenu}"]`) ??
+    document.createElement("div");
   const avatarElement = root.querySelector(`[data-id="${ids.avatar}"]`);
-  const avatar = avatarElement instanceof HTMLImageElement ? avatarElement : new Image();
-  const deleteAccount: HTMLElement = root.querySelector(`[data-id="${ids.deleteAccount}"]`) ?? document.createElement("div");
-  const logout: HTMLElement = root.querySelector(`[data-id="${ids.logout}"]`) ?? document.createElement("div");
+  const avatar =
+    avatarElement instanceof HTMLImageElement ? avatarElement : new Image();
+  const deleteAccount: HTMLElement =
+    root.querySelector(`[data-id="${ids.deleteAccount}"]`) ??
+    document.createElement("div");
+  const logout: HTMLElement =
+    root.querySelector(`[data-id="${ids.logout}"]`) ??
+    document.createElement("div");
   const logoElement = root.querySelector(`[data-id="${ids.logo}"]`);
-  const logo = logoElement instanceof HTMLImageElement ? logoElement : new Image();
-  const tutorial: HTMLElement = root.querySelector(`[data-id="${ids.tutorial}"]`) ?? document.createElement("div");
-  const arcade: HTMLElement = root.querySelector(`[data-id="${ids.arcade}"]`) ?? document.createElement("div");
-  const casualMatch: HTMLElement = root.querySelector(`[data-id="${ids.casualMatch}"]`) ?? document.createElement("div");
-  const config: HTMLElement = root.querySelector(`[data-id="${ids.config}"]`) ?? document.createElement("div");
+  const logo =
+    logoElement instanceof HTMLImageElement ? logoElement : new Image();
+  const tutorial: HTMLElement =
+    root.querySelector(`[data-id="${ids.tutorial}"]`) ??
+    document.createElement("div");
+  const arcade: HTMLElement =
+    root.querySelector(`[data-id="${ids.arcade}"]`) ??
+    document.createElement("div");
+  const casualMatch: HTMLElement =
+    root.querySelector(`[data-id="${ids.casualMatch}"]`) ??
+    document.createElement("div");
+  const config: HTMLElement =
+    root.querySelector(`[data-id="${ids.config}"]`) ??
+    document.createElement("div");
   return {
     login,
     accountMenu,
@@ -44,6 +62,6 @@ export function extractElements(root: HTMLElement, ids: DataIDs): Elements {
     tutorial,
     arcade,
     casualMatch,
-    config
+    config,
   };
 }

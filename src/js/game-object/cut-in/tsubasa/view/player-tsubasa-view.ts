@@ -30,12 +30,14 @@ export class PlayerTsubasaView implements TsubasaView {
    * @param resources リソース管理オブジェクト
    */
   constructor(resources: Resources) {
-    const tsubasa = resources.textures.find(v => v.id === TEXTURE_IDS.TSUBASA_CUTIN)?.texture ?? new THREE.Texture();
+    const tsubasa =
+      resources.textures.find((v) => v.id === TEXTURE_IDS.TSUBASA_CUTIN)
+        ?.texture ?? new THREE.Texture();
     this.#mesh = new HorizontalAnimationMesh({
       texture: tsubasa,
       maxAnimation: MAX_ANIMATION,
       width: MESH_SIZE,
-      height: MESH_SIZE
+      height: MESH_SIZE,
     });
   }
 
@@ -53,8 +55,12 @@ export class PlayerTsubasaView implements TsubasaView {
    * @param preRender プリレンダー情報
    */
   engage(model: TsubasaModel, preRender: PreRender): void {
-    const scale = HUDCutInScale(preRender.rendererDOM, preRender.safeAreaInset) * model.scale;
-    const x = preRender.rendererDOM.clientWidth / 2 + (model.position.x - PADDING_RIGHT) * scale;
+    const scale =
+      HUDCutInScale(preRender.rendererDOM, preRender.safeAreaInset) *
+      model.scale;
+    const x =
+      preRender.rendererDOM.clientWidth / 2 +
+      (model.position.x - PADDING_RIGHT) * scale;
     this.#mesh.getObject3D().scale.set(scale, scale, scale);
     this.#mesh.getObject3D().position.set(x, 0, HUD_CUT_IN_ZNIDEX);
     this.#mesh.setOpacity(model.opacity);
@@ -68,5 +74,4 @@ export class PlayerTsubasaView implements TsubasaView {
   getObject3D(): THREE.Object3D {
     return this.#mesh.getObject3D();
   }
-
 }

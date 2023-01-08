@@ -5,9 +5,11 @@ import type { DomDialogActionConnector } from "../dom-dialog-binder/dom-dialog-a
 type Connector = DomDialogActionConnector<NetworkErrorDialog>;
 
 /** 通信エラー ダイアログとゲームアクションを関連付ける */
-export const networkErrorDialogConnector: Connector = (dialog, gameAction) => [dialog.postNetworkErrorNotifier().subscribe(postNetworkError => {
-  gameAction.next({
-    type: "EndNetworkError",
-    postNetworkError
-  });
-})];
+export const networkErrorDialogConnector: Connector = (dialog, gameAction) => [
+  dialog.postNetworkErrorNotifier().subscribe((postNetworkError) => {
+    gameAction.next({
+      type: "EndNetworkError",
+      postNetworkError,
+    });
+  }),
+];

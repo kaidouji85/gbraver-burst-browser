@@ -1,5 +1,8 @@
 import type { CustomBattleEventProps } from "../../../td-scenes/battle/custom-battle-event";
-import { activeLeftMessageWindowWithFace, activeRightMessageWindowWithFace } from "../../active-message-window";
+import {
+  activeLeftMessageWindowWithFace,
+  activeRightMessageWindowWithFace,
+} from "../../active-message-window";
 import { scrollLeftMessages, scrollRightMessages } from "../../scroll-messages";
 
 /**
@@ -9,15 +12,26 @@ import { scrollLeftMessages, scrollRightMessages } from "../../scroll-messages";
  */
 export const batteryRuleDescription = async (props: CustomBattleEventProps) => {
   activeLeftMessageWindowWithFace(props, "Tsubasa");
-  await scrollLeftMessages(props, [["ツバサ", "「……と このように 攻撃が当たるかは"], ["互いに出したバッテリーの大きさだけで決まるんだ」"]]);
+  await scrollLeftMessages(props, [
+    ["ツバサ", "「……と このように 攻撃が当たるかは"],
+    ["互いに出したバッテリーの大きさだけで決まるんだ」"],
+  ]);
   props.view.dom.leftMessageWindow.darken();
   activeRightMessageWindowWithFace(props, "Shinya");
-  await scrollRightMessages(props, [["シンヤ", "「なるほど シンプルながらも奥が深いッスね」"]]);
+  await scrollRightMessages(props, [
+    ["シンヤ", "「なるほど シンプルながらも奥が深いッスね」"],
+  ]);
   props.view.dom.rightMessageWindow.darken();
   props.view.dom.leftMessageWindow.lighten();
-  await scrollLeftMessages(props, [["ツバサ", "「バッテリーの攻防配分 これが基本かつ奥義だ"], ["では 次は私が攻撃を仕掛けるので 同じ要領で回避してくれ」"]]);
+  await scrollLeftMessages(props, [
+    ["ツバサ", "「バッテリーの攻防配分 これが基本かつ奥義だ"],
+    ["では 次は私が攻撃を仕掛けるので 同じ要領で回避してくれ」"],
+  ]);
   props.view.dom.leftMessageWindow.darken();
   props.view.dom.rightMessageWindow.lighten();
-  await scrollRightMessages(props, [["シンヤ", "「了解ッス"], ["お手柔らかに頼むッスよ ツバサ先輩"]]);
+  await scrollRightMessages(props, [
+    ["シンヤ", "「了解ッス"],
+    ["お手柔らかに頼むッスよ ツバサ先輩"],
+  ]);
   props.view.dom.rightMessageWindow.darken();
 };

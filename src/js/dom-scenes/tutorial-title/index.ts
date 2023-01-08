@@ -20,7 +20,8 @@ export class TutorialTitle implements DOMScene {
   }
 
   /** @override */
-  destructor(): void {// NOP
+  destructor(): void {
+    // NOP
   }
 
   /** @override */
@@ -34,7 +35,9 @@ export class TutorialTitle implements DOMScene {
    * @return 待機結果
    */
   async waitUntilLoaded(): Promise<void> {
-    await Promise.all([this.#props.isStandLoaded, this.#props.isBustShotLoaded]);
+    await Promise.all([
+      this.#props.isStandLoaded,
+      this.#props.isBustShotLoaded,
+    ]);
   }
-
 }

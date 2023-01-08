@@ -1,4 +1,4 @@
-import TWEEN, {Group} from "@tweenjs/tween.js";
+import TWEEN, { Group } from "@tweenjs/tween.js";
 import * as THREE from "three";
 
 import { Animate } from "../../animation/animate";
@@ -39,15 +39,18 @@ export class TurnIndicator {
     this.#tweenGroup = new TWEEN.Group();
     this.#model = createInitialValue();
     this.#view = new TurnIndicatorView(param.resources);
-    this.#unsubscribers = [param.gameObjectAction.subscribe(action => {
-      if (action.type === "Update") {
-        this.#onUpdate(action);
-      } else if (action.type === "PreRender") {
-        this.#onPreRender(action);
-      }
-    }), firstUpdate(param.gameObjectAction).subscribe(action => {
-      this.#onFirstUpdate(action);
-    })];
+    this.#unsubscribers = [
+      param.gameObjectAction.subscribe((action) => {
+        if (action.type === "Update") {
+          this.#onUpdate(action);
+        } else if (action.type === "PreRender") {
+          this.#onPreRender(action);
+        }
+      }),
+      firstUpdate(param.gameObjectAction).subscribe((action) => {
+        this.#onFirstUpdate(action);
+      }),
+    ];
   }
 
   /**
@@ -55,7 +58,7 @@ export class TurnIndicator {
    */
   destructor(): void {
     this.#view.destructor();
-    this.#unsubscribers.forEach(v => {
+    this.#unsubscribers.forEach((v) => {
       v.unsubscribe();
     });
     this.#tweenGroup.removeAll();
@@ -110,5 +113,4 @@ export class TurnIndicator {
   #onPreRender(action: PreRender): void {
     this.#view.lookAt(action.camera);
   }
-
 }

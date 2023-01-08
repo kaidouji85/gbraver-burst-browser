@@ -4,7 +4,10 @@ import { toSilhouette } from "../../../../canvas/silhouette/to-silhouette";
 import type { Resources } from "../../../../resource";
 import { TEXTURE_IDS } from "../../../../resource/texture/ids";
 import type { ArmdozerAnimation } from "../../mesh/armdozer-animation";
-import { createHorizontalAnimation, createHorizontalAnimationFromResources } from "../../mesh/horizontal-animation";
+import {
+  createHorizontalAnimation,
+  createHorizontalAnimationFromResources,
+} from "../../mesh/horizontal-animation";
 import { ACTIVE_COLOR_B, ACTIVE_COLOR_G, ACTIVE_COLOR_R } from "./active-color";
 import { MESH_Y } from "./position";
 
@@ -28,7 +31,7 @@ export function shinBraverStand(resources: Resources): ArmdozerAnimation {
     maxAnimation: MAX_ANIMATION,
     resources: resources,
     width: MESH_WIDTH,
-    height: MESH_HEIGHT
+    height: MESH_HEIGHT,
   });
   const object = ret.getObject3D();
   object.position.y = MESH_Y;
@@ -41,14 +44,21 @@ export function shinBraverStand(resources: Resources): ArmdozerAnimation {
  * @return 生成結果
  */
 export function shinBraverActiveStand(resources: Resources): ArmdozerAnimation {
-  const texture = resources.textures.find(v => v.id === TEXTURE_IDS.SHIN_BRAVER_STAND)?.texture ?? new THREE.Texture();
-  const canvas = toSilhouette(texture.image, ACTIVE_COLOR_R, ACTIVE_COLOR_G, ACTIVE_COLOR_B);
+  const texture =
+    resources.textures.find((v) => v.id === TEXTURE_IDS.SHIN_BRAVER_STAND)
+      ?.texture ?? new THREE.Texture();
+  const canvas = toSilhouette(
+    texture.image,
+    ACTIVE_COLOR_R,
+    ACTIVE_COLOR_G,
+    ACTIVE_COLOR_B
+  );
   const silhouetteTexture = new THREE.Texture(canvas);
   const ret = createHorizontalAnimation({
     texture: silhouetteTexture,
     maxAnimation: MAX_ANIMATION,
     width: MESH_WIDTH,
-    height: MESH_HEIGHT
+    height: MESH_HEIGHT,
   });
   const object = ret.getObject3D();
   object.position.y = MESH_Y;

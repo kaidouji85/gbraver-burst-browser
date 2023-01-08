@@ -14,7 +14,10 @@ import { zeroBatteryChance } from "../stories/zero-battery-chance";
  * @param state ステート
  * @return ステート更新結果
  */
-async function doDamageRaceOrNothing(props: Readonly<LastState>, state: ZeroDefenseTutorialState): Promise<ZeroDefenseTutorialState> {
+async function doDamageRaceOrNothing(
+  props: Readonly<LastState>,
+  state: ZeroDefenseTutorialState
+): Promise<ZeroDefenseTutorialState> {
   if (state.isDamageRaceComplete) {
     return state;
   }
@@ -26,15 +29,13 @@ async function doDamageRaceOrNothing(props: Readonly<LastState>, state: ZeroDefe
   }
 
   const battle: GameStateX<Battle> = extractedBattle;
-  const player = battle.players.find(v => v.playerId === props.playerId);
-  const enemy = battle.players.find(v => v.playerId !== props.playerId);
+  const player = battle.players.find((v) => v.playerId === props.playerId);
+  const enemy = battle.players.find((v) => v.playerId !== props.playerId);
   const isEnemyAttack = battle.effect.attacker !== props.playerId;
 
   if (player && enemy && isEnemyAttack) {
     await damageRace(props, player.armdozer.hp, enemy.armdozer.hp);
-    return { ...state,
-      isDamageRaceComplete: true
-    };
+    return { ...state, isDamageRaceComplete: true };
   }
 
   return state;
@@ -47,7 +48,10 @@ async function doDamageRaceOrNothing(props: Readonly<LastState>, state: ZeroDefe
  * @param state ステート
  * @return ステート更新結果
  */
-async function doZeroBatteryChangeOrNothing(props: Readonly<LastState>, state: ZeroDefenseTutorialState): Promise<ZeroDefenseTutorialState> {
+async function doZeroBatteryChangeOrNothing(
+  props: Readonly<LastState>,
+  state: ZeroDefenseTutorialState
+): Promise<ZeroDefenseTutorialState> {
   if (state.isZeroBatteryChangeComplete) {
     return state;
   }
@@ -59,7 +63,7 @@ async function doZeroBatteryChangeOrNothing(props: Readonly<LastState>, state: Z
   }
 
   const lastState: GameState = foundLastState;
-  const enemy = lastState.players.find(v => v.playerId !== props.playerId);
+  const enemy = lastState.players.find((v) => v.playerId !== props.playerId);
 
   if (!enemy) {
     return state;
@@ -69,9 +73,7 @@ async function doZeroBatteryChangeOrNothing(props: Readonly<LastState>, state: Z
 
   if (isPlayerTurn && enemy.armdozer.battery === 0 && 0 < enemy.armdozer.hp) {
     await zeroBatteryChance(props);
-    return { ...state,
-      isZeroBatteryChangeComplete: true
-    };
+    return { ...state, isZeroBatteryChangeComplete: true };
   }
 
   return state;
@@ -84,22 +86,27 @@ async function doZeroBatteryChangeOrNothing(props: Readonly<LastState>, state: Z
  * @param state ステート
  * @return ステート更新結果
  */
-export async function beforeLastState(props: Readonly<LastState>, state: ZeroDefenseTutorialState): Promise<ZeroDefenseTutorialState> {
-  const updatedStateHistory = { ...state,
-    stateHistory: [...state.stateHistory, ...props.update]
+export async function beforeLastState(
+  props: Readonly<LastState>,
+  state: ZeroDefenseTutorialState
+): Promise<ZeroDefenseTutorialState> {
+  const updatedStateHistory = {
+    ...state,
+    stateHistory: [...state.stateHistory, ...props.update],
   };
 
   if (!state.isIntroductionComplete) {
     await introduction(props);
-    return { ...updatedStateHistory,
-      isIntroductionComplete: true
-    };
+    return { ...updatedStateHistory, isIntroductionComplete: true };
   }
 
   if (extractGameEnd(props.update)) {
     return updatedStateHistory;
   }
 
-  const updatedByDamageRace = await doDamageRaceOrNothing(props, updatedStateHistory);
+  const updatedByDamageRace = await doDamageRaceOrNothing(
+    props,
+    updatedStateHistory
+  );
   return await doZeroBatteryChangeOrNothing(props, updatedByDamageRace);
 }

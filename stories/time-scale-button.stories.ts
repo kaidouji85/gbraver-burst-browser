@@ -1,15 +1,12 @@
 import { TimeScaleButton } from "../src/js/game-object/time-scale-button/time-scale-button";
 import { HUDGameObjectStub } from "./stub/hud-game-object-stub";
 export default {
-  title: "time-scale-button"
+  title: "time-scale-button",
 };
 export const timeScaleButton = (): HTMLElement => {
-  const stub = new HUDGameObjectStub(({
-    resources,
-    gameObjectAction
-  }) => {
+  const stub = new HUDGameObjectStub(({ resources, gameObjectAction }) => {
     const timeScaleButton = new TimeScaleButton(resources, gameObjectAction);
-    timeScaleButton.toggleNotifier().subscribe(timeScale => {
+    timeScaleButton.toggleNotifier().subscribe((timeScale) => {
       console.log("push", timeScale);
     });
     timeScaleButton.open(1).play();

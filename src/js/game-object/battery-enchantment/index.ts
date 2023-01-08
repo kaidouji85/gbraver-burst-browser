@@ -12,7 +12,10 @@ import { PlayerBatteryEnchantmentView } from "./view/player-battery-enchantment-
  * @param gameObjectAction ゲームオブジェクトアクション
  * @return 生成結果
  */
-export function playerBatteryEnchantment(resources: Resources, gameObjectAction: Stream<GameObjectAction>): BatteryEnchantment {
+export function playerBatteryEnchantment(
+  resources: Resources,
+  gameObjectAction: Stream<GameObjectAction>
+): BatteryEnchantment {
   const view = new PlayerBatteryEnchantmentView(resources);
   return new BatteryEnchantment(view, resources, gameObjectAction);
 }
@@ -24,7 +27,10 @@ export function playerBatteryEnchantment(resources: Resources, gameObjectAction:
  * @param gameObjectAction ゲームオブジェクトアクション
  * @return 生成結果
  */
-export function enemyBatteryEnchantment(resources: Resources, gameObjectAction: Stream<GameObjectAction>): BatteryEnchantment {
+export function enemyBatteryEnchantment(
+  resources: Resources,
+  gameObjectAction: Stream<GameObjectAction>
+): BatteryEnchantment {
   const view = new EnemyBatteryEnchantmentView(resources);
   return new BatteryEnchantment(view, resources, gameObjectAction);
 }

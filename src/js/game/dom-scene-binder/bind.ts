@@ -11,7 +11,11 @@ import type { DOMSceneBinderProps } from "./props";
  * @param scene バインドするシーン
  * @param connector ゲームアクションコネクタ
  */
-export function bind<X extends DOMScene>(props: DOMSceneBinderProps, scene: X, connector: DOMSceneActionConnector<X>) {
+export function bind<X extends DOMScene>(
+  props: DOMSceneBinderProps,
+  scene: X,
+  connector: DOMSceneActionConnector<X>
+) {
   discardCurrentScene(props);
   props.scene = scene;
   props.root.appendChild(scene.getRootHTMLElement());

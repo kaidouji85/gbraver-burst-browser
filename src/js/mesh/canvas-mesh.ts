@@ -32,9 +32,12 @@ export class CanvasMesh {
     this.texture = new THREE.Texture(canvas);
     const material = new THREE.MeshBasicMaterial({
       map: this.texture,
-      transparent: true
+      transparent: true,
     });
-    const planeGeometry = new THREE.PlaneGeometry(params.meshWidth, params.meshHeight);
+    const planeGeometry = new THREE.PlaneGeometry(
+      params.meshWidth,
+      params.meshHeight
+    );
     this.mesh = new THREE.Mesh(planeGeometry, material);
     this.mesh.renderOrder = SPRITE_RENDER_ORDER;
   }
@@ -64,7 +67,8 @@ export class CanvasMesh {
     // 詳細
     // https://stackoverflow.com/a/18474767/7808745
     (this.mesh.material.map ?? new THREE.Texture()).needsUpdate = true;
-    const context = this.canvas.getContext("2d") || new CanvasRenderingContext2D();
+    const context =
+      this.canvas.getContext("2d") || new CanvasRenderingContext2D();
     drawFunc(context);
   }
 
@@ -77,5 +81,4 @@ export class CanvasMesh {
   getObject3D(): THREE.Object3D {
     return this.mesh;
   }
-
 }

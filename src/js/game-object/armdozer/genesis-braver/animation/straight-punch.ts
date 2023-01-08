@@ -12,9 +12,22 @@ export function straightPunch(model: GenesisBraverModel): Animate {
   return process(() => {
     model.animation.type = "SP_ATTACK";
     model.animation.frame = 0;
-  }).chain(tween(model.animation, t => t.to({
-    frame: 1
-  }, 150)), tween(model.position, t => t.to({
-    x: "-80"
-  }, 150)));
+  }).chain(
+    tween(model.animation, (t) =>
+      t.to(
+        {
+          frame: 1,
+        },
+        150
+      )
+    ),
+    tween(model.position, (t) =>
+      t.to(
+        {
+          x: "-80",
+        },
+        150
+      )
+    )
+  );
 }

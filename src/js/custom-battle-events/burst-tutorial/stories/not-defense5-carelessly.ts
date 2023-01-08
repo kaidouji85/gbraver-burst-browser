@@ -10,6 +10,8 @@ import { scrollRightMessages } from "../../scroll-messages";
  */
 export const notDefense5Carelessly = async (props: CustomBattleEventProps) => {
   activeRightMessageWindowWithFace(props, "Shinya");
-  await scrollRightMessages(props, [["シンヤ", "「すみませんッス うっかりしてたッス」"]]);
+  await scrollRightMessages(props, [
+    ["シンヤ", "「すみませんッス うっかりしてたッス」"],
+  ]);
   invisibleAllMessageWindows(props);
 };

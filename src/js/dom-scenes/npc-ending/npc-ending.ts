@@ -51,12 +51,18 @@ type Elements = {
  */
 function extractElements(root: HTMLElement, ids: DataIDs): Elements {
   const selectedEnd = root.querySelector(`[data-id="${ids.end}"]`);
-  const end = selectedEnd instanceof HTMLImageElement ? selectedEnd : document.createElement("img");
+  const end =
+    selectedEnd instanceof HTMLImageElement
+      ? selectedEnd
+      : document.createElement("img");
   const selectedLogo = root.querySelector(`[data-id="${ids.logo}"]`);
-  const logo = selectedLogo instanceof HTMLImageElement ? selectedLogo : document.createElement("img");
+  const logo =
+    selectedLogo instanceof HTMLImageElement
+      ? selectedLogo
+      : document.createElement("img");
   return {
     end,
-    logo
+    logo,
   };
 }
 
@@ -82,34 +88,43 @@ export class NPCEnding implements DOMScene {
   constructor(resources: Resources, bgm: BGMManager) {
     const ids = {
       end: domUuid(),
-      logo: domUuid()
+      logo: domUuid(),
     };
     this.#root = document.createElement("div");
     this.#root.className = ROOT_CLASS;
     this.#root.innerHTML = rootInnerHTML(ids);
     const elements = extractElements(this.#root, ids);
     const titleBackImage = new Image();
-    titleBackImage.src = resources.paths.find(v => v.id === PathIds.END_CARD)?.path ?? "";
+    titleBackImage.src =
+      resources.paths.find((v) => v.id === PathIds.END_CARD)?.path ?? "";
     this.#isEndCardLoaded = waitElementLoaded(titleBackImage).then(() => {
       this.#root.style.backgroundImage = `url(${titleBackImage.src})`;
     });
     this.#isEndLoaded = waitElementLoaded(elements.end);
-    elements.end.src = resources.paths.find(v => v.id === PathIds.END)?.path ?? "";
+    elements.end.src =
+      resources.paths.find((v) => v.id === PathIds.END)?.path ?? "";
     this.#isLogoLoader = waitElementLoaded(elements.logo);
-    elements.logo.src = resources.paths.find(v => v.id === PathIds.LOGO)?.path ?? "";
-    this.#pushButtonSound = resources.sounds.find(v => v.id === SOUND_IDS.PUSH_BUTTON)?.sound ?? new Howl({src: ""});
+    elements.logo.src =
+      resources.paths.find((v) => v.id === PathIds.LOGO)?.path ?? "";
+    this.#pushButtonSound =
+      resources.sounds.find((v) => v.id === SOUND_IDS.PUSH_BUTTON)?.sound ??
+      new Howl({ src: "" });
     this.#bgm = bgm;
-    this.#endingBGM = resources.sounds.find(v => v.id === SOUND_IDS.NPC_ENDING) ?? createEmptySoundResource();
+    this.#endingBGM =
+      resources.sounds.find((v) => v.id === SOUND_IDS.NPC_ENDING) ??
+      createEmptySoundResource();
     this.#canOperation = true;
     this.#endNPCEnding = createStreamSource();
-    this.#unsubscriber = [pushDOMStream(this.#root).subscribe(action => {
-      this.#onScreenPush(action);
-    })];
+    this.#unsubscriber = [
+      pushDOMStream(this.#root).subscribe((action) => {
+        this.#onScreenPush(action);
+      }),
+    ];
   }
 
   /** @override */
   destructor(): void {
-    this.#unsubscriber.forEach(v => {
+    this.#unsubscriber.forEach((v) => {
       v.unsubscribe();
     });
   }
@@ -144,7 +159,11 @@ export class NPCEnding implements DOMScene {
    * @return 待機結果
    */
   async waitUntilLoaded(): Promise<void> {
-    await Promise.all([this.#isEndLoaded, this.#isEndCardLoaded, this.#isLogoLoader]);
+    await Promise.all([
+      this.#isEndLoaded,
+      this.#isEndCardLoaded,
+      this.#isLogoLoader,
+    ]);
   }
 
   /**
@@ -163,5 +182,4 @@ export class NPCEnding implements DOMScene {
     this.#pushButtonSound.play();
     this.#endNPCEnding.next();
   }
-
 }

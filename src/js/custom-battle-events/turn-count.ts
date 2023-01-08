@@ -7,5 +7,5 @@ import type { GameState } from "gbraver-burst-core";
  * @return ターン数
  */
 export function turnCount(stateHistory: GameState[]): number {
-  return stateHistory.filter(v => v.effect.name === "TurnChange").length + 1;
+  return stateHistory.filter((v) => v.effect.name === "TurnChange").length + 1;
 }

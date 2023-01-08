@@ -17,5 +17,4 @@ export class EnemyRecoverBatteryView extends PlayerRecoverBatteryView {
     super.engage(model);
     this.getObject3D().position.x *= -1;
   }
-
 }

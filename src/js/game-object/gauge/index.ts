@@ -32,7 +32,7 @@ export function playerGauge(param: Param): Gauge {
     view: view,
     gameObjectAction: param.gameObjectAction,
     hp: param.hp,
-    battery: param.battery
+    battery: param.battery,
   });
 }
 
@@ -48,6 +48,6 @@ export function enemyGauge(param: Param): Gauge {
     view: view,
     gameObjectAction: param.gameObjectAction,
     hp: param.hp,
-    battery: param.battery
+    battery: param.battery,
   });
 }

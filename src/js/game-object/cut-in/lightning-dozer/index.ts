@@ -12,7 +12,10 @@ import { PlayerLightningDozerCutInView } from "./view/player-lightning-dozer-cut
  * @param gameObjectAction ゲームオブジェクトアクション
  * @return 生成結果
  */
-export function playerLightningDozerCutIn(resources: Resources, gameObjectAction: Stream<GameObjectAction>): LightningDozerCutIn {
+export function playerLightningDozerCutIn(
+  resources: Resources,
+  gameObjectAction: Stream<GameObjectAction>
+): LightningDozerCutIn {
   const view = new PlayerLightningDozerCutInView(resources);
   return new LightningDozerCutIn(view, gameObjectAction);
 }
@@ -24,7 +27,10 @@ export function playerLightningDozerCutIn(resources: Resources, gameObjectAction
  * @param gameObjectAction ゲームオブジェクトアクション
  * @return 生成結果
  */
-export function enemyLightningiDozerCutIn(resources: Resources, gameObjectAction: Stream<GameObjectAction>): LightningDozerCutIn {
+export function enemyLightningiDozerCutIn(
+  resources: Resources,
+  gameObjectAction: Stream<GameObjectAction>
+): LightningDozerCutIn {
   const view = new EnemyLightningDozerCutInView(resources);
   return new LightningDozerCutIn(view, gameObjectAction);
 }

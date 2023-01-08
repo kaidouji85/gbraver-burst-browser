@@ -12,8 +12,11 @@ import { playerWin } from "../stories/player-win";
  * @param state ステート
  * @return ステート更新結果
  */
-export async function afterLastState(props: Readonly<LastState>, state: BurstTutorialState): Promise<BurstTutorialState> {
-  const foundGameEnd = props.update.find(v => v.effect.name === "GameEnd");
+export async function afterLastState(
+  props: Readonly<LastState>,
+  state: BurstTutorialState
+): Promise<BurstTutorialState> {
+  const foundGameEnd = props.update.find((v) => v.effect.name === "GameEnd");
 
   if (!foundGameEnd || foundGameEnd.effect.name !== "GameEnd") {
     return state;

@@ -11,4 +11,7 @@ import type { GameAction } from "../game-actions";
  * @param gameAction ゲームアクションストリーム
  * @return ゲームションションのアンサブスクライブ
  */
-export type DomDialogActionConnector<X extends DOMDialog> = (dialog: X, gameAction: StreamSource<GameAction>) => Unsubscriber[];
+export type DomDialogActionConnector<X extends DOMDialog> = (
+  dialog: X,
+  gameAction: StreamSource<GameAction>
+) => Unsubscriber[];

@@ -20,8 +20,8 @@ export async function onArcadeStart(props: GameProps): Promise<void> {
   props.inProgress = {
     type: "NPCBattle",
     subFlow: {
-      type: "PlayerSelect"
-    }
+      type: "PlayerSelect",
+    },
   };
   await props.fader.fadeOut();
   const scene = new PlayerSelect(props.resources);

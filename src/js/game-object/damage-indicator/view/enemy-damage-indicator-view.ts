@@ -13,5 +13,4 @@ export class EnemyDamageIndicatorView extends PlayerDamageIndicatorView {
     super.engage(model);
     this.getObject3D().position.x *= -1;
   }
-
 }

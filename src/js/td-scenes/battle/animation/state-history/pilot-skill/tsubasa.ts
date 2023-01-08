@@ -11,7 +11,8 @@ import type { PilotSkillAnimationParamX } from "./animation-param";
  * パイロットスキル ツバサ アニメーションパラメータ
  * @template SKILL パイロットスキル
  */
-export type TsubasaAnimationParamX<SKILL extends PilotSkill> = PilotSkillAnimationParamX<SKILL, TsubasaHUD>;
+export type TsubasaAnimationParamX<SKILL extends PilotSkill> =
+  PilotSkillAnimationParamX<SKILL, TsubasaHUD>;
 
 /**
  * パイロットスキル ツバサ アニメーションパラメータ
@@ -26,9 +27,7 @@ export type TsubasaAnimationParam = TsubasaAnimationParamX<PilotSkill>;
 export function tsubasaAnimation(param: TsubasaAnimationParam): Animate {
   if (param.skill.type === "BatteryEnchantmentSkill") {
     const skill: BatteryEnchantmentSkill = param.skill;
-    return tsubasaBatteryEnchantment({ ...param,
-      skill
-    });
+    return tsubasaBatteryEnchantment({ ...param, skill });
   }
 
   return empty();
@@ -40,6 +39,30 @@ export function tsubasaAnimation(param: TsubasaAnimationParam): Animate {
  * @param param パラメータ
  * @return アニメーション
  */
-function tsubasaBatteryEnchantment(param: TsubasaAnimationParamX<BatteryEnchantmentSkill>): Animate {
-  return all(param.pilot.cutIn.show(), param.isActivePlayer ? param.invokerSprite.endActive() : param.anotherSprite.endActive(), track(param.tdCamera, param.invokerSprite.getObject3D().position.x, 500), dolly(param.tdCamera, "-40", 500), param.tdObjects.skyBrightness.brightness(0.2, 500), param.tdObjects.illumination.intensity(0.2, 500), param.tdObjects.turnIndicator.invisible()).chain(delay(800)).chain(param.pilot.cutIn.hidden()).chain(delay(200)).chain(param.invokerTD.armdozerEffects.batteryEnchantment.popUp()).chain(all(toInitial(param.tdCamera, 500), param.tdObjects.skyBrightness.brightness(1, 500), param.tdObjects.illumination.intensity(1, 500))).chain(delay(200));
+function tsubasaBatteryEnchantment(
+  param: TsubasaAnimationParamX<BatteryEnchantmentSkill>
+): Animate {
+  return all(
+    param.pilot.cutIn.show(),
+    param.isActivePlayer
+      ? param.invokerSprite.endActive()
+      : param.anotherSprite.endActive(),
+    track(param.tdCamera, param.invokerSprite.getObject3D().position.x, 500),
+    dolly(param.tdCamera, "-40", 500),
+    param.tdObjects.skyBrightness.brightness(0.2, 500),
+    param.tdObjects.illumination.intensity(0.2, 500),
+    param.tdObjects.turnIndicator.invisible()
+  )
+    .chain(delay(800))
+    .chain(param.pilot.cutIn.hidden())
+    .chain(delay(200))
+    .chain(param.invokerTD.armdozerEffects.batteryEnchantment.popUp())
+    .chain(
+      all(
+        toInitial(param.tdCamera, 500),
+        param.tdObjects.skyBrightness.brightness(1, 500),
+        param.tdObjects.illumination.intensity(1, 500)
+      )
+    )
+    .chain(delay(200));
 }

@@ -20,7 +20,12 @@ import type { NPCBattleStage } from "../npc-battle";
  * @param stage NPCバトルステージ
  * @param level ステージレベル
  */
-export async function startNPCBattleStage(props: Readonly<GameProps>, player: Player, stage: NPCBattleStage, level: number) {
+export async function startNPCBattleStage(
+  props: Readonly<GameProps>,
+  player: Player,
+  stage: NPCBattleStage,
+  level: number
+) {
   const npcBattle = new NPCBattleRoom(player, stage.npc);
   await props.fader.fadeOut();
   props.domDialogBinder.hidden();
@@ -29,14 +34,14 @@ export async function startNPCBattleStage(props: Readonly<GameProps>, player: Pl
     stagePrefix: "NPCBattle",
     level,
     caption: stage.caption,
-    armDozerId: npcBattle.enemy.armdozer.id
+    armDozerId: npcBattle.enemy.armdozer.id,
   });
   props.domSceneBinder.bind(scene, stageTitleConnector);
   await Promise.race([scene.waitUntilLoaded(), waitTime(MAX_LOADING_TIME)]);
   await props.fader.fadeIn();
   const startNPCStageTitleTime = Date.now();
   const battleProgress = {
-    progress: (v: Command) => Promise.resolve(npcBattle.progress(v))
+    progress: (v: Command) => Promise.resolve(npcBattle.progress(v)),
   };
   const config = await props.config.load();
   props.renderer.setPixelRatio(config.webGLPixelRatio);
@@ -52,19 +57,22 @@ export async function startNPCBattleStage(props: Readonly<GameProps>, player: Pl
     resize: props.resize,
     pushWindow: props.pushWindow,
     gameLoop: props.gameLoop,
-    renderer: props.renderer
+    renderer: props.renderer,
   });
   props.tdBinder.bind(battleScene, battleSceneConnector);
   await waitAnimationFrame();
   const latency = Date.now() - startNPCStageTitleTime;
   await waitTime(3000 - latency);
-  await Promise.all([(async () => {
-    await props.fader.fadeOut();
-    props.domSceneBinder.hidden();
-  })(), (async () => {
-    await props.bgm.do(fadeOut);
-    await props.bgm.do(stop);
-  })()]);
+  await Promise.all([
+    (async () => {
+      await props.fader.fadeOut();
+      props.domSceneBinder.hidden();
+    })(),
+    (async () => {
+      await props.bgm.do(fadeOut);
+      await props.bgm.do(stop);
+    })(),
+  ]);
   await props.fader.fadeIn();
   await battleScene.start();
 }

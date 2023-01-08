@@ -10,7 +10,8 @@ import type { ArmDozerSprite } from "./armdozer-sprite";
  */
 export class EmptyArmDozerSprite implements ArmDozerSprite {
   /** @override */
-  destructor(): void {// NOP
+  destructor(): void {
+    // NOP
   }
 
   /** @override */
@@ -70,5 +71,4 @@ export class EmptyArmDozerSprite implements ArmDozerSprite {
   down(): Animate {
     return empty();
   }
-
 }

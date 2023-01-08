@@ -1,4 +1,8 @@
-import { ARMDOZER_EFFECT_STANDARD_X, ARMDOZER_EFFECT_STANDARD_Y, ARMDOZER_EFFECT_STANDARD_Z } from "../../../armdozer/position";
+import {
+  ARMDOZER_EFFECT_STANDARD_X,
+  ARMDOZER_EFFECT_STANDARD_Y,
+  ARMDOZER_EFFECT_STANDARD_Z,
+} from "../../../armdozer/position";
 import type { LightningModel } from "./lightning-model";
 
 /**
@@ -11,11 +15,11 @@ export function createInitialValue(): LightningModel {
     position: {
       x: ARMDOZER_EFFECT_STANDARD_X,
       y: ARMDOZER_EFFECT_STANDARD_Y,
-      z: ARMDOZER_EFFECT_STANDARD_Z
+      z: ARMDOZER_EFFECT_STANDARD_Z,
     },
     animation: {
-      frame: 0
+      frame: 0,
     },
-    opacity: 0
+    opacity: 0,
   };
 }

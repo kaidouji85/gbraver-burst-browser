@@ -9,7 +9,10 @@ import type { ConfigProps } from "../props";
  * @param props 画面プロパティ
  * @param action アクション
  */
-export function onSEVolumeChange(props: ConfigProps, action: Readonly<InputDOM>): void {
+export function onSEVolumeChange(
+  props: ConfigProps,
+  action: Readonly<InputDOM>
+): void {
   action.event.preventDefault();
   action.event.stopPropagation();
   props.exclusive.execute(async () => {

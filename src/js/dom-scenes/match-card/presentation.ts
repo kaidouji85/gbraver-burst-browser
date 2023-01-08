@@ -21,7 +21,12 @@ export class MatchCardPresentation {
    * @param enemy 敵側 アームドーザID
    * @param caption ステージ名
    */
-  constructor(resources: Resources, player: ArmDozerId, enemy: ArmDozerId, caption: string) {
+  constructor(
+    resources: Resources,
+    player: ArmDozerId,
+    enemy: ArmDozerId,
+    caption: string
+  ) {
     const playerId = domUuid();
     const enemyId = domUuid();
     this.#root = document.createElement("div");
@@ -39,16 +44,22 @@ export class MatchCardPresentation {
       </div>
     `;
     const playerElement = this.#root.querySelector(`[data-id="${playerId}"]`);
-    const playerImage: HTMLImageElement = playerElement instanceof HTMLImageElement ? playerElement : new Image();
+    const playerImage: HTMLImageElement =
+      playerElement instanceof HTMLImageElement ? playerElement : new Image();
     this.#isPlayerLoaded = waitElementLoaded(playerImage);
     const playerIconPath = getArmdozerIconPathId(player);
-    const playerIconResource = resources.paths.find(v => v.id === playerIconPath);
+    const playerIconResource = resources.paths.find(
+      (v) => v.id === playerIconPath
+    );
     playerImage.src = playerIconResource ? playerIconResource.path : "";
     const enemyElement = this.#root.querySelector(`[data-id="${enemyId}"]`);
-    const enemyImage = enemyElement instanceof HTMLImageElement ? enemyElement : new Image();
+    const enemyImage =
+      enemyElement instanceof HTMLImageElement ? enemyElement : new Image();
     this.#isEnemyLoaded = waitElementLoaded(enemyImage);
     const enemyIconPath = getArmdozerIconPathId(enemy);
-    const enemyIconResource = resources.paths.find(v => v.id === enemyIconPath);
+    const enemyIconResource = resources.paths.find(
+      (v) => v.id === enemyIconPath
+    );
     enemyImage.src = enemyIconResource ? enemyIconResource.path : "";
   }
 
@@ -69,5 +80,4 @@ export class MatchCardPresentation {
   async waitUntilLoaded(): Promise<void> {
     await Promise.all([this.#isPlayerLoaded, this.#isEnemyLoaded]);
   }
-
 }

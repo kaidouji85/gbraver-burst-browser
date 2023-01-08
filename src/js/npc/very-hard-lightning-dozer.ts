@@ -1,4 +1,11 @@
-import {ArmDozerIds, ArmDozers, Command, correctPower, PilotIds, Pilots} from "gbraver-burst-core";
+import {
+  ArmDozerIds,
+  ArmDozers,
+  Command,
+  correctPower,
+  PilotIds,
+  Pilots,
+} from "gbraver-burst-core";
 
 import { canBeatDown } from "./can-beat-down";
 import type { NPC } from "./npc";
@@ -8,19 +15,31 @@ import { SimpleNPC } from "./simple-npc";
 /** 0バッテリー */
 const ZERO_BATTERY: Command = {
   type: "BATTERY_COMMAND",
-  battery: 0
+  battery: 0,
 };
 
 /**
  * @override
  * 攻撃ルーチン
  */
-const attackRoutine: SimpleRoutine = data => {
+const attackRoutine: SimpleRoutine = (data) => {
   const hasCorrectPower = 0 < correctPower(data.enemy.armdozer.effects);
-  const pilot = data.commands.find(v => v.type === "PILOT_SKILL_COMMAND");
-  const allBattery = data.commands.find(v => v.type === "BATTERY_COMMAND" && v.battery === data.enemy.armdozer.battery);
-  const allBatteryMinusOne = data.commands.find(v => v.type === "BATTERY_COMMAND" && v.battery === data.enemy.armdozer.battery - 1);
-  const canBeatDownWithAllBattery = canBeatDown(data.enemy, data.enemy.armdozer.battery, data.player, data.player.armdozer.battery);
+  const pilot = data.commands.find((v) => v.type === "PILOT_SKILL_COMMAND");
+  const allBattery = data.commands.find(
+    (v) =>
+      v.type === "BATTERY_COMMAND" && v.battery === data.enemy.armdozer.battery
+  );
+  const allBatteryMinusOne = data.commands.find(
+    (v) =>
+      v.type === "BATTERY_COMMAND" &&
+      v.battery === data.enemy.armdozer.battery - 1
+  );
+  const canBeatDownWithAllBattery = canBeatDown(
+    data.enemy,
+    data.enemy.armdozer.battery,
+    data.player,
+    data.player.armdozer.battery
+  );
 
   if (data.enemy.armdozer.battery === 5 && pilot) {
     return pilot;
@@ -30,7 +49,12 @@ const attackRoutine: SimpleRoutine = data => {
     return allBattery;
   }
 
-  if (canBeatDownWithAllBattery && !data.player.armdozer.enableBurst && !data.player.pilot.enableSkill && allBattery) {
+  if (
+    canBeatDownWithAllBattery &&
+    !data.player.armdozer.enableBurst &&
+    !data.player.pilot.enableSkill &&
+    allBattery
+  ) {
     return allBattery;
   }
 
@@ -45,11 +69,21 @@ const attackRoutine: SimpleRoutine = data => {
  * @override
  * 防御ルーチン
  */
-const defenseRoutine: SimpleRoutine = data => {
-  const burst = data.commands.find(v => v.type === "BURST_COMMAND");
-  const battery1 = data.commands.find(v => v.type === "BATTERY_COMMAND" && v.battery === 1);
-  const allBattery = data.commands.find(v => v.type === "BATTERY_COMMAND" && v.battery === data.enemy.armdozer.battery);
-  const isDefeatedWithBattery1 = canBeatDown(data.player, data.player.armdozer.battery, data.enemy, 1);
+const defenseRoutine: SimpleRoutine = (data) => {
+  const burst = data.commands.find((v) => v.type === "BURST_COMMAND");
+  const battery1 = data.commands.find(
+    (v) => v.type === "BATTERY_COMMAND" && v.battery === 1
+  );
+  const allBattery = data.commands.find(
+    (v) =>
+      v.type === "BATTERY_COMMAND" && v.battery === data.enemy.armdozer.battery
+  );
+  const isDefeatedWithBattery1 = canBeatDown(
+    data.player,
+    data.player.armdozer.battery,
+    data.enemy,
+    1
+  );
 
   if (burst) {
     return burst;
@@ -72,7 +106,8 @@ const defenseRoutine: SimpleRoutine = data => {
  * @returns NPC
  */
 export function veryHardLightningDozer(): NPC {
-  const armdozer = ArmDozers.find(v => v.id === ArmDozerIds.LIGHTNING_DOZER) ?? ArmDozers[0];
-  const pilot = Pilots.find(v => v.id === PilotIds.GAI) ?? Pilots[0];
+  const armdozer =
+    ArmDozers.find((v) => v.id === ArmDozerIds.LIGHTNING_DOZER) ?? ArmDozers[0];
+  const pilot = Pilots.find((v) => v.id === PilotIds.GAI) ?? Pilots[0];
   return new SimpleNPC(armdozer, pilot, attackRoutine, defenseRoutine);
 }

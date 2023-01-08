@@ -11,17 +11,22 @@ import type { AnimationMeshMapping } from "./animation-mesh-mapping";
  * @return 生成結果
  */
 export function createMeshes(resources: Resources): AnimationMeshMapping[] {
-  return [{
-    type: "STAND",
-    mesh: genesisBraverStand(resources)
-  }, {
-    type: "SP_CHARGE",
-    mesh: genesisBraverSPCharge(resources)
-  }, {
-    type: "SP_ATTACK",
-    mesh: genesisBraverSPAttack(resources)
-  }, {
-    type: "SP_TO_STAND",
-    mesh: genesisBraverSPTOStand(resources)
-  }];
+  return [
+    {
+      type: "STAND",
+      mesh: genesisBraverStand(resources),
+    },
+    {
+      type: "SP_CHARGE",
+      mesh: genesisBraverSPCharge(resources),
+    },
+    {
+      type: "SP_ATTACK",
+      mesh: genesisBraverSPAttack(resources),
+    },
+    {
+      type: "SP_TO_STAND",
+      mesh: genesisBraverSPTOStand(resources),
+    },
+  ];
 }

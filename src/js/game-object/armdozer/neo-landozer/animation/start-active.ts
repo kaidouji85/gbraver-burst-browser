@@ -8,7 +8,12 @@ import type { NeoLandozerModel } from "../model/neo-landozer-model";
  * @return アニメーション
  */
 export function startActive(model: NeoLandozerModel): Animate {
-  return tween(model.active, t => t.to({
-    opacity: 1
-  }, 500));
+  return tween(model.active, (t) =>
+    t.to(
+      {
+        opacity: 1,
+      },
+      500
+    )
+  );
 }

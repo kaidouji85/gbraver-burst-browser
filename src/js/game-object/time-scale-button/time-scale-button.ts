@@ -1,4 +1,4 @@
-import TWEEN, {Group} from "@tweenjs/tween.js";
+import TWEEN, { Group } from "@tweenjs/tween.js";
 import * as THREE from "three";
 
 import type { Animate } from "../../animation/animate";
@@ -33,21 +33,27 @@ export class TimeScaleButton {
    * @param resources リソース管理オブジェクト
    * @param gameObjectAction ゲームオブジェクトアクション
    */
-  constructor(resources: Resources, gameObjectAction: Stream<GameObjectAction>) {
+  constructor(
+    resources: Resources,
+    gameObjectAction: Stream<GameObjectAction>
+  ) {
     this.#model = createInitialValue();
     this.#view = new TimeScaleButtonView(resources, gameObjectAction);
     this.#sounds = createTimeScaleButtonSounds(resources);
     this.#toggleTween = new TWEEN.Group();
     this.#toggle = createStreamSource();
-    this.#unsubscribers = [gameObjectAction.subscribe(action => {
-      if (action.type === "Update") {
-        this.#onUpdate(action);
-      } else if (action.type === "PreRender") {
-        this.#onPreRender(action);
-      }
-    }), this.#view.pushButtonNotifier().subscribe(() => {
-      this.#onButtonPush();
-    })];
+    this.#unsubscribers = [
+      gameObjectAction.subscribe((action) => {
+        if (action.type === "Update") {
+          this.#onUpdate(action);
+        } else if (action.type === "PreRender") {
+          this.#onPreRender(action);
+        }
+      }),
+      this.#view.pushButtonNotifier().subscribe(() => {
+        this.#onButtonPush();
+      }),
+    ];
   }
 
   /**
@@ -55,7 +61,7 @@ export class TimeScaleButton {
    */
   destructor(): void {
     this.#view.destructor();
-    this.#unsubscribers.forEach(v => {
+    this.#unsubscribers.forEach((v) => {
       v.unsubscribe();
     });
   }
@@ -129,5 +135,4 @@ export class TimeScaleButton {
     toggle(this.#model, this.#sounds, this.#toggleTween, nextTimeScale).play();
     this.#toggle.next(nextTimeScale);
   }
-
 }

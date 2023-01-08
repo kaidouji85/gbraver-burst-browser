@@ -13,9 +13,24 @@ import type { GaiModel } from "../model/gai-model";
 export function hidden(model: GaiModel): Animate {
   return process(() => {
     model.opacity = 1;
-  }).chain(all(tween(model, t => t.to({
-    opacity: 0
-  }, 300)), tween(model.position, t => t.to({
-    x: "+100"
-  }, 300))));
+  }).chain(
+    all(
+      tween(model, (t) =>
+        t.to(
+          {
+            opacity: 0,
+          },
+          300
+        )
+      ),
+      tween(model.position, (t) =>
+        t.to(
+          {
+            x: "+100",
+          },
+          300
+        )
+      )
+    )
+  );
 }

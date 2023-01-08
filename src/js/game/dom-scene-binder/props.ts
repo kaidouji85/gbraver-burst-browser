@@ -31,6 +31,6 @@ export function createDOMSceneBinderProps(): DOMSceneBinderProps {
     root,
     gameAction,
     scene,
-    unsubscribers: []
+    unsubscribers: [],
   };
 }

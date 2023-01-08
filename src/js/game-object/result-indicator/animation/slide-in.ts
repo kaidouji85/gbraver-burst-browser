@@ -22,9 +22,28 @@ export function slideIn(model: ResultIndicatorModel): Animate {
     model.localCoordinate.x = -distance;
     model.localCoordinate.y = 0;
     model.scale = 1.3;
-  }).chain(all(tween(model.localCoordinate, t => t.to({
-    x: `+${distance}`
-  }, duration).easing(TWEEN.Easing.Quadratic.Out)), tween(model, t => t.to({
-    opacity: 1
-  }, duration).easing(TWEEN.Easing.Quadratic.Out))));
+  }).chain(
+    all(
+      tween(model.localCoordinate, (t) =>
+        t
+          .to(
+            {
+              x: `+${distance}`,
+            },
+            duration
+          )
+          .easing(TWEEN.Easing.Quadratic.Out)
+      ),
+      tween(model, (t) =>
+        t
+          .to(
+            {
+              opacity: 1,
+            },
+            duration
+          )
+          .easing(TWEEN.Easing.Quadratic.Out)
+      )
+    )
+  );
 }

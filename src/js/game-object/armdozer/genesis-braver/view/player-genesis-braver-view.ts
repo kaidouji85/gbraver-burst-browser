@@ -21,18 +21,14 @@ export class PlayerGenesisBraverView implements GenesisBraverView {
   constructor(resources: Resources) {
     this.#group = new THREE.Group();
     this.#meshes = createMeshes(resources);
-    this.#meshes.forEach(({
-      mesh
-    }) => {
+    this.#meshes.forEach(({ mesh }) => {
       this.#group.add(mesh.getObject3D());
     });
   }
 
   /** @override */
   destructor() {
-    this.#meshes.forEach(({
-      mesh
-    }) => {
+    this.#meshes.forEach(({ mesh }) => {
       mesh.destructor();
     });
   }
@@ -47,23 +43,24 @@ export class PlayerGenesisBraverView implements GenesisBraverView {
     this.#group.position.x = model.position.x;
     this.#group.position.y = model.position.y;
     this.#group.position.z = model.position.z;
-    const currentMesh = this.#meshes.find(v => v.type === model.animation.type);
+    const currentMesh = this.#meshes.find(
+      (v) => v.type === model.animation.type
+    );
 
     if (currentMesh) {
       currentMesh.mesh.opacity(1);
       currentMesh.mesh.animate(model.animation.frame);
     }
 
-    this.#meshes.filter(v => v !== currentMesh).forEach(({
-      mesh
-    }) => {
-      mesh.opacity(0);
-    });
+    this.#meshes
+      .filter((v) => v !== currentMesh)
+      .forEach(({ mesh }) => {
+        mesh.opacity(0);
+      });
   }
 
   /** @override */
   lookAt(camera: THREE.Camera): void {
     this.#group.quaternion.copy(camera.quaternion);
   }
-
 }

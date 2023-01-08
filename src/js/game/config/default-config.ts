@@ -5,5 +5,5 @@ export const DefaultConfig: GbraverBurstBrowserConfig = {
   webGLPixelRatio: 2,
   battleAnimationTimeScale: 1,
   bgmVolume: 1,
-  seVolume: 1
+  seVolume: 1,
 };

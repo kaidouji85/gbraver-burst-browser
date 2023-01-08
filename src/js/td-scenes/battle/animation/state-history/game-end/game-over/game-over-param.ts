@@ -27,8 +27,13 @@ export type GameOverParam = GameOverParamX<TDArmdozerObjects>;
  * @param gameOver ゲームオーバー情報
  * @return 変換結果
  */
-export function toGameOverParam(props: StateAnimationProps, gameOver: GameOver): GameOverParam | null | undefined {
-  const winnerArmdozer = props.view.td.armdozerObjects.find(v => v.playerId === gameOver.winner);
+export function toGameOverParam(
+  props: StateAnimationProps,
+  gameOver: GameOver
+): GameOverParam | null | undefined {
+  const winnerArmdozer = props.view.td.armdozerObjects.find(
+    (v) => v.playerId === gameOver.winner
+  );
 
   if (!winnerArmdozer) {
     return null;
@@ -37,6 +42,6 @@ export function toGameOverParam(props: StateAnimationProps, gameOver: GameOver):
   const tdArmdozer: TDArmdozerObjects = winnerArmdozer;
   return {
     winnerTdArmdozer: tdArmdozer,
-    tdCamera: props.view.td.camera
+    tdCamera: props.view.td.camera,
   };
 }

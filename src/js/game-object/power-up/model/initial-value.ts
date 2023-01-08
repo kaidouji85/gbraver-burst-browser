@@ -8,6 +8,6 @@ import type { PowerUpModel } from "./power-up-model";
 export function createInitialValue(): PowerUpModel {
   return {
     opacity: 0,
-    scale: 1
+    scale: 1,
   };
 }

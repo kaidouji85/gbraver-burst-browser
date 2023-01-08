@@ -11,15 +11,29 @@ import { LightningDozerSounds } from "../sounds/lightning-dozer-sounds";
  * @param sounds 音
  * @return アニメーション
  */
-export function guardToStand(model: LightningDozerModel, sounds: LightningDozerSounds): Animate {
+export function guardToStand(
+  model: LightningDozerModel,
+  sounds: LightningDozerSounds
+): Animate {
   return process(() => {
     model.animation.frame = 1;
     model.animation.type = "GUARD";
     sounds.motor.play();
-  }).chain(tween(model.animation, t => t.to({
-    frame: 0
-  }, 300))).chain(process(() => {
-    model.animation.frame = 0;
-    model.animation.type = "STAND";
-  }));
+  })
+    .chain(
+      tween(model.animation, (t) =>
+        t.to(
+          {
+            frame: 0,
+          },
+          300
+        )
+      )
+    )
+    .chain(
+      process(() => {
+        model.animation.frame = 0;
+        model.animation.type = "STAND";
+      })
+    );
 }

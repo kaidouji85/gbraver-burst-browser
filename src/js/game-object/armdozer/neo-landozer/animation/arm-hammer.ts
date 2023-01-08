@@ -8,9 +8,22 @@ export function armHammer(model: NeoLandozerModel): Animate {
   return process(() => {
     model.animation.type = "HM_ATTACK";
     model.animation.frame = 0;
-  }).chain(tween(model.animation, t => t.to({
-    frame: 1
-  }, 150)), tween(model.position, t => t.to({
-    x: "-100"
-  }, 150)));
+  }).chain(
+    tween(model.animation, (t) =>
+      t.to(
+        {
+          frame: 1,
+        },
+        150
+      )
+    ),
+    tween(model.position, (t) =>
+      t.to(
+        {
+          x: "-100",
+        },
+        150
+      )
+    )
+  );
 }

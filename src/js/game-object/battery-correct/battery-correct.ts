@@ -21,14 +21,19 @@ export class BatteryCorrect {
    * @param view ビュー
    * @param gameObjectAction ゲームオブジェクトアクション
    */
-  constructor(view: BatteryCorrectView, gameObjectAction: Stream<GameObjectAction>) {
+  constructor(
+    view: BatteryCorrectView,
+    gameObjectAction: Stream<GameObjectAction>
+  ) {
     this.#model = initialValue();
     this.#view = view;
-    this.#unsubscribers = [gameObjectAction.subscribe(action => {
-      if (action.type === "PreRender") {
-        this.#onPreRender(action);
-      }
-    })];
+    this.#unsubscribers = [
+      gameObjectAction.subscribe((action) => {
+        if (action.type === "PreRender") {
+          this.#onPreRender(action);
+        }
+      }),
+    ];
   }
 
   /**
@@ -36,7 +41,7 @@ export class BatteryCorrect {
    */
   destructor(): void {
     this.#view.destructor();
-    this.#unsubscribers.forEach(v => {
+    this.#unsubscribers.forEach((v) => {
       v.unsubscribe();
     });
   }
@@ -68,5 +73,4 @@ export class BatteryCorrect {
   #onPreRender(action: PreRender): void {
     this.#view.engage(this.#model, action);
   }
-
 }

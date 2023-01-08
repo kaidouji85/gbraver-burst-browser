@@ -8,7 +8,12 @@ import type { WingDozerModel } from "../model/wing-dozer-model";
  * @return アニメーション
  */
 export function startActive(model: WingDozerModel): Animate {
-  return tween(model.active, t => t.to({
-    opacity: 1
-  }, 500));
+  return tween(model.active, (t) =>
+    t.to(
+      {
+        opacity: 1,
+      },
+      500
+    )
+  );
 }

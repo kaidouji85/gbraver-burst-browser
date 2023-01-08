@@ -48,9 +48,9 @@ export class BatterySelectorView {
     this.#button = new BatteryButton({
       resources: param.resources,
       gameObjectAction: param.gameObjectAction,
-      onPush: event => {
+      onPush: (event) => {
         param.onOkPush(event);
-      }
+      },
     });
     this.#button.getObject3D().position.set(0, 0, 1);
     this.#group.add(this.#button.getObject3D());
@@ -59,7 +59,7 @@ export class BatterySelectorView {
       gameObjectAction: param.gameObjectAction,
       onPush: () => {
         param.onPlusPush();
-      }
+      },
     });
     this.#plus.getObject3D().position.set(256, 176, 2);
     this.#group.add(this.#plus.getObject3D());
@@ -68,7 +68,7 @@ export class BatterySelectorView {
       gameObjectAction: param.gameObjectAction,
       onPush: () => {
         param.onMinusPush();
-      }
+      },
     });
     this.#minus.getObject3D().position.set(-256, 176, 2);
     this.#group.add(this.#minus.getObject3D());
@@ -98,16 +98,24 @@ export class BatterySelectorView {
     this.#button.update(model);
     this.#plus.update(model);
     this.#minus.update(model);
-    const devicePerScale = HUDUIScale(preRender.rendererDOM, preRender.safeAreaInset);
+    const devicePerScale = HUDUIScale(
+      preRender.rendererDOM,
+      preRender.safeAreaInset
+    );
     const frontScale = devicePerScale * 0.3;
     this.#group.scale.set(frontScale, frontScale, 0.3);
     const paddingRight = 105;
     const marginRight = 10;
-    this.#group.position.x = preRender.rendererDOM.clientWidth / 2 - paddingRight * devicePerScale - Math.max(marginRight, preRender.safeAreaInset.right);
+    this.#group.position.x =
+      preRender.rendererDOM.clientWidth / 2 -
+      paddingRight * devicePerScale -
+      Math.max(marginRight, preRender.safeAreaInset.right);
     const paddingBottom = 65;
     const marginBottom = 10;
-    this.#group.position.y = -preRender.rendererDOM.clientHeight / 2 + paddingBottom * devicePerScale + Math.max(marginBottom, preRender.safeAreaInset.bottom);
+    this.#group.position.y =
+      -preRender.rendererDOM.clientHeight / 2 +
+      paddingBottom * devicePerScale +
+      Math.max(marginBottom, preRender.safeAreaInset.bottom);
     this.#group.quaternion.copy(preRender.camera.quaternion);
   }
-
 }

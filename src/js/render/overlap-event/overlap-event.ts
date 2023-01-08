@@ -19,7 +19,13 @@ import { toTouchStartRaycaster } from "./touch-start-raycaster";
 /**
  * オーバーラップ イベント
  */
-export type OverlapEvent = MouseDownRaycaster | MouseMoveRaycaster | MouseUpRaycaster | TouchStartRaycaster | TouchMoveRaycaster | TouchEndRaycaster;
+export type OverlapEvent =
+  | MouseDownRaycaster
+  | MouseMoveRaycaster
+  | MouseUpRaycaster
+  | TouchStartRaycaster
+  | TouchMoveRaycaster
+  | TouchEndRaycaster;
 
 /**
  * DOMイベントストリームを当たり判定ストリームに変換する
@@ -29,29 +35,39 @@ export type OverlapEvent = MouseDownRaycaster | MouseMoveRaycaster | MouseUpRayc
  * @param camera カメラ
  * @return 当たり判定ストリーム
  */
-export function toOverlapStream(origin: Stream<RendererDOMEvent>, rendererDOM: HTMLElement, camera: THREE.Camera): Stream<OverlapEvent> {
-  return origin.chain(map(v => {
-    switch (v.type) {
-      case "mouseDown":
-        return toMouseDownRaycaster(v, rendererDOM, camera);
+export function toOverlapStream(
+  origin: Stream<RendererDOMEvent>,
+  rendererDOM: HTMLElement,
+  camera: THREE.Camera
+): Stream<OverlapEvent> {
+  return origin
+    .chain(
+      map((v) => {
+        switch (v.type) {
+          case "mouseDown":
+            return toMouseDownRaycaster(v, rendererDOM, camera);
 
-      case "mouseMove":
-        return toMouseMoveRaycaster(v, rendererDOM, camera);
+          case "mouseMove":
+            return toMouseMoveRaycaster(v, rendererDOM, camera);
 
-      case "mouseUp":
-        return toMouseUpRaycaster(v, rendererDOM, camera);
+          case "mouseUp":
+            return toMouseUpRaycaster(v, rendererDOM, camera);
 
-      case "touchStart":
-        return toTouchStartRaycaster(v, rendererDOM, camera);
+          case "touchStart":
+            return toTouchStartRaycaster(v, rendererDOM, camera);
 
-      case "touchMove":
-        return toTouchMoveRaycaster(v, rendererDOM, camera);
+          case "touchMove":
+            return toTouchMoveRaycaster(v, rendererDOM, camera);
 
-      case "touchEnd":
-        return toTouchEndRaycaster(v, rendererDOM, camera);
+          case "touchEnd":
+            return toTouchEndRaycaster(v, rendererDOM, camera);
 
-      default:
-        return null;
-    }
-  })).chain(filter(v => !!v)).chain(map(v => (v as OverlapEvent))).chain(share());
+          default:
+            return null;
+        }
+      })
+    )
+    .chain(filter((v) => !!v))
+    .chain(map((v) => v as OverlapEvent))
+    .chain(share());
 }

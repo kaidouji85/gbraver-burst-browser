@@ -8,6 +8,6 @@ import type { ContinuousAttackModel } from "./continuous-attack-model";
 export function createInitialValue(): ContinuousAttackModel {
   return {
     opacity: 0,
-    scale: 1
+    scale: 1,
   };
 }

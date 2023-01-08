@@ -18,13 +18,17 @@ import type { TutorialStage } from "../tutorial-stages";
  * @param stage チュートリアルステージ
  * @return 処理が完了したら発火するPromise
  */
-export async function startTutorial(props: Readonly<GameProps>, level: number, stage: TutorialStage): Promise<void> {
+export async function startTutorial(
+  props: Readonly<GameProps>,
+  level: number,
+  stage: TutorialStage
+): Promise<void> {
   const npcBattle = new NPCBattleRoom(stage.player, stage.npc);
   await props.fader.fadeOut();
   const scene = new TutorialTitle({
     resources: props.resources,
     level,
-    title: stage.title
+    title: stage.title,
   });
   props.domSceneBinder.bind(scene, tutorialTitleConnector);
   await Promise.race([scene.waitUntilLoaded(), waitTime(MAX_LOADING_TIME)]);
@@ -45,19 +49,22 @@ export async function startTutorial(props: Readonly<GameProps>, level: number, s
     resize: props.resize,
     pushWindow: props.pushWindow,
     gameLoop: props.gameLoop,
-    renderer: props.renderer
+    renderer: props.renderer,
   });
   props.tdBinder.bind(battleScene, battleSceneConnector);
   await waitAnimationFrame();
   const latency = Date.now() - startTutorialStageTime;
   await waitTime(3000 - latency);
-  await Promise.all([(async () => {
-    await props.fader.fadeOut();
-    props.domSceneBinder.hidden();
-  })(), (async () => {
-    await props.bgm.do(fadeOut);
-    await props.bgm.do(stop);
-  })()]);
+  await Promise.all([
+    (async () => {
+      await props.fader.fadeOut();
+      props.domSceneBinder.hidden();
+    })(),
+    (async () => {
+      await props.bgm.do(fadeOut);
+      await props.bgm.do(stop);
+    })(),
+  ]);
   await props.fader.fadeIn();
   await battleScene.start();
 }

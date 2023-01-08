@@ -4,7 +4,10 @@ import type { SafeAreaInset } from "../safe-area/safe-area-inset";
 import { createSafeAreaInset } from "../safe-area/safe-area-inset";
 import type { Stream } from "../stream/stream";
 import { createStream } from "../stream/stream";
-import { getViewPortHeight, getViewPortWidth } from "../view-port/view-port-size";
+import {
+  getViewPortHeight,
+  getViewPortWidth,
+} from "../view-port/view-port-size";
 
 /** リサイズ */
 export type Resize = {
@@ -27,14 +30,14 @@ export const RESIZE_DELAY = 50;
  * @return ストリーム
  */
 export function resizeStream(): Stream<Resize> {
-  const origin = new Observable<Resize>(subscriber => {
+  const origin = new Observable<Resize>((subscriber) => {
     window.addEventListener("resize", () => {
       setTimeout(() => {
         subscriber.next({
           type: "resize",
           width: getViewPortWidth(),
           height: getViewPortHeight(),
-          safeAreaInset: createSafeAreaInset()
+          safeAreaInset: createSafeAreaInset(),
         });
       }, RESIZE_DELAY);
     });

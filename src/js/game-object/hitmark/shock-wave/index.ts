@@ -13,7 +13,10 @@ import { PlayerShockWaveView } from "./view/player-shock-wave-view";
  * @param gameObjectAction ゲームオブジェクトアクション
  * @return 衝撃波
  */
-export function playerShockWave(resources: Resources, gameObjectAction: Stream<GameObjectAction>): ShockWave {
+export function playerShockWave(
+  resources: Resources,
+  gameObjectAction: Stream<GameObjectAction>
+): ShockWave {
   const model = initialValue();
   const view = new PlayerShockWaveView(resources, model);
   return new ShockWave(view, model, resources, gameObjectAction);
@@ -26,7 +29,10 @@ export function playerShockWave(resources: Resources, gameObjectAction: Stream<G
  * @param gameObjectAction ゲームオブジェクトアクション
  * @return 衝撃波
  */
-export function enemyShockWave(resources: Resources, gameObjectAction: Stream<GameObjectAction>): ShockWave {
+export function enemyShockWave(
+  resources: Resources,
+  gameObjectAction: Stream<GameObjectAction>
+): ShockWave {
   const model = initialValue();
   const view = new EnemyShockWaveView(resources, model);
   return new ShockWave(view, model, resources, gameObjectAction);

@@ -9,6 +9,6 @@ export function createInitialValue(): RecoverBatteryModel {
   return {
     value: 3,
     opacity: 0,
-    scale: 1
+    scale: 1,
   };
 }

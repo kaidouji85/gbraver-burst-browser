@@ -13,7 +13,11 @@ import type { BurstAnimationParamX } from "./animation-param";
  *
  * @template BURST バースト
  */
-type NeoLandozerBurst<BURST extends Burst> = BurstAnimationParamX<NeoLandozerTD, NeoLandozerHUD, BURST>;
+type NeoLandozerBurst<BURST extends Burst> = BurstAnimationParamX<
+  NeoLandozerTD,
+  NeoLandozerHUD,
+  BURST
+>;
 
 /**
  * ネオランドーザ バースト アニメーション
@@ -24,9 +28,7 @@ type NeoLandozerBurst<BURST extends Burst> = BurstAnimationParamX<NeoLandozerTD,
 export function neoLandozerBurst(param: NeoLandozerBurst<Burst>): Animate {
   if (param.burst.type === "BuffPower") {
     const burst: BuffPower = param.burst;
-    return neoLandozerBuffPower({ ...param,
-      burst
-    });
+    return neoLandozerBuffPower({ ...param, burst });
   }
 
   return empty();
@@ -39,5 +41,48 @@ export function neoLandozerBurst(param: NeoLandozerBurst<Burst>): Animate {
  * @return アニメーション
  */
 function neoLandozerBuffPower(param: NeoLandozerBurst<BuffPower>): Animate {
-  return all(param.burstArmdozerTD.neoLandozer.guts(), param.isActive ? param.burstArmdozerTD.neoLandozer.endActive() : param.anotherArmdozerTD.sprite().endActive(), param.burstArmdozerHUD.cutIn.show(), track(param.tdCamera, param.burstArmdozerTD.neoLandozer.getObject3D().position.x, 500), dolly(param.tdCamera, "-60", 500), param.tdObjects.skyBrightness.brightness(0.2, 500), param.tdObjects.illumination.intensity(0.2, 500), param.hudObjects.rearmostFader.opacity(0.6, 500), param.tdObjects.turnIndicator.invisible()).chain(delay(800)).chain(all(param.burstArmdozerHUD.cutIn.hidden(), param.hudObjects.rearmostFader.opacity(0, 300))).chain(delay(300)).chain(param.burstPlayerTD.armdozerEffects.powerUp.popUp()).chain(delay(200)).chain(all(param.burstPlayerHUD.gauge.battery(param.burstPlayerState.armdozer.battery), param.burstPlayerTD.recoverBattery.popUp(param.burst.recoverBattery))).chain(all(param.burstArmdozerTD.neoLandozer.gutsToStand(), toInitial(param.tdCamera, 500), param.tdObjects.skyBrightness.brightness(1, 500), param.tdObjects.illumination.intensity(1, 500))).chain(delay(200));
+  return all(
+    param.burstArmdozerTD.neoLandozer.guts(),
+    param.isActive
+      ? param.burstArmdozerTD.neoLandozer.endActive()
+      : param.anotherArmdozerTD.sprite().endActive(),
+    param.burstArmdozerHUD.cutIn.show(),
+    track(
+      param.tdCamera,
+      param.burstArmdozerTD.neoLandozer.getObject3D().position.x,
+      500
+    ),
+    dolly(param.tdCamera, "-60", 500),
+    param.tdObjects.skyBrightness.brightness(0.2, 500),
+    param.tdObjects.illumination.intensity(0.2, 500),
+    param.hudObjects.rearmostFader.opacity(0.6, 500),
+    param.tdObjects.turnIndicator.invisible()
+  )
+    .chain(delay(800))
+    .chain(
+      all(
+        param.burstArmdozerHUD.cutIn.hidden(),
+        param.hudObjects.rearmostFader.opacity(0, 300)
+      )
+    )
+    .chain(delay(300))
+    .chain(param.burstPlayerTD.armdozerEffects.powerUp.popUp())
+    .chain(delay(200))
+    .chain(
+      all(
+        param.burstPlayerHUD.gauge.battery(
+          param.burstPlayerState.armdozer.battery
+        ),
+        param.burstPlayerTD.recoverBattery.popUp(param.burst.recoverBattery)
+      )
+    )
+    .chain(
+      all(
+        param.burstArmdozerTD.neoLandozer.gutsToStand(),
+        toInitial(param.tdCamera, 500),
+        param.tdObjects.skyBrightness.brightness(1, 500),
+        param.tdObjects.illumination.intensity(1, 500)
+      )
+    )
+    .chain(delay(200));
 }

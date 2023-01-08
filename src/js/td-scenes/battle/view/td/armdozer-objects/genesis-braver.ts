@@ -3,7 +3,10 @@ import * as THREE from "three";
 
 import type { GameObjectAction } from "../../../../../game-object/action/game-object-action";
 import type { ArmDozerSprite } from "../../../../../game-object/armdozer/armdozer-sprite";
-import { EnemyGenesisBraver, PlayerGenesisBraver } from "../../../../../game-object/armdozer/genesis-braver";
+import {
+  EnemyGenesisBraver,
+  PlayerGenesisBraver,
+} from "../../../../../game-object/armdozer/genesis-braver";
 import { GenesisBraver } from "../../../../../game-object/armdozer/genesis-braver/genesis-braver";
 import type { Resources } from "../../../../../resource";
 import type { Stream } from "../../../../../stream/stream";
@@ -16,7 +19,9 @@ interface GenesisBraverTDField {
 }
 
 /** ジェネシスブレイバー 3Dレイヤー */
-export class GenesisBraverTD implements GenesisBraverTDField, TDArmdozerObjects {
+export class GenesisBraverTD
+  implements GenesisBraverTDField, TDArmdozerObjects
+{
   /** @override */
   playerId: PlayerId;
 
@@ -47,7 +52,6 @@ export class GenesisBraverTD implements GenesisBraverTDField, TDArmdozerObjects 
   getObject3Ds(): THREE.Object3D[] {
     return [this.genesisBraver.getObject3D()];
   }
-
 }
 
 /**
@@ -57,9 +61,13 @@ export class GenesisBraverTD implements GenesisBraverTDField, TDArmdozerObjects 
  * @param state プレイヤー情報
  * @return 生成結果
  */
-export function playerGenesisBraverTD(resources: Resources, gameObjectAction: Stream<GameObjectAction>, state: Player): GenesisBraverTD {
+export function playerGenesisBraverTD(
+  resources: Resources,
+  gameObjectAction: Stream<GameObjectAction>,
+  state: Player
+): GenesisBraverTD {
   return new GenesisBraverTD(state.playerId, {
-    genesisBraver: PlayerGenesisBraver(resources, gameObjectAction)
+    genesisBraver: PlayerGenesisBraver(resources, gameObjectAction),
   });
 }
 
@@ -70,8 +78,12 @@ export function playerGenesisBraverTD(resources: Resources, gameObjectAction: St
  * @param state プレイヤー情報
  * @return 生成結果
  */
-export function enemyGenesisBraverTD(resources: Resources, gameObjectAction: Stream<GameObjectAction>, state: Player): GenesisBraverTD {
+export function enemyGenesisBraverTD(
+  resources: Resources,
+  gameObjectAction: Stream<GameObjectAction>,
+  state: Player
+): GenesisBraverTD {
   return new GenesisBraverTD(state.playerId, {
-    genesisBraver: EnemyGenesisBraver(resources, gameObjectAction)
+    genesisBraver: EnemyGenesisBraver(resources, gameObjectAction),
   });
 }

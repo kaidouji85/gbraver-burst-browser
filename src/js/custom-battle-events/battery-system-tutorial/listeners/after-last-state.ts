@@ -2,7 +2,10 @@ import type { GameEnd, GameStateX } from "gbraver-burst-core";
 
 import type { LastState } from "../../../td-scenes/battle/custom-battle-event";
 import { extractGameEnd } from "../../game-state-extractor";
-import { invisibleAllMessageWindows, refreshConversation } from "../../invisible-all-message-windows";
+import {
+  invisibleAllMessageWindows,
+  refreshConversation,
+} from "../../invisible-all-message-windows";
 import type { BatterySystemTutorialState } from "../state";
 import { lose } from "../stories/lose";
 import { tutorialEnd } from "../stories/tutorial-end";
@@ -15,7 +18,10 @@ import { victory } from "../stories/victory";
  * @param state ステート
  * @return ステート更新結果
  */
-export async function afterLastState(props: Readonly<LastState>, state: BatterySystemTutorialState): Promise<BatterySystemTutorialState> {
+export async function afterLastState(
+  props: Readonly<LastState>,
+  state: BatterySystemTutorialState
+): Promise<BatterySystemTutorialState> {
   const extractedGameEnd = extractGameEnd(props.update);
 
   if (!extractedGameEnd) {
@@ -24,7 +30,8 @@ export async function afterLastState(props: Readonly<LastState>, state: BatteryS
 
   const gameEnd: GameStateX<GameEnd> = extractedGameEnd;
   const result = gameEnd.effect.result;
-  const isVictory = result.type === "GameOver" && result.winner === props.playerId;
+  const isVictory =
+    result.type === "GameOver" && result.winner === props.playerId;
   isVictory ? await victory(props) : await lose(props);
   await refreshConversation(props);
   await tutorialEnd(props);

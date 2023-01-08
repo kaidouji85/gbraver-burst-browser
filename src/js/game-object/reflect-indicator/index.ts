@@ -12,7 +12,10 @@ import { PlayerReflectIndicatorView } from "./view/player-reflect-indicator-view
  * @param gameObjectAction ゲームオブジェクトアクション
  * @return 生成結果
  */
-export function playerReflectIndicator(resources: Resources, gameObjectAction: Stream<GameObjectAction>): ReflectIndicator {
+export function playerReflectIndicator(
+  resources: Resources,
+  gameObjectAction: Stream<GameObjectAction>
+): ReflectIndicator {
   const view = new PlayerReflectIndicatorView(resources);
   return new ReflectIndicator(view, gameObjectAction);
 }
@@ -24,7 +27,10 @@ export function playerReflectIndicator(resources: Resources, gameObjectAction: S
  * @param gameObjectAction ゲームオブジェクトアクション
  * @return 生成結果
  */
-export function enemyReflectIndicator(resources: Resources, gameObjectAction: Stream<GameObjectAction>): ReflectIndicator {
+export function enemyReflectIndicator(
+  resources: Resources,
+  gameObjectAction: Stream<GameObjectAction>
+): ReflectIndicator {
   const view = new EnemyReflectIndicatorView(resources);
   return new ReflectIndicator(view, gameObjectAction);
 }

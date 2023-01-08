@@ -1,4 +1,9 @@
-import type { BatteryEnchantmentSkill, BuffPowerSkill, PilotSkill, RecoverBatterySkill } from "gbraver-burst-core";
+import type {
+  BatteryEnchantmentSkill,
+  BuffPowerSkill,
+  PilotSkill,
+  RecoverBatterySkill,
+} from "gbraver-burst-core";
 
 /**
  * パイロットスキル概要
@@ -47,7 +52,9 @@ function buffPowerSkillTemplate(skill: BuffPowerSkill): string {
  * @param skill スキル情報
  * @return 説明文
  */
-function batteryEnchantmentSkillTemplate(skill: BatteryEnchantmentSkill): string {
+function batteryEnchantmentSkillTemplate(
+  skill: BatteryEnchantmentSkill
+): string {
   return `自分が出したバッテリー+${skill.batteryEnchantment}`;
 }
 

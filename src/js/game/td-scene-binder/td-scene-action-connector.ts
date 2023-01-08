@@ -11,4 +11,7 @@ import type { GameAction } from "../game-actions";
  * @param gameAction ゲームアクションストリーム
  * @return ゲームションションのアンサブスクライブ
  */
-export type TDSceneActionConnector<X extends TDScene> = (scene: X, gameAction: StreamSource<GameAction>) => Unsubscriber[];
+export type TDSceneActionConnector<X extends TDScene> = (
+  scene: X,
+  gameAction: StreamSource<GameAction>
+) => Unsubscriber[];

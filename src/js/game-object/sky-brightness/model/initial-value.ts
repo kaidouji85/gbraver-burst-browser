@@ -7,6 +7,6 @@ import type { SkyBrightnessModel } from "./sky-brightness-model";
  */
 export function createInitialValue(): SkyBrightnessModel {
   return {
-    brightness: 1
+    brightness: 1,
   };
 }

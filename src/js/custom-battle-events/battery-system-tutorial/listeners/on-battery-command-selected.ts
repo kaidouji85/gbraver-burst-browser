@@ -1,12 +1,30 @@
 import type { GameState, PlayerState } from "gbraver-burst-core";
 
-import type { BatteryCommandSelected, CommandCanceled, CustomBattleEventProps } from "../../../td-scenes/battle/custom-battle-event";
+import type {
+  BatteryCommandSelected,
+  CommandCanceled,
+  CustomBattleEventProps,
+} from "../../../td-scenes/battle/custom-battle-event";
 import { unattentionBurstButton } from "../../attention";
-import { focusInBatterySelector, focusInBurstButton, focusInPilotButton, focusOutBatterySelector } from "../../focus";
+import {
+  focusInBatterySelector,
+  focusInBurstButton,
+  focusInPilotButton,
+  focusOutBatterySelector,
+} from "../../focus";
 import { refreshConversation } from "../../invisible-all-message-windows";
-import { burstCaption, defenseBatteryCaption, pilotSkillCaption } from "../captions";
+import {
+  burstCaption,
+  defenseBatteryCaption,
+  pilotSkillCaption,
+} from "../captions";
 import type { BatterySystemTutorialState, SelectableCommands } from "../state";
-import { cancelZeroBatteryDefense, doBurstBecauseZeroBattery, doPilotSkillBecauseZeroBattery, zeroBatteryDefenseBecauseNoBatteryRecover } from "../stories/zero-battery";
+import {
+  cancelZeroBatteryDefense,
+  doBurstBecauseZeroBattery,
+  doPilotSkillBecauseZeroBattery,
+  zeroBatteryDefenseBecauseNoBatteryRecover,
+} from "../stories/zero-battery";
 
 /** イベントリスト終了情報 */
 type Ret = {
@@ -25,7 +43,11 @@ type Ret = {
  * @param player プレイヤー情報
  * @return 終了情報
  */
-async function onZeroDefense(props: Readonly<CustomBattleEventProps>, state: BatterySystemTutorialState, player: PlayerState): Promise<Ret> {
+async function onZeroDefense(
+  props: Readonly<CustomBattleEventProps>,
+  state: BatterySystemTutorialState,
+  player: PlayerState
+): Promise<Ret> {
   const isZeroBattery = player.armdozer.battery === 0;
   const enableBurst = player.armdozer.enableBurst;
   const enablePilotSkill = player.pilot.enableSkill;
@@ -36,8 +58,8 @@ async function onZeroDefense(props: Readonly<CustomBattleEventProps>, state: Bat
     return {
       state,
       cancel: {
-        isCommandCanceled: false
-      }
+        isCommandCanceled: false,
+      },
     };
   }
 
@@ -46,12 +68,10 @@ async function onZeroDefense(props: Readonly<CustomBattleEventProps>, state: Bat
     refreshConversation(props);
     await focusInPilotButton(props, pilotSkillCaption);
     return {
-      state: { ...state,
-        selectableCommands: "PilotSkillOnly"
-      },
+      state: { ...state, selectableCommands: "PilotSkillOnly" },
       cancel: {
-        isCommandCanceled: true
-      }
+        isCommandCanceled: true,
+      },
     };
   }
 
@@ -61,23 +81,22 @@ async function onZeroDefense(props: Readonly<CustomBattleEventProps>, state: Bat
     unattentionBurstButton(props);
     await focusInBurstButton(props, burstCaption);
     return {
-      state: { ...state,
-        selectableCommands: "BurstOnly"
-      },
+      state: { ...state, selectableCommands: "BurstOnly" },
       cancel: {
-        isCommandCanceled: true
-      }
+        isCommandCanceled: true,
+      },
     };
   }
 
   await cancelZeroBatteryDefense(props);
   refreshConversation(props);
-  state.selectableCommands === "BatteryOnly" && (await focusInBatterySelector(props, defenseBatteryCaption));
+  state.selectableCommands === "BatteryOnly" &&
+    (await focusInBatterySelector(props, defenseBatteryCaption));
   return {
     state,
     cancel: {
-      isCommandCanceled: true
-    }
+      isCommandCanceled: true,
+    },
   };
 }
 
@@ -88,20 +107,25 @@ async function onZeroDefense(props: Readonly<CustomBattleEventProps>, state: Bat
  * @param state ステート
  * @return 終了情報
  */
-export async function onBatteryCommandSelected(props: Readonly<BatteryCommandSelected>, state: BatterySystemTutorialState): Promise<Ret> {
+export async function onBatteryCommandSelected(
+  props: Readonly<BatteryCommandSelected>,
+  state: BatterySystemTutorialState
+): Promise<Ret> {
   const enableBatteryCommand: SelectableCommands[] = ["BatteryOnly", "All"];
 
   if (!enableBatteryCommand.includes(state.selectableCommands)) {
     return {
       state,
       cancel: {
-        isCommandCanceled: true
-      }
+        isCommandCanceled: true,
+      },
     };
   }
 
   const foundLastState = state.stateHistory[state.stateHistory.length - 1];
-  const foundPlayer = (foundLastState?.players ?? []).find(v => v.playerId === props.playerId);
+  const foundPlayer = (foundLastState?.players ?? []).find(
+    (v) => v.playerId === props.playerId
+  );
   const isZeroBatteryCommand = props.battery.battery === 0;
 
   if (isZeroBatteryCommand && foundLastState && foundPlayer) {
@@ -118,7 +142,7 @@ export async function onBatteryCommandSelected(props: Readonly<BatteryCommandSel
   return {
     state,
     cancel: {
-      isCommandCanceled: false
-    }
+      isCommandCanceled: false,
+    },
   };
 }

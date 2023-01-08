@@ -11,12 +11,22 @@ import { WingDozerSounds } from "../sounds/wing-dozer-sounds";
  * @param sounds 音
  * @return アニメーション
  */
-export function charge(model: WingDozerModel, sounds: WingDozerSounds): Animate {
+export function charge(
+  model: WingDozerModel,
+  sounds: WingDozerSounds
+): Animate {
   return process(() => {
     model.animation.type = "UPPER_CHARGE";
     model.animation.frame = 0;
     sounds.motor.play();
-  }).chain(tween(model.animation, t => t.to({
-    frame: 1
-  }, 200)));
+  }).chain(
+    tween(model.animation, (t) =>
+      t.to(
+        {
+          frame: 1,
+        },
+        200
+      )
+    )
+  );
 }

@@ -20,17 +20,27 @@ import { ThreeDimensionLayer } from "../td";
  * @param hud HUDレイヤー
  * @param rendererDOM レンダラDOM
  */
-export function trackingArmdozerSprites(td: ThreeDimensionLayer, hud: HudLayer, rendererDOM: HTMLElement): void {
-  td.armdozerObjects.forEach(tdArmdozer => {
-    const hudArmdozer = hud.armdozers.find(v => v.playerId === tdArmdozer.playerId);
+export function trackingArmdozerSprites(
+  td: ThreeDimensionLayer,
+  hud: HudLayer,
+  rendererDOM: HTMLElement
+): void {
+  td.armdozerObjects.forEach((tdArmdozer) => {
+    const hudArmdozer = hud.armdozers.find(
+      (v) => v.playerId === tdArmdozer.playerId
+    );
 
     if (!hudArmdozer) {
       return;
     }
 
     const tracks = getTracksFromHUDArmdozer(hudArmdozer);
-    tracks.forEach(v => {
-      const position = toCutInHUDPos(td.camera.getCamera(), rendererDOM, tdArmdozer.sprite());
+    tracks.forEach((v) => {
+      const position = toCutInHUDPos(
+        td.camera.getCamera(),
+        rendererDOM,
+        tdArmdozer.sprite()
+      );
       v.tracking(position.x, position.y);
     });
   });
@@ -42,7 +52,9 @@ export function trackingArmdozerSprites(td: ThreeDimensionLayer, hud: HudLayer, 
  * @param hudArmdozer 取得元
  * @return 取得結果
  */
-function getTracksFromHUDArmdozer(hudArmdozer: HUDArmdozerObjects): HUDTracking[] {
+function getTracksFromHUDArmdozer(
+  hudArmdozer: HUDArmdozerObjects
+): HUDTracking[] {
   if (hudArmdozer instanceof ShinBraverHUD) {
     return getTracksFromShinBraverHUD(hudArmdozer);
   }
@@ -68,7 +80,9 @@ function getTracksFromHUDArmdozer(hudArmdozer: HUDArmdozerObjects): HUDTracking[
  * @param shinBraverHUD 取得元
  * @return 取得結果
  */
-function getTracksFromShinBraverHUD(shinBraverHUD: ShinBraverHUD): HUDTracking[] {
+function getTracksFromShinBraverHUD(
+  shinBraverHUD: ShinBraverHUD
+): HUDTracking[] {
   return [shinBraverHUD.cutIn];
 }
 
@@ -78,7 +92,9 @@ function getTracksFromShinBraverHUD(shinBraverHUD: ShinBraverHUD): HUDTracking[]
  * @param neoLandozerHUD 取得元
  * @return 取得結果
  */
-function getTracksFromNeoLandozerHUD(neoLandozerHUD: NeoLandozerHUD): HUDTracking[] {
+function getTracksFromNeoLandozerHUD(
+  neoLandozerHUD: NeoLandozerHUD
+): HUDTracking[] {
   return [neoLandozerHUD.cutIn];
 }
 
@@ -88,7 +104,9 @@ function getTracksFromNeoLandozerHUD(neoLandozerHUD: NeoLandozerHUD): HUDTrackin
  * @param lightningDozerHUD 取得元
  * @return 取得結果
  */
-function getTracksFromLightningDozerHUD(lightningDozerHUD: LightningDozerHUD): HUDTracking[] {
+function getTracksFromLightningDozerHUD(
+  lightningDozerHUD: LightningDozerHUD
+): HUDTracking[] {
   return [lightningDozerHUD.cutIn];
 }
 
@@ -110,12 +128,16 @@ function getTracksFromWingDozerHUD(wingDozerHUD: WingDozerHUD): HUDTracking[] {
  * @param sprite トラッキングするスプライト
  * @return 変換結果
  */
-function toCutInHUDPos(tdCamera: THREE.PerspectiveCamera, rendererDOM: HTMLElement, sprite: ArmDozerSprite): Coordinate {
+function toCutInHUDPos(
+  tdCamera: THREE.PerspectiveCamera,
+  rendererDOM: HTMLElement,
+  sprite: ArmDozerSprite
+): Coordinate {
   const target = sprite.getObject3D();
   const tdPosition = {
     x: target.position.x,
     y: ARMDOZER_EFFECT_STANDARD_Y,
-    z: target.position.z
+    z: target.position.z,
   };
   return toHUDCoordinate(tdPosition, tdCamera, rendererDOM);
 }

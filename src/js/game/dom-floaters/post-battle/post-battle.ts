@@ -5,10 +5,17 @@ import { pushDOMStream } from "../../../dom/event-stream";
 import { Exclusive } from "../../../exclusive/exclusive";
 import type { Resources } from "../../../resource";
 import { SOUND_IDS } from "../../../resource/sound";
-import type { Stream, StreamSource, Unsubscriber } from "../../../stream/stream";
+import type {
+  Stream,
+  StreamSource,
+  Unsubscriber,
+} from "../../../stream/stream";
 import { createStreamSource } from "../../../stream/stream";
 import type { PostBattle } from "../../post-battle";
-import type { ButtonStyle, PostBattleButtonConfig } from "./post-battle-button-config";
+import type {
+  ButtonStyle,
+  PostBattleButtonConfig,
+} from "./post-battle-button-config";
 
 /** ルートHTML要素のclass属性 */
 const ROOT_CLASS = "post-battle";
@@ -46,7 +53,7 @@ export class PostBattleFloater {
    * デストラクタ相当の処理
    */
   destructor(): void {
-    this.#unsubscribers.forEach(v => {
+    this.#unsubscribers.forEach((v) => {
       v.unsubscribe();
     });
     this.#root.innerHTML = "";
@@ -68,13 +75,16 @@ export class PostBattleFloater {
    * @param buttons アクションボタン設定
    * @return アニメーションが完了したら発火するPromise
    */
-  async show(resources: Resources, buttons: PostBattleButtonConfig[]): Promise<void> {
+  async show(
+    resources: Resources,
+    buttons: PostBattleButtonConfig[]
+  ): Promise<void> {
     await this.#exclusive.execute(async () => {
       const actionButtons = this.#createActionButtons(resources, buttons);
-      actionButtons.forEach(v => {
+      actionButtons.forEach((v) => {
         this.#root.appendChild(v.button);
       });
-      this.#unsubscribers = actionButtons.map(v => v.unsubscriber);
+      this.#unsubscribers = actionButtons.map((v) => v.unsubscriber);
       await this.#bottomUp();
     });
   }
@@ -104,15 +114,21 @@ export class PostBattleFloater {
    */
   async #bottomUp(): Promise<void> {
     this.#root.style.display = "flex";
-    const animation = this.#root.animate([{
-      transform: "translate(-50%, 100%)"
-    }, {
-      transform: "translate(-50%, 0)"
-    }], {
-      duration: 400,
-      fill: "forwards",
-      easing: "ease"
-    });
+    const animation = this.#root.animate(
+      [
+        {
+          transform: "translate(-50%, 100%)",
+        },
+        {
+          transform: "translate(-50%, 0)",
+        },
+      ],
+      {
+        duration: 400,
+        fill: "forwards",
+        easing: "ease",
+      }
+    );
     await waitFinishAnimation(animation);
   }
 
@@ -123,42 +139,40 @@ export class PostBattleFloater {
    * @param buttons ボタン設定
    * @return 生成結果
    */
-  #createActionButtons(resources: Resources, buttons: PostBattleButtonConfig[]): ActionButton[] {
-    const pushButton = resources.sounds.find(v => v.id === SOUND_IDS.PUSH_BUTTON)?.sound ?? new Howl({src: ""});
-    const changeValue = resources.sounds.find(v => v.id === SOUND_IDS.CHANGE_VALUE)?.sound ?? new Howl({src: ""});
+  #createActionButtons(
+    resources: Resources,
+    buttons: PostBattleButtonConfig[]
+  ): ActionButton[] {
+    const pushButton =
+      resources.sounds.find((v) => v.id === SOUND_IDS.PUSH_BUTTON)?.sound ??
+      new Howl({ src: "" });
+    const changeValue =
+      resources.sounds.find((v) => v.id === SOUND_IDS.CHANGE_VALUE)?.sound ??
+      new Howl({ src: "" });
 
     const createButtonStyle = (style: ButtonStyle) => {
       switch (style) {
         case "MainButton":
           return {
             className: `${ROOT_CLASS}__main-action`,
-            sound: pushButton
+            sound: pushButton,
           };
 
         case "SubButton":
         default:
           return {
             className: `${ROOT_CLASS}__sub-action`,
-            sound: changeValue
+            sound: changeValue,
           };
       }
     };
 
-    return buttons.map(({
-      style,
-      action,
-      label
-    }) => {
+    return buttons.map(({ style, action, label }) => {
       const button = document.createElement("button");
       button.innerText = label;
-      const {
-        className,
-        sound
-      } = createButtonStyle(style);
+      const { className, sound } = createButtonStyle(style);
       button.className = className;
-      const unsubscriber = pushDOMStream(button).subscribe(({
-        event
-      }) => {
+      const unsubscriber = pushDOMStream(button).subscribe(({ event }) => {
         this.#exclusive.execute(async () => {
           event.preventDefault();
           event.stopPropagation();
@@ -169,9 +183,8 @@ export class PostBattleFloater {
       });
       return {
         button,
-        unsubscriber
+        unsubscriber,
       };
     });
   }
-
 }

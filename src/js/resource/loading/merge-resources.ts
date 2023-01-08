@@ -6,12 +6,16 @@ import type { Resources } from "..";
  * @param loading 読みこまれたリソース
  * @return マージ結果
  */
-export async function mergeResources(resources: Resources, loaded: Resources): Promise<Resources> {
-  return { ...resources,
+export async function mergeResources(
+  resources: Resources,
+  loaded: Resources
+): Promise<Resources> {
+  return {
+    ...resources,
     gltfs: [...resources.gltfs, ...loaded.gltfs],
     textures: [...resources.textures, ...loaded.textures],
     cubeTextures: [...resources.cubeTextures, ...loaded.cubeTextures],
     canvasImages: [...resources.canvasImages, ...loaded.canvasImages],
-    sounds: [...resources.sounds, ...loaded.sounds]
+    sounds: [...resources.sounds, ...loaded.sounds],
   };
 }

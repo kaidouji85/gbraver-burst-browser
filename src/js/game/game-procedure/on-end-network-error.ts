@@ -12,26 +12,32 @@ import { startTitle } from "./start-title";
  * @param action アクション
  * @return 処理が完了したら発火するPromise
  */
-export async function onEndNetworkError(props: GameProps, action: EndNetworkError): Promise<void> {
+export async function onEndNetworkError(
+  props: GameProps,
+  action: EndNetworkError
+): Promise<void> {
   const close = async () => {
     props.inProgress = {
-      type: "None"
+      type: "None",
     };
     props.domDialogBinder.hidden();
   };
 
   const gotoTitle = async () => {
     props.inProgress = {
-      type: "None"
+      type: "None",
     };
     props.domDialogBinder.hidden();
-    await Promise.all([(async () => {
-      await props.fader.fadeOut();
-      return await startTitle(props);
-    })(), (async () => {
-      await props.bgm.do(fadeOut);
-      await props.bgm.do(stop);
-    })()]);
+    await Promise.all([
+      (async () => {
+        await props.fader.fadeOut();
+        return await startTitle(props);
+      })(),
+      (async () => {
+        await props.bgm.do(fadeOut);
+        await props.bgm.do(stop);
+      })(),
+    ]);
     await props.fader.fadeIn();
     playTitleBGM(props);
   };

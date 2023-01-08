@@ -22,10 +22,15 @@ type DataIDs = {
  * @param level ステージレベル
  * @return ルート要素のinnerHTML
  */
-function rootInnerHTML(ids: DataIDs, stagePrefix: StagePrefixType, level: number): string {
+function rootInnerHTML(
+  ids: DataIDs,
+  stagePrefix: StagePrefixType,
+  level: number
+): string {
   const npcStagePrefix = ["S", "TAGE"];
   const tutorialStagePrefix = ["T", "UTORIAL"];
-  const prefix = stagePrefix === "NPCBattle" ? npcStagePrefix : tutorialStagePrefix;
+  const prefix =
+    stagePrefix === "NPCBattle" ? npcStagePrefix : tutorialStagePrefix;
   return `
     <div class="${ROOT_CLASS}__title">
       <div class="${ROOT_CLASS}__stage">
@@ -53,12 +58,19 @@ type Elements = {
  * @return 抽出結果
  */
 function extractElements(root: HTMLElement, ids: DataIDs): Elements {
-  const caption: HTMLElement = root.querySelector(`[data-id="${ids.caption}"]`) ?? document.createElement("div");
-  const armDozerIconElement = root.querySelector(`[data-id="${ids.armDozerIcon}"]`);
-  const armDozerIcon = armDozerIconElement instanceof HTMLImageElement ? armDozerIconElement : document.createElement("img");
+  const caption: HTMLElement =
+    root.querySelector(`[data-id="${ids.caption}"]`) ??
+    document.createElement("div");
+  const armDozerIconElement = root.querySelector(
+    `[data-id="${ids.armDozerIcon}"]`
+  );
+  const armDozerIcon =
+    armDozerIconElement instanceof HTMLImageElement
+      ? armDozerIconElement
+      : document.createElement("img");
   return {
     caption,
-    armDozerIcon
+    armDozerIcon,
   };
 }
 
@@ -96,7 +108,7 @@ export class StageTitle implements DOMScene {
   constructor(param: StageTitleParam) {
     const ids = {
       caption: domUuid(),
-      armDozerIcon: domUuid()
+      armDozerIcon: domUuid(),
     };
     this.#root = document.createElement("div");
     this.#root.className = ROOT_CLASS;
@@ -104,15 +116,25 @@ export class StageTitle implements DOMScene {
     const elements = extractElements(this.#root, ids);
     this.#isArmDozerIconLoaded = waitElementLoaded(elements.armDozerIcon);
     const armDozerIconPathID = getArmdozerIconPathId(param.armDozerId);
-    elements.armDozerIcon.src = param.resources.paths.find(v => v.id === armDozerIconPathID)?.path ?? "";
-    elements.caption.innerHTML = param.caption.map(v => `
-        <div class="${ROOT_CLASS}__caption-clause--capitalized">${v.slice(0, 1)}</div>
+    elements.armDozerIcon.src =
+      param.resources.paths.find((v) => v.id === armDozerIconPathID)?.path ??
+      "";
+    elements.caption.innerHTML = param.caption
+      .map(
+        (v) => `
+        <div class="${ROOT_CLASS}__caption-clause--capitalized">${v.slice(
+          0,
+          1
+        )}</div>
         <div class="${ROOT_CLASS}__caption-clause">${v.slice(1)}</div>
-      `).reduce((a, b) => a + b);
+      `
+      )
+      .reduce((a, b) => a + b);
   }
 
   /** @override */
-  destructor(): void {// NOP
+  destructor(): void {
+    // NOP
   }
 
   /** @override */
@@ -128,5 +150,4 @@ export class StageTitle implements DOMScene {
   async waitUntilLoaded(): Promise<void> {
     await this.#isArmDozerIconLoaded;
   }
-
 }

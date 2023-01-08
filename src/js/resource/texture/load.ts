@@ -10,14 +10,23 @@ import type { TextureConfig, TextureResource } from "./resource";
  * @param config テクスチャ設定
  * @return 読み込み結果
  */
-export function loadTexture(resourceRoot: ResourceRoot, config: TextureConfig): Promise<TextureResource> {
+export function loadTexture(
+  resourceRoot: ResourceRoot,
+  config: TextureConfig
+): Promise<TextureResource> {
   const loader = new THREE.TextureLoader();
   return new Promise((resolve, reject) => {
-    loader.load(`${resourceRoot.get()}/${config.path}`, texture => resolve({
-      id: config.id,
-      texture
-    }), undefined, error => {
-      reject(error);
-    });
+    loader.load(
+      `${resourceRoot.get()}/${config.path}`,
+      (texture) =>
+        resolve({
+          id: config.id,
+          texture,
+        }),
+      undefined,
+      (error) => {
+        reject(error);
+      }
+    );
   });
 }

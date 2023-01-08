@@ -1,4 +1,10 @@
-import type { BatteryEnchantmentSkill, BuffPowerSkill, DamageHalvedSkill, PilotSkill, RecoverBatterySkill } from "gbraver-burst-core";
+import type {
+  BatteryEnchantmentSkill,
+  BuffPowerSkill,
+  DamageHalvedSkill,
+  PilotSkill,
+  RecoverBatterySkill,
+} from "gbraver-burst-core";
 
 /**
  * パイロットスキル詳細
@@ -47,8 +53,13 @@ function buffPowerSkillDetail(skill: BuffPowerSkill): string[] {
  * @param skill スキル情報
  * @return 説明文
  */
-function batteryEnchantmentSkillDetail(skill: BatteryEnchantmentSkill): string[] {
-  return [`${skill.duration}ターンだけ、0より大きいバッテリーを出した場合にバッテリー+${skill.batteryEnchantment}する。`, `ただしバーストによる攻撃力アップが半減する。`];
+function batteryEnchantmentSkillDetail(
+  skill: BatteryEnchantmentSkill
+): string[] {
+  return [
+    `${skill.duration}ターンだけ、0より大きいバッテリーを出した場合にバッテリー+${skill.batteryEnchantment}する。`,
+    `ただしバーストによる攻撃力アップが半減する。`,
+  ];
 }
 
 /**
@@ -57,5 +68,7 @@ function batteryEnchantmentSkillDetail(skill: BatteryEnchantmentSkill): string[]
  * @return 説明文
  */
 function damageHalvedSkillDetail(skill: DamageHalvedSkill): string[] {
-  return [`${skill.duration}ターンだけ、全ての被ダメージを1/2にする。この効果は、0防御した時に無効となる。`];
+  return [
+    `${skill.duration}ターンだけ、全ての被ダメージを1/2にする。この効果は、0防御した時に無効となる。`,
+  ];
 }

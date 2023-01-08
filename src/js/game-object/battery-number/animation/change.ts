@@ -13,9 +13,25 @@ import type { BatteryNumberModel } from "../model/battery-number-model";
 export function change(model: BatteryNumberModel, battery: number): Animate {
   return process(() => {
     model.battery = battery;
-  }).chain(tween(model, t => t.to({
-    scale: 1.2
-  }, 200))).chain(tween(model, t => t.to({
-    scale: 1
-  }, 200)));
+  })
+    .chain(
+      tween(model, (t) =>
+        t.to(
+          {
+            scale: 1.2,
+          },
+          200
+        )
+      )
+    )
+    .chain(
+      tween(model, (t) =>
+        t.to(
+          {
+            scale: 1,
+          },
+          200
+        )
+      )
+    );
 }

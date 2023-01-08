@@ -27,14 +27,18 @@ export class PilotBustShotContainer {
    * @param pilotIds パイロットIDリスト
    * @param initialPilotId パイロットID初期値
    */
-  constructor(resources: Resources, pilotIds: PilotId[], initialPilotId: PilotId) {
+  constructor(
+    resources: Resources,
+    pilotIds: PilotId[],
+    initialPilotId: PilotId
+  ) {
     this.#pilotId = initialPilotId;
     this.#root = document.createElement("div");
-    this.#bustShots = pilotIds.map(v => ({
+    this.#bustShots = pilotIds.map((v) => ({
       pilotId: v,
-      bustShot: createPilotBustShot(resources, v)
+      bustShot: createPilotBustShot(resources, v),
     }));
-    this.#bustShots.forEach(v => {
+    this.#bustShots.forEach((v) => {
       v.pilotId === this.#pilotId ? v.bustShot.show() : v.bustShot.hidden();
       this.#root.appendChild(v.bustShot.getRootHTMLElement());
     });
@@ -55,15 +59,15 @@ export class PilotBustShotContainer {
    * @param pilotId 切り替えるパイロットID
    */
   switch(pilotId: PilotId): void {
-    const target = this.#bustShots.find(v => v.pilotId === pilotId);
+    const target = this.#bustShots.find((v) => v.pilotId === pilotId);
 
     if (!target) {
       return;
     }
 
     this.#pilotId = pilotId;
-    const others = this.#bustShots.filter(v => v !== target);
-    others.forEach(v => {
+    const others = this.#bustShots.filter((v) => v !== target);
+    others.forEach((v) => {
       v.bustShot.hidden();
     });
     target.bustShot.show();
@@ -76,7 +80,7 @@ export class PilotBustShotContainer {
    * @return アニメーション
    */
   async exit(): Promise<void> {
-    const target = this.#bustShots.find(v => v.pilotId === this.#pilotId);
+    const target = this.#bustShots.find((v) => v.pilotId === this.#pilotId);
 
     if (!target) {
       return;
@@ -89,7 +93,7 @@ export class PilotBustShotContainer {
    * 非表示にする
    */
   hidden(): void {
-    this.#bustShots.forEach(v => {
+    this.#bustShots.forEach((v) => {
       v.bustShot.hidden();
     });
   }
@@ -100,7 +104,6 @@ export class PilotBustShotContainer {
    * @return 待機結果
    */
   async waitUnlillLoaded(): Promise<void> {
-    await Promise.all(this.#bustShots.map(v => v.bustShot.waitUntilLoaded()));
+    await Promise.all(this.#bustShots.map((v) => v.bustShot.waitUntilLoaded()));
   }
-
 }

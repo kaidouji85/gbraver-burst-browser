@@ -18,11 +18,17 @@ export type BatterySelectorSounds = {
  * @param resources リソース管理オブジェクト
  * @return 生成結果
  */
-export function createBatterySelectorSounds(resources: Resources): BatterySelectorSounds {
-  const pushButtonSound = resources.sounds.find(v => v.id === SOUND_IDS.PUSH_BUTTON)?.sound ?? new Howl({src: ""});
-  const batteryChangeSound = resources.sounds.find(v => v.id === SOUND_IDS.CHANGE_VALUE)?.sound ?? new Howl({src: ""});
+export function createBatterySelectorSounds(
+  resources: Resources
+): BatterySelectorSounds {
+  const pushButtonSound =
+    resources.sounds.find((v) => v.id === SOUND_IDS.PUSH_BUTTON)?.sound ??
+    new Howl({ src: "" });
+  const batteryChangeSound =
+    resources.sounds.find((v) => v.id === SOUND_IDS.CHANGE_VALUE)?.sound ??
+    new Howl({ src: "" });
   return {
     pushButtonSound,
-    batteryChangeSound
+    batteryChangeSound,
   };
 }

@@ -10,5 +10,5 @@ import { EMPTY_PILOT } from "./pilot";
 export const EMPTY_PLAYER: Player = {
   playerId: "emptyPlayer",
   armdozer: EMPTY_ARMDOZER,
-  pilot: EMPTY_PILOT
+  pilot: EMPTY_PILOT,
 };

@@ -2,9 +2,13 @@ import type { DomFloaterActionConnector } from "../dom-floaters/dom-floater-acti
 import { PostBattleFloater } from "../dom-floaters/post-battle/post-battle";
 
 /** バトル終了後行動選択フローターとゲームアクションを関連づける */
-export const postBattleConnector: DomFloaterActionConnector<PostBattleFloater> = (floater, gameAction) => [floater.selectionCompleteNotifier().subscribe(postBattle => {
-  gameAction.next({
-    type: "PostBattleAction",
-    action: postBattle
-  });
-})];
+export const postBattleConnector: DomFloaterActionConnector<
+  PostBattleFloater
+> = (floater, gameAction) => [
+  floater.selectionCompleteNotifier().subscribe((postBattle) => {
+    gameAction.next({
+      type: "PostBattleAction",
+      action: postBattle,
+    });
+  }),
+];

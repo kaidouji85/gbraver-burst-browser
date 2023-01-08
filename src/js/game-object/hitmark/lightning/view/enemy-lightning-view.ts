@@ -21,5 +21,4 @@ export class EnemyLightningView extends PlayerLightningView {
     object3D.position.x *= -1;
     object3D.scale.x *= -1;
   }
-
 }

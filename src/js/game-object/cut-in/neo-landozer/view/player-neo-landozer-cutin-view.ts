@@ -6,7 +6,10 @@ import type { Resources } from "../../../../resource";
 import { TEXTURE_IDS } from "../../../../resource/texture/ids";
 import { HUD_CUT_IN_ZNIDEX } from "../../../hud-zindex";
 import { HUDCutInScale } from "../../../scale";
-import type { AnimationType, NeoLandozerCutInModel } from "../model/neo-landozer-cutin-model";
+import type {
+  AnimationType,
+  NeoLandozerCutInModel,
+} from "../model/neo-landozer-cutin-model";
 import type { NeoLandozerCutInView } from "./neo-landozer-cutin-view";
 export const MAX_ANIMATION = 4;
 export const WIDTH = 800;
@@ -23,23 +26,31 @@ export class PlayerNeoLandozerCutInView implements NeoLandozerCutInView {
   constructor(resources: Resources) {
     this.#group = new THREE.Group();
     this.#group.position.z = HUD_CUT_IN_ZNIDEX;
-    const cutInUpResource = resources.textures.find(v => v.id === TEXTURE_IDS.NEO_LANDOZER_CUTIN_UP);
-    const cutInUp = cutInUpResource ? cutInUpResource.texture : new THREE.Texture();
+    const cutInUpResource = resources.textures.find(
+      (v) => v.id === TEXTURE_IDS.NEO_LANDOZER_CUTIN_UP
+    );
+    const cutInUp = cutInUpResource
+      ? cutInUpResource.texture
+      : new THREE.Texture();
     this.#cutInUp = new HorizontalAnimationMesh({
       texture: cutInUp,
       maxAnimation: MAX_ANIMATION,
       width: WIDTH,
-      height: HEIGHT
+      height: HEIGHT,
     });
-    const cutInDownResource = resources.textures.find(v => v.id === TEXTURE_IDS.NEO_LANDOZER_CUTIN_DOWN);
-    const cutInDown = cutInDownResource ? cutInDownResource.texture : new THREE.Texture();
+    const cutInDownResource = resources.textures.find(
+      (v) => v.id === TEXTURE_IDS.NEO_LANDOZER_CUTIN_DOWN
+    );
+    const cutInDown = cutInDownResource
+      ? cutInDownResource.texture
+      : new THREE.Texture();
     this.#cutInDown = new HorizontalAnimationMesh({
       texture: cutInDown,
       maxAnimation: MAX_ANIMATION,
       width: WIDTH,
-      height: HEIGHT
+      height: HEIGHT,
     });
-    this.#getAllMeshes().forEach(v => {
+    this.#getAllMeshes().forEach((v) => {
       this.#group.add(v.getObject3D());
     });
   }
@@ -48,7 +59,7 @@ export class PlayerNeoLandozerCutInView implements NeoLandozerCutInView {
    * デストラクタ相当の処理
    */
   destructor(): void {
-    this.#getAllMeshes().forEach(v => {
+    this.#getAllMeshes().forEach((v) => {
       v.destructor();
     });
   }
@@ -63,10 +74,14 @@ export class PlayerNeoLandozerCutInView implements NeoLandozerCutInView {
     const activeMesh = this.#getActiveMesh(model.animation.type);
     activeMesh.setOpacity(model.opacity);
     activeMesh.animate(model.animation.frame);
-    this.#getAllMeshes().filter(v => v !== activeMesh).forEach(v => {
-      v.setOpacity(0);
-    });
-    const scale = model.scale * HUDCutInScale(preRender.rendererDOM, preRender.safeAreaInset);
+    this.#getAllMeshes()
+      .filter((v) => v !== activeMesh)
+      .forEach((v) => {
+        v.setOpacity(0);
+      });
+    const scale =
+      model.scale *
+      HUDCutInScale(preRender.rendererDOM, preRender.safeAreaInset);
     this.#group.scale.set(scale, scale, scale);
     this.#group.position.x = model.tracking.x;
     this.#group.position.y = model.tracking.y;
@@ -106,5 +121,4 @@ export class PlayerNeoLandozerCutInView implements NeoLandozerCutInView {
         return this.#cutInUp;
     }
   }
-
 }

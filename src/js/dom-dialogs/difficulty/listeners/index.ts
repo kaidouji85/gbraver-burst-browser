@@ -14,18 +14,27 @@ import { onVeryHardPush } from "./on-very-hard-push";
  * @param props ダイアログプロパティ
  * @return バインドしたイベントリスナのアンサブスクライバ
  */
-export function bindEventListeners(props: DifficultyDialogProps): Unsubscriber[] {
-  return [pushDOMStream(props.backGround).subscribe(action => {
-    onBackGroundPush(props, action);
-  }), pushDOMStream(props.closer).subscribe(action => {
-    onCloserPush(props, action);
-  }), pushDOMStream(props.easy).subscribe(action => {
-    onEasyPush(props, action);
-  }), pushDOMStream(props.normal).subscribe(action => {
-    onNormalPush(props, action);
-  }), pushDOMStream(props.hard).subscribe(action => {
-    onHardPush(props, action);
-  }), pushDOMStream(props.veryHard).subscribe(action => {
-    onVeryHardPush(props, action);
-  })];
+export function bindEventListeners(
+  props: DifficultyDialogProps
+): Unsubscriber[] {
+  return [
+    pushDOMStream(props.backGround).subscribe((action) => {
+      onBackGroundPush(props, action);
+    }),
+    pushDOMStream(props.closer).subscribe((action) => {
+      onCloserPush(props, action);
+    }),
+    pushDOMStream(props.easy).subscribe((action) => {
+      onEasyPush(props, action);
+    }),
+    pushDOMStream(props.normal).subscribe((action) => {
+      onNormalPush(props, action);
+    }),
+    pushDOMStream(props.hard).subscribe((action) => {
+      onHardPush(props, action);
+    }),
+    pushDOMStream(props.veryHard).subscribe((action) => {
+      onVeryHardPush(props, action);
+    }),
+  ];
 }

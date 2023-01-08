@@ -14,11 +14,28 @@ export function popUp(model: ReflectIndocatorModel): Animate {
   return process(() => {
     model.opacity = 0;
     model.scale = 1.2;
-  }).chain(tween(model, t => t.to({
-    opacity: 1,
-    scale: 1
-  }, 400))).chain(delay(600)).chain(tween(model, t => t.to({
-    opacity: 0,
-    scale: 1.1
-  }, 200)));
+  })
+    .chain(
+      tween(model, (t) =>
+        t.to(
+          {
+            opacity: 1,
+            scale: 1,
+          },
+          400
+        )
+      )
+    )
+    .chain(delay(600))
+    .chain(
+      tween(model, (t) =>
+        t.to(
+          {
+            opacity: 0,
+            scale: 1.1,
+          },
+          200
+        )
+      )
+    );
 }

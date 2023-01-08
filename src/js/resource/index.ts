@@ -46,6 +46,6 @@ export function emptyResources(resourceRoot: ResourceRoot): Resources {
     textures: [],
     cubeTextures: [],
     canvasImages: [],
-    sounds: []
+    sounds: [],
   };
 }

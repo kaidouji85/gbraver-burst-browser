@@ -20,44 +20,58 @@ import type { AnimationMeshMapping } from "./animation-mesh-mapping";
  * @return 生成結果
  */
 export function createMeshes(resources: Resources): AnimationMeshMapping[] {
-  return [{
-    type: "STAND",
-    mesh: shinBraverStand(resources)
-  }, {
-    type: "SP_CHARGE",
-    mesh: shinBraverSPCharge(resources)
-  }, {
-    type: "SP_ATTACK",
-    mesh: shinBraverSPAttack(resources)
-  }, {
-    type: "SP_TO_STAND",
-    mesh: shinBraverSPToStand(resources)
-  }, {
-    type: "KNOCK_BACK",
-    mesh: shinBraverKnockBack(resources)
-  }, {
-    type: "GUARD",
-    mesh: shinBraverGuard(resources)
-  }, {
-    type: "DOWN",
-    mesh: shinBraverDown(resources)
-  }, {
-    type: "GUTS_UP",
-    mesh: shinBraverGutsUp(resources)
-  }, {
-    type: "GUTS_DOWN",
-    mesh: shinBraverGutsDown(resources)
-  }, {
-    type: "BURST_UP",
-    mesh: shinBraverBurstUp(resources)
-  }, {
-    type: "BURST_DOWN",
-    mesh: shinBraverBurstDown(resources)
-  }, {
-    type: "BACK_STEP",
-    mesh: shinBraverBackStep(resources)
-  }, {
-    type: "FRONT_STEP",
-    mesh: shinBraverFrontStep(resources)
-  }];
+  return [
+    {
+      type: "STAND",
+      mesh: shinBraverStand(resources),
+    },
+    {
+      type: "SP_CHARGE",
+      mesh: shinBraverSPCharge(resources),
+    },
+    {
+      type: "SP_ATTACK",
+      mesh: shinBraverSPAttack(resources),
+    },
+    {
+      type: "SP_TO_STAND",
+      mesh: shinBraverSPToStand(resources),
+    },
+    {
+      type: "KNOCK_BACK",
+      mesh: shinBraverKnockBack(resources),
+    },
+    {
+      type: "GUARD",
+      mesh: shinBraverGuard(resources),
+    },
+    {
+      type: "DOWN",
+      mesh: shinBraverDown(resources),
+    },
+    {
+      type: "GUTS_UP",
+      mesh: shinBraverGutsUp(resources),
+    },
+    {
+      type: "GUTS_DOWN",
+      mesh: shinBraverGutsDown(resources),
+    },
+    {
+      type: "BURST_UP",
+      mesh: shinBraverBurstUp(resources),
+    },
+    {
+      type: "BURST_DOWN",
+      mesh: shinBraverBurstDown(resources),
+    },
+    {
+      type: "BACK_STEP",
+      mesh: shinBraverBackStep(resources),
+    },
+    {
+      type: "FRONT_STEP",
+      mesh: shinBraverFrontStep(resources),
+    },
+  ];
 }

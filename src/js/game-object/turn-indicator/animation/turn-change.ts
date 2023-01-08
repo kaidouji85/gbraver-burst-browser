@@ -10,10 +10,20 @@ import type { TurnIndicatorModel } from "../model/turn-indicator-model";
  * @param model モデル
  * @return アニメーション
  */
-export function turnChange(isPlayerTurn: boolean, model: TurnIndicatorModel): Animate {
+export function turnChange(
+  isPlayerTurn: boolean,
+  model: TurnIndicatorModel
+): Animate {
   return process(() => {
     model.isPlayerTurn = isPlayerTurn;
-  }).chain(tween(model, t => t.to({
-    opacity: 1
-  }, 500)));
+  }).chain(
+    tween(model, (t) =>
+      t.to(
+        {
+          opacity: 1,
+        },
+        500
+      )
+    )
+  );
 }

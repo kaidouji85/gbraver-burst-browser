@@ -17,7 +17,10 @@ import { createGenesisBraverSounds } from "./sounds/genesis-braver-sounds";
 import type { GenesisBraverView } from "./view/genesis-braver-view";
 
 /** ジェネシスブレイバースプライト */
-export class GenesisBraver extends EmptyArmDozerSprite implements ArmDozerSprite {
+export class GenesisBraver
+  extends EmptyArmDozerSprite
+  implements ArmDozerSprite
+{
   /** ビュー */
   #view: GenesisBraverView;
 
@@ -36,24 +39,30 @@ export class GenesisBraver extends EmptyArmDozerSprite implements ArmDozerSprite
    * @param resources リソース管理オブジェクト
    * @param gameAction ゲームアクション
    */
-  constructor(view: GenesisBraverView, resources: Resources, gameAction: Stream<GameObjectAction>) {
+  constructor(
+    view: GenesisBraverView,
+    resources: Resources,
+    gameAction: Stream<GameObjectAction>
+  ) {
     super();
     this.#view = view;
     this.#sounds = createGenesisBraverSounds(resources);
     this.#model = createInitialValue();
-    this.#unsubscribers = [gameAction.subscribe(action => {
-      if (action.type === "PreRender") {
-        this.#onPreRender(action);
-      } else if (action.type === "Update") {
-        this.#onUpdate();
-      }
-    })];
+    this.#unsubscribers = [
+      gameAction.subscribe((action) => {
+        if (action.type === "PreRender") {
+          this.#onPreRender(action);
+        } else if (action.type === "Update") {
+          this.#onUpdate();
+        }
+      }),
+    ];
   }
 
   /** @override */
   destructor() {
     this.#view.destructor();
-    this.#unsubscribers.forEach(v => {
+    this.#unsubscribers.forEach((v) => {
       v.unsubscribe();
     });
   }
@@ -101,5 +110,4 @@ export class GenesisBraver extends EmptyArmDozerSprite implements ArmDozerSprite
   #onPreRender(action: PreRender): void {
     this.#view.lookAt(action.camera);
   }
-
 }

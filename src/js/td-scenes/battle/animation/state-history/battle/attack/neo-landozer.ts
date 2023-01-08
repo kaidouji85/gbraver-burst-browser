@@ -1,4 +1,11 @@
-import type { BattleResult, CriticalHit, Feint, Guard, Miss, NormalHit } from "gbraver-burst-core";
+import type {
+  BattleResult,
+  CriticalHit,
+  Feint,
+  Guard,
+  Miss,
+  NormalHit,
+} from "gbraver-burst-core";
 
 import { all } from "../../../../../../animation/all";
 import { Animate } from "../../../../../../animation/animate";
@@ -12,7 +19,8 @@ import type { BattleAnimationParamX } from "../animation-param";
  * ネオランドーザ 戦闘アニメーション パラメータ
  * @template RESULT 戦闘結果
  */
-export type NeoLandozerBattle<RESULT extends BattleResult> = BattleAnimationParamX<NeoLandozer, RESULT>;
+export type NeoLandozerBattle<RESULT extends BattleResult> =
+  BattleAnimationParamX<NeoLandozer, RESULT>;
 
 /**
  * アタッカーにフォーカスを合わせる
@@ -22,7 +30,10 @@ export type NeoLandozerBattle<RESULT extends BattleResult> = BattleAnimationPara
  */
 function focusToAttacker(camera: TDCamera, attacker: NeoLandozer): Animate {
   const duration = 400;
-  return all(track(camera, attacker.getObject3D().position.x * 0.6, duration), dolly(camera, "-30", duration));
+  return all(
+    track(camera, attacker.getObject3D().position.x * 0.6, duration),
+    dolly(camera, "-30", duration)
+  );
 }
 
 /** attackが受け取ることができる戦闘結果 */
@@ -34,7 +45,21 @@ type AttackResult = NormalHit | CriticalHit;
  * @return アニメーション
  */
 function attack(param: NeoLandozerBattle<AttackResult>): Animate {
-  return all(param.attackerSprite.charge().chain(delay(500)), focusToAttacker(param.tdCamera, param.attackerSprite)).chain(param.attackerSprite.armHammer()).chain(all(delay(1000).chain(param.attackerSprite.hmToStand()).chain(delay(500)), toInitial(param.tdCamera, 100), param.defenderTD.damageIndicator.popUp(param.result.damage), param.defenderSprite.knockBack(), param.defenderTD.hitMark.shockWave.popUp(), param.defenderHUD.gauge.hp(param.defenderState.armdozer.hp)));
+  return all(
+    param.attackerSprite.charge().chain(delay(500)),
+    focusToAttacker(param.tdCamera, param.attackerSprite)
+  )
+    .chain(param.attackerSprite.armHammer())
+    .chain(
+      all(
+        delay(1000).chain(param.attackerSprite.hmToStand()).chain(delay(500)),
+        toInitial(param.tdCamera, 100),
+        param.defenderTD.damageIndicator.popUp(param.result.damage),
+        param.defenderSprite.knockBack(),
+        param.defenderTD.hitMark.shockWave.popUp(),
+        param.defenderHUD.gauge.hp(param.defenderState.armdozer.hp)
+      )
+    );
 }
 
 /**
@@ -43,7 +68,19 @@ function attack(param: NeoLandozerBattle<AttackResult>): Animate {
  * @return アニメーション
  */
 function guard(param: NeoLandozerBattle<Guard>): Animate {
-  return param.attackerSprite.charge().chain(delay(500)).chain(param.attackerSprite.armHammer()).chain(all(delay(1000).chain(param.attackerSprite.hmToStand()).chain(delay(500)), param.defenderTD.damageIndicator.popUp(param.result.damage), param.defenderSprite.guard(), param.defenderTD.hitMark.shockWave.popUp(), param.defenderHUD.gauge.hp(param.defenderState.armdozer.hp)));
+  return param.attackerSprite
+    .charge()
+    .chain(delay(500))
+    .chain(param.attackerSprite.armHammer())
+    .chain(
+      all(
+        delay(1000).chain(param.attackerSprite.hmToStand()).chain(delay(500)),
+        param.defenderTD.damageIndicator.popUp(param.result.damage),
+        param.defenderSprite.guard(),
+        param.defenderTD.hitMark.shockWave.popUp(),
+        param.defenderHUD.gauge.hp(param.defenderState.armdozer.hp)
+      )
+    );
 }
 
 /**
@@ -52,7 +89,14 @@ function guard(param: NeoLandozerBattle<Guard>): Animate {
  * @return アニメーション
  */
 function miss(param: NeoLandozerBattle<Miss>): Animate {
-  return param.attackerSprite.charge().chain(delay(500)).chain(param.attackerSprite.armHammer()).chain(param.defenderSprite.avoid()).chain(delay(500)).chain(param.attackerSprite.hmToStand()).chain(delay(500));
+  return param.attackerSprite
+    .charge()
+    .chain(delay(500))
+    .chain(param.attackerSprite.armHammer())
+    .chain(param.defenderSprite.avoid())
+    .chain(delay(500))
+    .chain(param.attackerSprite.hmToStand())
+    .chain(delay(500));
 }
 
 /**
@@ -77,7 +121,25 @@ type DownResult = NormalHit | Guard | CriticalHit;
  * @return アニメーション
  */
 function down(param: NeoLandozerBattle<DownResult>): Animate {
-  return all(param.attackerSprite.charge().chain(delay(500)), focusToAttacker(param.tdCamera, param.attackerSprite)).chain(param.attackerSprite.armHammer()).chain(all(delay(1500).chain(param.attackerSprite.hmToStand()).chain(delay(500)), param.attackerHUD.resultIndicator.slideIn().chain(delay(500)).chain(param.attackerHUD.resultIndicator.moveToEdge()), toInitial(param.tdCamera, 100), param.defenderTD.damageIndicator.popUp(param.result.damage), param.defenderSprite.down(), param.defenderTD.hitMark.shockWave.popUp(), param.defenderHUD.gauge.hp(param.defenderState.armdozer.hp)));
+  return all(
+    param.attackerSprite.charge().chain(delay(500)),
+    focusToAttacker(param.tdCamera, param.attackerSprite)
+  )
+    .chain(param.attackerSprite.armHammer())
+    .chain(
+      all(
+        delay(1500).chain(param.attackerSprite.hmToStand()).chain(delay(500)),
+        param.attackerHUD.resultIndicator
+          .slideIn()
+          .chain(delay(500))
+          .chain(param.attackerHUD.resultIndicator.moveToEdge()),
+        toInitial(param.tdCamera, 100),
+        param.defenderTD.damageIndicator.popUp(param.result.damage),
+        param.defenderSprite.down(),
+        param.defenderTD.hitMark.shockWave.popUp(),
+        param.defenderHUD.gauge.hp(param.defenderState.armdozer.hp)
+      )
+    );
 }
 
 /**
@@ -85,61 +147,47 @@ function down(param: NeoLandozerBattle<DownResult>): Animate {
  * @param param パラメータ
  * @return アニメーション
  */
-export function neoLandozerAttack(param: NeoLandozerBattle<BattleResult>): Animate {
+export function neoLandozerAttack(
+  param: NeoLandozerBattle<BattleResult>
+): Animate {
   if (param.isDeath && param.result.name === "NormalHit") {
-    const result = (param.result as NormalHit);
-    return down({ ...param,
-      result
-    });
+    const result = param.result as NormalHit;
+    return down({ ...param, result });
   }
 
   if (param.result.name === "NormalHit") {
-    const result = (param.result as NormalHit);
-    return attack({ ...param,
-      result
-    });
+    const result = param.result as NormalHit;
+    return attack({ ...param, result });
   }
 
   if (param.isDeath && param.result.name === "CriticalHit") {
-    const result = (param.result as CriticalHit);
-    return down({ ...param,
-      result
-    });
+    const result = param.result as CriticalHit;
+    return down({ ...param, result });
   }
 
   if (param.result.name === "CriticalHit") {
-    const result = (param.result as CriticalHit);
-    return attack({ ...param,
-      result
-    });
+    const result = param.result as CriticalHit;
+    return attack({ ...param, result });
   }
 
   if (param.isDeath && param.result.name === "Guard") {
-    const result = (param.result as Guard);
-    return down({ ...param,
-      result
-    });
+    const result = param.result as Guard;
+    return down({ ...param, result });
   }
 
   if (param.result.name === "Guard") {
-    const result = (param.result as Guard);
-    return guard({ ...param,
-      result
-    });
+    const result = param.result as Guard;
+    return guard({ ...param, result });
   }
 
   if (param.result.name === "Miss") {
-    const result = (param.result as Miss);
-    return miss({ ...param,
-      result
-    });
+    const result = param.result as Miss;
+    return miss({ ...param, result });
   }
 
   if (param.result.name === "Feint") {
-    const result = (param.result as Feint);
-    return feint({ ...param,
-      result
-    });
+    const result = param.result as Feint;
+    return feint({ ...param, result });
   }
 
   return empty();

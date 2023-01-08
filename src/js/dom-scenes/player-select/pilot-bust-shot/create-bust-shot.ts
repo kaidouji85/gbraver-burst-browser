@@ -17,7 +17,10 @@ const ROOT_CLASS_NAME = "pilot-bust-shot";
  * @param pilotId パイロットID
  * @return 生成結果
  */
-export function createPilotBustShot(resources: Resources, pilotId: PilotId): PilotBustShot {
+export function createPilotBustShot(
+  resources: Resources,
+  pilotId: PilotId
+): PilotBustShot {
   switch (pilotId) {
     case PilotIds.SHINYA:
       return shinyaBustShot(resources);
@@ -43,7 +46,9 @@ export function createPilotBustShot(resources: Resources, pilotId: PilotId): Pil
  * @return 生成結果
  */
 function shinyaBustShot(resources: Resources): PilotBustShot {
-  const path = resources.paths.find(v => v.id === PathIds.SHINYA_SKILL_CUTIN)?.path ?? "";
+  const path =
+    resources.paths.find((v) => v.id === PathIds.SHINYA_SKILL_CUTIN)?.path ??
+    "";
   const className = `${ROOT_CLASS_NAME}__shinya`;
   return new PilotBustShot(path, className);
 }
@@ -55,7 +60,8 @@ function shinyaBustShot(resources: Resources): PilotBustShot {
  * @return 生成結果
  */
 function gaiBustShot(resources: Resources): PilotBustShot {
-  const path = resources.paths.find(v => v.id === PathIds.GAI_SKILL_CUTIN)?.path ?? "";
+  const path =
+    resources.paths.find((v) => v.id === PathIds.GAI_SKILL_CUTIN)?.path ?? "";
   const className = `${ROOT_CLASS_NAME}__gai`;
   return new PilotBustShot(path, className);
 }
@@ -67,7 +73,8 @@ function gaiBustShot(resources: Resources): PilotBustShot {
  * @return 生成結果
  */
 function raitoBustShot(resources: Resources): PilotBustShot {
-  const path = resources.paths.find(v => v.id === PathIds.RAITO_SKILL_CUTIN)?.path ?? "";
+  const path =
+    resources.paths.find((v) => v.id === PathIds.RAITO_SKILL_CUTIN)?.path ?? "";
   const className = `${ROOT_CLASS_NAME}__raito`;
   return new PilotBustShot(path, className);
 }
@@ -79,7 +86,9 @@ function raitoBustShot(resources: Resources): PilotBustShot {
  * @return 生成結果
  */
 function tsubasaBustShot(resources: Resources): PilotBustShot {
-  const path = resources.paths.find(v => v.id === PathIds.TSUBASA_SKILL_CUTIN)?.path ?? "";
+  const path =
+    resources.paths.find((v) => v.id === PathIds.TSUBASA_SKILL_CUTIN)?.path ??
+    "";
   const className = `${ROOT_CLASS_NAME}__tsubasa`;
   return new PilotBustShot(path, className);
 }

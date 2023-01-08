@@ -1,5 +1,8 @@
 import type { CustomBattleEventProps } from "../../../td-scenes/battle/custom-battle-event";
-import { activeLeftMessageWindowWithFace, activeRightMessageWindowWithFace } from "../../active-message-window";
+import {
+  activeLeftMessageWindowWithFace,
+  activeRightMessageWindowWithFace,
+} from "../../active-message-window";
 import { scrollLeftMessages, scrollRightMessages } from "../../scroll-messages";
 
 /**
@@ -9,9 +12,14 @@ import { scrollLeftMessages, scrollRightMessages } from "../../scroll-messages";
  */
 export async function lose(props: CustomBattleEventProps) {
   activeRightMessageWindowWithFace(props, "Shinya");
-  await scrollRightMessages(props, [["シンヤ", "「あともう少しで勝てたのに」"]]);
+  await scrollRightMessages(props, [
+    ["シンヤ", "「あともう少しで勝てたのに」"],
+  ]);
   props.view.dom.rightMessageWindow.darken();
   activeLeftMessageWindowWithFace(props, "Tsubasa");
-  await scrollLeftMessages(props, [["ツバサ", "「はじめてにしては 悪くなかったぞ"], ["これからも精進あるのみだな」"]]);
+  await scrollLeftMessages(props, [
+    ["ツバサ", "「はじめてにしては 悪くなかったぞ"],
+    ["これからも精進あるのみだな」"],
+  ]);
   props.view.dom.leftMessageWindow.darken();
 }

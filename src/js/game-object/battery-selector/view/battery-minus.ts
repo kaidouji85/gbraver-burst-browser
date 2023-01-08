@@ -36,30 +36,38 @@ export class BatteryMinus {
    * @param param パラメータ
    */
   constructor(param: Param) {
-    const active = param.resources.canvasImages.find(v => v.id === CANVAS_IMAGE_IDS.BATTERY_MINUS)?.image ?? new Image();
+    const active =
+      param.resources.canvasImages.find(
+        (v) => v.id === CANVAS_IMAGE_IDS.BATTERY_MINUS
+      )?.image ?? new Image();
     this.#activeButton = new SimpleImageMesh({
       canvasSize: 256,
       meshSize: 256,
       image: active,
-      imageWidth: 172
+      imageWidth: 172,
     });
-    const buttonDisabled = param.resources.canvasImages.find(v => v.id === CANVAS_IMAGE_IDS.SMALL_BUTTON_DISABLED)?.image ?? new Image();
+    const buttonDisabled =
+      param.resources.canvasImages.find(
+        (v) => v.id === CANVAS_IMAGE_IDS.SMALL_BUTTON_DISABLED
+      )?.image ?? new Image();
     this.#buttonDisabled = new SimpleImageMesh({
       canvasSize: 256,
       meshSize: 256,
       image: buttonDisabled,
-      imageWidth: 176
+      imageWidth: 176,
     });
     this.#pushDetector = circlePushDetector({
       radius: 80,
       segments: 32,
-      gameObjectAction: param.gameObjectAction
+      gameObjectAction: param.gameObjectAction,
     });
     this.#group = new THREE.Group();
     this.#group.add(this.#activeButton.getObject3D());
     this.#group.add(this.#buttonDisabled.getObject3D());
     this.#group.add(this.#pushDetector.getObject3D());
-    this.#unsubscribers = [this.#pushDetector.pushNotifier().subscribe(param.onPush)];
+    this.#unsubscribers = [
+      this.#pushDetector.pushNotifier().subscribe(param.onPush),
+    ];
   }
 
   /** デストラクタ */
@@ -67,7 +75,7 @@ export class BatteryMinus {
     this.#activeButton.destructor();
     this.#buttonDisabled.destructor();
     this.#pushDetector.destructor();
-    this.#unsubscribers.forEach(unsubscriber => {
+    this.#unsubscribers.forEach((unsubscriber) => {
       unsubscriber.unsubscribe();
     });
   }
@@ -75,16 +83,27 @@ export class BatteryMinus {
   /** モデルをビューに反映させる */
   update(model: BatterySelectorModel): void {
     this.#activeButton.setOpacity(model.opacity);
-    this.#activeButton.getObject3D().scale.set(model.minusButtonScale, model.minusButtonScale, model.minusButtonScale);
+    this.#activeButton
+      .getObject3D()
+      .scale.set(
+        model.minusButtonScale,
+        model.minusButtonScale,
+        model.minusButtonScale
+      );
     const isDisabledVisible = !canBatteryMinus(model);
     const disabledOpacity = isDisabledVisible ? model.opacity : 0;
     this.#buttonDisabled.setOpacity(disabledOpacity);
-    this.#buttonDisabled.getObject3D().scale.set(model.minusButtonScale, model.minusButtonScale, model.minusButtonScale);
+    this.#buttonDisabled
+      .getObject3D()
+      .scale.set(
+        model.minusButtonScale,
+        model.minusButtonScale,
+        model.minusButtonScale
+      );
   }
 
   /** シーンに追加するオブジェクトを取得する */
   getObject3D(): THREE.Object3D {
     return this.#group;
   }
-
 }

@@ -20,5 +20,4 @@ export class EnemyBatteryCorrectView extends PlayerBatteryCorrectView {
     const target = this.getObject3D();
     target.position.x *= -1;
   }
-
 }

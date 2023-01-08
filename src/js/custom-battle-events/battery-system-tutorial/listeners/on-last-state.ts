@@ -13,7 +13,10 @@ import { attackDescription } from "../stories/attack-description";
  * @param state ステート
  * @return ステート更新結果
  */
-export async function onLastState(props: Readonly<LastState>, state: BatterySystemTutorialState): Promise<BatterySystemTutorialState> {
+export async function onLastState(
+  props: Readonly<LastState>,
+  state: BatterySystemTutorialState
+): Promise<BatterySystemTutorialState> {
   if (state.isBatterySystemDescriptionComplete) {
     return state;
   }

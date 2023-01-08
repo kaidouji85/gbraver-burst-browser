@@ -8,7 +8,10 @@ import { empty } from "./delay";
  * @return アニメーション
  */
 export function all(...animations: Animate[]): Animate {
-  const next = animations.reduce((a, b) => a._time < b._time ? b : a, empty());
-  const parallels = animations.filter(v => v !== next);
+  const next = animations.reduce(
+    (a, b) => (a._time < b._time ? b : a),
+    empty()
+  );
+  const parallels = animations.filter((v) => v !== next);
   return empty().chain(next, ...parallels);
 }

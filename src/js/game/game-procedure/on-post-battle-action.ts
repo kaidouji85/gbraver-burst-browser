@@ -27,13 +27,16 @@ import { startTutorialSelector } from "./start-tutorial-selector";
  */
 const gotoTitle = async (props: Readonly<GameProps>) => {
   props.domFloaters.hiddenPostBattle();
-  await Promise.all([(async () => {
-    await props.fader.fadeOut();
-    return await startTitle(props);
-  })(), (async () => {
-    await props.bgm.do(fadeOut);
-    await props.bgm.do(stop);
-  })()]);
+  await Promise.all([
+    (async () => {
+      await props.fader.fadeOut();
+      return await startTitle(props);
+    })(),
+    (async () => {
+      await props.bgm.do(fadeOut);
+      await props.bgm.do(stop);
+    })(),
+  ]);
   await props.fader.fadeIn();
   playTitleBGM(props);
 };
@@ -62,18 +65,21 @@ const gotoEnding = async (props: Readonly<GameProps>) => {
  * @return 生成結果、NPCバトル中でない場合はnullを返す
  */
 const createNPCBattle = (inProgress: InProgress) => {
-  if (inProgress.type !== "NPCBattle" || inProgress.subFlow.type !== "PlayingNPCBattle") {
+  if (
+    inProgress.type !== "NPCBattle" ||
+    inProgress.subFlow.type !== "PlayingNPCBattle"
+  ) {
     return null;
   }
 
-  const state = (inProgress.subFlow.state as NPCBattleState);
+  const state = inProgress.subFlow.state as NPCBattleState;
   const stage = getCurrentNPCStage(state) ?? DefaultStage;
   const level = getNPCStageLevel(state);
   const player = state.player;
   return {
     player,
     stage,
-    level
+    level,
   };
 };
 
@@ -86,7 +92,12 @@ const createNPCBattle = (inProgress: InProgress) => {
  * @param level レベル
  * @return 処理が完了したら発火するPromise
  */
-const gotoNPCBattleStage = async (props: Readonly<GameProps>, player: Player, stage: NPCBattleStage, level: number) => {
+const gotoNPCBattleStage = async (
+  props: Readonly<GameProps>,
+  player: Player,
+  stage: NPCBattleStage,
+  level: number
+) => {
   props.domFloaters.hiddenPostBattle();
   await startNPCBattleStage(props, player, stage, level);
 };
@@ -99,7 +110,11 @@ const gotoNPCBattleStage = async (props: Readonly<GameProps>, player: Player, st
  * @param stage チュートリアルステージ
  * @return 処理が完了したら発火するPromise
  */
-const gotoTutorial = async (props: Readonly<GameProps>, level: number, stage: TutorialStage) => {
+const gotoTutorial = async (
+  props: Readonly<GameProps>,
+  level: number,
+  stage: TutorialStage
+) => {
   props.domFloaters.hiddenPostBattle();
   await startTutorial(props, level, stage);
 };
@@ -124,12 +139,15 @@ const gotoTutorialSelector = async (props: Readonly<GameProps>) => {
  * @param action アクション
  * @return 処理が完了したら発火するPromise
  */
-export async function onPostBattleAction(props: GameProps, action: PostBattleAction): Promise<void> {
+export async function onPostBattleAction(
+  props: GameProps,
+  action: PostBattleAction
+): Promise<void> {
   const npcBattle = createNPCBattle(props.inProgress);
 
   if (action.action.type === "GotoTitle") {
     props.inProgress = {
-      type: "None"
+      type: "None",
     };
     await gotoTitle(props);
     return;
@@ -137,26 +155,38 @@ export async function onPostBattleAction(props: GameProps, action: PostBattleAct
 
   if (action.action.type === "GotoEnding") {
     props.inProgress = {
-      type: "None"
+      type: "None",
     };
     await gotoEnding(props);
     return;
   }
 
-  if (npcBattle && (action.action.type === "NextStage" || action.action.type === "Retry")) {
-    await gotoNPCBattleStage(props, npcBattle.player, npcBattle.stage, npcBattle.level);
+  if (
+    npcBattle &&
+    (action.action.type === "NextStage" || action.action.type === "Retry")
+  ) {
+    await gotoNPCBattleStage(
+      props,
+      npcBattle.player,
+      npcBattle.stage,
+      npcBattle.level
+    );
     return;
   }
 
-  if (action.action.type === "Retry" && props.inProgress.type === "Tutorial" && props.inProgress.subFlow.type === "PlayingTutorialStage") {
-    const playingTutorial = (props.inProgress.subFlow as PlayingTutorialStage);
+  if (
+    action.action.type === "Retry" &&
+    props.inProgress.type === "Tutorial" &&
+    props.inProgress.subFlow.type === "PlayingTutorialStage"
+  ) {
+    const playingTutorial = props.inProgress.subFlow as PlayingTutorialStage;
     await gotoTutorial(props, playingTutorial.level, playingTutorial.stage);
   } else if (action.action.type === "GotoTutorialSelect") {
     props.inProgress = {
       type: "Tutorial",
       subFlow: {
-        type: "TutorialStageSelect"
-      }
+        type: "TutorialStageSelect",
+      },
     };
     await gotoTutorialSelector(props);
   }

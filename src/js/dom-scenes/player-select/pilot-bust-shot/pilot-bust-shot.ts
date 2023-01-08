@@ -59,15 +59,21 @@ export class PilotBustShot {
    * @return アニメーション
    */
   enter(): Promise<void> {
-    const animation = this.#image.animate([{
-      transform: "translateX(5em)"
-    }, {
-      transform: "translateX(0)"
-    }], {
-      duration: 200,
-      fill: "forwards",
-      easing: "ease"
-    });
+    const animation = this.#image.animate(
+      [
+        {
+          transform: "translateX(5em)",
+        },
+        {
+          transform: "translateX(0)",
+        },
+      ],
+      {
+        duration: 200,
+        fill: "forwards",
+        easing: "ease",
+      }
+    );
     return waitFinishAnimation(animation);
   }
 
@@ -77,16 +83,21 @@ export class PilotBustShot {
    * @return アニメーション
    */
   exit(): Promise<void> {
-    const animation = this.#image.animate([{
-      transform: "translateX(0)"
-    }, {
-      transform: "translateX(15em)"
-    }], {
-      duration: 200,
-      fill: "forwards",
-      easing: "ease"
-    });
+    const animation = this.#image.animate(
+      [
+        {
+          transform: "translateX(0)",
+        },
+        {
+          transform: "translateX(15em)",
+        },
+      ],
+      {
+        duration: 200,
+        fill: "forwards",
+        easing: "ease",
+      }
+    );
     return waitFinishAnimation(animation);
   }
-
 }

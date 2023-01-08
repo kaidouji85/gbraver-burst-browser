@@ -11,5 +11,13 @@ import type { GameOverParamX } from "./game-over-param";
  * @return アニメーション
  */
 export function neoLandozerWin(param: GameOverParamX<NeoLandozerTD>): Animate {
-  return all(param.winnerTdArmdozer.neoLandozer.guts(), track(param.tdCamera, param.winnerTdArmdozer.neoLandozer.getObject3D().position.x, 800), dolly(param.tdCamera, "-60", 800));
+  return all(
+    param.winnerTdArmdozer.neoLandozer.guts(),
+    track(
+      param.tdCamera,
+      param.winnerTdArmdozer.neoLandozer.getObject3D().position.x,
+      800
+    ),
+    dolly(param.tdCamera, "-60", 800)
+  );
 }

@@ -13,7 +13,10 @@ import { winIndicatorView } from "./view/win-indicator-view";
  * @param gameObjectAction ゲームオブジェクトアクション
  * @return 生成結果
  */
-export function winIndicator(resources: Resources, gameObjectAction: Stream<GameObjectAction>): ResultIndicator {
+export function winIndicator(
+  resources: Resources,
+  gameObjectAction: Stream<GameObjectAction>
+): ResultIndicator {
   const view = winIndicatorView(resources);
   return new ResultIndicator(view, gameObjectAction);
 }
@@ -25,7 +28,10 @@ export function winIndicator(resources: Resources, gameObjectAction: Stream<Game
  * @param gameObjectAction ゲームオブジェクトアクション
  * @return 生成結果
  */
-export function loseIndicator(resources: Resources, gameObjectAction: Stream<GameObjectAction>): ResultIndicator {
+export function loseIndicator(
+  resources: Resources,
+  gameObjectAction: Stream<GameObjectAction>
+): ResultIndicator {
   const view = loseIndicatorView(resources);
   return new ResultIndicator(view, gameObjectAction);
 }
@@ -37,7 +43,10 @@ export function loseIndicator(resources: Resources, gameObjectAction: Stream<Gam
  * @param gameObjectAction ゲームオブジェクトアクション
  * @return 生成結果
  */
-export function drawIndicator(resources: Resources, gameObjectAction: Stream<GameObjectAction>): ResultIndicator {
+export function drawIndicator(
+  resources: Resources,
+  gameObjectAction: Stream<GameObjectAction>
+): ResultIndicator {
   const view = drawIndicatorView(resources);
   return new ResultIndicator(view, gameObjectAction);
 }

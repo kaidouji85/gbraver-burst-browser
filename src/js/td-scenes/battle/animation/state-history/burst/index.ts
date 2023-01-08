@@ -25,7 +25,10 @@ import { wingDozerBurst } from "./wingdozer";
  * @param gameState ゲーム状態
  * @return バーストアニメーション
  */
-export function burstAnimation(props: StateAnimationProps, gameState: GameStateX<BurstEffect>): Animate {
+export function burstAnimation(
+  props: StateAnimationProps,
+  gameState: GameStateX<BurstEffect>
+): Animate {
   const param = toBurstAnimationParam(props, gameState);
 
   if (!param) {
@@ -42,40 +45,40 @@ export function burstAnimation(props: StateAnimationProps, gameState: GameStateX
  * @return バーストアニメーション
  */
 function armdozerAnimation(param: BurstAnimationParam): Animate {
-  if (param.burstArmdozerTD instanceof ShinBraverTD && param.burstArmdozerHUD instanceof ShinBraverHUD) {
+  if (
+    param.burstArmdozerTD instanceof ShinBraverTD &&
+    param.burstArmdozerHUD instanceof ShinBraverHUD
+  ) {
     const burstArmdozerTD: ShinBraverTD = param.burstArmdozerTD;
     const burstArmdozerHUD: ShinBraverHUD = param.burstArmdozerHUD;
-    return shinBraverBurst({ ...param,
-      burstArmdozerTD,
-      burstArmdozerHUD
-    });
+    return shinBraverBurst({ ...param, burstArmdozerTD, burstArmdozerHUD });
   }
 
-  if (param.burstArmdozerTD instanceof NeoLandozerTD && param.burstArmdozerHUD instanceof NeoLandozerHUD) {
+  if (
+    param.burstArmdozerTD instanceof NeoLandozerTD &&
+    param.burstArmdozerHUD instanceof NeoLandozerHUD
+  ) {
     const burstArmdozerTD: NeoLandozerTD = param.burstArmdozerTD;
     const burstArmdozerHUD: NeoLandozerHUD = param.burstArmdozerHUD;
-    return neoLandozerBurst({ ...param,
-      burstArmdozerTD,
-      burstArmdozerHUD
-    });
+    return neoLandozerBurst({ ...param, burstArmdozerTD, burstArmdozerHUD });
   }
 
-  if (param.burstArmdozerTD instanceof LightningDozerTD && param.burstArmdozerHUD instanceof LightningDozerHUD) {
+  if (
+    param.burstArmdozerTD instanceof LightningDozerTD &&
+    param.burstArmdozerHUD instanceof LightningDozerHUD
+  ) {
     const burstArmdozerTD: LightningDozerTD = param.burstArmdozerTD;
     const burstArmdozerHUD: LightningDozerHUD = param.burstArmdozerHUD;
-    return lightningDozerBurst({ ...param,
-      burstArmdozerTD,
-      burstArmdozerHUD
-    });
+    return lightningDozerBurst({ ...param, burstArmdozerTD, burstArmdozerHUD });
   }
 
-  if (param.burstArmdozerTD instanceof WingDozerTD && param.burstArmdozerHUD instanceof WingDozerHUD) {
+  if (
+    param.burstArmdozerTD instanceof WingDozerTD &&
+    param.burstArmdozerHUD instanceof WingDozerHUD
+  ) {
     const burstArmdozerTD: WingDozerTD = param.burstArmdozerTD;
     const burstArmdozerHUD: WingDozerHUD = param.burstArmdozerHUD;
-    return wingDozerBurst({ ...param,
-      burstArmdozerTD,
-      burstArmdozerHUD
-    });
+    return wingDozerBurst({ ...param, burstArmdozerTD, burstArmdozerHUD });
   }
 
   return empty();

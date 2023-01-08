@@ -65,11 +65,11 @@ class SimplePushDetector implements PushDetector {
   constructor(param: SimplePushDetectorParam) {
     const material = new THREE.MeshBasicMaterial({
       color: new THREE.Color("rgb(0, 255, 0)"),
-      visible: param.visible ?? false
+      visible: param.visible ?? false,
     });
     this.#mesh = new THREE.Mesh(param.geometry, material);
     this.#push = createStreamSource();
-    this.#unsubscriber = param.gameObjectAction.subscribe(action => {
+    this.#unsubscriber = param.gameObjectAction.subscribe((action) => {
       if (action.type === "mouseDownRaycaster") {
         this.#mouseDownRaycaster(action);
       } else if (action.type === "touchStartRaycaster") {
@@ -117,17 +117,17 @@ class SimplePushDetector implements PushDetector {
    * @param action アクション
    */
   #touchStartRaycaster(action: TouchStartRaycaster): void {
-    const overlapTouches = action.touch.targetTouches.filter(v => isMeshOverlap(v.raycaster, this.#mesh));
+    const overlapTouches = action.touch.targetTouches.filter((v) =>
+      isMeshOverlap(v.raycaster, this.#mesh)
+    );
     const isTouchOverlap = 0 < overlapTouches.length;
 
     if (isTouchOverlap) {
       this.#push.next(action.event);
     }
   }
-
 }
 /** 円形プッシュ検出生成のパラメータ */
-
 
 type CirclePushDetectorParam = {
   /** 円半径 */
@@ -152,11 +152,13 @@ type CirclePushDetectorParam = {
  * @param param パラメータ
  * @return プッシュ検出
  */
-export function circlePushDetector(param: CirclePushDetectorParam): PushDetector {
+export function circlePushDetector(
+  param: CirclePushDetectorParam
+): PushDetector {
   const geometry = new THREE.CircleGeometry(param.radius, param.segments);
   return new SimplePushDetector({
     geometry: geometry,
     gameObjectAction: param.gameObjectAction,
-    visible: param.visible
+    visible: param.visible,
   });
 }

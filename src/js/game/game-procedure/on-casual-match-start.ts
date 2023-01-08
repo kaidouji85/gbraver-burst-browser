@@ -24,7 +24,7 @@ export async function onCasualMatchStart(props: GameProps): Promise<void> {
       return await props.api.isLogin();
     } catch (e) {
       const dialog = new NetworkErrorDialog(props.resources, {
-        type: "Close"
+        type: "Close",
       });
       props.domDialogBinder.bind(dialog, networkErrorDialogConnector);
       throw e;
@@ -35,8 +35,8 @@ export async function onCasualMatchStart(props: GameProps): Promise<void> {
     props.inProgress = {
       type: "CasualMatch",
       subFlow: {
-        type: "PlayerSelect"
-      }
+        type: "PlayerSelect",
+      },
     };
     props.domDialogBinder.hidden();
     await props.fader.fadeOut();
@@ -47,7 +47,10 @@ export async function onCasualMatchStart(props: GameProps): Promise<void> {
   };
 
   const showLoginDialog = () => {
-    const dialog = new LoginDialog(props.resources, "ネット対戦をするにはログインをしてください");
+    const dialog = new LoginDialog(
+      props.resources,
+      "ネット対戦をするにはログインをしてください"
+    );
     props.domDialogBinder.bind(dialog, loginDialogConnector);
   };
 

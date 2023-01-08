@@ -19,7 +19,7 @@ export function gameLoopStream(): Stream<GameLoop> {
     requestAnimationFrame(gameLoop);
     source.next({
       type: "GameLoop",
-      time: time
+      time: time,
     });
   };
 

@@ -41,7 +41,13 @@ export class IlluminationView {
    * @return シーンに追加するオブジェクト
    */
   getObject3Ds(): THREE.Object3D[] {
-    return [this.#directionalLight1, this.#directionalLight2, this.#directionalLight3, this.#directionalLight4, this.#ambientLight];
+    return [
+      this.#directionalLight1,
+      this.#directionalLight2,
+      this.#directionalLight3,
+      this.#directionalLight4,
+      this.#ambientLight,
+    ];
   }
 
   /**
@@ -55,5 +61,4 @@ export class IlluminationView {
     this.#directionalLight4.intensity = model.intensity * 0.6;
     this.#ambientLight.intensity = model.intensity * 0.8;
   }
-
 }

@@ -20,5 +20,4 @@ export class EnemyReflectIndicatorView extends PlayerReflectIndicatorView {
     const target = this.getObject3D();
     target.position.x *= -1;
   }
-
 }

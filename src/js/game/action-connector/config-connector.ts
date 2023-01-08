@@ -5,13 +5,16 @@ import type { DOMSceneActionConnector } from "../dom-scene-binder/dom-scene-acti
 type Connector = DOMSceneActionConnector<Config>;
 
 /** 設定画面とゲームアクションを関連付ける */
-export const configConnector: Connector = (scene, gameAction) => [scene.prevNotifier().subscribe(() => {
-  gameAction.next({
-    type: "ConfigChangeCancel"
-  });
-}), scene.configChangeNotifier().subscribe(config => {
-  gameAction.next({
-    type: "ConfigChangeComplete",
-    config
-  });
-})];
+export const configConnector: Connector = (scene, gameAction) => [
+  scene.prevNotifier().subscribe(() => {
+    gameAction.next({
+      type: "ConfigChangeCancel",
+    });
+  }),
+  scene.configChangeNotifier().subscribe((config) => {
+    gameAction.next({
+      type: "ConfigChangeComplete",
+      config,
+    });
+  }),
+];

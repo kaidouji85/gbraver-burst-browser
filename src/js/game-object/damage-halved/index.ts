@@ -12,7 +12,10 @@ import { PlayerDamageHalvedView } from "./view/player-damage-halved-view";
  * @param gameObjectAction ゲームオブジェクトアクション
  * @return 生成結果
  */
-export function playerDamageHalved(resources: Resources, gameObjectAction: Stream<GameObjectAction>): DamageHalved {
+export function playerDamageHalved(
+  resources: Resources,
+  gameObjectAction: Stream<GameObjectAction>
+): DamageHalved {
   const view = new PlayerDamageHalvedView(resources);
   return new DamageHalved(view, resources, gameObjectAction);
 }
@@ -24,7 +27,10 @@ export function playerDamageHalved(resources: Resources, gameObjectAction: Strea
  * @param gameObjectAction ゲームオブジェクトアクション
  * @return 生成結果
  */
-export function enemyDamageHalved(resources: Resources, gameObjectAction: Stream<GameObjectAction>): DamageHalved {
+export function enemyDamageHalved(
+  resources: Resources,
+  gameObjectAction: Stream<GameObjectAction>
+): DamageHalved {
   const view = new EnemyDamageHalvedView(resources);
   return new DamageHalved(view, resources, gameObjectAction);
 }

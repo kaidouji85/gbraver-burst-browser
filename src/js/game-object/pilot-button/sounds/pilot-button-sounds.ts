@@ -15,8 +15,9 @@ export class PilotButtonSounds {
    * @param resources リソース管理オブジェクト
    */
   constructor(resources: Resources) {
-    const pushButtonResource = resources.sounds.find(v => v.id === SOUND_IDS.PUSH_BUTTON);
-    this.pushButton = pushButtonResource?.sound ?? new Howl({src: ""});
+    const pushButtonResource = resources.sounds.find(
+      (v) => v.id === SOUND_IDS.PUSH_BUTTON
+    );
+    this.pushButton = pushButtonResource?.sound ?? new Howl({ src: "" });
   }
-
 }

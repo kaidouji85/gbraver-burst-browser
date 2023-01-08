@@ -10,7 +10,7 @@ import { startTitle } from "./start-title";
  */
 export async function onSelectionCancel(props: GameProps): Promise<void> {
   props.inProgress = {
-    type: "None"
+    type: "None",
   };
   await props.fader.fadeOut();
   await startTitle(props);

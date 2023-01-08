@@ -8,4 +8,7 @@ import type { GameAction } from "../game-actions";
  * @param gameAction ゲームアクション通知
  * @return アンサブスクライバ
  */
-export type DomFloaterActionConnector<X> = (floater: X, gameAction: StreamSource<GameAction>) => Unsubscriber[];
+export type DomFloaterActionConnector<X> = (
+  floater: X,
+  gameAction: StreamSource<GameAction>
+) => Unsubscriber[];

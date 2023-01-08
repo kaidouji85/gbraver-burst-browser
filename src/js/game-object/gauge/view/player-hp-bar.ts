@@ -39,33 +39,48 @@ export class PlayerHpBar {
     canvas.width = BAR_CANVAS_WIDTH;
     canvas.height = BAR_CANVAS_HEIGHT;
     const context = canvas.getContext("2d") || new CanvasRenderingContext2D();
-    const bar = resources.canvasImages.find(v => v.id === CANVAS_IMAGE_IDS.HP_BAR)?.image ?? new Image();
-    const barHeight = bar.height * BAR_WIDTH / bar.width;
+    const bar =
+      resources.canvasImages.find((v) => v.id === CANVAS_IMAGE_IDS.HP_BAR)
+        ?.image ?? new Image();
+    const barHeight = (bar.height * BAR_WIDTH) / bar.width;
     context.drawImage(bar, 0, context.canvas.height / 2, BAR_WIDTH, barHeight);
     this.#texture = new THREE.CanvasTexture(canvas);
     animatedTexture(this.#texture, 2, 1);
     this.#texture.needsUpdate = true;
-    const geometry = new THREE.PlaneGeometry(BAR_MESH_WIDTH, BAR_MESH_HEIGHT, 1, 1);
+    const geometry = new THREE.PlaneGeometry(
+      BAR_MESH_WIDTH,
+      BAR_MESH_HEIGHT,
+      1,
+      1
+    );
     const material = new THREE.MeshBasicMaterial({
       side: THREE.DoubleSide,
       transparent: true,
-      map: this.#texture
+      map: this.#texture,
     });
     this.#mesh = new THREE.Mesh(geometry, material);
     this.#mesh.position.set(BAR_MESH_HEIGHT / 2, 0, 1);
     this.#mesh.renderOrder = SPRITE_RENDER_ORDER;
     this.#group.add(this.#mesh);
-    const back = resources.canvasImages.find(v => v.id === CANVAS_IMAGE_IDS.HP_BAR_BACK)?.image ?? new Image();
+    const back =
+      resources.canvasImages.find((v) => v.id === CANVAS_IMAGE_IDS.HP_BAR_BACK)
+        ?.image ?? new Image();
     this.#back = new CanvasMesh({
       canvasWidth: 512,
       canvasHeight: 512,
       meshWidth: 512,
-      meshHeight: 512
+      meshHeight: 512,
     });
-    this.#back.draw(context => {
+    this.#back.draw((context) => {
       const backWidth = 472;
-      const backHeight = back.height * backWidth / back.width;
-      context.drawImage(back, 0, context.canvas.height / 2, backWidth, backHeight);
+      const backHeight = (back.height * backWidth) / back.width;
+      context.drawImage(
+        back,
+        0,
+        context.canvas.height / 2,
+        backWidth,
+        backHeight
+      );
     });
     this.#back.getObject3D().position.set(BAR_MESH_HEIGHT / 2, 0, 0);
     this.#group.add(this.#back.getObject3D());
@@ -89,7 +104,7 @@ export class PlayerHpBar {
    */
   setValue(value: number): void {
     const baseOffsetX = 1 - this.#correctValue(value);
-    this.#texture.offset.x = baseOffsetX * BAR_WIDTH / BAR_CANVAS_WIDTH;
+    this.#texture.offset.x = (baseOffsetX * BAR_WIDTH) / BAR_CANVAS_WIDTH;
   }
 
   /**
@@ -116,5 +131,4 @@ export class PlayerHpBar {
       return value;
     }
   }
-
 }

@@ -32,7 +32,10 @@ export class DOMSceneBinder {
    * @param scene バインドするシーン
    * @param connector ゲームアクションコネクタ
    */
-  bind<X extends DOMScene>(scene: X, connector: DOMSceneActionConnector<X>): void {
+  bind<X extends DOMScene>(
+    scene: X,
+    connector: DOMSceneActionConnector<X>
+  ): void {
     bind(this.#props, scene, connector);
   }
 
@@ -61,5 +64,4 @@ export class DOMSceneBinder {
   getRootHTMLElement(): HTMLElement {
     return this.#props.root;
   }
-
 }

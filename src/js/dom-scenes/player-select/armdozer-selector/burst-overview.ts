@@ -1,4 +1,9 @@
-import type { BuffPower, Burst, ContinuousAttack, LightningBarrier } from "gbraver-burst-core";
+import type {
+  BuffPower,
+  Burst,
+  ContinuousAttack,
+  LightningBarrier,
+} from "gbraver-burst-core";
 
 /**
  * バースト概要を生成する

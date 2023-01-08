@@ -9,6 +9,6 @@ export function createInitialValue(): BatteryNumberModel {
   return {
     opacity: 0,
     scale: 1,
-    battery: 0
+    battery: 0,
   };
 }

@@ -33,7 +33,7 @@ export class HorizontalAnimationMesh {
     const material = new THREE.MeshBasicMaterial({
       side: THREE.DoubleSide,
       transparent: true,
-      map: this.texture
+      map: this.texture,
     });
     this.mesh = new THREE.Mesh(geometry, material);
     this.mesh.renderOrder = SPRITE_RENDER_ORDER;
@@ -66,5 +66,4 @@ export class HorizontalAnimationMesh {
   getObject3D(): THREE.Object3D {
     return this.mesh;
   }
-
 }

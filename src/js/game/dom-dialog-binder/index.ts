@@ -35,7 +35,10 @@ export class DOMDialogBinder {
    * @param dialog ダイアログ
    * @param connector アクションコネクタ
    */
-  bind<X extends DOMDialog>(dialog: X, connector: DomDialogActionConnector<X>): void {
+  bind<X extends DOMDialog>(
+    dialog: X,
+    connector: DomDialogActionConnector<X>
+  ): void {
     this.#removeCurrentDialog();
     this.#unsubscribers = connector(dialog, this.#gameAction);
     this.#root.appendChild(dialog.getRootHTMLElement());
@@ -74,10 +77,9 @@ export class DOMDialogBinder {
     this.#dialog && this.#dialog.destructor();
     this.#dialog && this.#dialog.getRootHTMLElement().remove();
     this.#dialog = null;
-    this.#unsubscribers.forEach(v => {
+    this.#unsubscribers.forEach((v) => {
       v.unsubscribe();
     });
     this.#unsubscribers = [];
   }
-
 }

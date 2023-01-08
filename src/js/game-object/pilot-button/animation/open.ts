@@ -15,9 +15,20 @@ export function open(model: PilotButtonModel, canPilot: boolean): Animate {
     model.disabled = true;
     model.canPilot = canPilot;
     model.opacity = 0;
-  }).chain(tween(model, t => t.to({
-    opacity: 1
-  }, 200))).chain(process(() => {
-    model.disabled = false;
-  }));
+  })
+    .chain(
+      tween(model, (t) =>
+        t.to(
+          {
+            opacity: 1,
+          },
+          200
+        )
+      )
+    )
+    .chain(
+      process(() => {
+        model.disabled = false;
+      })
+    );
 }

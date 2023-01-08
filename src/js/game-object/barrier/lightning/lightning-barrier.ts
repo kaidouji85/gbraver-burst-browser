@@ -1,4 +1,4 @@
-import TWEEN, {Group} from "@tweenjs/tween.js";
+import TWEEN, { Group } from "@tweenjs/tween.js";
 import * as THREE from "three";
 
 import { Animate } from "../../../animation/animate";
@@ -32,20 +32,26 @@ export class LightningBarrierGameEffect {
    * @param resources リソース管理オブジェクト
    * @param gameObjectAction ゲームオブジェクトアクション
    */
-  constructor(resources: Resources, gameObjectAction: Stream<GameObjectAction>) {
+  constructor(
+    resources: Resources,
+    gameObjectAction: Stream<GameObjectAction>
+  ) {
     this.#model = createInitialValue();
     this.#view = new LightningBarrierView(resources);
     this.#sounds = new LightningBarrierSounds(resources);
     this.#tweenGroup = new TWEEN.Group();
-    this.#unsubscribers = [gameObjectAction.subscribe(action => {
-      if (action.type === "Update") {
-        this.#onUpdate(action);
-      } else if (action.type === "PreRender") {
-        this.#onPreRender(action);
-      }
-    }), firstUpdate(gameObjectAction).subscribe(() => {
-      this.#onFirstUpdate();
-    })];
+    this.#unsubscribers = [
+      gameObjectAction.subscribe((action) => {
+        if (action.type === "Update") {
+          this.#onUpdate(action);
+        } else if (action.type === "PreRender") {
+          this.#onPreRender(action);
+        }
+      }),
+      firstUpdate(gameObjectAction).subscribe(() => {
+        this.#onFirstUpdate();
+      }),
+    ];
   }
 
   /**
@@ -53,7 +59,7 @@ export class LightningBarrierGameEffect {
    */
   destructor(): void {
     this.#view.destructor();
-    this.#unsubscribers.forEach(v => {
+    this.#unsubscribers.forEach((v) => {
       v.unsubscribe();
     });
     this.#tweenGroup.removeAll();
@@ -111,5 +117,4 @@ export class LightningBarrierGameEffect {
   #onPreRender(action: PreRender): void {
     this.#view.lookAt(action.camera);
   }
-
 }

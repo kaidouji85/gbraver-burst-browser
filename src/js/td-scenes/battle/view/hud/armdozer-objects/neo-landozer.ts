@@ -2,7 +2,10 @@ import type { Player, PlayerId } from "gbraver-burst-core";
 import * as THREE from "three";
 
 import type { GameObjectAction } from "../../../../../game-object/action/game-object-action";
-import { enemyNeoLandozerCutIn, playerNeoLandozerCutIn } from "../../../../../game-object/cut-in/neo-landozer";
+import {
+  enemyNeoLandozerCutIn,
+  playerNeoLandozerCutIn,
+} from "../../../../../game-object/cut-in/neo-landozer";
 import { NeoLandozerCutIn } from "../../../../../game-object/cut-in/neo-landozer/neo-landozer-cutin";
 import type { Resources } from "../../../../../resource";
 import type { Stream } from "../../../../../stream/stream";
@@ -42,7 +45,6 @@ export class NeoLandozerHUD implements HUDArmdozerObjects, NeoLandozerHUDField {
   getObject3Ds(): THREE.Object3D[] {
     return [this.cutIn.getObject3D()];
   }
-
 }
 
 /**
@@ -53,9 +55,13 @@ export class NeoLandozerHUD implements HUDArmdozerObjects, NeoLandozerHUDField {
  * @param state プレイヤー情報
  * @return 生成結果
  */
-export function playerNeoLandozerHUD(resources: Resources, gameObjectAction: Stream<GameObjectAction>, state: Player): NeoLandozerHUD {
+export function playerNeoLandozerHUD(
+  resources: Resources,
+  gameObjectAction: Stream<GameObjectAction>,
+  state: Player
+): NeoLandozerHUD {
   return new NeoLandozerHUD(state.playerId, {
-    cutIn: playerNeoLandozerCutIn(resources, gameObjectAction)
+    cutIn: playerNeoLandozerCutIn(resources, gameObjectAction),
   });
 }
 
@@ -67,8 +73,12 @@ export function playerNeoLandozerHUD(resources: Resources, gameObjectAction: Str
  * @param state プレイヤー情報
  * @return 生成結果
  */
-export function enemyNeoLandozerHUD(resources: Resources, gameObjectAction: Stream<GameObjectAction>, state: Player): NeoLandozerHUD {
+export function enemyNeoLandozerHUD(
+  resources: Resources,
+  gameObjectAction: Stream<GameObjectAction>,
+  state: Player
+): NeoLandozerHUD {
   return new NeoLandozerHUD(state.playerId, {
-    cutIn: enemyNeoLandozerCutIn(resources, gameObjectAction)
+    cutIn: enemyNeoLandozerCutIn(resources, gameObjectAction),
   });
 }

@@ -1,4 +1,10 @@
-import type { Command, GameState, GbraverBurstCore, Player, PlayerCommand } from "gbraver-burst-core";
+import type {
+  Command,
+  GameState,
+  GbraverBurstCore,
+  Player,
+  PlayerCommand,
+} from "gbraver-burst-core";
 import { startGbraverBurst } from "gbraver-burst-core";
 
 import { playerUuid } from "../uuid/player";
@@ -23,7 +29,7 @@ export class NPCBattleRoom {
     this.enemy = {
       playerId: playerUuid(),
       armdozer: npc.armdozer,
-      pilot: npc.pilot
+      pilot: npc.pilot,
     };
     this._core = startGbraverBurst([player, this.enemy]);
   }
@@ -46,13 +52,15 @@ export class NPCBattleRoom {
   async progress(command: Command): Promise<GameState[]> {
     const playerCommand: PlayerCommand = {
       playerId: this.player.playerId,
-      command
+      command,
     };
     const enemyCommand: PlayerCommand = {
       playerId: this.enemy.playerId,
-      command: this._npc.routine(this.enemy.playerId, this._core.stateHistory())
+      command: this._npc.routine(
+        this.enemy.playerId,
+        this._core.stateHistory()
+      ),
     };
     return this._core.progress([playerCommand, enemyCommand]);
   }
-
 }

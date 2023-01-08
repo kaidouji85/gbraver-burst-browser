@@ -26,23 +26,22 @@ export type CreatePropsParams = RootInnerHTMLParams;
  * @param params パラメータ
  * @return 生成した画面プロパティ
  */
-export function createTutorialTitleProps(params: CreatePropsParams): TutorialTitleProps {
+export function createTutorialTitleProps(
+  params: CreatePropsParams
+): TutorialTitleProps {
   const ids = {
     stand: domUuid(),
-    bustShot: domUuid()
+    bustShot: domUuid(),
   };
   const root = document.createElement("div");
   root.className = ROOT_CLASS;
   root.innerHTML = rootInnerHtml(ids, params);
-  const {
-    stand,
-    bustShot
-  } = extractElements(root, ids);
+  const { stand, bustShot } = extractElements(root, ids);
   const isStandLoaded = waitElementLoaded(stand);
   const isBustShotLoaded = waitElementLoaded(bustShot);
   return {
     root,
     isStandLoaded,
-    isBustShotLoaded
+    isBustShotLoaded,
   };
 }

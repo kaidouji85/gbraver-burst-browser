@@ -1,7 +1,10 @@
 import type { GameState } from "gbraver-burst-core";
 
 import { play } from "../../../bgm/bgm-operators";
-import { stateAnimation, stateHistoryAnimation } from "../animation/state-history";
+import {
+  stateAnimation,
+  stateHistoryAnimation,
+} from "../animation/state-history";
 import { animationPlayer } from "../animation-player";
 import type { BattleSceneProps } from "../battle-scene-props";
 
@@ -20,13 +23,21 @@ export async function start(props: Readonly<BattleSceneProps>): Promise<void> {
     }
 
     const removeLastState = props.initialState.slice(0, -1);
-    await animationPlayer(props).play(stateHistoryAnimation(props, removeLastState));
-    const eventProps = { ...props,
-      update: props.initialState
-    };
-    props.customBattleEvent && (await props.customBattleEvent.beforeLastState(eventProps));
-    const lastState: GameState = props.initialState[props.initialState.length - 1];
-    await Promise.all([animationPlayer(props).play(stateAnimation(props, lastState)), props.customBattleEvent ? props.customBattleEvent.onLastState(eventProps) : Promise.resolve()]);
-    props.customBattleEvent && (await props.customBattleEvent.afterLastState(eventProps));
+    await animationPlayer(props).play(
+      stateHistoryAnimation(props, removeLastState)
+    );
+    const eventProps = { ...props, update: props.initialState };
+    props.customBattleEvent &&
+      (await props.customBattleEvent.beforeLastState(eventProps));
+    const lastState: GameState =
+      props.initialState[props.initialState.length - 1];
+    await Promise.all([
+      animationPlayer(props).play(stateAnimation(props, lastState)),
+      props.customBattleEvent
+        ? props.customBattleEvent.onLastState(eventProps)
+        : Promise.resolve(),
+    ]);
+    props.customBattleEvent &&
+      (await props.customBattleEvent.afterLastState(eventProps));
   });
 }

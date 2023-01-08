@@ -1,4 +1,8 @@
-import { ARMDOZER_SPRITE_STANDARD_X, ARMDOZER_SPRITE_STANDARD_Y, ARMDOZER_SPRITE_STANDARD_Z } from "../../position";
+import {
+  ARMDOZER_SPRITE_STANDARD_X,
+  ARMDOZER_SPRITE_STANDARD_Y,
+  ARMDOZER_SPRITE_STANDARD_Z,
+} from "../../position";
 import type { GenesisBraverModel } from "./genesis-braver-model";
 
 /**
@@ -9,12 +13,12 @@ export function createInitialValue(): GenesisBraverModel {
   return {
     animation: {
       type: "STAND",
-      frame: 0
+      frame: 0,
     },
     position: {
       x: ARMDOZER_SPRITE_STANDARD_X,
       y: ARMDOZER_SPRITE_STANDARD_Y,
-      z: ARMDOZER_SPRITE_STANDARD_Z
-    }
+      z: ARMDOZER_SPRITE_STANDARD_Z,
+    },
   };
 }

@@ -4,7 +4,10 @@ import { Animate } from "../../../animation/animate";
 import { onResizePerspectiveCamera } from "../../../camera/resize";
 import type { Update } from "../../../game-loop/update";
 import type { Stream, Unsubscriber } from "../../../stream/stream";
-import { getViewPortHeight, getViewPortWidth } from "../../../view-port/view-port-size";
+import {
+  getViewPortHeight,
+  getViewPortWidth,
+} from "../../../view-port/view-port-size";
 import type { Resize } from "../../../window/resize";
 import { lookAt } from "./animation/look-at";
 import { move } from "./animation/move";
@@ -30,18 +33,21 @@ export class TDCamera {
     this.#model = createInitialValue();
     const aspect = getViewPortWidth() / getViewPortHeight();
     this.#camera = new THREE.PerspectiveCamera(75, aspect, 1, 10000);
-    this.#unsubscriber = [update.subscribe(() => {
-      this.#update();
-    }), resize.subscribe(action => {
-      this.#resize(action);
-    })];
+    this.#unsubscriber = [
+      update.subscribe(() => {
+        this.#update();
+      }),
+      resize.subscribe((action) => {
+        this.#resize(action);
+      }),
+    ];
   }
 
   /**
    * デストラクタ
    */
   destructor(): void {
-    this.#unsubscriber.forEach(v => {
+    this.#unsubscriber.forEach((v) => {
       v.unsubscribe();
     });
   }
@@ -92,5 +98,4 @@ export class TDCamera {
   #update(): void {
     engage(this.#model, this.#camera);
   }
-
 }

@@ -28,15 +28,24 @@ export const INITIAL_VIEW_POINT_Z = 0;
  * @return アニメーション
  */
 export function toInitial(camera: TDCamera, duration: number): Animate {
-  return all(camera.move({
-    x: INITIAL_CAMERA_POSITION_X,
-    y: INITIAL_CAMERA_POSITION_Y,
-    z: INITIAL_CAMERA_POSITION_Z
-  }, duration), camera.lookAt({
-    x: INITIAL_VIEW_POINT_X,
-    y: INITIAL_VIEW_POINT_Y,
-    z: INITIAL_VIEW_POINT_Z
-  }, duration));
+  return all(
+    camera.move(
+      {
+        x: INITIAL_CAMERA_POSITION_X,
+        y: INITIAL_CAMERA_POSITION_Y,
+        z: INITIAL_CAMERA_POSITION_Z,
+      },
+      duration
+    ),
+    camera.lookAt(
+      {
+        x: INITIAL_VIEW_POINT_X,
+        y: INITIAL_VIEW_POINT_Y,
+        z: INITIAL_VIEW_POINT_Z,
+      },
+      duration
+    )
+  );
 }
 
 /**
@@ -47,12 +56,25 @@ export function toInitial(camera: TDCamera, duration: number): Animate {
  * @param duration 移動時間
  * @return アニメーション
  */
-export function dolly(camera: TDCamera, z: number | string, duration: number): Animate {
-  return all(camera.move({
-    z: z
-  }, duration), camera.lookAt({
-    z: z
-  }, duration));
+export function dolly(
+  camera: TDCamera,
+  z: number | string,
+  duration: number
+): Animate {
+  return all(
+    camera.move(
+      {
+        z: z,
+      },
+      duration
+    ),
+    camera.lookAt(
+      {
+        z: z,
+      },
+      duration
+    )
+  );
 }
 
 /**
@@ -63,10 +85,23 @@ export function dolly(camera: TDCamera, z: number | string, duration: number): A
  * @param duration 移動時間
  * @return アニメーション
  */
-export function track(camera: TDCamera, x: number | string, duration: number): Animate {
-  return all(camera.move({
-    x: x
-  }, duration), camera.lookAt({
-    x: x
-  }, duration));
+export function track(
+  camera: TDCamera,
+  x: number | string,
+  duration: number
+): Animate {
+  return all(
+    camera.move(
+      {
+        x: x,
+      },
+      duration
+    ),
+    camera.lookAt(
+      {
+        x: x,
+      },
+      duration
+    )
+  );
 }

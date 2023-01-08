@@ -26,11 +26,15 @@ export class Lightning {
    * @param resources リソース管理オブジェクト
    * @param gameObjectAction ゲームオブジェクトアクション
    */
-  constructor(view: LightningView, resources: Resources, gameObjectAction: Stream<GameObjectAction>) {
+  constructor(
+    view: LightningView,
+    resources: Resources,
+    gameObjectAction: Stream<GameObjectAction>
+  ) {
     this.#model = createInitialValue();
     this.#view = view;
     this.#sounds = new LightningSounds(resources);
-    this.#unsubscriber = gameObjectAction.subscribe(action => {
+    this.#unsubscriber = gameObjectAction.subscribe((action) => {
       if (action.type === "Update") {
         this.#onUpdate();
       }
@@ -69,5 +73,4 @@ export class Lightning {
   #onUpdate(): void {
     this.#view.engage(this.#model);
   }
-
 }

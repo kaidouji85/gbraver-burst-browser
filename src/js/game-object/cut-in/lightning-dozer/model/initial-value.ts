@@ -9,13 +9,13 @@ export function createInitialValue(): LightningDozerCutInModel {
   return {
     animation: {
       type: "CUT_IN_DOWN",
-      frame: 1
+      frame: 1,
     },
     tracking: {
       x: 0,
-      y: 0
+      y: 0,
     },
     opacity: 0,
-    scale: 1
+    scale: 1,
   };
 }

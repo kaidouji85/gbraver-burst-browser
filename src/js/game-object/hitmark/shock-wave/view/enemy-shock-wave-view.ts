@@ -20,5 +20,4 @@ export class EnemyShockWaveView extends PlayerShockWaveView {
     this.getObject3D().scale.x *= -1;
     this.getObject3D().position.x *= -1;
   }
-
 }

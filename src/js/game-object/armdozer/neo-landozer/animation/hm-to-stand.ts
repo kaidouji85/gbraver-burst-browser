@@ -5,17 +5,37 @@ import type { NeoLandozerModel } from "../model/neo-landozer-model";
 import { NeoLandozerSounds } from "../sounds/neo-landozer-sounds";
 
 /** アームハンマー -> 立ち */
-export function hmToStand(model: NeoLandozerModel, sounds: NeoLandozerSounds): Animate {
+export function hmToStand(
+  model: NeoLandozerModel,
+  sounds: NeoLandozerSounds
+): Animate {
   return process(() => {
     model.animation.type = "HM_TO_STAND";
     model.animation.frame = 0;
     sounds.motor.play();
-  }).chain(tween(model.animation, t => t.to({
-    frame: 1
-  }, 300)), tween(model.position, t => t.to({
-    x: "+100"
-  }, 300))).chain(process(() => {
-    model.animation.type = "STAND";
-    model.animation.frame = 0;
-  }));
+  })
+    .chain(
+      tween(model.animation, (t) =>
+        t.to(
+          {
+            frame: 1,
+          },
+          300
+        )
+      ),
+      tween(model.position, (t) =>
+        t.to(
+          {
+            x: "+100",
+          },
+          300
+        )
+      )
+    )
+    .chain(
+      process(() => {
+        model.animation.type = "STAND";
+        model.animation.frame = 0;
+      })
+    );
 }

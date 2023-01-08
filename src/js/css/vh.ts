@@ -34,7 +34,7 @@ export class CssVH {
    * @param resize リサイズストリーム
    */
   constructor(resize: Stream<Resize>) {
-    this._unsubscriber = resize.subscribe(action => {
+    this._unsubscriber = resize.subscribe((action) => {
       this.#onResize(action);
     });
     setVH(getViewPortHeight());

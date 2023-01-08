@@ -10,7 +10,10 @@ import { PathIds } from "../path";
 import type { ResourceRoot } from "../resource-root";
 import type { SoundConfig } from "../sound";
 import { SOUND_CONFIGS } from "../sound";
-import { DEVELOPING_TEXTURE_CONFIGS, TEXTURE_CONFIGS } from "../texture/configs";
+import {
+  DEVELOPING_TEXTURE_CONFIGS,
+  TEXTURE_CONFIGS,
+} from "../texture/configs";
 import type { TextureConfig } from "../texture/resource";
 import { extractUnloadedResorceConfigs } from "./extract-unloaded-resorce-configs";
 import { mergeResources } from "./merge-resources";
@@ -18,7 +21,13 @@ import type { ResourceLoading } from "./resource-loading";
 import { resourceLoading } from "./resource-loading";
 
 /** フルリソース読み込みでのプリフェッチ対象パス */
-const PRE_FETCH_PATH_IDS: PathId[] = [PathIds.NPC_COURSE_EASY_ICON, PathIds.NPC_COURSE_NORMAL_ICON, PathIds.NPC_COURSE_HARD_ICON, PathIds.NPC_COURSE_VERY_HARD_ICON, PathIds.CLOSER];
+const PRE_FETCH_PATH_IDS: PathId[] = [
+  PathIds.NPC_COURSE_EASY_ICON,
+  PathIds.NPC_COURSE_NORMAL_ICON,
+  PathIds.NPC_COURSE_HARD_ICON,
+  PathIds.NPC_COURSE_VERY_HARD_ICON,
+  PathIds.CLOSER,
+];
 
 /** リソース設定をあつめたもの */
 type Configs = {
@@ -35,7 +44,7 @@ const FULL_RESOURCE_CONFIGS: Configs = {
   textureConfigs: TEXTURE_CONFIGS,
   cubeTextureConfigs: CUBE_TEXTURE_CONFIGS,
   canvasImageConfigs: CANVAS_IMAGE_CONFIGS,
-  soundConfigs: SOUND_CONFIGS
+  soundConfigs: SOUND_CONFIGS,
 };
 
 /** 開発中素材も含めたフルリソース設定 */
@@ -44,7 +53,7 @@ const DEVELOPING_FULL_RESOURCE_CONFIGS: Configs = {
   textureConfigs: [...TEXTURE_CONFIGS, ...DEVELOPING_TEXTURE_CONFIGS],
   cubeTextureConfigs: CUBE_TEXTURE_CONFIGS,
   canvasImageConfigs: CANVAS_IMAGE_CONFIGS,
-  soundConfigs: SOUND_CONFIGS
+  soundConfigs: SOUND_CONFIGS,
 };
 
 /**
@@ -52,10 +61,13 @@ const DEVELOPING_FULL_RESOURCE_CONFIGS: Configs = {
  * @param resourceRoot リソースルート
  * @return リソース読み込みオブジェクト
  */
-export function fullResourceLoading(resourceRoot: ResourceRoot): ResourceLoading {
-  return resourceLoading({ ...FULL_RESOURCE_CONFIGS,
+export function fullResourceLoading(
+  resourceRoot: ResourceRoot
+): ResourceLoading {
+  return resourceLoading({
+    ...FULL_RESOURCE_CONFIGS,
     resourceRoot,
-    preFetchPaths: PRE_FETCH_PATH_IDS
+    preFetchPaths: PRE_FETCH_PATH_IDS,
   });
 }
 
@@ -64,10 +76,13 @@ export function fullResourceLoading(resourceRoot: ResourceRoot): ResourceLoading
  * @param resourceRoot リソースルート
  * @return リソース読み込みオブジェクト
  */
-export function developingFullResourceLoading(resourceRoot: ResourceRoot): ResourceLoading {
-  return resourceLoading({ ...DEVELOPING_FULL_RESOURCE_CONFIGS,
+export function developingFullResourceLoading(
+  resourceRoot: ResourceRoot
+): ResourceLoading {
+  return resourceLoading({
+    ...DEVELOPING_FULL_RESOURCE_CONFIGS,
     resourceRoot,
-    preFetchPaths: PRE_FETCH_PATH_IDS
+    preFetchPaths: PRE_FETCH_PATH_IDS,
   });
 }
 
@@ -78,17 +93,22 @@ export function developingFullResourceLoading(resourceRoot: ResourceRoot): Resou
  * @param configs フルフリース設定
  * @return リソース読み込みオブジェクト
  */
-function resourceDifferentialLoad(resources: Resources, configs: Configs): ResourceLoading {
+function resourceDifferentialLoad(
+  resources: Resources,
+  configs: Configs
+): ResourceLoading {
   const differentialConfigs = extractUnloadedResorceConfigs(configs, resources);
-  const loading = resourceLoading({ ...differentialConfigs,
+  const loading = resourceLoading({
+    ...differentialConfigs,
     resourceRoot: resources.rootPath,
-    preFetchPaths: PRE_FETCH_PATH_IDS
+    preFetchPaths: PRE_FETCH_PATH_IDS,
   });
-  return { ...loading,
+  return {
+    ...loading,
     resources: (async () => {
       const loaded = await loading.resources;
       return mergeResources(resources, loaded);
-    })()
+    })(),
   };
 }
 
@@ -98,7 +118,9 @@ function resourceDifferentialLoad(resources: Resources, configs: Configs): Resou
  * @param resources リソース管理オブジェクト
  * @return リソース読み込みオブジェクト
  */
-export function fullResourceDifferentialLoad(resources: Resources): ResourceLoading {
+export function fullResourceDifferentialLoad(
+  resources: Resources
+): ResourceLoading {
   return resourceDifferentialLoad(resources, FULL_RESOURCE_CONFIGS);
 }
 
@@ -108,6 +130,8 @@ export function fullResourceDifferentialLoad(resources: Resources): ResourceLoad
  * @param resources リソース管理オブジェクト
  * @return リソース読み込みオブジェクト
  */
-export function developingFullResourceDifferentialLoad(resources: Resources): ResourceLoading {
+export function developingFullResourceDifferentialLoad(
+  resources: Resources
+): ResourceLoading {
   return resourceDifferentialLoad(resources, DEVELOPING_FULL_RESOURCE_CONFIGS);
 }

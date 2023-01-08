@@ -1,5 +1,8 @@
 import { Title } from "../../dom-scenes/title";
-import {LoggedInAccount, TitleAccount} from "../../dom-scenes/title/title-account";
+import {
+  LoggedInAccount,
+  TitleAccount,
+} from "../../dom-scenes/title/title-account";
 import { waitTime } from "../../wait/wait-time";
 import { titleConnector } from "../action-connector/title-connector";
 import { MAX_LOADING_TIME } from "../dom-scene-binder/max-loading-time";
@@ -15,18 +18,23 @@ import type { GameProps } from "../game-props";
  */
 export async function startTitle(props: Readonly<GameProps>): Promise<Title> {
   const createLoggedInAccount = async (): Promise<LoggedInAccount> => {
-    const [name, pictureURL] = await Promise.all([props.api.getUserName(), props.api.getUserPictureURL()]);
+    const [name, pictureURL] = await Promise.all([
+      props.api.getUserName(),
+      props.api.getUserPictureURL(),
+    ]);
     return {
       type: "LoggedInAccount",
       name,
-      pictureURL
+      pictureURL,
     };
   };
 
   const isLogin = await props.api.isLogin();
-  const account: TitleAccount = isLogin ? await createLoggedInAccount() : {
-    type: "GuestAccount"
-  };
+  const account: TitleAccount = isLogin
+    ? await createLoggedInAccount()
+    : {
+        type: "GuestAccount",
+      };
   const scene = new Title({
     resources: props.resources,
     account,
@@ -34,7 +42,7 @@ export async function startTitle(props: Readonly<GameProps>): Promise<Title> {
     isApiServerEnable: props.isAPIServerEnable,
     termsOfServiceURL: props.termsOfServiceURL,
     privacyPolicyURL: props.privacyPolicyURL,
-    contactURL: props.contactURL
+    contactURL: props.contactURL,
   });
   props.domSceneBinder.bind(scene, titleConnector);
   await Promise.race([scene.waitUntilLoaded(), waitTime(MAX_LOADING_TIME)]);

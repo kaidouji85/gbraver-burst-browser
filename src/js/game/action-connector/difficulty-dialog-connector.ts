@@ -5,13 +5,16 @@ import type { DomDialogActionConnector } from "../dom-dialog-binder/dom-dialog-a
 type Connector = DomDialogActionConnector<DifficultyDialog>;
 
 /** 難易度選択ダイアログとゲームアクションを関連付ける */
-export const difficultyDialogConnector: Connector = (dialog, gameAction) => [dialog.selectionCompleteNotifier().subscribe(difficulty => {
-  gameAction.next({
-    type: "DifficultySelectionComplete",
-    difficulty
-  });
-}), dialog.closeDialogNotifier().subscribe(() => {
-  gameAction.next({
-    type: "DifficultySelectionCancel"
-  });
-})];
+export const difficultyDialogConnector: Connector = (dialog, gameAction) => [
+  dialog.selectionCompleteNotifier().subscribe((difficulty) => {
+    gameAction.next({
+      type: "DifficultySelectionComplete",
+      difficulty,
+    });
+  }),
+  dialog.closeDialogNotifier().subscribe(() => {
+    gameAction.next({
+      type: "DifficultySelectionCancel",
+    });
+  }),
+];

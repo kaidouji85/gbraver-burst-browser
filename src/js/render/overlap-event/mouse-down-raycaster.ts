@@ -21,11 +21,19 @@ export type MouseDownRaycaster = {
  * @param origin 変換元
  * @return 変換結果
  */
-export function toMouseDownRaycaster(origin: MouseDown, renderer: HTMLElement, camera: THREE.Camera): MouseDownRaycaster {
-  const mouseRaycaster: MouseRaycaster = createMouseRaycaster(origin.event, renderer, camera);
+export function toMouseDownRaycaster(
+  origin: MouseDown,
+  renderer: HTMLElement,
+  camera: THREE.Camera
+): MouseDownRaycaster {
+  const mouseRaycaster: MouseRaycaster = createMouseRaycaster(
+    origin.event,
+    renderer,
+    camera
+  );
   return {
     type: "mouseDownRaycaster",
     mouse: mouseRaycaster,
-    event: origin.event
+    event: origin.event,
   };
 }

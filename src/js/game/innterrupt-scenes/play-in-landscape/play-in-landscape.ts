@@ -11,7 +11,8 @@ const ROOT_CLASS = "play-in-landscape";
  * @return ルート要素innerHTML
  */
 function rootInnerHTML(resources: Resources) {
-  const playInLandscapePath = resources.paths.find(v => v.id === PathIds.PLAY_IN_LANDSCAPE)?.path ?? "";
+  const playInLandscapePath =
+    resources.paths.find((v) => v.id === PathIds.PLAY_IN_LANDSCAPE)?.path ?? "";
   return `
     <span class="${ROOT_CLASS}__caption">横向きでプレイしてください</span>
     <img class="${ROOT_CLASS}__image" src = "${playInLandscapePath}"/>
@@ -41,5 +42,4 @@ export class PlayInLandscape {
   getRootHTMLElement(): HTMLElement {
     return this.#root;
   }
-
 }

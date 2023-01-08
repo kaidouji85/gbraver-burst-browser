@@ -199,4 +199,32 @@ export type SelectTutorialStage = {
 /**
  * ゲーム全体で利用するアクション
  */
-export type GameAction = ReloadRequest | ExitMailVerifiedIncomplete | ArcadeStart | CasualMatchStart | MatchingCanceled | SelectionComplete | SelectionCancel | DifficultySelectionComplete | DifficultySelectionCancel | EndBattle | SuddenlyBattleEnd | PostBattleAction | EndNPCEnding | UniversalLogin | LoginCancel | Logout | AccountDeleteConsent | DeleteAccount | CancelAccountDeletion | WebSocketAPIError | WebSocketAPIUnintentionalClose | EndNetworkError | ConfigChangeStart | ConfigChangeComplete | ConfigChangeCancel | TutorialStart | CancelTutorialSelect | SelectTutorialStage;
+export type GameAction =
+  | ReloadRequest
+  | ExitMailVerifiedIncomplete
+  | ArcadeStart
+  | CasualMatchStart
+  | MatchingCanceled
+  | SelectionComplete
+  | SelectionCancel
+  | DifficultySelectionComplete
+  | DifficultySelectionCancel
+  | EndBattle
+  | SuddenlyBattleEnd
+  | PostBattleAction
+  | EndNPCEnding
+  | UniversalLogin
+  | LoginCancel
+  | Logout
+  | AccountDeleteConsent
+  | DeleteAccount
+  | CancelAccountDeletion
+  | WebSocketAPIError
+  | WebSocketAPIUnintentionalClose
+  | EndNetworkError
+  | ConfigChangeStart
+  | ConfigChangeComplete
+  | ConfigChangeCancel
+  | TutorialStart
+  | CancelTutorialSelect
+  | SelectTutorialStage;

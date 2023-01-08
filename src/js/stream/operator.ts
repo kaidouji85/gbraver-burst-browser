@@ -1,5 +1,11 @@
 import { merge as mergeRXJS } from "rxjs";
-import { filter as filterRXJS, first as firstRXJS, map as mapRXJS, share as shareRXJS, tap as tapRXJS } from "rxjs/operators";
+import {
+  filter as filterRXJS,
+  first as firstRXJS,
+  map as mapRXJS,
+  share as shareRXJS,
+  tap as tapRXJS,
+} from "rxjs/operators";
 
 import type { Operator, Stream } from "./stream";
 import { createStream } from "./stream";
@@ -12,10 +18,12 @@ import { createStream } from "./stream";
  * @param fn 変換関数
  * @return オペレータ
  */
-export const map = <T, U>(fn: (arg0: T) => U): Operator<T, U> => (origin: Stream<T>): Stream<U> => {
-  const observable = origin.getRxjsObservable().pipe(mapRXJS(fn));
-  return createStream(observable);
-};
+export const map =
+  <T, U>(fn: (arg0: T) => U): Operator<T, U> =>
+  (origin: Stream<T>): Stream<U> => {
+    const observable = origin.getRxjsObservable().pipe(mapRXJS(fn));
+    return createStream(observable);
+  };
 
 /**
  * ストリームデータを変更せずに副作用のある操作を行う
@@ -24,10 +32,12 @@ export const map = <T, U>(fn: (arg0: T) => U): Operator<T, U> => (origin: Stream
  * @param fn 副作用操作を行う関数
  * @return オペレータ
  */
-export const tap = <T>(fn: (arg0: T) => void): Operator<T, T> => (origin: Stream<T>): Stream<T> => {
-  const observable = origin.getRxjsObservable().pipe(tapRXJS(fn));
-  return createStream(observable);
-};
+export const tap =
+  <T>(fn: (arg0: T) => void): Operator<T, T> =>
+  (origin: Stream<T>): Stream<T> => {
+    const observable = origin.getRxjsObservable().pipe(tapRXJS(fn));
+    return createStream(observable);
+  };
 
 /**
  * 条件を満たさないストリームを止める
@@ -36,10 +46,12 @@ export const tap = <T>(fn: (arg0: T) => void): Operator<T, T> => (origin: Stream
  * @param fn 判定関数
  * @return オペレータ
  */
-export const filter = <T>(fn: (arg0: T) => boolean): Operator<T, T> => (origin: Stream<T>): Stream<T> => {
-  const observable = origin.getRxjsObservable().pipe(filterRXJS(fn));
-  return createStream(observable);
-};
+export const filter =
+  <T>(fn: (arg0: T) => boolean): Operator<T, T> =>
+  (origin: Stream<T>): Stream<T> => {
+    const observable = origin.getRxjsObservable().pipe(filterRXJS(fn));
+    return createStream(observable);
+  };
 
 /**
  * 最初のストリーム以外は止める
@@ -47,20 +59,24 @@ export const filter = <T>(fn: (arg0: T) => boolean): Operator<T, T> => (origin: 
  * @template T ストリームデータ型
  * @return オペレータ
  */
-export const first = <T>(): Operator<T, T> => (origin: Stream<T>): Stream<T> => {
-  const observable = origin.getRxjsObservable().pipe(firstRXJS());
-  return createStream(observable);
-};
+export const first =
+  <T>(): Operator<T, T> =>
+  (origin: Stream<T>): Stream<T> => {
+    const observable = origin.getRxjsObservable().pipe(firstRXJS());
+    return createStream(observable);
+  };
 
 /**
  * RXJSのshareを呼び出す
  *
  * @return オペレータ
  */
-export const share = <T>(): Operator<T, T> => (origin: Stream<T>): Stream<T> => {
-  const observable = origin.getRxjsObservable().pipe(shareRXJS());
-  return createStream(observable);
-};
+export const share =
+  <T>(): Operator<T, T> =>
+  (origin: Stream<T>): Stream<T> => {
+    const observable = origin.getRxjsObservable().pipe(shareRXJS());
+    return createStream(observable);
+  };
 
 /**
  * ストリームを合成する
@@ -70,7 +86,12 @@ export const share = <T>(): Operator<T, T> => (origin: Stream<T>): Stream<T> => 
  * @param newItem 合成するストリーム
  * @return オペレータ
  */
-export const merge = <T, U>(newItem: Stream<U>): Operator<T, T | U> => (origin: Stream<T>): Stream<T | U> => {
-  const observable = mergeRXJS(origin.getRxjsObservable(), newItem.getRxjsObservable());
-  return createStream(observable);
-};
+export const merge =
+  <T, U>(newItem: Stream<U>): Operator<T, T | U> =>
+  (origin: Stream<T>): Stream<T | U> => {
+    const observable = mergeRXJS(
+      origin.getRxjsObservable(),
+      newItem.getRxjsObservable()
+    );
+    return createStream(observable);
+  };

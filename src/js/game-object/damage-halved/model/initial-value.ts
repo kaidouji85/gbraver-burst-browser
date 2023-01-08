@@ -8,6 +8,6 @@ import type { DamageHalvedModel } from "./damage-halved-model";
 export function createInitialValue(): DamageHalvedModel {
   return {
     opacity: 0,
-    scale: 1
+    scale: 1,
   };
 }

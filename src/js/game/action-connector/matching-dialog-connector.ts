@@ -5,8 +5,10 @@ import type { DomDialogActionConnector } from "../dom-dialog-binder/dom-dialog-a
 type Connector = DomDialogActionConnector<MatchingDialog>;
 
 /** マッチングダイアログとゲームアクションを関連付ける */
-export const matchingDialogConnector: Connector = (dialog, gameAction) => [dialog.matchingCanceledNotifier().subscribe(() => {
-  gameAction.next({
-    type: "MatchingCanceled"
-  });
-})];
+export const matchingDialogConnector: Connector = (dialog, gameAction) => [
+  dialog.matchingCanceledNotifier().subscribe(() => {
+    gameAction.next({
+      type: "MatchingCanceled",
+    });
+  }),
+];

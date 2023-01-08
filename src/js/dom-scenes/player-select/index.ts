@@ -45,11 +45,15 @@ type Elements = {
  * @return 抽出結果
  */
 function extractElements(root: HTMLElement, ids: DataIDs): Elements {
-  const working: HTMLElement = root.querySelector(`[data-id="${ids.working}"]`) ?? document.createElement("div");
-  const selector: HTMLElement = root.querySelector(`[data-id="${ids.selector}"]`) ?? document.createElement("div");
+  const working: HTMLElement =
+    root.querySelector(`[data-id="${ids.working}"]`) ??
+    document.createElement("div");
+  const selector: HTMLElement =
+    root.querySelector(`[data-id="${ids.selector}"]`) ??
+    document.createElement("div");
   return {
     working,
-    selector
+    selector,
   };
 }
 
@@ -78,43 +82,72 @@ export class PlayerSelect implements DOMScene {
    * @param resources リソース管理オブジェクト
    */
   constructor(resources: Resources) {
-    const armDozerIds = [ArmDozerIds.SHIN_BRAVER, ArmDozerIds.WING_DOZER, ArmDozerIds.NEO_LANDOZER, ArmDozerIds.LIGHTNING_DOZER];
-    const pilotIds = [PilotIds.SHINYA, PilotIds.TSUBASA, PilotIds.GAI, PilotIds.RAITO];
+    const armDozerIds = [
+      ArmDozerIds.SHIN_BRAVER,
+      ArmDozerIds.WING_DOZER,
+      ArmDozerIds.NEO_LANDOZER,
+      ArmDozerIds.LIGHTNING_DOZER,
+    ];
+    const pilotIds = [
+      PilotIds.SHINYA,
+      PilotIds.TSUBASA,
+      PilotIds.GAI,
+      PilotIds.RAITO,
+    ];
     this.#armdozerId = ArmDozerIds.SHIN_BRAVER;
     this.#pilotId = PilotIds.SHINYA;
     this.#playerDecide = createStreamSource();
     this.#prev = createStreamSource();
     const dataIDs = {
       selector: domUuid(),
-      working: domUuid()
+      working: domUuid(),
     };
     this.#root = document.createElement("div");
     this.#root.className = "player-select";
     this.#root.innerHTML = rootInnerHTML(dataIDs);
     const elements = extractElements(this.#root, dataIDs);
-    this.#armdozerBustShot = new ArmdozerBustShotContainer(resources, armDozerIds, this.#armdozerId);
+    this.#armdozerBustShot = new ArmdozerBustShotContainer(
+      resources,
+      armDozerIds,
+      this.#armdozerId
+    );
     elements.working.appendChild(this.#armdozerBustShot.getRootHTMLElement());
-    this.#pilotBustShot = new PilotBustShotContainer(resources, pilotIds, this.#pilotId);
+    this.#pilotBustShot = new PilotBustShotContainer(
+      resources,
+      pilotIds,
+      this.#pilotId
+    );
     this.#pilotBustShot.hidden();
     elements.working.appendChild(this.#pilotBustShot.getRootHTMLElement());
-    this.#armdozerSelector = new ArmdozerSelector(resources, armDozerIds, this.#armdozerId);
+    this.#armdozerSelector = new ArmdozerSelector(
+      resources,
+      armDozerIds,
+      this.#armdozerId
+    );
     elements.selector.appendChild(this.#armdozerSelector.getRootHTMLElement());
     this.#pilotSelector = new PilotSelector(resources, pilotIds, this.#pilotId);
     this.#pilotSelector.hidden();
     elements.selector.appendChild(this.#pilotSelector.getRootHTMLElement());
-    this.#unsubscribers = [this.#armdozerSelector.changeNotifier().subscribe(v => {
-      this.#onArmdozerChange(v);
-    }), this.#armdozerSelector.decideNotifier().subscribe(v => {
-      this.#onArmdozerDecided(v);
-    }), this.#armdozerSelector.prevNotifier().subscribe(() => {
-      this.#onArmdozerSelectorPrev();
-    }), this.#pilotSelector.changeNotifier().subscribe(v => {
-      this.#onPilotChange(v);
-    }), this.#pilotSelector.decideNotifier().subscribe(v => {
-      this.#onPilotDecided(v);
-    }), this.#pilotSelector.prevNotifier().subscribe(() => {
-      this.#onPilotSelectorPrev();
-    })];
+    this.#unsubscribers = [
+      this.#armdozerSelector.changeNotifier().subscribe((v) => {
+        this.#onArmdozerChange(v);
+      }),
+      this.#armdozerSelector.decideNotifier().subscribe((v) => {
+        this.#onArmdozerDecided(v);
+      }),
+      this.#armdozerSelector.prevNotifier().subscribe(() => {
+        this.#onArmdozerSelectorPrev();
+      }),
+      this.#pilotSelector.changeNotifier().subscribe((v) => {
+        this.#onPilotChange(v);
+      }),
+      this.#pilotSelector.decideNotifier().subscribe((v) => {
+        this.#onPilotDecided(v);
+      }),
+      this.#pilotSelector.prevNotifier().subscribe(() => {
+        this.#onPilotSelectorPrev();
+      }),
+    ];
   }
 
   /**
@@ -123,7 +156,7 @@ export class PlayerSelect implements DOMScene {
   destructor(): void {
     this.#armdozerSelector.destructor();
     this.#pilotSelector.destructor();
-    this.#unsubscribers.forEach(v => {
+    this.#unsubscribers.forEach((v) => {
       v.unsubscribe();
     });
   }
@@ -143,7 +176,12 @@ export class PlayerSelect implements DOMScene {
    * @return 待機結果
    */
   async waitUntilLoaded(): Promise<void> {
-    await Promise.all([this.#armdozerBustShot.waitUntilLoaded(), this.#armdozerSelector.waitUntilLoaded(), this.#pilotBustShot.waitUnlillLoaded(), this.#pilotSelector.waitUntilLoaded()]);
+    await Promise.all([
+      this.#armdozerBustShot.waitUntilLoaded(),
+      this.#armdozerSelector.waitUntilLoaded(),
+      this.#pilotBustShot.waitUnlillLoaded(),
+      this.#pilotSelector.waitUntilLoaded(),
+    ]);
   }
 
   /**
@@ -211,7 +249,7 @@ export class PlayerSelect implements DOMScene {
     this.#pilotId = pilotId;
     this.#playerDecide.next({
       armdozerId: this.#armdozerId,
-      pilotId: this.#pilotId
+      pilotId: this.#pilotId,
     });
   }
 
@@ -224,5 +262,4 @@ export class PlayerSelect implements DOMScene {
     this.#pilotSelector.hidden();
     this.#armdozerSelector.show();
   }
-
 }

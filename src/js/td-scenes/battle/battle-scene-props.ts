@@ -113,7 +113,9 @@ export type BattleScenePropsCreatorParams = {
  * @param params パラメータ
  * @return 生成結果
  */
-export function createBattleSceneProps(params: BattleScenePropsCreatorParams): BattleSceneProps {
+export function createBattleSceneProps(
+  params: BattleScenePropsCreatorParams
+): BattleSceneProps {
   return {
     playerId: params.player.playerId,
     animationTimeScale: params.initialAnimationTimeScale,
@@ -129,9 +131,9 @@ export function createBattleSceneProps(params: BattleScenePropsCreatorParams): B
       player: params.player,
       enemy: params.enemy,
       gameLoop: params.gameLoop,
-      resize: params.resize
+      resize: params.resize,
     }),
     sounds: new BattleSceneSounds(params.resources, params.playingBGM),
-    bgm: params.bgm
+    bgm: params.bgm,
   };
 }

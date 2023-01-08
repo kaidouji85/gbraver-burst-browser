@@ -11,11 +11,11 @@ export function createInitialValue(): ResultIndicatorModel {
     opacity: 0,
     worldCoordinate: {
       x: 0,
-      y: 0
+      y: 0,
     },
     localCoordinate: {
       x: 0,
-      y: 0
-    }
+      y: 0,
+    },
   };
 }

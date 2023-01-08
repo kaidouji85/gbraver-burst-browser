@@ -29,12 +29,19 @@ export class ShockWave {
    * @param resources リソース管理オブジェクト
    * @param gameObjectAction ゲームオブジェクトアクション
    */
-  constructor(view: ShockWaveView, initialModel: ShockWaveModel, resources: Resources, gameObjectAction: Stream<GameObjectAction>) {
+  constructor(
+    view: ShockWaveView,
+    initialModel: ShockWaveModel,
+    resources: Resources,
+    gameObjectAction: Stream<GameObjectAction>
+  ) {
     this.#model = initialModel;
     this.#view = view;
-    const hitResource = resources.sounds.find(v => v.id === SOUND_IDS.MECHA_IMPACT);
-    this.#hitSound = hitResource ? hitResource.sound : new Howl({src: ""});
-    this.#unsubscriber = gameObjectAction.subscribe(action => {
+    const hitResource = resources.sounds.find(
+      (v) => v.id === SOUND_IDS.MECHA_IMPACT
+    );
+    this.#hitSound = hitResource ? hitResource.sound : new Howl({ src: "" });
+    this.#unsubscriber = gameObjectAction.subscribe((action) => {
       if (action.type === "Update") {
         this.#onUpdate();
       } else if (action.type === "PreRender") {
@@ -86,5 +93,4 @@ export class ShockWave {
   #onPreRender(action: PreRender): void {
     this.#view.lookAt(action.camera);
   }
-
 }

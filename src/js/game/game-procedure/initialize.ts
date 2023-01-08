@@ -28,7 +28,10 @@ export async function initialize(props: GameProps): Promise<void> {
     props.serviceWorker = await loadServiceWorker();
   }
 
-  const [isLogin, isMailVerified] = await Promise.all([props.api.isLogin(), props.api.isMailVerified()]);
+  const [isLogin, isMailVerified] = await Promise.all([
+    props.api.isLogin(),
+    props.api.isMailVerified(),
+  ]);
 
   if (isLogin && !isMailVerified) {
     const mailAddress = await props.api.getMail();

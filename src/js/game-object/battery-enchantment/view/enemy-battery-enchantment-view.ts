@@ -20,5 +20,4 @@ export class EnemyBatteryEnchantmentView extends PlayerBatteryEnchantmentView {
     const target = super.getObject3D();
     target.position.x *= -1;
   }
-
 }

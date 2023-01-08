@@ -1,7 +1,10 @@
 import type { BattleResult } from "gbraver-burst-core";
 
 import type { CustomBattleEventProps } from "../../../td-scenes/battle/custom-battle-event";
-import { activeLeftMessageWindowWithFace, activeRightMessageWindowWithFace } from "../../active-message-window";
+import {
+  activeLeftMessageWindowWithFace,
+  activeRightMessageWindowWithFace,
+} from "../../active-message-window";
 import { scrollLeftMessages, scrollRightMessages } from "../../scroll-messages";
 
 /**
@@ -15,7 +18,10 @@ export async function enemyAttackMiss(props: CustomBattleEventProps) {
   await scrollRightMessages(props, [["シンヤ", "「よし 回避成功ッス」"]]);
   props.view.dom.rightMessageWindow.darken();
   activeLeftMessageWindowWithFace(props, "Tsubasa");
-  await scrollLeftMessages(props, [["ツバサ", "「素晴らしいマニューバだ シンヤ"], ["私よりも君の方が大きいバッテリーを出したので　攻撃を完全回避したぞ」"]]);
+  await scrollLeftMessages(props, [
+    ["ツバサ", "「素晴らしいマニューバだ シンヤ"],
+    ["私よりも君の方が大きいバッテリーを出したので　攻撃を完全回避したぞ」"],
+  ]);
   props.view.dom.leftMessageWindow.darken();
 }
 
@@ -27,10 +33,16 @@ export async function enemyAttackMiss(props: CustomBattleEventProps) {
  */
 export async function enemyAttackGuarded(props: CustomBattleEventProps) {
   activeRightMessageWindowWithFace(props, "Shinya");
-  await scrollRightMessages(props, [["シンヤ", "「クッ 避けられなかった"], ["けど思った程のダメージじゃないッスね」"]]);
+  await scrollRightMessages(props, [
+    ["シンヤ", "「クッ 避けられなかった"],
+    ["けど思った程のダメージじゃないッスね」"],
+  ]);
   props.view.dom.rightMessageWindow.darken();
   activeLeftMessageWindowWithFace(props, "Tsubasa");
-  await scrollLeftMessages(props, [["ツバサ", "「私の攻撃をガードするとはな"], ["私と君が同じバッテリーを出したので攻撃をガード ダメージが半減されたな」"]]);
+  await scrollLeftMessages(props, [
+    ["ツバサ", "「私の攻撃をガードするとはな"],
+    ["私と君が同じバッテリーを出したので攻撃をガード ダメージが半減されたな」"],
+  ]);
   props.view.dom.leftMessageWindow.darken();
 }
 
@@ -42,10 +54,16 @@ export async function enemyAttackGuarded(props: CustomBattleEventProps) {
  */
 export async function enemyAttackHit(props: CustomBattleEventProps) {
   activeRightMessageWindowWithFace(props, "Shinya");
-  await scrollRightMessages(props, [["シンヤ", "「すごいダメージ ッス"], ["ツバサ先輩 少しは加減してくださいッスよ"]]);
+  await scrollRightMessages(props, [
+    ["シンヤ", "「すごいダメージ ッス"],
+    ["ツバサ先輩 少しは加減してくださいッスよ"],
+  ]);
   props.view.dom.rightMessageWindow.darken();
   activeLeftMessageWindowWithFace(props, "Tsubasa");
-  await scrollLeftMessages(props, [["ツバサ", "「すまない これでも手心を加えたつもりなのだがな"], ["私の方が君よりも大きいバッテリーを出したので 攻撃を当てさせてもらった」"]]);
+  await scrollLeftMessages(props, [
+    ["ツバサ", "「すまない これでも手心を加えたつもりなのだがな"],
+    ["私の方が君よりも大きいバッテリーを出したので 攻撃を当てさせてもらった」"],
+  ]);
   props.view.dom.leftMessageWindow.darken();
 }
 
@@ -56,8 +74,14 @@ export async function enemyAttackHit(props: CustomBattleEventProps) {
  * @param battleResult 戦闘結果
  * @return ストーリーが完了したら発火するPromise
  */
-export async function enemyAttack(props: CustomBattleEventProps, battleResult: BattleResult) {
-  if (battleResult.name === "NormalHit" || battleResult.name === "CriticalHit") {
+export async function enemyAttack(
+  props: CustomBattleEventProps,
+  battleResult: BattleResult
+) {
+  if (
+    battleResult.name === "NormalHit" ||
+    battleResult.name === "CriticalHit"
+  ) {
     await enemyAttackHit(props);
   } else if (battleResult.name === "Guard") {
     await enemyAttackGuarded(props);

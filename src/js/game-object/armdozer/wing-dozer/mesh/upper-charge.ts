@@ -18,7 +18,7 @@ export function wingDozerUpperCharge(resources: Resources): ArmdozerAnimation {
     maxAnimation: MAX_ANIMATION,
     resources: resources,
     width: MESH_WIDTH,
-    height: MESH_HEIGHT
+    height: MESH_HEIGHT,
   });
   const object = ret.getObject3D();
   object.position.y = MESH_Y;

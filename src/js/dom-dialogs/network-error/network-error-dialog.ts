@@ -69,10 +69,15 @@ type Elements = {
  * @return 抽出結果
  */
 function extractElements(root: HTMLElement, ids: DataIDs): Elements {
-  const postNetworkErrorButtonElement = root.querySelector(`[data-id="${ids.postNetworkErrorButton}"]`);
-  const postNetworkErrorButton = postNetworkErrorButtonElement instanceof HTMLButtonElement ? postNetworkErrorButtonElement : document.createElement("button");
+  const postNetworkErrorButtonElement = root.querySelector(
+    `[data-id="${ids.postNetworkErrorButton}"]`
+  );
+  const postNetworkErrorButton =
+    postNetworkErrorButtonElement instanceof HTMLButtonElement
+      ? postNetworkErrorButtonElement
+      : document.createElement("button");
   return {
-    postNetworkErrorButton
+    postNetworkErrorButton,
   };
 }
 
@@ -95,7 +100,7 @@ export class NetworkErrorDialog implements DOMDialog {
   constructor(resources: Resources, postNetworkError: PostNetworkError) {
     this.#postNetworkError = postNetworkError;
     const dataIDs = {
-      postNetworkErrorButton: domUuid()
+      postNetworkErrorButton: domUuid(),
     };
     this.#root = document.createElement("div");
     this.#root.className = ROOT_CLASS_NAME;
@@ -104,18 +109,22 @@ export class NetworkErrorDialog implements DOMDialog {
     const elements = extractElements(this.#root, dataIDs);
     this.#postNetworkErrorButton = elements.postNetworkErrorButton;
     this.#postNetworkErrorSource = createStreamSource();
-    this.#unsubscribers = [pushDOMStream(this.#postNetworkErrorButton).subscribe(action => {
-      this.#onPostNetworkErrorButtonPush(action);
-    })];
+    this.#unsubscribers = [
+      pushDOMStream(this.#postNetworkErrorButton).subscribe((action) => {
+        this.#onPostNetworkErrorButtonPush(action);
+      }),
+    ];
     this.#exclusive = new Exclusive();
-    this.#pushButton = resources.sounds.find(v => v.id === SOUND_IDS.PUSH_BUTTON)?.sound ?? new Howl({src: ""});
+    this.#pushButton =
+      resources.sounds.find((v) => v.id === SOUND_IDS.PUSH_BUTTON)?.sound ??
+      new Howl({ src: "" });
   }
 
   /**
    * デストラクタ相当の処理
    */
   destructor(): void {
-    this.#unsubscribers.forEach(v => {
+    this.#unsubscribers.forEach((v) => {
       v.unsubscribe();
     });
   }
@@ -146,9 +155,11 @@ export class NetworkErrorDialog implements DOMDialog {
   #onPostNetworkErrorButtonPush(action: PushDOM): void {
     this.#exclusive.execute(async () => {
       action.event.preventDefault();
-      await Promise.all([this.#pushButton.play(), pop(this.#postNetworkErrorButton)]);
+      await Promise.all([
+        this.#pushButton.play(),
+        pop(this.#postNetworkErrorButton),
+      ]);
       this.#postNetworkErrorSource.next(this.#postNetworkError);
     });
   }
-
 }

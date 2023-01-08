@@ -18,5 +18,4 @@ export class EnemyDamageHalvedView extends PlayerDamageHalvedView {
     const target = super.getObject3D();
     target.position.x *= -1;
   }
-
 }

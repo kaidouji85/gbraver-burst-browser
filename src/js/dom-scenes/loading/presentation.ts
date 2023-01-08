@@ -25,8 +25,12 @@ export class LoadingPresentation {
     `;
     this.#root.className = "loading";
     this.#root.style.display = "flex";
-    this.#text = this.#root.querySelector(`[data-id="${textId}"]`) || document.createElement("div");
-    this.#bar = this.#root.querySelector(`[data-id="${barId}"]`) || document.createElement("div");
+    this.#text =
+      this.#root.querySelector(`[data-id="${textId}"]`) ||
+      document.createElement("div");
+    this.#bar =
+      this.#root.querySelector(`[data-id="${barId}"]`) ||
+      document.createElement("div");
     this.setCompletedRate(0);
   }
 
@@ -48,5 +52,4 @@ export class LoadingPresentation {
   getRootHTMLElement(): HTMLElement {
     return this.#root;
   }
-
 }

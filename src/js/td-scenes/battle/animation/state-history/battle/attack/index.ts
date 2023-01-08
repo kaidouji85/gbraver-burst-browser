@@ -20,37 +20,27 @@ import { wingDozerAttack } from "./wing-dozer";
 export function attackAnimation(param: BattleAnimationParam): Animate {
   if (param.attackerSprite instanceof ShinBraver) {
     const attackerSprite: ShinBraver = param.attackerSprite;
-    return shinBraverAttack({ ...param,
-      attackerSprite
-    });
+    return shinBraverAttack({ ...param, attackerSprite });
   }
 
   if (param.attackerSprite instanceof NeoLandozer) {
     const attackerSprite: NeoLandozer = param.attackerSprite;
-    return neoLandozerAttack({ ...param,
-      attackerSprite
-    });
+    return neoLandozerAttack({ ...param, attackerSprite });
   }
 
   if (param.attackerSprite instanceof LightningDozer) {
     const attackerSprite: LightningDozer = param.attackerSprite;
-    return lightningDozerAttack({ ...param,
-      attackerSprite
-    });
+    return lightningDozerAttack({ ...param, attackerSprite });
   }
 
   if (param.attackerSprite instanceof WingDozer) {
     const attackerSprite: WingDozer = param.attackerSprite;
-    return wingDozerAttack({ ...param,
-      attackerSprite
-    });
+    return wingDozerAttack({ ...param, attackerSprite });
   }
 
   if (param.attackerSprite instanceof GenesisBraver) {
     const attackerSprite: GenesisBraver = param.attackerSprite;
-    return genesisBraverAttack({ ...param,
-      attackerSprite
-    });
+    return genesisBraverAttack({ ...param, attackerSprite });
   }
 
   return emptyAttackAnimation(param);

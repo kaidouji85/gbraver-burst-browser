@@ -36,12 +36,14 @@ export class PlayerBatteryCorrectView implements BatteryCorrectView {
    */
   constructor(resources: Resources) {
     this.#group = new THREE.Group();
-    const batteryNumber = resources.textures.find(v => v.id === TEXTURE_IDS.BATTERY_NUMBER)?.texture ?? new THREE.Texture();
+    const batteryNumber =
+      resources.textures.find((v) => v.id === TEXTURE_IDS.BATTERY_NUMBER)
+        ?.texture ?? new THREE.Texture();
     this.#value = new HorizontalAnimationMesh({
       texture: batteryNumber,
       maxAnimation: MAX_BATTERY_ANIMATION,
       width: MESH_SIZE,
-      height: MESH_SIZE
+      height: MESH_SIZE,
     });
     this.#value.getObject3D().position.x = 10;
     this.#group.add(this.#value.getObject3D());
@@ -49,7 +51,7 @@ export class PlayerBatteryCorrectView implements BatteryCorrectView {
       texture: batteryNumber,
       maxAnimation: MAX_BATTERY_ANIMATION,
       width: MESH_SIZE,
-      height: MESH_SIZE
+      height: MESH_SIZE,
     });
     this.#sign.getObject3D().position.x = -20;
     this.#group.add(this.#sign.getObject3D());
@@ -68,7 +70,10 @@ export class PlayerBatteryCorrectView implements BatteryCorrectView {
 
   /** @override */
   engage(model: BatteryCorrectModel, preRender: PreRender): void {
-    const absoluteValue = Math.min(Math.abs(model.correctValue), MAX_ABSOLUTE_VALUE);
+    const absoluteValue = Math.min(
+      Math.abs(model.correctValue),
+      MAX_ABSOLUTE_VALUE
+    );
     const value = absoluteValue / MAX_BATTERY_ANIMATION;
     this.#value.animate(value);
     const sign = 0 <= model.correctValue ? PLUS_SIGN : MINUS_SIGN;
@@ -84,5 +89,4 @@ export class PlayerBatteryCorrectView implements BatteryCorrectView {
     this.#group.scale.y = model.scale;
     this.#group.quaternion.copy(preRender.camera.quaternion);
   }
-
 }

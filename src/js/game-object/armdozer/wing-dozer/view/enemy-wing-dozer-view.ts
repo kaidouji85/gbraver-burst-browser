@@ -26,5 +26,4 @@ export class EnemyWingDozerView extends PlayerWingDozerView {
     object.position.x *= -1;
     object.scale.x = -1;
   }
-
 }

@@ -3,7 +3,11 @@ import * as THREE from "three";
 import { HorizontalAnimationMesh } from "../../../mesh/horizontal-animation";
 import type { Resources } from "../../../resource";
 import { TEXTURE_IDS } from "../../../resource/texture/ids";
-import { ARMDOZER_EFFECT_STANDARD_X, ARMDOZER_EFFECT_STANDARD_Y, ARMDOZER_EFFECT_STANDARD_Z } from "../../armdozer/position";
+import {
+  ARMDOZER_EFFECT_STANDARD_X,
+  ARMDOZER_EFFECT_STANDARD_Y,
+  ARMDOZER_EFFECT_STANDARD_Z,
+} from "../../armdozer/position";
 import type { BatteryEnchantmentModel } from "../model/battery-enchantment-model";
 import type { BatteryEnchantmentView } from "./battery-enchantment-view";
 export const MESH_SIZE = 300;
@@ -15,13 +19,17 @@ export class PlayerBatteryEnchantmentView implements BatteryEnchantmentView {
   #mesh: HorizontalAnimationMesh;
 
   constructor(resources: Resources) {
-    const playerTurnResource = resources.textures.find(v => v.id === TEXTURE_IDS.BATTERY_ENCHANTMENT);
-    const playerTurn = playerTurnResource ? playerTurnResource.texture : new THREE.Texture();
+    const playerTurnResource = resources.textures.find(
+      (v) => v.id === TEXTURE_IDS.BATTERY_ENCHANTMENT
+    );
+    const playerTurn = playerTurnResource
+      ? playerTurnResource.texture
+      : new THREE.Texture();
     this.#mesh = new HorizontalAnimationMesh({
       texture: playerTurn,
       maxAnimation: 1,
       width: MESH_SIZE,
-      height: MESH_SIZE
+      height: MESH_SIZE,
     });
   }
 
@@ -62,5 +70,4 @@ export class PlayerBatteryEnchantmentView implements BatteryEnchantmentView {
   lookAt(camera: THREE.Camera): void {
     this.#mesh.getObject3D().quaternion.copy(camera.quaternion);
   }
-
 }

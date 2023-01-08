@@ -28,5 +28,4 @@ export class EnemyGaiView extends PlayerGaiView {
     target.scale.x *= -1;
     target.position.x *= -1;
   }
-
 }

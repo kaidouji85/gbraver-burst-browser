@@ -9,7 +9,12 @@ import type { TurnIndicatorModel } from "../model/turn-indicator-model";
  * @return アニメーション
  */
 export function invisible(model: TurnIndicatorModel): Animate {
-  return tween(model, t => t.to({
-    opacity: 0
-  }, 500));
+  return tween(model, (t) =>
+    t.to(
+      {
+        opacity: 0,
+      },
+      500
+    )
+  );
 }

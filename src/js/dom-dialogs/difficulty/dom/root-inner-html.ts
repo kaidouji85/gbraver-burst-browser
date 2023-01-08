@@ -11,11 +11,20 @@ import type { DataIDs } from "./data-ids";
  * @return innerHTML
  */
 export function rootInnerHTML(resources: Resources, ids: DataIDs): string {
-  const closerPath = resources.paths.find(v => v.id === PathIds.CLOSER)?.path ?? "";
-  const easyIconPath = resources.paths.find(v => v.id === PathIds.NPC_COURSE_EASY_ICON)?.path ?? "";
-  const normalIconPath = resources.paths.find(v => v.id === PathIds.NPC_COURSE_NORMAL_ICON)?.path ?? "";
-  const hardIconPath = resources.paths.find(v => v.id === PathIds.NPC_COURSE_HARD_ICON)?.path ?? "";
-  const veryHardIconPath = resources.paths.find(v => v.id === PathIds.NPC_COURSE_VERY_HARD_ICON)?.path ?? "";
+  const closerPath =
+    resources.paths.find((v) => v.id === PathIds.CLOSER)?.path ?? "";
+  const easyIconPath =
+    resources.paths.find((v) => v.id === PathIds.NPC_COURSE_EASY_ICON)?.path ??
+    "";
+  const normalIconPath =
+    resources.paths.find((v) => v.id === PathIds.NPC_COURSE_NORMAL_ICON)
+      ?.path ?? "";
+  const hardIconPath =
+    resources.paths.find((v) => v.id === PathIds.NPC_COURSE_HARD_ICON)?.path ??
+    "";
+  const veryHardIconPath =
+    resources.paths.find((v) => v.id === PathIds.NPC_COURSE_VERY_HARD_ICON)
+      ?.path ?? "";
   return `
     <div class="${ROOT_CLASS}__background" data-id="${ids.backGround}"></div>
     <div class="${ROOT_CLASS}__dialog">

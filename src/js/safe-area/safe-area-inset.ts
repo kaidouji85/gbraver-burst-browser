@@ -33,7 +33,7 @@ export const EMPTY_SAFE_AREA_INSET: SafeAreaInset = {
   top: 0,
   bottom: 0,
   right: 0,
-  left: 0
+  left: 0,
 };
 
 /**
@@ -60,7 +60,7 @@ export function createSafeAreaInset(): SafeAreaInset {
     top: getSize(top),
     bottom: getSize(bottom),
     right: getSize(right),
-    left: getSize(left)
+    left: getSize(left),
   };
 }
 

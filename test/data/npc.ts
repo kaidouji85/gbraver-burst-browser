@@ -20,17 +20,15 @@ class SimpleEmptyNPC implements NPC {
   routine(): Command {
     return {
       type: "BATTERY_COMMAND",
-      battery: 0
+      battery: 0,
     };
   }
-
 }
 /**
  * 空NPCを生成する
  *
  * @return 生成結果
  */
-
 
 export function createEmptyNPC(): NPC {
   return new SimpleEmptyNPC();

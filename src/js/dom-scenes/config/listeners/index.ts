@@ -16,19 +16,27 @@ import { onSEVolumeChange } from "./on-se-volume-change";
  * @return バインドしたイベントリスナのアンサブスクライバ
  */
 export function bindEventListeners(props: ConfigProps): Unsubscriber[] {
-  return [inputDOMStream(props.bgmVolumeSelector).subscribe(action => {
-    onBGMVolumeChange(props, action);
-  }), inputDOMStream(props.seVolumeSelector).subscribe(action => {
-    onSEVolumeChange(props, action);
-  }), pushDOMStream(props.prevButton).subscribe(action => {
-    onPrevButtonPush(props, action);
-  }), pushDOMStream(props.configChangeButton).subscribe(action => {
-    onConfigChangeButtonPush(props, action);
-  }), props.dialog.closeNotifier().subscribe(() => {
-    onDialogClose(props);
-  }), props.dialog.discardNotifier().subscribe(() => {
-    onDiscardConfigChange(props);
-  }), props.dialog.acceptNotifier().subscribe(() => {
-    onAcceptConfigChange(props);
-  })];
+  return [
+    inputDOMStream(props.bgmVolumeSelector).subscribe((action) => {
+      onBGMVolumeChange(props, action);
+    }),
+    inputDOMStream(props.seVolumeSelector).subscribe((action) => {
+      onSEVolumeChange(props, action);
+    }),
+    pushDOMStream(props.prevButton).subscribe((action) => {
+      onPrevButtonPush(props, action);
+    }),
+    pushDOMStream(props.configChangeButton).subscribe((action) => {
+      onConfigChangeButtonPush(props, action);
+    }),
+    props.dialog.closeNotifier().subscribe(() => {
+      onDialogClose(props);
+    }),
+    props.dialog.discardNotifier().subscribe(() => {
+      onDiscardConfigChange(props);
+    }),
+    props.dialog.acceptNotifier().subscribe(() => {
+      onAcceptConfigChange(props);
+    }),
+  ];
 }

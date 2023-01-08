@@ -23,10 +23,13 @@ export class ResultIndicator {
    * @param view ビュー
    * @param gameObjectAction ゲームオブジェクトアクション
    */
-  constructor(view: ResultIndicatorView, gameObjectAction: Stream<GameObjectAction>) {
+  constructor(
+    view: ResultIndicatorView,
+    gameObjectAction: Stream<GameObjectAction>
+  ) {
     this.#view = view;
     this.#model = createInitialValue();
-    this.#unsubscriber = gameObjectAction.subscribe(action => {
+    this.#unsubscriber = gameObjectAction.subscribe((action) => {
       if (action.type === "PreRender") {
         this.#onPreRender(action);
       }
@@ -85,5 +88,4 @@ export class ResultIndicator {
   #onPreRender(action: PreRender): void {
     this.#view.engage(this.#model, action);
   }
-
 }

@@ -5,8 +5,10 @@ import type { DOMSceneActionConnector } from "../dom-scene-binder/dom-scene-acti
 type Connector = DOMSceneActionConnector<NPCEnding>;
 
 /** NPCルートエンディング画面とゲームアクションを関連付ける */
-export const npcEndingConnector: Connector = (scene, gameAction) => [scene.endNPCEndingNotifier().subscribe(() => {
-  gameAction.next({
-    type: "EndNPCEnding"
-  });
-})];
+export const npcEndingConnector: Connector = (scene, gameAction) => [
+  scene.endNPCEndingNotifier().subscribe(() => {
+    gameAction.next({
+      type: "EndNPCEnding",
+    });
+  }),
+];

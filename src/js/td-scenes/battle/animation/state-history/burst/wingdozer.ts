@@ -13,7 +13,11 @@ import type { BurstAnimationParamX } from "./animation-param";
  *
  * @template BURST バースト
  */
-export type WingDozerBurst<BURST extends Burst> = BurstAnimationParamX<WingDozerTD, WingDozerHUD, BURST>;
+export type WingDozerBurst<BURST extends Burst> = BurstAnimationParamX<
+  WingDozerTD,
+  WingDozerHUD,
+  BURST
+>;
 
 /**
  * ウィングドーザのバーストアニメーション
@@ -24,9 +28,7 @@ export type WingDozerBurst<BURST extends Burst> = BurstAnimationParamX<WingDozer
 export function wingDozerBurst(param: WingDozerBurst<Burst>): Animate {
   if (param.burst.type === "ContinuousAttack") {
     const burst: ContinuousAttack = param.burst;
-    return wingDozerContinuousAttack({ ...param,
-      burst
-    });
+    return wingDozerContinuousAttack({ ...param, burst });
   }
 
   return empty();
@@ -38,6 +40,51 @@ export function wingDozerBurst(param: WingDozerBurst<Burst>): Animate {
  * @param param パラメータ
  * @return アニメーション
  */
-export function wingDozerContinuousAttack(param: WingDozerBurst<ContinuousAttack>): Animate {
-  return all(param.burstArmdozerTD.wingDozer.dash(), param.isActive ? param.burstArmdozerTD.wingDozer.endActive() : param.anotherArmdozerTD.sprite().endActive(), param.burstArmdozerHUD.cutIn.show(), track(param.tdCamera, param.burstArmdozerTD.wingDozer.getObject3D().position.x, 500), dolly(param.tdCamera, "-60", 500), param.tdObjects.skyBrightness.brightness(0.2, 500), param.tdObjects.illumination.intensity(0.2, 500), param.hudObjects.rearmostFader.opacity(0.6, 500), param.tdObjects.turnIndicator.invisible()).chain(delay(800)).chain(all(param.burstArmdozerHUD.cutIn.hidden(), param.hudObjects.rearmostFader.opacity(0, 300))).chain(delay(300)).chain(param.burstPlayerTD.armdozerEffects.continuousAttack.popUp()).chain(delay(200)).chain(all(param.burstPlayerHUD.gauge.battery(param.burstPlayerState.armdozer.battery), param.burstPlayerTD.recoverBattery.popUp(param.burst.recoverBattery))).chain(all(param.burstArmdozerTD.wingDozer.dashToStand(), toInitial(param.tdCamera, 500), param.tdObjects.skyBrightness.brightness(1, 500), param.tdObjects.illumination.intensity(1, 500))).chain(delay(200));
+export function wingDozerContinuousAttack(
+  param: WingDozerBurst<ContinuousAttack>
+): Animate {
+  return all(
+    param.burstArmdozerTD.wingDozer.dash(),
+    param.isActive
+      ? param.burstArmdozerTD.wingDozer.endActive()
+      : param.anotherArmdozerTD.sprite().endActive(),
+    param.burstArmdozerHUD.cutIn.show(),
+    track(
+      param.tdCamera,
+      param.burstArmdozerTD.wingDozer.getObject3D().position.x,
+      500
+    ),
+    dolly(param.tdCamera, "-60", 500),
+    param.tdObjects.skyBrightness.brightness(0.2, 500),
+    param.tdObjects.illumination.intensity(0.2, 500),
+    param.hudObjects.rearmostFader.opacity(0.6, 500),
+    param.tdObjects.turnIndicator.invisible()
+  )
+    .chain(delay(800))
+    .chain(
+      all(
+        param.burstArmdozerHUD.cutIn.hidden(),
+        param.hudObjects.rearmostFader.opacity(0, 300)
+      )
+    )
+    .chain(delay(300))
+    .chain(param.burstPlayerTD.armdozerEffects.continuousAttack.popUp())
+    .chain(delay(200))
+    .chain(
+      all(
+        param.burstPlayerHUD.gauge.battery(
+          param.burstPlayerState.armdozer.battery
+        ),
+        param.burstPlayerTD.recoverBattery.popUp(param.burst.recoverBattery)
+      )
+    )
+    .chain(
+      all(
+        param.burstArmdozerTD.wingDozer.dashToStand(),
+        toInitial(param.tdCamera, 500),
+        param.tdObjects.skyBrightness.brightness(1, 500),
+        param.tdObjects.illumination.intensity(1, 500)
+      )
+    )
+    .chain(delay(200));
 }

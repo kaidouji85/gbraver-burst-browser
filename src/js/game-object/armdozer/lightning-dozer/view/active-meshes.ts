@@ -13,27 +13,37 @@ import type { AnimationMeshMapping } from "./animation-mesh-mapping";
  * @param resources リソース管理オブジェクト
  * @return 生成結果
  */
-export function createActiveMeshes(resources: Resources): AnimationMeshMapping[] {
-  return [{
-    type: "KNOCK_BACK",
-    mesh: lightningDozerActiveKnockBack(resources)
-  }, {
-    type: "GUTS_UP",
-    mesh: lightningDozerActiveGutsUp(resources)
-  }, {
-    type: "GUTS_DOWN",
-    mesh: lightningDozerActiveGutsDown(resources)
-  }, {
-    type: "GUTS_TO_STAND",
-    mesh: lightningDozerActiveGutsToStand(resources)
-  }, {
-    type: "GUARD",
-    mesh: lightningDozerActiveGuard(resources)
-  }, {
-    type: "FRONT_STEP",
-    mesh: lightningDozerActiveFrontStep(resources)
-  }, {
-    type: "STAND",
-    mesh: lightningDozerActiveStand(resources)
-  }];
+export function createActiveMeshes(
+  resources: Resources
+): AnimationMeshMapping[] {
+  return [
+    {
+      type: "KNOCK_BACK",
+      mesh: lightningDozerActiveKnockBack(resources),
+    },
+    {
+      type: "GUTS_UP",
+      mesh: lightningDozerActiveGutsUp(resources),
+    },
+    {
+      type: "GUTS_DOWN",
+      mesh: lightningDozerActiveGutsDown(resources),
+    },
+    {
+      type: "GUTS_TO_STAND",
+      mesh: lightningDozerActiveGutsToStand(resources),
+    },
+    {
+      type: "GUARD",
+      mesh: lightningDozerActiveGuard(resources),
+    },
+    {
+      type: "FRONT_STEP",
+      mesh: lightningDozerActiveFrontStep(resources),
+    },
+    {
+      type: "STAND",
+      mesh: lightningDozerActiveStand(resources),
+    },
+  ];
 }

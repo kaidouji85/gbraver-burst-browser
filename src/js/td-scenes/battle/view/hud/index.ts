@@ -46,40 +46,81 @@ export class HudLayer {
   constructor(param: Param) {
     this.scene = new THREE.Scene();
     this.camera = new PlainHUDCamera(param.resize);
-    this.#overlap = param.renderer.createOverlapNotifier(this.camera.getCamera());
-    this.#gameObjectAction = gameObjectStream(param.update, param.preRender, this.#overlap);
-    this.gameObjects = new HUDGameObjects(param.resources, this.#gameObjectAction, param.player);
-    this.gameObjects.getObject3Ds().forEach(object => {
+    this.#overlap = param.renderer.createOverlapNotifier(
+      this.camera.getCamera()
+    );
+    this.#gameObjectAction = gameObjectStream(
+      param.update,
+      param.preRender,
+      this.#overlap
+    );
+    this.gameObjects = new HUDGameObjects(
+      param.resources,
+      this.#gameObjectAction,
+      param.player
+    );
+    this.gameObjects.getObject3Ds().forEach((object) => {
       this.scene.add(object);
     });
-    this.players = [playerHUDObjects(param.resources, param.player, this.#gameObjectAction), enemyHUDObjects(param.resources, param.enemy, this.#gameObjectAction)];
-    this.players.map(v => v.getObject3Ds()).flat().forEach(v => {
-      this.scene.add(v);
-    });
-    this.armdozers = [playerArmdozerHUD(param.resources, this.#gameObjectAction, param.player), enemyArmdozerHUD(param.resources, this.#gameObjectAction, param.enemy)];
-    this.armdozers.map(v => v.getObject3Ds()).flat().forEach(v => {
-      this.scene.add(v);
-    });
-    this.pilots = [playerHUDPilotObjects(param.resources, this.#gameObjectAction, param.player), enemyHUDPilotObjects(param.resources, this.#gameObjectAction, param.enemy)];
-    this.pilots.map(v => v.getObject3Ds()).flat().forEach(v => {
-      this.scene.add(v);
-    });
+    this.players = [
+      playerHUDObjects(param.resources, param.player, this.#gameObjectAction),
+      enemyHUDObjects(param.resources, param.enemy, this.#gameObjectAction),
+    ];
+    this.players
+      .map((v) => v.getObject3Ds())
+      .flat()
+      .forEach((v) => {
+        this.scene.add(v);
+      });
+    this.armdozers = [
+      playerArmdozerHUD(param.resources, this.#gameObjectAction, param.player),
+      enemyArmdozerHUD(param.resources, this.#gameObjectAction, param.enemy),
+    ];
+    this.armdozers
+      .map((v) => v.getObject3Ds())
+      .flat()
+      .forEach((v) => {
+        this.scene.add(v);
+      });
+    this.pilots = [
+      playerHUDPilotObjects(
+        param.resources,
+        this.#gameObjectAction,
+        param.player
+      ),
+      enemyHUDPilotObjects(
+        param.resources,
+        this.#gameObjectAction,
+        param.enemy
+      ),
+    ];
+    this.pilots
+      .map((v) => v.getObject3Ds())
+      .flat()
+      .forEach((v) => {
+        this.scene.add(v);
+      });
   }
 
   /** デストラクタ */
   destructor(): void {
-    const removeTargets: THREE.Object3D[] = [...this.gameObjects.getObject3Ds(), ...this.armdozers.flatMap(v => v.getObject3Ds()), ...this.players.flatMap(v => v.getObject3Ds()), ...this.pilots.flatMap(v => v.getObject3Ds())];
-    removeTargets.forEach(v => {
+    const removeTargets: THREE.Object3D[] = [
+      ...this.gameObjects.getObject3Ds(),
+      ...this.armdozers.flatMap((v) => v.getObject3Ds()),
+      ...this.players.flatMap((v) => v.getObject3Ds()),
+      ...this.pilots.flatMap((v) => v.getObject3Ds()),
+    ];
+    removeTargets.forEach((v) => {
       this.scene.remove(v);
     });
     this.gameObjects.destructor();
-    this.armdozers.forEach(armdozer => {
+    this.armdozers.forEach((armdozer) => {
       armdozer.destructor();
     });
-    this.players.forEach(player => {
+    this.players.forEach((player) => {
       player.destructor();
     });
-    this.pilots.forEach(pilot => {
+    this.pilots.forEach((pilot) => {
       pilot.destructor();
     });
     this.camera.destructor();
@@ -92,5 +133,4 @@ export class HudLayer {
   battleActionNotifier(): Stream<BattleSceneAction> {
     return this.gameObjects.battleActionNotifier();
   }
-
 }

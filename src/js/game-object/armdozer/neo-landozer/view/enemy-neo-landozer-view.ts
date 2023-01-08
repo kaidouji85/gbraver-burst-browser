@@ -21,5 +21,4 @@ export class EnemyNeoLandozerView extends PlayerNeoLandozerView {
     this.getObject3D().position.x *= -1;
     this.getObject3D().scale.x = -1;
   }
-
 }

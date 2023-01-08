@@ -14,7 +14,7 @@ export class SkyBrightnessView {
     const material = new THREE.MeshBasicMaterial({
       color: "rgb(0, 0, 0)",
       side: THREE.BackSide,
-      transparent: true
+      transparent: true,
     });
     this.#mesh = new THREE.Mesh(geometry, material);
   }
@@ -43,5 +43,4 @@ export class SkyBrightnessView {
     const opacity = 1 - model.brightness;
     this.#mesh.material.opacity = opacity;
   }
-
 }
