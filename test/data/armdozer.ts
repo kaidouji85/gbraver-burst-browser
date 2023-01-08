@@ -11,7 +11,6 @@ export const EMPTY_ARMDOZER: Armdozer = {
   maxBattery: 5,
   power: 2000,
   speed: 2000,
-  appearance: "",
   burst: {
     type: "RecoverBattery",
     recoverBattery: 3

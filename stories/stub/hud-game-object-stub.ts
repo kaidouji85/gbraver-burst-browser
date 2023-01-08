@@ -86,7 +86,6 @@ export class HUDGameObjectStub {
     const object3Ds = this._creator({
       resources,
       gameObjectAction: this._gameObjectAction,
-      scene: this._scene
     });
 
     object3Ds.forEach(object3D => {

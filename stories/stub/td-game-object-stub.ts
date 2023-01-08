@@ -101,7 +101,6 @@ export class TDGameObjectStub {
     } = this._creator({
       resources,
       gameObjectAction: this._gameObjectAction,
-      scene: this._scene,
       camera: this._camera
     });
 

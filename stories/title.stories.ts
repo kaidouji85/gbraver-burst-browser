@@ -1,11 +1,14 @@
 import { Title } from "../src/js/dom-scenes/title";
 import type { DOMStubStory } from "./stub/dom-stub";
 import { domStub } from "./stub/dom-stub";
+import {GuestAccount, LoggedInAccount} from "../src/js/dom-scenes/title/title-account";
+
 export default {
   title: "title"
 };
+
 export const guestAccount: DOMStubStory = domStub(resources => {
-  const account = {
+  const account: GuestAccount = {
     type: "GuestAccount"
   };
   const scene = new Title({
@@ -19,8 +22,9 @@ export const guestAccount: DOMStubStory = domStub(resources => {
   });
   return scene.getRootHTMLElement();
 });
+
 export const loggedInAccount: DOMStubStory = domStub(resources => {
-  const account = {
+  const account: LoggedInAccount = {
     type: "LoggedInAccount",
     name: "test-account",
     pictureURL: "test-picture"
