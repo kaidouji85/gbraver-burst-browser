@@ -1,4 +1,5 @@
 import type { Player } from "gbraver-burst-core";
+
 import { EMPTY_ARMDOZER } from "./armdozer";
 import { EMPTY_PILOT } from "./pilot";
 // TODO gbraver-burst-coreと共有する
