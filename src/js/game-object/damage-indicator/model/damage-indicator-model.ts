@@ -1,0 +1,6 @@
+/** ダメージインジケータのモデル */
+export type DamageIndicatorModel = {
+  damage: number;
+  opacity: number;
+  scale: number;
+};

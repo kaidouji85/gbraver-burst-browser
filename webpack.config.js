@@ -16,7 +16,7 @@ const OUTPUT_JS_NAME = `index.js`;
 
 module.exports = {
   mode: 'development',
-  entry: path.resolve(__dirname, 'src/js/index.js'),
+  entry: path.resolve(__dirname, 'src/js/index.ts'),
   output: {
     path: path.resolve(__dirname, BUILD_ROOT),
     filename: OUTPUT_JS_NAME
@@ -29,9 +29,9 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.js/,
+        test: /\.ts$/,
         exclude: /node_modules/,
-        use: 'babel-loader'
+        use: 'ts-loader'
       },
       {
         test: /\.css$/i,
@@ -44,7 +44,7 @@ module.exports = {
     ]
   },
   resolve: {
-    extensions: ['.js', '.css']
+    extensions: ['.js', '.ts', '.css']
   },
   plugins: [
     new HtmlWebpackPlugin({
