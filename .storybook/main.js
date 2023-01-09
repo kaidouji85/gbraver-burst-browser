@@ -1,5 +1,5 @@
 module.exports = {
-  stories: ['../stories/**/*.stories.js'],
+  stories: ['../stories/**/*.stories.ts'],
   core: {
     builder: "webpack5",
   },
@@ -10,9 +10,9 @@ module.exports = {
         ...config.module,
         rules: [
           {
-            test: /\.js/,
+            test: /\.ts$/,
             exclude: /node_modules/,
-            use: 'babel-loader'
+            use: 'ts-loader'
           },
           {
             test: /\.css$/i,

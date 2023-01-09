@@ -4,7 +4,7 @@ const BUILD_PATH = 'build/production';
 
 module.exports = {
   mode: 'production',
-  entry: path.resolve(__dirname, 'src/js/clear.js'),
+  entry: path.resolve(__dirname, 'src/js/clear.ts'),
   output: {
     path: path.resolve(__dirname, BUILD_PATH),
     filename: 'clear.js'
@@ -12,9 +12,9 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.js$/,
+        test: /\.ts$/,
         exclude: /node_modules/,
-        loader: 'babel-loader'
+        loader: 'ts-loader'
       }
     ]
   },
@@ -23,5 +23,8 @@ module.exports = {
       filename: path.resolve(__dirname, `${BUILD_PATH}/clear.html`),
       template: 'src/clear.html'
     })
-  ]
+  ],
+  resolve: {
+    extensions: ['.js', '.ts']
+  },
 };

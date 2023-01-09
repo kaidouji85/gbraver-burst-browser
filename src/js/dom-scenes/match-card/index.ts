@@ -1,0 +1,61 @@
+import type { ArmDozerId } from "gbraver-burst-core";
+
+import type { Resources } from "../../resource";
+import type { DOMScene } from "../dom-scene";
+import { MatchCardPresentation } from "./presentation";
+
+/**
+ * コンストラクタのパラメータ
+ */
+type Param = {
+  resources: Resources;
+  player: ArmDozerId;
+  enemy: ArmDozerId;
+  caption: string;
+};
+
+/**
+ * 対戦カード
+ */
+export class MatchCard implements DOMScene {
+  #presentation: MatchCardPresentation;
+
+  /**
+   * コンストラクタ
+   *
+   * @param param パラメータ
+   */
+  constructor(param: Param) {
+    this.#presentation = new MatchCardPresentation(
+      param.resources,
+      param.player,
+      param.enemy,
+      param.caption
+    );
+  }
+
+  /**
+   * デストラクタ相当の処理
+   */
+  destructor(): void {
+    // NOP
+  }
+
+  /**
+   * 各種リソースの読み込みが完了するまで待つ
+   *
+   * @return 待機結果
+   */
+  waitUntilLoaded(): Promise<void> {
+    return this.#presentation.waitUntilLoaded();
+  }
+
+  /**
+   * ルートHTML要素を取得する
+   *
+   * @return ルートHTML要素
+   */
+  getRootHTMLElement(): HTMLElement {
+    return this.#presentation.getRootHTMLElement();
+  }
+}
