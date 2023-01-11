@@ -125,6 +125,7 @@ npm run start:storybook
 以下ツールはpackage.jsonには含まれていないので、何らかの方法で作業端末にインストールしてください。
 
 * [madge](https://github.com/pahen/madge)
+* [fixpad](https://www.npmjs.com/package/fixpack#configuration)
 
 ### madge
 ```shell
@@ -132,6 +133,18 @@ npm run start:storybook
 madge -c src
 madge -c test
 madge -c stories
+```
+
+### fixpad
+```shell
+# package.jsonをフォーマットする
+fixpad
+```
+
+### npm audit
+```shell
+# デプロイされるモジュールに脆弱性がないかチェック
+npm audit --omit=dev
 ```
 
 ## スペシャルサンクス
