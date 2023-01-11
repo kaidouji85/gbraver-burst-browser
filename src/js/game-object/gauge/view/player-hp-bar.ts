@@ -1,9 +1,11 @@
 import * as THREE from "three";
 
 import { CanvasMesh } from "../../../mesh/canvas-mesh";
+import { HorizontalAnimationMesh } from "../../../mesh/horizontal-animation";
 import { SPRITE_RENDER_ORDER } from "../../../render/render-order/td-render-order";
 import type { Resources } from "../../../resource";
 import { CANVAS_IMAGE_IDS } from "../../../resource/canvas-image";
+import { TEXTURE_IDS } from "../../../resource/texture/ids";
 import { animatedTexture } from "../../../texture/animation/texture-animation";
 
 /** HPバー キャンバス横幅 */
@@ -26,6 +28,7 @@ export class PlayerHpBar {
   #texture: THREE.CanvasTexture;
   #mesh: THREE.Mesh<THREE.PlaneGeometry, THREE.MeshBasicMaterial>;
   #back: CanvasMesh;
+  #frame: HorizontalAnimationMesh;
   #group: THREE.Group;
 
   /**
@@ -35,6 +38,18 @@ export class PlayerHpBar {
    */
   constructor(resources: Resources) {
     this.#group = new THREE.Group();
+
+    const frameTexture = resources.textures.find(v => v.id === TEXTURE_IDS.PLAYER_HP_GAUGE)?.texture ?? new THREE.Texture();
+    this.#frame = new HorizontalAnimationMesh({
+      texture: frameTexture,
+      width: 1024,
+      height: 1024,
+      maxAnimation: 1
+    });
+    this.#frame.getObject3D().position.x = 165;
+    this.#frame.getObject3D().position.z = -0.1;
+    this.#group.add(this.#frame.getObject3D());
+    
     const canvas = document.createElement("canvas");
     canvas.width = BAR_CANVAS_WIDTH;
     canvas.height = BAR_CANVAS_HEIGHT;
@@ -71,6 +86,7 @@ export class PlayerHpBar {
       meshWidth: 512,
       meshHeight: 512,
     });
+    
     this.#back.draw((context) => {
       const backWidth = 472;
       const backHeight = (back.height * backWidth) / back.width;

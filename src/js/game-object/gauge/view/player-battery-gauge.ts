@@ -13,7 +13,7 @@ export const MAX_BATTERY = 5;
 /** プレイヤーバッテリー */
 export class PlayerBatteryGauge {
   #group: THREE.Group;
-  #base: HorizontalAnimationMesh;
+  #frame: HorizontalAnimationMesh;
   #gaugeList: BatteryGaugeUnit[];
 
   /**
@@ -23,17 +23,16 @@ export class PlayerBatteryGauge {
   constructor(resources: Resources) {
     this.#group = new THREE.Group();
     
-    const batteryGauge = resources.textures.find(v => v.id === TEXTURE_IDS.PLAYER_BATTERY_GAUGE)?.texture ?? new THREE.Texture();
-    const batteryGuageWitdh = 1024;
-    const batteryGaugeHeight = 1024;
-    this.#base = new HorizontalAnimationMesh({
-      texture: batteryGauge,
-      width: batteryGuageWitdh,
-      height: batteryGaugeHeight,
+    const frameTexture = resources.textures.find(v => v.id === TEXTURE_IDS.PLAYER_BATTERY_GAUGE)?.texture ?? new THREE.Texture();
+    this.#frame = new HorizontalAnimationMesh({
+      texture: frameTexture,
+      width: 1024,
+      height: 1024,
       maxAnimation: 1
     });
-    this.#base.getObject3D().position.x = 165;
-    this.#group.add(this.#base.getObject3D());
+    this.#frame.getObject3D().position.x = 165;
+    this.#frame.getObject3D().position.z = -0.1;
+    this.#group.add(this.#frame.getObject3D());
     
     this.#gaugeList = R.times((v) => v + 1, MAX_BATTERY).map(
       (v) => new BatteryGaugeUnit(resources, v)
@@ -46,6 +45,7 @@ export class PlayerBatteryGauge {
 
   /** デストラクタ相当の処理 */
   destructor(): void {
+    this.#frame.destructor();
     this.#gaugeList.forEach((v) => {
       v.destructor();
     });
