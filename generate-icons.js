@@ -1,6 +1,6 @@
 const sharp = require('sharp');
 const path = require('path');
-const toIco = require('to-ico');
+const icongen = require('icon-gen');
 const fs = require('fs').promises;
 
 const buildRoot = path.resolve(__dirname, 'build/production');
@@ -27,12 +27,13 @@ async function resizeAppIcon(fileName, size) {
  * @return {Promise<void>} 処理が完了したら発火するPromise
  */
 async function toFavicon() {
-  const pngBuffer = await sharp(originIconPath)
-    .resize(48, 48)
-    .toBuffer();
-  const icoBuffer = await toIco([pngBuffer]);
-  const icoPath = path.resolve(buildRoot, 'favicon.ico');
-  await fs.writeFile(icoPath, icoBuffer);
+  await icongen(originIconPath, buildRoot, {
+    report: true,
+    ico: {
+      name: 'favicon',
+      sizes: [48]
+    },
+  });
 }
 
 /** 
