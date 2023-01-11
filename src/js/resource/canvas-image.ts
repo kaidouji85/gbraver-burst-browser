@@ -33,10 +33,6 @@ export const CANVAS_IMAGE_IDS = {
   PILOT_BUTTON_LABEL: "PILOT_BUTTON_LABEL",
   BIG_BUTTON_DISABLED: "BIG_BUTTON_DISABLED",
   SMALL_BUTTON_DISABLED: "SMALL_BUTTON_DISABLED",
-  /** @deprecated */
-  PLAYER_GAUGE_BASE: "PLAYER_GAUGE_BASE",
-  /** @deprecated */
-  ENEMY_GAUGE_BASE: "ENEMY_GAUGE_BASE",
   HP_BAR: "HP_BAR",
   HP_BAR_BACK: "HP_BAR_BACK",
   BATTERY_GAUGE: "BATTERY_GAUGE",
@@ -104,14 +100,6 @@ export const CANVAS_IMAGE_CONFIGS: CanvasImageConfig[] = [
   {
     id: CANVAS_IMAGE_IDS.SMALL_BUTTON_DISABLED,
     path: "button/small-button-disabled.webp",
-  },
-  {
-    id: CANVAS_IMAGE_IDS.PLAYER_GAUGE_BASE,
-    path: "gauge/player-gauge-base.webp",
-  },
-  {
-    id: CANVAS_IMAGE_IDS.ENEMY_GAUGE_BASE,
-    path: "gauge/enemy-gauge-base.webp",
   },
   {
     id: CANVAS_IMAGE_IDS.HP_BAR,
