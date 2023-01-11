@@ -20,12 +20,17 @@ export const MIN_PADDING_TOP = 50;
 /** プレイヤーゲージのビュー */
 export class PlayerGaugeView implements GaugeView {
   #group: THREE.Group;
+  /** @deprecated */
   #base: SimpleImageMesh;
   #hpBar: PlayerHpBar;
   #hpNumber: HpNumber;
   #maxHpNumber: HpNumber;
   #batteryGauge: PlayerBatteryGauge;
 
+  /**
+   * コンストラクタ
+   * @param resources リソース管理オブジェクト
+   */
   constructor(resources: Resources) {
     this.#group = new THREE.Group();
     this.#group.scale.set(BASE_SCALE, BASE_SCALE, BASE_SCALE);
@@ -39,6 +44,7 @@ export class PlayerGaugeView implements GaugeView {
       image: gaugeBase,
       imageWidth: 548,
     });
+    this.#base.setOpacity(0);
     this.#group.add(this.#base.getObject3D());
     this.#hpBar = new PlayerHpBar(resources);
     this.#hpBar.getObject3D().position.set(-212, 31.5, 1);
@@ -67,7 +73,6 @@ export class PlayerGaugeView implements GaugeView {
 
   /**
    * モデルをビューに反映させる
-   *
    * @param model モデル
    * @param preRender プリレンダーアクション
    */
@@ -98,7 +103,6 @@ export class PlayerGaugeView implements GaugeView {
 
   /**
    * シーンに追加するオブジェクトを取得する
-   *
    * @return シーンに追加するオブジェクト
    */
   getObject3D(): THREE.Object3D {

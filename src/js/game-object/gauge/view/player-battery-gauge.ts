@@ -1,9 +1,12 @@
 import * as R from "ramda";
 import * as THREE from "three";
+import { HorizontalAnimationMesh } from "../../../mesh/horizontal-animation";
 
 import { SimpleImageMesh } from "../../../mesh/simple-image-mesh";
+import { toTouchStartRaycaster } from "../../../render/overlap-event/touch-start-raycaster";
 import type { Resources } from "../../../resource";
 import { CANVAS_IMAGE_IDS } from "../../../resource/canvas-image";
+import { TEXTURE_IDS } from "../../../resource/texture/ids";
 import type { Battery } from "../model/gauge-model";
 
 /** バッテリー最大値 */
@@ -12,15 +15,28 @@ export const MAX_BATTERY = 5;
 /** プレイヤーバッテリー */
 export class PlayerBatteryGauge {
   #group: THREE.Group;
+  #base: HorizontalAnimationMesh;
   #gaugeList: BatteryGaugeUnit[];
 
   /**
    * コンストラクタ
-   *
    * @param resources リソース管理オブジェクト
    */
   constructor(resources: Resources) {
     this.#group = new THREE.Group();
+    
+    const batteryGauge = resources.textures.find(v => v.id === TEXTURE_IDS.PLAYER_BATTERY_GAUGE)?.texture ?? new THREE.Texture();
+    const batteryGuageWitdh = 1024;
+    const batteryGaugeHeight = 1024;
+    this.#base = new HorizontalAnimationMesh({
+      texture: batteryGauge,
+      width: batteryGuageWitdh,
+      height: batteryGaugeHeight,
+      maxAnimation: 1
+    });
+    this.#base.getObject3D().position.x = 165;
+    this.#group.add(this.#base.getObject3D());
+    
     this.#gaugeList = R.times((v) => v + 1, MAX_BATTERY).map(
       (v) => new BatteryGaugeUnit(resources, v)
     );
@@ -39,7 +55,6 @@ export class PlayerBatteryGauge {
 
   /**
    * バッテリーゲージモデルを反映させる
-   *
    * @param batteryList モデル
    */
   engage(batteryList: Battery[]): void {
@@ -58,15 +73,14 @@ export class PlayerBatteryGauge {
 
   /**
    * シーンに追加するオブジェクトを取得する
-   *
    * @return シーンに追加するオブジェクト
    */
   getObject3D(): THREE.Object3D {
     return this.#group;
   }
 }
-/** バッテリーゲージ1マス分 */
 
+/** バッテリーゲージ1マス分 */
 class BatteryGaugeUnit {
   #group: THREE.Group;
   #gauge: SimpleImageMesh;
@@ -75,7 +89,6 @@ class BatteryGaugeUnit {
 
   /**
    * コンストラクタ
-   *
    * @param resources リソース管理オブジェクト
    * @param value バッテリー値
    */
