@@ -1,9 +1,11 @@
 import * as THREE from "three";
 
 import type { PreRender } from "../../../game-loop/pre-render";
+import { HorizontalAnimationMesh } from "../../../mesh/horizontal-animation";
 import { SimpleImageMesh } from "../../../mesh/simple-image-mesh";
 import type { Resources } from "../../../resource";
 import { CANVAS_IMAGE_IDS } from "../../../resource/canvas-image";
+import { TEXTURE_IDS } from "../../../resource/texture/ids";
 import { HUDUIScale } from "../../scale";
 import type { GaugeModel } from "../model/gauge-model";
 import type { GaugeView } from "./gauge-view";
@@ -22,9 +24,11 @@ export class PlayerGaugeView implements GaugeView {
   #group: THREE.Group;
   /** @deprecated */
   #base: SimpleImageMesh;
+  #hpFrame: HorizontalAnimationMesh;
   #hpBar: PlayerHpBar;
   #hpNumber: HpNumber;
   #maxHpNumber: HpNumber;
+  #batteryFrame: HorizontalAnimationMesh;
   #batteryGauge: PlayerBatteryGauge;
 
   /**
@@ -46,15 +50,43 @@ export class PlayerGaugeView implements GaugeView {
     });
     this.#base.setOpacity(0);
     this.#group.add(this.#base.getObject3D());
+
+    const hpFrameTexture =
+      resources.textures.find((v) => v.id === TEXTURE_IDS.PLAYER_HP_GAUGE)
+        ?.texture ?? new THREE.Texture();
+    this.#hpFrame = new HorizontalAnimationMesh({
+      width: 1024,
+      height: 1024,
+      texture: hpFrameTexture,
+      maxAnimation: 1,
+    });
+    this.#hpFrame.getObject3D().position.set(110, 37, 0);
+    this.#group.add(this.#hpFrame.getObject3D());
+
     this.#hpBar = new PlayerHpBar(resources);
     this.#hpBar.getObject3D().position.set(-212, 31.5, 1);
     this.#group.add(this.#hpBar.getObject3D());
+
     this.#hpNumber = new HpNumber(resources);
     this.#hpNumber.getObject3D().position.set(80, 52, 1);
     this.#group.add(this.#hpNumber.getObject3D());
+
     this.#maxHpNumber = new HpNumber(resources);
     this.#maxHpNumber.getObject3D().position.set(240, 52, 1);
     this.#group.add(this.#maxHpNumber.getObject3D());
+
+    const batteryFrameTexture =
+      resources.textures.find((v) => v.id === TEXTURE_IDS.PLAYER_BATTERY_GAUGE)
+        ?.texture ?? new THREE.Texture();
+    this.#batteryFrame = new HorizontalAnimationMesh({
+      width: 1024,
+      height: 1024,
+      texture: batteryFrameTexture,
+      maxAnimation: 1,
+    });
+    this.#batteryFrame.getObject3D().position.set(110, -55.5, 0);
+    this.#group.add(this.#batteryFrame.getObject3D());
+
     this.#batteryGauge = new PlayerBatteryGauge(resources);
     this.#batteryGauge.getObject3D().position.set(-169.5, -55.5, 1);
     this.#group.add(this.#batteryGauge.getObject3D());
@@ -65,9 +97,11 @@ export class PlayerGaugeView implements GaugeView {
    */
   destructor(): void {
     this.#base.destructor();
+    this.#hpFrame.destructor();
     this.#hpBar.destructor();
     this.#hpNumber.destructor();
     this.#maxHpNumber.destructor();
+    this.#batteryFrame.destructor();
     this.#batteryGauge.destructor();
   }
 

@@ -19,9 +19,10 @@ export class BatteryGaugeUnit {
   constructor(resources: Resources, value: number) {
     this.#group = new THREE.Group();
     this.#value = value;
-    const gaugeImage = resources.canvasImages.find(
-      (v) => v.id === CANVAS_IMAGE_IDS.BATTERY_GAUGE
-    )?.image ?? new Image();
+    const gaugeImage =
+      resources.canvasImages.find(
+        (v) => v.id === CANVAS_IMAGE_IDS.BATTERY_GAUGE
+      )?.image ?? new Image();
     this.#gauge = new SimpleImageMesh({
       image: gaugeImage,
       imageWidth: 88,
@@ -30,9 +31,10 @@ export class BatteryGaugeUnit {
     });
     this.#gauge.getObject3D().position.z = 1;
     this.#group.add(this.#gauge.getObject3D());
-    const backImage = resources.canvasImages.find(
-      (v) => v.id === CANVAS_IMAGE_IDS.BATTERY_GAUGE_BACK
-    )?.image ?? new Image();
+    const backImage =
+      resources.canvasImages.find(
+        (v) => v.id === CANVAS_IMAGE_IDS.BATTERY_GAUGE_BACK
+      )?.image ?? new Image();
     this.#back = new SimpleImageMesh({
       image: backImage,
       imageWidth: 88,

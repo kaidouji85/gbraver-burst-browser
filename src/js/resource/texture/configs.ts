@@ -343,19 +343,19 @@ export const TEXTURE_CONFIGS: TextureConfig[] = [
   // ゲージ系
   {
     id: TEXTURE_IDS.PLAYER_HP_GAUGE,
-    path: "gauge/player-hp-gauge.webp"
+    path: "gauge/player-hp-gauge.webp",
   },
   {
     id: TEXTURE_IDS.PLAYER_BATTERY_GAUGE,
-    path: "gauge/player-battery-gauge.webp"
+    path: "gauge/player-battery-gauge.webp",
   },
   {
     id: TEXTURE_IDS.ENEMY_HP_GAUGE,
-    path: "gauge/enemy-hp-gauge.webp"
+    path: "gauge/enemy-hp-gauge.webp",
   },
   {
     id: TEXTURE_IDS.ENEMY_BATTERY_GAUGE,
-    path: "gauge/enemy-battery-gauge.webp"
+    path: "gauge/enemy-battery-gauge.webp",
   },
 ];
 
