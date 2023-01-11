@@ -8,10 +8,10 @@
     "email": "kaidouji85@gmail.com"
   },
   "dependencies": {
-    "@gbraver-burst-network/browser-core": "^1.6.2",
-    "@gbraver-burst-network/browser-sdk": "^1.6.2",
+    "@gbraver-burst-network/browser-core": "^1.6.3",
+    "@gbraver-burst-network/browser-sdk": "^1.6.3",
     "@tweenjs/tween.js": "^18.6.4",
-    "gbraver-burst-core": "1.16.3",
+    "gbraver-burst-core": "1.16.4",
     "howler": "^2.2.3",
     "ramda": "^0.28.0",
     "rxjs": "^7.8.0",
