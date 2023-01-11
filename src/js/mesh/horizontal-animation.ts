@@ -4,10 +4,15 @@ import { SPRITE_RENDER_ORDER } from "../render/render-order/td-render-order";
 import { animatedTexture } from "../texture/animation/texture-animation";
 import { normalizeTextureOffset } from "../texture/animation/texture-offset";
 
+/** コンストラクタのパラメータ */
 type Param = {
+  /** テクスチャ */
   texture: THREE.Texture;
+  /** アニメーション数 */
   maxAnimation: number;
+  /** 幅 */
   width: number;
+  /** 高 */
   height: number;
 };
 
@@ -22,6 +27,10 @@ export class HorizontalAnimationMesh {
   height: number;
   maxAnimation: number;
 
+  /**
+   * コンストラクタ
+   * @param param パラメータ
+   */
   constructor(param: Param) {
     this.width = param.width;
     this.height = param.height;
