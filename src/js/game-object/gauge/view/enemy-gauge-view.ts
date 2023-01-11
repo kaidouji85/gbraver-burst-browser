@@ -78,6 +78,7 @@ export class EnemyGaugeView implements GaugeView {
     this.#hpBar.destructor();
     this.#hpNumber.destructor();
     this.#maxHpNumber.destructor();
+    this.#batteryFrame.destructor();
     this.#batteryGauge.destructor();
   }
 
