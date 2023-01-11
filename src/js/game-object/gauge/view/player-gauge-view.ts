@@ -22,8 +22,6 @@ export const MIN_PADDING_TOP = 50;
 /** プレイヤーゲージのビュー */
 export class PlayerGaugeView implements GaugeView {
   #group: THREE.Group;
-  /** @deprecated */
-  #base: SimpleImageMesh;
   #hpFrame: HorizontalAnimationMesh;
   #hpBar: PlayerHpBar;
   #hpNumber: HpNumber;
@@ -38,18 +36,6 @@ export class PlayerGaugeView implements GaugeView {
   constructor(resources: Resources) {
     this.#group = new THREE.Group();
     this.#group.scale.set(BASE_SCALE, BASE_SCALE, BASE_SCALE);
-    const gaugeBase =
-      resources.canvasImages.find(
-        (v) => v.id === CANVAS_IMAGE_IDS.PLAYER_GAUGE_BASE
-      )?.image ?? new Image();
-    this.#base = new SimpleImageMesh({
-      canvasSize: 1024,
-      meshSize: 1024,
-      image: gaugeBase,
-      imageWidth: 548,
-    });
-    this.#base.setOpacity(0);
-    this.#group.add(this.#base.getObject3D());
 
     const hpFrameTexture =
       resources.textures.find((v) => v.id === TEXTURE_IDS.PLAYER_HP_GAUGE)
@@ -96,7 +82,6 @@ export class PlayerGaugeView implements GaugeView {
    * デストラクタ相当の処理
    */
   destructor(): void {
-    this.#base.destructor();
     this.#hpFrame.destructor();
     this.#hpBar.destructor();
     this.#hpNumber.destructor();
