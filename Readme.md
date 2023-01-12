@@ -24,31 +24,6 @@ npm start
 # ブラウザを起動して<localhost:8080>を開く
 ```
 
-## Dockerで動かす
-### 初回
-
-```shell script
-touch .env
-# 環境に応じた値を.envに記載する
-# .envの記載内容は本リポジトリの.env.templateを参照
-
-docker run --env-file <.envのパス> -p <任意ポート>:3000 kaidouji85/gbraver-burst
-# ブラウザでhttp://localhost:<CLIで指定したポート>/を開く
-```
-
-### 2回目以降
-
-```shell script
-docker run --env-file <.envのパス> -p <Dockerホストの任意ポート>:3000 kaidouji85/gbraver-burst
-# ブラウザでhttp://localhost:<CLIで指定したポート>/を開く
-```
-
-## Dockerイメージをビルドする
-
-```shell script
-docker build ./
-```
-
 ## デプロイする
 本プログラムは静的ファイルのみで構成されているので、
 ビルド生成物をPublicに公開すればデプロイ完了です。
