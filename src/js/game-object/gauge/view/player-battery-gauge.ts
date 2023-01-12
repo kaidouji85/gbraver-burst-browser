@@ -45,11 +45,10 @@ export class PlayerBatteryGauge {
       const gauge = this.#gaugeList.find(
         (gauge) => gauge.getValue() === v.value
       );
-
       if (!gauge) {
         return;
       }
-
+      gauge.setBrightness(v.brightness);
       gauge.setOpacity(v.opacity);
     });
   }
