@@ -122,6 +122,15 @@ fixpad
 npm audit --omit=dev
 ```
 
+### シェルスクリプトのチェック
+```shell
+# lint
+shellcheck *.bash
+
+# フォーマット
+shfmt -l -w *.bash
+```
+
 ## スペシャルサンクス
 ### メカザイン
 本ゲームのキャラクターは [DOGAL3](http://doga.jp/2010/programs/dogal/dogal3/index.html) で作成しました。
