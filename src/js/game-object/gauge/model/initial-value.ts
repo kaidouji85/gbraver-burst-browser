@@ -1,6 +1,7 @@
 import * as R from "ramda";
 
 import type { GaugeModel } from "./gauge-model";
+import {BatteryLimit} from "./gauge-model";
 
 /**
  * 初期値を生成する
@@ -9,15 +10,14 @@ import type { GaugeModel } from "./gauge-model";
  * @return 生成した初期値
  */
 export function initialValue(hp: number, battery: number): GaugeModel {
-  const maxBattery = Math.floor(battery);
-  const batteryList = R.times((v) => v + 1, maxBattery).map((v) => ({
+  const batteryList = R.times((v) => v + 1, BatteryLimit).map((v) => ({
     value: v,
     opacity: 1,
   }));
   return {
     hp: hp,
     maxHp: hp,
-    maxBattery,
+    maxBattery: Math.floor(battery),
     batteryList,
     tracking: {
       x: 0,

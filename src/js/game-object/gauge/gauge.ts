@@ -15,13 +15,10 @@ import type { GaugeView } from "./view/gauge-view";
 type Param = {
   /** ゲームオブジェクトアクション */
   gameObjectAction: Stream<GameObjectAction>;
-
   /** ビュー */
   view: GaugeView;
-
   /** 最大HP */
   hp: number;
-
   /** 最大バッテリー */
   battery: number;
 };
@@ -34,7 +31,6 @@ export class Gauge implements HUDTracking {
 
   /**
    * コンストラクタ
-   *
    * @param param パラメータ
    */
   constructor(param: Param) {
@@ -47,18 +43,28 @@ export class Gauge implements HUDTracking {
     });
   }
 
-  /** デストラクタ */
+  /**
+   * デストラクタ
+   */
   destructor(): void {
     this.#view.destructor();
     this.#unsubscriber.unsubscribe();
   }
 
-  /** HP変更 */
+  /**
+   * HP変更
+   * @param value 変更値
+   * @return アニメーション
+   */
   hp(value: number): Animate {
     return hp(this.#model, value);
   }
 
-  /** バッテリー変更 */
+  /**
+   * バッテリー変更
+   * @param value 変更値
+   * @return アニメーション
+   */
   battery(value: number): Animate {
     return battery(this.#model, value);
   }
@@ -66,7 +72,6 @@ export class Gauge implements HUDTracking {
   /**
    * 3Dレイヤーのオブジェクをトラッキングする
    * 座標にはHUDレイヤー系座標に変換したものを指定する
-   *
    * @param x x座標
    * @param y y座標
    */
@@ -75,12 +80,18 @@ export class Gauge implements HUDTracking {
     this.#model.tracking.y = y;
   }
 
-  /** ゲージで使われているthree.jsオブジェクトを取得する */
+  /**
+   * ゲージで使われているthree.jsオブジェクトを取得する
+   * @return 取得結果
+   */
   getObject3D(): THREE.Object3D {
     return this.#view.getObject3D();
   }
 
-  /** プリレンダー */
+  /**
+   * プリレンダー時の処理
+   * @param action アクション
+   */
   #preRender(action: PreRender): void {
     this.#view.engage(this.#model, action);
   }
