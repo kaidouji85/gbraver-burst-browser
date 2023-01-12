@@ -13,6 +13,7 @@ export function initialValue(hp: number, battery: number): GaugeModel {
   const batteryList = R.times((v) => v + 1, BatteryLimit).map((v) => ({
     value: v,
     opacity: 1,
+    brightness: 1,
   }));
   return {
     hp: hp,

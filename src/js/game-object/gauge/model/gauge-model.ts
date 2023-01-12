@@ -2,6 +2,8 @@
 export type Battery = {
   /** バッテリー値 */
   value: number;
+  /** 輝度 */
+  brightness: number;
   /** 透明度 */
   opacity: number;
 };
