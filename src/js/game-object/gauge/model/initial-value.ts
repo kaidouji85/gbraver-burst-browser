@@ -18,7 +18,8 @@ export function initialValue(hp: number, battery: number): GaugeModel {
   return {
     hp: hp,
     maxHp: hp,
-    batteryList: batteryList,
+    maxBattery: 5,
+    batteryList,
     tracking: {
       x: 0,
       y: 0,
