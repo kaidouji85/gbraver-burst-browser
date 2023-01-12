@@ -4,7 +4,6 @@ import type { GaugeModel } from "./gauge-model";
 
 /**
  * 初期値を生成する
- *
  * @param hp 最大HP
  * @param battery 最大バッテリー
  * @return 生成した初期値
@@ -18,7 +17,7 @@ export function initialValue(hp: number, battery: number): GaugeModel {
   return {
     hp: hp,
     maxHp: hp,
-    maxBattery: 5,
+    maxBattery,
     batteryList,
     tracking: {
       x: 0,
