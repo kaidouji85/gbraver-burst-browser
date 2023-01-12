@@ -1,5 +1,5 @@
 /** バッテリーゲージの1マス分のモデル */
-export type Battery = {
+export type BatteryGaugeUnitModel = {
   /** バッテリー値 */
   value: number;
   /** 輝度 */
@@ -18,7 +18,7 @@ export type GaugeModel = {
   /** HP最大値 */
   maxHp: number;
   /** バッテリー */
-  batteryList: Battery[];
+  batteryList: BatteryGaugeUnitModel[];
   /** 現在のバッテリー最大値、本値はゲーム中に変更する */
   maxBattery: number;
   /** トラッキング情報 */
