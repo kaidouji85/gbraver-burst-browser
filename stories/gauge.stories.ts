@@ -44,6 +44,20 @@ export const playerBattery4 = (): HTMLElement => {
   return stub.domElement();
 };
 
+export const playerBattery8 = (): HTMLElement => {
+  const stub = new HUDGameObjectStub(({ resources, gameObjectAction }) => {
+    const gauge = playerGauge({
+      resources,
+      gameObjectAction,
+      hp: 3100,
+      battery: 8,
+    });
+    return [gauge.getObject3D()];
+  });
+  stub.start();
+  return stub.domElement();
+};
+
 export const enemy = (): HTMLElement => {
   const stub = new HUDGameObjectStub(({ resources, gameObjectAction }) => {
     const gauge = enemyGauge({

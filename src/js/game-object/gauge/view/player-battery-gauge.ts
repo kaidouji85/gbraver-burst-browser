@@ -3,8 +3,8 @@ import * as THREE from "three";
 
 import type { Resources } from "../../../resource";
 import type { Battery } from "../model/gauge-model";
+import { BatteryLimit } from "../model/gauge-model";
 import { BatteryGaugeUnit } from "./battery-gauge-unit";
-import {BatteryLimit} from "../model/gauge-model";
 
 /** プレイヤーバッテリー */
 export class PlayerBatteryGauge {

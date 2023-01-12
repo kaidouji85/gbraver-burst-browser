@@ -13,12 +13,7 @@ import type { GaugeModel } from "../model/gauge-model";
 export function battery(model: GaugeModel, value: number): Animate {
   const animations = model.batteryList.map((v) => {
     const brightness = v.value <= value ? 1 : 0;
-    return tween(v, (t) =>
-      t.to(
-        {brightness},
-        300
-      )
-    );
+    return tween(v, (t) => t.to({ brightness }, 300));
   });
   return all(...animations);
 }

@@ -1,7 +1,7 @@
 import * as R from "ramda";
 
 import type { GaugeModel } from "./gauge-model";
-import {BatteryLimit} from "./gauge-model";
+import { BatteryLimit } from "./gauge-model";
 
 /**
  * 初期値を生成する
@@ -12,7 +12,7 @@ import {BatteryLimit} from "./gauge-model";
 export function initialValue(hp: number, battery: number): GaugeModel {
   const batteryList = R.times((v) => v + 1, BatteryLimit).map((v) => ({
     value: v,
-    opacity: (v <= battery) ? 1 : 0,
+    opacity: v <= battery ? 1 : 0,
     brightness: 1,
   }));
   return {
