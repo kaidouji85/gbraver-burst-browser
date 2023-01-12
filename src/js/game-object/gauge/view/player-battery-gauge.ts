@@ -4,9 +4,7 @@ import * as THREE from "three";
 import type { Resources } from "../../../resource";
 import type { Battery } from "../model/gauge-model";
 import { BatteryGaugeUnit } from "./battery-gauge-unit";
-
-/** バッテリー最大値 */
-export const MAX_BATTERY = 5;
+import {BatteryLimit} from "../model/gauge-model";
 
 /** プレイヤーバッテリー */
 export class PlayerBatteryGauge {
@@ -20,7 +18,7 @@ export class PlayerBatteryGauge {
   constructor(resources: Resources) {
     this.#group = new THREE.Group();
 
-    this.#gaugeList = R.times((v) => v + 1, MAX_BATTERY).map(
+    this.#gaugeList = R.times((v) => v + 1, BatteryLimit).map(
       (v) => new BatteryGaugeUnit(resources, v)
     );
     this.#gaugeList.forEach((gauge, index) => {
@@ -29,7 +27,9 @@ export class PlayerBatteryGauge {
     });
   }
 
-  /** デストラクタ相当の処理 */
+  /**
+   * デストラクタ相当の処理
+   */
   destructor(): void {
     this.#gaugeList.forEach((v) => {
       v.destructor();

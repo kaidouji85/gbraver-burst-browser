@@ -1,8 +1,13 @@
 /** バッテリーゲージの1マス分のモデル */
 export type Battery = {
+  /** バッテリー値 */
   value: number;
+  /** 透明度 */
   opacity: number;
 };
+
+/** バッテリーゲージ上限 */
+export const BatteryLimit = 8;
 
 /** ゲージのモデル */
 export type GaugeModel = {
@@ -12,7 +17,7 @@ export type GaugeModel = {
   maxHp: number;
   /** バッテリー */
   batteryList: Battery[];
-  /** バッテリー最大値 */
+  /** 現在のバッテリー最大値、本値はゲーム中に変更する */
   maxBattery: number;
   /** トラッキング情報 */
   tracking: {
