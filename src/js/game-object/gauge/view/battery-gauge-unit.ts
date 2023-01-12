@@ -10,6 +10,7 @@ export class BatteryGaugeUnit {
   #gauge: SimpleImageMesh;
   #back: SimpleImageMesh;
   #value: number;
+  #brightness: number;
 
   /**
    * コンストラクタ
@@ -19,6 +20,7 @@ export class BatteryGaugeUnit {
   constructor(resources: Resources, value: number) {
     this.#group = new THREE.Group();
     this.#value = value;
+    this.#brightness = 1;
     const gaugeImage =
       resources.canvasImages.find(
         (v) => v.id === CANVAS_IMAGE_IDS.BATTERY_GAUGE
@@ -45,7 +47,9 @@ export class BatteryGaugeUnit {
     this.#group.add(this.#back.getObject3D());
   }
 
-  /** デストラクタ相当の処理 */
+  /**
+   * デストラクタ相当の処理
+   */
   destructor() {
     this.#gauge.destructor();
     this.#back.destructor();
@@ -53,7 +57,6 @@ export class BatteryGaugeUnit {
 
   /**
    * シーンに追加するオブジェクトを取得する
-   *
    * @return シーンに追加するオブジェクト
    */
   getObject3D(): THREE.Object3D {
@@ -62,7 +65,6 @@ export class BatteryGaugeUnit {
 
   /**
    * バッテリー値を取得
-   *
    * @return バッテリー値
    */
   getValue(): number {
@@ -71,10 +73,19 @@ export class BatteryGaugeUnit {
 
   /**
    * 透明度を設定
-   *
    * @param opacity 0〜1で指定する透明度、0で完全透明
    */
   setOpacity(opacity: number): void {
-    this.#gauge.setOpacity(opacity);
+    this.#back.setOpacity(opacity);
+    this.#gauge.setOpacity(opacity * this.#brightness);
+  }
+
+  /**
+   * 輝度を設定
+   * @param brightness 0〜1で指定する輝度
+   */
+  setBrightness(brightness: number): void {
+    this.#brightness = brightness;
+    this.#gauge.setOpacity(brightness);
   }
 }
