@@ -12,7 +12,7 @@ import {BatteryLimit} from "./gauge-model";
 export function initialValue(hp: number, battery: number): GaugeModel {
   const batteryList = R.times((v) => v + 1, BatteryLimit).map((v) => ({
     value: v,
-    opacity: 1,
+    opacity: (v <= battery) ? 1 : 0,
     brightness: 1,
   }));
   return {
