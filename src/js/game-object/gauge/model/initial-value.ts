@@ -2,7 +2,7 @@ import * as R from "ramda";
 
 import type { GaugeModel } from "./gauge-model";
 import { BatteryLimit } from "./gauge-model";
-import {getOpacity} from "./get-opacity";
+import {getBatteryGaugeUnitOpacity} from "./get-battery-gauge-unit-opacity";
 import {normalizeMaxBattery} from "./normalize-max-battery";
 
 /**
@@ -15,7 +15,7 @@ export function initialValue(hp: number, battery: number): GaugeModel {
   const maxBattery = normalizeMaxBattery(battery);
   const batteryList = R.times((v) => v + 1, BatteryLimit).map((v) => ({
     value: v,
-    opacity: getOpacity(v, maxBattery),
+    opacity: getBatteryGaugeUnitOpacity(v, maxBattery),
     brightness: 1,
   }));
   return {
