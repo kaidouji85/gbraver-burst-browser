@@ -2,7 +2,7 @@ import * as R from "ramda";
 import * as THREE from "three";
 
 import type { Resources } from "../../../resource";
-import type { BatteryGaugeUnitModel } from "../model/gauge-model";
+import { BatteryGaugeUnitModel } from "../model/battery-gauge-unit-model";
 import { BatteryLimit } from "../model/gauge-model";
 import { BatteryGaugeUnit } from "./battery-gauge-unit";
 
@@ -45,11 +45,7 @@ export class PlayerBatteryGauge {
       const gauge = this.#gaugeList.find(
         (gauge) => gauge.getValue() === v.value
       );
-      if (!gauge) {
-        return;
-      }
-      gauge.setBrightness(v.brightness);
-      gauge.setOpacity(v.opacity);
+      gauge && gauge.engage(v);
     });
   }
 

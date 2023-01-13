@@ -3,6 +3,7 @@ import * as THREE from "three";
 import { SimpleImageMesh } from "../../../mesh/simple-image-mesh";
 import { Resources } from "../../../resource";
 import { CANVAS_IMAGE_IDS } from "../../../resource/canvas-image";
+import { BatteryGaugeUnitProps } from "../model/battery-gauge-unit-model";
 
 /** バッテリーゲージ1マス分 */
 export class BatteryGaugeUnit {
@@ -10,7 +11,6 @@ export class BatteryGaugeUnit {
   #gauge: SimpleImageMesh;
   #back: SimpleImageMesh;
   #value: number;
-  #brightness: number;
 
   /**
    * コンストラクタ
@@ -20,7 +20,6 @@ export class BatteryGaugeUnit {
   constructor(resources: Resources, value: number) {
     this.#group = new THREE.Group();
     this.#value = value;
-    this.#brightness = 1;
     const gaugeImage =
       resources.canvasImages.find(
         (v) => v.id === CANVAS_IMAGE_IDS.BATTERY_GAUGE
@@ -71,21 +70,8 @@ export class BatteryGaugeUnit {
     return this.#value;
   }
 
-  /**
-   * 透明度を設定
-   * @param opacity 0〜1で指定する透明度、0で完全透明
-   */
-  setOpacity(opacity: number): void {
-    this.#back.setOpacity(opacity);
-    this.#gauge.setOpacity(opacity * this.#brightness);
-  }
-
-  /**
-   * 輝度を設定
-   * @param brightness 0〜1で指定する輝度
-   */
-  setBrightness(brightness: number): void {
-    this.#brightness = brightness;
-    this.#gauge.setOpacity(brightness);
+  engage(props: BatteryGaugeUnitProps): void {
+    this.#back.setOpacity(props.opacity);
+    this.#gauge.setOpacity(props.opacity * props.brightness);
   }
 }

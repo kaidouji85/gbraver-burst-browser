@@ -1,12 +1,4 @@
-/** バッテリーゲージの1マス分のモデル */
-export type BatteryGaugeUnitModel = {
-  /** バッテリー値 */
-  value: number;
-  /** 輝度 */
-  brightness: number;
-  /** 透明度 */
-  opacity: number;
-};
+import { BatteryGaugeUnitModel } from "./battery-gauge-unit-model";
 
 /** バッテリーゲージ上限 */
 export const BatteryLimit = 8;
