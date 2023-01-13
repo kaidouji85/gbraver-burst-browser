@@ -2,11 +2,9 @@ import * as R from "ramda";
 import * as THREE from "three";
 
 import type { Resources } from "../../../resource";
-import type { Battery } from "../model/gauge-model";
+import { BatteryGaugeUnitModel } from "../model/battery-gauge-unit-model";
+import { BatteryLimit } from "../model/gauge-model";
 import { BatteryGaugeUnit } from "./battery-gauge-unit";
-
-/** バッテリー最大値 */
-export const MAX_BATTERY = 5;
 
 /** プレイヤーバッテリー */
 export class PlayerBatteryGauge {
@@ -20,7 +18,7 @@ export class PlayerBatteryGauge {
   constructor(resources: Resources) {
     this.#group = new THREE.Group();
 
-    this.#gaugeList = R.times((v) => v + 1, MAX_BATTERY).map(
+    this.#gaugeList = R.times((v) => v + 1, BatteryLimit).map(
       (v) => new BatteryGaugeUnit(resources, v)
     );
     this.#gaugeList.forEach((gauge, index) => {
@@ -29,7 +27,9 @@ export class PlayerBatteryGauge {
     });
   }
 
-  /** デストラクタ相当の処理 */
+  /**
+   * デストラクタ相当の処理
+   */
   destructor(): void {
     this.#gaugeList.forEach((v) => {
       v.destructor();
@@ -40,17 +40,12 @@ export class PlayerBatteryGauge {
    * バッテリーゲージモデルを反映させる
    * @param batteryList モデル
    */
-  engage(batteryList: Battery[]): void {
+  engage(batteryList: BatteryGaugeUnitModel[]): void {
     batteryList.forEach((v) => {
       const gauge = this.#gaugeList.find(
         (gauge) => gauge.getValue() === v.value
       );
-
-      if (!gauge) {
-        return;
-      }
-
-      gauge.setOpacity(v.opacity);
+      gauge && gauge.engage(v);
     });
   }
 

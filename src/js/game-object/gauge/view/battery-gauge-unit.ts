@@ -3,6 +3,7 @@ import * as THREE from "three";
 import { SimpleImageMesh } from "../../../mesh/simple-image-mesh";
 import { Resources } from "../../../resource";
 import { CANVAS_IMAGE_IDS } from "../../../resource/canvas-image";
+import { BatteryGaugeUnitProps } from "../model/battery-gauge-unit-model";
 
 /** バッテリーゲージ1マス分 */
 export class BatteryGaugeUnit {
@@ -45,7 +46,9 @@ export class BatteryGaugeUnit {
     this.#group.add(this.#back.getObject3D());
   }
 
-  /** デストラクタ相当の処理 */
+  /**
+   * デストラクタ相当の処理
+   */
   destructor() {
     this.#gauge.destructor();
     this.#back.destructor();
@@ -53,7 +56,6 @@ export class BatteryGaugeUnit {
 
   /**
    * シーンに追加するオブジェクトを取得する
-   *
    * @return シーンに追加するオブジェクト
    */
   getObject3D(): THREE.Object3D {
@@ -62,19 +64,14 @@ export class BatteryGaugeUnit {
 
   /**
    * バッテリー値を取得
-   *
    * @return バッテリー値
    */
   getValue(): number {
     return this.#value;
   }
 
-  /**
-   * 透明度を設定
-   *
-   * @param opacity 0〜1で指定する透明度、0で完全透明
-   */
-  setOpacity(opacity: number): void {
-    this.#gauge.setOpacity(opacity);
+  engage(props: BatteryGaugeUnitProps): void {
+    this.#back.setOpacity(props.opacity);
+    this.#gauge.setOpacity(props.opacity * props.brightness);
   }
 }

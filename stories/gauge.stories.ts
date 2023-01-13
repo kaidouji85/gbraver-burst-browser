@@ -1,9 +1,11 @@
 import { delay } from "../src/js/animation/delay";
 import { enemyGauge, playerGauge } from "../src/js/game-object/gauge";
 import { HUDGameObjectStub } from "./stub/hud-game-object-stub";
+
 export default {
   title: "gauge",
 };
+
 export const player = (): HTMLElement => {
   const stub = new HUDGameObjectStub(({ resources, gameObjectAction }) => {
     const gauge = playerGauge({
@@ -27,6 +29,35 @@ export const player = (): HTMLElement => {
   stub.start();
   return stub.domElement();
 };
+
+export const playerBattery4 = (): HTMLElement => {
+  const stub = new HUDGameObjectStub(({ resources, gameObjectAction }) => {
+    const gauge = playerGauge({
+      resources,
+      gameObjectAction,
+      hp: 3100,
+      battery: 4,
+    });
+    return [gauge.getObject3D()];
+  });
+  stub.start();
+  return stub.domElement();
+};
+
+export const playerBattery8 = (): HTMLElement => {
+  const stub = new HUDGameObjectStub(({ resources, gameObjectAction }) => {
+    const gauge = playerGauge({
+      resources,
+      gameObjectAction,
+      hp: 3100,
+      battery: 8,
+    });
+    return [gauge.getObject3D()];
+  });
+  stub.start();
+  return stub.domElement();
+};
+
 export const enemy = (): HTMLElement => {
   const stub = new HUDGameObjectStub(({ resources, gameObjectAction }) => {
     const gauge = enemyGauge({
@@ -45,6 +76,20 @@ export const enemy = (): HTMLElement => {
       .chain(gauge.hp(3100))
       .chain(gauge.battery(5));
     animation.loop();
+    return [gauge.getObject3D()];
+  });
+  stub.start();
+  return stub.domElement();
+};
+
+export const enemyBattery4 = (): HTMLElement => {
+  const stub = new HUDGameObjectStub(({ resources, gameObjectAction }) => {
+    const gauge = enemyGauge({
+      resources,
+      gameObjectAction,
+      hp: 3100,
+      battery: 4,
+    });
     return [gauge.getObject3D()];
   });
   stub.start();
