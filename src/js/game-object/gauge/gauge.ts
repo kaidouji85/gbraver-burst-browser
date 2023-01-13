@@ -7,6 +7,7 @@ import type { HUDTracking } from "../../tracking/hud-tracking";
 import type { GameObjectAction } from "../action/game-object-action";
 import { battery } from "./animation/battery";
 import { hp } from "./animation/hp";
+import { maxBattery } from "./animation/max-battery";
 import type { GaugeModel } from "./model/gauge-model";
 import { initialValue } from "./model/initial-value";
 import type { GaugeView } from "./view/gauge-view";
@@ -67,6 +68,15 @@ export class Gauge implements HUDTracking {
    */
   battery(value: number): Animate {
     return battery(this.#model, value);
+  }
+
+  /**
+   * 最大バッテリー変更
+   * @param value 変更値
+   * @return アニメーション
+   */
+  maxBattery(value: number): Animate {
+    return maxBattery(this.#model, value);
   }
 
   /**
