@@ -19,7 +19,7 @@ export function initialValue(hp: number, battery: number): GaugeModel {
     brightness: 1,
   }));
   return {
-    hp: hp,
+    hp,
     maxHp: hp,
     maxBattery,
     batteryList,
