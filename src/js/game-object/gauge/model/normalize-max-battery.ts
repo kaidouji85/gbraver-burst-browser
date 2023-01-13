@@ -1,4 +1,4 @@
-import {BatteryLimit} from "./gauge-model";
+import { BatteryLimit } from "./gauge-model";
 
 /**
  * 最大バッテリー値を正規化する

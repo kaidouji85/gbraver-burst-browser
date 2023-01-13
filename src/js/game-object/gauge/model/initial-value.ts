@@ -2,8 +2,8 @@ import * as R from "ramda";
 
 import type { GaugeModel } from "./gauge-model";
 import { BatteryLimit } from "./gauge-model";
-import {getBatteryGaugeUnitOpacity} from "./get-battery-gauge-unit-opacity";
-import {normalizeMaxBattery} from "./normalize-max-battery";
+import { getBatteryGaugeUnitOpacity } from "./get-battery-gauge-unit-opacity";
+import { normalizeMaxBattery } from "./normalize-max-battery";
 
 /**
  * 初期値を生成する

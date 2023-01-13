@@ -4,6 +4,9 @@
  * @param maxBattery 最大バッテリー
  * @return 透明度
  */
-export function getBatteryGaugeUnitOpacity(gaugeUnitValue: number, maxBattery: number): number {
+export function getBatteryGaugeUnitOpacity(
+  gaugeUnitValue: number,
+  maxBattery: number
+): number {
   return gaugeUnitValue <= maxBattery ? 1 : 0;
 }

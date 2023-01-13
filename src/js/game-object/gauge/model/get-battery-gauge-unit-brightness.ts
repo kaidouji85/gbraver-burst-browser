@@ -4,6 +4,9 @@
  * @param battery 現在バッテリー値
  * @return 輝度
  */
-export function getBatteryGaugeUnitBrightness(gaugeUnitValue: number, battery: number): number {
+export function getBatteryGaugeUnitBrightness(
+  gaugeUnitValue: number,
+  battery: number
+): number {
   return gaugeUnitValue <= battery ? 1 : 0;
 }
