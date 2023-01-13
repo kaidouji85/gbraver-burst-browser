@@ -1,5 +1,5 @@
-import {normalizeMaxBattery} from "../../../../../src/js/game-object/gauge/model/normalize-max-battery";
-import {BatteryLimit} from "../../../../../src/js/game-object/gauge/model/gauge-model";
+import { BatteryLimit } from "../../../../../src/js/game-object/gauge/model/gauge-model";
+import { normalizeMaxBattery } from "../../../../../src/js/game-object/gauge/model/normalize-max-battery";
 
 test("最大バッテリーが整数の場合はそのまま", () => {
   expect(normalizeMaxBattery(5)).toBe(5);
