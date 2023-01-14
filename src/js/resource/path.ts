@@ -1,29 +1,21 @@
 import type { ResourceRoot } from "./resource-root";
 
-/**
- * パス ID
- */
+/** パス ID */
 export type PathId = string;
 
-/**
- * パス設定
- */
+/** パス設定 */
 export type PathConfig = {
   id: PathId;
   path: (basePath: ResourceRoot) => string;
 };
 
-/**
- * パス
- */
+/** パス */
 export type Path = {
   id: PathId;
   path: string;
 };
 
-/**
- * パスIDを集めたもの
- */
+/** パスIDを集めたもの */
 export const PathIds = {
   TITLE_BACK: "TITLE_BACK",
   LOGO: "LOGO",
@@ -63,9 +55,7 @@ export const PathIds = {
   TUTORIAL_IMAGE_CUT_06: "TUTORIAL_IMAGE_CUT_06",
 };
 
-/**
- * パス設定を集めたもの
- */
+/** パス設定を集めたもの */
 export const PathConfigs: PathConfig[] = [
   {
     id: PathIds.TITLE_BACK,
@@ -215,7 +205,6 @@ export const PathConfigs: PathConfig[] = [
 
 /**
  * パス設定をパスに変換する
- *
  * @param config 設定
  * @param resourceRoot リソースルート
  * @return パス
@@ -229,7 +218,6 @@ export function toPath(config: PathConfig, resourceRoot: ResourceRoot): Path {
 
 /**
  * 全てのパスを取得する
- *
  * @param resourceRoot リソースルート
  * @return 全てのパス
  */
