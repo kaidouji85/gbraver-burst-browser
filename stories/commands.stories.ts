@@ -16,7 +16,7 @@ export const commands = (): HTMLElement => {
     const burstButton = shinBraverBurstButton(resources, gameObjectAction);
     const pilotButton = shinyaPilotButton(resources, gameObjectAction);
     all(
-      batterySelector.open(1, 5, "Attack"),
+      batterySelector.open(1, 5, 5, "Attack"),
       burstButton.open(true),
       pilotButton.open(true)
     ).play();

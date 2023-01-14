@@ -18,7 +18,6 @@ import { close } from "./animation/close";
 import { decide } from "./animation/decide";
 import { open } from "./animation/open";
 import type { BatterySelectorModel } from "./model";
-import { MAX_BATTERY } from "./model";
 import type { ButtonLabel } from "./model/button-label";
 import { canBatteryMinus } from "./model/can-battery-minus";
 import { canBatteryPlus } from "./model/can-battery-plus";
@@ -118,23 +117,31 @@ export class BatterySelector {
 
   /**
    * バッテリーセレクターを開く
-   *
    * @param initialValue 初期値
-   * @param maxEnable 選択可能な最大値
+   * @param maxBattery バッテリー最大値
+   * @param enableMaxBattery 選択可能な最大値
    * @param label ボタンのラベル
    * @return アニメーション
    */
-  open(initialValue: number, maxEnable: number, label: ButtonLabel): Animate {
+  open(
+    initialValue: number,
+    maxBattery: number,
+    enableMaxBattery: number,
+    label: ButtonLabel
+  ): Animate {
     this.#model.battery = initialValue;
-    this.#model.needle = getNeedleValue(initialValue);
-    this.#model.enableMaxBattery = Math.min(maxEnable, MAX_BATTERY);
+    this.#model.maxBattery = maxBattery;
+    this.#model.needle = getNeedleValue(initialValue, this.#model.maxBattery);
+    this.#model.enableMaxBattery = Math.min(
+      enableMaxBattery,
+      this.#model.maxBattery
+    );
     this.#model.label = label;
     return open(this.#model);
   }
 
   /**
    * バッテリー決定アニメーション
-   *
    * @return アニメーション
    */
   decide(): Animate {
@@ -144,7 +151,6 @@ export class BatterySelector {
 
   /**
    * バッテリーセレクタを閉じる
-   *
    * @return アニメーション
    */
   close(): Animate {
@@ -154,7 +160,6 @@ export class BatterySelector {
   /**
    * バッテリープラス
    * メモリ最大値の場合は空のアニメーションを返す
-   *
    * @return アニメーション
    */
   batteryPlus(): Animate {
@@ -171,7 +176,6 @@ export class BatterySelector {
   /**
    * バッテリーマイナス
    * メモリ最小値の場合は空のアニメーションを返す
-   *
    * @return アニメーション
    */
   batteryMinus(): Animate {
@@ -185,19 +189,24 @@ export class BatterySelector {
     );
   }
 
-  /** 現在のバッテリー値を取得する */
+  /**
+   * 現在のバッテリー値を取得する
+   * @return 取得結果
+   */
   getBattery(): number {
     return this.#model.battery;
   }
 
-  /** シーンに追加するthree.jsオブジェクトを取得する */
+  /**
+   * シーンに追加するthree.jsオブジェクトを取得する
+   * @return 取得結果
+   */
   getObject3D(): THREE.Object3D {
     return this.#view.getObject3D();
   }
 
   /**
    * 決定ボタン押下ストリーム
-   *
    * @return 通知ストリーム
    */
   decidePushNotifier(): Stream<Event> {
@@ -206,7 +215,6 @@ export class BatterySelector {
 
   /**
    * バッテリープラスボタン押下ストリーム
-   *
    * @return 通知ストリーム
    */
   batteryPlusPushNotifier(): Stream<void> {
@@ -215,28 +223,32 @@ export class BatterySelector {
 
   /**
    * バッテリーマイナスボタン押下ストリーム
-   *
    * @return 通知ストリーム
    */
   batteryMinusPushNotifier(): Stream<void> {
     return this.#batteryMinusPush;
   }
 
-  /** 状態更新 */
+  /**
+   * 状態更新
+   * @param action アクション
+   */
   #update(action: Update): void {
     this.#batteryMinusTween.update(action.time);
     this.#batteryPlusTween.update(action.time);
     this.#batteryChangeTween.update(action.time);
   }
 
-  /** プリレンダー */
+  /**
+   * プリレンダー
+   * @param action アクション
+   */
   #preRender(action: PreRender): void {
     this.#view.engage(this.#model, action);
   }
 
   /**
    * 決定ボタン押下時の処理
-   *
    * @param event イベント
    */
   #onOKPush(event: Event): void {
@@ -271,7 +283,6 @@ export class BatterySelector {
 
   /**
    * バッテリーマイナスボタン ポップ
-   *
    * @return アニメーション
    */
   #batteryMinusPop(): Animate {
@@ -282,7 +293,6 @@ export class BatterySelector {
 
   /**
    * バッテリープラスボタン ポップ
-   *
    * @return アニメーション
    */
   #batteryPlusPop(): Animate {
@@ -293,14 +303,13 @@ export class BatterySelector {
 
   /**
    * バッテリー値を変更するヘルパー関数
-   *
    * @param battery 変更するバッテリー値
    * @return アニメーション
    */
   #batteryChange(battery: number): Animate {
     this.#batteryChangeTween.update();
     this.#batteryChangeTween.removeAll();
-    const needle = getNeedleValue(battery);
+    const needle = getNeedleValue(battery, this.#model.maxBattery);
     return all(
       process(() => {
         this.#model.battery = battery;
