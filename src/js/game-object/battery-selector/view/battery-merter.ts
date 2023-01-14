@@ -125,7 +125,7 @@ export class BatteryMeter {
     this.#disk4.setOpacity(disk4Opacity);
     const disk8Opacity = model.maxBattery === 8 ? model.opacity : 0;
     this.#disk8.setOpacity(disk8Opacity);
-    const diskOpacity = [4,8].includes(model.maxBattery) ? 0 : model.opacity;
+    const diskOpacity = [4, 8].includes(model.maxBattery) ? 0 : model.opacity;
     this.#disk.setOpacity(diskOpacity);
     this.#needle.setOpacity(model.opacity);
     this.#numbers.forEach((numberMesh, value) => {
