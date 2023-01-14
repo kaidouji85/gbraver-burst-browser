@@ -73,8 +73,9 @@ export class PlayerGaugeView implements GaugeView {
     this.#group.add(this.#batteryFrame.getObject3D());
 
     const batteryFrameBigTexture =
-      resources.textures.find((v) => v.id === TEXTURE_IDS.PLAYER_BATTERY_GAUGE_BIG)
-        ?.texture ?? new THREE.Texture();
+      resources.textures.find(
+        (v) => v.id === TEXTURE_IDS.PLAYER_BATTERY_GAUGE_BIG
+      )?.texture ?? new THREE.Texture();
     this.#batteryFrameBig = new HorizontalAnimationMesh({
       width: 1024,
       height: 1024,

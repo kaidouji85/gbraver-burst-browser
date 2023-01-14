@@ -1,9 +1,9 @@
 import { all } from "../../../animation/all";
 import { Animate } from "../../../animation/animate";
+import { process } from "../../../animation/process";
 import { tween } from "../../../animation/tween";
 import type { GaugeModel } from "../model/gauge-model";
 import { getBatteryGaugeUnitOpacity } from "../model/get-battery-gauge-unit-opacity";
-import { process } from "../../../animation/process";
 
 /**
  * バッテリー最大値を変更するアニメーション
@@ -18,10 +18,7 @@ export function maxBattery(model: GaugeModel, value: number): Animate {
     }),
     ...model.batteryList.map((gaugeUnit) =>
       tween(gaugeUnit, (t) =>
-        t.to(
-          { opacity: getBatteryGaugeUnitOpacity(gaugeUnit.value, value) },
-          0
-        )
+        t.to({ opacity: getBatteryGaugeUnitOpacity(gaugeUnit.value, value) }, 0)
       )
     )
   );
