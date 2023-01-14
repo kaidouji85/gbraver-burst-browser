@@ -18,7 +18,6 @@ import { close } from "./animation/close";
 import { decide } from "./animation/decide";
 import { open } from "./animation/open";
 import type { BatterySelectorModel } from "./model";
-import { MAX_BATTERY_LIMIT } from "./model";
 import type { ButtonLabel } from "./model/button-label";
 import { canBatteryMinus } from "./model/can-battery-minus";
 import { canBatteryPlus } from "./model/can-battery-plus";
@@ -126,8 +125,8 @@ export class BatterySelector {
    */
   open(initialValue: number, maxEnable: number, label: ButtonLabel): Animate {
     this.#model.battery = initialValue;
-    this.#model.needle = getNeedleValue(initialValue);
-    this.#model.enableMaxBattery = Math.min(maxEnable, MAX_BATTERY_LIMIT);
+    this.#model.needle = getNeedleValue(initialValue, this.#model.maxBattery);
+    this.#model.enableMaxBattery = Math.min(maxEnable, this.#model.maxBattery);
     this.#model.label = label;
     return open(this.#model);
   }
@@ -300,7 +299,7 @@ export class BatterySelector {
   #batteryChange(battery: number): Animate {
     this.#batteryChangeTween.update();
     this.#batteryChangeTween.removeAll();
-    const needle = getNeedleValue(battery);
+    const needle = getNeedleValue(battery, this.#model.maxBattery);
     return all(
       process(() => {
         this.#model.battery = battery;

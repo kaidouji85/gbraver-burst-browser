@@ -1,8 +1,5 @@
 import type { ButtonLabel } from "./button-label";
 
-/** バッテリー最大値の上限 */
-export const MAX_BATTERY_LIMIT = 8;
-
 /** バッテリー最小値 */
 export const MIN_BATTERY = 0;
 
@@ -10,10 +7,7 @@ export const MIN_BATTERY = 0;
 export type BatterySelectorModel = {
   /** 最後に選択したバッテリーの値 */
   battery: number;
-  /**
-   * バッテリー最大値
-   * 本プロパティは変更可だが、MAX_BATTERY_LIMITより大きい値はセットできない
-   */
+  /** バッテリー最大値 */
   maxBattery: number;
   /** 選択可能なバッテリーの最大値 */
   enableMaxBattery: number;
