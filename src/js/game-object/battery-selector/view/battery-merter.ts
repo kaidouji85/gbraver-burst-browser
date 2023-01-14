@@ -7,6 +7,7 @@ import type { Resources } from "../../../resource";
 import { CANVAS_IMAGE_IDS } from "../../../resource/canvas-image";
 import { TEXTURE_IDS } from "../../../resource/texture/ids";
 import type { BatterySelectorModel } from "../model";
+import { batteryNumber } from "./battery-number";
 
 /** バッテリーゲージの最大数字 */
 export const MAX_VALUE = 5;
@@ -19,6 +20,10 @@ export class BatteryMeter {
   #numbers: HorizontalAnimationMesh[];
   #disActiveNumbers: HorizontalAnimationMesh[];
 
+  /**
+   * コンストラクタ
+   * @param resources リソース管理オブジェクト
+   */
   constructor(resources: Resources) {
     this.#group = new THREE.Group();
     const disk =
@@ -62,7 +67,9 @@ export class BatteryMeter {
     this.#group.add(this.#needle.getObject3D());
   }
 
-  /** デストラクタ */
+  /**
+   * デストラクタ
+   */
   destructor(): void {
     this.#disk.destructor();
     this.#needle.destructor();
@@ -74,7 +81,10 @@ export class BatteryMeter {
     });
   }
 
-  /** モデルをビューに反映させる */
+  /**
+   * モデルをビューに反映させる
+   * @param model モデル
+   */
   update(model: BatterySelectorModel): void {
     this.#needle.getObject3D().rotation.z = Math.PI * (1 - model.needle);
     this.#disk.setOpacity(model.opacity);
@@ -91,34 +101,11 @@ export class BatteryMeter {
     });
   }
 
-  /** シーンに追加するオブジェクトを取得する */
+  /**
+   * シーンに追加するオブジェクトを取得する
+   * @return シーンに追加するオブジェクト
+   */
   getObject3D(): THREE.Object3D {
     return this.#group;
   }
-}
-
-/**
- * バッテリーセレクタ数字のCanvasMeshを生成するヘルパー関数
- *
- * @param value 数字の値
- * @param texture テクスチャ
- * @return バッテリーセレクタ数字
- */
-function batteryNumber(
-  value: number,
-  texture: THREE.Texture
-): HorizontalAnimationMesh {
-  const maxAnimation = 8;
-  const numberMesh = new HorizontalAnimationMesh({
-    texture,
-    maxAnimation,
-    width: 64,
-    height: 64,
-  });
-  numberMesh.animate(value / 8);
-  const angle = Math.PI - (Math.PI / MAX_VALUE) * value;
-  const radius = 155;
-  numberMesh.getObject3D().position.x = radius * Math.cos(angle);
-  numberMesh.getObject3D().position.y = radius * Math.sin(angle);
-  return numberMesh;
 }
