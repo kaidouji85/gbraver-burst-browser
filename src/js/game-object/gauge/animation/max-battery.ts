@@ -20,7 +20,7 @@ export function maxBattery(model: GaugeModel, value: number): Animate {
       tween(gaugeUnit, (t) =>
         t.to(
           { opacity: getBatteryGaugeUnitOpacity(gaugeUnit.value, value) },
-          300
+          0
         )
       )
     )

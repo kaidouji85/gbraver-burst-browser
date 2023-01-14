@@ -99,6 +99,7 @@ export class PlayerGaugeView implements GaugeView {
     this.#hpNumber.destructor();
     this.#maxHpNumber.destructor();
     this.#batteryFrame.destructor();
+    this.#batteryFrameBig.destructor();
     this.#batteryGauge.destructor();
   }
 
