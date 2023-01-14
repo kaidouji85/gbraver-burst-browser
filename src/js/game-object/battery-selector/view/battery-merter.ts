@@ -105,7 +105,7 @@ export class BatteryMeter {
       const { x, y } = batteryNumberPosition(value, model.maxBattery);
       numberMesh.getObject3D().position.x = x;
       numberMesh.getObject3D().position.y = y;
-      model.enableMaxBattery < value
+      (model.enableMaxBattery < value)　&& (value <= model.maxBattery)
         ? numberMesh.setOpacity(model.opacity)
         : numberMesh.setOpacity(0);
     });
