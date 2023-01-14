@@ -20,6 +20,7 @@ export const MAX_VALUE = 8;
 export class BatteryMeter {
   #group: THREE.Group;
   #disk: SimpleImageMesh;
+  #disk8: HorizontalAnimationMesh;
   #needle: SimpleImageMesh;
   #numbers: HorizontalAnimationMesh[];
   #disActiveNumbers: HorizontalAnimationMesh[];
@@ -42,6 +43,17 @@ export class BatteryMeter {
       imageWidth: 539,
     });
     this.#group.add(this.#disk.getObject3D());
+
+    const disk8 =
+      resources.textures.find((v) => v.id === TEXTURE_IDS.BATTERY_METER_8)
+        ?.texture ?? new THREE.Texture();
+    this.#disk8 = new HorizontalAnimationMesh({
+      texture: disk8,
+      width: 1024,
+      height: 1024,
+      maxAnimation: 1,
+    });
+    this.#group.add(this.#disk8.getObject3D());
 
     const disActiveNumber =
       resources.textures.find(
@@ -80,6 +92,7 @@ export class BatteryMeter {
    */
   destructor(): void {
     this.#disk.destructor();
+    this.#disk8.destructor();
     this.#needle.destructor();
     this.#numbers.forEach((v) => {
       v.destructor();
@@ -95,7 +108,10 @@ export class BatteryMeter {
    */
   update(model: BatterySelectorModel): void {
     this.#needle.getObject3D().rotation.z = Math.PI * (1 - model.needle);
-    this.#disk.setOpacity(model.opacity);
+    const disk8Opacity = model.maxBattery === 8 ? model.opacity : 0;
+    this.#disk8.setOpacity(disk8Opacity);
+    const diskOpacity = model.maxBattery !== 8 ? model.opacity : 0;
+    this.#disk.setOpacity(diskOpacity);
     this.#needle.setOpacity(model.opacity);
     this.#numbers.forEach((numberMesh, value) => {
       const { x, y } = batteryNumberPosition(value, model.maxBattery);
