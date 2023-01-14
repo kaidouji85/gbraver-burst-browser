@@ -82,6 +82,6 @@ function continuousAttackDetail(burst: ContinuousAttack): string[] {
 function batteryLimitBreakDetail(burst: BatteryLimitBreak): string[] {
   return [
     `ゲーム終了まで、最大バッテリーを${burst.maxBattery}にする。`,
-    `バッテリーを${burst.recoverBattery}回復する。`
+    `バッテリーを${burst.recoverBattery}回復する。`,
   ];
 }

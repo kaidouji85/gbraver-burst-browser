@@ -83,6 +83,7 @@ function wingDozerIcon(resources: Resources): ArmdozerIcon {
  */
 function genesisBraverIcon(resources: Resources): ArmdozerIcon {
   const path =
-    resources.paths.find((v) => v.id === PathIds.GENESIS_BRAVER_ICON)?.path ?? "";
+    resources.paths.find((v) => v.id === PathIds.GENESIS_BRAVER_ICON)?.path ??
+    "";
   return new ArmdozerIcon(resources, path, "ジェネシスブレイバー アイコン");
 }

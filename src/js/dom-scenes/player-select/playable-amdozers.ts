@@ -1,4 +1,4 @@
-import {ArmDozerId, ArmDozerIds} from "gbraver-burst-core";
+import { ArmDozerId, ArmDozerIds } from "gbraver-burst-core";
 
 /** プレイアブルアームドーザ */
 export const PlayableArmdozers: ArmDozerId[] = [
@@ -12,4 +12,4 @@ export const PlayableArmdozers: ArmDozerId[] = [
 export const DevelopingPlayableArmdozers: ArmDozerId[] = [
   ...PlayableArmdozers,
   ArmDozerIds.GENESIS_BRAVER,
-]
+];

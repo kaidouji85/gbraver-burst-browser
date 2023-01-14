@@ -1,6 +1,10 @@
-import {ArmDozerId} from "gbraver-burst-core";
-import {GameProps} from "../game-props";
-import {DevelopingPlayableArmdozers, PlayableArmdozers} from "../../dom-scenes/player-select/playable-amdozers";
+import { ArmDozerId } from "gbraver-burst-core";
+
+import {
+  DevelopingPlayableArmdozers,
+  PlayableArmdozers,
+} from "../../dom-scenes/player-select/playable-amdozers";
+import { GameProps } from "../game-props";
 
 /**
  * プレイアブルアームドーザを取得するヘルパー関数
@@ -8,5 +12,7 @@ import {DevelopingPlayableArmdozers, PlayableArmdozers} from "../../dom-scenes/p
  * @return 取得結果
  */
 export function getPlayableArmdozers(props: Readonly<GameProps>): ArmDozerId[] {
-  return props.canPlayDevelopingArmdozer ? DevelopingPlayableArmdozers : PlayableArmdozers;
+  return props.canPlayDevelopingArmdozer
+    ? DevelopingPlayableArmdozers
+    : PlayableArmdozers;
 }

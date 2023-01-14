@@ -91,8 +91,8 @@ function wingDozerBustShot(resources: Resources): ArmdozerBustShot {
  */
 function genesisBraverBustShot(resources: Resources): ArmdozerBustShot {
   const path =
-    resources.paths.find((v) => v.id === PathIds.GENESIS_BRAVER_BUST_SHOT)?.path ??
-    "";
+    resources.paths.find((v) => v.id === PathIds.GENESIS_BRAVER_BUST_SHOT)
+      ?.path ?? "";
   const className = `${CLASS_NAME_PREFIX}__genesis-braver`;
   return new ArmdozerBustShot(path, className);
 }
