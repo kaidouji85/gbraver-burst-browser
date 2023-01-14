@@ -40,7 +40,7 @@ export function batteryNumberPosition(
   maxBattery: number
 ): Position {
   const angle = Math.PI - (Math.PI / maxBattery) * battery;
-  const radius = 155;
+  const radius = maxBattery !== 8 ? 155 : 175;
   return {
     x: radius * Math.cos(angle),
     y: radius * Math.sin(angle),
@@ -48,9 +48,10 @@ export function batteryNumberPosition(
 }
 
 /**
- * バッテリーセレクタ数字の座標を計算する
+ * バッテリーセレクタ数字のスケールを計算する
  * @param battery
  * @param maxBattery
+ * @return 計算結果
  */
 export function batteryNumberScale(
   battery: number,
