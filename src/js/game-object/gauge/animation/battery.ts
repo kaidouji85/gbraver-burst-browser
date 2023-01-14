@@ -11,13 +11,14 @@ import { getBatteryGaugeUnitBrightness } from "../model/get-battery-gauge-unit-b
  * @return アニメーション
  */
 export function battery(model: GaugeModel, value: number): Animate {
-  const animations = model.batteryList.map((gaugeUnit) => {
-    return tween(gaugeUnit, (t) =>
-      t.to(
-        { brightness: getBatteryGaugeUnitBrightness(gaugeUnit.value, value) },
-        300
-      )
-    );
-  });
-  return all(...animations);
+  return all(
+    ...model.batteryList.map((gaugeUnit) => {
+      return tween(gaugeUnit, (t) =>
+        t.to(
+          { brightness: getBatteryGaugeUnitBrightness(gaugeUnit.value, value) },
+          300
+        )
+      );
+    })
+  );
 }
