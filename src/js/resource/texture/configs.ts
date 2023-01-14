@@ -365,6 +365,15 @@ export const TEXTURE_CONFIGS: TextureConfig[] = [
     id: TEXTURE_IDS.ENEMY_BATTERY_GAUGE_BIG,
     path: "gauge/enemy-battery-gauge-big.webp",
   },
+  // バッテリーセレクタ系
+  {
+    id: TEXTURE_IDS.BATTERY_METER_8,
+    path: "battery-selector/meter-8.webp",
+  },
+  {
+    id: TEXTURE_IDS.BATTERY_METER_4,
+    path: "battery-selector/meter-4.webp",
+  },
 ];
 
 /** 開発中のテクスチャリソース設定をあつめたもの */
@@ -385,10 +394,5 @@ export const DEVELOPING_TEXTURE_CONFIGS: TextureConfig[] = [
   {
     id: TEXTURE_IDS.GENESIS_BRAVER_SP_TO_STAND,
     path: "armdozer/genesis-braver/sp-to-stand.webp",
-  },
-  // バッテリーセレクタ系
-  {
-    id: TEXTURE_IDS.BATTERY_METER_8,
-    path: "battery-selector/meter-8.webp",
   },
 ];
