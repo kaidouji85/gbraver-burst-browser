@@ -12,7 +12,7 @@ import { circlePushDetector } from "../../push-detector/push-detector";
 import type { BatterySelectorModel } from "../model";
 
 /** バッテリー現在値 最大フレーム数 */
-const BATTERY_VALUE_MAX_ANIMATION = 8;
+const BATTERY_VALUE_MAX_ANIMATION = 16;
 
 /** コンストラクタのパラメータ */
 type Param = {

@@ -56,7 +56,5 @@ export function batteryNumberScale(
   battery: number,
   maxBattery: number
 ): number {
-  return maxBattery <= 5
-    ? 1
-    : 0.8;
+  return maxBattery <= 5 ? 1 : 0.8;
 }
