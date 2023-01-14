@@ -10,7 +10,7 @@ export const Scene: DOMStubStory = domStub((resources) => {
   const scene = new MatchCard({
     resources: resources,
     player: ArmDozerIds.LIGHTNING_DOZER,
-    enemy: ArmDozerIds.NEO_LANDOZER,
+    enemy: ArmDozerIds.GENESIS_BRAVER,
     caption: "STAGE X",
   });
   return scene.getRootHTMLElement();
