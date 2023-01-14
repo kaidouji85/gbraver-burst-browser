@@ -17,6 +17,8 @@ import { lightningDozerBurst } from "./lightning-dozer";
 import { neoLandozerBurst } from "./neo-landozer";
 import { shinBraverBurst } from "./shin-braver";
 import { wingDozerBurst } from "./wingdozer";
+import {GenesisBraverTD} from "../../../view/td/armdozer-objects/genesis-braver";
+import {genesisBraverBurst, GenesisBraverBurst} from "./genesis-braver";
 
 /**
  * バーストアニメーション
@@ -79,6 +81,11 @@ function armdozerAnimation(param: BurstAnimationParam): Animate {
     const burstArmdozerTD: WingDozerTD = param.burstArmdozerTD;
     const burstArmdozerHUD: WingDozerHUD = param.burstArmdozerHUD;
     return wingDozerBurst({ ...param, burstArmdozerTD, burstArmdozerHUD });
+  }
+
+  if (param.burstArmdozerTD instanceof GenesisBraverTD) {
+    const burstArmdozerTD: GenesisBraverTD = param.burstArmdozerTD;
+    return genesisBraverBurst({...param, burstArmdozerTD});
   }
 
   return empty();
