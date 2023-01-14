@@ -7,7 +7,7 @@ import type { Resources } from "../../../resource";
 import { CANVAS_IMAGE_IDS } from "../../../resource/canvas-image";
 import { TEXTURE_IDS } from "../../../resource/texture/ids";
 import type { BatterySelectorModel } from "../model";
-import { batteryNumber } from "./battery-number";
+import {batteryNumber, batteryNumberPosition} from "./battery-number";
 
 /** バッテリーゲージの最大数字 */
 export const MAX_VALUE = 5;
@@ -26,6 +26,7 @@ export class BatteryMeter {
    */
   constructor(resources: Resources) {
     this.#group = new THREE.Group();
+
     const disk =
       resources.canvasImages.find(
         (v) => v.id === CANVAS_IMAGE_IDS.BATTERY_METER
@@ -37,6 +38,7 @@ export class BatteryMeter {
       imageWidth: 539,
     });
     this.#group.add(this.#disk.getObject3D());
+
     const disActiveNumber =
       resources.textures.find(
         (v) => v.id === TEXTURE_IDS.DIS_ACTIVE_BATTERY_SELECTOR_NUMBER
@@ -45,6 +47,7 @@ export class BatteryMeter {
       (value: number) => batteryNumber(value, disActiveNumber)
     );
     this.#disActiveNumbers.forEach((v) => this.#group.add(v.getObject3D()));
+
     const activeNumber =
       resources.textures.find(
         (v) => v.id === TEXTURE_IDS.BATTERY_SELECTOR_NUMBER
@@ -53,6 +56,7 @@ export class BatteryMeter {
       batteryNumber(value, activeNumber)
     );
     this.#numbers.forEach((v) => this.#group.add(v.getObject3D()));
+
     const needle =
       resources.canvasImages.find(
         (v) => v.id === CANVAS_IMAGE_IDS.BATTERY_NEEDLE
@@ -89,12 +93,18 @@ export class BatteryMeter {
     this.#needle.getObject3D().rotation.z = Math.PI * (1 - model.needle);
     this.#disk.setOpacity(model.opacity);
     this.#needle.setOpacity(model.opacity);
-    this.#numbers.forEach((numberMesh, value) =>
+    this.#numbers.forEach((numberMesh, value) => {
+      const {x, y} = batteryNumberPosition(value, model.maxBattery);
+      numberMesh.getObject3D().position.x = x;
+      numberMesh.getObject3D().position.y = y;
       value <= model.enableMaxBattery
         ? numberMesh.setOpacity(model.opacity)
-        : numberMesh.setOpacity(0)
-    );
+        : numberMesh.setOpacity(0);
+    });
     this.#disActiveNumbers.forEach((numberMesh, value) => {
+      const {x, y} = batteryNumberPosition(value, model.maxBattery);
+      numberMesh.getObject3D().position.x = x;
+      numberMesh.getObject3D().position.y = y;
       model.enableMaxBattery < value
         ? numberMesh.setOpacity(model.opacity)
         : numberMesh.setOpacity(0);

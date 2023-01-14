@@ -1,7 +1,6 @@
 import * as THREE from "three";
 
 import { HorizontalAnimationMesh } from "../../../mesh/horizontal-animation";
-import { MAX_VALUE } from "./battery-merter";
 
 /**
  * バッテリーセレクタ数字のCanvasMeshを生成するヘルパー関数
@@ -21,9 +20,26 @@ export function batteryNumber(
     height: 64,
   });
   numberMesh.animate(value / 8);
-  const angle = Math.PI - (Math.PI / MAX_VALUE) * value;
-  const radius = 155;
-  numberMesh.getObject3D().position.x = radius * Math.cos(angle);
-  numberMesh.getObject3D().position.y = radius * Math.sin(angle);
   return numberMesh;
+}
+
+/** 座標 */
+type Position = {
+  x: number;
+  y: number;
+}
+
+/**
+ * バッテリーセレクタ数字の座標を計算する
+ * @param battery バッテリー数字
+ * @param maxBattery 最大バッテリー
+ * @return 計算結果
+ */
+export function batteryNumberPosition(battery: number, maxBattery: number): Position {
+  const angle = Math.PI - (Math.PI / maxBattery) * battery;
+  const radius = 155;
+  return {
+    x: radius * Math.cos(angle),
+    y: radius * Math.sin(angle)
+  };
 }
