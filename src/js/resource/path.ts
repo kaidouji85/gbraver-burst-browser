@@ -36,6 +36,7 @@ export const PathIds = {
   LIGHTNING_DOZER_BUST_SHOT: "LIGHTNING_DOZER_BUST_SHOT",
   WING_DOZER_ICON: "WING_DOZER_ICON",
   WING_DOZER_BUST_SHOT: "WING_DOZER_BUST_SHOT",
+  GENESIS_BRAVER_BUST_SHOT: "GENESIS_BRAVER_BUST_SHOT",
   SHINYA_ICON: "SHINYA_ICON",
   SHINYA_SKILL_CUTIN: "SHINYA_SKILL_CUTIN",
   GAI_ICON: "GAI_ICON",
@@ -108,6 +109,10 @@ export const PathConfigs: PathConfig[] = [
   {
     id: PathIds.WING_DOZER_BUST_SHOT,
     path: (root) => `${root.get()}/armdozer/wing-dozer/bust-shot.webp`,
+  },
+  {
+    id: PathIds.GENESIS_BRAVER_BUST_SHOT,
+    path: (root) => `${root.get()}/armdozer/genesis-braver/bust-shot.webp`,
   },
   {
     id: PathIds.SHINYA_ICON,
