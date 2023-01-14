@@ -10,7 +10,7 @@ export const batterySelector = (): HTMLElement => {
       gameObjectAction: gameObjectAction,
       maxBattery: 5,
     });
-    selector.open(1, 5, "Attack").play();
+    selector.open(1, 5, 5, "Attack").play();
     selector.decidePushNotifier().subscribe((event) => {
       event.preventDefault();
       event.stopPropagation();

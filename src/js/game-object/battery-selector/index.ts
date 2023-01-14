@@ -118,14 +118,16 @@ export class BatterySelector {
   /**
    * バッテリーセレクターを開く
    * @param initialValue 初期値
-   * @param maxEnable 選択可能な最大値
+   * @param maxBattery バッテリー最大値
+   * @param enableMaxBattery 選択可能な最大値
    * @param label ボタンのラベル
    * @return アニメーション
    */
-  open(initialValue: number, maxEnable: number, label: ButtonLabel): Animate {
+  open(initialValue: number, maxBattery:number, enableMaxBattery: number, label: ButtonLabel): Animate {
     this.#model.battery = initialValue;
+    this.#model.maxBattery = maxBattery;
     this.#model.needle = getNeedleValue(initialValue, this.#model.maxBattery);
-    this.#model.enableMaxBattery = Math.min(maxEnable, this.#model.maxBattery);
+    this.#model.enableMaxBattery = Math.min(enableMaxBattery, this.#model.maxBattery);
     this.#model.label = label;
     return open(this.#model);
   }
