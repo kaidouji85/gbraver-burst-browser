@@ -12,14 +12,14 @@ export function batteryNumber(
   value: number,
   texture: THREE.Texture
 ): HorizontalAnimationMesh {
-  const maxAnimation = 8;
+  const maxAnimation = 16;
   const numberMesh = new HorizontalAnimationMesh({
     texture,
     maxAnimation,
     width: 64,
     height: 64,
   });
-  numberMesh.animate(value / 8);
+  numberMesh.animate(value / maxAnimation);
   return numberMesh;
 }
 
