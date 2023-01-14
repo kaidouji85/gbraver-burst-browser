@@ -78,7 +78,6 @@ export class PlayerSelect implements DOMScene {
 
   /**
    * コンストラクタ
-   *
    * @param resources リソース管理オブジェクト
    */
   constructor(resources: Resources) {

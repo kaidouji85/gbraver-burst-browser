@@ -66,6 +66,8 @@ async function main(): Promise<void> {
       GBRAVER_BURST_CAN_PLAY_TUTORIAL_IN_DEVELOPMENT === "true",
     shouldLoadDevelopingResource:
       GBRAVER_BURST_SHOULD_LOAD_DEVELOPING_RESOURCE === "true",
+    canPlayDevelopingArmdozer:
+      GBRAVER_BURST_CAN_PLAY_DEVELOPING_ARMDOZER === "true",
   });
   await game.initialize();
 }
