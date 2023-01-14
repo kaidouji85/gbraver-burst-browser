@@ -123,11 +123,19 @@ export class BatterySelector {
    * @param label ボタンのラベル
    * @return アニメーション
    */
-  open(initialValue: number, maxBattery:number, enableMaxBattery: number, label: ButtonLabel): Animate {
+  open(
+    initialValue: number,
+    maxBattery: number,
+    enableMaxBattery: number,
+    label: ButtonLabel
+  ): Animate {
     this.#model.battery = initialValue;
     this.#model.maxBattery = maxBattery;
     this.#model.needle = getNeedleValue(initialValue, this.#model.maxBattery);
-    this.#model.enableMaxBattery = Math.min(enableMaxBattery, this.#model.maxBattery);
+    this.#model.enableMaxBattery = Math.min(
+      enableMaxBattery,
+      this.#model.maxBattery
+    );
     this.#model.label = label;
     return open(this.#model);
   }

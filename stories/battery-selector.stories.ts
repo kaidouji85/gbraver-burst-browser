@@ -28,7 +28,7 @@ export const batterySelector = (): HTMLElement => {
   return stub.domElement();
 };
 
-export const batterySelector4  = (): HTMLElement => {
+export const batterySelector4 = (): HTMLElement => {
   const stub = new HUDGameObjectStub(({ resources, gameObjectAction }) => {
     const selector = new BatterySelector({
       resources: resources,
@@ -53,7 +53,7 @@ export const batterySelector4  = (): HTMLElement => {
   return stub.domElement();
 };
 
-export const batterySelector8  = (): HTMLElement => {
+export const batterySelector8 = (): HTMLElement => {
   const stub = new HUDGameObjectStub(({ resources, gameObjectAction }) => {
     const selector = new BatterySelector({
       resources: resources,
