@@ -9,6 +9,7 @@ import { MIN_BATTERY } from "./index";
 export function initialValue(): BatterySelectorModel {
   return {
     battery: MIN_BATTERY,
+    maxBattery: 5,
     enableMaxBattery: MIN_BATTERY,
     needle: 0,
     label: "Attack",
