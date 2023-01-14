@@ -10,6 +10,7 @@ import { waitingDialogConnector } from "../action-connector/waiting-dialog-conne
 import { MAX_LOADING_TIME } from "../dom-scene-binder/max-loading-time";
 import type { GameProps } from "../game-props";
 import { loadFullResource } from "./load-full-resource";
+import {getPlayableArmdozers} from "./get-playable-armdozers";
 
 /**
  * カジュアルマッチ開始
@@ -40,7 +41,7 @@ export async function onCasualMatchStart(props: GameProps): Promise<void> {
     };
     props.domDialogBinder.hidden();
     await props.fader.fadeOut();
-    const scene = new PlayerSelect(props.resources);
+    const scene = new PlayerSelect(props.resources, getPlayableArmdozers(props));
     props.domSceneBinder.bind(scene, playerSelectConnector);
     await Promise.race([scene.waitUntilLoaded(), waitTime(MAX_LOADING_TIME)]);
     await props.fader.fadeIn();
