@@ -5,6 +5,7 @@ env:
     IS_SERVICE_WORKER_USED: true
     IS_APP_ICON_DEV_ENABLE: false
     SHOULD_LOAD_DEVELOPING_RESOURCE: false
+    CAN_PLAY_DEVELOPING_ARMDOZER: false
     CAN_PLAY_TUTORIAL_IN_DEVELOPMENT: false
   parameter-store:
     SERVICE: /GbraverBurst/prod/service

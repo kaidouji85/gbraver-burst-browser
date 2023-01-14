@@ -3,6 +3,7 @@ import { waitTime } from "../../wait/wait-time";
 import { playerSelectConnector } from "../action-connector/player-select-connector";
 import { MAX_LOADING_TIME } from "../dom-scene-binder/max-loading-time";
 import type { GameProps } from "../game-props";
+import { getPlayableArmdozers } from "./get-playable-armdozers";
 import { loadFullResource } from "./load-full-resource";
 
 /**
@@ -24,7 +25,7 @@ export async function onArcadeStart(props: GameProps): Promise<void> {
     },
   };
   await props.fader.fadeOut();
-  const scene = new PlayerSelect(props.resources);
+  const scene = new PlayerSelect(props.resources, getPlayableArmdozers(props));
   props.domSceneBinder.bind(scene, playerSelectConnector);
   await Promise.race([scene.waitUntilLoaded(), waitTime(MAX_LOADING_TIME)]);
   await props.fader.fadeIn();

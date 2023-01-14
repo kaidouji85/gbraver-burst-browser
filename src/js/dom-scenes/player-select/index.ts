@@ -78,16 +78,10 @@ export class PlayerSelect implements DOMScene {
 
   /**
    * コンストラクタ
-   *
    * @param resources リソース管理オブジェクト
+   * @param armDozerIds プレイアブルアームドーザ
    */
-  constructor(resources: Resources) {
-    const armDozerIds = [
-      ArmDozerIds.SHIN_BRAVER,
-      ArmDozerIds.WING_DOZER,
-      ArmDozerIds.NEO_LANDOZER,
-      ArmDozerIds.LIGHTNING_DOZER,
-    ];
+  constructor(resources: Resources, armDozerIds: ArmDozerId[]) {
     const pilotIds = [
       PilotIds.SHINYA,
       PilotIds.TSUBASA,

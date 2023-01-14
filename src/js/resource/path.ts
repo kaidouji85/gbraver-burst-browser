@@ -1,29 +1,21 @@
 import type { ResourceRoot } from "./resource-root";
 
-/**
- * パス ID
- */
+/** パス ID */
 export type PathId = string;
 
-/**
- * パス設定
- */
+/** パス設定 */
 export type PathConfig = {
   id: PathId;
   path: (basePath: ResourceRoot) => string;
 };
 
-/**
- * パス
- */
+/** パス */
 export type Path = {
   id: PathId;
   path: string;
 };
 
-/**
- * パスIDを集めたもの
- */
+/** パスIDを集めたもの */
 export const PathIds = {
   TITLE_BACK: "TITLE_BACK",
   LOGO: "LOGO",
@@ -36,6 +28,8 @@ export const PathIds = {
   LIGHTNING_DOZER_BUST_SHOT: "LIGHTNING_DOZER_BUST_SHOT",
   WING_DOZER_ICON: "WING_DOZER_ICON",
   WING_DOZER_BUST_SHOT: "WING_DOZER_BUST_SHOT",
+  GENESIS_BRAVER_BUST_SHOT: "GENESIS_BRAVER_BUST_SHOT",
+  GENESIS_BRAVER_ICON: "GENESIS_BRAVER_ICON",
   SHINYA_ICON: "SHINYA_ICON",
   SHINYA_SKILL_CUTIN: "SHINYA_SKILL_CUTIN",
   GAI_ICON: "GAI_ICON",
@@ -61,9 +55,7 @@ export const PathIds = {
   TUTORIAL_IMAGE_CUT_06: "TUTORIAL_IMAGE_CUT_06",
 };
 
-/**
- * パス設定を集めたもの
- */
+/** パス設定を集めたもの */
 export const PathConfigs: PathConfig[] = [
   {
     id: PathIds.TITLE_BACK,
@@ -108,6 +100,14 @@ export const PathConfigs: PathConfig[] = [
   {
     id: PathIds.WING_DOZER_BUST_SHOT,
     path: (root) => `${root.get()}/armdozer/wing-dozer/bust-shot.webp`,
+  },
+  {
+    id: PathIds.GENESIS_BRAVER_BUST_SHOT,
+    path: (root) => `${root.get()}/armdozer/genesis-braver/bust-shot.webp`,
+  },
+  {
+    id: PathIds.GENESIS_BRAVER_ICON,
+    path: (root) => `${root.get()}/armdozer/genesis-braver/player-select.webp`,
   },
   {
     id: PathIds.SHINYA_ICON,
@@ -205,7 +205,6 @@ export const PathConfigs: PathConfig[] = [
 
 /**
  * パス設定をパスに変換する
- *
  * @param config 設定
  * @param resourceRoot リソースルート
  * @return パス
@@ -219,7 +218,6 @@ export function toPath(config: PathConfig, resourceRoot: ResourceRoot): Path {
 
 /**
  * 全てのパスを取得する
- *
  * @param resourceRoot リソースルート
  * @return 全てのパス
  */

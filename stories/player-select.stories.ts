@@ -4,15 +4,19 @@ import { PlayerSelect } from "../src/js/dom-scenes/player-select";
 import { ArmdozerSelector } from "../src/js/dom-scenes/player-select/armdozer-selector";
 import { PilotSelector } from "../src/js/dom-scenes/player-select/pilot-selector";
 import { createPilotIcon } from "../src/js/dom-scenes/player-select/pilot-selector/create-pilot-icon";
+import { PlayableArmdozers } from "../src/js/dom-scenes/player-select/playable-amdozers";
 import type { DOMStubStory } from "./stub/dom-stub";
 import { domStub } from "./stub/dom-stub";
+
 export default {
   title: "player-select",
 };
+
 export const scene: DOMStubStory = domStub((resources) => {
-  const scene = new PlayerSelect(resources);
+  const scene = new PlayerSelect(resources, PlayableArmdozers);
   return scene.getRootHTMLElement();
 });
+
 export const pilotIcon: DOMStubStory = domStub((resources) => {
   const icon = createPilotIcon(resources, PilotIds.SHINYA);
   icon.selectedNotifier().subscribe(() => {
@@ -20,6 +24,7 @@ export const pilotIcon: DOMStubStory = domStub((resources) => {
   });
   return icon.getRootHTMLElement();
 });
+
 export const armdozerSelector: DOMStubStory = domStub((resources) => {
   const armdozerIds = [
     ArmDozerIds.NEO_LANDOZER,
@@ -34,6 +39,7 @@ export const armdozerSelector: DOMStubStory = domStub((resources) => {
   );
   return component.getRootHTMLElement();
 });
+
 export const pilotSelector: DOMStubStory = domStub((resources) => {
   const pilotIds = [PilotIds.SHINYA, PilotIds.GAI];
   const component = new PilotSelector(resources, pilotIds, PilotIds.SHINYA);
