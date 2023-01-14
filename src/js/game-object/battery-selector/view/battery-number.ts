@@ -27,7 +27,7 @@ export function batteryNumber(
 type Position = {
   x: number;
   y: number;
-}
+};
 
 /**
  * バッテリーセレクタ数字の座標を計算する
@@ -35,11 +35,14 @@ type Position = {
  * @param maxBattery 最大バッテリー
  * @return 計算結果
  */
-export function batteryNumberPosition(battery: number, maxBattery: number): Position {
+export function batteryNumberPosition(
+  battery: number,
+  maxBattery: number
+): Position {
   const angle = Math.PI - (Math.PI / maxBattery) * battery;
   const radius = 155;
   return {
     x: radius * Math.cos(angle),
-    y: radius * Math.sin(angle)
+    y: radius * Math.sin(angle),
   };
 }

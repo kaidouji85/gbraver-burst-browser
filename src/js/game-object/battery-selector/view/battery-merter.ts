@@ -7,10 +7,10 @@ import type { Resources } from "../../../resource";
 import { CANVAS_IMAGE_IDS } from "../../../resource/canvas-image";
 import { TEXTURE_IDS } from "../../../resource/texture/ids";
 import type { BatterySelectorModel } from "../model";
-import {batteryNumber, batteryNumberPosition} from "./battery-number";
+import { batteryNumber, batteryNumberPosition } from "./battery-number";
 
 /** バッテリーゲージの最大数字 */
-export const MAX_VALUE = 5;
+export const MAX_VALUE = 8;
 
 /** バッテリーメーター */
 export class BatteryMeter {
@@ -94,7 +94,7 @@ export class BatteryMeter {
     this.#disk.setOpacity(model.opacity);
     this.#needle.setOpacity(model.opacity);
     this.#numbers.forEach((numberMesh, value) => {
-      const {x, y} = batteryNumberPosition(value, model.maxBattery);
+      const { x, y } = batteryNumberPosition(value, model.maxBattery);
       numberMesh.getObject3D().position.x = x;
       numberMesh.getObject3D().position.y = y;
       value <= model.enableMaxBattery
@@ -102,7 +102,7 @@ export class BatteryMeter {
         : numberMesh.setOpacity(0);
     });
     this.#disActiveNumbers.forEach((numberMesh, value) => {
-      const {x, y} = batteryNumberPosition(value, model.maxBattery);
+      const { x, y } = batteryNumberPosition(value, model.maxBattery);
       numberMesh.getObject3D().position.x = x;
       numberMesh.getObject3D().position.y = y;
       model.enableMaxBattery < value
