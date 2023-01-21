@@ -5,6 +5,7 @@ test("バッテリーが最大値以上の場合、バッテリー+ボタンを�
   const data: BatterySelectorModel = {
     ...EMPTY_BATTERY_SELECTOR,
     battery: 3,
+    maxBattery: 5,
     enableMaxBattery: 3,
   };
   const result = canBatteryPlus(data);
@@ -14,6 +15,7 @@ test("バッテリーが最大値より小さい場合、バッテリー+ボタ�
   const data: BatterySelectorModel = {
     ...EMPTY_BATTERY_SELECTOR,
     battery: 2,
+    maxBattery: 5,
     enableMaxBattery: 3,
   };
   const result = canBatteryPlus(data);

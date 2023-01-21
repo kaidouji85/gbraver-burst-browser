@@ -1,9 +1,9 @@
 import * as THREE from "three";
 
 import type { PreRender } from "../../../game-loop/pre-render";
-import { SimpleImageMesh } from "../../../mesh/simple-image-mesh";
+import { HorizontalAnimationMesh } from "../../../mesh/horizontal-animation";
 import type { Resources } from "../../../resource";
-import { CANVAS_IMAGE_IDS } from "../../../resource/canvas-image";
+import { TEXTURE_IDS } from "../../../resource/texture/ids";
 import { HUDUIScale } from "../../scale";
 import type { GaugeModel } from "../model/gauge-model";
 import { EnemyBatteryGauge } from "./enemy-battery-gauge";
@@ -20,35 +20,67 @@ export const MIN_PADDING_TOP = 50;
 /** 敵のビュー */
 export class EnemyGaugeView implements GaugeView {
   #group: THREE.Group;
-  #base: SimpleImageMesh;
+  #hpFrame: HorizontalAnimationMesh;
   #hpBar: EnemyHpBar;
   #hpNumber: HpNumber;
   #maxHpNumber: HpNumber;
+  #batteryFrame: HorizontalAnimationMesh;
+  #batteryFrameBig: HorizontalAnimationMesh;
   #batteryGauge: EnemyBatteryGauge;
 
   constructor(resources: Resources) {
     this.#group = new THREE.Group();
     this.#group.scale.set(BASE_SCALE, BASE_SCALE, BASE_SCALE);
-    const gaugeBase =
-      resources.canvasImages.find(
-        (v) => v.id === CANVAS_IMAGE_IDS.ENEMY_GAUGE_BASE
-      )?.image ?? new Image();
-    this.#base = new SimpleImageMesh({
-      canvasSize: 1024,
-      meshSize: 1024,
-      image: gaugeBase,
-      imageWidth: 549,
+
+    const hpFrameTexture =
+      resources.textures.find((v) => v.id === TEXTURE_IDS.ENEMY_HP_GAUGE)
+        ?.texture ?? new THREE.Texture();
+    this.#hpFrame = new HorizontalAnimationMesh({
+      width: 1024,
+      height: 1024,
+      texture: hpFrameTexture,
+      maxAnimation: 1,
     });
-    this.#group.add(this.#base.getObject3D());
+    this.#hpFrame.getObject3D().position.set(-110, 37, 0);
+    this.#group.add(this.#hpFrame.getObject3D());
+
     this.#hpBar = new EnemyHpBar(resources);
     this.#hpBar.getObject3D().position.set(213, 30.5, 1);
     this.#group.add(this.#hpBar.getObject3D());
+
     this.#hpNumber = new HpNumber(resources);
     this.#hpNumber.getObject3D().position.set(-145, 52, 1);
     this.#group.add(this.#hpNumber.getObject3D());
+
     this.#maxHpNumber = new HpNumber(resources);
     this.#maxHpNumber.getObject3D().position.set(10, 52, 1);
     this.#group.add(this.#maxHpNumber.getObject3D());
+
+    const batteryFrameTexture =
+      resources.textures.find((v) => v.id === TEXTURE_IDS.ENEMY_BATTERY_GAUGE)
+        ?.texture ?? new THREE.Texture();
+    this.#batteryFrame = new HorizontalAnimationMesh({
+      width: 1024,
+      height: 1024,
+      texture: batteryFrameTexture,
+      maxAnimation: 1,
+    });
+    this.#batteryFrame.getObject3D().position.set(-110, -55.5, 0);
+    this.#group.add(this.#batteryFrame.getObject3D());
+
+    const batteryFrameBigTexture =
+      resources.textures.find(
+        (v) => v.id === TEXTURE_IDS.ENEMY_BATTERY_GAUGE_BIG
+      )?.texture ?? new THREE.Texture();
+    this.#batteryFrameBig = new HorizontalAnimationMesh({
+      width: 1024,
+      height: 1024,
+      texture: batteryFrameBigTexture,
+      maxAnimation: 1,
+    });
+    this.#batteryFrameBig.getObject3D().position.set(-110, -55.5, 0);
+    this.#group.add(this.#batteryFrameBig.getObject3D());
+
     this.#batteryGauge = new EnemyBatteryGauge(resources);
     this.#batteryGauge.getObject3D().position.set(169.5, -55.5, 1);
     this.#group.add(this.#batteryGauge.getObject3D());
@@ -56,10 +88,12 @@ export class EnemyGaugeView implements GaugeView {
 
   /** デストラクタ */
   destructor(): void {
-    this.#base.destructor();
+    this.#hpFrame.destructor();
     this.#hpBar.destructor();
     this.#hpNumber.destructor();
     this.#maxHpNumber.destructor();
+    this.#batteryFrame.destructor();
+    this.#batteryFrameBig.destructor();
     this.#batteryGauge.destructor();
   }
 
@@ -74,6 +108,9 @@ export class EnemyGaugeView implements GaugeView {
       preRender.rendererDOM,
       preRender.safeAreaInset
     );
+    const isBigBatteryFrameVisible = 5 < model.maxBattery;
+    this.#batteryFrame.setOpacity(isBigBatteryFrameVisible ? 0 : 1);
+    this.#batteryFrameBig.setOpacity(isBigBatteryFrameVisible ? 1 : 0);
     this.#hpBar.setValue(model.hp / model.maxHp);
     this.#hpNumber.setValue(model.hp);
     this.#maxHpNumber.setValue(model.maxHp);

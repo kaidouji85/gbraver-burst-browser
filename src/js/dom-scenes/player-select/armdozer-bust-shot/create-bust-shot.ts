@@ -19,16 +19,14 @@ export function createBustShot(
   switch (armdozerId) {
     case ArmDozerIds.SHIN_BRAVER:
       return shinBraverBustShot(resources);
-
     case ArmDozerIds.NEO_LANDOZER:
       return neoLandozerBustShot(resources);
-
     case ArmDozerIds.LIGHTNING_DOZER:
       return lightningDozerBustShot(resources);
-
     case ArmDozerIds.WING_DOZER:
       return wingDozerBustShot(resources);
-
+    case ArmDozerIds.GENESIS_BRAVER:
+      return genesisBraverBustShot(resources);
     default:
       return shinBraverBustShot(resources);
   }
@@ -36,7 +34,6 @@ export function createBustShot(
 
 /**
  * シンブレイバー バストショット
- *
  * @param resources リソース管理オブジェクト
  * @return 生成結果
  */
@@ -50,7 +47,6 @@ function shinBraverBustShot(resources: Resources): ArmdozerBustShot {
 
 /**
  * ネオランドーザ バストショット
- *
  * @param resources リソース管理オブジェクト
  * @return 生成結果
  */
@@ -64,7 +60,6 @@ function neoLandozerBustShot(resources: Resources): ArmdozerBustShot {
 
 /**
  * ライトニングドーザ バストショット
- *
  * @param resources リソース管理オブジェクト
  * @return 生成結果
  */
@@ -78,7 +73,6 @@ function lightningDozerBustShot(resources: Resources): ArmdozerBustShot {
 
 /**
  * ウィングドーザ バストショット
- *
  * @param resources リソース管理オブジェクト
  * @return 生成結果
  */
@@ -87,5 +81,18 @@ function wingDozerBustShot(resources: Resources): ArmdozerBustShot {
     resources.paths.find((v) => v.id === PathIds.WING_DOZER_BUST_SHOT)?.path ??
     "";
   const className = `${CLASS_NAME_PREFIX}__wing-dozer`;
+  return new ArmdozerBustShot(path, className);
+}
+
+/**
+ * ジェネシスブレイバー バストショット
+ * @param resources リソース管理オブジェクト
+ * @return 生成結果
+ */
+function genesisBraverBustShot(resources: Resources): ArmdozerBustShot {
+  const path =
+    resources.paths.find((v) => v.id === PathIds.GENESIS_BRAVER_BUST_SHOT)
+      ?.path ?? "";
+  const className = `${CLASS_NAME_PREFIX}__genesis-braver`;
   return new ArmdozerBustShot(path, className);
 }

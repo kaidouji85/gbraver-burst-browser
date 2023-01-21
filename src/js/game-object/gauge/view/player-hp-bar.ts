@@ -35,6 +35,7 @@ export class PlayerHpBar {
    */
   constructor(resources: Resources) {
     this.#group = new THREE.Group();
+
     const canvas = document.createElement("canvas");
     canvas.width = BAR_CANVAS_WIDTH;
     canvas.height = BAR_CANVAS_HEIGHT;
@@ -71,6 +72,7 @@ export class PlayerHpBar {
       meshWidth: 512,
       meshHeight: 512,
     });
+
     this.#back.draw((context) => {
       const backWidth = 472;
       const backHeight = (back.height * backWidth) / back.width;

@@ -71,6 +71,7 @@ export function inputCommandAnimation(
     props.view.td.gameObjects.turnIndicator.turnChange(isPlayerTurn),
     props.view.hud.gameObjects.batterySelector.open(
       initialValue,
+      player.armdozer.maxBattery,
       enableMax,
       okButtonLabel
     ),

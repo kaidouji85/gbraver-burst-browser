@@ -1,4 +1,5 @@
 import type {
+  BatteryLimitBreak,
   BuffPower,
   Burst,
   ContinuousAttack,
@@ -15,16 +16,14 @@ export function burstDetail(burst: Burst): string[] {
   switch (burst.type) {
     case "RecoverBattery":
       return recoverBatteryDetail(burst);
-
     case "BuffPower":
       return powerBuffDetail(burst);
-
     case "LightningBarrier":
       return lightningBarrierDetail(burst);
-
     case "ContinuousAttack":
       return continuousAttackDetail(burst);
-
+    case "BatteryLimitBreak":
+      return batteryLimitBreakDetail(burst);
     default:
       return [];
   }
@@ -72,5 +71,17 @@ function continuousAttackDetail(burst: ContinuousAttack): string[] {
   return [
     `バッテリーを${burst.recoverBattery}回復する。`,
     `自分ターン終了時に、バッテリー回復なしで再び自分ターンとなる。`,
+  ];
+}
+
+/**
+ * バッテリーリミットブレイク詳細
+ * @param burst バースト情報
+ * @return 説明文
+ */
+function batteryLimitBreakDetail(burst: BatteryLimitBreak): string[] {
+  return [
+    `ゲーム終了まで、最大バッテリーを${burst.maxBattery}にする。`,
+    `バッテリーを${burst.recoverBattery}回復する。`,
   ];
 }

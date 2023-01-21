@@ -340,6 +340,40 @@ export const TEXTURE_CONFIGS: TextureConfig[] = [
     id: TEXTURE_IDS.DRAW,
     path: "result/draw.png",
   },
+  // ゲージ系
+  {
+    id: TEXTURE_IDS.PLAYER_HP_GAUGE,
+    path: "gauge/player-hp-gauge.webp",
+  },
+  {
+    id: TEXTURE_IDS.PLAYER_BATTERY_GAUGE,
+    path: "gauge/player-battery-gauge.webp",
+  },
+  {
+    id: TEXTURE_IDS.PLAYER_BATTERY_GAUGE_BIG,
+    path: "gauge/player-battery-gauge-big.webp",
+  },
+  {
+    id: TEXTURE_IDS.ENEMY_HP_GAUGE,
+    path: "gauge/enemy-hp-gauge.webp",
+  },
+  {
+    id: TEXTURE_IDS.ENEMY_BATTERY_GAUGE,
+    path: "gauge/enemy-battery-gauge.webp",
+  },
+  {
+    id: TEXTURE_IDS.ENEMY_BATTERY_GAUGE_BIG,
+    path: "gauge/enemy-battery-gauge-big.webp",
+  },
+  // バッテリーセレクタ系
+  {
+    id: TEXTURE_IDS.BATTERY_METER_8,
+    path: "battery-selector/meter-8.webp",
+  },
+  {
+    id: TEXTURE_IDS.BATTERY_METER_4,
+    path: "battery-selector/meter-4.webp",
+  },
 ];
 
 /** 開発中のテクスチャリソース設定をあつめたもの */
