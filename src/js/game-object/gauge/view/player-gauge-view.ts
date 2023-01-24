@@ -6,6 +6,7 @@ import type { Resources } from "../../../resource";
 import { TEXTURE_IDS } from "../../../resource/texture/ids";
 import { HUDUIScale } from "../../scale";
 import type { GaugeModel } from "../model/gauge-model";
+import { BATTERY_UNIT_GAUGE_PIXEL_WIDTH } from "./battery-gauge-unit";
 import type { GaugeView } from "./gauge-view";
 import { HpNumber } from "./hp-number";
 import { PlayerBatteryGauge } from "./player-battery-gauge";
@@ -72,7 +73,9 @@ export class PlayerGaugeView implements GaugeView {
     this.#group.add(this.#batteryFrame.getObject3D());
 
     this.#batteryGauge = new PlayerBatteryGauge(resources);
-    this.#batteryGauge.getObject3D().position.set(-169.5, -55.5, 1);
+    this.#batteryGauge
+      .getObject3D()
+      .position.set(-169.5 - BATTERY_UNIT_GAUGE_PIXEL_WIDTH / 2, -55.5, 1);
     this.#group.add(this.#batteryGauge.getObject3D());
   }
 

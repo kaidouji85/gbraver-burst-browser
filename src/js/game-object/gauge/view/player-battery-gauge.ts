@@ -4,7 +4,10 @@ import * as THREE from "three";
 import type { Resources } from "../../../resource";
 import { BatteryGaugeUnitModel } from "../model/battery-gauge-unit-model";
 import { BatteryLimit } from "../model/gauge-model";
-import { BatteryGaugeUnit } from "./battery-gauge-unit";
+import {
+  BATTERY_UNIT_GAUGE_PIXEL_WIDTH,
+  BatteryGaugeUnit,
+} from "./battery-gauge-unit";
 
 /** プレイヤーバッテリー */
 export class PlayerBatteryGauge {
@@ -22,7 +25,8 @@ export class PlayerBatteryGauge {
       (v) => new BatteryGaugeUnit(resources, v)
     );
     this.#gaugeList.forEach((gauge, index) => {
-      gauge.getObject3D().position.x = index * 95;
+      gauge.getObject3D().position.x =
+        BATTERY_UNIT_GAUGE_PIXEL_WIDTH / 2 + index * 95;
       this.#group.add(gauge.getObject3D());
     });
   }
