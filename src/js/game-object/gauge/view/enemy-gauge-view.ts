@@ -10,6 +10,7 @@ import { EnemyBatteryGauge } from "./enemy-battery-gauge";
 import { EnemyHpBar } from "./enemy-hp-bar";
 import type { GaugeView } from "./gauge-view";
 import { HpNumber } from "./hp-number";
+import {BATTERY_UNIT_GAUGE_PIXEL_WIDTH} from "./battery-gauge-unit";
 
 /** 基本拡大率 */
 export const BASE_SCALE = 0.3;
@@ -82,7 +83,7 @@ export class EnemyGaugeView implements GaugeView {
     this.#group.add(this.#batteryFrameBig.getObject3D());
 
     this.#batteryGauge = new EnemyBatteryGauge(resources);
-    this.#batteryGauge.getObject3D().position.set(169.5, -55.5, 1);
+    this.#batteryGauge.getObject3D().position.set(169.5 + BATTERY_UNIT_GAUGE_PIXEL_WIDTH / 2, -55.5, 1);
     this.#group.add(this.#batteryGauge.getObject3D());
   }
 
