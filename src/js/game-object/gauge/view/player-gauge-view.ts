@@ -121,6 +121,7 @@ export class PlayerGaugeView implements GaugeView {
     this.#hpNumber.setValue(model.hp);
     this.#maxHpNumber.setValue(model.maxHp);
     this.#batteryGauge.engage(model.batteryList);
+    this.#batteryGauge.getObject3D().scale.x = 5 / model.maxBattery;
     this.#group.scale.set(
       BASE_SCALE * devicePerScale,
       BASE_SCALE * devicePerScale,
