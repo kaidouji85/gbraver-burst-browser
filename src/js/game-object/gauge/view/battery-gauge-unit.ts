@@ -5,6 +5,9 @@ import { Resources } from "../../../resource";
 import { CANVAS_IMAGE_IDS } from "../../../resource/canvas-image";
 import { BatteryGaugeUnitProps } from "../model/battery-gauge-unit-model";
 
+/** バッテリーユニットゲージ幅（ピクセル） */
+export const BATTERY_UNIT_GAUGE_PIXEL_WIDTH = 88;
+
 /** バッテリーゲージ1マス分 */
 export class BatteryGaugeUnit {
   #group: THREE.Group;

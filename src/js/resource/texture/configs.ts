@@ -350,20 +350,12 @@ export const TEXTURE_CONFIGS: TextureConfig[] = [
     path: "gauge/player-battery-gauge.webp",
   },
   {
-    id: TEXTURE_IDS.PLAYER_BATTERY_GAUGE_BIG,
-    path: "gauge/player-battery-gauge-big.webp",
-  },
-  {
     id: TEXTURE_IDS.ENEMY_HP_GAUGE,
     path: "gauge/enemy-hp-gauge.webp",
   },
   {
     id: TEXTURE_IDS.ENEMY_BATTERY_GAUGE,
     path: "gauge/enemy-battery-gauge.webp",
-  },
-  {
-    id: TEXTURE_IDS.ENEMY_BATTERY_GAUGE_BIG,
-    path: "gauge/enemy-battery-gauge-big.webp",
   },
   // バッテリーセレクタ系
   {
