@@ -10,7 +10,6 @@ import type {
   UserPictureGet,
   WebsocketDisconnect,
   WebsocketErrorNotifier,
-  WebsocketUnintentionalCloseNotifier,
 } from "@gbraver-burst-network/browser-core";
 
 import type { BGMManager } from "../bgm/bgm-manager";
@@ -51,8 +50,7 @@ export interface GameAPI
     MailVerify,
     UserMailGet,
     WebsocketDisconnect,
-    WebsocketErrorNotifier,
-    WebsocketUnintentionalCloseNotifier {}
+    WebsocketErrorNotifier {}
 
 /**
  * ゲームプロパティ
