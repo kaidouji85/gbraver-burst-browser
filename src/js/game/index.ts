@@ -50,14 +50,7 @@ export class Game {
         error,
       }))
     );
-    const WebSocketAPIUnintentionalClose: Stream<GameAction> = createStream(
-      this.#props.api.websocketUnintentionalCloseNotifier()
-    ).chain(
-      map((error) => ({
-        type: "WebSocketAPIUnintentionalClose",
-        error,
-      }))
-    );
+
     const gameActionStreams: Stream<GameAction>[] = [
       this.#props.tdBinder.gameActionNotifier(),
       this.#props.domSceneBinder.gameActionNotifier(),
@@ -65,7 +58,6 @@ export class Game {
       this.#props.domFloaters.gameActionNotifier(),
       suddenlyBattleEnd,
       webSocketAPIError,
-      WebSocketAPIUnintentionalClose,
     ];
     this.#unsubscribers = gameActionStreams.map((v) =>
       v.subscribe((action) => {

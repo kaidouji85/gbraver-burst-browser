@@ -26,7 +26,6 @@ import { onSelectionComplete } from "./on-selection-complete";
 import { onSuddenlyEndBattle } from "./on-suddenly-battle-end";
 import { onTutorialStart } from "./on-tutorial-start";
 import { onUniversalLogin } from "./on-universal-login";
-import { onWebSocketAPIUnintentionalClose } from "./on-web-socket-api-unintentional-close";
 import { onWebSocketAPIError } from "./on-websocker-api-error";
 
 /**
@@ -78,8 +77,6 @@ export function onGameAction(props: GameProps, action: GameAction) {
     onEndNetworkError(props, action);
   } else if (action.type === "WebSocketAPIError") {
     onWebSocketAPIError(props, action);
-  } else if (action.type === "WebSocketAPIUnintentionalClose") {
-    onWebSocketAPIUnintentionalClose(props, action);
   } else if (action.type === "ConfigChangeStart") {
     onConfigChangeStart(props);
   } else if (action.type === "ConfigChangeCancel") {
