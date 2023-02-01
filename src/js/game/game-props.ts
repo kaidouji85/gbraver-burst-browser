@@ -4,6 +4,8 @@ import type {
   LoginCheck,
   Logout,
   MailVerify,
+  PrivateMatchCreate,
+  PrivateMatchRoomEnter,
   UniversalLogin,
   UserMailGet,
   UserNameGet,
@@ -49,6 +51,8 @@ export interface GameAPI
     UserPictureGet,
     MailVerify,
     UserMailGet,
+    PrivateMatchCreate,
+    PrivateMatchRoomEnter,
     WebsocketDisconnect,
     WebsocketErrorNotifier {}
 
