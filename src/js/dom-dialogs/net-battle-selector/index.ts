@@ -1,3 +1,4 @@
+import { Resources } from "../../resource";
 import { DOMDialog } from "../dialog";
 import { createNetBattleSelectrProps, NetBattleSelectrProps } from "./props";
 
@@ -8,9 +9,10 @@ export class NetBattleSelector implements DOMDialog {
 
   /**
    * コンストラクタ
+   * @param resources リソース管理オブジェクト
    */
-  constructor() {
-    this.#props = createNetBattleSelectrProps();
+  constructor(resources: Resources) {
+    this.#props = createNetBattleSelectrProps(resources);
   }
 
   /** @override  */

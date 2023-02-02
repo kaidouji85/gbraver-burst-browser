@@ -5,7 +5,7 @@ export default {
   title: "net-battle-selector",
 };
 
-export const dialog: DOMStubStory = domStub(() => {
-  const dialog = new NetBattleSelector();
+export const dialog: DOMStubStory = domStub((resources) => {
+  const dialog = new NetBattleSelector(resources);
   return dialog.getRootHTMLElement();
 });

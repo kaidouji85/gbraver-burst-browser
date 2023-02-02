@@ -45,3 +45,11 @@
   padding-bottom: var(--dialog-padding);
   padding-left: var(--dialog-padding);
 }
+
+.net-battle-selector__closer {
+  width: var(--closer-width);
+  height: var(--closer-height);
+  position: absolute;
+  top: calc(var(--closer-width) * -0.5);
+  left: calc(var(--closer-height) * -0.5);
+}
