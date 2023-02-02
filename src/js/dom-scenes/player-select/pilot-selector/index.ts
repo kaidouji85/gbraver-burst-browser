@@ -225,7 +225,7 @@ export class PilotSelector {
    *
    * @return 通知ストリーム
    */
-  changeNotifier(): Stream<PilotId> {
+  notifyChanges(): Stream<PilotId> {
     return this.#change;
   }
 
@@ -234,7 +234,7 @@ export class PilotSelector {
    *
    * @return 通知ストリーム
    */
-  decideNotifier(): Stream<PilotId> {
+  notifyDecision(): Stream<PilotId> {
     return this.#decide;
   }
 
@@ -242,7 +242,7 @@ export class PilotSelector {
    * 戻る 通知
    * @return 通知ストリーム
    */
-  prevNotifier(): Stream<void> {
+  notifyPrev(): Stream<void> {
     return this.#prev;
   }
 
