@@ -178,7 +178,7 @@ export class LoginDialog implements DOMDialog {
    *
    * @return 通知ストリーム
    */
-  notifyDialogClose(): Stream<void> {
+  notifyClosed(): Stream<void> {
     return this.#closeDialog;
   }
 

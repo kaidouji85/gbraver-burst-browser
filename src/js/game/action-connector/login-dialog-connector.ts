@@ -11,7 +11,7 @@ export const loginDialogConnector: Connector = (dialog, gameAction) => [
       type: "UniversalLogin",
     });
   }),
-  dialog.notifyDialogClose().subscribe(() => {
+  dialog.notifyClosed().subscribe(() => {
     gameAction.next({
       type: "LoginCancel",
     });

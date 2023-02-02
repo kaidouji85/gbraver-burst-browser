@@ -12,7 +12,7 @@ export const dialog: DOMStubStory = domStub((resources) => {
   dialog.notifyLogin().subscribe(() => {
     console.log("login");
   });
-  dialog.notifyDialogClose().subscribe(() => {
+  dialog.notifyClosed().subscribe(() => {
     console.log("close");
   });
   return dialog.getRootHTMLElement();
