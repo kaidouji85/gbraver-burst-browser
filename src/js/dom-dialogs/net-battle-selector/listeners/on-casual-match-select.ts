@@ -1,13 +1,13 @@
+import { pop } from "../../../dom/animation";
 import { PushDOM } from "../../../dom/event-stream";
 import { NetBattleSelectrProps } from "../props";
-import {pop} from "../../../dom/animation";
 
 /**
- * カジュアルマッチボタンを押した時の処理
+ * カジュアルマッチが選択された時の処理
  * @param props ダイアログプロパティ
  * @param action アクション
  */
-export function onCasualMatchPush(
+export function onCasualMatchSelect(
   props: NetBattleSelectrProps,
   action: PushDOM
 ): void {
@@ -16,6 +16,6 @@ export function onCasualMatchPush(
   props.exclusive.execute(async () => {
     props.pushButton.sound.play();
     await pop(props.casualMatchButton, 1.05);
-    props.selectCasualMatch.next();
+    props.casualMatchSelection.next();
   });
 }

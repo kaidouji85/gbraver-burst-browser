@@ -10,5 +10,8 @@ export const dialog: DOMStubStory = domStub((resources) => {
   dialog.notifyCasualMatchSelection().subscribe(() => {
     console.log("select casual match");
   });
+  dialog.notifyPrivateMatchSelection().subscribe(() => {
+    console.log("select private match");
+  });
   return dialog.getRootHTMLElement();
 });

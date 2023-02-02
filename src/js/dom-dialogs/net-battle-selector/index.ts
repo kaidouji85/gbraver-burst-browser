@@ -1,8 +1,9 @@
 import { pushDOMStream } from "../../dom/event-stream";
 import { Resources } from "../../resource";
-import {Stream, Unsubscriber} from "../../stream/stream";
+import { Stream, Unsubscriber } from "../../stream/stream";
 import { DOMDialog } from "../dialog";
-import { onCasualMatchPush } from "./listeners/on-casual-match-push";
+import { onCasualMatchSelect } from "./listeners/on-casual-match-select";
+import { onPrivateMatchSelect } from "./listeners/on-private-match-select";
 import { createNetBattleSelectrProps, NetBattleSelectrProps } from "./props";
 
 /** ネットバトルセレクター */
@@ -20,7 +21,10 @@ export class NetBattleSelector implements DOMDialog {
     this.#props = createNetBattleSelectrProps(resources);
     this.#unsubscribers = [
       pushDOMStream(this.#props.casualMatchButton).subscribe((action) =>
-        onCasualMatchPush(this.#props, action)
+        onCasualMatchSelect(this.#props, action)
+      ),
+      pushDOMStream(this.#props.privateMatchButton).subscribe((action) =>
+        onPrivateMatchSelect(this.#props, action)
       ),
     ];
   }
@@ -42,6 +46,14 @@ export class NetBattleSelector implements DOMDialog {
    * @return 通知ストリーム
    */
   notifyCasualMatchSelection(): Stream<void> {
-    return this.#props.selectCasualMatch;
+    return this.#props.casualMatchSelection;
+  }
+
+  /**
+   * プライベートマッチを選択したことを通知する
+   * @return 通知ストリーム
+   */
+  notifyPrivateMatchSelection(): Stream<void> {
+    return this.#props.privateMatchSelection;
   }
 }
