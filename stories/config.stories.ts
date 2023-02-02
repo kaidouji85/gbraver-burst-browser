@@ -13,10 +13,10 @@ export const Scene: DOMStubStory = domStub((resources) => {
     seVolume: 1,
   };
   const scene = new Config(resources, config);
-  scene.prevNotifier().subscribe(() => {
+  scene.notifyPrev().subscribe(() => {
     console.log("prev");
   });
-  scene.configChangeNotifier().subscribe((config) => {
+  scene.notifyConfigChanges().subscribe((config) => {
     console.log("config change");
     console.log(config);
   });
