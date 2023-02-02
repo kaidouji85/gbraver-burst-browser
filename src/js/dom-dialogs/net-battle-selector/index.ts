@@ -1,24 +1,25 @@
 import { DOMDialog } from "../dialog";
+import { createNetBattleSelectrProps, NetBattleSelectrProps } from "./props";
 
 /** ネットバトルセレクター */
 export class NetBattleSelector implements DOMDialog {
-  /** ルートHTML要素 */
-  #root: HTMLElement;
+  /** プロパティ */
+  #props: NetBattleSelectrProps;
 
   /**
    * コンストラクタ
    */
   constructor() {
-    this.#root = document.createElement("div");
+    this.#props = createNetBattleSelectrProps();
   }
 
-  /**@override  */
+  /** @override  */
   destructor(): void {
     // NOP
   }
 
   /** @override */
   getRootHTMLElement(): HTMLElement {
-    return this.#root;
+    return this.#props.root;
   }
 }
