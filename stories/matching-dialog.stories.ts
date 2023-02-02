@@ -6,7 +6,7 @@ export default {
 };
 export const dialog: DOMStubStory = domStub((resources) => {
   const dialog = new MatchingDialog(resources);
-  dialog.matchingCanceledNotifier().subscribe(() => {
+  dialog.notifyMatchingCanceled().subscribe(() => {
     console.log("matching canceled");
   });
   return dialog.getRootHTMLElement();

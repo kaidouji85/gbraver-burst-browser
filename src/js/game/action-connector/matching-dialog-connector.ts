@@ -6,7 +6,7 @@ type Connector = DomDialogActionConnector<MatchingDialog>;
 
 /** マッチングダイアログとゲームアクションを関連付ける */
 export const matchingDialogConnector: Connector = (dialog, gameAction) => [
-  dialog.matchingCanceledNotifier().subscribe(() => {
+  dialog.notifyMatchingCanceled().subscribe(() => {
     gameAction.next({
       type: "MatchingCanceled",
     });
