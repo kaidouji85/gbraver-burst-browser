@@ -2,10 +2,11 @@ import { pushDOMStream } from "../../dom/event-stream";
 import { Resources } from "../../resource";
 import { Stream, Unsubscriber } from "../../stream/stream";
 import { DOMDialog } from "../dialog";
+import { onBackgroundPush } from "./listeners/on-background-push";
 import { onCasualMatchSelect } from "./listeners/on-casual-match-select";
+import { onCloserPush } from "./listeners/on-closer-push";
 import { onPrivateMatchSelect } from "./listeners/on-private-match-select";
 import { createNetBattleSelectrProps, NetBattleSelectrProps } from "./props";
-import {onCloserPush} from "./listeners/on-closer-push";
 
 /** ネットバトルセレクター */
 export class NetBattleSelector implements DOMDialog {
@@ -27,7 +28,12 @@ export class NetBattleSelector implements DOMDialog {
       pushDOMStream(this.#props.privateMatchButton).subscribe((action) =>
         onPrivateMatchSelect(this.#props, action)
       ),
-      pushDOMStream(this.#props.closer).subscribe(action => onCloserPush(this.#props, action))
+      pushDOMStream(this.#props.closer).subscribe((action) =>
+        onCloserPush(this.#props, action)
+      ),
+      pushDOMStream(this.#props.backGround).subscribe((action) =>
+        onBackgroundPush(this.#props, action)
+      ),
     ];
   }
 

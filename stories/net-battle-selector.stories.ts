@@ -15,6 +15,6 @@ export const dialog: DOMStubStory = domStub((resources) => {
   });
   dialog.notifyDialogClosed().subscribe(() => {
     console.log("dialog closed");
-  })
+  });
   return dialog.getRootHTMLElement();
 });
