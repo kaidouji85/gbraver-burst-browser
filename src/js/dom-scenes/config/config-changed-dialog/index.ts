@@ -61,7 +61,7 @@ export class ConfigChangedDialog {
    *
    * @return 通知ストリーム
    */
-  closeNotifier(): Stream<void> {
+  notifyClosed(): Stream<void> {
     return this.#props.closeStream;
   }
 
@@ -70,7 +70,7 @@ export class ConfigChangedDialog {
    *
    * @return 通知ストリーム
    */
-  acceptNotifier(): Stream<void> {
+  notifyAcceptance(): Stream<void> {
     return this.#props.acceptStream;
   }
 
@@ -79,7 +79,7 @@ export class ConfigChangedDialog {
    *
    * @return 通知ストリーム
    */
-  discardNotifier(): Stream<void> {
+  notifyDiscard(): Stream<void> {
     return this.#props.discardStream;
   }
 }

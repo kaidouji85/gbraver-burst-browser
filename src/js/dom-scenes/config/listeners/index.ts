@@ -29,13 +29,13 @@ export function bindEventListeners(props: ConfigProps): Unsubscriber[] {
     pushDOMStream(props.configChangeButton).subscribe((action) => {
       onConfigChangeButtonPush(props, action);
     }),
-    props.dialog.closeNotifier().subscribe(() => {
+    props.dialog.notifyClosed().subscribe(() => {
       onDialogClose(props);
     }),
-    props.dialog.discardNotifier().subscribe(() => {
+    props.dialog.notifyDiscard().subscribe(() => {
       onDiscardConfigChange(props);
     }),
-    props.dialog.acceptNotifier().subscribe(() => {
+    props.dialog.notifyAcceptance().subscribe(() => {
       onAcceptConfigChange(props);
     }),
   ];

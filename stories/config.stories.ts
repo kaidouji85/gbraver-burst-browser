@@ -25,13 +25,13 @@ export const Scene: DOMStubStory = domStub((resources) => {
 export const ConfigChanged: DOMStubStory = domStub((resources) => {
   const dialog = new ConfigChangedDialog(resources);
   dialog.show();
-  dialog.closeNotifier().subscribe(() => {
+  dialog.notifyClosed().subscribe(() => {
     console.log("on close");
   });
-  dialog.discardNotifier().subscribe(() => {
+  dialog.notifyDiscard().subscribe(() => {
     console.log("on discard");
   });
-  dialog.acceptNotifier().subscribe(() => {
+  dialog.notifyAcceptance().subscribe(() => {
     console.log("on accept");
   });
   return dialog.getRootHTMLElement();
