@@ -19,12 +19,10 @@ export function rootInnerHTML(resources: Resources): string {
       <div class="${ROOT_CLASS}__casual-match">
         <div class="${ROOT_CLASS}__casual-match-title">カジュアルマッチ</div>
         <div class="${ROOT_CLASS}__casual-match-description">${casualMatchDescription}</div>
-        <button class="${ROOT_CLASS}__casual-match-button">カジュアルマッチする</button>
       </div>
       <div class="${ROOT_CLASS}__private-match">
         <div class="${ROOT_CLASS}__private-match-title">プライベートマッチ</div>
         <div class="${ROOT_CLASS}__private-match-description">${privateMatchDescription}</div>
-        <button class="${ROOT_CLASS}__private-match-button">プライベートマッチする</button>
       </div>
     </div>
   `;
