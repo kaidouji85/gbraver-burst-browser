@@ -1,12 +1,21 @@
 import { Resources } from "../../resource";
 import { domUuid } from "../../uuid/dom-uuid";
 import { ROOT_CLASS } from "./dom/class-name";
+import { extractElements } from "./dom/elements";
 import { rootInnerHTML } from "./dom/root-inner-html";
 
 /** ネットバトルセレクターのプロパティ */
 export type NetBattleSelectrProps = {
   /** ルートHTML要素 */
   root: HTMLElement;
+  /** 背景 */
+  backGround: HTMLElement;
+  /** クロージャ */
+  closer: HTMLElement;
+  /** カジュアルマッチボタン */
+  casualMatchButton: HTMLElement;
+  /** プライベートマッチボタン */
+  privateMatchButton: HTMLElement;
 };
 
 /**
@@ -26,5 +35,12 @@ export function createNetBattleSelectrProps(
     privateMatchButton: domUuid(),
   };
   root.innerHTML = rootInnerHTML(resources, dataIDs);
-  return { root };
+  const elements = extractElements(root, dataIDs);
+  return {
+    root,
+    backGround: elements.backGround,
+    closer: elements.closer,
+    casualMatchButton: elements.casualMatchButton,
+    privateMatchButton: elements.privateMatchButton,
+  };
 }
