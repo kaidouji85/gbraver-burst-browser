@@ -1,3 +1,4 @@
+import { Exclusive } from "../../exclusive/exclusive";
 import { Resources } from "../../resource";
 import { domUuid } from "../../uuid/dom-uuid";
 import { ROOT_CLASS } from "./dom/class-name";
@@ -16,6 +17,8 @@ export type NetBattleSelectrProps = {
   casualMatchButton: HTMLElement;
   /** プライベートマッチボタン */
   privateMatchButton: HTMLElement;
+  /** 排他制御 */
+  exclusive: Exclusive;
 };
 
 /**
@@ -42,5 +45,6 @@ export function createNetBattleSelectrProps(
     closer: elements.closer,
     casualMatchButton: elements.casualMatchButton,
     privateMatchButton: elements.privateMatchButton,
+    exclusive: new Exclusive(),
   };
 }
