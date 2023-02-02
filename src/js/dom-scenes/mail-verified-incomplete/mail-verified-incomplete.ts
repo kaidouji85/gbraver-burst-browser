@@ -123,7 +123,7 @@ export class MailVerifiedIncomplete implements DOMScene {
    *
    * @return 通知ストリーム
    */
-  gotoTitleNotifier(): Stream<void> {
+  notifyTitleTransition(): Stream<void> {
     return this.#gotoTitle;
   }
 
@@ -132,7 +132,7 @@ export class MailVerifiedIncomplete implements DOMScene {
    *
    * @return 通知ストリーム
    */
-  reloadNotifier(): Stream<void> {
+  notifyReload(): Stream<void> {
     return this.#reload;
   }
 

@@ -9,12 +9,12 @@ export const mailVerifiedIncompleteConnector: Connector = (
   scene,
   gameAction
 ) => [
-  scene.gotoTitleNotifier().subscribe(() => {
+  scene.notifyTitleTransition().subscribe(() => {
     gameAction.next({
       type: "ExitMailVerifiedIncomplete",
     });
   }),
-  scene.reloadNotifier().subscribe(() => {
+  scene.notifyReload().subscribe(() => {
     gameAction.next({
       type: "ReloadRequest",
     });
