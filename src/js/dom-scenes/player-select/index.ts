@@ -183,7 +183,7 @@ export class PlayerSelect implements DOMScene {
    *
    * @return 通知ストリーム
    */
-  decideNotifier(): Stream<PlayerDecide> {
+  notifySelectCompletion(): Stream<PlayerDecide> {
     return this.#playerDecide;
   }
 
@@ -191,7 +191,7 @@ export class PlayerSelect implements DOMScene {
    * 戻る通知
    * @return 通知ストリーム
    */
-  prevNotifier(): Stream<void> {
+  notifyPrev(): Stream<void> {
     return this.#prev;
   }
 
