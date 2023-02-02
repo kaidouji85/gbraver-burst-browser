@@ -14,6 +14,7 @@ export function onCasualMatchPush(
   action.event.preventDefault();
   action.event.stopPropagation();
   props.exclusive.execute(async () => {
-    await pop(props.casualMatchButton);
+    props.pushButton.sound.play();
+    await pop(props.casualMatchButton, 1.05);
   });
 }
