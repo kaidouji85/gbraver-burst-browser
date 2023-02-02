@@ -1,4 +1,5 @@
 import { Resources } from "../../resource";
+import { domUuid } from "../../uuid/dom-uuid";
 import { ROOT_CLASS } from "./dom/class-name";
 import { rootInnerHTML } from "./dom/root-inner-html";
 
@@ -18,6 +19,12 @@ export function createNetBattleSelectrProps(
 ): NetBattleSelectrProps {
   const root = document.createElement("div");
   root.className = ROOT_CLASS;
-  root.innerHTML = rootInnerHTML(resources);
+  const dataIDs = {
+    backGround: domUuid(),
+    closer: domUuid(),
+    casualMatchButton: domUuid(),
+    privateMatchButton: domUuid(),
+  };
+  root.innerHTML = rootInnerHTML(resources, dataIDs);
   return { root };
 }
