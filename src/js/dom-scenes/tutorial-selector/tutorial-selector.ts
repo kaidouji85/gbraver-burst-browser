@@ -181,7 +181,7 @@ export class TutorialSelector implements DOMScene {
    * 戻るボタン押下通知
    * @return 通知ストリーム
    */
-  prevNotifier(): Stream<void> {
+  notifyPrev(): Stream<void> {
     return this.#prev;
   }
 
@@ -189,7 +189,7 @@ export class TutorialSelector implements DOMScene {
    * チュートリアルステージ選択通知
    * @return 通知ストリーム
    */
-  stageSelectNotifier(): Stream<TutorialStageSelect> {
+  notifyStageSelection(): Stream<TutorialStageSelect> {
     return this.#stageSelect;
   }
 

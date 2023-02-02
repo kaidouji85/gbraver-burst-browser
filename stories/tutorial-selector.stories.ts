@@ -19,10 +19,10 @@ export const scene: DOMStubStory = domStub((resources) => {
       title: "バースト基礎",
     },
   ]);
-  scene.prevNotifier().subscribe(() => {
+  scene.notifyPrev().subscribe(() => {
     console.log("prev");
   });
-  scene.stageSelectNotifier().subscribe((stageSelect) => {
+  scene.notifyStageSelection().subscribe((stageSelect) => {
     console.log("stage-select", stageSelect);
   });
   return scene.getRootHTMLElement();
