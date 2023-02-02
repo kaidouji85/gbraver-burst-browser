@@ -1,6 +1,6 @@
 import { pushDOMStream } from "../../dom/event-stream";
 import { Resources } from "../../resource";
-import { Unsubscriber } from "../../stream/stream";
+import {Stream, Unsubscriber} from "../../stream/stream";
 import { DOMDialog } from "../dialog";
 import { onCasualMatchPush } from "./listeners/on-casual-match-push";
 import { createNetBattleSelectrProps, NetBattleSelectrProps } from "./props";
@@ -35,5 +35,13 @@ export class NetBattleSelector implements DOMDialog {
   /** @override */
   getRootHTMLElement(): HTMLElement {
     return this.#props.root;
+  }
+
+  /**
+   * カジュアルマッチを選択したことを通知する
+   * @return 通知ストリーム
+   */
+  notifyCasualMatchSelection(): Stream<void> {
+    return this.#props.selectCasualMatch;
   }
 }

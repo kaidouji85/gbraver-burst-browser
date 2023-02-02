@@ -5,6 +5,7 @@ import { ROOT_CLASS } from "./dom/class-name";
 import { extractElements } from "./dom/elements";
 import { rootInnerHTML } from "./dom/root-inner-html";
 import {createEmptySoundResource, SOUND_IDS, SoundResource} from "../../resource/sound";
+import {createStreamSource, StreamSource} from "../../stream/stream";
 
 /** ネットバトルセレクターのプロパティ */
 export type NetBattleSelectrProps = {
@@ -20,6 +21,8 @@ export type NetBattleSelectrProps = {
   privateMatchButton: HTMLElement;
   /** 効果音プッシュボタン */
   pushButton: SoundResource;
+  /** カジュアルマッチ選択通知 */
+  selectCasualMatch: StreamSource<void>;
   /** 排他制御 */
   exclusive: Exclusive;
 };
@@ -49,6 +52,7 @@ export function createNetBattleSelectrProps(
     casualMatchButton: elements.casualMatchButton,
     privateMatchButton: elements.privateMatchButton,
     pushButton: resources.sounds.find(v => v.id === SOUND_IDS.PUSH_BUTTON) ?? createEmptySoundResource(),
+    selectCasualMatch: createStreamSource(),
     exclusive: new Exclusive(),
   };
 }

@@ -16,5 +16,6 @@ export function onCasualMatchPush(
   props.exclusive.execute(async () => {
     props.pushButton.sound.play();
     await pop(props.casualMatchButton, 1.05);
+    props.selectCasualMatch.next();
   });
 }
