@@ -13,5 +13,8 @@ export const dialog: DOMStubStory = domStub((resources) => {
   dialog.notifyPrivateMatchSelection().subscribe(() => {
     console.log("select private match");
   });
+  dialog.notifyDialogClosed().subscribe(() => {
+    console.log("dialog closed");
+  })
   return dialog.getRootHTMLElement();
 });

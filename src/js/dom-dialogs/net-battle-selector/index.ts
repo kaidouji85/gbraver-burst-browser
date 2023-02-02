@@ -5,6 +5,7 @@ import { DOMDialog } from "../dialog";
 import { onCasualMatchSelect } from "./listeners/on-casual-match-select";
 import { onPrivateMatchSelect } from "./listeners/on-private-match-select";
 import { createNetBattleSelectrProps, NetBattleSelectrProps } from "./props";
+import {onCloserPush} from "./listeners/on-closer-push";
 
 /** ネットバトルセレクター */
 export class NetBattleSelector implements DOMDialog {
@@ -26,6 +27,7 @@ export class NetBattleSelector implements DOMDialog {
       pushDOMStream(this.#props.privateMatchButton).subscribe((action) =>
         onPrivateMatchSelect(this.#props, action)
       ),
+      pushDOMStream(this.#props.closer).subscribe(action => onCloserPush(this.#props, action))
     ];
   }
 
@@ -55,5 +57,13 @@ export class NetBattleSelector implements DOMDialog {
    */
   notifyPrivateMatchSelection(): Stream<void> {
     return this.#props.privateMatchSelection;
+  }
+
+  /**
+   * ダイアログクローズを通知する
+   * @return 通知ストリーム
+   */
+  notifyDialogClosed(): Stream<void> {
+    return this.#props.dialogClosed;
   }
 }

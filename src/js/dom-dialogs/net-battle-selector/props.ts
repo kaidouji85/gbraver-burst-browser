@@ -29,6 +29,8 @@ export type NetBattleSelectrProps = {
   casualMatchSelection: StreamSource<void>;
   /** プライベートマッチ選択通知 */
   privateMatchSelection: StreamSource<void>;
+  /** ダイアログクローズ通知 */
+  dialogClosed: StreamSource<void>;
   /** 排他制御 */
   exclusive: Exclusive;
 };
@@ -62,6 +64,7 @@ export function createNetBattleSelectrProps(
       createEmptySoundResource(),
     casualMatchSelection: createStreamSource(),
     privateMatchSelection: createStreamSource(),
+    dialogClosed: createStreamSource(),
     exclusive: new Exclusive(),
   };
 }
