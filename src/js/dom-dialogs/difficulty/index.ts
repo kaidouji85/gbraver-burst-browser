@@ -10,7 +10,6 @@ import { createDifficultyDialogProps } from "./props";
 export class DifficultyDialog implements DOMDialog {
   /** プロパティ */
   #props: DifficultyDialogProps;
-
   /** アンサブスクライバ */
   #unsubscribers: Unsubscriber[];
 

@@ -1,11 +1,16 @@
+import { pushDOMStream } from "../../dom/event-stream";
 import { Resources } from "../../resource";
+import { Unsubscriber } from "../../stream/stream";
 import { DOMDialog } from "../dialog";
+import { onCasualMatchPush } from "./listeners/on-casual-match-push";
 import { createNetBattleSelectrProps, NetBattleSelectrProps } from "./props";
 
 /** ネットバトルセレクター */
 export class NetBattleSelector implements DOMDialog {
   /** プロパティ */
   #props: NetBattleSelectrProps;
+  /** アンサブスクライバ */
+  #unsubscribers: Unsubscriber[];
 
   /**
    * コンストラクタ
@@ -13,11 +18,18 @@ export class NetBattleSelector implements DOMDialog {
    */
   constructor(resources: Resources) {
     this.#props = createNetBattleSelectrProps(resources);
+    this.#unsubscribers = [
+      pushDOMStream(this.#props.casualMatchButton).subscribe((action) =>
+        onCasualMatchPush(this.#props, action)
+      ),
+    ];
   }
 
   /** @override  */
   destructor(): void {
-    // NOP
+    this.#unsubscribers.forEach((v) => {
+      v.unsubscribe();
+    });
   }
 
   /** @override */
