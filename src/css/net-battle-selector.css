@@ -39,6 +39,9 @@
   padding-right: var(--dialog-padding);
   padding-bottom: var(--dialog-padding);
   padding-left: var(--dialog-padding);
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 1fr 1fr;
 }
 
 .net-battle-selector__closer {
@@ -61,6 +64,7 @@
   border: var(--button-border);
   background-color: var(--button-background-color);
   padding: calc(var(--responsive-font-size) * 1) calc(var(--responsive-font-size) * 2);
+  text-align: left;
 }
 
 .net-battle-selector__casual-match-description,

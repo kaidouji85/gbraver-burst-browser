@@ -16,14 +16,14 @@ export function rootInnerHTML(resources: Resources): string {
     <div class="${ROOT_CLASS}__background"></div>
     <div class="${ROOT_CLASS}__dialog">
       <img class="${ROOT_CLASS}__closer" alt="閉じる" src="${closerPath}">
-      <div class="${ROOT_CLASS}__casual-match">
+      <button class="${ROOT_CLASS}__casual-match" alt="カジュアルマッチをする">
         <div class="${ROOT_CLASS}__casual-match-title">カジュアルマッチ</div>
         <div class="${ROOT_CLASS}__casual-match-description">${casualMatchDescription}</div>
-      </div>
-      <div class="${ROOT_CLASS}__private-match">
+      </button>
+      <button class="${ROOT_CLASS}__private-match" alt="プライベートマッチをする">
         <div class="${ROOT_CLASS}__private-match-title">プライベートマッチ</div>
         <div class="${ROOT_CLASS}__private-match-description">${privateMatchDescription}</div>
-      </div>
+      </button>
     </div>
   `;
 }
