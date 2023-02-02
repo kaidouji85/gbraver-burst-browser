@@ -150,7 +150,7 @@ export class TutorialSelector implements DOMScene {
         this.#onPrevPush(action);
       }),
       ...stageElements.map((stage) =>
-        stage.stageSelectNotifier().subscribe(() => {
+        stage.notifyStageSelection().subscribe(() => {
           this.#onTutorialStageSelect(stage);
         })
       ),
