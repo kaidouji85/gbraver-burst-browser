@@ -6,7 +6,7 @@ type Connector = DomDialogActionConnector<NetworkErrorDialog>;
 
 /** 通信エラー ダイアログとゲームアクションを関連付ける */
 export const networkErrorDialogConnector: Connector = (dialog, gameAction) => [
-  dialog.postNetworkErrorNotifier().subscribe((postNetworkError) => {
+  dialog.notifyPostNetworkError().subscribe((postNetworkError) => {
     gameAction.next({
       type: "EndNetworkError",
       postNetworkError,

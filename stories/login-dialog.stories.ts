@@ -9,10 +9,10 @@ export const dialog: DOMStubStory = domStub((resources) => {
     resources,
     "ネット対戦をするにはログインしてください"
   );
-  dialog.loginNotifier().subscribe(() => {
+  dialog.notifyLogin().subscribe(() => {
     console.log("login");
   });
-  dialog.closeDialogNotifier().subscribe(() => {
+  dialog.notifyDialogClose().subscribe(() => {
     console.log("close");
   });
   return dialog.getRootHTMLElement();
