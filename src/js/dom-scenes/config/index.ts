@@ -40,7 +40,7 @@ export class Config implements DOMScene {
    *
    * @return 通知ストリーム
    */
-  prevNotifier(): Stream<void> {
+  notifyPrev(): Stream<void> {
     return this.#props.prev;
   }
 
@@ -49,7 +49,7 @@ export class Config implements DOMScene {
    *
    * @return 通知ストリーム
    */
-  configChangeNotifier(): Stream<GbraverBurstBrowserConfig> {
+  notifyConfigChanges(): Stream<GbraverBurstBrowserConfig> {
     return this.#props.configChange;
   }
 }

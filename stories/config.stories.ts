@@ -13,10 +13,10 @@ export const Scene: DOMStubStory = domStub((resources) => {
     seVolume: 1,
   };
   const scene = new Config(resources, config);
-  scene.prevNotifier().subscribe(() => {
+  scene.notifyPrev().subscribe(() => {
     console.log("prev");
   });
-  scene.configChangeNotifier().subscribe((config) => {
+  scene.notifyConfigChanges().subscribe((config) => {
     console.log("config change");
     console.log(config);
   });
@@ -25,13 +25,13 @@ export const Scene: DOMStubStory = domStub((resources) => {
 export const ConfigChanged: DOMStubStory = domStub((resources) => {
   const dialog = new ConfigChangedDialog(resources);
   dialog.show();
-  dialog.closeNotifier().subscribe(() => {
+  dialog.notifyClosed().subscribe(() => {
     console.log("on close");
   });
-  dialog.discardNotifier().subscribe(() => {
+  dialog.notifyDiscard().subscribe(() => {
     console.log("on discard");
   });
-  dialog.acceptNotifier().subscribe(() => {
+  dialog.notifyAcceptance().subscribe(() => {
     console.log("on accept");
   });
   return dialog.getRootHTMLElement();

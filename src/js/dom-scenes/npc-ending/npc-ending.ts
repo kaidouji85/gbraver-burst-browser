@@ -149,7 +149,7 @@ export class NPCEnding implements DOMScene {
    *
    * @return 通知ストリーム
    */
-  endNPCEndingNotifier(): Stream<void> {
+  notifyFinish(): Stream<void> {
     return this.#endNPCEnding;
   }
 

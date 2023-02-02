@@ -150,7 +150,7 @@ export class PilotSelector {
     this.#prevButton = elements.prevButton;
     this.#unsubscribers = [
       ...this.#pilotIcons.map((v) =>
-        v.icon.selectedNotifier().subscribe(() => {
+        v.icon.notifySelection().subscribe(() => {
           this.#onPilotChange(v.pilotId);
         })
       ),
@@ -225,7 +225,7 @@ export class PilotSelector {
    *
    * @return 通知ストリーム
    */
-  changeNotifier(): Stream<PilotId> {
+  notifyChanges(): Stream<PilotId> {
     return this.#change;
   }
 
@@ -234,7 +234,7 @@ export class PilotSelector {
    *
    * @return 通知ストリーム
    */
-  decideNotifier(): Stream<PilotId> {
+  notifyDecision(): Stream<PilotId> {
     return this.#decide;
   }
 
@@ -242,7 +242,7 @@ export class PilotSelector {
    * 戻る 通知
    * @return 通知ストリーム
    */
-  prevNotifier(): Stream<void> {
+  notifyPrev(): Stream<void> {
     return this.#prev;
   }
 

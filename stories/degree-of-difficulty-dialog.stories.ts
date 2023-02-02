@@ -11,7 +11,7 @@ export const dialog: DOMStubStory = domStub((resources) => {
   dialog.notifySelectionComplete().subscribe((diffuculty) => {
     console.log(diffuculty);
   });
-  dialog.notifyDialogClose().subscribe(() => {
+  dialog.notifyClosed().subscribe(() => {
     console.log("close dialog");
   });
   return dialog.getRootHTMLElement();

@@ -12,7 +12,7 @@ export const difficultyDialogConnector: Connector = (dialog, gameAction) => [
       difficulty,
     });
   }),
-  dialog.notifyDialogClose().subscribe(() => {
+  dialog.notifyClosed().subscribe(() => {
     gameAction.next({
       type: "DifficultySelectionCancel",
     });

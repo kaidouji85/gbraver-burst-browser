@@ -69,7 +69,7 @@ export class NetBattleSelector implements DOMDialog {
    * ダイアログクローズを通知する
    * @return 通知ストリーム
    */
-  notifyDialogClosed(): Stream<void> {
+  notifyClosed(): Stream<void> {
     return this.#props.dialogClosed;
   }
 }

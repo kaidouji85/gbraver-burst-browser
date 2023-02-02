@@ -6,12 +6,12 @@ type Connector = DOMSceneActionConnector<Config>;
 
 /** 設定画面とゲームアクションを関連付ける */
 export const configConnector: Connector = (scene, gameAction) => [
-  scene.prevNotifier().subscribe(() => {
+  scene.notifyPrev().subscribe(() => {
     gameAction.next({
       type: "ConfigChangeCancel",
     });
   }),
-  scene.configChangeNotifier().subscribe((config) => {
+  scene.notifyConfigChanges().subscribe((config) => {
     gameAction.next({
       type: "ConfigChangeComplete",
       config,

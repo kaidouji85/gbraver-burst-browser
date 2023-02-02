@@ -96,7 +96,7 @@ export class TutorialStageElement {
    *
    * @return 通知ストリーム
    */
-  stageSelectNotifier(): Stream<void> {
+  notifyStageSelection(): Stream<void> {
     return this.#select;
   }
 

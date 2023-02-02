@@ -74,7 +74,7 @@ export class ArmdozerIcon {
    *
    * @return 通知ストリーム
    */
-  selectedNotifier(): Stream<PushDOM> {
+  notifySelection(): Stream<PushDOM> {
     return this.#select;
   }
 

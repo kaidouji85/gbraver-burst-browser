@@ -123,22 +123,22 @@ export class PlayerSelect implements DOMScene {
     this.#pilotSelector.hidden();
     elements.selector.appendChild(this.#pilotSelector.getRootHTMLElement());
     this.#unsubscribers = [
-      this.#armdozerSelector.changeNotifier().subscribe((v) => {
+      this.#armdozerSelector.notifyChanges().subscribe((v) => {
         this.#onArmdozerChange(v);
       }),
-      this.#armdozerSelector.decideNotifier().subscribe((v) => {
+      this.#armdozerSelector.notifyDecision().subscribe((v) => {
         this.#onArmdozerDecided(v);
       }),
-      this.#armdozerSelector.prevNotifier().subscribe(() => {
+      this.#armdozerSelector.notifyPrev().subscribe(() => {
         this.#onArmdozerSelectorPrev();
       }),
-      this.#pilotSelector.changeNotifier().subscribe((v) => {
+      this.#pilotSelector.notifyChanges().subscribe((v) => {
         this.#onPilotChange(v);
       }),
-      this.#pilotSelector.decideNotifier().subscribe((v) => {
+      this.#pilotSelector.notifyDecision().subscribe((v) => {
         this.#onPilotDecided(v);
       }),
-      this.#pilotSelector.prevNotifier().subscribe(() => {
+      this.#pilotSelector.notifyPrev().subscribe(() => {
         this.#onPilotSelectorPrev();
       }),
     ];
@@ -183,7 +183,7 @@ export class PlayerSelect implements DOMScene {
    *
    * @return 通知ストリーム
    */
-  decideNotifier(): Stream<PlayerDecide> {
+  notifySelectCompletion(): Stream<PlayerDecide> {
     return this.#playerDecide;
   }
 
@@ -191,7 +191,7 @@ export class PlayerSelect implements DOMScene {
    * 戻る通知
    * @return 通知ストリーム
    */
-  prevNotifier(): Stream<void> {
+  notifyPrev(): Stream<void> {
     return this.#prev;
   }
 

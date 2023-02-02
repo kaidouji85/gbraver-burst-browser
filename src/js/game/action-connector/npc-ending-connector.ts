@@ -6,7 +6,7 @@ type Connector = DOMSceneActionConnector<NPCEnding>;
 
 /** NPCルートエンディング画面とゲームアクションを関連付ける */
 export const npcEndingConnector: Connector = (scene, gameAction) => [
-  scene.endNPCEndingNotifier().subscribe(() => {
+  scene.notifyFinish().subscribe(() => {
     gameAction.next({
       type: "EndNPCEnding",
     });
