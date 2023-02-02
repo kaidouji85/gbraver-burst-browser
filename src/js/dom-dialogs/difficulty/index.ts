@@ -40,7 +40,7 @@ export class DifficultyDialog implements DOMDialog {
    *
    * @return 通知ストリーム
    */
-  selectionCompleteNotifier(): Stream<NPCBattleCourseDifficulty> {
+  notifySelectionComplete(): Stream<NPCBattleCourseDifficulty> {
     return this.#props.selectionComplete;
   }
 
@@ -49,7 +49,7 @@ export class DifficultyDialog implements DOMDialog {
    *
    * @return 通知ストリーム
    */
-  closeDialogNotifier(): Stream<void> {
+  notifyDialogClose(): Stream<void> {
     return this.#props.closeDialog;
   }
 }

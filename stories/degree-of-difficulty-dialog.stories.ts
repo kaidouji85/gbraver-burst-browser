@@ -8,10 +8,10 @@ export default {
 
 export const dialog: DOMStubStory = domStub((resources) => {
   const dialog = new DifficultyDialog(resources);
-  dialog.selectionCompleteNotifier().subscribe((diffuculty) => {
+  dialog.notifySelectionComplete().subscribe((diffuculty) => {
     console.log(diffuculty);
   });
-  dialog.closeDialogNotifier().subscribe(() => {
+  dialog.notifyDialogClose().subscribe(() => {
     console.log("close dialog");
   });
   return dialog.getRootHTMLElement();
