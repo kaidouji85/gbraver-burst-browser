@@ -19,7 +19,7 @@ export const scene: DOMStubStory = domStub((resources) => {
 
 export const pilotIcon: DOMStubStory = domStub((resources) => {
   const icon = createPilotIcon(resources, PilotIds.SHINYA);
-  icon.selectedNotifier().subscribe(() => {
+  icon.notifySelection().subscribe(() => {
     // NOP
   });
   return icon.getRootHTMLElement();

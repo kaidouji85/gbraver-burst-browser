@@ -150,7 +150,7 @@ export class PilotSelector {
     this.#prevButton = elements.prevButton;
     this.#unsubscribers = [
       ...this.#pilotIcons.map((v) =>
-        v.icon.selectedNotifier().subscribe(() => {
+        v.icon.notifySelection().subscribe(() => {
           this.#onPilotChange(v.pilotId);
         })
       ),
