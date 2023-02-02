@@ -1,5 +1,6 @@
 import { PushDOM } from "../../../dom/event-stream";
 import { NetBattleSelectrProps } from "../props";
+import {pop} from "../../../dom/animation";
 
 /**
  * カジュアルマッチボタンを押した時の処理
@@ -12,5 +13,7 @@ export function onCasualMatchPush(
 ): void {
   action.event.preventDefault();
   action.event.stopPropagation();
-  console.log("push");
+  props.exclusive.execute(async () => {
+    await pop(props.casualMatchButton);
+  });
 }
