@@ -1,6 +1,6 @@
-/** ルート要素の子孫要素 */
 import { DataIDs } from "./data-ids";
 
+/** ルート要素の子孫要素 */
 export type Elements = {
   /** 背景 */
   backGround: HTMLElement;
