@@ -153,7 +153,7 @@ export class ArmdozerSelector {
     this.#prevButton = elements.prevButton;
     this.#unsubscribers = [
       ...this.#armdozerIcons.map((v) =>
-        v.icon.selectedNotifier().subscribe(() => {
+        v.icon.notifySelection().subscribe(() => {
           this.#onArmdozerSelect(v.armdozerId);
         })
       ),
@@ -212,7 +212,7 @@ export class ArmdozerSelector {
    *
    * @return イベント通知ストリーム
    */
-  changeNotifier(): Stream<ArmDozerId> {
+  notifyChanges(): Stream<ArmDozerId> {
     return this.#change;
   }
 
@@ -221,7 +221,7 @@ export class ArmdozerSelector {
    *
    * @return アームドーザ決定通知ストリーム
    */
-  decideNotifier(): Stream<ArmDozerId> {
+  notifyDecision(): Stream<ArmDozerId> {
     return this.#decide;
   }
 
@@ -229,7 +229,7 @@ export class ArmdozerSelector {
    * 戻る 通知
    * @return 通知ストリーム
    */
-  prevNotifier(): Stream<void> {
+  notifyPrev(): Stream<void> {
     return this.#prev;
   }
 

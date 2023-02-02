@@ -123,13 +123,13 @@ export class PlayerSelect implements DOMScene {
     this.#pilotSelector.hidden();
     elements.selector.appendChild(this.#pilotSelector.getRootHTMLElement());
     this.#unsubscribers = [
-      this.#armdozerSelector.changeNotifier().subscribe((v) => {
+      this.#armdozerSelector.notifyChanges().subscribe((v) => {
         this.#onArmdozerChange(v);
       }),
-      this.#armdozerSelector.decideNotifier().subscribe((v) => {
+      this.#armdozerSelector.notifyDecision().subscribe((v) => {
         this.#onArmdozerDecided(v);
       }),
-      this.#armdozerSelector.prevNotifier().subscribe(() => {
+      this.#armdozerSelector.notifyPrev().subscribe(() => {
         this.#onArmdozerSelectorPrev();
       }),
       this.#pilotSelector.changeNotifier().subscribe((v) => {
