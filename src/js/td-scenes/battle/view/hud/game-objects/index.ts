@@ -77,17 +77,17 @@ export class HUDGameObjects {
     });
     this.drawIndicator = drawIndicator(resources, gameObjectAction);
     this.#unsubscribers = [
-      this.batterySelector.batteryPlusPushNotifier().subscribe(() => {
+      this.batterySelector.notifyBatteryPlus().subscribe(() => {
         this.#battleAction.next({
           type: "plusBattery",
         });
       }),
-      this.batterySelector.batteryMinusPushNotifier().subscribe(() => {
+      this.batterySelector.notifyBatteryMinus().subscribe(() => {
         this.#battleAction.next({
           type: "minusBattery",
         });
       }),
-      this.batterySelector.decidePushNotifier().subscribe((event) => {
+      this.batterySelector.notifyDecision().subscribe((event) => {
         this.#battleAction.next({
           type: "decideBattery",
           battery: this.batterySelector.getBattery(),
