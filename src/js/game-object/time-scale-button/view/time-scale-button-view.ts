@@ -131,7 +131,7 @@ export class TimeScaleButtonView {
    *
    * @return 通知ストリーム
    */
-  pushButtonNotifier(): Stream<void> {
+  notifyPressed(): Stream<void> {
     return this.#pushButton;
   }
 

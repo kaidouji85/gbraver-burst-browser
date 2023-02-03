@@ -50,7 +50,7 @@ export class TimeScaleButton {
           this.#onPreRender(action);
         }
       }),
-      this.#view.pushButtonNotifier().subscribe(() => {
+      this.#view.notifyPressed().subscribe(() => {
         this.#onButtonPush();
       }),
     ];
