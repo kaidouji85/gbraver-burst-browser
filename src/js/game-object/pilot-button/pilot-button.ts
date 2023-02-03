@@ -98,7 +98,7 @@ export class PilotButton {
    *
    * @return 通知ストリーム
    */
-  pushButtonNotifier(): Stream<Event> {
+  notifyPressed(): Stream<Event> {
     return this.#pushButton;
   }
 

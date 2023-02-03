@@ -100,7 +100,7 @@ export class HUDGameObjects {
           event,
         });
       }),
-      this.pilotButton.pushButtonNotifier().subscribe((event) => {
+      this.pilotButton.notifyPressed().subscribe((event) => {
         this.#battleAction.next({
           type: "doPilotSkill",
           event,
