@@ -106,7 +106,7 @@ export class HUDGameObjects {
           event,
         });
       }),
-      this.timeScaleButton.toggleNotifier().subscribe((timeScale) => {
+      this.timeScaleButton.notifyToggled().subscribe((timeScale) => {
         this.#battleAction.next({
           type: "toggleTimeScale",
           timeScale,
