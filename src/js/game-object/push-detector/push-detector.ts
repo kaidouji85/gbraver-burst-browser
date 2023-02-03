@@ -16,24 +16,21 @@ export interface PushDetector {
 
   /**
    * デバッグ用に当たり判定を表示する
-   *
    * @param visible trueで当たり判定を表示する
    */
   setVisible(visible: boolean): void;
 
   /**
    * シーンに追加するオブジェクトを取得する
-   *
    * @return 取得結果
    */
   getObject3D(): THREE.Object3D;
 
   /**
-   * プッシュ通知
-   *
+   * プッシュしたことを通知する
    * @return 通知ストリーム
    */
-  pushNotifier(): Stream<Event>;
+  notifyPush(): Stream<Event>;
 }
 
 /** SimplePushDetectorコンストラクタのパラメータ */
@@ -50,6 +47,7 @@ type SimplePushDetectorParam = {
    */
   visible?: boolean;
 };
+
 /** プッシュ検出のシンプルな実装 */
 
 class SimplePushDetector implements PushDetector {
@@ -59,7 +57,6 @@ class SimplePushDetector implements PushDetector {
 
   /**
    * コンストラクタ
-   *
    * @param param パラメータ
    */
   constructor(param: SimplePushDetectorParam) {
@@ -96,7 +93,7 @@ class SimplePushDetector implements PushDetector {
   }
 
   /** @override */
-  pushNotifier(): Stream<Event> {
+  notifyPush(): Stream<Event> {
     return this.#push;
   }
 
@@ -127,6 +124,7 @@ class SimplePushDetector implements PushDetector {
     }
   }
 }
+
 /** 円形プッシュ検出生成のパラメータ */
 
 type CirclePushDetectorParam = {
