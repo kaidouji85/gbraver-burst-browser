@@ -14,8 +14,8 @@ export function rootInnerHTML(resources: Resources, ids: DataIDs): string {
     resources.paths.find((v) => v.id === PathIds.CLOSER)?.path ?? "";
   const casualMatchDescription =
     "すべてのプレイヤーでランダムマッチをおこないます";
-  const privateMatchHostDescription = "合言葉を共有して、知り合いと対戦します";
-  const privateMatchGuestDescription = "合言葉を入力して、対戦します";
+  const privateMatchHostDescription = "プライベートマッチを開催します、ルームIDをゲストに共有してください";
+  const privateMatchGuestDescription = "ホストから共有されたルームIDを入力して、対戦を開始します";
   return `
     <div class="${ROOT_CLASS}__background" data-id="${ids.backGround}"></div>
     <div class="${ROOT_CLASS}__dialog">
