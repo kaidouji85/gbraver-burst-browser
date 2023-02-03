@@ -97,7 +97,7 @@ export class TimeScaleButtonView {
     });
     this.#group.add(this.#pushDetector.getObject3D());
     this.#unsubscribers = [
-      this.#pushDetector.notifyPush().subscribe(() => {
+      this.#pushDetector.notifyPressed().subscribe(() => {
         this.#pushButton.next();
       }),
     ];

@@ -94,7 +94,7 @@ export class HUDGameObjects {
           event,
         });
       }),
-      this.burstButton.pushButtonNotifier().subscribe((event) => {
+      this.burstButton.notifyPressed().subscribe((event) => {
         this.#battleAction.next({
           type: "doBurst",
           event,

@@ -112,7 +112,7 @@ export class BurstButton {
    *
    * @return 通知ストリーム
    */
-  pushButtonNotifier(): Stream<Event> {
+  notifyPressed(): Stream<Event> {
     return this.#pushButton;
   }
 

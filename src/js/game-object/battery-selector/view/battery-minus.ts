@@ -66,7 +66,7 @@ export class BatteryMinus {
     this.#group.add(this.#buttonDisabled.getObject3D());
     this.#group.add(this.#pushDetector.getObject3D());
     this.#unsubscribers = [
-      this.#pushDetector.notifyPush().subscribe(param.onPush),
+      this.#pushDetector.notifyPressed().subscribe(param.onPush),
     ];
   }
 

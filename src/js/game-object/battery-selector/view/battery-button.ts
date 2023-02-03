@@ -101,7 +101,7 @@ export class BatteryButton {
     this.#batteryValue.getObject3D().position.set(-130, -82, 0);
     this.#group.add(this.#batteryValue.getObject3D());
     this.#unsubscribers = [
-      this.#pushDetector.notifyPush().subscribe(param.onPush),
+      this.#pushDetector.notifyPressed().subscribe(param.onPush),
     ];
   }
 

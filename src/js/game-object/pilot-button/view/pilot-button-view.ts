@@ -89,7 +89,7 @@ export class PilotButtonView {
     this.#pushDetector.getObject3D().position.z = 1;
     this.#group.add(this.#pushDetector.getObject3D());
     this.#unsubscribers = [
-      this.#pushDetector.notifyPush().subscribe((event) => {
+      this.#pushDetector.notifyPressed().subscribe((event) => {
         this.#pushButton.next(event);
       }),
     ];

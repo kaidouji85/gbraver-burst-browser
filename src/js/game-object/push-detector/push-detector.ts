@@ -27,10 +27,10 @@ export interface PushDetector {
   getObject3D(): THREE.Object3D;
 
   /**
-   * プッシュしたことを通知する
+   * 押されたことを通知する
    * @return 通知ストリーム
    */
-  notifyPush(): Stream<Event>;
+  notifyPressed(): Stream<Event>;
 }
 
 /** SimplePushDetectorコンストラクタのパラメータ */
@@ -93,7 +93,7 @@ class SimplePushDetector implements PushDetector {
   }
 
   /** @override */
-  notifyPush(): Stream<Event> {
+  notifyPressed(): Stream<Event> {
     return this.#push;
   }
 

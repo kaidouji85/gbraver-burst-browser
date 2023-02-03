@@ -11,7 +11,7 @@ export const circle = (): HTMLElement => {
       gameObjectAction,
       visible: true,
     });
-    pushDetector.notifyPush().subscribe((event) => {
+    pushDetector.notifyPressed().subscribe((event) => {
       console.log("push start", event);
     });
     return [pushDetector.getObject3D()];
