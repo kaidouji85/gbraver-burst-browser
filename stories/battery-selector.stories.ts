@@ -5,21 +5,21 @@ export default {
 };
 export const batterySelector = (): HTMLElement => {
   const stub = new HUDGameObjectStub(({ resources, gameObjectAction }) => {
-    const selector = new BatterySelector({
+    const selector: BatterySelector = new BatterySelector({
       resources: resources,
       gameObjectAction: gameObjectAction,
       maxBattery: 5,
     });
     selector.open(1, 5, 5, "Attack").play();
-    selector.decidePushNotifier().subscribe((event) => {
+    selector.notifyDecision().subscribe((event) => {
       event.preventDefault();
       event.stopPropagation();
       selector.decide().play();
     });
-    selector.batteryPlusPushNotifier().subscribe(() => {
+    selector.notifyBatteryPlus().subscribe(() => {
       selector.batteryPlus().play();
     });
-    selector.batteryMinusPushNotifier().subscribe(() => {
+    selector.notifyBatteryMinus().subscribe(() => {
       selector.batteryMinus().play();
     });
     return [selector.getObject3D()];
@@ -30,21 +30,21 @@ export const batterySelector = (): HTMLElement => {
 
 export const batterySelector4 = (): HTMLElement => {
   const stub = new HUDGameObjectStub(({ resources, gameObjectAction }) => {
-    const selector = new BatterySelector({
+    const selector: BatterySelector = new BatterySelector({
       resources: resources,
       gameObjectAction: gameObjectAction,
       maxBattery: 5,
     });
     selector.open(1, 4, 4, "Attack").play();
-    selector.decidePushNotifier().subscribe((event) => {
+    selector.notifyDecision().subscribe((event) => {
       event.preventDefault();
       event.stopPropagation();
       selector.decide().play();
     });
-    selector.batteryPlusPushNotifier().subscribe(() => {
+    selector.notifyBatteryPlus().subscribe(() => {
       selector.batteryPlus().play();
     });
-    selector.batteryMinusPushNotifier().subscribe(() => {
+    selector.notifyBatteryMinus().subscribe(() => {
       selector.batteryMinus().play();
     });
     return [selector.getObject3D()];
@@ -55,21 +55,21 @@ export const batterySelector4 = (): HTMLElement => {
 
 export const batterySelector8 = (): HTMLElement => {
   const stub = new HUDGameObjectStub(({ resources, gameObjectAction }) => {
-    const selector = new BatterySelector({
+    const selector: BatterySelector = new BatterySelector({
       resources: resources,
       gameObjectAction: gameObjectAction,
       maxBattery: 5,
     });
     selector.open(1, 8, 8, "Attack").play();
-    selector.decidePushNotifier().subscribe((event) => {
+    selector.notifyDecision().subscribe((event) => {
       event.preventDefault();
       event.stopPropagation();
       selector.decide().play();
     });
-    selector.batteryPlusPushNotifier().subscribe(() => {
+    selector.notifyBatteryPlus().subscribe(() => {
       selector.batteryPlus().play();
     });
-    selector.batteryMinusPushNotifier().subscribe(() => {
+    selector.notifyBatteryMinus().subscribe(() => {
       selector.batteryMinus().play();
     });
     return [selector.getObject3D()];

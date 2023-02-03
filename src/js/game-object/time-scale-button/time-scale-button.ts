@@ -50,7 +50,7 @@ export class TimeScaleButton {
           this.#onPreRender(action);
         }
       }),
-      this.#view.pushButtonNotifier().subscribe(() => {
+      this.#view.notifyPressed().subscribe(() => {
         this.#onButtonPush();
       }),
     ];
@@ -80,7 +80,7 @@ export class TimeScaleButton {
    *
    * @return 通知ストリーム
    */
-  toggleNotifier(): Stream<number> {
+  notifyToggled(): Stream<number> {
     return this.#toggle;
   }
 

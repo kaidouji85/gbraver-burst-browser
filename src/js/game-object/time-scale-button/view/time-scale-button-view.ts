@@ -97,7 +97,7 @@ export class TimeScaleButtonView {
     });
     this.#group.add(this.#pushDetector.getObject3D());
     this.#unsubscribers = [
-      this.#pushDetector.pushNotifier().subscribe(() => {
+      this.#pushDetector.notifyPressed().subscribe(() => {
         this.#pushButton.next();
       }),
     ];
@@ -131,7 +131,7 @@ export class TimeScaleButtonView {
    *
    * @return 通知ストリーム
    */
-  pushButtonNotifier(): Stream<void> {
+  notifyPressed(): Stream<void> {
     return this.#pushButton;
   }
 

@@ -209,7 +209,7 @@ export class BatterySelector {
    * 決定ボタン押下ストリーム
    * @return 通知ストリーム
    */
-  decidePushNotifier(): Stream<Event> {
+  notifyDecision(): Stream<Event> {
     return this.#decidePush;
   }
 
@@ -217,7 +217,7 @@ export class BatterySelector {
    * バッテリープラスボタン押下ストリーム
    * @return 通知ストリーム
    */
-  batteryPlusPushNotifier(): Stream<void> {
+  notifyBatteryPlus(): Stream<void> {
     return this.#batteryPlusPush;
   }
 
@@ -225,7 +225,7 @@ export class BatterySelector {
    * バッテリーマイナスボタン押下ストリーム
    * @return 通知ストリーム
    */
-  batteryMinusPushNotifier(): Stream<void> {
+  notifyBatteryMinus(): Stream<void> {
     return this.#batteryMinusPush;
   }
 
