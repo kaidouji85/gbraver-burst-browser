@@ -10,6 +10,7 @@ import { domUuid } from "../../uuid/dom-uuid";
 import { ROOT_CLASS } from "./dom/class-name";
 import { extractElements } from "./dom/elements";
 import { rootInnerHTML } from "./dom/root-inner-html";
+import {DataIDs} from "./dom/data-ids";
 
 /** ネットバトルセレクターのプロパティ */
 export type NetBattleSelectrProps = {
@@ -21,8 +22,10 @@ export type NetBattleSelectrProps = {
   closer: HTMLElement;
   /** カジュアルマッチボタン */
   casualMatchButton: HTMLElement;
-  /** プライベートマッチボタン */
-  privateMatchButton: HTMLElement;
+  /** プライベートマッチ（ホスト）ボタン */
+  privateMatchHostButton: HTMLElement;
+  /** プライベートマッチ（ゲスト）ボタン */
+  privateMatchGuestButton: HTMLElement;
   /** 効果音 プッシュボタン */
   pushButton: SoundResource;
   /** 効果音 値変更 */
@@ -47,11 +50,12 @@ export function createNetBattleSelectrProps(
 ): NetBattleSelectrProps {
   const root = document.createElement("div");
   root.className = ROOT_CLASS;
-  const dataIDs = {
+  const dataIDs: DataIDs = {
     backGround: domUuid(),
     closer: domUuid(),
     casualMatchButton: domUuid(),
-    privateMatchButton: domUuid(),
+    privateMatchHostButton: domUuid(),
+    privateMatchGuestButton: domUuid(),
   };
   root.innerHTML = rootInnerHTML(resources, dataIDs);
   const elements = extractElements(root, dataIDs);
@@ -60,7 +64,8 @@ export function createNetBattleSelectrProps(
     backGround: elements.backGround,
     closer: elements.closer,
     casualMatchButton: elements.casualMatchButton,
-    privateMatchButton: elements.privateMatchButton,
+    privateMatchHostButton: elements.privateMatchHostButton,
+    privateMatchGuestButton: elements.privateMatchGuestButton,
     pushButton:
       resources.sounds.find((v) => v.id === SOUND_IDS.PUSH_BUTTON) ??
       createEmptySoundResource(),

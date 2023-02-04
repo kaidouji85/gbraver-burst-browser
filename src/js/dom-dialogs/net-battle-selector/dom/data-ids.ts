@@ -6,6 +6,8 @@ export type DataIDs = {
   closer: string;
   /** カジュアルマッチボタン */
   casualMatchButton: string;
-  /** プライベートマッチボタン */
-  privateMatchButton: string;
+  /** プライベートマッチ（ホスト）ボタン */
+  privateMatchHostButton: string;
+  /** プライベートマッチ（ゲスト）ボタン */
+  privateMatchGuestButton: string;
 };

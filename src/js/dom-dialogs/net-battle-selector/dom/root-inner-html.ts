@@ -24,11 +24,11 @@ export function rootInnerHTML(resources: Resources, ids: DataIDs): string {
         <div class="${ROOT_CLASS}__casual-match-title">カジュアルマッチ</div>
         <div class="${ROOT_CLASS}__casual-match-description">${casualMatchDescription}</div>
       </button>
-      <button class="${ROOT_CLASS}__private-match-host" alt="プライベートマッチをする" data-id="${ids.privateMatchButton}">
+      <button class="${ROOT_CLASS}__private-match-host" alt="プライベートマッチ（ホスト）をする" data-id="${ids.privateMatchHostButton}">
         <div class="${ROOT_CLASS}__private-match-host-title">プライベートマッチ（ホスト）</div>
         <div class="${ROOT_CLASS}__private-match-host-description">${privateMatchHostDescription}</div>
       </button>
-      <button class="${ROOT_CLASS}__private-match-guest">
+      <button class="${ROOT_CLASS}__private-match-guest" alt="プライベートマッチ（ゲスト）をする" data-id="${ids.privateMatchGuestButton}">
         <div class="${ROOT_CLASS}__private-match-guest-title">プライベートマッチ（ゲスト）</div>
         <div class="${ROOT_CLASS}__private-match-guest-description">${privateMatchGuestDescription}</div>
       </button>

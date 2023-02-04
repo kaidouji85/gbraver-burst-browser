@@ -5,7 +5,7 @@ import { DOMDialog } from "../dialog";
 import { onBackgroundPush } from "./listeners/on-background-push";
 import { onCasualMatchSelect } from "./listeners/on-casual-match-select";
 import { onCloserPush } from "./listeners/on-closer-push";
-import { onPrivateMatchSelect } from "./listeners/on-private-match-select";
+import { onPrivateMatchHostSelect } from "./listeners/on-private-match-host-select";
 import { createNetBattleSelectrProps, NetBattleSelectrProps } from "./props";
 
 /** ネットバトルセレクター */
@@ -25,8 +25,8 @@ export class NetBattleSelector implements DOMDialog {
       pushDOMStream(this.#props.casualMatchButton).subscribe((action) =>
         onCasualMatchSelect(this.#props, action)
       ),
-      pushDOMStream(this.#props.privateMatchButton).subscribe((action) =>
-        onPrivateMatchSelect(this.#props, action)
+      pushDOMStream(this.#props.privateMatchHostButton).subscribe((action) =>
+        onPrivateMatchHostSelect(this.#props, action)
       ),
       pushDOMStream(this.#props.closer).subscribe((action) =>
         onCloserPush(this.#props, action)
