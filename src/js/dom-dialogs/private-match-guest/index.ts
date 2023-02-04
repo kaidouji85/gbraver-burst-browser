@@ -1,5 +1,8 @@
 import { DOMDialog } from "../dialog";
-import {createPrivateMatchGuestDialogProps, PrivateMatchGuestDialogProps} from "./props";
+import {
+  createPrivateMatchGuestDialogProps,
+  PrivateMatchGuestDialogProps,
+} from "./props";
 
 /** プライベートマッチゲストダイアログ */
 export class PrivateMatchGuestDialog implements DOMDialog {

@@ -1,6 +1,6 @@
 /** プライベートマッチゲストダイアログのプロパティ */
-import {ROOT_CLASS} from "./dom/class-name";
-import {rootInnerHtml} from "./dom/root-inner-html";
+import { ROOT_CLASS } from "./dom/class-name";
+import { rootInnerHtml } from "./dom/root-inner-html";
 
 export type PrivateMatchGuestDialogProps = {
   /** ルートHTML要素 */
