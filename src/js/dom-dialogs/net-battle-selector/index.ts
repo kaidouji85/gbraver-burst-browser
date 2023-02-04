@@ -7,12 +7,15 @@ import { onCasualMatchSelect } from "./listeners/on-casual-match-select";
 import { onCloserPush } from "./listeners/on-closer-push";
 import { onPrivateMatchGuestSelect } from "./listeners/on-private-match-guest-select";
 import { onPrivateMatchHostSelect } from "./listeners/on-private-match-host-select";
-import { createNetBattleSelectrProps, NetBattleSelectrProps } from "./props";
+import {
+  createNetBattleSelectrProps,
+  NetBattleSelectorDialogProps,
+} from "./props";
 
 /** ネットバトルセレクター */
 export class NetBattleSelectorDialog implements DOMDialog {
   /** プロパティ */
-  #props: NetBattleSelectrProps;
+  #props: NetBattleSelectorDialogProps;
   /** アンサブスクライバ */
   #unsubscribers: Unsubscriber[];
 

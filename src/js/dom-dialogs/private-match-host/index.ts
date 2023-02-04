@@ -1,15 +1,19 @@
 import { DOMDialog } from "../dialog";
+import {
+  createPrivateMatchHostDialogProps,
+  PrivateMatchHostDialogProps,
+} from "./props";
 
 /** プライベートマッチホストダイアログ */
 export class PrivateMatchHostDialog implements DOMDialog {
-  /** ルート要素HTML */
-  #root: HTMLElement;
+  /** プロパティ */
+  #props: PrivateMatchHostDialogProps;
 
   /**
    * コンストラクタ
    */
   constructor() {
-    this.#root = document.createElement("div");
+    this.#props = createPrivateMatchHostDialogProps();
   }
 
   /** @override */
@@ -23,6 +27,6 @@ export class PrivateMatchHostDialog implements DOMDialog {
    * @return 取得結果
    */
   getRootHTMLElement(): HTMLElement {
-    return this.#root;
+    return this.#props.root;
   }
 }

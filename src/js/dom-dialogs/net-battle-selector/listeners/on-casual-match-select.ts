@@ -1,6 +1,6 @@
 import { pop } from "../../../dom/animation";
 import { PushDOM } from "../../../dom/event-stream";
-import { NetBattleSelectrProps } from "../props";
+import { NetBattleSelectorDialogProps } from "../props";
 
 /**
  * カジュアルマッチが選択された時の処理
@@ -8,7 +8,7 @@ import { NetBattleSelectrProps } from "../props";
  * @param action アクション
  */
 export function onCasualMatchSelect(
-  props: NetBattleSelectrProps,
+  props: NetBattleSelectorDialogProps,
   action: PushDOM
 ): void {
   action.event.preventDefault();
