@@ -1,8 +1,10 @@
-/** プライベートマッチホストダイアログのプロパティ */
 import { Resources } from "../../resource";
+import { domUuid } from "../../uuid/dom-uuid";
 import { ROOT_CLASS } from "./dom/class-name";
+import { DataIDs } from "./dom/data-ids";
 import { rootInnerHTML } from "./dom/inner-html";
 
+/** プライベートマッチホストダイアログのプロパティ */
 export type PrivateMatchHostDialogProps = {
   /** ルート要素HTML */
   root: HTMLElement;
@@ -18,8 +20,12 @@ export function createPrivateMatchHostDialogProps(
   resources: Resources,
   roomID: string
 ): PrivateMatchHostDialogProps {
+  const ids: DataIDs = {
+    background: domUuid(),
+    closer: domUuid(),
+  };
   const root = document.createElement("div");
   root.className = ROOT_CLASS;
-  root.innerHTML = rootInnerHTML(resources, roomID);
+  root.innerHTML = rootInnerHTML(resources, ids, roomID);
   return { root };
 }
