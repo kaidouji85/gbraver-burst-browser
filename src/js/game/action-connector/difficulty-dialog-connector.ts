@@ -6,13 +6,13 @@ type Connector = DomDialogActionConnector<DifficultyDialog>;
 
 /** 難易度選択ダイアログとゲームアクションを関連付ける */
 export const difficultyDialogConnector: Connector = (dialog, gameAction) => [
-  dialog.selectionCompleteNotifier().subscribe((difficulty) => {
+  dialog.notifySelectionComplete().subscribe((difficulty) => {
     gameAction.next({
       type: "DifficultySelectionComplete",
       difficulty,
     });
   }),
-  dialog.closeDialogNotifier().subscribe(() => {
+  dialog.notifyClosed().subscribe(() => {
     gameAction.next({
       type: "DifficultySelectionCancel",
     });

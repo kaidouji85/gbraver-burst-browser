@@ -10,7 +10,6 @@ import { createDifficultyDialogProps } from "./props";
 export class DifficultyDialog implements DOMDialog {
   /** プロパティ */
   #props: DifficultyDialogProps;
-
   /** アンサブスクライバ */
   #unsubscribers: Unsubscriber[];
 
@@ -41,7 +40,7 @@ export class DifficultyDialog implements DOMDialog {
    *
    * @return 通知ストリーム
    */
-  selectionCompleteNotifier(): Stream<NPCBattleCourseDifficulty> {
+  notifySelectionComplete(): Stream<NPCBattleCourseDifficulty> {
     return this.#props.selectionComplete;
   }
 
@@ -50,7 +49,7 @@ export class DifficultyDialog implements DOMDialog {
    *
    * @return 通知ストリーム
    */
-  closeDialogNotifier(): Stream<void> {
+  notifyClosed(): Stream<void> {
     return this.#props.closeDialog;
   }
 }

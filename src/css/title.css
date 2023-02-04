@@ -34,7 +34,7 @@
 
 .title__login {
   color: var(--button-font-color);
-  background-color: var(--button-background-color);
+  background-color: var(--sub-button-background-color);
   height: calc(var(--responsive-font-size) * 2.5);
   padding: 0 calc(var(--responsive-font-size) * 1.5);
   border: var(--button-border);
@@ -151,13 +151,13 @@
   box-shadow: var(--button-box-shadow);
 }
 
-.title__config {
+.title__config,
+.title__arcade,
+.title__casual-match {
   background-color: var(--sub-button-background-color);
 }
 
-.title__tutorial,
-.title__arcade,
-.title__casual-match {
+.title__tutorial {
   background-color: var(--button-background-color);
 }
 

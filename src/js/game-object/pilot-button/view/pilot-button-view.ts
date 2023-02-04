@@ -89,7 +89,7 @@ export class PilotButtonView {
     this.#pushDetector.getObject3D().position.z = 1;
     this.#group.add(this.#pushDetector.getObject3D());
     this.#unsubscribers = [
-      this.#pushDetector.pushNotifier().subscribe((event) => {
+      this.#pushDetector.notifyPressed().subscribe((event) => {
         this.#pushButton.next(event);
       }),
     ];
@@ -157,7 +157,7 @@ export class PilotButtonView {
    *
    * @return 通知ストリーム
    */
-  pushButtonNotifier(): Stream<Event> {
+  notifyPressed(): Stream<Event> {
     return this.#pushButton;
   }
 }

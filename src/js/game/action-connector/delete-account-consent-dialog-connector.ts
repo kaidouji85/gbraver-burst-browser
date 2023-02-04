@@ -9,12 +9,12 @@ export const deleteAccountConsentDialogConnector: Connector = (
   dialog,
   gameAction
 ) => [
-  dialog.deleteAccountNotifier().subscribe(() => {
+  dialog.notifyAccountDeletion().subscribe(() => {
     gameAction.next({
       type: "DeleteAccount",
     });
   }),
-  dialog.closeDialogNotifier().subscribe(() => {
+  dialog.notifyClosed().subscribe(() => {
     gameAction.next({
       type: "CancelAccountDeletion",
     });

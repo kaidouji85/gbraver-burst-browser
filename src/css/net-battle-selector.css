@@ -1,0 +1,96 @@
+/** ネットバトルセレクタ */
+
+@media (orientation: landscape) {
+  .net-battle-selector {
+    --closer-width: 48px;
+    --closer-height: 48px;
+    display: block;
+  }
+}
+
+@media (orientation: portrait) {
+  .net-battle-selector {
+    display: none;
+  }
+}
+
+.net-battle-selector__background {
+  position: absolute;
+  width: var(--screen-width);
+  height: var(--screen-height);
+  background-color: #000000;
+  opacity: 0.5;
+  z-index: var(--zindex-background);
+}
+
+.net-battle-selector__dialog {
+  --dialog-padding: calc(var(--responsive-font-size) * 2);
+  top: calc(var(--vh, 1vh) * 50);
+  left: 50vw;
+  min-width: 90vw;
+  transform: translate(-50%, -50%);
+  color: var(--font-color);
+  background-color: var(--background-color);
+  position: absolute;
+  border: var(--dialog-border);
+  border-radius: var(--dialog-border-radius);
+  z-index: var(--zindex-dialog);
+  box-sizing: border-box;
+  padding-top: max(var(--dialog-padding), calc(var(--closer-height) / 2));
+  padding-right: var(--dialog-padding);
+  padding-bottom: var(--dialog-padding);
+  padding-left: var(--dialog-padding);
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+  grid-gap: calc(var(--responsive-font-size) * 0.3);
+}
+
+.net-battle-selector__closer {
+  width: var(--closer-width);
+  height: var(--closer-height);
+  position: absolute;
+  top: calc(var(--closer-width) * -0.5);
+  left: calc(var(--closer-height) * -0.5);
+}
+
+.net-battle-selector__casual-match {
+  grid-column: 1;
+  grid-row: 1/3;
+}
+
+.net-battle-selector__private-match-host {
+  grid-column: 2;
+  grid-row: 1;
+}
+
+.net-battle-selector__private-match-guest {
+  grid-column: 2;
+  grid-row: 2;
+}
+
+
+.net-battle-selector__casual-match,
+.net-battle-selector__private-match-host,
+.net-battle-selector__private-match-guest {
+  min-height: calc(var(--responsive-font-size) * 1);
+  border-radius: var(--button-border-radius);
+  color: var(--button-font-color);
+  border: var(--button-border);
+  background-color: var(--sub-button-background-color);
+  padding: calc(var(--responsive-font-size) * 1) calc(var(--responsive-font-size) * 2);
+  text-align: left;
+}
+
+.net-battle-selector__casual-match-title,
+.net-battle-selector__private-match-host-title,
+.net-battle-selector__private-match-guest-title {
+  font-size: calc(var(--responsive-font-size) * 1);
+}
+
+.net-battle-selector__casual-match-description,
+.net-battle-selector__private-match-host-description,
+.net-battle-selector__private-match-guest-description {
+  font-size: calc(var(--responsive-font-size) * 0.6);
+}
+

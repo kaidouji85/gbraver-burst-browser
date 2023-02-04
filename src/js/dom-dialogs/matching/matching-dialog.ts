@@ -125,7 +125,7 @@ export class MatchingDialog implements DOMDialog {
    *
    * @return 通知ストリーム
    */
-  matchingCanceledNotifier(): Stream<void> {
+  notifyMatchingCanceled(): Stream<void> {
     return this.#matchingCanceled;
   }
 

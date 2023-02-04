@@ -34,7 +34,7 @@ export class Title implements DOMScene {
    *
    * @return イベント通知ストリーム
    */
-  pushLoginNotifier(): Stream<void> {
+  notifyLogin(): Stream<void> {
     return this.#props.pushLogin;
   }
 
@@ -43,7 +43,7 @@ export class Title implements DOMScene {
    *
    * @return イベント通知ストリーム
    */
-  pushDeleteAccountNotifier(): Stream<void> {
+  notifyAccountDeletion(): Stream<void> {
     return this.#props.pushDeleteAccount;
   }
 
@@ -52,7 +52,7 @@ export class Title implements DOMScene {
    *
    * @return イベント通知ストリーム
    */
-  pushLogoutNotifier(): Stream<void> {
+  notifyLogout(): Stream<void> {
     return this.#props.pushLogout;
   }
 
@@ -61,7 +61,7 @@ export class Title implements DOMScene {
    *
    * @return イベント通知ストリーム
    */
-  pushTutorialNotifier(): Stream<void> {
+  notifyTutorial(): Stream<void> {
     return this.#props.pushTutorial;
   }
 
@@ -70,7 +70,7 @@ export class Title implements DOMScene {
    *
    * @return イベント通知ストリーム
    */
-  pushArcadeNotifier(): Stream<void> {
+  notifyArcade(): Stream<void> {
     return this.#props.pushArcade;
   }
 
@@ -79,7 +79,7 @@ export class Title implements DOMScene {
    *
    * @return イベント通知ストリーム
    */
-  pushCasualMatchNotifier(): Stream<void> {
+  notifyCasualMatch(): Stream<void> {
     return this.#props.pushCasualMatch;
   }
 
@@ -88,7 +88,7 @@ export class Title implements DOMScene {
    *
    * @return イベント通知ストリーム
    */
-  pushConfigNotifier(): Stream<void> {
+  notifyConfig(): Stream<void> {
     return this.#props.pushConfig;
   }
 

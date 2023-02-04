@@ -172,7 +172,7 @@ export class DeleteAccountConsentDialog implements DOMDialog {
    *
    * @return 通知ストリーム
    */
-  deleteAccountNotifier(): Stream<void> {
+  notifyAccountDeletion(): Stream<void> {
     return this.#deleteAccount;
   }
 
@@ -181,7 +181,7 @@ export class DeleteAccountConsentDialog implements DOMDialog {
    *
    * @return 通知ストリーム
    */
-  closeDialogNotifier(): Stream<void> {
+  notifyClosed(): Stream<void> {
     return this.#closeDialog;
   }
 

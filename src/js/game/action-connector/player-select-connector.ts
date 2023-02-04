@@ -6,14 +6,14 @@ type Connector = DOMSceneActionConnector<PlayerSelect>;
 
 /** プレイヤーセレクト画面とゲームアクションを関連付ける */
 export const playerSelectConnector: Connector = (scene, gameAction) => [
-  scene.decideNotifier().subscribe((v) => {
+  scene.notifySelectCompletion().subscribe((v) => {
     gameAction.next({
       type: "SelectionComplete",
       armdozerId: v.armdozerId,
       pilotId: v.pilotId,
     });
   }),
-  scene.prevNotifier().subscribe(() => {
+  scene.notifyPrev().subscribe(() => {
     gameAction.next({
       type: "SelectionCancel",
     });

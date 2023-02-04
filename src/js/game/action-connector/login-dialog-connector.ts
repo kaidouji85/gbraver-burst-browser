@@ -6,12 +6,12 @@ type Connector = DomDialogActionConnector<LoginDialog>;
 
 /** ログインダイアログとゲームアクションを関連付ける */
 export const loginDialogConnector: Connector = (dialog, gameAction) => [
-  dialog.loginNotifier().subscribe(() => {
+  dialog.notifyLogin().subscribe(() => {
     gameAction.next({
       type: "UniversalLogin",
     });
   }),
-  dialog.closeDialogNotifier().subscribe(() => {
+  dialog.notifyClosed().subscribe(() => {
     gameAction.next({
       type: "LoginCancel",
     });

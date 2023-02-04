@@ -6,12 +6,12 @@ type Connector = DOMSceneActionConnector<TutorialSelector>;
 
 /** チュートリアルステージセレクト画面とゲームアクションを関連付ける */
 export const tutorialSelectorConnector: Connector = (scene, gameAction) => [
-  scene.prevNotifier().subscribe(() => {
+  scene.notifyPrev().subscribe(() => {
     gameAction.next({
       type: "CancelTutorialSelect",
     });
   }),
-  scene.stageSelectNotifier().subscribe((stageSelect) => {
+  scene.notifyStageSelection().subscribe((stageSelect) => {
     gameAction.next({ ...stageSelect, type: "SelectTutorialStage" });
   }),
 ];

@@ -12,7 +12,7 @@ export const dialog: DOMStubStory = domStub((resources) => {
     type: "Close",
   };
   const dialog = new NetworkErrorDialog(resources, postNetworkError);
-  dialog.postNetworkErrorNotifier().subscribe(() => {
+  dialog.notifyPostNetworkError().subscribe(() => {
     console.log("post network error");
   });
   return dialog.getRootHTMLElement();

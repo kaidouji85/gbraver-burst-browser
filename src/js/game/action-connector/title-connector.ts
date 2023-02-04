@@ -6,37 +6,37 @@ type Connector = DOMSceneActionConnector<Title>;
 
 /** タイトル画面とゲームアクションを関連付ける */
 export const titleConnector: Connector = (scene, gameAction) => [
-  scene.pushLoginNotifier().subscribe(() => {
+  scene.notifyLogin().subscribe(() => {
     gameAction.next({
       type: "UniversalLogin",
     });
   }),
-  scene.pushLogoutNotifier().subscribe(() => {
+  scene.notifyLogout().subscribe(() => {
     gameAction.next({
       type: "Logout",
     });
   }),
-  scene.pushDeleteAccountNotifier().subscribe(() => {
+  scene.notifyAccountDeletion().subscribe(() => {
     gameAction.next({
       type: "AccountDeleteConsent",
     });
   }),
-  scene.pushArcadeNotifier().subscribe(() => {
+  scene.notifyArcade().subscribe(() => {
     gameAction.next({
       type: "ArcadeStart",
     });
   }),
-  scene.pushCasualMatchNotifier().subscribe(() => {
+  scene.notifyCasualMatch().subscribe(() => {
     gameAction.next({
       type: "CasualMatchStart",
     });
   }),
-  scene.pushConfigNotifier().subscribe(() => {
+  scene.notifyConfig().subscribe(() => {
     gameAction.next({
       type: "ConfigChangeStart",
     });
   }),
-  scene.pushTutorialNotifier().subscribe(() => {
+  scene.notifyTutorial().subscribe(() => {
     gameAction.next({
       type: "TutorialStart",
     });

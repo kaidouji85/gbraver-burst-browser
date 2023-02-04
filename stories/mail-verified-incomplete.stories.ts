@@ -6,10 +6,10 @@ export default {
 };
 export const scene: DOMStubStory = domStub(() => {
   const scene = new MailVerifiedIncomplete("test@mail.address.com");
-  scene.gotoTitleNotifier().subscribe(() => {
+  scene.notifyTitleTransition().subscribe(() => {
     console.log("goto title");
   });
-  scene.reloadNotifier().subscribe(() => {
+  scene.notifyReload().subscribe(() => {
     console.log("reload");
   });
   return scene.getRootHTMLElement();

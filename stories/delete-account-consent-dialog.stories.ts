@@ -6,10 +6,10 @@ export default {
 };
 export const dialog: DOMStubStory = domStub((resources) => {
   const deleteAccountConsentDialog = new DeleteAccountConsentDialog(resources);
-  deleteAccountConsentDialog.deleteAccountNotifier().subscribe(() => {
+  deleteAccountConsentDialog.notifyAccountDeletion().subscribe(() => {
     console.log("delete account");
   });
-  deleteAccountConsentDialog.closeDialogNotifier().subscribe(() => {
+  deleteAccountConsentDialog.notifyClosed().subscribe(() => {
     console.log("close dialog");
   });
   return deleteAccountConsentDialog.getRootHTMLElement();

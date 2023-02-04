@@ -9,7 +9,7 @@ export default {
 export const shinBraver = (): HTMLElement => {
   const stub = new HUDGameObjectStub(({ resources, gameObjectAction }) => {
     const burstButton = shinBraverBurstButton(resources, gameObjectAction);
-    burstButton.pushButtonNotifier().subscribe(() => {
+    burstButton.notifyPressed().subscribe(() => {
       burstButton.decide().play();
     });
     burstButton.open(true).play();
@@ -21,7 +21,7 @@ export const shinBraver = (): HTMLElement => {
 export const wingDozer = (): HTMLElement => {
   const stub = new HUDGameObjectStub(({ resources, gameObjectAction }) => {
     const burstButton = wingDozerBurstButton(resources, gameObjectAction);
-    burstButton.pushButtonNotifier().subscribe(() => {
+    burstButton.notifyPressed().subscribe(() => {
       burstButton.decide().play();
     });
     burstButton.open(true).play();

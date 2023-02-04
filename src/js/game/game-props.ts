@@ -4,13 +4,14 @@ import type {
   LoginCheck,
   Logout,
   MailVerify,
+  PrivateMatchCreate,
+  PrivateMatchRoomEnter,
   UniversalLogin,
   UserMailGet,
   UserNameGet,
   UserPictureGet,
   WebsocketDisconnect,
   WebsocketErrorNotifier,
-  WebsocketUnintentionalCloseNotifier,
 } from "@gbraver-burst-network/browser-core";
 
 import type { BGMManager } from "../bgm/bgm-manager";
@@ -50,9 +51,10 @@ export interface GameAPI
     UserPictureGet,
     MailVerify,
     UserMailGet,
+    PrivateMatchCreate,
+    PrivateMatchRoomEnter,
     WebsocketDisconnect,
-    WebsocketErrorNotifier,
-    WebsocketUnintentionalCloseNotifier {}
+    WebsocketErrorNotifier {}
 
 /**
  * ゲームプロパティ
