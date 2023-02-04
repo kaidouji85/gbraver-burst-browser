@@ -27,7 +27,6 @@
   --dialog-padding: calc(var(--responsive-font-size) * 2);
   top: calc(var(--vh, 1vh) * 50);
   left: 50vw;
-  min-width: 90vw;
   transform: translate(-50%, -50%);
   color: var(--font-color);
   background-color: var(--background-color);
@@ -48,4 +47,17 @@
   position: absolute;
   top: calc(var(--closer-width) * -0.5);
   left: calc(var(--closer-height) * -0.5);
+}
+
+.private-match-host__title {
+  font-size: calc(var(--responsive-font-size) * 1.3);
+}
+
+.private-match-host__description {
+  margin-bottom: calc(var(--responsive-font-size) * 1);
+}
+
+.private-match-host__room-id {
+  font-size: calc(var(--responsive-font-size) * 2.8);
+  white-space: nowrap;
 }

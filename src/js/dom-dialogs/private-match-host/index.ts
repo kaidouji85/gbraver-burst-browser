@@ -1,9 +1,9 @@
+import { Resources } from "../../resource";
 import { DOMDialog } from "../dialog";
 import {
   createPrivateMatchHostDialogProps,
   PrivateMatchHostDialogProps,
 } from "./props";
-import {Resources} from "../../resource";
 
 /** プライベートマッチホストダイアログ */
 export class PrivateMatchHostDialog implements DOMDialog {
