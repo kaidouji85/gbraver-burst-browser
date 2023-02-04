@@ -10,8 +10,11 @@ export const dialog: DOMStubStory = domStub((resources) => {
   dialog.notifyCasualMatchSelection().subscribe(() => {
     console.log("select casual match");
   });
-  dialog.notifyPrivateMatchSelection().subscribe(() => {
-    console.log("select private match");
+  dialog.notifyPrivateMatchHostSelection().subscribe(() => {
+    console.log("select private match host");
+  });
+  dialog.notifyPrivateMatchGuestSelection().subscribe(() => {
+    console.log("select private match guest");
   });
   dialog.notifyClosed().subscribe(() => {
     console.log("dialog closed");

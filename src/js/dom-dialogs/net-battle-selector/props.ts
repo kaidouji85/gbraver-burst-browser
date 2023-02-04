@@ -8,9 +8,9 @@ import {
 import { createStreamSource, StreamSource } from "../../stream/stream";
 import { domUuid } from "../../uuid/dom-uuid";
 import { ROOT_CLASS } from "./dom/class-name";
+import { DataIDs } from "./dom/data-ids";
 import { extractElements } from "./dom/elements";
 import { rootInnerHTML } from "./dom/root-inner-html";
-import {DataIDs} from "./dom/data-ids";
 
 /** ネットバトルセレクターのプロパティ */
 export type NetBattleSelectrProps = {
@@ -32,8 +32,10 @@ export type NetBattleSelectrProps = {
   valueChange: SoundResource;
   /** カジュアルマッチ選択通知 */
   casualMatchSelection: StreamSource<void>;
-  /** プライベートマッチ選択通知 */
-  privateMatchSelection: StreamSource<void>;
+  /** プライベートマッチ（ホスト）選択通知 */
+  privateMatchHostSelection: StreamSource<void>;
+  /** プライベートマッチ（ゲスト）選択通知 */
+  privateMatchGuestSelection: StreamSource<void>;
   /** ダイアログクローズ通知 */
   dialogClosed: StreamSource<void>;
   /** 排他制御 */
@@ -73,7 +75,8 @@ export function createNetBattleSelectrProps(
       resources.sounds.find((v) => v.id === SOUND_IDS.CHANGE_VALUE) ??
       createEmptySoundResource(),
     casualMatchSelection: createStreamSource(),
-    privateMatchSelection: createStreamSource(),
+    privateMatchHostSelection: createStreamSource(),
+    privateMatchGuestSelection: createStreamSource(),
     dialogClosed: createStreamSource(),
     exclusive: new Exclusive(),
   };

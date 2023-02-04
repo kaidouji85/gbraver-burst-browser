@@ -36,5 +36,11 @@ export function extractElements(root: HTMLElement, ids: DataIDs): Elements {
   const privateMatchGuestButton: HTMLElement =
     root.querySelector(`[data-id="${ids.privateMatchGuestButton}"]`) ??
     document.createElement("div");
-  return { backGround, closer, casualMatchButton, privateMatchHostButton, privateMatchGuestButton };
+  return {
+    backGround,
+    closer,
+    casualMatchButton,
+    privateMatchHostButton,
+    privateMatchGuestButton,
+  };
 }
