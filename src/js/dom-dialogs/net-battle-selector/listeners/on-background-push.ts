@@ -13,7 +13,7 @@ export function onBackgroundPush(
   action.event.preventDefault();
   action.event.stopPropagation();
   props.exclusive.execute(async () => {
-    props.pushButton.sound.play();
+    props.valueChange.sound.play();
     props.dialogClosed.next();
   });
 }

@@ -8,8 +8,10 @@ export type Elements = {
   closer: HTMLElement;
   /** カジュアルマッチボタン */
   casualMatchButton: HTMLElement;
-  /** プライベートマッチボタン */
-  privateMatchButton: HTMLElement;
+  /** プライベートマッチ（ホスト）ボタン */
+  privateMatchHostButton: HTMLElement;
+  /** プライベートマッチ（ゲスト）ボタン */
+  privateMatchGuestButton: HTMLElement;
 };
 
 /**
@@ -28,8 +30,17 @@ export function extractElements(root: HTMLElement, ids: DataIDs): Elements {
   const casualMatchButton: HTMLElement =
     root.querySelector(`[data-id="${ids.casualMatchButton}"]`) ??
     document.createElement("div");
-  const privateMatchButton: HTMLElement =
-    root.querySelector(`[data-id="${ids.privateMatchButton}"]`) ??
+  const privateMatchHostButton: HTMLElement =
+    root.querySelector(`[data-id="${ids.privateMatchHostButton}"]`) ??
     document.createElement("div");
-  return { backGround, closer, casualMatchButton, privateMatchButton };
+  const privateMatchGuestButton: HTMLElement =
+    root.querySelector(`[data-id="${ids.privateMatchGuestButton}"]`) ??
+    document.createElement("div");
+  return {
+    backGround,
+    closer,
+    casualMatchButton,
+    privateMatchHostButton,
+    privateMatchGuestButton,
+  };
 }

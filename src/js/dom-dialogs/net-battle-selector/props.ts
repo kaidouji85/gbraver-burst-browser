@@ -8,6 +8,7 @@ import {
 import { createStreamSource, StreamSource } from "../../stream/stream";
 import { domUuid } from "../../uuid/dom-uuid";
 import { ROOT_CLASS } from "./dom/class-name";
+import { DataIDs } from "./dom/data-ids";
 import { extractElements } from "./dom/elements";
 import { rootInnerHTML } from "./dom/root-inner-html";
 
@@ -21,14 +22,20 @@ export type NetBattleSelectrProps = {
   closer: HTMLElement;
   /** カジュアルマッチボタン */
   casualMatchButton: HTMLElement;
-  /** プライベートマッチボタン */
-  privateMatchButton: HTMLElement;
-  /** 効果音プッシュボタン */
+  /** プライベートマッチ（ホスト）ボタン */
+  privateMatchHostButton: HTMLElement;
+  /** プライベートマッチ（ゲスト）ボタン */
+  privateMatchGuestButton: HTMLElement;
+  /** 効果音 プッシュボタン */
   pushButton: SoundResource;
+  /** 効果音 値変更 */
+  valueChange: SoundResource;
   /** カジュアルマッチ選択通知 */
   casualMatchSelection: StreamSource<void>;
-  /** プライベートマッチ選択通知 */
-  privateMatchSelection: StreamSource<void>;
+  /** プライベートマッチ（ホスト）選択通知 */
+  privateMatchHostSelection: StreamSource<void>;
+  /** プライベートマッチ（ゲスト）選択通知 */
+  privateMatchGuestSelection: StreamSource<void>;
   /** ダイアログクローズ通知 */
   dialogClosed: StreamSource<void>;
   /** 排他制御 */
@@ -45,11 +52,12 @@ export function createNetBattleSelectrProps(
 ): NetBattleSelectrProps {
   const root = document.createElement("div");
   root.className = ROOT_CLASS;
-  const dataIDs = {
+  const dataIDs: DataIDs = {
     backGround: domUuid(),
     closer: domUuid(),
     casualMatchButton: domUuid(),
-    privateMatchButton: domUuid(),
+    privateMatchHostButton: domUuid(),
+    privateMatchGuestButton: domUuid(),
   };
   root.innerHTML = rootInnerHTML(resources, dataIDs);
   const elements = extractElements(root, dataIDs);
@@ -58,12 +66,17 @@ export function createNetBattleSelectrProps(
     backGround: elements.backGround,
     closer: elements.closer,
     casualMatchButton: elements.casualMatchButton,
-    privateMatchButton: elements.privateMatchButton,
+    privateMatchHostButton: elements.privateMatchHostButton,
+    privateMatchGuestButton: elements.privateMatchGuestButton,
     pushButton:
       resources.sounds.find((v) => v.id === SOUND_IDS.PUSH_BUTTON) ??
       createEmptySoundResource(),
+    valueChange:
+      resources.sounds.find((v) => v.id === SOUND_IDS.CHANGE_VALUE) ??
+      createEmptySoundResource(),
     casualMatchSelection: createStreamSource(),
-    privateMatchSelection: createStreamSource(),
+    privateMatchHostSelection: createStreamSource(),
+    privateMatchGuestSelection: createStreamSource(),
     dialogClosed: createStreamSource(),
     exclusive: new Exclusive(),
   };
