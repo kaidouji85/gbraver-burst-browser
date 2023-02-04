@@ -10,7 +10,7 @@ import { onPrivateMatchHostSelect } from "./listeners/on-private-match-host-sele
 import { createNetBattleSelectrProps, NetBattleSelectrProps } from "./props";
 
 /** ネットバトルセレクター */
-export class NetBattleSelector implements DOMDialog {
+export class NetBattleSelectorDialog implements DOMDialog {
   /** プロパティ */
   #props: NetBattleSelectrProps;
   /** アンサブスクライバ */
