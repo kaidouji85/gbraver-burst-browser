@@ -3,6 +3,7 @@ import {
   createPrivateMatchHostDialogProps,
   PrivateMatchHostDialogProps,
 } from "./props";
+import {Resources} from "../../resource";
 
 /** プライベートマッチホストダイアログ */
 export class PrivateMatchHostDialog implements DOMDialog {
@@ -11,9 +12,10 @@ export class PrivateMatchHostDialog implements DOMDialog {
 
   /**
    * コンストラクタ
+   * @param resources リソース管理オブジェクト
    */
-  constructor() {
-    this.#props = createPrivateMatchHostDialogProps();
+  constructor(resources: Resources) {
+    this.#props = createPrivateMatchHostDialogProps(resources);
   }
 
   /** @override */

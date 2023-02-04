@@ -1,13 +1,18 @@
 import { ROOT_CLASS } from "./class-name";
+import {Resources} from "../../../resource";
+import {PathIds} from "../../../resource/path";
 
 /**
  * ルートHTML要素のinnerHTMLを生成する
+ * @param resources リソース管理オブジェクト
  * @return 生成結果
  */
-export function rootInnerHTML(): string {
+export function rootInnerHTML(resources: Resources): string {
+  const closerPath = resources.paths.find(v => v.id === PathIds.CLOSER)?.path ?? "";
   return `
     <div class="${ROOT_CLASS}__background"></div>
     <div class="${ROOT_CLASS}__dialog">
+      <img class="${ROOT_CLASS}__closer" alt="閉じる" src="${closerPath}">
       ダイアログ
     </div>
   `;
