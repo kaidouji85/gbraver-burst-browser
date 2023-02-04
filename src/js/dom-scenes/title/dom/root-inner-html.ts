@@ -78,9 +78,9 @@ export function rootInnerHTML(
       <img class="${ROOT_CLASS}__logo" data-id="${ids.logo}">
       <div class="${ROOT_CLASS}__game-menu">
         <button class="${ROOT_CLASS}__config" data-id="${ids.config}">設定</button>
-        <button class="${ROOT_CLASS}__tutorial" data-id="${ids.tutorial}">チュートリアル</button>
         <button class="${ROOT_CLASS}__arcade" data-id="${ids.arcade}">アーケード</button>
         <button class="${casualMatchClassName}" data-id="${ids.casualMatch}">ネット対戦</button>
+        <button class="${ROOT_CLASS}__tutorial" data-id="${ids.tutorial}">チュートリアル</button>
       </div>
     </div>
     <div class="${ROOT_CLASS}__footer">
