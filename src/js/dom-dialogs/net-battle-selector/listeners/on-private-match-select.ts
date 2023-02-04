@@ -15,7 +15,7 @@ export function onPrivateMatchSelect(
   action.event.stopPropagation();
   props.exclusive.execute(async () => {
     props.pushButton.sound.play();
-    await pop(props.privateMatchButton, 1.05);
+    await pop(props.privateMatchButton, 1.02);
     props.casualMatchSelection.next();
   });
 }

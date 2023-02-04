@@ -23,8 +23,10 @@ export type NetBattleSelectrProps = {
   casualMatchButton: HTMLElement;
   /** プライベートマッチボタン */
   privateMatchButton: HTMLElement;
-  /** 効果音プッシュボタン */
+  /** 効果音 プッシュボタン */
   pushButton: SoundResource;
+  /** 効果音 値変更 */
+  valueChange: SoundResource;
   /** カジュアルマッチ選択通知 */
   casualMatchSelection: StreamSource<void>;
   /** プライベートマッチ選択通知 */
@@ -61,6 +63,9 @@ export function createNetBattleSelectrProps(
     privateMatchButton: elements.privateMatchButton,
     pushButton:
       resources.sounds.find((v) => v.id === SOUND_IDS.PUSH_BUTTON) ??
+      createEmptySoundResource(),
+    valueChange:
+      resources.sounds.find((v) => v.id === SOUND_IDS.CHANGE_VALUE) ??
       createEmptySoundResource(),
     casualMatchSelection: createStreamSource(),
     privateMatchSelection: createStreamSource(),
