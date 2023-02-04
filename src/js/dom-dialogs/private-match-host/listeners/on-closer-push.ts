@@ -1,20 +1,20 @@
 import { pop } from "../../../dom/animation";
 import { PushDOM } from "../../../dom/event-stream";
-import { NetBattleSelectorDialogProps } from "../props";
+import { PrivateMatchHostDialogProps } from "../props";
 
 /**
- * クロージャが押された時の処理
- * @param props プロパティ
+ * クロージャを押した時の処理
+ * @param props ダイアログプロパティ
  * @param action アクション
  */
 export function onCloserPush(
-  props: NetBattleSelectorDialogProps,
+  props: PrivateMatchHostDialogProps,
   action: PushDOM
 ): void {
-  action.event.preventDefault();
-  action.event.stopPropagation();
   props.exclusive.execute(async () => {
-    props.valueChange.sound.play();
+    action.event.preventDefault();
+    action.event.stopPropagation();
+    props.changeValue.sound.play();
     await pop(props.closer, 1.3);
     props.dialogClosed.next();
   });

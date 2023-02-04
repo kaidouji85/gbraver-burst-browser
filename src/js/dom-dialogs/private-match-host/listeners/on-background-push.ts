@@ -1,5 +1,5 @@
 import { PushDOM } from "../../../dom/event-stream";
-import { NetBattleSelectorDialogProps } from "../props";
+import { PrivateMatchHostDialogProps } from "../props";
 
 /**
  * 背景が押された時の処理
@@ -7,13 +7,13 @@ import { NetBattleSelectorDialogProps } from "../props";
  * @param action アクション
  */
 export function onBackgroundPush(
-  props: NetBattleSelectorDialogProps,
+  props: PrivateMatchHostDialogProps,
   action: PushDOM
 ): void {
-  action.event.preventDefault();
-  action.event.stopPropagation();
   props.exclusive.execute(async () => {
-    props.valueChange.sound.play();
+    action.event.preventDefault();
+    action.event.stopPropagation();
+    props.changeValue.sound.play();
     props.dialogClosed.next();
   });
 }

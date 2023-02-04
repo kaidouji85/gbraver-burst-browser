@@ -12,8 +12,8 @@ import { DataIDs } from "./dom/data-ids";
 import { extractElements } from "./dom/elements";
 import { rootInnerHTML } from "./dom/root-inner-html";
 
-/** ネットバトルセレクターのプロパティ */
-export type NetBattleSelectrProps = {
+/** ネットバトルセレクターダイアログのプロパティ */
+export type NetBattleSelectorDialogProps = {
   /** ルートHTML要素 */
   root: HTMLElement;
   /** 背景 */
@@ -49,7 +49,7 @@ export type NetBattleSelectrProps = {
  */
 export function createNetBattleSelectrProps(
   resources: Resources
-): NetBattleSelectrProps {
+): NetBattleSelectorDialogProps {
   const root = document.createElement("div");
   root.className = ROOT_CLASS;
   const dataIDs: DataIDs = {
