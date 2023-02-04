@@ -5,6 +5,7 @@ import { ROOT_CLASS } from "./dom/class-name";
 import { DataIDs } from "./dom/data-ids";
 import { extractElements } from "./dom/elements";
 import { rootInnerHTML } from "./dom/inner-html";
+import {createEmptySoundResource, SOUND_IDS, SoundResource} from "../../resource/sound";
 
 /** プライベートマッチホストダイアログのプロパティ */
 export type PrivateMatchHostDialogProps = {
@@ -14,6 +15,8 @@ export type PrivateMatchHostDialogProps = {
   closer: HTMLElement;
   /** 背景 */
   background: HTMLElement;
+  /** 効果音 値変更 */
+  changeValue: SoundResource;
   /** 排他制御 */
   exclusive: Exclusive;
 };
@@ -40,6 +43,8 @@ export function createPrivateMatchHostDialogProps(
     root,
     closer: elements.closer,
     background: elements.background,
+    changeValue: resources.sounds.find(v => v.id === SOUND_IDS.CHANGE_VALUE)
+      ?? createEmptySoundResource(),
     exclusive: new Exclusive(),
   };
 }
