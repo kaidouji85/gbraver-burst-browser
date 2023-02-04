@@ -1,4 +1,4 @@
-import {DOMDialog} from "../dialog";
+import { DOMDialog } from "../dialog";
 
 /** プライベートマッチゲストダイアログ */
 export class PrivateMatchGuestDialog implements DOMDialog {
