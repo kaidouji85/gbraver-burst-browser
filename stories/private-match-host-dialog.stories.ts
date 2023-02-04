@@ -6,6 +6,6 @@ export default {
 };
 
 export const dialog: DOMStubStory = domStub((resources) => {
-  const dialog = new PrivateMatchHostDialog(resources);
+  const dialog = new PrivateMatchHostDialog(resources, "V1StGXR8_Z5jdHi6B-myT");
   return dialog.getRootHTMLElement();
 });

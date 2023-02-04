@@ -13,9 +13,10 @@ export class PrivateMatchHostDialog implements DOMDialog {
   /**
    * コンストラクタ
    * @param resources リソース管理オブジェクト
+   * @param roomID ルームID
    */
-  constructor(resources: Resources) {
-    this.#props = createPrivateMatchHostDialogProps(resources);
+  constructor(resources: Resources, roomID: string) {
+    this.#props = createPrivateMatchHostDialogProps(resources, roomID);
   }
 
   /** @override */

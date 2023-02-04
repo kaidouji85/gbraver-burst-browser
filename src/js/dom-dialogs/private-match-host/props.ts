@@ -11,13 +11,15 @@ export type PrivateMatchHostDialogProps = {
 /**
  * PrivateMatchHostDialogPropsを生成する
  * @param resources リソース管理オブジェクト
+ * @param roomID ルームID
  * @return 生成結果
  */
 export function createPrivateMatchHostDialogProps(
-  resources: Resources
+  resources: Resources,
+  roomID: string
 ): PrivateMatchHostDialogProps {
   const root = document.createElement("div");
   root.className = ROOT_CLASS;
-  root.innerHTML = rootInnerHTML(resources);
+  root.innerHTML = rootInnerHTML(resources, roomID);
   return { root };
 }

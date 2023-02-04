@@ -5,9 +5,10 @@ import { ROOT_CLASS } from "./class-name";
 /**
  * ルートHTML要素のinnerHTMLを生成する
  * @param resources リソース管理オブジェクト
+ * @param roomID 表示するルームID
  * @return 生成結果
  */
-export function rootInnerHTML(resources: Resources): string {
+export function rootInnerHTML(resources: Resources, roomID: string): string {
   const closerPath =
     resources.paths.find((v) => v.id === PathIds.CLOSER)?.path ?? "";
   const description =
@@ -18,7 +19,7 @@ export function rootInnerHTML(resources: Resources): string {
       <img class="${ROOT_CLASS}__closer" alt="閉じる" src="${closerPath}">
       <div class="${ROOT_CLASS}__title">プライベートマッチ（ホスト）</div>
       <div class="${ROOT_CLASS}__description">${description}</div>
-      <div class="${ROOT_CLASS}__room-id">V1StGXR8_Z5jdHi6B-myT</div>
+      <div class="${ROOT_CLASS}__room-id">${roomID}</div>
     </div>
   `;
 }
