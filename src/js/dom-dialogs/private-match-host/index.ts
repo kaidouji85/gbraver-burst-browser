@@ -1,6 +1,6 @@
 import { pushDOMStream } from "../../dom/event-stream";
 import { Resources } from "../../resource";
-import { Unsubscriber } from "../../stream/stream";
+import { Stream, Unsubscriber } from "../../stream/stream";
 import { DOMDialog } from "../dialog";
 import { onCloserPush } from "./listeners/on-closer-push";
 import {
@@ -34,12 +34,16 @@ export class PrivateMatchHostDialog implements DOMDialog {
     this.#unsubscribers.forEach((v) => v.unsubscribe());
   }
 
-  /**
-   * ルートHTML要素を取得する
-   *
-   * @return 取得結果
-   */
+  /** @override */
   getRootHTMLElement(): HTMLElement {
     return this.#props.root;
+  }
+
+  /**
+   * ダイアログ閉じる通知
+   * @return 通知ストリーム
+   */
+  notifyDialogClosed(): Stream<void> {
+    return this.#props.dialogClosed;
   }
 }
