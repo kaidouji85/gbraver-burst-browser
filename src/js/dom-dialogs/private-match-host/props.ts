@@ -1,3 +1,4 @@
+import { Exclusive } from "../../exclusive/exclusive";
 import { Resources } from "../../resource";
 import { domUuid } from "../../uuid/dom-uuid";
 import { ROOT_CLASS } from "./dom/class-name";
@@ -13,6 +14,8 @@ export type PrivateMatchHostDialogProps = {
   closer: HTMLElement;
   /** 背景 */
   background: HTMLElement;
+  /** 排他制御 */
+  exclusive: Exclusive;
 };
 
 /**
@@ -37,5 +40,6 @@ export function createPrivateMatchHostDialogProps(
     root,
     closer: elements.closer,
     background: elements.background,
+    exclusive: new Exclusive(),
   };
 }
