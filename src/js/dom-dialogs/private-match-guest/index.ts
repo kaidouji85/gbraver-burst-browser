@@ -1,3 +1,4 @@
+import { Resources } from "../../resource";
 import { DOMDialog } from "../dialog";
 import {
   createPrivateMatchGuestDialogProps,
@@ -10,9 +11,10 @@ export class PrivateMatchGuestDialog implements DOMDialog {
 
   /**
    * コンストラクタ
+   * @param resources リソース管理オブジェクト
    */
-  constructor() {
-    this.#props = createPrivateMatchGuestDialogProps();
+  constructor(resources: Resources) {
+    this.#props = createPrivateMatchGuestDialogProps(resources);
   }
 
   /** @override */

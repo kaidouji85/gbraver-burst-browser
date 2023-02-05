@@ -5,7 +5,7 @@ export default {
   title: "private-match-guest",
 };
 
-export const dialog: DOMStubStory = domStub(() => {
-  const dialog = new PrivateMatchGuestDialog();
+export const dialog: DOMStubStory = domStub((resources) => {
+  const dialog = new PrivateMatchGuestDialog(resources);
   return dialog.getRootHTMLElement();
 });
