@@ -54,10 +54,14 @@
 }
 
 .private-match-guest__entry-form {
-  display: grid;
   min-width: var(--dialog-min-width);
   min-height: var(--dialog-min-height);
+  display: grid;
   grid-template-rows: auto 1fr auto auto;
+}
+
+.private-match-guest__entry-form--invisible {
+  display: none;
 }
 
 .private-match-guest__entry-title {
@@ -86,4 +90,13 @@
   border-radius: var(--button-border-radius);
   border: var(--button-border);
   height: calc(var(--responsive-font-size) * 3);
+}
+
+.private-match-guest__matching {
+  min-width: var(--dialog-min-width);
+  min-height: var(--dialog-min-height);
+}
+
+.private-match-guest__matching--invisible {
+  display: none;
 }

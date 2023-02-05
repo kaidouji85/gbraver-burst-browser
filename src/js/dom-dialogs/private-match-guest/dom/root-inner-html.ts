@@ -21,6 +21,9 @@ export function rootInnerHtml(resources: Resources): string {
         <input class="${ROOT_CLASS}__room-id" type="text">
         <button class="${ROOT_CLASS}__enter">プライベートマッチ開始</button>
       </div>
+      <div class="${ROOT_CLASS}__matching--invisible">
+        マッチメイク中……
+      </div>
     </div>
   `;
 }
