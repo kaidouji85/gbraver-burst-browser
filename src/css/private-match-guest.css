@@ -4,6 +4,8 @@
   .private-match-guest {
     --closer-width: 48px;
     --closer-height: 48px;
+    --dialog-min-width: calc(var(--responsive-font-size) * 20);
+    --dialog-min-height: calc(var(--vh) * 30);
     display: block;
   }
 }
@@ -39,6 +41,8 @@
   padding-right: var(--dialog-padding);
   padding-bottom: var(--dialog-padding);
   padding-left: var(--dialog-padding);
+  min-width: var(--dialog-min-width);
+  min-height: var(--dialog-min-height);
 }
 
 .private-match-guest__closer {
@@ -47,4 +51,39 @@
   position: absolute;
   top: calc(var(--closer-width) * -0.5);
   left: calc(var(--closer-height) * -0.5);
+}
+
+.private-match-guest__entry-form {
+  display: grid;
+  min-width: var(--dialog-min-width);
+  min-height: var(--dialog-min-height);
+  grid-template-rows: auto 1fr auto auto;
+}
+
+.private-match-guest__entry-title {
+  font-size: calc(var(--responsive-font-size) * 1.3);
+}
+
+.private-match-guest__entry-description {
+  margin-bottom: calc(var(--responsive-font-size) * 2);
+  font-size: calc(var(--responsive-font-size) * 0.8);
+}
+
+.private-match-guest__room-id {
+  font-size: calc(var(--responsive-font-size) * 1);
+  height: calc(var(--responsive-font-size) * 3);
+  border: var(--button-border);
+  border-radius: var(--button-border-radius);
+  padding: var(--button-border-radius);
+  margin-bottom: calc(var(--responsive-font-size) * 0.5);
+  box-sizing: border-box;
+}
+
+.private-match-guest__enter {
+  font-size: calc(var(--responsive-font-size) * 1);
+  color: var(--button-font-color);
+  background-color: var(--button-background-color);
+  border-radius: var(--button-border-radius);
+  border: var(--button-border);
+  height: calc(var(--responsive-font-size) * 3);
 }
