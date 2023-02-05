@@ -95,6 +95,10 @@
 .private-match-guest__matching {
   min-width: var(--dialog-min-width);
   min-height: var(--dialog-min-height);
+  font-size: var(--responsive-font-size);
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .private-match-guest__matching--invisible {
