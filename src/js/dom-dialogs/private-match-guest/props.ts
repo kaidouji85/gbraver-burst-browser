@@ -2,12 +2,19 @@ import { Resources } from "../../resource";
 import { domUuid } from "../../uuid/dom-uuid";
 import { ROOT_CLASS } from "./dom/class-name";
 import { DataIDs } from "./dom/data-ids";
+import { extractElements } from "./dom/elements";
 import { rootInnerHtml } from "./dom/root-inner-html";
 
 /** プライベートマッチゲストダイアログのプロパティ */
 export type PrivateMatchGuestDialogProps = {
   /** ルートHTML要素 */
   root: HTMLElement;
+  /** クロージャ */
+  closer: HTMLElement;
+  /** 背景 */
+  background: HTMLElement;
+  /** プライベートマット開始ボタン */
+  enterButton: HTMLElement;
 };
 
 /**
@@ -26,5 +33,6 @@ export function createPrivateMatchGuestDialogProps(
     enterButton: domUuid(),
   };
   root.innerHTML = rootInnerHtml(resources, dataIDs);
-  return { root };
+  const elements = extractElements(root, dataIDs);
+  return { root, ...elements };
 }
