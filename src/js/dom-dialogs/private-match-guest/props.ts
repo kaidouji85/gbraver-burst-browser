@@ -65,7 +65,7 @@ export function createPrivateMatchGuestDialogProps(
     changeValue:
       resources.sounds.find((v) => v.id === SOUND_IDS.CHANGE_VALUE) ??
       createEmptySoundResource(),
-    pushButton:  
+    pushButton:
       resources.sounds.find((v) => v.id === SOUND_IDS.PUSH_BUTTON) ??
       createEmptySoundResource(),
     exclusive: new Exclusive(),
