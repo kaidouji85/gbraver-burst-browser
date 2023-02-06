@@ -1,5 +1,6 @@
 import { Exclusive } from "../../exclusive/exclusive";
 import { Resources } from "../../resource";
+import { createEmptySoundResource, SoundResource, SOUND_IDS } from "../../resource/sound";
 import { createStreamSource, StreamSource } from "../../stream/stream";
 import { domUuid } from "../../uuid/dom-uuid";
 import { ROOT_CLASS } from "./dom/class-name";
@@ -19,6 +20,8 @@ export type PrivateMatchGuestDialogProps = {
   enterButton: HTMLElement;
   /** 排他制御 */
   exclusive: Exclusive;
+  /** 効果音 値変更 */
+  changeValue: SoundResource;
   /** ダイアログ閉じる通知 */
   dialogClosed: StreamSource<void>;
 };
@@ -44,6 +47,7 @@ export function createPrivateMatchGuestDialogProps(
     ...elements,
     root,
     exclusive: new Exclusive(),
+    changeValue: resources.sounds.find(v => v.id === SOUND_IDS.CHANGE_VALUE) ?? createEmptySoundResource(),
     dialogClosed: createStreamSource(),
   };
 }
