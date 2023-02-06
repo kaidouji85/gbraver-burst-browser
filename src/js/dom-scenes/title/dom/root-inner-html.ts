@@ -10,7 +10,7 @@ import {
   LOGIN_CLASS,
   ROOT_CLASS,
 } from "./class-name";
-import type { DataIDs } from "./daga-ids";
+import type { DataIDs } from "./data-ids";
 
 /** data-id以外のinnerHTMLジェネレータパラメータ */
 export type RootInnerHTMLParams = {
