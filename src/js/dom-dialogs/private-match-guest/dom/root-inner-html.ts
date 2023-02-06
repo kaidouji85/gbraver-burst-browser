@@ -1,6 +1,6 @@
 import { Resources } from "../../../resource";
 import { PathIds } from "../../../resource/path";
-import { ENTRY_FORM, MATCHING_INVISIBLE, ROOT_CLASS } from "./class-name";
+import { ROOT_CLASS } from "./class-name";
 
 /**
  * ルートHTML要素のinnerHTMLを生成する
@@ -15,15 +15,10 @@ export function rootInnerHtml(resources: Resources): string {
     <div class="${ROOT_CLASS}__background"></div>
     <div class="${ROOT_CLASS}__dialog">
       <img class="${ROOT_CLASS}__closer" src="${closerPath}">
-      <div class="${ENTRY_FORM}">
-        <div class="${ROOT_CLASS}__entry-title">プライベートマッチ（ゲスト）</div>
-        <div class="${ROOT_CLASS}__entry-description">${entryDescription}</div>
-        <input class="${ROOT_CLASS}__room-id" type="text">
-        <button class="${ROOT_CLASS}__enter">プライベートマッチ開始</button>
-      </div>
-      <div class="${MATCHING_INVISIBLE}">
-        マッチング中……
-      </div>
+      <div class="${ROOT_CLASS}__entry-title">プライベートマッチ（ゲスト）</div>
+      <div class="${ROOT_CLASS}__entry-description">${entryDescription}</div>
+      <input class="${ROOT_CLASS}__room-id" type="text">
+      <button class="${ROOT_CLASS}__enter">プライベートマッチ開始</button>
     </div>
   `;
 }
