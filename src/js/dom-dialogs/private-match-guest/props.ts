@@ -28,6 +28,11 @@ export type PrivateMatchGuestDialogProps = {
   changeValue: SoundResource;
   /** ダイアログ閉じる通知 */
   dialogClosed: StreamSource<void>;
+  /** 
+   * プライベートマッチ開始通知
+   * ユーザが入力したルームIDをストリームとして渡す
+   */
+  privateMatchStart: StreamSource<string>;
 };
 
 /**
@@ -51,9 +56,11 @@ export function createPrivateMatchGuestDialogProps(
     ...elements,
     root,
     exclusive: new Exclusive(),
+    dialogClosed: createStreamSource(),
+    privateMatchStart: createStreamSource(),
     changeValue:
       resources.sounds.find((v) => v.id === SOUND_IDS.CHANGE_VALUE) ??
       createEmptySoundResource(),
-    dialogClosed: createStreamSource(),
+    
   };
 }

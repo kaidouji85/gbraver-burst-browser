@@ -51,4 +51,13 @@ export class PrivateMatchGuestDialog implements DOMDialog {
   notifyDialogClosed(): Stream<void> {
     return this.#props.dialogClosed;
   }
+
+  /**
+   * プライベートマッチ開始の通知
+   * ユーザが入力したルームIDはストリームのデータとして渡す
+   * @return 通知ストリーム
+   */
+  notifyPrivateMatchStart(): Stream<string> {
+    return this.#props.privateMatchStart;
+  }
 }
