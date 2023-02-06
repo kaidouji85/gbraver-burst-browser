@@ -7,7 +7,7 @@ export type Elements = {
   /** 背景 */
   background: HTMLElement;
   /** ルームID入力フォーム */
-  roomID: HTMLElement;
+  roomID: HTMLInputElement;
   /** プライベートマット開始ボタン */
   enterButton: HTMLElement;
 };
@@ -26,9 +26,11 @@ export function extractElements(root: HTMLElement, ids: DataIDs): Elements {
   const background: HTMLElement =
     root.querySelector(`[data-id="${ids.background}"]`) ??
     document.createElement("div");
-const roomID: HTMLElement =
-    root.querySelector(`[data-id="${ids.roomID}"]`) ??
-    document.createElement("div");
+  const foundRoomID = root.querySelector(`[data-id="${ids.roomID}"]`);
+  const roomID: HTMLInputElement =
+    foundRoomID instanceof HTMLInputElement
+      ? foundRoomID
+      : document.createElement("input");
   const enterButton: HTMLElement =
     root.querySelector(`[data-id="${ids.enterButton}"]`) ??
     document.createElement("div");

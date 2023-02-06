@@ -1,19 +1,20 @@
+import { pop } from "../../../dom/animation";
 import { PushDOM } from "../../../dom/event-stream";
 import { PrivateMatchGuestDialogProps } from "../props";
 
 /**
- * 背景が押された時の処理
+ * プライベートマッチ開始ボタンが押された時の処理
  * @param props ダイアログプロパティ
  * @param action アクション
  */
-export function onBackgroundPush(
+export function onEnterButtonPush(
   props: PrivateMatchGuestDialogProps,
   action: PushDOM
 ): void {
   props.exclusive.execute(async () => {
     action.event.preventDefault();
     action.event.stopPropagation();
-    props.changeValue.sound.play();
-    props.dialogClosed.next();
+    await pop(props.enterButton);
+    props.privateMatchStart.next(props.roomID.value);
   });
 }

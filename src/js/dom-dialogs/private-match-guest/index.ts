@@ -4,6 +4,7 @@ import { Stream, Unsubscriber } from "../../stream/stream";
 import { DOMDialog } from "../dialog";
 import { onBackgroundPush } from "./listeners/on-background-push";
 import { onCloserPush } from "./listeners/on-closer-push";
+import { onEnterButtonPush } from "./listeners/on-enter-button-push";
 import {
   createPrivateMatchGuestDialogProps,
   PrivateMatchGuestDialogProps,
@@ -28,6 +29,9 @@ export class PrivateMatchGuestDialog implements DOMDialog {
       }),
       pushDOMStream(this.#props.background).subscribe((action) => {
         onBackgroundPush(this.#props, action);
+      }),
+      pushDOMStream(this.#props.enterButton).subscribe((action) => {
+        onEnterButtonPush(this.#props, action);
       }),
     ];
   }

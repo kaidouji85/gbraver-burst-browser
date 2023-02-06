@@ -21,7 +21,7 @@ export type PrivateMatchGuestDialogProps = {
   /** 背景 */
   background: HTMLElement;
   /** ルームID入力フォーム */
-  roomID: HTMLElement;
+  roomID: HTMLInputElement;
   /** プライベートマット開始ボタン */
   enterButton: HTMLElement;
   /** 排他制御 */
@@ -30,7 +30,7 @@ export type PrivateMatchGuestDialogProps = {
   changeValue: SoundResource;
   /** ダイアログ閉じる通知 */
   dialogClosed: StreamSource<void>;
-  /** 
+  /**
    * プライベートマッチ開始通知
    * ユーザが入力したルームIDをストリームとして渡す
    */
@@ -64,6 +64,5 @@ export function createPrivateMatchGuestDialogProps(
     changeValue:
       resources.sounds.find((v) => v.id === SOUND_IDS.CHANGE_VALUE) ??
       createEmptySoundResource(),
-    
   };
 }
