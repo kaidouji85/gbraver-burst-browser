@@ -1,5 +1,6 @@
 import { Exclusive } from "../../exclusive/exclusive";
 import { Resources } from "../../resource";
+import { createStreamSource, StreamSource } from "../../stream/stream";
 import { domUuid } from "../../uuid/dom-uuid";
 import { ROOT_CLASS } from "./dom/class-name";
 import { DataIDs } from "./dom/data-ids";
@@ -18,6 +19,8 @@ export type PrivateMatchGuestDialogProps = {
   enterButton: HTMLElement;
   /** 排他制御 */
   exclusive: Exclusive;
+  /** ダイアログ閉じる通知 */
+  dialogClosed: StreamSource<void>;
 };
 
 /**
@@ -37,5 +40,10 @@ export function createPrivateMatchGuestDialogProps(
   };
   root.innerHTML = rootInnerHtml(resources, dataIDs);
   const elements = extractElements(root, dataIDs);
-  return { ...elements, root, exclusive: new Exclusive() };
+  return {
+    ...elements,
+    root,
+    exclusive: new Exclusive(),
+    dialogClosed: createStreamSource(),
+  };
 }

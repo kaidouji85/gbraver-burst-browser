@@ -15,5 +15,6 @@ export function onCloserPush(
     action.event.stopPropagation();
     action.event.preventDefault();
     await pop(props.closer, 1.3);
+    props.dialogClosed.next();
   });
 }
