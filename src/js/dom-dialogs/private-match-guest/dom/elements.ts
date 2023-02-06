@@ -6,6 +6,8 @@ export type Elements = {
   closer: HTMLElement;
   /** 背景 */
   background: HTMLElement;
+  /** ルームID入力フォーム */
+  roomID: HTMLElement;
   /** プライベートマット開始ボタン */
   enterButton: HTMLElement;
 };
@@ -24,8 +26,11 @@ export function extractElements(root: HTMLElement, ids: DataIDs): Elements {
   const background: HTMLElement =
     root.querySelector(`[data-id="${ids.background}"]`) ??
     document.createElement("div");
+const roomID: HTMLElement =
+    root.querySelector(`[data-id="${ids.roomID}"]`) ??
+    document.createElement("div");
   const enterButton: HTMLElement =
     root.querySelector(`[data-id="${ids.enterButton}"]`) ??
     document.createElement("div");
-  return { closer, background, enterButton };
+  return { closer, background, roomID, enterButton };
 }
