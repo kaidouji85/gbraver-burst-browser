@@ -5,7 +5,7 @@ export default {
   title: "reject-private-match-entry",
 };
 
-export const dialog: DOMStubStory = domStub(() => {
-  const dialog = new RejectPrivateMatchEntryDialog();
+export const dialog: DOMStubStory = domStub((resources) => {
+  const dialog = new RejectPrivateMatchEntryDialog(resources);
   return dialog.getRootHTMLElement();
 });
