@@ -1,6 +1,10 @@
 import { Exclusive } from "../../exclusive/exclusive";
 import { Resources } from "../../resource";
-import { createEmptySoundResource, SoundResource, SOUND_IDS } from "../../resource/sound";
+import {
+  createEmptySoundResource,
+  SOUND_IDS,
+  SoundResource,
+} from "../../resource/sound";
 import { createStreamSource, StreamSource } from "../../stream/stream";
 import { domUuid } from "../../uuid/dom-uuid";
 import { ROOT_CLASS } from "./dom/class-name";
@@ -47,7 +51,9 @@ export function createPrivateMatchGuestDialogProps(
     ...elements,
     root,
     exclusive: new Exclusive(),
-    changeValue: resources.sounds.find(v => v.id === SOUND_IDS.CHANGE_VALUE) ?? createEmptySoundResource(),
+    changeValue:
+      resources.sounds.find((v) => v.id === SOUND_IDS.CHANGE_VALUE) ??
+      createEmptySoundResource(),
     dialogClosed: createStreamSource(),
   };
 }
