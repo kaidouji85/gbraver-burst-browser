@@ -1,15 +1,19 @@
 import { DOMDialog } from "../dialog";
+import {
+  createRejectPrivateMatchEntryDialogProps,
+  RejectPrivateMatchEntryDialogProps,
+} from "./props";
 
 /** プライベートマッチエントリ拒否ダイアログ */
 export class RejectPrivateMatchEntryDialog implements DOMDialog {
-  /** ルートHTML要素 */
-  #root: HTMLElement;
+  /** プロパティ */
+  #props: RejectPrivateMatchEntryDialogProps;
 
   /**
    * コンストラクタ
    */
   constructor() {
-    this.#root = document.createElement("div");
+    this.#props = createRejectPrivateMatchEntryDialogProps();
   }
 
   /** @override */
@@ -19,6 +23,6 @@ export class RejectPrivateMatchEntryDialog implements DOMDialog {
 
   /** @override */
   getRootHTMLElement(): HTMLElement {
-    return this.#root;
+    return this.#props.root;
   }
 }
