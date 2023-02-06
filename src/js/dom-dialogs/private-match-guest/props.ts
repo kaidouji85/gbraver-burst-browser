@@ -28,6 +28,8 @@ export type PrivateMatchGuestDialogProps = {
   exclusive: Exclusive;
   /** 効果音 値変更 */
   changeValue: SoundResource;
+  /** 効果音 ボタンプッシュ */
+  pushButton: SoundResource;
   /** ダイアログ閉じる通知 */
   dialogClosed: StreamSource<void>;
   /**
@@ -58,11 +60,14 @@ export function createPrivateMatchGuestDialogProps(
   return {
     ...elements,
     root,
-    exclusive: new Exclusive(),
     dialogClosed: createStreamSource(),
     privateMatchStart: createStreamSource(),
     changeValue:
       resources.sounds.find((v) => v.id === SOUND_IDS.CHANGE_VALUE) ??
       createEmptySoundResource(),
+    pushButton:  
+      resources.sounds.find((v) => v.id === SOUND_IDS.PUSH_BUTTON) ??
+      createEmptySoundResource(),
+    exclusive: new Exclusive(),
   };
 }
