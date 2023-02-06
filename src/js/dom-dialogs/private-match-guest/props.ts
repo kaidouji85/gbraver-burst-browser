@@ -1,3 +1,4 @@
+import { Exclusive } from "../../exclusive/exclusive";
 import { Resources } from "../../resource";
 import { domUuid } from "../../uuid/dom-uuid";
 import { ROOT_CLASS } from "./dom/class-name";
@@ -15,6 +16,8 @@ export type PrivateMatchGuestDialogProps = {
   background: HTMLElement;
   /** プライベートマット開始ボタン */
   enterButton: HTMLElement;
+  /** 排他制御 */
+  exclusive: Exclusive;
 };
 
 /**
@@ -34,5 +37,5 @@ export function createPrivateMatchGuestDialogProps(
   };
   root.innerHTML = rootInnerHtml(resources, dataIDs);
   const elements = extractElements(root, dataIDs);
-  return { root, ...elements };
+  return { ...elements, root, exclusive: new Exclusive() };
 }

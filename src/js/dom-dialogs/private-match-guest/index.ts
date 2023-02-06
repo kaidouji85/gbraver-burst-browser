@@ -1,5 +1,8 @@
+import { pushDOMStream } from "../../dom/event-stream";
 import { Resources } from "../../resource";
+import { Unsubscriber } from "../../stream/stream";
 import { DOMDialog } from "../dialog";
+import { onCloserPush } from "./listeners/on-closer-push";
 import {
   createPrivateMatchGuestDialogProps,
   PrivateMatchGuestDialogProps,
@@ -7,7 +10,10 @@ import {
 
 /** プライベートマッチゲストダイアログ */
 export class PrivateMatchGuestDialog implements DOMDialog {
+  /** プロパティ */
   #props: PrivateMatchGuestDialogProps;
+  /** アンサブスクライバ */
+  #unsubscribers: Unsubscriber[];
 
   /**
    * コンストラクタ
@@ -15,11 +21,18 @@ export class PrivateMatchGuestDialog implements DOMDialog {
    */
   constructor(resources: Resources) {
     this.#props = createPrivateMatchGuestDialogProps(resources);
+    this.#unsubscribers = [
+      pushDOMStream(this.#props.closer).subscribe((action) => {
+        onCloserPush(this.#props, action);
+      }),
+    ];
   }
 
   /** @override */
   destructor(): void {
-    // NOP
+    this.#unsubscribers.forEach((v) => {
+      v.unsubscribe();
+    });
   }
 
   /** @override */
