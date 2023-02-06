@@ -1,4 +1,4 @@
-import type { DataIDs } from "./daga-ids";
+import type { DataIDs } from "./data-ids";
 
 /** ルート要素の子孫要素 */
 type Elements = {
