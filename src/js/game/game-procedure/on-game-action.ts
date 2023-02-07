@@ -18,6 +18,7 @@ import { onExitMailVerifiedIncomplete } from "./on-exit-mai-verified-incomplete"
 import { onLoginCancel } from "./on-login-cancel";
 import { onLogout } from "./on-logout";
 import { onMatchingCanceled } from "./on-matching-cancel";
+import { onNetBattleStart } from "./on-net-battle-start";
 import { onPostBattleAction } from "./on-post-battle-action";
 import { onReloadRequest } from "./on-reload-request";
 import { onSelectTutorialStage } from "./on-select-tutorial-stage";
@@ -89,5 +90,7 @@ export function onGameAction(props: GameProps, action: GameAction) {
     onCancelTutorialSelect(props);
   } else if (action.type === "SelectTutorialStage") {
     onSelectTutorialStage(props, action);
+  } else if (action.type === "NetBattleStart") {
+    onNetBattleStart(props);
   }
 }
