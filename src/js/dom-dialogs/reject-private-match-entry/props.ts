@@ -24,6 +24,8 @@ export type RejectPrivateMatchEntryDialogProps = {
   closeButton: HTMLElement;
   /** 効果音 プッシュボタン */
   pushButton: SoundResource;
+  /** 効果音 値変更 */
+  changeValue: SoundResource;
   /** ダイアログ閉じる通知 */
   dialogClosed: StreamSource<void>;
   /** 排他制御 */
@@ -52,6 +54,9 @@ export function createRejectPrivateMatchEntryDialogProps(
     root,
     pushButton:
       resources.sounds.find((v) => v.id === SOUND_IDS.PUSH_BUTTON) ??
+      createEmptySoundResource(),
+    changeValue:
+      resources.sounds.find((v) => v.id === SOUND_IDS.CHANGE_VALUE) ??
       createEmptySoundResource(),
     dialogClosed: createStreamSource(),
     exclusive: new Exclusive(),

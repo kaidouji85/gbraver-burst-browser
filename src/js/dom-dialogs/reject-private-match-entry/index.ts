@@ -26,9 +26,9 @@ export class RejectPrivateMatchEntryDialog implements DOMDialog {
       pushDOMStream(this.#props.closeButton).subscribe((action) => {
         onCloseButtonPush(this.#props, action);
       }),
-      pushDOMStream(this.#props.closer).subscribe(action => {
+      pushDOMStream(this.#props.closer).subscribe((action) => {
         onCloserPush(this.#props, action);
-      })
+      }),
     ];
   }
 
