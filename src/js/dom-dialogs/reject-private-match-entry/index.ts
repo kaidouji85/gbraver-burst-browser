@@ -2,6 +2,7 @@ import { pushDOMStream } from "../../dom/event-stream";
 import { Resources } from "../../resource";
 import { Stream, Unsubscriber } from "../../stream/stream";
 import { DOMDialog } from "../dialog";
+import { onBackgroundPush } from "./listeners/on-background-push";
 import { onCloseButtonPush } from "./listeners/on-close-button-push";
 import { onCloserPush } from "./listeners/on-closer-push";
 import {
@@ -28,6 +29,9 @@ export class RejectPrivateMatchEntryDialog implements DOMDialog {
       }),
       pushDOMStream(this.#props.closer).subscribe((action) => {
         onCloserPush(this.#props, action);
+      }),
+      pushDOMStream(this.#props.background).subscribe((action) => {
+        onBackgroundPush(this.#props, action);
       }),
     ];
   }
