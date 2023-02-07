@@ -19,8 +19,8 @@ export const ACCOUNT_MENU_CLASS = `${ROOT_CLASS}__account-menu`;
 /** アカウントメニュー 非表示 class属性 */
 export const INVISIBLE_ACCOUNT_MENU_CLASS = `${ACCOUNT_MENU_CLASS}--invisible`;
 
-/** カジュアルマッチボタン class属性 */
-export const CASUAL_MATCH_CLASS = `${ROOT_CLASS}__casual-match`;
+/** ネット対戦ボタン class属性 */
+export const NET_BATTLE_CLASS = `${ROOT_CLASS}__net-battle`;
 
-/** カジュアルマッチボタン 非表示 class属性 */
-export const INVISIBLE_CASUAL_MATCH_CLASS = `${CASUAL_MATCH_CLASS}--invisible`;
+/** ネット対戦ボタン 非表示 class属性 */
+export const INVISIBLE_NET_BATTLE_CLASS = `${NET_BATTLE_CLASS}--invisible`;
