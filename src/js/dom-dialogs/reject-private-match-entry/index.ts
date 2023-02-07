@@ -3,6 +3,7 @@ import { Resources } from "../../resource";
 import { Stream, Unsubscriber } from "../../stream/stream";
 import { DOMDialog } from "../dialog";
 import { onCloseButtonPush } from "./listeners/on-close-button-push";
+import { onCloserPush } from "./listeners/on-closer-push";
 import {
   createRejectPrivateMatchEntryDialogProps,
   RejectPrivateMatchEntryDialogProps,
@@ -25,6 +26,9 @@ export class RejectPrivateMatchEntryDialog implements DOMDialog {
       pushDOMStream(this.#props.closeButton).subscribe((action) => {
         onCloseButtonPush(this.#props, action);
       }),
+      pushDOMStream(this.#props.closer).subscribe(action => {
+        onCloserPush(this.#props, action);
+      })
     ];
   }
 
