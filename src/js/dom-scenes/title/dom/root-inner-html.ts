@@ -2,10 +2,10 @@ import { escapeHTML } from "../../../dom/escape-html";
 import type { TitleAccount } from "../title-account";
 import {
   ACCOUNT_CLASS,
-  CASUAL_MATCH_CLASS,
+  NET_BATTLE_CLASS,
   INVISIBLE_ACCOUNT_CLASS,
   INVISIBLE_ACCOUNT_MENU_CLASS,
-  INVISIBLE_CASUAL_MATCH_CLASS,
+  INVISIBLE_NET_BATTLE_CLASS,
   INVISIBLE_LOGIN_CLASS,
   LOGIN_CLASS,
   ROOT_CLASS,
@@ -55,9 +55,9 @@ export function rootInnerHTML(
     params.isApiServerEnable && params.account.type === "LoggedInAccount"
       ? ACCOUNT_CLASS
       : INVISIBLE_ACCOUNT_CLASS;
-  const casualMatchClassName = params.isApiServerEnable
-    ? CASUAL_MATCH_CLASS
-    : INVISIBLE_CASUAL_MATCH_CLASS;
+  const netBattleClassName = params.isApiServerEnable
+    ? NET_BATTLE_CLASS
+    : INVISIBLE_NET_BATTLE_CLASS;
   return `
     <div class="${ROOT_CLASS}__header">
       <button data-id="${ids.login}" class="${loginClassName}">ログイン</button>
@@ -79,7 +79,7 @@ export function rootInnerHTML(
       <div class="${ROOT_CLASS}__game-menu">
         <button class="${ROOT_CLASS}__config" data-id="${ids.config}">設定</button>
         <button class="${ROOT_CLASS}__arcade" data-id="${ids.arcade}">アーケード</button>
-        <button class="${casualMatchClassName}" data-id="${ids.casualMatch}">ネット対戦</button>
+        <button class="${netBattleClassName}" data-id="${ids.casualMatch}">ネット対戦</button>
         <button class="${ROOT_CLASS}__tutorial" data-id="${ids.tutorial}">チュートリアル</button>
       </div>
     </div>
