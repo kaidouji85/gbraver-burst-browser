@@ -75,12 +75,12 @@ export class Title implements DOMScene {
   }
 
   /**
-   * カジュアルマッチボタン押下通知
+   * ネット対戦ボタン押下通知
    *
    * @return イベント通知ストリーム
    */
-  notifyCasualMatch(): Stream<void> {
-    return this.#props.pushCasualMatch;
+  notifyNetBattle(): Stream<void> {
+    return this.#props.pushNetBattle;
   }
 
   /**
