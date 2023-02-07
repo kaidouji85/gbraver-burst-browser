@@ -16,5 +16,6 @@ export function onCloseButtonPush(
     action.event.preventDefault();
     props.pushButton.sound.play();
     await pop(props.closeButton, 1.05);
+    props.dialogClosed.next();
   });
 }

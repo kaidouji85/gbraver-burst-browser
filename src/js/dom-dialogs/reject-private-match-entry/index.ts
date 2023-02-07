@@ -1,6 +1,6 @@
 import { pushDOMStream } from "../../dom/event-stream";
 import { Resources } from "../../resource";
-import { Unsubscriber } from "../../stream/stream";
+import { Stream, Unsubscriber } from "../../stream/stream";
 import { DOMDialog } from "../dialog";
 import { onCloseButtonPush } from "./listeners/on-close-button-push";
 import {
@@ -38,5 +38,13 @@ export class RejectPrivateMatchEntryDialog implements DOMDialog {
   /** @override */
   getRootHTMLElement(): HTMLElement {
     return this.#props.root;
+  }
+
+  /**
+   * ダイアログ閉じる通知
+   * @return 通知ストリーム
+   */
+  notifyDialogClosed(): Stream<void> {
+    return this.#props.dialogClosed;
   }
 }

@@ -1,6 +1,11 @@
 import { Exclusive } from "../../exclusive/exclusive";
 import { Resources } from "../../resource";
-import { createEmptySoundResource, SoundResource, SOUND_IDS } from "../../resource/sound";
+import {
+  createEmptySoundResource,
+  SOUND_IDS,
+  SoundResource,
+} from "../../resource/sound";
+import { createStreamSource, StreamSource } from "../../stream/stream";
 import { domUuid } from "../../uuid/dom-uuid";
 import { ROOT_CLASS } from "./dom/class-name";
 import { DataIDs } from "./dom/data-ids";
@@ -19,6 +24,8 @@ export type RejectPrivateMatchEntryDialogProps = {
   closeButton: HTMLElement;
   /** 効果音 プッシュボタン */
   pushButton: SoundResource;
+  /** ダイアログ閉じる通知 */
+  dialogClosed: StreamSource<void>;
   /** 排他制御 */
   exclusive: Exclusive;
 };
@@ -40,10 +47,13 @@ export function createRejectPrivateMatchEntryDialogProps(
   };
   root.innerHTML = rootInnerHTML(resources, dataIDs);
   const elements = extractElements(root, dataIDs);
-  return { 
-    ...elements, 
-    root, 
-    pushButton: resources.sounds.find(v => v.id === SOUND_IDS.PUSH_BUTTON) ?? createEmptySoundResource(),
-    exclusive: new Exclusive()
+  return {
+    ...elements,
+    root,
+    pushButton:
+      resources.sounds.find((v) => v.id === SOUND_IDS.PUSH_BUTTON) ??
+      createEmptySoundResource(),
+    dialogClosed: createStreamSource(),
+    exclusive: new Exclusive(),
   };
 }

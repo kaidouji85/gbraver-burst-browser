@@ -7,5 +7,8 @@ export default {
 
 export const dialog: DOMStubStory = domStub((resources) => {
   const dialog = new RejectPrivateMatchEntryDialog(resources);
+  dialog.notifyDialogClosed().subscribe(() => {
+    console.log("dialog closed");
+  });
   return dialog.getRootHTMLElement();
 });
