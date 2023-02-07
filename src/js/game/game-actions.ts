@@ -21,9 +21,27 @@ export type ArcadeStart = {
   type: "ArcadeStart";
 };
 
-/** カジュアルマッチスタート */
+/**
+ * @deprecated
+ * カジュアルマッチスタート
+ */
 export type CasualMatchStart = {
   type: "CasualMatchStart";
+};
+
+/** ネット対戦スタート */
+export type NetBattleStart = {
+  type: "NetBattleStart";
+};
+
+/** ネット対戦種別 */
+export type NetBattleType = "CasualMatch" | "PrivateMatch";
+
+/** ネット対戦種別の選択完了 */
+export type NetBattleSelectionComplete = {
+  type: "NetBattleSelectionComplete";
+  /** 選択したネット対戦 */
+  netBattle: NetBattleType;
 };
 
 /** マッチング中止 */
@@ -194,6 +212,8 @@ export type GameAction =
   | ExitMailVerifiedIncomplete
   | ArcadeStart
   | CasualMatchStart
+  | NetBattleStart
+  | NetBattleSelectionComplete
   | MatchingCanceled
   | SelectionComplete
   | SelectionCancel
