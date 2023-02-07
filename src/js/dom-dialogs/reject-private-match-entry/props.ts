@@ -2,12 +2,19 @@ import { Resources } from "../../resource";
 import { domUuid } from "../../uuid/dom-uuid";
 import { ROOT_CLASS } from "./dom/class-name";
 import { DataIDs } from "./dom/data-ids";
+import { extractElements } from "./dom/elements";
 import { rootInnerHTML } from "./dom/root-inner-html";
 
 /** RejectPrivateMatchEntryDialogのプロパティ */
 export type RejectPrivateMatchEntryDialogProps = {
   /** ルートHTML要素 */
   root: HTMLElement;
+  /** クロージャ */
+  closer: HTMLElement;
+  /** 背景 */
+  background: HTMLElement;
+  /** 閉じるボタン */
+  closeButton: HTMLElement;
 };
 
 /**
@@ -26,5 +33,6 @@ export function createRejectPrivateMatchEntryDialogProps(
     closeButton: domUuid(),
   };
   root.innerHTML = rootInnerHTML(resources, dataIDs);
-  return { root };
+  const elements = extractElements(root, dataIDs);
+  return { ...elements, root };
 }
