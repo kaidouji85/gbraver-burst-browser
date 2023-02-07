@@ -145,7 +145,7 @@ export function createTitleProps(params: CreateTitlePropsParams): TitleProps {
     logout: elements.logout,
     tutorial: elements.tutorial,
     arcade: elements.arcade,
-    casualMatch: elements.casualMatch,
+    casualMatch: elements.netBattle,
     config: elements.config,
     isLogoLoaded,
     isAvatarLoaded,

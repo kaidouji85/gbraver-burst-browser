@@ -10,7 +10,7 @@ type Elements = {
   logo: HTMLImageElement;
   tutorial: HTMLElement;
   arcade: HTMLElement;
-  casualMatch: HTMLElement;
+  netBattle: HTMLElement;
   config: HTMLElement;
 };
 
@@ -46,7 +46,7 @@ export function extractElements(root: HTMLElement, ids: DataIDs): Elements {
   const arcade: HTMLElement =
     root.querySelector(`[data-id="${ids.arcade}"]`) ??
     document.createElement("div");
-  const casualMatch: HTMLElement =
+  const netBattle: HTMLElement =
     root.querySelector(`[data-id="${ids.netBattle}"]`) ??
     document.createElement("div");
   const config: HTMLElement =
@@ -61,7 +61,7 @@ export function extractElements(root: HTMLElement, ids: DataIDs): Elements {
     logo,
     tutorial,
     arcade,
-    casualMatch,
+    netBattle,
     config,
   };
 }
