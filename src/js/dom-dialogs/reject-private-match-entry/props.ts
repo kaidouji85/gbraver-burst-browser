@@ -1,3 +1,4 @@
+import { Exclusive } from "../../exclusive/exclusive";
 import { Resources } from "../../resource";
 import { domUuid } from "../../uuid/dom-uuid";
 import { ROOT_CLASS } from "./dom/class-name";
@@ -15,6 +16,8 @@ export type RejectPrivateMatchEntryDialogProps = {
   background: HTMLElement;
   /** 閉じるボタン */
   closeButton: HTMLElement;
+  /** 排他制御 */
+  exclusive: Exclusive;
 };
 
 /**
@@ -34,5 +37,5 @@ export function createRejectPrivateMatchEntryDialogProps(
   };
   root.innerHTML = rootInnerHTML(resources, dataIDs);
   const elements = extractElements(root, dataIDs);
-  return { ...elements, root };
+  return { ...elements, root, exclusive: new Exclusive() };
 }

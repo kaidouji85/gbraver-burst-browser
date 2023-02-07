@@ -1,5 +1,8 @@
+import { pushDOMStream } from "../../dom/event-stream";
 import { Resources } from "../../resource";
+import { Unsubscriber } from "../../stream/stream";
 import { DOMDialog } from "../dialog";
+import { onCloseButtonPush } from "./listeners/on-close-button-push";
 import {
   createRejectPrivateMatchEntryDialogProps,
   RejectPrivateMatchEntryDialogProps,
@@ -9,6 +12,8 @@ import {
 export class RejectPrivateMatchEntryDialog implements DOMDialog {
   /** プロパティ */
   #props: RejectPrivateMatchEntryDialogProps;
+  /** アンサブスクライバ */
+  #unsubscribers: Unsubscriber[];
 
   /**
    * コンストラクタ
@@ -16,11 +21,18 @@ export class RejectPrivateMatchEntryDialog implements DOMDialog {
    */
   constructor(resources: Resources) {
     this.#props = createRejectPrivateMatchEntryDialogProps(resources);
+    this.#unsubscribers = [
+      pushDOMStream(this.#props.closeButton).subscribe((action) => {
+        onCloseButtonPush(this.#props, action);
+      }),
+    ];
   }
 
   /** @override */
   destructor(): void {
-    // NOP
+    this.#unsubscribers.forEach((v) => {
+      v.unsubscribe();
+    });
   }
 
   /** @override */
