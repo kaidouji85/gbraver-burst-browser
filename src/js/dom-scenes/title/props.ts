@@ -9,6 +9,7 @@ import { createStreamSource } from "../../stream/stream";
 import { domUuid } from "../../uuid/dom-uuid";
 import { waitElementLoaded } from "../../wait/wait-element-loaded";
 import { ROOT_CLASS } from "./dom/class-name";
+import { DataIDs } from "./dom/data-ids";
 import { extractElements } from "./dom/elements";
 import type { RootInnerHTMLParams } from "./dom/root-inner-html";
 import { rootInnerHTML } from "./dom/root-inner-html";
@@ -101,7 +102,7 @@ export type CreateTitlePropsParams = RootInnerHTMLParams & {
  * @return 生成結果
  */
 export function createTitleProps(params: CreateTitlePropsParams): TitleProps {
-  const dataIDs = {
+  const dataIDs: DataIDs = {
     login: domUuid(),
     accountMenu: domUuid(),
     avatar: domUuid(),
