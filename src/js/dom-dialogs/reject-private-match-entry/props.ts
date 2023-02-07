@@ -1,5 +1,7 @@
 import { Resources } from "../../resource";
+import { domUuid } from "../../uuid/dom-uuid";
 import { ROOT_CLASS } from "./dom/class-name";
+import { DataIDs } from "./dom/data-ids";
 import { rootInnerHTML } from "./dom/root-inner-html";
 
 /** RejectPrivateMatchEntryDialogのプロパティ */
@@ -18,6 +20,11 @@ export function createRejectPrivateMatchEntryDialogProps(
 ): RejectPrivateMatchEntryDialogProps {
   const root = document.createElement("div");
   root.className = ROOT_CLASS;
-  root.innerHTML = rootInnerHTML(resources);
+  const dataIDs: DataIDs = {
+    closer: domUuid(),
+    background: domUuid(),
+    closeButton: domUuid(),
+  };
+  root.innerHTML = rootInnerHTML(resources, dataIDs);
   return { root };
 }
