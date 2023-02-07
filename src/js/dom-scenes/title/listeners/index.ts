@@ -3,7 +3,7 @@ import type { Unsubscriber } from "../../../stream/stream";
 import type { TitleProps } from "../props";
 import { onArcadePush } from "./on-arcade-push";
 import { onAvatarPush } from "./on-avatar-push";
-import { onCasualMatchPush } from "./on-casual-match-push";
+import { onNetBattlePush } from "./on-net-battle-push";
 import { onConfigPush } from "./on-config-push";
 import { onLoginPush } from "./on-login-push";
 import { onLogoutPush } from "./on-logout-push";
@@ -41,7 +41,7 @@ export function bindEventListeners(props: TitleProps): Unsubscriber[] {
       onArcadePush(props, action);
     }),
     pushDOMStream(props.netBattle).subscribe((action) => {
-      onCasualMatchPush(props, action);
+      onNetBattlePush(props, action);
     }),
     pushDOMStream(props.config).subscribe((action) => {
       onConfigPush(props, action);
