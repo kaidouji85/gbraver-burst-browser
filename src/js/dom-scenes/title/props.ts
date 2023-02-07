@@ -46,8 +46,8 @@ export type TitleProps = {
   /** アーケード */
   arcade: HTMLElement;
 
-  /** カジュアルマッチ */
-  casualMatch: HTMLElement;
+  /** ネット対戦 */
+  netBattle: HTMLElement;
 
   /** 設定 */
   config: HTMLElement;
@@ -82,8 +82,8 @@ export type TitleProps = {
   /** アーケード押下ストリーム */
   pushArcade: StreamSource<void>;
 
-  /** カジュアルマッチ押下ストリーム */
-  pushCasualMatch: StreamSource<void>;
+  /** ネット対戦押下ストリーム */
+  pushNetBattle: StreamSource<void>;
 
   /** 設定押下ストリーム */
   pushConfig: StreamSource<void>;
@@ -145,7 +145,7 @@ export function createTitleProps(params: CreateTitlePropsParams): TitleProps {
     logout: elements.logout,
     tutorial: elements.tutorial,
     arcade: elements.arcade,
-    casualMatch: elements.netBattle,
+    netBattle: elements.netBattle,
     config: elements.config,
     isLogoLoaded,
     isAvatarLoaded,
@@ -161,7 +161,7 @@ export function createTitleProps(params: CreateTitlePropsParams): TitleProps {
     pushLogout: createStreamSource(),
     pushTutorial: createStreamSource(),
     pushArcade: createStreamSource(),
-    pushCasualMatch: createStreamSource(),
+    pushNetBattle: createStreamSource(),
     pushConfig: createStreamSource(),
   };
 }

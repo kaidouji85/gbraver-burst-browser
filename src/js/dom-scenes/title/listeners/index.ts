@@ -40,7 +40,7 @@ export function bindEventListeners(props: TitleProps): Unsubscriber[] {
     pushDOMStream(props.arcade).subscribe((action) => {
       onArcadePush(props, action);
     }),
-    pushDOMStream(props.casualMatch).subscribe((action) => {
+    pushDOMStream(props.netBattle).subscribe((action) => {
       onCasualMatchPush(props, action);
     }),
     pushDOMStream(props.config).subscribe((action) => {

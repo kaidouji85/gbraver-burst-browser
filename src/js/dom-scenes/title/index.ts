@@ -80,7 +80,7 @@ export class Title implements DOMScene {
    * @return イベント通知ストリーム
    */
   notifyCasualMatch(): Stream<void> {
-    return this.#props.pushCasualMatch;
+    return this.#props.pushNetBattle;
   }
 
   /**

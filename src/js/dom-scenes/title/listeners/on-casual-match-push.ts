@@ -15,7 +15,7 @@ export function onCasualMatchPush(
   props.exclusive.execute(async (): Promise<void> => {
     action.event.preventDefault();
     props.pushButton.play();
-    await pop(props.casualMatch);
-    props.pushCasualMatch.next();
+    await pop(props.netBattle);
+    props.pushNetBattle.next();
   });
 }
