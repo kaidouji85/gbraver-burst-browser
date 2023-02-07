@@ -14,6 +14,7 @@ export function onCloseButtonPush(
   props.exclusive.execute(async () => {
     action.event.stopPropagation();
     action.event.preventDefault();
-    await pop(props.closeButton);
+    props.pushButton.sound.play();
+    await pop(props.closeButton, 1.05);
   });
 }
