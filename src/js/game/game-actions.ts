@@ -34,6 +34,11 @@ export type NetBattleStart = {
   type: "NetBattleStart";
 };
 
+/** ネット対戦キャンセル */
+export type NetBattleCancel = {
+  type: "NetBattleCancel";
+};
+
 /** ネット対戦種別 */
 export type NetBattleType = "CasualMatch" | "PrivateMatch";
 
@@ -213,6 +218,7 @@ export type GameAction =
   | ArcadeStart
   | CasualMatchStart
   | NetBattleStart
+  | NetBattleCancel
   | NetBattleSelectionComplete
   | MatchingCanceled
   | SelectionComplete
