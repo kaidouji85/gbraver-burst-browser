@@ -8,6 +8,6 @@ export type DataIDs = {
   logo: string;
   tutorial: string;
   arcade: string;
-  casualMatch: string;
+  netBattle: string;
   config: string;
 };

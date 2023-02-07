@@ -111,7 +111,7 @@ export function createTitleProps(params: CreateTitlePropsParams): TitleProps {
     logo: domUuid(),
     tutorial: domUuid(),
     arcade: domUuid(),
-    casualMatch: domUuid(),
+    netBattle: domUuid(),
     config: domUuid(),
   };
   const root = document.createElement("div");

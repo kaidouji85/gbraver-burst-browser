@@ -79,7 +79,7 @@ export function rootInnerHTML(
       <div class="${ROOT_CLASS}__game-menu">
         <button class="${ROOT_CLASS}__config" data-id="${ids.config}">設定</button>
         <button class="${ROOT_CLASS}__arcade" data-id="${ids.arcade}">アーケード</button>
-        <button class="${netBattleClassName}" data-id="${ids.casualMatch}">ネット対戦</button>
+        <button class="${netBattleClassName}" data-id="${ids.netBattle}">ネット対戦</button>
         <button class="${ROOT_CLASS}__tutorial" data-id="${ids.tutorial}">チュートリアル</button>
       </div>
     </div>
