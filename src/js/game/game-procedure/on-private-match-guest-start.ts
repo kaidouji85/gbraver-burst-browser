@@ -13,6 +13,7 @@ import { loadFullResource } from "./load-full-resource";
 export async function onPrivateMatchGuestStart(
   props: GameProps
 ): Promise<void> {
+  props.domDialogBinder.hidden();
   if (!props.isFullResourceLoaded) {
     await loadFullResource(props);
   }
@@ -23,7 +24,6 @@ export async function onPrivateMatchGuestStart(
       type: "PlayerSelect",
     },
   };
-  props.domDialogBinder.hidden();
   await props.fader.fadeOut();
   const scene = new PlayerSelect(props.resources, getPlayableArmdozers(props));
   props.domSceneBinder.bind(scene, playerSelectConnector);
