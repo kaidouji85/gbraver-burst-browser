@@ -38,12 +38,12 @@ export type CasualMatchStart = {
 
 /** プライベートマット（ホスト）スタート */
 export type PrivateMatchHostStart = {
-  type: "PrivateMatchHostStart"
-}
+  type: "PrivateMatchHostStart";
+};
 
 /** プライベートマット（ゲスト）スタート */
 export type PrivateMatchGuestStart = {
-  type: "PrivateMatchGuestStart"
+  type: "PrivateMatchGuestStart";
 };
 
 /** マッチング中止 */
