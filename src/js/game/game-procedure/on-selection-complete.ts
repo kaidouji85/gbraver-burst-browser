@@ -20,25 +20,6 @@ import { waitingDialogConnector } from "../action-connector/waiting-dialog-conne
 import { MAX_LOADING_TIME } from "../dom-scene-binder/max-loading-time";
 import type { SelectionComplete } from "../game-actions";
 import type { GameProps } from "../game-props";
-import type { CasualMatch } from "../in-progress/casual-match";
-import type { NPCBattle } from "../in-progress/npc-battle";
-
-async function courseDifficultySelect(
-  props: GameProps,
-  action: SelectionComplete,
-  npcBattle: NPCBattle
-): Promise<void> {
-  props.inProgress = {
-    ...npcBattle,
-    subFlow: {
-      type: "DifficultySelect",
-      armdozerId: action.armdozerId,
-      pilotId: action.pilotId,
-    },
-  };
-  const dialog = new DifficultyDialog(props.resources);
-  props.domDialogBinder.bind(dialog, difficultyDialogConnector);
-}
 
 async function waitUntilMatching(
   props: Readonly<GameProps>,
@@ -79,21 +60,14 @@ function createBattleProgress(props: Readonly<GameProps>, battle: BattleSDK): Ba
   };
 } 
 
-async function startMatching(
-  props: GameProps,
+async function startCasualMatch(
+  props: Readonly<GameProps>,
   action: SelectionComplete,
-  origin: CasualMatch
 ): Promise<void> {
   const dialog = new MatchingDialog(props.resources);
   props.domDialogBinder.bind(dialog, matchingDialogConnector);
   const battle = await waitUntilMatching(props, action);
   props.suddenlyBattleEnd.bind(battle);
-  props.inProgress = {
-    ...origin,
-    subFlow: {
-      type: "Battle",
-    },
-  };
   await props.fader.fadeOut();
   props.domDialogBinder.hidden();
   const scene = new MatchCard({
@@ -151,8 +125,22 @@ export async function onSelectionComplete(
   action: SelectionComplete
 ): Promise<void> {
   if (props.inProgress.type === "NPCBattle") {
-    await courseDifficultySelect(props, action, props.inProgress);
+    props.inProgress = {
+      ...props.inProgress,
+      subFlow: {
+        type: "DifficultySelect",
+        armdozerId: action.armdozerId,
+        pilotId: action.pilotId,
+      },
+    };
+    props.domDialogBinder.bind(new DifficultyDialog(props.resources), difficultyDialogConnector);
   } else if (props.inProgress.type === "CasualMatch") {
-    await startMatching(props, action, props.inProgress);
+    props.inProgress = {
+      ...props.inProgress,
+      subFlow: {
+        type: "Battle",
+      },
+    };
+    await startCasualMatch(props, action);
   }
 }
