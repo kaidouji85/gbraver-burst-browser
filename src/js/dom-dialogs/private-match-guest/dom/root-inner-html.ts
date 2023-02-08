@@ -14,7 +14,7 @@ export function rootInnerHtml(resources: Resources, ids: DataIDs): string {
     resources.paths.find((v) => v.id === PathIds.CLOSER)?.path ?? "";
   const entryDescription = "ホストから共有されたルームIDを、入力してください。";
   return `
-    <div class="${ROOT_CLASS}__background" data-id="${ids.background}"></div>
+    <div class="${ROOT_CLASS}__background"></div>
     <div class="${ROOT_CLASS}__dialog">
       <img class="${ROOT_CLASS}__closer" alt="閉じる" src="${closerPath}" data-id="${ids.closer}">
       <div class="${ROOT_CLASS}__entry-title">プライベートマッチ（ゲスト）</div>
