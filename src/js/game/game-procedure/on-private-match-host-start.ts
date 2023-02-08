@@ -4,6 +4,7 @@ import { playerSelectConnector } from "../action-connector/player-select-connect
 import { MAX_LOADING_TIME } from "../dom-scene-binder/max-loading-time";
 import { GameProps } from "../game-props";
 import { getPlayableArmdozers } from "./get-playable-armdozers";
+import { loadFullResource } from "./load-full-resource";
 
 /**
  * プライベートマッチ（ホスト）スタート
@@ -11,18 +12,19 @@ import { getPlayableArmdozers } from "./get-playable-armdozers";
  * @return 処理が完了したら発火するPromise
  */
 export async function onPrivateMatchHostStart(props: GameProps): Promise<void> {
+  if (!props.isFullResourceLoaded) {
+    await loadFullResource(props);
+  }
+
   props.inProgress = {
     type: "PrivateMatchHost",
     subFlow: {
-      type: "PlayerSelect"
-    }
+      type: "PlayerSelect",
+    },
   };
   props.domDialogBinder.hidden();
   await props.fader.fadeOut();
-  const scene = new PlayerSelect(
-    props.resources,
-    getPlayableArmdozers(props)
-  );
+  const scene = new PlayerSelect(props.resources, getPlayableArmdozers(props));
   props.domSceneBinder.bind(scene, playerSelectConnector);
   await Promise.race([scene.waitUntilLoaded(), waitTime(MAX_LOADING_TIME)]);
   await props.fader.fadeIn();
