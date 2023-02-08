@@ -21,11 +21,6 @@ export type ArcadeStart = {
   type: "ArcadeStart";
 };
 
-/** カジュアルマッチスタート */
-export type CasualMatchStart = {
-  type: "CasualMatchStart";
-};
-
 /** ネット対戦スタート */
 export type NetBattleStart = {
   type: "NetBattleStart";
@@ -34,6 +29,21 @@ export type NetBattleStart = {
 /** ネット対戦キャンセル */
 export type NetBattleCancel = {
   type: "NetBattleCancel";
+};
+
+/** カジュアルマッチスタート */
+export type CasualMatchStart = {
+  type: "CasualMatchStart";
+};
+
+/** プライベートマット（ホスト）スタート */
+export type PrivateMatchHostStart = {
+  type: "PrivateMatchHostStart"
+}
+
+/** プライベートマット（ゲスト）スタート */
+export type PrivateMatchGuestStart = {
+  type: "PrivateMatchGuestStart"
 };
 
 /** マッチング中止 */
@@ -203,9 +213,11 @@ export type GameAction =
   | ReloadRequest
   | ExitMailVerifiedIncomplete
   | ArcadeStart
-  | CasualMatchStart
   | NetBattleStart
   | NetBattleCancel
+  | CasualMatchStart
+  | PrivateMatchHostStart
+  | PrivateMatchGuestStart
   | MatchingCanceled
   | SelectionComplete
   | SelectionCancel
