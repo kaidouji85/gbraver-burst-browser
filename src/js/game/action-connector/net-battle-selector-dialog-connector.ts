@@ -9,6 +9,9 @@ export const netBattleSelectorDialogConnector: Connector = (
   dialog,
   gameAction
 ) => [
+  dialog.notifyCasualMatchSelection().subscribe(() => {
+    gameAction.next({ type: "CasualMatchStart" });
+  }),
   dialog.notifyClosed().subscribe(() => {
     gameAction.next({ type: "NetBattleCancel" });
   }),
