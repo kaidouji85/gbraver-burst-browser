@@ -5,4 +5,11 @@ import { DomDialogActionConnector } from "../dom-dialog-binder/dom-dialog-action
 type Connector = DomDialogActionConnector<NetBattleSelectorDialog>;
 
 /** ネットバトルセレクターダイアログとゲームアクションを関連付ける */
-export const netBattleSelectorDialogConnector: Connector = () => [];
+export const netBattleSelectorDialogConnector: Connector = (
+  dialog,
+  gameAction
+) => [
+  dialog.notifyClosed().subscribe(() => {
+    gameAction.next({ type: "NetBattleCancel" });
+  }),
+];

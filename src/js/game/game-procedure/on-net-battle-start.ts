@@ -7,5 +7,8 @@ import { GameProps } from "../game-props";
  * @param props ゲームプロパティ
  */
 export function onNetBattleStart(props: Readonly<GameProps>) {
-  props.domDialogBinder.bind(new NetBattleSelectorDialog(props.resources), netBattleSelectorDialogConnector);
+  props.domDialogBinder.bind(
+    new NetBattleSelectorDialog(props.resources),
+    netBattleSelectorDialogConnector
+  );
 }
