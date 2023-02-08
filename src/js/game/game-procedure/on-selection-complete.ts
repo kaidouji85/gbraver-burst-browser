@@ -3,6 +3,7 @@ import { difficultyDialogConnector } from "../action-connector/difficulty-dialog
 import { SelectionComplete } from "../game-actions";
 import type { GameProps } from "../game-props";
 import { startCasualMatch } from "./start-casual-match";
+import { startPrivateMatchHost } from "./start-private-match-host";
 
 /**
  * プレイヤーキャラクター 選択完了時の処理
@@ -42,6 +43,20 @@ export async function onSelectionComplete(
       subFlow: {
         type: "Battle",
       },
+    };
+  } else if (props.inProgress.type === "PrivateMatchHost") {
+    props.inProgress = {
+      ...props.inProgress,
+      subFlow: {
+        type: "Waiting"
+      }
+    };
+    await startPrivateMatchHost(props, action);
+    props.inProgress = {
+      ...props.inProgress,
+      subFlow: {
+        type: "Battle"
+      }
     };
   }
 }
