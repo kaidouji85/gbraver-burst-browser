@@ -4,8 +4,6 @@ import { DataIDs } from "./data-ids";
 export type Elements = {
   /** クロージャ */
   closer: HTMLElement;
-  /** 背景 */
-  background: HTMLElement;
 };
 
 /**
@@ -19,8 +17,6 @@ export function extractElements(root: HTMLElement, ids: DataIDs): Elements {
   const closer: HTMLElement =
     root.querySelector(`[data-id="${ids.closer}"]`) ??
     document.createElement("div");
-  const background: HTMLElement =
-    root.querySelector(`[data-id="${ids.background}"]`) ??
     document.createElement("div");
-  return { closer, background };
+  return { closer };
 }

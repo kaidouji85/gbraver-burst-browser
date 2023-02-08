@@ -10,7 +10,7 @@ import { domUuid } from "../../uuid/dom-uuid";
 import { ROOT_CLASS } from "./dom/class-name";
 import { DataIDs } from "./dom/data-ids";
 import { extractElements } from "./dom/elements";
-import { rootInnerHTML } from "./dom/inner-html";
+import { rootInnerHTML } from "./dom/root-inner-html";
 
 /** プライベートマッチホストダイアログのプロパティ */
 export type PrivateMatchHostDialogProps = {
@@ -18,8 +18,6 @@ export type PrivateMatchHostDialogProps = {
   root: HTMLElement;
   /** クロージャ */
   closer: HTMLElement;
-  /** 背景 */
-  background: HTMLElement;
   /** 効果音 値変更 */
   changeValue: SoundResource;
   /** 排他制御 */
@@ -39,7 +37,6 @@ export function createPrivateMatchHostDialogProps(
   roomID: string
 ): PrivateMatchHostDialogProps {
   const ids: DataIDs = {
-    background: domUuid(),
     closer: domUuid(),
   };
   const root = document.createElement("div");
@@ -49,7 +46,6 @@ export function createPrivateMatchHostDialogProps(
   return {
     root,
     closer: elements.closer,
-    background: elements.background,
     changeValue:
       resources.sounds.find((v) => v.id === SOUND_IDS.CHANGE_VALUE) ??
       createEmptySoundResource(),
