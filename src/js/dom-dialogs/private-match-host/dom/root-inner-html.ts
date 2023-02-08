@@ -20,7 +20,7 @@ export function rootInnerHTML(
   const description =
     "プライベートマッチしたい人に、以下のルームIDを共有してください。";
   return `
-    <div class="${ROOT_CLASS}__background" data-id="${ids.background}"></div>
+    <div class="${ROOT_CLASS}__background"></div>
     <div class="${ROOT_CLASS}__dialog">
       <img class="${ROOT_CLASS}__closer" alt="閉じる" src="${closerPath}" data-id="${ids.closer}">
       <div class="${ROOT_CLASS}__title">プライベートマッチ（ホスト）</div>
