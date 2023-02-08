@@ -7,26 +7,34 @@ import { waitingDialogConnector } from "../action-connector/waiting-dialog-conne
 import { SelectionComplete } from "../game-actions";
 import { GameProps } from "../game-props";
 
+function showWaitingDialog(props: Readonly<GameProps>, caption: string): void {
+  props.domDialogBinder.bind(
+    new WaitingDialog(caption),
+    waitingDialogConnector
+  ); 
+}
+
+function showNetworkErrorDialog(props: Readonly<GameProps>): void {
+  props.domDialogBinder.bind(
+    new NetworkErrorDialog(props.resources, {
+      type: "GotoTitle",
+    }),
+    networkErrorDialogConnector
+  );
+}
+
 async function createPrivateMatchRoom(
   props: Readonly<GameProps>,
   action: SelectionComplete
 ): Promise<PrivateMatchRoom> {
   try {
-    props.domDialogBinder.bind(
-      new WaitingDialog("ルーム作成中……"),
-      waitingDialogConnector
-    );
+    showWaitingDialog(props, "ルーム作成中……");
     return await props.api.createPrivateMatchRoom(
       action.armdozerId,
       action.pilotId
     );
   } catch (e) {
-    props.domDialogBinder.bind(
-      new NetworkErrorDialog(props.resources, {
-        type: "GotoTitle",
-      }),
-      networkErrorDialogConnector
-    );
+    showNetworkErrorDialog(props);
     throw e;
   }
 }
