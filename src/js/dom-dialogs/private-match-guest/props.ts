@@ -18,8 +18,6 @@ export type PrivateMatchGuestDialogProps = {
   root: HTMLElement;
   /** クロージャ */
   closer: HTMLElement;
-  /** 背景 */
-  background: HTMLElement;
   /** ルームID入力フォーム */
   roomID: HTMLInputElement;
   /** プライベートマット開始ボタン */
@@ -51,7 +49,6 @@ export function createPrivateMatchGuestDialogProps(
   root.className = ROOT_CLASS;
   const dataIDs: DataIDs = {
     closer: domUuid(),
-    background: domUuid(),
     roomID: domUuid(),
     enterButton: domUuid(),
   };

@@ -2,7 +2,6 @@ import { pushDOMStream } from "../../dom/event-stream";
 import { Resources } from "../../resource";
 import { Stream, Unsubscriber } from "../../stream/stream";
 import { DOMDialog } from "../dialog";
-import { onBackgroundPush } from "./listeners/on-background-push";
 import { onCloserPush } from "./listeners/on-closer-push";
 import { onEnterButtonPush } from "./listeners/on-enter-button-push";
 import {
@@ -26,9 +25,6 @@ export class PrivateMatchGuestDialog implements DOMDialog {
     this.#unsubscribers = [
       pushDOMStream(this.#props.closer).subscribe((action) => {
         onCloserPush(this.#props, action);
-      }),
-      pushDOMStream(this.#props.background).subscribe((action) => {
-        onBackgroundPush(this.#props, action);
       }),
       pushDOMStream(this.#props.enterButton).subscribe((action) => {
         onEnterButtonPush(this.#props, action);

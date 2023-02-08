@@ -4,8 +4,6 @@ import { DataIDs } from "./data-ids";
 export type Elements = {
   /** クロージャ */
   closer: HTMLElement;
-  /** 背景 */
-  background: HTMLElement;
   /** ルームID入力フォーム */
   roomID: HTMLInputElement;
   /** プライベートマット開始ボタン */
@@ -23,9 +21,6 @@ export function extractElements(root: HTMLElement, ids: DataIDs): Elements {
   const closer: HTMLElement =
     root.querySelector(`[data-id="${ids.closer}"]`) ??
     document.createElement("div");
-  const background: HTMLElement =
-    root.querySelector(`[data-id="${ids.background}"]`) ??
-    document.createElement("div");
   const foundRoomID = root.querySelector(`[data-id="${ids.roomID}"]`);
   const roomID: HTMLInputElement =
     foundRoomID instanceof HTMLInputElement
@@ -34,5 +29,5 @@ export function extractElements(root: HTMLElement, ids: DataIDs): Elements {
   const enterButton: HTMLElement =
     root.querySelector(`[data-id="${ids.enterButton}"]`) ??
     document.createElement("div");
-  return { closer, background, roomID, enterButton };
+  return { closer, roomID, enterButton };
 }
