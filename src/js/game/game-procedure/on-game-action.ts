@@ -21,6 +21,7 @@ import { onMatchingCanceled } from "./on-matching-cancel";
 import { onNetBattleCancel } from "./on-net-battle-cancel";
 import { onNetBattleStart } from "./on-net-battle-start";
 import { onPostBattleAction } from "./on-post-battle-action";
+import { onPrivateMatchGuestStart } from "./on-private-match-guest-start";
 import { onPrivateMatchHostStart } from "./on-private-match-host-start";
 import { onReloadRequest } from "./on-reload-request";
 import { onSelectTutorialStage } from "./on-select-tutorial-stage";
@@ -98,5 +99,7 @@ export function onGameAction(props: GameProps, action: GameAction) {
     onNetBattleCancel(props);
   } else if (action.type === "PrivateMatchHostStart") {
     onPrivateMatchHostStart(props);
+  } else if (action.type === "PrivateMatchGuestStart") {
+    onPrivateMatchGuestStart(props);
   }
 }
