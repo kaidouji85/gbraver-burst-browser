@@ -25,7 +25,7 @@ export class PrivateMatchHostDialog implements DOMDialog {
     this.#unsubscribers = [
       pushDOMStream(this.#props.closer).subscribe((action) => {
         onCloserPush(this.#props, action);
-      })
+      }),
     ];
   }
 

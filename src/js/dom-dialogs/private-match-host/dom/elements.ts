@@ -17,6 +17,5 @@ export function extractElements(root: HTMLElement, ids: DataIDs): Elements {
   const closer: HTMLElement =
     root.querySelector(`[data-id="${ids.closer}"]`) ??
     document.createElement("div");
-    document.createElement("div");
   return { closer };
 }
