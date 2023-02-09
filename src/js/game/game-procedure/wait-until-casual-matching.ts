@@ -22,7 +22,6 @@ export async function waitUntilCasualMatching(
       new MatchingDialog(props.resources),
       matchingDialogConnector
     );
-    await props.api.disconnectWebsocket();
     return await props.api.startCasualMatch(action.armdozerId, action.pilotId);
   } catch (e) {
     const dialog = new NetworkErrorDialog(props.resources, {

@@ -2,7 +2,8 @@ import { DifficultyDialog } from "../../dom-dialogs/difficulty";
 import { difficultyDialogConnector } from "../action-connector/difficulty-dialog-connector";
 import { SelectionComplete } from "../game-actions";
 import type { GameProps } from "../game-props";
-import { startCasualMatch } from "./start-casual-match";
+import { startOnlineBattle } from "./start-online-battle";
+import { waitUntilCasualMatching } from "./wait-until-casual-matching";
 
 /**
  * プレイヤーキャラクター 選択完了時の処理
@@ -36,12 +37,14 @@ export async function onSelectionComplete(
         type: "Waiting",
       },
     };
-    await startCasualMatch(props, action);
+    await props.api.disconnectWebsocket();
+    const battle = await waitUntilCasualMatching(props, action);
     props.inProgress = {
       ...props.inProgress,
       subFlow: {
         type: "Battle",
       },
     };
+    await startOnlineBattle(props, battle);
   }
 }
