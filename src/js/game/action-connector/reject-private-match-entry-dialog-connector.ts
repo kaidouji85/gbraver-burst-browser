@@ -5,4 +5,4 @@ import type { DomDialogActionConnector } from "../dom-dialog-binder/dom-dialog-a
 type Connector = DomDialogActionConnector<RejectPrivateMatchEntryDialog>;
 
 /** プライベートマッチエントリ拒否ダイアログとゲームアクションを関連付ける */
-export const RejectPrivateMatcEntryDialogConnector: Connector = () => [];
+export const rejectPrivateMatcEntryDialogConnector: Connector = () => [];

@@ -7,6 +7,7 @@ import { waitUntilPrivateMatchingAsHost } from "./wait-until-private-matching-as
 import { waitUntilCasualMatching } from "./wait-until-casual-matching";
 import { PrivateMatchGuestDialog } from "../../dom-dialogs/private-match-guest";
 import { privateMatchGuestDialogConnector } from "../action-connector/private-match-guest-dialog-connector";
+import { prop } from "ramda";
 
 /**
  * プレイヤーキャラクター 選択完了時の処理
@@ -66,6 +67,14 @@ export async function onSelectionComplete(
     };
     await startOnlineBattle(props, battle, "PRIVATE MATCH");
   } else if (props.inProgress.type === "PrivateMatchGuest") {
+    props.inProgress = {
+      ...props.inProgress,
+      subFlow: {
+        type: "Entry",
+        armdozerId: action.armdozerId,
+        pilotId: action.pilotId,
+      }
+    };
     props.domDialogBinder.bind(
       new PrivateMatchGuestDialog(props.resources),
       privateMatchGuestDialogConnector

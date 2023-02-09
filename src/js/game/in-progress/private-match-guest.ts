@@ -1,6 +1,17 @@
+import { ArmDozerId, PilotId } from "gbraver-burst-core";
+
 /** プライベートマッチ（ゲスト）サブフロー キャラ選択 */
 export type PlayerSelect = {
   type: "PlayerSelect";
+};
+
+/** プライベートマッチ（ゲスト）エントリ */
+export type Entry = {
+  type: "Entry";
+  /** 選択したアームドーザ */
+  armdozerId: ArmDozerId;
+  /** 選択したパイロット */
+  pilotId: PilotId;
 };
 
 /** プライベートマッチ（ゲスト）サブフロー マッチング待ち */
@@ -14,7 +25,7 @@ export type Battle = {
 };
 
 /** プライベートマッチ（ゲスト）サブフロー */
-export type PrivateMatchGuestSubFlow = PlayerSelect | Waiting | Battle;
+export type PrivateMatchGuestSubFlow = PlayerSelect | Entry | Waiting | Battle;
 
 /**
  * プライベートマッチ（ゲスト）
