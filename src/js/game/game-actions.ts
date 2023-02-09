@@ -54,9 +54,9 @@ export type PrivateMatchEntry = {
   roomID: PrivateMatchRoomID;
 }
 
-/** ゲストがプライベートマッチエントリを取り下げる  */
-export type WidthdrawPrivateMatchEntry = {
-  type: "WidthdrawPrivateMatchEntry"
+/** ゲストがプライベートマッチエントリを取り下げる */
+export type WithdrawPrivateMatchEntry = {
+  type: "WithdrawPrivateMatchEntry"
 };
 
 /** マッチング中止 */
@@ -232,7 +232,7 @@ export type GameAction =
   | PrivateMatchHostStart
   | PrivateMatchGuestStart
   | PrivateMatchEntry
-  | WidthdrawPrivateMatchEntry
+  | WithdrawPrivateMatchEntry
   | MatchingCanceled
   | SelectionComplete
   | SelectionCancel

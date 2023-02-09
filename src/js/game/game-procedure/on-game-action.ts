@@ -31,6 +31,7 @@ import { onSuddenlyEndBattle } from "./on-suddenly-battle-end";
 import { onTutorialStart } from "./on-tutorial-start";
 import { onUniversalLogin } from "./on-universal-login";
 import { onWebSocketAPIError } from "./on-websocker-api-error";
+import { onWithdrawPrivateMatchEntry } from "./on-withdraw-private-match-entry";
 
 /**
  * ゲームアクション発生時の処理
@@ -101,5 +102,7 @@ export function onGameAction(props: GameProps, action: GameAction) {
     onPrivateMatchHostStart(props);
   } else if (action.type === "PrivateMatchGuestStart") {
     onPrivateMatchGuestStart(props);
+  } else if (action.type === "WithdrawPrivateMatchEntry") {
+    onWithdrawPrivateMatchEntry(props);
   }
 }

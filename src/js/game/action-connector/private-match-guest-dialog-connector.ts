@@ -10,6 +10,6 @@ export const privateMatchGuestDialogConnector: Connector = (dialog, gameAction) 
     gameAction.next({ type: "PrivateMatchEntry", roomID })
   }),
   dialog.notifyDialogClosed().subscribe(() => {
-    gameAction.next({ type: "WidthdrawPrivateMatchEntry" });
+    gameAction.next({ type: "WithdrawPrivateMatchEntry" });
   })
 ];
