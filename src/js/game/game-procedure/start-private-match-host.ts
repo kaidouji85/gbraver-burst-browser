@@ -11,7 +11,7 @@ function showWaitingDialog(props: Readonly<GameProps>, caption: string): void {
   props.domDialogBinder.bind(
     new WaitingDialog(caption),
     waitingDialogConnector
-  ); 
+  );
 }
 
 function showNetworkErrorDialog(props: Readonly<GameProps>): void {

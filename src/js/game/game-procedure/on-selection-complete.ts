@@ -48,15 +48,15 @@ export async function onSelectionComplete(
     props.inProgress = {
       ...props.inProgress,
       subFlow: {
-        type: "Waiting"
-      }
+        type: "Waiting",
+      },
     };
     await startPrivateMatchHost(props, action);
     props.inProgress = {
       ...props.inProgress,
       subFlow: {
-        type: "Battle"
-      }
+        type: "Battle",
+      },
     };
   }
 }
