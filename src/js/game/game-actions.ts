@@ -1,3 +1,4 @@
+import { PrivateMatchRoomID } from "@gbraver-burst-network/browser-core";
 import type { ArmDozerId, GameEnd, PilotId } from "gbraver-burst-core";
 
 import type { GbraverBurstBrowserConfig } from "./config/browser-config";
@@ -44,6 +45,18 @@ export type PrivateMatchHostStart = {
 /** プライベートマット（ゲスト）スタート */
 export type PrivateMatchGuestStart = {
   type: "PrivateMatchGuestStart";
+};
+
+/** ゲストがプライベートマッチにエントリする */
+export type PrivateMatchEntry = {
+  type: "PrivateMatchEntry"
+  /** エントリするルームID */
+  roomID: PrivateMatchRoomID;
+}
+
+/** ゲストがプライベートマッチエントリを取り下げる  */
+export type WidthdrawPrivateMatchEntry = {
+  type: "WidthdrawPrivateMatchEntry"
 };
 
 /** マッチング中止 */
@@ -218,6 +231,8 @@ export type GameAction =
   | CasualMatchStart
   | PrivateMatchHostStart
   | PrivateMatchGuestStart
+  | PrivateMatchEntry
+  | WidthdrawPrivateMatchEntry
   | MatchingCanceled
   | SelectionComplete
   | SelectionCancel
