@@ -1,13 +1,12 @@
 import { DifficultyDialog } from "../../dom-dialogs/difficulty";
+import { PrivateMatchGuestDialog } from "../../dom-dialogs/private-match-guest";
 import { difficultyDialogConnector } from "../action-connector/difficulty-dialog-connector";
+import { privateMatchGuestDialogConnector } from "../action-connector/private-match-guest-dialog-connector";
 import { SelectionComplete } from "../game-actions";
 import type { GameProps } from "../game-props";
 import { startOnlineBattle } from "./start-online-battle";
-import { waitUntilPrivateMatchingAsHost } from "./wait-until-private-matching-as-host";
 import { waitUntilCasualMatching } from "./wait-until-casual-matching";
-import { PrivateMatchGuestDialog } from "../../dom-dialogs/private-match-guest";
-import { privateMatchGuestDialogConnector } from "../action-connector/private-match-guest-dialog-connector";
-import { prop } from "ramda";
+import { waitUntilPrivateMatchingAsHost } from "./wait-until-private-matching-as-host";
 
 /**
  * プレイヤーキャラクター 選択完了時の処理
@@ -73,7 +72,7 @@ export async function onSelectionComplete(
         type: "Entry",
         armdozerId: action.armdozerId,
         pilotId: action.pilotId,
-      }
+      },
     };
     props.domDialogBinder.bind(
       new PrivateMatchGuestDialog(props.resources),

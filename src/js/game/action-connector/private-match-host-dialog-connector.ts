@@ -5,8 +5,11 @@ import type { DomDialogActionConnector } from "../dom-dialog-binder/dom-dialog-a
 type Connector = DomDialogActionConnector<PrivateMatchHostDialog>;
 
 /** プライベートマッチ（ホスト）ダイアログとゲームアクションを関連付ける */
-export const privateMatchHostDialogConnector: Connector = (dialog, gameAction) => [
+export const privateMatchHostDialogConnector: Connector = (
+  dialog,
+  gameAction
+) => [
   dialog.notifyDialogClosed().subscribe(() => {
     gameAction.next({ type: "MatchingCanceled" });
-  })
+  }),
 ];

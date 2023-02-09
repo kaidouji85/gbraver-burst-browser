@@ -5,4 +5,11 @@ import type { DomDialogActionConnector } from "../dom-dialog-binder/dom-dialog-a
 type Connector = DomDialogActionConnector<RejectPrivateMatchEntryDialog>;
 
 /** プライベートマッチエントリ拒否ダイアログとゲームアクションを関連付ける */
-export const rejectPrivateMatcEntryDialogConnector: Connector = () => [];
+export const rejectPrivateMatcEntryDialogConnector: Connector = (
+  dialog,
+  gameAction
+) => [
+  dialog.notifyDialogClosed().subscribe(() => {
+    gameAction.next({ type: "MatchingCanceled" });
+  }),
+];

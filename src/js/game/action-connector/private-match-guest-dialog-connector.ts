@@ -5,11 +5,14 @@ import type { DomDialogActionConnector } from "../dom-dialog-binder/dom-dialog-a
 type Connector = DomDialogActionConnector<PrivateMatchGuestDialog>;
 
 /** プライベートマッチ（ゲスト）ダイアログとゲームアクションを関連付ける */
-export const privateMatchGuestDialogConnector: Connector = (dialog, gameAction) => [
+export const privateMatchGuestDialogConnector: Connector = (
+  dialog,
+  gameAction
+) => [
   dialog.notifyPrivateMatchStart().subscribe((roomID) => {
-    gameAction.next({ type: "PrivateMatchEntry", roomID })
+    gameAction.next({ type: "PrivateMatchEntry", roomID });
   }),
   dialog.notifyDialogClosed().subscribe(() => {
     gameAction.next({ type: "WithdrawPrivateMatchEntry" });
-  })
+  }),
 ];

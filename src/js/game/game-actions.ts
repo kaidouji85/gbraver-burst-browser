@@ -49,14 +49,14 @@ export type PrivateMatchGuestStart = {
 
 /** ゲストがプライベートマッチにエントリする */
 export type PrivateMatchEntry = {
-  type: "PrivateMatchEntry"
+  type: "PrivateMatchEntry";
   /** エントリするルームID */
   roomID: PrivateMatchRoomID;
-}
+};
 
 /** ゲストがプライベートマッチエントリを取り下げる */
 export type WithdrawPrivateMatchEntry = {
-  type: "WithdrawPrivateMatchEntry"
+  type: "WithdrawPrivateMatchEntry";
 };
 
 /** マッチング中止 */
