@@ -5,6 +5,8 @@ import type { GameProps } from "../game-props";
 import { startOnlineBattle } from "./start-online-battle";
 import { waitUntilPrivateMatchingAsHost } from "./wait-until-private-matching-as-host";
 import { waitUntilCasualMatching } from "./wait-until-casual-matching";
+import { PrivateMatchGuestDialog } from "../../dom-dialogs/private-match-guest";
+import { privateMatchGuestDialogConnector } from "../action-connector/private-match-guest-dialog-connector";
 
 /**
  * プレイヤーキャラクター 選択完了時の処理
@@ -31,10 +33,7 @@ export async function onSelectionComplete(
       new DifficultyDialog(props.resources),
       difficultyDialogConnector
     );
-    return;
-  } 
-  
-  if (props.inProgress.type === "CasualMatch") {
+  } else if (props.inProgress.type === "CasualMatch") {
     props.inProgress = {
       ...props.inProgress,
       subFlow: {
@@ -50,16 +49,14 @@ export async function onSelectionComplete(
       },
     };
     await startOnlineBattle(props, battle, "CASUAL MATCH");
-    return;
-  }
-  
-  if (props.inProgress.type === "PrivateMatchHost") {
+  } else if (props.inProgress.type === "PrivateMatchHost") {
     props.inProgress = {
       ...props.inProgress,
       subFlow: {
         type: "Waiting",
       },
     };
+    await props.api.disconnectWebsocket();
     const battle = await waitUntilPrivateMatchingAsHost(props, action);
     props.inProgress = {
       ...props.inProgress,
@@ -68,6 +65,10 @@ export async function onSelectionComplete(
       },
     };
     await startOnlineBattle(props, battle, "PRIVATE MATCH");
-    return;
+  } else if (props.inProgress.type === "PrivateMatchGuest") {
+    props.domDialogBinder.bind(
+      new PrivateMatchGuestDialog(props.resources),
+      privateMatchGuestDialogConnector
+    );
   }
 }
