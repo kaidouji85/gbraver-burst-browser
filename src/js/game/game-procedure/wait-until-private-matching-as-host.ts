@@ -15,7 +15,7 @@ import { GameProps } from "../game-props";
  * @param action アクション
  * @return バトルSDK
  */
-export async function waitUntilPrivateMatchingWithHost(
+export async function waitUntilPrivateMatchingAsHost(
   props: Readonly<GameProps>,
   action: SelectionComplete
 ): Promise<BattleSDK> {

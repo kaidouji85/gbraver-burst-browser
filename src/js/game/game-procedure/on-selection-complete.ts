@@ -3,7 +3,7 @@ import { difficultyDialogConnector } from "../action-connector/difficulty-dialog
 import { SelectionComplete } from "../game-actions";
 import type { GameProps } from "../game-props";
 import { startOnlineBattle } from "./start-online-battle";
-import { waitUntilPrivateMatchingWithHost } from "./wait-until-private-matching-with-host";
+import { waitUntilPrivateMatchingAsHost } from "./wait-until-private-matching-as-host";
 import { waitUntilCasualMatching } from "./wait-until-casual-matching";
 
 /**
@@ -60,7 +60,7 @@ export async function onSelectionComplete(
         type: "Waiting",
       },
     };
-    const battle = await waitUntilPrivateMatchingWithHost(props, action);
+    const battle = await waitUntilPrivateMatchingAsHost(props, action);
     props.inProgress = {
       ...props.inProgress,
       subFlow: {
