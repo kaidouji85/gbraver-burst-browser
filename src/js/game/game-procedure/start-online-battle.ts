@@ -49,10 +49,12 @@ function createBattleProgress(
  * オンライン対戦を開始する
  * @param props ゲームプロパティ
  * @param battle バトルSDK
+ * @param caption 対戦カードのキャプション
  */
 export async function startOnlineBattle(
   props: Readonly<GameProps>,
-  battle: BattleSDK
+  battle: BattleSDK,
+  caption: string
 ): Promise<void> {
   props.suddenlyBattleEnd.bind(battle);
   await props.fader.fadeOut();
@@ -61,7 +63,7 @@ export async function startOnlineBattle(
     resources: props.resources,
     player: battle.player.armdozer.id,
     enemy: battle.enemy.armdozer.id,
-    caption: "CASUAL MATCH",
+    caption,
   });
   props.domSceneBinder.bind(scene, matchCardConnector);
   await Promise.race([scene.waitUntilLoaded(), waitTime(MAX_LOADING_TIME)]);

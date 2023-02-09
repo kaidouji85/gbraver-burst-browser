@@ -45,6 +45,6 @@ export async function onSelectionComplete(
         type: "Battle",
       },
     };
-    await startOnlineBattle(props, battle);
+    await startOnlineBattle(props, battle, "CASUAL MATCH");
   }
 }
