@@ -3,7 +3,7 @@ import { difficultyDialogConnector } from "../action-connector/difficulty-dialog
 import { SelectionComplete } from "../game-actions";
 import type { GameProps } from "../game-props";
 import { startOnlineBattle } from "./start-online-battle";
-import { startPrivateMatchHost } from "./start-private-match-host";
+import { waitUntilPrivateMatchingWithHost } from "./wait-until-private-matching-with-host";
 import { waitUntilCasualMatching } from "./wait-until-casual-matching";
 
 /**
@@ -31,7 +31,10 @@ export async function onSelectionComplete(
       new DifficultyDialog(props.resources),
       difficultyDialogConnector
     );
-  } else if (props.inProgress.type === "CasualMatch") {
+    return;
+  } 
+  
+  if (props.inProgress.type === "CasualMatch") {
     props.inProgress = {
       ...props.inProgress,
       subFlow: {
@@ -47,19 +50,24 @@ export async function onSelectionComplete(
       },
     };
     await startOnlineBattle(props, battle, "CASUAL MATCH");
-  } else if (props.inProgress.type === "PrivateMatchHost") {
+    return;
+  }
+  
+  if (props.inProgress.type === "PrivateMatchHost") {
     props.inProgress = {
       ...props.inProgress,
       subFlow: {
         type: "Waiting",
       },
     };
-    await startPrivateMatchHost(props, action);
+    const battle = await waitUntilPrivateMatchingWithHost(props, action);
     props.inProgress = {
       ...props.inProgress,
       subFlow: {
         type: "Battle",
       },
     };
+    await startOnlineBattle(props, battle, "PRIVATE MATCH");
+    return;
   }
 }
