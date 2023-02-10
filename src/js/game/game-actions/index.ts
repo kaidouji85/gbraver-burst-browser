@@ -25,11 +25,7 @@ import { LoginCancel } from "./login-cancel";
 import { Logout } from "./logout";
 import { AccountDeleteConsent } from "./account-delete-consent";
 import { DeleteAccount } from "./delete-account";
-
-/** アカウント削除同意ダイアログを閉じる */
-export type CancelAccountDeletion = {
-  type: "CancelAccountDeletion";
-};
+import { CancelAccountDeletion } from "./cancel-account-deletion";
 
 /** WebSocketAPI エラー発生 */
 export type WebSocketAPIError = {
