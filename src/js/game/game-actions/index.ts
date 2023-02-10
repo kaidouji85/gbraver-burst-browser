@@ -6,11 +6,7 @@ import type { NPCBattleCourseDifficulty } from "../npc-battle-courses";
 import type { PostBattle } from "../post-battle";
 import type { PostNetworkError } from "../post-network-error";
 import type { TutorialStageID } from "../tutorial-stages";
-
-/** 画面リロード依頼 */
-export type ReloadRequest = {
-  type: "ReloadRequest";
-};
+import { ReloadRequest } from "./reload-request";
 
 /** メール認証未完了画面を抜ける */
 export type ExitMailVerifiedIncomplete = {
