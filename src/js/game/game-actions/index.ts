@@ -1,5 +1,4 @@
 import type { GbraverBurstBrowserConfig } from "../config/browser-config";
-import type { PostNetworkError } from "../post-network-error";
 import type { TutorialStageID } from "../tutorial-stages";
 import { ArcadeStart } from "./arcade-start";
 import { ExitMailVerifiedIncomplete } from "./exit-mail-verified-incomplete";
@@ -27,14 +26,7 @@ import { AccountDeleteConsent } from "./account-delete-consent";
 import { DeleteAccount } from "./delete-account";
 import { CancelAccountDeletion } from "./cancel-account-deletion";
 import { WebSocketAPIError } from "./web-socket-api-error";
-
-/** 通信エラーダイアログを閉じる */
-export type EndNetworkError = {
-  type: "EndNetworkError";
-
-  /** ダイアログを閉じた後の処理に必要な情報 */
-  postNetworkError: PostNetworkError;
-};
+import { EndNetworkError } from "./end-network-error";
 
 /** 設定変更開始 */
 export type ConfigChangeStart = {

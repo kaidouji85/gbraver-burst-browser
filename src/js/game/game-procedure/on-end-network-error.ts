@@ -1,5 +1,5 @@
 import { fadeOut, stop } from "../../bgm/bgm-operators";
-import type { EndNetworkError } from "../game-actions";
+import { EndNetworkError } from "../game-actions/end-network-error";
 import type { GameProps } from "../game-props";
 import { playTitleBGM } from "./play-title-bgm";
 import { startTitle } from "./start-title";
