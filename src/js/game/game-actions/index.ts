@@ -23,11 +23,7 @@ import { EndNPCEnding } from "./end-npc-ending";
 import { UniversalLogin } from "./universal-login";
 import { LoginCancel } from "./login-cancel";
 import { Logout } from "./logout";
-
-/** アカウント削除同意 */
-export type AccountDeleteConsent = {
-  type: "AccountDeleteConsent";
-};
+import { AccountDeleteConsent } from "./account-delete-consent";
 
 /** アカウント削除 */
 export type DeleteAccount = {
