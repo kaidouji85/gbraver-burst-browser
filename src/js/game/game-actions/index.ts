@@ -20,11 +20,7 @@ import { EndBattle } from "./end-battle";
 import { SuddenlyBattleEnd } from "./suddenly-battle-end";
 import { PostBattleAction } from "./post-battle-action";
 import { EndNPCEnding } from "./end-npc-ending";
-
-/** ユニバーサルログインを実行する */
-export type UniversalLogin = {
-  type: "UniversalLogin";
-};
+import { UniversalLogin } from "./universal-login";
 
 /** ログインダイアからのログインを中断した */
 export type LoginCancel = {
