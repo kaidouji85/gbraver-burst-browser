@@ -27,11 +27,7 @@ import { DeleteAccount } from "./delete-account";
 import { CancelAccountDeletion } from "./cancel-account-deletion";
 import { WebSocketAPIError } from "./web-socket-api-error";
 import { EndNetworkError } from "./end-network-error";
-
-/** 設定変更開始 */
-export type ConfigChangeStart = {
-  type: "ConfigChangeStart";
-};
+import { ConfigChangeStart } from "./config-change-start";
 
 /** 設定変更完了 */
 export type ConfigChangeComplete = {
