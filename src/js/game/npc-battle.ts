@@ -132,11 +132,10 @@ export type UpdatedNPCBattleState = {
  * @return NPCバトル更新結果
  */
 export function updateNPCBattleState(
-  origin: NPCBattleState,
-  gameEndResult: GameEndResult
-): UpdatedNPCBattleState | null | undefined {
+  origin: Readonly<NPCBattleState>,
+  gameEndResult: Readonly<GameEndResult>
+): UpdatedNPCBattleState | null {
   const stage = getCurrentNPCStage(origin);
-
   if (!stage) {
     return null;
   }
