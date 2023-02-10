@@ -1,7 +1,9 @@
+import { GameOver } from "gbraver-burst-core";
 import {
   BattleAnimationTimeScales,
   parseBattleAnimationTimeScale,
 } from "../config/browser-config";
+import { PostBattleButtonConfig } from "../dom-floaters/post-battle/post-battle-button-config";
 import {
   PostNetworkBattleButtons,
   PostNPCBattleComplete,
@@ -12,12 +14,12 @@ import {
 } from "../dom-floaters/post-battle/post-battle-buttons";
 import type { EndBattle } from "../game-actions";
 import type { GameProps } from "../game-props";
+import { PlayingTutorialStage } from "../in-progress/tutorial";
 import type { NPCBattleResult } from "../npc-battle";
 import { updateNPCBattleState } from "../npc-battle";
 
 /**
  * 戦闘画面のアニメーションタイムスケールを設定に反映する
- *
  * @param props ゲームプロパティ
  * @param animationTimeScale 反映するタイムスケール
  */
@@ -35,11 +37,10 @@ const saveAnimationTimeScale = async (
 
 /**
  * NPCバトル終了後に表示するアクションボタンを求める
- *
  * @param result NPCバトル結果
  * @return 表示するアクションボタン
  */
-const postNPCBattleButtons = (result: NPCBattleResult) => {
+const postNPCBattleButtons = (result: NPCBattleResult): PostBattleButtonConfig[] => {
   switch (result) {
     case "NPCBattleComplete":
       return PostNPCBattleComplete;
@@ -52,9 +53,18 @@ const postNPCBattleButtons = (result: NPCBattleResult) => {
 };
 
 /**
+ * チュートリアル終了後に表示するアクションボタンを求める
+ * @param gameOver ゲームオーバー情報
+ * @param state チュートリアルステート
+ * @return 表示するアクションボタン
+ */
+const postTutorialBattleButtons = (gameOver: GameOver, state: PlayingTutorialStage): PostBattleButtonConfig[] => {
+  const isPlayerWin = gameOver.winner == state.stage.player.playerId;
+  return isPlayerWin ? PostTutorialWinButtons : PostTutorialLoseButtons;
+}
+
+/**
  * 戦闘終了時の処理
- * 本関数にはpropsを変更する副作用がある
- *
  * @param props ゲームプロパティ
  * @param action アクション
  * @return 処理が完了したら発火するPromise
@@ -89,11 +99,6 @@ export async function onEndBattle(
     && props.inProgress.subFlow.type === "PlayingTutorialStage"
     && action.gameEnd.result.type === "GameOver"
   ) {
-    const isPlayerWin =
-      action.gameEnd.result.winner === props.inProgress.subFlow.stage.player.playerId;
-    const postBattleButtons = isPlayerWin
-      ? PostTutorialWinButtons
-      : PostTutorialLoseButtons;
-    await props.domFloaters.showPostBattle(props.resources, postBattleButtons);
+    await props.domFloaters.showPostBattle(props.resources, postTutorialBattleButtons(action.gameEnd.result, props.inProgress.subFlow));
   }
 }
