@@ -1,4 +1,4 @@
-import type { ArmDozerId, GameEnd, PilotId } from "gbraver-burst-core";
+import type { GameEnd } from "gbraver-burst-core";
 
 import type { GbraverBurstBrowserConfig } from "../config/browser-config";
 import type { NPCBattleCourseDifficulty } from "../npc-battle-courses";
@@ -16,19 +16,7 @@ import { PrivateMatchGuestStart } from "./private-match-guest-start";
 import { PrivateMatchEntry } from "./private-match-entry";
 import { WithdrawPrivateMatchEntry } from "./withdraw-private-match-entry";
 import { MatchingCanceled } from "./matching-canceled";
-
-/**
- * プレイヤー選択完了
- */
-export type SelectionComplete = {
-  type: "SelectionComplete";
-
-  /** 選択したアームドーザのID */
-  armdozerId: ArmDozerId;
-
-  /** 選択したパイロットのID */
-  pilotId: PilotId;
-};
+import { SelectionComplete } from "./selection-complete";
 
 /**
  * プレイヤー選択キャンセル

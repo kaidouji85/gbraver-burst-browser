@@ -6,7 +6,7 @@ import { WaitingDialog } from "../../dom-dialogs/waiting/waiting-dialog";
 import { networkErrorDialogConnector } from "../action-connector/network-error-dialog-connector";
 import { privateMatchHostDialogConnector } from "../action-connector/private-match-host-dialog-connector";
 import { waitingDialogConnector } from "../action-connector/waiting-dialog-connector";
-import { SelectionComplete } from "../game-actions";
+import { SelectionComplete } from "../game-actions/selection-complete";
 import { GameProps } from "../game-props";
 
 /**

@@ -4,7 +4,7 @@ import { MatchingDialog } from "../../dom-dialogs/matching/matching-dialog";
 import { NetworkErrorDialog } from "../../dom-dialogs/network-error/network-error-dialog";
 import { matchingDialogConnector } from "../action-connector/matching-dialog-connector";
 import { networkErrorDialogConnector } from "../action-connector/network-error-dialog-connector";
-import { SelectionComplete } from "../game-actions";
+import { SelectionComplete } from "../game-actions/selection-complete";
 import { GameProps } from "../game-props";
 
 /**
