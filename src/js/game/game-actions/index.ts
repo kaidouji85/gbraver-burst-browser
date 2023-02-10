@@ -1,6 +1,4 @@
-
 import type { GbraverBurstBrowserConfig } from "../config/browser-config";
-import type { PostBattle } from "../post-battle";
 import type { PostNetworkError } from "../post-network-error";
 import type { TutorialStageID } from "../tutorial-stages";
 import { ArcadeStart } from "./arcade-start";
@@ -20,14 +18,7 @@ import { DifficultySelectionComplete } from "./difficulty-selection-complete";
 import { DifficultySelectionCancel } from "./difficulty-selection-cancel";
 import { EndBattle } from "./end-battle";
 import { SuddenlyBattleEnd } from "./suddenly-battle-end";
-
-/** 戦闘終了後アクション決定 */
-export type PostBattleAction = {
-  type: "PostBattleAction";
-
-  /** 決定したアクション */
-  action: PostBattle;
-};
+import { PostBattleAction } from "./post-battle-action";
 
 /**
  * NPC ルート エンディング 終了
