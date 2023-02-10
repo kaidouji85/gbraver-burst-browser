@@ -58,56 +58,6 @@ const postNPCBattleButtons = (result: NPCBattleResult) => {
 };
 
 /**
- * NPCバトル進行中に利用するデータを生成する
- *
- * @param inProgress 進行中のフロー
- * @param gameEndResult 戦闘結果
- * @return 生成結果、NPCバトル中でない場合はnullを返す
- */
-const createNPCBattle = (
-  inProgress: InProgress,
-  gameEndResult: GameEndResult
-) => {
-  if (
-    inProgress.type !== "NPCBattle" ||
-    inProgress.subFlow.type !== "PlayingNPCBattle"
-  ) {
-    return null;
-  }
-
-  const npcBattle = inProgress as NPCBattle;
-  const playingNPCBattle = inProgress.subFlow as PlayingNPCBattle;
-  const updated = updateNPCBattleState(playingNPCBattle.state, gameEndResult);
-  if (!updated) {
-    return null;
-  }
-
-  const postBattleButtons = postNPCBattleButtons(updated.result);
-  const updatedInProgress = {
-    ...npcBattle,
-    subFlow: { ...playingNPCBattle, state: updated.state },
-  };
-  return {
-    updatedInProgress,
-    postBattleButtons,
-  };
-};
-
-/**
- * NPCバトルステージが終了した際の処理
- *
- * @param props ゲームプロパティ
- * @param postBattleButtons 戦闘終了後アクションボタン設定
- * @return 処理が完了したら発火するPromise
- */
-const endNPCBattleStage = async (
-  props: Readonly<GameProps>,
-  postBattleButtons: PostBattleButtonConfig[]
-) => {
-  await props.domFloaters.showPostBattle(props.resources, postBattleButtons);
-};
-
-/**
  * チュートリアル進行中に利用するデータを生成する
  *
  * @param inProgress 進行中のフロー
@@ -164,13 +114,21 @@ export async function onEndBattle(
   props: GameProps,
   action: EndBattle
 ): Promise<void> {
-  const npcBattle = createNPCBattle(props.inProgress, action.gameEnd.result);
   const tutorial = createTutorial(props.inProgress, action.gameEnd.result);
   await saveAnimationTimeScale(props, action.animationTimeScale);
 
-  if (npcBattle) {
-    //props.inProgress = npcBattle.updatedInProgress;
-    //await endNPCBattleStage(props, npcBattle.postBattleButtons);
+  if (props.inProgress.type === "NPCBattle" && props.inProgress.subFlow.type === "PlayingNPCBattle") {
+    const updated = updateNPCBattleState(props.inProgress.subFlow.state, action.gameEnd.result);
+    if (updated) {
+      props.inProgress = {
+        ...props.inProgress,
+        subFlow: { 
+          ...props.inProgress.subFlow, 
+          state: updated.state
+        }
+      };
+      await props.domFloaters.showPostBattle(props.resources, postNPCBattleButtons(updated.result));
+    }
   } else if (props.inProgress.type === "CasualMatch") {
     props.suddenlyBattleEnd.unbind();
     await props.api.disconnectWebsocket();
