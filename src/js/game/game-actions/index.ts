@@ -1,4 +1,3 @@
-import type { TutorialStageID } from "../tutorial-stages";
 import { ArcadeStart } from "./arcade-start";
 import { ExitMailVerifiedIncomplete } from "./exit-mail-verified-incomplete";
 import { NetBattleStart } from "./net-battle-start";
@@ -31,21 +30,9 @@ import { ConfigChangeComplete } from "./config-change-complete";
 import { ConfigChangeCancel } from "./config-change-cancel";
 import { TutorialStart } from "./tutorial-start";
 import { CancelTutorialSelect } from "./cancel-tutorial-select";
+import { SelectTutorialStage } from "./select-tutorial-stage";
 
-/** チュートリアルステージ選択完了 */
-export type SelectTutorialStage = {
-  type: "SelectTutorialStage";
-
-  /** ステージID */
-  id: TutorialStageID;
-
-  /** ステージレベル */
-  level: number;
-};
-
-/**
- * ゲーム全体で利用するアクション
- */
+/** ゲーム全体で利用するアクション */
 export type GameAction =
   | ReloadRequest
   | ExitMailVerifiedIncomplete
