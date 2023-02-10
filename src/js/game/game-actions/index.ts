@@ -15,11 +15,7 @@ import { PrivateMatchHostStart } from "./private-match-host-start";
 import { PrivateMatchGuestStart } from "./private-match-guest-start";
 import { PrivateMatchEntry } from "./private-match-entry";
 import { WithdrawPrivateMatchEntry } from "./withdraw-private-match-entry";
-
-/** マッチング中止 */
-export type MatchingCanceled = {
-  type: "MatchingCanceled";
-};
+import { MatchingCanceled } from "./matching-canceled";
 
 /**
  * プレイヤー選択完了
