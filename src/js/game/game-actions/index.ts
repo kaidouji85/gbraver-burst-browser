@@ -9,12 +9,8 @@ import type { TutorialStageID } from "../tutorial-stages";
 import { ArcadeStart } from "./arcade-start";
 import { ExitMailVerifiedIncomplete } from "./exit-mail-verified-incomplete";
 import { NetBattleStart } from "./net-battle-start";
+import { NetBattleCancel } from "./net-battle-cancel";
 import { ReloadRequest } from "./reload-request";
-
-/** ネット対戦キャンセル */
-export type NetBattleCancel = {
-  type: "NetBattleCancel";
-};
 
 /** カジュアルマッチスタート */
 export type CasualMatchStart = {
