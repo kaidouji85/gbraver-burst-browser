@@ -72,7 +72,7 @@ const createNPCBattle = (inProgress: InProgress) => {
     return null;
   }
 
-  const state = inProgress.subFlow.state as NPCBattleState;
+  const state: NPCBattleState = inProgress.subFlow.state;
   const stage = getCurrentNPCStage(state) ?? DefaultStage;
   const level = getNPCStageLevel(state);
   const player = state.player;
@@ -179,7 +179,7 @@ export async function onPostBattleAction(
     props.inProgress.type === "Tutorial" &&
     props.inProgress.subFlow.type === "PlayingTutorialStage"
   ) {
-    const playingTutorial = props.inProgress.subFlow as PlayingTutorialStage;
+    const playingTutorial: PlayingTutorialStage = props.inProgress.subFlow;
     await gotoTutorial(props, playingTutorial.level, playingTutorial.stage);
   } else if (action.action.type === "GotoTutorialSelect") {
     props.inProgress = {
