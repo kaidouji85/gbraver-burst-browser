@@ -19,11 +19,7 @@ import { SelectionCancel } from "./selection-cancel";
 import { DifficultySelectionComplete } from "./difficulty-selection-complete";
 import { DifficultySelectionCancel } from "./difficulty-selection-cancel";
 import { EndBattle } from "./end-battle";
-
-/** バトル強制終了 */
-export type SuddenlyBattleEnd = {
-  type: "SuddenlyBattleEnd";
-};
+import { SuddenlyBattleEnd } from "./suddenly-battle-end";
 
 /** 戦闘終了後アクション決定 */
 export type PostBattleAction = {
