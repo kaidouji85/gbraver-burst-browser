@@ -18,13 +18,7 @@ import { MatchingCanceled } from "./matching-canceled";
 import { SelectionComplete } from "./selection-complete";
 import { SelectionCancel } from "./selection-cancel";
 import { DifficultySelectionComplete } from "./difficulty-selection-complete";
-
-/**
- * 難易度選択キャンセル
- */
-export type DifficultySelectionCancel = {
-  type: "DifficultySelectionCancel";
-};
+import { DifficultySelectionCancel } from "./difficulty-selection-cancel";
 
 /** 戦闘終了 */
 export type EndBattle = {
