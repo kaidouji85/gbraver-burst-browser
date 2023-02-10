@@ -17,13 +17,7 @@ import { PrivateMatchEntry } from "./private-match-entry";
 import { WithdrawPrivateMatchEntry } from "./withdraw-private-match-entry";
 import { MatchingCanceled } from "./matching-canceled";
 import { SelectionComplete } from "./selection-complete";
-
-/**
- * プレイヤー選択キャンセル
- */
-export type SelectionCancel = {
-  type: "SelectionCancel";
-};
+import { SelectionCancel } from "./selection-cancel";
 
 /**
  * 難易度選択完了
