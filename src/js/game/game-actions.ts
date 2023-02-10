@@ -1,3 +1,4 @@
+import { PrivateMatchRoomID } from "@gbraver-burst-network/browser-core";
 import type { ArmDozerId, GameEnd, PilotId } from "gbraver-burst-core";
 
 import type { GbraverBurstBrowserConfig } from "./config/browser-config";
@@ -21,9 +22,41 @@ export type ArcadeStart = {
   type: "ArcadeStart";
 };
 
+/** ネット対戦スタート */
+export type NetBattleStart = {
+  type: "NetBattleStart";
+};
+
+/** ネット対戦キャンセル */
+export type NetBattleCancel = {
+  type: "NetBattleCancel";
+};
+
 /** カジュアルマッチスタート */
 export type CasualMatchStart = {
   type: "CasualMatchStart";
+};
+
+/** プライベートマット（ホスト）スタート */
+export type PrivateMatchHostStart = {
+  type: "PrivateMatchHostStart";
+};
+
+/** プライベートマット（ゲスト）スタート */
+export type PrivateMatchGuestStart = {
+  type: "PrivateMatchGuestStart";
+};
+
+/** ゲストがプライベートマッチにエントリする */
+export type PrivateMatchEntry = {
+  type: "PrivateMatchEntry";
+  /** エントリするルームID */
+  roomID: PrivateMatchRoomID;
+};
+
+/** ゲストがプライベートマッチエントリを取り下げる */
+export type WithdrawPrivateMatchEntry = {
+  type: "WithdrawPrivateMatchEntry";
 };
 
 /** マッチング中止 */
@@ -193,7 +226,13 @@ export type GameAction =
   | ReloadRequest
   | ExitMailVerifiedIncomplete
   | ArcadeStart
+  | NetBattleStart
+  | NetBattleCancel
   | CasualMatchStart
+  | PrivateMatchHostStart
+  | PrivateMatchGuestStart
+  | PrivateMatchEntry
+  | WithdrawPrivateMatchEntry
   | MatchingCanceled
   | SelectionComplete
   | SelectionCancel

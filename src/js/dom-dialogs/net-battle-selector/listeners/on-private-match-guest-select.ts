@@ -16,6 +16,6 @@ export function onPrivateMatchGuestSelect(
   props.exclusive.execute(async () => {
     props.pushButton.sound.play();
     await pop(props.privateMatchGuestButton, 1.02);
-    props.casualMatchSelection.next();
+    props.privateMatchGuestSelection.next();
   });
 }

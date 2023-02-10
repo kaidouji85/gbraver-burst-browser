@@ -2,24 +2,23 @@ import { PlayerSelect } from "../../dom-scenes/player-select";
 import { waitTime } from "../../wait/wait-time";
 import { playerSelectConnector } from "../action-connector/player-select-connector";
 import { MAX_LOADING_TIME } from "../dom-scene-binder/max-loading-time";
-import type { GameProps } from "../game-props";
+import { GameProps } from "../game-props";
 import { getPlayableArmdozers } from "./get-playable-armdozers";
 import { loadFullResource } from "./load-full-resource";
 
 /**
- * カジュアルマッチ開始
- * 本関数にはpropsを変更する副作用がある
+ * プライベートマッチ（ホスト）スタート
  * @param props ゲームプロパティ
  * @return 処理が完了したら発火するPromise
  */
-export async function onCasualMatchStart(props: GameProps): Promise<void> {
+export async function onPrivateMatchHostStart(props: GameProps): Promise<void> {
   props.domDialogBinder.hidden();
   if (!props.isFullResourceLoaded) {
     await loadFullResource(props);
   }
 
   props.inProgress = {
-    type: "CasualMatch",
+    type: "PrivateMatchHost",
     subFlow: {
       type: "PlayerSelect",
     },

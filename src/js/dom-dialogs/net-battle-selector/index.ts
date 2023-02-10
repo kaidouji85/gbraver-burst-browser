@@ -12,7 +12,7 @@ import {
   NetBattleSelectorDialogProps,
 } from "./props";
 
-/** ネットバトルセレクター */
+/** ネットバトルセレクターダイアログ */
 export class NetBattleSelectorDialog implements DOMDialog {
   /** プロパティ */
   #props: NetBattleSelectorDialogProps;
