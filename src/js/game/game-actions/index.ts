@@ -21,11 +21,7 @@ import { SuddenlyBattleEnd } from "./suddenly-battle-end";
 import { PostBattleAction } from "./post-battle-action";
 import { EndNPCEnding } from "./end-npc-ending";
 import { UniversalLogin } from "./universal-login";
-
-/** ログインダイアからのログインを中断した */
-export type LoginCancel = {
-  type: "LoginCancel";
-};
+import { LoginCancel } from "./login-cancel";
 
 /** ログアウト */
 export type Logout = {
