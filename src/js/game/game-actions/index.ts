@@ -30,11 +30,7 @@ import { ConfigChangeStart } from "./config-change-start";
 import { ConfigChangeComplete } from "./config-change-complete";
 import { ConfigChangeCancel } from "./config-change-cancel";
 import { TutorialStart } from "./tutorial-start";
-
-/** チュートリアル選択キャンセル */
-export type CancelTutorialSelect = {
-  type: "CancelTutorialSelect";
-};
+import { CancelTutorialSelect } from "./cancel-tutorial-select";
 
 /** チュートリアルステージ選択完了 */
 export type SelectTutorialStage = {
