@@ -23,7 +23,7 @@ export async function onSelectTutorialStage(
     return;
   }
 
-  const inProgress = props.inProgress as Tutorial;
+  const inProgress: Tutorial = props.inProgress;
   const tutorialStages = props.canPlayTutorialInDevelopment
     ? TutorialStagesInDevelopment
     : TutorialStages;

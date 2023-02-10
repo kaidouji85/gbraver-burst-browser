@@ -17,17 +17,17 @@ import type {
  */
 export function emptyAttackAnimation(param: BattleAnimationParam): Animate {
   if (param.result.name === "NormalHit") {
-    const result = param.result as NormalHit;
+    const result: NormalHit = param.result;
     return viewDamage({ ...param, result });
   }
 
   if (param.result.name === "CriticalHit") {
-    const result = param.result as CriticalHit;
+    const result: CriticalHit = param.result;
     return viewDamage({ ...param, result });
   }
 
   if (param.result.name === "Guard") {
-    const result = param.result as Guard;
+    const result: Guard = param.result;
     return viewDamage({ ...param, result });
   }
 
