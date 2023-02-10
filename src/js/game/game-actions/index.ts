@@ -22,11 +22,7 @@ import { PostBattleAction } from "./post-battle-action";
 import { EndNPCEnding } from "./end-npc-ending";
 import { UniversalLogin } from "./universal-login";
 import { LoginCancel } from "./login-cancel";
-
-/** ログアウト */
-export type Logout = {
-  type: "Logout";
-};
+import { Logout } from "./logout";
 
 /** アカウント削除同意 */
 export type AccountDeleteConsent = {
