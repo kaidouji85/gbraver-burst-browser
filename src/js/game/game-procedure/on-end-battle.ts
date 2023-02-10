@@ -40,21 +40,6 @@ const saveAnimationTimeScale = async (
 };
 
 /**
- * カジュアルマッチが終了した際の処理
- *
- * @param props ゲームプロパティ
- * @return 処理が完了したら発火するPromise
- */
-const endCasualMatch = async (props: Readonly<GameProps>) => {
-  props.suddenlyBattleEnd.unbind();
-  await props.api.disconnectWebsocket();
-  await props.domFloaters.showPostBattle(
-    props.resources,
-    PostNetworkBattleButtons
-  );
-};
-
-/**
  * NPCバトル終了後に表示するアクションボタンを求める
  *
  * @param result NPCバトル結果
@@ -64,10 +49,8 @@ const postNPCBattleButtons = (result: NPCBattleResult) => {
   switch (result) {
     case "NPCBattleComplete":
       return PostNPCBattleComplete;
-
     case "StageClear":
       return PostNPCBattleWinButtons;
-
     case "StageMiss":
     default:
       return PostNPCBattleLoseButtons;
@@ -95,7 +78,6 @@ const createNPCBattle = (
   const npcBattle = inProgress as NPCBattle;
   const playingNPCBattle = inProgress.subFlow as PlayingNPCBattle;
   const updated = updateNPCBattleState(playingNPCBattle.state, gameEndResult);
-
   if (!updated) {
     return null;
   }
@@ -187,11 +169,16 @@ export async function onEndBattle(
   await saveAnimationTimeScale(props, action.animationTimeScale);
 
   if (npcBattle) {
-    props.inProgress = npcBattle.updatedInProgress;
-    await endNPCBattleStage(props, npcBattle.postBattleButtons);
+    //props.inProgress = npcBattle.updatedInProgress;
+    //await endNPCBattleStage(props, npcBattle.postBattleButtons);
   } else if (props.inProgress.type === "CasualMatch") {
-    await endCasualMatch(props);
+    props.suddenlyBattleEnd.unbind();
+    await props.api.disconnectWebsocket();
+    await props.domFloaters.showPostBattle(
+      props.resources,
+      PostNetworkBattleButtons
+    );
   } else if (tutorial) {
-    await endTutorial(props, tutorial.postBattleButtons);
+    //await endTutorial(props, tutorial.postBattleButtons);
   }
 }
