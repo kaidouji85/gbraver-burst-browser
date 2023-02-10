@@ -1,7 +1,6 @@
 import type { GameEnd } from "gbraver-burst-core";
 
 import type { GbraverBurstBrowserConfig } from "../config/browser-config";
-import type { NPCBattleCourseDifficulty } from "../npc-battle-courses";
 import type { PostBattle } from "../post-battle";
 import type { PostNetworkError } from "../post-network-error";
 import type { TutorialStageID } from "../tutorial-stages";
@@ -18,16 +17,7 @@ import { WithdrawPrivateMatchEntry } from "./withdraw-private-match-entry";
 import { MatchingCanceled } from "./matching-canceled";
 import { SelectionComplete } from "./selection-complete";
 import { SelectionCancel } from "./selection-cancel";
-
-/**
- * 難易度選択完了
- */
-export type DifficultySelectionComplete = {
-  type: "DifficultySelectionComplete";
-
-  /** 選択した難易度 */
-  difficulty: NPCBattleCourseDifficulty;
-};
+import { DifficultySelectionComplete } from "./difficulty-selection-complete";
 
 /**
  * 難易度選択キャンセル
