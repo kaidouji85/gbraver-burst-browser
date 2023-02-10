@@ -14,11 +14,7 @@ import { CasualMatchStart } from "./casual-match-start";
 import { PrivateMatchHostStart } from "./private-match-host-start";
 import { PrivateMatchGuestStart } from "./private-match-guest-start";
 import { PrivateMatchEntry } from "./private-match-entry";
-
-/** ゲストがプライベートマッチエントリを取り下げる */
-export type WithdrawPrivateMatchEntry = {
-  type: "WithdrawPrivateMatchEntry";
-};
+import { WithdrawPrivateMatchEntry } from "./withdraw-private-match-entry";
 
 /** マッチング中止 */
 export type MatchingCanceled = {
