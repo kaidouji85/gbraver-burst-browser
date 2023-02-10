@@ -29,11 +29,7 @@ import { EndNetworkError } from "./end-network-error";
 import { ConfigChangeStart } from "./config-change-start";
 import { ConfigChangeComplete } from "./config-change-complete";
 import { ConfigChangeCancel } from "./config-change-cancel";
-
-/** チュートリアルスタート */
-export type TutorialStart = {
-  type: "TutorialStart";
-};
+import { TutorialStart } from "./tutorial-start";
 
 /** チュートリアル選択キャンセル */
 export type CancelTutorialSelect = {
