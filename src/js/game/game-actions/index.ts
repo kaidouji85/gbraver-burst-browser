@@ -28,11 +28,7 @@ import { WebSocketAPIError } from "./web-socket-api-error";
 import { EndNetworkError } from "./end-network-error";
 import { ConfigChangeStart } from "./config-change-start";
 import { ConfigChangeComplete } from "./config-change-complete";
-
-/** 設定変更キャンセル */
-export type ConfigChangeCancel = {
-  type: "ConfigChangeCancel";
-};
+import { ConfigChangeCancel } from "./config-change-cancel";
 
 /** チュートリアルスタート */
 export type TutorialStart = {
