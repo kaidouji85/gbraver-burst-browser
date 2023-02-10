@@ -6,13 +6,9 @@ import type { NPCBattleCourseDifficulty } from "../npc-battle-courses";
 import type { PostBattle } from "../post-battle";
 import type { PostNetworkError } from "../post-network-error";
 import type { TutorialStageID } from "../tutorial-stages";
+import { ArcadeStart } from "./arcade-start";
 import { ExitMailVerifiedIncomplete } from "./exit-mail-verified-incomplete";
 import { ReloadRequest } from "./reload-request";
-
-/** アーケードモード開始 */
-export type ArcadeStart = {
-  type: "ArcadeStart";
-};
 
 /** ネット対戦スタート */
 export type NetBattleStart = {
