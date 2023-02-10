@@ -19,13 +19,7 @@ import { DifficultySelectionCancel } from "./difficulty-selection-cancel";
 import { EndBattle } from "./end-battle";
 import { SuddenlyBattleEnd } from "./suddenly-battle-end";
 import { PostBattleAction } from "./post-battle-action";
-
-/**
- * NPC ルート エンディング 終了
- */
-export type EndNPCEnding = {
-  type: "EndNPCEnding";
-};
+import { EndNPCEnding } from "./end-npc-ending";
 
 /** ユニバーサルログインを実行する */
 export type UniversalLogin = {
