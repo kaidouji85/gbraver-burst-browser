@@ -80,7 +80,6 @@ export async function onEndBattle(
   action: EndBattle
 ): Promise<void> {
   await saveAnimationTimeScale(props, action.animationTimeScale);
-
   if (
     props.inProgress.type === "NPCBattle" &&
     props.inProgress.subFlow.type === "PlayingNPCBattle"
@@ -90,19 +89,17 @@ export async function onEndBattle(
       action.gameEnd.result
     );
     if (updated) {
-      props.inProgress = {
-        ...props.inProgress,
-        subFlow: {
-          ...props.inProgress.subFlow,
-          state: updated.state,
-        },
-      };
+      props.inProgress.subFlow.state = updated.state;
       await props.domFloaters.showPostBattle(
         props.resources,
         postNPCBattleButtons(updated.result)
       );
     }
-  } else if (props.inProgress.type === "CasualMatch") {
+  } else if (
+    props.inProgress.type === "CasualMatch" ||
+    props.inProgress.type === "PrivateMatchHost" ||
+    props.inProgress.type === "PrivateMatchGuest"
+  ) {
     props.suddenlyBattleEnd.unbind();
     await props.api.disconnectWebsocket();
     await props.domFloaters.showPostBattle(
