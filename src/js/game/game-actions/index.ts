@@ -26,16 +26,7 @@ import { Logout } from "./logout";
 import { AccountDeleteConsent } from "./account-delete-consent";
 import { DeleteAccount } from "./delete-account";
 import { CancelAccountDeletion } from "./cancel-account-deletion";
-
-/** WebSocketAPI エラー発生 */
-export type WebSocketAPIError = {
-  type: "WebSocketAPIError";
-
-  /** エラー情報 */
-  /* eslint-disable @typescript-eslint/no-explicit-any */
-  error: any;
-  /* eslint-enable */
-};
+import { WebSocketAPIError } from "./web-socket-api-error";
 
 /** 通信エラーダイアログを閉じる */
 export type EndNetworkError = {
