@@ -11,11 +11,7 @@ import { ExitMailVerifiedIncomplete } from "./exit-mail-verified-incomplete";
 import { NetBattleStart } from "./net-battle-start";
 import { NetBattleCancel } from "./net-battle-cancel";
 import { ReloadRequest } from "./reload-request";
-
-/** カジュアルマッチスタート */
-export type CasualMatchStart = {
-  type: "CasualMatchStart";
-};
+import { CasualMatchStart } from "./casual-match-start";
 
 /** プライベートマット（ホスト）スタート */
 export type PrivateMatchHostStart = {
