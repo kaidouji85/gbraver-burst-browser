@@ -43,11 +43,6 @@ export async function onPrivateMatchEntry(
     return;
   }
 
-  props.inProgress = {
-    ...props.inProgress,
-    subFlow: {
-      type: "Battle",
-    },
-  };
+  props.inProgress.subFlow = { type: "Battle" };
   await startOnlineBattle(props, battle, "PRIVATE MATCH");
 }
