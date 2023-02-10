@@ -2,7 +2,7 @@ import { DifficultyDialog } from "../../dom-dialogs/difficulty";
 import { PrivateMatchGuestDialog } from "../../dom-dialogs/private-match-guest";
 import { difficultyDialogConnector } from "../action-connector/difficulty-dialog-connector";
 import { privateMatchGuestDialogConnector } from "../action-connector/private-match-guest-dialog-connector";
-import { SelectionComplete } from "../game-actions";
+import { SelectionComplete } from "../game-actions/selection-complete";
 import type { GameProps } from "../game-props";
 import { startOnlineBattle } from "./start-online-battle";
 import { waitUntilCasualMatching } from "./wait-until-casual-matching";

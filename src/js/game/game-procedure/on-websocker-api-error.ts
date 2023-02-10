@@ -1,6 +1,6 @@
 import { NetworkErrorDialog } from "../../dom-dialogs/network-error/network-error-dialog";
 import { networkErrorDialogConnector } from "../action-connector/network-error-dialog-connector";
-import type { WebSocketAPIError } from "../game-actions";
+import { WebSocketAPIError } from "../game-actions/web-socket-api-error";
 import type { GameProps } from "../game-props";
 
 /**

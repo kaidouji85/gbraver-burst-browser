@@ -1,4 +1,4 @@
-import type { SelectTutorialStage } from "../game-actions";
+import { SelectTutorialStage } from "../game-actions/select-tutorial-stage";
 import type { GameProps } from "../game-props";
 import type { Tutorial } from "../in-progress/tutorial";
 import {

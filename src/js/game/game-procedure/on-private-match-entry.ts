@@ -2,7 +2,7 @@ import { MatchingDialog } from "../../dom-dialogs/matching/matching-dialog";
 import { RejectPrivateMatchEntryDialog } from "../../dom-dialogs/reject-private-match-entry";
 import { matchingDialogConnector } from "../action-connector/matching-dialog-connector";
 import { rejectPrivateMatcEntryDialogConnector } from "../action-connector/reject-private-match-entry-dialog-connector";
-import { PrivateMatchEntry } from "../game-actions";
+import { PrivateMatchEntry } from "../game-actions/private-match-entry";
 import { GameProps } from "../game-props";
 import { startOnlineBattle } from "./start-online-battle";
 
