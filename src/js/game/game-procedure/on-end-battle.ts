@@ -1,4 +1,5 @@
 import { GameOver } from "gbraver-burst-core";
+
 import {
   BattleAnimationTimeScales,
   parseBattleAnimationTimeScale,
@@ -40,7 +41,9 @@ const saveAnimationTimeScale = async (
  * @param result NPCバトル結果
  * @return 表示するアクションボタン
  */
-const postNPCBattleButtons = (result: NPCBattleResult): PostBattleButtonConfig[] => {
+const postNPCBattleButtons = (
+  result: NPCBattleResult
+): PostBattleButtonConfig[] => {
   switch (result) {
     case "NPCBattleComplete":
       return PostNPCBattleComplete;
@@ -58,10 +61,13 @@ const postNPCBattleButtons = (result: NPCBattleResult): PostBattleButtonConfig[]
  * @param state チュートリアルステート
  * @return 表示するアクションボタン
  */
-const postTutorialBattleButtons = (gameOver: GameOver, state: PlayingTutorialStage): PostBattleButtonConfig[] => {
+const postTutorialBattleButtons = (
+  gameOver: GameOver,
+  state: PlayingTutorialStage
+): PostBattleButtonConfig[] => {
   const isPlayerWin = gameOver.winner == state.stage.player.playerId;
   return isPlayerWin ? PostTutorialWinButtons : PostTutorialLoseButtons;
-}
+};
 
 /**
  * 戦闘終了時の処理
@@ -75,17 +81,26 @@ export async function onEndBattle(
 ): Promise<void> {
   await saveAnimationTimeScale(props, action.animationTimeScale);
 
-  if (props.inProgress.type === "NPCBattle" && props.inProgress.subFlow.type === "PlayingNPCBattle") {
-    const updated = updateNPCBattleState(props.inProgress.subFlow.state, action.gameEnd.result);
+  if (
+    props.inProgress.type === "NPCBattle" &&
+    props.inProgress.subFlow.type === "PlayingNPCBattle"
+  ) {
+    const updated = updateNPCBattleState(
+      props.inProgress.subFlow.state,
+      action.gameEnd.result
+    );
     if (updated) {
       props.inProgress = {
         ...props.inProgress,
-        subFlow: { 
-          ...props.inProgress.subFlow, 
-          state: updated.state
-        }
+        subFlow: {
+          ...props.inProgress.subFlow,
+          state: updated.state,
+        },
       };
-      await props.domFloaters.showPostBattle(props.resources, postNPCBattleButtons(updated.result));
+      await props.domFloaters.showPostBattle(
+        props.resources,
+        postNPCBattleButtons(updated.result)
+      );
     }
   } else if (props.inProgress.type === "CasualMatch") {
     props.suddenlyBattleEnd.unbind();
@@ -95,10 +110,13 @@ export async function onEndBattle(
       PostNetworkBattleButtons
     );
   } else if (
-    props.inProgress.type === "Tutorial" 
-    && props.inProgress.subFlow.type === "PlayingTutorialStage"
-    && action.gameEnd.result.type === "GameOver"
+    props.inProgress.type === "Tutorial" &&
+    props.inProgress.subFlow.type === "PlayingTutorialStage" &&
+    action.gameEnd.result.type === "GameOver"
   ) {
-    await props.domFloaters.showPostBattle(props.resources, postTutorialBattleButtons(action.gameEnd.result, props.inProgress.subFlow));
+    await props.domFloaters.showPostBattle(
+      props.resources,
+      postTutorialBattleButtons(action.gameEnd.result, props.inProgress.subFlow)
+    );
   }
 }
