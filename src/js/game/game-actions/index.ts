@@ -12,11 +12,7 @@ import { NetBattleStart } from "./net-battle-start";
 import { NetBattleCancel } from "./net-battle-cancel";
 import { ReloadRequest } from "./reload-request";
 import { CasualMatchStart } from "./casual-match-start";
-
-/** プライベートマット（ホスト）スタート */
-export type PrivateMatchHostStart = {
-  type: "PrivateMatchHostStart";
-};
+import { PrivateMatchHostStart } from "./private-match-host-start";
 
 /** プライベートマット（ゲスト）スタート */
 export type PrivateMatchGuestStart = {
