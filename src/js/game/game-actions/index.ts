@@ -1,4 +1,3 @@
-import type { GameEnd } from "gbraver-burst-core";
 
 import type { GbraverBurstBrowserConfig } from "../config/browser-config";
 import type { PostBattle } from "../post-battle";
@@ -19,17 +18,7 @@ import { SelectionComplete } from "./selection-complete";
 import { SelectionCancel } from "./selection-cancel";
 import { DifficultySelectionComplete } from "./difficulty-selection-complete";
 import { DifficultySelectionCancel } from "./difficulty-selection-cancel";
-
-/** 戦闘終了 */
-export type EndBattle = {
-  type: "EndBattle";
-
-  /** ゲーム終了情報 */
-  gameEnd: GameEnd;
-
-  /** アニメーションタイムスケール */
-  animationTimeScale: number;
-};
+import { EndBattle } from "./end-battle";
 
 /** バトル強制終了 */
 export type SuddenlyBattleEnd = {

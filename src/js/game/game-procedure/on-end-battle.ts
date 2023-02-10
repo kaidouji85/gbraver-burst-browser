@@ -13,7 +13,7 @@ import {
   PostTutorialLoseButtons,
   PostTutorialWinButtons,
 } from "../dom-floaters/post-battle/post-battle-buttons";
-import type { EndBattle } from "../game-actions";
+import { EndBattle } from "../game-actions/end-battle";
 import type { GameProps } from "../game-props";
 import { PlayingTutorialStage } from "../in-progress/tutorial";
 import type { NPCBattleResult } from "../npc-battle";
