@@ -8,12 +8,8 @@ import type { PostNetworkError } from "../post-network-error";
 import type { TutorialStageID } from "../tutorial-stages";
 import { ArcadeStart } from "./arcade-start";
 import { ExitMailVerifiedIncomplete } from "./exit-mail-verified-incomplete";
+import { NetBattleStart } from "./net-battle-start";
 import { ReloadRequest } from "./reload-request";
-
-/** ネット対戦スタート */
-export type NetBattleStart = {
-  type: "NetBattleStart";
-};
 
 /** ネット対戦キャンセル */
 export type NetBattleCancel = {
