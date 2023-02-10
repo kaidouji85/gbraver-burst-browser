@@ -1,11 +1,11 @@
 import { PrivateMatchRoomID } from "@gbraver-burst-network/browser-core";
 import type { ArmDozerId, GameEnd, PilotId } from "gbraver-burst-core";
 
-import type { GbraverBurstBrowserConfig } from "./config/browser-config";
-import type { NPCBattleCourseDifficulty } from "./npc-battle-courses";
-import type { PostBattle } from "./post-battle";
-import type { PostNetworkError } from "./post-network-error";
-import type { TutorialStageID } from "./tutorial-stages";
+import type { GbraverBurstBrowserConfig } from "../config/browser-config";
+import type { NPCBattleCourseDifficulty } from "../npc-battle-courses";
+import type { PostBattle } from "../post-battle";
+import type { PostNetworkError } from "../post-network-error";
+import type { TutorialStageID } from "../tutorial-stages";
 
 /** 画面リロード依頼 */
 export type ReloadRequest = {
