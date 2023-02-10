@@ -24,11 +24,7 @@ import { UniversalLogin } from "./universal-login";
 import { LoginCancel } from "./login-cancel";
 import { Logout } from "./logout";
 import { AccountDeleteConsent } from "./account-delete-consent";
-
-/** アカウント削除 */
-export type DeleteAccount = {
-  type: "DeleteAccount";
-};
+import { DeleteAccount } from "./delete-account";
 
 /** アカウント削除同意ダイアログを閉じる */
 export type CancelAccountDeletion = {
