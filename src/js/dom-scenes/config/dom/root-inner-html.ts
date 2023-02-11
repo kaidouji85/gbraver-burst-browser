@@ -22,13 +22,17 @@ export function rootInnerHTML(
   ids: DataIDs,
   config: GbraverBurstBrowserConfig
 ): string {
-  const battleAnimationTimeScaleOption = (value: BattleAnimationTimeScale) => `
+  const battleAnimationTimeScaleOption = (value: BattleAnimationTimeScale) => {
+    const selected =
+      value === config.battleAnimationTimeScale ? "selected" : "";
+    return `
     <option class="${ROOT_CLASS}__battle-animation-time-scale-option"
-      value="${value}" ${
-    value === config.battleAnimationTimeScale ? "selected" : ""
-  }>
+      value="${value}"
+      ${selected}
+    >
       ${Math.floor(1 / value)}倍
     </option>`;
+  };
 
   const battleAnimationTimeScaleOptions = BattleAnimationTimeScales.map((v) =>
     battleAnimationTimeScaleOption(v)
