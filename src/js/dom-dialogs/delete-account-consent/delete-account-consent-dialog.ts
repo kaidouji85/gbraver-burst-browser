@@ -35,8 +35,12 @@ function rootInnerHTML(ids: DataIDs, resources: Resources): string {
     resources.paths.find((v) => v.id === PathIds.CLOSER)?.path ?? "";
   return `
     <div class="${ROOT_CLASS}__background" data-id="${ids.backGround}"></div>
-    <img class="${ROOT_CLASS}__closer" alt="閉じる" src="${closerPath}" data-id="${ids.closer}">
     <div class="${ROOT_CLASS}__dialog">
+      <img class="${ROOT_CLASS}__closer"
+        alt="閉じる"
+        src="${closerPath}"
+        data-id="${ids.closer}"
+      >
       <div class="${ROOT_CLASS}__caption">
         <div>アカウント削除をすると、</div>
         <div>ネット対戦が出来なくなります。</div>
