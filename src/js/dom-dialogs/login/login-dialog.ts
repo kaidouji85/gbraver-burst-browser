@@ -40,13 +40,14 @@ function rootInnerHTML(
     resources.paths.find((v) => v.id === PathIds.CLOSER)?.path ?? "";
   return `
     <div class="${ROOT_CLASS_NAME}__background" data-id="${ids.backGround}"></div>
-    <img class="${ROOT_CLASS_NAME}__closer" alt="閉じる" src="${closerPath}" data-id="${ids.closer}">
     <div class="${ROOT_CLASS_NAME}__dialog">
+      <img class="${ROOT_CLASS_NAME}__closer"
+        alt="閉じる" src="${closerPath}"
+        data-id="${ids.closer}"
+      >
       <div class="${ROOT_CLASS_NAME}__caption">${caption}</div>
-      <div class="${ROOT_CLASS_NAME}__controllers">
-        <button class="${ROOT_CLASS_NAME}__close" data-id="${ids.closeButton}">閉じる</button>
-        <button class="${ROOT_CLASS_NAME}__login" data-id="${ids.loginButton}">ログイン</buton>
-      </div>
+      <button class="${ROOT_CLASS_NAME}__login" data-id="${ids.loginButton}">ログイン</buton>
+      <button class="${ROOT_CLASS_NAME}__close" data-id="${ids.closeButton}">閉じる</button>
     </div>
   `;
 }

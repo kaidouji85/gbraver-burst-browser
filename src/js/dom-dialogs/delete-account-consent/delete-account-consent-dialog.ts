@@ -33,19 +33,20 @@ type DataIDs = {
 function rootInnerHTML(ids: DataIDs, resources: Resources): string {
   const closerPath =
     resources.paths.find((v) => v.id === PathIds.CLOSER)?.path ?? "";
+  const caption =
+    "アカウント削除をすると、ネット対戦が出来なくなります。本当にアカウント削除しますか？";
   return `
     <div class="${ROOT_CLASS}__background" data-id="${ids.backGround}"></div>
-    <img class="${ROOT_CLASS}__closer" alt="閉じる" src="${closerPath}" data-id="${ids.closer}">
     <div class="${ROOT_CLASS}__dialog">
-      <div class="${ROOT_CLASS}__caption">
-        <div>アカウント削除をすると、</div>
-        <div>ネット対戦が出来なくなります。</div>
-        <div>本当にアカウント削除しますか？</div>
-      </div>
-      <div class="${ROOT_CLASS}__controllers">
-        <button class="${ROOT_CLASS}__close" data-id="${ids.closeButton}">閉じる</button>
-        <button class="${ROOT_CLASS}__delete-account" data-id="${ids.deleteAccountButton}">アカウント削除</buton>
-      </div>
+      <img class="${ROOT_CLASS}__closer"
+        alt="閉じる"
+        src="${closerPath}"
+        data-id="${ids.closer}"
+      >
+      <div class="${ROOT_CLASS}__title">アカウント削除</div>
+      <div class="${ROOT_CLASS}__caption">${caption}</div>
+      <button class="${ROOT_CLASS}__delete-account" data-id="${ids.deleteAccountButton}">アカウント削除</buton>
+      <button class="${ROOT_CLASS}__close" data-id="${ids.closeButton}">閉じる</button>
     </div>
   `;
 }
