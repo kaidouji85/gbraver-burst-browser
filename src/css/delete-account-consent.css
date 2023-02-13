@@ -5,7 +5,6 @@
   .delete-account-consent {
     --closer-width: 48px;
     --closer-height: 48px;
-    --control-button-width: calc(var(--responsive-font-size) * 10);
     --control-button-height: calc(var(--responsive-font-size) * 3);
     display: block;
   }
@@ -44,9 +43,9 @@
   font-size: var(--responsive-font-size);
   background-color: var(--background-color);
   position: absolute;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  display: grid;
+  grid-template-columns: auto;
+  grid-template-rows: auto 1fr auto auto;
   justify-content: center;
   border: var(--dialog-border);
   border-radius: var(--dialog-border-radius);
@@ -58,12 +57,16 @@
   padding-left: var(--dialog-padding);
 }
 
+.delete-account-consent__title {
+  font-size: calc(var(--responsive-font-size) * 1.3);
+}
+
 .delete-account-consent__caption {
   margin-bottom: calc(var(--responsive-font-size) * 2);
+  font-size: calc(var(--responsive-font-size) * 0.8);
 }
 
 .delete-account-consent__close {
-  width: var(--control-button-width);
   height: var(--control-button-height);
   font-size: var(--responsive-font-size);
   border-radius: var(--button-border-radius);
@@ -71,11 +74,9 @@
   color: var(--button-font-color);
   border: var(--button-border);
   box-shadow: var(--button-box-shadow);
-  margin-right: calc(var(--responsive-font-size) * 0.5);
 }
 
 .delete-account-consent__delete-account {
-  width: var(--control-button-width);
   height: var(--control-button-height);
   font-size: var(--responsive-font-size);
   border-radius: var(--button-border-radius);
@@ -83,4 +84,5 @@
   color: var(--button-font-color);
   border: var(--button-border);
   box-shadow: var(--button-box-shadow);
+  margin-bottom: calc(var(--responsive-font-size) * 0.5);
 }
