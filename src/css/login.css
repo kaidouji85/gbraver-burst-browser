@@ -3,11 +3,8 @@
  */
 @media (orientation: landscape) {
   .login {
-    --login-dialog-width: calc(min(var(--login-dialog-height) * 16 / 9, 90vw));
-    --login-dialog-height: calc(var(--vh) * 80);
-    --login-dialog-top: calc(var(--vh, 1vh) * 50);
-    --login-dialog-left: 50vw;
-    --control-button-width: calc(var(--responsive-font-size) * 10);
+    --closer-width: 48px;
+    --closer-height: 48px;
     --control-button-height: calc(var(--responsive-font-size) * 3);
     display: block;
   }
@@ -29,53 +26,44 @@
 }
 
 .login__closer {
-  --icon-width: 48px;
-  --icon-height: 48px;
-  position: fixed;
-  top: calc(
-      var(--login-dialog-top)
-      - var(--login-dialog-height) / 2
-      - var(--icon-width) / 2
-  );
-  left: calc(
-      var(--login-dialog-left)
-      - var(--login-dialog-width) / 2
-      - var(--icon-height) / 2
-  );
-  width: var(--icon-width);
-  height: var(--icon-height);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: var(--zindex-close);
+  width: var(--closer-width);
+  height: var(--closer-height);
+  position: absolute;
+  top: calc(var(--closer-width) * -0.5);
+  left: calc(var(--closer-height) * -0.5);
 }
 
 .login__dialog {
-  width: var(--login-dialog-width);
-  height: var(--login-dialog-height);
+  --dialog-padding: calc(var(--responsive-font-size) * 2);
   top: calc(var(--vh, 1vh) * 50);
-  left: 50%;
+  left: 50vw;
   transform: translate(-50%, -50%);
   color: var(--font-color);
   font-size: var(--responsive-font-size);
-
   background-color: var(--background-color);
   position: absolute;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
+  display: grid;
+  grid-template-columns: auto;
+  grid-template-rows: auto 1fr auto auto;
   border: var(--dialog-border);
   border-radius: var(--dialog-border-radius);
-  z-index: var(--zindex-dialog)
+  z-index: var(--zindex-dialog);
+  padding-top: max(var(--dialog-padding), calc(var(--closer-height) / 2));
+  padding-right: var(--dialog-padding);
+  padding-bottom: var(--dialog-padding);
+  padding-left: var(--dialog-padding);
+}
+
+.login__title {
+  font-size: calc(var(--responsive-font-size) * 1.3);
 }
 
 .login__caption {
+  font-size: calc(var(--responsive-font-size) * 0.8);
   margin-bottom: calc(var(--responsive-font-size) * 2);
 }
 
 .login__close {
-  width: var(--control-button-width);
   height: var(--control-button-height);
   font-size: var(--responsive-font-size);
   border-radius: var(--button-border-radius);
@@ -83,11 +71,9 @@
   color: var(--button-font-color);
   border: var(--button-border);
   box-shadow: var(--button-box-shadow);
-  margin-right: calc(var(--responsive-font-size) * 0.5);
 }
 
 .login__login {
-  width: var(--control-button-width);
   height: var(--control-button-height);
   font-size: var(--responsive-font-size);
   border-radius: var(--button-border-radius);
@@ -95,4 +81,5 @@
   color: var(--button-font-color);
   border: var(--button-border);
   box-shadow: var(--button-box-shadow);
+  margin-bottom: calc(var(--responsive-font-size) * 0.3);
 }

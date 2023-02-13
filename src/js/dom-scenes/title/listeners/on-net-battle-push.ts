@@ -3,19 +3,19 @@ import type { PushDOM } from "../../../dom/event-stream";
 import type { TitleProps } from "../props";
 
 /**
- * カジュアルマッチが押された時の処理
+ * ネット対戦が押された時の処理
  *
  * @param props 画面プロパティ
  * @param action アクション
  */
-export function onCasualMatchPush(
+export function onNetBattlePush(
   props: TitleProps,
   action: Readonly<PushDOM>
 ): void {
   props.exclusive.execute(async (): Promise<void> => {
     action.event.preventDefault();
     props.pushButton.play();
-    await pop(props.casualMatch);
-    props.pushCasualMatch.next();
+    await pop(props.netBattle);
+    props.pushNetBattle.next();
   });
 }

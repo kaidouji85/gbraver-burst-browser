@@ -1,5 +1,5 @@
 import { playerUuid } from "../../uuid/player";
-import type { DifficultySelectionComplete } from "../game-actions";
+import { DifficultySelectionComplete } from "../game-actions/difficulty-selection-complete";
 import type { GameProps } from "../game-props";
 import type { DifficultySelect, NPCBattle } from "../in-progress/npc-battle";
 import {

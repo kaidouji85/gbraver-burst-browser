@@ -156,42 +156,42 @@ function down(param: WingDozerBattle<DownResult>): Animate {
  */
 export function wingDozerAttack(param: WingDozerBattle<BattleResult>): Animate {
   if (param.result.name === "NormalHit" && param.isDeath) {
-    const result = param.result as NormalHit;
+    const result: NormalHit = param.result;
     return down({ ...param, result });
   }
 
   if (param.result.name === "NormalHit") {
-    const result = param.result as NormalHit;
+    const result: NormalHit = param.result;
     return attack({ ...param, result });
   }
 
   if (param.result.name === "CriticalHit" && param.isDeath) {
-    const result = param.result as CriticalHit;
+    const result: CriticalHit = param.result;
     return down({ ...param, result });
   }
 
   if (param.result.name === "CriticalHit") {
-    const result = param.result as CriticalHit;
+    const result: CriticalHit = param.result;
     return attack({ ...param, result });
   }
 
   if (param.result.name === "Guard" && param.isDeath) {
-    const result = param.result as Guard;
+    const result: Guard = param.result;
     return down({ ...param, result });
   }
 
   if (param.result.name === "Guard") {
-    const result = param.result as Guard;
+    const result: Guard = param.result;
     return guard({ ...param, result });
   }
 
   if (param.result.name === "Miss") {
-    const result = param.result as Miss;
+    const result: Miss = param.result;
     return miss({ ...param, result });
   }
 
   if (param.result.name === "Feint") {
-    const result = param.result as Feint;
+    const result: Feint = param.result;
     return feint({ ...param, result });
   }
 

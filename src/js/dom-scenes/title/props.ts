@@ -9,6 +9,7 @@ import { createStreamSource } from "../../stream/stream";
 import { domUuid } from "../../uuid/dom-uuid";
 import { waitElementLoaded } from "../../wait/wait-element-loaded";
 import { ROOT_CLASS } from "./dom/class-name";
+import { DataIDs } from "./dom/data-ids";
 import { extractElements } from "./dom/elements";
 import type { RootInnerHTMLParams } from "./dom/root-inner-html";
 import { rootInnerHTML } from "./dom/root-inner-html";
@@ -45,8 +46,8 @@ export type TitleProps = {
   /** アーケード */
   arcade: HTMLElement;
 
-  /** カジュアルマッチ */
-  casualMatch: HTMLElement;
+  /** ネット対戦 */
+  netBattle: HTMLElement;
 
   /** 設定 */
   config: HTMLElement;
@@ -81,8 +82,8 @@ export type TitleProps = {
   /** アーケード押下ストリーム */
   pushArcade: StreamSource<void>;
 
-  /** カジュアルマッチ押下ストリーム */
-  pushCasualMatch: StreamSource<void>;
+  /** ネット対戦押下ストリーム */
+  pushNetBattle: StreamSource<void>;
 
   /** 設定押下ストリーム */
   pushConfig: StreamSource<void>;
@@ -101,7 +102,7 @@ export type CreateTitlePropsParams = RootInnerHTMLParams & {
  * @return 生成結果
  */
 export function createTitleProps(params: CreateTitlePropsParams): TitleProps {
-  const dataIDs = {
+  const dataIDs: DataIDs = {
     login: domUuid(),
     accountMenu: domUuid(),
     avatar: domUuid(),
@@ -110,7 +111,7 @@ export function createTitleProps(params: CreateTitlePropsParams): TitleProps {
     logo: domUuid(),
     tutorial: domUuid(),
     arcade: domUuid(),
-    casualMatch: domUuid(),
+    netBattle: domUuid(),
     config: domUuid(),
   };
   const root = document.createElement("div");
@@ -144,7 +145,7 @@ export function createTitleProps(params: CreateTitlePropsParams): TitleProps {
     logout: elements.logout,
     tutorial: elements.tutorial,
     arcade: elements.arcade,
-    casualMatch: elements.casualMatch,
+    netBattle: elements.netBattle,
     config: elements.config,
     isLogoLoaded,
     isAvatarLoaded,
@@ -160,7 +161,7 @@ export function createTitleProps(params: CreateTitlePropsParams): TitleProps {
     pushLogout: createStreamSource(),
     pushTutorial: createStreamSource(),
     pushArcade: createStreamSource(),
-    pushCasualMatch: createStreamSource(),
+    pushNetBattle: createStreamSource(),
     pushConfig: createStreamSource(),
   };
 }

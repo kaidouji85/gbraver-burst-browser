@@ -19,6 +19,7 @@
 
   /** 背景 */
   --background-color: rgb(23, 23, 23);
+  --sub-background-color: #2b2b2b;
 
   /** z-index */
   --zindex-background: 8;

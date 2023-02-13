@@ -55,9 +55,11 @@
 
 .private-match-host__description {
   margin-bottom: calc(var(--responsive-font-size) * 1);
+  font-size: calc(var(--responsive-font-size) * 0.8);
 }
 
 .private-match-host__room-id {
   font-size: calc(var(--responsive-font-size) * 2.8);
   white-space: nowrap;
+  user-select: text;
 }

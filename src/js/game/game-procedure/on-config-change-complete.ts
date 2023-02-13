@@ -1,5 +1,5 @@
 import { isSoundConfigChanged } from "../config/browser-config";
-import type { ConfigChangeComplete } from "../game-actions";
+import { ConfigChangeComplete } from "../game-actions/config-change-complete";
 import type { GameProps } from "../game-props";
 import { reflectSoundVolume } from "../reflect-sound-volume";
 import { startTitle } from "./start-title";

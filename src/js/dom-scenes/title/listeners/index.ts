@@ -3,10 +3,10 @@ import type { Unsubscriber } from "../../../stream/stream";
 import type { TitleProps } from "../props";
 import { onArcadePush } from "./on-arcade-push";
 import { onAvatarPush } from "./on-avatar-push";
-import { onCasualMatchPush } from "./on-casual-match-push";
 import { onConfigPush } from "./on-config-push";
 import { onLoginPush } from "./on-login-push";
 import { onLogoutPush } from "./on-logout-push";
+import { onNetBattlePush } from "./on-net-battle-push";
 import { onPushDeleteAccount } from "./on-push-delete-account";
 import { onRootPush } from "./on-root-push";
 import { onTutorialPush } from "./on-tutorial-push";
@@ -40,8 +40,8 @@ export function bindEventListeners(props: TitleProps): Unsubscriber[] {
     pushDOMStream(props.arcade).subscribe((action) => {
       onArcadePush(props, action);
     }),
-    pushDOMStream(props.casualMatch).subscribe((action) => {
-      onCasualMatchPush(props, action);
+    pushDOMStream(props.netBattle).subscribe((action) => {
+      onNetBattlePush(props, action);
     }),
     pushDOMStream(props.config).subscribe((action) => {
       onConfigPush(props, action);

@@ -18,7 +18,12 @@ import { onExitMailVerifiedIncomplete } from "./on-exit-mai-verified-incomplete"
 import { onLoginCancel } from "./on-login-cancel";
 import { onLogout } from "./on-logout";
 import { onMatchingCanceled } from "./on-matching-cancel";
+import { onNetBattleCancel } from "./on-net-battle-cancel";
+import { onNetBattleStart } from "./on-net-battle-start";
 import { onPostBattleAction } from "./on-post-battle-action";
+import { onPrivateMatchEntry } from "./on-private-match-entry";
+import { onPrivateMatchGuestStart } from "./on-private-match-guest-start";
+import { onPrivateMatchHostStart } from "./on-private-match-host-start";
 import { onReloadRequest } from "./on-reload-request";
 import { onSelectTutorialStage } from "./on-select-tutorial-stage";
 import { onSelectionCancel } from "./on-selection-cancel";
@@ -27,6 +32,7 @@ import { onSuddenlyEndBattle } from "./on-suddenly-battle-end";
 import { onTutorialStart } from "./on-tutorial-start";
 import { onUniversalLogin } from "./on-universal-login";
 import { onWebSocketAPIError } from "./on-websocker-api-error";
+import { onWithdrawPrivateMatchEntry } from "./on-withdraw-private-match-entry";
 
 /**
  * ゲームアクション発生時の処理
@@ -89,5 +95,17 @@ export function onGameAction(props: GameProps, action: GameAction) {
     onCancelTutorialSelect(props);
   } else if (action.type === "SelectTutorialStage") {
     onSelectTutorialStage(props, action);
+  } else if (action.type === "NetBattleStart") {
+    onNetBattleStart(props);
+  } else if (action.type === "NetBattleCancel") {
+    onNetBattleCancel(props);
+  } else if (action.type === "PrivateMatchHostStart") {
+    onPrivateMatchHostStart(props);
+  } else if (action.type === "PrivateMatchGuestStart") {
+    onPrivateMatchGuestStart(props);
+  } else if (action.type === "WithdrawPrivateMatchEntry") {
+    onWithdrawPrivateMatchEntry(props);
+  } else if (action.type === "PrivateMatchEntry") {
+    onPrivateMatchEntry(props, action);
   }
 }

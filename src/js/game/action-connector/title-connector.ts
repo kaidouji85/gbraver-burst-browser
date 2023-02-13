@@ -26,9 +26,9 @@ export const titleConnector: Connector = (scene, gameAction) => [
       type: "ArcadeStart",
     });
   }),
-  scene.notifyCasualMatch().subscribe(() => {
+  scene.notifyNetBattle().subscribe(() => {
     gameAction.next({
-      type: "CasualMatchStart",
+      type: "NetBattleStart",
     });
   }),
   scene.notifyConfig().subscribe(() => {

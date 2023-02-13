@@ -5,7 +5,7 @@ import { NPCEnding } from "../../dom-scenes/npc-ending/npc-ending";
 import { waitTime } from "../../wait/wait-time";
 import { npcEndingConnector } from "../action-connector/npc-ending-connector";
 import { MAX_LOADING_TIME } from "../dom-scene-binder/max-loading-time";
-import type { PostBattleAction } from "../game-actions";
+import { PostBattleAction } from "../game-actions/post-battle-action";
 import type { GameProps } from "../game-props";
 import type { InProgress } from "../in-progress/in-progress";
 import type { PlayingTutorialStage } from "../in-progress/tutorial";
@@ -72,7 +72,7 @@ const createNPCBattle = (inProgress: InProgress) => {
     return null;
   }
 
-  const state = inProgress.subFlow.state as NPCBattleState;
+  const state: NPCBattleState = inProgress.subFlow.state;
   const stage = getCurrentNPCStage(state) ?? DefaultStage;
   const level = getNPCStageLevel(state);
   const player = state.player;
@@ -179,7 +179,7 @@ export async function onPostBattleAction(
     props.inProgress.type === "Tutorial" &&
     props.inProgress.subFlow.type === "PlayingTutorialStage"
   ) {
-    const playingTutorial = props.inProgress.subFlow as PlayingTutorialStage;
+    const playingTutorial: PlayingTutorialStage = props.inProgress.subFlow;
     await gotoTutorial(props, playingTutorial.level, playingTutorial.stage);
   } else if (action.action.type === "GotoTutorialSelect") {
     props.inProgress = {

@@ -1,8 +1,8 @@
 import type { GameEnd } from "gbraver-burst-core";
 
-import type { EndBattle } from "../../src/js/game/game-actions";
-// TODO gbraver-burst-coreと共有する
+import { EndBattle } from "../../src/js/game/game-actions/end-battle";
 
+// TODO gbraver-burst-coreと共有する
 /**
  * 空のGameEnd
  */

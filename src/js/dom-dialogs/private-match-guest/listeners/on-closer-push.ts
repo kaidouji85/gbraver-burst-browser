@@ -1,19 +1,21 @@
+import { pop } from "../../../dom/animation";
 import { PushDOM } from "../../../dom/event-stream";
-import { PrivateMatchHostDialogProps } from "../props";
+import { PrivateMatchGuestDialogProps } from "../props";
 
 /**
- * 背景が押された時の処理
+ * クロージャが押された時の処理
  * @param props ダイアログプロパティ
  * @param action アクション
  */
-export function onBackgroundPush(
-  props: PrivateMatchHostDialogProps,
+export function onCloserPush(
+  props: PrivateMatchGuestDialogProps,
   action: PushDOM
 ): void {
   props.exclusive.execute(async () => {
-    action.event.preventDefault();
     action.event.stopPropagation();
+    action.event.preventDefault();
     props.changeValue.sound.play();
+    await pop(props.closer, 1.3);
     props.dialogClosed.next();
   });
 }
