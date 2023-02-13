@@ -45,6 +45,7 @@ function rootInnerHTML(
         alt="閉じる" src="${closerPath}"
         data-id="${ids.closer}"
       >
+      <div class="${ROOT_CLASS_NAME}__title">ログインをしてください</div>
       <div class="${ROOT_CLASS_NAME}__caption">${caption}</div>
       <button class="${ROOT_CLASS_NAME}__login" data-id="${ids.loginButton}">ログイン</buton>
       <button class="${ROOT_CLASS_NAME}__close" data-id="${ids.closeButton}">閉じる</button>
