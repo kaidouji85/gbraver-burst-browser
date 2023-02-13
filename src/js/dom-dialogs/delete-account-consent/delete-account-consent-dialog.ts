@@ -33,7 +33,8 @@ type DataIDs = {
 function rootInnerHTML(ids: DataIDs, resources: Resources): string {
   const closerPath =
     resources.paths.find((v) => v.id === PathIds.CLOSER)?.path ?? "";
-  const caption = "アカウント削除をすると、ネット対戦が出来なくなります。本当にアカウント削除しますか？";  
+  const caption =
+    "アカウント削除をすると、ネット対戦が出来なくなります。本当にアカウント削除しますか？";
   return `
     <div class="${ROOT_CLASS}__background" data-id="${ids.backGround}"></div>
     <div class="${ROOT_CLASS}__dialog">
