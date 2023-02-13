@@ -13,7 +13,7 @@ import type { DataIDs } from "./data-ids";
 export function rootInnerHTML(resources: Resources, ids: DataIDs): string {
   const closerPath =
     resources.paths.find((v) => v.id === PathIds.CLOSER)?.path ?? "";
-  const caption = "この設定にしますか、それとも設定変更を破棄しますか？";  
+  const caption = "この設定にしますか、それとも設定変更を破棄しますか？";
   return `
     <div class="${ROOT_CLASS}__background" data-id="${ids.backGround}"></div>
     <div class="${ROOT_CLASS}__dialog">
