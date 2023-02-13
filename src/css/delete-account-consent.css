@@ -46,7 +46,6 @@
   display: grid;
   grid-template-columns: auto;
   grid-template-rows: auto 1fr auto auto;
-  justify-content: center;
   border: var(--dialog-border);
   border-radius: var(--dialog-border-radius);
   z-index: var(--zindex-dialog);
