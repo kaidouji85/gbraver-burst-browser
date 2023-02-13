@@ -5,7 +5,6 @@
   .login {
     --closer-width: 48px;
     --closer-height: 48px;
-    --control-button-width: calc(var(--responsive-font-size) * 10);
     --control-button-height: calc(var(--responsive-font-size) * 3);
     display: block;
   }
@@ -43,10 +42,9 @@
   font-size: var(--responsive-font-size);
   background-color: var(--background-color);
   position: absolute;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
+  display: grid;
+  grid-template-columns: auto;
+  grid-template-rows: 1fr auto auto;
   border: var(--dialog-border);
   border-radius: var(--dialog-border-radius);
   z-index: var(--zindex-dialog);
@@ -61,7 +59,6 @@
 }
 
 .login__close {
-  width: var(--control-button-width);
   height: var(--control-button-height);
   font-size: var(--responsive-font-size);
   border-radius: var(--button-border-radius);
@@ -69,11 +66,9 @@
   color: var(--button-font-color);
   border: var(--button-border);
   box-shadow: var(--button-box-shadow);
-  margin-right: calc(var(--responsive-font-size) * 0.5);
 }
 
 .login__login {
-  width: var(--control-button-width);
   height: var(--control-button-height);
   font-size: var(--responsive-font-size);
   border-radius: var(--button-border-radius);
@@ -81,4 +76,5 @@
   color: var(--button-font-color);
   border: var(--button-border);
   box-shadow: var(--button-box-shadow);
+  margin-bottom: calc(var(--responsive-font-size) * 0.3);
 }

@@ -46,10 +46,8 @@ function rootInnerHTML(
         data-id="${ids.closer}"
       >
       <div class="${ROOT_CLASS_NAME}__caption">${caption}</div>
-      <div class="${ROOT_CLASS_NAME}__controllers">
-        <button class="${ROOT_CLASS_NAME}__close" data-id="${ids.closeButton}">閉じる</button>
-        <button class="${ROOT_CLASS_NAME}__login" data-id="${ids.loginButton}">ログイン</buton>
-      </div>
+      <button class="${ROOT_CLASS_NAME}__login" data-id="${ids.loginButton}">ログイン</buton>
+      <button class="${ROOT_CLASS_NAME}__close" data-id="${ids.closeButton}">閉じる</button>
     </div>
   `;
 }
