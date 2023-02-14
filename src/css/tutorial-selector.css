@@ -24,7 +24,7 @@
 
 .tutorial-selector__content {
   display: grid;
-  grid-template-columns: auto 1fr;
+  grid-template-columns: 1fr auto;
   grid-template-rows: auto 1fr auto;
   grid-gap: calc(var(--responsive-font-size) * 0.5);
   height: 100%;
@@ -41,7 +41,7 @@
 
 .tutorial-selector__image-cuts {
   grid-row: 2 / 4;
-  grid-column: 2;
+  grid-column: 1;
   position: relative;
   border-radius: var(--button-border-radius);
 }
@@ -118,7 +118,7 @@
 
 .tutorial-selector__stages {
   grid-row: 2;
-  grid-column: 1;
+  grid-column: 2;
   display: flex;
   flex-direction: column;
   z-index: var(--controllers-z-index);
@@ -129,7 +129,7 @@
 
 .tutorial-selector__prev {
   grid-row: 3;
-  grid-column: 1;
+  grid-column: 2;
   min-height: calc(var(--responsive-font-size) * 3);
   font-size: var(--responsive-font-size);
   border-radius: var(--button-border-radius);
