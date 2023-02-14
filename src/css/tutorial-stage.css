@@ -5,15 +5,14 @@
     flex-direction: column;
     justify-content: center;
     background-color: var(--button-background-color);
+    border: var(--button-border);
+    border-radius: var(--button-border-radius);
     width: calc(var(--responsive-font-size) * 20);
     min-height: calc(var(--responsive-font-size) * 5);
-    border-color: darken(var(--button-background-color), 40%);
-    border-radius: var(--dialog-border-radius);
     box-sizing: border-box;
     font-size: var(--responsive-font-size);
     padding: calc(var(--responsive-font-size) * 0.5);
     margin-bottom: calc(var(--responsive-font-size) * 0.5);
-    box-shadow: var(--button-box-shadow);
   }
 }
 

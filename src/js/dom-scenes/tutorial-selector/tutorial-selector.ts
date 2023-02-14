@@ -53,17 +53,19 @@ export function rootInnerHTML(ids: DataIDs, resources: Resources): string {
     resources.paths.find((v) => v.id === PathIds.TUTORIAL_IMAGE_CUT_06)?.path ??
     "";
   return `
-    <div class="${ROOT_CLASS}__title">チュートリアル</div>
-    <div class="${ROOT_CLASS}__image-cuts" data-id="${ids.imageCuts}">
-      <img class="${ROOT_CLASS}__cut-01" src="${imageCut01}">
-      <img class="${ROOT_CLASS}__cut-02" src="${imageCut02}">
-      <img class="${ROOT_CLASS}__cut-03" src="${imageCut03}">
-      <img class="${ROOT_CLASS}__cut-04" src="${imageCut04}">
-      <img class="${ROOT_CLASS}__cut-05" src="${imageCut05}">
-      <img class="${ROOT_CLASS}__cut-06" src="${imageCut06}">
+    <div class="${ROOT_CLASS}__content">
+      <div class="${ROOT_CLASS}__title">チュートリアル</div>
+      <div class="${ROOT_CLASS}__image-cuts" data-id="${ids.imageCuts}">
+        <img class="${ROOT_CLASS}__cut-01" src="${imageCut01}">
+        <img class="${ROOT_CLASS}__cut-02" src="${imageCut02}">
+        <img class="${ROOT_CLASS}__cut-03" src="${imageCut03}">
+        <img class="${ROOT_CLASS}__cut-04" src="${imageCut04}">
+        <img class="${ROOT_CLASS}__cut-05" src="${imageCut05}">
+        <img class="${ROOT_CLASS}__cut-06" src="${imageCut06}">
+      </div>
+      <div class="${ROOT_CLASS}__stages" data-id="${ids.stages}"></div>
+      <button class="${ROOT_CLASS}__prev" data-id="${ids.prevButton}">戻る</button>
     </div>
-    <div class="${ROOT_CLASS}__stages" data-id="${ids.stages}"></div>
-    <button class="${ROOT_CLASS}__prev" data-id="${ids.prevButton}">戻る</button> 
   `;
 }
 
