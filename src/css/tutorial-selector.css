@@ -11,8 +11,10 @@
     padding-left: var(--screen-padding-left);
     padding-right: var(--screen-padding-right);
     padding-bottom: var(--screen-padding-bottom);
-    background-size: cover;
-    background-position: 50% 0;
+    display: grid;
+    grid-template-columns: auto 1fr;
+    grid-template-rows: auto 1fr auto;
+    grid-gap: calc(var(--responsive-font-size) * 0.5);
   }
 }
 
@@ -20,14 +22,6 @@
   .tutorial-selector {
     display: none;
   }
-}
-
-.tutorial-selector__content {
-  display: grid;
-  grid-template-columns: auto 1fr;
-  grid-template-rows: auto 1fr auto;
-  grid-gap: calc(var(--responsive-font-size) * 0.5);
-  height: 100%;
 }
 
 .tutorial-selector__title {
