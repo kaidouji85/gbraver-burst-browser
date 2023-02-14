@@ -55,13 +55,13 @@
   --cut-04-delay: 9s;
   --cut-05-delay: 12s;
   --cut-06-delay: 15s;
-  --height: 100%;
-  width: auto;
-  height: var(--height);
-  filter: brightness(0.8);
+  filter: brightness(0.7);
   position: fixed;
   opacity: 0;
   overflow: hidden;
+  width: 100vw;
+  height: calc(var(--vh) * 100);
+  object-fit: cover;
   top: 0;
   left :0;
 }
