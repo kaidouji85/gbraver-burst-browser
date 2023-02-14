@@ -63,7 +63,7 @@ export function rootInnerHTML(ids: DataIDs, resources: Resources): string {
       <img class="${ROOT_CLASS}__cut-06" src="${imageCut06}">
     </div>
     <div class="${ROOT_CLASS}__stages" data-id="${ids.stages}"></div>
-    <button class="${ROOT_CLASS}__prev" data-id="${ids.prevButton}">戻る</button> 
+    <button class="${ROOT_CLASS}__prev" data-id="${ids.prevButton}">戻る</button>
   `;
 }
 
