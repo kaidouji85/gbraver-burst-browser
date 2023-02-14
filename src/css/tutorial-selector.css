@@ -123,7 +123,8 @@
   flex-direction: column;
   z-index: var(--controllers-z-index);
   border-radius: var(--button-border-radius);
-  background-color: var(--sub-background-color);
+  background-color: rgba(10, 10, 10, 0.7);
+  border: var(--dialog-border);
   padding: calc(var(--responsive-font-size) * 1);
 }
 
