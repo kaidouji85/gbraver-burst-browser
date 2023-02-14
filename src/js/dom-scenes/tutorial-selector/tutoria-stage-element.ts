@@ -18,7 +18,7 @@ const ROOT_CLASS = "tutorial-stage";
  */
 function rootInnerHTML(level: number, title: string): string {
   return `
-    <div class="${ROOT_CLASS}__prefix">Tutorial ${level}</div>
+    <div class="${ROOT_CLASS}__prefix">${level}.　</div>
     <div class="${ROOT_CLASS}__title">${title}</div>
   `;
 }
