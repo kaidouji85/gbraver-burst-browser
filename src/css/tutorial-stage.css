@@ -2,6 +2,7 @@
 @media (orientation: landscape) {
   .tutorial-stage {
     display: flex;
+    align-items: center;
     background-color: var(--button-background-color);
     border: var(--button-border);
     border-radius: var(--button-border-radius);
