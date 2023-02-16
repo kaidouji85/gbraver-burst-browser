@@ -5,7 +5,7 @@
     background-color: var(--button-background-color);
     border: var(--button-border);
     border-radius: var(--button-border-radius);
-    width: calc(var(--responsive-font-size) * 20);
+    min-width: calc(var(--responsive-font-size) * 16);
     min-height: calc(var(--responsive-font-size) * 3);
     box-sizing: border-box;
     font-size: var(--responsive-font-size);
