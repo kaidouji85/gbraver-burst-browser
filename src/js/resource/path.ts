@@ -50,9 +50,6 @@ export const PathIds = {
   TUTORIAL_IMAGE_CUT_01: "TUTORIAL_IMAGE_CUT_01",
   TUTORIAL_IMAGE_CUT_02: "TUTORIAL_IMAGE_CUT_02",
   TUTORIAL_IMAGE_CUT_03: "TUTORIAL_IMAGE_CUT_03",
-  TUTORIAL_IMAGE_CUT_04: "TUTORIAL_IMAGE_CUT_04",
-  TUTORIAL_IMAGE_CUT_05: "TUTORIAL_IMAGE_CUT_05",
-  TUTORIAL_IMAGE_CUT_06: "TUTORIAL_IMAGE_CUT_06",
 };
 
 /** パス設定を集めたもの */
@@ -188,18 +185,6 @@ export const PathConfigs: PathConfig[] = [
   {
     id: PathIds.TUTORIAL_IMAGE_CUT_03,
     path: (root) => `${root.get()}/tutorial/image-cut-03.webp`,
-  },
-  {
-    id: PathIds.TUTORIAL_IMAGE_CUT_04,
-    path: (root) => `${root.get()}/tutorial/image-cut-04.webp`,
-  },
-  {
-    id: PathIds.TUTORIAL_IMAGE_CUT_05,
-    path: (root) => `${root.get()}/tutorial/image-cut-05.webp`,
-  },
-  {
-    id: PathIds.TUTORIAL_IMAGE_CUT_06,
-    path: (root) => `${root.get()}/tutorial/image-cut-06.webp`,
   },
 ];
 
