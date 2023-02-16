@@ -42,13 +42,10 @@
 }
 
 .tutorial-selector__image-cuts img {
-  --animation: slide 18s infinite ease;
+  --animation: slide 9s infinite ease;
   --cut-01-delay: 0s;
   --cut-02-delay: 3s;
   --cut-03-delay: 6s;
-  --cut-04-delay: 9s;
-  --cut-05-delay: 12s;
-  --cut-06-delay: 15s;
   filter: brightness(0.7);
   position: fixed;
   opacity: 0;
@@ -75,35 +72,20 @@
   animation-delay: var(--cut-03-delay);
 }
 
-.tutorial-selector__cut-04 {
-  animation: var(--animation);
-  animation-delay: var(--cut-04-delay);
-}
-
-.tutorial-selector__cut-05 {
-  animation: var(--animation);
-  animation-delay: var(--cut-05-delay);
-}
-
-.tutorial-selector__cut-06 {
-  animation: var(--animation);
-  animation-delay: var(--cut-06-delay);
-}
-
 @keyframes slide {
   0% {
     opacity: 0;
   }
 
-  5% {
+  10% {
     opacity: 1;
   }
 
-  17% {
+  44% {
     opacity: 1;
   }
 
-  22% {
+  54% {
     opacity: 0;
   }
 
