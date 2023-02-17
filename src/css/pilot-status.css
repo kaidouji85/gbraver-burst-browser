@@ -24,9 +24,8 @@
 .pilot-status__skill-overview-label,
 .pilot-status__skill-detail-label {
   display: inline-block;
-  min-width: calc(var(--responsive-font-size) * 6);
-  text-align: center;
   border-radius: calc(var(--responsive-font-size) * 0.2);
+  padding: 0 calc(var(--responsive-font-size) * 0.8);
 }
 
 .pilot-status__skill-overview-label {

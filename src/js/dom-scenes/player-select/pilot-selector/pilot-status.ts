@@ -31,7 +31,7 @@ function rootInnerHTML(ids: DataIDs): string {
       <span class="${ROOT_CLASS_NAME}__skill-overview-contents" data-id="${ids.skillOverview}"></span>
     </div>
     <div class="${ROOT_CLASS_NAME}__skill-detail">
-      <span class="${ROOT_CLASS_NAME}__skill-detail-label">詳細</span>
+      <span class="${ROOT_CLASS_NAME}__skill-detail-label">スキル詳細</span>
       <span class="${ROOT_CLASS_NAME}__skill-detail-contents" data-id="${ids.skillDetail}"></span>
     </div>
   `;
