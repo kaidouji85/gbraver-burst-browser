@@ -6,6 +6,7 @@
     --padding: 5vh;
     --control-button-width: calc(var(--responsive-font-size) * 10);
     --control-button-height: calc(var(--responsive-font-size) * 3);
+
     width: var(--screen-width);
     height: var(--screen-height);
     box-sizing: border-box;

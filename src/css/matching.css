@@ -7,6 +7,7 @@
     --closer-height: 48px;
     --control-button-width: calc(var(--responsive-font-size) * 10);
     --control-button-height: calc(var(--responsive-font-size) * 3);
+
     display: block;
   }
 }
@@ -21,13 +22,14 @@
   position: absolute;
   width: var(--screen-width);
   height: var(--screen-height);
-  background-color: #000000;
+  background-color: #000;
   opacity: 0.5;
   z-index: var(--zindex-background);
 }
 
 .matching__dialog {
   --dialog-padding: var(--responsive-font-size);
+
   width: var(--dialog-width);
   height: var(--dialog-height);
   top: calc(var(--vh, 1vh) * 50);

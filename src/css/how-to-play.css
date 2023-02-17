@@ -9,6 +9,7 @@
     --how-to-play-dialog-height: calc(var(--vh) * 80);
     --how-to-play-dialog-top: calc(var(--vh, 1vh) * 50);
     --how-to-play-dialog-left: 50vw;
+
     display: block;
   }
 }
@@ -23,7 +24,7 @@
   position: absolute;
   width: var(--screen-width);
   height: var(--screen-height);
-  background-color: #000000;
+  background-color: #000;
   opacity: 0.5;
   z-index: var(--zindex-background);
 }
@@ -34,7 +35,6 @@
   top: calc(var(--vh, 1vh) * 50);
   left: 50%;
   transform: translate(-50%, -50%);
-
   background-color: var(--background-color);
   position: absolute;
   display: flex;
@@ -48,6 +48,7 @@
 .how-to-play__closer {
   --icon-width: 48px;
   --icon-height: 48px;
+
   position: fixed;
   top: calc(
     var(--how-to-play-dialog-top) - var(--how-to-play-dialog-height) / 2 -

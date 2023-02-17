@@ -4,6 +4,7 @@
 @media (orientation: landscape) {
   .waiting {
     --wating-dialog-height: calc(var(--responsive-font-size) * 7);
+
     display: block;
   }
 }
@@ -18,7 +19,7 @@
   position: absolute;
   width: var(--screen-width);
   height: var(--screen-height);
-  background-color: #000000;
+  background-color: #000;
   opacity: 0.5;
   z-index: var(--zindex-background);
 }
@@ -31,7 +32,6 @@
   transform: translate(-50%, -50%);
   color: var(--font-color);
   font-size: var(--responsive-font-size);
-
   background-color: var(--background-color);
   position: absolute;
   display: flex;

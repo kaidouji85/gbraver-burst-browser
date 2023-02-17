@@ -2,6 +2,7 @@
 .armdozer-icon {
   --armdozer-icon-width: 12.5vw;
   --armdozer-icon-height: 12.5vw;
+
   position: relative;
 }
 
@@ -18,6 +19,7 @@
 
 .armdozer-icon__check {
   --width: 6vw;
+
   width: var(--width);
   position: absolute;
   top: 0;

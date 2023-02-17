@@ -15,6 +15,7 @@
 .face-graphic__shinya,
 .face-graphic__shinya--right {
   --icon-size: calc(var(--responsive-font-size) * 8);
+
   width: var(--icon-size);
   height: var(--icon-size);
 }
@@ -30,6 +31,7 @@
 .face-graphic__gai,
 .face-graphic__gai--right {
   --icon-size: calc(var(--responsive-font-size) * 8.5);
+
   width: var(--icon-size);
   height: var(--icon-size);
 }
@@ -45,6 +47,7 @@
 .face-graphic__raito,
 .face-graphic__raito--right {
   --icon-size: calc(var(--responsive-font-size) * 8.5);
+
   width: var(--icon-size);
   height: var(--icon-size);
 }
@@ -60,6 +63,7 @@
 .face-graphic__tsubasa,
 .face-graphic__tsubasa--right {
   --icon-size: calc(var(--responsive-font-size) * 9.5);
+
   width: var(--icon-size);
   height: var(--icon-size);
 }
