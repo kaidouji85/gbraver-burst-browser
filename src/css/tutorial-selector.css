@@ -8,7 +8,8 @@
     background-color: var(--background-color);
     color: var(--font-color);
     box-sizing: border-box;
-    padding: var(--screen-padding-top) var(--screen-padding-right) var(--screen-padding-bottom) var(--screen-padding-left);
+    padding: var(--screen-padding-top) var(--screen-padding-right)
+      var(--screen-padding-bottom) var(--screen-padding-left);
     display: grid;
     grid-template-columns: 1fr auto;
     grid-template-rows: auto 1fr auto;

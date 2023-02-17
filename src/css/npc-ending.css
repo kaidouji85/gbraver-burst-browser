@@ -8,7 +8,8 @@
     background-color: var(--background-color);
     color: var(--font-color);
     box-sizing: border-box;
-    padding: var(--screen-padding-top) var(--screen-padding-right) var(--screen-padding-bottom) var(--screen-padding-left);
+    padding: var(--screen-padding-top) var(--screen-padding-right)
+      var(--screen-padding-bottom) var(--screen-padding-left);
     background-size: cover;
     background-position: 50% 0;
   }

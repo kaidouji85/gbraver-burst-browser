@@ -51,7 +51,8 @@
   border-radius: var(--dialog-border-radius);
   z-index: var(--zindex-dialog);
   box-sizing: border-box;
-  padding: var(--closer-height) var(--dialog-padding) var(--dialog-padding) var(--dialog-padding);
+  padding: var(--closer-height) var(--dialog-padding) var(--dialog-padding)
+    var(--dialog-padding);
 }
 
 .difficulty__caption {

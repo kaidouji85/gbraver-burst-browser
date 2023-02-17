@@ -52,7 +52,8 @@
   border-radius: var(--dialog-border-radius);
   z-index: var(--zindex-dialog);
   box-sizing: border-box;
-  padding: max(var(--dialog-padding), calc(var(--closer-height) / 2)) var(--dialog-padding) var(--dialog-padding) var(--dialog-padding);
+  padding: max(var(--dialog-padding), calc(var(--closer-height) / 2))
+    var(--dialog-padding) var(--dialog-padding) var(--dialog-padding);
 }
 
 .delete-account-consent__title {
