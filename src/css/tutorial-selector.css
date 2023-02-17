@@ -26,16 +26,18 @@
 
 .tutorial-selector__title {
   grid-row: 1;
-  grid-column: 1 / 3;
+  grid-column: 2;
   font-size: calc(var(--responsive-font-size) * 1.3);
   border-radius: var(--button-border-radius);
   background-color: var(--sub-background-color);
-  padding: calc(var(--responsive-font-size) * 0.5);
+  padding: 
+    calc(var(--responsive-font-size) * 0.5)
+    calc(var(--responsive-font-size) * 1.2);
   z-index: var(--controllers-z-index);
 }
 
 .tutorial-selector__image-cuts {
-  grid-row: 2 / 4;
+  grid-row: 1 / 4;
   grid-column: 1;
   position: relative;
   border-radius: var(--button-border-radius);
