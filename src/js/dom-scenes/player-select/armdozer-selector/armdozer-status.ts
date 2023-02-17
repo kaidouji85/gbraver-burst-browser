@@ -40,7 +40,7 @@ function rootInnerHTML(ids: DataIDs): string {
       <span class="${ROOT_CLASS_NAME}__burst-overview-contents" data-id="${ids.burstOverview}"></span>
     </div>
     <div class="${ROOT_CLASS_NAME}__burst-detail">
-     <span class="${ROOT_CLASS_NAME}__burst-detail-label">詳細</span>
+     <span class="${ROOT_CLASS_NAME}__burst-detail-label">バースト詳細</span>
      <span class="${ROOT_CLASS_NAME}__burst-detail-contents" data-id="${ids.burstDetail}"></span>
     </div>
   `;

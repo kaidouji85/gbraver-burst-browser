@@ -48,9 +48,9 @@
 .armdozer-status__burst-overview-label,
 .armdozer-status__burst-detail-label {
   display: inline-block;
-  min-width: calc(var(--responsive-font-size) * 6);
   text-align: center;
   border-radius: calc(var(--responsive-font-size) * 0.2);
+  padding: 0 calc(var(--responsive-font-size) * 0.8);
 }
 
 .armdozer-status__burst-overview-label {
