@@ -4,6 +4,7 @@
 @media (orientation: landscape) {
   .network-error {
     --control-button-height: calc(var(--responsive-font-size) * 3);
+
     display: block;
   }
 }
@@ -18,7 +19,7 @@
   position: absolute;
   width: var(--screen-width);
   height: var(--screen-height);
-  background-color: #000000;
+  background-color: #000;
   opacity: 0.5;
   z-index: var(--zindex-background);
 }

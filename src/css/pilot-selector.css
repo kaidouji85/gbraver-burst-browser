@@ -2,6 +2,7 @@
 .pilot-selector {
   --control-button-width: 24vw;
   --control-button-height: calc(var(--responsive-font-size) * 3);
+
   z-index: var(--selector-zindex);
   display: flex;
   flex-direction: column;

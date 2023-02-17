@@ -2,6 +2,7 @@
 
 .armdozer-bust-shot__shin-braver {
   --width: calc(var(--vh) * 200);
+
   position: absolute;
   top: calc(var(--vh) * -10);
   left: calc(100vw - 0.9 * var(--width) - var(--safe-area-right));
@@ -10,6 +11,7 @@
 
 .armdozer-bust-shot__neo-landozer {
   --width: calc(var(--vh) * 200);
+
   position: absolute;
   top: calc(var(--vh) * -25);
   left: calc(100vw - 0.9 * var(--width) - var(--safe-area-right));
@@ -18,6 +20,7 @@
 
 .armdozer-bust-shot__lightning-dozer {
   --width: calc(var(--vh) * 200);
+
   position: absolute;
   top: calc(var(--vh) * -25);
   left: calc(100vw - 0.9 * var(--width) - var(--safe-area-right));
@@ -26,6 +29,7 @@
 
 .armdozer-bust-shot__wing-dozer {
   --width: calc(var(--vh) * 200);
+
   position: absolute;
   top: calc(var(--vh) * -40);
   left: calc(100vw - 0.8 * var(--width) - var(--safe-area-right));
@@ -34,6 +38,7 @@
 
 .armdozer-bust-shot__genesis-braver {
   --width: calc(var(--vh) * 160);
+
   position: absolute;
   top: calc(var(--vh) * -15);
   left: calc(100vw - 1 * var(--width) - var(--safe-area-right));

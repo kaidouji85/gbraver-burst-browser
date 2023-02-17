@@ -6,6 +6,7 @@
     --closer-width: 48px;
     --closer-height: 48px;
     --control-button-height: calc(var(--responsive-font-size) * 3);
+
     display: block;
   }
 }
@@ -20,7 +21,7 @@
   position: absolute;
   width: var(--screen-width);
   height: var(--screen-height);
-  background-color: #000000;
+  background-color: #000;
   opacity: 0.5;
   z-index: var(--zindex-background);
 }
@@ -36,6 +37,7 @@
 
 .delete-account-consent__dialog {
   --dialog-padding: calc(var(--responsive-font-size) * 2);
+
   top: calc(var(--vh, 1vh) * 50);
   left: 50vw;
   transform: translate(-50%, -50%);
@@ -50,10 +52,7 @@
   border-radius: var(--dialog-border-radius);
   z-index: var(--zindex-dialog);
   box-sizing: border-box;
-  padding-top: max(var(--dialog-padding), calc(var(--closer-height) / 2));
-  padding-right: var(--dialog-padding);
-  padding-bottom: var(--dialog-padding);
-  padding-left: var(--dialog-padding);
+  padding: max(var(--dialog-padding), calc(var(--closer-height) / 2)) var(--dialog-padding) var(--dialog-padding) var(--dialog-padding);
 }
 
 .delete-account-consent__title {

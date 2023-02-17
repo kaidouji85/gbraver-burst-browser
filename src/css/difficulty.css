@@ -5,6 +5,7 @@
   .difficulty {
     --closer-width: 48px;
     --closer-height: 48px;
+
     display: block;
   }
 }
@@ -19,7 +20,7 @@
   position: absolute;
   width: var(--screen-width);
   height: var(--screen-height);
-  background-color: #000000;
+  background-color: #000;
   opacity: 0.5;
   z-index: var(--zindex-background);
 }
@@ -34,6 +35,7 @@
 
 .difficulty__dialog {
   --dialog-padding: var(--responsive-font-size);
+
   top: calc(var(--vh, 1vh) * 50);
   left: 50vw;
   transform: translate(-50%, -50%);
@@ -49,10 +51,7 @@
   border-radius: var(--dialog-border-radius);
   z-index: var(--zindex-dialog);
   box-sizing: border-box;
-  padding-top: var(--closer-height);
-  padding-right: var(--dialog-padding);
-  padding-bottom: var(--dialog-padding);
-  padding-left: var(--dialog-padding);
+  padding: var(--closer-height) var(--dialog-padding) var(--dialog-padding) var(--dialog-padding);
 }
 
 .difficulty__caption {
