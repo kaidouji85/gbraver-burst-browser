@@ -83,7 +83,7 @@
     "build:storybook-static": "build-storybook -s ./src/resources -o build/storybook-static",
     "clean": "rimraf build",
     "code-analysis": "codehawk src/js",
-    "code-format": "run-s code-format:src code-format:test code-format:storybook",
+    "code-format": "run-s code-format:src code-format:test code-format:storybook code-format:css",
     "code-format:css": "prettier --write src/css",
     "code-format:src": "prettier --write src/js",
     "code-format:storybook": "prettier --write stories",
