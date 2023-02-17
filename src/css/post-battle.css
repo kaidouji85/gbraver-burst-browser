@@ -15,7 +15,8 @@
   }
 }
 
-.post-battle__main-action, .post-battle__sub-action {
+.post-battle__main-action,
+.post-battle__sub-action {
   width: var(--control-button-width);
   height: var(--control-button-height);
   font-size: var(--responsive-font-size);

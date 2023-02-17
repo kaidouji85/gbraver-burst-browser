@@ -1,7 +1,7 @@
 /**
  * 難易度選択ダイアログ
  */
- @media (orientation: landscape) {
+@media (orientation: landscape) {
   .difficulty {
     --closer-width: 48px;
     --closer-height: 48px;
@@ -68,8 +68,7 @@
 .difficulty__easy,
 .difficulty__normal,
 .difficulty__hard,
-.difficulty__very-hard
-{
+.difficulty__very-hard {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -79,18 +78,16 @@
 .difficulty__easy-icon,
 .difficulty__normal-icon,
 .difficulty__hard-icon,
-.difficulty__very-hard-icon
-{
+.difficulty__very-hard-icon {
   width: calc(var(--responsive-font-size) * 5);
   height: calc(var(--responsive-font-size) * 5);
-  margin-bottom:  calc(var(--responsive-font-size) * 0.5);
+  margin-bottom: calc(var(--responsive-font-size) * 0.5);
 }
 
 .difficulty__easy-button,
 .difficulty__normal-button,
 .difficulty__hard-button,
-.difficulty__very-hard-button
-{
+.difficulty__very-hard-button {
   width: calc(var(--responsive-font-size) * 7);
   height: calc(var(--responsive-font-size) * 3);
   font-size: calc(var(--responsive-font-size) * 0.9);

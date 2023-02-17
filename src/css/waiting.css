@@ -40,5 +40,5 @@
   justify-content: center;
   border: var(--dialog-border);
   border-radius: var(--dialog-border-radius);
-  z-index: var(--zindex-dialog)
+  z-index: var(--zindex-dialog);
 }

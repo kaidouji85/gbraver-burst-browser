@@ -9,11 +9,10 @@
     width: var(--screen-width);
     height: var(--screen-height);
     box-sizing: border-box;
-    padding:
-        max(var(--safe-area-top), var(--padding))
-        max(var(--safe-area-right), var(--padding))
-        max(var(--safe-area-bottom), var(--padding))
-        max(var(--safe-area-left), var(--padding));
+    padding: max(var(--safe-area-top), var(--padding))
+      max(var(--safe-area-right), var(--padding))
+      max(var(--safe-area-bottom), var(--padding))
+      max(var(--safe-area-left), var(--padding));
     background-color: var(--background-color);
     color: var(--font-color);
     font-size: var(--responsive-font-size);
