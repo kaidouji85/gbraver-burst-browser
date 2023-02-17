@@ -1,5 +1,5 @@
 /** プレイヤー選択画面 アームドーザステータスウインドウ */
-.armdozer-status{
+.armdozer-status {
   font-size: calc(var(--responsive-font-size) * 0.8);
   width: 50vw;
   box-sizing: border-box;
@@ -14,7 +14,7 @@
 .armdozer-status__basic-status {
   --parameter-label-width: calc(var(--responsive-font-size) * 2.2);
   display: grid;
-  grid-template-columns: 
+  grid-template-columns:
     1fr
     var(--parameter-label-width)
     auto
@@ -38,7 +38,6 @@
 .armdozer-status__power-value {
   margin-right: calc(var(--responsive-font-size) * 0.2);
 }
-
 
 .armdozer-status__burst-overview {
   margin-top: calc(var(--responsive-font-size) * 0.5);

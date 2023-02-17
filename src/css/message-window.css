@@ -2,13 +2,14 @@
  * メッセージウインドウ
  */
 @media (orientation: landscape) {
-  .message-window, 
+  .message-window,
   .message-window--left,
   .message-window--right,
   .message-window--near-battery-selector,
   .message-window--near-burst-button,
   .message-window--near-pilot-button {
-    --brightness: brightness(1);  /** 本カスタムプロパティはJavaScriptから変更される */
+    /** 本カスタムプロパティはJavaScriptから変更される */
+    --brightness: brightness(1);
     --margin-x: max(3vw, var(--safe-area-left), var(--safe-area-right));
     box-sizing: border-box;
     display: flex;
@@ -70,13 +71,13 @@
     display: inline-block;
     margin-left: calc(var(--responsive-font-size) * 0.5);
     animation-name: icon-up-down;
-    animation-fill-mode:backwards;
+    animation-fill-mode: backwards;
     animation-duration: 0.5s;
-    animation-iteration-count:infinite;
+    animation-iteration-count: infinite;
   }
 
   .message-window__next-message-icon--invisible {
-    display :none;
+    display: none;
   }
 
   @keyframes icon-up-down {

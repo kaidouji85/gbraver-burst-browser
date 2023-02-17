@@ -58,13 +58,13 @@
 }
 
 .tutorial-title__caption-clause {
-  white-space: nowrap
+  white-space: nowrap;
 }
 
 .tutorial-title__caption-clause--capitalized {
   font-size: calc(var(--font-size) * 1.5);
   font-weight: bold;
-  white-space: nowrap
+  white-space: nowrap;
 }
 
 .tutorial-title__shin-braver-bust-shot {

@@ -6,13 +6,13 @@
 }
 
 .armdozer-icon__image {
-  width: var( --armdozer-icon-width);
-  height: var( --armdozer-icon-height);
+  width: var(--armdozer-icon-width);
+  height: var(--armdozer-icon-height);
 }
 
 .armdozer-icon__image--selected {
-  width: var( --armdozer-icon-width);
-  height: var( --armdozer-icon-height);
+  width: var(--armdozer-icon-width);
+  height: var(--armdozer-icon-height);
   filter: brightness(0.4);
 }
 
