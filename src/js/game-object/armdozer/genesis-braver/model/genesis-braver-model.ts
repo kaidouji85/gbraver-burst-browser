@@ -6,15 +6,20 @@ export type GenesisBraverModel = {
   animation: {
     /** アニメーションの種類 */
     type: AnimationType;
-
     /** 0〜1で指定するアニメーションフレーム */
     frame: number;
   };
-
   /** 座標 */
   position: {
     x: number;
     y: number;
     z: number;
+  };
+  /** アクティブレイヤ */
+  active: {
+    /** 0〜1で指定するアクティブレイヤーの強さ */
+    strength: number;
+    /** 透明度 */
+    opacity: number;
   };
 };
