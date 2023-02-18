@@ -1,12 +1,12 @@
 import * as THREE from "three";
 
+import { toSilhouette } from "../../../../canvas/silhouette/to-silhouette";
 import type { Resources } from "../../../../resource";
 import { TEXTURE_IDS } from "../../../../resource/texture/ids";
 import type { ArmdozerAnimation } from "../../mesh/armdozer-animation";
 import { createHorizontalAnimation } from "../../mesh/horizontal-animation";
+import { ACTIVE_COLOR_B, ACTIVE_COLOR_G, ACTIVE_COLOR_R } from "./active-color";
 import { MESH_Y } from "./position";
-import {toSilhouette} from "../../../../canvas/silhouette/to-silhouette";
-import {ACTIVE_COLOR_B, ACTIVE_COLOR_G, ACTIVE_COLOR_R} from "./active-color";
 
 /** スプライト幅 */
 export const WIDTH = 600;
@@ -41,7 +41,9 @@ export function genesisBraverStand(resources: Resources): ArmdozerAnimation {
  * @param resources リソース管理オブジェクト
  * @return 生成結果
  */
-export function genesisBraverActiveStand(resources: Resources): ArmdozerAnimation {
+export function genesisBraverActiveStand(
+  resources: Resources
+): ArmdozerAnimation {
   const texture =
     resources.textures.find((v) => v.id === TEXTURE_IDS.GENESIS_BRAVER_STAND)
       ?.texture ?? new THREE.Texture();

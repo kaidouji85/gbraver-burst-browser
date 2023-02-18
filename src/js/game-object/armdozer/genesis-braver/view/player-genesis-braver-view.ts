@@ -2,6 +2,7 @@ import * as THREE from "three";
 
 import type { Resources } from "../../../../resource";
 import type { GenesisBraverModel } from "../model/genesis-braver-model";
+import { createActiveMeshes } from "./active-meshes";
 import type { AnimationMeshMapping } from "./animation-mesh-mapping";
 import type { GenesisBraverView } from "./genesis-braver-view";
 import { createMeshes } from "./meshes";
@@ -10,7 +11,8 @@ import { createMeshes } from "./meshes";
 export class PlayerGenesisBraverView implements GenesisBraverView {
   /** メッシュ */
   #meshes: AnimationMeshMapping[];
-
+  /** アクティブメッシュ */
+  #activeMeshes: AnimationMeshMapping[];
   /** グループ */
   #group: THREE.Group;
 
@@ -21,6 +23,7 @@ export class PlayerGenesisBraverView implements GenesisBraverView {
   constructor(resources: Resources) {
     this.#group = new THREE.Group();
     this.#meshes = createMeshes(resources);
+    this.#activeMeshes = createActiveMeshes(resources);
     this.#meshes.forEach(({ mesh }) => {
       this.#group.add(mesh.getObject3D());
     });
@@ -29,6 +32,9 @@ export class PlayerGenesisBraverView implements GenesisBraverView {
   /** @override */
   destructor() {
     this.#meshes.forEach(({ mesh }) => {
+      mesh.destructor();
+    });
+    this.#activeMeshes.forEach(({ mesh }) => {
       mesh.destructor();
     });
   }
@@ -46,14 +52,22 @@ export class PlayerGenesisBraverView implements GenesisBraverView {
     const currentMesh = this.#meshes.find(
       (v) => v.type === model.animation.type
     );
-
     if (currentMesh) {
       currentMesh.mesh.opacity(1);
       currentMesh.mesh.animate(model.animation.frame);
     }
 
+    const currentActiveMesh = this.#activeMeshes.find(
+      (v) => v.type === model.animation.type
+    );
+    if (currentActiveMesh) {
+      currentActiveMesh.mesh.opacity(1);
+      currentActiveMesh.mesh.animate(model.animation.frame);
+    }
+
     this.#meshes
       .filter((v) => v !== currentMesh)
+      .filter((v) => v !== currentActiveMesh)
       .forEach(({ mesh }) => {
         mesh.opacity(0);
       });
