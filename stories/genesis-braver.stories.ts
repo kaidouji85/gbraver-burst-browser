@@ -37,16 +37,34 @@ const story = (
   return stub.domElement();
 };
 
+/** プレイヤー 立ち */
 export const playerStand = () =>
   story(PlayerGenesisBraver, () => {
     // NOP
   });
 
+/** プレイヤー アクティブ 立ち */
+export const playerActiveStand = () =>
+  story(PlayerGenesisBraver, (sprite) => {
+    sprite.startActive().play();
+  })
+
+/** 敵 立ち */
 export const enemyStand = () =>
   story(EnemyGenesisBraver, () => {
     // NOP
   });
 
+/** 敵 立ち */
+export const enemyActiveStand = () =>
+  story(EnemyGenesisBraver, (sprite) => {
+    sprite.startActive().play();
+  });
+
+/**
+ * ストレートパンチ
+ * @param sprite スプライト
+ */
 const straightPunch = (sprite: GenesisBraver) => {
   return delay(1000)
     .chain(sprite.charge())
