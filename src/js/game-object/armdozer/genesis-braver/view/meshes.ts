@@ -1,10 +1,10 @@
 import type { Resources } from "../../../../resource";
+import { genesisBraverKnockBack } from "../mesh/knock-back";
 import { genesisBraverSPAttack } from "../mesh/sp-attack";
 import { genesisBraverSPCharge } from "../mesh/sp-charge";
 import { genesisBraverSPTOStand } from "../mesh/sp-to-stand";
 import { genesisBraverStand } from "../mesh/stand";
 import type { AnimationMeshMapping } from "./animation-mesh-mapping";
-import {genesisBraverKnockBack} from "../mesh/knock-back";
 
 /**
  * アニメーションメッシュマッピングを生成
