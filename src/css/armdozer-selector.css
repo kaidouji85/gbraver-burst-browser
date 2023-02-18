@@ -1,8 +1,8 @@
-
 /** プレイヤー選択画面 アームドーザセレクタ */
 .armdozer-selector {
   --control-button-width: 24vw;
   --control-button-height: calc(var(--responsive-font-size) * 3);
+
   display: flex;
   flex-direction: column;
   align-items: flex-start;

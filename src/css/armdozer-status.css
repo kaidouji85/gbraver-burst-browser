@@ -1,11 +1,11 @@
 /** プレイヤー選択画面 アームドーザステータスウインドウ */
-.armdozer-status{
+.armdozer-status {
   font-size: calc(var(--responsive-font-size) * 0.8);
   width: 50vw;
   box-sizing: border-box;
   min-height: calc(var(--responsive-font-size) * 8);
   padding: calc(var(--responsive-font-size) * 0.5);
-  background-color: rgba(10, 10, 10, 0.7);
+  background-color: rgb(10 10 10 / 70%);
   border: var(--dialog-border);
   border-radius: var(--dialog-border-radius);
   margin-bottom: calc(var(--responsive-font-size) * 0.5);
@@ -13,8 +13,9 @@
 
 .armdozer-status__basic-status {
   --parameter-label-width: calc(var(--responsive-font-size) * 2.2);
+
   display: grid;
-  grid-template-columns: 
+  grid-template-columns:
     1fr
     var(--parameter-label-width)
     auto
@@ -39,7 +40,6 @@
   margin-right: calc(var(--responsive-font-size) * 0.2);
 }
 
-
 .armdozer-status__burst-overview {
   margin-top: calc(var(--responsive-font-size) * 0.5);
   margin-bottom: calc(var(--responsive-font-size) * 0.5);
@@ -48,9 +48,9 @@
 .armdozer-status__burst-overview-label,
 .armdozer-status__burst-detail-label {
   display: inline-block;
-  min-width: calc(var(--responsive-font-size) * 6);
   text-align: center;
   border-radius: calc(var(--responsive-font-size) * 0.2);
+  padding: 0 calc(var(--responsive-font-size) * 0.8);
 }
 
 .armdozer-status__burst-overview-label {

@@ -3,6 +3,7 @@
   --dialog-button-height: calc(var(--responsive-font-size) * 3);
   --closer-width: 48px;
   --closer-height: 48px;
+
   position: fixed;
 }
 
@@ -16,13 +17,14 @@
   left: 0;
   width: var(--screen-width);
   height: var(--screen-height);
-  background-color: #000000;
+  background-color: #000;
   opacity: 0.5;
   z-index: var(--zindex-background);
 }
 
 .config-changed__dialog {
   --dialog-padding: var(--responsive-font-size);
+
   top: calc(var(--vh, 1vh) * 50);
   left: 50vw;
   transform: translate(-50%, -50%);
@@ -36,10 +38,8 @@
   border: var(--dialog-border);
   border-radius: var(--dialog-border-radius);
   z-index: var(--zindex-dialog);
-  padding-top: var(--closer-height);
-  padding-right: var(--dialog-padding);
-  padding-bottom: var(--dialog-padding);
-  padding-left: var(--dialog-padding);
+  padding: var(--closer-height) var(--dialog-padding) var(--dialog-padding)
+    var(--dialog-padding);
 }
 
 .config-changed__closer {
@@ -51,7 +51,7 @@
 }
 
 .config-changed__title {
-  font-size: calc(var(--responsive-font-size) * 1.3);  
+  font-size: calc(var(--responsive-font-size) * 1.3);
 }
 
 .config-changed__caption {

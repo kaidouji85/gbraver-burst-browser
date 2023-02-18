@@ -12,8 +12,10 @@
   bottom: 0;
 }
 
-.face-graphic__shinya, .face-graphic__shinya--right {
+.face-graphic__shinya,
+.face-graphic__shinya--right {
   --icon-size: calc(var(--responsive-font-size) * 8);
+
   width: var(--icon-size);
   height: var(--icon-size);
 }
@@ -26,8 +28,10 @@
   transform: translateX(-25%) scaleX(-1);
 }
 
-.face-graphic__gai, .face-graphic__gai--right {
+.face-graphic__gai,
+.face-graphic__gai--right {
   --icon-size: calc(var(--responsive-font-size) * 8.5);
+
   width: var(--icon-size);
   height: var(--icon-size);
 }
@@ -40,8 +44,10 @@
   transform: translateX(-25%) scaleX(-1);
 }
 
-.face-graphic__raito, .face-graphic__raito--right {
+.face-graphic__raito,
+.face-graphic__raito--right {
   --icon-size: calc(var(--responsive-font-size) * 8.5);
+
   width: var(--icon-size);
   height: var(--icon-size);
 }
@@ -54,8 +60,10 @@
   transform: translateX(-25%) scaleX(-1);
 }
 
-.face-graphic__tsubasa, .face-graphic__tsubasa--right {
+.face-graphic__tsubasa,
+.face-graphic__tsubasa--right {
   --icon-size: calc(var(--responsive-font-size) * 9.5);
+
   width: var(--icon-size);
   height: var(--icon-size);
 }

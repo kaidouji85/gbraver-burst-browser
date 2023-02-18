@@ -14,12 +14,12 @@
   --screen-height: calc(var(--vh, 1vh) * 100);
 
   /** フォント */
-  --font-color: rgb(240, 240, 240);
+  --font-color: rgb(240 240 240);
   --responsive-font-size: 10px;
 
   /** 背景 */
-  --background-color: rgb(23, 23, 23);
-  --sub-background-color: #2b2b2b;
+  --background-color: rgb(23 23 23);
+  --sub-background-color: #383c3c;
 
   /** z-index */
   --zindex-background: 8;
@@ -31,7 +31,7 @@
   /** ボタン */
   --button-background-color: #007bbb;
   --sub-button-background-color: #595857;
-  --button-font-color: rgb(240, 240, 240);
+  --button-font-color: rgb(240 240 240);
   --button-border-radius: calc(var(--responsive-font-size) * 0.5);
   --button-border: none;
   --button-box-shadow: 0 0 0.5em rgb(25 25 25);

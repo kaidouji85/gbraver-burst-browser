@@ -3,10 +3,13 @@
  */
 @media (orientation: landscape) {
   .how-to-play {
-    --how-to-play-dialog-width: calc(min(var(--how-to-play-dialog-height) * 16 / 9, 90vw));
+    --how-to-play-dialog-width: calc(
+      min(var(--how-to-play-dialog-height) * 16 / 9, 90vw)
+    );
     --how-to-play-dialog-height: calc(var(--vh) * 80);
     --how-to-play-dialog-top: calc(var(--vh, 1vh) * 50);
     --how-to-play-dialog-left: 50vw;
+
     display: block;
   }
 }
@@ -21,7 +24,7 @@
   position: absolute;
   width: var(--screen-width);
   height: var(--screen-height);
-  background-color: #000000;
+  background-color: #000;
   opacity: 0.5;
   z-index: var(--zindex-background);
 }
@@ -32,7 +35,6 @@
   top: calc(var(--vh, 1vh) * 50);
   left: 50%;
   transform: translate(-50%, -50%);
-
   background-color: var(--background-color);
   position: absolute;
   display: flex;
@@ -40,22 +42,21 @@
   justify-content: center;
   border: var(--dialog-border);
   border-radius: var(--dialog-border-radius);
-  z-index: var(--zindex-dialog)
+  z-index: var(--zindex-dialog);
 }
 
 .how-to-play__closer {
   --icon-width: 48px;
   --icon-height: 48px;
+
   position: fixed;
   top: calc(
-      var(--how-to-play-dialog-top)
-      - var(--how-to-play-dialog-height) / 2
-      - var(--icon-width) / 2
+    var(--how-to-play-dialog-top) - var(--how-to-play-dialog-height) / 2 -
+      var(--icon-width) / 2
   );
   left: calc(
-      var(--how-to-play-dialog-left)
-      - var(--how-to-play-dialog-width) / 2
-      - var(--icon-height) / 2
+    var(--how-to-play-dialog-left) - var(--how-to-play-dialog-width) / 2 -
+      var(--icon-height) / 2
   );
   width: var(--icon-width);
   height: var(--icon-height);

@@ -1,4 +1,5 @@
 import type { Resources } from "../../../../resource";
+import { genesisBraverKnockBack } from "../mesh/knock-back";
 import { genesisBraverSPAttack } from "../mesh/sp-attack";
 import { genesisBraverSPCharge } from "../mesh/sp-charge";
 import { genesisBraverSPTOStand } from "../mesh/sp-to-stand";
@@ -27,6 +28,10 @@ export function createMeshes(resources: Resources): AnimationMeshMapping[] {
     {
       type: "SP_TO_STAND",
       mesh: genesisBraverSPTOStand(resources),
+    },
+    {
+      type: "KNOCK_BACK",
+      mesh: genesisBraverKnockBack(resources),
     },
   ];
 }

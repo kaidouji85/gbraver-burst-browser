@@ -30,7 +30,8 @@
 
 .play-in-landscape__image {
   --icon-width: 20vw;
-  --icon-height: calc(var(--icon-width)*0.45);
+  --icon-height: calc(var(--icon-width) * 0.45);
+
   width: var(--icon-width);
   height: var(--icon-height);
 }

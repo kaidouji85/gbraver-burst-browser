@@ -2,22 +2,24 @@
 .armdozer-icon {
   --armdozer-icon-width: 12.5vw;
   --armdozer-icon-height: 12.5vw;
+
   position: relative;
 }
 
 .armdozer-icon__image {
-  width: var( --armdozer-icon-width);
-  height: var( --armdozer-icon-height);
+  width: var(--armdozer-icon-width);
+  height: var(--armdozer-icon-height);
 }
 
 .armdozer-icon__image--selected {
-  width: var( --armdozer-icon-width);
-  height: var( --armdozer-icon-height);
+  width: var(--armdozer-icon-width);
+  height: var(--armdozer-icon-height);
   filter: brightness(0.4);
 }
 
 .armdozer-icon__check {
   --width: 6vw;
+
   width: var(--width);
   position: absolute;
   top: 0;
