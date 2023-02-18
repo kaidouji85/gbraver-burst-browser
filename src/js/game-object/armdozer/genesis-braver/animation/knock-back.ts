@@ -13,7 +13,7 @@ export function knockBack(model: GenesisBraverModel): Animate {
   return all(
     process(() => {
       model.animation.type = "KNOCK_BACK";
-      model.animation.frame = 0;
+      model.animation.frame = 1;
     }),
     tween(model.position, (t) =>
       t.to(
