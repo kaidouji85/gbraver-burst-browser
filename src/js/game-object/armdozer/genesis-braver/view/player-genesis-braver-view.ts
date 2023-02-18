@@ -70,7 +70,7 @@ export class PlayerGenesisBraverView implements GenesisBraverView {
       currentActiveMesh.mesh.animate(model.animation.frame);
     }
 
-    this.#meshes
+    [...this.#meshes, ...this.#activeMeshes]
       .filter((v) => v !== currentMesh)
       .filter((v) => v !== currentActiveMesh)
       .forEach(({ mesh }) => {

@@ -21,7 +21,7 @@ export const MAX_ANIMATION = 8;
  * @param resources リソース管理オブジェクト
  * @return 生成結果
  */
-export function genesisBraverSPTOStand(
+export function genesisBraverSPToStand(
   resources: Resources
 ): ArmdozerAnimation {
   const texture =
@@ -44,7 +44,7 @@ export function genesisBraverSPTOStand(
  * @param resources リソース管理オブジェクト
  * @return 生成結果
  */
-export function genesisBraverActiveSPTOStand(
+export function genesisBraverActiveSPToStand(
   resources: Resources
 ): ArmdozerAnimation {
   const texture =
