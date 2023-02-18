@@ -1,11 +1,10 @@
 import * as THREE from "three";
 
-import { toSilhouette } from "../../../../canvas/silhouette/to-silhouette";
 import type { Resources } from "../../../../resource";
 import { TEXTURE_IDS } from "../../../../resource/texture/ids";
 import type { ArmdozerAnimation } from "../../mesh/armdozer-animation";
 import { createHorizontalAnimation } from "../../mesh/horizontal-animation";
-import { ACTIVE_COLOR_B, ACTIVE_COLOR_G, ACTIVE_COLOR_R } from "./active-color";
+import { createSilhouetteTexture } from "./create-silhouette-texture";
 import { MESH_Y } from "./position";
 
 /** スプライト幅 */
@@ -47,13 +46,7 @@ export function genesisBraverActiveStand(
   const texture =
     resources.textures.find((v) => v.id === TEXTURE_IDS.GENESIS_BRAVER_STAND)
       ?.texture ?? new THREE.Texture();
-  const canvas = toSilhouette(
-    texture.image,
-    ACTIVE_COLOR_R,
-    ACTIVE_COLOR_G,
-    ACTIVE_COLOR_B
-  );
-  const silhouetteTexture = new THREE.Texture(canvas);
+  const silhouetteTexture = createSilhouetteTexture(texture);
   const mesh = createHorizontalAnimation({
     texture: silhouetteTexture,
     maxAnimation: MAX_ANIMATION,

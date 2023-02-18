@@ -1,6 +1,6 @@
 import { Animate } from "../../../../animation/animate";
 import { tween } from "../../../../animation/tween";
-import {GenesisBraverModel} from "../model/genesis-braver-model";
+import { GenesisBraverModel } from "../model/genesis-braver-model";
 
 /**
  * アクティブ状態を終了する

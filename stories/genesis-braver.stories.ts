@@ -47,7 +47,7 @@ export const playerStand = () =>
 export const playerActiveStand = () =>
   story(PlayerGenesisBraver, (sprite) => {
     sprite.startActive().play();
-  })
+  });
 
 /** 敵 立ち */
 export const enemyStand = () =>
@@ -66,13 +66,14 @@ export const enemyActiveStand = () =>
  * @param sprite スプライト
  */
 const straightPunch = (sprite: GenesisBraver) => {
-  return delay(1000)
+  delay(1000)
     .chain(sprite.charge())
     .chain(delay(1000))
     .chain(sprite.straightPunch())
     .chain(delay(1000))
     .chain(sprite.spToStand())
-    .chain(delay(1000));
+    .chain(delay(1000))
+    .loop();
 };
 
 export const playerStraightPunch = () =>
