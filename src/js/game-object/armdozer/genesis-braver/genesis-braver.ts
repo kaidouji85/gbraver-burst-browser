@@ -129,6 +129,7 @@ export class GenesisBraver
 
   /**
    * アップデート時の処理
+   * @param action アクション
    */
   #onUpdate(action: Update): void {
     this.#activeFlashTween.update(action.time);
