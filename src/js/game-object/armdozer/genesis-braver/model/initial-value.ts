@@ -21,7 +21,7 @@ export function createInitialValue(): GenesisBraverModel {
       z: ARMDOZER_SPRITE_STANDARD_Z,
     },
     active: {
-      opacity: 1,
+      opacity: 0,
       strength: 0,
     },
   };

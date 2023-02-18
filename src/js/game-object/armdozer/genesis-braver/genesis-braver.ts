@@ -12,9 +12,11 @@ import type { ArmDozerSprite } from "../armdozer-sprite";
 import { EmptyArmDozerSprite } from "../empty-armdozer-sprite";
 import { activeFlash } from "./animation/active-flash";
 import { charge } from "./animation/charge";
+import { endActive } from "./animation/end-active";
 import { knockBack } from "./animation/knock-back";
 import { knockBackToStand } from "./animation/knock-back-to-stand";
 import { spToStand } from "./animation/sp-to-stand";
+import { startActive } from "./animation/start-active";
 import { straightPunch } from "./animation/straight-punch";
 import type { GenesisBraverModel } from "./model/genesis-braver-model";
 import { createInitialValue } from "./model/initial-value";
@@ -113,6 +115,16 @@ export class GenesisBraver
   /** @override */
   getObject3D(): THREE.Object3D {
     return this.#view.getObject3D();
+  }
+
+  /** @override */
+  startActive(): Animate {
+    return startActive(this.#model);
+  }
+
+  /** @override */
+  endActive(): Animate {
+    return endActive(this.#model);
   }
 
   /**
