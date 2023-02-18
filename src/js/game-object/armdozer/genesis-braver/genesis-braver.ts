@@ -9,6 +9,7 @@ import type { ArmDozerSprite } from "../armdozer-sprite";
 import { EmptyArmDozerSprite } from "../empty-armdozer-sprite";
 import { charge } from "./animation/charge";
 import { knockBack } from "./animation/knock-back";
+import { knockBackToStand } from "./animation/knock-back-to-stand";
 import { spToStand } from "./animation/sp-to-stand";
 import { straightPunch } from "./animation/straight-punch";
 import type { GenesisBraverModel } from "./model/genesis-braver-model";
@@ -95,6 +96,11 @@ export class GenesisBraver
   /** @override */
   knockBack(): Animate {
     return knockBack(this.#model);
+  }
+
+  /** @override */
+  knockBackToStand(): Animate {
+    return knockBackToStand(this.#model, this.#sounds);
   }
 
   /** @override */
