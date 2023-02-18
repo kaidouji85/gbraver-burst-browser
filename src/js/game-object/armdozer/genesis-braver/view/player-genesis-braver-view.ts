@@ -27,6 +27,9 @@ export class PlayerGenesisBraverView implements GenesisBraverView {
     this.#meshes.forEach(({ mesh }) => {
       this.#group.add(mesh.getObject3D());
     });
+    this.#activeMeshes.forEach(({ mesh }) => {
+      this.#group.add(mesh.getObject3D());
+    });
   }
 
   /** @override */
@@ -61,7 +64,9 @@ export class PlayerGenesisBraverView implements GenesisBraverView {
       (v) => v.type === model.animation.type
     );
     if (currentActiveMesh) {
-      currentActiveMesh.mesh.opacity(1);
+      const activeOpacity =
+        (0.25 + model.active.strength * 0.07) * model.active.opacity;
+      currentActiveMesh.mesh.opacity(activeOpacity);
       currentActiveMesh.mesh.animate(model.animation.frame);
     }
 
