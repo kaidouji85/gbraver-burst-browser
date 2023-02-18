@@ -37,26 +37,15 @@ const story = (
   return stub.domElement();
 };
 
-export const playerStand = (): HTMLElement => {
-  const stub = new TDGameObjectStub(({ resources, gameObjectAction }) => {
-    const sprite = PlayerGenesisBraver(resources, gameObjectAction);
-    return {
-      objects: [sprite.getObject3D()],
-    };
+export const playerStand = () =>
+  story(PlayerGenesisBraver, () => {
+    // NOP
   });
-  stub.start();
-  return stub.domElement();
-};
-export const enemyStand = (): HTMLElement => {
-  const stub = new TDGameObjectStub(({ resources, gameObjectAction }) => {
-    const sprite = EnemyGenesisBraver(resources, gameObjectAction);
-    return {
-      objects: [sprite.getObject3D()],
-    };
+
+export const enemyStand = () =>
+  story(EnemyGenesisBraver, () => {
+    // NOP
   });
-  stub.start();
-  return stub.domElement();
-};
 
 const straightPunch = (sprite: GenesisBraver) => {
   return delay(1000)
@@ -68,28 +57,10 @@ const straightPunch = (sprite: GenesisBraver) => {
     .chain(delay(1000));
 };
 
-export const playerStraightPunch = (): HTMLElement => {
-  const stub = new TDGameObjectStub(({ resources, gameObjectAction }) => {
-    const sprite = PlayerGenesisBraver(resources, gameObjectAction);
-    straightPunch(sprite).loop();
-    return {
-      objects: [sprite.getObject3D()],
-    };
-  });
-  stub.start();
-  return stub.domElement();
-};
-export const enemyStraightPunch = (): HTMLElement => {
-  const stub = new TDGameObjectStub(({ resources, gameObjectAction }) => {
-    const sprite = EnemyGenesisBraver(resources, gameObjectAction);
-    straightPunch(sprite).loop();
-    return {
-      objects: [sprite.getObject3D()],
-    };
-  });
-  stub.start();
-  return stub.domElement();
-};
+export const playerStraightPunch = () =>
+  story(PlayerGenesisBraver, straightPunch);
+export const enemyStraightPunch = () =>
+  story(EnemyGenesisBraver, straightPunch);
 
 const knockBack = (sprite: GenesisBraver) => {
   delay(1000)
