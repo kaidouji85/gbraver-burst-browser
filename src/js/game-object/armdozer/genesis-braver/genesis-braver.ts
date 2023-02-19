@@ -113,6 +113,18 @@ export class GenesisBraver
   }
 
   /** @override */
+  guard(): Animate {
+    // TODO ガードアニメーションを作る
+    return knockBack(this.#model);
+  }
+
+  /** @override */
+  guardToStand(): Animate {
+    // TODO ガードアニメーションを作る
+    return knockBackToStand(this.#model, this.#sounds);
+  }
+
+  /** @override */
   getObject3D(): THREE.Object3D {
     return this.#view.getObject3D();
   }
