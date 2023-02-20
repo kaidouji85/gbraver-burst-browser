@@ -226,10 +226,7 @@ export const enemyActiveAvoid = () =>
  * @param sprite スプライト
  */
 const down = (sprite: ShinBraver) => {
-  delay(1000)
-    .chain(sprite.down())
-    .chain(delay(1000))
-    .loop()
+  delay(1000).chain(sprite.down()).chain(delay(1000)).loop();
 };
 
 /** プレイヤー ダウン */
@@ -237,4 +234,3 @@ export const playerDown = () => armdozerSpriteStub(PlayerShinBraver, down);
 
 /** 敵 ダウン */
 export const enemyDown = () => armdozerSpriteStub(EnemyShinBraver, down);
-
