@@ -6,6 +6,7 @@ import { TDGameObjectStub } from "./td-game-object-stub";
 
 /**
  * アームドーザスプライト ジェネレータ
+ * @template X スプライトのデータ型
  * @param resources リソース管理オブジェクト
  * @param gameObjectAction ゲームオブジェクトアクション
  * @return アームドーザスプライト
@@ -17,6 +18,7 @@ type SpriteGenerator<X extends ArmDozerSprite> = (
 
 /**
  * アームドーザスプライト スタブ
+ * @template X スプライトのデータ型
  * @param generator スプライトジェネレータ
  * @param fn スプライト操作関数
  * @return ルートHTML要素
