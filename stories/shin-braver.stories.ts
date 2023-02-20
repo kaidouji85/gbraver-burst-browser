@@ -3,9 +3,9 @@ import {
   EnemyShinBraver,
   PlayerShinBraver,
 } from "../src/js/game-object/armdozer/shin-braver";
+import { ShinBraver } from "../src/js/game-object/armdozer/shin-braver/shin-braver";
 import { armdozerSpriteStub } from "./stub/armdozer-sprite-stub";
 import { TDGameObjectStub } from "./stub/td-game-object-stub";
-import {ShinBraver} from "../src/js/game-object/armdozer/shin-braver/shin-braver";
 
 export default {
   title: "shin-braver",
@@ -50,10 +50,12 @@ const straightPunch = (sprite: ShinBraver) => {
 };
 
 /** プレイヤー ストレートパンチ */
-export const playerStraightPunch = () => armdozerSpriteStub(PlayerShinBraver, straightPunch);
+export const playerStraightPunch = () =>
+  armdozerSpriteStub(PlayerShinBraver, straightPunch);
 
 /** 敵 ストレートパンチ */
-export const enemyStraightPunch = () => armdozerSpriteStub(EnemyShinBraver, straightPunch);
+export const enemyStraightPunch = () =>
+  armdozerSpriteStub(EnemyShinBraver, straightPunch);
 
 /**
  * ガッツ
