@@ -186,23 +186,40 @@ export const enemyGuard = () => armdozerSpriteStub(EnemyShinBraver, guard);
 export const enemyActiveGuard = () =>
   armdozerSpriteStub(EnemyShinBraver, activeGuard);
 
-export const activeAvoid = (): HTMLElement => {
-  const stub = new TDGameObjectStub(({ resources, gameObjectAction }) => {
-    const sprite = PlayerShinBraver(resources, gameObjectAction);
-    sprite.startActive().play();
-    const animation = sprite
-      .avoid()
-      .chain(delay(2000))
-      .chain(sprite.avoidToStand())
-      .chain(delay(2000));
-    animation.loop();
-    return {
-      objects: [sprite.getObject3D()],
-    };
-  });
-  stub.start();
-  return stub.domElement();
+/**
+ * 回避
+ * @param sprite スプライト
+ */
+const avoid = (sprite: ShinBraver) => {
+  sprite
+    .avoid()
+    .chain(delay(2000))
+    .chain(sprite.avoidToStand())
+    .chain(delay(2000))
+    .loop();
 };
+
+/**
+ * アクティブ 回避
+ * @param sprite スプライト
+ */
+const activeAvoid = (sprite: ShinBraver) => {
+  avoid(sprite);
+  sprite.startActive().play();
+};
+
+/** プレイヤー 回避 */
+export const playerAvoid = () => armdozerSpriteStub(PlayerShinBraver, avoid);
+
+/** プレイヤー アクティブ 回避 */
+export const playerActiveAvoid = () => armdozerSpriteStub(PlayerShinBraver, activeAvoid);
+
+/** 敵 回避 */
+export const enemyAvoid = () => armdozerSpriteStub(EnemyShinBraver, avoid);
+
+/** 敵 アクティブ 回避 */
+export const enemyActiveAvoid = () => armdozerSpriteStub(EnemyShinBraver, activeAvoid);
+
 export const down = (): HTMLElement => {
   const stub = new TDGameObjectStub(({ resources, gameObjectAction }) => {
     const sprite = PlayerShinBraver(resources, gameObjectAction);
