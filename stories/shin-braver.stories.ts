@@ -102,13 +102,15 @@ const activeBurst = (sprite: ShinBraver) => {
 export const playerBurst = () => armdozerSpriteStub(PlayerShinBraver, burst);
 
 /** プレイヤー アクティブ バースト */
-export const playerActiveBurst = () => armdozerSpriteStub(PlayerShinBraver, activeBurst);
+export const playerActiveBurst = () =>
+  armdozerSpriteStub(PlayerShinBraver, activeBurst);
 
 /** 敵 バースト */
 export const enemyBurst = () => armdozerSpriteStub(EnemyShinBraver, burst);
 
 /** 敵 アクティブ バースト */
-export const enemyActiveBurst = () => armdozerSpriteStub(EnemyShinBraver, activeBurst);
+export const enemyActiveBurst = () =>
+  armdozerSpriteStub(EnemyShinBraver, activeBurst);
 
 export const activeKnockBack = (): HTMLElement => {
   const stub = new TDGameObjectStub(({ resources, gameObjectAction }) => {
