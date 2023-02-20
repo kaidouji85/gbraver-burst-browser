@@ -112,23 +112,40 @@ export const enemyBurst = () => armdozerSpriteStub(EnemyShinBraver, burst);
 export const enemyActiveBurst = () =>
   armdozerSpriteStub(EnemyShinBraver, activeBurst);
 
-export const activeKnockBack = (): HTMLElement => {
-  const stub = new TDGameObjectStub(({ resources, gameObjectAction }) => {
-    const sprite = PlayerShinBraver(resources, gameObjectAction);
-    sprite.startActive().play();
-    const animation = sprite
-      .knockBack()
-      .chain(delay(2000))
-      .chain(sprite.knockBackToStand())
-      .chain(delay(2000));
-    animation.loop();
-    return {
-      objects: [sprite.getObject3D()],
-    };
-  });
-  stub.start();
-  return stub.domElement();
+/**
+ * ノックバック
+ * @param sprite スプライト
+ */
+const knockBack = (sprite: ShinBraver) => {
+  sprite
+    .knockBack()
+    .chain(delay(2000))
+    .chain(sprite.knockBackToStand())
+    .chain(delay(2000))
+    .loop();
 };
+
+/**
+ * アクティブ ノックバック
+ * @param sprite スプライト
+ */
+const activeKnockBack = (sprite: ShinBraver) => {
+  knockBack(sprite);
+  sprite.startActive().play();
+};
+
+/** プレイヤー ノックバック */
+export const playerKnockBack = () => armdozerSpriteStub(PlayerShinBraver, knockBack);
+
+/** プレイヤー アクティブ ノックバック */
+export const playerActiveKnockBack = () => armdozerSpriteStub(PlayerShinBraver, activeKnockBack);
+
+/** 敵 ノックバック */
+export const enemyKnockBack = () => armdozerSpriteStub(EnemyShinBraver, knockBack);
+
+/** 敵 アクティブ ノックバック */
+export const enemyActiveKnockBack = () => armdozerSpriteStub(EnemyShinBraver, activeKnockBack);
+
 export const activeGuard = (): HTMLElement => {
   const stub = new TDGameObjectStub(({ resources, gameObjectAction }) => {
     const sprite = PlayerShinBraver(resources, gameObjectAction);
