@@ -1,5 +1,8 @@
 import { delay } from "../src/js/animation/delay";
-import { EnemyShinBraver, PlayerShinBraver } from "../src/js/game-object/armdozer/shin-braver";
+import {
+  EnemyShinBraver,
+  PlayerShinBraver,
+} from "../src/js/game-object/armdozer/shin-braver";
 import { armdozerSpriteStub } from "./stub/armdozer-sprite-stub";
 import { TDGameObjectStub } from "./stub/td-game-object-stub";
 
@@ -8,24 +11,28 @@ export default {
 };
 
 /** プレイヤー 立ち */
-export const playerStand = () => armdozerSpriteStub(PlayerShinBraver, () => {
-  // NOP
-});
+export const playerStand = () =>
+  armdozerSpriteStub(PlayerShinBraver, () => {
+    // NOP
+  });
 
 /** プレイヤー アクティブ 立ち */
-export const playerActiveStand = () => armdozerSpriteStub(PlayerShinBraver, (sprite) => {
-  sprite.startActive().play();
-});
+export const playerActiveStand = () =>
+  armdozerSpriteStub(PlayerShinBraver, (sprite) => {
+    sprite.startActive().play();
+  });
 
 /** 敵 立ち */
-export const enemyStand = () => armdozerSpriteStub(EnemyShinBraver, () => {
-  // NOP
-});
+export const enemyStand = () =>
+  armdozerSpriteStub(EnemyShinBraver, () => {
+    // NOP
+  });
 
 /** 敵 アクティブ 立ち */
-export const enemyActiveStand = () => armdozerSpriteStub(EnemyShinBraver, (sprite) => {
-  sprite.startActive().play();
-});
+export const enemyActiveStand = () =>
+  armdozerSpriteStub(EnemyShinBraver, (sprite) => {
+    sprite.startActive().play();
+  });
 
 export const straightPunch = (): HTMLElement => {
   const stub = new TDGameObjectStub(({ resources, gameObjectAction }) => {
