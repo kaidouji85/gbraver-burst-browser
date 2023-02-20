@@ -55,22 +55,25 @@ export const playerStraightPunch = () => armdozerSpriteStub(PlayerShinBraver, st
 /** 敵 ストレートパンチ */
 export const enemyStraightPunch = () => armdozerSpriteStub(EnemyShinBraver, straightPunch);
 
-export const guts = (): HTMLElement => {
-  const stub = new TDGameObjectStub(({ resources, gameObjectAction }) => {
-    const sprite = PlayerShinBraver(resources, gameObjectAction);
-    const animation = sprite
-      .guts()
-      .chain(delay(2000))
-      .chain(sprite.gutsToStand())
-      .chain(delay(2000));
-    animation.loop();
-    return {
-      objects: [sprite.getObject3D()],
-    };
-  });
-  stub.start();
-  return stub.domElement();
+/**
+ * ガッツ
+ * @param sprite スプライト
+ */
+const guts = (sprite: ShinBraver) => {
+  sprite
+    .guts()
+    .chain(delay(2000))
+    .chain(sprite.gutsToStand())
+    .chain(delay(2000))
+    .loop();
 };
+
+/** プレイヤー ガッツ */
+export const playerGuts = () => armdozerSpriteStub(PlayerShinBraver, guts);
+
+/** 敵 ガッツ */
+export const enemyGuts = () => armdozerSpriteStub(EnemyShinBraver, guts);
+
 export const activeBurst = (): HTMLElement => {
   const stub = new TDGameObjectStub(({ resources, gameObjectAction }) => {
     const sprite = PlayerShinBraver(resources, gameObjectAction);
