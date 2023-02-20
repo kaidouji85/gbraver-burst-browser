@@ -212,13 +212,15 @@ const activeAvoid = (sprite: ShinBraver) => {
 export const playerAvoid = () => armdozerSpriteStub(PlayerShinBraver, avoid);
 
 /** プレイヤー アクティブ 回避 */
-export const playerActiveAvoid = () => armdozerSpriteStub(PlayerShinBraver, activeAvoid);
+export const playerActiveAvoid = () =>
+  armdozerSpriteStub(PlayerShinBraver, activeAvoid);
 
 /** 敵 回避 */
 export const enemyAvoid = () => armdozerSpriteStub(EnemyShinBraver, avoid);
 
 /** 敵 アクティブ 回避 */
-export const enemyActiveAvoid = () => armdozerSpriteStub(EnemyShinBraver, activeAvoid);
+export const enemyActiveAvoid = () =>
+  armdozerSpriteStub(EnemyShinBraver, activeAvoid);
 
 export const down = (): HTMLElement => {
   const stub = new TDGameObjectStub(({ resources, gameObjectAction }) => {
