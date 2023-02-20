@@ -5,7 +5,6 @@ import {
 } from "../src/js/game-object/armdozer/shin-braver";
 import { ShinBraver } from "../src/js/game-object/armdozer/shin-braver/shin-braver";
 import { armdozerSpriteStub } from "./stub/armdozer-sprite-stub";
-import { TDGameObjectStub } from "./stub/td-game-object-stub";
 
 export default {
   title: "shin-braver",
@@ -222,14 +221,20 @@ export const enemyAvoid = () => armdozerSpriteStub(EnemyShinBraver, avoid);
 export const enemyActiveAvoid = () =>
   armdozerSpriteStub(EnemyShinBraver, activeAvoid);
 
-export const down = (): HTMLElement => {
-  const stub = new TDGameObjectStub(({ resources, gameObjectAction }) => {
-    const sprite = PlayerShinBraver(resources, gameObjectAction);
-    delay(1000).chain(sprite.down()).chain(delay(1000)).loop();
-    return {
-      objects: [sprite.getObject3D()],
-    };
-  });
-  stub.start();
-  return stub.domElement();
+/**
+ * ダウン
+ * @param sprite スプライト
+ */
+const down = (sprite: ShinBraver) => {
+  delay(1000)
+    .chain(sprite.down())
+    .chain(delay(1000))
+    .loop()
 };
+
+/** プレイヤー ダウン */
+export const playerDown = () => armdozerSpriteStub(PlayerShinBraver, down);
+
+/** 敵 ダウン */
+export const enemyDown = () => armdozerSpriteStub(EnemyShinBraver, down);
+
