@@ -170,20 +170,21 @@ const guard = (sprite: ShinBraver) => {
 const activeGuard = (sprite: ShinBraver) => {
   guard(sprite);
   sprite.startActive().play();
-}
+};
 
 /** プレイヤー ガード */
 export const playerGuard = () => armdozerSpriteStub(PlayerShinBraver, guard);
 
 /** プレイヤー アクティブ ガード */
-export const playerActiveGuard = () => armdozerSpriteStub(PlayerShinBraver, activeGuard);
+export const playerActiveGuard = () =>
+  armdozerSpriteStub(PlayerShinBraver, activeGuard);
 
 /** 敵 ガード */
 export const enemyGuard = () => armdozerSpriteStub(EnemyShinBraver, guard);
 
 /** 敵 アクティブ ガード */
-export const enemyActiveGuard = () => armdozerSpriteStub(EnemyShinBraver, activeGuard);
-
+export const enemyActiveGuard = () =>
+  armdozerSpriteStub(EnemyShinBraver, activeGuard);
 
 export const activeAvoid = (): HTMLElement => {
   const stub = new TDGameObjectStub(({ resources, gameObjectAction }) => {
