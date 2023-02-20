@@ -150,23 +150,41 @@ export const enemyKnockBack = () =>
 export const enemyActiveKnockBack = () =>
   armdozerSpriteStub(EnemyShinBraver, activeKnockBack);
 
-export const activeGuard = (): HTMLElement => {
-  const stub = new TDGameObjectStub(({ resources, gameObjectAction }) => {
-    const sprite = PlayerShinBraver(resources, gameObjectAction);
-    sprite.startActive().play();
-    const animation = sprite
-      .guard()
-      .chain(delay(2000))
-      .chain(sprite.guardToStand())
-      .chain(delay(2000));
-    animation.loop();
-    return {
-      objects: [sprite.getObject3D()],
-    };
-  });
-  stub.start();
-  return stub.domElement();
+/**
+ * ガード
+ * @param sprite スプライト
+ */
+const guard = (sprite: ShinBraver) => {
+  sprite
+    .guard()
+    .chain(delay(2000))
+    .chain(sprite.guardToStand())
+    .chain(delay(2000))
+    .loop();
 };
+
+/**
+ * アクティブ ガード
+ * @param sprite スプライト
+ */
+const activeGuard = (sprite: ShinBraver) => {
+  guard(sprite);
+  sprite.startActive().play();
+}
+
+/** プレイヤー ガード */
+export const playerGuard = () => armdozerSpriteStub(PlayerShinBraver, guard);
+
+/** プレイヤー アクティブ ガード */
+export const playerActiveGuard = () => armdozerSpriteStub(PlayerShinBraver, activeGuard);
+
+/** 敵 ガード */
+export const enemyGuard = () => armdozerSpriteStub(EnemyShinBraver, guard);
+
+/** 敵 アクティブ ガード */
+export const enemyActiveGuard = () => armdozerSpriteStub(EnemyShinBraver, activeGuard);
+
+
 export const activeAvoid = (): HTMLElement => {
   const stub = new TDGameObjectStub(({ resources, gameObjectAction }) => {
     const sprite = PlayerShinBraver(resources, gameObjectAction);
