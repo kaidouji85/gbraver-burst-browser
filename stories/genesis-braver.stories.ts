@@ -119,3 +119,22 @@ export const enemyKnockBack = () => story(EnemyGenesisBraver, knockBack);
 /** 敵 アクティブ ノックバック */
 export const enemyActiveKnockBack = () =>
   story(EnemyGenesisBraver, activeKnockBack);
+
+/**
+ * 回避
+ * @param sprite スプライト
+ */
+const avoid = (sprite: GenesisBraver) => {
+  delay(1000)
+    .chain(sprite.avoid())
+    .chain(delay(1000))
+    .chain(sprite.avoidToStand())
+    .chain(delay(1000))
+    .loop();
+};
+
+/** プレイヤー 回避 */
+export const playerAvoid = () => story(PlayerGenesisBraver, avoid);
+
+/** 敵 回避 */
+export const enemyAvoid = () => story(EnemyGenesisBraver, avoid);

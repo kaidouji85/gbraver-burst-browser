@@ -11,8 +11,10 @@ import type { GameObjectAction } from "../../action/game-object-action";
 import type { ArmDozerSprite } from "../armdozer-sprite";
 import { EmptyArmDozerSprite } from "../empty-armdozer-sprite";
 import { activeFlash } from "./animation/active-flash";
+import { backStep } from "./animation/back-step";
 import { charge } from "./animation/charge";
 import { endActive } from "./animation/end-active";
+import { frontStep } from "./animation/front-step";
 import { knockBack } from "./animation/knock-back";
 import { knockBackToStand } from "./animation/knock-back-to-stand";
 import { spToStand } from "./animation/sp-to-stand";
@@ -122,6 +124,16 @@ export class GenesisBraver
   guardToStand(): Animate {
     // TODO ガードアニメーションを作る
     return knockBackToStand(this.#model, this.#sounds);
+  }
+
+  /** @override */
+  avoid(): Animate {
+    return backStep(this.#model, this.#sounds);
+  }
+
+  /** @override */
+  avoidToStand(): Animate {
+    return frontStep(this.#model, this.#sounds);
   }
 
   /** @override */
