@@ -5,6 +5,7 @@ import {
 } from "../src/js/game-object/armdozer/shin-braver";
 import { armdozerSpriteStub } from "./stub/armdozer-sprite-stub";
 import { TDGameObjectStub } from "./stub/td-game-object-stub";
+import {ShinBraver} from "../src/js/game-object/armdozer/shin-braver/shin-braver";
 
 export default {
   title: "shin-braver",
@@ -34,23 +35,26 @@ export const enemyActiveStand = () =>
     sprite.startActive().play();
   });
 
-export const straightPunch = (): HTMLElement => {
-  const stub = new TDGameObjectStub(({ resources, gameObjectAction }) => {
-    const sprite = PlayerShinBraver(resources, gameObjectAction);
-    delay(1000)
-      .chain(sprite.charge())
-      .chain(delay(1000))
-      .chain(sprite.straightPunch())
-      .chain(delay(1000))
-      .chain(sprite.punchToStand())
-      .loop();
-    return {
-      objects: [sprite.getObject3D()],
-    };
-  });
-  stub.start();
-  return stub.domElement();
+/**
+ * ストレートパンチ
+ * @param sprite スプライト
+ */
+const straightPunch = (sprite: ShinBraver) => {
+  delay(1000)
+    .chain(sprite.charge())
+    .chain(delay(1000))
+    .chain(sprite.straightPunch())
+    .chain(delay(1000))
+    .chain(sprite.punchToStand())
+    .loop();
 };
+
+/** プレイヤー ストレートパンチ */
+export const playerStraightPunch = () => armdozerSpriteStub(PlayerShinBraver, straightPunch);
+
+/** 敵 ストレートパンチ */
+export const enemyStraightPunch = () => armdozerSpriteStub(EnemyShinBraver, straightPunch);
+
 export const guts = (): HTMLElement => {
   const stub = new TDGameObjectStub(({ resources, gameObjectAction }) => {
     const sprite = PlayerShinBraver(resources, gameObjectAction);
