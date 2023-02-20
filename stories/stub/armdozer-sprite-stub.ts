@@ -1,8 +1,8 @@
-import {Resources} from "../../src/js/resource";
-import {Stream} from "../../src/js/stream/stream";
-import {GameObjectAction} from "../../src/js/game-object/action/game-object-action";
-import {ArmDozerSprite} from "../../src/js/game-object/armdozer/armdozer-sprite";
-import {TDGameObjectStub} from "./td-game-object-stub";
+import { GameObjectAction } from "../../src/js/game-object/action/game-object-action";
+import { ArmDozerSprite } from "../../src/js/game-object/armdozer/armdozer-sprite";
+import { Resources } from "../../src/js/resource";
+import { Stream } from "../../src/js/stream/stream";
+import { TDGameObjectStub } from "./td-game-object-stub";
 
 /**
  * アームドーザスプライト ジェネレータ
@@ -10,7 +10,10 @@ import {TDGameObjectStub} from "./td-game-object-stub";
  * @param gameObjectAction ゲームオブジェクトアクション
  * @return アームドーザスプライト
  */
-type SpriteGenerator<X extends ArmDozerSprite> = (resources: Resources, gameObjectAction: Stream<GameObjectAction>) => X;
+type SpriteGenerator<X extends ArmDozerSprite> = (
+  resources: Resources,
+  gameObjectAction: Stream<GameObjectAction>
+) => X;
 
 /**
  * アームドーザスプライト スタブ
@@ -18,7 +21,7 @@ type SpriteGenerator<X extends ArmDozerSprite> = (resources: Resources, gameObje
  * @param fn スプライト操作関数
  * @return ルートHTML要素
  */
-const armdozerSpriteStub = <X extends ArmDozerSprite>(
+export const armdozerSpriteStub = <X extends ArmDozerSprite>(
   generator: SpriteGenerator<X>,
   fn: (sprite: X) => void
 ): HTMLElement => {
