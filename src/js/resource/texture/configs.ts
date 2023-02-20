@@ -391,4 +391,8 @@ export const DEVELOPING_TEXTURE_CONFIGS: TextureConfig[] = [
     id: TEXTURE_IDS.GENESIS_BRAVER_KNOCK_BACK,
     path: "armdozer/genesis-braver/knock-back.webp",
   },
+  {
+    id: TEXTURE_IDS.GENESIS_BRAVER_BACK_STEP,
+    path: "armdozer/genesis-braver/back-step.webp",
+  }
 ];
