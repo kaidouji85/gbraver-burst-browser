@@ -76,23 +76,40 @@ export const playerGuts = () => armdozerSpriteStub(PlayerShinBraver, guts);
 /** 敵 ガッツ */
 export const enemyGuts = () => armdozerSpriteStub(EnemyShinBraver, guts);
 
-export const activeBurst = (): HTMLElement => {
-  const stub = new TDGameObjectStub(({ resources, gameObjectAction }) => {
-    const sprite = PlayerShinBraver(resources, gameObjectAction);
-    sprite.startActive().play();
-    const animation = sprite
-      .burst()
-      .chain(delay(2000))
-      .chain(sprite.burstToStand())
-      .chain(delay(2000));
-    animation.loop();
-    return {
-      objects: [sprite.getObject3D()],
-    };
-  });
-  stub.start();
-  return stub.domElement();
+/**
+ * バースト
+ * @param sprite スプライト
+ */
+const burst = (sprite: ShinBraver) => {
+  sprite
+    .burst()
+    .chain(delay(2000))
+    .chain(sprite.burstToStand())
+    .chain(delay(2000))
+    .loop();
 };
+
+/**
+ * アクティブ バースト
+ * @param sprite スプライト
+ */
+const activeBurst = (sprite: ShinBraver) => {
+  burst(sprite);
+  sprite.startActive().play();
+};
+
+/** プレイヤー バースト */
+export const playerBurst = () => armdozerSpriteStub(PlayerShinBraver, burst);
+
+/** プレイヤー アクティブ バースト */
+export const playerActiveBurst = () => armdozerSpriteStub(PlayerShinBraver, activeBurst);
+
+/** 敵 バースト */
+export const enemyBurst = () => armdozerSpriteStub(EnemyShinBraver, burst);
+
+/** 敵 アクティブ バースト */
+export const enemyActiveBurst = () => armdozerSpriteStub(EnemyShinBraver, activeBurst);
+
 export const activeKnockBack = (): HTMLElement => {
   const stub = new TDGameObjectStub(({ resources, gameObjectAction }) => {
     const sprite = PlayerShinBraver(resources, gameObjectAction);
