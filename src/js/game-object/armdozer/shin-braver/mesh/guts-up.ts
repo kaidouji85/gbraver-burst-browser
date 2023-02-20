@@ -1,18 +1,26 @@
+import * as THREE from "three";
+
 import type { Resources } from "../../../../resource";
 import { TEXTURE_IDS } from "../../../../resource/texture/ids";
 import type { ArmdozerAnimation } from "../../mesh/armdozer-animation";
-import { createHorizontalAnimationFromResources } from "../../mesh/horizontal-animation";
+import { createHorizontalAnimation } from "../../mesh/horizontal-animation";
 import { MESH_Y } from "./position";
 export const MESH_WIDTH = 600;
 export const MESH_HEIGHT = 600;
 export const MAX_ANIMATION = 4;
 
-/** 腕上げガッツ */
+/**
+ * 腕上げガッツ
+ * @param resources リソース管理オブジェクト
+ * @return 生成したメッシュ
+ */
 export function shinBraverGutsUp(resources: Resources): ArmdozerAnimation {
-  const ret = createHorizontalAnimationFromResources({
-    id: TEXTURE_IDS.SHIN_BRAVER_GUTS_UP,
+  const texture =
+    resources.textures.find((v) => v.id === TEXTURE_IDS.SHIN_BRAVER_GUTS_UP)
+      ?.texture ?? new THREE.Texture();
+  const ret = createHorizontalAnimation({
+    texture,
     maxAnimation: MAX_ANIMATION,
-    resources: resources,
     width: MESH_WIDTH,
     height: MESH_HEIGHT,
   });
