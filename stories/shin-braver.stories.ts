@@ -135,16 +135,20 @@ const activeKnockBack = (sprite: ShinBraver) => {
 };
 
 /** プレイヤー ノックバック */
-export const playerKnockBack = () => armdozerSpriteStub(PlayerShinBraver, knockBack);
+export const playerKnockBack = () =>
+  armdozerSpriteStub(PlayerShinBraver, knockBack);
 
 /** プレイヤー アクティブ ノックバック */
-export const playerActiveKnockBack = () => armdozerSpriteStub(PlayerShinBraver, activeKnockBack);
+export const playerActiveKnockBack = () =>
+  armdozerSpriteStub(PlayerShinBraver, activeKnockBack);
 
 /** 敵 ノックバック */
-export const enemyKnockBack = () => armdozerSpriteStub(EnemyShinBraver, knockBack);
+export const enemyKnockBack = () =>
+  armdozerSpriteStub(EnemyShinBraver, knockBack);
 
 /** 敵 アクティブ ノックバック */
-export const enemyActiveKnockBack = () => armdozerSpriteStub(EnemyShinBraver, activeKnockBack);
+export const enemyActiveKnockBack = () =>
+  armdozerSpriteStub(EnemyShinBraver, activeKnockBack);
 
 export const activeGuard = (): HTMLElement => {
   const stub = new TDGameObjectStub(({ resources, gameObjectAction }) => {
