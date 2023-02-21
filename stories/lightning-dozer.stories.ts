@@ -2,7 +2,6 @@ import { delay } from "../src/js/animation/delay";
 import { EnemyLightningDozer, PlayerLightningDozer } from "../src/js/game-object/armdozer/lightning-dozer";
 import { LightningDozer } from "../src/js/game-object/armdozer/lightning-dozer/lightning-dozer";
 import { armdozerSpriteStub } from "./stub/armdozer-sprite-stub";
-import { TDGameObjectStub } from "./stub/td-game-object-stub";
 
 export default {
   title: "lightning-dozer",
@@ -181,14 +180,16 @@ export const enemyGuts = () => armdozerSpriteStub(EnemyLightningDozer, guts);
 /** 敵 アクティブ ガッツ */
 export const enemyActiveGuts = () => armdozerSpriteStub(EnemyLightningDozer, activeGuts);
 
-export const down = (): HTMLElement => {
-  const stub = new TDGameObjectStub(({ resources, gameObjectAction }) => {
-    const sprite = PlayerLightningDozer(resources, gameObjectAction);
-    delay(1000).chain(sprite.down()).chain(delay(1000)).loop();
-    return {
-      objects: [sprite.getObject3D()],
-    };
-  });
-  stub.start();
-  return stub.domElement();
+/**
+ * ダウン
+ * @param sprite スプライト
+ */
+const down = (sprite: LightningDozer) => {
+  delay(1000).chain(sprite.down()).chain(delay(1000)).loop();
 };
+
+/** プレイヤー ダウン */
+export const playerDown = () => armdozerSpriteStub(PlayerLightningDozer, down);
+
+/** 敵 ダウン */
+export const enemyDown = () => armdozerSpriteStub(EnemyLightningDozer, down);
