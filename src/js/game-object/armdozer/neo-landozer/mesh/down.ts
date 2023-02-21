@@ -10,15 +10,15 @@ export const MAX_ANIMATION = 4;
 export const MESH_WIDTH = 600;
 export const MESH_HEIGHT = 600;
 
-/** 
+/**
  * ネオラインドーザ 立ち -> ダウン
  * @param resources リソース管理オブジェクト
  * @return 生成したメッシュ
  */
 export function neoLandozerDown(resources: Resources): ArmdozerAnimation {
   const texture =
-  resources.textures.find((v) => v.id === TEXTURE_IDS.NEO_LANDOZER_DOWN)
-    ?.texture ?? new THREE.Texture();
+    resources.textures.find((v) => v.id === TEXTURE_IDS.NEO_LANDOZER_DOWN)
+      ?.texture ?? new THREE.Texture();
   const ret = createHorizontalAnimation({
     texture,
     maxAnimation: MAX_ANIMATION,

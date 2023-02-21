@@ -17,8 +17,8 @@ export const MESH_HEIGHT = 600;
  */
 export function neoLandozerBackStep(resources: Resources): ArmdozerAnimation {
   const texture =
-  resources.textures.find((v) => v.id === TEXTURE_IDS.NEO_LANDOZER_BACK_STEP)
-    ?.texture ?? new THREE.Texture();
+    resources.textures.find((v) => v.id === TEXTURE_IDS.NEO_LANDOZER_BACK_STEP)
+      ?.texture ?? new THREE.Texture();
   const ret = createHorizontalAnimation({
     texture,
     maxAnimation: MAX_ANIMATION,

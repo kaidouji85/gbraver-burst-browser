@@ -10,7 +10,7 @@ export const MAX_ANIMATION = 4;
 export const MESH_WIDTH = 600;
 export const MESH_HEIGHT = 600;
 
-/** 
+/**
  * ネオラインドーザ アームハンマーチャージ
  * @param resources リソース管理オブジェクト
  * @return 生成したメッシュ
