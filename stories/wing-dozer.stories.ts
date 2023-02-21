@@ -3,10 +3,32 @@ import {
   EnemyWingDozer,
   PlayerWingDozer,
 } from "../src/js/game-object/armdozer/wing-dozer";
+import { armdozerSpriteStub } from "./stub/armdozer-sprite-stub";
 import { TDGameObjectStub } from "./stub/td-game-object-stub";
 export default {
   title: "wing-dozer",
 };
+
+/** プレイヤー 立ち */
+export const playerStand = () => armdozerSpriteStub(PlayerWingDozer, () => {
+  // NOP
+});
+
+/** プレイヤー 立ち */
+export const playerActiveStand = () => armdozerSpriteStub(PlayerWingDozer, (sprite) => {
+  sprite.startActive().play();
+});
+
+/** 敵 立ち */
+export const enemyStand = () => armdozerSpriteStub(EnemyWingDozer, () => {
+  // NOP
+});
+
+/** 敵 アクティブ 立ち */
+export const enemyActiveStand = () => armdozerSpriteStub(EnemyWingDozer, (sprite) => {
+  sprite.startActive().play();
+});
+
 export const enemy = (): HTMLElement => {
   const stub = new TDGameObjectStub(({ resources, gameObjectAction }) => {
     const sprite = EnemyWingDozer(resources, gameObjectAction);
@@ -17,6 +39,7 @@ export const enemy = (): HTMLElement => {
   stub.start();
   return stub.domElement();
 };
+
 export const activeStand = (): HTMLElement => {
   const stub = new TDGameObjectStub(({ resources, gameObjectAction }) => {
     const sprite = PlayerWingDozer(resources, gameObjectAction);
@@ -28,6 +51,7 @@ export const activeStand = (): HTMLElement => {
   stub.start();
   return stub.domElement();
 };
+
 export const upper = (): HTMLElement => {
   const stub = new TDGameObjectStub(({ resources, gameObjectAction }) => {
     const sprite = PlayerWingDozer(resources, gameObjectAction);
@@ -46,6 +70,7 @@ export const upper = (): HTMLElement => {
   stub.start();
   return stub.domElement();
 };
+
 export const activeDash = (): HTMLElement => {
   const stub = new TDGameObjectStub(({ resources, gameObjectAction }) => {
     const sprite = PlayerWingDozer(resources, gameObjectAction);
@@ -63,6 +88,7 @@ export const activeDash = (): HTMLElement => {
   stub.start();
   return stub.domElement();
 };
+
 export const down = (): HTMLElement => {
   const stub = new TDGameObjectStub(({ resources, gameObjectAction }) => {
     const sprite = PlayerWingDozer(resources, gameObjectAction);
@@ -75,6 +101,7 @@ export const down = (): HTMLElement => {
   stub.start();
   return stub.domElement();
 };
+
 export const activeAvoid = (): HTMLElement => {
   const stub = new TDGameObjectStub(({ resources, gameObjectAction }) => {
     const sprite = PlayerWingDozer(resources, gameObjectAction);
@@ -91,6 +118,7 @@ export const activeAvoid = (): HTMLElement => {
   stub.start();
   return stub.domElement();
 };
+
 export const activeGuard = (): HTMLElement => {
   const stub = new TDGameObjectStub(({ resources, gameObjectAction }) => {
     const sprite = PlayerWingDozer(resources, gameObjectAction);
@@ -107,6 +135,7 @@ export const activeGuard = (): HTMLElement => {
   stub.start();
   return stub.domElement();
 };
+
 export const activeKnockBack = (): HTMLElement => {
   const stub = new TDGameObjectStub(({ resources, gameObjectAction }) => {
     const sprite = PlayerWingDozer(resources, gameObjectAction);
