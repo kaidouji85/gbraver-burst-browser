@@ -1,9 +1,32 @@
 import { delay } from "../src/js/animation/delay";
-import { PlayerLightningDozer } from "../src/js/game-object/armdozer/lightning-dozer";
+import { EnemyLightningDozer, PlayerLightningDozer } from "../src/js/game-object/armdozer/lightning-dozer";
+import { armdozerSpriteStub } from "./stub/armdozer-sprite-stub";
 import { TDGameObjectStub } from "./stub/td-game-object-stub";
+
 export default {
   title: "lightning-dozer",
 };
+
+/** プレイヤー 立ち */
+export const playerStand = () => armdozerSpriteStub(PlayerLightningDozer, () => {
+  // NOP
+});
+
+/** プレイヤー アクティブ 立ち */
+export const playerActiveStand = () => armdozerSpriteStub(PlayerLightningDozer, (sprite) => {
+  sprite.startActive().play();
+});
+
+/** 敵 立ち */
+export const enemyStand = () => armdozerSpriteStub(EnemyLightningDozer, () => {
+  // NOP
+});
+
+/** 敵 アクティブ 立ち */
+export const enemyActiveStand = () => armdozerSpriteStub(EnemyLightningDozer, (sprite) => {
+  sprite.startActive().play();
+});
+
 export const activeStand = (): HTMLElement => {
   const stub = new TDGameObjectStub(({ resources, gameObjectAction }) => {
     const sprite = PlayerLightningDozer(resources, gameObjectAction);
