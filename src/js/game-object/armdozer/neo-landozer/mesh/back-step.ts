@@ -1,7 +1,9 @@
+import * as THREE from "three";
+
 import type { Resources } from "../../../../resource";
 import { TEXTURE_IDS } from "../../../../resource/texture/ids";
 import type { ArmdozerAnimation } from "../../mesh/armdozer-animation";
-import { createHorizontalAnimationFromResources } from "../../mesh/horizontal-animation";
+import { createHorizontalAnimation } from "../../mesh/horizontal-animation";
 import { MESH_Y } from "./position";
 export const MAX_ANIMATION = 4;
 export const MESH_WIDTH = 600;
@@ -14,10 +16,12 @@ export const MESH_HEIGHT = 600;
  * @return メッシュ
  */
 export function neoLandozerBackStep(resources: Resources): ArmdozerAnimation {
-  const ret = createHorizontalAnimationFromResources({
-    id: TEXTURE_IDS.NEO_LANDOZER_BACK_STEP,
+  const texture =
+    resources.textures.find((v) => v.id === TEXTURE_IDS.NEO_LANDOZER_BACK_STEP)
+      ?.texture ?? new THREE.Texture();
+  const ret = createHorizontalAnimation({
+    texture,
     maxAnimation: MAX_ANIMATION,
-    resources: resources,
     width: MESH_WIDTH,
     height: MESH_HEIGHT,
   });
