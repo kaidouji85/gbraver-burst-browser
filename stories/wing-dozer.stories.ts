@@ -99,22 +99,38 @@ export const playerDown = () => armdozerSpriteStub(PlayerWingDozer, down);
 /** 敵 ダウン */
 export const enemyDown = () => armdozerSpriteStub(EnemyWingDozer, down);
 
-export const activeAvoid = (): HTMLElement => {
-  const stub = new TDGameObjectStub(({ resources, gameObjectAction }) => {
-    const sprite = PlayerWingDozer(resources, gameObjectAction);
-    sprite.startActive().play();
-    delay(1000)
-      .chain(sprite.avoid())
-      .chain(delay(1000))
-      .chain(sprite.avoidToStand())
-      .loop();
-    return {
-      objects: [sprite.getObject3D()],
-    };
-  });
-  stub.start();
-  return stub.domElement();
+/**
+ * 回避
+ * @param sprite スプライト
+ */
+const avoid = (sprite: WingDozer) => {
+  delay(1000)
+    .chain(sprite.avoid())
+    .chain(delay(1000))
+    .chain(sprite.avoidToStand())
+    .loop();  
 };
+
+/**
+ * アクティブ 回避
+ * @param sprite スプライト
+ */
+const activeAvoid = (sprite: WingDozer) => {
+  avoid(sprite);
+  sprite.startActive().play();
+};
+
+/** プレイヤー 回避 */
+export const playerAvoid = () => armdozerSpriteStub(PlayerWingDozer, avoid);
+
+/** プレイヤー アクティブ 回避 */
+export const playerActiveAvoid = () => armdozerSpriteStub(PlayerWingDozer, activeAvoid);
+
+/** 敵 回避 */
+export const enemyAvoid = () => armdozerSpriteStub(EnemyWingDozer, avoid);
+
+/** 敵 アクティブ 回避 */
+export const enemyActiveAvoid = () => armdozerSpriteStub(EnemyWingDozer, activeAvoid);
 
 export const activeGuard = (): HTMLElement => {
   const stub = new TDGameObjectStub(({ resources, gameObjectAction }) => {
