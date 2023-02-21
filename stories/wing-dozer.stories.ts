@@ -165,19 +165,35 @@ export const enemyGuard = () => armdozerSpriteStub(EnemyWingDozer, guard);
 /** 敵 アクティブ ガード */
 export const enemyActiveGuard = () => armdozerSpriteStub(EnemyWingDozer, activeGuard);
 
-export const activeKnockBack = (): HTMLElement => {
-  const stub = new TDGameObjectStub(({ resources, gameObjectAction }) => {
-    const sprite = PlayerWingDozer(resources, gameObjectAction);
-    sprite.startActive().play();
-    delay(1000)
-      .chain(sprite.knockBack())
-      .chain(delay(1000))
-      .chain(sprite.knockBackToStand())
-      .loop();
-    return {
-      objects: [sprite.getObject3D()],
-    };
-  });
-  stub.start();
-  return stub.domElement();
+/**
+ * ノックバック
+ * @param sprite スプライト
+ */
+const knockBack = (sprite: WingDozer) => {
+  delay(1000)
+    .chain(sprite.knockBack())
+    .chain(delay(1000))
+    .chain(sprite.knockBackToStand())
+    .loop();  
 };
+
+/**
+ * アクティブ ノックバック
+ * @param sprite スプライト
+ */
+const activeKnockBack = (sprite: WingDozer) => {
+  knockBack(sprite);
+  sprite.startActive().play();
+};
+
+/** プレイヤー ノックバック */
+export const playerKnockBack = () => armdozerSpriteStub(PlayerWingDozer, knockBack);
+
+/** プレイヤー アクティブ ノックバック */
+export const playerActiveKnockBack = () => armdozerSpriteStub(PlayerWingDozer, activeKnockBack);
+
+/** 敵 ノックバック */
+export const enemyKnockBack = () => armdozerSpriteStub(EnemyWingDozer, knockBack);
+
+/** 敵 アクティブ ノックバック */
+export const enemyActiveKnockBack = () => armdozerSpriteStub(EnemyWingDozer, activeKnockBack);
