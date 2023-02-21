@@ -8,7 +8,7 @@ import {
   createHorizontalAnimation,
   createHorizontalAnimationFromResources,
 } from "../../mesh/horizontal-animation";
-import { ACTIVE_COLOR_B, ACTIVE_COLOR_G, ACTIVE_COLOR_R } from "./active-color";
+import { ACTIVE_COLOR_B, ACTIVE_COLOR_G, ACTIVE_COLOR_R } from "./create-silhouette-texture";
 import { MESH_Y } from "./position";
 
 /** アニメーション枚数 */
