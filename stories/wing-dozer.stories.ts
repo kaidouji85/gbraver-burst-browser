@@ -51,23 +51,39 @@ export const playerUpper = () => armdozerSpriteStub(PlayerWingDozer, upper);
 /** 敵 アッパー */
 export const enemyUpper = () => armdozerSpriteStub(EnemyWingDozer, upper);
 
-export const activeDash = (): HTMLElement => {
-  const stub = new TDGameObjectStub(({ resources, gameObjectAction }) => {
-    const sprite = PlayerWingDozer(resources, gameObjectAction);
-    sprite.startActive().play();
-    sprite
-      .dash()
-      .chain(delay(2000))
-      .chain(sprite.dashToStand())
-      .chain(delay(2000))
-      .loop();
-    return {
-      objects: [sprite.getObject3D()],
-    };
-  });
-  stub.start();
-  return stub.domElement();
+/**
+ * ダッシュ
+ * @param sprite スプライト 
+ */
+const dash = (sprite: WingDozer) => {
+  sprite
+    .dash()
+    .chain(delay(2000))
+    .chain(sprite.dashToStand())
+    .chain(delay(2000))
+    .loop();
 };
+
+/**
+ * アクティブ ダッシュ
+ * @param sprite スプライト
+ */
+const activeDash = (sprite: WingDozer) => {
+  dash(sprite);
+  sprite.startActive().play();
+};
+
+/** プレイヤー ダッシュ */
+export const playerDash = () => armdozerSpriteStub(PlayerWingDozer, dash);
+
+/** プレイヤー アクティブ ダッシュ */
+export const playerActiveDash = () => armdozerSpriteStub(PlayerWingDozer, activeDash);
+
+/** 敵 ダッシュ */
+export const enemyDash = () => armdozerSpriteStub(EnemyWingDozer, dash);
+
+/** 敵 アクティブ ダッシュ */
+export const enemyActiveDash = () => armdozerSpriteStub(EnemyWingDozer, activeDash);
 
 export const down = (): HTMLElement => {
   const stub = new TDGameObjectStub(({ resources, gameObjectAction }) => {
