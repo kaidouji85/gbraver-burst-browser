@@ -21,10 +21,13 @@ export const MAX_ANIMATION = 4;
  * @param resources リソース管理オブジェクト
  * @return 生成結果
  */
-export function genesisBraverFrontStep(resources: Resources): ArmdozerAnimation {
+export function genesisBraverFrontStep(
+  resources: Resources
+): ArmdozerAnimation {
   const texture =
-    resources.textures.find((v) => v.id === TEXTURE_IDS.GENESIS_BRAVER_FRONT_STEP)
-      ?.texture ?? new THREE.Texture();
+    resources.textures.find(
+      (v) => v.id === TEXTURE_IDS.GENESIS_BRAVER_FRONT_STEP
+    )?.texture ?? new THREE.Texture();
   const mesh = createHorizontalAnimation({
     texture,
     maxAnimation: MAX_ANIMATION,
@@ -44,8 +47,9 @@ export function genesisBraverActiveFrontStep(
   resources: Resources
 ): ArmdozerAnimation {
   const texture =
-    resources.textures.find((v) => v.id === TEXTURE_IDS.GENESIS_BRAVER_FRONT_STEP)
-      ?.texture ?? new THREE.Texture();
+    resources.textures.find(
+      (v) => v.id === TEXTURE_IDS.GENESIS_BRAVER_FRONT_STEP
+    )?.texture ?? new THREE.Texture();
   const silhouetteTexture = createSilhouetteTexture(texture);
   const mesh = createHorizontalAnimation({
     texture: silhouetteTexture,

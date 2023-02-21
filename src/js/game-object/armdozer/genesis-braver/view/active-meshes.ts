@@ -1,8 +1,8 @@
 import { Resources } from "../../../../resource";
+import { genesisBraverActiveFrontStep } from "../mesh/front-step";
 import { genesisBraverActiveKnockBack } from "../mesh/knock-back";
 import { genesisBraverActiveStand } from "../mesh/stand";
 import { AnimationMeshMapping } from "./animation-mesh-mapping";
-import {genesisBraverActiveFrontStep} from "../mesh/front-step";
 
 /**
  * アニメーションアクティブメッシュマッピング生成
@@ -24,6 +24,6 @@ export function createActiveMeshes(
     {
       type: "FRONT_STEP",
       mesh: genesisBraverActiveFrontStep(resources),
-    }
+    },
   ];
 }

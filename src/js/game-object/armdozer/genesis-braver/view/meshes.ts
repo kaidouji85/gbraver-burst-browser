@@ -1,12 +1,12 @@
 import type { Resources } from "../../../../resource";
 import { genesisBraverBackStep } from "../mesh/back-step";
+import { genesisBraverFrontStep } from "../mesh/front-step";
 import { genesisBraverKnockBack } from "../mesh/knock-back";
 import { genesisBraverSPAttack } from "../mesh/sp-attack";
 import { genesisBraverSPCharge } from "../mesh/sp-charge";
 import { genesisBraverSPToStand } from "../mesh/sp-to-stand";
 import { genesisBraverStand } from "../mesh/stand";
 import type { AnimationMeshMapping } from "./animation-mesh-mapping";
-import {genesisBraverFrontStep} from "../mesh/front-step";
 
 /**
  * アニメーションメッシュマッピングを生成
@@ -42,6 +42,6 @@ export function createMeshes(resources: Resources): AnimationMeshMapping[] {
     {
       type: "FRONT_STEP",
       mesh: genesisBraverFrontStep(resources),
-    }
+    },
   ];
 }
