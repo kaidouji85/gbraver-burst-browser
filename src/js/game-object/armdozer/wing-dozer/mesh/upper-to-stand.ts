@@ -16,8 +16,9 @@ export const MAX_ANIMATION = 8;
  */
 export function wingDozerUpperToStand(resources: Resources): ArmdozerAnimation {
   const texture =
-    resources.textures.find((v) => v.id === TEXTURE_IDS.WING_DOZER_UPPER_TO_STAND)
-      ?.texture ?? new THREE.Texture();
+    resources.textures.find(
+      (v) => v.id === TEXTURE_IDS.WING_DOZER_UPPER_TO_STAND
+    )?.texture ?? new THREE.Texture();
   const ret = createHorizontalAnimation({
     texture,
     maxAnimation: MAX_ANIMATION,

@@ -5,30 +5,34 @@ import {
 } from "../src/js/game-object/armdozer/wing-dozer";
 import { WingDozer } from "../src/js/game-object/armdozer/wing-dozer/wing-dozer";
 import { armdozerSpriteStub } from "./stub/armdozer-sprite-stub";
-import { TDGameObjectStub } from "./stub/td-game-object-stub";
+
 export default {
   title: "wing-dozer",
 };
 
 /** プレイヤー 立ち */
-export const playerStand = () => armdozerSpriteStub(PlayerWingDozer, () => {
-  // NOP
-});
+export const playerStand = () =>
+  armdozerSpriteStub(PlayerWingDozer, () => {
+    // NOP
+  });
 
 /** プレイヤー 立ち */
-export const playerActiveStand = () => armdozerSpriteStub(PlayerWingDozer, (sprite) => {
-  sprite.startActive().play();
-});
+export const playerActiveStand = () =>
+  armdozerSpriteStub(PlayerWingDozer, (sprite) => {
+    sprite.startActive().play();
+  });
 
 /** 敵 立ち */
-export const enemyStand = () => armdozerSpriteStub(EnemyWingDozer, () => {
-  // NOP
-});
+export const enemyStand = () =>
+  armdozerSpriteStub(EnemyWingDozer, () => {
+    // NOP
+  });
 
 /** 敵 アクティブ 立ち */
-export const enemyActiveStand = () => armdozerSpriteStub(EnemyWingDozer, (sprite) => {
-  sprite.startActive().play();
-});
+export const enemyActiveStand = () =>
+  armdozerSpriteStub(EnemyWingDozer, (sprite) => {
+    sprite.startActive().play();
+  });
 
 /**
  * アッパー
@@ -53,7 +57,7 @@ export const enemyUpper = () => armdozerSpriteStub(EnemyWingDozer, upper);
 
 /**
  * ダッシュ
- * @param sprite スプライト 
+ * @param sprite スプライト
  */
 const dash = (sprite: WingDozer) => {
   sprite
@@ -77,17 +81,19 @@ const activeDash = (sprite: WingDozer) => {
 export const playerDash = () => armdozerSpriteStub(PlayerWingDozer, dash);
 
 /** プレイヤー アクティブ ダッシュ */
-export const playerActiveDash = () => armdozerSpriteStub(PlayerWingDozer, activeDash);
+export const playerActiveDash = () =>
+  armdozerSpriteStub(PlayerWingDozer, activeDash);
 
 /** 敵 ダッシュ */
 export const enemyDash = () => armdozerSpriteStub(EnemyWingDozer, dash);
 
 /** 敵 アクティブ ダッシュ */
-export const enemyActiveDash = () => armdozerSpriteStub(EnemyWingDozer, activeDash);
+export const enemyActiveDash = () =>
+  armdozerSpriteStub(EnemyWingDozer, activeDash);
 
 /**
  * ダウン
- * @param sprite スプライト 
+ * @param sprite スプライト
  */
 const down = (sprite: WingDozer) => {
   sprite.down().chain(delay(2000)).loop();
@@ -108,7 +114,7 @@ const avoid = (sprite: WingDozer) => {
     .chain(sprite.avoid())
     .chain(delay(1000))
     .chain(sprite.avoidToStand())
-    .loop();  
+    .loop();
 };
 
 /**
@@ -124,13 +130,15 @@ const activeAvoid = (sprite: WingDozer) => {
 export const playerAvoid = () => armdozerSpriteStub(PlayerWingDozer, avoid);
 
 /** プレイヤー アクティブ 回避 */
-export const playerActiveAvoid = () => armdozerSpriteStub(PlayerWingDozer, activeAvoid);
+export const playerActiveAvoid = () =>
+  armdozerSpriteStub(PlayerWingDozer, activeAvoid);
 
 /** 敵 回避 */
 export const enemyAvoid = () => armdozerSpriteStub(EnemyWingDozer, avoid);
 
 /** 敵 アクティブ 回避 */
-export const enemyActiveAvoid = () => armdozerSpriteStub(EnemyWingDozer, activeAvoid);
+export const enemyActiveAvoid = () =>
+  armdozerSpriteStub(EnemyWingDozer, activeAvoid);
 
 /**
  * ガード
@@ -157,13 +165,15 @@ const activeGuard = (sprite: WingDozer) => {
 export const playerGuard = () => armdozerSpriteStub(PlayerWingDozer, guard);
 
 /** プレイヤー アクティブ ガード */
-export const playerActiveGuard = () => armdozerSpriteStub(PlayerWingDozer, activeGuard);
+export const playerActiveGuard = () =>
+  armdozerSpriteStub(PlayerWingDozer, activeGuard);
 
 /** 敵 ガード */
 export const enemyGuard = () => armdozerSpriteStub(EnemyWingDozer, guard);
 
 /** 敵 アクティブ ガード */
-export const enemyActiveGuard = () => armdozerSpriteStub(EnemyWingDozer, activeGuard);
+export const enemyActiveGuard = () =>
+  armdozerSpriteStub(EnemyWingDozer, activeGuard);
 
 /**
  * ノックバック
@@ -174,7 +184,7 @@ const knockBack = (sprite: WingDozer) => {
     .chain(sprite.knockBack())
     .chain(delay(1000))
     .chain(sprite.knockBackToStand())
-    .loop();  
+    .loop();
 };
 
 /**
@@ -187,13 +197,17 @@ const activeKnockBack = (sprite: WingDozer) => {
 };
 
 /** プレイヤー ノックバック */
-export const playerKnockBack = () => armdozerSpriteStub(PlayerWingDozer, knockBack);
+export const playerKnockBack = () =>
+  armdozerSpriteStub(PlayerWingDozer, knockBack);
 
 /** プレイヤー アクティブ ノックバック */
-export const playerActiveKnockBack = () => armdozerSpriteStub(PlayerWingDozer, activeKnockBack);
+export const playerActiveKnockBack = () =>
+  armdozerSpriteStub(PlayerWingDozer, activeKnockBack);
 
 /** 敵 ノックバック */
-export const enemyKnockBack = () => armdozerSpriteStub(EnemyWingDozer, knockBack);
+export const enemyKnockBack = () =>
+  armdozerSpriteStub(EnemyWingDozer, knockBack);
 
 /** 敵 アクティブ ノックバック */
-export const enemyActiveKnockBack = () => armdozerSpriteStub(EnemyWingDozer, activeKnockBack);
+export const enemyActiveKnockBack = () =>
+  armdozerSpriteStub(EnemyWingDozer, activeKnockBack);

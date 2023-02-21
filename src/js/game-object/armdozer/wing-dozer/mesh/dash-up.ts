@@ -4,9 +4,7 @@ import type { Resources } from "../../../../resource";
 import { TEXTURE_IDS } from "../../../../resource/texture/ids";
 import { createSilhouetteTexture } from "../../genesis-braver/mesh/create-silhouette-texture";
 import type { ArmdozerAnimation } from "../../mesh/armdozer-animation";
-import {
-  createHorizontalAnimation,
-} from "../../mesh/horizontal-animation";
+import { createHorizontalAnimation } from "../../mesh/horizontal-animation";
 import { MESH_HEIGHT, MESH_WIDTH } from "./mesh-size";
 import { MESH_Y } from "./position";
 
