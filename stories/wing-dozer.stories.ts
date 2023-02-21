@@ -3,6 +3,7 @@ import {
   EnemyWingDozer,
   PlayerWingDozer,
 } from "../src/js/game-object/armdozer/wing-dozer";
+import { WingDozer } from "../src/js/game-object/armdozer/wing-dozer/wing-dozer";
 import { armdozerSpriteStub } from "./stub/armdozer-sprite-stub";
 import { TDGameObjectStub } from "./stub/td-game-object-stub";
 export default {
@@ -29,47 +30,26 @@ export const enemyActiveStand = () => armdozerSpriteStub(EnemyWingDozer, (sprite
   sprite.startActive().play();
 });
 
-export const enemy = (): HTMLElement => {
-  const stub = new TDGameObjectStub(({ resources, gameObjectAction }) => {
-    const sprite = EnemyWingDozer(resources, gameObjectAction);
-    return {
-      objects: [sprite.getObject3D()],
-    };
-  });
-  stub.start();
-  return stub.domElement();
+/**
+ * アッパー
+ * @param sprite スプライト
+ */
+const upper = (sprite: WingDozer) => {
+  sprite
+    .charge()
+    .chain(delay(500))
+    .chain(sprite.upper())
+    .chain(delay(500))
+    .chain(sprite.upperToStand())
+    .chain(delay(1000))
+    .loop();
 };
 
-export const activeStand = (): HTMLElement => {
-  const stub = new TDGameObjectStub(({ resources, gameObjectAction }) => {
-    const sprite = PlayerWingDozer(resources, gameObjectAction);
-    sprite.startActive().play();
-    return {
-      objects: [sprite.getObject3D()],
-    };
-  });
-  stub.start();
-  return stub.domElement();
-};
+/** プレイヤー アッパー */
+export const playerUpper = () => armdozerSpriteStub(PlayerWingDozer, upper);
 
-export const upper = (): HTMLElement => {
-  const stub = new TDGameObjectStub(({ resources, gameObjectAction }) => {
-    const sprite = PlayerWingDozer(resources, gameObjectAction);
-    const animation = sprite
-      .charge()
-      .chain(delay(500))
-      .chain(sprite.upper())
-      .chain(delay(500))
-      .chain(sprite.upperToStand())
-      .chain(delay(1000));
-    animation.loop();
-    return {
-      objects: [sprite.getObject3D()],
-    };
-  });
-  stub.start();
-  return stub.domElement();
-};
+/** 敵 アッパー */
+export const enemyUpper = () => armdozerSpriteStub(EnemyWingDozer, upper);
 
 export const activeDash = (): HTMLElement => {
   const stub = new TDGameObjectStub(({ resources, gameObjectAction }) => {
