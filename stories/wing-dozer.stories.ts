@@ -85,18 +85,19 @@ export const enemyDash = () => armdozerSpriteStub(EnemyWingDozer, dash);
 /** 敵 アクティブ ダッシュ */
 export const enemyActiveDash = () => armdozerSpriteStub(EnemyWingDozer, activeDash);
 
-export const down = (): HTMLElement => {
-  const stub = new TDGameObjectStub(({ resources, gameObjectAction }) => {
-    const sprite = PlayerWingDozer(resources, gameObjectAction);
-    const animation = sprite.down().chain(delay(2000));
-    animation.loop();
-    return {
-      objects: [sprite.getObject3D()],
-    };
-  });
-  stub.start();
-  return stub.domElement();
+/**
+ * ダウン
+ * @param sprite スプライト 
+ */
+const down = (sprite: WingDozer) => {
+  sprite.down().chain(delay(2000)).loop();
 };
+
+/** プレイヤー ダウン */
+export const playerDown = () => armdozerSpriteStub(PlayerWingDozer, down);
+
+/** 敵 ダウン */
+export const enemyDown = () => armdozerSpriteStub(EnemyWingDozer, down);
 
 export const activeAvoid = (): HTMLElement => {
   const stub = new TDGameObjectStub(({ resources, gameObjectAction }) => {
