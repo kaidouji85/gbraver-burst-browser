@@ -1,5 +1,6 @@
 import type { Resources } from "../../../../resource";
 import { genesisBraverBackStep } from "../mesh/back-step";
+import { genesisBraverFrontStep } from "../mesh/front-step";
 import { genesisBraverKnockBack } from "../mesh/knock-back";
 import { genesisBraverSPAttack } from "../mesh/sp-attack";
 import { genesisBraverSPCharge } from "../mesh/sp-charge";
@@ -37,6 +38,10 @@ export function createMeshes(resources: Resources): AnimationMeshMapping[] {
     {
       type: "BACK_STEP",
       mesh: genesisBraverBackStep(resources),
+    },
+    {
+      type: "FRONT_STEP",
+      mesh: genesisBraverFrontStep(resources),
     },
   ];
 }

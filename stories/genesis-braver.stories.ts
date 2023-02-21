@@ -108,8 +108,21 @@ const avoid = (sprite: GenesisBraver) => {
     .loop();
 };
 
+const activeAvoid = (sprite: GenesisBraver) => {
+  avoid(sprite);
+  sprite.startActive().play();
+};
+
 /** プレイヤー 回避 */
 export const playerAvoid = () => armdozerSpriteStub(PlayerGenesisBraver, avoid);
 
+/** プレイヤー アクティブ 回避 */
+export const playerActiveAvoid = () =>
+  armdozerSpriteStub(PlayerGenesisBraver, activeAvoid);
+
 /** 敵 回避 */
 export const enemyAvoid = () => armdozerSpriteStub(EnemyGenesisBraver, avoid);
+
+/** 敵 アクティブ 回避 */
+export const enemyActiveAvoid = () =>
+  armdozerSpriteStub(EnemyGenesisBraver, activeAvoid);
