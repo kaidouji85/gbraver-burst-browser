@@ -25,7 +25,7 @@ export const MESH_HEIGHT = 600;
  */
 export function lightningDozerStand(resources: Resources): ArmdozerAnimation {
   const texture =
-    resources.textures.find((v) => v.id === TEXTURE_IDS.NEO_LANDOZER_STAND)
+    resources.textures.find((v) => v.id === TEXTURE_IDS.LIGHTNING_DOZER_STAND)
       ?.texture ?? new THREE.Texture();
   const ret = createHorizontalAnimation({
     texture,

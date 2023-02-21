@@ -1,5 +1,6 @@
 import { delay } from "../src/js/animation/delay";
 import { EnemyLightningDozer, PlayerLightningDozer } from "../src/js/game-object/armdozer/lightning-dozer";
+import { LightningDozer } from "../src/js/game-object/armdozer/lightning-dozer/lightning-dozer";
 import { armdozerSpriteStub } from "./stub/armdozer-sprite-stub";
 import { TDGameObjectStub } from "./stub/td-game-object-stub";
 
@@ -27,35 +28,27 @@ export const enemyActiveStand = () => armdozerSpriteStub(EnemyLightningDozer, (s
   sprite.startActive().play();
 });
 
-export const activeStand = (): HTMLElement => {
-  const stub = new TDGameObjectStub(({ resources, gameObjectAction }) => {
-    const sprite = PlayerLightningDozer(resources, gameObjectAction);
-    sprite.startActive().play();
-    return {
-      objects: [sprite.getObject3D()],
-    };
-  });
-  stub.start();
-  return stub.domElement();
+/**
+ * アームハンマー
+ * @param sprite スプライト
+ */
+const armHammer = (sprite: LightningDozer) => {
+  sprite
+    .charge()
+    .chain(delay(1000))
+    .chain(sprite.armHammer())
+    .chain(delay(2000))
+    .chain(sprite.hmToStand())
+    .chain(delay(2000))
+    .loop();
 };
-export const armHammer = (): HTMLElement => {
-  const stub = new TDGameObjectStub(({ resources, gameObjectAction }) => {
-    const sprite = PlayerLightningDozer(resources, gameObjectAction);
-    const animation = sprite
-      .charge()
-      .chain(delay(1000))
-      .chain(sprite.armHammer())
-      .chain(delay(2000))
-      .chain(sprite.hmToStand())
-      .chain(delay(2000));
-    animation.loop();
-    return {
-      objects: [sprite.getObject3D()],
-    };
-  });
-  stub.start();
-  return stub.domElement();
-};
+
+/** プレイヤー アームハンマー */
+export const playerArmHammer = () => armdozerSpriteStub(PlayerLightningDozer, armHammer);
+
+/** 敵 アームハンマー */
+export const enemyArmHammer = () => armdozerSpriteStub(EnemyLightningDozer, armHammer);
+
 export const activeAvoid = (): HTMLElement => {
   const stub = new TDGameObjectStub(({ resources, gameObjectAction }) => {
     const sprite = PlayerLightningDozer(resources, gameObjectAction);
