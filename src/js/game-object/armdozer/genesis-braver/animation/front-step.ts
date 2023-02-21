@@ -19,8 +19,7 @@ export function frontStep(
   distance = 100
 ): Animate {
   return process(() => {
-    // TODO フロントステップテクスチャに置き換える
-    model.animation.type = "BACK_STEP";
+    model.animation.type = "FRONT_STEP";
     model.animation.frame = 0;
     sounds.motor.sound.play();
   })
