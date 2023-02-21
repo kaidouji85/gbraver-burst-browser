@@ -3,7 +3,7 @@ import * as THREE from "three";
 import type { Resources } from "../../../../resource";
 import { TEXTURE_IDS } from "../../../../resource/texture/ids";
 import type { ArmdozerAnimation } from "../../mesh/armdozer-animation";
-import {createHorizontalAnimation} from "../../mesh/horizontal-animation";
+import { createHorizontalAnimation } from "../../mesh/horizontal-animation";
 import { MESH_Y } from "./position";
 
 export const MESH_WIDTH = 600;

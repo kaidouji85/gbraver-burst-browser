@@ -4,9 +4,7 @@ import type { Resources } from "../../../../resource";
 import { TEXTURE_IDS } from "../../../../resource/texture/ids";
 import { createSilhouetteTexture } from "../../genesis-braver/mesh/create-silhouette-texture";
 import type { ArmdozerAnimation } from "../../mesh/armdozer-animation";
-import {
-  createHorizontalAnimation,
-} from "../../mesh/horizontal-animation";
+import { createHorizontalAnimation } from "../../mesh/horizontal-animation";
 import { MESH_Y } from "./position";
 
 /** メッシュ幅 */
@@ -27,8 +25,9 @@ export function lightningDozerFrontStep(
   resources: Resources
 ): ArmdozerAnimation {
   const texture =
-    resources.textures.find((v) => v.id === TEXTURE_IDS.LIGHTNING_DOZER_FRONT_STEP)
-      ?.texture ?? new THREE.Texture();
+    resources.textures.find(
+      (v) => v.id === TEXTURE_IDS.LIGHTNING_DOZER_FRONT_STEP
+    )?.texture ?? new THREE.Texture();
   const ret = createHorizontalAnimation({
     texture,
     maxAnimation: MAX_ANIMATION,

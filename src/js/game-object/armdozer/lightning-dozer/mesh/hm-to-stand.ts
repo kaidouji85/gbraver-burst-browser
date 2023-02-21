@@ -20,8 +20,9 @@ export function lightningDozerHmToStand(
   resources: Resources
 ): ArmdozerAnimation {
   const texture =
-    resources.textures.find((v) => v.id === TEXTURE_IDS.LIGHTNING_DOZER_HM_TO_STAND)
-      ?.texture ?? new THREE.Texture();
+    resources.textures.find(
+      (v) => v.id === TEXTURE_IDS.LIGHTNING_DOZER_HM_TO_STAND
+    )?.texture ?? new THREE.Texture();
   const ret = createHorizontalAnimation({
     texture,
     maxAnimation: MAX_ANIMATION,

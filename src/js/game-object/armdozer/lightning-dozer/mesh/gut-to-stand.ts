@@ -3,10 +3,8 @@ import * as THREE from "three";
 import type { Resources } from "../../../../resource";
 import { TEXTURE_IDS } from "../../../../resource/texture/ids";
 import type { ArmdozerAnimation } from "../../mesh/armdozer-animation";
-import {
-  createHorizontalAnimation,
-} from "../../mesh/horizontal-animation";
-import {createSilhouetteTexture} from "./create-silhouette-texture";
+import { createHorizontalAnimation } from "../../mesh/horizontal-animation";
+import { createSilhouetteTexture } from "./create-silhouette-texture";
 import { MESH_Y } from "./position";
 
 /** メッシュ幅 */
@@ -27,8 +25,9 @@ export function lightningDozerGutsToStand(
   resources: Resources
 ): ArmdozerAnimation {
   const texture =
-    resources.textures.find((v) => v.id === TEXTURE_IDS.LIGHTNING_DOZER_GUTS_TO_STAND)
-      ?.texture ?? new THREE.Texture();
+    resources.textures.find(
+      (v) => v.id === TEXTURE_IDS.LIGHTNING_DOZER_GUTS_TO_STAND
+    )?.texture ?? new THREE.Texture();
   const ret = createHorizontalAnimation({
     texture,
     maxAnimation: MAX_ANIMATION,
