@@ -127,22 +127,39 @@ export const enemyKnockBack = () => armdozerSpriteStub(EnemyNeoLandozer, knockBa
 /** 敵 アクティブ ノックバック */
 export const enemyActiveKnockBack = () => armdozerSpriteStub(EnemyNeoLandozer, activeKnockBack);
 
-export const activeGuts = (): HTMLElement => {
-  const stub = new TDGameObjectStub(({ resources, gameObjectAction }) => {
-    const sprite = PlayerNeoLandozer(resources, gameObjectAction);
-    sprite.startActive().play();
-    delay(1000)
-      .chain(sprite.guts())
-      .chain(delay(1000))
-      .chain(sprite.gutsToStand())
-      .loop();
-    return {
-      objects: [sprite.getObject3D()],
-    };
-  });
-  stub.start();
-  return stub.domElement();
+/**
+ * ガッツ
+ * @param sprite スプライト 
+ */
+const guts = (sprite: NeoLandozer) => {
+  delay(1000)
+    .chain(sprite.guts())
+    .chain(delay(1000))
+    .chain(sprite.gutsToStand())
+    .loop();
 };
+
+/**
+ * アクティブ ガッツ
+ * @param sprite スプライト 
+ */
+const activeGuts = (sprite: NeoLandozer) => {
+  guts(sprite);
+  sprite.startActive().play();
+}
+
+/** プレイヤー ガッツ */
+export const playerGuts = () => armdozerSpriteStub(PlayerNeoLandozer, guts);
+
+/** プレイヤー アクティブ ガッツ */
+export const playerActiveGuts = () => armdozerSpriteStub(PlayerNeoLandozer, activeGuts);
+
+/** 敵 ガッツ */
+export const enemyGuts = () => armdozerSpriteStub(EnemyNeoLandozer, guts);
+
+/** 敵 アクティブ ガッツ */
+export const enemyActiveGuts = () => armdozerSpriteStub(EnemyNeoLandozer, activeGuts);
+
 export const armHammer = (): HTMLElement => {
   const stub = new TDGameObjectStub(({ resources, gameObjectAction }) => {
     const sprite = PlayerNeoLandozer(resources, gameObjectAction);
