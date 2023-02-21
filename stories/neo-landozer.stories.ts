@@ -2,7 +2,6 @@ import { delay } from "../src/js/animation/delay";
 import { EnemyNeoLandozer, PlayerNeoLandozer } from "../src/js/game-object/armdozer/neo-landozer";
 import { NeoLandozer } from "../src/js/game-object/armdozer/neo-landozer/neo-landozer";
 import { armdozerSpriteStub } from "./stub/armdozer-sprite-stub";
-import { TDGameObjectStub } from "./stub/td-game-object-stub";
 
 export default {
   title: "neo-landozer",
@@ -180,14 +179,16 @@ export const playerArmHammer = () => armdozerSpriteStub(PlayerNeoLandozer, armHa
 /** 敵 アームハンマー */
 export const enemyArmHammer = () => armdozerSpriteStub(EnemyNeoLandozer, armHammer);
 
-export const down = (): HTMLElement => {
-  const stub = new TDGameObjectStub(({ resources, gameObjectAction }) => {
-    const sprite = PlayerNeoLandozer(resources, gameObjectAction);
-    delay(1000).chain(sprite.down()).chain(delay(1000)).loop();
-    return {
-      objects: [sprite.getObject3D()],
-    };
-  });
-  stub.start();
-  return stub.domElement();
+/**
+ * ダウン
+ * @param sprite スプライト
+ */
+const down = (sprite: NeoLandozer) => {
+  delay(1000).chain(sprite.down()).chain(delay(1000)).loop();
 };
+
+/** プレイヤー ダウン */
+export const playerDown = () => armdozerSpriteStub(PlayerNeoLandozer, down);
+
+/** 敵 ダウン */
+export const enemyDown = () => armdozerSpriteStub(EnemyNeoLandozer, down);
