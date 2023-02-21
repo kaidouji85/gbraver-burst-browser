@@ -1,5 +1,6 @@
 import { delay } from "../src/js/animation/delay";
 import { EnemyNeoLandozer, PlayerNeoLandozer } from "../src/js/game-object/armdozer/neo-landozer";
+import { NeoLandozer } from "../src/js/game-object/armdozer/neo-landozer/neo-landozer";
 import { armdozerSpriteStub } from "./stub/armdozer-sprite-stub";
 import { TDGameObjectStub } from "./stub/td-game-object-stub";
 
@@ -27,33 +28,39 @@ export const enemyActiveStand = () => armdozerSpriteStub(EnemyNeoLandozer, (spri
   sprite.startActive().play();
 });
 
-export const activeStand = (): HTMLElement => {
-  const stub = new TDGameObjectStub(({ resources, gameObjectAction }) => {
-    const sprite = PlayerNeoLandozer(resources, gameObjectAction);
-    sprite.startActive().play();
-    return {
-      objects: [sprite.getObject3D()],
-    };
-  });
-  stub.start();
-  return stub.domElement();
+/**
+ * 回避
+ * @param sprite スプライト
+ */
+const avoid = (sprite: NeoLandozer) => {
+  delay(1000)
+    .chain(sprite.avoid())
+    .chain(delay(1000))
+    .chain(sprite.avoidToStand())
+    .loop();
 };
-export const activeAvoid = (): HTMLElement => {
-  const stub = new TDGameObjectStub(({ resources, gameObjectAction }) => {
-    const sprite = PlayerNeoLandozer(resources, gameObjectAction);
-    sprite.startActive().play();
-    delay(1000)
-      .chain(sprite.avoid())
-      .chain(delay(1000))
-      .chain(sprite.avoidToStand())
-      .loop();
-    return {
-      objects: [sprite.getObject3D()],
-    };
-  });
-  stub.start();
-  return stub.domElement();
+
+/**
+ * アクティブ 回避
+ * @param sprite スプライト
+ */
+const activeAvoid = (sprite: NeoLandozer) => {
+  avoid(sprite);
+  sprite.startActive().play();
 };
+
+/** プレイヤー 回避 */
+export const playerAvoid = () => armdozerSpriteStub(PlayerNeoLandozer, avoid);
+
+/** プレイヤー アクティブ 回避 */
+export const playerActiveAvoid = () => armdozerSpriteStub(PlayerNeoLandozer, activeAvoid);
+
+/** 敵 回避 */
+export const enemyAvoid = () => armdozerSpriteStub(EnemyNeoLandozer, avoid);
+
+/** 敵 アクティブ 回避 */
+export const enemyActiveAvoid = () => armdozerSpriteStub(EnemyNeoLandozer, activeAvoid);
+
 export const activeGuard = (): HTMLElement => {
   const stub = new TDGameObjectStub(({ resources, gameObjectAction }) => {
     const sprite = PlayerNeoLandozer(resources, gameObjectAction);
