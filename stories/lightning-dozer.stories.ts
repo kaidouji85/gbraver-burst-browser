@@ -148,22 +148,39 @@ export const enemyKnockBack = () => armdozerSpriteStub(EnemyLightningDozer, knoc
 /** 敵 アクティブ ノックバック */
 export const enemyActiveKnockBack = () => armdozerSpriteStub(EnemyLightningDozer, activeKnockBack);
 
-export const activeGuts = (): HTMLElement => {
-  const stub = new TDGameObjectStub(({ resources, gameObjectAction }) => {
-    const sprite = PlayerLightningDozer(resources, gameObjectAction);
-    sprite.startActive().play();
-    delay(1000)
-      .chain(sprite.guts())
-      .chain(delay(1000))
-      .chain(sprite.gutsToStand())
-      .loop();
-    return {
-      objects: [sprite.getObject3D()],
-    };
-  });
-  stub.start();
-  return stub.domElement();
+/**
+ * ガッツ
+ * @param sprite スプライト
+ */
+const guts = (sprite: LightningDozer) => {
+  delay(1000)
+    .chain(sprite.guts())
+    .chain(delay(1000))
+    .chain(sprite.gutsToStand())
+    .loop();
 };
+
+/**
+ * アクティブ ガッツ
+ * @param sprite スプライト
+ */
+const activeGuts = (sprite: LightningDozer) => {
+  guts(sprite);
+  sprite.startActive().play();
+};
+
+/** プレイヤー ガッツ */
+export const playerGuts = () => armdozerSpriteStub(PlayerLightningDozer, guts);
+
+/** プレイヤー アクティブ ガッツ */
+export const playerActiveGuts = () => armdozerSpriteStub(PlayerLightningDozer, activeGuts);
+
+/** 敵 ガッツ */
+export const enemyGuts = () => armdozerSpriteStub(EnemyLightningDozer, guts);
+
+/** 敵 アクティブ ガッツ */
+export const enemyActiveGuts = () => armdozerSpriteStub(EnemyLightningDozer, activeGuts);
+
 export const down = (): HTMLElement => {
   const stub = new TDGameObjectStub(({ resources, gameObjectAction }) => {
     const sprite = PlayerLightningDozer(resources, gameObjectAction);
