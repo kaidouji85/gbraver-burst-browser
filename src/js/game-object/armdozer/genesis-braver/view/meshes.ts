@@ -7,6 +7,7 @@ import { genesisBraverSPCharge } from "../mesh/sp-charge";
 import { genesisBraverSPToStand } from "../mesh/sp-to-stand";
 import { genesisBraverStand } from "../mesh/stand";
 import type { AnimationMeshMapping } from "./animation-mesh-mapping";
+import { genesisBraverDown } from "../mesh/down";
 
 /**
  * アニメーションメッシュマッピングを生成
@@ -34,6 +35,10 @@ export function createMeshes(resources: Resources): AnimationMeshMapping[] {
     {
       type: "KNOCK_BACK",
       mesh: genesisBraverKnockBack(resources),
+    },
+    {
+      type: "DOWN",
+      mesh: genesisBraverDown(resources),
     },
     {
       type: "BACK_STEP",
