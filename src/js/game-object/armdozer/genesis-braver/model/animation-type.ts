@@ -6,4 +6,5 @@ export type AnimationType =
   | "SP_TO_STAND"
   | "KNOCK_BACK"
   | "BACK_STEP"
-  | "FRONT_STEP";
+  | "FRONT_STEP"
+  | "DOWN";

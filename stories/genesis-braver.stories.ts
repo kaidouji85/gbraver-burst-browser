@@ -96,6 +96,20 @@ export const enemyActiveKnockBack = () =>
   armdozerSpriteStub(EnemyGenesisBraver, activeKnockBack);
 
 /**
+ * ダウン
+ * @param sprite スプライト
+ */
+const down = (sprite: GenesisBraver) => {
+  delay(1000).chain(sprite.down()).chain(delay(1000)).loop();
+};
+
+/** プレイヤー ダウン */
+export const playerDown = () => armdozerSpriteStub(PlayerGenesisBraver, down);
+
+/** 敵 ダウン */
+export const enemyDown = () => armdozerSpriteStub(EnemyGenesisBraver, down);
+
+/**
  * 回避
  * @param sprite スプライト
  */

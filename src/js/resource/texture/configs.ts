@@ -399,4 +399,8 @@ export const DEVELOPING_TEXTURE_CONFIGS: TextureConfig[] = [
     id: TEXTURE_IDS.GENESIS_BRAVER_FRONT_STEP,
     path: "armdozer/genesis-braver/front-step.webp",
   },
+  {
+    id: TEXTURE_IDS.GENESIS_BRAVE_DOWN,
+    path: "armdozer/genesis-braver/down.webp",
+  },
 ];
