@@ -402,5 +402,5 @@ export const DEVELOPING_TEXTURE_CONFIGS: TextureConfig[] = [
   {
     id: TEXTURE_IDS.GENESIS_BRAVE_DOWN,
     path: "armdozer/genesis-braver/down.webp",
-  }
+  },
 ];

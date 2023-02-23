@@ -4,7 +4,7 @@ import { Animate } from "../../../../animation/animate";
 import { delay } from "../../../../animation/delay";
 import { process } from "../../../../animation/process";
 import { tween } from "../../../../animation/tween";
-import {GenesisBraverModel} from "../model/genesis-braver-model";
+import { GenesisBraverModel } from "../model/genesis-braver-model";
 
 /**
  * ダウン

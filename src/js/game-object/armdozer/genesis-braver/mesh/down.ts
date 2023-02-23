@@ -22,9 +22,8 @@ export const MAX_ANIMATION = 4;
  */
 export function genesisBraverDown(resources: Resources): ArmdozerAnimation {
   const texture =
-    resources.textures.find(
-      (v) => v.id === TEXTURE_IDS.GENESIS_BRAVE_DOWN
-    )?.texture ?? new THREE.Texture();
+    resources.textures.find((v) => v.id === TEXTURE_IDS.GENESIS_BRAVE_DOWN)
+      ?.texture ?? new THREE.Texture();
   const mesh = createHorizontalAnimation({
     texture,
     maxAnimation: MAX_ANIMATION,
