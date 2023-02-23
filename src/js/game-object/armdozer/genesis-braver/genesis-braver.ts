@@ -13,6 +13,7 @@ import { EmptyArmDozerSprite } from "../empty-armdozer-sprite";
 import { activeFlash } from "./animation/active-flash";
 import { backStep } from "./animation/back-step";
 import { charge } from "./animation/charge";
+import { down } from "./animation/down";
 import { endActive } from "./animation/end-active";
 import { frontStep } from "./animation/front-step";
 import { knockBack } from "./animation/knock-back";
@@ -112,6 +113,11 @@ export class GenesisBraver
   /** @override */
   knockBackToStand(): Animate {
     return knockBackToStand(this.#model, this.#sounds);
+  }
+
+  /** @override */
+  down(): Animate {
+    return down(this.#model);
   }
 
   /** @override */
