@@ -37,6 +37,7 @@ function batteryLimitBreak(
   param: GenesisBraverBurst<BatteryLimitBreak>
 ): Animate {
   return all(
+    param.burstArmdozerTD.genesisBraver.burst(),
     param.isActive
       ? param.burstArmdozerTD.genesisBraver.endActive()
       : param.anotherArmdozerTD.sprite().endActive(),
@@ -62,6 +63,7 @@ function batteryLimitBreak(
     )
     .chain(
       all(
+        param.burstArmdozerTD.genesisBraver.burstToStand(),
         toInitial(param.tdCamera, 500),
         param.tdObjects.skyBrightness.brightness(1, 500),
         param.tdObjects.illumination.intensity(1, 500)

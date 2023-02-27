@@ -403,4 +403,12 @@ export const DEVELOPING_TEXTURE_CONFIGS: TextureConfig[] = [
     id: TEXTURE_IDS.GENESIS_BRAVE_DOWN,
     path: "armdozer/genesis-braver/down.webp",
   },
+  {
+    id: TEXTURE_IDS.GENESIS_BRAVER_BURST_UP,
+    path: "armdozer/genesis-braver/burst-up.webp",
+  },
+  {
+    id: TEXTURE_IDS.GENESIS_BRAVER_BURST_DOWN,
+    path: "armdozer/genesis-braver/burst-down.webp",
+  },
 ];

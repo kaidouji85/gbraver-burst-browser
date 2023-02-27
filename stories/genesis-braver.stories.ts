@@ -140,3 +140,39 @@ export const enemyAvoid = () => armdozerSpriteStub(EnemyGenesisBraver, avoid);
 /** 敵 アクティブ 回避 */
 export const enemyActiveAvoid = () =>
   armdozerSpriteStub(EnemyGenesisBraver, activeAvoid);
+
+/**
+ * バースト
+ * @param sprite スプライト
+ */
+const burst = (sprite: GenesisBraver) => {
+  delay(1000)
+    .chain(sprite.burst())
+    .chain(delay(1000))
+    .chain(sprite.burstToStand())
+    .chain(delay(1000))
+    .loop();
+};
+
+/**
+ * アクティブ バースト
+ * @param sprite スプライト
+ */
+const activeBurst = (sprite: GenesisBraver) => {
+  burst(sprite);
+  sprite.startActive().play();
+};
+
+/** プレイヤー バースト */
+export const playerBurst = () => armdozerSpriteStub(PlayerGenesisBraver, burst);
+
+/** プレイヤー アクティブ バースト */
+export const playerActiveBurst = () =>
+  armdozerSpriteStub(PlayerGenesisBraver, activeBurst);
+
+/** 敵 バースト */
+export const enemyBurst = () => armdozerSpriteStub(EnemyGenesisBraver, burst);
+
+/** 敵 アクティブ バースト */
+export const enemyActiveBurst = () =>
+  armdozerSpriteStub(EnemyGenesisBraver, activeBurst);

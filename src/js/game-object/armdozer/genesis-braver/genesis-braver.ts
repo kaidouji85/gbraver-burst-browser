@@ -12,6 +12,8 @@ import type { ArmDozerSprite } from "../armdozer-sprite";
 import { EmptyArmDozerSprite } from "../empty-armdozer-sprite";
 import { activeFlash } from "./animation/active-flash";
 import { backStep } from "./animation/back-step";
+import { burst } from "./animation/burst";
+import { burstToStand } from "./animation/burst-to-stand";
 import { charge } from "./animation/charge";
 import { down } from "./animation/down";
 import { endActive } from "./animation/end-active";
@@ -103,6 +105,22 @@ export class GenesisBraver
    */
   spToStand(): Animate {
     return spToStand(this.#model, this.#sounds);
+  }
+
+  /**
+   * バースト
+   * @return アニメーション
+   */
+  burst(): Animate {
+    return burst(this.#model, this.#sounds);
+  }
+
+  /**
+   * バースト -> 立ち
+   * @return アニメーション
+   */
+  burstToStand(): Animate {
+    return burstToStand(this.#model, this.#sounds);
   }
 
   /** @override */

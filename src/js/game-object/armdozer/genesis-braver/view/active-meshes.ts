@@ -1,4 +1,5 @@
 import { Resources } from "../../../../resource";
+import { genesisBraverActiveBurstUp } from "../mesh/burst-up";
 import { genesisBraverActiveFrontStep } from "../mesh/front-step";
 import { genesisBraverActiveKnockBack } from "../mesh/knock-back";
 import { genesisBraverActiveStand } from "../mesh/stand";
@@ -24,6 +25,10 @@ export function createActiveMeshes(
     {
       type: "FRONT_STEP",
       mesh: genesisBraverActiveFrontStep(resources),
+    },
+    {
+      type: "BURST_UP",
+      mesh: genesisBraverActiveBurstUp(resources),
     },
   ];
 }

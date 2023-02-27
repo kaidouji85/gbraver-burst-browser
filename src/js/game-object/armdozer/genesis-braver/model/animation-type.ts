@@ -7,4 +7,6 @@ export type AnimationType =
   | "KNOCK_BACK"
   | "BACK_STEP"
   | "FRONT_STEP"
-  | "DOWN";
+  | "DOWN"
+  | "BURST_UP"
+  | "BURST_DOWN";
