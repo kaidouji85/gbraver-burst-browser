@@ -1,18 +1,4 @@
-import type {
-  CasualMatch as CasualMatchSDK,
-  LoggedInUserDelete,
-  LoginCheck,
-  Logout,
-  MailVerify,
-  PrivateMatchCreate,
-  PrivateMatchRoomEnter,
-  UniversalLogin,
-  UserMailGet,
-  UserNameGet,
-  UserPictureGet,
-  WebsocketDisconnect,
-  WebsocketErrorNotifier,
-} from "@gbraver-burst-network/browser-core";
+import { BrowserSDK } from "@gbraver-burst-network/browser-sdk";
 
 import type { BGMManager } from "../bgm/bgm-manager";
 import { createBGMManager } from "../bgm/bgm-manager";
@@ -40,22 +26,6 @@ import type { InProgress } from "./in-progress/in-progress";
 import { InterruptScenes } from "./innterrupt-scenes";
 import { TDSceneBinder } from "./td-scene-binder";
 
-/** ゲーム管理オブジェクトで利用するAPIサーバの機能 */
-export interface GameAPI
-  extends UniversalLogin,
-    LoginCheck,
-    CasualMatchSDK,
-    Logout,
-    LoggedInUserDelete,
-    UserNameGet,
-    UserPictureGet,
-    MailVerify,
-    UserMailGet,
-    PrivateMatchCreate,
-    PrivateMatchRoomEnter,
-    WebsocketDisconnect,
-    WebsocketErrorNotifier {}
-
 /**
  * ゲームプロパティ
  * 本オブジェクトはゲーム管理オブジェクト内部、各種ヘルパーで利用することを想定している
@@ -77,8 +47,8 @@ export interface GameProps {
   isAPIServerEnable: boolean;
   /** 現在進行中のフロー */
   inProgress: InProgress;
-  /** ゲームで利用するAPI */
-  api: GameAPI;
+  /** APIサーバのSDK */
+  api: BrowserSDK;
   /** ブラウザ設定リポジトリ */
   config: GbraverBurstBrowserConfigRepository;
   /** バトル強制終了監視 */
@@ -144,7 +114,7 @@ export type GamePropsGeneratorParam = {
   /** APIサーバ系機能が利用可能か否か、trueで利用可能 */
   isAPIServerEnable: boolean;
   /** APIサーバのSDK */
-  api: GameAPI;
+  api: BrowserSDK;
   /** ブラウザ設定リポジトリ */
   config: GbraverBurstBrowserConfigRepository;
   /** 開発中のチュートリアルをプレイできるか否かのフラグ、trueでプレイできる */
