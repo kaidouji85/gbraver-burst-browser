@@ -20,10 +20,13 @@ export const MAX_ANIMATION = 4;
  * @param resources リソース管理オブジェクト
  * @return 生成結果
  */
-export function genesisBraverBurstDown(resources: Resources): ArmdozerAnimation {
+export function genesisBraverBurstDown(
+  resources: Resources
+): ArmdozerAnimation {
   const texture =
-    resources.textures.find((v) => v.id === TEXTURE_IDS.GENESIS_BRAVER_BURST_DOWN)
-      ?.texture ?? new THREE.Texture();
+    resources.textures.find(
+      (v) => v.id === TEXTURE_IDS.GENESIS_BRAVER_BURST_DOWN
+    )?.texture ?? new THREE.Texture();
   const mesh = createHorizontalAnimation({
     texture,
     maxAnimation: MAX_ANIMATION,

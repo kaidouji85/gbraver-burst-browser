@@ -1,9 +1,9 @@
 import { Resources } from "../../../../resource";
+import { genesisBraverActiveBurstUp } from "../mesh/burst-up";
 import { genesisBraverActiveFrontStep } from "../mesh/front-step";
 import { genesisBraverActiveKnockBack } from "../mesh/knock-back";
 import { genesisBraverActiveStand } from "../mesh/stand";
 import { AnimationMeshMapping } from "./animation-mesh-mapping";
-import {genesisBraverActiveBurstUp} from "../mesh/burst-up";
 
 /**
  * アニメーションアクティブメッシュマッピング生成
@@ -29,6 +29,6 @@ export function createActiveMeshes(
     {
       type: "BURST_UP",
       mesh: genesisBraverActiveBurstUp(resources),
-    }
+    },
   ];
 }

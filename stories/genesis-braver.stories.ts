@@ -167,10 +167,12 @@ const activeBurst = (sprite: GenesisBraver) => {
 export const playerBurst = () => armdozerSpriteStub(PlayerGenesisBraver, burst);
 
 /** プレイヤー アクティブ バースト */
-export const playerActiveBurst = () => armdozerSpriteStub(PlayerGenesisBraver, activeBurst);
+export const playerActiveBurst = () =>
+  armdozerSpriteStub(PlayerGenesisBraver, activeBurst);
 
 /** 敵 バースト */
 export const enemyBurst = () => armdozerSpriteStub(EnemyGenesisBraver, burst);
 
 /** 敵 アクティブ バースト */
-export const enemyActiveBurst = () => armdozerSpriteStub(EnemyGenesisBraver, activeBurst);
+export const enemyActiveBurst = () =>
+  armdozerSpriteStub(EnemyGenesisBraver, activeBurst);

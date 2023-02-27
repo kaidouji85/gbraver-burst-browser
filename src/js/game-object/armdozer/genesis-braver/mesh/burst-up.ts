@@ -24,13 +24,10 @@ export const TEXTURE_ID = TEXTURE_IDS.GENESIS_BRAVER_BURST_UP;
  * @param resources リソース管理オブジェクト
  * @return 生成結果
  */
-export function genesisBraverBurstUp(
-  resources: Resources
-): ArmdozerAnimation {
+export function genesisBraverBurstUp(resources: Resources): ArmdozerAnimation {
   const texture =
-    resources.textures.find(
-      (v) => v.id === TEXTURE_ID
-    )?.texture ?? new THREE.Texture();
+    resources.textures.find((v) => v.id === TEXTURE_ID)?.texture ??
+    new THREE.Texture();
   const mesh = createHorizontalAnimation({
     texture,
     maxAnimation: MAX_ANIMATION,
@@ -51,9 +48,8 @@ export function genesisBraverActiveBurstUp(
   resources: Resources
 ): ArmdozerAnimation {
   const texture =
-    resources.textures.find(
-      (v) => v.id === TEXTURE_ID
-    )?.texture ?? new THREE.Texture();
+    resources.textures.find((v) => v.id === TEXTURE_ID)?.texture ??
+    new THREE.Texture();
   const silhouetteTexture = createSilhouetteTexture(texture);
   const mesh = createHorizontalAnimation({
     texture: silhouetteTexture,

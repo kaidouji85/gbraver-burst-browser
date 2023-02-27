@@ -1,5 +1,7 @@
 import type { Resources } from "../../../../resource";
 import { genesisBraverBackStep } from "../mesh/back-step";
+import { genesisBraverBurstDown } from "../mesh/burst-down";
+import { genesisBraverBurstUp } from "../mesh/burst-up";
 import { genesisBraverDown } from "../mesh/down";
 import { genesisBraverFrontStep } from "../mesh/front-step";
 import { genesisBraverKnockBack } from "../mesh/knock-back";
@@ -8,8 +10,6 @@ import { genesisBraverSPCharge } from "../mesh/sp-charge";
 import { genesisBraverSPToStand } from "../mesh/sp-to-stand";
 import { genesisBraverStand } from "../mesh/stand";
 import type { AnimationMeshMapping } from "./animation-mesh-mapping";
-import {genesisBraverBurstUp} from "../mesh/burst-up";
-import {genesisBraverBurstDown} from "../mesh/burst-down";
 
 /**
  * アニメーションメッシュマッピングを生成
@@ -57,6 +57,6 @@ export function createMeshes(resources: Resources): AnimationMeshMapping[] {
     {
       type: "BURST_DOWN",
       mesh: genesisBraverBurstDown(resources),
-    }
+    },
   ];
 }
