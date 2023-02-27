@@ -1,3 +1,5 @@
+import { BrowserSDK } from "@gbraver-burst-network/browser-sdk";
+
 import type { BGMManager } from "../bgm/bgm-manager";
 import { createBGMManager } from "../bgm/bgm-manager";
 import { DOMFader } from "../components/dom-fader/dom-fader";
@@ -23,7 +25,6 @@ import { FutureSuddenlyBattleEnd } from "./future-suddenly-battle-end";
 import type { InProgress } from "./in-progress/in-progress";
 import { InterruptScenes } from "./innterrupt-scenes";
 import { TDSceneBinder } from "./td-scene-binder";
-import { BrowserSDK } from "@gbraver-burst-network/browser-sdk";
 
 /**
  * ゲームプロパティ
