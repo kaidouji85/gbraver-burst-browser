@@ -1,6 +1,6 @@
+import { Observable } from "rxjs";
 import * as THREE from "three";
 
-import type { Stream } from "../stream/stream";
 import type { OverlapEvent } from "./overlap-event/overlap-event";
 
 /**
@@ -13,5 +13,5 @@ export interface OverlapNotifier {
    * @param camera カメラ
    * @return 生成結果
    */
-  createOverlapNotifier(camera: THREE.Camera): Stream<OverlapEvent>;
+  createOverlapNotifier(camera: THREE.Camera): Observable<OverlapEvent>;
 }

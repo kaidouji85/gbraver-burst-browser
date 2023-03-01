@@ -1,8 +1,4 @@
-import { fromEvent } from "rxjs";
-
-import { map, merge } from "../stream/operator";
-import type { Stream } from "../stream/stream";
-import { createStream } from "../stream/stream";
+import { fromEvent, map, merge, Observable } from "rxjs";
 
 /** window押下情報 */
 export type PushWindow = {
@@ -15,26 +11,22 @@ export type PushWindow = {
  *
  * @return window押下ストリーム
  */
-export function pushWindowsStream(): Stream<PushWindow> {
-  const click: Stream<PushWindow> = createStream<Event>(
-    fromEvent(window, "mousedown", {
-      passive: false,
-    })
-  ).chain(
+export function pushWindowsStream(): Observable<PushWindow> {
+  const click: Observable<PushWindow> = fromEvent<MouseEvent>(window, "mousedown", {
+    passive: false,
+  }).pipe(
     map((event) => ({
       type: "PushWindow",
       event,
     }))
   );
-  const touchStart: Stream<PushWindow> = createStream<Event>(
-    fromEvent(window, "touchstart", {
-      passive: false,
-    })
-  ).chain(
+  const touchStart: Observable<PushWindow> = fromEvent<TouchEvent>(window, "touchstart", {
+    passive: false,
+  }).pipe(
     map((event) => ({
       type: "PushWindow",
       event,
     }))
   );
-  return click.chain(merge(touchStart));
+  return merge(click, touchStart);
 }

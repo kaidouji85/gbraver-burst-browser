@@ -1,7 +1,6 @@
+import { filter, map, Observable, share } from "rxjs";
 import * as THREE from "three";
 
-import { filter, map, share } from "../../stream/operator";
-import type { Stream } from "../../stream/stream";
 import type { RendererDOMEvent } from "../dom-event/dom-event";
 import type { MouseDownRaycaster } from "./mouse-down-raycaster";
 import { toMouseDownRaycaster } from "./mouse-down-raycaster";
@@ -36,12 +35,12 @@ export type OverlapEvent =
  * @return 当たり判定ストリーム
  */
 export function toOverlapStream(
-  origin: Stream<RendererDOMEvent>,
+  origin: Observable<RendererDOMEvent>,
   rendererDOM: HTMLElement,
   camera: THREE.Camera
-): Stream<OverlapEvent> {
+): Observable<OverlapEvent> {
   return origin
-    .chain(
+    .pipe(
       map((v) => {
         switch (v.type) {
           case "mouseDown":
@@ -65,9 +64,9 @@ export function toOverlapStream(
           default:
             return null;
         }
-      })
-    )
-    .chain(filter((v) => !!v))
-    .chain(map((v) => v as OverlapEvent))
-    .chain(share());
+      }),
+      filter((v) => !!v),
+      map((v) => v as OverlapEvent),
+      share(),
+    );
 }
