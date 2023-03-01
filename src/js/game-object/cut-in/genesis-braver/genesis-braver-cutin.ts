@@ -18,6 +18,7 @@ export class GenesisBraverCutIn {
   /**
    * コンストラクタ
    * @param resources ビュー
+   * @param gameObjectAction ゲームオブジェクトアクション
    */
   constructor(view: GenesisBraverCutInView, gameObjectAction: Stream<GameObjectAction>) {
     this.#model = createInitialValue();
