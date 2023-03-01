@@ -1,5 +1,5 @@
+import { Observable } from "rxjs";
 import type { Resources } from "../../resource";
-import type { Stream } from "../../stream/stream";
 import type { GameObjectAction } from "../action/game-object-action";
 import { ResultIndicator } from "./result-indicator";
 import { drawIndicatorView } from "./view/draw-indicator-view";
@@ -15,7 +15,7 @@ import { winIndicatorView } from "./view/win-indicator-view";
  */
 export function winIndicator(
   resources: Resources,
-  gameObjectAction: Stream<GameObjectAction>
+  gameObjectAction: Observable<GameObjectAction>
 ): ResultIndicator {
   const view = winIndicatorView(resources);
   return new ResultIndicator(view, gameObjectAction);
@@ -30,7 +30,7 @@ export function winIndicator(
  */
 export function loseIndicator(
   resources: Resources,
-  gameObjectAction: Stream<GameObjectAction>
+  gameObjectAction: Observable<GameObjectAction>
 ): ResultIndicator {
   const view = loseIndicatorView(resources);
   return new ResultIndicator(view, gameObjectAction);
@@ -45,7 +45,7 @@ export function loseIndicator(
  */
 export function drawIndicator(
   resources: Resources,
-  gameObjectAction: Stream<GameObjectAction>
+  gameObjectAction: Observable<GameObjectAction>
 ): ResultIndicator {
   const view = drawIndicatorView(resources);
   return new ResultIndicator(view, gameObjectAction);

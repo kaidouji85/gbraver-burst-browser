@@ -1,4 +1,4 @@
-import type { StreamSource, Unsubscriber } from "../../stream/stream";
+import { Subject, Unsubscribable } from "rxjs";
 import type { TDScene } from "../../td-scenes/td-scene";
 import type { GameAction } from "../game-actions";
 
@@ -13,5 +13,5 @@ import type { GameAction } from "../game-actions";
  */
 export type TDSceneActionConnector<X extends TDScene> = (
   scene: X,
-  gameAction: StreamSource<GameAction>
-) => Unsubscriber[];
+  gameAction: Subject<GameAction>
+) => Unsubscribable[];

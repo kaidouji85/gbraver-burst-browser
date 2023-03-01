@@ -1,6 +1,5 @@
+import { Observable, Subject, Unsubscribable } from "rxjs";
 import type { DOMDialog } from "../../dom-dialogs/dialog";
-import type { Stream, StreamSource, Unsubscriber } from "../../stream/stream";
-import { createStreamSource } from "../../stream/stream";
 import type { GameAction } from "../game-actions";
 import type { DomDialogActionConnector } from "./dom-dialog-action-connector";
 
@@ -13,10 +12,10 @@ export class DOMDialogBinder {
   #dialog: DOMDialog | null;
 
   /** ゲームアクションストリーム */
-  #gameAction: StreamSource<GameAction>;
+  #gameAction: Subject<GameAction>;
 
   /** 案サブスクライバ */
-  #unsubscribers: Unsubscriber[];
+  #unsubscribers: Unsubscribable[];
 
   /**
    * コンストラクタ
@@ -24,7 +23,7 @@ export class DOMDialogBinder {
   constructor() {
     this.#root = document.createElement("div");
     this.#dialog = null;
-    this.#gameAction = createStreamSource();
+    this.#gameAction = new Subject();
     this.#unsubscribers = [];
   }
 
@@ -57,7 +56,7 @@ export class DOMDialogBinder {
    *
    * @return イベント通知ストリーム
    */
-  gameActionNotifier(): Stream<GameAction> {
+  gameActionNotifier(): Observable<GameAction> {
     return this.#gameAction;
   }
 

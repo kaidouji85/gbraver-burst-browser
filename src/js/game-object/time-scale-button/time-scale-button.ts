@@ -1,12 +1,11 @@
 import TWEEN, { Group } from "@tweenjs/tween.js";
+import { Observable, Subject, Unsubscribable } from "rxjs";
 import * as THREE from "three";
 
 import type { Animate } from "../../animation/animate";
 import type { PreRender } from "../../game-loop/pre-render";
 import type { Update } from "../../game-loop/update";
 import type { Resources } from "../../resource";
-import type { Stream, StreamSource, Unsubscriber } from "../../stream/stream";
-import { createStreamSource } from "../../stream/stream";
 import type { GameObjectAction } from "../action/game-object-action";
 import { close } from "./animation/close";
 import { open } from "./animation/open";
@@ -24,8 +23,8 @@ export class TimeScaleButton {
   #view: TimeScaleButtonView;
   #sounds: TimeScaleButtonSounds;
   #toggleTween: Group;
-  #toggle: StreamSource<number>;
-  #unsubscribers: Unsubscriber[];
+  #toggle: Subject<number>;
+  #unsubscribers: Unsubscribable[];
 
   /**
    * コンストラクタ
@@ -35,13 +34,13 @@ export class TimeScaleButton {
    */
   constructor(
     resources: Resources,
-    gameObjectAction: Stream<GameObjectAction>
+    gameObjectAction: Observable<GameObjectAction>
   ) {
     this.#model = createInitialValue();
     this.#view = new TimeScaleButtonView(resources, gameObjectAction);
     this.#sounds = createTimeScaleButtonSounds(resources);
     this.#toggleTween = new TWEEN.Group();
-    this.#toggle = createStreamSource();
+    this.#toggle = new Subject();
     this.#unsubscribers = [
       gameObjectAction.subscribe((action) => {
         if (action.type === "Update") {
@@ -80,7 +79,7 @@ export class TimeScaleButton {
    *
    * @return 通知ストリーム
    */
-  notifyToggled(): Stream<number> {
+  notifyToggled(): Observable<number> {
     return this.#toggle;
   }
 

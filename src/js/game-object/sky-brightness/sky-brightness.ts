@@ -1,7 +1,7 @@
+import { Observable, Unsubscribable } from "rxjs";
 import * as THREE from "three";
 
 import { Animate } from "../../animation/animate";
-import type { Stream, Unsubscriber } from "../../stream/stream";
 import type { GameObjectAction } from "../action/game-object-action";
 import { brightness } from "./animation/brightness";
 import { createInitialValue } from "./model/initial-value";
@@ -12,14 +12,14 @@ import { SkyBrightnessView } from "./view/sky-brightness-view";
 export class SkyBrightness {
   #model: SkyBrightnessModel;
   #view: SkyBrightnessView;
-  #unsubscriber: Unsubscriber;
+  #unsubscriber: Unsubscribable;
 
   /**
    * コンストラクタ
    *
    * @param gameObjectAction ゲームオブジェクトアクション
    */
-  constructor(gameObjectAction: Stream<GameObjectAction>) {
+  constructor(gameObjectAction: Observable<GameObjectAction>) {
     this.#model = createInitialValue();
     this.#view = new SkyBrightnessView();
     this.#view.engage(this.#model);
