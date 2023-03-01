@@ -1,4 +1,4 @@
-import type { Stream, Unsubscriber } from "../../stream/stream";
+import { Observable, Unsubscribable } from "rxjs";
 import type { TDScene } from "../td-scene";
 import type {
   BattleEnd,
@@ -20,7 +20,7 @@ type BattleSceneParams = BattleScenePropsCreatorParams;
 /** 戦闘シーン */
 export class BattleScene implements TDScene {
   #props: BattleSceneProps;
-  #unsubscriber: Unsubscriber[];
+  #unsubscriber: Unsubscribable[];
 
   /**
    * コンストラクタ
@@ -66,7 +66,7 @@ export class BattleScene implements TDScene {
    *
    * @return 通知ストリーム
    */
-  gameEndNotifier(): Stream<BattleEnd> {
+  gameEndNotifier(): Observable<BattleEnd> {
     return this.#props.endBattle;
   }
 
