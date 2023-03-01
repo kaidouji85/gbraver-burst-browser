@@ -1,4 +1,5 @@
 import { Howl } from "howler";
+import { Observable, Subject, Unsubscribable } from "rxjs";
 
 import { pop } from "../../dom/animation";
 import type { PushDOM } from "../../dom/event-stream";
@@ -7,8 +8,6 @@ import { Exclusive } from "../../exclusive/exclusive";
 import type { PostNetworkError } from "../../game/post-network-error";
 import type { Resources } from "../../resource";
 import { SOUND_IDS } from "../../resource/sound";
-import type { Stream, StreamSource, Unsubscriber } from "../../stream/stream";
-import { createStreamSource } from "../../stream/stream";
 import { domUuid } from "../../uuid/dom-uuid";
 import type { DOMDialog } from "../dialog";
 
@@ -86,9 +85,9 @@ export class NetworkErrorDialog implements DOMDialog {
   #root: HTMLElement;
   #postNetworkErrorButton: HTMLButtonElement;
   #postNetworkError: PostNetworkError;
-  #postNetworkErrorSource: StreamSource<PostNetworkError>;
+  #postNetworkErrorSource: Subject<PostNetworkError>;
   #pushButton: Howl;
-  #unsubscribers: Unsubscriber[];
+  #unsubscribers: Unsubscribable[];
   #exclusive: Exclusive;
 
   /**
@@ -108,7 +107,7 @@ export class NetworkErrorDialog implements DOMDialog {
     this.#root.innerHTML = rootInnerHTML(dataIDs, label);
     const elements = extractElements(this.#root, dataIDs);
     this.#postNetworkErrorButton = elements.postNetworkErrorButton;
-    this.#postNetworkErrorSource = createStreamSource();
+    this.#postNetworkErrorSource = new Subject();
     this.#unsubscribers = [
       pushDOMStream(this.#postNetworkErrorButton).subscribe((action) => {
         this.#onPostNetworkErrorButtonPush(action);
@@ -143,7 +142,7 @@ export class NetworkErrorDialog implements DOMDialog {
    *
    * @return 通知ストリーム
    */
-  notifyPostNetworkError(): Stream<PostNetworkError> {
+  notifyPostNetworkError(): Observable<PostNetworkError> {
     return this.#postNetworkErrorSource;
   }
 

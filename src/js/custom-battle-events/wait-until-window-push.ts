@@ -1,5 +1,4 @@
-import { first } from "../stream/operator";
-import type { Stream } from "../stream/stream";
+import { first, Observable } from "rxjs";
 import type { CustomBattleEventProps } from "../td-scenes/battle/custom-battle-event";
 import type { PushWindow } from "../window/push-window";
 
@@ -11,10 +10,10 @@ import type { PushWindow } from "../window/push-window";
  * @return 画面押下したら発火するPromise
  */
 export function waitUntilWindowPushWithStream(
-  pushWindow: Stream<PushWindow>
+  pushWindow: Observable<PushWindow>
 ): Promise<void> {
   return new Promise((resolve) => {
-    const unsubscriber = pushWindow.chain(first()).subscribe((action) => {
+    const unsubscriber = pushWindow.pipe(first()).subscribe((action) => {
       action.event.preventDefault();
       unsubscriber.unsubscribe();
       resolve();

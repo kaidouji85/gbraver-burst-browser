@@ -1,6 +1,5 @@
+import { filter, first, map, Observable } from "rxjs";
 import type { Update } from "../../game-loop/update";
-import { filter, first, map } from "../../stream/operator";
-import type { Stream } from "../../stream/stream";
 import type { GameObjectAction } from "./game-object-action";
 
 /**
@@ -10,10 +9,11 @@ import type { GameObjectAction } from "./game-object-action";
  * @return 生成結果
  */
 export function firstUpdate(
-  gameObjectAction: Stream<GameObjectAction>
-): Stream<Update> {
-  return gameObjectAction
-    .chain(filter((v) => v.type === "Update"))
-    .chain(map((v) => v as Update))
-    .chain(first());
+  gameObjectAction: Observable<GameObjectAction>
+): Observable<Update> {
+  return gameObjectAction.pipe(
+    filter(v => v.type === "Update"),
+    map(v => v as Update),
+    first(),
+  );
 }

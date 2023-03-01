@@ -1,6 +1,6 @@
+import { Observable, Unsubscribable } from "rxjs";
 import type { NPCBattleCourseDifficulty } from "../../game/npc-battle-courses";
 import type { Resources } from "../../resource";
-import type { Stream, Unsubscriber } from "../../stream/stream";
 import type { DOMDialog } from "../dialog";
 import { bindEventListeners } from "./listeners";
 import type { DifficultyDialogProps } from "./props";
@@ -11,7 +11,7 @@ export class DifficultyDialog implements DOMDialog {
   /** プロパティ */
   #props: DifficultyDialogProps;
   /** アンサブスクライバ */
-  #unsubscribers: Unsubscriber[];
+  #unsubscribers: Unsubscribable[];
 
   /**
    * コンストラクタ
@@ -40,7 +40,7 @@ export class DifficultyDialog implements DOMDialog {
    *
    * @return 通知ストリーム
    */
-  notifySelectionComplete(): Stream<NPCBattleCourseDifficulty> {
+  notifySelectionComplete(): Observable<NPCBattleCourseDifficulty> {
     return this.#props.selectionComplete;
   }
 
@@ -49,7 +49,7 @@ export class DifficultyDialog implements DOMDialog {
    *
    * @return 通知ストリーム
    */
-  notifyClosed(): Stream<void> {
+  notifyClosed(): Observable<void> {
     return this.#props.closeDialog;
   }
 }

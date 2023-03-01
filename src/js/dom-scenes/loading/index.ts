@@ -1,8 +1,8 @@
+import { Observable, Unsubscribable } from "rxjs";
 import type {
   LoadingActions,
   LoadingProgress,
 } from "../../resource/loading/loading-actions";
-import type { Stream, Unsubscriber } from "../../stream/stream";
 import type { DOMScene } from "../dom-scene";
 import { LoadingPresentation } from "./presentation";
 
@@ -12,14 +12,14 @@ import { LoadingPresentation } from "./presentation";
 export class Loading implements DOMScene {
   #completedRate: number;
   #presentation: LoadingPresentation;
-  #unsubscriber: Unsubscriber;
+  #unsubscriber: Unsubscribable;
 
   /**
    * コンストラクタ
    *
    * @param loading ローディングストリーム
    */
-  constructor(loading: Stream<LoadingActions>) {
+  constructor(loading: Observable<LoadingActions>) {
     this.#completedRate = 0;
     this.#presentation = new LoadingPresentation();
     this.#unsubscriber = loading.subscribe((action) => {

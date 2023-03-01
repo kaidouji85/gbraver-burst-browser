@@ -1,6 +1,6 @@
+import { Observable, Unsubscribable } from "rxjs";
 import { pushDOMStream } from "../../dom/event-stream";
 import { Resources } from "../../resource";
-import { Stream, Unsubscriber } from "../../stream/stream";
 import { DOMDialog } from "../dialog";
 import { onBackgroundPush } from "./listeners/on-background-push";
 import { onCloseButtonPush } from "./listeners/on-close-button-push";
@@ -15,7 +15,7 @@ export class RejectPrivateMatchEntryDialog implements DOMDialog {
   /** プロパティ */
   #props: RejectPrivateMatchEntryDialogProps;
   /** アンサブスクライバ */
-  #unsubscribers: Unsubscriber[];
+  #unsubscribers: Unsubscribable[];
 
   /**
    * コンストラクタ
@@ -52,7 +52,7 @@ export class RejectPrivateMatchEntryDialog implements DOMDialog {
    * ダイアログ閉じる通知
    * @return 通知ストリーム
    */
-  notifyDialogClosed(): Stream<void> {
+  notifyDialogClosed(): Observable<void> {
     return this.#props.dialogClosed;
   }
 }

@@ -1,6 +1,6 @@
+import { Observable, Unsubscribable } from "rxjs";
 import { pushDOMStream } from "../../dom/event-stream";
 import { Resources } from "../../resource";
-import { Stream, Unsubscriber } from "../../stream/stream";
 import { DOMDialog } from "../dialog";
 import { onBackgroundPush } from "./listeners/on-background-push";
 import { onCasualMatchSelect } from "./listeners/on-casual-match-select";
@@ -17,7 +17,7 @@ export class NetBattleSelectorDialog implements DOMDialog {
   /** プロパティ */
   #props: NetBattleSelectorDialogProps;
   /** アンサブスクライバ */
-  #unsubscribers: Unsubscriber[];
+  #unsubscribers: Unsubscribable[];
 
   /**
    * コンストラクタ
@@ -60,7 +60,7 @@ export class NetBattleSelectorDialog implements DOMDialog {
    * カジュアルマッチを選択したことを通知する
    * @return 通知ストリーム
    */
-  notifyCasualMatchSelection(): Stream<void> {
+  notifyCasualMatchSelection(): Observable<void> {
     return this.#props.casualMatchSelection;
   }
 
@@ -68,7 +68,7 @@ export class NetBattleSelectorDialog implements DOMDialog {
    * プライベートマッチ（ホスト）を選択したことを通知する
    * @return 通知ストリーム
    */
-  notifyPrivateMatchHostSelection(): Stream<void> {
+  notifyPrivateMatchHostSelection(): Observable<void> {
     return this.#props.privateMatchHostSelection;
   }
 
@@ -76,7 +76,7 @@ export class NetBattleSelectorDialog implements DOMDialog {
    * プライベートマッチ（ゲスト）を選択したことを通知する
    * @return 通知ストリーム
    */
-  notifyPrivateMatchGuestSelection(): Stream<void> {
+  notifyPrivateMatchGuestSelection(): Observable<void> {
     return this.#props.privateMatchGuestSelection;
   }
 
@@ -84,7 +84,7 @@ export class NetBattleSelectorDialog implements DOMDialog {
    * ダイアログクローズを通知する
    * @return 通知ストリーム
    */
-  notifyClosed(): Stream<void> {
+  notifyClosed(): Observable<void> {
     return this.#props.dialogClosed;
   }
 }
