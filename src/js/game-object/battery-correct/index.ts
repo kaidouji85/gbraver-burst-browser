@@ -1,5 +1,6 @@
+import { Observable } from "rxjs";
+
 import type { Resources } from "../../resource";
-import type { Stream } from "../../stream/stream";
 import type { GameObjectAction } from "../action/game-object-action";
 import { BatteryCorrect } from "./battery-correct";
 import { EnemyBatteryCorrectView } from "./view/enemy-battery-correct-view";
@@ -14,7 +15,7 @@ import { PlayerBatteryCorrectView } from "./view/player-battery-correct-view";
  */
 export function playerBatteryCorrect(
   resources: Resources,
-  gameObjectAction: Stream<GameObjectAction>
+  gameObjectAction: Observable<GameObjectAction>
 ): BatteryCorrect {
   const view = new PlayerBatteryCorrectView(resources);
   return new BatteryCorrect(view, gameObjectAction);
@@ -29,7 +30,7 @@ export function playerBatteryCorrect(
  */
 export function enemyBatteryCorrect(
   resources: Resources,
-  gameObjectAction: Stream<GameObjectAction>
+  gameObjectAction: Observable<GameObjectAction>
 ): BatteryCorrect {
   const view = new EnemyBatteryCorrectView(resources);
   return new BatteryCorrect(view, gameObjectAction);

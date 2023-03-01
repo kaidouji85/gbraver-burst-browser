@@ -1,8 +1,8 @@
+import { Observable, Unsubscribable } from "rxjs";
 import * as THREE from "three";
 
 import { Animate } from "../../../animation/animate";
 import type { PreRender } from "../../../game-loop/pre-render";
-import type { Stream, Unsubscriber } from "../../../stream/stream";
 import type { HUDTracking } from "../../../tracking/hud-tracking";
 import type { GameObjectAction } from "../../action/game-object-action";
 import { hidden } from "./animation/hidden";
@@ -17,7 +17,7 @@ import type { WingDozerCutInView } from "./view/wing-dozer-cutin-view";
 export class WingDozerCutIn implements HUDTracking {
   #model: WingDozerCutInModel;
   #view: WingDozerCutInView;
-  #unsubscriber: Unsubscriber;
+  #unsubscriber: Unsubscribable;
 
   /**
    * コンストラクタ
@@ -27,7 +27,7 @@ export class WingDozerCutIn implements HUDTracking {
    */
   constructor(
     view: WingDozerCutInView,
-    gameObjectAction: Stream<GameObjectAction>
+    gameObjectAction: Observable<GameObjectAction>
   ) {
     this.#model = createInitialValue();
     this.#view = view;

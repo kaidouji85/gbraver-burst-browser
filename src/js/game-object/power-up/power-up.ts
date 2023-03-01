@@ -1,9 +1,9 @@
+import { Observable, Unsubscribable } from "rxjs";
 import * as THREE from "three";
 
 import { Animate } from "../../animation/animate";
 import type { PreRender } from "../../game-loop/pre-render";
 import type { Resources } from "../../resource";
-import type { Stream, Unsubscriber } from "../../stream/stream";
 import type { GameObjectAction } from "../action/game-object-action";
 import { popUp } from "./animation/pop-up";
 import { createInitialValue } from "./model/initial-value";
@@ -18,7 +18,7 @@ export class PowerUp {
   #model: PowerUpModel;
   #view: PowerUpView;
   #sounds: PowerUpSounds;
-  #unsubscriber: Unsubscriber;
+  #unsubscriber: Unsubscribable;
 
   /**
    * コンストラクタ
@@ -30,7 +30,7 @@ export class PowerUp {
   constructor(
     view: PowerUpView,
     resources: Resources,
-    gameObjectAction: Stream<GameObjectAction>
+    gameObjectAction: Observable<GameObjectAction>
   ) {
     this.#model = createInitialValue();
     this.#view = view;

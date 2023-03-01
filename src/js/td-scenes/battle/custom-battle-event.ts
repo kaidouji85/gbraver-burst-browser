@@ -5,8 +5,8 @@ import type {
   PilotSkillCommand,
   PlayerId,
 } from "gbraver-burst-core";
+import { Observable } from "rxjs";
 
-import type { Stream } from "../../stream/stream";
 import type { PushWindow } from "../../window/push-window";
 import { BattleSceneSounds } from "./sounds/sounds";
 import { BattleSceneView } from "./view";
@@ -23,7 +23,7 @@ export type CustomBattleEventProps = {
   readonly view: BattleSceneView;
 
   /** window押下ストリーム */
-  readonly pushWindow: Stream<PushWindow>;
+  readonly pushWindow: Observable<PushWindow>;
 
   /** 戦闘シーン効果音 */
   readonly sounds: BattleSceneSounds;

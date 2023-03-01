@@ -1,4 +1,5 @@
 import type { Player, PlayerId } from "gbraver-burst-core";
+import { Observable } from "rxjs";
 import * as THREE from "three";
 
 import type { GameObjectAction } from "../../../../../game-object/action/game-object-action";
@@ -8,7 +9,6 @@ import {
 } from "../../../../../game-object/cut-in/shin-braver";
 import { ShinBraverCutIn } from "../../../../../game-object/cut-in/shin-braver/shin-braver-cutin";
 import type { Resources } from "../../../../../resource";
-import type { Stream } from "../../../../../stream/stream";
 import type { HUDArmdozerObjects } from "./hud-armdozer-ibjects";
 
 /** コンストラクタのパラメータ */
@@ -56,7 +56,7 @@ export class ShinBraverHUD implements HUDArmdozerObjects {
  */
 export function playerShinBraverHUD(
   resources: Resources,
-  gameObjectAction: Stream<GameObjectAction>,
+  gameObjectAction: Observable<GameObjectAction>,
   state: Player
 ): HUDArmdozerObjects {
   return new ShinBraverHUD({
@@ -75,7 +75,7 @@ export function playerShinBraverHUD(
  */
 export function enemyShinBraverHUD(
   resources: Resources,
-  gameObjectAction: Stream<GameObjectAction>,
+  gameObjectAction: Observable<GameObjectAction>,
   state: Player
 ): HUDArmdozerObjects {
   return new ShinBraverHUD({

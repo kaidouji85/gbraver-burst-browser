@@ -1,15 +1,10 @@
+import { Observable, Subject, Unsubscribable } from "rxjs";
 import * as THREE from "three";
 
 import type { PreRender } from "../../../game-loop/pre-render";
 import { SimpleImageMesh } from "../../../mesh/simple-image-mesh";
 import type { Resources } from "../../../resource";
 import { CANVAS_IMAGE_IDS } from "../../../resource/canvas-image";
-import type {
-  Stream,
-  StreamSource,
-  Unsubscriber,
-} from "../../../stream/stream";
-import { createStreamSource } from "../../../stream/stream";
 import type { GameObjectAction } from "../../action/game-object-action";
 import type { PushDetector } from "../../push-detector/push-detector";
 import { circlePushDetector } from "../../push-detector/push-detector";
@@ -27,8 +22,8 @@ export class PilotButtonView {
   #pilotIcon: PilotIcon;
   #buttonDisabled: SimpleImageMesh;
   #pushDetector: PushDetector;
-  #pushButton: StreamSource<Event>;
-  #unsubscribers: Unsubscriber[];
+  #pushButton: Subject<Event>;
+  #unsubscribers: Unsubscribable[];
 
   /**
    * コンストラクタ
@@ -40,9 +35,9 @@ export class PilotButtonView {
   constructor(
     resources: Resources,
     pilotIcon: PilotIcon,
-    gameObjectAction: Stream<GameObjectAction>
+    gameObjectAction: Observable<GameObjectAction>
   ) {
-    this.#pushButton = createStreamSource();
+    this.#pushButton = new Subject();
     this.#group = new THREE.Group();
     const buttonDisabled =
       resources.canvasImages.find(
@@ -157,7 +152,7 @@ export class PilotButtonView {
    *
    * @return 通知ストリーム
    */
-  notifyPressed(): Stream<Event> {
+  notifyPressed(): Observable<Event> {
     return this.#pushButton;
   }
 }

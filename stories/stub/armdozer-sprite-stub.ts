@@ -1,7 +1,8 @@
+import { Observable } from "rxjs";
+
 import { GameObjectAction } from "../../src/js/game-object/action/game-object-action";
 import { ArmDozerSprite } from "../../src/js/game-object/armdozer/armdozer-sprite";
 import { Resources } from "../../src/js/resource";
-import { Stream } from "../../src/js/stream/stream";
 import { TDGameObjectStub } from "./td-game-object-stub";
 
 /**
@@ -13,7 +14,7 @@ import { TDGameObjectStub } from "./td-game-object-stub";
  */
 type SpriteGenerator<X extends ArmDozerSprite> = (
   resources: Resources,
-  gameObjectAction: Stream<GameObjectAction>
+  gameObjectAction: Observable<GameObjectAction>
 ) => X;
 
 /**

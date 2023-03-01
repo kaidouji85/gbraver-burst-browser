@@ -1,4 +1,5 @@
 import type { GameEnd, GameState, Player, PlayerId } from "gbraver-burst-core";
+import { Observable, Subject } from "rxjs";
 
 import type { BGMManager } from "../../bgm/bgm-manager";
 import { Exclusive } from "../../exclusive/exclusive";
@@ -8,8 +9,6 @@ import type { RendererDomGetter } from "../../render/renderer-dom-getter";
 import type { Rendering } from "../../render/rendering";
 import type { Resources } from "../../resource";
 import type { SoundId } from "../../resource/sound";
-import type { Stream, StreamSource } from "../../stream/stream";
-import { createStreamSource } from "../../stream/stream";
 import type { PushWindow } from "../../window/push-window";
 import type { Resize } from "../../window/resize";
 import type { BattleProgress } from "./battle-progress";
@@ -38,7 +37,7 @@ export type BattleSceneProps = {
   initialState: GameState[];
 
   /** バトル終了ストリーム */
-  endBattle: StreamSource<BattleEnd>;
+  endBattle: Subject<BattleEnd>;
 
   /** バトル進行オブジェクト */
   battleProgress: BattleProgress;
@@ -53,7 +52,7 @@ export type BattleSceneProps = {
   view: BattleSceneView;
 
   /** ウインドウ押下ストリーム */
-  pushWindow: Stream<PushWindow>;
+  pushWindow: Observable<PushWindow>;
 
   /** 戦闘シーン効果音 */
   sounds: BattleSceneSounds;
@@ -95,13 +94,13 @@ export type BattleScenePropsCreatorParams = {
   enemy: Player;
 
   /** ゲームループストリーム */
-  gameLoop: Stream<GameLoop>;
+  gameLoop: Observable<GameLoop>;
 
   /** リサイズストリーム */
-  resize: Stream<Resize>;
+  resize: Observable<Resize>;
 
   /** window押下ストリーム */
-  pushWindow: Stream<PushWindow>;
+  pushWindow: Observable<PushWindow>;
 
   /** カスタムバトルイベント */
   customBattleEvent?: CustomBattleEvent;
@@ -122,7 +121,7 @@ export function createBattleSceneProps(
     pushWindow: params.pushWindow,
     exclusive: new Exclusive(),
     initialState: params.initialState,
-    endBattle: createStreamSource(),
+    endBattle: new Subject(),
     battleProgress: params.battleProgress,
     customBattleEvent: params.customBattleEvent,
     view: new BattleSceneView({

@@ -1,5 +1,6 @@
 import type { PilotId } from "gbraver-burst-core";
 import { Howl } from "howler";
+import { Observable, Subject, Unsubscribable } from "rxjs";
 
 import { pop } from "../../../dom/animation";
 import type { PushDOM } from "../../../dom/event-stream";
@@ -8,12 +9,6 @@ import { replaceDOM } from "../../../dom/replace-dom";
 import { Exclusive } from "../../../exclusive/exclusive";
 import type { Resources } from "../../../resource";
 import { SOUND_IDS } from "../../../resource/sound";
-import type {
-  Stream,
-  StreamSource,
-  Unsubscriber,
-} from "../../../stream/stream";
-import { createStreamSource } from "../../../stream/stream";
 import { domUuid } from "../../../uuid/dom-uuid";
 import { createPilotIcon } from "./create-pilot-icon";
 import { PilotIcon } from "./pilot-icon";
@@ -97,10 +92,10 @@ export class PilotSelector {
   #prevButton: HTMLElement;
   #changeValueSound: Howl;
   #decideSound: Howl;
-  #change: StreamSource<PilotId>;
-  #decide: StreamSource<PilotId>;
-  #prev: StreamSource<void>;
-  #unsubscribers: Unsubscriber[];
+  #change: Subject<PilotId>;
+  #decide: Subject<PilotId>;
+  #prev: Subject<void>;
+  #unsubscribers: Unsubscribable[];
 
   /**
    * コンストラクタ
@@ -116,9 +111,9 @@ export class PilotSelector {
   ) {
     this.#pilotId = initialPilotId;
     this.#exclusive = new Exclusive();
-    this.#change = createStreamSource();
-    this.#decide = createStreamSource();
-    this.#prev = createStreamSource();
+    this.#change = new Subject();
+    this.#decide = new Subject();
+    this.#prev = new Subject();
     this.#changeValueSound =
       resources.sounds.find((v) => v.id === SOUND_IDS.CHANGE_VALUE)?.sound ??
       new Howl({ src: "" });
@@ -225,7 +220,7 @@ export class PilotSelector {
    *
    * @return 通知ストリーム
    */
-  notifyChanges(): Stream<PilotId> {
+  notifyChanges(): Observable<PilotId> {
     return this.#change;
   }
 
@@ -234,7 +229,7 @@ export class PilotSelector {
    *
    * @return 通知ストリーム
    */
-  notifyDecision(): Stream<PilotId> {
+  notifyDecision(): Observable<PilotId> {
     return this.#decide;
   }
 
@@ -242,7 +237,7 @@ export class PilotSelector {
    * 戻る 通知
    * @return 通知ストリーム
    */
-  notifyPrev(): Stream<void> {
+  notifyPrev(): Observable<void> {
     return this.#prev;
   }
 

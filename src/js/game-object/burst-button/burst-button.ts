@@ -1,12 +1,11 @@
 import { Howl } from "howler";
+import { Observable, Subject, Unsubscribable } from "rxjs";
 import * as THREE from "three";
 
 import { Animate } from "../../animation/animate";
 import type { PreRender } from "../../game-loop/pre-render";
 import type { Resources } from "../../resource";
 import { SOUND_IDS } from "../../resource/sound";
-import type { Stream, StreamSource, Unsubscriber } from "../../stream/stream";
-import { createStreamSource } from "../../stream/stream";
 import type { GameObjectAction } from "../action/game-object-action";
 import { close } from "./animation/close";
 import { decide } from "./animation/decide";
@@ -21,8 +20,8 @@ export class BurstButton {
   #model: BurstButtonModel;
   #view: BurstButtonView;
   #pushButtonSound: Howl;
-  #pushButton: StreamSource<Event>;
-  #unsubscriber: Unsubscriber;
+  #pushButton: Subject<Event>;
+  #unsubscriber: Unsubscribable;
 
   /**
    * コンストラクタ
@@ -33,7 +32,7 @@ export class BurstButton {
    */
   constructor(
     resources: Resources,
-    gameObjectAction: Stream<GameObjectAction>,
+    gameObjectAction: Observable<GameObjectAction>,
     armdozerIcon: ArmdozerIcon
   ) {
     const pushButtonResource = resources.sounds.find(
@@ -42,7 +41,7 @@ export class BurstButton {
     this.#pushButtonSound = pushButtonResource
       ? pushButtonResource.sound
       : new Howl({ src: "" });
-    this.#pushButton = createStreamSource();
+    this.#pushButton = new Subject();
     this.#model = createInitialValue();
     this.#view = new BurstButtonView({
       resources: resources,
@@ -112,7 +111,7 @@ export class BurstButton {
    *
    * @return 通知ストリーム
    */
-  notifyPressed(): Stream<Event> {
+  notifyPressed(): Observable<Event> {
     return this.#pushButton;
   }
 

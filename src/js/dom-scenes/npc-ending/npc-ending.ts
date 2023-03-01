@@ -1,4 +1,5 @@
 import { Howl } from "howler";
+import { Observable, Subject, Unsubscribable } from "rxjs";
 
 import type { BGMManager } from "../../bgm/bgm-manager";
 import { fadeIn, play } from "../../bgm/bgm-operators";
@@ -8,8 +9,6 @@ import type { Resources } from "../../resource";
 import { PathIds } from "../../resource/path";
 import type { SoundResource } from "../../resource/sound";
 import { createEmptySoundResource, SOUND_IDS } from "../../resource/sound";
-import type { Stream, StreamSource, Unsubscriber } from "../../stream/stream";
-import { createStreamSource } from "../../stream/stream";
 import { domUuid } from "../../uuid/dom-uuid";
 import { waitElementLoaded } from "../../wait/wait-element-loaded";
 import type { DOMScene } from "../dom-scene";
@@ -76,8 +75,8 @@ export class NPCEnding implements DOMScene {
   #bgm: BGMManager;
   #endingBGM: SoundResource;
   #canOperation: boolean;
-  #endNPCEnding: StreamSource<void>;
-  #unsubscriber: Unsubscriber[];
+  #endNPCEnding: Subject<void>;
+  #unsubscriber: Unsubscribable[];
 
   /**
    * コンストラクタ
@@ -114,7 +113,7 @@ export class NPCEnding implements DOMScene {
       resources.sounds.find((v) => v.id === SOUND_IDS.NPC_ENDING) ??
       createEmptySoundResource();
     this.#canOperation = true;
-    this.#endNPCEnding = createStreamSource();
+    this.#endNPCEnding = new Subject();
     this.#unsubscriber = [
       pushDOMStream(this.#root).subscribe((action) => {
         this.#onScreenPush(action);
@@ -149,7 +148,7 @@ export class NPCEnding implements DOMScene {
    *
    * @return 通知ストリーム
    */
-  notifyFinish(): Stream<void> {
+  notifyFinish(): Observable<void> {
     return this.#endNPCEnding;
   }
 

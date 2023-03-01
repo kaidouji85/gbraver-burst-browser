@@ -1,3 +1,5 @@
+import { Subject } from "rxjs";
+
 import { Exclusive } from "../../exclusive/exclusive";
 import { Resources } from "../../resource";
 import {
@@ -5,7 +7,6 @@ import {
   SOUND_IDS,
   SoundResource,
 } from "../../resource/sound";
-import { createStreamSource, StreamSource } from "../../stream/stream";
 import { domUuid } from "../../uuid/dom-uuid";
 import { ROOT_CLASS } from "./dom/class-name";
 import { DataIDs } from "./dom/data-ids";
@@ -31,13 +32,13 @@ export type NetBattleSelectorDialogProps = {
   /** 効果音 値変更 */
   valueChange: SoundResource;
   /** カジュアルマッチ選択通知 */
-  casualMatchSelection: StreamSource<void>;
+  casualMatchSelection: Subject<void>;
   /** プライベートマッチ（ホスト）選択通知 */
-  privateMatchHostSelection: StreamSource<void>;
+  privateMatchHostSelection: Subject<void>;
   /** プライベートマッチ（ゲスト）選択通知 */
-  privateMatchGuestSelection: StreamSource<void>;
+  privateMatchGuestSelection: Subject<void>;
   /** ダイアログクローズ通知 */
-  dialogClosed: StreamSource<void>;
+  dialogClosed: Subject<void>;
   /** 排他制御 */
   exclusive: Exclusive;
 };
@@ -74,10 +75,10 @@ export function createNetBattleSelectrProps(
     valueChange:
       resources.sounds.find((v) => v.id === SOUND_IDS.CHANGE_VALUE) ??
       createEmptySoundResource(),
-    casualMatchSelection: createStreamSource(),
-    privateMatchHostSelection: createStreamSource(),
-    privateMatchGuestSelection: createStreamSource(),
-    dialogClosed: createStreamSource(),
+    casualMatchSelection: new Subject(),
+    privateMatchHostSelection: new Subject(),
+    privateMatchGuestSelection: new Subject(),
+    dialogClosed: new Subject(),
     exclusive: new Exclusive(),
   };
 }

@@ -1,11 +1,10 @@
 import { Howl } from "howler";
+import { Subject } from "rxjs";
 
 import { Exclusive } from "../../exclusive/exclusive";
 import type { Resources } from "../../resource";
 import { PathIds } from "../../resource/path";
 import { SOUND_IDS } from "../../resource/sound";
-import type { StreamSource } from "../../stream/stream";
-import { createStreamSource } from "../../stream/stream";
 import { domUuid } from "../../uuid/dom-uuid";
 import { waitElementLoaded } from "../../wait/wait-element-loaded";
 import { ROOT_CLASS } from "./dom/class-name";
@@ -68,25 +67,25 @@ export type TitleProps = {
   pushButton: Howl;
 
   /** ログイン押下ストリーム */
-  pushLogin: StreamSource<void>;
+  pushLogin: Subject<void>;
 
   /** 削除押下ストリーム */
-  pushDeleteAccount: StreamSource<void>;
+  pushDeleteAccount: Subject<void>;
 
   /** ログアウト押下ストリーム */
-  pushLogout: StreamSource<void>;
+  pushLogout: Subject<void>;
 
   /** チュートリアル押下ストリーム */
-  pushTutorial: StreamSource<void>;
+  pushTutorial: Subject<void>;
 
   /** アーケード押下ストリーム */
-  pushArcade: StreamSource<void>;
+  pushArcade: Subject<void>;
 
   /** ネット対戦押下ストリーム */
-  pushNetBattle: StreamSource<void>;
+  pushNetBattle: Subject<void>;
 
   /** 設定押下ストリーム */
-  pushConfig: StreamSource<void>;
+  pushConfig: Subject<void>;
 };
 
 /** タイトル画面プロパティ生成パラメータ */
@@ -156,12 +155,12 @@ export function createTitleProps(params: CreateTitlePropsParams): TitleProps {
     changeValue:
       params.resources.sounds.find((v) => v.id === SOUND_IDS.CHANGE_VALUE)
         ?.sound ?? new Howl({ src: "" }),
-    pushLogin: createStreamSource(),
-    pushDeleteAccount: createStreamSource(),
-    pushLogout: createStreamSource(),
-    pushTutorial: createStreamSource(),
-    pushArcade: createStreamSource(),
-    pushNetBattle: createStreamSource(),
-    pushConfig: createStreamSource(),
+    pushLogin: new Subject(),
+    pushDeleteAccount: new Subject(),
+    pushLogout: new Subject(),
+    pushTutorial: new Subject(),
+    pushArcade: new Subject(),
+    pushNetBattle: new Subject(),
+    pushConfig: new Subject(),
   };
 }

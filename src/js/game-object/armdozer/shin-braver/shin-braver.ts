@@ -1,11 +1,11 @@
 import TWEEN, { Group } from "@tweenjs/tween.js";
+import { Observable, Unsubscribable } from "rxjs";
 import * as THREE from "three";
 
 import { Animate } from "../../../animation/animate";
 import type { PreRender } from "../../../game-loop/pre-render";
 import type { Update } from "../../../game-loop/update";
 import type { Resources } from "../../../resource";
-import type { Stream, Unsubscriber } from "../../../stream/stream";
 import { firstUpdate } from "../../action/first-update";
 import type { GameObjectAction } from "../../action/game-object-action";
 import type { ArmDozerSprite } from "../armdozer-sprite";
@@ -47,7 +47,7 @@ export class ShinBraver extends EmptyArmDozerSprite implements ArmDozerSprite {
   #activeFlashTween: Group;
 
   /** アンサブスクライバ */
-  #unsubscribers: Unsubscriber[];
+  #unsubscribers: Unsubscribable[];
 
   /**
    * コンストラクタ
@@ -59,7 +59,7 @@ export class ShinBraver extends EmptyArmDozerSprite implements ArmDozerSprite {
   constructor(
     view: ShinBraverView,
     resources: Resources,
-    gameObjectAction: Stream<GameObjectAction>
+    gameObjectAction: Observable<GameObjectAction>
   ) {
     super();
     this.#model = createInitialValue();

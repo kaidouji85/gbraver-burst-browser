@@ -1,5 +1,6 @@
+import { Observable } from "rxjs";
+
 import type { MessageWindow } from "../game-dom/message-window/message-window";
-import type { Stream } from "../stream/stream";
 import type { CustomBattleEventProps } from "../td-scenes/battle/custom-battle-event";
 import { BattleSceneSounds } from "../td-scenes/battle/sounds/sounds";
 import type { PushWindow } from "../window/push-window";
@@ -21,7 +22,7 @@ type Paragraph = string[];
  */
 async function scrollMessages(
   messageWindow: MessageWindow,
-  pushWindow: Stream<PushWindow>,
+  pushWindow: Observable<PushWindow>,
   sounds: BattleSceneSounds,
   paragraphs: Paragraph[]
 ): Promise<void> {

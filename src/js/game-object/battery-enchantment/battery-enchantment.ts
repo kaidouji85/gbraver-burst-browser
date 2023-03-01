@@ -1,9 +1,9 @@
+import { Observable, Unsubscribable } from "rxjs";
 import * as THREE from "three";
 
 import { Animate } from "../../animation/animate";
 import type { PreRender } from "../../game-loop/pre-render";
 import type { Resources } from "../../resource";
-import type { Stream, Unsubscriber } from "../../stream/stream";
 import type { GameObjectAction } from "../action/game-object-action";
 import { popUp } from "./animation/pop-up";
 import type { BatteryEnchantmentModel } from "./model/battery-enchantment-model";
@@ -18,7 +18,7 @@ export class BatteryEnchantment {
   #model: BatteryEnchantmentModel;
   #view: BatteryEnchantmentView;
   #sounds: BatteryEnchantmentSounds;
-  #unsubscriber: Unsubscriber;
+  #unsubscriber: Unsubscribable;
 
   /**
    * コンストラクタ
@@ -30,7 +30,7 @@ export class BatteryEnchantment {
   constructor(
     view: BatteryEnchantmentView,
     resources: Resources,
-    gameObjectAction: Stream<GameObjectAction>
+    gameObjectAction: Observable<GameObjectAction>
   ) {
     this.#model = createInitialValue();
     this.#view = view;

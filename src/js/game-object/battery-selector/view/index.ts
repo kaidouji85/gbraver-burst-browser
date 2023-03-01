@@ -1,8 +1,8 @@
+import { Observable } from "rxjs";
 import * as THREE from "three";
 
 import type { PreRender } from "../../../game-loop/pre-render";
 import type { Resources } from "../../../resource";
-import type { Stream } from "../../../stream/stream";
 import type { GameObjectAction } from "../../action/game-object-action";
 import { HUDUIScale } from "../../scale";
 import type { BatterySelectorModel } from "../model";
@@ -17,7 +17,7 @@ type Param = {
   resources: Resources;
 
   /** ゲームオブジェクトアクション */
-  gameObjectAction: Stream<GameObjectAction>;
+  gameObjectAction: Observable<GameObjectAction>;
 
   /**
    * OKボタンが押された時に呼ばれるコールバック関数

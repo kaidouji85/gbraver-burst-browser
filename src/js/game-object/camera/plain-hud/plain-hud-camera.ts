@@ -1,8 +1,8 @@
+import { Observable, Unsubscribable } from "rxjs";
 import * as THREE from "three";
 
 import { createHUDCamera } from "../../../camera/create-hud-camera";
 import { onResizeOrthographicCamera } from "../../../camera/resize";
-import type { Stream, Unsubscriber } from "../../../stream/stream";
 import type { Resize } from "../../../window/resize";
 import { HUD_CAMERA_ZINDEX } from "../../hud-zindex";
 
@@ -12,14 +12,14 @@ import { HUD_CAMERA_ZINDEX } from "../../hud-zindex";
  */
 export class PlainHUDCamera {
   #camera: THREE.OrthographicCamera;
-  #unsubscriber: Unsubscriber;
+  #unsubscriber: Unsubscribable;
 
   /**
    * コンストラクタ
    *
    * @param resize リサイズストリーム
    */
-  constructor(resize: Stream<Resize>) {
+  constructor(resize: Observable<Resize>) {
     this.#camera = createHUDCamera();
     this.#camera.position.z = HUD_CAMERA_ZINDEX;
     this.#unsubscriber = resize.subscribe((action) => {

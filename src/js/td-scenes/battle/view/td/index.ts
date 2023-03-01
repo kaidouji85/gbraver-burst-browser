@@ -1,4 +1,5 @@
 import type { Player } from "gbraver-burst-core";
+import { Observable } from "rxjs";
 import * as THREE from "three";
 
 import type { PreRender } from "../../../../game-loop/pre-render";
@@ -9,7 +10,6 @@ import { TDCamera } from "../../../../game-object/camera/td";
 import type { OverlapEvent } from "../../../../render/overlap-event/overlap-event";
 import type { OverlapNotifier } from "../../../../render/overlap-notifier";
 import type { Resources } from "../../../../resource";
-import type { Stream } from "../../../../stream/stream";
 import type { Resize } from "../../../../window/resize";
 import { enemyTDArmdozer, playerTDArmdozer } from "./armdozer-objects";
 import type { TDArmdozerObjects } from "./armdozer-objects/armdozer-objects";
@@ -24,9 +24,9 @@ type Param = {
   renderer: OverlapNotifier;
   player: Player;
   enemy: Player;
-  resize: Stream<Resize>;
-  update: Stream<Update>;
-  preRender: Stream<PreRender>;
+  resize: Observable<Resize>;
+  update: Observable<Update>;
+  preRender: Observable<PreRender>;
 };
 
 /** 3Dレイヤー */
@@ -36,8 +36,8 @@ export class ThreeDimensionLayer {
   players: TDPlayer[];
   armdozerObjects: TDArmdozerObjects[];
   gameObjects: TDGameObjects;
-  #overlap: Stream<OverlapEvent>;
-  #gameObjectAction: Stream<GameObjectAction>;
+  #overlap: Observable<OverlapEvent>;
+  #gameObjectAction: Observable<GameObjectAction>;
 
   /**
    * コンストラクタ

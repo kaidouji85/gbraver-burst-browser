@@ -1,5 +1,6 @@
+import { Observable } from "rxjs";
+
 import type { Resources } from "../../../resource";
-import type { Stream } from "../../../stream/stream";
 import type { GameObjectAction } from "../../action/game-object-action";
 import { GenesisBraver } from "./genesis-braver";
 import { EnemyGenesisBraverView } from "./view/enemy-genesis-braver-view";
@@ -13,7 +14,7 @@ import { PlayerGenesisBraverView } from "./view/player-genesis-braver-view";
  */
 export function PlayerGenesisBraver(
   resources: Resources,
-  gameObjectAction: Stream<GameObjectAction>
+  gameObjectAction: Observable<GameObjectAction>
 ): GenesisBraver {
   const view = new PlayerGenesisBraverView(resources);
   return new GenesisBraver(view, resources, gameObjectAction);
@@ -27,7 +28,7 @@ export function PlayerGenesisBraver(
  */
 export function EnemyGenesisBraver(
   resources: Resources,
-  gameObjectAction: Stream<GameObjectAction>
+  gameObjectAction: Observable<GameObjectAction>
 ): GenesisBraver {
   const view = new EnemyGenesisBraverView(resources);
   return new GenesisBraver(view, resources, gameObjectAction);

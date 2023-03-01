@@ -1,4 +1,5 @@
 import type { Player, PlayerId } from "gbraver-burst-core";
+import { Observable } from "rxjs";
 import * as THREE from "three";
 
 import type { GameObjectAction } from "../../../../../game-object/action/game-object-action";
@@ -9,7 +10,6 @@ import {
 } from "../../../../../game-object/armdozer/shin-braver";
 import { ShinBraver } from "../../../../../game-object/armdozer/shin-braver/shin-braver";
 import type { Resources } from "../../../../../resource";
-import type { Stream } from "../../../../../stream/stream";
 import type { TDArmdozerObjects } from "./armdozer-objects";
 
 /**3Dレイヤー シンブレイバー 3Dレイヤー フィールド */
@@ -61,7 +61,7 @@ export class ShinBraverTD implements ShinBraverTDField, TDArmdozerObjects {
  */
 export function playerShinBraverTD(
   resources: Resources,
-  gameObjectAction: Stream<GameObjectAction>,
+  gameObjectAction: Observable<GameObjectAction>,
   state: Player
 ): ShinBraverTD {
   return new ShinBraverTD(state.playerId, {
@@ -78,7 +78,7 @@ export function playerShinBraverTD(
  */
 export function enemyShinBraverTD(
   resources: Resources,
-  gameObjectAction: Stream<GameObjectAction>,
+  gameObjectAction: Observable<GameObjectAction>,
   state: Player
 ): ShinBraverTD {
   return new ShinBraverTD(state.playerId, {

@@ -1,10 +1,9 @@
 import { Howl } from "howler";
+import { Subject } from "rxjs";
 
 import { Exclusive } from "../../../exclusive/exclusive";
 import type { Resources } from "../../../resource";
 import { SOUND_IDS } from "../../../resource/sound";
-import type { StreamSource } from "../../../stream/stream";
-import { createStreamSource } from "../../../stream/stream";
 import { domUuid } from "../../../uuid/dom-uuid";
 import { ROOT_CLASS_INVISIBLE } from "./dom/class-name";
 import { extractElements } from "./dom/elements";
@@ -37,13 +36,13 @@ export type ConfigChangedDialogProps = {
   pushButton: Howl;
 
   /** 閉じるストリーム */
-  closeStream: StreamSource<void>;
+  closeStream: Subject<void>;
 
   /** 設定変更受け入れ通知ストリーム */
-  acceptStream: StreamSource<void>;
+  acceptStream: Subject<void>;
 
   /** 設定変更破棄通知ストリーム */
-  discardStream: StreamSource<void>;
+  discardStream: Subject<void>;
 };
 
 /**
@@ -76,9 +75,9 @@ export function createConfigChangedDialogProps(
     resources.sounds.find((v) => v.id === SOUND_IDS.CHANGE_VALUE)?.sound ??
     new Howl({ src: "" });
   const exclusive = new Exclusive();
-  const closeStream = createStreamSource<void>();
-  const acceptStream = createStreamSource<void>();
-  const discardStream = createStreamSource<void>();
+  const closeStream = new Subject<void>();
+  const acceptStream = new Subject<void>();
+  const discardStream = new Subject<void>();
   return {
     root,
     backGround,

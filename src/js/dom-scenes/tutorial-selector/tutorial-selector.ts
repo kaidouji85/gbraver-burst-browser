@@ -1,3 +1,5 @@
+import { Observable, Subject, Unsubscribable } from "rxjs";
+
 import { pop } from "../../dom/animation";
 import type { PushDOM } from "../../dom/event-stream";
 import { pushDOMStream } from "../../dom/event-stream";
@@ -6,8 +8,6 @@ import type { Resources } from "../../resource";
 import { PathIds } from "../../resource/path";
 import type { SoundResource } from "../../resource/sound";
 import { createEmptySoundResource, SOUND_IDS } from "../../resource/sound";
-import type { Stream, StreamSource, Unsubscriber } from "../../stream/stream";
-import { createStreamSource } from "../../stream/stream";
 import { domUuid } from "../../uuid/dom-uuid";
 import { waitElementLoaded } from "../../wait/wait-element-loaded";
 import type { DOMScene } from "../dom-scene";
@@ -91,13 +91,13 @@ export class TutorialSelector implements DOMScene {
   #stages: HTMLElement;
   #prevButton: HTMLElement;
   #exclusive: Exclusive;
-  #prev: StreamSource<void>;
-  #stageSelect: StreamSource<TutorialStageSelect>;
+  #prev: Subject<void>;
+  #stageSelect: Subject<TutorialStageSelect>;
   #changeValue: SoundResource;
   /* eslint-disable @typescript-eslint/no-explicit-any */
   #isImageCutsLoaded: Promise<any>;
   /* eslint-enable */
-  #unsubscribers: Unsubscriber[];
+  #unsubscribers: Unsubscribable[];
 
   /**
    * コンストラクタ
@@ -117,8 +117,8 @@ export class TutorialSelector implements DOMScene {
     this.#stages = elements.stages;
     this.#prevButton = elements.prevButton;
     this.#exclusive = new Exclusive();
-    this.#prev = createStreamSource();
-    this.#stageSelect = createStreamSource();
+    this.#prev = new Subject();
+    this.#stageSelect = new Subject();
     this.#changeValue =
       resources.sounds.find((v) => v.id === SOUND_IDS.CHANGE_VALUE) ??
       createEmptySoundResource();
@@ -169,7 +169,7 @@ export class TutorialSelector implements DOMScene {
    * 戻るボタン押下通知
    * @return 通知ストリーム
    */
-  notifyPrev(): Stream<void> {
+  notifyPrev(): Observable<void> {
     return this.#prev;
   }
 
@@ -177,7 +177,7 @@ export class TutorialSelector implements DOMScene {
    * チュートリアルステージ選択通知
    * @return 通知ストリーム
    */
-  notifyStageSelection(): Stream<TutorialStageSelect> {
+  notifyStageSelection(): Observable<TutorialStageSelect> {
     return this.#stageSelect;
   }
 

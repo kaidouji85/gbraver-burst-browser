@@ -1,18 +1,16 @@
 import type { Battle } from "@gbraver-burst-network/browser-sdk";
-
-import type { Stream, StreamSource, Unsubscriber } from "../stream/stream";
-import { createStream, createStreamSource } from "../stream/stream";
+import { Observable, Subject, Unsubscribable } from "rxjs";
 
 /** 将来生成されるバトル管理オブジェクトからバトル強制終了ストリームを取り出す */
 export class FutureSuddenlyBattleEnd {
-  #notifier: StreamSource<void>;
-  #unsubscriber: Unsubscriber | null;
+  #notifier: Subject<void>;
+  #unsubscriber: Unsubscribable | null;
 
   /**
    * コンストラクタ
    */
   constructor() {
-    this.#notifier = createStreamSource();
+    this.#notifier = new Subject();
     this.#unsubscriber = null;
   }
 
@@ -23,9 +21,7 @@ export class FutureSuddenlyBattleEnd {
    */
   bind(battle: Battle): void {
     this.unbind();
-    this.#unsubscriber = createStream(
-      battle.suddenlyBattleNotifier()
-    ).subscribe(() => {
+    this.#unsubscriber = battle.suddenlyBattleNotifier().subscribe(() => {
       this.#notifier.next();
     });
   }
@@ -47,7 +43,7 @@ export class FutureSuddenlyBattleEnd {
    *
    * @return 通知ストリーム
    */
-  stream(): Stream<void> {
+  stream(): Observable<void> {
     return this.#notifier;
   }
 }

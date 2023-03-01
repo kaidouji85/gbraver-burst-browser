@@ -1,7 +1,6 @@
+import { filter, map, Observable, share } from "rxjs";
 import * as THREE from "three";
 
-import { filter, map, share } from "../../stream/operator";
-import type { Stream } from "../../stream/stream";
 import type { RendererDOMEvent } from "../dom-event/dom-event";
 import type { MouseDownRaycaster } from "./mouse-down-raycaster";
 import { toMouseDownRaycaster } from "./mouse-down-raycaster";
@@ -36,38 +35,37 @@ export type OverlapEvent =
  * @return 当たり判定ストリーム
  */
 export function toOverlapStream(
-  origin: Stream<RendererDOMEvent>,
+  origin: Observable<RendererDOMEvent>,
   rendererDOM: HTMLElement,
   camera: THREE.Camera
-): Stream<OverlapEvent> {
-  return origin
-    .chain(
-      map((v) => {
-        switch (v.type) {
-          case "mouseDown":
-            return toMouseDownRaycaster(v, rendererDOM, camera);
+): Observable<OverlapEvent> {
+  return origin.pipe(
+    map((v) => {
+      switch (v.type) {
+        case "mouseDown":
+          return toMouseDownRaycaster(v, rendererDOM, camera);
 
-          case "mouseMove":
-            return toMouseMoveRaycaster(v, rendererDOM, camera);
+        case "mouseMove":
+          return toMouseMoveRaycaster(v, rendererDOM, camera);
 
-          case "mouseUp":
-            return toMouseUpRaycaster(v, rendererDOM, camera);
+        case "mouseUp":
+          return toMouseUpRaycaster(v, rendererDOM, camera);
 
-          case "touchStart":
-            return toTouchStartRaycaster(v, rendererDOM, camera);
+        case "touchStart":
+          return toTouchStartRaycaster(v, rendererDOM, camera);
 
-          case "touchMove":
-            return toTouchMoveRaycaster(v, rendererDOM, camera);
+        case "touchMove":
+          return toTouchMoveRaycaster(v, rendererDOM, camera);
 
-          case "touchEnd":
-            return toTouchEndRaycaster(v, rendererDOM, camera);
+        case "touchEnd":
+          return toTouchEndRaycaster(v, rendererDOM, camera);
 
-          default:
-            return null;
-        }
-      })
-    )
-    .chain(filter((v) => !!v))
-    .chain(map((v) => v as OverlapEvent))
-    .chain(share());
+        default:
+          return null;
+      }
+    }),
+    filter((v) => !!v),
+    map((v) => v as OverlapEvent),
+    share()
+  );
 }

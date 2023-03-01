@@ -1,5 +1,6 @@
+import { Subject, Unsubscribable } from "rxjs";
+
 import type { DOMDialog } from "../../dom-dialogs/dialog";
-import type { StreamSource, Unsubscriber } from "../../stream/stream";
 import type { GameAction } from "../game-actions";
 
 /**
@@ -13,5 +14,5 @@ import type { GameAction } from "../game-actions";
  */
 export type DomDialogActionConnector<X extends DOMDialog> = (
   dialog: X,
-  gameAction: StreamSource<GameAction>
-) => Unsubscriber[];
+  gameAction: Subject<GameAction>
+) => Unsubscribable[];

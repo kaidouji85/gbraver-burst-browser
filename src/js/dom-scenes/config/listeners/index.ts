@@ -1,5 +1,6 @@
+import { Unsubscribable } from "rxjs";
+
 import { inputDOMStream, pushDOMStream } from "../../../dom/event-stream";
-import type { Unsubscriber } from "../../../stream/stream";
 import type { ConfigProps } from "../props";
 import { onAcceptConfigChange } from "./on-accept-config-change";
 import { onBGMVolumeChange } from "./on-bgm-volume-change";
@@ -15,7 +16,7 @@ import { onSEVolumeChange } from "./on-se-volume-change";
  * @param props 画面プロパティ
  * @return バインドしたイベントリスナのアンサブスクライバ
  */
-export function bindEventListeners(props: ConfigProps): Unsubscriber[] {
+export function bindEventListeners(props: ConfigProps): Unsubscribable[] {
   return [
     inputDOMStream(props.bgmVolumeSelector).subscribe((action) => {
       onBGMVolumeChange(props, action);

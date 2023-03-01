@@ -1,4 +1,5 @@
 import { BrowserSDK } from "@gbraver-burst-network/browser-sdk";
+import { Observable } from "rxjs";
 
 import type { BGMManager } from "../bgm/bgm-manager";
 import { createBGMManager } from "../bgm/bgm-manager";
@@ -11,7 +12,6 @@ import { Renderer } from "../render";
 import type { Resources } from "../resource";
 import { emptyResources } from "../resource";
 import type { ResourceRoot } from "../resource/resource-root";
-import type { Stream } from "../stream/stream";
 import type { PushWindow } from "../window/push-window";
 import { pushWindowsStream } from "../window/push-window";
 import type { Resize } from "../window/resize";
@@ -54,11 +54,11 @@ export interface GameProps {
   /** バトル強制終了監視 */
   suddenlyBattleEnd: FutureSuddenlyBattleEnd;
   /** リサイズ */
-  resize: Stream<Resize>;
+  resize: Observable<Resize>;
   /** window押下 */
-  pushWindow: Stream<PushWindow>;
+  pushWindow: Observable<PushWindow>;
   /** ゲームループ */
-  gameLoop: Stream<GameLoop>;
+  gameLoop: Observable<GameLoop>;
   /** cssカスタムプロパティ --vh */
   vh: CssVH;
   /** cssカスタムプロパティ --hud-ui-scale */
