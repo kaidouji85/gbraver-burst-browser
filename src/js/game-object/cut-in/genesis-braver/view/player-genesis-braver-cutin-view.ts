@@ -25,6 +25,11 @@ export class PlayerGenesisBraverCutInView implements GenesisBraverCutInView  {
   }
 
   /** @override */
+  destructor(): void {
+    this.#mesh.destructor();
+  }
+
+  /** @override */
   engage(model: GenesisBraverCutInModel): void {
     // NOP
   }

@@ -4,6 +4,11 @@ import { GenesisBraverCutInModel } from "../model/genesis-braver-cutin-model";
 /** ジェネシスブレイバー カットイン ビュー */
 export interface GenesisBraverCutInView {
   /**
+   * デストラクタ相当の処理
+   */
+  destructor(): void;
+
+  /**
    * モデルをビューに反映させる
    * @param model モデル
    */
@@ -11,6 +16,7 @@ export interface GenesisBraverCutInView {
 
   /**
    * シーンに追加するオブジェクトを取得
+   * @return 取得結果
    */
   getObject3D(): THREE.Object3D;
 }

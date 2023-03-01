@@ -7,8 +7,8 @@ export default {
 
 /** プレイヤーカットイン */
 export const playerCutIn = () => {
-  const stub = new HUDGameObjectStub(({resources}) => {
-    const cutin = playerGenesisBraverCutIn(resources);
+  const stub = new HUDGameObjectStub(({resources, gameObjectAction}) => {
+    const cutin = playerGenesisBraverCutIn(resources, gameObjectAction);
     return [cutin.getObject3D()];
   });
   stub.start();
