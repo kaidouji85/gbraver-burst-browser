@@ -1,5 +1,5 @@
+import { Unsubscribable } from "rxjs";
 import { pushDOMStream } from "../../../dom/event-stream";
-import type { Unsubscriber } from "../../../stream/stream";
 import type { TitleProps } from "../props";
 import { onArcadePush } from "./on-arcade-push";
 import { onAvatarPush } from "./on-avatar-push";
@@ -17,7 +17,7 @@ import { onTutorialPush } from "./on-tutorial-push";
  * @param props 画面プロパティ
  * @return バインドしたイベントリスナのアンサブスクライバ
  */
-export function bindEventListeners(props: TitleProps): Unsubscriber[] {
+export function bindEventListeners(props: TitleProps): Unsubscribable[] {
   return [
     pushDOMStream(props.root).subscribe((action) => {
       onRootPush(props, action);

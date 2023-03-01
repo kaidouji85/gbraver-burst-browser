@@ -1,5 +1,5 @@
+import { Observable } from "rxjs";
 import type { Resources } from "../../resource";
-import type { Stream } from "../../stream/stream";
 import type { GameObjectAction } from "../action/game-object-action";
 import { DamageIndicator } from "./damage-indicator";
 import { EnemyDamageIndicatorView } from "./view/enemy-damage-indicator-view";
@@ -14,7 +14,7 @@ import { PlayerDamageIndicatorView } from "./view/player-damage-indicator-view";
  */
 export function playerDamageIndicator(
   resources: Resources,
-  gameObjectAction: Stream<GameObjectAction>
+  gameObjectAction: Observable<GameObjectAction>
 ): DamageIndicator {
   const view = new PlayerDamageIndicatorView(resources);
   return new DamageIndicator(view, gameObjectAction);
@@ -29,7 +29,7 @@ export function playerDamageIndicator(
  */
 export function enemyDamageIndicator(
   resources: Resources,
-  gameObjectAction: Stream<GameObjectAction>
+  gameObjectAction: Observable<GameObjectAction>
 ): DamageIndicator {
   const view = new EnemyDamageIndicatorView(resources);
   return new DamageIndicator(view, gameObjectAction);

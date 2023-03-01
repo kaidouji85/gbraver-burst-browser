@@ -1,5 +1,5 @@
+import { Observable } from "rxjs";
 import type { Resources } from "../../resource";
-import type { Stream } from "../../stream/stream";
 import type { GameObjectAction } from "../action/game-object-action";
 import { BatteryNumber } from "./battery-number";
 import { EnemyBatteryNumberView } from "./view/enemy-battery-number-view";
@@ -14,7 +14,7 @@ import { PlayerBatteryNumberView } from "./view/player-battery-number-view";
  */
 export function playerBatteryNumber(
   resources: Resources,
-  gameObjectAction: Stream<GameObjectAction>
+  gameObjectAction: Observable<GameObjectAction>
 ): BatteryNumber {
   const view = new PlayerBatteryNumberView(resources);
   return new BatteryNumber(view, gameObjectAction);
@@ -29,7 +29,7 @@ export function playerBatteryNumber(
  */
 export function enemyBatteryNumber(
   resources: Resources,
-  gameObjectAction: Stream<GameObjectAction>
+  gameObjectAction: Observable<GameObjectAction>
 ): BatteryNumber {
   const view = new EnemyBatteryNumberView(resources);
   return new BatteryNumber(view, gameObjectAction);

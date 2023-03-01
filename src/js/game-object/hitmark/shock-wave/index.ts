@@ -1,5 +1,5 @@
+import { Observable } from "rxjs";
 import type { Resources } from "../../../resource";
-import type { Stream } from "../../../stream/stream";
 import type { GameObjectAction } from "../../action/game-object-action";
 import { initialValue } from "./model/initial-value";
 import { ShockWave } from "./shock-wave";
@@ -15,7 +15,7 @@ import { PlayerShockWaveView } from "./view/player-shock-wave-view";
  */
 export function playerShockWave(
   resources: Resources,
-  gameObjectAction: Stream<GameObjectAction>
+  gameObjectAction: Observable<GameObjectAction>
 ): ShockWave {
   const model = initialValue();
   const view = new PlayerShockWaveView(resources, model);
@@ -31,7 +31,7 @@ export function playerShockWave(
  */
 export function enemyShockWave(
   resources: Resources,
-  gameObjectAction: Stream<GameObjectAction>
+  gameObjectAction: Observable<GameObjectAction>
 ): ShockWave {
   const model = initialValue();
   const view = new EnemyShockWaveView(resources, model);

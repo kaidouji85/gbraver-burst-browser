@@ -1,5 +1,5 @@
+import { Observable } from "rxjs";
 import type { Resources } from "../../../resource";
-import type { Stream } from "../../../stream/stream";
 import type { GameObjectAction } from "../../action/game-object-action";
 import { ShinyaCutIn } from "./shinya";
 import { EnemyShinyaView } from "./view/enemy-shinya-view";
@@ -14,7 +14,7 @@ import { PlayerShinyaView } from "./view/player-shinya-view";
  */
 export function playerShinyaCutIn(
   resources: Resources,
-  gameObjectAction: Stream<GameObjectAction>
+  gameObjectAction: Observable<GameObjectAction>
 ): ShinyaCutIn {
   const view = new PlayerShinyaView(resources);
   return new ShinyaCutIn(view, resources, gameObjectAction);
@@ -29,7 +29,7 @@ export function playerShinyaCutIn(
  */
 export function enemyShinyaCutIn(
   resources: Resources,
-  gameObjectAction: Stream<GameObjectAction>
+  gameObjectAction: Observable<GameObjectAction>
 ): ShinyaCutIn {
   const view = new EnemyShinyaView(resources);
   return new ShinyaCutIn(view, resources, gameObjectAction);

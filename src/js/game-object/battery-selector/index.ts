@@ -1,4 +1,5 @@
 import TWEEN, { Group } from "@tweenjs/tween.js";
+import { Observable, Subject, Unsubscribable } from "rxjs";
 import * as THREE from "three";
 
 import { all } from "../../animation/all";
@@ -8,8 +9,6 @@ import { process } from "../../animation/process";
 import type { PreRender } from "../../game-loop/pre-render";
 import type { Update } from "../../game-loop/update";
 import type { Resources } from "../../resource";
-import type { Stream, StreamSource, Unsubscriber } from "../../stream/stream";
-import { createStreamSource } from "../../stream/stream";
 import type { GameObjectAction } from "../action/game-object-action";
 import { batteryMinusPop } from "./animation/battery-minus-pop";
 import { batteryPlusPop } from "./animation/battery-plus-pop";
@@ -33,7 +32,7 @@ type Param = {
   resources: Resources;
 
   /** ゲームオブジェクトアクション */
-  gameObjectAction: Stream<GameObjectAction>;
+  gameObjectAction: Observable<GameObjectAction>;
 
   /** 最大バッテリー */
   maxBattery: number;
@@ -60,16 +59,16 @@ export class BatterySelector {
   #batteryPlusTween: Group;
 
   /** 決定ボタン押下通知ストリーム */
-  #decidePush: StreamSource<Event>;
+  #decidePush: Subject<Event>;
 
   /** バッテリープラスボタン押下通知ストリーム */
-  #batteryPlusPush: StreamSource<void>;
+  #batteryPlusPush: Subject<void>;
 
   /** バッテリーマイナスボタン押下通知ストリーム */
-  #batteryMinusPush: StreamSource<void>;
+  #batteryMinusPush: Subject<void>;
 
   /** アンサブスクライバ */
-  #unsubscriber: Unsubscriber;
+  #unsubscriber: Unsubscribable;
 
   /**
    * コンストラクタ
@@ -81,9 +80,9 @@ export class BatterySelector {
     this.#batteryChangeTween = new TWEEN.Group();
     this.#batteryMinusTween = new TWEEN.Group();
     this.#batteryPlusTween = new TWEEN.Group();
-    this.#decidePush = createStreamSource();
-    this.#batteryMinusPush = createStreamSource();
-    this.#batteryPlusPush = createStreamSource();
+    this.#decidePush = new Subject();
+    this.#batteryMinusPush = new Subject();
+    this.#batteryPlusPush = new Subject();
     this.#sounds = createBatterySelectorSounds(param.resources);
     this.#unsubscriber = param.gameObjectAction.subscribe((action) => {
       if (action.type === "Update") {
@@ -209,7 +208,7 @@ export class BatterySelector {
    * 決定ボタン押下ストリーム
    * @return 通知ストリーム
    */
-  notifyDecision(): Stream<Event> {
+  notifyDecision(): Observable<Event> {
     return this.#decidePush;
   }
 
@@ -217,7 +216,7 @@ export class BatterySelector {
    * バッテリープラスボタン押下ストリーム
    * @return 通知ストリーム
    */
-  notifyBatteryPlus(): Stream<void> {
+  notifyBatteryPlus(): Observable<void> {
     return this.#batteryPlusPush;
   }
 
@@ -225,7 +224,7 @@ export class BatterySelector {
    * バッテリーマイナスボタン押下ストリーム
    * @return 通知ストリーム
    */
-  notifyBatteryMinus(): Stream<void> {
+  notifyBatteryMinus(): Observable<void> {
     return this.#batteryMinusPush;
   }
 

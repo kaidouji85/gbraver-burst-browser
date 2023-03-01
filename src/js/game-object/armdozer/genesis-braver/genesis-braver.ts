@@ -1,11 +1,11 @@
 import TWEEN, { Group } from "@tweenjs/tween.js";
+import { Observable, Unsubscribable } from "rxjs";
 import * as THREE from "three";
 
 import { Animate } from "../../../animation/animate";
 import type { PreRender } from "../../../game-loop/pre-render";
 import { Update } from "../../../game-loop/update";
 import type { Resources } from "../../../resource";
-import type { Stream, Unsubscriber } from "../../../stream/stream";
 import { firstUpdate } from "../../action/first-update";
 import type { GameObjectAction } from "../../action/game-object-action";
 import type { ArmDozerSprite } from "../armdozer-sprite";
@@ -43,7 +43,7 @@ export class GenesisBraver
   /** アクティブフラッシュTweenグループ */
   #activeFlashTween: Group;
   /** アンサブスクライバ */
-  #unsubscribers: Unsubscriber[];
+  #unsubscribers: Unsubscribable[];
 
   /**
    * コンストラクタ
@@ -54,7 +54,7 @@ export class GenesisBraver
   constructor(
     view: GenesisBraverView,
     resources: Resources,
-    gameAction: Stream<GameObjectAction>
+    gameAction: Observable<GameObjectAction>
   ) {
     super();
     this.#view = view;

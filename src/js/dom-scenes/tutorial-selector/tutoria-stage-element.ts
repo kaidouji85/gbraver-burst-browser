@@ -1,11 +1,10 @@
+import { map, Observable } from "rxjs";
 import { pop } from "../../dom/animation";
 import { pushDOMStream } from "../../dom/event-stream";
 import type { TutorialStageID } from "../../game/tutorial-stages";
 import type { Resources } from "../../resource";
 import type { SoundResource } from "../../resource/sound";
 import { createEmptySoundResource, SOUND_IDS } from "../../resource/sound";
-import { map } from "../../stream/operator";
-import type { Stream } from "../../stream/stream";
 
 /** ルートHTML class属性 */
 const ROOT_CLASS = "tutorial-stage";
@@ -56,7 +55,7 @@ export class TutorialStageElement {
   #pushButton: SoundResource;
 
   /** 選択通知ストリーム */
-  #select: Stream<void>;
+  #select: Observable<void>;
 
   /**
    * コンストラクタ
@@ -74,7 +73,7 @@ export class TutorialStageElement {
     this.#root = document.createElement("div");
     this.#root.className = ROOT_CLASS;
     this.#root.innerHTML = rootInnerHTML(level, stage.title);
-    this.#select = pushDOMStream(this.#root).chain(
+    this.#select = pushDOMStream(this.#root).pipe(
       map((action) => {
         action.event.preventDefault();
         action.event.stopPropagation();
@@ -96,7 +95,7 @@ export class TutorialStageElement {
    *
    * @return 通知ストリーム
    */
-  notifyStageSelection(): Stream<void> {
+  notifyStageSelection(): Observable<void> {
     return this.#select;
   }
 

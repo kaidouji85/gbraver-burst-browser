@@ -1,5 +1,5 @@
+import { Observable } from "rxjs";
 import type { Resources } from "../../resource";
-import type { Stream } from "../../stream/stream";
 import type { GameObjectAction } from "../action/game-object-action";
 import { BurstButton } from "./burst-button";
 import { LightningDozerIcon } from "./view/lightning-dozer-icon";
@@ -16,7 +16,7 @@ import { WingDozerIcon } from "./view/wing-dozer-icon";
  */
 export function shinBraverBurstButton(
   resources: Resources,
-  gameObjectAction: Stream<GameObjectAction>
+  gameObjectAction: Observable<GameObjectAction>
 ): BurstButton {
   const armdozerIcon = new ShinBraverIcon(resources);
   return new BurstButton(resources, gameObjectAction, armdozerIcon);
@@ -31,7 +31,7 @@ export function shinBraverBurstButton(
  */
 export function neoLandozerBurstButton(
   resources: Resources,
-  gameObjectAction: Stream<GameObjectAction>
+  gameObjectAction: Observable<GameObjectAction>
 ): BurstButton {
   const armdozerIcon = new NeoLandozerIcon(resources);
   return new BurstButton(resources, gameObjectAction, armdozerIcon);
@@ -46,7 +46,7 @@ export function neoLandozerBurstButton(
  */
 export function lightningDozerBurstButton(
   resources: Resources,
-  gameObjectAction: Stream<GameObjectAction>
+  gameObjectAction: Observable<GameObjectAction>
 ): BurstButton {
   const armdozerIcon = new LightningDozerIcon(resources);
   return new BurstButton(resources, gameObjectAction, armdozerIcon);
@@ -61,7 +61,7 @@ export function lightningDozerBurstButton(
  */
 export function wingDozerBurstButton(
   resources: Resources,
-  gameObjectAction: Stream<GameObjectAction>
+  gameObjectAction: Observable<GameObjectAction>
 ): BurstButton {
   const armdozerIcon = new WingDozerIcon(resources);
   return new BurstButton(resources, gameObjectAction, armdozerIcon);

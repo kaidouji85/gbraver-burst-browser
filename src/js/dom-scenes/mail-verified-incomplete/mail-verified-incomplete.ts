@@ -1,10 +1,9 @@
+import { Observable, Subject, Unsubscribable } from "rxjs";
 import { pop } from "../../dom/animation";
 import { escapeHTML } from "../../dom/escape-html";
 import type { PushDOM } from "../../dom/event-stream";
 import { pushDOMStream } from "../../dom/event-stream";
 import { Exclusive } from "../../exclusive/exclusive";
-import type { Stream, StreamSource, Unsubscriber } from "../../stream/stream";
-import { createStreamSource } from "../../stream/stream";
 import { domUuid } from "../../uuid/dom-uuid";
 import type { DOMScene } from "../dom-scene";
 
@@ -72,9 +71,9 @@ export class MailVerifiedIncomplete implements DOMScene {
   #root: HTMLElement;
   #gotoTitleButton: HTMLElement;
   #reloadButton: HTMLElement;
-  #gotoTitle: StreamSource<void>;
-  #reload: StreamSource<void>;
-  #unsubscribers: Unsubscriber[];
+  #gotoTitle: Subject<void>;
+  #reload: Subject<void>;
+  #unsubscribers: Unsubscribable[];
   #exclusive: Exclusive;
 
   /**
@@ -101,8 +100,8 @@ export class MailVerifiedIncomplete implements DOMScene {
         this.#onReloadButtonPush(action);
       }),
     ];
-    this.#gotoTitle = createStreamSource();
-    this.#reload = createStreamSource();
+    this.#gotoTitle = new Subject();
+    this.#reload = new Subject();
     this.#exclusive = new Exclusive();
   }
 
@@ -123,7 +122,7 @@ export class MailVerifiedIncomplete implements DOMScene {
    *
    * @return 通知ストリーム
    */
-  notifyTitleTransition(): Stream<void> {
+  notifyTitleTransition(): Observable<void> {
     return this.#gotoTitle;
   }
 
@@ -132,7 +131,7 @@ export class MailVerifiedIncomplete implements DOMScene {
    *
    * @return 通知ストリーム
    */
-  notifyReload(): Stream<void> {
+  notifyReload(): Observable<void> {
     return this.#reload;
   }
 

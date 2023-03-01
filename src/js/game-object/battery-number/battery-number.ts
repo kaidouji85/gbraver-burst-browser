@@ -1,8 +1,8 @@
+import { Observable, Unsubscribable } from "rxjs";
 import * as THREE from "three";
 
 import { Animate } from "../../animation/animate";
 import type { PreRender } from "../../game-loop/pre-render";
-import type { Stream, Unsubscriber } from "../../stream/stream";
 import type { GameObjectAction } from "../action/game-object-action";
 import { change } from "./animation/change";
 import { hidden } from "./animation/hidden";
@@ -15,7 +15,7 @@ import type { BatteryNumberView } from "./view/battery-number-view";
 export class BatteryNumber {
   #model: BatteryNumberModel;
   #view: BatteryNumberView;
-  #unsubscriber: Unsubscriber;
+  #unsubscriber: Unsubscribable;
 
   /**
    * コンストラクタ
@@ -25,7 +25,7 @@ export class BatteryNumber {
    */
   constructor(
     view: BatteryNumberView,
-    gameObjectAction: Stream<GameObjectAction>
+    gameObjectAction: Observable<GameObjectAction>
   ) {
     this.#model = createInitialValue();
     this.#view = view;

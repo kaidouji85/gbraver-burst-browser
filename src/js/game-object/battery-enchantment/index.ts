@@ -1,5 +1,5 @@
+import { Observable } from "rxjs";
 import type { Resources } from "../../resource";
-import type { Stream } from "../../stream/stream";
 import type { GameObjectAction } from "../action/game-object-action";
 import { BatteryEnchantment } from "./battery-enchantment";
 import { EnemyBatteryEnchantmentView } from "./view/enemy-battery-enchantment-view";
@@ -14,7 +14,7 @@ import { PlayerBatteryEnchantmentView } from "./view/player-battery-enchantment-
  */
 export function playerBatteryEnchantment(
   resources: Resources,
-  gameObjectAction: Stream<GameObjectAction>
+  gameObjectAction: Observable<GameObjectAction>
 ): BatteryEnchantment {
   const view = new PlayerBatteryEnchantmentView(resources);
   return new BatteryEnchantment(view, resources, gameObjectAction);
@@ -29,7 +29,7 @@ export function playerBatteryEnchantment(
  */
 export function enemyBatteryEnchantment(
   resources: Resources,
-  gameObjectAction: Stream<GameObjectAction>
+  gameObjectAction: Observable<GameObjectAction>
 ): BatteryEnchantment {
   const view = new EnemyBatteryEnchantmentView(resources);
   return new BatteryEnchantment(view, resources, gameObjectAction);

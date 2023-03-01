@@ -1,4 +1,4 @@
-import type { Stream } from "../../stream/stream";
+import { Observable } from "rxjs";
 import type { GameObjectAction } from "../action/game-object-action";
 import {
   HUD_FROMTMOST_FADER_ZINDEX,
@@ -12,7 +12,7 @@ type Param = {
   isVisible: boolean;
 
   /** ゲームオブジェクトアクション */
-  gameObjectAction: Stream<GameObjectAction>;
+  gameObjectAction: Observable<GameObjectAction>;
 };
 
 /**

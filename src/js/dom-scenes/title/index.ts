@@ -1,4 +1,4 @@
-import type { Stream, Unsubscriber } from "../../stream/stream";
+import { Observable, Unsubscribable } from "rxjs";
 import type { DOMScene } from "../dom-scene";
 import { bindEventListeners } from "./listeners";
 import type { CreateTitlePropsParams, TitleProps } from "./props";
@@ -10,7 +10,7 @@ export type TitleParams = CreateTitlePropsParams;
 /** タイトル */
 export class Title implements DOMScene {
   #props: TitleProps;
-  #unsubscribers: Unsubscriber[];
+  #unsubscribers: Unsubscribable[];
 
   /**
    * コンストラクタ
@@ -34,7 +34,7 @@ export class Title implements DOMScene {
    *
    * @return イベント通知ストリーム
    */
-  notifyLogin(): Stream<void> {
+  notifyLogin(): Observable<void> {
     return this.#props.pushLogin;
   }
 
@@ -43,7 +43,7 @@ export class Title implements DOMScene {
    *
    * @return イベント通知ストリーム
    */
-  notifyAccountDeletion(): Stream<void> {
+  notifyAccountDeletion(): Observable<void> {
     return this.#props.pushDeleteAccount;
   }
 
@@ -52,7 +52,7 @@ export class Title implements DOMScene {
    *
    * @return イベント通知ストリーム
    */
-  notifyLogout(): Stream<void> {
+  notifyLogout(): Observable<void> {
     return this.#props.pushLogout;
   }
 
@@ -61,7 +61,7 @@ export class Title implements DOMScene {
    *
    * @return イベント通知ストリーム
    */
-  notifyTutorial(): Stream<void> {
+  notifyTutorial(): Observable<void> {
     return this.#props.pushTutorial;
   }
 
@@ -70,7 +70,7 @@ export class Title implements DOMScene {
    *
    * @return イベント通知ストリーム
    */
-  notifyArcade(): Stream<void> {
+  notifyArcade(): Observable<void> {
     return this.#props.pushArcade;
   }
 
@@ -79,7 +79,7 @@ export class Title implements DOMScene {
    *
    * @return イベント通知ストリーム
    */
-  notifyNetBattle(): Stream<void> {
+  notifyNetBattle(): Observable<void> {
     return this.#props.pushNetBattle;
   }
 
@@ -88,7 +88,7 @@ export class Title implements DOMScene {
    *
    * @return イベント通知ストリーム
    */
-  notifyConfig(): Stream<void> {
+  notifyConfig(): Observable<void> {
     return this.#props.pushConfig;
   }
 

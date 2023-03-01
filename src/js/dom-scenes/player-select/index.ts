@@ -1,9 +1,8 @@
 import type { ArmDozerId, PilotId } from "gbraver-burst-core";
 import { ArmDozerIds, PilotIds } from "gbraver-burst-core";
+import { Observable, Subject, Unsubscribable } from "rxjs";
 
 import type { Resources } from "../../resource";
-import type { Stream, StreamSource, Unsubscriber } from "../../stream/stream";
-import { createStreamSource } from "../../stream/stream";
 import { domUuid } from "../../uuid/dom-uuid";
 import type { DOMScene } from "../dom-scene";
 import { ArmdozerBustShotContainer } from "./armdozer-bust-shot";
@@ -72,9 +71,9 @@ export class PlayerSelect implements DOMScene {
   #pilotSelector: PilotSelector;
   #armdozerId: ArmDozerId;
   #pilotId: PilotId;
-  #playerDecide: StreamSource<PlayerDecide>;
-  #prev: StreamSource<void>;
-  #unsubscribers: Unsubscriber[];
+  #playerDecide: Subject<PlayerDecide>;
+  #prev: Subject<void>;
+  #unsubscribers: Unsubscribable[];
 
   /**
    * コンストラクタ
@@ -90,8 +89,8 @@ export class PlayerSelect implements DOMScene {
     ];
     this.#armdozerId = ArmDozerIds.SHIN_BRAVER;
     this.#pilotId = PilotIds.SHINYA;
-    this.#playerDecide = createStreamSource();
-    this.#prev = createStreamSource();
+    this.#playerDecide = new Subject();
+    this.#prev = new Subject();
     const dataIDs = {
       selector: domUuid(),
       working: domUuid(),
@@ -183,7 +182,7 @@ export class PlayerSelect implements DOMScene {
    *
    * @return 通知ストリーム
    */
-  notifySelectCompletion(): Stream<PlayerDecide> {
+  notifySelectCompletion(): Observable<PlayerDecide> {
     return this.#playerDecide;
   }
 
@@ -191,7 +190,7 @@ export class PlayerSelect implements DOMScene {
    * 戻る通知
    * @return 通知ストリーム
    */
-  notifyPrev(): Stream<void> {
+  notifyPrev(): Observable<void> {
     return this.#prev;
   }
 

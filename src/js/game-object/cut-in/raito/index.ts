@@ -1,5 +1,5 @@
+import { Observable } from "rxjs";
 import type { Resources } from "../../../resource";
-import type { Stream } from "../../../stream/stream";
 import type { GameObjectAction } from "../../action/game-object-action";
 import { RaitoCutIn } from "./raito";
 import { EnemyRaitoView } from "./view/enemy-raito-view";
@@ -14,7 +14,7 @@ import { PlayerRaitoView } from "./view/player-raito-view";
  */
 export function playerRaitoCutIn(
   resources: Resources,
-  gameObjectAction: Stream<GameObjectAction>
+  gameObjectAction: Observable<GameObjectAction>
 ): RaitoCutIn {
   const view = new PlayerRaitoView(resources);
   return new RaitoCutIn(view, resources, gameObjectAction);
@@ -29,7 +29,7 @@ export function playerRaitoCutIn(
  */
 export function enemyRaitoCutIn(
   resources: Resources,
-  gameObjectAction: Stream<GameObjectAction>
+  gameObjectAction: Observable<GameObjectAction>
 ): RaitoCutIn {
   const view = new EnemyRaitoView(resources);
   return new RaitoCutIn(view, resources, gameObjectAction);

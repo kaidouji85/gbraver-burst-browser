@@ -1,5 +1,4 @@
-import type { Stream } from "../stream/stream";
-import { createStreamSource } from "../stream/stream";
+import { Observable, Subject } from "rxjs";
 
 /** ゲームループ */
 export type GameLoop = {
@@ -12,8 +11,8 @@ export type GameLoop = {
  *
  * @return ゲームループストリーム
  */
-export function gameLoopStream(): Stream<GameLoop> {
-  const source = createStreamSource<GameLoop>();
+export function gameLoopStream(): Observable<GameLoop> {
+  const source = new Subject<GameLoop>();
 
   const gameLoop = (time: number) => {
     requestAnimationFrame(gameLoop);

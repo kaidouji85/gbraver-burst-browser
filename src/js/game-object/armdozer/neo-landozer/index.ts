@@ -1,5 +1,5 @@
+import { Observable } from "rxjs";
 import type { Resources } from "../../../resource";
-import type { Stream } from "../../../stream/stream";
 import type { GameObjectAction } from "../../action/game-object-action";
 import { NeoLandozer } from "./neo-landozer";
 import { EnemyNeoLandozerView } from "./view/enemy-neo-landozer-view";
@@ -14,7 +14,7 @@ import { PlayerNeoLandozerView } from "./view/player-neo-landozer-view";
  */
 export function PlayerNeoLandozer(
   resources: Resources,
-  gameObjectAction: Stream<GameObjectAction>
+  gameObjectAction: Observable<GameObjectAction>
 ): NeoLandozer {
   const view = new PlayerNeoLandozerView(resources);
   return new NeoLandozer(view, resources, gameObjectAction);
@@ -29,7 +29,7 @@ export function PlayerNeoLandozer(
  */
 export function EnemyNeoLandozer(
   resources: Resources,
-  gameObjectAction: Stream<GameObjectAction>
+  gameObjectAction: Observable<GameObjectAction>
 ): NeoLandozer {
   const view = new EnemyNeoLandozerView(resources);
   return new NeoLandozer(view, resources, gameObjectAction);

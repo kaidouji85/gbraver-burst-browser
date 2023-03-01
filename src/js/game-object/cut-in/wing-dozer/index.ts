@@ -1,5 +1,5 @@
+import { Observable } from "rxjs";
 import type { Resources } from "../../../resource";
-import type { Stream } from "../../../stream/stream";
 import type { GameObjectAction } from "../../action/game-object-action";
 import { EnemyWingDozerCutInView } from "./view/enemy-wing-dozer-cutin-view";
 import { PlayerWingDozerCutInView } from "./view/player-wing-dozer-cutin-view";
@@ -14,7 +14,7 @@ import { WingDozerCutIn } from "./wing-dozer-cutin";
  */
 export function playerWingDozerCutIn(
   resources: Resources,
-  gameObjectAction: Stream<GameObjectAction>
+  gameObjectAction: Observable<GameObjectAction>
 ): WingDozerCutIn {
   const view = new PlayerWingDozerCutInView(resources);
   return new WingDozerCutIn(view, gameObjectAction);
@@ -29,7 +29,7 @@ export function playerWingDozerCutIn(
  */
 export function enemyWingDozerCutIn(
   resources: Resources,
-  gameObjectAction: Stream<GameObjectAction>
+  gameObjectAction: Observable<GameObjectAction>
 ): WingDozerCutIn {
   const view = new EnemyWingDozerCutInView(resources);
   return new WingDozerCutIn(view, gameObjectAction);

@@ -1,10 +1,9 @@
+import { filter, Observable, Unsubscribable } from "rxjs";
 import * as THREE from "three";
 
 import { Animate } from "../../animation/animate";
 import type { PreRender } from "../../game-loop/pre-render";
 import type { Resources } from "../../resource";
-import { filter } from "../../stream/operator";
-import type { Stream, Unsubscriber } from "../../stream/stream";
 import type { GameObjectAction } from "../action/game-object-action";
 import { close } from "./animation/close";
 import { decide } from "./animation/decide";
@@ -20,8 +19,8 @@ export class PilotButton {
   #model: PilotButtonModel;
   #sounds: PilotButtonSounds;
   #view: PilotButtonView;
-  #pushButton: Stream<Event>;
-  #unsubscriber: Unsubscriber;
+  #pushButton: Observable<Event>;
+  #unsubscriber: Unsubscribable;
 
   /**
    * コンストラクタ
@@ -33,14 +32,14 @@ export class PilotButton {
   constructor(
     resources: Resources,
     pilotIcon: PilotIcon,
-    gameObjectAction: Stream<GameObjectAction>
+    gameObjectAction: Observable<GameObjectAction>
   ) {
     this.#model = createInitialValue();
     this.#sounds = new PilotButtonSounds(resources);
     this.#view = new PilotButtonView(resources, pilotIcon, gameObjectAction);
     this.#pushButton = this.#view
       .notifyPressed()
-      .chain(filter(() => !this.#model.disabled && this.#model.canPilot));
+      .pipe(filter(() => !this.#model.disabled && this.#model.canPilot));
     this.#unsubscriber = gameObjectAction.subscribe((action) => {
       if (action.type === "PreRender") {
         this.#onPreRender(action);
@@ -98,7 +97,7 @@ export class PilotButton {
    *
    * @return 通知ストリーム
    */
-  notifyPressed(): Stream<Event> {
+  notifyPressed(): Observable<Event> {
     return this.#pushButton;
   }
 
