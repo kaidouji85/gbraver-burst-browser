@@ -1,4 +1,5 @@
 import type { Player, PlayerId } from "gbraver-burst-core";
+import { Observable } from "rxjs";
 import * as THREE from "three";
 
 import type { GameObjectAction } from "../../../../../game-object/action/game-object-action";
@@ -9,7 +10,6 @@ import {
 } from "../../../../../game-object/armdozer/neo-landozer";
 import { NeoLandozer } from "../../../../../game-object/armdozer/neo-landozer/neo-landozer";
 import type { Resources } from "../../../../../resource";
-import type { Stream } from "../../../../../stream/stream";
 import type { TDArmdozerObjects } from "./armdozer-objects";
 
 /** ネオランドーザ 3Dレイヤー フィールド */
@@ -61,7 +61,7 @@ export class NeoLandozerTD implements NeoLandozerTDField, TDArmdozerObjects {
  */
 export function playerNeoLandozerTD(
   resources: Resources,
-  gameObjectAction: Stream<GameObjectAction>,
+  gameObjectAction: Observable<GameObjectAction>,
   state: Player
 ): NeoLandozerTD {
   return new NeoLandozerTD(state.playerId, {
@@ -78,7 +78,7 @@ export function playerNeoLandozerTD(
  */
 export function enemyNeoLandozerTD(
   resources: Resources,
-  gameObjectAction: Stream<GameObjectAction>,
+  gameObjectAction: Observable<GameObjectAction>,
   state: Player
 ): NeoLandozerTD {
   return new NeoLandozerTD(state.playerId, {

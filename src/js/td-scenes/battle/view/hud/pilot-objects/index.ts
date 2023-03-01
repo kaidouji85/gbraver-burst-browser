@@ -1,9 +1,9 @@
 import type { Player } from "gbraver-burst-core";
 import { PilotIds } from "gbraver-burst-core";
+import { Observable } from "rxjs";
 
 import type { GameObjectAction } from "../../../../../game-object/action/game-object-action";
 import type { Resources } from "../../../../../resource";
-import type { Stream } from "../../../../../stream/stream";
 import { enemyGaiHUD, playerGaiHUD } from "./gai";
 import type { HUDPilotObjects } from "./hud-pilot-objects";
 import { enemyRaitoHUD, playerRaitoHUD } from "./raito";
@@ -20,7 +20,7 @@ import { enemyTsubasaHUD, playerTsubasaHUD } from "./tsubasa";
  */
 export function playerHUDPilotObjects(
   resources: Resources,
-  gameObjectAction: Stream<GameObjectAction>,
+  gameObjectAction: Observable<GameObjectAction>,
   state: Player
 ): HUDPilotObjects {
   switch (state.pilot.id) {
@@ -51,7 +51,7 @@ export function playerHUDPilotObjects(
  */
 export function enemyHUDPilotObjects(
   resources: Resources,
-  gameObjectAction: Stream<GameObjectAction>,
+  gameObjectAction: Observable<GameObjectAction>,
   state: Player
 ): HUDPilotObjects {
   switch (state.pilot.id) {

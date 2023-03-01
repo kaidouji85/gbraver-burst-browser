@@ -1,5 +1,4 @@
-import type { Stream } from "../../stream/stream";
-import { createStreamSource } from "../../stream/stream";
+import { Observable, Subject } from "rxjs";
 import type { Resources } from "..";
 import type { CanvasImageConfig, CanvasImageResource } from "../canvas-image";
 import { loadCanvasImage } from "../canvas-image";
@@ -94,8 +93,8 @@ function createLoadings(params: ResourceLoadingParams): Loadings {
  * @param loadings 読み込みPromise
  * @return 生成結果
  */
-function createLoadingActions(loadings: Loadings): Stream<LoadingActions> {
-  const loadingActions = createStreamSource<LoadingActions>();
+function createLoadingActions(loadings: Loadings): Observable<LoadingActions> {
+  const loadingActions = new Subject<LoadingActions>();
   const allLoadings = [
     ...loadings.preFetchPaths,
     ...loadings.gltfLoadings,
@@ -151,7 +150,7 @@ async function createResources(
 /** リソース読み込みオブジェクト */
 export type ResourceLoading = {
   /** 読み込みストリーム */
-  loading: Stream<LoadingActions>;
+  loading: Observable<LoadingActions>;
 
   /** 読み込んだリソース管理オブジェクト */
   resources: Promise<Resources>;

@@ -1,4 +1,5 @@
 import type { Player, PlayerId } from "gbraver-burst-core";
+import { Observable } from "rxjs";
 import * as THREE from "three";
 
 import type { GameObjectAction } from "../../../../../game-object/action/game-object-action";
@@ -9,7 +10,6 @@ import {
 } from "../../../../../game-object/armdozer/wing-dozer";
 import { WingDozer } from "../../../../../game-object/armdozer/wing-dozer/wing-dozer";
 import type { Resources } from "../../../../../resource";
-import type { Stream } from "../../../../../stream/stream";
 import type { TDArmdozerObjects } from "./armdozer-objects";
 
 /** ウィングドーザ 3Dレイヤー フィールド */
@@ -61,7 +61,7 @@ export class WingDozerTD implements WingDozerTDField, TDArmdozerObjects {
  */
 export function playerWingDozerTD(
   resources: Resources,
-  gameObjectAction: Stream<GameObjectAction>,
+  gameObjectAction: Observable<GameObjectAction>,
   state: Player
 ): WingDozerTD {
   return new WingDozerTD(state.playerId, {
@@ -78,7 +78,7 @@ export function playerWingDozerTD(
  */
 export function enemyWingDozerTD(
   resources: Resources,
-  gameObjectAction: Stream<GameObjectAction>,
+  gameObjectAction: Observable<GameObjectAction>,
   state: Player
 ): WingDozerTD {
   return new WingDozerTD(state.playerId, {

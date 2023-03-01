@@ -1,4 +1,5 @@
 import type { Player, PlayerId } from "gbraver-burst-core";
+import { Observable } from "rxjs";
 import * as THREE from "three";
 
 import type { GameObjectAction } from "../../../../../game-object/action/game-object-action";
@@ -10,7 +11,6 @@ import {
 import { LightningDozer } from "../../../../../game-object/armdozer/lightning-dozer/lightning-dozer";
 import { LightningBarrierGameEffect } from "../../../../../game-object/barrier/lightning/lightning-barrier";
 import type { Resources } from "../../../../../resource";
-import type { Stream } from "../../../../../stream/stream";
 import type { TDArmdozerObjects } from "./armdozer-objects";
 
 /** ライトニングドーザ 3Dレイヤー フィールド */
@@ -73,7 +73,7 @@ export class LightningDozerTD
  */
 export function playerLightningDozerTD(
   resources: Resources,
-  gameObjectAction: Stream<GameObjectAction>,
+  gameObjectAction: Observable<GameObjectAction>,
   state: Player
 ): LightningDozerTD {
   return new LightningDozerTD(state.playerId, {
@@ -94,7 +94,7 @@ export function playerLightningDozerTD(
  */
 export function enemyLightningDozerTD(
   resources: Resources,
-  gameObjectAction: Stream<GameObjectAction>,
+  gameObjectAction: Observable<GameObjectAction>,
   state: Player
 ): LightningDozerTD {
   return new LightningDozerTD(state.playerId, {

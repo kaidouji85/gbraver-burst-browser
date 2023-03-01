@@ -1,4 +1,5 @@
 import type { Player, PlayerId } from "gbraver-burst-core";
+import { Observable } from "rxjs";
 import * as THREE from "three";
 
 import type { GameObjectAction } from "../../../../../game-object/action/game-object-action";
@@ -9,7 +10,6 @@ import {
 } from "../../../../../game-object/armdozer/genesis-braver";
 import { GenesisBraver } from "../../../../../game-object/armdozer/genesis-braver/genesis-braver";
 import type { Resources } from "../../../../../resource";
-import type { Stream } from "../../../../../stream/stream";
 import type { TDArmdozerObjects } from "./armdozer-objects";
 
 /** ジェネシスブレイバー 3Dレイヤー フィールド */
@@ -63,7 +63,7 @@ export class GenesisBraverTD
  */
 export function playerGenesisBraverTD(
   resources: Resources,
-  gameObjectAction: Stream<GameObjectAction>,
+  gameObjectAction: Observable<GameObjectAction>,
   state: Player
 ): GenesisBraverTD {
   return new GenesisBraverTD(state.playerId, {
@@ -80,7 +80,7 @@ export function playerGenesisBraverTD(
  */
 export function enemyGenesisBraverTD(
   resources: Resources,
-  gameObjectAction: Stream<GameObjectAction>,
+  gameObjectAction: Observable<GameObjectAction>,
   state: Player
 ): GenesisBraverTD {
   return new GenesisBraverTD(state.playerId, {

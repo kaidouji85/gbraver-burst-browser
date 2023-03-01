@@ -1,4 +1,5 @@
 import type { Player } from "gbraver-burst-core";
+import { Observable } from "rxjs";
 import * as THREE from "three";
 
 import type { PreRender } from "../../../../game-loop/pre-render";
@@ -9,7 +10,6 @@ import { PlainHUDCamera } from "../../../../game-object/camera/plain-hud/plain-h
 import type { OverlapEvent } from "../../../../render/overlap-event/overlap-event";
 import type { OverlapNotifier } from "../../../../render/overlap-notifier";
 import type { Resources } from "../../../../resource";
-import type { Stream } from "../../../../stream/stream";
 import type { Resize } from "../../../../window/resize";
 import type { BattleSceneAction } from "../../actions";
 import { enemyArmdozerHUD, playerArmdozerHUD } from "./armdozer-objects";
@@ -25,9 +25,9 @@ export type Param = {
   renderer: OverlapNotifier;
   player: Player;
   enemy: Player;
-  update: Stream<Update>;
-  preRender: Stream<PreRender>;
-  resize: Stream<Resize>;
+  update: Observable<Update>;
+  preRender: Observable<PreRender>;
+  resize: Observable<Resize>;
 };
 
 /**
@@ -40,8 +40,8 @@ export class HudLayer {
   armdozers: HUDArmdozerObjects[];
   pilots: HUDPilotObjects[];
   gameObjects: HUDGameObjects;
-  #overlap: Stream<OverlapEvent>;
-  #gameObjectAction: Stream<GameObjectAction>;
+  #overlap: Observable<OverlapEvent>;
+  #gameObjectAction: Observable<GameObjectAction>;
 
   constructor(param: Param) {
     this.scene = new THREE.Scene();
@@ -130,7 +130,7 @@ export class HudLayer {
    * 戦闘シーンアクション通知
    * @return 通知ストリーム
    */
-  battleActionNotifier(): Stream<BattleSceneAction> {
+  battleActionNotifier(): Observable<BattleSceneAction> {
     return this.gameObjects.battleActionNotifier();
   }
 }

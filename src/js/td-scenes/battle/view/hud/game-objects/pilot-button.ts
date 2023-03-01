@@ -1,5 +1,6 @@
 import type { PilotId } from "gbraver-burst-core";
 import { PilotIds } from "gbraver-burst-core";
+import { Observable } from "rxjs";
 
 import type { GameObjectAction } from "../../../../../game-object/action/game-object-action";
 import {
@@ -10,7 +11,6 @@ import {
 } from "../../../../../game-object/pilot-button";
 import { PilotButton } from "../../../../../game-object/pilot-button/pilot-button";
 import type { Resources } from "../../../../../resource";
-import type { Stream } from "../../../../../stream/stream";
 
 /**
  * パイロットIDに対応したパイロットボタンを生成する
@@ -22,7 +22,7 @@ import type { Stream } from "../../../../../stream/stream";
  */
 export function createPilotButton(
   resources: Resources,
-  gameObjectAction: Stream<GameObjectAction>,
+  gameObjectAction: Observable<GameObjectAction>,
   pilotId: PilotId
 ): PilotButton {
   switch (pilotId) {

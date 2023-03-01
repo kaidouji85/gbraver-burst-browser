@@ -1,4 +1,5 @@
 import type { Player, PlayerId } from "gbraver-burst-core";
+import { Observable } from "rxjs";
 import * as THREE from "three";
 
 import type { GameObjectAction } from "../../../../game-object/action/game-object-action";
@@ -15,7 +16,6 @@ import {
 } from "../../../../game-object/turn-start";
 import { TurnStart } from "../../../../game-object/turn-start/turn-start";
 import type { Resources } from "../../../../resource";
-import type { Stream } from "../../../../stream/stream";
 
 /**
  * HUDレイヤー プレイヤー固有オブジェクト フィールド
@@ -77,7 +77,7 @@ export class HUDPlayer implements HUDPlayerField {
 export function playerHUDObjects(
   resources: Resources,
   state: Player,
-  gameObjectAction: Stream<GameObjectAction>
+  gameObjectAction: Observable<GameObjectAction>
 ): HUDPlayer {
   return new HUDPlayer({
     playerId: state.playerId,
@@ -103,7 +103,7 @@ export function playerHUDObjects(
 export function enemyHUDObjects(
   resources: Resources,
   state: Player,
-  gameObjectAction: Stream<GameObjectAction>
+  gameObjectAction: Observable<GameObjectAction>
 ): HUDPlayer {
   return new HUDPlayer({
     playerId: state.playerId,

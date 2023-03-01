@@ -1,3 +1,4 @@
+import { Observable } from "rxjs";
 import * as THREE from "three";
 
 import type { GameObjectAction } from "../../../../game-object/action/game-object-action";
@@ -7,7 +8,6 @@ import SchoolField from "../../../../game-object/stage/shopping-street/shopping-
 import type { Stage } from "../../../../game-object/stage/stage";
 import { TurnIndicator } from "../../../../game-object/turn-indicator/turn-indicator";
 import type { Resources } from "../../../../resource";
-import type { Stream } from "../../../../stream/stream";
 
 /**
  * 3Dレイヤーのゲームオブジェクト
@@ -26,7 +26,7 @@ export class TDGameObjects {
    */
   constructor(
     resources: Resources,
-    gameObjectAction: Stream<GameObjectAction>
+    gameObjectAction: Observable<GameObjectAction>
   ) {
     this.stage = new SchoolField(resources);
     this.turnIndicator = new TurnIndicator({

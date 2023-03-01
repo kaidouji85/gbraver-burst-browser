@@ -1,6 +1,4 @@
-import { map } from "../stream/operator";
-import type { Stream, Unsubscriber } from "../stream/stream";
-import { createStream } from "../stream/stream";
+import { map, Observable, Unsubscribable } from "rxjs";
 import { GameAction } from "./game-actions";
 import { initialize } from "./game-procedure/initialize";
 import { onGameAction } from "./game-procedure/on-game-action";
@@ -13,7 +11,7 @@ type Param = GamePropsGeneratorParam;
 /** ゲーム管理オブジェクト */
 export class Game {
   #props: GameProps;
-  #unsubscribers: Unsubscriber[];
+  #unsubscribers: Unsubscribable[];
 
   /**
    * コンストラクタ
@@ -35,23 +33,21 @@ export class Game {
     elements.forEach((element) => {
       body.appendChild(element);
     });
-    const suddenlyBattleEnd: Stream<GameAction> = this.#props.suddenlyBattleEnd
+    const suddenlyBattleEnd: Observable<GameAction> = this.#props.suddenlyBattleEnd
       .stream()
-      .chain(
+      .pipe(
         map(() => ({
           type: "SuddenlyBattleEnd",
         }))
       );
-    const webSocketAPIError: Stream<GameAction> = createStream(
-      this.#props.api.websocketErrorNotifier()
-    ).chain(
+    const webSocketAPIError: Observable<GameAction> = this.#props.api.websocketErrorNotifier().pipe(
       map((error) => ({
         type: "WebSocketAPIError",
         error,
       }))
     );
 
-    const gameActionStreams: Stream<GameAction>[] = [
+    const gameActionStreams: Observable<GameAction>[] = [
       this.#props.tdBinder.gameActionNotifier(),
       this.#props.domSceneBinder.gameActionNotifier(),
       this.#props.domDialogBinder.gameActionNotifier(),
