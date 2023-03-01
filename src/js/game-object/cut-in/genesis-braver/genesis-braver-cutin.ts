@@ -1,26 +1,17 @@
 import * as THREE from "three";
-
-import {HorizontalAnimationMesh} from "../../../mesh/horizontal-animation";
-import {Resources} from "../../../resource";
-import {TEXTURE_IDS} from "../../../resource/texture/ids";
+import { GenesisBraverCutInView } from "./view/genesis-braver-cutin-view";
 
 /** ジェネシスブレイバー カットイン */
 export class GenesisBraverCutIn {
-  #mesh: HorizontalAnimationMesh;
+  /** ビュー */
+  #view: GenesisBraverCutInView;
 
   /**
    * コンストラクタ
-   * @param resources リソース管理オブジェクト
+   * @param resources ビュー
    */
-  constructor(resources: Resources) {
-    const texture = resources.textures.find(v => v.id === TEXTURE_IDS.GENESIS_BRAVER_CUTIN_BURST_UP)?.texture
-      ?? new THREE.Texture();
-    this.#mesh = new HorizontalAnimationMesh({
-      texture,
-      maxAnimation: 4,
-      width: 800,
-      height: 800,
-    });
+  constructor(view: GenesisBraverCutInView) {
+    this.#view = view;
   }
 
   /**
@@ -28,6 +19,6 @@ export class GenesisBraverCutIn {
    * @return 取得結果
    */
   getObject3D(): THREE.Object3D {
-    return this.#mesh.getObject3D();
+    return this.#view.getObject3D();
   }
 }
