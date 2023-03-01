@@ -1,8 +1,12 @@
 import * as THREE from "three";
+import { GenesisBraverCutInModel } from "./model/genesis-braver-cutin-model";
+import { createInitialValue } from "./model/initial-value";
 import { GenesisBraverCutInView } from "./view/genesis-braver-cutin-view";
 
 /** ジェネシスブレイバー カットイン */
 export class GenesisBraverCutIn {
+  /** モデル */
+  #model: GenesisBraverCutInModel;
   /** ビュー */
   #view: GenesisBraverCutInView;
 
@@ -11,6 +15,7 @@ export class GenesisBraverCutIn {
    * @param resources ビュー
    */
   constructor(view: GenesisBraverCutInView) {
+    this.#model = createInitialValue();
     this.#view = view;
   }
 
