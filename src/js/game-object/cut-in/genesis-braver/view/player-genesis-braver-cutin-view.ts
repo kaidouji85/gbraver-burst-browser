@@ -1,41 +1,54 @@
 import * as THREE from "three";
-import { HorizontalAnimationMesh } from "../../../../mesh/horizontal-animation";
 import { Resources } from "../../../../resource";
-import { TEXTURE_IDS } from "../../../../resource/texture/ids";
 import { GenesisBraverCutInModel } from "../model/genesis-braver-cutin-model";
+import { AnimationMeshMapping } from "./animation-mesh-mapping";
 import { GenesisBraverCutInView } from "./genesis-braver-cutin-view";
+import { createMeshes } from "./meshes";
 
 /** プレイヤー ジェネシスブレイバー カットイン ビュー */
 export class PlayerGenesisBraverCutInView implements GenesisBraverCutInView  {
-  #mesh: HorizontalAnimationMesh;
+  /** グループ */
+  #group: THREE.Group;
+  /** メッシュ */
+  #meshes: AnimationMeshMapping[];
 
   /**
    * コンストラクタ
    * @param resources リソース管理オブジェクト
    */
   constructor(resources: Resources) {
-    const texture = resources.textures.find(v => v.id === TEXTURE_IDS.GENESIS_BRAVER_CUTIN_BURST_UP)?.texture
-    ?? new THREE.Texture();
-    this.#mesh = new HorizontalAnimationMesh({
-      texture,
-      maxAnimation: 4,
-      width: 800,
-      height: 800,
+    this.#group = new THREE.Group();
+    this.#meshes = createMeshes(resources);
+    this.#meshes.forEach(({mesh}) => {
+      this.#group.add(mesh.getObject3D());
     });
   }
 
   /** @override */
   destructor(): void {
-    this.#mesh.destructor();
+    this.#meshes.forEach(({mesh}) => {
+      mesh.destructor();
+    });
   }
 
   /** @override */
   engage(model: GenesisBraverCutInModel): void {
-    // NOP
+    this.#group.position.x = model.tracking.x;
+    this.#group.position.y = model.tracking.y;
+    const currentMesh = this.#meshes.find(v => v.type === model.animation.type);
+    if (currentMesh) {
+      currentMesh.mesh.animate(model.animation.frame);
+      currentMesh.mesh.setOpacity(model.opacity);
+    }
+
+    this.#meshes.filter(v => v !== currentMesh)
+      .forEach(({mesh}) => {
+        mesh.setOpacity(0);
+      });
   }
 
   /** @override */
   getObject3D(): THREE.Object3D {
-    return this.#mesh.getObject3D();
+    return this.#group;   
   }
 }
