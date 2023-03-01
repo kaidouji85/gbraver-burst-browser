@@ -1,4 +1,5 @@
 import { Observable, Subject } from "rxjs";
+
 import type { Resources } from "..";
 import type { CanvasImageConfig, CanvasImageResource } from "../canvas-image";
 import { loadCanvasImage } from "../canvas-image";

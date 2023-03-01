@@ -1,4 +1,5 @@
 import { Observable } from "rxjs";
+
 import { GameObjectAction } from "../../src/js/game-object/action/game-object-action";
 import { ArmDozerSprite } from "../../src/js/game-object/armdozer/armdozer-sprite";
 import { Resources } from "../../src/js/resource";

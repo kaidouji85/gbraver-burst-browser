@@ -1,4 +1,5 @@
 import { Observable } from "rxjs";
+
 import type { DOMScene } from "../../dom-scenes/dom-scene";
 import type { GameAction } from "../game-actions";
 import { bind } from "./bind";

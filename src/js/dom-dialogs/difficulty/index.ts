@@ -1,4 +1,5 @@
 import { Observable, Unsubscribable } from "rxjs";
+
 import type { NPCBattleCourseDifficulty } from "../../game/npc-battle-courses";
 import type { Resources } from "../../resource";
 import type { DOMDialog } from "../dialog";

@@ -39,34 +39,33 @@ export function toOverlapStream(
   rendererDOM: HTMLElement,
   camera: THREE.Camera
 ): Observable<OverlapEvent> {
-  return origin
-    .pipe(
-      map((v) => {
-        switch (v.type) {
-          case "mouseDown":
-            return toMouseDownRaycaster(v, rendererDOM, camera);
+  return origin.pipe(
+    map((v) => {
+      switch (v.type) {
+        case "mouseDown":
+          return toMouseDownRaycaster(v, rendererDOM, camera);
 
-          case "mouseMove":
-            return toMouseMoveRaycaster(v, rendererDOM, camera);
+        case "mouseMove":
+          return toMouseMoveRaycaster(v, rendererDOM, camera);
 
-          case "mouseUp":
-            return toMouseUpRaycaster(v, rendererDOM, camera);
+        case "mouseUp":
+          return toMouseUpRaycaster(v, rendererDOM, camera);
 
-          case "touchStart":
-            return toTouchStartRaycaster(v, rendererDOM, camera);
+        case "touchStart":
+          return toTouchStartRaycaster(v, rendererDOM, camera);
 
-          case "touchMove":
-            return toTouchMoveRaycaster(v, rendererDOM, camera);
+        case "touchMove":
+          return toTouchMoveRaycaster(v, rendererDOM, camera);
 
-          case "touchEnd":
-            return toTouchEndRaycaster(v, rendererDOM, camera);
+        case "touchEnd":
+          return toTouchEndRaycaster(v, rendererDOM, camera);
 
-          default:
-            return null;
-        }
-      }),
-      filter((v) => !!v),
-      map((v) => v as OverlapEvent),
-      share(),
-    );
+        default:
+          return null;
+      }
+    }),
+    filter((v) => !!v),
+    map((v) => v as OverlapEvent),
+    share()
+  );
 }

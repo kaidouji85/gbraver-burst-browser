@@ -64,7 +64,9 @@ export function createMouseMoveStream(
  * @param renderDom レンダラのDOM
  * @return ストリーム
  */
-export function createMouseUpStream(renderDom: HTMLElement): Observable<MouseUp> {
+export function createMouseUpStream(
+  renderDom: HTMLElement
+): Observable<MouseUp> {
   return fromEvent<MouseEvent>(renderDom, "mouseup").pipe(
     map((v) => {
       v.preventDefault();

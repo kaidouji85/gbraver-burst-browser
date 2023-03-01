@@ -1,4 +1,5 @@
 import { Observable, Unsubscribable } from "rxjs";
+
 import { getViewPortHeight } from "../view-port/view-port-size";
 import type { Resize } from "../window/resize";
 

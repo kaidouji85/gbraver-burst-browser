@@ -1,4 +1,5 @@
 import { map, Observable, Unsubscribable } from "rxjs";
+
 import { GameAction } from "./game-actions";
 import { initialize } from "./game-procedure/initialize";
 import { onGameAction } from "./game-procedure/on-game-action";
@@ -33,19 +34,20 @@ export class Game {
     elements.forEach((element) => {
       body.appendChild(element);
     });
-    const suddenlyBattleEnd: Observable<GameAction> = this.#props.suddenlyBattleEnd
-      .stream()
-      .pipe(
+    const suddenlyBattleEnd: Observable<GameAction> =
+      this.#props.suddenlyBattleEnd.stream().pipe(
         map(() => ({
           type: "SuddenlyBattleEnd",
         }))
       );
-    const webSocketAPIError: Observable<GameAction> = this.#props.api.websocketErrorNotifier().pipe(
-      map((error) => ({
-        type: "WebSocketAPIError",
-        error,
-      }))
-    );
+    const webSocketAPIError: Observable<GameAction> = this.#props.api
+      .websocketErrorNotifier()
+      .pipe(
+        map((error) => ({
+          type: "WebSocketAPIError",
+          error,
+        }))
+      );
 
     const gameActionStreams: Observable<GameAction>[] = [
       this.#props.tdBinder.gameActionNotifier(),

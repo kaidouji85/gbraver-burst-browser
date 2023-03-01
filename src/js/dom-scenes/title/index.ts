@@ -1,4 +1,5 @@
 import { Observable, Unsubscribable } from "rxjs";
+
 import type { DOMScene } from "../dom-scene";
 import { bindEventListeners } from "./listeners";
 import type { CreateTitlePropsParams, TitleProps } from "./props";

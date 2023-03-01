@@ -1,4 +1,5 @@
 import { merge, Observable } from "rxjs";
+
 import type { MouseDown, MouseMove, MouseUp } from "./mouse";
 import {
   createMouseDownStream,

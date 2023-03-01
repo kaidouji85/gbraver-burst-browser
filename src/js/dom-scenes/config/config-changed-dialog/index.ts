@@ -1,4 +1,5 @@
 import { Observable, Unsubscribable } from "rxjs";
+
 import type { Resources } from "../../../resource";
 import { ROOT_CLASS, ROOT_CLASS_INVISIBLE } from "./dom/class-name";
 import { bindEventListeners } from "./listeners";

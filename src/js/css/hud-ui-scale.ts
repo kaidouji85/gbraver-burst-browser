@@ -1,4 +1,5 @@
 import { Observable, Unsubscribable } from "rxjs";
+
 import { HUDUIScale } from "../game-object/scale";
 import type { SafeAreaInset } from "../safe-area/safe-area-inset";
 import { createSafeAreaInset } from "../safe-area/safe-area-inset";

@@ -1,4 +1,5 @@
 import { Unsubscribable } from "rxjs";
+
 import { pushDOMStream } from "../../../../dom/event-stream";
 import type { ConfigChangedDialogProps } from "../props";
 import { onAcceptPush } from "./on-accept-push";

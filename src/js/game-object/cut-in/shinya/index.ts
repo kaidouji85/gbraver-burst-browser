@@ -1,4 +1,5 @@
 import { Observable } from "rxjs";
+
 import type { Resources } from "../../../resource";
 import type { GameObjectAction } from "../../action/game-object-action";
 import { ShinyaCutIn } from "./shinya";

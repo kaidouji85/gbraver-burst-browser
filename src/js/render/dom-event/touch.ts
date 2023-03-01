@@ -64,7 +64,9 @@ export function createTouchMoveStream(
  * @param renderDom レンダラーDOM
  * @return ストリーム
  */
-export function createTouchEndStream(renderDom: HTMLElement): Observable<TouchEnd> {
+export function createTouchEndStream(
+  renderDom: HTMLElement
+): Observable<TouchEnd> {
   return fromEvent<TouchEvent>(renderDom, "touchend").pipe(
     map((v) => {
       v.preventDefault();

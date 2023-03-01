@@ -12,17 +12,25 @@ export type PushWindow = {
  * @return window押下ストリーム
  */
 export function pushWindowsStream(): Observable<PushWindow> {
-  const click: Observable<PushWindow> = fromEvent<MouseEvent>(window, "mousedown", {
-    passive: false,
-  }).pipe(
+  const click: Observable<PushWindow> = fromEvent<MouseEvent>(
+    window,
+    "mousedown",
+    {
+      passive: false,
+    }
+  ).pipe(
     map((event) => ({
       type: "PushWindow",
       event,
     }))
   );
-  const touchStart: Observable<PushWindow> = fromEvent<TouchEvent>(window, "touchstart", {
-    passive: false,
-  }).pipe(
+  const touchStart: Observable<PushWindow> = fromEvent<TouchEvent>(
+    window,
+    "touchstart",
+    {
+      passive: false,
+    }
+  ).pipe(
     map((event) => ({
       type: "PushWindow",
       event,

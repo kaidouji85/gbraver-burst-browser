@@ -1,4 +1,5 @@
 import { Observable, Subject, Unsubscribable } from "rxjs";
+
 import type { DOMDialog } from "../../dom-dialogs/dialog";
 import type { GameAction } from "../game-actions";
 import type { DomDialogActionConnector } from "./dom-dialog-action-connector";

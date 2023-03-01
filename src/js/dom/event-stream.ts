@@ -23,7 +23,10 @@ export function pushDOMStream(dom: HTMLElement): Observable<PushDOM> {
       };
     })
   );
-  const touchStart: Observable<PushDOM> = fromEvent<TouchEvent>(dom, "touchstart").pipe(
+  const touchStart: Observable<PushDOM> = fromEvent<TouchEvent>(
+    dom,
+    "touchstart"
+  ).pipe(
     map((event) => {
       return {
         type: "PushDOM",

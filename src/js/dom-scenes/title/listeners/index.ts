@@ -1,4 +1,5 @@
 import { Unsubscribable } from "rxjs";
+
 import { pushDOMStream } from "../../../dom/event-stream";
 import type { TitleProps } from "../props";
 import { onArcadePush } from "./on-arcade-push";

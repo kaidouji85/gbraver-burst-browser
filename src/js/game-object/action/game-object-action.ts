@@ -1,4 +1,5 @@
 import { merge, Observable, share } from "rxjs";
+
 import type { PreRender } from "../../game-loop/pre-render";
 import type { Update } from "../../game-loop/update";
 import type { OverlapEvent } from "../../render/overlap-event/overlap-event";
@@ -19,7 +20,5 @@ export function gameObjectStream(
   preRender: Observable<PreRender>,
   overlap: Observable<OverlapEvent>
 ): Observable<GameObjectAction> {
-  return merge(update, preRender, overlap).pipe(
-    share(),
-  );
+  return merge(update, preRender, overlap).pipe(share());
 }

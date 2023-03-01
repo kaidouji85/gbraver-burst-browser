@@ -1,4 +1,5 @@
 import { Unsubscribable } from "rxjs";
+
 import { inputDOMStream, pushDOMStream } from "../../../dom/event-stream";
 import type { ConfigProps } from "../props";
 import { onAcceptConfigChange } from "./on-accept-config-change";

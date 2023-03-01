@@ -1,4 +1,5 @@
 import { Observable, Unsubscribable } from "rxjs";
+
 import type { GbraverBurstBrowserConfig } from "../../game/config/browser-config";
 import type { Resources } from "../../resource";
 import type { DOMScene } from "../dom-scene";
