@@ -2,6 +2,7 @@ import * as THREE from "three";
 import { HorizontalAnimationMesh } from "../../../../mesh/horizontal-animation";
 import { Resources } from "../../../../resource";
 import { TEXTURE_IDS } from "../../../../resource/texture/ids";
+import { GenesisBraverCutInModel } from "../model/genesis-braver-cutin-model";
 import { GenesisBraverCutInView } from "./genesis-braver-cutin-view";
 
 /** プレイヤー ジェネシスブレイバー カットイン ビュー */
@@ -21,6 +22,11 @@ export class PlayerGenesisBraverCutInView implements GenesisBraverCutInView  {
       width: 800,
       height: 800,
     });
+  }
+
+  /** @override */
+  engage(model: GenesisBraverCutInModel): void {
+    // NOP
   }
 
   /** @override */
