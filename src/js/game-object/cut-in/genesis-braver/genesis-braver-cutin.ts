@@ -1,5 +1,6 @@
 import { Observable, Unsubscribable } from "rxjs";
 import * as THREE from "three";
+
 import { Animate } from "../../../animation/animate";
 import { PreRender } from "../../../game-loop/pre-render";
 import { GameObjectAction } from "../../action/game-object-action";
@@ -23,15 +24,18 @@ export class GenesisBraverCutIn {
    * @param resources ビュー
    * @param gameObjectAction ゲームオブジェクトアクション
    */
-  constructor(view: GenesisBraverCutInView, gameObjectAction: Observable<GameObjectAction>) {
+  constructor(
+    view: GenesisBraverCutInView,
+    gameObjectAction: Observable<GameObjectAction>
+  ) {
     this.#model = createInitialValue();
     this.#view = view;
     this.#unsubscribers = [
-      gameObjectAction.subscribe(action => {
+      gameObjectAction.subscribe((action) => {
         if (action.type === "PreRender") {
           this.#onPreRender(action);
         }
-      })
+      }),
     ];
   }
 
@@ -39,7 +43,7 @@ export class GenesisBraverCutIn {
    * デストラクタ相当の処理
    */
   destructor(): void {
-    this.#unsubscribers.forEach(v => {
+    this.#unsubscribers.forEach((v) => {
       v.unsubscribe();
     });
     this.#view.destructor();

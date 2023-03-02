@@ -1,4 +1,5 @@
 import * as THREE from "three";
+
 import { HorizontalAnimationMesh } from "../../../../mesh/horizontal-animation";
 import type { Resources } from "../../../../resource";
 import { TEXTURE_IDS } from "../../../../resource/texture/ids";
@@ -17,15 +18,17 @@ export const MAX_ANIMATION = 4;
  * @param resources リソース管理オブジェクト
  * @return 生成結果
  */
-export function genesisBraverCutInBurstUp(resources: Resources): HorizontalAnimationMesh {
+export function genesisBraverCutInBurstUp(
+  resources: Resources
+): HorizontalAnimationMesh {
   const texture =
     resources.textures.find(
       (v) => v.id === TEXTURE_IDS.GENESIS_BRAVER_CUTIN_BURST_UP
     )?.texture ?? new THREE.Texture();
-    return new HorizontalAnimationMesh({
-      texture,
-      maxAnimation: MAX_ANIMATION,
-      width: WIDTH,
-      height: HEIGHT,
-    });
+  return new HorizontalAnimationMesh({
+    texture,
+    maxAnimation: MAX_ANIMATION,
+    width: WIDTH,
+    height: HEIGHT,
+  });
 }

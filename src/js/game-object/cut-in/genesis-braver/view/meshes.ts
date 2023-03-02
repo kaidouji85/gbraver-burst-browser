@@ -6,7 +6,7 @@ import { AnimationMeshMapping } from "./animation-mesh-mapping";
 /**
  * アニメーションメッシュマッピングを生成
  * @param resources リソース管理オブジェクト
- * @return 生成結果 
+ * @return 生成結果
  */
 export function createMeshes(resources: Resources): AnimationMeshMapping[] {
   return [
@@ -17,6 +17,6 @@ export function createMeshes(resources: Resources): AnimationMeshMapping[] {
     {
       type: "BURST_DOWN",
       mesh: genesisBraverCutInBurstDown(resources),
-    }
+    },
   ];
 }

@@ -7,7 +7,7 @@ import { PlayerGenesisBraverCutInView } from "./player-genesis-braver-cutin-view
 export class EnemyGenesisBraverCutInView extends PlayerGenesisBraverCutInView {
   /**
    * コンストラクタ
-   * @param resources リソース管理オブジェクト 
+   * @param resources リソース管理オブジェクト
    * @param gameObjectAction ゲームオブジェクトアクション
    */
   constructor(resources: Resources) {

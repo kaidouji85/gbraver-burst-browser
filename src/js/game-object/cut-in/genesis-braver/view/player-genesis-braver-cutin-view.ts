@@ -1,4 +1,5 @@
 import * as THREE from "three";
+
 import { PreRender } from "../../../../game-loop/pre-render";
 import { Resources } from "../../../../resource";
 import { HUD_CUT_IN_ZNIDEX } from "../../../hud-zindex";
@@ -39,13 +40,16 @@ export class PlayerGenesisBraverCutInView implements GenesisBraverCutInView {
 
   /** @override */
   engage(model: GenesisBraverCutInModel, preRender: PreRender): void {
-    const currentMesh = this.#meshes.find(v => v.type === model.animation.type);
+    const currentMesh = this.#meshes.find(
+      (v) => v.type === model.animation.type
+    );
     if (currentMesh) {
       currentMesh.mesh.animate(model.animation.frame);
       currentMesh.mesh.setOpacity(model.opacity);
     }
 
-    this.#meshes.filter(v => v !== currentMesh)
+    this.#meshes
+      .filter((v) => v !== currentMesh)
       .forEach(({ mesh }) => {
         mesh.setOpacity(0);
       });
