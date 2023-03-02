@@ -3,6 +3,7 @@ import * as THREE from "three";
 
 import { Animate } from "../../../animation/animate";
 import { PreRender } from "../../../game-loop/pre-render";
+import { HUDTracking } from "../../../tracking/hud-tracking";
 import { GameObjectAction } from "../../action/game-object-action";
 import { hidden } from "./animation/hidden";
 import { show } from "./animation/show";
@@ -11,7 +12,7 @@ import { createInitialValue } from "./model/initial-value";
 import { GenesisBraverCutInView } from "./view/genesis-braver-cutin-view";
 
 /** ジェネシスブレイバー カットイン */
-export class GenesisBraverCutIn {
+export class GenesisBraverCutIn implements HUDTracking {
   /** モデル */
   #model: GenesisBraverCutInModel;
   /** ビュー */
@@ -47,6 +48,12 @@ export class GenesisBraverCutIn {
       v.unsubscribe();
     });
     this.#view.destructor();
+  }
+
+  /** @override */
+  tracking(x: number, y: number): void {
+    this.#model.tracking.x = x;
+    this.#model.tracking.y = y;
   }
 
   /**
