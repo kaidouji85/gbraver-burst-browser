@@ -1,4 +1,5 @@
 import { Howl } from "howler";
+import { Observable, Subject, Unsubscribable } from "rxjs";
 
 import { pop } from "../../dom/animation";
 import type { PushDOM } from "../../dom/event-stream";
@@ -7,8 +8,6 @@ import { Exclusive } from "../../exclusive/exclusive";
 import type { Resources } from "../../resource";
 import { PathIds } from "../../resource/path";
 import { SOUND_IDS } from "../../resource/sound";
-import type { Stream, StreamSource, Unsubscriber } from "../../stream/stream";
-import { createStreamSource } from "../../stream/stream";
 import { domUuid } from "../../uuid/dom-uuid";
 import type { DOMDialog } from "../dialog";
 
@@ -105,9 +104,9 @@ export class LoginDialog implements DOMDialog {
   #closer: HTMLImageElement;
   #loginButton: HTMLButtonElement;
   #closeButton: HTMLButtonElement;
-  #closeDialog: StreamSource<void>;
-  #login: StreamSource<void>;
-  #unsubscribers: Unsubscriber[];
+  #closeDialog: Subject<void>;
+  #login: Subject<void>;
+  #unsubscribers: Unsubscribable[];
   #changeValue: Howl;
   #pushButton: Howl;
   #exclusive: Exclusive;
@@ -132,8 +131,8 @@ export class LoginDialog implements DOMDialog {
     this.#closer = elements.closer;
     this.#loginButton = elements.loginButton;
     this.#closeButton = elements.closeButton;
-    this.#closeDialog = createStreamSource();
-    this.#login = createStreamSource();
+    this.#closeDialog = new Subject();
+    this.#login = new Subject();
     this.#unsubscribers = [
       pushDOMStream(this.#loginButton).subscribe((action) => {
         this.#onLoginButtonPush(action);
@@ -180,7 +179,7 @@ export class LoginDialog implements DOMDialog {
    *
    * @return 通知ストリーム
    */
-  notifyClosed(): Stream<void> {
+  notifyClosed(): Observable<void> {
     return this.#closeDialog;
   }
 
@@ -189,7 +188,7 @@ export class LoginDialog implements DOMDialog {
    *
    * @return 通知ストリーム
    */
-  notifyLogin(): Stream<void> {
+  notifyLogin(): Observable<void> {
     return this.#login;
   }
 

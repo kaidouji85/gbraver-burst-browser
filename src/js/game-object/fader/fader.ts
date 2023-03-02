@@ -1,8 +1,8 @@
+import { Observable, Unsubscribable } from "rxjs";
 import * as THREE from "three";
 
 import { Animate } from "../../animation/animate";
 import type { PreRender } from "../../game-loop/pre-render";
-import type { Stream, Unsubscriber } from "../../stream/stream";
 import type { GameObjectAction } from "../action/game-object-action";
 import { fadeIn } from "./animation/fade-in";
 import { fadeOut } from "./animation/fade-out";
@@ -17,7 +17,7 @@ type Param = {
   isVisible: boolean;
 
   /** ゲームオブジェクトアクション */
-  gameObjectAction: Stream<GameObjectAction>;
+  gameObjectAction: Observable<GameObjectAction>;
 
   /** Z座標 */
   z: number;
@@ -27,7 +27,7 @@ type Param = {
 export class Fader {
   #model: FaderModel;
   #view: FaderView;
-  #unsubscriber: Unsubscriber;
+  #unsubscriber: Unsubscribable;
 
   /**
    * コンストラクタ

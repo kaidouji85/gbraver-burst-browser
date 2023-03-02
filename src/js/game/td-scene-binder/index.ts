@@ -1,7 +1,7 @@
+import { Observable, Subject, Unsubscribable } from "rxjs";
+
 import { CssHUDUIScale } from "../../css/hud-ui-scale";
 import { Renderer } from "../../render";
-import type { Stream, StreamSource, Unsubscriber } from "../../stream/stream";
-import { createStreamSource } from "../../stream/stream";
 import type { TDScene } from "../../td-scenes/td-scene";
 import type { GameAction } from "../game-actions";
 import type { TDSceneActionConnector } from "./td-scene-action-connector";
@@ -9,7 +9,7 @@ import type { TDSceneActionConnector } from "./td-scene-action-connector";
 /** three.js系シーンをバインドする */
 export class TDSceneBinder {
   /** ゲームアクション */
-  #gameAction: StreamSource<GameAction>;
+  #gameAction: Subject<GameAction>;
 
   /** DOMレイヤーをバインドするHTML要素 */
   #domLayerElement: HTMLElement;
@@ -24,7 +24,7 @@ export class TDSceneBinder {
   #renderer: Renderer;
 
   /** アンサブスクライバ */
-  #unsubscribers: Unsubscriber[];
+  #unsubscribers: Unsubscribable[];
 
   /**
    * コンストラクタ
@@ -36,7 +36,7 @@ export class TDSceneBinder {
     this.#renderer = renderer;
     this.#hudUIScale = hudUIScale;
     this.#scene = null;
-    this.#gameAction = createStreamSource();
+    this.#gameAction = new Subject();
     this.#domLayerElement = document.createElement("div");
     this.#unsubscribers = [];
   }
@@ -75,7 +75,7 @@ export class TDSceneBinder {
    *
    * @return イベント通知ストリーム
    */
-  gameActionNotifier(): Stream<GameAction> {
+  gameActionNotifier(): Observable<GameAction> {
     return this.#gameAction;
   }
 

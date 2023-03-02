@@ -1,4 +1,5 @@
-import type { Stream, Unsubscriber } from "../stream/stream";
+import { Observable, Unsubscribable } from "rxjs";
+
 import { getViewPortHeight } from "../view-port/view-port-size";
 import type { Resize } from "../window/resize";
 
@@ -26,14 +27,14 @@ function setVH(viewPortHeight: number): void {
  */
 export class CssVH {
   /** アンサブスクライバ */
-  _unsubscriber: Unsubscriber;
+  _unsubscriber: Unsubscribable;
 
   /**
    * コンストラクタ
    *
    * @param resize リサイズストリーム
    */
-  constructor(resize: Stream<Resize>) {
+  constructor(resize: Observable<Resize>) {
     this._unsubscriber = resize.subscribe((action) => {
       this.#onResize(action);
     });

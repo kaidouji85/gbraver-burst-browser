@@ -1,3 +1,5 @@
+import { Subject } from "rxjs";
+
 import { Exclusive } from "../../exclusive/exclusive";
 import { Resources } from "../../resource";
 import {
@@ -5,7 +7,6 @@ import {
   SOUND_IDS,
   SoundResource,
 } from "../../resource/sound";
-import { createStreamSource, StreamSource } from "../../stream/stream";
 import { domUuid } from "../../uuid/dom-uuid";
 import { ROOT_CLASS } from "./dom/class-name";
 import { DataIDs } from "./dom/data-ids";
@@ -23,7 +24,7 @@ export type PrivateMatchHostDialogProps = {
   /** 排他制御 */
   exclusive: Exclusive;
   /** ダイアログ閉じる通知 */
-  dialogClosed: StreamSource<void>;
+  dialogClosed: Subject<void>;
 };
 
 /**
@@ -49,7 +50,7 @@ export function createPrivateMatchHostDialogProps(
     changeValue:
       resources.sounds.find((v) => v.id === SOUND_IDS.CHANGE_VALUE) ??
       createEmptySoundResource(),
-    dialogClosed: createStreamSource(),
+    dialogClosed: new Subject(),
     exclusive: new Exclusive(),
   };
 }

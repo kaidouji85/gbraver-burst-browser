@@ -1,8 +1,8 @@
+import { Observable, Unsubscribable } from "rxjs";
 import * as THREE from "three";
 
 import { Animate } from "../../animation/animate";
 import type { PreRender } from "../../game-loop/pre-render";
-import type { Stream, Unsubscriber } from "../../stream/stream";
 import type { HUDTracking } from "../../tracking/hud-tracking";
 import type { GameObjectAction } from "../action/game-object-action";
 import { battery } from "./animation/battery";
@@ -15,7 +15,7 @@ import type { GaugeView } from "./view/gauge-view";
 /** コンストラクタのパラメータ */
 type Param = {
   /** ゲームオブジェクトアクション */
-  gameObjectAction: Stream<GameObjectAction>;
+  gameObjectAction: Observable<GameObjectAction>;
   /** ビュー */
   view: GaugeView;
   /** 最大HP */
@@ -28,7 +28,7 @@ type Param = {
 export class Gauge implements HUDTracking {
   #model: GaugeModel;
   #view: GaugeView;
-  #unsubscriber: Unsubscriber;
+  #unsubscriber: Unsubscribable;
 
   /**
    * コンストラクタ

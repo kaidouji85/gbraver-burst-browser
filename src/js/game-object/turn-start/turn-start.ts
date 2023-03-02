@@ -1,9 +1,9 @@
+import { Observable, Unsubscribable } from "rxjs";
 import * as THREE from "three";
 
 import { Animate } from "../../animation/animate";
 import type { PreRender } from "../../game-loop/pre-render";
 import type { Resources } from "../../resource";
-import type { Stream, Unsubscriber } from "../../stream/stream";
 import type { GameObjectAction } from "../action/game-object-action";
 import { hidden } from "./animation/hidden";
 import { show } from "./animation/show";
@@ -17,7 +17,7 @@ import type { TurnStartView } from "./view/turn-start-view";
 export class TurnStart {
   #model: TurnStartModel;
   #view: TurnStartView;
-  #unsubscriber: Unsubscriber;
+  #unsubscriber: Unsubscribable;
 
   /**
    * コンストラクタ
@@ -29,7 +29,7 @@ export class TurnStart {
   constructor(
     view: TurnStartView,
     resources: Resources,
-    gameObjectAction: Stream<GameObjectAction>
+    gameObjectAction: Observable<GameObjectAction>
   ) {
     this.#model = createInitialValue();
     this.#view = view;

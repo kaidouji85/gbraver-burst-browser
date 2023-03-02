@@ -1,9 +1,9 @@
 import type { Player } from "gbraver-burst-core";
 import { ArmDozerIds } from "gbraver-burst-core";
+import { Observable } from "rxjs";
 
 import type { GameObjectAction } from "../../../../../game-object/action/game-object-action";
 import type { Resources } from "../../../../../resource";
-import type { Stream } from "../../../../../stream/stream";
 import type { TDArmdozerObjects } from "./armdozer-objects";
 import { enemyGenesisBraverTD, playerGenesisBraverTD } from "./genesis-braver";
 import {
@@ -24,7 +24,7 @@ import { enemyWingDozerTD, playerWingDozerTD } from "./wing-dozer";
  */
 export function playerTDArmdozer(
   resources: Resources,
-  gameObjectAction: Stream<GameObjectAction>,
+  gameObjectAction: Observable<GameObjectAction>,
   state: Player
 ): TDArmdozerObjects {
   switch (state.armdozer.id) {
@@ -58,7 +58,7 @@ export function playerTDArmdozer(
  */
 export function enemyTDArmdozer(
   resources: Resources,
-  gameObjectAction: Stream<GameObjectAction>,
+  gameObjectAction: Observable<GameObjectAction>,
   state: Player
 ): TDArmdozerObjects {
   switch (state.armdozer.id) {

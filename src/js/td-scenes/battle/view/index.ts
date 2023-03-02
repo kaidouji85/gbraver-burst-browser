@@ -1,5 +1,6 @@
 import TWEEN from "@tweenjs/tween.js";
 import type { Player, PlayerId } from "gbraver-burst-core";
+import { Observable, Subject } from "rxjs";
 
 import type { GameLoop } from "../../../game-loop/game-loop";
 import type { PreRender } from "../../../game-loop/pre-render";
@@ -10,8 +11,6 @@ import type { Rendering } from "../../../render/rendering";
 import type { Resources } from "../../../resource";
 import type { SafeAreaInset } from "../../../safe-area/safe-area-inset";
 import { createSafeAreaInset } from "../../../safe-area/safe-area-inset";
-import type { Stream, StreamSource } from "../../../stream/stream";
-import { createStreamSource } from "../../../stream/stream";
 import type { Resize } from "../../../window/resize";
 import type { BattleSceneAction } from "../actions";
 import { DOMLayer } from "./dom/dom-layer";
@@ -28,8 +27,8 @@ type Param = {
   renderer: OwnRenderer;
   player: Player;
   enemy: Player;
-  gameLoop: Stream<GameLoop>;
-  resize: Stream<Resize>;
+  gameLoop: Observable<GameLoop>;
+  resize: Observable<Resize>;
 };
 
 /**
@@ -42,19 +41,19 @@ export class BattleSceneView {
   #playerId: PlayerId;
   #safeAreaInset: SafeAreaInset;
   #renderer: OwnRenderer;
-  #updateTD: StreamSource<Update>;
-  #preRenderTD: StreamSource<PreRender>;
-  #updateHUD: StreamSource<Update>;
-  #preRenderHUD: StreamSource<PreRender>;
+  #updateTD: Subject<Update>;
+  #preRenderTD: Subject<PreRender>;
+  #updateHUD: Subject<Update>;
+  #preRenderHUD: Subject<PreRender>;
 
   constructor(param: Param) {
     this.#playerId = param.player.playerId;
     this.#safeAreaInset = createSafeAreaInset();
     this.#renderer = param.renderer;
-    this.#updateTD = createStreamSource();
-    this.#preRenderTD = createStreamSource();
-    this.#updateHUD = createStreamSource();
-    this.#preRenderHUD = createStreamSource();
+    this.#updateTD = new Subject();
+    this.#preRenderTD = new Subject();
+    this.#updateHUD = new Subject();
+    this.#preRenderHUD = new Subject();
     this.td = new ThreeDimensionLayer({
       resources: param.resources,
       renderer: param.renderer,
@@ -91,7 +90,7 @@ export class BattleSceneView {
    * 戦闘シーンアクションを通知する
    * @return 通知ストリーム
    */
-  battleActionNotifier(): Stream<BattleSceneAction> {
+  battleActionNotifier(): Observable<BattleSceneAction> {
     return this.hud.battleActionNotifier();
   }
 

@@ -1,15 +1,10 @@
+import { Observable, Subject, Unsubscribable } from "rxjs";
 import * as THREE from "three";
 
 import type { PreRender } from "../../../game-loop/pre-render";
 import { SimpleImageMesh } from "../../../mesh/simple-image-mesh";
 import type { Resources } from "../../../resource";
 import { CANVAS_IMAGE_IDS } from "../../../resource/canvas-image";
-import type {
-  Stream,
-  StreamSource,
-  Unsubscriber,
-} from "../../../stream/stream";
-import { createStreamSource } from "../../../stream/stream";
 import type { GameObjectAction } from "../../action/game-object-action";
 import type { PushDetector } from "../../push-detector/push-detector";
 import { circlePushDetector } from "../../push-detector/push-detector";
@@ -30,8 +25,8 @@ export class TimeScaleButtonView {
   #timeScale050: SimpleImageMesh;
   #timeScale025: SimpleImageMesh;
   #pushDetector: PushDetector;
-  #pushButton: StreamSource<void>;
-  #unsubscribers: Unsubscriber[];
+  #pushButton: Subject<void>;
+  #unsubscribers: Unsubscribable[];
 
   /**
    * コンストラクタ
@@ -41,10 +36,10 @@ export class TimeScaleButtonView {
    */
   constructor(
     resources: Resources,
-    gameObjectAction: Stream<GameObjectAction>
+    gameObjectAction: Observable<GameObjectAction>
   ) {
     this.#group = new THREE.Group();
-    this.#pushButton = createStreamSource();
+    this.#pushButton = new Subject();
     const buttonImage =
       resources.canvasImages.find(
         (v) => v.id === CANVAS_IMAGE_IDS.TIME_SCALE_BUTTON
@@ -131,7 +126,7 @@ export class TimeScaleButtonView {
    *
    * @return 通知ストリーム
    */
-  notifyPressed(): Stream<void> {
+  notifyPressed(): Observable<void> {
     return this.#pushButton;
   }
 

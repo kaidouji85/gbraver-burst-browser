@@ -1,7 +1,7 @@
+import { Observable, Unsubscribable } from "rxjs";
 import * as THREE from "three";
 
 import { Animate } from "../../animation/animate";
-import type { Stream, Unsubscriber } from "../../stream/stream";
 import type { GameObjectAction } from "../action/game-object-action";
 import { intensity } from "./animation/intensity";
 import type { IlluminationModel } from "./model/illumination-model";
@@ -14,14 +14,14 @@ import { IlluminationView } from "./view/illumination-view";
 export class Illumination {
   #model: IlluminationModel;
   #view: IlluminationView;
-  #unsubscriber: Unsubscriber;
+  #unsubscriber: Unsubscribable;
 
   /**
    * コンストラクタ
    *
    * @param gameObjectAction ゲームオブジェクトアクション
    */
-  constructor(gameObjectAction: Stream<GameObjectAction>) {
+  constructor(gameObjectAction: Observable<GameObjectAction>) {
     this.#model = createInitialValue();
     this.#view = new IlluminationView();
     this.#view.engage(this.#model);

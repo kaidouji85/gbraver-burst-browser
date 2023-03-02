@@ -1,8 +1,8 @@
+import { Observable, Unsubscribable } from "rxjs";
 import * as THREE from "three";
 
 import { Animate } from "../../animation/animate";
 import type { PreRender } from "../../game-loop/pre-render";
-import type { Stream, Unsubscriber } from "../../stream/stream";
 import type { GameObjectAction } from "../action/game-object-action";
 import { popUp } from "./animation/pop-up";
 import type { BatteryCorrectModel } from "./model/battery-correct-model";
@@ -13,7 +13,7 @@ import type { BatteryCorrectView } from "./view/battery-correct-view";
 export class BatteryCorrect {
   #model: BatteryCorrectModel;
   #view: BatteryCorrectView;
-  #unsubscribers: Unsubscriber[];
+  #unsubscribers: Unsubscribable[];
 
   /**
    * コンストラクタ
@@ -23,7 +23,7 @@ export class BatteryCorrect {
    */
   constructor(
     view: BatteryCorrectView,
-    gameObjectAction: Stream<GameObjectAction>
+    gameObjectAction: Observable<GameObjectAction>
   ) {
     this.#model = initialValue();
     this.#view = view;

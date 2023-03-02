@@ -1,5 +1,6 @@
 import type { ArmDozerId } from "gbraver-burst-core";
 import { ArmDozerIds } from "gbraver-burst-core";
+import { Observable } from "rxjs";
 
 import type { GameObjectAction } from "../../../../../game-object/action/game-object-action";
 import {
@@ -10,7 +11,6 @@ import {
 } from "../../../../../game-object/burst-button";
 import { BurstButton } from "../../../../../game-object/burst-button/burst-button";
 import type { Resources } from "../../../../../resource";
-import type { Stream } from "../../../../../stream/stream";
 
 /**
  * アームドーザIDに対応したバーストボタンを生成する
@@ -22,7 +22,7 @@ import type { Stream } from "../../../../../stream/stream";
  */
 export function createBurstButton(
   resources: Resources,
-  gameObjectAction: Stream<GameObjectAction>,
+  gameObjectAction: Observable<GameObjectAction>,
   armDozerId: ArmDozerId
 ): BurstButton {
   switch (armDozerId) {

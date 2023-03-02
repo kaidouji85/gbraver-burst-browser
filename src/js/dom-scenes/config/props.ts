@@ -1,11 +1,10 @@
 import { Howl } from "howler";
+import { Subject } from "rxjs";
 
 import { Exclusive } from "../../exclusive/exclusive";
 import type { GbraverBurstBrowserConfig } from "../../game/config/browser-config";
 import type { Resources } from "../../resource";
 import { SOUND_IDS } from "../../resource/sound";
-import type { StreamSource } from "../../stream/stream";
-import { createStreamSource } from "../../stream/stream";
 import { domUuid } from "../../uuid/dom-uuid";
 import { ConfigChangedDialog } from "./config-changed-dialog";
 import { ROOT_CLASS } from "./dom/class-name";
@@ -57,10 +56,10 @@ export type ConfigProps = {
   exclusive: Exclusive;
 
   /** 戻るストリーム */
-  prev: StreamSource<void>;
+  prev: Subject<void>;
 
   /** 設定変更ストリーム */
-  configChange: StreamSource<GbraverBurstBrowserConfig>;
+  configChange: Subject<GbraverBurstBrowserConfig>;
 };
 
 /**
@@ -109,7 +108,7 @@ export function createConfigProps(
       resources.sounds.find((v) => v.id === SOUND_IDS.CHANGE_VALUE)?.sound ??
       new Howl({ src: "" }),
     exclusive: new Exclusive(),
-    prev: createStreamSource(),
-    configChange: createStreamSource(),
+    prev: new Subject(),
+    configChange: new Subject(),
   };
 }

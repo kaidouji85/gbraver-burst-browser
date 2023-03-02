@@ -1,4 +1,5 @@
 import TWEEN from "@tweenjs/tween.js";
+import { Observable, Subject, Unsubscribable } from "rxjs";
 import * as THREE from "three";
 
 import type { GameLoop } from "../../src/js/game-loop/game-loop";
@@ -14,12 +15,6 @@ import type { Resources } from "../../src/js/resource";
 import { developingFullResourceLoading } from "../../src/js/resource/loading/full-resource-loading";
 import type { SafeAreaInset } from "../../src/js/safe-area/safe-area-inset";
 import { createSafeAreaInset } from "../../src/js/safe-area/safe-area-inset";
-import type {
-  Stream,
-  StreamSource,
-  Unsubscriber,
-} from "../../src/js/stream/stream";
-import { createStreamSource } from "../../src/js/stream/stream";
 import type { Resize } from "../../src/js/window/resize";
 import { resizeStream } from "../../src/js/window/resize";
 import { StorybookResourceRoot } from "../storybook-resource-root";
@@ -30,7 +25,7 @@ type Object3DParams = {
   resources: Resources;
 
   /** ゲームオブジェクトアクション */
-  gameObjectAction: Stream<GameObjectAction>;
+  gameObjectAction: Observable<GameObjectAction>;
 };
 
 /**
@@ -45,16 +40,16 @@ export type Object3DCreator = (params: Object3DParams) => THREE.Object3D[];
 export class HUDGameObjectStub {
   _creator: Object3DCreator;
   _safeAreaInset: SafeAreaInset;
-  _resize: Stream<Resize>;
-  _gameLoop: Stream<GameLoop>;
-  _update: StreamSource<Update>;
-  _preRender: StreamSource<PreRender>;
+  _resize: Observable<Resize>;
+  _gameLoop: Observable<GameLoop>;
+  _update: Subject<Update>;
+  _preRender: Subject<PreRender>;
   _renderer: Renderer;
   _camera: PlainHUDCamera;
   _scene: THREE.Scene;
-  _overlap: Stream<OverlapEvent>;
-  _gameObjectAction: Stream<GameObjectAction>;
-  _unsubscriber: Unsubscriber[];
+  _overlap: Observable<OverlapEvent>;
+  _gameObjectAction: Observable<GameObjectAction>;
+  _unsubscriber: Unsubscribable[];
 
   /**
    * コンストラクタ
@@ -66,8 +61,8 @@ export class HUDGameObjectStub {
     this._safeAreaInset = createSafeAreaInset();
     this._resize = resizeStream();
     this._gameLoop = gameLoopStream();
-    this._update = createStreamSource();
-    this._preRender = createStreamSource();
+    this._update = new Subject();
+    this._preRender = new Subject();
     this._renderer = new Renderer(this._resize);
     this._scene = new THREE.Scene();
     this._camera = new PlainHUDCamera(this._resize);

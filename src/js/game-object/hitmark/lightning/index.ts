@@ -1,5 +1,6 @@
+import { Observable } from "rxjs";
+
 import type { Resources } from "../../../resource";
-import type { Stream } from "../../../stream/stream";
 import type { GameObjectAction } from "../../action/game-object-action";
 import { Lightning } from "./lightning";
 import { EnemyLightningView } from "./view/enemy-lightning-view";
@@ -14,7 +15,7 @@ import { PlayerLightningView } from "./view/player-lightning-view";
  */
 export function playerLightning(
   resources: Resources,
-  gameObjectAction: Stream<GameObjectAction>
+  gameObjectAction: Observable<GameObjectAction>
 ): Lightning {
   const view = new PlayerLightningView(resources);
   return new Lightning(view, resources, gameObjectAction);
@@ -29,7 +30,7 @@ export function playerLightning(
  */
 export function enemyLightning(
   resources: Resources,
-  gameObjectAction: Stream<GameObjectAction>
+  gameObjectAction: Observable<GameObjectAction>
 ): Lightning {
   const view = new EnemyLightningView(resources);
   return new Lightning(view, resources, gameObjectAction);

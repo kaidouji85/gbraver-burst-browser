@@ -1,16 +1,11 @@
 import { Howl } from "howler";
+import { Observable, Subject, Unsubscribable } from "rxjs";
 
 import { pop, waitFinishAnimation } from "../../../dom/animation";
 import { pushDOMStream } from "../../../dom/event-stream";
 import { Exclusive } from "../../../exclusive/exclusive";
 import type { Resources } from "../../../resource";
 import { SOUND_IDS } from "../../../resource/sound";
-import type {
-  Stream,
-  StreamSource,
-  Unsubscriber,
-} from "../../../stream/stream";
-import { createStreamSource } from "../../../stream/stream";
 import type { PostBattle } from "../../post-battle";
 import type {
   ButtonStyle,
@@ -26,15 +21,15 @@ type ActionButton = {
   button: HTMLButtonElement;
 
   /** ボタンイベントのUnsubscriber */
-  unsubscriber: Unsubscriber;
+  unsubscriber: Unsubscribable;
 };
 
 /** バトル終了後行動選択フローター */
 export class PostBattleFloater {
   #root: HTMLElement;
   #exclusive: Exclusive;
-  #selectionComplete: StreamSource<PostBattle>;
-  #unsubscribers: Unsubscriber[];
+  #selectionComplete: Subject<PostBattle>;
+  #unsubscribers: Unsubscribable[];
 
   /**
    * コンストラクタ
@@ -45,7 +40,7 @@ export class PostBattleFloater {
     this.#root.className = ROOT_CLASS;
     this.#root.style.display = "none";
     this.#exclusive = new Exclusive();
-    this.#selectionComplete = createStreamSource();
+    this.#selectionComplete = new Subject();
     this.#unsubscribers = [];
   }
 
@@ -103,7 +98,7 @@ export class PostBattleFloater {
    *
    * @return 通知ストリーム
    */
-  selectionCompleteNotifier(): Stream<PostBattle> {
+  selectionCompleteNotifier(): Observable<PostBattle> {
     return this.#selectionComplete;
   }
 

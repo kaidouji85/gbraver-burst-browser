@@ -1,5 +1,6 @@
+import { Observable } from "rxjs";
+
 import type { DOMScene } from "../../dom-scenes/dom-scene";
-import type { Stream } from "../../stream/stream";
 import type { GameAction } from "../game-actions";
 import { bind } from "./bind";
 import { discardCurrentScene } from "./discard-current-scene";
@@ -44,7 +45,7 @@ export class DOMSceneBinder {
    *
    * @return 通知ストリーム
    */
-  gameActionNotifier(): Stream<GameAction> {
+  gameActionNotifier(): Observable<GameAction> {
     return this.#props.gameAction;
   }
 

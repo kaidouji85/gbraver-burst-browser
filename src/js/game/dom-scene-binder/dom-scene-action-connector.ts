@@ -1,5 +1,6 @@
+import { Subject, Unsubscribable } from "rxjs";
+
 import type { DOMScene } from "../../dom-scenes/dom-scene";
-import type { StreamSource, Unsubscriber } from "../../stream/stream";
 import type { GameAction } from "../game-actions";
 
 /**
@@ -13,5 +14,5 @@ import type { GameAction } from "../game-actions";
  */
 export type DOMSceneActionConnector<X extends DOMScene> = (
   scene: X,
-  gameAction: StreamSource<GameAction>
-) => Unsubscriber[];
+  gameAction: Subject<GameAction>
+) => Unsubscribable[];

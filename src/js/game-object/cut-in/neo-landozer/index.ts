@@ -1,5 +1,6 @@
+import { Observable } from "rxjs";
+
 import type { Resources } from "../../../resource";
-import type { Stream } from "../../../stream/stream";
 import type { GameObjectAction } from "../../action/game-object-action";
 import { NeoLandozerCutIn } from "./neo-landozer-cutin";
 import { EnemyNeoLandozerCutInView } from "./view/enemy-neo-landozer-cutin-view";
@@ -14,7 +15,7 @@ import { PlayerNeoLandozerCutInView } from "./view/player-neo-landozer-cutin-vie
  */
 export function playerNeoLandozerCutIn(
   resources: Resources,
-  gameObjectAction: Stream<GameObjectAction>
+  gameObjectAction: Observable<GameObjectAction>
 ): NeoLandozerCutIn {
   const view = new PlayerNeoLandozerCutInView(resources);
   return new NeoLandozerCutIn(view, gameObjectAction);
@@ -29,7 +30,7 @@ export function playerNeoLandozerCutIn(
  */
 export function enemyNeoLandozerCutIn(
   resources: Resources,
-  gameObjectAction: Stream<GameObjectAction>
+  gameObjectAction: Observable<GameObjectAction>
 ): NeoLandozerCutIn {
   const view = new EnemyNeoLandozerCutInView(resources);
   return new NeoLandozerCutIn(view, gameObjectAction);
