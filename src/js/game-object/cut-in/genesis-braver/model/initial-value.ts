@@ -14,7 +14,7 @@ export function createInitialValue(): GenesisBraverCutInModel {
       x: 0,
       y: 0,
     },
-    opacity: 1,
+    opacity: 0,
     scale: 1,
   };
 }
