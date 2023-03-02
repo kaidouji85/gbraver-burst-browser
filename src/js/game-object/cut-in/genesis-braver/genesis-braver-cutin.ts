@@ -1,7 +1,10 @@
 import { Observable, Unsubscribable } from "rxjs";
 import * as THREE from "three";
+import { Animate } from "../../../animation/animate";
 import { PreRender } from "../../../game-loop/pre-render";
 import { GameObjectAction } from "../../action/game-object-action";
+import { hidden } from "./animation/hidden";
+import { show } from "./animation/show";
 import { GenesisBraverCutInModel } from "./model/genesis-braver-cutin-model";
 import { createInitialValue } from "./model/initial-value";
 import { GenesisBraverCutInView } from "./view/genesis-braver-cutin-view";
@@ -48,6 +51,22 @@ export class GenesisBraverCutIn {
    */
   getObject3D(): THREE.Object3D {
     return this.#view.getObject3D();
+  }
+
+  /**
+   * カットインを表示する
+   * @return アニメーション
+   */
+  show(): Animate {
+    return show(this.#model);
+  }
+
+  /**
+   * カットインを非表示にする
+   * @return アニメーション
+   */
+  hidden(): Animate {
+    return hidden(this.#model);
   }
 
   /**
