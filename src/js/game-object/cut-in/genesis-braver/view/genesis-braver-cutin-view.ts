@@ -1,4 +1,5 @@
 import * as THREE from "three";
+import { PreRender } from "../../../../game-loop/pre-render";
 import { GenesisBraverCutInModel } from "../model/genesis-braver-cutin-model";
 
 /** ジェネシスブレイバー カットイン ビュー */
@@ -11,8 +12,9 @@ export interface GenesisBraverCutInView {
   /**
    * モデルをビューに反映させる
    * @param model モデル
+   * @param preRender プリレンダー
    */
-  engage(model: GenesisBraverCutInModel): void;
+  engage(model: GenesisBraverCutInModel, preRender: PreRender): void;
 
   /**
    * シーンに追加するオブジェクトを取得

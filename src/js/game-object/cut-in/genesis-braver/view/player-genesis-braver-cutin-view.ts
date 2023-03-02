@@ -1,4 +1,5 @@
 import * as THREE from "three";
+import { PreRender } from "../../../../game-loop/pre-render";
 import { Resources } from "../../../../resource";
 import { GenesisBraverCutInModel } from "../model/genesis-braver-cutin-model";
 import { AnimationMeshMapping } from "./animation-mesh-mapping";
@@ -32,7 +33,7 @@ export class PlayerGenesisBraverCutInView implements GenesisBraverCutInView  {
   }
 
   /** @override */
-  engage(model: GenesisBraverCutInModel): void {
+  engage(model: GenesisBraverCutInModel, action: PreRender): void {
     this.#group.position.x = model.tracking.x;
     this.#group.position.y = model.tracking.y;
     const currentMesh = this.#meshes.find(v => v.type === model.animation.type);

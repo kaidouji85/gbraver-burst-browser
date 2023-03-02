@@ -1,5 +1,6 @@
 import { Observable, Unsubscribable } from "rxjs";
 import * as THREE from "three";
+import { PreRender } from "../../../game-loop/pre-render";
 import { GameObjectAction } from "../../action/game-object-action";
 import { GenesisBraverCutInModel } from "./model/genesis-braver-cutin-model";
 import { createInitialValue } from "./model/initial-value";
@@ -25,7 +26,7 @@ export class GenesisBraverCutIn {
     this.#unsubscribers = [
       gameObjectAction.subscribe(action => {
         if (action.type === "PreRender") {
-          this.#onPreRender();
+          this.#onPreRender(action);
         }
       })
     ];
@@ -52,7 +53,7 @@ export class GenesisBraverCutIn {
   /**
    * プリレンダー時の処理
    */
-  #onPreRender(): void {
-    this.#view.engage(this.#model);
+  #onPreRender(action: PreRender): void {
+    this.#view.engage(this.#model, action);
   }
 }
