@@ -1,6 +1,5 @@
+import { Observable, Unsubscribable } from "rxjs";
 import * as THREE from "three";
-import { toTouchStartRaycaster } from "../../../render/overlap-event/touch-start-raycaster";
-import { Stream, Unsubscriber } from "../../../stream/stream";
 import { GameObjectAction } from "../../action/game-object-action";
 import { GenesisBraverCutInModel } from "./model/genesis-braver-cutin-model";
 import { createInitialValue } from "./model/initial-value";
@@ -12,15 +11,15 @@ export class GenesisBraverCutIn {
   #model: GenesisBraverCutInModel;
   /** ビュー */
   #view: GenesisBraverCutInView;
-
-  #unsubscribers: Unsubscriber[];
+  /** アンサブスクライバ */
+  #unsubscribers: Unsubscribable[];
 
   /**
    * コンストラクタ
    * @param resources ビュー
    * @param gameObjectAction ゲームオブジェクトアクション
    */
-  constructor(view: GenesisBraverCutInView, gameObjectAction: Stream<GameObjectAction>) {
+  constructor(view: GenesisBraverCutInView, gameObjectAction: Observable<GameObjectAction>) {
     this.#model = createInitialValue();
     this.#view = view;
     this.#unsubscribers = [
