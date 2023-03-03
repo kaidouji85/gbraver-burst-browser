@@ -3,7 +3,7 @@ import { BatteryLimitBreak, Burst } from "gbraver-burst-core";
 import { all } from "../../../../../animation/all";
 import { Animate } from "../../../../../animation/animate";
 import { delay, empty } from "../../../../../animation/delay";
-import { HUDArmdozerObjects } from "../../../view/hud/armdozer-objects/hud-armdozer-ibjects";
+import { GenesisBraverHUD } from "../../../view/hud/armdozer-objects/genesis-braver";
 import { GenesisBraverTD } from "../../../view/td/armdozer-objects/genesis-braver";
 import { dolly, toInitial, track } from "../../td-camera";
 import { BurstAnimationParamX } from "./animation-param";
@@ -15,7 +15,7 @@ import { BurstAnimationParamX } from "./animation-param";
  */
 export type GenesisBraverBurst<BURST extends Burst> = BurstAnimationParamX<
   GenesisBraverTD,
-  HUDArmdozerObjects,
+  GenesisBraverHUD,
   BURST
 >;
 
