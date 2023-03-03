@@ -3,7 +3,10 @@ import { Observable } from "rxjs";
 import * as THREE from "three";
 
 import type { GameObjectAction } from "../../../../../game-object/action/game-object-action";
-import { enemyGenesisBraverCutIn, playerGenesisBraverCutIn } from "../../../../../game-object/cut-in/genesis-braver";
+import {
+  enemyGenesisBraverCutIn,
+  playerGenesisBraverCutIn,
+} from "../../../../../game-object/cut-in/genesis-braver";
 import { GenesisBraverCutIn } from "../../../../../game-object/cut-in/genesis-braver/genesis-braver-cutin";
 import type { Resources } from "../../../../../resource";
 import type { HUDArmdozerObjects } from "./hud-armdozer-ibjects";

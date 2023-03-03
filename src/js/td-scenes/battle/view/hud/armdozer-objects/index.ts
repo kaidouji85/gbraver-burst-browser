@@ -5,7 +5,10 @@ import { Observable } from "rxjs";
 import type { GameObjectAction } from "../../../../../game-object/action/game-object-action";
 import type { Resources } from "../../../../../resource";
 import { EmptyHUDArmdozer } from "./empty";
-import { enemyGenesisBraverHUD, playerGenesisBraverHUD } from "./genesis-braver";
+import {
+  enemyGenesisBraverHUD,
+  playerGenesisBraverHUD,
+} from "./genesis-braver";
 import type { HUDArmdozerObjects } from "./hud-armdozer-ibjects";
 import {
   enemyLightningDozerHUD,
@@ -67,7 +70,7 @@ export function enemyArmdozerHUD(
     case ArmDozerIds.WING_DOZER:
       return enemyWingDozerHUD(resources, gameObjectAction, state);
     case ArmDozerIds.GENESIS_BRAVER:
-      return enemyGenesisBraverHUD(resources, gameObjectAction, state);  
+      return enemyGenesisBraverHUD(resources, gameObjectAction, state);
     default:
       return new EmptyHUDArmdozer(state);
   }
