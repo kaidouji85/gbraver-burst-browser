@@ -1,6 +1,7 @@
 import * as THREE from "three";
 
 import { toSilhouette } from "../../../../canvas/silhouette/to-silhouette";
+import { CanvasDisposeTexture } from "../../../../texture/canvas-dispose-texture";
 
 /** アクティブレイヤー Red */
 export const ACTIVE_COLOR_R = 240;
@@ -23,5 +24,5 @@ export function createSilhouetteTexture(texture: THREE.Texture): THREE.Texture {
     ACTIVE_COLOR_G,
     ACTIVE_COLOR_B
   );
-  return new THREE.Texture(canvas);
+  return new CanvasDisposeTexture(canvas);
 }
