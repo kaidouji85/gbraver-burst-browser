@@ -10,7 +10,6 @@ import { BurstAnimationParamX } from "./animation-param";
 
 /**
  * ジェネシスブレイバー バーストアニメーションパラメータ
- *
  * @template BURST バースト
  */
 export type GenesisBraverBurst<BURST extends Burst> = BurstAnimationParamX<
@@ -37,6 +36,7 @@ function batteryLimitBreak(
   param: GenesisBraverBurst<BatteryLimitBreak>
 ): Animate {
   return all(
+    param.burstArmdozerHUD.cutIn.show(),
     param.burstArmdozerTD.genesisBraver.burst(),
     param.isActive
       ? param.burstArmdozerTD.genesisBraver.endActive()
@@ -49,9 +49,17 @@ function batteryLimitBreak(
     dolly(param.tdCamera, "-60", 500),
     param.tdObjects.skyBrightness.brightness(0.2, 500),
     param.tdObjects.illumination.intensity(0.2, 500),
+    param.hudObjects.rearmostFader.opacity(0.6, 500),
     param.tdObjects.turnIndicator.invisible()
   )
     .chain(delay(800))
+    .chain(
+      all(
+        param.hudObjects.rearmostFader.opacity(0, 300),
+        param.burstArmdozerHUD.cutIn.hidden()
+      )
+    )
+    .chain(delay(300))
     .chain(
       all(
         param.burstPlayerHUD.gauge.battery(
