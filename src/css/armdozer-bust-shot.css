@@ -37,10 +37,10 @@
 }
 
 .armdozer-bust-shot__genesis-braver {
-  --width: calc(var(--vh) * 160);
+  --width: calc(var(--vh) * 200);
 
   position: absolute;
-  top: calc(var(--vh) * -15);
-  left: calc(100vw - 1 * var(--width) - var(--safe-area-right));
+  top: calc(var(--vh) * -20);
+  left: calc(100vw - 0.85 * var(--width) - var(--safe-area-right));
   width: var(--width);
 }
