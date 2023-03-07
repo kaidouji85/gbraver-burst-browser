@@ -40,8 +40,8 @@ export async function enemyAttackGuarded(props: CustomBattleEventProps) {
   props.view.dom.rightMessageWindow.darken();
   activeLeftMessageWindowWithFace(props, "Tsubasa");
   await scrollLeftMessages(props, [
-    ["ツバサ", "「私と君が同じバッテリーを出したので"],
-    ["攻撃をガード ダメージが半減されたな」"],
+    ["ツバサ", "「私と君が同じバッテリーを出したので 攻撃をガード"],
+    ["ダメージが半減されたぞ」"],
   ]);
   props.view.dom.leftMessageWindow.darken();
 }
@@ -62,8 +62,7 @@ export async function enemyAttackHit(props: CustomBattleEventProps) {
   activeLeftMessageWindowWithFace(props, "Tsubasa");
   await scrollLeftMessages(props, [
     ["ツバサ", "「すまない これでも手心を加えたのだがな"],
-    ["私の方が君よりも大きいバッテリーを出したので"],
-    ["攻撃がヒットしたぞ」"],
+    ["私の方が君よりも大きいバッテリーを出したので 攻撃がヒットしたぞ」"],
   ]);
   props.view.dom.leftMessageWindow.darken();
 }

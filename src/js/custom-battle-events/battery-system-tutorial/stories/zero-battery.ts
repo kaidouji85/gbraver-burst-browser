@@ -91,12 +91,6 @@ export async function doPilotSkillBecauseZeroBattery(
     ["これで急場を凌ぐんだ」"],
   ]);
   props.view.dom.leftMessageWindow.darken();
-  activeRightMessageWindowWithFace(props, "Shinya");
-  await scrollRightMessages(props, [
-    ["シンヤ", "「了解ッス"],
-    ["俺の底力 見せてやる!!」"],
-  ]);
-  props.view.dom.rightMessageWindow.darken();
 }
 
 /**
