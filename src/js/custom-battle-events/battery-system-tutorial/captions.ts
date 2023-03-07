@@ -1,23 +1,15 @@
 /** 攻撃バッテリー注釈 */
 export const attackBatteryCaption = [
-  "好きなバッテリーで攻撃してみよう",
-  "+ - ボタンで数字を調整したら コウゲキ ボタンを押せ",
+  "+ - ボタンで数字を調整したら ”コウゲキ”ボタンを押そう",
 ];
 
 /** 防御バッテリー注釈 */
 export const defenseBatteryCaption = [
-  "好きなバッテリーで防御してみよう",
-  "ツバサ先輩よりも大きい数字を出せば攻撃を回避できるぞ",
+  "+ - ボタンで数字を調整したら ”ボウギョ” ボタンを押そう",
 ];
 
 /** バースト注釈 */
-export const burstCaption = [
-  "このまま0防御すると負け確定だ",
-  "バーストでバッテリーを回復させよう",
-];
+export const burstCaption = ["”バースト” ボタンを押そう"];
 
 /** パイロットスキル注釈 */
-export const pilotSkillCaption = [
-  "このまま0防御すると負け確定だ",
-  "シンヤのパイロットスキルを発動して バッテリーを回復させよう",
-];
+export const pilotSkillCaption = ["”パイロット” ボタンを押そう"];

@@ -38,9 +38,8 @@ export async function playerAttackGuarded(props: CustomBattleEventProps) {
   activeLeftMessageWindowWithFace(props, "Tsubasa");
   await scrollLeftMessages(props, [
     ["ツバサ", "「甘いぞ シンヤ"],
-    [
-      "君は私と同じバッテリーを出したので 攻撃をガード ダメージを半減させてもらった」",
-    ],
+    ["君は私と同じバッテリーを出したので攻撃をガード"],
+    ["ダメージを半減させてもらった」"],
   ]);
   props.view.dom.leftMessageWindow.darken();
 }
@@ -57,7 +56,8 @@ export async function playerAttackMiss(props: CustomBattleEventProps) {
   activeLeftMessageWindowWithFace(props, "Tsubasa");
   await scrollLeftMessages(props, [
     ["ツバサ", "「まだまだ だな シンヤ"],
-    ["私の方が君より大きいバッテリーを出したので 攻撃を回避させてもらった」"],
+    ["私の方が君より大きいバッテリーを出したので"],
+    ["攻撃を回避させてもらった」"],
   ]);
   props.view.dom.leftMessageWindow.darken();
 }
