@@ -16,8 +16,8 @@ export async function noZeroBatteryDefense(props: CustomBattleEventProps) {
   invisibleAllMessageWindows(props);
   activeLeftMessageWindowWithFace(props, "Tsubasa");
   await scrollLeftMessages(props, [
-    ["ツバサ", "「待て シンヤ!! 0防御はまずい」"],
-    ["たとえHPが満タンでも即死級のダメージを受けるぞ」"],
+    ["ツバサ", "「待て シンヤ!!"],
+    ["0防御はまずい たとえHPが満タンでも即死するぞ」"],
   ]);
   props.view.dom.leftMessageWindow.darken();
 }
@@ -48,23 +48,16 @@ export async function doBurstBecauseZeroBattery(props: CustomBattleEventProps) {
   await noZeroBatteryDefense(props);
   activeRightMessageWindowWithFace(props, "Shinya");
   await scrollRightMessages(props, [
-    ["シンヤ", "「でもツバサ先輩 俺のバッテリーはもう0ッスよ"],
-    ["俺はこのまま即死ッスか」"],
+    ["シンヤ", "「でもツバサ先輩 俺のバッテリーはもう0ッスよ」"],
   ]);
   props.view.dom.rightMessageWindow.darken();
   activeLeftMessageWindowWithFace(props, "Tsubasa");
   await scrollLeftMessages(props, [
-    ["ツバサ", "「心配するな シンヤ こういう時はバーストだ"],
-    [
-      "バーストは1試合に1回しか使えないが 発動すればバッテリーを大幅に回復できるんだ」",
-    ],
+    ["ツバサ", "「シンヤ こういう時はバーストだ"],
+    ["バーストは1試合に1回しか使えないが"],
+    ["発動すればバッテリーを大幅に回復できるんだ」"]
   ]);
   props.view.dom.leftMessageWindow.darken();
-  activeRightMessageWindowWithFace(props, "Shinya");
-  await scrollRightMessages(props, [
-    ["シンヤ", "「了解ッス バーストで立て直せばいいんすね」"],
-  ]);
-  props.view.dom.rightMessageWindow.darken();
 }
 
 /**
@@ -79,30 +72,29 @@ export async function doPilotSkillBecauseZeroBattery(
   await noZeroBatteryDefense(props);
   activeRightMessageWindowWithFace(props, "Shinya");
   await scrollRightMessages(props, [
-    ["シンヤ", "「でもツバサ先輩 俺のバッテリーはもう0ッスよ"],
-    ["俺はこのまま即死ッスか」"],
+    ["シンヤ", "「でもツバサ先輩 俺のバッテリーはもう0ッスよ"]
   ]);
   props.view.dom.rightMessageWindow.darken();
   activeLeftMessageWindowWithFace(props, "Tsubasa");
   await scrollLeftMessages(props, [
     ["ツバサ", "「こういう時はバーストでバッテリーを回復するんだ"],
     ["……と言いたいところが もうバーストは使ってしまったか"],
-    ["ならば 最後の手段だ シンヤ 君に秘めれた力を発動するんだ」"],
+    ["ならば 最後の手段 パイロットスキルを発動するんだ」"]
   ]);
   props.view.dom.leftMessageWindow.darken();
   activeRightMessageWindowWithFace(props, "Shinya");
-  await scrollRightMessages(props, [["シンヤ", "「俺に秘められた力?」"]]);
+  await scrollRightMessages(props, [["シンヤ", "「パイロットスキル?」"]]);
   props.view.dom.rightMessageWindow.darken();
   activeLeftMessageWindowWithFace(props, "Tsubasa");
   await scrollLeftMessages(props, [
-    ["ツバサ", "「パイロットスキルを発動するんだ"],
-    ["君のパイロットスキルはバッテリーを少しだけ回復することができる"],
+    ["ツバサ", "「君のパイロットスキルで バッテリーを少しだけ回復できる"],
     ["これで急場を凌ぐんだ」"],
   ]);
   props.view.dom.leftMessageWindow.darken();
   activeRightMessageWindowWithFace(props, "Shinya");
   await scrollRightMessages(props, [
-    ["シンヤ", "「了解ッス 俺の底力 見せてやる!!」"],
+    ["シンヤ", "「了解ッス"],
+    ["俺の底力 見せてやる!!」"]
   ]);
   props.view.dom.rightMessageWindow.darken();
 }
@@ -118,8 +110,7 @@ export async function zeroBatteryDefenseBecauseNoBatteryRecover(
   await noZeroBatteryDefense(props);
   activeRightMessageWindowWithFace(props, "Shinya");
   await scrollRightMessages(props, [
-    ["シンヤ", "「でもツバサ先輩 俺のバッテリーはもう0ッスよ"],
-    ["俺はこのまま即死ッスか」"],
+    ["シンヤ", "「でもツバサ先輩 俺のバッテリーはもう0ッスよ」"],
   ]);
   props.view.dom.rightMessageWindow.darken();
   activeLeftMessageWindowWithFace(props, "Tsubasa");
@@ -135,8 +126,7 @@ export async function zeroBatteryDefenseBecauseNoBatteryRecover(
   props.view.dom.rightMessageWindow.darken();
   activeLeftMessageWindowWithFace(props, "Tsubasa");
   await scrollLeftMessages(props, [
-    ["ツバサ", "「残念ながら万策尽きたな"],
-    ["初めての訓練では良くあることだから あまり気にするな"],
+    ["ツバサ", "「残念ながら万策尽きた」"],
   ]);
   props.view.dom.leftMessageWindow.darken();
 }
