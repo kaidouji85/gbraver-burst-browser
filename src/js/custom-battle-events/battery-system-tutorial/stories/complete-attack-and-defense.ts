@@ -1,7 +1,5 @@
 import type { CustomBattleEventProps } from "../../../td-scenes/battle/custom-battle-event";
-import {
-  activeLeftMessageWindowWithFace,
-} from "../../active-message-window";
+import { activeLeftMessageWindowWithFace } from "../../active-message-window";
 import { scrollLeftMessages } from "../../scroll-messages";
 
 /**

@@ -19,7 +19,7 @@ export async function lose(props: CustomBattleEventProps) {
   activeLeftMessageWindowWithFace(props, "Tsubasa");
   await scrollLeftMessages(props, [
     ["ツバサ", "「そう落ち込むな"],
-    ["はじめてにしては 悪くなかったぞ」"]
+    ["はじめてにしては 悪くなかったぞ」"],
   ]);
   props.view.dom.leftMessageWindow.darken();
 }

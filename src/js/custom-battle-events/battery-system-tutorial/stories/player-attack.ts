@@ -57,7 +57,7 @@ export async function playerAttackMiss(props: CustomBattleEventProps) {
   await scrollLeftMessages(props, [
     ["ツバサ", "「まだまだ だな シンヤ"],
     ["私の方が君より大きいバッテリーを出したので"],
-    ["攻撃を回避させてもらった」"]
+    ["攻撃を回避させてもらった」"],
   ]);
   props.view.dom.leftMessageWindow.darken();
 }
