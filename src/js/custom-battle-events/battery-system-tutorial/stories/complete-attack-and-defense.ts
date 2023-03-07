@@ -18,7 +18,7 @@ export const completeAttackAndDefense = async (
     ["ツバサ", "「これで攻撃 防御を一通り体験したな"],
     ["以降はどちらかのHPが0になるまで これを繰り返すんだ"],
     ["以上が基本ルールだ"],
-    ["ここから先は好きなように戦ってくれ」"]
+    ["ここから先は好きなように戦ってくれ」"],
   ]);
   props.view.dom.leftMessageWindow.darken();
   activeRightMessageWindowWithFace(props, "Shinya");

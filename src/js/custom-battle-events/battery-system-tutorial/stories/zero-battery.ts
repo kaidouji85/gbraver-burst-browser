@@ -55,7 +55,7 @@ export async function doBurstBecauseZeroBattery(props: CustomBattleEventProps) {
   await scrollLeftMessages(props, [
     ["ツバサ", "「シンヤ こういう時はバーストだ"],
     ["バーストは1試合に1回しか使えないが"],
-    ["発動すればバッテリーを大幅に回復できるんだ」"]
+    ["発動すればバッテリーを大幅に回復できるんだ」"],
   ]);
   props.view.dom.leftMessageWindow.darken();
 }
@@ -72,14 +72,14 @@ export async function doPilotSkillBecauseZeroBattery(
   await noZeroBatteryDefense(props);
   activeRightMessageWindowWithFace(props, "Shinya");
   await scrollRightMessages(props, [
-    ["シンヤ", "「でもツバサ先輩 俺のバッテリーはもう0ッスよ"]
+    ["シンヤ", "「でもツバサ先輩 俺のバッテリーはもう0ッスよ"],
   ]);
   props.view.dom.rightMessageWindow.darken();
   activeLeftMessageWindowWithFace(props, "Tsubasa");
   await scrollLeftMessages(props, [
     ["ツバサ", "「こういう時はバーストでバッテリーを回復するんだ"],
     ["……と言いたいところが もうバーストは使ってしまったか"],
-    ["ならば 最後の手段 パイロットスキルを発動するんだ」"]
+    ["ならば 最後の手段 パイロットスキルを発動するんだ」"],
   ]);
   props.view.dom.leftMessageWindow.darken();
   activeRightMessageWindowWithFace(props, "Shinya");
@@ -94,7 +94,7 @@ export async function doPilotSkillBecauseZeroBattery(
   activeRightMessageWindowWithFace(props, "Shinya");
   await scrollRightMessages(props, [
     ["シンヤ", "「了解ッス"],
-    ["俺の底力 見せてやる!!」"]
+    ["俺の底力 見せてやる!!」"],
   ]);
   props.view.dom.rightMessageWindow.darken();
 }
@@ -125,8 +125,6 @@ export async function zeroBatteryDefenseBecauseNoBatteryRecover(
   await scrollRightMessages(props, [["シンヤ", "「センパーイ」"]]);
   props.view.dom.rightMessageWindow.darken();
   activeLeftMessageWindowWithFace(props, "Tsubasa");
-  await scrollLeftMessages(props, [
-    ["ツバサ", "「残念ながら万策尽きた」"],
-  ]);
+  await scrollLeftMessages(props, [["ツバサ", "「残念ながら万策尽きた」"]]);
   props.view.dom.leftMessageWindow.darken();
 }

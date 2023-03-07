@@ -21,7 +21,7 @@ export async function playerAttackHit(props: CustomBattleEventProps) {
   await scrollLeftMessages(props, [
     ["ツバサ", "「見事な攻撃だな シンヤ"],
     ["君が私よりも大きいバッテリーを出したので"],
-    ["攻撃がヒットしたぞ」"]
+    ["攻撃がヒットしたぞ」"],
   ]);
   props.view.dom.leftMessageWindow.darken();
 }
@@ -40,7 +40,7 @@ export async function playerAttackGuarded(props: CustomBattleEventProps) {
   await scrollLeftMessages(props, [
     ["ツバサ", "「甘いぞ シンヤ"],
     ["君は私と同じバッテリーを出したので"],
-    ["攻撃をガード ダメージを半減させてもらった」"]
+    ["攻撃をガード ダメージを半減させてもらった」"],
   ]);
   props.view.dom.leftMessageWindow.darken();
 }
@@ -58,7 +58,7 @@ export async function playerAttackMiss(props: CustomBattleEventProps) {
   await scrollLeftMessages(props, [
     ["ツバサ", "「まだまだ だな シンヤ"],
     ["私の方が君より大きいバッテリーを出したので"],
-    ["攻撃を回避させてもらった」"]
+    ["攻撃を回避させてもらった」"],
   ]);
   props.view.dom.leftMessageWindow.darken();
 }

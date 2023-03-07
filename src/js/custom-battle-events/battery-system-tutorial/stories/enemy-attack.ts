@@ -63,7 +63,7 @@ export async function enemyAttackHit(props: CustomBattleEventProps) {
   await scrollLeftMessages(props, [
     ["ツバサ", "「すまない これでも手心を加えたのだがな"],
     ["私の方が君よりも大きいバッテリーを出したので"],
-    ["攻撃がヒットしたぞ」"]
+    ["攻撃がヒットしたぞ」"],
   ]);
   props.view.dom.leftMessageWindow.darken();
 }

@@ -9,11 +9,7 @@ export const defenseBatteryCaption = [
 ];
 
 /** バースト注釈 */
-export const burstCaption = [
-  "バースト ボタンを押そう",
-];
+export const burstCaption = ["バースト ボタンを押そう"];
 
 /** パイロットスキル注釈 */
-export const pilotSkillCaption = [
-  "パイロット ボタンを押そう",
-];
+export const pilotSkillCaption = ["パイロット ボタンを押そう"];
