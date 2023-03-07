@@ -29,8 +29,7 @@ export async function introduction(props: CustomBattleEventProps) {
   await refreshConversation(props, 100);
   activeLeftMessageWindowWithFace(props, "Tsubasa");
   await scrollLeftMessages(props, [
-    ["ツバサ", "「いい返事だな"],
-    ["では早速はじめよう"],
+    ["ツバサ", "「いい返事だな では早速はじめよう"],
     ["試合の基本は攻撃側 防御側でのバッテリーの出し合いだ"],
     ["大きいバッテリーを出した側の行動が成功するのだが"],
     ["これは実際にやってみた方が早いな"],

@@ -19,7 +19,7 @@ export const batteryRuleDescription = async (props: CustomBattleEventProps) => {
   props.view.dom.leftMessageWindow.darken();
   activeRightMessageWindowWithFace(props, "Shinya");
   await scrollRightMessages(props, [
-    ["シンヤ", "「なるほど シンプルながらも奥が深いッスね」"],
+    ["シンヤ", "「シンプルながらも奥深いッスね」"],
   ]);
   props.view.dom.rightMessageWindow.darken();
   props.view.dom.leftMessageWindow.lighten();
@@ -29,9 +29,4 @@ export const batteryRuleDescription = async (props: CustomBattleEventProps) => {
     ["同じ要領で回避してくれ」"],
   ]);
   props.view.dom.leftMessageWindow.darken();
-  props.view.dom.rightMessageWindow.lighten();
-  await scrollRightMessages(props, [
-    ["シンヤ", "「お手柔らかに頼むッスよ ツバサ先輩」"],
-  ]);
-  props.view.dom.rightMessageWindow.darken();
 };
