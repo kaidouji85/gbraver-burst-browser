@@ -6,36 +6,34 @@ sharp.cache(false);
 
 /**
  * png画像の大きさを変更する
- *
  * @param origin 画像ファイルのパス
  * @param scale 拡大率
  * @return 大きさ変更が完了したら発火するPromise
  */
-async function resizePng(origin: string, scale: number) {
+async function resizePng(origin: string, scale: number): Promise<void> {
   const size = imageSize(origin);
-  const height = Math.floor(size.height ?? 0 * scale);
+  const height = Math.floor((size.height ?? 0) * scale);
   const buffer = await sharp(origin)
     .resize(null, height)
     .png()
     .toBuffer();
-  return sharp(buffer).toFile(origin);
+  await sharp(buffer).toFile(origin);
 }
 
 /**
  * webp画像の大きさを変更する
- *
  * @param origin 画像ファイルのパス
  * @param scale 拡大率
  * @return 大きさ変更が完了したら発火するPromise
  */
-async function resizeWebp(origin: string, scale: number) {
+async function resizeWebp(origin: string, scale: number): Promise<void> {
   const size = imageSize(origin);
-  const height = Math.floor(size.height ?? 0 * scale);
+  const height = Math.floor((size.height ?? 0) * scale);
   const buffer = await sharp(origin)
     .resize(null, height)
-    .webp({lossless: true})
+    .webp({lossless: true, quality: 100})
     .toBuffer();
-  return sharp(buffer).toFile(origin);
+  await sharp(buffer).toFile(origin);
 }
 
 /**
@@ -54,6 +52,8 @@ async function resizeWebp(origin: string, scale: number) {
     'build/production/resources/**/mobile/armdozer/lightning-dozer/cutin-up.webp',
     'build/production/resources/**/mobile/armdozer/wing-dozer/burst-down.webp',
     'build/production/resources/**/mobile/armdozer/wing-dozer/burst-up.webp',
+    'build/production/resources/**/mobile/armdozer/genesis-braver/cutin-burst-up.webp',
+    'build/production/resources/**/mobile/armdozer/genesis-braver/cutin-burst-up.webp',
   ];
   const pngModelTextures = 'build/production/resources/**/mobile/**/model/**/*.png';
 
