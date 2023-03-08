@@ -1,5 +1,5 @@
 import {
-  genesisBraverBurstButton,
+  genesisBraverBurstButton, lightningDozerBurstButton, neoLandozerBurstButton,
   shinBraverBurstButton,
   wingDozerBurstButton,
 } from "../src/js/game-object/burst-button";
@@ -38,35 +38,22 @@ const buttonStory = (generator: BurstButtonGenerator): HTMLElement => {
   return stub.domElement();
 }
 
+/** シンブレイバー */
+export const shinBraver = () => buttonStory(shinBraverBurstButton);
+
+/** ネオランドーザ */
+export const neoLandozer = () => buttonStory(neoLandozerBurstButton);
+
+/** ライトニングドーザ */
+export const lightningDozer = () => buttonStory(lightningDozerBurstButton);
+
+/** ウィングドーザ */
+export const wingDozer = () => buttonStory(wingDozerBurstButton);
+
 /** ジェネシスブレイバー */
 export const genesisBraver = () => buttonStory(genesisBraverBurstButton);
 
-export const shinBraver = (): HTMLElement => {
-  const stub = new HUDGameObjectStub(({ resources, gameObjectAction }) => {
-    const burstButton = shinBraverBurstButton(resources, gameObjectAction);
-    burstButton.notifyPressed().subscribe(() => {
-      burstButton.decide().play();
-    });
-    burstButton.open(true).play();
-    return [burstButton.getObject3D()];
-  });
-  stub.start();
-  return stub.domElement();
-};
-
-export const wingDozer = (): HTMLElement => {
-  const stub = new HUDGameObjectStub(({ resources, gameObjectAction }) => {
-    const burstButton = wingDozerBurstButton(resources, gameObjectAction);
-    burstButton.notifyPressed().subscribe(() => {
-      burstButton.decide().play();
-    });
-    burstButton.open(true).play();
-    return [burstButton.getObject3D()];
-  });
-  stub.start();
-  return stub.domElement();
-};
-
+/** disabledボタン */
 export const disabled = (): HTMLElement => {
   const stub = new HUDGameObjectStub(({ resources, gameObjectAction }) => {
     const burstButton = shinBraverBurstButton(resources, gameObjectAction);
