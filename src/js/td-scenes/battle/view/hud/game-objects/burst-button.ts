@@ -4,6 +4,7 @@ import { Observable } from "rxjs";
 
 import type { GameObjectAction } from "../../../../../game-object/action/game-object-action";
 import {
+  genesisBraverBurstButton,
   lightningDozerBurstButton,
   neoLandozerBurstButton,
   shinBraverBurstButton,
@@ -37,6 +38,9 @@ export function createBurstButton(
 
     case ArmDozerIds.WING_DOZER:
       return wingDozerBurstButton(resources, gameObjectAction);
+
+    case ArmDozerIds.GENESIS_BRAVER:
+      return genesisBraverBurstButton(resources, gameObjectAction);
 
     default:
       return shinBraverBurstButton(resources, gameObjectAction);
