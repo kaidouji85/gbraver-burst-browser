@@ -5,16 +5,13 @@ import type { Resources } from "../../../resource";
 import { TEXTURE_IDS } from "../../../resource/texture/ids";
 import type { ArmdozerIcon } from "./armdozer-icon";
 
-/**
- * シンブレイバーアイコン
- */
+/** シンブレイバーアイコン */
 export class ShinBraverIcon implements ArmdozerIcon {
   #mesh: HorizontalAnimationMesh;
   #group: THREE.Group;
 
   /**
    * コンストラクタ
-   *
    * @param resources リソース管理オブジェクト
    */
   constructor(resources: Resources) {
@@ -35,27 +32,17 @@ export class ShinBraverIcon implements ArmdozerIcon {
     this.#group.add(this.#mesh.getObject3D());
   }
 
-  /**
-   * デストラクタ相当の処理
-   */
+  /** @override */
   destructor(): void {
     this.#mesh.destructor();
   }
 
-  /**
-   * シーンに追加するオブジェクトを取得する
-   *
-   * @return シーンに追加するオブジェクト
-   */
+  /** @override */
   getObject3D(): THREE.Object3D {
     return this.#group;
   }
 
-  /**
-   * 透明度を設定する
-   *
-   * @param opacity 透明度
-   */
+  /** @override */
   setOpacity(opacity: number): void {
     this.#mesh.setOpacity(opacity);
   }
