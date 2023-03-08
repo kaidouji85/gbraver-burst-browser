@@ -92,7 +92,7 @@
     "code-format:src": "prettier --write src/js",
     "code-format:storybook": "prettier --write stories",
     "code-format:test": "prettier --write test",
-    "generate-icons": "node generate-icons.js",
+    "generate-icons": "ts-node generate-icons.ts",
     "lint": "run-s lint:src lint:storybook lint:test lint:css lint:helper-ts",
     "lint-fix": "run-s lint-fix:src lint-fix:storybook lint-fix:test lint-fix:css lint-fix:helper-ts",
     "lint-fix:css": "stylelint --fix src/css/**/*.css",
