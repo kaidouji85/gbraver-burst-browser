@@ -7,10 +7,10 @@ import { LightningDozerIcon } from "./view/lightning-dozer-icon";
 import { NeoLandozerIcon } from "./view/neo-landozer-icon";
 import { ShinBraverIcon } from "./view/shin-braver-icon";
 import { WingDozerIcon } from "./view/wing-dozer-icon";
+import {GenesisBraverIcon} from "./view/genesis-braver-icon";
 
 /**
  * シンブレイバー バーストボタンを生成する
- *
  * @param resources リソース管理オブジェクト
  * @param gameObjectAction ゲームオブジェクトアクション
  * @return バーストボタン
@@ -25,7 +25,6 @@ export function shinBraverBurstButton(
 
 /**
  * ネオランドーザ バーストボタンを生成する
- *
  * @param resources リソース管理オブジェクト
  * @param gameObjectAction ゲームオブジェクトアクション
  * @return バーストボタン
@@ -40,7 +39,6 @@ export function neoLandozerBurstButton(
 
 /**
  * ライトニングドーザ バーストボタンを生成する
- *
  * @param resources リソース管理オブジェクト
  * @param gameObjectAction ゲームオブジェクトアクション
  * @return バーストボタン
@@ -55,7 +53,6 @@ export function lightningDozerBurstButton(
 
 /**
  * ウィングドーザ バーストボタンを生成する
- *
  * @param resources リソース管理オブジェクト
  * @param gameObjectAction ゲームオブジェクトアクション
  * @return バーストボタン
@@ -65,5 +62,19 @@ export function wingDozerBurstButton(
   gameObjectAction: Observable<GameObjectAction>
 ): BurstButton {
   const armdozerIcon = new WingDozerIcon(resources);
+  return new BurstButton(resources, gameObjectAction, armdozerIcon);
+}
+
+/**
+ * ジェネシスブレイバー バーストボタンを生成する
+ * @param resources リソース管理オブジェクト
+ * @param gameObjectAction ゲームオブジェクトアクション
+ * @return バーストボタン
+ */
+export function genesisBraverBurstButton(
+  resources: Resources,
+  gameObjectAction: Observable<GameObjectAction>
+): BurstButton {
+  const armdozerIcon = new GenesisBraverIcon(resources);
   return new BurstButton(resources, gameObjectAction, armdozerIcon);
 }
