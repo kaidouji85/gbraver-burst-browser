@@ -1,34 +1,19 @@
-const glob = require("glob");
-const sizeOf = require('image-size');
-const sharp = require('sharp');
+import {glob} from "glob";
+import {imageSize} from "image-size";
+import sharp from "sharp";
 
 sharp.cache(false);
 
 /**
- * globをPromise化したもの
- *
- * @param {string} pattern globパターン
- * @param {Object|undefined} option オプション
- * @return {Promise<string[]>} 検索結果
- */
-function globPromise(pattern, option) {
-  return new Promise((resolve, reject) => {
-    glob(pattern, option, (err, paths) => {
-      err ? reject(err) :  resolve(paths);
-    });
-  });
-}
-
-/**
  * png画像の大きさを変更する
  *
- * @param {string} origin 画像ファイルのパス
- * @param {number} scale 拡大率
- * @return {Promise<void>} 大きさ変更が完了したら発火するPromise
+ * @param origin 画像ファイルのパス
+ * @param scale 拡大率
+ * @return 大きさ変更が完了したら発火するPromise
  */
-async function resizePng(origin, scale) {
-  const size = sizeOf(origin);
-  const height = Math.floor(size.height * scale);
+async function resizePng(origin: string, scale: number) {
+  const size = imageSize(origin);
+  const height = Math.floor(size.height ?? 0 * scale);
   const buffer = await sharp(origin)
     .resize(null, height)
     .png()
@@ -39,13 +24,13 @@ async function resizePng(origin, scale) {
 /**
  * webp画像の大きさを変更する
  *
- * @param {string} origin 画像ファイルのパス
- * @param {number} scale 拡大率
- * @return {Promise<void>} 大きさ変更が完了したら発火するPromise
+ * @param origin 画像ファイルのパス
+ * @param scale 拡大率
+ * @return 大きさ変更が完了したら発火するPromise
  */
-async function resizeWebp(origin, scale) {
-  const size = sizeOf(origin);
-  const height = Math.floor(size.height * scale);
+async function resizeWebp(origin: string, scale: number) {
+  const size = imageSize(origin);
+  const height = Math.floor(size.height ?? 0 * scale);
   const buffer = await sharp(origin)
     .resize(null, height)
     .webp({lossless: true})
@@ -73,8 +58,8 @@ async function resizeWebp(origin, scale) {
   const pngModelTextures = 'build/production/resources/**/mobile/**/model/**/*.png';
 
   const [webpImagePaths, pngModelTexturePaths] = await Promise.all([
-    globPromise(webpImages, {ignore: ignoreWebpImages}),
-    globPromise(pngModelTextures),
+    glob(webpImages, {ignore: ignoreWebpImages}),
+    glob(pngModelTextures),
   ]);
   await Promise.all([
     ...webpImagePaths.map(v => resizeWebp(v, 0.5)),
