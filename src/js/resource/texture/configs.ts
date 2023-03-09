@@ -419,4 +419,8 @@ export const DEVELOPING_TEXTURE_CONFIGS: TextureConfig[] = [
     id: TEXTURE_IDS.GENESIS_BRAVER_CUTIN_BURST_DOWN,
     path: "armdozer/genesis-braver/cutin-burst-down.webp",
   },
+  {
+    id: TEXTURE_IDS.GENESIS_BRAVER_BURST_ICON,
+    path: "armdozer/genesis-braver/burst-button-icon.webp",
+  },
 ];
