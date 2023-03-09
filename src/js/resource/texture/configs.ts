@@ -1,6 +1,5 @@
 import { TEXTURE_IDS } from "./ids";
 import type { TextureConfig } from "./resource";
-import {TEXTURE_ID} from "../../game-object/armdozer/genesis-braver/mesh/burst-up";
 
 /** テクスチャ設定をまとめたもの */
 export const TEXTURE_CONFIGS: TextureConfig[] = [
@@ -423,5 +422,5 @@ export const DEVELOPING_TEXTURE_CONFIGS: TextureConfig[] = [
   {
     id: TEXTURE_IDS.GENESIS_BRAVER_BURST_ICON,
     path: "armdozer/genesis-braver/burst-button-icon.webp",
-  }
+  },
 ];

@@ -1,13 +1,16 @@
+import { Observable } from "rxjs";
+
+import { GameObjectAction } from "../src/js/game-object/action/game-object-action";
 import {
-  genesisBraverBurstButton, lightningDozerBurstButton, neoLandozerBurstButton,
+  genesisBraverBurstButton,
+  lightningDozerBurstButton,
+  neoLandozerBurstButton,
   shinBraverBurstButton,
   wingDozerBurstButton,
 } from "../src/js/game-object/burst-button";
+import { BurstButton } from "../src/js/game-object/burst-button/burst-button";
+import { Resources } from "../src/js/resource";
 import { HUDGameObjectStub } from "./stub/hud-game-object-stub";
-import {BurstButton} from "../src/js/game-object/burst-button/burst-button";
-import {Resources} from "../src/js/resource";
-import {Observable} from "rxjs";
-import {GameObjectAction} from "../src/js/game-object/action/game-object-action";
 
 export default {
   title: "burst-button",
@@ -19,7 +22,10 @@ export default {
  * @param gameObjectAction ゲームオブジェクトアクション
  * @return バーストボタン
  */
-type BurstButtonGenerator = (resources: Resources, gameObjectAction: Observable<GameObjectAction>) => BurstButton;
+type BurstButtonGenerator = (
+  resources: Resources,
+  gameObjectAction: Observable<GameObjectAction>
+) => BurstButton;
 
 /**
  * バーストボタンストーリー
@@ -36,7 +42,7 @@ const buttonStory = (generator: BurstButtonGenerator): HTMLElement => {
   });
   stub.start();
   return stub.domElement();
-}
+};
 
 /** シンブレイバー */
 export const shinBraver = () => buttonStory(shinBraverBurstButton);

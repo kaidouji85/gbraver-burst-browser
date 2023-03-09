@@ -3,11 +3,11 @@ import { Observable } from "rxjs";
 import type { Resources } from "../../resource";
 import type { GameObjectAction } from "../action/game-object-action";
 import { BurstButton } from "./burst-button";
+import { GenesisBraverIcon } from "./view/genesis-braver-icon";
 import { LightningDozerIcon } from "./view/lightning-dozer-icon";
 import { NeoLandozerIcon } from "./view/neo-landozer-icon";
 import { ShinBraverIcon } from "./view/shin-braver-icon";
 import { WingDozerIcon } from "./view/wing-dozer-icon";
-import {GenesisBraverIcon} from "./view/genesis-braver-icon";
 
 /**
  * シンブレイバー バーストボタンを生成する
