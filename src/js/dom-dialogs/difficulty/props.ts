@@ -1,11 +1,10 @@
 import { Howl } from "howler";
+import { Subject } from "rxjs";
 
 import { Exclusive } from "../../exclusive/exclusive";
 import type { NPCBattleCourseDifficulty } from "../../game/npc-battle-courses";
 import type { Resources } from "../../resource";
 import { SOUND_IDS } from "../../resource/sound";
-import type { StreamSource } from "../../stream/stream";
-import { createStreamSource } from "../../stream/stream";
 import { domUuid } from "../../uuid/dom-uuid";
 import { ROOT_CLASS } from "./dom/class-name";
 import { extractElements } from "./dom/elements";
@@ -50,10 +49,10 @@ export type DifficultyDialogProps = {
   exclusive: Exclusive;
 
   /** 選択完了通知ストリーム */
-  selectionComplete: StreamSource<NPCBattleCourseDifficulty>;
+  selectionComplete: Subject<NPCBattleCourseDifficulty>;
 
   /** ダイアログ閉じ通知ストリーム */
-  closeDialog: StreamSource<void>;
+  closeDialog: Subject<void>;
 
   /** 効果音 値変更 */
   changeValue: Howl;
@@ -97,8 +96,8 @@ export function createDifficultyDialogProps(
   const hardButton = elements.hardButton;
   const veryHard = elements.veryHard;
   const veryHardButton = elements.veryHardButton;
-  const selectionComplete = createStreamSource<NPCBattleCourseDifficulty>();
-  const closeDialog = createStreamSource<void>();
+  const selectionComplete = new Subject<NPCBattleCourseDifficulty>();
+  const closeDialog = new Subject<void>();
   const exclusive = new Exclusive();
   const changeValue =
     resources.sounds.find((v) => v.id === SOUND_IDS.CHANGE_VALUE)?.sound ??

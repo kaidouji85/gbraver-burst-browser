@@ -1,8 +1,8 @@
+import { Observable, Unsubscribable } from "rxjs";
 import * as THREE from "three";
 
 import { Animate } from "../../animation/animate";
 import type { PreRender } from "../../game-loop/pre-render";
-import type { Stream, Unsubscriber } from "../../stream/stream";
 import type { GameObjectAction } from "../action/game-object-action";
 import { popUp } from "./animation/pop-up";
 import type { DamageIndicatorModel } from "./model/damage-indicator-model";
@@ -13,7 +13,7 @@ import type { DamageIndicatorView } from "./view/damage-indicator-view";
 export class DamageIndicator {
   #model: DamageIndicatorModel;
   #view: DamageIndicatorView;
-  #unsubscriber: Unsubscriber;
+  #unsubscriber: Unsubscribable;
 
   /**
    * コンストラクタ
@@ -23,7 +23,7 @@ export class DamageIndicator {
    */
   constructor(
     view: DamageIndicatorView,
-    gameObjectAction: Stream<GameObjectAction>
+    gameObjectAction: Observable<GameObjectAction>
   ) {
     this.#view = view;
     this.#model = createInitialValue();

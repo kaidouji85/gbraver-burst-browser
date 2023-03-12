@@ -3,19 +3,18 @@ import { BatteryLimitBreak, Burst } from "gbraver-burst-core";
 import { all } from "../../../../../animation/all";
 import { Animate } from "../../../../../animation/animate";
 import { delay, empty } from "../../../../../animation/delay";
-import { HUDArmdozerObjects } from "../../../view/hud/armdozer-objects/hud-armdozer-ibjects";
+import { GenesisBraverHUD } from "../../../view/hud/armdozer-objects/genesis-braver";
 import { GenesisBraverTD } from "../../../view/td/armdozer-objects/genesis-braver";
 import { dolly, toInitial, track } from "../../td-camera";
 import { BurstAnimationParamX } from "./animation-param";
 
 /**
  * ジェネシスブレイバー バーストアニメーションパラメータ
- *
  * @template BURST バースト
  */
 export type GenesisBraverBurst<BURST extends Burst> = BurstAnimationParamX<
   GenesisBraverTD,
-  HUDArmdozerObjects,
+  GenesisBraverHUD,
   BURST
 >;
 
@@ -37,6 +36,8 @@ function batteryLimitBreak(
   param: GenesisBraverBurst<BatteryLimitBreak>
 ): Animate {
   return all(
+    param.burstArmdozerHUD.cutIn.show(),
+    param.burstArmdozerTD.genesisBraver.burst(),
     param.isActive
       ? param.burstArmdozerTD.genesisBraver.endActive()
       : param.anotherArmdozerTD.sprite().endActive(),
@@ -48,9 +49,17 @@ function batteryLimitBreak(
     dolly(param.tdCamera, "-60", 500),
     param.tdObjects.skyBrightness.brightness(0.2, 500),
     param.tdObjects.illumination.intensity(0.2, 500),
+    param.hudObjects.rearmostFader.opacity(0.6, 500),
     param.tdObjects.turnIndicator.invisible()
   )
     .chain(delay(800))
+    .chain(
+      all(
+        param.hudObjects.rearmostFader.opacity(0, 300),
+        param.burstArmdozerHUD.cutIn.hidden()
+      )
+    )
+    .chain(delay(300))
     .chain(
       all(
         param.burstPlayerHUD.gauge.battery(
@@ -62,6 +71,7 @@ function batteryLimitBreak(
     )
     .chain(
       all(
+        param.burstArmdozerTD.genesisBraver.burstToStand(),
         toInitial(param.tdCamera, 500),
         param.tdObjects.skyBrightness.brightness(1, 500),
         param.tdObjects.illumination.intensity(1, 500)

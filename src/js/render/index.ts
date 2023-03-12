@@ -1,7 +1,7 @@
+import { Observable, Unsubscribable } from "rxjs";
 import * as THREE from "three";
 import { WebGLInfo } from "three";
 
-import type { Stream, Unsubscriber } from "../stream/stream";
 import {
   getViewPortHeight,
   getViewPortWidth,
@@ -18,15 +18,15 @@ import type { Rendering } from "./rendering";
 /** レンダラ管理オブジェクト */
 export class Renderer implements OverlapNotifier, RendererDomGetter, Rendering {
   _threeJsRender: THREE.WebGLRenderer;
-  _domEvent: Stream<RendererDOMEvent>;
-  _unsubscriber: Unsubscriber[];
+  _domEvent: Observable<RendererDOMEvent>;
+  _unsubscriber: Unsubscribable[];
 
   /**
    * コンストラクタ
    *
    * @param resize リサイズのストリーム
    */
-  constructor(resize: Stream<Resize>) {
+  constructor(resize: Observable<Resize>) {
     this._threeJsRender = new THREE.WebGLRenderer();
     this._threeJsRender.autoClear = false;
 
@@ -56,7 +56,7 @@ export class Renderer implements OverlapNotifier, RendererDomGetter, Rendering {
    * @param camera カメラ
    * @return 生成結果
    */
-  createOverlapNotifier(camera: THREE.Camera): Stream<OverlapEvent> {
+  createOverlapNotifier(camera: THREE.Camera): Observable<OverlapEvent> {
     return toOverlapStream(this._domEvent, this.getRendererDOM(), camera);
   }
 

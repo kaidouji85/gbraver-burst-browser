@@ -1,5 +1,6 @@
+import { Observable, Unsubscribable } from "rxjs";
+
 import type { Resources } from "../../../resource";
-import type { Stream, Unsubscriber } from "../../../stream/stream";
 import { ROOT_CLASS, ROOT_CLASS_INVISIBLE } from "./dom/class-name";
 import { bindEventListeners } from "./listeners";
 import type { ConfigChangedDialogProps } from "./props";
@@ -11,7 +12,7 @@ import { createConfigChangedDialogProps } from "./props";
  */
 export class ConfigChangedDialog {
   #props: ConfigChangedDialogProps;
-  #unsbusscriber: Unsubscriber[];
+  #unsbusscriber: Unsubscribable[];
 
   /**
    * コンストラクタ
@@ -61,7 +62,7 @@ export class ConfigChangedDialog {
    *
    * @return 通知ストリーム
    */
-  notifyClosed(): Stream<void> {
+  notifyClosed(): Observable<void> {
     return this.#props.closeStream;
   }
 
@@ -70,7 +71,7 @@ export class ConfigChangedDialog {
    *
    * @return 通知ストリーム
    */
-  notifyAcceptance(): Stream<void> {
+  notifyAcceptance(): Observable<void> {
     return this.#props.acceptStream;
   }
 
@@ -79,7 +80,7 @@ export class ConfigChangedDialog {
    *
    * @return 通知ストリーム
    */
-  notifyDiscard(): Stream<void> {
+  notifyDiscard(): Observable<void> {
     return this.#props.discardStream;
   }
 }

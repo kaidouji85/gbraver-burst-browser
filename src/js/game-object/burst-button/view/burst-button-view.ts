@@ -1,10 +1,10 @@
+import { Observable, Unsubscribable } from "rxjs";
 import * as THREE from "three";
 
 import type { PreRender } from "../../../game-loop/pre-render";
 import { SimpleImageMesh } from "../../../mesh/simple-image-mesh";
 import type { Resources } from "../../../resource";
 import { CANVAS_IMAGE_IDS } from "../../../resource/canvas-image";
-import type { Stream, Unsubscriber } from "../../../stream/stream";
 import type { GameObjectAction } from "../../action/game-object-action";
 import type { PushDetector } from "../../push-detector/push-detector";
 import { circlePushDetector } from "../../push-detector/push-detector";
@@ -18,7 +18,7 @@ type Param = {
   resources: Resources;
 
   /** ゲームオブジェクトアクション */
-  gameObjectAction: Stream<GameObjectAction>;
+  gameObjectAction: Observable<GameObjectAction>;
 
   /** アームドーザアイコン */
   armdozerIcon: ArmdozerIcon;
@@ -38,7 +38,7 @@ export class BurstButtonView {
   #buttonDisabled: SimpleImageMesh;
   #pushDetector: PushDetector;
   #group: THREE.Group;
-  #unsubscribers: Unsubscriber[];
+  #unsubscribers: Unsubscribable[];
 
   /**
    * コンストラクタ

@@ -1,4 +1,4 @@
-import { Battle as BattleSDK } from "@gbraver-burst-network/browser-core";
+import { Battle as BattleSDK } from "@gbraver-burst-network/browser-sdk";
 
 import { fadeOut, stop } from "../../bgm/bgm-operators";
 import { NetworkErrorDialog } from "../../dom-dialogs/network-error/network-error-dialog";

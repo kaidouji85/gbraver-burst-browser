@@ -1,8 +1,8 @@
+import { Observable, Unsubscribable } from "rxjs";
 import * as THREE from "three";
 
 import { Animate } from "../../animation/animate";
 import type { PreRender } from "../../game-loop/pre-render";
-import type { Stream, Unsubscriber } from "../../stream/stream";
 import type { GameObjectAction } from "../action/game-object-action";
 import { hidden } from "./animation/hidden";
 import { moveToEdge } from "./animation/move-to-edge";
@@ -15,7 +15,7 @@ import type { ResultIndicatorView } from "./view/result-indicator-view";
 export class ResultIndicator {
   #model: ResultIndicatorModel;
   #view: ResultIndicatorView;
-  #unsubscriber: Unsubscriber;
+  #unsubscriber: Unsubscribable;
 
   /**
    * コンストラクタ
@@ -25,7 +25,7 @@ export class ResultIndicator {
    */
   constructor(
     view: ResultIndicatorView,
-    gameObjectAction: Stream<GameObjectAction>
+    gameObjectAction: Observable<GameObjectAction>
   ) {
     this.#view = view;
     this.#model = createInitialValue();

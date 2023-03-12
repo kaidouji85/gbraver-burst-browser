@@ -1,6 +1,6 @@
+import { Observable, Subject, Unsubscribable } from "rxjs";
+
 import type { Resources } from "../../resource";
-import type { Stream, StreamSource, Unsubscriber } from "../../stream/stream";
-import { createStreamSource } from "../../stream/stream";
 import type { GameAction } from "../game-actions";
 import type { DomFloaterActionConnector } from "./dom-floater-action-connector";
 import { PostBattleFloater } from "./post-battle/post-battle";
@@ -21,10 +21,10 @@ export class DOMFloaters {
   #postBattle: PostBattleFloater;
 
   /** ゲームアクションストリーム */
-  #gameAction: StreamSource<GameAction>;
+  #gameAction: Subject<GameAction>;
 
   /** アンサブスクライバ */
-  #unsubscribers: Unsubscriber[];
+  #unsubscribers: Unsubscribable[];
 
   /**
    * コンストラクタ
@@ -32,7 +32,7 @@ export class DOMFloaters {
    */
   constructor(params: Params) {
     this.#root = document.createElement("div");
-    this.#gameAction = createStreamSource();
+    this.#gameAction = new Subject();
     this.#postBattle = new PostBattleFloater();
     this.#root.appendChild(this.#postBattle.getRootHTMLElement());
     this.#unsubscribers = [
@@ -62,7 +62,7 @@ export class DOMFloaters {
    * ゲームアクション通知
    * @return 通知ストリーム
    */
-  gameActionNotifier(): Stream<GameAction> {
+  gameActionNotifier(): Observable<GameAction> {
     return this.#gameAction;
   }
 

@@ -1,5 +1,6 @@
+import { Observable } from "rxjs";
+
 import type { Resources } from "../../../resource";
-import type { Stream } from "../../../stream/stream";
 import type { GameObjectAction } from "../../action/game-object-action";
 import { LightningDozerCutIn } from "./lightning-dozer-cutin";
 import { EnemyLightningDozerCutInView } from "./view/enemy-lightning-dozer-cutin-view";
@@ -14,7 +15,7 @@ import { PlayerLightningDozerCutInView } from "./view/player-lightning-dozer-cut
  */
 export function playerLightningDozerCutIn(
   resources: Resources,
-  gameObjectAction: Stream<GameObjectAction>
+  gameObjectAction: Observable<GameObjectAction>
 ): LightningDozerCutIn {
   const view = new PlayerLightningDozerCutInView(resources);
   return new LightningDozerCutIn(view, gameObjectAction);
@@ -29,7 +30,7 @@ export function playerLightningDozerCutIn(
  */
 export function enemyLightningiDozerCutIn(
   resources: Resources,
-  gameObjectAction: Stream<GameObjectAction>
+  gameObjectAction: Observable<GameObjectAction>
 ): LightningDozerCutIn {
   const view = new EnemyLightningDozerCutInView(resources);
   return new LightningDozerCutIn(view, gameObjectAction);

@@ -1,5 +1,6 @@
+import { Observable } from "rxjs";
+
 import type { Resources } from "../../resource";
-import type { Stream } from "../../stream/stream";
 import type { GameObjectAction } from "../action/game-object-action";
 import { ContinuousAttackIndicator } from "./continuous-attack-indicator";
 import { EnemyContinuousAttackView } from "./view/enemy-continuous-attack-view";
@@ -14,7 +15,7 @@ import { PlayerContinuousAttackView } from "./view/player-continuous-attack-view
  */
 export function playerContinuousAttack(
   resources: Resources,
-  gameObjectAction: Stream<GameObjectAction>
+  gameObjectAction: Observable<GameObjectAction>
 ): ContinuousAttackIndicator {
   const view = new PlayerContinuousAttackView(resources);
   return new ContinuousAttackIndicator(view, resources, gameObjectAction);
@@ -29,7 +30,7 @@ export function playerContinuousAttack(
  */
 export function enemyContinuousAttack(
   resources: Resources,
-  gameObjectAction: Stream<GameObjectAction>
+  gameObjectAction: Observable<GameObjectAction>
 ): ContinuousAttackIndicator {
   const view = new EnemyContinuousAttackView(resources);
   return new ContinuousAttackIndicator(view, resources, gameObjectAction);

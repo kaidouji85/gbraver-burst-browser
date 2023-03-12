@@ -1,4 +1,5 @@
 import { Howl } from "howler";
+import { Observable, Unsubscribable } from "rxjs";
 import * as THREE from "three";
 
 import { Animate } from "../../../animation/animate";
@@ -6,7 +7,6 @@ import { process } from "../../../animation/process";
 import type { PreRender } from "../../../game-loop/pre-render";
 import type { Resources } from "../../../resource";
 import { SOUND_IDS } from "../../../resource/sound";
-import type { Stream, Unsubscriber } from "../../../stream/stream";
 import type { GameObjectAction } from "../../action/game-object-action";
 import { popUp } from "./animation/pop-up";
 import type { ShockWaveModel } from "./model/shock-wave-model";
@@ -19,7 +19,7 @@ export class ShockWave {
   #model: ShockWaveModel;
   #view: ShockWaveView;
   #hitSound: Howl;
-  #unsubscriber: Unsubscriber;
+  #unsubscriber: Unsubscribable;
 
   /**
    * リソース管理オブジェクト
@@ -33,7 +33,7 @@ export class ShockWave {
     view: ShockWaveView,
     initialModel: ShockWaveModel,
     resources: Resources,
-    gameObjectAction: Stream<GameObjectAction>
+    gameObjectAction: Observable<GameObjectAction>
   ) {
     this.#model = initialModel;
     this.#view = view;

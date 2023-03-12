@@ -1,4 +1,5 @@
 import type { Player, PlayerId } from "gbraver-burst-core";
+import { Observable } from "rxjs";
 import * as THREE from "three";
 
 import type { GameObjectAction } from "../../../../../game-object/action/game-object-action";
@@ -8,7 +9,6 @@ import {
 } from "../../../../../game-object/cut-in/tsubasa";
 import { TsubasaCutIn } from "../../../../../game-object/cut-in/tsubasa/tsubasa";
 import type { Resources } from "../../../../../resource";
-import type { Stream } from "../../../../../stream/stream";
 import type { HUDPilotObjects } from "./hud-pilot-objects";
 
 /**
@@ -63,7 +63,7 @@ export class TsubasaHUD implements HUDPilotObjects {
  */
 export function playerTsubasaHUD(
   resources: Resources,
-  gameObjectAction: Stream<GameObjectAction>,
+  gameObjectAction: Observable<GameObjectAction>,
   state: Player
 ): TsubasaHUD {
   return new TsubasaHUD({
@@ -82,7 +82,7 @@ export function playerTsubasaHUD(
  */
 export function enemyTsubasaHUD(
   resources: Resources,
-  gameObjectAction: Stream<GameObjectAction>,
+  gameObjectAction: Observable<GameObjectAction>,
   state: Player
 ): TsubasaHUD {
   return new TsubasaHUD({

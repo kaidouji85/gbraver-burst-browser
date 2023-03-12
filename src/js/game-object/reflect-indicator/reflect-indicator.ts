@@ -1,8 +1,8 @@
+import { Observable, Unsubscribable } from "rxjs";
 import * as THREE from "three";
 
 import { Animate } from "../../animation/animate";
 import type { PreRender } from "../../game-loop/pre-render";
-import type { Stream, Unsubscriber } from "../../stream/stream";
 import type { GameObjectAction } from "../action/game-object-action";
 import { popUp } from "./animation/pop-up";
 import { createInitialValue } from "./model/initial-value";
@@ -15,7 +15,7 @@ import type { ReflectIndicatorView } from "./view/reflect-indicator-view";
 export class ReflectIndicator {
   #model: ReflectIndocatorModel;
   #view: ReflectIndicatorView;
-  #unsubscriber: Unsubscriber;
+  #unsubscriber: Unsubscribable;
 
   /**
    * コンストラクタ
@@ -25,7 +25,7 @@ export class ReflectIndicator {
    */
   constructor(
     view: ReflectIndicatorView,
-    gameObjectAction: Stream<GameObjectAction>
+    gameObjectAction: Observable<GameObjectAction>
   ) {
     this.#model = createInitialValue();
     this.#view = view;

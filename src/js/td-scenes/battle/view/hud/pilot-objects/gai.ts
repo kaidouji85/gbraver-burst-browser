@@ -1,4 +1,5 @@
 import type { Player, PlayerId } from "gbraver-burst-core";
+import { Observable } from "rxjs";
 import * as THREE from "three";
 
 import type { GameObjectAction } from "../../../../../game-object/action/game-object-action";
@@ -8,7 +9,6 @@ import {
 } from "../../../../../game-object/cut-in/gai";
 import { GaiCutIn } from "../../../../../game-object/cut-in/gai/gai";
 import type { Resources } from "../../../../../resource";
-import type { Stream } from "../../../../../stream/stream";
 import type { HUDPilotObjects } from "./hud-pilot-objects";
 
 /**
@@ -63,7 +63,7 @@ export class GaiHUD implements HUDPilotObjects {
  */
 export function playerGaiHUD(
   resources: Resources,
-  gameObjectAction: Stream<GameObjectAction>,
+  gameObjectAction: Observable<GameObjectAction>,
   state: Player
 ): GaiHUD {
   return new GaiHUD({
@@ -82,7 +82,7 @@ export function playerGaiHUD(
  */
 export function enemyGaiHUD(
   resources: Resources,
-  gameObjectAction: Stream<GameObjectAction>,
+  gameObjectAction: Observable<GameObjectAction>,
   state: Player
 ): GaiHUD {
   return new GaiHUD({

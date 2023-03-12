@@ -1,8 +1,13 @@
 import type { Resources } from "../../../../resource";
+import { genesisBraverBackStep } from "../mesh/back-step";
+import { genesisBraverBurstDown } from "../mesh/burst-down";
+import { genesisBraverBurstUp } from "../mesh/burst-up";
+import { genesisBraverDown } from "../mesh/down";
+import { genesisBraverFrontStep } from "../mesh/front-step";
 import { genesisBraverKnockBack } from "../mesh/knock-back";
 import { genesisBraverSPAttack } from "../mesh/sp-attack";
 import { genesisBraverSPCharge } from "../mesh/sp-charge";
-import { genesisBraverSPTOStand } from "../mesh/sp-to-stand";
+import { genesisBraverSPToStand } from "../mesh/sp-to-stand";
 import { genesisBraverStand } from "../mesh/stand";
 import type { AnimationMeshMapping } from "./animation-mesh-mapping";
 
@@ -27,11 +32,31 @@ export function createMeshes(resources: Resources): AnimationMeshMapping[] {
     },
     {
       type: "SP_TO_STAND",
-      mesh: genesisBraverSPTOStand(resources),
+      mesh: genesisBraverSPToStand(resources),
     },
     {
       type: "KNOCK_BACK",
       mesh: genesisBraverKnockBack(resources),
+    },
+    {
+      type: "DOWN",
+      mesh: genesisBraverDown(resources),
+    },
+    {
+      type: "BACK_STEP",
+      mesh: genesisBraverBackStep(resources),
+    },
+    {
+      type: "FRONT_STEP",
+      mesh: genesisBraverFrontStep(resources),
+    },
+    {
+      type: "BURST_UP",
+      mesh: genesisBraverBurstUp(resources),
+    },
+    {
+      type: "BURST_DOWN",
+      mesh: genesisBraverBurstDown(resources),
     },
   ];
 }

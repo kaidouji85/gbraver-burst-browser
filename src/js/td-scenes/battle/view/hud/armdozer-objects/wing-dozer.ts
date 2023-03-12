@@ -1,4 +1,5 @@
 import type { Player, PlayerId } from "gbraver-burst-core";
+import { Observable } from "rxjs";
 import * as THREE from "three";
 
 import type { GameObjectAction } from "../../../../../game-object/action/game-object-action";
@@ -8,7 +9,6 @@ import {
 } from "../../../../../game-object/cut-in/wing-dozer";
 import { WingDozerCutIn } from "../../../../../game-object/cut-in/wing-dozer/wing-dozer-cutin";
 import type { Resources } from "../../../../../resource";
-import type { Stream } from "../../../../../stream/stream";
 import type { HUDArmdozerObjects } from "./hud-armdozer-ibjects";
 
 /** コンストラクタのパラメータ */
@@ -56,7 +56,7 @@ export class WingDozerHUD implements HUDArmdozerObjects {
  */
 export function playerWingDozerHUD(
   resources: Resources,
-  gameObjectAction: Stream<GameObjectAction>,
+  gameObjectAction: Observable<GameObjectAction>,
   state: Player
 ): WingDozerHUD {
   return new WingDozerHUD({
@@ -75,7 +75,7 @@ export function playerWingDozerHUD(
  */
 export function enemyWingDozerHUD(
   resources: Resources,
-  gameObjectAction: Stream<GameObjectAction>,
+  gameObjectAction: Observable<GameObjectAction>,
   state: Player
 ): WingDozerHUD {
   return new WingDozerHUD({

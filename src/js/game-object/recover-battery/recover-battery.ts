@@ -1,9 +1,9 @@
+import { Observable, Unsubscribable } from "rxjs";
 import * as THREE from "three";
 
 import { Animate } from "../../animation/animate";
 import type { PreRender } from "../../game-loop/pre-render";
 import type { Resources } from "../../resource";
-import type { Stream, Unsubscriber } from "../../stream/stream";
 import type { GameObjectAction } from "../action/game-object-action";
 import { hidden, popUp, show } from "./animation/pop-up";
 import { createInitialValue } from "./model/initial-value";
@@ -22,7 +22,7 @@ type Param = {
   resources: Resources;
 
   /** ゲームオブジェクトアクション */
-  gameObjectAction: Stream<GameObjectAction>;
+  gameObjectAction: Observable<GameObjectAction>;
 };
 
 /**
@@ -32,7 +32,7 @@ export class RecoverBattery {
   #model: RecoverBatteryModel;
   #view: RecoverBatteryView;
   #sounds: RecoverBatterySounds;
-  #unsubscriber: Unsubscriber;
+  #unsubscriber: Unsubscribable;
 
   /**
    * コンストラクタ

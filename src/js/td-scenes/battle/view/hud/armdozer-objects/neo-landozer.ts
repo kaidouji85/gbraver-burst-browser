@@ -1,4 +1,5 @@
 import type { Player, PlayerId } from "gbraver-burst-core";
+import { Observable } from "rxjs";
 import * as THREE from "three";
 
 import type { GameObjectAction } from "../../../../../game-object/action/game-object-action";
@@ -8,7 +9,6 @@ import {
 } from "../../../../../game-object/cut-in/neo-landozer";
 import { NeoLandozerCutIn } from "../../../../../game-object/cut-in/neo-landozer/neo-landozer-cutin";
 import type { Resources } from "../../../../../resource";
-import type { Stream } from "../../../../../stream/stream";
 import type { HUDArmdozerObjects } from "./hud-armdozer-ibjects";
 
 /**
@@ -57,7 +57,7 @@ export class NeoLandozerHUD implements HUDArmdozerObjects, NeoLandozerHUDField {
  */
 export function playerNeoLandozerHUD(
   resources: Resources,
-  gameObjectAction: Stream<GameObjectAction>,
+  gameObjectAction: Observable<GameObjectAction>,
   state: Player
 ): NeoLandozerHUD {
   return new NeoLandozerHUD(state.playerId, {
@@ -75,7 +75,7 @@ export function playerNeoLandozerHUD(
  */
 export function enemyNeoLandozerHUD(
   resources: Resources,
-  gameObjectAction: Stream<GameObjectAction>,
+  gameObjectAction: Observable<GameObjectAction>,
   state: Player
 ): NeoLandozerHUD {
   return new NeoLandozerHUD(state.playerId, {

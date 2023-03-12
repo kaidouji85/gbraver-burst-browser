@@ -1,129 +1,236 @@
 import { delay } from "../src/js/animation/delay";
-import { PlayerShinBraver } from "../src/js/game-object/armdozer/shin-braver";
-import { TDGameObjectStub } from "./stub/td-game-object-stub";
+import {
+  EnemyShinBraver,
+  PlayerShinBraver,
+} from "../src/js/game-object/armdozer/shin-braver";
+import { ShinBraver } from "../src/js/game-object/armdozer/shin-braver/shin-braver";
+import { armdozerSpriteStub } from "./stub/armdozer-sprite-stub";
+
 export default {
   title: "shin-braver",
 };
-export const activeStand = (): HTMLElement => {
-  const stub = new TDGameObjectStub(({ resources, gameObjectAction }) => {
-    const sprite = PlayerShinBraver(resources, gameObjectAction);
+
+/** プレイヤー 立ち */
+export const playerStand = () =>
+  armdozerSpriteStub(PlayerShinBraver, () => {
+    // NOP
+  });
+
+/** プレイヤー アクティブ 立ち */
+export const playerActiveStand = () =>
+  armdozerSpriteStub(PlayerShinBraver, (sprite) => {
     sprite.startActive().play();
-    return {
-      objects: [sprite.getObject3D()],
-    };
   });
-  stub.start();
-  return stub.domElement();
-};
-export const straightPunch = (): HTMLElement => {
-  const stub = new TDGameObjectStub(({ resources, gameObjectAction }) => {
-    const sprite = PlayerShinBraver(resources, gameObjectAction);
-    delay(1000)
-      .chain(sprite.charge())
-      .chain(delay(1000))
-      .chain(sprite.straightPunch())
-      .chain(delay(1000))
-      .chain(sprite.punchToStand())
-      .loop();
-    return {
-      objects: [sprite.getObject3D()],
-    };
+
+/** 敵 立ち */
+export const enemyStand = () =>
+  armdozerSpriteStub(EnemyShinBraver, () => {
+    // NOP
   });
-  stub.start();
-  return stub.domElement();
-};
-export const guts = (): HTMLElement => {
-  const stub = new TDGameObjectStub(({ resources, gameObjectAction }) => {
-    const sprite = PlayerShinBraver(resources, gameObjectAction);
-    const animation = sprite
-      .guts()
-      .chain(delay(2000))
-      .chain(sprite.gutsToStand())
-      .chain(delay(2000));
-    animation.loop();
-    return {
-      objects: [sprite.getObject3D()],
-    };
-  });
-  stub.start();
-  return stub.domElement();
-};
-export const activeBurst = (): HTMLElement => {
-  const stub = new TDGameObjectStub(({ resources, gameObjectAction }) => {
-    const sprite = PlayerShinBraver(resources, gameObjectAction);
+
+/** 敵 アクティブ 立ち */
+export const enemyActiveStand = () =>
+  armdozerSpriteStub(EnemyShinBraver, (sprite) => {
     sprite.startActive().play();
-    const animation = sprite
-      .burst()
-      .chain(delay(2000))
-      .chain(sprite.burstToStand())
-      .chain(delay(2000));
-    animation.loop();
-    return {
-      objects: [sprite.getObject3D()],
-    };
   });
-  stub.start();
-  return stub.domElement();
+
+/**
+ * ストレートパンチ
+ * @param sprite スプライト
+ */
+const straightPunch = (sprite: ShinBraver) => {
+  delay(1000)
+    .chain(sprite.charge())
+    .chain(delay(1000))
+    .chain(sprite.straightPunch())
+    .chain(delay(1000))
+    .chain(sprite.punchToStand())
+    .loop();
 };
-export const activeKnockBack = (): HTMLElement => {
-  const stub = new TDGameObjectStub(({ resources, gameObjectAction }) => {
-    const sprite = PlayerShinBraver(resources, gameObjectAction);
-    sprite.startActive().play();
-    const animation = sprite
-      .knockBack()
-      .chain(delay(2000))
-      .chain(sprite.knockBackToStand())
-      .chain(delay(2000));
-    animation.loop();
-    return {
-      objects: [sprite.getObject3D()],
-    };
-  });
-  stub.start();
-  return stub.domElement();
+
+/** プレイヤー ストレートパンチ */
+export const playerStraightPunch = () =>
+  armdozerSpriteStub(PlayerShinBraver, straightPunch);
+
+/** 敵 ストレートパンチ */
+export const enemyStraightPunch = () =>
+  armdozerSpriteStub(EnemyShinBraver, straightPunch);
+
+/**
+ * ガッツ
+ * @param sprite スプライト
+ */
+const guts = (sprite: ShinBraver) => {
+  sprite
+    .guts()
+    .chain(delay(2000))
+    .chain(sprite.gutsToStand())
+    .chain(delay(2000))
+    .loop();
 };
-export const activeGuard = (): HTMLElement => {
-  const stub = new TDGameObjectStub(({ resources, gameObjectAction }) => {
-    const sprite = PlayerShinBraver(resources, gameObjectAction);
-    sprite.startActive().play();
-    const animation = sprite
-      .guard()
-      .chain(delay(2000))
-      .chain(sprite.guardToStand())
-      .chain(delay(2000));
-    animation.loop();
-    return {
-      objects: [sprite.getObject3D()],
-    };
-  });
-  stub.start();
-  return stub.domElement();
+
+/** プレイヤー ガッツ */
+export const playerGuts = () => armdozerSpriteStub(PlayerShinBraver, guts);
+
+/** 敵 ガッツ */
+export const enemyGuts = () => armdozerSpriteStub(EnemyShinBraver, guts);
+
+/**
+ * バースト
+ * @param sprite スプライト
+ */
+const burst = (sprite: ShinBraver) => {
+  sprite
+    .burst()
+    .chain(delay(2000))
+    .chain(sprite.burstToStand())
+    .chain(delay(2000))
+    .loop();
 };
-export const activeAvoid = (): HTMLElement => {
-  const stub = new TDGameObjectStub(({ resources, gameObjectAction }) => {
-    const sprite = PlayerShinBraver(resources, gameObjectAction);
-    sprite.startActive().play();
-    const animation = sprite
-      .avoid()
-      .chain(delay(2000))
-      .chain(sprite.avoidToStand())
-      .chain(delay(2000));
-    animation.loop();
-    return {
-      objects: [sprite.getObject3D()],
-    };
-  });
-  stub.start();
-  return stub.domElement();
+
+/**
+ * アクティブ バースト
+ * @param sprite スプライト
+ */
+const activeBurst = (sprite: ShinBraver) => {
+  burst(sprite);
+  sprite.startActive().play();
 };
-export const down = (): HTMLElement => {
-  const stub = new TDGameObjectStub(({ resources, gameObjectAction }) => {
-    const sprite = PlayerShinBraver(resources, gameObjectAction);
-    delay(1000).chain(sprite.down()).chain(delay(1000)).loop();
-    return {
-      objects: [sprite.getObject3D()],
-    };
-  });
-  stub.start();
-  return stub.domElement();
+
+/** プレイヤー バースト */
+export const playerBurst = () => armdozerSpriteStub(PlayerShinBraver, burst);
+
+/** プレイヤー アクティブ バースト */
+export const playerActiveBurst = () =>
+  armdozerSpriteStub(PlayerShinBraver, activeBurst);
+
+/** 敵 バースト */
+export const enemyBurst = () => armdozerSpriteStub(EnemyShinBraver, burst);
+
+/** 敵 アクティブ バースト */
+export const enemyActiveBurst = () =>
+  armdozerSpriteStub(EnemyShinBraver, activeBurst);
+
+/**
+ * ノックバック
+ * @param sprite スプライト
+ */
+const knockBack = (sprite: ShinBraver) => {
+  sprite
+    .knockBack()
+    .chain(delay(2000))
+    .chain(sprite.knockBackToStand())
+    .chain(delay(2000))
+    .loop();
 };
+
+/**
+ * アクティブ ノックバック
+ * @param sprite スプライト
+ */
+const activeKnockBack = (sprite: ShinBraver) => {
+  knockBack(sprite);
+  sprite.startActive().play();
+};
+
+/** プレイヤー ノックバック */
+export const playerKnockBack = () =>
+  armdozerSpriteStub(PlayerShinBraver, knockBack);
+
+/** プレイヤー アクティブ ノックバック */
+export const playerActiveKnockBack = () =>
+  armdozerSpriteStub(PlayerShinBraver, activeKnockBack);
+
+/** 敵 ノックバック */
+export const enemyKnockBack = () =>
+  armdozerSpriteStub(EnemyShinBraver, knockBack);
+
+/** 敵 アクティブ ノックバック */
+export const enemyActiveKnockBack = () =>
+  armdozerSpriteStub(EnemyShinBraver, activeKnockBack);
+
+/**
+ * ガード
+ * @param sprite スプライト
+ */
+const guard = (sprite: ShinBraver) => {
+  sprite
+    .guard()
+    .chain(delay(2000))
+    .chain(sprite.guardToStand())
+    .chain(delay(2000))
+    .loop();
+};
+
+/**
+ * アクティブ ガード
+ * @param sprite スプライト
+ */
+const activeGuard = (sprite: ShinBraver) => {
+  guard(sprite);
+  sprite.startActive().play();
+};
+
+/** プレイヤー ガード */
+export const playerGuard = () => armdozerSpriteStub(PlayerShinBraver, guard);
+
+/** プレイヤー アクティブ ガード */
+export const playerActiveGuard = () =>
+  armdozerSpriteStub(PlayerShinBraver, activeGuard);
+
+/** 敵 ガード */
+export const enemyGuard = () => armdozerSpriteStub(EnemyShinBraver, guard);
+
+/** 敵 アクティブ ガード */
+export const enemyActiveGuard = () =>
+  armdozerSpriteStub(EnemyShinBraver, activeGuard);
+
+/**
+ * 回避
+ * @param sprite スプライト
+ */
+const avoid = (sprite: ShinBraver) => {
+  sprite
+    .avoid()
+    .chain(delay(2000))
+    .chain(sprite.avoidToStand())
+    .chain(delay(2000))
+    .loop();
+};
+
+/**
+ * アクティブ 回避
+ * @param sprite スプライト
+ */
+const activeAvoid = (sprite: ShinBraver) => {
+  avoid(sprite);
+  sprite.startActive().play();
+};
+
+/** プレイヤー 回避 */
+export const playerAvoid = () => armdozerSpriteStub(PlayerShinBraver, avoid);
+
+/** プレイヤー アクティブ 回避 */
+export const playerActiveAvoid = () =>
+  armdozerSpriteStub(PlayerShinBraver, activeAvoid);
+
+/** 敵 回避 */
+export const enemyAvoid = () => armdozerSpriteStub(EnemyShinBraver, avoid);
+
+/** 敵 アクティブ 回避 */
+export const enemyActiveAvoid = () =>
+  armdozerSpriteStub(EnemyShinBraver, activeAvoid);
+
+/**
+ * ダウン
+ * @param sprite スプライト
+ */
+const down = (sprite: ShinBraver) => {
+  delay(1000).chain(sprite.down()).chain(delay(1000)).loop();
+};
+
+/** プレイヤー ダウン */
+export const playerDown = () => armdozerSpriteStub(PlayerShinBraver, down);
+
+/** 敵 ダウン */
+export const enemyDown = () => armdozerSpriteStub(EnemyShinBraver, down);

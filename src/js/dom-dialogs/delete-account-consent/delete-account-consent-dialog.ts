@@ -1,4 +1,5 @@
 import { Howl } from "howler";
+import { Observable, Subject, Unsubscribable } from "rxjs";
 
 import { pop } from "../../dom/animation";
 import type { PushDOM } from "../../dom/event-stream";
@@ -7,8 +8,6 @@ import { Exclusive } from "../../exclusive/exclusive";
 import type { Resources } from "../../resource";
 import { PathIds } from "../../resource/path";
 import { SOUND_IDS } from "../../resource/sound";
-import type { Stream, StreamSource, Unsubscriber } from "../../stream/stream";
-import { createStreamSource } from "../../stream/stream";
 import { domUuid } from "../../uuid/dom-uuid";
 import type { DOMDialog } from "../dialog";
 
@@ -104,9 +103,9 @@ export class DeleteAccountConsentDialog implements DOMDialog {
   #closer: HTMLImageElement;
   #deleteAccountButton: HTMLButtonElement;
   #closeButton: HTMLButtonElement;
-  #deleteAccount: StreamSource<void>;
-  #closeDialog: StreamSource<void>;
-  #unsubscribers: Unsubscriber[];
+  #deleteAccount: Subject<void>;
+  #closeDialog: Subject<void>;
+  #unsubscribers: Unsubscribable[];
   #changeValue: Howl;
   #pushButton: Howl;
   #exclusive: Exclusive;
@@ -131,8 +130,8 @@ export class DeleteAccountConsentDialog implements DOMDialog {
     this.#closer = elements.closer;
     this.#deleteAccountButton = elements.deleteAccountButton;
     this.#closeButton = elements.closeButton;
-    this.#deleteAccount = createStreamSource();
-    this.#closeDialog = createStreamSource();
+    this.#deleteAccount = new Subject();
+    this.#closeDialog = new Subject();
     this.#unsubscribers = [
       pushDOMStream(this.#backGround).subscribe((action) => {
         this.#onPushOutsideOfDialog(action);
@@ -173,7 +172,7 @@ export class DeleteAccountConsentDialog implements DOMDialog {
    *
    * @return 通知ストリーム
    */
-  notifyAccountDeletion(): Stream<void> {
+  notifyAccountDeletion(): Observable<void> {
     return this.#deleteAccount;
   }
 
@@ -182,7 +181,7 @@ export class DeleteAccountConsentDialog implements DOMDialog {
    *
    * @return 通知ストリーム
    */
-  notifyClosed(): Stream<void> {
+  notifyClosed(): Observable<void> {
     return this.#closeDialog;
   }
 

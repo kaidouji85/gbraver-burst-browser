@@ -1,7 +1,9 @@
+import * as THREE from "three";
+
 import type { Resources } from "../../../../resource";
 import { TEXTURE_IDS } from "../../../../resource/texture/ids";
 import type { ArmdozerAnimation } from "../../mesh/armdozer-animation";
-import { createHorizontalAnimationFromResources } from "../../mesh/horizontal-animation";
+import { createHorizontalAnimation } from "../../mesh/horizontal-animation";
 import { MESH_HEIGHT, MESH_WIDTH } from "./mesh-size";
 import { MESH_Y } from "./position";
 export const MAX_ANIMATION = 4;
@@ -13,10 +15,12 @@ export const MAX_ANIMATION = 4;
  * @return メッシュ
  */
 export function wingDozerUpperCharge(resources: Resources): ArmdozerAnimation {
-  const ret = createHorizontalAnimationFromResources({
-    id: TEXTURE_IDS.WING_DOZER_UPPER_CHARGE,
+  const texture =
+    resources.textures.find((v) => v.id === TEXTURE_IDS.WING_DOZER_UPPER_CHARGE)
+      ?.texture ?? new THREE.Texture();
+  const ret = createHorizontalAnimation({
+    texture,
     maxAnimation: MAX_ANIMATION,
-    resources: resources,
     width: MESH_WIDTH,
     height: MESH_HEIGHT,
   });

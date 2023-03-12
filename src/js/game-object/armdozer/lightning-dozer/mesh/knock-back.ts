@@ -1,14 +1,10 @@
 import * as THREE from "three";
 
-import { toSilhouette } from "../../../../canvas/silhouette/to-silhouette";
 import type { Resources } from "../../../../resource";
 import { TEXTURE_IDS } from "../../../../resource/texture/ids";
 import type { ArmdozerAnimation } from "../../mesh/armdozer-animation";
-import {
-  createHorizontalAnimation,
-  createHorizontalAnimationFromResources,
-} from "../../mesh/horizontal-animation";
-import { ACTIVE_COLOR_B, ACTIVE_COLOR_G, ACTIVE_COLOR_R } from "./active-color";
+import { createHorizontalAnimation } from "../../mesh/horizontal-animation";
+import { createSilhouetteTexture } from "./create-silhouette-texture";
 import { MESH_Y } from "./position";
 
 /** メッシュ幅 */
@@ -28,10 +24,13 @@ export const MAX_ANIMATION = 4;
 export function lightningDozerKnockBack(
   resources: Resources
 ): ArmdozerAnimation {
-  const ret = createHorizontalAnimationFromResources({
-    id: TEXTURE_IDS.LIGHTNING_DOZER_KNOCK_BACK,
+  const texture =
+    resources.textures.find(
+      (v) => v.id === TEXTURE_IDS.LIGHTNING_DOZER_KNOCK_BACK
+    )?.texture ?? new THREE.Texture();
+  const ret = createHorizontalAnimation({
+    texture,
     maxAnimation: MAX_ANIMATION,
-    resources: resources,
     width: MESH_WIDTH,
     height: MESH_HEIGHT,
   });
@@ -52,13 +51,7 @@ export function lightningDozerActiveKnockBack(
     resources.textures.find(
       (v) => v.id === TEXTURE_IDS.LIGHTNING_DOZER_KNOCK_BACK
     )?.texture ?? new THREE.Texture();
-  const canvas = toSilhouette(
-    texture.image,
-    ACTIVE_COLOR_R,
-    ACTIVE_COLOR_G,
-    ACTIVE_COLOR_B
-  );
-  const silhouetteTexture = new THREE.Texture(canvas);
+  const silhouetteTexture = createSilhouetteTexture(texture);
   const ret = createHorizontalAnimation({
     texture: silhouetteTexture,
     maxAnimation: MAX_ANIMATION,

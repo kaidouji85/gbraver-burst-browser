@@ -1,4 +1,5 @@
 import type { Player, PlayerId } from "gbraver-burst-core";
+import { Observable } from "rxjs";
 import * as THREE from "three";
 
 import type { GameObjectAction } from "../../../../game-object/action/game-object-action";
@@ -55,7 +56,6 @@ import {
 } from "../../../../game-object/reflect-indicator";
 import { ReflectIndicator } from "../../../../game-object/reflect-indicator/reflect-indicator";
 import type { Resources } from "../../../../resource";
-import type { Stream } from "../../../../stream/stream";
 
 /**
  * 3Dレイヤー プレイヤー関係オブジェクト フィールド
@@ -177,7 +177,7 @@ export class TDPlayerImpl implements TDPlayer {
 export function playerTDObjects(
   resources: Resources,
   state: Player,
-  gameObjectAction: Stream<GameObjectAction>
+  gameObjectAction: Observable<GameObjectAction>
 ): TDPlayer {
   return new TDPlayerImpl({
     playerId: state.playerId,
@@ -210,7 +210,7 @@ export function playerTDObjects(
 export function enemyTDObject(
   resources: Resources,
   state: Player,
-  gameObjectAction: Stream<GameObjectAction>
+  gameObjectAction: Observable<GameObjectAction>
 ): TDPlayer {
   return new TDPlayerImpl({
     playerId: state.playerId,

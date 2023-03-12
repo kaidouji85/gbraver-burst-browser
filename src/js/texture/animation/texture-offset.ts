@@ -5,7 +5,7 @@
  * normalizeTextureOffset(0, 10);     // -> 0
  * normalizeTextureOffset(0.65, 10);  // -> 6 / 10
  *
- * @param offsetPos 任意のテクスチャオフセットの座標軸
+ * @param offset 任意のテクスチャオフセットの座標軸
  * @param maxAnimation アニメーションの最大数
  * @return 正規化したオフセット値
  */

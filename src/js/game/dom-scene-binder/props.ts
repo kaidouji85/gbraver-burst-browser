@@ -1,6 +1,6 @@
+import { Subject, Unsubscribable } from "rxjs";
+
 import type { DOMScene } from "../../dom-scenes/dom-scene";
-import type { StreamSource, Unsubscriber } from "../../stream/stream";
-import { createStreamSource } from "../../stream/stream";
 import type { GameAction } from "../game-actions";
 
 /** DomSceneBinderプロパティ */
@@ -12,10 +12,10 @@ export type DOMSceneBinderProps = {
   scene: DOMScene | null | undefined;
 
   /** ゲームアクション通知ストリーム */
-  gameAction: StreamSource<GameAction>;
+  gameAction: Subject<GameAction>;
 
   /** ゲームアクション通知ノアンサブスクライバ */
-  unsubscribers: Unsubscriber[];
+  unsubscribers: Unsubscribable[];
 };
 
 /**
@@ -25,7 +25,7 @@ export type DOMSceneBinderProps = {
  */
 export function createDOMSceneBinderProps(): DOMSceneBinderProps {
   const root = document.createElement("div");
-  const gameAction = createStreamSource<GameAction>();
+  const gameAction = new Subject<GameAction>();
   const scene = null;
   return {
     root,

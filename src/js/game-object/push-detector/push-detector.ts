@@ -1,10 +1,9 @@
+import { Observable, Subject, Unsubscribable } from "rxjs";
 import * as THREE from "three";
 
 import { isMeshOverlap } from "../../overlap/mesh-overlap";
 import type { MouseDownRaycaster } from "../../render/overlap-event/mouse-down-raycaster";
 import type { TouchStartRaycaster } from "../../render/overlap-event/touch-start-raycaster";
-import type { Stream, StreamSource, Unsubscriber } from "../../stream/stream";
-import { createStreamSource } from "../../stream/stream";
 import type { GameObjectAction } from "../action/game-object-action";
 
 /** プッシュ検出 */
@@ -30,7 +29,7 @@ export interface PushDetector {
    * 押されたことを通知する
    * @return 通知ストリーム
    */
-  notifyPressed(): Stream<Event>;
+  notifyPressed(): Observable<Event>;
 }
 
 /** SimplePushDetectorコンストラクタのパラメータ */
@@ -39,7 +38,7 @@ type SimplePushDetectorParam = {
   geometry: THREE.BufferGeometry;
 
   /** ゲームオブジェクトアクション */
-  gameObjectAction: Stream<GameObjectAction>;
+  gameObjectAction: Observable<GameObjectAction>;
 
   /**
    * デバッグ用途で当たり判定を表示・非表示するフラグ
@@ -52,8 +51,8 @@ type SimplePushDetectorParam = {
 
 class SimplePushDetector implements PushDetector {
   #mesh: THREE.Mesh<THREE.BufferGeometry, THREE.MeshBasicMaterial>;
-  #push: StreamSource<Event>;
-  #unsubscriber: Unsubscriber;
+  #push: Subject<Event>;
+  #unsubscriber: Unsubscribable;
 
   /**
    * コンストラクタ
@@ -65,7 +64,7 @@ class SimplePushDetector implements PushDetector {
       visible: param.visible ?? false,
     });
     this.#mesh = new THREE.Mesh(param.geometry, material);
-    this.#push = createStreamSource();
+    this.#push = new Subject();
     this.#unsubscriber = param.gameObjectAction.subscribe((action) => {
       if (action.type === "mouseDownRaycaster") {
         this.#mouseDownRaycaster(action);
@@ -93,7 +92,7 @@ class SimplePushDetector implements PushDetector {
   }
 
   /** @override */
-  notifyPressed(): Stream<Event> {
+  notifyPressed(): Observable<Event> {
     return this.#push;
   }
 
@@ -135,7 +134,7 @@ type CirclePushDetectorParam = {
   segments: number;
 
   /** ゲームオブジェクトアクション */
-  gameObjectAction: Stream<GameObjectAction>;
+  gameObjectAction: Observable<GameObjectAction>;
 
   /**
    * デバッグ用途で当たり判定を表示・非表示するフラグ

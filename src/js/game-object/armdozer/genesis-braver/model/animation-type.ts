@@ -4,4 +4,9 @@ export type AnimationType =
   | "SP_CHARGE"
   | "SP_ATTACK"
   | "SP_TO_STAND"
-  | "KNOCK_BACK";
+  | "KNOCK_BACK"
+  | "BACK_STEP"
+  | "FRONT_STEP"
+  | "DOWN"
+  | "BURST_UP"
+  | "BURST_DOWN";

@@ -1,4 +1,5 @@
 import type { Player } from "gbraver-burst-core";
+import { Observable, Subject, Unsubscribable } from "rxjs";
 import * as THREE from "three";
 
 import type { GameObjectAction } from "../../../../../game-object/action/game-object-action";
@@ -14,12 +15,6 @@ import { drawIndicator } from "../../../../../game-object/result-indicator";
 import { ResultIndicator } from "../../../../../game-object/result-indicator/result-indicator";
 import { TimeScaleButton } from "../../../../../game-object/time-scale-button/time-scale-button";
 import type { Resources } from "../../../../../resource";
-import type {
-  Stream,
-  StreamSource,
-  Unsubscriber,
-} from "../../../../../stream/stream";
-import { createStreamSource } from "../../../../../stream/stream";
 import type { BattleSceneAction } from "../../../actions";
 import { createBurstButton } from "./burst-button";
 import { createPilotButton } from "./pilot-button";
@@ -35,8 +30,8 @@ export class HUDGameObjects {
   frontmostFader: Fader;
   rearmostFader: Fader;
   drawIndicator: ResultIndicator;
-  #battleAction: StreamSource<BattleSceneAction>;
-  #unsubscribers: Unsubscriber[];
+  #battleAction: Subject<BattleSceneAction>;
+  #unsubscribers: Unsubscribable[];
 
   /**
    * コンストラクタ
@@ -47,10 +42,10 @@ export class HUDGameObjects {
    */
   constructor(
     resources: Resources,
-    gameObjectAction: Stream<GameObjectAction>,
+    gameObjectAction: Observable<GameObjectAction>,
     playerInfo: Player
   ) {
-    this.#battleAction = createStreamSource();
+    this.#battleAction = new Subject();
     this.batterySelector = new BatterySelector({
       gameObjectAction: gameObjectAction,
       maxBattery: playerInfo.armdozer.maxBattery,
@@ -153,7 +148,7 @@ export class HUDGameObjects {
    *
    * @return 通知ストリーム
    */
-  battleActionNotifier(): Stream<BattleSceneAction> {
+  battleActionNotifier(): Observable<BattleSceneAction> {
     return this.#battleAction;
   }
 }

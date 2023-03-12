@@ -1,5 +1,6 @@
+import { Observable } from "rxjs";
+
 import type { Resources } from "../../resource";
-import type { Stream } from "../../stream/stream";
 import type { GameObjectAction } from "../action/game-object-action";
 import { RecoverBattery } from "./recover-battery";
 import { EnemyRecoverBatteryView } from "./view/enemy-recover-battery-view";
@@ -14,7 +15,7 @@ import { PlayerRecoverBatteryView } from "./view/player-recover-battery-view";
  */
 export function playerRecoverBattery(
   resources: Resources,
-  gameObjectAction: Stream<GameObjectAction>
+  gameObjectAction: Observable<GameObjectAction>
 ): RecoverBattery {
   const view = new PlayerRecoverBatteryView(resources);
   return new RecoverBattery({
@@ -33,7 +34,7 @@ export function playerRecoverBattery(
  */
 export function enemyRecoverBattery(
   resources: Resources,
-  gameObjectAction: Stream<GameObjectAction>
+  gameObjectAction: Observable<GameObjectAction>
 ): RecoverBattery {
   const view = new EnemyRecoverBatteryView(resources);
   return new RecoverBattery({

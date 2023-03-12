@@ -1,4 +1,5 @@
 import { Howl } from "howler";
+import { Observable, Subject, Unsubscribable } from "rxjs";
 
 import { pop } from "../../dom/animation";
 import type { PushDOM } from "../../dom/event-stream";
@@ -7,8 +8,6 @@ import { Exclusive } from "../../exclusive/exclusive";
 import type { Resources } from "../../resource";
 import { PathIds } from "../../resource/path";
 import { SOUND_IDS } from "../../resource/sound";
-import type { Stream, StreamSource, Unsubscriber } from "../../stream/stream";
-import { createStreamSource } from "../../stream/stream";
 import { domUuid } from "../../uuid/dom-uuid";
 import type { DOMDialog } from "../dialog";
 
@@ -69,8 +68,8 @@ export class MatchingDialog implements DOMDialog {
   #changeValue: Howl;
   #pushButton: Howl;
   #exclusive: Exclusive;
-  #matchingCanceled: StreamSource<void>;
-  #unsubscribers: Unsubscriber[];
+  #matchingCanceled: Subject<void>;
+  #unsubscribers: Unsubscribable[];
 
   /**
    * コンストラクタ
@@ -94,7 +93,7 @@ export class MatchingDialog implements DOMDialog {
       resources.sounds.find((v) => v.id === SOUND_IDS.PUSH_BUTTON)?.sound ??
       new Howl({ src: "" });
     this.#exclusive = new Exclusive();
-    this.#matchingCanceled = createStreamSource();
+    this.#matchingCanceled = new Subject();
     this.#unsubscribers = [
       pushDOMStream(this.#closer).subscribe((action) => {
         this.#onCloserPush(action);
@@ -125,7 +124,7 @@ export class MatchingDialog implements DOMDialog {
    *
    * @return 通知ストリーム
    */
-  notifyMatchingCanceled(): Stream<void> {
+  notifyMatchingCanceled(): Observable<void> {
     return this.#matchingCanceled;
   }
 

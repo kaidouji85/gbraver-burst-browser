@@ -1,8 +1,4 @@
-import { fromEvent, Observable } from "rxjs";
-
-import { map } from "../../stream/operator";
-import type { Stream } from "../../stream/stream";
-import { createStream } from "../../stream/stream";
+import { fromEvent, map, Observable } from "rxjs";
 
 /** マウスダウン */
 export type MouseDown = {
@@ -30,12 +26,8 @@ export type MouseUp = {
  */
 export function createMouseDownStream(
   renderDom: HTMLElement
-): Stream<MouseDown> {
-  const observable = fromEvent(
-    renderDom,
-    "mousedown"
-  ) as Observable<MouseEvent>;
-  return createStream<MouseEvent>(observable).chain(
+): Observable<MouseDown> {
+  return fromEvent<MouseEvent>(renderDom, "mousedown").pipe(
     map((v) => {
       v.preventDefault();
       return {
@@ -54,12 +46,8 @@ export function createMouseDownStream(
  */
 export function createMouseMoveStream(
   renderDom: HTMLElement
-): Stream<MouseMove> {
-  const observable = fromEvent(
-    renderDom,
-    "mousemove"
-  ) as Observable<MouseEvent>;
-  return createStream<MouseEvent>(observable).chain(
+): Observable<MouseMove> {
+  return fromEvent<MouseEvent>(renderDom, "mousemove").pipe(
     map((v) => {
       v.preventDefault();
       return {
@@ -76,9 +64,10 @@ export function createMouseMoveStream(
  * @param renderDom レンダラのDOM
  * @return ストリーム
  */
-export function createMouseUpStream(renderDom: HTMLElement): Stream<MouseUp> {
-  const observable = fromEvent(renderDom, "mouseup") as Observable<MouseEvent>;
-  return createStream<MouseEvent>(observable).chain(
+export function createMouseUpStream(
+  renderDom: HTMLElement
+): Observable<MouseUp> {
+  return fromEvent<MouseEvent>(renderDom, "mouseup").pipe(
     map((v) => {
       v.preventDefault();
       return {

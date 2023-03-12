@@ -1,10 +1,10 @@
+import { Observable, tap } from "rxjs";
+
 import { pop } from "../../../dom/animation";
 import type { PushDOM } from "../../../dom/event-stream";
 import { pushDOMStream } from "../../../dom/event-stream";
 import type { Resources } from "../../../resource";
 import { PathIds } from "../../../resource/path";
-import { tap } from "../../../stream/operator";
-import type { Stream } from "../../../stream/stream";
 import { waitElementLoaded } from "../../../wait/wait-element-loaded";
 const ROOT_CLASS_NAME = "pilot-icon";
 const IMAGE_CLASS_NAME = `${ROOT_CLASS_NAME}__image`;
@@ -19,7 +19,7 @@ export class PilotIcon {
   #check: HTMLImageElement;
   #isImageLoaded: Promise<void>;
   #isCheckLoaded: Promise<void>;
-  #select: Stream<PushDOM>;
+  #select: Observable<PushDOM>;
 
   /**
    * コンストラクタ
@@ -44,7 +44,7 @@ export class PilotIcon {
       resources.paths.find((v) => v.id === PathIds.CHECK)?.path ?? "";
     this.#check.hidden = true;
     this.#root.appendChild(this.#check);
-    this.#select = pushDOMStream(this.#root).chain(
+    this.#select = pushDOMStream(this.#root).pipe(
       tap((action) => {
         action.event.preventDefault();
       })
@@ -74,7 +74,7 @@ export class PilotIcon {
    *
    * @return 通知ストリーム
    */
-  notifySelection(): Stream<PushDOM> {
+  notifySelection(): Observable<PushDOM> {
     return this.#select;
   }
 

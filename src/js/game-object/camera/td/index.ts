@@ -1,9 +1,9 @@
+import { Observable, Unsubscribable } from "rxjs";
 import * as THREE from "three";
 
 import { Animate } from "../../../animation/animate";
 import { onResizePerspectiveCamera } from "../../../camera/resize";
 import type { Update } from "../../../game-loop/update";
-import type { Stream, Unsubscriber } from "../../../stream/stream";
 import {
   getViewPortHeight,
   getViewPortWidth,
@@ -21,7 +21,7 @@ import type { Position } from "./position";
 export class TDCamera {
   #model: Battle3DCameraModel;
   #camera: THREE.PerspectiveCamera;
-  #unsubscriber: Unsubscriber[];
+  #unsubscriber: Unsubscribable[];
 
   /**
    * コンストラクタ
@@ -29,7 +29,7 @@ export class TDCamera {
    * @param update Updateストリーム
    * @param resize リサイズストリーム
    */
-  constructor(update: Stream<Update>, resize: Stream<Resize>) {
+  constructor(update: Observable<Update>, resize: Observable<Resize>) {
     this.#model = createInitialValue();
     const aspect = getViewPortWidth() / getViewPortHeight();
     this.#camera = new THREE.PerspectiveCamera(75, aspect, 1, 10000);

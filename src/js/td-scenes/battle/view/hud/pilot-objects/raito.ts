@@ -1,4 +1,5 @@
 import type { Player, PlayerId } from "gbraver-burst-core";
+import { Observable } from "rxjs";
 import * as THREE from "three";
 
 import type { GameObjectAction } from "../../../../../game-object/action/game-object-action";
@@ -8,7 +9,6 @@ import {
 } from "../../../../../game-object/cut-in/raito";
 import { RaitoCutIn } from "../../../../../game-object/cut-in/raito/raito";
 import type { Resources } from "../../../../../resource";
-import type { Stream } from "../../../../../stream/stream";
 import type { HUDPilotObjects } from "./hud-pilot-objects";
 
 /**
@@ -63,7 +63,7 @@ export class RaitoHUD implements HUDPilotObjects {
  */
 export function playerRaitoHUD(
   resources: Resources,
-  gameObjectAction: Stream<GameObjectAction>,
+  gameObjectAction: Observable<GameObjectAction>,
   state: Player
 ): RaitoHUD {
   return new RaitoHUD({
@@ -82,7 +82,7 @@ export function playerRaitoHUD(
  */
 export function enemyRaitoHUD(
   resources: Resources,
-  gameObjectAction: Stream<GameObjectAction>,
+  gameObjectAction: Observable<GameObjectAction>,
   state: Player
 ): RaitoHUD {
   return new RaitoHUD({

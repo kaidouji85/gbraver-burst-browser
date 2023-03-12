@@ -1,18 +1,5 @@
-import type {
-  CasualMatch as CasualMatchSDK,
-  LoggedInUserDelete,
-  LoginCheck,
-  Logout,
-  MailVerify,
-  PrivateMatchCreate,
-  PrivateMatchRoomEnter,
-  UniversalLogin,
-  UserMailGet,
-  UserNameGet,
-  UserPictureGet,
-  WebsocketDisconnect,
-  WebsocketErrorNotifier,
-} from "@gbraver-burst-network/browser-core";
+import { BrowserSDK } from "@gbraver-burst-network/browser-sdk";
+import { Observable } from "rxjs";
 
 import type { BGMManager } from "../bgm/bgm-manager";
 import { createBGMManager } from "../bgm/bgm-manager";
@@ -25,7 +12,6 @@ import { Renderer } from "../render";
 import type { Resources } from "../resource";
 import { emptyResources } from "../resource";
 import type { ResourceRoot } from "../resource/resource-root";
-import type { Stream } from "../stream/stream";
 import type { PushWindow } from "../window/push-window";
 import { pushWindowsStream } from "../window/push-window";
 import type { Resize } from "../window/resize";
@@ -39,22 +25,6 @@ import { FutureSuddenlyBattleEnd } from "./future-suddenly-battle-end";
 import type { InProgress } from "./in-progress/in-progress";
 import { InterruptScenes } from "./innterrupt-scenes";
 import { TDSceneBinder } from "./td-scene-binder";
-
-/** ゲーム管理オブジェクトで利用するAPIサーバの機能 */
-export interface GameAPI
-  extends UniversalLogin,
-    LoginCheck,
-    CasualMatchSDK,
-    Logout,
-    LoggedInUserDelete,
-    UserNameGet,
-    UserPictureGet,
-    MailVerify,
-    UserMailGet,
-    PrivateMatchCreate,
-    PrivateMatchRoomEnter,
-    WebsocketDisconnect,
-    WebsocketErrorNotifier {}
 
 /**
  * ゲームプロパティ
@@ -77,18 +47,18 @@ export interface GameProps {
   isAPIServerEnable: boolean;
   /** 現在進行中のフロー */
   inProgress: InProgress;
-  /** ゲームで利用するAPI */
-  api: GameAPI;
+  /** APIサーバのSDK */
+  api: BrowserSDK;
   /** ブラウザ設定リポジトリ */
   config: GbraverBurstBrowserConfigRepository;
   /** バトル強制終了監視 */
   suddenlyBattleEnd: FutureSuddenlyBattleEnd;
   /** リサイズ */
-  resize: Stream<Resize>;
+  resize: Observable<Resize>;
   /** window押下 */
-  pushWindow: Stream<PushWindow>;
+  pushWindow: Observable<PushWindow>;
   /** ゲームループ */
-  gameLoop: Stream<GameLoop>;
+  gameLoop: Observable<GameLoop>;
   /** cssカスタムプロパティ --vh */
   vh: CssVH;
   /** cssカスタムプロパティ --hud-ui-scale */
@@ -144,7 +114,7 @@ export type GamePropsGeneratorParam = {
   /** APIサーバ系機能が利用可能か否か、trueで利用可能 */
   isAPIServerEnable: boolean;
   /** APIサーバのSDK */
-  api: GameAPI;
+  api: BrowserSDK;
   /** ブラウザ設定リポジトリ */
   config: GbraverBurstBrowserConfigRepository;
   /** 開発中のチュートリアルをプレイできるか否かのフラグ、trueでプレイできる */

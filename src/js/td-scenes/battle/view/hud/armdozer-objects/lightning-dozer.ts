@@ -1,4 +1,5 @@
 import type { Player, PlayerId } from "gbraver-burst-core";
+import { Observable } from "rxjs";
 import * as THREE from "three";
 
 import type { GameObjectAction } from "../../../../../game-object/action/game-object-action";
@@ -8,7 +9,6 @@ import {
 } from "../../../../../game-object/cut-in/lightning-dozer";
 import { LightningDozerCutIn } from "../../../../../game-object/cut-in/lightning-dozer/lightning-dozer-cutin";
 import type { Resources } from "../../../../../resource";
-import type { Stream } from "../../../../../stream/stream";
 import type { HUDArmdozerObjects } from "./hud-armdozer-ibjects";
 
 /**
@@ -65,7 +65,7 @@ export class LightningDozerHUD
  */
 export function playerLightningDozerHUD(
   resources: Resources,
-  gameObjectAction: Stream<GameObjectAction>,
+  gameObjectAction: Observable<GameObjectAction>,
   state: Player
 ): LightningDozerHUD {
   return new LightningDozerHUD(state.playerId, {
@@ -83,7 +83,7 @@ export function playerLightningDozerHUD(
  */
 export function enemyLightningDozerHUD(
   resources: Resources,
-  gameObjectAction: Stream<GameObjectAction>,
+  gameObjectAction: Observable<GameObjectAction>,
   state: Player
 ): LightningDozerHUD {
   return new LightningDozerHUD(state.playerId, {

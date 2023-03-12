@@ -391,4 +391,36 @@ export const DEVELOPING_TEXTURE_CONFIGS: TextureConfig[] = [
     id: TEXTURE_IDS.GENESIS_BRAVER_KNOCK_BACK,
     path: "armdozer/genesis-braver/knock-back.webp",
   },
+  {
+    id: TEXTURE_IDS.GENESIS_BRAVER_BACK_STEP,
+    path: "armdozer/genesis-braver/back-step.webp",
+  },
+  {
+    id: TEXTURE_IDS.GENESIS_BRAVER_FRONT_STEP,
+    path: "armdozer/genesis-braver/front-step.webp",
+  },
+  {
+    id: TEXTURE_IDS.GENESIS_BRAVE_DOWN,
+    path: "armdozer/genesis-braver/down.webp",
+  },
+  {
+    id: TEXTURE_IDS.GENESIS_BRAVER_BURST_UP,
+    path: "armdozer/genesis-braver/burst-up.webp",
+  },
+  {
+    id: TEXTURE_IDS.GENESIS_BRAVER_BURST_DOWN,
+    path: "armdozer/genesis-braver/burst-down.webp",
+  },
+  {
+    id: TEXTURE_IDS.GENESIS_BRAVER_CUTIN_BURST_UP,
+    path: "armdozer/genesis-braver/cutin-burst-up.webp",
+  },
+  {
+    id: TEXTURE_IDS.GENESIS_BRAVER_CUTIN_BURST_DOWN,
+    path: "armdozer/genesis-braver/cutin-burst-down.webp",
+  },
+  {
+    id: TEXTURE_IDS.GENESIS_BRAVER_BURST_ICON,
+    path: "armdozer/genesis-braver/burst-button-icon.webp",
+  },
 ];

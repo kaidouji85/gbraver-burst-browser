@@ -2,6 +2,7 @@ import type { BurstEffect, GameStateX } from "gbraver-burst-core";
 
 import { Animate } from "../../../../../animation/animate";
 import { empty } from "../../../../../animation/delay";
+import { GenesisBraverHUD } from "../../../view/hud/armdozer-objects/genesis-braver";
 import { LightningDozerHUD } from "../../../view/hud/armdozer-objects/lightning-dozer";
 import { NeoLandozerHUD } from "../../../view/hud/armdozer-objects/neo-landozer";
 import { ShinBraverHUD } from "../../../view/hud/armdozer-objects/shin-braver";
@@ -83,9 +84,13 @@ function armdozerAnimation(param: BurstAnimationParam): Animate {
     return wingDozerBurst({ ...param, burstArmdozerTD, burstArmdozerHUD });
   }
 
-  if (param.burstArmdozerTD instanceof GenesisBraverTD) {
+  if (
+    param.burstArmdozerTD instanceof GenesisBraverTD &&
+    param.burstArmdozerHUD instanceof GenesisBraverHUD
+  ) {
     const burstArmdozerTD: GenesisBraverTD = param.burstArmdozerTD;
-    return genesisBraverBurst({ ...param, burstArmdozerTD });
+    const burstArmdozerHUD: GenesisBraverHUD = param.burstArmdozerHUD;
+    return genesisBraverBurst({ ...param, burstArmdozerTD, burstArmdozerHUD });
   }
 
   return empty();
