@@ -17,7 +17,7 @@ import { scrollLeftMessages, scrollRightMessages } from "../../scroll-messages";
 export const introduction = async (props: CustomBattleEventProps) => {
   activeLeftMessageWindowWithFace(props, "Raito");
   await scrollLeftMessages(props, [
-    ["ライト", "「さすがは大田高校はん 一瞬で勝負がついてしもたな"],
+    ["ライト", "「さすがは大田高校 一瞬で勝負がついてしもたな"],
     ["どや まだ道路の占有時間も残っとるし ワイともう一戦やりまへんか」"],
   ]);
   props.view.dom.leftMessageWindow.darken();
