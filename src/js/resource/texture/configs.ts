@@ -392,6 +392,10 @@ export const DEVELOPING_TEXTURE_CONFIGS: TextureConfig[] = [
     path: "armdozer/genesis-braver/knock-back.webp",
   },
   {
+    id: TEXTURE_IDS.GENESIS_BRAVER_GUARD,
+    path: "armdozer/genesis-braver/guard.webp",
+  },
+  {
     id: TEXTURE_IDS.GENESIS_BRAVER_BACK_STEP,
     path: "armdozer/genesis-braver/back-step.webp",
   },
