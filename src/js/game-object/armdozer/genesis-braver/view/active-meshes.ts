@@ -1,10 +1,10 @@
 import { Resources } from "../../../../resource";
 import { genesisBraverActiveBurstUp } from "../mesh/burst-up";
 import { genesisBraverActiveFrontStep } from "../mesh/front-step";
+import { genesisBraverActiveGuard } from "../mesh/guard";
 import { genesisBraverActiveKnockBack } from "../mesh/knock-back";
 import { genesisBraverActiveStand } from "../mesh/stand";
 import { AnimationMeshMapping } from "./animation-mesh-mapping";
-import {genesisBraverActiveGuard} from "../mesh/guard";
 
 /**
  * アニメーションアクティブメッシュマッピング生成

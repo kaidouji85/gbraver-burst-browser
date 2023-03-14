@@ -121,13 +121,15 @@ const activeGuard = (sprite: GenesisBraver) => {
 export const playerGuard = () => armdozerSpriteStub(PlayerGenesisBraver, guard);
 
 /** プレイヤー アクティブ ガード */
-export const playerActiveGuard = () => armdozerSpriteStub(PlayerGenesisBraver, activeGuard);
+export const playerActiveGuard = () =>
+  armdozerSpriteStub(PlayerGenesisBraver, activeGuard);
 
 /** 敵 ガード */
 export const enemyGuard = () => armdozerSpriteStub(EnemyGenesisBraver, guard);
 
 /** 敵 アクティブ ガード */
-export const enemyActiveGuard = () => armdozerSpriteStub(EnemyGenesisBraver, activeGuard);
+export const enemyActiveGuard = () =>
+  armdozerSpriteStub(EnemyGenesisBraver, activeGuard);
 
 /**
  * ダウン

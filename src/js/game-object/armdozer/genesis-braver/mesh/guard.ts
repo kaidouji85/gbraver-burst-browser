@@ -24,13 +24,10 @@ const MESH_TEXTURE = TEXTURE_IDS.GENESIS_BRAVER_GUARD;
  * @param resources リソース管理オブジェクト
  * @return 生成結果
  */
-export function genesisBraverGuard(
-  resources: Resources
-): ArmdozerAnimation {
+export function genesisBraverGuard(resources: Resources): ArmdozerAnimation {
   const texture =
-    resources.textures.find(
-      (v) => v.id === MESH_TEXTURE
-    )?.texture ?? new THREE.Texture();
+    resources.textures.find((v) => v.id === MESH_TEXTURE)?.texture ??
+    new THREE.Texture();
   const mesh = createHorizontalAnimation({
     texture,
     maxAnimation: MAX_ANIMATION,
@@ -51,9 +48,8 @@ export function genesisBraverActiveGuard(
   resources: Resources
 ): ArmdozerAnimation {
   const texture =
-    resources.textures.find(
-      (v) => v.id === MESH_TEXTURE
-    )?.texture ?? new THREE.Texture();
+    resources.textures.find((v) => v.id === MESH_TEXTURE)?.texture ??
+    new THREE.Texture();
   const silhouetteTexture = createSilhouetteTexture(texture);
   const mesh = createHorizontalAnimation({
     texture: silhouetteTexture,
