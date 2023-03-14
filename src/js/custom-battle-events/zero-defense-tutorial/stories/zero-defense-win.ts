@@ -25,7 +25,7 @@ export const zeroDefenseWin = async (props: CustomBattleEventProps) => {
   props.view.dom.rightMessageWindow.darken();
   activeLeftMessageWindowWithFace(props, "Gai");
   await scrollLeftMessages(props, [
-    ["ガイ", "「バカな この俺が負けるなんて」"]
+    ["ガイ", "「バカな この俺が負けるなんて」"],
   ]);
   props.view.dom.leftMessageWindow.darken();
 };
