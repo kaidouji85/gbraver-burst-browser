@@ -25,8 +25,7 @@ export async function burstIsTrumpCard(
   activeLeftMessageWindowWithFace(props, "Tsubasa");
   await scrollLeftMessages(props, [
     ["ツバサ", "「バーストすれば バッテリーを5回復できる"],
-    ["しかし今はバッテリーが満タン"],
-    ["だからバーストしても意味がないんだ」"],
+    ["しかし今はバッテリーが満タンだから バーストしても意味がないんだ」"],
   ]);
   props.view.dom.leftMessageWindow.darken();
   activeRightMessageWindowWithFace(props, "Shinya");
