@@ -1,19 +1,16 @@
 /** プレイヤー選択画面 アームドーザアイコン */
 .armdozer-icon {
-  --armdozer-icon-width: 12.5vw;
-  --armdozer-icon-height: 12.5vw;
-
   position: relative;
 }
 
 .armdozer-icon__image {
-  width: var(--armdozer-icon-width);
-  height: var(--armdozer-icon-height);
+  width: 100%;
+  height: 100%;
 }
 
 .armdozer-icon__image--selected {
-  width: var(--armdozer-icon-width);
-  height: var(--armdozer-icon-height);
+  width: 100%;
+  height: 100%;
   filter: brightness(0.4);
 }
 
@@ -23,5 +20,5 @@
   width: var(--width);
   position: absolute;
   top: 0;
-  left: calc(var(--armdozer-icon-width) - var(--width));
+  left: calc(100% - var(--width));
 }
