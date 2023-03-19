@@ -28,12 +28,14 @@ function rootInnerHTML(ids: DataIDs): string {
   return `
     <div class="${ROOT_CLASS_NAME}__basic-status">
       <div class="${ROOT_CLASS_NAME}__name" data-id="${ids.name}"></div>
-      <span class="${ROOT_CLASS_NAME}__hp-label">HP</span>
-      <span class="${ROOT_CLASS_NAME}__hp-value" data-id="${ids.hp}"></span>
-      <span class="${ROOT_CLASS_NAME}__power-label">攻撃</span>
-      <span class="${ROOT_CLASS_NAME}__power-value" data-id="${ids.power}" ></span>
-      <span class="${ROOT_CLASS_NAME}__speed-label">機動</span>
-      <span class="${ROOT_CLASS_NAME}__speed-value" data-id="${ids.speed}" ></span>
+      <div class="${ROOT_CLASS_NAME}__basic-params">
+        <span class="${ROOT_CLASS_NAME}__hp-label">HP</span>
+        <span class="${ROOT_CLASS_NAME}__hp-value" data-id="${ids.hp}"></span>
+        <span class="${ROOT_CLASS_NAME}__power-label">攻撃</span>
+        <span class="${ROOT_CLASS_NAME}__power-value" data-id="${ids.power}" ></span>
+        <span class="${ROOT_CLASS_NAME}__speed-label">機動</span>
+        <span class="${ROOT_CLASS_NAME}__speed-value" data-id="${ids.speed}" ></span>
+      </div>
     </div>
     <div class="${ROOT_CLASS_NAME}__burst-overview">
       <span class="${ROOT_CLASS_NAME}__burst-overview-label">バースト</span>
