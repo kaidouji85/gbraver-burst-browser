@@ -13,6 +13,7 @@ const ROOT_CLASS_NAME = "armdozer-status";
 /** data-idを集めたもの */
 type DataIDs = {
   name: string;
+  battery: string;
   hp: string;
   power: string;
   speed: string;
@@ -36,7 +37,7 @@ function rootInnerHTML(ids: DataIDs, resources: Resources): string {
         <span class="${ROOT_CLASS_NAME}__battery-label">
           <img class="${ROOT_CLASS_NAME}__battery-icon" src="${batteryIconPath}" alt="バッテリーアイコン">
         </span>
-        <span class="${ROOT_CLASS_NAME}__battery-value">5</span>
+        <span class="${ROOT_CLASS_NAME}__battery-value" data-id="${ids.battery}"></span>
         <span class="${ROOT_CLASS_NAME}__hp-label">HP</span>
         <span class="${ROOT_CLASS_NAME}__hp-value" data-id="${ids.hp}"></span>
         <span class="${ROOT_CLASS_NAME}__power-label">攻撃</span>
@@ -59,6 +60,7 @@ function rootInnerHTML(ids: DataIDs, resources: Resources): string {
 /** ルート要素の子孫要素 */
 type Elements = {
   name: HTMLElement;
+  battery: HTMLElement;
   hp: HTMLElement;
   power: HTMLElement;
   speed: HTMLElement;
@@ -77,6 +79,9 @@ function extractElements(root: HTMLElement, ids: DataIDs): Elements {
   const name: HTMLElement =
     root.querySelector(`[data-id="${ids.name}"]`) ??
     document.createElement("div");
+  const battery: HTMLElement =
+    root.querySelector(`[data-id="${ids.battery}"]`) ??
+    document.createElement("div");
   const hp: HTMLElement =
     root.querySelector(`[data-id="${ids.hp}"]`) ??
     document.createElement("div");
@@ -94,6 +99,7 @@ function extractElements(root: HTMLElement, ids: DataIDs): Elements {
     document.createElement("div");
   return {
     name,
+    battery,
     hp,
     power,
     speed,
@@ -106,6 +112,7 @@ function extractElements(root: HTMLElement, ids: DataIDs): Elements {
 export class ArmdozerStatus {
   #root: HTMLElement;
   #name: HTMLElement;
+  #battery: HTMLElement;
   #hp: HTMLElement;
   #power: HTMLElement;
   #speed: HTMLElement;
@@ -119,6 +126,7 @@ export class ArmdozerStatus {
   constructor(resources: Resources) {
     const dataIDs = {
       name: domUuid(),
+      battery: domUuid(),
       hp: domUuid(),
       power: domUuid(),
       speed: domUuid(),
@@ -130,6 +138,7 @@ export class ArmdozerStatus {
     this.#root.innerHTML = rootInnerHTML(dataIDs, resources);
     const elements = extractElements(this.#root, dataIDs);
     this.#name = elements.name;
+    this.#battery = elements.battery;
     this.#hp = elements.hp;
     this.#power = elements.power;
     this.#speed = elements.speed;
@@ -159,6 +168,7 @@ export class ArmdozerStatus {
     }
 
     this.#name.innerText = target.name;
+    this.#battery.innerText = `${target.maxBattery}`;
     this.#hp.innerText = `${target.maxHp}`;
     this.#power.innerText = `${target.power}`;
     this.#speed.innerText = `${target.speed}`;
