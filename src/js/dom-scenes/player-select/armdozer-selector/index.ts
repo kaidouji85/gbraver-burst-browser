@@ -133,7 +133,7 @@ export class ArmdozerSelector {
     this.#root.className = ROOT_CLASS_NAME;
     this.#root.innerHTML = rootInnerHTML(dataIDs);
     const elements = extractElements(this.#root, dataIDs);
-    this.#armdozerStatus = new ArmdozerStatus();
+    this.#armdozerStatus = new ArmdozerStatus(resources);
     this.#armdozerStatus.switch(this.#armdozerId);
     replaceDOM(elements.dummyStatus, this.#armdozerStatus.getRootHTMLElement());
     this.#armdozerIcons = armDozerIds.map((v) => ({

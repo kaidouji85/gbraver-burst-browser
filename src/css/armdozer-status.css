@@ -32,12 +32,18 @@
 }
 
 .armdozer-status__hp-label,
+.armdozer-status__battery-label,
 .armdozer-status__power-label,
 .armdozer-status__speed-label {
   min-width: var(--parameter-label-width);
   background-color: var(--button-background-color);
   text-align: center;
   border-radius: calc(var(--responsive-font-size) * 0.2);
+}
+
+.armdozer-status__battery-icon {
+  width: var(--responsive-font-size);
+  height: var(--responsive-font-size);
 }
 
 .armdozer-status__hp-value,

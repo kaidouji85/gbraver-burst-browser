@@ -4,6 +4,8 @@ import { ArmDozers } from "gbraver-burst-core";
 import { domUuid } from "../../../uuid/dom-uuid";
 import { burstDetail } from "./burst-detail";
 import { burstOverview } from "./burst-overview";
+import {Resources} from "../../../resource";
+import {PathIds} from "../../../resource/path";
 
 /**ルート要素のクラス名 */
 const ROOT_CLASS_NAME = "armdozer-status";
@@ -22,15 +24,21 @@ type DataIDs = {
  * ルート要素のinnerHTML
  *
  * @param ids data-idを集めたもの
+ * @param resources リソース管理オブジェクト
  * @return innerHTML
  */
-function rootInnerHTML(ids: DataIDs): string {
+function rootInnerHTML(ids: DataIDs, resources: Resources): string {
+  const batteryIconPath = resources.paths.find(v => v.id === PathIds.BATTERY_ICON)?.path ?? "";
   return `
     <div class="${ROOT_CLASS_NAME}__basic-status">
       <div class="${ROOT_CLASS_NAME}__name" data-id="${ids.name}"></div>
       <div class="${ROOT_CLASS_NAME}__basic-params">
         <span class="${ROOT_CLASS_NAME}__hp-label">HP</span>
         <span class="${ROOT_CLASS_NAME}__hp-value" data-id="${ids.hp}"></span>
+        <span class="${ROOT_CLASS_NAME}__battery-label">
+          <img class="${ROOT_CLASS_NAME}__battery-icon" src="${batteryIconPath}" alt="バッテリーアイコン">
+        </span>
+        <span class="${ROOT_CLASS_NAME}__battery-value"></span>
         <span class="${ROOT_CLASS_NAME}__power-label">攻撃</span>
         <span class="${ROOT_CLASS_NAME}__power-value" data-id="${ids.power}" ></span>
         <span class="${ROOT_CLASS_NAME}__speed-label">機動</span>
@@ -106,8 +114,9 @@ export class ArmdozerStatus {
 
   /**
    * コンストラクタ
+   * @param resources　リソース管理オブジェクト
    */
-  constructor() {
+  constructor(resources: Resources) {
     const dataIDs = {
       name: domUuid(),
       hp: domUuid(),
@@ -118,7 +127,7 @@ export class ArmdozerStatus {
     };
     this.#root = document.createElement("div");
     this.#root.className = ROOT_CLASS_NAME;
-    this.#root.innerHTML = rootInnerHTML(dataIDs);
+    this.#root.innerHTML = rootInnerHTML(dataIDs, resources);
     const elements = extractElements(this.#root, dataIDs);
     this.#name = elements.name;
     this.#hp = elements.hp;
