@@ -50,6 +50,7 @@ export const PathIds = {
   TUTORIAL_IMAGE_CUT_01: "TUTORIAL_IMAGE_CUT_01",
   TUTORIAL_IMAGE_CUT_02: "TUTORIAL_IMAGE_CUT_02",
   TUTORIAL_IMAGE_CUT_03: "TUTORIAL_IMAGE_CUT_03",
+  BATTERY_ICON: "BATTERY_ICON",
 };
 
 /** パス設定を集めたもの */
@@ -185,6 +186,10 @@ export const PathConfigs: PathConfig[] = [
   {
     id: PathIds.TUTORIAL_IMAGE_CUT_03,
     path: (root) => `${root.get()}/tutorial/image-cut-03.webp`,
+  },
+  {
+    id: PathIds.BATTERY_ICON,
+    path: (root) => `${root.get()}/battery-icon.svg`,
   },
 ];
 
