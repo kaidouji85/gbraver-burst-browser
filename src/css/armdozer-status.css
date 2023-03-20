@@ -30,14 +30,14 @@
   flex-shrink: 0;
   display: grid;
   grid-template-columns:
-      auto
-      auto
-      auto
-      auto
-      auto
-      auto
-      auto
-      auto;
+    auto
+    auto
+    auto
+    auto
+    auto
+    auto
+    auto
+    auto;
 }
 
 .armdozer-status__battery-label,

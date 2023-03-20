@@ -1,11 +1,11 @@
 import type { ArmDozerId } from "gbraver-burst-core";
 import { ArmDozers } from "gbraver-burst-core";
 
+import { Resources } from "../../../resource";
+import { PathIds } from "../../../resource/path";
 import { domUuid } from "../../../uuid/dom-uuid";
 import { burstDetail } from "./burst-detail";
 import { burstOverview } from "./burst-overview";
-import {Resources} from "../../../resource";
-import {PathIds} from "../../../resource/path";
 
 /**ルート要素のクラス名 */
 const ROOT_CLASS_NAME = "armdozer-status";
@@ -29,7 +29,8 @@ type DataIDs = {
  * @return innerHTML
  */
 function rootInnerHTML(ids: DataIDs, resources: Resources): string {
-  const batteryIconPath = resources.paths.find(v => v.id === PathIds.BATTERY_ICON)?.path ?? "";
+  const batteryIconPath =
+    resources.paths.find((v) => v.id === PathIds.BATTERY_ICON)?.path ?? "";
   return `
     <div class="${ROOT_CLASS_NAME}__basic-status">
       <div class="${ROOT_CLASS_NAME}__name" data-id="${ids.name}"></div>
@@ -121,7 +122,7 @@ export class ArmdozerStatus {
 
   /**
    * コンストラクタ
-   * @param resources　リソース管理オブジェクト
+   * @param resources リソース管理オブジェクト
    */
   constructor(resources: Resources) {
     const dataIDs = {
