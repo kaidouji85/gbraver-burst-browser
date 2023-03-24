@@ -14,14 +14,15 @@ export function lightning(param: ReflectAnimationParam): Animate {
     param.damaged.td.hitMark.lightning.popUp(),
     delay(100).chain(
       all(
-        param.damaged.sprite.knockBack(),
+        param.damaged.sprite
+          .knockBack()
+          .chain(delay(800))
+          .chain(param.damaged.sprite.knockBackToStand()),
         param.damaged.td.damageIndicator.popUp(param.effect.damage),
         param.damaged.hud.gauge.hp(param.damaged.state.armdozer.hp)
       )
     )
-  )
-    .chain(param.damaged.sprite.knockBackToStand())
-    .chain(delay(300));
+  );
 }
 
 /**
