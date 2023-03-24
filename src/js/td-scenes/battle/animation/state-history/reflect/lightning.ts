@@ -14,7 +14,8 @@ export function lightning(param: ReflectAnimationParam): Animate {
     param.damaged.td.hitMark.lightning.popUp(),
     delay(100).chain(
       all(
-        param.damaged.sprite.knockBack()
+        param.damaged.sprite
+          .knockBack()
           .chain(delay(800))
           .chain(param.damaged.sprite.knockBackToStand()),
         param.damaged.td.damageIndicator.popUp(param.effect.damage),
