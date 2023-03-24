@@ -364,7 +364,7 @@ export const NPCBattleCourses: NPCBattleCourse[] = [
     difficulty: "VeryHard",
     stages: [
       { ...VeryHardLightningDozer, bgm: SOUND_IDS.BATTLE_BGM_01 },
-      { ...VeryHardNeoLandozer, bgm: SOUND_IDS.BATTLE_BGM_02 },
+      { ...VeryHardShinBraver, bgm: SOUND_IDS.BATTLE_BGM_02 },
       { ...VeryHardWingDozer, bgm: SOUND_IDS.BATTLE_BGM_03 },
     ],
   },
