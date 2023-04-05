@@ -1,5 +1,6 @@
 module.exports = {
   stories: ['../stories/**/*.stories.ts'],
+  staticDirs: ['../src/resources'],
   webpackFinal: config => {
     return {
       ...config,

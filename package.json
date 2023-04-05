@@ -111,7 +111,7 @@
     "serve:storybook-static": "http-server build/storybook-static -c-1",
     "start": "webpack serve",
     "start:production": "run-s build:production serve",
-    "start:storybook": "storybook dev -s ./src/resources -p 6006",
+    "start:storybook": "storybook dev -p 6006",
     "start:storybook-static": "run-s build:storybook-static serve:storybook-static",
     "test": "jest",
     "type-check": "tsc --noEmit",
