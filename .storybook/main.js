@@ -19,9 +19,5 @@ module.exports = {
   framework: {
     name: '@storybook/html-webpack5',
     options: {}
-  },
-  addons: ['@storybook/addon-mdx-gfm'],
-  docs: {
-    autodocs: true
   }
 };
