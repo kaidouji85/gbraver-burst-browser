@@ -84,7 +84,7 @@
   "scripts": {
     "build": "run-s webpack generate-icons scale-down-mobile-images webpack:sw webpack:clear-sw",
     "build:production": "run-s webpack:production generate-icons scale-down-mobile-images webpack:sw webpack:clear-sw",
-    "build:storybook-static": "storybook build -s ./src/resources -o build/storybook-static",
+    "build:storybook-static": "storybook build -o build/storybook-static",
     "clean": "rimraf build",
     "code-analysis": "codehawk src/js",
     "code-format": "run-s code-format:src code-format:test code-format:storybook code-format:css code-format:helper-ts",
