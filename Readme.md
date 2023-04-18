@@ -55,6 +55,7 @@ npm start
     | /GbraverBurst/dev/ownRootUrl | String | 開発環境を公開しているURL |
     | /GbraverBurst/dev/twitterSite | String | OGP twitter:site で使うtwitterアカウント |
     | /GbraverBurst/dev/howToPlayUrl | String | 遊び方スライドのURL |
+    | /GbraverBurst/dev/trailerMovieUrl | String | トレイラー映像のURL |
     | /GbraverBurst/dev/termsOfServiceUrl | String | 利用規約ページのURL |
     | /GbraverBurst/dev/privacyPolicyUrl | String | プライバシーポリシーページのURL |
     | /GbraverBurst/dev/contactURL | String | 問い合わせページのURL |
@@ -77,6 +78,7 @@ npm start
     | /GbraverBurst/prod/ownRootUrl | String | 本番環境を公開しているURL |
     | /GbraverBurst/prod/twitterSite | String | OGP twitter:site で使うtwitterアカウント |
     | /GbraverBurst/prod/howToPlayUrl | String | 遊び方スライドのURL |
+    | /GbraverBurst/prod/trailerMovieUrl | String | トレイラー映像のURL |
     | /GbraverBurst/prod/termsOfServiceUrl | String | 利用規約ページのURL |
     | /GbraverBurst/prod/privacyPolicyUrl | String | プライバシーポリシーページのURL |
     | /GbraverBurst/prod/contactURL | String | 問い合わせページのURL |
