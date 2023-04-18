@@ -17,7 +17,7 @@ import { pushWindowsStream } from "../window/push-window";
 import type { Resize } from "../window/resize";
 import { resizeStream } from "../window/resize";
 import { postBattleConnector } from "./action-connector/post-battle-connector";
-import type { GbraverBurstBrowserConfigRepository } from "./config/browser-config";
+import { GbraverBurstBrowserConfigRepository } from "./config/browser-config";
 import { DOMDialogBinder } from "./dom-dialog-binder";
 import { DOMFloaters } from "./dom-floaters/dom-floaters";
 import { DOMSceneBinder } from "./dom-scene-binder";
@@ -37,6 +37,8 @@ export interface GameProps {
   isServiceWorkerUsed: boolean;
   /** 遊び方スライドのURL */
   howToPlayURL: string;
+  /** トレイラー画像のURL */
+  trailerMovieURL: string;  
   /** 利用規約ページのURL */
   termsOfServiceURL: string;
   /** プライバシーポリシーページのURL */
@@ -146,6 +148,7 @@ export function generateGameProps(param: GamePropsGeneratorParam): GameProps {
     isServiceWorkerUsed: param.isServiceWorkerUsed,
     isPerformanceStatsVisible: param.isPerformanceStatsVisible,
     howToPlayURL: param.howToPlayURL,
+    trailerMovieURL: param.trailerMovieURL,
     termsOfServiceURL: param.termsOfServiceURL,
     privacyPolicyURL: param.privacyPolicyURL,
     contactURL: param.contactURL,
