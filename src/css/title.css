@@ -29,6 +29,7 @@
   position: absolute;
   top: max(var(--safe-area-top), var(--responsive-font-size) * 1);
   right: max(var(--safe-area-right), var(--responsive-font-size) * 1);
+  z-index: var(--zindex-dialog);
 }
 
 .title__login {
@@ -78,7 +79,6 @@
   background-color: var(--background-color);
   border: var(--dialog-border);
   border-radius: var(--dialog-border-radius);
-  z-index: var(--zindex-dialog);
   box-shadow: var(--button-box-shadow);
   min-width: var(--menu-min-width);
   max-width: var(--menu-max-width);
@@ -120,6 +120,7 @@
   position: absolute;
   top: max(var(--safe-area-top), var(--responsive-font-size) * 1);
   left: max(var(--safe-area-left), var(--responsive-font-size) * 1);
+  z-index: var(--zindex-dialog);
 }
 
 .title__help-icon {
@@ -137,7 +138,7 @@
 }
 
 .title__help-menu {
-  --margin-horizontal: calc(var(--responsive-font-size) * 1.5);
+  --margin-horizontal: calc(var(--responsive-font-size) * 1);
   --margin-vertical: calc(var(--margin-horizontal) * 0.5);
   --menu-max-width: 95vw;
 
@@ -149,7 +150,6 @@
   background-color: var(--background-color);
   border: var(--dialog-border);
   border-radius: var(--dialog-border-radius);
-  z-index: var(--zindex-dialog);
   box-shadow: var(--button-box-shadow);
   max-width: var(--menu-max-width);
   padding: calc(var(--margin-horizontal) * 0.5);
@@ -172,6 +172,7 @@
 .title__contact {
   text-decoration: none;
   color: var(--button-font-color);
+  margin: var(--margin-vertical) var(--margin-horizontal);
 }
 
 .title__how-to-play:hover,
