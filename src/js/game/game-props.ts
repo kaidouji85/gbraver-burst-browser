@@ -101,6 +101,8 @@ export type GamePropsGeneratorParam = {
   resourceRoot: ResourceRoot;
   /** 遊び方スライドのURL */
   howToPlayURL: string;
+  /** トレイラー画像のURL */
+  trailerMovieURL: string;
   /** 利用規約ページのURL */
   termsOfServiceURL: string;
   /** 問い合わせページのURL */

@@ -11,6 +11,7 @@ declare let GBRAVER_BURST_DESKTOP_RESOURCE_ROOT: string;
 declare let GBRAVER_BURST_MOBILE_RESOURCE_ROOT: string;
 declare let GBRAVER_BURST_OWN_ROOT_URL: string;
 declare let GBRAVER_BURST_HOW_TO_PLAY: string;
+declare let GBRAVER_BURST_TRAILER_MOVIE_URL: string;
 declare let GBRAVER_BURST_TERMS_OF_SERVICE_URL: string;
 declare let GBRAVER_BURST_PRIVACY_POLICY_URL: string;
 declare let GBRAVER_BURST_CONTACT_URL: string;
@@ -55,6 +56,7 @@ async function main(): Promise<void> {
     api: api,
     config: createLocalStorageConfigRepository(),
     howToPlayURL: GBRAVER_BURST_HOW_TO_PLAY,
+    trailerMovieURL: GBRAVER_BURST_TRAILER_MOVIE_URL,
     termsOfServiceURL: GBRAVER_BURST_TERMS_OF_SERVICE_URL,
     privacyPolicyURL: GBRAVER_BURST_PRIVACY_POLICY_URL,
     contactURL: GBRAVER_BURST_CONTACT_URL,
