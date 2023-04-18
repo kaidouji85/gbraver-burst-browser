@@ -37,8 +37,6 @@ export interface GameProps {
   isServiceWorkerUsed: boolean;
   /** 遊び方スライドのURL */
   howToPlayURL: string;
-  /** トレイラー画像のURL */
-  trailerMovieURL: string;
   /** 利用規約ページのURL */
   termsOfServiceURL: string;
   /** プライバシーポリシーページのURL */
@@ -103,8 +101,6 @@ export type GamePropsGeneratorParam = {
   resourceRoot: ResourceRoot;
   /** 遊び方スライドのURL */
   howToPlayURL: string;
-  /** トレイラー画像のURL */
-  trailerMovieURL: string;
   /** 利用規約ページのURL */
   termsOfServiceURL: string;
   /** 問い合わせページのURL */
@@ -148,7 +144,6 @@ export function generateGameProps(param: GamePropsGeneratorParam): GameProps {
     isServiceWorkerUsed: param.isServiceWorkerUsed,
     isPerformanceStatsVisible: param.isPerformanceStatsVisible,
     howToPlayURL: param.howToPlayURL,
-    trailerMovieURL: param.trailerMovieURL,
     termsOfServiceURL: param.termsOfServiceURL,
     privacyPolicyURL: param.privacyPolicyURL,
     contactURL: param.contactURL,

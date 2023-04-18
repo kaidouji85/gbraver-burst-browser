@@ -24,9 +24,6 @@ export type RootInnerHTMLParams = {
   /** 遊び方スライドのURL */
   howToPlayURL: string;
 
-  /** トレイラー動画のURL */
-  trailerMovieURL: string;
-
   /** 利用規約ページのURL */
   termsOfServiceURL: string;
 
@@ -82,7 +79,6 @@ export function rootInnerHTML(
       <img class="${ROOT_CLASS}__help-icon" data-id="${ids.helpIcon}">
       <div class="${INVISIBLE__HELP_MENU_CLASS}" data-id="${ids.helpMenu}">
         <a class="${ROOT_CLASS}__how-to-play" href="${params.howToPlayURL}" target="_blank" rel="noopener">遊び方</a>
-        <a class="${ROOT_CLASS}__trailer" href="${params.trailerMovieURL}" target="_blank" rel="noopenePr">トレイラー</a>
         <div class="${ROOT_CLASS}__help-menu-separation"></div>
         <a class="${ROOT_CLASS}__terms-of-service" href="${params.termsOfServiceURL}" target="_blank" rel="noopener">利用規約</a>
         <a class="${ROOT_CLASS}__privacy-policy" href="${params.privacyPolicyURL}" target="_blank" rel="noopener">プライバシーポリシー</a>

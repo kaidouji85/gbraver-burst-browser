@@ -39,7 +39,6 @@ export async function startTitle(props: Readonly<GameProps>): Promise<Title> {
     resources: props.resources,
     account,
     howToPlayURL: props.howToPlayURL,
-    trailerMovieURL: props.trailerMovieURL,
     isApiServerEnable: props.isAPIServerEnable,
     termsOfServiceURL: props.termsOfServiceURL,
     privacyPolicyURL: props.privacyPolicyURL,
