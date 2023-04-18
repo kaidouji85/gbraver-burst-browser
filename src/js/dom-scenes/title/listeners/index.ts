@@ -11,6 +11,7 @@ import { onNetBattlePush } from "./on-net-battle-push";
 import { onPushDeleteAccount } from "./on-push-delete-account";
 import { onRootPush } from "./on-root-push";
 import { onTutorialPush } from "./on-tutorial-push";
+import { onHelpIconPush } from "./on-help-icon-push";
 
 /**
  * タイトル画面にイベントリスナをバインドする
@@ -28,6 +29,9 @@ export function bindEventListeners(props: TitleProps): Unsubscribable[] {
     }),
     pushDOMStream(props.avatar).subscribe((action) => {
       onAvatarPush(props, action);
+    }),
+    pushDOMStream(props.helpIcon).subscribe((action) => {
+      onHelpIconPush(props, action);
     }),
     pushDOMStream(props.deleteAccount).subscribe((action) => {
       onPushDeleteAccount(props, action);
