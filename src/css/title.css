@@ -29,7 +29,6 @@
   position: absolute;
   top: max(var(--safe-area-top), var(--responsive-font-size) * 1);
   right: max(var(--safe-area-right), var(--responsive-font-size) * 1);
-  z-index: var(--zindex-dialog);
 }
 
 .title__login {
@@ -82,6 +81,7 @@
   box-shadow: var(--button-box-shadow);
   min-width: var(--menu-min-width);
   max-width: var(--menu-max-width);
+  z-index: var(--zindex-dialog);
 }
 
 .title__account-menu--invisible {
@@ -120,7 +120,6 @@
   position: absolute;
   top: max(var(--safe-area-top), var(--responsive-font-size) * 1);
   left: max(var(--safe-area-left), var(--responsive-font-size) * 1);
-  z-index: var(--zindex-dialog);
 }
 
 .title__help-icon {
@@ -153,6 +152,7 @@
   box-shadow: var(--button-box-shadow);
   max-width: var(--menu-max-width);
   padding: calc(var(--margin-horizontal) * 0.5);
+  z-index: var(--zindex-dialog);
 }
 
 .title__help-menu--invisible {
