@@ -15,6 +15,7 @@
       var(--screen-padding-bottom) var(--screen-padding-left);
     background-size: cover;
     background-position: 50% 0;
+    position: relative;
   }
 }
 
@@ -24,7 +25,7 @@
   }
 }
 
-.title__account {
+.title__account-controller {
   position: absolute;
   top: max(var(--safe-area-top), var(--responsive-font-size) * 1);
   right: max(var(--safe-area-right), var(--responsive-font-size) * 1);
