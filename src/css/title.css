@@ -24,7 +24,7 @@
   }
 }
 
-.title__header {
+.title__account {
   position: absolute;
   top: max(var(--safe-area-top), var(--responsive-font-size) * 1);
   right: max(var(--safe-area-right), var(--responsive-font-size) * 1);
@@ -119,6 +119,25 @@
 
 .title__logout:hover {
   background-color: var(--button-background-color);
+}
+
+.title__help {
+  position: absolute;
+  top: max(var(--safe-area-top), var(--responsive-font-size) * 1);
+  left: max(var(--safe-area-left), var(--responsive-font-size) * 1);
+}
+
+.title__help-icon {
+  --size: max(var(--responsive-font-size) * 1.5, 32px);
+
+  width: var(--size);
+  height: var(--size);
+  border-radius: calc(var(--size) * 0.5);
+  margin-right: calc(var(--responsive-font-size) * 0.2);
+  background-color: transparent;
+  color: var(--font-color);
+  font-size: calc(var(--responsive-font-size));
+  border: var(--dialog-border);
 }
 
 .title__contents {

@@ -59,7 +59,7 @@ export function rootInnerHTML(
     ? NET_BATTLE_CLASS
     : INVISIBLE_NET_BATTLE_CLASS;
   return `
-    <div class="${ROOT_CLASS}__header">
+    <div class="${ROOT_CLASS}__account">
       <button data-id="${ids.login}" class="${loginClassName}">ログイン</button>
       <div class="${accountClassName}">
         <img class="${ROOT_CLASS}__avatar" data-id="${ids.avatar}" >
@@ -73,6 +73,9 @@ export function rootInnerHTML(
           <div class="${ROOT_CLASS}__logout" data-id="${ids.logout}">ログアウト</div>
         </div>
       </div>
+    </div>
+    <div class="${ROOT_CLASS}__help">
+      <button class="${ROOT_CLASS}__help-icon">?</button>
     </div>
     <div class="${ROOT_CLASS}__contents">
       <img class="${ROOT_CLASS}__logo" data-id="${ids.logo}">
