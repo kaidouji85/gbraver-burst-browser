@@ -9,7 +9,10 @@ import { openHelpMenu } from "./open-help-menu";
  * @param props 画面プロパティ
  * @param action アクション
  */
-export function onHelpIconPush(props: TitleProps, action: Readonly<PushDOM>): void {
+export function onHelpIconPush(
+  props: TitleProps,
+  action: Readonly<PushDOM>
+): void {
   action.event.preventDefault();
 
   if (!isHelpMenuOpen(props)) {

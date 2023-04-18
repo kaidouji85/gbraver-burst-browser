@@ -106,17 +106,14 @@
   margin: var(--margin-vertical) 0;
 }
 
-.title__delete-account {
+.title__delete-account,
+.title__logout {
   margin: var(--margin-vertical) var(--margin-horizontal);
 }
 
 .title__delete-account:hover,
 .title__logout:hover {
   background-color: var(--button-background-color);
-}
-
-.title__logout {
-  margin: var(--margin-vertical) var(--margin-horizontal);
 }
 
 .title__help {

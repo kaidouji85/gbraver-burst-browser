@@ -33,10 +33,12 @@ export function extractElements(root: HTMLElement, ids: DataIDs): Elements {
   const avatarElement = root.querySelector(`[data-id="${ids.avatar}"]`);
   const avatar =
     avatarElement instanceof HTMLImageElement ? avatarElement : new Image();
-  const helpIcon: HTMLElement = root.querySelector(`[data-id="${ids.helpIcon}"]`)
-    ?? document.createElement("div");
-  const helpMenu: HTMLElement = root.querySelector(`[data-id="${ids.helpMenu}"]`)
-    ?? document.createElement("div");
+  const helpIcon: HTMLElement =
+    root.querySelector(`[data-id="${ids.helpIcon}"]`) ??
+    document.createElement("div");
+  const helpMenu: HTMLElement =
+    root.querySelector(`[data-id="${ids.helpMenu}"]`) ??
+    document.createElement("div");
   const deleteAccount: HTMLElement =
     root.querySelector(`[data-id="${ids.deleteAccount}"]`) ??
     document.createElement("div");

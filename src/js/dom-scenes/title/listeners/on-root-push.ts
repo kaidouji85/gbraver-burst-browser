@@ -1,4 +1,3 @@
-import { prop } from "ramda";
 import type { PushDOM } from "../../../dom/event-stream";
 import type { TitleProps } from "../props";
 import { closeAccountMenu } from "./close-account-menu";

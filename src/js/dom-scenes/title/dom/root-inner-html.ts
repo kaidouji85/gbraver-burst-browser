@@ -2,11 +2,11 @@ import { escapeHTML } from "../../../dom/escape-html";
 import type { TitleAccount } from "../title-account";
 import {
   ACCOUNT_CLASS,
+  INVISIBLE__HELP_MENU_CLASS,
   INVISIBLE_ACCOUNT_CLASS,
   INVISIBLE_ACCOUNT_MENU_CLASS,
   INVISIBLE_LOGIN_CLASS,
   INVISIBLE_NET_BATTLE_CLASS,
-  INVISIBLE__HELP_MENU_CLASS,
   LOGIN_CLASS,
   NET_BATTLE_CLASS,
   ROOT_CLASS,

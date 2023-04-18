@@ -38,7 +38,7 @@ export interface GameProps {
   /** 遊び方スライドのURL */
   howToPlayURL: string;
   /** トレイラー画像のURL */
-  trailerMovieURL: string;  
+  trailerMovieURL: string;
   /** 利用規約ページのURL */
   termsOfServiceURL: string;
   /** プライバシーポリシーページのURL */
