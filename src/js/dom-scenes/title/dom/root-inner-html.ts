@@ -76,6 +76,14 @@ export function rootInnerHTML(
     </div>
     <div class="${ROOT_CLASS}__help">
       <button class="${ROOT_CLASS}__help-icon">?</button>
+      <div class="${ROOT_CLASS}__help-menu">
+        <a class="${ROOT_CLASS}__how-to-play" href="${params.howToPlayURL}" target="_blank" rel="noopener">遊び方</a>
+        <a class="${ROOT_CLASS}__trailer">トレイラー</a>
+        <div class="${ROOT_CLASS}__help-menu-separation"></div>
+        <a class="${ROOT_CLASS}__terms-of-service" href="${params.termsOfServiceURL}" target="_blank" rel="noopener">利用規約</a>
+        <a class="${ROOT_CLASS}__privacy-policy" href="${params.privacyPolicyURL}" target="_blank" rel="noopener">プライバシーポリシー</a>
+        <a class="${ROOT_CLASS}__contact" href="${params.contactURL}" target="_blank" rel="noopener">問い合わせ</a>
+      </div>
     </div>
     <div class="${ROOT_CLASS}__contents">
       <img class="${ROOT_CLASS}__logo" data-id="${ids.logo}">
@@ -93,10 +101,6 @@ export function rootInnerHTML(
         <span class="${ROOT_CLASS}__copy-rights-owner">Pegass85</span>
       </small>
       <small class="${ROOT_CLASS}__music">音楽 魔王魂</small>
-      <a class="${ROOT_CLASS}__how-to-play" href="${params.howToPlayURL}" target="_blank" rel="noopener">遊び方</a>
-      <a class="${ROOT_CLASS}__terms-of-service" href="${params.termsOfServiceURL}" target="_blank" rel="noopener">利用規約</a>
-      <a class="${ROOT_CLASS}__privacy-policy" href="${params.privacyPolicyURL}" target="_blank" rel="noopener">プライバシーポリシー</a>
-      <a class="${ROOT_CLASS}__contact" href="${params.contactURL}" target="_blank" rel="noopener">問い合わせ</a>
     </div>
   `;
 }
