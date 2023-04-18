@@ -6,6 +6,7 @@ import {
   INVISIBLE_ACCOUNT_MENU_CLASS,
   INVISIBLE_LOGIN_CLASS,
   INVISIBLE_NET_BATTLE_CLASS,
+  INVISIBLE__HELP_MENU,
   LOGIN_CLASS,
   NET_BATTLE_CLASS,
   ROOT_CLASS,
@@ -79,7 +80,7 @@ export function rootInnerHTML(
     </div>
     <div class="${ROOT_CLASS}__help">
       <button class="${ROOT_CLASS}__help-icon" data-id="${ids.helpIcon}">?</button>
-      <div class="${ROOT_CLASS}__help-menu" data-id="${ids.helpMenu}">
+      <div class="${INVISIBLE__HELP_MENU}" data-id="${ids.helpMenu}">
         <a class="${ROOT_CLASS}__how-to-play" href="${params.howToPlayURL}" target="_blank" rel="noopener">遊び方</a>
         <a class="${ROOT_CLASS}__trailer" href="${params.trailerMovieURL}" target="_blank" rel="noopenePr">トレイラー</a>
         <div class="${ROOT_CLASS}__help-menu-separation"></div>

@@ -157,6 +157,10 @@
   padding: calc(var(--margin-horizontal) * 0.5);
 }
 
+.title__help-menu--invisible {
+  display: none;
+}
+
 .title__help-menu-separation {
   height: 0;
   border-top: solid #626262 1px;
