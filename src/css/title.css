@@ -137,7 +137,8 @@
   background-color: transparent;
   color: var(--font-color);
   font-size: calc(var(--responsive-font-size));
-  border: var(--dialog-border);
+  font-weight: bold;
+  border: solid #a9a9a9 2px;
 }
 
 .title__contents {
