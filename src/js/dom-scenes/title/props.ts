@@ -63,6 +63,9 @@ export type TitleProps = {
   /** ロゴ画像を読み込んだら発火するPromise */
   isLogoLoaded: Promise<void>;
 
+  /** ヘルプアイコンを読み込んだら発火するPromise */
+  isHelpIconLoaded: Promise<void>;
+
   /** SE 値変更 */
   changeValue: Howl;
 
@@ -138,6 +141,8 @@ export function createTitleProps(params: CreateTitlePropsParams): TitleProps {
   });
   titleBackImage.src =
     params.resources.paths.find((v) => v.id === PathIds.TITLE_BACK)?.path ?? "";
+  const isHelpIconLoaded = waitElementLoaded(elements.helpIcon);
+  elements.helpIcon.src = params.resources.paths.find(v => v.id === PathIds.HELP_ICON)?.path ?? "";
   return {
     exclusive: new Exclusive(),
     root,
@@ -155,6 +160,7 @@ export function createTitleProps(params: CreateTitlePropsParams): TitleProps {
     isLogoLoaded,
     isAvatarLoaded,
     isTitleBackLoaded,
+    isHelpIconLoaded,
     pushButton:
       params.resources.sounds.find((v) => v.id === SOUND_IDS.PUSH_BUTTON)
         ?.sound ?? new Howl({ src: "" }),

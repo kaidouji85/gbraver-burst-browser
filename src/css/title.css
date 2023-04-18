@@ -127,13 +127,7 @@
 
   width: var(--size);
   height: var(--size);
-  border-radius: calc(var(--size) * 0.5);
   margin-right: calc(var(--responsive-font-size) * 0.2);
-  background-color: transparent;
-  color: var(--font-color);
-  font-size: calc(var(--responsive-font-size));
-  font-weight: bold;
-  border: solid #a9a9a9 2px;
 }
 
 .title__help-menu {
