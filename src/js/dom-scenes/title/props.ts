@@ -39,6 +39,12 @@ export type TitleProps = {
   /** ログアウト */
   logout: HTMLElement;
 
+  /** ヘルプアイコン */
+  helpIcon: HTMLElement;
+
+  /** ヘルプメニュー */
+  helpMenu: HTMLElement;
+
   /** チュートリアル */
   tutorial: HTMLElement;
 
@@ -105,6 +111,8 @@ export function createTitleProps(params: CreateTitlePropsParams): TitleProps {
     login: domUuid(),
     accountMenu: domUuid(),
     avatar: domUuid(),
+    helpIcon: domUuid(),
+    helpMenu: domUuid(),
     deleteAccount: domUuid(),
     logout: domUuid(),
     logo: domUuid(),
@@ -142,6 +150,8 @@ export function createTitleProps(params: CreateTitlePropsParams): TitleProps {
     avatar,
     deleteAccount: elements.deleteAccount,
     logout: elements.logout,
+    helpIcon: elements.helpIcon,
+    helpMenu: elements.helpMenu,
     tutorial: elements.tutorial,
     arcade: elements.arcade,
     netBattle: elements.netBattle,

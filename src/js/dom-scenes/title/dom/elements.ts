@@ -5,6 +5,8 @@ type Elements = {
   login: HTMLElement;
   accountMenu: HTMLElement;
   avatar: HTMLImageElement;
+  helpIcon: HTMLElement;
+  helpMenu: HTMLElement;
   deleteAccount: HTMLElement;
   logout: HTMLElement;
   logo: HTMLImageElement;
@@ -31,6 +33,10 @@ export function extractElements(root: HTMLElement, ids: DataIDs): Elements {
   const avatarElement = root.querySelector(`[data-id="${ids.avatar}"]`);
   const avatar =
     avatarElement instanceof HTMLImageElement ? avatarElement : new Image();
+  const helpIcon: HTMLElement = root.querySelector(`[data-id="${ids.helpIcon}"]`)
+    ?? document.createElement("div");
+  const helpMenu: HTMLElement = root.querySelector(`[data-id="${ids.helpMenu}"]`)
+    ?? document.createElement("div");
   const deleteAccount: HTMLElement =
     root.querySelector(`[data-id="${ids.deleteAccount}"]`) ??
     document.createElement("div");
@@ -56,6 +62,8 @@ export function extractElements(root: HTMLElement, ids: DataIDs): Elements {
     login,
     accountMenu,
     avatar,
+    helpIcon,
+    helpMenu,
     deleteAccount,
     logout,
     logo,
