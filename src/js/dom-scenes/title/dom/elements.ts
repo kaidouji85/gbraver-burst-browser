@@ -34,8 +34,8 @@ export function extractElements(root: HTMLElement, ids: DataIDs): Elements {
   const avatar =
     avatarElement instanceof HTMLImageElement ? avatarElement : new Image();
   const helpIconElement = root.querySelector(`[data-id="${ids.helpIcon}"]`);
-  const helpIcon: HTMLImageElement
-    = helpIconElement instanceof HTMLImageElement
+  const helpIcon: HTMLImageElement =
+    helpIconElement instanceof HTMLImageElement
       ? helpIconElement
       : document.createElement("img");
   const helpMenu: HTMLElement =

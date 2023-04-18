@@ -195,7 +195,7 @@ export const PathConfigs: PathConfig[] = [
   {
     id: PathIds.HELP_ICON,
     path: (root) => `${root.get()}/help-icon.svg`,
-  }
+  },
 ];
 
 /**

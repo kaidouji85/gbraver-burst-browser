@@ -142,7 +142,8 @@ export function createTitleProps(params: CreateTitlePropsParams): TitleProps {
   titleBackImage.src =
     params.resources.paths.find((v) => v.id === PathIds.TITLE_BACK)?.path ?? "";
   const isHelpIconLoaded = waitElementLoaded(elements.helpIcon);
-  elements.helpIcon.src = params.resources.paths.find(v => v.id === PathIds.HELP_ICON)?.path ?? "";
+  elements.helpIcon.src =
+    params.resources.paths.find((v) => v.id === PathIds.HELP_ICON)?.path ?? "";
   return {
     exclusive: new Exclusive(),
     root,
