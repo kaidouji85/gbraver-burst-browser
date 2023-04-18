@@ -109,16 +109,13 @@
   margin: var(--margin-vertical) var(--margin-horizontal);
 }
 
-.title__delete-account:hover {
+.title__delete-account:hover,
+.title__logout:hover {
   background-color: var(--button-background-color);
 }
 
 .title__logout {
   margin: var(--margin-vertical) var(--margin-horizontal);
-}
-
-.title__logout:hover {
-  background-color: var(--button-background-color);
 }
 
 .title__help {
@@ -167,11 +164,20 @@
 }
 
 .title__how-to-play,
+.title__trailer,
 .title__terms-of-service,
 .title__privacy-policy,
 .title__contact {
   text-decoration: none;
   color: var(--button-font-color);
+}
+
+.title__how-to-play:hover,
+.title__trailer:hover,
+.title__terms-of-service:hover,
+.title__privacy-policy:hover,
+.title__contact:hover {
+  background-color: var(--button-background-color);
 }
 
 .title__contents {
