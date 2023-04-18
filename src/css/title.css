@@ -15,6 +15,7 @@
       var(--screen-padding-bottom) var(--screen-padding-left);
     background-size: cover;
     background-position: 50% 0;
+    position: relative;
   }
 }
 
@@ -24,7 +25,7 @@
   }
 }
 
-.title__header {
+.title__account-controller {
   position: absolute;
   top: max(var(--safe-area-top), var(--responsive-font-size) * 1);
   right: max(var(--safe-area-right), var(--responsive-font-size) * 1);
@@ -77,10 +78,10 @@
   background-color: var(--background-color);
   border: var(--dialog-border);
   border-radius: var(--dialog-border-radius);
-  z-index: var(--zindex-dialog);
   box-shadow: var(--button-box-shadow);
   min-width: var(--menu-min-width);
   max-width: var(--menu-max-width);
+  z-index: var(--zindex-dialog);
 }
 
 .title__account-menu--invisible {
@@ -105,19 +106,74 @@
   margin: var(--margin-vertical) 0;
 }
 
-.title__delete-account {
-  margin: var(--margin-vertical) var(--margin-horizontal);
-}
-
-.title__delete-account:hover {
-  background-color: var(--button-background-color);
-}
-
+.title__delete-account,
 .title__logout {
   margin: var(--margin-vertical) var(--margin-horizontal);
 }
 
+.title__delete-account:hover,
 .title__logout:hover {
+  background-color: var(--button-background-color);
+}
+
+.title__help {
+  position: absolute;
+  top: max(var(--safe-area-top), var(--responsive-font-size) * 1);
+  left: max(var(--safe-area-left), var(--responsive-font-size) * 1);
+}
+
+.title__help-icon {
+  --size: max(var(--responsive-font-size) * 2.5, 32px);
+
+  width: var(--size);
+  height: var(--size);
+  margin-right: calc(var(--responsive-font-size) * 0.2);
+}
+
+.title__help-menu {
+  --margin-horizontal: calc(var(--responsive-font-size) * 1);
+  --margin-vertical: calc(var(--margin-horizontal) * 0.5);
+  --menu-max-width: 95vw;
+
+  display: flex;
+  flex-direction: column;
+  margin-top: calc(var(--responsive-font-size) * 0.7);
+  color: var(--font-color);
+  font-size: var(--responsive-font-size);
+  background-color: var(--background-color);
+  border: var(--dialog-border);
+  border-radius: var(--dialog-border-radius);
+  box-shadow: var(--button-box-shadow);
+  max-width: var(--menu-max-width);
+  padding: calc(var(--margin-horizontal) * 0.5);
+  z-index: var(--zindex-dialog);
+}
+
+.title__help-menu--invisible {
+  display: none;
+}
+
+.title__help-menu-separation {
+  height: 0;
+  border-top: solid #626262 1px;
+  margin: var(--margin-vertical) 0;
+}
+
+.title__how-to-play,
+.title__trailer,
+.title__terms-of-service,
+.title__privacy-policy,
+.title__contact {
+  text-decoration: none;
+  color: var(--button-font-color);
+  margin: var(--margin-vertical) var(--margin-horizontal);
+}
+
+.title__how-to-play:hover,
+.title__trailer:hover,
+.title__terms-of-service:hover,
+.title__privacy-policy:hover,
+.title__contact:hover {
   background-color: var(--button-background-color);
 }
 
@@ -188,11 +244,7 @@
   font-size: calc(var(--responsive-font-size) * 0.8);
 }
 
-.title__music,
-.title__how-to-play,
-.title__terms-of-service,
-.title__privacy-policy,
-.title__contact {
+.title__music {
   font-size: calc(var(--responsive-font-size) * 0.8);
   text-decoration: none;
   color: var(--button-font-color);

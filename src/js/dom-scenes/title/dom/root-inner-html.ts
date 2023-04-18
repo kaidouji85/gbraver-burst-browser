@@ -2,6 +2,7 @@ import { escapeHTML } from "../../../dom/escape-html";
 import type { TitleAccount } from "../title-account";
 import {
   ACCOUNT_CLASS,
+  INVISIBLE__HELP_MENU_CLASS,
   INVISIBLE_ACCOUNT_CLASS,
   INVISIBLE_ACCOUNT_MENU_CLASS,
   INVISIBLE_LOGIN_CLASS,
@@ -59,7 +60,7 @@ export function rootInnerHTML(
     ? NET_BATTLE_CLASS
     : INVISIBLE_NET_BATTLE_CLASS;
   return `
-    <div class="${ROOT_CLASS}__header">
+    <div class="${ROOT_CLASS}__account-controller">
       <button data-id="${ids.login}" class="${loginClassName}">ログイン</button>
       <div class="${accountClassName}">
         <img class="${ROOT_CLASS}__avatar" data-id="${ids.avatar}" >
@@ -72,6 +73,16 @@ export function rootInnerHTML(
           <div class="${ROOT_CLASS}__delete-account" data-id="${ids.deleteAccount}">アカウント削除</div>
           <div class="${ROOT_CLASS}__logout" data-id="${ids.logout}">ログアウト</div>
         </div>
+      </div>
+    </div>
+    <div class="${ROOT_CLASS}__help">
+      <img class="${ROOT_CLASS}__help-icon" data-id="${ids.helpIcon}">
+      <div class="${INVISIBLE__HELP_MENU_CLASS}" data-id="${ids.helpMenu}">
+        <a class="${ROOT_CLASS}__how-to-play" href="${params.howToPlayURL}" target="_blank" rel="noopener">遊び方</a>
+        <div class="${ROOT_CLASS}__help-menu-separation"></div>
+        <a class="${ROOT_CLASS}__terms-of-service" href="${params.termsOfServiceURL}" target="_blank" rel="noopener">利用規約</a>
+        <a class="${ROOT_CLASS}__privacy-policy" href="${params.privacyPolicyURL}" target="_blank" rel="noopener">プライバシーポリシー</a>
+        <a class="${ROOT_CLASS}__contact" href="${params.contactURL}" target="_blank" rel="noopener">問い合わせ</a>
       </div>
     </div>
     <div class="${ROOT_CLASS}__contents">
@@ -90,10 +101,6 @@ export function rootInnerHTML(
         <span class="${ROOT_CLASS}__copy-rights-owner">Pegass85</span>
       </small>
       <small class="${ROOT_CLASS}__music">音楽 魔王魂</small>
-      <a class="${ROOT_CLASS}__how-to-play" href="${params.howToPlayURL}" target="_blank" rel="noopener">遊び方</a>
-      <a class="${ROOT_CLASS}__terms-of-service" href="${params.termsOfServiceURL}" target="_blank" rel="noopener">利用規約</a>
-      <a class="${ROOT_CLASS}__privacy-policy" href="${params.privacyPolicyURL}" target="_blank" rel="noopener">プライバシーポリシー</a>
-      <a class="${ROOT_CLASS}__contact" href="${params.contactURL}" target="_blank" rel="noopener">問い合わせ</a>
     </div>
   `;
 }

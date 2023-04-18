@@ -17,7 +17,7 @@ import { pushWindowsStream } from "../window/push-window";
 import type { Resize } from "../window/resize";
 import { resizeStream } from "../window/resize";
 import { postBattleConnector } from "./action-connector/post-battle-connector";
-import type { GbraverBurstBrowserConfigRepository } from "./config/browser-config";
+import { GbraverBurstBrowserConfigRepository } from "./config/browser-config";
 import { DOMDialogBinder } from "./dom-dialog-binder";
 import { DOMFloaters } from "./dom-floaters/dom-floaters";
 import { DOMSceneBinder } from "./dom-scene-binder";

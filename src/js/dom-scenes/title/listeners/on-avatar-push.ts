@@ -1,6 +1,7 @@
 import { pop } from "../../../dom/animation";
 import type { PushDOM } from "../../../dom/event-stream";
 import type { TitleProps } from "../props";
+import { isAccountMenuOpen } from "./is-account-menu-open";
 import { openAccountMenu } from "./open-account-menu";
 
 /**
@@ -15,7 +16,7 @@ export function onAvatarPush(
 ): void {
   action.event.preventDefault();
 
-  if (!props.isAccountMenuOpen) {
+  if (!isAccountMenuOpen(props)) {
     action.event.stopPropagation();
     props.changeValue.play();
     pop(props.avatar, 1.2);
