@@ -18,9 +18,6 @@ export type TitleProps = {
   /** 排他制御 */
   exclusive: Exclusive;
 
-  /** アカウントメニューを開いているか否か、trueで開いている */
-  isAccountMenuOpen: boolean;
-
   /** ルートHTML要素 */
   root: HTMLElement;
 
@@ -143,7 +140,6 @@ export function createTitleProps(params: CreateTitlePropsParams): TitleProps {
     params.resources.paths.find((v) => v.id === PathIds.TITLE_BACK)?.path ?? "";
   return {
     exclusive: new Exclusive(),
-    isAccountMenuOpen: false,
     root,
     login: elements.login,
     accountMenu: elements.accountMenu,

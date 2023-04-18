@@ -1,4 +1,4 @@
-import { HELP_MENU } from "../dom/class-name";
+import { HELP_MENU_CLASS } from "../dom/class-name";
 import { TitleProps } from "../props";
 
 /**
@@ -7,5 +7,5 @@ import { TitleProps } from "../props";
  * @return 判定結果、trueでヘルプメニューを表示している
  */
 export function isHelpMenuOpen(props: Readonly<TitleProps>): boolean {
-  return props.helpMenu.className === HELP_MENU;
+  return props.helpMenu.className === HELP_MENU_CLASS;
 }

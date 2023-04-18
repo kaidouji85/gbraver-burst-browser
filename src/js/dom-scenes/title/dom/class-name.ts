@@ -20,10 +20,10 @@ export const ACCOUNT_MENU_CLASS = `${ROOT_CLASS}__account-menu`;
 export const INVISIBLE_ACCOUNT_MENU_CLASS = `${ACCOUNT_MENU_CLASS}--invisible`;
 
 /** ヘルプメニュー class属性*/
-export const HELP_MENU = `${ROOT_CLASS}__help-menu`;
+export const HELP_MENU_CLASS = `${ROOT_CLASS}__help-menu`;
 
 /** ヘルプメニュー 非表示 class属性*/
-export const INVISIBLE__HELP_MENU = `${HELP_MENU}--invisible`;
+export const INVISIBLE__HELP_MENU_CLASS = `${HELP_MENU_CLASS}--invisible`;
 
 /** ネット対戦ボタン class属性 */
 export const NET_BATTLE_CLASS = `${ROOT_CLASS}__net-battle`;

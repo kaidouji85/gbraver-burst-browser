@@ -1,4 +1,4 @@
-import { HELP_MENU } from "../dom/class-name";
+import { HELP_MENU_CLASS } from "../dom/class-name";
 import { TitleProps } from "../props";
 
 /**
@@ -6,5 +6,5 @@ import { TitleProps } from "../props";
  * @param props 画面プロパティ
  */
 export function openHelpMenu(props: TitleProps): void {
-  props.helpMenu.className = HELP_MENU;
+  props.helpMenu.className = HELP_MENU_CLASS;
 }
