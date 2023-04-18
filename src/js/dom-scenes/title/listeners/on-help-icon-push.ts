@@ -15,7 +15,7 @@ export function onHelpIconPush(props: TitleProps, action: Readonly<PushDOM>): vo
   if (!isHelpMenuOpen(props)) {
     action.event.stopPropagation();
     props.changeValue.play();
-    pop(props.helpIcon);
+    pop(props.helpIcon, 1.3);
     openHelpMenu(props);
   }
 }
