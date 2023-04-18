@@ -5,6 +5,7 @@ import type { TitleProps } from "../props";
 import { onArcadePush } from "./on-arcade-push";
 import { onAvatarPush } from "./on-avatar-push";
 import { onConfigPush } from "./on-config-push";
+import { onHelpAnkerPush } from "./on-help-anker-push";
 import { onHelpIconPush } from "./on-help-icon-push";
 import { onLoginPush } from "./on-login-push";
 import { onLogoutPush } from "./on-logout-push";
@@ -33,6 +34,11 @@ export function bindEventListeners(props: TitleProps): Unsubscribable[] {
     pushDOMStream(props.helpIcon).subscribe((action) => {
       onHelpIconPush(props, action);
     }),
+    ...[...props.helpMenu.querySelectorAll("a")].map((anker) =>
+      pushDOMStream(anker).subscribe((action) => {
+        onHelpAnkerPush(action);
+      })
+    ),
     pushDOMStream(props.deleteAccount).subscribe((action) => {
       onPushDeleteAccount(props, action);
     }),
