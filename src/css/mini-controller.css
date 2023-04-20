@@ -11,14 +11,11 @@
     transform: translateX(-50%);
     color: var(--font-color);
     background-color: var(--background-color);
-    border: var(--dialog-border);
     border-radius: var(--dialog-border-radius);
     z-index: var(--zindex-dialog);
-    padding: calc(var(--responsive-font-size) * 2);
     display: grid;
-    grid-template-columns: auto auto;
-    grid-template-rows: 1fr 1fr 1fr;
-    grid-gap: calc(var(--responsive-font-size) * 0.6);
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
   }
 }
 
@@ -28,50 +25,22 @@
   }
 }
 
-.mini-controller__attack-label {
-  grid-column: 1;
+.mini-controller__batteries {
+  grid-column: 1 / 3;
   grid-row: 1;
   display: flex;
-  align-items: center;
-  font-size: var(--font-size);
 }
 
-.mini-controller__battery-buttons {
-  grid-column: 2;
-  grid-row: 1;
-  display: flex;
-  gap: calc(var(--responsive-font-size) * 0.2);
-}
-
-.mini-controller__battery-button {
+.mini-controller__battery {
   flex: 1;
-  font-size: var(--font-size);
 }
 
-.mini-controller__burst-label {
+.mini-controller__burst {
   grid-column: 1;
   grid-row: 2;
-  display: flex;
-  align-items: center;
-  font-size: var(--font-size);
 }
 
-.mini-controller__burst-button {
+.mini-controller__pilor {
   grid-column: 2;
   grid-row: 2;
-  font-size: var(--font-size);
-}
-
-.mini-controller__pilot-label {
-  grid-column: 1;
-  grid-row: 3;
-  display: flex;
-  align-items: center;
-  font-size: var(--font-size);
-}
-
-.mini-controller__pilot-button {
-  grid-column: 2;
-  grid-row: 3;
-  font-size: var(--font-size);
 }
