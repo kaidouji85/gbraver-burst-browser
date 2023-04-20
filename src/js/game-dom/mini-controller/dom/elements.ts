@@ -17,8 +17,14 @@ export type Elements = {
  * @return 抽出結果
  */
 export function extractElements(root: HTMLElement, ids: DataIDs): Elements {
-  const batteries: HTMLElement = root.querySelector(`[data-id="${ids.batteries}"]`) ?? document.createElement("div");
-  const burst: HTMLElement = root.querySelector(`[data-id="${ids.burst}"]`) ?? document.createElement("div");
-  const pilot: HTMLElement = root.querySelector(`[data-id="${ids.pilot}"]`) ?? document.createElement("div");
+  const batteries: HTMLElement =
+    root.querySelector(`[data-id="${ids.batteries}"]`) ??
+    document.createElement("div");
+  const burst: HTMLElement =
+    root.querySelector(`[data-id="${ids.burst}"]`) ??
+    document.createElement("div");
+  const pilot: HTMLElement =
+    root.querySelector(`[data-id="${ids.pilot}"]`) ??
+    document.createElement("div");
   return { batteries, burst, pilot };
 }

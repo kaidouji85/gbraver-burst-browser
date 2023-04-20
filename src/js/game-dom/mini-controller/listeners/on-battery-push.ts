@@ -7,7 +7,10 @@ import { getBattery } from "./get-battery";
  * @param props コンポネントプロパティ
  * @param action アクション
  */
-export function onBatteryPush(props: Readonly<MiniControllerProps>, action: Readonly<PushDOM>): void {
+export function onBatteryPush(
+  props: Readonly<MiniControllerProps>,
+  action: Readonly<PushDOM>
+): void {
   action.event.preventDefault();
   action.event.stopPropagation();
   if (!(action.event.target instanceof HTMLElement)) {

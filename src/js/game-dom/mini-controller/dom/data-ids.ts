@@ -7,4 +7,3 @@ export type DataIDs = {
   /** パイロットコマンド */
   pilot: string;
 };
-

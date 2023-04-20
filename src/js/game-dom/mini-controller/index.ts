@@ -1,6 +1,7 @@
 import { Observable, Unsubscribable } from "rxjs";
-import { createMiniControllerProps, MiniControllerProps } from "./props";
+
 import { bindEventListeners } from "./listeners";
+import { createMiniControllerProps, MiniControllerProps } from "./props";
 
 /** ミニコントローラ */
 export class MiniController {
@@ -21,7 +22,7 @@ export class MiniController {
    * デストラクタ相当の処理
    */
   destructor(): void {
-    this.#unsubscribers.forEach(v => {
+    this.#unsubscribers.forEach((v) => {
       v.unsubscribe();
     });
   }
