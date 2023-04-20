@@ -1,4 +1,4 @@
-import { MiniControllerProps, createMiniControllerProps } from "./props";
+import { createMiniControllerProps, MiniControllerProps } from "./props";
 
 /** ミニコントローラ */
 export class MiniController {
