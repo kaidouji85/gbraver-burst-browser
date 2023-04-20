@@ -5,7 +5,10 @@
   .mini-controller {
     --font-size: calc(var(--responsive-font-size) * 1);
 
-    position: absolute;
+    position: fixed;
+    bottom: max(calc(var(--responsive-font-size * 1)), var(--safe-area-bottom));
+    left: 50vw;
+    transform: translateX(-50%);
     color: var(--font-color);
     background-color: var(--background-color);
     border: var(--dialog-border);
@@ -15,7 +18,7 @@
     display: grid;
     grid-template-columns: auto auto;
     grid-template-rows: 1fr 1fr 1fr;
-    grid-gap: calc(var(--responsive-font-size) * 0.2);
+    grid-gap: calc(var(--responsive-font-size) * 0.6);
   }
 }
 
