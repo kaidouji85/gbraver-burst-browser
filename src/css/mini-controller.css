@@ -5,7 +5,7 @@
   .mini-controller {
     --font-size: calc(var(--responsive-font-size) * 1);
     --gap: 1px;
-    --button-padding: calc(var(--responsive-font-size) * 0.3);
+    --button-padding: calc(var(--responsive-font-size) * 0.5);
 
     position: fixed;
     bottom: max(calc(var(--responsive-font-size * 1)), var(--safe-area-bottom));
@@ -41,6 +41,8 @@
   font-size: var(--font-size);
   background-color: var(--sub-button-background-color);
   padding: var(--button-padding);
+  border: none;
+  outline: none;
   display: flex;
   align-items: center;
   justify-content: center;
