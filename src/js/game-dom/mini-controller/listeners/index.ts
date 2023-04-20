@@ -2,6 +2,7 @@ import { Unsubscribable } from "rxjs";
 import { MiniControllerProps } from "../props";
 import { pushDOMStream } from "../../../dom/event-stream";
 import { onBurstPush } from "./on-burst-push";
+import { onPilotPush } from "./on-pilot-push";
 
 /**
  * 設定画面にイベントリスナをバインドする
@@ -11,7 +12,10 @@ import { onBurstPush } from "./on-burst-push";
 export function bindEventListeners(props: MiniControllerProps): Unsubscribable[] {
   return [
     pushDOMStream(props.burst).subscribe(action => {
-      onBurstPush(action);
-    })
+      onBurstPush(props, action);
+    }),
+    pushDOMStream(props.pilot).subscribe(action => {
+      onPilotPush(props, action);
+    }),
   ];
 }

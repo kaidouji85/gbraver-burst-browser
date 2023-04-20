@@ -7,5 +7,11 @@ export default {
 
 export const miniController = domStub(() => {
   const controller = new MiniController();
+  controller.burstPushNotifier().subscribe(() => {
+    console.log("burst");
+  });
+  controller.pilotPushNotifier().subscribe(() => {
+    console.log("pilot");
+  });
   return controller.getRootHTMLElement();
 });

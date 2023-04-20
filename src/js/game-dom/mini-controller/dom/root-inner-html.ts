@@ -17,6 +17,6 @@ export function rootInnerHTML(ids: DataIDs): string {
       <div class="${ROOT}__battery">5</div>
     </div>
     <button type="button" class="${ROOT}__burst" data-id="${ids.burst}" accesskey="b">バースト(b)</button>
-    <div class="${ROOT}__pilot" data-id="${ids.pilot}">パイロット(p)</div>
+    <button type="button" class="${ROOT}__pilot" data-id="${ids.pilot}" accesskey="p">パイロット(p)</button>
   `;
 }

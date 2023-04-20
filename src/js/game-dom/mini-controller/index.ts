@@ -1,4 +1,4 @@
-import { Unsubscribable } from "rxjs";
+import { Observable, Unsubscribable } from "rxjs";
 import { createMiniControllerProps, MiniControllerProps } from "./props";
 import { bindEventListeners } from "./listeners";
 
@@ -32,5 +32,21 @@ export class MiniController {
    */
   getRootHTMLElement(): HTMLElement {
     return this.#props.root;
+  }
+
+  /**
+   * バーストボタン押下通知
+   * @return 通知ストリーム
+   */
+  burstPushNotifier(): Observable<void> {
+    return this.#props.burstPush;
+  }
+
+  /**
+   * パイロットボタン押下通知
+   * @return 通知ストリーム
+   */
+  pilotPushNotifier(): Observable<void> {
+    return this.#props.pilotPush;
   }
 }

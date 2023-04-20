@@ -1,3 +1,4 @@
+import { Subject } from "rxjs";
 import { domUuid } from "../../uuid/dom-uuid";
 import { ROOT } from "./dom/class-name";
 import { extractElements } from "./dom/elements";
@@ -13,6 +14,10 @@ export type MiniControllerProps = {
   burst: HTMLElement;
   /** パイロットコマンド */
   pilot: HTMLElement;
+  /** バーストボタン押下ストリーム */
+  burstPush: Subject<void>;
+  /** パイロットボタン押下ストリーム */
+  pilotPush: Subject<void>;
 };
 
 /**
@@ -28,5 +33,7 @@ export function createMiniControllerProps(): MiniControllerProps {
   return {
     ...elements,
     root,
+    burstPush: new Subject(),
+    pilotPush: new Subject(),
   };
 }

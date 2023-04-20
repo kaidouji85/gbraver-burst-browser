@@ -4,7 +4,7 @@
 @media (orientation: landscape) {
   .mini-controller {
     --font-size: calc(var(--responsive-font-size) * 1);
-    --gap: max(2px, var(--responsive-font-size) * 0.3);
+    --gap: 1px;
     --button-padding: calc(var(--responsive-font-size) * 0.3);
 
     position: fixed;
@@ -64,14 +64,11 @@
   background-color: var(--sub-button-background-color);
   padding: var(--button-padding);
   border: none;
+  outline: none;
   display: flex;
   align-items: center;
   justify-content: center;
   user-select:none;
-}
-
-.mini-controller__burst {
-  outline: none;
 }
 
 .mini-controller__pilot {
@@ -82,6 +79,8 @@
   border-bottom-right-radius: var(--dialog-border-radius);
   background-color: var(--sub-button-background-color);
   padding: var(--button-padding);
+  border: none;
+  outline: none;
   display: flex;
   align-items: center;
   justify-content: center;
