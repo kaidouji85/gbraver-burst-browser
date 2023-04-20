@@ -14,6 +14,8 @@ export type MiniControllerProps = {
   burst: HTMLElement;
   /** パイロットコマンド */
   pilot: HTMLElement;
+  /** バッテリーボタン押下ストリーム、numberはバッテリー値 */
+  batteryPush: Subject<number>;
   /** バーストボタン押下ストリーム */
   burstPush: Subject<void>;
   /** パイロットボタン押下ストリーム */
@@ -33,6 +35,7 @@ export function createMiniControllerProps(): MiniControllerProps {
   return {
     ...elements,
     root,
+    batteryPush: new Subject(),
     burstPush: new Subject(),
     pilotPush: new Subject(),
   };

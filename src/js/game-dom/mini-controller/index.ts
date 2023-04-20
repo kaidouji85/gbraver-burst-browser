@@ -35,6 +35,14 @@ export class MiniController {
   }
 
   /**
+   * バッテリーボタン押下通知
+   * @return 通知ストリーム、numberはバッテリー値
+   */
+  batteryPushNotigier(): Observable<number> {
+    return this.#props.batteryPush;
+  }
+
+  /**
    * バーストボタン押下通知
    * @return 通知ストリーム
    */
