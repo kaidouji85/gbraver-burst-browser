@@ -10,7 +10,6 @@
     position: fixed;
     bottom: max(calc(var(--responsive-font-size * 1)), var(--safe-area-bottom));
     right: max(calc(var(--responsive-font-size * 1)), var(--safe-area-right));
-    color: var(--font-color);
     background-color: var(--font-color);
     border-radius: var(--dialog-border-radius);
     z-index: var(--zindex-dialog);
@@ -38,6 +37,8 @@
 
 .mini-controller__battery {
   flex: 1;
+  color: var(--font-color);
+  font-size: var(--font-size);
   background-color: var(--sub-button-background-color);
   padding: var(--button-padding);
   display: flex;
@@ -57,18 +58,27 @@
 .mini-controller__burst {
   grid-column: 1;
   grid-row: 2;
+  color: var(--font-color);
+  font-size: var(--font-size);
   border-bottom-left-radius: var(--dialog-border-radius);
   background-color: var(--sub-button-background-color);
   padding: var(--button-padding);
+  border: none;
   display: flex;
   align-items: center;
   justify-content: center;
   user-select:none;
 }
 
+.mini-controller__burst {
+  outline: none;
+}
+
 .mini-controller__pilot {
   grid-column: 2;
   grid-row: 2;
+  color: var(--font-color);
+  font-size: var(--font-size);
   border-bottom-right-radius: var(--dialog-border-radius);
   background-color: var(--sub-button-background-color);
   padding: var(--button-padding);
