@@ -1,9 +1,11 @@
 import { MessageWindow } from "../src/js/game-dom/message-window/message-window";
 import type { DOMStubStory } from "./stub/dom-stub";
 import { domStub } from "./stub/dom-stub";
+
 export default {
   title: "message-window",
 };
+
 export const threeLine: DOMStubStory = domStub((resources) => {
   const dom = new MessageWindow({
     resources,
@@ -16,6 +18,7 @@ export const threeLine: DOMStubStory = domStub((resources) => {
   ]);
   return dom.getRootHTMLElement();
 });
+
 export const twoLine: DOMStubStory = domStub((resources) => {
   const dom = new MessageWindow({
     resources,
@@ -24,6 +27,7 @@ export const twoLine: DOMStubStory = domStub((resources) => {
   dom.messages(["2行表示します", "よっこいしょ"]);
   return dom.getRootHTMLElement();
 });
+
 export const oneLine: DOMStubStory = domStub((resources) => {
   const dom = new MessageWindow({
     resources,
@@ -32,6 +36,7 @@ export const oneLine: DOMStubStory = domStub((resources) => {
   dom.messages(["1行だけ表示"]);
   return dom.getRootHTMLElement();
 });
+
 export const zeroLine: DOMStubStory = domStub((resources) => {
   const dom = new MessageWindow({
     resources,
@@ -40,6 +45,7 @@ export const zeroLine: DOMStubStory = domStub((resources) => {
   dom.messages([]);
   return dom.getRootHTMLElement();
 });
+
 export const left: DOMStubStory = domStub((resources) => {
   const dom = new MessageWindow({
     resources,
@@ -49,6 +55,7 @@ export const left: DOMStubStory = domStub((resources) => {
   dom.messages(["左側表示です"]);
   return dom.getRootHTMLElement();
 });
+
 export const right: DOMStubStory = domStub((resources) => {
   const dom = new MessageWindow({
     resources,
@@ -58,6 +65,7 @@ export const right: DOMStubStory = domStub((resources) => {
   dom.messages(["右側表示です"]);
   return dom.getRootHTMLElement();
 });
+
 export const shinya: DOMStubStory = domStub((resources) => {
   const dom = new MessageWindow({
     resources,
@@ -71,6 +79,7 @@ export const shinya: DOMStubStory = domStub((resources) => {
   dom.messages(["シンヤ", "「力を貸してくれ、シンブンレイバー」"]);
   return dom.getRootHTMLElement();
 });
+
 export const shinyaRight: DOMStubStory = domStub((resources) => {
   const dom = new MessageWindow({
     resources,
@@ -84,6 +93,7 @@ export const shinyaRight: DOMStubStory = domStub((resources) => {
   dom.messages(["シンヤ", "「力を貸してくれ、シンブンレイバー」"]);
   return dom.getRootHTMLElement();
 });
+
 export const gai: DOMStubStory = domStub((resources) => {
   const dom = new MessageWindow({
     resources,
@@ -97,6 +107,7 @@ export const gai: DOMStubStory = domStub((resources) => {
   dom.messages(["ガイ", "「シンヤ、お前の力はその程度か」"]);
   return dom.getRootHTMLElement();
 });
+
 export const gaiRight: DOMStubStory = domStub((resources) => {
   const dom = new MessageWindow({
     resources,
@@ -110,6 +121,7 @@ export const gaiRight: DOMStubStory = domStub((resources) => {
   dom.messages(["ガイ", "「シンヤ、お前の力はその程度か」"]);
   return dom.getRootHTMLElement();
 });
+
 export const raito: DOMStubStory = domStub((resources) => {
   const dom = new MessageWindow({
     resources,
@@ -123,6 +135,7 @@ export const raito: DOMStubStory = domStub((resources) => {
   dom.messages(["ライト", "「難波の底力、見せたるでぇ」"]);
   return dom.getRootHTMLElement();
 });
+
 export const raitoRight: DOMStubStory = domStub((resources) => {
   const dom = new MessageWindow({
     resources,
@@ -136,6 +149,7 @@ export const raitoRight: DOMStubStory = domStub((resources) => {
   dom.messages(["ライト", "「難波の底力、見せたるでぇ」"]);
   return dom.getRootHTMLElement();
 });
+
 export const tsubasa: DOMStubStory = domStub((resources) => {
   const dom = new MessageWindow({
     resources,
@@ -149,6 +163,7 @@ export const tsubasa: DOMStubStory = domStub((resources) => {
   dom.messages(["ツバサ", "「君の動きは、完全に見切った」"]);
   return dom.getRootHTMLElement();
 });
+
 export const tsubasaRight: DOMStubStory = domStub((resources) => {
   const dom = new MessageWindow({
     resources,
@@ -162,6 +177,7 @@ export const tsubasaRight: DOMStubStory = domStub((resources) => {
   dom.messages(["ツバサ", "「君の動きは、完全に見切った」"]);
   return dom.getRootHTMLElement();
 });
+
 export const doubleMessageWindows: DOMStubStory = domStub((resources) => {
   const root = document.createElement("div");
   const rightMessageWindow = new MessageWindow({
