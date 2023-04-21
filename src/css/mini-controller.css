@@ -35,7 +35,9 @@
   gap: var(--gap);
 }
 
-.mini-controller__battery {
+.mini-controller__battery,
+.mini-controller__battery--first,
+.mini-controller__battery--last {
   flex: 1;
   color: var(--font-color);
   font-size: var(--font-size);
@@ -49,16 +51,16 @@
   user-select: none;
 }
 
-.mini-controller__battery--invisible {
-  display: none;
-}
-
-.mini-controller__battery:visible:first-child {
+.mini-controller__battery--first {
   border-top-left-radius: var(--dialog-border-radius);
 }
 
-.mini-controller__battery:visible:last-child {
+.mini-controller__battery--last {
   border-top-right-radius: var(--dialog-border-radius);
+}
+
+.mini-controller__battery--invisible {
+  display: none;
 }
 
 .mini-controller__burst {
