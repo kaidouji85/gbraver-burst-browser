@@ -3,6 +3,7 @@ import * as R from "ramda";
 import { ROOT } from "./class-name";
 import { DataIDs } from "./data-ids";
 import { batteryButton } from "./battery-button";
+import { burstButton } from "./burst-button";
 
 /** バッテリーボタン最大個数 */
 const MAX_BATTERY_BUTTON = 9;
@@ -20,7 +21,7 @@ export function rootInnerHTML(ids: DataIDs): string {
     <div class="${ROOT}__batteries" data-id="${ids.batteries}">
       ${batteryButtons}
     </div>
-    <button type="button" class="${ROOT}__burst" data-id="${ids.burst}" accesskey="b">バースト(b)</button>
+    ${burstButton(ids.burst)}
     <button type="button" class="${ROOT}__pilot" data-id="${ids.pilot}" accesskey="p">パイロット(p)</button>
   `;
 }
