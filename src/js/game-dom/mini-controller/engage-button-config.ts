@@ -1,7 +1,6 @@
 import { ButtonConfig } from "./button-config";
 import { getBattery, invisibleBattery, visibleBattery, visibleBatteryAsFirst, visibleBatteryAsLast } from "./dom/battery-button";
 import { MiniControllerProps } from "./props";
-import { getBatteryButtons } from "./get-battery-buttons";
 
 /**
  * ボタン設定をコンポネントに反映される
@@ -9,7 +8,7 @@ import { getBatteryButtons } from "./get-battery-buttons";
  * @param config ボタン設定
  */
 export function engageButtonConfig(props: MiniControllerProps, config: ButtonConfig): void {
-  getBatteryButtons(props).forEach(batteryButton => {
+  props.batteryButtons.forEach(batteryButton => {
     const battery = getBattery(batteryButton);
     if (battery === null) {
       return;

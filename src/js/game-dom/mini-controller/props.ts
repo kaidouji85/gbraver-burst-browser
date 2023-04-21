@@ -9,8 +9,8 @@ import { rootInnerHTML } from "./dom/root-inner-html";
 export type MiniControllerProps = {
   /** ルートHTML要素 */
   root: HTMLElement;
-  /** バッテリーコマンドを集めたもの */
-  batteries: HTMLElement;
+  /** 全バッテリーボタン */
+  batteryButtons: HTMLButtonElement[];
   /** バーストコマンド */
   burst: HTMLElement;
   /** パイロットコマンド */
@@ -33,9 +33,11 @@ export function createMiniControllerProps(): MiniControllerProps {
   const ids = { batteries: domUuid(), burst: domUuid(), pilot: domUuid() };
   root.innerHTML = rootInnerHTML(ids);
   const elements = extractElements(root, ids);
+  const batteryButtons = [...elements.batteries.querySelectorAll("button")];
   return {
     ...elements,
     root,
+    batteryButtons,
     batteryPush: new Subject(),
     burstPush: new Subject(),
     pilotPush: new Subject(),
