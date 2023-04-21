@@ -50,3 +50,21 @@ export function visibleBatteryAsLast(element: HTMLButtonElement): void {
 export function invisibleBattery(element: HTMLButtonElement): void {
   element.className = BATTERY_INVISIBLE;
 }
+
+/**
+ * バッテリーボタンを操作可能にするヘルパー関数
+ * @param element 操作対象のHTML要素
+ */
+export function enabledBatttery(element: HTMLButtonElement): void {
+  element.disabled = false;
+  element.innerText = `${getBattery(element) ?? 0}`
+}
+
+/**
+ * バッテリーボタンを操作不可能にするヘルパー関数
+ * @param element 操作対象のHTML要素
+ */
+export function disabledBattery(element: HTMLButtonElement): void {
+  element.disabled = true;
+  element.innerText = "";
+}

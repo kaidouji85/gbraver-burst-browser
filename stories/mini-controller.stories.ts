@@ -8,7 +8,7 @@ export default {
 export const miniController = domStub(() => {
   const controller = new MiniController({
     maxBattery: 5,
-    battery: 5,
+    battery: 3,
     canBurst: true,
     canPilotSkill: true,
   });

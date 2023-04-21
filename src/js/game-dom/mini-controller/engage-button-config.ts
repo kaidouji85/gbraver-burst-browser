@@ -1,5 +1,5 @@
 import { ButtonConfig } from "./button-config";
-import { getBattery, invisibleBattery, visibleBattery, visibleBatteryAsFirst, visibleBatteryAsLast } from "./dom/battery-button";
+import { disabledBattery, enabledBatttery, getBattery, invisibleBattery, visibleBattery, visibleBatteryAsFirst, visibleBatteryAsLast } from "./dom/battery-button";
 import { MiniControllerProps } from "./props";
 
 /**
@@ -14,7 +14,7 @@ export function engageButtonConfig(props: MiniControllerProps, config: ButtonCon
       return;
     }
 
-    const isVisible = battery <= config.battery;
+    const isVisible = battery <= config.maxBattery;
     const isFirst = battery === 0;
     const isLast = battery === config.maxBattery;
     if (isVisible && isFirst) {
@@ -25,6 +25,13 @@ export function engageButtonConfig(props: MiniControllerProps, config: ButtonCon
       visibleBattery(batteryButton);
     } else {
       invisibleBattery(batteryButton);
+    }
+
+    const isEnabled = battery <= config.battery;
+    if (isEnabled) {
+      enabledBatttery(batteryButton);
+    } else {
+      disabledBattery(batteryButton);
     }
   });
 }
