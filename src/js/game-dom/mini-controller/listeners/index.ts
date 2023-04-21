@@ -5,6 +5,7 @@ import { MiniControllerProps } from "../props";
 import { onBatteryPush } from "./on-battery-push";
 import { onBurstPush } from "./on-burst-push";
 import { onPilotPush } from "./on-pilot-push";
+import { getBatteryButtons } from "../get-battery-buttons";
 
 /**
  * 設定画面にイベントリスナをバインドする
@@ -21,8 +22,8 @@ export function bindEventListeners(
     pushDOMStream(props.pilot).subscribe((action) => {
       onPilotPush(props, action);
     }),
-    ...[...props.batteries.querySelectorAll("button")].map((battery) =>
-      pushDOMStream(battery).subscribe((action) => {
+    ...getBatteryButtons(props).map((batteryButton) =>
+      pushDOMStream(batteryButton).subscribe((action) => {
         onBatteryPush(props, action);
       })
     ),

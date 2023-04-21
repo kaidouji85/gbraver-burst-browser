@@ -49,11 +49,15 @@
   user-select: none;
 }
 
-.mini-controller__battery:first-child {
+.mini-controller__battery--invisible {
+  display: none;
+}
+
+.mini-controller__battery:visible:first-child {
   border-top-left-radius: var(--dialog-border-radius);
 }
 
-.mini-controller__battery:last-child {
+.mini-controller__battery:visible:last-child {
   border-top-right-radius: var(--dialog-border-radius);
 }
 

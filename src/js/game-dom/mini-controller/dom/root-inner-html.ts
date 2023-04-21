@@ -2,18 +2,10 @@ import * as R from "ramda";
 
 import { ROOT } from "./class-name";
 import { DataIDs } from "./data-ids";
+import { batteryButton } from "./battery-button";
 
 /** バッテリーボタン最大個数 */
-const MAX_BATTERY_BUTTON = 6;
-
-/**
- * バッテリーボタンHTMLを生成する
- * @param battery バッテリー値
- * @return 生成結果
- */
-const batteryButton = (battery: number) => `
-  <button class="${ROOT}__battery" accesskey="${battery}" data-battery="${battery}">${battery}</button>
-`;
+const MAX_BATTERY_BUTTON = 9;
 
 /**
  * ルートHTML要素のinnerHTMLを生成する

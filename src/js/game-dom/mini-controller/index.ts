@@ -2,6 +2,8 @@ import { Observable, Unsubscribable } from "rxjs";
 
 import { bindEventListeners } from "./listeners";
 import { createMiniControllerProps, MiniControllerProps } from "./props";
+import { ButtonConfig } from "./button-config";
+import { engageButtonConfig } from "./engage-button-config";
 
 /** ミニコントローラ */
 export class MiniController {
@@ -12,9 +14,11 @@ export class MiniController {
 
   /**
    * コンストラクタ
+   * @param config ボタン設定
    */
-  constructor() {
+  constructor(config: ButtonConfig) {
     this.#props = createMiniControllerProps();
+    engageButtonConfig(this.#props, config);
     this.#unsubscribers = bindEventListeners(this.#props);
   }
 

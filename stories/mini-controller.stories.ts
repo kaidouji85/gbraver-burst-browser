@@ -6,7 +6,12 @@ export default {
 };
 
 export const miniController = domStub(() => {
-  const controller = new MiniController();
+  const controller = new MiniController({
+    maxBattery: 5,
+    battery: 5,
+    canBurst: true,
+    canPilotSkill: true,
+  });
   controller.batteryPushNotigier().subscribe((battery) => {
     console.log(`battery ${battery}`);
   });
