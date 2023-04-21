@@ -14,7 +14,7 @@ export const batteryButton = (battery: number) => `
  * @param element 取得元
  * @return 取得結果、取得できなかった場合はnullを返す
  */
-export function getBattery(element: HTMLElement): number | null {
+export function getBattery(element: HTMLButtonElement): number | null {
   const battery = parseInt(element.dataset.battery ?? "");
   return Number.isInteger(battery) ? battery : null;
 }
@@ -23,7 +23,7 @@ export function getBattery(element: HTMLElement): number | null {
  * バッテリーボタンを表示するヘルパー関数
  * @param element 操作対象のHTML要素
  */
-export function visibleBattery(element: HTMLElement): void {
+export function visibleBattery(element: HTMLButtonElement): void {
   element.className = BATTERY;
 }
 
@@ -31,7 +31,7 @@ export function visibleBattery(element: HTMLElement): void {
  * バッテリーボタンを先頭要素として表示するヘルパー関数
  * @param element 操作対象のHTML要素
  */
-export function visibleBatteryAsFirst(element: HTMLElement): void {
+export function visibleBatteryAsFirst(element: HTMLButtonElement): void {
   element.className = BATTERY_FIRST;
 }
 
@@ -39,7 +39,7 @@ export function visibleBatteryAsFirst(element: HTMLElement): void {
  * バッテリーボタンを末尾要素として表示するヘルパー関数
  * @param element 操作対象のHTML要素
  */
-export function visibleBatteryAsLast(element: HTMLElement): void {
+export function visibleBatteryAsLast(element: HTMLButtonElement): void {
   element.className = BATTERY_LAST;
 }
 
@@ -47,6 +47,6 @@ export function visibleBatteryAsLast(element: HTMLElement): void {
  * バッテリーボタンを非表示にするヘルパー関数
  * @param element 操作対象のHTML要素
  */
-export function invisibleBattery(element: HTMLElement): void {
+export function invisibleBattery(element: HTMLButtonElement): void {
   element.className = BATTERY_INVISIBLE;
 }

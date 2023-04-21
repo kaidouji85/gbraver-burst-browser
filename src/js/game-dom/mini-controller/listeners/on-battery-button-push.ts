@@ -4,20 +4,18 @@ import { getBattery } from "../dom/battery-button";
 
 /**
  * バッテリーボタンを押下した時の処理
+ * @param batteryButton 押されたバッテリーボタンのHTML要素
  * @param props コンポネントプロパティ
  * @param action アクション
  */
-export function onBatteryPush(
+export function onBatteryButtonPush(
+  batteryButton: HTMLButtonElement,
   props: Readonly<MiniControllerProps>,
   action: Readonly<PushDOM>
 ): void {
   action.event.preventDefault();
   action.event.stopPropagation();
-  if (!(action.event.target instanceof HTMLElement)) {
-    return;
-  }
-
-  const battery = getBattery(action.event.target);
+  const battery = getBattery(batteryButton);
   if (battery === null) {
     return;
   }
