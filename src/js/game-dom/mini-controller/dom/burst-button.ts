@@ -14,7 +14,8 @@ export const burstButton = (dataID: string) => `
  * @param element 操作対象のHTML要素
  */
 export function enabledBurst(element: HTMLButtonElement): void {
-  element.disabled = true;
+  element.disabled = false;
+  element.innerText = "バースト(b)";
 }
 
 /**
@@ -22,5 +23,6 @@ export function enabledBurst(element: HTMLButtonElement): void {
  * @param element 操作対象のHTML要素
  */
 export function disabledBurst(element: HTMLButtonElement): void {
-  element.innerText = "バースト(b)";
+  element.disabled = true;
+  element.innerText = "";
 }

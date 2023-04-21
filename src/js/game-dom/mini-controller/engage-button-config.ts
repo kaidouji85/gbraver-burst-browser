@@ -8,11 +8,12 @@ import {
   visibleBatteryAsFirst,
   visibleBatteryAsLast,
 } from "./dom/battery-button";
+import { disabledBurst, enabledBurst } from "./dom/burst-button";
 import { MiniControllerProps } from "./props";
 
 /**
  * バッテリーボタンに設定を反映させる
- * @param batteryButton 反映対象となるバッテリーボタン
+ * @param batteryButton 設定反映対象となるバッテリーボタン
  * @param config 設定
  */
 function engageBatteryButton(
@@ -46,6 +47,15 @@ function engageBatteryButton(
 }
 
 /**
+ * バーストボタンに設定を反映させる
+ * @param batteryButton 設定反映対象となるバーストボタン
+ * @param config 設定
+ */
+function engageBurstButton(burstButton: HTMLButtonElement, config: ButtonConfig): void {
+  config.canBurst ? enabledBurst(burstButton) : disabledBurst(burstButton);
+}
+
+/**
  * ボタン設定をコンポネントに反映される
  * @param props コンポネントプロパティ
  * @param config ボタン設定
@@ -57,4 +67,5 @@ export function engageButtonConfig(
   props.batteryButtons.forEach((batteryButton) => {
     engageBatteryButton(batteryButton, config);
   });
+  engageBurstButton(props.burst, config);
 }
