@@ -12,7 +12,7 @@ export type MiniControllerProps = {
   /** 全バッテリーボタン */
   batteryButtons: HTMLButtonElement[];
   /** バーストコマンド */
-  burst: HTMLElement;
+  burst: HTMLButtonElement;
   /** パイロットコマンド */
   pilot: HTMLElement;
   /** バッテリーボタン押下ストリーム、numberはバッテリー値 */

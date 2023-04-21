@@ -5,7 +5,7 @@ export type Elements = {
   /** バッテリーコマンドを集めたもの */
   batteries: HTMLElement;
   /** バーストコマンド */
-  burst: HTMLElement;
+  burst: HTMLButtonElement;
   /** パイロットコマンド */
   pilot: HTMLElement;
 };
@@ -20,9 +20,10 @@ export function extractElements(root: HTMLElement, ids: DataIDs): Elements {
   const batteries: HTMLElement =
     root.querySelector(`[data-id="${ids.batteries}"]`) ??
     document.createElement("div");
-  const burst: HTMLElement =
-    root.querySelector(`[data-id="${ids.burst}"]`) ??
-    document.createElement("div");
+  const selectedBurst = root.querySelector(`[data-id="${ids.burst}"]`);
+  const burst: HTMLButtonElement = selectedBurst instanceof HTMLButtonElement
+    ? selectedBurst
+    : document.createElement("button");
   const pilot: HTMLElement =
     root.querySelector(`[data-id="${ids.pilot}"]`) ??
     document.createElement("div");
