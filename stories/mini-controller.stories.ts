@@ -6,19 +6,20 @@ export default {
   title: "mini-controller",
 };
 
-const miniControllerStory = (config: ButtonConfig) => domStub(() => {
-  const controller = new MiniController(config);
-  controller.batteryPushNotigier().subscribe((battery) => {
-    console.log(`battery ${battery}`);
+const miniControllerStory = (config: ButtonConfig) =>
+  domStub(() => {
+    const controller = new MiniController(config);
+    controller.batteryPushNotigier().subscribe((battery) => {
+      console.log(`battery ${battery}`);
+    });
+    controller.burstPushNotifier().subscribe(() => {
+      console.log("burst");
+    });
+    controller.pilotPushNotifier().subscribe(() => {
+      console.log("pilot");
+    });
+    return controller.getRootHTMLElement();
   });
-  controller.burstPushNotifier().subscribe(() => {
-    console.log("burst");
-  });
-  controller.pilotPushNotifier().subscribe(() => {
-    console.log("pilot");
-  });
-  return controller.getRootHTMLElement();
-});
 
 export const battery5Full = miniControllerStory({
   battery: 5,

@@ -21,8 +21,8 @@ export function bindEventListeners(
     pushDOMStream(props.pilot).subscribe((action) => {
       onPilotPush(props, action);
     }),
-    ...props.batteryButtons.map(batteryButton => 
-      pushDOMStream(batteryButton).subscribe(action => {
+    ...props.batteryButtons.map((batteryButton) =>
+      pushDOMStream(batteryButton).subscribe((action) => {
         onBatteryButtonPush(batteryButton, props, action);
       })
     ),

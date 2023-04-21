@@ -1,9 +1,9 @@
 import { Observable, Unsubscribable } from "rxjs";
 
-import { bindEventListeners } from "./listeners";
-import { createMiniControllerProps, MiniControllerProps } from "./props";
 import { ButtonConfig } from "./button-config";
 import { engageButtonConfig } from "./engage-button-config";
+import { bindEventListeners } from "./listeners";
+import { createMiniControllerProps, MiniControllerProps } from "./props";
 
 /** ミニコントローラ */
 export class MiniController {

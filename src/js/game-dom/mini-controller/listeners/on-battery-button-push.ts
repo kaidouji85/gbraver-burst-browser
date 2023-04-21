@@ -1,6 +1,6 @@
 import { PushDOM } from "../../../dom/event-stream";
-import { MiniControllerProps } from "../props";
 import { getBattery } from "../dom/battery-button";
+import { MiniControllerProps } from "../props";
 
 /**
  * バッテリーボタンを押下した時の処理

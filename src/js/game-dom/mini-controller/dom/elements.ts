@@ -21,9 +21,10 @@ export function extractElements(root: HTMLElement, ids: DataIDs): Elements {
     root.querySelector(`[data-id="${ids.batteries}"]`) ??
     document.createElement("div");
   const selectedBurst = root.querySelector(`[data-id="${ids.burst}"]`);
-  const burst: HTMLButtonElement = selectedBurst instanceof HTMLButtonElement
-    ? selectedBurst
-    : document.createElement("button");
+  const burst: HTMLButtonElement =
+    selectedBurst instanceof HTMLButtonElement
+      ? selectedBurst
+      : document.createElement("button");
   const pilot: HTMLElement =
     root.querySelector(`[data-id="${ids.pilot}"]`) ??
     document.createElement("div");

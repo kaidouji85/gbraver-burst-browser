@@ -1,4 +1,9 @@
-import { BATTERY, BATTERY_FIRST, BATTERY_INVISIBLE, BATTERY_LAST } from "./class-name";
+import {
+  BATTERY,
+  BATTERY_FIRST,
+  BATTERY_INVISIBLE,
+  BATTERY_LAST,
+} from "./class-name";
 
 /**
  * バッテリーボタンHTMLを生成する
@@ -57,7 +62,7 @@ export function invisibleBattery(element: HTMLButtonElement): void {
  */
 export function enabledBatttery(element: HTMLButtonElement): void {
   element.disabled = false;
-  element.innerText = `${getBattery(element) ?? 0}`
+  element.innerText = `${getBattery(element) ?? 0}`;
 }
 
 /**
