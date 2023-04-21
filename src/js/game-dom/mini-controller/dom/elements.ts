@@ -7,7 +7,7 @@ export type Elements = {
   /** バーストコマンド */
   burst: HTMLButtonElement;
   /** パイロットコマンド */
-  pilot: HTMLElement;
+  pilot: HTMLButtonElement;
 };
 
 /**
@@ -25,8 +25,9 @@ export function extractElements(root: HTMLElement, ids: DataIDs): Elements {
     selectedBurst instanceof HTMLButtonElement
       ? selectedBurst
       : document.createElement("button");
-  const pilot: HTMLElement =
-    root.querySelector(`[data-id="${ids.pilot}"]`) ??
-    document.createElement("div");
+  const selectedPilot = root.querySelector(`[data-id="${ids.pilot}"]`);
+  const pilot: HTMLButtonElement = selectedPilot instanceof HTMLButtonElement
+    ? selectedPilot
+    : document.createElement("button");
   return { batteries, burst, pilot };
 }

@@ -69,3 +69,10 @@ export const disabledBurst = miniControllerStory({
   canBurst: false,
   canPilotSkill: true,
 });
+
+export const disabledPilot = miniControllerStory({
+  battery: 3,
+  maxBattery: 5,
+  canBurst: true,
+  canPilotSkill: false,
+});
