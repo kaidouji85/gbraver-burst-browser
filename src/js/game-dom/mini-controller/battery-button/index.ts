@@ -34,6 +34,14 @@ export class BatteryButton {
   }
 
   /**
+   * ルートHTML要素を取得する
+   * @return 取得結果
+   */
+  getRootHTMLElement(): HTMLButtonElement {
+    return this.#props.root;
+  }
+
+  /**
    * バッテリー押下通知、numberはバッテリー値がセットされる
    * @return 通知ストリーム
    */
