@@ -1,7 +1,12 @@
 import { Observable, Unsubscribable } from "rxjs";
-import { BATTERY, BATTERY_FIRST, BATTERY_INVISIBLE, BATTERY_LAST } from "../dom/class-name";
 import { BatteryButtonProps, createBatteryButtonProps } from "./props";
 import { bindEventListeners } from "./procedure/bind-event-lisnters";
+import { visibleBattery } from "./procedure/visible-battery";
+import { visibleBatteryAsFirst } from "./procedure/visible-battery-as-first";
+import { visibleBatteryAsLast } from "./procedure/visible-battery-as-last";
+import { invisibleBattery } from "./procedure/invisible-battery";
+import { enabledBatttery } from "./procedure/enabled-batttery";
+import { disabledBattery } from "./procedure/disabled-battery";
 
 /** バッテリーボタン */
 export class BatteryButton {
@@ -40,43 +45,41 @@ export class BatteryButton {
    * バッテリーボタンを表示する
    */
   visibleBattery(): void {
-    this.#props.root.className = BATTERY;
+    visibleBattery(this.#props);
   }
 
   /**
    * バッテリーボタンを先頭要素として表示する
    */
   visibleBatteryAsFirst(): void {
-    this.#props.root.className = BATTERY_FIRST;
+    visibleBatteryAsFirst(this.#props);
   }
 
   /**
    * バッテリーボタンを末尾要素として表示する
    */
   visibleBatteryAsLast(): void {
-    this.#props.root.className = BATTERY_LAST;
+    visibleBatteryAsLast(this.#props);
   }
 
   /**
    * バッテリーボタンを非表示にする
    */
   invisibleBattery(): void {
-    this.#props.root.className = BATTERY_INVISIBLE;
+    invisibleBattery(this.#props);
   }
 
   /**
    * バッテリーボタンを操作可能にする
    */
   enabledBatttery(): void {
-    this.#props.root.disabled = false;
-    this.#props.root.innerText = `${this.#props.battery}`;
+    enabledBatttery(this.#props);
   }
 
   /**
    * バッテリーボタンを操作不可能にする
    */
   disabledBattery(): void {
-    this.#props.root.disabled = true;
-    this.#props.root.innerText = "";
+    disabledBattery(this.#props);
   }
 }

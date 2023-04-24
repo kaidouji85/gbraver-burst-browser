@@ -6,7 +6,7 @@ import { BatteryButtonProps } from "../props";
  * @param props コンポネントプロパティ
  * @param action アクション
  */
-export function onBatteryPush(props: BatteryButtonProps, action: Readonly<PushDOM>): void {
+export function onBatteryPush(props: Readonly<BatteryButtonProps>, action: Readonly<PushDOM>): void {
   action.event.preventDefault();
   action.event.stopPropagation();
   props.batteryPush.next(props.battery);
