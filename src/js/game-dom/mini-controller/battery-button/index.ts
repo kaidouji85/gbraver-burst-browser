@@ -1,8 +1,9 @@
 import { Observable, Unsubscribable } from "rxjs";
-import { BatteryButtonProps, createBatteryButtonProps } from "./props";
-import { bindEventListeners } from "./procedure/bind-event-lisnters";
+
 import { BatteryButtonConfig } from "./config";
+import { bindEventListeners } from "./procedure/bind-event-lisnters";
 import { engage } from "./procedure/engage";
+import { BatteryButtonProps, createBatteryButtonProps } from "./props";
 
 /** バッテリーボタン */
 export class BatteryButton {
@@ -24,7 +25,7 @@ export class BatteryButton {
    * デストラクタ相当の処理
    */
   destructor(): void {
-    this.#unsubscribers.forEach(v => {
+    this.#unsubscribers.forEach((v) => {
       v.unsubscribe();
     });
   }

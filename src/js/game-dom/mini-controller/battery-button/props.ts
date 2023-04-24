@@ -1,14 +1,15 @@
 import { Subject } from "rxjs";
+
 import { BATTERY } from "../dom/class-name";
 
 /** バッテリーボタンプロパティ */
 export type BatteryButtonProps = {
-    /** ルート要素 */
-    root: HTMLButtonElement;
-    /** バッテリー値 */
-    battery: number;
-    /** バッテリー押下ストリーム */
-    batteryPush: Subject<number>;
+  /** ルート要素 */
+  root: HTMLButtonElement;
+  /** バッテリー値 */
+  battery: number;
+  /** バッテリー押下ストリーム */
+  batteryPush: Subject<number>;
 };
 
 /**
@@ -21,5 +22,5 @@ export function createBatteryButtonProps(battery: number): BatteryButtonProps {
   root.className = BATTERY;
   root.accessKey = `${battery}`;
   const batteryPush = new Subject<number>();
-  return { root, battery, batteryPush};
+  return { root, battery, batteryPush };
 }

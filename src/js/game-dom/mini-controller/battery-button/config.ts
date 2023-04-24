@@ -4,4 +4,4 @@ export type BatteryButtonConfig = {
   battery: number;
   /** 最大バッテリー値 */
   maxBattery: number;
-}
+};

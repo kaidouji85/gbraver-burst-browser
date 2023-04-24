@@ -8,7 +8,10 @@ import { MiniControllerProps } from "../props";
  * @param batteryButton 設定反映対象となるバーストボタン
  * @param config 設定
  */
-function engageBurstButton(burstButton: HTMLButtonElement, config: ButtonConfig): void {
+function engageBurstButton(
+  burstButton: HTMLButtonElement,
+  config: ButtonConfig
+): void {
   config.canBurst ? enabledBurst(burstButton) : disabledBurst(burstButton);
 }
 
@@ -17,10 +20,12 @@ function engageBurstButton(burstButton: HTMLButtonElement, config: ButtonConfig)
  * @param batteryButton 設定反映対象となるパイロットボタン
  * @param config 設定
  */
-function engagePilotButton(pilotButton: HTMLButtonElement, config: ButtonConfig): void {
+function engagePilotButton(
+  pilotButton: HTMLButtonElement,
+  config: ButtonConfig
+): void {
   config.canPilotSkill ? enabledPilot(pilotButton) : disabledPilot(pilotButton);
 }
-
 
 /**
  * ボタン設定をコンポネントに反映される
