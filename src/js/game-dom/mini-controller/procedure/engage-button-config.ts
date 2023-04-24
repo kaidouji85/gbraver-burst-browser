@@ -1,4 +1,4 @@
-import { ButtonConfig } from "./button-config";
+import { ButtonConfig } from "../button-config";
 import {
   disabledBattery,
   enabledBatttery,
@@ -7,10 +7,10 @@ import {
   visibleBattery,
   visibleBatteryAsFirst,
   visibleBatteryAsLast,
-} from "./dom/battery-button";
-import { disabledBurst, enabledBurst } from "./dom/burst-button";
-import { disabledPilot, enabledPilot } from "./dom/pilot-button";
-import { MiniControllerProps } from "./props";
+} from "../dom/battery-button";
+import { disabledBurst, enabledBurst } from "../dom/burst-button";
+import { disabledPilot, enabledPilot } from "../dom/pilot-button";
+import { MiniControllerProps } from "../props";
 
 /**
  * バッテリーボタンに設定を反映させる
