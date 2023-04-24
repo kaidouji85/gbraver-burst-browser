@@ -1,9 +1,7 @@
+import { BatteryButtonConfig } from "./battery-button/config";
+
 /** コントローラーのボタン設定 */
-export type ButtonConfig = {
-  /** 最大バッテリー */
-  maxBattery: number;
-  /** 現在のバッテリー値 */
-  battery: number;
+export type ButtonConfig = BatteryButtonConfig & {
   /** バースト可能であるか、trueで可能 */
   canBurst: boolean;
   /** パイロットスキル可能であるか、trueで可能 */
