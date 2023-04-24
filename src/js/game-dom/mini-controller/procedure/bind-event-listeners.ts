@@ -2,7 +2,6 @@ import { Unsubscribable } from "rxjs";
 
 import { pushDOMStream } from "../../../dom/event-stream";
 import { MiniControllerProps } from "../props";
-import { onBatteryButtonPush } from "./on-battery-button-push";
 import { onBurstPush } from "./on-burst-push";
 import { onPilotPush } from "./on-pilot-push";
 
@@ -21,10 +20,5 @@ export function bindEventListeners(
     pushDOMStream(props.pilot).subscribe((action) => {
       onPilotPush(props, action);
     }),
-    ...props.batteryButtons.map((batteryButton) =>
-      pushDOMStream(batteryButton).subscribe((action) => {
-        onBatteryButtonPush(batteryButton, props, action);
-      })
-    ),
   ];
 }
