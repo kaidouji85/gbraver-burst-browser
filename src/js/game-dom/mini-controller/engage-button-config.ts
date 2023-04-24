@@ -76,7 +76,7 @@ export function engageButtonConfig(
   config: ButtonConfig
 ): void {
   props.batteryButtons.forEach((batteryButton) => {
-    engageBatteryButton(batteryButton, config);
+    //engageBatteryButton(batteryButton, config);
   });
   engageBurstButton(props.burst, config);
   engagePilotButton(props.pilot, config);
