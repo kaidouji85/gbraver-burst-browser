@@ -1,12 +1,12 @@
 import { Observable, Unsubscribable } from "rxjs";
 import { BatteryButtonProps, createBatteryButtonProps } from "./props";
 import { bindEventListeners } from "./procedure/bind-event-lisnters";
-import { visibleBattery } from "./procedure/visible-battery";
-import { visibleBatteryAsFirst } from "./procedure/visible-battery-as-first";
-import { visibleBatteryAsLast } from "./procedure/visible-battery-as-last";
-import { invisibleBattery } from "./procedure/invisible-battery";
-import { enabledBatttery } from "./procedure/enabled-batttery";
-import { disabledBattery } from "./procedure/disabled-battery";
+import { visible } from "./procedure/visible";
+import { visibleAsFirst } from "./procedure/visible-as-first";
+import { visibleAsLast } from "./procedure/visible-as-last";
+import { invisible } from "./procedure/invisible";
+import { enabled } from "./procedure/enabled";
+import { disabled } from "./procedure/disabled";
 
 /** バッテリーボタン */
 export class BatteryButton {
@@ -37,49 +37,49 @@ export class BatteryButton {
    * バッテリー押下通知、numberはバッテリー値がセットされる
    * @return 通知ストリーム
    */
-  batteryPushNotifier(): Observable<number> {
+  pushNotifier(): Observable<number> {
     return this.#props.batteryPush;
   }
 
   /**
    * バッテリーボタンを表示する
    */
-  visibleBattery(): void {
-    visibleBattery(this.#props);
+  visible(): void {
+    visible(this.#props);
   }
 
   /**
    * バッテリーボタンを先頭要素として表示する
    */
-  visibleBatteryAsFirst(): void {
-    visibleBatteryAsFirst(this.#props);
+  visibleAsFirst(): void {
+    visibleAsFirst(this.#props);
   }
 
   /**
    * バッテリーボタンを末尾要素として表示する
    */
-  visibleBatteryAsLast(): void {
-    visibleBatteryAsLast(this.#props);
+  visibleAsLast(): void {
+    visibleAsLast(this.#props);
   }
 
   /**
    * バッテリーボタンを非表示にする
    */
-  invisibleBattery(): void {
-    invisibleBattery(this.#props);
+  invisible(): void {
+    invisible(this.#props);
   }
 
   /**
    * バッテリーボタンを操作可能にする
    */
-  enabledBatttery(): void {
-    enabledBatttery(this.#props);
+  enabled(): void {
+    enabled(this.#props);
   }
 
   /**
    * バッテリーボタンを操作不可能にする
    */
-  disabledBattery(): void {
-    disabledBattery(this.#props);
+  disabled(): void {
+    disabled(this.#props);
   }
 }

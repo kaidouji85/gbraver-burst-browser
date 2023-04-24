@@ -5,6 +5,6 @@ import { BatteryButtonProps } from "../props";
  * バッテリーボタンを表示する
  * @param props コンポネントプロパティ
  */
-export function visibleBattery(props: Readonly<BatteryButtonProps>): void {
+export function visible(props: Readonly<BatteryButtonProps>): void {
   props.root.className = BATTERY;
 }

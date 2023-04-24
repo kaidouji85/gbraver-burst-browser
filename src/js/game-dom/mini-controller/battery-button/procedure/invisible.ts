@@ -5,6 +5,6 @@ import { BatteryButtonProps } from "../props";
  * バッテリーボタンを非表示にする
  * @param props コンポネントプロパティ
  */
-export function invisibleBattery(props: Readonly<BatteryButtonProps>): void {
+export function invisible(props: Readonly<BatteryButtonProps>): void {
   props.root.className = BATTERY_INVISIBLE;
 }

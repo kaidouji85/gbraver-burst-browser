@@ -5,6 +5,6 @@ import { BatteryButtonProps } from "../props";
  * バッテリーボタンを末尾要素として表示する
  * @param props コンポネントプロパティ
  */
-export function visibleBatteryAsLast(props: Readonly<BatteryButtonProps>): void {
+export function visibleAsLast(props: Readonly<BatteryButtonProps>): void {
   props.root.className = BATTERY_LAST;
 }
