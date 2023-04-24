@@ -7,6 +7,7 @@
     --gap: 1px;
     --button-padding: calc(var(--responsive-font-size) * 0.5);
 
+    min-width: calc(var(--responsive-font-size) * 15);
     position: fixed;
     bottom: max(calc(var(--responsive-font-size * 1)), var(--safe-area-bottom));
     right: max(calc(var(--responsive-font-size * 1)), var(--safe-area-right));
