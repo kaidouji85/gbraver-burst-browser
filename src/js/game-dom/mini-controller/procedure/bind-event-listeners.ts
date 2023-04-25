@@ -2,7 +2,6 @@ import { Unsubscribable } from "rxjs";
 
 import { pushDOMStream } from "../../../dom/event-stream";
 import { MiniControllerProps } from "../props";
-import { onBurstPush } from "./on-burst-push";
 import { onPilotPush } from "./on-pilot-push";
 
 /**
@@ -14,9 +13,6 @@ export function bindEventListeners(
   props: MiniControllerProps
 ): Unsubscribable[] {
   return [
-    pushDOMStream(props.burst).subscribe((action) => {
-      onBurstPush(props, action);
-    }),
     pushDOMStream(props.pilot).subscribe((action) => {
       onPilotPush(props, action);
     }),

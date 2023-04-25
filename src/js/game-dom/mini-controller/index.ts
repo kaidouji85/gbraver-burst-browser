@@ -52,7 +52,7 @@ export class MiniController {
    * @return 通知ストリーム
    */
   burstPushNotifier(): Observable<void> {
-    return this.#props.burstPush;
+    return this.#props.burst.pushNotifier();
   }
 
   /**

@@ -13,12 +13,10 @@ export class BurstButton {
 
   /**
    * コンストラクタ
-   * @param config バーストボタン設定
    */
-  constructor(config: BurstButtonConfig) {
+  constructor() {
     this.#props = createBurstButtonProps();
     this.#unsubscribers = bindEventListeners(this.#props);
-    engage(this.#props, config);
   }
 
   /**

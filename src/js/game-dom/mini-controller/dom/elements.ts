@@ -4,8 +4,6 @@ import { DataIDs } from "./data-ids";
 export type Elements = {
   /** バッテリーコマンドを集めたもの */
   batteries: HTMLElement;
-  /** バーストコマンド */
-  burst: HTMLButtonElement;
   /** パイロットコマンド */
   pilot: HTMLButtonElement;
 };
@@ -20,15 +18,10 @@ export function extractElements(root: HTMLElement, ids: DataIDs): Elements {
   const batteries: HTMLElement =
     root.querySelector(`[data-id="${ids.batteries}"]`) ??
     document.createElement("div");
-  const selectedBurst = root.querySelector(`[data-id="${ids.burst}"]`);
-  const burst: HTMLButtonElement =
-    selectedBurst instanceof HTMLButtonElement
-      ? selectedBurst
-      : document.createElement("button");
   const selectedPilot = root.querySelector(`[data-id="${ids.pilot}"]`);
   const pilot: HTMLButtonElement =
     selectedPilot instanceof HTMLButtonElement
       ? selectedPilot
       : document.createElement("button");
-  return { batteries, burst, pilot };
+  return { batteries, pilot };
 }

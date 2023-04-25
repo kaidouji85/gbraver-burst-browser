@@ -6,6 +6,7 @@ import { BatteryButton } from "./battery-button";
 import { ROOT } from "./dom/class-name";
 import { extractElements } from "./dom/elements";
 import { rootInnerHTML } from "./dom/root-inner-html";
+import { BurstButton } from "./burst-button";
 
 /** バッテリーボタン最大個数 */
 const MAX_BATTERY_BUTTON = 9;
@@ -17,13 +18,11 @@ export type MiniControllerProps = {
   /** 全バッテリーボタン */
   batteryButtons: BatteryButton[];
   /** バーストコマンド */
-  burst: HTMLButtonElement;
+  burst: BurstButton;
   /** パイロットコマンド */
   pilot: HTMLButtonElement;
   /** バッテリーボタン押下ストリーム、numberはバッテリー値 */
   batteryPush: Observable<number>;
-  /** バーストボタン押下ストリーム */
-  burstPush: Subject<void>;
   /** パイロットボタン押下ストリーム */
   pilotPush: Subject<void>;
 };
@@ -47,12 +46,14 @@ export function createMiniControllerProps(): MiniControllerProps {
   const batteryPush = merge(
     ...batteryButtons.map((batteryButton) => batteryButton.pushNotifier())
   );
+  const burst = new BurstButton();
+  root.appendChild(burst.getRootHTMLElement());
   return {
     ...elements,
     root,
     batteryButtons,
     batteryPush,
-    burstPush: new Subject(),
+    burst,
     pilotPush: new Subject(),
   };
 }
