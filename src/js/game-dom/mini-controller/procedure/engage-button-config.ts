@@ -1,5 +1,4 @@
 import { ButtonConfig } from "../button-config";
-import { disabledBurst, enabledBurst } from "../dom/burst-button";
 import { disabledPilot, enabledPilot } from "../dom/pilot-button";
 import { MiniControllerProps } from "../props";
 
