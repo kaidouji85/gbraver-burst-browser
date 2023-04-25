@@ -1,8 +1,9 @@
 import { Observable, Unsubscribable } from "rxjs";
-import { BurstButtonProps, createBurstButtonProps } from "./props";
-import { bindEventListeners } from "./procedure/bind-event-listeners";
+
 import { BurstButtonConfig } from "./config";
+import { bindEventListeners } from "./procedure/bind-event-listeners";
 import { engage } from "./procedure/engage";
+import { BurstButtonProps, createBurstButtonProps } from "./props";
 
 /** バーストボタン */
 export class BurstButton {
@@ -23,14 +24,14 @@ export class BurstButton {
    * デストラクタ相当の処理
    */
   destructor(): void {
-    this.#unsubscribers.forEach(v => {
+    this.#unsubscribers.forEach((v) => {
       v.unsubscribe();
-    })
+    });
   }
 
   /**
    * ルートHTML要素を取得する
-   * @return 
+   * @return
    */
   getRootHTMLElement(): HTMLButtonElement {
     return this.#props.root;

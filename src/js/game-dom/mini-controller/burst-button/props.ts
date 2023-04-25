@@ -1,4 +1,5 @@
 import { Subject } from "rxjs";
+
 import { BURST } from "../dom/class-name";
 
 /** バーストボタンプロパティ */

@@ -6,7 +6,10 @@ import { BurstButtonProps } from "../props";
  * @param props コンポネントプロパティ
  * @param action アクション
  */
-export function onButtonPush(props: Readonly<BurstButtonProps>, action: Readonly<PushDOM>): void {
+export function onButtonPush(
+  props: Readonly<BurstButtonProps>,
+  action: Readonly<PushDOM>
+): void {
   action.event.preventDefault();
   action.event.stopPropagation();
   props.push.next();

@@ -3,10 +3,10 @@ import { merge, Observable, Subject } from "rxjs";
 
 import { domUuid } from "../../uuid/dom-uuid";
 import { BatteryButton } from "./battery-button";
+import { BurstButton } from "./burst-button";
 import { ROOT } from "./dom/class-name";
 import { extractElements } from "./dom/elements";
 import { rootInnerHTML } from "./dom/root-inner-html";
-import { BurstButton } from "./burst-button";
 
 /** バッテリーボタン最大個数 */
 const MAX_BATTERY_BUTTON = 9;
