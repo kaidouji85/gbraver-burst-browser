@@ -3,6 +3,7 @@ import { merge, Observable, Subject } from "rxjs";
 
 import { domUuid } from "../../uuid/dom-uuid";
 import { BatteryButton } from "./battery-button";
+import { BurstButton } from "./burst-button";
 import { ROOT } from "./dom/class-name";
 import { extractElements } from "./dom/elements";
 import { rootInnerHTML } from "./dom/root-inner-html";
@@ -17,13 +18,11 @@ export type MiniControllerProps = {
   /** 全バッテリーボタン */
   batteryButtons: BatteryButton[];
   /** バーストコマンド */
-  burst: HTMLButtonElement;
+  burst: BurstButton;
   /** パイロットコマンド */
   pilot: HTMLButtonElement;
   /** バッテリーボタン押下ストリーム、numberはバッテリー値 */
   batteryPush: Observable<number>;
-  /** バーストボタン押下ストリーム */
-  burstPush: Subject<void>;
   /** パイロットボタン押下ストリーム */
   pilotPush: Subject<void>;
 };
@@ -47,12 +46,14 @@ export function createMiniControllerProps(): MiniControllerProps {
   const batteryPush = merge(
     ...batteryButtons.map((batteryButton) => batteryButton.pushNotifier())
   );
+  const burst = new BurstButton();
+  root.appendChild(burst.getRootHTMLElement());
   return {
     ...elements,
     root,
     batteryButtons,
     batteryPush,
-    burstPush: new Subject(),
+    burst,
     pilotPush: new Subject(),
   };
 }

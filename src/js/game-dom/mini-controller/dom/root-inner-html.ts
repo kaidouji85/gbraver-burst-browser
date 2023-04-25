@@ -1,4 +1,3 @@
-import { burstButton } from "./burst-button";
 import { ROOT } from "./class-name";
 import { DataIDs } from "./data-ids";
 import { pilotButton } from "./pilot-button";
@@ -11,7 +10,6 @@ import { pilotButton } from "./pilot-button";
 export function rootInnerHTML(ids: DataIDs): string {
   return `
     <div class="${ROOT}__batteries" data-id="${ids.batteries}"></div>
-    ${burstButton(ids.burst)}
     ${pilotButton(ids.pilot)}
   `;
 }

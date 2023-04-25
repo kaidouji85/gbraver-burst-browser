@@ -1,19 +1,6 @@
 import { ButtonConfig } from "../button-config";
-import { disabledBurst, enabledBurst } from "../dom/burst-button";
 import { disabledPilot, enabledPilot } from "../dom/pilot-button";
 import { MiniControllerProps } from "../props";
-
-/**
- * バーストボタンに設定を反映させる
- * @param batteryButton 設定反映対象となるバーストボタン
- * @param config 設定
- */
-function engageBurstButton(
-  burstButton: HTMLButtonElement,
-  config: ButtonConfig
-): void {
-  config.canBurst ? enabledBurst(burstButton) : disabledBurst(burstButton);
-}
 
 /**
  * パイロットボタンに設定を反映させる
@@ -39,6 +26,6 @@ export function engageButtonConfig(
   props.batteryButtons.forEach((batteryButton) => {
     batteryButton.engage(config);
   });
-  engageBurstButton(props.burst, config);
+  props.burst.engage(config);
   engagePilotButton(props.pilot, config);
 }
