@@ -1,6 +1,8 @@
 import { Unsubscribable } from "rxjs";
 import { BurstButtonProps, createBurstButtonProps } from "./props";
 import { bindEventListeners } from "./procedure/bind-event-listeners";
+import { BurstButtonConfig } from "./config";
+import { engage } from "./procedure/engage";
 
 /** バーストボタン */
 export class BurstButton {
@@ -11,10 +13,12 @@ export class BurstButton {
 
   /**
    * コンストラクタ
+   * @param config バーストボタン設定
    */
-  constructor() {
+  constructor(config: BurstButtonConfig) {
     this.#props = createBurstButtonProps();
     this.#unsubscribers = bindEventListeners(this.#props);
+    engage(this.#props, config);
   }
 
   /**
@@ -32,5 +36,13 @@ export class BurstButton {
    */
   getRootHTMLElement(): HTMLButtonElement {
     return this.#props.root;
+  }
+
+  /**
+   * 設定を反映させる
+   * @param config 反映させる設定
+   */
+  engage(config: BurstButtonConfig): void {
+    engage(this.#props, config);
   }
 }
