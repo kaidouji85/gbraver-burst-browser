@@ -1,5 +1,7 @@
 import { Unsubscribable } from "rxjs";
 import { BurstButtonProps } from "../props";
+import { pushDOMStream } from "../../../../dom/event-stream";
+import { onButtonPush } from "./on-button-push";
 
 /**
  * バーストボタンにイベントを関連付ける
@@ -7,5 +9,9 @@ import { BurstButtonProps } from "../props";
  * @return アンサブスクライバ
  */
 export function bindEventListeners(props: BurstButtonProps): Unsubscribable[] {
-  return [];
+  return [
+    pushDOMStream(props.root).subscribe(action => {
+      onButtonPush(props, action);
+    }),
+  ];
 }

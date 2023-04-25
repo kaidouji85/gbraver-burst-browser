@@ -1,4 +1,4 @@
-import { Unsubscribable } from "rxjs";
+import { Observable, Unsubscribable } from "rxjs";
 import { BurstButtonProps, createBurstButtonProps } from "./props";
 import { bindEventListeners } from "./procedure/bind-event-listeners";
 import { BurstButtonConfig } from "./config";
@@ -36,6 +36,14 @@ export class BurstButton {
    */
   getRootHTMLElement(): HTMLButtonElement {
     return this.#props.root;
+  }
+
+  /**
+   * ボタン押下通知
+   * @return 通知ストリーム
+   */
+  pushNotifier(): Observable<void> {
+    return this.#props.push;
   }
 
   /**
