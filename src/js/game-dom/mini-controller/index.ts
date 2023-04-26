@@ -1,7 +1,6 @@
-import { Observable, Unsubscribable } from "rxjs";
+import { Observable } from "rxjs";
 
 import { ButtonConfig } from "./button-config";
-import { bindEventListeners } from "./procedure/bind-event-listeners";
 import { engageButtonConfig } from "./procedure/engage-button-config";
 import { createMiniControllerProps, MiniControllerProps } from "./props";
 
@@ -9,8 +8,6 @@ import { createMiniControllerProps, MiniControllerProps } from "./props";
 export class MiniController {
   /** プロパティ */
   #props: MiniControllerProps;
-  /** アンサブスクライバ */
-  #unsubscribers: Unsubscribable[];
 
   /**
    * コンストラクタ
@@ -19,16 +16,17 @@ export class MiniController {
   constructor(config: ButtonConfig) {
     this.#props = createMiniControllerProps();
     engageButtonConfig(this.#props, config);
-    this.#unsubscribers = bindEventListeners(this.#props);
   }
 
   /**
    * デストラクタ相当の処理
    */
   destructor(): void {
-    this.#unsubscribers.forEach((v) => {
-      v.unsubscribe();
+    this.#props.batteryButtons.forEach(batteryButton => {
+      batteryButton.destructor();
     });
+    this.#props.burst.destructor();
+    this.#props.pilot.destructor();
   }
 
   /**
@@ -60,6 +58,6 @@ export class MiniController {
    * @return 通知ストリーム
    */
   pilotPushNotifier(): Observable<void> {
-    return this.#props.pilotPush;
+    return this.#props.pilot.pushNotifier();
   }
 }

@@ -1,6 +1,5 @@
 import { ROOT } from "./class-name";
 import { DataIDs } from "./data-ids";
-import { pilotButton } from "./pilot-button";
 
 /**
  * ルートHTML要素のinnerHTMLを生成する
@@ -10,6 +9,5 @@ import { pilotButton } from "./pilot-button";
 export function rootInnerHTML(ids: DataIDs): string {
   return `
     <div class="${ROOT}__batteries" data-id="${ids.batteries}"></div>
-    ${pilotButton(ids.pilot)}
   `;
 }

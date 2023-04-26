@@ -2,6 +2,4 @@
 export type DataIDs = {
   /** バッテリーコマンドを集めたもの */
   batteries: string;
-  /** パイロットコマンド */
-  pilot: string;
 };
