@@ -8,6 +8,9 @@ import { enabled } from "./enabled";
  * @param props コンポネントプロパティ
  * @param config 反映させる設定
  */
-export function engage(props: Readonly<PilotButtonProps>, config: PilotButtonConfig): void {
+export function engage(
+  props: Readonly<PilotButtonProps>,
+  config: PilotButtonConfig
+): void {
   config.canPilotSkill ? enabled(props) : disabled(props);
 }

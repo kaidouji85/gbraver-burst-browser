@@ -1,8 +1,9 @@
 import { Observable, Unsubscribable } from "rxjs";
+
 import { PilotButtonConfig } from "./config";
-import { engage } from "./procedure/engage";
-import { PilotButtonProps, createPilotButtonProps } from "./props";
 import { bindEventListeners } from "./procedure/bind-event-listeners";
+import { engage } from "./procedure/engage";
+import { createPilotButtonProps, PilotButtonProps } from "./props";
 
 /** パイロットボタン */
 export class PilotButton {

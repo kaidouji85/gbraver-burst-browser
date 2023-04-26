@@ -7,4 +7,4 @@ import { PilotButtonProps } from "../props";
 export function disabled(props: Readonly<PilotButtonProps>): void {
   props.root.disabled = true;
   props.root.innerText = "";
-} 
+}

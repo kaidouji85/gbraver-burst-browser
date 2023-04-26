@@ -22,7 +22,7 @@ export class MiniController {
    * デストラクタ相当の処理
    */
   destructor(): void {
-    this.#props.batteryButtons.forEach(batteryButton => {
+    this.#props.batteryButtons.forEach((batteryButton) => {
       batteryButton.destructor();
     });
     this.#props.burstButton.destructor();

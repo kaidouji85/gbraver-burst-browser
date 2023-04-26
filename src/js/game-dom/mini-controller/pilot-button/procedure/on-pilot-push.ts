@@ -6,7 +6,10 @@ import { PilotButtonProps } from "../props";
  * @param props コンポネントプロパティ
  * @param action アクション
  */
-export function onPilotPush(props: Readonly<PilotButtonProps>, action: Readonly<PushDOM>): void {
+export function onPilotPush(
+  props: Readonly<PilotButtonProps>,
+  action: Readonly<PushDOM>
+): void {
   action.event.preventDefault();
   action.event.stopPropagation();
   props.push.next();

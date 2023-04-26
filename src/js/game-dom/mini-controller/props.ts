@@ -1,5 +1,5 @@
 import * as R from "ramda";
-import { merge, Observable, Subject } from "rxjs";
+import { merge, Observable } from "rxjs";
 
 import { domUuid } from "../../uuid/dom-uuid";
 import { BatteryButton } from "./battery-button";
@@ -48,7 +48,7 @@ export function createMiniControllerProps(): MiniControllerProps {
   const burst = new BurstButton();
   root.appendChild(burst.getRootHTMLElement());
   const pilot = new PilotButton();
-  root.appendChild(pilot.getRootHTMLElement())
+  root.appendChild(pilot.getRootHTMLElement());
   return {
     ...elements,
     root,
