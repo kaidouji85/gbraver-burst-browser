@@ -1,5 +1,5 @@
 import * as R from "ramda";
-import { merge, Observable, Subject } from "rxjs";
+import { merge, Observable } from "rxjs";
 
 import { domUuid } from "../../uuid/dom-uuid";
 import { BatteryButton } from "./battery-button";
@@ -7,6 +7,7 @@ import { BurstButton } from "./burst-button";
 import { ROOT } from "./dom/class-name";
 import { extractElements } from "./dom/elements";
 import { rootInnerHTML } from "./dom/root-inner-html";
+import { PilotButton } from "./pilot-button";
 
 /** バッテリーボタン最大個数 */
 const MAX_BATTERY_BUTTON = 9;
@@ -17,14 +18,12 @@ export type MiniControllerProps = {
   root: HTMLElement;
   /** 全バッテリーボタン */
   batteryButtons: BatteryButton[];
-  /** バーストコマンド */
-  burst: BurstButton;
-  /** パイロットコマンド */
-  pilot: HTMLButtonElement;
+  /** バーストボタン */
+  burstButton: BurstButton;
+  /** パイロットボタン */
+  pilotButton: PilotButton;
   /** バッテリーボタン押下ストリーム、numberはバッテリー値 */
   batteryPush: Observable<number>;
-  /** パイロットボタン押下ストリーム */
-  pilotPush: Subject<void>;
 };
 
 /**
@@ -48,12 +47,14 @@ export function createMiniControllerProps(): MiniControllerProps {
   );
   const burst = new BurstButton();
   root.appendChild(burst.getRootHTMLElement());
+  const pilot = new PilotButton();
+  root.appendChild(pilot.getRootHTMLElement());
   return {
     ...elements,
     root,
     batteryButtons,
     batteryPush,
-    burst,
-    pilotPush: new Subject(),
+    burstButton: burst,
+    pilotButton: pilot,
   };
 }

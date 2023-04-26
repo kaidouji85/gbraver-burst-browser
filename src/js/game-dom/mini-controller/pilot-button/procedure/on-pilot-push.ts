@@ -1,5 +1,5 @@
-import { PushDOM } from "../../../dom/event-stream";
-import { MiniControllerProps } from "../props";
+import { PushDOM } from "../../../../dom/event-stream";
+import { PilotButtonProps } from "../props";
 
 /**
  * パイロットボタンが押された時の処理
@@ -7,10 +7,10 @@ import { MiniControllerProps } from "../props";
  * @param action アクション
  */
 export function onPilotPush(
-  props: Readonly<MiniControllerProps>,
+  props: Readonly<PilotButtonProps>,
   action: Readonly<PushDOM>
 ): void {
   action.event.preventDefault();
   action.event.stopPropagation();
-  props.pilotPush.next();
+  props.push.next();
 }
