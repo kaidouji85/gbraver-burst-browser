@@ -25,8 +25,8 @@ export class MiniController {
     this.#props.batteryButtons.forEach(batteryButton => {
       batteryButton.destructor();
     });
-    this.#props.burst.destructor();
-    this.#props.pilot.destructor();
+    this.#props.burstButton.destructor();
+    this.#props.pilotButton.destructor();
   }
 
   /**
@@ -50,7 +50,7 @@ export class MiniController {
    * @return 通知ストリーム
    */
   burstPushNotifier(): Observable<void> {
-    return this.#props.burst.pushNotifier();
+    return this.#props.burstButton.pushNotifier();
   }
 
   /**
@@ -58,6 +58,6 @@ export class MiniController {
    * @return 通知ストリーム
    */
   pilotPushNotifier(): Observable<void> {
-    return this.#props.pilot.pushNotifier();
+    return this.#props.pilotButton.pushNotifier();
   }
 }
