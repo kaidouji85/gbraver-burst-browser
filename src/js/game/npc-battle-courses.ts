@@ -332,4 +332,40 @@ export const NPCBattleCourses: NPCBattleCourse[] = [
       { ...VeryHardNeoLandozer, bgm: SOUND_IDS.BATTLE_BGM_03 },
     ],
   },
+  {
+    armdozerId: ArmDozerIds.SHIN_BRAVER,
+    difficulty: "Easy",
+    stages: [
+      { ...OneBatteryNeoLandozerStage, bgm: SOUND_IDS.BATTLE_BGM_01 },
+      { ...MaxAttackWingDozerStage, bgm: SOUND_IDS.BATTLE_BGM_02 },
+      { ...Attack3Defense2LightningDozerStage, bgm: SOUND_IDS.BATTLE_BGM_03 },
+    ],
+  },
+  {
+    armdozerId: ArmDozerIds.GENESIS_BRAVER,
+    difficulty: "Normal",
+    stages: [
+      { ...Attack4Defense1LightningDozerStage, bgm: SOUND_IDS.BATTLE_BGM_01 },
+      { ...PrioritizeDefenseWingDozerStage, bgm: SOUND_IDS.BATTLE_BGM_02 },
+      { ...BurstAttack5NeoLandozderStage, bgm: SOUND_IDS.BATTLE_BGM_03 },
+    ],
+  },
+  {
+    armdozerId: ArmDozerIds.GENESIS_BRAVER,
+    difficulty: "Hard",
+    stages: [
+      { ...HardNeoLandozerStage, bgm: SOUND_IDS.BATTLE_BGM_01 },
+      { ...HardWingDozerStage, bgm: SOUND_IDS.BATTLE_BGM_02 },
+      { ...HardLightningDozer, bgm: SOUND_IDS.BATTLE_BGM_03 },
+    ],
+  },
+  {
+    armdozerId: ArmDozerIds.GENESIS_BRAVER,
+    difficulty: "VeryHard",
+    stages: [
+      { ...VeryHardLightningDozer, bgm: SOUND_IDS.BATTLE_BGM_01 },
+      { ...VeryHardShinBraver, bgm: SOUND_IDS.BATTLE_BGM_02 },
+      { ...VeryHardWingDozer, bgm: SOUND_IDS.BATTLE_BGM_03 },
+    ],
+  },
 ];

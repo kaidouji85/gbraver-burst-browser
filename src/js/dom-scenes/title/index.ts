@@ -112,6 +112,7 @@ export class Title implements DOMScene {
       this.#props.isTitleBackLoaded,
       this.#props.isAvatarLoaded,
       this.#props.isLogoLoaded,
+      this.#props.isHelpIconLoaded,
     ]);
   }
 }

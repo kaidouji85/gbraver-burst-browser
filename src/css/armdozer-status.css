@@ -1,5 +1,7 @@
 /** プレイヤー選択画面 アームドーザステータスウインドウ */
 .armdozer-status {
+  --parameter-label-width: calc(var(--responsive-font-size) * 2.2);
+
   font-size: calc(var(--responsive-font-size) * 0.8);
   width: 50vw;
   box-sizing: border-box;
@@ -12,32 +14,60 @@
 }
 
 .armdozer-status__basic-status {
-  --parameter-label-width: calc(var(--responsive-font-size) * 2.2);
-
-  display: grid;
-  grid-template-columns:
-    1fr
-    var(--parameter-label-width)
-    auto
-    var(--parameter-label-width)
-    auto
-    var(--parameter-label-width)
-    auto;
+  display: flex;
+  flex-wrap: wrap;
   border-bottom: 1px dashed var(--font-color);
   padding-bottom: calc(var(--responsive-font-size) * 0.5);
 }
 
+.armdozer-status__name {
+  flex-grow: 1;
+  flex-shrink: 0;
+}
+
+.armdozer-status__basic-params {
+  flex-grow: 0;
+  flex-shrink: 0;
+  display: grid;
+  grid-template-columns:
+    auto
+    auto
+    auto
+    auto
+    auto
+    auto
+    auto
+    auto;
+}
+
+.armdozer-status__battery-label,
 .armdozer-status__hp-label,
 .armdozer-status__power-label,
 .armdozer-status__speed-label {
+  min-width: var(--parameter-label-width);
   background-color: var(--button-background-color);
   text-align: center;
   border-radius: calc(var(--responsive-font-size) * 0.2);
 }
 
+.armdozer-status__battery-label {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.armdozer-status__battery-icon {
+  width: var(--responsive-font-size);
+  height: var(--responsive-font-size);
+}
+
+.armdozer-status__battery-value {
+  margin-right: calc(var(--responsive-font-size) * 1);
+}
+
 .armdozer-status__hp-value,
 .armdozer-status__power-value {
-  margin-right: calc(var(--responsive-font-size) * 0.2);
+  margin-right: calc(var(--responsive-font-size) * 0.5);
 }
 
 .armdozer-status__burst-overview {

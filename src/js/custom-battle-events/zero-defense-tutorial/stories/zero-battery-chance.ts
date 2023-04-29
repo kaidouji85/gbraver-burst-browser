@@ -26,12 +26,12 @@ export const zeroBatteryChance = async (props: CustomBattleEventProps) => {
   activeRightMessageWindowWithFace(props, "Tsubasa");
   await scrollRightMessages(props, [
     ["ツバサ", "「いい質問だな シンヤ"],
-    ["0防御すると HPが満タンでも一撃で死ぬダメージを受けるんだ」"],
+    ["0防御すると HPが満タンでも即死するんだ」"],
   ]);
   await refreshConversation(props, 100);
   activeRightMessageWindowWithFace(props, "Shinya");
   await scrollRightMessages(props, [
-    ["シンヤ", "「なるほど 0防御は即死ってことッスね"],
+    ["シンヤ", "「了解ッス"],
     ["じゃあ このまま一気に決めるッス」"],
   ]);
   invisibleAllMessageWindows(props);

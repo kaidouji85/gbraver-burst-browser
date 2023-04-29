@@ -96,6 +96,42 @@ export const enemyActiveKnockBack = () =>
   armdozerSpriteStub(EnemyGenesisBraver, activeKnockBack);
 
 /**
+ * ガード
+ * @param sprite スプライト
+ */
+const guard = (sprite: GenesisBraver) => {
+  delay(1000)
+    .chain(sprite.guard())
+    .chain(delay(1000))
+    .chain(sprite.guardToStand())
+    .chain(delay(1000))
+    .loop();
+};
+
+/**
+ * アクティブ ガード
+ * @param sprite スプライト
+ */
+const activeGuard = (sprite: GenesisBraver) => {
+  guard(sprite);
+  sprite.startActive().loop();
+};
+
+/** プレイヤー ガード */
+export const playerGuard = () => armdozerSpriteStub(PlayerGenesisBraver, guard);
+
+/** プレイヤー アクティブ ガード */
+export const playerActiveGuard = () =>
+  armdozerSpriteStub(PlayerGenesisBraver, activeGuard);
+
+/** 敵 ガード */
+export const enemyGuard = () => armdozerSpriteStub(EnemyGenesisBraver, guard);
+
+/** 敵 アクティブ ガード */
+export const enemyActiveGuard = () =>
+  armdozerSpriteStub(EnemyGenesisBraver, activeGuard);
+
+/**
  * ダウン
  * @param sprite スプライト
  */

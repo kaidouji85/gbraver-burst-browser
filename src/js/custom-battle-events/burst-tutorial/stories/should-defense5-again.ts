@@ -11,7 +11,7 @@ import { scrollRightMessages } from "../../scroll-messages";
 export const shouldDefense5Again = async (props: CustomBattleEventProps) => {
   activeRightMessageWindowWithFace(props, "Tsubasa");
   await scrollRightMessages(props, [
-    ["ツバサ", "「シンヤ さっきも説明したが 今は5防御しないとまずい」"],
+    ["ツバサ", "「シンヤ 今は5防御しないとまずい」"],
   ]);
   await refreshConversation(props, 100);
 };

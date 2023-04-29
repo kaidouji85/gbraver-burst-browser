@@ -42,7 +42,7 @@
 }
 
 /* iPhoneXランドスケープ画面高以上の場合に有効になるメディアクエリ */
-@media (min-height: 375px) {
+@media (height >= 375px) {
   :root {
     --responsive-font-size: max(3vh, 1rem);
   }

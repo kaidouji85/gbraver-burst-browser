@@ -1,11 +1,5 @@
 /** バースト注釈 */
-export const shouldBurst = [
-  "ライトさんは4攻撃をしかけてくる",
-  "バーストでバッテリー回復して5防御しよう",
-];
+export const shouldBurst = ["”バースト” ボタンを押そう"];
 
 /** パイロットスキル注釈 */
-export const shouldPilotSkill = [
-  "ライトさんは4攻撃をしかけてくる",
-  "パイロットスキルでバッテリー回復して5防御しよう",
-];
+export const shouldPilotSkill = ["”パイロット” ボタンを押そう"];

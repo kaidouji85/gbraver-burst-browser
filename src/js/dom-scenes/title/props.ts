@@ -18,9 +18,6 @@ export type TitleProps = {
   /** 排他制御 */
   exclusive: Exclusive;
 
-  /** アカウントメニューを開いているか否か、trueで開いている */
-  isAccountMenuOpen: boolean;
-
   /** ルートHTML要素 */
   root: HTMLElement;
 
@@ -38,6 +35,12 @@ export type TitleProps = {
 
   /** ログアウト */
   logout: HTMLElement;
+
+  /** ヘルプアイコン */
+  helpIcon: HTMLElement;
+
+  /** ヘルプメニュー */
+  helpMenu: HTMLElement;
 
   /** チュートリアル */
   tutorial: HTMLElement;
@@ -59,6 +62,9 @@ export type TitleProps = {
 
   /** ロゴ画像を読み込んだら発火するPromise */
   isLogoLoaded: Promise<void>;
+
+  /** ヘルプアイコンを読み込んだら発火するPromise */
+  isHelpIconLoaded: Promise<void>;
 
   /** SE 値変更 */
   changeValue: Howl;
@@ -105,6 +111,8 @@ export function createTitleProps(params: CreateTitlePropsParams): TitleProps {
     login: domUuid(),
     accountMenu: domUuid(),
     avatar: domUuid(),
+    helpIcon: domUuid(),
+    helpMenu: domUuid(),
     deleteAccount: domUuid(),
     logout: domUuid(),
     logo: domUuid(),
@@ -133,15 +141,19 @@ export function createTitleProps(params: CreateTitlePropsParams): TitleProps {
   });
   titleBackImage.src =
     params.resources.paths.find((v) => v.id === PathIds.TITLE_BACK)?.path ?? "";
+  const isHelpIconLoaded = waitElementLoaded(elements.helpIcon);
+  elements.helpIcon.src =
+    params.resources.paths.find((v) => v.id === PathIds.HELP_ICON)?.path ?? "";
   return {
     exclusive: new Exclusive(),
-    isAccountMenuOpen: false,
     root,
     login: elements.login,
     accountMenu: elements.accountMenu,
     avatar,
     deleteAccount: elements.deleteAccount,
     logout: elements.logout,
+    helpIcon: elements.helpIcon,
+    helpMenu: elements.helpMenu,
     tutorial: elements.tutorial,
     arcade: elements.arcade,
     netBattle: elements.netBattle,
@@ -149,6 +161,7 @@ export function createTitleProps(params: CreateTitlePropsParams): TitleProps {
     isLogoLoaded,
     isAvatarLoaded,
     isTitleBackLoaded,
+    isHelpIconLoaded,
     pushButton:
       params.resources.sounds.find((v) => v.id === SOUND_IDS.PUSH_BUTTON)
         ?.sound ?? new Howl({ src: "" }),

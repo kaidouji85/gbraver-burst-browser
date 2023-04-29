@@ -1,6 +1,9 @@
 import type { PushDOM } from "../../../dom/event-stream";
 import type { TitleProps } from "../props";
 import { closeAccountMenu } from "./close-account-menu";
+import { closeHelpMenu } from "./close-help-menu";
+import { isAccountMenuOpen } from "./is-account-menu-open";
+import { isHelpMenuOpen } from "./is-help-menu-open";
 
 /**
  * ルート要素が押された時の処理
@@ -12,7 +15,11 @@ import { closeAccountMenu } from "./close-account-menu";
 export function onRootPush(props: TitleProps, action: Readonly<PushDOM>): void {
   action.event.stopPropagation();
 
-  if (props.isAccountMenuOpen) {
+  if (isAccountMenuOpen(props)) {
     closeAccountMenu(props);
+  }
+
+  if (isHelpMenuOpen(props)) {
+    closeHelpMenu(props);
   }
 }

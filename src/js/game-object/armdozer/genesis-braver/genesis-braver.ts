@@ -18,6 +18,8 @@ import { charge } from "./animation/charge";
 import { down } from "./animation/down";
 import { endActive } from "./animation/end-active";
 import { frontStep } from "./animation/front-step";
+import { guard } from "./animation/guard";
+import { guardToStand } from "./animation/guts-to-stand";
 import { knockBack } from "./animation/knock-back";
 import { knockBackToStand } from "./animation/knock-back-to-stand";
 import { spToStand } from "./animation/sp-to-stand";
@@ -140,14 +142,12 @@ export class GenesisBraver
 
   /** @override */
   guard(): Animate {
-    // TODO ガードアニメーションを作る
-    return knockBack(this.#model);
+    return guard(this.#model);
   }
 
   /** @override */
   guardToStand(): Animate {
-    // TODO ガードアニメーションを作る
-    return knockBackToStand(this.#model, this.#sounds);
+    return guardToStand(this.#model, this.#sounds);
   }
 
   /** @override */

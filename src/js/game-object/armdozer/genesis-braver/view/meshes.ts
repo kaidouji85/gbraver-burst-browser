@@ -4,6 +4,7 @@ import { genesisBraverBurstDown } from "../mesh/burst-down";
 import { genesisBraverBurstUp } from "../mesh/burst-up";
 import { genesisBraverDown } from "../mesh/down";
 import { genesisBraverFrontStep } from "../mesh/front-step";
+import { genesisBraverGuard } from "../mesh/guard";
 import { genesisBraverKnockBack } from "../mesh/knock-back";
 import { genesisBraverSPAttack } from "../mesh/sp-attack";
 import { genesisBraverSPCharge } from "../mesh/sp-charge";
@@ -37,6 +38,10 @@ export function createMeshes(resources: Resources): AnimationMeshMapping[] {
     {
       type: "KNOCK_BACK",
       mesh: genesisBraverKnockBack(resources),
+    },
+    {
+      type: "GUARD",
+      mesh: genesisBraverGuard(resources),
     },
     {
       type: "DOWN",

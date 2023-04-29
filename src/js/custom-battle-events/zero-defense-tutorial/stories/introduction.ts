@@ -17,15 +17,14 @@ import { scrollLeftMessages, scrollRightMessages } from "../../scroll-messages";
 export const introduction = async (props: CustomBattleEventProps) => {
   activeRightMessageWindowWithFace(props, "Shinya");
   await scrollRightMessages(props, [
-    ["シンヤ", "「俺 都立大田高校のシンヤ ッス"],
+    ["シンヤ", "「俺 都立大田高校のシンヤ"],
     ["同じ一年生同士 よろしく頼むッス」"],
   ]);
   props.view.dom.rightMessageWindow.darken();
   activeLeftMessageWindowWithFace(props, "Gai");
   await scrollLeftMessages(props, [
     ["ガイ", "「都立台東高校のガイだ"],
-    ["強豪校だと期待していたが"],
-    ["こんな締まりのない奴が出てくるとはな」"],
+    ["こんな気の抜けた奴が出てくるなんて 大田高校も噂程ではないな」"],
   ]);
   await refreshConversation(props);
   activeRightMessageWindowWithFace(props, "Tsubasa");

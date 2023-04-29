@@ -1,0 +1,97 @@
+/**
+ * ミニコントローラー
+ */
+@media (orientation: landscape) {
+  .mini-controller {
+    --font-size: calc(var(--responsive-font-size) * 1);
+    --gap: 1px;
+    --button-padding: calc(var(--responsive-font-size) * 0.5);
+
+    min-width: calc(var(--responsive-font-size) * 15);
+    position: fixed;
+    bottom: max(calc(var(--responsive-font-size * 1)), var(--safe-area-bottom));
+    right: max(calc(var(--responsive-font-size * 1)), var(--safe-area-right));
+    background-color: var(--font-color);
+    border-radius: var(--dialog-border-radius);
+    z-index: var(--zindex-dialog);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    gap: var(--gap);
+    padding: var(--gap);
+    box-shadow: var(--button-box-shadow);
+  }
+}
+
+@media (orientation: portrait) {
+  .mini-controller {
+    display: none;
+  }
+}
+
+.mini-controller__batteries {
+  grid-column: 1 / 3;
+  grid-row: 1;
+  display: flex;
+  gap: var(--gap);
+}
+
+.mini-controller__battery,
+.mini-controller__battery--first,
+.mini-controller__battery--last {
+  flex: 1;
+  color: var(--font-color);
+  font-size: var(--font-size);
+  background-color: var(--sub-button-background-color);
+  padding: var(--button-padding);
+  border: none;
+  outline: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  user-select: none;
+}
+
+.mini-controller__battery--first {
+  border-top-left-radius: var(--dialog-border-radius);
+}
+
+.mini-controller__battery--last {
+  border-top-right-radius: var(--dialog-border-radius);
+}
+
+.mini-controller__battery--invisible {
+  display: none;
+}
+
+.mini-controller__burst {
+  grid-column: 1;
+  grid-row: 2;
+  color: var(--font-color);
+  font-size: var(--font-size);
+  border-bottom-left-radius: var(--dialog-border-radius);
+  background-color: var(--sub-button-background-color);
+  padding: var(--button-padding);
+  border: none;
+  outline: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  user-select: none;
+}
+
+.mini-controller__pilot {
+  grid-column: 2;
+  grid-row: 2;
+  color: var(--font-color);
+  font-size: var(--font-size);
+  border-bottom-right-radius: var(--dialog-border-radius);
+  background-color: var(--sub-button-background-color);
+  padding: var(--button-padding);
+  border: none;
+  outline: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  user-select: none;
+}

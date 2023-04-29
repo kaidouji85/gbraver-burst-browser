@@ -3,10 +3,8 @@ import type { TitleProps } from "../props";
 
 /**
  * アカウントメニューを開くヘルパー関数
- *
  * @param props 画面プロパティ
  */
 export function openAccountMenu(props: TitleProps): void {
-  props.isAccountMenuOpen = true;
   props.accountMenu.className = ACCOUNT_MENU_CLASS;
 }
