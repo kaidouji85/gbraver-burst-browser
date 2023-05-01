@@ -43,10 +43,10 @@ export class MiniController {
   /**
    * ミニコントローラーを表示する
    * @param config ボタン設定
-   * @return 処理が完了したら発火するPromise
+   * @return アニメーション
    */
-  async show(config: Readonly<ButtonConfig>): Promise<void> {
-    await show(this.#props, config);
+  show(config: Readonly<ButtonConfig>): Animate {
+    return show(this.#props, config);
   }
 
   /**

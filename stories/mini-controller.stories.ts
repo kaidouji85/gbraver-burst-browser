@@ -19,7 +19,7 @@ const miniControllerStory = (config: ButtonConfig) =>
     controller.pilotPushNotifier().subscribe(() => {
       console.log("pilot");
     });
-    controller.show(config);
+    controller.show(config).play();
     return controller.getRootHTMLElement();
   });
 
@@ -94,7 +94,7 @@ export const showHidden = domStub((resources) => {
       maxBattery: 5,
       canBurst: true,
       canPilotSkill: true,
-    });
+    }).play();
     await waitTime(2000);
     await controller.decided().play();
     await waitTime(200);
