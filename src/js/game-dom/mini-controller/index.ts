@@ -4,6 +4,7 @@ import { ButtonConfig } from "./button-config";
 import { createMiniControllerProps, MiniControllerProps } from "./props";
 import { show } from "./procedure/show";
 import { hidden } from "./procedure/hidden";
+import { decided } from "./procedure/decided";
 
 /** ミニコントローラ */
 export class MiniController {
@@ -51,6 +52,14 @@ export class MiniController {
    */
   async hidden(): Promise<void> {
     await hidden(this.#props);
+  }
+
+  /**
+   * コマンド決定アニメーション
+   * @return アニメーションが完了したら発火するPromise
+   */
+  async decided(): Promise<void> {
+    await decided(this.#props);
   }
 
   /**

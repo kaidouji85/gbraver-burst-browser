@@ -96,6 +96,8 @@ export const showHidden = domStub(() => {
       canPilotSkill: true,
     });
     await waitTime(5000);
+    await controller.decided();
+    await waitTime(200);
     await controller.hidden();  
   })();
   return controller.getRootHTMLElement();
