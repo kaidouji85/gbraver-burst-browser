@@ -3,6 +3,7 @@ import { Observable } from "rxjs";
 import { ButtonConfig } from "./button-config";
 import { createMiniControllerProps, MiniControllerProps } from "./props";
 import { show } from "./procedure/show";
+import { hidden } from "./procedure/hidden";
 
 /** ミニコントローラ */
 export class MiniController {
@@ -42,6 +43,14 @@ export class MiniController {
    */
   async show(config: Readonly<ButtonConfig>): Promise<void> {
     await show(this.#props, config);
+  }
+
+  /**
+   * ミニコントローラーを非表示にする
+   * @return 処理が完了したら発火するPromise
+   */
+  async hidden(): Promise<void> {
+    await hidden(this.#props);
   }
 
   /**

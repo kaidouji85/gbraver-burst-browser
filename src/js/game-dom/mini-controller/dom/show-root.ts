@@ -12,7 +12,6 @@ export async function showRoot(root: HTMLElement): Promise<void> {
   ], {
     duration: 200,
     fill: "forwards",
-    easing: "ease",
   });
   await waitFinishAnimation(animation);
 }

@@ -1,5 +1,6 @@
 import { MiniController } from "../src/js/game-dom/mini-controller";
 import { ButtonConfig } from "../src/js/game-dom/mini-controller/button-config";
+import { waitTime } from "../src/js/wait/wait-time";
 import { domStub } from "./stub/dom-stub";
 
 export default {
@@ -83,4 +84,19 @@ export const disabledAll = miniControllerStory({
   maxBattery: 5,
   canBurst: false,
   canPilotSkill: false,
+});
+
+export const showHidden = domStub(() => {
+  const controller = new MiniController();
+  (async () => {
+    await controller.show({
+      battery: 5,
+      maxBattery: 5,
+      canBurst: true,
+      canPilotSkill: true,
+    });
+    await waitTime(5000);
+    await controller.hidden();  
+  })();
+  return controller.getRootHTMLElement();
 });
