@@ -15,6 +15,9 @@ import { onPilotSkill } from "./procedure/on-pilot-skill";
 import { onPlusBattery } from "./procedure/on-plus-battery";
 import { onToggleTimeScale } from "./procedure/on-toggle-time-scale";
 import { start } from "./procedure/start";
+import { onDecideBatteryByMiniController } from "./procedure/on-decide-battery-by-minicontroller";
+import { onBurstByMiniController } from "./procedure/on-burst-by-mini-controller";
+import { onPilotSkillByMiniController } from "./procedure/on-pilot-skill-by-mini-controller";
 
 /** コンストラクタのパラメータ */
 type BattleSceneParams = BattleScenePropsCreatorParams & {
@@ -47,6 +50,12 @@ export class BattleScene implements TDScene {
           onPilotSkill(this.#props, action);
         } else if (action.type === "toggleTimeScale") {
           onToggleTimeScale(this.#props, action);
+        } else if (action.type === "decideBatteryByMiniController") {
+          onDecideBatteryByMiniController(this.#props, action);
+        } else if (action.type === "doBurstByMiniController") {
+          onBurstByMiniController(this.#props);
+        } else if (action.type === "doPilotSkillByMiniController") {
+          onPilotSkillByMiniController(this.#props);
         }
       }),
     ];
