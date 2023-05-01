@@ -1,5 +1,6 @@
 import { MiniController } from "../src/js/game-dom/mini-controller";
 import { ButtonConfig } from "../src/js/game-dom/mini-controller/button-config";
+import { waitTime } from "../src/js/wait/wait-time";
 import { domStub } from "./stub/dom-stub";
 
 export default {
@@ -7,8 +8,8 @@ export default {
 };
 
 const miniControllerStory = (config: ButtonConfig) =>
-  domStub(() => {
-    const controller = new MiniController(config);
+  domStub((resources) => {
+    const controller = new MiniController(resources);
     controller.batteryPushNotigier().subscribe((battery) => {
       console.log(`battery ${battery}`);
     });
@@ -18,6 +19,7 @@ const miniControllerStory = (config: ButtonConfig) =>
     controller.pilotPushNotifier().subscribe(() => {
       console.log("pilot");
     });
+    controller.show(config);
     return controller.getRootHTMLElement();
   });
 
@@ -82,4 +84,21 @@ export const disabledAll = miniControllerStory({
   maxBattery: 5,
   canBurst: false,
   canPilotSkill: false,
+});
+
+export const showHidden = domStub((resources) => {
+  const controller = new MiniController(resources);
+  (async () => {
+    await controller.show({
+      battery: 5,
+      maxBattery: 5,
+      canBurst: true,
+      canPilotSkill: true,
+    });
+    await waitTime(2000);
+    await controller.decided();
+    await waitTime(200);
+    await controller.hidden();
+  })();
+  return controller.getRootHTMLElement();
 });

@@ -1,7 +1,10 @@
 import { Observable } from "rxjs";
 
+import { Resources } from "../../resource";
 import { ButtonConfig } from "./button-config";
-import { engageButtonConfig } from "./procedure/engage-button-config";
+import { decided } from "./procedure/decided";
+import { hidden } from "./procedure/hidden";
+import { show } from "./procedure/show";
 import { createMiniControllerProps, MiniControllerProps } from "./props";
 
 /** ミニコントローラ */
@@ -11,11 +14,10 @@ export class MiniController {
 
   /**
    * コンストラクタ
-   * @param config ボタン設定
+   * @param resources リソース管理オブジェクト
    */
-  constructor(config: ButtonConfig) {
-    this.#props = createMiniControllerProps();
-    engageButtonConfig(this.#props, config);
+  constructor(resources: Resources) {
+    this.#props = createMiniControllerProps(resources);
   }
 
   /**
@@ -35,6 +37,31 @@ export class MiniController {
    */
   getRootHTMLElement(): HTMLElement {
     return this.#props.root;
+  }
+
+  /**
+   * ミニコントローラーを表示する
+   * @param config ボタン設定
+   * @return 処理が完了したら発火するPromise
+   */
+  async show(config: Readonly<ButtonConfig>): Promise<void> {
+    await show(this.#props, config);
+  }
+
+  /**
+   * ミニコントローラーを非表示にする
+   * @return 処理が完了したら発火するPromise
+   */
+  async hidden(): Promise<void> {
+    await hidden(this.#props);
+  }
+
+  /**
+   * コマンド決定アニメーション
+   * @return アニメーションが完了したら発火するPromise
+   */
+  async decided(): Promise<void> {
+    await decided(this.#props);
   }
 
   /**
