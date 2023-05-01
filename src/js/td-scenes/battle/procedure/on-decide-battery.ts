@@ -24,17 +24,15 @@ export async function onDecideBattery(
       type: "BATTERY_COMMAND",
       battery: action.battery,
     };
-    const { isCommandCanceled } = props.customBattleEvent
-      ? await props.customBattleEvent.onBatteryCommandSelected({
+    if (props.customBattleEvent) {
+      const { isCommandCanceled } =
+        await props.customBattleEvent.onBatteryCommandSelected({
           ...props,
           battery: batteryCommand,
-        })
-      : {
-          isCommandCanceled: false,
-        };
-
-    if (isCommandCanceled) {
-      return;
+        });
+      if (isCommandCanceled) {
+        return;
+      }
     }
 
     await animationPlayer(props).play(

@@ -23,17 +23,15 @@ export async function onPilotSkill(
     const pilotSkillCommand: PilotSkillCommand = {
       type: "PILOT_SKILL_COMMAND",
     };
-    const { isCommandCanceled } = props.customBattleEvent
-      ? await props.customBattleEvent.onPilotSkillCommandSelected({
+    if (props.customBattleEvent) {
+      const { isCommandCanceled } =
+        await props.customBattleEvent.onPilotSkillCommandSelected({
           ...props,
           pilot: pilotSkillCommand,
-        })
-      : {
-          isCommandCanceled: false,
-        };
-
-    if (isCommandCanceled) {
-      return;
+        });
+      if (isCommandCanceled) {
+        return;
+      }
     }
 
     await animationPlayer(props).play(

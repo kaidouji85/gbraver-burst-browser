@@ -23,17 +23,15 @@ export async function onBurst(
     const burstCommand: BurstCommand = {
       type: "BURST_COMMAND",
     };
-    const { isCommandCanceled } = props.customBattleEvent
-      ? await props.customBattleEvent.onBurstCommandSelected({
+    if (props.customBattleEvent) {
+      const { isCommandCanceled } =
+        await props.customBattleEvent.onBurstCommandSelected({
           ...props,
           burst: burstCommand,
-        })
-      : {
-          isCommandCanceled: false,
-        };
-
-    if (isCommandCanceled) {
-      return;
+        });
+      if (isCommandCanceled) {
+        return;
+      }
     }
 
     await animationPlayer(props).play(
