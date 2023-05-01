@@ -96,7 +96,7 @@ export const showHidden = domStub((resources) => {
       canPilotSkill: true,
     });
     await waitTime(2000);
-    await controller.decided();
+    await controller.decided().play();
     await waitTime(200);
     await controller.hidden();
   })();

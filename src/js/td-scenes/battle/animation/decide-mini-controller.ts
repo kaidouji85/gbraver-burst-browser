@@ -1,5 +1,4 @@
 import { waitTime } from "../../../wait/wait-time";
-import { BattleSceneProps } from "../battle-scene-props";
 import { BattleSceneView } from "../view";
 
 /**
@@ -10,7 +9,8 @@ import { BattleSceneView } from "../view";
 export async function decideMiniController(
   view: Readonly<BattleSceneView>
 ): Promise<void> {
-  await view.dom.miniController.decided();
+  // TODO Animteを返すようにする
+  await view.dom.miniController.decided().play();
   await waitTime(200);
   await view.dom.miniController.hidden();
 }

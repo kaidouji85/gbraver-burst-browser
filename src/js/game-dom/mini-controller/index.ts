@@ -6,6 +6,7 @@ import { decided } from "./procedure/decided";
 import { hidden } from "./procedure/hidden";
 import { show } from "./procedure/show";
 import { createMiniControllerProps, MiniControllerProps } from "./props";
+import { Animate } from "../../animation/animate";
 
 /** ミニコントローラ */
 export class MiniController {
@@ -58,10 +59,10 @@ export class MiniController {
 
   /**
    * コマンド決定アニメーション
-   * @return アニメーションが完了したら発火するPromise
+   * @return アニメーション
    */
-  async decided(): Promise<void> {
-    await decided(this.#props);
+  decided(): Animate {
+    return decided(this.#props);
   }
 
   /**
