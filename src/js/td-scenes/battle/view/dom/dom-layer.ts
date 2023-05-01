@@ -1,4 +1,5 @@
 import { MessageWindow } from "../../../../game-dom/message-window/message-window";
+import { MiniController } from "../../../../game-dom/mini-controller";
 import type { Resources } from "../../../../resource";
 
 /** HTML要素レイヤー */
@@ -17,6 +18,9 @@ export class DOMLayer {
 
   /** メッセージウインドウ パイロットボタン隣 */
   nearPilotButtonMessageWindow: MessageWindow;
+
+  /** ミニコントローラー */
+  miniController: MiniController;
 
   /**
    * コンストラクタ
@@ -59,6 +63,14 @@ export class DOMLayer {
       faceOrientation: "Left",
     });
     this.nearPilotButtonMessageWindow.visible(false);
+    this.miniController = new MiniController(resources);
+  }
+
+  /**
+   * デストラクタ相当の処理
+   */
+  destructor(): void {
+    this.miniController.destructor();
   }
 
   /**
@@ -73,6 +85,7 @@ export class DOMLayer {
       this.nearBatterySelectorMessageWindow.getRootHTMLElement(),
       this.nearBurstButtonMessageWindow.getRootHTMLElement(),
       this.nearPilotButtonMessageWindow.getRootHTMLElement(),
+      this.miniController.getRootHTMLElement(),
     ];
   }
 }

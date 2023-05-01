@@ -84,6 +84,7 @@ export class BattleSceneView {
   destructor(): void {
     this.hud.destructor();
     this.td.destructor();
+    this.dom.destructor();
   }
 
   /**
