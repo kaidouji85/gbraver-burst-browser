@@ -5,6 +5,7 @@ import { delay } from "../../../animation/delay";
 import type { DoPilotSkill } from "../actions/do-pilot-skill";
 import { animationPlayer } from "../animation-player";
 import type { BattleSceneProps } from "../battle-scene-props";
+import { doPilotSkillOrNot } from "./do-pilot-skill-or-not";
 import { progressGame } from "./progress-game";
 
 /**
@@ -23,15 +24,12 @@ export async function onPilotSkill(
     const pilotSkillCommand: PilotSkillCommand = {
       type: "PILOT_SKILL_COMMAND",
     };
-    if (props.customBattleEvent) {
-      const { isCommandCanceled } =
-        await props.customBattleEvent.onPilotSkillCommandSelected({
-          ...props,
-          pilot: pilotSkillCommand,
-        });
-      if (isCommandCanceled) {
-        return;
-      }
+    const { isCommandCanceled } = await doPilotSkillOrNot(
+      props,
+      pilotSkillCommand
+    );
+    if (isCommandCanceled) {
+      return;
     }
 
     await animationPlayer(props).play(

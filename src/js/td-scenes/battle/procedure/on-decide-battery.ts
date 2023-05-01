@@ -5,6 +5,7 @@ import { delay } from "../../../animation/delay";
 import type { DecideBattery } from "../actions/decide-battery";
 import { animationPlayer } from "../animation-player";
 import type { BattleSceneProps } from "../battle-scene-props";
+import { doBatteryOrNot } from "./do-battery-or-not";
 import { progressGame } from "./progress-game";
 
 /**
@@ -24,15 +25,10 @@ export async function onDecideBattery(
       type: "BATTERY_COMMAND",
       battery: action.battery,
     };
-    if (props.customBattleEvent) {
-      const { isCommandCanceled } =
-        await props.customBattleEvent.onBatteryCommandSelected({
-          ...props,
-          battery: batteryCommand,
-        });
-      if (isCommandCanceled) {
-        return;
-      }
+
+    const { isCommandCanceled } = await doBatteryOrNot(props, batteryCommand);
+    if (isCommandCanceled) {
+      return;
     }
 
     await animationPlayer(props).play(
