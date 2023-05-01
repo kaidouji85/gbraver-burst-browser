@@ -1,4 +1,4 @@
-import type { GameStateX, InputCommand } from "gbraver-burst-core";
+import type { Command, GameStateX, InputCommand, PlayerState } from "gbraver-burst-core";
 
 import { all } from "../../../../animation/all";
 import { Animate } from "../../../../animation/animate";
@@ -8,6 +8,43 @@ import { canPilotButtonPush } from "../../can-pilot-button-push";
 import { getEnableMaxBattery } from "../../get-enable-max-battery";
 import { getInitialBattery } from "../../get-initial-battery";
 import type { StateAnimationProps } from "./state-animation-props";
+import { BattleSceneView } from "../../view";
+
+/** ボタン表示アニメーションパラメータ */
+type VisibleButtonsParam = Readonly<{
+  /** ビュー */
+  view: BattleSceneView;
+  /** プレイヤーターンか否か、trueでプレイヤーターン */
+  isPlayerTurn: boolean;
+  /** プレイヤーが選択可能なコマンド */
+  commands: Command[];
+  /** プレイヤーステート */
+  player: PlayerState;
+}>;
+
+/**
+ * ボタン表示アニメーション
+ * @param param パラメータ
+ * @return アニメーション
+ */
+function visibleButtons(param: Readonly<VisibleButtonsParam>): Animate {
+  const enableMax = getEnableMaxBattery(param.commands);
+  const initialValue = getInitialBattery(enableMax);
+  const okButtonLabel = param.isPlayerTurn ? "Attack" : "Defense";
+  const canBurst = canBurstButtonPush(param.commands);
+  const canPilotSkill = canPilotButtonPush(param.commands);
+  return all(
+    param.view.hud.gameObjects.batterySelector.open(
+      initialValue,
+      param.player.armdozer.maxBattery,
+      enableMax,
+      okButtonLabel
+    ),
+    param.view.hud.gameObjects.burstButton.open(canBurst),
+    param.view.hud.gameObjects.pilotButton.open(canPilotSkill),
+  );
+}
+
 
 /**
  * コマンド入力フェイズのアニメーション
@@ -55,11 +92,6 @@ export function inputCommandAnimation(
   }
 
   const isPlayerTurn = props.playerId === gameState.activePlayerId;
-  const enableMax = getEnableMaxBattery(playerCommand.command);
-  const initialValue = getInitialBattery(enableMax);
-  const okButtonLabel = isPlayerTurn ? "Attack" : "Defense";
-  const canBurst = canBurstButtonPush(playerCommand.command);
-  const canPilotSkill = canPilotButtonPush(playerCommand.command);
   return all(
     isPlayerTurn
       ? playerTDArmdozer.sprite().startActive()
@@ -69,14 +101,12 @@ export function inputCommandAnimation(
     enemyHUD.gauge.hp(enemy.armdozer.hp),
     enemyHUD.gauge.battery(enemy.armdozer.battery),
     props.view.td.gameObjects.turnIndicator.turnChange(isPlayerTurn),
-    props.view.hud.gameObjects.batterySelector.open(
-      initialValue,
-      player.armdozer.maxBattery,
-      enableMax,
-      okButtonLabel
-    ),
-    props.view.hud.gameObjects.burstButton.open(canBurst),
-    props.view.hud.gameObjects.pilotButton.open(canPilotSkill),
+    visibleButtons({
+      ...props,
+      isPlayerTurn,
+      player,
+      commands: playerCommand.command
+    }),
     props.view.hud.gameObjects.timeScaleButton.open(props.animationTimeScale)
   );
 }
