@@ -84,6 +84,7 @@ export async function startOnlineBattle(
     pushWindow: props.pushWindow,
     gameLoop: props.gameLoop,
     renderer: props.renderer,
+    controllerType: "BigButton",
   });
   props.tdBinder.bind(battleScene, battleSceneConnector);
   await waitAnimationFrame();

@@ -7,6 +7,7 @@ import type {
   BattleScenePropsCreatorParams,
 } from "./battle-scene-props";
 import { createBattleSceneProps } from "./battle-scene-props";
+import { BattleControllerType } from "./controller-type";
 import { onBurst } from "./procedure/on-burst";
 import { onDecideBattery } from "./procedure/on-decide-battery";
 import { onMinusBattery } from "./procedure/on-minus-battery";
@@ -16,7 +17,10 @@ import { onToggleTimeScale } from "./procedure/on-toggle-time-scale";
 import { start } from "./procedure/start";
 
 /** コンストラクタのパラメータ */
-type BattleSceneParams = BattleScenePropsCreatorParams;
+type BattleSceneParams = BattleScenePropsCreatorParams & {
+  /** コントローラータイプ */
+  controllerType: BattleControllerType;
+};
 
 /** 戦闘シーン */
 export class BattleScene implements TDScene {
@@ -25,7 +29,6 @@ export class BattleScene implements TDScene {
 
   /**
    * コンストラクタ
-   *
    * @params params パラメータ
    */
   constructor(params: BattleSceneParams) {
@@ -64,7 +67,6 @@ export class BattleScene implements TDScene {
 
   /**
    * ゲーム終了通知
-   *
    * @return 通知ストリーム
    */
   gameEndNotifier(): Observable<BattleEnd> {
@@ -74,7 +76,6 @@ export class BattleScene implements TDScene {
   /**
    * 戦闘シーンを開始する
    * 画面遷移などが完了したら、本メソッドを呼ぶ想定
-   *
    * @return 処理が完了したら発火するPromise
    */
   async start(): Promise<void> {
