@@ -10,7 +10,7 @@ import { CommandCanceled } from "../custom-battle-event";
  * @param battery バーストコマンド
  * @return コマンドキャンセル情報
  */
-export async function doBurstOrNot(
+export async function doBurstEventOrNot(
   props: Readonly<BattleSceneProps>,
   burst: Readonly<BurstCommand>
 ): Promise<CommandCanceled> {
