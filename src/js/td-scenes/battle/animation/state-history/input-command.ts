@@ -1,4 +1,9 @@
-import type { Command, GameStateX, InputCommand, PlayerState } from "gbraver-burst-core";
+import type {
+  Command,
+  GameStateX,
+  InputCommand,
+  PlayerState,
+} from "gbraver-burst-core";
 
 import { all } from "../../../../animation/all";
 import { Animate } from "../../../../animation/animate";
@@ -7,8 +12,8 @@ import { canBurstButtonPush } from "../../can-burst-button-push";
 import { canPilotButtonPush } from "../../can-pilot-button-push";
 import { getEnableMaxBattery } from "../../get-enable-max-battery";
 import { getInitialBattery } from "../../get-initial-battery";
-import type { StateAnimationProps } from "./state-animation-props";
 import { BattleSceneView } from "../../view";
+import type { StateAnimationProps } from "./state-animation-props";
 
 /** ボタン表示アニメーションパラメータ */
 type VisibleButtonsParam = Readonly<{
@@ -41,10 +46,9 @@ function visibleButtons(param: Readonly<VisibleButtonsParam>): Animate {
       okButtonLabel
     ),
     param.view.hud.gameObjects.burstButton.open(canBurst),
-    param.view.hud.gameObjects.pilotButton.open(canPilotSkill),
+    param.view.hud.gameObjects.pilotButton.open(canPilotSkill)
   );
 }
-
 
 /**
  * コマンド入力フェイズのアニメーション
@@ -102,10 +106,10 @@ export function inputCommandAnimation(
     enemyHUD.gauge.battery(enemy.armdozer.battery),
     props.view.td.gameObjects.turnIndicator.turnChange(isPlayerTurn),
     visibleButtons({
-      ...props,
+      view: props.view,
       isPlayerTurn,
       player,
-      commands: playerCommand.command
+      commands: playerCommand.command,
     }),
     props.view.hud.gameObjects.timeScaleButton.open(props.animationTimeScale)
   );
