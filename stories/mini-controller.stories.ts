@@ -10,7 +10,7 @@ export default {
 const miniControllerStory = (config: ButtonConfig) =>
   domStub((resources) => {
     const controller = new MiniController(resources);
-    controller.batteryPushNotigier().subscribe((battery) => {
+    controller.batteryPushNotifier().subscribe((battery) => {
       console.log(`battery ${battery}`);
     });
     controller.burstPushNotifier().subscribe(() => {
