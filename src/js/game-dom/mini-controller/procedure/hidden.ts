@@ -7,7 +7,9 @@ import { MiniControllerProps } from "../props";
  * @param props コンポネントプロパティ
  * @return 処理が完了したら発火するPromise
  */
-export async function hidden(props: Readonly<MiniControllerProps>): Promise<void> {
+export async function hidden(
+  props: Readonly<MiniControllerProps>
+): Promise<void> {
   await hiddenRoot(props.root);
   props.root.className = ROOT_INVISIBLE;
 }

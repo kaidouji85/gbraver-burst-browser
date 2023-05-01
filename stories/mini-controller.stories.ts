@@ -98,7 +98,7 @@ export const showHidden = domStub((resources) => {
     await waitTime(2000);
     await controller.decided();
     await waitTime(200);
-    await controller.hidden();  
+    await controller.hidden();
   })();
   return controller.getRootHTMLElement();
 });

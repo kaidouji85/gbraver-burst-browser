@@ -6,10 +6,7 @@ import { waitFinishAnimation } from "../../../dom/animation";
  * @return アニメーションが完了したら発火するPromise
  */
 export async function showRoot(root: HTMLElement): Promise<void> {
-  const animation = root.animate([
-    { opacity: 0 },
-    { opacity: 1 }
-  ], {
+  const animation = root.animate([{ opacity: 0 }, { opacity: 1 }], {
     duration: 200,
     fill: "forwards",
   });

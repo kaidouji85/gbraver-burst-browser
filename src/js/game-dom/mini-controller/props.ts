@@ -1,6 +1,12 @@
 import * as R from "ramda";
 import { merge, Observable } from "rxjs";
 
+import { Resources } from "../../resource";
+import {
+  createEmptySoundResource,
+  SOUND_IDS,
+  SoundResource,
+} from "../../resource/sound";
 import { domUuid } from "../../uuid/dom-uuid";
 import { BatteryButton } from "./battery-button";
 import { BurstButton } from "./burst-button";
@@ -8,8 +14,6 @@ import { ROOT_INVISIBLE } from "./dom/class-name";
 import { extractElements } from "./dom/elements";
 import { rootInnerHTML } from "./dom/root-inner-html";
 import { PilotButton } from "./pilot-button";
-import { Resources } from "../../resource";
-import { createEmptySoundResource, SOUND_IDS, SoundResource } from "../../resource/sound";
 
 /** バッテリーボタン最大個数 */
 const MAX_BATTERY_BUTTON = 9;
@@ -35,7 +39,9 @@ export type MiniControllerProps = {
  * @param resources リソース管理オブジェクト
  * @return 生成結果
  */
-export function createMiniControllerProps(resources: Resources): MiniControllerProps {
+export function createMiniControllerProps(
+  resources: Resources
+): MiniControllerProps {
   const root = document.createElement("div");
   root.className = ROOT_INVISIBLE;
   const ids = { batteries: domUuid(), burst: domUuid(), pilot: domUuid() };
@@ -54,7 +60,9 @@ export function createMiniControllerProps(resources: Resources): MiniControllerP
   root.appendChild(burst.getRootHTMLElement());
   const pilot = new PilotButton();
   root.appendChild(pilot.getRootHTMLElement());
-  const pushButtonSound = resources.sounds.find(v => v.id === SOUND_IDS.PUSH_BUTTON) ?? createEmptySoundResource();
+  const pushButtonSound =
+    resources.sounds.find((v) => v.id === SOUND_IDS.PUSH_BUTTON) ??
+    createEmptySoundResource();
   return {
     ...elements,
     root,

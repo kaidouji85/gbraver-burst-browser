@@ -10,7 +10,10 @@ import { engageButtonConfig } from "./engage-button-config";
  * @param config ボタン設定
  * @return 処理が完了したら発火するPromise
  */
-export async function show(props: Readonly<MiniControllerProps>, config: Readonly<ButtonConfig>): Promise<void> {
+export async function show(
+  props: Readonly<MiniControllerProps>,
+  config: Readonly<ButtonConfig>
+): Promise<void> {
   props.root.className = ROOT;
   engageButtonConfig(props, config);
   await showRoot(props.root);

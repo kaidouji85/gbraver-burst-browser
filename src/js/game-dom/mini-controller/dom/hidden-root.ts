@@ -6,11 +6,10 @@ import { waitFinishAnimation } from "../../../dom/animation";
  * @return アニメーションが完了したら発火するPromise
  */
 export async function hiddenRoot(root: HTMLElement): Promise<void> {
-  await waitFinishAnimation(root.animate([
-    { opacity: 1 },
-    { opacity: 0 }
-  ], {
-    duration: 200,
-    fill: "forwards",
-  }));
+  await waitFinishAnimation(
+    root.animate([{ opacity: 1 }, { opacity: 0 }], {
+      duration: 200,
+      fill: "forwards",
+    })
+  );
 }

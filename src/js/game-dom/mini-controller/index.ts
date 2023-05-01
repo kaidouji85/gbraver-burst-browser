@@ -1,11 +1,11 @@
 import { Observable } from "rxjs";
 
-import { ButtonConfig } from "./button-config";
-import { createMiniControllerProps, MiniControllerProps } from "./props";
-import { show } from "./procedure/show";
-import { hidden } from "./procedure/hidden";
-import { decided } from "./procedure/decided";
 import { Resources } from "../../resource";
+import { ButtonConfig } from "./button-config";
+import { decided } from "./procedure/decided";
+import { hidden } from "./procedure/hidden";
+import { show } from "./procedure/show";
+import { createMiniControllerProps, MiniControllerProps } from "./props";
 
 /** ミニコントローラ */
 export class MiniController {

@@ -6,7 +6,9 @@ import { MiniControllerProps } from "../props";
  * @param props コンポネントプロパティ
  * @return アニメーションが完了したら発火するPromise
  */
-export async function decided(props: Readonly<MiniControllerProps>): Promise<void> {
+export async function decided(
+  props: Readonly<MiniControllerProps>
+): Promise<void> {
   props.pushButtonSound.sound.play();
   await pop(props.root);
 }
