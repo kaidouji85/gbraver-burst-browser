@@ -1,6 +1,9 @@
 /** ルートHTML要素 class属性 */
 export const ROOT = "mini-controller";
 
+/** ルートHTML要素 非表示 class属性 */
+export const ROOT_INVISIBLE = `${ROOT}--invisible`;
+
 /** バッテリーボタン class属性 */
 export const BATTERY = `${ROOT}__battery`;
 

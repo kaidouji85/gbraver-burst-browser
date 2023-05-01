@@ -1,8 +1,8 @@
 import { Observable } from "rxjs";
 
 import { ButtonConfig } from "./button-config";
-import { engageButtonConfig } from "./procedure/engage-button-config";
 import { createMiniControllerProps, MiniControllerProps } from "./props";
+import { show } from "./procedure/show";
 
 /** ミニコントローラ */
 export class MiniController {
@@ -11,11 +11,9 @@ export class MiniController {
 
   /**
    * コンストラクタ
-   * @param config ボタン設定
    */
-  constructor(config: ButtonConfig) {
+  constructor() {
     this.#props = createMiniControllerProps();
-    engageButtonConfig(this.#props, config);
   }
 
   /**
@@ -35,6 +33,15 @@ export class MiniController {
    */
   getRootHTMLElement(): HTMLElement {
     return this.#props.root;
+  }
+
+  /**
+   * ミニコントローラーを表示する
+   * @param config ボタン設定
+   * @return 処理が完了したら発火するPromise
+   */
+  async show(config: Readonly<ButtonConfig>): Promise<void> {
+    await show(this.#props, config);
   }
 
   /**

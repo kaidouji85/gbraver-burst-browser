@@ -29,6 +29,10 @@
   }
 }
 
+.mini-controller--invisible {
+  display: none;
+}
+
 .mini-controller__batteries {
   grid-column: 1 / 3;
   grid-row: 1;

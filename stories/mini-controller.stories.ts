@@ -8,7 +8,7 @@ export default {
 
 const miniControllerStory = (config: ButtonConfig) =>
   domStub(() => {
-    const controller = new MiniController(config);
+    const controller = new MiniController();
     controller.batteryPushNotigier().subscribe((battery) => {
       console.log(`battery ${battery}`);
     });
@@ -18,6 +18,7 @@ const miniControllerStory = (config: ButtonConfig) =>
     controller.pilotPushNotifier().subscribe(() => {
       console.log("pilot");
     });
+    controller.show(config);
     return controller.getRootHTMLElement();
   });
 

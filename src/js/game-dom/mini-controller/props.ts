@@ -4,7 +4,7 @@ import { merge, Observable } from "rxjs";
 import { domUuid } from "../../uuid/dom-uuid";
 import { BatteryButton } from "./battery-button";
 import { BurstButton } from "./burst-button";
-import { ROOT } from "./dom/class-name";
+import { ROOT_INVISIBLE } from "./dom/class-name";
 import { extractElements } from "./dom/elements";
 import { rootInnerHTML } from "./dom/root-inner-html";
 import { PilotButton } from "./pilot-button";
@@ -32,7 +32,7 @@ export type MiniControllerProps = {
  */
 export function createMiniControllerProps(): MiniControllerProps {
   const root = document.createElement("div");
-  root.className = ROOT;
+  root.className = ROOT_INVISIBLE;
   const ids = { batteries: domUuid(), burst: domUuid(), pilot: domUuid() };
   root.innerHTML = rootInnerHTML(ids);
   const elements = extractElements(root, ids);
