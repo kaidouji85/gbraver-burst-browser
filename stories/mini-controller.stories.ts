@@ -8,8 +8,8 @@ export default {
 };
 
 const miniControllerStory = (config: ButtonConfig) =>
-  domStub(() => {
-    const controller = new MiniController();
+  domStub((resources) => {
+    const controller = new MiniController(resources);
     controller.batteryPushNotigier().subscribe((battery) => {
       console.log(`battery ${battery}`);
     });
@@ -86,8 +86,8 @@ export const disabledAll = miniControllerStory({
   canPilotSkill: false,
 });
 
-export const showHidden = domStub(() => {
-  const controller = new MiniController();
+export const showHidden = domStub((resources) => {
+  const controller = new MiniController(resources);
   (async () => {
     await controller.show({
       battery: 5,
@@ -95,7 +95,7 @@ export const showHidden = domStub(() => {
       canBurst: true,
       canPilotSkill: true,
     });
-    await waitTime(5000);
+    await waitTime(2000);
     await controller.decided();
     await waitTime(200);
     await controller.hidden();  

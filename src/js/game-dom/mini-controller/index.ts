@@ -5,6 +5,7 @@ import { createMiniControllerProps, MiniControllerProps } from "./props";
 import { show } from "./procedure/show";
 import { hidden } from "./procedure/hidden";
 import { decided } from "./procedure/decided";
+import { Resources } from "../../resource";
 
 /** ミニコントローラ */
 export class MiniController {
@@ -13,9 +14,10 @@ export class MiniController {
 
   /**
    * コンストラクタ
+   * @param resources リソース管理オブジェクト
    */
-  constructor() {
-    this.#props = createMiniControllerProps();
+  constructor(resources: Resources) {
+    this.#props = createMiniControllerProps(resources);
   }
 
   /**

@@ -8,6 +8,8 @@ import { ROOT_INVISIBLE } from "./dom/class-name";
 import { extractElements } from "./dom/elements";
 import { rootInnerHTML } from "./dom/root-inner-html";
 import { PilotButton } from "./pilot-button";
+import { Resources } from "../../resource";
+import { createEmptySoundResource, SOUND_IDS, SoundResource } from "../../resource/sound";
 
 /** バッテリーボタン最大個数 */
 const MAX_BATTERY_BUTTON = 9;
@@ -24,13 +26,16 @@ export type MiniControllerProps = {
   pilotButton: PilotButton;
   /** バッテリーボタン押下ストリーム、numberはバッテリー値 */
   batteryPush: Observable<number>;
+  /** ボタン押下サウンド */
+  pushButtonSound: SoundResource;
 };
 
 /**
  * ミニコントローラープロパティを生成する
+ * @param resources リソース管理オブジェクト
  * @return 生成結果
  */
-export function createMiniControllerProps(): MiniControllerProps {
+export function createMiniControllerProps(resources: Resources): MiniControllerProps {
   const root = document.createElement("div");
   root.className = ROOT_INVISIBLE;
   const ids = { batteries: domUuid(), burst: domUuid(), pilot: domUuid() };
@@ -49,6 +54,7 @@ export function createMiniControllerProps(): MiniControllerProps {
   root.appendChild(burst.getRootHTMLElement());
   const pilot = new PilotButton();
   root.appendChild(pilot.getRootHTMLElement());
+  const pushButtonSound = resources.sounds.find(v => v.id === SOUND_IDS.PUSH_BUTTON) ?? createEmptySoundResource();
   return {
     ...elements,
     root,
@@ -56,5 +62,6 @@ export function createMiniControllerProps(): MiniControllerProps {
     batteryPush,
     burstButton: burst,
     pilotButton: pilot,
+    pushButtonSound,
   };
 }
