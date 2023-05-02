@@ -4,10 +4,15 @@ import { z } from "zod";
 export type WebGLPixelRatio = number;
 
 /** 設定可能なWebGLピクセルレートを集めたもの */
-export const WebGLPixelRatios: WebGLPixelRatio[] = [0.5, 0.75, 1, 2];
+export const WebGLPixelRatios: WebGLPixelRatio[] = [0.5, 0.75, 1, 2]; 
 
 /** WebGLピクセルレート zod schema */
-export const WebGLPixelRatioSchema = z.union([z.literal(0.5), z.literal(0.75), z.literal(1), z.literal(2)]);
+export const WebGLPixelRatioSchema = z.union([
+  z.preprocess(Number, z.literal(0.5)),
+  z.preprocess(Number, z.literal(0.75)),
+  z.preprocess(Number, z.literal(1)),
+  z.preprocess(Number, z.literal(2)),
+]);
 
 /**
  * 任意のオブジェクトをWebGLピクセルレートにパースする
