@@ -5,12 +5,7 @@ import { WebGLPixelRatio } from "../browser-config";
 /** WebGLピクセルレート zod schema */
 export const WebGLPixelRatioSchema = z.preprocess(
   Number,
-  z.union([
-    z.literal(0.5),
-    z.literal(0.75),
-    z.literal(1),
-    z.literal(2),
-  ])
+  z.union([z.literal(0.5), z.literal(0.75), z.literal(1), z.literal(2)])
 );
 
 /**

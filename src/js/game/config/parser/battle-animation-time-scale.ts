@@ -3,11 +3,10 @@ import { z } from "zod";
 import { BattleAnimationTimeScale } from "../browser-config";
 
 /** 戦闘アニメタイムスケール zod schema */
-export const BattleAnimationTimeScaleSchema = z.preprocess(Number, z.union([
-  z.literal(1),
-  z.literal(0.5),
-  z.literal(0.25)
-]));
+export const BattleAnimationTimeScaleSchema = z.preprocess(
+  Number,
+  z.union([z.literal(1), z.literal(0.5), z.literal(0.25)])
+);
 
 /**
  * 任意のオブジェクトを戦闘アニメタイムスケールにパースする
