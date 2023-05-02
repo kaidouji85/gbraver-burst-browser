@@ -1,14 +1,13 @@
 import type {
-  BattleAnimationTimeScale,
   GbraverBurstBrowserConfig,
   GbraverBurstBrowserConfigRepository,
   SoundVolume,
 } from "./browser-config";
 import {
-  parseBattleAnimationTimeScale,
   parseSoundVolume,
 } from "./browser-config";
 import { DefaultConfig } from "./default-config";
+import { BattleAnimationTimeScale, parseBattleAnimationTimeScale } from "./schema/battle-animation-time-scale";
 import { WebGLPixelRatio, parseWebGLPixelRatio } from "./schema/web-gl-pixel-ratio";
 
 /** 設定項目名とLocalStorageキーのマッピング */

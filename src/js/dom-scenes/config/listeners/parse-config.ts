@@ -1,10 +1,9 @@
 import type { GbraverBurstBrowserConfig } from "../../../game/config/browser-config";
 import {
-  BattleAnimationTimeScales,
-  parseBattleAnimationTimeScale,
   parseSoundVolume,
   SoundVolumes,
 } from "../../../game/config/browser-config";
+import { BattleAnimationTimeScales, parseBattleAnimationTimeScale } from "../../../game/config/schema/battle-animation-time-scale";
 import { parseWebGLPixelRatio, WebGLPixelRatios } from "../../../game/config/schema/web-gl-pixel-ratio";
 import type { ConfigProps } from "../props";
 

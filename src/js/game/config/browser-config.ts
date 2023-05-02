@@ -1,33 +1,5 @@
+import { BattleAnimationTimeScale } from "./schema/battle-animation-time-scale";
 import { WebGLPixelRatio } from "./schema/web-gl-pixel-ratio";
-
-/** 戦闘アニメタイムスケール */
-export type BattleAnimationTimeScale = number;
-
-/** 設定可能な戦闘アニメタイムスケールをあつめたもの */
-export const BattleAnimationTimeScales: BattleAnimationTimeScale[] = [
-  1, 0.5, 0.25,
-];
-
-/**
- * 任意のオブジェクトを戦闘アニメタイムスケールにパースする
- * パースできない場合はnullを返す
- *
- * @param origin パース元
- * @return パース結果
- */
-/* eslint-disable @typescript-eslint/no-explicit-any */
-export function parseBattleAnimationTimeScale(
-  origin: any
-): BattleAnimationTimeScale | null {
-  /* eslint-enable */
-  const value = Number(origin);
-
-  if (isNaN(value)) {
-    return null;
-  }
-
-  return BattleAnimationTimeScales.find((v) => v === value) ?? null;
-}
 
 /** 音量 */
 export type SoundVolume = number;
