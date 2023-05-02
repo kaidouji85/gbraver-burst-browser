@@ -7,15 +7,7 @@ import type {
   BattleScenePropsCreatorParams,
 } from "./battle-scene-props";
 import { createBattleSceneProps } from "./battle-scene-props";
-import { onBurst } from "./procedure/on-burst";
-import { onBurstByMiniController } from "./procedure/on-burst-by-mini-controller";
-import { onDecideBattery } from "./procedure/on-decide-battery";
-import { onDecideBatteryByMiniController } from "./procedure/on-decide-battery-by-minicontroller";
-import { onMinusBattery } from "./procedure/on-minus-battery";
-import { onPilotSkill } from "./procedure/on-pilot-skill";
-import { onPilotSkillByMiniController } from "./procedure/on-pilot-skill-by-mini-controller";
-import { onPlusBattery } from "./procedure/on-plus-battery";
-import { onToggleTimeScale } from "./procedure/on-toggle-time-scale";
+import { bindEventListeners } from "./procedure/bind-event-listeners";
 import { start } from "./procedure/start";
 
 /** コンストラクタのパラメータ */
@@ -32,29 +24,7 @@ export class BattleScene implements TDScene {
    */
   constructor(params: BattleSceneParams) {
     this.#props = createBattleSceneProps(params);
-    this.#unsubscriber = [
-      this.#props.view.battleActionNotifier().subscribe((action) => {
-        if (action.type === "plusBattery") {
-          onPlusBattery(this.#props);
-        } else if (action.type === "minusBattery") {
-          onMinusBattery(this.#props);
-        } else if (action.type === "decideBattery") {
-          onDecideBattery(this.#props, action);
-        } else if (action.type === "doBurst") {
-          onBurst(this.#props, action);
-        } else if (action.type === "doPilotSkill") {
-          onPilotSkill(this.#props, action);
-        } else if (action.type === "toggleTimeScale") {
-          onToggleTimeScale(this.#props, action);
-        } else if (action.type === "decideBatteryByMiniController") {
-          onDecideBatteryByMiniController(this.#props, action);
-        } else if (action.type === "doBurstByMiniController") {
-          onBurstByMiniController(this.#props);
-        } else if (action.type === "doPilotSkillByMiniController") {
-          onPilotSkillByMiniController(this.#props);
-        }
-      }),
-    ];
+    this.#unsubscriber = bindEventListeners(this.#props);
   }
 
   /** @override */
