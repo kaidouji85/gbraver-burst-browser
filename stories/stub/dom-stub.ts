@@ -1,6 +1,9 @@
 import "../../src/css/style.css";
 
+import TWEEN from "@tweenjs/tween.js";
+
 import { CssVH } from "../../src/js/css/vh";
+import { gameLoopStream } from "../../src/js/game-loop/game-loop";
 import type { Resources } from "../../src/js/resource";
 import { developingFullResourceLoading } from "../../src/js/resource/loading/full-resource-loading";
 import { resizeStream } from "../../src/js/window/resize";
@@ -38,6 +41,9 @@ export const domStub =
     resourceLoading.resources.then((resources) => {
       const component = creator(resources);
       root.appendChild(component);
+    });
+    gameLoopStream().subscribe((action) => {
+      TWEEN.update(action.time);
     });
     return root;
   };

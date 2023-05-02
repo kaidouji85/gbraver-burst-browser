@@ -8,9 +8,12 @@ import type {
 } from "./battle-scene-props";
 import { createBattleSceneProps } from "./battle-scene-props";
 import { onBurst } from "./procedure/on-burst";
+import { onBurstByMiniController } from "./procedure/on-burst-by-mini-controller";
 import { onDecideBattery } from "./procedure/on-decide-battery";
+import { onDecideBatteryByMiniController } from "./procedure/on-decide-battery-by-minicontroller";
 import { onMinusBattery } from "./procedure/on-minus-battery";
 import { onPilotSkill } from "./procedure/on-pilot-skill";
+import { onPilotSkillByMiniController } from "./procedure/on-pilot-skill-by-mini-controller";
 import { onPlusBattery } from "./procedure/on-plus-battery";
 import { onToggleTimeScale } from "./procedure/on-toggle-time-scale";
 import { start } from "./procedure/start";
@@ -25,7 +28,6 @@ export class BattleScene implements TDScene {
 
   /**
    * コンストラクタ
-   *
    * @params params パラメータ
    */
   constructor(params: BattleSceneParams) {
@@ -44,6 +46,12 @@ export class BattleScene implements TDScene {
           onPilotSkill(this.#props, action);
         } else if (action.type === "toggleTimeScale") {
           onToggleTimeScale(this.#props, action);
+        } else if (action.type === "decideBatteryByMiniController") {
+          onDecideBatteryByMiniController(this.#props, action);
+        } else if (action.type === "doBurstByMiniController") {
+          onBurstByMiniController(this.#props);
+        } else if (action.type === "doPilotSkillByMiniController") {
+          onPilotSkillByMiniController(this.#props);
         }
       }),
     ];
@@ -64,7 +72,6 @@ export class BattleScene implements TDScene {
 
   /**
    * ゲーム終了通知
-   *
    * @return 通知ストリーム
    */
   gameEndNotifier(): Observable<BattleEnd> {
@@ -74,7 +81,6 @@ export class BattleScene implements TDScene {
   /**
    * 戦闘シーンを開始する
    * 画面遷移などが完了したら、本メソッドを呼ぶ想定
-   *
    * @return 処理が完了したら発火するPromise
    */
   async start(): Promise<void> {

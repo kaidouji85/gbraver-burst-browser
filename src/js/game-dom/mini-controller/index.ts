@@ -1,5 +1,6 @@
 import { Observable } from "rxjs";
 
+import { Animate } from "../../animation/animate";
 import { Resources } from "../../resource";
 import { ButtonConfig } from "./button-config";
 import { decided } from "./procedure/decided";
@@ -42,33 +43,33 @@ export class MiniController {
   /**
    * ミニコントローラーを表示する
    * @param config ボタン設定
-   * @return 処理が完了したら発火するPromise
+   * @return アニメーション
    */
-  async show(config: Readonly<ButtonConfig>): Promise<void> {
-    await show(this.#props, config);
+  show(config: Readonly<ButtonConfig>): Animate {
+    return show(this.#props, config);
   }
 
   /**
    * ミニコントローラーを非表示にする
-   * @return 処理が完了したら発火するPromise
+   * @return アニメーション
    */
-  async hidden(): Promise<void> {
-    await hidden(this.#props);
+  hidden(): Animate {
+    return hidden(this.#props);
   }
 
   /**
    * コマンド決定アニメーション
-   * @return アニメーションが完了したら発火するPromise
+   * @return アニメーション
    */
-  async decided(): Promise<void> {
-    await decided(this.#props);
+  decided(): Animate {
+    return decided(this.#props);
   }
 
   /**
    * バッテリーボタン押下通知
    * @return 通知ストリーム、numberはバッテリー値
    */
-  batteryPushNotigier(): Observable<number> {
+  batteryPushNotifier(): Observable<number> {
     return this.#props.batteryPush;
   }
 

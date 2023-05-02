@@ -1,6 +1,7 @@
 import type { PlayerId } from "gbraver-burst-core";
 
 import type { BGMManager } from "../../../../bgm/bgm-manager";
+import { BattleControllerType } from "../../controller-type";
 import { BattleSceneSounds } from "../../sounds/sounds";
 import { BattleSceneView } from "../../view";
 
@@ -23,4 +24,7 @@ export type StateAnimationProps = {
 
   /** BGM管理オブジェクト */
   readonly bgm: BGMManager;
+
+  /** コントローラータイプ */
+  readonly controllerType: BattleControllerType;
 };
