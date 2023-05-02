@@ -10,12 +10,14 @@ export default {
 const miniControllerStory = (config: ButtonConfig) =>
   domStub((resources) => {
     const controller = new MiniController(resources);
-    const decide = () => controller.decided()
-      .chain(delay(200))
-      .chain(controller.hidden())
-      .chain(delay(2000))
-      .chain(controller.show(config))
-      .play();
+    const decide = () =>
+      controller
+        .decided()
+        .chain(delay(200))
+        .chain(controller.hidden())
+        .chain(delay(2000))
+        .chain(controller.show(config))
+        .play();
     controller.batteryPushNotifier().subscribe((battery) => {
       console.log(`battery ${battery}`);
       decide();
