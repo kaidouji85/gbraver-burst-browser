@@ -1,6 +1,6 @@
 import TWEEN from "@tweenjs/tween.js";
 import type { Player, PlayerId } from "gbraver-burst-core";
-import { Observable, Subject } from "rxjs";
+import { Observable, Subject, merge } from "rxjs";
 
 import type { GameLoop } from "../../../game-loop/game-loop";
 import type { PreRender } from "../../../game-loop/pre-render";
@@ -92,7 +92,10 @@ export class BattleSceneView {
    * @return 通知ストリーム
    */
   battleActionNotifier(): Observable<BattleSceneAction> {
-    return this.hud.battleActionNotifier();
+    return merge(
+      this.hud.battleActionNotifier(),
+      this.dom.battleActionNotifier()
+    );
   }
 
   /**
