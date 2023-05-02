@@ -1,4 +1,4 @@
-import { isSoundConfigChanged } from "../config/browser-config";
+import { isSoundConfigChanged } from "../config/config-changed";
 import { ConfigChangeComplete } from "../game-actions/config-change-complete";
 import type { GameProps } from "../game-props";
 import { reflectSoundVolume } from "../reflect-sound-volume";
