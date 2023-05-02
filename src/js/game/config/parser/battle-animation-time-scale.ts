@@ -1,12 +1,5 @@
 import { z } from "zod";
-
-/** 戦闘アニメタイムスケール */
-export type BattleAnimationTimeScale = number;
-
-/** 設定可能な戦闘アニメタイムスケールをあつめたもの */
-export const BattleAnimationTimeScales: BattleAnimationTimeScale[] = [
-  1, 0.5, 0.25,
-];
+import { BattleAnimationTimeScale } from "../browser-config";
 
 /** 戦闘アニメタイムスケール zod schema */
 export const BattleAnimationTimeScaleSchema = z.union([

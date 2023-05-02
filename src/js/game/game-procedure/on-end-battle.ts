@@ -14,7 +14,8 @@ import type { GameProps } from "../game-props";
 import { PlayingTutorialStage } from "../in-progress/tutorial";
 import type { NPCBattleResult } from "../npc-battle";
 import { updateNPCBattleState } from "../npc-battle";
-import { BattleAnimationTimeScales, parseBattleAnimationTimeScale } from "../config/schema/battle-animation-time-scale";
+import { parseBattleAnimationTimeScale } from "../config/parser/battle-animation-time-scale";
+import { BattleAnimationTimeScales } from "../config/browser-config";
 
 /**
  * 戦闘画面のアニメーションタイムスケールを設定に反映する

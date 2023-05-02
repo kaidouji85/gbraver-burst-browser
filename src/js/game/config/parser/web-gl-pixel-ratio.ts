@@ -1,10 +1,5 @@
 import { z } from "zod";
-
-/** WebGLピクセルレート */
-export type WebGLPixelRatio = number;
-
-/** 設定可能なWebGLピクセルレートを集めたもの */
-export const WebGLPixelRatios: WebGLPixelRatio[] = [0.5, 0.75, 1, 2]; 
+import { WebGLPixelRatio } from "../browser-config";
 
 /** WebGLピクセルレート zod schema */
 export const WebGLPixelRatioSchema = z.union([

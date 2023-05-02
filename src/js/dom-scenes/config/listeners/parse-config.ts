@@ -1,7 +1,7 @@
-import type { GbraverBurstBrowserConfig } from "../../../game/config/browser-config";
-import { BattleAnimationTimeScales, parseBattleAnimationTimeScale } from "../../../game/config/schema/battle-animation-time-scale";
-import { SoundVolumes, parseSoundVolume } from "../../../game/config/schema/sound-volume";
-import { parseWebGLPixelRatio, WebGLPixelRatios } from "../../../game/config/schema/web-gl-pixel-ratio";
+import { BattleAnimationTimeScales, GbraverBurstBrowserConfig, SoundVolumes, WebGLPixelRatios } from "../../../game/config/browser-config";
+import { parseBattleAnimationTimeScale } from "../../../game/config/parser/battle-animation-time-scale";
+import { parseSoundVolume } from "../../../game/config/parser/sound-volume";
+import { parseWebGLPixelRatio } from "../../../game/config/parser/web-gl-pixel-ratio";
 import type { ConfigProps } from "../props";
 
 /**

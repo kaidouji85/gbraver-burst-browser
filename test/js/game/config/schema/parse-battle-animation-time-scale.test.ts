@@ -1,4 +1,4 @@
-import { parseBattleAnimationTimeScale } from "../../../../../src/js/game/config/schema/battle-animation-time-scale";
+import { parseBattleAnimationTimeScale } from "../../../../../src/js/game/config/parser/battle-animation-time-scale";
 
 test("有効な戦闘アニメタイムスケールはパースできる", () => {
   expect(parseBattleAnimationTimeScale(1)).toBe(1);

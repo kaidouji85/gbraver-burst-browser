@@ -1,12 +1,5 @@
 import { z } from "zod";
-
-/** 音量 */
-export type SoundVolume = number;
-
-/** 有効な音量 */
-export const SoundVolumes: SoundVolume[] = [
-  0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1,
-];
+import { SoundVolume } from "../browser-config";
 
 /** 可能であればNumber型に変換するzod preprocess */
 /* eslint-disable @typescript-eslint/no-explicit-any */

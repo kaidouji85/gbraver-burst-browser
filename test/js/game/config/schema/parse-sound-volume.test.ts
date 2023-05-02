@@ -1,4 +1,4 @@
-import { parseSoundVolume } from "../../../../../src/js/game/config/schema/sound-volume";
+import { parseSoundVolume } from "../../../../../src/js/game/config/parser/sound-volume";
 
 test("有効な音量ならパースできる", () => {
   expect(parseSoundVolume(0.5)).toBe(0.5);

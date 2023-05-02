@@ -1,4 +1,4 @@
-import { parseWebGLPixelRatio } from "../../../../../src/js/game/config/schema/web-gl-pixel-ratio";
+import { parseWebGLPixelRatio } from "../../../../../src/js/game/config/parser/web-gl-pixel-ratio";
 
 test("有効なWebGLPixelRatioはパースできる", () => {
   expect(parseWebGLPixelRatio(2)).toBe(2);
