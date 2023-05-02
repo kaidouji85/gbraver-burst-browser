@@ -50,7 +50,7 @@ export async function startTutorial(
     pushWindow: props.pushWindow,
     gameLoop: props.gameLoop,
     renderer: props.renderer,
-    controllerType: "BigButton",
+    controllerType: "BigButton",  // TODO アプリ設定から値をセットする
   });
   props.tdBinder.bind(battleScene, battleSceneConnector);
   await waitAnimationFrame();
