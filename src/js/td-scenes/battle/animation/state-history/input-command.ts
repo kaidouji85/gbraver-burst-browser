@@ -16,7 +16,7 @@ import { BattleSceneView } from "../../view";
 import type { StateAnimationProps } from "./state-animation-props";
 
 /** ボタン表示アニメーションパラメータ */
-type VisibleButtonsParam = Readonly<{
+type VisibleButtonsParam = {
   /** ビュー */
   view: BattleSceneView;
   /** プレイヤーターンか否か、trueでプレイヤーターン */
@@ -25,7 +25,7 @@ type VisibleButtonsParam = Readonly<{
   commands: Command[];
   /** プレイヤーステート */
   player: PlayerState;
-}>;
+};
 
 /**
  * ボタン表示アニメーション
@@ -48,6 +48,34 @@ function visibleButtons(param: Readonly<VisibleButtonsParam>): Animate {
     param.view.hud.gameObjects.burstButton.open(canBurst),
     param.view.hud.gameObjects.pilotButton.open(canPilotSkill)
   );
+}
+
+/** ミニコントローラー表示アニメーションパラメータ */
+type VisibleMiniControllerParam = {
+  /** ビュー */
+  view: BattleSceneView;
+  /** プレイヤーが選択可能なコマンド */
+  commands: Command[];
+  /** プレイヤーステート */
+  player: PlayerState;
+};
+
+/**
+ * ミニコントローラー表示アニメーション
+ * @param param パラメータ
+ * @return アニメーション
+ */
+function visibleMiniController(param: VisibleMiniControllerParam): Animate {
+  const battery = getEnableMaxBattery(param.commands);
+  const maxBattery = param.player.armdozer.maxBattery;
+  const canBurst = canBurstButtonPush(param.commands);
+  const canPilotSkill = canPilotButtonPush(param.commands);
+  return param.view.dom.miniController.show({
+    battery,
+    maxBattery,
+    canBurst,
+    canPilotSkill,
+  });
 }
 
 /**
