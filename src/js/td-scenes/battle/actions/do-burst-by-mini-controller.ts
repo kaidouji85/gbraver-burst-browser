@@ -1,4 +1,4 @@
 /** ミニコントローラーのバーストボタンが押された */
 export type DoBurstByMiniController = {
-  type: "doBurstByMiniController",
+  type: "doBurstByMiniController";
 };

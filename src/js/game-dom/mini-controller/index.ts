@@ -1,12 +1,12 @@
 import { Observable } from "rxjs";
 
+import { Animate } from "../../animation/animate";
 import { Resources } from "../../resource";
 import { ButtonConfig } from "./button-config";
 import { decided } from "./procedure/decided";
 import { hidden } from "./procedure/hidden";
 import { show } from "./procedure/show";
 import { createMiniControllerProps, MiniControllerProps } from "./props";
-import { Animate } from "../../animation/animate";
 
 /** ミニコントローラ */
 export class MiniController {
@@ -51,10 +51,10 @@ export class MiniController {
 
   /**
    * ミニコントローラーを非表示にする
-   * @return 処理が完了したら発火するPromise
+   * @return アニメーション
    */
-  async hidden(): Promise<void> {
-    await hidden(this.#props);
+  hidden(): Animate {
+    return hidden(this.#props);
   }
 
   /**

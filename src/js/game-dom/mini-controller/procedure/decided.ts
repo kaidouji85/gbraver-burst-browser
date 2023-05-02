@@ -8,11 +8,8 @@ import { MiniControllerProps } from "../props";
  * @param props コンポネントプロパティ
  * @return アニメーション
  */
-export function decided(
-  props: Readonly<MiniControllerProps>
-): Animate {
+export function decided(props: Readonly<MiniControllerProps>): Animate {
   return process(() => {
     props.pushButtonSound.sound.play();
-  })
-  .chain(popRoot(props));
+  }).chain(popRoot(props));
 }

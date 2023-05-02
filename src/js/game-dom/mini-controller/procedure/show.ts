@@ -18,6 +18,6 @@ export function show(
 ): Animate {
   return process(() => {
     props.root.className = ROOT;
-    engageButtonConfig(props, config);  
+    engageButtonConfig(props, config);
   }).chain(showRoot(props));
 }

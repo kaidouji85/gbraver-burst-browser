@@ -11,15 +11,15 @@ type Model = {
 };
 
 /**
- * ルート要素を表示する
+ * ルート要素を非表示にする
  * @param props コンポネントプロパティ
  * @return アニメーション
  */
-export function showRoot(props: MiniControllerProps): Animate {
+export function hiddenRoot(props: MiniControllerProps): Animate {
   const setUpdateHandler = (t: Tween<Model>): Tween<Model> =>
     t.onUpdate((model) => {
       props.root.style.opacity = `${model.opacity}`;
     });
-  const model = { opacity: 0 };
-  return tween(model, (t) => setUpdateHandler(t).to({ opacity: 1 }, 200));
+  const model = { opacity: 1 };
+  return tween(model, (t) => setUpdateHandler(t).to({ opacity: 0 }, 200));
 }
