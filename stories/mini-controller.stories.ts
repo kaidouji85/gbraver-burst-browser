@@ -10,14 +10,23 @@ export default {
 const miniControllerStory = (config: ButtonConfig) =>
   domStub((resources) => {
     const controller = new MiniController(resources);
+    const decide = () => controller.decided()
+      .chain(delay(200))
+      .chain(controller.hidden())
+      .chain(delay(2000))
+      .chain(controller.show(config))
+      .play();
     controller.batteryPushNotifier().subscribe((battery) => {
       console.log(`battery ${battery}`);
+      decide();
     });
     controller.burstPushNotifier().subscribe(() => {
       console.log("burst");
+      decide();
     });
     controller.pilotPushNotifier().subscribe(() => {
       console.log("pilot");
+      decide();
     });
     controller.show(config).play();
     return controller.getRootHTMLElement();
@@ -99,6 +108,7 @@ export const showHidden = domStub((resources) => {
     .chain(controller.decided())
     .chain(delay(200))
     .chain(controller.hidden())
+    .chain(delay(2000))
     .loop();
   return controller.getRootHTMLElement();
 });
