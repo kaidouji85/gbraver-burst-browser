@@ -11,20 +11,22 @@ import { progressGame } from "./progress-game";
  * @param action アクション
  * @return 処理が完了したら発火するPromise
  */
-export async function onPilotSkillByMiniController(
+export function onPilotSkillByMiniController(
   props: Readonly<BattleSceneProps>
-): Promise<void> {
-  const pilotSkillCommand: PilotSkillCommand = {
-    type: "PILOT_SKILL_COMMAND",
-  };
-  const { isCommandCanceled } = await doPilotSkillEventOrNot(
-    props,
-    pilotSkillCommand
-  );
-  if (isCommandCanceled) {
-    return;
-  }
-
-  await decideMiniController(props.view).play();
-  await progressGame(props, pilotSkillCommand);
+): void {
+  props.exclusive.execute(async () => {
+    const pilotSkillCommand: PilotSkillCommand = {
+      type: "PILOT_SKILL_COMMAND",
+    };
+    const { isCommandCanceled } = await doPilotSkillEventOrNot(
+      props,
+      pilotSkillCommand
+    );
+    if (isCommandCanceled) {
+      return;
+    }
+  
+    await decideMiniController(props.view).play();
+    await progressGame(props, pilotSkillCommand);
+  });
 }

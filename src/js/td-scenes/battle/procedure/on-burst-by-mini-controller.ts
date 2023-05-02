@@ -11,17 +11,19 @@ import { progressGame } from "./progress-game";
  * @param action アクション
  * @return 処理が完了したら発火するPromise
  */
-export async function onBurstByMiniController(
+export function onBurstByMiniController(
   props: Readonly<BattleSceneProps>
-) {
-  const burstCommand: BurstCommand = {
-    type: "BURST_COMMAND",
-  };
-  const { isCommandCanceled } = await doBurstEventOrNot(props, burstCommand);
-  if (isCommandCanceled) {
-    return;
-  }
-
-  await decideMiniController(props.view).play();
-  await progressGame(props, burstCommand);
+): void {
+  props.exclusive.execute(async () => {
+    const burstCommand: BurstCommand = {
+      type: "BURST_COMMAND",
+    };
+    const { isCommandCanceled } = await doBurstEventOrNot(props, burstCommand);
+    if (isCommandCanceled) {
+      return;
+    }
+  
+    await decideMiniController(props.view).play();
+    await progressGame(props, burstCommand);
+  });
 }

@@ -12,23 +12,24 @@ import { progressGame } from "./progress-game";
  * @param action アクション
  * @return 処理が完了したら発火するPromise
  */
-export async function onDecideBatteryByMiniController(
+export function onDecideBatteryByMiniController(
   props: Readonly<BattleSceneProps>,
   action: Readonly<DecideBatteryByMiniController>
-) {
-  const batteryCommand: BatteryCommand = {
-    type: "BATTERY_COMMAND",
-    battery: action.battery,
-  };
-
-  const { isCommandCanceled } = await doBatteryEventOrNot(
-    props,
-    batteryCommand
-  );
-  if (isCommandCanceled) {
-    return;
-  }
-
-  await decideMiniController(props.view).play();
-  await progressGame(props, batteryCommand);
+): void {
+  props.exclusive.execute(async () => {
+    const batteryCommand: BatteryCommand = {
+      type: "BATTERY_COMMAND",
+      battery: action.battery,
+    };  
+    const { isCommandCanceled } = await doBatteryEventOrNot(
+      props,
+      batteryCommand
+    );
+    if (isCommandCanceled) {
+      return;
+    }
+  
+    await decideMiniController(props.view).play();
+    await progressGame(props, batteryCommand);
+  });
 }
