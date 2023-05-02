@@ -5,15 +5,15 @@ import type {
   PlayerState,
 } from "gbraver-burst-core";
 
-import { all } from "../../../../animation/all";
-import { Animate } from "../../../../animation/animate";
-import { empty } from "../../../../animation/delay";
-import { canBurstButtonPush } from "../../can-burst-button-push";
-import { canPilotButtonPush } from "../../can-pilot-button-push";
-import { getEnableMaxBattery } from "../../get-enable-max-battery";
-import { getInitialBattery } from "../../get-initial-battery";
-import { BattleSceneView } from "../../view";
-import type { StateAnimationProps } from "./state-animation-props";
+import { all } from "../../../../../animation/all";
+import { Animate } from "../../../../../animation/animate";
+import { empty } from "../../../../../animation/delay";
+import { canBurstButtonPush } from "../../../can-burst-button-push";
+import { canPilotButtonPush } from "../../../can-pilot-button-push";
+import { getEnableMaxBattery } from "../../../get-enable-max-battery";
+import { getInitialBattery } from "../../../get-initial-battery";
+import { BattleSceneView } from "../../../view";
+import type { StateAnimationProps } from "../state-animation-props";
 
 /** ボタン表示アニメーションパラメータ */
 type VisibleButtonsParam = {
