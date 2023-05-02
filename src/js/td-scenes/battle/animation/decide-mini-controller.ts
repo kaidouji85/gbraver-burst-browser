@@ -1,7 +1,7 @@
+import { all } from "../../../animation/all";
 import { Animate } from "../../../animation/animate";
 import { delay } from "../../../animation/delay";
 import { BattleSceneView } from "../view";
-import {all} from "../../../animation/all";
 
 /**
  * ミニコントローラー決定アニメーション
@@ -14,6 +14,6 @@ export function decideMiniController(view: Readonly<BattleSceneView>): Animate {
       .decided()
       .chain(delay(200))
       .chain(view.dom.miniController.hidden()),
-    view.hud.gameObjects.timeScaleButton.close(),
+    view.hud.gameObjects.timeScaleButton.close()
   );
 }
