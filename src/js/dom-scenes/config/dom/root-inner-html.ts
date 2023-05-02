@@ -1,12 +1,11 @@
 import type {
   BattleAnimationTimeScale,
   GbraverBurstBrowserConfig,
-  WebGLPixelRatio,
 } from "../../../game/config/browser-config";
 import {
   BattleAnimationTimeScales,
-  WebGLPixelRatios,
 } from "../../../game/config/browser-config";
+import { WebGLPixelRatio, WebGLPixelRatios } from "../../../game/config/schema/web-gl-pixel-ratio";
 import { ROOT_CLASS } from "./class-name";
 import type { DataIDs } from "./data-ids";
 import { soundVolumeLabel } from "./sound-volume-label";

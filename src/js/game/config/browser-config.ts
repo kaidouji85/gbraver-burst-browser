@@ -1,27 +1,4 @@
-/** WebGLピクセルレート */
-export type WebGLPixelRatio = number;
-
-/** 設定可能なWebGLピクセルレートを集めたもの */
-export const WebGLPixelRatios: WebGLPixelRatio[] = [0.5, 0.75, 1, 2];
-
-/**
- * 任意のオブジェクトをWebGLピクセルレートにパースする
- * パースできない場合はnullを返す
- *
- * @param origin パース元
- * @return パース結果
- */
-/* eslint-disable @typescript-eslint/no-explicit-any */
-export function parseWebGLPixelRatio(origin: any): WebGLPixelRatio | null {
-  /* eslint-enable */
-  const value = Number(origin);
-
-  if (isNaN(value)) {
-    return null;
-  }
-
-  return WebGLPixelRatios.find((v) => v === value) ?? null;
-}
+import { WebGLPixelRatio } from "./schema/web-gl-pixel-ratio";
 
 /** 戦闘アニメタイムスケール */
 export type BattleAnimationTimeScale = number;

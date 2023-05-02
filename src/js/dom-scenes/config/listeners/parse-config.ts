@@ -3,10 +3,9 @@ import {
   BattleAnimationTimeScales,
   parseBattleAnimationTimeScale,
   parseSoundVolume,
-  parseWebGLPixelRatio,
   SoundVolumes,
-  WebGLPixelRatios,
 } from "../../../game/config/browser-config";
+import { parseWebGLPixelRatio, WebGLPixelRatios } from "../../../game/config/schema/web-gl-pixel-ratio";
 import type { ConfigProps } from "../props";
 
 /**

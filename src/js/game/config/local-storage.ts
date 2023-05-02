@@ -3,14 +3,13 @@ import type {
   GbraverBurstBrowserConfig,
   GbraverBurstBrowserConfigRepository,
   SoundVolume,
-  WebGLPixelRatio,
 } from "./browser-config";
 import {
   parseBattleAnimationTimeScale,
   parseSoundVolume,
-  parseWebGLPixelRatio,
 } from "./browser-config";
 import { DefaultConfig } from "./default-config";
+import { WebGLPixelRatio, parseWebGLPixelRatio } from "./schema/web-gl-pixel-ratio";
 
 /** 設定項目名とLocalStorageキーのマッピング */
 const Keys = {
