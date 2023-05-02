@@ -21,7 +21,8 @@
     "workbox-expiration": "^6.5.4",
     "workbox-precaching": "^6.5.4",
     "workbox-routing": "^6.5.4",
-    "workbox-strategies": "^6.5.4"
+    "workbox-strategies": "^6.5.4",
+    "zod": "^3.21.4"
   },
   "devDependencies": {
     "@storybook/html": "^7.0.7",
