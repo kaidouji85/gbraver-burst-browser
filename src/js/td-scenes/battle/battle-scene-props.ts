@@ -15,6 +15,7 @@ import type { BattleProgress } from "./battle-progress";
 import type { CustomBattleEvent } from "./custom-battle-event";
 import { BattleSceneSounds } from "./sounds/sounds";
 import { BattleSceneView } from "./view";
+import { BattleControllerType } from "./controller-type";
 
 /** バトル終了情報 */
 export type BattleEnd = {
@@ -59,6 +60,9 @@ export type BattleSceneProps = {
 
   /** BGM管理オブジェクト */
   bgm: BGMManager;
+
+  /** コントローラータイプ */
+  controllerType: BattleControllerType;
 };
 
 /** 戦闘シーンで利用するレンダラ */
@@ -104,6 +108,9 @@ export type BattleScenePropsCreatorParams = {
 
   /** カスタムバトルイベント */
   customBattleEvent?: CustomBattleEvent;
+
+  /** コントローラータイプ */
+  controllerType: BattleControllerType;
 };
 
 /**
@@ -134,5 +141,6 @@ export function createBattleSceneProps(
     }),
     sounds: new BattleSceneSounds(params.resources, params.playingBGM),
     bgm: params.bgm,
+    controllerType: params.controllerType,
   };
 }

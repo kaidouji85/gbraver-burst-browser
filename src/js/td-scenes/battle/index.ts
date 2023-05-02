@@ -20,10 +20,7 @@ import { onToggleTimeScale } from "./procedure/on-toggle-time-scale";
 import { start } from "./procedure/start";
 
 /** コンストラクタのパラメータ */
-type BattleSceneParams = BattleScenePropsCreatorParams & {
-  /** コントローラータイプ */
-  controllerType: BattleControllerType;
-};
+type BattleSceneParams = BattleScenePropsCreatorParams;
 
 /** 戦闘シーン */
 export class BattleScene implements TDScene {
