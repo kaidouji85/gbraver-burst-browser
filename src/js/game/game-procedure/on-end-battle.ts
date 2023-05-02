@@ -1,5 +1,7 @@
 import { GameOver } from "gbraver-burst-core";
 
+import { BattleAnimationTimeScales } from "../config/browser-config";
+import { parseBattleAnimationTimeScale } from "../config/parser/battle-animation-time-scale";
 import { PostBattleButtonConfig } from "../dom-floaters/post-battle/post-battle-button-config";
 import {
   PostNetworkBattleButtons,
@@ -14,8 +16,6 @@ import type { GameProps } from "../game-props";
 import { PlayingTutorialStage } from "../in-progress/tutorial";
 import type { NPCBattleResult } from "../npc-battle";
 import { updateNPCBattleState } from "../npc-battle";
-import { parseBattleAnimationTimeScale } from "../config/parser/battle-animation-time-scale";
-import { BattleAnimationTimeScales } from "../config/browser-config";
 
 /**
  * 戦闘画面のアニメーションタイムスケールを設定に反映する

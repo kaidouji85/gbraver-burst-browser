@@ -1,4 +1,5 @@
 import { z } from "zod";
+
 import { WebGLPixelRatio } from "../browser-config";
 
 /** WebGLピクセルレート zod schema */

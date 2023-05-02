@@ -1,6 +1,8 @@
 import type {
   BattleAnimationTimeScale,
-  GbraverBurstBrowserConfig, SoundVolume, WebGLPixelRatio,
+  GbraverBurstBrowserConfig,
+  SoundVolume,
+  WebGLPixelRatio,
 } from "../browser-config";
 import { DefaultConfig } from "../default-config";
 import { parseBattleAnimationTimeScale } from "../parser/battle-animation-time-scale";

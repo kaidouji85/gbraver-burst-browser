@@ -1,4 +1,5 @@
 import { z } from "zod";
+
 import { BattleAnimationTimeScale } from "../browser-config";
 
 /** 戦闘アニメタイムスケール zod schema */

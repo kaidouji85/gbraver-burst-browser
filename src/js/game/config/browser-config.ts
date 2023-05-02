@@ -18,7 +18,7 @@ export const SoundVolumes: SoundVolume[] = [
 export type WebGLPixelRatio = number;
 
 /** 設定可能なWebGLピクセルレートを集めたもの */
-export const WebGLPixelRatios: WebGLPixelRatio[] = [0.5, 0.75, 1, 2]; 
+export const WebGLPixelRatios: WebGLPixelRatio[] = [0.5, 0.75, 1, 2];
 
 /** Gブレイバーバースト ブラウザ側設定項目 */
 export type GbraverBurstBrowserConfig = {

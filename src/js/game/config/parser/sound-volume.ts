@@ -1,11 +1,12 @@
 import { z } from "zod";
+
 import { SoundVolume } from "../browser-config";
 
 /** 可能であればNumber型に変換するzod preprocess */
 /* eslint-disable @typescript-eslint/no-explicit-any */
-const parseNumber = (origin: any) => 
+const parseNumber = (origin: any) =>
   /* eslint-enable */
-  (origin === null || origin === undefined || origin === "")
+  origin === null || origin === undefined || origin === ""
     ? null
     : Number(origin);
 
