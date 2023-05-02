@@ -22,7 +22,7 @@ export function onBurstByMiniController(
     if (isCommandCanceled) {
       return;
     }
-  
+
     await decideMiniController(props.view).play();
     await progressGame(props, burstCommand);
   });

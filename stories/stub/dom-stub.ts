@@ -42,7 +42,7 @@ export const domStub =
       const component = creator(resources);
       root.appendChild(component);
     });
-    gameLoopStream().subscribe(action => {
+    gameLoopStream().subscribe((action) => {
       TWEEN.update(action.time);
     });
     return root;

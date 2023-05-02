@@ -58,7 +58,7 @@ export async function startNPCBattleStage(
     pushWindow: props.pushWindow,
     gameLoop: props.gameLoop,
     renderer: props.renderer,
-    controllerType: "BigButton",  // TODO アプリ設定から値をセットする
+    controllerType: "BigButton", // TODO アプリ設定から値をセットする
   });
   props.tdBinder.bind(battleScene, battleSceneConnector);
   await waitAnimationFrame();

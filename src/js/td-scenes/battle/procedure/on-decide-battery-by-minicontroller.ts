@@ -20,7 +20,7 @@ export function onDecideBatteryByMiniController(
     const batteryCommand: BatteryCommand = {
       type: "BATTERY_COMMAND",
       battery: action.battery,
-    };  
+    };
     const { isCommandCanceled } = await doBatteryEventOrNot(
       props,
       batteryCommand
@@ -28,7 +28,7 @@ export function onDecideBatteryByMiniController(
     if (isCommandCanceled) {
       return;
     }
-  
+
     await decideMiniController(props.view).play();
     await progressGame(props, batteryCommand);
   });

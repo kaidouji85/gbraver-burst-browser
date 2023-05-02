@@ -25,7 +25,7 @@ export function onPilotSkillByMiniController(
     if (isCommandCanceled) {
       return;
     }
-  
+
     await decideMiniController(props.view).play();
     await progressGame(props, pilotSkillCommand);
   });
