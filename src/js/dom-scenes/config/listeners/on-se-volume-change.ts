@@ -1,5 +1,5 @@
 import type { InputDOM } from "../../../dom/event-stream";
-import { parseSoundVolume } from "../../../game/config/browser-config";
+import { parseSoundVolume } from "../../../game/config/parser/sound-volume";
 import { soundVolumeLabel } from "../dom/sound-volume-label";
 import type { ConfigProps } from "../props";
 

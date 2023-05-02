@@ -3,7 +3,7 @@ import "../css/style.css";
 import { createBrowserSDK } from "@gbraver-burst-network/browser-sdk";
 
 import { isMobile } from "./device-ditect/is-mobile";
-import { createLocalStorageConfigRepository } from "./game/config/local-storage";
+import { createLocalStorageConfigRepository } from "./game/config/repository/local-storage";
 import { Game } from "./game/index";
 
 /** webpack.config.js Webpack Define Pluginで定義したグローバル変数 */

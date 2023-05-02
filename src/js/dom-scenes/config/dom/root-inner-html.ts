@@ -1,10 +1,8 @@
-import type {
+import {
   BattleAnimationTimeScale,
+  BattleAnimationTimeScales,
   GbraverBurstBrowserConfig,
   WebGLPixelRatio,
-} from "../../../game/config/browser-config";
-import {
-  BattleAnimationTimeScales,
   WebGLPixelRatios,
 } from "../../../game/config/browser-config";
 import { ROOT_CLASS } from "./class-name";

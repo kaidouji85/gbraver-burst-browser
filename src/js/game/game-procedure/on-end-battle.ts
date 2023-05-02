@@ -1,9 +1,7 @@
 import { GameOver } from "gbraver-burst-core";
 
-import {
-  BattleAnimationTimeScales,
-  parseBattleAnimationTimeScale,
-} from "../config/browser-config";
+import { BattleAnimationTimeScales } from "../config/browser-config";
+import { parseBattleAnimationTimeScale } from "../config/parser/battle-animation-time-scale";
 import { PostBattleButtonConfig } from "../dom-floaters/post-battle/post-battle-button-config";
 import {
   PostNetworkBattleButtons,

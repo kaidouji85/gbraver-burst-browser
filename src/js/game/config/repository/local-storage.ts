@@ -1,16 +1,14 @@
 import type {
   BattleAnimationTimeScale,
   GbraverBurstBrowserConfig,
-  GbraverBurstBrowserConfigRepository,
   SoundVolume,
   WebGLPixelRatio,
-} from "./browser-config";
-import {
-  parseBattleAnimationTimeScale,
-  parseSoundVolume,
-  parseWebGLPixelRatio,
-} from "./browser-config";
-import { DefaultConfig } from "./default-config";
+} from "../browser-config";
+import { DefaultConfig } from "../default-config";
+import { parseBattleAnimationTimeScale } from "../parser/battle-animation-time-scale";
+import { parseSoundVolume } from "../parser/sound-volume";
+import { parseWebGLPixelRatio } from "../parser/web-gl-pixel-ratio";
+import { GbraverBurstBrowserConfigRepository } from "./repository";
 
 /** 設定項目名とLocalStorageキーのマッピング */
 const Keys = {
@@ -26,8 +24,8 @@ const Keys = {
   /** SE音量 */
   SEVolume: "SEVolume",
 };
-/** ブラウザ設定リポジトリのLocalStorage実装 */
 
+/** ブラウザ設定リポジトリのLocalStorage実装 */
 class LocalStorageConfigRepository
   implements GbraverBurstBrowserConfigRepository
 {
@@ -65,11 +63,11 @@ class LocalStorageConfigRepository
     };
   }
 }
+
 /**
  * ブラウザ設定リポジトリLocalStorage実装を生成する
  * @return 生成結果
  */
-
 export function createLocalStorageConfigRepository(): GbraverBurstBrowserConfigRepository {
   return new LocalStorageConfigRepository();
 }
