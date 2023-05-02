@@ -12,10 +12,10 @@ import type { SoundId } from "../../resource/sound";
 import type { PushWindow } from "../../window/push-window";
 import type { Resize } from "../../window/resize";
 import type { BattleProgress } from "./battle-progress";
+import { BattleControllerType } from "./controller-type";
 import type { CustomBattleEvent } from "./custom-battle-event";
 import { BattleSceneSounds } from "./sounds/sounds";
 import { BattleSceneView } from "./view";
-import { BattleControllerType } from "./controller-type";
 
 /** バトル終了情報 */
 export type BattleEnd = {

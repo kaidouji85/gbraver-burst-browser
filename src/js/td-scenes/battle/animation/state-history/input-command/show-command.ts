@@ -1,12 +1,13 @@
 import { Command } from "gbraver-burst-core";
-import { BattleSceneView } from "../../../view";
+
+import { all } from "../../../../../animation/all";
 import { Animate } from "../../../../../animation/animate";
-import { getEnableMaxBattery } from "../../../get-enable-max-battery";
-import { getInitialBattery } from "../../../get-initial-battery";
 import { canBurstButtonPush } from "../../../can-burst-button-push";
 import { canPilotButtonPush } from "../../../can-pilot-button-push";
-import { all } from "../../../../../animation/all";
 import { BattleControllerType } from "../../../controller-type";
+import { getEnableMaxBattery } from "../../../get-enable-max-battery";
+import { getInitialBattery } from "../../../get-initial-battery";
+import { BattleSceneView } from "../../../view";
 
 /** アニメーションパラメータ */
 type AnimationParam = {
@@ -73,12 +74,12 @@ export type ShowCommandParam = AnimationParam & {
  * @return アニメーション
  */
 export function showCommand(param: ShowCommandParam): Animate {
-  switch(param.controllerType) {
+  switch (param.controllerType) {
     case "BigButton":
       return showButtons(param);
     case "MiniController":
       return showMiniController(param);
     default:
-      return showButtons(param);  
+      return showButtons(param);
   }
 }

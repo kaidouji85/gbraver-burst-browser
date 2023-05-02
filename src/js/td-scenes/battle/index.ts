@@ -7,7 +7,6 @@ import type {
   BattleScenePropsCreatorParams,
 } from "./battle-scene-props";
 import { createBattleSceneProps } from "./battle-scene-props";
-import { BattleControllerType } from "./controller-type";
 import { onBurst } from "./procedure/on-burst";
 import { onBurstByMiniController } from "./procedure/on-burst-by-mini-controller";
 import { onDecideBattery } from "./procedure/on-decide-battery";
