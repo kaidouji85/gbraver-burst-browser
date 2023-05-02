@@ -1,5 +1,5 @@
-import { waitTime } from "../../../wait/wait-time";
-import { BattleSceneProps } from "../battle-scene-props";
+import { Animate } from "../../../animation/animate";
+import { delay } from "../../../animation/delay";
 import { BattleSceneView } from "../view";
 
 /**
@@ -7,10 +7,9 @@ import { BattleSceneView } from "../view";
  * @param props 戦闘シーンプロパティ
  * @return アニメーションが完了したら発火するPromise
  */
-export async function decideMiniController(
-  view: Readonly<BattleSceneView>
-): Promise<void> {
-  await view.dom.miniController.decided();
-  await waitTime(200);
-  await view.dom.miniController.hidden();
+export function decideMiniController(view: Readonly<BattleSceneView>): Animate {
+  return view.dom.miniController
+    .decided()
+    .chain(delay(200))
+    .chain(view.dom.miniController.hidden());
 }

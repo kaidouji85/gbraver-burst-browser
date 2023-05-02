@@ -1,5 +1,7 @@
+import { Animate } from "../../../animation/animate";
+import { process } from "../../../animation/process";
+import { hiddenRoot } from "../animation/hidden-root";
 import { ROOT_INVISIBLE } from "../dom/class-name";
-import { hiddenRoot } from "../dom/hidden-root";
 import { MiniControllerProps } from "../props";
 
 /**
@@ -7,9 +9,10 @@ import { MiniControllerProps } from "../props";
  * @param props コンポネントプロパティ
  * @return 処理が完了したら発火するPromise
  */
-export async function hidden(
-  props: Readonly<MiniControllerProps>
-): Promise<void> {
-  await hiddenRoot(props.root);
-  props.root.className = ROOT_INVISIBLE;
+export function hidden(props: Readonly<MiniControllerProps>): Animate {
+  return hiddenRoot(props).chain(
+    process(() => {
+      props.root.className = ROOT_INVISIBLE;
+    })
+  );
 }

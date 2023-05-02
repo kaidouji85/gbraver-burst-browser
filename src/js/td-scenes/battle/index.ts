@@ -9,15 +9,15 @@ import type {
 import { createBattleSceneProps } from "./battle-scene-props";
 import { BattleControllerType } from "./controller-type";
 import { onBurst } from "./procedure/on-burst";
+import { onBurstByMiniController } from "./procedure/on-burst-by-mini-controller";
 import { onDecideBattery } from "./procedure/on-decide-battery";
+import { onDecideBatteryByMiniController } from "./procedure/on-decide-battery-by-minicontroller";
 import { onMinusBattery } from "./procedure/on-minus-battery";
 import { onPilotSkill } from "./procedure/on-pilot-skill";
+import { onPilotSkillByMiniController } from "./procedure/on-pilot-skill-by-mini-controller";
 import { onPlusBattery } from "./procedure/on-plus-battery";
 import { onToggleTimeScale } from "./procedure/on-toggle-time-scale";
 import { start } from "./procedure/start";
-import { onDecideBatteryByMiniController } from "./procedure/on-decide-battery-by-minicontroller";
-import { onBurstByMiniController } from "./procedure/on-burst-by-mini-controller";
-import { onPilotSkillByMiniController } from "./procedure/on-pilot-skill-by-mini-controller";
 
 /** コンストラクタのパラメータ */
 type BattleSceneParams = BattleScenePropsCreatorParams & {

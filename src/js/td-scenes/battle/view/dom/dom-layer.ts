@@ -1,4 +1,5 @@
-import { Observable, map, merge } from "rxjs";
+import { map, merge, Observable } from "rxjs";
+
 import { MessageWindow } from "../../../../game-dom/message-window/message-window";
 import { MiniController } from "../../../../game-dom/mini-controller";
 import type { Resources } from "../../../../resource";
@@ -73,16 +74,28 @@ export class DOMLayer {
     this.nearPilotButtonMessageWindow.visible(false);
     this.miniController = new MiniController(resources);
     this.#battleAction = merge(
-      this.miniController.batteryPushNotifier().pipe(map((v): DecideBatteryByMiniController => ({
-        type: "decideBatteryByMiniController",
-        battery: v
-      }))),
-      this.miniController.burstPushNotifier().pipe(map((): DoBurstByMiniController => ({
-        type: "doBurstByMiniController"
-      }))),
-      this.miniController.pilotPushNotifier().pipe(map((): DoPilotSkillByMiniController => ({
-        type: "doPilotSkillByMiniController"
-      })))
+      this.miniController.batteryPushNotifier().pipe(
+        map(
+          (v): DecideBatteryByMiniController => ({
+            type: "decideBatteryByMiniController",
+            battery: v,
+          })
+        )
+      ),
+      this.miniController.burstPushNotifier().pipe(
+        map(
+          (): DoBurstByMiniController => ({
+            type: "doBurstByMiniController",
+          })
+        )
+      ),
+      this.miniController.pilotPushNotifier().pipe(
+        map(
+          (): DoPilotSkillByMiniController => ({
+            type: "doPilotSkillByMiniController",
+          })
+        )
+      )
     );
   }
 
