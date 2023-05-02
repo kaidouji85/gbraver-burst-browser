@@ -26,8 +26,8 @@ const Keys = {
   /** SE音量 */
   SEVolume: "SEVolume",
 };
-/** ブラウザ設定リポジトリのLocalStorage実装 */
 
+/** ブラウザ設定リポジトリのLocalStorage実装 */
 class LocalStorageConfigRepository
   implements GbraverBurstBrowserConfigRepository
 {
