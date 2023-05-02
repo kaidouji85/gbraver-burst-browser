@@ -1,4 +1,4 @@
-import type { SoundVolume } from "../../../game/config/browser-config";
+import { SoundVolume } from "../../../game/config/schema/sound-volume";
 
 /**
  * 音量を画面表示用にパースするヘルパー関数

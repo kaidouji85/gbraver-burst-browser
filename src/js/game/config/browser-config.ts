@@ -1,36 +1,6 @@
 import { BattleAnimationTimeScale } from "./schema/battle-animation-time-scale";
+import { SoundVolume } from "./schema/sound-volume";
 import { WebGLPixelRatio } from "./schema/web-gl-pixel-ratio";
-
-/** 音量 */
-export type SoundVolume = number;
-
-/** 有効な音量 */
-export const SoundVolumes: SoundVolume[] = [
-  0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1,
-];
-
-/**
- * 任意のオブジェクトを音量にパースする
- * パースできない場合はnullを返す
- *
- * @param origin パース元
- * @return パース結果
- */
-/* eslint-disable @typescript-eslint/no-explicit-any */
-export function parseSoundVolume(origin: any): SoundVolume | null {
-  /* eslint-enable */
-  if (origin === null || origin === undefined || origin === "") {
-    return null;
-  }
-
-  const value = Number(origin);
-
-  if (isNaN(value)) {
-    return null;
-  }
-
-  return SoundVolumes.find((v) => v === value) ?? null;
-}
 
 /** Gブレイバーバースト ブラウザ側設定項目 */
 export type GbraverBurstBrowserConfig = {
