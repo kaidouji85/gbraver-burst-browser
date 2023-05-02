@@ -1,11 +1,11 @@
 import type {
   GbraverBurstBrowserConfig,
-  GbraverBurstBrowserConfigRepository,
-} from "./browser-config";
-import { DefaultConfig } from "./default-config";
-import { BattleAnimationTimeScale, parseBattleAnimationTimeScale } from "./schema/battle-animation-time-scale";
-import { SoundVolume, parseSoundVolume } from "./schema/sound-volume";
-import { WebGLPixelRatio, parseWebGLPixelRatio } from "./schema/web-gl-pixel-ratio";
+} from "../browser-config";
+import { DefaultConfig } from "../default-config";
+import { BattleAnimationTimeScale, parseBattleAnimationTimeScale } from "../schema/battle-animation-time-scale";
+import { SoundVolume, parseSoundVolume } from "../schema/sound-volume";
+import { WebGLPixelRatio, parseWebGLPixelRatio } from "../schema/web-gl-pixel-ratio";
+import { GbraverBurstBrowserConfigRepository } from "./repository";
 
 /** 設定項目名とLocalStorageキーのマッピング */
 const Keys = {

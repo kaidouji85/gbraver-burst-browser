@@ -17,7 +17,6 @@ import { pushWindowsStream } from "../window/push-window";
 import type { Resize } from "../window/resize";
 import { resizeStream } from "../window/resize";
 import { postBattleConnector } from "./action-connector/post-battle-connector";
-import { GbraverBurstBrowserConfigRepository } from "./config/browser-config";
 import { DOMDialogBinder } from "./dom-dialog-binder";
 import { DOMFloaters } from "./dom-floaters/dom-floaters";
 import { DOMSceneBinder } from "./dom-scene-binder";
@@ -25,6 +24,7 @@ import { FutureSuddenlyBattleEnd } from "./future-suddenly-battle-end";
 import type { InProgress } from "./in-progress/in-progress";
 import { InterruptScenes } from "./innterrupt-scenes";
 import { TDSceneBinder } from "./td-scene-binder";
+import { GbraverBurstBrowserConfigRepository } from "./config/repository/repository";
 
 /**
  * ゲームプロパティ
