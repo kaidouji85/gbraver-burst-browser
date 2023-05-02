@@ -15,11 +15,11 @@ import { progressGame } from "./progress-game";
  * @param action バッテリー決定アクション
  * @return 処理が完了したら発火するPromise
  */
-export async function onDecideBattery(
+export function onDecideBattery(
   props: Readonly<BattleSceneProps>,
   action: DecideBattery
-): Promise<void> {
-  await props.exclusive.execute(async (): Promise<void> => {
+): void {
+  props.exclusive.execute(async (): Promise<void> => {
     action.event.stopPropagation();
     const batteryCommand: BatteryCommand = {
       type: "BATTERY_COMMAND",

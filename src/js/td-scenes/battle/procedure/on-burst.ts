@@ -15,10 +15,10 @@ import { progressGame } from "./progress-game";
  * @param action バースト発動アクション
  * @return 処理が完了したら発火するPromise
  */
-export async function onBurst(
+export function onBurst(
   props: Readonly<BattleSceneProps>,
   action: DoBurst
-): Promise<void> {
+): void {
   props.exclusive.execute(async () => {
     action.event.stopPropagation();
     const burstCommand: BurstCommand = {
