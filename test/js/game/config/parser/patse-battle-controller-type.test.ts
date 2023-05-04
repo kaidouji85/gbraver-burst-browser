@@ -1,14 +1,10 @@
 import { parseBattleControllerType } from "../../../../../src/js/game/config/parser/battle-controller-type";
-import { BattleControllerType } from "../../../../../src/js/td-scenes/battle/controller-type";
+import { BattleControllerTypes } from "../../../../../src/js/td-scenes/battle/controller-type";
 
-test("BigButtonはそのまま", () => {
-  const data: BattleControllerType = "BigButton";
-  expect(parseBattleControllerType(data)).toBe(data);
-});
-
-test("MiniControllerはそのまま", () => {
-  const data: BattleControllerType = "MiniController";
-  expect(parseBattleControllerType(data)).toBe(data);
+test("BattleControllerTypesは正しくパースできる", () => {
+  BattleControllerTypes.forEach((type) => {
+    expect(parseBattleControllerType(type)).toBe(type);
+  });
 });
 
 test("文字列でも不正なものはパースできない", () => {
