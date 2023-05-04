@@ -1,7 +1,10 @@
+import { WebGLPixelRatios } from "../../../../../src/js/game/config/browser-config";
 import { parseWebGLPixelRatio } from "../../../../../src/js/game/config/parser/web-gl-pixel-ratio";
 
 test("有効なWebGLPixelRatioはパースできる", () => {
-  expect(parseWebGLPixelRatio(2)).toBe(2);
+  WebGLPixelRatios.forEach((v) => {
+    expect(parseWebGLPixelRatio(v)).toBe(v);
+  });
 });
 
 test("文字列でも有効なWebGLPixelRatioならパースできる", () => {
