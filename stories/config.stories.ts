@@ -2,17 +2,18 @@ import { Config } from "../src/js/dom-scenes/config";
 import { ConfigChangedDialog } from "../src/js/dom-scenes/config/config-changed-dialog";
 import type { DOMStubStory } from "./stub/dom-stub";
 import { domStub } from "./stub/dom-stub";
+
 export default {
   title: "config",
 };
+
 export const Scene: DOMStubStory = domStub((resources) => {
-  const config = {
+  const scene = new Config(resources, {
     webGLPixelRatio: 2,
     battleAnimationTimeScale: 1,
     bgmVolume: 1,
     seVolume: 1,
-  };
-  const scene = new Config(resources, config);
+  });
   scene.notifyPrev().subscribe(() => {
     console.log("prev");
   });
@@ -22,6 +23,7 @@ export const Scene: DOMStubStory = domStub((resources) => {
   });
   return scene.getRootHTMLElement();
 });
+
 export const ConfigChanged: DOMStubStory = domStub((resources) => {
   const dialog = new ConfigChangedDialog(resources);
   dialog.show();

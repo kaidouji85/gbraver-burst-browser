@@ -9,27 +9,30 @@ const origin: GbraverBurstBrowserConfig = {
 };
 
 test("WebGLピクセルレートの変更を正しく検知できる", () => {
-  const update = { ...origin, webGLPixelRatio: 1 };
+  const update: GbraverBurstBrowserConfig = { ...origin, webGLPixelRatio: 1 };
   expect(isConfigChanged(origin, update)).toBe(true);
 });
 
 test("戦闘アニメ再生速度の変更を正しく検知できる", () => {
-  const update = { ...origin, battleAnimationTimeScale: 0.5 };
+  const update: GbraverBurstBrowserConfig = {
+    ...origin,
+    battleAnimationTimeScale: 0.5,
+  };
   expect(isConfigChanged(origin, update)).toBe(true);
 });
 
 test("BGM音量の変更を正しく検知できる", () => {
-  const update = { ...origin, bgmVolume: 0.5 };
+  const update: GbraverBurstBrowserConfig = { ...origin, bgmVolume: 0.5 };
   expect(isConfigChanged(origin, update)).toBe(true);
 });
 
 test("SE音量の変更を正しく検知できる", () => {
-  const update = { ...origin, seVolume: 0.5 };
+  const update: GbraverBurstBrowserConfig = { ...origin, seVolume: 0.5 };
   expect(isConfigChanged(origin, update)).toBe(true);
 });
 
 test("複数項目の変更を正しく検知できる", () => {
-  const update = {
+  const update: GbraverBurstBrowserConfig = {
     ...origin,
     webGLPixelRatio: 1,
     battleAnimationTimeScale: 0.25,
