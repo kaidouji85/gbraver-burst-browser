@@ -1,11 +1,16 @@
 import { z } from "zod";
 
-import { BattleAnimationTimeScale } from "../browser-config";
+import {BattleAnimationTimeScale, BattleAnimationTimeScales} from "../browser-config";
 
 /** 戦闘アニメタイムスケール zod schema */
 export const BattleAnimationTimeScaleSchema = z.preprocess(
   Number,
-  z.union([z.literal(1), z.literal(0.5), z.literal(0.25)])
+  z.union([
+    z.literal(BattleAnimationTimeScales[0]),
+    z.literal(BattleAnimationTimeScales[1]),
+    ...BattleAnimationTimeScales.map(v => z.literal(v))
+      .slice(2),
+  ])
 );
 
 /**
