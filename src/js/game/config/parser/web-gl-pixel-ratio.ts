@@ -1,6 +1,6 @@
 import { z } from "zod";
 
-import {WebGLPixelRatio, WebGLPixelRatios} from "../browser-config";
+import { WebGLPixelRatio, WebGLPixelRatios } from "../browser-config";
 
 /** WebGLピクセルレート zod schema */
 export const WebGLPixelRatioSchema = z.preprocess(
@@ -8,8 +8,7 @@ export const WebGLPixelRatioSchema = z.preprocess(
   z.union([
     z.literal(WebGLPixelRatios[0]),
     z.literal(WebGLPixelRatios[1]),
-    ...WebGLPixelRatios.map(v => z.literal(v))
-      .slice(2),
+    ...WebGLPixelRatios.map((v) => z.literal(v)).slice(2),
   ])
 );
 

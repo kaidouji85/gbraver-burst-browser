@@ -1,6 +1,4 @@
-import {
-  parseBattleControllerType,
-} from "../../../../../src/js/game/config/parser/battle-controller-type";
+import { parseBattleControllerType } from "../../../../../src/js/game/config/parser/battle-controller-type";
 import { BattleControllerTypes } from "../../../../../src/js/td-scenes/battle/controller-type";
 
 test("BattleControllerTypesは正しくパースできる", () => {

@@ -1,6 +1,6 @@
 import { z } from "zod";
 
-import {SoundVolume, SoundVolumes} from "../browser-config";
+import { SoundVolume, SoundVolumes } from "../browser-config";
 
 /** 音量 zod schema */
 export const SoundVolumeSchema = z.preprocess(
@@ -11,8 +11,7 @@ export const SoundVolumeSchema = z.preprocess(
   z.union([
     z.literal(SoundVolumes[0]),
     z.literal(SoundVolumes[1]),
-    ...SoundVolumes.map(v => z.literal(v))
-      .slice(2),
+    ...SoundVolumes.map((v) => z.literal(v)).slice(2),
   ])
 );
 

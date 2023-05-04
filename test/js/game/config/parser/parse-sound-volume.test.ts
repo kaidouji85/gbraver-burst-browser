@@ -1,8 +1,8 @@
+import { SoundVolumes } from "../../../../../src/js/game/config/browser-config";
 import { parseSoundVolume } from "../../../../../src/js/game/config/parser/sound-volume";
-import {SoundVolumes} from "../../../../../src/js/game/config/browser-config";
 
 test("有効な音量ならパースできる", () => {
-  SoundVolumes.forEach(v => {
+  SoundVolumes.forEach((v) => {
     expect(parseSoundVolume(v)).toBe(v);
   });
 });

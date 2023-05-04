@@ -1,8 +1,8 @@
+import { BattleAnimationTimeScales } from "../../../../../src/js/game/config/browser-config";
 import { parseBattleAnimationTimeScale } from "../../../../../src/js/game/config/parser/battle-animation-time-scale";
-import {BattleAnimationTimeScales} from "../../../../../src/js/game/config/browser-config";
 
 test("有効な戦闘アニメタイムスケールはパースできる", () => {
-  BattleAnimationTimeScales.forEach(v => {
+  BattleAnimationTimeScales.forEach((v) => {
     expect(parseBattleAnimationTimeScale(v)).toBe(v);
   });
 });
