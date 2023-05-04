@@ -1,6 +1,5 @@
+/** 戦闘シーンコントローラータイプのマスタ */
+export const BattleControllerTypes = ["BigButton", "MiniController"] as const;
+
 /** 戦闘シーンコントローラータイプ */
-export type BattleControllerType =
-  /** 大きいボタン */
-  | "BigButton"
-  /** ミニコントローラー */
-  | "MiniController";
+export type BattleControllerType = (typeof BattleControllerTypes)[number];
