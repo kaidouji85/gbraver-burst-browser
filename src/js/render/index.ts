@@ -17,27 +17,27 @@ import type { Rendering } from "./rendering";
 
 /** レンダラ管理オブジェクト */
 export class Renderer implements OverlapNotifier, RendererDomGetter, Rendering {
-  _threeJsRender: THREE.WebGLRenderer;
-  _domEvent: Observable<RendererDOMEvent>;
-  _unsubscriber: Unsubscribable[];
+  #threeJsRender: THREE.WebGLRenderer;
+  #domEvent: Observable<RendererDOMEvent>;
+  #unsubscriber: Unsubscribable[];
 
   /**
    * コンストラクタ
-   *
    * @param resize リサイズのストリーム
    */
   constructor(resize: Observable<Resize>) {
-    this._threeJsRender = new THREE.WebGLRenderer();
-    this._threeJsRender.autoClear = false;
+    this.#threeJsRender = new THREE.WebGLRenderer();
+    this.#threeJsRender.outputColorSpace = THREE.LinearSRGBColorSpace;
+    this.#threeJsRender.autoClear = false;
 
-    this._threeJsRender.setSize(getViewPortWidth(), getViewPortHeight());
+    this.#threeJsRender.setSize(getViewPortWidth(), getViewPortHeight());
 
-    this._threeJsRender.setPixelRatio(window.devicePixelRatio);
+    this.#threeJsRender.setPixelRatio(window.devicePixelRatio);
 
-    this._domEvent = createDOMEventStream(this._threeJsRender.domElement);
-    this._unsubscriber = [
+    this.#domEvent = createDOMEventStream(this.#threeJsRender.domElement);
+    this.#unsubscriber = [
       resize.subscribe((action) => {
-        this._resize(action);
+        this.#resize(action);
       }),
     ];
   }
@@ -47,60 +47,58 @@ export class Renderer implements OverlapNotifier, RendererDomGetter, Rendering {
    * シーン終了時に呼ばれる想定
    */
   disposeRenders(): void {
-    this._threeJsRender.renderLists.dispose();
+    this.#threeJsRender.renderLists.dispose();
   }
 
   /**
    * オーバーラップイベント通知を生成する
-   *
    * @param camera カメラ
    * @return 生成結果
    */
   createOverlapNotifier(camera: THREE.Camera): Observable<OverlapEvent> {
-    return toOverlapStream(this._domEvent, this.getRendererDOM(), camera);
+    return toOverlapStream(this.#domEvent, this.getRendererDOM(), camera);
   }
 
   /**
    * デバッグ用情報を返す
-   *
    * @return デバッグ用情報
    */
   info(): WebGLInfo {
-    return this._threeJsRender.info;
+    return this.#threeJsRender.info;
   }
 
   /**
    * three.jsレンダラのHTML要素を取得する
-   *
    * @return 取得結果
    */
   getRendererDOM(): HTMLElement {
-    return this._threeJsRender.domElement;
+    return this.#threeJsRender.domElement;
   }
 
   /**
    * ピクセルレートを設定する
-   *
    * @param pixelRatio ピクセルレート
    */
   setPixelRatio(pixelRatio: number): void {
     const normalizedPixelRatio = Math.min(window.devicePixelRatio, pixelRatio);
 
-    this._threeJsRender.setPixelRatio(normalizedPixelRatio);
+    this.#threeJsRender.setPixelRatio(normalizedPixelRatio);
   }
 
   /**
    * レンダリングをする
-   *
    * @param scene シーン
    * @param camera カメラ
    */
   rendering(scene: THREE.Scene, camera: THREE.Camera): void {
-    this._threeJsRender.render(scene, camera);
+    this.#threeJsRender.render(scene, camera);
   }
 
-  /** リサイズ */
-  _resize(action: Resize): void {
-    this._threeJsRender.setSize(action.width, action.height);
+  /**
+   * リサイズ時の処理
+   * @param action アクション
+   */
+  #resize(action: Resize): void {
+    this.#threeJsRender.setSize(action.width, action.height);
   }
 }
