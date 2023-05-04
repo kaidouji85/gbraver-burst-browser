@@ -1,12 +1,5 @@
-import {
-  BattleAnimationTimeScales,
-  GbraverBurstBrowserConfig,
-  SoundVolumes,
-  WebGLPixelRatios,
-} from "../../../game/config/browser-config";
-import { parseBattleAnimationTimeScale } from "../../../game/config/parser/battle-animation-time-scale";
-import { parseSoundVolume } from "../../../game/config/parser/sound-volume";
-import { parseWebGLPixelRatio } from "../../../game/config/parser/web-gl-pixel-ratio";
+import { GbraverBurstBrowserConfig } from "../../../game/config/browser-config";
+import { parseBrowserConfig } from "../../../game/config/parser/browser-config";
 import type { ConfigProps } from "../props";
 
 /**
@@ -15,21 +8,10 @@ import type { ConfigProps } from "../props";
  * @return パース結果
  */
 export function parseConfig(props: ConfigProps): GbraverBurstBrowserConfig {
-  const battleAnimationTimeScale =
-    parseBattleAnimationTimeScale(
-      props.battleAnimationTimeScaleSelector.value
-    ) ?? BattleAnimationTimeScales[0];
-  const webGLPixelRatio =
-    parseWebGLPixelRatio(props.webGLPixelRatioSelector.value) ??
-    WebGLPixelRatios[0];
-  const bgmVolume =
-    parseSoundVolume(props.bgmVolumeSelector.value) ?? SoundVolumes[0];
-  const seVolume =
-    parseSoundVolume(props.seVolumeSelector.value) ?? SoundVolumes[0];
-  return {
-    battleAnimationTimeScale,
-    webGLPixelRatio,
-    bgmVolume,
-    seVolume,
-  };
+  return parseBrowserConfig({
+    battleAnimationTimeScale: props.battleAnimationTimeScaleSelector.value,
+    webGLPixelRatio: props.webGLPixelRatioSelector.value,
+    bgmVolume: props.bgmVolumeSelector.value,
+    seVolume: props.seVolumeSelector.value,
+  });
 }

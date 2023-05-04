@@ -1,7 +1,6 @@
 import { GameOver } from "gbraver-burst-core";
 
-import { BattleAnimationTimeScales } from "../config/browser-config";
-import { parseBattleAnimationTimeScale } from "../config/parser/battle-animation-time-scale";
+import { parseBrowserConfig } from "../config/parser/browser-config";
 import { PostBattleButtonConfig } from "../dom-floaters/post-battle/post-battle-button-config";
 import {
   PostNetworkBattleButtons,
@@ -26,12 +25,13 @@ const saveAnimationTimeScale = async (
   props: Readonly<GameProps>,
   animationTimeScale: number
 ) => {
-  const battleAnimationTimeScale =
-    parseBattleAnimationTimeScale(animationTimeScale) ??
-    BattleAnimationTimeScales[0];
   const origin = await props.config.load();
-  const update = { ...origin, battleAnimationTimeScale };
-  await props.config.save(update);
+  await props.config.save(
+    parseBrowserConfig({
+      ...origin,
+      battleAnimationTimeScale: animationTimeScale,
+    })
+  );
 };
 
 /**
