@@ -5,6 +5,7 @@ import {
   BattleControllerTypes,
 } from "../../../td-scenes/battle/controller-type";
 
+/** デフォルト値 */
 export const DefaultBattleControllerType: BattleControllerType = "BigButton";
 
 /** 戦闘シーンコントローラータイプ zod schema */
