@@ -2,7 +2,7 @@ import { z } from "zod";
 
 import { SoundVolume } from "../browser-config";
 
-/** 音量 zod scehma */
+/** 音量 zod schema */
 export const SoundVolumeSchema = z.preprocess(
   /* eslint-disable @typescript-eslint/no-explicit-any */
   (origin: any) =>
