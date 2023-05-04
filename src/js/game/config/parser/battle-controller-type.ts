@@ -1,10 +1,11 @@
 import { z } from "zod";
-import {BattleControllerType} from "../../../td-scenes/battle/controller-type";
 
-/** 戦闘シーンコントローラータイプ　zod schema */
+import { BattleControllerType } from "../../../td-scenes/battle/controller-type";
+
+/** 戦闘シーンコントローラータイプ zod schema */
 export const BattleControllerTypeSchema = z.union([
   z.literal("BigButton"),
-  z.literal("MiniController")
+  z.literal("MiniController"),
 ]);
 
 /**
@@ -14,7 +15,9 @@ export const BattleControllerTypeSchema = z.union([
  * @return パース結果
  */
 /* eslint-disable @typescript-eslint/no-explicit-any */
-export function parseBattleControllerType(origin: any): BattleControllerType | null {
+export function parseBattleControllerType(
+  origin: any
+): BattleControllerType | null {
   /* eslint-enable */
   const result = BattleControllerTypeSchema.safeParse(origin);
   return result.success ? result.data : null;
