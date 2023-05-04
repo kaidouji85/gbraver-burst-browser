@@ -8,16 +8,12 @@ import { DefaultConfig} from "../default-config";
 /** ブラウザ設定 zod schema */
 export const BrowserConfigSchema = z.object({
   webGLPixelRatio: WebGLPixelRatioSchema
-    .default(DefaultConfig.webGLPixelRatio)
     .catch(DefaultConfig.webGLPixelRatio),
   battleAnimationTimeScale: BattleAnimationTimeScaleSchema
-    .default(DefaultConfig.battleAnimationTimeScale)
     .catch(DefaultConfig.battleAnimationTimeScale),
   bgmVolume: SoundVolumeSchema
-    .default(DefaultConfig.bgmVolume)
     .catch(DefaultConfig.bgmVolume),
   seVolume: SoundVolumeSchema
-    .default(DefaultConfig.seVolume)
     .catch(DefaultConfig.seVolume),
 });
 
