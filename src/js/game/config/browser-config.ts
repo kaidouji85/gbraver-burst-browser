@@ -1,10 +1,15 @@
-/** 戦闘アニメタイムスケール */
-export type BattleAnimationTimeScale = number;
-
 /** 設定可能な戦闘アニメタイムスケールをあつめたもの */
-export const BattleAnimationTimeScales: BattleAnimationTimeScale[] = [
+export const BattleAnimationTimeScales = [
   1, 0.5, 0.25,
-];
+] as const;
+
+/** 戦闘アニメタイムスケール */
+export type BattleAnimationTimeScale = typeof BattleAnimationTimeScales[number];
+
+// /** 設定可能な戦闘アニメタイムスケールをあつめたもの */
+// export const BattleAnimationTimeScales: BattleAnimationTimeScale[] = [
+//   1, 0.5, 0.25,
+// ];
 
 /** 音量 */
 export type SoundVolume = number;

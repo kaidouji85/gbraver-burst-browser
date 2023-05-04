@@ -9,12 +9,12 @@ const origin: GbraverBurstBrowserConfig = {
 };
 
 test("BGM音量が変更された場合、音量関係設定が変更されたとみなす", () => {
-  const update = { ...origin, bgmVolume: 0.4, seVolume: 0.2 };
+  const update: GbraverBurstBrowserConfig = { ...origin, bgmVolume: 0.4, seVolume: 0.2 };
   expect(isSoundConfigChanged(origin, update)).toBe(true);
 });
 
 test("音量関係以外が変更されても無視する", () => {
-  const update = {
+  const update: GbraverBurstBrowserConfig = {
     ...origin,
     webGLPixelRatio: 1,
     battleAnimationTimeScale: 0.5,
@@ -23,7 +23,7 @@ test("音量関係以外が変更されても無視する", () => {
 });
 
 test("複数項目が変更されても、音量関係が含まれていれば反応する", () => {
-  const update = {
+  const update: GbraverBurstBrowserConfig = {
     ...origin,
     webGLPixelRatio: 1,
     battleAnimationTimeScale: 0.25,
