@@ -1,17 +1,12 @@
 import { z } from "zod";
 
-import {
-  BattleControllerType,
-  BattleControllerTypes,
-} from "../../../td-scenes/battle/controller-type";
+import { BattleControllerType } from "../../../td-scenes/battle/controller-type";
 
 /** 戦闘シーンコントローラータイプ zod schema */
-export const BattleControllerTypeSchema = z
-  .union([
-    z.literal(BattleControllerTypes[0]),
-    z.literal(BattleControllerTypes[1]),
-    ...BattleControllerTypes.map((type) => z.literal(type)).slice(2),
-  ]);
+export const BattleControllerTypeSchema = z.union([
+  z.literal("BigButton"),
+  z.literal("MiniController"),
+]);
 
 /**
  * 任意のオブジェクトを戦闘シーンコントローラータイプにパースする
