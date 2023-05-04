@@ -1,20 +1,19 @@
 import { z } from "zod";
-import {WebGLPixelRatioSchema} from "./web-gl-pixel-ratio";
-import {BattleAnimationTimeScaleSchema} from "./battle-animation-time-scale";
-import {SoundVolumeSchema} from "./sound-volume";
-import {GbraverBurstBrowserConfig} from "../browser-config";
-import { DefaultConfig} from "../default-config";
+
+import { GbraverBurstBrowserConfig } from "../browser-config";
+import { DefaultConfig } from "../default-config";
+import { BattleAnimationTimeScaleSchema } from "./battle-animation-time-scale";
+import { SoundVolumeSchema } from "./sound-volume";
+import { WebGLPixelRatioSchema } from "./web-gl-pixel-ratio";
 
 /** ブラウザ設定 zod schema */
 export const BrowserConfigSchema = z.object({
-  webGLPixelRatio: WebGLPixelRatioSchema
-    .catch(DefaultConfig.webGLPixelRatio),
-  battleAnimationTimeScale: BattleAnimationTimeScaleSchema
-    .catch(DefaultConfig.battleAnimationTimeScale),
-  bgmVolume: SoundVolumeSchema
-    .catch(DefaultConfig.bgmVolume),
-  seVolume: SoundVolumeSchema
-    .catch(DefaultConfig.seVolume),
+  webGLPixelRatio: WebGLPixelRatioSchema.catch(DefaultConfig.webGLPixelRatio),
+  battleAnimationTimeScale: BattleAnimationTimeScaleSchema.catch(
+    DefaultConfig.battleAnimationTimeScale
+  ),
+  bgmVolume: SoundVolumeSchema.catch(DefaultConfig.bgmVolume),
+  seVolume: SoundVolumeSchema.catch(DefaultConfig.seVolume),
 });
 
 /**

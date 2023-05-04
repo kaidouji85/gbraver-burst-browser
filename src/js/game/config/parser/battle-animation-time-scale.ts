@@ -15,11 +15,9 @@ export const BattleAnimationTimeScaleSchema = z.preprocess(
  * @param origin パース元
  * @return パース結果
  */
-/* eslint-disable @typescript-eslint/no-explicit-any */
 export function parseBattleAnimationTimeScale(
-  origin: any
+  origin: unknown
 ): BattleAnimationTimeScale | null {
-  /* eslint-enable */
   const result = BattleAnimationTimeScaleSchema.safeParse(origin);
   return result.success ? result.data : null;
 }

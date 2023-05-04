@@ -1,6 +1,6 @@
-import {parseBrowserConfig} from "../../../../../src/js/game/config/parser/browser-config";
-import {GbraverBurstBrowserConfig} from "../../../../../src/js/game/config/browser-config";
-import {DefaultConfig} from "../../../../../src/js/game/config/default-config";
+import { GbraverBurstBrowserConfig } from "../../../../../src/js/game/config/browser-config";
+import { DefaultConfig } from "../../../../../src/js/game/config/default-config";
+import { parseBrowserConfig } from "../../../../../src/js/game/config/parser/browser-config";
 
 test("ブラウザ設定を正しくパースできる", () => {
   const data: GbraverBurstBrowserConfig = {
@@ -8,17 +8,19 @@ test("ブラウザ設定を正しくパースできる", () => {
     battleAnimationTimeScale: 1,
     bgmVolume: 1,
     seVolume: 1,
-  }
+  };
   expect(parseBrowserConfig(data)).toEqual(data);
 });
 
 test("データ型が異なっているも、ある程度はパースできる", () => {
-  expect(parseBrowserConfig({
-    webGLPixelRatio: "2",
-    battleAnimationTimeScale: "1",
-    bgmVolume: "1",
-    seVolume: "1",
-  })).toEqual({
+  expect(
+    parseBrowserConfig({
+      webGLPixelRatio: "2",
+      battleAnimationTimeScale: "1",
+      bgmVolume: "1",
+      seVolume: "1",
+    })
+  ).toEqual({
     webGLPixelRatio: 2,
     battleAnimationTimeScale: 1,
     bgmVolume: 1,
@@ -27,10 +29,12 @@ test("データ型が異なっているも、ある程度はパースできる",
 });
 
 test("指定なしのプロパティは、デフォルト値で補完される", () => {
-  expect(parseBrowserConfig({
-    webGLPixelRatio: 2,
-    battleAnimationTimeScale: 1,
-  })).toEqual({
+  expect(
+    parseBrowserConfig({
+      webGLPixelRatio: 2,
+      battleAnimationTimeScale: 1,
+    })
+  ).toEqual({
     ...DefaultConfig,
     webGLPixelRatio: 2,
     battleAnimationTimeScale: 1,

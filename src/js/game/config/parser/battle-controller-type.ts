@@ -14,11 +14,9 @@ export const BattleControllerTypeSchema = z.union([
  * @param origin パース元
  * @return パース結果
  */
-/* eslint-disable @typescript-eslint/no-explicit-any */
 export function parseBattleControllerType(
-  origin: any
+  origin: unknown
 ): BattleControllerType | null {
-  /* eslint-enable */
   const result = BattleControllerTypeSchema.safeParse(origin);
   return result.success ? result.data : null;
 }

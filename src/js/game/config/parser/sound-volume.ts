@@ -4,9 +4,7 @@ import { SoundVolume } from "../browser-config";
 
 /** 音量 zod schema */
 export const SoundVolumeSchema = z.preprocess(
-  /* eslint-disable @typescript-eslint/no-explicit-any */
-  (origin: any) =>
-    /* eslint-enable */
+  (origin: unknown) =>
     origin === null || origin === undefined || origin === ""
       ? null
       : Number(origin),
@@ -32,9 +30,7 @@ export const SoundVolumeSchema = z.preprocess(
  * @param origin パース元
  * @return パース結果
  */
-/* eslint-disable @typescript-eslint/no-explicit-any */
-export function parseSoundVolume(origin: any): SoundVolume | null {
-  /* eslint-enable */
+export function parseSoundVolume(origin: unknown): SoundVolume | null {
   const result = SoundVolumeSchema.safeParse(origin);
   return result.success ? result.data : null;
 }
