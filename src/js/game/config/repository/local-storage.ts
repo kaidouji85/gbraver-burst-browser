@@ -1,14 +1,6 @@
-import type {
-  BattleAnimationTimeScale,
-  GbraverBurstBrowserConfig,
-  SoundVolume,
-  WebGLPixelRatio,
-} from "../browser-config";
-import { DefaultConfig } from "../default-config";
-import { parseBattleAnimationTimeScale } from "../parser/battle-animation-time-scale";
-import { parseSoundVolume } from "../parser/sound-volume";
-import { parseWebGLPixelRatio } from "../parser/web-gl-pixel-ratio";
+import type { GbraverBurstBrowserConfig } from "../browser-config";
 import { GbraverBurstBrowserConfigRepository } from "./repository";
+import {parseBrowserConfig} from "../parser/browser-config";
 
 /** 設定項目名とLocalStorageキーのマッピング */
 const Keys = {
@@ -42,25 +34,12 @@ class LocalStorageConfigRepository
 
   /** @override */
   async load(): Promise<GbraverBurstBrowserConfig> {
-    const webGLPixelRatio: WebGLPixelRatio =
-      parseWebGLPixelRatio(localStorage.getItem(Keys.WebGLPixelRatio)) ??
-      DefaultConfig.webGLPixelRatio;
-    const battleAnimationTimeScale: BattleAnimationTimeScale =
-      parseBattleAnimationTimeScale(
-        localStorage.getItem(Keys.BattleAnimationTimeScale)
-      ) ?? DefaultConfig.battleAnimationTimeScale;
-    const bgmVolume: SoundVolume =
-      parseSoundVolume(localStorage.getItem(Keys.BGMVolume)) ??
-      DefaultConfig.bgmVolume;
-    const seVolume: SoundVolume =
-      parseSoundVolume(localStorage.getItem(Keys.SEVolume)) ??
-      DefaultConfig.seVolume;
-    return {
-      webGLPixelRatio,
-      battleAnimationTimeScale,
-      bgmVolume,
-      seVolume,
-    };
+    return parseBrowserConfig({
+      webGLPixelRatio: localStorage.getItem(Keys.WebGLPixelRatio),
+      battleAnimationTimeScale: localStorage.getItem(Keys.BattleAnimationTimeScale),
+      bgmVolume: localStorage.getItem(Keys.BGMVolume),
+      seVolume: localStorage.getItem(Keys.SEVolume),
+    });
   }
 }
 
