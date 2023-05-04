@@ -1,6 +1,7 @@
 import { z } from "zod";
 
 import {BattleControllerType, BattleControllerTypes} from "../../../td-scenes/battle/controller-type";
+import {DefaultConfig} from "../default-config";
 
 /** 戦闘シーンコントローラータイプ zod schema */
 export const BattleControllerTypeSchema = z.union([
@@ -8,17 +9,16 @@ export const BattleControllerTypeSchema = z.union([
   z.literal(BattleControllerTypes[1]),
   ...BattleControllerTypes.map((type) => z.literal(type))
     .slice(2),
-]);
+]).catch(DefaultConfig.battleControllerType);
 
 /**
  * 任意のオブジェクトを戦闘シーンコントローラータイプにパースする
- * パースできない場合はnullを返す
+ * パースできない場合はデフォルト値を返す
  * @param origin パース元
  * @return パース結果
  */
 export function parseBattleControllerType(
   origin: unknown
-): BattleControllerType | null {
-  const result = BattleControllerTypeSchema.safeParse(origin);
-  return result.success ? result.data : null;
+): BattleControllerType {
+  return BattleControllerTypeSchema.parse(origin);
 }
