@@ -1,5 +1,7 @@
 import "../css/style.css";
 
+import * as THREE from "three";
+
 import { createBrowserSDK } from "@gbraver-burst-network/browser-sdk";
 
 import { isMobile } from "./device-ditect/is-mobile";
@@ -25,6 +27,8 @@ declare let GBRAVER_BURST_AUTH0_AUDIENCE: string;
 declare let GBRAVER_BURST_CAN_PLAY_TUTORIAL_IN_DEVELOPMENT: string;
 declare let GBRAVER_BURST_SHOULD_LOAD_DEVELOPING_RESOURCE: string;
 declare let GBRAVER_BURST_CAN_PLAY_DEVELOPING_ARMDOZER: string;
+
+THREE.ColorManagement.enabled = false;
 
 /**
  * Gブレイバーバーストのエントリポイント

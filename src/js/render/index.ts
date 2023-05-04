@@ -23,11 +23,11 @@ export class Renderer implements OverlapNotifier, RendererDomGetter, Rendering {
 
   /**
    * コンストラクタ
-   *
    * @param resize リサイズのストリーム
    */
   constructor(resize: Observable<Resize>) {
     this._threeJsRender = new THREE.WebGLRenderer();
+    this._threeJsRender.outputColorSpace = THREE.LinearSRGBColorSpace;
     this._threeJsRender.autoClear = false;
 
     this._threeJsRender.setSize(getViewPortWidth(), getViewPortHeight());
@@ -52,7 +52,6 @@ export class Renderer implements OverlapNotifier, RendererDomGetter, Rendering {
 
   /**
    * オーバーラップイベント通知を生成する
-   *
    * @param camera カメラ
    * @return 生成結果
    */
@@ -62,7 +61,6 @@ export class Renderer implements OverlapNotifier, RendererDomGetter, Rendering {
 
   /**
    * デバッグ用情報を返す
-   *
    * @return デバッグ用情報
    */
   info(): WebGLInfo {
@@ -71,7 +69,6 @@ export class Renderer implements OverlapNotifier, RendererDomGetter, Rendering {
 
   /**
    * three.jsレンダラのHTML要素を取得する
-   *
    * @return 取得結果
    */
   getRendererDOM(): HTMLElement {
@@ -80,7 +77,6 @@ export class Renderer implements OverlapNotifier, RendererDomGetter, Rendering {
 
   /**
    * ピクセルレートを設定する
-   *
    * @param pixelRatio ピクセルレート
    */
   setPixelRatio(pixelRatio: number): void {
@@ -91,7 +87,6 @@ export class Renderer implements OverlapNotifier, RendererDomGetter, Rendering {
 
   /**
    * レンダリングをする
-   *
    * @param scene シーン
    * @param camera カメラ
    */
@@ -99,7 +94,10 @@ export class Renderer implements OverlapNotifier, RendererDomGetter, Rendering {
     this._threeJsRender.render(scene, camera);
   }
 
-  /** リサイズ */
+  /**
+   * リサイズ時の処理
+   * @param action アクション
+   */
   _resize(action: Resize): void {
     this._threeJsRender.setSize(action.width, action.height);
   }
