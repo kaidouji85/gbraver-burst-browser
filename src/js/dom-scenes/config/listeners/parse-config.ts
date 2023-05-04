@@ -1,8 +1,6 @@
-import {
-  GbraverBurstBrowserConfig,
-} from "../../../game/config/browser-config";
+import { GbraverBurstBrowserConfig } from "../../../game/config/browser-config";
+import { parseBrowserConfig } from "../../../game/config/parser/browser-config";
 import type { ConfigProps } from "../props";
-import {parseBrowserConfig} from "../../../game/config/parser/browser-config";
 
 /**
  * 画面の入力値から設定オブジェクトをパースするヘルパー関数

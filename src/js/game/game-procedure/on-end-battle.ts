@@ -1,5 +1,6 @@
 import { GameOver } from "gbraver-burst-core";
 
+import { parseBrowserConfig } from "../config/parser/browser-config";
 import { PostBattleButtonConfig } from "../dom-floaters/post-battle/post-battle-button-config";
 import {
   PostNetworkBattleButtons,
@@ -14,7 +15,6 @@ import type { GameProps } from "../game-props";
 import { PlayingTutorialStage } from "../in-progress/tutorial";
 import type { NPCBattleResult } from "../npc-battle";
 import { updateNPCBattleState } from "../npc-battle";
-import {parseBrowserConfig} from "../config/parser/browser-config";
 
 /**
  * 戦闘画面のアニメーションタイムスケールを設定に反映する
@@ -26,10 +26,12 @@ const saveAnimationTimeScale = async (
   animationTimeScale: number
 ) => {
   const origin = await props.config.load();
-  await props.config.save(parseBrowserConfig({
-    ...origin,
-    battleAnimationTimeScale: animationTimeScale
-  }));
+  await props.config.save(
+    parseBrowserConfig({
+      ...origin,
+      battleAnimationTimeScale: animationTimeScale,
+    })
+  );
 };
 
 /**

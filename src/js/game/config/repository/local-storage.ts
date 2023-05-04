@@ -1,6 +1,6 @@
 import type { GbraverBurstBrowserConfig } from "../browser-config";
+import { parseBrowserConfig } from "../parser/browser-config";
 import { GbraverBurstBrowserConfigRepository } from "./repository";
-import {parseBrowserConfig} from "../parser/browser-config";
 
 /** 設定項目名とLocalStorageキーのマッピング */
 const Keys = {
@@ -36,7 +36,9 @@ class LocalStorageConfigRepository
   async load(): Promise<GbraverBurstBrowserConfig> {
     return parseBrowserConfig({
       webGLPixelRatio: localStorage.getItem(Keys.WebGLPixelRatio),
-      battleAnimationTimeScale: localStorage.getItem(Keys.BattleAnimationTimeScale),
+      battleAnimationTimeScale: localStorage.getItem(
+        Keys.BattleAnimationTimeScale
+      ),
       bgmVolume: localStorage.getItem(Keys.BGMVolume),
       seVolume: localStorage.getItem(Keys.SEVolume),
     });
