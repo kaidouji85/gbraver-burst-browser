@@ -1,10 +1,9 @@
 /** 設定可能な戦闘アニメタイムスケールをあつめたもの */
-export const BattleAnimationTimeScales = [
-  1, 0.5, 0.25,
-] as const;
+export const BattleAnimationTimeScales = [1, 0.5, 0.25] as const;
 
 /** 戦闘アニメタイムスケール */
-export type BattleAnimationTimeScale = typeof BattleAnimationTimeScales[number];
+export type BattleAnimationTimeScale =
+  (typeof BattleAnimationTimeScales)[number];
 
 /** 有効な音量 */
 export const SoundVolumes = [
@@ -12,13 +11,13 @@ export const SoundVolumes = [
 ] as const;
 
 /** 音量 */
-export type SoundVolume = typeof SoundVolumes[number];
+export type SoundVolume = (typeof SoundVolumes)[number];
 
 /** 設定可能なWebGLピクセルレートを集めたもの */
 export const WebGLPixelRatios = [0.5, 0.75, 1, 2];
 
 /** WebGLピクセルレート */
-export type WebGLPixelRatio = typeof WebGLPixelRatios[number];
+export type WebGLPixelRatio = (typeof WebGLPixelRatios)[number];
 
 /** Gブレイバーバースト ブラウザ側設定項目 */
 export type GbraverBurstBrowserConfig = {

@@ -9,7 +9,11 @@ const origin: GbraverBurstBrowserConfig = {
 };
 
 test("BGM音量が変更された場合、音量関係設定が変更されたとみなす", () => {
-  const update: GbraverBurstBrowserConfig = { ...origin, bgmVolume: 0.4, seVolume: 0.2 };
+  const update: GbraverBurstBrowserConfig = {
+    ...origin,
+    bgmVolume: 0.4,
+    seVolume: 0.2,
+  };
   expect(isSoundConfigChanged(origin, update)).toBe(true);
 });
 

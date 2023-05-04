@@ -14,7 +14,10 @@ test("WebGLピクセルレートの変更を正しく検知できる", () => {
 });
 
 test("戦闘アニメ再生速度の変更を正しく検知できる", () => {
-  const update: GbraverBurstBrowserConfig = { ...origin, battleAnimationTimeScale: 0.5 };
+  const update: GbraverBurstBrowserConfig = {
+    ...origin,
+    battleAnimationTimeScale: 0.5,
+  };
   expect(isConfigChanged(origin, update)).toBe(true);
 });
 
