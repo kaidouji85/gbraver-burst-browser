@@ -1,31 +1,28 @@
-import {
-  DefaultBattleControllerType,
-  parseBattleControllerType,
-} from "../../../../../src/js/game/config/parser/battle-controller-type";
+import { parseBattleControllerType } from "../../../../../src/js/game/config/parser/battle-controller-type";
 import { BattleControllerTypes } from "../../../../../src/js/td-scenes/battle/controller-type";
 
 test("BattleControllerTypesは正しくパースできる", () => {
-  BattleControllerTypes.forEach((type) => {
-    expect(parseBattleControllerType(type)).toBe(type);
+  BattleControllerTypes.forEach((v) => {
+    expect(parseBattleControllerType(v)).toBe(v);
   });
 });
 
-test("不正な文字列はパースできないので、デフォルト値を返す", () => {
+test("不正な文字列はパースできない", () => {
   const data = "NoDefinedControllerType";
-  expect(parseBattleControllerType(data)).toBe(DefaultBattleControllerType);
+  expect(parseBattleControllerType(data)).toBe(null);
 });
 
-test("空文字はパースできないので、デフォルト値を返す", () => {
+test("空文字はパースできない", () => {
   const data = "";
-  expect(parseBattleControllerType(data)).toBe(DefaultBattleControllerType);
+  expect(parseBattleControllerType(data)).toBe(null);
 });
 
-test("nullはパースできないので、デフォルト値を返す", () => {
+test("nullはパースできない", () => {
   const data = null;
-  expect(parseBattleControllerType(data)).toBe(DefaultBattleControllerType);
+  expect(parseBattleControllerType(data)).toBe(null);
 });
 
-test("undefinedはパースできないので、デフォルト値を返す", () => {
+test("undefinedはパースできない", () => {
   const data = undefined;
-  expect(parseBattleControllerType(data)).toBe(DefaultBattleControllerType);
+  expect(parseBattleControllerType(data)).toBe(null);
 });
