@@ -1,8 +1,7 @@
 import "../css/style.css";
 
-import * as THREE from "three";
-
 import { createBrowserSDK } from "@gbraver-burst-network/browser-sdk";
+import * as THREE from "three";
 
 import { isMobile } from "./device-ditect/is-mobile";
 import { createLocalStorageConfigRepository } from "./game/config/repository/local-storage";
