@@ -4,5 +4,4 @@ export const DefaultConfig = {
   battleAnimationTimeScale: 1,
   bgmVolume: 1,
   seVolume: 1,
-  battleControllerType: "BigButton",
 } as const;
