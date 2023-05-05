@@ -22,9 +22,24 @@ const battleAnimationTimeScaleOptions = (selected: BattleAnimationTimeScale) =>
       ${value === selected ? "selected" : ""}
     >
       ${Math.floor(1 / value)}倍
-    </option>;
+    </option>
   `
-  );
+  ).reduce((a, b) => a + b);
+
+/**
+ * 戦闘画面のピクセルレートのoption要素HTMLを生成する
+ * @param selected 選択中の戦闘画面のピクセルレート
+ * @return 生成結果
+ */
+const webGLPixelRatioOptions = (selected: WebGLPixelRatio) =>
+  WebGLPixelRatios.map(
+    (value) => `
+    <option class="${ROOT_CLASS}__webgl-pixel-ratio-selector-option" 
+      value="${value}" ${value === selected ? "selected" : ""}>
+      ${Number(value).toFixed(2)}
+    </option>
+`
+  ).reduce((a, b) => a + b);
 
 /**
  * ルート要素のHTML要素
@@ -37,14 +52,6 @@ export function rootInnerHTML(
   ids: DataIDs,
   config: GbraverBurstBrowserConfig
 ): string {
-  const webGLPixelRatioOption = (value: WebGLPixelRatio) => `
-    <option class="${ROOT_CLASS}__webgl-pixel-ratio-selector-option" 
-      value="${value}" ${value === config.webGLPixelRatio ? "selected" : ""}>
-      ${Number(value).toFixed(2)}
-    </option>`;
-  const webGLPixelRatioOptions = WebGLPixelRatios.map((v) =>
-    webGLPixelRatioOption(v)
-  ).reduce((a, b) => a + b);
   return `
     <div class="${ROOT_CLASS}__content">
       <div class="${ROOT_CLASS}__title">設定</div>
@@ -62,7 +69,7 @@ export function rootInnerHTML(
           <select class="${ROOT_CLASS}__webgl-pixel-ratio-selector"
             data-id="${ids.webGLPixelRatioSelector}"
           >
-            ${webGLPixelRatioOptions}
+            ${webGLPixelRatioOptions(config.webGLPixelRatio)}
           </select>
         </div>
         <div class="${ROOT_CLASS}__bgm-volume">
