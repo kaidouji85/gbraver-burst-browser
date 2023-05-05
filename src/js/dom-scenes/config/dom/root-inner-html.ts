@@ -91,7 +91,6 @@ export function rootInnerHTML(
   config: GbraverBurstBrowserConfig
 ): string {
   return `
-    <div class="${ROOT_CLASS}__content">
       <div class="${ROOT_CLASS}__title">設定</div>
       <div class="${ROOT_CLASS}__configs">
         <div class="${ROOT_CLASS}__battle-animation-time-scale">
@@ -150,6 +149,5 @@ export function rootInnerHTML(
           この設定にする
         </button>
       </div>
-    </div>
   `;
 }
