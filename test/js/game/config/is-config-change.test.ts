@@ -6,6 +6,7 @@ const origin: GbraverBurstBrowserConfig = {
   battleAnimationTimeScale: 1,
   bgmVolume: 1,
   seVolume: 1,
+  battleControllerType: "BigButton",  // TODO 変更検知テストを実装する
 };
 
 test("WebGLピクセルレートの変更を正しく検知できる", () => {
@@ -29,6 +30,10 @@ test("BGM音量の変更を正しく検知できる", () => {
 test("SE音量の変更を正しく検知できる", () => {
   const update: GbraverBurstBrowserConfig = { ...origin, seVolume: 0.5 };
   expect(isConfigChanged(origin, update)).toBe(true);
+});
+
+test("戦闘シーンコントトーラータイプ", () => {
+
 });
 
 test("複数項目の変更を正しく検知できる", () => {

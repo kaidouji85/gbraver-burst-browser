@@ -1,4 +1,6 @@
 /** 設定可能な戦闘アニメタイムスケールをあつめたもの */
+import {BattleControllerType} from "../../td-scenes/battle/controller-type";
+
 export const BattleAnimationTimeScales = [1, 0.5, 0.25] as const;
 
 /** 戦闘アニメタイムスケール */
@@ -32,4 +34,7 @@ export type GbraverBurstBrowserConfig = {
 
   /** SE音量 */
   seVolume: SoundVolume;
+
+  /** 戦闘シーンコントローラータイプ */
+  battleControllerType: BattleControllerType;
 };

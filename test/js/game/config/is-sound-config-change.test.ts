@@ -6,6 +6,7 @@ const origin: GbraverBurstBrowserConfig = {
   battleAnimationTimeScale: 1,
   bgmVolume: 1,
   seVolume: 1,
+  battleControllerType: "BigButton",  // TODO 変更検知テストを実装する
 };
 
 test("BGM音量が変更された場合、音量関係設定が変更されたとみなす", () => {

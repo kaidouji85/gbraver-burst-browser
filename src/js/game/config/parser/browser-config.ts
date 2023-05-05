@@ -5,6 +5,7 @@ import { DefaultConfig } from "../default-config";
 import { BattleAnimationTimeScaleSchema } from "./battle-animation-time-scale";
 import { SoundVolumeSchema } from "./sound-volume";
 import { WebGLPixelRatioSchema } from "./web-gl-pixel-ratio";
+import {BattleControllerTypeSchema} from "./battle-controller-type";
 
 /** ブラウザ設定 zod schema */
 export const BrowserConfigSchema = z.object({
@@ -14,6 +15,7 @@ export const BrowserConfigSchema = z.object({
   ),
   bgmVolume: SoundVolumeSchema.catch(DefaultConfig.bgmVolume),
   seVolume: SoundVolumeSchema.catch(DefaultConfig.seVolume),
+  battleControllerType: BattleControllerTypeSchema.catch(DefaultConfig.battleControllerType),
 });
 
 /**
