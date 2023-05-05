@@ -81,7 +81,6 @@
   color: var(--font-color);
   font-size: var(--font-size);
   border-bottom-right-radius: var(--dialog-border-radius);
-  background-color: var(--sub-button-background-color);
   padding: var(--button-padding);
   border: none;
   outline: none;
@@ -89,6 +88,14 @@
   align-items: center;
   justify-content: center;
   user-select: none;
+}
+
+.mini-controller__burst--enabled {
+  background-color: var(--enabled-button-color);
+}
+
+.mini-controller__burst--disabled {
+  background-color: var(--disabled-button-color);
 }
 
 .mini-controller__pilot {

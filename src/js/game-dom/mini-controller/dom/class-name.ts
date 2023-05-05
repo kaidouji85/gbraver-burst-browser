@@ -25,5 +25,11 @@ export const BATTERY_INVISIBLE = `${BATTERY}--invisible`;
 /** バーストボタン class属性 */
 export const BURST = `${ROOT}__burst`;
 
+/** バーストボタン 操作可能 class属性 */
+export const BURST_ENABLED = `${BURST}--enabled`;
+
+/** バーストボタン 操作不可能 class属性 */
+export const BURST_DISABLED = `${BURST}--disabled`;
+
 /** パイロットボタン class属性 */
 export const PILOT = `${ROOT}__pilot`;
