@@ -112,7 +112,9 @@ export function rootInnerHTML(
         </div>
         <div class="${ROOT_CLASS}__battle-controller-type">
           <div class="${ROOT_CLASS}__battle-controller-type-caption">戦闘画面コントローラー</div>
-          <select class="${ROOT_CLASS}__battle-controller-type-selector">
+          <select class="${ROOT_CLASS}__battle-controller-type-selector"
+            data-id="${ids.battleControllerTypeSelector}"
+          >
             ${battleControllerTypeOptions(config.battleControllerType)}
           </select>
         </div>

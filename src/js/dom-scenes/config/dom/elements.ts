@@ -4,6 +4,7 @@ import type { DataIDs } from "./data-ids";
 type Elements = {
   battleAnimationTimeScaleSelector: HTMLSelectElement;
   webGLPixelRatioSelector: HTMLSelectElement;
+  battleControllerTypeSelector: HTMLSelectElement;
   bgmVolumeSelector: HTMLInputElement;
   bgmVolumeValue: HTMLElement;
   seVolumeSelector: HTMLInputElement;
@@ -34,6 +35,13 @@ export function extractElements(root: HTMLElement, ids: DataIDs): Elements {
     extractedWebGlPixelRatioSelector instanceof HTMLSelectElement
       ? extractedWebGlPixelRatioSelector
       : document.createElement("select");
+  const extractedBattleControllerTypeSelector = root.querySelector(
+    `[data-id="${ids.battleControllerTypeSelector}"]`
+  );
+  const battleControllerTypeSelector =
+    extractedBattleControllerTypeSelector instanceof HTMLSelectElement
+      ? extractedBattleControllerTypeSelector
+      : document.createElement("select");
   const extractedBGMVolumeSelector = root.querySelector(
     `[data-id="${ids.bgmVolumeSelector}"]`
   );
@@ -63,6 +71,7 @@ export function extractElements(root: HTMLElement, ids: DataIDs): Elements {
   return {
     battleAnimationTimeScaleSelector,
     webGLPixelRatioSelector,
+    battleControllerTypeSelector,
     prev,
     configChange,
     bgmVolumeSelector,
