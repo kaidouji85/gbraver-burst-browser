@@ -13,6 +13,7 @@ export const Scene: DOMStubStory = domStub((resources) => {
     battleAnimationTimeScale: 1,
     bgmVolume: 1,
     seVolume: 1,
+    battleControllerType: "BigButton",
   });
   scene.notifyPrev().subscribe(() => {
     console.log("prev");

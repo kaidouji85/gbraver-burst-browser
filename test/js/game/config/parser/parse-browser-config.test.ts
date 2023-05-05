@@ -8,6 +8,7 @@ test("ブラウザ設定を正しくパースできる", () => {
     battleAnimationTimeScale: 1,
     bgmVolume: 1,
     seVolume: 1,
+    battleControllerType: "BigButton",
   };
   expect(parseBrowserConfig(data)).toEqual(data);
 });
@@ -19,12 +20,14 @@ test("データ型が異なっているも、ある程度はパースできる",
       battleAnimationTimeScale: "1",
       bgmVolume: "1",
       seVolume: "1",
+      battleControllerType: "BigButton",
     })
   ).toEqual({
     webGLPixelRatio: 2,
     battleAnimationTimeScale: 1,
     bgmVolume: 1,
     seVolume: 1,
+    battleControllerType: "BigButton",
   });
 });
 
