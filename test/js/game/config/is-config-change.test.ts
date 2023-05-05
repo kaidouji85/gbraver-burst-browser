@@ -6,7 +6,7 @@ const origin: GbraverBurstBrowserConfig = {
   battleAnimationTimeScale: 1,
   bgmVolume: 1,
   seVolume: 1,
-  battleControllerType: "BigButton",  // TODO 変更検知テストを実装する
+  battleControllerType: "BigButton",
 };
 
 test("WebGLピクセルレートの変更を正しく検知できる", () => {
@@ -32,8 +32,9 @@ test("SE音量の変更を正しく検知できる", () => {
   expect(isConfigChanged(origin, update)).toBe(true);
 });
 
-test("戦闘シーンコントトーラータイプ", () => {
-
+test("戦闘シーンコントトーラータイプの変更を正しく検知できる", () => {
+  const update: GbraverBurstBrowserConfig = { ...origin, battleControllerType: "MiniController" };
+  expect(isConfigChanged(origin, update)).toBe(true);
 });
 
 test("複数項目の変更を正しく検知できる", () => {
@@ -43,6 +44,7 @@ test("複数項目の変更を正しく検知できる", () => {
     battleAnimationTimeScale: 0.25,
     bgmVolume: 0.5,
     seVolume: 0.2,
+    battleControllerType: "MiniController",
   };
   expect(isConfigChanged(origin, update)).toBe(true);
 });

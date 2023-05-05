@@ -14,6 +14,7 @@ export function isConfigChanged(
   return (
     origin.webGLPixelRatio !== update.webGLPixelRatio ||
     origin.battleAnimationTimeScale !== update.battleAnimationTimeScale ||
+    origin.battleControllerType !== update.battleControllerType ||
     isSoundConfigChanged(origin, update)
   );
 }
