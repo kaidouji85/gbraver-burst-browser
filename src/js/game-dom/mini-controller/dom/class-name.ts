@@ -7,6 +7,12 @@ export const ROOT_INVISIBLE = `${ROOT}--invisible`;
 /** バッテリーボタン class属性 */
 export const BATTERY = `${ROOT}__battery`;
 
+/** バッテリーボタン 操作可能 class属性 */
+export const BATTERY_ENABLED = `${BATTERY}--enabled`;
+
+/** バッテリーボタン 操作不可能 class属性 */
+export const BATTERY_DISABLED = `${BATTERY}--disabled`;
+
 /** バッテリーボタン 先頭 class属性 */
 export const BATTERY_FIRST = `${BATTERY}--first`;
 

@@ -1,13 +1,11 @@
 import {
-  BATTERY,
+  BATTERY, BATTERY_DISABLED, BATTERY_ENABLED,
   BATTERY_FIRST,
   BATTERY_INVISIBLE,
   BATTERY_LAST,
 } from "../../dom/class-name";
 import { BatteryButtonConfig } from "../config";
 import { BatteryButtonProps } from "../props";
-import { disabled } from "./disabled";
-import { enabled } from "./enabled";
 
 /**
  * 設定を反映させる
@@ -21,18 +19,14 @@ export function engage(
   const isVisible = props.battery <= config.maxBattery;
   const isFirst = props.battery === 0;
   const isLast = props.battery === config.maxBattery;
-
+  const isEnabled = props.battery <= config.battery;
   props.root.className = [
     BATTERY,
     isFirst ? BATTERY_FIRST : "",
     isLast ? BATTERY_LAST : "",
     isVisible ? "" : BATTERY_INVISIBLE,
+    isEnabled ? BATTERY_ENABLED : BATTERY_DISABLED,
   ].join(" ");
-
-  const isEnabled = props.battery <= config.battery;
-  if (isEnabled) {
-    enabled(props);
-  } else {
-    disabled(props);
-  }
+  props.root.disabled = !isEnabled;
+  props.root.innerText = isEnabled ? `${props.battery}` : "";
 }
