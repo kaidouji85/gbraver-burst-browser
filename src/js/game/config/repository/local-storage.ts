@@ -10,6 +10,9 @@ const Keys = {
   /** 戦闘アニメタイムスケール */
   BattleAnimationTimeScale: "BattleAnimationTimeScale",
 
+  /** 戦闘画面コントローラータイプ */
+  BattleControllerType: "BattleControllerType",
+
   /** BGM音量 */
   BGMVolume: "BGMVolume",
 
@@ -28,6 +31,10 @@ class LocalStorageConfigRepository
       Keys.BattleAnimationTimeScale,
       `${config.battleAnimationTimeScale}`
     );
+    localStorage.setItem(
+      Keys.BattleControllerType,
+      config.battleControllerType
+    );
     localStorage.setItem(Keys.BGMVolume, `${config.bgmVolume}`);
     localStorage.setItem(Keys.SEVolume, `${config.seVolume}`);
   }
@@ -39,6 +46,7 @@ class LocalStorageConfigRepository
       battleAnimationTimeScale: localStorage.getItem(
         Keys.BattleAnimationTimeScale
       ),
+      battleControllerType: localStorage.getItem(Keys.BattleControllerType),
       bgmVolume: localStorage.getItem(Keys.BGMVolume),
       seVolume: localStorage.getItem(Keys.SEVolume),
     });

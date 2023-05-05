@@ -25,6 +25,9 @@ export type ConfigProps = {
   /** webglピクセルレートセレクタ */
   webGLPixelRatioSelector: HTMLSelectElement;
 
+  /** 戦闘画面コントローラセレクタ */
+  battleControllerTypeSelector: HTMLSelectElement;
+
   /** bgm音量セレクタ */
   bgmVolumeSelector: HTMLInputElement;
 
@@ -76,6 +79,7 @@ export function createConfigProps(
   const ids = {
     battleAnimationTimeScaleSelector: domUuid(),
     webGLPixelRatioSelector: domUuid(),
+    battleControllerTypeSelector: domUuid(),
     bgmVolumeSelector: domUuid(),
     bgmVolumeValue: domUuid(),
     seVolumeSelector: domUuid(),
@@ -95,6 +99,7 @@ export function createConfigProps(
     battleAnimationTimeScaleSelector: elements.battleAnimationTimeScaleSelector,
     webGLPixelRatioSelector: elements.webGLPixelRatioSelector,
     bgmVolumeSelector: elements.bgmVolumeSelector,
+    battleControllerTypeSelector: elements.battleControllerTypeSelector,
     bgmVolumeValue: elements.bgmVolumeValue,
     seVolumeSelector: elements.seVolumeSelector,
     seVolumeValue: elements.seVolumeValue,
@@ -108,7 +113,7 @@ export function createConfigProps(
       resources.sounds.find((v) => v.id === SOUND_IDS.CHANGE_VALUE)?.sound ??
       new Howl({ src: "" }),
     exclusive: new Exclusive(),
-    prev: new Subject(),
-    configChange: new Subject(),
+    prev: new Subject<void>(),
+    configChange: new Subject<GbraverBurstBrowserConfig>(),
   };
 }

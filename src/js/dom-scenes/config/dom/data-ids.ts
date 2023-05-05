@@ -2,6 +2,7 @@
 export type DataIDs = {
   battleAnimationTimeScaleSelector: string;
   webGLPixelRatioSelector: string;
+  battleControllerTypeSelector: string;
   bgmVolumeSelector: string;
   bgmVolumeValue: string;
   seVolumeSelector: string;

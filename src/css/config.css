@@ -51,6 +51,7 @@
 
 .config__battle-animation-time-scale,
 .config__webgl-pixel-ratio,
+.config__battle-controller-type,
 .config__bgm-volume,
 .config__se-volume {
   display: flex;
@@ -60,15 +61,17 @@
 
 .config__battle-animation-time-scale-caption,
 .config__webgl-pixel-ratio-caption,
+.config__battle-controller-type-caption,
 .config__bgm-volume-caption,
 .config__se-volume-caption {
   width: calc(var(--responsive-font-size) * 15);
 }
 
 .config__battle-animation-time-scale-selector,
+.config__battle-controller-type-selector,
 .config__webgl-pixel-ratio-selector {
   appearance: menulist-button;
-  min-width: calc(var(--responsive-font-size) * 7);
+  min-width: calc(var(--responsive-font-size) * 14);
   height: calc(var(--responsive-font-size) * 2);
   font-size: var(--font-size);
 }
