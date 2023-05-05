@@ -6,7 +6,7 @@
     --font-size: calc(var(--responsive-font-size) * 1);
     --gap: 1px;
     --button-padding: calc(var(--responsive-font-size) * 0.5);
-    --button-color: var(--font-color);
+    --button-font-color: var(--font-color);
     --enabled-button-color: var(--sub-button-background-color);
     --disabled-button-color: #a9a9a9;
 
@@ -45,7 +45,7 @@
 
 .mini-controller__battery {
   flex: 1;
-  color: var(--button-color);
+  color: var(--button-font-color);
   font-size: var(--font-size);
   padding: var(--button-padding);
   border: none;
@@ -79,7 +79,7 @@
 .mini-controller__burst {
   grid-column: 2;
   grid-row: 2;
-  color: var(--button-color);
+  color: var(--button-font-color);
   font-size: var(--font-size);
   border-bottom-right-radius: var(--dialog-border-radius);
   padding: var(--button-padding);
@@ -102,7 +102,7 @@
 .mini-controller__pilot {
   grid-column: 1;
   grid-row: 2;
-  color: var(--button-color);
+  color: var(--button-font-color);
   font-size: var(--font-size);
   border-bottom-left-radius: var(--dialog-border-radius);
   padding: var(--button-padding);
