@@ -5,13 +5,13 @@ import {
   WebGLPixelRatio,
   WebGLPixelRatios,
 } from "../../../game/config/browser-config";
-import { ROOT_CLASS } from "./class-name";
-import type { DataIDs } from "./data-ids";
-import { soundVolumeLabel } from "./sound-volume-label";
 import {
   BattleControllerType,
   BattleControllerTypes,
 } from "../../../td-scenes/battle/controller-type";
+import { ROOT_CLASS } from "./class-name";
+import type { DataIDs } from "./data-ids";
+import { soundVolumeLabel } from "./sound-volume-label";
 
 /**
  * 戦闘アニメ再生速度のoption要素HTMLを生成する

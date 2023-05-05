@@ -31,7 +31,10 @@ class LocalStorageConfigRepository
       Keys.BattleAnimationTimeScale,
       `${config.battleAnimationTimeScale}`
     );
-    localStorage.setItem(Keys.BattleControllerType, config.battleControllerType);
+    localStorage.setItem(
+      Keys.BattleControllerType,
+      config.battleControllerType
+    );
     localStorage.setItem(Keys.BGMVolume, `${config.bgmVolume}`);
     localStorage.setItem(Keys.SEVolume, `${config.seVolume}`);
   }
