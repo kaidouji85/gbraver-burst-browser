@@ -24,11 +24,11 @@
 }
 
 .config__content {
+  flex: 1;
   display: grid;
   grid-template-columns: auto;
   grid-template-rows: auto 1fr auto;
   grid-gap: calc(var(--responsive-font-size) * 0.5);
-  height: calc(100% - var(--screen-padding-top) - var(--screen-padding-bottom));
 }
 
 .config__title {
