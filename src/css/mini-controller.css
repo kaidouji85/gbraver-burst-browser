@@ -64,7 +64,7 @@
 }
 
 .mini-controller__battery--first {
-  border-top-left-radius: var(--disabled-button-color);
+  border-top-left-radius: var(--dialog-border-radius);
 }
 
 .mini-controller__battery--last {
@@ -104,7 +104,6 @@
   color: var(--font-color);
   font-size: var(--font-size);
   border-bottom-left-radius: var(--dialog-border-radius);
-  background-color: var(--sub-button-background-color);
   padding: var(--button-padding);
   border: none;
   outline: none;
@@ -112,4 +111,12 @@
   align-items: center;
   justify-content: center;
   user-select: none;
+}
+
+.mini-controller__pilot--enabled {
+  background-color: var(--enabled-button-color);
+}
+
+.mini-controller__pilot--disabled {
+  background-color: var(--disabled-button-color);
 }
