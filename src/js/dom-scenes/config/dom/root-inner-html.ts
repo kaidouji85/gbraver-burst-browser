@@ -10,6 +10,38 @@ import type { DataIDs } from "./data-ids";
 import { soundVolumeLabel } from "./sound-volume-label";
 
 /**
+ * 戦闘アニメ再生速度のoption要素HTMLを生成する
+ * @param selected 選択中の戦闘アニメ再生速度
+ * @return 生成結果
+ */
+const battleAnimationTimeScaleOptions = (selected: BattleAnimationTimeScale) =>
+  BattleAnimationTimeScales.map(
+    (value) => `
+    <option class="${ROOT_CLASS}__battle-animation-time-scale-option"
+      value="${value}"
+      ${value === selected ? "selected" : ""}
+    >
+      ${Math.floor(1 / value)}倍
+    </option>
+  `
+  ).reduce((a, b) => a + b);
+
+/**
+ * 戦闘画面のピクセルレートのoption要素HTMLを生成する
+ * @param selected 選択中の戦闘画面のピクセルレート
+ * @return 生成結果
+ */
+const webGLPixelRatioOptions = (selected: WebGLPixelRatio) =>
+  WebGLPixelRatios.map(
+    (value) => `
+    <option class="${ROOT_CLASS}__webgl-pixel-ratio-selector-option" 
+      value="${value}" ${value === selected ? "selected" : ""}>
+      ${Number(value).toFixed(2)}
+    </option>
+  `
+  ).reduce((a, b) => a + b);
+
+/**
  * ルート要素のHTML要素
  *
  * @param ids data-idを集めたもの
@@ -20,28 +52,6 @@ export function rootInnerHTML(
   ids: DataIDs,
   config: GbraverBurstBrowserConfig
 ): string {
-  const battleAnimationTimeScaleOption = (value: BattleAnimationTimeScale) => {
-    const selected =
-      value === config.battleAnimationTimeScale ? "selected" : "";
-    return `
-    <option class="${ROOT_CLASS}__battle-animation-time-scale-option"
-      value="${value}"
-      ${selected}
-    >
-      ${Math.floor(1 / value)}倍
-    </option>`;
-  };
-  const battleAnimationTimeScaleOptions = BattleAnimationTimeScales.map((v) =>
-    battleAnimationTimeScaleOption(v)
-  ).reduce((a, b) => a + b);
-  const webGLPixelRatioOption = (value: WebGLPixelRatio) => `
-    <option class="${ROOT_CLASS}__webgl-pixel-ratio-selector-option" 
-      value="${value}" ${value === config.webGLPixelRatio ? "selected" : ""}>
-      ${Number(value).toFixed(2)}
-    </option>`;
-  const webGLPixelRatioOptions = WebGLPixelRatios.map((v) =>
-    webGLPixelRatioOption(v)
-  ).reduce((a, b) => a + b);
   return `
     <div class="${ROOT_CLASS}__content">
       <div class="${ROOT_CLASS}__title">設定</div>
@@ -51,7 +61,7 @@ export function rootInnerHTML(
           <select class="${ROOT_CLASS}__battle-animation-time-scale-selector"
             data-id="${ids.battleAnimationTimeScaleSelector}"
            >
-            ${battleAnimationTimeScaleOptions}
+            ${battleAnimationTimeScaleOptions(config.battleAnimationTimeScale)}
           </select>
         </div>
         <div class="${ROOT_CLASS}__webgl-pixel-ratio">
@@ -59,7 +69,7 @@ export function rootInnerHTML(
           <select class="${ROOT_CLASS}__webgl-pixel-ratio-selector"
             data-id="${ids.webGLPixelRatioSelector}"
           >
-            ${webGLPixelRatioOptions}
+            ${webGLPixelRatioOptions(config.webGLPixelRatio)}
           </select>
         </div>
         <div class="${ROOT_CLASS}__bgm-volume">
