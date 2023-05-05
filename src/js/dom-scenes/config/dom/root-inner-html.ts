@@ -8,6 +8,10 @@ import {
 import { ROOT_CLASS } from "./class-name";
 import type { DataIDs } from "./data-ids";
 import { soundVolumeLabel } from "./sound-volume-label";
+import {
+  BattleControllerType,
+  BattleControllerTypes,
+} from "../../../td-scenes/battle/controller-type";
 
 /**
  * 戦闘アニメ再生速度のoption要素HTMLを生成する
@@ -35,9 +39,43 @@ const webGLPixelRatioOptions = (selected: WebGLPixelRatio) =>
   WebGLPixelRatios.map(
     (value) => `
     <option class="${ROOT_CLASS}__webgl-pixel-ratio-selector-option" 
-      value="${value}" ${value === selected ? "selected" : ""}>
+      value="${value}" 
+      ${value === selected ? "selected" : ""}
+    >
       ${Number(value).toFixed(2)}
     </option>
+  `
+  ).reduce((a, b) => a + b);
+
+/**
+ * 戦闘画面コントローラーoptionのラベルを生成する
+ * @param value 値
+ * @return 生成結果
+ */
+const battleControllerTypeOptionLabel = (value: BattleControllerType) => {
+  switch (value) {
+    case "MiniController":
+      return "ミニコントローラー";
+    case "BigButton":
+    default:
+      return "ボタン";
+  }
+};
+
+/**
+ * 戦闘画面コントローラーのoption要素HTMLを生成する
+ * @param selected 選択中の戦闘画面コントローラー
+ * @return 生成結果
+ */
+const battleControllerTypeOptions = (selected: BattleControllerType) =>
+  BattleControllerTypes.map(
+    (value) => `
+    <option class="${ROOT_CLASS}__battle-controller-type-option"
+      value="${value}"
+      ${value === selected ? "selected" : ""}
+    >
+      ${battleControllerTypeOptionLabel(value)}
+    </option>  
   `
   ).reduce((a, b) => a + b);
 
@@ -70,6 +108,12 @@ export function rootInnerHTML(
             data-id="${ids.webGLPixelRatioSelector}"
           >
             ${webGLPixelRatioOptions(config.webGLPixelRatio)}
+          </select>
+        </div>
+        <div class="${ROOT_CLASS}__battle-controller-type">
+          <div class="${ROOT_CLASS}__battle-controller-type-caption">戦闘画面コントローラー</div>
+          <select class="${ROOT_CLASS}__battle-controller-type-selector">
+            ${battleControllerTypeOptions(config.battleControllerType)}
           </select>
         </div>
         <div class="${ROOT_CLASS}__bgm-volume">
