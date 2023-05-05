@@ -6,6 +6,9 @@
     --font-size: calc(var(--responsive-font-size) * 1);
     --gap: 1px;
     --button-padding: calc(var(--responsive-font-size) * 0.5);
+    --button-font-color: var(--font-color);
+    --enabled-button-color: var(--sub-button-background-color);
+    --disabled-button-color: #a9a9a9;
 
     min-width: calc(var(--responsive-font-size) * 15);
     position: fixed;
@@ -42,9 +45,8 @@
 
 .mini-controller__battery {
   flex: 1;
-  color: var(--font-color);
+  color: var(--button-font-color);
   font-size: var(--font-size);
-  background-color: var(--sub-button-background-color);
   padding: var(--button-padding);
   border: none;
   outline: none;
@@ -52,6 +54,14 @@
   align-items: center;
   justify-content: center;
   user-select: none;
+}
+
+.mini-controller__battery--enabled {
+  background-color: var(--enabled-button-color);
+}
+
+.mini-controller__battery--disabled {
+  background-color: var(--disabled-button-color);
 }
 
 .mini-controller__battery--first {
@@ -69,10 +79,9 @@
 .mini-controller__burst {
   grid-column: 2;
   grid-row: 2;
-  color: var(--font-color);
+  color: var(--button-font-color);
   font-size: var(--font-size);
   border-bottom-right-radius: var(--dialog-border-radius);
-  background-color: var(--sub-button-background-color);
   padding: var(--button-padding);
   border: none;
   outline: none;
@@ -82,13 +91,20 @@
   user-select: none;
 }
 
+.mini-controller__burst--enabled {
+  background-color: var(--enabled-button-color);
+}
+
+.mini-controller__burst--disabled {
+  background-color: var(--disabled-button-color);
+}
+
 .mini-controller__pilot {
   grid-column: 1;
   grid-row: 2;
-  color: var(--font-color);
+  color: var(--button-font-color);
   font-size: var(--font-size);
   border-bottom-left-radius: var(--dialog-border-radius);
-  background-color: var(--sub-button-background-color);
   padding: var(--button-padding);
   border: none;
   outline: none;
@@ -96,4 +112,12 @@
   align-items: center;
   justify-content: center;
   user-select: none;
+}
+
+.mini-controller__pilot--enabled {
+  background-color: var(--enabled-button-color);
+}
+
+.mini-controller__pilot--disabled {
+  background-color: var(--disabled-button-color);
 }
