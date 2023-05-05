@@ -71,7 +71,7 @@
 .config__battle-controller-type-selector,
 .config__webgl-pixel-ratio-selector {
   appearance: menulist-button;
-  min-width: calc(var(--responsive-font-size) * 7);
+  min-width: calc(var(--responsive-font-size) * 14);
   height: calc(var(--responsive-font-size) * 2);
   font-size: var(--font-size);
 }
