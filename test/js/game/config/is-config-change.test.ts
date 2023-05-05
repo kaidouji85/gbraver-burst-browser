@@ -33,7 +33,10 @@ test("SE音量の変更を正しく検知できる", () => {
 });
 
 test("戦闘シーンコントトーラータイプの変更を正しく検知できる", () => {
-  const update: GbraverBurstBrowserConfig = { ...origin, battleControllerType: "MiniController" };
+  const update: GbraverBurstBrowserConfig = {
+    ...origin,
+    battleControllerType: "MiniController",
+  };
   expect(isConfigChanged(origin, update)).toBe(true);
 });
 
