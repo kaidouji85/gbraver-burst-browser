@@ -40,9 +40,7 @@
   gap: var(--gap);
 }
 
-.mini-controller__battery,
-.mini-controller__battery--first,
-.mini-controller__battery--last {
+.mini-controller__battery {
   flex: 1;
   color: var(--font-color);
   font-size: var(--font-size);

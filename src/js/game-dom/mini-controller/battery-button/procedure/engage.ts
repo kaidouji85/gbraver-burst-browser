@@ -21,15 +21,13 @@ export function engage(
   const isVisible = props.battery <= config.maxBattery;
   const isFirst = props.battery === 0;
   const isLast = props.battery === config.maxBattery;
-  if (isVisible && isFirst) {
-    props.root.className = BATTERY_FIRST;
-  } else if (isVisible && isLast) {
-    props.root.className = BATTERY_LAST;
-  } else if (isVisible) {
-    props.root.className = BATTERY;
-  } else {
-    props.root.className = BATTERY_INVISIBLE;
-  }
+
+  props.root.className = [
+    BATTERY,
+    isFirst ? BATTERY_FIRST : "",
+    isLast ? BATTERY_LAST : "",
+    isVisible ? "" : BATTERY_INVISIBLE,
+  ].join(" ");
 
   const isEnabled = props.battery <= config.battery;
   if (isEnabled) {
