@@ -38,7 +38,7 @@ const webGLPixelRatioOptions = (selected: WebGLPixelRatio) =>
       value="${value}" ${value === selected ? "selected" : ""}>
       ${Number(value).toFixed(2)}
     </option>
-`
+  `
   ).reduce((a, b) => a + b);
 
 /**
