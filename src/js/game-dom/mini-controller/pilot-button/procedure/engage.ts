@@ -1,6 +1,6 @@
+import { PILOT, PILOT_DISABLED, PILOT_ENABLED } from "../../dom/class-name";
 import { PilotButtonConfig } from "../config";
 import { PilotButtonProps } from "../props";
-import {PILOT, PILOT_DISABLED, PILOT_ENABLED} from "../../dom/class-name";
 
 /**
  * 設定をパイロットボタンに反映させる
@@ -13,7 +13,7 @@ export function engage(
 ): void {
   props.root.className = [
     PILOT,
-    config.canPilotSkill ? PILOT_ENABLED : PILOT_DISABLED
+    config.canPilotSkill ? PILOT_ENABLED : PILOT_DISABLED,
   ].join(" ");
   props.root.disabled = !config.canPilotSkill;
   props.root.innerText = config.canPilotSkill ? "パイロット(p)" : "";

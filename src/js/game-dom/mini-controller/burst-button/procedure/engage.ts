@@ -1,6 +1,6 @@
+import { BURST, BURST_DISABLED, BURST_ENABLED } from "../../dom/class-name";
 import { BurstButtonConfig } from "../config";
 import { BurstButtonProps } from "../props";
-import {BURST, BURST_DISABLED, BURST_ENABLED} from "../../dom/class-name";
 
 /**
  * 設定を反映させる

@@ -39,4 +39,3 @@ export const PILOT_ENABLED = `${PILOT}--enabled`;
 
 /** パイロットボタン 操作不可能 class属性 */
 export const PILOT_DISABLED = `${PILOT}--disabled`;
-
