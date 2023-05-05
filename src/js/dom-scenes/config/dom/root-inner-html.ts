@@ -10,6 +10,23 @@ import type { DataIDs } from "./data-ids";
 import { soundVolumeLabel } from "./sound-volume-label";
 
 /**
+ * 戦闘アニメ再生速度のoption要素HTMLを生成する
+ * @param selected 選択中の戦闘アニメ再生速度
+ * @return 生成結果
+ */
+const battleAnimationTimeScaleOptions = (selected: BattleAnimationTimeScale) =>
+  BattleAnimationTimeScales.map(
+    (value) => `
+    <option class="${ROOT_CLASS}__battle-animation-time-scale-option"
+      value="${value}"
+      ${value === selected ? "selected" : ""}
+    >
+      ${Math.floor(1 / value)}倍
+    </option>;
+  `
+  );
+
+/**
  * ルート要素のHTML要素
  *
  * @param ids data-idを集めたもの
@@ -20,20 +37,6 @@ export function rootInnerHTML(
   ids: DataIDs,
   config: GbraverBurstBrowserConfig
 ): string {
-  const battleAnimationTimeScaleOption = (value: BattleAnimationTimeScale) => {
-    const selected =
-      value === config.battleAnimationTimeScale ? "selected" : "";
-    return `
-    <option class="${ROOT_CLASS}__battle-animation-time-scale-option"
-      value="${value}"
-      ${selected}
-    >
-      ${Math.floor(1 / value)}倍
-    </option>`;
-  };
-  const battleAnimationTimeScaleOptions = BattleAnimationTimeScales.map((v) =>
-    battleAnimationTimeScaleOption(v)
-  ).reduce((a, b) => a + b);
   const webGLPixelRatioOption = (value: WebGLPixelRatio) => `
     <option class="${ROOT_CLASS}__webgl-pixel-ratio-selector-option" 
       value="${value}" ${value === config.webGLPixelRatio ? "selected" : ""}>
@@ -51,7 +54,7 @@ export function rootInnerHTML(
           <select class="${ROOT_CLASS}__battle-animation-time-scale-selector"
             data-id="${ids.battleAnimationTimeScaleSelector}"
            >
-            ${battleAnimationTimeScaleOptions}
+            ${battleAnimationTimeScaleOptions(config.battleAnimationTimeScale)}
           </select>
         </div>
         <div class="${ROOT_CLASS}__webgl-pixel-ratio">
