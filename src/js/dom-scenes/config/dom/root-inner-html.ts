@@ -70,12 +70,16 @@ const battleControllerTypeOptionLabel = (value: BattleControllerType) => {
 const battleControllerTypeOptions = (selected: BattleControllerType) =>
   BattleControllerTypes.map(
     (value) => `
-    <option class="${ROOT_CLASS}__battle-controller-type-option"
-      value="${value}"
-      ${value === selected ? "selected" : ""}
-    >
-      ${battleControllerTypeOptionLabel(value)}
-    </option>  
+    <label class="${ROOT_CLASS}__battle-controller-type-label">
+      <input class="${ROOT_CLASS}__battle-controller-type-radio"
+        name="battle-controller-type"
+        type="radio"
+        value="${value}"
+        ${value === selected ? "selected" : ""}
+      >
+        ${battleControllerTypeOptionLabel(value)}
+      </input>
+    </label>  
   `
   ).reduce((a, b) => a + b);
 
@@ -111,11 +115,11 @@ export function rootInnerHTML(
       </div>
       <div class="${ROOT_CLASS}__battle-controller-type">
         <div class="${ROOT_CLASS}__battle-controller-type-caption">戦闘画面コントローラー</div>
-        <select class="${ROOT_CLASS}__battle-controller-type-selector"
+        <div class="${ROOT_CLASS}__battle-controller-type-selector"
           data-id="${ids.battleControllerTypeSelector}"
         >
           ${battleControllerTypeOptions(config.battleControllerType)}
-        </select>
+        </div>
       </div>
       <div class="${ROOT_CLASS}__bgm-volume">
         <div class="${ROOT_CLASS}__bgm-volume-caption">BGM音量</div>

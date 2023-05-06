@@ -61,12 +61,29 @@
 }
 
 .config__battle-animation-time-scale-selector,
-.config__battle-controller-type-selector,
 .config__webgl-pixel-ratio-selector {
   appearance: menulist-button;
   min-width: calc(var(--responsive-font-size) * 14);
   height: calc(var(--responsive-font-size) * 2);
   font-size: var(--font-size);
+}
+
+.config__battle-controller-type-selector {
+  height: calc(var(--responsive-font-size) * 2);
+  font-size: var(--font-size);
+  display: flex;
+  gap: calc(var(--font-size) * 1);
+}
+
+.config__battle-controller-type-label {
+  display: flex;
+  align-items: center;
+}
+
+.config__battle-controller-type-radio {
+  margin: 0;
+  height: var(--font-size);
+  width: var(--font-size);
 }
 
 .config__bgm-volume-selector,
