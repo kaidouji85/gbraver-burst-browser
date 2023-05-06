@@ -35,9 +35,9 @@ export function extractElements(root: HTMLElement, ids: DataIDs): Elements {
     extractedWebGlPixelRatioSelector instanceof HTMLSelectElement
       ? extractedWebGlPixelRatioSelector
       : document.createElement("select");
-  const battleControllerTypeSelector: HTMLElement = root.querySelector(
-    `[data-id="${ids.battleControllerTypeSelector}"]`
-  ) ?? document.createElement("div");
+  const battleControllerTypeSelector: HTMLElement =
+    root.querySelector(`[data-id="${ids.battleControllerTypeSelector}"]`) ??
+    document.createElement("div");
   const extractedBGMVolumeSelector = root.querySelector(
     `[data-id="${ids.bgmVolumeSelector}"]`
   );
