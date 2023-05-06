@@ -1,87 +1,10 @@
-import {
-  BattleAnimationTimeScale,
-  BattleAnimationTimeScales,
-  GbraverBurstBrowserConfig,
-  WebGLPixelRatio,
-  WebGLPixelRatios,
-} from "../../../game/config/browser-config";
-import {
-  BattleControllerType,
-  BattleControllerTypes,
-} from "../../../td-scenes/battle/controller-type";
+import { GbraverBurstBrowserConfig } from "../../../game/config/browser-config";
+import { battleAnimationTimeScaleOptions } from "./battle-animation-time-scale-options";
+import { battleControllerTypeOptions } from "./battle-controller-type-options";
 import { ROOT_CLASS } from "./class-name";
 import type { DataIDs } from "./data-ids";
 import { soundVolumeLabel } from "./sound-volume-label";
-
-/**
- * 戦闘アニメ再生速度のoption要素HTMLを生成する
- * @param selected 選択中の戦闘アニメ再生速度
- * @return 生成結果
- */
-const battleAnimationTimeScaleOptions = (selected: BattleAnimationTimeScale) =>
-  BattleAnimationTimeScales.map(
-    (value) => `
-    <option class="${ROOT_CLASS}__battle-animation-time-scale-option"
-      value="${value}"
-      ${value === selected ? "selected" : ""}
-    >
-      ${Math.floor(1 / value)}倍
-    </option>
-  `
-  ).reduce((a, b) => a + b);
-
-/**
- * 戦闘画面のピクセルレートのoption要素HTMLを生成する
- * @param selected 選択中の戦闘画面のピクセルレート
- * @return 生成結果
- */
-const webGLPixelRatioOptions = (selected: WebGLPixelRatio) =>
-  WebGLPixelRatios.map(
-    (value) => `
-    <option class="${ROOT_CLASS}__webgl-pixel-ratio-selector-option" 
-      value="${value}" 
-      ${value === selected ? "selected" : ""}
-    >
-      ${Number(value).toFixed(2)}
-    </option>
-  `
-  ).reduce((a, b) => a + b);
-
-/**
- * 戦闘画面コントローラーoptionのラベルを生成する
- * @param value 値
- * @return 生成結果
- */
-const battleControllerTypeOptionLabel = (value: BattleControllerType) => {
-  switch (value) {
-    case "MiniController":
-      return "ミニコントローラー";
-    case "BigButton":
-    default:
-      return "ボタン";
-  }
-};
-
-/**
- * 戦闘画面コントローラーのoption要素HTMLを生成する
- * @param selected 選択中の戦闘画面コントローラー
- * @return 生成結果
- */
-const battleControllerTypeOptions = (selected: BattleControllerType) =>
-  BattleControllerTypes.map(
-    (value) => `
-    <label class="${ROOT_CLASS}__battle-controller-type-label">
-      <input class="${ROOT_CLASS}__battle-controller-type-radio"
-        name="battle-controller-type"
-        type="radio"
-        value="${value}"
-        ${value === selected ? "checked" : ""}
-      >
-        ${battleControllerTypeOptionLabel(value)}
-      </input>
-    </label>  
-  `
-  ).reduce((a, b) => a + b);
+import { webGLPixelRatioOptions } from "./webgl-pixel-ratio-options";
 
 /**
  * ルート要素のHTML要素
