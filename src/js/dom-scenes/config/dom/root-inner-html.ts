@@ -75,7 +75,7 @@ const battleControllerTypeOptions = (selected: BattleControllerType) =>
         name="battle-controller-type"
         type="radio"
         value="${value}"
-        ${value === selected ? "selected" : ""}
+        ${value === selected ? "checked" : ""}
       >
         ${battleControllerTypeOptionLabel(value)}
       </input>
