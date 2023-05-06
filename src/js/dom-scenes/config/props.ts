@@ -26,7 +26,7 @@ export type ConfigProps = {
   webGLPixelRatioSelector: HTMLSelectElement;
 
   /** 戦闘画面コントローラセレクタ */
-  battleControllerTypeSelector: HTMLSelectElement;
+  battleControllerTypeSelector: HTMLElement;
 
   /** bgm音量セレクタ */
   bgmVolumeSelector: HTMLInputElement;

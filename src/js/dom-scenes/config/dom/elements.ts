@@ -4,7 +4,7 @@ import type { DataIDs } from "./data-ids";
 type Elements = {
   battleAnimationTimeScaleSelector: HTMLSelectElement;
   webGLPixelRatioSelector: HTMLSelectElement;
-  battleControllerTypeSelector: HTMLSelectElement;
+  battleControllerTypeSelector: HTMLElement;
   bgmVolumeSelector: HTMLInputElement;
   bgmVolumeValue: HTMLElement;
   seVolumeSelector: HTMLInputElement;
@@ -35,13 +35,9 @@ export function extractElements(root: HTMLElement, ids: DataIDs): Elements {
     extractedWebGlPixelRatioSelector instanceof HTMLSelectElement
       ? extractedWebGlPixelRatioSelector
       : document.createElement("select");
-  const extractedBattleControllerTypeSelector = root.querySelector(
-    `[data-id="${ids.battleControllerTypeSelector}"]`
-  );
-  const battleControllerTypeSelector =
-    extractedBattleControllerTypeSelector instanceof HTMLSelectElement
-      ? extractedBattleControllerTypeSelector
-      : document.createElement("select");
+  const battleControllerTypeSelector: HTMLElement =
+    root.querySelector(`[data-id="${ids.battleControllerTypeSelector}"]`) ??
+    document.createElement("div");
   const extractedBGMVolumeSelector = root.querySelector(
     `[data-id="${ids.bgmVolumeSelector}"]`
   );
