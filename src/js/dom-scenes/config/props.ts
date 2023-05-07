@@ -20,7 +20,7 @@ export type ConfigProps = {
   root: HTMLElement;
 
   /** 戦闘アニメ速度セレクタ */
-  battleAnimationTimeScaleSelector: HTMLSelectElement;
+  battleAnimationTimeScaleSelector: HTMLElement;
 
   /** webglピクセルレートセレクタ */
   webGLPixelRatioSelector: HTMLSelectElement;

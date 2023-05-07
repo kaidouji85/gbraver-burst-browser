@@ -8,7 +8,6 @@ import type { ConfigProps } from "../props";
  */
 export function isInputDisabled(props: ConfigProps, isDisabled: boolean): void {
   props.webGLPixelRatioSelector.disabled = isDisabled;
-  props.battleAnimationTimeScaleSelector.disabled = isDisabled;
   props.bgmVolumeSelector.disabled = isDisabled;
   props.seVolumeSelector.disabled = isDisabled;
 }
