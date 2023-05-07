@@ -69,7 +69,6 @@
   margin-bottom: calc(var(--responsive-font-size) * 0.5);
 }
 
-
 .config__battle-animation-time-scale-selector,
 .config__webgl-pixel-ratio-selector {
   appearance: menulist-button;
