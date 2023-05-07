@@ -2,7 +2,7 @@ import type { DataIDs } from "./data-ids";
 
 /** ルート要素の子孫要素 */
 type Elements = {
-  battleAnimationTimeScaleSelector: HTMLSelectElement;
+  battleAnimationTimeScaleSelector: HTMLElement;
   webGLPixelRatioSelector: HTMLSelectElement;
   battleControllerTypeSelector: HTMLElement;
   bgmVolumeSelector: HTMLInputElement;
@@ -21,13 +21,9 @@ type Elements = {
  * @return 抽出結果
  */
 export function extractElements(root: HTMLElement, ids: DataIDs): Elements {
-  const extractedBattleAnimationTimeScaleSelector = root.querySelector(
-    `[data-id="${ids.battleAnimationTimeScaleSelector}"]`
-  );
-  const battleAnimationTimeScaleSelector =
-    extractedBattleAnimationTimeScaleSelector instanceof HTMLSelectElement
-      ? extractedBattleAnimationTimeScaleSelector
-      : document.createElement("select");
+  const battleAnimationTimeScaleSelector: HTMLElement =
+    root.querySelector(`[data-id="${ids.battleAnimationTimeScaleSelector}"]`) ??
+    document.createElement("select");
   const extractedWebGlPixelRatioSelector = root.querySelector(
     `[data-id="${ids.webGLPixelRatioSelector}"]`
   );

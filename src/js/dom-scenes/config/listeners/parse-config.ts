@@ -16,8 +16,16 @@ export function parseConfig(props: ConfigProps): GbraverBurstBrowserConfig {
     foundBattleControllerType instanceof HTMLInputElement
       ? foundBattleControllerType.value
       : null;
+  const foundBattleAnimationTimeScale =
+    props.battleAnimationTimeScaleSelector.querySelector(
+      'input[type="radio"]:checked'
+    );
+  const battleAnimationTimeScale =
+    foundBattleAnimationTimeScale instanceof HTMLInputElement
+      ? foundBattleAnimationTimeScale.value
+      : null;
   return parseBrowserConfig({
-    battleAnimationTimeScale: props.battleAnimationTimeScaleSelector.value,
+    battleAnimationTimeScale,
     webGLPixelRatio: props.webGLPixelRatioSelector.value,
     battleControllerType,
     bgmVolume: props.bgmVolumeSelector.value,
