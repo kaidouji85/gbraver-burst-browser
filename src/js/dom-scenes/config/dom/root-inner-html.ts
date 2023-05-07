@@ -61,32 +61,32 @@ export function rootInnerHTML(
         <div class="${ROOT_CLASS}__bgm-volume-caption">音量 BGM</div>
         <div class="${ROOT_CLASS}__config-separation"></div>
         <div class="${ROOT_CLASS}__bgm-volume-description">
-          BGMの音量を変更します。
+          BGMの音量を変更します。本設定は全画面で有効です。
         </div>
         <input class="${ROOT_CLASS}__bgm-volume-selector" 
           type="range" min="0" max="1" step="0.1" 
           value="${config.bgmVolume}" 
           data-id="${ids.bgmVolumeSelector}"
         >
-        <div class="${ROOT_CLASS}__bgm-volume-value"
+        <span class="${ROOT_CLASS}__bgm-volume-value"
           data-id="${ids.bgmVolumeValue}"
         >
-        ${soundVolumeLabel(config.bgmVolume)}</div>
+        ${soundVolumeLabel(config.bgmVolume)}</span>
       </div>
       <div class="${ROOT_CLASS}__se-volume">
         <div class="${ROOT_CLASS}__se-volume-caption">音量 SE</div>
         <div class="${ROOT_CLASS}__config-separation"></div>
         <div class="${ROOT_CLASS}__se-volume-description">
-          SEの音量を変更します。
+          SEの音量を変更します。本設定は全画面で有効です。
         </div>
         <input class="${ROOT_CLASS}__se-volume-selector" type="range" min="0" max="1" step="0.1"
           value="${config.seVolume}" 
           data-id="${ids.seVolumeSelector}"
         >
-        <div class="${ROOT_CLASS}__se-volume-value"
+        <span class="${ROOT_CLASS}__se-volume-value"
           data-id="${ids.seVolumeValue}"
         >
-        ${soundVolumeLabel(config.seVolume)}</div>
+        ${soundVolumeLabel(config.seVolume)}</span>
       </div>
     </div>
     <div class="${ROOT_CLASS}__footer">
