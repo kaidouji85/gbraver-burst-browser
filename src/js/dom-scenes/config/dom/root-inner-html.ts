@@ -26,11 +26,11 @@ export function rootInnerHTML(
         <div class="${ROOT_CLASS}__battle-animation-time-scale-description">
           バトル中のアニメーション速度を変更します。
         </div>
-        <select class="${ROOT_CLASS}__battle-animation-time-scale-selector"
+        <div class="${ROOT_CLASS}__battle-animation-time-scale-selector"
           data-id="${ids.battleAnimationTimeScaleSelector}"
-         >
+        >
           ${battleAnimationTimeScaleOptions(config.battleAnimationTimeScale)}
-        </select>
+        </div>
       </div>
       <div class="${ROOT_CLASS}__webgl-pixel-ratio">
         <div class="${ROOT_CLASS}__webgl-pixel-ratio-caption">バトル ピクセルレート</div>

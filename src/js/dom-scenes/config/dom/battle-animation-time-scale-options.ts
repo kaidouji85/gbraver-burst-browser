@@ -14,11 +14,14 @@ export const battleAnimationTimeScaleOptions = (
 ) =>
   BattleAnimationTimeScales.map(
     (value) => `
-    <option class="${ROOT_CLASS}__battle-animation-time-scale-option"
-      value="${value}"
-      ${value === selected ? "selected" : ""}
-    >
+    <label class="${ROOT_CLASS}__battle-animation-time-scale-label">
+      <input class="${ROOT_CLASS}__battle-animation-time-scale-radio"
+        name="battle-animation-time-scale"
+        type="radio"
+        value="${value}"
+        ${value === selected ? "checked" : ""}
+      >
       ${Math.floor(1 / value)}倍
-    </option>
+    </label>
   `
   ).reduce((a, b) => a + b);
