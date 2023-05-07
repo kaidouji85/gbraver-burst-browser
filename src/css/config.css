@@ -61,6 +61,15 @@
   padding: calc(var(--responsive-font-size) * 0.3);
 }
 
+.config__battle-animation-time-scale-description,
+.config__webgl-pixel-ratio-description,
+.config__battle-controller-type-description,
+.config__bgm-volume-description,
+.config__se-volume-description {
+  margin-bottom: calc(var(--responsive-font-size) * 0.5);
+}
+
+
 .config__battle-animation-time-scale-selector,
 .config__webgl-pixel-ratio-selector {
   appearance: menulist-button;
