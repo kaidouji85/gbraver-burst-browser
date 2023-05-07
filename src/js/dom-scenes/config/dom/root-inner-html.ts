@@ -21,7 +21,11 @@ export function rootInnerHTML(
     <div class="${ROOT_CLASS}__title">設定</div>
     <div class="${ROOT_CLASS}__configs">
       <div class="${ROOT_CLASS}__battle-animation-time-scale">
-        <div class="${ROOT_CLASS}__battle-animation-time-scale-caption">戦闘アニメ再生速度</div>
+        <div class="${ROOT_CLASS}__battle-animation-time-scale-caption">バトル アニメ速度</div>
+        <div class="${ROOT_CLASS}__config-separation"></div>
+        <div class="${ROOT_CLASS}__battle-animation-time-scale-description">
+          バトル中のアニメーション速度を変更します。
+        </div>
         <select class="${ROOT_CLASS}__battle-animation-time-scale-selector"
           data-id="${ids.battleAnimationTimeScaleSelector}"
          >
@@ -29,7 +33,12 @@ export function rootInnerHTML(
         </select>
       </div>
       <div class="${ROOT_CLASS}__webgl-pixel-ratio">
-        <div class="${ROOT_CLASS}__webgl-pixel-ratio-caption">戦闘画面のピクセルレート</div>
+        <div class="${ROOT_CLASS}__webgl-pixel-ratio-caption">バトル ピクセルレート</div>
+        <div class="${ROOT_CLASS}__config-separation"></div>
+        <div class="${ROOT_CLASS}__webgl-pixel-ratio-description">
+          バトル中の画面解像度を変更します。
+          値が大きくなるほど画面が綺麗になりますが、負荷が高くなります。
+        </div>
         <select class="${ROOT_CLASS}__webgl-pixel-ratio-selector"
           data-id="${ids.webGLPixelRatioSelector}"
         >
@@ -37,7 +46,11 @@ export function rootInnerHTML(
         </select>
       </div>
       <div class="${ROOT_CLASS}__battle-controller-type">
-        <div class="${ROOT_CLASS}__battle-controller-type-caption">戦闘画面コントローラー</div>
+        <div class="${ROOT_CLASS}__battle-controller-type-caption">バトル コントローラー</div>
+        <div class="${ROOT_CLASS}__config-separation"></div>
+        <div class="${ROOT_CLASS}__battle-controller-type-description">
+          バトル中のコントローラーを変更します。
+        </div>
         <div class="${ROOT_CLASS}__battle-controller-type-selector"
           data-id="${ids.battleControllerTypeSelector}"
         >
@@ -45,27 +58,35 @@ export function rootInnerHTML(
         </div>
       </div>
       <div class="${ROOT_CLASS}__bgm-volume">
-        <div class="${ROOT_CLASS}__bgm-volume-caption">BGM音量</div>
+        <div class="${ROOT_CLASS}__bgm-volume-caption">音量 BGM</div>
+        <div class="${ROOT_CLASS}__config-separation"></div>
+        <div class="${ROOT_CLASS}__bgm-volume-description">
+          BGMの音量を変更します。本設定は全画面で有効です。
+        </div>
         <input class="${ROOT_CLASS}__bgm-volume-selector" 
           type="range" min="0" max="1" step="0.1" 
           value="${config.bgmVolume}" 
           data-id="${ids.bgmVolumeSelector}"
         >
-        <div class="${ROOT_CLASS}__bgm-volume-value"
+        <span class="${ROOT_CLASS}__bgm-volume-value"
           data-id="${ids.bgmVolumeValue}"
         >
-        ${soundVolumeLabel(config.bgmVolume)}</div>
+        ${soundVolumeLabel(config.bgmVolume)}</span>
       </div>
       <div class="${ROOT_CLASS}__se-volume">
-        <div class="${ROOT_CLASS}__se-volume-caption">SE音量</div>
+        <div class="${ROOT_CLASS}__se-volume-caption">音量 SE</div>
+        <div class="${ROOT_CLASS}__config-separation"></div>
+        <div class="${ROOT_CLASS}__se-volume-description">
+          SEの音量を変更します。本設定は全画面で有効です。
+        </div>
         <input class="${ROOT_CLASS}__se-volume-selector" type="range" min="0" max="1" step="0.1"
           value="${config.seVolume}" 
           data-id="${ids.seVolumeSelector}"
         >
-        <div class="${ROOT_CLASS}__se-volume-value"
+        <span class="${ROOT_CLASS}__se-volume-value"
           data-id="${ids.seVolumeValue}"
         >
-        ${soundVolumeLabel(config.seVolume)}</div>
+        ${soundVolumeLabel(config.seVolume)}</span>
       </div>
     </div>
     <div class="${ROOT_CLASS}__footer">
