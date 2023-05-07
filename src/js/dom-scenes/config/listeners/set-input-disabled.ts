@@ -5,13 +5,17 @@ import type { ConfigProps } from "../props";
  * @param props 画面プロパティ
  */
 export function setInputDisabled(props: ConfigProps): void {
-  props.battleAnimationTimeScaleSelector.querySelectorAll("input").forEach((input) => {
-    input.disabled = true;
-  });
+  props.battleAnimationTimeScaleSelector
+    .querySelectorAll("input")
+    .forEach((input) => {
+      input.disabled = true;
+    });
   props.webGLPixelRatioSelector.disabled = true;
-  props.battleControllerTypeSelector.querySelectorAll("input").forEach((input) => {
-    input.disabled = true;
-  });
+  props.battleControllerTypeSelector
+    .querySelectorAll("input")
+    .forEach((input) => {
+      input.disabled = true;
+    });
   props.bgmVolumeSelector.disabled = true;
   props.seVolumeSelector.disabled = true;
 }
