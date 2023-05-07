@@ -36,21 +36,19 @@
   flex: 1;
   overflow: auto;
   box-sizing: border-box;
-  font-size: var(--font-size);
+  font-size: calc(var(--responsive-font-size) * 1);
   background-color: var(--sub-background-color);
   border-radius: var(--button-border-radius);
   padding: calc(var(--responsive-font-size) * 1);
   display: flex;
   flex-direction: column;
-  gap: calc(var(--responsive-font-size) * 1);
+  gap: calc(var(--responsive-font-size) * 2);
 }
 
-.config__battle-animation-time-scale,
-.config__webgl-pixel-ratio,
-.config__battle-controller-type,
-.config__bgm-volume,
-.config__se-volume {
+.config__config-separation {
   width: 100%;
+  border-bottom: dashed 1px var(--font-color);
+  margin: calc(var(--responsive-font-size) * 0.5) 0;
 }
 
 .config__battle-animation-time-scale-caption,
@@ -58,10 +56,9 @@
 .config__battle-controller-type-caption,
 .config__bgm-volume-caption,
 .config__se-volume-caption {
-  --margin-size: calc(var(--responsive-font-size) * 0.3);
-  border-bottom: 1px dashed white;
-  padding-bottom: var(--margin-size);
-  margin-bottom: var(--margin-size);
+  background-color: var(--sub-button-background-color);
+  border-radius: calc(var(--responsive-font-size) * 0.5);
+  padding: calc(var(--responsive-font-size) * 0.3);
 }
 
 .config__battle-animation-time-scale-selector,
