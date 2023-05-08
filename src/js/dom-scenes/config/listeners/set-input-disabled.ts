@@ -10,7 +10,11 @@ export function setInputDisabled(props: ConfigProps): void {
     .forEach((input) => {
       input.disabled = true;
     });
-  props.webGLPixelRatioSelector.disabled = true;
+  props.webGLPixelRatioSelector
+    .querySelectorAll("input")
+    .forEach((input) => {
+      input.disabled = true;
+    });
   props.battleControllerTypeSelector
     .querySelectorAll("input")
     .forEach((input) => {
