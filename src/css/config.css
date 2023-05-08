@@ -27,7 +27,11 @@
   font-size: calc(var(--responsive-font-size) * 1);
   background-color: var(--sub-background-color);
   border-radius: var(--button-border-radius);
-  padding: calc(var(--responsive-font-size) * 0.5);
+  min-height: calc(var(--responsive-font-size) * 3);
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  padding: 0 calc(var(--responsive-font-size) * 1);
 }
 
 .config__configs {
@@ -78,7 +82,7 @@
 .config__battle-controller-type-selector {
   font-size: var(--font-size);
   display: flex;
-  gap: calc(var(--font-size) * 1);
+  gap: calc(var(--font-size) * 2);
 }
 
 .config__battle-animation-time-scale-label,
