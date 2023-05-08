@@ -69,16 +69,10 @@
   margin-bottom: calc(var(--responsive-font-size) * 0.5);
 }
 
-.config__battle-animation-time-scale-selector {
+.config__battle-animation-time-scale-selector,
+.config__webgl-pixel-ratio-selector {
   display: flex;
   gap: calc(var(--responsive-font-size) * 2);
-}
-
-.config__webgl-pixel-ratio-selector {
-  height: calc(var(--font-size) * 2);
-  min-width: calc(var(--responsive-font-size) * 14);
-  appearance: menulist-button;
-  font-size: var(--responsive-font-size);
 }
 
 .config__battle-controller-type-selector {
@@ -88,12 +82,14 @@
 }
 
 .config__battle-animation-time-scale-label,
+.config__webgl-pixel-ratio-selector-label
 .config__battle-controller-type-label {
   display: flex;
   align-items: center;
 }
 
 .config__battle-animation-time-scale-radio,
+.config__webgl-pixel-ratio-selector-radio,
 .config__battle-controller-type-radio {
   margin: 0;
   height: var(--font-size);
