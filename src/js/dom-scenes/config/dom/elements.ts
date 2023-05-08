@@ -25,9 +25,8 @@ export function extractElements(root: HTMLElement, ids: DataIDs): Elements {
     root.querySelector(`[data-id="${ids.battleAnimationTimeScaleSelector}"]`) ??
     document.createElement("select");
   const webGLPixelRatioSelector: HTMLElement =
-    root.querySelector(
-      `[data-id="${ids.webGLPixelRatioSelector}"]`
-    ) ?? document.createElement("div");
+    root.querySelector(`[data-id="${ids.webGLPixelRatioSelector}"]`) ??
+    document.createElement("div");
   const battleControllerTypeSelector: HTMLElement =
     root.querySelector(`[data-id="${ids.battleControllerTypeSelector}"]`) ??
     document.createElement("div");

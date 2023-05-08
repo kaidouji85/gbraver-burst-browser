@@ -82,7 +82,7 @@
 }
 
 .config__battle-animation-time-scale-label,
-.config__webgl-pixel-ratio-selector-label
+.config__webgl-pixel-ratio-selector-label,
 .config__battle-controller-type-label {
   display: flex;
   align-items: center;

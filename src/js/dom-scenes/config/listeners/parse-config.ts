@@ -16,10 +16,9 @@ export function parseConfig(props: ConfigProps): GbraverBurstBrowserConfig {
     foundBattleAnimationTimeScale instanceof HTMLInputElement
       ? foundBattleAnimationTimeScale.value
       : null;
-  const foundWebGLPixelRatio =
-    props.webGLPixelRatioSelector.querySelector(
-      'input[type="radio"]:checked'
-    );
+  const foundWebGLPixelRatio = props.webGLPixelRatioSelector.querySelector(
+    'input[type="radio"]:checked'
+  );
   const webGLPixelRatio =
     foundWebGLPixelRatio instanceof HTMLInputElement
       ? foundWebGLPixelRatio.value
