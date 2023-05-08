@@ -5,7 +5,7 @@ import {
 import { ROOT_CLASS } from "./class-name";
 
 /**
- * 戦闘アニメ再生速度のoption要素HTMLを生成する
+ * 戦闘アニメ再生速度のラジオボタン要素HTMLを生成する
  * @param selected 選択中の戦闘アニメ再生速度
  * @return 生成結果
  */

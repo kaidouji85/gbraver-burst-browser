@@ -39,11 +39,11 @@ export function rootInnerHTML(
           バトル中の画面解像度を変更します。
           値が大きくなるほど画面が綺麗になりますが、負荷が高くなります。
         </div>
-        <select class="${ROOT_CLASS}__webgl-pixel-ratio-selector"
+        <div class="${ROOT_CLASS}__webgl-pixel-ratio-selector"
           data-id="${ids.webGLPixelRatioSelector}"
         >
           ${webGLPixelRatioOptions(config.webGLPixelRatio)}
-        </select>
+        </div>
       </div>
       <div class="${ROOT_CLASS}__battle-controller-type">
         <div class="${ROOT_CLASS}__battle-controller-type-caption">バトル コントローラー</div>
