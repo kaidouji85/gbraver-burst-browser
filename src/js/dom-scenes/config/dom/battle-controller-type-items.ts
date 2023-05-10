@@ -63,8 +63,8 @@ const miniControllerDetail = `
     </div>
     <div class="${ROOT_CLASS}__accesskey-caption">
       accesskeyという仕組みでキーボードショートカットを実現しているので、
-      windows + chrome以外ではaltのボタンが変わります。
-      詳細は「<a href="${accesskeyReference}" target="_blank" rel="noopener">MDNのサイト</a>」を参照してください。
+      Windows版Chrome以外では<kbd class="${ROOT_CLASS}__keyboard-icon">alt</kbd>が他のキーに変わることがあります。
+      詳細は「<a href="${accesskeyReference}" target="_blank" rel="noopener">MDN公式サイト</a>」を参照してください。
     </div>
   </div>
 `;

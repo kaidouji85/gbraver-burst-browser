@@ -97,6 +97,11 @@
   width: var(--font-size);
 }
 
+.config__big-button-detail,
+.config__mini-controller-detail {
+  padding-left: calc(var(--responsive-font-size) * 1);
+}
+
 .config__mini-controller-detail {
   display: flex;
   flex-direction: column;
