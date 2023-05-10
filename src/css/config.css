@@ -27,7 +27,11 @@
   font-size: calc(var(--responsive-font-size) * 1);
   background-color: var(--sub-background-color);
   border-radius: var(--button-border-radius);
-  padding: calc(var(--responsive-font-size) * 0.5);
+  min-height: calc(var(--responsive-font-size) * 3);
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  padding: 0 calc(var(--responsive-font-size) * 1);
 }
 
 .config__configs {
