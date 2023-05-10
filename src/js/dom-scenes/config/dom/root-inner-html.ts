@@ -1,6 +1,6 @@
 import { GbraverBurstBrowserConfig } from "../../../game/config/browser-config";
 import { battleAnimationTimeScaleOptions } from "./battle-animation-time-scale-options";
-import { battleControllerTypeOptions } from "./battle-controller-type-options";
+import { battleControllerTypeItems } from "./battle-controller-type-items";
 import { ROOT_CLASS } from "./class-name";
 import type { DataIDs } from "./data-ids";
 import { soundVolumeLabel } from "./sound-volume-label";
@@ -54,7 +54,7 @@ export function rootInnerHTML(
         <div class="${ROOT_CLASS}__battle-controller-type-selector"
           data-id="${ids.battleControllerTypeSelector}"
         >
-          ${battleControllerTypeOptions(config.battleControllerType)}
+          ${battleControllerTypeItems(config.battleControllerType)}
         </div>
       </div>
       <div class="${ROOT_CLASS}__bgm-volume">
