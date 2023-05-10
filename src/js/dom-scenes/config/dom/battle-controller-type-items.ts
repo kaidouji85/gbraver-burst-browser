@@ -27,7 +27,8 @@ const bigButtonDetail = `
 `;
 
 /** accesskey参考文献URL */
-const accesskeyReference = "https://developer.mozilla.org/ja/docs/Web/HTML/Global_attributes/accesskey";
+const accesskeyReference =
+  "https://developer.mozilla.org/ja/docs/Web/HTML/Global_attributes/accesskey";
 
 /** ミニコントローラー詳細 */
 const miniControllerDetail = `
