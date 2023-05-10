@@ -78,6 +78,7 @@
 .config__battle-controller-type-selector {
   font-size: var(--font-size);
   display: flex;
+  flex-direction: column;
   gap: calc(var(--font-size) * 1);
 }
 
