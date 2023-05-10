@@ -26,6 +26,9 @@ const bigButtonDetail = `
   </div>
 `;
 
+/** accesskey参考文献URL */
+const accesskeyReference = "https://developer.mozilla.org/ja/docs/Web/HTML/Global_attributes/accesskey";
+
 /** ミニコントローラー詳細 */
 const miniControllerDetail = `
   <div class="${ROOT_CLASS}__mini-controller-detail">
@@ -57,6 +60,11 @@ const miniControllerDetail = `
           <kbd class="${ROOT_CLASS}__keyboard-icon">p</kbd>
         </div>
       </div>
+    </div>
+    <div class="${ROOT_CLASS}__accesskey-caption">
+      accesskeyという仕組みでキーボードショートカットを実現しているので、
+      windows + chrome以外ではaltのボタンが変わります。
+      詳細は「<a href="${accesskeyReference}" target="_blank" rel="noopener">MDNのサイト</a>」を参照してください。
     </div>
   </div>
 `;

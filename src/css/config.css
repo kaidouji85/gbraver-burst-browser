@@ -109,6 +109,10 @@
   gap: calc(var(--responsive-font-size) * 0.3) calc(var(--responsive-font-size) * 2);
 }
 
+.config__accesskey-caption a {
+  color: var(--button-font-color);
+}
+
 .config__keyboard-icon {
   display: inline-block;
   color: var(--background-color);
