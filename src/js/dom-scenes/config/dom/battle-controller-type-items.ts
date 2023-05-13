@@ -46,7 +46,7 @@ const miniControllerDetail = `
         <div class="${ROOT_CLASS}__mini-controller-keyboard-shortcut">
           <kbd class="${ROOT_CLASS}__keyboard-icon">alt</kbd>
           +
-          <kbd class="${ROOT_CLASS}__keyboard-icon">数字キー（0～8）</kbd>
+          <kbd class="${ROOT_CLASS}__number-key-icon">数字キー（0～8）</kbd>
         </div>
         <div class="${ROOT_CLASS}__mini-controller-command">バースト</div>
         <div class="${ROOT_CLASS}__mini-controller-keyboard-shortcut">
