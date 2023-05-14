@@ -6,10 +6,10 @@ export const PlayableArmdozers: ArmDozerId[] = [
   ArmDozerIds.WING_DOZER,
   ArmDozerIds.NEO_LANDOZER,
   ArmDozerIds.LIGHTNING_DOZER,
+  ArmDozerIds.GENESIS_BRAVER,
 ];
 
 /** 開発中も含めたプレイアブルアームドーザ */
 export const DevelopingPlayableArmdozers: ArmDozerId[] = [
   ...PlayableArmdozers,
-  ArmDozerIds.GENESIS_BRAVER,
 ];
