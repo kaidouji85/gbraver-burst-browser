@@ -1,5 +1,5 @@
-import {TEXTURE_IDS} from "./ids";
-import {TextureConfig} from "./resource";
+import { TEXTURE_IDS } from "./ids";
+import { TextureConfig } from "./resource";
 
 /** ジェネシスブレイバー関連テクスチャ設定 */
 export const GenesisBraverConfigs: TextureConfig[] = [

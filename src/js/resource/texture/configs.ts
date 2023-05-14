@@ -1,6 +1,6 @@
+import { GenesisBraverConfigs } from "./genesis-braver";
 import { TEXTURE_IDS } from "./ids";
 import type { TextureConfig } from "./resource";
-import {GenesisBraverConfigs} from "./genesis-braver";
 
 /** テクスチャ設定をまとめたもの */
 export const TEXTURE_CONFIGS: TextureConfig[] = [

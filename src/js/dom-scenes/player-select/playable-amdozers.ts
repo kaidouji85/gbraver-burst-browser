@@ -10,6 +10,4 @@ export const PlayableArmdozers: ArmDozerId[] = [
 ];
 
 /** 開発中も含めたプレイアブルアームドーザ */
-export const DevelopingPlayableArmdozers: ArmDozerId[] = [
-  ...PlayableArmdozers,
-];
+export const DevelopingPlayableArmdozers: ArmDozerId[] = [...PlayableArmdozers];
