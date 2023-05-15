@@ -1,9 +1,10 @@
 import "../css/style.css";
 
 import { createBrowserSDK } from "@gbraver-burst-network/browser-sdk";
+import * as THREE from "three";
 
 import { isMobile } from "./device-ditect/is-mobile";
-import { createLocalStorageConfigRepository } from "./game/config/local-storage";
+import { createLocalStorageConfigRepository } from "./game/config/repository/local-storage";
 import { Game } from "./game/index";
 
 /** webpack.config.js Webpack Define Pluginで定義したグローバル変数 */
@@ -25,6 +26,8 @@ declare let GBRAVER_BURST_AUTH0_AUDIENCE: string;
 declare let GBRAVER_BURST_CAN_PLAY_TUTORIAL_IN_DEVELOPMENT: string;
 declare let GBRAVER_BURST_SHOULD_LOAD_DEVELOPING_RESOURCE: string;
 declare let GBRAVER_BURST_CAN_PLAY_DEVELOPING_ARMDOZER: string;
+
+THREE.ColorManagement.enabled = false;
 
 /**
  * Gブレイバーバーストのエントリポイント

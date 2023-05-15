@@ -1,7 +1,11 @@
 import { Observable } from "rxjs";
 
+import { Animate } from "../../animation/animate";
+import { Resources } from "../../resource";
 import { ButtonConfig } from "./button-config";
-import { engageButtonConfig } from "./procedure/engage-button-config";
+import { decided } from "./procedure/decided";
+import { hidden } from "./procedure/hidden";
+import { show } from "./procedure/show";
 import { createMiniControllerProps, MiniControllerProps } from "./props";
 
 /** ミニコントローラ */
@@ -11,11 +15,10 @@ export class MiniController {
 
   /**
    * コンストラクタ
-   * @param config ボタン設定
+   * @param resources リソース管理オブジェクト
    */
-  constructor(config: ButtonConfig) {
-    this.#props = createMiniControllerProps();
-    engageButtonConfig(this.#props, config);
+  constructor(resources: Resources) {
+    this.#props = createMiniControllerProps(resources);
   }
 
   /**
@@ -38,10 +41,35 @@ export class MiniController {
   }
 
   /**
+   * ミニコントローラーを表示する
+   * @param config ボタン設定
+   * @return アニメーション
+   */
+  show(config: Readonly<ButtonConfig>): Animate {
+    return show(this.#props, config);
+  }
+
+  /**
+   * ミニコントローラーを非表示にする
+   * @return アニメーション
+   */
+  hidden(): Animate {
+    return hidden(this.#props);
+  }
+
+  /**
+   * コマンド決定アニメーション
+   * @return アニメーション
+   */
+  decided(): Animate {
+    return decided(this.#props);
+  }
+
+  /**
    * バッテリーボタン押下通知
    * @return 通知ストリーム、numberはバッテリー値
    */
-  batteryPushNotigier(): Observable<number> {
+  batteryPushNotifier(): Observable<number> {
     return this.#props.batteryPush;
   }
 

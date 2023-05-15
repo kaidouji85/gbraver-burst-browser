@@ -5,6 +5,7 @@ import { delay } from "../../../animation/delay";
 import type { DoBurst } from "../actions/do-burst";
 import { animationPlayer } from "../animation-player";
 import type { BattleSceneProps } from "../battle-scene-props";
+import { doBurstEventOrNot } from "./do-burst-event-or-not";
 import { progressGame } from "./progress-game";
 
 /**
@@ -14,24 +15,16 @@ import { progressGame } from "./progress-game";
  * @param action バースト発動アクション
  * @return 処理が完了したら発火するPromise
  */
-export async function onBurst(
+export function onBurst(
   props: Readonly<BattleSceneProps>,
   action: DoBurst
-): Promise<void> {
+): void {
   props.exclusive.execute(async () => {
     action.event.stopPropagation();
     const burstCommand: BurstCommand = {
       type: "BURST_COMMAND",
     };
-    const { isCommandCanceled } = props.customBattleEvent
-      ? await props.customBattleEvent.onBurstCommandSelected({
-          ...props,
-          burst: burstCommand,
-        })
-      : {
-          isCommandCanceled: false,
-        };
-
+    const { isCommandCanceled } = await doBurstEventOrNot(props, burstCommand);
     if (isCommandCanceled) {
       return;
     }

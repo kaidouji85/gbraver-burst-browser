@@ -1,6 +1,6 @@
 import { pop } from "../../../dom/animation";
 import type { PushDOM } from "../../../dom/event-stream";
-import { isConfigChanged } from "../../../game/config/browser-config";
+import { isConfigChanged } from "../../../game/config/config-changed";
 import type { ConfigProps } from "../props";
 import { parseConfig } from "./parse-config";
 

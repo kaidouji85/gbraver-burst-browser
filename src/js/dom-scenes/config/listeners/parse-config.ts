@@ -1,35 +1,41 @@
-import type { GbraverBurstBrowserConfig } from "../../../game/config/browser-config";
-import {
-  BattleAnimationTimeScales,
-  parseBattleAnimationTimeScale,
-  parseSoundVolume,
-  parseWebGLPixelRatio,
-  SoundVolumes,
-  WebGLPixelRatios,
-} from "../../../game/config/browser-config";
+import { GbraverBurstBrowserConfig } from "../../../game/config/browser-config";
+import { parseBrowserConfig } from "../../../game/config/parser/browser-config";
 import type { ConfigProps } from "../props";
 
 /**
  * 画面の入力値から設定オブジェクトをパースするヘルパー関数
- *
+ * @param props 画面の入力値
  * @return パース結果
  */
 export function parseConfig(props: ConfigProps): GbraverBurstBrowserConfig {
+  const foundBattleAnimationTimeScale =
+    props.battleAnimationTimeScaleSelector.querySelector(
+      'input[type="radio"]:checked'
+    );
   const battleAnimationTimeScale =
-    parseBattleAnimationTimeScale(
-      props.battleAnimationTimeScaleSelector.value
-    ) ?? BattleAnimationTimeScales[0];
+    foundBattleAnimationTimeScale instanceof HTMLInputElement
+      ? foundBattleAnimationTimeScale.value
+      : null;
+  const foundWebGLPixelRatio = props.webGLPixelRatioSelector.querySelector(
+    'input[type="radio"]:checked'
+  );
   const webGLPixelRatio =
-    parseWebGLPixelRatio(props.webGLPixelRatioSelector.value) ??
-    WebGLPixelRatios[0];
-  const bgmVolume =
-    parseSoundVolume(props.bgmVolumeSelector.value) ?? SoundVolumes[0];
-  const seVolume =
-    parseSoundVolume(props.seVolumeSelector.value) ?? SoundVolumes[0];
-  return {
+    foundWebGLPixelRatio instanceof HTMLInputElement
+      ? foundWebGLPixelRatio.value
+      : null;
+  const foundBattleControllerType =
+    props.battleControllerTypeSelector.querySelector(
+      'input[type="radio"]:checked'
+    );
+  const battleControllerType =
+    foundBattleControllerType instanceof HTMLInputElement
+      ? foundBattleControllerType.value
+      : null;
+  return parseBrowserConfig({
     battleAnimationTimeScale,
     webGLPixelRatio,
-    bgmVolume,
-    seVolume,
-  };
+    battleControllerType,
+    bgmVolume: props.bgmVolumeSelector.value,
+    seVolume: props.seVolumeSelector.value,
+  });
 }

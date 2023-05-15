@@ -5,6 +5,7 @@ import { delay } from "../../../animation/delay";
 import type { DecideBattery } from "../actions/decide-battery";
 import { animationPlayer } from "../animation-player";
 import type { BattleSceneProps } from "../battle-scene-props";
+import { doBatteryEventOrNot } from "./do-battery-event-or-not";
 import { progressGame } from "./progress-game";
 
 /**
@@ -14,25 +15,21 @@ import { progressGame } from "./progress-game";
  * @param action バッテリー決定アクション
  * @return 処理が完了したら発火するPromise
  */
-export async function onDecideBattery(
+export function onDecideBattery(
   props: Readonly<BattleSceneProps>,
   action: DecideBattery
-): Promise<void> {
-  await props.exclusive.execute(async (): Promise<void> => {
+): void {
+  props.exclusive.execute(async (): Promise<void> => {
     action.event.stopPropagation();
     const batteryCommand: BatteryCommand = {
       type: "BATTERY_COMMAND",
       battery: action.battery,
     };
-    const { isCommandCanceled } = props.customBattleEvent
-      ? await props.customBattleEvent.onBatteryCommandSelected({
-          ...props,
-          battery: batteryCommand,
-        })
-      : {
-          isCommandCanceled: false,
-        };
 
+    const { isCommandCanceled } = await doBatteryEventOrNot(
+      props,
+      batteryCommand
+    );
     if (isCommandCanceled) {
       return;
     }

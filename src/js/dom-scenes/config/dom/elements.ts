@@ -2,8 +2,9 @@ import type { DataIDs } from "./data-ids";
 
 /** ルート要素の子孫要素 */
 type Elements = {
-  battleAnimationTimeScaleSelector: HTMLSelectElement;
-  webGLPixelRatioSelector: HTMLSelectElement;
+  battleAnimationTimeScaleSelector: HTMLElement;
+  webGLPixelRatioSelector: HTMLElement;
+  battleControllerTypeSelector: HTMLElement;
   bgmVolumeSelector: HTMLInputElement;
   bgmVolumeValue: HTMLElement;
   seVolumeSelector: HTMLInputElement;
@@ -20,20 +21,15 @@ type Elements = {
  * @return 抽出結果
  */
 export function extractElements(root: HTMLElement, ids: DataIDs): Elements {
-  const extractedBattleAnimationTimeScaleSelector = root.querySelector(
-    `[data-id="${ids.battleAnimationTimeScaleSelector}"]`
-  );
-  const battleAnimationTimeScaleSelector =
-    extractedBattleAnimationTimeScaleSelector instanceof HTMLSelectElement
-      ? extractedBattleAnimationTimeScaleSelector
-      : document.createElement("select");
-  const extractedWebGlPixelRatioSelector = root.querySelector(
-    `[data-id="${ids.webGLPixelRatioSelector}"]`
-  );
-  const webGLPixelRatioSelector =
-    extractedWebGlPixelRatioSelector instanceof HTMLSelectElement
-      ? extractedWebGlPixelRatioSelector
-      : document.createElement("select");
+  const battleAnimationTimeScaleSelector: HTMLElement =
+    root.querySelector(`[data-id="${ids.battleAnimationTimeScaleSelector}"]`) ??
+    document.createElement("select");
+  const webGLPixelRatioSelector: HTMLElement =
+    root.querySelector(`[data-id="${ids.webGLPixelRatioSelector}"]`) ??
+    document.createElement("div");
+  const battleControllerTypeSelector: HTMLElement =
+    root.querySelector(`[data-id="${ids.battleControllerTypeSelector}"]`) ??
+    document.createElement("div");
   const extractedBGMVolumeSelector = root.querySelector(
     `[data-id="${ids.bgmVolumeSelector}"]`
   );
@@ -63,6 +59,7 @@ export function extractElements(root: HTMLElement, ids: DataIDs): Elements {
   return {
     battleAnimationTimeScaleSelector,
     webGLPixelRatioSelector,
+    battleControllerTypeSelector,
     prev,
     configChange,
     bgmVolumeSelector,

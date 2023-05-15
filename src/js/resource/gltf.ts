@@ -68,9 +68,7 @@ export function loadGlTF(
     const onProgress = () => {
       //NOP
     };
-    /* eslint-disable @typescript-eslint/no-explicit-any */
-    const onFail = (err: any) => reject(err);
-    /* eslint-enable */
+    const onFail = (err: unknown) => reject(err);
     loader.load(fullPath, onLoad, onProgress, onFail);
   });
 }

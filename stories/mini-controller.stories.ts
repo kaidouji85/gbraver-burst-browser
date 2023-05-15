@@ -1,3 +1,4 @@
+import { delay } from "../src/js/animation/delay";
 import { MiniController } from "../src/js/game-dom/mini-controller";
 import { ButtonConfig } from "../src/js/game-dom/mini-controller/button-config";
 import { domStub } from "./stub/dom-stub";
@@ -7,17 +8,29 @@ export default {
 };
 
 const miniControllerStory = (config: ButtonConfig) =>
-  domStub(() => {
-    const controller = new MiniController(config);
-    controller.batteryPushNotigier().subscribe((battery) => {
+  domStub((resources) => {
+    const controller = new MiniController(resources);
+    const decide = () =>
+      controller
+        .decided()
+        .chain(delay(200))
+        .chain(controller.hidden())
+        .chain(delay(2000))
+        .chain(controller.show(config))
+        .play();
+    controller.batteryPushNotifier().subscribe((battery) => {
       console.log(`battery ${battery}`);
+      decide();
     });
     controller.burstPushNotifier().subscribe(() => {
       console.log("burst");
+      decide();
     });
     controller.pilotPushNotifier().subscribe(() => {
       console.log("pilot");
+      decide();
     });
+    controller.show(config).play();
     return controller.getRootHTMLElement();
   });
 
@@ -82,4 +95,22 @@ export const disabledAll = miniControllerStory({
   maxBattery: 5,
   canBurst: false,
   canPilotSkill: false,
+});
+
+export const showHidden = domStub((resources) => {
+  const controller = new MiniController(resources);
+  controller
+    .show({
+      battery: 5,
+      maxBattery: 5,
+      canBurst: true,
+      canPilotSkill: true,
+    })
+    .chain(delay(2000))
+    .chain(controller.decided())
+    .chain(delay(200))
+    .chain(controller.hidden())
+    .chain(delay(2000))
+    .loop();
+  return controller.getRootHTMLElement();
 });

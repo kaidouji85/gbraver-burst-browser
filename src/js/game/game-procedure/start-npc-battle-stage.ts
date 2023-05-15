@@ -58,6 +58,7 @@ export async function startNPCBattleStage(
     pushWindow: props.pushWindow,
     gameLoop: props.gameLoop,
     renderer: props.renderer,
+    controllerType: config.battleControllerType,
   });
   props.tdBinder.bind(battleScene, battleSceneConnector);
   await waitAnimationFrame();
