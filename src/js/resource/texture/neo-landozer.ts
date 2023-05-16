@@ -58,5 +58,5 @@ export const NeoLandozerTextureConfigs: TextureConfig[] = [
   {
     id: TEXTURE_IDS.NEO_LANDOZER_BURST_BUTTON_ICON,
     path: "armdozer/neo-landozer/burst-button-icon.webp",
-  }, 
+  },
 ];
