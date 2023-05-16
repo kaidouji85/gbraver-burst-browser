@@ -1,5 +1,5 @@
-import { TEXTURE_IDS } from "./ids";
-import { TextureConfig } from "./resource";
+import { TEXTURE_IDS } from "../ids";
+import { TextureConfig } from "../resource";
 
 /** ライトニングドーザのテクスチャ設定をまとめたもの */
 export const LightningDozerTextureConfigs: TextureConfig[] = [
