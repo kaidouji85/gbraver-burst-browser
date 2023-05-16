@@ -1,68 +1,14 @@
 import { GenesisBraverTextureConfigs } from "./genesis-braver";
 import { TEXTURE_IDS } from "./ids";
+import { NeoLandozerTextureConfigs } from "./neo-landozer";
 import type { TextureConfig } from "./resource";
 import { ShinBraverTextureConfigs } from "./shin-braver";
 
 /** テクスチャ設定をまとめたもの */
 export const TEXTURE_CONFIGS: TextureConfig[] = [
   ...ShinBraverTextureConfigs,
-  // ネオランドーザ関連
-  {
-    id: TEXTURE_IDS.NEO_LANDOZER_STAND,
-    path: "armdozer/neo-landozer/stand.webp",
-  },
-  {
-    id: TEXTURE_IDS.NEO_LANDOZER_KNOCK_BACK,
-    path: "armdozer/neo-landozer/knock-back.webp",
-  },
-  {
-    id: TEXTURE_IDS.NEO_LANDOZER_GUARD,
-    path: "armdozer/neo-landozer/guard.webp",
-  },
-  {
-    id: TEXTURE_IDS.NEO_LANDOZER_HM_CHARGE,
-    path: "armdozer/neo-landozer/hm-charge.webp",
-  },
-  {
-    id: TEXTURE_IDS.NEO_LANDOZER_HM_ATTACK,
-    path: "armdozer/neo-landozer/hm-attack.webp",
-  },
-  {
-    id: TEXTURE_IDS.NEO_LANDOZER_HM_TO_STAND,
-    path: "armdozer/neo-landozer/hm-to-stand.webp",
-  },
-  {
-    id: TEXTURE_IDS.NEO_LANDOZER_DOWN,
-    path: "armdozer/neo-landozer/down.webp",
-  },
-  {
-    id: TEXTURE_IDS.NEO_LANDOZER_GUTS_DOWN,
-    path: "armdozer/neo-landozer/guts-down.webp",
-  },
-  {
-    id: TEXTURE_IDS.NEO_LANDOZER_GUTS_UP,
-    path: "armdozer/neo-landozer/guts-up.webp",
-  },
-  {
-    id: TEXTURE_IDS.NEO_LANDOZER_CUTIN_UP,
-    path: "armdozer/neo-landozer/cutin-up.webp",
-  },
-  {
-    id: TEXTURE_IDS.NEO_LANDOZER_CUTIN_DOWN,
-    path: "armdozer/neo-landozer/cutin-down.webp",
-  },
-  {
-    id: TEXTURE_IDS.NEO_LANDOZER_BACK_STEP,
-    path: "armdozer/neo-landozer/back-step.webp",
-  },
-  {
-    id: TEXTURE_IDS.NEO_LANDOZER_FRONT_STEP,
-    path: "armdozer/neo-landozer/front-step.webp",
-  },
-  {
-    id: TEXTURE_IDS.NEO_LANDOZER_BURST_BUTTON_ICON,
-    path: "armdozer/neo-landozer/burst-button-icon.webp",
-  }, // ライトニングドーザ関連
+  ...NeoLandozerTextureConfigs,
+  // ライトニングドーザ関連
   {
     id: TEXTURE_IDS.LIGHTNING_DOZER_STAND,
     path: "armdozer/lightning-dozer/stand.webp",
