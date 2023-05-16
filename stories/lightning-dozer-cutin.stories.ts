@@ -5,15 +5,16 @@ import {
 } from "../src/js/game-object/cut-in/lightning-dozer";
 import { LightningDozerCutIn } from "../src/js/game-object/cut-in/lightning-dozer/lightning-dozer-cutin";
 import { HUDGameObjectStub } from "./stub/hud-game-object-stub";
+
 export default {
   title: "lightning-dozer-cutin",
 };
+
 /**
  * ライトニングドーザ カットイン ループアニメーション
  *
  * @param cutIn カットイン
  */
-
 function loopAnimation(cutIn: LightningDozerCutIn): void {
   const animation = cutIn
     .show()
@@ -32,6 +33,7 @@ export const Player = (): HTMLElement => {
   stub.start();
   return stub.domElement();
 };
+
 export const Enemy = (): HTMLElement => {
   const stub = new HUDGameObjectStub(({ resources, gameObjectAction }) => {
     const cutIn = enemyLightningiDozerCutIn(resources, gameObjectAction);
