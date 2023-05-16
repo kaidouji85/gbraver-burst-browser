@@ -1,8 +1,8 @@
+import { TEXTURE_IDS } from "../ids";
+import type { TextureConfig } from "../resource";
 import { GenesisBraverTextureConfigs } from "./genesis-braver";
-import { TEXTURE_IDS } from "./ids";
 import { LightningDozerTextureConfigs } from "./lightning-dozer";
 import { NeoLandozerTextureConfigs } from "./neo-landozer";
-import type { TextureConfig } from "./resource";
 import { ShinBraverTextureConfigs } from "./shin-braver";
 import { WingDozerTextureConfigs } from "./wing-dozer";
 

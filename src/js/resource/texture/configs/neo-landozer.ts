@@ -1,5 +1,5 @@
-import { TEXTURE_IDS } from "./ids";
-import { TextureConfig } from "./resource";
+import { TEXTURE_IDS } from "../ids";
+import { TextureConfig } from "../resource";
 
 /** ネオランドーザのテクスチャ設定をあつめたもの */
 export const NeoLandozerTextureConfigs: TextureConfig[] = [
