@@ -1,4 +1,3 @@
-import { WingDozer } from "../../game-object/armdozer/wing-dozer/wing-dozer";
 import { GenesisBraverTextureConfigs } from "./genesis-braver";
 import { TEXTURE_IDS } from "./ids";
 import { LightningDozerTextureConfigs } from "./lightning-dozer";
