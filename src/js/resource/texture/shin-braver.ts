@@ -66,5 +66,5 @@ export const ShinBraverTextureConfigs: TextureConfig[] = [
   {
     id: TEXTURE_IDS.SHIN_BRAVER_BURST_BUTTON_ICON,
     path: "armdozer/shin-braver/burst-button-icon.webp",
-  }
+  },
 ];

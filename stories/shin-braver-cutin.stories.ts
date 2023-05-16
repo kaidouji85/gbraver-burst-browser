@@ -1,6 +1,9 @@
 import { Animate } from "../src/js/animation/animate";
 import { delay } from "../src/js/animation/delay";
-import { enemyShinBraverCutIn, playerShinBraverCutIn } from "../src/js/game-object/cut-in/shin-braver";
+import {
+  enemyShinBraverCutIn,
+  playerShinBraverCutIn,
+} from "../src/js/game-object/cut-in/shin-braver";
 import { ShinBraverCutIn } from "../src/js/game-object/cut-in/shin-braver/shin-braver-cutin";
 import { HUDGameObjectStub } from "./stub/hud-game-object-stub";
 
