@@ -1,76 +1,20 @@
+import { WingDozer } from "../../game-object/armdozer/wing-dozer/wing-dozer";
 import { GenesisBraverTextureConfigs } from "./genesis-braver";
 import { TEXTURE_IDS } from "./ids";
 import { LightningDozerTextureConfigs } from "./lightning-dozer";
 import { NeoLandozerTextureConfigs } from "./neo-landozer";
 import type { TextureConfig } from "./resource";
 import { ShinBraverTextureConfigs } from "./shin-braver";
+import { WingDozerTextureConfigs } from "./wing-dozer";
 
 /** テクスチャ設定をまとめたもの */
 export const TEXTURE_CONFIGS: TextureConfig[] = [
   ...ShinBraverTextureConfigs,
   ...NeoLandozerTextureConfigs,
   ...LightningDozerTextureConfigs,
-  // ウィングドーザ関連
-  {
-    id: TEXTURE_IDS.WING_DOZER_STAND,
-    path: "armdozer/wing-dozer/stand.webp",
-  },
-  {
-    id: TEXTURE_IDS.WING_DOZER_UPPER_CHARGE,
-    path: "armdozer/wing-dozer/upper-charge.webp",
-  },
-  {
-    id: TEXTURE_IDS.WING_DOZER_UPPER_ATTACK,
-    path: "armdozer/wing-dozer/upper-attack.webp",
-  },
-  {
-    id: TEXTURE_IDS.WING_DOZER_UPPER_TO_STAND,
-    path: "armdozer/wing-dozer/upper-to-stand.webp",
-  },
-  {
-    id: TEXTURE_IDS.WING_DOZER_DASH_UP,
-    path: "armdozer/wing-dozer/dash-up.webp",
-  },
-  {
-    id: TEXTURE_IDS.WING_DOZER_DASH_DOWN,
-    path: "armdozer/wing-dozer/dash-down.webp",
-  },
-  {
-    id: TEXTURE_IDS.WING_DOZER_DASH_TO_STAND,
-    path: "armdozer/wing-dozer/dash-to-stand.webp",
-  },
-  {
-    id: TEXTURE_IDS.WING_DOZER_KNOCK_BACK,
-    path: "armdozer/wing-dozer/knock-back.webp",
-  },
-  {
-    id: TEXTURE_IDS.WING_DOZER_DOWN,
-    path: "armdozer/wing-dozer/down.webp",
-  },
-  {
-    id: TEXTURE_IDS.WING_DOZER_BACK_STEP,
-    path: "armdozer/wing-dozer/back-step.webp",
-  },
-  {
-    id: TEXTURE_IDS.WING_DOZER_FRONT_STEP,
-    path: "armdozer/wing-dozer/front-step.webp",
-  },
-  {
-    id: TEXTURE_IDS.WING_DOZER_BURST_UP,
-    path: "armdozer/wing-dozer/burst-up.webp",
-  },
-  {
-    id: TEXTURE_IDS.WING_DOZER_BURST_DOWN,
-    path: "armdozer/wing-dozer/burst-down.webp",
-  },
-  {
-    id: TEXTURE_IDS.WING_DOZER_GUARD,
-    path: "armdozer/wing-dozer/guard.webp",
-  },
-  {
-    id: TEXTURE_IDS.WING_DOZER_BURST_BUTTON_ICON,
-    path: "armdozer/wing-dozer/burst-button-icon.webp",
-  }, // シンヤ関連
+  ...WingDozerTextureConfigs,
+  ...GenesisBraverTextureConfigs,
+  // シンヤ関連
   {
     id: TEXTURE_IDS.SHINYA_CUTIN,
     path: "pilot/shinya/skill-cutin.webp",
@@ -193,7 +137,6 @@ export const TEXTURE_CONFIGS: TextureConfig[] = [
     id: TEXTURE_IDS.BATTERY_METER_4,
     path: "battery-selector/meter-4.webp",
   },
-  ...GenesisBraverTextureConfigs,
 ];
 
 /** 開発中のテクスチャリソース設定をあつめたもの */
