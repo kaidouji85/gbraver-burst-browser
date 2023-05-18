@@ -3,6 +3,7 @@ import type { TextureConfig } from "../resource";
 import { BatteryNumberTextureConfigs } from "./battery-number";
 import { DamageNumberTextureConfigs } from "./damage-number";
 import { GaiTextureConfigs } from "./gai";
+import { GaugeTextureConfigs } from "./gauge";
 import { GenesisBraverTextureConfigs } from "./genesis-braver";
 import { LightingTextureConfigs } from "./lightning";
 import { LightningBarrierTextureConfigs } from "./lightning-barrier";
@@ -31,11 +32,8 @@ export const TEXTURE_CONFIGS: TextureConfig[] = [
   ...LightningBarrierTextureConfigs,
   ...BatteryNumberTextureConfigs,
   ...DamageNumberTextureConfigs,
-  // HPゲージ数字
-  {
-    id: TEXTURE_IDS.HP_NUMBER,
-    path: "gauge/hp-gauge-number.webp",
-  }, // バッテリーゲージセレクタ 円盤数字
+  ...GaugeTextureConfigs,
+  // バッテリーゲージセレクタ 円盤数字
   {
     id: TEXTURE_IDS.BATTERY_SELECTOR_NUMBER,
     path: "battery-selector/active-number.webp",
@@ -87,23 +85,6 @@ export const TEXTURE_CONFIGS: TextureConfig[] = [
   {
     id: TEXTURE_IDS.DRAW,
     path: "result/draw.png",
-  },
-  // ゲージ系
-  {
-    id: TEXTURE_IDS.PLAYER_HP_GAUGE,
-    path: "gauge/player-hp-gauge.webp",
-  },
-  {
-    id: TEXTURE_IDS.PLAYER_BATTERY_GAUGE,
-    path: "gauge/player-battery-gauge.webp",
-  },
-  {
-    id: TEXTURE_IDS.ENEMY_HP_GAUGE,
-    path: "gauge/enemy-hp-gauge.webp",
-  },
-  {
-    id: TEXTURE_IDS.ENEMY_BATTERY_GAUGE,
-    path: "gauge/enemy-battery-gauge.webp",
   },
   // バッテリーセレクタ系
   {
