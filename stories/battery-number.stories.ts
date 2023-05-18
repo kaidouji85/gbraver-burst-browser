@@ -1,14 +1,18 @@
 import { Observable } from "rxjs";
-import { Resources } from "../src/js/resource";
-import { GameObjectAction } from "../src/js/game-object/action/game-object-action";
-import { BatteryNumber } from "../src/js/game-object/battery-number/battery-number";
-import { TDGameObjectStub } from "./stub/td-game-object-stub";
+
 import { delay } from "../src/js/animation/delay";
-import { enemyBatteryNumber, playerBatteryNumber } from "../src/js/game-object/battery-number";
+import { GameObjectAction } from "../src/js/game-object/action/game-object-action";
+import {
+  enemyBatteryNumber,
+  playerBatteryNumber,
+} from "../src/js/game-object/battery-number";
+import { BatteryNumber } from "../src/js/game-object/battery-number/battery-number";
+import { Resources } from "../src/js/resource";
+import { TDGameObjectStub } from "./stub/td-game-object-stub";
 
 export default {
   title: "battery-number",
-}
+};
 
 /**
  * バッテリーナンバーのストーリー
@@ -16,20 +20,25 @@ export default {
  * @param fn バッテリーナンバー操作関数
  * @return story
  */
-const batteryNumberStory = (
-  generator: (resources: Resources, gameObjectAction: Observable<GameObjectAction>) => BatteryNumber,
-  fn: (batteryNumber: BatteryNumber) => void,
-) => () => {
-  const stub = new TDGameObjectStub(({ resources, gameObjectAction }) => {
-    const sprite = generator(resources, gameObjectAction);
-    fn(sprite);
-    return {
-      objects: [sprite.getObject3D()],
-    };
-  });
-  stub.start();
-  return stub.domElement();
-};
+const batteryNumberStory =
+  (
+    generator: (
+      resources: Resources,
+      gameObjectAction: Observable<GameObjectAction>
+    ) => BatteryNumber,
+    fn: (batteryNumber: BatteryNumber) => void
+  ) =>
+  () => {
+    const stub = new TDGameObjectStub(({ resources, gameObjectAction }) => {
+      const sprite = generator(resources, gameObjectAction);
+      fn(sprite);
+      return {
+        objects: [sprite.getObject3D()],
+      };
+    });
+    stub.start();
+    return stub.domElement();
+  };
 
 /**
  * バッテリーナンバー表示
