@@ -6,6 +6,7 @@ import { LightningDozerTextureConfigs } from "./lightning-dozer";
 import { NeoLandozerTextureConfigs } from "./neo-landozer";
 import { RaitoTextureConfigs } from "./raito";
 import { ShinBraverTextureConfigs } from "./shin-braver";
+import { ShockWaveTextureConfigs } from "./shock-wave";
 import { ShinyaTextureConfigs } from "./sinya";
 import { TsubasaTextureConfigs } from "./tsubasa";
 import { WingDozerTextureConfigs } from "./wing-dozer";
@@ -21,19 +22,8 @@ export const TEXTURE_CONFIGS: TextureConfig[] = [
   ...GaiTextureConfigs,
   ...RaitoTextureConfigs,
   ...TsubasaTextureConfigs,
-  // ヒットマーク関連
-  {
-    id: TEXTURE_IDS.HITMARK_SHOCK_WAVE_LINE,
-    path: "hitmark/shock-wave/line.webp",
-  },
-  {
-    id: TEXTURE_IDS.HITMARK_SHOCK_WAVE_RING,
-    path: "hitmark/shock-wave/ring.webp",
-  },
-  {
-    id: TEXTURE_IDS.HITMARK_LIGHTNING_RING,
-    path: "hitmark/lightning/lightning-ring.webp",
-  }, // バリア関連
+  ...ShockWaveTextureConfigs,
+  // バリア関連
   {
     id: TEXTURE_IDS.BARRIER_LIGHTNING,
     path: "barrier/lightning/lightning.webp",
