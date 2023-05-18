@@ -6,5 +6,5 @@ export const LightningBarrierTextureConfigs: TextureConfig[] = [
   {
     id: TEXTURE_IDS.BARRIER_LIGHTNING,
     path: "barrier/lightning/lightning.webp",
-  }, 
+  },
 ];
