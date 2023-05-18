@@ -15,6 +15,7 @@ import { ShinBraverTextureConfigs } from "./shin-braver";
 import { ShockWaveTextureConfigs } from "./shock-wave";
 import { ShinyaTextureConfigs } from "./sinya";
 import { TsubasaTextureConfigs } from "./tsubasa";
+import { TurnTexureConfigs } from "./turn";
 import { WingDozerTextureConfigs } from "./wing-dozer";
 
 /** テクスチャ設定をまとめたもの */
@@ -35,15 +36,8 @@ export const TEXTURE_CONFIGS: TextureConfig[] = [
   ...DamageNumberTextureConfigs,
   ...GaugeTextureConfigs,
   ...BatterySelectorTextureConfigs,
-  // ターンスタート
-  {
-    id: TEXTURE_IDS.PLAYER_TURN,
-    path: "turn/player-turn.webp",
-  },
-  {
-    id: TEXTURE_IDS.ENEMY_TURN,
-    path: "turn/enemy-turn.webp",
-  }, // 効果ラベル
+  ...TurnTexureConfigs,
+  // 効果ラベル
   {
     id: TEXTURE_IDS.POWER_UP,
     path: "effect-label/power-up.webp",
