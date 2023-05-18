@@ -3,6 +3,7 @@ import type { TextureConfig } from "../resource";
 import { GaiTextureConfigs } from "./gai";
 import { GenesisBraverTextureConfigs } from "./genesis-braver";
 import { LightingTextureConfigs } from "./lightning";
+import { LightningBarrierTextureConfigs } from "./lightning-barrier";
 import { LightningDozerTextureConfigs } from "./lightning-dozer";
 import { NeoLandozerTextureConfigs } from "./neo-landozer";
 import { RaitoTextureConfigs } from "./raito";
@@ -25,11 +26,8 @@ export const TEXTURE_CONFIGS: TextureConfig[] = [
   ...TsubasaTextureConfigs,
   ...ShockWaveTextureConfigs,
   ...LightingTextureConfigs,
-  // バリア関連
-  {
-    id: TEXTURE_IDS.BARRIER_LIGHTNING,
-    path: "barrier/lightning/lightning.webp",
-  }, // バッテリー数字
+  ...LightningBarrierTextureConfigs,
+  // バッテリー数字
   {
     id: TEXTURE_IDS.BATTERY_NUMBER,
     path: "battery-number/battery-number.webp",
