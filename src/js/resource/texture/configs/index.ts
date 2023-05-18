@@ -1,6 +1,7 @@
 import { TEXTURE_IDS } from "../ids";
 import type { TextureConfig } from "../resource";
 import { BatteryNumberTextureConfigs } from "./battery-number";
+import { DamageNumberTextureConfigs } from "./damage-number";
 import { GaiTextureConfigs } from "./gai";
 import { GenesisBraverTextureConfigs } from "./genesis-braver";
 import { LightingTextureConfigs } from "./lightning";
@@ -29,11 +30,8 @@ export const TEXTURE_CONFIGS: TextureConfig[] = [
   ...LightingTextureConfigs,
   ...LightningBarrierTextureConfigs,
   ...BatteryNumberTextureConfigs,
-  // ダメージ数字
-  {
-    id: TEXTURE_IDS.DAMAGE_NUMBER,
-    path: "damage-indicator/damage-number.webp",
-  }, // HPゲージ数字
+  ...DamageNumberTextureConfigs,
+  // HPゲージ数字
   {
     id: TEXTURE_IDS.HP_NUMBER,
     path: "gauge/hp-gauge-number.webp",
