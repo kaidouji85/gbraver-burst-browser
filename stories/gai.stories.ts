@@ -4,9 +4,11 @@ import {
   playerGaiCutIn,
 } from "../src/js/game-object/cut-in/gai";
 import { HUDGameObjectStub } from "./stub/hud-game-object-stub";
+
 export default {
-  title: "gai",
+  title: "gai-cutin",
 };
+
 export const player = (): HTMLElement => {
   const stub = new HUDGameObjectStub(({ resources, gameObjectAction }) => {
     const pilot = playerGaiCutIn(resources, gameObjectAction);
@@ -21,6 +23,7 @@ export const player = (): HTMLElement => {
   stub.start();
   return stub.domElement();
 };
+
 export const enemy = (): HTMLElement => {
   const stub = new HUDGameObjectStub(({ resources, gameObjectAction }) => {
     const pilot = enemyGaiCutIn(resources, gameObjectAction);

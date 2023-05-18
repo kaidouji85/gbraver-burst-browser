@@ -1,9 +1,13 @@
 import { TEXTURE_IDS } from "../ids";
 import type { TextureConfig } from "../resource";
+import { GaiTextureConfigs } from "./gai";
 import { GenesisBraverTextureConfigs } from "./genesis-braver";
 import { LightningDozerTextureConfigs } from "./lightning-dozer";
 import { NeoLandozerTextureConfigs } from "./neo-landozer";
+import { RaitoTextureConfigs } from "./raito";
 import { ShinBraverTextureConfigs } from "./shin-braver";
+import { ShinyaTextureConfigs } from "./sinya";
+import { TsubasaTextureConfigs } from "./tsubasa";
 import { WingDozerTextureConfigs } from "./wing-dozer";
 
 /** テクスチャ設定をまとめたもの */
@@ -13,23 +17,11 @@ export const TEXTURE_CONFIGS: TextureConfig[] = [
   ...LightningDozerTextureConfigs,
   ...WingDozerTextureConfigs,
   ...GenesisBraverTextureConfigs,
-  // シンヤ関連
-  {
-    id: TEXTURE_IDS.SHINYA_CUTIN,
-    path: "pilot/shinya/skill-cutin.webp",
-  }, // ガイ関連
-  {
-    id: TEXTURE_IDS.GAI_CUTIN,
-    path: "pilot/gai/skill-cutin.webp",
-  }, // ライト関連
-  {
-    id: TEXTURE_IDS.RAITO_CUTIN,
-    path: "pilot/raito/skill-cutin.webp",
-  }, // ツバサ関連
-  {
-    id: TEXTURE_IDS.TSUBASA_CUTIN,
-    path: "pilot/tsubasa/skill-cutin.webp",
-  }, // ヒットマーク関連
+  ...ShinyaTextureConfigs,
+  ...GaiTextureConfigs,
+  ...RaitoTextureConfigs,
+  ...TsubasaTextureConfigs,
+  // ヒットマーク関連
   {
     id: TEXTURE_IDS.HITMARK_SHOCK_WAVE_LINE,
     path: "hitmark/shock-wave/line.webp",
