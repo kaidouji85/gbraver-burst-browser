@@ -1,6 +1,7 @@
 import { TEXTURE_IDS } from "../ids";
 import type { TextureConfig } from "../resource";
 import { BatteryNumberTextureConfigs } from "./battery-number";
+import { BatterySelectorTextureConfigs } from "./battery-selector";
 import { DamageNumberTextureConfigs } from "./damage-number";
 import { GaiTextureConfigs } from "./gai";
 import { GaugeTextureConfigs } from "./gauge";
@@ -33,19 +34,8 @@ export const TEXTURE_CONFIGS: TextureConfig[] = [
   ...BatteryNumberTextureConfigs,
   ...DamageNumberTextureConfigs,
   ...GaugeTextureConfigs,
-  // バッテリーゲージセレクタ 円盤数字
-  {
-    id: TEXTURE_IDS.BATTERY_SELECTOR_NUMBER,
-    path: "battery-selector/active-number.webp",
-  }, // バッテリーセレクタ 円盤数字(ディスアクティブ)
-  {
-    id: TEXTURE_IDS.DIS_ACTIVE_BATTERY_SELECTOR_NUMBER,
-    path: "battery-selector/dis-active-number.webp",
-  }, // バッテリーセレクタ ボタンに表示する数字
-  {
-    id: TEXTURE_IDS.BATTERY_CURRENT_VALUE,
-    path: "battery-selector/current-battery.webp",
-  }, // ターンスタート
+  ...BatterySelectorTextureConfigs,
+  // ターンスタート
   {
     id: TEXTURE_IDS.PLAYER_TURN,
     path: "turn/player-turn.webp",
@@ -85,15 +75,6 @@ export const TEXTURE_CONFIGS: TextureConfig[] = [
   {
     id: TEXTURE_IDS.DRAW,
     path: "result/draw.png",
-  },
-  // バッテリーセレクタ系
-  {
-    id: TEXTURE_IDS.BATTERY_METER_8,
-    path: "battery-selector/meter-8.webp",
-  },
-  {
-    id: TEXTURE_IDS.BATTERY_METER_4,
-    path: "battery-selector/meter-4.webp",
   },
 ];
 
