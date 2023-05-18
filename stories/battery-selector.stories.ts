@@ -14,36 +14,38 @@ export default {
  * @param buttonLabel ボタンラベル
  * @return story
  */
-const batterySelectorStory = (
-  initialValue: number,
-  maxBattery: number,
-  enableValue: number,
-  buttonLabel: ButtonLabel
-) => () => {
-  const stub = new HUDGameObjectStub(({ resources, gameObjectAction }) => {
-    const selector: BatterySelector = new BatterySelector({
-      resources: resources,
-      gameObjectAction: gameObjectAction,
-      maxBattery: maxBattery,
+const batterySelectorStory =
+  (
+    initialValue: number,
+    maxBattery: number,
+    enableValue: number,
+    buttonLabel: ButtonLabel
+  ) =>
+  () => {
+    const stub = new HUDGameObjectStub(({ resources, gameObjectAction }) => {
+      const selector: BatterySelector = new BatterySelector({
+        resources: resources,
+        gameObjectAction: gameObjectAction,
+        maxBattery: maxBattery,
+      });
+      selector.open(initialValue, maxBattery, enableValue, buttonLabel).play();
+      selector.notifyDecision().subscribe((event) => {
+        event.preventDefault();
+        event.stopPropagation();
+        selector.decide().play();
+        console.log(selector.getBattery());
+      });
+      selector.notifyBatteryPlus().subscribe(() => {
+        selector.batteryPlus().play();
+      });
+      selector.notifyBatteryMinus().subscribe(() => {
+        selector.batteryMinus().play();
+      });
+      return [selector.getObject3D()];
     });
-    selector.open(initialValue, maxBattery, enableValue, buttonLabel).play();
-    selector.notifyDecision().subscribe((event) => {
-      event.preventDefault();
-      event.stopPropagation();
-      selector.decide().play();
-      console.log(selector.getBattery());
-    });
-    selector.notifyBatteryPlus().subscribe(() => {
-      selector.batteryPlus().play();
-    });
-    selector.notifyBatteryMinus().subscribe(() => {
-      selector.batteryMinus().play();
-    });
-    return [selector.getObject3D()];
-  });
-  stub.start();
-  return stub.domElement();
-};
+    stub.start();
+    return stub.domElement();
+  };
 
 /** 攻撃 最大値5 */
 export const attack5 = batterySelectorStory(1, 5, 5, "Attack");
