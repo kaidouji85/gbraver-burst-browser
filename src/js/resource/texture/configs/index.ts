@@ -3,6 +3,7 @@ import type { TextureConfig } from "../resource";
 import { BatteryNumberTextureConfigs } from "./battery-number";
 import { BatterySelectorTextureConfigs } from "./battery-selector";
 import { DamageNumberTextureConfigs } from "./damage-number";
+import { EffectLabelTextureConfigs } from "./effect-label";
 import { GaiTextureConfigs } from "./gai";
 import { GaugeTextureConfigs } from "./gauge";
 import { GenesisBraverTextureConfigs } from "./genesis-braver";
@@ -37,27 +38,8 @@ export const TEXTURE_CONFIGS: TextureConfig[] = [
   ...GaugeTextureConfigs,
   ...BatterySelectorTextureConfigs,
   ...TurnTexureConfigs,
-  // 効果ラベル
-  {
-    id: TEXTURE_IDS.POWER_UP,
-    path: "effect-label/power-up.webp",
-  },
-  {
-    id: TEXTURE_IDS.REFLECT,
-    path: "effect-label/reflect.webp",
-  },
-  {
-    id: TEXTURE_IDS.CONTINUOUS_ATTACK,
-    path: "effect-label/continuous-attack.webp",
-  },
-  {
-    id: TEXTURE_IDS.DAMAGE_HALVED,
-    path: "effect-label/damage-halved.webp",
-  },
-  {
-    id: TEXTURE_IDS.BATTERY_ENCHANTMENT,
-    path: "effect-label/battery-enchantment.webp",
-  }, // リザルト
+  ...EffectLabelTextureConfigs,
+  // リザルト
   {
     id: TEXTURE_IDS.WIN,
     path: "result/win.png",
