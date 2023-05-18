@@ -11,8 +11,4 @@ export const ShockWaveTextureConfigs: TextureConfig[] = [
     id: TEXTURE_IDS.HITMARK_SHOCK_WAVE_RING,
     path: "hitmark/shock-wave/ring.webp",
   },
-  {
-    id: TEXTURE_IDS.HITMARK_LIGHTNING_RING,
-    path: "hitmark/lightning/lightning-ring.webp",
-  },
 ];
