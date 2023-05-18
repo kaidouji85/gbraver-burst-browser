@@ -1,5 +1,6 @@
 import { TEXTURE_IDS } from "../ids";
 import type { TextureConfig } from "../resource";
+import { BatteryNumberTextureConfigs } from "./battery-number";
 import { GaiTextureConfigs } from "./gai";
 import { GenesisBraverTextureConfigs } from "./genesis-braver";
 import { LightingTextureConfigs } from "./lightning";
@@ -27,11 +28,8 @@ export const TEXTURE_CONFIGS: TextureConfig[] = [
   ...ShockWaveTextureConfigs,
   ...LightingTextureConfigs,
   ...LightningBarrierTextureConfigs,
-  // バッテリー数字
-  {
-    id: TEXTURE_IDS.BATTERY_NUMBER,
-    path: "battery-number/battery-number.webp",
-  }, // ダメージ数字
+  ...BatteryNumberTextureConfigs,
+  // ダメージ数字
   {
     id: TEXTURE_IDS.DAMAGE_NUMBER,
     path: "damage-indicator/damage-number.webp",
