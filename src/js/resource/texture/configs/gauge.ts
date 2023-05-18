@@ -6,7 +6,7 @@ export const GaugeTextureConfigs: TextureConfig[] = [
   {
     id: TEXTURE_IDS.HP_NUMBER,
     path: "gauge/hp-gauge-number.webp",
-  }, 
+  },
   {
     id: TEXTURE_IDS.PLAYER_HP_GAUGE,
     path: "gauge/player-hp-gauge.webp",
