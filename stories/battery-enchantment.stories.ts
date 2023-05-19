@@ -1,37 +1,52 @@
+import { Observable } from "rxjs";
 import { delay } from "../src/js/animation/delay";
 import {
   enemyBatteryEnchantment,
   playerBatteryEnchantment,
 } from "../src/js/game-object/battery-enchantment";
+import { Resources } from "../src/js/resource";
 import { TDGameObjectStub } from "./stub/td-game-object-stub";
+import { GameObjectAction } from "../src/js/game-object/action/game-object-action";
+import { BatteryEnchantment } from "../src/js/game-object/battery-enchantment/battery-enchantment";
+
 export default {
   title: "battery-enchantment",
 };
-export const player = (): HTMLElement => {
+
+/**
+ * バッテリー増強インジケータのストーリー
+ * @param generator バッテリー増強インジケータ生成関数
+ * @param fn バッテリー増強インジケータ操作関数
+ * @return story
+ */
+const batteryEnchantmentStory = (
+  generator: (resources: Resources, gameObjectAction: Observable<GameObjectAction>) => BatteryEnchantment,
+  fn: (batteryEnchantment: BatteryEnchantment) => void
+) => () => {
   const stub = new TDGameObjectStub(({ resources, gameObjectAction }) => {
-    const continuousAttack = playerBatteryEnchantment(
+    const batteryEnchantment = generator(
       resources,
       gameObjectAction
     );
-    delay(1000).chain(continuousAttack.popUp()).loop();
+    fn(batteryEnchantment);
     return {
-      objects: [continuousAttack.getObject3D()],
+      objects: [batteryEnchantment.getObject3D()],
     };
   });
   stub.start();
   return stub.domElement();
 };
-export const enemy = (): HTMLElement => {
-  const stub = new TDGameObjectStub(({ resources, gameObjectAction }) => {
-    const continuousAttack = enemyBatteryEnchantment(
-      resources,
-      gameObjectAction
-    );
-    delay(1000).chain(continuousAttack.popUp()).loop();
-    return {
-      objects: [continuousAttack.getObject3D()],
-    };
-  });
-  stub.start();
-  return stub.domElement();
+
+/**
+ * ポップアップ
+ * @param batteryEnchantment バッテリー増強インジケータ
+ */
+const popUp = (batteryEnchantment: BatteryEnchantment) => {
+  delay(1000).chain(batteryEnchantment.popUp()).loop();
 };
+
+/** プレイヤー バッテリー増強インジケータ ポップアップ */
+export const playerPopUp = batteryEnchantmentStory(playerBatteryEnchantment, popUp);
+
+/** 敵 バッテリー増強インジケータ ポップアップ */
+export const enemyPopUP = batteryEnchantmentStory(enemyBatteryEnchantment, popUp);
