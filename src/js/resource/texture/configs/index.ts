@@ -1,5 +1,4 @@
-import { TEXTURE_IDS } from "../ids";
-import type { TextureConfig } from "../resource";
+import { TextureConfig } from "../resource";
 import { BatteryNumberTextureConfigs } from "./battery-number";
 import { BatterySelectorTextureConfigs } from "./battery-selector";
 import { DamageNumberTextureConfigs } from "./damage-number";
@@ -12,6 +11,7 @@ import { LightningBarrierTextureConfigs } from "./lightning-barrier";
 import { LightningDozerTextureConfigs } from "./lightning-dozer";
 import { NeoLandozerTextureConfigs } from "./neo-landozer";
 import { RaitoTextureConfigs } from "./raito";
+import { ResultTextureConfigs } from "./result";
 import { ShinBraverTextureConfigs } from "./shin-braver";
 import { ShockWaveTextureConfigs } from "./shock-wave";
 import { ShinyaTextureConfigs } from "./sinya";
@@ -39,19 +39,7 @@ export const TEXTURE_CONFIGS: TextureConfig[] = [
   ...BatterySelectorTextureConfigs,
   ...TurnTexureConfigs,
   ...EffectLabelTextureConfigs,
-  // リザルト
-  {
-    id: TEXTURE_IDS.WIN,
-    path: "result/win.png",
-  },
-  {
-    id: TEXTURE_IDS.LOSE,
-    path: "result/lose.png",
-  },
-  {
-    id: TEXTURE_IDS.DRAW,
-    path: "result/draw.png",
-  },
+  ...ResultTextureConfigs,
 ];
 
 /** 開発中のテクスチャリソース設定をあつめたもの */
