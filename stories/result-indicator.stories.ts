@@ -1,14 +1,15 @@
 import { Observable } from "rxjs";
+
 import { delay } from "../src/js/animation/delay";
+import { GameObjectAction } from "../src/js/game-object/action/game-object-action";
 import {
   drawIndicator,
   loseIndicator,
   winIndicator,
 } from "../src/js/game-object/result-indicator";
+import { ResultIndicator } from "../src/js/game-object/result-indicator/result-indicator";
 import { Resources } from "../src/js/resource";
 import { HUDGameObjectStub } from "./stub/hud-game-object-stub";
-import { GameObjectAction } from "../src/js/game-object/action/game-object-action";
-import { ResultIndicator } from "../src/js/game-object/result-indicator/result-indicator";
 
 export default {
   title: "result-indicator",
@@ -20,18 +21,23 @@ export default {
  * @param fn リザルトインジケータ操作関数
  * @return story
  */
-const resultIndicatorStory = (
-  generator: (resources: Resources, gameObjectAction: Observable<GameObjectAction>) => ResultIndicator,
-  fn: (indicator: ResultIndicator) => void,
-) => () => {
-  const stub = new HUDGameObjectStub(({ resources, gameObjectAction }) => {
-    const indicator = generator(resources, gameObjectAction);
-    fn(indicator);
-    return [indicator.getObject3D()];
-  });
-  stub.start();
-  return stub.domElement();
-};
+const resultIndicatorStory =
+  (
+    generator: (
+      resources: Resources,
+      gameObjectAction: Observable<GameObjectAction>
+    ) => ResultIndicator,
+    fn: (indicator: ResultIndicator) => void
+  ) =>
+  () => {
+    const stub = new HUDGameObjectStub(({ resources, gameObjectAction }) => {
+      const indicator = generator(resources, gameObjectAction);
+      fn(indicator);
+      return [indicator.getObject3D()];
+    });
+    stub.start();
+    return stub.domElement();
+  };
 
 /**
  * 表示
@@ -39,12 +45,12 @@ const resultIndicatorStory = (
  */
 const visible = (indicator: ResultIndicator) => {
   delay(1000)
-  .chain(indicator.slideIn())
-  .chain(delay(1000))
-  .chain(indicator.moveToEdge())
-  .chain(delay(1000))
-  .chain(indicator.hidden())
-  .loop();
+    .chain(indicator.slideIn())
+    .chain(delay(1000))
+    .chain(indicator.moveToEdge())
+    .chain(delay(1000))
+    .chain(indicator.hidden())
+    .loop();
 };
 
 /** win 表示 */
