@@ -22,5 +22,5 @@ export const EffectLabelTextureConfigs: TextureConfig[] = [
   {
     id: TEXTURE_IDS.BATTERY_ENCHANTMENT,
     path: "effect-label/battery-enchantment.webp",
-  }
+  },
 ];

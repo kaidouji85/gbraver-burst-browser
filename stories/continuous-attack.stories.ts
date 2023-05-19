@@ -20,23 +20,25 @@ export default {
  * @param fn 連続攻撃インジケータ操作関数
  * @return story
  */
-const continuousAttackStory = (
-  generator: (resources: Resources, gameObjectAction: Observable<GameObjectAction>) => ContinuousAttackIndicator,
-  fn: (continuousAttack: ContinuousAttackIndicator) => void,
-) => () => {
-  const stub = new TDGameObjectStub(({ resources, gameObjectAction }) => {
-    const continuousAttack = generator(
-      resources,
-      gameObjectAction
-    );
-    fn(continuousAttack);
-    return {
-      objects: [continuousAttack.getObject3D()],
-    };
-  });
-  stub.start();
-  return stub.domElement();
-};
+const continuousAttackStory =
+  (
+    generator: (
+      resources: Resources,
+      gameObjectAction: Observable<GameObjectAction>
+    ) => ContinuousAttackIndicator,
+    fn: (continuousAttack: ContinuousAttackIndicator) => void
+  ) =>
+  () => {
+    const stub = new TDGameObjectStub(({ resources, gameObjectAction }) => {
+      const continuousAttack = generator(resources, gameObjectAction);
+      fn(continuousAttack);
+      return {
+        objects: [continuousAttack.getObject3D()],
+      };
+    });
+    stub.start();
+    return stub.domElement();
+  };
 
 /**
  * ポップアップ
@@ -44,7 +46,7 @@ const continuousAttackStory = (
  */
 const popUp = (continuousAttack: ContinuousAttackIndicator) => {
   delay(1000).chain(continuousAttack.popUp()).loop();
-}
+};
 
 /** プレイヤー 連続攻撃インジケータ ポップアップ */
 export const playerPopUp = continuousAttackStory(playerContinuousAttack, popUp);

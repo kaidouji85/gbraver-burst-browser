@@ -17,20 +17,25 @@ export default {
  * @param fn 攻撃アップ操作関数
  * @return story
  */
-const powerUpStory = (
-  generator: (resources: Resources, gameObjectAction: Observable<GameObjectAction>) => PowerUp,
-  fn: (powerUp: PowerUp) => void
-) => () => {
-  const stub = new TDGameObjectStub(({ resources, gameObjectAction }) => {
-    const powerUp = generator(resources, gameObjectAction);
-    fn(powerUp);
-    return {
-      objects: [powerUp.getObject3D()],
-    };
-  });
-  stub.start();
-  return stub.domElement();
-};
+const powerUpStory =
+  (
+    generator: (
+      resources: Resources,
+      gameObjectAction: Observable<GameObjectAction>
+    ) => PowerUp,
+    fn: (powerUp: PowerUp) => void
+  ) =>
+  () => {
+    const stub = new TDGameObjectStub(({ resources, gameObjectAction }) => {
+      const powerUp = generator(resources, gameObjectAction);
+      fn(powerUp);
+      return {
+        objects: [powerUp.getObject3D()],
+      };
+    });
+    stub.start();
+    return stub.domElement();
+  };
 
 /**
  * ポップアップ

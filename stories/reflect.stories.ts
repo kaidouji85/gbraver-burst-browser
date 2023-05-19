@@ -20,23 +20,25 @@ export default {
  * @param fn ダメージ反射インジケータ操作関数
  * @return story
  */
-const reflectIndicatorStory = (
-  generator: (resources: Resources, gameObjectAction: Observable<GameObjectAction>) => ReflectIndicator,
-  fn: (reflect: ReflectIndicator) => void,
-) => () => {
-  const stub = new TDGameObjectStub(({ resources, gameObjectAction }) => {
-    const reflect = generator(
-      resources,
-      gameObjectAction
-    );
-    fn(reflect);
-    return {
-      objects: [reflect.getObject3D()],
-    };
-  });
-  stub.start();
-  return stub.domElement();
-};
+const reflectIndicatorStory =
+  (
+    generator: (
+      resources: Resources,
+      gameObjectAction: Observable<GameObjectAction>
+    ) => ReflectIndicator,
+    fn: (reflect: ReflectIndicator) => void
+  ) =>
+  () => {
+    const stub = new TDGameObjectStub(({ resources, gameObjectAction }) => {
+      const reflect = generator(resources, gameObjectAction);
+      fn(reflect);
+      return {
+        objects: [reflect.getObject3D()],
+      };
+    });
+    stub.start();
+    return stub.domElement();
+  };
 
 /**
  * ポップアップ
