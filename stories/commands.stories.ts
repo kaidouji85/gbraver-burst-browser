@@ -11,7 +11,6 @@ export const commands = (): HTMLElement => {
     const batterySelector = new BatterySelector({
       resources: resources,
       gameObjectAction: gameObjectAction,
-      maxBattery: 5,
     });
     const burstButton = shinBraverBurstButton(resources, gameObjectAction);
     const pilotButton = shinyaPilotButton(resources, gameObjectAction);

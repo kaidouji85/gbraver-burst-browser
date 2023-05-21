@@ -26,7 +26,6 @@ const batterySelectorStory =
       const selector: BatterySelector = new BatterySelector({
         resources: resources,
         gameObjectAction: gameObjectAction,
-        maxBattery: maxBattery,
       });
       selector.open(initialValue, maxBattery, enableValue, buttonLabel).play();
       selector.notifyDecision().subscribe((event) => {
