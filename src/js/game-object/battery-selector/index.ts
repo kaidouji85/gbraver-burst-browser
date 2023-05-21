@@ -77,20 +77,20 @@ export class BatterySelector {
 
   /**
    * バッテリープラス
-   * メモリ最大値の場合は空のアニメーションを返す
-   * @return アニメーション
+   * メモリ最大値の場合は何もしない
+   * @return 処理が完了したら発火するPromise
    */
-  batteryPlus(): Animate {
-    return batteryPlus(this.#props);
+  async batteryPlus(): Promise<void> {
+    await batteryPlus(this.#props);
   }
 
   /**
    * バッテリーマイナス
-   * メモリ最小値の場合は空のアニメーションを返す
-   * @return アニメーション
+   * メモリ最小値の場合は何もしない
+   * @return 処理が完了したら発火するPromise
    */
-  batteryMinus(): Animate {
-    return batteryMinus(this.#props);
+  async batteryMinus(): Promise<void> {
+    await batteryMinus(this.#props);
   }
 
   /**
