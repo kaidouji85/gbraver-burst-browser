@@ -93,7 +93,7 @@ export class BatterySelector {
       }),
       this.#view.minusButtonPushNotifier().subscribe(() => {
         this.#onBatteryMinusPush();
-      })
+      }),
     ];
   }
 
@@ -102,7 +102,7 @@ export class BatterySelector {
    */
   destructor(): void {
     this.#view.destructor();
-    this.#unsubscribers.forEach(v => {
+    this.#unsubscribers.forEach((v) => {
       v.unsubscribe();
     });
   }
