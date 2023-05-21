@@ -16,7 +16,7 @@ export function open(
   param: BatterySelectorOpenParam
 ): Animate {
   return process(() => {
-    model.disabled = true;
+    model.isPushNotifierDisabled = true;
     model.opacity = 0;
     model.battery = param.initialValue;
     model.maxBattery = param.maxBattery;
@@ -36,7 +36,7 @@ export function open(
     )
     .chain(
       process(() => {
-        model.disabled = false;
+        model.isPushNotifierDisabled = false;
       })
     );
 }

@@ -11,7 +11,7 @@ import type { BatterySelectorModel } from "../model";
  */
 export function close(model: BatterySelectorModel): Animate {
   return process(() => {
-    model.disabled = true;
+    model.isPushNotifierDisabled = true;
     model.opacity = 1;
   }).chain(
     tween(model, (t) =>
