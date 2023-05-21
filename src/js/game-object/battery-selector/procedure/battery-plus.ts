@@ -1,10 +1,10 @@
-import {Animate} from "../../../animation/animate";
-import {canBatteryPlus} from "../model/can-battery-plus";
-import {empty} from "../../../animation/delay";
-import {all} from "../../../animation/all";
-import {batteryChange} from "./battery-change";
-import {BatterySelectorProps} from "../props";
-import {batteryPlusPop as batteryPlusPopAnimate} from "../animation/battery-plus-pop";
+import { all } from "../../../animation/all";
+import { Animate } from "../../../animation/animate";
+import { empty } from "../../../animation/delay";
+import { batteryPlusPop as batteryPlusPopAnimate } from "../animation/battery-plus-pop";
+import { canBatteryPlus } from "../model/can-battery-plus";
+import { BatterySelectorProps } from "../props";
+import { batteryChange } from "./battery-change";
 
 /**
  * バッテリープラス
@@ -20,11 +20,7 @@ export function batteryPlus(props: BatterySelectorProps): Animate {
   props.batteryPlusTween.update();
   props.batteryPlusTween.removeAll();
   return all(
-    batteryPlusPopAnimate(
-      props.model,
-      props.sounds,
-      props.batteryPlusTween
-    ),
+    batteryPlusPopAnimate(props.model, props.sounds, props.batteryPlusTween),
     batteryChange(props, props.model.battery + 1)
   );
 }
