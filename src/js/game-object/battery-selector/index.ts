@@ -87,9 +87,6 @@ export class BatterySelector {
     this.#view = new BatterySelectorView({
       resources: param.resources,
       gameObjectAction: param.gameObjectAction,
-      onPlusPush: () => {
-        this.#onBatteryPlusPush();
-      },
       onMinusPush: () => {
         this.#onBatteryMinusPush();
       },
@@ -104,6 +101,9 @@ export class BatterySelector {
       }),
       this.#view.okButtonPushNotifier().subscribe((event) => {
         this.#onOKPush(event);
+      }),
+      this.#view.plusButtonPushNotifier().subscribe(() => {
+        this.#onBatteryPlusPush();
       })
     ];
   }

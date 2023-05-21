@@ -18,7 +18,6 @@ const BATTERY_VALUE_MAX_ANIMATION = 16;
 type Param = {
   /** リソース管理オブジェクト */
   resources: Resources;
-
   /** ゲームオブジェクトアクション */
   gameObjectAction: Observable<GameObjectAction>;
 };
@@ -126,7 +125,7 @@ export class BatteryButton {
 
   /**
    * シーンに追加するオブジェクトを取得する
-   * @return 取得結果
+   * @return シーンに追加するオブジェクト
    */
   getObject3D(): THREE.Object3D {
     return this.#group;

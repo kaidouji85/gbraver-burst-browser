@@ -14,12 +14,8 @@ import { canBatteryPlus } from "../model/can-battery-plus";
 type Param = {
   /** リソース管理オブジェクト */
   resources: Resources;
-
   /** ゲームオブジェクトアクション */
   gameObjectAction: Observable<GameObjectAction>;
-
-  /** ボタンが押された時に呼ばれるコールバック関数 */
-  onPush: () => void;
 };
 
 /** バッテリープラスボタン */
@@ -28,11 +24,9 @@ export class BatteryPlus {
   #activeButton: SimpleImageMesh;
   #buttonDisabled: SimpleImageMesh;
   #pushDetector: PushDetector;
-  #unsubscribers: Unsubscribable[];
 
   /**
    * コンストラクタ
-   *
    * @param param パラメータ
    */
   constructor(param: Param) {
@@ -65,9 +59,6 @@ export class BatteryPlus {
     this.#group.add(this.#activeButton.getObject3D());
     this.#group.add(this.#buttonDisabled.getObject3D());
     this.#group.add(this.#pushDetector.getObject3D());
-    this.#unsubscribers = [
-      this.#pushDetector.notifyPressed().subscribe(param.onPush),
-    ];
   }
 
   /** デストラクタ */
@@ -75,12 +66,12 @@ export class BatteryPlus {
     this.#activeButton.destructor();
     this.#buttonDisabled.destructor();
     this.#pushDetector.destructor();
-    this.#unsubscribers.forEach((unsubscriber) => {
-      unsubscriber.unsubscribe();
-    });
   }
 
-  /** モデルをビューに反映させる */
+  /**
+   * モデルをビューに反映させる
+   * @param model モデル
+   */
   update(model: BatterySelectorModel): void {
     this.#activeButton.setOpacity(model.opacity);
     this.#activeButton
@@ -102,8 +93,19 @@ export class BatteryPlus {
       );
   }
 
-  /** シーンに追加するオブジェクトを取得する */
+  /**
+   * シーンに追加するオブジェクトを取得する
+   * @return シーンに追加するオブジェクト
+   */
   getObject3D(): THREE.Object3D {
     return this.#group;
+  }
+
+  /**
+   * ボタン押下通知
+   * @return 通知ストリーム
+   */
+  pushNotifier(): Observable<unknown> {
+    return this.#pushDetector.notifyPressed();
   }
 }
