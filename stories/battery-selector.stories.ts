@@ -10,16 +10,16 @@ export default {
  * バッテリーセレクタのストーリー
  * @param initialValue 初期選択バッテリー
  * @param maxBattery 最大バッテリー
- * @param enableValue 選択可能な最大値
- * @param buttonLabel ボタンラベル
+ * @param enableMaxBattery 選択可能な最大値
+ * @param label ボタンラベル
  * @return story
  */
 const batterySelectorStory =
   (
     initialValue: number,
     maxBattery: number,
-    enableValue: number,
-    buttonLabel: ButtonLabel
+    enableMaxBattery: number,
+    label: ButtonLabel
   ) =>
   () => {
     const stub = new HUDGameObjectStub(({ resources, gameObjectAction }) => {
@@ -27,7 +27,12 @@ const batterySelectorStory =
         resources: resources,
         gameObjectAction: gameObjectAction,
       });
-      selector.open(initialValue, maxBattery, enableValue, buttonLabel).play();
+      selector.open({
+        initialValue,
+        maxBattery,
+        enableMaxBattery,
+        label
+      }).play();
       selector.notifyDecision().subscribe((event) => {
         event.preventDefault();
         event.stopPropagation();

@@ -18,6 +18,7 @@ import { batteryMinusPop } from "./procedure/battery-minus-pop";
 import { batteryPlusPop } from "./procedure/battery-plus-pop";
 import { bindEventListeners } from "./procedure/bind-event-listeners";
 import { BatterySelectorProps, createBatterySelectorProps } from "./props";
+import {BatterySelectorOpenParam} from "./battery-selector-open-param";
 
 /** コンストラクタのパラメータ */
 type Param = {
@@ -58,29 +59,21 @@ export class BatterySelector {
 
   /**
    * バッテリーセレクターを開く
-   * @param initialValue 初期値
-   * @param maxBattery バッテリー最大値
-   * @param enableMaxBattery 選択可能な最大値
-   * @param label ボタンのラベル
+   * @param param パラメータ
    * @return アニメーション
    */
-  open(
-    initialValue: number,
-    maxBattery: number,
-    enableMaxBattery: number,
-    label: ButtonLabel
-  ): Animate {
-    this.#props.model.battery = initialValue;
-    this.#props.model.maxBattery = maxBattery;
+  open(param: BatterySelectorOpenParam): Animate {
+    this.#props.model.battery = param.initialValue;
+    this.#props.model.maxBattery = param.maxBattery;
     this.#props.model.needle = getNeedleValue(
-      initialValue,
+      param.initialValue,
       this.#props.model.maxBattery
     );
     this.#props.model.enableMaxBattery = Math.min(
-      enableMaxBattery,
+      param.enableMaxBattery,
       this.#props.model.maxBattery
     );
-    this.#props.model.label = label;
+    this.#props.model.label = param.label;
     return open(this.#props.model);
   }
 
