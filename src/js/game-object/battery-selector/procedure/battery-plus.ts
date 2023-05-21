@@ -1,6 +1,4 @@
 import { all } from "../../../animation/all";
-import { Animate } from "../../../animation/animate";
-import { empty } from "../../../animation/delay";
 import { batteryPlusPop as batteryPlusPopAnimate } from "../animation/battery-plus-pop";
 import { canBatteryPlus } from "../model/can-battery-plus";
 import { BatterySelectorProps } from "../props";
@@ -12,15 +10,15 @@ import { batteryChange } from "./battery-change";
  * @param props ゲームオブジェクトプロパティ
  * @return アニメーション
  */
-export function batteryPlus(props: BatterySelectorProps): Animate {
+export async function batteryPlus(props: BatterySelectorProps): Promise<void> {
   if (!canBatteryPlus(props.model)) {
-    return empty();
+    return;
   }
 
   props.batteryPlusTween.update();
   props.batteryPlusTween.removeAll();
-  return all(
+  await all(
     batteryPlusPopAnimate(props.model, props.sounds, props.batteryPlusTween),
     batteryChange(props, props.model.battery + 1)
-  );
+  ).play();
 }

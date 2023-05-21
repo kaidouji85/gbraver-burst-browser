@@ -33,10 +33,10 @@ const batterySelectorStory = (maxBattery: number, label: ButtonLabel) => () => {
       console.log(selector.getBattery());
     });
     selector.notifyBatteryPlus().subscribe(() => {
-      selector.batteryPlus().play();
+      selector.batteryPlus();
     });
     selector.notifyBatteryMinus().subscribe(() => {
-      selector.batteryMinus().play();
+      selector.batteryMinus();
     });
     return [selector.getObject3D()];
   });

@@ -13,11 +13,11 @@ export async function attackDescription(
   props: Readonly<LastState>
 ): Promise<void> {
   await focusInBatterySelector(props, attackBatteryCaption);
-  await props.view.hud.gameObjects.batterySelector.batteryPlus().play();
+  await props.view.hud.gameObjects.batterySelector.batteryPlus();
   await waitTime(200);
-  await props.view.hud.gameObjects.batterySelector.batteryPlus().play();
+  await props.view.hud.gameObjects.batterySelector.batteryPlus();
   await waitTime(200);
-  await props.view.hud.gameObjects.batterySelector.batteryPlus().play();
+  await props.view.hud.gameObjects.batterySelector.batteryPlus();
   await waitTime(200);
-  await props.view.hud.gameObjects.batterySelector.batteryMinus().play();
+  await props.view.hud.gameObjects.batterySelector.batteryMinus();
 }
