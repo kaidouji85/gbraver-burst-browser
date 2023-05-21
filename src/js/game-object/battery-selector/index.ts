@@ -11,12 +11,11 @@ import { decide } from "./animation/decide";
 import { open } from "./animation/open";
 import { BatterySelectorOpenParam } from "./battery-selector-open-param";
 import { canBatteryMinus } from "./model/can-battery-minus";
-import { canBatteryPlus } from "./model/can-battery-plus";
 import { batteryChange } from "./procedure/battery-change";
 import { batteryMinusPop } from "./procedure/battery-minus-pop";
-import { batteryPlusPop } from "./procedure/battery-plus-pop";
 import { bindEventListeners } from "./procedure/bind-event-listeners";
 import { BatterySelectorProps, createBatterySelectorProps } from "./props";
+import {batteryPlus} from "./procedure/battery-plus";
 
 /** コンストラクタのパラメータ */
 type Param = {
@@ -86,14 +85,7 @@ export class BatterySelector {
    * @return アニメーション
    */
   batteryPlus(): Animate {
-    if (!canBatteryPlus(this.#props.model)) {
-      return empty();
-    }
-
-    return all(
-      batteryPlusPop(this.#props),
-      batteryChange(this.#props, this.#props.model.battery + 1)
-    );
+    return batteryPlus(this.#props);
   }
 
   /**
