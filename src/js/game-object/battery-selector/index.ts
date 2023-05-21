@@ -68,7 +68,7 @@ export class BatterySelector {
   #batteryMinusPush: Subject<void>;
 
   /** アンサブスクライバ */
-  #unsubscriber: Unsubscribable;
+  #unsubscribers: Unsubscribable[];
 
   /**
    * コンストラクタ
@@ -84,19 +84,9 @@ export class BatterySelector {
     this.#batteryMinusPush = new Subject();
     this.#batteryPlusPush = new Subject();
     this.#sounds = createBatterySelectorSounds(param.resources);
-    this.#unsubscriber = param.gameObjectAction.subscribe((action) => {
-      if (action.type === "Update") {
-        this.#update(action);
-      } else if (action.type === "PreRender") {
-        this.#preRender(action);
-      }
-    });
     this.#view = new BatterySelectorView({
       resources: param.resources,
       gameObjectAction: param.gameObjectAction,
-      onOkPush: (event) => {
-        this.#onOKPush(event);
-      },
       onPlusPush: () => {
         this.#onBatteryPlusPush();
       },
@@ -104,6 +94,18 @@ export class BatterySelector {
         this.#onBatteryMinusPush();
       },
     });
+    this.#unsubscribers = [
+      param.gameObjectAction.subscribe((action) => {
+        if (action.type === "Update") {
+          this.#update(action);
+        } else if (action.type === "PreRender") {
+          this.#preRender(action);
+        }
+      }),
+      this.#view.okButtonPushNotifier().subscribe((event) => {
+        this.#onOKPush(event);
+      })
+    ];
   }
 
   /**
@@ -111,7 +113,9 @@ export class BatterySelector {
    */
   destructor(): void {
     this.#view.destructor();
-    this.#unsubscriber.unsubscribe();
+    this.#unsubscribers.forEach(v => {
+      v.unsubscribe();
+    });
   }
 
   /**

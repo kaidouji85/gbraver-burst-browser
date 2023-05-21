@@ -19,12 +19,6 @@ type Param = {
   /** ゲームオブジェクトアクション */
   gameObjectAction: Observable<GameObjectAction>;
 
-  /**
-   * OKボタンが押された時に呼ばれるコールバック関数
-   * @param event イベント
-   */
-  onOkPush: (event: Event) => void;
-
   /** +ボタンが押された時に呼ばれるコールバック関数 */
   onPlusPush: () => void;
 
@@ -49,7 +43,6 @@ export class BatterySelectorView {
       resources: param.resources,
       gameObjectAction: param.gameObjectAction,
     });
-    this.#button.pushNotifier().subscribe(param.onOkPush);  // TODO 開発が終わったら削除する
     this.#button.getObject3D().position.set(0, 0, 1);
     this.#group.add(this.#button.getObject3D());
     this.#plus = new BatteryPlus({
@@ -115,5 +108,13 @@ export class BatterySelectorView {
       paddingBottom * devicePerScale +
       Math.max(marginBottom, preRender.safeAreaInset.bottom);
     this.#group.quaternion.copy(preRender.camera.quaternion);
+  }
+
+  /**
+   * OKボタン押下通知
+   * @return 通知ストリーム
+   */
+  okButtonPushNotifier(): Observable<Event> {
+    return this.#button.pushNotifier();
   }
 }
