@@ -1,11 +1,15 @@
-import {BatterySelectorModel} from "./model";
-import {BatterySelectorView} from "./view";
-import {BatterySelectorSounds, createBatterySelectorSounds} from "./sounds/battery-selector-sounds";
-import TWEEN, {Group} from "@tweenjs/tween.js";
-import {Observable, Subject} from "rxjs";
-import {Resources} from "../../resource";
-import {GameObjectAction} from "../action/game-object-action";
-import {initialValue} from "./model/initial-value";
+import TWEEN, { Group } from "@tweenjs/tween.js";
+import { Observable, Subject } from "rxjs";
+
+import { Resources } from "../../resource";
+import { GameObjectAction } from "../action/game-object-action";
+import { BatterySelectorModel } from "./model";
+import { initialValue } from "./model/initial-value";
+import {
+  BatterySelectorSounds,
+  createBatterySelectorSounds,
+} from "./sounds/battery-selector-sounds";
+import { BatterySelectorView } from "./view";
 
 /** バッテリーセレクタプロパティ */
 export type BatterySelectorProps = {
@@ -35,14 +39,16 @@ export type GenerateBatterySelectorPropsParam = {
   resources: Resources;
   /** ゲームオブジェクトアクション */
   gameObjectAction: Observable<GameObjectAction>;
-}
+};
 
 /**
  * バッテリーセレクタプロパティを生成する
  * @param param パラメータ
  * @return バッテリーセレクタプロパティ
  */
-export function createBatterySelectorProps(param: GenerateBatterySelectorPropsParam): BatterySelectorProps {
+export function createBatterySelectorProps(
+  param: GenerateBatterySelectorPropsParam
+): BatterySelectorProps {
   return {
     model: initialValue(),
     batteryChangeTween: new TWEEN.Group(),
@@ -55,6 +61,6 @@ export function createBatterySelectorProps(param: GenerateBatterySelectorPropsPa
     view: new BatterySelectorView({
       resources: param.resources,
       gameObjectAction: param.gameObjectAction,
-    })
+    }),
   };
 }
