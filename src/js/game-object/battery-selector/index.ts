@@ -32,8 +32,6 @@ type Param = {
   resources: Resources;
   /** ゲームオブジェクトアクション */
   gameObjectAction: Observable<GameObjectAction>;
-  /** 最大バッテリー */
-  maxBattery: number;
 };
 
 /** バッテリーセレクタ */
@@ -61,7 +59,6 @@ export class BatterySelector {
 
   /**
    * コンストラクタ
-   *
    * @param param パラメータ
    */
   constructor(param: Param) {
