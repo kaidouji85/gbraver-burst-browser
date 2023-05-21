@@ -13,11 +13,11 @@ import type { ButtonLabel } from "./model/button-label";
 import { canBatteryMinus } from "./model/can-battery-minus";
 import { canBatteryPlus } from "./model/can-battery-plus";
 import { getNeedleValue } from "./model/needle-value";
-import {BatterySelectorProps, createBatterySelectorProps} from "./props";
-import {bindEventListeners} from "./procedure/bind-event-listeners";
-import {batteryPlusPop} from "./procedure/battery-plus-pop";
-import {batteryChange} from "./procedure/battery-change";
-import {batteryMinusPop} from "./procedure/battery-minus-pop";
+import { batteryChange } from "./procedure/battery-change";
+import { batteryMinusPop } from "./procedure/battery-minus-pop";
+import { batteryPlusPop } from "./procedure/battery-plus-pop";
+import { bindEventListeners } from "./procedure/bind-event-listeners";
+import { BatterySelectorProps, createBatterySelectorProps } from "./props";
 
 /** コンストラクタのパラメータ */
 type Param = {
@@ -40,7 +40,10 @@ export class BatterySelector {
    */
   constructor(param: Param) {
     this.#props = createBatterySelectorProps(param);
-    this.#unsubscribers = bindEventListeners(this.#props, param.gameObjectAction);
+    this.#unsubscribers = bindEventListeners(
+      this.#props,
+      param.gameObjectAction
+    );
   }
 
   /**
@@ -69,7 +72,10 @@ export class BatterySelector {
   ): Animate {
     this.#props.model.battery = initialValue;
     this.#props.model.maxBattery = maxBattery;
-    this.#props.model.needle = getNeedleValue(initialValue, this.#props.model.maxBattery);
+    this.#props.model.needle = getNeedleValue(
+      initialValue,
+      this.#props.model.maxBattery
+    );
     this.#props.model.enableMaxBattery = Math.min(
       enableMaxBattery,
       this.#props.model.maxBattery

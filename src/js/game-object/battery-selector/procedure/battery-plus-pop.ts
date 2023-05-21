@@ -1,6 +1,6 @@
-import {Animate} from "../../../animation/animate";
-import {batteryPlusPop as batteryPlusPopAnimate} from "../animation/battery-plus-pop";
-import {BatterySelectorProps} from "../props";
+import { Animate } from "../../../animation/animate";
+import { batteryPlusPop as batteryPlusPopAnimate } from "../animation/battery-plus-pop";
+import { BatterySelectorProps } from "../props";
 
 /**
  * バッテリープラスボタン ポップ
@@ -10,5 +10,9 @@ import {BatterySelectorProps} from "../props";
 export function batteryPlusPop(props: BatterySelectorProps): Animate {
   props.batteryPlusTween.update();
   props.batteryPlusTween.removeAll();
-  return batteryPlusPopAnimate(props.model, props.sounds, props.batteryPlusTween);
+  return batteryPlusPopAnimate(
+    props.model,
+    props.sounds,
+    props.batteryPlusTween
+  );
 }

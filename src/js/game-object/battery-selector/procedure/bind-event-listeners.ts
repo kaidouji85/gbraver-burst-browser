@@ -1,11 +1,12 @@
-import {BatterySelectorProps} from "../props";
-import {Observable, Unsubscribable} from "rxjs";
-import {GameObjectAction} from "../../action/game-object-action";
-import {onUpdate} from "./on-update";
-import {onPreRender} from "./on-pre-render";
-import {onOKPush} from "./on-ok-push";
-import {onBatteryMinusPush} from "./on-battery-minus-push";
-import {onBatteryPlusPush} from "./on-battery-plus-push";
+import { Observable, Unsubscribable } from "rxjs";
+
+import { GameObjectAction } from "../../action/game-object-action";
+import { BatterySelectorProps } from "../props";
+import { onBatteryMinusPush } from "./on-battery-minus-push";
+import { onBatteryPlusPush } from "./on-battery-plus-push";
+import { onOKPush } from "./on-ok-push";
+import { onPreRender } from "./on-pre-render";
+import { onUpdate } from "./on-update";
 
 /**
  * イベントリスナーをバインドする
@@ -13,7 +14,10 @@ import {onBatteryPlusPush} from "./on-battery-plus-push";
  * @param gameObjectAction ゲームオブジェクトアクション
  * @return アンサブスクライバ
  */
-export function bindEventListeners(props: BatterySelectorProps, gameObjectAction: Observable<GameObjectAction>): Unsubscribable[] {
+export function bindEventListeners(
+  props: BatterySelectorProps,
+  gameObjectAction: Observable<GameObjectAction>
+): Unsubscribable[] {
   return [
     gameObjectAction.subscribe((action) => {
       if (action.type === "Update") {
