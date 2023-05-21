@@ -12,7 +12,6 @@ import { open } from "./animation/open";
 import { BatterySelectorOpenParam } from "./battery-selector-open-param";
 import { canBatteryMinus } from "./model/can-battery-minus";
 import { canBatteryPlus } from "./model/can-battery-plus";
-import { getNeedleValue } from "./model/needle-value";
 import { batteryChange } from "./procedure/battery-change";
 import { batteryMinusPop } from "./procedure/battery-minus-pop";
 import { batteryPlusPop } from "./procedure/battery-plus-pop";
@@ -62,18 +61,7 @@ export class BatterySelector {
    * @return アニメーション
    */
   open(param: BatterySelectorOpenParam): Animate {
-    this.#props.model.battery = param.initialValue;
-    this.#props.model.maxBattery = param.maxBattery;
-    this.#props.model.needle = getNeedleValue(
-      param.initialValue,
-      this.#props.model.maxBattery
-    );
-    this.#props.model.enableMaxBattery = Math.min(
-      param.enableMaxBattery,
-      this.#props.model.maxBattery
-    );
-    this.#props.model.label = param.label;
-    return open(this.#props.model);
+    return open(this.#props.model, param);
   }
 
   /**
