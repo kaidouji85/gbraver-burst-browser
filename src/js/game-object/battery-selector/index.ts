@@ -30,10 +30,8 @@ import { BatterySelectorView } from "./view";
 type Param = {
   /** リソース管理オブジェクト */
   resources: Resources;
-
   /** ゲームオブジェクトアクション */
   gameObjectAction: Observable<GameObjectAction>;
-
   /** 最大バッテリー */
   maxBattery: number;
 };
@@ -42,33 +40,24 @@ type Param = {
 export class BatterySelector {
   /** モデル */
   #model: BatterySelectorModel;
-
   /** ビュー */
   #view: BatterySelectorView;
-
   /** 効果音 */
   #sounds: BatterySelectorSounds;
-
   /** バッテリー変更TweenGroup */
   #batteryChangeTween: Group;
-
   /** -ボタンTweenGroup */
   #batteryMinusTween: Group;
-
   /** +ボタンTweenGroup */
   #batteryPlusTween: Group;
-
   /** 決定ボタン押下通知ストリーム */
   #decidePush: Subject<Event>;
-
   /** バッテリープラスボタン押下通知ストリーム */
   #batteryPlusPush: Subject<void>;
-
   /** バッテリーマイナスボタン押下通知ストリーム */
   #batteryMinusPush: Subject<void>;
-
   /** アンサブスクライバ */
-  #unsubscriber: Unsubscribable;
+  #unsubscribers: Unsubscribable[];
 
   /**
    * コンストラクタ
@@ -84,26 +73,28 @@ export class BatterySelector {
     this.#batteryMinusPush = new Subject();
     this.#batteryPlusPush = new Subject();
     this.#sounds = createBatterySelectorSounds(param.resources);
-    this.#unsubscriber = param.gameObjectAction.subscribe((action) => {
-      if (action.type === "Update") {
-        this.#update(action);
-      } else if (action.type === "PreRender") {
-        this.#preRender(action);
-      }
-    });
     this.#view = new BatterySelectorView({
       resources: param.resources,
       gameObjectAction: param.gameObjectAction,
-      onOkPush: (event) => {
-        this.#onOKPush(event);
-      },
-      onPlusPush: () => {
-        this.#onBatteryPlusPush();
-      },
-      onMinusPush: () => {
-        this.#onBatteryMinusPush();
-      },
     });
+    this.#unsubscribers = [
+      param.gameObjectAction.subscribe((action) => {
+        if (action.type === "Update") {
+          this.#update(action);
+        } else if (action.type === "PreRender") {
+          this.#preRender(action);
+        }
+      }),
+      this.#view.okButtonPushNotifier().subscribe((event) => {
+        this.#onOKPush(event);
+      }),
+      this.#view.plusButtonPushNotifier().subscribe(() => {
+        this.#onBatteryPlusPush();
+      }),
+      this.#view.minusButtonPushNotifier().subscribe(() => {
+        this.#onBatteryMinusPush();
+      }),
+    ];
   }
 
   /**
@@ -111,7 +102,9 @@ export class BatterySelector {
    */
   destructor(): void {
     this.#view.destructor();
-    this.#unsubscriber.unsubscribe();
+    this.#unsubscribers.forEach((v) => {
+      v.unsubscribe();
+    });
   }
 
   /**
