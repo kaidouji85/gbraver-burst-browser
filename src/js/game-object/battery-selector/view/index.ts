@@ -48,10 +48,8 @@ export class BatterySelectorView {
     this.#button = new BatteryButton({
       resources: param.resources,
       gameObjectAction: param.gameObjectAction,
-      onPush: (event) => {
-        param.onOkPush(event);
-      },
     });
+    this.#button.pushNotifier().subscribe(param.onOkPush);  // TODO 開発が終わったら削除する
     this.#button.getObject3D().position.set(0, 0, 1);
     this.#group.add(this.#button.getObject3D());
     this.#plus = new BatteryPlus({
