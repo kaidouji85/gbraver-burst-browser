@@ -1,4 +1,4 @@
-import { Observable, Unsubscribable } from "rxjs";
+import { Observable } from "rxjs";
 import * as THREE from "three";
 
 import { SimpleImageMesh } from "../../../mesh/simple-image-mesh";

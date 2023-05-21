@@ -30,10 +30,8 @@ import { BatterySelectorView } from "./view";
 type Param = {
   /** リソース管理オブジェクト */
   resources: Resources;
-
   /** ゲームオブジェクトアクション */
   gameObjectAction: Observable<GameObjectAction>;
-
   /** 最大バッテリー */
   maxBattery: number;
 };
@@ -42,31 +40,22 @@ type Param = {
 export class BatterySelector {
   /** モデル */
   #model: BatterySelectorModel;
-
   /** ビュー */
   #view: BatterySelectorView;
-
   /** 効果音 */
   #sounds: BatterySelectorSounds;
-
   /** バッテリー変更TweenGroup */
   #batteryChangeTween: Group;
-
   /** -ボタンTweenGroup */
   #batteryMinusTween: Group;
-
   /** +ボタンTweenGroup */
   #batteryPlusTween: Group;
-
   /** 決定ボタン押下通知ストリーム */
   #decidePush: Subject<Event>;
-
   /** バッテリープラスボタン押下通知ストリーム */
   #batteryPlusPush: Subject<void>;
-
   /** バッテリーマイナスボタン押下通知ストリーム */
   #batteryMinusPush: Subject<void>;
-
   /** アンサブスクライバ */
   #unsubscribers: Unsubscribable[];
 
@@ -87,9 +76,6 @@ export class BatterySelector {
     this.#view = new BatterySelectorView({
       resources: param.resources,
       gameObjectAction: param.gameObjectAction,
-      onMinusPush: () => {
-        this.#onBatteryMinusPush();
-      },
     });
     this.#unsubscribers = [
       param.gameObjectAction.subscribe((action) => {
@@ -104,6 +90,9 @@ export class BatterySelector {
       }),
       this.#view.plusButtonPushNotifier().subscribe(() => {
         this.#onBatteryPlusPush();
+      }),
+      this.#view.minusButtonPushNotifier().subscribe(() => {
+        this.#onBatteryMinusPush();
       })
     ];
   }

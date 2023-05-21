@@ -17,8 +17,6 @@ type Param = {
   resources: Resources;
   /** ゲームオブジェクトアクション */
   gameObjectAction: Observable<GameObjectAction>;
-  /** -ボタンが押された時に呼ばれるコールバック関数 */
-  onMinusPush: () => void;
 };
 
 /** バッテリーセレクタのビュー */
@@ -29,6 +27,10 @@ export class BatterySelectorView {
   #minus: BatteryMinus;
   #group: THREE.Group;
 
+  /**
+   * コンストラクタ
+   * @param param パラメータ
+   */
   constructor(param: Param) {
     this.#group = new THREE.Group();
     this.#meter = new BatteryMeter(param.resources);
@@ -49,9 +51,6 @@ export class BatterySelectorView {
     this.#minus = new BatteryMinus({
       resources: param.resources,
       gameObjectAction: param.gameObjectAction,
-      onPush: () => {
-        param.onMinusPush();
-      },
     });
     this.#minus.getObject3D().position.set(-256, 176, 2);
     this.#group.add(this.#minus.getObject3D());
@@ -117,5 +116,13 @@ export class BatterySelectorView {
    */
   plusButtonPushNotifier(): Observable<unknown> {
     return this.#plus.pushNotifier();
+  }
+
+  /**
+   * -ボタン押下通知
+   * @return 通知ストリーム
+   */
+  minusButtonPushNotifier(): Observable<unknown> {
+    return this.#minus.pushNotifier();
   }
 }
