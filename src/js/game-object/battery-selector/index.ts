@@ -1,20 +1,15 @@
 import { Observable, Unsubscribable } from "rxjs";
 import * as THREE from "three";
 
-import { all } from "../../animation/all";
 import { Animate } from "../../animation/animate";
-import { empty } from "../../animation/delay";
 import type { Resources } from "../../resource";
 import type { GameObjectAction } from "../action/game-object-action";
 import { close } from "./animation/close";
 import { decide } from "./animation/decide";
 import { open } from "./animation/open";
 import { BatterySelectorOpenParam } from "./battery-selector-open-param";
-import { canBatteryMinus } from "./model/can-battery-minus";
-import { canBatteryPlus } from "./model/can-battery-plus";
-import { batteryChange } from "./procedure/battery-change";
-import { batteryMinusPop } from "./procedure/battery-minus-pop";
-import { batteryPlusPop } from "./procedure/battery-plus-pop";
+import { batteryMinus } from "./procedure/battery-minus";
+import { batteryPlus } from "./procedure/battery-plus";
 import { bindEventListeners } from "./procedure/bind-event-listeners";
 import { BatterySelectorProps, createBatterySelectorProps } from "./props";
 
@@ -86,14 +81,7 @@ export class BatterySelector {
    * @return アニメーション
    */
   batteryPlus(): Animate {
-    if (!canBatteryPlus(this.#props.model)) {
-      return empty();
-    }
-
-    return all(
-      batteryPlusPop(this.#props),
-      batteryChange(this.#props, this.#props.model.battery + 1)
-    );
+    return batteryPlus(this.#props);
   }
 
   /**
@@ -102,14 +90,7 @@ export class BatterySelector {
    * @return アニメーション
    */
   batteryMinus(): Animate {
-    if (!canBatteryMinus(this.#props.model)) {
-      return empty();
-    }
-
-    return all(
-      batteryMinusPop(this.#props),
-      batteryChange(this.#props, this.#props.model.battery - 1)
-    );
+    return batteryMinus(this.#props);
   }
 
   /**
