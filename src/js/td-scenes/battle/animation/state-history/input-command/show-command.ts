@@ -28,17 +28,17 @@ type AnimationParam = {
  */
 function showButtons(param: Readonly<AnimationParam>): Animate {
   const enableMaxBattery = getEnableMaxBattery(param.commands);
-  const initialBattery = getInitialBattery(enableMaxBattery);
-  const okButtonLabel = param.isPlayerTurn ? "Attack" : "Defense";
+  const initialValue = getInitialBattery(enableMaxBattery);
+  const label = param.isPlayerTurn ? "Attack" : "Defense";
   const canBurst = canBurstButtonPush(param.commands);
   const canPilotSkill = canPilotButtonPush(param.commands);
   return all(
-    param.view.hud.gameObjects.batterySelector.open(
-      initialBattery,
-      param.maxBattery,
+    param.view.hud.gameObjects.batterySelector.open({
+      initialValue,
+      maxBattery: param.maxBattery,
       enableMaxBattery,
-      okButtonLabel
-    ),
+      label,
+    }),
     param.view.hud.gameObjects.burstButton.open(canBurst),
     param.view.hud.gameObjects.pilotButton.open(canPilotSkill)
   );
