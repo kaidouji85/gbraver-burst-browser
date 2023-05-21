@@ -6,9 +6,9 @@ import { batteryChange } from "./battery-change";
 
 /**
  * バッテリーマイナス
- * メモリ最小値の場合は空のアニメーションを返す
+ * メモリ最小値の場合は何もしない
  * @param props ゲームオブジェクトプロパティ
- * @return アニメーション
+ * @return 処理が完了したら発火するPromise
  */
 export async function batteryMinus(props: BatterySelectorProps): Promise<void> {
   if (!canBatteryMinus(props.model)) {

@@ -78,7 +78,7 @@ export class BatterySelector {
   /**
    * バッテリープラス
    * メモリ最大値の場合は何もしない
-   * @return アニメーション
+   * @return 処理が完了したら発火するPromise
    */
   async batteryPlus(): Promise<void> {
     await batteryPlus(this.#props);
@@ -87,7 +87,7 @@ export class BatterySelector {
   /**
    * バッテリーマイナス
    * メモリ最小値の場合は何もしない
-   * @return アニメーション
+   * @return 処理が完了したら発火するPromise
    */
   async batteryMinus(): Promise<void> {
     await batteryMinus(this.#props);
