@@ -27,12 +27,14 @@ const batterySelectorStory =
         resources: resources,
         gameObjectAction: gameObjectAction,
       });
-      selector.open({
-        initialValue,
-        maxBattery,
-        enableMaxBattery,
-        label
-      }).play();
+      selector
+        .open({
+          initialValue,
+          maxBattery,
+          enableMaxBattery,
+          label,
+        })
+        .play();
       selector.notifyDecision().subscribe((event) => {
         event.preventDefault();
         event.stopPropagation();

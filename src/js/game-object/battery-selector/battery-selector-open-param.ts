@@ -1,4 +1,4 @@
-import {ButtonLabel} from "./model/button-label";
+import { ButtonLabel } from "./model/button-label";
 
 /** バッテリーセレクタオープンパラメータ */
 export type BatterySelectorOpenParam = {

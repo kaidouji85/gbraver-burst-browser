@@ -21,7 +21,7 @@ export const commands = (): HTMLElement => {
         initialValue: 1,
         maxBattery: 5,
         enableMaxBattery: 5,
-        label: "Attack"
+        label: "Attack",
       }),
       burstButton.open(true),
       pilotButton.open(true)

@@ -9,7 +9,7 @@ import type { GameObjectAction } from "../action/game-object-action";
 import { close } from "./animation/close";
 import { decide } from "./animation/decide";
 import { open } from "./animation/open";
-import type { ButtonLabel } from "./model/button-label";
+import { BatterySelectorOpenParam } from "./battery-selector-open-param";
 import { canBatteryMinus } from "./model/can-battery-minus";
 import { canBatteryPlus } from "./model/can-battery-plus";
 import { getNeedleValue } from "./model/needle-value";
@@ -18,7 +18,6 @@ import { batteryMinusPop } from "./procedure/battery-minus-pop";
 import { batteryPlusPop } from "./procedure/battery-plus-pop";
 import { bindEventListeners } from "./procedure/bind-event-listeners";
 import { BatterySelectorProps, createBatterySelectorProps } from "./props";
-import {BatterySelectorOpenParam} from "./battery-selector-open-param";
 
 /** コンストラクタのパラメータ */
 type Param = {
