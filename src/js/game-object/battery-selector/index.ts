@@ -110,6 +110,14 @@ export class BatterySelector {
   }
 
   /**
+   * 操作不可能であるか否かを判定する、trueで操作不可能である
+   * @return 判定結果
+   */
+  isDisabled(): boolean {
+    return this.#props.model.disabled;
+  }
+
+  /**
    * シーンに追加するthree.jsオブジェクトを取得する
    * @return 取得結果
    */
