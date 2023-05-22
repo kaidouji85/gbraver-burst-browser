@@ -17,7 +17,7 @@ export default {
 };
 
 /**
- * バーストボタンジェネレータ
+ * バーストボタン生成関数
  * @param resources リソース管理オブジェクト
  * @param gameObjectAction ゲームオブジェクトアクション
  * @return バーストボタン
@@ -29,43 +29,59 @@ type BurstButtonGenerator = (
 
 /**
  * バーストボタンストーリー
- * @param generator バーストボタンジェネレータ
+ * @param generator バーストボタン生成関数
+ * @param burstButton バーストボタン操作関数
  */
-const buttonStory = (generator: BurstButtonGenerator): HTMLElement => {
+const buttonStory = (
+  generator: BurstButtonGenerator,
+  fn: (burstButton: BurstButton) => void,
+) => () => {
   const stub = new HUDGameObjectStub(({ resources, gameObjectAction }) => {
     const burstButton = generator(resources, gameObjectAction);
-    burstButton.notifyPressed().subscribe(() => {
-      burstButton.decide().play();
-    });
-    burstButton.open(true).play();
+    fn(burstButton);
     return [burstButton.getObject3D()];
   });
   stub.start();
   return stub.domElement();
+};
+
+/**
+ * 操作可能
+ * @param burstButton バーストボタン 
+ */
+const operatable = (burstButton: BurstButton) => {
+  burstButton.notifyPressed().subscribe(() => {
+    burstButton.decide().play();
+  });
+  burstButton.open(true).play();
 };
 
 /** シンブレイバー */
-export const shinBraver = () => buttonStory(shinBraverBurstButton);
+export const shinBraver = buttonStory(shinBraverBurstButton, operatable);
 
 /** ネオランドーザ */
-export const neoLandozer = () => buttonStory(neoLandozerBurstButton);
+export const neoLandozer = buttonStory(neoLandozerBurstButton, operatable);
 
 /** ライトニングドーザ */
-export const lightningDozer = () => buttonStory(lightningDozerBurstButton);
+export const lightningDozer = buttonStory(lightningDozerBurstButton, operatable);
 
 /** ウィングドーザ */
-export const wingDozer = () => buttonStory(wingDozerBurstButton);
+export const wingDozer = buttonStory(wingDozerBurstButton, operatable);
 
 /** ジェネシスブレイバー */
-export const genesisBraver = () => buttonStory(genesisBraverBurstButton);
+export const genesisBraver = buttonStory(genesisBraverBurstButton, operatable);
 
-/** disabledボタン */
-export const disabled = (): HTMLElement => {
-  const stub = new HUDGameObjectStub(({ resources, gameObjectAction }) => {
-    const burstButton = shinBraverBurstButton(resources, gameObjectAction);
-    burstButton.open(false).play();
-    return [burstButton.getObject3D()];
+/**
+ * バースト不可能
+ * @param burstButton バーストボタン 
+ */
+const canNotBurst = (burstButton: BurstButton) => {
+  burstButton.notifyPressed().subscribe(() => {
+    burstButton.decide().play();
   });
-  stub.start();
-  return stub.domElement();
+  burstButton.open(false).play();
+
 };
+
+/** シンブレイバー バースト不可能 */
+export const canNotBurstShinBraver = buttonStory(shinBraverBurstButton, canNotBurst);
