@@ -63,3 +63,11 @@ export const raito = pilotButtonStory(raitoPilotButton, operatable);
 
 /** ツバサ */
 export const tsubasa = pilotButtonStory(tsubasaPilotButton, operatable);
+
+const dislabed = (button: PilotButton) => {
+  operatable(button);
+  button.disabled(true);
+};
+
+/** 操作不能 シンヤ */
+export const disabledShinya = pilotButtonStory(shinyaPilotButton, dislabed);
