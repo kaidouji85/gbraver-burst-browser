@@ -18,5 +18,6 @@ export function initialValue(): BatterySelectorModel {
     plusButtonScale: 1,
     batteryButtonScale: 1,
     isPushNotifierDisabled: true,
+    disabled: false,
   };
 }

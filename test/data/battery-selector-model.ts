@@ -1,4 +1,6 @@
 import type { BatterySelectorModel } from "../../src/js/game-object/battery-selector/model";
+
+/** 空のバッテリーセレクタモデル */
 export const EMPTY_BATTERY_SELECTOR: BatterySelectorModel = {
   battery: 0,
   maxBattery: 5,
@@ -10,4 +12,5 @@ export const EMPTY_BATTERY_SELECTOR: BatterySelectorModel = {
   plusButtonScale: 1,
   batteryButtonScale: 1,
   isPushNotifierDisabled: false,
+  disabled: false,
 };

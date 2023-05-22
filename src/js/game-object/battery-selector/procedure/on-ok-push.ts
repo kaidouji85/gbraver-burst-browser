@@ -6,7 +6,7 @@ import { BatterySelectorProps } from "../props";
  * @param event イベント
  */
 export function onOKPush(props: BatterySelectorProps, event: Event): void {
-  if (props.model.isPushNotifierDisabled) {
+  if (props.model.isPushNotifierDisabled || props.model.disabled) {
     return;
   }
 
