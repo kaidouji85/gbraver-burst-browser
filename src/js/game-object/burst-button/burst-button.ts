@@ -47,11 +47,7 @@ export class BurstButton {
       gameObjectAction: gameObjectAction,
       armdozerIcon: armdozerIcon,
       onPush: (event) => {
-        if (this.#model.disabled || !this.#model.canBurst) {
-          return;
-        }
-
-        this.#pushButton.next(event);
+        this.#onPush(event);
       },
     });
     this.#unsubscriber = gameObjectAction.subscribe((action) => {
@@ -117,5 +113,17 @@ export class BurstButton {
    */
   #onPreRender(action: PreRender): void {
     this.#view.engage(this.#model, action);
+  }
+
+  /**
+   * ボタンを押した時の処理
+   * @param event イベント 
+   */
+  #onPush(event: Event): void {
+    if (this.#model.disabled || !this.#model.canBurst) {
+      return;
+    }
+
+    this.#pushButton.next(event);
   }
 }
