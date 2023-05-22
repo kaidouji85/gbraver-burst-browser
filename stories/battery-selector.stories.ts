@@ -32,7 +32,7 @@ const batterySelectorStory = (
  * @param label ボタンラベル
  * @return バッテリーセレクタ操作関数
  */
-const operateSelector = (
+const enabled = (
   maxBattery: number, 
   label: ButtonLabel
 ) => (
@@ -61,19 +61,38 @@ const operateSelector = (
 };
 
 /** 攻撃 最大値5 */
-export const attack5 = batterySelectorStory(operateSelector(5, "Attack"));
+export const attack5 = batterySelectorStory(enabled(5, "Attack"));
 
 /** 防御 最大値5 */
-export const defense5 = batterySelectorStory(operateSelector(5, "Defense"));
+export const defense5 = batterySelectorStory(enabled(5, "Defense"));
 
 /** 攻撃 最大値4 */
-export const attack4 = batterySelectorStory(operateSelector(4, "Attack"));
+export const attack4 = batterySelectorStory(enabled(4, "Attack"));
 
 /** 防御 最大値4 */
-export const defense4 = batterySelectorStory(operateSelector(4, "Defense"));
+export const defense4 = batterySelectorStory(enabled(4, "Defense"));
 
 /** 攻撃 最大値8 */
-export const attack8 = batterySelectorStory(operateSelector(8, "Attack"));
+export const attack8 = batterySelectorStory(enabled(8, "Attack"));
 
 /** 防御 最大値8 */
-export const defense8 = batterySelectorStory(operateSelector(8, "Defense"));
+export const defense8 = batterySelectorStory(enabled(8, "Defense"));
+
+/**
+ * バッテリーセレクタを操作不可能な状態に設定する
+ * @param maxBattery 最大バッテリー
+ * @param label ボタンラベル
+ * @return バッテリーセレクタ操作関数
+ */
+const disabled = (
+  maxBattery: number, 
+  label: ButtonLabel
+) => (
+  selector: BatterySelector
+) => {
+  enabled(maxBattery, label)(selector);
+  selector.disabled(true);
+};
+
+/** 攻撃 最大値5 操作不可能 */
+export const attack5Disabled = batterySelectorStory(disabled(5, "Attack"));
