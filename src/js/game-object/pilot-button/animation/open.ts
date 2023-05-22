@@ -12,7 +12,7 @@ import type { PilotButtonModel } from "../model/pilot-button-model";
  */
 export function open(model: PilotButtonModel, canPilot: boolean): Animate {
   return process(() => {
-    model.disabled = true;
+    model.isPushNotifierDisabled = true;
     model.canPilot = canPilot;
     model.opacity = 0;
   })
@@ -28,7 +28,7 @@ export function open(model: PilotButtonModel, canPilot: boolean): Animate {
     )
     .chain(
       process(() => {
-        model.disabled = false;
+        model.isPushNotifierDisabled = false;
       })
     );
 }

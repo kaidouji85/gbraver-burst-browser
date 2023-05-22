@@ -24,7 +24,6 @@ export class PilotButton {
 
   /**
    * コンストラクタ
-   *
    * @param resources リソース管理オブジェクト
    * @param pilotIcon パイロットアイコン
    * @param gameObjectAction ゲームオブジェクトアクション
@@ -39,7 +38,7 @@ export class PilotButton {
     this.#view = new PilotButtonView(resources, pilotIcon, gameObjectAction);
     this.#pushButton = this.#view
       .notifyPressed()
-      .pipe(filter(() => !this.#model.disabled && this.#model.canPilot));
+      .pipe(filter(() => !this.#model.isPushNotifierDisabled && this.#model.canPilot));
     this.#unsubscriber = gameObjectAction.subscribe((action) => {
       if (action.type === "PreRender") {
         this.#onPreRender(action);
@@ -57,7 +56,6 @@ export class PilotButton {
 
   /**
    * シーンに追加するオブジェクトを取得する
-   *
    * @return シーンに追加するオブジェクト
    */
   getObject3D(): THREE.Object3D {
@@ -66,7 +64,6 @@ export class PilotButton {
 
   /**
    * パイロットボタン を表示する
-   *
    * @param canPilot ボタン利用フラグ、trueで利用可能
    * @return アニメーション
    */
@@ -76,7 +73,6 @@ export class PilotButton {
 
   /**
    * ボタンクリック
-   *
    * @return アニメーション
    */
   decide(): Animate {
@@ -85,7 +81,6 @@ export class PilotButton {
 
   /**
    * パイロットボタンを非表示にする
-   *
    * @return アニメーション
    */
   close(): Animate {
@@ -94,7 +89,6 @@ export class PilotButton {
 
   /**
    * ボタン押下通知
-   *
    * @return 通知ストリーム
    */
   notifyPressed(): Observable<Event> {
@@ -103,7 +97,6 @@ export class PilotButton {
 
   /**
    * プリレンダー時の処理
-   *
    * @param action アクション
    */
   #onPreRender(action: PreRender): void {
