@@ -57,7 +57,7 @@ export class BurstButton {
     });
   }
 
-  /** 
+  /**
    * デストラクタ相当の処理
    */
   destructor(): void {
@@ -123,7 +123,7 @@ export class BurstButton {
     return this.#model.disabled;
   }
 
-  /** 
+  /**
    * プリレンダー時の処理
    * @param action プリレンダー情報
    */
@@ -133,10 +133,14 @@ export class BurstButton {
 
   /**
    * ボタンを押した時の処理
-   * @param event イベント 
+   * @param event イベント
    */
   #onPush(event: Event): void {
-    if (this.#model.isPushNotifierDisabled || this.#model.disabled || !this.#model.canBurst) {
+    if (
+      this.#model.isPushNotifierDisabled ||
+      this.#model.disabled ||
+      !this.#model.canBurst
+    ) {
       return;
     }
 

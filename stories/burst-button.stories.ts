@@ -32,22 +32,21 @@ type BurstButtonGenerator = (
  * @param generator バーストボタン生成関数
  * @param burstButton バーストボタン操作関数
  */
-const buttonStory = (
-  generator: BurstButtonGenerator,
-  fn: (burstButton: BurstButton) => void,
-) => () => {
-  const stub = new HUDGameObjectStub(({ resources, gameObjectAction }) => {
-    const burstButton = generator(resources, gameObjectAction);
-    fn(burstButton);
-    return [burstButton.getObject3D()];
-  });
-  stub.start();
-  return stub.domElement();
-};
+const buttonStory =
+  (generator: BurstButtonGenerator, fn: (burstButton: BurstButton) => void) =>
+  () => {
+    const stub = new HUDGameObjectStub(({ resources, gameObjectAction }) => {
+      const burstButton = generator(resources, gameObjectAction);
+      fn(burstButton);
+      return [burstButton.getObject3D()];
+    });
+    stub.start();
+    return stub.domElement();
+  };
 
 /**
  * 操作可能
- * @param burstButton バーストボタン 
+ * @param burstButton バーストボタン
  */
 const operatable = (burstButton: BurstButton) => {
   burstButton.notifyPressed().subscribe(() => {
@@ -63,7 +62,10 @@ export const shinBraver = buttonStory(shinBraverBurstButton, operatable);
 export const neoLandozer = buttonStory(neoLandozerBurstButton, operatable);
 
 /** ライトニングドーザ */
-export const lightningDozer = buttonStory(lightningDozerBurstButton, operatable);
+export const lightningDozer = buttonStory(
+  lightningDozerBurstButton,
+  operatable
+);
 
 /** ウィングドーザ */
 export const wingDozer = buttonStory(wingDozerBurstButton, operatable);
@@ -73,7 +75,7 @@ export const genesisBraver = buttonStory(genesisBraverBurstButton, operatable);
 
 /**
  * バースト不可能
- * @param burstButton バーストボタン 
+ * @param burstButton バーストボタン
  */
 const canNotBurst = (burstButton: BurstButton) => {
   burstButton.notifyPressed().subscribe(() => {
@@ -83,11 +85,14 @@ const canNotBurst = (burstButton: BurstButton) => {
 };
 
 /** シンブレイバー バースト不可能 */
-export const canNotBurstShinBraver = buttonStory(shinBraverBurstButton, canNotBurst);
+export const canNotBurstShinBraver = buttonStory(
+  shinBraverBurstButton,
+  canNotBurst
+);
 
 /**
  * 操作不可能
- * @param burstButton バーストボタン 
+ * @param burstButton バーストボタン
  */
 const disabled = (burstButton: BurstButton) => {
   operatable(burstButton);
