@@ -38,7 +38,7 @@ export class PilotButton {
     this.#view = new PilotButtonView(resources, pilotIcon, gameObjectAction);
     this.#pushButton = this.#view
       .notifyPressed()
-      .pipe(filter(() => !this.#model.isPushNotifierDisabled && this.#model.canPilot));
+      .pipe(filter(() => !this.#model.isPushNotifierDisabled && !this.#model.disabled && this.#model.canPilot));
     this.#unsubscriber = gameObjectAction.subscribe((action) => {
       if (action.type === "PreRender") {
         this.#onPreRender(action);
@@ -93,6 +93,22 @@ export class PilotButton {
    */
   notifyPressed(): Observable<Event> {
     return this.#pushButton;
+  }
+
+  /**
+   * パイロットボタンが操作不可能であるか否かを設定する
+   * @param isDisabled trueで操作不可能
+   */
+  disabled(isDisabled: boolean): void {
+    this.#model.disabled = isDisabled;
+  }
+
+  /**
+   * パイロットボタンが操作不可能であるか否かを取得する
+   * @return trueで操作不可能
+   */
+  isDisabled(): boolean {
+    return this.#model.disabled;
   }
 
   /**

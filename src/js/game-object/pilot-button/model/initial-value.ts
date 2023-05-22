@@ -9,6 +9,7 @@ export function createInitialValue(): PilotButtonModel {
   return {
     opacity: 0,
     isPushNotifierDisabled: true,
+    disabled: false,
     scale: 1,
     canPilot: true,
   };
