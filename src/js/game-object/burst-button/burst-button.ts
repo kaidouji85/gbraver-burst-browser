@@ -107,6 +107,22 @@ export class BurstButton {
     return this.#pushButton;
   }
 
+  /**
+   * 操作不可能、可能を設定する
+   * @param isDisabled trueで操作不可能
+   */
+  disabled(isDisabled: boolean): void {
+    this.#model.disabled = isDisabled;
+  }
+
+  /**
+   * 操作不可能であるか否かを判定する
+   * @return trueで操作不可能
+   */
+  isDisabled(): boolean {
+    return this.#model.disabled;
+  }
+
   /** 
    * プリレンダー時の処理
    * @param action プリレンダー情報
@@ -120,7 +136,7 @@ export class BurstButton {
    * @param event イベント 
    */
   #onPush(event: Event): void {
-    if (this.#model.isPushNotifierDisabled || !this.#model.canBurst) {
+    if (this.#model.isPushNotifierDisabled || this.#model.disabled || !this.#model.canBurst) {
       return;
     }
 

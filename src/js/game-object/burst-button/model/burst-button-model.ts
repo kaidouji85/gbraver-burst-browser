@@ -8,6 +8,8 @@ export type BurstButtonModel = {
    * バッテリーセレクタが反応しないようにする
    */
   isPushNotifierDisabled: boolean;
+  /** バーストボタンが操作不可能であるか否か、trueで操作不可能である */
+  disabled: boolean;
   /** 拡大率 */
   scale: number;
   /** バースト可能フラグ、trueでバースト可能 */
