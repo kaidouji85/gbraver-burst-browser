@@ -8,7 +8,7 @@ import { BatterySelectorProps } from "../props";
 export function onBatteryMinusPush(
   props: Readonly<BatterySelectorProps>
 ): void {
-  if (props.model.isPushNotifierDisabled || !canBatteryMinus(props.model)) {
+  if (props.model.isPushNotifierDisabled || props.model.disabled || !canBatteryMinus(props.model)) {
     return;
   }
 
