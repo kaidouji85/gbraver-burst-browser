@@ -1,15 +1,16 @@
 import { Observable } from "rxjs";
+
 import { delay } from "../src/js/animation/delay";
+import { GameObjectAction } from "../src/js/game-object/action/game-object-action";
 import {
   gaiPilotButton,
   raitoPilotButton,
   shinyaPilotButton,
   tsubasaPilotButton,
 } from "../src/js/game-object/pilot-button";
+import { PilotButton } from "../src/js/game-object/pilot-button/pilot-button";
 import { Resources } from "../src/js/resource";
 import { HUDGameObjectStub } from "./stub/hud-game-object-stub";
-import { GameObjectAction } from "../src/js/game-object/action/game-object-action";
-import { PilotButton } from "../src/js/game-object/pilot-button/pilot-button";
 
 export default {
   title: "pilot-button",
@@ -21,18 +22,23 @@ export default {
  * @param fn パイロットボタン操作関数
  * @return story
  */
-const pilotButtonStory = (
-  generator: (resources: Resources, gameObjectAction: Observable<GameObjectAction>) => PilotButton,
-  fn: (button: PilotButton) => void
-) => () => {
-  const stub = new HUDGameObjectStub(({ resources, gameObjectAction }) => {
-    const button = generator(resources, gameObjectAction);
-    fn(button);
-    return [button.getObject3D()];
-  });
-  stub.start();
-  return stub.domElement();
-};
+const pilotButtonStory =
+  (
+    generator: (
+      resources: Resources,
+      gameObjectAction: Observable<GameObjectAction>
+    ) => PilotButton,
+    fn: (button: PilotButton) => void
+  ) =>
+  () => {
+    const stub = new HUDGameObjectStub(({ resources, gameObjectAction }) => {
+      const button = generator(resources, gameObjectAction);
+      fn(button);
+      return [button.getObject3D()];
+    });
+    stub.start();
+    return stub.domElement();
+  };
 
 /**
  * 操作可能なパイロットボタン
@@ -50,7 +56,7 @@ const operatable = (button: PilotButton) => {
     animation.play();
   });
   button.open(true).play();
-}; 
+};
 
 /** シンヤ */
 export const shinya = pilotButtonStory(shinyaPilotButton, operatable);
@@ -64,6 +70,10 @@ export const raito = pilotButtonStory(raitoPilotButton, operatable);
 /** ツバサ */
 export const tsubasa = pilotButtonStory(tsubasaPilotButton, operatable);
 
+/**
+ * 操作不可能なパイロットボタン
+ * @param button
+ */
 const dislabed = (button: PilotButton) => {
   operatable(button);
   button.disabled(true);

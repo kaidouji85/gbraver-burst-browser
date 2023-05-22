@@ -38,7 +38,14 @@ export class PilotButton {
     this.#view = new PilotButtonView(resources, pilotIcon, gameObjectAction);
     this.#pushButton = this.#view
       .notifyPressed()
-      .pipe(filter(() => !this.#model.isPushNotifierDisabled && !this.#model.disabled && this.#model.canPilot));
+      .pipe(
+        filter(
+          () =>
+            !this.#model.isPushNotifierDisabled &&
+            !this.#model.disabled &&
+            this.#model.canPilot
+        )
+      );
     this.#unsubscriber = gameObjectAction.subscribe((action) => {
       if (action.type === "PreRender") {
         this.#onPreRender(action);
