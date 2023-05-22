@@ -25,7 +25,6 @@ export class BurstButton {
 
   /**
    * コンストラクタ
-   *
    * @param resources リソース管理オブジェクト
    * @param gameObjectAction ゲームオブジェクトアクション
    * @param armdozerIcon アームドーザアイコン
@@ -48,21 +47,19 @@ export class BurstButton {
       gameObjectAction: gameObjectAction,
       armdozerIcon: armdozerIcon,
       onPush: (event) => {
-        if (this.#model.disabled || !this.#model.canBurst) {
-          return;
-        }
-
-        this.#pushButton.next(event);
+        this.#onPush(event);
       },
     });
     this.#unsubscriber = gameObjectAction.subscribe((action) => {
       if (action.type === "PreRender") {
-        this.#preRender(action);
+        this.#onPreRender(action);
       }
     });
   }
 
-  /** デストラクタ */
+  /**
+   * デストラクタ相当の処理
+   */
   destructor(): void {
     this.#view.destructor();
     this.#unsubscriber.unsubscribe();
@@ -70,7 +67,6 @@ export class BurstButton {
 
   /**
    * ボタンを表示する
-   *
    * @param canBurst バースト可能フラグ、trueでバースト可能
    * @return アニメーション
    */
@@ -80,7 +76,6 @@ export class BurstButton {
 
   /**
    * 決定アニメーション
-   *
    * @return アニメーション
    */
   decide(): Animate {
@@ -90,7 +85,6 @@ export class BurstButton {
 
   /**
    * ボタンを非表示にする
-   *
    * @return アニメーション
    */
   close(): Animate {
@@ -99,7 +93,6 @@ export class BurstButton {
 
   /**
    * three.jsオブジェクトを取得する
-   *
    * @return 取得結果
    */
   getObject3D(): THREE.Object3D {
@@ -108,15 +101,49 @@ export class BurstButton {
 
   /**
    * ボタン押下通知
-   *
    * @return 通知ストリーム
    */
   notifyPressed(): Observable<Event> {
     return this.#pushButton;
   }
 
-  /** プリレンダー */
-  #preRender(action: PreRender): void {
+  /**
+   * 操作不可能、可能を設定する
+   * @param isDisabled trueで操作不可能
+   */
+  disabled(isDisabled: boolean): void {
+    this.#model.disabled = isDisabled;
+  }
+
+  /**
+   * 操作不可能であるか否かを判定する
+   * @return trueで操作不可能
+   */
+  isDisabled(): boolean {
+    return this.#model.disabled;
+  }
+
+  /**
+   * プリレンダー時の処理
+   * @param action プリレンダー情報
+   */
+  #onPreRender(action: PreRender): void {
     this.#view.engage(this.#model, action);
+  }
+
+  /**
+   * ボタンを押した時の処理
+   * @param event イベント
+   */
+  #onPush(event: Event): void {
+    if (
+      this.#model.isPushNotifierDisabled ||
+      this.#model.disabled ||
+      !this.#model.canBurst
+    ) {
+      return;
+    }
+
+    this.#pushButton.next(event);
   }
 }
