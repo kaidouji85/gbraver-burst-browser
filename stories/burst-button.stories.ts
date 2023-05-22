@@ -80,8 +80,19 @@ const canNotBurst = (burstButton: BurstButton) => {
     burstButton.decide().play();
   });
   burstButton.open(false).play();
-
 };
 
 /** シンブレイバー バースト不可能 */
 export const canNotBurstShinBraver = buttonStory(shinBraverBurstButton, canNotBurst);
+
+/**
+ * 操作不可能
+ * @param burstButton バーストボタン 
+ */
+const disabled = (burstButton: BurstButton) => {
+  operatable(burstButton);
+  burstButton.disabled(true);
+};
+
+/** シンブレイバー 操作不可能 */
+export const disabledShinBraver = buttonStory(shinBraverBurstButton, disabled);
