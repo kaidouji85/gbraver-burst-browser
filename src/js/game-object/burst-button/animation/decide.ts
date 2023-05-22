@@ -11,7 +11,7 @@ import type { BurstButtonModel } from "../model/burst-button-model";
  */
 export function decide(model: BurstButtonModel): Animate {
   return process(() => {
-    model.disabled = true;
+    model.isPushNotifierDisabled = true;
   })
     .chain(
       tween(model, (t) =>

@@ -120,7 +120,7 @@ export class BurstButton {
    * @param event イベント 
    */
   #onPush(event: Event): void {
-    if (this.#model.disabled || !this.#model.canBurst) {
+    if (this.#model.isPushNotifierDisabled || !this.#model.canBurst) {
       return;
     }
 

@@ -11,7 +11,7 @@ import type { BurstButtonModel } from "../model/burst-button-model";
  */
 export function open(model: BurstButtonModel, canBurst: boolean): Animate {
   return process(() => {
-    model.disabled = true;
+    model.isPushNotifierDisabled = true;
     model.canBurst = canBurst;
     model.opacity = 0;
   })
@@ -27,7 +27,7 @@ export function open(model: BurstButtonModel, canBurst: boolean): Animate {
     )
     .chain(
       process(() => {
-        model.disabled = false;
+        model.isPushNotifierDisabled = false;
       })
     );
 }
