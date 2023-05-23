@@ -15,7 +15,6 @@ type Ret = {
 
 /**
  * パイロットスキルコマンド選択イベント
- *
  * @param props イベントプロパティ
  * @param state ステート
  * @return イベント終了情報

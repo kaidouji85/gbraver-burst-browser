@@ -13,8 +13,8 @@ import { onBatteryCommandSelected } from "./listeners/on-battery-command-selecte
 import { onBurstCommandSelected } from "./listeners/on-burst-command-selected";
 import { onPilotSkillCommandSelected } from "./listeners/on-pilot-skill-command-selected";
 import type { ZeroDefenseTutorialState } from "./state";
-/** ゼロ防御チュートリアル */
 
+/** ゼロ防御チュートリアル */
 class ZeroDefenseTutorialEvent extends EmptyCustomBattleEvent {
   /** ステート */
   state: ZeroDefenseTutorialState;
@@ -72,12 +72,11 @@ class ZeroDefenseTutorialEvent extends EmptyCustomBattleEvent {
     return cancel;
   }
 }
+
 /**
  * ゼロ防御チュートリアル用のカスタムバトルイベントを生成する
- *
  * @return 生成したカスタムバトルイベント
  */
-
 export function createZeroDefenseTutorialEvent(): CustomBattleEvent {
   return new ZeroDefenseTutorialEvent();
 }
