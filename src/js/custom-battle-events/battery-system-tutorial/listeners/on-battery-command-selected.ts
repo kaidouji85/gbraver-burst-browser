@@ -19,7 +19,7 @@ import {
   defenseBatteryCaption,
   pilotSkillCaption,
 } from "../captions";
-import type { BatterySystemTutorialState, SelectableCommands } from "../state";
+import type { BatterySystemTutorialState } from "../state";
 import {
   cancelZeroBatteryDefense,
   doBurstBecauseZeroBattery,
@@ -94,7 +94,7 @@ async function onZeroDefense(
   if (isBatterySelecterFocused(props)) {
     await focusInBatterySelector(props, defenseBatteryCaption);
   }
-  
+
   return {
     state,
     cancel: {
@@ -133,7 +133,7 @@ export async function onBatteryCommandSelected(
   if (isBatterySelecterFocused(props)) {
     focusOutBatterySelector(props);
   }
-  
+
   return {
     state,
     cancel: {

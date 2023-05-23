@@ -42,10 +42,14 @@ export const focusInBatterySelector = async (
  * @param props イベントプロパティ
  * @return 判定結果、trueでフォーカスしている
  */
-export const isBatterySelecterFocused = (props: CustomBattleEventProps): boolean => {
-  return !props.view.hud.gameObjects.batterySelector.isDisabled()
-    && props.view.hud.gameObjects.burstButton.isDisabled() 
-    && props.view.hud.gameObjects.pilotButton.isDisabled();
+export const isBatterySelecterFocused = (
+  props: CustomBattleEventProps
+): boolean => {
+  return (
+    !props.view.hud.gameObjects.batterySelector.isDisabled() &&
+    props.view.hud.gameObjects.burstButton.isDisabled() &&
+    props.view.hud.gameObjects.pilotButton.isDisabled()
+  );
 };
 
 /**
@@ -88,10 +92,14 @@ export const focusInBurstButton = async (
  * @param props イベントプロパティ
  * @return 判定結果、trueでフォーカスしている
  */
-export const isBurstButtonFocused = (props: CustomBattleEventProps): boolean => {
-  return props.view.hud.gameObjects.batterySelector.isDisabled()
-    && !props.view.hud.gameObjects.burstButton.isDisabled() 
-    && props.view.hud.gameObjects.pilotButton.isDisabled();
+export const isBurstButtonFocused = (
+  props: CustomBattleEventProps
+): boolean => {
+  return (
+    props.view.hud.gameObjects.batterySelector.isDisabled() &&
+    !props.view.hud.gameObjects.burstButton.isDisabled() &&
+    props.view.hud.gameObjects.pilotButton.isDisabled()
+  );
 };
 
 /**
@@ -132,10 +140,14 @@ export const focusInPilotButton = async (
  * @param props イベントプロパティ
  * @return 判定結果、trueでフォーカスしている
  */
-export const isPilotButtonFocused = (props: CustomBattleEventProps): boolean => {
-  return props.view.hud.gameObjects.batterySelector.isDisabled()
-    && props.view.hud.gameObjects.burstButton.isDisabled() 
-    && !props.view.hud.gameObjects.pilotButton.isDisabled();
+export const isPilotButtonFocused = (
+  props: CustomBattleEventProps
+): boolean => {
+  return (
+    props.view.hud.gameObjects.batterySelector.isDisabled() &&
+    props.view.hud.gameObjects.burstButton.isDisabled() &&
+    !props.view.hud.gameObjects.pilotButton.isDisabled()
+  );
 };
 
 /**
