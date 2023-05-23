@@ -28,7 +28,6 @@ class BurstTutorial extends EmptyCustomBattleEvent {
       stateHistory: [],
       isIntroductionComplete: false,
       isLoseIfNoDefense5Complete: false,
-      selectableCommands: "All",
     };
   }
 
