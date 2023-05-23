@@ -11,6 +11,7 @@ import {
   focusInBurstButton,
   focusInPilotButton,
   focusOutBatterySelector,
+  isBatterySelecterFocused,
 } from "../../focus";
 import { refreshConversation } from "../../invisible-all-message-windows";
 import {
@@ -18,7 +19,7 @@ import {
   defenseBatteryCaption,
   pilotSkillCaption,
 } from "../captions";
-import type { BatterySystemTutorialState, SelectableCommands } from "../state";
+import type { BatterySystemTutorialState } from "../state";
 import {
   cancelZeroBatteryDefense,
   doBurstBecauseZeroBattery,
@@ -68,7 +69,7 @@ async function onZeroDefense(
     refreshConversation(props);
     await focusInPilotButton(props, pilotSkillCaption);
     return {
-      state: { ...state, selectableCommands: "PilotSkillOnly" },
+      state,
       cancel: {
         isCommandCanceled: true,
       },
@@ -81,7 +82,7 @@ async function onZeroDefense(
     unattentionBurstButton(props);
     await focusInBurstButton(props, burstCaption);
     return {
-      state: { ...state, selectableCommands: "BurstOnly" },
+      state,
       cancel: {
         isCommandCanceled: true,
       },
@@ -90,8 +91,10 @@ async function onZeroDefense(
 
   await cancelZeroBatteryDefense(props);
   refreshConversation(props);
-  state.selectableCommands === "BatteryOnly" &&
-    (await focusInBatterySelector(props, defenseBatteryCaption));
+  if (isBatterySelecterFocused(props)) {
+    await focusInBatterySelector(props, defenseBatteryCaption);
+  }
+
   return {
     state,
     cancel: {
@@ -111,17 +114,6 @@ export async function onBatteryCommandSelected(
   props: Readonly<BatteryCommandSelected>,
   state: BatterySystemTutorialState
 ): Promise<Ret> {
-  const enableBatteryCommand: SelectableCommands[] = ["BatteryOnly", "All"];
-
-  if (!enableBatteryCommand.includes(state.selectableCommands)) {
-    return {
-      state,
-      cancel: {
-        isCommandCanceled: true,
-      },
-    };
-  }
-
   const foundLastState = state.stateHistory[state.stateHistory.length - 1];
   const foundPlayer = (foundLastState?.players ?? []).find(
     (v) => v.playerId === props.playerId
@@ -138,7 +130,10 @@ export async function onBatteryCommandSelected(
     }
   }
 
-  state.selectableCommands === "BatteryOnly" && focusOutBatterySelector(props);
+  if (isBatterySelecterFocused(props)) {
+    focusOutBatterySelector(props);
+  }
+
   return {
     state,
     cancel: {
