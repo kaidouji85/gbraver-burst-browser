@@ -11,7 +11,7 @@ import {
 import { focusInBurstButton, focusInPilotButton } from "../../focus";
 import { refreshConversation } from "../../invisible-all-message-windows";
 import { shouldBurst, shouldPilotSkill } from "../captions";
-import type { SelectableCommands, ZeroDefenseTutorialState } from "../state";
+import type { ZeroDefenseTutorialState } from "../state";
 import {
   cancelZeroBatteryDefense,
   doBurstBecauseZeroBattery,
@@ -23,14 +23,12 @@ import {
 type Ret = {
   /** ステート更新結果 */
   state: ZeroDefenseTutorialState;
-
   /** コマンドキャンセル情報 */
   cancel: CommandCanceled;
 };
 
 /**
  * バッテリーコマンド選択イベント
- *
  * @param props イベントプロパティ
  * @param state ステート
  * @return イベント終了情報
@@ -39,20 +37,8 @@ export async function onBatteryCommandSelected(
   props: Readonly<BatteryCommandSelected>,
   state: ZeroDefenseTutorialState
 ): Promise<Ret> {
-  const enableBatteryCommand: SelectableCommands[] = ["All"];
-
-  if (!enableBatteryCommand.includes(state.selectableCommands)) {
-    return {
-      state,
-      cancel: {
-        isCommandCanceled: true,
-      },
-    };
-  }
-
   const foundLastState = state.stateHistory[state.stateHistory.length - 1];
   const isNotZeroBatteryCommand = props.battery.battery !== 0;
-
   if (!foundLastState || isNotZeroBatteryCommand) {
     return {
       state,
@@ -65,7 +51,6 @@ export async function onBatteryCommandSelected(
   const lastState: GameState = foundLastState;
   const iPlayerTurn = lastState.activePlayerId === props.playerId;
   const player = lastState.players.find((v) => v.playerId === props.playerId);
-
   if (iPlayerTurn || !player) {
     return {
       state,
@@ -76,7 +61,6 @@ export async function onBatteryCommandSelected(
   }
 
   const isZeroBattery = player.armdozer.battery === 0;
-
   if (!isZeroBattery) {
     await cancelZeroBatteryDefense(props);
     return {
@@ -89,13 +73,12 @@ export async function onBatteryCommandSelected(
 
   const enableBurst = player.armdozer.enableBurst;
   const enablePilotSkill = player.pilot.enableSkill;
-
   if (isZeroBattery && enableBurst) {
     await doBurstBecauseZeroBattery(props);
     unattentionBurstButton(props);
     await focusInBurstButton(props, shouldBurst);
     return {
-      state: { ...state, selectableCommands: "BurstOnly" },
+      state,
       cancel: {
         isCommandCanceled: true,
       },
@@ -107,7 +90,7 @@ export async function onBatteryCommandSelected(
     unattentionPilotButton(props);
     await focusInPilotButton(props, shouldPilotSkill);
     return {
-      state: { ...state, selectableCommands: "PilotSkillOnly" },
+      state,
       cancel: {
         isCommandCanceled: true,
       },
