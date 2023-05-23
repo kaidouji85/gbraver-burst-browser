@@ -14,8 +14,8 @@ import { onBurstCommandSelected } from "./listeners/on-burst-command-selected";
 import { onLastState } from "./listeners/on-last-state";
 import { onPilotSkillCommandSelected } from "./listeners/on-pilot-skill-command-selected";
 import type { BatterySystemTutorialState } from "./state";
-/** バッテリーシステムチュートリアル用のカスタムバトルイベント */
 
+/** バッテリーシステムチュートリアル用のカスタムバトルイベント */
 class BatterySystemTutorialEvent extends EmptyCustomBattleEvent {
   /** チュートリアルのステート */
   state: BatterySystemTutorialState;
@@ -27,7 +27,6 @@ class BatterySystemTutorialEvent extends EmptyCustomBattleEvent {
     super();
     this.state = {
       stateHistory: [],
-      selectableCommands: "BatteryOnly",
       isBatterySystemDescriptionComplete: false,
     };
   }
@@ -79,10 +78,8 @@ class BatterySystemTutorialEvent extends EmptyCustomBattleEvent {
 }
 /**
  * バッテリーシステムチュートリアル用のカスタバトルイベントを生成する
- *
  * @return 生成したカスタムバトルイベント
  */
-
 export function createBatterySystemTutorialEvent(): CustomBattleEvent {
   return new BatterySystemTutorialEvent();
 }

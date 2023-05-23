@@ -11,10 +11,6 @@ export type SelectableCommands =
 export type BatterySystemTutorialState = {
   /** ステートヒストリー、 beforeLastState開始時に更新される */
   stateHistory: GameState[];
-
-  /** @deprecated 選択可能なコマンド */
-  selectableCommands: SelectableCommands;
-
   /** バッテリーシステムの解説が完了しているか、trueで完了している */
   isBatterySystemDescriptionComplete: boolean;
 };
