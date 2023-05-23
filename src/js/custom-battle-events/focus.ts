@@ -38,6 +38,17 @@ export const focusInBatterySelector = async (
 };
 
 /**
+ * バッテリーセレクタにフォーカスしているか判定する
+ * @param props イベントプロパティ
+ * @return 判定結果、trueでフォーカスしている
+ */
+export const isBatterySelecterFocused = (props: CustomBattleEventProps): boolean => {
+  return !props.view.hud.gameObjects.batterySelector.isDisabled()
+    && props.view.hud.gameObjects.burstButton.isDisabled() 
+    && props.view.hud.gameObjects.pilotButton.isDisabled();
+};
+
+/**
  * バッテリーセレクタからフォーカスアウトする
  * @param props イベントプロパティ
  * @return 処理が完了したら発火するPromise
@@ -73,6 +84,17 @@ export const focusInBurstButton = async (
 };
 
 /**
+ * バーストボタンにフォーカスしているか判定する
+ * @param props イベントプロパティ
+ * @return 判定結果、trueでフォーカスしている
+ */
+export const isBurstButtonFocused = (props: CustomBattleEventProps): boolean => {
+  return props.view.hud.gameObjects.batterySelector.isDisabled()
+    && !props.view.hud.gameObjects.burstButton.isDisabled() 
+    && props.view.hud.gameObjects.pilotButton.isDisabled();
+};
+
+/**
  * バーストボタンからフォーカスアウトする
  * @param props イベントプロパティ
  * @return 処理が完了したら発火するPromise
@@ -103,6 +125,17 @@ export const focusInPilotButton = async (
   activeNearPilotButtonMessageWindow(props);
   props.view.dom.nearPilotButtonMessageWindow.messages(caption);
   await props.view.hud.gameObjects.frontmostFader.opacity(0.7, 200).play();
+};
+
+/**
+ * パイロットボタンにフォーカスしているか判定する
+ * @param props イベントプロパティ
+ * @return 判定結果、trueでフォーカスしている
+ */
+export const isPilotButtonFocused = (props: CustomBattleEventProps): boolean => {
+  return props.view.hud.gameObjects.batterySelector.isDisabled()
+    && props.view.hud.gameObjects.burstButton.isDisabled() 
+    && !props.view.hud.gameObjects.pilotButton.isDisabled();
 };
 
 /**
