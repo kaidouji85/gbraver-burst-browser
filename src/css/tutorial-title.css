@@ -40,7 +40,7 @@
   align-items: baseline;
 }
 
-.tutorial-title__stage-prefix--capitalized {
+.tutorial-title__stage-prefix::first-letter {
   font-size: calc(var(--font-size) * 1.5);
   font-weight: bold;
 }
@@ -60,7 +60,7 @@
   white-space: nowrap;
 }
 
-.tutorial-title__caption-clause--capitalized {
+.tutorial-title__caption-clause::first-letter {
   font-size: calc(var(--font-size) * 1.5);
   font-weight: bold;
   white-space: nowrap;

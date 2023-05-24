@@ -13,11 +13,9 @@ function captionClauses(title: string[]): string {
   return title
     .map(
       (v) => `
-    <div class="${ROOT_CLASS}__caption-clause--capitalized">${v.slice(
-        0,
-        1
-      )}</div>
-    <div class="${ROOT_CLASS}__caption-clause">${v.slice(1)}</div>
+    <span class="${ROOT_CLASS}__caption-clause">
+      ${v}
+    </span>
   `
     )
     .join("");
@@ -27,10 +25,8 @@ function captionClauses(title: string[]): string {
 export type RootInnerHTMLParams = {
   /** リソース管理オブジェクト */
   resources: Resources;
-
   /** タイトル */
   title: string[];
-
   /** チュートリアルレベル */
   level: number;
 };
@@ -46,7 +42,6 @@ export function rootInnerHtml(
   ids: DataIDs,
   params: RootInnerHTMLParams
 ): string {
-  const prefix = "Tutorial";
   const bustShot =
     params.resources.paths.find((v) => v.id === PathIds.SHIN_BRAVER_BUST_SHOT)
       ?.path ?? "";
@@ -56,18 +51,15 @@ export function rootInnerHtml(
   return `
     <div class="${ROOT_CLASS}__title">
       <div class="${ROOT_CLASS}__stage">
-        <div class="${ROOT_CLASS}__stage-prefix--capitalized">${prefix.slice(
-    0,
-    1
-  )}</div>      
-        <div class="${ROOT_CLASS}__stage-prefix">${prefix.slice(1)}</div>
+        <div class="${ROOT_CLASS}__stage-prefix">Tutorial</div>
         <div class="${ROOT_CLASS}__stage-level">${params.level}</div>
       </div>
       <div class="${ROOT_CLASS}__caption">${captionClauses(params.title)}</div>
     </div>
-    <img class="${ROOT_CLASS}__shin-braver-stand" data-id="${
-    ids.stand
-  }" src="${stand}">
+    <img class="${ROOT_CLASS}__shin-braver-stand"
+      data-id="${ids.stand}"
+      src="${stand}"
+    >
     <img class="${ROOT_CLASS}__shin-braver-bust-shot" data-id="${
     ids.bustShot
   }" src="${bustShot}">

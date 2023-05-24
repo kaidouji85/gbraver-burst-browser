@@ -27,19 +27,14 @@ export const TutorialStageIDs = {
 export type TutorialStage = {
   /** チュートリアルステージID */
   id: TutorialStageID;
-
   /** チュートリアルタイトル */
   title: string[];
-
   /** カスタムバトルイベント生成関数、カスタムバトルイベントは状態を持つので都度生成する */
   event: () => CustomBattleEvent;
-
   /** NPC */
   npc: NPC;
-
   /** プレイヤー */
   player: Player;
-
   /** 再生するBGMのID */
   bgm: SoundId;
 };
@@ -67,7 +62,7 @@ export const TutorialStages: TutorialStage[] = [
   },
   {
     id: TutorialStageIDs.ZERO_DEFENSE,
-    title: ["ゼロ防御だと即", "死する"],
+    title: ["ゼロ防御だと即死する"],
     player: {
       playerId: playerUuid(),
       armdozer: shinBraver,
@@ -79,7 +74,7 @@ export const TutorialStages: TutorialStage[] = [
   },
   {
     id: TutorialStageIDs.BURST,
-    title: ["バーストで一発", "逆転"],
+    title: ["バーストで一発逆転"],
     player: {
       playerId: playerUuid(),
       armdozer: shinBraver,
