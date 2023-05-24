@@ -62,7 +62,7 @@ export const TutorialStages: TutorialStage[] = [
   },
   {
     id: TutorialStageIDs.ZERO_DEFENSE,
-    title: ["ゼロ防御だと", "即死する"],
+    title: ["ゼロ防御だと即死する"],
     player: {
       playerId: playerUuid(),
       armdozer: shinBraver,
@@ -74,7 +74,7 @@ export const TutorialStages: TutorialStage[] = [
   },
   {
     id: TutorialStageIDs.BURST,
-    title: ["バーストで", "一発逆転"],
+    title: ["バーストで一発逆転"],
     player: {
       playerId: playerUuid(),
       armdozer: shinBraver,
