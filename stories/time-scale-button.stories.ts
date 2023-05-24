@@ -10,20 +10,19 @@ export default {
  * @param fn タイムスケールボタン操作関数
  * @return story
  */
-const timeScaleButtonStory = (
-  fn: (timeScaleButton: TimeScaleButton) => void,
-) => () => {
-  const stub = new HUDGameObjectStub(({ resources, gameObjectAction }) => {
-    const timeScaleButton: TimeScaleButton = new TimeScaleButton(
-      resources,
-      gameObjectAction
-    );
-    fn(timeScaleButton);
-    return [timeScaleButton.getObject3D()];
-  });
-  stub.start();
-  return stub.domElement();
-};
+const timeScaleButtonStory =
+  (fn: (timeScaleButton: TimeScaleButton) => void) => () => {
+    const stub = new HUDGameObjectStub(({ resources, gameObjectAction }) => {
+      const timeScaleButton: TimeScaleButton = new TimeScaleButton(
+        resources,
+        gameObjectAction
+      );
+      fn(timeScaleButton);
+      return [timeScaleButton.getObject3D()];
+    });
+    stub.start();
+    return stub.domElement();
+  };
 
 /**
  * 操作可能なタイムスケールボタン

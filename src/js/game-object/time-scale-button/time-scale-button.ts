@@ -16,7 +16,6 @@ import type { TimeScaleButtonModel } from "./model/time-scale-button-model";
 import type { TimeScaleButtonSounds } from "./sounds/time-scale-sounds";
 import { createTimeScaleButtonSounds } from "./sounds/time-scale-sounds";
 import { TimeScaleButtonView } from "./view/time-scale-button-view";
-import { toTouchStartRaycaster } from "../../render/overlap-event/touch-start-raycaster";
 
 /** アニメーションタイムスケールボタン */
 export class TimeScaleButton {

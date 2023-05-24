@@ -7,19 +7,21 @@ type OperatableButton = {
    * @param isDisabled trueで操作不可能
    */
   disabled(isDisabled: boolean): void;
-}
+};
 
 /**
  * イベントプロパティから設定対象ボタンを取得する
  * @param props イベントプロパティ
  * @return 設定対象ボタン
  */
-function getOperatableButtons(props: Readonly<CustomBattleEventProps>): OperatableButton[] {
+function getOperatableButtons(
+  props: Readonly<CustomBattleEventProps>
+): OperatableButton[] {
   return [
     props.view.hud.gameObjects.batterySelector,
     props.view.hud.gameObjects.burstButton,
     props.view.hud.gameObjects.pilotButton,
-    props.view.hud.gameObjects.timeScaleButton,    
+    props.view.hud.gameObjects.timeScaleButton,
   ];
 }
 
@@ -30,7 +32,7 @@ function getOperatableButtons(props: Readonly<CustomBattleEventProps>): Operatab
 export function disabledAllButtons(
   props: Readonly<CustomBattleEventProps>
 ): void {
-  getOperatableButtons(props).forEach(button => {
+  getOperatableButtons(props).forEach((button) => {
     button.disabled(true);
   });
 }
@@ -42,7 +44,7 @@ export function disabledAllButtons(
 export function enabledAllButtons(
   props: Readonly<CustomBattleEventProps>
 ): void {
-  getOperatableButtons(props).forEach(button => {
+  getOperatableButtons(props).forEach((button) => {
     button.disabled(false);
   });
 }
