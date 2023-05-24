@@ -24,18 +24,12 @@ type DataIDs = {
  */
 function rootInnerHTML(
   ids: DataIDs,
-  stagePrefix: StagePrefixType,
   level: number
 ): string {
-  const npcStagePrefix = ["S", "TAGE"];
-  const tutorialStagePrefix = ["T", "UTORIAL"];
-  const prefix =
-    stagePrefix === "NPCBattle" ? npcStagePrefix : tutorialStagePrefix;
   return `
     <div class="${ROOT_CLASS}__title">
       <div class="${ROOT_CLASS}__stage">
-        <div class="${ROOT_CLASS}__stage-prefix--capitalized">${prefix[0]}</div>      
-        <div class="${ROOT_CLASS}__stage-prefix">${prefix[1]}</div>
+        <div class="${ROOT_CLASS}__stage-prefix">STAGE</div>
         <div class="${ROOT_CLASS}__stage-level">${level}</div>
       </div>
       <div class="${ROOT_CLASS}__caption" data-id="${ids.caption}"></div>
@@ -74,23 +68,14 @@ function extractElements(root: HTMLElement, ids: DataIDs): Elements {
   };
 }
 
-/** ステージプレフィックスタイプ */
-type StagePrefixType = "NPCBattle" | "Tutorial";
-
 /** ステージタイトルのパラメータ */
 export type StageTitleParam = {
   /** リソース管理オブジェクト */
   resources: Resources;
-
-  /** ステージプレフィックスタイプ */
-  stagePrefix: StagePrefixType;
-
   /** ステージレベル */
   level: number;
-
   /** ステージ名 */
   caption: string[];
-
   /** 対戦するアームドーザのID */
   armDozerId: ArmDozerId;
 };
@@ -102,7 +87,6 @@ export class StageTitle implements DOMScene {
 
   /**
    * コンストラクタ
-   *
    * @param param パラメータ
    */
   constructor(param: StageTitleParam) {
@@ -112,7 +96,7 @@ export class StageTitle implements DOMScene {
     };
     this.#root = document.createElement("div");
     this.#root.className = ROOT_CLASS;
-    this.#root.innerHTML = rootInnerHTML(ids, param.stagePrefix, param.level);
+    this.#root.innerHTML = rootInnerHTML(ids, param.level);
     const elements = extractElements(this.#root, ids);
     this.#isArmDozerIconLoaded = waitElementLoaded(elements.armDozerIcon);
     const armDozerIconPathID = getArmdozerIconPathId(param.armDozerId);
@@ -122,11 +106,12 @@ export class StageTitle implements DOMScene {
     elements.caption.innerHTML = param.caption
       .map(
         (v) => `
-        <div class="${ROOT_CLASS}__caption-clause--capitalized">${v.slice(
-          0,
-          1
-        )}</div>
-        <div class="${ROOT_CLASS}__caption-clause">${v.slice(1)}</div>
+        <div class="${ROOT_CLASS}__caption-clause--capitalized">
+          ${v.slice(0, 1)}
+        </div>
+        <div class="${ROOT_CLASS}__caption-clause">
+          ${v.slice(1)}
+        </div>
       `
       )
       .reduce((a, b) => a + b);
@@ -144,7 +129,6 @@ export class StageTitle implements DOMScene {
 
   /**
    * 各種リソースの読み込みが完了するまで待つ
-   *
    * @return 待機結果
    */
   async waitUntilLoaded(): Promise<void> {
