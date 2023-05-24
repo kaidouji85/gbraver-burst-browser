@@ -16,6 +16,7 @@ import type { TimeScaleButtonModel } from "./model/time-scale-button-model";
 import type { TimeScaleButtonSounds } from "./sounds/time-scale-sounds";
 import { createTimeScaleButtonSounds } from "./sounds/time-scale-sounds";
 import { TimeScaleButtonView } from "./view/time-scale-button-view";
+import { toTouchStartRaycaster } from "../../render/overlap-event/touch-start-raycaster";
 
 /** アニメーションタイムスケールボタン */
 export class TimeScaleButton {
@@ -81,6 +82,22 @@ export class TimeScaleButton {
   }
 
   /**
+   * 操作不可能、可能を設定する
+   * @param isDisabled trueで操作不可能
+   */
+  disabled(isDisabled: boolean): void {
+    this.#model.disabled = isDisabled;
+  }
+
+  /**
+   * 操作不可能であるか否かを判定する
+   * @return trueで操作不可能
+   */
+  isDisabled(): boolean {
+    return this.#model.disabled;
+  }
+
+  /**
    * ボタンを表示する
    * @param timeScale タイムスケール値
    * @return アニメーション
@@ -117,7 +134,7 @@ export class TimeScaleButton {
    * ボタン押下時の処理
    */
   #onButtonPush(): void {
-    if (this.#model.isPushNotifierDisabled) {
+    if (this.#model.isPushNotifierDisabled || this.#model.disabled) {
       return;
     }
 
