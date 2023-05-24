@@ -42,7 +42,6 @@ export function rootInnerHtml(
   ids: DataIDs,
   params: RootInnerHTMLParams
 ): string {
-  const prefix = "Tutorial";
   const bustShot =
     params.resources.paths.find((v) => v.id === PathIds.SHIN_BRAVER_BUST_SHOT)
       ?.path ?? "";
@@ -52,10 +51,7 @@ export function rootInnerHtml(
   return `
     <div class="${ROOT_CLASS}__title">
       <div class="${ROOT_CLASS}__stage">
-        <div class="${ROOT_CLASS}__stage-prefix--capitalized">
-          ${prefix.slice(0, 1)}
-        </div>      
-        <div class="${ROOT_CLASS}__stage-prefix">${prefix.slice(1)}</div>
+        <div class="${ROOT_CLASS}__stage-prefix">Tutorial</div>
         <div class="${ROOT_CLASS}__stage-level">${params.level}</div>
       </div>
       <div class="${ROOT_CLASS}__caption">${captionClauses(params.title)}</div>
