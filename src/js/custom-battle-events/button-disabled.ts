@@ -1,5 +1,28 @@
 import { CustomBattleEventProps } from "../td-scenes/battle/custom-battle-event";
 
+/** 操作不可能、可能が設定できるボタン */
+type OperatableButton = {
+  /**
+   * 操作不可能、可能を設定する
+   * @param isDisabled trueで操作不可能
+   */
+  disabled(isDisabled: boolean): void;
+}
+
+/**
+ * イベントプロパティから設定対象ボタンを取得する
+ * @param props イベントプロパティ
+ * @return 設定対象ボタン
+ */
+function getOperatableButtons(props: Readonly<CustomBattleEventProps>): OperatableButton[] {
+  return [
+    props.view.hud.gameObjects.batterySelector,
+    props.view.hud.gameObjects.burstButton,
+    props.view.hud.gameObjects.pilotButton,
+    props.view.hud.gameObjects.timeScaleButton,    
+  ];
+}
+
 /**
  * 全てのボタンを操作不可能にする
  * @param props カスタムイベントプロパティ
@@ -7,9 +30,9 @@ import { CustomBattleEventProps } from "../td-scenes/battle/custom-battle-event"
 export function disabledAllButtons(
   props: Readonly<CustomBattleEventProps>
 ): void {
-  props.view.hud.gameObjects.batterySelector.disabled(true);
-  props.view.hud.gameObjects.burstButton.disabled(true);
-  props.view.hud.gameObjects.pilotButton.disabled(true);
+  getOperatableButtons(props).forEach(button => {
+    button.disabled(true);
+  });
 }
 
 /**
@@ -19,7 +42,7 @@ export function disabledAllButtons(
 export function enabledAllButtons(
   props: Readonly<CustomBattleEventProps>
 ): void {
-  props.view.hud.gameObjects.batterySelector.disabled(false);
-  props.view.hud.gameObjects.burstButton.disabled(false);
-  props.view.hud.gameObjects.pilotButton.disabled(false);
+  getOperatableButtons(props).forEach(button => {
+    button.disabled(false);
+  });
 }
