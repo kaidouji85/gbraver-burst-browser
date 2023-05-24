@@ -22,10 +22,7 @@ type DataIDs = {
  * @param level ステージレベル
  * @return ルート要素のinnerHTML
  */
-function rootInnerHTML(
-  ids: DataIDs,
-  level: number
-): string {
+function rootInnerHTML(ids: DataIDs, level: number): string {
   return `
     <div class="${ROOT_CLASS}__title">
       <div class="${ROOT_CLASS}__stage">
