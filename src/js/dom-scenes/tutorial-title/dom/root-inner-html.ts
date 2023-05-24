@@ -56,9 +56,10 @@ export function rootInnerHtml(
       </div>
       <div class="${ROOT_CLASS}__caption">${captionClauses(params.title)}</div>
     </div>
-    <img class="${ROOT_CLASS}__shin-braver-stand" data-id="${
-    ids.stand
-  }" src="${stand}">
+    <img class="${ROOT_CLASS}__shin-braver-stand"
+      data-id="${ids.stand}"
+      src="${stand}"
+    >
     <img class="${ROOT_CLASS}__shin-braver-bust-shot" data-id="${
     ids.bustShot
   }" src="${bustShot}">
