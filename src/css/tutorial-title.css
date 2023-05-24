@@ -56,13 +56,13 @@
   margin-left: calc(var(--responsive-font-size) * 2);
 }
 
-.tutorial-title__caption-clause-initial {
-  font-size: calc(var(--font-size) * 1.5);
-  font-weight: bold;
+.tutorial-title__caption-clause {
   white-space: nowrap;
 }
 
-.tutorial-title__caption-clause-others {
+.tutorial-title__caption-clause::first-letter {
+  font-size: calc(var(--font-size) * 1.5);
+  font-weight: bold;
   white-space: nowrap;
 }
 

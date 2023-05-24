@@ -13,14 +13,9 @@ function captionClauses(title: string[]): string {
   return title
     .map(
       (v) => `
-    <div class="${ROOT_CLASS}__caption-clause">
-      <div class="${ROOT_CLASS}__caption-clause-initial">
-        ${v.slice(0, 1)}
-      </div>
-      <div class="${ROOT_CLASS}__caption-clause-others">
-        ${v.slice(1)}
-      </div>
-    </div>
+    <span class="${ROOT_CLASS}__caption-clause">
+      ${v}
+    </span>
   `
     )
     .join("");
@@ -30,10 +25,8 @@ function captionClauses(title: string[]): string {
 export type RootInnerHTMLParams = {
   /** リソース管理オブジェクト */
   resources: Resources;
-
   /** タイトル */
   title: string[];
-
   /** チュートリアルレベル */
   level: number;
 };
@@ -59,10 +52,9 @@ export function rootInnerHtml(
   return `
     <div class="${ROOT_CLASS}__title">
       <div class="${ROOT_CLASS}__stage">
-        <div class="${ROOT_CLASS}__stage-prefix--capitalized">${prefix.slice(
-    0,
-    1
-  )}</div>      
+        <div class="${ROOT_CLASS}__stage-prefix--capitalized">
+          ${prefix.slice(0, 1)}
+        </div>      
         <div class="${ROOT_CLASS}__stage-prefix">${prefix.slice(1)}</div>
         <div class="${ROOT_CLASS}__stage-level">${params.level}</div>
       </div>
