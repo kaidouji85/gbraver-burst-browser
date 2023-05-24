@@ -13,11 +13,14 @@ function captionClauses(title: string[]): string {
   return title
     .map(
       (v) => `
-    <div class="${ROOT_CLASS}__caption-clause--capitalized">${v.slice(
-        0,
-        1
-      )}</div>
-    <div class="${ROOT_CLASS}__caption-clause">${v.slice(1)}</div>
+    <div class="${ROOT_CLASS}__caption-clause">
+      <div class="${ROOT_CLASS}__caption-clause-initial">
+        ${v.slice(0, 1)}
+      </div>
+      <div class="${ROOT_CLASS}__caption-clause-others">
+        ${v.slice(1)}
+      </div>
+    </div>
   `
     )
     .join("");
