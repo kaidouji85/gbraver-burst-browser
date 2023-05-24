@@ -40,7 +40,7 @@
   align-items: baseline;
 }
 
-.stage-title__stage-prefix--capitalized {
+.stage-title__stage-prefix::first-letter {
   font-size: calc(var(--responsive-font-size) * 2.5);
   font-weight: bold;
 }
@@ -56,7 +56,7 @@
   margin-left: calc(var(--responsive-font-size) * 2);
 }
 
-.stage-title__caption-clause--capitalized {
+.stage-title__caption-clause::first-letter {
   font-size: calc(var(--responsive-font-size) * 2.5);
   font-weight: bold;
 }

@@ -31,7 +31,6 @@ export async function startNPCBattleStage(
   props.domDialogBinder.hidden();
   const scene = new StageTitle({
     resources: props.resources,
-    stagePrefix: "NPCBattle",
     level,
     caption: stage.caption,
     armDozerId: npcBattle.enemy.armdozer.id,
