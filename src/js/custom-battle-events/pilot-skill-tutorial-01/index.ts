@@ -20,7 +20,7 @@ class PilotSkillTutorial01 extends EmptyCustomBattleEvent {
 
   /** @override */
   async beforeLastState(props: LastState): Promise<void> {
-    await beforeLastState(props, this.#state);
+    this.#state = await beforeLastState(props, this.#state);
   }
 }
 
