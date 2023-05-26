@@ -76,6 +76,7 @@ class BatterySystemTutorialEvent extends EmptyCustomBattleEvent {
     return cancel;
   }
 }
+
 /**
  * バッテリーシステムチュートリアル用のカスタバトルイベントを生成する
  * @return 生成したカスタムバトルイベント
