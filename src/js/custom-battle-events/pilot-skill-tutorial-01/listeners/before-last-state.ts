@@ -2,6 +2,7 @@ import { LastState } from "../../../td-scenes/battle/custom-battle-event";
 import { invisibleAllMessageWindows } from "../../invisible-all-message-windows";
 import { turnCount } from "../../turn-count";
 import { PilotSkillTutorial01State } from "../state";
+import { gaiInspecting } from "../stories/gai-inspectiong";
 import { introduction } from "../stories/introduction";
 
 /**
@@ -23,7 +24,14 @@ export async function beforeLastState(
   if (turn === 1) {
     await introduction(props);
     invisibleAllMessageWindows(props);
+    return updatedStateHistory;
   }
-
+  
+  if (turn === 2) {
+    await gaiInspecting(props);
+    invisibleAllMessageWindows(props);
+    return updatedStateHistory;
+  }
+  
   return updatedStateHistory;
 }
