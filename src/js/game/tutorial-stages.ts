@@ -3,10 +3,12 @@ import { ArmDozerIds, ArmDozers, PilotIds, Pilots } from "gbraver-burst-core";
 
 import { createBatterySystemTutorialEvent } from "../custom-battle-events/battery-system-tutorial";
 import { createBurstTutorialEvent } from "../custom-battle-events/burst-tutorial";
+import { createPilotSkillTutorialEvent } from "../custom-battle-events/pilot-skill-tutorial";
 import { createZeroDefenseTutorialEvent } from "../custom-battle-events/zero-defense-tutorial";
 import { batterySystemTutorialNPC } from "../npc/battery-system-tutorial";
 import { burstTutorialNPC } from "../npc/burst-tutorial";
 import type { NPC } from "../npc/npc";
+import { pilotSkillTutorialNPC } from "../npc/pilot-skill-tutorial";
 import { zeroDefenseTutorialNPC } from "../npc/zero-defense-tutorial";
 import type { SoundId } from "../resource/sound";
 import { SOUND_IDS } from "../resource/sound";
@@ -21,6 +23,7 @@ export const TutorialStageIDs = {
   BATTERY_SYSTEM: "BATTERY_SYSTEM",
   ZERO_DEFENSE: "ZERO_DEFENSE",
   BURST: "BURST",
+  Pilot: "Pilot",
 };
 
 /** チュートリアルステージ */
@@ -87,4 +90,18 @@ export const TutorialStages: TutorialStage[] = [
 ];
 
 /** 開発中のチュートリアルのステージをあつめたもの */
-export const TutorialStagesInDevelopment: TutorialStage[] = TutorialStages;
+export const TutorialStagesInDevelopment: TutorialStage[] = [
+  ...TutorialStages,
+  {
+    id: TutorialStageIDs.Pilot,
+    title: ["パイロットスキルで意表を突け（前半）"],
+    player: {
+      playerId: playerUuid(),
+      armdozer: shinBraver,
+      pilot: shinya,
+    },
+    npc: pilotSkillTutorialNPC(),
+    event: createPilotSkillTutorialEvent,
+    bgm: SOUND_IDS.BATTLE_BGM_01,
+  },
+];
