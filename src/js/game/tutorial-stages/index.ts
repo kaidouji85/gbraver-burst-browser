@@ -64,7 +64,7 @@ export const TutorialStages: TutorialStage[] = [
 export const TutorialStagesInDevelopment: TutorialStage[] = [
   ...TutorialStages,
   {
-    id: TutorialStageIDs.Pilot,
+    id: TutorialStageIDs.Pilot01,
     title: ["パイロットスキルで意表を突け（前半）"],
     player: {
       playerId: playerUuid(),
