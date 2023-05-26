@@ -1,5 +1,6 @@
 import { LastState } from "../../../td-scenes/battle/custom-battle-event";
-import { introduction } from "../../battery-system-tutorial/stories/introduction";
+import { invisibleAllMessageWindows } from "../../invisible-all-message-windows";
+import { introduction } from "../stories/introduction";
 
 /**
  * 最終ステート完了後イベント
@@ -10,4 +11,5 @@ export async function afterLastState(
   props: Readonly<LastState>
 ): Promise<void> {
   await introduction(props);
+  invisibleAllMessageWindows(props);
 }

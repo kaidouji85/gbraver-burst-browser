@@ -1,6 +1,6 @@
 import { CustomBattleEvent, LastState } from "../../td-scenes/battle/custom-battle-event";
 import { EmptyCustomBattleEvent } from "../empty-custom-battle-event";
-import { afterLastState } from "./listeners/after-last-state";
+import { afterLastState as beforeLastState } from "./listeners/before-last-state";
 
 /** パイロットスキルチュートリアル（前半） */
 class PilotSkillTutorial01 extends EmptyCustomBattleEvent {
@@ -12,8 +12,8 @@ class PilotSkillTutorial01 extends EmptyCustomBattleEvent {
   }
 
   /** @override */
-  async afterLastState(props: LastState): Promise<void> {
-    await afterLastState(props);
+  async beforeLastState(props: LastState): Promise<void> {
+    await beforeLastState(props);
   }
 }
 
