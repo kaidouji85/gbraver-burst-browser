@@ -11,14 +11,7 @@ import { zeroDefenseTutorialNPC } from "../../npc/zero-defense-tutorial";
 import { SOUND_IDS } from "../../resource/sound";
 import { playerUuid } from "../../uuid/player";
 import { TutorialStage } from "./tutorial-stage";
-
-/** チュートリアルIDを集めたもの */
-export const TutorialStageIDs = {
-  BATTERY_SYSTEM: "BATTERY_SYSTEM",
-  ZERO_DEFENSE: "ZERO_DEFENSE",
-  BURST: "BURST",
-  Pilot: "Pilot",
-};
+import { TutorialStageIDs } from "./tutorial-stage-ids";
 
 /** シンブレイバー */
 const shinBraver =
