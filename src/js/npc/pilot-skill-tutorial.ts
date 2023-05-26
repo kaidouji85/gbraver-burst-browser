@@ -51,7 +51,7 @@ const defenseRoutine: SimpleRoutine = (data) => {
  * パイロットスキルチュートリアル用ウィングドーザNPC
  * @return NPC
  */
-export function zeroDefenseTutorialNPC(): NPC {
+export function pilotSkillTutorialNPC(): NPC {
   const armdozer =
     ArmDozers.find((v) => v.id === ArmDozerIds.WING_DOZER) ?? ArmDozers[0];
   const pilot = Pilots.find((v) => v.id === PilotIds.TSUBASA) ?? Pilots[0];

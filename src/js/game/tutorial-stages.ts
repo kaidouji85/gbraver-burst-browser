@@ -12,6 +12,8 @@ import type { SoundId } from "../resource/sound";
 import { SOUND_IDS } from "../resource/sound";
 import type { CustomBattleEvent } from "../td-scenes/battle/custom-battle-event";
 import { playerUuid } from "../uuid/player";
+import { pilotSkillTutorialNPC } from "../npc/pilot-skill-tutorial";
+import { createPilotSkillTutorialEvent } from "../custom-battle-events/pilot-skill-tutorial";
 
 /** チュートリアルステージID */
 export type TutorialStageID = string;
@@ -21,6 +23,7 @@ export const TutorialStageIDs = {
   BATTERY_SYSTEM: "BATTERY_SYSTEM",
   ZERO_DEFENSE: "ZERO_DEFENSE",
   BURST: "BURST",
+  Pilot: "Pilot",
 };
 
 /** チュートリアルステージ */
@@ -84,7 +87,22 @@ export const TutorialStages: TutorialStage[] = [
     event: createBurstTutorialEvent,
     bgm: SOUND_IDS.BATTLE_BGM_03,
   },
+  
 ];
 
 /** 開発中のチュートリアルのステージをあつめたもの */
-export const TutorialStagesInDevelopment: TutorialStage[] = TutorialStages;
+export const TutorialStagesInDevelopment: TutorialStage[] = [
+  ...TutorialStages,
+  {
+    id: TutorialStageIDs.Pilot,
+    title: ["パイロットスキルで意表を突け（前半）"],
+    player: {
+      playerId: playerUuid(),
+      armdozer: shinBraver,
+      pilot: shinya,
+    },
+    npc: pilotSkillTutorialNPC(),
+    event: createPilotSkillTutorialEvent,
+    bgm: SOUND_IDS.BATTLE_BGM_01
+  }
+];
