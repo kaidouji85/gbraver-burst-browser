@@ -1,4 +1,3 @@
-import type { Player } from "gbraver-burst-core";
 import { ArmDozerIds, ArmDozers, PilotIds, Pilots } from "gbraver-burst-core";
 
 import { createBatterySystemTutorialEvent } from "../../custom-battle-events/battery-system-tutorial";
@@ -7,16 +6,11 @@ import { createPilotSkillTutorialEvent } from "../../custom-battle-events/pilot-
 import { createZeroDefenseTutorialEvent } from "../../custom-battle-events/zero-defense-tutorial";
 import { batterySystemTutorialNPC } from "../../npc/battery-system-tutorial";
 import { burstTutorialNPC } from "../../npc/burst-tutorial";
-import type { NPC } from "../../npc/npc";
 import { pilotSkillTutorialNPC } from "../../npc/pilot-skill-tutorial";
 import { zeroDefenseTutorialNPC } from "../../npc/zero-defense-tutorial";
-import type { SoundId } from "../../resource/sound";
 import { SOUND_IDS } from "../../resource/sound";
-import type { CustomBattleEvent } from "../../td-scenes/battle/custom-battle-event";
 import { playerUuid } from "../../uuid/player";
-
-/** チュートリアルステージID */
-export type TutorialStageID = string;
+import { TutorialStage } from "./tutorial-stage";
 
 /** チュートリアルIDを集めたもの */
 export const TutorialStageIDs = {
@@ -24,22 +18,6 @@ export const TutorialStageIDs = {
   ZERO_DEFENSE: "ZERO_DEFENSE",
   BURST: "BURST",
   Pilot: "Pilot",
-};
-
-/** チュートリアルステージ */
-export type TutorialStage = {
-  /** チュートリアルステージID */
-  id: TutorialStageID;
-  /** チュートリアルタイトル */
-  title: string[];
-  /** カスタムバトルイベント生成関数、カスタムバトルイベントは状態を持つので都度生成する */
-  event: () => CustomBattleEvent;
-  /** NPC */
-  npc: NPC;
-  /** プレイヤー */
-  player: Player;
-  /** 再生するBGMのID */
-  bgm: SoundId;
 };
 
 /** シンブレイバー */
