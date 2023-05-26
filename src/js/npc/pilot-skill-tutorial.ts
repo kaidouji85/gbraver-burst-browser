@@ -21,7 +21,7 @@ const ZERO_BATTERY: Command = {
  * 攻撃ルーチン
  */
 const attackRoutine: SimpleRoutine = (data) => {
-  const burst = data.commands.find(v => v.type === "BURST_COMMAND");
+  const burst = data.commands.find((v) => v.type === "BURST_COMMAND");
   const pilot = data.commands.find((v) => v.type === "PILOT_SKILL_COMMAND");
   const maxBattery = data.commands.find(
     (v) =>
@@ -40,7 +40,7 @@ const attackRoutine: SimpleRoutine = (data) => {
  * 防御ルーチン
  */
 const defenseRoutine: SimpleRoutine = (data) => {
-  const burst = data.commands.find(v => v.type === "BURST_COMMAND");
+  const burst = data.commands.find((v) => v.type === "BURST_COMMAND");
   const battery1 = data.commands.find(
     (v) => v.type === "BATTERY_COMMAND" && v.battery === 1
   );

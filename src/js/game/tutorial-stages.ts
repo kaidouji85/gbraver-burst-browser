@@ -3,17 +3,17 @@ import { ArmDozerIds, ArmDozers, PilotIds, Pilots } from "gbraver-burst-core";
 
 import { createBatterySystemTutorialEvent } from "../custom-battle-events/battery-system-tutorial";
 import { createBurstTutorialEvent } from "../custom-battle-events/burst-tutorial";
+import { createPilotSkillTutorialEvent } from "../custom-battle-events/pilot-skill-tutorial";
 import { createZeroDefenseTutorialEvent } from "../custom-battle-events/zero-defense-tutorial";
 import { batterySystemTutorialNPC } from "../npc/battery-system-tutorial";
 import { burstTutorialNPC } from "../npc/burst-tutorial";
 import type { NPC } from "../npc/npc";
+import { pilotSkillTutorialNPC } from "../npc/pilot-skill-tutorial";
 import { zeroDefenseTutorialNPC } from "../npc/zero-defense-tutorial";
 import type { SoundId } from "../resource/sound";
 import { SOUND_IDS } from "../resource/sound";
 import type { CustomBattleEvent } from "../td-scenes/battle/custom-battle-event";
 import { playerUuid } from "../uuid/player";
-import { pilotSkillTutorialNPC } from "../npc/pilot-skill-tutorial";
-import { createPilotSkillTutorialEvent } from "../custom-battle-events/pilot-skill-tutorial";
 
 /** チュートリアルステージID */
 export type TutorialStageID = string;
@@ -87,7 +87,6 @@ export const TutorialStages: TutorialStage[] = [
     event: createBurstTutorialEvent,
     bgm: SOUND_IDS.BATTLE_BGM_03,
   },
-  
 ];
 
 /** 開発中のチュートリアルのステージをあつめたもの */
@@ -103,6 +102,6 @@ export const TutorialStagesInDevelopment: TutorialStage[] = [
     },
     npc: pilotSkillTutorialNPC(),
     event: createPilotSkillTutorialEvent,
-    bgm: SOUND_IDS.BATTLE_BGM_01
-  }
+    bgm: SOUND_IDS.BATTLE_BGM_01,
+  },
 ];
