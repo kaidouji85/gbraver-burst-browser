@@ -1,5 +1,5 @@
 import { ArmDozerIds, ArmDozers, PilotIds, Pilots } from "gbraver-burst-core";
-import { createPilotSkillTutorialEvent } from "../../custom-battle-events/pilot-skill-tutorial";
+import { createPilotSkillTutorial01Event } from "../../custom-battle-events/pilot-skill-tutorial-01";
 import { pilotSkillTutorialNPC } from "../../npc/pilot-skill-tutorial";
 import { SOUND_IDS } from "../../resource/sound";
 import { playerUuid } from "../../uuid/player";
@@ -16,6 +16,6 @@ export const pilotSkillTutorial01: TutorialStage = {
       pilot: Pilots.find((v) => v.id === PilotIds.SHINYA) ?? Pilots[0],
     },
     npc: pilotSkillTutorialNPC(),
-    event: createPilotSkillTutorialEvent,
+    event: createPilotSkillTutorial01Event,
     bgm: SOUND_IDS.BATTLE_BGM_01,
 };
