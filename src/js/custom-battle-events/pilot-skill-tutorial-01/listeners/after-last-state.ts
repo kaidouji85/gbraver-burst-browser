@@ -1,7 +1,7 @@
-import {LastState} from "../../../td-scenes/battle/custom-battle-event";
-import {PilotSkillTutorial01State} from "../state";
-import {playerLose} from "../stories/player-lose";
-import {invisibleAllMessageWindows} from "../../invisible-all-message-windows";
+import { LastState } from "../../../td-scenes/battle/custom-battle-event";
+import { invisibleAllMessageWindows } from "../../invisible-all-message-windows";
+import { PilotSkillTutorial01State } from "../state";
+import { playerLose } from "../stories/player-lose";
 
 /**
  * 最終ステート直後

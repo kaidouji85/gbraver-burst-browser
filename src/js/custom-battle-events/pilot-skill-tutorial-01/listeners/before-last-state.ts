@@ -24,13 +24,13 @@ export async function beforeLastState(
   if (turn === 1 && !updatedStateHistory.isIntroductionComplete) {
     await introduction(props);
     invisibleAllMessageWindows(props);
-    return {...updatedStateHistory, isIntroductionComplete: true};
+    return { ...updatedStateHistory, isIntroductionComplete: true };
   }
-  
+
   if (turn === 3 && !updatedStateHistory.isGaiInspectingComplete) {
     await gaiInspecting(props);
     invisibleAllMessageWindows(props);
-    return {...updatedStateHistory, isGaiInspectingComplete: true};
+    return { ...updatedStateHistory, isGaiInspectingComplete: true };
   }
 
   return updatedStateHistory;

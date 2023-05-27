@@ -1,8 +1,11 @@
-import { CustomBattleEvent, LastState } from "../../td-scenes/battle/custom-battle-event";
+import {
+  CustomBattleEvent,
+  LastState,
+} from "../../td-scenes/battle/custom-battle-event";
 import { EmptyCustomBattleEvent } from "../empty-custom-battle-event";
+import { afterLastState } from "./listeners/after-last-state";
 import { beforeLastState as beforeLastState } from "./listeners/before-last-state";
 import { PilotSkillTutorial01State } from "./state";
-import {afterLastState} from "./listeners/after-last-state";
 
 /** パイロットスキルチュートリアル（前半） */
 class PilotSkillTutorial01 extends EmptyCustomBattleEvent {

@@ -1,7 +1,10 @@
-import {CustomBattleEventProps} from "../../../td-scenes/battle/custom-battle-event";
-import {activeLeftMessageWindowWithFace, activeRightMessageWindowWithFace} from "../../active-message-window";
-import {scrollLeftMessages, scrollRightMessages} from "../../scroll-messages";
-import {refreshConversation} from "../../invisible-all-message-windows";
+import { CustomBattleEventProps } from "../../../td-scenes/battle/custom-battle-event";
+import {
+  activeLeftMessageWindowWithFace,
+  activeRightMessageWindowWithFace,
+} from "../../active-message-window";
+import { refreshConversation } from "../../invisible-all-message-windows";
+import { scrollLeftMessages, scrollRightMessages } from "../../scroll-messages";
 
 /**
  * プレイヤー敗北ストーリー
@@ -12,7 +15,9 @@ export async function playerLose(
   props: Readonly<CustomBattleEventProps>
 ): Promise<void> {
   activeRightMessageWindowWithFace(props, "Shinya");
-  await scrollRightMessages(props, [["シンヤ", "「あと少しで勝てそうだったスのに」"]]);
+  await scrollRightMessages(props, [
+    ["シンヤ", "「あと少しで勝てそうだったスのに」"],
+  ]);
   props.view.dom.rightMessageWindow.darken();
   activeLeftMessageWindowWithFace(props, "Tsubasa");
   await scrollLeftMessages(props, [
@@ -35,7 +40,7 @@ export async function playerLose(
   await scrollRightMessages(props, [
     ["シンヤ", "「でもツバサ先輩"],
     ["シンブレイバーの攻撃力だとウィングドーザを一撃で倒せないッスよ"],
-    ["もう詰みッスか」"]
+    ["もう詰みッスか」"],
   ]);
   props.view.dom.rightMessageWindow.darken();
   activeLeftMessageWindowWithFace(props, "Tsubasa");
@@ -43,14 +48,12 @@ export async function playerLose(
     ["ツバサ", "「案ずるなシンヤ"],
     ["シンブレイバーの攻撃力を底上げすれば勝機はある"],
     ["そのためのパイロットスキルだ"],
-    ["ガイ君 そこに居るんだろう」"]
+    ["ガイ君 そこに居るんだろう」"],
   ]);
   props.view.dom.leftMessageWindow.darken();
   await refreshConversation(props);
   activeRightMessageWindowWithFace(props, "Gai");
-  await scrollRightMessages(props, [
-    ["ガイ", "「……！！」"],
-  ]);
+  await scrollRightMessages(props, [["ガイ", "「……！！」"]]);
   props.view.dom.rightMessageWindow.darken();
   activeLeftMessageWindowWithFace(props, "Tsubasa");
   await scrollLeftMessages(props, [
