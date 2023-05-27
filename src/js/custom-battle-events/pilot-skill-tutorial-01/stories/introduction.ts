@@ -28,7 +28,7 @@ export async function introduction(
   await refreshConversation(props, 100);
   activeLeftMessageWindowWithFace(props, "Tsubasa");
   await scrollLeftMessages(props, [
-    ["ツバサ", "「今日も元気だな シンヤ"],
+    ["ツバサ", "「気合い十分だな シンヤ"],
     ["それでは早速だが パイロットスキルについてレクチャーする"],
     ["ロボとパイロットは自由に組み合わせることができるが"],
     ["この相性で勝負が決まると言っても過言ではない"],
