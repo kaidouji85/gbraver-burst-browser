@@ -38,13 +38,19 @@ export async function playerLose(
   props.view.dom.leftMessageWindow.darken();
   activeRightMessageWindowWithFace(props, "Shinya");
   await scrollRightMessages(props, [
-    ["シンヤ", "「でもツバサ先輩 シンブレイバーの攻撃力だとウィングドーザを一撃で倒せないッスよ"],
+    [
+      "シンヤ",
+      "「でもツバサ先輩 シンブレイバーの攻撃力だとウィングドーザを一撃で倒せないッスよ",
+    ],
     ["もう詰みッスか」"],
   ]);
   props.view.dom.rightMessageWindow.darken();
   activeLeftMessageWindowWithFace(props, "Tsubasa");
   await scrollLeftMessages(props, [
-    ["ツバサ", "「案ずるなシンヤ シンブレイバーの攻撃力を底上げすれば勝機はある"],
+    [
+      "ツバサ",
+      "「案ずるなシンヤ シンブレイバーの攻撃力を底上げすれば勝機はある",
+    ],
     ["そのためのパイロットスキルだ」"],
   ]);
   props.view.dom.leftMessageWindow.darken();
