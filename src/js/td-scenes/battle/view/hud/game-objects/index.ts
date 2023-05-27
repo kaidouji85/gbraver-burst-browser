@@ -48,7 +48,6 @@ export class HUDGameObjects {
     this.#battleAction = new Subject();
     this.batterySelector = new BatterySelector({
       gameObjectAction: gameObjectAction,
-      maxBattery: playerInfo.armdozer.maxBattery,
       resources: resources,
     });
     this.burstButton = createBurstButton(

@@ -13,8 +13,8 @@ import { onBatteryCommandSelected } from "./listeners/on-battery-command-selecte
 import { onBurstCommandSelected } from "./listeners/on-burst-command-selected";
 import { onPilotSkillCommandSelected } from "./listeners/on-pilot-skill-command-selected";
 import type { BurstTutorialState } from "./state";
-/** バーストチュートリアル用のカスタムバトルイベント */
 
+/** バーストチュートリアル用のカスタムバトルイベント */
 class BurstTutorial extends EmptyCustomBattleEvent {
   /** ステート */
   state: BurstTutorialState;
@@ -28,7 +28,6 @@ class BurstTutorial extends EmptyCustomBattleEvent {
       stateHistory: [],
       isIntroductionComplete: false,
       isLoseIfNoDefense5Complete: false,
-      selectableCommands: "All",
     };
   }
 
@@ -72,12 +71,11 @@ class BurstTutorial extends EmptyCustomBattleEvent {
     return cancel;
   }
 }
+
 /**
  * バーストチュートリアル用のカスタムバトルイベントを生成する
- *
  * @return 生成したカスタムバトルイベント
  */
-
 export function createBurstTutorialEvent(): CustomBattleEvent {
   return new BurstTutorial();
 }

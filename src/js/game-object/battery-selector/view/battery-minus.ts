@@ -1,4 +1,4 @@
-import { Observable, Unsubscribable } from "rxjs";
+import { Observable } from "rxjs";
 import * as THREE from "three";
 
 import { SimpleImageMesh } from "../../../mesh/simple-image-mesh";
@@ -14,12 +14,8 @@ import { canBatteryMinus } from "../model/can-battery-minus";
 type Param = {
   /** リソース管理オブジェクト */
   resources: Resources;
-
   /** ゲームオブジェクトアクション */
   gameObjectAction: Observable<GameObjectAction>;
-
-  /** ボタンを押した時に呼ばれるコールバック関数 */
-  onPush: () => void;
 };
 
 /** バッテリーマイナスボタン */
@@ -28,7 +24,6 @@ export class BatteryMinus {
   #activeButton: SimpleImageMesh;
   #buttonDisabled: SimpleImageMesh;
   #pushDetector: PushDetector;
-  #unsubscribers: Unsubscribable[];
 
   /**
    * コンストラクタ
@@ -65,9 +60,6 @@ export class BatteryMinus {
     this.#group.add(this.#activeButton.getObject3D());
     this.#group.add(this.#buttonDisabled.getObject3D());
     this.#group.add(this.#pushDetector.getObject3D());
-    this.#unsubscribers = [
-      this.#pushDetector.notifyPressed().subscribe(param.onPush),
-    ];
   }
 
   /** デストラクタ */
@@ -75,9 +67,6 @@ export class BatteryMinus {
     this.#activeButton.destructor();
     this.#buttonDisabled.destructor();
     this.#pushDetector.destructor();
-    this.#unsubscribers.forEach((unsubscriber) => {
-      unsubscriber.unsubscribe();
-    });
   }
 
   /** モデルをビューに反映させる */
@@ -102,8 +91,19 @@ export class BatteryMinus {
       );
   }
 
-  /** シーンに追加するオブジェクトを取得する */
+  /**
+   * シーンに追加するオブジェクトを取得する
+   * @return シーンに追加するオブジェクト
+   */
   getObject3D(): THREE.Object3D {
     return this.#group;
+  }
+
+  /**
+   * ボタン押下通知
+   * @return 通知ストリーム
+   */
+  pushNotifier(): Observable<unknown> {
+    return this.#pushDetector.notifyPressed();
   }
 }

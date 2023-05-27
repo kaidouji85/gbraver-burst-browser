@@ -4,9 +4,11 @@ import {
   playerTsubasaCutIn,
 } from "../src/js/game-object/cut-in/tsubasa";
 import { HUDGameObjectStub } from "./stub/hud-game-object-stub";
+
 export default {
-  title: "tsubasa",
+  title: "tsubasa-cutin",
 };
+
 export const player = (): HTMLElement => {
   const stub = new HUDGameObjectStub(({ resources, gameObjectAction }) => {
     const pilot = playerTsubasaCutIn(resources, gameObjectAction);
@@ -21,6 +23,7 @@ export const player = (): HTMLElement => {
   stub.start();
   return stub.domElement();
 };
+
 export const enemy = (): HTMLElement => {
   const stub = new HUDGameObjectStub(({ resources, gameObjectAction }) => {
     const pilot = enemyTsubasaCutIn(resources, gameObjectAction);

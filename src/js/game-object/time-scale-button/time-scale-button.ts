@@ -28,7 +28,6 @@ export class TimeScaleButton {
 
   /**
    * コンストラクタ
-   *
    * @param resources リソース管理オブジェクト
    * @param gameObjectAction ゲームオブジェクトアクション
    */
@@ -67,7 +66,6 @@ export class TimeScaleButton {
 
   /**
    * シーンに追加するオブジェクトを取得する
-   *
    * @return シーンに追加するオブジェクト
    */
   getObject3D(): THREE.Object3D {
@@ -76,7 +74,6 @@ export class TimeScaleButton {
 
   /**
    * タイムスケール変更通知
-   *
    * @return 通知ストリーム
    */
   notifyToggled(): Observable<number> {
@@ -84,8 +81,23 @@ export class TimeScaleButton {
   }
 
   /**
+   * 操作不可能、可能を設定する
+   * @param isDisabled trueで操作不可能
+   */
+  disabled(isDisabled: boolean): void {
+    this.#model.disabled = isDisabled;
+  }
+
+  /**
+   * 操作不可能であるか否かを判定する
+   * @return trueで操作不可能
+   */
+  isDisabled(): boolean {
+    return this.#model.disabled;
+  }
+
+  /**
    * ボタンを表示する
-   *
    * @param timeScale タイムスケール値
    * @return アニメーション
    */
@@ -95,7 +107,6 @@ export class TimeScaleButton {
 
   /**
    * ボタンを非表示にする
-   *
    * @return アニメーション
    */
   close(): Animate {
@@ -104,7 +115,6 @@ export class TimeScaleButton {
 
   /**
    * アップデート時の処理
-   *
    * @param action アクション
    */
   #onUpdate(action: Update): void {
@@ -113,7 +123,6 @@ export class TimeScaleButton {
 
   /**
    * プリレンダー時の処理
-   *
    * @param action アクション
    */
   #onPreRender(action: PreRender): void {
@@ -124,7 +133,7 @@ export class TimeScaleButton {
    * ボタン押下時の処理
    */
   #onButtonPush(): void {
-    if (this.#model.disabled) {
+    if (this.#model.isPushNotifierDisabled || this.#model.disabled) {
       return;
     }
 

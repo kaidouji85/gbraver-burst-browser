@@ -6,6 +6,7 @@ import {
 } from "../src/js/game-object/cut-in/wing-dozer";
 import { WingDozerCutIn } from "../src/js/game-object/cut-in/wing-dozer/wing-dozer-cutin";
 import { HUDGameObjectStub } from "./stub/hud-game-object-stub";
+
 export default {
   title: "wing-dozer-cutin",
 };
@@ -27,6 +28,7 @@ export const Player = (): HTMLElement => {
   stub.start();
   return stub.domElement();
 };
+
 export const Enemy = (): HTMLElement => {
   const stub = new HUDGameObjectStub(({ resources, gameObjectAction }) => {
     const cutIn = enemyWingDozerCutIn(resources, gameObjectAction);

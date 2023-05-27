@@ -1,79 +1,89 @@
 import { BatterySelector } from "../src/js/game-object/battery-selector";
+import { ButtonLabel } from "../src/js/game-object/battery-selector/model/button-label";
 import { HUDGameObjectStub } from "./stub/hud-game-object-stub";
+
 export default {
   title: "battery-selector",
 };
-export const batterySelector = (): HTMLElement => {
-  const stub = new HUDGameObjectStub(({ resources, gameObjectAction }) => {
-    const selector: BatterySelector = new BatterySelector({
-      resources: resources,
-      gameObjectAction: gameObjectAction,
-      maxBattery: 5,
-    });
-    selector.open(1, 5, 5, "Attack").play();
-    selector.notifyDecision().subscribe((event) => {
-      event.preventDefault();
-      event.stopPropagation();
-      selector.decide().play();
-    });
-    selector.notifyBatteryPlus().subscribe(() => {
-      selector.batteryPlus().play();
-    });
-    selector.notifyBatteryMinus().subscribe(() => {
-      selector.batteryMinus().play();
-    });
-    return [selector.getObject3D()];
-  });
-  stub.start();
-  return stub.domElement();
-};
 
-export const batterySelector4 = (): HTMLElement => {
-  const stub = new HUDGameObjectStub(({ resources, gameObjectAction }) => {
-    const selector: BatterySelector = new BatterySelector({
-      resources: resources,
-      gameObjectAction: gameObjectAction,
-      maxBattery: 5,
+/**
+ * バッテリーセレクタストーリー
+ * @param fn バッテリーセレクタ操作関数
+ * @return story
+ */
+const batterySelectorStory =
+  (fn: (selector: BatterySelector) => void) => () => {
+    const stub = new HUDGameObjectStub(({ resources, gameObjectAction }) => {
+      const selector: BatterySelector = new BatterySelector({
+        resources: resources,
+        gameObjectAction: gameObjectAction,
+      });
+      fn(selector);
+      return [selector.getObject3D()];
     });
-    selector.open(1, 4, 4, "Attack").play();
-    selector.notifyDecision().subscribe((event) => {
-      event.preventDefault();
-      event.stopPropagation();
-      selector.decide().play();
-    });
-    selector.notifyBatteryPlus().subscribe(() => {
-      selector.batteryPlus().play();
-    });
-    selector.notifyBatteryMinus().subscribe(() => {
-      selector.batteryMinus().play();
-    });
-    return [selector.getObject3D()];
-  });
-  stub.start();
-  return stub.domElement();
-};
+    stub.start();
+    return stub.domElement();
+  };
 
-export const batterySelector8 = (): HTMLElement => {
-  const stub = new HUDGameObjectStub(({ resources, gameObjectAction }) => {
-    const selector: BatterySelector = new BatterySelector({
-      resources: resources,
-      gameObjectAction: gameObjectAction,
-      maxBattery: 5,
-    });
-    selector.open(1, 8, 8, "Attack").play();
+/**
+ * バッテリーセレクタを操作可能な状態に設定する
+ * @param maxBattery 最大バッテリー
+ * @param label ボタンラベル
+ * @return バッテリーセレクタ操作関数
+ */
+const enabled =
+  (maxBattery: number, label: ButtonLabel) => (selector: BatterySelector) => {
+    selector
+      .open({
+        initialValue: 1,
+        maxBattery,
+        enableMaxBattery: maxBattery,
+        label,
+      })
+      .play();
     selector.notifyDecision().subscribe((event) => {
       event.preventDefault();
       event.stopPropagation();
       selector.decide().play();
+      console.log(selector.getBattery());
     });
     selector.notifyBatteryPlus().subscribe(() => {
-      selector.batteryPlus().play();
+      selector.batteryPlus();
     });
     selector.notifyBatteryMinus().subscribe(() => {
-      selector.batteryMinus().play();
+      selector.batteryMinus();
     });
-    return [selector.getObject3D()];
-  });
-  stub.start();
-  return stub.domElement();
-};
+  };
+
+/** 攻撃 最大値5 */
+export const attack5 = batterySelectorStory(enabled(5, "Attack"));
+
+/** 防御 最大値5 */
+export const defense5 = batterySelectorStory(enabled(5, "Defense"));
+
+/** 攻撃 最大値4 */
+export const attack4 = batterySelectorStory(enabled(4, "Attack"));
+
+/** 防御 最大値4 */
+export const defense4 = batterySelectorStory(enabled(4, "Defense"));
+
+/** 攻撃 最大値8 */
+export const attack8 = batterySelectorStory(enabled(8, "Attack"));
+
+/** 防御 最大値8 */
+export const defense8 = batterySelectorStory(enabled(8, "Defense"));
+
+/**
+ * バッテリーセレクタを操作不可能な状態に設定する
+ * @param maxBattery 最大バッテリー
+ * @param label ボタンラベル
+ * @return バッテリーセレクタ操作関数
+ */
+const disabled =
+  (maxBattery: number, label: ButtonLabel) => (selector: BatterySelector) => {
+    enabled(maxBattery, label)(selector);
+    selector.disabled(true);
+  };
+
+/** 攻撃 最大値5 操作不可能 */
+export const attack5Disabled = batterySelectorStory(disabled(5, "Attack"));

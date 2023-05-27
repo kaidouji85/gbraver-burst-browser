@@ -4,9 +4,11 @@ import {
   playerShinyaCutIn,
 } from "../src/js/game-object/cut-in/shinya";
 import { HUDGameObjectStub } from "./stub/hud-game-object-stub";
+
 export default {
-  title: "shinya",
+  title: "shinya-cutin",
 };
+
 export const player = (): HTMLElement => {
   const stub = new HUDGameObjectStub(({ resources, gameObjectAction }) => {
     const pilot = playerShinyaCutIn(resources, gameObjectAction);
@@ -21,6 +23,7 @@ export const player = (): HTMLElement => {
   stub.start();
   return stub.domElement();
 };
+
 export const enemy = (): HTMLElement => {
   const stub = new HUDGameObjectStub(({ resources, gameObjectAction }) => {
     const pilot = enemyShinyaCutIn(resources, gameObjectAction);

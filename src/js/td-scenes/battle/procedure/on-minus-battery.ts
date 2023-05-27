@@ -7,6 +7,6 @@ import type { BattleSceneProps } from "../battle-scene-props";
  */
 export const onMinusBattery = (props: BattleSceneProps): void => {
   props.exclusive.execute(async () => {
-    props.view.hud.gameObjects.batterySelector.batteryMinus().play();
+    props.view.hud.gameObjects.batterySelector.batteryMinus();
   });
 };

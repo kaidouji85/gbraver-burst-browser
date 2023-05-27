@@ -1,4 +1,4 @@
-import { TutorialStageID } from "../tutorial-stages";
+import { TutorialStageID } from "../tutorial-stages/tutorial-stage";
 
 /** チュートリアルステージ選択完了 */
 export type SelectTutorialStage = {

@@ -3,20 +3,26 @@ import { BatterySelector } from "../src/js/game-object/battery-selector";
 import { shinBraverBurstButton } from "../src/js/game-object/burst-button";
 import { shinyaPilotButton } from "../src/js/game-object/pilot-button";
 import { HUDGameObjectStub } from "./stub/hud-game-object-stub";
+
 export default {
   title: "commands",
 };
+
 export const commands = (): HTMLElement => {
   const stub = new HUDGameObjectStub(({ resources, gameObjectAction }) => {
     const batterySelector = new BatterySelector({
       resources: resources,
       gameObjectAction: gameObjectAction,
-      maxBattery: 5,
     });
     const burstButton = shinBraverBurstButton(resources, gameObjectAction);
     const pilotButton = shinyaPilotButton(resources, gameObjectAction);
     all(
-      batterySelector.open(1, 5, 5, "Attack"),
+      batterySelector.open({
+        initialValue: 1,
+        maxBattery: 5,
+        enableMaxBattery: 5,
+        label: "Attack",
+      }),
       burstButton.open(true),
       pilotButton.open(true)
     ).play();

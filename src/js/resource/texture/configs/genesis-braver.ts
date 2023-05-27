@@ -1,8 +1,8 @@
-import { TEXTURE_IDS } from "./ids";
-import { TextureConfig } from "./resource";
+import { TEXTURE_IDS } from "../ids";
+import { TextureConfig } from "../resource";
 
-/** ジェネシスブレイバー関連テクスチャ設定 */
-export const GenesisBraverConfigs: TextureConfig[] = [
+/** ジェネシスブレイバーのテクスチャ設定をあつめたもの */
+export const GenesisBraverTextureConfigs: TextureConfig[] = [
   {
     id: TEXTURE_IDS.GENESIS_BRAVER_STAND,
     path: "armdozer/genesis-braver/stand.webp",

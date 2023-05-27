@@ -13,10 +13,12 @@ import {
   unattentionBurstButton,
   unattentionPilotButton,
 } from "./attention";
+import { disabledAllButtons, enabledAllButtons } from "./button-disabled";
 import { invisibleAllMessageWindows } from "./invisible-all-message-windows";
 
 /**
  * バッテリーセレクタにフォーカスインする
+ * フォーカスインしたもの以外は、操作不可能にする
  * @param props イベントプロパティ
  * @param caption 注釈メッセージ
  * @return 処理が完了したら発火するPromise
@@ -26,11 +28,28 @@ export const focusInBatterySelector = async (
   caption: string[]
 ) => {
   unAttentionAllButtons(props);
+  disabledAllButtons(props);
   attentionBatterySelector(props);
+  props.view.hud.gameObjects.batterySelector.disabled(false);
   invisibleAllMessageWindows(props);
   activeNearBatterySelectorMessageWindow(props);
   props.view.dom.nearBatterySelectorMessageWindow.messages(caption);
   await props.view.hud.gameObjects.frontmostFader.opacity(0.7, 200).play();
+};
+
+/**
+ * バッテリーセレクタにフォーカスしているか判定する
+ * @param props イベントプロパティ
+ * @return 判定結果、trueでフォーカスしている
+ */
+export const isBatterySelecterFocused = (
+  props: CustomBattleEventProps
+): boolean => {
+  return (
+    !props.view.hud.gameObjects.batterySelector.isDisabled() &&
+    props.view.hud.gameObjects.burstButton.isDisabled() &&
+    props.view.hud.gameObjects.pilotButton.isDisabled()
+  );
 };
 
 /**
@@ -44,10 +63,12 @@ export const focusOutBatterySelector = async (
   props.view.dom.nearBatterySelectorMessageWindow.visible(false);
   await props.view.hud.gameObjects.frontmostFader.opacity(0, 200).play();
   unattentionBatterySelector(props);
+  enabledAllButtons(props);
 };
 
 /**
  * バーストボタンにフォーカスインする
+ * フォーカスインしたもの以外は、操作不可能にする
  * @param props イベントプロパティ
  * @param caption 注釈メッセージ
  * @return 処理が完了したら発火するPromise
@@ -57,11 +78,28 @@ export const focusInBurstButton = async (
   caption: string[]
 ) => {
   unAttentionAllButtons(props);
+  disabledAllButtons(props);
   attentionBurstButton(props);
+  props.view.hud.gameObjects.burstButton.disabled(false);
   invisibleAllMessageWindows(props);
   activeNearBurstButtonMessageWindow(props);
   props.view.dom.nearBurstButtonMessageWindow.messages(caption);
   await props.view.hud.gameObjects.frontmostFader.opacity(0.7, 200).play();
+};
+
+/**
+ * バーストボタンにフォーカスしているか判定する
+ * @param props イベントプロパティ
+ * @return 判定結果、trueでフォーカスしている
+ */
+export const isBurstButtonFocused = (
+  props: CustomBattleEventProps
+): boolean => {
+  return (
+    props.view.hud.gameObjects.batterySelector.isDisabled() &&
+    !props.view.hud.gameObjects.burstButton.isDisabled() &&
+    props.view.hud.gameObjects.pilotButton.isDisabled()
+  );
 };
 
 /**
@@ -73,10 +111,12 @@ export const focusOutBurstButton = async (props: CustomBattleEventProps) => {
   props.view.dom.nearBurstButtonMessageWindow.visible(false);
   await props.view.hud.gameObjects.frontmostFader.opacity(0, 200).play();
   unattentionBurstButton(props);
+  enabledAllButtons(props);
 };
 
 /**
  * パイロットボタンにフォーカスインする
+ * フォーカスインしたもの以外は、操作不可能にする
  * @param props イベントプロパティ
  * @param caption 注釈メッセージ
  * @return 処理が完了したら発火するPromise
@@ -86,11 +126,28 @@ export const focusInPilotButton = async (
   caption: string[]
 ) => {
   unAttentionAllButtons(props);
+  disabledAllButtons(props);
   attentionPilotButton(props);
+  props.view.hud.gameObjects.pilotButton.disabled(false);
   invisibleAllMessageWindows(props);
   activeNearPilotButtonMessageWindow(props);
   props.view.dom.nearPilotButtonMessageWindow.messages(caption);
   await props.view.hud.gameObjects.frontmostFader.opacity(0.7, 200).play();
+};
+
+/**
+ * パイロットボタンにフォーカスしているか判定する
+ * @param props イベントプロパティ
+ * @return 判定結果、trueでフォーカスしている
+ */
+export const isPilotButtonFocused = (
+  props: CustomBattleEventProps
+): boolean => {
+  return (
+    props.view.hud.gameObjects.batterySelector.isDisabled() &&
+    props.view.hud.gameObjects.burstButton.isDisabled() &&
+    !props.view.hud.gameObjects.pilotButton.isDisabled()
+  );
 };
 
 /**
@@ -102,4 +159,5 @@ export const focusOutPilotButton = async (props: CustomBattleEventProps) => {
   props.view.dom.nearPilotButtonMessageWindow.visible(false);
   await props.view.hud.gameObjects.frontmostFader.opacity(0, 200).play();
   unattentionPilotButton(props);
+  enabledAllButtons(props);
 };

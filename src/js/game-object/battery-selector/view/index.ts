@@ -11,25 +11,12 @@ import { BatteryMeter } from "./battery-merter";
 import { BatteryMinus } from "./battery-minus";
 import { BatteryPlus } from "./battery-plus";
 
-/** パラメータ */
+/** コンストラクタのパラメータ */
 type Param = {
   /** リソース管理オブジェクト */
   resources: Resources;
-
   /** ゲームオブジェクトアクション */
   gameObjectAction: Observable<GameObjectAction>;
-
-  /**
-   * OKボタンが押された時に呼ばれるコールバック関数
-   * @param event イベント
-   */
-  onOkPush: (event: Event) => void;
-
-  /** +ボタンが押された時に呼ばれるコールバック関数 */
-  onPlusPush: () => void;
-
-  /** -ボタンが押された時に呼ばれるコールバック関数 */
-  onMinusPush: () => void;
 };
 
 /** バッテリーセレクタのビュー */
@@ -40,6 +27,10 @@ export class BatterySelectorView {
   #minus: BatteryMinus;
   #group: THREE.Group;
 
+  /**
+   * コンストラクタ
+   * @param param パラメータ
+   */
   constructor(param: Param) {
     this.#group = new THREE.Group();
     this.#meter = new BatteryMeter(param.resources);
@@ -48,33 +39,26 @@ export class BatterySelectorView {
     this.#button = new BatteryButton({
       resources: param.resources,
       gameObjectAction: param.gameObjectAction,
-      onPush: (event) => {
-        param.onOkPush(event);
-      },
     });
     this.#button.getObject3D().position.set(0, 0, 1);
     this.#group.add(this.#button.getObject3D());
     this.#plus = new BatteryPlus({
       resources: param.resources,
       gameObjectAction: param.gameObjectAction,
-      onPush: () => {
-        param.onPlusPush();
-      },
     });
     this.#plus.getObject3D().position.set(256, 176, 2);
     this.#group.add(this.#plus.getObject3D());
     this.#minus = new BatteryMinus({
       resources: param.resources,
       gameObjectAction: param.gameObjectAction,
-      onPush: () => {
-        param.onMinusPush();
-      },
     });
     this.#minus.getObject3D().position.set(-256, 176, 2);
     this.#group.add(this.#minus.getObject3D());
   }
 
-  /** デストラクタ */
+  /**
+   * デストラクタ相当の処理
+   */
   destructor(): void {
     this.#button.destructor();
     this.#meter.destructor();
@@ -89,7 +73,6 @@ export class BatterySelectorView {
 
   /**
    * モデルをビューに反映させる
-   *
    * @param model モデル
    * @param preRender プリレンダー情報
    */
@@ -117,5 +100,29 @@ export class BatterySelectorView {
       paddingBottom * devicePerScale +
       Math.max(marginBottom, preRender.safeAreaInset.bottom);
     this.#group.quaternion.copy(preRender.camera.quaternion);
+  }
+
+  /**
+   * OKボタン押下通知
+   * @return 通知ストリーム
+   */
+  okButtonPushNotifier(): Observable<Event> {
+    return this.#button.pushNotifier();
+  }
+
+  /**
+   * +ボタン押下通知
+   * @return 通知ストリーム
+   */
+  plusButtonPushNotifier(): Observable<unknown> {
+    return this.#plus.pushNotifier();
+  }
+
+  /**
+   * -ボタン押下通知
+   * @return 通知ストリーム
+   */
+  minusButtonPushNotifier(): Observable<unknown> {
+    return this.#minus.pushNotifier();
   }
 }

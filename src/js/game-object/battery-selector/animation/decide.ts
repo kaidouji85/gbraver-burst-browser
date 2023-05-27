@@ -1,29 +1,40 @@
 import { Animate } from "../../../animation/animate";
+import { process } from "../../../animation/process";
 import { tween } from "../../../animation/tween";
 import type { BatterySelectorModel } from "../model";
+import { BatterySelectorSounds } from "../sounds/battery-selector-sounds";
 
 /**
  * バッテリー決定アニメーション
- *
  * @param model モデル
+ * @param sounds サウンド
  * @return アニメーション
  */
-export function decide(model: BatterySelectorModel): Animate {
-  return tween(model, (t) =>
-    t.to(
-      {
-        batteryButtonScale: 1.1,
-      },
-      100
-    )
-  ).chain(
-    tween(model, (t) =>
-      t.to(
-        {
-          batteryButtonScale: 1,
-        },
-        100
+export function decide(
+  model: BatterySelectorModel,
+  sounds: BatterySelectorSounds
+): Animate {
+  return process(() => {
+    sounds.pushButtonSound.play();
+  })
+    .chain(
+      tween(model, (t) =>
+        t.to(
+          {
+            batteryButtonScale: 1.1,
+          },
+          100
+        )
       )
     )
-  );
+    .chain(
+      tween(model, (t) =>
+        t.to(
+          {
+            batteryButtonScale: 1,
+          },
+          100
+        )
+      )
+    );
 }

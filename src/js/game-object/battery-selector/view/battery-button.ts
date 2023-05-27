@@ -1,4 +1,4 @@
-import { Observable, Unsubscribable } from "rxjs";
+import { Observable } from "rxjs";
 import * as THREE from "three";
 
 import { HorizontalAnimationMesh } from "../../../mesh/horizontal-animation";
@@ -18,15 +18,8 @@ const BATTERY_VALUE_MAX_ANIMATION = 16;
 type Param = {
   /** リソース管理オブジェクト */
   resources: Resources;
-
   /** ゲームオブジェクトアクション */
   gameObjectAction: Observable<GameObjectAction>;
-
-  /**
-   * ボタンを押した時に呼ばれるコールバック関数
-   * @param event イベント
-   */
-  onPush: (event: Event) => void;
 };
 
 /** バッテリーボタン */
@@ -37,11 +30,9 @@ export class BatteryButton {
   #attackLabel: SimpleImageMesh;
   #defenseLabel: SimpleImageMesh;
   #batteryValue: HorizontalAnimationMesh;
-  #unsubscribers: Unsubscribable[];
 
   /**
    * コンストラクタ
-   *
    * @param param パラメータ
    */
   constructor(param: Param) {
@@ -100,24 +91,23 @@ export class BatteryButton {
     });
     this.#batteryValue.getObject3D().position.set(-130, -82, 0);
     this.#group.add(this.#batteryValue.getObject3D());
-    this.#unsubscribers = [
-      this.#pushDetector.notifyPressed().subscribe(param.onPush),
-    ];
   }
 
-  /** デストラクタ */
+  /**
+   * デストラクタ相当の処理
+   */
   destructor(): void {
     this.#button.destructor();
     this.#pushDetector.destructor();
     this.#attackLabel.destructor();
     this.#defenseLabel.destructor();
     this.#batteryValue.destructor();
-    this.#unsubscribers.forEach((unsubscriber) => {
-      unsubscriber.unsubscribe();
-    });
   }
 
-  /** モデルをビューに反映させる */
+  /**
+   * モデルをビューに反映させる
+   * @param model モデル
+   */
   update(model: BatterySelectorModel): void {
     this.#group.scale.set(
       model.batteryButtonScale,
@@ -133,8 +123,19 @@ export class BatteryButton {
     this.#batteryValue.setOpacity(model.opacity);
   }
 
-  /** シーンに追加するオブジェクトを取得する */
+  /**
+   * シーンに追加するオブジェクトを取得する
+   * @return シーンに追加するオブジェクト
+   */
   getObject3D(): THREE.Object3D {
     return this.#group;
+  }
+
+  /**
+   * ボタン押下通知
+   * @return 通知ストリーム
+   */
+  pushNotifier(): Observable<Event> {
+    return this.#pushDetector.notifyPressed();
   }
 }

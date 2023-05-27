@@ -54,7 +54,7 @@ export type NPCBattleCourse = {
 
 /** 1バッテリー ネオランドーザ */
 const OneBatteryNeoLandozerStage = {
-  caption: ["敵よりも大きい", "バッテリーを出せ"],
+  caption: ["敵よりも大きいバッテリーを出せ"],
   npc: oneBatteryNeoLandozerNPC(),
 };
 
@@ -66,7 +66,7 @@ const OneBatteryShinBraverStage = {
 
 /** 全力攻撃 ウィングドーザ */
 const MaxAttackWingDozerStage = {
-  caption: ["ゼロ防御だと即", "死する"],
+  caption: ["ゼロ防御だと即死する"],
   npc: maxBatteryAttackWingDozerNPC(),
 };
 
@@ -78,7 +78,7 @@ const MaxAttackShinBraverStage = {
 
 /** 3攻撃2防御 ライトングドーザ */
 const Attack3Defense2LightningDozerStage = {
-  caption: ["相手のバッテリー", "切れを狙え"],
+  caption: ["相手のバッテリー切れを狙え"],
   npc: attack3Defense2LightningDozerNPC(),
 };
 
@@ -90,7 +90,7 @@ const Attack3Defense2ShinBraverStage = {
 
 /** 4攻撃1防御 ライトニングドーザ */
 const Attack4Defense1LightningDozerStage = {
-  caption: ["攻撃にはバッテリーを", "2以上使え"],
+  caption: ["攻撃にはバッテリーを2以上使え"],
   npc: attack4Defense1LightningDozerNPC(),
 };
 
@@ -102,7 +102,7 @@ const Attack4Defense1ShinBraverStage = {
 
 /** 防御優先 ウィングドーザ */
 const PrioritizeDefenseWingDozerStage = {
-  caption: ["0攻撃で敵を", "消耗させろ"],
+  caption: ["0攻撃で敵を消耗させろ"],
   npc: prioritizeDefenseWingDozer(),
 };
 
@@ -114,67 +114,67 @@ const PrioritizeDefenseShinBraverStage = {
 
 /** 5攻撃+バースト ネオランドーザ */
 const BurstAttack5NeoLandozderStage = {
-  caption: ["同じバッテリーだとダメージ", "半減"],
+  caption: ["同じバッテリーだとダメージ半減"],
   npc: burstAttack5NeoLandozer(),
 };
 
 /** 攻撃全振り ウィングドーザ */
 const FullAttackWingDozerStage = {
-  caption: ["バーストで相手を一", "撃粉砕せよ"],
+  caption: ["バーストで相手を一撃粉砕せよ"],
   npc: fullAttackWingDozer(),
 };
 
 /** ハードコース シンブレイバー */
 const HardShinBraverStage = {
-  caption: ["バーストでバッテリー", "回復せよ"],
+  caption: ["バーストでバッテリー回復せよ"],
   npc: hardShinBraver(),
 };
 
 /** ハードコース ネオランドーザ */
 const HardNeoLandozerStage = {
-  caption: ["バースト後の攻撃は", "全力防御しろ"],
+  caption: ["バースト後の攻撃は全力防御しろ"],
   npc: hardNeoLandozer(),
 };
 
 /** ハードコース ウィングドーザ */
 const HardWingDozerStage = {
-  caption: ["バースト、", "パイロットをフル活用しろ"],
+  caption: ["バースト、パイロットをフル活用しろ"],
   npc: hardWingDozer(),
 };
 
 /** ハードコース ライトニングドーザ */
 const HardLightningDozer = {
-  caption: ["0攻撃で", "バリアをやり過ごせ"],
+  caption: ["0攻撃でバリアをやり過ごせ"],
   npc: hardLightningDozer(),
 };
 
 /** ベリーハードコース シンブレイバー */
 const VeryHardShinBraver = {
-  caption: ["荒削りの英雄、", "シンブレイバー"],
+  caption: ["新たな勇者、シンブレイバー"],
   npc: veryHardShinBraver(),
 };
 
 /** ベリーハードコース ウィングドーザ */
 const VeryHardWingDozer = {
-  caption: ["音速の騎士、", "ウィングドーザ"],
+  caption: ["音速の騎士、ウィングドーザ"],
   npc: veryHardWingDozerNPC(),
 };
 
 /** ベリーハードコース ネオランドーザ */
 const VeryHardNeoLandozer = {
-  caption: ["究極の破壊神、", "ネオランドーザ"],
+  caption: ["究極の破壊神、ネオランドーザ"],
   npc: veryHardNeoLandozer(),
 };
 
 /** ベリーハードコース ライトニングドーザ */
 const VeryHardLightningDozer = {
-  caption: ["不屈の守護神、", "ライトニングドーザ"],
+  caption: ["不屈の守護神、ライトニングドーザ"],
   npc: veryHardLightningDozer(),
 };
 
 /** デフォルトのステージ */
 export const DefaultStage: NPCBattleStage = {
-  caption: ["敵よりも大きい", "バッテリーを出せ"],
+  caption: ["敵よりも大きいバッテリーを出せ"],
   npc: hardNeoLandozer(),
   bgm: SOUND_IDS.BATTLE_BGM_01,
 };

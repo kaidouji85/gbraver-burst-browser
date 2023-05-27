@@ -61,7 +61,6 @@ export async function beforeLastState(
     invisibleAllMessageWindows(props);
     return {
       ...updatedStateHistory,
-      selectableCommands: "All",
       isBatterySystemDescriptionComplete: true,
     };
   }
