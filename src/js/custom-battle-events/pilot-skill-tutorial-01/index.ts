@@ -14,7 +14,9 @@ class PilotSkillTutorial01 extends EmptyCustomBattleEvent {
   constructor() {
     super();
     this.#state = {
-      stateHistory: []
+      stateHistory: [],
+      isIntroductionComplete: false,
+      isGaiInspectingComplete: false,
     };
   }
 

@@ -4,4 +4,8 @@ import { GameState } from "gbraver-burst-core";
 export type PilotSkillTutorial01State = {
   /** ステートヒストリー、 beforeLastState開始時に更新される */
   stateHistory: GameState[];
+  /** イントロダクションを再生したか、trueで再生した */
+  isIntroductionComplete: boolean;
+  /** ガイ視察を再生したか、trueで再生した */
+  isGaiInspectingComplete: boolean;
 };

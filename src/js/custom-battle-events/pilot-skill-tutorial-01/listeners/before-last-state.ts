@@ -21,16 +21,16 @@ export async function beforeLastState(
   };
 
   const turn = turnCount(updatedStateHistory.stateHistory);
-  if (turn === 1) {
+  if (turn === 1 && !updatedStateHistory.isIntroductionComplete) {
     await introduction(props);
     invisibleAllMessageWindows(props);
-    return updatedStateHistory;
+    return {...updatedStateHistory, isIntroductionComplete: true};
   }
   
-  if (turn === 2) {
+  if (turn === 2 && !updatedStateHistory.isGaiInspectingComplete) {
     await gaiInspecting(props);
     invisibleAllMessageWindows(props);
-    return updatedStateHistory;
+    return {...updatedStateHistory, isGaiInspectingComplete: true};
   }
   
   return updatedStateHistory;
