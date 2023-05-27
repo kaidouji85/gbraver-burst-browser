@@ -4,7 +4,6 @@ import { turnCount } from "../../turn-count";
 import { PilotSkillTutorial01State } from "../state";
 import { gaiInspecting } from "../stories/gai-inspectiong";
 import { introduction } from "../stories/introduction";
-import {declarationVictory} from "../stories/declaration-victory";
 
 /**
  * 最終ステート直前イベント
@@ -28,17 +27,11 @@ export async function beforeLastState(
     return {...updatedStateHistory, isIntroductionComplete: true};
   }
   
-  if (turn === 2 && !updatedStateHistory.isGaiInspectingComplete) {
+  if (turn === 3 && !updatedStateHistory.isGaiInspectingComplete) {
     await gaiInspecting(props);
     invisibleAllMessageWindows(props);
     return {...updatedStateHistory, isGaiInspectingComplete: true};
   }
 
-  if (turn === 3 && !updatedStateHistory.isDeclarationVictoryComplete) {
-    await declarationVictory(props);
-    invisibleAllMessageWindows(props);
-    return {...updatedStateHistory, isDeclarationVictoryComplete: true};
-  }
-  
   return updatedStateHistory;
 }

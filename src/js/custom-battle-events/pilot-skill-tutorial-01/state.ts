@@ -8,6 +8,4 @@ export type PilotSkillTutorial01State = {
   isIntroductionComplete: boolean;
   /** ガイ視察を再生したか、trueで再生した */
   isGaiInspectingComplete: boolean;
-  /** ツバサ先輩勝利宣言を再生したか、trueで再生した */
-  isDeclarationVictoryComplete: boolean;
 };

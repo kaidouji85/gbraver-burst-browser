@@ -18,7 +18,6 @@ class PilotSkillTutorial01 extends EmptyCustomBattleEvent {
       stateHistory: [],
       isIntroductionComplete: false,
       isGaiInspectingComplete: false,
-      isDeclarationVictoryComplete: false,
     };
   }
 
