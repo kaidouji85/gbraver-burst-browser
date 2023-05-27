@@ -14,10 +14,9 @@ export async function declarationVictory(
   await scrollRightMessages(props, [["シンヤ", "「ツバサ先輩 勝負はこれからッスよ」"]]);
   props.view.dom.rightMessageWindow.darken();
   activeLeftMessageWindowWithFace(props, "Tsubasa");
-  await scrollLeftMessages(props, [[
-    "ツバサ",
-    "「悪いなシンヤ",
-    "この瞬間に 私の勝ちが確定した」"
-  ]]);
+  await scrollLeftMessages(props, [
+    ["ツバサ", "「悪いなシンヤ"],
+    ["この瞬間に 私の勝ちが確定した」"]
+  ]);
   props.view.dom.leftMessageWindow.darken();
 }
