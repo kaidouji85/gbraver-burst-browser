@@ -39,6 +39,9 @@ export async function introduction(
   ]);
   props.view.dom.leftMessageWindow.darken();
   activeRightMessageWindowWithFace(props, "Shinya");
-  await scrollRightMessages(props, [["シンヤ", "「了解ッス」"]]);
+  await scrollRightMessages(props, [
+    ["シンヤ", "「了解ッス"],
+    ["今日も俺が勝つッスよ ツバサ先輩 」"],
+  ]);
   props.view.dom.rightMessageWindow.darken();
 }

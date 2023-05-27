@@ -16,13 +16,13 @@ export async function playerLose(
 ): Promise<void> {
   activeRightMessageWindowWithFace(props, "Shinya");
   await scrollRightMessages(props, [
-    ["シンヤ", "「あと少しで勝てそうだったスのに」"],
+    ["シンヤ", "「クッ あと少しで勝てそうだったのに」"],
   ]);
   props.view.dom.rightMessageWindow.darken();
   activeLeftMessageWindowWithFace(props, "Tsubasa");
   await scrollLeftMessages(props, [
-    ["ツバサ", "「残念だがシンヤ"],
-    ["君とシンブレイバー組み合わせでは 絶対に私を倒すことができない」"],
+    ["ツバサ", "「残念だが君とシンブレイバー組み合わせでは"],
+    ["絶対に私を倒すことができない」"],
   ]);
   props.view.dom.leftMessageWindow.darken();
   activeRightMessageWindowWithFace(props, "Shinya");
@@ -32,26 +32,28 @@ export async function playerLose(
   props.view.dom.rightMessageWindow.darken();
   activeLeftMessageWindowWithFace(props, "Tsubasa");
   await scrollLeftMessages(props, [
-    ["ツバサ", "「今の君では 私の攻撃に2回耐えることはできない"],
-    ["かつ 私が先行なので 2ターン目に私を倒せないと負けが確定する」"],
+    ["ツバサ", "「今の君では私の攻撃に2回耐えることはできない"],
+    ["かつ 私が先行なので2ターン目に私を倒せないと負けが確定する」"],
   ]);
   props.view.dom.leftMessageWindow.darken();
   activeRightMessageWindowWithFace(props, "Shinya");
   await scrollRightMessages(props, [
-    ["シンヤ", "「でもツバサ先輩"],
-    ["シンブレイバーの攻撃力だとウィングドーザを一撃で倒せないッスよ"],
+    ["シンヤ", "「でもツバサ先輩 シンブレイバーの攻撃力だとウィングドーザを一撃で倒せないッスよ"],
     ["もう詰みッスか」"],
   ]);
   props.view.dom.rightMessageWindow.darken();
   activeLeftMessageWindowWithFace(props, "Tsubasa");
   await scrollLeftMessages(props, [
-    ["ツバサ", "「案ずるなシンヤ"],
-    ["シンブレイバーの攻撃力を底上げすれば勝機はある"],
-    ["そのためのパイロットスキルだ"],
-    ["ガイ君 そこに居るんだろう」"],
+    ["ツバサ", "「案ずるなシンヤ シンブレイバーの攻撃力を底上げすれば勝機はある"],
+    ["そのためのパイロットスキルだ」"],
   ]);
   props.view.dom.leftMessageWindow.darken();
   await refreshConversation(props);
+  activeLeftMessageWindowWithFace(props, "Tsubasa");
+  await scrollLeftMessages(props, [
+    ["ツバサ", "「ガイ君 そこに居るんだろう」"],
+  ]);
+  props.view.dom.leftMessageWindow.darken();
   activeRightMessageWindowWithFace(props, "Gai");
   await scrollRightMessages(props, [["ガイ", "「……！！」"]]);
   props.view.dom.rightMessageWindow.darken();
