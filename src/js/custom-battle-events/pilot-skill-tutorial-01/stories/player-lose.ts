@@ -3,11 +3,11 @@ import {activeLeftMessageWindowWithFace, activeRightMessageWindowWithFace} from 
 import {scrollLeftMessages, scrollRightMessages} from "../../scroll-messages";
 
 /**
- * 敗北
+ * プレイヤー敗北ストーリー
  * @param props イベントプロパティ
  * @return ストーリーが完了したら発火するPromise
  */
-export async function lose(
+export async function playerLose(
   props: Readonly<CustomBattleEventProps>
 ): Promise<void> {
   activeRightMessageWindowWithFace(props, "Shinya");
