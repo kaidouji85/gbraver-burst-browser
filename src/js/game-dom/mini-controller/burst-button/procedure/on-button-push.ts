@@ -1,5 +1,5 @@
-import { PushDOM } from "../../../../dom/event-stream";
 import { BurstButtonProps } from "../props";
+import {PushDOM} from "../../../../dom/push-dom";
 
 /**
  * ボタンが押された時の処理

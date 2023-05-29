@@ -1,6 +1,6 @@
 import { pop } from "../../../dom/animation";
-import { PushDOM } from "../../../dom/event-stream";
 import { NetBattleSelectorDialogProps } from "../props";
+import {PushDOM} from "../../../dom/push-dom";
 
 /**
  * クロージャが押された時の処理

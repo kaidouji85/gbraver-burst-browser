@@ -1,8 +1,6 @@
 import { Observable, Subject, Unsubscribable } from "rxjs";
 
 import { pop } from "../../dom/animation";
-import type { PushDOM } from "../../dom/event-stream";
-import { domImmediatePushStream } from "../../dom/event-stream";
 import { Exclusive } from "../../exclusive/exclusive";
 import type { Resources } from "../../resource";
 import { PathIds } from "../../resource/path";
@@ -16,6 +14,7 @@ import type {
   TutorialStageSelect,
 } from "./tutoria-stage-element";
 import { TutorialStageElement } from "./tutoria-stage-element";
+import {domImmediatePushStream, PushDOM} from "../../dom/push-dom";
 
 /** ROOT要素class属性*/
 const ROOT_CLASS = "tutorial-selector";

@@ -3,8 +3,6 @@ import { Howl } from "howler";
 import { Observable, Subject, Unsubscribable } from "rxjs";
 
 import { pop } from "../../../dom/animation";
-import type { PushDOM } from "../../../dom/event-stream";
-import { domImmediatePushStream } from "../../../dom/event-stream";
 import { replaceDOM } from "../../../dom/replace-dom";
 import { Exclusive } from "../../../exclusive/exclusive";
 import type { Resources } from "../../../resource";
@@ -13,6 +11,7 @@ import { domUuid } from "../../../uuid/dom-uuid";
 import { ArmdozerIcon } from "./armdozer-icon";
 import { ArmdozerStatus } from "./armdozer-status";
 import { createArmdozerIcon } from "./create-armdozer-icon";
+import {domImmediatePushStream, PushDOM} from "../../../dom/push-dom";
 
 /** ルートHTML要素 class */
 const ROOT_CLASS_NAME = "armdozer-selector";

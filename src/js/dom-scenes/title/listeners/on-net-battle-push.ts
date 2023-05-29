@@ -1,6 +1,6 @@
 import { pop } from "../../../dom/animation";
-import type { PushDOM } from "../../../dom/event-stream";
 import type { TitleProps } from "../props";
+import {PushDOM} from "../../../dom/push-dom";
 
 /**
  * ネット対戦が押された時の処理

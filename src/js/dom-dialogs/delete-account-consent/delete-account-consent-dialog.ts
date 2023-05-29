@@ -2,14 +2,13 @@ import { Howl } from "howler";
 import { Observable, Subject, Unsubscribable } from "rxjs";
 
 import { pop } from "../../dom/animation";
-import type { PushDOM } from "../../dom/event-stream";
-import { domImmediatePushStream } from "../../dom/event-stream";
 import { Exclusive } from "../../exclusive/exclusive";
 import type { Resources } from "../../resource";
 import { PathIds } from "../../resource/path";
 import { SOUND_IDS } from "../../resource/sound";
 import { domUuid } from "../../uuid/dom-uuid";
 import type { DOMDialog } from "../dialog";
+import {domImmediatePushStream, PushDOM} from "../../dom/push-dom";
 
 /** ルート要素 class属性 */
 const ROOT_CLASS = "delete-account-consent";

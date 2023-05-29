@@ -1,6 +1,6 @@
 import { pop } from "../../../dom/animation";
-import type { PushDOM } from "../../../dom/event-stream";
 import type { DifficultyDialogProps } from "../props";
+import {PushDOM} from "../../../dom/push-dom";
 
 /**
  * Easyが押された際の処理

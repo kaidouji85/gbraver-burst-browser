@@ -3,8 +3,6 @@ import { Observable, Subject, Unsubscribable } from "rxjs";
 
 import type { BGMManager } from "../../bgm/bgm-manager";
 import { fadeIn, play } from "../../bgm/bgm-operators";
-import type { PushDOM } from "../../dom/event-stream";
-import { domImmediatePushStream } from "../../dom/event-stream";
 import type { Resources } from "../../resource";
 import { PathIds } from "../../resource/path";
 import type { SoundResource } from "../../resource/sound";
@@ -12,6 +10,7 @@ import { createEmptySoundResource, SOUND_IDS } from "../../resource/sound";
 import { domUuid } from "../../uuid/dom-uuid";
 import { waitElementLoaded } from "../../wait/wait-element-loaded";
 import type { DOMScene } from "../dom-scene";
+import {domImmediatePushStream, PushDOM} from "../../dom/push-dom";
 
 /** ルート要素のclass属性 */
 const ROOT_CLASS = "npc-ending";

@@ -1,6 +1,6 @@
 import { pop } from "../../../../dom/animation";
-import type { PushDOM } from "../../../../dom/event-stream";
 import type { ConfigChangedDialogProps } from "../props";
+import {PushDOM} from "../../../../dom/push-dom";
 
 /**
  * クロージャを押した時の処理

@@ -1,6 +1,5 @@
 import { Unsubscribable } from "rxjs";
 
-import { domImmediatePushStream } from "../../../dom/event-stream";
 import type { DifficultyDialogProps } from "../props";
 import { onBackGroundPush } from "./on-back-ground-push";
 import { onCloserPush } from "./on-closer-push";
@@ -8,6 +7,7 @@ import { onEasyPush } from "./on-easy-push";
 import { onHardPush } from "./on-hard-push";
 import { onNormalPush } from "./on-normal-push";
 import { onVeryHardPush } from "./on-very-hard-push";
+import {domImmediatePushStream} from "../../../dom/push-dom";
 
 /**
  * 難易度選択ダイアログにイベントリスナをバインドする

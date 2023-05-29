@@ -1,11 +1,11 @@
 import { map, Observable } from "rxjs";
 
 import { pop } from "../../dom/animation";
-import { domImmediatePushStream } from "../../dom/event-stream";
 import type { TutorialStageID } from "../../game/tutorial-stages/tutorial-stage";
 import type { Resources } from "../../resource";
 import type { SoundResource } from "../../resource/sound";
 import { createEmptySoundResource, SOUND_IDS } from "../../resource/sound";
+import {domImmediatePushStream} from "../../dom/push-dom";
 
 /** ルートHTML class属性 */
 const ROOT_CLASS = "tutorial-stage";

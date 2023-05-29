@@ -3,8 +3,6 @@ import { Howl } from "howler";
 import { Observable, Subject, Unsubscribable } from "rxjs";
 
 import { pop } from "../../../dom/animation";
-import type { PushDOM } from "../../../dom/event-stream";
-import { domImmediatePushStream } from "../../../dom/event-stream";
 import { replaceDOM } from "../../../dom/replace-dom";
 import { Exclusive } from "../../../exclusive/exclusive";
 import type { Resources } from "../../../resource";
@@ -13,6 +11,7 @@ import { domUuid } from "../../../uuid/dom-uuid";
 import { createPilotIcon } from "./create-pilot-icon";
 import { PilotIcon } from "./pilot-icon";
 import { PilotStatus } from "./pilot-status";
+import {domImmediatePushStream, PushDOM} from "../../../dom/push-dom";
 
 /**ルート要素のclass名 */
 export const ROOT_CLASS_NAME = "pilot-selector";

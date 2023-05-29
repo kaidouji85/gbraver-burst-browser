@@ -1,6 +1,5 @@
 import { Observable, Unsubscribable } from "rxjs";
 
-import { domImmediatePushStream } from "../../dom/event-stream";
 import { Resources } from "../../resource";
 import { DOMDialog } from "../dialog";
 import { onBackgroundPush } from "./listeners/on-background-push";
@@ -12,6 +11,7 @@ import {
   createNetBattleSelectrProps,
   NetBattleSelectorDialogProps,
 } from "./props";
+import {domImmediatePushStream} from "../../dom/push-dom";
 
 /** ネットバトルセレクターダイアログ */
 export class NetBattleSelectorDialog implements DOMDialog {

@@ -1,5 +1,5 @@
-import type { PushDOM } from "../../../dom/event-stream";
 import type { TitleProps } from "../props";
+import {PushDOM} from "../../../dom/push-dom";
 
 /**
  * アカウント削除を押した時の処理

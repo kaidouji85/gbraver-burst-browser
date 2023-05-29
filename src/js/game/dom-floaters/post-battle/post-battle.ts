@@ -2,7 +2,6 @@ import { Howl } from "howler";
 import { Observable, Subject, Unsubscribable } from "rxjs";
 
 import { pop, waitFinishAnimation } from "../../../dom/animation";
-import { domImmediatePushStream } from "../../../dom/event-stream";
 import { Exclusive } from "../../../exclusive/exclusive";
 import type { Resources } from "../../../resource";
 import { SOUND_IDS } from "../../../resource/sound";
@@ -11,6 +10,7 @@ import type {
   ButtonStyle,
   PostBattleButtonConfig,
 } from "./post-battle-button-config";
+import {domImmediatePushStream} from "../../../dom/push-dom";
 
 /** ルートHTML要素のclass属性 */
 const ROOT_CLASS = "post-battle";

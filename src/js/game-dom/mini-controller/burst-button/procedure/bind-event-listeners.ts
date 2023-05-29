@@ -1,8 +1,8 @@
 import { Unsubscribable } from "rxjs";
 
-import { domImmediatePushStream } from "../../../../dom/event-stream";
 import { BurstButtonProps } from "../props";
 import { onButtonPush } from "./on-button-push";
+import {domImmediatePushStream} from "../../../../dom/push-dom";
 
 /**
  * バーストボタンにイベントを関連付ける

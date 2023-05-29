@@ -1,6 +1,5 @@
 import { Unsubscribable } from "rxjs";
 
-import { domImmediatePushStream } from "../../../dom/event-stream";
 import type { TitleProps } from "../props";
 import { onArcadePush } from "./on-arcade-push";
 import { onAvatarPush } from "./on-avatar-push";
@@ -13,6 +12,7 @@ import { onNetBattlePush } from "./on-net-battle-push";
 import { onPushDeleteAccount } from "./on-push-delete-account";
 import { onRootPush } from "./on-root-push";
 import { onTutorialPush } from "./on-tutorial-push";
+import {domImmediatePushStream} from "../../../dom/push-dom";
 
 /**
  * タイトル画面にイベントリスナをバインドする

@@ -1,6 +1,6 @@
 import { pop } from "../../../../dom/animation";
-import type { PushDOM } from "../../../../dom/event-stream";
 import type { ConfigChangedDialogProps } from "../props";
+import {PushDOM} from "../../../../dom/push-dom";
 
 /**
  * 設定変更受け入れボタンを押した時の処理

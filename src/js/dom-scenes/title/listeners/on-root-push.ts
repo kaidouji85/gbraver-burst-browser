@@ -1,9 +1,9 @@
-import type { PushDOM } from "../../../dom/event-stream";
 import type { TitleProps } from "../props";
 import { closeAccountMenu } from "./close-account-menu";
 import { closeHelpMenu } from "./close-help-menu";
 import { isAccountMenuOpen } from "./is-account-menu-open";
 import { isHelpMenuOpen } from "./is-help-menu-open";
+import {PushDOM} from "../../../dom/push-dom";
 
 /**
  * ルート要素が押された時の処理

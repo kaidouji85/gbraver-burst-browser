@@ -1,8 +1,8 @@
 import { pop } from "../../../dom/animation";
-import { PushDOM } from "../../../dom/event-stream";
 import { TitleProps } from "../props";
 import { isHelpMenuOpen } from "./is-help-menu-open";
 import { openHelpMenu } from "./open-help-menu";
+import {PushDOM} from "../../../dom/push-dom";
 
 /**
  * ヘルプアイコンを押した際の処理

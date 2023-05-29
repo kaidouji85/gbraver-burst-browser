@@ -1,4 +1,4 @@
-import { fromEvent, map, merge, Observable } from "rxjs";
+import {fromEvent, map, merge, Observable} from "rxjs";
 
 /** HTML要素が押下された時のアクション */
 export type PushDOM = {
@@ -33,25 +33,4 @@ export function domImmediatePushStream(dom: HTMLElement): Observable<PushDOM> {
     })
   );
   return merge(click, touchStart);
-}
-
-/** inputイベントをラッピングしたもの */
-export type InputDOM = {
-  type: "ChangeDOM";
-  /** イベントオブジェクト */
-  event: InputEvent;
-};
-
-/**
- * inputイベントからストリームを生成する
- * @param dom ストリーム生成元のDOM
- * @returns 生成結果
- */
-export function inputDOMStream(dom: HTMLInputElement): Observable<InputDOM> {
-  return fromEvent<InputEvent>(dom, "input").pipe(
-    map((event) => ({
-      type: "ChangeDOM",
-      event,
-    }))
-  );
 }

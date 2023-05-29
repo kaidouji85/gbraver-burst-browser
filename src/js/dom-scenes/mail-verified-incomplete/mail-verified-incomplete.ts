@@ -2,11 +2,10 @@ import { Observable, Subject, Unsubscribable } from "rxjs";
 
 import { pop } from "../../dom/animation";
 import { escapeHTML } from "../../dom/escape-html";
-import type { PushDOM } from "../../dom/event-stream";
-import { domImmediatePushStream } from "../../dom/event-stream";
 import { Exclusive } from "../../exclusive/exclusive";
 import { domUuid } from "../../uuid/dom-uuid";
 import type { DOMScene } from "../dom-scene";
+import {domImmediatePushStream, PushDOM} from "../../dom/push-dom";
 
 /** ルート要素 class属性 */
 const ROOT_CLASS = "mail-verified-incomplete";
