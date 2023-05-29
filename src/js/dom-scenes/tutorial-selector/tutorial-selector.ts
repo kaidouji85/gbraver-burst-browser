@@ -2,7 +2,7 @@ import { Observable, Subject, Unsubscribable } from "rxjs";
 
 import { pop } from "../../dom/animation";
 import type { PushDOM } from "../../dom/event-stream";
-import { pushDOMStream } from "../../dom/event-stream";
+import { domImmediatePushStream } from "../../dom/event-stream";
 import { Exclusive } from "../../exclusive/exclusive";
 import type { Resources } from "../../resource";
 import { PathIds } from "../../resource/path";
@@ -132,7 +132,7 @@ export class TutorialSelector implements DOMScene {
       this.#stages.appendChild(stage.getRootHTMLElement());
     });
     this.#unsubscribers = [
-      pushDOMStream(this.#prevButton).subscribe((action) => {
+      domImmediatePushStream(this.#prevButton).subscribe((action) => {
         this.#onPrevPush(action);
       }),
       ...stageElements.map((stage) =>

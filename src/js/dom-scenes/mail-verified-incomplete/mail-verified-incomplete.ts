@@ -3,7 +3,7 @@ import { Observable, Subject, Unsubscribable } from "rxjs";
 import { pop } from "../../dom/animation";
 import { escapeHTML } from "../../dom/escape-html";
 import type { PushDOM } from "../../dom/event-stream";
-import { pushDOMStream } from "../../dom/event-stream";
+import { domImmediatePushStream } from "../../dom/event-stream";
 import { Exclusive } from "../../exclusive/exclusive";
 import { domUuid } from "../../uuid/dom-uuid";
 import type { DOMScene } from "../dom-scene";
@@ -94,10 +94,10 @@ export class MailVerifiedIncomplete implements DOMScene {
     this.#gotoTitleButton = elements.gotoTitle;
     this.#reloadButton = elements.reload;
     this.#unsubscribers = [
-      pushDOMStream(this.#gotoTitleButton).subscribe((action) => {
+      domImmediatePushStream(this.#gotoTitleButton).subscribe((action) => {
         this.#onGotoTitleButtonPush(action);
       }),
-      pushDOMStream(this.#reloadButton).subscribe((action) => {
+      domImmediatePushStream(this.#reloadButton).subscribe((action) => {
         this.#onReloadButtonPush(action);
       }),
     ];

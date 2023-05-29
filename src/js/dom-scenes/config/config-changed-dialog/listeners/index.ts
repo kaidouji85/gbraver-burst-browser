@@ -1,6 +1,6 @@
 import { Unsubscribable } from "rxjs";
 
-import { pushDOMStream } from "../../../../dom/event-stream";
+import { domImmediatePushStream } from "../../../../dom/event-stream";
 import type { ConfigChangedDialogProps } from "../props";
 import { onAcceptPush } from "./on-accept-push";
 import { onBackGroundPush } from "./on-back-ground-push";
@@ -17,16 +17,16 @@ export function bindEventListeners(
   props: ConfigChangedDialogProps
 ): Unsubscribable[] {
   return [
-    pushDOMStream(props.backGround).subscribe((action) => {
+    domImmediatePushStream(props.backGround).subscribe((action) => {
       onBackGroundPush(props, action);
     }),
-    pushDOMStream(props.closer).subscribe((action) => {
+    domImmediatePushStream(props.closer).subscribe((action) => {
       onCloserPush(props, action);
     }),
-    pushDOMStream(props.discard).subscribe((action) => {
+    domImmediatePushStream(props.discard).subscribe((action) => {
       onDiscardPush(props, action);
     }),
-    pushDOMStream(props.accept).subscribe((action) => {
+    domImmediatePushStream(props.accept).subscribe((action) => {
       onAcceptPush(props, action);
     }),
   ];

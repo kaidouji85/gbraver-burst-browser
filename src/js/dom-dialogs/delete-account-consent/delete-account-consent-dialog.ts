@@ -3,7 +3,7 @@ import { Observable, Subject, Unsubscribable } from "rxjs";
 
 import { pop } from "../../dom/animation";
 import type { PushDOM } from "../../dom/event-stream";
-import { pushDOMStream } from "../../dom/event-stream";
+import { domImmediatePushStream } from "../../dom/event-stream";
 import { Exclusive } from "../../exclusive/exclusive";
 import type { Resources } from "../../resource";
 import { PathIds } from "../../resource/path";
@@ -133,16 +133,16 @@ export class DeleteAccountConsentDialog implements DOMDialog {
     this.#deleteAccount = new Subject();
     this.#closeDialog = new Subject();
     this.#unsubscribers = [
-      pushDOMStream(this.#backGround).subscribe((action) => {
+      domImmediatePushStream(this.#backGround).subscribe((action) => {
         this.#onPushOutsideOfDialog(action);
       }),
-      pushDOMStream(this.#closer).subscribe((action) => {
+      domImmediatePushStream(this.#closer).subscribe((action) => {
         this.#onCloserPush(action);
       }),
-      pushDOMStream(this.#deleteAccountButton).subscribe((action) => {
+      domImmediatePushStream(this.#deleteAccountButton).subscribe((action) => {
         this.#onDeleteAccountButtonPush(action);
       }),
-      pushDOMStream(this.#closeButton).subscribe((action) => {
+      domImmediatePushStream(this.#closeButton).subscribe((action) => {
         this.#onCloseButtonPush(action);
       }),
     ];

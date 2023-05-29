@@ -3,7 +3,7 @@ import { Observable, Subject, Unsubscribable } from "rxjs";
 
 import { pop } from "../../dom/animation";
 import type { PushDOM } from "../../dom/event-stream";
-import { pushDOMStream } from "../../dom/event-stream";
+import { domImmediatePushStream } from "../../dom/event-stream";
 import { Exclusive } from "../../exclusive/exclusive";
 import type { Resources } from "../../resource";
 import { PathIds } from "../../resource/path";
@@ -95,7 +95,7 @@ export class MatchingDialog implements DOMDialog {
     this.#exclusive = new Exclusive();
     this.#matchingCanceled = new Subject();
     this.#unsubscribers = [
-      pushDOMStream(this.#closer).subscribe((action) => {
+      domImmediatePushStream(this.#closer).subscribe((action) => {
         this.#onCloserPush(action);
       }),
     ];
