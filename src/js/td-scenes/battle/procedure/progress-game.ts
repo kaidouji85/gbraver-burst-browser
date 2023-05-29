@@ -10,7 +10,6 @@ import type { BattleSceneProps } from "../battle-scene-props";
 
 /**
  * コマンド選択可能になるまでゲームを進める
- *
  * @param props 戦闘シーンプロパティ
  * @param command プレイヤーが入力したコマンド
  * @return 処理が完了したら発火するPromise
@@ -21,10 +20,8 @@ const repeatProgressWhenUnselectable = async (
 ): Promise<GameState | null | undefined> => {
   let lastCommand: Command = command;
   const maxProgressCount = 100;
-
   for (let i = 0; i < maxProgressCount; i++) {
     const updateState = await props.battleProgress.progress(lastCommand);
-
     if (updateState.length < 1) {
       return;
     }
@@ -53,7 +50,6 @@ const repeatProgressWhenUnselectable = async (
     const playerCommand = lastState.effect.players.find(
       (v) => v.playerId === props.playerId
     );
-
     if (!playerCommand || playerCommand.selectable) {
       return lastState;
     }
@@ -66,7 +62,6 @@ const repeatProgressWhenUnselectable = async (
 
 /**
  * ゲームが終了した際の処理
- *
  * @param props 戦闘シーンプロパティ
  * @param gameEnd ゲーム終了情報
  * @return 処理が完了したら発火するPromise
@@ -85,7 +80,6 @@ const onGameEnd = async (
 
 /**
  * ゲームを進めるヘルパーメソッド
- *
  * @param command プレイヤーが入力したコマンド
  * @return 処理が完了したら発火するPromise
  */
@@ -94,7 +88,6 @@ export async function progressGame(
   command: Command
 ): Promise<void> {
   const lastState = await repeatProgressWhenUnselectable(props, command);
-
   if (lastState && lastState.effect.name === "GameEnd") {
     await onGameEnd(props, lastState.effect);
   }
