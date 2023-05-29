@@ -44,7 +44,7 @@ export function domImmediatePushStream(dom: HTMLElement): Observable<PushDOM> {
  * @return ストリーム
  */
 export function domPushStream(dom: HTMLElement): Observable<PushDOM> {
-  return  fromEvent<MouseEvent>(dom, "click").pipe(
+  return fromEvent<MouseEvent>(dom, "click").pipe(
     map((event) => {
       return {
         type: "PushDOM",
