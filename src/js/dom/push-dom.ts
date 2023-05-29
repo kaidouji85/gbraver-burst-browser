@@ -13,7 +13,7 @@ export type PushDOM = {
  * @return ストリーム
  */
 export function domImmediatePushStream(dom: HTMLElement): Observable<PushDOM> {
-  const click: Observable<PushDOM> = fromEvent<MouseEvent>(
+  const mouseDown: Observable<PushDOM> = fromEvent<MouseEvent>(
     dom,
     "mousedown"
   ).pipe(
@@ -35,7 +35,7 @@ export function domImmediatePushStream(dom: HTMLElement): Observable<PushDOM> {
       };
     })
   );
-  return merge(click, touchStart);
+  return merge(mouseDown, touchStart);
 }
 
 /**
@@ -44,7 +44,7 @@ export function domImmediatePushStream(dom: HTMLElement): Observable<PushDOM> {
  * @return ストリーム
  */
 export function domPushStream(dom: HTMLElement): Observable<PushDOM> {
-  const click: Observable<PushDOM> = fromEvent<MouseEvent>(dom, "mouseup").pipe(
+  return  fromEvent<MouseEvent>(dom, "click").pipe(
     map((event) => {
       return {
         type: "PushDOM",
@@ -52,16 +52,4 @@ export function domPushStream(dom: HTMLElement): Observable<PushDOM> {
       };
     })
   );
-  const touchStart: Observable<PushDOM> = fromEvent<TouchEvent>(
-    dom,
-    "touchend"
-  ).pipe(
-    map((event) => {
-      return {
-        type: "PushDOM",
-        event,
-      };
-    })
-  );
-  return merge(click, touchStart);
 }
