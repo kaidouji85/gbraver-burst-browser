@@ -1,4 +1,4 @@
-import type { PushDOM } from "../../../dom/event-stream";
+import { PushDOM } from "../../../dom/push-dom";
 import type { TitleProps } from "../props";
 import { closeAccountMenu } from "./close-account-menu";
 import { closeHelpMenu } from "./close-help-menu";

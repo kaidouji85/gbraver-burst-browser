@@ -3,8 +3,7 @@ import { Howl } from "howler";
 import { Observable, Subject, Unsubscribable } from "rxjs";
 
 import { pop } from "../../../dom/animation";
-import type { PushDOM } from "../../../dom/event-stream";
-import { pushDOMStream } from "../../../dom/event-stream";
+import { domImmediatePushStream, PushDOM } from "../../../dom/push-dom";
 import { replaceDOM } from "../../../dom/replace-dom";
 import { Exclusive } from "../../../exclusive/exclusive";
 import type { Resources } from "../../../resource";
@@ -152,10 +151,10 @@ export class ArmdozerSelector {
           this.#onArmdozerSelect(v.armdozerId);
         })
       ),
-      pushDOMStream(this.#okButton).subscribe((action) => {
+      domImmediatePushStream(this.#okButton).subscribe((action) => {
         this.#onOkButtonPush(action);
       }),
-      pushDOMStream(this.#prevButton).subscribe((action) => {
+      domImmediatePushStream(this.#prevButton).subscribe((action) => {
         this.#onPrevButtonPush(action);
       }),
     ];

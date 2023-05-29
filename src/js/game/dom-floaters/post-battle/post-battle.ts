@@ -2,7 +2,7 @@ import { Howl } from "howler";
 import { Observable, Subject, Unsubscribable } from "rxjs";
 
 import { pop, waitFinishAnimation } from "../../../dom/animation";
-import { pushDOMStream } from "../../../dom/event-stream";
+import { domImmediatePushStream } from "../../../dom/push-dom";
 import { Exclusive } from "../../../exclusive/exclusive";
 import type { Resources } from "../../../resource";
 import { SOUND_IDS } from "../../../resource/sound";
@@ -167,15 +167,17 @@ export class PostBattleFloater {
       button.innerText = label;
       const { className, sound } = createButtonStyle(style);
       button.className = className;
-      const unsubscriber = pushDOMStream(button).subscribe(({ event }) => {
-        this.#exclusive.execute(async () => {
-          event.preventDefault();
-          event.stopPropagation();
-          sound.play();
-          await pop(button);
-          this.#selectionComplete.next(action);
-        });
-      });
+      const unsubscriber = domImmediatePushStream(button).subscribe(
+        ({ event }) => {
+          this.#exclusive.execute(async () => {
+            event.preventDefault();
+            event.stopPropagation();
+            sound.play();
+            await pop(button);
+            this.#selectionComplete.next(action);
+          });
+        }
+      );
       return {
         button,
         unsubscriber,

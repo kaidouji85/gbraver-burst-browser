@@ -1,4 +1,4 @@
-import type { PushDOM } from "../../../../dom/event-stream";
+import { PushDOM } from "../../../../dom/push-dom";
 import type { ConfigChangedDialogProps } from "../props";
 
 /**

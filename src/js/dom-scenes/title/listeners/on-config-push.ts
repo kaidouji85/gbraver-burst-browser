@@ -1,5 +1,5 @@
 import { pop } from "../../../dom/animation";
-import type { PushDOM } from "../../../dom/event-stream";
+import { PushDOM } from "../../../dom/push-dom";
 import type { TitleProps } from "../props";
 
 /**

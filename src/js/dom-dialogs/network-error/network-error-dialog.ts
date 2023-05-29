@@ -2,8 +2,7 @@ import { Howl } from "howler";
 import { Observable, Subject, Unsubscribable } from "rxjs";
 
 import { pop } from "../../dom/animation";
-import type { PushDOM } from "../../dom/event-stream";
-import { pushDOMStream } from "../../dom/event-stream";
+import { domImmediatePushStream, PushDOM } from "../../dom/push-dom";
 import { Exclusive } from "../../exclusive/exclusive";
 import type { PostNetworkError } from "../../game/post-network-error";
 import type { Resources } from "../../resource";
@@ -109,9 +108,11 @@ export class NetworkErrorDialog implements DOMDialog {
     this.#postNetworkErrorButton = elements.postNetworkErrorButton;
     this.#postNetworkErrorSource = new Subject();
     this.#unsubscribers = [
-      pushDOMStream(this.#postNetworkErrorButton).subscribe((action) => {
-        this.#onPostNetworkErrorButtonPush(action);
-      }),
+      domImmediatePushStream(this.#postNetworkErrorButton).subscribe(
+        (action) => {
+          this.#onPostNetworkErrorButtonPush(action);
+        }
+      ),
     ];
     this.#exclusive = new Exclusive();
     this.#pushButton =
