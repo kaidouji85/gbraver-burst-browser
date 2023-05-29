@@ -99,9 +99,6 @@ export async function beforeLastState(
     return state;
   }
 
-  const updatedByDamageRace = await doDamageRaceOrNothing(
-    props,
-    state
-  );
+  const updatedByDamageRace = await doDamageRaceOrNothing(props, state);
   return await doZeroBatteryChangeOrNothing(props, updatedByDamageRace);
 }

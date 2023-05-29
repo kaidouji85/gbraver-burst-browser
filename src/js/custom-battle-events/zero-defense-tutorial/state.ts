@@ -1,5 +1,3 @@
-import type { GameState } from "gbraver-burst-core";
-
 /** 0防御チュートリアルステート */
 export type ZeroDefenseTutorialState = {
   /** イントロダクションを再生したか、trueで再生した */
