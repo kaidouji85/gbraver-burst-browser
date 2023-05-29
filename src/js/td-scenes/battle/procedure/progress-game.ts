@@ -10,25 +10,24 @@ import type { BattleSceneProps } from "../battle-scene-props";
 
 /**
  * コマンド選択可能になるまでゲームを進める
- *
+ * 本関数ではprops.stateHistoryを更新する副作用がある
  * @param props 戦闘シーンプロパティ
  * @param command プレイヤーが入力したコマンド
  * @return 処理が完了したら発火するPromise
  */
 const repeatProgressWhenUnselectable = async (
-  props: Readonly<BattleSceneProps>,
+  props: BattleSceneProps,
   command: Command
-): Promise<GameState | null | undefined> => {
+): Promise<GameState | null> => {
   let lastCommand: Command = command;
   const maxProgressCount = 100;
-
   for (let i = 0; i < maxProgressCount; i++) {
     const updateState = await props.battleProgress.progress(lastCommand);
-
     if (updateState.length < 1) {
-      return;
+      return null;
     }
 
+    props.stateHistory = [...props.stateHistory, ...updateState];
     const removeLastState = updateState.slice(0, -1);
     await animationPlayer(props).play(
       stateHistoryAnimation(props, removeLastState)
@@ -45,7 +44,6 @@ const repeatProgressWhenUnselectable = async (
     ]);
     props.customBattleEvent &&
       (await props.customBattleEvent.afterLastState(eventProps));
-
     if (lastState.effect.name !== "InputCommand") {
       return lastState;
     }
@@ -53,7 +51,6 @@ const repeatProgressWhenUnselectable = async (
     const playerCommand = lastState.effect.players.find(
       (v) => v.playerId === props.playerId
     );
-
     if (!playerCommand || playerCommand.selectable) {
       return lastState;
     }
@@ -66,7 +63,6 @@ const repeatProgressWhenUnselectable = async (
 
 /**
  * ゲームが終了した際の処理
- *
  * @param props 戦闘シーンプロパティ
  * @param gameEnd ゲーム終了情報
  * @return 処理が完了したら発火するPromise
@@ -85,16 +81,15 @@ const onGameEnd = async (
 
 /**
  * ゲームを進めるヘルパーメソッド
- *
+ * 本関数ではprops.stateHistoryを更新する副作用がある
  * @param command プレイヤーが入力したコマンド
  * @return 処理が完了したら発火するPromise
  */
 export async function progressGame(
-  props: Readonly<BattleSceneProps>,
+  props: BattleSceneProps,
   command: Command
 ): Promise<void> {
   const lastState = await repeatProgressWhenUnselectable(props, command);
-
   if (lastState && lastState.effect.name === "GameEnd") {
     await onGameEnd(props, lastState.effect);
   }

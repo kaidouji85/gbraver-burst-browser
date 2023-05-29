@@ -18,19 +18,19 @@ export async function start(props: Readonly<BattleSceneProps>): Promise<void> {
   return props.exclusive.execute(async (): Promise<void> => {
     props.bgm.do(play(props.sounds.bgm));
 
-    if (props.initialState.length < 1) {
+    if (props.stateHistory.length < 1) {
       return;
     }
 
-    const removeLastState = props.initialState.slice(0, -1);
+    const removeLastState = props.stateHistory.slice(0, -1);
     await animationPlayer(props).play(
       stateHistoryAnimation(props, removeLastState)
     );
-    const eventProps = { ...props, update: props.initialState };
+    const eventProps = { ...props, update: props.stateHistory };
     props.customBattleEvent &&
       (await props.customBattleEvent.beforeLastState(eventProps));
     const lastState: GameState =
-      props.initialState[props.initialState.length - 1];
+      props.stateHistory[props.stateHistory.length - 1];
     await Promise.all([
       animationPlayer(props).play(stateAnimation(props, lastState)),
       props.customBattleEvent
