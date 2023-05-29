@@ -1,5 +1,5 @@
+import { PushDOM } from "../../../../dom/push-dom";
 import type { ConfigChangedDialogProps } from "../props";
-import {PushDOM} from "../../../../dom/push-dom";
 
 /**
  * 背景を押した時の処理

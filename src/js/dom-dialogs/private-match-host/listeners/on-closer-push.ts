@@ -1,6 +1,6 @@
 import { pop } from "../../../dom/animation";
+import { PushDOM } from "../../../dom/push-dom";
 import { PrivateMatchHostDialogProps } from "../props";
-import {PushDOM} from "../../../dom/push-dom";
 
 /**
  * クロージャを押した時の処理

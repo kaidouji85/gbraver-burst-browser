@@ -1,8 +1,8 @@
 import { pop } from "../../../dom/animation";
+import { PushDOM } from "../../../dom/push-dom";
 import type { TitleProps } from "../props";
 import { isAccountMenuOpen } from "./is-account-menu-open";
 import { openAccountMenu } from "./open-account-menu";
-import {PushDOM} from "../../../dom/push-dom";
 
 /**
  * アバターが押された時の処理

@@ -1,5 +1,5 @@
+import { PushDOM } from "../../../../dom/push-dom";
 import { BatteryButtonProps } from "../props";
-import {PushDOM} from "../../../../dom/push-dom";
 
 /**
  * バッテリーボタンを押した時の処理

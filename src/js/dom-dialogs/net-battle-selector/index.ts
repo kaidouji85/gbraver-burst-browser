@@ -1,5 +1,6 @@
 import { Observable, Unsubscribable } from "rxjs";
 
+import { domImmediatePushStream } from "../../dom/push-dom";
 import { Resources } from "../../resource";
 import { DOMDialog } from "../dialog";
 import { onBackgroundPush } from "./listeners/on-background-push";
@@ -11,7 +12,6 @@ import {
   createNetBattleSelectrProps,
   NetBattleSelectorDialogProps,
 } from "./props";
-import {domImmediatePushStream} from "../../dom/push-dom";
 
 /** ネットバトルセレクターダイアログ */
 export class NetBattleSelectorDialog implements DOMDialog {
@@ -27,14 +27,14 @@ export class NetBattleSelectorDialog implements DOMDialog {
   constructor(resources: Resources) {
     this.#props = createNetBattleSelectrProps(resources);
     this.#unsubscribers = [
-      domImmediatePushStream(this.#props.casualMatchButton).subscribe((action) =>
-        onCasualMatchSelect(this.#props, action)
+      domImmediatePushStream(this.#props.casualMatchButton).subscribe(
+        (action) => onCasualMatchSelect(this.#props, action)
       ),
-      domImmediatePushStream(this.#props.privateMatchHostButton).subscribe((action) =>
-        onPrivateMatchHostSelect(this.#props, action)
+      domImmediatePushStream(this.#props.privateMatchHostButton).subscribe(
+        (action) => onPrivateMatchHostSelect(this.#props, action)
       ),
-      domImmediatePushStream(this.#props.privateMatchGuestButton).subscribe((action) =>
-        onPrivateMatchGuestSelect(this.#props, action)
+      domImmediatePushStream(this.#props.privateMatchGuestButton).subscribe(
+        (action) => onPrivateMatchGuestSelect(this.#props, action)
       ),
       domImmediatePushStream(this.#props.closer).subscribe((action) =>
         onCloserPush(this.#props, action)

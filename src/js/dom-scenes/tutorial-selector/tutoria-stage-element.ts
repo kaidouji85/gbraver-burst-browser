@@ -1,11 +1,11 @@
 import { map, Observable } from "rxjs";
 
 import { pop } from "../../dom/animation";
+import { domPushStream } from "../../dom/push-dom";
 import type { TutorialStageID } from "../../game/tutorial-stages/tutorial-stage";
 import type { Resources } from "../../resource";
 import type { SoundResource } from "../../resource/sound";
 import { createEmptySoundResource, SOUND_IDS } from "../../resource/sound";
-import {domImmediatePushStream} from "../../dom/push-dom";
 
 /** ルートHTML class属性 */
 const ROOT_CLASS = "tutorial-stage";
@@ -74,7 +74,7 @@ export class TutorialStageElement {
     this.#root = document.createElement("div");
     this.#root.className = ROOT_CLASS;
     this.#root.innerHTML = rootInnerHTML(level, stage.title);
-    this.#select = domImmediatePushStream(this.#root).pipe(
+    this.#select = domPushStream(this.#root).pipe(
       map((action) => {
         action.event.preventDefault();
         action.event.stopPropagation();

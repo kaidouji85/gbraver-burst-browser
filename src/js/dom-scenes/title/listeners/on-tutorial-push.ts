@@ -1,6 +1,6 @@
 import { pop } from "../../../dom/animation";
+import { PushDOM } from "../../../dom/push-dom";
 import type { TitleProps } from "../props";
-import {PushDOM} from "../../../dom/push-dom";
 
 /**
  * チュートリアルが押された際の処理

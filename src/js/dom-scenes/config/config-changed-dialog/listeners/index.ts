@@ -1,11 +1,11 @@
 import { Unsubscribable } from "rxjs";
 
+import { domImmediatePushStream } from "../../../../dom/push-dom";
 import type { ConfigChangedDialogProps } from "../props";
 import { onAcceptPush } from "./on-accept-push";
 import { onBackGroundPush } from "./on-back-ground-push";
 import { onCloserPush } from "./on-closer-push";
 import { onDiscardPush } from "./on-discard-push";
-import {domImmediatePushStream} from "../../../../dom/push-dom";
 
 /**
  * ダイアログにイベントリスナをバインドする

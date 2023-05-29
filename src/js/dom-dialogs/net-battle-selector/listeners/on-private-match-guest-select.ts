@@ -1,6 +1,6 @@
 import { pop } from "../../../dom/animation";
+import { PushDOM } from "../../../dom/push-dom";
 import { NetBattleSelectorDialogProps } from "../props";
-import {PushDOM} from "../../../dom/push-dom";
 
 /**
  * プライベートマッチ（ゲスト）が選択された時の処理

@@ -1,6 +1,7 @@
 import { Unsubscribable } from "rxjs";
 
 import { inputDOMStream } from "../../../dom/input-dom";
+import { domImmediatePushStream } from "../../../dom/push-dom";
 import type { ConfigProps } from "../props";
 import { onAcceptConfigChange } from "./on-accept-config-change";
 import { onBGMVolumeChange } from "./on-bgm-volume-change";
@@ -9,7 +10,6 @@ import { onDialogClose } from "./on-dialog-close";
 import { onDiscardConfigChange } from "./on-discard-config-change";
 import { onPrevButtonPush } from "./on-prev-button-push";
 import { onSEVolumeChange } from "./on-se-volume-change";
-import {domImmediatePushStream} from "../../../dom/push-dom";
 
 /**
  * 設定画面にイベントリスナをバインドする

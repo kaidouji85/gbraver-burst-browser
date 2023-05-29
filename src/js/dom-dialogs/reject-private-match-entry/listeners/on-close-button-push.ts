@@ -1,6 +1,6 @@
 import { pop } from "../../../dom/animation";
+import { PushDOM } from "../../../dom/push-dom";
 import { RejectPrivateMatchEntryDialogProps } from "../props";
-import {PushDOM} from "../../../dom/push-dom";
 
 /**
  * 閉じるボタンを押した時の処理

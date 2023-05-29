@@ -1,4 +1,4 @@
-import {PushDOM} from "../../../dom/push-dom";
+import { PushDOM } from "../../../dom/push-dom";
 
 /**
  * ヘルプメニューのanker要素を押した際のイベント

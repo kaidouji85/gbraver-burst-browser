@@ -1,4 +1,4 @@
-import {fromEvent, map, merge, Observable} from "rxjs";
+import { fromEvent, map, merge, Observable } from "rxjs";
 
 /** HTML要素が押下された時のアクション */
 export type PushDOM = {
@@ -13,7 +13,10 @@ export type PushDOM = {
  * @return ストリーム
  */
 export function domImmediatePushStream(dom: HTMLElement): Observable<PushDOM> {
-  const click: Observable<PushDOM> = fromEvent<MouseEvent>(dom, "mousedown").pipe(
+  const click: Observable<PushDOM> = fromEvent<MouseEvent>(
+    dom,
+    "mousedown"
+  ).pipe(
     map((event) => {
       return {
         type: "PushDOM",
@@ -24,6 +27,34 @@ export function domImmediatePushStream(dom: HTMLElement): Observable<PushDOM> {
   const touchStart: Observable<PushDOM> = fromEvent<TouchEvent>(
     dom,
     "touchstart"
+  ).pipe(
+    map((event) => {
+      return {
+        type: "PushDOM",
+        event,
+      };
+    })
+  );
+  return merge(click, touchStart);
+}
+
+/**
+ * HTML要素押下ストリーム
+ * @param dom 押下判定のHTML要素
+ * @return ストリーム
+ */
+export function domPushStream(dom: HTMLElement): Observable<PushDOM> {
+  const click: Observable<PushDOM> = fromEvent<MouseEvent>(dom, "mouseup").pipe(
+    map((event) => {
+      return {
+        type: "PushDOM",
+        event,
+      };
+    })
+  );
+  const touchStart: Observable<PushDOM> = fromEvent<TouchEvent>(
+    dom,
+    "touchend"
   ).pipe(
     map((event) => {
       return {

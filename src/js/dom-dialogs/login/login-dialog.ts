@@ -2,13 +2,13 @@ import { Howl } from "howler";
 import { Observable, Subject, Unsubscribable } from "rxjs";
 
 import { pop } from "../../dom/animation";
+import { domImmediatePushStream, PushDOM } from "../../dom/push-dom";
 import { Exclusive } from "../../exclusive/exclusive";
 import type { Resources } from "../../resource";
 import { PathIds } from "../../resource/path";
 import { SOUND_IDS } from "../../resource/sound";
 import { domUuid } from "../../uuid/dom-uuid";
 import type { DOMDialog } from "../dialog";
-import {domImmediatePushStream, PushDOM} from "../../dom/push-dom";
 
 /** ルート要素のcssクラス名 */
 const ROOT_CLASS_NAME = "login";

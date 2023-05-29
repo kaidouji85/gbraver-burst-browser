@@ -1,8 +1,8 @@
 import { Unsubscribable } from "rxjs";
 
+import { domImmediatePushStream } from "../../../../dom/push-dom";
 import { BatteryButtonProps } from "../props";
 import { onBatteryPush } from "./on-battery-push";
-import {domImmediatePushStream} from "../../../../dom/push-dom";
 
 /**
  * イベントリスナをバインドする

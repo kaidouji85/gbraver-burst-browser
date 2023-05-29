@@ -1,5 +1,6 @@
 import { Observable, Unsubscribable } from "rxjs";
 
+import { domImmediatePushStream } from "../../dom/push-dom";
 import { Resources } from "../../resource";
 import { DOMDialog } from "../dialog";
 import { onBackgroundPush } from "./listeners/on-background-push";
@@ -9,7 +10,6 @@ import {
   createRejectPrivateMatchEntryDialogProps,
   RejectPrivateMatchEntryDialogProps,
 } from "./props";
-import {domImmediatePushStream} from "../../dom/push-dom";
 
 /** プライベートマッチエントリ拒否ダイアログ */
 export class RejectPrivateMatchEntryDialog implements DOMDialog {

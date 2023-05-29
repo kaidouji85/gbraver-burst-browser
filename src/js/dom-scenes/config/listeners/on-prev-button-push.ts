@@ -1,8 +1,8 @@
 import { pop } from "../../../dom/animation";
+import { PushDOM } from "../../../dom/push-dom";
 import { isConfigChanged } from "../../../game/config/config-changed";
 import type { ConfigProps } from "../props";
 import { parseConfig } from "./parse-config";
-import {PushDOM} from "../../../dom/push-dom";
 
 /**
  * 戻るボタンを押した際の処理

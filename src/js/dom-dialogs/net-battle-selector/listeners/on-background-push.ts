@@ -1,5 +1,5 @@
+import { PushDOM } from "../../../dom/push-dom";
 import { NetBattleSelectorDialogProps } from "../props";
-import {PushDOM} from "../../../dom/push-dom";
 
 /**
  * 背景が押された時の処理

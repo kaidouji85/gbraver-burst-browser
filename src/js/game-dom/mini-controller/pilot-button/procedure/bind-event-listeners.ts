@@ -1,8 +1,8 @@
 import { Unsubscribable } from "rxjs";
 
+import { domImmediatePushStream } from "../../../../dom/push-dom";
 import { PilotButtonProps } from "../props";
 import { onPilotPush } from "./on-pilot-push";
-import {domImmediatePushStream} from "../../../../dom/push-dom";
 
 /**
  * パイロットボタンにイベントを関連付ける

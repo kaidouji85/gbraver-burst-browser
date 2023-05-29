@@ -1,5 +1,6 @@
 import { Observable, Unsubscribable } from "rxjs";
 
+import { domImmediatePushStream } from "../../dom/push-dom";
 import { Resources } from "../../resource";
 import { DOMDialog } from "../dialog";
 import { onCloserPush } from "./listeners/on-closer-push";
@@ -8,7 +9,6 @@ import {
   createPrivateMatchGuestDialogProps,
   PrivateMatchGuestDialogProps,
 } from "./props";
-import {domImmediatePushStream} from "../../dom/push-dom";
 
 /** プライベートマッチゲストダイアログ */
 export class PrivateMatchGuestDialog implements DOMDialog {

@@ -1,6 +1,6 @@
 import { pop } from "../../../dom/animation";
+import { PushDOM } from "../../../dom/push-dom";
 import { NetBattleSelectorDialogProps } from "../props";
-import {PushDOM} from "../../../dom/push-dom";
 
 /**
  * カジュアルマッチが選択された時の処理

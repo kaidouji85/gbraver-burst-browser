@@ -1,8 +1,8 @@
 import { pop } from "../../../dom/animation";
+import { PushDOM } from "../../../dom/push-dom";
 import type { ConfigProps } from "../props";
 import { parseConfig } from "./parse-config";
 import { setInputDisabled } from "./set-input-disabled";
-import {PushDOM} from "../../../dom/push-dom";
 
 /**
  * 設定変更するボタンを押した際の処理

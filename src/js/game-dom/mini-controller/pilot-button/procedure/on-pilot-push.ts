@@ -1,5 +1,5 @@
+import { PushDOM } from "../../../../dom/push-dom";
 import { PilotButtonProps } from "../props";
-import {PushDOM} from "../../../../dom/push-dom";
 
 /**
  * パイロットボタンが押された時の処理

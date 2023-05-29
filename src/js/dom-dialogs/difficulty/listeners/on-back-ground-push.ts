@@ -1,5 +1,5 @@
+import { PushDOM } from "../../../dom/push-dom";
 import type { DifficultyDialogProps } from "../props";
-import {PushDOM} from "../../../dom/push-dom";
 
 /**
  * バックグラウンドが押された際の処理

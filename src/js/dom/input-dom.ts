@@ -1,4 +1,4 @@
-import {fromEvent, map, Observable} from "rxjs";
+import { fromEvent, map, Observable } from "rxjs";
 
 /** inputイベントをラッピングしたもの */
 export type InputDOM = {

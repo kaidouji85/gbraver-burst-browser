@@ -2,13 +2,13 @@ import { Howl } from "howler";
 import { Observable, Subject, Unsubscribable } from "rxjs";
 
 import { pop } from "../../dom/animation";
+import { domImmediatePushStream, PushDOM } from "../../dom/push-dom";
 import { Exclusive } from "../../exclusive/exclusive";
 import type { PostNetworkError } from "../../game/post-network-error";
 import type { Resources } from "../../resource";
 import { SOUND_IDS } from "../../resource/sound";
 import { domUuid } from "../../uuid/dom-uuid";
 import type { DOMDialog } from "../dialog";
-import {domImmediatePushStream, PushDOM} from "../../dom/push-dom";
 
 /** ルート要素のcssクラス名 */
 const ROOT_CLASS_NAME = "network-error";
@@ -108,9 +108,11 @@ export class NetworkErrorDialog implements DOMDialog {
     this.#postNetworkErrorButton = elements.postNetworkErrorButton;
     this.#postNetworkErrorSource = new Subject();
     this.#unsubscribers = [
-      domImmediatePushStream(this.#postNetworkErrorButton).subscribe((action) => {
-        this.#onPostNetworkErrorButtonPush(action);
-      }),
+      domImmediatePushStream(this.#postNetworkErrorButton).subscribe(
+        (action) => {
+          this.#onPostNetworkErrorButtonPush(action);
+        }
+      ),
     ];
     this.#exclusive = new Exclusive();
     this.#pushButton =
