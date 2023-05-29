@@ -26,7 +26,6 @@ class BatterySystemTutorialEvent extends EmptyCustomBattleEvent {
   constructor() {
     super();
     this.state = {
-      stateHistory: [],
       isBatterySystemDescriptionComplete: false,
     };
   }

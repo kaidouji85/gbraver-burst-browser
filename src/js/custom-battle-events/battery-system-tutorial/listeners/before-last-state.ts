@@ -21,25 +21,18 @@ export async function beforeLastState(
   props: Readonly<LastState>,
   state: Readonly<BatterySystemTutorialState>
 ): Promise<BatterySystemTutorialState> {
-  const updatedStateHistory = {
-    ...state,
-    stateHistory: [...state.stateHistory, ...props.update],
-  };
   const extractedGameEnd = extractGameEnd(props.update);
-
   if (extractedGameEnd) {
-    return updatedStateHistory;
+    return state;
   }
 
-  const turn = turnCount(updatedStateHistory.stateHistory);
-
+  const turn = turnCount(props.stateHistory);
   if (turn === 1) {
     await introduction(props);
-    return updatedStateHistory;
+    return state;
   }
 
   const extractedBattle = extractBattle(props.update);
-
   if (extractedBattle) {
     const battle = extractedBattle.effect;
     const isPlayerAttack = battle.attacker === props.playerId;
@@ -52,7 +45,7 @@ export async function beforeLastState(
   if (turn === 2 && extractedBattle) {
     await waitTime(200);
     await batteryRuleDescription(props);
-    return updatedStateHistory;
+    return state;
   }
 
   if (turn === 3 && extractedBattle) {
@@ -60,10 +53,10 @@ export async function beforeLastState(
     await completeAttackAndDefense(props);
     invisibleAllMessageWindows(props);
     return {
-      ...updatedStateHistory,
+      ...state,
       isBatterySystemDescriptionComplete: true,
     };
   }
 
-  return updatedStateHistory;
+  return state;
 }
