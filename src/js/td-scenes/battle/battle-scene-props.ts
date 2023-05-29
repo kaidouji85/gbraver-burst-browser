@@ -32,7 +32,7 @@ export type BattleSceneProps = {
   /** アニメーションタイムスケール */
   animationTimeScale: number;
   /** ゲームの初期ステートヒストリー */
-  initialState: GameState[];
+  stateHistory: GameState[];
   /** バトル終了ストリーム */
   endBattle: Subject<BattleEnd>;
   /** バトル進行オブジェクト */
@@ -101,7 +101,7 @@ export function createBattleSceneProps(
     animationTimeScale: params.initialAnimationTimeScale,
     pushWindow: params.pushWindow,
     exclusive: new Exclusive(),
-    initialState: params.initialState,
+    stateHistory: params.initialState,
     endBattle: new Subject(),
     battleProgress: params.battleProgress,
     customBattleEvent: params.customBattleEvent,
