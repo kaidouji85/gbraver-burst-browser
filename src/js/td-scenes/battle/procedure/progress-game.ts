@@ -18,7 +18,7 @@ import type { BattleSceneProps } from "../battle-scene-props";
 const repeatProgressWhenUnselectable = async (
   props: BattleSceneProps,
   command: Command
-): Promise<GameState | null > => {
+): Promise<GameState | null> => {
   let lastCommand: Command = command;
   const maxProgressCount = 100;
   for (let i = 0; i < maxProgressCount; i++) {
