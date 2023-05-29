@@ -21,7 +21,6 @@ import { BattleSceneView } from "./view";
 export type BattleEnd = {
   /** ゲーム終了情報 */
   gameEnd: GameEnd;
-
   /** アニメーションタイムスケール */
   animationTimeScale: number;
 };
@@ -30,37 +29,26 @@ export type BattleEnd = {
 export type BattleSceneProps = {
   /** 画面を開いているプレイヤーのID */
   playerId: PlayerId;
-
   /** アニメーションタイムスケール */
   animationTimeScale: number;
-
   /** ゲームの初期ステートヒストリー */
   initialState: GameState[];
-
   /** バトル終了ストリーム */
   endBattle: Subject<BattleEnd>;
-
   /** バトル進行オブジェクト */
   battleProgress: BattleProgress;
-
   /** カスタムバトルイベント */
   customBattleEvent: CustomBattleEvent | null | undefined;
-
   /** 排他制御オブジェクト */
   exclusive: Exclusive;
-
   /** 戦闘シーンビュー */
   view: BattleSceneView;
-
   /** ウインドウ押下ストリーム */
   pushWindow: Observable<PushWindow>;
-
   /** 戦闘シーン効果音 */
   sounds: BattleSceneSounds;
-
   /** BGM管理オブジェクト */
   bgm: BGMManager;
-
   /** コントローラータイプ */
   controllerType: BattleControllerType;
 };
@@ -72,50 +60,36 @@ interface OwnRenderer extends OverlapNotifier, RendererDomGetter, Rendering {}
 export type BattleScenePropsCreatorParams = {
   /** リソース管理オブジェクト */
   resources: Resources;
-
   /** BGM管理オブジェクト */
   bgm: BGMManager;
-
   /** 再生するBGM ID */
   playingBGM: SoundId;
-
   /** レンダラ */
   renderer: OwnRenderer;
-
   /** バトル進行オブジェクト */
   battleProgress: BattleProgress;
-
   /** アニメーションスケールの初期値 */
   initialAnimationTimeScale: number;
-
   /** 初期ゲームステート */
   initialState: GameState[];
-
   /** プレイヤー情報 */
   player: Player;
-
   /** 敵情報 */
   enemy: Player;
-
   /** ゲームループストリーム */
   gameLoop: Observable<GameLoop>;
-
   /** リサイズストリーム */
   resize: Observable<Resize>;
-
   /** window押下ストリーム */
   pushWindow: Observable<PushWindow>;
-
   /** カスタムバトルイベント */
   customBattleEvent?: CustomBattleEvent;
-
   /** コントローラータイプ */
   controllerType: BattleControllerType;
 };
 
 /**
  * 戦闘シーンプロパティを生成する
- *
  * @param params パラメータ
  * @return 生成結果
  */
