@@ -25,7 +25,6 @@ class ZeroDefenseTutorialEvent extends EmptyCustomBattleEvent {
   constructor() {
     super();
     this.state = {
-      stateHistory: [],
       isIntroductionComplete: false,
       isDamageRaceComplete: false,
       isZeroBatteryChangeComplete: false,
