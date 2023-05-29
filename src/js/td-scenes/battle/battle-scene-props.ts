@@ -31,7 +31,7 @@ export type BattleSceneProps = {
   playerId: PlayerId;
   /** アニメーションタイムスケール */
   animationTimeScale: number;
-  /** ゲームの初期ステートヒストリー */
+  /** ゲームステートヒストリー */
   stateHistory: GameState[];
   /** バトル終了ストリーム */
   endBattle: Subject<BattleEnd>;
