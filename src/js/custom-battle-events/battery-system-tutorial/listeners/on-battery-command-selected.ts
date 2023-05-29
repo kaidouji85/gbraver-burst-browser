@@ -114,17 +114,15 @@ export async function onBatteryCommandSelected(
   props: Readonly<BatteryCommandSelected>,
   state: BatterySystemTutorialState
 ): Promise<Ret> {
-  const foundLastState = state.stateHistory[state.stateHistory.length - 1];
+  const foundLastState = props.stateHistory[props.stateHistory.length - 1];
   const foundPlayer = (foundLastState?.players ?? []).find(
     (v) => v.playerId === props.playerId
   );
   const isZeroBatteryCommand = props.battery.battery === 0;
-
   if (isZeroBatteryCommand && foundLastState && foundPlayer) {
     const lastState: GameState = foundLastState;
     const player: PlayerState = foundPlayer;
     const isEnemyTurn = lastState.activePlayerId !== props.playerId;
-
     if (isEnemyTurn) {
       return await onZeroDefense(props, state, player);
     }
@@ -133,7 +131,6 @@ export async function onBatteryCommandSelected(
   if (isBatterySelecterFocused(props)) {
     focusOutBatterySelector(props);
   }
-
   return {
     state,
     cancel: {
