@@ -35,7 +35,7 @@ export async function onBurstCommandSelected(
     };
   }
 
-  const lastPlayer = extractLastPlayer(props, state.stateHistory);
+  const lastPlayer = extractLastPlayer(props, props.stateHistory);
   if (
     lastPlayer &&
     lastPlayer.armdozer.battery === lastPlayer.armdozer.maxBattery

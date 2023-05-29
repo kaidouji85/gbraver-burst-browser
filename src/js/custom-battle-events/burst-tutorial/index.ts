@@ -25,7 +25,6 @@ class BurstTutorial extends EmptyCustomBattleEvent {
   constructor() {
     super();
     this.state = {
-      stateHistory: [],
       isIntroductionComplete: false,
       isLoseIfNoDefense5Complete: false,
     };
