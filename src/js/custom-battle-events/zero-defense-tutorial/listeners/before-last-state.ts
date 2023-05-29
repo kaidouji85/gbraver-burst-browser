@@ -90,23 +90,18 @@ export async function beforeLastState(
   props: Readonly<LastState>,
   state: ZeroDefenseTutorialState
 ): Promise<ZeroDefenseTutorialState> {
-  const updatedStateHistory = {
-    ...state,
-    stateHistory: [...state.stateHistory, ...props.update],
-  };
-
   if (!state.isIntroductionComplete) {
     await introduction(props);
-    return { ...updatedStateHistory, isIntroductionComplete: true };
+    return { ...state, isIntroductionComplete: true };
   }
 
   if (extractGameEnd(props.update)) {
-    return updatedStateHistory;
+    return state;
   }
 
   const updatedByDamageRace = await doDamageRaceOrNothing(
     props,
-    updatedStateHistory
+    state
   );
   return await doZeroBatteryChangeOrNothing(props, updatedByDamageRace);
 }
