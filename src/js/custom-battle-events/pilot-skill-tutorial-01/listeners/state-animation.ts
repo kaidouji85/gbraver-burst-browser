@@ -1,4 +1,4 @@
-import { Animate } from "../../../animation/animate"
+import { Animate } from "../../../animation/animate";
 import { empty } from "../../../animation/delay";
 import { StateAnimation } from "../../../td-scenes/battle/custom-battle-event";
 import { turnCount } from "../../turn-count";

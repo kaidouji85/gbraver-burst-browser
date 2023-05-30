@@ -18,7 +18,7 @@ export function tsubasaVictoryDeclaration(
     props.view.dom.leftMessageWindow.faceVisible(true);
     props.view.dom.leftMessageWindow.messages([
       "ツバサ",
-      "「シンヤ 私の勝ちだ」"
+      "「シンヤ 私の勝ちだ」",
     ]);
     props.view.dom.leftMessageWindow.scrollUp();
     props.view.dom.leftMessageWindow.nextMessageIconVisible(false);
