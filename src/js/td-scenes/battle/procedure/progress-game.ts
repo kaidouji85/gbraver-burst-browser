@@ -1,10 +1,7 @@
 import type { Command, GameEnd, GameState } from "gbraver-burst-core";
 
 import { fadeOut, stop } from "../../../bgm/bgm-operators";
-import {
-  stateAnimation,
-  stateHistoryAnimation,
-} from "../animation/game-state";
+import { stateAnimation, stateHistoryAnimation } from "../animation/game-state";
 import { animationPlayer } from "../animation-player";
 import type { BattleSceneProps } from "../battle-scene-props";
 

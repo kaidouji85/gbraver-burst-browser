@@ -1,6 +1,7 @@
 import { GameState } from "gbraver-burst-core";
-import { stateAnimation } from "../animation/game-state";
+
 import { empty } from "../../../animation/delay";
+import { stateAnimation } from "../animation/game-state";
 import { animationPlayer } from "../animation-player";
 import { BattleSceneProps } from "../battle-scene-props";
 
@@ -30,26 +31,28 @@ export async function playStateHistory(
   }
 
   const removeLastState = gameStateHistory.slice(0, -1);
-  await animationPlayer(props).play(removeLastState
-    .map((gameState, index) => {
-      const next = removeLastState[index + 1];
-      const isParallel =
-        next &&
-        parallelPlayEffects.includes(next.effect.name) &&
-        parallelPlayEffects.includes(gameState.effect.name);
-      const anime = stateAnimation(props, gameState);
-      return {
-        anime,
-        isParallel,
-      };
-    })
-    .reduce(
-      (previous, current) =>
-        current.isParallel
-          ? previous.chain(empty(), current.anime)
-          : previous.chain(current.anime),
-      empty()
-    ));
+  await animationPlayer(props).play(
+    removeLastState
+      .map((gameState, index) => {
+        const next = removeLastState[index + 1];
+        const isParallel =
+          next &&
+          parallelPlayEffects.includes(next.effect.name) &&
+          parallelPlayEffects.includes(gameState.effect.name);
+        const anime = stateAnimation(props, gameState);
+        return {
+          anime,
+          isParallel,
+        };
+      })
+      .reduce(
+        (previous, current) =>
+          current.isParallel
+            ? previous.chain(empty(), current.anime)
+            : previous.chain(current.anime),
+        empty()
+      )
+  );
   const lastState = gameStateHistory[gameStateHistory.length - 1];
   const eventProps = { ...props, update: gameStateHistory };
   if (props.customBattleEvent) {
