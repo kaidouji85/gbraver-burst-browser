@@ -1,5 +1,6 @@
 import { GameState } from "gbraver-burst-core";
 
+import { all } from "../../../animation/all";
 import { empty } from "../../../animation/delay";
 import { stateAnimation } from "../animation/game-state";
 import { animationPlayer } from "../animation-player";
@@ -39,7 +40,15 @@ export async function playStateHistory(
           next &&
           parallelPlayEffects.includes(next.effect.name) &&
           parallelPlayEffects.includes(gameState.effect.name);
-        const anime = stateAnimation(props, gameState);
+        const anime = all(
+          stateAnimation(props, gameState),
+          props.customBattleEvent
+            ? props.customBattleEvent.stateAnimation({
+                ...props,
+                currentState: gameState,
+              })
+            : empty()
+        );
         return {
           anime,
           isParallel,
