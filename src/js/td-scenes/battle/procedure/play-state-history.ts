@@ -1,7 +1,7 @@
 import { GameState } from "gbraver-burst-core";
-import { StateAnimationProps } from "../animation/state-history/state-animation-props";
+import { StateAnimationProps } from "../animation/game-state/state-animation-props";
 import { Animate } from "../../../animation/animate";
-import { stateAnimation } from "../animation/state-history";
+import { stateAnimation } from "../animation/game-state";
 import { empty } from "../../../animation/delay";
 
 /**

@@ -4,7 +4,7 @@ import { play } from "../../../bgm/bgm-operators";
 import {
   stateAnimation,
   stateHistoryAnimation,
-} from "../animation/state-history";
+} from "../animation/game-state";
 import { animationPlayer } from "../animation-player";
 import type { BattleSceneProps } from "../battle-scene-props";
 
