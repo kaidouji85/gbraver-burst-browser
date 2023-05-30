@@ -10,6 +10,7 @@ import { Observable } from "rxjs";
 import type { PushWindow } from "../../window/push-window";
 import { BattleSceneSounds } from "./sounds/sounds";
 import { BattleSceneView } from "./view";
+import { Animate } from "../../animation/animate";
 
 /**
  * 全カスタムイベントで利用できるプロパティ
@@ -26,6 +27,12 @@ export type CustomBattleEventProps = {
   readonly sounds: BattleSceneSounds;
   /** ステートヒストリー */
   readonly stateHistory: GameState[];
+};
+
+/** カスタムステートアニメーションのプロパティ */
+export type StateAnimation = CustomBattleEventProps & {
+  /** 再生するステート */
+  readonly state: GameState[];
 };
 
 /** 最終ステート系イベントのプロパティ */
@@ -60,6 +67,15 @@ export type CommandCanceled = {
 
 /** カスタムバトルイベント */
 export interface CustomBattleEvent {
+  /**
+   * カスタムステートアニメーション
+   * 最終ステート以外のステートアニメーション再生時に、本メソッドが呼び出さる
+   * 戻り値のアニメーションが完了するまで、次のステートアニメーションは再生されない
+   * @param props イベントプロパティ
+   * @return カスタムステートアニメーション
+   */
+  stateAnimation(props: StateAnimation): Animate;
+
   /**
    * 最終ステート直前イベント
    * @param props イベントプロパティ
