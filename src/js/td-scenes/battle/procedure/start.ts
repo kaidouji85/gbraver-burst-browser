@@ -1,5 +1,3 @@
-import type { GameState } from "gbraver-burst-core";
-
 import { play } from "../../../bgm/bgm-operators";
 import type { BattleSceneProps } from "../battle-scene-props";
 import { playStateHistory } from "./play-state-history";
@@ -13,10 +11,6 @@ import { playStateHistory } from "./play-state-history";
 export async function start(props: Readonly<BattleSceneProps>): Promise<void> {
   return props.exclusive.execute(async (): Promise<void> => {
     props.bgm.do(play(props.sounds.bgm));
-    if (props.stateHistory.length < 1) {
-      return;
-    }
-
     await playStateHistory(props, props.stateHistory);
   });
 }
