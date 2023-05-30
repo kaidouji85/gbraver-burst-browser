@@ -3,6 +3,7 @@ import { StateAnimationProps } from "../animation/game-state/state-animation-pro
 import { Animate } from "../../../animation/animate";
 import { stateAnimation } from "../animation/game-state";
 import { empty } from "../../../animation/delay";
+import { CustomBattleEvent } from "../custom-battle-event";
 
 /**
  * 同時再生する効果
@@ -14,16 +15,20 @@ const parallelPlayEffects = [
   "UpdateRemainingTurn",
 ];
 
+/** ステートヒストリーアニメーションのプロパティ */
+type StateHistoryAnimationProps = StateAnimationProps & {
+    /** カスタムバトルイベント */
+    customBattleEvent?: CustomBattleEvent;
+};
+
 /**
- * @deprecated
- * ゲームステート履歴を戦闘アニメーションに変換する
- *
+ * ステートヒストリーをアニメーションとして再生する
  * @param props 戦闘シーンプロパティ
  * @param gameStateHistory 変換対象のゲームステートヒストリー
  * @return アニメーション
  */
 export function stateHistoryAnimation(
-  props: StateAnimationProps,
+  props: StateHistoryAnimationProps,
   gameStateHistory: GameState[]
 ): Animate {
   return gameStateHistory
