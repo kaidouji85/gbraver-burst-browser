@@ -1,9 +1,8 @@
 import { GameState } from "gbraver-burst-core";
-import { StateAnimationProps } from "../animation/game-state/state-animation-props";
-import { Animate } from "../../../animation/animate";
 import { stateAnimation } from "../animation/game-state";
 import { empty } from "../../../animation/delay";
-import { CustomBattleEvent } from "../custom-battle-event";
+import { animationPlayer } from "../animation-player";
+import { BattleSceneProps } from "../battle-scene-props";
 
 /**
  * 同時再生する効果
@@ -15,25 +14,25 @@ const parallelPlayEffects = [
   "UpdateRemainingTurn",
 ];
 
-/** ステートヒストリーアニメーションのプロパティ */
-type StateHistoryAnimationProps = StateAnimationProps & {
-    /** カスタムバトルイベント */
-    customBattleEvent?: CustomBattleEvent;
-};
-
 /**
- * ステートヒストリーをアニメーションとして再生する
+ * ステートヒストリーアニメーションを再生し、カスタムバトルイベントを呼び出す
+ * 本関数を呼び出す前にprops.stateHistoryを最新化すること
  * @param props 戦闘シーンプロパティ
- * @param gameStateHistory 変換対象のゲームステートヒストリー
+ * @param gameStateHistory 再生するゲームステートヒストリー
  * @return アニメーション
  */
-export function stateHistoryAnimation(
-  props: StateHistoryAnimationProps,
+export async function playStateHistory(
+  props: Readonly<BattleSceneProps>,
   gameStateHistory: GameState[]
-): Animate {
-  return gameStateHistory
+): Promise<void> {
+  if (gameStateHistory.length <= 0) {
+    return;
+  }
+
+  const removeLastState = gameStateHistory.slice(0, -1);
+  await animationPlayer(props).play(removeLastState
     .map((gameState, index) => {
-      const next = gameStateHistory[index + 1];
+      const next = removeLastState[index + 1];
       const isParallel =
         next &&
         parallelPlayEffects.includes(next.effect.name) &&
@@ -50,5 +49,19 @@ export function stateHistoryAnimation(
           ? previous.chain(empty(), current.anime)
           : previous.chain(current.anime),
       empty()
-    );
+    ));
+  const lastState = gameStateHistory[gameStateHistory.length - 1];
+  const eventProps = { ...props, update: gameStateHistory };
+  if (props.customBattleEvent) {
+    await props.customBattleEvent.beforeLastState(eventProps);
+  }
+  await Promise.all([
+    animationPlayer(props).play(stateAnimation(props, lastState)),
+    props.customBattleEvent
+      ? props.customBattleEvent.onLastState(eventProps)
+      : Promise.resolve(),
+  ]);
+  if (props.customBattleEvent) {
+    await props.customBattleEvent.afterLastState(eventProps);
+  }
 }
