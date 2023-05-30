@@ -14,6 +14,7 @@ import { scrollLeftMessages, scrollRightMessages } from "../../scroll-messages";
 export async function playerLose(
   props: Readonly<CustomBattleEventProps>
 ): Promise<void> {
+  props.view.dom.leftMessageWindow.darken();
   activeRightMessageWindowWithFace(props, "Shinya");
   await scrollRightMessages(props, [
     ["シンヤ", "「クッ あと少しで勝てそうだったのに」"],

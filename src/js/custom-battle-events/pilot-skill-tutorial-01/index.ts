@@ -1,10 +1,13 @@
+import { Animate } from "../../animation/animate";
 import {
   CustomBattleEvent,
   LastState,
+  StateAnimation,
 } from "../../td-scenes/battle/custom-battle-event";
 import { EmptyCustomBattleEvent } from "../empty-custom-battle-event";
 import { afterLastState } from "./listeners/after-last-state";
 import { beforeLastState as beforeLastState } from "./listeners/before-last-state";
+import { stateAnimation } from "./listeners/state-animation";
 import { PilotSkillTutorial01State } from "./state";
 
 /** パイロットスキルチュートリアル（前半） */
@@ -21,6 +24,11 @@ class PilotSkillTutorial01 extends EmptyCustomBattleEvent {
       isIntroductionComplete: false,
       isGaiInspectingComplete: false,
     };
+  }
+
+  /** @override */
+  stateAnimation(props: StateAnimation): Animate {
+    return stateAnimation(props);
   }
 
   /** @override */
