@@ -4,6 +4,7 @@ import { empty } from "../../../animation/delay";
 import { stateAnimation } from "../animation/game-state";
 import { animationPlayer } from "../animation-player";
 import { BattleSceneProps } from "../battle-scene-props";
+import { all } from "../../../animation/all";
 
 /**
  * 同時再生する効果
@@ -39,7 +40,12 @@ export async function playStateHistory(
           next &&
           parallelPlayEffects.includes(next.effect.name) &&
           parallelPlayEffects.includes(gameState.effect.name);
-        const anime = stateAnimation(props, gameState);
+        const anime = all(
+          stateAnimation(props, gameState),
+          props.customBattleEvent
+            ? props.customBattleEvent.stateAnimation({ ...props, currentState: gameState })
+            : empty()
+        );
         return {
           anime,
           isParallel,

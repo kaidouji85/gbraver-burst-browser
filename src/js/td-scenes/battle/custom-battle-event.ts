@@ -32,7 +32,7 @@ export type CustomBattleEventProps = {
 /** カスタムステートアニメーションのプロパティ */
 export type StateAnimation = CustomBattleEventProps & {
   /** 再生するステート */
-  readonly state: GameState[];
+  readonly currentState: GameState;
 };
 
 /** 最終ステート系イベントのプロパティ */
