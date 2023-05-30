@@ -7,10 +7,10 @@ import type {
 } from "gbraver-burst-core";
 import { Observable } from "rxjs";
 
+import { Animate } from "../../animation/animate";
 import type { PushWindow } from "../../window/push-window";
 import { BattleSceneSounds } from "./sounds/sounds";
 import { BattleSceneView } from "./view";
-import { Animate } from "../../animation/animate";
 
 /**
  * 全カスタムイベントで利用できるプロパティ
