@@ -1,9 +1,8 @@
 import type { Command, GameEnd, GameState } from "gbraver-burst-core";
 
 import { fadeOut, stop } from "../../../bgm/bgm-operators";
-import { stateAnimation, stateHistoryAnimation } from "../animation/game-state";
-import { animationPlayer } from "../animation-player";
 import type { BattleSceneProps } from "../battle-scene-props";
+import { playStateHistory } from "./play-state-history";
 
 /**
  * コマンド選択可能になるまでゲームを進める
@@ -25,22 +24,8 @@ const repeatProgressWhenUnselectable = async (
     }
 
     props.stateHistory = [...props.stateHistory, ...updateState];
-    const removeLastState = updateState.slice(0, -1);
-    await animationPlayer(props).play(
-      stateHistoryAnimation(props, removeLastState)
-    );
+    await playStateHistory(props, updateState);
     const lastState: GameState = updateState[updateState.length - 1];
-    const eventProps = { ...props, update: updateState };
-    props.customBattleEvent &&
-      (await props.customBattleEvent.beforeLastState(eventProps));
-    await Promise.all([
-      animationPlayer(props).play(stateAnimation(props, lastState)),
-      props.customBattleEvent
-        ? props.customBattleEvent.onLastState(eventProps)
-        : Promise.resolve(),
-    ]);
-    props.customBattleEvent &&
-      (await props.customBattleEvent.afterLastState(eventProps));
     if (lastState.effect.name !== "InputCommand") {
       return lastState;
     }
