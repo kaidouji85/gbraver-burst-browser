@@ -39,6 +39,7 @@ const parallelPlayEffects = [
 ];
 
 /**
+ * @deprecated
  * ゲームステート履歴を戦闘アニメーションに変換する
  *
  * @param props 戦闘シーンプロパティ
