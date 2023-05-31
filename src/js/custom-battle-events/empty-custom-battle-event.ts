@@ -5,9 +5,9 @@ import type {
   BurstCommandSelected,
   CommandCanceled,
   CustomBattleEvent,
+  CustomStateAnimation,
   LastState,
   PilotSkillCommandSelected,
-  CustomStateAnimation,
 } from "../td-scenes/battle/custom-battle-event";
 
 /**

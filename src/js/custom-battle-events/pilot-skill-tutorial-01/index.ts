@@ -1,8 +1,8 @@
 import { Animate } from "../../animation/animate";
 import {
   CustomBattleEvent,
-  LastState,
   CustomStateAnimation,
+  LastState,
 } from "../../td-scenes/battle/custom-battle-event";
 import { EmptyCustomBattleEvent } from "../empty-custom-battle-event";
 import { afterLastState } from "./listeners/after-last-state";
