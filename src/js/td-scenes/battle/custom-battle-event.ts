@@ -74,7 +74,7 @@ export interface CustomBattleEvent {
    * @param props イベントプロパティ
    * @return カスタムステートアニメーション
    */
-  stateAnimation(props: CustomStateAnimation): Animate;
+  onStateAnimation(props: CustomStateAnimation): Animate;
 
   /**
    * 最終ステート直前イベント

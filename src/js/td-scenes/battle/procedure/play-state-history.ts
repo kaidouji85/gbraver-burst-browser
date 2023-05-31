@@ -43,7 +43,7 @@ export async function playStateHistory(
         const anime = all(
           stateAnimation(props, gameState),
           props.customBattleEvent
-            ? props.customBattleEvent.stateAnimation({
+            ? props.customBattleEvent.onStateAnimation({
                 ...props,
                 currentState: gameState,
               })

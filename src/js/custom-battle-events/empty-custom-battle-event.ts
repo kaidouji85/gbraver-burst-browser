@@ -17,7 +17,7 @@ import type {
 export class EmptyCustomBattleEvent implements CustomBattleEvent {
   /** @override */
   /* eslint-disable @typescript-eslint/no-unused-vars */
-  stateAnimation(props: CustomStateAnimation): Animate {
+  onStateAnimation(props: CustomStateAnimation): Animate {
     /* eslint-enable @typescript-eslint/no-unused-vars */
     return empty();
   }

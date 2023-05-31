@@ -9,7 +9,7 @@ import { tsubasaVictoryDeclaration } from "../animation/tsubasa-victory-declarat
  * @param props イベントプロパティ
  * @return アニメーション
  */
-export function stateAnimation(props: CustomStateAnimation): Animate {
+export function onStateAnimation(props: CustomStateAnimation): Animate {
   const turn = turnCount(props.stateHistory);
   if (
     turn === 3 &&
