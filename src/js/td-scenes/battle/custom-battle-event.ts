@@ -30,7 +30,7 @@ export type CustomBattleEventProps = {
 };
 
 /** カスタムステートアニメーションのプロパティ */
-export type StateAnimation = CustomBattleEventProps & {
+export type CustomStateAnimation = CustomBattleEventProps & {
   /** 再生するステート */
   readonly currentState: GameState;
 };
@@ -74,7 +74,7 @@ export interface CustomBattleEvent {
    * @param props イベントプロパティ
    * @return カスタムステートアニメーション
    */
-  stateAnimation(props: StateAnimation): Animate;
+  stateAnimation(props: CustomStateAnimation): Animate;
 
   /**
    * 最終ステート直前イベント

@@ -1,6 +1,6 @@
 import { Animate } from "../../../animation/animate";
 import { empty } from "../../../animation/delay";
-import { StateAnimation } from "../../../td-scenes/battle/custom-battle-event";
+import { CustomStateAnimation } from "../../../td-scenes/battle/custom-battle-event";
 import { turnCount } from "../../turn-count";
 import { tsubasaVictoryDeclaration } from "../animation/tsubasa-victory-declaration";
 
@@ -9,7 +9,7 @@ import { tsubasaVictoryDeclaration } from "../animation/tsubasa-victory-declarat
  * @param props イベントプロパティ
  * @return アニメーション
  */
-export function stateAnimation(props: StateAnimation): Animate {
+export function stateAnimation(props: CustomStateAnimation): Animate {
   const turn = turnCount(props.stateHistory);
   if (
     turn === 3 &&
