@@ -40,13 +40,23 @@ export async function playStateHistory(
           next &&
           parallelPlayEffects.includes(next.effect.name) &&
           parallelPlayEffects.includes(gameState.effect.name);
+        const customStateAnimationProps = {
+          ...props,
+          currentState: gameState,
+        };
         const anime = all(
           stateAnimation(props, gameState),
           props.customBattleEvent
-            ? props.customBattleEvent.stateAnimation({
-                ...props,
-                currentState: gameState,
-              })
+            ? props.customBattleEvent.onStateAnimation(
+                customStateAnimationProps
+              )
+            : empty()
+        ).chain(
+          empty(),
+          props.customBattleEvent
+            ? props.customBattleEvent.afterStateAnimation(
+                customStateAnimationProps
+              )
             : empty()
         );
         return {
