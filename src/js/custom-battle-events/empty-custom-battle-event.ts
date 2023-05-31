@@ -5,9 +5,9 @@ import type {
   BurstCommandSelected,
   CommandCanceled,
   CustomBattleEvent,
+  CustomStateAnimation,
   LastState,
   PilotSkillCommandSelected,
-  StateAnimation,
 } from "../td-scenes/battle/custom-battle-event";
 
 /**
@@ -17,7 +17,7 @@ import type {
 export class EmptyCustomBattleEvent implements CustomBattleEvent {
   /** @override */
   /* eslint-disable @typescript-eslint/no-unused-vars */
-  stateAnimation(props: StateAnimation): Animate {
+  stateAnimation(props: CustomStateAnimation): Animate {
     /* eslint-enable @typescript-eslint/no-unused-vars */
     return empty();
   }
