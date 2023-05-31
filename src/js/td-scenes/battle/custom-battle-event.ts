@@ -82,7 +82,7 @@ export interface CustomBattleEvent {
    * 戻り値のアニメーションが完了しなくても、次のステートアニメーションは再生される
    * @param props 
    */
-  afterAtateAnimation(props: CustomStateAnimation): Animate;
+  afterStateAnimation(props: CustomStateAnimation): Animate;
 
   /**
    * 最終ステート直前イベント
