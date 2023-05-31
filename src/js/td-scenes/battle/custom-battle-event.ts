@@ -77,6 +77,14 @@ export interface CustomBattleEvent {
   onStateAnimation(props: CustomStateAnimation): Animate;
 
   /**
+   * ステートアニメ終了後に呼ばれる、カスタムステートアニメーション
+   * 最終ステート以外のステートアニメーション再生後に、本メソッドが呼び出さる
+   * 戻り値のアニメーションが完了しなくても、次のステートアニメーションは再生される
+   * @param props 
+   */
+  afterAtateAnimation(props: CustomStateAnimation): Animate;
+
+  /**
    * 最終ステート直前イベント
    * @param props イベントプロパティ
    * @return 処理が完了したら発火するPromise
