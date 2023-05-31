@@ -4,4 +4,5 @@ export const TutorialStageIDs = {
   ZERO_DEFENSE: "ZERO_DEFENSE",
   BURST: "BURST",
   Pilot01: "Pilot01",
+  Pilot02: "Pilot02",
 };
