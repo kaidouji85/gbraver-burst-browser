@@ -26,7 +26,7 @@ async function doPilotSkillOrNothing(
 
   const correctPower = totalCorrectPower(player.armdozer.effects);
   const turn = turnCount(props.stateHistory);
-  if (0 < correctPower && turn === 2) {
+  if (correctPower <= 0 && turn === 2) {
     await doPilotSkill(props);
     return true;
   }

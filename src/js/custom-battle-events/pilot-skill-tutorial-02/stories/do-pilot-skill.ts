@@ -1,4 +1,8 @@
 import { CustomBattleEventProps } from "../../../td-scenes/battle/custom-battle-event";
+import { activeLeftMessageWindowWithFace } from "../../active-message-window";
+import { focusInPilotButton } from "../../focus";
+import { scrollLeftMessages } from "../../scroll-messages";
+import { shouldPilotSkill } from "../captions";
 
 /**
  * パイロットスキル発動の推奨
@@ -8,5 +12,9 @@ import { CustomBattleEventProps } from "../../../td-scenes/battle/custom-battle-
 export async function doPilotSkill(
   props: Readonly<CustomBattleEventProps>
 ): Promise<void> {
-  return;
+  activeLeftMessageWindowWithFace(props, "Tsubasa");
+  await scrollLeftMessages(props, [
+    ["ツバサ", "「いまだガイ君 パイロットスキル発動だ」"],
+  ]);
+  await focusInPilotButton(props, shouldPilotSkill);
 }
