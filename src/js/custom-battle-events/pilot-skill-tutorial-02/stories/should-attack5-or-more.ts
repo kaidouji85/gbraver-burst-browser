@@ -1,7 +1,7 @@
 import { CustomBattleEventProps } from "../../../td-scenes/battle/custom-battle-event";
-import { activeLeftMessageWindowWithFace } from "../../active-message-window";
+import { activeLeftMessageWindowWithFace, activeRightMessageWindowWithFace } from "../../active-message-window";
 import { invisibleAllMessageWindows } from "../../invisible-all-message-windows";
-import { scrollLeftMessages } from "../../scroll-messages";
+import { scrollLeftMessages, scrollRightMessages } from "../../scroll-messages";
 
 /**
  * 5以上で攻撃する
@@ -16,5 +16,11 @@ export async function shouldAttack5OrMore(
     ["ツバサ", "「これでシンブレイバーの攻撃力が底上げされた"],
     ["いまなら 3攻撃以上で私を倒せるはずだ」"]
   ]);
+  props.view.dom.leftMessageWindow.darken();
+  activeRightMessageWindowWithFace(props, "Gai");
+  await scrollRightMessages(props, [
+    ["ガイ", "「了解だ 3以上で攻撃すればいいんだな」"],
+  ]);
+  props.view.dom.rightMessageWindow.darken();
   invisibleAllMessageWindows(props);
 }
