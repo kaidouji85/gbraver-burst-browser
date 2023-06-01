@@ -1,5 +1,6 @@
 import { CommandCanceled, CustomBattleEvent, LastState, PilotSkillCommandSelected } from "../../td-scenes/battle/custom-battle-event";
 import { EmptyCustomBattleEvent } from "../empty-custom-battle-event";
+import { afterLastState } from "./listeners/after-last-state";
 import { beforeLastState } from "./listeners/before-last-state";
 import { onPilotSkillCommandSelected } from "./listeners/on-pilot-skill-command-selected";
 import { PilotSkillTutorial02State } from "./state";
@@ -25,6 +26,11 @@ class PilotSkillTutorial02 extends EmptyCustomBattleEvent {
   async beforeLastState(props: LastState): Promise<void> {
     this.#state = await beforeLastState(props, this.#state);
   }
+
+  /** @override */
+  async afterLastState(props: LastState): Promise<void> {
+    this.#state = await afterLastState(props, this.#state);
+  }  
 
   /** @override */
   async onPilotSkillCommandSelected(props: PilotSkillCommandSelected): Promise<CommandCanceled> {
