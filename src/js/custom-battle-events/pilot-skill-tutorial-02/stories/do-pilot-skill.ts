@@ -5,7 +5,7 @@ import { scrollLeftMessages } from "../../scroll-messages";
 import { shouldPilotSkill } from "../captions";
 
 /**
- * パイロットスキル発動の推奨
+ * パイロットスキル発動を推奨
  * @param props イベントプロパティ
  * @return ストーリーが完了したら発火するPromise
  */

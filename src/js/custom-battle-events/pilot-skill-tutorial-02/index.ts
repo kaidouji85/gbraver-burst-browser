@@ -17,6 +17,7 @@ class PilotSkillTutorial02 extends EmptyCustomBattleEvent {
     this.#state = {
       isIntroductionComplete: false,
       isDoPilotSkillComplete: false,
+      isShouldAttack5OrMoreComplete: false,
     };
   }
 

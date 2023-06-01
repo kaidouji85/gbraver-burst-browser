@@ -1,4 +1,6 @@
 import { CustomBattleEventProps } from "../../../td-scenes/battle/custom-battle-event";
+import { activeLeftMessageWindowWithFace } from "../../active-message-window";
+import { invisibleAllMessageWindows } from "../../invisible-all-message-windows";
 import { scrollLeftMessages } from "../../scroll-messages";
 
 /**
@@ -9,8 +11,10 @@ import { scrollLeftMessages } from "../../scroll-messages";
 export async function shouldAttack5OrMore(
   props: Readonly<CustomBattleEventProps>
 ): Promise<void> {
+  activeLeftMessageWindowWithFace(props, "Tsubasa");
   await scrollLeftMessages(props, [
     ["ツバサ", "「これでシンブレイバーの攻撃力が底上げされた"],
     ["いまなら 3攻撃以上で私を倒せるはずだ」"]
   ]);
+  invisibleAllMessageWindows(props);
 }
