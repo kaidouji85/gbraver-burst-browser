@@ -63,6 +63,7 @@ export function loadCubeTexture(
         `${resourceRoot.get()}/${config.nz}`,
       ],
       (texture: THREE.CubeTexture) => {
+        texture.colorSpace = THREE.LinearSRGBColorSpace;
         resolve({
           id: config.id,
           texture: texture,
