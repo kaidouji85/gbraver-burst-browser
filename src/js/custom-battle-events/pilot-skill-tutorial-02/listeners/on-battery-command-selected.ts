@@ -32,7 +32,6 @@ async function doNoZeroDefenseOrNothing(
   if (
     props.battery.battery <= 0 &&
     isEnemyTurn &&
-    player.armdozer.enableBurst &&
     0 < player.armdozer.battery
   ) {
     await noZeroDefense(props);
