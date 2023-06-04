@@ -1,5 +1,8 @@
 import { CustomBattleEventProps } from "../../../td-scenes/battle/custom-battle-event";
-import { activeLeftMessageWindowWithFace, activeRightMessageWindowWithFace } from "../../active-message-window";
+import {
+  activeLeftMessageWindowWithFace,
+  activeRightMessageWindowWithFace,
+} from "../../active-message-window";
 import { refreshConversation } from "../../invisible-all-message-windows";
 import { scrollLeftMessages, scrollRightMessages } from "../../scroll-messages";
 
@@ -8,9 +11,7 @@ import { scrollLeftMessages, scrollRightMessages } from "../../scroll-messages";
  * @param props イベントプロパティ
  * @return ストーリーが完了したら発火するPromise
  */
-export async function introduction(
-  props: Readonly<CustomBattleEventProps>
-) {
+export async function introduction(props: Readonly<CustomBattleEventProps>) {
   activeRightMessageWindowWithFace(props, "Shinya");
   await scrollRightMessages(props, [
     ["シンヤ", "「ガイ 練習を手伝ってくれて ありがとうッス」"],
@@ -31,9 +32,7 @@ export async function introduction(
   props.view.dom.leftMessageWindow.darken();
   await refreshConversation(props);
   activeRightMessageWindowWithFace(props, "Shinya");
-  await scrollRightMessages(props, [
-    ["シンヤ", "「姿勢を正して 礼！！」"],
-  ]);
+  await scrollRightMessages(props, [["シンヤ", "「姿勢を正して 礼！！」"]]);
   await refreshConversation(props);
   activeLeftMessageWindowWithFace(props, "Tsubasa");
   props.view.dom.leftMessageWindow.messages([

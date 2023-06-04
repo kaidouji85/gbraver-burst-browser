@@ -1,5 +1,8 @@
 import { CustomBattleEventProps } from "../../../td-scenes/battle/custom-battle-event";
-import { activeLeftMessageWindowWithFace, activeRightMessageWindowWithFace } from "../../active-message-window";
+import {
+  activeLeftMessageWindowWithFace,
+  activeRightMessageWindowWithFace,
+} from "../../active-message-window";
 import { refreshConversation } from "../../invisible-all-message-windows";
 import { scrollLeftMessages, scrollRightMessages } from "../../scroll-messages";
 
@@ -14,7 +17,7 @@ export async function playerWin(
   activeRightMessageWindowWithFace(props, "Shinya");
   await scrollRightMessages(props, [
     ["シンヤ", "「そこまで"],
-    ["この試合 ガイの勝ちッス」"]
+    ["この試合 ガイの勝ちッス」"],
   ]);
   props.view.dom.rightMessageWindow.darken();
   await refreshConversation(props);
@@ -29,9 +32,7 @@ export async function playerWin(
   ]);
   await refreshConversation(props);
   activeRightMessageWindowWithFace(props, "Shinya");
-  await scrollRightMessages(props, [
-    ["シンヤ", "「姿勢を正して 礼！！」"],
-  ]);
+  await scrollRightMessages(props, [["シンヤ", "「姿勢を正して 礼！！」"]]);
   await refreshConversation(props);
   activeLeftMessageWindowWithFace(props, "Tsubasa");
   props.view.dom.leftMessageWindow.messages([

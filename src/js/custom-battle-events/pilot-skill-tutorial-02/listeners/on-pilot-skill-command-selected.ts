@@ -1,4 +1,7 @@
-import { CommandCanceled, PilotSkillCommandSelected } from "../../../td-scenes/battle/custom-battle-event";
+import {
+  CommandCanceled,
+  PilotSkillCommandSelected,
+} from "../../../td-scenes/battle/custom-battle-event";
 import { focusOutPilotButton, isPilotButtonFocused } from "../../focus";
 import { PilotSkillTutorial02State } from "../state";
 

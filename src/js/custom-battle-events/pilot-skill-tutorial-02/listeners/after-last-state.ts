@@ -19,13 +19,13 @@ export async function afterLastState(
   }
 
   if (
-    foundGameEnd.effect.result.type === "GameOver" && 
+    foundGameEnd.effect.result.type === "GameOver" &&
     foundGameEnd.effect.result.winner === props.playerId
   ) {
     await playerWin(props);
     invisibleAllMessageWindows(props);
-    return state;  
+    return state;
   }
-  
+
   return state;
 }
