@@ -1,6 +1,9 @@
-import {PilotSkillTutorial02State} from "../state";
-import {BatteryCommandSelected, CommandCanceled} from "../../../td-scenes/battle/custom-battle-event";
-import {noZeroDefense} from "../stories/no-zero-defense";
+import {
+  BatteryCommandSelected,
+  CommandCanceled,
+} from "../../../td-scenes/battle/custom-battle-event";
+import { PilotSkillTutorial02State } from "../state";
+import { noZeroDefense } from "../stories/no-zero-defense";
 
 /** イベント終了情報 */
 type Ret = {
@@ -16,7 +19,7 @@ type Ret = {
  * @return 再生した否か、trueで再生した
  */
 async function doNoZeroDefenseOrNothing(
-  props: Readonly<BatteryCommandSelected>,
+  props: Readonly<BatteryCommandSelected>
 ): Promise<boolean> {
   const lastState = props.stateHistory[props.stateHistory.length - 1];
   if (!lastState) {
@@ -57,15 +60,14 @@ export async function onBatteryCommandSelected(
       state,
       cancel: {
         isCommandCanceled: true,
-      }
+      },
     };
   }
-
 
   return {
     state,
     cancel: {
       isCommandCanceled: false,
-    }
+    },
   };
 }

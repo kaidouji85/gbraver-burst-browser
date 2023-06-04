@@ -8,9 +8,9 @@ import {
 import { EmptyCustomBattleEvent } from "../empty-custom-battle-event";
 import { afterLastState } from "./listeners/after-last-state";
 import { beforeLastState } from "./listeners/before-last-state";
+import { onBatteryCommandSelected } from "./listeners/on-battery-command-selected";
 import { onPilotSkillCommandSelected } from "./listeners/on-pilot-skill-command-selected";
 import { PilotSkillTutorial02State } from "./state";
-import {onBatteryCommandSelected} from "./listeners/on-battery-command-selected";
 
 /** パイロットスキルチュートリアル（後半）イベント */
 class PilotSkillTutorial02 extends EmptyCustomBattleEvent {
@@ -40,8 +40,13 @@ class PilotSkillTutorial02 extends EmptyCustomBattleEvent {
   }
 
   /** @override */
-  async onBatteryCommandSelected(props: BatteryCommandSelected): Promise<CommandCanceled> {
-    const { state, cancel } = await onBatteryCommandSelected(props, this.#state);
+  async onBatteryCommandSelected(
+    props: BatteryCommandSelected
+  ): Promise<CommandCanceled> {
+    const { state, cancel } = await onBatteryCommandSelected(
+      props,
+      this.#state
+    );
     this.#state = state;
     return cancel;
   }

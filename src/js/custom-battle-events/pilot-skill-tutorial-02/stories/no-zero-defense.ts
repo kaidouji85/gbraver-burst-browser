@@ -1,7 +1,7 @@
-import {CustomBattleEventProps} from "../../../td-scenes/battle/custom-battle-event";
-import {activeRightMessageWindowWithFace} from "../../active-message-window";
-import {scrollRightMessages} from "../../scroll-messages";
-import {invisibleAllMessageWindows} from "../../invisible-all-message-windows";
+import { CustomBattleEventProps } from "../../../td-scenes/battle/custom-battle-event";
+import { activeRightMessageWindowWithFace } from "../../active-message-window";
+import { invisibleAllMessageWindows } from "../../invisible-all-message-windows";
+import { scrollRightMessages } from "../../scroll-messages";
 
 /**
  * 0防御しない
