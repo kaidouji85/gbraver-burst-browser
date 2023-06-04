@@ -1,6 +1,7 @@
 import {CustomBattleEventProps} from "../../../td-scenes/battle/custom-battle-event";
 import {activeRightMessageWindowWithFace} from "../../active-message-window";
 import {scrollRightMessages} from "../../scroll-messages";
+import {invisibleAllMessageWindows} from "../../invisible-all-message-windows";
 
 /**
  * 0防御しない
@@ -14,4 +15,5 @@ export async function noZeroDefense(
   await scrollRightMessages(props, [
     ["ガイ", "「0防御は即死 何度も同じ轍を踏むものか」"],
   ]);
+  invisibleAllMessageWindows(props);
 }
