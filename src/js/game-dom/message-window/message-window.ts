@@ -14,13 +14,7 @@ import {Position} from "./position";
 import {toRootClass} from "./dom/to-root-class";
 import {FacePosition} from "./face-position";
 import {CSS_PROPS_BRIGHTNESS} from "./dom/css-custom-props";
-
-/** data-idを集めたもの */
-type DataIDs = {
-  messages: string;
-  leftFaceGraphic: string;
-  rightFaceGraphic: string;
-};
+import {DataIDs} from "./dom/data-ids";
 
 /**
  * ルートHTML要素のinnerHTML
