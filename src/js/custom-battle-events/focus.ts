@@ -32,9 +32,9 @@ export const focusInBatterySelector = async (
   attentionBatterySelector(props);
   props.view.hud.gameObjects.batterySelector.disabled(false);
   invisibleAllMessageWindows(props);
+  await props.view.hud.gameObjects.frontmostFader.opacity(0.7, 200).play();
   activeNearBatterySelectorMessageWindow(props);
   props.view.dom.nearBatterySelectorMessageWindow.messages(caption);
-  await props.view.hud.gameObjects.frontmostFader.opacity(0.7, 200).play();
 };
 
 /**
