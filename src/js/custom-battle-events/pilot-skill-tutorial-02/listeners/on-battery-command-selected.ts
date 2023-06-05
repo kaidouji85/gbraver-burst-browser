@@ -6,14 +6,6 @@ import { PilotSkillTutorial02State } from "../state";
 import { lessThanAttack3 } from "../stories/less-than-attack3";
 import { noZeroDefense } from "../stories/no-zero-defense";
 
-/** イベント終了情報 */
-type Ret = {
-  /** ステート更新結果 */
-  state: PilotSkillTutorial02State;
-  /** コマンドキャンセル情報 */
-  cancel: CommandCanceled;
-};
-
 /**
  * 条件を満たした場合「0防御しない」を再生する
  * @param props イベントプロパティ
@@ -48,7 +40,7 @@ async function doNoZeroDefenseOrNothing(
 /**
  * 条件を満たした場合「3未満攻撃だと警告」を再生する
  * @param props イベントプロパティ
- * @param state
+ * @param state イベントステート
  * @return 再生した否か、trueで再生した
  */
 async function doLessThanAttack3orNothing(
@@ -78,6 +70,14 @@ async function doLessThanAttack3orNothing(
 
   return false;
 }
+
+/** イベント終了情報 */
+type Ret = {
+  /** ステート更新結果 */
+  state: PilotSkillTutorial02State;
+  /** コマンドキャンセル情報 */
+  cancel: CommandCanceled;
+};
 
 /**
  * バッテリーコマンド選択イベント
