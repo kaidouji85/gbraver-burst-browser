@@ -130,9 +130,9 @@ export const focusInPilotButton = async (
   attentionPilotButton(props);
   props.view.hud.gameObjects.pilotButton.disabled(false);
   invisibleAllMessageWindows(props);
+  await props.view.hud.gameObjects.frontmostFader.opacity(0.7, 200).play();
   activeNearPilotButtonMessageWindow(props);
   props.view.dom.nearPilotButtonMessageWindow.messages(caption);
-  await props.view.hud.gameObjects.frontmostFader.opacity(0.7, 200).play();
 };
 
 /**
