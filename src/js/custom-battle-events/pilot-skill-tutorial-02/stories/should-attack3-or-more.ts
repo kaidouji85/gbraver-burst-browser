@@ -7,11 +7,11 @@ import { invisibleAllMessageWindows } from "../../invisible-all-message-windows"
 import { scrollLeftMessages, scrollRightMessages } from "../../scroll-messages";
 
 /**
- * 5以上で攻撃する
+ * 3以上で攻撃する
  * @param props イベントプロパティ
  * @return ストーリーが完了したら発火するPromise
  */
-export async function shouldAttack5OrMore(
+export async function shouldAttack3OrMore(
   props: Readonly<CustomBattleEventProps>
 ): Promise<void> {
   activeLeftMessageWindowWithFace(props, "Tsubasa");
