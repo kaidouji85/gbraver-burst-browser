@@ -6,7 +6,7 @@ import { turnCount } from "../../turn-count";
 import { PilotSkillTutorial02State } from "../state";
 import { doPilotSkill } from "../stories/do-pilot-skill";
 import { introduction } from "../stories/introduction";
-import { shouldAttack5OrMore } from "../stories/should-attack5-or-more";
+import { shouldAttack3OrMore } from "../stories/should-attack3-or-more";
 
 /**
  * 条件を満たせば「パイロットスキル発動を推奨」を再生する
@@ -61,7 +61,7 @@ async function doAttack3OrMoreOrNothing(
   const correctPower = totalCorrectPower(player.armdozer.effects);
   const turn = turnCount(props.stateHistory);
   if (0 < correctPower && turn === 2 && !state.isShouldAttack5OrMoreComplete) {
-    await shouldAttack5OrMore(props);
+    await shouldAttack3OrMore(props);
     return true;
   }
 
