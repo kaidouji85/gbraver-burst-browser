@@ -32,9 +32,9 @@ export const focusInBatterySelector = async (
   attentionBatterySelector(props);
   props.view.hud.gameObjects.batterySelector.disabled(false);
   invisibleAllMessageWindows(props);
+  await props.view.hud.gameObjects.frontmostFader.opacity(0.7, 200).play();
   activeNearBatterySelectorMessageWindow(props);
   props.view.dom.nearBatterySelectorMessageWindow.messages(caption);
-  await props.view.hud.gameObjects.frontmostFader.opacity(0.7, 200).play();
 };
 
 /**
@@ -82,9 +82,9 @@ export const focusInBurstButton = async (
   attentionBurstButton(props);
   props.view.hud.gameObjects.burstButton.disabled(false);
   invisibleAllMessageWindows(props);
+  await props.view.hud.gameObjects.frontmostFader.opacity(0.7, 200).play();
   activeNearBurstButtonMessageWindow(props);
   props.view.dom.nearBurstButtonMessageWindow.messages(caption);
-  await props.view.hud.gameObjects.frontmostFader.opacity(0.7, 200).play();
 };
 
 /**
@@ -130,9 +130,9 @@ export const focusInPilotButton = async (
   attentionPilotButton(props);
   props.view.hud.gameObjects.pilotButton.disabled(false);
   invisibleAllMessageWindows(props);
+  await props.view.hud.gameObjects.frontmostFader.opacity(0.7, 200).play();
   activeNearPilotButtonMessageWindow(props);
   props.view.dom.nearPilotButtonMessageWindow.messages(caption);
-  await props.view.hud.gameObjects.frontmostFader.opacity(0.7, 200).play();
 };
 
 /**
