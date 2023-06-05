@@ -11,6 +11,8 @@
     /** 本カスタムプロパティはJavaScriptから変更される */
     --brightness: brightness(1);
     --margin-x: max(3vw, var(--safe-area-left), var(--safe-area-right));
+    --window-height: calc(var(--responsive-font-size) * 7);
+    --cry-window-height: auto;
 
     box-sizing: border-box;
     display: flex;
@@ -23,13 +25,13 @@
     border-radius: var(--dialog-border-radius);
     padding: calc(var(--responsive-font-size) * 1);
     width: calc(49vw - var(--margin-x));
-    min-height: calc(var(--responsive-font-size) * 7);
     filter: var(--brightness);
   }
 
   .message-window {
     left: 50vw;
     transform: translate(-50%, 0);
+    min-height: var(--window-height);
   }
 
   .message-window--invisible {
@@ -38,28 +40,43 @@
 
   .message-window--left {
     left: var(--margin-x);
+    min-height: var(--window-height);
   }
 
   .message-window--right {
     right: var(--margin-x);
+    min-height: var(--window-height);
   }
 
   .message-window--near-battery-selector {
     --right-margin: max(10px, var(--safe-area-right));
 
     right: calc(var(--right-margin) + var(--hud-ui-scale) * 220px);
+    min-height: var(--window-height);
   }
 
   .message-window--near-burst-button {
     --left-margin: max(10px, var(--safe-area-left));
 
     left: calc(var(--left-margin) + var(--hud-ui-scale) * 250px);
+    min-height: var(--window-height);
   }
 
   .message-window--near-pilot-button {
     --left-margin: max(10px, var(--safe-area-left));
 
     left: calc(var(--left-margin) + var(--hud-ui-scale) * 160px);
+    min-height: var(--window-height);
+  }
+
+  .message-window--player-cry {
+    right: var(--margin-x);
+    height: var(--cry-window-height);
+  }
+
+  .message-window--enemy-cry {
+    left: var(--margin-x);
+    height: var(--cry-window-height);
   }
 
   .message-window__messages-wrapper {
@@ -99,6 +116,9 @@
   .message-window,
   .message-window--left,
   .message-window--right,
+  .message-window--near-battery-selector,
+  .message-window--near-burst-button,
+  .message-window--near-pilot-button,
   .message-window--invisible {
     display: none;
   }
