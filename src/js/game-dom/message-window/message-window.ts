@@ -8,59 +8,16 @@ import {
   NEXT_MESSAGE_ICON_CLASS,
   NEXT_MESSAGE_ICON_CLASS_INVISIBLE,
   ROOT_CLASS,
-  ROOT_CLASS_INVISIBLE,
-  ROOT_CLASS_LEFT,
-  ROOT_CLASS_NEAR_BATTERY_SELECTOR,
-  ROOT_CLASS_NEAR_BURST_BUTTON,
-  ROOT_CLASS_NEAR_PILOT_BUTTON,
-  ROOT_CLASS_RIGHT
+  ROOT_CLASS_INVISIBLE
 } from "./dom/class-name";
-
-/** メッセージウインドウ位置 */
-type Position =
-  | "Center"
-  | "Right"
-  | "Left"
-  | "NearBatterySelector"
-  | "NearBurstButton"
-  | "NearPilotButton";
+import {Position} from "./position";
+import {toRootClass} from "./dom/to-root-class";
 
 /** 顔画像表示位置 */
 type FacePosition = "Right" | "Left";
 
 /** CSSカスタムプロパティ --brightness */
 const CSS_PROPS_BRIGHTNESS = "--brightness";
-
-/**
- * メッセージウインドウ位置に対応したroot要素class属性を取得する
- *
- * @param position メッセージウインドウ位置
- * @return root要素のclass属性
- */
-function toRootClass(position: Position): string {
-  switch (position) {
-    case "Center":
-      return ROOT_CLASS;
-
-    case "Left":
-      return ROOT_CLASS_LEFT;
-
-    case "Right":
-      return ROOT_CLASS_RIGHT;
-
-    case "NearBatterySelector":
-      return ROOT_CLASS_NEAR_BATTERY_SELECTOR;
-
-    case "NearBurstButton":
-      return ROOT_CLASS_NEAR_BURST_BUTTON;
-
-    case "NearPilotButton":
-      return ROOT_CLASS_NEAR_PILOT_BUTTON;
-
-    default:
-      return ROOT_CLASS_INVISIBLE;
-  }
-}
 
 /** data-idを集めたもの */
 type DataIDs = {
