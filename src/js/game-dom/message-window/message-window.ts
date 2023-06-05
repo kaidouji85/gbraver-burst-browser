@@ -12,9 +12,7 @@ import {
 } from "./dom/class-name";
 import {Position} from "./position";
 import {toRootClass} from "./dom/to-root-class";
-
-/** 顔画像表示位置 */
-type FacePosition = "Right" | "Left";
+import {FacePosition} from "./face-position";
 
 /** CSSカスタムプロパティ --brightness */
 const CSS_PROPS_BRIGHTNESS = "--brightness";
