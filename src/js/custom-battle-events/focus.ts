@@ -82,9 +82,9 @@ export const focusInBurstButton = async (
   attentionBurstButton(props);
   props.view.hud.gameObjects.burstButton.disabled(false);
   invisibleAllMessageWindows(props);
+  await props.view.hud.gameObjects.frontmostFader.opacity(0.7, 200).play();
   activeNearBurstButtonMessageWindow(props);
   props.view.dom.nearBurstButtonMessageWindow.messages(caption);
-  await props.view.hud.gameObjects.frontmostFader.opacity(0.7, 200).play();
 };
 
 /**
