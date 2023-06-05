@@ -4,6 +4,7 @@ import {
 } from "../../../td-scenes/battle/custom-battle-event";
 import { PilotSkillTutorial02State } from "../state";
 import { noZeroDefense } from "../stories/no-zero-defense";
+import {lessThanAttack3} from "../stories/less-than-attack3";
 
 /** イベント終了情報 */
 type Ret = {
@@ -45,6 +46,40 @@ async function doNoZeroDefenseOrNothing(
 }
 
 /**
+ * 条件を満たした場合「3未満攻撃だと警告」を再生する
+ * @param props イベントプロパティ
+ * @param state
+ * @return 再生した否か、trueで再生した
+ */
+async function doLessThanAttack3orNothing(
+  props: Readonly<BatteryCommandSelected>,
+  state: Readonly<PilotSkillTutorial02State>
+): Promise<boolean> {
+  const lastState = props.stateHistory[props.stateHistory.length - 1];
+  if (!lastState) {
+    return false;
+  }
+
+  const player = lastState.players.find((p) => p.playerId === props.playerId);
+  if (!player) {
+    return false;
+  }
+
+  const isPlayerTurn = lastState.activePlayerId === props.playerId;
+  if (
+    isPlayerTurn &&
+    3 <= player.armdozer.battery &&
+    state.isShouldAttack5OrMoreComplete &&
+    props.battery.battery < 3
+  ) {
+    await lessThanAttack3(props);
+    return true;
+  }
+
+  return false;
+}
+
+/**
  * バッテリーコマンド選択イベント
  * @param props イベントプロパティ
  * @param state イベントステート
@@ -56,6 +91,16 @@ export async function onBatteryCommandSelected(
 ): Promise<Ret> {
   const isNoZeroDefensePlayed = await doNoZeroDefenseOrNothing(props);
   if (isNoZeroDefensePlayed) {
+    return {
+      state,
+      cancel: {
+        isCommandCanceled: true,
+      },
+    };
+  }
+
+  const isLessThanAttack3Played = await doLessThanAttack3orNothing(props, state);
+  if (isLessThanAttack3Played) {
     return {
       state,
       cancel: {
