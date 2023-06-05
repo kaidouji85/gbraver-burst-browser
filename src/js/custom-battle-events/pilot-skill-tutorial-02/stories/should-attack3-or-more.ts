@@ -1,7 +1,10 @@
-import {CustomBattleEventProps} from "../../../td-scenes/battle/custom-battle-event";
-import {activeLeftMessageWindowWithFace, activeRightMessageWindowWithFace,} from "../../active-message-window";
-import {invisibleAllMessageWindows} from "../../invisible-all-message-windows";
-import {scrollLeftMessages, scrollRightMessages} from "../../scroll-messages";
+import { CustomBattleEventProps } from "../../../td-scenes/battle/custom-battle-event";
+import {
+  activeLeftMessageWindowWithFace,
+  activeRightMessageWindowWithFace,
+} from "../../active-message-window";
+import { invisibleAllMessageWindows } from "../../invisible-all-message-windows";
+import { scrollLeftMessages, scrollRightMessages } from "../../scroll-messages";
 
 /**
  * 3以上で攻撃する

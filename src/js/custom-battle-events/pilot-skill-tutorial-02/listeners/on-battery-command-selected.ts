@@ -3,8 +3,8 @@ import {
   CommandCanceled,
 } from "../../../td-scenes/battle/custom-battle-event";
 import { PilotSkillTutorial02State } from "../state";
+import { lessThanAttack3 } from "../stories/less-than-attack3";
 import { noZeroDefense } from "../stories/no-zero-defense";
-import {lessThanAttack3} from "../stories/less-than-attack3";
 
 /** イベント終了情報 */
 type Ret = {
@@ -99,7 +99,10 @@ export async function onBatteryCommandSelected(
     };
   }
 
-  const isLessThanAttack3Played = await doLessThanAttack3orNothing(props, state);
+  const isLessThanAttack3Played = await doLessThanAttack3orNothing(
+    props,
+    state
+  );
   if (isLessThanAttack3Played) {
     return {
       state,
