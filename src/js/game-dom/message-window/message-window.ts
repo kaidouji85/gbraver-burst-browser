@@ -15,22 +15,7 @@ import {toRootClass} from "./dom/to-root-class";
 import {FacePosition} from "./face-position";
 import {CSS_PROPS_BRIGHTNESS} from "./dom/css-custom-props";
 import {DataIDs} from "./dom/data-ids";
-
-/**
- * ルートHTML要素のinnerHTML
- *
- * @param ids data-idを集めたもの
- * @return innerHTML
- */
-function rootInnerHTML(ids: DataIDs): string {
-  return `
-    <div class="${ROOT_CLASS}__face-graphic" data-id="${ids.leftFaceGraphic}"></div>
-    <div class="${ROOT_CLASS}__messages-wrapper">
-      <div class="${ROOT_CLASS}__messages" data-id="${ids.messages}"></div>
-    </div>
-    <div class="${ROOT_CLASS}__face-graphic" data-id="${ids.rightFaceGraphic}"></div>
-  `;
-}
+import {rootInnerHTML} from "./dom/root-inner-html";
 
 /** ルート要素の子孫要素 */
 type Elements = {
