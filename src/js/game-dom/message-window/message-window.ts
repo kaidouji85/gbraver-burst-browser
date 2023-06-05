@@ -21,13 +21,10 @@ import {extractElements} from "./dom/elements";
 type Params = {
   /** リソース管理オブジェクト */
   resources: Resources;
-
   /** ウインドウ位置 */
   position?: Position;
-
   /** 顔画像位置 */
   facePosition?: FacePosition;
-
   /** 顔画像の向き */
   faceOrientation?: FaceOrientation;
 };
