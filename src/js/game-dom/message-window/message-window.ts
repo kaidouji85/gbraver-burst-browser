@@ -13,9 +13,7 @@ import {
 import {Position} from "./position";
 import {toRootClass} from "./dom/to-root-class";
 import {FacePosition} from "./face-position";
-
-/** CSSカスタムプロパティ --brightness */
-const CSS_PROPS_BRIGHTNESS = "--brightness";
+import {CSS_PROPS_BRIGHTNESS} from "./dom/css-custom-props";
 
 /** data-idを集めたもの */
 type DataIDs = {
