@@ -1,7 +1,7 @@
 import { Observable, tap } from "rxjs";
 
 import { pop } from "../../../dom/animation";
-import { domImmediatePushStream, PushDOM } from "../../../dom/push-dom";
+import { domPushStream, PushDOM } from "../../../dom/push-dom";
 import type { Resources } from "../../../resource";
 import { PathIds } from "../../../resource/path";
 import { waitElementLoaded } from "../../../wait/wait-element-loaded";
@@ -43,7 +43,7 @@ export class ArmdozerIcon {
       resources.paths.find((v) => v.id === PathIds.CHECK)?.path ?? "";
     this.#check.hidden = true;
     this.#root.appendChild(this.#check);
-    this.#select = domImmediatePushStream(this.#root).pipe(
+    this.#select = domPushStream(this.#root).pipe(
       tap((action) => {
         action.event.preventDefault();
       })

@@ -2,7 +2,7 @@ import { Howl } from "howler";
 import { Observable, Subject, Unsubscribable } from "rxjs";
 
 import { pop } from "../../dom/animation";
-import { domImmediatePushStream, PushDOM } from "../../dom/push-dom";
+import { domPushStream, PushDOM } from "../../dom/push-dom";
 import { Exclusive } from "../../exclusive/exclusive";
 import type { Resources } from "../../resource";
 import { PathIds } from "../../resource/path";
@@ -94,7 +94,7 @@ export class MatchingDialog implements DOMDialog {
     this.#exclusive = new Exclusive();
     this.#matchingCanceled = new Subject();
     this.#unsubscribers = [
-      domImmediatePushStream(this.#closer).subscribe((action) => {
+      domPushStream(this.#closer).subscribe((action) => {
         this.#onCloserPush(action);
       }),
     ];
