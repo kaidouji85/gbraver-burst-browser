@@ -11,6 +11,7 @@ import { onButtonPush } from "./on-button-push";
  */
 export function bindEventListeners(props: BurstButtonProps): Unsubscribable[] {
   return [
+    // accesskeyの挙動でボタンを押させるために、clickイベントを仕込む
     domClickStream(props.root).subscribe((action) => {
       onButtonPush(props, action);
     }),

@@ -13,6 +13,7 @@ export function bindEventListeners(
   props: Readonly<PilotButtonProps>
 ): Unsubscribable[] {
   return [
+    // accesskeyの挙動でボタンを押させるために、clickイベントを仕込む
     domClickStream(props.root).subscribe((action) => {
       onPilotPush(props, action);
     }),
