@@ -1,4 +1,4 @@
-import {Position} from "../position";
+import { Position } from "../position";
 import {
   ROOT_CLASS,
   ROOT_CLASS_INVISIBLE,
@@ -6,7 +6,7 @@ import {
   ROOT_CLASS_NEAR_BATTERY_SELECTOR,
   ROOT_CLASS_NEAR_BURST_BUTTON,
   ROOT_CLASS_NEAR_PILOT_BUTTON,
-  ROOT_CLASS_RIGHT
+  ROOT_CLASS_RIGHT,
 } from "./class-name";
 
 /**

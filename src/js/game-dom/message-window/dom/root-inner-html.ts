@@ -1,5 +1,5 @@
-import {DataIDs} from "./data-ids";
-import {ROOT_CLASS} from "./class-name";
+import { DataIDs } from "./data-ids";
+import { ROOT_CLASS } from "./class-name";
 
 /**
  * ルートHTML要素のinnerHTML

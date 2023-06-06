@@ -1,21 +1,21 @@
-import {waitFinishAnimation} from "../../dom/animation";
-import {replaceDOM} from "../../dom/replace-dom";
-import type {Resources} from "../../resource";
-import {domUuid} from "../../uuid/dom-uuid";
-import type {FaceOrientation, FaceType} from "./face-graphic";
-import {FaceGraphic} from "./face-graphic";
+import { waitFinishAnimation } from "../../dom/animation";
+import { replaceDOM } from "../../dom/replace-dom";
+import type { Resources } from "../../resource";
+import { domUuid } from "../../uuid/dom-uuid";
+import type { FaceOrientation, FaceType } from "./face-graphic";
+import { FaceGraphic } from "./face-graphic";
 import {
   NEXT_MESSAGE_ICON_CLASS,
   NEXT_MESSAGE_ICON_CLASS_INVISIBLE,
   ROOT_CLASS,
-  ROOT_CLASS_INVISIBLE
+  ROOT_CLASS_INVISIBLE,
 } from "./dom/class-name";
-import {Position} from "./position";
-import {toRootClass} from "./dom/to-root-class";
-import {FacePosition} from "./face-position";
-import {CSS_PROPS_BRIGHTNESS} from "./dom/css-custom-props";
-import {rootInnerHTML} from "./dom/root-inner-html";
-import {extractElements} from "./dom/elements";
+import { Position } from "./position";
+import { toRootClass } from "./dom/to-root-class";
+import { FacePosition } from "./face-position";
+import { CSS_PROPS_BRIGHTNESS } from "./dom/css-custom-props";
+import { rootInnerHTML } from "./dom/root-inner-html";
+import { extractElements } from "./dom/elements";
 
 /** コンストラクタのパラメータ */
 type Params = {
