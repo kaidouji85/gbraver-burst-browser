@@ -64,6 +64,6 @@ export function createMessageWindowProps(params: GenerateParams): MessageWindowP
     rightFaceGraphic,
     facePosition: params?.facePosition ?? "Right",
     faceOrientation: params?.faceOrientation ?? "Left",
-    messages: elements.messages;
+    messages: elements.messages,
   };
 }
