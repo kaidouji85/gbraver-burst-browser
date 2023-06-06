@@ -1,5 +1,5 @@
-import {MessageWindowProps} from "../props";
-import {getTargetFaceGraphic} from "./get-target-face-graphic";
+import { MessageWindowProps } from "../props";
+import { getTargetFaceGraphic } from "./get-target-face-graphic";
 
 /**
  * 顔画像の表示、非表示設定

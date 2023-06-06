@@ -1,13 +1,17 @@
 import type { FaceType } from "./face-graphic";
-import {createMessageWindowProps, GenerateParams, MessageWindowProps} from "./props";
-import {visible} from "./procedure/visible";
-import {messages} from "./procedure/messages";
-import {scrollUp} from "./procedure/scroll-up";
-import {face} from "./procedure/face";
-import {faceVisible} from "./procedure/face-visible";
-import {nextMessageIconVisible} from "./procedure/next-message-icon-visible";
-import {darken} from "./procedure/darken";
-import {lighten} from "./procedure/lighten";
+import { darken } from "./procedure/darken";
+import { face } from "./procedure/face";
+import { faceVisible } from "./procedure/face-visible";
+import { lighten } from "./procedure/lighten";
+import { messages } from "./procedure/messages";
+import { nextMessageIconVisible } from "./procedure/next-message-icon-visible";
+import { scrollUp } from "./procedure/scroll-up";
+import { visible } from "./procedure/visible";
+import {
+  createMessageWindowProps,
+  GenerateParams,
+  MessageWindowProps,
+} from "./props";
 
 /** コンストラクタのパラメータ */
 type Params = GenerateParams;

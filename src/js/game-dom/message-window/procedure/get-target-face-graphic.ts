@@ -1,5 +1,5 @@
-import {FaceGraphic} from "../face-graphic";
-import {MessageWindowProps} from "../props";
+import { FaceGraphic } from "../face-graphic";
+import { MessageWindowProps } from "../props";
 
 /**
  * 表示位置に応じた顔画像を取得する

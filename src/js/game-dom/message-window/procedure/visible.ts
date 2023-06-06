@@ -1,6 +1,6 @@
-import { MessageWindowProps } from "../props";
-import { toRootClass } from "../dom/to-root-class";
 import { ROOT_CLASS_INVISIBLE } from "../dom/class-name";
+import { toRootClass } from "../dom/to-root-class";
+import { MessageWindowProps } from "../props";
 
 /**
  * メッセージウインドウの表示状態を設定する

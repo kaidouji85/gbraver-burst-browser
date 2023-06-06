@@ -1,5 +1,5 @@
-import {waitFinishAnimation} from "../../../dom/animation";
-import {MessageWindowProps} from "../props";
+import { waitFinishAnimation } from "../../../dom/animation";
+import { MessageWindowProps } from "../props";
 
 /**
  * メッセージを上スクロールする

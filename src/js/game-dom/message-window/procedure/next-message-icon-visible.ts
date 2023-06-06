@@ -1,5 +1,8 @@
-import {NEXT_MESSAGE_ICON_CLASS, NEXT_MESSAGE_ICON_CLASS_INVISIBLE} from "../dom/class-name";
-import {MessageWindowProps} from "../props";
+import {
+  NEXT_MESSAGE_ICON_CLASS,
+  NEXT_MESSAGE_ICON_CLASS_INVISIBLE,
+} from "../dom/class-name";
+import { MessageWindowProps } from "../props";
 
 /**
  * 次メッセージアイコンの表示、非表示設定

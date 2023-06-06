@@ -1,13 +1,13 @@
-import {FaceGraphic, FaceOrientation} from "./face-graphic";
-import {Position} from "./position";
-import {FacePosition} from "./face-position";
-import {Resources} from "../../resource";
-import {domUuid} from "../../uuid/dom-uuid";
-import {toRootClass} from "./dom/to-root-class";
-import {rootInnerHTML} from "./dom/root-inner-html";
-import {extractElements} from "./dom/elements";
-import {NEXT_MESSAGE_ICON_CLASS_INVISIBLE} from "./dom/class-name";
-import {replaceDOM} from "../../dom/replace-dom";
+import { replaceDOM } from "../../dom/replace-dom";
+import { Resources } from "../../resource";
+import { domUuid } from "../../uuid/dom-uuid";
+import { NEXT_MESSAGE_ICON_CLASS_INVISIBLE } from "./dom/class-name";
+import { extractElements } from "./dom/elements";
+import { rootInnerHTML } from "./dom/root-inner-html";
+import { toRootClass } from "./dom/to-root-class";
+import { FaceGraphic, FaceOrientation } from "./face-graphic";
+import { FacePosition } from "./face-position";
+import { Position } from "./position";
 
 /** メッセージウインドウプロパティ */
 export type MessageWindowProps = {
@@ -19,7 +19,7 @@ export type MessageWindowProps = {
   position: Position;
   faceOrientation: FaceOrientation;
   facePosition: FacePosition;
-}
+};
 
 /** プロパティ生成パラメータ */
 export type GenerateParams = {
@@ -38,7 +38,9 @@ export type GenerateParams = {
  * @param params 生成パラメータ
  * @return 生成結果
  */
-export function createMessageWindowProps(params: GenerateParams): MessageWindowProps {
+export function createMessageWindowProps(
+  params: GenerateParams
+): MessageWindowProps {
   const ids = {
     messages: domUuid(),
     leftFaceGraphic: domUuid(),
