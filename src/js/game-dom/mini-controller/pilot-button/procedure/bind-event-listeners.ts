@@ -1,6 +1,6 @@
 import { Unsubscribable } from "rxjs";
 
-import { domImmediatePushStream } from "../../../../dom/push-dom";
+import { domPushStream } from "../../../../dom/push-dom";
 import { PilotButtonProps } from "../props";
 import { onPilotPush } from "./on-pilot-push";
 
@@ -13,7 +13,7 @@ export function bindEventListeners(
   props: Readonly<PilotButtonProps>
 ): Unsubscribable[] {
   return [
-    domImmediatePushStream(props.root).subscribe((action) => {
+    domPushStream(props.root).subscribe((action) => {
       onPilotPush(props, action);
     }),
   ];
