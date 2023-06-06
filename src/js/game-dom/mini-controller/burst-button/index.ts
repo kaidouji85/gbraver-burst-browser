@@ -2,8 +2,8 @@ import { Observable, Unsubscribable } from "rxjs";
 
 import { BurstButtonConfig } from "./config";
 import { bindEventListeners } from "./procedure/bind-event-listeners";
-import { engage } from "./procedure/engage";
 import { disabled } from "./procedure/disabled";
+import { engage } from "./procedure/engage";
 import { BurstButtonProps, createBurstButtonProps } from "./props";
 
 /** バーストボタン */

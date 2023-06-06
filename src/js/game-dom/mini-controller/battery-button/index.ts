@@ -2,9 +2,9 @@ import { Observable, Unsubscribable } from "rxjs";
 
 import { BatteryButtonConfig } from "./config";
 import { bindEventListeners } from "./procedure/bind-event-lisnters";
+import { disabled } from "./procedure/disabled";
 import { engage } from "./procedure/engage";
 import { BatteryButtonProps, createBatteryButtonProps } from "./props";
-import {disabled} from "./procedure/disabled";
 
 /** バッテリーボタン */
 export class BatteryButton {
