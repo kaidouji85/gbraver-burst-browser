@@ -167,17 +167,15 @@ export class PostBattleFloater {
       button.innerText = label;
       const { className, sound } = createButtonStyle(style);
       button.className = className;
-      const unsubscriber = domPushStream(button).subscribe(
-        ({ event }) => {
-          this.#exclusive.execute(async () => {
-            event.preventDefault();
-            event.stopPropagation();
-            sound.play();
-            await pop(button);
-            this.#selectionComplete.next(action);
-          });
-        }
-      );
+      const unsubscriber = domPushStream(button).subscribe(({ event }) => {
+        this.#exclusive.execute(async () => {
+          event.preventDefault();
+          event.stopPropagation();
+          sound.play();
+          await pop(button);
+          this.#selectionComplete.next(action);
+        });
+      });
       return {
         button,
         unsubscriber,

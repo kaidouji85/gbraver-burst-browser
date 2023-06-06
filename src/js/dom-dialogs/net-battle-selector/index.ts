@@ -27,14 +27,14 @@ export class NetBattleSelectorDialog implements DOMDialog {
   constructor(resources: Resources) {
     this.#props = createNetBattleSelectrProps(resources);
     this.#unsubscribers = [
-      domPushStream(this.#props.casualMatchButton).subscribe(
-        (action) => onCasualMatchSelect(this.#props, action)
+      domPushStream(this.#props.casualMatchButton).subscribe((action) =>
+        onCasualMatchSelect(this.#props, action)
       ),
-      domPushStream(this.#props.privateMatchHostButton).subscribe(
-        (action) => onPrivateMatchHostSelect(this.#props, action)
+      domPushStream(this.#props.privateMatchHostButton).subscribe((action) =>
+        onPrivateMatchHostSelect(this.#props, action)
       ),
-      domPushStream(this.#props.privateMatchGuestButton).subscribe(
-        (action) => onPrivateMatchGuestSelect(this.#props, action)
+      domPushStream(this.#props.privateMatchGuestButton).subscribe((action) =>
+        onPrivateMatchGuestSelect(this.#props, action)
       ),
       domPushStream(this.#props.closer).subscribe((action) =>
         onCloserPush(this.#props, action)

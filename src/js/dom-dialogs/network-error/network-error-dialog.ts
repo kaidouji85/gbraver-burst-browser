@@ -108,11 +108,9 @@ export class NetworkErrorDialog implements DOMDialog {
     this.#postNetworkErrorButton = elements.postNetworkErrorButton;
     this.#postNetworkErrorSource = new Subject();
     this.#unsubscribers = [
-      domPushStream(this.#postNetworkErrorButton).subscribe(
-        (action) => {
-          this.#onPostNetworkErrorButtonPush(action);
-        }
-      ),
+      domPushStream(this.#postNetworkErrorButton).subscribe((action) => {
+        this.#onPostNetworkErrorButtonPush(action);
+      }),
     ];
     this.#exclusive = new Exclusive();
     this.#pushButton =
