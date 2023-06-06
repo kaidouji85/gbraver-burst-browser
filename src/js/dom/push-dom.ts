@@ -8,11 +8,11 @@ export type PushDOM = {
 };
 
 /**
- * HTML要素即時押下ストリーム
+ * HTML押下ストリーム
  * @param dom 押下判定のHTML要素
  * @return ストリーム
  */
-export function domImmediatePushStream(dom: HTMLElement): Observable<PushDOM> {
+export function domPushStream(dom: HTMLElement): Observable<PushDOM> {
   const mouseDown: Observable<PushDOM> = fromEvent<MouseEvent>(
     dom,
     "mousedown"

@@ -1,6 +1,6 @@
 import { Unsubscribable } from "rxjs";
 
-import { domImmediatePushStream } from "../../../dom/push-dom";
+import { domPushStream } from "../../../dom/push-dom";
 import type { TitleProps } from "../props";
 import { onArcadePush } from "./on-arcade-push";
 import { onAvatarPush } from "./on-avatar-push";
@@ -22,39 +22,39 @@ import { onTutorialPush } from "./on-tutorial-push";
  */
 export function bindEventListeners(props: TitleProps): Unsubscribable[] {
   return [
-    domImmediatePushStream(props.root).subscribe((action) => {
+    domPushStream(props.root).subscribe((action) => {
       onRootPush(props, action);
     }),
-    domImmediatePushStream(props.login).subscribe((action) => {
+    domPushStream(props.login).subscribe((action) => {
       onLoginPush(props, action);
     }),
-    domImmediatePushStream(props.avatar).subscribe((action) => {
+    domPushStream(props.avatar).subscribe((action) => {
       onAvatarPush(props, action);
     }),
-    domImmediatePushStream(props.helpIcon).subscribe((action) => {
+    domPushStream(props.helpIcon).subscribe((action) => {
       onHelpIconPush(props, action);
     }),
     ...[...props.helpMenu.querySelectorAll("a")].map((anker) =>
-      domImmediatePushStream(anker).subscribe((action) => {
+      domPushStream(anker).subscribe((action) => {
         onHelpAnkerPush(action);
       })
     ),
-    domImmediatePushStream(props.deleteAccount).subscribe((action) => {
+    domPushStream(props.deleteAccount).subscribe((action) => {
       onPushDeleteAccount(props, action);
     }),
-    domImmediatePushStream(props.logout).subscribe((action) => {
+    domPushStream(props.logout).subscribe((action) => {
       onLogoutPush(props, action);
     }),
-    domImmediatePushStream(props.tutorial).subscribe((action) => {
+    domPushStream(props.tutorial).subscribe((action) => {
       onTutorialPush(props, action);
     }),
-    domImmediatePushStream(props.arcade).subscribe((action) => {
+    domPushStream(props.arcade).subscribe((action) => {
       onArcadePush(props, action);
     }),
-    domImmediatePushStream(props.netBattle).subscribe((action) => {
+    domPushStream(props.netBattle).subscribe((action) => {
       onNetBattlePush(props, action);
     }),
-    domImmediatePushStream(props.config).subscribe((action) => {
+    domPushStream(props.config).subscribe((action) => {
       onConfigPush(props, action);
     }),
   ];
