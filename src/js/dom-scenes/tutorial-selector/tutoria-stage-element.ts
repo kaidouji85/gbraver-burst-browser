@@ -1,7 +1,7 @@
 import { map, Observable } from "rxjs";
 
 import { pop } from "../../dom/animation";
-import { pushDOMStream } from "../../dom/event-stream";
+import { domClickStream } from "../../dom/push-dom";
 import type { TutorialStageID } from "../../game/tutorial-stages/tutorial-stage";
 import type { Resources } from "../../resource";
 import type { SoundResource } from "../../resource/sound";
@@ -74,7 +74,7 @@ export class TutorialStageElement {
     this.#root = document.createElement("div");
     this.#root.className = ROOT_CLASS;
     this.#root.innerHTML = rootInnerHTML(level, stage.title);
-    this.#select = pushDOMStream(this.#root).pipe(
+    this.#select = domClickStream(this.#root).pipe(
       map((action) => {
         action.event.preventDefault();
         action.event.stopPropagation();

@@ -1,5 +1,5 @@
 import { pop } from "../../../dom/animation";
-import type { PushDOM } from "../../../dom/event-stream";
+import { PushDOM } from "../../../dom/push-dom";
 import type { ConfigProps } from "../props";
 import { parseConfig } from "./parse-config";
 import { setInputDisabled } from "./set-input-disabled";

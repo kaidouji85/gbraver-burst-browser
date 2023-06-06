@@ -1,6 +1,7 @@
 import { Unsubscribable } from "rxjs";
 
-import { inputDOMStream, pushDOMStream } from "../../../dom/event-stream";
+import { inputDOMStream } from "../../../dom/input-dom";
+import { domPushStream } from "../../../dom/push-dom";
 import type { ConfigProps } from "../props";
 import { onAcceptConfigChange } from "./on-accept-config-change";
 import { onBGMVolumeChange } from "./on-bgm-volume-change";
@@ -24,10 +25,10 @@ export function bindEventListeners(props: ConfigProps): Unsubscribable[] {
     inputDOMStream(props.seVolumeSelector).subscribe((action) => {
       onSEVolumeChange(props, action);
     }),
-    pushDOMStream(props.prevButton).subscribe((action) => {
+    domPushStream(props.prevButton).subscribe((action) => {
       onPrevButtonPush(props, action);
     }),
-    pushDOMStream(props.configChangeButton).subscribe((action) => {
+    domPushStream(props.configChangeButton).subscribe((action) => {
       onConfigChangeButtonPush(props, action);
     }),
     props.dialog.notifyClosed().subscribe(() => {

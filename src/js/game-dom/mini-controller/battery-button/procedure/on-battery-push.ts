@@ -1,4 +1,4 @@
-import { PushDOM } from "../../../../dom/event-stream";
+import { PushDOM } from "../../../../dom/push-dom";
 import { BatteryButtonProps } from "../props";
 
 /**

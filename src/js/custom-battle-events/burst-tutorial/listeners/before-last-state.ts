@@ -57,16 +57,11 @@ export async function beforeLastState(
   props: Readonly<LastState>,
   state: BurstTutorialState
 ): Promise<BurstTutorialState> {
-  const updatedStateHistory = {
-    ...state,
-    stateHistory: [...state.stateHistory, ...props.update],
-  };
-
   if (!state.isIntroductionComplete) {
     await introduction(props);
-    return { ...updatedStateHistory, isIntroductionComplete: true };
+    return { ...state, isIntroductionComplete: true };
   }
 
   await doReflectOrNothing(props);
-  return updatedStateHistory;
+  return state;
 }

@@ -2,8 +2,7 @@ import { Howl } from "howler";
 import { Observable, Subject, Unsubscribable } from "rxjs";
 
 import { pop } from "../../dom/animation";
-import type { PushDOM } from "../../dom/event-stream";
-import { pushDOMStream } from "../../dom/event-stream";
+import { domPushStream, PushDOM } from "../../dom/push-dom";
 import { Exclusive } from "../../exclusive/exclusive";
 import type { Resources } from "../../resource";
 import { PathIds } from "../../resource/path";
@@ -134,16 +133,16 @@ export class LoginDialog implements DOMDialog {
     this.#closeDialog = new Subject();
     this.#login = new Subject();
     this.#unsubscribers = [
-      pushDOMStream(this.#loginButton).subscribe((action) => {
+      domPushStream(this.#loginButton).subscribe((action) => {
         this.#onLoginButtonPush(action);
       }),
-      pushDOMStream(this.#closeButton).subscribe((action) => {
+      domPushStream(this.#closeButton).subscribe((action) => {
         this.#onCloseButtonPush(action);
       }),
-      pushDOMStream(this.#closer).subscribe((action) => {
+      domPushStream(this.#closer).subscribe((action) => {
         this.#onCloserPush(action);
       }),
-      pushDOMStream(elements.backGround).subscribe((action) => {
+      domPushStream(elements.backGround).subscribe((action) => {
         this.#onPushOutsideOfDialog(action);
       }),
     ];

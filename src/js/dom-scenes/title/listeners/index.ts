@@ -1,6 +1,6 @@
 import { Unsubscribable } from "rxjs";
 
-import { pushDOMStream } from "../../../dom/event-stream";
+import { domPushStream } from "../../../dom/push-dom";
 import type { TitleProps } from "../props";
 import { onArcadePush } from "./on-arcade-push";
 import { onAvatarPush } from "./on-avatar-push";
@@ -22,39 +22,39 @@ import { onTutorialPush } from "./on-tutorial-push";
  */
 export function bindEventListeners(props: TitleProps): Unsubscribable[] {
   return [
-    pushDOMStream(props.root).subscribe((action) => {
+    domPushStream(props.root).subscribe((action) => {
       onRootPush(props, action);
     }),
-    pushDOMStream(props.login).subscribe((action) => {
+    domPushStream(props.login).subscribe((action) => {
       onLoginPush(props, action);
     }),
-    pushDOMStream(props.avatar).subscribe((action) => {
+    domPushStream(props.avatar).subscribe((action) => {
       onAvatarPush(props, action);
     }),
-    pushDOMStream(props.helpIcon).subscribe((action) => {
+    domPushStream(props.helpIcon).subscribe((action) => {
       onHelpIconPush(props, action);
     }),
     ...[...props.helpMenu.querySelectorAll("a")].map((anker) =>
-      pushDOMStream(anker).subscribe((action) => {
+      domPushStream(anker).subscribe((action) => {
         onHelpAnkerPush(action);
       })
     ),
-    pushDOMStream(props.deleteAccount).subscribe((action) => {
+    domPushStream(props.deleteAccount).subscribe((action) => {
       onPushDeleteAccount(props, action);
     }),
-    pushDOMStream(props.logout).subscribe((action) => {
+    domPushStream(props.logout).subscribe((action) => {
       onLogoutPush(props, action);
     }),
-    pushDOMStream(props.tutorial).subscribe((action) => {
+    domPushStream(props.tutorial).subscribe((action) => {
       onTutorialPush(props, action);
     }),
-    pushDOMStream(props.arcade).subscribe((action) => {
+    domPushStream(props.arcade).subscribe((action) => {
       onArcadePush(props, action);
     }),
-    pushDOMStream(props.netBattle).subscribe((action) => {
+    domPushStream(props.netBattle).subscribe((action) => {
       onNetBattlePush(props, action);
     }),
-    pushDOMStream(props.config).subscribe((action) => {
+    domPushStream(props.config).subscribe((action) => {
       onConfigPush(props, action);
     }),
   ];

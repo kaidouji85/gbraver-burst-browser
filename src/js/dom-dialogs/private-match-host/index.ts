@@ -1,6 +1,6 @@
 import { Observable, Unsubscribable } from "rxjs";
 
-import { pushDOMStream } from "../../dom/event-stream";
+import { domPushStream } from "../../dom/push-dom";
 import { Resources } from "../../resource";
 import { DOMDialog } from "../dialog";
 import { onCloserPush } from "./listeners/on-closer-push";
@@ -24,7 +24,7 @@ export class PrivateMatchHostDialog implements DOMDialog {
   constructor(resources: Resources, roomID: string) {
     this.#props = createPrivateMatchHostDialogProps(resources, roomID);
     this.#unsubscribers = [
-      pushDOMStream(this.#props.closer).subscribe((action) => {
+      domPushStream(this.#props.closer).subscribe((action) => {
         onCloserPush(this.#props, action);
       }),
     ];

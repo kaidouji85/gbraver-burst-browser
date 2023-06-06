@@ -15,23 +15,18 @@ export async function beforeLastState(
   props: Readonly<LastState>,
   state: Readonly<PilotSkillTutorial01State>
 ): Promise<PilotSkillTutorial01State> {
-  const updatedStateHistory = {
-    ...state,
-    stateHistory: [...state.stateHistory, ...props.update],
-  };
-
-  const turn = turnCount(updatedStateHistory.stateHistory);
-  if (turn === 1 && !updatedStateHistory.isIntroductionComplete) {
+  const turn = turnCount(props.stateHistory);
+  if (turn === 1 && !state.isIntroductionComplete) {
     await introduction(props);
     invisibleAllMessageWindows(props);
-    return { ...updatedStateHistory, isIntroductionComplete: true };
+    return { ...state, isIntroductionComplete: true };
   }
 
-  if (turn === 3 && !updatedStateHistory.isGaiInspectingComplete) {
+  if (turn === 3 && !state.isGaiInspectingComplete) {
     await gaiInspecting(props);
     invisibleAllMessageWindows(props);
-    return { ...updatedStateHistory, isGaiInspectingComplete: true };
+    return { ...state, isGaiInspectingComplete: true };
   }
 
-  return updatedStateHistory;
+  return state;
 }

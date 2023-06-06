@@ -49,7 +49,7 @@ export async function onBatteryCommandSelected(
   state: BurstTutorialState
 ): Promise<Ret> {
   const isBattery5Command = props.battery.battery === 5;
-  const foundLastState = state.stateHistory[state.stateHistory.length - 1];
+  const foundLastState = props.stateHistory[props.stateHistory.length - 1];
   if (!foundLastState || isBattery5Command) {
     return {
       state,

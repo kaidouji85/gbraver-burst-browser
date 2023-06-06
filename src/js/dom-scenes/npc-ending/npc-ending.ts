@@ -3,8 +3,7 @@ import { Observable, Subject, Unsubscribable } from "rxjs";
 
 import type { BGMManager } from "../../bgm/bgm-manager";
 import { fadeIn, play } from "../../bgm/bgm-operators";
-import type { PushDOM } from "../../dom/event-stream";
-import { pushDOMStream } from "../../dom/event-stream";
+import { domPushStream, PushDOM } from "../../dom/push-dom";
 import type { Resources } from "../../resource";
 import { PathIds } from "../../resource/path";
 import type { SoundResource } from "../../resource/sound";
@@ -115,7 +114,7 @@ export class NPCEnding implements DOMScene {
     this.#canOperation = true;
     this.#endNPCEnding = new Subject();
     this.#unsubscriber = [
-      pushDOMStream(this.#root).subscribe((action) => {
+      domPushStream(this.#root).subscribe((action) => {
         this.#onScreenPush(action);
       }),
     ];
