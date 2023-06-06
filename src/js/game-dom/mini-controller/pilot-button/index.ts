@@ -3,6 +3,7 @@ import { Observable, Unsubscribable } from "rxjs";
 import { PilotButtonConfig } from "./config";
 import { bindEventListeners } from "./procedure/bind-event-listeners";
 import { engage } from "./procedure/engage";
+import { disabled } from "./procedure/disabled";
 import { createPilotButtonProps, PilotButtonProps } from "./props";
 
 /** パイロットボタン */
@@ -51,5 +52,13 @@ export class PilotButton {
    */
   engage(config: Readonly<PilotButtonConfig>): void {
     engage(this.#props, config);
+  }
+
+  /**
+   * バーストボタンを強制的に無効化する
+   * 本メソッドは親メソッドを非表示にする際に呼ばれる想定である
+   */
+  disabled(): void {
+    disabled(this.#props);
   }
 }

@@ -17,6 +17,7 @@ export function hidden(props: Readonly<MiniControllerProps>): Animate {
         batteryButton.disabled();
       });
       props.burstButton.disabled();
+      props.pilotButton.disabled();
     })
   );
 }
