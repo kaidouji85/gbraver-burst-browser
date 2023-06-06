@@ -1,6 +1,6 @@
 import { Unsubscribable } from "rxjs";
 
-import { domPushStream } from "../../../../dom/push-dom";
+import { domClickStream } from "../../../../dom/push-dom";
 import { BatteryButtonProps } from "../props";
 import { onBatteryPush } from "./on-battery-push";
 
@@ -13,7 +13,7 @@ export function bindEventListeners(
   props: BatteryButtonProps
 ): Unsubscribable[] {
   return [
-    domPushStream(props.root).subscribe((action) => {
+    domClickStream(props.root).subscribe((action) => {
       onBatteryPush(props, action);
     }),
   ];

@@ -1,6 +1,6 @@
 import { Unsubscribable } from "rxjs";
 
-import { domPushStream } from "../../../../dom/push-dom";
+import { domClickStream } from "../../../../dom/push-dom";
 import { BurstButtonProps } from "../props";
 import { onButtonPush } from "./on-button-push";
 
@@ -11,7 +11,7 @@ import { onButtonPush } from "./on-button-push";
  */
 export function bindEventListeners(props: BurstButtonProps): Unsubscribable[] {
   return [
-    domPushStream(props.root).subscribe((action) => {
+    domClickStream(props.root).subscribe((action) => {
       onButtonPush(props, action);
     }),
   ];
