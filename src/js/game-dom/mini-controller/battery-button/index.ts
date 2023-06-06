@@ -4,6 +4,7 @@ import { BatteryButtonConfig } from "./config";
 import { bindEventListeners } from "./procedure/bind-event-lisnters";
 import { engage } from "./procedure/engage";
 import { BatteryButtonProps, createBatteryButtonProps } from "./props";
+import {disabled} from "./procedure/disabled";
 
 /** バッテリーボタン */
 export class BatteryButton {
@@ -52,5 +53,13 @@ export class BatteryButton {
    */
   engage(config: BatteryButtonConfig): void {
     engage(this.#props, config);
+  }
+
+  /**
+   * バッテリーボタンを強制的に無効化する
+   * 本メソッドは親メソッドを非表示にする際に呼ばれる想定
+   */
+  disabled(): void {
+    disabled(this.#props);
   }
 }

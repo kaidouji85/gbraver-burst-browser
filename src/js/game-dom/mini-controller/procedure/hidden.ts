@@ -13,6 +13,9 @@ export function hidden(props: Readonly<MiniControllerProps>): Animate {
   return hiddenRoot(props).chain(
     process(() => {
       props.root.className = ROOT_INVISIBLE;
+      props.batteryButtons.forEach((batteryButton) => {
+        batteryButton.disabled();
+      });
     })
   );
 }
