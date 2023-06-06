@@ -22,7 +22,7 @@ export type MessageWindowProps = {
 }
 
 /** プロパティ生成パラメータ */
-type GenerateParams = {
+export type GenerateParams = {
   /** リソース管理オブジェクト */
   resources: Resources;
   /** ウインドウ位置 */
