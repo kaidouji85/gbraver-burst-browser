@@ -1,6 +1,6 @@
 import { map, merge, Observable } from "rxjs";
 
-import { MessageWindow } from "../../../../game-dom/message-window/message-window";
+import { MessageWindow } from "../../../../game-dom/message-window";
 import { MiniController } from "../../../../game-dom/mini-controller";
 import type { Resources } from "../../../../resource";
 import { BattleSceneAction } from "../../actions";

@@ -1,4 +1,4 @@
-import { MessageWindow } from "../src/js/game-dom/message-window/message-window";
+import { MessageWindow } from "../src/js/game-dom/message-window";
 import type { DOMStubStory } from "./stub/dom-stub";
 import { domStub } from "./stub/dom-stub";
 
