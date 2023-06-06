@@ -16,6 +16,7 @@ export function hidden(props: Readonly<MiniControllerProps>): Animate {
       props.batteryButtons.forEach((batteryButton) => {
         batteryButton.disabled();
       });
+      props.burstButton.disabled();
     })
   );
 }

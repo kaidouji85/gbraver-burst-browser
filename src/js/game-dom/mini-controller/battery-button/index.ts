@@ -57,7 +57,7 @@ export class BatteryButton {
 
   /**
    * バッテリーボタンを強制的に無効化する
-   * 本メソッドは親メソッドを非表示にする際に呼ばれる想定
+   * 本メソッドは親メソッドを非表示にする際に呼ばれる想定である
    */
   disabled(): void {
     disabled(this.#props);

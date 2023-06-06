@@ -3,6 +3,7 @@ import { Observable, Unsubscribable } from "rxjs";
 import { BurstButtonConfig } from "./config";
 import { bindEventListeners } from "./procedure/bind-event-listeners";
 import { engage } from "./procedure/engage";
+import { disabled } from "./procedure/disabled";
 import { BurstButtonProps, createBurstButtonProps } from "./props";
 
 /** バーストボタン */
@@ -51,5 +52,13 @@ export class BurstButton {
    */
   engage(config: BurstButtonConfig): void {
     engage(this.#props, config);
+  }
+
+  /**
+   * バッテリーボタンを強制的に無効化する
+   * 本メソッドは親メソッドを非表示にする際に呼ばれる想定である
+   */
+  disabled(): void {
+    disabled(this.#props);
   }
 }
