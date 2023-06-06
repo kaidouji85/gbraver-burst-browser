@@ -1,6 +1,6 @@
 import { Observable } from "rxjs";
 
-import type { MessageWindow } from "../game-dom/message-window/message-window";
+import type { MessageWindow } from "../game-dom/message-window";
 import type { CustomBattleEventProps } from "../td-scenes/battle/custom-battle-event";
 import { BattleSceneSounds } from "../td-scenes/battle/sounds/sounds";
 import type { PushWindow } from "../window/push-window";
