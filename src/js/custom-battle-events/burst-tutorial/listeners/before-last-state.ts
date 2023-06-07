@@ -12,7 +12,9 @@ import { successReflectDamage } from "../stories/success-reflect-damage";
  * @param props イベントプロパティ
  * @return 処理が完了したら発火するPromise
  */
-async function doReflectOrNothing(props: Readonly<LastState>): Promise<void> {
+async function executeReflectIfNeeded(
+  props: Readonly<LastState>
+): Promise<void> {
   const foundLastBattle = props.update.find((v) => v.effect.name === "Battle");
 
   if (!foundLastBattle) {
@@ -62,6 +64,6 @@ export async function beforeLastState(
     return { ...state, isIntroductionComplete: true };
   }
 
-  await doReflectOrNothing(props);
+  await executeReflectIfNeeded(props);
   return state;
 }

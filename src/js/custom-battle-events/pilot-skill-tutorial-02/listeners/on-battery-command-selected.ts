@@ -11,7 +11,7 @@ import { noZeroDefense } from "../stories/no-zero-defense";
  * @param props イベントプロパティ
  * @return 再生した否か、trueで再生した
  */
-async function doNoZeroDefenseOrNothing(
+async function executeNoZeroDefenseIfNeeded(
   props: Readonly<BatteryCommandSelected>
 ): Promise<boolean> {
   const lastState = props.stateHistory[props.stateHistory.length - 1];
@@ -43,7 +43,7 @@ async function doNoZeroDefenseOrNothing(
  * @param state イベントステート
  * @return 再生した否か、trueで再生した
  */
-async function doLessThanAttack3orNothing(
+async function executeLessThanAttack3IfNeeded(
   props: Readonly<BatteryCommandSelected>,
   state: Readonly<PilotSkillTutorial02State>
 ): Promise<boolean> {
@@ -89,8 +89,8 @@ export async function onBatteryCommandSelected(
   props: Readonly<BatteryCommandSelected>,
   state: Readonly<PilotSkillTutorial02State>
 ): Promise<Ret> {
-  const isNoZeroDefensePlayed = await doNoZeroDefenseOrNothing(props);
-  if (isNoZeroDefensePlayed) {
+  const isNoZeroDefenseExecuted = await executeNoZeroDefenseIfNeeded(props);
+  if (isNoZeroDefenseExecuted) {
     return {
       state,
       cancel: {
@@ -99,11 +99,11 @@ export async function onBatteryCommandSelected(
     };
   }
 
-  const isLessThanAttack3Played = await doLessThanAttack3orNothing(
+  const isLessThanAttack3Executed = await executeLessThanAttack3IfNeeded(
     props,
     state
   );
-  if (isLessThanAttack3Played) {
+  if (isLessThanAttack3Executed) {
     return {
       state,
       cancel: {
