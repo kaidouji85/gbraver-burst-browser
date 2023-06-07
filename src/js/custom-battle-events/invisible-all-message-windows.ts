@@ -14,6 +14,8 @@ export function invisibleAllMessageWindows(
   props.view.dom.nearBatterySelectorMessageWindow.visible(false);
   props.view.dom.nearBurstButtonMessageWindow.visible(false);
   props.view.dom.nearPilotButtonMessageWindow.visible(false);
+  props.view.dom.playerCryMessageWindow.visible(false);
+  props.view.dom.enemyCryMessageWindow.visible(false);
 }
 
 /**

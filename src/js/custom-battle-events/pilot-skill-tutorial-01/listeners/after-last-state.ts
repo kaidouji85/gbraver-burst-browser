@@ -4,6 +4,24 @@ import { PilotSkillTutorial01State } from "../state";
 import { playerLose } from "../stories/player-lose";
 
 /**
+ * 条件を満たした場合「プレイヤー敗北ストーリー」を再生する
+ * @param props イベントプロパティ
+ * @return trueでストーリーを再生した
+ */
+async function executePlayerLoseIfNeeded(
+  props: Readonly<LastState>
+): Promise<boolean> {
+  const foundGameEnd = props.update.find((v) => v.effect.name === "GameEnd");
+  if (!foundGameEnd || foundGameEnd.effect.name !== "GameEnd") {
+    return false;
+  }
+
+  await playerLose(props);
+  invisibleAllMessageWindows(props);
+  return true;
+}
+
+/**
  * 最終ステート直後
  * @param props イベントプロパティ
  * @param state イベントステート
@@ -13,12 +31,11 @@ export async function afterLastState(
   props: Readonly<LastState>,
   state: Readonly<PilotSkillTutorial01State>
 ): Promise<PilotSkillTutorial01State> {
-  const foundGameEnd = props.update.find((v) => v.effect.name === "GameEnd");
-  if (!foundGameEnd || foundGameEnd.effect.name !== "GameEnd") {
+  const isPlayerLoseExecuted = await executePlayerLoseIfNeeded(props);
+  if (isPlayerLoseExecuted) {
     return state;
   }
 
-  await playerLose(props);
   invisibleAllMessageWindows(props);
   return state;
 }
