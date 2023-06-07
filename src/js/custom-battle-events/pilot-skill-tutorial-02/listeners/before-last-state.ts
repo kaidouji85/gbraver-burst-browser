@@ -85,15 +85,16 @@ export async function beforeLastState(
     return { ...state, isIntroductionComplete: true };
   }
 
-  const isDoPilotSkillExecuted = await executeDoPilotSkillIfNeeded(props, state);
+  const isDoPilotSkillExecuted = await executeDoPilotSkillIfNeeded(
+    props,
+    state
+  );
   if (isDoPilotSkillExecuted) {
     return { ...state, isDoPilotSkillComplete: true };
   }
 
-  const isShouldAttack5OrMoreExecuted = await executeShouldAttack3OrMoreIfNeeded(
-    props,
-    state
-  );
+  const isShouldAttack5OrMoreExecuted =
+    await executeShouldAttack3OrMoreIfNeeded(props, state);
   if (isShouldAttack5OrMoreExecuted) {
     return { ...state, isShouldAttack5OrMoreComplete: true };
   }
