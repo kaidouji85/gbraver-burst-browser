@@ -47,7 +47,7 @@ async function executeDamageRaceIfNeeded(
  * @param state ステート
  * @return ステート更新結果
  */
-async function executeZeroBatteryChangeIfNeeded(
+async function executeZeroBatteryChanceIfNeeded(
   props: Readonly<LastState>,
   state: ZeroDefenseTutorialState
 ): Promise<ZeroDefenseTutorialState> {
@@ -99,5 +99,5 @@ export async function beforeLastState(
   }
 
   const updatedByDamageRace = await executeDamageRaceIfNeeded(props, state);
-  return await executeZeroBatteryChangeIfNeeded(props, updatedByDamageRace);
+  return await executeZeroBatteryChanceIfNeeded(props, updatedByDamageRace);
 }
