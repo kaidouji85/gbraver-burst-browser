@@ -7,7 +7,9 @@
   .message-window--right,
   .message-window--near-battery-selector,
   .message-window--near-burst-button,
-  .message-window--near-pilot-button {
+  .message-window--near-pilot-button,
+  .message-window--player-cry,
+  .message-window--enemy-cry {
     /** 本カスタムプロパティはJavaScriptから変更される */
     --brightness: brightness(1);
     --margin-x: max(3vw, var(--safe-area-left), var(--safe-area-right));
@@ -119,6 +121,8 @@
   .message-window--near-battery-selector,
   .message-window--near-burst-button,
   .message-window--near-pilot-button,
+  .message-window--player-cry,
+  .message-window--enemy-cry,
   .message-window--invisible {
     display: none;
   }
