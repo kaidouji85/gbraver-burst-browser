@@ -1,7 +1,7 @@
 import { Observable, Subject, Unsubscribable } from "rxjs";
 
 import { pop } from "../../dom/animation";
-import { domImmediatePushStream, PushDOM } from "../../dom/push-dom";
+import { domPushStream, PushDOM } from "../../dom/push-dom";
 import { Exclusive } from "../../exclusive/exclusive";
 import type { Resources } from "../../resource";
 import { PathIds } from "../../resource/path";
@@ -131,7 +131,7 @@ export class TutorialSelector implements DOMScene {
       this.#stages.appendChild(stage.getRootHTMLElement());
     });
     this.#unsubscribers = [
-      domImmediatePushStream(this.#prevButton).subscribe((action) => {
+      domPushStream(this.#prevButton).subscribe((action) => {
         this.#onPrevPush(action);
       }),
       ...stageElements.map((stage) =>

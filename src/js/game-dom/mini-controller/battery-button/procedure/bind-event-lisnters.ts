@@ -1,6 +1,6 @@
 import { Unsubscribable } from "rxjs";
 
-import { domImmediatePushStream } from "../../../../dom/push-dom";
+import { domClickStream } from "../../../../dom/push-dom";
 import { BatteryButtonProps } from "../props";
 import { onBatteryPush } from "./on-battery-push";
 
@@ -13,7 +13,8 @@ export function bindEventListeners(
   props: BatteryButtonProps
 ): Unsubscribable[] {
   return [
-    domImmediatePushStream(props.root).subscribe((action) => {
+    // accesskeyの挙動でボタンを押させるために、clickイベントを仕込む
+    domClickStream(props.root).subscribe((action) => {
       onBatteryPush(props, action);
     }),
   ];

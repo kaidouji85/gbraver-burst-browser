@@ -1,6 +1,6 @@
 import { Unsubscribable } from "rxjs";
 
-import { domImmediatePushStream } from "../../../dom/push-dom";
+import { domPushStream } from "../../../dom/push-dom";
 import type { DifficultyDialogProps } from "../props";
 import { onBackGroundPush } from "./on-back-ground-push";
 import { onCloserPush } from "./on-closer-push";
@@ -19,22 +19,22 @@ export function bindEventListeners(
   props: DifficultyDialogProps
 ): Unsubscribable[] {
   return [
-    domImmediatePushStream(props.backGround).subscribe((action) => {
+    domPushStream(props.backGround).subscribe((action) => {
       onBackGroundPush(props, action);
     }),
-    domImmediatePushStream(props.closer).subscribe((action) => {
+    domPushStream(props.closer).subscribe((action) => {
       onCloserPush(props, action);
     }),
-    domImmediatePushStream(props.easy).subscribe((action) => {
+    domPushStream(props.easy).subscribe((action) => {
       onEasyPush(props, action);
     }),
-    domImmediatePushStream(props.normal).subscribe((action) => {
+    domPushStream(props.normal).subscribe((action) => {
       onNormalPush(props, action);
     }),
-    domImmediatePushStream(props.hard).subscribe((action) => {
+    domPushStream(props.hard).subscribe((action) => {
       onHardPush(props, action);
     }),
-    domImmediatePushStream(props.veryHard).subscribe((action) => {
+    domPushStream(props.veryHard).subscribe((action) => {
       onVeryHardPush(props, action);
     }),
   ];

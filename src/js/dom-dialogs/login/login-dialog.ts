@@ -2,7 +2,7 @@ import { Howl } from "howler";
 import { Observable, Subject, Unsubscribable } from "rxjs";
 
 import { pop } from "../../dom/animation";
-import { domImmediatePushStream, PushDOM } from "../../dom/push-dom";
+import { domPushStream, PushDOM } from "../../dom/push-dom";
 import { Exclusive } from "../../exclusive/exclusive";
 import type { Resources } from "../../resource";
 import { PathIds } from "../../resource/path";
@@ -133,16 +133,16 @@ export class LoginDialog implements DOMDialog {
     this.#closeDialog = new Subject();
     this.#login = new Subject();
     this.#unsubscribers = [
-      domImmediatePushStream(this.#loginButton).subscribe((action) => {
+      domPushStream(this.#loginButton).subscribe((action) => {
         this.#onLoginButtonPush(action);
       }),
-      domImmediatePushStream(this.#closeButton).subscribe((action) => {
+      domPushStream(this.#closeButton).subscribe((action) => {
         this.#onCloseButtonPush(action);
       }),
-      domImmediatePushStream(this.#closer).subscribe((action) => {
+      domPushStream(this.#closer).subscribe((action) => {
         this.#onCloserPush(action);
       }),
-      domImmediatePushStream(elements.backGround).subscribe((action) => {
+      domPushStream(elements.backGround).subscribe((action) => {
         this.#onPushOutsideOfDialog(action);
       }),
     ];

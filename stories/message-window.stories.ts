@@ -1,4 +1,4 @@
-import { MessageWindow } from "../src/js/game-dom/message-window/message-window";
+import { MessageWindow } from "../src/js/game-dom/message-window";
 import type { DOMStubStory } from "./stub/dom-stub";
 import { domStub } from "./stub/dom-stub";
 
@@ -49,7 +49,7 @@ export const zeroLine: DOMStubStory = domStub((resources) => {
 export const left: DOMStubStory = domStub((resources) => {
   const dom = new MessageWindow({
     resources,
-    position: "Left",
+    type: "Left",
   });
   dom.visible(true);
   dom.messages(["左側表示です"]);
@@ -59,7 +59,7 @@ export const left: DOMStubStory = domStub((resources) => {
 export const right: DOMStubStory = domStub((resources) => {
   const dom = new MessageWindow({
     resources,
-    position: "Right",
+    type: "Right",
   });
   dom.visible(true);
   dom.messages(["右側表示です"]);
@@ -69,7 +69,7 @@ export const right: DOMStubStory = domStub((resources) => {
 export const shinya: DOMStubStory = domStub((resources) => {
   const dom = new MessageWindow({
     resources,
-    position: "Right",
+    type: "Right",
     faceOrientation: "Left",
     facePosition: "Right",
   });
@@ -83,7 +83,7 @@ export const shinya: DOMStubStory = domStub((resources) => {
 export const shinyaRight: DOMStubStory = domStub((resources) => {
   const dom = new MessageWindow({
     resources,
-    position: "Left",
+    type: "Left",
     faceOrientation: "Right",
     facePosition: "Left",
   });
@@ -97,7 +97,7 @@ export const shinyaRight: DOMStubStory = domStub((resources) => {
 export const gai: DOMStubStory = domStub((resources) => {
   const dom = new MessageWindow({
     resources,
-    position: "Right",
+    type: "Right",
     faceOrientation: "Left",
     facePosition: "Right",
   });
@@ -111,7 +111,7 @@ export const gai: DOMStubStory = domStub((resources) => {
 export const gaiRight: DOMStubStory = domStub((resources) => {
   const dom = new MessageWindow({
     resources,
-    position: "Left",
+    type: "Left",
     faceOrientation: "Right",
     facePosition: "Left",
   });
@@ -125,7 +125,7 @@ export const gaiRight: DOMStubStory = domStub((resources) => {
 export const raito: DOMStubStory = domStub((resources) => {
   const dom = new MessageWindow({
     resources,
-    position: "Right",
+    type: "Right",
     faceOrientation: "Left",
     facePosition: "Right",
   });
@@ -139,7 +139,7 @@ export const raito: DOMStubStory = domStub((resources) => {
 export const raitoRight: DOMStubStory = domStub((resources) => {
   const dom = new MessageWindow({
     resources,
-    position: "Left",
+    type: "Left",
     faceOrientation: "Right",
     facePosition: "Left",
   });
@@ -153,7 +153,7 @@ export const raitoRight: DOMStubStory = domStub((resources) => {
 export const tsubasa: DOMStubStory = domStub((resources) => {
   const dom = new MessageWindow({
     resources,
-    position: "Right",
+    type: "Right",
     faceOrientation: "Left",
     facePosition: "Right",
   });
@@ -167,7 +167,7 @@ export const tsubasa: DOMStubStory = domStub((resources) => {
 export const tsubasaRight: DOMStubStory = domStub((resources) => {
   const dom = new MessageWindow({
     resources,
-    position: "Left",
+    type: "Left",
     faceOrientation: "Right",
     facePosition: "Left",
   });
@@ -182,7 +182,7 @@ export const doubleMessageWindows: DOMStubStory = domStub((resources) => {
   const root = document.createElement("div");
   const rightMessageWindow = new MessageWindow({
     resources,
-    position: "Right",
+    type: "Right",
     faceOrientation: "Left",
     facePosition: "Right",
   });
@@ -193,7 +193,7 @@ export const doubleMessageWindows: DOMStubStory = domStub((resources) => {
   root.appendChild(rightMessageWindow.getRootHTMLElement());
   const leftMessageWindow = new MessageWindow({
     resources,
-    position: "Left",
+    type: "Left",
     faceOrientation: "Right",
     facePosition: "Left",
   });
