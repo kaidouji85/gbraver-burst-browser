@@ -1,17 +1,21 @@
 import { Animate } from "../../../animation/animate";
 import { empty } from "../../../animation/delay";
+import { process } from "../../../animation/process";
 import { CustomStateAnimation } from "../../../td-scenes/battle/custom-battle-event";
-import { tsubasaVictoryDeclaration } from "../animation/tsubasa-victory-declaration";
 import { isPilotSkillActivatedByTsubasa } from "./is-pilot-skill-activated-by-tsubasa";
 
 /**
- * カスタムステートアニメーション
+ * ステートアニメ終了後に呼ばれる、カスタムステートアニメーション
  * @param props イベントプロパティ
- * @return アニメーション
+ * @return カスタムステートアニメーション 
  */
-export function onStateAnimation(props: Readonly<CustomStateAnimation>): Animate {
+export function afterStateAnimation(
+  props: Readonly<CustomStateAnimation>
+): Animate {
   if (isPilotSkillActivatedByTsubasa(props)) {
-    return tsubasaVictoryDeclaration(props);
+    return process(() => {
+      props.view.dom.enemyCryMessageWindow.visible(false);
+    });
   }
 
   return empty();
