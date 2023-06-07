@@ -205,3 +205,35 @@ export const doubleMessageWindows: DOMStubStory = domStub((resources) => {
   root.appendChild(leftMessageWindow.getRootHTMLElement());
   return root;
 });
+
+export const playerCry: DOMStubStory = domStub((resources) => {
+  const dom = new MessageWindow({
+    resources,
+    type: "PlayerCry",
+    faceOrientation: "Left",
+    facePosition: "Right",
+  });
+  dom.visible(true);
+  dom.faceVisible(true);
+  dom.face("Gai");
+  dom.messages([
+    "俺だって やれるんだ",
+  ]);
+  return dom.getRootHTMLElement();
+});
+
+export const enemyCry: DOMStubStory = domStub((resources) => {
+  const dom = new MessageWindow({
+    resources,
+    type: "EnemyCry",
+    faceOrientation: "Right",
+    facePosition: "Left",
+  });
+  dom.visible(true);
+  dom.faceVisible(true);
+  dom.face("Tsubasa");
+  dom.messages([
+    "この瞬間 私の勝利が確定した",
+  ]);
+  return dom.getRootHTMLElement();
+});
