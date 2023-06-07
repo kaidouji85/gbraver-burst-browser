@@ -17,9 +17,7 @@ export function tsubasaVictoryDeclaration(
     messageWindow.lighten();
     messageWindow.face("Tsubasa");
     messageWindow.faceVisible(true);
-    messageWindow.messages([
-      "この瞬間 私の勝利が確定した",
-    ]);
+    messageWindow.messages(["この瞬間 私の勝利が確定した"]);
     messageWindow.scrollUp();
     messageWindow.nextMessageIconVisible(false);
   });

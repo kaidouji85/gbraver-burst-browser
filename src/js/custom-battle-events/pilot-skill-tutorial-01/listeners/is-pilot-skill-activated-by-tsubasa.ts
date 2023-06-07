@@ -8,6 +8,8 @@ import { CustomStateAnimation } from "../../../td-scenes/battle/custom-battle-ev
 export function isPilotSkillActivatedByTsubasa(
   props: Readonly<CustomStateAnimation>
 ): boolean {
-  return props.currentState.effect.name === "PilotSkillEffect" &&
-    props.currentState.effect.invokerId !== props.playerId;
+  return (
+    props.currentState.effect.name === "PilotSkillEffect" &&
+    props.currentState.effect.invokerId !== props.playerId
+  );
 }
