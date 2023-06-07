@@ -9,7 +9,7 @@ import { playerLose } from "../stories/player-lose";
  * @return trueでストーリーを再生した
  */
 async function executePlayerLoseIfNeeded(
-  props: Readonly<LastState>,
+  props: Readonly<LastState>
 ): Promise<boolean> {
   const foundGameEnd = props.update.find((v) => v.effect.name === "GameEnd");
   if (!foundGameEnd || foundGameEnd.effect.name !== "GameEnd") {
