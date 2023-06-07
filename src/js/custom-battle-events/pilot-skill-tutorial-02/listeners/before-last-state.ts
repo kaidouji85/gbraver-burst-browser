@@ -14,7 +14,7 @@ import { shouldAttack3OrMore } from "../stories/should-attack3-or-more";
  * @param state イベントステート
  * @return ストーリーを再生したか否か、trueで再生した
  */
-async function doPilotSkillOrNothing(
+async function executeDoPilotSkillIfNeeded(
   props: Readonly<LastState>,
   state: Readonly<PilotSkillTutorial02State>
 ): Promise<boolean> {
@@ -44,7 +44,7 @@ async function doPilotSkillOrNothing(
  * @param state イベントステート
  * @return ストーリーを再生したか否か、trueで再生した
  */
-async function doAttack3OrMoreOrNothing(
+async function executeShouldAttack3OrMoreIfNeeded(
   props: Readonly<LastState>,
   state: Readonly<PilotSkillTutorial02State>
 ): Promise<boolean> {
@@ -85,16 +85,16 @@ export async function beforeLastState(
     return { ...state, isIntroductionComplete: true };
   }
 
-  const isDoPilotSkillPlayed = await doPilotSkillOrNothing(props, state);
-  if (isDoPilotSkillPlayed) {
+  const isDoPilotSkillExecuted = await executeDoPilotSkillIfNeeded(props, state);
+  if (isDoPilotSkillExecuted) {
     return { ...state, isDoPilotSkillComplete: true };
   }
 
-  const isShouldAttack5OrMorePlayed = await doAttack3OrMoreOrNothing(
+  const isShouldAttack5OrMoreExecuted = await executeShouldAttack3OrMoreIfNeeded(
     props,
     state
   );
-  if (isShouldAttack5OrMorePlayed) {
+  if (isShouldAttack5OrMoreExecuted) {
     return { ...state, isShouldAttack5OrMoreComplete: true };
   }
 
