@@ -7,7 +7,7 @@ import { rootInnerHTML } from "./dom/root-inner-html";
 import { toRootClass } from "./dom/to-root-class";
 import { FaceGraphic, FaceOrientation } from "./face-graphic";
 import { FacePosition } from "./face-position";
-import { Position } from "./position";
+import { WindowType } from "./window-type";
 
 /** メッセージウインドウプロパティ */
 export type MessageWindowProps = {
@@ -16,7 +16,7 @@ export type MessageWindowProps = {
   nextMessageIcon: HTMLElement;
   leftFaceGraphic: FaceGraphic;
   rightFaceGraphic: FaceGraphic;
-  position: Position;
+  type: WindowType;
   faceOrientation: FaceOrientation;
   facePosition: FacePosition;
 };
@@ -25,8 +25,8 @@ export type MessageWindowProps = {
 export type GenerateParams = {
   /** リソース管理オブジェクト */
   resources: Resources;
-  /** ウインドウ位置 */
-  position?: Position;
+  /** ウインドウタイプ */
+  type?: WindowType;
   /** 顔画像位置 */
   facePosition?: FacePosition;
   /** 顔画像の向き */
@@ -47,8 +47,8 @@ export function createMessageWindowProps(
     rightFaceGraphic: domUuid(),
   };
   const root = document.createElement("div");
-  const position = params?.position ?? "Center";
-  root.className = toRootClass(position);
+  const type = params?.type ?? "Center";
+  root.className = toRootClass(type);
   root.innerHTML = rootInnerHTML(ids);
   const elements = extractElements(root, ids);
   const nextMessageIcon = document.createElement("span");
@@ -60,7 +60,7 @@ export function createMessageWindowProps(
   replaceDOM(elements.rightFaceGraphic, rightFaceGraphic.getRootHTMLElement());
   return {
     root,
-    position,
+    type,
     nextMessageIcon,
     leftFaceGraphic,
     rightFaceGraphic,
