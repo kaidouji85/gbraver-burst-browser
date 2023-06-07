@@ -1,4 +1,4 @@
-import { Position } from "../position";
+import { WindowType } from "../window-type";
 import {
   ROOT_CLASS,
   ROOT_CLASS_INVISIBLE,
@@ -10,12 +10,12 @@ import {
 } from "./class-name";
 
 /**
- * メッセージウインドウ位置に対応したroot要素class属性を取得する
- * @param position メッセージウインドウ位置
+ * メッセージウインドウタイプに対応したroot要素class属性を取得する
+ * @param type メッセージウインドウタイプ
  * @return root要素のclass属性
  */
-export function toRootClass(position: Position): string {
-  switch (position) {
+export function toRootClass(type: WindowType): string {
+  switch (type) {
     case "Center":
       return ROOT_CLASS;
     case "Left":

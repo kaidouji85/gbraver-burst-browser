@@ -1,5 +1,5 @@
-/** メッセージウインドウ位置 */
-export type Position =
+/** メッセージウインドウタイプ */
+export type WindowType =
   | "Center"
   | "Right"
   | "Left"

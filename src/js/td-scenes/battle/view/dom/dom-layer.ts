@@ -39,35 +39,35 @@ export class DOMLayer {
   constructor(resources: Resources) {
     this.rightMessageWindow = new MessageWindow({
       resources,
-      position: "Right",
+      type: "Right",
       facePosition: "Right",
       faceOrientation: "Left",
     });
     this.rightMessageWindow.visible(false);
     this.leftMessageWindow = new MessageWindow({
       resources,
-      position: "Left",
+      type: "Left",
       facePosition: "Left",
       faceOrientation: "Right",
     });
     this.leftMessageWindow.visible(false);
     this.nearBatterySelectorMessageWindow = new MessageWindow({
       resources,
-      position: "NearBatterySelector",
+      type: "NearBatterySelector",
       facePosition: "Left",
       faceOrientation: "Right",
     });
     this.nearBatterySelectorMessageWindow.visible(false);
     this.nearBurstButtonMessageWindow = new MessageWindow({
       resources,
-      position: "NearBurstButton",
+      type: "NearBurstButton",
       facePosition: "Right",
       faceOrientation: "Left",
     });
     this.nearBurstButtonMessageWindow.visible(false);
     this.nearPilotButtonMessageWindow = new MessageWindow({
       resources,
-      position: "NearPilotButton",
+      type: "NearPilotButton",
       facePosition: "Right",
       faceOrientation: "Left",
     });

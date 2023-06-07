@@ -12,6 +12,6 @@ export function visible(
   isVisible: boolean
 ): void {
   props.root.className = isVisible
-    ? toRootClass(props.position)
+    ? toRootClass(props.type)
     : ROOT_CLASS_INVISIBLE;
 }
