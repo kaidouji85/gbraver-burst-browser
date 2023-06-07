@@ -6,7 +6,6 @@ import {
 } from "../../td-scenes/battle/custom-battle-event";
 import { EmptyCustomBattleEvent } from "../empty-custom-battle-event";
 import { afterLastState } from "./listeners/after-last-state";
-import { afterStateAnimation } from "./listeners/after-state-animation";
 import { beforeLastState as beforeLastState } from "./listeners/before-last-state";
 import { onStateAnimation } from "./listeners/on-state-animation";
 import { PilotSkillTutorial01State } from "./state";
@@ -30,11 +29,6 @@ class PilotSkillTutorial01 extends EmptyCustomBattleEvent {
   /** @override */
   onStateAnimation(props: CustomStateAnimation): Animate {
     return onStateAnimation(props);
-  }
-
-  /** @override */
-  afterStateAnimation(props: CustomStateAnimation): Animate {
-    return afterStateAnimation(props);
   }
 
   /** @override */
