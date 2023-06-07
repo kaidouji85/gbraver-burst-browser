@@ -10,17 +10,17 @@ import { CustomBattleEventProps } from "../../../td-scenes/battle/custom-battle-
 export function tsubasaVictoryDeclaration(
   props: Readonly<CustomBattleEventProps>
 ): Animate {
+  const messageWindow = props.view.dom.enemyCryMessageWindow;
   return process(() => {
     props.sounds.sendMessage.sound.play();
-    props.view.dom.leftMessageWindow.visible(true);
-    props.view.dom.leftMessageWindow.lighten();
-    props.view.dom.leftMessageWindow.face("Tsubasa");
-    props.view.dom.leftMessageWindow.faceVisible(true);
-    props.view.dom.leftMessageWindow.messages([
-      "ツバサ",
-      "「この勝負 もらった」",
+    messageWindow.visible(true);
+    messageWindow.lighten();
+    messageWindow.face("Tsubasa");
+    messageWindow.faceVisible(true);
+    messageWindow.messages([
+      "この瞬間 私の勝利が確定した",
     ]);
-    props.view.dom.leftMessageWindow.scrollUp();
-    props.view.dom.leftMessageWindow.nextMessageIconVisible(false);
+    messageWindow.scrollUp();
+    messageWindow.nextMessageIconVisible(false);
   });
 }
