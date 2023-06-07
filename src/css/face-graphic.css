@@ -9,7 +9,7 @@
 
 .face-graphic img {
   position: absolute;
-  bottom: 0;
+  bottom: calc(var(--responsive-font-size) * -1);
 }
 
 .face-graphic__shinya,
