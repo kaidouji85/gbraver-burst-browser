@@ -8,7 +8,7 @@ import { playerLose } from "../stories/player-lose";
  * @param props イベントプロパティ
  * @return trueでストーリーを再生した
  */
-async function checkAndExecutePlayerLose(
+async function executePlayerLoseIfNeeded(
   props: Readonly<LastState>,
 ): Promise<boolean> {
   const foundGameEnd = props.update.find((v) => v.effect.name === "GameEnd");
@@ -31,7 +31,7 @@ export async function afterLastState(
   props: Readonly<LastState>,
   state: Readonly<PilotSkillTutorial01State>
 ): Promise<PilotSkillTutorial01State> {
-  const isPlayerLoseExecuted = await checkAndExecutePlayerLose(props);
+  const isPlayerLoseExecuted = await executePlayerLoseIfNeeded(props);
   if (isPlayerLoseExecuted) {
     return state;
   }
