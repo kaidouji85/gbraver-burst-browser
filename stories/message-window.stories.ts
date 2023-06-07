@@ -216,9 +216,7 @@ export const playerCry: DOMStubStory = domStub((resources) => {
   dom.visible(true);
   dom.faceVisible(true);
   dom.face("Gai");
-  dom.messages([
-    "俺だって やれるんだ",
-  ]);
+  dom.messages(["俺だって やれるんだ"]);
   return dom.getRootHTMLElement();
 });
 
@@ -232,8 +230,6 @@ export const enemyCry: DOMStubStory = domStub((resources) => {
   dom.visible(true);
   dom.faceVisible(true);
   dom.face("Tsubasa");
-  dom.messages([
-    "この瞬間 私の勝利が確定した",
-  ]);
+  dom.messages(["この瞬間 私の勝利が確定した"]);
   return dom.getRootHTMLElement();
 });
