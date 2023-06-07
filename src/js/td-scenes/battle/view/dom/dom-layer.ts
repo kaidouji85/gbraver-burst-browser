@@ -12,22 +12,20 @@ import { DoPilotSkillByMiniController } from "../../actions/do-pilot-skill-by-mi
 export class DOMLayer {
   /** メッセージウインドウ 右 */
   rightMessageWindow: MessageWindow;
-
   /** メッセージウインドウ 左 */
   leftMessageWindow: MessageWindow;
-
   /** メッセージウインドウ バッテリーセレクタ隣 */
   nearBatterySelectorMessageWindow: MessageWindow;
-
   /** メッセージウインドウ バーストボタン隣 */
   nearBurstButtonMessageWindow: MessageWindow;
-
   /** メッセージウインドウ パイロットボタン隣 */
   nearPilotButtonMessageWindow: MessageWindow;
-
+  /** 叫びメッセージウインドウ プレイヤー */
+  playerCryMessageWindow: MessageWindow;
+  /** 叫びメッセージウインドウ 敵 */
+  enemyCryMessageWindow: MessageWindow;
   /** ミニコントローラー */
   miniController: MiniController;
-
   /** 戦闘シーンアクション */
   #battleAction: Observable<BattleSceneAction>;
 
@@ -72,6 +70,20 @@ export class DOMLayer {
       faceOrientation: "Left",
     });
     this.nearPilotButtonMessageWindow.visible(false);
+    this.playerCryMessageWindow = new MessageWindow({
+      resources,
+      type: "PlayerCry",
+      faceOrientation: "Left",
+      facePosition: "Right",
+    });
+    this.playerCryMessageWindow.visible(false);
+    this.enemyCryMessageWindow = new MessageWindow({
+      resources,
+      type: "EnemyCry",
+      faceOrientation: "Right",
+      facePosition: "Left",
+    });
+    this.enemyCryMessageWindow.visible(false);
     this.miniController = new MiniController(resources);
     this.#battleAction = merge(
       this.miniController.batteryPushNotifier().pipe(
@@ -126,6 +138,8 @@ export class DOMLayer {
       this.nearBatterySelectorMessageWindow.getRootHTMLElement(),
       this.nearBurstButtonMessageWindow.getRootHTMLElement(),
       this.nearPilotButtonMessageWindow.getRootHTMLElement(),
+      this.playerCryMessageWindow.getRootHTMLElement(),
+      this.enemyCryMessageWindow.getRootHTMLElement(),
       this.miniController.getRootHTMLElement(),
     ];
   }
