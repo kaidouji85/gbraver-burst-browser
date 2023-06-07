@@ -36,6 +36,5 @@ export async function afterLastState(
     return state;
   }
 
-  invisibleAllMessageWindows(props);
   return state;
 }
