@@ -4,19 +4,19 @@ import { delay } from "../../../animation/delay";
 import { BattleSceneView } from "../view";
 
 /**
- * バッテリーセレクタによる決定アニメーション
+ * バーストボタンによる決定アニメーション
  * @param view ビュー
  * @return アニメーション
  */
-export function decisionByBatterySelector(
+export function decisionByBurstButton(
   view: Readonly<BattleSceneView>
 ): Animate {
   return all(
-    view.hud.gameObjects.batterySelector.decide(),
-    view.hud.gameObjects.burstButton.close(),
+    view.hud.gameObjects.burstButton.decide(),
+    view.hud.gameObjects.batterySelector.close(),
     view.hud.gameObjects.pilotButton.close(),
     view.hud.gameObjects.timeScaleButton.close()
   )
     .chain(delay(500))
-    .chain(view.hud.gameObjects.batterySelector.close());
+    .chain(view.hud.gameObjects.burstButton.close());
 }
