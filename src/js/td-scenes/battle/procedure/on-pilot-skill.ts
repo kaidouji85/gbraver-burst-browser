@@ -1,11 +1,11 @@
 import { PilotSkillCommand } from "gbraver-burst-core";
 
 import type { DoPilotSkill } from "../actions/do-pilot-skill";
+import { decisionByPilotButton } from "../animation/decision-by-pilot-button";
 import { animationPlayer } from "../animation-player";
 import type { BattleSceneProps } from "../battle-scene-props";
 import { doPilotSkillEventIfNeeded } from "./do-pilot-skill-event-if-needed";
 import { progressGame } from "./progress-game";
-import { decisionByPilotButton } from "../animation/decision-by-pilot-button";
 
 /**
  * パイロットスキル発動時の処理
@@ -31,9 +31,7 @@ export function onPilotSkill(
       return;
     }
 
-    await animationPlayer(props).play(
-      decisionByPilotButton(props.view)
-    );
+    await animationPlayer(props).play(decisionByPilotButton(props.view));
     await progressGame(props, pilotSkillCommand);
   });
 }

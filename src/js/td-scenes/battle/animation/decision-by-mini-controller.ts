@@ -8,7 +8,9 @@ import { BattleSceneView } from "../view";
  * @param view 戦闘シーンビュー
  * @return アニメーションが完了したら発火するPromise
  */
-export function decisionByMiniController(view: Readonly<BattleSceneView>): Animate {
+export function decisionByMiniController(
+  view: Readonly<BattleSceneView>
+): Animate {
   return all(
     view.dom.miniController
       .decided()
