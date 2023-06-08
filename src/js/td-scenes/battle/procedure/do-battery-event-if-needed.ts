@@ -1,23 +1,23 @@
-import { PilotSkillCommand } from "gbraver-burst-core";
+import { BatteryCommand } from "gbraver-burst-core";
 
 import { BattleSceneProps } from "../battle-scene-props";
 import { CommandCanceled } from "../custom-battle-event";
 
 /**
- * カスタムバトルイベントがセットされていれば onPilotSkillCommandSelected を実行する
+ * カスタムバトルイベントがセットされていれば onBatteryCommandSelected を実行する
  * 実行結果としてコマンドキャンセル情報を返す
  * @param props 戦闘シーンプロパティ
- * @param battery パイロットスキルコマンド
+ * @param battery バッテリーコマンド
  * @return コマンドキャンセル情報
  */
-export async function doPilotSkillEventOrNot(
+export async function doBatteryEventIfNeeded(
   props: Readonly<BattleSceneProps>,
-  pilot: Readonly<PilotSkillCommand>
+  battery: Readonly<BatteryCommand>
 ): Promise<CommandCanceled> {
   return props.customBattleEvent
-    ? await props.customBattleEvent.onPilotSkillCommandSelected({
+    ? await props.customBattleEvent.onBatteryCommandSelected({
         ...props,
-        pilot,
+        battery,
       })
     : { isCommandCanceled: false };
 }
