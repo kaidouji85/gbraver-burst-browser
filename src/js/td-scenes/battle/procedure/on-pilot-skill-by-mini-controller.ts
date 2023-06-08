@@ -1,6 +1,6 @@
 import { PilotSkillCommand } from "gbraver-burst-core";
 
-import { decideMiniController } from "../animation/decide-mini-controller";
+import { decisionByMiniController } from "../animation/decision-by-mini-controller";
 import { BattleSceneProps } from "../battle-scene-props";
 import { doPilotSkillEventIfNeeded } from "./do-pilot-skill-event-if-needed";
 import { progressGame } from "./progress-game";
@@ -26,7 +26,7 @@ export function onPilotSkillByMiniController(
       return;
     }
 
-    await decideMiniController(props.view).play();
+    await decisionByMiniController(props.view).play();
     await progressGame(props, pilotSkillCommand);
   });
 }

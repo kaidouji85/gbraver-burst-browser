@@ -1,7 +1,7 @@
 import { BatteryCommand } from "gbraver-burst-core";
 
 import { DecideBatteryByMiniController } from "../actions/decide-battery-by-mini-controller";
-import { decideMiniController } from "../animation/decide-mini-controller";
+import { decisionByMiniController } from "../animation/decision-by-mini-controller";
 import { BattleSceneProps } from "../battle-scene-props";
 import { doBatteryEventIfNeeded } from "./do-battery-event-if-needed";
 import { progressGame } from "./progress-game";
@@ -29,7 +29,7 @@ export function onDecideBatteryByMiniController(
       return;
     }
 
-    await decideMiniController(props.view).play();
+    await decisionByMiniController(props.view).play();
     await progressGame(props, batteryCommand);
   });
 }

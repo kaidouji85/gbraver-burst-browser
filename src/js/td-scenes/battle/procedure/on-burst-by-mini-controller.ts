@@ -1,6 +1,6 @@
 import { BurstCommand } from "gbraver-burst-core";
 
-import { decideMiniController } from "../animation/decide-mini-controller";
+import { decisionByMiniController } from "../animation/decision-by-mini-controller";
 import { BattleSceneProps } from "../battle-scene-props";
 import { doBurstEventIfNeeded } from "./do-burst-event-if-needed";
 import { progressGame } from "./progress-game";
@@ -26,7 +26,7 @@ export function onBurstByMiniController(
       return;
     }
 
-    await decideMiniController(props.view).play();
+    await decisionByMiniController(props.view).play();
     await progressGame(props, burstCommand);
   });
 }
