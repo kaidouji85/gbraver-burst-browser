@@ -5,7 +5,7 @@ import { delay } from "../../../animation/delay";
 import type { DecideBattery } from "../actions/decide-battery";
 import { animationPlayer } from "../animation-player";
 import type { BattleSceneProps } from "../battle-scene-props";
-import { doBatteryEventOrNot } from "./do-battery-event-or-not";
+import { doBatteryEventIfNeeded } from "./do-battery-event-if-needed";
 import { progressGame } from "./progress-game";
 
 /**
@@ -26,7 +26,7 @@ export function onDecideBattery(
       battery: action.battery,
     };
 
-    const { isCommandCanceled } = await doBatteryEventOrNot(
+    const { isCommandCanceled } = await doBatteryEventIfNeeded(
       props,
       batteryCommand
     );
