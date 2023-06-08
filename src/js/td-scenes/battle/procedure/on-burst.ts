@@ -24,7 +24,10 @@ export function onBurst(
     const burstCommand: BurstCommand = {
       type: "BURST_COMMAND",
     };
-    const { isCommandCanceled } = await doBurstEventIfNeeded(props, burstCommand);
+    const { isCommandCanceled } = await doBurstEventIfNeeded(
+      props,
+      burstCommand
+    );
     if (isCommandCanceled) {
       return;
     }
