@@ -4,7 +4,6 @@ import { Animate } from "../../animation/animate";
 import { Resources } from "../../resource";
 import { ButtonConfig } from "./button-config";
 import { decided } from "./procedure/decided";
-import { disabledAllButtons } from "./procedure/disabled-all-buttons";
 import { hidden } from "./procedure/hidden";
 import { show } from "./procedure/show";
 import { createMiniControllerProps, MiniControllerProps } from "./props";
@@ -20,7 +19,6 @@ export class MiniController {
    */
   constructor(resources: Resources) {
     this.#props = createMiniControllerProps(resources);
-    disabledAllButtons(this.#props);
   }
 
   /**
