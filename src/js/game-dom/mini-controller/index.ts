@@ -7,8 +7,12 @@ import { decided } from "./procedure/decided";
 import { hidden } from "./procedure/hidden";
 import { show } from "./procedure/show";
 import { createMiniControllerProps, MiniControllerProps } from "./props";
+import { engageButtonConfig } from "./procedure/engage-button-config";
 
-/** ミニコントローラ */
+/** 
+ * ミニコントローラ
+ * 本コンポネントは非表示状態（display: none）でもaccesskeyでボタンが反応する
+ */
 export class MiniController {
   /** プロパティ */
   #props: MiniControllerProps;
@@ -47,6 +51,14 @@ export class MiniController {
    */
   show(config: Readonly<ButtonConfig>): Animate {
     return show(this.#props, config);
+  }
+
+/**
+ * ボタン設定をコンポネントに反映する
+ * @param config ボタン設定
+ */
+  engage(config: Readonly<ButtonConfig>): void {
+    engageButtonConfig(this.#props, config);
   }
 
   /**
