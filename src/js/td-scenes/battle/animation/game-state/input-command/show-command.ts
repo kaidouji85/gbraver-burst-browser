@@ -2,6 +2,7 @@ import { Command } from "gbraver-burst-core";
 
 import { all } from "../../../../../animation/all";
 import { Animate } from "../../../../../animation/animate";
+import { ButtonConfig } from "../../../../../game-dom/mini-controller/button-config";
 import { canBurstButtonPush } from "../../../can-burst-button-push";
 import { canPilotButtonPush } from "../../../can-pilot-button-push";
 import { BattleControllerType } from "../../../controller-type";
@@ -22,6 +23,23 @@ type AnimationParam = {
 };
 
 /**
+ * アニメーションパラメータをミニコントローラボタン設定に変換する
+ * @param origin 変換元
+ * @return 変換結果
+ */
+function toMiniControllerConfig(origin: AnimationParam): ButtonConfig {
+  const battery = getEnableMaxBattery(origin.commands);
+  const canBurst = canBurstButtonPush(origin.commands);
+  const canPilotSkill = canPilotButtonPush(origin.commands);
+  return {
+    battery,
+    maxBattery: origin.maxBattery,
+    canBurst,
+    canPilotSkill,
+  };
+}
+
+/**
  * ボタン表示アニメーション
  * @param param パラメータ
  * @return アニメーション
@@ -32,6 +50,8 @@ function showButtons(param: Readonly<AnimationParam>): Animate {
   const label = param.isPlayerTurn ? "Attack" : "Defense";
   const canBurst = canBurstButtonPush(param.commands);
   const canPilotSkill = canPilotButtonPush(param.commands);
+  const miniControllerConfig = toMiniControllerConfig(param);
+  param.view.dom.miniController.engage(miniControllerConfig);
   return all(
     param.view.hud.gameObjects.batterySelector.open({
       initialValue,
@@ -50,15 +70,9 @@ function showButtons(param: Readonly<AnimationParam>): Animate {
  * @return アニメーション
  */
 function showMiniController(param: AnimationParam): Animate {
-  const battery = getEnableMaxBattery(param.commands);
-  const canBurst = canBurstButtonPush(param.commands);
-  const canPilotSkill = canPilotButtonPush(param.commands);
-  return param.view.dom.miniController.show({
-    battery,
-    maxBattery: param.maxBattery,
-    canBurst,
-    canPilotSkill,
-  });
+  const miniControllerConfig = toMiniControllerConfig(param);
+  param.view.dom.miniController.engage(miniControllerConfig);
+  return param.view.dom.miniController.show();
 }
 
 /** コマンド表示パラメータ */

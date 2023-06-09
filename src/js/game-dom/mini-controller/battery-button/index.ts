@@ -2,7 +2,6 @@ import { Observable, Unsubscribable } from "rxjs";
 
 import { BatteryButtonConfig } from "./config";
 import { bindEventListeners } from "./procedure/bind-event-lisnters";
-import { disabled } from "./procedure/disabled";
 import { engage } from "./procedure/engage";
 import { BatteryButtonProps, createBatteryButtonProps } from "./props";
 
@@ -53,13 +52,5 @@ export class BatteryButton {
    */
   engage(config: BatteryButtonConfig): void {
     engage(this.#props, config);
-  }
-
-  /**
-   * バッテリーボタンを強制的に無効化する
-   * 本メソッドは親メソッドを非表示にする際に呼ばれる想定である
-   */
-  disabled(): void {
-    disabled(this.#props);
   }
 }

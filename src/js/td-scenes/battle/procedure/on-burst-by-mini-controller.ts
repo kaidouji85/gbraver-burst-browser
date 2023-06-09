@@ -1,6 +1,8 @@
 import { BurstCommand } from "gbraver-burst-core";
 
+import { decisionByBurstButton } from "../animation/decision-by-bursy-button";
 import { decisionByMiniController } from "../animation/decision-by-mini-controller";
+import { animationPlayer } from "../animation-player";
 import { BattleSceneProps } from "../battle-scene-props";
 import { doBurstEventIfNeeded } from "./do-burst-event-if-needed";
 import { progressGame } from "./progress-game";
@@ -26,7 +28,13 @@ export function onBurstByMiniController(
       return;
     }
 
-    await decisionByMiniController(props.view).play();
+    // display: noneでもミニコントローラのaccesskeyは有効なので、
+    // コントローラーが「おおきいボタン」の場合でも、本関数は呼ばれうる
+    const decisionAnimation =
+      props.controllerType === "BigButton"
+        ? decisionByBurstButton(props.view)
+        : decisionByMiniController(props.view);
+    await animationPlayer(props).play(decisionAnimation);
     await progressGame(props, burstCommand);
   });
 }
