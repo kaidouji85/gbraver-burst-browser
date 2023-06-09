@@ -7,7 +7,6 @@ import { MiniControllerProps } from "../props";
 /**
  * ミニコントローラを表示する
  * @param props コンポネントプロパティ
- * @param config ボタン設定
  * @return アニメーション
  */
 export function show(props: MiniControllerProps): Animate {
