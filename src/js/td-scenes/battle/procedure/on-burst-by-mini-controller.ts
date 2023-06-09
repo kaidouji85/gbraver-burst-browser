@@ -28,6 +28,8 @@ export function onBurstByMiniController(
       return;
     }
 
+    // display: noneでもミニコントローラのaccesskeyは有効なので、
+    // コントローラーが「おおきいボタン」の場合でも、本関数は呼ばれうる
     const decisionAnimation = props.controllerType === "BigButton"
       ? decisionByBurstButton(props.view)
       : decisionByMiniController(props.view);
