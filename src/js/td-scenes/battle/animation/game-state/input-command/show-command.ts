@@ -53,12 +53,13 @@ function showMiniController(param: AnimationParam): Animate {
   const battery = getEnableMaxBattery(param.commands);
   const canBurst = canBurstButtonPush(param.commands);
   const canPilotSkill = canPilotButtonPush(param.commands);
-  return param.view.dom.miniController.show({
+  param.view.dom.miniController.engage({
     battery,
     maxBattery: param.maxBattery,
     canBurst,
     canPilotSkill,
   });
+  return param.view.dom.miniController.show();
 }
 
 /** コマンド表示パラメータ */

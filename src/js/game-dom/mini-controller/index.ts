@@ -46,11 +46,10 @@ export class MiniController {
 
   /**
    * ミニコントローラーを表示する
-   * @param config ボタン設定
    * @return アニメーション
    */
-  show(config: Readonly<ButtonConfig>): Animate {
-    return show(this.#props, config);
+  show(): Animate {
+    return show(this.#props);
   }
 
 /**
