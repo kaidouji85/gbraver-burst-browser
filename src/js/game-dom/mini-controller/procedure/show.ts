@@ -10,9 +10,7 @@ import { MiniControllerProps } from "../props";
  * @param config ボタン設定
  * @return アニメーション
  */
-export function show(
-  props: MiniControllerProps,
-): Animate {
+export function show(props: MiniControllerProps): Animate {
   return process(() => {
     props.root.className = ROOT;
   }).chain(showRoot(props));

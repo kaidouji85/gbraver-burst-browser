@@ -2,13 +2,13 @@ import { Command } from "gbraver-burst-core";
 
 import { all } from "../../../../../animation/all";
 import { Animate } from "../../../../../animation/animate";
+import { ButtonConfig } from "../../../../../game-dom/mini-controller/button-config";
 import { canBurstButtonPush } from "../../../can-burst-button-push";
 import { canPilotButtonPush } from "../../../can-pilot-button-push";
 import { BattleControllerType } from "../../../controller-type";
 import { getEnableMaxBattery } from "../../../get-enable-max-battery";
 import { getInitialBattery } from "../../../get-initial-battery";
 import { BattleSceneView } from "../../../view";
-import { ButtonConfig } from "../../../../../game-dom/mini-controller/button-config";
 
 /** アニメーションパラメータ */
 type AnimationParam = {
@@ -36,7 +36,7 @@ function toMiniControllerConfig(origin: AnimationParam): ButtonConfig {
     maxBattery: origin.maxBattery,
     canBurst,
     canPilotSkill,
-  }
+  };
 }
 
 /**

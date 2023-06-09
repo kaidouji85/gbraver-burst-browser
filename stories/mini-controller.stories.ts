@@ -106,7 +106,8 @@ export const showHidden = domStub((resources) => {
     canBurst: true,
     canPilotSkill: true,
   });
-  controller.show()
+  controller
+    .show()
     .chain(delay(2000))
     .chain(controller.decided())
     .chain(delay(200))

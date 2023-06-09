@@ -4,12 +4,12 @@ import { Animate } from "../../animation/animate";
 import { Resources } from "../../resource";
 import { ButtonConfig } from "./button-config";
 import { decided } from "./procedure/decided";
+import { engageButtonConfig } from "./procedure/engage-button-config";
 import { hidden } from "./procedure/hidden";
 import { show } from "./procedure/show";
 import { createMiniControllerProps, MiniControllerProps } from "./props";
-import { engageButtonConfig } from "./procedure/engage-button-config";
 
-/** 
+/**
  * ミニコントローラ
  * 本コンポネントは非表示状態（display: none）でもaccesskeyでボタンが反応する
  */
@@ -52,10 +52,10 @@ export class MiniController {
     return show(this.#props);
   }
 
-/**
- * ボタン設定をコンポネントに反映する
- * @param config ボタン設定
- */
+  /**
+   * ボタン設定をコンポネントに反映する
+   * @param config ボタン設定
+   */
   engage(config: Readonly<ButtonConfig>): void {
     engageButtonConfig(this.#props, config);
   }
