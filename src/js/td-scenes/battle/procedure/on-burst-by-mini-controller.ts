@@ -4,6 +4,8 @@ import { decisionByMiniController } from "../animation/decision-by-mini-controll
 import { BattleSceneProps } from "../battle-scene-props";
 import { doBurstEventIfNeeded } from "./do-burst-event-if-needed";
 import { progressGame } from "./progress-game";
+import { decisionByBurstButton } from "../animation/decision-by-bursy-button";
+import { animationPlayer } from "../animation-player";
 
 /**
  * ミニコントローラーでバーストボタンが押された時の処理
@@ -26,7 +28,10 @@ export function onBurstByMiniController(
       return;
     }
 
-    await decisionByMiniController(props.view).play();
+    const decisionAnimation = props.controllerType === "BigButton"
+      ? decisionByBurstButton(props.view)
+      : decisionByMiniController(props.view);
+    await animationPlayer(props).play(decisionAnimation);
     await progressGame(props, burstCommand);
   });
 }
