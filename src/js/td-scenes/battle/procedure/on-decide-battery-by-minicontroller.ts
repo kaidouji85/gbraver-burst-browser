@@ -5,6 +5,8 @@ import { decisionByMiniController } from "../animation/decision-by-mini-controll
 import { BattleSceneProps } from "../battle-scene-props";
 import { doBatteryEventIfNeeded } from "./do-battery-event-if-needed";
 import { progressGame } from "./progress-game";
+import { decisionByBatterySelector } from "../animation/decision-by-battery-selector";
+import { animationPlayer } from "../animation-player";
 
 /**
  * ミニコントローラーでバッテリーボタンが押された時の処理
@@ -29,7 +31,10 @@ export function onDecideBatteryByMiniController(
       return;
     }
 
-    await decisionByMiniController(props.view).play();
+    const decisionAnimation = props.controllerType === "BigButton"
+      ? decisionByBatterySelector(props.view)
+      : decisionByMiniController(props.view);
+    await animationPlayer(props).play(decisionAnimation);
     await progressGame(props, batteryCommand);
   });
 }
