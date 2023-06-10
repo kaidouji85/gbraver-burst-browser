@@ -12,13 +12,11 @@ export function tsubasaVictoryDeclaration(
 ): Animate {
   const messageWindow = props.view.dom.enemyCryMessageWindow;
   return process(() => {
-    props.sounds.sendMessage.sound.play();
     messageWindow.visible(true);
     messageWindow.lighten();
     messageWindow.face("Tsubasa");
     messageWindow.faceVisible(true);
     messageWindow.messages(["この瞬間 私の勝利が確定した"]);
-    messageWindow.scrollUp();
     messageWindow.nextMessageIconVisible(false);
   });
 }
