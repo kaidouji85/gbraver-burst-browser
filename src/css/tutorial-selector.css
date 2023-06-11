@@ -108,6 +108,11 @@
   overflow-y: scroll;
 }
 
+.tutorial-selector__stage-separator {
+  border-bottom: dashed 1px var(--font-color);
+  margin: calc(var(--responsive-font-size) * 0.7) 0;
+}
+
 .tutorial-selector__prev {
   grid-row: 3;
   grid-column: 2;

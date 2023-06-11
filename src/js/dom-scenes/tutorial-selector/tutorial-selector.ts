@@ -84,6 +84,16 @@ function extractElements(root: HTMLElement, ids: DataIDs): Elements {
   };
 }
 
+/**
+ * ステージセパレータを生成する
+ * @return 生成結果
+ */
+function stageSeparator() {
+  const separator = document.createElement("div");
+  separator.className = `${ROOT_CLASS}__stage-separator`;
+  return separator;
+}
+
 /** チュートリアルステージセレクト画面 */
 export class TutorialSelector implements DOMScene {
   #root: HTMLElement;
@@ -127,9 +137,15 @@ export class TutorialSelector implements DOMScene {
     const stageElements = stages.map(
       (stage, index) => new TutorialStageElement(resources, stage, index + 1)
     );
-    stageElements.forEach((stage) => {
+    const stageElementsWithLastRemoved = stageElements.slice(0, -1);
+    stageElementsWithLastRemoved.forEach((stage) => {
       this.#stages.appendChild(stage.getRootHTMLElement());
+      this.#stages.appendChild(stageSeparator());
     });
+    const lastStageElement = stageElements[stageElements.length - 1];
+    if (lastStageElement) {
+      this.#stages.appendChild(lastStageElement.getRootHTMLElement());
+    }
     this.#unsubscribers = [
       domPushStream(this.#prevButton).subscribe((action) => {
         this.#onPrevPush(action);
