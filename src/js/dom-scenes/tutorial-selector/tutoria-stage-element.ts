@@ -1,6 +1,6 @@
 import { map, Observable } from "rxjs";
 
-import { pop } from "../../dom/pop";
+import { flash } from "../../dom/flash";
 import { domClickStream } from "../../dom/push-dom";
 import type { TutorialStageID } from "../../game/tutorial-stages/tutorial-stage";
 import type { Resources } from "../../resource";
@@ -107,6 +107,6 @@ export class TutorialStageElement {
    */
   async selected(): Promise<void> {
     this.#pushButton.sound.play();
-    await pop(this.#root);
+    await flash(this.#root);
   }
 }
