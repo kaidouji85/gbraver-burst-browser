@@ -1,4 +1,4 @@
-import {waitFinishAnimation} from "./wait-finish-animation";
+import { waitFinishAnimation } from "./wait-finish-animation";
 
 /**
  * 点滅アニメーション
@@ -8,7 +8,7 @@ import {waitFinishAnimation} from "./wait-finish-animation";
  */
 export async function flash(
   element: Readonly<HTMLElement>,
-  brightness: number = 0.5
+  brightness = 0.5
 ): Promise<void> {
   const animation = element.animate(
     [
