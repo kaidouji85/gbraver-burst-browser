@@ -1,6 +1,6 @@
 import { map, Observable } from "rxjs";
 
-import { pop } from "../../dom/animation";
+import { pop } from "../../dom/pop";
 import { domClickStream } from "../../dom/push-dom";
 import type { TutorialStageID } from "../../game/tutorial-stages/tutorial-stage";
 import type { Resources } from "../../resource";
