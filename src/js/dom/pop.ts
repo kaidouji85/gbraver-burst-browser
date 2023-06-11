@@ -1,4 +1,4 @@
-import {waitFinishAnimation} from "./wait-finish-animation";
+import { waitFinishAnimation } from "./wait-finish-animation";
 
 /**
  * ポップアニメーション

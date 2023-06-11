@@ -1,7 +1,7 @@
 import { Observable, Subject, Unsubscribable } from "rxjs";
 
-import { pop } from "../../dom/pop";
 import { escapeHTML } from "../../dom/escape-html";
+import { pop } from "../../dom/pop";
 import { domPushStream, PushDOM } from "../../dom/push-dom";
 import { Exclusive } from "../../exclusive/exclusive";
 import { domUuid } from "../../uuid/dom-uuid";

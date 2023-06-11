@@ -1,4 +1,4 @@
-import {waitFinishAnimation} from "../../dom/wait-finish-animation";
+import { waitFinishAnimation } from "../../dom/wait-finish-animation";
 
 /**
  * HTML要素で作られたフェーダ
