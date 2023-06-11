@@ -18,11 +18,15 @@
 }
 
 .tutorial-stage__prefix {
+  --icon-size: calc(var(--responsive-font-size) * 2);
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
   margin-right: calc(var(--responsive-font-size) * 0.5);
   background-color: var(--button-background-color);
-  min-width: calc(var(--responsive-font-size) * 1.3);
-  min-height: calc(var(--responsive-font-size) * 1.3);
+  min-width: var(--icon-size);
+  min-height: var(--icon-size);
   padding: calc(var(--responsive-font-size) * 0.2);
   border-radius: calc(var(--responsive-font-size) * 0.4);
-  text-align: center;
 }
