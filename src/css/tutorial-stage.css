@@ -3,8 +3,7 @@
   .tutorial-stage {
     display: flex;
     align-items: center;
-    background-color: var(--button-background-color);
-    border: var(--button-border);
+    border: dashed 1px var(--font-color);
     border-radius: var(--button-border-radius);
     min-width: calc(var(--responsive-font-size) * 16);
     min-height: calc(var(--responsive-font-size) * 3);
