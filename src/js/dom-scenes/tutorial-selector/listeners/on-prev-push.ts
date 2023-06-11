@@ -1,6 +1,6 @@
-import {TutorialSelectorProps} from "../props";
-import {PushDOM} from "../../../dom/push-dom";
-import {pop} from "../../../dom/animation";
+import { pop } from "../../../dom/animation";
+import { PushDOM } from "../../../dom/push-dom";
+import { TutorialSelectorProps } from "../props";
 
 /**
  * 戻るボタンを押した時の処理

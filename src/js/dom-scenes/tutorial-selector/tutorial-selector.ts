@@ -1,10 +1,13 @@
-import {Observable, Unsubscribable} from "rxjs";
+import { Observable, Unsubscribable } from "rxjs";
 
-import type {Resources} from "../../resource";
-import type {DOMScene} from "../dom-scene";
-import type {TutorialStage, TutorialStageSelect,} from "./tutoria-stage-element";
-import {createTutorialSelectorProps, TutorialSelectorProps} from "./props";
-import {bindEventListeners} from "./listeners/bind-event-listeners";
+import type { Resources } from "../../resource";
+import type { DOMScene } from "../dom-scene";
+import { bindEventListeners } from "./listeners/bind-event-listeners";
+import { createTutorialSelectorProps, TutorialSelectorProps } from "./props";
+import type {
+  TutorialStage,
+  TutorialStageSelect,
+} from "./tutoria-stage-element";
 
 /** チュートリアルステージセレクト画面 */
 export class TutorialSelector implements DOMScene {

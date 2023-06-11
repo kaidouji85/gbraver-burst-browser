@@ -1,8 +1,9 @@
-import {TutorialSelectorProps} from "../props";
-import {Unsubscribable} from "rxjs";
-import {domPushStream} from "../../../dom/push-dom";
-import {onPrevPush} from "./on-prev-push";
-import {onTutorialStageSelect} from "./on-tutorial-stage-select";
+import { Unsubscribable } from "rxjs";
+
+import { domPushStream } from "../../../dom/push-dom";
+import { TutorialSelectorProps } from "../props";
+import { onPrevPush } from "./on-prev-push";
+import { onTutorialStageSelect } from "./on-tutorial-stage-select";
 
 /**
  * 画面にイベントリスナをバインドする

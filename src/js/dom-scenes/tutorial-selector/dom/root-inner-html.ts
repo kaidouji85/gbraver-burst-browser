@@ -1,7 +1,7 @@
-import {DataIDs} from "./data-ids";
-import {Resources} from "../../../resource";
-import {PathIds} from "../../../resource/path";
-import {ROOT_CLASS} from "./class-name";
+import { Resources } from "../../../resource";
+import { PathIds } from "../../../resource/path";
+import { ROOT_CLASS } from "./class-name";
+import { DataIDs } from "./data-ids";
 
 /**
  * ルート要素のinnerHTML

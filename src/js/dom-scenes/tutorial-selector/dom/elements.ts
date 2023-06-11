@@ -1,4 +1,4 @@
-import {DataIDs} from "./data-ids";
+import { DataIDs } from "./data-ids";
 
 /** ルート要素の子孫要素 */
 type Elements = {

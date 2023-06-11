@@ -1,5 +1,5 @@
-import {TutorialSelectorProps} from "../props";
-import {TutorialStageElement} from "../tutoria-stage-element";
+import { TutorialSelectorProps } from "../props";
+import { TutorialStageElement } from "../tutoria-stage-element";
 
 /**
  * チュートリアルステージ選択

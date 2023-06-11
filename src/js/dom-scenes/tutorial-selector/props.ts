@@ -1,14 +1,23 @@
-import {Exclusive} from "../../exclusive/exclusive";
-import {Subject, Unsubscribable} from "rxjs";
-import {TutorialStage, TutorialStageElement, TutorialStageSelect} from "./tutoria-stage-element";
-import {createEmptySoundResource, SOUND_IDS, SoundResource} from "../../resource/sound";
-import {domUuid} from "../../uuid/dom-uuid";
-import {ROOT_CLASS} from "./dom/class-name";
-import {rootInnerHTML} from "./dom/root-inner-html";
-import {extractElements} from "./dom/elements";
-import {waitElementLoaded} from "../../wait/wait-element-loaded";
-import {stageSeparator} from "./dom/stage-separator";
-import {Resources} from "../../resource";
+import { Subject, Unsubscribable } from "rxjs";
+
+import { Exclusive } from "../../exclusive/exclusive";
+import { Resources } from "../../resource";
+import {
+  createEmptySoundResource,
+  SOUND_IDS,
+  SoundResource,
+} from "../../resource/sound";
+import { domUuid } from "../../uuid/dom-uuid";
+import { waitElementLoaded } from "../../wait/wait-element-loaded";
+import { ROOT_CLASS } from "./dom/class-name";
+import { extractElements } from "./dom/elements";
+import { rootInnerHTML } from "./dom/root-inner-html";
+import { stageSeparator } from "./dom/stage-separator";
+import {
+  TutorialStage,
+  TutorialStageElement,
+  TutorialStageSelect,
+} from "./tutoria-stage-element";
 
 /** チュートリアルセレクタ画面プロパティ */
 export type TutorialSelectorProps = {
