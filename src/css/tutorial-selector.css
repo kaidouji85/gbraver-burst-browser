@@ -110,7 +110,7 @@
 
 .tutorial-selector__stage-separator {
   border-bottom: dashed 1px var(--font-color);
-  margin: calc(var(--responsive-font-size) * 0.7) 0;
+  margin-bottom: calc(var(--responsive-font-size) * 0.7) 0;
 }
 
 .tutorial-selector__prev {
