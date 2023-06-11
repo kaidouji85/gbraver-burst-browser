@@ -13,13 +13,7 @@ import type {DOMScene} from "../dom-scene";
 import type {TutorialStage, TutorialStageSelect,} from "./tutoria-stage-element";
 import {TutorialStageElement} from "./tutoria-stage-element";
 import {ROOT_CLASS} from "./dom/class-name";
-
-/** data-idを集めたもの */
-type DataIDs = {
-  stages: string;
-  imageCuts: string;
-  prevButton: string;
-};
+import {DataIDs} from "./dom/data-ids";
 
 /**
  * ルート要素のinnerHTML
