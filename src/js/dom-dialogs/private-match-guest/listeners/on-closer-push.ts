@@ -1,4 +1,4 @@
-import { pop } from "../../../dom/animation";
+import { pop } from "../../../dom/pop";
 import { PushDOM } from "../../../dom/push-dom";
 import { PrivateMatchGuestDialogProps } from "../props";
 

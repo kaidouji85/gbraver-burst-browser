@@ -2,7 +2,6 @@ import {waitFinishAnimation} from "./wait-finish-animation";
 
 /**
  * ポップアニメーション
- *
  * @param element アニメーション対象のHTML要素
  * @param scale ポップする大きさ
  * @return アニメーション
