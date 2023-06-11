@@ -1,23 +1,18 @@
-import { Observable, Subject, Unsubscribable } from "rxjs";
+import {Observable, Subject, Unsubscribable} from "rxjs";
 
-import { pop } from "../../dom/animation";
-import { domPushStream, PushDOM } from "../../dom/push-dom";
-import { Exclusive } from "../../exclusive/exclusive";
-import type { Resources } from "../../resource";
-import { PathIds } from "../../resource/path";
-import type { SoundResource } from "../../resource/sound";
-import { createEmptySoundResource, SOUND_IDS } from "../../resource/sound";
-import { domUuid } from "../../uuid/dom-uuid";
-import { waitElementLoaded } from "../../wait/wait-element-loaded";
-import type { DOMScene } from "../dom-scene";
-import type {
-  TutorialStage,
-  TutorialStageSelect,
-} from "./tutoria-stage-element";
-import { TutorialStageElement } from "./tutoria-stage-element";
-
-/** ROOT要素class属性*/
-const ROOT_CLASS = "tutorial-selector";
+import {pop} from "../../dom/animation";
+import {domPushStream, PushDOM} from "../../dom/push-dom";
+import {Exclusive} from "../../exclusive/exclusive";
+import type {Resources} from "../../resource";
+import {PathIds} from "../../resource/path";
+import type {SoundResource} from "../../resource/sound";
+import {createEmptySoundResource, SOUND_IDS} from "../../resource/sound";
+import {domUuid} from "../../uuid/dom-uuid";
+import {waitElementLoaded} from "../../wait/wait-element-loaded";
+import type {DOMScene} from "../dom-scene";
+import type {TutorialStage, TutorialStageSelect,} from "./tutoria-stage-element";
+import {TutorialStageElement} from "./tutoria-stage-element";
+import {ROOT_CLASS} from "./dom/class-name";
 
 /** data-idを集めたもの */
 type DataIDs = {
