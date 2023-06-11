@@ -16,7 +16,7 @@ export async function flash(
         filter: "brightness(1)",
       },
       {
-        transform: `brightness(${brightness})`,
+        filter: `brightness(${brightness})`,
       },
       {
         filter: "brightness(1)",
