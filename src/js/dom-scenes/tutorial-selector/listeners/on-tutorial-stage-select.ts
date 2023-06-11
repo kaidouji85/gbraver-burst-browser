@@ -4,17 +4,17 @@ import {TutorialStageElement} from "../tutoria-stage-element";
 /**
  * チュートリアルステージ選択
  * @param props 画面プロパティ
- * @param stage チュートリアルステージ HTML要素
+ * @param stageElement チュートリアルステージ HTML要素
  */
-export function onTutorialSelect(
+export function onTutorialStageSelect(
   props: Readonly<TutorialSelectorProps>,
-  stage: TutorialStageElement
+  stageElement: TutorialStageElement
 ): void {
   props.exclusive.execute(async () => {
-    await stage.selected();
+    await stageElement.selected();
     props.stageSelect.next({
-      id: stage.id,
-      level: stage.level,
+      id: stageElement.id,
+      level: stageElement.level,
     });
   });
 }

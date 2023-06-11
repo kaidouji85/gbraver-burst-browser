@@ -14,8 +14,8 @@ import {Resources} from "../../resource";
 export type TutorialSelectorProps = {
   /** ルートHTML要素 */
   root: HTMLElement;
-  /** ステージリストの親HTML要素 */
-  stages: HTMLElement;
+  /** チュートリアルステージ */
+  stageElements: TutorialStageElement[];
   /** 戻るボタン */
   prevButton: HTMLElement;
   /** 排他制御 */
@@ -64,7 +64,7 @@ export function createTutorialSelectorProps(
 
   return {
     root,
-    stages: elements.stages,
+    stageElements,
     prevButton: elements.prevButton,
     exclusive: new Exclusive(),
     prev: new Subject(),
