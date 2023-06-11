@@ -1,5 +1,5 @@
-import { waitFinishAnimation } from "../../../dom/animation";
 import { waitElementLoaded } from "../../../wait/wait-element-loaded";
+import {waitFinishAnimation} from "../../../dom/wait-finish-animation";
 
 /**
  * cssクラス名のプレフィックス
