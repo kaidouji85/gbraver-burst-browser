@@ -4,7 +4,6 @@ import {pop} from "../../dom/animation";
 import {domPushStream, PushDOM} from "../../dom/push-dom";
 import {Exclusive} from "../../exclusive/exclusive";
 import type {Resources} from "../../resource";
-import {PathIds} from "../../resource/path";
 import type {SoundResource} from "../../resource/sound";
 import {createEmptySoundResource, SOUND_IDS} from "../../resource/sound";
 import {domUuid} from "../../uuid/dom-uuid";
@@ -14,34 +13,7 @@ import type {TutorialStage, TutorialStageSelect,} from "./tutoria-stage-element"
 import {TutorialStageElement} from "./tutoria-stage-element";
 import {ROOT_CLASS} from "./dom/class-name";
 import {DataIDs} from "./dom/data-ids";
-
-/**
- * ルート要素のinnerHTML
- * @param ids data-idを集めたもの
- * @param resources リソース管理オブジェクト
- * @return innerHTML
- */
-export function rootInnerHTML(ids: DataIDs, resources: Resources): string {
-  const imageCut01 =
-    resources.paths.find((v) => v.id === PathIds.TUTORIAL_IMAGE_CUT_01)?.path ??
-    "";
-  const imageCut02 =
-    resources.paths.find((v) => v.id === PathIds.TUTORIAL_IMAGE_CUT_02)?.path ??
-    "";
-  const imageCut03 =
-    resources.paths.find((v) => v.id === PathIds.TUTORIAL_IMAGE_CUT_03)?.path ??
-    "";
-  return `
-    <div class="${ROOT_CLASS}__title">チュートリアル</div>
-    <div class="${ROOT_CLASS}__image-cuts" data-id="${ids.imageCuts}">
-      <img class="${ROOT_CLASS}__cut-01" src="${imageCut01}">
-      <img class="${ROOT_CLASS}__cut-02" src="${imageCut02}">
-      <img class="${ROOT_CLASS}__cut-03" src="${imageCut03}">
-    </div>
-    <div class="${ROOT_CLASS}__stages" data-id="${ids.stages}"></div>
-    <button class="${ROOT_CLASS}__prev" data-id="${ids.prevButton}">戻る</button>
-  `;
-}
+import {rootInnerHTML} from "./dom/root-inner-html";
 
 /** ルート要素の子孫要素 */
 type Elements = {
