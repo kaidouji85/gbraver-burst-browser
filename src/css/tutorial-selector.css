@@ -26,11 +26,11 @@
 .tutorial-selector__title {
   grid-row: 1;
   grid-column: 2;
-  font-size: calc(var(--responsive-font-size) * 1.3);
+  font-size: calc(var(--responsive-font-size) * 1);
   border-radius: var(--button-border-radius);
   background-color: var(--sub-background-color);
   padding: calc(var(--responsive-font-size) * 0.5)
-    calc(var(--responsive-font-size) * 1.2);
+    calc(var(--responsive-font-size) * 0.7);
   z-index: var(--controllers-z-index);
 }
 
@@ -104,8 +104,13 @@
   z-index: var(--controllers-z-index);
   border-radius: var(--button-border-radius);
   background-color: var(--sub-background-color);
-  padding: calc(var(--responsive-font-size) * 1);
+  padding: calc(var(--responsive-font-size) * 0.5);
   overflow-y: scroll;
+}
+
+.tutorial-selector__stage-separator {
+  border-bottom: dashed 1px var(--font-color);
+  margin-bottom: calc(var(--responsive-font-size) * 0.7) 0;
 }
 
 .tutorial-selector__prev {
