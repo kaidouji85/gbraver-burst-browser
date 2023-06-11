@@ -14,16 +14,7 @@ import {TutorialStageElement} from "./tutoria-stage-element";
 import {ROOT_CLASS} from "./dom/class-name";
 import {rootInnerHTML} from "./dom/root-inner-html";
 import {extractElements} from "./dom/elements";
-
-/**
- * ステージセパレータを生成する
- * @return 生成結果
- */
-function stageSeparator() {
-  const separator = document.createElement("div");
-  separator.className = `${ROOT_CLASS}__stage-separator`;
-  return separator;
-}
+import {stageSeparator} from "./dom/stage-separator";
 
 /** チュートリアルステージセレクト画面 */
 export class TutorialSelector implements DOMScene {
