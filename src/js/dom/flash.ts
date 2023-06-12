@@ -8,7 +8,7 @@ import { waitFinishAnimation } from "./wait-finish-animation";
  */
 export async function flash(
   element: Readonly<HTMLElement>,
-  brightness = 0.5
+  brightness = 1.4
 ): Promise<void> {
   const animation = element.animate(
     [
