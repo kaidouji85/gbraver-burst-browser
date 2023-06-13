@@ -9,5 +9,5 @@ export async function selected(
   props: Readonly<TutorialStageElementProps>
 ): Promise<void> {
   props.pushButton.sound.play();
-  await flash(props.root);
+  await flash(props.overlay);
 }

@@ -7,7 +7,10 @@ import {
   SOUND_IDS,
   SoundResource,
 } from "../../../resource/sound";
+import { domUuid } from "../../../uuid/dom-uuid";
 import { ROOT_CLASS } from "./dom/class-name";
+import { DataIDs } from "./dom/data-ids";
+import { extractElements } from "./dom/elements";
 import { rootInnerHTML } from "./dom/root-inner-html";
 import { TutorialStage } from "./tutorial-stage";
 
@@ -15,6 +18,8 @@ import { TutorialStage } from "./tutorial-stage";
 export type TutorialStageElementProps = {
   /** ルートHTML要素 */
   root: HTMLElement;
+  /** オーバーレイ */
+  overlay: HTMLElement;
   /** プッシュボタン効果音 */
   pushButton: SoundResource;
   /** 選択通知ストリーム */
@@ -33,21 +38,25 @@ export function createTutorialStageElementProps(
   stage: Readonly<TutorialStage>,
   level: Readonly<number>
 ) {
+  const ids: DataIDs = {
+    overlay: domUuid(),
+  };
   const pushButton =
     resources.sounds.find((v) => v.id === SOUND_IDS.PUSH_BUTTON) ??
     createEmptySoundResource();
   const root = document.createElement("div");
   root.className = ROOT_CLASS;
-  root.innerHTML = rootInnerHTML(level, stage.title);
+  root.innerHTML = rootInnerHTML(ids, level, stage.title);
+  const elements = extractElements(root, ids);
   const select = domClickStream(root).pipe(
     map((action) => {
       action.event.preventDefault();
       action.event.stopPropagation();
     })
   );
-
   return {
     root,
+    overlay: elements.overlay,
     pushButton,
     select,
   };
