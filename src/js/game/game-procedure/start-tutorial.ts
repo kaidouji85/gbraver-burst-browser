@@ -24,7 +24,13 @@ export async function startTutorial(
   stage: TutorialStage
 ): Promise<void> {
   const npcBattle = new NPCBattleRoom(stage.player, stage.npc);
-  await props.fader.fadeOut();
+  await Promise.all([
+    props.fader.fadeOut(),
+    (async () => {
+      await props.bgm.do(fadeOut);
+      await props.bgm.do(stop);
+    })(),
+  ]);
   const scene = new TutorialTitle({
     resources: props.resources,
     level,
@@ -56,16 +62,8 @@ export async function startTutorial(
   await waitAnimationFrame();
   const latency = Date.now() - startTutorialStageTime;
   await waitTime(3000 - latency);
-  await Promise.all([
-    (async () => {
-      await props.fader.fadeOut();
-      props.domSceneBinder.hidden();
-    })(),
-    (async () => {
-      await props.bgm.do(fadeOut);
-      await props.bgm.do(stop);
-    })(),
-  ]);
+  await props.fader.fadeOut();
+  props.domSceneBinder.hidden();
   await props.fader.fadeIn();
   await battleScene.start();
 }
