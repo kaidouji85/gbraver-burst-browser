@@ -13,11 +13,9 @@ import { ROOT_CLASS } from "./dom/class-name";
 import { extractElements } from "./dom/elements";
 import { rootInnerHTML } from "./dom/root-inner-html";
 import { stageSeparator } from "./dom/stage-separator";
-import {
-  TutorialStage,
-  TutorialStageElement,
-  TutorialStageSelect,
-} from "./tutoria-stage-element";
+import { TutorialStageElement } from "./tutorial-stage-element";
+import { TutorialStage } from "./tutorial-stage-element/tutorial-stage";
+import { TutorialStageSelect } from "./tutorial-stage-element/tutorial-stage-select";
 
 /** チュートリアルセレクタ画面プロパティ */
 export type TutorialSelectorProps = {
