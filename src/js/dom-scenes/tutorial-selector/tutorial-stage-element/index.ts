@@ -1,14 +1,12 @@
-import { map, Observable } from "rxjs";
+import {map, Observable} from "rxjs";
 
-import { flash } from "../../../dom/flash";
-import { domClickStream } from "../../../dom/push-dom";
-import type { TutorialStageID } from "../../../game/tutorial-stages/tutorial-stage";
-import type { Resources } from "../../../resource";
-import type { SoundResource } from "../../../resource/sound";
-import { createEmptySoundResource, SOUND_IDS } from "../../../resource/sound";
-
-/** ルートHTML class属性 */
-const ROOT_CLASS = "tutorial-stage";
+import {flash} from "../../../dom/flash";
+import {domClickStream} from "../../../dom/push-dom";
+import type {TutorialStageID} from "../../../game/tutorial-stages/tutorial-stage";
+import type {Resources} from "../../../resource";
+import type {SoundResource} from "../../../resource/sound";
+import {createEmptySoundResource, SOUND_IDS} from "../../../resource/sound";
+import {ROOT_CLASS} from "./dom/class-name";
 
 /**
  * ルート要素のinnerHTML
