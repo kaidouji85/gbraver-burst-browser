@@ -7,7 +7,7 @@ import { createTutorialSelectorProps, TutorialSelectorProps } from "./props";
 import type {
   TutorialStage,
   TutorialStageSelect,
-} from "./tutoria-stage-element";
+} from "./tutorial-stage-element";
 
 /** チュートリアルステージセレクト画面 */
 export class TutorialSelector implements DOMScene {

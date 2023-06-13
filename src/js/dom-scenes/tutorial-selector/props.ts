@@ -17,7 +17,7 @@ import {
   TutorialStage,
   TutorialStageElement,
   TutorialStageSelect,
-} from "./tutoria-stage-element";
+} from "./tutorial-stage-element";
 
 /** チュートリアルセレクタ画面プロパティ */
 export type TutorialSelectorProps = {
