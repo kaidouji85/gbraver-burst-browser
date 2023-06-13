@@ -29,7 +29,7 @@ export async function startTutorial(
     (async () => {
       await props.bgm.do(fadeOut);
       await props.bgm.do(stop);
-    })()
+    })(),
   ]);
   const scene = new TutorialTitle({
     resources: props.resources,
