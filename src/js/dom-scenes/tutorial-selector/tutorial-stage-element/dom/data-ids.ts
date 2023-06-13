@@ -1,5 +1,5 @@
 /** data-idをあつめたもの */
-export type DataIds = {
+export type DataIDs = {
   /** オーバーレイ */
   overlay: string;
 };
