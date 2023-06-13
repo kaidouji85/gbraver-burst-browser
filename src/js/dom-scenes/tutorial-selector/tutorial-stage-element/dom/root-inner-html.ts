@@ -10,5 +10,6 @@ export function rootInnerHTML(level: number, title: string): string {
   return `
     <div class="${ROOT_CLASS}__prefix">${level}</div>
     <div class="${ROOT_CLASS}__title">${title}</div>
+    <div class="${ROOT_CLASS}__overlay"></div>
   `;
 }
