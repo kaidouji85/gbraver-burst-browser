@@ -8,15 +8,7 @@ import type {SoundResource} from "../../../resource/sound";
 import {createEmptySoundResource, SOUND_IDS} from "../../../resource/sound";
 import {ROOT_CLASS} from "./dom/class-name";
 import {rootInnerHTML} from "./dom/root-inner-html";
-
-/** チュートリアルステージ情報 */
-export type TutorialStage = {
-  /** チュートリアルステージID */
-  id: TutorialStageID;
-
-  /** チュートリアルステージタイトル */
-  title: string;
-};
+import {TutorialStage} from "./tutorial-stage";
 
 /** チュートリアルステージ選択情報 */
 export type TutorialStageSelect = {

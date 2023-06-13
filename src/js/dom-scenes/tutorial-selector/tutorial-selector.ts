@@ -5,9 +5,9 @@ import type { DOMScene } from "../dom-scene";
 import { bindEventListeners } from "./listeners/bind-event-listeners";
 import { createTutorialSelectorProps, TutorialSelectorProps } from "./props";
 import type {
-  TutorialStage,
   TutorialStageSelect,
 } from "./tutorial-stage-element";
+import {TutorialStage} from "./tutorial-stage-element/tutorial-stage";
 
 /** チュートリアルステージセレクト画面 */
 export class TutorialSelector implements DOMScene {
