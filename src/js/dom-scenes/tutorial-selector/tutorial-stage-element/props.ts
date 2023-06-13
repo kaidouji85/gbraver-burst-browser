@@ -1,7 +1,6 @@
 import { map, Observable } from "rxjs";
 
 import { domClickStream } from "../../../dom/push-dom";
-import { TutorialStageID } from "../../../game/tutorial-stages/tutorial-stage";
 import { Resources } from "../../../resource";
 import {
   createEmptySoundResource,
