@@ -1,5 +1,5 @@
-import {TutorialStageElementProps} from "../props";
-import {flash} from "../../../../dom/flash";
+import { flash } from "../../../../dom/flash";
+import { TutorialStageElementProps } from "../props";
 
 /**
  * ステージ選択アニメーション

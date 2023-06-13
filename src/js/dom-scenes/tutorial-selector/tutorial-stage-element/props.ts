@@ -1,11 +1,16 @@
-import {TutorialStageID} from "../../../game/tutorial-stages/tutorial-stage";
-import {createEmptySoundResource, SOUND_IDS, SoundResource} from "../../../resource/sound";
-import {map, Observable} from "rxjs";
-import {Resources} from "../../../resource";
-import {TutorialStage} from "./tutorial-stage";
-import {ROOT_CLASS} from "./dom/class-name";
-import {rootInnerHTML} from "./dom/root-inner-html";
-import {domClickStream} from "../../../dom/push-dom";
+import { map, Observable } from "rxjs";
+
+import { domClickStream } from "../../../dom/push-dom";
+import { TutorialStageID } from "../../../game/tutorial-stages/tutorial-stage";
+import { Resources } from "../../../resource";
+import {
+  createEmptySoundResource,
+  SOUND_IDS,
+  SoundResource,
+} from "../../../resource/sound";
+import { ROOT_CLASS } from "./dom/class-name";
+import { rootInnerHTML } from "./dom/root-inner-html";
+import { TutorialStage } from "./tutorial-stage";
 
 /** チュートリアルステージ HTML要素 プロパティ */
 export type TutorialStageElementProps = {

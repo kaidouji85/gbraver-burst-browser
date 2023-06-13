@@ -1,4 +1,4 @@
-import {ROOT_CLASS} from "./class-name";
+import { ROOT_CLASS } from "./class-name";
 
 /**
  * ルート要素のinnerHTML

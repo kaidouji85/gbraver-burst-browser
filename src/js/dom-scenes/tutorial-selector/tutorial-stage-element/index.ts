@@ -1,10 +1,13 @@
-import {Observable} from "rxjs";
+import { Observable } from "rxjs";
 
-import type {TutorialStageID} from "../../../game/tutorial-stages/tutorial-stage";
-import type {Resources} from "../../../resource";
-import {TutorialStage} from "./tutorial-stage";
-import {createTutorialStageElementProps, TutorialStageElementProps} from "./props";
-import {selected} from "./procedure/selected";
+import type { TutorialStageID } from "../../../game/tutorial-stages/tutorial-stage";
+import type { Resources } from "../../../resource";
+import { selected } from "./procedure/selected";
+import {
+  createTutorialStageElementProps,
+  TutorialStageElementProps,
+} from "./props";
+import { TutorialStage } from "./tutorial-stage";
 
 /** チュートリアルステージ HTML要素 */
 export class TutorialStageElement {
