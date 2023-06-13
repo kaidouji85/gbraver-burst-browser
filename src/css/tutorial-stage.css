@@ -37,7 +37,7 @@
   position: absolute;
   border-radius: var(--button-border-radius);
   background-color: var(--font-color);
-  opacity: 0;
+  filter: opacity(0);
   top: 0;
   left: 0;
   width: 100%;

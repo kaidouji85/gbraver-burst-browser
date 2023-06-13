@@ -46,7 +46,7 @@ export function createTutorialStageElementProps(
     createEmptySoundResource();
   const root = document.createElement("div");
   root.className = ROOT_CLASS;
-  root.innerHTML = rootInnerHTML(level, stage.title);
+  root.innerHTML = rootInnerHTML(ids, level, stage.title);
   const elements = extractElements(root, ids);
   const select = domClickStream(root).pipe(
     map((action) => {

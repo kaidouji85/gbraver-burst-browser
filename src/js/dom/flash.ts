@@ -3,23 +3,23 @@ import { waitFinishAnimation } from "./wait-finish-animation";
 /**
  * 点滅アニメーション
  * @param element アニメーションさせるHTML要素
- * @param brightness 点滅の明るさ
+ * @param maxOpacity 最大透明度
  * @return アニメーション
  */
 export async function flash(
   element: Readonly<HTMLElement>,
-  brightness = 1.4
+  maxOpacity = 0.3
 ): Promise<void> {
   const animation = element.animate(
     [
       {
-        filter: "brightness(1)",
+        filter: "opacity(0)",
       },
       {
-        filter: `brightness(${brightness})`,
+        filter: `opacity(${maxOpacity})`,
       },
       {
-        filter: "brightness(1)",
+        filter: "opacity(0)",
       },
     ],
     {
