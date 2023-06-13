@@ -1,10 +1,10 @@
 import {Observable} from "rxjs";
 
-import {flash} from "../../../dom/flash";
 import type {TutorialStageID} from "../../../game/tutorial-stages/tutorial-stage";
 import type {Resources} from "../../../resource";
 import {TutorialStage} from "./tutorial-stage";
 import {createTutorialStageElementProps, TutorialStageElementProps} from "./props";
+import {selected} from "./procedure/selected";
 
 /** チュートリアルステージ HTML要素 */
 export class TutorialStageElement {
@@ -17,7 +17,6 @@ export class TutorialStageElement {
 
   /**
    * コンストラクタ
-   *
    * @param resources リソース管理オブジェクト
    * @param stage ステージ情報
    * @param level ステージレベル
@@ -30,7 +29,6 @@ export class TutorialStageElement {
 
   /**
    * ルートHTML要素を取得する
-   *
    * @return ルートHTML要素
    */
   getRootHTMLElement(): HTMLElement {
@@ -39,7 +37,6 @@ export class TutorialStageElement {
 
   /**
    * ステージ選択通知
-   *
    * @return 通知ストリーム
    */
   notifyStageSelection(): Observable<void> {
@@ -48,11 +45,9 @@ export class TutorialStageElement {
 
   /**
    * ステージ選択アニメーション
-   *
    * @return アニメーションが完了したら発火するPromise
    */
   async selected(): Promise<void> {
-    this.#props.pushButton.sound.play();
-    await flash(this.#props.root);
+    await selected(this.#props);
   }
 }
