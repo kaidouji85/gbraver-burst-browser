@@ -57,7 +57,13 @@ export async function startOnlineBattle(
   caption: string
 ): Promise<void> {
   props.suddenlyBattleEnd.bind(battle);
-  await props.fader.fadeOut();
+  await Promise.all([
+    props.fader.fadeOut(),
+    (async () => {
+      await props.bgm.do(fadeOut);
+      await props.bgm.do(stop);
+    })(),
+  ]);
   props.domDialogBinder.hidden();
   const scene = new MatchCard({
     resources: props.resources,
@@ -88,16 +94,8 @@ export async function startOnlineBattle(
   });
   props.tdBinder.bind(battleScene, battleSceneConnector);
   await waitAnimationFrame();
-  await Promise.all([
-    (async () => {
-      await props.fader.fadeOut();
-      props.domSceneBinder.hidden();
-    })(),
-    (async () => {
-      await props.bgm.do(fadeOut);
-      await props.bgm.do(stop);
-    })(),
-  ]);
+  await props.fader.fadeOut();
+  props.domSceneBinder.hidden();
   await props.fader.fadeIn();
   await battleScene.start();
 }
