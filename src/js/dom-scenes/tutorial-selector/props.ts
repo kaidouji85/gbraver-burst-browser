@@ -15,9 +15,10 @@ import { rootInnerHTML } from "./dom/root-inner-html";
 import { stageSeparator } from "./dom/stage-separator";
 import {
   TutorialStageElement,
-  TutorialStageSelect,
+
 } from "./tutorial-stage-element";
 import {TutorialStage} from "./tutorial-stage-element/tutorial-stage";
+import {TutorialStageSelect} from "./tutorial-stage-element/tutorial-stage-select";
 
 /** チュートリアルセレクタ画面プロパティ */
 export type TutorialSelectorProps = {

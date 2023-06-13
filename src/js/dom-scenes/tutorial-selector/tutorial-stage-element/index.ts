@@ -10,15 +10,6 @@ import {ROOT_CLASS} from "./dom/class-name";
 import {rootInnerHTML} from "./dom/root-inner-html";
 import {TutorialStage} from "./tutorial-stage";
 
-/** チュートリアルステージ選択情報 */
-export type TutorialStageSelect = {
-  /** チュートリアルステージID */
-  id: TutorialStageID;
-
-  /** ステージレベル */
-  level: number;
-};
-
 /** チュートリアルステージ HTML要素 */
 export class TutorialStageElement {
   /** ステージID */
