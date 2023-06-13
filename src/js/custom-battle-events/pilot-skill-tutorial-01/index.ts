@@ -1,5 +1,6 @@
 import { Animate } from "../../animation/animate";
 import {
+  BatteryCommandSelected, CommandCanceled,
   CustomBattleEvent,
   CustomStateAnimation,
   LastState,
@@ -10,6 +11,7 @@ import { afterStateAnimation } from "./listeners/after-state-animation";
 import { beforeLastState as beforeLastState } from "./listeners/before-last-state";
 import { onStateAnimation } from "./listeners/on-state-animation";
 import { PilotSkillTutorial01State } from "./state";
+import { onBatteryCommandSelected } from "./listeners/on-battery-command-selected";
 
 /** パイロットスキルチュートリアル（前半） */
 class PilotSkillTutorial01 extends EmptyCustomBattleEvent {
@@ -45,6 +47,13 @@ class PilotSkillTutorial01 extends EmptyCustomBattleEvent {
   /** @override */
   async afterLastState(props: LastState): Promise<void> {
     this.#state = await afterLastState(props, this.#state);
+  }
+
+  /** @override */
+  async onBatteryCommandSelected(props: BatteryCommandSelected): Promise<CommandCanceled> {
+    const { cancel, state } = await onBatteryCommandSelected(props, this.#state);
+    this.#state = state;
+    return cancel;
   }
 }
 
