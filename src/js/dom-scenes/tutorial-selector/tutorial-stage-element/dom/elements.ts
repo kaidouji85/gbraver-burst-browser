@@ -1,4 +1,4 @@
-import {DataIDs} from "./data-ids";
+import { DataIDs } from "./data-ids";
 
 /** ルート要素の子孫要素 */
 export type Elements = {
@@ -13,8 +13,10 @@ export type Elements = {
  * @return 抽出結果
  */
 export function extractElements(root: HTMLElement, ids: DataIDs): Elements {
-  const overlay: HTMLElement = root.querySelector(`[data-id="${(ids.overlay)}"]`) ?? document.createElement("div");
+  const overlay: HTMLElement =
+    root.querySelector(`[data-id="${ids.overlay}"]`) ??
+    document.createElement("div");
   return {
-    overlay
+    overlay,
   };
 }

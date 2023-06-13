@@ -7,12 +7,12 @@ import {
   SOUND_IDS,
   SoundResource,
 } from "../../../resource/sound";
+import { domUuid } from "../../../uuid/dom-uuid";
 import { ROOT_CLASS } from "./dom/class-name";
+import { DataIDs } from "./dom/data-ids";
+import { extractElements } from "./dom/elements";
 import { rootInnerHTML } from "./dom/root-inner-html";
 import { TutorialStage } from "./tutorial-stage";
-import {extractElements} from "./dom/elements";
-import {DataIDs} from "./dom/data-ids";
-import {domUuid} from "../../../uuid/dom-uuid";
 
 /** チュートリアルステージ HTML要素 プロパティ */
 export type TutorialStageElementProps = {

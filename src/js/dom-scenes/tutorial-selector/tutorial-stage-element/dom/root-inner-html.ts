@@ -1,5 +1,5 @@
 import { ROOT_CLASS } from "./class-name";
-import {DataIDs} from "./data-ids";
+import { DataIDs } from "./data-ids";
 
 /**
  * ルート要素のinnerHTML
@@ -7,7 +7,11 @@ import {DataIDs} from "./data-ids";
  * @param title ステージタイトル
  * @return innerHTML
  */
-export function rootInnerHTML(ids: DataIDs, level: number, title: string): string {
+export function rootInnerHTML(
+  ids: DataIDs,
+  level: number,
+  title: string
+): string {
   return `
     <div class="${ROOT_CLASS}__prefix">${level}</div>
     <div class="${ROOT_CLASS}__title">${title}</div>
