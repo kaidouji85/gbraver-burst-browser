@@ -9,10 +9,6 @@ import {domClickStream} from "../../../dom/push-dom";
 
 /** チュートリアルステージ HTML要素 プロパティ */
 export type TutorialStageElementProps = {
-  /** ステージID */
-  readonly id: TutorialStageID;
-  /** ステージレベル */
-  readonly level: number;
   /** ルートHTML要素 */
   root: HTMLElement;
   /** プッシュボタン効果音 */
@@ -47,8 +43,6 @@ export function createTutorialStageElementProps(
   );
 
   return {
-    id: stage.id,
-    level,
     root,
     pushButton,
     select,

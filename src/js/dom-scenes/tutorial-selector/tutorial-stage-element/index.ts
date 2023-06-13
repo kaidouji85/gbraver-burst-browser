@@ -1,31 +1,19 @@
-import {map, Observable} from "rxjs";
+import {Observable} from "rxjs";
 
 import {flash} from "../../../dom/flash";
-import {domClickStream} from "../../../dom/push-dom";
 import type {TutorialStageID} from "../../../game/tutorial-stages/tutorial-stage";
 import type {Resources} from "../../../resource";
-import type {SoundResource} from "../../../resource/sound";
-import {createEmptySoundResource, SOUND_IDS} from "../../../resource/sound";
-import {ROOT_CLASS} from "./dom/class-name";
-import {rootInnerHTML} from "./dom/root-inner-html";
 import {TutorialStage} from "./tutorial-stage";
+import {createTutorialStageElementProps, TutorialStageElementProps} from "./props";
 
 /** チュートリアルステージ HTML要素 */
 export class TutorialStageElement {
   /** ステージID */
   readonly id: TutorialStageID;
-
   /** ステージレベル */
   readonly level: number;
-
-  /** ルートHTML要素 */
-  #root: HTMLElement;
-
-  /** プッシュボタン効果音 */
-  #pushButton: SoundResource;
-
-  /** 選択通知ストリーム */
-  #select: Observable<void>;
+  /** プロパティ */
+  #props: TutorialStageElementProps;
 
   /**
    * コンストラクタ
@@ -37,18 +25,7 @@ export class TutorialStageElement {
   constructor(resources: Resources, stage: TutorialStage, level: number) {
     this.id = stage.id;
     this.level = level;
-    this.#pushButton =
-      resources.sounds.find((v) => v.id === SOUND_IDS.PUSH_BUTTON) ??
-      createEmptySoundResource();
-    this.#root = document.createElement("div");
-    this.#root.className = ROOT_CLASS;
-    this.#root.innerHTML = rootInnerHTML(level, stage.title);
-    this.#select = domClickStream(this.#root).pipe(
-      map((action) => {
-        action.event.preventDefault();
-        action.event.stopPropagation();
-      })
-    );
+    this.#props = createTutorialStageElementProps(resources, stage, level);
   }
 
   /**
@@ -57,7 +34,7 @@ export class TutorialStageElement {
    * @return ルートHTML要素
    */
   getRootHTMLElement(): HTMLElement {
-    return this.#root;
+    return this.#props.root;
   }
 
   /**
@@ -66,7 +43,7 @@ export class TutorialStageElement {
    * @return 通知ストリーム
    */
   notifyStageSelection(): Observable<void> {
-    return this.#select;
+    return this.#props.select;
   }
 
   /**
@@ -75,7 +52,7 @@ export class TutorialStageElement {
    * @return アニメーションが完了したら発火するPromise
    */
   async selected(): Promise<void> {
-    this.#pushButton.sound.play();
-    await flash(this.#root);
+    this.#props.pushButton.sound.play();
+    await flash(this.#props.root);
   }
 }
