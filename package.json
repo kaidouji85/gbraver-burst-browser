@@ -100,7 +100,7 @@
     "generate-icons": "ts-node generate-icons.ts",
     "lint": "run-s lint:src lint:storybook lint:test lint:css lint:helper-ts",
     "lint-fix": "run-s lint-fix:src lint-fix:storybook lint-fix:test lint-fix:css lint-fix:helper-ts",
-    "lint-fix:css": "stylelint --fix  --max-warnings 0 src/css/**/*.css",
+    "lint-fix:css": "stylelint --fix --max-warnings 0 src/css/**/*.css",
     "lint-fix:helper-ts": "eslint --fix --max-warnings 0 *.ts",
     "lint-fix:src": "eslint --fix --max-warnings 0 src/js",
     "lint-fix:storybook": "eslint --fix --max-warnings 0 stories",
