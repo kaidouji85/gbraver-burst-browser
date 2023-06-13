@@ -1,8 +1,11 @@
-import {BatteryCommandSelected, CommandCanceled} from "../../../td-scenes/battle/custom-battle-event";
-import {turnCount} from "../../turn-count";
-import {noZeroDefense} from "../stories/no-zero-defense";
-import {invisibleAllMessageWindows} from "../../invisible-all-message-windows";
-import {PilotSkillTutorial01State} from "../state";
+import {
+  BatteryCommandSelected,
+  CommandCanceled,
+} from "../../../td-scenes/battle/custom-battle-event";
+import { invisibleAllMessageWindows } from "../../invisible-all-message-windows";
+import { turnCount } from "../../turn-count";
+import { PilotSkillTutorial01State } from "../state";
+import { noZeroDefense } from "../stories/no-zero-defense";
 
 /** イベント終了情報 */
 type Ret = {
@@ -30,7 +33,7 @@ export async function onBatteryCommandSelected(
       cancel: {
         isCommandCanceled: true,
       },
-      state
+      state,
     };
   }
 
@@ -38,6 +41,6 @@ export async function onBatteryCommandSelected(
     cancel: {
       isCommandCanceled: false,
     },
-    state
+    state,
   };
 }
