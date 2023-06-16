@@ -82,8 +82,10 @@
   "main": "src/js/index.js",
   "repository": "https://github.com/kaidouji85/study-three-js",
   "scripts": {
-    "build": "run-s webpack generate-icons scale-down-mobile-images webpack:sw webpack:clear-sw",
-    "build:production": "run-s webpack:production generate-icons scale-down-mobile-images webpack:sw webpack:clear-sw",
+    "build": "run-s build:production build:sw build:clear-sw build:storybook-static",
+    "build:clear-sw": "webpack --config webpack.clear.sw.js",
+    "build:production": "webpack --mode=production",
+    "build:sw": "webpack --config webpack.sw.js",
     "build:storybook-static": "storybook build -o build/storybook-static",
     "clean": "rimraf build",
     "code-analysis": "codehawk src/js",
@@ -118,10 +120,6 @@
     "start:storybook": "storybook dev -p 6006",
     "start:storybook-static": "run-s build:storybook-static serve:storybook-static",
     "test": "jest",
-    "type-check": "tsc --noEmit",
-    "webpack": "webpack",
-    "webpack:clear-sw": "webpack --config webpack.clear.sw.js",
-    "webpack:production": "webpack --mode=production",
-    "webpack:sw": "webpack --config webpack.sw.js"
+    "type-check": "tsc --noEmit"
   }
 }
