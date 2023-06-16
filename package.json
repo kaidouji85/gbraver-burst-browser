@@ -87,6 +87,7 @@
     "build:production": "webpack --mode=production",
     "build:storybook": "storybook build -o build/storybook",
     "build:sw": "webpack --config webpack.sw.js",
+    "build-for-deployment": "run-p build:production build:sw build:clear-sw",
     "clean": "rimraf build",
     "code-analysis": "codehawk src/js",
     "code-format": "run-s code-format:src code-format:test code-format:storybook code-format:css code-format:helper-ts",
