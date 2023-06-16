@@ -91,24 +91,15 @@ npm start
 
 ```shell script
 cd <本リポジトリをcloneした場所>
-npm run start:storybook
+npm run start-storybook
 # ブラウザからlocalhost:6006を開く
 ```
 
 ## その他コード解析
 本プロジェクトは、以下ツールでコード解析が可能です。
 以下ツールはpackage.jsonには含まれていないので、何らかの方法で作業端末にインストールしてください。
-
-* [madge](https://github.com/pahen/madge)
+* 
 * [fixpad](https://www.npmjs.com/package/fixpack#configuration)
-
-### madge
-```shell
-# コードの循環参照がないかを確認する
-madge -c src
-madge -c test
-madge -c stories
-```
 
 ### fixpad
 ```shell
