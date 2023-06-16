@@ -42,6 +42,8 @@ npm start
 ```
 
 ## CodeBuild設定
+ビルド環境は[aws/codebuild/standard:7.0](https://github.com/aws/aws-codebuild-docker-images/tree/master/ubuntu/standard/7.0)を利用してください。
+
 ### 開発環境設定
 
 * [GブレイバーバーストAPIサーバ](https://github.com/kaidouji85/gbraver-burst-network)の開発環境をデプロイする
