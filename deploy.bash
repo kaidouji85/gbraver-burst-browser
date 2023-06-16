@@ -12,6 +12,10 @@ DISTRIBUTION_ID=$2
 ASSETLINKS_JSON_URI=$3
 
 npm run build:production
+npm run generate-icons
+npm run scale-down-mobile-images
+npm run build:sw
+npm run build:clear-sw
 aws s3 cp "${ASSETLINKS_JSON_URI}" ./build/production/.well-known/assetlinks.json
 ./upload-module.bash "${S3_BUCKET}"
 ./clear-cdn.bash "${DISTRIBUTION_ID}"
