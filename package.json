@@ -83,6 +83,7 @@
   "repository": "https://github.com/kaidouji85/study-three-js",
   "scripts": {
     "build": "run-s build:production build:sw build:clear-sw build:storybook",
+    "build-for-deployment": "run-p build:production build:sw build:clear-sw",
     "build:clear-sw": "webpack --config webpack.clear.sw.js",
     "build:production": "webpack --mode=production",
     "build:storybook": "storybook build -o build/storybook",
