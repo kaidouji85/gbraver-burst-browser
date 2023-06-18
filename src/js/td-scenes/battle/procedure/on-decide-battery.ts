@@ -1,11 +1,10 @@
 import { BatteryCommand } from "gbraver-burst-core";
 
-import { all } from "../../../animation/all";
-import { delay } from "../../../animation/delay";
 import type { DecideBattery } from "../actions/decide-battery";
+import { decisionByBatterySelector } from "../animation/decision-by-battery-selector";
 import { animationPlayer } from "../animation-player";
 import type { BattleSceneProps } from "../battle-scene-props";
-import { doBatteryEventOrNot } from "./do-battery-event-or-not";
+import { doBatteryEventIfNeeded } from "./do-battery-event-if-needed";
 import { progressGame } from "./progress-game";
 
 /**
@@ -26,7 +25,7 @@ export function onDecideBattery(
       battery: action.battery,
     };
 
-    const { isCommandCanceled } = await doBatteryEventOrNot(
+    const { isCommandCanceled } = await doBatteryEventIfNeeded(
       props,
       batteryCommand
     );
@@ -34,16 +33,7 @@ export function onDecideBattery(
       return;
     }
 
-    await animationPlayer(props).play(
-      all(
-        props.view.hud.gameObjects.batterySelector.decide(),
-        props.view.hud.gameObjects.burstButton.close(),
-        props.view.hud.gameObjects.pilotButton.close(),
-        props.view.hud.gameObjects.timeScaleButton.close()
-      )
-        .chain(delay(500))
-        .chain(props.view.hud.gameObjects.batterySelector.close())
-    );
+    await animationPlayer(props).play(decisionByBatterySelector(props.view));
     await progressGame(props, batteryCommand);
   });
 }

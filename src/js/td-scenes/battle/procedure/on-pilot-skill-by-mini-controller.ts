@@ -1,8 +1,10 @@
 import { PilotSkillCommand } from "gbraver-burst-core";
 
-import { decideMiniController } from "../animation/decide-mini-controller";
+import { decisionByMiniController } from "../animation/decision-by-mini-controller";
+import { decisionByPilotButton } from "../animation/decision-by-pilot-button";
+import { animationPlayer } from "../animation-player";
 import { BattleSceneProps } from "../battle-scene-props";
-import { doPilotSkillEventOrNot } from "./do-pilot-skill-event-or-not";
+import { doPilotSkillEventIfNeeded } from "./do-pilot-skill-event-if-needed";
 import { progressGame } from "./progress-game";
 
 /**
@@ -18,7 +20,7 @@ export function onPilotSkillByMiniController(
     const pilotSkillCommand: PilotSkillCommand = {
       type: "PILOT_SKILL_COMMAND",
     };
-    const { isCommandCanceled } = await doPilotSkillEventOrNot(
+    const { isCommandCanceled } = await doPilotSkillEventIfNeeded(
       props,
       pilotSkillCommand
     );
@@ -26,7 +28,13 @@ export function onPilotSkillByMiniController(
       return;
     }
 
-    await decideMiniController(props.view).play();
+    // display: noneでもミニコントローラのaccesskeyは有効なので、
+    // コントローラーが「おおきいボタン」の場合でも、本関数は呼ばれうる
+    const decisionAnimation =
+      props.controllerType === "BigButton"
+        ? decisionByPilotButton(props.view)
+        : decisionByMiniController(props.view);
+    await animationPlayer(props).play(decisionAnimation);
     await progressGame(props, pilotSkillCommand);
   });
 }

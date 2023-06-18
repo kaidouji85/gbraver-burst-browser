@@ -9,12 +9,11 @@ import { zeroBatteryChance } from "../stories/zero-battery-chance";
 
 /**
  * 条件を満たした場合、ダメージレースストーリーを再生する
- *
  * @param props イベントプロパティ
  * @param state ステート
  * @return ステート更新結果
  */
-async function doDamageRaceOrNothing(
+async function executeDamageRaceIfNeeded(
   props: Readonly<LastState>,
   state: ZeroDefenseTutorialState
 ): Promise<ZeroDefenseTutorialState> {
@@ -48,7 +47,7 @@ async function doDamageRaceOrNothing(
  * @param state ステート
  * @return ステート更新結果
  */
-async function doZeroBatteryChangeOrNothing(
+async function executeZeroBatteryChanceIfNeeded(
   props: Readonly<LastState>,
   state: ZeroDefenseTutorialState
 ): Promise<ZeroDefenseTutorialState> {
@@ -99,6 +98,6 @@ export async function beforeLastState(
     return state;
   }
 
-  const updatedByDamageRace = await doDamageRaceOrNothing(props, state);
-  return await doZeroBatteryChangeOrNothing(props, updatedByDamageRace);
+  const updatedByDamageRace = await executeDamageRaceIfNeeded(props, state);
+  return await executeZeroBatteryChanceIfNeeded(props, updatedByDamageRace);
 }

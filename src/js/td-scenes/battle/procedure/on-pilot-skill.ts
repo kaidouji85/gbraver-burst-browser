@@ -1,11 +1,10 @@
 import { PilotSkillCommand } from "gbraver-burst-core";
 
-import { all } from "../../../animation/all";
-import { delay } from "../../../animation/delay";
 import type { DoPilotSkill } from "../actions/do-pilot-skill";
+import { decisionByPilotButton } from "../animation/decision-by-pilot-button";
 import { animationPlayer } from "../animation-player";
 import type { BattleSceneProps } from "../battle-scene-props";
-import { doPilotSkillEventOrNot } from "./do-pilot-skill-event-or-not";
+import { doPilotSkillEventIfNeeded } from "./do-pilot-skill-event-if-needed";
 import { progressGame } from "./progress-game";
 
 /**
@@ -24,7 +23,7 @@ export function onPilotSkill(
     const pilotSkillCommand: PilotSkillCommand = {
       type: "PILOT_SKILL_COMMAND",
     };
-    const { isCommandCanceled } = await doPilotSkillEventOrNot(
+    const { isCommandCanceled } = await doPilotSkillEventIfNeeded(
       props,
       pilotSkillCommand
     );
@@ -32,16 +31,7 @@ export function onPilotSkill(
       return;
     }
 
-    await animationPlayer(props).play(
-      all(
-        props.view.hud.gameObjects.pilotButton.decide(),
-        props.view.hud.gameObjects.burstButton.close(),
-        props.view.hud.gameObjects.batterySelector.close(),
-        props.view.hud.gameObjects.timeScaleButton.close()
-      )
-        .chain(delay(500))
-        .chain(props.view.hud.gameObjects.pilotButton.close())
-    );
+    await animationPlayer(props).play(decisionByPilotButton(props.view));
     await progressGame(props, pilotSkillCommand);
   });
 }

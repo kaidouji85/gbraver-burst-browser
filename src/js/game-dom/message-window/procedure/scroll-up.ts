@@ -1,4 +1,4 @@
-import { waitFinishAnimation } from "../../../dom/animation";
+import { waitFinishAnimation } from "../../../dom/wait-finish-animation";
 import { MessageWindowProps } from "../props";
 
 /**

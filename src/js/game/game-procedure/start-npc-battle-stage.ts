@@ -27,7 +27,13 @@ export async function startNPCBattleStage(
   level: number
 ) {
   const npcBattle = new NPCBattleRoom(player, stage.npc);
-  await props.fader.fadeOut();
+  await Promise.all([
+    props.fader.fadeOut(),
+    (async () => {
+      await props.bgm.do(fadeOut);
+      await props.bgm.do(stop);
+    })(),
+  ]);
   props.domDialogBinder.hidden();
   const scene = new StageTitle({
     resources: props.resources,
@@ -63,16 +69,8 @@ export async function startNPCBattleStage(
   await waitAnimationFrame();
   const latency = Date.now() - startNPCStageTitleTime;
   await waitTime(3000 - latency);
-  await Promise.all([
-    (async () => {
-      await props.fader.fadeOut();
-      props.domSceneBinder.hidden();
-    })(),
-    (async () => {
-      await props.bgm.do(fadeOut);
-      await props.bgm.do(stop);
-    })(),
-  ]);
+  await props.fader.fadeOut();
+  props.domSceneBinder.hidden();
   await props.fader.fadeIn();
   await battleScene.start();
 }

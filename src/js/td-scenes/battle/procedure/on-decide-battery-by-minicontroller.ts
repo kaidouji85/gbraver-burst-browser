@@ -1,9 +1,11 @@
 import { BatteryCommand } from "gbraver-burst-core";
 
 import { DecideBatteryByMiniController } from "../actions/decide-battery-by-mini-controller";
-import { decideMiniController } from "../animation/decide-mini-controller";
+import { decisionByBatterySelector } from "../animation/decision-by-battery-selector";
+import { decisionByMiniController } from "../animation/decision-by-mini-controller";
+import { animationPlayer } from "../animation-player";
 import { BattleSceneProps } from "../battle-scene-props";
-import { doBatteryEventOrNot } from "./do-battery-event-or-not";
+import { doBatteryEventIfNeeded } from "./do-battery-event-if-needed";
 import { progressGame } from "./progress-game";
 
 /**
@@ -21,7 +23,7 @@ export function onDecideBatteryByMiniController(
       type: "BATTERY_COMMAND",
       battery: action.battery,
     };
-    const { isCommandCanceled } = await doBatteryEventOrNot(
+    const { isCommandCanceled } = await doBatteryEventIfNeeded(
       props,
       batteryCommand
     );
@@ -29,7 +31,13 @@ export function onDecideBatteryByMiniController(
       return;
     }
 
-    await decideMiniController(props.view).play();
+    // display: noneでもミニコントローラのaccesskeyは有効なので、
+    // コントローラーが「おおきいボタン」の場合でも、本関数は呼ばれうる
+    const decisionAnimation =
+      props.controllerType === "BigButton"
+        ? decisionByBatterySelector(props.view)
+        : decisionByMiniController(props.view);
+    await animationPlayer(props).play(decisionAnimation);
     await progressGame(props, batteryCommand);
   });
 }

@@ -10,11 +10,11 @@ export const TutorialStages: TutorialStage[] = [
   batterySystemTutorial,
   zeroDefenseTutorial,
   burstTutorial,
+  pilotSkillTutorial01,
+  pilotSkillTutorial02,
 ];
 
 /** 開発中のチュートリアルのステージをあつめたもの */
 export const TutorialStagesInDevelopment: TutorialStage[] = [
   ...TutorialStages,
-  pilotSkillTutorial01,
-  pilotSkillTutorial02,
 ];

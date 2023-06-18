@@ -42,6 +42,8 @@ npm start
 ```
 
 ## CodeBuild設定
+ビルド環境は[aws/codebuild/standard:7.0](https://github.com/aws/aws-codebuild-docker-images/tree/master/ubuntu/standard/7.0)を利用してください。
+
 ### 開発環境設定
 
 * [GブレイバーバーストAPIサーバ](https://github.com/kaidouji85/gbraver-burst-network)の開発環境をデプロイする
@@ -91,24 +93,15 @@ npm start
 
 ```shell script
 cd <本リポジトリをcloneした場所>
-npm run start:storybook
+npm run start-storybook
 # ブラウザからlocalhost:6006を開く
 ```
 
 ## その他コード解析
 本プロジェクトは、以下ツールでコード解析が可能です。
 以下ツールはpackage.jsonには含まれていないので、何らかの方法で作業端末にインストールしてください。
-
-* [madge](https://github.com/pahen/madge)
+* 
 * [fixpad](https://www.npmjs.com/package/fixpack#configuration)
-
-### madge
-```shell
-# コードの循環参照がないかを確認する
-madge -c src
-madge -c test
-madge -c stories
-```
 
 ### fixpad
 ```shell

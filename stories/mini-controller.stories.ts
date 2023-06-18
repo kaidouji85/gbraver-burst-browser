@@ -16,7 +16,7 @@ const miniControllerStory = (config: ButtonConfig) =>
         .chain(delay(200))
         .chain(controller.hidden())
         .chain(delay(2000))
-        .chain(controller.show(config))
+        .chain(controller.show())
         .play();
     controller.batteryPushNotifier().subscribe((battery) => {
       console.log(`battery ${battery}`);
@@ -30,7 +30,8 @@ const miniControllerStory = (config: ButtonConfig) =>
       console.log("pilot");
       decide();
     });
-    controller.show(config).play();
+    controller.engage(config);
+    controller.show().play();
     return controller.getRootHTMLElement();
   });
 
@@ -99,13 +100,14 @@ export const disabledAll = miniControllerStory({
 
 export const showHidden = domStub((resources) => {
   const controller = new MiniController(resources);
+  controller.engage({
+    battery: 5,
+    maxBattery: 5,
+    canBurst: true,
+    canPilotSkill: true,
+  });
   controller
-    .show({
-      battery: 5,
-      maxBattery: 5,
-      canBurst: true,
-      canPilotSkill: true,
-    })
+    .show()
     .chain(delay(2000))
     .chain(controller.decided())
     .chain(delay(200))

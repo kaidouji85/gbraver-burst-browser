@@ -12,22 +12,20 @@ import { DoPilotSkillByMiniController } from "../../actions/do-pilot-skill-by-mi
 export class DOMLayer {
   /** メッセージウインドウ 右 */
   rightMessageWindow: MessageWindow;
-
   /** メッセージウインドウ 左 */
   leftMessageWindow: MessageWindow;
-
   /** メッセージウインドウ バッテリーセレクタ隣 */
   nearBatterySelectorMessageWindow: MessageWindow;
-
   /** メッセージウインドウ バーストボタン隣 */
   nearBurstButtonMessageWindow: MessageWindow;
-
   /** メッセージウインドウ パイロットボタン隣 */
   nearPilotButtonMessageWindow: MessageWindow;
-
+  /** 叫びメッセージウインドウ プレイヤー */
+  playerCryMessageWindow: MessageWindow;
+  /** 叫びメッセージウインドウ 敵 */
+  enemyCryMessageWindow: MessageWindow;
   /** ミニコントローラー */
   miniController: MiniController;
-
   /** 戦闘シーンアクション */
   #battleAction: Observable<BattleSceneAction>;
 
@@ -39,39 +37,53 @@ export class DOMLayer {
   constructor(resources: Resources) {
     this.rightMessageWindow = new MessageWindow({
       resources,
-      position: "Right",
+      type: "Right",
       facePosition: "Right",
       faceOrientation: "Left",
     });
     this.rightMessageWindow.visible(false);
     this.leftMessageWindow = new MessageWindow({
       resources,
-      position: "Left",
+      type: "Left",
       facePosition: "Left",
       faceOrientation: "Right",
     });
     this.leftMessageWindow.visible(false);
     this.nearBatterySelectorMessageWindow = new MessageWindow({
       resources,
-      position: "NearBatterySelector",
+      type: "NearBatterySelector",
       facePosition: "Left",
       faceOrientation: "Right",
     });
     this.nearBatterySelectorMessageWindow.visible(false);
     this.nearBurstButtonMessageWindow = new MessageWindow({
       resources,
-      position: "NearBurstButton",
+      type: "NearBurstButton",
       facePosition: "Right",
       faceOrientation: "Left",
     });
     this.nearBurstButtonMessageWindow.visible(false);
     this.nearPilotButtonMessageWindow = new MessageWindow({
       resources,
-      position: "NearPilotButton",
+      type: "NearPilotButton",
       facePosition: "Right",
       faceOrientation: "Left",
     });
     this.nearPilotButtonMessageWindow.visible(false);
+    this.playerCryMessageWindow = new MessageWindow({
+      resources,
+      type: "PlayerCry",
+      faceOrientation: "Left",
+      facePosition: "Right",
+    });
+    this.playerCryMessageWindow.visible(false);
+    this.enemyCryMessageWindow = new MessageWindow({
+      resources,
+      type: "EnemyCry",
+      faceOrientation: "Right",
+      facePosition: "Left",
+    });
+    this.enemyCryMessageWindow.visible(false);
     this.miniController = new MiniController(resources);
     this.#battleAction = merge(
       this.miniController.batteryPushNotifier().pipe(
@@ -126,6 +138,8 @@ export class DOMLayer {
       this.nearBatterySelectorMessageWindow.getRootHTMLElement(),
       this.nearBurstButtonMessageWindow.getRootHTMLElement(),
       this.nearPilotButtonMessageWindow.getRootHTMLElement(),
+      this.playerCryMessageWindow.getRootHTMLElement(),
+      this.enemyCryMessageWindow.getRootHTMLElement(),
       this.miniController.getRootHTMLElement(),
     ];
   }

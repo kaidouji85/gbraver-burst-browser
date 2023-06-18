@@ -1,4 +1,4 @@
-import { TutorialSelector } from "../src/js/dom-scenes/tutorial-selector/tutorial-selector";
+import { TutorialSelector } from "../src/js/dom-scenes/tutorial-selector";
 import type { DOMStubStory } from "./stub/dom-stub";
 import { domStub } from "./stub/dom-stub";
 export default {

@@ -1,21 +1,18 @@
 import { Animate } from "../../../animation/animate";
 import { empty } from "../../../animation/delay";
 import { CustomStateAnimation } from "../../../td-scenes/battle/custom-battle-event";
-import { turnCount } from "../../turn-count";
 import { tsubasaVictoryDeclaration } from "../animation/tsubasa-victory-declaration";
+import { isPilotSkillActivatedByTsubasa } from "./is-pilot-skill-activated-by-tsubasa";
 
 /**
  * カスタムステートアニメーション
  * @param props イベントプロパティ
  * @return アニメーション
  */
-export function onStateAnimation(props: CustomStateAnimation): Animate {
-  const turn = turnCount(props.stateHistory);
-  if (
-    turn === 3 &&
-    props.currentState.effect.name === "BatteryDeclaration" &&
-    props.currentState.effect.attacker !== props.playerId
-  ) {
+export function onStateAnimation(
+  props: Readonly<CustomStateAnimation>
+): Animate {
+  if (isPilotSkillActivatedByTsubasa(props)) {
     return tsubasaVictoryDeclaration(props);
   }
 
