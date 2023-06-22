@@ -24,7 +24,7 @@ export type Battle = {
   type: "Battle";
 };
 
-/** プライベートマッチ（ゲスト）サブフロー */
+/** プライベートマッチ（ゲスト）のサブフロー */
 export type PrivateMatchGuestSubFlow = PlayerSelect | Entry | Waiting | Battle;
 
 /**
@@ -34,7 +34,7 @@ export type PrivateMatchGuestSubFlow = PlayerSelect | Entry | Waiting | Battle;
 export type PrivateMatchGuestX<X extends PrivateMatchGuestSubFlow> = {
   type: "PrivateMatchGuest";
   /** サブフロー */
-  subFlow: X;
+  privateMatchGuest: X;
 };
 
 /** プライベートマッチ（ゲスト） */

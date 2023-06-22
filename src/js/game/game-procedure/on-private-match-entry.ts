@@ -18,7 +18,7 @@ export async function onPrivateMatchEntry(
   if (
     !(
       props.inProgress.type === "PrivateMatchGuest" &&
-      props.inProgress.subFlow.type === "Entry"
+      props.inProgress.privateMatchGuest.type === "Entry"
     )
   ) {
     return;
@@ -29,7 +29,7 @@ export async function onPrivateMatchEntry(
     matchingDialogConnector
   );
   await props.api.disconnectWebsocket();
-  const { armdozerId, pilotId } = props.inProgress.subFlow;
+  const { armdozerId, pilotId } = props.inProgress.privateMatchGuest;
   const battle = await props.api.enterPrivateMatchRoom(
     action.roomID,
     armdozerId,
@@ -43,6 +43,6 @@ export async function onPrivateMatchEntry(
     return;
   }
 
-  props.inProgress.subFlow = { type: "Battle" };
+  props.inProgress.privateMatchGuest = { type: "Battle" };
   await startOnlineBattle(props, battle, "PRIVATE MATCH");
 }

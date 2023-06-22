@@ -43,7 +43,7 @@ export async function onSelectionComplete(
     props.inProgress.subFlow = { type: "Battle" };
     await startOnlineBattle(props, battle, "PRIVATE MATCH");
   } else if (props.inProgress.type === "PrivateMatchGuest") {
-    props.inProgress.subFlow = {
+    props.inProgress.privateMatchGuest = {
       type: "Entry",
       armdozerId: action.armdozerId,
       pilotId: action.pilotId,

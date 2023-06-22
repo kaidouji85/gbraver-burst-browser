@@ -20,7 +20,7 @@ export async function onPrivateMatchGuestStart(
 
   props.inProgress = {
     type: "PrivateMatchGuest",
-    subFlow: {
+    privateMatchGuest: {
       type: "PlayerSelect",
     },
   };
