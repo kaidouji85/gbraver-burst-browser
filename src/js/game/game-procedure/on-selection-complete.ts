@@ -37,10 +37,10 @@ export async function onSelectionComplete(
     props.inProgress.casualMatch = { type: "Battle" };
     await startOnlineBattle(props, battle, "CASUAL MATCH");
   } else if (props.inProgress.type === "PrivateMatchHost") {
-    props.inProgress.subFlow = { type: "Waiting" };
+    props.inProgress.privateMatchHost = { type: "Waiting" };
     await props.api.disconnectWebsocket();
     const battle = await waitUntilPrivateMatchingAsHost(props, action);
-    props.inProgress.subFlow = { type: "Battle" };
+    props.inProgress.privateMatchHost = { type: "Battle" };
     await startOnlineBattle(props, battle, "PRIVATE MATCH");
   } else if (props.inProgress.type === "PrivateMatchGuest") {
     props.inProgress.privateMatchGuest = {
