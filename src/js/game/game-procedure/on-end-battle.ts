@@ -3,7 +3,6 @@ import { GameOver } from "gbraver-burst-core";
 import { parseBrowserConfig } from "../config/parser/browser-config";
 import { PostBattleButtonConfig } from "../dom-floaters/post-battle/post-battle-button-config";
 import {
-  PostNetworkBattleButtons,
   PostTutorialLoseButtons,
   PostTutorialWinButtons,
 } from "../dom-floaters/post-battle/post-battle-buttons";
@@ -11,6 +10,7 @@ import { EndBattle } from "../game-actions/end-battle";
 import type { GameProps } from "../game-props";
 import { PlayingTutorialStage } from "../in-progress/tutorial";
 import { executePostNPCBattleIfNeeded } from "./execute-post-npc-baattle-if-needed";
+import { executePostNetBattleIfNeeded } from "./execute-post-net-battle-if-needed";
 
 /**
  * 戦闘画面のアニメーションタイムスケールを設定に反映する
@@ -60,19 +60,13 @@ export async function onEndBattle(
     props.inProgress = postNPCBattle.inProgress;
     return;
   }
+
+  const isPostNetBattleExecuted = await executePostNetBattleIfNeeded(props);
+  if (isPostNetBattleExecuted) {
+    return;
+  }
   
   if (
-    props.inProgress.type === "CasualMatch" ||
-    props.inProgress.type === "PrivateMatchHost" ||
-    props.inProgress.type === "PrivateMatchGuest"
-  ) {
-    props.suddenlyBattleEnd.unbind();
-    await props.api.disconnectWebsocket();
-    await props.domFloaters.showPostBattle(
-      props.resources,
-      PostNetworkBattleButtons
-    );
-  } else if (
     props.inProgress.type === "Tutorial" &&
     props.inProgress.subFlow.type === "PlayingTutorialStage" &&
     action.gameEnd.result.type === "GameOver"
