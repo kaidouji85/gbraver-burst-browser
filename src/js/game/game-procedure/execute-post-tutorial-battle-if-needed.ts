@@ -35,7 +35,7 @@ export async function executePostTutorialBattleIfNeeded(
 ): Promise<boolean> {
   if (
     props.inProgress.type !== "Tutorial" ||
-    props.inProgress.subFlow.type !== "PlayingTutorialStage" ||
+    props.inProgress.tutorial.type !== "PlayingTutorialStage" ||
     action.gameEnd.result.type !== "GameOver"
   ) {
     return false;
@@ -43,7 +43,7 @@ export async function executePostTutorialBattleIfNeeded(
 
   await props.domFloaters.showPostBattle(
     props.resources,
-    postTutorialBattleButtons(action.gameEnd.result, props.inProgress.subFlow)
+    postTutorialBattleButtons(action.gameEnd.result, props.inProgress.tutorial)
   );
   return true;
 }

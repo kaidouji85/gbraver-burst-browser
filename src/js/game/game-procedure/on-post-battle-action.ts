@@ -177,14 +177,14 @@ export async function onPostBattleAction(
   if (
     action.action.type === "Retry" &&
     props.inProgress.type === "Tutorial" &&
-    props.inProgress.subFlow.type === "PlayingTutorialStage"
+    props.inProgress.tutorial.type === "PlayingTutorialStage"
   ) {
-    const playingTutorial: PlayingTutorialStage = props.inProgress.subFlow;
+    const playingTutorial: PlayingTutorialStage = props.inProgress.tutorial;
     await gotoTutorial(props, playingTutorial.level, playingTutorial.stage);
   } else if (action.action.type === "GotoTutorialSelect") {
     props.inProgress = {
       type: "Tutorial",
-      subFlow: {
+      tutorial: {
         type: "TutorialStageSelect",
       },
     };
