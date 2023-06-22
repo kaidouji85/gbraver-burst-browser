@@ -4,17 +4,13 @@ import { parseBrowserConfig } from "../config/parser/browser-config";
 import { PostBattleButtonConfig } from "../dom-floaters/post-battle/post-battle-button-config";
 import {
   PostNetworkBattleButtons,
-  PostNPCBattleComplete,
-  PostNPCBattleLoseButtons,
-  PostNPCBattleWinButtons,
   PostTutorialLoseButtons,
   PostTutorialWinButtons,
 } from "../dom-floaters/post-battle/post-battle-buttons";
 import { EndBattle } from "../game-actions/end-battle";
 import type { GameProps } from "../game-props";
 import { PlayingTutorialStage } from "../in-progress/tutorial";
-import type { NPCBattleResult } from "../npc-battle";
-import { updateNPCBattleState } from "../npc-battle";
+import { executePostNPCBattleIfNeeded } from "./execute-post-npc-baattle-if-needed";
 
 /**
  * 戦闘画面のアニメーションタイムスケールを設定に反映する
@@ -32,25 +28,6 @@ const saveAnimationTimeScale = async (
       battleAnimationTimeScale: animationTimeScale,
     })
   );
-};
-
-/**
- * NPCバトル終了後に表示するアクションボタンを求める
- * @param result NPCバトル結果
- * @return 表示するアクションボタン
- */
-const postNPCBattleButtons = (
-  result: NPCBattleResult
-): PostBattleButtonConfig[] => {
-  switch (result) {
-    case "NPCBattleComplete":
-      return PostNPCBattleComplete;
-    case "StageClear":
-      return PostNPCBattleWinButtons;
-    case "StageMiss":
-    default:
-      return PostNPCBattleLoseButtons;
-  }
 };
 
 /**
@@ -78,22 +55,13 @@ export async function onEndBattle(
   action: EndBattle
 ): Promise<void> {
   await saveAnimationTimeScale(props, action.animationTimeScale);
+  const postNPCBattle = await executePostNPCBattleIfNeeded(props, action);
+  if (postNPCBattle.isExecuted) {
+    props.inProgress = postNPCBattle.inProgress;
+    return;
+  }
+  
   if (
-    props.inProgress.type === "NPCBattle" &&
-    props.inProgress.subFlow.type === "PlayingNPCBattle"
-  ) {
-    const updated = updateNPCBattleState(
-      props.inProgress.subFlow.state,
-      action.gameEnd.result
-    );
-    if (updated) {
-      props.inProgress.subFlow.state = updated.state;
-      await props.domFloaters.showPostBattle(
-        props.resources,
-        postNPCBattleButtons(updated.result)
-      );
-    }
-  } else if (
     props.inProgress.type === "CasualMatch" ||
     props.inProgress.type === "PrivateMatchHost" ||
     props.inProgress.type === "PrivateMatchGuest"
