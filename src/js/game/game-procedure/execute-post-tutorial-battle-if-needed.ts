@@ -12,14 +12,14 @@ import { PlayingTutorialStage } from "../in-progress/tutorial";
 /**
  * チュートリアル終了後に表示するアクションボタンを求める
  * @param gameOver ゲームオーバー情報
- * @param state チュートリアルステート
+ * @param tutorial チュートリアルステージプレイ情報
  * @return 表示するアクションボタン
  */
 const postTutorialBattleButtons = (
   gameOver: Readonly<GameOver>,
-  state: Readonly<PlayingTutorialStage>
+  tutorial: Readonly<PlayingTutorialStage>
 ): PostBattleButtonConfig[] => {
-  const isPlayerWin = gameOver.winner == state.stage.player.playerId;
+  const isPlayerWin = gameOver.winner == tutorial.stage.player.playerId;
   return isPlayerWin ? PostTutorialWinButtons : PostTutorialLoseButtons;
 };
 
