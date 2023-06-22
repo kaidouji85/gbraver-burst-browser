@@ -1,9 +1,13 @@
 import { GameOver } from "gbraver-burst-core";
-import { PostTutorialLoseButtons, PostTutorialWinButtons } from "../dom-floaters/post-battle/post-battle-buttons";
+
+import { PostBattleButtonConfig } from "../dom-floaters/post-battle/post-battle-button-config";
+import {
+  PostTutorialLoseButtons,
+  PostTutorialWinButtons,
+} from "../dom-floaters/post-battle/post-battle-buttons";
 import { EndBattle } from "../game-actions/end-battle";
 import { GameProps } from "../game-props";
 import { PlayingTutorialStage } from "../in-progress/tutorial";
-import { PostBattleButtonConfig } from "../dom-floaters/post-battle/post-battle-button-config";
 
 /**
  * チュートリアル終了後に表示するアクションボタンを求める

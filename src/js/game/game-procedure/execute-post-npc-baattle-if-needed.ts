@@ -1,5 +1,9 @@
 import { PostBattleButtonConfig } from "../dom-floaters/post-battle/post-battle-button-config";
-import { PostNPCBattleComplete, PostNPCBattleLoseButtons, PostNPCBattleWinButtons } from "../dom-floaters/post-battle/post-battle-buttons";
+import {
+  PostNPCBattleComplete,
+  PostNPCBattleLoseButtons,
+  PostNPCBattleWinButtons,
+} from "../dom-floaters/post-battle/post-battle-buttons";
 import { EndBattle } from "../game-actions/end-battle";
 import { GameProps } from "../game-props";
 import { InProgress } from "../in-progress/in-progress";
@@ -33,7 +37,7 @@ type IsExecuted = {
 
 /** NPCバトル終了後処理が実行されなかった時の情報 */
 type IsNotExecuted = {
-  isExecuted: false,
+  isExecuted: false;
 };
 
 /** NPCバトル終了処理の実行情報 */
@@ -53,15 +57,15 @@ export async function executePostNPCBattleIfNeeded(
     props.inProgress.type !== "NPCBattle" ||
     props.inProgress.subFlow.type !== "PlayingNPCBattle"
   ) {
-    return {isExecuted: false};
+    return { isExecuted: false };
   }
-  
+
   const updated = updateNPCBattleState(
     props.inProgress.subFlow.state,
     action.gameEnd.result
   );
   if (!updated) {
-    return {isExecuted: false};
+    return { isExecuted: false };
   }
 
   await props.domFloaters.showPostBattle(
@@ -75,7 +79,7 @@ export async function executePostNPCBattleIfNeeded(
       subFlow: {
         ...props.inProgress.subFlow,
         state: updated.state,
-      }
-    }
+      },
+    },
   };
 }

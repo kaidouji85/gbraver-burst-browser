@@ -1,8 +1,8 @@
 import { parseBrowserConfig } from "../config/parser/browser-config";
 import { EndBattle } from "../game-actions/end-battle";
 import type { GameProps } from "../game-props";
-import { executePostNPCBattleIfNeeded } from "./execute-post-npc-baattle-if-needed";
 import { executePostNetBattleIfNeeded } from "./execute-post-net-battle-if-needed";
+import { executePostNPCBattleIfNeeded } from "./execute-post-npc-baattle-if-needed";
 import { executePostTutorialBattleIfNeeded } from "./execute-post-tutorial-battle-if-needed";
 
 /**
@@ -32,8 +32,11 @@ export async function onEndBattle(
   if (isPostNetBattleExecuted) {
     return;
   }
-  
-  const isPostTutorialBattleExecuted = await executePostTutorialBattleIfNeeded(props, action);
+
+  const isPostTutorialBattleExecuted = await executePostTutorialBattleIfNeeded(
+    props,
+    action
+  );
   if (isPostTutorialBattleExecuted) {
     return;
   }

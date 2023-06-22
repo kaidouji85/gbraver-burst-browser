@@ -7,7 +7,7 @@ import { GameProps } from "../game-props";
  * @returns ネット対戦後処理を実行したか否か、trueで実行した
  */
 export async function executePostNetBattleIfNeeded(
-  props: Readonly<GameProps>,
+  props: Readonly<GameProps>
 ): Promise<boolean> {
   if (
     props.inProgress.type !== "CasualMatch" &&
