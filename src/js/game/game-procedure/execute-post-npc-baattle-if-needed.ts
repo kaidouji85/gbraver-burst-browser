@@ -2,7 +2,8 @@ import { PostBattleButtonConfig } from "../dom-floaters/post-battle/post-battle-
 import { PostNPCBattleComplete, PostNPCBattleLoseButtons, PostNPCBattleWinButtons } from "../dom-floaters/post-battle/post-battle-buttons";
 import { EndBattle } from "../game-actions/end-battle";
 import { GameProps } from "../game-props";
-import { NPCBattleResult, NPCBattleState, updateNPCBattleState } from "../npc-battle";
+import { InProgress } from "../in-progress/in-progress";
+import { NPCBattleResult, updateNPCBattleState } from "../npc-battle";
 
 /**
  * NPCバトル終了後に表示するアクションボタンを求める
@@ -26,8 +27,8 @@ const postNPCBattleButtons = (
 /** NPCバトル終了後処理が実行された時の情報 */
 type IsExecuted = {
   isExecuted: true;
-  /** NPCバトルステート更新結果 */
-  npcBattleState: NPCBattleState;
+  /** inProgress更新結果 */
+  inProgress: InProgress;
 };
 
 /** NPCバトル終了後処理が実行されなかった時の情報 */
@@ -69,6 +70,12 @@ export async function executePostNPCBattleIfNeeded(
   );
   return {
     isExecuted: true,
-    npcBattleState: updated.state
+    inProgress: {
+      ...props.inProgress,
+      subFlow: {
+        ...props.inProgress.subFlow,
+        state: updated.state,
+      }
+    }
   };
 }
