@@ -52,7 +52,7 @@ const postTutorialBattleButtons = (
  */
 export async function onEndBattle(
   props: GameProps,
-  action: EndBattle
+  action: Readonly<EndBattle>
 ): Promise<void> {
   await saveAnimationTimeScale(props, action.animationTimeScale);
   const postNPCBattle = await executePostNPCBattleIfNeeded(props, action);
