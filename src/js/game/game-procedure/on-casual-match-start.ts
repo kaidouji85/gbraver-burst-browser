@@ -20,7 +20,7 @@ export async function onCasualMatchStart(props: GameProps): Promise<void> {
 
   props.inProgress = {
     type: "CasualMatch",
-    subFlow: {
+    casualMatch: {
       type: "PlayerSelect",
     },
   };

@@ -31,10 +31,10 @@ export async function onSelectionComplete(
       difficultyDialogConnector
     );
   } else if (props.inProgress.type === "CasualMatch") {
-    props.inProgress.subFlow = { type: "Waiting" };
+    props.inProgress.casualMatch = { type: "Waiting" };
     await props.api.disconnectWebsocket();
     const battle = await waitUntilCasualMatching(props, action);
-    props.inProgress.subFlow = { type: "Battle" };
+    props.inProgress.casualMatch = { type: "Battle" };
     await startOnlineBattle(props, battle, "CASUAL MATCH");
   } else if (props.inProgress.type === "PrivateMatchHost") {
     props.inProgress.subFlow = { type: "Waiting" };
