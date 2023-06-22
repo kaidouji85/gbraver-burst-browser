@@ -10,7 +10,7 @@ export function onDifficultySelectionCancel(props: GameProps): void {
   if (
     !(
       props.inProgress.type === "NPCBattle" &&
-      props.inProgress.subFlow.type === "DifficultySelect"
+      props.inProgress.npcBattle.type === "DifficultySelect"
     )
   ) {
     return;
@@ -18,7 +18,7 @@ export function onDifficultySelectionCancel(props: GameProps): void {
 
   props.inProgress = {
     ...props.inProgress,
-    subFlow: {
+    npcBattle: {
       type: "PlayerSelect",
     },
   };

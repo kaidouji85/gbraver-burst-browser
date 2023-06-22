@@ -55,13 +55,13 @@ export async function executePostNPCBattleIfNeeded(
 ): Promise<Ret> {
   if (
     props.inProgress.type !== "NPCBattle" ||
-    props.inProgress.subFlow.type !== "PlayingNPCBattle"
+    props.inProgress.npcBattle.type !== "PlayingNPCBattle"
   ) {
     return { isExecuted: false };
   }
 
   const updated = updateNPCBattleState(
-    props.inProgress.subFlow.state,
+    props.inProgress.npcBattle.state,
     action.gameEnd.result
   );
   if (!updated) {
@@ -76,8 +76,8 @@ export async function executePostNPCBattleIfNeeded(
     isExecuted: true,
     inProgress: {
       ...props.inProgress,
-      subFlow: {
-        ...props.inProgress.subFlow,
+      npcBattle: {
+        ...props.inProgress.npcBattle,
         state: updated.state,
       },
     },

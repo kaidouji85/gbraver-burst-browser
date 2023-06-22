@@ -21,7 +21,7 @@ export async function onSelectionComplete(
   action: SelectionComplete
 ): Promise<void> {
   if (props.inProgress.type === "NPCBattle") {
-    props.inProgress.subFlow = {
+    props.inProgress.npcBattle = {
       type: "DifficultySelect",
       armdozerId: action.armdozerId,
       pilotId: action.pilotId,

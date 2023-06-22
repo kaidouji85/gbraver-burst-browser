@@ -67,12 +67,12 @@ const gotoEnding = async (props: Readonly<GameProps>) => {
 const createNPCBattle = (inProgress: InProgress) => {
   if (
     inProgress.type !== "NPCBattle" ||
-    inProgress.subFlow.type !== "PlayingNPCBattle"
+    inProgress.npcBattle.type !== "PlayingNPCBattle"
   ) {
     return null;
   }
 
-  const state: NPCBattleState = inProgress.subFlow.state;
+  const state: NPCBattleState = inProgress.npcBattle.state;
   const stage = getCurrentNPCStage(state) ?? DefaultStage;
   const level = getNPCStageLevel(state);
   const player = state.player;
