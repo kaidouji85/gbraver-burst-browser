@@ -6,24 +6,6 @@ import { executePostNetBattleIfNeeded } from "./execute-post-net-battle-if-neede
 import { executePostTutorialBattleIfNeeded } from "./execute-post-tutorial-battle-if-needed";
 
 /**
- * 戦闘画面のアニメーションタイムスケールを設定に反映する
- * @param props ゲームプロパティ
- * @param animationTimeScale 反映するタイムスケール
- */
-const saveAnimationTimeScale = async (
-  props: Readonly<GameProps>,
-  animationTimeScale: number
-) => {
-  const origin = await props.config.load();
-  await props.config.save(
-    parseBrowserConfig({
-      ...origin,
-      battleAnimationTimeScale: animationTimeScale,
-    })
-  );
-};
-
-/**
  * 戦闘終了時の処理
  * @param props ゲームプロパティ
  * @param action アクション
@@ -33,7 +15,13 @@ export async function onEndBattle(
   props: GameProps,
   action: Readonly<EndBattle>
 ): Promise<void> {
-  await saveAnimationTimeScale(props, action.animationTimeScale);
+  const config = await props.config.load();
+  await props.config.save(
+    parseBrowserConfig({
+      ...config,
+      battleAnimationTimeScale: action.animationTimeScale,
+    })
+  );
   const postNPCBattle = await executePostNPCBattleIfNeeded(props, action);
   if (postNPCBattle.isExecuted) {
     props.inProgress = postNPCBattle.inProgress;
