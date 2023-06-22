@@ -15,6 +15,4 @@ export const TutorialStages: TutorialStage[] = [
 ];
 
 /** 開発中のチュートリアルのステージをあつめたもの */
-export const TutorialStagesInDevelopment: TutorialStage[] = [
-  ...TutorialStages,
-];
+export const TutorialStagesInDevelopment: TutorialStage[] = [...TutorialStages];
