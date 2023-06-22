@@ -23,7 +23,10 @@ export type PlayingNPCBattle = {
 };
 
 /** NPCバトルのサブフロー */
-export type NPCBattleSubFlow = PlayerSelect | DifficultySelect | PlayingNPCBattle;
+export type NPCBattleSubFlow =
+  | PlayerSelect
+  | DifficultySelect
+  | PlayingNPCBattle;
 
 /**
  * NPCバトル
