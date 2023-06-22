@@ -10,10 +10,8 @@ export type PlayerSelect = {
 /** 難易度選択 */
 export type DifficultySelect = {
   type: "DifficultySelect";
-
   /** 選択したアームドーザ */
   armdozerId: ArmDozerId;
-
   /** 選択したパイロット */
   pilotId: PilotId;
 };
@@ -33,7 +31,6 @@ export type SubFlow = PlayerSelect | DifficultySelect | PlayingNPCBattle;
  */
 export type NPCBattleX<X> = {
   type: "NPCBattle";
-
   /** サブフロー */
   subFlow: X;
 };

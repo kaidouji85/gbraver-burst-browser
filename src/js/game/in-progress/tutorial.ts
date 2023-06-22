@@ -3,7 +3,6 @@ import type { TutorialStage } from "../tutorial-stages/tutorial-stage";
 /** チュートリアル */
 export type Tutorial = {
   type: "Tutorial";
-
   /** サブフロー */
   subFlow: SubFLow;
 };
@@ -19,10 +18,8 @@ export type TutorialStageSelect = {
 /** チュートリアルステージプレイ中 */
 export type PlayingTutorialStage = {
   type: "PlayingTutorialStage";
-
   /** プレイ中のチュートリアルステージID */
   stage: TutorialStage;
-
   /** プレイ中のチュートリアルステージレベル */
   level: number;
 };
