@@ -43,7 +43,7 @@ type Ret = IsExecuted | IsNotExecuted;
  * 条件を満たした場合、NPCバトル終了後処理を実行する
  * @param props ゲームプロパティ
  * @param action アクション
- * @return 実行したか否かの情報
+ * @return NPCバトル終了処理の実行情報
  */
 export async function executePostNPCBattleIfNeeded(
   props: Readonly<GameProps>,

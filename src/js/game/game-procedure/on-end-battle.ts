@@ -1,16 +1,9 @@
-import { GameOver } from "gbraver-burst-core";
-
 import { parseBrowserConfig } from "../config/parser/browser-config";
-import { PostBattleButtonConfig } from "../dom-floaters/post-battle/post-battle-button-config";
-import {
-  PostTutorialLoseButtons,
-  PostTutorialWinButtons,
-} from "../dom-floaters/post-battle/post-battle-buttons";
 import { EndBattle } from "../game-actions/end-battle";
 import type { GameProps } from "../game-props";
-import { PlayingTutorialStage } from "../in-progress/tutorial";
 import { executePostNPCBattleIfNeeded } from "./execute-post-npc-baattle-if-needed";
 import { executePostNetBattleIfNeeded } from "./execute-post-net-battle-if-needed";
+import { executePostTutorialBattleIfNeeded } from "./execute-post-tutorial-battle-if-needed";
 
 /**
  * 戦闘画面のアニメーションタイムスケールを設定に反映する
@@ -28,20 +21,6 @@ const saveAnimationTimeScale = async (
       battleAnimationTimeScale: animationTimeScale,
     })
   );
-};
-
-/**
- * チュートリアル終了後に表示するアクションボタンを求める
- * @param gameOver ゲームオーバー情報
- * @param state チュートリアルステート
- * @return 表示するアクションボタン
- */
-const postTutorialBattleButtons = (
-  gameOver: GameOver,
-  state: PlayingTutorialStage
-): PostBattleButtonConfig[] => {
-  const isPlayerWin = gameOver.winner == state.stage.player.playerId;
-  return isPlayerWin ? PostTutorialWinButtons : PostTutorialLoseButtons;
 };
 
 /**
@@ -66,14 +45,8 @@ export async function onEndBattle(
     return;
   }
   
-  if (
-    props.inProgress.type === "Tutorial" &&
-    props.inProgress.subFlow.type === "PlayingTutorialStage" &&
-    action.gameEnd.result.type === "GameOver"
-  ) {
-    await props.domFloaters.showPostBattle(
-      props.resources,
-      postTutorialBattleButtons(action.gameEnd.result, props.inProgress.subFlow)
-    );
+  const isPostTutorialBattleExecuted = await executePostTutorialBattleIfNeeded(props, action);
+  if (isPostTutorialBattleExecuted) {
+    return;
   }
 }
