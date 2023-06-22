@@ -3,7 +3,6 @@ export type CasualMatch = CasualMatchX<CasualMatchSubFlow>;
 
 /**
  * カジュアルマッチ
- *
  * @template X サブフロー
  */
 export type CasualMatchX<X> = {
