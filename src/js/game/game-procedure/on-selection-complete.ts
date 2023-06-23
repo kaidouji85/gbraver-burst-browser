@@ -1,12 +1,11 @@
-import { DifficultyDialog } from "../../dom-dialogs/difficulty";
 import { PrivateMatchGuestDialog } from "../../dom-dialogs/private-match-guest";
-import { difficultyDialogConnector } from "../action-connector/difficulty-dialog-connector";
 import { privateMatchGuestDialogConnector } from "../action-connector/private-match-guest-dialog-connector";
 import { SelectionComplete } from "../game-actions/selection-complete";
 import type { GameProps } from "../game-props";
 import { startOnlineBattle } from "./start-online-battle";
 import { waitUntilCasualMatching } from "./wait-until-casual-matching";
 import { waitUntilPrivateMatchingAsHost } from "./wait-until-private-matching-as-host";
+import {executeDifficultySelectionIfNeeded} from "./execute-difficulty-selection-if-needed";
 
 /**
  * プレイヤーキャラクター 選択完了時の処理
@@ -20,17 +19,13 @@ export async function onSelectionComplete(
   props: GameProps,
   action: Readonly<SelectionComplete>
 ): Promise<void> {
-  if (props.inProgress.type === "NPCBattle") {
-    props.inProgress.npcBattle = {
-      type: "DifficultySelect",
-      armdozerId: action.armdozerId,
-      pilotId: action.pilotId,
-    };
-    props.domDialogBinder.bind(
-      new DifficultyDialog(props.resources),
-      difficultyDialogConnector
-    );
-  } else if (props.inProgress.type === "CasualMatch") {
+  const isDifficultySelectionExecuted
+    = await executeDifficultySelectionIfNeeded(props, action);
+  if (isDifficultySelectionExecuted) {
+    return;
+  }
+
+  if (props.inProgress.type === "CasualMatch") {
     props.inProgress.casualMatch = { type: "Waiting" };
     await props.api.disconnectWebsocket();
     const battle = await waitUntilCasualMatching(props, action);
