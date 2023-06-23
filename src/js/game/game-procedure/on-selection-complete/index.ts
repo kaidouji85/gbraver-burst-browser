@@ -4,8 +4,8 @@ import { SelectionComplete } from "../../game-actions/selection-complete";
 import type { GameProps } from "../../game-props";
 import { startOnlineBattle } from "../start-online-battle";
 import { waitUntilPrivateMatchingAsHost } from "../wait-until-private-matching-as-host";
-import {executeDifficultySelectionIfNeeded} from "./execute-difficulty-selection-if-needed";
-import {executeCasualMatchStartIfNeeded} from "./execute-casual-match-start-if-needed";
+import {startDifficultySelectionIfNeeded} from "./start-difficulty-selection-if-needed";
+import {startCasualMatchIfNeeded} from "./start-casual-match-start-if-needed";
 
 /**
  * プレイヤーキャラクター 選択完了時の処理
@@ -19,15 +19,15 @@ export async function onSelectionComplete(
   props: GameProps,
   action: Readonly<SelectionComplete>
 ): Promise<void> {
-  const isDifficultySelectionExecuted
-    = await executeDifficultySelectionIfNeeded(props, action);
-  if (isDifficultySelectionExecuted) {
+  const isDifficultySelectionStarted
+    = await startDifficultySelectionIfNeeded(props, action);
+  if (isDifficultySelectionStarted) {
     return;
   }
 
-  const casualMatchStart = await executeCasualMatchStartIfNeeded(props, action);
-  if (casualMatchStart.isExecuted) {
-    props.inProgress = casualMatchStart.inProgress;
+  const casualMatch = await startCasualMatchIfNeeded(props, action);
+  if (casualMatch.isStarted) {
+    props.inProgress = casualMatch.inProgress;
     return;
   }
 

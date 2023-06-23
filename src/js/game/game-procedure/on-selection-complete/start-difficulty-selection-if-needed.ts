@@ -4,12 +4,12 @@ import {DifficultyDialog} from "../../../dom-dialogs/difficulty";
 import {difficultyDialogConnector} from "../../action-connector/difficulty-dialog-connector";
 
 /**
- * 条件を満たした場合、難易度選択を実行する
+ * 条件を満たした場合、難易度選択を開始する
  * @param props ゲームプロパティ
  * @param action アクション
- * @return 難易度選択を実行したか否か、trueで実行した
+ * @return 難易度選択を開始したか否か、trueで開始した
  */
-export async function executeDifficultySelectionIfNeeded(
+export async function startDifficultySelectionIfNeeded(
   props: Readonly<GameProps>,
   action: Readonly<SelectionComplete>
 ): Promise<boolean> {
