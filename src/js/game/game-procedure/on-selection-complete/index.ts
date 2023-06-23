@@ -2,10 +2,9 @@ import { PrivateMatchGuestDialog } from "../../../dom-dialogs/private-match-gues
 import { privateMatchGuestDialogConnector } from "../../action-connector/private-match-guest-dialog-connector";
 import { SelectionComplete } from "../../game-actions/selection-complete";
 import type { GameProps } from "../../game-props";
-import { startOnlineBattle } from "../start-online-battle";
-import { waitUntilPrivateMatchingAsHost } from "../wait-until-private-matching-as-host";
 import {startDifficultySelectionIfNeeded} from "./start-difficulty-selection-if-needed";
 import {startCasualMatchIfNeeded} from "./start-casual-match-start-if-needed";
+import { startPrivateMatchHostIfNeeded } from "./start-private-match-host-if-needed";
 
 /**
  * プレイヤーキャラクター 選択完了時の処理
@@ -31,13 +30,13 @@ export async function onSelectionComplete(
     return;
   }
 
-  if (props.inProgress.type === "PrivateMatchHost") {
-    props.inProgress.privateMatchHost = { type: "Waiting" };
-    await props.api.disconnectWebsocket();
-    const battle = await waitUntilPrivateMatchingAsHost(props, action);
-    props.inProgress.privateMatchHost = { type: "Battle" };
-    await startOnlineBattle(props, battle, "PRIVATE MATCH");
-  } else if (props.inProgress.type === "PrivateMatchGuest") {
+  const privateMatchHost = await startPrivateMatchHostIfNeeded(props, action);
+  if (privateMatchHost.isStarted) {
+    props.inProgress = privateMatchHost.inProgress;
+    return;
+  }
+
+  if (props.inProgress.type === "PrivateMatchGuest") {
     props.inProgress.privateMatchGuest = {
       type: "Entry",
       armdozerId: action.armdozerId,
