@@ -11,16 +11,11 @@ export type CasualMatchX<X> = {
 };
 
 /** カジュアルマッチのサブフロー */
-export type CasualMatchSubFlow = PlayerSelect | Waiting | Battle;
+export type CasualMatchSubFlow = PlayerSelect | Battle;
 
 /** キャラ選択 */
 export type PlayerSelect = {
   type: "PlayerSelect";
-};
-
-/** @deprecated マッチング待ち */
-export type Waiting = {
-  type: "Waiting";
 };
 
 /** 戦闘中 */
