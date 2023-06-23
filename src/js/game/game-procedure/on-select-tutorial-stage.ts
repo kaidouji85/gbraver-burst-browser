@@ -31,7 +31,7 @@ export async function onSelectTutorialStage(
     tutorialStages.find((v) => v.id === action.id) ?? tutorialStages[0];
   props.inProgress = {
     ...inProgress,
-    subFlow: {
+    tutorial: {
       type: "PlayingTutorialStage",
       stage,
       level: action.level,

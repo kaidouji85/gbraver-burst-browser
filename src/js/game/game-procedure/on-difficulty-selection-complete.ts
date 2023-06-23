@@ -29,14 +29,14 @@ export async function onDifficultySelectionComplete(
   if (
     !(
       props.inProgress.type === "NPCBattle" &&
-      props.inProgress.subFlow.type === "DifficultySelect"
+      props.inProgress.npcBattle.type === "DifficultySelect"
     )
   ) {
     return;
   }
 
   const npcBattle: NPCBattle = props.inProgress;
-  const difficultySelect: DifficultySelect = props.inProgress.subFlow;
+  const difficultySelect: DifficultySelect = props.inProgress.npcBattle;
   const { armdozerId, pilotId } = difficultySelect;
   const stages =
     NPCBattleCourses.find(
@@ -50,7 +50,7 @@ export async function onDifficultySelectionComplete(
   );
   props.inProgress = {
     ...npcBattle,
-    subFlow: {
+    npcBattle: {
       type: "PlayingNPCBattle",
       state: npcBattleState,
     },

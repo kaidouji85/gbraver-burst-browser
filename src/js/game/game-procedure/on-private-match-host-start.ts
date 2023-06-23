@@ -19,7 +19,7 @@ export async function onPrivateMatchHostStart(props: GameProps): Promise<void> {
 
   props.inProgress = {
     type: "PrivateMatchHost",
-    subFlow: {
+    privateMatchHost: {
       type: "PlayerSelect",
     },
   };

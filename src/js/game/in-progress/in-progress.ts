@@ -5,9 +5,7 @@ import { PrivateMatchGuest } from "./private-match-guest";
 import { PrivateMatchHost } from "./private-match-host";
 import type { Tutorial } from "./tutorial";
 
-/**
- * 現在進行中のフローの状態を保持する
- */
+/** 現在進行中のフローの状態を保持する */
 export type InProgress =
   | None
   | NPCBattle

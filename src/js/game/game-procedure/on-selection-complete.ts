@@ -21,7 +21,7 @@ export async function onSelectionComplete(
   action: SelectionComplete
 ): Promise<void> {
   if (props.inProgress.type === "NPCBattle") {
-    props.inProgress.subFlow = {
+    props.inProgress.npcBattle = {
       type: "DifficultySelect",
       armdozerId: action.armdozerId,
       pilotId: action.pilotId,
@@ -31,19 +31,19 @@ export async function onSelectionComplete(
       difficultyDialogConnector
     );
   } else if (props.inProgress.type === "CasualMatch") {
-    props.inProgress.subFlow = { type: "Waiting" };
+    props.inProgress.casualMatch = { type: "Waiting" };
     await props.api.disconnectWebsocket();
     const battle = await waitUntilCasualMatching(props, action);
-    props.inProgress.subFlow = { type: "Battle" };
+    props.inProgress.casualMatch = { type: "Battle" };
     await startOnlineBattle(props, battle, "CASUAL MATCH");
   } else if (props.inProgress.type === "PrivateMatchHost") {
-    props.inProgress.subFlow = { type: "Waiting" };
+    props.inProgress.privateMatchHost = { type: "Waiting" };
     await props.api.disconnectWebsocket();
     const battle = await waitUntilPrivateMatchingAsHost(props, action);
-    props.inProgress.subFlow = { type: "Battle" };
+    props.inProgress.privateMatchHost = { type: "Battle" };
     await startOnlineBattle(props, battle, "PRIVATE MATCH");
   } else if (props.inProgress.type === "PrivateMatchGuest") {
-    props.inProgress.subFlow = {
+    props.inProgress.privateMatchGuest = {
       type: "Entry",
       armdozerId: action.armdozerId,
       pilotId: action.pilotId,

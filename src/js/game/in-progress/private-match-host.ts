@@ -13,7 +13,7 @@ export type Battle = {
   type: "Battle";
 };
 
-/** プライベートマッチ（ホスト）サブフロー */
+/** プライベートマッチ（ホスト）のサブフロー */
 export type PrivateMatchHostSubFlow = PlayerSelect | Waiting | Battle;
 
 /**
@@ -23,7 +23,7 @@ export type PrivateMatchHostSubFlow = PlayerSelect | Waiting | Battle;
 export type PrivateMatchHostX<X extends PrivateMatchHostSubFlow> = {
   type: "PrivateMatchHost";
   /** サブフロー */
-  subFlow: X;
+  privateMatchHost: X;
 };
 
 /** プライベートマッチ（ホスト） */

@@ -1,18 +1,17 @@
 /** カジュアルマッチ */
-export type CasualMatch = CasualMatchX<SubFlow>;
+export type CasualMatch = CasualMatchX<CasualMatchSubFlow>;
 
 /**
  * カジュアルマッチ
- *
  * @template X サブフロー
  */
 export type CasualMatchX<X> = {
   type: "CasualMatch";
-  subFlow: X;
+  casualMatch: X;
 };
 
 /** カジュアルマッチのサブフロー */
-export type SubFlow = PlayerSelect | Waiting | Battle;
+export type CasualMatchSubFlow = PlayerSelect | Waiting | Battle;
 
 /** キャラ選択 */
 export type PlayerSelect = {

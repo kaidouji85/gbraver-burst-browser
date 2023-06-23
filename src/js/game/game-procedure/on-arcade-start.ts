@@ -20,7 +20,7 @@ export async function onArcadeStart(props: GameProps): Promise<void> {
 
   props.inProgress = {
     type: "NPCBattle",
-    subFlow: {
+    npcBattle: {
       type: "PlayerSelect",
     },
   };

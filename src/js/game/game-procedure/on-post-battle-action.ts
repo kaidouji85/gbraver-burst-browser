@@ -67,12 +67,12 @@ const gotoEnding = async (props: Readonly<GameProps>) => {
 const createNPCBattle = (inProgress: InProgress) => {
   if (
     inProgress.type !== "NPCBattle" ||
-    inProgress.subFlow.type !== "PlayingNPCBattle"
+    inProgress.npcBattle.type !== "PlayingNPCBattle"
   ) {
     return null;
   }
 
-  const state: NPCBattleState = inProgress.subFlow.state;
+  const state: NPCBattleState = inProgress.npcBattle.state;
   const stage = getCurrentNPCStage(state) ?? DefaultStage;
   const level = getNPCStageLevel(state);
   const player = state.player;
@@ -177,14 +177,14 @@ export async function onPostBattleAction(
   if (
     action.action.type === "Retry" &&
     props.inProgress.type === "Tutorial" &&
-    props.inProgress.subFlow.type === "PlayingTutorialStage"
+    props.inProgress.tutorial.type === "PlayingTutorialStage"
   ) {
-    const playingTutorial: PlayingTutorialStage = props.inProgress.subFlow;
+    const playingTutorial: PlayingTutorialStage = props.inProgress.tutorial;
     await gotoTutorial(props, playingTutorial.level, playingTutorial.stage);
   } else if (action.action.type === "GotoTutorialSelect") {
     props.inProgress = {
       type: "Tutorial",
-      subFlow: {
+      tutorial: {
         type: "TutorialStageSelect",
       },
     };
