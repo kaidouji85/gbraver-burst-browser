@@ -8,7 +8,6 @@ import { startPrivateMatchHostIfNeeded } from "./start-private-match-host-if-nee
 /**
  * プレイヤーキャラクター 選択完了時の処理
  * 本関数にはpropsを変更する副作用がある
- *
  * @param props ゲームプロパティ
  * @param action アクション
  * @return 処理が完了したら発火するPromise
