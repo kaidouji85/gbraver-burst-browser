@@ -3,18 +3,13 @@ export type PlayerSelect = {
   type: "PlayerSelect";
 };
 
-/** プライベートマッチ（ホスト）サブフロー マッチング待ち */
-export type Waiting = {
-  type: "Waiting";
-};
-
 /** プライベートマッチ（ホスト）サブフロー 戦闘中 */
 export type Battle = {
   type: "Battle";
 };
 
 /** プライベートマッチ（ホスト）のサブフロー */
-export type PrivateMatchHostSubFlow = PlayerSelect | Waiting | Battle;
+export type PrivateMatchHostSubFlow = PlayerSelect | Battle;
 
 /**
  * プライベートマッチ（ホスト）
