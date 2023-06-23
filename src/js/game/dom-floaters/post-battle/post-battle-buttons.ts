@@ -51,31 +51,13 @@ export const PostNetworkBattleButtons: PostBattleButtonConfig[] = [
   },
 ];
 
-/** チュートリアル勝利後のアクションボタン */
-export const PostTutorialWinButtons: PostBattleButtonConfig[] = [
+/** チュートリアル後のアクションボタン */
+export const PostTutorialButtons: PostBattleButtonConfig[] = [
   {
     style: "MainButton",
     action: {
       type: "GotoTutorialSelect",
     },
     label: "ステージ選択へ",
-  },
-];
-
-/** チュートリアル敗北後のアクションボタン */
-export const PostTutorialLoseButtons: PostBattleButtonConfig[] = [
-  {
-    style: "SubButton",
-    action: {
-      type: "GotoTutorialSelect",
-    },
-    label: "ステージ選択へ",
-  },
-  {
-    style: "MainButton",
-    action: {
-      type: "Retry",
-    },
-    label: "リトライ",
   },
 ];
