@@ -1,9 +1,9 @@
 import { SelectionComplete } from "../../game-actions/selection-complete";
 import type { GameProps } from "../../game-props";
-import {startDifficultySelectionIfNeeded} from "./start-difficulty-selection-if-needed";
-import {startCasualMatchIfNeeded} from "./start-casual-match-start-if-needed";
-import { startPrivateMatchHostIfNeeded } from "./start-private-match-host-if-needed";
+import { startCasualMatchIfNeeded } from "./start-casual-match-start-if-needed";
+import { startDifficultySelectionIfNeeded } from "./start-difficulty-selection-if-needed";
 import { startPrivateMatchGuestIfNeeded } from "./start-private-match-guest-if-needed";
+import { startPrivateMatchHostIfNeeded } from "./start-private-match-host-if-needed";
 
 /**
  * プレイヤーキャラクター 選択完了時の処理
@@ -17,8 +17,10 @@ export async function onSelectionComplete(
   props: GameProps,
   action: Readonly<SelectionComplete>
 ): Promise<void> {
-  const isDifficultySelectionStarted
-    = await startDifficultySelectionIfNeeded(props, action);
+  const isDifficultySelectionStarted = await startDifficultySelectionIfNeeded(
+    props,
+    action
+  );
   if (isDifficultySelectionStarted) {
     return;
   }

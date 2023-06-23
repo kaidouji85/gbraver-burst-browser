@@ -1,8 +1,8 @@
-import {GameProps} from "../../game-props";
-import {SelectionComplete} from "../../game-actions/selection-complete";
-import {InProgress} from "../../in-progress/in-progress";
-import {waitUntilCasualMatching} from "../wait-until-casual-matching";
-import {startOnlineBattle} from "../start-online-battle";
+import { SelectionComplete } from "../../game-actions/selection-complete";
+import { GameProps } from "../../game-props";
+import { InProgress } from "../../in-progress/in-progress";
+import { startOnlineBattle } from "../start-online-battle";
+import { waitUntilCasualMatching } from "../wait-until-casual-matching";
 
 /** カジュアルマッチが開始された */
 type IsCasualMatchStarted = {
@@ -39,7 +39,7 @@ export async function startCasualMatchIfNeeded(
     isStarted: true,
     inProgress: {
       ...props.inProgress,
-      casualMatch: { type: "Battle" }
-    }
+      casualMatch: { type: "Battle" },
+    },
   };
 }

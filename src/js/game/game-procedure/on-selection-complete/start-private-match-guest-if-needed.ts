@@ -32,7 +32,7 @@ export async function startPrivateMatchGuestIfNeeded(
   if (props.inProgress.type !== "PrivateMatchGuest") {
     return { isStarted: false };
   }
-  
+
   props.domDialogBinder.bind(
     new PrivateMatchGuestDialog(props.resources),
     privateMatchGuestDialogConnector
@@ -45,7 +45,7 @@ export async function startPrivateMatchGuestIfNeeded(
         type: "Entry",
         armdozerId: action.armdozerId,
         pilotId: action.pilotId,
-      }
-    }
+      },
+    },
   };
 }
