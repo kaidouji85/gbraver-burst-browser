@@ -18,7 +18,7 @@ import { waitUntilPrivateMatchingAsHost } from "./wait-until-private-matching-as
  */
 export async function onSelectionComplete(
   props: GameProps,
-  action: SelectionComplete
+  action: Readonly<SelectionComplete>
 ): Promise<void> {
   if (props.inProgress.type === "NPCBattle") {
     props.inProgress.npcBattle = {
