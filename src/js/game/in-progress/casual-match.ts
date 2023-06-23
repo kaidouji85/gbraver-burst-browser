@@ -18,7 +18,7 @@ export type PlayerSelect = {
   type: "PlayerSelect";
 };
 
-/** マッチング待ち */
+/** @deprecated マッチング待ち */
 export type Waiting = {
   type: "Waiting";
 };
