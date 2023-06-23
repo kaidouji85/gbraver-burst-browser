@@ -1,10 +1,9 @@
-import { PrivateMatchGuestDialog } from "../../../dom-dialogs/private-match-guest";
-import { privateMatchGuestDialogConnector } from "../../action-connector/private-match-guest-dialog-connector";
 import { SelectionComplete } from "../../game-actions/selection-complete";
 import type { GameProps } from "../../game-props";
 import {startDifficultySelectionIfNeeded} from "./start-difficulty-selection-if-needed";
 import {startCasualMatchIfNeeded} from "./start-casual-match-start-if-needed";
 import { startPrivateMatchHostIfNeeded } from "./start-private-match-host-if-needed";
+import { startPrivateMatchGuestIfNeeded } from "./start-private-match-guest-if-needed";
 
 /**
  * プレイヤーキャラクター 選択完了時の処理
@@ -36,15 +35,9 @@ export async function onSelectionComplete(
     return;
   }
 
-  if (props.inProgress.type === "PrivateMatchGuest") {
-    props.inProgress.privateMatchGuest = {
-      type: "Entry",
-      armdozerId: action.armdozerId,
-      pilotId: action.pilotId,
-    };
-    props.domDialogBinder.bind(
-      new PrivateMatchGuestDialog(props.resources),
-      privateMatchGuestDialogConnector
-    );
+  const privateMatchGuest = await startPrivateMatchGuestIfNeeded(props, action);
+  if (privateMatchGuest.isStarted) {
+    props.inProgress = privateMatchGuest.inProgress;
+    return;
   }
 }
