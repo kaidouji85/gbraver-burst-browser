@@ -1,9 +1,9 @@
-import { PrivateMatchGuestDialog } from "../../dom-dialogs/private-match-guest";
-import { privateMatchGuestDialogConnector } from "../action-connector/private-match-guest-dialog-connector";
-import { SelectionComplete } from "../game-actions/selection-complete";
-import type { GameProps } from "../game-props";
-import { startOnlineBattle } from "./start-online-battle";
-import { waitUntilPrivateMatchingAsHost } from "./wait-until-private-matching-as-host";
+import { PrivateMatchGuestDialog } from "../../../dom-dialogs/private-match-guest";
+import { privateMatchGuestDialogConnector } from "../../action-connector/private-match-guest-dialog-connector";
+import { SelectionComplete } from "../../game-actions/selection-complete";
+import type { GameProps } from "../../game-props";
+import { startOnlineBattle } from "../start-online-battle";
+import { waitUntilPrivateMatchingAsHost } from "../wait-until-private-matching-as-host";
 import {executeDifficultySelectionIfNeeded} from "./execute-difficulty-selection-if-needed";
 import {executeCasualMatchStartIfNeeded} from "./execute-casual-match-start-if-needed";
 

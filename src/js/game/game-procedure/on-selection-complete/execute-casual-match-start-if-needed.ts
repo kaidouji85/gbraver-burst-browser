@@ -1,8 +1,8 @@
-import {GameProps} from "../game-props";
-import {SelectionComplete} from "../game-actions/selection-complete";
-import {InProgress} from "../in-progress/in-progress";
-import {waitUntilCasualMatching} from "./wait-until-casual-matching";
-import {startOnlineBattle} from "./start-online-battle";
+import {GameProps} from "../../game-props";
+import {SelectionComplete} from "../../game-actions/selection-complete";
+import {InProgress} from "../../in-progress/in-progress";
+import {waitUntilCasualMatching} from "../wait-until-casual-matching";
+import {startOnlineBattle} from "../start-online-battle";
 
 /** カジュアルマッチが開始された */
 type IsCasualMatchStarted = {
