@@ -1,4 +1,6 @@
+import { Observable } from "rxjs";
 import * as THREE from "three";
+import { GameObjectAction } from "../action/game-object-action";
 
 /** 座標 */
 type Position = {
@@ -11,6 +13,16 @@ type Position = {
 /** ベースとなる線の長さ */
 const BaseLength = 100;
 
+/** パラメータ */
+type Params = {
+  /** 線の色 */
+  color: THREE.ColorRepresentation;
+  /** 線の幅 */
+  width: number,
+  /** ゲームオブジェクトアクション */
+  gameObjectAction: Observable<GameObjectAction>;
+};
+
 /** 引き出し線 */
 export class Leadline {
   /** メッシュ */
@@ -21,10 +33,10 @@ export class Leadline {
    * @param color 線の色
    * @param width 線の太さ
    */
-  constructor(color: THREE.ColorRepresentation = 0x0000ff, width = 3) {
-    const geometry = new THREE.PlaneGeometry(BaseLength, width);
+  constructor(params: Params) {
+    const geometry = new THREE.PlaneGeometry(BaseLength, params.width);
     const material = new THREE.MeshBasicMaterial({
-      color,
+      color: params.color,
       side: THREE.DoubleSide,
     });
     this.#mesh = new THREE.Mesh(geometry, material);
