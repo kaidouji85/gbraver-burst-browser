@@ -1,6 +1,7 @@
-import { Observable } from "rxjs";
+import { Observable, Unsubscribable } from "rxjs";
 import * as THREE from "three";
 import { GameObjectAction } from "../action/game-object-action";
+import { PreRender } from "../../game-loop/pre-render";
 
 /** 座標 */
 type Position = {
@@ -26,7 +27,9 @@ type Params = {
 /** 引き出し線 */
 export class Leadline {
   /** メッシュ */
-  #mesh: THREE.Mesh;
+  #mesh: THREE.Mesh<THREE.PlaneGeometry, THREE.MeshBasicMaterial>;
+  /** アンサブスクライバ */
+  #unsubscribers: Unsubscribable[];
 
   /**
    * コンストラクタ
@@ -40,6 +43,22 @@ export class Leadline {
       side: THREE.DoubleSide,
     });
     this.#mesh = new THREE.Mesh(geometry, material);
+    this.#unsubscribers = [
+      params.gameObjectAction.subscribe((action) => {
+        if (action.type === "PreRender") {
+          this.#onPreRender(action);
+        }
+      })
+    ];
+  }
+
+  /**
+   * デストラクタ相当の処理
+   */
+  destructor(): void {
+    this.#mesh.material.dispose();
+    this.#mesh.geometry.dispose();
+    this.#unsubscribers.forEach(unsubscriber => unsubscriber.unsubscribe());
   }
 
   /**
@@ -62,5 +81,13 @@ export class Leadline {
    */
   getObject3D(): THREE.Object3D {
     return this.#mesh;
+  }
+
+  /**
+   * プリレンダー時の処理
+   * @param action アクション
+   */
+  #onPreRender(action: PreRender): void {
+    this.#mesh.quaternion.copy(action.camera.quaternion);
   }
 }
