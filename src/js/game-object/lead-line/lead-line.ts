@@ -1,7 +1,8 @@
 import { Observable, Unsubscribable } from "rxjs";
 import * as THREE from "three";
-import { GameObjectAction } from "../action/game-object-action";
+
 import { PreRender } from "../../game-loop/pre-render";
+import { GameObjectAction } from "../action/game-object-action";
 
 /** 座標 */
 type Position = {

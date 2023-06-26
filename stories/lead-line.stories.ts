@@ -1,9 +1,9 @@
+import { Observable } from "rxjs";
 import * as THREE from "three";
 
+import { GameObjectAction } from "../src/js/game-object/action/game-object-action";
 import { Leadline } from "../src/js/game-object/lead-line/lead-line";
 import { HUDGameObjectStub } from "./stub/hud-game-object-stub";
-import { Observable } from "rxjs";
-import { GameObjectAction } from "../src/js/game-object/action/game-object-action";
 
 export default {
   title: "lead-line",
