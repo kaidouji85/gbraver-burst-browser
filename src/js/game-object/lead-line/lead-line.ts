@@ -21,10 +21,13 @@ export class Leadline {
    * @param color 線の色
    * @param width 線の太さ
    */
-  constructor(color: THREE.ColorRepresentation = 0x0000ff, width: number = 3) {
+  constructor(color: THREE.ColorRepresentation = 0x0000ff, width = 3) {
     const geometry = new THREE.PlaneGeometry(BaseLength, width);
-    const material = new THREE.MeshBasicMaterial( {color, side: THREE.DoubleSide} );
-    this.#mesh = new THREE.Mesh( geometry, material );  
+    const material = new THREE.MeshBasicMaterial({
+      color,
+      side: THREE.DoubleSide,
+    });
+    this.#mesh = new THREE.Mesh(geometry, material);
   }
 
   /**
