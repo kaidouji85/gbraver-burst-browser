@@ -51,9 +51,9 @@ const leadLineStory = (generator: Generator, fn: Fn) => () => {
 };
 
 /** 青線 */
-const blueLine: Generator = (gameObjectAction) => {
+const blueLine: Generator = () => {
   const color = 0x0000ff;
-  return [new Leadline({color, width: 3, gameObjectAction}), cirlce(5, color), cirlce(5, color)];
+  return [new Leadline(color, 3), cirlce(5, color), cirlce(5, color)];
 };
 
 /** 右上 */
