@@ -1,7 +1,5 @@
-import { Observable } from "rxjs";
 import * as THREE from "three";
 
-import { GameObjectAction } from "../src/js/game-object/action/game-object-action";
 import { Leadline } from "../src/js/game-object/lead-line/lead-line";
 import { HUDGameObjectStub } from "./stub/hud-game-object-stub";
 
@@ -25,7 +23,7 @@ const cirlce = (radius: number, color = 0xffff00) => {
  * 引き出し線生成関数
  * @return 引き出し線、点A、点B
  */
-type Generator = (gameObjectAction: Observable<GameObjectAction>) => [Leadline, THREE.Mesh, THREE.Mesh];
+type Generator = () => [Leadline, THREE.Mesh, THREE.Mesh];
 
 /**
  * 引き出し線操作関数
@@ -41,8 +39,8 @@ type Fn = (leadLine: Leadline, a: THREE.Mesh, b: THREE.Mesh) => void;
  * @param fn 引き出し線操作関数
  */
 const leadLineStory = (generator: Generator, fn: Fn) => () => {
-  const stub = new HUDGameObjectStub(({gameObjectAction}) => {
-    const [leadLine, a, b] = generator(gameObjectAction);
+  const stub = new HUDGameObjectStub(() => {
+    const [leadLine, a, b] = generator();
     fn(leadLine, a, b);
     return [leadLine.getObject3D(), a, b];
   });

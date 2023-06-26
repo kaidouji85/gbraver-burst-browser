@@ -15,7 +15,7 @@ const BaseLength = 100;
 export class Leadline {
   /** メッシュ */
   #mesh: THREE.Mesh<THREE.PlaneGeometry, THREE.MeshBasicMaterial>;
- 
+
   /**
    * コンストラクタ
    * @param color 線の色
