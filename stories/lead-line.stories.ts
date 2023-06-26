@@ -51,14 +51,41 @@ const leadLineStory = (generator: Generator, fn: Fn) => () => {
 /** 青線 */
 const blueLine: Generator = () => {
   const color = 0x0000ff;
-  return [new Leadline(color), cirlce(5, color), cirlce(5, color)];
+  return [new Leadline(color, 3), cirlce(5, color), cirlce(5, color)];
 };
 
-/** 斜め線 */
-export const diagonalLine = leadLineStory(blueLine, (leadLine, a, b) => {
-  a.position.x = 0;
-  a.position.y = 0;
-  b.position.x = 100;
-  b.position.y = 100;
+/** 右上 */
+export const rightUpper = leadLineStory(blueLine, (leadLine, a, b) => {
+  a.position.x = 30;
+  a.position.y = 40;
+  b.position.x = a.position.x + 100;
+  b.position.y = a.position.y + 120;
+  leadLine.set(a.position, b.position);
+});
+
+/** 左上 */
+export const leftUpper = leadLineStory(blueLine, (leadLine, a, b) => {
+  a.position.x = -30;
+  a.position.y = 40;
+  b.position.x = a.position.x - 100;
+  b.position.y = a.position.y + 120;
+  leadLine.set(a.position, b.position);
+});
+
+/** 右下 */
+export const rightLover = leadLineStory(blueLine, (leadLine, a, b) => {
+  a.position.x = 30;
+  a.position.y = -40;
+  b.position.x = a.position.x + 100;
+  b.position.y = a.position.y - 120;
+  leadLine.set(a.position, b.position);
+});
+
+/** 左下 */
+export const leftLover = leadLineStory(blueLine, (leadLine, a, b) => {
+  a.position.x = -30;
+  a.position.y = -40;
+  b.position.x = a.position.x - 100;
+  b.position.y = a.position.y - 120;
   leadLine.set(a.position, b.position);
 });
