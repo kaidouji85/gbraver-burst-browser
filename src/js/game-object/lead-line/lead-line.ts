@@ -24,7 +24,10 @@ export class Leadline {
     const material = new THREE.LineBasicMaterial({
       color,
     });
-    const points = [new THREE.Vector3(0, 0, 0), new THREE.Vector3(BaseLength, 0, 0)];
+    const points = [
+      new THREE.Vector3(0, 0, 0),
+      new THREE.Vector3(BaseLength, 0, 0),
+    ];
     const geometry = new THREE.BufferGeometry().setFromPoints(points);
     this.#line = new THREE.Line(geometry, material);
   }
