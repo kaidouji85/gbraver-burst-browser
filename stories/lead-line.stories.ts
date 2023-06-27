@@ -2,6 +2,7 @@ import * as THREE from "three";
 
 import { LeadLine } from "../src/js/game-object/lead-line/lead-line";
 import { HUDGameObjectStub } from "./stub/hud-game-object-stub";
+import {LeadLineView} from "../src/js/game-object/lead-line/view/lead-line-view";
 
 export default {
   title: "lead-line",
@@ -51,7 +52,7 @@ const leadLineStory = (generator: Generator, fn: Fn) => () => {
 /** 青線 */
 const blueLine: Generator = () => {
   const color = 0x0000ff;
-  return [new LeadLine(color, 3), cirlce(5, color), cirlce(5, color)];
+  return [new LeadLine(new LeadLineView(color, 3)), cirlce(5, color), cirlce(5, color)];
 };
 
 /** 右上 */

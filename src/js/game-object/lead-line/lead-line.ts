@@ -12,12 +12,11 @@ export class LeadLine {
 
   /**
    * コンストラクタ
-   * @param color 線の色
-   * @param width 線の太さ
+   * @param view ビュー
    */
-  constructor(color: THREE.ColorRepresentation, width: number) {
+  constructor(view: LeadLineView) {
     this.#model = initialValue();
-    this.#view = new LeadLineView(color, width);
+    this.#view = view;
   }
 
   /**
