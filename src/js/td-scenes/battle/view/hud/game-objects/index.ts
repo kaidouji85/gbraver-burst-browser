@@ -23,14 +23,23 @@ import { createPilotButton } from "./pilot-button";
  * HUDレイヤーのゲームオブジェクト
  */
 export class HUDGameObjects {
+  /** バッテリーセレクタ */
   batterySelector: BatterySelector;
+  /** バーストボタン */
   burstButton: BurstButton;
+  /** パイロットボタン */
   pilotButton: PilotButton;
+  /** アニメーションタイムスケールボタン */
   timeScaleButton: TimeScaleButton;
+  /** フェーダ（最前列） */
   frontmostFader: Fader;
+  /** フェーダ（最後尾） */
   rearmostFader: Fader;
+  /** 引き分けインジケータ */
   drawIndicator: ResultIndicator;
+  /** 戦闘シーンアクション */
   #battleAction: Subject<BattleSceneAction>;
+  /** アンサブスクライバ */
   #unsubscribers: Unsubscribable[];
 
   /**
