@@ -15,6 +15,26 @@ const targetTDCoordinate = {
 };
 
 /**
+ * バッテリーセレクタ引き出し線をトラッキングする
+ * @param td 3Dレイヤー
+ * @param hud HUDレイヤー
+ * @param targetHUDCoordinate 引き出し線が指し示すHUDレイヤー座標
+ */
+function trackingBatterySelectorLeadLine(
+  td: Readonly<ThreeDimensionLayer>,
+  hud: Readonly<HudLayer>,
+  targetHUDCoordinate: Readonly<Coordinate>,
+): void {
+  const batterySelectorPosition = hud.gameObjects.batterySelector.getObject3D().position;
+  const startHUDCoordinate = {
+    x: batterySelectorPosition.x,
+    y: batterySelectorPosition.y,
+  };
+  hud.gameObjects.batterySelectorLeadLine.set(startHUDCoordinate, targetHUDCoordinate);
+  hud.gameObjects.batterySelectorLeadLine.getObject3D().position.z = batterySelectorPosition.z - 0.1;
+}
+
+/**
  * バーストボタン引き出し線をトラッキングする
  * @param td 3Dレイヤー
  * @param hud HUDレイヤー
@@ -70,6 +90,7 @@ export function trackingLeadLine(
     td.camera.getCamera(),
     rendererDOM
   );
+  trackingBatterySelectorLeadLine(td, hud, targetHUDCoordinate);
   trackingBurstButtonLeadLine(td, hud, targetHUDCoordinate);
   trackingPilotButtonLeadLine(td, hud, targetHUDCoordinate);
 }
