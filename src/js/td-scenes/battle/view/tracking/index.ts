@@ -4,6 +4,7 @@ import { HudLayer } from "../hud";
 import { ThreeDimensionLayer } from "../td";
 import { trackingArmdozerSprites } from "./armdozer-sprite";
 import { trackingGauges } from "./gauge";
+import {trackingLeadLine} from "./lead-line";
 
 /**
  * 3Dレイヤーのオブジェクトをトラッキングする
@@ -20,4 +21,5 @@ export function tracking(
 ): void {
   trackingGauges(td, hud, activePlayerId, rendererDOM);
   trackingArmdozerSprites(td, hud, rendererDOM);
+  trackingLeadLine(td, hud, rendererDOM);
 }
