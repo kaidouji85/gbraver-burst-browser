@@ -18,6 +18,8 @@ import type { Resources } from "../../../../../resource";
 import type { BattleSceneAction } from "../../../actions";
 import { createBurstButton } from "./burst-button";
 import { createPilotButton } from "./pilot-button";
+import {LeadLine} from "../../../../../game-object/lead-line/lead-line";
+import {battleButtonLeadLine} from "../../../../../game-object/lead-line";
 
 /**
  * HUDレイヤーのゲームオブジェクト
@@ -27,6 +29,8 @@ export class HUDGameObjects {
   batterySelector: BatterySelector;
   /** バーストボタン */
   burstButton: BurstButton;
+  /** バーストボタンの引き出し線 */
+  burstButtonLeadLine: LeadLine;
   /** パイロットボタン */
   pilotButton: PilotButton;
   /** アニメーションタイムスケールボタン */
@@ -64,6 +68,7 @@ export class HUDGameObjects {
       gameObjectAction,
       playerInfo.armdozer.id
     );
+    this.burstButtonLeadLine = battleButtonLeadLine();
     this.pilotButton = createPilotButton(
       resources,
       gameObjectAction,
@@ -124,6 +129,7 @@ export class HUDGameObjects {
   destructor(): void {
     this.batterySelector.destructor();
     this.burstButton.destructor();
+    this.burstButtonLeadLine.destructor();
     this.pilotButton.destructor();
     this.timeScaleButton.destructor();
     this.rearmostFader.destructor();
@@ -143,6 +149,7 @@ export class HUDGameObjects {
     return [
       this.batterySelector.getObject3D(),
       this.burstButton.getObject3D(),
+      this.burstButtonLeadLine.getObject3D(),
       this.pilotButton.getObject3D(),
       this.timeScaleButton.getObject3D(),
       this.rearmostFader.getObject3D(),
