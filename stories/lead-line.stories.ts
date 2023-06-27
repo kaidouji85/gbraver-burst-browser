@@ -14,7 +14,7 @@ export default {
  * @param color 円の色
  * @return 生成した円
  */
-const cirlce = (radius: number, color = 0xffff00) => {
+const circle = (radius: number, color = 0xffff00) => {
   const geometry = new THREE.CircleGeometry(radius, 32);
   const material = new THREE.MeshBasicMaterial({ color });
   return new THREE.Mesh(geometry, material);
@@ -52,7 +52,7 @@ const leadLineStory = (generator: Generator, fn: Fn) => () => {
 /** 青線 */
 const blueLine: Generator = () => {
   const color = 0x0000ff;
-  return [new LeadLine(new LeadLineView(color, 3)), cirlce(5, color), cirlce(5, color)];
+  return [new LeadLine(new LeadLineView(color, 3)), circle(5, color), circle(5, color)];
 };
 
 /** 右上 */
