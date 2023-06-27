@@ -33,6 +33,8 @@ export class HUDGameObjects {
   burstButtonLeadLine: LeadLine;
   /** パイロットボタン */
   pilotButton: PilotButton;
+  /** パイロットボタンの引き出し線 */
+  pilotButtonLeadLine: LeadLine;
   /** アニメーションタイムスケールボタン */
   timeScaleButton: TimeScaleButton;
   /** フェーダ（最前列） */
@@ -74,6 +76,7 @@ export class HUDGameObjects {
       gameObjectAction,
       playerInfo.pilot.id
     );
+    this.pilotButtonLeadLine = battleButtonLeadLine();
     this.timeScaleButton = new TimeScaleButton(resources, gameObjectAction);
     this.frontmostFader = frontmostFader({
       gameObjectAction: gameObjectAction,
@@ -131,6 +134,7 @@ export class HUDGameObjects {
     this.burstButton.destructor();
     this.burstButtonLeadLine.destructor();
     this.pilotButton.destructor();
+    this.pilotButtonLeadLine.destructor();
     this.timeScaleButton.destructor();
     this.rearmostFader.destructor();
     this.frontmostFader.destructor();
@@ -151,6 +155,7 @@ export class HUDGameObjects {
       this.burstButton.getObject3D(),
       this.burstButtonLeadLine.getObject3D(),
       this.pilotButton.getObject3D(),
+      this.pilotButtonLeadLine.getObject3D(),
       this.timeScaleButton.getObject3D(),
       this.rearmostFader.getObject3D(),
       this.frontmostFader.getObject3D(),
