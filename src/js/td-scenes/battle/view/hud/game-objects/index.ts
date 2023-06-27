@@ -27,6 +27,8 @@ import {battleButtonLeadLine} from "../../../../../game-object/lead-line";
 export class HUDGameObjects {
   /** バッテリーセレクタ */
   batterySelector: BatterySelector;
+  /** バッテリーセレクタの引き出し線 */
+  batterySelectorLeadLine: LeadLine;
   /** バーストボタン */
   burstButton: BurstButton;
   /** バーストボタンの引き出し線 */
@@ -65,6 +67,7 @@ export class HUDGameObjects {
       gameObjectAction: gameObjectAction,
       resources: resources,
     });
+    this.batterySelectorLeadLine = battleButtonLeadLine();
     this.burstButton = createBurstButton(
       resources,
       gameObjectAction,
@@ -131,6 +134,7 @@ export class HUDGameObjects {
    */
   destructor(): void {
     this.batterySelector.destructor();
+    this.batterySelectorLeadLine.destructor();
     this.burstButton.destructor();
     this.burstButtonLeadLine.destructor();
     this.pilotButton.destructor();
@@ -152,6 +156,7 @@ export class HUDGameObjects {
   getObject3Ds(): THREE.Object3D[] {
     return [
       this.batterySelector.getObject3D(),
+      this.batterySelectorLeadLine.getObject3D(),
       this.burstButton.getObject3D(),
       this.burstButtonLeadLine.getObject3D(),
       this.pilotButton.getObject3D(),
