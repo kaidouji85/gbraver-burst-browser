@@ -67,19 +67,19 @@ export class HUDGameObjects {
       gameObjectAction: gameObjectAction,
       resources: resources,
     });
-    this.batterySelectorLeadLine = battleButtonLeadLine();
+    this.batterySelectorLeadLine = battleButtonLeadLine(gameObjectAction);
     this.burstButton = createBurstButton(
       resources,
       gameObjectAction,
       playerInfo.armdozer.id
     );
-    this.burstButtonLeadLine = battleButtonLeadLine();
+    this.burstButtonLeadLine = battleButtonLeadLine(gameObjectAction);
     this.pilotButton = createPilotButton(
       resources,
       gameObjectAction,
       playerInfo.pilot.id
     );
-    this.pilotButtonLeadLine = battleButtonLeadLine();
+    this.pilotButtonLeadLine = battleButtonLeadLine(gameObjectAction);
     this.timeScaleButton = new TimeScaleButton(resources, gameObjectAction);
     this.frontmostFader = frontmostFader({
       gameObjectAction: gameObjectAction,
