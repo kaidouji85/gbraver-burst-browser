@@ -3,6 +3,8 @@ import * as THREE from "three";
 import { LeadLine } from "../src/js/game-object/lead-line/lead-line";
 import { HUDGameObjectStub } from "./stub/hud-game-object-stub";
 import {LeadLineView} from "../src/js/game-object/lead-line/view/lead-line-view";
+import {Observable} from "rxjs";
+import {GameObjectAction} from "../src/js/game-object/action/game-object-action";
 
 export default {
   title: "lead-line",
@@ -22,9 +24,10 @@ const circle = (radius: number, color = 0xffff00) => {
 
 /**
  * 引き出し線生成関数
+ * @param gameObjectAction ゲームオブジェクトアクション
  * @return 引き出し線、点A、点B
  */
-type Generator = () => [LeadLine, THREE.Mesh, THREE.Mesh];
+type Generator = (gameObjectAction: Observable<GameObjectAction>) => [LeadLine, THREE.Mesh, THREE.Mesh];
 
 /**
  * 引き出し線操作関数
@@ -40,8 +43,8 @@ type Fn = (leadLine: LeadLine, a: THREE.Mesh, b: THREE.Mesh) => void;
  * @param fn 引き出し線操作関数
  */
 const leadLineStory = (generator: Generator, fn: Fn) => () => {
-  const stub = new HUDGameObjectStub(() => {
-    const [leadLine, a, b] = generator();
+  const stub = new HUDGameObjectStub(({gameObjectAction}) => {
+    const [leadLine, a, b] = generator(gameObjectAction);
     fn(leadLine, a, b);
     return [leadLine.getObject3D(), a, b];
   });
@@ -50,9 +53,10 @@ const leadLineStory = (generator: Generator, fn: Fn) => () => {
 };
 
 /** 青線 */
-const blueLine: Generator = () => {
+const blueLine: Generator = (gameObjectAction) => {
   const color = 0x0000ff;
-  return [new LeadLine(new LeadLineView(color, 3)), circle(5, color), circle(5, color)];
+  const view = new LeadLineView(color, 3);
+  return [new LeadLine(view, gameObjectAction), circle(5, color), circle(5, color)];
 };
 
 /** 右上 */
