@@ -36,6 +36,7 @@ function trackingBurstButton(
     y: burstButtonPosition.y,
   };
   hud.gameObjects.burstButtonLeadLine.set(startHUDCoordinate, targetHUDCoordinate);
+  hud.gameObjects.burstButtonLeadLine.getObject3D().position.z = burstButtonPosition.z - 0.1;
 }
 
 /**
