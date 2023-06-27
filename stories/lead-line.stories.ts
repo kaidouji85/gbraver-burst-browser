@@ -1,6 +1,6 @@
 import * as THREE from "three";
 
-import { Leadline } from "../src/js/game-object/lead-line/lead-line";
+import { LeadLine } from "../src/js/game-object/lead-line/lead-line";
 import { HUDGameObjectStub } from "./stub/hud-game-object-stub";
 
 export default {
@@ -23,7 +23,7 @@ const cirlce = (radius: number, color = 0xffff00) => {
  * 引き出し線生成関数
  * @return 引き出し線、点A、点B
  */
-type Generator = () => [Leadline, THREE.Mesh, THREE.Mesh];
+type Generator = () => [LeadLine, THREE.Mesh, THREE.Mesh];
 
 /**
  * 引き出し線操作関数
@@ -31,7 +31,7 @@ type Generator = () => [Leadline, THREE.Mesh, THREE.Mesh];
  * @param a 点A
  * @param b 点B
  */
-type Fn = (leadLine: Leadline, a: THREE.Mesh, b: THREE.Mesh) => void;
+type Fn = (leadLine: LeadLine, a: THREE.Mesh, b: THREE.Mesh) => void;
 
 /**
  * 引き出し線ストーリー
@@ -51,7 +51,7 @@ const leadLineStory = (generator: Generator, fn: Fn) => () => {
 /** 青線 */
 const blueLine: Generator = () => {
   const color = 0x0000ff;
-  return [new Leadline(color, 3), cirlce(5, color), cirlce(5, color)];
+  return [new LeadLine(color, 3), cirlce(5, color), cirlce(5, color)];
 };
 
 /** 右上 */
