@@ -12,7 +12,7 @@ type Position = {
 const BaseLength = 100;
 
 /** 引き出し線 */
-export class Leadline {
+export class LeadLine {
   /** メッシュ */
   #mesh: THREE.Mesh<THREE.PlaneGeometry, THREE.MeshBasicMaterial>;
 
