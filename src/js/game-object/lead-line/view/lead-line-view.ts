@@ -1,5 +1,6 @@
 import * as THREE from "three";
-import {LeadLineModel} from "../model/lead-line-model";
+
+import { LeadLineModel } from "../model/lead-line-model";
 
 /** ベースとなる線の長さ */
 const BaseLength = 100;
@@ -36,11 +37,16 @@ export class LeadLineView {
    * @param model モデル
    */
   engage(model: Readonly<LeadLineModel>): void {
-    const length = Math.sqrt((model.end.x - model.start.x) ** 2 + (model.end.y - model.start.y) ** 2);
+    const length = Math.sqrt(
+      (model.end.x - model.start.x) ** 2 + (model.end.y - model.start.y) ** 2
+    );
     this.#mesh.scale.x = length / BaseLength;
     this.#mesh.position.x = model.start.x + (model.end.x - model.start.x) / 2;
     this.#mesh.position.y = model.start.y + (model.end.y - model.start.y) / 2;
-    this.#mesh.rotation.z = Math.atan2(model.end.y - model.start.y, model.end.x - model.start.x);
+    this.#mesh.rotation.z = Math.atan2(
+      model.end.y - model.start.y,
+      model.end.x - model.start.x
+    );
   }
 
   /**

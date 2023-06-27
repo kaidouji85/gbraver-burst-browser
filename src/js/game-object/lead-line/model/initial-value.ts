@@ -1,4 +1,4 @@
-import {LeadLineModel} from "./lead-line-model";
+import { LeadLineModel } from "./lead-line-model";
 
 /**
  * モデルの初期値を生成する
@@ -13,6 +13,6 @@ export function initialValue(): LeadLineModel {
     end: {
       x: 100,
       y: 0,
-    }
+    },
   };
 }

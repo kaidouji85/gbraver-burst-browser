@@ -1,9 +1,10 @@
+import { Observable, Unsubscribable } from "rxjs";
 import * as THREE from "three";
-import {LeadLineModel, Position} from "./model/lead-line-model";
-import {LeadLineView} from "./view/lead-line-view";
-import {initialValue} from "./model/initial-value";
-import {Observable, Unsubscribable} from "rxjs";
-import {GameObjectAction} from "../action/game-object-action";
+
+import { GameObjectAction } from "../action/game-object-action";
+import { initialValue } from "./model/initial-value";
+import { LeadLineModel, Position } from "./model/lead-line-model";
+import { LeadLineView } from "./view/lead-line-view";
 
 /** 引き出し線 */
 export class LeadLine {
@@ -12,22 +13,25 @@ export class LeadLine {
   /** ビュー */
   #view: LeadLineView;
   /** アンサブスクライバ */
-  #unsubscribers: Unsubscribable[]
+  #unsubscribers: Unsubscribable[];
 
   /**
    * コンストラクタ
    * @param view ビュー
    * @param gameObjectAction ゲームオブジェクトアクション
    */
-  constructor(view: LeadLineView, gameObjectAction: Observable<GameObjectAction>) {
+  constructor(
+    view: LeadLineView,
+    gameObjectAction: Observable<GameObjectAction>
+  ) {
     this.#model = initialValue();
     this.#view = view;
     this.#unsubscribers = [
-      gameObjectAction.subscribe(action => {
+      gameObjectAction.subscribe((action) => {
         if (action.type === "Update") {
           this.#onUpdate();
         }
-      })
+      }),
     ];
   }
 
@@ -36,7 +40,7 @@ export class LeadLine {
    */
   destructor(): void {
     this.#view.destructor();
-    this.#unsubscribers.forEach(unsubscriber => unsubscriber.unsubscribe());
+    this.#unsubscribers.forEach((unsubscriber) => unsubscriber.unsubscribe());
   }
 
   /**
