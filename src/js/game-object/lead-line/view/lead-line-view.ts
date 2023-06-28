@@ -9,7 +9,7 @@ const BaseLength = 100;
 /** 引き出し線ビュー */
 export class LeadLineView {
   /** メッシュ */
-  #mesh: THREE.Mesh<THREE.PlaneGeometry, THREE.MeshBasicMaterial>;
+  #mesh: THREE.Mesh<THREE.BufferGeometry, THREE.MeshBasicMaterial>;
 
   /**
    * コンストラクタ
@@ -17,7 +17,11 @@ export class LeadLineView {
    * @param width 線の太さ
    */
   constructor(color: THREE.ColorRepresentation, width: number) {
-    const geometry = new THREE.PlaneGeometry(BaseLength, width);
+    const geometry = new THREE.BufferGeometry().setFromPoints([
+      new THREE.Vector3(BaseLength, 0, 0),
+      new THREE.Vector3(0, width/2, 0),
+      new THREE.Vector3(0, -width/2, 0),
+    ]);
     const material = new THREE.MeshBasicMaterial({
       color,
       side: THREE.DoubleSide,
@@ -44,8 +48,8 @@ export class LeadLineView {
       (model.end.x - model.start.x) ** 2 + (model.end.y - model.start.y) ** 2
     );
     this.#mesh.scale.x = length / BaseLength;
-    this.#mesh.position.x = model.start.x + (model.end.x - model.start.x) / 2;
-    this.#mesh.position.y = model.start.y + (model.end.y - model.start.y) / 2;
+    this.#mesh.position.x = model.start.x;
+    this.#mesh.position.y = model.start.y;
     this.#mesh.rotation.z = Math.atan2(
       model.end.y - model.start.y,
       model.end.x - model.start.x
