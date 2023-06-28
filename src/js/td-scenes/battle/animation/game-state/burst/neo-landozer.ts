@@ -55,8 +55,7 @@ function neoLandozerBuffPower(param: NeoLandozerBurst<BuffPower>): Animate {
     dolly(param.tdCamera, "-60", 500),
     param.tdObjects.skyBrightness.brightness(0.2, 500),
     param.tdObjects.illumination.intensity(0.2, 500),
-    param.hudObjects.rearmostFader.opacity(0.6, 500),
-    param.tdObjects.turnIndicator.invisible()
+    param.hudObjects.rearmostFader.opacity(0.6, 500)
   )
     .chain(delay(800))
     .chain(

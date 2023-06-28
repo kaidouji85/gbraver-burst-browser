@@ -50,8 +50,7 @@ function shinyaRecoverBattery(
     track(param.tdCamera, param.invokerSprite.getObject3D().position.x, 500),
     dolly(param.tdCamera, "-40", 500),
     param.tdObjects.skyBrightness.brightness(0.2, 500),
-    param.tdObjects.illumination.intensity(0.2, 500),
-    param.tdObjects.turnIndicator.invisible()
+    param.tdObjects.illumination.intensity(0.2, 500)
   )
     .chain(delay(800))
     .chain(param.pilot.cutIn.hidden())
