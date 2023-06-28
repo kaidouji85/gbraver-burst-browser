@@ -20,6 +20,7 @@ export class LeadLineView {
     const material = new THREE.MeshBasicMaterial({
       color,
       side: THREE.DoubleSide,
+      transparent: true,
     });
     this.#mesh = new THREE.Mesh(geometry, material);
   }
@@ -47,6 +48,7 @@ export class LeadLineView {
       model.end.y - model.start.y,
       model.end.x - model.start.x
     );
+    this.#mesh.material.opacity = model.opacity;
   }
 
   /**
