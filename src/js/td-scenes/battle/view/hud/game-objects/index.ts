@@ -10,7 +10,11 @@ import {
   rearmostFader,
 } from "../../../../../game-object/fader";
 import { Fader } from "../../../../../game-object/fader/fader";
-import { battleButtonLeadLine } from "../../../../../game-object/lead-line";
+import {
+  batterySelectorLeadLine,
+  burstButtonLeadLine,
+  pilotButtonLeadLine,
+} from "../../../../../game-object/lead-line";
 import { LeadLine } from "../../../../../game-object/lead-line/lead-line";
 import { PilotButton } from "../../../../../game-object/pilot-button/pilot-button";
 import { drawIndicator } from "../../../../../game-object/result-indicator";
@@ -21,9 +25,7 @@ import type { BattleSceneAction } from "../../../actions";
 import { createBurstButton } from "./burst-button";
 import { createPilotButton } from "./pilot-button";
 
-/**
- * HUDレイヤーのゲームオブジェクト
- */
+/** HUDレイヤーのゲームオブジェクト */
 export class HUDGameObjects {
   /** バッテリーセレクタ */
   batterySelector: BatterySelector;
@@ -67,19 +69,19 @@ export class HUDGameObjects {
       gameObjectAction: gameObjectAction,
       resources: resources,
     });
-    this.batterySelectorLeadLine = battleButtonLeadLine(gameObjectAction);
+    this.batterySelectorLeadLine = batterySelectorLeadLine(gameObjectAction);
     this.burstButton = createBurstButton(
       resources,
       gameObjectAction,
       playerInfo.armdozer.id
     );
-    this.burstButtonLeadLine = battleButtonLeadLine(gameObjectAction);
+    this.burstButtonLeadLine = burstButtonLeadLine(gameObjectAction);
     this.pilotButton = createPilotButton(
       resources,
       gameObjectAction,
       playerInfo.pilot.id
     );
-    this.pilotButtonLeadLine = battleButtonLeadLine(gameObjectAction);
+    this.pilotButtonLeadLine = pilotButtonLeadLine(gameObjectAction);
     this.timeScaleButton = new TimeScaleButton(resources, gameObjectAction);
     this.frontmostFader = frontmostFader({
       gameObjectAction: gameObjectAction,
