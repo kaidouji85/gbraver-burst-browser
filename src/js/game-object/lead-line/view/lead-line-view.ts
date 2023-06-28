@@ -1,7 +1,7 @@
 import * as THREE from "three";
 
-import { LeadLineModel } from "../model/lead-line-model";
 import { SPRITE_RENDER_ORDER } from "../../../render/render-order/td-render-order";
+import { LeadLineModel } from "../model/lead-line-model";
 
 /** ベースとなる線の長さ */
 const BaseLength = 100;
