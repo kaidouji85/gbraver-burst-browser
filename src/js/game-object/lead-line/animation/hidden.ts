@@ -4,13 +4,13 @@ import { tween } from "../../../animation/tween";
 import { LeadLineModel } from "../model/lead-line-model";
 
 /**
- * 引き出し線を表示する
+ * 引き出し線を消す
  * @param model モデル
  * @return アニメーション
  */
-export function show(model: LeadLineModel): Animate {
+export function hodden(model: LeadLineModel): Animate {
   return process(() => {
-    model.opacity = 0;
+    model.opacity = 1;
   })
-  .chain(tween(model, t => t.to({opacity: 1}, 200)));
+  .chain(tween(model, t => t.to({opacity: 0}, 200)));
 }
