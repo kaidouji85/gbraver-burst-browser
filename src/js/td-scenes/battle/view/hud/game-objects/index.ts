@@ -10,7 +10,11 @@ import {
   rearmostFader,
 } from "../../../../../game-object/fader";
 import { Fader } from "../../../../../game-object/fader/fader";
-import { batterySelectorLeadLine, burstButtonLeadLine, pilotButtonLeadLine } from "../../../../../game-object/lead-line";
+import {
+  batterySelectorLeadLine,
+  burstButtonLeadLine,
+  pilotButtonLeadLine,
+} from "../../../../../game-object/lead-line";
 import { LeadLine } from "../../../../../game-object/lead-line/lead-line";
 import { PilotButton } from "../../../../../game-object/pilot-button/pilot-button";
 import { drawIndicator } from "../../../../../game-object/result-indicator";
