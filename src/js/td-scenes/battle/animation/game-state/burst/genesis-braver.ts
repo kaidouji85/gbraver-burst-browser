@@ -50,7 +50,6 @@ function batteryLimitBreak(
     param.tdObjects.skyBrightness.brightness(0.2, 500),
     param.tdObjects.illumination.intensity(0.2, 500),
     param.hudObjects.rearmostFader.opacity(0.6, 500),
-    param.tdObjects.turnIndicator.invisible()
   )
     .chain(delay(800))
     .chain(
