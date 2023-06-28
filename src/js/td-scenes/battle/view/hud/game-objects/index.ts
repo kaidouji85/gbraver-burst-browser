@@ -10,6 +10,8 @@ import {
   rearmostFader,
 } from "../../../../../game-object/fader";
 import { Fader } from "../../../../../game-object/fader/fader";
+import { battleButtonLeadLine } from "../../../../../game-object/lead-line";
+import { LeadLine } from "../../../../../game-object/lead-line/lead-line";
 import { PilotButton } from "../../../../../game-object/pilot-button/pilot-button";
 import { drawIndicator } from "../../../../../game-object/result-indicator";
 import { ResultIndicator } from "../../../../../game-object/result-indicator/result-indicator";
@@ -23,14 +25,29 @@ import { createPilotButton } from "./pilot-button";
  * HUDレイヤーのゲームオブジェクト
  */
 export class HUDGameObjects {
+  /** バッテリーセレクタ */
   batterySelector: BatterySelector;
+  /** バッテリーセレクタの引き出し線 */
+  batterySelectorLeadLine: LeadLine;
+  /** バーストボタン */
   burstButton: BurstButton;
+  /** バーストボタンの引き出し線 */
+  burstButtonLeadLine: LeadLine;
+  /** パイロットボタン */
   pilotButton: PilotButton;
+  /** パイロットボタンの引き出し線 */
+  pilotButtonLeadLine: LeadLine;
+  /** アニメーションタイムスケールボタン */
   timeScaleButton: TimeScaleButton;
+  /** フェーダ（最前列） */
   frontmostFader: Fader;
+  /** フェーダ（最後尾） */
   rearmostFader: Fader;
+  /** 引き分けインジケータ */
   drawIndicator: ResultIndicator;
+  /** 戦闘シーンアクション */
   #battleAction: Subject<BattleSceneAction>;
+  /** アンサブスクライバ */
   #unsubscribers: Unsubscribable[];
 
   /**
@@ -50,16 +67,19 @@ export class HUDGameObjects {
       gameObjectAction: gameObjectAction,
       resources: resources,
     });
+    this.batterySelectorLeadLine = battleButtonLeadLine(gameObjectAction);
     this.burstButton = createBurstButton(
       resources,
       gameObjectAction,
       playerInfo.armdozer.id
     );
+    this.burstButtonLeadLine = battleButtonLeadLine(gameObjectAction);
     this.pilotButton = createPilotButton(
       resources,
       gameObjectAction,
       playerInfo.pilot.id
     );
+    this.pilotButtonLeadLine = battleButtonLeadLine(gameObjectAction);
     this.timeScaleButton = new TimeScaleButton(resources, gameObjectAction);
     this.frontmostFader = frontmostFader({
       gameObjectAction: gameObjectAction,
@@ -114,8 +134,11 @@ export class HUDGameObjects {
    */
   destructor(): void {
     this.batterySelector.destructor();
+    this.batterySelectorLeadLine.destructor();
     this.burstButton.destructor();
+    this.burstButtonLeadLine.destructor();
     this.pilotButton.destructor();
+    this.pilotButtonLeadLine.destructor();
     this.timeScaleButton.destructor();
     this.rearmostFader.destructor();
     this.frontmostFader.destructor();
@@ -133,8 +156,11 @@ export class HUDGameObjects {
   getObject3Ds(): THREE.Object3D[] {
     return [
       this.batterySelector.getObject3D(),
+      this.batterySelectorLeadLine.getObject3D(),
       this.burstButton.getObject3D(),
+      this.burstButtonLeadLine.getObject3D(),
       this.pilotButton.getObject3D(),
+      this.pilotButtonLeadLine.getObject3D(),
       this.timeScaleButton.getObject3D(),
       this.rearmostFader.getObject3D(),
       this.frontmostFader.getObject3D(),
