@@ -63,7 +63,7 @@ function showButtons(param: Readonly<AnimationParam>): Animate {
     param.view.hud.gameObjects.burstButton.open(canBurst),
     param.view.hud.gameObjects.burstButtonLeadLine.show(),
     param.view.hud.gameObjects.pilotButton.open(canPilotSkill),
-    param.view.hud.gameObjects.pilotButtonLeadLine.show(),
+    param.view.hud.gameObjects.pilotButtonLeadLine.show()
   );
 }
 
