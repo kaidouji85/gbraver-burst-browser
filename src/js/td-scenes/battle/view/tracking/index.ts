@@ -4,7 +4,7 @@ import { HudLayer } from "../hud";
 import { ThreeDimensionLayer } from "../td";
 import { trackingArmdozerSprites } from "./armdozer-sprite";
 import { trackingGauges } from "./gauge";
-import {trackingLeadLine} from "./lead-line";
+import { trackingLeadLine } from "./lead-line";
 
 /**
  * 3Dレイヤーのオブジェクトをトラッキングする

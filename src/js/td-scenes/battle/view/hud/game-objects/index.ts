@@ -10,6 +10,8 @@ import {
   rearmostFader,
 } from "../../../../../game-object/fader";
 import { Fader } from "../../../../../game-object/fader/fader";
+import { battleButtonLeadLine } from "../../../../../game-object/lead-line";
+import { LeadLine } from "../../../../../game-object/lead-line/lead-line";
 import { PilotButton } from "../../../../../game-object/pilot-button/pilot-button";
 import { drawIndicator } from "../../../../../game-object/result-indicator";
 import { ResultIndicator } from "../../../../../game-object/result-indicator/result-indicator";
@@ -18,8 +20,6 @@ import type { Resources } from "../../../../../resource";
 import type { BattleSceneAction } from "../../../actions";
 import { createBurstButton } from "./burst-button";
 import { createPilotButton } from "./pilot-button";
-import {LeadLine} from "../../../../../game-object/lead-line/lead-line";
-import {battleButtonLeadLine} from "../../../../../game-object/lead-line";
 
 /**
  * HUDレイヤーのゲームオブジェクト
