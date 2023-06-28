@@ -1,6 +1,7 @@
 import * as THREE from "three";
 
 import { LeadLineModel } from "../model/lead-line-model";
+import { SPRITE_RENDER_ORDER } from "../../../render/render-order/td-render-order";
 
 /** ベースとなる線の長さ */
 const BaseLength = 100;
@@ -23,6 +24,7 @@ export class LeadLineView {
       transparent: true,
     });
     this.#mesh = new THREE.Mesh(geometry, material);
+    this.#mesh.renderOrder = SPRITE_RENDER_ORDER;
   }
 
   /**
@@ -48,7 +50,7 @@ export class LeadLineView {
       model.end.y - model.start.y,
       model.end.x - model.start.x
     );
-    this.#mesh.material.opacity = model.opacity;
+    this.#mesh.material.opacity = 0;
   }
 
   /**
