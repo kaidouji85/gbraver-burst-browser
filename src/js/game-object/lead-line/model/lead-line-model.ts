@@ -12,4 +12,6 @@ export type LeadLineModel = {
   start: Position;
   /** 終点 */
   end: Position;
+  /** 透明度 */
+  opacity: number;
 };

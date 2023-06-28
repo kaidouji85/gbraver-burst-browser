@@ -1,7 +1,10 @@
 import { Observable, Unsubscribable } from "rxjs";
 import * as THREE from "three";
 
+import { Animate } from "../../animation/animate";
 import { GameObjectAction } from "../action/game-object-action";
+import { hidden } from "./animation/hidden";
+import { show } from "./animation/show";
 import { initialValue } from "./model/initial-value";
 import { LeadLineModel, Position } from "./model/lead-line-model";
 import { LeadLineView } from "./view/lead-line-view";
@@ -51,6 +54,24 @@ export class LeadLine {
   set(start: Position, end: Position): void {
     this.#model.start = start;
     this.#model.end = end;
+  }
+
+  /**
+   * 引き出し線を表示する
+   * @param model モデル
+   * @return アニメーション
+   */
+  show(): Animate {
+    return show(this.#model);
+  }
+
+  /**
+   * 引き出し線を消す
+   * @param model モデル
+   * @return アニメーション
+   */
+  hidden(): Animate {
+    return hidden(this.#model);
   }
 
   /**
