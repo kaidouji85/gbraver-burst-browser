@@ -72,6 +72,7 @@ export const rightUpper = leadLineStory(blueLine, (leadLine, a, b) => {
   b.position.x = a.position.x + 100;
   b.position.y = a.position.y + 120;
   leadLine.set(a.position, b.position);
+  leadLine.show().play();
 });
 
 /** 左上 */
@@ -81,6 +82,7 @@ export const leftUpper = leadLineStory(blueLine, (leadLine, a, b) => {
   b.position.x = a.position.x - 100;
   b.position.y = a.position.y + 120;
   leadLine.set(a.position, b.position);
+  leadLine.show().play();
 });
 
 /** 右下 */
@@ -90,6 +92,7 @@ export const rightLover = leadLineStory(blueLine, (leadLine, a, b) => {
   b.position.x = a.position.x + 100;
   b.position.y = a.position.y - 120;
   leadLine.set(a.position, b.position);
+  leadLine.show().play();
 });
 
 /** 左下 */
@@ -99,4 +102,5 @@ export const leftLover = leadLineStory(blueLine, (leadLine, a, b) => {
   b.position.x = a.position.x - 100;
   b.position.y = a.position.y - 120;
   leadLine.set(a.position, b.position);
+  leadLine.show().play();
 });
