@@ -60,7 +60,6 @@ export function inputCommandAnimation(
     playerHUD.gauge.battery(player.armdozer.battery),
     enemyHUD.gauge.hp(enemy.armdozer.hp),
     enemyHUD.gauge.battery(enemy.armdozer.battery),
-    props.view.td.gameObjects.turnIndicator.turnChange(isPlayerTurn),
     showCommand({
       view: props.view,
       isPlayerTurn,
