@@ -17,9 +17,9 @@ export interface PilotIcon {
   getObject3D(): THREE.Object3D;
 
   /**
-   * 透明度を設定する
+   * 不透明度を設定する
    *
-   * @param opacity 透明度
+   * @param opacity 不透明度
    */
   setOpacity(opacity: number): void;
 }

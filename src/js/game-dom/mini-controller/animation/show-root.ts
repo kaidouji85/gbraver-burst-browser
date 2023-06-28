@@ -6,7 +6,7 @@ import { MiniControllerProps } from "../props";
 
 /** モデル */
 type Model = {
-  /** 透明度 */
+  /** 不透明度 */
   opacity: number;
 };
 

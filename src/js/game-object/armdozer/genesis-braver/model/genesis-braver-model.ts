@@ -19,7 +19,7 @@ export type GenesisBraverModel = {
   active: {
     /** 0〜1で指定するアクティブレイヤーの強さ */
     strength: number;
-    /** 透明度 */
+    /** 不透明度 */
     opacity: number;
   };
 };

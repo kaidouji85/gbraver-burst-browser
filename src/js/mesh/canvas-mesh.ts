@@ -72,7 +72,7 @@ export class CanvasMesh {
     drawFunc(context);
   }
 
-  /** 透明度を設定する */
+  /** 不透明度を設定する */
   setOpacity(opacity: number): void {
     this.mesh.material.opacity = opacity;
   }
