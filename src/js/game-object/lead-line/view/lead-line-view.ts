@@ -19,11 +19,15 @@ export class LeadLineView {
    * @param width 線の太さ
    * @param opacityCoefficient 不透明度係数
    */
-  constructor(color: THREE.ColorRepresentation, width: number, opacityCoefficient: number) {
+  constructor(
+    color: THREE.ColorRepresentation,
+    width: number,
+    opacityCoefficient: number
+  ) {
     const geometry = new THREE.BufferGeometry().setFromPoints([
       new THREE.Vector3(BaseLength, 0, 0),
-      new THREE.Vector3(0, width/2, 0),
-      new THREE.Vector3(0, -width/2, 0),
+      new THREE.Vector3(0, width / 2, 0),
+      new THREE.Vector3(0, -width / 2, 0),
     ]);
     const material = new THREE.MeshBasicMaterial({
       color,
