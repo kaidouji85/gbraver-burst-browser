@@ -8,7 +8,7 @@ import { LeadLineModel } from "../model/lead-line-model";
  * @param model モデル
  * @return アニメーション
  */
-export function hodden(model: LeadLineModel): Animate {
+export function hidden(model: LeadLineModel): Animate {
   return process(() => {
     model.opacity = 1;
   })
