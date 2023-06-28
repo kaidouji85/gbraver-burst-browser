@@ -50,9 +50,9 @@ export class TsubasaIcon implements PilotIcon {
   }
 
   /**
-   * 透明度を設定する
+   * 不透明度を設定する
    *
-   * @param opacity 透明度
+   * @param opacity 不透明度
    */
   setOpacity(opacity: number): void {
     this.#mesh.setOpacity(opacity);

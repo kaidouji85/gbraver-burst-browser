@@ -3,7 +3,7 @@ export type ResultIndicatorModel = {
   /** 拡大率 */
   scale: number;
 
-  /** 透明度 */
+  /** 不透明度 */
   opacity: number;
 
   /** ワールド座標、原点は画面中央 */

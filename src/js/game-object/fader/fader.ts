@@ -69,9 +69,9 @@ export class Fader {
   }
 
   /**
-   * 透明度を変更
+   * 不透明度を変更
    *
-   * @param value 透明度
+   * @param value 不透明度
    * @param duration アニメーション時間
    * @return アニメーション
    */

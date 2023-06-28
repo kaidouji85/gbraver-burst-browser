@@ -5,7 +5,7 @@ export type TurnIndicatorModel = {
    */
   isPlayerTurn: boolean;
 
-  /** 0 - 1 で表現する透明度 */
+  /** 0 - 1 で表現する不透明度 */
   opacity: number;
 
   /** 0 - 1 で表現するアニメーション進捗 */

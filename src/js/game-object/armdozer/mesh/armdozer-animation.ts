@@ -15,7 +15,7 @@ export interface ArmdozerAnimation {
   animate(animation: number): void;
 
   /**
-   * 透明度を設定する
+   * 不透明度を設定する
    * @param value 設定値
    */
   opacity(value: number): void;
