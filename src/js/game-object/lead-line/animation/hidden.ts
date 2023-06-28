@@ -11,6 +11,5 @@ import { LeadLineModel } from "../model/lead-line-model";
 export function hidden(model: LeadLineModel): Animate {
   return process(() => {
     model.opacity = 1;
-  })
-  .chain(tween(model, t => t.to({opacity: 0}, 200)));
+  }).chain(tween(model, (t) => t.to({ opacity: 0 }, 200)));
 }

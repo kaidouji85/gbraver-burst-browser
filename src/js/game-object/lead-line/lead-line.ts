@@ -1,13 +1,13 @@
 import { Observable, Unsubscribable } from "rxjs";
 import * as THREE from "three";
 
+import { Animate } from "../../animation/animate";
 import { GameObjectAction } from "../action/game-object-action";
+import { hidden } from "./animation/hidden";
+import { show } from "./animation/show";
 import { initialValue } from "./model/initial-value";
 import { LeadLineModel, Position } from "./model/lead-line-model";
 import { LeadLineView } from "./view/lead-line-view";
-import { Animate } from "../../animation/animate";
-import { show } from "./animation/show";
-import { hidden } from "./animation/hidden";
 
 /** 引き出し線 */
 export class LeadLine {
