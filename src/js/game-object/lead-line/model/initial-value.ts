@@ -14,5 +14,6 @@ export function initialValue(): LeadLineModel {
       x: 100,
       y: 0,
     },
+    opacity: 1,
   };
 }
