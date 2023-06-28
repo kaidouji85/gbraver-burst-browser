@@ -1,6 +1,6 @@
 import { BurstCommand } from "gbraver-burst-core";
 
-import { decisionByBurstButton } from "../animation/decision-by-bursy-button";
+import { decisionByBurstButton } from "../animation/decision-by-burst-button";
 import { decisionByMiniController } from "../animation/decision-by-mini-controller";
 import { animationPlayer } from "../animation-player";
 import { BattleSceneProps } from "../battle-scene-props";
