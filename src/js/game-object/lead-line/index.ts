@@ -12,6 +12,6 @@ import { LeadLineView } from "./view/lead-line-view";
 export function battleButtonLeadLine(
   gameObjectAction: Observable<GameObjectAction>
 ): LeadLine {
-  const view = new LeadLineView(0xf5f5f5, 3);
+  const view = new LeadLineView(0xdcdcdc , 90);
   return new LeadLine(view, gameObjectAction);
 }

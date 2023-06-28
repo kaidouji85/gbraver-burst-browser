@@ -54,7 +54,7 @@ export class LeadLineView {
       model.end.y - model.start.y,
       model.end.x - model.start.x
     );
-    this.#mesh.material.opacity = model.opacity;
+    this.#mesh.material.opacity = model.opacity * 0.9;
   }
 
   /**
