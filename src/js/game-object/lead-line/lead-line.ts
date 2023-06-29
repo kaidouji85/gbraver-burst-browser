@@ -2,6 +2,7 @@ import { Observable, Unsubscribable } from "rxjs";
 import * as THREE from "three";
 
 import { Animate } from "../../animation/animate";
+import { PreRender } from "../../game-loop/pre-render";
 import { GameObjectAction } from "../action/game-object-action";
 import { hidden } from "./animation/hidden";
 import { show } from "./animation/show";
@@ -31,8 +32,8 @@ export class LeadLine {
     this.#view = view;
     this.#unsubscribers = [
       gameObjectAction.subscribe((action) => {
-        if (action.type === "Update") {
-          this.#onUpdate();
+        if (action.type === "PreRender") {
+          this.#onPreRender(action);
         }
       }),
     ];
@@ -83,10 +84,9 @@ export class LeadLine {
   }
 
   /**
-   * Update時の処理
-   * @private
+   * PreRender時の処理
    */
-  #onUpdate(): void {
-    this.#view.engage(this.#model);
+  #onPreRender(action: Readonly<PreRender>): void {
+    this.#view.engage(this.#model, action);
   }
 }

@@ -24,7 +24,7 @@ export function batterySelectorLeadLine(
 export function burstButtonLeadLine(
   gameObjectAction: Observable<GameObjectAction>
 ): LeadLine {
-  const view = new LeadLineView(0xdcdcdc, 45, 0.8);
+  const view = new LeadLineView(0xdcdcdc, 60, 0.8);
   return new LeadLine(view, gameObjectAction);
 }
 
@@ -36,6 +36,6 @@ export function burstButtonLeadLine(
 export function pilotButtonLeadLine(
   gameObjectAction: Observable<GameObjectAction>
 ): LeadLine {
-  const view = new LeadLineView(0xdcdcdc, 45, 0.8);
+  const view = new LeadLineView(0xdcdcdc, 60, 0.8);
   return new LeadLine(view, gameObjectAction);
 }
