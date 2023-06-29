@@ -3,7 +3,7 @@ import * as THREE from "three";
 import { SPRITE_RENDER_ORDER } from "../../../render/render-order/td-render-order";
 import { LeadLineModel } from "../model/lead-line-model";
 import { PreRender } from "../../../game-loop/pre-render";
-import { HUDUIScale } from "../../scale";
+import { HUDCutInScale, HUDUIScale } from "../../scale";
 
 /** ベースとなる線の長さ */
 const BaseLength = 100;
@@ -59,7 +59,7 @@ export class LeadLineView {
       (model.end.x - model.start.x) ** 2 + (model.end.y - model.start.y) ** 2
     );
     this.#mesh.scale.x = length / BaseLength;
-    this.#mesh.scale.y = HUDUIScale(      
+    this.#mesh.scale.y = HUDCutInScale(      
       preRender.rendererDOM,
       preRender.safeAreaInset);
     this.#mesh.position.x = model.start.x;
