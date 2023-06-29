@@ -5,12 +5,11 @@ import type { TurnIndicatorModel } from "../model/turn-indicator-model";
 
 /**
  * ターンインジケータを表示する
- *
  * @param isPlayerTurn プレイヤーターンであるか否か、trueでプレイヤーターン
  * @param model モデル
  * @return アニメーション
  */
-export function turnChange(
+export function show(
   isPlayerTurn: boolean,
   model: TurnIndicatorModel
 ): Animate {

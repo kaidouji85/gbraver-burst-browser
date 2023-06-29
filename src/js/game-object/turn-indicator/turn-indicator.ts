@@ -8,7 +8,7 @@ import type { Update } from "../../game-loop/update";
 import type { Resources } from "../../resource";
 import type { GameObjectAction } from "../action/game-object-action";
 import { invisible } from "./animation/invisible";
-import { turnChange } from "./animation/turn-change";
+import { show } from "./animation/show";
 import { waiting } from "./animation/waiting";
 import { createInitialValue } from "./model/initial-value";
 import type { TurnIndicatorModel } from "./model/turn-indicator-model";
@@ -20,7 +20,6 @@ import { process } from "../../animation/process";
 type Param = {
   /** リソース管理オブジェクト */
   resources: Resources;
-
   /** ゲームオブジェクトアクション */
   gameObjectAction: Observable<GameObjectAction>;
 };
@@ -63,13 +62,13 @@ export class TurnIndicator {
   }
 
   /**
-   * ターン変更
+   * ターンインジケータを表示する
    * @param isPlayerTurn プレイヤーターンか否かのフラグ、trueでプレイヤーターン
    * @return アニメーション
    */
-  turnChange(isPlayerTurn: boolean): Animate {
+  show(isPlayerTurn: boolean): Animate {
     return all(
-      turnChange(isPlayerTurn, this.#model),
+      show(isPlayerTurn, this.#model),
       process(() => {
         waiting(this.#model, this.#tweenGroup).loop();
       })
