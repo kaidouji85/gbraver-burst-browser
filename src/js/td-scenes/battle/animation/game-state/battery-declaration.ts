@@ -157,7 +157,7 @@ export function batteryDeclarationAnimation(
       : declarationSound(props.sounds);
   return all(
     sound,
-    props.view.td.gameObjects.turnIndicator.turnChange(isAttacker),
+    props.view.td.gameObjects.turnIndicator.show(isAttacker),
     attackerHUD.gauge.battery(attacker.armdozer.battery),
     attackerDeclaration,
     attackerTDArmdozer.sprite().endActive(),
