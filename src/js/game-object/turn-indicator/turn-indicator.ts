@@ -6,7 +6,6 @@ import { Animate } from "../../animation/animate";
 import type { PreRender } from "../../game-loop/pre-render";
 import type { Update } from "../../game-loop/update";
 import type { Resources } from "../../resource";
-import { firstUpdate } from "../action/first-update";
 import type { GameObjectAction } from "../action/game-object-action";
 import { invisible } from "./animation/invisible";
 import { turnChange } from "./animation/turn-change";
@@ -14,6 +13,8 @@ import { waiting } from "./animation/waiting";
 import { createInitialValue } from "./model/initial-value";
 import type { TurnIndicatorModel } from "./model/turn-indicator-model";
 import { TurnIndicatorView } from "./view/turn-indicator-view";
+import { all } from "../../animation/all";
+import { process } from "../../animation/process";
 
 /** コンストラクタのパラメータ */
 type Param = {
@@ -46,10 +47,7 @@ export class TurnIndicator {
         } else if (action.type === "PreRender") {
           this.#onPreRender(action);
         }
-      }),
-      firstUpdate(param.gameObjectAction).subscribe((action) => {
-        this.#onFirstUpdate(action);
-      }),
+      })
     ];
   }
 
@@ -70,7 +68,12 @@ export class TurnIndicator {
    * @return アニメーション
    */
   turnChange(isPlayerTurn: boolean): Animate {
-    return turnChange(isPlayerTurn, this.#model);
+    return all(
+      turnChange(isPlayerTurn, this.#model),
+      process(() => {
+        waiting(this.#model, this.#tweenGroup).loop();
+      })
+    );
   }
 
   /**
@@ -78,7 +81,12 @@ export class TurnIndicator {
    * @return アニメーション
    */
   invisible(): Animate {
-    return invisible(this.#model);
+    return all(
+      invisible(this.#model),
+      process(() => {
+        this.#tweenGroup.removeAll();
+      })
+    );
   }
 
   /**
@@ -87,14 +95,6 @@ export class TurnIndicator {
    */
   getObject3D(): THREE.Object3D {
     return this.#view.getObject3D();
-  }
-
-  /**
-   * 初回のアップデート時にのみ実行される処理
-   * @param action アクション
-   */
-  #onFirstUpdate(action: Update): void {
-    waiting(this.#model, this.#tweenGroup).loop(action.time);
   }
 
   /**
