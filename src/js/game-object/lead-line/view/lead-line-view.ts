@@ -2,6 +2,7 @@ import * as THREE from "three";
 
 import { SPRITE_RENDER_ORDER } from "../../../render/render-order/td-render-order";
 import { LeadLineModel } from "../model/lead-line-model";
+import { PreRender } from "../../../game-loop/pre-render";
 
 /** ベースとなる線の長さ */
 const BaseLength = 100;
@@ -50,8 +51,9 @@ export class LeadLineView {
   /**
    * モデルをビューに反映させる
    * @param model モデル
+   * @param preRender プリレンダー
    */
-  engage(model: Readonly<LeadLineModel>): void {
+  engage(model: Readonly<LeadLineModel>, preRender: Readonly<PreRender>): void {
     const length = Math.sqrt(
       (model.end.x - model.start.x) ** 2 + (model.end.y - model.start.y) ** 2
     );

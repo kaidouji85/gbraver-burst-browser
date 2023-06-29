@@ -8,6 +8,7 @@ import { show } from "./animation/show";
 import { initialValue } from "./model/initial-value";
 import { LeadLineModel, Position } from "./model/lead-line-model";
 import { LeadLineView } from "./view/lead-line-view";
+import { PreRender } from "../../game-loop/pre-render";
 
 /** 引き出し線 */
 export class LeadLine {
@@ -31,8 +32,8 @@ export class LeadLine {
     this.#view = view;
     this.#unsubscribers = [
       gameObjectAction.subscribe((action) => {
-        if (action.type === "Update") {
-          this.#onUpdate();
+        if (action.type === "PreRender") {
+          this.#onPreRender(action);
         }
       }),
     ];
@@ -83,10 +84,9 @@ export class LeadLine {
   }
 
   /**
-   * Update時の処理
-   * @private
+   * PreRender時の処理
    */
-  #onUpdate(): void {
-    this.#view.engage(this.#model);
+  #onPreRender(action: Readonly<PreRender>): void {
+    this.#view.engage(this.#model, action);
   }
 }
