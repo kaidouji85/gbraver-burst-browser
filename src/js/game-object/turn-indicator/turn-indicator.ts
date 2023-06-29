@@ -2,7 +2,9 @@ import TWEEN, { Group } from "@tweenjs/tween.js";
 import { Observable, Unsubscribable } from "rxjs";
 import * as THREE from "three";
 
+import { all } from "../../animation/all";
 import { Animate } from "../../animation/animate";
+import { process } from "../../animation/process";
 import type { PreRender } from "../../game-loop/pre-render";
 import type { Update } from "../../game-loop/update";
 import type { Resources } from "../../resource";
@@ -13,8 +15,6 @@ import { waiting } from "./animation/waiting";
 import { createInitialValue } from "./model/initial-value";
 import type { TurnIndicatorModel } from "./model/turn-indicator-model";
 import { TurnIndicatorView } from "./view/turn-indicator-view";
-import { all } from "../../animation/all";
-import { process } from "../../animation/process";
 
 /** コンストラクタのパラメータ */
 type Param = {
@@ -46,7 +46,7 @@ export class TurnIndicator {
         } else if (action.type === "PreRender") {
           this.#onPreRender(action);
         }
-      })
+      }),
     ];
   }
 
