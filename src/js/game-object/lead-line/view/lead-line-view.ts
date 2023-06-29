@@ -1,9 +1,9 @@
 import * as THREE from "three";
 
-import { SPRITE_RENDER_ORDER } from "../../../render/render-order/td-render-order";
-import { LeadLineModel } from "../model/lead-line-model";
 import { PreRender } from "../../../game-loop/pre-render";
+import { SPRITE_RENDER_ORDER } from "../../../render/render-order/td-render-order";
 import { HUDLeadLineScale } from "../../scale";
+import { LeadLineModel } from "../model/lead-line-model";
 
 /** ベースとなる線の長さ */
 const BaseLength = 100;
@@ -59,9 +59,10 @@ export class LeadLineView {
       (model.end.x - model.start.x) ** 2 + (model.end.y - model.start.y) ** 2
     );
     this.#mesh.scale.x = length / BaseLength;
-    this.#mesh.scale.y = HUDLeadLineScale(      
+    this.#mesh.scale.y = HUDLeadLineScale(
       preRender.rendererDOM,
-      preRender.safeAreaInset);
+      preRender.safeAreaInset
+    );
     this.#mesh.position.x = model.start.x;
     this.#mesh.position.y = model.start.y;
     this.#mesh.rotation.z = Math.atan2(
