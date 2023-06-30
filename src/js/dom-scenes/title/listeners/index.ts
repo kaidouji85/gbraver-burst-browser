@@ -34,8 +34,8 @@ export function bindEventListeners(props: TitleProps): Unsubscribable[] {
     domPushStream(props.helpIcon).subscribe((action) => {
       onHelpIconPush(props, action);
     }),
-    ...[...props.helpMenu.querySelectorAll("a")].map((anker) =>
-      domPushStream(anker).subscribe((action) => {
+    ...Array.from(props.helpMenu.querySelectorAll("a")).map((anchor) =>
+      domPushStream(anchor).subscribe((action) => {
         onHelpAnkerPush(action);
       })
     ),
