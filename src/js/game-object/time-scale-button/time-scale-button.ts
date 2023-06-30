@@ -1,4 +1,4 @@
-import TWEEN, { Group } from "@tweenjs/tween.js";
+import * as TWEEN from "@tweenjs/tween.js";
 import { Observable, Subject, Unsubscribable } from "rxjs";
 import * as THREE from "three";
 
@@ -22,7 +22,7 @@ export class TimeScaleButton {
   #model: TimeScaleButtonModel;
   #view: TimeScaleButtonView;
   #sounds: TimeScaleButtonSounds;
-  #toggleTween: Group;
+  #toggleTween: TWEEN.Group;
   #toggle: Subject<number>;
   #unsubscribers: Unsubscribable[];
 

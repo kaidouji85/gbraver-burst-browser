@@ -1,6 +1,6 @@
 import "../../src/css/style.css";
 
-import TWEEN from "@tweenjs/tween.js";
+import * as TWEEN from "@tweenjs/tween.js";
 
 import { CssVH } from "../../src/js/css/vh";
 import { gameLoopStream } from "../../src/js/game-loop/game-loop";

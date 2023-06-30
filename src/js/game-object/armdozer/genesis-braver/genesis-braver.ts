@@ -1,4 +1,4 @@
-import TWEEN, { Group } from "@tweenjs/tween.js";
+import * as TWEEN from "@tweenjs/tween.js";
 import { Observable, Unsubscribable } from "rxjs";
 import * as THREE from "three";
 
@@ -43,7 +43,7 @@ export class GenesisBraver
   /** モデル */
   #model: GenesisBraverModel;
   /** アクティブフラッシュTweenグループ */
-  #activeFlashTween: Group;
+  #activeFlashTween: TWEEN.Group;
   /** アンサブスクライバ */
   #unsubscribers: Unsubscribable[];
 

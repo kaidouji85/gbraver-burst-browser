@@ -1,4 +1,4 @@
-import { Group } from "@tweenjs/tween.js";
+import * as TWEEN from "@tweenjs/tween.js";
 
 import { Animate } from "../../../../animation/animate";
 import { process } from "../../../../animation/process";
@@ -14,7 +14,7 @@ import type { LightningBarrierModel } from "../model/lightning-barrier-model";
  */
 export function electrification(
   model: LightningBarrierModel,
-  group: Group
+  group: TWEEN.Group
 ): Animate {
   return process(() => {
     model.animation.frame = 0;

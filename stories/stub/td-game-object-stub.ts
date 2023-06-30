@@ -1,4 +1,4 @@
-import TWEEN from "@tweenjs/tween.js";
+import * as TWEEN from "@tweenjs/tween.js";
 import { Observable, Subject, Unsubscribable } from "rxjs";
 import * as THREE from "three";
 

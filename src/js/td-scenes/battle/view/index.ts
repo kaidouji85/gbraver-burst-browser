@@ -1,4 +1,4 @@
-import TWEEN from "@tweenjs/tween.js";
+import * as TWEEN from "@tweenjs/tween.js";
 import type { Player, PlayerId } from "gbraver-burst-core";
 import { merge, Observable, Subject } from "rxjs";
 
