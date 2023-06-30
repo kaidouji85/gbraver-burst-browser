@@ -1,4 +1,4 @@
-import TWEEN from "@tweenjs/tween.js";
+import * as TWEEN from "@tweenjs/tween.js";
 
 import { all } from "../../../animation/all";
 import { Animate } from "../../../animation/animate";

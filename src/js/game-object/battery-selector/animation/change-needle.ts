@@ -1,4 +1,4 @@
-import { Group } from "@tweenjs/tween.js";
+import * as TWEEN from "@tweenjs/tween.js";
 
 import { Animate } from "../../../animation/animate";
 import { tween } from "../../../animation/tween";
@@ -15,7 +15,7 @@ const MAX_DURATION = 500;
  */
 export function changeNeedle(
   model: BatterySelectorModel,
-  group: Group,
+  group: TWEEN.Group,
   needle: number
 ): Animate {
   const duration = Math.abs(model.needle - needle) * MAX_DURATION;

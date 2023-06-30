@@ -1,4 +1,4 @@
-import { Group } from "@tweenjs/tween.js";
+import * as TWEEN from "@tweenjs/tween.js";
 
 import { Animate } from "../../../animation/animate";
 import { process } from "../../../animation/process";
@@ -17,7 +17,7 @@ import type { BatterySelectorSounds } from "../sounds/battery-selector-sounds";
 export function batteryPlusPop(
   model: BatterySelectorModel,
   sounds: BatterySelectorSounds,
-  group: Group
+  group: TWEEN.Group
 ): Animate {
   return process(() => {
     sounds.batteryChangeSound.play();

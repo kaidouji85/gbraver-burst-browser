@@ -1,4 +1,4 @@
-import { Group } from "@tweenjs/tween.js";
+import * as TWEEN from "@tweenjs/tween.js";
 
 import { Animate } from "../../../../animation/animate";
 import { delay } from "../../../../animation/delay";
@@ -12,7 +12,10 @@ import type { WingDozerModel } from "../model/wing-dozer-model";
  * @param group TWEENグループ
  * @return アニメーション
  */
-export function activeFlash(model: WingDozerModel, group: Group): Animate {
+export function activeFlash(
+  model: WingDozerModel,
+  group: TWEEN.Group
+): Animate {
   return process(() => {
     model.active.strength = 0;
   })

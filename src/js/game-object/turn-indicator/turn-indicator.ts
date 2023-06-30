@@ -1,4 +1,4 @@
-import TWEEN, { Group } from "@tweenjs/tween.js";
+import * as TWEEN from "@tweenjs/tween.js";
 import { Observable, Unsubscribable } from "rxjs";
 import * as THREE from "three";
 
@@ -26,7 +26,7 @@ type Param = {
 
 /** ターンインジケーター */
 export class TurnIndicator {
-  #tweenGroup: Group;
+  #tweenGroup: TWEEN.Group;
   #model: TurnIndicatorModel;
   #view: TurnIndicatorView;
   #unsubscribers: Unsubscribable[];

@@ -1,4 +1,4 @@
-import { Tween } from "@tweenjs/tween.js";
+import * as TWEEN from "@tweenjs/tween.js";
 
 /**
  * Tween単体の再生時間を計算する
@@ -6,7 +6,7 @@ import { Tween } from "@tweenjs/tween.js";
  * @return 再生時間
  */
 /* eslint-disable @typescript-eslint/no-explicit-any */
-export function tweenDuration(tween: Tween<any>): number {
+export function tweenDuration(tween: TWEEN.Tween<any>): number {
   return (
     (tween as any)._duration +
     (tween as any)._delayTime +
@@ -31,9 +31,9 @@ export function tweenDuration(tween: Tween<any>): number {
  */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 export function scaleTweenDuration(
-  tween: Tween<any>,
+  tween: TWEEN.Tween<any>,
   scale: number,
-  scaledTweens: Tween<any>[] = []
+  scaledTweens: TWEEN.Tween<any>[] = []
 ): void {
   /* eslint-enable */
   if (scaledTweens.includes(tween)) {
@@ -46,7 +46,7 @@ export function scaleTweenDuration(
   /* eslint-enable */
 
   /* eslint-disable @typescript-eslint/no-explicit-any */
-  (tween as any)._chainedTweens.forEach((child: Tween<any>) => {
+  (tween as any)._chainedTweens.forEach((child: TWEEN.Tween<any>) => {
     /* eslint-enable */
     scaleTweenDuration(child, scale, newScaledTweens);
   });

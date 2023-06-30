@@ -1,4 +1,4 @@
-import { Group } from "@tweenjs/tween.js";
+import * as TWEEN from "@tweenjs/tween.js";
 
 import { Animate } from "./animate";
 import { tween } from "./tween";
@@ -10,7 +10,7 @@ import { tween } from "./tween";
  * @param group TweenGroup
  * @return アニメーション
  */
-export function delay(time: number, group?: Group): Animate {
+export function delay(time: number, group?: TWEEN.Group): Animate {
   return tween({}, (t) => t.to({}, time), group);
 }
 
