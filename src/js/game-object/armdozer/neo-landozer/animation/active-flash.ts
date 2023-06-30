@@ -12,7 +12,10 @@ import type { NeoLandozerModel } from "../model/neo-landozer-model";
  * @param group TWEENグループ
  * @return アニメーション
  */
-export function activeFlash(model: NeoLandozerModel, group: TWEEN.Group): Animate {
+export function activeFlash(
+  model: NeoLandozerModel,
+  group: TWEEN.Group
+): Animate {
   return process(() => {
     model.active.strength = 0;
   })

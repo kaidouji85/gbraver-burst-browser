@@ -12,7 +12,10 @@ import type { ShinBraverModel } from "../model/shin-braver-model";
  * @param group TWEENグループ
  * @return アニメーション
  */
-export function activeFlash(model: ShinBraverModel, group: TWEEN.Group): Animate {
+export function activeFlash(
+  model: ShinBraverModel,
+  group: TWEEN.Group
+): Animate {
   return process(() => {
     model.active.strength = 0;
   })

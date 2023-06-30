@@ -12,7 +12,10 @@ import type { LightningDozerModel } from "../model/lightning-dozer-model";
  * @param group TWEENグループ
  * @return アニメーション
  */
-export function activeFlash(model: LightningDozerModel, group: TWEEN.Group): Animate {
+export function activeFlash(
+  model: LightningDozerModel,
+  group: TWEEN.Group
+): Animate {
   return process(() => {
     model.active.strength = 0;
   })

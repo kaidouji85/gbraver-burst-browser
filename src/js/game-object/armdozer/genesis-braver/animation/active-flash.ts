@@ -12,7 +12,10 @@ import { GenesisBraverModel } from "../model/genesis-braver-model";
  * @param group TWEENグループ
  * @return アニメーション
  */
-export function activeFlash(model: GenesisBraverModel, group: TWEEN.Group): Animate {
+export function activeFlash(
+  model: GenesisBraverModel,
+  group: TWEEN.Group
+): Animate {
   return process(() => {
     model.active.strength = 0;
   })

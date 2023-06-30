@@ -13,7 +13,10 @@ import type { TurnIndicatorModel } from "../model/turn-indicator-model";
  * @param group Tweenグループ
  * @return アニメーション
  */
-export function waiting(model: TurnIndicatorModel, group: TWEEN.Group): Animate {
+export function waiting(
+  model: TurnIndicatorModel,
+  group: TWEEN.Group
+): Animate {
   return process(() => {
     model.animation = 0;
   }, group)
