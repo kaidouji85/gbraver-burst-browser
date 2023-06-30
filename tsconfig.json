@@ -1,3 +1,5 @@
+// 以下サイトを参考にtsconfig.jsonを作成した
+// https://ics.media/entry/16329/#webpack+typescript+three.js%E3%81%AE%E6%9C%80%E5%B0%8F%E6%A7%8B%E6%88%90
 {
   "compilerOptions": {
     /* Visit https://aka.ms/tsconfig to read more about this file */
