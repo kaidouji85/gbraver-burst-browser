@@ -20,8 +20,10 @@ export function decisionByBatterySelector(
     view.hud.gameObjects.timeScaleButton.close()
   )
     .chain(delay(500))
-    .chain(all(
-      view.hud.gameObjects.batterySelector.close(),
-      view.hud.gameObjects.batterySelectorLeadLine.hidden(),
-    ));
+    .chain(
+      all(
+        view.hud.gameObjects.batterySelector.close(),
+        view.hud.gameObjects.batterySelectorLeadLine.hidden()
+      )
+    );
 }

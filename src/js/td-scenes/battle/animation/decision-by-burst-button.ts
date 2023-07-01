@@ -20,8 +20,10 @@ export function decisionByBurstButton(
     view.hud.gameObjects.timeScaleButton.close()
   )
     .chain(delay(500))
-    .chain(all(
-      view.hud.gameObjects.burstButton.close(),
-      view.hud.gameObjects.burstButtonLeadLine.hidden(),
-    ));
+    .chain(
+      all(
+        view.hud.gameObjects.burstButton.close(),
+        view.hud.gameObjects.burstButtonLeadLine.hidden()
+      )
+    );
 }

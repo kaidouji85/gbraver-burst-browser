@@ -20,8 +20,10 @@ export function decisionByPilotButton(
     view.hud.gameObjects.timeScaleButton.close()
   )
     .chain(delay(500))
-    .chain(all(
-      view.hud.gameObjects.pilotButton.close(),
-      view.hud.gameObjects.pilotButtonLeadLine.hidden(),
-    ));
+    .chain(
+      all(
+        view.hud.gameObjects.pilotButton.close(),
+        view.hud.gameObjects.pilotButtonLeadLine.hidden()
+      )
+    );
 }
