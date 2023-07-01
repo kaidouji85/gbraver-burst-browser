@@ -13,7 +13,6 @@ export function decisionByBatterySelector(
 ): Animate {
   return all(
     view.hud.gameObjects.batterySelector.decide(),
-    view.hud.gameObjects.batterySelectorLeadLine.hidden(),
     view.hud.gameObjects.burstButton.close(),
     view.hud.gameObjects.burstButtonLeadLine.hidden(),
     view.hud.gameObjects.pilotButton.close(),
@@ -21,5 +20,10 @@ export function decisionByBatterySelector(
     view.hud.gameObjects.timeScaleButton.close()
   )
     .chain(delay(500))
-    .chain(view.hud.gameObjects.batterySelector.close());
+    .chain(
+      all(
+        view.hud.gameObjects.batterySelector.close(),
+        view.hud.gameObjects.batterySelectorLeadLine.hidden()
+      )
+    );
 }

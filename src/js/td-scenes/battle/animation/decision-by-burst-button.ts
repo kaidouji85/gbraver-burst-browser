@@ -13,7 +13,6 @@ export function decisionByBurstButton(
 ): Animate {
   return all(
     view.hud.gameObjects.burstButton.decide(),
-    view.hud.gameObjects.burstButtonLeadLine.hidden(),
     view.hud.gameObjects.batterySelector.close(),
     view.hud.gameObjects.batterySelectorLeadLine.hidden(),
     view.hud.gameObjects.pilotButton.close(),
@@ -21,5 +20,10 @@ export function decisionByBurstButton(
     view.hud.gameObjects.timeScaleButton.close()
   )
     .chain(delay(500))
-    .chain(view.hud.gameObjects.burstButton.close());
+    .chain(
+      all(
+        view.hud.gameObjects.burstButton.close(),
+        view.hud.gameObjects.burstButtonLeadLine.hidden()
+      )
+    );
 }
