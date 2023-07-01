@@ -9,8 +9,8 @@ import { ThreeDimensionLayer } from "../td";
 
 /** 引き出し線が指し示す3Dレイヤー座標 */
 const targetTDCoordinate = {
-  x: ARMDOZER_EFFECT_STANDARD_X,
-  y: ARMDOZER_EFFECT_STANDARD_Y,
+  x: ARMDOZER_EFFECT_STANDARD_X - 30,
+  y: ARMDOZER_EFFECT_STANDARD_Y + 30,
   z: ARMDOZER_EFFECT_STANDARD_Z,
 };
 

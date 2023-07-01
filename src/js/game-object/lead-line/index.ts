@@ -4,6 +4,11 @@ import { GameObjectAction } from "../action/game-object-action";
 import { LeadLine } from "./lead-line";
 import { LeadLineView } from "./view/lead-line-view";
 
+/** 色 */
+const COLOR = 0xf5f5f5;
+/** 不透明度 */
+const OPACITY = 0.8;
+
 /**
  * バッテリーセレクタの引き出し線を生成する
  * @param gameObjectAction ゲームオブジェクトアクション
@@ -12,7 +17,7 @@ import { LeadLineView } from "./view/lead-line-view";
 export function batterySelectorLeadLine(
   gameObjectAction: Observable<GameObjectAction>
 ): LeadLine {
-  const view = new LeadLineView(0xdcdcdc, 90, 0.8);
+  const view = new LeadLineView(COLOR, 90, OPACITY);
   return new LeadLine(view, gameObjectAction);
 }
 
@@ -24,7 +29,7 @@ export function batterySelectorLeadLine(
 export function burstButtonLeadLine(
   gameObjectAction: Observable<GameObjectAction>
 ): LeadLine {
-  const view = new LeadLineView(0xdcdcdc, 60, 0.8);
+  const view = new LeadLineView(COLOR, 60, OPACITY);
   return new LeadLine(view, gameObjectAction);
 }
 
@@ -36,6 +41,6 @@ export function burstButtonLeadLine(
 export function pilotButtonLeadLine(
   gameObjectAction: Observable<GameObjectAction>
 ): LeadLine {
-  const view = new LeadLineView(0xdcdcdc, 60, 0.8);
+  const view = new LeadLineView(COLOR, 60, OPACITY);
   return new LeadLine(view, gameObjectAction);
 }
