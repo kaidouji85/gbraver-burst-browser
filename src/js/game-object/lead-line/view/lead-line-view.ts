@@ -1,19 +1,17 @@
 import * as THREE from "three";
 
 import { PreRender } from "../../../game-loop/pre-render";
-import { SPRITE_RENDER_ORDER } from "../../../render/render-order/td-render-order";
 import { HUDLeadLineScale } from "../../scale";
 import { LeadLineModel } from "../model/lead-line-model";
-
-/** ベースとなる線の長さ */
-const BaseLength = 100;
+import { line } from "./line";
+import {BaseLineLength} from "./base-line-length";
 
 /** 引き出し線ビュー */
 export class LeadLineView {
   /** グループ */
   #group: THREE.Group;
-  /** メッシュ */
-  #mesh: THREE.Mesh<THREE.BufferGeometry, THREE.MeshBasicMaterial>;
+  /** 線メッシュ */
+  line: THREE.Mesh<THREE.BufferGeometry, THREE.MeshBasicMaterial>;
   /** 不透明度係数 */
   #opacityCoefficient: number;
 
@@ -29,19 +27,8 @@ export class LeadLineView {
     opacityCoefficient: number
   ) {
     this.#group = new THREE.Group();
-    const geometry = new THREE.BufferGeometry().setFromPoints([
-      new THREE.Vector3(BaseLength, 0, 0),
-      new THREE.Vector3(0, width / 2, 0),
-      new THREE.Vector3(0, -width / 2, 0),
-    ]);
-    const material = new THREE.MeshBasicMaterial({
-      color,
-      side: THREE.DoubleSide,
-      transparent: true,
-    });
-    this.#mesh = new THREE.Mesh(geometry, material);
-    this.#mesh.renderOrder = SPRITE_RENDER_ORDER;
-    this.#group.add(this.#mesh);
+    this.line = line(color, width);
+    this.#group.add(this.line);
     this.#opacityCoefficient = opacityCoefficient;
   }
 
@@ -49,8 +36,8 @@ export class LeadLineView {
    * デストラクタ相当の処理
    */
   destructor(): void {
-    this.#mesh.material.dispose();
-    this.#mesh.geometry.dispose();
+    this.line.material.dispose();
+    this.line.geometry.dispose();
   }
 
   /**
@@ -62,18 +49,18 @@ export class LeadLineView {
     const length = Math.sqrt(
       (model.end.x - model.start.x) ** 2 + (model.end.y - model.start.y) ** 2
     );
-    this.#mesh.scale.x = length / BaseLength;
-    this.#mesh.scale.y = HUDLeadLineScale(
+    this.line.scale.x = length / BaseLineLength;
+    this.line.scale.y = HUDLeadLineScale(
       preRender.rendererDOM,
       preRender.safeAreaInset
     );
-    this.#mesh.position.x = model.start.x;
-    this.#mesh.position.y = model.start.y;
-    this.#mesh.rotation.z = Math.atan2(
+    this.line.position.x = model.start.x;
+    this.line.position.y = model.start.y;
+    this.line.rotation.z = Math.atan2(
       model.end.y - model.start.y,
       model.end.x - model.start.x
     );
-    this.#mesh.material.opacity = model.opacity * this.#opacityCoefficient;
+    this.line.material.opacity = model.opacity * this.#opacityCoefficient;
   }
 
   /**
