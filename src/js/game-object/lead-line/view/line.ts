@@ -8,7 +8,7 @@ import {BaseLineLength} from "./base-line-length";
  * @param width 線の幅
  * @return 生成結果
  */
-export function line(color: THREE.ColorRepresentation, width: number): THREE.Mesh<THREE.BufferGeometry, THREE.MeshBasicMaterial> {
+export function createLine(color: THREE.ColorRepresentation, width: number): THREE.Mesh<THREE.BufferGeometry, THREE.MeshBasicMaterial> {
   const geometry = new THREE.BufferGeometry().setFromPoints([
     new THREE.Vector3(BaseLineLength, 0, 0),
     new THREE.Vector3(0, width / 2, 0),

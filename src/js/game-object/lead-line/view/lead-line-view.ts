@@ -3,7 +3,7 @@ import * as THREE from "three";
 import { PreRender } from "../../../game-loop/pre-render";
 import { HUDLeadLineScale } from "../../scale";
 import { LeadLineModel } from "../model/lead-line-model";
-import { line } from "./line";
+import { createLine } from "./line";
 import {BaseLineLength} from "./base-line-length";
 
 /** 引き出し線ビュー */
@@ -27,7 +27,7 @@ export class LeadLineView {
     opacityCoefficient: number
   ) {
     this.#group = new THREE.Group();
-    this.#line = line(color, width);
+    this.#line = createLine(color, width);
     this.#group.add(this.#line);
     this.#opacityCoefficient = opacityCoefficient;
   }
