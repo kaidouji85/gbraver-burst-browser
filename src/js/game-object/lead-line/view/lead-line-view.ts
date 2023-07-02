@@ -6,7 +6,6 @@ import { LeadLineModel } from "../model/lead-line-model";
 import { BaseLineLength } from "./base-line-length";
 import {createLine, LineMesh} from "./line";
 import {createEdge, EdgeMesh} from "./edge";
-import {atan2} from "three/examples/jsm/nodes/shadernode/ShaderNodeBaseElements";
 
 /** 引き出し線ビュー */
 export class LeadLineView {
@@ -84,6 +83,9 @@ export class LeadLineView {
       model.end.x - model.start.x
     );
     this.#line.material.opacity = model.opacity * this.#opacityCoefficient;
+    this.#edges.forEach(edge => {
+      edge.material.opacity = model.opacity;
+    });
   }
 
   /**
