@@ -4,8 +4,8 @@ import { PreRender } from "../../../game-loop/pre-render";
 import { HUDLeadLineScale } from "../../scale";
 import { LeadLineModel } from "../model/lead-line-model";
 import { BaseLineLength } from "./base-line-length";
-import {createLine, LineMesh} from "./line";
-import {createEdge, EdgeMesh} from "./edge";
+import { createEdge, EdgeMesh } from "./edge";
+import { createLine, LineMesh } from "./line";
 
 /** 引き出し線ビュー */
 export class LeadLineView {
@@ -35,16 +35,13 @@ export class LeadLineView {
     const upEdge = createEdge(width);
     upEdge.position.x = BaseLineLength / 2;
     upEdge.position.y = width / 4;
-    upEdge.rotation.z = Math.atan2(-width/2, BaseLineLength);
+    upEdge.rotation.z = Math.atan2(-width / 2, BaseLineLength);
     const downEdge = createEdge(width);
     downEdge.position.x = BaseLineLength / 2;
-    downEdge.position.y = - width / 4;
-    downEdge.rotation.z = Math.atan2(width/2, BaseLineLength);
-    this.#edges = [
-      upEdge,
-      downEdge,
-    ];
-    [this.#line, ...this.#edges].forEach(v => {
+    downEdge.position.y = -width / 4;
+    downEdge.rotation.z = Math.atan2(width / 2, BaseLineLength);
+    this.#edges = [upEdge, downEdge];
+    [this.#line, ...this.#edges].forEach((v) => {
       this.#group.add(v);
     });
     this.#opacityCoefficient = opacityCoefficient;
@@ -56,10 +53,10 @@ export class LeadLineView {
   destructor(): void {
     this.#line.material.dispose();
     this.#line.geometry.dispose();
-    this.#edges.forEach(edge => {
+    this.#edges.forEach((edge) => {
       edge.material.dispose();
       edge.geometry.dispose();
-    })
+    });
   }
 
   /**
@@ -83,7 +80,7 @@ export class LeadLineView {
       model.end.x - model.start.x
     );
     this.#line.material.opacity = model.opacity * this.#opacityCoefficient;
-    this.#edges.forEach(edge => {
+    this.#edges.forEach((edge) => {
       edge.material.opacity = model.opacity;
     });
   }
