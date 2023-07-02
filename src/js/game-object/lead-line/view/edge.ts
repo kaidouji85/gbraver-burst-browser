@@ -1,17 +1,19 @@
 import * as THREE from "three";
-import {BaseLineLength} from "./base-line-length";
-import {SPRITE_RENDER_ORDER} from "../../../render/render-order/td-render-order";
+
+import { SPRITE_RENDER_ORDER } from "../../../render/render-order/td-render-order";
+import { BaseLineLength } from "./base-line-length";
+
+/** 縁取りメッシュ */
+type EdgeMesh = THREE.Mesh<THREE.PlaneGeometry, THREE.MeshBasicMaterial>;
 
 /**
  * 引き出し線の縁取りを生成する
  * @param lineWidth 引き出し線の太さ
  * @return 生成結果
  */
-export function createEdge(
-  lineWidth: number
-): THREE.Mesh<THREE.PlaneGeometry, THREE.MeshBasicMaterial> {
+export function createEdge(lineWidth: number): EdgeMesh {
   const edgeWidth = Math.sqrt((lineWidth / 2) ** 2 + BaseLineLength ** 2);
-  const geometry =new THREE.PlaneGeometry( edgeWidth, 4 );
+  const geometry = new THREE.PlaneGeometry(edgeWidth, 4);
   const material = new THREE.MeshBasicMaterial({
     color: 0x000000,
     side: THREE.DoubleSide,

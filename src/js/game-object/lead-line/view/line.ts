@@ -1,6 +1,13 @@
 import * as THREE from "three";
-import {SPRITE_RENDER_ORDER} from "../../../render/render-order/td-render-order";
-import {BaseLineLength} from "./base-line-length";
+
+import { SPRITE_RENDER_ORDER } from "../../../render/render-order/td-render-order";
+import { BaseLineLength } from "./base-line-length";
+
+/** 線メッシュ */
+export type LineMesh = THREE.Mesh<
+  THREE.BufferGeometry,
+  THREE.MeshBasicMaterial
+>;
 
 /**
  * 線メッシュを生成する
@@ -8,7 +15,10 @@ import {BaseLineLength} from "./base-line-length";
  * @param width 線の幅
  * @return 生成結果
  */
-export function createLine(color: THREE.ColorRepresentation, width: number): THREE.Mesh<THREE.BufferGeometry, THREE.MeshBasicMaterial> {
+export function createLine(
+  color: THREE.ColorRepresentation,
+  width: number
+): LineMesh {
   const geometry = new THREE.BufferGeometry().setFromPoints([
     new THREE.Vector3(BaseLineLength, 0, 0),
     new THREE.Vector3(0, width / 2, 0),
