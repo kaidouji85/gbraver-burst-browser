@@ -12,10 +12,8 @@ import type { WingDozerView } from "./wing-dozer-view";
 export class PlayerWingDozerView implements WingDozerView {
   /** グループ */
   #group: THREE.Group;
-
   /** メッシュ */
   #meshes: AnimationMeshMapping[];
-
   /** アクティブメッシュ */
   #activeMeshes: AnimationMeshMapping[];
 
@@ -56,7 +54,6 @@ export class PlayerWingDozerView implements WingDozerView {
     const currentMesh = this.#meshes.find(
       (v) => v.type === model.animation.type
     );
-
     if (currentMesh) {
       currentMesh.mesh.animate(model.animation.frame);
       currentMesh.mesh.opacity(1);
@@ -65,10 +62,9 @@ export class PlayerWingDozerView implements WingDozerView {
     const currentActiveMesh = this.#activeMeshes.find(
       (v) => v.type === model.animation.type
     );
-
     if (currentActiveMesh) {
       const activeOpacity =
-        (0.25 + model.active.strength * 0.07) * model.active.opacity;
+        (0.4 + model.active.strength * 0.07) * model.active.opacity;
       currentActiveMesh.mesh.opacity(activeOpacity);
       currentActiveMesh.mesh.animate(model.animation.frame);
     }

@@ -11,10 +11,8 @@ import type { NeoLandozerView } from "./neo-landozer-view";
 export class PlayerNeoLandozerView implements NeoLandozerView {
   /** グループ */
   #group: THREE.Group;
-
   /** メッシュ */
   #meshes: AnimationMeshMapping[];
-
   /** アクティブメッシュ */
   #activeMeshes: AnimationMeshMapping[];
 
@@ -46,7 +44,6 @@ export class PlayerNeoLandozerView implements NeoLandozerView {
     const currentMesh = this.#meshes.find(
       (v) => v.type === model.animation.type
     );
-
     if (currentMesh) {
       currentMesh.mesh.opacity(1);
       currentMesh.mesh.animate(model.animation.frame);
@@ -55,10 +52,9 @@ export class PlayerNeoLandozerView implements NeoLandozerView {
     const currentActiveMesh = this.#activeMeshes.find(
       (v) => v.type === model.animation.type
     );
-
     if (currentActiveMesh) {
       const activeOpacity =
-        (0.25 + model.active.strength * 0.07) * model.active.opacity;
+        (0.4 + model.active.strength * 0.07) * model.active.opacity;
       currentActiveMesh.mesh.opacity(activeOpacity);
       currentActiveMesh.mesh.animate(model.animation.frame);
     }
