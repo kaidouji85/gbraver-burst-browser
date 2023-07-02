@@ -4,7 +4,7 @@ import { SPRITE_RENDER_ORDER } from "../../../render/render-order/td-render-orde
 import { BaseLineLength } from "./base-line-length";
 
 /** 縁取りメッシュ */
-type EdgeMesh = THREE.Mesh<THREE.PlaneGeometry, THREE.MeshBasicMaterial>;
+export type EdgeMesh = THREE.Mesh<THREE.PlaneGeometry, THREE.MeshBasicMaterial>;
 
 /**
  * 引き出し線の縁取りを生成する

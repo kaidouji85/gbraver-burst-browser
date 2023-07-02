@@ -4,14 +4,17 @@ import { PreRender } from "../../../game-loop/pre-render";
 import { HUDLeadLineScale } from "../../scale";
 import { LeadLineModel } from "../model/lead-line-model";
 import { BaseLineLength } from "./base-line-length";
-import { createLine } from "./line";
+import {createLine, LineMesh} from "./line";
+import {createEdge, EdgeMesh} from "./edge";
 
 /** 引き出し線ビュー */
 export class LeadLineView {
   /** グループ */
   #group: THREE.Group;
   /** 線メッシュ */
-  #line: THREE.Mesh<THREE.BufferGeometry, THREE.MeshBasicMaterial>;
+  #line: LineMesh;
+  /** 縁取りメッシュ */
+  #edges: [EdgeMesh, EdgeMesh];
   /** 不透明度係数 */
   #opacityCoefficient: number;
 
@@ -28,7 +31,14 @@ export class LeadLineView {
   ) {
     this.#group = new THREE.Group();
     this.#line = createLine(color, width);
-    this.#group.add(this.#line);
+    this.#line.position.z = -0.1;
+    this.#edges = [
+      createEdge(width),
+      createEdge(width),
+    ];
+    [this.#line, ...this.#edges].forEach(v => {
+      this.#group.add(v);
+    });
     this.#opacityCoefficient = opacityCoefficient;
   }
 
@@ -38,6 +48,10 @@ export class LeadLineView {
   destructor(): void {
     this.#line.material.dispose();
     this.#line.geometry.dispose();
+    this.#edges.forEach(edge => {
+      edge.material.dispose();
+      edge.geometry.dispose();
+    })
   }
 
   /**
