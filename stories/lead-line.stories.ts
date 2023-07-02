@@ -57,7 +57,7 @@ const leadLineStory = (generator: Generator, fn: Fn) => () => {
 /** 青線 */
 const blueLine: Generator = (gameObjectAction) => {
   const color = 0x0000ff;
-  const view = new LeadLineView(color, 3, 1);
+  const view = new LeadLineView(color, 40, 1);
   return [
     new LeadLine(view, gameObjectAction),
     circle(5, color),
@@ -69,8 +69,8 @@ const blueLine: Generator = (gameObjectAction) => {
 export const rightUpper = leadLineStory(blueLine, (leadLine, a, b) => {
   a.position.x = 30;
   a.position.y = 40;
-  b.position.x = a.position.x + 100;
-  b.position.y = a.position.y + 120;
+  b.position.x = a.position.x + 200;
+  b.position.y = a.position.y + 220;
   leadLine.set(a.position, b.position);
   leadLine.show().play();
 });
@@ -79,8 +79,8 @@ export const rightUpper = leadLineStory(blueLine, (leadLine, a, b) => {
 export const leftUpper = leadLineStory(blueLine, (leadLine, a, b) => {
   a.position.x = -30;
   a.position.y = 40;
-  b.position.x = a.position.x - 100;
-  b.position.y = a.position.y + 120;
+  b.position.x = a.position.x - 200;
+  b.position.y = a.position.y + 220;
   leadLine.set(a.position, b.position);
   leadLine.show().play();
 });
@@ -89,8 +89,8 @@ export const leftUpper = leadLineStory(blueLine, (leadLine, a, b) => {
 export const rightLover = leadLineStory(blueLine, (leadLine, a, b) => {
   a.position.x = 30;
   a.position.y = -40;
-  b.position.x = a.position.x + 100;
-  b.position.y = a.position.y - 120;
+  b.position.x = a.position.x + 200;
+  b.position.y = a.position.y - 220;
   leadLine.set(a.position, b.position);
   leadLine.show().play();
 });
@@ -99,8 +99,8 @@ export const rightLover = leadLineStory(blueLine, (leadLine, a, b) => {
 export const leftLover = leadLineStory(blueLine, (leadLine, a, b) => {
   a.position.x = -30;
   a.position.y = -40;
-  b.position.x = a.position.x - 100;
-  b.position.y = a.position.y - 120;
+  b.position.x = a.position.x - 200;
+  b.position.y = a.position.y - 220;
   leadLine.set(a.position, b.position);
   leadLine.show().play();
 });

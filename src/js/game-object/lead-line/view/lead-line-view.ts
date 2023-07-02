@@ -6,6 +6,7 @@ import { LeadLineModel } from "../model/lead-line-model";
 import { BaseLineLength } from "./base-line-length";
 import {createLine, LineMesh} from "./line";
 import {createEdge, EdgeMesh} from "./edge";
+import {atan2} from "three/examples/jsm/nodes/shadernode/ShaderNodeBaseElements";
 
 /** 引き出し線ビュー */
 export class LeadLineView {
@@ -32,9 +33,17 @@ export class LeadLineView {
     this.#group = new THREE.Group();
     this.#line = createLine(color, width);
     this.#line.position.z = -0.1;
+    const upEdge = createEdge(width);
+    upEdge.position.x = BaseLineLength / 2;
+    upEdge.position.y = width / 4;
+    upEdge.rotation.z = Math.atan2(-width/2, BaseLineLength);
+    const downEdge = createEdge(width);
+    downEdge.position.x = BaseLineLength / 2;
+    downEdge.position.y = - width / 4;
+    downEdge.rotation.z = Math.atan2(width/2, BaseLineLength);
     this.#edges = [
-      createEdge(width),
-      createEdge(width),
+      upEdge,
+      downEdge,
     ];
     [this.#line, ...this.#edges].forEach(v => {
       this.#group.add(v);
