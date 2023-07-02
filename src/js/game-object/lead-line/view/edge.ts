@@ -15,7 +15,7 @@ export function createEdge(lineWidth: number): EdgeMesh {
   const edgeWidth = Math.sqrt((lineWidth / 2) ** 2 + BaseLineLength ** 2);
   const geometry = new THREE.PlaneGeometry(edgeWidth, 1);
   const material = new THREE.MeshBasicMaterial({
-    color: 0x000000,
+    color: 0x808080,
     side: THREE.DoubleSide,
     transparent: true,
   });
