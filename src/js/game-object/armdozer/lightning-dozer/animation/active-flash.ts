@@ -27,7 +27,7 @@ export function activeFlash(
             {
               strength: 1,
             },
-            500
+            2000
           ),
         group
       )
@@ -41,7 +41,7 @@ export function activeFlash(
             {
               strength: 0,
             },
-            500
+            2000
           ),
         group
       )
