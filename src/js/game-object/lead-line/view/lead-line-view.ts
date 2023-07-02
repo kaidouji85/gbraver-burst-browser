@@ -11,7 +11,7 @@ export class LeadLineView {
   /** グループ */
   #group: THREE.Group;
   /** 線メッシュ */
-  line: THREE.Mesh<THREE.BufferGeometry, THREE.MeshBasicMaterial>;
+  #line: THREE.Mesh<THREE.BufferGeometry, THREE.MeshBasicMaterial>;
   /** 不透明度係数 */
   #opacityCoefficient: number;
 
@@ -27,8 +27,8 @@ export class LeadLineView {
     opacityCoefficient: number
   ) {
     this.#group = new THREE.Group();
-    this.line = line(color, width);
-    this.#group.add(this.line);
+    this.#line = line(color, width);
+    this.#group.add(this.#line);
     this.#opacityCoefficient = opacityCoefficient;
   }
 
@@ -36,8 +36,8 @@ export class LeadLineView {
    * デストラクタ相当の処理
    */
   destructor(): void {
-    this.line.material.dispose();
-    this.line.geometry.dispose();
+    this.#line.material.dispose();
+    this.#line.geometry.dispose();
   }
 
   /**
@@ -49,18 +49,18 @@ export class LeadLineView {
     const length = Math.sqrt(
       (model.end.x - model.start.x) ** 2 + (model.end.y - model.start.y) ** 2
     );
-    this.line.scale.x = length / BaseLineLength;
-    this.line.scale.y = HUDLeadLineScale(
+    this.#group.scale.x = length / BaseLineLength;
+    this.#group.scale.y = HUDLeadLineScale(
       preRender.rendererDOM,
       preRender.safeAreaInset
     );
-    this.line.position.x = model.start.x;
-    this.line.position.y = model.start.y;
-    this.line.rotation.z = Math.atan2(
+    this.#group.position.x = model.start.x;
+    this.#group.position.y = model.start.y;
+    this.#group.rotation.z = Math.atan2(
       model.end.y - model.start.y,
       model.end.x - model.start.x
     );
-    this.line.material.opacity = model.opacity * this.#opacityCoefficient;
+    this.#line.material.opacity = model.opacity * this.#opacityCoefficient;
   }
 
   /**
