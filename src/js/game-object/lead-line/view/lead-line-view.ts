@@ -10,6 +10,8 @@ const BaseLength = 100;
 
 /** 引き出し線ビュー */
 export class LeadLineView {
+  /** グループ */
+  #group: THREE.Group;
   /** メッシュ */
   #mesh: THREE.Mesh<THREE.BufferGeometry, THREE.MeshBasicMaterial>;
   /** 不透明度係数 */
@@ -26,6 +28,7 @@ export class LeadLineView {
     width: number,
     opacityCoefficient: number
   ) {
+    this.#group = new THREE.Group();
     const geometry = new THREE.BufferGeometry().setFromPoints([
       new THREE.Vector3(BaseLength, 0, 0),
       new THREE.Vector3(0, width / 2, 0),
@@ -38,6 +41,7 @@ export class LeadLineView {
     });
     this.#mesh = new THREE.Mesh(geometry, material);
     this.#mesh.renderOrder = SPRITE_RENDER_ORDER;
+    this.#group.add(this.#mesh);
     this.#opacityCoefficient = opacityCoefficient;
   }
 
@@ -77,6 +81,6 @@ export class LeadLineView {
    * @return シーンに追加するオブジェクト
    */
   getObject3D(): THREE.Object3D {
-    return this.#mesh;
+    return this.#group;
   }
 }
