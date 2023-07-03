@@ -4,7 +4,7 @@ import { toSilhouette } from "../../../../canvas/silhouette/to-silhouette";
 import { CanvasDisposeTexture } from "../../../../texture/canvas-dispose-texture";
 
 /** アクティブレイヤー Red */
-export const ACTIVE_COLOR_R = 127
+export const ACTIVE_COLOR_R = 127;
 
 /** アクティブレイヤー Green */
 export const ACTIVE_COLOR_G = 191;
