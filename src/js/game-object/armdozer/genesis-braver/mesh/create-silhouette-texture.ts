@@ -16,11 +16,11 @@ export const ACTIVE_COLOR_B = 127;
  * @return シルエット化したテクスチャ
  */
 export function createSilhouetteTexture(texture: THREE.Texture): THREE.Texture {
-  const canvas = toSilhouette(
-    texture.image,
-    ACTIVE_COLOR_R,
-    ACTIVE_COLOR_G,
-    ACTIVE_COLOR_B
-  );
+  const canvas = toSilhouette({
+    image: texture.image,
+    r: ACTIVE_COLOR_R,
+    g: ACTIVE_COLOR_G,
+    b: ACTIVE_COLOR_B
+  });
   return new CanvasDisposeTexture(canvas);
 }

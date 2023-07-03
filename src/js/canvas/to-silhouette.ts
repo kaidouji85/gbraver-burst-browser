@@ -1,18 +1,24 @@
+/** パラメータ */
+type Params = {
+  /** シルエット抽出する画像 */
+  image: HTMLImageElement,
+  /** 塗りつぶしRed */
+  r: number,
+  /** 塗りつぶしGreen */
+  g: number,
+  /** 塗りつぶしBlue */
+  b: number
+};
+
+
 /**
  * 指定した画像のシルエットを抽出する
  * 透明色以外を指定した色で塗りつぶし、抽出結果は新規作成したCanvasとして返す
- * @param image シルエット抽出する画像
- * @param r 塗りつぶしRed
- * @param g 塗りつぶしGreen
- * @param b 塗りつぶしBlue
+ * @param param パラメータ
  * @return 生成したCanvas
  */
-export function toSilhouette(
-  image: HTMLImageElement,
-  r: number,
-  g: number,
-  b: number
-): HTMLCanvasElement {
+export function toSilhouette(params: Params): HTMLCanvasElement {
+  const {image, r, g, b} = params;
   const canvas = document.createElement("canvas");
   canvas.width = image.width;
   canvas.height = image.height;
