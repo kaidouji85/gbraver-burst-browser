@@ -5,10 +5,8 @@ import { CanvasDisposeTexture } from "../../../../texture/canvas-dispose-texture
 
 /** アクティブレイヤー Red */
 export const ACTIVE_COLOR_R = 255;
-
 /** アクティブレイヤー Green */
 export const ACTIVE_COLOR_G = 191;
-
 /** アクティブレイヤー Blue */
 export const ACTIVE_COLOR_B = 127;
 
