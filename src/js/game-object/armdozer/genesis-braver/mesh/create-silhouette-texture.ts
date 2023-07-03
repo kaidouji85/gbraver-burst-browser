@@ -20,7 +20,7 @@ export function createSilhouetteTexture(texture: THREE.Texture): THREE.Texture {
     image: texture.image,
     r: ACTIVE_COLOR_R,
     g: ACTIVE_COLOR_G,
-    b: ACTIVE_COLOR_B
+    b: ACTIVE_COLOR_B,
   });
   return new CanvasDisposeTexture(canvas);
 }

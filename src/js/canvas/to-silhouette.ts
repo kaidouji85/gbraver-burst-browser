@@ -1,15 +1,15 @@
 /** パラメータ */
 type Params = {
   /** シルエット抽出する画像 */
-  image: HTMLImageElement,
+  image: HTMLImageElement;
   /** 塗りつぶしRed */
-  r: number,
+  r: number;
   /** 塗りつぶしGreen */
-  g: number,
+  g: number;
   /** 塗りつぶしBlue */
-  b: number,
+  b: number;
   /** canvas後の画像スケール */
-  scale?: number,
+  scale?: number;
 };
 
 /**
@@ -19,7 +19,7 @@ type Params = {
  * @return 生成したCanvas
  */
 export function toSilhouette(params: Params): HTMLCanvasElement {
-  const {image, r, g, b} = params;
+  const { image, r, g, b } = params;
   const scale = params?.scale ?? 1;
   const canvas = document.createElement("canvas");
   canvas.width = image.width * scale;
