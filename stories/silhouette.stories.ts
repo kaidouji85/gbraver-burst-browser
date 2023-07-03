@@ -18,6 +18,14 @@ export const texture: DOMStubStory = domStub((resources) => {
   return toSilhouette({image, r: 255, g: 0, b: 0});
 });
 
+export const scaleDownTexture: DOMStubStory = domStub((resources) => {
+  const texture =
+    resources.textures.find((v) => v.id === TEXTURE_IDS.SHIN_BRAVER_STAND)
+      ?.texture ?? new THREE.Texture();
+  const image = texture.image;
+  return toSilhouette({image, r: 255, g: 0, b: 0, scale: 0.5});
+});
+
 export const horizontalTexture: DOMStubStory = domStub((resources) => {
   const texture =
     resources.textures.find((v) => v.id === TEXTURE_IDS.SHIN_BRAVER_BURST_DOWN)
@@ -26,9 +34,24 @@ export const horizontalTexture: DOMStubStory = domStub((resources) => {
   return toSilhouette({image, r: 255, g: 0, b: 0});
 });
 
+export const scaleDownHorizontalTexture: DOMStubStory = domStub((resources) => {
+  const texture =
+    resources.textures.find((v) => v.id === TEXTURE_IDS.SHIN_BRAVER_BURST_DOWN)
+      ?.texture ?? new THREE.Texture();
+  const image = texture.image;
+  return toSilhouette({image, r: 255, g: 0, b: 0, scale: 0.5});
+});
+
 export const canvasImage: DOMStubStory = domStub((resources) => {
   const image =
     resources.canvasImages.find((v) => v.id === CANVAS_IMAGE_IDS.BURST_BUTTON)
       ?.image ?? new Image();
   return toSilhouette({image, r: 0, g: 0, b: 255});
+});
+
+export const scaleDownCanvasImage: DOMStubStory = domStub((resources) => {
+  const image =
+    resources.canvasImages.find((v) => v.id === CANVAS_IMAGE_IDS.BURST_BUTTON)
+      ?.image ?? new Image();
+  return toSilhouette({image, r: 0, g: 0, b: 255, scale: 0.5});
 });
