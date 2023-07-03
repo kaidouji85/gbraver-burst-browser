@@ -4,13 +4,11 @@ import { toSilhouette } from "../../../../canvas/silhouette/to-silhouette";
 import { CanvasDisposeTexture } from "../../../../texture/canvas-dispose-texture";
 
 /** アクティブレイヤー Red */
-export const ACTIVE_COLOR_R = 240;
-
+export const ACTIVE_COLOR_R = 0;
 /** アクティブレイヤー Green */
-export const ACTIVE_COLOR_G = 240;
-
+export const ACTIVE_COLOR_G = 255;
 /** アクティブレイヤー Blue */
-export const ACTIVE_COLOR_B = 240;
+export const ACTIVE_COLOR_B = 127;
 
 /**
  * シルエット化したテクスチャを生成する
