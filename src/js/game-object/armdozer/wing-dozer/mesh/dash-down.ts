@@ -2,11 +2,11 @@ import * as THREE from "three";
 
 import type { Resources } from "../../../../resource";
 import { TEXTURE_IDS } from "../../../../resource/texture/ids";
-import { createSilhouetteTexture } from "../../genesis-braver/mesh/create-silhouette-texture";
 import type { ArmdozerAnimation } from "../../mesh/armdozer-animation";
 import { createHorizontalAnimation } from "../../mesh/horizontal-animation";
 import { MESH_HEIGHT, MESH_WIDTH } from "./mesh-size";
 import { MESH_Y } from "./position";
+import { createSilhouetteTexture } from "./create-silhouette-texture";
 
 /** アニメーション枚数 */
 export const MAX_ANIMATION = 4;
