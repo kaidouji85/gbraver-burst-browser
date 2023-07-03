@@ -1,6 +1,6 @@
 import * as THREE from "three";
 
-import { toSilhouette } from "../../../../canvas/silhouette/to-silhouette";
+import { toSilhouette } from "../../../../canvas/to-silhouette";
 import { CanvasDisposeTexture } from "../../../../texture/canvas-dispose-texture";
 
 /** アクティブレイヤー Red */

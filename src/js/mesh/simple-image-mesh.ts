@@ -1,6 +1,6 @@
 import * as THREE from "three";
 
-import { drawImageInCenter } from "../canvas/draw/image-drawer";
+import { drawImageInCenter } from "../canvas/draw-image-in-center";
 import { CanvasMesh } from "./canvas-mesh";
 
 /** コンストラクタのパラメータ */
