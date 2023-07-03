@@ -1,6 +1,6 @@
 import * as THREE from "three";
 
-import { toSilhouette } from "../src/js/canvas/silhouette/to-silhouette";
+import { toSilhouette } from "../src/js/canvas/to-silhouette";
 import { CANVAS_IMAGE_IDS } from "../src/js/resource/canvas-image";
 import { TEXTURE_IDS } from "../src/js/resource/texture/ids";
 import type { DOMStubStory } from "./stub/dom-stub";
