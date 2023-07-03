@@ -20,13 +20,11 @@ export function toSilhouette(
   context.drawImage(image, 0, 0);
   const imageData = context.getImageData(0, 0, canvas.width, canvas.height);
   const pix = imageData.data;
-
   for (let i = 0; i < pix.length; i += 4) {
     pix[i] = r;
     pix[i + 1] = g;
     pix[i + 2] = b;
   }
-
   context.putImageData(imageData, 0, 0);
   return canvas;
 }
