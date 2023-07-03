@@ -21,6 +21,7 @@ export function createSilhouetteTexture(texture: THREE.Texture): THREE.Texture {
     r: ACTIVE_COLOR_R,
     g: ACTIVE_COLOR_G,
     b: ACTIVE_COLOR_B,
+    scale: 0.5,
   });
   return new CanvasDisposeTexture(canvas);
 }
