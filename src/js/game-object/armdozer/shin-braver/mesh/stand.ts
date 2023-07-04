@@ -66,12 +66,13 @@ export function shinBraverOutlineStand(resources: Resources): ArmdozerAnimation 
     resources.textures.find((v) => v.id === TEXTURE_IDS.SHIN_BRAVER_STAND)
       ?.texture ?? new THREE.Texture();
   const silhouetteTexture = createOutlineSilhouetteTexture(texture);
-  const outlineWidth = 20;
+  const outlineWidth = 30;
   const ret = createHorizontalAnimation({
     texture: silhouetteTexture,
     maxAnimation: MAX_ANIMATION,
     width: MESH_WIDTH + outlineWidth,
     height: MESH_HEIGHT + outlineWidth,
+    blending: THREE.AdditiveBlending,
   });
   const object = ret.getObject3D();
   object.position.y = MESH_Y;
