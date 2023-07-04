@@ -7,15 +7,14 @@ import type { ArmdozerAnimation } from "./armdozer-animation";
 type ConstructorParam = {
   /** テクスチャ */
   texture: THREE.Texture;
-
   /** アニメーション枚数 */
   maxAnimation: number;
-
   /** 横 */
   width: number;
-
   /** 縦 */
   height: number;
+  /** ブレンドモード */
+  blending?: THREE.Blending;
 };
 
 /** アームドーザアニメーション水平方向テクスチャ版 */
@@ -25,7 +24,6 @@ class HorizontalArmdozerAnimation implements ArmdozerAnimation {
 
   /**
    * コンストラクタ
-   *
    * @param param パラメータ
    */
   constructor(param: ConstructorParam) {
@@ -34,6 +32,7 @@ class HorizontalArmdozerAnimation implements ArmdozerAnimation {
       maxAnimation: param.maxAnimation,
       width: param.width,
       height: param.height,
+      blending: param.blending,
     });
   }
 
@@ -57,8 +56,8 @@ class HorizontalArmdozerAnimation implements ArmdozerAnimation {
     return this.#animation.getObject3D();
   }
 }
-/** createHorizontalAnimationのパラメータ */
 
+/** createHorizontalAnimationのパラメータ */
 type CreatorParam = ConstructorParam;
 
 /**
