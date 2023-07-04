@@ -14,13 +14,18 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version: ${{ env.NODE_JS_VERSION }}
-      - uses: actions/cache@v3
-        id: node_modules_cache_id
+      - name: Cache node modules
+        id: cache-npm
+        uses: actions/cache@v3
         env:
           cache-name: cache-node-modules
         with:
-          path: '**/node_modules'
+          path: ~/.npm
           key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-build-${{ env.cache-name }}-
+            ${{ runner.os }}-build-
+            ${{ runner.os }}-
       - run: shellcheck *.bash
       - run: npm ci
       - run: npm run type-check
@@ -34,13 +39,18 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version: ${{ env.NODE_JS_VERSION }}
-      - uses: actions/cache@v3
-        id: node_modules_cache_id
+      - name: Cache node modules
+        id: cache-npm
+        uses: actions/cache@v3
         env:
           cache-name: cache-node-modules
         with:
-          path: '**/node_modules'
+          path: ~/.npm
           key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-build-${{ env.cache-name }}-
+            ${{ runner.os }}-build-
+            ${{ runner.os }}-
       - run: npm ci
       - run: npm run build:production
   buildOthers:
@@ -50,13 +60,18 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version: ${{ env.NODE_JS_VERSION }}
-      - uses: actions/cache@v3
-        id: node_modules_cache_id
+      - name: Cache node modules
+        id: cache-npm
+        uses: actions/cache@v3
         env:
           cache-name: cache-node-modules
         with:
-          path: '**/node_modules'
+          path: ~/.npm
           key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-build-${{ env.cache-name }}-
+            ${{ runner.os }}-build-
+            ${{ runner.os }}-
       - run: npm ci
       - run: npm run build:sw
       - run: npm run build:clear-sw
