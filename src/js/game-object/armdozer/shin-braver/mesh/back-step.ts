@@ -4,7 +4,6 @@ import type { Resources } from "../../../../resource";
 import { TEXTURE_IDS } from "../../../../resource/texture/ids";
 import type { ArmdozerAnimation } from "../../mesh/armdozer-animation";
 import { createHorizontalAnimation } from "../../mesh/horizontal-animation";
-import { createActiveSilhouetteTexture } from "./silhouette-texture";
 import { MESH_Y } from "./position";
 
 /** メッシュ幅 */

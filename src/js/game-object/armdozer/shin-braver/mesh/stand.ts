@@ -4,9 +4,12 @@ import type { Resources } from "../../../../resource";
 import { TEXTURE_IDS } from "../../../../resource/texture/ids";
 import type { ArmdozerAnimation } from "../../mesh/armdozer-animation";
 import { createHorizontalAnimation } from "../../mesh/horizontal-animation";
-import { createActiveSilhouetteTexture, createOutlineSilhouetteTexture } from "./silhouette-texture";
+import { OutlineWidth } from "./outline-width";
 import { MESH_Y } from "./position";
-import {OutlineWidth} from "./outline-width";
+import {
+  createActiveSilhouetteTexture,
+  createOutlineSilhouetteTexture,
+} from "./silhouette-texture";
 
 /** メッシュ幅 */
 export const MESH_WIDTH = 600;
@@ -62,7 +65,9 @@ export function shinBraverActiveStand(resources: Resources): ArmdozerAnimation {
  * @param resources リソース管理オブジェクト
  * @return 生成結果
  */
-export function shinBraverOutlineStand(resources: Resources): ArmdozerAnimation {
+export function shinBraverOutlineStand(
+  resources: Resources
+): ArmdozerAnimation {
   const texture =
     resources.textures.find((v) => v.id === TEXTURE_IDS.SHIN_BRAVER_STAND)
       ?.texture ?? new THREE.Texture();

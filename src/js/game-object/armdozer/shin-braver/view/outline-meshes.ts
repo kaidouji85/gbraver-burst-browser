@@ -1,11 +1,11 @@
 import { Resources } from "../../../../resource";
+import { shinBraverOutlineBurstDown } from "../mesh/burst-down";
+import { shinBraverOutlineBurstUp } from "../mesh/burst-up";
+import { shinBraverActiveFrontStep } from "../mesh/front-step";
+import { shinBraverOutlineGuard } from "../mesh/guard";
+import { shinBraverOutlineKnockBack } from "../mesh/knock-back";
 import { shinBraverOutlineStand } from "../mesh/stand";
 import { AnimationMeshMapping } from "./animation-mesh-mapping";
-import {shinBraverOutlineKnockBack} from "../mesh/knock-back";
-import {shinBraverOutlineGuard} from "../mesh/guard";
-import {shinBraverOutlineBurstUp} from "../mesh/burst-up";
-import {shinBraverOutlineBurstDown} from "../mesh/burst-down";
-import {shinBraverActiveFrontStep} from "../mesh/front-step";
 
 /**
  * アウトラインメッシュマッピング生成

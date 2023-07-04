@@ -5,8 +5,8 @@ import type { ShinBraverModel } from "../model/shin-braver-model";
 import { createActiveMeshes } from "./active-meshes";
 import type { AnimationMeshMapping } from "./animation-mesh-mapping";
 import { createMeshes } from "./meshes";
-import type { ShinBraverView } from "./shin-braver-view";
 import { createOutlineMeshes } from "./outline-meshes";
+import type { ShinBraverView } from "./shin-braver-view";
 
 /** プレイヤー側シンブレイバーのビュー */
 export class PlayerShinBraverView implements ShinBraverView {
@@ -28,16 +28,20 @@ export class PlayerShinBraverView implements ShinBraverView {
     this.#meshes = createMeshes(resources);
     this.#activeMeshes = createActiveMeshes(resources);
     this.#outlineMeshes = createOutlineMeshes(resources);
-    [...this.#meshes, ...this.#activeMeshes, ...this.#outlineMeshes].forEach(({ mesh }) => {
-      this.#group.add(mesh.getObject3D());
-    });
+    [...this.#meshes, ...this.#activeMeshes, ...this.#outlineMeshes].forEach(
+      ({ mesh }) => {
+        this.#group.add(mesh.getObject3D());
+      }
+    );
   }
 
   /** @override */
   destructor(): void {
-    [...this.#meshes, ...this.#activeMeshes, ...this.#outlineMeshes].forEach(({ mesh }) => {
-      mesh.destructor();
-    });
+    [...this.#meshes, ...this.#activeMeshes, ...this.#outlineMeshes].forEach(
+      ({ mesh }) => {
+        mesh.destructor();
+      }
+    );
   }
 
   /** @override */
@@ -63,7 +67,7 @@ export class PlayerShinBraverView implements ShinBraverView {
       currentActiveMesh.mesh.opacity(activeOpacity);
       currentActiveMesh.mesh.animate(model.animation.frame);
     }
-    
+
     const currentOutlineMesh = this.#outlineMeshes.find(
       (v) => v.type === model.animation.type
     );
@@ -73,7 +77,7 @@ export class PlayerShinBraverView implements ShinBraverView {
       currentOutlineMesh.mesh.opacity(outlineOpacity);
       currentOutlineMesh.mesh.animate(model.animation.frame);
     }
-    
+
     [...this.#meshes, ...this.#activeMeshes, ...this.#outlineMeshes]
       .filter((v) => v !== currentMesh)
       .filter((v) => v !== currentActiveMesh)

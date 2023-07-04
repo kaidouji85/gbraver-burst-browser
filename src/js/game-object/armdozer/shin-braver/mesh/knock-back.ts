@@ -4,9 +4,9 @@ import type { Resources } from "../../../../resource";
 import { TEXTURE_IDS } from "../../../../resource/texture/ids";
 import type { ArmdozerAnimation } from "../../mesh/armdozer-animation";
 import { createHorizontalAnimation } from "../../mesh/horizontal-animation";
-import { createActiveSilhouetteTexture } from "./silhouette-texture";
+import { OutlineWidth } from "./outline-width";
 import { MESH_Y } from "./position";
-import {OutlineWidth} from "./outline-width";
+import { createActiveSilhouetteTexture } from "./silhouette-texture";
 
 /** メッシュ幅 */
 export const MESH_WIDTH = 600;
