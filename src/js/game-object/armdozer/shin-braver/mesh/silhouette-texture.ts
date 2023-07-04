@@ -4,11 +4,11 @@ import { toSilhouette } from "../../../../canvas/to-silhouette";
 import { CanvasDisposeTexture } from "../../../../texture/canvas-dispose-texture";
 
 /** アクティブレイヤー Red */
-export const ACTIVE_COLOR_R = 0;
+export const ACTIVE_COLOR_R = 100;
 /** アクティブレイヤー Green */
-export const ACTIVE_COLOR_G = 255;
+export const ACTIVE_COLOR_G = 100;
 /** アクティブレイヤー Blue */
-export const ACTIVE_COLOR_B = 127;
+export const ACTIVE_COLOR_B = 100;
 
 /**
  * アクティブ用にシルエット化したテクスチャを生成する
@@ -27,11 +27,11 @@ export function createActiveSilhouetteTexture(texture: THREE.Texture): THREE.Tex
 }
 
 /** アウトラインレイヤー Red */
-export const OUTLINE_COLOR_R = 0;
+export const OUTLINE_COLOR_R = 255;
 /** アウトラインレイヤー Green */
 export const OUTLINE_COLOR_G = 0;
 /** アウトラインレイヤー Blue */
-export const OUTLINE_COLOR_B = 0;
+export const OUTLINE_COLOR_B = 255;
 
 /**
  * アウトライン用にシルエット化したテクスチャを生成する
