@@ -4,7 +4,7 @@ import type { Resources } from "../../../../resource";
 import { TEXTURE_IDS } from "../../../../resource/texture/ids";
 import type { ArmdozerAnimation } from "../../mesh/armdozer-animation";
 import { createHorizontalAnimation } from "../../mesh/horizontal-animation";
-import { createSilhouetteTexture } from "./create-silhouette-texture";
+import { createActiveSilhouetteTexture } from "./silhouette-texture";
 import { MESH_Y } from "./position";
 
 /** メッシュ幅 */
@@ -47,7 +47,7 @@ export function shinBraverActiveBurstDown(
   const texture =
     resources.textures.find((v) => v.id === TEXTURE_IDS.SHIN_BRAVER_BURST_DOWN)
       ?.texture ?? new THREE.Texture();
-  const silhouetteTexture = createSilhouetteTexture(texture);
+  const silhouetteTexture = createActiveSilhouetteTexture(texture);
   const ret = createHorizontalAnimation({
     texture: silhouetteTexture,
     maxAnimation: MAX_ANIMATION,
