@@ -6,7 +6,10 @@ import type { ArmdozerAnimation } from "../../mesh/armdozer-animation";
 import { createHorizontalAnimation } from "../../mesh/horizontal-animation";
 import { OutlineWidth } from "./outline-width";
 import { MESH_Y } from "./position";
-import {createActiveSilhouetteTexture, createOutlineSilhouetteTexture} from "./silhouette-texture";
+import {
+  createActiveSilhouetteTexture,
+  createOutlineSilhouetteTexture,
+} from "./silhouette-texture";
 
 /** メッシュ幅 */
 export const MESH_WIDTH = 600;
