@@ -14,6 +14,8 @@ type Param = {
   width: number;
   /** 高 */
   height: number;
+  /** ブレンドモード */
+  blending?: THREE.Blending;
 };
 
 /**
@@ -43,6 +45,7 @@ export class HorizontalAnimationMesh {
       side: THREE.DoubleSide,
       transparent: true,
       map: this.texture,
+      blending: param.blending,
     });
     this.mesh = new THREE.Mesh(geometry, material);
     this.mesh.renderOrder = SPRITE_RENDER_ORDER;
