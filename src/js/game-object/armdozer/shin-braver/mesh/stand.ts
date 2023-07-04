@@ -4,7 +4,7 @@ import type { Resources } from "../../../../resource";
 import { TEXTURE_IDS } from "../../../../resource/texture/ids";
 import type { ArmdozerAnimation } from "../../mesh/armdozer-animation";
 import { createHorizontalAnimation } from "../../mesh/horizontal-animation";
-import { createActiveSilhouetteTexture } from "./silhouette-texture";
+import { createActiveSilhouetteTexture, createOutlineSilhouetteTexture } from "./silhouette-texture";
 import { MESH_Y } from "./position";
 
 /** メッシュ幅 */
@@ -53,5 +53,28 @@ export function shinBraverActiveStand(resources: Resources): ArmdozerAnimation {
   const object = ret.getObject3D();
   object.position.y = MESH_Y;
   object.position.z = 0.01;
+  return ret;
+}
+
+/**
+ * シンブレイバーアウトライン立ちポーズメッシュを生成する
+ * @param resources リソース管理オブジェクト
+ * @return 生成結果
+ */
+export function shinBraverOutlineStand(resources: Resources): ArmdozerAnimation {
+  const texture =
+    resources.textures.find((v) => v.id === TEXTURE_IDS.SHIN_BRAVER_STAND)
+      ?.texture ?? new THREE.Texture();
+  const silhouetteTexture = createOutlineSilhouetteTexture(texture);
+  const scale = 1.2;
+  const ret = createHorizontalAnimation({
+    texture: silhouetteTexture,
+    maxAnimation: MAX_ANIMATION,
+    width: MESH_WIDTH * scale,
+    height: MESH_HEIGHT * scale,
+  });
+  const object = ret.getObject3D();
+  object.position.y = MESH_Y;
+  object.position.z = -0.01;
   return ret;
 }
