@@ -1,5 +1,4 @@
 import type { Resources } from "../../../../resource";
-import { shinBraverBackStep } from "../mesh/back-step";
 import { shinBraverActiveBurstDown } from "../mesh/burst-down";
 import { shinBraverActiveBurstUp } from "../mesh/burst-up";
 import { shinBraverActiveFrontStep } from "../mesh/front-step";
@@ -36,10 +35,6 @@ export function createActiveMeshes(
     {
       type: "BURST_DOWN",
       mesh: shinBraverActiveBurstDown(resources),
-    },
-    {
-      type: "BACK_STEP",
-      mesh: shinBraverBackStep(resources),
     },
     {
       type: "FRONT_STEP",

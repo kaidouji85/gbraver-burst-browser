@@ -35,27 +35,3 @@ export function shinBraverBackStep(resources: Resources): ArmdozerAnimation {
   object.position.y = MESH_Y;
   return ret;
 }
-
-/**
- * アクティブバックステップメッシュ生成
- * @param resources リソース管理オブジェクト
- * @return メッシュ
- */
-export function shinBraverActiveBackStep(
-  resources: Resources
-): ArmdozerAnimation {
-  const texture =
-    resources.textures.find((v) => v.id === TEXTURE_IDS.SHIN_BRAVER_BACK_STEP)
-      ?.texture ?? new THREE.Texture();
-  const silhouetteTexture = createActiveSilhouetteTexture(texture);
-  const ret = createHorizontalAnimation({
-    texture: silhouetteTexture,
-    maxAnimation: MAX_ANIMATION,
-    width: MESH_WIDTH,
-    height: MESH_HEIGHT,
-  });
-  const object = ret.getObject3D();
-  object.position.y = MESH_Y;
-  object.position.z = 0.01;
-  return ret;
-}
