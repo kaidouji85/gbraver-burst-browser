@@ -1,7 +1,7 @@
 import { Resources } from "../../../../resource";
 import { shinBraverOutlineBurstDown } from "../mesh/burst-down";
 import { shinBraverOutlineBurstUp } from "../mesh/burst-up";
-import { shinBraverActiveFrontStep } from "../mesh/front-step";
+import { shinBraverOutlineFrontStep} from "../mesh/front-step";
 import { shinBraverOutlineGuard } from "../mesh/guard";
 import { shinBraverOutlineKnockBack } from "../mesh/knock-back";
 import { shinBraverOutlineStand } from "../mesh/stand";
@@ -38,7 +38,7 @@ export function createOutlineMeshes(
     },
     {
       type: "FRONT_STEP",
-      mesh: shinBraverActiveFrontStep(resources),
+      mesh: shinBraverOutlineFrontStep(resources),
     },
   ];
 }

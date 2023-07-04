@@ -6,7 +6,7 @@ import type { ArmdozerAnimation } from "../../mesh/armdozer-animation";
 import { createHorizontalAnimation } from "../../mesh/horizontal-animation";
 import { OutlineWidth } from "./outline-width";
 import { MESH_Y } from "./position";
-import { createActiveSilhouetteTexture } from "./silhouette-texture";
+import {createActiveSilhouetteTexture, createOutlineSilhouetteTexture} from "./silhouette-texture";
 
 /** メッシュ幅 */
 export const MESH_WIDTH = 600;
@@ -70,7 +70,7 @@ export function shinBraverOutlineKnockBack(
   const texture =
     resources.textures.find((v) => v.id === TEXTURE_IDS.SHIN_BRAVER_KNOCK_BACK)
       ?.texture ?? new THREE.Texture();
-  const silhouetteTexture = createActiveSilhouetteTexture(texture);
+  const silhouetteTexture = createOutlineSilhouetteTexture(texture);
   const ret = createHorizontalAnimation({
     texture: silhouetteTexture,
     maxAnimation: MAX_ANIMATION,
@@ -80,6 +80,6 @@ export function shinBraverOutlineKnockBack(
   });
   const object = ret.getObject3D();
   object.position.y = MESH_Y;
-  object.position.z = 0.01;
+  object.position.z = -0.01;
   return ret;
 }
