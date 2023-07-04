@@ -9,10 +9,8 @@ import { MESH_Y } from "./position";
 
 /** メッシュ幅 */
 export const MESH_WIDTH = 600;
-
 /** メッシュ高 */
 export const MESH_HEIGHT = 600;
-
 /** アニメーション枚数 */
 export const MAX_ANIMATION = 1;
 
