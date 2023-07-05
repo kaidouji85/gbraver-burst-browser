@@ -4,9 +4,9 @@ import type { ArmdozerAnimation } from "../../mesh/armdozer-animation";
 import { createShinBraverActiveMesh } from "./create-active-mesh";
 import { createShinBraverMesh } from "./create-mesh";
 import { createShinBraverOutlineMesh } from "./create-outline-mesh";
+import { MESH_HEIGHT, MESH_WIDTH } from "./mes-size";
 import { OutlineWidth } from "./outline-width";
 import { MESH_Y } from "./position";
-import {MESH_HEIGHT, MESH_WIDTH} from "./mes-size";
 
 /** テクスチャID */
 export const TEXTURE_ID = TEXTURE_IDS.SHIN_BRAVER_FRONT_STEP;

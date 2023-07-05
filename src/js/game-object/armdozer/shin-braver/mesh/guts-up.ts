@@ -2,8 +2,8 @@ import type { Resources } from "../../../../resource";
 import { TEXTURE_IDS } from "../../../../resource/texture/ids";
 import type { ArmdozerAnimation } from "../../mesh/armdozer-animation";
 import { createShinBraverMesh } from "./create-mesh";
+import { MESH_HEIGHT, MESH_WIDTH } from "./mes-size";
 import { MESH_Y } from "./position";
-import {MESH_HEIGHT, MESH_WIDTH} from "./mes-size";
 
 /** テクスチャID */
 export const TEXTURE_ID = TEXTURE_IDS.SHIN_BRAVER_GUTS_UP;
