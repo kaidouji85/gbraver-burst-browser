@@ -55,7 +55,7 @@ type Params = {
  * @param params パラメータ
  * @return　生成結果
  */
-export function createShinBraverMesh(params: Params): ArmdozerAnimation {
+export function createShinBraverOutlineMesh(params: Params): ArmdozerAnimation {
   const { resources, textureId, maxAnimation, width, height, positionY, outlineWidth } = params;
   const texture =
     resources.textures.find((v) => v.id === textureId)
