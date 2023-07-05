@@ -6,8 +6,8 @@ import { TextureId } from "../../../../resource/texture/resource";
 import { CanvasDisposeTexture } from "../../../../texture/canvas-dispose-texture";
 import { ArmdozerAnimation } from "../../mesh/armdozer-animation";
 import { createHorizontalAnimation } from "../../mesh/horizontal-animation";
-import {MESH_HEIGHT, MESH_WIDTH} from "./mesh-size";
-import {MESH_Y} from "./position";
+import { MESH_HEIGHT, MESH_WIDTH } from "./mesh-size";
+import { MESH_Y } from "./position";
 
 /** アクティブレイヤー Red */
 const ACTIVE_COLOR_R = 100;
@@ -48,8 +48,7 @@ type Params = {
  * @return 生成結果
  */
 export function createNeoLandozerActiveMesh(params: Params): ArmdozerAnimation {
-  const { resources, textureId, maxAnimation } =
-    params;
+  const { resources, textureId, maxAnimation } = params;
   const texture =
     resources.textures.find((v) => v.id === textureId)?.texture ??
     new THREE.Texture();
