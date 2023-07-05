@@ -4,14 +4,11 @@ import type { ArmdozerAnimation } from "../../mesh/armdozer-animation";
 import { createNeoLandozerActiveMesh } from "./create-active-mesh";
 import { createNeoLandozerMesh } from "./create-mesh";
 import { createNeoLandozerOutlineMesh } from "./create-outline-mesh";
-import { MESH_HEIGHT, MESH_WIDTH } from "./mesh-size";
-import { OutlineWidth } from "./outline-width";
-import { MESH_Y } from "./position";
 
-/** アニメーション枚数 */
-export const MAX_ANIMATION = 4;
 /** テクスチャID */
 export const TEXTURE_ID = TEXTURE_IDS.NEO_LANDOZER_GUARD;
+/** アニメーション枚数 */
+export const MAX_ANIMATION = 4;
 
 /**
  * ネオラインドーザ ガード メッシュ生成
@@ -23,9 +20,6 @@ export function neoLandozerGuard(resources: Resources): ArmdozerAnimation {
     resources,
     textureId: TEXTURE_ID,
     maxAnimation: MAX_ANIMATION,
-    width: MESH_WIDTH,
-    height: MESH_HEIGHT,
-    positionY: MESH_Y,
   });
 }
 
@@ -41,9 +35,6 @@ export function neoLandozerActiveGuard(
     resources,
     textureId: TEXTURE_ID,
     maxAnimation: MAX_ANIMATION,
-    width: MESH_WIDTH,
-    height: MESH_HEIGHT,
-    positionY: MESH_Y,
   });
 }
 
@@ -59,9 +50,5 @@ export function neoLandozerOutlineGuard(
     resources,
     textureId: TEXTURE_ID,
     maxAnimation: MAX_ANIMATION,
-    width: MESH_WIDTH,
-    height: MESH_HEIGHT,
-    positionY: MESH_Y,
-    outlineWidth: OutlineWidth,
   });
 }
