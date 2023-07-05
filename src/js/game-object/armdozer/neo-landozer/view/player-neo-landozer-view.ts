@@ -6,6 +6,7 @@ import { createActiveMeshes } from "./active-meshes";
 import type { AnimationMeshMapping } from "./animation-mesh-mapping";
 import { createMeshes } from "./meshes";
 import type { NeoLandozerView } from "./neo-landozer-view";
+import { createOutlineMeshes } from "./outline-meshes";
 
 /** プレイヤー側ネオランドーザのビュー */
 export class PlayerNeoLandozerView implements NeoLandozerView {
@@ -15,6 +16,8 @@ export class PlayerNeoLandozerView implements NeoLandozerView {
   #meshes: AnimationMeshMapping[];
   /** アクティブメッシュ */
   #activeMeshes: AnimationMeshMapping[];
+  /** アウトラインメッシュ */
+  #outlineMeshes: AnimationMeshMapping[];
 
   /**
    * コンストラクタ
@@ -24,16 +27,21 @@ export class PlayerNeoLandozerView implements NeoLandozerView {
     this.#group = new THREE.Group();
     this.#meshes = createMeshes(resources);
     this.#activeMeshes = createActiveMeshes(resources);
-    [...this.#meshes, ...this.#activeMeshes].forEach(({ mesh }) => {
-      this.#group.add(mesh.getObject3D());
-    });
+    this.#outlineMeshes = createOutlineMeshes(resources);
+    [...this.#meshes, ...this.#activeMeshes, ...this.#outlineMeshes].forEach(
+      ({ mesh }) => {
+        this.#group.add(mesh.getObject3D());
+      }
+    );
   }
 
   /** @override */
   destructor(): void {
-    [...this.#meshes, ...this.#activeMeshes].forEach(({ mesh }) => {
-      mesh.destructor();
-    });
+    [...this.#meshes, ...this.#activeMeshes, ...this.#outlineMeshes].forEach(
+      ({ mesh }) => {
+        mesh.destructor();
+      }
+    );
   }
 
   /** @override */
@@ -41,6 +49,7 @@ export class PlayerNeoLandozerView implements NeoLandozerView {
     this.#group.position.x = model.position.x;
     this.#group.position.y = model.position.y;
     this.#group.position.z = model.position.z;
+
     const currentMesh = this.#meshes.find(
       (v) => v.type === model.animation.type
     );
@@ -54,14 +63,25 @@ export class PlayerNeoLandozerView implements NeoLandozerView {
     );
     if (currentActiveMesh) {
       const activeOpacity =
-        (0.4 + model.active.strength * 0.1) * model.active.opacity;
+        (0.2 + model.active.strength * 0.1) * model.active.opacity;
       currentActiveMesh.mesh.opacity(activeOpacity);
       currentActiveMesh.mesh.animate(model.animation.frame);
     }
 
-    [...this.#meshes, ...this.#activeMeshes]
+    const currentOutlineMesh = this.#outlineMeshes.find(
+      (v) => v.type === model.animation.type
+    );
+    if (currentOutlineMesh) {
+      const outlineOpacity =
+        (0.9 + model.active.strength * 0.1) * model.active.opacity;
+      currentOutlineMesh.mesh.opacity(outlineOpacity);
+      currentOutlineMesh.mesh.animate(model.animation.frame);
+    }
+
+    [...this.#meshes, ...this.#activeMeshes, ...this.#outlineMeshes]
       .filter((v) => v !== currentMesh)
       .filter((v) => v !== currentActiveMesh)
+      .filter((v) => v !== currentOutlineMesh)
       .forEach(({ mesh }) => {
         mesh.opacity(0);
       });

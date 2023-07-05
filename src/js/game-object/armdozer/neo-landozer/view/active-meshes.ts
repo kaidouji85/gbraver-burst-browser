@@ -1,8 +1,8 @@
 import type { Resources } from "../../../../resource";
 import { neoLandozerActiveFrontStep } from "../mesh/front-step";
 import { neoLandozerActiveGuard } from "../mesh/guard";
-import { neoLandozerGutsDown } from "../mesh/guts-down";
-import { neoLandozerGutsUp } from "../mesh/guts-up";
+import { neoLandozerActiveGutsDown } from "../mesh/guts-down";
+import { neoLandozerActiveGutsUp } from "../mesh/guts-up";
 import { neoLandozerActiveKnockBack } from "../mesh/knock-back";
 import { neoLandozerActiveStand } from "../mesh/stand";
 import type { AnimationMeshMapping } from "./animation-mesh-mapping";
@@ -30,11 +30,11 @@ export function createActiveMeshes(
     },
     {
       type: "GUTS_UP",
-      mesh: neoLandozerGutsUp(resources),
+      mesh: neoLandozerActiveGutsUp(resources),
     },
     {
       type: "GUTS_DOWN",
-      mesh: neoLandozerGutsDown(resources),
+      mesh: neoLandozerActiveGutsDown(resources),
     },
     {
       type: "FRONT_STEP",

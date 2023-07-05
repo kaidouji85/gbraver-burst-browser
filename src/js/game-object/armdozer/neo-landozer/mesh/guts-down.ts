@@ -4,8 +4,12 @@ import type { Resources } from "../../../../resource";
 import { TEXTURE_IDS } from "../../../../resource/texture/ids";
 import type { ArmdozerAnimation } from "../../mesh/armdozer-animation";
 import { createHorizontalAnimation } from "../../mesh/horizontal-animation";
-import { createSilhouetteTexture } from "./create-silhouette-texture";
+import { OutlineWidth } from "./outline-width";
 import { MESH_Y } from "./position";
+import {
+  createActiveSilhouetteTexture,
+  createOutlineSilhouetteTexture,
+} from "./silhouette-texture";
 
 /** アニメーション枚数 */
 export const MAX_ANIMATION = 4;
@@ -47,7 +51,7 @@ export function neoLandozerActiveGutsDown(
   const texture =
     resources.textures.find((v) => v.id === TEXTURE_IDS.NEO_LANDOZER_GUTS_DOWN)
       ?.texture ?? new THREE.Texture();
-  const silhouetteTexture = createSilhouetteTexture(texture);
+  const silhouetteTexture = createActiveSilhouetteTexture(texture);
   const ret = createHorizontalAnimation({
     texture: silhouetteTexture,
     maxAnimation: MAX_ANIMATION,
@@ -57,5 +61,30 @@ export function neoLandozerActiveGutsDown(
   const object = ret.getObject3D();
   object.position.y = MESH_Y;
   object.position.z = 0.01;
+  return ret;
+}
+
+/**
+ * ネオラインドーザ アウトラインガッツダウン メッシュ生成
+ * @param resources リソース管理オブジェクト
+ * @return メッシュ
+ */
+export function neoLandozerOutlineGutsDown(
+  resources: Resources
+): ArmdozerAnimation {
+  const texture =
+    resources.textures.find((v) => v.id === TEXTURE_IDS.NEO_LANDOZER_GUTS_DOWN)
+      ?.texture ?? new THREE.Texture();
+  const silhouetteTexture = createOutlineSilhouetteTexture(texture);
+  const ret = createHorizontalAnimation({
+    texture: silhouetteTexture,
+    maxAnimation: MAX_ANIMATION,
+    width: MESH_WIDTH + OutlineWidth,
+    height: MESH_HEIGHT + OutlineWidth,
+    blending: THREE.AdditiveBlending,
+  });
+  const object = ret.getObject3D();
+  object.position.y = MESH_Y;
+  object.position.z = -0.01;
   return ret;
 }
