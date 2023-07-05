@@ -1,22 +1,17 @@
-import * as THREE from "three";
-
 import type { Resources } from "../../../../resource";
 import { TEXTURE_IDS } from "../../../../resource/texture/ids";
 import type { ArmdozerAnimation } from "../../mesh/armdozer-animation";
-import { createHorizontalAnimation } from "../../mesh/horizontal-animation";
+import { createNeoLandozerActiveMesh } from "./create-active-mesh";
+import { createNeoLandozerMesh } from "./create-mesh";
+import { createNeoLandozerOutlineMesh } from "./create-outline-mesh";
+import { MESH_HEIGHT, MESH_WIDTH } from "./mesh-size";
 import { OutlineWidth } from "./outline-width";
 import { MESH_Y } from "./position";
-import {
-  createActiveSilhouetteTexture,
-  createOutlineSilhouetteTexture,
-} from "./silhouette-texture";
 
 /** アニメーション枚数 */
 export const MAX_ANIMATION = 4;
-/** メッシュ幅 */
-export const MESH_WIDTH = 600;
-/** メッシュ高 */
-export const MESH_HEIGHT = 600;
+/** テクスチャID */
+export const TEXTURE_ID = TEXTURE_IDS.NEO_LANDOZER_GUTS_UP;
 
 /**
  * ネオラインドーザ ガッツアップ メッシュ生成
@@ -24,18 +19,14 @@ export const MESH_HEIGHT = 600;
  * @return メッシュ
  */
 export function neoLandozerGutsUp(resources: Resources): ArmdozerAnimation {
-  const texture =
-    resources.textures.find((v) => v.id === TEXTURE_IDS.NEO_LANDOZER_GUTS_UP)
-      ?.texture ?? new THREE.Texture();
-  const ret = createHorizontalAnimation({
-    texture,
+  return createNeoLandozerMesh({
+    resources,
+    textureId: TEXTURE_ID,
     maxAnimation: MAX_ANIMATION,
     width: MESH_WIDTH,
     height: MESH_HEIGHT,
+    positionY: MESH_Y,
   });
-  const object = ret.getObject3D();
-  object.position.y = MESH_Y;
-  return ret;
 }
 
 /**
@@ -46,20 +37,14 @@ export function neoLandozerGutsUp(resources: Resources): ArmdozerAnimation {
 export function neoLandozerActiveGutsUp(
   resources: Resources
 ): ArmdozerAnimation {
-  const texture =
-    resources.textures.find((v) => v.id === TEXTURE_IDS.NEO_LANDOZER_GUTS_UP)
-      ?.texture ?? new THREE.Texture();
-  const silhouetteTexture = createActiveSilhouetteTexture(texture);
-  const ret = createHorizontalAnimation({
-    texture: silhouetteTexture,
+  return createNeoLandozerActiveMesh({
+    resources,
+    textureId: TEXTURE_ID,
     maxAnimation: MAX_ANIMATION,
     width: MESH_WIDTH,
     height: MESH_HEIGHT,
+    positionY: MESH_Y,
   });
-  const object = ret.getObject3D();
-  object.position.y = MESH_Y;
-  object.position.z = 0.01;
-  return ret;
 }
 
 /**
@@ -70,19 +55,13 @@ export function neoLandozerActiveGutsUp(
 export function neoLandozerOutlineGutsUp(
   resources: Resources
 ): ArmdozerAnimation {
-  const texture =
-    resources.textures.find((v) => v.id === TEXTURE_IDS.NEO_LANDOZER_GUTS_UP)
-      ?.texture ?? new THREE.Texture();
-  const silhouetteTexture = createOutlineSilhouetteTexture(texture);
-  const ret = createHorizontalAnimation({
-    texture: silhouetteTexture,
+  return createNeoLandozerOutlineMesh({
+    resources,
+    textureId: TEXTURE_ID,
     maxAnimation: MAX_ANIMATION,
-    width: MESH_WIDTH + OutlineWidth,
-    height: MESH_HEIGHT + OutlineWidth,
-    blending: THREE.AdditiveBlending,
+    width: MESH_WIDTH,
+    height: MESH_HEIGHT,
+    positionY: MESH_Y,
+    outlineWidth: OutlineWidth,
   });
-  const object = ret.getObject3D();
-  object.position.y = MESH_Y;
-  object.position.z = -0.01;
-  return ret;
 }
