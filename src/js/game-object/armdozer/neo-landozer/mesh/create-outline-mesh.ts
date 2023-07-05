@@ -7,26 +7,26 @@ import { ArmdozerAnimation } from "../../mesh/armdozer-animation";
 import { toSilhouette } from "../../../../canvas/to-silhouette";
 import { CanvasDisposeTexture } from "../../../../texture/canvas-dispose-texture";
 
-/** アクティブレイヤー Red */
-const ACTIVE_COLOR_R = 100;
-/** アクティブレイヤー Green */
-const ACTIVE_COLOR_G = 100;
-/** アクティブレイヤー Blue */
-const ACTIVE_COLOR_B = 100;
+/** アウトラインレイヤー Red */
+const OUTLINE_COLOR_R = 0;
+/** アウトラインレイヤー Green */
+const OUTLINE_COLOR_G = 255;
+/** アウトラインレイヤー Blue */
+const OUTLINE_COLOR_B = 255;
 
 /**
- * アクティブ用にシルエット化したテクスチャを生成する
+ * アウトライン用にシルエット化したテクスチャを生成する
  * @param texture 加工前のテクスチャ
  * @return シルエット化したテクスチャ
  */
-function createActiveSilhouetteTexture(
+function createOutlineSilhouetteTexture(
   texture: THREE.Texture
 ): THREE.Texture {
   const canvas = toSilhouette({
     image: texture.image,
-    r: ACTIVE_COLOR_R,
-    g: ACTIVE_COLOR_G,
-    b: ACTIVE_COLOR_B,
+    r: OUTLINE_COLOR_R,
+    g: OUTLINE_COLOR_G,
+    b: OUTLINE_COLOR_B,
     scale: 0.5,
   });
   return new CanvasDisposeTexture(canvas);
@@ -46,28 +46,31 @@ type Params = {
   height: number;
   /** ローカル座標Y軸 */
   positionY: number;
+  /** アウトラインの太さ */
+  outlineWidth: number;
 };
 
 /**
- * ネオランドーザのアクティブメッシュを生成する
+ * ネオランドーザのアウトラインメッシュを生成する
  * @param params パラメータ
  * @return 生成結果
  */
-export function createNeoLandozerActiveMesh(params: Params): ArmdozerAnimation {
-  const { resources, textureId, maxAnimation, width, height, positionY } =
+export function createNeoLandozerOutlineMesh(params: Params): ArmdozerAnimation {
+  const { resources, textureId, maxAnimation, width, height, positionY, outlineWidth } =
     params;
   const texture =
     resources.textures.find((v) => v.id === textureId)?.texture ??
     new THREE.Texture();
-  const silhouetteTexture = createActiveSilhouetteTexture(texture);
+  const silhouetteTexture = createOutlineSilhouetteTexture(texture);  
   const ret = createHorizontalAnimation({
     texture: silhouetteTexture,
     maxAnimation,
-    width,
-    height,
+    width: width + outlineWidth,
+    height: height + outlineWidth,
+    blending: THREE.AdditiveBlending,
   });
   const object = ret.getObject3D();
   object.position.y = positionY;
-  object.position.z = 0.01;
+  object.position.z = -0.01;
   return ret;
 }
