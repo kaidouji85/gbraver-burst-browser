@@ -28,16 +28,20 @@ export class PlayerNeoLandozerView implements NeoLandozerView {
     this.#meshes = createMeshes(resources);
     this.#activeMeshes = createActiveMeshes(resources);
     this.#outlineMeshes = createOutlineMeshes(resources);
-    [...this.#meshes, ...this.#activeMeshes, ...this.#outlineMeshes].forEach(({ mesh }) => {
-      this.#group.add(mesh.getObject3D());
-    });
+    [...this.#meshes, ...this.#activeMeshes, ...this.#outlineMeshes].forEach(
+      ({ mesh }) => {
+        this.#group.add(mesh.getObject3D());
+      }
+    );
   }
 
   /** @override */
   destructor(): void {
-    [...this.#meshes, ...this.#activeMeshes, ...this.#outlineMeshes].forEach(({ mesh }) => {
-      mesh.destructor();
-    });
+    [...this.#meshes, ...this.#activeMeshes, ...this.#outlineMeshes].forEach(
+      ({ mesh }) => {
+        mesh.destructor();
+      }
+    );
   }
 
   /** @override */

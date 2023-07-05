@@ -4,9 +4,12 @@ import type { Resources } from "../../../../resource";
 import { TEXTURE_IDS } from "../../../../resource/texture/ids";
 import type { ArmdozerAnimation } from "../../mesh/armdozer-animation";
 import { createHorizontalAnimation } from "../../mesh/horizontal-animation";
-import { createActiveSilhouetteTexture, createOutlineSilhouetteTexture } from "./silhouette-texture";
-import { MESH_Y } from "./position";
 import { OutlineWidth } from "./outline-width";
+import { MESH_Y } from "./position";
+import {
+  createActiveSilhouetteTexture,
+  createOutlineSilhouetteTexture,
+} from "./silhouette-texture";
 
 /** アニメーション枚数 */
 export const MAX_ANIMATION = 4;

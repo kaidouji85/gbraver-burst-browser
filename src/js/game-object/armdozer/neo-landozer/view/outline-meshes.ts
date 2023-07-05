@@ -39,6 +39,6 @@ export function createOutlineMeshes(
     {
       type: "FRONT_STEP",
       mesh: neoLandozerOutlineFrontStep(resources),
-    }
+    },
   ];
 }

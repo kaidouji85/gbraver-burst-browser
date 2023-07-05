@@ -15,7 +15,9 @@ export const ACTIVE_COLOR_B = 100;
  * @param texture 加工前のテクスチャ
  * @return シルエット化したテクスチャ
  */
-export function createActiveSilhouetteTexture(texture: THREE.Texture): THREE.Texture {
+export function createActiveSilhouetteTexture(
+  texture: THREE.Texture
+): THREE.Texture {
   const canvas = toSilhouette({
     image: texture.image,
     r: ACTIVE_COLOR_R,
