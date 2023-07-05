@@ -6,6 +6,8 @@ import { TextureId } from "../../../../resource/texture/resource";
 import { CanvasDisposeTexture } from "../../../../texture/canvas-dispose-texture";
 import { ArmdozerAnimation } from "../../mesh/armdozer-animation";
 import { createHorizontalAnimation } from "../../mesh/horizontal-animation";
+import {MESH_Y} from "./position";
+import {MESH_HEIGHT, MESH_WIDTH} from "./mes-size";
 
 /** アクティブレイヤー Red */
 const ACTIVE_COLOR_R = 100;
@@ -38,12 +40,6 @@ type Params = {
   textureId: TextureId;
   /** 最大アニメーション枚数 */
   maxAnimation: number;
-  /** メッシュ幅 */
-  width: number;
-  /** メッシュ高 */
-  height: number;
-  /** ローカル座標Y軸 */
-  positionY: number;
 };
 
 /**
@@ -52,7 +48,7 @@ type Params = {
  * @return 生成結果
  */
 export function createShinBraverActiveMesh(params: Params): ArmdozerAnimation {
-  const { resources, textureId, maxAnimation, width, height, positionY } =
+  const { resources, textureId, maxAnimation } =
     params;
   const texture =
     resources.textures.find((v) => v.id === textureId)?.texture ??
@@ -61,11 +57,11 @@ export function createShinBraverActiveMesh(params: Params): ArmdozerAnimation {
   const ret = createHorizontalAnimation({
     texture: silhouetteTexture,
     maxAnimation,
-    width,
-    height,
+    width: MESH_WIDTH,
+    height: MESH_HEIGHT,
   });
   const object = ret.getObject3D();
-  object.position.y = positionY;
+  object.position.y = MESH_Y;
   object.position.z = 0.01;
   return ret;
 }
