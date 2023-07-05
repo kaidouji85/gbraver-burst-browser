@@ -1,20 +1,18 @@
-import * as THREE from "three";
-
 import type { Resources } from "../../../../resource";
 import { TEXTURE_IDS } from "../../../../resource/texture/ids";
 import type { ArmdozerAnimation } from "../../mesh/armdozer-animation";
-import { createHorizontalAnimation } from "../../mesh/horizontal-animation";
+import { createShinBraverActiveMesh } from "./create-active-mesh";
+import { createShinBraverMesh } from "./create-mesh";
+import { createShinBraverOutlineMesh } from "./create-outline-mesh";
 import { OutlineWidth } from "./outline-width";
 import { MESH_Y } from "./position";
-import {
-  createActiveSilhouetteTexture,
-  createOutlineSilhouetteTexture,
-} from "./silhouette-texture";
 
 /** メッシュ幅 */
 export const MESH_WIDTH = 600;
 /** メッシュ高 */
 export const MESH_HEIGHT = 600;
+/** テクスチャID */
+export const TEXTURE_ID = TEXTURE_IDS.SHIN_BRAVER_BURST_DOWN;
 /** アニメーション枚数 */
 export const MAX_ANIMATION = 4;
 
@@ -24,18 +22,14 @@ export const MAX_ANIMATION = 4;
  * @return メッシュ
  */
 export function shinBraverBurstDown(resources: Resources): ArmdozerAnimation {
-  const texture =
-    resources.textures.find((v) => v.id === TEXTURE_IDS.SHIN_BRAVER_BURST_DOWN)
-      ?.texture ?? new THREE.Texture();
-  const ret = createHorizontalAnimation({
-    texture,
+  return createShinBraverMesh({
+    resources,
+    textureId: TEXTURE_ID,
     maxAnimation: MAX_ANIMATION,
     width: MESH_WIDTH,
     height: MESH_HEIGHT,
+    positionY: MESH_Y,
   });
-  const object = ret.getObject3D();
-  object.position.y = MESH_Y;
-  return ret;
 }
 
 /**
@@ -46,20 +40,14 @@ export function shinBraverBurstDown(resources: Resources): ArmdozerAnimation {
 export function shinBraverActiveBurstDown(
   resources: Resources
 ): ArmdozerAnimation {
-  const texture =
-    resources.textures.find((v) => v.id === TEXTURE_IDS.SHIN_BRAVER_BURST_DOWN)
-      ?.texture ?? new THREE.Texture();
-  const silhouetteTexture = createActiveSilhouetteTexture(texture);
-  const ret = createHorizontalAnimation({
-    texture: silhouetteTexture,
+  return createShinBraverActiveMesh({
+    resources,
+    textureId: TEXTURE_ID,
     maxAnimation: MAX_ANIMATION,
     width: MESH_WIDTH,
     height: MESH_HEIGHT,
+    positionY: MESH_Y,
   });
-  const object = ret.getObject3D();
-  object.position.y = MESH_Y;
-  object.position.z = 0.01;
-  return ret;
 }
 
 /**
@@ -70,19 +58,13 @@ export function shinBraverActiveBurstDown(
 export function shinBraverOutlineBurstDown(
   resources: Resources
 ): ArmdozerAnimation {
-  const texture =
-    resources.textures.find((v) => v.id === TEXTURE_IDS.SHIN_BRAVER_BURST_DOWN)
-      ?.texture ?? new THREE.Texture();
-  const silhouetteTexture = createOutlineSilhouetteTexture(texture);
-  const ret = createHorizontalAnimation({
-    texture: silhouetteTexture,
+  return createShinBraverOutlineMesh({
+    resources,
+    textureId: TEXTURE_ID,
     maxAnimation: MAX_ANIMATION,
-    width: MESH_WIDTH + OutlineWidth,
-    height: MESH_HEIGHT + OutlineWidth,
-    blending: THREE.AdditiveBlending,
+    width: MESH_WIDTH,
+    height: MESH_HEIGHT,
+    positionY: MESH_Y,
+    outlineWidth: OutlineWidth,
   });
-  const object = ret.getObject3D();
-  object.position.y = MESH_Y;
-  object.position.z = -0.01;
-  return ret;
 }
