@@ -4,9 +4,6 @@ import type { ArmdozerAnimation } from "../../mesh/armdozer-animation";
 import { createShinBraverActiveMesh } from "./create-active-mesh";
 import { createShinBraverMesh } from "./create-mesh";
 import { createShinBraverOutlineMesh } from "./create-outline-mesh";
-import { MESH_HEIGHT, MESH_WIDTH } from "./mes-size";
-import { OutlineWidth } from "./outline-width";
-import { MESH_Y } from "./position";
 
 /** テクスチャID */
 export const TEXTURE_ID = TEXTURE_IDS.SHIN_BRAVER_STAND;
@@ -23,9 +20,6 @@ export function shinBraverStand(resources: Resources): ArmdozerAnimation {
     resources,
     textureId: TEXTURE_ID,
     maxAnimation: MAX_ANIMATION,
-    width: MESH_WIDTH,
-    height: MESH_HEIGHT,
-    positionY: MESH_Y,
   });
 }
 
@@ -39,9 +33,6 @@ export function shinBraverActiveStand(resources: Resources): ArmdozerAnimation {
     resources,
     textureId: TEXTURE_ID,
     maxAnimation: MAX_ANIMATION,
-    width: MESH_WIDTH,
-    height: MESH_HEIGHT,
-    positionY: MESH_Y,
   });
 }
 
@@ -57,9 +48,5 @@ export function shinBraverOutlineStand(
     resources,
     textureId: TEXTURE_ID,
     maxAnimation: MAX_ANIMATION,
-    width: MESH_WIDTH,
-    height: MESH_HEIGHT,
-    positionY: MESH_Y,
-    outlineWidth: OutlineWidth,
   });
 }
