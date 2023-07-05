@@ -6,11 +6,8 @@ import { createShinBraverMesh } from "./create-mesh";
 import { createShinBraverOutlineMesh } from "./create-outline-mesh";
 import { OutlineWidth } from "./outline-width";
 import { MESH_Y } from "./position";
+import {MESH_HEIGHT, MESH_WIDTH} from "./mes-size";
 
-/** メッシュ幅 */
-export const MESH_WIDTH = 600;
-/** メッシュ高 */
-export const MESH_HEIGHT = 600;
 /** テクスチャID */
 export const TEXTURE_ID = TEXTURE_IDS.SHIN_BRAVER_BURST_DOWN;
 /** アニメーション枚数 */

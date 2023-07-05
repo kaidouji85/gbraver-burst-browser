@@ -3,11 +3,8 @@ import { TEXTURE_IDS } from "../../../../resource/texture/ids";
 import type { ArmdozerAnimation } from "../../mesh/armdozer-animation";
 import { createShinBraverMesh } from "./create-mesh";
 import { MESH_Y } from "./position";
+import {MESH_HEIGHT, MESH_WIDTH} from "./mes-size";
 
-/** メッシュ幅 */
-export const MESH_WIDTH = 600;
-/** メッシュ高 */
-export const MESH_HEIGHT = 600;
 /** テクスチャID */
 export const TEXTURE_ID = TEXTURE_IDS.SHIN_BRAVER_SP_CHARGE;
 /** アニメーション枚数 */
