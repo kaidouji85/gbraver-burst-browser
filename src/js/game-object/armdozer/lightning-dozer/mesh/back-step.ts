@@ -21,5 +21,5 @@ export function lightningDozerBackStep(
     resources,
     textureId: TEXTURE_ID,
     maxAnimation: MAX_ANIMATION,
-  })
+  });
 }
