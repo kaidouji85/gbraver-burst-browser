@@ -79,6 +79,7 @@ export function neoLandozerOutlineGutsUp(
     maxAnimation: MAX_ANIMATION,
     width: MESH_WIDTH + OutlineWidth,
     height: MESH_HEIGHT + OutlineWidth,
+    blending: THREE.AdditiveBlending,
   });
   const object = ret.getObject3D();
   object.position.y = MESH_Y;
