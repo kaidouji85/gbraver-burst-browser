@@ -11,6 +11,7 @@ export const ACTIVE_COLOR_G = 127;
 export const ACTIVE_COLOR_B = 255;
 
 /**
+ * @deprecated
  * シルエット化したテクスチャを生成する
  * @param texture 加工前のテクスチャ
  * @return シルエット化したテクスチャ
