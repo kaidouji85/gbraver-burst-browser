@@ -1,5 +1,6 @@
 import { Resources } from "../../../../resource";
 import { neoLandozerOutlineGuard } from "../mesh/guard";
+import { neoLandozerOutlineGutsUp } from "../mesh/guts-up";
 import { neoLandozerOutlineKnockBack } from "../mesh/knock-back";
 import { neoLandozerOutlineStand } from "../mesh/stand";
 import { AnimationMeshMapping } from "./animation-mesh-mapping";
@@ -24,6 +25,10 @@ export function createOutlineMeshes(
     {
       type: "GUARD",
       mesh: neoLandozerOutlineGuard(resources),
+    },
+    {
+      type: "GUTS_UP",
+      mesh: neoLandozerOutlineGutsUp(resources),
     }
   ];
 }
