@@ -1,4 +1,5 @@
 import { Resources } from "../../../../resource";
+import { neoLandozerOutlineKnockBack } from "../mesh/knock-back";
 import { neoLandozerOutlineStand } from "../mesh/stand";
 import { AnimationMeshMapping } from "./animation-mesh-mapping";
 
@@ -14,6 +15,10 @@ export function createOutlineMeshes(
     {
       type: "STAND",
       mesh: neoLandozerOutlineStand(resources),
+    },
+    {
+      type: "KNOCK_BACK",
+      mesh: neoLandozerOutlineKnockBack(resources),
     }
   ];
 }

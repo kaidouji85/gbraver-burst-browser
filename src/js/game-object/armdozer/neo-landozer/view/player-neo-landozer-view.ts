@@ -74,7 +74,7 @@ export class PlayerNeoLandozerView implements NeoLandozerView {
       currentOutlineMesh.mesh.animate(model.animation.frame);
     }
 
-    [...this.#meshes, ...this.#activeMeshes]
+    [...this.#meshes, ...this.#activeMeshes, ...this.#outlineMeshes]
       .filter((v) => v !== currentMesh)
       .filter((v) => v !== currentActiveMesh)
       .filter((v) => v !== currentOutlineMesh)
