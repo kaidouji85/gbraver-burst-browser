@@ -1,18 +1,11 @@
-import * as THREE from "three";
-
 import type { Resources } from "../../../../resource";
 import { TEXTURE_IDS } from "../../../../resource/texture/ids";
 import type { ArmdozerAnimation } from "../../mesh/armdozer-animation";
-import { createHorizontalAnimation } from "../../mesh/horizontal-animation";
-import { createSilhouetteTexture } from "./create-silhouette-texture";
-import { MESH_Y } from "./position";
+import {createLightningDozerMesh} from "./create-mesh";
+import {createLightningDozerActiveMesh} from "./create-active-mesh";
 
-/** メッシュ幅 */
-export const MESH_WIDTH = 600;
-
-/** メッシュ高 */
-export const MESH_HEIGHT = 600;
-
+/** テクスチャID */
+export const TEXTURE_ID = TEXTURE_IDS.LIGHTNING_DOZER_GUTS_TO_STAND
 /** アニメーション枚数 */
 export const MAX_ANIMATION = 4;
 
@@ -24,19 +17,11 @@ export const MAX_ANIMATION = 4;
 export function lightningDozerGutsToStand(
   resources: Resources
 ): ArmdozerAnimation {
-  const texture =
-    resources.textures.find(
-      (v) => v.id === TEXTURE_IDS.LIGHTNING_DOZER_GUTS_TO_STAND
-    )?.texture ?? new THREE.Texture();
-  const ret = createHorizontalAnimation({
-    texture,
+  return createLightningDozerMesh({
+    resources,
+    textureId: TEXTURE_ID,
     maxAnimation: MAX_ANIMATION,
-    width: MESH_WIDTH,
-    height: MESH_HEIGHT,
   });
-  const object = ret.getObject3D();
-  object.position.y = MESH_Y;
-  return ret;
 }
 
 /**
@@ -47,19 +32,9 @@ export function lightningDozerGutsToStand(
 export function lightningDozerActiveGutsToStand(
   resources: Resources
 ): ArmdozerAnimation {
-  const texture =
-    resources.textures.find(
-      (v) => v.id === TEXTURE_IDS.LIGHTNING_DOZER_GUTS_TO_STAND
-    )?.texture ?? new THREE.Texture();
-  const silhouetteTexture = createSilhouetteTexture(texture);
-  const ret = createHorizontalAnimation({
-    texture: silhouetteTexture,
+  return createLightningDozerActiveMesh({
+    resources,
+    textureId: TEXTURE_ID,
     maxAnimation: MAX_ANIMATION,
-    width: MESH_WIDTH,
-    height: MESH_HEIGHT,
   });
-  const object = ret.getObject3D();
-  object.position.y = MESH_Y;
-  object.position.z = 0.01;
-  return ret;
 }
