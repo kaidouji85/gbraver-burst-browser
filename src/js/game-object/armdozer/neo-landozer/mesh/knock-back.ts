@@ -26,7 +26,7 @@ export function neoLandozerKnockBack(resources: Resources): ArmdozerAnimation {
     width: MESH_WIDTH,
     height: MESH_HEIGHT,
     positionY: MESH_Y,
-  })
+  });
 }
 
 /**
