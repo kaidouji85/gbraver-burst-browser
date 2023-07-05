@@ -11,8 +11,7 @@ import {createNeoLandozerOutlineMesh} from "./create-outline-mesh";
 /** アニメーション枚数 */
 export const MAX_ANIMATION = 4;
 /** テクスチャID */
-export const TEXTURE_ID = TEXTURE_IDS.NEO_LANDOZER_GUTS_DOWN
-
+export const TEXTURE_ID = TEXTURE_IDS.NEO_LANDOZER_GUTS_DOWN;
 
 /**
  * ネオラインドーザ ガッツダウン メッシュ生成
