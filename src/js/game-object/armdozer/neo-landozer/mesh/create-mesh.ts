@@ -2,8 +2,8 @@ import * as THREE from "three";
 
 import { Resources } from "../../../../resource";
 import { TextureId } from "../../../../resource/texture/resource";
-import { createHorizontalAnimation } from "../../mesh/horizontal-animation";
 import { ArmdozerAnimation } from "../../mesh/armdozer-animation";
+import { createHorizontalAnimation } from "../../mesh/horizontal-animation";
 
 /** パラメータ */
 type Params = {

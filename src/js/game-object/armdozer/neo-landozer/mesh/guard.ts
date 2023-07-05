@@ -1,17 +1,17 @@
 import type { Resources } from "../../../../resource";
 import { TEXTURE_IDS } from "../../../../resource/texture/ids";
 import type { ArmdozerAnimation } from "../../mesh/armdozer-animation";
+import { createNeoLandozerActiveMesh } from "./create-active-mesh";
+import { createNeoLandozerMesh } from "./create-mesh";
+import { createNeoLandozerOutlineMesh } from "./create-outline-mesh";
+import { MESH_HEIGHT, MESH_WIDTH } from "./mesh-size";
 import { OutlineWidth } from "./outline-width";
 import { MESH_Y } from "./position";
-import {createNeoLandozerMesh} from "./create-mesh";
-import {MESH_HEIGHT, MESH_WIDTH} from "./mesh-size";
-import {createNeoLandozerActiveMesh} from "./create-active-mesh";
-import {createNeoLandozerOutlineMesh} from "./create-outline-mesh";
 
 /** アニメーション枚数 */
 export const MAX_ANIMATION = 4;
 /** テクスチャID */
-export const TEXTURE_ID = TEXTURE_IDS.NEO_LANDOZER_GUARD
+export const TEXTURE_ID = TEXTURE_IDS.NEO_LANDOZER_GUARD;
 
 /**
  * ネオラインドーザ ガード メッシュ生成

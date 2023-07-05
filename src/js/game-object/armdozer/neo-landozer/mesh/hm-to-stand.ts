@@ -1,9 +1,9 @@
 import type { Resources } from "../../../../resource";
 import { TEXTURE_IDS } from "../../../../resource/texture/ids";
 import type { ArmdozerAnimation } from "../../mesh/armdozer-animation";
+import { createNeoLandozerMesh } from "./create-mesh";
+import { MESH_HEIGHT, MESH_WIDTH } from "./mesh-size";
 import { MESH_Y } from "./position";
-import {createNeoLandozerMesh} from "./create-mesh";
-import {MESH_HEIGHT, MESH_WIDTH} from "./mesh-size";
 
 /** アニメーション枚数 */
 export const MAX_ANIMATION = 4;

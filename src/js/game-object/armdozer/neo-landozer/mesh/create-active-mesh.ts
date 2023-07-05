@@ -1,11 +1,11 @@
 import * as THREE from "three";
 
+import { toSilhouette } from "../../../../canvas/to-silhouette";
 import { Resources } from "../../../../resource";
 import { TextureId } from "../../../../resource/texture/resource";
-import { createHorizontalAnimation } from "../../mesh/horizontal-animation";
-import { ArmdozerAnimation } from "../../mesh/armdozer-animation";
-import { toSilhouette } from "../../../../canvas/to-silhouette";
 import { CanvasDisposeTexture } from "../../../../texture/canvas-dispose-texture";
+import { ArmdozerAnimation } from "../../mesh/armdozer-animation";
+import { createHorizontalAnimation } from "../../mesh/horizontal-animation";
 
 /** アクティブレイヤー Red */
 const ACTIVE_COLOR_R = 100;
@@ -19,9 +19,7 @@ const ACTIVE_COLOR_B = 100;
  * @param texture 加工前のテクスチャ
  * @return シルエット化したテクスチャ
  */
-function createActiveSilhouetteTexture(
-  texture: THREE.Texture
-): THREE.Texture {
+function createActiveSilhouetteTexture(texture: THREE.Texture): THREE.Texture {
   const canvas = toSilhouette({
     image: texture.image,
     r: ACTIVE_COLOR_R,
