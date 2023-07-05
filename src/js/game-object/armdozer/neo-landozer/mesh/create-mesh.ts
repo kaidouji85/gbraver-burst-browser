@@ -4,6 +4,8 @@ import { Resources } from "../../../../resource";
 import { TextureId } from "../../../../resource/texture/resource";
 import { ArmdozerAnimation } from "../../mesh/armdozer-animation";
 import { createHorizontalAnimation } from "../../mesh/horizontal-animation";
+import { MESH_HEIGHT, MESH_WIDTH } from "./mesh-size";
+import { MESH_Y } from "./position";
 
 /** パラメータ */
 type Params = {
@@ -13,12 +15,6 @@ type Params = {
   textureId: TextureId;
   /** 最大アニメーション枚数 */
   maxAnimation: number;
-  /** メッシュ幅 */
-  width: number;
-  /** メッシュ高 */
-  height: number;
-  /** ローカル座標Y軸 */
-  positionY: number;
 };
 
 /**
@@ -27,18 +23,17 @@ type Params = {
  * @return 生成結果
  */
 export function createNeoLandozerMesh(params: Params): ArmdozerAnimation {
-  const { resources, textureId, maxAnimation, width, height, positionY } =
-    params;
+  const { resources, textureId, maxAnimation } = params;
   const texture =
     resources.textures.find((v) => v.id === textureId)?.texture ??
     new THREE.Texture();
   const ret = createHorizontalAnimation({
     texture,
     maxAnimation,
-    width,
-    height,
+    width: MESH_WIDTH,
+    height: MESH_HEIGHT,
   });
   const object = ret.getObject3D();
-  object.position.y = positionY;
+  object.position.y = MESH_Y;
   return ret;
 }

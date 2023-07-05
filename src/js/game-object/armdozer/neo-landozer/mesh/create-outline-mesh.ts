@@ -6,6 +6,9 @@ import { TextureId } from "../../../../resource/texture/resource";
 import { CanvasDisposeTexture } from "../../../../texture/canvas-dispose-texture";
 import { ArmdozerAnimation } from "../../mesh/armdozer-animation";
 import { createHorizontalAnimation } from "../../mesh/horizontal-animation";
+import { MESH_HEIGHT, MESH_WIDTH } from "./mesh-size";
+import { OUTLINE_WIDTH } from "./outline-width";
+import { MESH_Y } from "./position";
 
 /** アウトラインレイヤー Red */
 const OUTLINE_COLOR_R = 0;
@@ -38,14 +41,6 @@ type Params = {
   textureId: TextureId;
   /** 最大アニメーション枚数 */
   maxAnimation: number;
-  /** メッシュ幅 */
-  width: number;
-  /** メッシュ高 */
-  height: number;
-  /** ローカル座標Y軸 */
-  positionY: number;
-  /** アウトラインの太さ */
-  outlineWidth: number;
 };
 
 /**
@@ -56,15 +51,7 @@ type Params = {
 export function createNeoLandozerOutlineMesh(
   params: Params
 ): ArmdozerAnimation {
-  const {
-    resources,
-    textureId,
-    maxAnimation,
-    width,
-    height,
-    positionY,
-    outlineWidth,
-  } = params;
+  const { resources, textureId, maxAnimation } = params;
   const texture =
     resources.textures.find((v) => v.id === textureId)?.texture ??
     new THREE.Texture();
@@ -72,12 +59,12 @@ export function createNeoLandozerOutlineMesh(
   const ret = createHorizontalAnimation({
     texture: silhouetteTexture,
     maxAnimation,
-    width: width + outlineWidth,
-    height: height + outlineWidth,
+    width: MESH_WIDTH + OUTLINE_WIDTH,
+    height: MESH_HEIGHT + OUTLINE_WIDTH,
     blending: THREE.AdditiveBlending,
   });
   const object = ret.getObject3D();
-  object.position.y = positionY;
+  object.position.y = MESH_Y;
   object.position.z = -0.01;
   return ret;
 }
