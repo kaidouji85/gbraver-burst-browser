@@ -1,4 +1,5 @@
 import { Resources } from "../../../../resource";
+import { neoLandozerOutlineFrontStep } from "../mesh/front-step";
 import { neoLandozerOutlineGuard } from "../mesh/guard";
 import { neoLandozerOutlineGutsDown } from "../mesh/guts-down";
 import { neoLandozerOutlineGutsUp } from "../mesh/guts-up";
@@ -34,6 +35,10 @@ export function createOutlineMeshes(
     {
       type: "GUTS_DOWN",
       mesh: neoLandozerOutlineGutsDown(resources),
+    },
+    {
+      type: "FRONT_STEP",
+      mesh: neoLandozerOutlineFrontStep(resources),
     }
   ];
 }
