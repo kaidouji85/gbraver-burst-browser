@@ -1,8 +1,8 @@
 import type { Resources } from "../../../../resource";
 import { TEXTURE_IDS } from "../../../../resource/texture/ids";
 import type { ArmdozerAnimation } from "../../mesh/armdozer-animation";
-import { MESH_Y } from "./position";
 import { createShinBraverMesh } from "./create-mesh";
+import { MESH_Y } from "./position";
 
 /** メッシュ幅 */
 export const MESH_WIDTH = 600;

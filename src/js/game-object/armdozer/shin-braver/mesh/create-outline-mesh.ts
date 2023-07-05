@@ -1,11 +1,11 @@
 import * as THREE from "three";
 
+import { toSilhouette } from "../../../../canvas/to-silhouette";
 import { Resources } from "../../../../resource";
 import { TextureId } from "../../../../resource/texture/resource";
-import { createHorizontalAnimation } from "../../mesh/horizontal-animation";
-import { ArmdozerAnimation } from "../../mesh/armdozer-animation";
-import { toSilhouette } from "../../../../canvas/to-silhouette";
 import { CanvasDisposeTexture } from "../../../../texture/canvas-dispose-texture";
+import { ArmdozerAnimation } from "../../mesh/armdozer-animation";
+import { createHorizontalAnimation } from "../../mesh/horizontal-animation";
 
 /** アウトラインレイヤー Red */
 const OUTLINE_COLOR_R = 255;
@@ -19,9 +19,7 @@ const OUTLINE_COLOR_B = 255;
  * @param texture 加工前のテクスチャ
  * @return シルエット化したテクスチャ
  */
-function createOutlineSilhouetteTexture(
-  texture: THREE.Texture
-): THREE.Texture {
+function createOutlineSilhouetteTexture(texture: THREE.Texture): THREE.Texture {
   const canvas = toSilhouette({
     image: texture.image,
     r: OUTLINE_COLOR_R,
@@ -53,18 +51,26 @@ type Params = {
 /**
  * シンブレイバーのアウトラインメッシュを生成する
  * @param params パラメータ
- * @return　生成結果
+ * @return 生成結果
  */
 export function createShinBraverOutlineMesh(params: Params): ArmdozerAnimation {
-  const { resources, textureId, maxAnimation, width, height, positionY, outlineWidth } = params;
+  const {
+    resources,
+    textureId,
+    maxAnimation,
+    width,
+    height,
+    positionY,
+    outlineWidth,
+  } = params;
   const texture =
-    resources.textures.find((v) => v.id === textureId)
-      ?.texture ?? new THREE.Texture();
+    resources.textures.find((v) => v.id === textureId)?.texture ??
+    new THREE.Texture();
   const silhouetteTexture = createOutlineSilhouetteTexture(texture);
   const ret = createHorizontalAnimation({
     texture: silhouetteTexture,
     maxAnimation,
-    width : width + outlineWidth,
+    width: width + outlineWidth,
     height: height + outlineWidth,
     blending: THREE.AdditiveBlending,
   });

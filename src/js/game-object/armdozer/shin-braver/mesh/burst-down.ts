@@ -1,11 +1,11 @@
 import type { Resources } from "../../../../resource";
 import { TEXTURE_IDS } from "../../../../resource/texture/ids";
 import type { ArmdozerAnimation } from "../../mesh/armdozer-animation";
+import { createShinBraverActiveMesh } from "./create-active-mesh";
+import { createShinBraverMesh } from "./create-mesh";
+import { createShinBraverOutlineMesh } from "./create-outline-mesh";
 import { OutlineWidth } from "./outline-width";
 import { MESH_Y } from "./position";
-import { createShinBraverMesh } from "./create-mesh";
-import { createShinBraverActiveMesh } from "./create-active-mesh";
-import { createShinBraverOutlineMesh } from "./create-outline-mesh";
 
 /** メッシュ幅 */
 export const MESH_WIDTH = 600;

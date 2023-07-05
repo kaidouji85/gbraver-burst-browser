@@ -2,8 +2,8 @@ import * as THREE from "three";
 
 import { Resources } from "../../../../resource";
 import { TextureId } from "../../../../resource/texture/resource";
-import { createHorizontalAnimation } from "../../mesh/horizontal-animation";
 import { ArmdozerAnimation } from "../../mesh/armdozer-animation";
+import { createHorizontalAnimation } from "../../mesh/horizontal-animation";
 
 /** パラメータ */
 type Params = {
@@ -24,13 +24,14 @@ type Params = {
 /**
  * シンブレイバーメッシュを生成する
  * @param params パラメータ
- * @return　生成結果
+ * @return 生成結果
  */
 export function createShinBraverMesh(params: Params): ArmdozerAnimation {
-  const { resources, textureId, maxAnimation, width, height, positionY } = params;
+  const { resources, textureId, maxAnimation, width, height, positionY } =
+    params;
   const texture =
-    resources.textures.find((v) => v.id === textureId)
-      ?.texture ?? new THREE.Texture();
+    resources.textures.find((v) => v.id === textureId)?.texture ??
+    new THREE.Texture();
   const ret = createHorizontalAnimation({
     texture,
     maxAnimation,
