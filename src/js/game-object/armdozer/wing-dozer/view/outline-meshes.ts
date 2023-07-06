@@ -4,6 +4,7 @@ import { wingDozerOutlineDashToStand } from "../mesh/dash-to-stand";
 import { wingDozerOutlineDashUp } from "../mesh/dash-up";
 import { wingDozerOutlineFrontStep } from "../mesh/front-step";
 import { wingDozerOutlineGuard } from "../mesh/guard";
+import { wingDozerOutlineKnockBack } from "../mesh/knock-back";
 import { wingDozerOutlineStand } from "../mesh/stand";
 import { AnimationMeshMapping } from "./animation-mesh-mapping";
 
@@ -39,6 +40,10 @@ export function createOutlineMeshes(
     {
       type: "GUARD",
       mesh: wingDozerOutlineGuard(resources),
+    },
+    {
+      type: "KNOCK_BACK",
+      mesh: wingDozerOutlineKnockBack(resources),
     }
   ];
 }
