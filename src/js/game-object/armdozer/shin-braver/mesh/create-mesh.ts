@@ -4,7 +4,7 @@ import { Resources } from "../../../../resource";
 import { TextureId } from "../../../../resource/texture/resource";
 import { ArmdozerAnimation } from "../../mesh/armdozer-animation";
 import { createHorizontalAnimation } from "../../mesh/horizontal-animation";
-import { MESH_HEIGHT, MESH_WIDTH } from "./mes-size";
+import { MESH_HEIGHT, MESH_WIDTH } from "./mesh-size";
 import { MESH_Y } from "./position";
 
 /** パラメータ */
