@@ -3,6 +3,7 @@ import { lightningDozerOutlineGuard } from "../mesh/guard";
 import { lightningDozerOutlineGutsToStand } from "../mesh/gut-to-stand";
 import { lightningDozerOutlineGutsDown } from "../mesh/guts-down";
 import { lightningDozerOutlineGutsUp } from "../mesh/guts-up";
+import { lightningDozerOutlineKnockBack } from "../mesh/knock-back";
 import { lightningDozerOutlineStand } from "../mesh/stand";
 import { AnimationMeshMapping } from "./animation-mesh-mapping";
 
@@ -16,8 +17,8 @@ export function createOutlineMeshes(
 ): AnimationMeshMapping[] {
   return [
     {
-      type: "STAND",
-      mesh: lightningDozerOutlineStand(resources)
+      type: "KNOCK_BACK",
+      mesh: lightningDozerOutlineKnockBack(resources),
     },
     {
       type: "GUTS_UP",
@@ -34,6 +35,10 @@ export function createOutlineMeshes(
     {
       type: "GUARD",
       mesh: lightningDozerOutlineGuard(resources),
-    }
+    },
+    {
+      type: "STAND",
+      mesh: lightningDozerOutlineStand(resources)
+    },
   ];
 }
