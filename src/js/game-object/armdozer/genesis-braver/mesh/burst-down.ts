@@ -1,17 +1,10 @@
-import * as THREE from "three";
-
 import type { Resources } from "../../../../resource";
 import { TEXTURE_IDS } from "../../../../resource/texture/ids";
 import type { ArmdozerAnimation } from "../../mesh/armdozer-animation";
-import { createHorizontalAnimation } from "../../mesh/horizontal-animation";
-import { MESH_Y } from "./position";
+import { createGenesisBraverMesh } from "./create-mesh";
 
-/** スプライト幅 */
-export const WIDTH = 600;
-
-/** スプライト高 */
-export const HEIGHT = 600;
-
+/** テクスチャID */
+export const TEXTURE_ID = TEXTURE_IDS.GENESIS_BRAVER_BURST_DOWN;
 /** アニメーション枚数 */
 export const MAX_ANIMATION = 4;
 
@@ -23,17 +16,9 @@ export const MAX_ANIMATION = 4;
 export function genesisBraverBurstDown(
   resources: Resources
 ): ArmdozerAnimation {
-  const texture =
-    resources.textures.find(
-      (v) => v.id === TEXTURE_IDS.GENESIS_BRAVER_BURST_DOWN
-    )?.texture ?? new THREE.Texture();
-  const mesh = createHorizontalAnimation({
-    texture,
+  return createGenesisBraverMesh({
+    resources,
+    textureId: TEXTURE_ID,
     maxAnimation: MAX_ANIMATION,
-    width: WIDTH,
-    height: HEIGHT,
   });
-  mesh.getObject3D().position.y = MESH_Y;
-  mesh.getObject3D().position.z = 1;
-  return mesh;
 }
