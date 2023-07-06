@@ -2,6 +2,7 @@ import { Resources } from "../../../../resource";
 import { wingDozerOutlineDashDown } from "../mesh/dash-down";
 import { wingDozerOutlineDashToStand } from "../mesh/dash-to-stand";
 import { wingDozerOutlineDashUp } from "../mesh/dash-up";
+import { wingDozerOutlineFrontStep } from "../mesh/front-step";
 import { wingDozerOutlineStand } from "../mesh/stand";
 import { AnimationMeshMapping } from "./animation-mesh-mapping";
 
@@ -29,6 +30,10 @@ export function createOutlineMeshes(
     {
       type: "DASH_TO_STAND",
       mesh: wingDozerOutlineDashToStand(resources)
+    },
+    {
+      type: "FRONT_STEP",
+      mesh: wingDozerOutlineFrontStep(resources),
     }
   ];
 }
