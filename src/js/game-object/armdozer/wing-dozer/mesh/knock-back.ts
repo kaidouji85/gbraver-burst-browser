@@ -24,7 +24,7 @@ export function wingDozerKnockBack(resources: Resources): ArmdozerAnimation {
 }
 
 /**
- * ウィングドーザ  アクティブ ノックバック メッシュ生成
+ * ウィングドーザ アクティブ ノックバック メッシュ生成
  * @param resources リソース管理オブジェクト
  * @return メッシュ
  */
@@ -39,7 +39,7 @@ export function wingDozerActiveKnockBack(
 }
 
 /**
- * ウィングドーザ  アウトライン ノックバック メッシュ生成
+ * ウィングドーザ アウトライン ノックバック メッシュ生成
  * @param resources リソース管理オブジェクト
  * @return メッシュ
  */
