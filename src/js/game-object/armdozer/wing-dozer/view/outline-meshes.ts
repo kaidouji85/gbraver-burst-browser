@@ -1,4 +1,7 @@
 import { Resources } from "../../../../resource";
+import { wingDozerOutlineDashDown } from "../mesh/dash-down";
+import { wingDozerOutlineDashToStand } from "../mesh/dash-to-stand";
+import { wingDozerOutlineDashUp } from "../mesh/dash-up";
 import { wingDozerOutlineStand } from "../mesh/stand";
 import { AnimationMeshMapping } from "./animation-mesh-mapping";
 
@@ -14,6 +17,18 @@ export function createOutlineMeshes(
     {
       type: "STAND",
       mesh: wingDozerOutlineStand(resources)
+    },
+    {
+      type: "DASH_UP",
+      mesh: wingDozerOutlineDashUp(resources)
+    },
+    {
+      type: "DASH_DOWN",
+      mesh: wingDozerOutlineDashDown(resources)
+    },
+    {
+      type: "DASH_TO_STAND",
+      mesh: wingDozerOutlineDashToStand(resources)
     }
   ];
 }
