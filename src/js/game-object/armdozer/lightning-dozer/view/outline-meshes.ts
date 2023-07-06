@@ -1,4 +1,5 @@
 import { Resources } from "../../../../resource";
+import { lightningDozerOutlineGuard } from "../mesh/guard";
 import { lightningDozerOutlineGutsToStand } from "../mesh/gut-to-stand";
 import { lightningDozerOutlineGutsDown } from "../mesh/guts-down";
 import { lightningDozerOutlineGutsUp } from "../mesh/guts-up";
@@ -29,6 +30,10 @@ export function createOutlineMeshes(
     {
       type: "GUTS_TO_STAND",
       mesh: lightningDozerOutlineGutsToStand(resources),
+    },
+    {
+      type: "GUARD",
+      mesh: lightningDozerOutlineGuard(resources),
     }
   ];
 }

@@ -3,6 +3,7 @@ import { TEXTURE_IDS } from "../../../../resource/texture/ids";
 import type { ArmdozerAnimation } from "../../mesh/armdozer-animation";
 import { createLightningDozerActiveMesh } from "./create-active-mesh";
 import { createLightningDozerMesh } from "./create-mesh";
+import { createLightningDozerOutlineMesh } from "./create-outline-mesh";
 
 /** テクスチャID */
 export const TEXTURE_ID = TEXTURE_IDS.LIGHTNING_DOZER_GUARD;
@@ -31,6 +32,21 @@ export function lightningDozerActiveGuard(
   resources: Resources
 ): ArmdozerAnimation {
   return createLightningDozerActiveMesh({
+    resources,
+    textureId: TEXTURE_ID,
+    maxAnimation: MAX_ANIMATION,
+  });
+}
+
+/**
+ * ライトニングドーザ アウトラインガード メッシュ生成
+ * @param resources リソース管理オブジェクト
+ * @return メッシュ
+ */
+export function lightningDozerOutlineGuard(
+  resources: Resources
+): ArmdozerAnimation {
+  return createLightningDozerOutlineMesh({
     resources,
     textureId: TEXTURE_ID,
     maxAnimation: MAX_ANIMATION,
