@@ -7,6 +7,7 @@ import { createActiveMeshes } from "./active-meshes";
 import type { AnimationMeshMapping } from "./animation-mesh-mapping";
 import { createMeshes } from "./meshes";
 import type { WingDozerView } from "./wing-dozer-view";
+import { createOutlineMeshes } from "./outline-meshes";
 
 /** プレイヤー側 ウィングドーザ ビュー */
 export class PlayerWingDozerView implements WingDozerView {
@@ -16,6 +17,8 @@ export class PlayerWingDozerView implements WingDozerView {
   #meshes: AnimationMeshMapping[];
   /** アクティブメッシュ */
   #activeMeshes: AnimationMeshMapping[];
+  /** アウトラインメッシュ */
+  #outlineMeshes: AnimationMeshMapping[];
 
   /**
    * コンストラクタ
@@ -26,14 +29,15 @@ export class PlayerWingDozerView implements WingDozerView {
     this.#group = new Group();
     this.#meshes = createMeshes(resources);
     this.#activeMeshes = createActiveMeshes(resources);
-    [...this.#meshes, ...this.#activeMeshes].forEach(({ mesh }) => {
+    this.#outlineMeshes = createOutlineMeshes(resources);
+    [...this.#meshes, ...this.#activeMeshes, ...this.#outlineMeshes].forEach(({ mesh }) => {
       this.#group.add(mesh.getObject3D());
     });
   }
 
   /** @override */
   destructor(): void {
-    [...this.#meshes, ...this.#activeMeshes].forEach(({ mesh }) => {
+    [...this.#meshes, ...this.#activeMeshes, ...this.#outlineMeshes].forEach(({ mesh }) => {
       mesh.destructor();
     });
   }
@@ -51,6 +55,7 @@ export class PlayerWingDozerView implements WingDozerView {
     this.#group.scale.x = 1;
     this.#group.scale.y = 1;
     this.#group.scale.z = 1;
+
     const currentMesh = this.#meshes.find(
       (v) => v.type === model.animation.type
     );
@@ -69,9 +74,20 @@ export class PlayerWingDozerView implements WingDozerView {
       currentActiveMesh.mesh.animate(model.animation.frame);
     }
 
-    [...this.#meshes, ...this.#activeMeshes]
+    const currentOutlineMesh = this.#outlineMeshes.find(
+      (v) => v.type === model.animation.type
+    );
+    if (currentOutlineMesh) {
+      const outlineOpacity =
+        (0.9 + model.active.strength * 0.1) * model.active.opacity;
+      currentOutlineMesh.mesh.opacity(outlineOpacity);
+      currentOutlineMesh.mesh.animate(model.animation.frame);
+    }
+
+    [...this.#meshes, ...this.#activeMeshes, ...this.#outlineMeshes]
       .filter((v) => v !== currentMesh)
       .filter((v) => v !== currentActiveMesh)
+      .filter((v) => v !== currentOutlineMesh)
       .forEach(({ mesh }) => mesh.opacity(0));
   }
 
