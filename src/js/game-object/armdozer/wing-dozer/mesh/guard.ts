@@ -3,6 +3,7 @@ import { TEXTURE_IDS } from "../../../../resource/texture/ids";
 import type { ArmdozerAnimation } from "../../mesh/armdozer-animation";
 import { createWingDozerActiveMesh } from "./create-active-mesh";
 import { createWingDozerMesh } from "./create-mesh";
+import { createWingDozerOutlineMesh } from "./create-outline-mesh";
 
 /** テクスチャID */
 export const TEXTURE_ID = TEXTURE_IDS.WING_DOZER_GUARD;
@@ -23,12 +24,25 @@ export function wingDozerGuard(resources: Resources): ArmdozerAnimation {
 }
 
 /**
- * ウィングドーザ アクティブガード メッシュ生成
+ * ウィングドーザ アクティブ ガード メッシュ生成
  * @param resources リソース管理オブジェクト
  * @return メッシュ
  */
 export function wingDozerActiveGuard(resources: Resources): ArmdozerAnimation {
   return createWingDozerActiveMesh({
+    resources,
+    textureId: TEXTURE_ID,
+    maxAnimation: MAX_ANIMATION,
+  });
+}
+
+/**
+ * ウィングドーザ アウトライン ガード メッシュ生成
+ * @param resources リソース管理オブジェクト
+ * @return メッシュ
+ */
+export function wingDozerOutlineGuard(resources: Resources): ArmdozerAnimation {
+  return createWingDozerOutlineMesh({
     resources,
     textureId: TEXTURE_ID,
     maxAnimation: MAX_ANIMATION,
