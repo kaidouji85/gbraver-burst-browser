@@ -28,16 +28,20 @@ export class PlayerLightingDozerView implements LightningDozerView {
     this.#meshes = createMeshes(resources);
     this.#activeMeshes = createActiveMeshes(resources);
     this.#outlineMeshes = createOutlineMeshes(resources);
-    [...this.#meshes, ...this.#activeMeshes, ...this.#outlineMeshes].forEach(({ mesh }) => {
-      this.#group.add(mesh.getObject3D());
-    });
+    [...this.#meshes, ...this.#activeMeshes, ...this.#outlineMeshes].forEach(
+      ({ mesh }) => {
+        this.#group.add(mesh.getObject3D());
+      }
+    );
   }
 
   /** @override */
   destructor(): void {
-    [...this.#meshes, ...this.#activeMeshes, ...this.#outlineMeshes].forEach(({ mesh }) => {
-      mesh.destructor();
-    });
+    [...this.#meshes, ...this.#activeMeshes, ...this.#outlineMeshes].forEach(
+      ({ mesh }) => {
+        mesh.destructor();
+      }
+    );
   }
 
   /** @override */
@@ -77,7 +81,7 @@ export class PlayerLightingDozerView implements LightningDozerView {
     [...this.#meshes, ...this.#activeMeshes, ...this.#outlineMeshes]
       .filter((v) => v !== currentMesh)
       .filter((v) => v !== currentActiveMesh)
-      .filter((v) => v !== currentOutlineMesh) 
+      .filter((v) => v !== currentOutlineMesh)
       .forEach(({ mesh }) => {
         mesh.opacity(0);
       });

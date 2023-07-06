@@ -43,7 +43,7 @@ export function createOutlineMeshes(
     },
     {
       type: "STAND",
-      mesh: lightningDozerOutlineStand(resources)
+      mesh: lightningDozerOutlineStand(resources),
     },
   ];
 }
