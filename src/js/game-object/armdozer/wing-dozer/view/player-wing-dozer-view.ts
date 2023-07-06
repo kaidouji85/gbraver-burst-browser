@@ -6,8 +6,8 @@ import type { WingDozerModel } from "../model/wing-dozer-model";
 import { createActiveMeshes } from "./active-meshes";
 import type { AnimationMeshMapping } from "./animation-mesh-mapping";
 import { createMeshes } from "./meshes";
-import type { WingDozerView } from "./wing-dozer-view";
 import { createOutlineMeshes } from "./outline-meshes";
+import type { WingDozerView } from "./wing-dozer-view";
 
 /** プレイヤー側 ウィングドーザ ビュー */
 export class PlayerWingDozerView implements WingDozerView {
@@ -30,16 +30,20 @@ export class PlayerWingDozerView implements WingDozerView {
     this.#meshes = createMeshes(resources);
     this.#activeMeshes = createActiveMeshes(resources);
     this.#outlineMeshes = createOutlineMeshes(resources);
-    [...this.#meshes, ...this.#activeMeshes, ...this.#outlineMeshes].forEach(({ mesh }) => {
-      this.#group.add(mesh.getObject3D());
-    });
+    [...this.#meshes, ...this.#activeMeshes, ...this.#outlineMeshes].forEach(
+      ({ mesh }) => {
+        this.#group.add(mesh.getObject3D());
+      }
+    );
   }
 
   /** @override */
   destructor(): void {
-    [...this.#meshes, ...this.#activeMeshes, ...this.#outlineMeshes].forEach(({ mesh }) => {
-      mesh.destructor();
-    });
+    [...this.#meshes, ...this.#activeMeshes, ...this.#outlineMeshes].forEach(
+      ({ mesh }) => {
+        mesh.destructor();
+      }
+    );
   }
 
   /** @override */

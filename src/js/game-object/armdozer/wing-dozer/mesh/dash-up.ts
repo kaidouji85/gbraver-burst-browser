@@ -41,7 +41,9 @@ export function wingDozerActiveDashUp(resources: Resources): ArmdozerAnimation {
  * @param resources リソース管理オブジェクト
  * @return メッシュ
  */
-export function wingDozerOutlineDashUp(resources: Resources): ArmdozerAnimation {
+export function wingDozerOutlineDashUp(
+  resources: Resources
+): ArmdozerAnimation {
   return createWingDozerOutlineMesh({
     resources,
     textureId: TEXTURE_ID,

@@ -19,19 +19,19 @@ export function createOutlineMeshes(
   return [
     {
       type: "STAND",
-      mesh: wingDozerOutlineStand(resources)
+      mesh: wingDozerOutlineStand(resources),
     },
     {
       type: "DASH_UP",
-      mesh: wingDozerOutlineDashUp(resources)
+      mesh: wingDozerOutlineDashUp(resources),
     },
     {
       type: "DASH_DOWN",
-      mesh: wingDozerOutlineDashDown(resources)
+      mesh: wingDozerOutlineDashDown(resources),
     },
     {
       type: "DASH_TO_STAND",
-      mesh: wingDozerOutlineDashToStand(resources)
+      mesh: wingDozerOutlineDashToStand(resources),
     },
     {
       type: "FRONT_STEP",
@@ -44,6 +44,6 @@ export function createOutlineMeshes(
     {
       type: "KNOCK_BACK",
       mesh: wingDozerOutlineKnockBack(resources),
-    }
+    },
   ];
 }
