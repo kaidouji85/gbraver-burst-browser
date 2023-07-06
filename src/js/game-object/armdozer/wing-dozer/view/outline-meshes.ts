@@ -1,4 +1,5 @@
 import { Resources } from "../../../../resource";
+import { wingDozerOutlineStand } from "../mesh/stand";
 import { AnimationMeshMapping } from "./animation-mesh-mapping";
 
 /**
@@ -9,5 +10,10 @@ import { AnimationMeshMapping } from "./animation-mesh-mapping";
 export function createOutlineMeshes(
   resources: Resources
 ): AnimationMeshMapping[] {
-  return [];
+  return [
+    {
+      type: "STAND",
+      mesh: wingDozerOutlineStand(resources)
+    }
+  ];
 }
