@@ -1,13 +1,11 @@
-import * as THREE from "three";
-
 import type { Resources } from "../../../../resource";
 import { TEXTURE_IDS } from "../../../../resource/texture/ids";
 import type { ArmdozerAnimation } from "../../mesh/armdozer-animation";
-import { createHorizontalAnimation } from "../../mesh/horizontal-animation";
-import { createSilhouetteTexture } from "./create-silhouette-texture";
-import { MESH_HEIGHT, MESH_WIDTH } from "./mesh-size";
-import { MESH_Y } from "./position";
+import { createWingDozerMesh } from "./create-mesh";
+import { createWingDozerActiveMesh } from "./create-active-mesh";
 
+/** テクスチャID */
+export const TEXTURE_ID = TEXTURE_IDS.WING_DOZER_GUARD;
 /** アニメーション枚数 */
 export const MAX_ANIMATION = 4;
 
@@ -17,18 +15,11 @@ export const MAX_ANIMATION = 4;
  * @return メッシュ
  */
 export function wingDozerGuard(resources: Resources): ArmdozerAnimation {
-  const texture =
-    resources.textures.find((v) => v.id === TEXTURE_IDS.WING_DOZER_GUARD)
-      ?.texture ?? new THREE.Texture();
-  const ret = createHorizontalAnimation({
-    texture,
+  return createWingDozerMesh({
+    resources,
+    textureId: TEXTURE_ID,
     maxAnimation: MAX_ANIMATION,
-    width: MESH_WIDTH,
-    height: MESH_HEIGHT,
   });
-  const object = ret.getObject3D();
-  object.position.y = MESH_Y;
-  return ret;
 }
 
 /**
@@ -37,18 +28,9 @@ export function wingDozerGuard(resources: Resources): ArmdozerAnimation {
  * @return メッシュ
  */
 export function wingDozerActiveGuard(resources: Resources): ArmdozerAnimation {
-  const texture =
-    resources.textures.find((v) => v.id === TEXTURE_IDS.WING_DOZER_GUARD)
-      ?.texture ?? new THREE.Texture();
-  const silhouetteTexture = createSilhouetteTexture(texture);
-  const ret = createHorizontalAnimation({
-    texture: silhouetteTexture,
+  return createWingDozerActiveMesh({
+    resources,
+    textureId: TEXTURE_ID,
     maxAnimation: MAX_ANIMATION,
-    width: MESH_WIDTH,
-    height: MESH_HEIGHT,
   });
-  const object = ret.getObject3D();
-  object.position.y = MESH_Y;
-  object.position.z = 0.01;
-  return ret;
 }
