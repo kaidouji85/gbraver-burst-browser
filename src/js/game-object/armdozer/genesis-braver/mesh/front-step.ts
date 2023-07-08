@@ -1,8 +1,8 @@
 import type { Resources } from "../../../../resource";
 import { TEXTURE_IDS } from "../../../../resource/texture/ids";
 import type { ArmdozerAnimation } from "../../mesh/armdozer-animation";
-import { createGenesisBraverMesh } from "./create-mesh";
 import { createGenesisBraverActiveMesh } from "./create-active-mesh";
+import { createGenesisBraverMesh } from "./create-mesh";
 
 /** テクスチャID */
 export const TEXTURE_ID = TEXTURE_IDS.GENESIS_BRAVER_FRONT_STEP;
