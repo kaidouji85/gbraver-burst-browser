@@ -14,7 +14,7 @@ import { NeoLandozerSounds } from "../sounds/neo-landozer-sounds";
  */
 export function guts(
   model: NeoLandozerModel,
-  sounds: NeoLandozerSounds
+  sounds: NeoLandozerSounds,
 ): Animate {
   return process(() => {
     model.animation.type = "GUTS_UP";
@@ -27,9 +27,9 @@ export function guts(
           {
             frame: 1,
           },
-          200
-        )
-      )
+          200,
+        ),
+      ),
     )
     .chain(delay(500))
     .chain(
@@ -37,7 +37,7 @@ export function guts(
         model.animation.type = "GUTS_DOWN";
         model.animation.frame = 0;
         sounds.motor.play();
-      })
+      }),
     )
     .chain(
       tween(model.animation, (t) =>
@@ -45,8 +45,8 @@ export function guts(
           {
             frame: 1,
           },
-          200
-        )
-      )
+          200,
+        ),
+      ),
     );
 }

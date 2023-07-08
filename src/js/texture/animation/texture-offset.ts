@@ -11,7 +11,7 @@
  */
 export function normalizeTextureOffset(
   offset: number,
-  maxAnimation: number
+  maxAnimation: number,
 ): number {
   const min = 0;
   const max = (maxAnimation - 1) / maxAnimation;

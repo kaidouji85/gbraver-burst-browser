@@ -17,7 +17,7 @@ export type GenesisBraverSounds = {
  * @return 生成結果
  */
 export function createGenesisBraverSounds(
-  resources: Resources
+  resources: Resources,
 ): GenesisBraverSounds {
   const motor =
     resources.sounds.find((v) => v.id === SOUND_IDS.MOTOR) ??

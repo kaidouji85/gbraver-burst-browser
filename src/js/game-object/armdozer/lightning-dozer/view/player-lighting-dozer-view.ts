@@ -31,7 +31,7 @@ export class PlayerLightingDozerView implements LightningDozerView {
     [...this.#meshes, ...this.#activeMeshes, ...this.#outlineMeshes].forEach(
       ({ mesh }) => {
         this.#group.add(mesh.getObject3D());
-      }
+      },
     );
   }
 
@@ -40,7 +40,7 @@ export class PlayerLightingDozerView implements LightningDozerView {
     [...this.#meshes, ...this.#activeMeshes, ...this.#outlineMeshes].forEach(
       ({ mesh }) => {
         mesh.destructor();
-      }
+      },
     );
   }
 
@@ -51,7 +51,7 @@ export class PlayerLightingDozerView implements LightningDozerView {
     this.#group.position.z = model.position.z;
 
     const currentMesh = this.#meshes.find(
-      (v) => v.type === model.animation.type
+      (v) => v.type === model.animation.type,
     );
     if (currentMesh) {
       currentMesh.mesh.opacity(1);
@@ -59,7 +59,7 @@ export class PlayerLightingDozerView implements LightningDozerView {
     }
 
     const currentActiveMesh = this.#activeMeshes.find(
-      (v) => v.type === model.animation.type
+      (v) => v.type === model.animation.type,
     );
     if (currentActiveMesh) {
       const activeOpacity =
@@ -69,7 +69,7 @@ export class PlayerLightingDozerView implements LightningDozerView {
     }
 
     const currentOutlineMesh = this.#outlineMeshes.find(
-      (v) => v.type === model.animation.type
+      (v) => v.type === model.animation.type,
     );
     if (currentOutlineMesh) {
       const outlineOpacity =

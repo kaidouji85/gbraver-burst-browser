@@ -18,8 +18,11 @@ export function maxBattery(model: GaugeModel, value: number): Animate {
     }),
     ...model.batteryList.map((gaugeUnit) =>
       tween(gaugeUnit, (t) =>
-        t.to({ opacity: getBatteryGaugeUnitOpacity(gaugeUnit.value, value) }, 0)
-      )
-    )
+        t.to(
+          { opacity: getBatteryGaugeUnitOpacity(gaugeUnit.value, value) },
+          0,
+        ),
+      ),
+    ),
   );
 }

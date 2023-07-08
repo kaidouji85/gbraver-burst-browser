@@ -13,7 +13,7 @@ import { NeoLandozerSounds } from "../sounds/neo-landozer-sounds";
  */
 export function charge(
   model: NeoLandozerModel,
-  sounds: NeoLandozerSounds
+  sounds: NeoLandozerSounds,
 ): Animate {
   return process(() => {
     model.animation.type = "HM_CHARGE";
@@ -25,8 +25,8 @@ export function charge(
         {
           frame: 1,
         },
-        300
-      )
-    )
+        300,
+      ),
+    ),
   );
 }

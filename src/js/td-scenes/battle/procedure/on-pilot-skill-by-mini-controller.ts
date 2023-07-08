@@ -14,7 +14,7 @@ import { progressGame } from "./progress-game";
  * @return 処理が完了したら発火するPromise
  */
 export function onPilotSkillByMiniController(
-  props: Readonly<BattleSceneProps>
+  props: Readonly<BattleSceneProps>,
 ): void {
   props.exclusive.execute(async () => {
     const pilotSkillCommand: PilotSkillCommand = {
@@ -22,7 +22,7 @@ export function onPilotSkillByMiniController(
     };
     const { isCommandCanceled } = await doPilotSkillEventIfNeeded(
       props,
-      pilotSkillCommand
+      pilotSkillCommand,
     );
     if (isCommandCanceled) {
       return;

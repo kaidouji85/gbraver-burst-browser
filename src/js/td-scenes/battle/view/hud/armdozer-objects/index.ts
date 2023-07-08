@@ -29,7 +29,7 @@ import { enemyWingDozerHUD, playerWingDozerHUD } from "./wing-dozer";
 export function playerArmdozerHUD(
   resources: Resources,
   gameObjectAction: Observable<GameObjectAction>,
-  state: Player
+  state: Player,
 ): HUDArmdozerObjects {
   switch (state.armdozer.id) {
     case ArmDozerIds.SHIN_BRAVER:
@@ -58,7 +58,7 @@ export function playerArmdozerHUD(
 export function enemyArmdozerHUD(
   resources: Resources,
   gameObjectAction: Observable<GameObjectAction>,
-  state: Player
+  state: Player,
 ): HUDArmdozerObjects {
   switch (state.armdozer.id) {
     case ArmDozerIds.SHIN_BRAVER:

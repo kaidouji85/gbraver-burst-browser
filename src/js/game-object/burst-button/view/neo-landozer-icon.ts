@@ -18,7 +18,7 @@ export class NeoLandozerIcon implements ArmdozerIcon {
     this.#group = new THREE.Group();
     const neoLandozer =
       resources.textures.find(
-        (v) => v.id === TEXTURE_IDS.NEO_LANDOZER_BURST_BUTTON_ICON
+        (v) => v.id === TEXTURE_IDS.NEO_LANDOZER_BURST_BUTTON_ICON,
       )?.texture ?? new THREE.Texture();
     this.#mesh = new HorizontalAnimationMesh({
       texture: neoLandozer,

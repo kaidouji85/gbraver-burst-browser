@@ -14,7 +14,7 @@ import { playerWin } from "../stories/player-win";
  */
 export async function afterLastState(
   props: Readonly<LastState>,
-  state: BurstTutorialState
+  state: BurstTutorialState,
 ): Promise<BurstTutorialState> {
   const foundGameEnd = props.update.find((v) => v.effect.name === "GameEnd");
 

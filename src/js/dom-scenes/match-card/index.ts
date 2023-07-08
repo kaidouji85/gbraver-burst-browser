@@ -30,7 +30,7 @@ export class MatchCard implements DOMScene {
       param.resources,
       param.player,
       param.enemy,
-      param.caption
+      param.caption,
     );
   }
 

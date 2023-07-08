@@ -36,13 +36,13 @@ export class TimeScaleButtonView {
    */
   constructor(
     resources: Resources,
-    gameObjectAction: Observable<GameObjectAction>
+    gameObjectAction: Observable<GameObjectAction>,
   ) {
     this.#group = new THREE.Group();
     this.#pushButton = new Subject();
     const buttonImage =
       resources.canvasImages.find(
-        (v) => v.id === CANVAS_IMAGE_IDS.TIME_SCALE_BUTTON
+        (v) => v.id === CANVAS_IMAGE_IDS.TIME_SCALE_BUTTON,
       )?.image ?? new Image();
     this.#button = new SimpleImageMesh({
       canvasSize: CANVAS_SIZE,
@@ -53,7 +53,7 @@ export class TimeScaleButtonView {
     this.#group.add(this.#button.getObject3D());
     const timeScale100 =
       resources.canvasImages.find(
-        (v) => v.id === CANVAS_IMAGE_IDS.TIME_SCALE_100
+        (v) => v.id === CANVAS_IMAGE_IDS.TIME_SCALE_100,
       )?.image ?? new Image();
     this.#timeScale100 = new SimpleImageMesh({
       canvasSize: CANVAS_SIZE,
@@ -64,7 +64,7 @@ export class TimeScaleButtonView {
     this.#group.add(this.#timeScale100.getObject3D());
     const timeScale050 =
       resources.canvasImages.find(
-        (v) => v.id === CANVAS_IMAGE_IDS.TIME_SCALE_050
+        (v) => v.id === CANVAS_IMAGE_IDS.TIME_SCALE_050,
       )?.image ?? new Image();
     this.#timeScale050 = new SimpleImageMesh({
       canvasSize: CANVAS_SIZE,
@@ -75,7 +75,7 @@ export class TimeScaleButtonView {
     this.#group.add(this.#timeScale050.getObject3D());
     const timeScale025 =
       resources.canvasImages.find(
-        (v) => v.id === CANVAS_IMAGE_IDS.TIME_SCALE_025
+        (v) => v.id === CANVAS_IMAGE_IDS.TIME_SCALE_025,
       )?.image ?? new Image();
     this.#timeScale025 = new SimpleImageMesh({
       canvasSize: CANVAS_SIZE,
@@ -169,7 +169,7 @@ export class TimeScaleButtonView {
     this.#button.setOpacity(model.opacity);
     const devicePerScale = HUDUIScale(
       preRender.rendererDOM,
-      preRender.safeAreaInset
+      preRender.safeAreaInset,
     );
     const groupScale = model.scale * devicePerScale;
     this.#group.scale.set(groupScale, groupScale, groupScale);

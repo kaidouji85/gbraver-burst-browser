@@ -12,7 +12,7 @@ import { CommandCanceled } from "../custom-battle-event";
  */
 export async function doBatteryEventIfNeeded(
   props: Readonly<BattleSceneProps>,
-  battery: Readonly<BatteryCommand>
+  battery: Readonly<BatteryCommand>,
 ): Promise<CommandCanceled> {
   return props.customBattleEvent
     ? await props.customBattleEvent.onBatteryCommandSelected({

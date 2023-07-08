@@ -15,7 +15,7 @@ import { PlayerRaitoView } from "./view/player-raito-view";
  */
 export function playerRaitoCutIn(
   resources: Resources,
-  gameObjectAction: Observable<GameObjectAction>
+  gameObjectAction: Observable<GameObjectAction>,
 ): RaitoCutIn {
   const view = new PlayerRaitoView(resources);
   return new RaitoCutIn(view, resources, gameObjectAction);
@@ -30,7 +30,7 @@ export function playerRaitoCutIn(
  */
 export function enemyRaitoCutIn(
   resources: Resources,
-  gameObjectAction: Observable<GameObjectAction>
+  gameObjectAction: Observable<GameObjectAction>,
 ): RaitoCutIn {
   const view = new EnemyRaitoView(resources);
   return new RaitoCutIn(view, resources, gameObjectAction);

@@ -11,7 +11,7 @@ import type { PushWindow } from "../window/push-window";
  * @return 画面押下したら発火するPromise
  */
 export function waitUntilWindowPushWithStream(
-  pushWindow: Observable<PushWindow>
+  pushWindow: Observable<PushWindow>,
 ): Promise<void> {
   return new Promise((resolve) => {
     const unsubscriber = pushWindow.pipe(first()).subscribe((action) => {
@@ -30,7 +30,7 @@ export function waitUntilWindowPushWithStream(
  * @return 画面押下したら発火するPromise
  */
 export async function waitUntilWindowPush(
-  props: CustomBattleEventProps
+  props: CustomBattleEventProps,
 ): Promise<void> {
   await waitUntilWindowPushWithStream(props.pushWindow);
 }

@@ -74,13 +74,13 @@ export class LightningDozerTD
 export function playerLightningDozerTD(
   resources: Resources,
   gameObjectAction: Observable<GameObjectAction>,
-  state: Player
+  state: Player,
 ): LightningDozerTD {
   return new LightningDozerTD(state.playerId, {
     lightningDozer: PlayerLightningDozer(resources, gameObjectAction),
     lightningBarrier: new LightningBarrierGameEffect(
       resources,
-      gameObjectAction
+      gameObjectAction,
     ),
   });
 }
@@ -95,13 +95,13 @@ export function playerLightningDozerTD(
 export function enemyLightningDozerTD(
   resources: Resources,
   gameObjectAction: Observable<GameObjectAction>,
-  state: Player
+  state: Player,
 ): LightningDozerTD {
   return new LightningDozerTD(state.playerId, {
     lightningDozer: EnemyLightningDozer(resources, gameObjectAction),
     lightningBarrier: new LightningBarrierGameEffect(
       resources,
-      gameObjectAction
+      gameObjectAction,
     ),
   });
 }

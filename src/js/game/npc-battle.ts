@@ -53,7 +53,7 @@ export function createNPCBattleState(
   playerId: PlayerId,
   armdozerId: ArmDozerId,
   pilotId: PilotId,
-  stages: NPCBattleStage[]
+  stages: NPCBattleStage[],
 ): NPCBattleState {
   const armdozer = ArmDozers.find((v) => v.id === armdozerId) ?? ArmDozers[0];
   const pilot = Pilots.find((v) => v.id === pilotId) ?? Pilots[0];
@@ -87,7 +87,7 @@ export function getNPCStageLevel(state: NPCBattleState): number {
  * @return ステージ
  */
 export function getCurrentNPCStage(
-  origin: NPCBattleState
+  origin: NPCBattleState,
 ): NPCBattleStage | null | undefined {
   return origin.stages[origin.stageIndex] ?? null;
 }
@@ -104,7 +104,7 @@ export type NPCBattleResult = "StageClear" | "StageMiss" | "NPCBattleComplete";
  */
 function getNPCBattleResult(
   isStageClear: boolean,
-  isLastStage: boolean
+  isLastStage: boolean,
 ): NPCBattleResult {
   if (isStageClear && isLastStage) {
     return "NPCBattleComplete";
@@ -133,7 +133,7 @@ export type UpdatedNPCBattleState = {
  */
 export function updateNPCBattleState(
   origin: Readonly<NPCBattleState>,
-  gameEndResult: Readonly<GameEndResult>
+  gameEndResult: Readonly<GameEndResult>,
 ): UpdatedNPCBattleState | null {
   const stage = getCurrentNPCStage(origin);
   if (!stage) {

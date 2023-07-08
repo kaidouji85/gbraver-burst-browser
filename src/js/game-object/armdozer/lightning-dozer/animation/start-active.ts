@@ -13,7 +13,7 @@ export function startActive(model: LightningDozerModel): Animate {
       {
         opacity: 1,
       },
-      500
-    )
+      500,
+    ),
   );
 }

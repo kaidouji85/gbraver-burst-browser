@@ -25,7 +25,7 @@ export const noZeroBattery = async (props: CustomBattleEventProps) => {
  * @return ストーリーが完了したら発火するPromise
  */
 export const cancelZeroBatteryDefense = async (
-  props: CustomBattleEventProps
+  props: CustomBattleEventProps,
 ) => {
   await noZeroBattery(props);
   await refreshConversation(props, 100);
@@ -43,7 +43,7 @@ export const cancelZeroBatteryDefense = async (
  * @return ストーリーが完了したら発火するPromise
  */
 export const doBurstBecauseZeroBattery = async (
-  props: CustomBattleEventProps
+  props: CustomBattleEventProps,
 ) => {
   await noZeroBattery(props);
   await refreshConversation(props, 100);
@@ -67,7 +67,7 @@ export const doBurstBecauseZeroBattery = async (
  * @return ストーリーが完了したら発火するPromise
  */
 export const doPilotSkillBecauseZeroBattery = async (
-  props: CustomBattleEventProps
+  props: CustomBattleEventProps,
 ) => {
   await noZeroBattery(props);
   await refreshConversation(props, 100);
@@ -100,7 +100,7 @@ export const doPilotSkillBecauseZeroBattery = async (
  * @return ストーリーが完了したら発火するPromise
  */
 export const zeroBatteryDefenseBecauseNoBatteryRecover = async (
-  props: CustomBattleEventProps
+  props: CustomBattleEventProps,
 ) => {
   await noZeroBattery(props);
   await refreshConversation(props, 100);

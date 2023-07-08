@@ -24,9 +24,9 @@ const lightingStory =
   (
     generator: (
       resources: Resources,
-      gameObjectAction: Observable<GameObjectAction>
+      gameObjectAction: Observable<GameObjectAction>,
     ) => Lightning,
-    fn: (lightning: Lightning) => void
+    fn: (lightning: Lightning) => void,
   ) =>
   () => {
     const stub = new TDGameObjectStub(({ resources, gameObjectAction }) => {

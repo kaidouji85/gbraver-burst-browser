@@ -7,7 +7,7 @@ type Connector = DomDialogActionConnector<RejectPrivateMatchEntryDialog>;
 /** プライベートマッチエントリ拒否ダイアログとゲームアクションを関連付ける */
 export const rejectPrivateMatcEntryDialogConnector: Connector = (
   dialog,
-  gameAction
+  gameAction,
 ) => [
   dialog.notifyDialogClosed().subscribe(() => {
     gameAction.next({ type: "MatchingCanceled" });

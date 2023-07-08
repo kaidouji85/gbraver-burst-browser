@@ -8,7 +8,7 @@ import type { Resources } from "..";
  */
 export async function mergeResources(
   resources: Resources,
-  loaded: Resources
+  loaded: Resources,
 ): Promise<Resources> {
   return {
     ...resources,

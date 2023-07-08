@@ -35,7 +35,7 @@ export type PrivateMatchHostDialogProps = {
  */
 export function createPrivateMatchHostDialogProps(
   resources: Resources,
-  roomID: string
+  roomID: string,
 ): PrivateMatchHostDialogProps {
   const ids: DataIDs = {
     closer: domUuid(),

@@ -62,7 +62,7 @@ export class NeoLandozerTD implements NeoLandozerTDField, TDArmdozerObjects {
 export function playerNeoLandozerTD(
   resources: Resources,
   gameObjectAction: Observable<GameObjectAction>,
-  state: Player
+  state: Player,
 ): NeoLandozerTD {
   return new NeoLandozerTD(state.playerId, {
     neoLandozer: PlayerNeoLandozer(resources, gameObjectAction),
@@ -79,7 +79,7 @@ export function playerNeoLandozerTD(
 export function enemyNeoLandozerTD(
   resources: Resources,
   gameObjectAction: Observable<GameObjectAction>,
-  state: Player
+  state: Player,
 ): NeoLandozerTD {
   return new NeoLandozerTD(state.playerId, {
     neoLandozer: EnemyNeoLandozer(resources, gameObjectAction),

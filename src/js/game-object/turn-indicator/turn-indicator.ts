@@ -71,7 +71,7 @@ export class TurnIndicator {
       show(isPlayerTurn, this.#model),
       process(() => {
         waiting(this.#model, this.#tweenGroup).loop();
-      })
+      }),
     );
   }
 
@@ -84,7 +84,7 @@ export class TurnIndicator {
       invisible(this.#model),
       process(() => {
         this.#tweenGroup.removeAll();
-      })
+      }),
     );
   }
 

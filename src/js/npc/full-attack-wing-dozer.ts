@@ -22,7 +22,7 @@ const ZERO_BATTERY: Command = {
  */
 const attackRoutine: SimpleRoutine = ({ commands, enemy }) => {
   const allBattery = commands.find(
-    (v) => v.type === "BATTERY_COMMAND" && v.battery === enemy.armdozer.battery
+    (v) => v.type === "BATTERY_COMMAND" && v.battery === enemy.armdozer.battery,
   );
   return allBattery ?? ZERO_BATTERY;
 };
@@ -34,7 +34,7 @@ const attackRoutine: SimpleRoutine = ({ commands, enemy }) => {
 const defenseRoutine: SimpleRoutine = ({ commands }) => {
   const burst = commands.find((v) => v.type === "BURST_COMMAND");
   const battery1 = commands.find(
-    (v) => v.type === "BATTERY_COMMAND" && v.battery === 1
+    (v) => v.type === "BATTERY_COMMAND" && v.battery === 1,
   );
   return burst ?? battery1 ?? ZERO_BATTERY;
 };

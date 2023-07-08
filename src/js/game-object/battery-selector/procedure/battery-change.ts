@@ -13,7 +13,7 @@ import { BatterySelectorProps } from "../props";
  */
 export function batteryChange(
   props: BatterySelectorProps,
-  battery: number
+  battery: number,
 ): Animate {
   props.batteryChangeTween.update();
   props.batteryChangeTween.removeAll();
@@ -22,6 +22,6 @@ export function batteryChange(
     process(() => {
       props.model.battery = battery;
     }),
-    changeNeedle(props.model, props.batteryChangeTween, needle)
+    changeNeedle(props.model, props.batteryChangeTween, needle),
   );
 }

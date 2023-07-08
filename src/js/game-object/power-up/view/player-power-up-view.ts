@@ -20,7 +20,7 @@ export class PlayerPowerUpView implements PowerUpView {
 
   constructor(resources: Resources) {
     const playerTurnResource = resources.textures.find(
-      (v) => v.id === TEXTURE_IDS.POWER_UP
+      (v) => v.id === TEXTURE_IDS.POWER_UP,
     );
     const playerTurn = playerTurnResource
       ? playerTurnResource.texture

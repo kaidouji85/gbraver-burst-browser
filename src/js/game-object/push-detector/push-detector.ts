@@ -114,7 +114,7 @@ class SimplePushDetector implements PushDetector {
    */
   #touchStartRaycaster(action: TouchStartRaycaster): void {
     const overlapTouches = action.touch.targetTouches.filter((v) =>
-      isMeshOverlap(v.raycaster, this.#mesh)
+      isMeshOverlap(v.raycaster, this.#mesh),
     );
     const isTouchOverlap = 0 < overlapTouches.length;
 
@@ -150,7 +150,7 @@ type CirclePushDetectorParam = {
  * @return プッシュ検出
  */
 export function circlePushDetector(
-  param: CirclePushDetectorParam
+  param: CirclePushDetectorParam,
 ): PushDetector {
   const geometry = new THREE.CircleGeometry(param.radius, param.segments);
   return new SimplePushDetector({

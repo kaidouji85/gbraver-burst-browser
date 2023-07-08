@@ -22,7 +22,7 @@ type AnimationPlayer = {
  * @return 生成したアニメーションプレイヤー
  */
 export const animationPlayer = (
-  props: Readonly<BattleSceneProps>
+  props: Readonly<BattleSceneProps>,
 ): AnimationPlayer => ({
   play: (animate: Animate) =>
     animate.timeScale(props.animationTimeScale).play(),

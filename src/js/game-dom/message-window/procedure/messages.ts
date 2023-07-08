@@ -9,7 +9,7 @@ import { MessageWindowProps } from "../props";
  */
 export function messages(
   props: Readonly<MessageWindowProps>,
-  values: string[]
+  values: string[],
 ): void {
   const createParagraph = (message: string) => {
     const div = document.createElement("div");

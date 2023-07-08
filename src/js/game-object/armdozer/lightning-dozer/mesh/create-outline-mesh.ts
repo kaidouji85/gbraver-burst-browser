@@ -49,7 +49,7 @@ type Params = {
  * @return 生成結果
  */
 export function createLightningDozerOutlineMesh(
-  params: Params
+  params: Params,
 ): ArmdozerAnimation {
   const { resources, textureId, maxAnimation } = params;
   const texture =

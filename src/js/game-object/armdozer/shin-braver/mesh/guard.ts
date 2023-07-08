@@ -42,7 +42,7 @@ export function shinBraverActiveGuard(resources: Resources): ArmdozerAnimation {
  * @return メッシュ
  */
 export function shinBraverOutlineGuard(
-  resources: Resources
+  resources: Resources,
 ): ArmdozerAnimation {
   return createShinBraverOutlineMesh({
     resources,

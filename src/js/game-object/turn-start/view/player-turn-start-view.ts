@@ -15,7 +15,7 @@ export class PlayerTurnStartView implements TurnStartView {
 
   constructor(resources: Resources) {
     const playerTurnResource = resources.textures.find(
-      (v) => v.id === TEXTURE_IDS.PLAYER_TURN
+      (v) => v.id === TEXTURE_IDS.PLAYER_TURN,
     );
     const playerTurn = playerTurnResource
       ? playerTurnResource.texture
@@ -52,7 +52,7 @@ export class PlayerTurnStartView implements TurnStartView {
     const target = this.#mesh.getObject3D();
     const devicePerScale = HUDCutInScale(
       preRender.rendererDOM,
-      preRender.safeAreaInset
+      preRender.safeAreaInset,
     );
     target.position.x =
       preRender.rendererDOM.clientWidth / 2 -

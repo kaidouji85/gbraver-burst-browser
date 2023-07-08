@@ -37,7 +37,7 @@ export type OverlapEvent =
 export function toOverlapStream(
   origin: Observable<RendererDOMEvent>,
   rendererDOM: HTMLElement,
-  camera: THREE.Camera
+  camera: THREE.Camera,
 ): Observable<OverlapEvent> {
   return origin.pipe(
     map((v) => {
@@ -66,6 +66,6 @@ export function toOverlapStream(
     }),
     filter((v) => !!v),
     map((v) => v as OverlapEvent),
-    share()
+    share(),
   );
 }

@@ -64,7 +64,7 @@ export class TsubasaHUD implements HUDPilotObjects {
 export function playerTsubasaHUD(
   resources: Resources,
   gameObjectAction: Observable<GameObjectAction>,
-  state: Player
+  state: Player,
 ): TsubasaHUD {
   return new TsubasaHUD({
     playerId: state.playerId,
@@ -83,7 +83,7 @@ export function playerTsubasaHUD(
 export function enemyTsubasaHUD(
   resources: Resources,
   gameObjectAction: Observable<GameObjectAction>,
-  state: Player
+  state: Player,
 ): TsubasaHUD {
   return new TsubasaHUD({
     playerId: state.playerId,

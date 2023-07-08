@@ -25,7 +25,7 @@ import { zeroDefenseWin } from "../stories/zero-defense-win";
  */
 export async function afterLastState(
   props: Readonly<LastState>,
-  state: ZeroDefenseTutorialState
+  state: ZeroDefenseTutorialState,
 ): Promise<ZeroDefenseTutorialState> {
   const extractedBatteryDeclaration = extractBatteryDeclaration(props.update);
   const extractedGameEnd = extractGameEnd(props.update);

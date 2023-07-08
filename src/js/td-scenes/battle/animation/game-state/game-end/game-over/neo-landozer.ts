@@ -16,8 +16,8 @@ export function neoLandozerWin(param: GameOverParamX<NeoLandozerTD>): Animate {
     track(
       param.tdCamera,
       param.winnerTdArmdozer.neoLandozer.getObject3D().position.x,
-      800
+      800,
     ),
-    dolly(param.tdCamera, "-60", 800)
+    dolly(param.tdCamera, "-60", 800),
   );
 }

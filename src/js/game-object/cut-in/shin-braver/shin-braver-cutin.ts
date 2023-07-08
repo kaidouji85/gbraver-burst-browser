@@ -27,7 +27,7 @@ export class ShinBraverCutIn implements HUDTracking {
    */
   constructor(
     view: ShinBraverCutInView,
-    gameObjectAction: Observable<GameObjectAction>
+    gameObjectAction: Observable<GameObjectAction>,
   ) {
     this.#model = createInitialValue();
     this.#view = view;

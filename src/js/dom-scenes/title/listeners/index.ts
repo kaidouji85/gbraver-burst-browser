@@ -37,7 +37,7 @@ export function bindEventListeners(props: TitleProps): Unsubscribable[] {
     ...Array.from(props.helpMenu.querySelectorAll("a")).map((anchor) =>
       domPushStream(anchor).subscribe((action) => {
         onHelpAnkerPush(action);
-      })
+      }),
     ),
     domPushStream(props.deleteAccount).subscribe((action) => {
       onPushDeleteAccount(props, action);

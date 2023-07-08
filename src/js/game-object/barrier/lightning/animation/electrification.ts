@@ -14,7 +14,7 @@ import type { LightningBarrierModel } from "../model/lightning-barrier-model";
  */
 export function electrification(
   model: LightningBarrierModel,
-  group: TWEEN.Group
+  group: TWEEN.Group,
 ): Animate {
   return process(() => {
     model.animation.frame = 0;
@@ -26,9 +26,9 @@ export function electrification(
           {
             frame: 1,
           },
-          1500
+          1500,
         ),
-      group
-    )
+      group,
+    ),
   );
 }

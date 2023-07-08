@@ -17,6 +17,6 @@ export function inputDOMStream(dom: HTMLInputElement): Observable<InputDOM> {
     map((event) => ({
       type: "ChangeDOM",
       event,
-    }))
+    })),
   );
 }

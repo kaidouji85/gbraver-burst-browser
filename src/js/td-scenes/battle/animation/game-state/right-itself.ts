@@ -14,7 +14,7 @@ import type { StateAnimationProps } from "./state-animation-props";
  */
 export function rightItselfAnimation(
   props: StateAnimationProps,
-  gameState: GameStateX<RightItself>
+  gameState: GameStateX<RightItself>,
 ): Animate {
   if (gameState.effect.name !== "RightItself") {
     return empty();
@@ -22,7 +22,7 @@ export function rightItselfAnimation(
 
   const effect: RightItself = gameState.effect;
   const defenderArmdozer = props.view.td.armdozerObjects.find(
-    (v) => v.playerId === effect.defender
+    (v) => v.playerId === effect.defender,
   );
 
   if (!defenderArmdozer) {
@@ -30,7 +30,7 @@ export function rightItselfAnimation(
   }
 
   return getMotion(defenderArmdozer.sprite(), effect.battleResult).chain(
-    delay(300)
+    delay(300),
   );
 }
 
@@ -43,7 +43,7 @@ export function rightItselfAnimation(
  */
 function getMotion(
   sprite: ArmDozerSprite,
-  battleResult: BattleResult
+  battleResult: BattleResult,
 ): Animate {
   if (battleResult.name === "NormalHit") {
     return sprite.knockBackToStand();

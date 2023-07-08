@@ -9,7 +9,7 @@ import { getTargetFaceGraphic } from "./get-target-face-graphic";
  */
 export function face(
   props: Readonly<MessageWindowProps>,
-  faceType: FaceType
+  faceType: FaceType,
 ): void {
   const target = getTargetFaceGraphic(props);
   target.face(faceType, props.faceOrientation);

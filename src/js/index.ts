@@ -39,7 +39,7 @@ async function main(): Promise<void> {
     GBRAVER_BURST_WEBSOCKET_API_URL,
     GBRAVER_BURST_AUTH0_DOMAIN,
     GBRAVER_BURST_AUTH0_CLIENT_ID,
-    GBRAVER_BURST_AUTH0_AUDIENCE
+    GBRAVER_BURST_AUTH0_AUDIENCE,
   );
 
   if (api.isLoginSuccessRedirect()) {

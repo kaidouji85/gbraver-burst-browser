@@ -76,7 +76,7 @@ export async function enemyAttackHit(props: CustomBattleEventProps) {
  */
 export async function enemyAttack(
   props: CustomBattleEventProps,
-  battleResult: BattleResult
+  battleResult: BattleResult,
 ) {
   if (
     battleResult.name === "NormalHit" ||

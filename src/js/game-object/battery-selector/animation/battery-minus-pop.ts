@@ -17,7 +17,7 @@ import type { BatterySelectorSounds } from "../sounds/battery-selector-sounds";
 export function batteryMinusPop(
   model: BatterySelectorModel,
   sounds: BatterySelectorSounds,
-  group: TWEEN.Group
+  group: TWEEN.Group,
 ): Animate {
   return process(() => {
     sounds.batteryChangeSound.play();
@@ -30,10 +30,10 @@ export function batteryMinusPop(
             {
               minusButtonScale: 1.1,
             },
-            100
+            100,
           ),
-        group
-      )
+        group,
+      ),
     )
     .chain(
       tween(
@@ -43,9 +43,9 @@ export function batteryMinusPop(
             {
               minusButtonScale: 1,
             },
-            100
+            100,
           ),
-        group
-      )
+        group,
+      ),
     );
 }

@@ -19,7 +19,7 @@ export type BatterySelectorSounds = {
  * @return 生成結果
  */
 export function createBatterySelectorSounds(
-  resources: Resources
+  resources: Resources,
 ): BatterySelectorSounds {
   const pushButtonSound =
     resources.sounds.find((v) => v.id === SOUND_IDS.PUSH_BUTTON)?.sound ??

@@ -14,5 +14,5 @@ import type { GameAction } from "../game-actions";
  */
 export type TDSceneActionConnector<X extends TDScene> = (
   scene: X,
-  gameAction: Subject<GameAction>
+  gameAction: Subject<GameAction>,
 ) => Unsubscribable[];

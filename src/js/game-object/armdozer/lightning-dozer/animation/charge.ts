@@ -13,7 +13,7 @@ import { LightningDozerSounds } from "../sounds/lightning-dozer-sounds";
  */
 export function charge(
   model: LightningDozerModel,
-  sounds: LightningDozerSounds
+  sounds: LightningDozerSounds,
 ): Animate {
   return process(() => {
     model.animation.type = "HM_CHARGE";
@@ -25,8 +25,8 @@ export function charge(
         {
           frame: 1,
         },
-        300
-      )
-    )
+        300,
+      ),
+    ),
   );
 }

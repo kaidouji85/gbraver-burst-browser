@@ -94,7 +94,7 @@ export type BattleScenePropsCreatorParams = {
  * @return 生成結果
  */
 export function createBattleSceneProps(
-  params: BattleScenePropsCreatorParams
+  params: BattleScenePropsCreatorParams,
 ): BattleSceneProps {
   return {
     playerId: params.player.playerId,

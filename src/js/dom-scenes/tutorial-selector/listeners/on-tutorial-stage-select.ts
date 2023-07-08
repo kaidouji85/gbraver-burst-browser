@@ -8,7 +8,7 @@ import { TutorialStageElement } from "../tutorial-stage-element";
  */
 export function onTutorialStageSelect(
   props: Readonly<TutorialSelectorProps>,
-  stageElement: TutorialStageElement
+  stageElement: TutorialStageElement,
 ): void {
   props.exclusive.execute(async () => {
     await stageElement.selected();

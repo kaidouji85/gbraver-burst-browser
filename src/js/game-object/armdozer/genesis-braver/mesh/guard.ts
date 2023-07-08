@@ -28,7 +28,7 @@ export function genesisBraverGuard(resources: Resources): ArmdozerAnimation {
  * @return 生成結果
  */
 export function genesisBraverActiveGuard(
-  resources: Resources
+  resources: Resources,
 ): ArmdozerAnimation {
   return createGenesisBraverActiveMesh({
     resources,

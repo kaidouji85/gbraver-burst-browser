@@ -16,7 +16,7 @@ import { TsubasaIcon } from "./view/tsubasa";
  */
 export function shinyaPilotButton(
   resources: Resources,
-  gameObjectAction: Observable<GameObjectAction>
+  gameObjectAction: Observable<GameObjectAction>,
 ): PilotButton {
   const icon = new ShinyaIcon(resources);
   return new PilotButton(resources, icon, gameObjectAction);
@@ -30,7 +30,7 @@ export function shinyaPilotButton(
  */
 export function gaiPilotButton(
   resources: Resources,
-  gameObjectAction: Observable<GameObjectAction>
+  gameObjectAction: Observable<GameObjectAction>,
 ): PilotButton {
   const icon = new GaiIcon(resources);
   return new PilotButton(resources, icon, gameObjectAction);
@@ -44,7 +44,7 @@ export function gaiPilotButton(
  */
 export function raitoPilotButton(
   resources: Resources,
-  gameObjectAction: Observable<GameObjectAction>
+  gameObjectAction: Observable<GameObjectAction>,
 ): PilotButton {
   const icon = new RaitoIcon(resources);
   return new PilotButton(resources, icon, gameObjectAction);
@@ -58,7 +58,7 @@ export function raitoPilotButton(
  */
 export function tsubasaPilotButton(
   resources: Resources,
-  gameObjectAction: Observable<GameObjectAction>
+  gameObjectAction: Observable<GameObjectAction>,
 ): PilotButton {
   const icon = new TsubasaIcon(resources);
   return new PilotButton(resources, icon, gameObjectAction);

@@ -42,7 +42,7 @@ export type RootInnerHTMLParams = {
  */
 export function rootInnerHTML(
   ids: DataIDs,
-  params: RootInnerHTMLParams
+  params: RootInnerHTMLParams,
 ): string {
   const loginClassName =
     params.isApiServerEnable && params.account.type === "GuestAccount"

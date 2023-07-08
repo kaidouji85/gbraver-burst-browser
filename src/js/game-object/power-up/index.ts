@@ -15,7 +15,7 @@ import { PlayerPowerUpView } from "./view/player-power-up-view";
  */
 export function playerPowerUp(
   resources: Resources,
-  gameObjectAction: Observable<GameObjectAction>
+  gameObjectAction: Observable<GameObjectAction>,
 ): PowerUp {
   const view = new PlayerPowerUpView(resources);
   return new PowerUp(view, resources, gameObjectAction);
@@ -30,7 +30,7 @@ export function playerPowerUp(
  */
 export function enemyPowerUp(
   resources: Resources,
-  gameObjectAction: Observable<GameObjectAction>
+  gameObjectAction: Observable<GameObjectAction>,
 ): PowerUp {
   const view = new EnemyPowerUpView(resources);
   return new PowerUp(view, resources, gameObjectAction);

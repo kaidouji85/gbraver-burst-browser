@@ -10,11 +10,11 @@ import type { GameObjectAction } from "./game-object-action";
  * @return 生成結果
  */
 export function firstUpdate(
-  gameObjectAction: Observable<GameObjectAction>
+  gameObjectAction: Observable<GameObjectAction>,
 ): Observable<Update> {
   return gameObjectAction.pipe(
     filter((v) => v.type === "Update"),
     map((v) => v as Update),
-    first()
+    first(),
   );
 }

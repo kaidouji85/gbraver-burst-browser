@@ -11,7 +11,7 @@ import type { CustomBattleEventProps } from "../td-scenes/battle/custom-battle-e
  */
 export function extractLastPlayer(
   props: CustomBattleEventProps,
-  stateHistory: GameState[]
+  stateHistory: GameState[],
 ): PlayerState | null | undefined {
   const lastState = stateHistory[stateHistory.length - 1];
 
@@ -31,7 +31,7 @@ export function extractLastPlayer(
  */
 export function extractLastEnemy(
   props: CustomBattleEventProps,
-  stateHistory: GameState[]
+  stateHistory: GameState[],
 ): PlayerState | null | undefined {
   const lastState = stateHistory[stateHistory.length - 1];
 

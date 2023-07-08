@@ -24,7 +24,7 @@ export type TouchStartRaycaster = {
 export function toTouchStartRaycaster(
   origin: TouchStart,
   renderer: HTMLElement,
-  camera: THREE.Camera
+  camera: THREE.Camera,
 ): TouchStartRaycaster {
   const touch = createTouchEventRaycaster(origin.event, renderer, camera);
   return {

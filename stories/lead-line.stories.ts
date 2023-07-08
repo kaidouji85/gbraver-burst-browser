@@ -28,7 +28,7 @@ const circle = (radius: number, color = 0xffff00) => {
  * @return 引き出し線、点A、点B
  */
 type Generator = (
-  gameObjectAction: Observable<GameObjectAction>
+  gameObjectAction: Observable<GameObjectAction>,
 ) => [LeadLine, THREE.Mesh, THREE.Mesh];
 
 /**

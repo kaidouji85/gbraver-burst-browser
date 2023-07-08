@@ -14,7 +14,7 @@ export function hidden(model: TurnStartModel): Animate {
       {
         opacity: 0,
       },
-      200
-    )
+      200,
+    ),
   );
 }

@@ -10,7 +10,7 @@ import { isPilotSkillActivatedByTsubasa } from "./is-pilot-skill-activated-by-ts
  * @return アニメーション
  */
 export function onStateAnimation(
-  props: Readonly<CustomStateAnimation>
+  props: Readonly<CustomStateAnimation>,
 ): Animate {
   if (isPilotSkillActivatedByTsubasa(props)) {
     return tsubasaVictoryDeclaration(props);

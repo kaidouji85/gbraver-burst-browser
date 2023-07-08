@@ -15,7 +15,7 @@ export const MAX_ANIMATION = 4;
  * @return メッシュ
  */
 export function lightningDozerBackStep(
-  resources: Resources
+  resources: Resources,
 ): ArmdozerAnimation {
   return createLightningDozerMesh({
     resources,

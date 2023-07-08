@@ -7,7 +7,7 @@ export default {
 export const dialog: DOMStubStory = domStub((resources) => {
   const dialog = new LoginDialog(
     resources,
-    "ネット対戦をするにはログインしてください"
+    "ネット対戦をするにはログインしてください",
   );
   dialog.notifyLogin().subscribe(() => {
     console.log("login");

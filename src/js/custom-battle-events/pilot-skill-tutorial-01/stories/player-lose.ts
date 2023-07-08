@@ -12,7 +12,7 @@ import { scrollLeftMessages, scrollRightMessages } from "../../scroll-messages";
  * @return ストーリーが完了したら発火するPromise
  */
 export async function playerLose(
-  props: Readonly<CustomBattleEventProps>
+  props: Readonly<CustomBattleEventProps>,
 ): Promise<void> {
   activeRightMessageWindowWithFace(props, "Shinya");
   await scrollRightMessages(props, [

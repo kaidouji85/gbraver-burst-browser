@@ -15,25 +15,25 @@ export type PushDOM = {
 export function domPushStream(dom: HTMLElement): Observable<PushDOM> {
   const mouseDown: Observable<PushDOM> = fromEvent<MouseEvent>(
     dom,
-    "mousedown"
+    "mousedown",
   ).pipe(
     map((event) => {
       return {
         type: "PushDOM",
         event,
       };
-    })
+    }),
   );
   const touchStart: Observable<PushDOM> = fromEvent<TouchEvent>(
     dom,
-    "touchstart"
+    "touchstart",
   ).pipe(
     map((event) => {
       return {
         type: "PushDOM",
         event,
       };
-    })
+    }),
   );
   return merge(mouseDown, touchStart);
 }
@@ -50,6 +50,6 @@ export function domClickStream(dom: HTMLElement): Observable<PushDOM> {
         type: "PushDOM",
         event,
       };
-    })
+    }),
   );
 }

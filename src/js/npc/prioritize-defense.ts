@@ -22,7 +22,7 @@ const ZERO_BATTERY: Command = {
  */
 const attackRoutine: SimpleRoutine = ({ commands, enemy, player }) => {
   const battery1 = commands.find(
-    (v) => v.type === "BATTERY_COMMAND" && v.battery === 1
+    (v) => v.type === "BATTERY_COMMAND" && v.battery === 1,
   );
 
   if (battery1 && player.armdozer.battery < enemy.armdozer.battery) {
@@ -39,7 +39,7 @@ const attackRoutine: SimpleRoutine = ({ commands, enemy, player }) => {
 const defenseRoutine: SimpleRoutine = ({ commands, enemy, player }) => {
   const oneGreaterThanPlayer = commands.find(
     (v) =>
-      v.type === "BATTERY_COMMAND" && v.battery === player.armdozer.battery + 1
+      v.type === "BATTERY_COMMAND" && v.battery === player.armdozer.battery + 1,
   );
 
   if (oneGreaterThanPlayer) {
@@ -47,7 +47,8 @@ const defenseRoutine: SimpleRoutine = ({ commands, enemy, player }) => {
   }
 
   const sameSaPlayer = commands.find(
-    (v) => v.type === "BATTERY_COMMAND" && v.battery === player.armdozer.battery
+    (v) =>
+      v.type === "BATTERY_COMMAND" && v.battery === player.armdozer.battery,
   );
 
   if (sameSaPlayer) {
@@ -55,10 +56,10 @@ const defenseRoutine: SimpleRoutine = ({ commands, enemy, player }) => {
   }
 
   const maxBattery = commands.find(
-    (v) => v.type === "BATTERY_COMMAND" && v.battery === enemy.armdozer.battery
+    (v) => v.type === "BATTERY_COMMAND" && v.battery === enemy.armdozer.battery,
   );
   const battery1 = commands.find(
-    (v) => v.type === "BATTERY_COMMAND" && v.battery === 1
+    (v) => v.type === "BATTERY_COMMAND" && v.battery === 1,
   );
   return maxBattery ?? battery1 ?? ZERO_BATTERY;
 };

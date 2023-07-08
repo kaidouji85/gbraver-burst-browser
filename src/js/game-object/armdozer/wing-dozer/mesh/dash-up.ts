@@ -42,7 +42,7 @@ export function wingDozerActiveDashUp(resources: Resources): ArmdozerAnimation {
  * @return メッシュ
  */
 export function wingDozerOutlineDashUp(
-  resources: Resources
+  resources: Resources,
 ): ArmdozerAnimation {
   return createWingDozerOutlineMesh({
     resources,

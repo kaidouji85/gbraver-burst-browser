@@ -24,9 +24,9 @@ const continuousAttackStory =
   (
     generator: (
       resources: Resources,
-      gameObjectAction: Observable<GameObjectAction>
+      gameObjectAction: Observable<GameObjectAction>,
     ) => ContinuousAttackIndicator,
-    fn: (continuousAttack: ContinuousAttackIndicator) => void
+    fn: (continuousAttack: ContinuousAttackIndicator) => void,
   ) =>
   () => {
     const stub = new TDGameObjectStub(({ resources, gameObjectAction }) => {

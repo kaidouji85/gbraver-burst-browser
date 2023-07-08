@@ -15,7 +15,7 @@ import { NPCBattleResult, updateNPCBattleState } from "../../npc-battle";
  * @return 表示するアクションボタン
  */
 const postNPCBattleButtons = (
-  result: NPCBattleResult
+  result: NPCBattleResult,
 ): PostBattleButtonConfig[] => {
   switch (result) {
     case "NPCBattleComplete":
@@ -51,7 +51,7 @@ type Ret = IsExecuted | IsNotExecuted;
  */
 export async function executePostNPCBattleIfNeeded(
   props: Readonly<GameProps>,
-  action: Readonly<EndBattle>
+  action: Readonly<EndBattle>,
 ): Promise<Ret> {
   if (
     props.inProgress.type !== "NPCBattle" ||
@@ -62,7 +62,7 @@ export async function executePostNPCBattleIfNeeded(
 
   const updated = updateNPCBattleState(
     props.inProgress.npcBattle.state,
-    action.gameEnd.result
+    action.gameEnd.result,
   );
   if (!updated) {
     return { isExecuted: false };
@@ -70,7 +70,7 @@ export async function executePostNPCBattleIfNeeded(
 
   await props.domFloaters.showPostBattle(
     props.resources,
-    postNPCBattleButtons(updated.result)
+    postNPCBattleButtons(updated.result),
   );
   return {
     isExecuted: true,

@@ -64,7 +64,7 @@ export class GenesisBraverTD
 export function playerGenesisBraverTD(
   resources: Resources,
   gameObjectAction: Observable<GameObjectAction>,
-  state: Player
+  state: Player,
 ): GenesisBraverTD {
   return new GenesisBraverTD(state.playerId, {
     genesisBraver: PlayerGenesisBraver(resources, gameObjectAction),
@@ -81,7 +81,7 @@ export function playerGenesisBraverTD(
 export function enemyGenesisBraverTD(
   resources: Resources,
   gameObjectAction: Observable<GameObjectAction>,
-  state: Player
+  state: Player,
 ): GenesisBraverTD {
   return new GenesisBraverTD(state.playerId, {
     genesisBraver: EnemyGenesisBraver(resources, gameObjectAction),

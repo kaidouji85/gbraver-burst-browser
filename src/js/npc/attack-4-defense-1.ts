@@ -22,7 +22,7 @@ const ZERO_BATTERY: Command = {
  */
 const attackRoutine: SimpleRoutine = ({ commands, enemy }) => {
   const battery4 = commands.find(
-    (v) => v.type === "BATTERY_COMMAND" && v.battery === 4
+    (v) => v.type === "BATTERY_COMMAND" && v.battery === 4,
   );
 
   if (5 <= enemy.armdozer.battery && battery4) {
@@ -38,7 +38,7 @@ const attackRoutine: SimpleRoutine = ({ commands, enemy }) => {
  */
 const defenseRoutine: SimpleRoutine = (data) => {
   const battery1 = data.commands.find(
-    (v) => v.type === "BATTERY_COMMAND" && v.battery === 1
+    (v) => v.type === "BATTERY_COMMAND" && v.battery === 1,
   );
   return battery1 ?? ZERO_BATTERY;
 };

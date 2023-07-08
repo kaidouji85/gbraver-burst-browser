@@ -24,9 +24,9 @@ export function popUp(model: DamageIndicatorModel, damage: number): Animate {
             opacity: 1,
             scale: 1,
           },
-          200
-        )
-      )
+          200,
+        ),
+      ),
     )
     .chain(delay(1300))
     .chain(
@@ -36,8 +36,8 @@ export function popUp(model: DamageIndicatorModel, damage: number): Animate {
             opacity: 0,
             scale: 1.05,
           },
-          200
-        )
-      )
+          200,
+        ),
+      ),
     );
 }

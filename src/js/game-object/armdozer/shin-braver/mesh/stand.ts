@@ -42,7 +42,7 @@ export function shinBraverActiveStand(resources: Resources): ArmdozerAnimation {
  * @return 生成結果
  */
 export function shinBraverOutlineStand(
-  resources: Resources
+  resources: Resources,
 ): ArmdozerAnimation {
   return createShinBraverOutlineMesh({
     resources,

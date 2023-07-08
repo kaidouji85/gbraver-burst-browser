@@ -53,7 +53,7 @@ export class EmptyCustomBattleEvent implements CustomBattleEvent {
   /** @override */
   /* eslint-disable @typescript-eslint/no-unused-vars */
   async onBatteryCommandSelected(
-    props: BatteryCommandSelected
+    props: BatteryCommandSelected,
   ): Promise<CommandCanceled> {
     /* eslint-enable @typescript-eslint/no-unused-vars */
     return {
@@ -64,7 +64,7 @@ export class EmptyCustomBattleEvent implements CustomBattleEvent {
   /** @override */
   /* eslint-disable @typescript-eslint/no-unused-vars */
   async onBurstCommandSelected(
-    props: BurstCommandSelected
+    props: BurstCommandSelected,
   ): Promise<CommandCanceled> {
     /* eslint-enable @typescript-eslint/no-unused-vars */
     return {
@@ -75,7 +75,7 @@ export class EmptyCustomBattleEvent implements CustomBattleEvent {
   /** @override */
   /* eslint-disable @typescript-eslint/no-unused-vars */
   async onPilotSkillCommandSelected(
-    props: PilotSkillCommandSelected
+    props: PilotSkillCommandSelected,
   ): Promise<CommandCanceled> {
     /* eslint-enable @typescript-eslint/no-unused-vars */
     return {

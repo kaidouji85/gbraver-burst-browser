@@ -30,7 +30,7 @@ export class PilotBustShotContainer {
   constructor(
     resources: Resources,
     pilotIds: PilotId[],
-    initialPilotId: PilotId
+    initialPilotId: PilotId,
   ) {
     this.#pilotId = initialPilotId;
     this.#root = document.createElement("div");

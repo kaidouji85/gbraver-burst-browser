@@ -21,7 +21,7 @@ import { enemyTsubasaHUD, playerTsubasaHUD } from "./tsubasa";
 export function playerHUDPilotObjects(
   resources: Resources,
   gameObjectAction: Observable<GameObjectAction>,
-  state: Player
+  state: Player,
 ): HUDPilotObjects {
   switch (state.pilot.id) {
     case PilotIds.SHINYA:
@@ -52,7 +52,7 @@ export function playerHUDPilotObjects(
 export function enemyHUDPilotObjects(
   resources: Resources,
   gameObjectAction: Observable<GameObjectAction>,
-  state: Player
+  state: Player,
 ): HUDPilotObjects {
   switch (state.pilot.id) {
     case PilotIds.SHINYA:

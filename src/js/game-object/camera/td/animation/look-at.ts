@@ -14,7 +14,7 @@ import type { Position } from "../position";
 export function lookAt(
   model: Battle3DCameraModel,
   position: Position,
-  duration: number
+  duration: number,
 ): Animate {
   return tween(model.target, (t) => t.to(position, duration));
 }

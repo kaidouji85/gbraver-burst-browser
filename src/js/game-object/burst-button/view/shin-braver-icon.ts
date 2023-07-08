@@ -18,7 +18,7 @@ export class ShinBraverIcon implements ArmdozerIcon {
     this.#group = new THREE.Group();
     const shinBraver =
       resources.textures.find(
-        (v) => v.id === TEXTURE_IDS.SHIN_BRAVER_BURST_BUTTON_ICON
+        (v) => v.id === TEXTURE_IDS.SHIN_BRAVER_BURST_BUTTON_ICON,
       )?.texture ?? new THREE.Texture();
     this.#mesh = new HorizontalAnimationMesh({
       texture: shinBraver,

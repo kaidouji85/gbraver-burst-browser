@@ -10,7 +10,7 @@ import { empty } from "./delay";
 export function all(...animations: Animate[]): Animate {
   const next = animations.reduce(
     (a, b) => (a._time < b._time ? b : a),
-    empty()
+    empty(),
   );
   const parallels = animations.filter((v) => v !== next);
   return empty().chain(next, ...parallels);

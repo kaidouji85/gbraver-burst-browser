@@ -16,7 +16,7 @@ import { RecoverBatterySounds } from "../sounds/recover-battery-sounds";
 export function popUp(
   model: RecoverBatteryModel,
   sounds: RecoverBatterySounds,
-  value: number
+  value: number,
 ): Animate {
   return show(model, sounds, value).chain(delay(600)).chain(hidden(model));
 }
@@ -32,7 +32,7 @@ export function popUp(
 export function show(
   model: RecoverBatteryModel,
   sounds: RecoverBatterySounds,
-  value: number
+  value: number,
 ): Animate {
   return process(() => {
     model.scale = 1.2;
@@ -46,9 +46,9 @@ export function show(
           opacity: 1,
           scale: 1,
         },
-        400
-      )
-    )
+        400,
+      ),
+    ),
   );
 }
 
@@ -65,7 +65,7 @@ export function hidden(model: RecoverBatteryModel): Animate {
         opacity: 0,
         scale: 1.1,
       },
-      200
-    )
+      200,
+    ),
   );
 }

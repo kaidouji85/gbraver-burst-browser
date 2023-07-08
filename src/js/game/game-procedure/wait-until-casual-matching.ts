@@ -15,12 +15,12 @@ import { GameProps } from "../game-props";
  */
 export async function waitUntilCasualMatching(
   props: Readonly<GameProps>,
-  action: SelectionComplete
+  action: SelectionComplete,
 ): Promise<BattleSDK> {
   try {
     props.domDialogBinder.bind(
       new MatchingDialog(props.resources),
-      matchingDialogConnector
+      matchingDialogConnector,
     );
     return await props.api.startCasualMatch(action.armdozerId, action.pilotId);
   } catch (e) {

@@ -56,7 +56,7 @@ export class GenesisBraver
   constructor(
     view: GenesisBraverView,
     resources: Resources,
-    gameAction: Observable<GameObjectAction>
+    gameAction: Observable<GameObjectAction>,
   ) {
     super();
     this.#view = view;

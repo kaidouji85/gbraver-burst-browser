@@ -19,16 +19,16 @@ export function straightPunch(model: ShinBraverModel): Animate {
         {
           frame: 1,
         },
-        150
-      )
+        150,
+      ),
     ),
     tween(model.position, (t) =>
       t.to(
         {
           x: "-80",
         },
-        150
-      )
-    )
+        150,
+      ),
+    ),
   );
 }

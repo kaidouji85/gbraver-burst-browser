@@ -26,7 +26,7 @@ type Ret = IsCasualMatchStarted | IsNotCasualMatchStarted;
  */
 export async function startCasualMatchIfNeeded(
   props: Readonly<GameProps>,
-  action: Readonly<SelectionComplete>
+  action: Readonly<SelectionComplete>,
 ): Promise<Ret> {
   if (props.inProgress.type !== "CasualMatch") {
     return { isStarted: false };

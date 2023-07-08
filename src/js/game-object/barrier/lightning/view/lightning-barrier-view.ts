@@ -22,7 +22,7 @@ export class LightningBarrierView {
 
   constructor(resources: Resources) {
     const textureResource = resources.textures.find(
-      (v) => v.id === TEXTURE_IDS.BARRIER_LIGHTNING
+      (v) => v.id === TEXTURE_IDS.BARRIER_LIGHTNING,
     );
     const texture = textureResource
       ? textureResource.texture

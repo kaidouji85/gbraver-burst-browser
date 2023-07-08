@@ -13,14 +13,14 @@ import type { FaderModel } from "../model/fader-model";
 export function opacity(
   value: FaderModel,
   opacity: number,
-  duration: number
+  duration: number,
 ): Animate {
   return tween(value, (t) =>
     t.to(
       {
         opacity: opacity,
       },
-      duration
-    )
+      duration,
+    ),
   );
 }

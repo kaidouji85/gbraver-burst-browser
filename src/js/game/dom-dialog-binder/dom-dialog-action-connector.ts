@@ -14,5 +14,5 @@ import type { GameAction } from "../game-actions";
  */
 export type DomDialogActionConnector<X extends DOMDialog> = (
   dialog: X,
-  gameAction: Subject<GameAction>
+  gameAction: Subject<GameAction>,
 ) => Unsubscribable[];

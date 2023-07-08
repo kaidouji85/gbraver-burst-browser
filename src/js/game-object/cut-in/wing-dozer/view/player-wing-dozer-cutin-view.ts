@@ -33,7 +33,7 @@ export class PlayerWingDozerCutInView implements WingDozerCutInView {
    */
   constructor(resources: Resources) {
     const burstUpResource = resources.textures.find(
-      (v) => v.id === TEXTURE_IDS.WING_DOZER_BURST_UP
+      (v) => v.id === TEXTURE_IDS.WING_DOZER_BURST_UP,
     );
     const burstUp = burstUpResource
       ? burstUpResource.texture
@@ -45,7 +45,7 @@ export class PlayerWingDozerCutInView implements WingDozerCutInView {
       maxAnimation: 4,
     });
     const burstDownResource = resources.textures.find(
-      (v) => v.id === TEXTURE_IDS.WING_DOZER_BURST_DOWN
+      (v) => v.id === TEXTURE_IDS.WING_DOZER_BURST_DOWN,
     );
     const burstDown = burstDownResource
       ? burstDownResource.texture
@@ -91,7 +91,7 @@ export class PlayerWingDozerCutInView implements WingDozerCutInView {
     activeMesh.setOpacity(model.opacity);
     activeMesh.animate(model.animation.frame);
     const disactiveMeshes = this.#getAllMeshes().filter(
-      (v) => v !== activeMesh
+      (v) => v !== activeMesh,
     );
     disactiveMeshes.forEach((v) => {
       v.setOpacity(0);

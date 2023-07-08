@@ -25,9 +25,9 @@ const resultIndicatorStory =
   (
     generator: (
       resources: Resources,
-      gameObjectAction: Observable<GameObjectAction>
+      gameObjectAction: Observable<GameObjectAction>,
     ) => ResultIndicator,
-    fn: (indicator: ResultIndicator) => void
+    fn: (indicator: ResultIndicator) => void,
   ) =>
   () => {
     const stub = new HUDGameObjectStub(({ resources, gameObjectAction }) => {

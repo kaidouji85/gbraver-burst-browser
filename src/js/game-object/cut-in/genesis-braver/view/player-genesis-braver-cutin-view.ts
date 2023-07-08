@@ -41,7 +41,7 @@ export class PlayerGenesisBraverCutInView implements GenesisBraverCutInView {
   /** @override */
   engage(model: GenesisBraverCutInModel, preRender: PreRender): void {
     const currentMesh = this.#meshes.find(
-      (v) => v.type === model.animation.type
+      (v) => v.type === model.animation.type,
     );
     if (currentMesh) {
       currentMesh.mesh.animate(model.animation.frame);

@@ -22,13 +22,13 @@ export function open(model: TimeScaleButtonModel, timeScale: number): Animate {
           {
             opacity: 1,
           },
-          200
-        )
-      )
+          200,
+        ),
+      ),
     )
     .chain(
       process(() => {
         model.isPushNotifierDisabled = false;
-      })
+      }),
     );
 }

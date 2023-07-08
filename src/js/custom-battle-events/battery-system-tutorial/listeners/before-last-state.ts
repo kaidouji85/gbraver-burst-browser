@@ -19,7 +19,7 @@ import { playerAttack } from "../stories/player-attack";
  */
 export async function beforeLastState(
   props: Readonly<LastState>,
-  state: Readonly<BatterySystemTutorialState>
+  state: Readonly<BatterySystemTutorialState>,
 ): Promise<BatterySystemTutorialState> {
   const extractedGameEnd = extractGameEnd(props.update);
   if (extractedGameEnd) {

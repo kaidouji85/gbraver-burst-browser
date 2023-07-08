@@ -59,7 +59,7 @@ export class LightningDozer
   constructor(
     resources: Resources,
     gameObjectAction: Observable<GameObjectAction>,
-    view: LightningDozerView
+    view: LightningDozerView,
   ) {
     super();
     this.#model = createInitialValue();

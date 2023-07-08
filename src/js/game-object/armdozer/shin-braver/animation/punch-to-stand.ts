@@ -7,7 +7,7 @@ import { ShinBraverSounds } from "../sounds/shin-braver-sounds";
 /** ストレートパンチ -> 立ち */
 export function punchToStand(
   model: ShinBraverModel,
-  sounds: ShinBraverSounds
+  sounds: ShinBraverSounds,
 ): Animate {
   return process(() => {
     model.animation.type = "SP_TO_STAND";
@@ -20,22 +20,22 @@ export function punchToStand(
           {
             frame: 1,
           },
-          400
-        )
+          400,
+        ),
       ),
       tween(model.position, (t) =>
         t.to(
           {
             x: "+80",
           },
-          400
-        )
-      )
+          400,
+        ),
+      ),
     )
     .chain(
       process(() => {
         model.animation.type = "STAND";
         model.animation.frame = 0;
-      })
+      }),
     );
 }

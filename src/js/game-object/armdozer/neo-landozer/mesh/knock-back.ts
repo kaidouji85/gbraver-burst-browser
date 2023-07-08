@@ -29,7 +29,7 @@ export function neoLandozerKnockBack(resources: Resources): ArmdozerAnimation {
  * @return メッシュ
  */
 export function neoLandozerActiveKnockBack(
-  resources: Resources
+  resources: Resources,
 ): ArmdozerAnimation {
   return createNeoLandozerActiveMesh({
     resources,
@@ -44,7 +44,7 @@ export function neoLandozerActiveKnockBack(
  * @return メッシュ
  */
 export function neoLandozerOutlineKnockBack(
-  resources: Resources
+  resources: Resources,
 ): ArmdozerAnimation {
   return createNeoLandozerOutlineMesh({
     resources,

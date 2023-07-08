@@ -12,7 +12,7 @@ import { CommandCanceled } from "../custom-battle-event";
  */
 export async function doPilotSkillEventIfNeeded(
   props: Readonly<BattleSceneProps>,
-  pilot: Readonly<PilotSkillCommand>
+  pilot: Readonly<PilotSkillCommand>,
 ): Promise<CommandCanceled> {
   return props.customBattleEvent
     ? await props.customBattleEvent.onPilotSkillCommandSelected({

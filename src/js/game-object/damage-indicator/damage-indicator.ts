@@ -23,7 +23,7 @@ export class DamageIndicator {
    */
   constructor(
     view: DamageIndicatorView,
-    gameObjectAction: Observable<GameObjectAction>
+    gameObjectAction: Observable<GameObjectAction>,
   ) {
     this.#view = view;
     this.#model = createInitialValue();

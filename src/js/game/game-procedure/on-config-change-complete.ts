@@ -13,7 +13,7 @@ import { startTitle } from "./start-title";
  */
 export async function onConfigChangeComplete(
   props: Readonly<GameProps>,
-  action: ConfigChangeComplete
+  action: ConfigChangeComplete,
 ): Promise<void> {
   await props.fader.fadeOut();
   const origin = await props.config.load();

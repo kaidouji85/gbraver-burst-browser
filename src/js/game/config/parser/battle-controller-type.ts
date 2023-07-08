@@ -15,7 +15,7 @@ export const BattleControllerTypeSchema = z.union([
  * @return パース結果
  */
 export function parseBattleControllerType(
-  origin: unknown
+  origin: unknown,
 ): BattleControllerType | null {
   const result = BattleControllerTypeSchema.safeParse(origin);
   return result.success ? result.data : null;

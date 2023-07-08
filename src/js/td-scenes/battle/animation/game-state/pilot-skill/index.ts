@@ -23,7 +23,7 @@ import { tsubasaAnimation } from "./tsubasa";
  */
 export function pilotSkillAnimation(
   props: StateAnimationProps,
-  gameState: GameStateX<PilotSkillEffect>
+  gameState: GameStateX<PilotSkillEffect>,
 ): Animate {
   const param = toPilotSkillAnimationParam(props, gameState);
 

@@ -14,7 +14,7 @@ import { PlayerGenesisBraverView } from "./view/player-genesis-braver-view";
  */
 export function PlayerGenesisBraver(
   resources: Resources,
-  gameObjectAction: Observable<GameObjectAction>
+  gameObjectAction: Observable<GameObjectAction>,
 ): GenesisBraver {
   const view = new PlayerGenesisBraverView(resources);
   return new GenesisBraver(view, resources, gameObjectAction);
@@ -28,7 +28,7 @@ export function PlayerGenesisBraver(
  */
 export function EnemyGenesisBraver(
   resources: Resources,
-  gameObjectAction: Observable<GameObjectAction>
+  gameObjectAction: Observable<GameObjectAction>,
 ): GenesisBraver {
   const view = new EnemyGenesisBraverView(resources);
   return new GenesisBraver(view, resources, gameObjectAction);

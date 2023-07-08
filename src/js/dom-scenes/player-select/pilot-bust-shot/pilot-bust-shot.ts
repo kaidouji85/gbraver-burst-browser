@@ -72,7 +72,7 @@ export class PilotBustShot {
         duration: 200,
         fill: "forwards",
         easing: "ease",
-      }
+      },
     );
     return waitFinishAnimation(animation);
   }
@@ -96,7 +96,7 @@ export class PilotBustShot {
         duration: 200,
         fill: "forwards",
         easing: "ease",
-      }
+      },
     );
     return waitFinishAnimation(animation);
   }

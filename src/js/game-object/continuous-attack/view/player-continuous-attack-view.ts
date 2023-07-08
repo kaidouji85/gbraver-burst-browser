@@ -20,7 +20,7 @@ export class PlayerContinuousAttackView implements ContinuousAttackView {
 
   constructor(resources: Resources) {
     const playerTurnResource = resources.textures.find(
-      (v) => v.id === TEXTURE_IDS.CONTINUOUS_ATTACK
+      (v) => v.id === TEXTURE_IDS.CONTINUOUS_ATTACK,
     );
     const playerTurn = playerTurnResource
       ? playerTurnResource.texture

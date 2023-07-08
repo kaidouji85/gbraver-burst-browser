@@ -33,7 +33,7 @@ export function tweenDuration(tween: TWEEN.Tween<any>): number {
 export function scaleTweenDuration(
   tween: TWEEN.Tween<any>,
   scale: number,
-  scaledTweens: TWEEN.Tween<any>[] = []
+  scaledTweens: TWEEN.Tween<any>[] = [],
 ): void {
   /* eslint-enable */
   if (scaledTweens.includes(tween)) {

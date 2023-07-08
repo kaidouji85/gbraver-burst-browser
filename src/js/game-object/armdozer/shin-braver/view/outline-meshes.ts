@@ -13,7 +13,7 @@ import { AnimationMeshMapping } from "./animation-mesh-mapping";
  * @return 生成結果
  */
 export function createOutlineMeshes(
-  resources: Resources
+  resources: Resources,
 ): AnimationMeshMapping[] {
   return [
     {

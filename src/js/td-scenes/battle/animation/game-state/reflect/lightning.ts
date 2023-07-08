@@ -19,9 +19,9 @@ export function lightning(param: ReflectAnimationParam): Animate {
           .chain(delay(800))
           .chain(param.damaged.sprite.knockBackToStand()),
         param.damaged.td.damageIndicator.popUp(param.effect.damage),
-        param.damaged.hud.gauge.hp(param.damaged.state.armdozer.hp)
-      )
-    )
+        param.damaged.hud.gauge.hp(param.damaged.state.armdozer.hp),
+      ),
+    ),
   );
 }
 
@@ -43,8 +43,8 @@ export function deathLightning(param: ReflectAnimationParam): Animate {
       all(
         param.damaged.sprite.down(),
         param.damaged.td.damageIndicator.popUp(param.effect.damage),
-        param.damaged.hud.gauge.hp(param.damaged.state.armdozer.hp)
-      )
-    )
+        param.damaged.hud.gauge.hp(param.damaged.state.armdozer.hp),
+      ),
+    ),
   );
 }

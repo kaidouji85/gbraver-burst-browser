@@ -26,7 +26,7 @@ import type { StateAnimationProps } from "../state-animation-props";
 export type BurstAnimationParamX<
   TD_ARMDOZER extends TDArmdozerObjects,
   HUD_ARMDOZER extends HUDArmdozerObjects,
-  BURST extends Burst
+  BURST extends Burst,
 > = {
   /** バースト発動側ステート */
   burstPlayerState: PlayerState;
@@ -81,26 +81,26 @@ export type BurstAnimationParam = BurstAnimationParamX<
  */
 export function toBurstAnimationParam(
   props: StateAnimationProps,
-  gameState: GameStateX<BurstEffect>
+  gameState: GameStateX<BurstEffect>,
 ): BurstAnimationParam | null | undefined {
   const effect: BurstEffect = gameState.effect;
   const burstPlayerState = gameState.players.find(
-    (v) => v.playerId === effect.burstPlayer
+    (v) => v.playerId === effect.burstPlayer,
   );
   const burstPlayerTD = props.view.td.players.find(
-    (v) => v.playerId === effect.burstPlayer
+    (v) => v.playerId === effect.burstPlayer,
   );
   const burstPlayerHUD = props.view.hud.players.find(
-    (v) => v.playerId === effect.burstPlayer
+    (v) => v.playerId === effect.burstPlayer,
   );
   const burstArmdozerHUD = props.view.hud.armdozers.find(
-    (v) => v.playerId === effect.burstPlayer
+    (v) => v.playerId === effect.burstPlayer,
   );
   const burstArmdozerTD = props.view.td.armdozerObjects.find(
-    (v) => v.playerId === effect.burstPlayer
+    (v) => v.playerId === effect.burstPlayer,
   );
   const anotherArmdozerTD = props.view.td.armdozerObjects.find(
-    (v) => v.playerId !== effect.burstPlayer
+    (v) => v.playerId !== effect.burstPlayer,
   );
 
   if (

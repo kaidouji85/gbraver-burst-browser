@@ -10,14 +10,14 @@ import type { ConfigProps } from "../props";
 export function parseConfig(props: ConfigProps): GbraverBurstBrowserConfig {
   const foundBattleAnimationTimeScale =
     props.battleAnimationTimeScaleSelector.querySelector(
-      'input[type="radio"]:checked'
+      'input[type="radio"]:checked',
     );
   const battleAnimationTimeScale =
     foundBattleAnimationTimeScale instanceof HTMLInputElement
       ? foundBattleAnimationTimeScale.value
       : null;
   const foundWebGLPixelRatio = props.webGLPixelRatioSelector.querySelector(
-    'input[type="radio"]:checked'
+    'input[type="radio"]:checked',
   );
   const webGLPixelRatio =
     foundWebGLPixelRatio instanceof HTMLInputElement
@@ -25,7 +25,7 @@ export function parseConfig(props: ConfigProps): GbraverBurstBrowserConfig {
       : null;
   const foundBattleControllerType =
     props.battleControllerTypeSelector.querySelector(
-      'input[type="radio"]:checked'
+      'input[type="radio"]:checked',
     );
   const battleControllerType =
     foundBattleControllerType instanceof HTMLInputElement

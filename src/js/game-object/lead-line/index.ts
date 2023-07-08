@@ -15,7 +15,7 @@ const OPACITY = 0.8;
  * @return 引き出し線
  */
 export function batterySelectorLeadLine(
-  gameObjectAction: Observable<GameObjectAction>
+  gameObjectAction: Observable<GameObjectAction>,
 ): LeadLine {
   const view = new LeadLineView(COLOR, 90, OPACITY);
   return new LeadLine(view, gameObjectAction);
@@ -27,7 +27,7 @@ export function batterySelectorLeadLine(
  * @return 引き出し線
  */
 export function burstButtonLeadLine(
-  gameObjectAction: Observable<GameObjectAction>
+  gameObjectAction: Observable<GameObjectAction>,
 ): LeadLine {
   const view = new LeadLineView(COLOR, 60, OPACITY);
   return new LeadLine(view, gameObjectAction);
@@ -39,7 +39,7 @@ export function burstButtonLeadLine(
  * @return 引き出し線
  */
 export function pilotButtonLeadLine(
-  gameObjectAction: Observable<GameObjectAction>
+  gameObjectAction: Observable<GameObjectAction>,
 ): LeadLine {
   const view = new LeadLineView(COLOR, 60, OPACITY);
   return new LeadLine(view, gameObjectAction);

@@ -9,7 +9,7 @@ import type { TitleProps } from "../props";
  */
 export function onPushDeleteAccount(
   props: TitleProps,
-  action: Readonly<PushDOM>
+  action: Readonly<PushDOM>,
 ): void {
   action.event.preventDefault();
   props.changeValue.play();

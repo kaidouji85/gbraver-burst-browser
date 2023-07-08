@@ -18,7 +18,7 @@ export class HpNumber {
   constructor(resources: Resources) {
     this.#group = new THREE.Group();
     const hpNumberResource = resources.textures.find(
-      (v) => v.id === TEXTURE_IDS.HP_NUMBER
+      (v) => v.id === TEXTURE_IDS.HP_NUMBER,
     );
     const hpNumber = hpNumberResource
       ? hpNumberResource.texture

@@ -10,7 +10,7 @@ import type { ConfigChangedDialogProps } from "../props";
  */
 export function onCloserPush(
   props: ConfigChangedDialogProps,
-  action: Readonly<PushDOM>
+  action: Readonly<PushDOM>,
 ): void {
   action.event.preventDefault();
   action.event.stopPropagation();

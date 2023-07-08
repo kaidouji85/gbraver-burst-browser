@@ -30,7 +30,7 @@ export class PowerUp {
   constructor(
     view: PowerUpView,
     resources: Resources,
-    gameObjectAction: Observable<GameObjectAction>
+    gameObjectAction: Observable<GameObjectAction>,
   ) {
     this.#model = createInitialValue();
     this.#view = view;

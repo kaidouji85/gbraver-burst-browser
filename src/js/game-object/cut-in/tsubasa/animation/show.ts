@@ -24,22 +24,22 @@ export function show(model: TsubasaModel, sounds: TsubasaSounds): Animate {
             {
               opacity: 1,
             },
-            500
-          )
+            500,
+          ),
         ),
         tween(model.position, (t) =>
           t.to(
             {
               x: 0,
             },
-            500
-          )
-        )
-      )
+            500,
+          ),
+        ),
+      ),
     )
     .chain(
       process(() => {
         sounds.benefitEffect.play();
-      })
+      }),
     );
 }

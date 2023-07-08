@@ -15,23 +15,23 @@ import { deathLightning, lightning } from "./lightning";
  */
 export function reflectAnimation(
   props: StateAnimationProps,
-  gameState: GameStateX<Reflect>
+  gameState: GameStateX<Reflect>,
 ): Animate {
   const effect: Reflect = gameState.effect;
   const stateOfDamaged = gameState.players.find(
-    (v) => v.playerId === effect.damagedPlayer
+    (v) => v.playerId === effect.damagedPlayer,
   );
   const tdArmdozerOfDamaged = props.view.td.armdozerObjects.find(
-    (v) => v.playerId === effect.damagedPlayer
+    (v) => v.playerId === effect.damagedPlayer,
   );
   const tdPlayerOfDamaged = props.view.td.players.find(
-    (v) => v.playerId === effect.damagedPlayer
+    (v) => v.playerId === effect.damagedPlayer,
   );
   const hudPlayerOfDamaged = props.view.hud.players.find(
-    (v) => v.playerId === effect.damagedPlayer
+    (v) => v.playerId === effect.damagedPlayer,
   );
   const hudPlayerOfReflecting = props.view.hud.players.find(
-    (v) => v.playerId !== effect.damagedPlayer
+    (v) => v.playerId !== effect.damagedPlayer,
   );
 
   if (

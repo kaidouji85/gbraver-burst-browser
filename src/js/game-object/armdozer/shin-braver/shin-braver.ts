@@ -59,7 +59,7 @@ export class ShinBraver extends EmptyArmDozerSprite implements ArmDozerSprite {
   constructor(
     view: ShinBraverView,
     resources: Resources,
-    gameObjectAction: Observable<GameObjectAction>
+    gameObjectAction: Observable<GameObjectAction>,
   ) {
     super();
     this.#model = createInitialValue();

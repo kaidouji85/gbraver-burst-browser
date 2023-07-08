@@ -96,7 +96,7 @@ const gotoNPCBattleStage = async (
   props: Readonly<GameProps>,
   player: Player,
   stage: NPCBattleStage,
-  level: number
+  level: number,
 ) => {
   props.domFloaters.hiddenPostBattle();
   await startNPCBattleStage(props, player, stage, level);
@@ -113,7 +113,7 @@ const gotoNPCBattleStage = async (
 const gotoTutorial = async (
   props: Readonly<GameProps>,
   level: number,
-  stage: TutorialStage
+  stage: TutorialStage,
 ) => {
   props.domFloaters.hiddenPostBattle();
   await startTutorial(props, level, stage);
@@ -141,7 +141,7 @@ const gotoTutorialSelector = async (props: Readonly<GameProps>) => {
  */
 export async function onPostBattleAction(
   props: GameProps,
-  action: PostBattleAction
+  action: PostBattleAction,
 ): Promise<void> {
   const npcBattle = createNPCBattle(props.inProgress);
 
@@ -169,7 +169,7 @@ export async function onPostBattleAction(
       props,
       npcBattle.player,
       npcBattle.stage,
-      npcBattle.level
+      npcBattle.level,
     );
     return;
   }

@@ -29,7 +29,7 @@ export function shinBraverFrontStep(resources: Resources): ArmdozerAnimation {
  * @return メッシュ
  */
 export function shinBraverActiveFrontStep(
-  resources: Resources
+  resources: Resources,
 ): ArmdozerAnimation {
   return createShinBraverActiveMesh({
     resources,
@@ -44,7 +44,7 @@ export function shinBraverActiveFrontStep(
  * @return メッシュ
  */
 export function shinBraverOutlineFrontStep(
-  resources: Resources
+  resources: Resources,
 ): ArmdozerAnimation {
   return createShinBraverOutlineMesh({
     resources,

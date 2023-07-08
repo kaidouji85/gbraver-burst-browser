@@ -8,7 +8,7 @@ import { RejectPrivateMatchEntryDialogProps } from "../props";
  */
 export function onBackgroundPush(
   props: RejectPrivateMatchEntryDialogProps,
-  action: PushDOM
+  action: PushDOM,
 ): void {
   props.exclusive.execute(async () => {
     action.event.stopPropagation();

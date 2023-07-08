@@ -29,7 +29,7 @@ export function shinBraverKnockBack(resources: Resources): ArmdozerAnimation {
  * @return メッシュ
  */
 export function shinBraverActiveKnockBack(
-  resources: Resources
+  resources: Resources,
 ): ArmdozerAnimation {
   return createShinBraverActiveMesh({
     resources,
@@ -44,7 +44,7 @@ export function shinBraverActiveKnockBack(
  * @return メッシュ
  */
 export function shinBraverOutlineKnockBack(
-  resources: Resources
+  resources: Resources,
 ): ArmdozerAnimation {
   return createShinBraverOutlineMesh({
     resources,

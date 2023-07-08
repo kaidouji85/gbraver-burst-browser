@@ -56,7 +56,7 @@ export class WingDozer extends EmptyArmDozerSprite implements ArmDozerSprite {
   constructor(
     view: WingDozerView,
     resources: Resources,
-    gameObjectAction: Observable<GameObjectAction>
+    gameObjectAction: Observable<GameObjectAction>,
   ) {
     super();
     this.#model = createInitialValue();

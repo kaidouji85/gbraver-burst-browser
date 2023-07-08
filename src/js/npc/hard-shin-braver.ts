@@ -25,18 +25,18 @@ const attackRoutine: SimpleRoutine = (data) => {
   const burst = data.commands.find((v) => v.type === "BURST_COMMAND");
   const allBattery = data.commands.find(
     (v) =>
-      v.type === "BATTERY_COMMAND" && v.battery === data.enemy.armdozer.battery
+      v.type === "BATTERY_COMMAND" && v.battery === data.enemy.armdozer.battery,
   );
   const allBatteryMinusOne = data.commands.find(
     (v) =>
       v.type === "BATTERY_COMMAND" &&
-      v.battery === data.enemy.armdozer.battery - 1
+      v.battery === data.enemy.armdozer.battery - 1,
   );
   const canBeatDownWithAllBattery = canBeatDown(
     data.enemy,
     data.enemy.armdozer.battery,
     data.player,
-    data.player.armdozer.battery
+    data.player.armdozer.battery,
   );
 
   if (burst && allBattery) {
@@ -67,13 +67,13 @@ const defenseRoutine: SimpleRoutine = (data) => {
   const burst = data.commands.find((v) => v.type === "BURST_COMMAND");
   const allBattery = data.commands.find(
     (v) =>
-      v.type === "BATTERY_COMMAND" && v.battery === data.enemy.armdozer.battery
+      v.type === "BATTERY_COMMAND" && v.battery === data.enemy.armdozer.battery,
   );
   const battery3 = data.commands.find(
-    (v) => v.type === "BATTERY_COMMAND" && v.battery === 3
+    (v) => v.type === "BATTERY_COMMAND" && v.battery === 3,
   );
   const battery1 = data.commands.find(
-    (v) => v.type === "BATTERY_COMMAND" && v.battery === 1
+    (v) => v.type === "BATTERY_COMMAND" && v.battery === 1,
   );
 
   if (burst && data.enemy.armdozer.battery === 0) {

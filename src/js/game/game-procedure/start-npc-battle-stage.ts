@@ -24,7 +24,7 @@ export async function startNPCBattleStage(
   props: Readonly<GameProps>,
   player: Player,
   stage: NPCBattleStage,
-  level: number
+  level: number,
 ) {
   const npcBattle = new NPCBattleRoom(player, stage.npc);
   await Promise.all([

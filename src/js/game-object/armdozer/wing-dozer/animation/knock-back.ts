@@ -20,9 +20,9 @@ export function knockBack(model: WingDozerModel): Animate {
           {
             x: "+20",
           },
-          100
-        )
-      )
+          100,
+        ),
+      ),
     )
     .chain(
       tween(model.position, (t) =>
@@ -30,8 +30,8 @@ export function knockBack(model: WingDozerModel): Animate {
           {
             x: "-20",
           },
-          100
-        )
-      )
+          100,
+        ),
+      ),
     );
 }

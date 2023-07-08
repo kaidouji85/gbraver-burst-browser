@@ -14,7 +14,7 @@ import { LightningDozerSounds } from "../sounds/lightning-dozer-sounds";
  */
 export function guts(
   model: LightningDozerModel,
-  sounds: LightningDozerSounds
+  sounds: LightningDozerSounds,
 ): Animate {
   return process(() => {
     model.animation.type = "GUTS_UP";
@@ -27,9 +27,9 @@ export function guts(
           {
             frame: 1,
           },
-          200
-        )
-      )
+          200,
+        ),
+      ),
     )
     .chain(delay(600))
     .chain(
@@ -37,7 +37,7 @@ export function guts(
         model.animation.type = "GUTS_DOWN";
         model.animation.frame = 0;
         sounds.motor.play();
-      })
+      }),
     )
     .chain(
       tween(model.animation, (t) =>
@@ -45,8 +45,8 @@ export function guts(
           {
             frame: 1,
           },
-          200
-        )
-      )
+          200,
+        ),
+      ),
     );
 }

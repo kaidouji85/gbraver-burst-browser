@@ -21,17 +21,17 @@ export function show(model: TurnStartModel): Animate {
           {
             opacity: 1,
           },
-          400
-        )
+          400,
+        ),
       ),
       tween(model.position, (t) =>
         t.to(
           {
             x: 0,
           },
-          400
-        )
-      )
-    )
+          400,
+        ),
+      ),
+    ),
   );
 }

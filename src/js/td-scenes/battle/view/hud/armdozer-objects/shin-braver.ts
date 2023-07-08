@@ -57,7 +57,7 @@ export class ShinBraverHUD implements HUDArmdozerObjects {
 export function playerShinBraverHUD(
   resources: Resources,
   gameObjectAction: Observable<GameObjectAction>,
-  state: Player
+  state: Player,
 ): HUDArmdozerObjects {
   return new ShinBraverHUD({
     playerId: state.playerId,
@@ -76,7 +76,7 @@ export function playerShinBraverHUD(
 export function enemyShinBraverHUD(
   resources: Resources,
   gameObjectAction: Observable<GameObjectAction>,
-  state: Player
+  state: Player,
 ): HUDArmdozerObjects {
   return new ShinBraverHUD({
     playerId: state.playerId,

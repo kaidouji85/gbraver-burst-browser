@@ -22,9 +22,9 @@ export function popUp(model: ReflectIndocatorModel): Animate {
             opacity: 1,
             scale: 1,
           },
-          400
-        )
-      )
+          400,
+        ),
+      ),
     )
     .chain(delay(600))
     .chain(
@@ -34,8 +34,8 @@ export function popUp(model: ReflectIndocatorModel): Animate {
             opacity: 0,
             scale: 1.1,
           },
-          200
-        )
-      )
+          200,
+        ),
+      ),
     );
 }

@@ -31,7 +31,7 @@ export class RaitoCutIn {
   constructor(
     view: RaitoView,
     resources: Resources,
-    gameObjectAction: Observable<GameObjectAction>
+    gameObjectAction: Observable<GameObjectAction>,
   ) {
     this.#model = createInitialValue();
     this.#view = view;

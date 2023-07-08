@@ -31,7 +31,7 @@ export class PilotButton {
   constructor(
     resources: Resources,
     pilotIcon: PilotIcon,
-    gameObjectAction: Observable<GameObjectAction>
+    gameObjectAction: Observable<GameObjectAction>,
   ) {
     this.#model = createInitialValue();
     this.#sounds = new PilotButtonSounds(resources);
@@ -43,8 +43,8 @@ export class PilotButton {
           () =>
             !this.#model.isPushNotifierDisabled &&
             !this.#model.disabled &&
-            this.#model.canPilot
-        )
+            this.#model.canPilot,
+        ),
       );
     this.#unsubscriber = gameObjectAction.subscribe((action) => {
       if (action.type === "PreRender") {

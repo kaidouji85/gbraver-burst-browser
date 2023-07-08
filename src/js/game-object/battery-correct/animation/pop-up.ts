@@ -24,17 +24,17 @@ export function popUp(model: BatteryCorrectModel, value: number): Animate {
           {
             y: "+10",
           },
-          1000
-        )
+          1000,
+        ),
       ),
       tween(model, (t) =>
         t.to(
           {
             opacity: 0,
           },
-          1000
-        )
-      )
-    )
+          1000,
+        ),
+      ),
+    ),
   );
 }

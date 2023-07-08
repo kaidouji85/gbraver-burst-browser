@@ -30,7 +30,7 @@ import { wingDozerBurst } from "./wingdozer";
  */
 export function burstAnimation(
   props: StateAnimationProps,
-  gameState: GameStateX<BurstEffect>
+  gameState: GameStateX<BurstEffect>,
 ): Animate {
   const param = toBurstAnimationParam(props, gameState);
 

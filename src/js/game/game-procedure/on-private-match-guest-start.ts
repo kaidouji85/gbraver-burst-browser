@@ -11,7 +11,7 @@ import { loadFullResource } from "./load-full-resource";
  * @param props ゲームプロパティ
  */
 export async function onPrivateMatchGuestStart(
-  props: GameProps
+  props: GameProps,
 ): Promise<void> {
   props.domDialogBinder.hidden();
   if (!props.isFullResourceLoaded) {

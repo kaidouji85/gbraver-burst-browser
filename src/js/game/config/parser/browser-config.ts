@@ -11,12 +11,12 @@ import { WebGLPixelRatioSchema } from "./web-gl-pixel-ratio";
 export const BrowserConfigSchema = z.object({
   webGLPixelRatio: WebGLPixelRatioSchema.catch(DefaultConfig.webGLPixelRatio),
   battleAnimationTimeScale: BattleAnimationTimeScaleSchema.catch(
-    DefaultConfig.battleAnimationTimeScale
+    DefaultConfig.battleAnimationTimeScale,
   ),
   bgmVolume: SoundVolumeSchema.catch(DefaultConfig.bgmVolume),
   seVolume: SoundVolumeSchema.catch(DefaultConfig.seVolume),
   battleControllerType: BattleControllerTypeSchema.catch(
-    DefaultConfig.battleControllerType
+    DefaultConfig.battleControllerType,
   ),
 });
 

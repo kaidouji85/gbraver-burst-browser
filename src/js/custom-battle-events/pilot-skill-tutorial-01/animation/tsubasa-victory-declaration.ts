@@ -8,7 +8,7 @@ import { CustomBattleEventProps } from "../../../td-scenes/battle/custom-battle-
  * @return アニメーション
  */
 export function tsubasaVictoryDeclaration(
-  props: Readonly<CustomBattleEventProps>
+  props: Readonly<CustomBattleEventProps>,
 ): Animate {
   const messageWindow = props.view.dom.enemyCryMessageWindow;
   return process(() => {

@@ -9,13 +9,13 @@ import { BattleSceneView } from "../view";
  * @return アニメーションが完了したら発火するPromise
  */
 export function decisionByMiniController(
-  view: Readonly<BattleSceneView>
+  view: Readonly<BattleSceneView>,
 ): Animate {
   return all(
     view.dom.miniController
       .decided()
       .chain(delay(200))
       .chain(view.dom.miniController.hidden()),
-    view.hud.gameObjects.timeScaleButton.close()
+    view.hud.gameObjects.timeScaleButton.close(),
   );
 }

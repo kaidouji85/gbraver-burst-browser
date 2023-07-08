@@ -106,7 +106,7 @@ export class PilotSelector {
   constructor(
     resources: Resources,
     pilotIds: PilotId[],
-    initialPilotId: PilotId
+    initialPilotId: PilotId,
   ) {
     this.#pilotId = initialPilotId;
     this.#exclusive = new Exclusive();
@@ -146,7 +146,7 @@ export class PilotSelector {
       ...this.#pilotIcons.map((v) =>
         v.icon.notifySelection().subscribe(() => {
           this.#onPilotChange(v.pilotId);
-        })
+        }),
       ),
       domPushStream(this.#okButton).subscribe((action) => {
         this.#onOkButtonPush(action);

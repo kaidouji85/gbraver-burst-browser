@@ -39,7 +39,7 @@ export type GenerateParams = {
  * @return 生成結果
  */
 export function createMessageWindowProps(
-  params: GenerateParams
+  params: GenerateParams,
 ): MessageWindowProps {
   const ids = {
     messages: domUuid(),

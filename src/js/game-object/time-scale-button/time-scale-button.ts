@@ -33,7 +33,7 @@ export class TimeScaleButton {
    */
   constructor(
     resources: Resources,
-    gameObjectAction: Observable<GameObjectAction>
+    gameObjectAction: Observable<GameObjectAction>,
   ) {
     this.#model = createInitialValue();
     this.#view = new TimeScaleButtonView(resources, gameObjectAction);

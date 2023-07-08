@@ -27,7 +27,7 @@ export class GenesisBraverCutIn implements HUDTracking {
    */
   constructor(
     view: GenesisBraverCutInView,
-    gameObjectAction: Observable<GameObjectAction>
+    gameObjectAction: Observable<GameObjectAction>,
   ) {
     this.#model = createInitialValue();
     this.#view = view;

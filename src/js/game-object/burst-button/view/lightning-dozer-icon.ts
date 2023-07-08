@@ -18,7 +18,7 @@ export class LightningDozerIcon implements ArmdozerIcon {
     this.#group = new THREE.Group();
     const lightningDozer =
       resources.textures.find(
-        (v) => v.id === TEXTURE_IDS.LIGHTNING_DOZER_BURST_BUTTON_ICON
+        (v) => v.id === TEXTURE_IDS.LIGHTNING_DOZER_BURST_BUTTON_ICON,
       )?.texture ?? new THREE.Texture();
     this.#mesh = new HorizontalAnimationMesh({
       texture: lightningDozer,

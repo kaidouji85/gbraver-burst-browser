@@ -28,7 +28,7 @@ export function genesisBraverBurstUp(resources: Resources): ArmdozerAnimation {
  * @return 生成結果
  */
 export function genesisBraverActiveBurstUp(
-  resources: Resources
+  resources: Resources,
 ): ArmdozerAnimation {
   return createGenesisBraverActiveMesh({
     resources,

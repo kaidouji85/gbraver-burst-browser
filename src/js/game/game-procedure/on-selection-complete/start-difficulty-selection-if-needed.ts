@@ -11,7 +11,7 @@ import { GameProps } from "../../game-props";
  */
 export async function startDifficultySelectionIfNeeded(
   props: Readonly<GameProps>,
-  action: Readonly<SelectionComplete>
+  action: Readonly<SelectionComplete>,
 ): Promise<boolean> {
   if (props.inProgress.type !== "NPCBattle") {
     return false;
@@ -24,7 +24,7 @@ export async function startDifficultySelectionIfNeeded(
   };
   props.domDialogBinder.bind(
     new DifficultyDialog(props.resources),
-    difficultyDialogConnector
+    difficultyDialogConnector,
   );
   return true;
 }

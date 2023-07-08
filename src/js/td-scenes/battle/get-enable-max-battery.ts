@@ -9,7 +9,7 @@ import type { Command } from "gbraver-burst-core";
 export function getEnableMaxBattery(commands: Command[]): number {
   return commands
     .map((command) =>
-      command.type === "BATTERY_COMMAND" ? command.battery : 0
+      command.type === "BATTERY_COMMAND" ? command.battery : 0,
     )
     .reduce((a, b) => Math.max(a, b), 0);
 }

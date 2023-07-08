@@ -6,7 +6,7 @@
  */
 export function getBatteryGaugeUnitBrightness(
   gaugeUnitValue: number,
-  battery: number
+  battery: number,
 ): number {
   return gaugeUnitValue <= battery ? 1 : 0;
 }

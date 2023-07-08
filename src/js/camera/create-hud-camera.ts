@@ -15,6 +15,6 @@ export function createHUDCamera(): THREE.OrthographicCamera {
     height / 2,
     -height / 2,
     0,
-    30
+    30,
   );
 }

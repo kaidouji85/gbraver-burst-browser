@@ -14,11 +14,11 @@ import { startPrivateMatchHostIfNeeded } from "./start-private-match-host-if-nee
  */
 export async function onSelectionComplete(
   props: GameProps,
-  action: Readonly<SelectionComplete>
+  action: Readonly<SelectionComplete>,
 ): Promise<void> {
   const isDifficultySelectionStarted = await startDifficultySelectionIfNeeded(
     props,
-    action
+    action,
   );
   if (isDifficultySelectionStarted) {
     return;

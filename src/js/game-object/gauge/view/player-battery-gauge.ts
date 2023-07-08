@@ -22,7 +22,7 @@ export class PlayerBatteryGauge {
     this.#group = new THREE.Group();
 
     this.#gaugeList = R.times((v) => v + 1, BatteryLimit).map(
-      (v) => new BatteryGaugeUnit(resources, v)
+      (v) => new BatteryGaugeUnit(resources, v),
     );
     this.#gaugeList.forEach((gauge, index) => {
       gauge.getObject3D().position.x =
@@ -47,7 +47,7 @@ export class PlayerBatteryGauge {
   engage(batteryList: BatteryGaugeUnitModel[]): void {
     batteryList.forEach((v) => {
       const gauge = this.#gaugeList.find(
-        (gauge) => gauge.getValue() === v.value
+        (gauge) => gauge.getValue() === v.value,
       );
       gauge && gauge.engage(v);
     });

@@ -29,7 +29,7 @@ export function wingDozerKnockBack(resources: Resources): ArmdozerAnimation {
  * @return メッシュ
  */
 export function wingDozerActiveKnockBack(
-  resources: Resources
+  resources: Resources,
 ): ArmdozerAnimation {
   return createWingDozerActiveMesh({
     resources,
@@ -44,7 +44,7 @@ export function wingDozerActiveKnockBack(
  * @return メッシュ
  */
 export function wingDozerOutlineKnockBack(
-  resources: Resources
+  resources: Resources,
 ): ArmdozerAnimation {
   return createWingDozerOutlineMesh({
     resources,

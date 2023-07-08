@@ -10,7 +10,7 @@ import { startTitle } from "./start-title";
  * @return 処理が完了したら発火するPromise
  */
 export async function onEndNPCEnding(
-  props: Readonly<GameProps>
+  props: Readonly<GameProps>,
 ): Promise<void> {
   await Promise.all([
     (async () => {

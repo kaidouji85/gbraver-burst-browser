@@ -41,11 +41,11 @@ class PilotSkillTutorial02 extends EmptyCustomBattleEvent {
 
   /** @override */
   async onBatteryCommandSelected(
-    props: BatteryCommandSelected
+    props: BatteryCommandSelected,
   ): Promise<CommandCanceled> {
     const { state, cancel } = await onBatteryCommandSelected(
       props,
-      this.#state
+      this.#state,
     );
     this.#state = state;
     return cancel;
@@ -53,11 +53,11 @@ class PilotSkillTutorial02 extends EmptyCustomBattleEvent {
 
   /** @override */
   async onPilotSkillCommandSelected(
-    props: PilotSkillCommandSelected
+    props: PilotSkillCommandSelected,
   ): Promise<CommandCanceled> {
     const { state, cancel } = await onPilotSkillCommandSelected(
       props,
-      this.#state
+      this.#state,
     );
     this.#state = state;
     return cancel;

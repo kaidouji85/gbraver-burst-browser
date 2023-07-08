@@ -22,7 +22,7 @@ const ZERO_BATTERY: Command = {
  */
 const oneBatteryRoutine: SimpleRoutine = (data) => {
   const battery1 = data.commands.find(
-    (v) => v.type === "BATTERY_COMMAND" && v.battery === 1
+    (v) => v.type === "BATTERY_COMMAND" && v.battery === 1,
   );
   return battery1 ?? ZERO_BATTERY;
 };

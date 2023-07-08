@@ -27,7 +27,7 @@ type Ret = IsPrivateMatchGuestStarted | IsNotPrivateatchGuestStarted;
  */
 export async function startPrivateMatchGuestIfNeeded(
   props: Readonly<GameProps>,
-  action: Readonly<SelectionComplete>
+  action: Readonly<SelectionComplete>,
 ): Promise<Ret> {
   if (props.inProgress.type !== "PrivateMatchGuest") {
     return { isStarted: false };
@@ -35,7 +35,7 @@ export async function startPrivateMatchGuestIfNeeded(
 
   props.domDialogBinder.bind(
     new PrivateMatchGuestDialog(props.resources),
-    privateMatchGuestDialogConnector
+    privateMatchGuestDialogConnector,
   );
   return {
     isStarted: true,

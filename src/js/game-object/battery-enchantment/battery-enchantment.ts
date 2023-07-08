@@ -30,7 +30,7 @@ export class BatteryEnchantment {
   constructor(
     view: BatteryEnchantmentView,
     resources: Resources,
-    gameObjectAction: Observable<GameObjectAction>
+    gameObjectAction: Observable<GameObjectAction>,
   ) {
     this.#model = createInitialValue();
     this.#view = view;

@@ -26,7 +26,7 @@ export class TDGameObjects {
    */
   constructor(
     resources: Resources,
-    gameObjectAction: Observable<GameObjectAction>
+    gameObjectAction: Observable<GameObjectAction>,
   ) {
     this.stage = new SchoolField(resources);
     this.turnIndicator = new TurnIndicator({

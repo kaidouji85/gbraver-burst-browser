@@ -15,7 +15,7 @@ export function hidden(model: WingDozerCutInModel): Animate {
         opacity: 0,
         scale: 1.1,
       },
-      300
-    )
+      300,
+    ),
   );
 }

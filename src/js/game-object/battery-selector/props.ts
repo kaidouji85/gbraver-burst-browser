@@ -47,7 +47,7 @@ export type GenerateBatterySelectorPropsParam = {
  * @return バッテリーセレクタプロパティ
  */
 export function createBatterySelectorProps(
-  param: GenerateBatterySelectorPropsParam
+  param: GenerateBatterySelectorPropsParam,
 ): BatterySelectorProps {
   return {
     model: initialValue(),

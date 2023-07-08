@@ -44,7 +44,7 @@ export class SimpleIndicatorView implements ResultIndicatorView {
     const target = this.#mesh.getObject3D();
     const devicePerScale = HUDCutInScale(
       preRender.rendererDOM,
-      preRender.safeAreaInset
+      preRender.safeAreaInset,
     );
     const safeAreaX =
       0 < model.worldCoordinate.x

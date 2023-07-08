@@ -46,13 +46,13 @@ function declarationWithCorrect(
   td: TDPlayer,
   origin: number,
   correct: number,
-  value: number
+  value: number,
 ): Animate {
   return td.batteryNumber
     .show(origin)
     .chain(delay(300))
     .chain(
-      all(td.batteryNumber.change(value), td.batteryCorrect.popUp(correct))
+      all(td.batteryNumber.change(value), td.batteryCorrect.popUp(correct)),
     )
     .chain(delay(200));
 }
@@ -72,7 +72,7 @@ function declarationSoundWithCorrect(sounds: BattleSceneSounds): Animate {
     .chain(
       process(() => {
         sounds.batteryDeclaration.play();
-      })
+      }),
     );
 }
 
@@ -85,13 +85,13 @@ function declarationSoundWithCorrect(sounds: BattleSceneSounds): Animate {
  */
 export function batteryDeclarationAnimation(
   props: StateAnimationProps,
-  gameState: GameStateX<BatteryDeclaration>
+  gameState: GameStateX<BatteryDeclaration>,
 ): Animate {
   const attacker = gameState.players.find(
-    (v) => v.playerId === gameState.activePlayerId
+    (v) => v.playerId === gameState.activePlayerId,
   );
   const defender = gameState.players.find(
-    (v) => v.playerId !== gameState.activePlayerId
+    (v) => v.playerId !== gameState.activePlayerId,
   );
 
   if (!attacker || !defender) {
@@ -99,19 +99,19 @@ export function batteryDeclarationAnimation(
   }
 
   const attackerTD = props.view.td.players.find(
-    (v) => v.playerId === attacker.playerId
+    (v) => v.playerId === attacker.playerId,
   );
   const attackerTDArmdozer = props.view.td.armdozerObjects.find(
-    (v) => v.playerId === attacker.playerId
+    (v) => v.playerId === attacker.playerId,
   );
   const attackerHUD = props.view.hud.players.find(
-    (v) => v.playerId === attacker.playerId
+    (v) => v.playerId === attacker.playerId,
   );
   const defenderTD = props.view.td.players.find(
-    (v) => v.playerId === defender.playerId
+    (v) => v.playerId === defender.playerId,
   );
   const defenderHUD = props.view.hud.players.find(
-    (v) => v.playerId === defender.playerId
+    (v) => v.playerId === defender.playerId,
   );
 
   if (
@@ -138,7 +138,7 @@ export function batteryDeclarationAnimation(
           attackerTD,
           originalBatteryOfAttacker,
           attackerCorrect,
-          attackerBattery
+          attackerBattery,
         )
       : declaration(attackerTD, attackerBattery);
   const defenderCorrect = defenderBattery - originalBatteryOfDefender;
@@ -148,7 +148,7 @@ export function batteryDeclarationAnimation(
           defenderTD,
           originalBatteryOfDefender,
           defenderCorrect,
-          defenderBattery
+          defenderBattery,
         )
       : declaration(defenderTD, defenderBattery);
   const sound =
@@ -162,11 +162,11 @@ export function batteryDeclarationAnimation(
     attackerDeclaration,
     attackerTDArmdozer.sprite().endActive(),
     defenderHUD.gauge.battery(defender.armdozer.battery),
-    defenderDeclaration
+    defenderDeclaration,
   ).chain(
     delay(0),
     attackerTD.batteryNumber.hidden(),
     defenderTD.batteryNumber.hidden(),
-    props.view.td.gameObjects.turnIndicator.invisible()
+    props.view.td.gameObjects.turnIndicator.invisible(),
   );
 }

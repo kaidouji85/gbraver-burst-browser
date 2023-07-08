@@ -19,7 +19,7 @@ export type MouseRaycaster = {
 export function createMouseRaycaster(
   event: MouseEvent,
   rendererDOM: HTMLElement,
-  camera: THREE.Camera
+  camera: THREE.Camera,
 ): MouseRaycaster {
   const mousePos = getMousePosition(event, rendererDOM);
   return {
@@ -35,12 +35,12 @@ export function createMouseRaycaster(
  */
 export function getMousePosition(
   event: MouseEvent,
-  rendererDOM: HTMLElement
+  rendererDOM: HTMLElement,
 ): THREE.Vector2 {
   return getScreenPosition(
     event.clientX,
     event.clientY,
     rendererDOM.clientWidth,
-    rendererDOM.clientHeight
+    rendererDOM.clientHeight,
   );
 }

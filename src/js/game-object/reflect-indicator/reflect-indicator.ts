@@ -25,7 +25,7 @@ export class ReflectIndicator {
    */
   constructor(
     view: ReflectIndicatorView,
-    gameObjectAction: Observable<GameObjectAction>
+    gameObjectAction: Observable<GameObjectAction>,
   ) {
     this.#model = createInitialValue();
     this.#view = view;

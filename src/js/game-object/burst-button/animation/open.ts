@@ -21,13 +21,13 @@ export function open(model: BurstButtonModel, canBurst: boolean): Animate {
           {
             opacity: 1,
           },
-          200
-        )
-      )
+          200,
+        ),
+      ),
     )
     .chain(
       process(() => {
         model.isPushNotifierDisabled = false;
-      })
+      }),
     );
 }

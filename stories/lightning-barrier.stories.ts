@@ -16,7 +16,7 @@ const lightningBarrierStory =
     const stub = new TDGameObjectStub(({ resources, gameObjectAction }) => {
       const barrier = new LightningBarrierGameEffect(
         resources,
-        gameObjectAction
+        gameObjectAction,
       );
       fn(barrier);
       return {
@@ -35,5 +35,5 @@ export const showHidden = lightningBarrierStory(
       .chain(delay(2000))
       .chain(barrier.hidden())
       .loop();
-  }
+  },
 );

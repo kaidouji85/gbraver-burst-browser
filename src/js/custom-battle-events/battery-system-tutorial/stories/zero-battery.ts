@@ -67,7 +67,7 @@ export async function doBurstBecauseZeroBattery(props: CustomBattleEventProps) {
  * @return ストーリーが完了したら発火するPromise
  */
 export async function doPilotSkillBecauseZeroBattery(
-  props: CustomBattleEventProps
+  props: CustomBattleEventProps,
 ) {
   await noZeroBatteryDefense(props);
   activeRightMessageWindowWithFace(props, "Shinya");
@@ -99,7 +99,7 @@ export async function doPilotSkillBecauseZeroBattery(
  * @return ストーリーが完了したら発火するPromise
  */
 export async function zeroBatteryDefenseBecauseNoBatteryRecover(
-  props: CustomBattleEventProps
+  props: CustomBattleEventProps,
 ) {
   await noZeroBatteryDefense(props);
   activeRightMessageWindowWithFace(props, "Shinya");

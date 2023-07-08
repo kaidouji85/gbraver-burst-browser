@@ -7,7 +7,7 @@ import { MessageWindowProps } from "../props";
  * @return 取得結果
  */
 export function getTargetFaceGraphic(
-  props: Readonly<MessageWindowProps>
+  props: Readonly<MessageWindowProps>,
 ): FaceGraphic {
   return props.facePosition === "Left"
     ? props.leftFaceGraphic

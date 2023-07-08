@@ -12,7 +12,7 @@ import { scrollLeftMessages, scrollRightMessages } from "../../scroll-messages";
  * @return ストーリーが完了したら発火するPromise
  */
 export async function shouldAttack3OrMore(
-  props: Readonly<CustomBattleEventProps>
+  props: Readonly<CustomBattleEventProps>,
 ): Promise<void> {
   activeLeftMessageWindowWithFace(props, "Tsubasa");
   await scrollLeftMessages(props, [

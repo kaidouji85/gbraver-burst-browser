@@ -29,7 +29,7 @@ export function wingDozerDashDown(resources: Resources): ArmdozerAnimation {
  * @return メッシュ
  */
 export function wingDozerActiveDashDown(
-  resources: Resources
+  resources: Resources,
 ): ArmdozerAnimation {
   return createWingDozerActiveMesh({
     resources,
@@ -44,7 +44,7 @@ export function wingDozerActiveDashDown(
  * @return メッシュ
  */
 export function wingDozerOutlineDashDown(
-  resources: Resources
+  resources: Resources,
 ): ArmdozerAnimation {
   return createWingDozerOutlineMesh({
     resources,

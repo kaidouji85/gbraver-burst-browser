@@ -34,7 +34,7 @@ export class PlayerLightningDozerCutInView implements LightningDozerCutInView {
   constructor(resources: Resources) {
     this.#group = new THREE.Group();
     const cutInUpResource = resources.textures.find(
-      (v) => v.id === TEXTURE_IDS.LIGHTNING_DOZER_CUTIN_UP
+      (v) => v.id === TEXTURE_IDS.LIGHTNING_DOZER_CUTIN_UP,
     );
     const cutInUp = cutInUpResource
       ? cutInUpResource.texture
@@ -46,7 +46,7 @@ export class PlayerLightningDozerCutInView implements LightningDozerCutInView {
       maxAnimation: 4,
     });
     const cutInDownResource = resources.textures.find(
-      (v) => v.id === TEXTURE_IDS.LIGHTNING_DOZER_CUTIN_DOWN
+      (v) => v.id === TEXTURE_IDS.LIGHTNING_DOZER_CUTIN_DOWN,
     );
     const cutInDown = cutInDownResource
       ? cutInDownResource.texture

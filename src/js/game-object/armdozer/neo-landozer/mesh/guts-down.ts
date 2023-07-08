@@ -29,7 +29,7 @@ export function neoLandozerGutsDown(resources: Resources): ArmdozerAnimation {
  * @return メッシュ
  */
 export function neoLandozerActiveGutsDown(
-  resources: Resources
+  resources: Resources,
 ): ArmdozerAnimation {
   return createNeoLandozerActiveMesh({
     resources,
@@ -44,7 +44,7 @@ export function neoLandozerActiveGutsDown(
  * @return メッシュ
  */
 export function neoLandozerOutlineGutsDown(
-  resources: Resources
+  resources: Resources,
 ): ArmdozerAnimation {
   return createNeoLandozerOutlineMesh({
     resources,

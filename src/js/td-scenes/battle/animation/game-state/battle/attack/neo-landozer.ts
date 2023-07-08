@@ -32,7 +32,7 @@ function focusToAttacker(camera: TDCamera, attacker: NeoLandozer): Animate {
   const duration = 400;
   return all(
     track(camera, attacker.getObject3D().position.x * 0.6, duration),
-    dolly(camera, "-30", duration)
+    dolly(camera, "-30", duration),
   );
 }
 
@@ -47,7 +47,7 @@ type AttackResult = NormalHit | CriticalHit;
 function attack(param: NeoLandozerBattle<AttackResult>): Animate {
   return all(
     param.attackerSprite.charge().chain(delay(500)),
-    focusToAttacker(param.tdCamera, param.attackerSprite)
+    focusToAttacker(param.tdCamera, param.attackerSprite),
   )
     .chain(param.attackerSprite.armHammer())
     .chain(
@@ -57,8 +57,8 @@ function attack(param: NeoLandozerBattle<AttackResult>): Animate {
         param.defenderTD.damageIndicator.popUp(param.result.damage),
         param.defenderSprite.knockBack(),
         param.defenderTD.hitMark.shockWave.popUp(),
-        param.defenderHUD.gauge.hp(param.defenderState.armdozer.hp)
-      )
+        param.defenderHUD.gauge.hp(param.defenderState.armdozer.hp),
+      ),
     );
 }
 
@@ -78,8 +78,8 @@ function guard(param: NeoLandozerBattle<Guard>): Animate {
         param.defenderTD.damageIndicator.popUp(param.result.damage),
         param.defenderSprite.guard(),
         param.defenderTD.hitMark.shockWave.popUp(),
-        param.defenderHUD.gauge.hp(param.defenderState.armdozer.hp)
-      )
+        param.defenderHUD.gauge.hp(param.defenderState.armdozer.hp),
+      ),
     );
 }
 
@@ -123,7 +123,7 @@ type DownResult = NormalHit | Guard | CriticalHit;
 function down(param: NeoLandozerBattle<DownResult>): Animate {
   return all(
     param.attackerSprite.charge().chain(delay(500)),
-    focusToAttacker(param.tdCamera, param.attackerSprite)
+    focusToAttacker(param.tdCamera, param.attackerSprite),
   )
     .chain(param.attackerSprite.armHammer())
     .chain(
@@ -137,8 +137,8 @@ function down(param: NeoLandozerBattle<DownResult>): Animate {
         param.defenderTD.damageIndicator.popUp(param.result.damage),
         param.defenderSprite.down(),
         param.defenderTD.hitMark.shockWave.popUp(),
-        param.defenderHUD.gauge.hp(param.defenderState.armdozer.hp)
-      )
+        param.defenderHUD.gauge.hp(param.defenderState.armdozer.hp),
+      ),
     );
 }
 
@@ -148,7 +148,7 @@ function down(param: NeoLandozerBattle<DownResult>): Animate {
  * @return アニメーション
  */
 export function neoLandozerAttack(
-  param: NeoLandozerBattle<BattleResult>
+  param: NeoLandozerBattle<BattleResult>,
 ): Animate {
   if (param.isDeath && param.result.name === "NormalHit") {
     const result: NormalHit = param.result;

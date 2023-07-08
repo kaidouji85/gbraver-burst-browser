@@ -7,7 +7,7 @@ import type { NeoLandozerSounds } from "../sounds/neo-landozer-sounds";
 /** ガード -> 立ち */
 export function guardToStand(
   model: NeoLandozerModel,
-  sounds: NeoLandozerSounds
+  sounds: NeoLandozerSounds,
 ): Animate {
   return process(() => {
     model.animation.frame = 1;
@@ -20,14 +20,14 @@ export function guardToStand(
           {
             frame: 0,
           },
-          300
-        )
-      )
+          300,
+        ),
+      ),
     )
     .chain(
       process(() => {
         model.animation.frame = 0;
         model.animation.type = "STAND";
-      })
+      }),
     );
 }

@@ -20,7 +20,7 @@ export class PlayerBatteryEnchantmentView implements BatteryEnchantmentView {
 
   constructor(resources: Resources) {
     const playerTurnResource = resources.textures.find(
-      (v) => v.id === TEXTURE_IDS.BATTERY_ENCHANTMENT
+      (v) => v.id === TEXTURE_IDS.BATTERY_ENCHANTMENT,
     );
     const playerTurn = playerTurnResource
       ? playerTurnResource.texture

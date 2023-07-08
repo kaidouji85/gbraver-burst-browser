@@ -25,7 +25,7 @@ import { enemyWingDozerTD, playerWingDozerTD } from "./wing-dozer";
 export function playerTDArmdozer(
   resources: Resources,
   gameObjectAction: Observable<GameObjectAction>,
-  state: Player
+  state: Player,
 ): TDArmdozerObjects {
   switch (state.armdozer.id) {
     case ArmDozerIds.SHIN_BRAVER:
@@ -59,7 +59,7 @@ export function playerTDArmdozer(
 export function enemyTDArmdozer(
   resources: Resources,
   gameObjectAction: Observable<GameObjectAction>,
-  state: Player
+  state: Player,
 ): TDArmdozerObjects {
   switch (state.armdozer.id) {
     case ArmDozerIds.SHIN_BRAVER:

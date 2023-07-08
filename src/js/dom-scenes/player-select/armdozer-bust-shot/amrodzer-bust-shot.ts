@@ -77,7 +77,7 @@ export class ArmdozerBustShot {
         duration: 200,
         fill: "forwards",
         easing: "ease",
-      }
+      },
     );
     return waitFinishAnimation(animation);
   }

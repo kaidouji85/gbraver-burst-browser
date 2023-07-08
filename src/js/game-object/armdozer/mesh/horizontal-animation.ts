@@ -66,7 +66,7 @@ type CreatorParam = ConstructorParam;
  * @return 生成結果
  */
 export function createHorizontalAnimation(
-  param: CreatorParam
+  param: CreatorParam,
 ): ArmdozerAnimation {
   return new HorizontalArmdozerAnimation(param);
 }

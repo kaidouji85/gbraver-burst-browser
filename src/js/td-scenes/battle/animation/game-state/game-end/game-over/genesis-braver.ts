@@ -10,15 +10,15 @@ import { GameOverParamX } from "./game-over-param";
  * @return アニメーション
  */
 export function genesisBraverWin(
-  param: GameOverParamX<GenesisBraverTD>
+  param: GameOverParamX<GenesisBraverTD>,
 ): Animate {
   return all(
     param.winnerTdArmdozer.genesisBraver.burst(),
     track(
       param.tdCamera,
       param.winnerTdArmdozer.genesisBraver.getObject3D().position.x,
-      800
+      800,
     ),
-    dolly(param.tdCamera, "-60", 800)
+    dolly(param.tdCamera, "-60", 800),
   );
 }

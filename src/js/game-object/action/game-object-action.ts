@@ -18,7 +18,7 @@ export type GameObjectAction = Update | PreRender | OverlapEvent;
 export function gameObjectStream(
   update: Observable<Update>,
   preRender: Observable<PreRender>,
-  overlap: Observable<OverlapEvent>
+  overlap: Observable<OverlapEvent>,
 ): Observable<GameObjectAction> {
   return merge(update, preRender, overlap).pipe(share());
 }

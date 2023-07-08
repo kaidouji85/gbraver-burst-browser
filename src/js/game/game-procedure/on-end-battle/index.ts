@@ -13,14 +13,14 @@ import { executePostTutorialBattleIfNeeded } from "./execute-post-tutorial-battl
  */
 export async function onEndBattle(
   props: GameProps,
-  action: Readonly<EndBattle>
+  action: Readonly<EndBattle>,
 ): Promise<void> {
   const config = await props.config.load();
   await props.config.save(
     parseBrowserConfig({
       ...config,
       battleAnimationTimeScale: action.animationTimeScale,
-    })
+    }),
   );
   const postNPCBattle = await executePostNPCBattleIfNeeded(props, action);
   if (postNPCBattle.isExecuted) {
@@ -35,7 +35,7 @@ export async function onEndBattle(
 
   const isPostTutorialBattleExecuted = await executePostTutorialBattleIfNeeded(
     props,
-    action
+    action,
   );
   if (isPostTutorialBattleExecuted) {
     return;

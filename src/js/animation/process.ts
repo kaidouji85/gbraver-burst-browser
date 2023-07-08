@@ -17,6 +17,6 @@ export function process(fn: () => void, group?: TWEEN.Group): Animate {
       t.to({}, 0).onStart(() => {
         fn();
       }),
-    group
+    group,
   );
 }

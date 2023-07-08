@@ -21,9 +21,9 @@ const powerUpStory =
   (
     generator: (
       resources: Resources,
-      gameObjectAction: Observable<GameObjectAction>
+      gameObjectAction: Observable<GameObjectAction>,
     ) => PowerUp,
-    fn: (powerUp: PowerUp) => void
+    fn: (powerUp: PowerUp) => void,
   ) =>
   () => {
     const stub = new TDGameObjectStub(({ resources, gameObjectAction }) => {

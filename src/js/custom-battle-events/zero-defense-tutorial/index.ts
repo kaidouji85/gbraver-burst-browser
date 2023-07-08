@@ -43,7 +43,7 @@ class ZeroDefenseTutorialEvent extends EmptyCustomBattleEvent {
 
   /** @override */
   async onBatteryCommandSelected(
-    props: BatteryCommandSelected
+    props: BatteryCommandSelected,
   ): Promise<CommandCanceled> {
     const { state, cancel } = await onBatteryCommandSelected(props, this.state);
     this.state = state;
@@ -52,7 +52,7 @@ class ZeroDefenseTutorialEvent extends EmptyCustomBattleEvent {
 
   /** @override */
   async onBurstCommandSelected(
-    props: BurstCommandSelected
+    props: BurstCommandSelected,
   ): Promise<CommandCanceled> {
     const { state, cancel } = await onBurstCommandSelected(props, this.state);
     this.state = state;
@@ -61,11 +61,11 @@ class ZeroDefenseTutorialEvent extends EmptyCustomBattleEvent {
 
   /** @override */
   async onPilotSkillCommandSelected(
-    props: PilotSkillCommandSelected
+    props: PilotSkillCommandSelected,
   ): Promise<CommandCanceled> {
     const { state, cancel } = await onPilotSkillCommandSelected(
       props,
-      this.state
+      this.state,
     );
     this.state = state;
     return cancel;

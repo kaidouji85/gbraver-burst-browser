@@ -13,7 +13,7 @@ import { introduction } from "../stories/introduction";
  */
 export async function beforeLastState(
   props: Readonly<LastState>,
-  state: Readonly<PilotSkillTutorial01State>
+  state: Readonly<PilotSkillTutorial01State>,
 ): Promise<PilotSkillTutorial01State> {
   const turn = turnCount(props.stateHistory);
   if (turn === 1 && !state.isIntroductionComplete) {

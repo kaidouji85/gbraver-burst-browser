@@ -17,7 +17,7 @@ import { WingDozerIcon } from "./view/wing-dozer-icon";
  */
 export function shinBraverBurstButton(
   resources: Resources,
-  gameObjectAction: Observable<GameObjectAction>
+  gameObjectAction: Observable<GameObjectAction>,
 ): BurstButton {
   const armdozerIcon = new ShinBraverIcon(resources);
   return new BurstButton(resources, gameObjectAction, armdozerIcon);
@@ -31,7 +31,7 @@ export function shinBraverBurstButton(
  */
 export function neoLandozerBurstButton(
   resources: Resources,
-  gameObjectAction: Observable<GameObjectAction>
+  gameObjectAction: Observable<GameObjectAction>,
 ): BurstButton {
   const armdozerIcon = new NeoLandozerIcon(resources);
   return new BurstButton(resources, gameObjectAction, armdozerIcon);
@@ -45,7 +45,7 @@ export function neoLandozerBurstButton(
  */
 export function lightningDozerBurstButton(
   resources: Resources,
-  gameObjectAction: Observable<GameObjectAction>
+  gameObjectAction: Observable<GameObjectAction>,
 ): BurstButton {
   const armdozerIcon = new LightningDozerIcon(resources);
   return new BurstButton(resources, gameObjectAction, armdozerIcon);
@@ -59,7 +59,7 @@ export function lightningDozerBurstButton(
  */
 export function wingDozerBurstButton(
   resources: Resources,
-  gameObjectAction: Observable<GameObjectAction>
+  gameObjectAction: Observable<GameObjectAction>,
 ): BurstButton {
   const armdozerIcon = new WingDozerIcon(resources);
   return new BurstButton(resources, gameObjectAction, armdozerIcon);
@@ -73,7 +73,7 @@ export function wingDozerBurstButton(
  */
 export function genesisBraverBurstButton(
   resources: Resources,
-  gameObjectAction: Observable<GameObjectAction>
+  gameObjectAction: Observable<GameObjectAction>,
 ): BurstButton {
   const armdozerIcon = new GenesisBraverIcon(resources);
   return new BurstButton(resources, gameObjectAction, armdozerIcon);

@@ -21,7 +21,7 @@ import { tweenDuration } from "./duration";
 export function tween<T extends Record<string, any>>(
   model: T,
   create: (t: TWEEN.Tween<any>) => TWEEN.Tween<any>,
-  group?: TWEEN.Group
+  group?: TWEEN.Group,
 ): Animate {
   /* eslint-enable */
   const origin = new TWEEN.Tween(model, group);

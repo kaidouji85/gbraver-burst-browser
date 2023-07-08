@@ -19,9 +19,9 @@ export function decide(model: BurstButtonModel): Animate {
           {
             scale: 1.1,
           },
-          100
-        )
-      )
+          100,
+        ),
+      ),
     )
     .chain(
       tween(model, (t) =>
@@ -29,8 +29,8 @@ export function decide(model: BurstButtonModel): Animate {
           {
             scale: 1,
           },
-          100
-        )
-      )
+          100,
+        ),
+      ),
     );
 }

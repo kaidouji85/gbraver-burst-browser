@@ -13,7 +13,7 @@ import { ShinBraverSounds } from "../sounds/shin-braver-sounds";
  */
 export function charge(
   model: ShinBraverModel,
-  sounds: ShinBraverSounds
+  sounds: ShinBraverSounds,
 ): Animate {
   return process(() => {
     model.animation.type = "SP_CHARGE";
@@ -25,8 +25,8 @@ export function charge(
         {
           frame: 1,
         },
-        250
-      )
-    )
+        250,
+      ),
+    ),
   );
 }

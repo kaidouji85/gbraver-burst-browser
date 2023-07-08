@@ -15,7 +15,7 @@ export function hidden(model: BatteryNumberModel): Animate {
         opacity: 0,
         scale: 1.1,
       },
-      200
-    )
+      200,
+    ),
   );
 }

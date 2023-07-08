@@ -13,7 +13,7 @@ export function endActive(model: WingDozerModel): Animate {
       {
         opacity: 0,
       },
-      500
-    )
+      500,
+    ),
   );
 }

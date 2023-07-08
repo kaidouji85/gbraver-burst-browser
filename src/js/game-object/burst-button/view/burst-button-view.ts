@@ -49,7 +49,7 @@ export class BurstButtonView {
     this.#group = new THREE.Group();
     const burstButton =
       param.resources.canvasImages.find(
-        (v) => v.id === CANVAS_IMAGE_IDS.BURST_BUTTON
+        (v) => v.id === CANVAS_IMAGE_IDS.BURST_BUTTON,
       )?.image ?? new Image();
     this.#burstButton = new SimpleImageMesh({
       canvasSize: 512,
@@ -64,7 +64,7 @@ export class BurstButtonView {
     this.#group.add(this.#armdozerIcon.getObject3D());
     const label =
       param.resources.canvasImages.find(
-        (v) => v.id === CANVAS_IMAGE_IDS.BURST_BUTTON_LABEL
+        (v) => v.id === CANVAS_IMAGE_IDS.BURST_BUTTON_LABEL,
       )?.image ?? new Image();
     this.#label = new SimpleImageMesh({
       canvasSize: 512,
@@ -75,7 +75,7 @@ export class BurstButtonView {
     this.#group.add(this.#label.getObject3D());
     const buttonDisabled =
       param.resources.canvasImages.find(
-        (v) => v.id === CANVAS_IMAGE_IDS.BIG_BUTTON_DISABLED
+        (v) => v.id === CANVAS_IMAGE_IDS.BIG_BUTTON_DISABLED,
       )?.image ?? new Image();
     this.#buttonDisabled = new SimpleImageMesh({
       canvasSize: 512,
@@ -124,7 +124,7 @@ export class BurstButtonView {
     this.#buttonDisabled.setOpacity(disabledOpacity);
     const devicePerScale = HUDUIScale(
       preRender.rendererDOM,
-      preRender.safeAreaInset
+      preRender.safeAreaInset,
     );
     const frontScale = devicePerScale * model.scale * 0.3;
     this.#group.scale.set(frontScale, frontScale, 0.3);

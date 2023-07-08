@@ -9,7 +9,7 @@ import { BurstButtonProps } from "../props";
  */
 export function engage(
   props: Readonly<BurstButtonProps>,
-  config: BurstButtonConfig
+  config: BurstButtonConfig,
 ): void {
   props.root.className = [
     BURST,

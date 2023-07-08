@@ -15,7 +15,7 @@ const timeScaleButtonStory =
     const stub = new HUDGameObjectStub(({ resources, gameObjectAction }) => {
       const timeScaleButton: TimeScaleButton = new TimeScaleButton(
         resources,
-        gameObjectAction
+        gameObjectAction,
       );
       fn(timeScaleButton);
       return [timeScaleButton.getObject3D()];

@@ -10,7 +10,7 @@ import { onPilotPush } from "./on-pilot-push";
  * @return アンサブスクライバ
  */
 export function bindEventListeners(
-  props: Readonly<PilotButtonProps>
+  props: Readonly<PilotButtonProps>,
 ): Unsubscribable[] {
   return [
     // accesskeyの挙動でボタンを押させるために、clickイベントを仕込む

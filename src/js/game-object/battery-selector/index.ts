@@ -36,7 +36,7 @@ export class BatterySelector {
     this.#props = createBatterySelectorProps(param);
     this.#unsubscribers = bindEventListeners(
       this.#props,
-      param.gameObjectAction
+      param.gameObjectAction,
     );
   }
 

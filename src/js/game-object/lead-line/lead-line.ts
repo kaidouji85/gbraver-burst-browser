@@ -26,7 +26,7 @@ export class LeadLine {
    */
   constructor(
     view: LeadLineView,
-    gameObjectAction: Observable<GameObjectAction>
+    gameObjectAction: Observable<GameObjectAction>,
   ) {
     this.#model = initialValue();
     this.#view = view;

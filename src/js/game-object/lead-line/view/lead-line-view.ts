@@ -27,7 +27,7 @@ export class LeadLineView {
   constructor(
     color: THREE.ColorRepresentation,
     width: number,
-    opacityCoefficient: number
+    opacityCoefficient: number,
   ) {
     this.#group = new THREE.Group();
     this.#line = createLine(color, width);
@@ -66,18 +66,18 @@ export class LeadLineView {
    */
   engage(model: Readonly<LeadLineModel>, preRender: Readonly<PreRender>): void {
     const length = Math.sqrt(
-      (model.end.x - model.start.x) ** 2 + (model.end.y - model.start.y) ** 2
+      (model.end.x - model.start.x) ** 2 + (model.end.y - model.start.y) ** 2,
     );
     this.#group.scale.x = length / BaseLineLength;
     this.#group.scale.y = HUDLeadLineScale(
       preRender.rendererDOM,
-      preRender.safeAreaInset
+      preRender.safeAreaInset,
     );
     this.#group.position.x = model.start.x;
     this.#group.position.y = model.start.y;
     this.#group.rotation.z = Math.atan2(
       model.end.y - model.start.y,
-      model.end.x - model.start.x
+      model.end.x - model.start.x,
     );
     this.#line.material.opacity = model.opacity * this.#opacityCoefficient;
     this.#edges.forEach((edge) => {

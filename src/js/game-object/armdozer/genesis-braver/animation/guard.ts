@@ -19,17 +19,17 @@ export function guard(model: GenesisBraverModel): Animate {
       {
         x: "+20",
       },
-      100
-    )
+      100,
+    ),
   ).chain(
     tween(model.position, (t) =>
       t.to(
         {
           x: "-20",
         },
-        100
-      )
-    )
+        100,
+      ),
+    ),
   );
   return all(motion, position);
 }

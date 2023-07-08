@@ -15,7 +15,7 @@ import type {
  * @return キャスト結果
  */
 export function castBattle(
-  state: GameState
+  state: GameState,
 ): GameStateX<Battle> | null | undefined {
   if (state.effect.name === "Battle") {
     const effect: Battle = state.effect;
@@ -33,7 +33,7 @@ export function castBattle(
  * @return 抽出結果
  */
 export function extractBattle(
-  stateHistory: GameState[]
+  stateHistory: GameState[],
 ): GameStateX<Battle> | null | undefined {
   const foundState = stateHistory.find((v) => v.effect.name === "Battle");
   return foundState ? castBattle(foundState) : null;
@@ -47,7 +47,7 @@ export function extractBattle(
  * @return キャスト結果
  */
 export function castInputCommand(
-  state: GameState
+  state: GameState,
 ): GameStateX<InputCommand> | null | undefined {
   if (state.effect.name === "InputCommand") {
     const effect: InputCommand = state.effect;
@@ -65,7 +65,7 @@ export function castInputCommand(
  * @return 抽出結果
  */
 export function extractInputCommand(
-  stateHistory: GameState[]
+  stateHistory: GameState[],
 ): GameStateX<InputCommand> | null | undefined {
   const foundState = stateHistory.find((v) => v.effect.name === "InputCommand");
   return foundState ? castInputCommand(foundState) : null;
@@ -79,7 +79,7 @@ export function extractInputCommand(
  * @return キャスト結果
  */
 export function castBatteryDeclaration(
-  state: GameState
+  state: GameState,
 ): GameStateX<BatteryDeclaration> | null | undefined {
   if (state.effect.name === "BatteryDeclaration") {
     const effect: BatteryDeclaration = state.effect;
@@ -97,10 +97,10 @@ export function castBatteryDeclaration(
  * @return 抽出結果
  */
 export function extractBatteryDeclaration(
-  stateHistory: GameState[]
+  stateHistory: GameState[],
 ): GameStateX<BatteryDeclaration> | null | undefined {
   const foundState = stateHistory.find(
-    (v) => v.effect.name === "BatteryDeclaration"
+    (v) => v.effect.name === "BatteryDeclaration",
   );
   return foundState ? castBatteryDeclaration(foundState) : null;
 }
@@ -113,7 +113,7 @@ export function extractBatteryDeclaration(
  * @return キャスト結果
  */
 export function castGameEnd(
-  state: GameState
+  state: GameState,
 ): GameStateX<GameEnd> | null | undefined {
   if (state.effect.name === "GameEnd") {
     const effect: GameEnd = state.effect;
@@ -131,7 +131,7 @@ export function castGameEnd(
  * @return 抽出結果
  */
 export function extractGameEnd(
-  stateHistory: GameState[]
+  stateHistory: GameState[],
 ): GameStateX<GameEnd> | null | undefined {
   const foundState = stateHistory.find((v) => v.effect.name === "GameEnd");
   return foundState ? castGameEnd(foundState) : null;

@@ -12,7 +12,7 @@ import { scrollLeftMessages, scrollRightMessages } from "../../scroll-messages";
  * @return ストーリーが完了したら発火するPromise
  */
 export async function burstIsTrumpCard(
-  props: CustomBattleEventProps
+  props: CustomBattleEventProps,
 ): Promise<void> {
   activeLeftMessageWindowWithFace(props, "Tsubasa");
   await scrollLeftMessages(props, [

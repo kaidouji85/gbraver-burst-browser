@@ -7,7 +7,7 @@ import { NeoLandozerSounds } from "../sounds/neo-landozer-sounds";
 /** アームハンマー -> 立ち */
 export function hmToStand(
   model: NeoLandozerModel,
-  sounds: NeoLandozerSounds
+  sounds: NeoLandozerSounds,
 ): Animate {
   return process(() => {
     model.animation.type = "HM_TO_STAND";
@@ -20,22 +20,22 @@ export function hmToStand(
           {
             frame: 1,
           },
-          300
-        )
+          300,
+        ),
       ),
       tween(model.position, (t) =>
         t.to(
           {
             x: "+100",
           },
-          300
-        )
-      )
+          300,
+        ),
+      ),
     )
     .chain(
       process(() => {
         model.animation.type = "STAND";
         model.animation.frame = 0;
-      })
+      }),
     );
 }

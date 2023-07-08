@@ -31,7 +31,7 @@ export class PlayerShinyaView implements ShinyaView {
    */
   constructor(resources: Resources) {
     const shinyaResource = resources.textures.find(
-      (v) => v.id === TEXTURE_IDS.SHINYA_CUTIN
+      (v) => v.id === TEXTURE_IDS.SHINYA_CUTIN,
     );
     const shinya = shinyaResource?.texture ?? new THREE.Texture();
     this.#mesh = new HorizontalAnimationMesh({

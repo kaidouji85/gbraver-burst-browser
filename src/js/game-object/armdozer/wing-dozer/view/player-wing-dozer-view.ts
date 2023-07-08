@@ -33,7 +33,7 @@ export class PlayerWingDozerView implements WingDozerView {
     [...this.#meshes, ...this.#activeMeshes, ...this.#outlineMeshes].forEach(
       ({ mesh }) => {
         this.#group.add(mesh.getObject3D());
-      }
+      },
     );
   }
 
@@ -42,7 +42,7 @@ export class PlayerWingDozerView implements WingDozerView {
     [...this.#meshes, ...this.#activeMeshes, ...this.#outlineMeshes].forEach(
       ({ mesh }) => {
         mesh.destructor();
-      }
+      },
     );
   }
 
@@ -61,7 +61,7 @@ export class PlayerWingDozerView implements WingDozerView {
     this.#group.scale.z = 1;
 
     const currentMesh = this.#meshes.find(
-      (v) => v.type === model.animation.type
+      (v) => v.type === model.animation.type,
     );
     if (currentMesh) {
       currentMesh.mesh.animate(model.animation.frame);
@@ -69,7 +69,7 @@ export class PlayerWingDozerView implements WingDozerView {
     }
 
     const currentActiveMesh = this.#activeMeshes.find(
-      (v) => v.type === model.animation.type
+      (v) => v.type === model.animation.type,
     );
     if (currentActiveMesh) {
       const activeOpacity =
@@ -79,7 +79,7 @@ export class PlayerWingDozerView implements WingDozerView {
     }
 
     const currentOutlineMesh = this.#outlineMeshes.find(
-      (v) => v.type === model.animation.type
+      (v) => v.type === model.animation.type,
     );
     if (currentOutlineMesh) {
       const outlineOpacity =

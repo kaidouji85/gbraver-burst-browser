@@ -25,7 +25,7 @@ const parallelPlayEffects = [
  */
 export async function playStateHistory(
   props: Readonly<BattleSceneProps>,
-  gameStateHistory: GameState[]
+  gameStateHistory: GameState[],
 ): Promise<void> {
   if (gameStateHistory.length <= 0) {
     return;
@@ -48,16 +48,16 @@ export async function playStateHistory(
           stateAnimation(props, gameState),
           props.customBattleEvent
             ? props.customBattleEvent.onStateAnimation(
-                customStateAnimationProps
+                customStateAnimationProps,
               )
-            : empty()
+            : empty(),
         ).chain(
           empty(),
           props.customBattleEvent
             ? props.customBattleEvent.afterStateAnimation(
-                customStateAnimationProps
+                customStateAnimationProps,
               )
-            : empty()
+            : empty(),
         );
         return {
           anime,
@@ -69,8 +69,8 @@ export async function playStateHistory(
           current.isParallel
             ? previous.chain(empty(), current.anime)
             : previous.chain(current.anime),
-        empty()
-      )
+        empty(),
+      ),
   );
   const lastState = gameStateHistory[gameStateHistory.length - 1];
   const eventProps = { ...props, update: gameStateHistory };

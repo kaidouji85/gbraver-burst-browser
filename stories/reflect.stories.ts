@@ -24,9 +24,9 @@ const reflectIndicatorStory =
   (
     generator: (
       resources: Resources,
-      gameObjectAction: Observable<GameObjectAction>
+      gameObjectAction: Observable<GameObjectAction>,
     ) => ReflectIndicator,
-    fn: (reflect: ReflectIndicator) => void
+    fn: (reflect: ReflectIndicator) => void,
   ) =>
   () => {
     const stub = new TDGameObjectStub(({ resources, gameObjectAction }) => {

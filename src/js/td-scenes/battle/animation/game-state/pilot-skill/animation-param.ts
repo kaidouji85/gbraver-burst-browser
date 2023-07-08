@@ -21,7 +21,7 @@ import type { StateAnimationProps } from "../state-animation-props";
  */
 export type PilotSkillAnimationParamX<
   SKILL extends PilotSkill,
-  PILOT extends HUDPilotObjects
+  PILOT extends HUDPilotObjects,
 > = {
   /** スキル情報 */
   skill: SKILL;
@@ -75,26 +75,26 @@ export type PilotSkillAnimationParam = PilotSkillAnimationParamX<
  */
 export function toPilotSkillAnimationParam(
   props: StateAnimationProps,
-  gameState: GameStateX<PilotSkillEffect>
+  gameState: GameStateX<PilotSkillEffect>,
 ): PilotSkillAnimationParam | null | undefined {
   const effect: PilotSkillEffect = gameState.effect;
   const invokerState = gameState.players.find(
-    (v) => v.playerId === effect.invokerId
+    (v) => v.playerId === effect.invokerId,
   );
   const invokerArmdozer = props.view.td.armdozerObjects.find(
-    (v) => v.playerId === effect.invokerId
+    (v) => v.playerId === effect.invokerId,
   );
   const pilot = props.view.hud.pilots.find(
-    (v) => v.playerId === effect.invokerId
+    (v) => v.playerId === effect.invokerId,
   );
   const invokerTD = props.view.td.players.find(
-    (v) => v.playerId === effect.invokerId
+    (v) => v.playerId === effect.invokerId,
   );
   const invokerHUD = props.view.hud.players.find(
-    (v) => v.playerId === effect.invokerId
+    (v) => v.playerId === effect.invokerId,
   );
   const anotherArmdozer = props.view.td.armdozerObjects.find(
-    (v) => v.playerId !== effect.invokerId
+    (v) => v.playerId !== effect.invokerId,
   );
 
   if (

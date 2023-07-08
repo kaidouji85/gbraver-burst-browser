@@ -21,7 +21,7 @@ type Ret = {
  */
 export async function onBurstCommandSelected(
   props: BurstCommandSelected,
-  state: ZeroDefenseTutorialState
+  state: ZeroDefenseTutorialState,
 ): Promise<Ret> {
   if (isBurstButtonFocused(props)) {
     focusOutBurstButton(props);

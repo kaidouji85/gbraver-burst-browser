@@ -16,7 +16,7 @@ import { progressGame } from "./progress-game";
  */
 export function onDecideBattery(
   props: Readonly<BattleSceneProps>,
-  action: DecideBattery
+  action: DecideBattery,
 ): void {
   props.exclusive.execute(async (): Promise<void> => {
     action.event.stopPropagation();
@@ -27,7 +27,7 @@ export function onDecideBattery(
 
     const { isCommandCanceled } = await doBatteryEventIfNeeded(
       props,
-      batteryCommand
+      batteryCommand,
     );
     if (isCommandCanceled) {
       return;

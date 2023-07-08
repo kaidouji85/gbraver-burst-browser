@@ -48,7 +48,7 @@ export class PlayerShockWaveView implements ShockWaveView {
     this.#group.position.set(
       model.position.x,
       model.position.y,
-      model.position.z
+      model.position.z,
     );
     this.#group.scale.set(1, 1, 1);
     this.#ring.engage(model.ring);

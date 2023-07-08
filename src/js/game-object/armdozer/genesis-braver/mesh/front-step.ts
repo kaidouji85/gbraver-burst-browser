@@ -15,7 +15,7 @@ export const MAX_ANIMATION = 4;
  * @return 生成結果
  */
 export function genesisBraverFrontStep(
-  resources: Resources
+  resources: Resources,
 ): ArmdozerAnimation {
   return createGenesisBraverMesh({
     resources,
@@ -30,7 +30,7 @@ export function genesisBraverFrontStep(
  * @return 生成結果
  */
 export function genesisBraverActiveFrontStep(
-  resources: Resources
+  resources: Resources,
 ): ArmdozerAnimation {
   return createGenesisBraverActiveMesh({
     resources,

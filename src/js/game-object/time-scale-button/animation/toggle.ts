@@ -19,7 +19,7 @@ export function toggle(
   model: TimeScaleButtonModel,
   sounds: TimeScaleButtonSounds,
   group: TWEEN.Group,
-  timeScale: number
+  timeScale: number,
 ): Animate {
   return process(() => {
     model.timeScale = timeScale;
@@ -34,10 +34,10 @@ export function toggle(
             {
               scale: 1.1,
             },
-            100
+            100,
           ),
-        group
-      )
+        group,
+      ),
     )
     .chain(
       tween(
@@ -47,9 +47,9 @@ export function toggle(
             {
               scale: 1,
             },
-            100
+            100,
           ),
-        group
-      )
+        group,
+      ),
     );
 }

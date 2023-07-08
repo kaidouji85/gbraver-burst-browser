@@ -77,7 +77,7 @@ export class HUDPlayer implements HUDPlayerField {
 export function playerHUDObjects(
   resources: Resources,
   state: Player,
-  gameObjectAction: Observable<GameObjectAction>
+  gameObjectAction: Observable<GameObjectAction>,
 ): HUDPlayer {
   return new HUDPlayer({
     playerId: state.playerId,
@@ -103,7 +103,7 @@ export function playerHUDObjects(
 export function enemyHUDObjects(
   resources: Resources,
   state: Player,
-  gameObjectAction: Observable<GameObjectAction>
+  gameObjectAction: Observable<GameObjectAction>,
 ): HUDPlayer {
   return new HUDPlayer({
     playerId: state.playerId,

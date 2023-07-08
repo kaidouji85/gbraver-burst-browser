@@ -49,12 +49,12 @@ export class ThreeDimensionLayer {
     this.scene.background = skyBox(param.resources);
     this.camera = new TDCamera(param.update, param.resize);
     this.#overlap = param.renderer.createOverlapNotifier(
-      this.camera.getCamera()
+      this.camera.getCamera(),
     );
     this.#gameObjectAction = gameObjectStream(
       param.update,
       param.preRender,
-      this.#overlap
+      this.#overlap,
     );
     this.players = [
       playerTDObjects(param.resources, param.player, this.#gameObjectAction),
@@ -78,7 +78,7 @@ export class ThreeDimensionLayer {
       });
     this.gameObjects = new TDGameObjects(
       param.resources,
-      this.#gameObjectAction
+      this.#gameObjectAction,
     );
     this.gameObjects.getObject3Ds().forEach((object) => {
       this.scene.add(object);
