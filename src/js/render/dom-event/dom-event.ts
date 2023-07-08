@@ -29,7 +29,7 @@ export type RendererDOMEvent =
  * @return ストリーム
  */
 export function createDOMEventStream(
-  renderDom: HTMLElement
+  renderDom: HTMLElement,
 ): Observable<RendererDOMEvent> {
   return merge(
     createMouseDownStream(renderDom),
@@ -37,6 +37,6 @@ export function createDOMEventStream(
     createMouseUpStream(renderDom),
     createTouchStartStream(renderDom),
     createTouchMoveStream(renderDom),
-    createTouchEndStream(renderDom)
+    createTouchEndStream(renderDom),
   );
 }

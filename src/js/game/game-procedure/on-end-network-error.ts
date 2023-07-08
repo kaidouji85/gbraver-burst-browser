@@ -14,7 +14,7 @@ import { startTitle } from "./start-title";
  */
 export async function onEndNetworkError(
   props: GameProps,
-  action: EndNetworkError
+  action: EndNetworkError,
 ): Promise<void> {
   const close = async () => {
     props.inProgress = {

@@ -62,7 +62,7 @@ const DEVELOPING_FULL_RESOURCE_CONFIGS: Configs = {
  * @return リソース読み込みオブジェクト
  */
 export function fullResourceLoading(
-  resourceRoot: ResourceRoot
+  resourceRoot: ResourceRoot,
 ): ResourceLoading {
   return resourceLoading({
     ...FULL_RESOURCE_CONFIGS,
@@ -77,7 +77,7 @@ export function fullResourceLoading(
  * @return リソース読み込みオブジェクト
  */
 export function developingFullResourceLoading(
-  resourceRoot: ResourceRoot
+  resourceRoot: ResourceRoot,
 ): ResourceLoading {
   return resourceLoading({
     ...DEVELOPING_FULL_RESOURCE_CONFIGS,
@@ -95,7 +95,7 @@ export function developingFullResourceLoading(
  */
 function resourceDifferentialLoad(
   resources: Resources,
-  configs: Configs
+  configs: Configs,
 ): ResourceLoading {
   const differentialConfigs = extractUnloadedResorceConfigs(configs, resources);
   const loading = resourceLoading({
@@ -119,7 +119,7 @@ function resourceDifferentialLoad(
  * @return リソース読み込みオブジェクト
  */
 export function fullResourceDifferentialLoad(
-  resources: Resources
+  resources: Resources,
 ): ResourceLoading {
   return resourceDifferentialLoad(resources, FULL_RESOURCE_CONFIGS);
 }
@@ -131,7 +131,7 @@ export function fullResourceDifferentialLoad(
  * @return リソース読み込みオブジェクト
  */
 export function developingFullResourceDifferentialLoad(
-  resources: Resources
+  resources: Resources,
 ): ResourceLoading {
   return resourceDifferentialLoad(resources, DEVELOPING_FULL_RESOURCE_CONFIGS);
 }

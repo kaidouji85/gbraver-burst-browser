@@ -21,17 +21,17 @@ export function armHammer(model: LightningDozerModel): Animate {
           {
             frame: 1,
           },
-          100
-        )
-      )
+          100,
+        ),
+      ),
     ),
     tween(model.position, (t) =>
       t.to(
         {
           x: "-60",
         },
-        100
-      )
-    )
+        100,
+      ),
+    ),
   );
 }

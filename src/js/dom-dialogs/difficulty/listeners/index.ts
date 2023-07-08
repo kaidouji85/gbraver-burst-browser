@@ -16,7 +16,7 @@ import { onVeryHardPush } from "./on-very-hard-push";
  * @return バインドしたイベントリスナのアンサブスクライバ
  */
 export function bindEventListeners(
-  props: DifficultyDialogProps
+  props: DifficultyDialogProps,
 ): Unsubscribable[] {
   return [
     domPushStream(props.backGround).subscribe((action) => {

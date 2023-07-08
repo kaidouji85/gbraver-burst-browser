@@ -29,7 +29,7 @@ export function lightningDozerGuard(resources: Resources): ArmdozerAnimation {
  * @return メッシュ
  */
 export function lightningDozerActiveGuard(
-  resources: Resources
+  resources: Resources,
 ): ArmdozerAnimation {
   return createLightningDozerActiveMesh({
     resources,
@@ -44,7 +44,7 @@ export function lightningDozerActiveGuard(
  * @return メッシュ
  */
 export function lightningDozerOutlineGuard(
-  resources: Resources
+  resources: Resources,
 ): ArmdozerAnimation {
   return createLightningDozerOutlineMesh({
     resources,

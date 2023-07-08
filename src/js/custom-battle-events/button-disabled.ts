@@ -15,7 +15,7 @@ type OperatableButton = {
  * @return 設定対象ボタン
  */
 function getOperatableButtons(
-  props: Readonly<CustomBattleEventProps>
+  props: Readonly<CustomBattleEventProps>,
 ): OperatableButton[] {
   return [
     props.view.hud.gameObjects.batterySelector,
@@ -30,7 +30,7 @@ function getOperatableButtons(
  * @param props カスタムイベントプロパティ
  */
 export function disabledAllButtons(
-  props: Readonly<CustomBattleEventProps>
+  props: Readonly<CustomBattleEventProps>,
 ): void {
   getOperatableButtons(props).forEach((button) => {
     button.disabled(true);
@@ -42,7 +42,7 @@ export function disabledAllButtons(
  * @param props カスタムイベントプロパティ
  */
 export function enabledAllButtons(
-  props: Readonly<CustomBattleEventProps>
+  props: Readonly<CustomBattleEventProps>,
 ): void {
   getOperatableButtons(props).forEach((button) => {
     button.disabled(false);

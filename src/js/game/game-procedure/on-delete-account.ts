@@ -9,7 +9,7 @@ import type { GameProps } from "../game-props";
  * @return 処理が完了したら発火するPromise
  */
 export async function onDeleteAccount(
-  props: Readonly<GameProps>
+  props: Readonly<GameProps>,
 ): Promise<void> {
   const dialog = new WaitingDialog("アカウント削除中");
   props.domDialogBinder.bind(dialog, waitingDialogConnector);

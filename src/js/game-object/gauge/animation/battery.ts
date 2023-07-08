@@ -16,9 +16,9 @@ export function battery(model: GaugeModel, value: number): Animate {
       return tween(gaugeUnit, (t) =>
         t.to(
           { brightness: getBatteryGaugeUnitBrightness(gaugeUnit.value, value) },
-          300
-        )
+          300,
+        ),
       );
-    })
+    }),
   );
 }

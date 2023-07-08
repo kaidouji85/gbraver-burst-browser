@@ -15,7 +15,7 @@ import { WingDozerCutIn } from "./wing-dozer-cutin";
  */
 export function playerWingDozerCutIn(
   resources: Resources,
-  gameObjectAction: Observable<GameObjectAction>
+  gameObjectAction: Observable<GameObjectAction>,
 ): WingDozerCutIn {
   const view = new PlayerWingDozerCutInView(resources);
   return new WingDozerCutIn(view, gameObjectAction);
@@ -30,7 +30,7 @@ export function playerWingDozerCutIn(
  */
 export function enemyWingDozerCutIn(
   resources: Resources,
-  gameObjectAction: Observable<GameObjectAction>
+  gameObjectAction: Observable<GameObjectAction>,
 ): WingDozerCutIn {
   const view = new EnemyWingDozerCutInView(resources);
   return new WingDozerCutIn(view, gameObjectAction);

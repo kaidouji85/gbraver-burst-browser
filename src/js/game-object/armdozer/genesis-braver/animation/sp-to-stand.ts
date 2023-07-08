@@ -12,7 +12,7 @@ import type { GenesisBraverSounds } from "../sounds/genesis-braver-sounds";
  */
 export function spToStand(
   model: GenesisBraverModel,
-  sounds: GenesisBraverSounds
+  sounds: GenesisBraverSounds,
 ): Animate {
   return process(() => {
     model.animation.type = "SP_TO_STAND";
@@ -25,22 +25,22 @@ export function spToStand(
           {
             frame: 1,
           },
-          400
-        )
+          400,
+        ),
       ),
       tween(model.position, (t) =>
         t.to(
           {
             x: "+80",
           },
-          400
-        )
-      )
+          400,
+        ),
+      ),
     )
     .chain(
       process(() => {
         model.animation.type = "STAND";
         model.animation.frame = 0;
-      })
+      }),
     );
 }

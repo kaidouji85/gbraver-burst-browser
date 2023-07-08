@@ -15,7 +15,7 @@ import { PlayerDamageIndicatorView } from "./view/player-damage-indicator-view";
  */
 export function playerDamageIndicator(
   resources: Resources,
-  gameObjectAction: Observable<GameObjectAction>
+  gameObjectAction: Observable<GameObjectAction>,
 ): DamageIndicator {
   const view = new PlayerDamageIndicatorView(resources);
   return new DamageIndicator(view, gameObjectAction);
@@ -30,7 +30,7 @@ export function playerDamageIndicator(
  */
 export function enemyDamageIndicator(
   resources: Resources,
-  gameObjectAction: Observable<GameObjectAction>
+  gameObjectAction: Observable<GameObjectAction>,
 ): DamageIndicator {
   const view = new EnemyDamageIndicatorView(resources);
   return new DamageIndicator(view, gameObjectAction);

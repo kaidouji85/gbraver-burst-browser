@@ -27,7 +27,7 @@ export class LightningDozerCutIn implements HUDTracking {
    */
   constructor(
     view: LightningDozerCutInView,
-    gameObjectAction: Observable<GameObjectAction>
+    gameObjectAction: Observable<GameObjectAction>,
   ) {
     this.#view = view;
     this.#model = createInitialValue();

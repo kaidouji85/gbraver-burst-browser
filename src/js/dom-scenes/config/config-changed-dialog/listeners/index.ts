@@ -14,7 +14,7 @@ import { onDiscardPush } from "./on-discard-push";
  * @return バインドしたイベントリスナのアンサブスクライバ
  */
 export function bindEventListeners(
-  props: ConfigChangedDialogProps
+  props: ConfigChangedDialogProps,
 ): Unsubscribable[] {
   return [
     domPushStream(props.backGround).subscribe((action) => {

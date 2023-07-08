@@ -54,7 +54,7 @@ function buffPowerSkillDetail(skill: BuffPowerSkill): string[] {
  * @return 説明文
  */
 function batteryEnchantmentSkillDetail(
-  skill: BatteryEnchantmentSkill
+  skill: BatteryEnchantmentSkill,
 ): string[] {
   return [
     `${skill.duration}ターンだけ、0より大きいバッテリーを出した場合にバッテリー+${skill.batteryEnchantment}する。`,

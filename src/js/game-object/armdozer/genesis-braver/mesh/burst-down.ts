@@ -14,7 +14,7 @@ export const MAX_ANIMATION = 4;
  * @return 生成結果
  */
 export function genesisBraverBurstDown(
-  resources: Resources
+  resources: Resources,
 ): ArmdozerAnimation {
   return createGenesisBraverMesh({
     resources,

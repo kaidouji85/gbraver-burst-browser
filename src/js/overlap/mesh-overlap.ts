@@ -9,7 +9,7 @@ import * as THREE from "three";
  */
 export function isMeshOverlap(
   raycaster: THREE.Raycaster,
-  mesh: THREE.Mesh
+  mesh: THREE.Mesh,
 ): boolean {
   const intersects = raycaster.intersectObjects([mesh]);
   return intersects.length > 0;

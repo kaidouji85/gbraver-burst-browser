@@ -9,7 +9,7 @@ import { PrivateMatchHostDialogProps } from "../props";
  */
 export function onCloserPush(
   props: PrivateMatchHostDialogProps,
-  action: PushDOM
+  action: PushDOM,
 ): void {
   props.exclusive.execute(async () => {
     action.event.preventDefault();

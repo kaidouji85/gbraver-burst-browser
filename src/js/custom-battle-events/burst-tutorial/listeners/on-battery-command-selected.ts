@@ -23,7 +23,7 @@ import { shouldDefense5Again } from "../stories/should-defense5-again";
  */
 async function defense5(
   props: Readonly<BatteryCommandSelected>,
-  state: BurstTutorialState
+  state: BurstTutorialState,
 ): Promise<void> {
   state.isLoseIfNoDefense5Complete
     ? await shouldDefense5Again(props)
@@ -46,7 +46,7 @@ type Ret = {
  */
 export async function onBatteryCommandSelected(
   props: Readonly<BatteryCommandSelected>,
-  state: BurstTutorialState
+  state: BurstTutorialState,
 ): Promise<Ret> {
   const isBattery5Command = props.battery.battery === 5;
   const foundLastState = props.stateHistory[props.stateHistory.length - 1];

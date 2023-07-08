@@ -10,7 +10,7 @@ import { onBatteryPush } from "./on-battery-push";
  * @return バインドしたイベントリスナのアンサブスクライバ
  */
 export function bindEventListeners(
-  props: BatteryButtonProps
+  props: BatteryButtonProps,
 ): Unsubscribable[] {
   return [
     // accesskeyの挙動でボタンを押させるために、clickイベントを仕込む

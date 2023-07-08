@@ -25,12 +25,12 @@ const attackRoutine: SimpleRoutine = (data) => {
   const burst = data.commands.find((v) => v.type === "BURST_COMMAND");
   const allBattery = data.commands.find(
     (v) =>
-      v.type === "BATTERY_COMMAND" && v.battery === data.enemy.armdozer.battery
+      v.type === "BATTERY_COMMAND" && v.battery === data.enemy.armdozer.battery,
   );
   const allBatteryMinusOne = data.commands.find(
     (v) =>
       v.type === "BATTERY_COMMAND" &&
-      v.battery === data.enemy.armdozer.battery - 1
+      v.battery === data.enemy.armdozer.battery - 1,
   );
   const hasPlusCorrectPower = 0 < correctPower(data.enemy.armdozer.effects);
   const hasDamaged = data.enemy.armdozer.hp < data.enemy.armdozer.maxHp;
@@ -58,10 +58,10 @@ const defenseRoutine: SimpleRoutine = (data) => {
   const burst = data.commands.find((v) => v.type === "BURST_COMMAND");
   const allBattery = data.commands.find(
     (v) =>
-      v.type === "BATTERY_COMMAND" && v.battery === data.enemy.armdozer.battery
+      v.type === "BATTERY_COMMAND" && v.battery === data.enemy.armdozer.battery,
   );
   const battery1 = data.commands.find(
-    (v) => v.type === "BATTERY_COMMAND" && v.battery === 1
+    (v) => v.type === "BATTERY_COMMAND" && v.battery === 1,
   );
 
   if (data.enemy.armdozer.battery === 0 && burst) {

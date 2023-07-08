@@ -8,12 +8,12 @@ import type { SafeAreaInset } from "../safe-area/safe-area-inset";
  */
 export function HUDCutInScale(
   rendererDOM: HTMLElement,
-  safeAreaInset: SafeAreaInset
+  safeAreaInset: SafeAreaInset,
 ): number {
   const iPhoneXLandscapeHeight = 375;
   return Math.max(
     (rendererDOM.clientHeight - safeAreaInset.bottom) / iPhoneXLandscapeHeight,
-    1
+    1,
   );
 }
 
@@ -25,14 +25,14 @@ export function HUDCutInScale(
  */
 export function HUDUIScale(
   rendererDOM: HTMLElement,
-  safeAreaInset: SafeAreaInset
+  safeAreaInset: SafeAreaInset,
 ): number {
   const batterySelectorOriginHeight = 234;
   return Math.max(
     ((rendererDOM.clientHeight - safeAreaInset.bottom) /
       batterySelectorOriginHeight) *
       0.45,
-    1
+    1,
   );
 }
 
@@ -44,11 +44,11 @@ export function HUDUIScale(
  */
 export function HUDLeadLineScale(
   rendererDOM: HTMLElement,
-  safeAreaInset: SafeAreaInset
+  safeAreaInset: SafeAreaInset,
 ): number {
   const iPhoneXLandscapeHeight = 375;
   return Math.max(
     (rendererDOM.clientHeight - safeAreaInset.bottom) / iPhoneXLandscapeHeight,
-    1
+    1,
   );
 }

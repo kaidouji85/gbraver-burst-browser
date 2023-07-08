@@ -12,7 +12,7 @@ import { scrollRightMessages } from "../../scroll-messages";
  * @return ストーリーが完了したら発火するPromise
  */
 export const doPilotSkillToRecoverBattery = async (
-  props: CustomBattleEventProps
+  props: CustomBattleEventProps,
 ) => {
   activeRightMessageWindowWithFace(props, "Shinya");
   await scrollRightMessages(props, [

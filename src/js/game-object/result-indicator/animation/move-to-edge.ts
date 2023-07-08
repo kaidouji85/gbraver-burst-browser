@@ -21,9 +21,9 @@ export function moveToEdge(model: ResultIndicatorModel): Animate {
             x: -1,
             y: 1,
           },
-          duration
+          duration,
         )
-        .easing(TWEEN.Easing.Quadratic.InOut)
+        .easing(TWEEN.Easing.Quadratic.InOut),
     ),
     tween(model, (t) =>
       t
@@ -31,9 +31,9 @@ export function moveToEdge(model: ResultIndicatorModel): Animate {
           {
             scale: 1,
           },
-          duration
+          duration,
         )
-        .easing(TWEEN.Easing.Quadratic.InOut)
-    )
+        .easing(TWEEN.Easing.Quadratic.InOut),
+    ),
   );
 }

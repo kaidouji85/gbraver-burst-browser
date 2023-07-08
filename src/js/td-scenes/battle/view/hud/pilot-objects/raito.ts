@@ -64,7 +64,7 @@ export class RaitoHUD implements HUDPilotObjects {
 export function playerRaitoHUD(
   resources: Resources,
   gameObjectAction: Observable<GameObjectAction>,
-  state: Player
+  state: Player,
 ): RaitoHUD {
   return new RaitoHUD({
     playerId: state.playerId,
@@ -83,7 +83,7 @@ export function playerRaitoHUD(
 export function enemyRaitoHUD(
   resources: Resources,
   gameObjectAction: Observable<GameObjectAction>,
-  state: Player
+  state: Player,
 ): RaitoHUD {
   return new RaitoHUD({
     playerId: state.playerId,

@@ -14,7 +14,7 @@ import { ShinBraverSounds } from "../sounds/shin-braver-sounds";
  */
 export function gutsToStand(
   model: ShinBraverModel,
-  sounds: ShinBraverSounds
+  sounds: ShinBraverSounds,
 ): Animate {
   return process(() => {
     model.animation.type = "GUTS_DOWN";
@@ -27,21 +27,21 @@ export function gutsToStand(
           {
             frame: 0,
           },
-          200
-        )
-      )
+          200,
+        ),
+      ),
     )
     .chain(
       process(() => {
         model.animation.type = "GUTS_UP";
         model.animation.frame = 1;
-      })
+      }),
     )
     .chain(delay(500))
     .chain(
       process(() => {
         sounds.motor.play();
-      })
+      }),
     )
     .chain(
       tween(model.animation, (t) =>
@@ -49,14 +49,14 @@ export function gutsToStand(
           {
             frame: 0,
           },
-          200
-        )
-      )
+          200,
+        ),
+      ),
     )
     .chain(
       process(() => {
         model.animation.type = "STAND";
         model.animation.frame = 0;
-      })
+      }),
     );
 }

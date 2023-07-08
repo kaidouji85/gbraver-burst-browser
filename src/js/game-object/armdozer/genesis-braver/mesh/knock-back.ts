@@ -16,7 +16,7 @@ export const MAX_ANIMATION = 4;
  * @return 生成結果
  */
 export function genesisBraverKnockBack(
-  resources: Resources
+  resources: Resources,
 ): ArmdozerAnimation {
   return createGenesisBraverMesh({
     resources,
@@ -31,7 +31,7 @@ export function genesisBraverKnockBack(
  * @return 生成結果
  */
 export function genesisBraverActiveKnockBack(
-  resources: Resources
+  resources: Resources,
 ): ArmdozerAnimation {
   return createGenesisBraverActiveMesh({
     resources,

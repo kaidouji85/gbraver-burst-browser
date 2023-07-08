@@ -24,9 +24,9 @@ const batteryNumberStory =
   (
     generator: (
       resources: Resources,
-      gameObjectAction: Observable<GameObjectAction>
+      gameObjectAction: Observable<GameObjectAction>,
     ) => BatteryNumber,
-    fn: (batteryNumber: BatteryNumber) => void
+    fn: (batteryNumber: BatteryNumber) => void,
   ) =>
   () => {
     const stub = new TDGameObjectStub(({ resources, gameObjectAction }) => {

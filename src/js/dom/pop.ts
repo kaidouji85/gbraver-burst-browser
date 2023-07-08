@@ -23,7 +23,7 @@ export async function pop(element: HTMLElement, scale = 1.1): Promise<void> {
       duration: 200,
       fill: "forwards",
       easing: "ease",
-    }
+    },
   );
   await waitFinishAnimation(animation);
 }

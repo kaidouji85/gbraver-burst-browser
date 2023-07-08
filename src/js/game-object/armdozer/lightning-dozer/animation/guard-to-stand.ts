@@ -13,7 +13,7 @@ import { LightningDozerSounds } from "../sounds/lightning-dozer-sounds";
  */
 export function guardToStand(
   model: LightningDozerModel,
-  sounds: LightningDozerSounds
+  sounds: LightningDozerSounds,
 ): Animate {
   return process(() => {
     model.animation.frame = 1;
@@ -26,14 +26,14 @@ export function guardToStand(
           {
             frame: 0,
           },
-          300
-        )
-      )
+          300,
+        ),
+      ),
     )
     .chain(
       process(() => {
         model.animation.frame = 0;
         model.animation.type = "STAND";
-      })
+      }),
     );
 }

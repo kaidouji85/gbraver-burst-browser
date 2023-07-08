@@ -40,7 +40,7 @@ export type MiniControllerProps = {
  * @return 生成結果
  */
 export function createMiniControllerProps(
-  resources: Resources
+  resources: Resources,
 ): MiniControllerProps {
   const root = document.createElement("div");
   root.className = ROOT_INVISIBLE;
@@ -48,13 +48,13 @@ export function createMiniControllerProps(
   root.innerHTML = rootInnerHTML(ids);
   const elements = extractElements(root, ids);
   const batteryButtons = R.times(R.identity, MAX_BATTERY_BUTTON).map(
-    (battery) => new BatteryButton(battery)
+    (battery) => new BatteryButton(battery),
   );
   batteryButtons.forEach((batteryButton) => {
     elements.batteries.appendChild(batteryButton.getRootHTMLElement());
   });
   const batteryPush = merge(
-    ...batteryButtons.map((batteryButton) => batteryButton.pushNotifier())
+    ...batteryButtons.map((batteryButton) => batteryButton.pushNotifier()),
   );
   const burst = new BurstButton();
   root.appendChild(burst.getRootHTMLElement());

@@ -14,7 +14,7 @@ import { GenesisBraverSounds } from "../sounds/genesis-braver-sounds";
  */
 export function backStep(
   model: GenesisBraverModel,
-  sounds: GenesisBraverSounds
+  sounds: GenesisBraverSounds,
 ): Animate {
   return process(() => {
     model.animation.type = "BACK_STEP";
@@ -28,24 +28,24 @@ export function backStep(
             {
               frame: 1,
             },
-            200
-          )
+            200,
+          ),
         ),
         tween(model.position, (t) =>
           t.to(
             {
               x: "+100",
             },
-            200
-          )
-        )
-      )
+            200,
+          ),
+        ),
+      ),
     )
     .chain(delay(300))
     .chain(
       process(() => {
         sounds.motor.sound.play();
-      })
+      }),
     )
     .chain(
       tween(model.animation, (t) =>
@@ -53,14 +53,14 @@ export function backStep(
           {
             frame: 0,
           },
-          300
-        )
-      )
+          300,
+        ),
+      ),
     )
     .chain(
       process(() => {
         model.animation.type = "STAND";
         model.animation.frame = 0;
-      })
+      }),
     );
 }

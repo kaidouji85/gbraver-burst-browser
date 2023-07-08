@@ -109,7 +109,7 @@ export class ArmdozerSelector {
   constructor(
     resources: Resources,
     armDozerIds: ArmDozerId[],
-    initialArmdozerId: ArmDozerId
+    initialArmdozerId: ArmDozerId,
   ) {
     this.#armdozerId = initialArmdozerId;
     this.#exclusive = new Exclusive();
@@ -149,7 +149,7 @@ export class ArmdozerSelector {
       ...this.#armdozerIcons.map((v) =>
         v.icon.notifySelection().subscribe(() => {
           this.#onArmdozerSelect(v.armdozerId);
-        })
+        }),
       ),
       domPushStream(this.#okButton).subscribe((action) => {
         this.#onOkButtonPush(action);

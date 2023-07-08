@@ -24,7 +24,7 @@ export default {
  */
 type BurstButtonGenerator = (
   resources: Resources,
-  gameObjectAction: Observable<GameObjectAction>
+  gameObjectAction: Observable<GameObjectAction>,
 ) => BurstButton;
 
 /**
@@ -64,7 +64,7 @@ export const neoLandozer = buttonStory(neoLandozerBurstButton, operatable);
 /** ライトニングドーザ */
 export const lightningDozer = buttonStory(
   lightningDozerBurstButton,
-  operatable
+  operatable,
 );
 
 /** ウィングドーザ */
@@ -87,7 +87,7 @@ const canNotBurst = (burstButton: BurstButton) => {
 /** シンブレイバー バースト不可能 */
 export const canNotBurstShinBraver = buttonStory(
   shinBraverBurstButton,
-  canNotBurst
+  canNotBurst,
 );
 
 /**

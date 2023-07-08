@@ -74,7 +74,7 @@ export class DOMFloaters {
    */
   async showPostBattle(
     resources: Resources,
-    buttons: PostBattleButtonConfig[]
+    buttons: PostBattleButtonConfig[],
   ): Promise<void> {
     await this.#postBattle.show(resources, buttons);
   }

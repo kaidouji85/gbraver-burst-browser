@@ -14,7 +14,7 @@ import { PlayerGenesisBraverCutInView } from "./view/player-genesis-braver-cutin
  */
 export function playerGenesisBraverCutIn(
   resources: Resources,
-  gameObjectAction: Observable<GameObjectAction>
+  gameObjectAction: Observable<GameObjectAction>,
 ): GenesisBraverCutIn {
   const view = new PlayerGenesisBraverCutInView(resources);
   return new GenesisBraverCutIn(view, gameObjectAction);
@@ -28,7 +28,7 @@ export function playerGenesisBraverCutIn(
  */
 export function enemyGenesisBraverCutIn(
   resources: Resources,
-  gameObjectAction: Observable<GameObjectAction>
+  gameObjectAction: Observable<GameObjectAction>,
 ): GenesisBraverCutIn {
   const view = new EnemyGenesisBraverCutInView(resources);
   return new GenesisBraverCutIn(view, gameObjectAction);

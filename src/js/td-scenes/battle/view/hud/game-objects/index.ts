@@ -62,7 +62,7 @@ export class HUDGameObjects {
   constructor(
     resources: Resources,
     gameObjectAction: Observable<GameObjectAction>,
-    playerInfo: Player
+    playerInfo: Player,
   ) {
     this.#battleAction = new Subject();
     this.batterySelector = new BatterySelector({
@@ -73,13 +73,13 @@ export class HUDGameObjects {
     this.burstButton = createBurstButton(
       resources,
       gameObjectAction,
-      playerInfo.armdozer.id
+      playerInfo.armdozer.id,
     );
     this.burstButtonLeadLine = burstButtonLeadLine(gameObjectAction);
     this.pilotButton = createPilotButton(
       resources,
       gameObjectAction,
-      playerInfo.pilot.id
+      playerInfo.pilot.id,
     );
     this.pilotButtonLeadLine = pilotButtonLeadLine(gameObjectAction);
     this.timeScaleButton = new TimeScaleButton(resources, gameObjectAction);

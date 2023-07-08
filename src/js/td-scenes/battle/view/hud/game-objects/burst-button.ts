@@ -24,7 +24,7 @@ import type { Resources } from "../../../../../resource";
 export function createBurstButton(
   resources: Resources,
   gameObjectAction: Observable<GameObjectAction>,
-  armDozerId: ArmDozerId
+  armDozerId: ArmDozerId,
 ): BurstButton {
   switch (armDozerId) {
     case ArmDozerIds.SHIN_BRAVER:

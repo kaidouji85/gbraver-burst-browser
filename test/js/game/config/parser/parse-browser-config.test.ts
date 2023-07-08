@@ -21,7 +21,7 @@ test("データ型が異なっているも、ある程度はパースできる",
       bgmVolume: "1",
       seVolume: "1",
       battleControllerType: "BigButton",
-    })
+    }),
   ).toEqual({
     webGLPixelRatio: 2,
     battleAnimationTimeScale: 1,
@@ -36,7 +36,7 @@ test("指定なしのプロパティは、デフォルト値で補完される",
     parseBrowserConfig({
       webGLPixelRatio: 2,
       battleAnimationTimeScale: 1,
-    })
+    }),
   ).toEqual({
     ...DefaultConfig,
     webGLPixelRatio: 2,

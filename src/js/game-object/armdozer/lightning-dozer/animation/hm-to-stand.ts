@@ -14,7 +14,7 @@ import { LightningDozerSounds } from "../sounds/lightning-dozer-sounds";
  */
 export function hmToStand(
   model: LightningDozerModel,
-  sounds: LightningDozerSounds
+  sounds: LightningDozerSounds,
 ): Animate {
   return all(
     process(() => {
@@ -28,23 +28,23 @@ export function hmToStand(
             {
               frame: 1,
             },
-            400
-          )
-        )
+            400,
+          ),
+        ),
       )
       .chain(
         process(() => {
           model.animation.type = "STAND";
           model.animation.frame = 0;
-        })
+        }),
       ),
     tween(model.position, (t) =>
       t.to(
         {
           x: "+60",
         },
-        400
-      )
-    )
+        400,
+      ),
+    ),
   );
 }

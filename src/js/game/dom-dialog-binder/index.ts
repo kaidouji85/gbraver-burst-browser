@@ -37,7 +37,7 @@ export class DOMDialogBinder {
    */
   bind<X extends DOMDialog>(
     dialog: X,
-    connector: DomDialogActionConnector<X>
+    connector: DomDialogActionConnector<X>,
   ): void {
     this.#removeCurrentDialog();
     this.#unsubscribers = connector(dialog, this.#gameAction);

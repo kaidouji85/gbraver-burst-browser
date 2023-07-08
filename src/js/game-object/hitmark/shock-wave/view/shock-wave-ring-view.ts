@@ -20,7 +20,7 @@ export class ShockWaveRingView {
 
   constructor(resources: Resources) {
     const textureResource = resources.textures.find(
-      (v) => v.id === TEXTURE_IDS.HITMARK_SHOCK_WAVE_RING
+      (v) => v.id === TEXTURE_IDS.HITMARK_SHOCK_WAVE_RING,
     );
     const texture = textureResource
       ? textureResource.texture

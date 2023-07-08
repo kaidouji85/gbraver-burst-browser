@@ -12,7 +12,7 @@ import { AnimationMeshMapping } from "./animation-mesh-mapping";
  * @return 生成結果
  */
 export function createActiveMeshes(
-  resources: Resources
+  resources: Resources,
 ): AnimationMeshMapping[] {
   return [
     {

@@ -16,7 +16,7 @@ import { progressGame } from "./progress-game";
  */
 export function onPilotSkill(
   props: Readonly<BattleSceneProps>,
-  action: DoPilotSkill
+  action: DoPilotSkill,
 ): void {
   props.exclusive.execute(async () => {
     action.event.stopPropagation();
@@ -25,7 +25,7 @@ export function onPilotSkill(
     };
     const { isCommandCanceled } = await doPilotSkillEventIfNeeded(
       props,
-      pilotSkillCommand
+      pilotSkillCommand,
     );
     if (isCommandCanceled) {
       return;

@@ -23,16 +23,16 @@ export function show(model: LightningDozerCutInModel): Animate {
             {
               frame: 1,
             },
-            200
-          )
-        )
+            200,
+          ),
+        ),
       )
       .chain(delay(600))
       .chain(
         process(() => {
           model.animation.type = "CUT_IN_DOWN";
           model.animation.frame = 0;
-        })
+        }),
       )
       .chain(
         tween(model.animation, (t) =>
@@ -40,9 +40,9 @@ export function show(model: LightningDozerCutInModel): Animate {
             {
               frame: 1,
             },
-            200
-          )
-        )
+            200,
+          ),
+        ),
       ),
     process(() => {
       model.opacity = 0;
@@ -52,9 +52,9 @@ export function show(model: LightningDozerCutInModel): Animate {
           {
             opacity: 1,
           },
-          500
-        )
-      )
+          500,
+        ),
+      ),
     ),
     process(() => {
       model.scale = 0.9;
@@ -64,9 +64,9 @@ export function show(model: LightningDozerCutInModel): Animate {
           {
             scale: 1,
           },
-          300
-        )
-      )
-    )
+          300,
+        ),
+      ),
+    ),
   );
 }

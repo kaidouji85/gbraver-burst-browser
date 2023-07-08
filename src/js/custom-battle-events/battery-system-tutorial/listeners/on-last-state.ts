@@ -15,7 +15,7 @@ import { attackDescription } from "../stories/attack-description";
  */
 export async function onLastState(
   props: Readonly<LastState>,
-  state: BatterySystemTutorialState
+  state: BatterySystemTutorialState,
 ): Promise<BatterySystemTutorialState> {
   if (state.isBatterySystemDescriptionComplete) {
     return state;

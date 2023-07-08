@@ -35,7 +35,7 @@ export class BatteryMeter {
 
     const disk =
       resources.canvasImages.find(
-        (v) => v.id === CANVAS_IMAGE_IDS.BATTERY_METER
+        (v) => v.id === CANVAS_IMAGE_IDS.BATTERY_METER,
       )?.image ?? new Image();
     this.#disk = new SimpleImageMesh({
       canvasSize: 1024,
@@ -69,25 +69,25 @@ export class BatteryMeter {
 
     const disActiveNumber =
       resources.textures.find(
-        (v) => v.id === TEXTURE_IDS.DIS_ACTIVE_BATTERY_SELECTOR_NUMBER
+        (v) => v.id === TEXTURE_IDS.DIS_ACTIVE_BATTERY_SELECTOR_NUMBER,
       )?.texture ?? new THREE.Texture();
     this.#disActiveNumbers = R.times(R.identity, MAX_VALUE + 1).map(
-      (value: number) => batteryNumber(value, disActiveNumber)
+      (value: number) => batteryNumber(value, disActiveNumber),
     );
     this.#disActiveNumbers.forEach((v) => this.#group.add(v.getObject3D()));
 
     const activeNumber =
       resources.textures.find(
-        (v) => v.id === TEXTURE_IDS.BATTERY_SELECTOR_NUMBER
+        (v) => v.id === TEXTURE_IDS.BATTERY_SELECTOR_NUMBER,
       )?.texture ?? new THREE.Texture();
     this.#numbers = R.times(R.identity, MAX_VALUE + 1).map((value: number) =>
-      batteryNumber(value, activeNumber)
+      batteryNumber(value, activeNumber),
     );
     this.#numbers.forEach((v) => this.#group.add(v.getObject3D()));
 
     const needle =
       resources.canvasImages.find(
-        (v) => v.id === CANVAS_IMAGE_IDS.BATTERY_NEEDLE
+        (v) => v.id === CANVAS_IMAGE_IDS.BATTERY_NEEDLE,
       )?.image ?? new Image();
     this.#needle = new SimpleImageMesh({
       canvasSize: 512,

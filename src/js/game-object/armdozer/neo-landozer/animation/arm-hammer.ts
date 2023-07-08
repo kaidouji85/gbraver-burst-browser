@@ -14,16 +14,16 @@ export function armHammer(model: NeoLandozerModel): Animate {
         {
           frame: 1,
         },
-        150
-      )
+        150,
+      ),
     ),
     tween(model.position, (t) =>
       t.to(
         {
           x: "-100",
         },
-        150
-      )
-    )
+        150,
+      ),
+    ),
   );
 }

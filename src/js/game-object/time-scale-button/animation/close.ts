@@ -19,8 +19,8 @@ export function close(model: TimeScaleButtonModel): Animate {
         {
           opacity: 0,
         },
-        200
-      )
-    )
+        200,
+      ),
+    ),
   );
 }

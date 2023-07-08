@@ -23,7 +23,7 @@ export class BatteryCorrect {
    */
   constructor(
     view: BatteryCorrectView,
-    gameObjectAction: Observable<GameObjectAction>
+    gameObjectAction: Observable<GameObjectAction>,
   ) {
     this.#model = initialValue();
     this.#view = view;

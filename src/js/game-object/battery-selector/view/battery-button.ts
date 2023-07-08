@@ -39,7 +39,7 @@ export class BatteryButton {
     this.#group = new THREE.Group();
     const button =
       param.resources.canvasImages.find(
-        (v) => v.id === CANVAS_IMAGE_IDS.BATTERY_BUTTON
+        (v) => v.id === CANVAS_IMAGE_IDS.BATTERY_BUTTON,
       )?.image ?? new Image();
     this.#button = new SimpleImageMesh({
       canvasSize: 512,
@@ -57,7 +57,7 @@ export class BatteryButton {
     this.#group.add(this.#pushDetector.getObject3D());
     const attackLabel =
       param.resources.canvasImages.find(
-        (v) => v.id === CANVAS_IMAGE_IDS.BATTERY_LABEL_ATTACK
+        (v) => v.id === CANVAS_IMAGE_IDS.BATTERY_LABEL_ATTACK,
       )?.image ?? new Image();
     this.#attackLabel = new SimpleImageMesh({
       canvasSize: 512,
@@ -69,7 +69,7 @@ export class BatteryButton {
     this.#group.add(this.#attackLabel.getObject3D());
     const defenseLabel =
       param.resources.canvasImages.find(
-        (v) => v.id === CANVAS_IMAGE_IDS.BATTERY_LABEL_DEFENSE
+        (v) => v.id === CANVAS_IMAGE_IDS.BATTERY_LABEL_DEFENSE,
       )?.image ?? new Image();
     this.#defenseLabel = new SimpleImageMesh({
       canvasSize: 512,
@@ -81,7 +81,7 @@ export class BatteryButton {
     this.#group.add(this.#defenseLabel.getObject3D());
     const currentBattery =
       param.resources.textures.find(
-        (v) => v.id === TEXTURE_IDS.BATTERY_CURRENT_VALUE
+        (v) => v.id === TEXTURE_IDS.BATTERY_CURRENT_VALUE,
       )?.texture ?? new THREE.Texture();
     this.#batteryValue = new HorizontalAnimationMesh({
       texture: currentBattery,
@@ -112,7 +112,7 @@ export class BatteryButton {
     this.#group.scale.set(
       model.batteryButtonScale,
       model.batteryButtonScale,
-      1
+      1,
     );
     const attackOpacity = model.label === "Attack" ? model.opacity : 0;
     this.#attackLabel.setOpacity(attackOpacity);

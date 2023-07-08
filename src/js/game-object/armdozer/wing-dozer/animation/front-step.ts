@@ -17,7 +17,7 @@ import { WingDozerSounds } from "../sounds/wing-dozer-sounds";
 export function frontStep(
   model: WingDozerModel,
   sounds: WingDozerSounds,
-  distance = 100
+  distance = 100,
 ): Animate {
   return process(() => {
     model.animation.type = "FRONT_STEP";
@@ -31,24 +31,24 @@ export function frontStep(
             {
               frame: 1,
             },
-            300
-          )
+            300,
+          ),
         ),
         tween(model.position, (t) =>
           t.to(
             {
               x: `-${Math.abs(distance)}`,
             },
-            300
-          )
-        )
-      )
+            300,
+          ),
+        ),
+      ),
     )
     .chain(delay(300))
     .chain(
       process(() => {
         sounds.motor.play();
-      })
+      }),
     )
     .chain(
       tween(model.animation, (t) =>
@@ -56,14 +56,14 @@ export function frontStep(
           {
             frame: 0,
           },
-          300
-        )
-      )
+          300,
+        ),
+      ),
     )
     .chain(
       process(() => {
         model.animation.type = "STAND";
         model.animation.frame = 0;
-      })
+      }),
     );
 }

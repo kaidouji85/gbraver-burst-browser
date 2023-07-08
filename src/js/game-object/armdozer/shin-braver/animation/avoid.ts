@@ -9,7 +9,7 @@ import { ShinBraverSounds } from "../sounds/shin-braver-sounds";
 /** 避ける */
 export function avoid(
   model: ShinBraverModel,
-  sounds: ShinBraverSounds
+  sounds: ShinBraverSounds,
 ): Animate {
   return process(() => {
     model.animation.type = "BACK_STEP";
@@ -23,24 +23,24 @@ export function avoid(
             {
               frame: 1,
             },
-            200
-          )
+            200,
+          ),
         ),
         tween(model.position, (t) =>
           t.to(
             {
               x: "+100",
             },
-            200
-          )
-        )
-      )
+            200,
+          ),
+        ),
+      ),
     )
     .chain(delay(300))
     .chain(
       process(() => {
         sounds.motor.play();
-      })
+      }),
     )
     .chain(
       tween(model.animation, (t) =>
@@ -48,14 +48,14 @@ export function avoid(
           {
             frame: 0,
           },
-          300
-        )
-      )
+          300,
+        ),
+      ),
     )
     .chain(
       process(() => {
         model.animation.type = "STAND";
         model.animation.frame = 0;
-      })
+      }),
     );
 }

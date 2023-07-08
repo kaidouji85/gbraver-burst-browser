@@ -56,7 +56,7 @@ export class GenesisBraverHUD implements HUDArmdozerObjects {
 export function playerGenesisBraverHUD(
   resources: Resources,
   gameObjectAction: Observable<GameObjectAction>,
-  state: Player
+  state: Player,
 ): HUDArmdozerObjects {
   return new GenesisBraverHUD({
     playerId: state.playerId,
@@ -74,7 +74,7 @@ export function playerGenesisBraverHUD(
 export function enemyGenesisBraverHUD(
   resources: Resources,
   gameObjectAction: Observable<GameObjectAction>,
-  state: Player
+  state: Player,
 ): HUDArmdozerObjects {
   return new GenesisBraverHUD({
     playerId: state.playerId,

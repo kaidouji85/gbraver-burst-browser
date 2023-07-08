@@ -14,7 +14,7 @@ import { ContinuousAttackSounds } from "../sounds/continuous-attack-sounds";
  */
 export function popUp(
   model: ContinuousAttackModel,
-  sounds: ContinuousAttackSounds
+  sounds: ContinuousAttackSounds,
 ): Animate {
   return process(() => {
     model.opacity = 0;
@@ -28,9 +28,9 @@ export function popUp(
             opacity: 1,
             scale: 1,
           },
-          400
-        )
-      )
+          400,
+        ),
+      ),
     )
     .chain(delay(600))
     .chain(
@@ -40,8 +40,8 @@ export function popUp(
             opacity: 0,
             scale: 1.1,
           },
-          200
-        )
-      )
+          200,
+        ),
+      ),
     );
 }

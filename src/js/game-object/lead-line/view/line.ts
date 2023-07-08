@@ -17,7 +17,7 @@ export type LineMesh = THREE.Mesh<
  */
 export function createLine(
   color: THREE.ColorRepresentation,
-  width: number
+  width: number,
 ): LineMesh {
   const geometry = new THREE.BufferGeometry().setFromPoints([
     new THREE.Vector3(BaseLineLength, 0, 0),

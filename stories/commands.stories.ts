@@ -24,7 +24,7 @@ export const commands = (): HTMLElement => {
         label: "Attack",
       }),
       burstButton.open(true),
-      pilotButton.open(true)
+      pilotButton.open(true),
     ).play();
     return [
       batterySelector.getObject3D(),

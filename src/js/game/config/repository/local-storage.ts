@@ -29,11 +29,11 @@ class LocalStorageConfigRepository
     localStorage.setItem(Keys.WebGLPixelRatio, `${config.webGLPixelRatio}`);
     localStorage.setItem(
       Keys.BattleAnimationTimeScale,
-      `${config.battleAnimationTimeScale}`
+      `${config.battleAnimationTimeScale}`,
     );
     localStorage.setItem(
       Keys.BattleControllerType,
-      config.battleControllerType
+      config.battleControllerType,
     );
     localStorage.setItem(Keys.BGMVolume, `${config.bgmVolume}`);
     localStorage.setItem(Keys.SEVolume, `${config.seVolume}`);
@@ -44,7 +44,7 @@ class LocalStorageConfigRepository
     return parseBrowserConfig({
       webGLPixelRatio: localStorage.getItem(Keys.WebGLPixelRatio),
       battleAnimationTimeScale: localStorage.getItem(
-        Keys.BattleAnimationTimeScale
+        Keys.BattleAnimationTimeScale,
       ),
       battleControllerType: localStorage.getItem(Keys.BattleControllerType),
       bgmVolume: localStorage.getItem(Keys.BGMVolume),

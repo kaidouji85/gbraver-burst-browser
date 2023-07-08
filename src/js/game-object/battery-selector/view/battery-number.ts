@@ -10,7 +10,7 @@ import { HorizontalAnimationMesh } from "../../../mesh/horizontal-animation";
  */
 export function batteryNumber(
   value: number,
-  texture: THREE.Texture
+  texture: THREE.Texture,
 ): HorizontalAnimationMesh {
   const maxAnimation = 16;
   const numberMesh = new HorizontalAnimationMesh({
@@ -37,7 +37,7 @@ type Position = {
  */
 export function batteryNumberPosition(
   battery: number,
-  maxBattery: number
+  maxBattery: number,
 ): Position {
   const angle = Math.PI - (Math.PI / maxBattery) * battery;
   const radius = maxBattery !== 8 ? 155 : 175;
@@ -55,7 +55,7 @@ export function batteryNumberPosition(
  */
 export function batteryNumberScale(
   battery: number,
-  maxBattery: number
+  maxBattery: number,
 ): number {
   return maxBattery <= 5 ? 1 : 0.8;
 }

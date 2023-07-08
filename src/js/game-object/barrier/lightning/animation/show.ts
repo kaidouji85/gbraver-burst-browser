@@ -13,7 +13,7 @@ import { LightningBarrierSounds } from "../sounds/lightning-barrier-sounds";
  */
 export function show(
   model: LightningBarrierModel,
-  sounds: LightningBarrierSounds
+  sounds: LightningBarrierSounds,
 ): Animate {
   return process(() => {
     sounds.lightningBarrier.play();
@@ -23,8 +23,8 @@ export function show(
         {
           opacity: 1,
         },
-        1000
-      )
-    )
+        1000,
+      ),
+    ),
   );
 }

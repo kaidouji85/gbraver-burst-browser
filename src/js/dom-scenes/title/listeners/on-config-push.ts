@@ -10,7 +10,7 @@ import type { TitleProps } from "../props";
  */
 export function onConfigPush(
   props: TitleProps,
-  action: Readonly<PushDOM>
+  action: Readonly<PushDOM>,
 ): void {
   props.exclusive.execute(async (): Promise<void> => {
     action.event.preventDefault();

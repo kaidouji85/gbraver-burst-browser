@@ -16,7 +16,7 @@ import { progressGame } from "./progress-game";
  */
 export function onBurst(
   props: Readonly<BattleSceneProps>,
-  action: DoBurst
+  action: DoBurst,
 ): void {
   props.exclusive.execute(async () => {
     action.event.stopPropagation();
@@ -25,7 +25,7 @@ export function onBurst(
     };
     const { isCommandCanceled } = await doBurstEventIfNeeded(
       props,
-      burstCommand
+      burstCommand,
     );
     if (isCommandCanceled) {
       return;

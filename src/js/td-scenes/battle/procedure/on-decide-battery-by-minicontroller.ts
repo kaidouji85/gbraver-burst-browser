@@ -16,7 +16,7 @@ import { progressGame } from "./progress-game";
  */
 export function onDecideBatteryByMiniController(
   props: Readonly<BattleSceneProps>,
-  action: Readonly<DecideBatteryByMiniController>
+  action: Readonly<DecideBatteryByMiniController>,
 ): void {
   props.exclusive.execute(async () => {
     const batteryCommand: BatteryCommand = {
@@ -25,7 +25,7 @@ export function onDecideBatteryByMiniController(
     };
     const { isCommandCanceled } = await doBatteryEventIfNeeded(
       props,
-      batteryCommand
+      batteryCommand,
     );
     if (isCommandCanceled) {
       return;

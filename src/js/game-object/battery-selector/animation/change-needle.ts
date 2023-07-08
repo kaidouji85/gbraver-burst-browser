@@ -16,7 +16,7 @@ const MAX_DURATION = 500;
 export function changeNeedle(
   model: BatterySelectorModel,
   group: TWEEN.Group,
-  needle: number
+  needle: number,
 ): Animate {
   const duration = Math.abs(model.needle - needle) * MAX_DURATION;
   return tween(
@@ -26,8 +26,8 @@ export function changeNeedle(
         {
           needle: needle,
         },
-        duration
+        duration,
       ),
-    group
+    group,
   );
 }

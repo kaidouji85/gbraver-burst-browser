@@ -58,7 +58,7 @@ export class NPCBattleRoom {
       playerId: this.enemy.playerId,
       command: this._npc.routine(
         this.enemy.playerId,
-        this._core.stateHistory()
+        this._core.stateHistory(),
       ),
     };
     return this._core.progress([playerCommand, enemyCommand]);

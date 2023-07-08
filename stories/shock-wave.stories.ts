@@ -24,9 +24,9 @@ const shockWaveStory =
   (
     generator: (
       resources: Resources,
-      gameObjectAction: Observable<GameObjectAction>
+      gameObjectAction: Observable<GameObjectAction>,
     ) => ShockWave,
-    fn: (shockWave: ShockWave) => void
+    fn: (shockWave: ShockWave) => void,
   ) =>
   () => {
     const stub = new TDGameObjectStub(({ resources, gameObjectAction }) => {

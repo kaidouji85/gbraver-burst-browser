@@ -12,7 +12,7 @@ import type { GenesisBraverSounds } from "../sounds/genesis-braver-sounds";
  */
 export function charge(
   model: GenesisBraverModel,
-  sounds: GenesisBraverSounds
+  sounds: GenesisBraverSounds,
 ): Animate {
   return process(() => {
     model.animation.type = "SP_CHARGE";
@@ -24,8 +24,8 @@ export function charge(
         {
           frame: 1,
         },
-        250
-      )
-    )
+        250,
+      ),
+    ),
   );
 }

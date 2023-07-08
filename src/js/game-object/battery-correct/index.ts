@@ -15,7 +15,7 @@ import { PlayerBatteryCorrectView } from "./view/player-battery-correct-view";
  */
 export function playerBatteryCorrect(
   resources: Resources,
-  gameObjectAction: Observable<GameObjectAction>
+  gameObjectAction: Observable<GameObjectAction>,
 ): BatteryCorrect {
   const view = new PlayerBatteryCorrectView(resources);
   return new BatteryCorrect(view, gameObjectAction);
@@ -30,7 +30,7 @@ export function playerBatteryCorrect(
  */
 export function enemyBatteryCorrect(
   resources: Resources,
-  gameObjectAction: Observable<GameObjectAction>
+  gameObjectAction: Observable<GameObjectAction>,
 ): BatteryCorrect {
   const view = new EnemyBatteryCorrectView(resources);
   return new BatteryCorrect(view, gameObjectAction);

@@ -13,7 +13,7 @@ import { DataIDs } from "./data-ids";
 export function rootInnerHTML(
   resources: Resources,
   ids: DataIDs,
-  roomID: string
+  roomID: string,
 ): string {
   const closerPath =
     resources.paths.find((v) => v.id === PathIds.CLOSER)?.path ?? "";

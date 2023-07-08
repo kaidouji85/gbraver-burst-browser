@@ -17,7 +17,7 @@ import { startTutorial } from "./start-tutorial";
  */
 export async function onSelectTutorialStage(
   props: GameProps,
-  action: SelectTutorialStage
+  action: SelectTutorialStage,
 ): Promise<void> {
   if (props.inProgress.type !== "Tutorial") {
     return;

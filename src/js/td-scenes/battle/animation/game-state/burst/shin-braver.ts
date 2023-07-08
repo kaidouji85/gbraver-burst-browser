@@ -49,36 +49,36 @@ function recoverBattery(param: ShinBraverBurst<RecoverBattery>): Animate {
     track(
       param.tdCamera,
       param.burstArmdozerTD.shinBraver.getObject3D().position.x,
-      500
+      500,
     ),
     dolly(param.tdCamera, "-60", 500),
     param.tdObjects.skyBrightness.brightness(0.2, 500),
     param.tdObjects.illumination.intensity(0.2, 500),
-    param.hudObjects.rearmostFader.opacity(0.6, 500)
+    param.hudObjects.rearmostFader.opacity(0.6, 500),
   )
     .chain(delay(800))
     .chain(
       all(
         param.hudObjects.rearmostFader.opacity(0, 300),
-        param.burstArmdozerHUD.cutIn.hidden()
-      )
+        param.burstArmdozerHUD.cutIn.hidden(),
+      ),
     )
     .chain(delay(300))
     .chain(
       all(
         param.burstPlayerHUD.gauge.battery(
-          param.burstPlayerState.armdozer.battery
+          param.burstPlayerState.armdozer.battery,
         ),
-        param.burstPlayerTD.recoverBattery.popUp(param.burst.recoverBattery)
-      )
+        param.burstPlayerTD.recoverBattery.popUp(param.burst.recoverBattery),
+      ),
     )
     .chain(
       all(
         param.burstArmdozerTD.shinBraver.burstToStand(),
         toInitial(param.tdCamera, 500),
         param.tdObjects.skyBrightness.brightness(1, 500),
-        param.tdObjects.illumination.intensity(1, 500)
-      )
+        param.tdObjects.illumination.intensity(1, 500),
+      ),
     )
     .chain(delay(200));
 }

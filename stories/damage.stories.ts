@@ -24,9 +24,9 @@ const damageIndicatorStory =
   (
     generator: (
       resources: Resources,
-      gameObjectAction: Observable<GameObjectAction>
+      gameObjectAction: Observable<GameObjectAction>,
     ) => DamageIndicator,
-    fn: (damageIndicator: DamageIndicator) => void
+    fn: (damageIndicator: DamageIndicator) => void,
   ) =>
   () => {
     const stub = new TDGameObjectStub(({ resources, gameObjectAction }) => {

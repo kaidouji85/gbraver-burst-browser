@@ -15,7 +15,7 @@ import { PlayerBatteryEnchantmentView } from "./view/player-battery-enchantment-
  */
 export function playerBatteryEnchantment(
   resources: Resources,
-  gameObjectAction: Observable<GameObjectAction>
+  gameObjectAction: Observable<GameObjectAction>,
 ): BatteryEnchantment {
   const view = new PlayerBatteryEnchantmentView(resources);
   return new BatteryEnchantment(view, resources, gameObjectAction);
@@ -30,7 +30,7 @@ export function playerBatteryEnchantment(
  */
 export function enemyBatteryEnchantment(
   resources: Resources,
-  gameObjectAction: Observable<GameObjectAction>
+  gameObjectAction: Observable<GameObjectAction>,
 ): BatteryEnchantment {
   const view = new EnemyBatteryEnchantmentView(resources);
   return new BatteryEnchantment(view, resources, gameObjectAction);

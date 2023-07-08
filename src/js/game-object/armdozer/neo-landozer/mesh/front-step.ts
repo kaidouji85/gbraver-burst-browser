@@ -29,7 +29,7 @@ export function neoLandozerFrontStep(resources: Resources): ArmdozerAnimation {
  * @return メッシュ
  */
 export function neoLandozerActiveFrontStep(
-  resources: Resources
+  resources: Resources,
 ): ArmdozerAnimation {
   return createNeoLandozerActiveMesh({
     resources,
@@ -44,7 +44,7 @@ export function neoLandozerActiveFrontStep(
  * @return メッシュ
  */
 export function neoLandozerOutlineFrontStep(
-  resources: Resources
+  resources: Resources,
 ): ArmdozerAnimation {
   return createNeoLandozerOutlineMesh({
     resources,

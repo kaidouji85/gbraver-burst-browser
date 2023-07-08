@@ -16,7 +16,7 @@ export const MAX_ANIMATION = 4;
  * @return メッシュ
  */
 export function lightningDozerGutsDown(
-  resources: Resources
+  resources: Resources,
 ): ArmdozerAnimation {
   return createLightningDozerMesh({
     resources,
@@ -31,7 +31,7 @@ export function lightningDozerGutsDown(
  * @return メッシュ
  */
 export function lightningDozerActiveGutsDown(
-  resources: Resources
+  resources: Resources,
 ): ArmdozerAnimation {
   return createLightningDozerActiveMesh({
     resources,
@@ -46,7 +46,7 @@ export function lightningDozerActiveGutsDown(
  * @return メッシュ
  */
 export function lightningDozerOutlineGutsDown(
-  resources: Resources
+  resources: Resources,
 ): ArmdozerAnimation {
   return createLightningDozerOutlineMesh({
     resources,

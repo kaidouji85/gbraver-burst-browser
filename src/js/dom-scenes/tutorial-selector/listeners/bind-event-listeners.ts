@@ -11,7 +11,7 @@ import { onTutorialStageSelect } from "./on-tutorial-stage-select";
  * @return バインドしたイベントリスナのアンサブスクライバ
  */
 export function bindEventListeners(
-  props: Readonly<TutorialSelectorProps>
+  props: Readonly<TutorialSelectorProps>,
 ): Unsubscribable[] {
   return [
     domPushStream(props.prevButton).subscribe((action) => {
@@ -20,7 +20,7 @@ export function bindEventListeners(
     ...props.stageElements.map((stage) =>
       stage.notifyStageSelection().subscribe(() => {
         onTutorialStageSelect(props, stage);
-      })
+      }),
     ),
   ];
 }

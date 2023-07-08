@@ -24,12 +24,12 @@ export type MouseDownRaycaster = {
 export function toMouseDownRaycaster(
   origin: MouseDown,
   renderer: HTMLElement,
-  camera: THREE.Camera
+  camera: THREE.Camera,
 ): MouseDownRaycaster {
   const mouseRaycaster: MouseRaycaster = createMouseRaycaster(
     origin.event,
     renderer,
-    camera
+    camera,
   );
   return {
     type: "mouseDownRaycaster",

@@ -29,7 +29,7 @@ export class PlayerShinBraverCutInView implements ShinBraverCutInView {
   constructor(resources: Resources) {
     this.#group = new THREE.Group();
     const cutInUpResource = resources.textures.find(
-      (v) => v.id === TEXTURE_IDS.SHIN_BRAVER_CUTIN_UP
+      (v) => v.id === TEXTURE_IDS.SHIN_BRAVER_CUTIN_UP,
     );
     const cutInUp = cutInUpResource
       ? cutInUpResource.texture
@@ -41,7 +41,7 @@ export class PlayerShinBraverCutInView implements ShinBraverCutInView {
       maxAnimation: 4,
     });
     const cutInDownResource = resources.textures.find(
-      (v) => v.id === TEXTURE_IDS.SHIN_BRAVER_CUTIN_DOWN
+      (v) => v.id === TEXTURE_IDS.SHIN_BRAVER_CUTIN_DOWN,
     );
     const cutInDown = cutInDownResource
       ? cutInDownResource.texture

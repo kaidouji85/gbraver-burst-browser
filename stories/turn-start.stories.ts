@@ -24,9 +24,9 @@ const turnStartStory =
   (
     generator: (
       resources: Resources,
-      gameObjectAction: Observable<GameObjectAction>
+      gameObjectAction: Observable<GameObjectAction>,
     ) => TurnStart,
-    fn: (turnStart: TurnStart) => void
+    fn: (turnStart: TurnStart) => void,
   ) =>
   () => {
     const stub = new HUDGameObjectStub(({ resources, gameObjectAction }) => {

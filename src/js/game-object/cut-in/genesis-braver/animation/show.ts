@@ -22,16 +22,16 @@ export function show(model: GenesisBraverCutInModel): Animate {
             {
               frame: 1,
             },
-            200
-          )
-        )
+            200,
+          ),
+        ),
       )
       .chain(delay(500))
       .chain(
         process(() => {
           model.animation.type = "BURST_DOWN";
           model.animation.frame = 0;
-        })
+        }),
       )
       .chain(
         tween(model.animation, (t) =>
@@ -39,9 +39,9 @@ export function show(model: GenesisBraverCutInModel): Animate {
             {
               frame: 1,
             },
-            200
-          )
-        )
+            200,
+          ),
+        ),
       ),
     process(() => {
       model.opacity = 0;
@@ -51,9 +51,9 @@ export function show(model: GenesisBraverCutInModel): Animate {
           {
             opacity: 1,
           },
-          600
-        )
-      )
+          600,
+        ),
+      ),
     ),
     process(() => {
       model.scale = 0.9;
@@ -63,9 +63,9 @@ export function show(model: GenesisBraverCutInModel): Animate {
           {
             scale: 1,
           },
-          300
-        )
-      )
-    )
+          300,
+        ),
+      ),
+    ),
   );
 }

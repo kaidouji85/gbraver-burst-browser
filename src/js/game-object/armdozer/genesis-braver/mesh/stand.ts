@@ -29,7 +29,7 @@ export function genesisBraverStand(resources: Resources): ArmdozerAnimation {
  * @return 生成結果
  */
 export function genesisBraverActiveStand(
-  resources: Resources
+  resources: Resources,
 ): ArmdozerAnimation {
   return createGenesisBraverActiveMesh({
     resources,

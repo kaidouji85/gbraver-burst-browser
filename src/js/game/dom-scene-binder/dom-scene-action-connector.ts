@@ -14,5 +14,5 @@ import type { GameAction } from "../game-actions";
  */
 export type DOMSceneActionConnector<X extends DOMScene> = (
   scene: X,
-  gameAction: Subject<GameAction>
+  gameAction: Subject<GameAction>,
 ) => Unsubscribable[];

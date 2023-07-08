@@ -16,7 +16,7 @@ import { winIndicatorView } from "./view/win-indicator-view";
  */
 export function winIndicator(
   resources: Resources,
-  gameObjectAction: Observable<GameObjectAction>
+  gameObjectAction: Observable<GameObjectAction>,
 ): ResultIndicator {
   const view = winIndicatorView(resources);
   return new ResultIndicator(view, gameObjectAction);
@@ -31,7 +31,7 @@ export function winIndicator(
  */
 export function loseIndicator(
   resources: Resources,
-  gameObjectAction: Observable<GameObjectAction>
+  gameObjectAction: Observable<GameObjectAction>,
 ): ResultIndicator {
   const view = loseIndicatorView(resources);
   return new ResultIndicator(view, gameObjectAction);
@@ -46,7 +46,7 @@ export function loseIndicator(
  */
 export function drawIndicator(
   resources: Resources,
-  gameObjectAction: Observable<GameObjectAction>
+  gameObjectAction: Observable<GameObjectAction>,
 ): ResultIndicator {
   const view = drawIndicatorView(resources);
   return new ResultIndicator(view, gameObjectAction);

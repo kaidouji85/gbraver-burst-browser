@@ -23,7 +23,7 @@ import type { Resources } from "../../../../../resource";
 export function createPilotButton(
   resources: Resources,
   gameObjectAction: Observable<GameObjectAction>,
-  pilotId: PilotId
+  pilotId: PilotId,
 ): PilotButton {
   switch (pilotId) {
     case PilotIds.SHINYA:

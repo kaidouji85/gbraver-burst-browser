@@ -8,7 +8,7 @@ import { BatterySelectorProps } from "../props";
  */
 export function onPreRender(
   props: Readonly<BatterySelectorProps>,
-  action: PreRender
+  action: PreRender,
 ): void {
   props.view.engage(props.model, action);
 }

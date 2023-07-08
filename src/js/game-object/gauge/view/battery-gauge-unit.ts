@@ -25,7 +25,7 @@ export class BatteryGaugeUnit {
     this.#value = value;
     const gaugeImage =
       resources.canvasImages.find(
-        (v) => v.id === CANVAS_IMAGE_IDS.BATTERY_GAUGE
+        (v) => v.id === CANVAS_IMAGE_IDS.BATTERY_GAUGE,
       )?.image ?? new Image();
     this.#gauge = new SimpleImageMesh({
       image: gaugeImage,
@@ -37,7 +37,7 @@ export class BatteryGaugeUnit {
     this.#group.add(this.#gauge.getObject3D());
     const backImage =
       resources.canvasImages.find(
-        (v) => v.id === CANVAS_IMAGE_IDS.BATTERY_GAUGE_BACK
+        (v) => v.id === CANVAS_IMAGE_IDS.BATTERY_GAUGE_BACK,
       )?.image ?? new Image();
     this.#back = new SimpleImageMesh({
       image: backImage,

@@ -53,7 +53,7 @@ function buffPowerSkillTemplate(skill: BuffPowerSkill): string {
  * @return 説明文
  */
 function batteryEnchantmentSkillTemplate(
-  skill: BatteryEnchantmentSkill
+  skill: BatteryEnchantmentSkill,
 ): string {
   return `自分が出したバッテリー+${skill.batteryEnchantment}`;
 }

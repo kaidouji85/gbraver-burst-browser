@@ -26,7 +26,7 @@ export class PlayerRecoverBatteryView implements RecoverBatteryView {
   constructor(resources: Resources) {
     this.#group = new THREE.Group();
     const batteryNumberResource = resources.textures.find(
-      (v) => v.id === TEXTURE_IDS.BATTERY_NUMBER
+      (v) => v.id === TEXTURE_IDS.BATTERY_NUMBER,
     );
     const batteryNumber = batteryNumberResource
       ? batteryNumberResource.texture

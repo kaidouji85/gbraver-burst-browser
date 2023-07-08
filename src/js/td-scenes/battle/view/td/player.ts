@@ -177,7 +177,7 @@ export class TDPlayerImpl implements TDPlayer {
 export function playerTDObjects(
   resources: Resources,
   state: Player,
-  gameObjectAction: Observable<GameObjectAction>
+  gameObjectAction: Observable<GameObjectAction>,
 ): TDPlayer {
   return new TDPlayerImpl({
     playerId: state.playerId,
@@ -210,7 +210,7 @@ export function playerTDObjects(
 export function enemyTDObject(
   resources: Resources,
   state: Player,
-  gameObjectAction: Observable<GameObjectAction>
+  gameObjectAction: Observable<GameObjectAction>,
 ): TDPlayer {
   return new TDPlayerImpl({
     playerId: state.playerId,

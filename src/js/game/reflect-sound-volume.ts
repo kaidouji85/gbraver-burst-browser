@@ -32,7 +32,7 @@ function getVolume(sound: SoundResource, config: GbraverBurstBrowserConfig) {
  */
 export function reflectSoundVolume(
   resources: Resources,
-  config: GbraverBurstBrowserConfig
+  config: GbraverBurstBrowserConfig,
 ): void {
   resources.sounds.forEach((sound) => {
     sound.volume = getVolume(sound, config);

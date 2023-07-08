@@ -9,7 +9,7 @@ import { NetBattleSelectorDialogProps } from "../props";
  */
 export function onPrivateMatchHostSelect(
   props: NetBattleSelectorDialogProps,
-  action: PushDOM
+  action: PushDOM,
 ): void {
   action.event.preventDefault();
   action.event.stopPropagation();

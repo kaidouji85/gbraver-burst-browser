@@ -16,7 +16,7 @@ function captionClauses(title: string[]): string {
     <span class="${ROOT_CLASS}__caption-clause">
       ${v}
     </span>
-  `
+  `,
     )
     .join("");
 }
@@ -40,7 +40,7 @@ export type RootInnerHTMLParams = {
  */
 export function rootInnerHtml(
   ids: DataIDs,
-  params: RootInnerHTMLParams
+  params: RootInnerHTMLParams,
 ): string {
   const bustShot =
     params.resources.paths.find((v) => v.id === PathIds.SHIN_BRAVER_BUST_SHOT)
@@ -61,7 +61,7 @@ export function rootInnerHtml(
       src="${stand}"
     >
     <img class="${ROOT_CLASS}__shin-braver-bust-shot" data-id="${
-    ids.bustShot
-  }" src="${bustShot}">
+      ids.bustShot
+    }" src="${bustShot}">
   `;
 }

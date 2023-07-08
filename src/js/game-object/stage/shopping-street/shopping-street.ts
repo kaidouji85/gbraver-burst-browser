@@ -16,7 +16,7 @@ export default class ShoppingStreet implements Stage {
    */
   constructor(resources: Resources) {
     const resource = resources.gltfs.find(
-      (v) => v.id === GLTF_IDS.SHOPPING_STREET
+      (v) => v.id === GLTF_IDS.SHOPPING_STREET,
     );
     this.#gltf = resource
       ? resource

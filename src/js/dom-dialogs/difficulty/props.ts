@@ -68,7 +68,7 @@ export type DifficultyDialogProps = {
  * @return 生成したプロパティ
  */
 export function createDifficultyDialogProps(
-  resources: Resources
+  resources: Resources,
 ): DifficultyDialogProps {
   const ids = {
     backGround: domUuid(),

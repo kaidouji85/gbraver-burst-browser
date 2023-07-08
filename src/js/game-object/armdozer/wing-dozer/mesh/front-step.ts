@@ -29,7 +29,7 @@ export function wingDozerFrontStep(resources: Resources): ArmdozerAnimation {
  * @return メッシュ
  */
 export function wingDozerActiveFrontStep(
-  resources: Resources
+  resources: Resources,
 ): ArmdozerAnimation {
   return createWingDozerActiveMesh({
     resources,
@@ -44,7 +44,7 @@ export function wingDozerActiveFrontStep(
  * @return メッシュ
  */
 export function wingDozerOutlineFrontStep(
-  resources: Resources
+  resources: Resources,
 ): ArmdozerAnimation {
   return createWingDozerOutlineMesh({
     resources,

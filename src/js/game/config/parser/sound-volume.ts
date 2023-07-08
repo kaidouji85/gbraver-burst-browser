@@ -20,7 +20,7 @@ export const SoundVolumeSchema = z.preprocess(
     z.literal(0.8),
     z.literal(0.9),
     z.literal(1),
-  ])
+  ]),
 );
 
 /**

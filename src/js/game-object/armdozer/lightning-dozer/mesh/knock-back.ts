@@ -16,7 +16,7 @@ export const MAX_ANIMATION = 4;
  * @return メッシュ
  */
 export function lightningDozerKnockBack(
-  resources: Resources
+  resources: Resources,
 ): ArmdozerAnimation {
   return createLightningDozerMesh({
     resources,
@@ -31,7 +31,7 @@ export function lightningDozerKnockBack(
  * @return メッシュ
  */
 export function lightningDozerActiveKnockBack(
-  resources: Resources
+  resources: Resources,
 ): ArmdozerAnimation {
   return createLightningDozerActiveMesh({
     resources,
@@ -46,7 +46,7 @@ export function lightningDozerActiveKnockBack(
  * @return メッシュ
  */
 export function lightningDozerOutlineKnockBack(
-  resources: Resources
+  resources: Resources,
 ): ArmdozerAnimation {
   return createLightningDozerOutlineMesh({
     resources,

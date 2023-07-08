@@ -69,22 +69,22 @@ type Loadings = {
 function createLoadings(params: ResourceLoadingParams): Loadings {
   return {
     preFetchPaths: PathConfigs.filter((v) =>
-      params.preFetchPaths.includes(v.id)
+      params.preFetchPaths.includes(v.id),
     ).map((v) => fetch(v.path(params.resourceRoot))),
     gltfLoadings: params.gltfConfigs.map((v) =>
-      loadGlTF(params.resourceRoot, v)
+      loadGlTF(params.resourceRoot, v),
     ),
     textureLoadings: params.textureConfigs.map((v) =>
-      loadTexture(params.resourceRoot, v)
+      loadTexture(params.resourceRoot, v),
     ),
     cubeTextureLoadings: params.cubeTextureConfigs.map((v) =>
-      loadCubeTexture(params.resourceRoot, v)
+      loadCubeTexture(params.resourceRoot, v),
     ),
     canvasImageLoadings: params.canvasImageConfigs.map((v) =>
-      loadCanvasImage(params.resourceRoot, v)
+      loadCanvasImage(params.resourceRoot, v),
     ),
     soundLoadings: params.soundConfigs.map((v) =>
-      loadSound(params.resourceRoot, v)
+      loadSound(params.resourceRoot, v),
     ),
   };
 }
@@ -126,7 +126,7 @@ function createLoadingActions(loadings: Loadings): Observable<LoadingActions> {
  */
 async function createResources(
   loading: Loadings,
-  resourceRoot: ResourceRoot
+  resourceRoot: ResourceRoot,
 ): Promise<Resources> {
   const [gltfs, textures, cubeTextures, canvasImages, sounds] =
     await Promise.all([
@@ -163,7 +163,7 @@ export type ResourceLoading = {
  * @return リソース読み込みオブジェクト
  */
 export function resourceLoading(
-  params: ResourceLoadingParams
+  params: ResourceLoadingParams,
 ): ResourceLoading {
   const loadings = createLoadings(params);
   return {

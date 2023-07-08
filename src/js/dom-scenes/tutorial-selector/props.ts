@@ -45,7 +45,7 @@ export type TutorialSelectorProps = {
  */
 export function createTutorialSelectorProps(
   resources: Resources,
-  stages: TutorialStage[]
+  stages: TutorialStage[],
 ): TutorialSelectorProps {
   const ids = {
     stages: domUuid(),
@@ -57,7 +57,7 @@ export function createTutorialSelectorProps(
   root.innerHTML = rootInnerHTML(ids, resources);
   const elements = extractElements(root, ids);
   const stageElements = stages.map(
-    (stage, index) => new TutorialStageElement(resources, stage, index + 1)
+    (stage, index) => new TutorialStageElement(resources, stage, index + 1),
   );
   const stageElementsWithLastRemoved = stageElements.slice(0, -1);
   stageElementsWithLastRemoved.forEach((stage) => {
@@ -81,8 +81,8 @@ export function createTutorialSelectorProps(
       createEmptySoundResource(),
     isImageCutsLoaded: Promise.all(
       Array.from(elements.imageCuts.children).map((img) =>
-        waitElementLoaded(img as HTMLElement)
-      )
+        waitElementLoaded(img as HTMLElement),
+      ),
     ),
   };
 }

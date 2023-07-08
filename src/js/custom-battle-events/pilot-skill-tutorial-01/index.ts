@@ -52,11 +52,11 @@ class PilotSkillTutorial01 extends EmptyCustomBattleEvent {
 
   /** @override */
   async onBatteryCommandSelected(
-    props: BatteryCommandSelected
+    props: BatteryCommandSelected,
   ): Promise<CommandCanceled> {
     const { cancel, state } = await onBatteryCommandSelected(
       props,
-      this.#state
+      this.#state,
     );
     this.#state = state;
     return cancel;

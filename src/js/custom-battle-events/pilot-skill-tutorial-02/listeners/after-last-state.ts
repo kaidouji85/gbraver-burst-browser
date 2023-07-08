@@ -11,7 +11,7 @@ import { playerWin } from "../stories/player-win";
  */
 export async function afterLastState(
   props: Readonly<LastState>,
-  state: Readonly<PilotSkillTutorial02State>
+  state: Readonly<PilotSkillTutorial02State>,
 ): Promise<PilotSkillTutorial02State> {
   const foundGameEnd = props.update.find((v) => v.effect.name === "GameEnd");
   if (!foundGameEnd || foundGameEnd.effect.name !== "GameEnd") {

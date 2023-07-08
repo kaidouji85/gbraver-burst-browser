@@ -47,17 +47,17 @@ export class HudLayer {
     this.scene = new THREE.Scene();
     this.camera = new PlainHUDCamera(param.resize);
     this.#overlap = param.renderer.createOverlapNotifier(
-      this.camera.getCamera()
+      this.camera.getCamera(),
     );
     this.#gameObjectAction = gameObjectStream(
       param.update,
       param.preRender,
-      this.#overlap
+      this.#overlap,
     );
     this.gameObjects = new HUDGameObjects(
       param.resources,
       this.#gameObjectAction,
-      param.player
+      param.player,
     );
     this.gameObjects.getObject3Ds().forEach((object) => {
       this.scene.add(object);
@@ -86,12 +86,12 @@ export class HudLayer {
       playerHUDPilotObjects(
         param.resources,
         this.#gameObjectAction,
-        param.player
+        param.player,
       ),
       enemyHUDPilotObjects(
         param.resources,
         this.#gameObjectAction,
-        param.enemy
+        param.enemy,
       ),
     ];
     this.pilots

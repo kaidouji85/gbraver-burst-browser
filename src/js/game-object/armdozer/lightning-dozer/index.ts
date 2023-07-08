@@ -15,7 +15,7 @@ import { PlayerLightingDozerView } from "./view/player-lighting-dozer-view";
  */
 export function PlayerLightningDozer(
   resources: Resources,
-  gameObjectAction: Observable<GameObjectAction>
+  gameObjectAction: Observable<GameObjectAction>,
 ): LightningDozer {
   const view = new PlayerLightingDozerView(resources);
   return new LightningDozer(resources, gameObjectAction, view);
@@ -30,7 +30,7 @@ export function PlayerLightningDozer(
  */
 export function EnemyLightningDozer(
   resources: Resources,
-  gameObjectAction: Observable<GameObjectAction>
+  gameObjectAction: Observable<GameObjectAction>,
 ): LightningDozer {
   const view = new EnemyLightningDozerView(resources);
   return new LightningDozer(resources, gameObjectAction, view);

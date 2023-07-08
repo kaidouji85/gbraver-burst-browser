@@ -20,7 +20,7 @@ export class PlayerReflectIndicatorView implements ReflectIndicatorView {
 
   constructor(resources: Resources) {
     const playerTurnResource = resources.textures.find(
-      (v) => v.id === TEXTURE_IDS.REFLECT
+      (v) => v.id === TEXTURE_IDS.REFLECT,
     );
     const playerTurn = playerTurnResource
       ? playerTurnResource.texture

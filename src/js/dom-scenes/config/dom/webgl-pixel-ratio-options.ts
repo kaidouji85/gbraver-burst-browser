@@ -21,5 +21,5 @@ export const webGLPixelRatioOptions = (selected: WebGLPixelRatio) =>
       >
       ${Number(value).toFixed(2)}
     </label>
-  `
+  `,
   ).reduce((a, b) => a + b);

@@ -71,7 +71,7 @@ export async function playerAttackMiss(props: CustomBattleEventProps) {
  */
 export async function playerAttack(
   props: CustomBattleEventProps,
-  battleResult: BattleResult
+  battleResult: BattleResult,
 ) {
   if (
     battleResult.name === "NormalHit" ||

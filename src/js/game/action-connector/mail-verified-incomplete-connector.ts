@@ -7,7 +7,7 @@ type Connector = DOMSceneActionConnector<MailVerifiedIncomplete>;
 /** メール認証未完了画面とゲームアクションを関連付ける */
 export const mailVerifiedIncompleteConnector: Connector = (
   scene,
-  gameAction
+  gameAction,
 ) => [
   scene.notifyTitleTransition().subscribe(() => {
     gameAction.next({

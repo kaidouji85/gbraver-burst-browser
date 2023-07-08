@@ -24,7 +24,7 @@ async function scrollMessages(
   messageWindow: MessageWindow,
   pushWindow: Observable<PushWindow>,
   sounds: BattleSceneSounds,
-  paragraphs: Paragraph[]
+  paragraphs: Paragraph[],
 ): Promise<void> {
   messageWindow.nextMessageIconVisible(true);
 
@@ -47,13 +47,13 @@ async function scrollMessages(
  */
 export async function scrollLeftMessages(
   props: CustomBattleEventProps,
-  paragraphs: Paragraph[]
+  paragraphs: Paragraph[],
 ): Promise<void> {
   await scrollMessages(
     props.view.dom.leftMessageWindow,
     props.pushWindow,
     props.sounds,
-    paragraphs
+    paragraphs,
   );
 }
 
@@ -66,12 +66,12 @@ export async function scrollLeftMessages(
  */
 export async function scrollRightMessages(
   props: CustomBattleEventProps,
-  paragraphs: Paragraph[]
+  paragraphs: Paragraph[],
 ): Promise<void> {
   await scrollMessages(
     props.view.dom.rightMessageWindow,
     props.pushWindow,
     props.sounds,
-    paragraphs
+    paragraphs,
   );
 }

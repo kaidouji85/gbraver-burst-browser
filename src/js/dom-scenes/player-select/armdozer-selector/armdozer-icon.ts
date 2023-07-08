@@ -46,7 +46,7 @@ export class ArmdozerIcon {
     this.#select = domPushStream(this.#root).pipe(
       tap((action) => {
         action.event.preventDefault();
-      })
+      }),
     );
   }
 

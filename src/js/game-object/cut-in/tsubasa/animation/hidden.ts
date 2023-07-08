@@ -20,17 +20,17 @@ export function hidden(model: TsubasaModel): Animate {
           {
             opacity: 0,
           },
-          300
-        )
+          300,
+        ),
       ),
       tween(model.position, (t) =>
         t.to(
           {
             x: "+100",
           },
-          300
-        )
-      )
-    )
+          300,
+        ),
+      ),
+    ),
   );
 }

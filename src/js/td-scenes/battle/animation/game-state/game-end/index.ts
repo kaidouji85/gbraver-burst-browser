@@ -16,7 +16,7 @@ import { toGameOverParam } from "./game-over/game-over-param";
  */
 export function gameEndAnimation(
   props: StateAnimationProps,
-  gameState: GameStateX<GameEnd>
+  gameState: GameStateX<GameEnd>,
 ): Animate {
   if (gameState.effect.result.type === "EvenMatch") {
     return evenMatchAnimation(props);

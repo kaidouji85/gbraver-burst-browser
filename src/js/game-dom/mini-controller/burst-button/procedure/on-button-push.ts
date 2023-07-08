@@ -8,7 +8,7 @@ import { BurstButtonProps } from "../props";
  */
 export function onButtonPush(
   props: Readonly<BurstButtonProps>,
-  action: Readonly<PushDOM>
+  action: Readonly<PushDOM>,
 ): void {
   action.event.preventDefault();
   action.event.stopPropagation();

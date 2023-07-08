@@ -64,7 +64,7 @@ export class GaiHUD implements HUDPilotObjects {
 export function playerGaiHUD(
   resources: Resources,
   gameObjectAction: Observable<GameObjectAction>,
-  state: Player
+  state: Player,
 ): GaiHUD {
   return new GaiHUD({
     playerId: state.playerId,
@@ -83,7 +83,7 @@ export function playerGaiHUD(
 export function enemyGaiHUD(
   resources: Resources,
   gameObjectAction: Observable<GameObjectAction>,
-  state: Player
+  state: Player,
 ): GaiHUD {
   return new GaiHUD({
     playerId: state.playerId,

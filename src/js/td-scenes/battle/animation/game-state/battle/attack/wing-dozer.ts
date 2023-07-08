@@ -33,7 +33,7 @@ function focusToAttacker(camera: TDCamera, attacker: WingDozer): Animate {
   const duration = 400;
   return all(
     track(camera, attacker.getObject3D().position.x * 0.6, duration),
-    dolly(camera, "-20", duration)
+    dolly(camera, "-20", duration),
   );
 }
 
@@ -48,7 +48,7 @@ type AttackResult = NormalHit | CriticalHit;
 function attack(param: WingDozerBattle<AttackResult>): Animate {
   return all(
     param.attackerSprite.charge().chain(delay(600)),
-    focusToAttacker(param.tdCamera, param.attackerSprite)
+    focusToAttacker(param.tdCamera, param.attackerSprite),
   )
     .chain(param.attackerSprite.upper())
     .chain(
@@ -60,8 +60,8 @@ function attack(param: WingDozerBattle<AttackResult>): Animate {
         param.defenderTD.damageIndicator.popUp(param.result.damage),
         param.defenderSprite.knockBack(),
         param.defenderTD.hitMark.shockWave.popUp(),
-        param.defenderHUD.gauge.hp(param.defenderState.armdozer.hp)
-      )
+        param.defenderHUD.gauge.hp(param.defenderState.armdozer.hp),
+      ),
     );
 }
 
@@ -83,8 +83,8 @@ function guard(param: WingDozerBattle<Guard>): Animate {
         param.defenderTD.damageIndicator.popUp(param.result.damage),
         param.defenderSprite.guard(),
         param.defenderTD.hitMark.shockWave.popUp(),
-        param.defenderHUD.gauge.hp(param.defenderState.armdozer.hp)
-      )
+        param.defenderHUD.gauge.hp(param.defenderState.armdozer.hp),
+      ),
     );
 }
 
@@ -128,7 +128,7 @@ type DownResult = NormalHit | CriticalHit | Guard;
 function down(param: WingDozerBattle<DownResult>): Animate {
   return all(
     param.attackerSprite.charge().chain(delay(600)),
-    focusToAttacker(param.tdCamera, param.attackerSprite)
+    focusToAttacker(param.tdCamera, param.attackerSprite),
   )
     .chain(param.attackerSprite.upper())
     .chain(
@@ -144,8 +144,8 @@ function down(param: WingDozerBattle<DownResult>): Animate {
         param.defenderTD.damageIndicator.popUp(param.result.damage),
         param.defenderSprite.down(),
         param.defenderTD.hitMark.shockWave.popUp(),
-        param.defenderHUD.gauge.hp(param.defenderState.armdozer.hp)
-      )
+        param.defenderHUD.gauge.hp(param.defenderState.armdozer.hp),
+      ),
     );
 }
 

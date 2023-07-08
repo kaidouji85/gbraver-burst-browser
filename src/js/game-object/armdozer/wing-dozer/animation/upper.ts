@@ -19,8 +19,8 @@ export function upper(model: WingDozerModel): Animate {
         {
           frame: 1,
         },
-        150
-      )
-    )
+        150,
+      ),
+    ),
   );
 }

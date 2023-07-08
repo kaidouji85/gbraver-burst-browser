@@ -14,7 +14,7 @@ import type { NeoLandozerModel } from "../model/neo-landozer-model";
  */
 export function activeFlash(
   model: NeoLandozerModel,
-  group: TWEEN.Group
+  group: TWEEN.Group,
 ): Animate {
   return process(() => {
     model.active.strength = 0;
@@ -27,10 +27,10 @@ export function activeFlash(
             {
               strength: 1,
             },
-            2000
+            2000,
           ),
-        group
-      )
+        group,
+      ),
     )
     .chain(delay(150, group))
     .chain(
@@ -41,10 +41,10 @@ export function activeFlash(
             {
               strength: 0,
             },
-            2000
+            2000,
           ),
-        group
-      )
+        group,
+      ),
     )
     .chain(delay(150, group));
 }

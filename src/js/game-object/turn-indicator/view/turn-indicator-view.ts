@@ -16,7 +16,7 @@ export class TurnIndicatorView {
   constructor(resources: Resources) {
     const turnIndicator =
       resources.canvasImages.find(
-        (v) => v.id === CANVAS_IMAGE_IDS.TURN_INDICATOR
+        (v) => v.id === CANVAS_IMAGE_IDS.TURN_INDICATOR,
       )?.image ?? new Image();
     this.#mesh = new SimpleImageMesh({
       canvasSize: 512,

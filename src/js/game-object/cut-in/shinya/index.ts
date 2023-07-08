@@ -15,7 +15,7 @@ import { PlayerShinyaView } from "./view/player-shinya-view";
  */
 export function playerShinyaCutIn(
   resources: Resources,
-  gameObjectAction: Observable<GameObjectAction>
+  gameObjectAction: Observable<GameObjectAction>,
 ): ShinyaCutIn {
   const view = new PlayerShinyaView(resources);
   return new ShinyaCutIn(view, resources, gameObjectAction);
@@ -30,7 +30,7 @@ export function playerShinyaCutIn(
  */
 export function enemyShinyaCutIn(
   resources: Resources,
-  gameObjectAction: Observable<GameObjectAction>
+  gameObjectAction: Observable<GameObjectAction>,
 ): ShinyaCutIn {
   const view = new EnemyShinyaView(resources);
   return new ShinyaCutIn(view, resources, gameObjectAction);

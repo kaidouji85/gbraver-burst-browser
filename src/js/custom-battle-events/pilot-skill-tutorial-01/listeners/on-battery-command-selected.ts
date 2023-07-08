@@ -12,7 +12,7 @@ import { noZeroDefense } from "../stories/no-zero-defense";
  * @return 再生した否か、trueで再生した
  */
 async function executeNoZeroDefenseIfNeeded(
-  props: Readonly<BatteryCommandSelected>
+  props: Readonly<BatteryCommandSelected>,
 ): Promise<boolean> {
   const lastState = props.stateHistory[props.stateHistory.length - 1];
   if (!lastState) {
@@ -54,7 +54,7 @@ type Ret = {
  */
 export async function onBatteryCommandSelected(
   props: Readonly<BatteryCommandSelected>,
-  state: Readonly<PilotSkillTutorial01State>
+  state: Readonly<PilotSkillTutorial01State>,
 ): Promise<Ret> {
   const isNoZeroDefenseExecuted = await executeNoZeroDefenseIfNeeded(props);
   if (isNoZeroDefenseExecuted) {

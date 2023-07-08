@@ -12,7 +12,7 @@ import { openAccountMenu } from "./open-account-menu";
  */
 export function onAvatarPush(
   props: TitleProps,
-  action: Readonly<PushDOM>
+  action: Readonly<PushDOM>,
 ): void {
   action.event.preventDefault();
 

@@ -46,7 +46,7 @@ export class PilotIcon {
     this.#select = domPushStream(this.#root).pipe(
       tap((action) => {
         action.event.preventDefault();
-      })
+      }),
     );
   }
 

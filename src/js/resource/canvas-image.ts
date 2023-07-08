@@ -144,7 +144,7 @@ export const CANVAS_IMAGE_CONFIGS: CanvasImageConfig[] = [
  */
 export function loadCanvasImage(
   resourceRoot: ResourceRoot,
-  config: CanvasImageConfig
+  config: CanvasImageConfig,
 ): Promise<CanvasImageResource> {
   return new Promise((resolve, reject) => {
     const loader = new THREE.ImageLoader();
@@ -159,7 +159,7 @@ export function loadCanvasImage(
       undefined,
       (error) => {
         reject(error);
-      }
+      },
     );
   });
 }

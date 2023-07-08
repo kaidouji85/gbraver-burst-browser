@@ -31,11 +31,11 @@ async function callLoginCheckAPI(props: Readonly<GameProps>): Promise<boolean> {
  * @return 処理が完了したら発火するPromise
  */
 export async function onNetBattleStart(
-  props: Readonly<GameProps>
+  props: Readonly<GameProps>,
 ): Promise<void> {
   props.domDialogBinder.bind(
     new WaitingDialog("ログインチェック中......"),
-    waitingDialogConnector
+    waitingDialogConnector,
   );
   const isLogin = await callLoginCheckAPI(props);
   props.domDialogBinder.hidden();
@@ -43,15 +43,15 @@ export async function onNetBattleStart(
     props.domDialogBinder.bind(
       new LoginDialog(
         props.resources,
-        "ネット対戦をするにはログインをしてください"
+        "ネット対戦をするにはログインをしてください",
       ),
-      loginDialogConnector
+      loginDialogConnector,
     );
     return;
   }
 
   props.domDialogBinder.bind(
     new NetBattleSelectorDialog(props.resources),
-    netBattleSelectorDialogConnector
+    netBattleSelectorDialogConnector,
   );
 }

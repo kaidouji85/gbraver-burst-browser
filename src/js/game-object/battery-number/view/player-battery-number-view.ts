@@ -20,7 +20,7 @@ export class PlayerBatteryNumberView implements BatteryNumberView {
 
   constructor(resources: Resources) {
     const batteryNumberResource = resources.textures.find(
-      (v) => v.id === TEXTURE_IDS.BATTERY_NUMBER
+      (v) => v.id === TEXTURE_IDS.BATTERY_NUMBER,
     );
     const batteryNumber = batteryNumberResource
       ? batteryNumberResource.texture

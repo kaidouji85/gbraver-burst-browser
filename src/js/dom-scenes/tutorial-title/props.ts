@@ -27,7 +27,7 @@ export type CreatePropsParams = RootInnerHTMLParams;
  * @return 生成した画面プロパティ
  */
 export function createTutorialTitleProps(
-  params: CreatePropsParams
+  params: CreatePropsParams,
 ): TutorialTitleProps {
   const ids = {
     stand: domUuid(),

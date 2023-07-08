@@ -22,6 +22,6 @@ export function popRoot(props: MiniControllerProps): Animate {
     });
   const model = { scale: 1 };
   return tween(model, (t) => setUpdateHandler(t).to({ scale: 1.1 }, 100)).chain(
-    tween(model, (t) => setUpdateHandler(t).to({ scale: 1 }, 100))
+    tween(model, (t) => setUpdateHandler(t).to({ scale: 1 }, 100)),
   );
 }

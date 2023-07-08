@@ -10,7 +10,7 @@ import { ROOT_CLASS } from "./class-name";
  * @return 生成結果
  */
 export const battleAnimationTimeScaleOptions = (
-  selected: BattleAnimationTimeScale
+  selected: BattleAnimationTimeScale,
 ) =>
   BattleAnimationTimeScales.map(
     (value) => `
@@ -23,5 +23,5 @@ export const battleAnimationTimeScaleOptions = (
       >
       ${Math.floor(1 / value)}倍
     </label>
-  `
+  `,
   ).reduce((a, b) => a + b);

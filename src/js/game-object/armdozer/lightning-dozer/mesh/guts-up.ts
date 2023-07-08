@@ -29,7 +29,7 @@ export function lightningDozerGutsUp(resources: Resources): ArmdozerAnimation {
  * @return メッシュ
  */
 export function lightningDozerActiveGutsUp(
-  resources: Resources
+  resources: Resources,
 ): ArmdozerAnimation {
   return createLightningDozerActiveMesh({
     resources,
@@ -44,7 +44,7 @@ export function lightningDozerActiveGutsUp(
  * @return メッシュ
  */
 export function lightningDozerOutlineGutsUp(
-  resources: Resources
+  resources: Resources,
 ): ArmdozerAnimation {
   return createLightningDozerOutlineMesh({
     resources,

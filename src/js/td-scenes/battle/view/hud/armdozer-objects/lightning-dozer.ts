@@ -66,7 +66,7 @@ export class LightningDozerHUD
 export function playerLightningDozerHUD(
   resources: Resources,
   gameObjectAction: Observable<GameObjectAction>,
-  state: Player
+  state: Player,
 ): LightningDozerHUD {
   return new LightningDozerHUD(state.playerId, {
     cutIn: playerLightningDozerCutIn(resources, gameObjectAction),
@@ -84,7 +84,7 @@ export function playerLightningDozerHUD(
 export function enemyLightningDozerHUD(
   resources: Resources,
   gameObjectAction: Observable<GameObjectAction>,
-  state: Player
+  state: Player,
 ): LightningDozerHUD {
   return new LightningDozerHUD(state.playerId, {
     cutIn: enemyLightningiDozerCutIn(resources, gameObjectAction),

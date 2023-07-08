@@ -17,7 +17,7 @@ import * as THREE from "three";
 export function animatedTexture(
   texture: THREE.Texture,
   horizonDividedNum: number,
-  verticalDividedNum: number
+  verticalDividedNum: number,
 ): void {
   texture.wrapS = THREE.RepeatWrapping;
   texture.wrapT = THREE.RepeatWrapping;

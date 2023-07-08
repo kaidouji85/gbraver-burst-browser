@@ -23,7 +23,7 @@ const targetTDCoordinate = {
 function trackingBatterySelectorLeadLine(
   td: Readonly<ThreeDimensionLayer>,
   hud: Readonly<HudLayer>,
-  targetHUDCoordinate: Readonly<Coordinate>
+  targetHUDCoordinate: Readonly<Coordinate>,
 ): void {
   const batterySelectorPosition =
     hud.gameObjects.batterySelector.getObject3D().position;
@@ -33,7 +33,7 @@ function trackingBatterySelectorLeadLine(
   };
   hud.gameObjects.batterySelectorLeadLine.set(
     startHUDCoordinate,
-    targetHUDCoordinate
+    targetHUDCoordinate,
   );
   hud.gameObjects.batterySelectorLeadLine.getObject3D().position.z =
     batterySelectorPosition.z - 0.1;
@@ -48,7 +48,7 @@ function trackingBatterySelectorLeadLine(
 function trackingBurstButtonLeadLine(
   td: Readonly<ThreeDimensionLayer>,
   hud: Readonly<HudLayer>,
-  targetHUDCoordinate: Readonly<Coordinate>
+  targetHUDCoordinate: Readonly<Coordinate>,
 ): void {
   const burstButtonPosition =
     hud.gameObjects.burstButton.getObject3D().position;
@@ -58,7 +58,7 @@ function trackingBurstButtonLeadLine(
   };
   hud.gameObjects.burstButtonLeadLine.set(
     startHUDCoordinate,
-    targetHUDCoordinate
+    targetHUDCoordinate,
   );
   hud.gameObjects.burstButtonLeadLine.getObject3D().position.z =
     burstButtonPosition.z - 0.1;
@@ -73,7 +73,7 @@ function trackingBurstButtonLeadLine(
 function trackingPilotButtonLeadLine(
   td: Readonly<ThreeDimensionLayer>,
   hud: Readonly<HudLayer>,
-  targetHUDCoordinate: Readonly<Coordinate>
+  targetHUDCoordinate: Readonly<Coordinate>,
 ): void {
   const pilotButtonPosition =
     hud.gameObjects.pilotButton.getObject3D().position;
@@ -83,7 +83,7 @@ function trackingPilotButtonLeadLine(
   };
   hud.gameObjects.pilotButtonLeadLine.set(
     startHUDCoordinate,
-    targetHUDCoordinate
+    targetHUDCoordinate,
   );
   hud.gameObjects.pilotButtonLeadLine.getObject3D().position.z =
     pilotButtonPosition.z - 0.1;
@@ -98,12 +98,12 @@ function trackingPilotButtonLeadLine(
 export function trackingLeadLine(
   td: Readonly<ThreeDimensionLayer>,
   hud: Readonly<HudLayer>,
-  rendererDOM: Readonly<HTMLElement>
+  rendererDOM: Readonly<HTMLElement>,
 ): void {
   const targetHUDCoordinate = toHUDCoordinate(
     targetTDCoordinate,
     td.camera.getCamera(),
-    rendererDOM
+    rendererDOM,
   );
   trackingBatterySelectorLeadLine(td, hud, targetHUDCoordinate);
   trackingBurstButtonLeadLine(td, hud, targetHUDCoordinate);

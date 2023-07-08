@@ -31,7 +31,7 @@ export class PlayerGaiView implements GaiView {
    */
   constructor(resources: Resources) {
     const gaiResource = resources.textures.find(
-      (v) => v.id === TEXTURE_IDS.GAI_CUTIN
+      (v) => v.id === TEXTURE_IDS.GAI_CUTIN,
     );
     const gai = gaiResource?.texture ?? new THREE.Texture();
     this.#mesh = new HorizontalAnimationMesh({

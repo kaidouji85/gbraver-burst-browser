@@ -15,7 +15,7 @@ import type { TurnIndicatorModel } from "../model/turn-indicator-model";
  */
 export function waiting(
   model: TurnIndicatorModel,
-  group: TWEEN.Group
+  group: TWEEN.Group,
 ): Animate {
   return process(() => {
     model.animation = 0;
@@ -28,10 +28,10 @@ export function waiting(
             {
               animation: 1,
             },
-            500
+            500,
           ),
-        group
-      )
+        group,
+      ),
     )
     .chain(delay(150, group));
 }

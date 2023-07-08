@@ -15,7 +15,7 @@ export function trapezoid(
   height: number,
   dx: number,
   dy: number,
-  percent: number
+  percent: number,
 ) {
   const gaugeWidth = width * percent;
   context.beginPath();

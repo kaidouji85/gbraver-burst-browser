@@ -15,7 +15,7 @@ import { PlayerDamageHalvedView } from "./view/player-damage-halved-view";
  */
 export function playerDamageHalved(
   resources: Resources,
-  gameObjectAction: Observable<GameObjectAction>
+  gameObjectAction: Observable<GameObjectAction>,
 ): DamageHalved {
   const view = new PlayerDamageHalvedView(resources);
   return new DamageHalved(view, resources, gameObjectAction);
@@ -30,7 +30,7 @@ export function playerDamageHalved(
  */
 export function enemyDamageHalved(
   resources: Resources,
-  gameObjectAction: Observable<GameObjectAction>
+  gameObjectAction: Observable<GameObjectAction>,
 ): DamageHalved {
   const view = new EnemyDamageHalvedView(resources);
   return new DamageHalved(view, resources, gameObjectAction);

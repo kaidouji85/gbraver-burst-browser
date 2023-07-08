@@ -24,7 +24,7 @@ import { GameProps } from "../game-props";
  */
 function createBattleProgress(
   props: Readonly<GameProps>,
-  battle: BattleSDK
+  battle: BattleSDK,
 ): BattleProgress {
   return {
     progress: async (v) => {
@@ -54,7 +54,7 @@ function createBattleProgress(
 export async function startOnlineBattle(
   props: Readonly<GameProps>,
   battle: BattleSDK,
-  caption: string
+  caption: string,
 ): Promise<void> {
   props.suddenlyBattleEnd.bind(battle);
   await Promise.all([

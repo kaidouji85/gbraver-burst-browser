@@ -53,7 +53,7 @@ export class PlayerGenesisBraverView implements GenesisBraverView {
     this.#group.position.y = model.position.y;
     this.#group.position.z = model.position.z;
     const currentMesh = this.#meshes.find(
-      (v) => v.type === model.animation.type
+      (v) => v.type === model.animation.type,
     );
     if (currentMesh) {
       currentMesh.mesh.opacity(1);
@@ -61,7 +61,7 @@ export class PlayerGenesisBraverView implements GenesisBraverView {
     }
 
     const currentActiveMesh = this.#activeMeshes.find(
-      (v) => v.type === model.animation.type
+      (v) => v.type === model.animation.type,
     );
     if (currentActiveMesh) {
       const activeOpacity =

@@ -39,7 +39,7 @@ export type RejectPrivateMatchEntryDialogProps = {
  * @return 生成結果
  */
 export function createRejectPrivateMatchEntryDialogProps(
-  resources: Resources
+  resources: Resources,
 ): RejectPrivateMatchEntryDialogProps {
   const root = document.createElement("div");
   root.className = ROOT_CLASS;

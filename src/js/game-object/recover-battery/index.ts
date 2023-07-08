@@ -15,7 +15,7 @@ import { PlayerRecoverBatteryView } from "./view/player-recover-battery-view";
  */
 export function playerRecoverBattery(
   resources: Resources,
-  gameObjectAction: Observable<GameObjectAction>
+  gameObjectAction: Observable<GameObjectAction>,
 ): RecoverBattery {
   const view = new PlayerRecoverBatteryView(resources);
   return new RecoverBattery({
@@ -34,7 +34,7 @@ export function playerRecoverBattery(
  */
 export function enemyRecoverBattery(
   resources: Resources,
-  gameObjectAction: Observable<GameObjectAction>
+  gameObjectAction: Observable<GameObjectAction>,
 ): RecoverBattery {
   const view = new EnemyRecoverBatteryView(resources);
   return new RecoverBattery({

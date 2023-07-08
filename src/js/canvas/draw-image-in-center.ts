@@ -16,7 +16,7 @@ export function drawImageInCenter(
   image: HTMLImageElement,
   dx: number,
   dy: number,
-  width?: number
+  width?: number,
 ): void {
   const correctWidth = width ?? image.width;
   const correctHeight = (image.height * correctWidth) / image.width;

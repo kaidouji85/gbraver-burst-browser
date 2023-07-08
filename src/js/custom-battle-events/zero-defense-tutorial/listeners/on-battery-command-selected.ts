@@ -35,7 +35,7 @@ type Ret = {
  */
 export async function onBatteryCommandSelected(
   props: Readonly<BatteryCommandSelected>,
-  state: ZeroDefenseTutorialState
+  state: ZeroDefenseTutorialState,
 ): Promise<Ret> {
   const foundLastState = props.stateHistory[props.stateHistory.length - 1];
   const isNotZeroBatteryCommand = props.battery.battery !== 0;

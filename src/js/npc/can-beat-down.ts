@@ -19,27 +19,27 @@ export function canBeatDown(
   attacker: PlayerState,
   attackBattery: number,
   defender: PlayerState,
-  defenseBattery: number
+  defenseBattery: number,
 ): boolean {
   const correctedAttackBattery = correctedBattery(
     {
       type: "BATTERY_COMMAND",
       battery: attackBattery,
     },
-    attacker.armdozer.effects
+    attacker.armdozer.effects,
   );
   const correctedDefenseBattery = correctedBattery(
     {
       type: "BATTERY_COMMAND",
       battery: defenseBattery,
     },
-    defender.armdozer.effects
+    defender.armdozer.effects,
   );
   const result = battleResult(
     attacker,
     correctedAttackBattery,
     defender,
-    correctedDefenseBattery
+    correctedDefenseBattery,
   );
   const updatedDefender = updateDefender(result, defender);
   return isPlayerDeath(updatedDefender);

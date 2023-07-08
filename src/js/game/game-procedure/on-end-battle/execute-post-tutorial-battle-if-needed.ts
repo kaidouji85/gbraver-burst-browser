@@ -10,7 +10,7 @@ import { GameProps } from "../../game-props";
  */
 export async function executePostTutorialBattleIfNeeded(
   props: Readonly<GameProps>,
-  action: Readonly<EndBattle>
+  action: Readonly<EndBattle>,
 ): Promise<boolean> {
   if (
     props.inProgress.type !== "Tutorial" ||

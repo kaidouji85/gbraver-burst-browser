@@ -15,7 +15,7 @@ import { webGLPixelRatioOptions } from "./webgl-pixel-ratio-options";
  */
 export function rootInnerHTML(
   ids: DataIDs,
-  config: GbraverBurstBrowserConfig
+  config: GbraverBurstBrowserConfig,
 ): string {
   return `
     <div class="${ROOT_CLASS}__title">設定</div>

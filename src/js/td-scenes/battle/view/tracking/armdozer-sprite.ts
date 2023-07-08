@@ -23,11 +23,11 @@ import { ThreeDimensionLayer } from "../td";
 export function trackingArmdozerSprites(
   td: Readonly<ThreeDimensionLayer>,
   hud: Readonly<HudLayer>,
-  rendererDOM: Readonly<HTMLElement>
+  rendererDOM: Readonly<HTMLElement>,
 ): void {
   td.armdozerObjects.forEach((tdArmdozer) => {
     const hudArmdozer = hud.armdozers.find(
-      (v) => v.playerId === tdArmdozer.playerId
+      (v) => v.playerId === tdArmdozer.playerId,
     );
 
     if (!hudArmdozer) {
@@ -39,7 +39,7 @@ export function trackingArmdozerSprites(
       const position = toCutInHUDPos(
         td.camera.getCamera(),
         rendererDOM,
-        tdArmdozer.sprite()
+        tdArmdozer.sprite(),
       );
       v.tracking(position.x, position.y);
     });
@@ -52,7 +52,7 @@ export function trackingArmdozerSprites(
  * @return 取得結果
  */
 function getTracksFromHUDArmdozer(
-  hudArmdozer: Readonly<HUDArmdozerObjects>
+  hudArmdozer: Readonly<HUDArmdozerObjects>,
 ): HUDTracking[] {
   if (hudArmdozer instanceof ShinBraverHUD) {
     return [hudArmdozer.cutIn];
@@ -87,7 +87,7 @@ function getTracksFromHUDArmdozer(
 function toCutInHUDPos(
   tdCamera: Readonly<THREE.PerspectiveCamera>,
   rendererDOM: Readonly<HTMLElement>,
-  sprite: Readonly<ArmDozerSprite>
+  sprite: Readonly<ArmDozerSprite>,
 ): Coordinate {
   const target = sprite.getObject3D();
   const tdPosition = {

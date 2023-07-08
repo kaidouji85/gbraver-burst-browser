@@ -62,7 +62,7 @@ export class ShinBraverTD implements ShinBraverTDField, TDArmdozerObjects {
 export function playerShinBraverTD(
   resources: Resources,
   gameObjectAction: Observable<GameObjectAction>,
-  state: Player
+  state: Player,
 ): ShinBraverTD {
   return new ShinBraverTD(state.playerId, {
     shinBraver: PlayerShinBraver(resources, gameObjectAction),
@@ -79,7 +79,7 @@ export function playerShinBraverTD(
 export function enemyShinBraverTD(
   resources: Resources,
   gameObjectAction: Observable<GameObjectAction>,
-  state: Player
+  state: Player,
 ): ShinBraverTD {
   return new ShinBraverTD(state.playerId, {
     shinBraver: EnemyShinBraver(resources, gameObjectAction),

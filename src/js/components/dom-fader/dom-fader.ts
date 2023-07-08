@@ -53,7 +53,7 @@ export class DOMFader {
         duration: 500,
         fill: "forwards",
         easing: "ease",
-      }
+      },
     );
 
     await waitFinishAnimation(animation);
@@ -81,7 +81,7 @@ export class DOMFader {
         duration: 500,
         fill: "forwards",
         easing: "ease",
-      }
+      },
     );
 
     await waitFinishAnimation(animation);

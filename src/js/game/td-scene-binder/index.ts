@@ -57,7 +57,7 @@ export class TDSceneBinder {
    */
   bind<X extends TDScene>(
     scene: X,
-    connector: TDSceneActionConnector<X>
+    connector: TDSceneActionConnector<X>,
   ): void {
     this.#disposeScene();
     this.#scene = scene;

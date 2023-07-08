@@ -17,7 +17,7 @@ export function attentionBatterySelector(props: CustomBattleEventProps): void {
  * @param props イベントプロパティ
  */
 export function unattentionBatterySelector(
-  props: CustomBattleEventProps
+  props: CustomBattleEventProps,
 ): void {
   props.view.hud.gameObjects.batterySelector.getObject3D().position.z = 0;
 }

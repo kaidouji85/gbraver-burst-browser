@@ -11,7 +11,7 @@ import type { GameProps } from "../game-props";
  */
 export function onWebSocketAPIError(
   props: Readonly<GameProps>,
-  action: WebSocketAPIError
+  action: WebSocketAPIError,
 ): void {
   const dialog = new NetworkErrorDialog(props.resources, {
     type: "GotoTitle",

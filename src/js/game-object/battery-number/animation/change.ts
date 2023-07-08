@@ -20,9 +20,9 @@ export function change(model: BatteryNumberModel, battery: number): Animate {
           {
             scale: 1.2,
           },
-          200
-        )
-      )
+          200,
+        ),
+      ),
     )
     .chain(
       tween(model, (t) =>
@@ -30,8 +30,8 @@ export function change(model: BatteryNumberModel, battery: number): Animate {
           {
             scale: 1,
           },
-          200
-        )
-      )
+          200,
+        ),
+      ),
     );
 }

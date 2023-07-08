@@ -11,15 +11,15 @@ import type { GameOverParamX } from "./game-over-param";
  * @return アニメーション
  */
 export function lightningDozerWin(
-  param: GameOverParamX<LightningDozerTD>
+  param: GameOverParamX<LightningDozerTD>,
 ): Animate {
   return all(
     param.winnerTdArmdozer.lightningDozer.guts(),
     track(
       param.tdCamera,
       param.winnerTdArmdozer.lightningDozer.getObject3D().position.x,
-      800
+      800,
     ),
-    dolly(param.tdCamera, "-60", 800)
+    dolly(param.tdCamera, "-60", 800),
   );
 }

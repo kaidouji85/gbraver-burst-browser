@@ -14,7 +14,7 @@ import type { Position } from "../position";
 export function move(
   model: Battle3DCameraModel,
   position: Position,
-  duration: number
+  duration: number,
 ): Animate {
   return tween(model.position, (t) => t.to(position, duration));
 }

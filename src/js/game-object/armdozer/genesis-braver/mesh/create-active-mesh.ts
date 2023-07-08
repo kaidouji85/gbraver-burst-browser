@@ -48,7 +48,7 @@ type Params = {
  * @return 生成結果
  */
 export function createGenesisBraverActiveMesh(
-  params: Params
+  params: Params,
 ): ArmdozerAnimation {
   const { resources, textureId, maxAnimation } = params;
   const texture =

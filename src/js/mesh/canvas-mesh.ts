@@ -36,7 +36,7 @@ export class CanvasMesh {
     });
     const planeGeometry = new THREE.PlaneGeometry(
       params.meshWidth,
-      params.meshHeight
+      params.meshHeight,
     );
     this.mesh = new THREE.Mesh(planeGeometry, material);
     this.mesh.renderOrder = SPRITE_RENDER_ORDER;

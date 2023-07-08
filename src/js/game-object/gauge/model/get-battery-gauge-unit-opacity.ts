@@ -6,7 +6,7 @@
  */
 export function getBatteryGaugeUnitOpacity(
   gaugeUnitValue: number,
-  maxBattery: number
+  maxBattery: number,
 ): number {
   return gaugeUnitValue <= maxBattery ? 1 : 0;
 }

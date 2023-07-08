@@ -13,7 +13,7 @@ import { successReflectDamage } from "../stories/success-reflect-damage";
  * @return 処理が完了したら発火するPromise
  */
 async function executeReflectIfNeeded(
-  props: Readonly<LastState>
+  props: Readonly<LastState>,
 ): Promise<void> {
   const foundLastBattle = props.update.find((v) => v.effect.name === "Battle");
 
@@ -41,7 +41,8 @@ async function executeReflectIfNeeded(
   const reflectSuccessful =
     props.update.filter(
       (v) =>
-        v.effect.name === "Reflect" && v.effect.damagedPlayer === props.playerId
+        v.effect.name === "Reflect" &&
+        v.effect.damagedPlayer === props.playerId,
     ).length > 0;
   reflectSuccessful
     ? await successReflectDamage(props)
@@ -57,7 +58,7 @@ async function executeReflectIfNeeded(
  */
 export async function beforeLastState(
   props: Readonly<LastState>,
-  state: BurstTutorialState
+  state: BurstTutorialState,
 ): Promise<BurstTutorialState> {
   if (!state.isIntroductionComplete) {
     await introduction(props);

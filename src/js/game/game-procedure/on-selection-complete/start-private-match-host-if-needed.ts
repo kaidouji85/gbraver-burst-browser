@@ -27,7 +27,7 @@ type Ret = IsPrivateMatchHostStarted | IsNotPrivateMatchHostStarted;
  */
 export async function startPrivateMatchHostIfNeeded(
   props: Readonly<GameProps>,
-  action: Readonly<SelectionComplete>
+  action: Readonly<SelectionComplete>,
 ): Promise<Ret> {
   if (props.inProgress.type !== "PrivateMatchHost") {
     return { isStarted: false };

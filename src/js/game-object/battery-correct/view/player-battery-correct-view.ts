@@ -72,7 +72,7 @@ export class PlayerBatteryCorrectView implements BatteryCorrectView {
   engage(model: BatteryCorrectModel, preRender: PreRender): void {
     const absoluteValue = Math.min(
       Math.abs(model.correctValue),
-      MAX_ABSOLUTE_VALUE
+      MAX_ABSOLUTE_VALUE,
     );
     const value = absoluteValue / MAX_BATTERY_ANIMATION;
     this.#value.animate(value);

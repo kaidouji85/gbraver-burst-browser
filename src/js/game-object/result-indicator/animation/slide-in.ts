@@ -30,9 +30,9 @@ export function slideIn(model: ResultIndicatorModel): Animate {
             {
               x: `+${distance}`,
             },
-            duration
+            duration,
           )
-          .easing(TWEEN.Easing.Quadratic.Out)
+          .easing(TWEEN.Easing.Quadratic.Out),
       ),
       tween(model, (t) =>
         t
@@ -40,10 +40,10 @@ export function slideIn(model: ResultIndicatorModel): Animate {
             {
               opacity: 1,
             },
-            duration
+            duration,
           )
-          .easing(TWEEN.Easing.Quadratic.Out)
-      )
-    )
+          .easing(TWEEN.Easing.Quadratic.Out),
+      ),
+    ),
   );
 }

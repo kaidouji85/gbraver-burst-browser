@@ -33,12 +33,12 @@ export class ShockWave {
     view: ShockWaveView,
     initialModel: ShockWaveModel,
     resources: Resources,
-    gameObjectAction: Observable<GameObjectAction>
+    gameObjectAction: Observable<GameObjectAction>,
   ) {
     this.#model = initialModel;
     this.#view = view;
     const hitResource = resources.sounds.find(
-      (v) => v.id === SOUND_IDS.MECHA_IMPACT
+      (v) => v.id === SOUND_IDS.MECHA_IMPACT,
     );
     this.#hitSound = hitResource ? hitResource.sound : new Howl({ src: "" });
     this.#unsubscriber = gameObjectAction.subscribe((action) => {

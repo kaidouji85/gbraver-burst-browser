@@ -6,7 +6,7 @@ import { BatterySelectorProps } from "../props";
  * @param props ゲームオブジェクトプロパティ
  */
 export function onBatteryMinusPush(
-  props: Readonly<BatterySelectorProps>
+  props: Readonly<BatterySelectorProps>,
 ): void {
   if (
     props.model.isPushNotifierDisabled ||

@@ -15,7 +15,7 @@ import { zeroBatteryChance } from "../stories/zero-battery-chance";
  */
 async function executeDamageRaceIfNeeded(
   props: Readonly<LastState>,
-  state: ZeroDefenseTutorialState
+  state: ZeroDefenseTutorialState,
 ): Promise<ZeroDefenseTutorialState> {
   if (state.isDamageRaceComplete) {
     return state;
@@ -49,7 +49,7 @@ async function executeDamageRaceIfNeeded(
  */
 async function executeZeroBatteryChanceIfNeeded(
   props: Readonly<LastState>,
-  state: ZeroDefenseTutorialState
+  state: ZeroDefenseTutorialState,
 ): Promise<ZeroDefenseTutorialState> {
   if (state.isZeroBatteryChangeComplete) {
     return state;
@@ -87,7 +87,7 @@ async function executeZeroBatteryChanceIfNeeded(
  */
 export async function beforeLastState(
   props: Readonly<LastState>,
-  state: ZeroDefenseTutorialState
+  state: ZeroDefenseTutorialState,
 ): Promise<ZeroDefenseTutorialState> {
   if (!state.isIntroductionComplete) {
     await introduction(props);

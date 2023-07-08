@@ -73,7 +73,7 @@ export class PostBattleFloater {
    */
   async show(
     resources: Resources,
-    buttons: PostBattleButtonConfig[]
+    buttons: PostBattleButtonConfig[],
   ): Promise<void> {
     await this.#exclusive.execute(async () => {
       const actionButtons = this.#createActionButtons(resources, buttons);
@@ -123,7 +123,7 @@ export class PostBattleFloater {
         duration: 400,
         fill: "forwards",
         easing: "ease",
-      }
+      },
     );
     await waitFinishAnimation(animation);
   }
@@ -137,7 +137,7 @@ export class PostBattleFloater {
    */
   #createActionButtons(
     resources: Resources,
-    buttons: PostBattleButtonConfig[]
+    buttons: PostBattleButtonConfig[],
   ): ActionButton[] {
     const pushButton =
       resources.sounds.find((v) => v.id === SOUND_IDS.PUSH_BUTTON)?.sound ??

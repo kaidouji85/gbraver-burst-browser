@@ -13,7 +13,7 @@ import { playStateHistory } from "./play-state-history";
  */
 const repeatProgressWhenUnselectable = async (
   props: BattleSceneProps,
-  command: Command
+  command: Command,
 ): Promise<GameState | null> => {
   let lastCommand: Command = command;
   const maxProgressCount = 100;
@@ -31,7 +31,7 @@ const repeatProgressWhenUnselectable = async (
     }
 
     const playerCommand = lastState.effect.players.find(
-      (v) => v.playerId === props.playerId
+      (v) => v.playerId === props.playerId,
     );
     if (!playerCommand || playerCommand.selectable) {
       return lastState;
@@ -51,7 +51,7 @@ const repeatProgressWhenUnselectable = async (
  */
 const onGameEnd = async (
   props: Readonly<BattleSceneProps>,
-  gameEnd: GameEnd
+  gameEnd: GameEnd,
 ): Promise<void> => {
   await props.bgm.do(fadeOut);
   await props.bgm.do(stop);
@@ -69,7 +69,7 @@ const onGameEnd = async (
  */
 export async function progressGame(
   props: BattleSceneProps,
-  command: Command
+  command: Command,
 ): Promise<void> {
   const lastState = await repeatProgressWhenUnselectable(props, command);
   if (lastState && lastState.effect.name === "GameEnd") {

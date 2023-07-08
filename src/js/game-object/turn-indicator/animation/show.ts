@@ -11,7 +11,7 @@ import type { TurnIndicatorModel } from "../model/turn-indicator-model";
  */
 export function show(
   isPlayerTurn: boolean,
-  model: TurnIndicatorModel
+  model: TurnIndicatorModel,
 ): Animate {
   return process(() => {
     model.isPlayerTurn = isPlayerTurn;
@@ -21,8 +21,8 @@ export function show(
         {
           opacity: 1,
         },
-        500
-      )
-    )
+        500,
+      ),
+    ),
   );
 }

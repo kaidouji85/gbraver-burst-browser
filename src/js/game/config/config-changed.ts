@@ -9,7 +9,7 @@ import { GbraverBurstBrowserConfig } from "./browser-config";
  */
 export function isConfigChanged(
   origin: GbraverBurstBrowserConfig,
-  update: GbraverBurstBrowserConfig
+  update: GbraverBurstBrowserConfig,
 ): boolean {
   return (
     origin.webGLPixelRatio !== update.webGLPixelRatio ||
@@ -28,7 +28,7 @@ export function isConfigChanged(
  */
 export function isSoundConfigChanged(
   origin: GbraverBurstBrowserConfig,
-  update: GbraverBurstBrowserConfig
+  update: GbraverBurstBrowserConfig,
 ): boolean {
   return (
     origin.bgmVolume !== update.bgmVolume || origin.seVolume !== update.seVolume

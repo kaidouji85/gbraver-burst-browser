@@ -15,7 +15,7 @@ import { PlayerNeoLandozerCutInView } from "./view/player-neo-landozer-cutin-vie
  */
 export function playerNeoLandozerCutIn(
   resources: Resources,
-  gameObjectAction: Observable<GameObjectAction>
+  gameObjectAction: Observable<GameObjectAction>,
 ): NeoLandozerCutIn {
   const view = new PlayerNeoLandozerCutInView(resources);
   return new NeoLandozerCutIn(view, gameObjectAction);
@@ -30,7 +30,7 @@ export function playerNeoLandozerCutIn(
  */
 export function enemyNeoLandozerCutIn(
   resources: Resources,
-  gameObjectAction: Observable<GameObjectAction>
+  gameObjectAction: Observable<GameObjectAction>,
 ): NeoLandozerCutIn {
   const view = new EnemyNeoLandozerCutInView(resources);
   return new NeoLandozerCutIn(view, gameObjectAction);

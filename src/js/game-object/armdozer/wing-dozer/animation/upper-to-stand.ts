@@ -13,7 +13,7 @@ import { WingDozerSounds } from "../sounds/wing-dozer-sounds";
  */
 export function upperToStand(
   model: WingDozerModel,
-  sounds: WingDozerSounds
+  sounds: WingDozerSounds,
 ): Animate {
   return process(() => {
     model.animation.type = "UPPER_TO_STAND";
@@ -26,14 +26,14 @@ export function upperToStand(
           {
             frame: 1,
           },
-          400
-        )
-      )
+          400,
+        ),
+      ),
     )
     .chain(
       process(() => {
         model.animation.type = "STAND";
         model.animation.frame = 0;
-      })
+      }),
     );
 }

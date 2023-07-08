@@ -40,7 +40,7 @@ export function shinyaAnimation(param: ShinyaAnimationParam): Animate {
  * @return アニメーション
  */
 function shinyaRecoverBattery(
-  param: ShinyaAnimationParamX<RecoverBatterySkill>
+  param: ShinyaAnimationParamX<RecoverBatterySkill>,
 ): Animate {
   return all(
     param.pilot.cutIn.show(),
@@ -50,7 +50,7 @@ function shinyaRecoverBattery(
     track(param.tdCamera, param.invokerSprite.getObject3D().position.x, 500),
     dolly(param.tdCamera, "-40", 500),
     param.tdObjects.skyBrightness.brightness(0.2, 500),
-    param.tdObjects.illumination.intensity(0.2, 500)
+    param.tdObjects.illumination.intensity(0.2, 500),
   )
     .chain(delay(800))
     .chain(param.pilot.cutIn.hidden())
@@ -58,15 +58,15 @@ function shinyaRecoverBattery(
     .chain(
       all(
         param.invokerHUD.gauge.battery(param.invokerState.armdozer.battery),
-        param.invokerTD.recoverBattery.popUp(param.skill.recoverBattery)
-      )
+        param.invokerTD.recoverBattery.popUp(param.skill.recoverBattery),
+      ),
     )
     .chain(
       all(
         toInitial(param.tdCamera, 500),
         param.tdObjects.skyBrightness.brightness(1, 500),
-        param.tdObjects.illumination.intensity(1, 500)
-      )
+        param.tdObjects.illumination.intensity(1, 500),
+      ),
     )
     .chain(delay(200));
 }

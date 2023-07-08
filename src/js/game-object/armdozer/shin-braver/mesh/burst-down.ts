@@ -29,7 +29,7 @@ export function shinBraverBurstDown(resources: Resources): ArmdozerAnimation {
  * @return メッシュ
  */
 export function shinBraverActiveBurstDown(
-  resources: Resources
+  resources: Resources,
 ): ArmdozerAnimation {
   return createShinBraverActiveMesh({
     resources,
@@ -44,7 +44,7 @@ export function shinBraverActiveBurstDown(
  * @return メッシュ
  */
 export function shinBraverOutlineBurstDown(
-  resources: Resources
+  resources: Resources,
 ): ArmdozerAnimation {
   return createShinBraverOutlineMesh({
     resources,

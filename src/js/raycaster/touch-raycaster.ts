@@ -35,7 +35,7 @@ export type TouchRaycaster = {
 export function createTouchEventRaycaster(
   event: TouchEvent,
   rendererDOM: HTMLElement,
-  camera: THREE.Camera
+  camera: THREE.Camera,
 ): TouchRaycastContainer {
   const touchToRaycaster = (touchList: TouchList): TouchRaycaster[] =>
     Object.values(touchList).map((touch) => {
@@ -61,12 +61,12 @@ export function createTouchEventRaycaster(
  */
 export function getTouchPosition(
   touch: Touch,
-  rendererDOM: HTMLElement
+  rendererDOM: HTMLElement,
 ): THREE.Vector2 {
   return getScreenPosition(
     touch.clientX,
     touch.clientY,
     rendererDOM.clientWidth,
-    rendererDOM.clientHeight
+    rendererDOM.clientHeight,
   );
 }

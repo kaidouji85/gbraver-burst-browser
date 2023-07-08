@@ -15,7 +15,7 @@ import { PlayerTsubasaView } from "./view/player-tsubasa-view";
  */
 export function playerTsubasaCutIn(
   resources: Resources,
-  gameObjectAction: Observable<GameObjectAction>
+  gameObjectAction: Observable<GameObjectAction>,
 ): TsubasaCutIn {
   const view = new PlayerTsubasaView(resources);
   return new TsubasaCutIn(view, resources, gameObjectAction);
@@ -30,7 +30,7 @@ export function playerTsubasaCutIn(
  */
 export function enemyTsubasaCutIn(
   resources: Resources,
-  gameObjectAction: Observable<GameObjectAction>
+  gameObjectAction: Observable<GameObjectAction>,
 ): TsubasaCutIn {
   const view = new EnemyTsubasaView(resources);
   return new TsubasaCutIn(view, resources, gameObjectAction);

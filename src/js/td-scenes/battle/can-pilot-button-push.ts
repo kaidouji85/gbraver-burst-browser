@@ -8,7 +8,7 @@ import type { Command } from "gbraver-burst-core";
  */
 export function canPilotButtonPush(commands: Command[]): boolean {
   const burstCommands = commands.filter(
-    (v) => v.type === "PILOT_SKILL_COMMAND"
+    (v) => v.type === "PILOT_SKILL_COMMAND",
   );
   return 1 <= burstCommands.length;
 }

@@ -14,7 +14,7 @@ import { PilotIcon } from "./pilot-icon";
  */
 export function createPilotIcon(
   resources: Resources,
-  pilotId: PilotId
+  pilotId: PilotId,
 ): PilotIcon {
   switch (pilotId) {
     case PilotIds.SHINYA:

@@ -11,7 +11,7 @@ import { setInputDisabled } from "./set-input-disabled";
  */
 export function onConfigChangeButtonPush(
   props: ConfigProps,
-  action: Readonly<PushDOM>
+  action: Readonly<PushDOM>,
 ): void {
   action.event.preventDefault();
   action.event.stopPropagation();

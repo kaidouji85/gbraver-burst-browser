@@ -22,7 +22,7 @@ const ZERO_BATTERY: Command = {
  */
 const attackRoutine: SimpleRoutine = (data) => {
   const battery3 = data.commands.find(
-    (v) => v.type === "BATTERY_COMMAND" && v.battery === 3
+    (v) => v.type === "BATTERY_COMMAND" && v.battery === 3,
   );
   return battery3 ?? ZERO_BATTERY;
 };
@@ -33,10 +33,10 @@ const attackRoutine: SimpleRoutine = (data) => {
  */
 const defenseRoutine: SimpleRoutine = (data) => {
   const battery2 = data.commands.find(
-    (v) => v.type === "BATTERY_COMMAND" && v.battery === 2
+    (v) => v.type === "BATTERY_COMMAND" && v.battery === 2,
   );
   const battery1 = data.commands.find(
-    (v) => v.type === "BATTERY_COMMAND" && v.battery === 1
+    (v) => v.type === "BATTERY_COMMAND" && v.battery === 1,
   );
   return battery2 ?? battery1 ?? ZERO_BATTERY;
 };

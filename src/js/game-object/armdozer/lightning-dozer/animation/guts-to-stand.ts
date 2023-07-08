@@ -13,7 +13,7 @@ import { LightningDozerSounds } from "../sounds/lightning-dozer-sounds";
  */
 export function gutsToStand(
   model: LightningDozerModel,
-  sounds: LightningDozerSounds
+  sounds: LightningDozerSounds,
 ): Animate {
   return process(() => {
     model.animation.type = "GUTS_TO_STAND";
@@ -26,14 +26,14 @@ export function gutsToStand(
           {
             frame: 1,
           },
-          400
-        )
-      )
+          400,
+        ),
+      ),
     )
     .chain(
       process(() => {
         model.animation.type = "STAND";
         model.animation.frame = 0;
-      })
+      }),
     );
 }

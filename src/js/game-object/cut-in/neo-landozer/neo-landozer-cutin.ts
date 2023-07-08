@@ -27,7 +27,7 @@ export class NeoLandozerCutIn implements HUDTracking {
    */
   constructor(
     view: NeoLandozerCutInView,
-    gameObjectAction: Observable<GameObjectAction>
+    gameObjectAction: Observable<GameObjectAction>,
   ) {
     this.#model = createInitialValue();
     this.#view = view;

@@ -23,7 +23,7 @@ export class PlayerLightningView implements LightningView {
 
   constructor(resources: Resources) {
     const textureResource = resources.textures.find(
-      (v) => v.id === TEXTURE_IDS.HITMARK_LIGHTNING_RING
+      (v) => v.id === TEXTURE_IDS.HITMARK_LIGHTNING_RING,
     );
     const texture = textureResource
       ? textureResource.texture

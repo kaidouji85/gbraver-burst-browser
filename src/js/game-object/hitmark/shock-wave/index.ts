@@ -16,7 +16,7 @@ import { PlayerShockWaveView } from "./view/player-shock-wave-view";
  */
 export function playerShockWave(
   resources: Resources,
-  gameObjectAction: Observable<GameObjectAction>
+  gameObjectAction: Observable<GameObjectAction>,
 ): ShockWave {
   const model = initialValue();
   const view = new PlayerShockWaveView(resources, model);
@@ -32,7 +32,7 @@ export function playerShockWave(
  */
 export function enemyShockWave(
   resources: Resources,
-  gameObjectAction: Observable<GameObjectAction>
+  gameObjectAction: Observable<GameObjectAction>,
 ): ShockWave {
   const model = initialValue();
   const view = new EnemyShockWaveView(resources, model);

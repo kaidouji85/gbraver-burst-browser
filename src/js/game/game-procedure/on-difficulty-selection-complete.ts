@@ -24,7 +24,7 @@ import { startNPCBattleStage } from "./start-npc-battle-stage";
  */
 export async function onDifficultySelectionComplete(
   props: GameProps,
-  action: DifficultySelectionComplete
+  action: DifficultySelectionComplete,
 ): Promise<void> {
   if (
     !(
@@ -40,13 +40,13 @@ export async function onDifficultySelectionComplete(
   const { armdozerId, pilotId } = difficultySelect;
   const stages =
     NPCBattleCourses.find(
-      (v) => v.armdozerId === armdozerId && v.difficulty === action.difficulty
+      (v) => v.armdozerId === armdozerId && v.difficulty === action.difficulty,
     )?.stages ?? DefaultStages;
   const npcBattleState = createNPCBattleState(
     playerUuid(),
     armdozerId,
     pilotId,
-    stages
+    stages,
   );
   props.inProgress = {
     ...npcBattle,

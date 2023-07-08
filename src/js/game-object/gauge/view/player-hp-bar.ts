@@ -52,7 +52,7 @@ export class PlayerHpBar {
       BAR_MESH_WIDTH,
       BAR_MESH_HEIGHT,
       1,
-      1
+      1,
     );
     const material = new THREE.MeshBasicMaterial({
       side: THREE.DoubleSide,
@@ -81,7 +81,7 @@ export class PlayerHpBar {
         0,
         context.canvas.height / 2,
         backWidth,
-        backHeight
+        backHeight,
       );
     });
     this.#back.getObject3D().position.set(BAR_MESH_HEIGHT / 2, 0, 0);

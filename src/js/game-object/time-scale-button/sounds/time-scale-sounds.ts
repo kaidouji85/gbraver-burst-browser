@@ -16,7 +16,7 @@ export type TimeScaleButtonSounds = {
  * @return 生成結果
  */
 export function createTimeScaleButtonSounds(
-  resources: Resources
+  resources: Resources,
 ): TimeScaleButtonSounds {
   const changeValue =
     resources.sounds.find((v) => v.id === SOUND_IDS.CHANGE_VALUE)?.sound ??

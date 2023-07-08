@@ -13,7 +13,7 @@ import { WingDozerSounds } from "../sounds/wing-dozer-sounds";
  */
 export function charge(
   model: WingDozerModel,
-  sounds: WingDozerSounds
+  sounds: WingDozerSounds,
 ): Animate {
   return process(() => {
     model.animation.type = "UPPER_CHARGE";
@@ -25,8 +25,8 @@ export function charge(
         {
           frame: 1,
         },
-        200
-      )
-    )
+        200,
+      ),
+    ),
   );
 }

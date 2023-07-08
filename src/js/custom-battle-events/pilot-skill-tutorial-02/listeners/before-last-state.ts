@@ -16,7 +16,7 @@ import { shouldAttack3OrMore } from "../stories/should-attack3-or-more";
  */
 async function executeDoPilotSkillIfNeeded(
   props: Readonly<LastState>,
-  state: Readonly<PilotSkillTutorial02State>
+  state: Readonly<PilotSkillTutorial02State>,
 ): Promise<boolean> {
   const lastState = props.update[props.update.length - 1];
   if (!lastState) {
@@ -46,7 +46,7 @@ async function executeDoPilotSkillIfNeeded(
  */
 async function executeShouldAttack3OrMoreIfNeeded(
   props: Readonly<LastState>,
-  state: Readonly<PilotSkillTutorial02State>
+  state: Readonly<PilotSkillTutorial02State>,
 ): Promise<boolean> {
   const lastState = props.update[props.update.length - 1];
   if (!lastState) {
@@ -76,7 +76,7 @@ async function executeShouldAttack3OrMoreIfNeeded(
  */
 export async function beforeLastState(
   props: Readonly<LastState>,
-  state: Readonly<PilotSkillTutorial02State>
+  state: Readonly<PilotSkillTutorial02State>,
 ): Promise<PilotSkillTutorial02State> {
   const turn = turnCount(props.stateHistory);
   if (turn === 1 && !state.isIntroductionComplete) {
@@ -87,7 +87,7 @@ export async function beforeLastState(
 
   const isDoPilotSkillExecuted = await executeDoPilotSkillIfNeeded(
     props,
-    state
+    state,
   );
   if (isDoPilotSkillExecuted) {
     return { ...state, isDoPilotSkillComplete: true };

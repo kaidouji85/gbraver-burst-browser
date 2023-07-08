@@ -24,7 +24,7 @@ export function trackingGauges(
   td: Readonly<ThreeDimensionLayer>,
   hud: Readonly<HudLayer>,
   activePlayerId: Readonly<PlayerId>,
-  rendererDOM: Readonly<HTMLElement>
+  rendererDOM: Readonly<HTMLElement>,
 ): void {
   hud.players.forEach((hudPlayer) => {
     const isActivePlayer = hudPlayer.playerId === activePlayerId;
@@ -57,7 +57,7 @@ function getTracksFromHUDPlayer(hudPlayer: Readonly<HUDPlayer>): HUDTracking[] {
  */
 function toPlayerGaugeHUDPos(
   tdCamera: Readonly<THREE.PerspectiveCamera>,
-  rendererDOM: Readonly<HTMLElement>
+  rendererDOM: Readonly<HTMLElement>,
 ): Coordinate {
   const tdCoordinate = {
     x: ARMDOZER_EFFECT_STANDARD_X,
@@ -76,7 +76,7 @@ function toPlayerGaugeHUDPos(
  */
 function toEnemyGaugeHUDPos(
   tdCamera: Readonly<THREE.PerspectiveCamera>,
-  rendererDOM: Readonly<HTMLElement>
+  rendererDOM: Readonly<HTMLElement>,
 ): Coordinate {
   const tdCoordinate = {
     x: -ARMDOZER_EFFECT_STANDARD_X,

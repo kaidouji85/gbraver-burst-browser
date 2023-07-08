@@ -17,10 +17,10 @@ const TITLE_SOUND_IDS = [
  * @return リソース読み込みオブジェクト
  */
 export function titleResourceLoading(
-  resourceRoot: ResourceRoot
+  resourceRoot: ResourceRoot,
 ): ResourceLoading {
   const soundConfigs = SOUND_CONFIGS.filter((v) =>
-    TITLE_SOUND_IDS.includes(v.id)
+    TITLE_SOUND_IDS.includes(v.id),
   );
   return resourceLoading({
     resourceRoot,

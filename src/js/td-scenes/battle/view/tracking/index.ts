@@ -17,7 +17,7 @@ export function tracking(
   td: Readonly<ThreeDimensionLayer>,
   hud: Readonly<HudLayer>,
   activePlayerId: Readonly<PlayerId>,
-  rendererDOM: Readonly<HTMLElement>
+  rendererDOM: Readonly<HTMLElement>,
 ): void {
   trackingGauges(td, hud, activePlayerId, rendererDOM);
   trackingArmdozerSprites(td, hud, rendererDOM);

@@ -19,6 +19,6 @@ export async function batteryMinus(props: BatterySelectorProps): Promise<void> {
   props.batteryMinusTween.removeAll();
   await all(
     batteryMinusPopAnimate(props.model, props.sounds, props.batteryMinusTween),
-    batteryChange(props, props.model.battery - 1)
+    batteryChange(props, props.model.battery - 1),
   ).play();
 }
