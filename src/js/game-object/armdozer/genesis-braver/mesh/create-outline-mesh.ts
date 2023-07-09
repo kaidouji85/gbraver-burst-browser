@@ -15,7 +15,7 @@ const OUTLINE_COLOR_R = 255;
 /** アウトラインレイヤー Green */
 const OUTLINE_COLOR_G = 0;
 /** アウトラインレイヤー Blue */
-const OUTLINE_COLOR_B = 0;
+const OUTLINE_COLOR_B = 255;
 
 /**
  * アウトライン用にシルエット化したテクスチャを生成する
