@@ -48,13 +48,30 @@ const straightPunch = (sprite: ShinBraver) => {
     .loop();
 };
 
+/**
+ * アクティブ ストレートパンチ
+ * @param sprite スプライト
+ */
+const activeStraightPunch = (sprite: ShinBraver) => {
+  straightPunch(sprite);
+  sprite.startActive().play();
+};
+
 /** プレイヤー ストレートパンチ */
 export const playerStraightPunch = () =>
   armdozerSpriteStub(PlayerShinBraver, straightPunch);
 
+/** プレイヤー アクティブ ストレートパンチ */
+export const playerActiveStraightPunch = () =>
+  armdozerSpriteStub(PlayerShinBraver, activeStraightPunch);
+
 /** 敵 ストレートパンチ */
 export const enemyStraightPunch = () =>
   armdozerSpriteStub(EnemyShinBraver, straightPunch);
+
+/** 敵 アクティブ ストレートパンチ */
+export const enemyActiveStraightPunch = () =>
+  armdozerSpriteStub(EnemyShinBraver, activeStraightPunch);
 
 /**
  * ガッツ
@@ -69,11 +86,28 @@ const guts = (sprite: ShinBraver) => {
     .loop();
 };
 
+/**
+ * アクティブ ガッツ
+ * @param sprite スプライト
+ */
+const activeGuts = (sprite: ShinBraver) => {
+  guts(sprite);
+  sprite.startActive().play();
+};
+
 /** プレイヤー ガッツ */
 export const playerGuts = () => armdozerSpriteStub(PlayerShinBraver, guts);
 
+/** プレイヤー アクティブ ガッツ */
+export const playerActiveGuts = () =>
+  armdozerSpriteStub(PlayerShinBraver, activeGuts);
+
 /** 敵 ガッツ */
 export const enemyGuts = () => armdozerSpriteStub(EnemyShinBraver, guts);
+
+/** 敵 アクティブ ガッツ */
+export const enemyActiveGuts = () =>
+  armdozerSpriteStub(EnemyShinBraver, activeGuts);
 
 /**
  * バースト
@@ -229,8 +263,25 @@ const down = (sprite: ShinBraver) => {
   delay(1000).chain(sprite.down()).chain(delay(1000)).loop();
 };
 
+/**
+ * アクティブ ダウン
+ * @param sprite スプライト
+ */
+const activeDown = (sprite: ShinBraver) => {
+  down(sprite);
+  sprite.startActive().play();
+};
+
 /** プレイヤー ダウン */
 export const playerDown = () => armdozerSpriteStub(PlayerShinBraver, down);
 
+/** プレイヤー アクティブ ダウン */
+export const playerActiveDown = () =>
+  armdozerSpriteStub(PlayerShinBraver, activeDown);
+
 /** 敵 ダウン */
 export const enemyDown = () => armdozerSpriteStub(EnemyShinBraver, down);
+
+/** 敵 アクティブ ダウン */
+export const enemyActiveDown = () =>
+  armdozerSpriteStub(EnemyShinBraver, activeDown);
