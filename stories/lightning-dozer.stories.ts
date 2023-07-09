@@ -226,8 +226,23 @@ const down = (sprite: LightningDozer) => {
   delay(1000).chain(sprite.down()).chain(delay(1000)).loop();
 };
 
+/**
+ * アクティブ ダウン
+ * @param sprite スプライト
+ */
+const activeDown = (sprite: LightningDozer) => {
+  down(sprite);
+  sprite.startActive().play();
+}
+
 /** プレイヤー ダウン */
 export const playerDown = () => armdozerSpriteStub(PlayerLightningDozer, down);
 
+/** プレイヤー アクティブ ダウン */
+export const playerActiveDown = () => armdozerSpriteStub(PlayerLightningDozer, activeDown);
+
 /** 敵 ダウン */
 export const enemyDown = () => armdozerSpriteStub(EnemyLightningDozer, down);
+
+/** 敵 アクティブ ダウン */
+export const enemyActiveDown = () => armdozerSpriteStub(EnemyLightningDozer, activeDown);

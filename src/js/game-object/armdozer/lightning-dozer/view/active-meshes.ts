@@ -40,7 +40,7 @@ export function createActiveMeshes(
     {
       type: "DOWN",
       mesh: lightningDozerActiveDown(resources),
-    }
+    },
     {
       type: "GUTS_UP",
       mesh: lightningDozerActiveGutsUp(resources),
