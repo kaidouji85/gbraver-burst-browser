@@ -1,16 +1,16 @@
 import { Resources } from "../../../../resource";
+import { genesisBraverActiveBackStep } from "../mesh/back-step";
+import { genesisBraverActiveBurstDown } from "../mesh/burst-down";
 import { genesisBraverActiveBurstUp } from "../mesh/burst-up";
+import { genesisBraverActiveDown } from "../mesh/down";
 import { genesisBraverActiveFrontStep } from "../mesh/front-step";
 import { genesisBraverActiveGuard } from "../mesh/guard";
 import { genesisBraverActiveKnockBack } from "../mesh/knock-back";
+import { genesisBraverActiveSPAttack } from "../mesh/sp-attack";
+import { genesisBraverActiveSPCharge } from "../mesh/sp-charge";
+import { genesisBraverActiveSPToStand } from "../mesh/sp-to-stand";
 import { genesisBraverActiveStand } from "../mesh/stand";
 import { AnimationMeshMapping } from "./animation-mesh-mapping";
-import {genesisBraverActiveSPCharge} from "../mesh/sp-charge";
-import {genesisBraverActiveSPAttack} from "../mesh/sp-attack";
-import {genesisBraverActiveSPToStand} from "../mesh/sp-to-stand";
-import {genesisBraverActiveDown} from "../mesh/down";
-import {genesisBraverActiveBackStep} from "../mesh/back-step";
-import {genesisBraverActiveBurstDown} from "../mesh/burst-down";
 
 /**
  * アニメーションアクティブメッシュマッピング生成
@@ -63,7 +63,7 @@ export function createActiveMeshes(
     },
     {
       type: "BURST_DOWN",
-      mesh: genesisBraverActiveBurstDown(resources)
-    }
+      mesh: genesisBraverActiveBurstDown(resources),
+    },
   ];
 }

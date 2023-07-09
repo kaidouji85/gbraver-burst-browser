@@ -56,7 +56,7 @@ const straightPunch = (sprite: GenesisBraver) => {
 const activeStraightPunch = (sprite: GenesisBraver) => {
   straightPunch(sprite);
   sprite.startActive().loop();
-}
+};
 
 /** プレイヤー ストレートパンチ */
 export const playerStraightPunch = () =>
@@ -163,19 +163,21 @@ const down = (sprite: GenesisBraver) => {
 const activeDown = (sprite: GenesisBraver) => {
   down(sprite);
   sprite.startActive().play();
-}
+};
 
 /** プレイヤー ダウン */
 export const playerDown = () => armdozerSpriteStub(PlayerGenesisBraver, down);
 
 /** プレイヤー アクティブ ダウン */
-export const playerActiveDown = () => armdozerSpriteStub(PlayerGenesisBraver, activeDown);
+export const playerActiveDown = () =>
+  armdozerSpriteStub(PlayerGenesisBraver, activeDown);
 
 /** 敵 ダウン */
 export const enemyDown = () => armdozerSpriteStub(EnemyGenesisBraver, down);
 
 /** 敵 アクティブ ダウン */
-export const enemyActiveDown = () => armdozerSpriteStub(EnemyGenesisBraver, activeDown);
+export const enemyActiveDown = () =>
+  armdozerSpriteStub(EnemyGenesisBraver, activeDown);
 
 /**
  * 回避

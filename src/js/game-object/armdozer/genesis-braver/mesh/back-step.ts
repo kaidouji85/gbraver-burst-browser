@@ -1,9 +1,9 @@
 import type { Resources } from "../../../../resource";
 import { TEXTURE_IDS } from "../../../../resource/texture/ids";
 import type { ArmdozerAnimation } from "../../mesh/armdozer-animation";
+import { createGenesisBraverActiveMesh } from "./create-active-mesh";
 import { createGenesisBraverMesh } from "./create-mesh";
-import {createGenesisBraverActiveMesh} from "./create-active-mesh";
-import {createGenesisBraverOutlineMesh} from "./create-outline-mesh";
+import { createGenesisBraverOutlineMesh } from "./create-outline-mesh";
 
 /** テクスチャID */
 export const TEXTURE_ID = TEXTURE_IDS.GENESIS_BRAVER_BACK_STEP;
@@ -28,7 +28,9 @@ export function genesisBraverBackStep(resources: Resources): ArmdozerAnimation {
  * @param resources リソース管理オブジェクト
  * @return 生成結果
  */
-export function genesisBraverActiveBackStep(resources: Resources): ArmdozerAnimation {
+export function genesisBraverActiveBackStep(
+  resources: Resources,
+): ArmdozerAnimation {
   return createGenesisBraverActiveMesh({
     resources,
     textureId: TEXTURE_ID,
@@ -41,7 +43,9 @@ export function genesisBraverActiveBackStep(resources: Resources): ArmdozerAnima
  * @param resources リソース管理オブジェクト
  * @return 生成結果
  */
-export function genesisBraverOutlineBackStep(resources: Resources): ArmdozerAnimation {
+export function genesisBraverOutlineBackStep(
+  resources: Resources,
+): ArmdozerAnimation {
   return createGenesisBraverOutlineMesh({
     resources,
     textureId: TEXTURE_ID,

@@ -1,16 +1,16 @@
 import { Resources } from "../../../../resource";
+import { genesisBraverOutlineBackStep } from "../mesh/back-step";
+import { genesisBraverOutlineBurstDown } from "../mesh/burst-down";
 import { genesisBraverOutlineBurstUp } from "../mesh/burst-up";
+import { genesisBraverOutlineDown } from "../mesh/down";
 import { genesisBraverOutlineFrontStep } from "../mesh/front-step";
 import { genesisBraverOutlineGuard } from "../mesh/guard";
 import { genesisBraverOutlineKnockBack } from "../mesh/knock-back";
+import { genesisBraverOutlineSPAttack } from "../mesh/sp-attack";
+import { genesisBraverOutlineSPCharge } from "../mesh/sp-charge";
+import { genesisBraverOutlineSPToStand } from "../mesh/sp-to-stand";
 import { genesisBraverOutlineStand } from "../mesh/stand";
 import { AnimationMeshMapping } from "./animation-mesh-mapping";
-import {genesisBraverOutlineSPCharge} from "../mesh/sp-charge";
-import {genesisBraverOutlineSPAttack} from "../mesh/sp-attack";
-import {genesisBraverOutlineSPToStand} from "../mesh/sp-to-stand";
-import {genesisBraverOutlineDown} from "../mesh/down";
-import {genesisBraverOutlineBackStep} from "../mesh/back-step";
-import {genesisBraverOutlineBurstDown} from "../mesh/burst-down";
 
 /**
  * アニメーションアクティブメッシュマッピング生成
@@ -47,7 +47,7 @@ export function createOutlineMeshes(
     },
     {
       type: "DOWN",
-      mesh: genesisBraverOutlineDown(resources)
+      mesh: genesisBraverOutlineDown(resources),
     },
     {
       type: "BACK_STEP",
@@ -63,7 +63,7 @@ export function createOutlineMeshes(
     },
     {
       type: "BURST_DOWN",
-      mesh: genesisBraverOutlineBurstDown(resources)
-    }
+      mesh: genesisBraverOutlineBurstDown(resources),
+    },
   ];
 }
