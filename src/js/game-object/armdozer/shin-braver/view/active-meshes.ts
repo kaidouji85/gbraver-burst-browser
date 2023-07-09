@@ -1,18 +1,18 @@
 import type { Resources } from "../../../../resource";
+import { shinBraverActiveBackStep } from "../mesh/back-step";
 import { shinBraverActiveBurstDown } from "../mesh/burst-down";
 import { shinBraverActiveBurstUp } from "../mesh/burst-up";
+import { shinBraverActiveDown } from "../mesh/down";
 import { shinBraverActiveFrontStep } from "../mesh/front-step";
 import { shinBraverActiveGuard } from "../mesh/guard";
+import { shinBraverActiveGutsDown } from "../mesh/guts-down";
+import { shinBraverActiveGutsUp } from "../mesh/guts-up";
 import { shinBraverActiveKnockBack } from "../mesh/knock-back";
+import { shinBraverActiveSPAttack } from "../mesh/sp-attack";
+import { shinBraverActiveSPCharge } from "../mesh/sp-charge";
+import { shinBraverActiveSPToStand } from "../mesh/sp-to-stand";
 import { shinBraverActiveStand } from "../mesh/stand";
 import type { AnimationMeshMapping } from "./animation-mesh-mapping";
-import {shinBraverActiveSPCharge} from "../mesh/sp-charge";
-import {shinBraverActiveSPAttack} from "../mesh/sp-attack";
-import {shinBraverActiveSPToStand} from "../mesh/sp-to-stand";
-import {shinBraverActiveDown} from "../mesh/down";
-import {shinBraverActiveGutsUp} from "../mesh/guts-up";
-import {shinBraverActiveGutsDown} from "../mesh/guts-down";
-import {shinBraverActiveBackStep} from "../mesh/back-step";
 
 /**
  * アニメーションアクティブメッシュマッピング生成
@@ -69,7 +69,7 @@ export function createActiveMeshes(
     },
     {
       type: "BACK_STEP",
-      mesh: shinBraverActiveBackStep(resources)
+      mesh: shinBraverActiveBackStep(resources),
     },
     {
       type: "FRONT_STEP",

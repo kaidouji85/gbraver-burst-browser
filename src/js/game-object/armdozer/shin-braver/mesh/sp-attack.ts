@@ -1,9 +1,9 @@
 import type { Resources } from "../../../../resource";
 import { TEXTURE_IDS } from "../../../../resource/texture/ids";
 import type { ArmdozerAnimation } from "../../mesh/armdozer-animation";
+import { createShinBraverActiveMesh } from "./create-active-mesh";
 import { createShinBraverMesh } from "./create-mesh";
-import {createShinBraverActiveMesh} from "./create-active-mesh";
-import {createShinBraverOutlineMesh} from "./create-outline-mesh";
+import { createShinBraverOutlineMesh } from "./create-outline-mesh";
 
 /** テクスチャID */
 export const TEXTURE_ID = TEXTURE_IDS.SHIN_BRAVER_SP_ATTACK;
@@ -28,7 +28,9 @@ export function shinBraverSPAttack(resources: Resources): ArmdozerAnimation {
  * @param resources リソース管理オブジェクト
  * @return 生成したメッシュ
  */
-export function shinBraverActiveSPAttack(resources: Resources): ArmdozerAnimation {
+export function shinBraverActiveSPAttack(
+  resources: Resources,
+): ArmdozerAnimation {
   return createShinBraverActiveMesh({
     resources,
     textureId: TEXTURE_ID,
@@ -41,7 +43,9 @@ export function shinBraverActiveSPAttack(resources: Resources): ArmdozerAnimatio
  * @param resources リソース管理オブジェクト
  * @return 生成したメッシュ
  */
-export function shinBraverOutlineSPAttack(resources: Resources): ArmdozerAnimation {
+export function shinBraverOutlineSPAttack(
+  resources: Resources,
+): ArmdozerAnimation {
   return createShinBraverOutlineMesh({
     resources,
     textureId: TEXTURE_ID,

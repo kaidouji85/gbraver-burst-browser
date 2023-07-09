@@ -1,18 +1,18 @@
 import { Resources } from "../../../../resource";
+import { shinBraverOutlineBackStep } from "../mesh/back-step";
 import { shinBraverOutlineBurstDown } from "../mesh/burst-down";
 import { shinBraverOutlineBurstUp } from "../mesh/burst-up";
+import { shinBraverOutlineDown } from "../mesh/down";
 import { shinBraverOutlineFrontStep } from "../mesh/front-step";
 import { shinBraverOutlineGuard } from "../mesh/guard";
+import { shinBraverOutlineGutsDown } from "../mesh/guts-down";
+import { shinBraverOutlineGutsUp } from "../mesh/guts-up";
 import { shinBraverOutlineKnockBack } from "../mesh/knock-back";
+import { shinBraverOutlineSPAttack } from "../mesh/sp-attack";
+import { shinBraverOutlineSPCharge } from "../mesh/sp-charge";
+import { shinBraverOutlineSPToStand } from "../mesh/sp-to-stand";
 import { shinBraverOutlineStand } from "../mesh/stand";
 import { AnimationMeshMapping } from "./animation-mesh-mapping";
-import {shinBraverOutlineSPCharge} from "../mesh/sp-charge";
-import {shinBraverOutlineSPAttack} from "../mesh/sp-attack";
-import {shinBraverOutlineSPToStand} from "../mesh/sp-to-stand";
-import {shinBraverOutlineDown} from "../mesh/down";
-import {shinBraverOutlineGutsUp} from "../mesh/guts-up";
-import {shinBraverOutlineGutsDown} from "../mesh/guts-down";
-import {shinBraverOutlineBackStep} from "../mesh/back-step";
 
 /**
  * アウトラインメッシュマッピング生成
@@ -69,7 +69,7 @@ export function createOutlineMeshes(
     },
     {
       type: "BACK_STEP",
-      mesh: shinBraverOutlineBackStep(resources)
+      mesh: shinBraverOutlineBackStep(resources),
     },
     {
       type: "FRONT_STEP",

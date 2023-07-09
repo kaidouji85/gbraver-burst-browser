@@ -1,9 +1,9 @@
 import type { Resources } from "../../../../resource";
 import { TEXTURE_IDS } from "../../../../resource/texture/ids";
 import type { ArmdozerAnimation } from "../../mesh/armdozer-animation";
+import { createShinBraverActiveMesh } from "./create-active-mesh";
 import { createShinBraverMesh } from "./create-mesh";
-import {createShinBraverActiveMesh} from "./create-active-mesh";
-import {createShinBraverOutlineMesh} from "./create-outline-mesh";
+import { createShinBraverOutlineMesh } from "./create-outline-mesh";
 
 /** テクスチャID */
 export const TEXTURE_ID = TEXTURE_IDS.SHIN_BRAVER_BACK_STEP;
@@ -28,7 +28,9 @@ export function shinBraverBackStep(resources: Resources): ArmdozerAnimation {
  * @param resources リソース管理オブジェクト
  * @return メッシュ
  */
-export function shinBraverActiveBackStep(resources: Resources): ArmdozerAnimation {
+export function shinBraverActiveBackStep(
+  resources: Resources,
+): ArmdozerAnimation {
   return createShinBraverActiveMesh({
     resources,
     textureId: TEXTURE_ID,
@@ -41,7 +43,9 @@ export function shinBraverActiveBackStep(resources: Resources): ArmdozerAnimatio
  * @param resources リソース管理オブジェクト
  * @return メッシュ
  */
-export function shinBraverOutlineBackStep(resources: Resources): ArmdozerAnimation {
+export function shinBraverOutlineBackStep(
+  resources: Resources,
+): ArmdozerAnimation {
   return createShinBraverOutlineMesh({
     resources,
     textureId: TEXTURE_ID,

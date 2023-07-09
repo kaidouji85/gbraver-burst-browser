@@ -1,9 +1,9 @@
 import type { Resources } from "../../../../resource";
 import { TEXTURE_IDS } from "../../../../resource/texture/ids";
 import type { ArmdozerAnimation } from "../../mesh/armdozer-animation";
+import { createShinBraverActiveMesh } from "./create-active-mesh";
 import { createShinBraverMesh } from "./create-mesh";
-import {createShinBraverActiveMesh} from "./create-active-mesh";
-import {createShinBraverOutlineMesh} from "./create-outline-mesh";
+import { createShinBraverOutlineMesh } from "./create-outline-mesh";
 
 /** テクスチャID */
 export const TEXTURE_ID = TEXTURE_IDS.SHIN_BRAVER_DOWN;
