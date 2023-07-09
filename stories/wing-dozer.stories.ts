@@ -49,11 +49,26 @@ const upper = (sprite: WingDozer) => {
     .loop();
 };
 
+/**
+ * アクティブ アッパー
+ * @param sprite スプライト
+ */
+const activeUpper = (sprite: WingDozer) => {
+  upper(sprite);
+  sprite.startActive().play();
+}
+
 /** プレイヤー アッパー */
 export const playerUpper = () => armdozerSpriteStub(PlayerWingDozer, upper);
 
+/** プレイヤー アクティブ アッパー */
+export const playerActiveUpper = () => armdozerSpriteStub(PlayerWingDozer, activeUpper);
+
 /** 敵 アッパー */
 export const enemyUpper = () => armdozerSpriteStub(EnemyWingDozer, upper);
+
+/** 敵 アクティブ アッパー */
+export const enemyActiveUpper = () => armdozerSpriteStub(EnemyWingDozer, activeUpper);
 
 /**
  * ダッシュ
