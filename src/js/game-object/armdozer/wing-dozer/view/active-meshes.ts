@@ -53,12 +53,12 @@ export function createActiveMeshes(
       mesh: wingDozerActiveFrontStep(resources),
     },
     {
-      type: "GUARD",
-      mesh: wingDozerActiveGuard(resources),
-    },
-    {
       type: "KNOCK_BACK",
       mesh: wingDozerActiveKnockBack(resources),
+    },
+    {
+      type: "GUARD",
+      mesh: wingDozerActiveGuard(resources),
     },
   ];
 }

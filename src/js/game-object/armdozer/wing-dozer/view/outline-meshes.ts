@@ -53,12 +53,12 @@ export function createOutlineMeshes(
       mesh: wingDozerOutlineFrontStep(resources),
     },
     {
-      type: "GUARD",
-      mesh: wingDozerOutlineGuard(resources),
-    },
-    {
       type: "KNOCK_BACK",
       mesh: wingDozerOutlineKnockBack(resources),
+    },
+    {
+      type: "GUARD",
+      mesh: wingDozerOutlineGuard(resources),
     },
   ];
 }
