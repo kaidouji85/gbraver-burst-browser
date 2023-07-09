@@ -190,13 +190,30 @@ const armHammer = (sprite: NeoLandozer) => {
     .loop();
 };
 
+/**
+ * アクティブ アームハンマー
+ * @param sprite スプライト
+ */
+const activeArmHammer = (sprite: NeoLandozer) => {
+  armHammer(sprite);
+  sprite.startActive().play();
+}
+
 /** プレイヤー アームハンマー */
 export const playerArmHammer = () =>
   armdozerSpriteStub(PlayerNeoLandozer, armHammer);
 
+/** プレイヤー アクティブ アームハンマー */
+export const playerActiveArmHammer = () =>
+  armdozerSpriteStub(PlayerNeoLandozer, activeArmHammer);
+
 /** 敵 アームハンマー */
 export const enemyArmHammer = () =>
   armdozerSpriteStub(EnemyNeoLandozer, armHammer);
+
+/** 敵 アクティブ アームハンマー */
+export const enemyActiveAtmHammer = () =>
+  armdozerSpriteStub(EnemyNeoLandozer, activeArmHammer);
 
 /**
  * ダウン
