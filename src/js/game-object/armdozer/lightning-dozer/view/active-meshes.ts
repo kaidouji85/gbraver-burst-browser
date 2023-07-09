@@ -7,6 +7,9 @@ import { lightningDozerActiveGutsUp } from "../mesh/guts-up";
 import { lightningDozerActiveKnockBack } from "../mesh/knock-back";
 import { lightningDozerActiveStand } from "../mesh/stand";
 import type { AnimationMeshMapping } from "./animation-mesh-mapping";
+import {lightningDozerActiveHmCharge} from "../mesh/hm-charge";
+import {lightningDozerActiveHmAttack} from "../mesh/hm-attack";
+import {lightningDozerActiveHmToStand} from "../mesh/hm-to-stand";
 
 /**
  * アクティブアニメーションメッシュマッピングを生成
@@ -20,6 +23,18 @@ export function createActiveMeshes(
     {
       type: "KNOCK_BACK",
       mesh: lightningDozerActiveKnockBack(resources),
+    },
+    {
+      type: "HM_CHARGE",
+      mesh: lightningDozerActiveHmCharge(resources),
+    },
+    {
+      type: "HM_ATTACK",
+      mesh: lightningDozerActiveHmAttack(resources),
+    },
+    {
+      type: "HM_TO_STAND",
+      mesh: lightningDozerActiveHmToStand(resources),
     },
     {
       type: "GUTS_UP",

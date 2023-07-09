@@ -7,6 +7,9 @@ import { lightningDozerOutlineGutsUp } from "../mesh/guts-up";
 import { lightningDozerOutlineKnockBack } from "../mesh/knock-back";
 import { lightningDozerOutlineStand } from "../mesh/stand";
 import { AnimationMeshMapping } from "./animation-mesh-mapping";
+import {lightningDozerOutlineHmCharge} from "../mesh/hm-charge";
+import {lightningDozerOutlineHmAttack} from "../mesh/hm-attack";
+import {lightningDozerOutlineHmToStand} from "../mesh/hm-to-stand";
 
 /**
  * アウトラインアニメーションメッシュマッピングを生成
@@ -17,6 +20,18 @@ export function createOutlineMeshes(
   resources: Resources,
 ): AnimationMeshMapping[] {
   return [
+    {
+      type: "HM_CHARGE",
+      mesh: lightningDozerOutlineHmCharge(resources),
+    },
+    {
+      type: "HM_ATTACK",
+      mesh: lightningDozerOutlineHmAttack(resources),
+    },
+    {
+      type: "HM_TO_STAND",
+      mesh: lightningDozerOutlineHmToStand(resources),
+    },
     {
       type: "KNOCK_BACK",
       mesh: lightningDozerOutlineKnockBack(resources),
