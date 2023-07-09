@@ -4,6 +4,7 @@ import {genesisBraverOutlineKnockBack} from "../mesh/knock-back";
 import {genesisBraverOutlineStand} from "../mesh/stand";
 import {genesisBraverOutlineGuard} from "../mesh/guard";
 import {genesisBraverOutlineFrontStep} from "../mesh/front-step";
+import {genesisBraverOutlineBurstUp} from "../mesh/burst-up";
 
 /**
  * アニメーションアクティブメッシュマッピング生成
@@ -29,6 +30,10 @@ export function createOutlineMeshes(
     {
       type: "FRONT_STEP",
       mesh: genesisBraverOutlineFrontStep(resources),
+    },
+    {
+      type: "BURST_UP",
+      mesh: genesisBraverOutlineBurstUp(resources),
     }
   ];
 }
