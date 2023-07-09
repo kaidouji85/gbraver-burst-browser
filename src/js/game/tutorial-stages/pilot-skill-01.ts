@@ -10,7 +10,7 @@ import { TutorialStageIDs } from "./tutorial-stage-ids";
 /** パイロットスキルチュートリアル（前半） */
 export const pilotSkillTutorial01: TutorialStage = {
   id: TutorialStageIDs.Pilot01,
-  title: ["パイロットスキルで意表を突け（前半）"],
+  title: ["パイロット次第では詰み（負けイベント）"],
   player: {
     playerId: playerUuid(),
     armdozer:
