@@ -9,6 +9,7 @@ import {genesisBraverOutlineSPCharge} from "../mesh/sp-charge";
 import {genesisBraverOutlineSPAttack} from "../mesh/sp-attack";
 import {genesisBraverOutlineSPToStand} from "../mesh/sp-to-stand";
 import {genesisBraverOutlineDown} from "../mesh/down";
+import {genesisBraverOutlineBackStep} from "../mesh/back-step";
 
 /**
  * アニメーションアクティブメッシュマッピング生成
@@ -46,6 +47,10 @@ export function createOutlineMeshes(
     {
       type: "DOWN",
       mesh: genesisBraverOutlineDown(resources)
+    },
+    {
+      type: "BACK_STEP",
+      mesh: genesisBraverOutlineBackStep(resources),
     },
     {
       type: "FRONT_STEP",
