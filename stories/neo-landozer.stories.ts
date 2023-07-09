@@ -223,8 +223,25 @@ const down = (sprite: NeoLandozer) => {
   delay(1000).chain(sprite.down()).chain(delay(1000)).loop();
 };
 
+/**
+ * アクティブ ダウン
+ * @param sprite スプライト
+ */
+const activeDown = (sprite: NeoLandozer) => {
+  down(sprite);
+  sprite.startActive().play();
+}
+
 /** プレイヤー ダウン */
 export const playerDown = () => armdozerSpriteStub(PlayerNeoLandozer, down);
 
+/** プレイヤー アクティブ ダウン */
+export const playerActiveDown = () =>
+  armdozerSpriteStub(PlayerNeoLandozer, activeDown);
+
 /** 敵 ダウン */
 export const enemyDown = () => armdozerSpriteStub(EnemyNeoLandozer, down);
+
+/** 敵 アクティブ ダウン */
+export const enemyActiveDown = () =>
+  armdozerSpriteStub(EnemyNeoLandozer, activeDown);
