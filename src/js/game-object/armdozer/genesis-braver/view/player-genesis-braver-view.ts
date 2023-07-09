@@ -6,7 +6,7 @@ import { createActiveMeshes } from "./active-meshes";
 import type { AnimationMeshMapping } from "./animation-mesh-mapping";
 import type { GenesisBraverView } from "./genesis-braver-view";
 import { createMeshes } from "./meshes";
-import {createOutlineMeshes} from "./outline-meshes";
+import { createOutlineMeshes } from "./outline-meshes";
 
 /** プレイヤー ジェネシスブレイバービュー */
 export class PlayerGenesisBraverView implements GenesisBraverView {
@@ -31,14 +31,17 @@ export class PlayerGenesisBraverView implements GenesisBraverView {
     [...this.#meshes, ...this.#activeMeshes, ...this.#outlineMeshes].forEach(
       ({ mesh }) => {
         this.#group.add(mesh.getObject3D());
-      });
+      },
+    );
   }
 
   /** @override */
   destructor() {
-    [...this.#meshes, ...this.#activeMeshes, ...this.#outlineMeshes].forEach(({mesh}) => {
-      mesh.destructor();
-    });
+    [...this.#meshes, ...this.#activeMeshes, ...this.#outlineMeshes].forEach(
+      ({ mesh }) => {
+        mesh.destructor();
+      },
+    );
   }
 
   /** @override */
