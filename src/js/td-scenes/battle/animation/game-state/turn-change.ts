@@ -33,7 +33,13 @@ export function turnChangeAnimation(
     (v) => v.playerId !== gameState.activePlayerId,
   );
 
-  if (!activeTDPlayer || !activeTDArmdozer || !activeHUDPlayer || !activeStatus || !inactiveTDArmdozer) {
+  if (
+    !activeTDPlayer ||
+    !activeTDArmdozer ||
+    !activeHUDPlayer ||
+    !activeStatus ||
+    !inactiveTDArmdozer
+  ) {
     return empty();
   }
 
