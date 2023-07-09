@@ -48,13 +48,30 @@ const straightPunch = (sprite: ShinBraver) => {
     .loop();
 };
 
+/**
+ * ストレートパンチ アクティブ
+ * @param sprite スプライト
+ */
+const straightPunchActive = (sprite: ShinBraver) => {
+  straightPunch(sprite);
+  sprite.startActive().play();
+};
+
 /** プレイヤー ストレートパンチ */
 export const playerStraightPunch = () =>
   armdozerSpriteStub(PlayerShinBraver, straightPunch);
 
+/** プレイヤー ストレートパンチ アクティブ */
+export const playerStraightPunchActive = () =>
+  armdozerSpriteStub(PlayerShinBraver, straightPunchActive);
+
 /** 敵 ストレートパンチ */
 export const enemyStraightPunch = () =>
   armdozerSpriteStub(EnemyShinBraver, straightPunch);
+
+/** 敵 ストレートパンチ アクティブ */
+export const enemyStraightPunchActive = () =>
+  armdozerSpriteStub(EnemyShinBraver, straightPunchActive);
 
 /**
  * ガッツ
