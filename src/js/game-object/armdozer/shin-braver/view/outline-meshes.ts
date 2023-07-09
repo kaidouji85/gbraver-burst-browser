@@ -9,6 +9,7 @@ import { AnimationMeshMapping } from "./animation-mesh-mapping";
 import {shinBraverOutlineSPCharge} from "../mesh/sp-charge";
 import {shinBraverOutlineSPAttack} from "../mesh/sp-attack";
 import {shinBraverOutlineSPToStand} from "../mesh/sp-to-stand";
+import {shinBraverOutlineDown} from "../mesh/down";
 
 /**
  * アウトラインメッシュマッピング生成
@@ -42,6 +43,10 @@ export function createOutlineMeshes(
     {
       type: "GUARD",
       mesh: shinBraverOutlineGuard(resources),
+    },
+    {
+      type: "DOWN",
+      mesh: shinBraverOutlineDown(resources),
     },
     {
       type: "BURST_UP",

@@ -9,6 +9,7 @@ import type { AnimationMeshMapping } from "./animation-mesh-mapping";
 import {shinBraverActiveSPCharge} from "../mesh/sp-charge";
 import {shinBraverActiveSPAttack} from "../mesh/sp-attack";
 import {shinBraverActiveSPToStand} from "../mesh/sp-to-stand";
+import {shinBraverActiveDown} from "../mesh/down";
 
 /**
  * アニメーションアクティブメッシュマッピング生成
@@ -42,6 +43,10 @@ export function createActiveMeshes(
     {
       type: "GUARD",
       mesh: shinBraverActiveGuard(resources),
+    },
+    {
+      type: "DOWN",
+      mesh: shinBraverActiveDown(resources),
     },
     {
       type: "BURST_UP",
