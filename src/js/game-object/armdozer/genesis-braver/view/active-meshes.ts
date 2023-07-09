@@ -8,6 +8,7 @@ import { AnimationMeshMapping } from "./animation-mesh-mapping";
 import {genesisBraverActiveSPCharge} from "../mesh/sp-charge";
 import {genesisBraverActiveSPAttack} from "../mesh/sp-attack";
 import {genesisBraverActiveSPToStand} from "../mesh/sp-to-stand";
+import {genesisBraverActiveDown} from "../mesh/down";
 
 /**
  * アニメーションアクティブメッシュマッピング生成
@@ -41,6 +42,10 @@ export function createActiveMeshes(
     {
       type: "GUARD",
       mesh: genesisBraverActiveGuard(resources),
+    },
+    {
+      type: "DOWN",
+      mesh: genesisBraverActiveDown(resources),
     },
     {
       type: "FRONT_STEP",

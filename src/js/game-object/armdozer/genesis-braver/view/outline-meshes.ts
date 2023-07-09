@@ -8,6 +8,7 @@ import { AnimationMeshMapping } from "./animation-mesh-mapping";
 import {genesisBraverOutlineSPCharge} from "../mesh/sp-charge";
 import {genesisBraverOutlineSPAttack} from "../mesh/sp-attack";
 import {genesisBraverOutlineSPToStand} from "../mesh/sp-to-stand";
+import {genesisBraverOutlineDown} from "../mesh/down";
 
 /**
  * アニメーションアクティブメッシュマッピング生成
@@ -41,6 +42,10 @@ export function createOutlineMeshes(
     {
       type: "GUARD",
       mesh: genesisBraverOutlineGuard(resources),
+    },
+    {
+      type: "DOWN",
+      mesh: genesisBraverOutlineDown(resources)
     },
     {
       type: "FRONT_STEP",
