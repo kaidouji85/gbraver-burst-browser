@@ -156,11 +156,26 @@ const down = (sprite: GenesisBraver) => {
   delay(1000).chain(sprite.down()).chain(delay(1000)).loop();
 };
 
+/**
+ * アクティブ ダウン
+ * @param sprite スプライト
+ */
+const activeDown = (sprite: GenesisBraver) => {
+  down(sprite);
+  sprite.startActive().play();
+}
+
 /** プレイヤー ダウン */
 export const playerDown = () => armdozerSpriteStub(PlayerGenesisBraver, down);
 
+/** プレイヤー アクティブ ダウン */
+export const playerActiveDown = () => armdozerSpriteStub(PlayerGenesisBraver, activeDown);
+
 /** 敵 ダウン */
 export const enemyDown = () => armdozerSpriteStub(EnemyGenesisBraver, down);
+
+/** 敵 アクティブ ダウン */
+export const enemyActiveDown = () => armdozerSpriteStub(EnemyGenesisBraver, activeDown);
 
 /**
  * 回避
