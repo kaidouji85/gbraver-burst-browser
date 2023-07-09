@@ -11,6 +11,7 @@ import {lightningDozerOutlineHmCharge} from "../mesh/hm-charge";
 import {lightningDozerOutlineHmAttack} from "../mesh/hm-attack";
 import {lightningDozerOutlineHmToStand} from "../mesh/hm-to-stand";
 import {lightningDozerOutlineDown} from "../mesh/down";
+import {lightningDozerOutlineBackStep} from "../mesh/back-step";
 
 /**
  * アウトラインアニメーションメッシュマッピングを生成
@@ -56,6 +57,10 @@ export function createOutlineMeshes(
     {
       type: "GUARD",
       mesh: lightningDozerOutlineGuard(resources),
+    },
+    {
+      type: "BACK_STEP",
+      mesh: lightningDozerOutlineBackStep(resources),
     },
     {
       type: "FRONT_STEP",

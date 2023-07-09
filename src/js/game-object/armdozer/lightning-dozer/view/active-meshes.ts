@@ -11,6 +11,7 @@ import {lightningDozerActiveHmCharge} from "../mesh/hm-charge";
 import {lightningDozerActiveHmAttack} from "../mesh/hm-attack";
 import {lightningDozerActiveHmToStand} from "../mesh/hm-to-stand";
 import {lightningDozerActiveDown} from "../mesh/down";
+import {lightningDozerActiveBackStep} from "../mesh/back-step";
 
 /**
  * アクティブアニメーションメッシュマッピングを生成
@@ -56,6 +57,10 @@ export function createActiveMeshes(
     {
       type: "GUARD",
       mesh: lightningDozerActiveGuard(resources),
+    },
+    {
+      type: "BACK_STEP",
+      mesh: lightningDozerActiveBackStep(resources),
     },
     {
       type: "FRONT_STEP",
