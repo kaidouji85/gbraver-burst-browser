@@ -114,11 +114,26 @@ const down = (sprite: WingDozer) => {
   sprite.down().chain(delay(2000)).loop();
 };
 
+/**
+ * アクティブ ダウン
+ * @param sprite スプライト
+ */
+const activeDown = (sprite: WingDozer) => {
+  down(sprite);
+  sprite.startActive().play();
+}
+
 /** プレイヤー ダウン */
 export const playerDown = () => armdozerSpriteStub(PlayerWingDozer, down);
 
+/** プレイヤー アクティブ ダウン */
+export const playerActiveDown = () => armdozerSpriteStub(PlayerWingDozer, activeDown);
+
 /** 敵 ダウン */
 export const enemyDown = () => armdozerSpriteStub(EnemyWingDozer, down);
+
+/** 敵 アクティブ ダウン */
+export const enemyActiveDown = () => armdozerSpriteStub(EnemyWingDozer, activeDown);
 
 /**
  * 回避
