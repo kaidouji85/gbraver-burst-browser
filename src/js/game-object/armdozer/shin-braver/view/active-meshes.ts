@@ -6,6 +6,9 @@ import { shinBraverActiveGuard } from "../mesh/guard";
 import { shinBraverActiveKnockBack } from "../mesh/knock-back";
 import { shinBraverActiveStand } from "../mesh/stand";
 import type { AnimationMeshMapping } from "./animation-mesh-mapping";
+import {shinBraverActiveSPCharge} from "../mesh/sp-charge";
+import {shinBraverActiveSPAttack} from "../mesh/sp-attack";
+import {shinBraverActiveSPToStand} from "../mesh/sp-to-stand";
 
 /**
  * アニメーションアクティブメッシュマッピング生成
@@ -19,6 +22,18 @@ export function createActiveMeshes(
     {
       type: "STAND",
       mesh: shinBraverActiveStand(resources),
+    },
+    {
+      type: "SP_CHARGE",
+      mesh: shinBraverActiveSPCharge(resources),
+    },
+    {
+      type: "SP_ATTACK",
+      mesh: shinBraverActiveSPAttack(resources),
+    },
+    {
+      type: "SP_TO_STAND",
+      mesh: shinBraverActiveSPToStand(resources),
     },
     {
       type: "KNOCK_BACK",
