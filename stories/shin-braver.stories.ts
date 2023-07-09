@@ -49,10 +49,10 @@ const straightPunch = (sprite: ShinBraver) => {
 };
 
 /**
- * ストレートパンチ アクティブ
+ * アクティブ ストレートパンチ
  * @param sprite スプライト
  */
-const straightPunchActive = (sprite: ShinBraver) => {
+const activeStraightPunch = (sprite: ShinBraver) => {
   straightPunch(sprite);
   sprite.startActive().play();
 };
@@ -61,17 +61,17 @@ const straightPunchActive = (sprite: ShinBraver) => {
 export const playerStraightPunch = () =>
   armdozerSpriteStub(PlayerShinBraver, straightPunch);
 
-/** プレイヤー ストレートパンチ アクティブ */
-export const playerStraightPunchActive = () =>
-  armdozerSpriteStub(PlayerShinBraver, straightPunchActive);
+/** プレイヤー アクティブ ストレートパンチ */
+export const playerActiveStraightPunch = () =>
+  armdozerSpriteStub(PlayerShinBraver, activeStraightPunch);
 
 /** 敵 ストレートパンチ */
 export const enemyStraightPunch = () =>
   armdozerSpriteStub(EnemyShinBraver, straightPunch);
 
-/** 敵 ストレートパンチ アクティブ */
-export const enemyStraightPunchActive = () =>
-  armdozerSpriteStub(EnemyShinBraver, straightPunchActive);
+/** 敵 アクティブ ストレートパンチ */
+export const enemyActiveStraightPunch = () =>
+  armdozerSpriteStub(EnemyShinBraver, activeStraightPunch);
 
 /**
  * ガッツ
@@ -246,8 +246,23 @@ const down = (sprite: ShinBraver) => {
   delay(1000).chain(sprite.down()).chain(delay(1000)).loop();
 };
 
+/**
+ * アクティブ ダウン
+ * @param sprite スプライト
+ */
+const activeDown = (sprite: ShinBraver) => {
+  down(sprite);
+  sprite.startActive().play();
+}
+
 /** プレイヤー ダウン */
 export const playerDown = () => armdozerSpriteStub(PlayerShinBraver, down);
 
+/** プレイヤー アクティブ ダウン */
+export const playerActiveDown = () => armdozerSpriteStub(PlayerShinBraver, activeDown);
+
 /** 敵 ダウン */
 export const enemyDown = () => armdozerSpriteStub(EnemyShinBraver, down);
+
+/** 敵 アクティブ ダウン */
+export const enemyActiveDown = () => armdozerSpriteStub(EnemyShinBraver, activeDown);
