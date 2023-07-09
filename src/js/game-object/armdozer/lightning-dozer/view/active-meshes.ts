@@ -1,9 +1,14 @@
 import type { Resources } from "../../../../resource";
+import { lightningDozerActiveBackStep } from "../mesh/back-step";
+import { lightningDozerActiveDown } from "../mesh/down";
 import { lightningDozerActiveFrontStep } from "../mesh/front-step";
 import { lightningDozerActiveGuard } from "../mesh/guard";
 import { lightningDozerActiveGutsToStand } from "../mesh/gut-to-stand";
 import { lightningDozerActiveGutsDown } from "../mesh/guts-down";
 import { lightningDozerActiveGutsUp } from "../mesh/guts-up";
+import { lightningDozerActiveHmAttack } from "../mesh/hm-attack";
+import { lightningDozerActiveHmCharge } from "../mesh/hm-charge";
+import { lightningDozerActiveHmToStand } from "../mesh/hm-to-stand";
 import { lightningDozerActiveKnockBack } from "../mesh/knock-back";
 import { lightningDozerActiveStand } from "../mesh/stand";
 import type { AnimationMeshMapping } from "./animation-mesh-mapping";
@@ -18,8 +23,24 @@ export function createActiveMeshes(
 ): AnimationMeshMapping[] {
   return [
     {
+      type: "HM_CHARGE",
+      mesh: lightningDozerActiveHmCharge(resources),
+    },
+    {
+      type: "HM_ATTACK",
+      mesh: lightningDozerActiveHmAttack(resources),
+    },
+    {
+      type: "HM_TO_STAND",
+      mesh: lightningDozerActiveHmToStand(resources),
+    },
+    {
       type: "KNOCK_BACK",
       mesh: lightningDozerActiveKnockBack(resources),
+    },
+    {
+      type: "DOWN",
+      mesh: lightningDozerActiveDown(resources),
     },
     {
       type: "GUTS_UP",
@@ -36,6 +57,10 @@ export function createActiveMeshes(
     {
       type: "GUARD",
       mesh: lightningDozerActiveGuard(resources),
+    },
+    {
+      type: "BACK_STEP",
+      mesh: lightningDozerActiveBackStep(resources),
     },
     {
       type: "FRONT_STEP",
