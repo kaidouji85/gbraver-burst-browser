@@ -7,6 +7,9 @@ import { wingDozerOutlineGuard } from "../mesh/guard";
 import { wingDozerOutlineKnockBack } from "../mesh/knock-back";
 import { wingDozerOutlineStand } from "../mesh/stand";
 import { AnimationMeshMapping } from "./animation-mesh-mapping";
+import {wingDozerOutlineUpperCharge} from "../mesh/upper-charge";
+import {wingDozerOutlineUpperAttack} from "../mesh/upper-attack";
+import {wingDozerOutlineUpperToStand} from "../mesh/upper-to-stand";
 
 /**
  * アウトラインアニメーションメッシュマッピングを生成
@@ -20,6 +23,18 @@ export function createOutlineMeshes(
     {
       type: "STAND",
       mesh: wingDozerOutlineStand(resources),
+    },
+    {
+      type: "UPPER_CHARGE",
+      mesh: wingDozerOutlineUpperCharge(resources),
+    },
+    {
+      type: "UPPER_ATTACK",
+      mesh: wingDozerOutlineUpperAttack(resources),
+    },
+    {
+      type: "UPPER_TO_STAND",
+      mesh: wingDozerOutlineUpperToStand(resources),
     },
     {
       type: "DASH_UP",

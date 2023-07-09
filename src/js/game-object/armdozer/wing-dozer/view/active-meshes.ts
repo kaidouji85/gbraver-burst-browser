@@ -7,6 +7,9 @@ import { wingDozerActiveGuard } from "../mesh/guard";
 import { wingDozerActiveKnockBack } from "../mesh/knock-back";
 import { wingDozerActiveStand } from "../mesh/stand";
 import type { AnimationMeshMapping } from "./animation-mesh-mapping";
+import {wingDozerActiveUpperCharge} from "../mesh/upper-charge";
+import {wingDozerActiveUpperAttack} from "../mesh/upper-attack";
+import {wingDozerActiveUpperToStand} from "../mesh/upper-to-stand";
 
 /**
  * アクティブアニメーションメッシュマッピングを生成
@@ -20,6 +23,18 @@ export function createActiveMeshes(
     {
       type: "STAND",
       mesh: wingDozerActiveStand(resources),
+    },
+    {
+      type: "UPPER_CHARGE",
+      mesh: wingDozerActiveUpperCharge(resources),
+    },
+    {
+      type: "UPPER_ATTACK",
+      mesh: wingDozerActiveUpperAttack(resources),
+    },
+    {
+      type: "UPPER_TO_STAND",
+      mesh: wingDozerActiveUpperToStand(resources),
     },
     {
       type: "DASH_UP",
