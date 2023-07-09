@@ -5,6 +5,9 @@ import { genesisBraverOutlineGuard } from "../mesh/guard";
 import { genesisBraverOutlineKnockBack } from "../mesh/knock-back";
 import { genesisBraverOutlineStand } from "../mesh/stand";
 import { AnimationMeshMapping } from "./animation-mesh-mapping";
+import {genesisBraverOutlineSPCharge} from "../mesh/sp-charge";
+import {genesisBraverOutlineSPAttack} from "../mesh/sp-attack";
+import {genesisBraverOutlineSPToStand} from "../mesh/sp-to-stand";
 
 /**
  * アニメーションアクティブメッシュマッピング生成
@@ -18,6 +21,18 @@ export function createOutlineMeshes(
     {
       type: "STAND",
       mesh: genesisBraverOutlineStand(resources),
+    },
+    {
+      type: "SP_CHARGE",
+      mesh: genesisBraverOutlineSPCharge(resources),
+    },
+    {
+      type: "SP_ATTACK",
+      mesh: genesisBraverOutlineSPAttack(resources),
+    },
+    {
+      type: "SP_TO_STAND",
+      mesh: genesisBraverOutlineSPToStand(resources),
     },
     {
       type: "KNOCK_BACK",

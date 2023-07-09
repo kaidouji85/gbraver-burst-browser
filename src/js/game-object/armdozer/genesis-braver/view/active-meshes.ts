@@ -5,6 +5,9 @@ import { genesisBraverActiveGuard } from "../mesh/guard";
 import { genesisBraverActiveKnockBack } from "../mesh/knock-back";
 import { genesisBraverActiveStand } from "../mesh/stand";
 import { AnimationMeshMapping } from "./animation-mesh-mapping";
+import {genesisBraverActiveSPCharge} from "../mesh/sp-charge";
+import {genesisBraverActiveSPAttack} from "../mesh/sp-attack";
+import {genesisBraverActiveSPToStand} from "../mesh/sp-to-stand";
 
 /**
  * アニメーションアクティブメッシュマッピング生成
@@ -18,6 +21,18 @@ export function createActiveMeshes(
     {
       type: "STAND",
       mesh: genesisBraverActiveStand(resources),
+    },
+    {
+      type: "SP_CHARGE",
+      mesh: genesisBraverActiveSPCharge(resources),
+    },
+    {
+      type: "SP_ATTACK",
+      mesh: genesisBraverActiveSPAttack(resources),
+    },
+    {
+      type: "SP_TO_STAND",
+      mesh: genesisBraverActiveSPToStand(resources),
     },
     {
       type: "KNOCK_BACK",
