@@ -86,11 +86,26 @@ const guts = (sprite: ShinBraver) => {
     .loop();
 };
 
+/**
+ * アクティブ ガッツ
+ * @param sprite　スプライト
+ */
+const activeGuts = (sprite: ShinBraver) => {
+  guts(sprite);
+  sprite.startActive().play();
+}
+
 /** プレイヤー ガッツ */
 export const playerGuts = () => armdozerSpriteStub(PlayerShinBraver, guts);
 
+/** プレイヤー アクティブ ガッツ */
+export const playerActiveGuts = () => armdozerSpriteStub(PlayerShinBraver, activeGuts);
+
 /** 敵 ガッツ */
 export const enemyGuts = () => armdozerSpriteStub(EnemyShinBraver, guts);
+
+/** 敵 アクティブ ガッツ */
+export const enemyActiveGuts = () => armdozerSpriteStub(EnemyShinBraver, activeGuts);
 
 /**
  * バースト
