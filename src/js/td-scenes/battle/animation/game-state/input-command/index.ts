@@ -53,9 +53,6 @@ export function inputCommandAnimation(
 
   const isPlayerTurn = props.playerId === gameState.activePlayerId;
   return all(
-    isPlayerTurn
-      ? playerTDArmdozer.sprite().startActive()
-      : enemyTDArmdozer.sprite().startActive(),
     playerHUD.gauge.hp(player.armdozer.hp),
     playerHUD.gauge.battery(player.armdozer.battery),
     enemyHUD.gauge.hp(enemy.armdozer.hp),
