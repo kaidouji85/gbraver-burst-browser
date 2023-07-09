@@ -1,11 +1,16 @@
 import type { Resources } from "../../../../resource";
+import { wingDozerActiveBackStep } from "../mesh/back-step";
 import { wingDozerActiveDashDown } from "../mesh/dash-down";
 import { wingDozerActiveDashToStand } from "../mesh/dash-to-stand";
 import { wingDozerActiveDashUp } from "../mesh/dash-up";
+import { wingDozerActiveDown } from "../mesh/down";
 import { wingDozerActiveFrontStep } from "../mesh/front-step";
 import { wingDozerActiveGuard } from "../mesh/guard";
 import { wingDozerActiveKnockBack } from "../mesh/knock-back";
 import { wingDozerActiveStand } from "../mesh/stand";
+import { wingDozerActiveUpperAttack } from "../mesh/upper-attack";
+import { wingDozerActiveUpperCharge } from "../mesh/upper-charge";
+import { wingDozerActiveUpperToStand } from "../mesh/upper-to-stand";
 import type { AnimationMeshMapping } from "./animation-mesh-mapping";
 
 /**
@@ -22,6 +27,18 @@ export function createActiveMeshes(
       mesh: wingDozerActiveStand(resources),
     },
     {
+      type: "UPPER_CHARGE",
+      mesh: wingDozerActiveUpperCharge(resources),
+    },
+    {
+      type: "UPPER_ATTACK",
+      mesh: wingDozerActiveUpperAttack(resources),
+    },
+    {
+      type: "UPPER_TO_STAND",
+      mesh: wingDozerActiveUpperToStand(resources),
+    },
+    {
       type: "DASH_UP",
       mesh: wingDozerActiveDashUp(resources),
     },
@@ -34,16 +51,24 @@ export function createActiveMeshes(
       mesh: wingDozerActiveDashToStand(resources),
     },
     {
+      type: "KNOCK_BACK",
+      mesh: wingDozerActiveKnockBack(resources),
+    },
+    {
+      type: "DOWN",
+      mesh: wingDozerActiveDown(resources),
+    },
+    {
+      type: "BACK_STEP",
+      mesh: wingDozerActiveBackStep(resources),
+    },
+    {
       type: "FRONT_STEP",
       mesh: wingDozerActiveFrontStep(resources),
     },
     {
       type: "GUARD",
       mesh: wingDozerActiveGuard(resources),
-    },
-    {
-      type: "KNOCK_BACK",
-      mesh: wingDozerActiveKnockBack(resources),
     },
   ];
 }
