@@ -10,6 +10,8 @@ import {shinBraverOutlineSPCharge} from "../mesh/sp-charge";
 import {shinBraverOutlineSPAttack} from "../mesh/sp-attack";
 import {shinBraverOutlineSPToStand} from "../mesh/sp-to-stand";
 import {shinBraverOutlineDown} from "../mesh/down";
+import {shinBraverOutlineGutsUp} from "../mesh/guts-up";
+import {shinBraverOutlineGutsDown} from "../mesh/guts-down";
 
 /**
  * アウトラインメッシュマッピング生成
@@ -47,6 +49,14 @@ export function createOutlineMeshes(
     {
       type: "DOWN",
       mesh: shinBraverOutlineDown(resources),
+    },
+    {
+      type: "GUTS_UP",
+      mesh: shinBraverOutlineGutsUp(resources),
+    },
+    {
+      type: "GUTS_DOWN",
+      mesh: shinBraverOutlineGutsDown(resources),
     },
     {
       type: "BURST_UP",

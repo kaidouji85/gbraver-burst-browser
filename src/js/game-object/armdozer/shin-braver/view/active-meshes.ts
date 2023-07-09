@@ -10,6 +10,8 @@ import {shinBraverActiveSPCharge} from "../mesh/sp-charge";
 import {shinBraverActiveSPAttack} from "../mesh/sp-attack";
 import {shinBraverActiveSPToStand} from "../mesh/sp-to-stand";
 import {shinBraverActiveDown} from "../mesh/down";
+import {shinBraverActiveGutsUp} from "../mesh/guts-up";
+import {shinBraverActiveGutsDown} from "../mesh/guts-down";
 
 /**
  * アニメーションアクティブメッシュマッピング生成
@@ -47,6 +49,14 @@ export function createActiveMeshes(
     {
       type: "DOWN",
       mesh: shinBraverActiveDown(resources),
+    },
+    {
+      type: "GUTS_UP",
+      mesh: shinBraverActiveGutsUp(resources),
+    },
+    {
+      type: "GUTS_DOWN",
+      mesh: shinBraverActiveGutsDown(resources),
     },
     {
       type: "BURST_UP",
