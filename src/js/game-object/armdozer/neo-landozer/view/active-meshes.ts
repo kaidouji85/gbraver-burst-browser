@@ -6,6 +6,9 @@ import { neoLandozerActiveGutsUp } from "../mesh/guts-up";
 import { neoLandozerActiveKnockBack } from "../mesh/knock-back";
 import { neoLandozerActiveStand } from "../mesh/stand";
 import type { AnimationMeshMapping } from "./animation-mesh-mapping";
+import {neoLandozerActiveHMCharge} from "../mesh/hm-charge";
+import {neoLandozerActiveHMAttack} from "../mesh/hm-attack";
+import {neoLandozerActiveHMToStand} from "../mesh/hm-to-stand";
 
 /**
  * アクティブアニメーションメッシュを生成
@@ -27,6 +30,18 @@ export function createActiveMeshes(
     {
       type: "GUARD",
       mesh: neoLandozerActiveGuard(resources),
+    },
+    {
+      type: "HM_CHARGE",
+      mesh: neoLandozerActiveHMCharge(resources),
+    },
+    {
+      type: "HM_ATTACK",
+      mesh: neoLandozerActiveHMAttack(resources),
+    },
+    {
+      type: "HM_TO_STAND",
+      mesh: neoLandozerActiveHMToStand(resources),
     },
     {
       type: "GUTS_UP",

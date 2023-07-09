@@ -6,6 +6,9 @@ import { neoLandozerOutlineGutsUp } from "../mesh/guts-up";
 import { neoLandozerOutlineKnockBack } from "../mesh/knock-back";
 import { neoLandozerOutlineStand } from "../mesh/stand";
 import { AnimationMeshMapping } from "./animation-mesh-mapping";
+import {neoLandozerOutlineHMCharge} from "../mesh/hm-charge";
+import {neoLandozerOutlineHMAttack} from "../mesh/hm-attack";
+import {neoLandozerOutlineHMToStand} from "../mesh/hm-to-stand";
 
 /**
  * アウトラインアニメーションメッシュを生成
@@ -27,6 +30,18 @@ export function createOutlineMeshes(
     {
       type: "GUARD",
       mesh: neoLandozerOutlineGuard(resources),
+    },
+    {
+      type: "HM_CHARGE",
+      mesh: neoLandozerOutlineHMCharge(resources),
+    },
+    {
+      type: "HM_ATTACK",
+      mesh: neoLandozerOutlineHMAttack(resources),
+    },
+    {
+      type: "HM_TO_STAND",
+      mesh: neoLandozerOutlineHMToStand(resources),
     },
     {
       type: "GUTS_UP",
