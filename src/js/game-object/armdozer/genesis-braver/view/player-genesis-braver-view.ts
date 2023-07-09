@@ -6,6 +6,7 @@ import { createActiveMeshes } from "./active-meshes";
 import type { AnimationMeshMapping } from "./animation-mesh-mapping";
 import type { GenesisBraverView } from "./genesis-braver-view";
 import { createMeshes } from "./meshes";
+import {createOutlineMeshes} from "./outline-meshes";
 
 /** プレイヤー ジェネシスブレイバービュー */
 export class PlayerGenesisBraverView implements GenesisBraverView {
@@ -13,6 +14,8 @@ export class PlayerGenesisBraverView implements GenesisBraverView {
   #meshes: AnimationMeshMapping[];
   /** アクティブメッシュ */
   #activeMeshes: AnimationMeshMapping[];
+  /** アウトラインメッシュ */
+  #outlineMeshes: AnimationMeshMapping[];
   /** グループ */
   #group: THREE.Group;
 
@@ -24,20 +27,16 @@ export class PlayerGenesisBraverView implements GenesisBraverView {
     this.#group = new THREE.Group();
     this.#meshes = createMeshes(resources);
     this.#activeMeshes = createActiveMeshes(resources);
-    this.#meshes.forEach(({ mesh }) => {
-      this.#group.add(mesh.getObject3D());
-    });
-    this.#activeMeshes.forEach(({ mesh }) => {
-      this.#group.add(mesh.getObject3D());
-    });
+    this.#outlineMeshes = createOutlineMeshes(resources);
+    [...this.#meshes, ...this.#activeMeshes, ...this.#outlineMeshes].forEach(
+      ({ mesh }) => {
+        this.#group.add(mesh.getObject3D());
+      });
   }
 
   /** @override */
   destructor() {
-    this.#meshes.forEach(({ mesh }) => {
-      mesh.destructor();
-    });
-    this.#activeMeshes.forEach(({ mesh }) => {
+    [...this.#meshes, ...this.#activeMeshes, ...this.#outlineMeshes].forEach(({mesh}) => {
       mesh.destructor();
     });
   }
@@ -70,7 +69,17 @@ export class PlayerGenesisBraverView implements GenesisBraverView {
       currentActiveMesh.mesh.animate(model.animation.frame);
     }
 
-    [...this.#meshes, ...this.#activeMeshes]
+    const currentOutlineMesh = this.#outlineMeshes.find(
+      (v) => v.type === model.animation.type,
+    );
+    if (currentOutlineMesh) {
+      const outlineOpacity =
+        (0.9 + model.active.strength * 0.1) * model.active.opacity;
+      currentOutlineMesh.mesh.opacity(outlineOpacity);
+      currentOutlineMesh.mesh.animate(model.animation.frame);
+    }
+
+    [...this.#meshes, ...this.#activeMeshes, ...this.#outlineMeshes]
       .filter((v) => v !== currentMesh)
       .filter((v) => v !== currentActiveMesh)
       .forEach(({ mesh }) => {
