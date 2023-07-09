@@ -12,6 +12,7 @@ import {shinBraverActiveSPToStand} from "../mesh/sp-to-stand";
 import {shinBraverActiveDown} from "../mesh/down";
 import {shinBraverActiveGutsUp} from "../mesh/guts-up";
 import {shinBraverActiveGutsDown} from "../mesh/guts-down";
+import {shinBraverActiveBackStep} from "../mesh/back-step";
 
 /**
  * アニメーションアクティブメッシュマッピング生成
@@ -65,6 +66,10 @@ export function createActiveMeshes(
     {
       type: "BURST_DOWN",
       mesh: shinBraverActiveBurstDown(resources),
+    },
+    {
+      type: "BACK_STEP",
+      mesh: shinBraverActiveBackStep(resources)
     },
     {
       type: "FRONT_STEP",

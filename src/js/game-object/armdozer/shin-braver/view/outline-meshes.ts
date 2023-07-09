@@ -12,6 +12,7 @@ import {shinBraverOutlineSPToStand} from "../mesh/sp-to-stand";
 import {shinBraverOutlineDown} from "../mesh/down";
 import {shinBraverOutlineGutsUp} from "../mesh/guts-up";
 import {shinBraverOutlineGutsDown} from "../mesh/guts-down";
+import {shinBraverOutlineBackStep} from "../mesh/back-step";
 
 /**
  * アウトラインメッシュマッピング生成
@@ -65,6 +66,10 @@ export function createOutlineMeshes(
     {
       type: "BURST_DOWN",
       mesh: shinBraverOutlineBurstDown(resources),
+    },
+    {
+      type: "BACK_STEP",
+      mesh: shinBraverOutlineBackStep(resources)
     },
     {
       type: "FRONT_STEP",
