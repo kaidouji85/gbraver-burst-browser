@@ -9,6 +9,7 @@ import type { AnimationMeshMapping } from "./animation-mesh-mapping";
 import {neoLandozerActiveHMCharge} from "../mesh/hm-charge";
 import {neoLandozerActiveHMAttack} from "../mesh/hm-attack";
 import {neoLandozerActiveHMToStand} from "../mesh/hm-to-stand";
+import {neoLandozerActiveDown} from "../mesh/down";
 
 /**
  * アクティブアニメーションメッシュを生成
@@ -42,6 +43,10 @@ export function createActiveMeshes(
     {
       type: "HM_TO_STAND",
       mesh: neoLandozerActiveHMToStand(resources),
+    },
+    {
+      type: "DOWN",
+      mesh: neoLandozerActiveDown(resources),
     },
     {
       type: "GUTS_UP",

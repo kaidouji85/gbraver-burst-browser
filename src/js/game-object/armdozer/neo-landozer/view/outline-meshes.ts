@@ -9,6 +9,7 @@ import { AnimationMeshMapping } from "./animation-mesh-mapping";
 import {neoLandozerOutlineHMCharge} from "../mesh/hm-charge";
 import {neoLandozerOutlineHMAttack} from "../mesh/hm-attack";
 import {neoLandozerOutlineHMToStand} from "../mesh/hm-to-stand";
+import {neoLandozerOutlineDown} from "../mesh/down";
 
 /**
  * アウトラインアニメーションメッシュを生成
@@ -42,6 +43,10 @@ export function createOutlineMeshes(
     {
       type: "HM_TO_STAND",
       mesh: neoLandozerOutlineHMToStand(resources),
+    },
+    {
+      type: "DOWN",
+      mesh: neoLandozerOutlineDown(resources),
     },
     {
       type: "GUTS_UP",
