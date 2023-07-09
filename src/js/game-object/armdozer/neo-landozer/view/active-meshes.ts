@@ -1,8 +1,13 @@
 import type { Resources } from "../../../../resource";
+import { neoLandozerActiveBackStep } from "../mesh/back-step";
+import { neoLandozerActiveDown } from "../mesh/down";
 import { neoLandozerActiveFrontStep } from "../mesh/front-step";
 import { neoLandozerActiveGuard } from "../mesh/guard";
 import { neoLandozerActiveGutsDown } from "../mesh/guts-down";
 import { neoLandozerActiveGutsUp } from "../mesh/guts-up";
+import { neoLandozerActiveHMAttack } from "../mesh/hm-attack";
+import { neoLandozerActiveHMCharge } from "../mesh/hm-charge";
+import { neoLandozerActiveHMToStand } from "../mesh/hm-to-stand";
 import { neoLandozerActiveKnockBack } from "../mesh/knock-back";
 import { neoLandozerActiveStand } from "../mesh/stand";
 import type { AnimationMeshMapping } from "./animation-mesh-mapping";
@@ -29,12 +34,32 @@ export function createActiveMeshes(
       mesh: neoLandozerActiveGuard(resources),
     },
     {
+      type: "HM_CHARGE",
+      mesh: neoLandozerActiveHMCharge(resources),
+    },
+    {
+      type: "HM_ATTACK",
+      mesh: neoLandozerActiveHMAttack(resources),
+    },
+    {
+      type: "HM_TO_STAND",
+      mesh: neoLandozerActiveHMToStand(resources),
+    },
+    {
+      type: "DOWN",
+      mesh: neoLandozerActiveDown(resources),
+    },
+    {
       type: "GUTS_UP",
       mesh: neoLandozerActiveGutsUp(resources),
     },
     {
       type: "GUTS_DOWN",
       mesh: neoLandozerActiveGutsDown(resources),
+    },
+    {
+      type: "BACK_STEP",
+      mesh: neoLandozerActiveBackStep(resources),
     },
     {
       type: "FRONT_STEP",
