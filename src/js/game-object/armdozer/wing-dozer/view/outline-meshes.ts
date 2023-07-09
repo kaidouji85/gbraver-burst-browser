@@ -11,6 +11,7 @@ import {wingDozerOutlineUpperCharge} from "../mesh/upper-charge";
 import {wingDozerOutlineUpperAttack} from "../mesh/upper-attack";
 import {wingDozerOutlineUpperToStand} from "../mesh/upper-to-stand";
 import {wingDozerOutlineDown} from "../mesh/down";
+import {wingDozerOutlineBackStep} from "../mesh/back-step";
 
 /**
  * アウトラインアニメーションメッシュマッピングを生成
@@ -56,6 +57,10 @@ export function createOutlineMeshes(
     {
       type: "DOWN",
       mesh: wingDozerOutlineDown(resources),
+    },
+    {
+      type: "BACK_STEP",
+      mesh: wingDozerOutlineBackStep(resources),
     },
     {
       type: "FRONT_STEP",

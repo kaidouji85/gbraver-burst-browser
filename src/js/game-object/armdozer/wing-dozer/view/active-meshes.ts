@@ -11,6 +11,7 @@ import {wingDozerActiveUpperCharge} from "../mesh/upper-charge";
 import {wingDozerActiveUpperAttack} from "../mesh/upper-attack";
 import {wingDozerActiveUpperToStand} from "../mesh/upper-to-stand";
 import {wingDozerActiveDown} from "../mesh/down";
+import {wingDozerActiveBackStep} from "../mesh/back-step";
 
 /**
  * アクティブアニメーションメッシュマッピングを生成
@@ -56,6 +57,10 @@ export function createActiveMeshes(
     {
       type: "DOWN",
       mesh: wingDozerActiveDown(resources),
+    },
+    {
+      type: "BACK_STEP",
+      mesh: wingDozerActiveBackStep(resources),
     },
     {
       type: "FRONT_STEP",
