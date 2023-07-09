@@ -56,7 +56,7 @@ const armHammer = (sprite: LightningDozer) => {
 const activeArmHammer = (sprite: LightningDozer) => {
   armHammer(sprite);
   sprite.startActive().play();
-}
+};
 
 /** プレイヤー アームハンマー */
 export const playerArmHammer = () =>
@@ -233,16 +233,18 @@ const down = (sprite: LightningDozer) => {
 const activeDown = (sprite: LightningDozer) => {
   down(sprite);
   sprite.startActive().play();
-}
+};
 
 /** プレイヤー ダウン */
 export const playerDown = () => armdozerSpriteStub(PlayerLightningDozer, down);
 
 /** プレイヤー アクティブ ダウン */
-export const playerActiveDown = () => armdozerSpriteStub(PlayerLightningDozer, activeDown);
+export const playerActiveDown = () =>
+  armdozerSpriteStub(PlayerLightningDozer, activeDown);
 
 /** 敵 ダウン */
 export const enemyDown = () => armdozerSpriteStub(EnemyLightningDozer, down);
 
 /** 敵 アクティブ ダウン */
-export const enemyActiveDown = () => armdozerSpriteStub(EnemyLightningDozer, activeDown);
+export const enemyActiveDown = () =>
+  armdozerSpriteStub(EnemyLightningDozer, activeDown);

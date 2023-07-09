@@ -1,9 +1,9 @@
 import type { Resources } from "../../../../resource";
 import { TEXTURE_IDS } from "../../../../resource/texture/ids";
 import type { ArmdozerAnimation } from "../../mesh/armdozer-animation";
+import { createLightningDozerActiveMesh } from "./create-active-mesh";
 import { createLightningDozerMesh } from "./create-mesh";
-import {createLightningDozerActiveMesh} from "./create-active-mesh";
-import {createLightningDozerOutlineMesh} from "./create-outline-mesh";
+import { createLightningDozerOutlineMesh } from "./create-outline-mesh";
 
 /** テクスチャID */
 export const TEXTURE_ID = TEXTURE_IDS.LIGHTNING_DOZER_HM_ATTACK;
