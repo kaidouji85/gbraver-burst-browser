@@ -197,7 +197,7 @@ const armHammer = (sprite: NeoLandozer) => {
 const activeArmHammer = (sprite: NeoLandozer) => {
   armHammer(sprite);
   sprite.startActive().play();
-}
+};
 
 /** プレイヤー アームハンマー */
 export const playerArmHammer = () =>
@@ -230,7 +230,7 @@ const down = (sprite: NeoLandozer) => {
 const activeDown = (sprite: NeoLandozer) => {
   down(sprite);
   sprite.startActive().play();
-}
+};
 
 /** プレイヤー ダウン */
 export const playerDown = () => armdozerSpriteStub(PlayerNeoLandozer, down);
