@@ -10,6 +10,7 @@ import { AnimationMeshMapping } from "./animation-mesh-mapping";
 import {wingDozerOutlineUpperCharge} from "../mesh/upper-charge";
 import {wingDozerOutlineUpperAttack} from "../mesh/upper-attack";
 import {wingDozerOutlineUpperToStand} from "../mesh/upper-to-stand";
+import {wingDozerOutlineDown} from "../mesh/down";
 
 /**
  * アウトラインアニメーションメッシュマッピングを生成
@@ -49,12 +50,16 @@ export function createOutlineMeshes(
       mesh: wingDozerOutlineDashToStand(resources),
     },
     {
-      type: "FRONT_STEP",
-      mesh: wingDozerOutlineFrontStep(resources),
-    },
-    {
       type: "KNOCK_BACK",
       mesh: wingDozerOutlineKnockBack(resources),
+    },
+    {
+      type: "DOWN",
+      mesh: wingDozerOutlineDown(resources),
+    },
+    {
+      type: "FRONT_STEP",
+      mesh: wingDozerOutlineFrontStep(resources),
     },
     {
       type: "GUARD",
