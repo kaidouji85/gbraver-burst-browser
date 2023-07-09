@@ -49,13 +49,30 @@ const armHammer = (sprite: LightningDozer) => {
     .loop();
 };
 
+/**
+ * アクティブ アームハンマー
+ * @param sprite スプライト
+ */
+const activeArmHammer = (sprite: LightningDozer) => {
+  armHammer(sprite);
+  sprite.startActive().play();
+}
+
 /** プレイヤー アームハンマー */
 export const playerArmHammer = () =>
   armdozerSpriteStub(PlayerLightningDozer, armHammer);
 
+/** プレイヤー アクティブ アームハンマー */
+export const playerActiveArmHammer = () =>
+  armdozerSpriteStub(PlayerLightningDozer, activeArmHammer);
+
 /** 敵 アームハンマー */
 export const enemyArmHammer = () =>
   armdozerSpriteStub(EnemyLightningDozer, armHammer);
+
+/** 敵 アクティブ アームハンマー */
+export const enemyActiveAtmHammer = () =>
+  armdozerSpriteStub(EnemyLightningDozer, activeArmHammer);
 
 /**
  * 回避
