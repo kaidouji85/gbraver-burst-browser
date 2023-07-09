@@ -10,6 +10,7 @@ import {neoLandozerOutlineHMCharge} from "../mesh/hm-charge";
 import {neoLandozerOutlineHMAttack} from "../mesh/hm-attack";
 import {neoLandozerOutlineHMToStand} from "../mesh/hm-to-stand";
 import {neoLandozerOutlineDown} from "../mesh/down";
+import {neoLandozerOutlineBackStep} from "../mesh/back-step";
 
 /**
  * アウトラインアニメーションメッシュを生成
@@ -55,6 +56,10 @@ export function createOutlineMeshes(
     {
       type: "GUTS_DOWN",
       mesh: neoLandozerOutlineGutsDown(resources),
+    },
+    {
+      type: "BACK_STEP",
+      mesh: neoLandozerOutlineBackStep(resources),
     },
     {
       type: "FRONT_STEP",

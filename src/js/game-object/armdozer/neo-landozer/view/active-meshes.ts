@@ -10,6 +10,7 @@ import {neoLandozerActiveHMCharge} from "../mesh/hm-charge";
 import {neoLandozerActiveHMAttack} from "../mesh/hm-attack";
 import {neoLandozerActiveHMToStand} from "../mesh/hm-to-stand";
 import {neoLandozerActiveDown} from "../mesh/down";
+import {neoLandozerActiveBackStep} from "../mesh/back-step";
 
 /**
  * アクティブアニメーションメッシュを生成
@@ -55,6 +56,10 @@ export function createActiveMeshes(
     {
       type: "GUTS_DOWN",
       mesh: neoLandozerActiveGutsDown(resources),
+    },
+    {
+      type: "BACK_STEP",
+      mesh: neoLandozerActiveBackStep(resources),
     },
     {
       type: "FRONT_STEP",
