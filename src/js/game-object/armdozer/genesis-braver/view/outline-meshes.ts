@@ -2,6 +2,7 @@ import { Resources } from "../../../../resource";
 import { AnimationMeshMapping } from "./animation-mesh-mapping";
 import {genesisBraverOutlineKnockBack} from "../mesh/knock-back";
 import {genesisBraverOutlineStand} from "../mesh/stand";
+import {genesisBraverOutlineGuard} from "../mesh/guard";
 
 /**
  * アニメーションアクティブメッシュマッピング生成
@@ -20,5 +21,9 @@ export function createOutlineMeshes(
       type: "KNOCK_BACK",
       mesh: genesisBraverOutlineKnockBack(resources)
     },
+    {
+      type: "GUARD",
+      mesh: genesisBraverOutlineGuard(resources),
+    }
   ];
 }
