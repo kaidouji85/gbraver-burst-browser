@@ -38,9 +38,6 @@ function batteryLimitBreak(
   return all(
     param.burstArmdozerHUD.cutIn.show(),
     param.burstArmdozerTD.genesisBraver.burst(),
-    param.isActive
-      ? param.burstArmdozerTD.genesisBraver.endActive()
-      : param.anotherArmdozerTD.sprite().endActive(),
     track(
       param.tdCamera,
       param.burstArmdozerTD.genesisBraver.getObject3D().position.x,

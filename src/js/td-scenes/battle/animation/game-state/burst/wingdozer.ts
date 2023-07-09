@@ -45,9 +45,6 @@ export function wingDozerContinuousAttack(
 ): Animate {
   return all(
     param.burstArmdozerTD.wingDozer.dash(),
-    param.isActive
-      ? param.burstArmdozerTD.wingDozer.endActive()
-      : param.anotherArmdozerTD.sprite().endActive(),
     param.burstArmdozerHUD.cutIn.show(),
     track(
       param.tdCamera,

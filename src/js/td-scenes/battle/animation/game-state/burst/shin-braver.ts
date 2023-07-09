@@ -43,9 +43,6 @@ function recoverBattery(param: ShinBraverBurst<RecoverBattery>): Animate {
   return all(
     param.burstArmdozerHUD.cutIn.show(),
     param.burstArmdozerTD.shinBraver.burst(),
-    param.isActive
-      ? param.burstArmdozerTD.shinBraver.endActive()
-      : param.anotherArmdozerTD.sprite().endActive(),
     track(
       param.tdCamera,
       param.burstArmdozerTD.shinBraver.getObject3D().position.x,

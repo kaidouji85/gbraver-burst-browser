@@ -43,9 +43,6 @@ export function neoLandozerBurst(param: NeoLandozerBurst<Burst>): Animate {
 function neoLandozerBuffPower(param: NeoLandozerBurst<BuffPower>): Animate {
   return all(
     param.burstArmdozerTD.neoLandozer.guts(),
-    param.isActive
-      ? param.burstArmdozerTD.neoLandozer.endActive()
-      : param.anotherArmdozerTD.sprite().endActive(),
     param.burstArmdozerHUD.cutIn.show(),
     track(
       param.tdCamera,

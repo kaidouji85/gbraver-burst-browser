@@ -20,14 +20,20 @@ export function turnChangeAnimation(
   const activeTDPlayer = props.view.td.players.find(
     (v) => v.playerId === gameState.activePlayerId,
   );
+  const activeTDArmdozer = props.view.td.armdozerObjects.find(
+    (v) => v.playerId === gameState.activePlayerId,
+  );
   const activeHUDPlayer = props.view.hud.players.find(
     (v) => v.playerId === gameState.activePlayerId,
   );
   const activeStatus = gameState.players.find(
     (v) => v.playerId === gameState.activePlayerId,
   );
+  const inactiveTDArmdozer = props.view.td.armdozerObjects.find(
+    (v) => v.playerId !== gameState.activePlayerId,
+  );
 
-  if (!activeTDPlayer || !activeHUDPlayer || !activeStatus) {
+  if (!activeTDPlayer || !activeTDArmdozer || !activeHUDPlayer || !activeStatus || !inactiveTDArmdozer) {
     return empty();
   }
 
@@ -44,6 +50,8 @@ export function turnChangeAnimation(
       .show(turnChange.recoverBattery)
       .chain(delay(400))
       .chain(activeTDPlayer.recoverBattery.hidden()),
+    activeTDArmdozer.sprite().startActive(),
+    inactiveTDArmdozer.sprite().endActive(),
   );
   const forContinuousAttack = empty().chain(
     delay(800),
