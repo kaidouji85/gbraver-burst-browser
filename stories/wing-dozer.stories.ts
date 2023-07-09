@@ -56,19 +56,21 @@ const upper = (sprite: WingDozer) => {
 const activeUpper = (sprite: WingDozer) => {
   upper(sprite);
   sprite.startActive().play();
-}
+};
 
 /** プレイヤー アッパー */
 export const playerUpper = () => armdozerSpriteStub(PlayerWingDozer, upper);
 
 /** プレイヤー アクティブ アッパー */
-export const playerActiveUpper = () => armdozerSpriteStub(PlayerWingDozer, activeUpper);
+export const playerActiveUpper = () =>
+  armdozerSpriteStub(PlayerWingDozer, activeUpper);
 
 /** 敵 アッパー */
 export const enemyUpper = () => armdozerSpriteStub(EnemyWingDozer, upper);
 
 /** 敵 アクティブ アッパー */
-export const enemyActiveUpper = () => armdozerSpriteStub(EnemyWingDozer, activeUpper);
+export const enemyActiveUpper = () =>
+  armdozerSpriteStub(EnemyWingDozer, activeUpper);
 
 /**
  * ダッシュ
@@ -121,19 +123,21 @@ const down = (sprite: WingDozer) => {
 const activeDown = (sprite: WingDozer) => {
   down(sprite);
   sprite.startActive().play();
-}
+};
 
 /** プレイヤー ダウン */
 export const playerDown = () => armdozerSpriteStub(PlayerWingDozer, down);
 
 /** プレイヤー アクティブ ダウン */
-export const playerActiveDown = () => armdozerSpriteStub(PlayerWingDozer, activeDown);
+export const playerActiveDown = () =>
+  armdozerSpriteStub(PlayerWingDozer, activeDown);
 
 /** 敵 ダウン */
 export const enemyDown = () => armdozerSpriteStub(EnemyWingDozer, down);
 
 /** 敵 アクティブ ダウン */
-export const enemyActiveDown = () => armdozerSpriteStub(EnemyWingDozer, activeDown);
+export const enemyActiveDown = () =>
+  armdozerSpriteStub(EnemyWingDozer, activeDown);
 
 /**
  * 回避

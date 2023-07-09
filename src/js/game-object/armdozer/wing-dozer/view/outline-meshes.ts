@@ -1,17 +1,17 @@
 import { Resources } from "../../../../resource";
+import { wingDozerOutlineBackStep } from "../mesh/back-step";
 import { wingDozerOutlineDashDown } from "../mesh/dash-down";
 import { wingDozerOutlineDashToStand } from "../mesh/dash-to-stand";
 import { wingDozerOutlineDashUp } from "../mesh/dash-up";
+import { wingDozerOutlineDown } from "../mesh/down";
 import { wingDozerOutlineFrontStep } from "../mesh/front-step";
 import { wingDozerOutlineGuard } from "../mesh/guard";
 import { wingDozerOutlineKnockBack } from "../mesh/knock-back";
 import { wingDozerOutlineStand } from "../mesh/stand";
+import { wingDozerOutlineUpperAttack } from "../mesh/upper-attack";
+import { wingDozerOutlineUpperCharge } from "../mesh/upper-charge";
+import { wingDozerOutlineUpperToStand } from "../mesh/upper-to-stand";
 import { AnimationMeshMapping } from "./animation-mesh-mapping";
-import {wingDozerOutlineUpperCharge} from "../mesh/upper-charge";
-import {wingDozerOutlineUpperAttack} from "../mesh/upper-attack";
-import {wingDozerOutlineUpperToStand} from "../mesh/upper-to-stand";
-import {wingDozerOutlineDown} from "../mesh/down";
-import {wingDozerOutlineBackStep} from "../mesh/back-step";
 
 /**
  * アウトラインアニメーションメッシュマッピングを生成

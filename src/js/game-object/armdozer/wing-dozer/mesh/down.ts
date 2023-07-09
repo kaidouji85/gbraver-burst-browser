@@ -1,9 +1,9 @@
 import type { Resources } from "../../../../resource";
 import { TEXTURE_IDS } from "../../../../resource/texture/ids";
 import type { ArmdozerAnimation } from "../../mesh/armdozer-animation";
+import { createWingDozerActiveMesh } from "./create-active-mesh";
 import { createWingDozerMesh } from "./create-mesh";
-import {createWingDozerActiveMesh} from "./create-active-mesh";
-import {createWingDozerOutlineMesh} from "./create-outline-mesh";
+import { createWingDozerOutlineMesh } from "./create-outline-mesh";
 
 /** テクスチャID */
 export const TEXTURE_ID = TEXTURE_IDS.WING_DOZER_DOWN;
