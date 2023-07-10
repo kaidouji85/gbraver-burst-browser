@@ -52,6 +52,11 @@ class HorizontalArmdozerAnimation implements ArmdozerAnimation {
   }
 
   /** @override */
+  color(r: number, g: number, b: number): void {
+    this.#animation.mesh.material.color.setRGB(r, g, b);
+  }
+
+  /** @override */
   getObject3D(): THREE.Object3D {
     return this.#animation.getObject3D();
   }
