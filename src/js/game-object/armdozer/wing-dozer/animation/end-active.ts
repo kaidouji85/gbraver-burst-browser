@@ -1,8 +1,8 @@
 import { Animate } from "../../../../animation/animate";
+import { process } from "../../../../animation/process";
 import { tween } from "../../../../animation/tween";
+import { ARMDOZER_SPRITE_STANDARD_Z } from "../../position";
 import type { WingDozerModel } from "../model/wing-dozer-model";
-import {process} from "../../../../animation/process";
-import {ARMDOZER_SPRITE_STANDARD_Z} from "../../position";
 
 /**
  * アクティブ状態を終了する
@@ -20,6 +20,6 @@ export function endActive(model: WingDozerModel): Animate {
         },
         500,
       ),
-    )
+    ),
   );
 }

@@ -1,8 +1,8 @@
 import { Animate } from "../../../../animation/animate";
+import { process } from "../../../../animation/process";
 import { tween } from "../../../../animation/tween";
+import { ARMDOZER_SPRITE_STANDARD_Z } from "../../position";
 import { GenesisBraverModel } from "../model/genesis-braver-model";
-import {process} from "../../../../animation/process";
-import {ARMDOZER_SPRITE_STANDARD_Z} from "../../position";
 
 /**
  * アクティブ状態を終了する
@@ -20,6 +20,6 @@ export function endActive(model: GenesisBraverModel): Animate {
         },
         500,
       ),
-    )
+    ),
   );
 }
