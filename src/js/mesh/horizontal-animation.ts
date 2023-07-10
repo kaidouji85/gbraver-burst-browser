@@ -84,18 +84,6 @@ export class HorizontalAnimationMesh {
   }
 
   /**
-   * 色を設定する
-   * @param r 赤
-   * @param g 緑
-   * @param b 青
-   */
-  setColor(r: number, g: number, b: number): void {
-    this.mesh.material.color.r = r;
-    this.mesh.material.color.g = g;
-    this.mesh.material.color.b = b;
-  }
-
-  /**
    * シーンに追加するオブジェクトを取得する
    * @return 取得結果
    */
