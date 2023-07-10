@@ -10,11 +10,11 @@ import { MESH_HEIGHT, MESH_WIDTH } from "./mesh-size";
 import { MESH_Y } from "./position";
 
 /** アクティブレイヤー Red */
-const ACTIVE_COLOR_R = 169;
+const ACTIVE_COLOR_R = 128;
 /** アクティブレイヤー Green */
-const ACTIVE_COLOR_G = 169;
+const ACTIVE_COLOR_G = 128;
 /** アクティブレイヤー Blue */
-const ACTIVE_COLOR_B = 169;
+const ACTIVE_COLOR_B = 128;
 
 /**
  * アクティブ用にシルエット化したテクスチャを生成する
