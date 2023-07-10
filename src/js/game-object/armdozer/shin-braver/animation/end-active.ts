@@ -1,6 +1,8 @@
 import { Animate } from "../../../../animation/animate";
+import { process } from "../../../../animation/process";
 import { tween } from "../../../../animation/tween";
 import type { ShinBraverModel } from "../model/shin-braver-model";
+import {ARMDOZER_SPRITE_STANDARD_Z} from "../../position";
 
 /**
  * アクティブ状態を終了する
@@ -8,12 +10,16 @@ import type { ShinBraverModel } from "../model/shin-braver-model";
  * @return アニメーション
  */
 export function endActive(model: ShinBraverModel): Animate {
-  return tween(model.active, (t) =>
-    t.to(
-      {
-        opacity: 0,
-      },
-      500,
-    ),
+  return process(() => {
+    model.position.z = ARMDOZER_SPRITE_STANDARD_Z;
+  }).chain(
+    tween(model.active, (t) =>
+      t.to(
+        {
+          opacity: 0,
+        },
+        500,
+      ),
+    )
   );
 }
