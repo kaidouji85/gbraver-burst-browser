@@ -62,7 +62,7 @@ export class PlayerWingDozerView implements WingDozerView {
     if (currentMesh) {
       currentMesh.mesh.animate(model.animation.frame);
       currentMesh.mesh.opacity(1);
-      const colorStrength = 1 - (0.15 + model.active.strength * 0.1) * model.active.opacity;
+      const colorStrength = 1 - (0.1 + model.active.strength * 0.1) * model.active.opacity;
       currentMesh.mesh.color(
         colorStrength,
         colorStrength,
