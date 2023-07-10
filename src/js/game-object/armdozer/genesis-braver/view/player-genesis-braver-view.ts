@@ -69,7 +69,6 @@ export class PlayerGenesisBraverView implements GenesisBraverView {
 
     [...this.#meshes, ...this.#outlineMeshes]
       .filter((v) => v !== currentMesh)
-      //.filter((v) => v !== currentActiveMesh)
       .filter((v) => v !== currentOutlineMesh)
       .forEach(({ mesh }) => {
         mesh.opacity(0);
