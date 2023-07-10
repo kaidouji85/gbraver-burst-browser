@@ -24,20 +24,16 @@ export class PlayerGenesisBraverView implements GenesisBraverView {
     this.#group = new THREE.Group();
     this.#meshes = createMeshes(resources);
     this.#outlineMeshes = createOutlineMeshes(resources);
-    [...this.#meshes, ...this.#outlineMeshes].forEach(
-      ({ mesh }) => {
-        this.#group.add(mesh.getObject3D());
-      },
-    );
+    [...this.#meshes, ...this.#outlineMeshes].forEach(({ mesh }) => {
+      this.#group.add(mesh.getObject3D());
+    });
   }
 
   /** @override */
   destructor() {
-    [...this.#meshes, ...this.#outlineMeshes].forEach(
-      ({ mesh }) => {
-        mesh.destructor();
-      },
-    );
+    [...this.#meshes, ...this.#outlineMeshes].forEach(({ mesh }) => {
+      mesh.destructor();
+    });
   }
 
   /** @override */
@@ -56,12 +52,9 @@ export class PlayerGenesisBraverView implements GenesisBraverView {
     if (currentMesh) {
       currentMesh.mesh.opacity(1);
       currentMesh.mesh.animate(model.animation.frame);
-      const colorStrength = 1 - (0.1 + model.active.strength * 0.1) * model.active.opacity;
-      currentMesh.mesh.color(
-        colorStrength,
-        colorStrength,
-        colorStrength,
-      );
+      const colorStrength =
+        1 - (0.1 + model.active.strength * 0.1) * model.active.opacity;
+      currentMesh.mesh.color(colorStrength, colorStrength, colorStrength);
     }
 
     const currentOutlineMesh = this.#outlineMeshes.find(

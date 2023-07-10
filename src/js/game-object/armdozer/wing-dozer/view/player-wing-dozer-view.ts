@@ -26,20 +26,16 @@ export class PlayerWingDozerView implements WingDozerView {
     this.#group = new Group();
     this.#meshes = createMeshes(resources);
     this.#outlineMeshes = createOutlineMeshes(resources);
-    [...this.#meshes, ...this.#outlineMeshes].forEach(
-      ({ mesh }) => {
-        this.#group.add(mesh.getObject3D());
-      },
-    );
+    [...this.#meshes, ...this.#outlineMeshes].forEach(({ mesh }) => {
+      this.#group.add(mesh.getObject3D());
+    });
   }
 
   /** @override */
   destructor(): void {
-    [...this.#meshes, ...this.#outlineMeshes].forEach(
-      ({ mesh }) => {
-        mesh.destructor();
-      },
-    );
+    [...this.#meshes, ...this.#outlineMeshes].forEach(({ mesh }) => {
+      mesh.destructor();
+    });
   }
 
   /** @override */
@@ -62,12 +58,9 @@ export class PlayerWingDozerView implements WingDozerView {
     if (currentMesh) {
       currentMesh.mesh.animate(model.animation.frame);
       currentMesh.mesh.opacity(1);
-      const colorStrength = 1 - (0.1 + model.active.strength * 0.1) * model.active.opacity;
-      currentMesh.mesh.color(
-        colorStrength,
-        colorStrength,
-        colorStrength,
-      );
+      const colorStrength =
+        1 - (0.1 + model.active.strength * 0.1) * model.active.opacity;
+      currentMesh.mesh.color(colorStrength, colorStrength, colorStrength);
     }
 
     const currentOutlineMesh = this.#outlineMeshes.find(
