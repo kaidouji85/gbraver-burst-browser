@@ -2,7 +2,7 @@ import { Animate } from "../../../../animation/animate";
 import { process } from "../../../../animation/process";
 import { tween } from "../../../../animation/tween";
 import type { ShinBraverModel } from "../model/shin-braver-model";
-import {ARMDOZER_SPRITE_ATTACKER_Z} from "../../position";
+import {ARMDOZER_SPRITE_ACTIVE_Z} from "../../position";
 
 /**
  * アクティブ状態を開始する
@@ -11,7 +11,7 @@ import {ARMDOZER_SPRITE_ATTACKER_Z} from "../../position";
  */
 export function startActive(model: ShinBraverModel): Animate {
   return process(() => {
-    model.position.z = ARMDOZER_SPRITE_ATTACKER_Z;
+    model.position.z = ARMDOZER_SPRITE_ACTIVE_Z;
   }).chain(tween(model.active, (t) =>
     t.to(
       {
