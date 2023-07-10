@@ -56,7 +56,7 @@ export class PlayerGenesisBraverView implements GenesisBraverView {
     if (currentMesh) {
       currentMesh.mesh.opacity(1);
       currentMesh.mesh.animate(model.animation.frame);
-      const colorStrength = 1 - (0.2 + model.active.strength * 0.1) * model.active.opacity;
+      const colorStrength = 1 - (0.1 + model.active.strength * 0.1) * model.active.opacity;
       currentMesh.mesh.color(
         colorStrength,
         colorStrength,

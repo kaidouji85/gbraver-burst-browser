@@ -2,7 +2,6 @@ import * as THREE from "three";
 
 import type { Resources } from "../../../../resource";
 import type { LightningDozerModel } from "../model/lightning-dozer-model";
-import { createActiveMeshes } from "./active-meshes";
 import type { AnimationMeshMapping } from "./animation-mesh-mapping";
 import type { LightningDozerView } from "./lightning-dozer-view";
 import { createMeshes } from "./meshes";
@@ -14,8 +13,6 @@ export class PlayerLightingDozerView implements LightningDozerView {
   #group: THREE.Group;
   /** メッシュ */
   #meshes: AnimationMeshMapping[];
-  /** アクティブメッシュ */
-  #activeMeshes: AnimationMeshMapping[];
   /** アウトラインメッシュ */
   #outlineMeshes: AnimationMeshMapping[];
 
@@ -26,9 +23,8 @@ export class PlayerLightingDozerView implements LightningDozerView {
   constructor(resources: Resources) {
     this.#group = new THREE.Group();
     this.#meshes = createMeshes(resources);
-    this.#activeMeshes = createActiveMeshes(resources);
     this.#outlineMeshes = createOutlineMeshes(resources);
-    [...this.#meshes, ...this.#activeMeshes, ...this.#outlineMeshes].forEach(
+    [...this.#meshes, ...this.#outlineMeshes].forEach(
       ({ mesh }) => {
         this.#group.add(mesh.getObject3D());
       },
@@ -37,7 +33,7 @@ export class PlayerLightingDozerView implements LightningDozerView {
 
   /** @override */
   destructor(): void {
-    [...this.#meshes, ...this.#activeMeshes, ...this.#outlineMeshes].forEach(
+    [...this.#meshes, ...this.#outlineMeshes].forEach(
       ({ mesh }) => {
         mesh.destructor();
       },
@@ -56,16 +52,12 @@ export class PlayerLightingDozerView implements LightningDozerView {
     if (currentMesh) {
       currentMesh.mesh.opacity(1);
       currentMesh.mesh.animate(model.animation.frame);
-    }
-
-    const currentActiveMesh = this.#activeMeshes.find(
-      (v) => v.type === model.animation.type,
-    );
-    if (currentActiveMesh) {
-      const activeOpacity =
-        (0.2 + model.active.strength * 0.1) * model.active.opacity;
-      currentActiveMesh.mesh.opacity(activeOpacity);
-      currentActiveMesh.mesh.animate(model.animation.frame);
+      const colorStrength = 1 - (0.1 + model.active.strength * 0.1) * model.active.opacity;
+      currentMesh.mesh.color(
+        colorStrength,
+        colorStrength,
+        colorStrength,
+      );
     }
 
     const currentOutlineMesh = this.#outlineMeshes.find(
@@ -78,9 +70,8 @@ export class PlayerLightingDozerView implements LightningDozerView {
       currentOutlineMesh.mesh.animate(model.animation.frame);
     }
 
-    [...this.#meshes, ...this.#activeMeshes, ...this.#outlineMeshes]
+    [...this.#meshes, ...this.#outlineMeshes]
       .filter((v) => v !== currentMesh)
-      .filter((v) => v !== currentActiveMesh)
       .filter((v) => v !== currentOutlineMesh)
       .forEach(({ mesh }) => {
         mesh.opacity(0);
