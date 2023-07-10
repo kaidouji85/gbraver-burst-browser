@@ -20,10 +20,10 @@ export interface ArmdozerAnimation {
   opacity(value: number): void;
 
   /**
-   * 色を設定する
-   * @param r 赤
-   * @param g 緑
-   * @param b 青
+   * 色の強さを設定する
+   * @param r 赤要素の倍率(1でそのまま)
+   * @param g 緑要素の倍率(1でそのまま)
+   * @param b 青要素の倍率(1でそのまま)
    */
   color(r: number, g: number, b: number): void;
 

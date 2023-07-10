@@ -3,7 +3,6 @@ import { Group } from "three";
 
 import type { Resources } from "../../../../resource";
 import type { WingDozerModel } from "../model/wing-dozer-model";
-import { createActiveMeshes } from "./active-meshes";
 import type { AnimationMeshMapping } from "./animation-mesh-mapping";
 import { createMeshes } from "./meshes";
 import { createOutlineMeshes } from "./outline-meshes";
@@ -15,8 +14,6 @@ export class PlayerWingDozerView implements WingDozerView {
   #group: THREE.Group;
   /** メッシュ */
   #meshes: AnimationMeshMapping[];
-  /** アクティブメッシュ */
-  #activeMeshes: AnimationMeshMapping[];
   /** アウトラインメッシュ */
   #outlineMeshes: AnimationMeshMapping[];
 
@@ -28,22 +25,17 @@ export class PlayerWingDozerView implements WingDozerView {
   constructor(resources: Resources) {
     this.#group = new Group();
     this.#meshes = createMeshes(resources);
-    this.#activeMeshes = createActiveMeshes(resources);
     this.#outlineMeshes = createOutlineMeshes(resources);
-    [...this.#meshes, ...this.#activeMeshes, ...this.#outlineMeshes].forEach(
-      ({ mesh }) => {
-        this.#group.add(mesh.getObject3D());
-      },
-    );
+    [...this.#meshes, ...this.#outlineMeshes].forEach(({ mesh }) => {
+      this.#group.add(mesh.getObject3D());
+    });
   }
 
   /** @override */
   destructor(): void {
-    [...this.#meshes, ...this.#activeMeshes, ...this.#outlineMeshes].forEach(
-      ({ mesh }) => {
-        mesh.destructor();
-      },
-    );
+    [...this.#meshes, ...this.#outlineMeshes].forEach(({ mesh }) => {
+      mesh.destructor();
+    });
   }
 
   /** @override */
@@ -66,16 +58,9 @@ export class PlayerWingDozerView implements WingDozerView {
     if (currentMesh) {
       currentMesh.mesh.animate(model.animation.frame);
       currentMesh.mesh.opacity(1);
-    }
-
-    const currentActiveMesh = this.#activeMeshes.find(
-      (v) => v.type === model.animation.type,
-    );
-    if (currentActiveMesh) {
-      const activeOpacity =
-        (0.4 + model.active.strength * 0.1) * model.active.opacity;
-      currentActiveMesh.mesh.opacity(activeOpacity);
-      currentActiveMesh.mesh.animate(model.animation.frame);
+      const colorStrength =
+        1 - (0.1 + model.active.strength * 0.1) * model.active.opacity;
+      currentMesh.mesh.color(colorStrength, colorStrength, colorStrength);
     }
 
     const currentOutlineMesh = this.#outlineMeshes.find(
@@ -88,9 +73,8 @@ export class PlayerWingDozerView implements WingDozerView {
       currentOutlineMesh.mesh.animate(model.animation.frame);
     }
 
-    [...this.#meshes, ...this.#activeMeshes, ...this.#outlineMeshes]
+    [...this.#meshes, ...this.#outlineMeshes]
       .filter((v) => v !== currentMesh)
-      .filter((v) => v !== currentActiveMesh)
       .filter((v) => v !== currentOutlineMesh)
       .forEach(({ mesh }) => mesh.opacity(0));
   }
