@@ -60,17 +60,23 @@ export class PlayerGenesisBraverView implements GenesisBraverView {
     if (currentMesh) {
       currentMesh.mesh.opacity(1);
       currentMesh.mesh.animate(model.animation.frame);
+      const colorStrength = 1 - (0.2 + model.active.strength * 0.1) * model.active.opacity;
+      currentMesh.mesh.color(
+        colorStrength,
+        colorStrength,
+        colorStrength,
+      );
     }
 
-    const currentActiveMesh = this.#activeMeshes.find(
-      (v) => v.type === model.animation.type,
-    );
-    if (currentActiveMesh) {
-      const activeOpacity =
-        (0.2 + model.active.strength * 0.1) * model.active.opacity;
-      currentActiveMesh.mesh.opacity(activeOpacity);
-      currentActiveMesh.mesh.animate(model.animation.frame);
-    }
+    // const currentActiveMesh = this.#activeMeshes.find(
+    //   (v) => v.type === model.animation.type,
+    // );
+    // if (currentActiveMesh) {
+    //   const activeOpacity =
+    //     (0.2 + model.active.strength * 0.1) * model.active.opacity;
+    //   currentActiveMesh.mesh.opacity(activeOpacity);
+    //   currentActiveMesh.mesh.animate(model.animation.frame);
+    // }
 
     const currentOutlineMesh = this.#outlineMeshes.find(
       (v) => v.type === model.animation.type,
@@ -84,7 +90,7 @@ export class PlayerGenesisBraverView implements GenesisBraverView {
 
     [...this.#meshes, ...this.#activeMeshes, ...this.#outlineMeshes]
       .filter((v) => v !== currentMesh)
-      .filter((v) => v !== currentActiveMesh)
+      //.filter((v) => v !== currentActiveMesh)
       .filter((v) => v !== currentOutlineMesh)
       .forEach(({ mesh }) => {
         mesh.opacity(0);
