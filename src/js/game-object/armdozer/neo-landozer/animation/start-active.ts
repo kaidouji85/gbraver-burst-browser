@@ -1,6 +1,8 @@
 import { Animate } from "../../../../animation/animate";
 import { tween } from "../../../../animation/tween";
 import type { NeoLandozerModel } from "../model/neo-landozer-model";
+import {process} from "../../../../animation/process";
+import {ARMDOZER_SPRITE_ATTACKER_Z} from "../../position";
 
 /**
  * アクティブ状態を開始する
@@ -8,12 +10,14 @@ import type { NeoLandozerModel } from "../model/neo-landozer-model";
  * @return アニメーション
  */
 export function startActive(model: NeoLandozerModel): Animate {
-  return tween(model.active, (t) =>
+  return process(() => {
+    model.position.z = ARMDOZER_SPRITE_ATTACKER_Z;
+  }).chain(tween(model.active, (t) =>
     t.to(
       {
         opacity: 1,
       },
       500,
     ),
-  );
+  ));
 }
