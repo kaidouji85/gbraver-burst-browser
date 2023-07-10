@@ -52,7 +52,9 @@ export class HorizontalAnimationMesh {
     this.mesh.material.depthTest = false;
   }
 
-  /** デストラクタ */
+  /**
+   * デストラクタ相当の処理
+   */
   destructor(): void {
     this.mesh.geometry.dispose();
     this.mesh.material.dispose();
@@ -61,7 +63,6 @@ export class HorizontalAnimationMesh {
 
   /**
    * アニメーションを設定する
-   *
    * @param frame 0〜1で指定するアニメーション進捗度
    */
   animate(frame: number): void {
@@ -69,12 +70,18 @@ export class HorizontalAnimationMesh {
     this.texture.offset.y = 0;
   }
 
-  /** 不透明度を設定する */
+  /**
+   * 不透明度を設定する
+   * @param opacity 不透明度
+   */
   setOpacity(opacity: number): void {
     this.mesh.material.opacity = opacity;
   }
 
-  /** シーンに追加するオブジェクトを取得する */
+  /**
+   * シーンに追加するオブジェクトを取得する
+   * @return 取得結果
+   */
   getObject3D(): THREE.Object3D {
     return this.mesh;
   }
