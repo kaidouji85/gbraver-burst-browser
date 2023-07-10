@@ -23,10 +23,15 @@ type Param = {
  * 本クラスで使用するテクスチャは、横方向にのみアニメーション連結されたものである
  */
 export class HorizontalAnimationMesh {
+  /** テクスチャ */
   texture: THREE.Texture;
+  /** メッシュ */
   mesh: THREE.Mesh<THREE.PlaneGeometry, THREE.MeshBasicMaterial>;
+  /** 横幅 */
   width: number;
+  /** 高 */
   height: number;
+  /** アニメーション枚数 */
   maxAnimation: number;
 
   /**
