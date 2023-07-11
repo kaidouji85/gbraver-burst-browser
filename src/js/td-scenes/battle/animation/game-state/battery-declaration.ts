@@ -165,6 +165,7 @@ export function batteryDeclarationAnimation(
   ).chain(
     delay(0),
     attackerTD.batteryNumber.hidden(),
+    attackerTDArmdozer.sprite().endActive(),
     defenderTD.batteryNumber.hidden(),
     props.view.td.gameObjects.turnIndicator.invisible(),
   );
