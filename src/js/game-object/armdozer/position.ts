@@ -7,8 +7,8 @@ export const ARMDOZER_SPRITE_STANDARD_Y = 0;
 /** アームドーザスプライト 基準Z座標 */
 export const ARMDOZER_SPRITE_STANDARD_Z = 0;
 
-/** アームドーザスプライト アクティブプレイヤー基準Z座標 */
-export const ARMDOZER_SPRITE_ACTIVE_Z = ARMDOZER_SPRITE_STANDARD_Z + 0.01;
+/** アームドーザスプライト 攻撃時 基準Z座標 */
+export const ARMDOZER_SPRITE_ATTACKER_Z = ARMDOZER_SPRITE_STANDARD_Z + 0.01;
 
 /** アームドーザエフェクト 基準X座標 */
 export const ARMDOZER_EFFECT_STANDARD_X: number = ARMDOZER_SPRITE_STANDARD_X;

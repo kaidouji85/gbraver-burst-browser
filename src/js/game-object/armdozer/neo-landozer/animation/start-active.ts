@@ -1,7 +1,7 @@
 import { Animate } from "../../../../animation/animate";
 import { process } from "../../../../animation/process";
 import { tween } from "../../../../animation/tween";
-import { ARMDOZER_SPRITE_ACTIVE_Z } from "../../position";
+import { ARMDOZER_SPRITE_ATTACKER_Z } from "../../position";
 import type { NeoLandozerModel } from "../model/neo-landozer-model";
 
 /**
@@ -11,7 +11,7 @@ import type { NeoLandozerModel } from "../model/neo-landozer-model";
  */
 export function startActive(model: NeoLandozerModel): Animate {
   return process(() => {
-    model.position.z = ARMDOZER_SPRITE_ACTIVE_Z;
+    model.position.z = ARMDOZER_SPRITE_ATTACKER_Z;
   }).chain(
     tween(model.active, (t) =>
       t.to(
