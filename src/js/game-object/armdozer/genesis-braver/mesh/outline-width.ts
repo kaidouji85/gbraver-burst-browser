@@ -1,2 +1,2 @@
 /** アウトラインの太さ */
-export const OUTLINE_WIDTH = 40;
+export const OUTLINE_WIDTH = 30;
