@@ -59,6 +59,7 @@ export function turnChangeAnimation(
     process(() => {
       props.sounds.batteryRecover.play();
     }),
+    activeTDArmdozer.sprite().startActive(),
   );
   return isTurnChange ? forTurnChange : forContinuousAttack;
 }
