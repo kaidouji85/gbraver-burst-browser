@@ -18,7 +18,7 @@ export function startActive(model: ShinBraverModel): Animate {
         {
           opacity: 1,
         },
-        500,
+        300,
       ),
     ),
   );
