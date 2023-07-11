@@ -18,7 +18,7 @@ export function startActive(model: WingDozerModel): Animate {
         {
           opacity: 1,
         },
-        300,
+        200,
       ),
     ),
   );

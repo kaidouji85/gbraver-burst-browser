@@ -18,7 +18,7 @@ export function endActive(model: NeoLandozerModel): Animate {
         {
           opacity: 0,
         },
-        300,
+        200,
       ),
     ),
   );

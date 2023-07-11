@@ -18,7 +18,7 @@ export function endActive(model: LightningDozerModel): Animate {
         {
           opacity: 0,
         },
-        300,
+        200,
       ),
     ),
   );
