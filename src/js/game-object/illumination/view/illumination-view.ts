@@ -14,7 +14,7 @@ export class IlluminationView {
    * コンストラクタ
    */
   constructor() {
-    const lightColor = 0x808080;
+    const lightColor = 0xaaaaaa;
     this.#directionalLight1 = new THREE.DirectionalLight(lightColor);
     this.#directionalLight1.position.set(1, 1, 1);
     this.#directionalLight2 = new THREE.DirectionalLight(lightColor);
