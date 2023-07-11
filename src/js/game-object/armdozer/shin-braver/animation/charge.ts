@@ -3,6 +3,7 @@ import { process } from "../../../../animation/process";
 import { tween } from "../../../../animation/tween";
 import type { ShinBraverModel } from "../model/shin-braver-model";
 import { ShinBraverSounds } from "../sounds/shin-braver-sounds";
+import {ARMDOZER_SPRITE_ATTACKER_Z} from "../../position";
 
 /**
  * チャージ
@@ -18,6 +19,7 @@ export function charge(
   return process(() => {
     model.animation.type = "SP_CHARGE";
     model.animation.frame = 0;
+    model.position.z = ARMDOZER_SPRITE_ATTACKER_Z;
     sounds.motor.play();
   }).chain(
     tween(model.animation, (t) =>

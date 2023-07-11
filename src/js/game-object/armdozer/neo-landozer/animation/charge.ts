@@ -3,6 +3,7 @@ import { process } from "../../../../animation/process";
 import { tween } from "../../../../animation/tween";
 import type { NeoLandozerModel } from "../model/neo-landozer-model";
 import { NeoLandozerSounds } from "../sounds/neo-landozer-sounds";
+import {ARMDOZER_SPRITE_STANDARD_Z} from "../../position";
 
 /**
  * チャージ
@@ -18,6 +19,7 @@ export function charge(
   return process(() => {
     model.animation.type = "HM_CHARGE";
     model.animation.frame = 0;
+    model.position.z = ARMDOZER_SPRITE_STANDARD_Z;
     sounds.motor.play();
   }).chain(
     tween(model.animation, (t) =>

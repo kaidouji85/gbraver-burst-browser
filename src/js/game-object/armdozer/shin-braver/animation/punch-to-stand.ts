@@ -3,6 +3,7 @@ import { process } from "../../../../animation/process";
 import { tween } from "../../../../animation/tween";
 import type { ShinBraverModel } from "../model/shin-braver-model";
 import { ShinBraverSounds } from "../sounds/shin-braver-sounds";
+import {ARMDOZER_SPRITE_STANDARD_Z} from "../../position";
 
 /** ストレートパンチ -> 立ち */
 export function punchToStand(
@@ -36,6 +37,7 @@ export function punchToStand(
       process(() => {
         model.animation.type = "STAND";
         model.animation.frame = 0;
+        model.position.z = ARMDOZER_SPRITE_STANDARD_Z;
       }),
     );
 }

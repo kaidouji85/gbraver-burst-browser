@@ -3,6 +3,7 @@ import { process } from "../../../../animation/process";
 import { tween } from "../../../../animation/tween";
 import type { WingDozerModel } from "../model/wing-dozer-model";
 import { WingDozerSounds } from "../sounds/wing-dozer-sounds";
+import {ARMDOZER_SPRITE_STANDARD_Z} from "../../position";
 
 /**
  * アッパー -> 立ち
@@ -34,6 +35,7 @@ export function upperToStand(
       process(() => {
         model.animation.type = "STAND";
         model.animation.frame = 0;
+        model.position.z = ARMDOZER_SPRITE_STANDARD_Z;
       }),
     );
 }
