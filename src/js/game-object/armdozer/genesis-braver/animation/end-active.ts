@@ -18,7 +18,7 @@ export function endActive(model: GenesisBraverModel): Animate {
         {
           opacity: 0,
         },
-        500,
+        300,
       ),
     ),
   );
