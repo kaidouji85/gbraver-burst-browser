@@ -1,7 +1,5 @@
 import { Animate } from "../../../../animation/animate";
-import { process } from "../../../../animation/process";
 import { tween } from "../../../../animation/tween";
-import { ARMDOZER_SPRITE_STANDARD_Z } from "../../position";
 import type { LightningDozerModel } from "../model/lightning-dozer-model";
 
 /**
@@ -10,16 +8,12 @@ import type { LightningDozerModel } from "../model/lightning-dozer-model";
  * @return アニメーション
  */
 export function endActive(model: LightningDozerModel): Animate {
-  return process(() => {
-    model.position.z = ARMDOZER_SPRITE_STANDARD_Z;
-  }).chain(
-    tween(model.active, (t) =>
-      t.to(
-        {
-          opacity: 0,
-        },
-        200,
-      ),
+  return tween(model.active, (t) =>
+    t.to(
+      {
+        opacity: 0,
+      },
+      200,
     ),
   );
 }

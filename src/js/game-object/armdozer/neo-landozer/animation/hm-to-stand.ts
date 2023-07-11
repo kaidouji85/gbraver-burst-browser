@@ -1,6 +1,7 @@
 import { Animate } from "../../../../animation/animate";
 import { process } from "../../../../animation/process";
 import { tween } from "../../../../animation/tween";
+import { ARMDOZER_SPRITE_STANDARD_Z } from "../../position";
 import type { NeoLandozerModel } from "../model/neo-landozer-model";
 import { NeoLandozerSounds } from "../sounds/neo-landozer-sounds";
 
@@ -36,6 +37,7 @@ export function hmToStand(
       process(() => {
         model.animation.type = "STAND";
         model.animation.frame = 0;
+        model.position.z = ARMDOZER_SPRITE_STANDARD_Z;
       }),
     );
 }

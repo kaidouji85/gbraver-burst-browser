@@ -1,6 +1,7 @@
 import { Animate } from "../../../../animation/animate";
 import { process } from "../../../../animation/process";
 import { tween } from "../../../../animation/tween";
+import { ARMDOZER_SPRITE_STANDARD_Z } from "../../position";
 import type { LightningDozerModel } from "../model/lightning-dozer-model";
 import { LightningDozerSounds } from "../sounds/lightning-dozer-sounds";
 
@@ -18,6 +19,7 @@ export function charge(
   return process(() => {
     model.animation.type = "HM_CHARGE";
     model.animation.frame = 0;
+    model.position.z = ARMDOZER_SPRITE_STANDARD_Z;
     sounds.motor.play();
   }).chain(
     tween(model.animation, (t) =>

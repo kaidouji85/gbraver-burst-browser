@@ -2,6 +2,7 @@ import { all } from "../../../../animation/all";
 import { Animate } from "../../../../animation/animate";
 import { process } from "../../../../animation/process";
 import { tween } from "../../../../animation/tween";
+import { ARMDOZER_SPRITE_STANDARD_Z } from "../../position";
 import type { LightningDozerModel } from "../model/lightning-dozer-model";
 import { LightningDozerSounds } from "../sounds/lightning-dozer-sounds";
 
@@ -45,6 +46,10 @@ export function hmToStand(
         },
         400,
       ),
+    ).chain(
+      process(() => {
+        model.position.z = ARMDOZER_SPRITE_STANDARD_Z;
+      }),
     ),
   );
 }

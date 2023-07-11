@@ -1,6 +1,7 @@
 import { Animate } from "../../../../animation/animate";
 import { process } from "../../../../animation/process";
 import { tween } from "../../../../animation/tween";
+import { ARMDOZER_SPRITE_STANDARD_Z } from "../../position";
 import type { GenesisBraverModel } from "../model/genesis-braver-model";
 import type { GenesisBraverSounds } from "../sounds/genesis-braver-sounds";
 
@@ -41,6 +42,7 @@ export function spToStand(
       process(() => {
         model.animation.type = "STAND";
         model.animation.frame = 0;
+        model.position.z = ARMDOZER_SPRITE_STANDARD_Z;
       }),
     );
 }
