@@ -46,6 +46,9 @@ function gaiBuffPower(param: GaiAnimationParamX<BuffPowerSkill>): Animate {
     dolly(param.tdCamera, "-40", 500),
     param.tdObjects.skyBrightness.brightness(0.2, 500),
     param.tdObjects.illumination.intensity(0.2, 500),
+    param.isActivePlayer
+      ? param.invokerSprite.endActive()
+      : param.anotherSprite.endActive(),
   )
     .chain(delay(800))
     .chain(param.pilot.cutIn.hidden())

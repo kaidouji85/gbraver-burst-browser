@@ -65,5 +65,8 @@ export function inputCommandAnimation(
       controllerType: props.controllerType,
     }),
     props.view.hud.gameObjects.timeScaleButton.open(props.animationTimeScale),
+    isPlayerTurn
+      ? playerTDArmdozer.sprite().startActive()
+      : enemyTDArmdozer.sprite().startActive(),
   );
 }
