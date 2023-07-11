@@ -8,12 +8,12 @@ import { GenesisBraverModel } from "../model/genesis-braver-model";
  * @return アニメーション
  */
 export function startActive(model: GenesisBraverModel): Animate {
-  return  tween(model.active, (t) =>
-      t.to(
-        {
-          opacity: 1,
-        },
-        200,
-      ),
-    );
+  return tween(model.active, (t) =>
+    t.to(
+      {
+        opacity: 1,
+      },
+      200,
+    ),
+  );
 }

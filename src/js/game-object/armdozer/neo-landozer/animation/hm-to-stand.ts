@@ -1,9 +1,9 @@
 import { Animate } from "../../../../animation/animate";
 import { process } from "../../../../animation/process";
 import { tween } from "../../../../animation/tween";
+import { ARMDOZER_SPRITE_STANDARD_Z } from "../../position";
 import type { NeoLandozerModel } from "../model/neo-landozer-model";
 import { NeoLandozerSounds } from "../sounds/neo-landozer-sounds";
-import {ARMDOZER_SPRITE_STANDARD_Z} from "../../position";
 
 /** アームハンマー -> 立ち */
 export function hmToStand(

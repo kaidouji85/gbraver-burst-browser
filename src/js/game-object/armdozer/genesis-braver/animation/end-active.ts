@@ -9,11 +9,11 @@ import { GenesisBraverModel } from "../model/genesis-braver-model";
  */
 export function endActive(model: GenesisBraverModel): Animate {
   return tween(model.active, (t) =>
-      t.to(
-        {
-          opacity: 0,
-        },
-        200,
-      ),
-    );
+    t.to(
+      {
+        opacity: 0,
+      },
+      200,
+    ),
+  );
 }

@@ -9,11 +9,11 @@ import type { LightningDozerModel } from "../model/lightning-dozer-model";
  */
 export function startActive(model: LightningDozerModel): Animate {
   return tween(model.active, (t) =>
-      t.to(
-        {
-          opacity: 1,
-        },
-        200,
-      ),
-    );
+    t.to(
+      {
+        opacity: 1,
+      },
+      200,
+    ),
+  );
 }

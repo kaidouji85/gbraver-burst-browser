@@ -1,9 +1,9 @@
 import { Animate } from "../../../../animation/animate";
 import { process } from "../../../../animation/process";
 import { tween } from "../../../../animation/tween";
+import { ARMDOZER_SPRITE_STANDARD_Z } from "../../position";
 import type { WingDozerModel } from "../model/wing-dozer-model";
 import { WingDozerSounds } from "../sounds/wing-dozer-sounds";
-import {ARMDOZER_SPRITE_STANDARD_Z} from "../../position";
 
 /**
  * アッパー -> 立ち

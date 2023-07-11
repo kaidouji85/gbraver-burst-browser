@@ -9,11 +9,11 @@ import type { WingDozerModel } from "../model/wing-dozer-model";
  */
 export function endActive(model: WingDozerModel): Animate {
   return tween(model.active, (t) =>
-      t.to(
-        {
-          opacity: 0,
-        },
-        200,
-      ),
-    );
+    t.to(
+      {
+        opacity: 0,
+      },
+      200,
+    ),
+  );
 }

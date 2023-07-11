@@ -9,11 +9,11 @@ import type { NeoLandozerModel } from "../model/neo-landozer-model";
  */
 export function endActive(model: NeoLandozerModel): Animate {
   return tween(model.active, (t) =>
-      t.to(
-        {
-          opacity: 0,
-        },
-        200,
-      ),
-    );
+    t.to(
+      {
+        opacity: 0,
+      },
+      200,
+    ),
+  );
 }
