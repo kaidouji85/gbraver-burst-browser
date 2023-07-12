@@ -162,9 +162,9 @@ export function batteryDeclarationAnimation(
     attackerDeclaration,
     defenderHUD.gauge.battery(defender.armdozer.battery),
     defenderDeclaration,
+    attackerTDArmdozer.sprite().endActive(),
   ).chain(
     empty(),
-    attackerTDArmdozer.sprite().endActive(),
     attackerTD.batteryNumber.hidden(),
     defenderTD.batteryNumber.hidden(),
     props.view.td.gameObjects.turnIndicator.invisible(),
