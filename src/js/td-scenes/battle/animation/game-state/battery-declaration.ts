@@ -53,7 +53,8 @@ function declarationWithCorrect(
     .chain(delay(300))
     .chain(
       all(td.batteryNumber.change(value), td.batteryCorrect.popUp(correct)),
-    ).chain(delay(200));
+    )
+    .chain(delay(200));
 }
 
 /**
