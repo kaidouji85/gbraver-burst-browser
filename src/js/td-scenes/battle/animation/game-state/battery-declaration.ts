@@ -16,7 +16,7 @@ import type { StateAnimationProps } from "./state-animation-props";
  * @return アニメーション
  */
 function declaration(td: TDPlayer, value: number): Animate {
-  return td.batteryNumber.show(value).chain(delay(600));
+  return td.batteryNumber.show(value).chain(delay(800));
 }
 
 /**
@@ -53,7 +53,7 @@ function declarationWithCorrect(
     .chain(delay(300))
     .chain(
       all(td.batteryNumber.change(value), td.batteryCorrect.popUp(correct)),
-    );
+    ).chain(delay(200));
 }
 
 /**
@@ -158,11 +158,10 @@ export function batteryDeclarationAnimation(
     sound,
     props.view.td.gameObjects.turnIndicator.show(isAttacker),
     attackerHUD.gauge.battery(attacker.armdozer.battery),
+    attackerDeclaration,
     defenderHUD.gauge.battery(defender.armdozer.battery),
-    all(
-      attackerDeclaration,
-      defenderDeclaration,
-    ).chain(attackerTDArmdozer.sprite().endActive())
+    defenderDeclaration,
+    attackerTDArmdozer.sprite().endActive(),
   ).chain(
     empty(),
     attackerTD.batteryNumber.hidden(),
