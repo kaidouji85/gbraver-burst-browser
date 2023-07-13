@@ -4,11 +4,15 @@ import { Group } from "three";
 import type { Resources } from "../../../../resource";
 import type { WingDozerModel } from "../model/wing-dozer-model";
 import type { WingDozerView } from "./wing-dozer-view";
+import { AnimationMeshMapping } from "../mesh/animation-mesh-mapping";
+import { createMeshes } from "../mesh";
 
 /** プレイヤー側 ウィングドーザ ビュー */
 export class PlayerWingDozerView implements WingDozerView {
   /** グループ */
   #group: THREE.Group;
+  /** メッシュ */
+  #meshes: AnimationMeshMapping[];
 
   /**
    * コンストラクタ
@@ -17,18 +21,17 @@ export class PlayerWingDozerView implements WingDozerView {
    */
   constructor(resources: Resources) {
     this.#group = new Group();
-    // this.#meshes = createMeshes(resources);
-    // this.#outlineMeshes = createOutlineMeshes(resources);
-    // [...this.#meshes, ...this.#outlineMeshes].forEach(({ mesh }) => {
-    //   this.#group.add(mesh.getObject3D());
-    // });
+    this.#meshes = createMeshes(resources);
+    this.#meshes.forEach(({ mesh }) => {
+      this.#group.add(mesh.getObject3D());
+    });
   }
 
   /** @override */
   destructor(): void {
-    // [...this.#meshes, ...this.#outlineMeshes].forEach(({ mesh }) => {
-    //   mesh.destructor();
-    // });
+    this.#meshes.forEach(({ mesh }) => {
+      mesh.destructor();
+    });
   }
 
   /** @override */
@@ -45,31 +48,31 @@ export class PlayerWingDozerView implements WingDozerView {
     this.#group.scale.y = 1;
     this.#group.scale.z = 1;
 
-    // const currentMesh = this.#meshes.find(
-    //   (v) => v.type === model.animation.type,
-    // );
-    // if (currentMesh) {
-    //   currentMesh.mesh.animate(model.animation.frame);
-    //   currentMesh.mesh.opacity(1);
-    //   const colorStrength =
-    //     1 - (0.2 + model.active.strength * 0.1) * model.active.opacity;
-    //   currentMesh.mesh.color(colorStrength, colorStrength, colorStrength);
-    // }
+    const currentStandardMesh = this.#meshes.find(
+      (v) => v.meshType === "STANDARD" && v.animationType === model.animation.type,
+    );
+    if (currentStandardMesh) {
+      currentStandardMesh.mesh.animate(model.animation.frame);
+      currentStandardMesh.mesh.opacity(1);
+      const colorStrength =
+        1 - (0.2 + model.active.strength * 0.1) * model.active.opacity;
+      currentStandardMesh.mesh.color(colorStrength, colorStrength, colorStrength);
+    }
 
-    // const currentOutlineMesh = this.#outlineMeshes.find(
-    //   (v) => v.type === model.animation.type,
-    // );
-    // if (currentOutlineMesh) {
-    //   const outlineOpacity =
-    //     (0.9 + model.active.strength * 0.1) * model.active.opacity;
-    //   currentOutlineMesh.mesh.opacity(outlineOpacity);
-    //   currentOutlineMesh.mesh.animate(model.animation.frame);
-    // }
+    const currentOutlineMesh = this.#meshes.find(
+      (v) => v.meshType === "OUTLINE" && v.animationType === model.animation.type,
+    );
+    if (currentOutlineMesh) {
+      const outlineOpacity =
+        (0.9 + model.active.strength * 0.1) * model.active.opacity;
+      currentOutlineMesh.mesh.opacity(outlineOpacity);
+      currentOutlineMesh.mesh.animate(model.animation.frame);
+    }
 
-    // [...this.#meshes, ...this.#outlineMeshes]
-    //   .filter((v) => v !== currentMesh)
-    //   .filter((v) => v !== currentOutlineMesh)
-    //   .forEach(({ mesh }) => mesh.opacity(0));
+    this.#meshes
+      .filter((v) => v !== currentStandardMesh)
+      .filter((v) => v !== currentOutlineMesh)
+      .forEach(({ mesh }) => mesh.opacity(0));
   }
 
   /** @override */
