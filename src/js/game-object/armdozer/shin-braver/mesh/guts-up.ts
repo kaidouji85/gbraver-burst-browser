@@ -1,9 +1,7 @@
 import type { Resources } from "../../../../resource";
 import { TEXTURE_IDS } from "../../../../resource/texture/ids";
-import type { ArmdozerAnimation } from "../../mesh/armdozer-animation";
-import { createShinBraverActiveMesh } from "./create-active-mesh";
-import { createStandardMesh } from "./create-standard-mesh";
-import { createOutlineMesh } from "./create-outline-mesh";
+import { AnimationMeshMapping } from "./animation-mesh-mapping";
+import { createMeshesForAnimation } from "./create-meshes-for-animation";
 
 /** テクスチャID */
 export const TEXTURE_ID = TEXTURE_IDS.SHIN_BRAVER_GUTS_UP;
@@ -11,43 +9,14 @@ export const TEXTURE_ID = TEXTURE_IDS.SHIN_BRAVER_GUTS_UP;
 export const MAX_ANIMATION = 4;
 
 /**
- * ガッツアップ
+ * ガッツアップ メッシュ群を生成
  * @param resources リソース管理オブジェクト
- * @return 生成したメッシュ
+ * @return 生成結果
  */
-export function shinBraverGutsUp(resources: Resources): ArmdozerAnimation {
-  return createStandardMesh({
+export function gutsUp(resources: Resources): AnimationMeshMapping[] {
+  return createMeshesForAnimation({
     resources,
-    textureId: TEXTURE_ID,
-    maxAnimation: MAX_ANIMATION,
-  });
-}
-
-/**
- * アクティブ ガッツアップ
- * @param resources リソース管理オブジェクト
- * @return 生成したメッシュ
- */
-export function shinBraverActiveGutsUp(
-  resources: Resources,
-): ArmdozerAnimation {
-  return createShinBraverActiveMesh({
-    resources,
-    textureId: TEXTURE_ID,
-    maxAnimation: MAX_ANIMATION,
-  });
-}
-
-/**
- * アウトライン ガッツアップ
- * @param resources リソース管理オブジェクト
- * @return 生成したメッシュ
- */
-export function shinBraverOutlineGutsUp(
-  resources: Resources,
-): ArmdozerAnimation {
-  return createOutlineMesh({
-    resources,
+    animationType: "GUTS_UP",
     textureId: TEXTURE_ID,
     maxAnimation: MAX_ANIMATION,
   });
