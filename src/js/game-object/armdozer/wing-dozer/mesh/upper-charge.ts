@@ -2,8 +2,8 @@ import type { Resources } from "../../../../resource";
 import { TEXTURE_IDS } from "../../../../resource/texture/ids";
 import type { ArmdozerAnimation } from "../../mesh/armdozer-animation";
 import { createWingDozerActiveMesh } from "./create-active-mesh";
-import { createWingDozerMesh } from "./create-mesh";
-import { createWingDozerOutlineMesh } from "./create-outline-mesh";
+import { createStandardMesh } from "./create-standard-mesh";
+import { createOutlineMesh } from "./create-outline-mesh";
 
 /** テクスチャID */
 export const TEXTURE_ID = TEXTURE_IDS.WING_DOZER_UPPER_CHARGE;
@@ -16,7 +16,7 @@ export const MAX_ANIMATION = 4;
  * @return メッシュ
  */
 export function wingDozerUpperCharge(resources: Resources): ArmdozerAnimation {
-  return createWingDozerMesh({
+  return createStandardMesh({
     resources,
     textureId: TEXTURE_ID,
     maxAnimation: MAX_ANIMATION,
@@ -46,7 +46,7 @@ export function wingDozerActiveUpperCharge(
 export function wingDozerOutlineUpperCharge(
   resources: Resources,
 ): ArmdozerAnimation {
-  return createWingDozerOutlineMesh({
+  return createOutlineMesh({
     resources,
     textureId: TEXTURE_ID,
     maxAnimation: MAX_ANIMATION,
