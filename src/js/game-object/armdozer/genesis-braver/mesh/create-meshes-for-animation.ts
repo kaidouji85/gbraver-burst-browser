@@ -2,8 +2,8 @@ import { Resources } from "../../../../resource";
 import { TextureId } from "../../../../resource/texture/resource";
 import { AnimationType } from "../model/animation-type";
 import { AnimationMeshMapping } from "./animation-mesh-mapping";
-import { createStandardMesh } from "./create-standard-mesh";
 import { createOutlineMesh } from "./create-outline-mesh";
+import { createStandardMesh } from "./create-standard-mesh";
 
 /** パラメータ */
 type Params = {
@@ -22,7 +22,9 @@ type Params = {
  * @param params パラメータ
  * @return 生成結果
  */
-export function createMeshesForAnimation(params: Params): AnimationMeshMapping[] {
+export function createMeshesForAnimation(
+  params: Params,
+): AnimationMeshMapping[] {
   const { animationType } = params;
   return [
     {
@@ -34,6 +36,6 @@ export function createMeshesForAnimation(params: Params): AnimationMeshMapping[]
       animationType,
       meshType: "OUTLINE",
       mesh: createOutlineMesh(params),
-    }
+    },
   ];
 }

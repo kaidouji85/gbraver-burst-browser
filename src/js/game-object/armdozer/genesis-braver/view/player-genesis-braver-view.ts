@@ -1,10 +1,10 @@
 import * as THREE from "three";
 
 import type { Resources } from "../../../../resource";
+import { createMeshes } from "../mesh";
+import { AnimationMeshMapping } from "../mesh/animation-mesh-mapping";
 import type { GenesisBraverModel } from "../model/genesis-braver-model";
 import type { GenesisBraverView } from "./genesis-braver-view";
-import { AnimationMeshMapping } from "../mesh/animation-mesh-mapping";
-import { createMeshes } from "../mesh";
 
 /** プレイヤー ジェネシスブレイバービュー */
 export class PlayerGenesisBraverView implements GenesisBraverView {
@@ -20,14 +20,14 @@ export class PlayerGenesisBraverView implements GenesisBraverView {
   constructor(resources: Resources) {
     this.#group = new THREE.Group();
     this.#meshes = createMeshes(resources);
-    this.#meshes.forEach(({mesh}) => {
+    this.#meshes.forEach(({ mesh }) => {
       this.#group.add(mesh.getObject3D());
     });
   }
 
   /** @override */
   destructor() {
-    this.#meshes.forEach(({mesh}) => {
+    this.#meshes.forEach(({ mesh }) => {
       mesh.destructor();
     });
   }
@@ -43,16 +43,26 @@ export class PlayerGenesisBraverView implements GenesisBraverView {
     this.#group.position.y = model.position.y;
     this.#group.position.z = model.position.z;
 
-    const currentStandardMesh = this.#meshes.find(v => v.meshType === "STANDARD" && v.animationType === model.animation.type);
+    const currentStandardMesh = this.#meshes.find(
+      (v) =>
+        v.meshType === "STANDARD" && v.animationType === model.animation.type,
+    );
     if (currentStandardMesh) {
       currentStandardMesh.mesh.opacity(1);
       currentStandardMesh.mesh.animate(model.animation.frame);
       const colorStrength =
         1 - (0.2 + model.active.strength * 0.1) * model.active.opacity;
-        currentStandardMesh.mesh.color(colorStrength, colorStrength, colorStrength);
+      currentStandardMesh.mesh.color(
+        colorStrength,
+        colorStrength,
+        colorStrength,
+      );
     }
 
-    const currentOutlineMesh = this.#meshes.find(v => v.meshType === "OUTLINE" && v.animationType === model.animation.type);
+    const currentOutlineMesh = this.#meshes.find(
+      (v) =>
+        v.meshType === "OUTLINE" && v.animationType === model.animation.type,
+    );
     if (currentOutlineMesh) {
       const outlineOpacity =
         (0.9 + model.active.strength * 0.1) * model.active.opacity;
@@ -61,11 +71,11 @@ export class PlayerGenesisBraverView implements GenesisBraverView {
     }
 
     this.#meshes
-    .filter((v) => v !== currentStandardMesh)
-    .filter((v) => v !== currentOutlineMesh)
-    .forEach(({ mesh }) => {
-      mesh.opacity(0);
-    });
+      .filter((v) => v !== currentStandardMesh)
+      .filter((v) => v !== currentOutlineMesh)
+      .forEach(({ mesh }) => {
+        mesh.opacity(0);
+      });
   }
 
   /** @override */

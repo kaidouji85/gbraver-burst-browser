@@ -48,9 +48,7 @@ type Params = {
  * @param params パラメータ
  * @return 生成結果
  */
-export function createOutlineMesh(
-  params: Params,
-): ArmdozerAnimation {
+export function createOutlineMesh(params: Params): ArmdozerAnimation {
   const { resources, textureId, maxAnimation } = params;
   const texture =
     resources.textures.find((v) => v.id === textureId)?.texture ??

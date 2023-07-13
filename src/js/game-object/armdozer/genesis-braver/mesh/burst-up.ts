@@ -19,5 +19,5 @@ export function burstUp(resources: Resources): AnimationMeshMapping[] {
     animationType: "BURST_UP",
     textureId: TEXTURE_ID,
     maxAnimation: MAX_ANIMATION,
-  })
+  });
 }

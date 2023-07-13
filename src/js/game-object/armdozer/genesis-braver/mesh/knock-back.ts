@@ -20,5 +20,5 @@ export function knockBack(resources: Resources): AnimationMeshMapping[] {
     animationType: "KNOCK_BACK",
     textureId: TEXTURE_ID,
     maxAnimation: MAX_ANIMATION,
-  })
+  });
 }
