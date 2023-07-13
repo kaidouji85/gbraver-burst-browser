@@ -52,7 +52,7 @@ export class HpNumber {
    */
   setValue(value: number): void {
     this.#meshList.forEach((v) => {
-      v.setOpacity(0);
+      v.opacity(0);
     });
     const correctValue = this.#correctValue(value);
     const values = String(correctValue)
@@ -66,7 +66,7 @@ export class HpNumber {
       }))
       .forEach((v: { mesh: HorizontalAnimationMesh; value: number }) => {
         v.mesh.animate(v.value / MAX_ANIMATION);
-        v.mesh.setOpacity(1);
+        v.mesh.opacity(1);
       });
   }
 

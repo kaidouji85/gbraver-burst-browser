@@ -64,7 +64,7 @@ export class PlayerShinyaView implements ShinyaView {
       (model.position.x - PADDING_RIGHT) * scale;
     this.#mesh.getObject3D().scale.set(scale, scale, scale);
     this.#mesh.getObject3D().position.set(x, 0, HUD_CUT_IN_ZNIDEX);
-    this.#mesh.setOpacity(model.opacity);
+    this.#mesh.opacity(model.opacity);
   }
 
   /**

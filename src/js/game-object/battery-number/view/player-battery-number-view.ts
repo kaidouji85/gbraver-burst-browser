@@ -47,7 +47,7 @@ export class PlayerBatteryNumberView implements BatteryNumberView {
     const battery =
       Math.min(model.battery, MAX_BATTERY_VALUE) / MAX_BATTERY_ANIMATION;
     this.#numberMesh.animate(battery);
-    this.#numberMesh.setOpacity(model.opacity);
+    this.#numberMesh.opacity(model.opacity);
     this.#numberMesh.getObject3D().position.x = ARMDOZER_EFFECT_STANDARD_X;
     this.#numberMesh.getObject3D().position.y = ARMDOZER_EFFECT_STANDARD_Y;
     this.#numberMesh.getObject3D().position.z = ARMDOZER_EFFECT_STANDARD_Z;

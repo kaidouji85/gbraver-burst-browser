@@ -54,7 +54,7 @@ export class PlayerReflectIndicatorView implements ReflectIndicatorView {
    */
   engage(model: ReflectIndocatorModel): void {
     const target = this.#mesh.getObject3D();
-    this.#mesh.setOpacity(model.opacity);
+    this.#mesh.opacity(model.opacity);
     target.position.x = ARMDOZER_EFFECT_STANDARD_X;
     target.position.y = ARMDOZER_EFFECT_STANDARD_Y + 10;
     target.position.z = ARMDOZER_EFFECT_STANDARD_Z + 40;

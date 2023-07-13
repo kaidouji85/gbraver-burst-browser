@@ -56,12 +56,12 @@ export class PlayerDamageIndicatorView implements DamageIndicatorView {
       .split("")
       .map((v) => Number(v));
     this.#numbers.forEach((mesh, meshIndex) => {
-      mesh.setOpacity(0);
+      mesh.opacity(0);
       values
         .filter((value, valueIndex) => meshIndex === valueIndex)
         .forEach((value) => {
           mesh.animate(value / MAX_ANIMATION);
-          mesh.setOpacity(model.opacity);
+          mesh.opacity(model.opacity);
           mesh.getObject3D().position.x =
             MESH_SIZE * (meshIndex - values.length / 2) + GROUP_PADDING;
         });

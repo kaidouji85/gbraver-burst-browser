@@ -120,7 +120,7 @@ export class BatteryButton {
     this.#defenseLabel.setOpacity(defenseOpacity);
     this.#button.setOpacity(model.opacity);
     this.#batteryValue.animate(model.battery / BATTERY_VALUE_MAX_ANIMATION);
-    this.#batteryValue.setOpacity(model.opacity);
+    this.#batteryValue.opacity(model.opacity);
   }
 
   /**

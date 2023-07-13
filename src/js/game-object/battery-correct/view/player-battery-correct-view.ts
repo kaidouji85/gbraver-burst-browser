@@ -83,8 +83,8 @@ export class PlayerBatteryCorrectView implements BatteryCorrectView {
     // BatteryNumberよりも手前に表示したいので、
     // ARMDOZER_EFFECT_STANDARD_Zに+1している
     this.#group.position.z = ARMDOZER_EFFECT_STANDARD_Z + 1;
-    this.#value.setOpacity(model.opacity);
-    this.#sign.setOpacity(model.opacity);
+    this.#value.opacity(model.opacity);
+    this.#sign.opacity(model.opacity);
     this.#group.scale.x = model.scale;
     this.#group.scale.y = model.scale;
     this.#group.quaternion.copy(preRender.camera.quaternion);

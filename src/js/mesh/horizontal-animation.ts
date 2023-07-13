@@ -79,7 +79,7 @@ export class HorizontalAnimationMesh {
    * 不透明度を設定する
    * @param opacity 不透明度
    */
-  setOpacity(opacity: number): void {
+  opacity(opacity: number): void {
     this.mesh.material.opacity = opacity;
   }
 

@@ -76,10 +76,10 @@ export class PlayerShinBraverCutInView implements ShinBraverCutInView {
   engage(model: ShinBraverCutInModel, preRender: PreRender): void {
     const activeMesh = this.#getActiveMesh(model.animation.type);
     activeMesh.animate(model.animation.frame);
-    activeMesh.setOpacity(model.opacity);
+    activeMesh.opacity(model.opacity);
     const disActiveMeshes = this.#getMeshes().filter((v) => v !== activeMesh);
     disActiveMeshes.forEach((v) => {
-      v.setOpacity(0);
+      v.opacity(0);
     });
     const scale =
       HUDCutInScale(preRender.rendererDOM, preRender.safeAreaInset) *

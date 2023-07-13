@@ -88,13 +88,13 @@ export class PlayerWingDozerCutInView implements WingDozerCutInView {
    */
   engage(model: WingDozerCutInModel, preRender: PreRender): void {
     const activeMesh = this.#getActiveMesh(model.animation.type);
-    activeMesh.setOpacity(model.opacity);
+    activeMesh.opacity(model.opacity);
     activeMesh.animate(model.animation.frame);
     const disactiveMeshes = this.#getAllMeshes().filter(
       (v) => v !== activeMesh,
     );
     disactiveMeshes.forEach((v) => {
-      v.setOpacity(0);
+      v.opacity(0);
     });
     const scale =
       HUDCutInScale(preRender.rendererDOM, preRender.safeAreaInset) *

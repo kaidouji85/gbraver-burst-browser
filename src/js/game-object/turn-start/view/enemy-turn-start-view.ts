@@ -65,7 +65,7 @@ export class EnemyTurnStartView implements TurnStartView {
     target.position.z = 0;
     target.scale.x = model.scale * devicePerScale;
     target.scale.y = model.scale * devicePerScale;
-    this.#mesh.setOpacity(model.opacity);
+    this.#mesh.opacity(model.opacity);
     this.#mesh.getObject3D().quaternion.copy(preRender.camera.quaternion);
   }
 }
