@@ -2,8 +2,8 @@ import type { Resources } from "../../../../resource";
 import { TEXTURE_IDS } from "../../../../resource/texture/ids";
 import type { ArmdozerAnimation } from "../../mesh/armdozer-animation";
 import { createShinBraverActiveMesh } from "./create-active-mesh";
-import { createShinBraverMesh } from "./create-mesh";
-import { createShinBraverOutlineMesh } from "./create-outline-mesh";
+import { createStandardMesh } from "./create-standard-mesh";
+import { createOutlineMesh } from "./create-outline-mesh";
 
 /** テクスチャID */
 export const TEXTURE_ID = TEXTURE_IDS.SHIN_BRAVER_SP_TO_STAND;
@@ -16,7 +16,7 @@ export const MAX_ANIMATION = 8;
  * @return 生成したメッシュ
  */
 export function shinBraverSPToStand(resources: Resources): ArmdozerAnimation {
-  return createShinBraverMesh({
+  return createStandardMesh({
     resources,
     textureId: TEXTURE_ID,
     maxAnimation: MAX_ANIMATION,
@@ -46,7 +46,7 @@ export function shinBraverActiveSPToStand(
 export function shinBraverOutlineSPToStand(
   resources: Resources,
 ): ArmdozerAnimation {
-  return createShinBraverOutlineMesh({
+  return createOutlineMesh({
     resources,
     textureId: TEXTURE_ID,
     maxAnimation: MAX_ANIMATION,
