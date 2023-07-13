@@ -2,8 +2,8 @@ import type { Resources } from "../../../../resource";
 import { TEXTURE_IDS } from "../../../../resource/texture/ids";
 import type { ArmdozerAnimation } from "../../mesh/armdozer-animation";
 import { createGenesisBraverActiveMesh } from "./create-active-mesh";
-import { createGenesisBraverMesh } from "../view/create-mesh";
-import { createGenesisBraverOutlineMesh } from "../view/create-outline-mesh";
+import { createGenesisBraverMesh } from "./create-mesh";
+import { createGenesisBraverOutlineMesh } from "./create-outline-mesh";
 
 /** テクスチャID */
 export const TEXTURE_ID = TEXTURE_IDS.GENESIS_BRAVER_KNOCK_BACK;
