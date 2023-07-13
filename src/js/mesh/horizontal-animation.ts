@@ -5,7 +5,7 @@ import { animatedTexture } from "../texture/animation/texture-animation";
 import { normalizeTextureOffset } from "../texture/animation/texture-offset";
 
 /** コンストラクタのパラメータ */
-type Param = {
+export type HorizontalAnimationMeshParam = {
   /** テクスチャ */
   texture: THREE.Texture;
   /** アニメーション数 */
@@ -38,7 +38,7 @@ export class HorizontalAnimationMesh {
    * コンストラクタ
    * @param param パラメータ
    */
-  constructor(param: Param) {
+  constructor(param: HorizontalAnimationMeshParam) {
     this.#width = param.width;
     this.#height = param.height;
     this.#texture = param.texture.clone();
