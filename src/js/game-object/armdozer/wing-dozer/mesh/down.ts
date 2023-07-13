@@ -1,9 +1,7 @@
 import type { Resources } from "../../../../resource";
 import { TEXTURE_IDS } from "../../../../resource/texture/ids";
-import type { ArmdozerAnimation } from "../../mesh/armdozer-animation";
-import { createWingDozerActiveMesh } from "./create-active-mesh";
-import { createStandardMesh } from "./create-standard-mesh";
-import { createOutlineMesh } from "./create-outline-mesh";
+import { AnimationMeshMapping } from "./animation-mesh-mapping";
+import { createMeshesForAnimation } from "./create-meshes-for-animation";
 
 /** テクスチャID */
 export const TEXTURE_ID = TEXTURE_IDS.WING_DOZER_DOWN;
@@ -11,39 +9,14 @@ export const TEXTURE_ID = TEXTURE_IDS.WING_DOZER_DOWN;
 export const MAX_ANIMATION = 4;
 
 /**
- * ウィングドーザ ダウン
+ * ダウン メッシュ群を生成
  * @param resources リソース管理オブジェクト
- * @return メッシュ
+ * @return 生成結果
  */
-export function wingDozerDown(resources: Resources): ArmdozerAnimation {
-  return createStandardMesh({
+export function down(resources: Resources): AnimationMeshMapping[] {
+  return createMeshesForAnimation({
     resources,
-    textureId: TEXTURE_ID,
-    maxAnimation: MAX_ANIMATION,
-  });
-}
-
-/**
- * ウィングドーザ アクティブ ダウン
- * @param resources リソース管理オブジェクト
- * @return メッシュ
- */
-export function wingDozerActiveDown(resources: Resources): ArmdozerAnimation {
-  return createWingDozerActiveMesh({
-    resources,
-    textureId: TEXTURE_ID,
-    maxAnimation: MAX_ANIMATION,
-  });
-}
-
-/**
- * ウィングドーザ アウトライン ダウン
- * @param resources リソース管理オブジェクト
- * @return メッシュ
- */
-export function wingDozerOutlineDown(resources: Resources): ArmdozerAnimation {
-  return createOutlineMesh({
-    resources,
+    animationType: "DOWN",
     textureId: TEXTURE_ID,
     maxAnimation: MAX_ANIMATION,
   });
