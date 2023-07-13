@@ -24,46 +24,46 @@ type Param = {
  */
 export class HorizontalAnimationMesh {
   /** テクスチャ */
-  texture: THREE.Texture;
+  #texture: THREE.Texture;
   /** メッシュ */
-  mesh: THREE.Mesh<THREE.PlaneGeometry, THREE.MeshBasicMaterial>;
+  #mesh: THREE.Mesh<THREE.PlaneGeometry, THREE.MeshBasicMaterial>;
   /** 横幅 */
-  width: number;
+  #width: number;
   /** 高 */
-  height: number;
+  #height: number;
   /** アニメーション枚数 */
-  maxAnimation: number;
+  #maxAnimation: number;
 
   /**
    * コンストラクタ
    * @param param パラメータ
    */
   constructor(param: Param) {
-    this.width = param.width;
-    this.height = param.height;
-    this.texture = param.texture.clone();
-    animatedTexture(this.texture, param.maxAnimation, 1);
-    this.texture.needsUpdate = true;
-    this.maxAnimation = param.maxAnimation;
+    this.#width = param.width;
+    this.#height = param.height;
+    this.#texture = param.texture.clone();
+    animatedTexture(this.#texture, param.maxAnimation, 1);
+    this.#texture.needsUpdate = true;
+    this.#maxAnimation = param.maxAnimation;
     const geometry = new THREE.PlaneGeometry(param.height, param.width, 1, 1);
     const material = new THREE.MeshBasicMaterial({
       side: THREE.DoubleSide,
       transparent: true,
-      map: this.texture,
+      map: this.#texture,
       blending: param.blending,
     });
-    this.mesh = new THREE.Mesh(geometry, material);
-    this.mesh.renderOrder = SPRITE_RENDER_ORDER;
-    this.mesh.material.depthTest = false;
+    this.#mesh = new THREE.Mesh(geometry, material);
+    this.#mesh.renderOrder = SPRITE_RENDER_ORDER;
+    this.#mesh.material.depthTest = false;
   }
 
   /**
    * デストラクタ相当の処理
    */
   destructor(): void {
-    this.mesh.geometry.dispose();
-    this.mesh.material.dispose();
-    this.texture.dispose();
+    this.#mesh.geometry.dispose();
+    this.#mesh.material.dispose();
+    this.#texture.dispose();
   }
 
   /**
@@ -71,8 +71,8 @@ export class HorizontalAnimationMesh {
    * @param frame 0〜1で指定するアニメーション進捗度
    */
   animate(frame: number): void {
-    this.texture.offset.x = normalizeTextureOffset(frame, this.maxAnimation);
-    this.texture.offset.y = 0;
+    this.#texture.offset.x = normalizeTextureOffset(frame, this.#maxAnimation);
+    this.#texture.offset.y = 0;
   }
 
   /**
@@ -80,7 +80,7 @@ export class HorizontalAnimationMesh {
    * @param opacity 不透明度
    */
   opacity(opacity: number): void {
-    this.mesh.material.opacity = opacity;
+    this.#mesh.material.opacity = opacity;
   }
 
   /**
@@ -91,7 +91,7 @@ export class HorizontalAnimationMesh {
    * @param b 青
    */
   color(r: number, g: number, b: number): void {
-    this.mesh.material.color.setRGB(r, g, b);
+    this.#mesh.material.color.setRGB(r, g, b);
   }
 
   /**
@@ -99,6 +99,6 @@ export class HorizontalAnimationMesh {
    * @return 取得結果
    */
   getObject3D(): THREE.Object3D {
-    return this.mesh;
+    return this.#mesh;
   }
 }
