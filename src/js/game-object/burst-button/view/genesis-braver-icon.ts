@@ -44,6 +44,6 @@ export class GenesisBraverIcon implements ArmdozerIcon {
 
   /** @override */
   setOpacity(opacity: number): void {
-    this.#mesh.setOpacity(opacity);
+    this.#mesh.opacity(opacity);
   }
 }

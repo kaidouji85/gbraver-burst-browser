@@ -70,7 +70,7 @@ export class SimpleIndicatorView implements ResultIndicatorView {
     target.scale.x = model.scale * devicePerScale;
     target.scale.y = model.scale * devicePerScale;
     target.quaternion.copy(preRender.camera.quaternion);
-    this.#mesh.setOpacity(model.opacity);
+    this.#mesh.opacity(model.opacity);
   }
 
   /** @override */

@@ -51,7 +51,7 @@ export class LightningBarrierView {
     const target = this.getObject3D();
     target.position.set(model.position.x, model.position.y, model.position.z);
     target.scale.set(model.scale, model.scale, model.scale);
-    this.#mesh.setOpacity(model.opacity);
+    this.#mesh.opacity(model.opacity);
     this.#mesh.animate(model.animation.frame);
   }
 

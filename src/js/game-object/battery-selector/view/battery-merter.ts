@@ -122,9 +122,9 @@ export class BatteryMeter {
   update(model: BatterySelectorModel): void {
     this.#needle.getObject3D().rotation.z = Math.PI * (1 - model.needle);
     const disk4Opacity = model.maxBattery === 4 ? model.opacity : 0;
-    this.#disk4.setOpacity(disk4Opacity);
+    this.#disk4.opacity(disk4Opacity);
     const disk8Opacity = model.maxBattery === 8 ? model.opacity : 0;
-    this.#disk8.setOpacity(disk8Opacity);
+    this.#disk8.opacity(disk8Opacity);
     const diskOpacity = [4, 8].includes(model.maxBattery) ? 0 : model.opacity;
     this.#disk.setOpacity(diskOpacity);
     this.#needle.setOpacity(model.opacity);
@@ -135,8 +135,8 @@ export class BatteryMeter {
       const scale = batteryNumberScale(value, model.maxBattery);
       numberMesh.getObject3D().scale.set(scale, scale, 1);
       value <= model.enableMaxBattery
-        ? numberMesh.setOpacity(model.opacity)
-        : numberMesh.setOpacity(0);
+        ? numberMesh.opacity(model.opacity)
+        : numberMesh.opacity(0);
     });
     this.#disActiveNumbers.forEach((numberMesh, value) => {
       const { x, y } = batteryNumberPosition(value, model.maxBattery);
@@ -145,8 +145,8 @@ export class BatteryMeter {
       const scale = batteryNumberScale(value, model.maxBattery);
       numberMesh.getObject3D().scale.set(scale, scale, 1);
       model.enableMaxBattery < value && value <= model.maxBattery
-        ? numberMesh.setOpacity(model.opacity)
-        : numberMesh.setOpacity(0);
+        ? numberMesh.opacity(model.opacity)
+        : numberMesh.opacity(0);
     });
   }
 

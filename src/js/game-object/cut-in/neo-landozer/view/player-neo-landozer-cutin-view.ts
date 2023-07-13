@@ -72,12 +72,12 @@ export class PlayerNeoLandozerCutInView implements NeoLandozerCutInView {
    */
   engage(model: NeoLandozerCutInModel, preRender: PreRender): void {
     const activeMesh = this.#getActiveMesh(model.animation.type);
-    activeMesh.setOpacity(model.opacity);
+    activeMesh.opacity(model.opacity);
     activeMesh.animate(model.animation.frame);
     this.#getAllMeshes()
       .filter((v) => v !== activeMesh)
       .forEach((v) => {
-        v.setOpacity(0);
+        v.opacity(0);
       });
     const scale =
       model.scale *
