@@ -2,8 +2,8 @@ import type { Resources } from "../../../../resource";
 import { TEXTURE_IDS } from "../../../../resource/texture/ids";
 import type { ArmdozerAnimation } from "../../mesh/armdozer-animation";
 import { createNeoLandozerActiveMesh } from "./create-active-mesh";
-import { createNeoLandozerMesh } from "./create-mesh";
-import { createNeoLandozerOutlineMesh } from "./create-outline-mesh";
+import { createStandardMesh } from "./create-standard-mesh";
+import { createOutlineMesh } from "./create-outline-mesh";
 
 /** テクスチャID */
 export const TEXTURE_ID = TEXTURE_IDS.NEO_LANDOZER_KNOCK_BACK;
@@ -16,7 +16,7 @@ export const MAX_ANIMATION = 4;
  * @return メッシュ
  */
 export function neoLandozerKnockBack(resources: Resources): ArmdozerAnimation {
-  return createNeoLandozerMesh({
+  return createStandardMesh({
     resources,
     textureId: TEXTURE_ID,
     maxAnimation: MAX_ANIMATION,
@@ -46,7 +46,7 @@ export function neoLandozerActiveKnockBack(
 export function neoLandozerOutlineKnockBack(
   resources: Resources,
 ): ArmdozerAnimation {
-  return createNeoLandozerOutlineMesh({
+  return createOutlineMesh({
     resources,
     textureId: TEXTURE_ID,
     maxAnimation: MAX_ANIMATION,

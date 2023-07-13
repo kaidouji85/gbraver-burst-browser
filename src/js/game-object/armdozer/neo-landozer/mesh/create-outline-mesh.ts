@@ -44,11 +44,11 @@ type Params = {
 };
 
 /**
- * ネオランドーザのアウトラインメッシュを生成する
+ * アウトラインメッシュを生成する
  * @param params パラメータ
  * @return 生成結果
  */
-export function createNeoLandozerOutlineMesh(
+export function createOutlineMesh(
   params: Params,
 ): ArmdozerAnimation {
   const { resources, textureId, maxAnimation } = params;
