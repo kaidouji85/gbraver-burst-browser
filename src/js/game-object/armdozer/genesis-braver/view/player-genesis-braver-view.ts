@@ -1,20 +1,17 @@
 import * as THREE from "three";
 
 import type { Resources } from "../../../../resource";
+import { createMeshes } from "../mesh";
+import { AnimationMeshMapping } from "../mesh/animation-mesh-mapping";
 import type { GenesisBraverModel } from "../model/genesis-braver-model";
-import type { AnimationMeshMapping } from "./animation-mesh-mapping";
 import type { GenesisBraverView } from "./genesis-braver-view";
-import { createMeshes } from "./meshes";
-import { createOutlineMeshes } from "./outline-meshes";
 
 /** プレイヤー ジェネシスブレイバービュー */
 export class PlayerGenesisBraverView implements GenesisBraverView {
-  /** メッシュ */
-  #meshes: AnimationMeshMapping[];
-  /** アウトラインメッシュ */
-  #outlineMeshes: AnimationMeshMapping[];
   /** グループ */
   #group: THREE.Group;
+  /** メッシュ */
+  #meshes: AnimationMeshMapping[];
 
   /**
    * コンストラクタ
@@ -23,15 +20,14 @@ export class PlayerGenesisBraverView implements GenesisBraverView {
   constructor(resources: Resources) {
     this.#group = new THREE.Group();
     this.#meshes = createMeshes(resources);
-    this.#outlineMeshes = createOutlineMeshes(resources);
-    [...this.#meshes, ...this.#outlineMeshes].forEach(({ mesh }) => {
+    this.#meshes.forEach(({ mesh }) => {
       this.#group.add(mesh.getObject3D());
     });
   }
 
   /** @override */
   destructor() {
-    [...this.#meshes, ...this.#outlineMeshes].forEach(({ mesh }) => {
+    this.#meshes.forEach(({ mesh }) => {
       mesh.destructor();
     });
   }
@@ -46,19 +42,26 @@ export class PlayerGenesisBraverView implements GenesisBraverView {
     this.#group.position.x = model.position.x;
     this.#group.position.y = model.position.y;
     this.#group.position.z = model.position.z;
-    const currentMesh = this.#meshes.find(
-      (v) => v.type === model.animation.type,
+
+    const currentStandardMesh = this.#meshes.find(
+      (v) =>
+        v.meshType === "STANDARD" && v.animationType === model.animation.type,
     );
-    if (currentMesh) {
-      currentMesh.mesh.opacity(1);
-      currentMesh.mesh.animate(model.animation.frame);
+    if (currentStandardMesh) {
+      currentStandardMesh.mesh.opacity(1);
+      currentStandardMesh.mesh.animate(model.animation.frame);
       const colorStrength =
         1 - (0.2 + model.active.strength * 0.1) * model.active.opacity;
-      currentMesh.mesh.color(colorStrength, colorStrength, colorStrength);
+      currentStandardMesh.mesh.color(
+        colorStrength,
+        colorStrength,
+        colorStrength,
+      );
     }
 
-    const currentOutlineMesh = this.#outlineMeshes.find(
-      (v) => v.type === model.animation.type,
+    const currentOutlineMesh = this.#meshes.find(
+      (v) =>
+        v.meshType === "OUTLINE" && v.animationType === model.animation.type,
     );
     if (currentOutlineMesh) {
       const outlineOpacity =
@@ -67,8 +70,8 @@ export class PlayerGenesisBraverView implements GenesisBraverView {
       currentOutlineMesh.mesh.animate(model.animation.frame);
     }
 
-    [...this.#meshes, ...this.#outlineMeshes]
-      .filter((v) => v !== currentMesh)
+    this.#meshes
+      .filter((v) => v !== currentStandardMesh)
       .filter((v) => v !== currentOutlineMesh)
       .forEach(({ mesh }) => {
         mesh.opacity(0);

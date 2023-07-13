@@ -1,9 +1,7 @@
 import type { Resources } from "../../../../resource";
 import { TEXTURE_IDS } from "../../../../resource/texture/ids";
-import type { ArmdozerAnimation } from "../../mesh/armdozer-animation";
-import { createGenesisBraverActiveMesh } from "./create-active-mesh";
-import { createGenesisBraverMesh } from "./create-mesh";
-import { createGenesisBraverOutlineMesh } from "./create-outline-mesh";
+import { AnimationMeshMapping } from "./animation-mesh-mapping";
+import { createMeshesForAnimation } from "./create-meshes-for-animation";
 
 /** テクスチャID */
 export const TEXTURE_ID = TEXTURE_IDS.GENESIS_BRAVER_KNOCK_BACK;
@@ -12,45 +10,14 @@ export const TEXTURE_ID = TEXTURE_IDS.GENESIS_BRAVER_KNOCK_BACK;
 export const MAX_ANIMATION = 4;
 
 /**
- * ジェネシスブレイバー ノックバック スプライトを生成
+ * ノックバック メッシュ群を生成
  * @param resources リソース管理オブジェクト
  * @return 生成結果
  */
-export function genesisBraverKnockBack(
-  resources: Resources,
-): ArmdozerAnimation {
-  return createGenesisBraverMesh({
+export function knockBack(resources: Resources): AnimationMeshMapping[] {
+  return createMeshesForAnimation({
     resources,
-    textureId: TEXTURE_ID,
-    maxAnimation: MAX_ANIMATION,
-  });
-}
-
-/**
- * ジェネシスブレイバー アクティブ ノックバック スプライトを生成
- * @param resources リソース管理オブジェクト
- * @return 生成結果
- */
-export function genesisBraverActiveKnockBack(
-  resources: Resources,
-): ArmdozerAnimation {
-  return createGenesisBraverActiveMesh({
-    resources,
-    textureId: TEXTURE_ID,
-    maxAnimation: MAX_ANIMATION,
-  });
-}
-
-/**
- * ジェネシスブレイバー アウトライン ノックバック スプライトを生成
- * @param resources リソース管理オブジェクト
- * @return 生成結果
- */
-export function genesisBraverOutlineKnockBack(
-  resources: Resources,
-): ArmdozerAnimation {
-  return createGenesisBraverOutlineMesh({
-    resources,
+    animationType: "KNOCK_BACK",
     textureId: TEXTURE_ID,
     maxAnimation: MAX_ANIMATION,
   });
