@@ -44,11 +44,11 @@ type Params = {
 };
 
 /**
- * ウィングドーザのアウトラインメッシュを生成する
+ * アウトラインメッシュを生成する
  * @param params パラメータ
  * @return 生成結果
  */
-export function createWingDozerOutlineMesh(params: Params): ArmdozerAnimation {
+export function createOutlineMesh(params: Params): ArmdozerAnimation {
   const { resources, textureId, maxAnimation } = params;
   const texture =
     resources.textures.find((v) => v.id === textureId)?.texture ??
