@@ -1,9 +1,7 @@
 import type { Resources } from "../../../../resource";
 import { TEXTURE_IDS } from "../../../../resource/texture/ids";
-import type { ArmdozerAnimation } from "../../mesh/armdozer-animation";
-import { createNeoLandozerActiveMesh } from "./create-active-mesh";
-import { createNeoLandozerMesh } from "./create-mesh";
-import { createNeoLandozerOutlineMesh } from "./create-outline-mesh";
+import { AnimationMeshMapping } from "./animation-mesh-mapping";
+import { createMeshesForAnimation } from "./create-meshes-for-animation";
 
 /** テクスチャID */
 export const TEXTURE_ID = TEXTURE_IDS.NEO_LANDOZER_GUARD;
@@ -11,43 +9,14 @@ export const TEXTURE_ID = TEXTURE_IDS.NEO_LANDOZER_GUARD;
 export const MAX_ANIMATION = 4;
 
 /**
- * ネオラインドーザ ガード メッシュ生成
+ * ガード メッシュ群を生成
  * @param resources リソース管理オブジェクト
- * @return メッシュ
+ * @return 生成結果
  */
-export function neoLandozerGuard(resources: Resources): ArmdozerAnimation {
-  return createNeoLandozerMesh({
+export function guard(resources: Resources): AnimationMeshMapping[] {
+  return createMeshesForAnimation({
     resources,
-    textureId: TEXTURE_ID,
-    maxAnimation: MAX_ANIMATION,
-  });
-}
-
-/**
- * ネオラインドーザ アクティブガードメッシュ生成
- * @param resources リソース管理オブジェクト
- * @return メッシュ
- */
-export function neoLandozerActiveGuard(
-  resources: Resources,
-): ArmdozerAnimation {
-  return createNeoLandozerActiveMesh({
-    resources,
-    textureId: TEXTURE_ID,
-    maxAnimation: MAX_ANIMATION,
-  });
-}
-
-/**
- * ネオラインドーザ アウトラインガードメッシュ生成
- * @param resources リソース管理オブジェクト
- * @return メッシュ
- */
-export function neoLandozerOutlineGuard(
-  resources: Resources,
-): ArmdozerAnimation {
-  return createNeoLandozerOutlineMesh({
-    resources,
+    animationType: "GUARD",
     textureId: TEXTURE_ID,
     maxAnimation: MAX_ANIMATION,
   });

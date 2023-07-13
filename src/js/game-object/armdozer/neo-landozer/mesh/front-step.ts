@@ -1,9 +1,7 @@
 import type { Resources } from "../../../../resource";
 import { TEXTURE_IDS } from "../../../../resource/texture/ids";
-import type { ArmdozerAnimation } from "../../mesh/armdozer-animation";
-import { createNeoLandozerActiveMesh } from "./create-active-mesh";
-import { createNeoLandozerMesh } from "./create-mesh";
-import { createNeoLandozerOutlineMesh } from "./create-outline-mesh";
+import { AnimationMeshMapping } from "./animation-mesh-mapping";
+import { createMeshesForAnimation } from "./create-meshes-for-animation";
 
 /** テクスチャID */
 export const TEXTURE_ID = TEXTURE_IDS.NEO_LANDOZER_FRONT_STEP;
@@ -11,43 +9,14 @@ export const TEXTURE_ID = TEXTURE_IDS.NEO_LANDOZER_FRONT_STEP;
 export const MAX_ANIMATION = 4;
 
 /**
- * ネオラインドーザ フロントステップ メッシュ生成
+ * フロントステップ メッシュ群を生成
  * @param resources リソース管理オブジェクト
- * @return メッシュ
+ * @return 生成結果
  */
-export function neoLandozerFrontStep(resources: Resources): ArmdozerAnimation {
-  return createNeoLandozerMesh({
+export function frontStep(resources: Resources): AnimationMeshMapping[] {
+  return createMeshesForAnimation({
     resources,
-    textureId: TEXTURE_ID,
-    maxAnimation: MAX_ANIMATION,
-  });
-}
-
-/**
- * ネオラインドーザ アクティブフロントステップ メッシュ生成
- * @param resources リソース管理オブジェクト
- * @return メッシュ
- */
-export function neoLandozerActiveFrontStep(
-  resources: Resources,
-): ArmdozerAnimation {
-  return createNeoLandozerActiveMesh({
-    resources,
-    textureId: TEXTURE_ID,
-    maxAnimation: MAX_ANIMATION,
-  });
-}
-
-/**
- * ネオラインドーザ アウトラインフロントステップ メッシュ生成
- * @param resources リソース管理オブジェクト
- * @return メッシュ
- */
-export function neoLandozerOutlineFrontStep(
-  resources: Resources,
-): ArmdozerAnimation {
-  return createNeoLandozerOutlineMesh({
-    resources,
+    animationType: "FRONT_STEP",
     textureId: TEXTURE_ID,
     maxAnimation: MAX_ANIMATION,
   });
