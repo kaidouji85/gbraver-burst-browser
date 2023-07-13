@@ -2,19 +2,12 @@ import * as THREE from "three";
 
 import type { Resources } from "../../../../resource";
 import type { NeoLandozerModel } from "../model/neo-landozer-model";
-import type { AnimationMeshMapping } from "./animation-mesh-mapping";
-import { createMeshes } from "./meshes";
 import type { NeoLandozerView } from "./neo-landozer-view";
-import { createOutlineMeshes } from "./outline-meshes";
 
 /** プレイヤー側ネオランドーザのビュー */
 export class PlayerNeoLandozerView implements NeoLandozerView {
   /** グループ */
   #group: THREE.Group;
-  /** メッシュ */
-  #meshes: AnimationMeshMapping[];
-  /** アウトラインメッシュ */
-  #outlineMeshes: AnimationMeshMapping[];
 
   /**
    * コンストラクタ
@@ -22,18 +15,18 @@ export class PlayerNeoLandozerView implements NeoLandozerView {
    */
   constructor(resources: Resources) {
     this.#group = new THREE.Group();
-    this.#meshes = createMeshes(resources);
-    this.#outlineMeshes = createOutlineMeshes(resources);
-    [...this.#meshes, ...this.#outlineMeshes].forEach(({ mesh }) => {
-      this.#group.add(mesh.getObject3D());
-    });
+    // this.#meshes = createMeshes(resources);
+    // this.#outlineMeshes = createOutlineMeshes(resources);
+    // [...this.#meshes, ...this.#outlineMeshes].forEach(({ mesh }) => {
+    //   this.#group.add(mesh.getObject3D());
+    // });
   }
 
   /** @override */
   destructor(): void {
-    [...this.#meshes, ...this.#outlineMeshes].forEach(({ mesh }) => {
-      mesh.destructor();
-    });
+    // [...this.#meshes, ...this.#outlineMeshes].forEach(({ mesh }) => {
+    //   mesh.destructor();
+    // });
   }
 
   /** @override */
@@ -42,33 +35,33 @@ export class PlayerNeoLandozerView implements NeoLandozerView {
     this.#group.position.y = model.position.y;
     this.#group.position.z = model.position.z;
 
-    const currentMesh = this.#meshes.find(
-      (v) => v.type === model.animation.type,
-    );
-    if (currentMesh) {
-      currentMesh.mesh.opacity(1);
-      currentMesh.mesh.animate(model.animation.frame);
-      const colorStrength =
-        1 - (0.2 + model.active.strength * 0.1) * model.active.opacity;
-      currentMesh.mesh.color(colorStrength, colorStrength, colorStrength);
-    }
+    // const currentMesh = this.#meshes.find(
+    //   (v) => v.type === model.animation.type,
+    // );
+    // if (currentMesh) {
+    //   currentMesh.mesh.opacity(1);
+    //   currentMesh.mesh.animate(model.animation.frame);
+    //   const colorStrength =
+    //     1 - (0.2 + model.active.strength * 0.1) * model.active.opacity;
+    //   currentMesh.mesh.color(colorStrength, colorStrength, colorStrength);
+    // }
 
-    const currentOutlineMesh = this.#outlineMeshes.find(
-      (v) => v.type === model.animation.type,
-    );
-    if (currentOutlineMesh) {
-      const outlineOpacity =
-        (0.9 + model.active.strength * 0.1) * model.active.opacity;
-      currentOutlineMesh.mesh.opacity(outlineOpacity);
-      currentOutlineMesh.mesh.animate(model.animation.frame);
-    }
+    // const currentOutlineMesh = this.#outlineMeshes.find(
+    //   (v) => v.type === model.animation.type,
+    // );
+    // if (currentOutlineMesh) {
+    //   const outlineOpacity =
+    //     (0.9 + model.active.strength * 0.1) * model.active.opacity;
+    //   currentOutlineMesh.mesh.opacity(outlineOpacity);
+    //   currentOutlineMesh.mesh.animate(model.animation.frame);
+    // }
 
-    [...this.#meshes, ...this.#outlineMeshes]
-      .filter((v) => v !== currentMesh)
-      .filter((v) => v !== currentOutlineMesh)
-      .forEach(({ mesh }) => {
-        mesh.opacity(0);
-      });
+    // [...this.#meshes, ...this.#outlineMeshes]
+    //   .filter((v) => v !== currentMesh)
+    //   .filter((v) => v !== currentOutlineMesh)
+    //   .forEach(({ mesh }) => {
+    //     mesh.opacity(0);
+    //   });
   }
 
   /** @override */
