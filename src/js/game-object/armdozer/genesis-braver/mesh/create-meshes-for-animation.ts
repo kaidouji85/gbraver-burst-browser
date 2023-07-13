@@ -2,8 +2,8 @@ import { Resources } from "../../../../resource";
 import { TextureId } from "../../../../resource/texture/resource";
 import { AnimationType } from "../model/animation-type";
 import { AnimationMeshMapping } from "./animation-mesh-mapping";
-import { createGenesisBraverMesh } from "./create-mesh";
-import { createGenesisBraverOutlineMesh } from "./create-outline-mesh";
+import { createStandardMesh } from "./create-standard-mesh";
+import { createOutlineMesh } from "./create-outline-mesh";
 
 /** パラメータ */
 type Params = {
@@ -28,12 +28,12 @@ export function createMeshesForAnimation(params: Params): AnimationMeshMapping[]
     {
       animationType,
       meshType: "STANDARD",
-      mesh: createGenesisBraverMesh(params),
+      mesh: createStandardMesh(params),
     },
     {
       animationType,
       meshType: "OUTLINE",
-      mesh: createGenesisBraverOutlineMesh(params),
+      mesh: createOutlineMesh(params),
     }
   ];
 }

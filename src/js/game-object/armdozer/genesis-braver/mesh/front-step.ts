@@ -2,8 +2,8 @@ import type { Resources } from "../../../../resource";
 import { TEXTURE_IDS } from "../../../../resource/texture/ids";
 import type { ArmdozerAnimation } from "../../mesh/armdozer-animation";
 import { createGenesisBraverActiveMesh } from "./create-active-mesh";
-import { createGenesisBraverMesh } from "./create-mesh";
-import { createGenesisBraverOutlineMesh } from "./create-outline-mesh";
+import { createStandardMesh } from "./create-standard-mesh";
+import { createOutlineMesh } from "./create-outline-mesh";
 
 /** テクスチャID */
 export const TEXTURE_ID = TEXTURE_IDS.GENESIS_BRAVER_FRONT_STEP;
@@ -18,7 +18,7 @@ export const MAX_ANIMATION = 4;
 export function genesisBraverFrontStep(
   resources: Resources,
 ): ArmdozerAnimation {
-  return createGenesisBraverMesh({
+  return createStandardMesh({
     resources,
     textureId: TEXTURE_ID,
     maxAnimation: MAX_ANIMATION,
@@ -48,7 +48,7 @@ export function genesisBraverActiveFrontStep(
 export function genesisBraverOutlineFrontStep(
   resources: Resources,
 ): ArmdozerAnimation {
-  return createGenesisBraverOutlineMesh({
+  return createOutlineMesh({
     resources,
     textureId: TEXTURE_ID,
     maxAnimation: MAX_ANIMATION,

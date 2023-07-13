@@ -18,11 +18,11 @@ type Params = {
 };
 
 /**
- * ジェネシスブレイバーメッシュを生成する
+ * 標準メッシュを生成する
  * @param params パラメータ
  * @return 生成結果
  */
-export function createGenesisBraverMesh(params: Params): ArmdozerAnimation {
+export function createStandardMesh(params: Params): ArmdozerAnimation {
   const { resources, textureId, maxAnimation } = params;
   const texture =
     resources.textures.find((v) => v.id === textureId)?.texture ??
