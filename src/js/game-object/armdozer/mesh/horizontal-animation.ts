@@ -48,12 +48,12 @@ class HorizontalArmdozerAnimation implements ArmdozerAnimation {
 
   /** @override */
   opacity(value: number): void {
-    this.#animation.mesh.material.opacity = value;
+    this.#animation.opacity(value);
   }
 
   /** @override */
   color(r: number, g: number, b: number): void {
-    this.#animation.mesh.material.color.setRGB(r, g, b);
+    this.#animation.color(r, g, b);
   }
 
   /** @override */
