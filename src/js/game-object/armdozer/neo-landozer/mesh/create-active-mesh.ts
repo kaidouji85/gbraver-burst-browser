@@ -17,6 +17,7 @@ const ACTIVE_COLOR_G = 100;
 const ACTIVE_COLOR_B = 100;
 
 /**
+ * @deprecated
  * アクティブ用にシルエット化したテクスチャを生成する
  * @param texture 加工前のテクスチャ
  * @return シルエット化したテクスチャ
