@@ -1,10 +1,10 @@
 import * as THREE from "three";
 
 import type { Resources } from "../../../../resource";
+import { createMeshes } from "../mesh";
+import { AnimationMeshMapping } from "../mesh/animation-mesh-mapping";
 import type { ShinBraverModel } from "../model/shin-braver-model";
 import type { ShinBraverView } from "./shin-braver-view";
-import { AnimationMeshMapping } from "../mesh/animation-mesh-mapping";
-import { createMeshes } from "../mesh";
 
 /** プレイヤー側シンブレイバーのビュー */
 export class PlayerShinBraverView implements ShinBraverView {
@@ -19,7 +19,7 @@ export class PlayerShinBraverView implements ShinBraverView {
    */
   constructor(resources: Resources) {
     this.#group = new THREE.Group();
-     this.#meshes = createMeshes(resources);
+    this.#meshes = createMeshes(resources);
     this.#meshes.forEach(({ mesh }) => {
       this.#group.add(mesh.getObject3D());
     });
@@ -39,22 +39,24 @@ export class PlayerShinBraverView implements ShinBraverView {
     this.#group.position.z = model.position.z;
 
     const currentStandardMesh = this.#meshes.find(
-      (v) => 
-        v.meshType === "STANDARD" &&
-        v.animationType === model.animation.type,
+      (v) =>
+        v.meshType === "STANDARD" && v.animationType === model.animation.type,
     );
     if (currentStandardMesh) {
       currentStandardMesh.mesh.opacity(1);
       currentStandardMesh.mesh.animate(model.animation.frame);
       const colorStrength =
         1 - (0.2 + model.active.strength * 0.1) * model.active.opacity;
-      currentStandardMesh.mesh.color(colorStrength, colorStrength, colorStrength);
+      currentStandardMesh.mesh.color(
+        colorStrength,
+        colorStrength,
+        colorStrength,
+      );
     }
 
     const currentOutlineMesh = this.#meshes.find(
       (v) =>
-        v.meshType === "OUTLINE" && 
-        v.animationType === model.animation.type,
+        v.meshType === "OUTLINE" && v.animationType === model.animation.type,
     );
     if (currentOutlineMesh) {
       const outlineOpacity =
