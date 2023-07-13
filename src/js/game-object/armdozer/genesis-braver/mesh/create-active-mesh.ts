@@ -6,8 +6,8 @@ import { TextureId } from "../../../../resource/texture/resource";
 import { CanvasDisposeTexture } from "../../../../texture/canvas-dispose-texture";
 import { ArmdozerAnimation } from "../../mesh/armdozer-animation";
 import { createHorizontalAnimation } from "../../mesh/horizontal-animation";
-import { MESH_HEIGHT, MESH_WIDTH } from "./mesh-size";
-import { MESH_Y } from "./position";
+import { MESH_HEIGHT, MESH_WIDTH } from "../view/mesh-size";
+import { MESH_Y } from "../view/position";
 
 /** アクティブレイヤー Red */
 const ACTIVE_COLOR_R = 128;
