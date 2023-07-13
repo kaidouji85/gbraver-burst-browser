@@ -1,9 +1,7 @@
 import type { Resources } from "../../../../resource";
 import { TEXTURE_IDS } from "../../../../resource/texture/ids";
-import type { ArmdozerAnimation } from "../../mesh/armdozer-animation";
-import { createNeoLandozerActiveMesh } from "./create-active-mesh";
-import { createStandardMesh } from "./create-standard-mesh";
-import { createOutlineMesh } from "./create-outline-mesh";
+import { AnimationMeshMapping } from "./animation-mesh-mapping";
+import { createMeshesForAnimation } from "./create-meshes-for-animation";
 
 /** テクスチャID */
 export const TEXTURE_ID = TEXTURE_IDS.NEO_LANDOZER_HM_ATTACK;
@@ -11,43 +9,14 @@ export const TEXTURE_ID = TEXTURE_IDS.NEO_LANDOZER_HM_ATTACK;
 export const MAX_ANIMATION = 4;
 
 /**
- * ネオラインドーザ アームハンマー攻撃
+ * アームハンマー攻撃 メッシュ群を生成
  * @param resources リソース管理オブジェクト
- * @return 生成したメッシュ
+ * @return 生成結果
  */
-export function neoLandozerHMAttack(resources: Resources): ArmdozerAnimation {
-  return createStandardMesh({
+export function hmAttack(resources: Resources): AnimationMeshMapping[] {
+  return createMeshesForAnimation({
     resources,
-    textureId: TEXTURE_ID,
-    maxAnimation: MAX_ANIMATION,
-  });
-}
-
-/**
- * ネオラインドーザ アクティブ アームハンマー攻撃
- * @param resources リソース管理オブジェクト
- * @return 生成したメッシュ
- */
-export function neoLandozerActiveHMAttack(
-  resources: Resources,
-): ArmdozerAnimation {
-  return createNeoLandozerActiveMesh({
-    resources,
-    textureId: TEXTURE_ID,
-    maxAnimation: MAX_ANIMATION,
-  });
-}
-
-/**
- * ネオラインドーザ アウトライン アームハンマー攻撃
- * @param resources リソース管理オブジェクト
- * @return 生成したメッシュ
- */
-export function neoLandozerOutlineHMAttack(
-  resources: Resources,
-): ArmdozerAnimation {
-  return createOutlineMesh({
-    resources,
+    animationType: "HM_ATTACK",
     textureId: TEXTURE_ID,
     maxAnimation: MAX_ANIMATION,
   });
