@@ -84,6 +84,17 @@ export class HorizontalAnimationMesh {
   }
 
   /**
+   * テクスチャカラーを設定する
+   * 色の強さは0～1で指定する
+   * @param r 赤
+   * @param g 緑
+   * @param b 青
+   */
+  color(r: number, g: number, b: number): void {
+    this.mesh.material.color.setRGB(r, g, b);
+  }
+
+  /**
    * シーンに追加するオブジェクトを取得する
    * @return 取得結果
    */
