@@ -20,6 +20,6 @@ export async function toBattery(
   const pushButton = () => 0 < diff ? batteryPlus(props) : batteryMinus(props);
   for (let i=0; i<count; i++) {
     pushButton();
-    waitTime(duration);
+    await waitTime(duration);
   }
 }
