@@ -1,7 +1,7 @@
 import type { Resources } from "../../../../resource";
 import { TEXTURE_IDS } from "../../../../resource/texture/ids";
-import { AnimationMeshMapping } from "./animation-mesh-mapping";
-import { createMeshesForAnimation } from "./create-meshes-for-animation";
+import { AnimationMesh } from "./animation-mesh";
+import { createAnimationMeshes } from "./create-animation-meshes";
 
 /** テクスチャID */
 export const TEXTURE_ID = TEXTURE_IDS.WING_DOZER_UPPER_TO_STAND;
@@ -13,8 +13,8 @@ export const MAX_ANIMATION = 8;
  * @param resources リソース管理オブジェクト
  * @return 生成結果
  */
-export function upperToStand(resources: Resources): AnimationMeshMapping[] {
-  return createMeshesForAnimation({
+export function upperToStand(resources: Resources): AnimationMesh[] {
+  return createAnimationMeshes({
     resources,
     animationType: "UPPER_TO_STAND",
     textureId: TEXTURE_ID,

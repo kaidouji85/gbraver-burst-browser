@@ -4,8 +4,8 @@ import { AnimationType } from "../model/wing-dozer-model";
 /** メッシュタイプ */
 export type MeshType = "STANDARD" | "OUTLINE";
 
-/** アニメーション、メッシュマッピング */
-export type AnimationMeshMapping = {
+/** アニメーションメッシュ */
+export type AnimationMesh = {
   /** アニメーションタイプ */
   animationType: AnimationType;
   /** メッシュタイプ */
