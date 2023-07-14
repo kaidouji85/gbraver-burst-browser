@@ -13,12 +13,13 @@ import { batteryPlus } from "./battery-plus";
 export async function toBattery(
   props: BatterySelectorProps,
   battery: number,
-  duration: number
+  duration: number,
 ): Promise<void> {
   const diff = battery - props.model.battery;
   const count = Math.abs(diff);
-  const pushButton = () => 0 < diff ? batteryPlus(props) : batteryMinus(props);
-  for (let i=0; i<count; i++) {
+  const pushButton = () =>
+    0 < diff ? batteryPlus(props) : batteryMinus(props);
+  for (let i = 0; i < count; i++) {
     pushButton();
     await waitTime(duration);
   }

@@ -32,7 +32,8 @@ const batterySelectorStory =
  * @return バッテリーセレクタ操作関数
  */
 const enabled =
-  (maxBattery: number, label: ButtonLabel) => async (selector: BatterySelector) => {
+  (maxBattery: number, label: ButtonLabel) =>
+  async (selector: BatterySelector) => {
     selector.notifyDecision().subscribe((event) => {
       event.preventDefault();
       event.stopPropagation();
@@ -80,7 +81,8 @@ export const defense8 = batterySelectorStory(enabled(8, "Defense"));
  * @return バッテリーセレクタ操作関数
  */
 const disabled =
-  (maxBattery: number, label: ButtonLabel) => async (selector: BatterySelector) => {
+  (maxBattery: number, label: ButtonLabel) =>
+  async (selector: BatterySelector) => {
     await enabled(maxBattery, label)(selector);
     selector.disabled(true);
   };
@@ -95,10 +97,12 @@ export const attack5Disabled = batterySelectorStory(disabled(5, "Attack"));
  * @param label ボタンラベル
  * @return バッテリーセレクタ操作関数
  */
-const toBattery = (battery: number, maxBattery: number, label: ButtonLabel) => async (selector: BatterySelector) => { 
-  await enabled(maxBattery, label)(selector);
-  selector.toBattery(battery);
-};
+const toBattery =
+  (battery: number, maxBattery: number, label: ButtonLabel) =>
+  async (selector: BatterySelector) => {
+    await enabled(maxBattery, label)(selector);
+    selector.toBattery(battery);
+  };
 
 /** 5に設定 最大値5 */
 export const attackTo5 = batterySelectorStory(toBattery(5, 5, "Attack"));
