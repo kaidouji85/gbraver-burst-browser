@@ -1,9 +1,7 @@
 import type { Resources } from "../../../../resource";
 import { TEXTURE_IDS } from "../../../../resource/texture/ids";
-import type { ArmdozerAnimation } from "../../mesh/armdozer-animation";
-import { createLightningDozerActiveMesh } from "./create-active-mesh";
-import { createStandardMesh } from "./create-standard-mesh";
-import { createOutlineMesh } from "./create-outline-mesh";
+import { AnimationMeshMapping } from "./animation-mesh-mapping";
+import { createMeshesForAnimation } from "./create-meshes-for-animation";
 
 /** テクスチャID */
 export const TEXTURE_ID = TEXTURE_IDS.LIGHTNING_DOZER_FRONT_STEP;
@@ -11,45 +9,14 @@ export const TEXTURE_ID = TEXTURE_IDS.LIGHTNING_DOZER_FRONT_STEP;
 export const MAX_ANIMATION = 4;
 
 /**
- * ライトニングドーザ フロントステップ メッシュ生成
- * @param resources リソース管理オブジェクト
- * @return メッシュ
+ * フロントステップ メッシュ群を生成
+ * @param resource リソース管理オブジェクト
+ * @return 生成結果
  */
-export function lightningDozerFrontStep(
-  resources: Resources,
-): ArmdozerAnimation {
-  return createStandardMesh({
-    resources,
-    textureId: TEXTURE_ID,
-    maxAnimation: MAX_ANIMATION,
-  });
-}
-
-/**
- * ライトニングドーザ アクティブフロントステップ メッシュ生成
- * @param resources リソース管理オブジェクト
- * @return メッシュ
- */
-export function lightningDozerActiveFrontStep(
-  resources: Resources,
-): ArmdozerAnimation {
-  return createLightningDozerActiveMesh({
-    resources,
-    textureId: TEXTURE_ID,
-    maxAnimation: MAX_ANIMATION,
-  });
-}
-
-/**
- * ライトニングドーザ アウトラインフロントステップ メッシュ生成
- * @param resources リソース管理オブジェクト
- * @return メッシュ
- */
-export function lightningDozerOutlineFrontStep(
-  resources: Resources,
-): ArmdozerAnimation {
-  return createOutlineMesh({
-    resources,
+export function frontStep(resource: Resources): AnimationMeshMapping[] {
+  return createMeshesForAnimation({
+    resources: resource,
+    animationType: "FRONT_STEP",
     textureId: TEXTURE_ID,
     maxAnimation: MAX_ANIMATION,
   });
