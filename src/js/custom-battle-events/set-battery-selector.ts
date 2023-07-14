@@ -13,13 +13,15 @@ export async function setBatterySelector(
   toBattery: number,
   duration = 200,
 ): Promise<void> {
-  const currentBattery = props.view.hud.gameObjects.batterySelector.getBattery();
+  const currentBattery =
+    props.view.hud.gameObjects.batterySelector.getBattery();
   const diff = currentBattery - toBattery;
   const count = Math.abs(diff);
-  const pushButton =  0 < diff
-    ? props.view.hud.gameObjects.batterySelector.batteryPlus
-    : props.view.hud.gameObjects.batterySelector.batteryMinus;
-  for(let i=0; i < count; i++) {
+  const pushButton =
+    0 < diff
+      ? props.view.hud.gameObjects.batterySelector.batteryPlus
+      : props.view.hud.gameObjects.batterySelector.batteryMinus;
+  for (let i = 0; i < count; i++) {
     pushButton();
     await waitTime(duration);
   }
