@@ -1,9 +1,7 @@
 import type { Resources } from "../../../../resource";
 import { TEXTURE_IDS } from "../../../../resource/texture/ids";
-import type { ArmdozerAnimation } from "../../mesh/armdozer-animation";
-import { createLightningDozerActiveMesh } from "./create-active-mesh";
-import { createLightningDozerMesh } from "./create-mesh";
-import { createLightningDozerOutlineMesh } from "./create-outline-mesh";
+import { AnimationMeshMapping } from "./animation-mesh-mapping";
+import { createMeshesForAnimation } from "./create-meshes-for-animation";
 
 /** テクスチャID */
 export const TEXTURE_ID = TEXTURE_IDS.LIGHTNING_DOZER_HM_TO_STAND;
@@ -11,45 +9,14 @@ export const TEXTURE_ID = TEXTURE_IDS.LIGHTNING_DOZER_HM_TO_STAND;
 export const MAX_ANIMATION = 8;
 
 /**
- * ライトニングドーザ アームハンマー -> 立ち
+ * アームハンマー -> 立ち メッシュ群を生成
  * @param resources リソース管理オブジェクト
- * @return メッシュ
+ * @return 生成結果
  */
-export function lightningDozerHmToStand(
-  resources: Resources,
-): ArmdozerAnimation {
-  return createLightningDozerMesh({
+export function hmToStand(resources: Resources): AnimationMeshMapping[] {
+  return createMeshesForAnimation({
     resources,
-    textureId: TEXTURE_ID,
-    maxAnimation: MAX_ANIMATION,
-  });
-}
-
-/**
- * ライトニングドーザ アクティブ アームハンマー -> 立ち
- * @param resources リソース管理オブジェクト
- * @return メッシュ
- */
-export function lightningDozerActiveHmToStand(
-  resources: Resources,
-): ArmdozerAnimation {
-  return createLightningDozerActiveMesh({
-    resources,
-    textureId: TEXTURE_ID,
-    maxAnimation: MAX_ANIMATION,
-  });
-}
-
-/**
- * ライトニングドーザ アウトライン アームハンマー -> 立ち
- * @param resources リソース管理オブジェクト
- * @return メッシュ
- */
-export function lightningDozerOutlineHmToStand(
-  resources: Resources,
-): ArmdozerAnimation {
-  return createLightningDozerOutlineMesh({
-    resources,
+    animationType: "HM_TO_STAND",
     textureId: TEXTURE_ID,
     maxAnimation: MAX_ANIMATION,
   });
