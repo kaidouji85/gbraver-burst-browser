@@ -13,7 +13,7 @@ import { batteryPlus } from "./battery-plus";
 export async function toBattery(
   props: BatterySelectorProps,
   battery: number,
-  duration = 200
+  duration: number
 ): Promise<void> {
   const diff = battery - props.model.battery;
   const count = Math.abs(diff);
