@@ -1,8 +1,8 @@
 import * as THREE from "three";
 
 import type { Resources } from "../../../../resource";
-import { createMeshes } from "../mesh";
-import { AnimationMeshMapping } from "../mesh/animation-mesh-mapping";
+import { createAllMeshes } from "../mesh";
+import { AnimationMesh } from "../mesh/animation-mesh";
 import type { GenesisBraverModel } from "../model/genesis-braver-model";
 import type { GenesisBraverView } from "./genesis-braver-view";
 
@@ -11,7 +11,7 @@ export class PlayerGenesisBraverView implements GenesisBraverView {
   /** グループ */
   #group: THREE.Group;
   /** メッシュ */
-  #meshes: AnimationMeshMapping[];
+  #meshes: AnimationMesh[];
 
   /**
    * コンストラクタ
@@ -19,7 +19,7 @@ export class PlayerGenesisBraverView implements GenesisBraverView {
    */
   constructor(resources: Resources) {
     this.#group = new THREE.Group();
-    this.#meshes = createMeshes(resources);
+    this.#meshes = createAllMeshes(resources);
     this.#meshes.forEach(({ mesh }) => {
       this.#group.add(mesh.getObject3D());
     });

@@ -1,7 +1,7 @@
 import type { Resources } from "../../../../resource";
 import { TEXTURE_IDS } from "../../../../resource/texture/ids";
-import { AnimationMeshMapping } from "./animation-mesh-mapping";
-import { createMeshesForAnimation } from "./create-meshes-for-animation";
+import { AnimationMesh } from "./animation-mesh";
+import { createAnimationMeshes } from "./create-meshes-for-animation";
 
 /** テクスチャID */
 export const TEXTURE_ID = TEXTURE_IDS.GENESIS_BRAVER_BACK_STEP;
@@ -13,8 +13,8 @@ export const MAX_ANIMATION = 4;
  * @param resources リソース管理オブジェクト
  * @return 生成結果
  */
-export function backStep(resources: Resources): AnimationMeshMapping[] {
-  return createMeshesForAnimation({
+export function backStep(resources: Resources): AnimationMesh[] {
+  return createAnimationMeshes({
     resources,
     animationType: "BACK_STEP",
     textureId: TEXTURE_ID,
