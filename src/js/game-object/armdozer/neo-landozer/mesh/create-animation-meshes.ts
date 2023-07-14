@@ -1,7 +1,7 @@
 import { Resources } from "../../../../resource";
 import { TextureId } from "../../../../resource/texture/resource";
 import { AnimationType } from "../model/animation-type";
-import { AnimationMeshMapping } from "./animation-mesh-mapping";
+import { AnimationMesh } from "./animation-mesh";
 import { createOutlineMesh } from "./create-outline-mesh";
 import { createStandardMesh } from "./create-standard-mesh";
 
@@ -22,9 +22,7 @@ type Params = {
  * @param params パラメータ
  * @return 生成結果
  */
-export function createMeshesForAnimation(
-  params: Params,
-): AnimationMeshMapping[] {
+export function createAnimationMeshes(params: Params): AnimationMesh[] {
   const { animationType } = params;
   return [
     {

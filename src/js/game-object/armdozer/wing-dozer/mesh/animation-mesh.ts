@@ -1,11 +1,11 @@
 import type { ArmdozerAnimation } from "../../mesh/armdozer-animation";
-import type { AnimationType } from "../model/animation-type";
+import { AnimationType } from "../model/wing-dozer-model";
 
 /** メッシュタイプ */
 export type MeshType = "STANDARD" | "OUTLINE";
 
-/** アニメーション、メッシュマッピング */
-export type AnimationMeshMapping = {
+/** アニメーションメッシュ */
+export type AnimationMesh = {
   /** アニメーションタイプ */
   animationType: AnimationType;
   /** メッシュタイプ */

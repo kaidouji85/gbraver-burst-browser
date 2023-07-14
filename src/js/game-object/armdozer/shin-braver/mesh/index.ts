@@ -1,5 +1,5 @@
 import { Resources } from "../../../../resource";
-import { AnimationMeshMapping } from "./animation-mesh-mapping";
+import { AnimationMesh } from "./animation-mesh";
 import { backStep } from "./back-step";
 import { burstDown } from "./burst-down";
 import { burstUp } from "./burst-up";
@@ -15,11 +15,11 @@ import { spToStand } from "./sp-to-stand";
 import { stand } from "./stand";
 
 /**
- * ビューで利用するメッシュ群を生成する
+ * ビューで利用するすべてのメッシュを生成する
  * @param resources リソース管理オブジェクト
  * @return 生成結果
  */
-export function createMeshes(resources: Resources): AnimationMeshMapping[] {
+export function createAllMeshes(resources: Resources): AnimationMesh[] {
   return [
     ...stand(resources),
     ...spCharge(resources),
