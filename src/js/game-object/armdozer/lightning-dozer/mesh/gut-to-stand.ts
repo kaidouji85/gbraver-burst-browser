@@ -2,8 +2,8 @@ import type { Resources } from "../../../../resource";
 import { TEXTURE_IDS } from "../../../../resource/texture/ids";
 import type { ArmdozerAnimation } from "../../mesh/armdozer-animation";
 import { createLightningDozerActiveMesh } from "./create-active-mesh";
-import { createLightningDozerMesh } from "./create-mesh";
-import { createLightningDozerOutlineMesh } from "./create-outline-mesh";
+import { createStandardMesh } from "./create-standard-mesh";
+import { createOutlineMesh } from "./create-outline-mesh";
 
 /** テクスチャID */
 export const TEXTURE_ID = TEXTURE_IDS.LIGHTNING_DOZER_GUTS_TO_STAND;
@@ -18,7 +18,7 @@ export const MAX_ANIMATION = 4;
 export function lightningDozerGutsToStand(
   resources: Resources,
 ): ArmdozerAnimation {
-  return createLightningDozerMesh({
+  return createStandardMesh({
     resources,
     textureId: TEXTURE_ID,
     maxAnimation: MAX_ANIMATION,
@@ -48,7 +48,7 @@ export function lightningDozerActiveGutsToStand(
 export function lightningDozerOutlineGutsToStand(
   resources: Resources,
 ): ArmdozerAnimation {
-  return createLightningDozerOutlineMesh({
+  return createOutlineMesh({
     resources,
     textureId: TEXTURE_ID,
     maxAnimation: MAX_ANIMATION,

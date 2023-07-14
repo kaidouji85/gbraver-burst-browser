@@ -43,6 +43,7 @@ type Params = {
 };
 
 /**
+ * @deprecated
  * ライトニングドーザのアクティブメッシュを生成する
  * @param params パラメータ
  * @return 生成結果
