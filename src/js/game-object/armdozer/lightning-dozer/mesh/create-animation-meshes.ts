@@ -22,9 +22,7 @@ type Params = {
  * @param params パラメータ
  * @return 生成結果
  */
-export function createAnimationMeshes(
-  params: Params,
-): AnimationMesh[] {
+export function createAnimationMeshes(params: Params): AnimationMesh[] {
   const { animationType } = params;
   return [
     {
