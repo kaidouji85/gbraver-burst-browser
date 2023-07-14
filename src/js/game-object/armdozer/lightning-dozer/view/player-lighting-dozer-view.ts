@@ -1,10 +1,10 @@
 import * as THREE from "three";
 
 import type { Resources } from "../../../../resource";
+import { createMeshes } from "../mesh";
+import { AnimationMeshMapping } from "../mesh/animation-mesh-mapping";
 import type { LightningDozerModel } from "../model/lightning-dozer-model";
 import type { LightningDozerView } from "./lightning-dozer-view";
-import { AnimationMeshMapping } from "../mesh/animation-mesh-mapping";
-import { createMeshes } from "../mesh";
 
 /** プレイヤー側のライトニングドーザビュー */
 export class PlayerLightingDozerView implements LightningDozerView {
@@ -39,18 +39,24 @@ export class PlayerLightingDozerView implements LightningDozerView {
     this.#group.position.z = model.position.z;
 
     const currentStandardMesh = this.#meshes.find(
-      (v) => v.meshType === "STANDARD" && v.animationType === model.animation.type,
+      (v) =>
+        v.meshType === "STANDARD" && v.animationType === model.animation.type,
     );
     if (currentStandardMesh) {
       currentStandardMesh.mesh.opacity(1);
       currentStandardMesh.mesh.animate(model.animation.frame);
       const colorStrength =
         1 - (0.2 + model.active.strength * 0.1) * model.active.opacity;
-      currentStandardMesh.mesh.color(colorStrength, colorStrength, colorStrength);
+      currentStandardMesh.mesh.color(
+        colorStrength,
+        colorStrength,
+        colorStrength,
+      );
     }
 
     const currentOutlineMesh = this.#meshes.find(
-      (v) => v.meshType === "OUTLINE" && v.animationType === model.animation.type,
+      (v) =>
+        v.meshType === "OUTLINE" && v.animationType === model.animation.type,
     );
     if (currentOutlineMesh) {
       const outlineOpacity =

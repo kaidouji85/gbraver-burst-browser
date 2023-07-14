@@ -11,7 +11,7 @@ export const MAX_ANIMATION = 4;
 /**
  * ガッツダウン メッシュ生成
  * @param resources リソース管理オブジェクト
- * @return 生成結果 
+ * @return 生成結果
  */
 export function gutsDown(resources: Resources): AnimationMeshMapping[] {
   return createMeshesForAnimation({
