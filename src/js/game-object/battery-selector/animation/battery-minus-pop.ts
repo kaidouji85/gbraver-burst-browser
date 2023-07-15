@@ -7,21 +7,26 @@ import type { BatterySelectorModel } from "../model";
 import type { BatterySelectorSounds } from "../sounds/battery-selector-sounds";
 
 /**
- * マイナスボタン ポップ
- *
+ * マイナスボタン ポップ 無音
  * @param model モデル
- * @param sounds 効果音
  * @param group Tweenグループ
  * @return アニメーション
  */
-export function batteryMinusPop(
+export function silentlyBatteryMinusPop(
   model: BatterySelectorModel,
-  sounds: BatterySelectorSounds,
-  group: TWEEN.Group,
+group: TWEEN.Group,
 ): Animate {
-  return process(() => {
-    sounds.batteryChangeSound.play();
-  })
+  return tween(
+    model,
+    (t) =>
+      t.to(
+        {
+          minusButtonScale: 1.1,
+        },
+        100,
+      ),
+    group,
+  )
     .chain(
       tween(
         model,
@@ -48,4 +53,22 @@ export function batteryMinusPop(
         group,
       ),
     );
+}
+
+/**
+ * マイナスボタン ポップ
+ * @param model モデル
+ * @param sounds 効果音
+ * @param group Tweenグループ
+ * @return アニメーション
+ */
+export function batteryMinusPop(
+  model: BatterySelectorModel,
+  sounds: BatterySelectorSounds,
+  group: TWEEN.Group,
+): Animate {
+  return process(() => {
+      sounds.batteryChangeSound.play();
+    }).chain(silentlyBatteryMinusPop(model, group));
+  )
 }
