@@ -14,7 +14,7 @@ import type { BatterySelectorSounds } from "../sounds/battery-selector-sounds";
  */
 export function silentlyBatteryMinusPop(
   model: BatterySelectorModel,
-group: TWEEN.Group,
+  group: TWEEN.Group,
 ): Animate {
   return tween(
     model,
@@ -26,20 +26,19 @@ group: TWEEN.Group,
         100,
       ),
     group,
-  )
-    .chain(
-      tween(
-        model,
-        (t) =>
-          t.to(
-            {
-              minusButtonScale: 1,
-            },
-            100,
-          ),
-        group,
-      ),
-    );
+  ).chain(
+    tween(
+      model,
+      (t) =>
+        t.to(
+          {
+            minusButtonScale: 1,
+          },
+          100,
+        ),
+      group,
+    ),
+  );
 }
 
 /**
@@ -55,6 +54,6 @@ export function batteryMinusPop(
   group: TWEEN.Group,
 ): Animate {
   return process(() => {
-      sounds.batteryChangeSound.play();
-    }).chain(silentlyBatteryMinusPop(model, group));
+    sounds.batteryChangeSound.play();
+  }).chain(silentlyBatteryMinusPop(model, group));
 }
