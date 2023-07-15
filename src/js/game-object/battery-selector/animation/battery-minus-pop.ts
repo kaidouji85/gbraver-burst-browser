@@ -70,5 +70,4 @@ export function batteryMinusPop(
   return process(() => {
       sounds.batteryChangeSound.play();
     }).chain(silentlyBatteryMinusPop(model, group));
-  )
 }
