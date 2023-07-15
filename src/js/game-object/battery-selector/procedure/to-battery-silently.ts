@@ -1,18 +1,16 @@
-import {all} from "../../../animation/all";
+import { all } from "../../../animation/all";
 import { waitTime } from "../../../wait/wait-time";
-import {silentlyBatteryMinusPop} from "../animation/battery-minus-pop";
-import {silentlyBatteryPlusPop} from "../animation/battery-plus-pop";
+import { silentlyBatteryMinusPop } from "../animation/battery-minus-pop";
+import { silentlyBatteryPlusPop } from "../animation/battery-plus-pop";
 import { BatterySelectorProps } from "../props";
-import {batteryChange} from "./battery-change";
+import { batteryChange } from "./battery-change";
 
 /**
  * プラスボタンアニメーション
  * @param props ゲームオブジェクトプロパティ
  * @return 処理が完了したら発火するPromise
  */
-async function plusButton(
-  props: BatterySelectorProps,
-): Promise<void> {
+async function plusButton(props: BatterySelectorProps): Promise<void> {
   props.batteryPlusTween.update();
   props.batteryPlusTween.removeAll();
   await all(
@@ -26,9 +24,7 @@ async function plusButton(
  * @param props ゲームオブジェクトプロパティ
  * @return 処理が完了したら発火するPromise
  */
-async function minusButton(
-  props: BatterySelectorProps,
-): Promise<void> {
+async function minusButton(props: BatterySelectorProps): Promise<void> {
   props.batteryPlusTween.update();
   props.batteryPlusTween.removeAll();
   await all(
@@ -51,8 +47,7 @@ export async function toBatterySilently(
 ): Promise<void> {
   const diff = battery - props.model.battery;
   const count = Math.abs(diff);
-  const pushButton = () =>
-    0 < diff ? plusButton(props) : minusButton(props);
+  const pushButton = () => (0 < diff ? plusButton(props) : minusButton(props));
   for (let i = 0; i < count; i++) {
     pushButton();
     await waitTime(duration);
