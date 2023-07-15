@@ -11,7 +11,7 @@ import { BatterySelectorOpenParam } from "./battery-selector-open-param";
 import { batteryMinus } from "./procedure/battery-minus";
 import { batteryPlus } from "./procedure/battery-plus";
 import { bindEventListeners } from "./procedure/bind-event-listeners";
-import { toBattery } from "./procedure/to-battery";
+import { toBatterySilently } from "./procedure/to-battery-silently";
 import { BatterySelectorProps, createBatterySelectorProps } from "./props";
 
 /** コンストラクタのパラメータ */
@@ -101,7 +101,7 @@ export class BatterySelector {
    * @return 処理が完了したら発火するPromise
    */
   async toBattery(battery: number, duration = 200): Promise<void> {
-    await toBattery(this.#props, battery, duration);
+    await toBatterySilently(this.#props, battery, duration);
   }
 
   /**
