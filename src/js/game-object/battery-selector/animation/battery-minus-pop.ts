@@ -33,19 +33,6 @@ group: TWEEN.Group,
         (t) =>
           t.to(
             {
-              minusButtonScale: 1.1,
-            },
-            100,
-          ),
-        group,
-      ),
-    )
-    .chain(
-      tween(
-        model,
-        (t) =>
-          t.to(
-            {
               minusButtonScale: 1,
             },
             100,

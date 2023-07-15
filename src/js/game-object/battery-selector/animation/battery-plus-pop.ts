@@ -7,34 +7,26 @@ import type { BatterySelectorModel } from "../model";
 import type { BatterySelectorSounds } from "../sounds/battery-selector-sounds";
 
 /**
- * プラスボタン ポップ
- *
+ * プラスボタン ポップ 無音
  * @param model モデル
- * @param sounds 効果音
  * @param group Tweenグループ
  * @return アニメーション
  */
-export function batteryPlusPop(
+export function silentlyBatteryPlusPop(
   model: BatterySelectorModel,
-  sounds: BatterySelectorSounds,
   group: TWEEN.Group,
 ): Animate {
-  return process(() => {
-    sounds.batteryChangeSound.play();
-  })
-    .chain(
-      tween(
-        model,
-        (t) =>
-          t.to(
-            {
-              plusButtonScale: 1.1,
-            },
-            100,
-          ),
-        group,
+  return tween(
+    model,
+    (t) =>
+      t.to(
+        {
+          plusButtonScale: 1.1,
+        },
+        100,
       ),
-    )
+    group,
+  )
     .chain(
       tween(
         model,
@@ -48,4 +40,22 @@ export function batteryPlusPop(
         group,
       ),
     );
+}
+
+/**
+ * プラスボタン ポップ
+ * @param model モデル
+ * @param sounds 効果音
+ * @param group Tweenグループ
+ * @return アニメーション
+ */
+export function batteryPlusPop(
+  model: BatterySelectorModel,
+  sounds: BatterySelectorSounds,
+  group: TWEEN.Group,
+): Animate {
+  return process(() => {
+    sounds.batteryChangeSound.play();
+  })
+    .chain(silentlyBatteryPlusPop(model, group));
 }
