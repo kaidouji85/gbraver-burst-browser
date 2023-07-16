@@ -89,6 +89,7 @@ async function onZeroDefense(
     };
   }
 
+  props.view.hud.gameObjects.batterySelector.toBatterySilently(1);
   await cancelZeroBatteryDefense(props);
   refreshConversation(props);
   if (isBatterySelecterFocused(props)) {
