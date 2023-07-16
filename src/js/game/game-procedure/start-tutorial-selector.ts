@@ -22,6 +22,7 @@ export async function startTutorialSelector(props: Readonly<GameProps>) {
   const stages = tutorialStages.map((stage) => ({
     id: stage.id,
     title: stage.title.join(""),
+    type: stage.type,
   }));
   const scene = new TutorialSelector(props.resources, stages);
   props.domSceneBinder.bind(scene, tutorialSelectorConnector);

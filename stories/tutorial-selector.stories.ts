@@ -8,14 +8,17 @@ export const scene: DOMStubStory = domStub((resources) => {
   const scene = new TutorialSelector(resources, [
     {
       id: "01",
+      type: "Beginner",
       title: "バッテリーシステム基礎",
     },
     {
       id: "02",
+      type: "Intermediate",
       title: "ゼロ防御は即死",
     },
     {
       id: "03",
+      type: "Advanced",
       title: "バースト基礎",
     },
   ]);
