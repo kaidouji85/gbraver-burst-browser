@@ -48,7 +48,7 @@ export function rootInnerHTML(
 ): string {
   return `
     ${tutorialType(type)}
-    <div class="${ROOT_CLASS}__prefix">${level}</div>
+    <div class="${ROOT_CLASS}__level">${level}. </div>
     <div class="${ROOT_CLASS}__title">${title}</div>
     <div class="${ROOT_CLASS}__overlay" data-id="${ids.overlay}"></div>
   `;
