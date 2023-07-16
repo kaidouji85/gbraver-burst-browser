@@ -39,7 +39,7 @@ async function executeDoPilotSkillIfNeeded(
 }
 
 /**
- * 条件を満たせば「5以上で攻撃する」を再生する
+ * 条件を満たせば「3以上で攻撃する」を再生する
  * @param props イベントプロパティ
  * @param state イベントステート
  * @return ストーリーを再生したか否か、trueで再生した
