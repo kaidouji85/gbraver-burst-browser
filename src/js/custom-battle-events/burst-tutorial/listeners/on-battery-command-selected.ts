@@ -131,6 +131,7 @@ export async function onBatteryCommandSelected(
   }
 
   if (isPlayerFullBattery) {
+    props.view.hud.gameObjects.batterySelector.toBatterySilently(5);
     await defense5(props, state);
     state.isLoseIfNoDefense5Complete
       ? await notDefense5Carelessly(props)
