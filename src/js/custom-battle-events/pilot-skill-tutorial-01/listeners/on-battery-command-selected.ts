@@ -30,6 +30,7 @@ async function executeNoZeroDefenseIfNeeded(
     0 < player.armdozer.battery &&
     props.battery.battery <= 0
   ) {
+    props.view.hud.gameObjects.batterySelector.toBatterySilently(1);
     await noZeroDefense(props);
     invisibleAllMessageWindows(props);
     return true;

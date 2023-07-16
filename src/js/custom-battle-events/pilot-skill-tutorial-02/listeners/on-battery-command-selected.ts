@@ -30,6 +30,7 @@ async function executeNoZeroDefenseIfNeeded(
     isEnemyTurn &&
     0 < player.armdozer.battery
   ) {
+    props.view.hud.gameObjects.batterySelector.toBatterySilently(1);
     await noZeroDefense(props);
     return true;
   }
@@ -64,6 +65,7 @@ async function executeLessThanAttack3IfNeeded(
     state.isShouldAttack5OrMoreComplete &&
     props.battery.battery < 3
   ) {
+    props.view.hud.gameObjects.batterySelector.toBatterySilently(3);
     await lessThanAttack3(props);
     return true;
   }
