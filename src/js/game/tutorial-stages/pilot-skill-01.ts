@@ -10,6 +10,7 @@ import { TutorialStageIDs } from "./tutorial-stage-ids";
 /** パイロットスキルチュートリアル（前半） */
 export const pilotSkillTutorial01: TutorialStage = {
   id: TutorialStageIDs.Pilot01,
+  type: "Advanced",
   title: ["パイロット次第では詰み（負けイベント）"],
   player: {
     playerId: playerUuid(),

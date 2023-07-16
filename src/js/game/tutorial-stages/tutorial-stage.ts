@@ -7,10 +7,21 @@ import type { CustomBattleEvent } from "../../td-scenes/battle/custom-battle-eve
 /** チュートリアルステージID */
 export type TutorialStageID = string;
 
+/** チュートリアルタイプ */
+export type TutorialType =
+  /** 初級 */
+  "Beginner" |
+  /** 中級 */
+  "Intermediate" |
+  /** 上級 */
+  "Advanced";
+
 /** チュートリアルステージ */
 export type TutorialStage = {
   /** チュートリアルステージID */
   id: TutorialStageID;
+  /** チュートリアルタイプ */
+  type: TutorialType;
   /** チュートリアルタイトル */
   title: string[];
   /** カスタムバトルイベント生成関数、カスタムバトルイベントは状態を持つので都度生成する */

@@ -5,10 +5,12 @@ import { burstTutorialNPC } from "../../npc/burst-tutorial";
 import { SOUND_IDS } from "../../resource/sound";
 import { playerUuid } from "../../uuid/player";
 import { TutorialStageIDs } from "./tutorial-stage-ids";
+import {TutorialStage} from "./tutorial-stage";
 
 /** バーストチュートリアル */
-export const burstTutorial = {
+export const burstTutorial: TutorialStage = {
   id: TutorialStageIDs.BURST,
+  type: "Intermediate",
   title: ["バーストで一発逆転"],
   player: {
     playerId: playerUuid(),

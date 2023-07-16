@@ -10,6 +10,7 @@ import { TutorialStageIDs } from "./tutorial-stage-ids";
 /** ゼロ防御チュートリアル */
 export const zeroDefenseTutorial: TutorialStage = {
   id: TutorialStageIDs.ZERO_DEFENSE,
+  type: "Beginner",
   title: ["ゼロ防御だと即死する"],
   player: {
     playerId: playerUuid(),
