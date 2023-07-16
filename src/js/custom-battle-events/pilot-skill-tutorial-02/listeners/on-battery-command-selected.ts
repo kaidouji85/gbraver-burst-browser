@@ -30,6 +30,7 @@ async function executeNoZeroDefenseIfNeeded(
     isEnemyTurn &&
     0 < player.armdozer.battery
   ) {
+    props.view.hud.gameObjects.batterySelector.toBatterySilently(1);
     await noZeroDefense(props);
     return true;
   }
