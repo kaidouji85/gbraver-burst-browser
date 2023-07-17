@@ -10,11 +10,11 @@ export type TutorialStageID = string;
 /** チュートリアルタイプ */
 export type TutorialType =
   /** 初級 */
-  "Beginner" |
+  | "Beginner"
   /** 中級 */
-  "Intermediate" |
+  | "Intermediate"
   /** 上級 */
-  "Advanced";
+  | "Advanced";
 
 /** チュートリアルステージ */
 export type TutorialStage = {

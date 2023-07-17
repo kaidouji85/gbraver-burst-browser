@@ -4,8 +4,8 @@ import { createBurstTutorialEvent } from "../../custom-battle-events/burst-tutor
 import { burstTutorialNPC } from "../../npc/burst-tutorial";
 import { SOUND_IDS } from "../../resource/sound";
 import { playerUuid } from "../../uuid/player";
+import { TutorialStage } from "./tutorial-stage";
 import { TutorialStageIDs } from "./tutorial-stage-ids";
-import {TutorialStage} from "./tutorial-stage";
 
 /** バーストチュートリアル */
 export const burstTutorial: TutorialStage = {
