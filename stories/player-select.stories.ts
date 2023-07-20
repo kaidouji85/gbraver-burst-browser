@@ -13,7 +13,10 @@ export default {
 };
 
 export const scene: DOMStubStory = domStub((resources) => {
-  const scene = new PlayerSelect(resources, PlayableArmdozers);
+  const scene = new PlayerSelect({
+    resources, 
+    armDozerIds: PlayableArmdozers
+  });
   return scene.getRootHTMLElement();
 });
 
