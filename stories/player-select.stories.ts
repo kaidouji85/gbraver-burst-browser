@@ -5,6 +5,7 @@ import { ArmdozerSelector } from "../src/js/dom-scenes/player-select/armdozer-se
 import { PilotSelector } from "../src/js/dom-scenes/player-select/pilot-selector";
 import { createPilotIcon } from "../src/js/dom-scenes/player-select/pilot-selector/create-pilot-icon";
 import { PlayableArmdozers } from "../src/js/game/playable-amdozers";
+import { PlayablePilots } from "../src/js/game/playable-pilots";
 import type { DOMStubStory } from "./stub/dom-stub";
 import { domStub } from "./stub/dom-stub";
 
@@ -16,6 +17,7 @@ export const scene: DOMStubStory = domStub((resources) => {
   const scene = new PlayerSelect({
     resources,
     armDozerIds: PlayableArmdozers,
+    pilotIds: PlayablePilots,
   });
   return scene.getRootHTMLElement();
 });

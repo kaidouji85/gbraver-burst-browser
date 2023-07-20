@@ -4,6 +4,7 @@ import { playerSelectConnector } from "../action-connector/player-select-connect
 import { MAX_LOADING_TIME } from "../dom-scene-binder/max-loading-time";
 import type { GameProps } from "../game-props";
 import { getPlayableArmdozers } from "../playable-amdozers";
+import { getPlayablePilots } from "../playable-pilots";
 import { loadFullResource } from "./load-full-resource";
 
 /**
@@ -28,6 +29,7 @@ export async function onCasualMatchStart(props: GameProps): Promise<void> {
   const scene = new PlayerSelect({
     resources: props.resources,
     armDozerIds: getPlayableArmdozers(props),
+    pilotIds: getPlayablePilots(props),
   });
   props.domSceneBinder.bind(scene, playerSelectConnector);
   await Promise.race([scene.waitUntilLoaded(), waitTime(MAX_LOADING_TIME)]);
