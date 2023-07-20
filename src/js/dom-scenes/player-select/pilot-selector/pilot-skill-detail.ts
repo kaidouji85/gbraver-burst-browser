@@ -1,4 +1,5 @@
 import type {
+  BatteryBoostSkill,
   BatteryEnchantmentSkill,
   BuffPowerSkill,
   DamageHalvedSkill,
@@ -15,16 +16,14 @@ export function pilotSkillDetail(skill: PilotSkill): string[] {
   switch (skill.type) {
     case "RecoverBatterySkill":
       return recoverBatterySkillDetail(skill);
-
     case "BuffPowerSkill":
       return buffPowerSkillDetail(skill);
-
     case "BatteryEnchantmentSkill":
       return batteryEnchantmentSkillDetail(skill);
-
     case "DamageHalvedSkill":
       return damageHalvedSkillDetail(skill);
-
+    case "BatteryBoostSkill":
+      return batteryBoostSkillDetail(skill);
     default:
       return [];
   }
@@ -70,5 +69,19 @@ function batteryEnchantmentSkillDetail(
 function damageHalvedSkillDetail(skill: DamageHalvedSkill): string[] {
   return [
     `${skill.duration}ターンだけ、全ての被ダメージを1/2にする。この効果は、0防御した時に無効となる。`,
+  ];
+}
+
+/**
+ * バッテリーブースト詳細
+ * @param skill スキル情報
+ * @return 説明文
+ */
+function batteryBoostSkillDetail(
+  skill: BatteryBoostSkill
+): string[] {
+  return [
+    `バッテリーを${skill.recoverBattery}回復する。`,
+    `ただし次の自分ターン開始時のバッテリー回復処理をスキップする。`
   ];
 }
