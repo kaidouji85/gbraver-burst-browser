@@ -8,8 +8,9 @@ import { PlayerSelectProps } from "../props";
  * @param armdozerId 変更したアームドーザID
  */
 export function onArmdozerChange(
-  props: Readonly<PlayerSelectProps>,
+  props: PlayerSelectProps,
   armdozerId: ArmDozerId,
 ): void {
+  props.armdozerId = armdozerId;
   props.armdozerBustShot.switch(armdozerId);
 }
