@@ -4,7 +4,7 @@ import { PlayerSelect } from "../src/js/dom-scenes/player-select";
 import { ArmdozerSelector } from "../src/js/dom-scenes/player-select/armdozer-selector";
 import { PilotSelector } from "../src/js/dom-scenes/player-select/pilot-selector";
 import { createPilotIcon } from "../src/js/dom-scenes/player-select/pilot-selector/create-pilot-icon";
-import { PlayableArmdozers } from "../src/js/dom-scenes/player-select/playable-amdozers";
+import { PlayableArmdozers } from "../src/js/game/playable-amdozers";
 import type { DOMStubStory } from "./stub/dom-stub";
 import { domStub } from "./stub/dom-stub";
 
