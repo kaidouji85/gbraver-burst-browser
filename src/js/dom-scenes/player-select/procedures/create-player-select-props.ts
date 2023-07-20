@@ -15,9 +15,9 @@ import { PlayerSelectProps } from "../props";
 /** 生成パラメータ */
 export type CreatePlayerSelectPropsParams = {
   /** ソース管理オブジェクト */
-  resources: Resources,
+  resources: Resources;
   /** プレイアブルなアームドーザのID */
-  armDozerIds: ArmDozerId[],
+  armDozerIds: ArmDozerId[];
 };
 
 /**
@@ -25,7 +25,9 @@ export type CreatePlayerSelectPropsParams = {
  * @param params パラメータ
  * @return 生成結果
  */
-export function createPlayerSelectProps(params: CreatePlayerSelectPropsParams): PlayerSelectProps {
+export function createPlayerSelectProps(
+  params: CreatePlayerSelectPropsParams,
+): PlayerSelectProps {
   const { resources, armDozerIds } = params;
   const pilotIds = [
     PilotIds.SHINYA,

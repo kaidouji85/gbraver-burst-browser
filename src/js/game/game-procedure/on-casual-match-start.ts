@@ -26,7 +26,7 @@ export async function onCasualMatchStart(props: GameProps): Promise<void> {
   };
   await props.fader.fadeOut();
   const scene = new PlayerSelect({
-    resources: props.resources, 
+    resources: props.resources,
     armDozerIds: getPlayableArmdozers(props),
   });
   props.domSceneBinder.bind(scene, playerSelectConnector);

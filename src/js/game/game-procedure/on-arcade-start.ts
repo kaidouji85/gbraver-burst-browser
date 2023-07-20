@@ -26,8 +26,8 @@ export async function onArcadeStart(props: GameProps): Promise<void> {
   };
   await props.fader.fadeOut();
   const scene = new PlayerSelect({
-    resources: props.resources, 
-    armDozerIds: getPlayableArmdozers(props)
+    resources: props.resources,
+    armDozerIds: getPlayableArmdozers(props),
   });
   props.domSceneBinder.bind(scene, playerSelectConnector);
   await Promise.race([scene.waitUntilLoaded(), waitTime(MAX_LOADING_TIME)]);

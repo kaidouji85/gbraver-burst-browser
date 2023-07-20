@@ -14,8 +14,8 @@ export default {
 
 export const scene: DOMStubStory = domStub((resources) => {
   const scene = new PlayerSelect({
-    resources, 
-    armDozerIds: PlayableArmdozers
+    resources,
+    armDozerIds: PlayableArmdozers,
   });
   return scene.getRootHTMLElement();
 });

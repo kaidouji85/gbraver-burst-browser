@@ -3,7 +3,10 @@ import { Observable, Unsubscribable } from "rxjs";
 import { DOMScene } from "../dom-scene";
 import { PlayerDecide } from "./player-decide";
 import { bindEventListeners } from "./procedures/bind-event-listeners";
-import { CreatePlayerSelectPropsParams, createPlayerSelectProps } from "./procedures/create-player-select-props";
+import {
+  createPlayerSelectProps,
+  CreatePlayerSelectPropsParams,
+} from "./procedures/create-player-select-props";
 import { waitUntilLoaded } from "./procedures/wait-until-loaded";
 import { PlayerSelectProps } from "./props";
 
