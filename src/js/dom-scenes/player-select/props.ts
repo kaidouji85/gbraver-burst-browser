@@ -1,4 +1,4 @@
-import type { ArmDozerId, PilotId } from "gbraver-burst-core";
+import { ArmDozerId, PilotId,  } from "gbraver-burst-core";
 import { Subject } from "rxjs";
 
 import { ArmdozerBustShotContainer } from "./armdozer-bust-shot";
@@ -7,7 +7,7 @@ import { PilotBustShotContainer } from "./pilot-bust-shot";
 import { PilotSelector } from "./pilot-selector";
 import { PlayerDecide } from "./player-decide";
 
-/** プレイヤーセレクトのプロパティ */
+/** プレイヤーセレクト画面のプロパティ */
 export type PlayerSelectProps = {
   /** ルートHTML要素 */
   root: HTMLElement;
