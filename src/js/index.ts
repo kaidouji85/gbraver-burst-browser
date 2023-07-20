@@ -26,6 +26,7 @@ declare let GBRAVER_BURST_AUTH0_AUDIENCE: string;
 declare let GBRAVER_BURST_CAN_PLAY_TUTORIAL_IN_DEVELOPMENT: string;
 declare let GBRAVER_BURST_SHOULD_LOAD_DEVELOPING_RESOURCE: string;
 declare let GBRAVER_BURST_CAN_PLAY_DEVELOPING_ARMDOZER: string;
+declare let GBRAVER_BURST_CAN_PLAY_DEVELOPING_PILOT: string;
 
 THREE.ColorManagement.enabled = false;
 
@@ -71,6 +72,7 @@ async function main(): Promise<void> {
       GBRAVER_BURST_SHOULD_LOAD_DEVELOPING_RESOURCE === "true",
     canPlayDevelopingArmdozer:
       GBRAVER_BURST_CAN_PLAY_DEVELOPING_ARMDOZER === "true",
+    canPlayDevelopingPilot: GBRAVER_BURST_CAN_PLAY_DEVELOPING_PILOT === "true",
   });
   await game.initialize();
 }

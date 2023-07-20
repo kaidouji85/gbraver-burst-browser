@@ -93,6 +93,8 @@ export interface GameProps {
   shouldLoadDevelopingResource: boolean;
   /** 開発中のアームドーザを選択できるか否かのフラグ、trueで選択できる */
   canPlayDevelopingArmdozer: boolean;
+  /** 開発中のパイロットを選択できるか否かのフラグ、trueで選択できる */
+  canPlayDevelopingPilot: boolean;
 }
 
 /** GamePropsジェネレータパラメータ */
@@ -123,6 +125,8 @@ export type GamePropsGeneratorParam = {
   shouldLoadDevelopingResource: boolean;
   /** 開発中のアームドーザを選択できるか否かのフラグ、trueで選択できる */
   canPlayDevelopingArmdozer: boolean;
+  /** 開発中のパイロットを選択できるか否かのフラグ、trueで選択できる */
+  canPlayDevelopingPilot: boolean;
 };
 
 /**
@@ -173,5 +177,6 @@ export function generateGameProps(param: GamePropsGeneratorParam): GameProps {
     canPlayTutorialInDevelopment: param.canPlayTutorialInDevelopment,
     shouldLoadDevelopingResource: param.shouldLoadDevelopingResource,
     canPlayDevelopingArmdozer: param.canPlayDevelopingArmdozer,
+    canPlayDevelopingPilot: param.canPlayDevelopingPilot,
   };
 }

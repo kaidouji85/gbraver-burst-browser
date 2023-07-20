@@ -60,7 +60,6 @@ export class PilotBustShotContainer {
    */
   switch(pilotId: PilotId): void {
     const target = this.#bustShots.find((v) => v.pilotId === pilotId);
-
     if (!target) {
       return;
     }
