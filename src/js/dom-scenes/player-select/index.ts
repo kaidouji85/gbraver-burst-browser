@@ -1,13 +1,17 @@
-import { ArmDozerId } from "gbraver-burst-core";
 import { Observable, Unsubscribable } from "rxjs";
 
-import { Resources } from "../../resource";
 import { DOMScene } from "../dom-scene";
 import { PlayerDecide } from "./player-decide";
 import { bindEventListeners } from "./procedures/bind-event-listeners";
-import { createPlayerSelectProps } from "./procedures/create-player-select-props";
+import {
+  createPlayerSelectProps,
+  CreatePlayerSelectPropsParams,
+} from "./procedures/create-player-select-props";
 import { waitUntilLoaded } from "./procedures/wait-until-loaded";
 import { PlayerSelectProps } from "./props";
+
+/** コンストラクタのパラメータ */
+type Params = CreatePlayerSelectPropsParams;
 
 /** プレイヤーセレクト */
 export class PlayerSelect implements DOMScene {
@@ -18,11 +22,10 @@ export class PlayerSelect implements DOMScene {
 
   /**
    * コンストラクタ
-   * @param resources リソース管理オブジェクト
-   * @param armDozerIds プレイアブルアームドーザ
+   * @param params パラメータ
    */
-  constructor(resources: Resources, armDozerIds: ArmDozerId[]) {
-    this.#props = createPlayerSelectProps(resources, armDozerIds);
+  constructor(params: Params) {
+    this.#props = createPlayerSelectProps(params);
     this.#unsubscribers = bindEventListeners(this.#props);
   }
 
