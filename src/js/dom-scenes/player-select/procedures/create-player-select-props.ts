@@ -12,16 +12,21 @@ import { PilotSelector } from "../pilot-selector";
 import { PlayerDecide } from "../player-decide";
 import { PlayerSelectProps } from "../props";
 
+/** 生成パラメータ */
+export type CreatePlayerSelectPropsParams = {
+  /** ソース管理オブジェクト */
+  resources: Resources,
+  /** プレイアブルなアームドーザのID */
+  armDozerIds: ArmDozerId[],
+};
+
 /**
  * プレイヤーセレクト画面プロパティを生成する
- * @param resources リソース管理オブジェクト
- * @param armDozerIds プレイアブルなアームドーザのID
+ * @param params パラメータ
  * @return 生成結果
  */
-export function createPlayerSelectProps(
-  resources: Resources,
-  armDozerIds: ArmDozerId[],
-): PlayerSelectProps {
+export function createPlayerSelectProps(params: CreatePlayerSelectPropsParams): PlayerSelectProps {
+  const { resources, armDozerIds } = params;
   const pilotIds = [
     PilotIds.SHINYA,
     PilotIds.TSUBASA,

@@ -22,7 +22,7 @@ export class PlayerSelect implements DOMScene {
    * @param armDozerIds プレイアブルアームドーザ
    */
   constructor(resources: Resources, armDozerIds: ArmDozerId[]) {
-    this.#props = createPlayerSelectProps(resources, armDozerIds);
+    this.#props = createPlayerSelectProps({resources, armDozerIds});
     this.#unsubscribers = bindEventListeners(this.#props);
   }
 
