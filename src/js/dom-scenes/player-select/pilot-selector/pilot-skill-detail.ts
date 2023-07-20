@@ -77,11 +77,9 @@ function damageHalvedSkillDetail(skill: DamageHalvedSkill): string[] {
  * @param skill スキル情報
  * @return 説明文
  */
-function batteryBoostSkillDetail(
-  skill: BatteryBoostSkill
-): string[] {
+function batteryBoostSkillDetail(skill: BatteryBoostSkill): string[] {
   return [
     `バッテリーを${skill.recoverBattery}回復する。`,
-    `ただし次の自分ターン開始時のバッテリー回復処理をスキップする。`
+    `ただし次の自分ターン開始時のバッテリー回復処理をスキップする。`,
   ];
 }

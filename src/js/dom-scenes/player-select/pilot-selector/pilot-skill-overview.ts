@@ -51,9 +51,7 @@ function buffPowerSkill(skill: BuffPowerSkill): string {
  * @param skill スキル情報
  * @return 説明文
  */
-function batteryEnchantmentSkill(
-  skill: BatteryEnchantmentSkill,
-): string {
+function batteryEnchantmentSkill(skill: BatteryEnchantmentSkill): string {
   return `自分が出したバッテリー+${skill.batteryEnchantment}`;
 }
 

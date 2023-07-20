@@ -21,9 +21,7 @@ export const DevelopingPlayablePilots: PilotId[] = [
  * @param props ゲームプロパティ
  * @return 取得結果
  */
-export function getPlayablePilots(
-  props: Readonly<GameProps>
-): PilotId[] {
+export function getPlayablePilots(props: Readonly<GameProps>): PilotId[] {
   return props.canPlayDevelopingPilot
     ? DevelopingPlayablePilots
     : PlayablePilots;
