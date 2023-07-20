@@ -20,7 +20,7 @@ import { PlayerSelectProps } from "../props";
  */
 export function createPlayerSelectProps(
   resources: Resources,
-  armDozerIds: ArmDozerId[]
+  armDozerIds: ArmDozerId[],
 ): PlayerSelectProps {
   const pilotIds = [
     PilotIds.SHINYA,

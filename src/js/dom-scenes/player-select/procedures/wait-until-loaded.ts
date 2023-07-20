@@ -6,7 +6,7 @@ import { PlayerSelectProps } from "../props";
  * @return 読み込み完了したら発火するPromise
  */
 export async function waitUntilLoaded(
-  props: Readonly<PlayerSelectProps>
+  props: Readonly<PlayerSelectProps>,
 ): Promise<void> {
   await Promise.all([
     props.armdozerBustShot.waitUntilLoaded(),

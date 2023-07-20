@@ -5,7 +5,7 @@ import { PlayerSelectProps } from "../props";
  * @param props シーンプロパティ
  */
 export function onArmdozerSelectorPrev(
-  props: Readonly<PlayerSelectProps>
+  props: Readonly<PlayerSelectProps>,
 ): void {
   props.prev.next();
 }

@@ -14,7 +14,7 @@ import { onPilotSelectorPrev } from "./on-pilot-selector-prev";
  * @return アンサブスクライバ
  */
 export function bindEventListeners(
-  props: Readonly<PlayerSelectProps>
+  props: Readonly<PlayerSelectProps>,
 ): Unsubscribable[] {
   return [
     props.armdozerSelector.notifyChanges().subscribe((v) => {

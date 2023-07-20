@@ -1,4 +1,4 @@
-import { ArmDozerId, PilotId,  } from "gbraver-burst-core";
+import { ArmDozerId, PilotId } from "gbraver-burst-core";
 import { Subject } from "rxjs";
 
 import { ArmdozerBustShotContainer } from "./armdozer-bust-shot";

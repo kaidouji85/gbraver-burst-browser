@@ -9,7 +9,7 @@ import { PlayerSelectProps } from "../props";
  */
 export function onPilotChange(
   props: PlayerSelectProps,
-  pilotId: PilotId
+  pilotId: PilotId,
 ): void {
   props.pilotId = pilotId;
   props.pilotBustShot.switch(pilotId);

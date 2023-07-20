@@ -9,7 +9,7 @@ import { PlayerSelectProps } from "../props";
  */
 export function onPilotDecided(
   props: PlayerSelectProps,
-  pilotId: PilotId
+  pilotId: PilotId,
 ): void {
   props.pilotId = pilotId;
   props.playerDecide.next({

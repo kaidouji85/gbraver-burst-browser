@@ -6,7 +6,7 @@ import { PlayerSelectProps } from "../props";
  * @return 処置が完了したら発火するPromise
  */
 export async function onPilotSelectorPrev(
-  props: Readonly<PlayerSelectProps>
+  props: Readonly<PlayerSelectProps>,
 ): Promise<void> {
   await props.pilotBustShot.exit();
   props.pilotBustShot.hidden();

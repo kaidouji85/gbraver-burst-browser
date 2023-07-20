@@ -10,7 +10,7 @@ import { PlayerSelectProps } from "../props";
  */
 export function onArmdozerDecided(
   props: PlayerSelectProps,
-  armdozerId: ArmDozerId
+  armdozerId: ArmDozerId,
 ): void {
   props.armdozerId = armdozerId;
   props.pilotId = getDedicatedPilot(props.armdozerId);
