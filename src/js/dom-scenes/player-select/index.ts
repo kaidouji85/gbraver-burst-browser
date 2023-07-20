@@ -165,8 +165,7 @@ export class PlayerSelect implements DOMScene {
 
   /**
    * リソース読み込みが完了するまで待つ
-   *
-   * @return 待機結果
+   * @return 読み込み完了したら発火するPromise
    */
   async waitUntilLoaded(): Promise<void> {
     await Promise.all([
