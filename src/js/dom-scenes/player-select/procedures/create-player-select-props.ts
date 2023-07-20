@@ -81,5 +81,7 @@ export function createPlayerSelectProps(
     pilotId,
     playerDecide,
     prev,
+    armDozerIds,
+    pilotIds,
   };
 }

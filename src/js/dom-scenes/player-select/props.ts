@@ -27,4 +27,8 @@ export type PlayerSelectProps = {
   playerDecide: Subject<PlayerDecide>;
   /** 戻るストリーム */
   prev: Subject<void>;
+  /** 本画面で選択可能なアームドーザのID */
+  readonly armDozerIds: ArmDozerId[];
+  /** 本画面で選択可能なパイロットのID */
+  readonly pilotIds: PilotId[];
 };

@@ -1,4 +1,4 @@
-import { ArmDozerId } from "gbraver-burst-core";
+import { ArmDozerId, PilotIds } from "gbraver-burst-core";
 
 import { getDedicatedPilot } from "../dedicated-pilot";
 import { PlayerSelectProps } from "../props";
@@ -13,7 +13,10 @@ export function onArmdozerDecided(
   armdozerId: ArmDozerId,
 ): void {
   props.armdozerId = armdozerId;
-  props.pilotId = getDedicatedPilot(props.armdozerId);
+  const dedicatedPilotId = getDedicatedPilot(props.armdozerId);
+  props.pilotId = props.pilotIds.includes(dedicatedPilotId)
+    ? dedicatedPilotId
+    : PilotIds.SHINYA;
   props.pilotBustShot.switch(props.pilotId);
   props.pilotSelector.show(props.pilotId);
   props.armdozerSelector.hidden();
