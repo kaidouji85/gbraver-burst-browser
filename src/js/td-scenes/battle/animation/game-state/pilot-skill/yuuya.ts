@@ -8,15 +8,13 @@ import { dolly, toInitial, track } from "../../td-camera";
 import type { PilotSkillAnimationParamX } from "./animation-param";
 
 /**
- * パイロットスキル ユウヤ アニメーションパラメータ
+ * パイロットスキル ユウヤ アニメーションパラメータ（型指定あり）
  * @template SKILL パイロットスキル
  */
 export type YuuyaAnimationParamX<SKILL extends PilotSkill> =
   PilotSkillAnimationParamX<SKILL, YuuyaHUD>;
 
-/**
- * パイロットスキル ユウヤ アニメーションパラメータ
- */
+/** パイロットスキル ユウヤ アニメーションパラメータ */
 export type YuuyaAnimationParam = YuuyaAnimationParamX<PilotSkill>;
 
 /**
