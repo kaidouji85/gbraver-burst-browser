@@ -3,7 +3,7 @@ import type { BatteryBoostSkill, PilotSkill } from "gbraver-burst-core";
 import { all } from "../../../../../animation/all";
 import { Animate } from "../../../../../animation/animate";
 import { delay, empty } from "../../../../../animation/delay";
-import { ShinyaHUD } from "../../../view/hud/pilot-objects/shinya";
+import { YuuyaHUD } from "../../../view/hud/pilot-objects/yuuya";
 import { dolly, toInitial, track } from "../../td-camera";
 import type { PilotSkillAnimationParamX } from "./animation-param";
 
@@ -12,7 +12,7 @@ import type { PilotSkillAnimationParamX } from "./animation-param";
  * @template SKILL パイロットスキル
  */
 export type YuuyaAnimationParamX<SKILL extends PilotSkill> =
-  PilotSkillAnimationParamX<SKILL, ShinyaHUD>;
+  PilotSkillAnimationParamX<SKILL, YuuyaHUD>;
 
 /**
  * パイロットスキル ユウヤ アニメーションパラメータ
