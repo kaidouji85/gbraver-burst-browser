@@ -3,7 +3,10 @@ import { Observable } from "rxjs";
 import * as THREE from "three";
 
 import type { GameObjectAction } from "../../../../../game-object/action/game-object-action";
-import { enemyYuuyaCutIn, playerYuuyaCutIn } from "../../../../../game-object/cut-in/yuuya";
+import {
+  enemyYuuyaCutIn,
+  playerYuuyaCutIn,
+} from "../../../../../game-object/cut-in/yuuya";
 import { YuuyaCutIn } from "../../../../../game-object/cut-in/yuuya/yuuya";
 import type { Resources } from "../../../../../resource";
 import type { HUDPilotObjects } from "./hud-pilot-objects";
