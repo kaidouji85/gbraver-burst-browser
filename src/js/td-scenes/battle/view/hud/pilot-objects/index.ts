@@ -9,10 +9,10 @@ import type { HUDPilotObjects } from "./hud-pilot-objects";
 import { enemyRaitoHUD, playerRaitoHUD } from "./raito";
 import { enemyShinyaHUD, playerShinyaHUD } from "./shinya";
 import { enemyTsubasaHUD, playerTsubasaHUD } from "./tsubasa";
+import { enemyYuuyaHUD, playerYuuyaHUD } from "./yuuya";
 
 /**
  * プレイヤー側 HUDパイロット
- *
  * @param resources リソース管理オブジェクト
  * @param gameObjectAction ゲームオブジェクトアクション
  * @param state プレイヤー状態
@@ -26,16 +26,14 @@ export function playerHUDPilotObjects(
   switch (state.pilot.id) {
     case PilotIds.SHINYA:
       return playerShinyaHUD(resources, gameObjectAction, state);
-
     case PilotIds.GAI:
       return playerGaiHUD(resources, gameObjectAction, state);
-
     case PilotIds.RAITO:
       return playerRaitoHUD(resources, gameObjectAction, state);
-
     case PilotIds.TSUBASA:
       return playerTsubasaHUD(resources, gameObjectAction, state);
-
+    case PilotIds.YUUYA:
+      return playerYuuyaHUD(resources, gameObjectAction, state);
     default:
       return playerShinyaHUD(resources, gameObjectAction, state);
   }
@@ -43,7 +41,6 @@ export function playerHUDPilotObjects(
 
 /**
  * 敵側 HUDパイロット
- *
  * @param resources リソース管理オブジェクト
  * @param gameObjectAction ゲームオブジェクトアクション
  * @param state プレイヤー状態
@@ -57,16 +54,14 @@ export function enemyHUDPilotObjects(
   switch (state.pilot.id) {
     case PilotIds.SHINYA:
       return enemyShinyaHUD(resources, gameObjectAction, state);
-
     case PilotIds.GAI:
       return enemyGaiHUD(resources, gameObjectAction, state);
-
     case PilotIds.RAITO:
       return enemyRaitoHUD(resources, gameObjectAction, state);
-
     case PilotIds.TSUBASA:
       return enemyTsubasaHUD(resources, gameObjectAction, state);
-
+    case PilotIds.YUUYA:
+      return enemyYuuyaHUD(resources, gameObjectAction, state);
     default:
       return enemyShinyaHUD(resources, gameObjectAction, state);
   }
