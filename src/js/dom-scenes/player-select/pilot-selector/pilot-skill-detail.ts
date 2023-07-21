@@ -80,6 +80,6 @@ function damageHalvedSkillDetail(skill: DamageHalvedSkill): string[] {
 function batteryBoostSkillDetail(skill: BatteryBoostSkill): string[] {
   return [
     `バッテリーを${skill.recoverBattery}回復する。`,
-    `ただし次の自分ターン開始時のバッテリー回復処理をスキップする。`,
+    `ただし次の自分ターン開始時にはバッテリーが回復しない。`,
   ];
 }
