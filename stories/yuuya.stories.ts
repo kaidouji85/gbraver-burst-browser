@@ -31,18 +31,17 @@ type CutInGenerator = (
  * @param fn カットイン操作関数
  * @return ルートHTML要素
  */
-const cutInStory = (
-  generator: CutInGenerator,
-  fn: (cutIn: YuuyaCutIn) => void,
-) => (): HTMLElement => {
-  const stub = new HUDGameObjectStub(({ resources, gameObjectAction }) => {
-    const cutIn = generator(resources, gameObjectAction);
-    fn(cutIn);
-    return [cutIn.getObject3D()];
-  });
-  stub.start();
-  return stub.domElement();
-};
+const cutInStory =
+  (generator: CutInGenerator, fn: (cutIn: YuuyaCutIn) => void) =>
+  (): HTMLElement => {
+    const stub = new HUDGameObjectStub(({ resources, gameObjectAction }) => {
+      const cutIn = generator(resources, gameObjectAction);
+      fn(cutIn);
+      return [cutIn.getObject3D()];
+    });
+    stub.start();
+    return stub.domElement();
+  };
 
 /**
  * カットインを表示する

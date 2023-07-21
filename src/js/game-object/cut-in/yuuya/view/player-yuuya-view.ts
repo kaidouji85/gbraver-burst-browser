@@ -27,9 +27,9 @@ export class PlayerYuuyaView implements YuuyaView {
    * @param resources リソース管理オブジェクト
    */
   constructor(resources: Resources) {
-    const texture = resources.textures.find(
-      (v) => v.id === TEXTURE_IDS.YUUYA_CUTIN,
-    )?.texture ?? new THREE.Texture();
+    const texture =
+      resources.textures.find((v) => v.id === TEXTURE_IDS.YUUYA_CUTIN)
+        ?.texture ?? new THREE.Texture();
     this.#mesh = new HorizontalAnimationMesh({
       texture: texture,
       maxAnimation: MAX_ANIMATION,
