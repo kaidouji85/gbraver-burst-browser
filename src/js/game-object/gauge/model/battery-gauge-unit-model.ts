@@ -2,7 +2,7 @@
 export type BatteryGaugeUnitProps = {
   /** 輝度 */
   brightness: number;
-  /** 透明度 */
+  /** 不透明度 */
   opacity: number;
 };
 

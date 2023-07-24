@@ -47,7 +47,7 @@ type Ret = {
 async function onZeroDefense(
   props: Readonly<CustomBattleEventProps>,
   state: BatterySystemTutorialState,
-  player: PlayerState
+  player: PlayerState,
 ): Promise<Ret> {
   const isZeroBattery = player.armdozer.battery === 0;
   const enableBurst = player.armdozer.enableBurst;
@@ -89,6 +89,7 @@ async function onZeroDefense(
     };
   }
 
+  props.view.hud.gameObjects.batterySelector.toBatterySilently(1);
   await cancelZeroBatteryDefense(props);
   refreshConversation(props);
   if (isBatterySelecterFocused(props)) {
@@ -112,11 +113,11 @@ async function onZeroDefense(
  */
 export async function onBatteryCommandSelected(
   props: Readonly<BatteryCommandSelected>,
-  state: BatterySystemTutorialState
+  state: BatterySystemTutorialState,
 ): Promise<Ret> {
   const foundLastState = props.stateHistory[props.stateHistory.length - 1];
   const foundPlayer = (foundLastState?.players ?? []).find(
-    (v) => v.playerId === props.playerId
+    (v) => v.playerId === props.playerId,
   );
   const isZeroBatteryCommand = props.battery.battery === 0;
   if (isZeroBatteryCommand && foundLastState && foundPlayer) {

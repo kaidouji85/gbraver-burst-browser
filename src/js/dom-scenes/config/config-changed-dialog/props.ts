@@ -52,7 +52,7 @@ export type ConfigChangedDialogProps = {
  * @return 生成したダイアログプロパティ
  */
 export function createConfigChangedDialogProps(
-  resources: Resources
+  resources: Resources,
 ): ConfigChangedDialogProps {
   const ids = {
     backGround: domUuid(),

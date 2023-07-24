@@ -44,7 +44,7 @@ export type PrivateMatchGuestDialogProps = {
  * @return 生成結果
  */
 export function createPrivateMatchGuestDialogProps(
-  resources: Resources
+  resources: Resources,
 ): PrivateMatchGuestDialogProps {
   const root = document.createElement("div");
   root.className = ROOT_CLASS;

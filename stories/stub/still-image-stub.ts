@@ -70,7 +70,7 @@ export type Object3DsGeneratorParams = {
  * @return スタブに追加するオブジェクト群
  */
 export type Object3DsGenerator = (
-  params: Object3DsGeneratorParams
+  params: Object3DsGeneratorParams,
 ) => Object3Ds;
 
 /** スタブのパラメータ */

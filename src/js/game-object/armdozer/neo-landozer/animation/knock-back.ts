@@ -16,17 +16,17 @@ export function knockBack(model: NeoLandozerModel): Animate {
       {
         x: "+20",
       },
-      100
-    )
+      100,
+    ),
   ).chain(
     tween(model.position, (t) =>
       t.to(
         {
           x: "-20",
         },
-        100
-      )
-    )
+        100,
+      ),
+    ),
   );
   return empty().chain(all(motion, position));
 }

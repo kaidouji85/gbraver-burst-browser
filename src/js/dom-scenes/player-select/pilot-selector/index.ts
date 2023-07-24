@@ -106,7 +106,7 @@ export class PilotSelector {
   constructor(
     resources: Resources,
     pilotIds: PilotId[],
-    initialPilotId: PilotId
+    initialPilotId: PilotId,
   ) {
     this.#pilotId = initialPilotId;
     this.#exclusive = new Exclusive();
@@ -146,7 +146,7 @@ export class PilotSelector {
       ...this.#pilotIcons.map((v) =>
         v.icon.notifySelection().subscribe(() => {
           this.#onPilotChange(v.pilotId);
-        })
+        }),
       ),
       domPushStream(this.#okButton).subscribe((action) => {
         this.#onOkButtonPush(action);
@@ -168,17 +168,15 @@ export class PilotSelector {
 
   /**
    * 本コンポネントを表示する
-   *
-   * @@aram pilotId 選択するパイロットID
+   * @param pilotId 選択するパイロットID
    */
-  show(pilotId?: PilotId): void {
-    this.#root.className = ROOT_CLASS_NAME;
+  show(pilotId: PilotId): void {
     const selected = this.#pilotIcons.find((v) => v.pilotId === pilotId);
-
-    if (!pilotId || !selected) {
+    if (!selected) {
       return;
     }
 
+    this.#root.className = ROOT_CLASS_NAME;
     this.#pilotId = pilotId;
     selected.icon.selected(true);
     this.#pilotStatus.switch(pilotId);

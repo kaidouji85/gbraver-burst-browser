@@ -13,7 +13,7 @@ import { LightningDozerSounds } from "../sounds/lightning-dozer-sounds";
  */
 export function knockBackToStand(
   model: LightningDozerModel,
-  sounds: LightningDozerSounds
+  sounds: LightningDozerSounds,
 ): Animate {
   return process(() => {
     model.animation.type = "KNOCK_BACK";
@@ -26,14 +26,14 @@ export function knockBackToStand(
           {
             frame: 0,
           },
-          300
-        )
-      )
+          300,
+        ),
+      ),
     )
     .chain(
       process(() => {
         model.animation.type = "STAND";
         model.animation.frame = 0;
-      })
+      }),
     );
 }

@@ -13,12 +13,12 @@ import { startOnlineBattle } from "./start-online-battle";
  */
 export async function onPrivateMatchEntry(
   props: GameProps,
-  action: PrivateMatchEntry
+  action: PrivateMatchEntry,
 ): Promise<void> {
   if (
     !(
       props.inProgress.type === "PrivateMatchGuest" &&
-      props.inProgress.subFlow.type === "Entry"
+      props.inProgress.privateMatchGuest.type === "Entry"
     )
   ) {
     return;
@@ -26,23 +26,23 @@ export async function onPrivateMatchEntry(
 
   props.domDialogBinder.bind(
     new MatchingDialog(props.resources),
-    matchingDialogConnector
+    matchingDialogConnector,
   );
   await props.api.disconnectWebsocket();
-  const { armdozerId, pilotId } = props.inProgress.subFlow;
+  const { armdozerId, pilotId } = props.inProgress.privateMatchGuest;
   const battle = await props.api.enterPrivateMatchRoom(
     action.roomID,
     armdozerId,
-    pilotId
+    pilotId,
   );
   if (!battle) {
     props.domDialogBinder.bind(
       new RejectPrivateMatchEntryDialog(props.resources),
-      rejectPrivateMatcEntryDialogConnector
+      rejectPrivateMatcEntryDialogConnector,
     );
     return;
   }
 
-  props.inProgress.subFlow = { type: "Battle" };
+  props.inProgress.privateMatchGuest = { type: "Battle" };
   await startOnlineBattle(props, battle, "PRIVATE MATCH");
 }

@@ -21,7 +21,7 @@ import type { TutorialStage } from "../tutorial-stages/tutorial-stage";
 export async function startTutorial(
   props: Readonly<GameProps>,
   level: number,
-  stage: TutorialStage
+  stage: TutorialStage,
 ): Promise<void> {
   const npcBattle = new NPCBattleRoom(stage.player, stage.npc);
   await Promise.all([

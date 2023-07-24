@@ -17,20 +17,20 @@ import { GameProps } from "../game-props";
  */
 export async function waitUntilPrivateMatchingAsHost(
   props: Readonly<GameProps>,
-  action: SelectionComplete
+  action: SelectionComplete,
 ): Promise<BattleSDK> {
   try {
     props.domDialogBinder.bind(
       new WaitingDialog("ルーム作成中......"),
-      waitingDialogConnector
+      waitingDialogConnector,
     );
     const room = await props.api.createPrivateMatchRoom(
       action.armdozerId,
-      action.pilotId
+      action.pilotId,
     );
     props.domDialogBinder.bind(
       new PrivateMatchHostDialog(props.resources, room.roomID),
-      privateMatchHostDialogConnector
+      privateMatchHostDialogConnector,
     );
     return await room.waitUntilMatching();
   } catch (e) {
@@ -38,7 +38,7 @@ export async function waitUntilPrivateMatchingAsHost(
       new NetworkErrorDialog(props.resources, {
         type: "GotoTitle",
       }),
-      networkErrorDialogConnector
+      networkErrorDialogConnector,
     );
     throw e;
   }

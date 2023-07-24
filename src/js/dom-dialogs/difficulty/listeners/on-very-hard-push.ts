@@ -10,7 +10,7 @@ import type { DifficultyDialogProps } from "../props";
  */
 export function onVeryHardPush(
   props: DifficultyDialogProps,
-  action: PushDOM
+  action: PushDOM,
 ): void {
   action.event.preventDefault();
   action.event.stopPropagation();

@@ -8,7 +8,7 @@ import { BatterySelectorProps } from "../props";
  */
 export function onUpdate(
   props: Readonly<BatterySelectorProps>,
-  action: Update
+  action: Update,
 ): void {
   props.batteryMinusTween.update(action.time);
   props.batteryPlusTween.update(action.time);

@@ -5,7 +5,7 @@ import { BattleAnimationTimeScale } from "../browser-config";
 /** 戦闘アニメタイムスケール zod schema */
 export const BattleAnimationTimeScaleSchema = z.preprocess(
   Number,
-  z.union([z.literal(1), z.literal(0.5), z.literal(0.25)])
+  z.union([z.literal(1), z.literal(0.5), z.literal(0.25)]),
 );
 
 /**
@@ -16,7 +16,7 @@ export const BattleAnimationTimeScaleSchema = z.preprocess(
  * @return パース結果
  */
 export function parseBattleAnimationTimeScale(
-  origin: unknown
+  origin: unknown,
 ): BattleAnimationTimeScale | null {
   const result = BattleAnimationTimeScaleSchema.safeParse(origin);
   return result.success ? result.data : null;

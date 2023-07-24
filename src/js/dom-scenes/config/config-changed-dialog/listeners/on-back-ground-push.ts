@@ -9,7 +9,7 @@ import type { ConfigChangedDialogProps } from "../props";
  */
 export function onBackGroundPush(
   props: ConfigChangedDialogProps,
-  action: Readonly<PushDOM>
+  action: Readonly<PushDOM>,
 ): void {
   action.event.preventDefault();
   action.event.stopPropagation();

@@ -74,7 +74,7 @@ export type ConfigProps = {
  */
 export function createConfigProps(
   resources: Resources,
-  config: GbraverBurstBrowserConfig
+  config: GbraverBurstBrowserConfig,
 ): ConfigProps {
   const ids = {
     battleAnimationTimeScaleSelector: domUuid(),

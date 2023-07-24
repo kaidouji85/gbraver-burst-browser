@@ -13,14 +13,14 @@ import type { SkyBrightnessModel } from "../model/sky-brightness-model";
 export function brightness(
   model: SkyBrightnessModel,
   value: number,
-  duration: number
+  duration: number,
 ): Animate {
   return tween(model, (t) =>
     t.to(
       {
         brightness: value,
       },
-      duration
-    )
+      duration,
+    ),
   );
 }

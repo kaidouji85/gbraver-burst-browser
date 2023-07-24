@@ -16,8 +16,8 @@ export function shinBraverWin(param: GameOverParamX<ShinBraverTD>): Animate {
     track(
       param.tdCamera,
       param.winnerTdArmdozer.shinBraver.getObject3D().position.x,
-      800
+      800,
     ),
-    dolly(param.tdCamera, "-60", 800)
+    dolly(param.tdCamera, "-60", 800),
   );
 }

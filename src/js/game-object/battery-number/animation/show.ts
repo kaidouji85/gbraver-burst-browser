@@ -22,8 +22,8 @@ export function show(model: BatteryNumberModel, battery: number): Animate {
           opacity: 1,
           scale: 1,
         },
-        300
-      )
-    )
+        300,
+      ),
+    ),
   );
 }

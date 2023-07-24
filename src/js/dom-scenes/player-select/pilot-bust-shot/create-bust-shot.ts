@@ -19,7 +19,7 @@ const ROOT_CLASS_NAME = "pilot-bust-shot";
  */
 export function createPilotBustShot(
   resources: Resources,
-  pilotId: PilotId
+  pilotId: PilotId,
 ): PilotBustShot {
   switch (pilotId) {
     case PilotIds.SHINYA:

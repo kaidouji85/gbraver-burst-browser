@@ -7,7 +7,7 @@ type Connector = DomDialogActionConnector<NetBattleSelectorDialog>;
 /** ネットバトルセレクターダイアログとゲームアクションを関連付ける */
 export const netBattleSelectorDialogConnector: Connector = (
   dialog,
-  gameAction
+  gameAction,
 ) => [
   dialog.notifyCasualMatchSelection().subscribe(() => {
     gameAction.next({ type: "CasualMatchStart" });

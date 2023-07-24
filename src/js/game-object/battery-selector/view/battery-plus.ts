@@ -32,7 +32,7 @@ export class BatteryPlus {
   constructor(param: Param) {
     const active =
       param.resources.canvasImages.find(
-        (v) => v.id === CANVAS_IMAGE_IDS.BATTERY_PLUS
+        (v) => v.id === CANVAS_IMAGE_IDS.BATTERY_PLUS,
       )?.image ?? new Image();
     this.#activeButton = new SimpleImageMesh({
       canvasSize: 256,
@@ -42,7 +42,7 @@ export class BatteryPlus {
     });
     const buttonDisabled =
       param.resources.canvasImages.find(
-        (v) => v.id === CANVAS_IMAGE_IDS.SMALL_BUTTON_DISABLED
+        (v) => v.id === CANVAS_IMAGE_IDS.SMALL_BUTTON_DISABLED,
       )?.image ?? new Image();
     this.#buttonDisabled = new SimpleImageMesh({
       canvasSize: 256,
@@ -79,7 +79,7 @@ export class BatteryPlus {
       .scale.set(
         model.plusButtonScale,
         model.plusButtonScale,
-        model.plusButtonScale
+        model.plusButtonScale,
       );
     const isDisabledVisible = !canBatteryPlus(model);
     const disabledOpacity = isDisabledVisible ? model.opacity : 0;
@@ -89,7 +89,7 @@ export class BatteryPlus {
       .scale.set(
         model.plusButtonScale,
         model.plusButtonScale,
-        model.plusButtonScale
+        model.plusButtonScale,
       );
   }
 

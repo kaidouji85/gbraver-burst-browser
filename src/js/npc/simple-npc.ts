@@ -54,7 +54,7 @@ export class SimpleNPC implements NPC {
     armdozer: Armdozer,
     pilot: Pilot,
     attackRoutine: SimpleRoutine,
-    defenseRoutine: SimpleRoutine
+    defenseRoutine: SimpleRoutine,
   ) {
     this.armdozer = armdozer;
     this.pilot = pilot;
@@ -75,7 +75,7 @@ export class SimpleNPC implements NPC {
     }
 
     const enableCommand = lastState.effect.players.find(
-      (v) => v.playerId === enemyId
+      (v) => v.playerId === enemyId,
     );
     const enemy = lastState.players.find((v) => v.playerId === enemyId);
     const player = lastState.players.find((v) => v.playerId !== enemyId);

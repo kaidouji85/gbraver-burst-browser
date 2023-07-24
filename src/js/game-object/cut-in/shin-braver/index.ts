@@ -15,7 +15,7 @@ import { PlayerShinBraverCutInView } from "./view/player-shin-braver-cutin-view"
  */
 export function playerShinBraverCutIn(
   resources: Resources,
-  gameObjectAction: Observable<GameObjectAction>
+  gameObjectAction: Observable<GameObjectAction>,
 ): ShinBraverCutIn {
   const view = new PlayerShinBraverCutInView(resources);
   return new ShinBraverCutIn(view, gameObjectAction);
@@ -30,7 +30,7 @@ export function playerShinBraverCutIn(
  */
 export function enemyShinBraverCutIn(
   resources: Resources,
-  gameObjectAction: Observable<GameObjectAction>
+  gameObjectAction: Observable<GameObjectAction>,
 ): ShinBraverCutIn {
   const view = new EnemyShinBraverCutInView(resources);
   return new ShinBraverCutIn(view, gameObjectAction);

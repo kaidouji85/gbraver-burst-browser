@@ -9,7 +9,7 @@ import { scrollRightMessages } from "../../scroll-messages";
  * @return ストーリーが完了したら発火するPromise
  */
 export async function lessThanAttack3(
-  props: Readonly<CustomBattleEventProps>
+  props: Readonly<CustomBattleEventProps>,
 ): Promise<void> {
   activeRightMessageWindowWithFace(props, "Gai");
   await scrollRightMessages(props, [

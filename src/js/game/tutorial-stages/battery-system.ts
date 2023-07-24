@@ -10,6 +10,7 @@ import { TutorialStageIDs } from "./tutorial-stage-ids";
 /** バッテリーチュートリアル */
 export const batterySystemTutorial: TutorialStage = {
   id: TutorialStageIDs.BATTERY_SYSTEM,
+  type: "Beginner",
   title: ["バッテリーシステムの基本"],
   player: {
     playerId: playerUuid(),

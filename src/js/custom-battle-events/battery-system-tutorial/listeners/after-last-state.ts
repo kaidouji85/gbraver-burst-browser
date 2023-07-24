@@ -20,7 +20,7 @@ import { victory } from "../stories/victory";
  */
 export async function afterLastState(
   props: Readonly<LastState>,
-  state: BatterySystemTutorialState
+  state: BatterySystemTutorialState,
 ): Promise<BatterySystemTutorialState> {
   const extractedGameEnd = extractGameEnd(props.update);
 

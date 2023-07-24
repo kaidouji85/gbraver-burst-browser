@@ -1,36 +1,23 @@
-import * as THREE from "three";
-
 import type { Resources } from "../../../../resource";
 import { TEXTURE_IDS } from "../../../../resource/texture/ids";
-import type { ArmdozerAnimation } from "../../mesh/armdozer-animation";
-import { createHorizontalAnimation } from "../../mesh/horizontal-animation";
-import { MESH_Y } from "./position";
+import { AnimationMesh } from "./animation-mesh";
+import { createAnimationMeshes } from "./create-animation-meshes";
 
-export const MESH_WIDTH = 600;
-export const MESH_HEIGHT = 600;
+/** テクスチャID */
+export const TEXTURE_ID = TEXTURE_IDS.LIGHTNING_DOZER_HM_ATTACK;
+/** アニメーション枚数 */
 export const MAX_ANIMATION = 4;
 
 /**
- * ライトニングドーザ アームハンマー 攻撃
- *
+ * アームハンマー攻撃 メッシュ群を生成
  * @param resources リソース管理オブジェクト
- * @return メッシュ
+ * @return 生成結果
  */
-export function lightningDozerHmAttack(
-  resources: Resources
-): ArmdozerAnimation {
-  const texture =
-    resources.textures.find(
-      (v) => v.id === TEXTURE_IDS.LIGHTNING_DOZER_HM_ATTACK
-    )?.texture ?? new THREE.Texture();
-  const ret = createHorizontalAnimation({
-    texture,
+export function hmAttack(resources: Resources): AnimationMesh[] {
+  return createAnimationMeshes({
+    resources,
+    animationType: "HM_ATTACK",
+    textureId: TEXTURE_ID,
     maxAnimation: MAX_ANIMATION,
-    width: MESH_WIDTH,
-    height: MESH_HEIGHT,
   });
-  const object = ret.getObject3D();
-  object.position.y = MESH_Y;
-  object.position.z = 1;
-  return ret;
 }

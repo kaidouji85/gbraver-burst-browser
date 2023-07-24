@@ -9,7 +9,7 @@ import { PilotButtonProps } from "../props";
  */
 export function engage(
   props: Readonly<PilotButtonProps>,
-  config: PilotButtonConfig
+  config: PilotButtonConfig,
 ): void {
   props.root.className = [
     PILOT,

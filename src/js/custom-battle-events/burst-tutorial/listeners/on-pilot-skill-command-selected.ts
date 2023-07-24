@@ -21,7 +21,7 @@ type Ret = {
  */
 export async function onPilotSkillCommandSelected(
   props: Readonly<PilotSkillCommandSelected>,
-  state: BurstTutorialState
+  state: BurstTutorialState,
 ): Promise<Ret> {
   if (isPilotButtonFocused(props)) {
     focusOutPilotButton(props);

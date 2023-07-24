@@ -1,4 +1,4 @@
-import TWEEN, { Group } from "@tweenjs/tween.js";
+import * as TWEEN from "@tweenjs/tween.js";
 import { Observable, Unsubscribable } from "rxjs";
 import * as THREE from "three";
 
@@ -23,7 +23,7 @@ export class LightningBarrierGameEffect {
   #model: LightningBarrierModel;
   #view: LightningBarrierView;
   #sounds: LightningBarrierSounds;
-  #tweenGroup: Group;
+  #tweenGroup: TWEEN.Group;
   #unsubscribers: Unsubscribable[];
 
   /**
@@ -34,7 +34,7 @@ export class LightningBarrierGameEffect {
    */
   constructor(
     resources: Resources,
-    gameObjectAction: Observable<GameObjectAction>
+    gameObjectAction: Observable<GameObjectAction>,
   ) {
     this.#model = createInitialValue();
     this.#view = new LightningBarrierView(resources);

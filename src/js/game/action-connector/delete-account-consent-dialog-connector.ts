@@ -7,7 +7,7 @@ type Connector = DomDialogActionConnector<DeleteAccountConsentDialog>;
 /** アカウント削除同意ダイアログとゲームアクションを関連付ける */
 export const deleteAccountConsentDialogConnector: Connector = (
   dialog,
-  gameAction
+  gameAction,
 ) => [
   dialog.notifyAccountDeletion().subscribe(() => {
     gameAction.next({

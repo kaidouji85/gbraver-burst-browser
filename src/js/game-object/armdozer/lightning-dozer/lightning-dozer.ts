@@ -1,4 +1,4 @@
-import TWEEN, { Group } from "@tweenjs/tween.js";
+import * as TWEEN from "@tweenjs/tween.js";
 import { Observable, Unsubscribable } from "rxjs";
 import * as THREE from "three";
 
@@ -45,7 +45,7 @@ export class LightningDozer
   #sounds: LightningDozerSounds;
 
   /** アクティブフラッシュTweenグループ */
-  #activeFlashTween: Group;
+  #activeFlashTween: TWEEN.Group;
 
   /** アンサブスクライバ */
   #unsubscribers: Unsubscribable[];
@@ -59,7 +59,7 @@ export class LightningDozer
   constructor(
     resources: Resources,
     gameObjectAction: Observable<GameObjectAction>,
-    view: LightningDozerView
+    view: LightningDozerView,
   ) {
     super();
     this.#model = createInitialValue();

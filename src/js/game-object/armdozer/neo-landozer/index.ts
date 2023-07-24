@@ -15,7 +15,7 @@ import { PlayerNeoLandozerView } from "./view/player-neo-landozer-view";
  */
 export function PlayerNeoLandozer(
   resources: Resources,
-  gameObjectAction: Observable<GameObjectAction>
+  gameObjectAction: Observable<GameObjectAction>,
 ): NeoLandozer {
   const view = new PlayerNeoLandozerView(resources);
   return new NeoLandozer(view, resources, gameObjectAction);
@@ -30,7 +30,7 @@ export function PlayerNeoLandozer(
  */
 export function EnemyNeoLandozer(
   resources: Resources,
-  gameObjectAction: Observable<GameObjectAction>
+  gameObjectAction: Observable<GameObjectAction>,
 ): NeoLandozer {
   const view = new EnemyNeoLandozerView(resources);
   return new NeoLandozer(view, resources, gameObjectAction);

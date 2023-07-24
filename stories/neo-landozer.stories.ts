@@ -190,13 +190,30 @@ const armHammer = (sprite: NeoLandozer) => {
     .loop();
 };
 
+/**
+ * アクティブ アームハンマー
+ * @param sprite スプライト
+ */
+const activeArmHammer = (sprite: NeoLandozer) => {
+  armHammer(sprite);
+  sprite.startActive().play();
+};
+
 /** プレイヤー アームハンマー */
 export const playerArmHammer = () =>
   armdozerSpriteStub(PlayerNeoLandozer, armHammer);
 
+/** プレイヤー アクティブ アームハンマー */
+export const playerActiveArmHammer = () =>
+  armdozerSpriteStub(PlayerNeoLandozer, activeArmHammer);
+
 /** 敵 アームハンマー */
 export const enemyArmHammer = () =>
   armdozerSpriteStub(EnemyNeoLandozer, armHammer);
+
+/** 敵 アクティブ アームハンマー */
+export const enemyActiveAtmHammer = () =>
+  armdozerSpriteStub(EnemyNeoLandozer, activeArmHammer);
 
 /**
  * ダウン
@@ -206,8 +223,25 @@ const down = (sprite: NeoLandozer) => {
   delay(1000).chain(sprite.down()).chain(delay(1000)).loop();
 };
 
+/**
+ * アクティブ ダウン
+ * @param sprite スプライト
+ */
+const activeDown = (sprite: NeoLandozer) => {
+  down(sprite);
+  sprite.startActive().play();
+};
+
 /** プレイヤー ダウン */
 export const playerDown = () => armdozerSpriteStub(PlayerNeoLandozer, down);
 
+/** プレイヤー アクティブ ダウン */
+export const playerActiveDown = () =>
+  armdozerSpriteStub(PlayerNeoLandozer, activeDown);
+
 /** 敵 ダウン */
 export const enemyDown = () => armdozerSpriteStub(EnemyNeoLandozer, down);
+
+/** 敵 アクティブ ダウン */
+export const enemyActiveDown = () =>
+  armdozerSpriteStub(EnemyNeoLandozer, activeDown);

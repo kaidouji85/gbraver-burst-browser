@@ -14,7 +14,7 @@ export function invisible(model: TurnIndicatorModel): Animate {
       {
         opacity: 0,
       },
-      500
-    )
+      500,
+    ),
   );
 }

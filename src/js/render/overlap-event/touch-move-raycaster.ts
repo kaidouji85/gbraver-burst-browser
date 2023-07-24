@@ -19,7 +19,7 @@ export type TouchMoveRaycaster = {
 export function toTouchMoveRaycaster(
   origin: TouchMove,
   renderer: HTMLElement,
-  camera: THREE.Camera
+  camera: THREE.Camera,
 ): TouchMoveRaycaster {
   const touch = createTouchEventRaycaster(origin.event, renderer, camera);
   return {

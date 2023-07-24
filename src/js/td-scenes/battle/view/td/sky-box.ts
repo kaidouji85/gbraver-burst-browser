@@ -11,7 +11,7 @@ import { CUBE_TEXTURE_IDS } from "../../../../resource/cube-texture";
  */
 export function skyBox(resources: Resources): THREE.CubeTexture {
   const cubeTextureResource = resources.cubeTextures.find(
-    (v) => v.id === CUBE_TEXTURE_IDS.BlueSky
+    (v) => v.id === CUBE_TEXTURE_IDS.BlueSky,
   );
   const cubeTexture = cubeTextureResource
     ? cubeTextureResource.texture

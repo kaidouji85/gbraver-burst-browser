@@ -16,8 +16,8 @@ export function wingDozerWin(param: GameOverParamX<WingDozerTD>): Animate {
     track(
       param.tdCamera,
       param.winnerTdArmdozer.wingDozer.getObject3D().position.x,
-      800
+      800,
     ),
-    dolly(param.tdCamera, "-60", 800)
+    dolly(param.tdCamera, "-60", 800),
   );
 }

@@ -1,32 +1,23 @@
-import * as THREE from "three";
-
 import type { Resources } from "../../../../resource";
 import { TEXTURE_IDS } from "../../../../resource/texture/ids";
-import type { ArmdozerAnimation } from "../../mesh/armdozer-animation";
-import { createHorizontalAnimation } from "../../mesh/horizontal-animation";
-import { MESH_HEIGHT, MESH_WIDTH } from "./mesh-size";
-import { MESH_Y } from "./position";
+import { AnimationMesh } from "./animation-mesh";
+import { createAnimationMeshes } from "./create-animation-meshes";
+
+/** テクスチャID */
+export const TEXTURE_ID = TEXTURE_IDS.WING_DOZER_UPPER_TO_STAND;
+/** アニメーション枚数 */
 export const MAX_ANIMATION = 8;
 
 /**
- * ウィングドーザ アッパー -> 立ち
- *
+ * アッパー -> 立ち メッシュ群を生成
  * @param resources リソース管理オブジェクト
- * @return メッシュ
+ * @return 生成結果
  */
-export function wingDozerUpperToStand(resources: Resources): ArmdozerAnimation {
-  const texture =
-    resources.textures.find(
-      (v) => v.id === TEXTURE_IDS.WING_DOZER_UPPER_TO_STAND
-    )?.texture ?? new THREE.Texture();
-  const ret = createHorizontalAnimation({
-    texture,
+export function upperToStand(resources: Resources): AnimationMesh[] {
+  return createAnimationMeshes({
+    resources,
+    animationType: "UPPER_TO_STAND",
+    textureId: TEXTURE_ID,
     maxAnimation: MAX_ANIMATION,
-    width: MESH_WIDTH,
-    height: MESH_HEIGHT,
   });
-  const object = ret.getObject3D();
-  object.position.y = MESH_Y;
-  object.position.z = 1;
-  return ret;
 }

@@ -16,7 +16,7 @@ export class PilotButtonSounds {
    */
   constructor(resources: Resources) {
     const pushButtonResource = resources.sounds.find(
-      (v) => v.id === SOUND_IDS.PUSH_BUTTON
+      (v) => v.id === SOUND_IDS.PUSH_BUTTON,
     );
     this.pushButton = pushButtonResource?.sound ?? new Howl({ src: "" });
   }

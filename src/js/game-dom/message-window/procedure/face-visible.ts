@@ -8,7 +8,7 @@ import { getTargetFaceGraphic } from "./get-target-face-graphic";
  */
 export function faceVisible(
   props: Readonly<MessageWindowProps>,
-  isVisible: boolean
+  isVisible: boolean,
 ): void {
   const target = getTargetFaceGraphic(props);
   target.visible(isVisible);

@@ -13,14 +13,14 @@ import type { IlluminationModel } from "../model/illumination-model";
 export function intensity(
   model: IlluminationModel,
   value: number,
-  duration: number
+  duration: number,
 ): Animate {
   return tween(model, (t) =>
     t.to(
       {
         intensity: value,
       },
-      duration
-    )
+      duration,
+    ),
   );
 }

@@ -15,17 +15,16 @@ import { ThreeDimensionLayer } from "../td";
 
 /**
  * ゲージをトラッキングする
- *
  * @param td 3Dレイヤー
  * @param hud HUDレイヤー
  * @param activePlayerId アクティブプレイヤーID
  * @param rendererDOM レンダラDOM
  */
 export function trackingGauges(
-  td: ThreeDimensionLayer,
-  hud: HudLayer,
-  activePlayerId: PlayerId,
-  rendererDOM: HTMLElement
+  td: Readonly<ThreeDimensionLayer>,
+  hud: Readonly<HudLayer>,
+  activePlayerId: Readonly<PlayerId>,
+  rendererDOM: Readonly<HTMLElement>,
 ): void {
   hud.players.forEach((hudPlayer) => {
     const isActivePlayer = hudPlayer.playerId === activePlayerId;
@@ -45,7 +44,7 @@ export function trackingGauges(
  * @param hudPlayer HUDプレイヤーオブジェクト
  * @return 取得結果
  */
-function getTracksFromHUDPlayer(hudPlayer: HUDPlayer): HUDTracking[] {
+function getTracksFromHUDPlayer(hudPlayer: Readonly<HUDPlayer>): HUDTracking[] {
   return [hudPlayer.gauge];
 }
 
@@ -57,8 +56,8 @@ function getTracksFromHUDPlayer(hudPlayer: HUDPlayer): HUDTracking[] {
  * @return 変換結果
  */
 function toPlayerGaugeHUDPos(
-  tdCamera: THREE.PerspectiveCamera,
-  rendererDOM: HTMLElement
+  tdCamera: Readonly<THREE.PerspectiveCamera>,
+  rendererDOM: Readonly<HTMLElement>,
 ): Coordinate {
   const tdCoordinate = {
     x: ARMDOZER_EFFECT_STANDARD_X,
@@ -76,8 +75,8 @@ function toPlayerGaugeHUDPos(
  * @return 変換結果
  */
 function toEnemyGaugeHUDPos(
-  tdCamera: THREE.PerspectiveCamera,
-  rendererDOM: HTMLElement
+  tdCamera: Readonly<THREE.PerspectiveCamera>,
+  rendererDOM: Readonly<HTMLElement>,
 ): Coordinate {
   const tdCoordinate = {
     x: -ARMDOZER_EFFECT_STANDARD_X,

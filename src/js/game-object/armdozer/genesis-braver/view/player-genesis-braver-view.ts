@@ -1,20 +1,17 @@
 import * as THREE from "three";
 
 import type { Resources } from "../../../../resource";
+import { createAllMeshes } from "../mesh";
+import { AnimationMesh } from "../mesh/animation-mesh";
 import type { GenesisBraverModel } from "../model/genesis-braver-model";
-import { createActiveMeshes } from "./active-meshes";
-import type { AnimationMeshMapping } from "./animation-mesh-mapping";
 import type { GenesisBraverView } from "./genesis-braver-view";
-import { createMeshes } from "./meshes";
 
 /** プレイヤー ジェネシスブレイバービュー */
 export class PlayerGenesisBraverView implements GenesisBraverView {
-  /** メッシュ */
-  #meshes: AnimationMeshMapping[];
-  /** アクティブメッシュ */
-  #activeMeshes: AnimationMeshMapping[];
   /** グループ */
   #group: THREE.Group;
+  /** メッシュ */
+  #meshes: AnimationMesh[];
 
   /**
    * コンストラクタ
@@ -22,12 +19,8 @@ export class PlayerGenesisBraverView implements GenesisBraverView {
    */
   constructor(resources: Resources) {
     this.#group = new THREE.Group();
-    this.#meshes = createMeshes(resources);
-    this.#activeMeshes = createActiveMeshes(resources);
+    this.#meshes = createAllMeshes(resources);
     this.#meshes.forEach(({ mesh }) => {
-      this.#group.add(mesh.getObject3D());
-    });
-    this.#activeMeshes.forEach(({ mesh }) => {
       this.#group.add(mesh.getObject3D());
     });
   }
@@ -35,9 +28,6 @@ export class PlayerGenesisBraverView implements GenesisBraverView {
   /** @override */
   destructor() {
     this.#meshes.forEach(({ mesh }) => {
-      mesh.destructor();
-    });
-    this.#activeMeshes.forEach(({ mesh }) => {
       mesh.destructor();
     });
   }
@@ -52,27 +42,37 @@ export class PlayerGenesisBraverView implements GenesisBraverView {
     this.#group.position.x = model.position.x;
     this.#group.position.y = model.position.y;
     this.#group.position.z = model.position.z;
-    const currentMesh = this.#meshes.find(
-      (v) => v.type === model.animation.type
+
+    const currentStandardMesh = this.#meshes.find(
+      (v) =>
+        v.meshType === "STANDARD" && v.animationType === model.animation.type,
     );
-    if (currentMesh) {
-      currentMesh.mesh.opacity(1);
-      currentMesh.mesh.animate(model.animation.frame);
+    if (currentStandardMesh) {
+      currentStandardMesh.mesh.opacity(1);
+      currentStandardMesh.mesh.animate(model.animation.frame);
+      const colorStrength =
+        1 - (0.2 + model.active.strength * 0.1) * model.active.opacity;
+      currentStandardMesh.mesh.color(
+        colorStrength,
+        colorStrength,
+        colorStrength,
+      );
     }
 
-    const currentActiveMesh = this.#activeMeshes.find(
-      (v) => v.type === model.animation.type
+    const currentOutlineMesh = this.#meshes.find(
+      (v) =>
+        v.meshType === "OUTLINE" && v.animationType === model.animation.type,
     );
-    if (currentActiveMesh) {
-      const activeOpacity =
-        (0.25 + model.active.strength * 0.07) * model.active.opacity;
-      currentActiveMesh.mesh.opacity(activeOpacity);
-      currentActiveMesh.mesh.animate(model.animation.frame);
+    if (currentOutlineMesh) {
+      const outlineOpacity =
+        (0.9 + model.active.strength * 0.1) * model.active.opacity;
+      currentOutlineMesh.mesh.opacity(outlineOpacity);
+      currentOutlineMesh.mesh.animate(model.animation.frame);
     }
 
-    [...this.#meshes, ...this.#activeMeshes]
-      .filter((v) => v !== currentMesh)
-      .filter((v) => v !== currentActiveMesh)
+    this.#meshes
+      .filter((v) => v !== currentStandardMesh)
+      .filter((v) => v !== currentOutlineMesh)
       .forEach(({ mesh }) => {
         mesh.opacity(0);
       });

@@ -17,24 +17,24 @@ export function pushWindowsStream(): Observable<PushWindow> {
     "mousedown",
     {
       passive: false,
-    }
+    },
   ).pipe(
     map((event) => ({
       type: "PushWindow",
       event,
-    }))
+    })),
   );
   const touchStart: Observable<PushWindow> = fromEvent<TouchEvent>(
     window,
     "touchstart",
     {
       passive: false,
-    }
+    },
   ).pipe(
     map((event) => ({
       type: "PushWindow",
       event,
-    }))
+    })),
   );
   return merge(click, touchStart);
 }

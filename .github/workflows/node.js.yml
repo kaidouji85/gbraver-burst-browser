@@ -10,15 +10,17 @@ jobs:
   test:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v3
-    - uses: actions/setup-node@v3
-      with:
-        node-version: ${{ env.NODE_JS_VERSION }}
-    - run: npm ci
-    - run: npm run type-check
-    - run: npm run detect-circular
-    - run: npm run lint
-    - run: npm run test
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: ${{ env.NODE_JS_VERSION }}
+          cache: npm
+      - run: shellcheck *.bash
+      - run: npm ci
+      - run: npm run type-check
+      - run: npm run detect-circular
+      - run: npm run lint
+      - run: npm run test
   buildProduction:
     runs-on: ubuntu-latest
     steps:
@@ -26,24 +28,18 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version: ${{ env.NODE_JS_VERSION }}
+          cache: npm
       - run: npm ci
       - run: npm run build:production
-  buildServiceWorker:
+  buildOthers:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
         with:
           node-version: ${{ env.NODE_JS_VERSION }}
+          cache: npm
       - run: npm ci
       - run: npm run build:sw
       - run: npm run build:clear-sw
-  buildStoryBook:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-node@v3
-        with:
-          node-version: ${{ env.NODE_JS_VERSION }}
-      - run: npm ci
       - run: npm run build:storybook

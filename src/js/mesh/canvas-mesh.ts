@@ -36,7 +36,7 @@ export class CanvasMesh {
     });
     const planeGeometry = new THREE.PlaneGeometry(
       params.meshWidth,
-      params.meshHeight
+      params.meshHeight,
     );
     this.mesh = new THREE.Mesh(planeGeometry, material);
     this.mesh.renderOrder = SPRITE_RENDER_ORDER;
@@ -72,7 +72,7 @@ export class CanvasMesh {
     drawFunc(context);
   }
 
-  /** 透明度を設定する */
+  /** 不透明度を設定する */
   setOpacity(opacity: number): void {
     this.mesh.material.opacity = opacity;
   }

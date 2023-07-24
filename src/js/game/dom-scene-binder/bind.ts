@@ -14,7 +14,7 @@ import type { DOMSceneBinderProps } from "./props";
 export function bind<X extends DOMScene>(
   props: DOMSceneBinderProps,
   scene: X,
-  connector: DOMSceneActionConnector<X>
+  connector: DOMSceneActionConnector<X>,
 ) {
   discardCurrentScene(props);
   props.scene = scene;

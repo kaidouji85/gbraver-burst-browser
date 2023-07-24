@@ -19,18 +19,33 @@
   }
 }
 
-.tutorial-stage__prefix {
-  --icon-size: calc(var(--responsive-font-size) * 2);
-
+.tutorial-stage__beginner,
+.tutorial-stage__intermediate,
+.tutorial-stage__advanced {
   display: flex;
   align-items: center;
   justify-content: center;
   margin-right: calc(var(--responsive-font-size) * 0.5);
-  background-color: var(--button-background-color);
-  min-width: var(--icon-size);
-  min-height: var(--icon-size);
+  min-width: calc(var(--responsive-font-size) * 3);
+  min-height: calc(var(--responsive-font-size) * 2);
   padding: calc(var(--responsive-font-size) * 0.2);
   border-radius: calc(var(--responsive-font-size) * 0.4);
+}
+
+.tutorial-stage__beginner {
+  background-color: var(--button-background-color);
+}
+
+.tutorial-stage__intermediate {
+  background-color: #00a497;
+}
+
+.tutorial-stage__advanced {
+  background-color: #d7003a;
+}
+
+.tutorial-stage__level {
+  padding-right: calc(var(--responsive-font-size) * 0.2);
 }
 
 .tutorial-stage__overlay {

@@ -44,7 +44,7 @@ export class SimpleIndicatorView implements ResultIndicatorView {
     const target = this.#mesh.getObject3D();
     const devicePerScale = HUDCutInScale(
       preRender.rendererDOM,
-      preRender.safeAreaInset
+      preRender.safeAreaInset,
     );
     const safeAreaX =
       0 < model.worldCoordinate.x
@@ -70,7 +70,7 @@ export class SimpleIndicatorView implements ResultIndicatorView {
     target.scale.x = model.scale * devicePerScale;
     target.scale.y = model.scale * devicePerScale;
     target.quaternion.copy(preRender.camera.quaternion);
-    this.#mesh.setOpacity(model.opacity);
+    this.#mesh.opacity(model.opacity);
   }
 
   /** @override */

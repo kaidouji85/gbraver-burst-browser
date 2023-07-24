@@ -1,4 +1,4 @@
-import TWEEN, { Group } from "@tweenjs/tween.js";
+import * as TWEEN from "@tweenjs/tween.js";
 import { Observable, Subject } from "rxjs";
 
 import { Resources } from "../../resource";
@@ -20,11 +20,11 @@ export type BatterySelectorProps = {
   /** 効果音 */
   sounds: BatterySelectorSounds;
   /** バッテリー変更TweenGroup */
-  batteryChangeTween: Group;
+  batteryChangeTween: TWEEN.Group;
   /** -ボタンTweenGroup */
-  batteryMinusTween: Group;
+  batteryMinusTween: TWEEN.Group;
   /** +ボタンTweenGroup */
-  batteryPlusTween: Group;
+  batteryPlusTween: TWEEN.Group;
   /** 決定ボタン押下通知ストリーム */
   decidePush: Subject<Event>;
   /** バッテリープラスボタン押下通知ストリーム */
@@ -47,7 +47,7 @@ export type GenerateBatterySelectorPropsParam = {
  * @return バッテリーセレクタプロパティ
  */
 export function createBatterySelectorProps(
-  param: GenerateBatterySelectorPropsParam
+  param: GenerateBatterySelectorPropsParam,
 ): BatterySelectorProps {
   return {
     model: initialValue(),

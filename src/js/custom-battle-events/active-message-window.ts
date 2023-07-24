@@ -29,7 +29,7 @@ function activeMessageWindow(messageWindow: MessageWindow): void {
  */
 function activeMessageWindowWithFace(
   messageWindow: MessageWindow,
-  faceType: FaceType
+  faceType: FaceType,
 ): void {
   messageWindow.visible(true);
   messageWindow.face(faceType);
@@ -61,7 +61,7 @@ export function activeRightMessageWindow(props: CustomBattleEventProps): void {
  * @param props イベントプロパティ
  */
 export function activeNearBatterySelectorMessageWindow(
-  props: CustomBattleEventProps
+  props: CustomBattleEventProps,
 ): void {
   activeMessageWindow(props.view.dom.nearBatterySelectorMessageWindow);
 }
@@ -72,7 +72,7 @@ export function activeNearBatterySelectorMessageWindow(
  * @param props イベントプロパティ
  */
 export function activeNearBurstButtonMessageWindow(
-  props: CustomBattleEventProps
+  props: CustomBattleEventProps,
 ): void {
   activeMessageWindow(props.view.dom.nearBurstButtonMessageWindow);
 }
@@ -83,7 +83,7 @@ export function activeNearBurstButtonMessageWindow(
  * @param props イベントプロパティ
  */
 export function activeNearPilotButtonMessageWindow(
-  props: CustomBattleEventProps
+  props: CustomBattleEventProps,
 ): void {
   activeMessageWindow(props.view.dom.nearPilotButtonMessageWindow);
 }
@@ -96,7 +96,7 @@ export function activeNearPilotButtonMessageWindow(
  */
 export function activeLeftMessageWindowWithFace(
   props: CustomBattleEventProps,
-  faceType: FaceType
+  faceType: FaceType,
 ): void {
   activeMessageWindowWithFace(props.view.dom.leftMessageWindow, faceType);
 }
@@ -109,7 +109,7 @@ export function activeLeftMessageWindowWithFace(
  */
 export function activeRightMessageWindowWithFace(
   props: CustomBattleEventProps,
-  faceType: FaceType
+  faceType: FaceType,
 ): void {
   activeMessageWindowWithFace(props.view.dom.rightMessageWindow, faceType);
 }

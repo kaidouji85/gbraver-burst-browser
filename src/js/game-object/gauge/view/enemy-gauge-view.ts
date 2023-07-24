@@ -94,7 +94,7 @@ export class EnemyGaugeView implements GaugeView {
   engage(model: GaugeModel, preRender: PreRender): void {
     const devicePerScale = HUDUIScale(
       preRender.rendererDOM,
-      preRender.safeAreaInset
+      preRender.safeAreaInset,
     );
     this.#hpBar.setValue(model.hp / model.maxHp);
     this.#hpNumber.setValue(model.hp);
@@ -104,7 +104,7 @@ export class EnemyGaugeView implements GaugeView {
     this.#group.scale.set(
       BASE_SCALE * devicePerScale,
       BASE_SCALE * devicePerScale,
-      BASE_SCALE * devicePerScale
+      BASE_SCALE * devicePerScale,
     );
     const minY =
       preRender.rendererDOM.clientHeight / 2 - MIN_PADDING_TOP * devicePerScale;

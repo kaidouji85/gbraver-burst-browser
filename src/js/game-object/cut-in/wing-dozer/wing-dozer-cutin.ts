@@ -27,7 +27,7 @@ export class WingDozerCutIn implements HUDTracking {
    */
   constructor(
     view: WingDozerCutInView,
-    gameObjectAction: Observable<GameObjectAction>
+    gameObjectAction: Observable<GameObjectAction>,
   ) {
     this.#model = createInitialValue();
     this.#view = view;

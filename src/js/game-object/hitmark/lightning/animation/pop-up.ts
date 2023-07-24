@@ -24,26 +24,26 @@ export function popUp(model: LightningModel, sounds: LightningSounds): Animate {
           {
             frame: 1,
           },
-          700
-        )
+          700,
+        ),
       ),
       tween(model, (t) =>
         t.to(
           {
             opacity: 0.5,
           },
-          600
-        )
+          600,
+        ),
       ).chain(
         tween(model, (t) =>
           t.to(
             {
               opacity: 0,
             },
-            100
-          )
-        )
-      )
-    )
+            100,
+          ),
+        ),
+      ),
+    ),
   );
 }

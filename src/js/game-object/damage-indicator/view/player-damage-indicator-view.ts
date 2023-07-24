@@ -23,7 +23,7 @@ export class PlayerDamageIndicatorView implements DamageIndicatorView {
   constructor(resources: Resources) {
     this.#group = new THREE.Group();
     const damageNumberResource = resources.textures.find(
-      (v) => v.id === TEXTURE_IDS.DAMAGE_NUMBER
+      (v) => v.id === TEXTURE_IDS.DAMAGE_NUMBER,
     );
     const damageNumber = damageNumberResource
       ? damageNumberResource.texture
@@ -36,7 +36,7 @@ export class PlayerDamageIndicatorView implements DamageIndicatorView {
           width: MESH_SIZE,
           height: MESH_SIZE,
         }),
-      MAX_NUMBER_SIZE
+      MAX_NUMBER_SIZE,
     );
     this.#numbers.forEach((v) => {
       this.#group.add(v.getObject3D());
@@ -56,12 +56,12 @@ export class PlayerDamageIndicatorView implements DamageIndicatorView {
       .split("")
       .map((v) => Number(v));
     this.#numbers.forEach((mesh, meshIndex) => {
-      mesh.setOpacity(0);
+      mesh.opacity(0);
       values
         .filter((value, valueIndex) => meshIndex === valueIndex)
         .forEach((value) => {
           mesh.animate(value / MAX_ANIMATION);
-          mesh.setOpacity(model.opacity);
+          mesh.opacity(model.opacity);
           mesh.getObject3D().position.x =
             MESH_SIZE * (meshIndex - values.length / 2) + GROUP_PADDING;
         });

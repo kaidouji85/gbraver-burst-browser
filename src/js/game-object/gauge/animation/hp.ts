@@ -9,7 +9,7 @@ export function hp(model: GaugeModel, value: number): Animate {
       {
         hp: value,
       },
-      300
-    )
+      300,
+    ),
   );
 }

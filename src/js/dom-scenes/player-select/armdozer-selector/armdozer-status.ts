@@ -177,7 +177,7 @@ export class ArmdozerStatus {
     this.#burstDetail.innerHTML = burstDetail(target.burst)
       .map(
         (v) =>
-          `<span class="${ROOT_CLASS_NAME}__burst__content__line">${v}</span>`
+          `<span class="${ROOT_CLASS_NAME}__burst__content__line">${v}</span>`,
       )
       .reduce((a, b) => a + b);
   }

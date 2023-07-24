@@ -49,7 +49,7 @@ export const CUBE_TEXTURE_CONFIGS: CubeTextureConfig[] = [
  */
 export function loadCubeTexture(
   resourceRoot: ResourceRoot,
-  config: CubeTextureConfig
+  config: CubeTextureConfig,
 ): Promise<CubeTextureResource> {
   return new Promise((resolve, reject) => {
     const loader = new THREE.CubeTextureLoader();
@@ -74,7 +74,7 @@ export function loadCubeTexture(
       },
       (e) => {
         reject(e);
-      }
+      },
     );
   });
 }

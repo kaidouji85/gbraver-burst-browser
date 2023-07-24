@@ -23,7 +23,7 @@ import type { StateAnimationProps } from "../state-animation-props";
  */
 export type BattleAnimationParamX<
   SPRITE extends ArmDozerSprite,
-  RESULT extends BattleResult
+  RESULT extends BattleResult,
 > = {
   attackerState: PlayerState;
   attackerTD: TDPlayer;
@@ -56,32 +56,32 @@ export type BattleAnimationParam = BattleAnimationParamX<
  */
 export function toBattleAnimationParam(
   props: StateAnimationProps,
-  gameState: GameStateX<Battle>
+  gameState: GameStateX<Battle>,
 ): BattleAnimationParam | null | undefined {
   const battle: Battle = gameState.effect;
   const attackerState = gameState.players.find(
-    (v) => v.playerId === battle.attacker
+    (v) => v.playerId === battle.attacker,
   );
   const attackerTD = props.view.td.players.find(
-    (v) => v.playerId === battle.attacker
+    (v) => v.playerId === battle.attacker,
   );
   const attackerHUD = props.view.hud.players.find(
-    (v) => v.playerId === battle.attacker
+    (v) => v.playerId === battle.attacker,
   );
   const attackerArmdozer = props.view.td.armdozerObjects.find(
-    (v) => v.playerId === battle.attacker
+    (v) => v.playerId === battle.attacker,
   );
   const defenderState = gameState.players.find(
-    (v) => v.playerId !== battle.attacker
+    (v) => v.playerId !== battle.attacker,
   );
   const defenderTD = props.view.td.players.find(
-    (v) => v.playerId !== battle.attacker
+    (v) => v.playerId !== battle.attacker,
   );
   const defenderHUD = props.view.hud.players.find(
-    (v) => v.playerId !== battle.attacker
+    (v) => v.playerId !== battle.attacker,
   );
   const defenderArmdozer = props.view.td.armdozerObjects.find(
-    (v) => v.playerId !== battle.attacker
+    (v) => v.playerId !== battle.attacker,
   );
 
   if (

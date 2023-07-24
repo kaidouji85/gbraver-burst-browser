@@ -64,7 +64,7 @@ export class ShinyaHUD implements HUDPilotObjects {
 export function playerShinyaHUD(
   resources: Resources,
   gameObjectAction: Observable<GameObjectAction>,
-  state: Player
+  state: Player,
 ): ShinyaHUD {
   return new ShinyaHUD({
     playerId: state.playerId,
@@ -83,7 +83,7 @@ export function playerShinyaHUD(
 export function enemyShinyaHUD(
   resources: Resources,
   gameObjectAction: Observable<GameObjectAction>,
-  state: Player
+  state: Player,
 ): ShinyaHUD {
   return new ShinyaHUD({
     playerId: state.playerId,

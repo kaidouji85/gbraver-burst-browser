@@ -7,7 +7,7 @@ import type { TDSceneActionConnector } from "../td-scene-binder/td-scene-action-
 /** 戦闘シーンとゲームアクションを関連付ける */
 export const battleSceneConnector: TDSceneActionConnector<BattleScene> = (
   scene: BattleScene,
-  gameAction: Subject<GameAction>
+  gameAction: Subject<GameAction>,
 ) => [
   scene.gameEndNotifier().subscribe((v) => {
     gameAction.next({

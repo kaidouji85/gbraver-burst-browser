@@ -31,7 +31,7 @@ export class GaiCutIn {
   constructor(
     view: GaiView,
     resources: Resources,
-    gameObjectAction: Observable<GameObjectAction>
+    gameObjectAction: Observable<GameObjectAction>,
   ) {
     this.#model = createInitialValue();
     this.#view = view;

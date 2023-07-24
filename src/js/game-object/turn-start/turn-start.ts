@@ -29,7 +29,7 @@ export class TurnStart {
   constructor(
     view: TurnStartView,
     resources: Resources,
-    gameObjectAction: Observable<GameObjectAction>
+    gameObjectAction: Observable<GameObjectAction>,
   ) {
     this.#model = createInitialValue();
     this.#view = view;

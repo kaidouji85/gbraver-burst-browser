@@ -13,7 +13,7 @@ import * as THREE from "three";
 export function onResizePerspectiveCamera(
   camera: THREE.PerspectiveCamera,
   width: number,
-  height: number
+  height: number,
 ): void {
   camera.aspect = width / height;
   camera.updateProjectionMatrix();
@@ -30,7 +30,7 @@ export function onResizePerspectiveCamera(
 export function onResizeOrthographicCamera(
   camera: THREE.OrthographicCamera,
   width: number,
-  height: number
+  height: number,
 ): void {
   camera.left = -width / 2;
   camera.right = width / 2;

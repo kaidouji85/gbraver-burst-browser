@@ -38,7 +38,7 @@ export class Game {
       this.#props.suddenlyBattleEnd.stream().pipe(
         map(() => ({
           type: "SuddenlyBattleEnd",
-        }))
+        })),
       );
     const webSocketAPIError: Observable<GameAction> = this.#props.api
       .websocketErrorNotifier()
@@ -46,7 +46,7 @@ export class Game {
         map((error) => ({
           type: "WebSocketAPIError",
           error,
-        }))
+        })),
       );
 
     const gameActionStreams: Observable<GameAction>[] = [
@@ -60,7 +60,7 @@ export class Game {
     this.#unsubscribers = gameActionStreams.map((v) =>
       v.subscribe((action) => {
         onGameAction(this.#props, action);
-      })
+      }),
     );
   }
 

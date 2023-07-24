@@ -1,6 +1,6 @@
 import * as THREE from "three";
 
-import { drawImageInCenter } from "../canvas/draw/image-drawer";
+import { drawImageInCenter } from "../canvas/draw-image-in-center";
 import { CanvasMesh } from "./canvas-mesh";
 
 /** コンストラクタのパラメータ */
@@ -51,7 +51,7 @@ export class SimpleImageMesh {
     this._mesh.destructor();
   }
 
-  /** 透明度を設定する */
+  /** 不透明度を設定する */
   setOpacity(opacity: number): void {
     this._mesh.setOpacity(opacity);
   }

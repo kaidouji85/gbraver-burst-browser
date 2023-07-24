@@ -11,6 +11,7 @@ import { BatterySelectorOpenParam } from "./battery-selector-open-param";
 import { batteryMinus } from "./procedure/battery-minus";
 import { batteryPlus } from "./procedure/battery-plus";
 import { bindEventListeners } from "./procedure/bind-event-listeners";
+import { toBatterySilently } from "./procedure/to-battery-silently";
 import { BatterySelectorProps, createBatterySelectorProps } from "./props";
 
 /** コンストラクタのパラメータ */
@@ -36,7 +37,7 @@ export class BatterySelector {
     this.#props = createBatterySelectorProps(param);
     this.#unsubscribers = bindEventListeners(
       this.#props,
-      param.gameObjectAction
+      param.gameObjectAction,
     );
   }
 
@@ -91,6 +92,16 @@ export class BatterySelector {
    */
   async batteryMinus(): Promise<void> {
     await batteryMinus(this.#props);
+  }
+
+  /**
+   * 無音でバッテリー値を設定する
+   * @param battery バッテリー設定値
+   * @param duration ボタンを押す間隔（ミリ秒）
+   * @return 処理が完了したら発火するPromise
+   */
+  async toBatterySilently(battery: number, duration = 200): Promise<void> {
+    await toBatterySilently(this.#props, battery, duration);
   }
 
   /**

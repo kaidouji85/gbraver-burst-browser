@@ -35,7 +35,7 @@ type Ret = {
  */
 export async function onBatteryCommandSelected(
   props: Readonly<BatteryCommandSelected>,
-  state: ZeroDefenseTutorialState
+  state: ZeroDefenseTutorialState,
 ): Promise<Ret> {
   const foundLastState = props.stateHistory[props.stateHistory.length - 1];
   const isNotZeroBatteryCommand = props.battery.battery !== 0;
@@ -62,6 +62,7 @@ export async function onBatteryCommandSelected(
 
   const isZeroBattery = player.armdozer.battery === 0;
   if (!isZeroBattery) {
+    props.view.hud.gameObjects.batterySelector.toBatterySilently(1);
     await cancelZeroBatteryDefense(props);
     return {
       state,

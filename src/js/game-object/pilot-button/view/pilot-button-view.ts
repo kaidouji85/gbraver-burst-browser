@@ -35,13 +35,13 @@ export class PilotButtonView {
   constructor(
     resources: Resources,
     pilotIcon: PilotIcon,
-    gameObjectAction: Observable<GameObjectAction>
+    gameObjectAction: Observable<GameObjectAction>,
   ) {
     this.#pushButton = new Subject();
     this.#group = new THREE.Group();
     const buttonDisabled =
       resources.canvasImages.find(
-        (v) => v.id === CANVAS_IMAGE_IDS.BIG_BUTTON_DISABLED
+        (v) => v.id === CANVAS_IMAGE_IDS.BIG_BUTTON_DISABLED,
       )?.image ?? new Image();
     this.#buttonDisabled = new SimpleImageMesh({
       canvasSize: 512,
@@ -63,7 +63,7 @@ export class PilotButtonView {
     this.#group.add(this.#button.getObject3D());
     const label =
       resources.canvasImages.find(
-        (v) => v.id === CANVAS_IMAGE_IDS.PILOT_BUTTON_LABEL
+        (v) => v.id === CANVAS_IMAGE_IDS.PILOT_BUTTON_LABEL,
       )?.image ?? new Image();
     this.#label = new SimpleImageMesh({
       canvasSize: 512,
@@ -119,7 +119,7 @@ export class PilotButtonView {
     this.#buttonDisabled.setOpacity(disabledOpacity);
     const devicePerScale = HUDUIScale(
       preRender.rendererDOM,
-      preRender.safeAreaInset
+      preRender.safeAreaInset,
     );
     const frontScale = 0.3 * devicePerScale * model.scale;
     this.#group.scale.set(frontScale, frontScale, 0.3);

@@ -18,12 +18,12 @@ export type Coordinate = {
 export function toHUDCoordinate(
   tdCoordinate: Coordinate,
   camera: THREE.PerspectiveCamera,
-  rendererDOM: HTMLElement
+  rendererDOM: HTMLElement,
 ): Coordinate {
   const origin = new THREE.Vector3(
     tdCoordinate.x,
     tdCoordinate.y,
-    tdCoordinate.z
+    tdCoordinate.z,
   );
   origin.project(camera);
   return {

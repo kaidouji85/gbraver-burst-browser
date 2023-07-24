@@ -1,56 +1,23 @@
-import * as THREE from "three";
-
 import type { Resources } from "../../../../resource";
 import { TEXTURE_IDS } from "../../../../resource/texture/ids";
-import { createSilhouetteTexture } from "../../genesis-braver/mesh/create-silhouette-texture";
-import type { ArmdozerAnimation } from "../../mesh/armdozer-animation";
-import { createHorizontalAnimation } from "../../mesh/horizontal-animation";
-import { MESH_HEIGHT, MESH_WIDTH } from "./mesh-size";
-import { MESH_Y } from "./position";
+import { AnimationMesh } from "./animation-mesh";
+import { createAnimationMeshes } from "./create-animation-meshes";
 
+/** テクスチャID */
+export const TEXTURE_ID = TEXTURE_IDS.WING_DOZER_FRONT_STEP;
 /** アニメーション枚数 */
 export const MAX_ANIMATION = 4;
 
 /**
- * ウィングドーザ フロントテップ メッシュ生成
+ * フロントステップ
  * @param resources リソース管理オブジェクト
- * @return メッシュ
+ * @return 生成結果
  */
-export function wingDozerFrontStep(resources: Resources): ArmdozerAnimation {
-  const texture =
-    resources.textures.find((v) => v.id === TEXTURE_IDS.WING_DOZER_FRONT_STEP)
-      ?.texture ?? new THREE.Texture();
-  const ret = createHorizontalAnimation({
-    texture,
+export function frontStep(resources: Resources): AnimationMesh[] {
+  return createAnimationMeshes({
+    resources,
+    animationType: "FRONT_STEP",
+    textureId: TEXTURE_ID,
     maxAnimation: MAX_ANIMATION,
-    width: MESH_WIDTH,
-    height: MESH_HEIGHT,
   });
-  const object = ret.getObject3D();
-  object.position.y = MESH_Y;
-  return ret;
-}
-
-/**
- * ウィングドーザ アクティブフロントテップ メッシュ生成
- * @param resources リソース管理オブジェクト
- * @return メッシュ
- */
-export function wingDozerActiveFrontStep(
-  resources: Resources
-): ArmdozerAnimation {
-  const texture =
-    resources.textures.find((v) => v.id === TEXTURE_IDS.WING_DOZER_FRONT_STEP)
-      ?.texture ?? new THREE.Texture();
-  const silhouetteTexture = createSilhouetteTexture(texture);
-  const ret = createHorizontalAnimation({
-    texture: silhouetteTexture,
-    maxAnimation: MAX_ANIMATION,
-    width: MESH_WIDTH,
-    height: MESH_HEIGHT,
-  });
-  const object = ret.getObject3D();
-  object.position.y = MESH_Y;
-  object.position.z = 0.01;
-  return ret;
 }

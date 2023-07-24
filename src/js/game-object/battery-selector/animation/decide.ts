@@ -12,7 +12,7 @@ import { BatterySelectorSounds } from "../sounds/battery-selector-sounds";
  */
 export function decide(
   model: BatterySelectorModel,
-  sounds: BatterySelectorSounds
+  sounds: BatterySelectorSounds,
 ): Animate {
   return process(() => {
     sounds.pushButtonSound.play();
@@ -23,9 +23,9 @@ export function decide(
           {
             batteryButtonScale: 1.1,
           },
-          100
-        )
-      )
+          100,
+        ),
+      ),
     )
     .chain(
       tween(model, (t) =>
@@ -33,8 +33,8 @@ export function decide(
           {
             batteryButtonScale: 1,
           },
-          100
-        )
-      )
+          100,
+        ),
+      ),
     );
 }

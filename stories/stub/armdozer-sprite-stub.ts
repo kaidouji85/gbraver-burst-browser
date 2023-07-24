@@ -14,7 +14,7 @@ import { TDGameObjectStub } from "./td-game-object-stub";
  */
 type SpriteGenerator<X extends ArmDozerSprite> = (
   resources: Resources,
-  gameObjectAction: Observable<GameObjectAction>
+  gameObjectAction: Observable<GameObjectAction>,
 ) => X;
 
 /**
@@ -26,7 +26,7 @@ type SpriteGenerator<X extends ArmDozerSprite> = (
  */
 export const armdozerSpriteStub = <X extends ArmDozerSprite>(
   generator: SpriteGenerator<X>,
-  fn: (sprite: X) => void
+  fn: (sprite: X) => void,
 ): HTMLElement => {
   const stub = new TDGameObjectStub(({ resources, gameObjectAction }) => {
     const sprite = generator(resources, gameObjectAction);

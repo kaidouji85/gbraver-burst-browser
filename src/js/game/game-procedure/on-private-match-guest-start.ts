@@ -3,7 +3,8 @@ import { waitTime } from "../../wait/wait-time";
 import { playerSelectConnector } from "../action-connector/player-select-connector";
 import { MAX_LOADING_TIME } from "../dom-scene-binder/max-loading-time";
 import { GameProps } from "../game-props";
-import { getPlayableArmdozers } from "./get-playable-armdozers";
+import { getPlayableArmdozers } from "../playable-amdozers";
+import { getPlayablePilots } from "../playable-pilots";
 import { loadFullResource } from "./load-full-resource";
 
 /**
@@ -11,7 +12,7 @@ import { loadFullResource } from "./load-full-resource";
  * @param props ゲームプロパティ
  */
 export async function onPrivateMatchGuestStart(
-  props: GameProps
+  props: GameProps,
 ): Promise<void> {
   props.domDialogBinder.hidden();
   if (!props.isFullResourceLoaded) {
@@ -20,12 +21,16 @@ export async function onPrivateMatchGuestStart(
 
   props.inProgress = {
     type: "PrivateMatchGuest",
-    subFlow: {
+    privateMatchGuest: {
       type: "PlayerSelect",
     },
   };
   await props.fader.fadeOut();
-  const scene = new PlayerSelect(props.resources, getPlayableArmdozers(props));
+  const scene = new PlayerSelect({
+    resources: props.resources,
+    armDozerIds: getPlayableArmdozers(props),
+    pilotIds: getPlayablePilots(props),
+  });
   props.domSceneBinder.bind(scene, playerSelectConnector);
   await Promise.race([scene.waitUntilLoaded(), waitTime(MAX_LOADING_TIME)]);
   await props.fader.fadeIn();

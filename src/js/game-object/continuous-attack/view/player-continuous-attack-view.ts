@@ -20,7 +20,7 @@ export class PlayerContinuousAttackView implements ContinuousAttackView {
 
   constructor(resources: Resources) {
     const playerTurnResource = resources.textures.find(
-      (v) => v.id === TEXTURE_IDS.CONTINUOUS_ATTACK
+      (v) => v.id === TEXTURE_IDS.CONTINUOUS_ATTACK,
     );
     const playerTurn = playerTurnResource
       ? playerTurnResource.texture
@@ -54,7 +54,7 @@ export class PlayerContinuousAttackView implements ContinuousAttackView {
    */
   engage(model: ContinuousAttackModel): void {
     const target = this.#mesh.getObject3D();
-    this.#mesh.setOpacity(model.opacity);
+    this.#mesh.opacity(model.opacity);
     target.position.x = ARMDOZER_EFFECT_STANDARD_X;
     target.position.y = ARMDOZER_EFFECT_STANDARD_Y + 10;
     target.position.z = ARMDOZER_EFFECT_STANDARD_Z + 40;

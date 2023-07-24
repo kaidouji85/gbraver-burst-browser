@@ -15,7 +15,7 @@ import { PlayerBatteryNumberView } from "./view/player-battery-number-view";
  */
 export function playerBatteryNumber(
   resources: Resources,
-  gameObjectAction: Observable<GameObjectAction>
+  gameObjectAction: Observable<GameObjectAction>,
 ): BatteryNumber {
   const view = new PlayerBatteryNumberView(resources);
   return new BatteryNumber(view, gameObjectAction);
@@ -30,7 +30,7 @@ export function playerBatteryNumber(
  */
 export function enemyBatteryNumber(
   resources: Resources,
-  gameObjectAction: Observable<GameObjectAction>
+  gameObjectAction: Observable<GameObjectAction>,
 ): BatteryNumber {
   const view = new EnemyBatteryNumberView(resources);
   return new BatteryNumber(view, gameObjectAction);

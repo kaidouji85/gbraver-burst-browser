@@ -106,5 +106,5 @@ export const battleControllerTypeItems = (selected: BattleControllerType) =>
       </label>  
       ${getDetail(value)}
     </div>
-  `
+  `,
   ).reduce((a, b) => a + b);

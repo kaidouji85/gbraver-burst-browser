@@ -11,7 +11,7 @@ import type { ConfigProps } from "../props";
  */
 export function onBGMVolumeChange(
   props: ConfigProps,
-  action: Readonly<InputDOM>
+  action: Readonly<InputDOM>,
 ): void {
   action.event.preventDefault();
   action.event.stopPropagation();

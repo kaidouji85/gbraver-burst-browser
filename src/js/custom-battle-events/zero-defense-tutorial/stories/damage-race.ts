@@ -56,7 +56,7 @@ const damageRaceDisadvantage = async (props: CustomBattleEventProps) => {
 export const damageRace = async (
   props: CustomBattleEventProps,
   playerHP: number,
-  enemyHP: number
+  enemyHP: number,
 ) => {
   const hpDiff = playerHP - enemyHP;
   const isHpNearlyEqual = Math.abs(hpDiff) <= 500;

@@ -16,7 +16,7 @@ export class LightningBarrierSounds {
    */
   constructor(resources: Resources) {
     const lightningResource = resources.sounds.find(
-      (v) => v.id === SOUND_IDS.LIGHTNING_BARRIER
+      (v) => v.id === SOUND_IDS.LIGHTNING_BARRIER,
     );
     this.lightningBarrier = lightningResource
       ? lightningResource.sound

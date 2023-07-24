@@ -31,7 +31,7 @@ export function extractElements(root: HTMLElement, ids: DataIDs): Elements {
     root.querySelector(`[data-id="${ids.battleControllerTypeSelector}"]`) ??
     document.createElement("div");
   const extractedBGMVolumeSelector = root.querySelector(
-    `[data-id="${ids.bgmVolumeSelector}"]`
+    `[data-id="${ids.bgmVolumeSelector}"]`,
   );
   const bgmVolumeSelector =
     extractedBGMVolumeSelector instanceof HTMLInputElement
@@ -41,7 +41,7 @@ export function extractElements(root: HTMLElement, ids: DataIDs): Elements {
     root.querySelector(`[data-id="${ids.bgmVolumeValue}"]`) ??
     document.createElement("div");
   const extractedSeVolumeSelector = root.querySelector(
-    `[data-id="${ids.seVolumeSelector}"]`
+    `[data-id="${ids.seVolumeSelector}"]`,
   );
   const seVolumeSelector =
     extractedSeVolumeSelector instanceof HTMLInputElement

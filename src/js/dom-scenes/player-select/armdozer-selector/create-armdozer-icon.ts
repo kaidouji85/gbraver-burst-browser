@@ -13,7 +13,7 @@ import { ArmdozerIcon } from "./armdozer-icon";
  */
 export function createArmdozerIcon(
   resources: Resources,
-  armdozerId: ArmDozerId
+  armdozerId: ArmDozerId,
 ): ArmdozerIcon {
   switch (armdozerId) {
     case ArmDozerIds.SHIN_BRAVER:

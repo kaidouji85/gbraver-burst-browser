@@ -11,7 +11,7 @@ import { MessageWindowProps } from "../props";
  */
 export function nextMessageIconVisible(
   props: Readonly<MessageWindowProps>,
-  isNextMessageIconVisible: boolean
+  isNextMessageIconVisible: boolean,
 ): void {
   props.nextMessageIcon.className = isNextMessageIconVisible
     ? NEXT_MESSAGE_ICON_CLASS

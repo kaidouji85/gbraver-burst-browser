@@ -18,8 +18,8 @@ export function fadeIn(model: FaderModel): Animate {
         {
           opacity: 0,
         },
-        500
-      )
-    )
+        500,
+      ),
+    ),
   );
 }

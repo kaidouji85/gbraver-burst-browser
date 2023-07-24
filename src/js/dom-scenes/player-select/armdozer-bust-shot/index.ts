@@ -29,7 +29,7 @@ export class ArmdozerBustShotContainer {
   constructor(
     resources: Resources,
     armDozerIds: ArmDozerId[],
-    initialArmdozerId: ArmDozerId
+    initialArmdozerId: ArmDozerId,
   ) {
     this.#resources = resources;
     this.#root = document.createElement("div");

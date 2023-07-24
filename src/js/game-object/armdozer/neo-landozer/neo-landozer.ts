@@ -1,4 +1,4 @@
-import TWEEN, { Group } from "@tweenjs/tween.js";
+import * as TWEEN from "@tweenjs/tween.js";
 import { Observable, Unsubscribable } from "rxjs";
 import * as THREE from "three";
 
@@ -42,7 +42,7 @@ export class NeoLandozer extends EmptyArmDozerSprite implements ArmDozerSprite {
   #sounds: NeoLandozerSounds;
 
   /** アクティブフラッシュTweenグループ */
-  #activeFlashTween: Group;
+  #activeFlashTween: TWEEN.Group;
 
   /** アンサブスクライバ */
   #unsubscribers: Unsubscribable[];
@@ -56,7 +56,7 @@ export class NeoLandozer extends EmptyArmDozerSprite implements ArmDozerSprite {
   constructor(
     view: NeoLandozerView,
     resources: Resources,
-    gameObjectAction: Observable<GameObjectAction>
+    gameObjectAction: Observable<GameObjectAction>,
   ) {
     super();
     this.#model = createInitialValue();

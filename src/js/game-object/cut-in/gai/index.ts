@@ -15,7 +15,7 @@ import { PlayerGaiView } from "./view/player-gai-view";
  */
 export function playerGaiCutIn(
   resources: Resources,
-  gameObjectAction: Observable<GameObjectAction>
+  gameObjectAction: Observable<GameObjectAction>,
 ): GaiCutIn {
   const view = new PlayerGaiView(resources);
   return new GaiCutIn(view, resources, gameObjectAction);
@@ -30,7 +30,7 @@ export function playerGaiCutIn(
  */
 export function enemyGaiCutIn(
   resources: Resources,
-  gameObjectAction: Observable<GameObjectAction>
+  gameObjectAction: Observable<GameObjectAction>,
 ): GaiCutIn {
   const view = new EnemyGaiView(resources);
   return new GaiCutIn(view, resources, gameObjectAction);

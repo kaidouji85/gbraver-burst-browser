@@ -49,7 +49,7 @@ export type NetBattleSelectorDialogProps = {
  * @return 生成結果
  */
 export function createNetBattleSelectrProps(
-  resources: Resources
+  resources: Resources,
 ): NetBattleSelectorDialogProps {
   const root = document.createElement("div");
   root.className = ROOT_CLASS;

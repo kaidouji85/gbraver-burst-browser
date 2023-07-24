@@ -15,7 +15,7 @@ export class EnemyTurnStartView implements TurnStartView {
 
   constructor(resources: Resources) {
     const enemyTurnResource = resources.textures.find(
-      (v) => v.id === TEXTURE_IDS.ENEMY_TURN
+      (v) => v.id === TEXTURE_IDS.ENEMY_TURN,
     );
     const enemyTurn = enemyTurnResource
       ? enemyTurnResource.texture
@@ -52,7 +52,7 @@ export class EnemyTurnStartView implements TurnStartView {
     const target = this.#mesh.getObject3D();
     const devicePerScale = HUDCutInScale(
       preRender.rendererDOM,
-      preRender.safeAreaInset
+      preRender.safeAreaInset,
     );
     target.position.x =
       -preRender.rendererDOM.clientWidth / 2 +
@@ -65,7 +65,7 @@ export class EnemyTurnStartView implements TurnStartView {
     target.position.z = 0;
     target.scale.x = model.scale * devicePerScale;
     target.scale.y = model.scale * devicePerScale;
-    this.#mesh.setOpacity(model.opacity);
+    this.#mesh.opacity(model.opacity);
     this.#mesh.getObject3D().quaternion.copy(preRender.camera.quaternion);
   }
 }

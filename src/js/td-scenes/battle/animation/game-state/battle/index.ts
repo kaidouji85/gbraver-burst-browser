@@ -15,7 +15,7 @@ import { attackAnimation } from "./attack";
  */
 export function battleAnimation(
   props: StateAnimationProps,
-  gameState: GameStateX<Battle>
+  gameState: GameStateX<Battle>,
 ): Animate {
   const param = toBattleAnimationParam(props, gameState);
 

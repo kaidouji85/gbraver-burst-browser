@@ -37,7 +37,7 @@ import { updateRemainingTurnAnimation } from "./update-remaining-turn";
  */
 export function stateAnimation(
   props: StateAnimationProps,
-  gameState: GameState
+  gameState: GameState,
 ): Animate {
   if (gameState.effect.name === "StartGame") {
     const effect: StartGame = gameState.effect;

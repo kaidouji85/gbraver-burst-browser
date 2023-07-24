@@ -6,6 +6,7 @@ env:
     IS_APP_ICON_DEV_ENABLE: true
     SHOULD_LOAD_DEVELOPING_RESOURCE: true
     CAN_PLAY_DEVELOPING_ARMDOZER: true
+    CAN_PLAY_DEVELOPING_PILOT: true
     CAN_PLAY_TUTORIAL_IN_DEVELOPMENT: true
   parameter-store:
     SERVICE: /GbraverBurst/dev/service

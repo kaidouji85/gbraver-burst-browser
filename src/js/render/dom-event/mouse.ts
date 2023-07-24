@@ -25,7 +25,7 @@ export type MouseUp = {
  * @return ストリーム
  */
 export function createMouseDownStream(
-  renderDom: HTMLElement
+  renderDom: HTMLElement,
 ): Observable<MouseDown> {
   return fromEvent<MouseEvent>(renderDom, "mousedown").pipe(
     map((v) => {
@@ -34,7 +34,7 @@ export function createMouseDownStream(
         type: "mouseDown",
         event: v,
       };
-    })
+    }),
   );
 }
 
@@ -45,7 +45,7 @@ export function createMouseDownStream(
  * @return ストリーム
  */
 export function createMouseMoveStream(
-  renderDom: HTMLElement
+  renderDom: HTMLElement,
 ): Observable<MouseMove> {
   return fromEvent<MouseEvent>(renderDom, "mousemove").pipe(
     map((v) => {
@@ -54,7 +54,7 @@ export function createMouseMoveStream(
         type: "mouseMove",
         event: v,
       };
-    })
+    }),
   );
 }
 
@@ -65,7 +65,7 @@ export function createMouseMoveStream(
  * @return ストリーム
  */
 export function createMouseUpStream(
-  renderDom: HTMLElement
+  renderDom: HTMLElement,
 ): Observable<MouseUp> {
   return fromEvent<MouseEvent>(renderDom, "mouseup").pipe(
     map((v) => {
@@ -74,6 +74,6 @@ export function createMouseUpStream(
         type: "mouseUp",
         event: v,
       };
-    })
+    }),
   );
 }

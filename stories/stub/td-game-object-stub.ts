@@ -1,4 +1,4 @@
-import TWEEN from "@tweenjs/tween.js";
+import * as TWEEN from "@tweenjs/tween.js";
 import { Observable, Subject, Unsubscribable } from "rxjs";
 import * as THREE from "three";
 
@@ -79,12 +79,12 @@ export class TDGameObjectStub {
     this._scene = new THREE.Scene();
     this._camera = new TDCamera(this._update, this._resize);
     this._overlap = this._renderer.createOverlapNotifier(
-      this._camera.getCamera()
+      this._camera.getCamera(),
     );
     this._gameObjectAction = gameObjectStream(
       this._update,
       this._preRender,
-      this._overlap
+      this._overlap,
     );
     this._unsubscriber = [
       this._gameLoop.subscribe((v) => {

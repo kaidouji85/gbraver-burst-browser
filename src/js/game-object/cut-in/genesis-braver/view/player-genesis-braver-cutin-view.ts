@@ -41,17 +41,17 @@ export class PlayerGenesisBraverCutInView implements GenesisBraverCutInView {
   /** @override */
   engage(model: GenesisBraverCutInModel, preRender: PreRender): void {
     const currentMesh = this.#meshes.find(
-      (v) => v.type === model.animation.type
+      (v) => v.type === model.animation.type,
     );
     if (currentMesh) {
       currentMesh.mesh.animate(model.animation.frame);
-      currentMesh.mesh.setOpacity(model.opacity);
+      currentMesh.mesh.opacity(model.opacity);
     }
 
     this.#meshes
       .filter((v) => v !== currentMesh)
       .forEach(({ mesh }) => {
-        mesh.setOpacity(0);
+        mesh.opacity(0);
       });
 
     const scale =

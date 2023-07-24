@@ -32,7 +32,7 @@ type DataIDs = {
 function rootInnerHTML(
   ids: DataIDs,
   resources: Resources,
-  caption: string
+  caption: string,
 ): string {
   const closerPath =
     resources.paths.find((v) => v.id === PathIds.CLOSER)?.path ?? "";
@@ -76,14 +76,14 @@ function extractElements(root: HTMLElement, ids: DataIDs): Elements {
     root.querySelector(`[data-id="${ids.backGround}"]`) ??
     document.createElement("div");
   const loginButtonElement = root.querySelector(
-    `[data-id="${ids.loginButton}"]`
+    `[data-id="${ids.loginButton}"]`,
   );
   const loginButton =
     loginButtonElement instanceof HTMLButtonElement
       ? loginButtonElement
       : document.createElement("button");
   const closeButtonElement = root.querySelector(
-    `[data-id="${ids.closeButton}"]`
+    `[data-id="${ids.closeButton}"]`,
   );
   const closeButton =
     closeButtonElement instanceof HTMLButtonElement

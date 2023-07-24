@@ -31,7 +31,7 @@ type Configs = {
  */
 export function extractUnloadedResorceConfigs(
   configs: Configs,
-  resources: Resources
+  resources: Resources,
 ): Configs {
   const loadedGltfIDs = resources.gltfs.map((v) => v.id);
   const loadedTextureIDs = resources.textures.map((v) => v.id);
@@ -40,19 +40,19 @@ export function extractUnloadedResorceConfigs(
   const loadedSoundIDs = resources.sounds.map((v) => v.id);
   return {
     gltfConfigs: configs.gltfConfigs.filter(
-      (v) => !loadedGltfIDs.includes(v.id)
+      (v) => !loadedGltfIDs.includes(v.id),
     ),
     textureConfigs: configs.textureConfigs.filter(
-      (v) => !loadedTextureIDs.includes(v.id)
+      (v) => !loadedTextureIDs.includes(v.id),
     ),
     cubeTextureConfigs: configs.cubeTextureConfigs.filter(
-      (v) => !loadedCubeTextureIDs.includes(v.id)
+      (v) => !loadedCubeTextureIDs.includes(v.id),
     ),
     canvasImageConfigs: configs.canvasImageConfigs.filter(
-      (v) => !loadedCanvasImageIDs.includes(v.id)
+      (v) => !loadedCanvasImageIDs.includes(v.id),
     ),
     soundConfigs: configs.soundConfigs.filter(
-      (v) => !loadedSoundIDs.includes(v.id)
+      (v) => !loadedSoundIDs.includes(v.id),
     ),
   };
 }

@@ -19,8 +19,8 @@ export function close(model: BatterySelectorModel): Animate {
         {
           opacity: 0,
         },
-        200
-      )
-    )
+        200,
+      ),
+    ),
   );
 }

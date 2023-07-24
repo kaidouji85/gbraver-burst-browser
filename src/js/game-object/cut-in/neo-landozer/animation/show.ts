@@ -23,16 +23,16 @@ export function show(model: NeoLandozerCutInModel): Animate {
             {
               frame: 1,
             },
-            200
-          )
-        )
+            200,
+          ),
+        ),
       )
       .chain(delay(500))
       .chain(
         process(() => {
           model.animation.type = "CUT_IN_DOWN";
           model.animation.frame = 0;
-        })
+        }),
       )
       .chain(
         tween(model.animation, (t) =>
@@ -40,9 +40,9 @@ export function show(model: NeoLandozerCutInModel): Animate {
             {
               frame: 1,
             },
-            200
-          )
-        )
+            200,
+          ),
+        ),
       ),
     process(() => {
       model.opacity = 0;
@@ -52,9 +52,9 @@ export function show(model: NeoLandozerCutInModel): Animate {
           {
             opacity: 1,
           },
-          600
-        )
-      )
+          600,
+        ),
+      ),
     ),
     process(() => {
       model.scale = 0.9;
@@ -64,9 +64,9 @@ export function show(model: NeoLandozerCutInModel): Animate {
           {
             scale: 1,
           },
-          300
-        )
-      )
-    )
+          300,
+        ),
+      ),
+    ),
   );
 }

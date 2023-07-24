@@ -11,7 +11,7 @@ import { openHelpMenu } from "./open-help-menu";
  */
 export function onHelpIconPush(
   props: TitleProps,
-  action: Readonly<PushDOM>
+  action: Readonly<PushDOM>,
 ): void {
   action.event.preventDefault();
 

@@ -54,7 +54,7 @@ Routing.registerRoute(
         maxAgeSeconds: 3 * 24 * 60 * 60,
       }),
     ],
-  })
+  }),
 );
 
 Routing.registerRoute(
@@ -66,5 +66,5 @@ Routing.registerRoute(
         maxAgeSeconds: 3 * 24 * 60 * 60,
       }),
     ],
-  })
+  }),
 );

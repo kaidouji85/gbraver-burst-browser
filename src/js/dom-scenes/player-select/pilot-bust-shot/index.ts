@@ -30,7 +30,7 @@ export class PilotBustShotContainer {
   constructor(
     resources: Resources,
     pilotIds: PilotId[],
-    initialPilotId: PilotId
+    initialPilotId: PilotId,
   ) {
     this.#pilotId = initialPilotId;
     this.#root = document.createElement("div");
@@ -60,7 +60,6 @@ export class PilotBustShotContainer {
    */
   switch(pilotId: PilotId): void {
     const target = this.#bustShots.find((v) => v.pilotId === pilotId);
-
     if (!target) {
       return;
     }

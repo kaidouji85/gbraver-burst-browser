@@ -36,7 +36,7 @@ export type TutorialStageElementProps = {
 export function createTutorialStageElementProps(
   resources: Readonly<Resources>,
   stage: Readonly<TutorialStage>,
-  level: Readonly<number>
+  level: Readonly<number>,
 ) {
   const ids: DataIDs = {
     overlay: domUuid(),
@@ -46,13 +46,13 @@ export function createTutorialStageElementProps(
     createEmptySoundResource();
   const root = document.createElement("div");
   root.className = ROOT_CLASS;
-  root.innerHTML = rootInnerHTML(ids, level, stage.title);
+  root.innerHTML = rootInnerHTML(ids, stage.type, level, stage.title);
   const elements = extractElements(root, ids);
   const select = domClickStream(root).pipe(
     map((action) => {
       action.event.preventDefault();
       action.event.stopPropagation();
-    })
+    }),
   );
   return {
     root,

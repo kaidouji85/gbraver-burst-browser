@@ -11,7 +11,7 @@ export class NeoLandozerSounds {
 
   constructor(resources: Resources) {
     const motorResource = resources.sounds.find(
-      (v) => v.id === SOUND_IDS.MOTOR
+      (v) => v.id === SOUND_IDS.MOTOR,
     );
     this.motor = motorResource ? motorResource.sound : new Howl({ src: "" });
   }

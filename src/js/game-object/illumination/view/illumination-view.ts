@@ -14,15 +14,16 @@ export class IlluminationView {
    * コンストラクタ
    */
   constructor() {
-    this.#directionalLight1 = new THREE.DirectionalLight(0xaaaaaa);
+    const lightColor = 0xaaaaaa;
+    this.#directionalLight1 = new THREE.DirectionalLight(lightColor);
     this.#directionalLight1.position.set(1, 1, 1);
-    this.#directionalLight2 = new THREE.DirectionalLight(0xaaaaaa);
+    this.#directionalLight2 = new THREE.DirectionalLight(lightColor);
     this.#directionalLight2.position.set(-1, 1, 1);
-    this.#directionalLight3 = new THREE.DirectionalLight(0xaaaaaa);
+    this.#directionalLight3 = new THREE.DirectionalLight(lightColor);
     this.#directionalLight3.position.set(1, -1, 1);
-    this.#directionalLight4 = new THREE.DirectionalLight(0xaaaaaa);
+    this.#directionalLight4 = new THREE.DirectionalLight(lightColor);
     this.#directionalLight4.position.set(-1, -1, 1);
-    this.#ambientLight = new THREE.AmbientLight(0xaaaaaa);
+    this.#ambientLight = new THREE.AmbientLight(lightColor);
   }
 
   /**

@@ -7,7 +7,7 @@ type Connector = DomDialogActionConnector<PrivateMatchHostDialog>;
 /** プライベートマッチ（ホスト）ダイアログとゲームアクションを関連付ける */
 export const privateMatchHostDialogConnector: Connector = (
   dialog,
-  gameAction
+  gameAction,
 ) => [
   dialog.notifyDialogClosed().subscribe(() => {
     gameAction.next({ type: "MatchingCanceled" });

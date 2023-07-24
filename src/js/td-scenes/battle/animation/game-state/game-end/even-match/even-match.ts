@@ -20,8 +20,8 @@ export function evenMatchAnimation(props: StateAnimationProps): Animate {
       .chain(
         ...(props.view.hud.players.map((v) => v.resultIndicator.hidden()) as [
           Animate,
-          Animate
-        ])
-      )
+          Animate,
+        ]),
+      ),
   );
 }

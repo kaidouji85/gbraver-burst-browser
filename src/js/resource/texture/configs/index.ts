@@ -18,6 +18,7 @@ import { ShinyaTextureConfigs } from "./sinya";
 import { TsubasaTextureConfigs } from "./tsubasa";
 import { TurnTexureConfigs } from "./turn";
 import { WingDozerTextureConfigs } from "./wing-dozer";
+import { YuuyaTextureConfigs } from "./yuuya";
 
 /** テクスチャ設定をまとめたもの */
 export const TEXTURE_CONFIGS: TextureConfig[] = [
@@ -43,4 +44,6 @@ export const TEXTURE_CONFIGS: TextureConfig[] = [
 ];
 
 /** 開発中のテクスチャリソース設定をあつめたもの */
-export const DEVELOPING_TEXTURE_CONFIGS: TextureConfig[] = [];
+export const DEVELOPING_TEXTURE_CONFIGS: TextureConfig[] = [
+  ...YuuyaTextureConfigs,
+];

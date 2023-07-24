@@ -25,7 +25,7 @@ export type TouchEnd = {
  * @return ストリーム
  */
 export function createTouchStartStream(
-  renderDom: HTMLElement
+  renderDom: HTMLElement,
 ): Observable<TouchStart> {
   return fromEvent<TouchEvent>(renderDom, "touchstart").pipe(
     map((v) => {
@@ -34,7 +34,7 @@ export function createTouchStartStream(
         type: "touchStart",
         event: v,
       };
-    })
+    }),
   );
 }
 
@@ -45,7 +45,7 @@ export function createTouchStartStream(
  * @return ストリーム
  */
 export function createTouchMoveStream(
-  renderDom: HTMLElement
+  renderDom: HTMLElement,
 ): Observable<TouchMove> {
   return fromEvent<TouchEvent>(renderDom, "touchmove").pipe(
     map((v) => {
@@ -54,7 +54,7 @@ export function createTouchMoveStream(
         type: "touchMove",
         event: v,
       };
-    })
+    }),
   );
 }
 
@@ -65,7 +65,7 @@ export function createTouchMoveStream(
  * @return ストリーム
  */
 export function createTouchEndStream(
-  renderDom: HTMLElement
+  renderDom: HTMLElement,
 ): Observable<TouchEnd> {
   return fromEvent<TouchEvent>(renderDom, "touchend").pipe(
     map((v) => {
@@ -74,6 +74,6 @@ export function createTouchEndStream(
         type: "touchEnd",
         event: v,
       };
-    })
+    }),
   );
 }

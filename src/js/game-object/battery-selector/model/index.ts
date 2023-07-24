@@ -15,7 +15,7 @@ export type BatterySelectorModel = {
   needle: number;
   /** バッテリーボタンラベル */
   label: ButtonLabel;
-  /** 透明度 1〜0で指定して1で完全不透明 */
+  /** 不透明度 1〜0で指定して1で完全不透明 */
   opacity: number;
   /**
    * 押下通知が無効であるか否か、trueで通知不可能

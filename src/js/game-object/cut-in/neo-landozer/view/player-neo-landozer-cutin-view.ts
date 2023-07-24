@@ -27,7 +27,7 @@ export class PlayerNeoLandozerCutInView implements NeoLandozerCutInView {
     this.#group = new THREE.Group();
     this.#group.position.z = HUD_CUT_IN_ZNIDEX;
     const cutInUpResource = resources.textures.find(
-      (v) => v.id === TEXTURE_IDS.NEO_LANDOZER_CUTIN_UP
+      (v) => v.id === TEXTURE_IDS.NEO_LANDOZER_CUTIN_UP,
     );
     const cutInUp = cutInUpResource
       ? cutInUpResource.texture
@@ -39,7 +39,7 @@ export class PlayerNeoLandozerCutInView implements NeoLandozerCutInView {
       height: HEIGHT,
     });
     const cutInDownResource = resources.textures.find(
-      (v) => v.id === TEXTURE_IDS.NEO_LANDOZER_CUTIN_DOWN
+      (v) => v.id === TEXTURE_IDS.NEO_LANDOZER_CUTIN_DOWN,
     );
     const cutInDown = cutInDownResource
       ? cutInDownResource.texture
@@ -72,12 +72,12 @@ export class PlayerNeoLandozerCutInView implements NeoLandozerCutInView {
    */
   engage(model: NeoLandozerCutInModel, preRender: PreRender): void {
     const activeMesh = this.#getActiveMesh(model.animation.type);
-    activeMesh.setOpacity(model.opacity);
+    activeMesh.opacity(model.opacity);
     activeMesh.animate(model.animation.frame);
     this.#getAllMeshes()
       .filter((v) => v !== activeMesh)
       .forEach((v) => {
-        v.setOpacity(0);
+        v.opacity(0);
       });
     const scale =
       model.scale *

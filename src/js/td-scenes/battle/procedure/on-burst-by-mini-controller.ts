@@ -1,6 +1,6 @@
 import { BurstCommand } from "gbraver-burst-core";
 
-import { decisionByBurstButton } from "../animation/decision-by-bursy-button";
+import { decisionByBurstButton } from "../animation/decision-by-burst-button";
 import { decisionByMiniController } from "../animation/decision-by-mini-controller";
 import { animationPlayer } from "../animation-player";
 import { BattleSceneProps } from "../battle-scene-props";
@@ -14,7 +14,7 @@ import { progressGame } from "./progress-game";
  * @return 処理が完了したら発火するPromise
  */
 export function onBurstByMiniController(
-  props: Readonly<BattleSceneProps>
+  props: Readonly<BattleSceneProps>,
 ): void {
   props.exclusive.execute(async () => {
     const burstCommand: BurstCommand = {
@@ -22,7 +22,7 @@ export function onBurstByMiniController(
     };
     const { isCommandCanceled } = await doBurstEventIfNeeded(
       props,
-      burstCommand
+      burstCommand,
     );
     if (isCommandCanceled) {
       return;

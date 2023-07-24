@@ -15,18 +15,18 @@ import type { StateAnimationProps } from "./state-animation-props";
  */
 export function updateRemainingTurnAnimation(
   props: StateAnimationProps,
-  gameState: GameStateX<UpdateRemainingTurn>
+  gameState: GameStateX<UpdateRemainingTurn>,
 ): Animate {
   const endLightningBarrier = gameState.effect.endArmdozerEffects.filter(
     (end) =>
-      end.effect.type === "TryReflect" && end.effect.effect === "Lightning"
+      end.effect.type === "TryReflect" && end.effect.effect === "Lightning",
   );
   const endLightningBarrierAnimates: Animate[] = props.view.td.armdozerObjects
     .filter((td) =>
-      endLightningBarrier.find((end) => end.playerId === td.playerId)
+      endLightningBarrier.find((end) => end.playerId === td.playerId),
     )
     .map((td) =>
-      td instanceof LightningDozerTD ? td.lightningBarrier.hidden() : empty()
+      td instanceof LightningDozerTD ? td.lightningBarrier.hidden() : empty(),
     );
   return all(...endLightningBarrierAnimates);
 }

@@ -1,7 +1,7 @@
 import { BurstCommand } from "gbraver-burst-core";
 
 import type { DoBurst } from "../actions/do-burst";
-import { decisionByBurstButton } from "../animation/decision-by-bursy-button";
+import { decisionByBurstButton } from "../animation/decision-by-burst-button";
 import { animationPlayer } from "../animation-player";
 import type { BattleSceneProps } from "../battle-scene-props";
 import { doBurstEventIfNeeded } from "./do-burst-event-if-needed";
@@ -16,7 +16,7 @@ import { progressGame } from "./progress-game";
  */
 export function onBurst(
   props: Readonly<BattleSceneProps>,
-  action: DoBurst
+  action: DoBurst,
 ): void {
   props.exclusive.execute(async () => {
     action.event.stopPropagation();
@@ -25,7 +25,7 @@ export function onBurst(
     };
     const { isCommandCanceled } = await doBurstEventIfNeeded(
       props,
-      burstCommand
+      burstCommand,
     );
     if (isCommandCanceled) {
       return;

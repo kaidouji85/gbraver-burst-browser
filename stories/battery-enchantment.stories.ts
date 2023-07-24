@@ -24,9 +24,9 @@ const batteryEnchantmentStory =
   (
     generator: (
       resources: Resources,
-      gameObjectAction: Observable<GameObjectAction>
+      gameObjectAction: Observable<GameObjectAction>,
     ) => BatteryEnchantment,
-    fn: (batteryEnchantment: BatteryEnchantment) => void
+    fn: (batteryEnchantment: BatteryEnchantment) => void,
   ) =>
   () => {
     const stub = new TDGameObjectStub(({ resources, gameObjectAction }) => {
@@ -51,11 +51,11 @@ const popUp = (batteryEnchantment: BatteryEnchantment) => {
 /** プレイヤー バッテリー増強インジケータ ポップアップ */
 export const playerPopUp = batteryEnchantmentStory(
   playerBatteryEnchantment,
-  popUp
+  popUp,
 );
 
 /** 敵 バッテリー増強インジケータ ポップアップ */
 export const enemyPopUP = batteryEnchantmentStory(
   enemyBatteryEnchantment,
-  popUp
+  popUp,
 );

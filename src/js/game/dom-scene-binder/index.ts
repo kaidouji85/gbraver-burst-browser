@@ -35,7 +35,7 @@ export class DOMSceneBinder {
    */
   bind<X extends DOMScene>(
     scene: X,
-    connector: DOMSceneActionConnector<X>
+    connector: DOMSceneActionConnector<X>,
   ): void {
     bind(this.#props, scene, connector);
   }

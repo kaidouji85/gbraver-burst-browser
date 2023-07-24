@@ -8,7 +8,7 @@ import { BatteryButtonProps } from "../props";
  */
 export function onBatteryPush(
   props: Readonly<BatteryButtonProps>,
-  action: Readonly<PushDOM>
+  action: Readonly<PushDOM>,
 ): void {
   action.event.preventDefault();
   action.event.stopPropagation();

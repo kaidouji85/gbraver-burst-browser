@@ -9,7 +9,7 @@ import { TutorialSelectorProps } from "../props";
  */
 export function onPrevPush(
   props: Readonly<TutorialSelectorProps>,
-  action: Readonly<PushDOM>
+  action: Readonly<PushDOM>,
 ): void {
   action.event.stopPropagation();
   action.event.preventDefault();

@@ -15,24 +15,24 @@ import { showCommand } from "./show-command";
  */
 export function inputCommandAnimation(
   props: StateAnimationProps,
-  gameState: GameStateX<InputCommand>
+  gameState: GameStateX<InputCommand>,
 ): Animate {
   const player = gameState.players.find((v) => v.playerId === props.playerId);
   const playerCommand = gameState.effect.players.find(
-    (v) => v.playerId === props.playerId
+    (v) => v.playerId === props.playerId,
   );
   const playerTDArmdozer = props.view.td.armdozerObjects.find(
-    (v) => v.playerId === props.playerId
+    (v) => v.playerId === props.playerId,
   );
   const playerHUD = props.view.hud.players.find(
-    (v) => v.playerId === props.playerId
+    (v) => v.playerId === props.playerId,
   );
   const enemy = gameState.players.find((v) => v.playerId !== props.playerId);
   const enemyTDArmdozer = props.view.td.armdozerObjects.find(
-    (v) => v.playerId !== props.playerId
+    (v) => v.playerId !== props.playerId,
   );
   const enemyHUD = props.view.hud.players.find(
-    (v) => v.playerId !== props.playerId
+    (v) => v.playerId !== props.playerId,
   );
 
   if (
@@ -53,14 +53,10 @@ export function inputCommandAnimation(
 
   const isPlayerTurn = props.playerId === gameState.activePlayerId;
   return all(
-    isPlayerTurn
-      ? playerTDArmdozer.sprite().startActive()
-      : enemyTDArmdozer.sprite().startActive(),
     playerHUD.gauge.hp(player.armdozer.hp),
     playerHUD.gauge.battery(player.armdozer.battery),
     enemyHUD.gauge.hp(enemy.armdozer.hp),
     enemyHUD.gauge.battery(enemy.armdozer.battery),
-    props.view.td.gameObjects.turnIndicator.turnChange(isPlayerTurn),
     showCommand({
       view: props.view,
       isPlayerTurn,
@@ -68,6 +64,9 @@ export function inputCommandAnimation(
       commands: playerCommand.command,
       controllerType: props.controllerType,
     }),
-    props.view.hud.gameObjects.timeScaleButton.open(props.animationTimeScale)
+    props.view.hud.gameObjects.timeScaleButton.open(props.animationTimeScale),
+    isPlayerTurn
+      ? playerTDArmdozer.sprite().startActive()
+      : enemyTDArmdozer.sprite().startActive(),
   );
 }

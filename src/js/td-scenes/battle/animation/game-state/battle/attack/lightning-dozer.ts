@@ -33,7 +33,7 @@ function focusToAttacker(camera: TDCamera, attacker: LightningDozer): Animate {
   const duration = 400;
   return all(
     track(camera, attacker.getObject3D().position.x * 0.6, duration),
-    dolly(camera, "-30", duration)
+    dolly(camera, "-30", duration),
   );
 }
 
@@ -48,7 +48,7 @@ type AttackResult = NormalHit | CriticalHit;
 function attack(param: LightningDozerBattle<AttackResult>): Animate {
   return all(
     param.attackerSprite.charge().chain(delay(500)),
-    focusToAttacker(param.tdCamera, param.attackerSprite)
+    focusToAttacker(param.tdCamera, param.attackerSprite),
   )
     .chain(param.attackerSprite.armHammer())
     .chain(
@@ -58,8 +58,8 @@ function attack(param: LightningDozerBattle<AttackResult>): Animate {
         param.defenderTD.damageIndicator.popUp(param.result.damage),
         param.defenderSprite.knockBack(),
         param.defenderTD.hitMark.shockWave.popUp(),
-        param.defenderHUD.gauge.hp(param.defenderState.armdozer.hp)
-      )
+        param.defenderHUD.gauge.hp(param.defenderState.armdozer.hp),
+      ),
     );
 }
 
@@ -79,8 +79,8 @@ function guard(param: LightningDozerBattle<Guard>): Animate {
         param.defenderTD.damageIndicator.popUp(param.result.damage),
         param.defenderSprite.guard(),
         param.defenderTD.hitMark.shockWave.popUp(),
-        param.defenderHUD.gauge.hp(param.defenderState.armdozer.hp)
-      )
+        param.defenderHUD.gauge.hp(param.defenderState.armdozer.hp),
+      ),
     );
 }
 
@@ -111,7 +111,7 @@ type DownResult = NormalHit | Guard | CriticalHit;
 function down(param: LightningDozerBattle<DownResult>): Animate {
   return all(
     param.attackerSprite.charge().chain(delay(500)),
-    focusToAttacker(param.tdCamera, param.attackerSprite)
+    focusToAttacker(param.tdCamera, param.attackerSprite),
   )
     .chain(param.attackerSprite.armHammer())
     .chain(
@@ -125,8 +125,8 @@ function down(param: LightningDozerBattle<DownResult>): Animate {
         param.defenderTD.damageIndicator.popUp(param.result.damage),
         param.defenderSprite.down(),
         param.defenderTD.hitMark.shockWave.popUp(),
-        param.defenderHUD.gauge.hp(param.defenderState.armdozer.hp)
-      )
+        param.defenderHUD.gauge.hp(param.defenderState.armdozer.hp),
+      ),
     );
 }
 
@@ -149,7 +149,7 @@ function feint(param: LightningDozerBattle<Feint>): Animate {
  * @return アニメーション
  */
 export function lightningDozerAttack(
-  param: LightningDozerBattle<BattleResult>
+  param: LightningDozerBattle<BattleResult>,
 ): Animate {
   if (param.isDeath && param.result.name === "NormalHit") {
     const result: NormalHit = param.result;

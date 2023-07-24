@@ -57,7 +57,7 @@ export class WingDozerHUD implements HUDArmdozerObjects {
 export function playerWingDozerHUD(
   resources: Resources,
   gameObjectAction: Observable<GameObjectAction>,
-  state: Player
+  state: Player,
 ): WingDozerHUD {
   return new WingDozerHUD({
     playerId: state.playerId,
@@ -76,7 +76,7 @@ export function playerWingDozerHUD(
 export function enemyWingDozerHUD(
   resources: Resources,
   gameObjectAction: Observable<GameObjectAction>,
-  state: Player
+  state: Player,
 ): WingDozerHUD {
   return new WingDozerHUD({
     playerId: state.playerId,

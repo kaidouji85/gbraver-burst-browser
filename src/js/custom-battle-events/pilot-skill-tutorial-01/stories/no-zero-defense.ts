@@ -8,7 +8,7 @@ import { scrollRightMessages } from "../../scroll-messages";
  * @return 処理が完了したら発火するPromise
  */
 export async function noZeroDefense(
-  props: Readonly<CustomBattleEventProps>
+  props: Readonly<CustomBattleEventProps>,
 ): Promise<void> {
   activeRightMessageWindowWithFace(props, "Shinya");
   await scrollRightMessages(props, [

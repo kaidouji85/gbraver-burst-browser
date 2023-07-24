@@ -16,7 +16,7 @@ import { BatteryButtonProps } from "../props";
  */
 export function engage(
   props: Readonly<BatteryButtonProps>,
-  config: BatteryButtonConfig
+  config: BatteryButtonConfig,
 ): void {
   const isVisible = props.battery <= config.maxBattery;
   const isFirst = props.battery === 0;

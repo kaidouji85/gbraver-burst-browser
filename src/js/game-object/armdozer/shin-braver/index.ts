@@ -15,7 +15,7 @@ import { PlayerShinBraverView } from "./view/player-shin-braver-view";
  */
 export function PlayerShinBraver(
   resources: Resources,
-  gameObjectAction: Observable<GameObjectAction>
+  gameObjectAction: Observable<GameObjectAction>,
 ): ShinBraver {
   const view = new PlayerShinBraverView(resources);
   return new ShinBraver(view, resources, gameObjectAction);
@@ -30,7 +30,7 @@ export function PlayerShinBraver(
  */
 export function EnemyShinBraver(
   resources: Resources,
-  gameObjectAction: Observable<GameObjectAction>
+  gameObjectAction: Observable<GameObjectAction>,
 ): ShinBraver {
   const view = new EnemyShinBraverView(resources);
   return new ShinBraver(view, resources, gameObjectAction);

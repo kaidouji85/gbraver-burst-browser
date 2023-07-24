@@ -9,7 +9,7 @@ import { MessageWindowProps } from "../props";
  */
 export function visible(
   props: Readonly<MessageWindowProps>,
-  isVisible: boolean
+  isVisible: boolean,
 ): void {
   props.root.className = isVisible
     ? toRootClass(props.type)

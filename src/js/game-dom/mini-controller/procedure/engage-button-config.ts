@@ -8,7 +8,7 @@ import { MiniControllerProps } from "../props";
  */
 export function engageButtonConfig(
   props: MiniControllerProps,
-  config: ButtonConfig
+  config: ButtonConfig,
 ): void {
   props.batteryButtons.forEach((batteryButton) => {
     batteryButton.engage(config);

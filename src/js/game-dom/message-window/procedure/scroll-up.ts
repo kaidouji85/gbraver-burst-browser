@@ -7,7 +7,7 @@ import { MessageWindowProps } from "../props";
  * @return アニメーションが完了したら発火するPromise
  */
 export async function scrollUp(
-  props: Readonly<MessageWindowProps>
+  props: Readonly<MessageWindowProps>,
 ): Promise<void> {
   await waitFinishAnimation(
     props.messages.animate(
@@ -21,7 +21,7 @@ export async function scrollUp(
       ],
       {
         duration: 100,
-      }
-    )
+      },
+    ),
   );
 }

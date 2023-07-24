@@ -25,22 +25,22 @@ const ZERO_BATTERY: Command = {
 const attackRoutine: SimpleRoutine = (data) => {
   const burst = data.commands.find((v) => v.type === "BURST_COMMAND");
   const battery5 = data.commands.find(
-    (v) => v.type === "BATTERY_COMMAND" && v.battery === 5
+    (v) => v.type === "BATTERY_COMMAND" && v.battery === 5,
   );
   const allBattery = data.commands.find(
     (v) =>
-      v.type === "BATTERY_COMMAND" && v.battery === data.enemy.armdozer.battery
+      v.type === "BATTERY_COMMAND" && v.battery === data.enemy.armdozer.battery,
   );
   const allBatteryMinusOne = data.commands.find(
     (v) =>
       v.type === "BATTERY_COMMAND" &&
-      v.battery === data.enemy.armdozer.battery - 1
+      v.battery === data.enemy.armdozer.battery - 1,
   );
   const canBeatDownWithAllBattery = canBeatDown(
     data.enemy,
     data.enemy.armdozer.battery,
     data.player,
-    data.player.armdozer.battery
+    data.player.armdozer.battery,
   );
   const hasCorrectPower = 0 < totalCorrectPower(data.enemy.armdozer.effects);
 
@@ -77,33 +77,33 @@ const defenseRoutine: SimpleRoutine = (data) => {
   const burst = data.commands.find((v) => v.type === "BURST_COMMAND");
   const allBattery = data.commands.find(
     (v) =>
-      v.type === "BATTERY_COMMAND" && v.battery === data.enemy.armdozer.battery
+      v.type === "BATTERY_COMMAND" && v.battery === data.enemy.armdozer.battery,
   );
   const allBatteryMinusTwo = data.commands.find(
     (v) =>
       v.type === "BATTERY_COMMAND" &&
-      v.battery === data.enemy.armdozer.battery - 2
+      v.battery === data.enemy.armdozer.battery - 2,
   );
   const battery1 = data.commands.find(
-    (v) => v.type === "BATTERY_COMMAND" && v.battery === 1
+    (v) => v.type === "BATTERY_COMMAND" && v.battery === 1,
   );
   const isDefeatedWithAllBattery = canBeatDown(
     data.player,
     data.player.armdozer.battery,
     data.enemy,
-    data.enemy.armdozer.battery
+    data.enemy.armdozer.battery,
   );
   const isDefeatedWithAllBatteryMinusTwo = canBeatDown(
     data.player,
     data.player.armdozer.battery,
     data.enemy,
-    data.enemy.armdozer.battery - 2
+    data.enemy.armdozer.battery - 2,
   );
   const isDefeatedWithBattery1 = canBeatDown(
     data.player,
     data.player.armdozer.battery,
     data.enemy,
-    1
+    1,
   );
 
   if (pilot) {

@@ -53,7 +53,7 @@ function extractElements(root: HTMLElement, ids: DataIDs): Elements {
     root.querySelector(`[data-id="${ids.caption}"]`) ??
     document.createElement("div");
   const armDozerIconElement = root.querySelector(
-    `[data-id="${ids.armDozerIcon}"]`
+    `[data-id="${ids.armDozerIcon}"]`,
   );
   const armDozerIcon =
     armDozerIconElement instanceof HTMLImageElement
@@ -106,7 +106,7 @@ export class StageTitle implements DOMScene {
         <span class="${ROOT_CLASS}__caption-clause">
           ${v}
         </span>
-      `
+      `,
       )
       .reduce((a, b) => a + b);
   }

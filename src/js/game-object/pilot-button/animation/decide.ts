@@ -13,7 +13,7 @@ import { PilotButtonSounds } from "../sounds/pilot-button-sounds";
  */
 export function decide(
   model: PilotButtonModel,
-  sounds: PilotButtonSounds
+  sounds: PilotButtonSounds,
 ): Animate {
   return process(() => {
     model.isPushNotifierDisabled = true;
@@ -25,9 +25,9 @@ export function decide(
           {
             scale: 1.1,
           },
-          100
-        )
-      )
+          100,
+        ),
+      ),
     )
     .chain(
       tween(model, (t) =>
@@ -35,8 +35,8 @@ export function decide(
           {
             scale: 1,
           },
-          100
-        )
-      )
+          100,
+        ),
+      ),
     );
 }

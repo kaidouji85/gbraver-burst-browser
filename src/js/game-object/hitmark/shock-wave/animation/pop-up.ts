@@ -1,4 +1,4 @@
-import TWEEN from "@tweenjs/tween.js";
+import * as TWEEN from "@tweenjs/tween.js";
 
 import { all } from "../../../../animation/all";
 import { Animate } from "../../../../animation/animate";
@@ -22,7 +22,7 @@ export const DURATION = 800;
 export function popUp(model: ShockWaveModel): Animate {
   return all(
     ...model.lines.map((v) => lineAnimation(v)),
-    ringAnimation(model.ring)
+    ringAnimation(model.ring),
   );
 }
 
@@ -45,10 +45,10 @@ function lineAnimation(model: ShockWaveLineModel): Animate {
             opacity: 0,
             scale: model.toScale,
           },
-          DURATION
+          DURATION,
         )
-        .easing(TWEEN.Easing.Quadratic.Out)
-    )
+        .easing(TWEEN.Easing.Quadratic.Out),
+    ),
   );
 }
 
@@ -70,9 +70,9 @@ function ringAnimation(model: ShockWaveRingModel): Animate {
             opacity: 0,
             scale: 1,
           },
-          DURATION
+          DURATION,
         )
-        .easing(TWEEN.Easing.Quadratic.Out)
-    )
+        .easing(TWEEN.Easing.Quadratic.Out),
+    ),
   );
 }

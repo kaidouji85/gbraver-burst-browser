@@ -26,7 +26,7 @@ export class PlayerRecoverBatteryView implements RecoverBatteryView {
   constructor(resources: Resources) {
     this.#group = new THREE.Group();
     const batteryNumberResource = resources.textures.find(
-      (v) => v.id === TEXTURE_IDS.BATTERY_NUMBER
+      (v) => v.id === TEXTURE_IDS.BATTERY_NUMBER,
     );
     const batteryNumber = batteryNumberResource
       ? batteryNumberResource.texture
@@ -60,12 +60,12 @@ export class PlayerRecoverBatteryView implements RecoverBatteryView {
    */
   engage(model: RecoverBatteryModel): void {
     this.#signMesh.animate(SIGN_FRAME);
-    this.#signMesh.setOpacity(model.opacity);
+    this.#signMesh.opacity(model.opacity);
     this.#signMesh.getObject3D().position.x = -SIGN_PADDING + GROUP_PADDING;
     this.#signMesh.getObject3D().position.z = 1;
     const battery = Math.min(model.value, MAX_BATTERY) / MAX_ANIMATION;
     this.#numberMesh.animate(battery);
-    this.#numberMesh.setOpacity(model.opacity);
+    this.#numberMesh.opacity(model.opacity);
     this.#numberMesh.getObject3D().position.x = GROUP_PADDING;
     this.#numberMesh.getObject3D().position.z = 0;
     this.#group.position.x = ARMDOZER_EFFECT_STANDARD_X;

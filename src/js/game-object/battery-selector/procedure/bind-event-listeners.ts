@@ -16,7 +16,7 @@ import { onUpdate } from "./on-update";
  */
 export function bindEventListeners(
   props: BatterySelectorProps,
-  gameObjectAction: Observable<GameObjectAction>
+  gameObjectAction: Observable<GameObjectAction>,
 ): Unsubscribable[] {
   return [
     gameObjectAction.subscribe((action) => {

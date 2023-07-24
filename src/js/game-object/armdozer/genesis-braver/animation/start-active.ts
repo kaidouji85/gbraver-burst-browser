@@ -13,7 +13,7 @@ export function startActive(model: GenesisBraverModel): Animate {
       {
         opacity: 1,
       },
-      500
-    )
+      200,
+    ),
   );
 }

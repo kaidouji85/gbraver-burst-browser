@@ -9,7 +9,7 @@ import type { NeoLandozerSounds } from "../sounds/neo-landozer-sounds";
 /** 避ける */
 export function avoid(
   model: NeoLandozerModel,
-  sounds: NeoLandozerSounds
+  sounds: NeoLandozerSounds,
 ): Animate {
   return process(() => {
     model.animation.type = "BACK_STEP";
@@ -23,24 +23,24 @@ export function avoid(
             {
               frame: 1,
             },
-            300
-          )
+            300,
+          ),
         ),
         tween(model.position, (t) =>
           t.to(
             {
               x: "+100",
             },
-            300
-          )
-        )
-      )
+            300,
+          ),
+        ),
+      ),
     )
     .chain(delay(300))
     .chain(
       process(() => {
         sounds.motor.play();
-      })
+      }),
     )
     .chain(
       tween(model.animation, (t) =>
@@ -48,14 +48,14 @@ export function avoid(
           {
             frame: 0,
           },
-          300
-        )
-      )
+          300,
+        ),
+      ),
     )
     .chain(
       process(() => {
         model.animation.type = "STAND";
         model.animation.frame = 0;
-      })
+      }),
     );
 }

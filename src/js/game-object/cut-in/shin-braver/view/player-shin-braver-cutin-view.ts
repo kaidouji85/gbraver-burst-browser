@@ -29,7 +29,7 @@ export class PlayerShinBraverCutInView implements ShinBraverCutInView {
   constructor(resources: Resources) {
     this.#group = new THREE.Group();
     const cutInUpResource = resources.textures.find(
-      (v) => v.id === TEXTURE_IDS.SHIN_BRAVER_CUTIN_UP
+      (v) => v.id === TEXTURE_IDS.SHIN_BRAVER_CUTIN_UP,
     );
     const cutInUp = cutInUpResource
       ? cutInUpResource.texture
@@ -41,7 +41,7 @@ export class PlayerShinBraverCutInView implements ShinBraverCutInView {
       maxAnimation: 4,
     });
     const cutInDownResource = resources.textures.find(
-      (v) => v.id === TEXTURE_IDS.SHIN_BRAVER_CUTIN_DOWN
+      (v) => v.id === TEXTURE_IDS.SHIN_BRAVER_CUTIN_DOWN,
     );
     const cutInDown = cutInDownResource
       ? cutInDownResource.texture
@@ -76,10 +76,10 @@ export class PlayerShinBraverCutInView implements ShinBraverCutInView {
   engage(model: ShinBraverCutInModel, preRender: PreRender): void {
     const activeMesh = this.#getActiveMesh(model.animation.type);
     activeMesh.animate(model.animation.frame);
-    activeMesh.setOpacity(model.opacity);
+    activeMesh.opacity(model.opacity);
     const disActiveMeshes = this.#getMeshes().filter((v) => v !== activeMesh);
     disActiveMeshes.forEach((v) => {
-      v.setOpacity(0);
+      v.opacity(0);
     });
     const scale =
       HUDCutInScale(preRender.rendererDOM, preRender.safeAreaInset) *

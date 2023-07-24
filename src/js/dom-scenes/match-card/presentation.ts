@@ -25,7 +25,7 @@ export class MatchCardPresentation {
     resources: Resources,
     player: ArmDozerId,
     enemy: ArmDozerId,
-    caption: string
+    caption: string,
   ) {
     const playerId = domUuid();
     const enemyId = domUuid();
@@ -49,7 +49,7 @@ export class MatchCardPresentation {
     this.#isPlayerLoaded = waitElementLoaded(playerImage);
     const playerIconPath = getArmdozerIconPathId(player);
     const playerIconResource = resources.paths.find(
-      (v) => v.id === playerIconPath
+      (v) => v.id === playerIconPath,
     );
     playerImage.src = playerIconResource ? playerIconResource.path : "";
     const enemyElement = this.#root.querySelector(`[data-id="${enemyId}"]`);
@@ -58,7 +58,7 @@ export class MatchCardPresentation {
     this.#isEnemyLoaded = waitElementLoaded(enemyImage);
     const enemyIconPath = getArmdozerIconPathId(enemy);
     const enemyIconResource = resources.paths.find(
-      (v) => v.id === enemyIconPath
+      (v) => v.id === enemyIconPath,
     );
     enemyImage.src = enemyIconResource ? enemyIconResource.path : "";
   }

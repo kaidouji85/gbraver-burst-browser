@@ -91,23 +91,23 @@ export class DOMLayer {
           (v): DecideBatteryByMiniController => ({
             type: "decideBatteryByMiniController",
             battery: v,
-          })
-        )
+          }),
+        ),
       ),
       this.miniController.burstPushNotifier().pipe(
         map(
           (): DoBurstByMiniController => ({
             type: "doBurstByMiniController",
-          })
-        )
+          }),
+        ),
       ),
       this.miniController.pilotPushNotifier().pipe(
         map(
           (): DoPilotSkillByMiniController => ({
             type: "doPilotSkillByMiniController",
-          })
-        )
-      )
+          }),
+        ),
+      ),
     );
   }
 

@@ -113,7 +113,7 @@ export interface CustomBattleEvent {
    * @return コマンドキャンセル情報
    */
   onBatteryCommandSelected(
-    props: BatteryCommandSelected
+    props: BatteryCommandSelected,
   ): Promise<CommandCanceled>;
 
   /**
@@ -129,6 +129,6 @@ export interface CustomBattleEvent {
    * @return コマンドキャンセル情報
    */
   onPilotSkillCommandSelected(
-    props: PilotSkillCommandSelected
+    props: PilotSkillCommandSelected,
   ): Promise<CommandCanceled>;
 }

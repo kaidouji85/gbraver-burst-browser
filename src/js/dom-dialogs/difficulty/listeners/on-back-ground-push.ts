@@ -9,7 +9,7 @@ import type { DifficultyDialogProps } from "../props";
  */
 export function onBackGroundPush(
   props: DifficultyDialogProps,
-  action: PushDOM
+  action: PushDOM,
 ): void {
   action.event.preventDefault();
   action.event.stopPropagation();

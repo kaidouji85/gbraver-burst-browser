@@ -18,7 +18,7 @@ export class GenesisBraverIcon implements ArmdozerIcon {
     this.#group = new THREE.Group();
     const shinBraver =
       resources.textures.find(
-        (v) => v.id === TEXTURE_IDS.GENESIS_BRAVER_BURST_ICON
+        (v) => v.id === TEXTURE_IDS.GENESIS_BRAVER_BURST_ICON,
       )?.texture ?? new THREE.Texture();
     this.#mesh = new HorizontalAnimationMesh({
       texture: shinBraver,
@@ -44,6 +44,6 @@ export class GenesisBraverIcon implements ArmdozerIcon {
 
   /** @override */
   setOpacity(opacity: number): void {
-    this.#mesh.setOpacity(opacity);
+    this.#mesh.opacity(opacity);
   }
 }

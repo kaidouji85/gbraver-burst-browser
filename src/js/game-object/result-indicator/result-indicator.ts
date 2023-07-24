@@ -25,7 +25,7 @@ export class ResultIndicator {
    */
   constructor(
     view: ResultIndicatorView,
-    gameObjectAction: Observable<GameObjectAction>
+    gameObjectAction: Observable<GameObjectAction>,
   ) {
     this.#view = view;
     this.#model = createInitialValue();

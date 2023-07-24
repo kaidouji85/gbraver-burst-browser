@@ -25,7 +25,7 @@ import { invisibleAllMessageWindows } from "./invisible-all-message-windows";
  */
 export const focusInBatterySelector = async (
   props: CustomBattleEventProps,
-  caption: string[]
+  caption: string[],
 ) => {
   unAttentionAllButtons(props);
   disabledAllButtons(props);
@@ -43,7 +43,7 @@ export const focusInBatterySelector = async (
  * @return 判定結果、trueでフォーカスしている
  */
 export const isBatterySelecterFocused = (
-  props: CustomBattleEventProps
+  props: CustomBattleEventProps,
 ): boolean => {
   return (
     !props.view.hud.gameObjects.batterySelector.isDisabled() &&
@@ -58,7 +58,7 @@ export const isBatterySelecterFocused = (
  * @return 処理が完了したら発火するPromise
  */
 export const focusOutBatterySelector = async (
-  props: CustomBattleEventProps
+  props: CustomBattleEventProps,
 ) => {
   props.view.dom.nearBatterySelectorMessageWindow.visible(false);
   await props.view.hud.gameObjects.frontmostFader.opacity(0, 200).play();
@@ -75,7 +75,7 @@ export const focusOutBatterySelector = async (
  */
 export const focusInBurstButton = async (
   props: CustomBattleEventProps,
-  caption: string[]
+  caption: string[],
 ) => {
   unAttentionAllButtons(props);
   disabledAllButtons(props);
@@ -93,7 +93,7 @@ export const focusInBurstButton = async (
  * @return 判定結果、trueでフォーカスしている
  */
 export const isBurstButtonFocused = (
-  props: CustomBattleEventProps
+  props: CustomBattleEventProps,
 ): boolean => {
   return (
     props.view.hud.gameObjects.batterySelector.isDisabled() &&
@@ -123,7 +123,7 @@ export const focusOutBurstButton = async (props: CustomBattleEventProps) => {
  */
 export const focusInPilotButton = async (
   props: CustomBattleEventProps,
-  caption: string[]
+  caption: string[],
 ) => {
   unAttentionAllButtons(props);
   disabledAllButtons(props);
@@ -141,7 +141,7 @@ export const focusInPilotButton = async (
  * @return 判定結果、trueでフォーカスしている
  */
 export const isPilotButtonFocused = (
-  props: CustomBattleEventProps
+  props: CustomBattleEventProps,
 ): boolean => {
   return (
     props.view.hud.gameObjects.batterySelector.isDisabled() &&

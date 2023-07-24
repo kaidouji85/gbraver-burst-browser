@@ -12,7 +12,7 @@ import { CommandCanceled } from "../custom-battle-event";
  */
 export async function doBurstEventIfNeeded(
   props: Readonly<BattleSceneProps>,
-  burst: Readonly<BurstCommand>
+  burst: Readonly<BurstCommand>,
 ): Promise<CommandCanceled> {
   return props.customBattleEvent
     ? await props.customBattleEvent.onBurstCommandSelected({ ...props, burst })

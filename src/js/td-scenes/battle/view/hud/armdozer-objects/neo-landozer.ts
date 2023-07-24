@@ -58,7 +58,7 @@ export class NeoLandozerHUD implements HUDArmdozerObjects, NeoLandozerHUDField {
 export function playerNeoLandozerHUD(
   resources: Resources,
   gameObjectAction: Observable<GameObjectAction>,
-  state: Player
+  state: Player,
 ): NeoLandozerHUD {
   return new NeoLandozerHUD(state.playerId, {
     cutIn: playerNeoLandozerCutIn(resources, gameObjectAction),
@@ -76,7 +76,7 @@ export function playerNeoLandozerHUD(
 export function enemyNeoLandozerHUD(
   resources: Resources,
   gameObjectAction: Observable<GameObjectAction>,
-  state: Player
+  state: Player,
 ): NeoLandozerHUD {
   return new NeoLandozerHUD(state.playerId, {
     cutIn: enemyNeoLandozerCutIn(resources, gameObjectAction),

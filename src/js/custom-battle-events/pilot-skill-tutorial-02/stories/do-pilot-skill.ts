@@ -10,7 +10,7 @@ import { shouldPilotSkill } from "../captions";
  * @return ストーリーが完了したら発火するPromise
  */
 export async function doPilotSkill(
-  props: Readonly<CustomBattleEventProps>
+  props: Readonly<CustomBattleEventProps>,
 ): Promise<void> {
   activeLeftMessageWindowWithFace(props, "Tsubasa");
   await scrollLeftMessages(props, [

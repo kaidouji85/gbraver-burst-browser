@@ -1,4 +1,4 @@
-import { Group } from "@tweenjs/tween.js";
+import * as TWEEN from "@tweenjs/tween.js";
 
 import type { Animate } from "../../../animation/animate";
 import { process } from "../../../animation/process";
@@ -18,8 +18,8 @@ import type { TimeScaleButtonSounds } from "../sounds/time-scale-sounds";
 export function toggle(
   model: TimeScaleButtonModel,
   sounds: TimeScaleButtonSounds,
-  group: Group,
-  timeScale: number
+  group: TWEEN.Group,
+  timeScale: number,
 ): Animate {
   return process(() => {
     model.timeScale = timeScale;
@@ -34,10 +34,10 @@ export function toggle(
             {
               scale: 1.1,
             },
-            100
+            100,
           ),
-        group
-      )
+        group,
+      ),
     )
     .chain(
       tween(
@@ -47,9 +47,9 @@ export function toggle(
             {
               scale: 1,
             },
-            100
+            100,
           ),
-        group
-      )
+        group,
+      ),
     );
 }

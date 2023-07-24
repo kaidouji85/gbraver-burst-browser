@@ -13,7 +13,7 @@ import { getNeedleValue } from "../model/needle-value";
  */
 export function open(
   model: BatterySelectorModel,
-  param: BatterySelectorOpenParam
+  param: BatterySelectorOpenParam,
 ): Animate {
   return process(() => {
     model.isPushNotifierDisabled = true;
@@ -30,13 +30,13 @@ export function open(
           {
             opacity: 1,
           },
-          200
-        )
-      )
+          200,
+        ),
+      ),
     )
     .chain(
       process(() => {
         model.isPushNotifierDisabled = false;
-      })
+      }),
     );
 }

@@ -14,7 +14,7 @@ export function hidden(model: LightningBarrierModel): Animate {
       {
         opacity: 0,
       },
-      1000
-    )
+      1000,
+    ),
   );
 }

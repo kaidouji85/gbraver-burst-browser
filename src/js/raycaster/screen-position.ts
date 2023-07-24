@@ -13,7 +13,7 @@ export function getScreenPosition(
   clientX: number,
   clientY: number,
   canvasWidth: number,
-  canvasHeight: number
+  canvasHeight: number,
 ): THREE.Vector2 {
   const mouse = new THREE.Vector2();
   mouse.x = (clientX / canvasWidth) * 2 - 1;

@@ -22,7 +22,7 @@ export class ShockWaveLineView {
   constructor(resources: Resources) {
     this.#group = new THREE.Group();
     const textureResource = resources.textures.find(
-      (v) => v.id === TEXTURE_IDS.HITMARK_SHOCK_WAVE_LINE
+      (v) => v.id === TEXTURE_IDS.HITMARK_SHOCK_WAVE_LINE,
     );
     const texture = textureResource
       ? textureResource.texture
@@ -58,7 +58,7 @@ export class ShockWaveLineView {
     this.#group.position.set(
       model.distance * Math.cos(model.rotate),
       model.distance * Math.sin(model.rotate),
-      LINE_Z_INDEX
+      LINE_Z_INDEX,
     );
     this.#group.rotation.z = model.rotate;
     this.#group.scale.set(model.scale, 1, 1);

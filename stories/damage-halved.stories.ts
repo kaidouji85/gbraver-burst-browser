@@ -24,9 +24,9 @@ const damageHalvedStory =
   (
     generator: (
       resources: Resources,
-      gameObjectAction: Observable<GameObjectAction>
+      gameObjectAction: Observable<GameObjectAction>,
     ) => DamageHalved,
-    fn: (damageHavled: DamageHalved) => void
+    fn: (damageHavled: DamageHalved) => void,
   ) =>
   () => {
     const stub = new TDGameObjectStub(({ resources, gameObjectAction }) => {

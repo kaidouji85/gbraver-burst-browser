@@ -7,7 +7,7 @@ import { waitTime } from "../wait/wait-time";
  * @param props イベントプロパティ
  */
 export function invisibleAllMessageWindows(
-  props: CustomBattleEventProps
+  props: CustomBattleEventProps,
 ): void {
   props.view.dom.leftMessageWindow.visible(false);
   props.view.dom.rightMessageWindow.visible(false);
@@ -27,7 +27,7 @@ export function invisibleAllMessageWindows(
  */
 export const refreshConversation = async (
   props: CustomBattleEventProps,
-  wait = 200
+  wait = 200,
 ) => {
   invisibleAllMessageWindows(props);
   await waitTime(wait);

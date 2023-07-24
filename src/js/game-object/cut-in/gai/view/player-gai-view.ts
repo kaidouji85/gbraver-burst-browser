@@ -31,7 +31,7 @@ export class PlayerGaiView implements GaiView {
    */
   constructor(resources: Resources) {
     const gaiResource = resources.textures.find(
-      (v) => v.id === TEXTURE_IDS.GAI_CUTIN
+      (v) => v.id === TEXTURE_IDS.GAI_CUTIN,
     );
     const gai = gaiResource?.texture ?? new THREE.Texture();
     this.#mesh = new HorizontalAnimationMesh({
@@ -64,7 +64,7 @@ export class PlayerGaiView implements GaiView {
       (model.position.x - PADDING_RIGHT) * scale;
     this.#mesh.getObject3D().scale.set(scale, scale, scale);
     this.#mesh.getObject3D().position.set(x, 0, HUD_CUT_IN_ZNIDEX);
-    this.#mesh.setOpacity(model.opacity);
+    this.#mesh.opacity(model.opacity);
   }
 
   /**

@@ -7,7 +7,7 @@
  */
 export function replaceDOM(
   oldElement: HTMLElement,
-  newElement: HTMLElement
+  newElement: HTMLElement,
 ): void {
   const parent = oldElement.parentElement;
 

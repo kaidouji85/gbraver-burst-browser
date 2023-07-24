@@ -19,11 +19,11 @@ export const MAX_ANIMATION = 4;
  * @return 生成結果
  */
 export function genesisBraverCutInBurstUp(
-  resources: Resources
+  resources: Resources,
 ): HorizontalAnimationMesh {
   const texture =
     resources.textures.find(
-      (v) => v.id === TEXTURE_IDS.GENESIS_BRAVER_CUTIN_BURST_UP
+      (v) => v.id === TEXTURE_IDS.GENESIS_BRAVER_CUTIN_BURST_UP,
     )?.texture ?? new THREE.Texture();
   return new HorizontalAnimationMesh({
     texture,

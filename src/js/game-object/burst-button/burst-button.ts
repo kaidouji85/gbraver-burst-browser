@@ -32,10 +32,10 @@ export class BurstButton {
   constructor(
     resources: Resources,
     gameObjectAction: Observable<GameObjectAction>,
-    armdozerIcon: ArmdozerIcon
+    armdozerIcon: ArmdozerIcon,
   ) {
     const pushButtonResource = resources.sounds.find(
-      (v) => v.id === SOUND_IDS.PUSH_BUTTON
+      (v) => v.id === SOUND_IDS.PUSH_BUTTON,
     );
     this.#pushButtonSound = pushButtonResource
       ? pushButtonResource.sound

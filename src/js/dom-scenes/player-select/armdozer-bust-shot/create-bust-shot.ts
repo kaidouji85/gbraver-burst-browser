@@ -14,7 +14,7 @@ import { ArmdozerBustShot, CLASS_NAME_PREFIX } from "./amrodzer-bust-shot";
  */
 export function createBustShot(
   armdozerId: ArmDozerId,
-  resources: Resources
+  resources: Resources,
 ): ArmdozerBustShot {
   switch (armdozerId) {
     case ArmDozerIds.SHIN_BRAVER:

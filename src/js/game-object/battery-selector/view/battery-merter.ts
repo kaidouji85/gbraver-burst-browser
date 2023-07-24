@@ -35,7 +35,7 @@ export class BatteryMeter {
 
     const disk =
       resources.canvasImages.find(
-        (v) => v.id === CANVAS_IMAGE_IDS.BATTERY_METER
+        (v) => v.id === CANVAS_IMAGE_IDS.BATTERY_METER,
       )?.image ?? new Image();
     this.#disk = new SimpleImageMesh({
       canvasSize: 1024,
@@ -69,25 +69,25 @@ export class BatteryMeter {
 
     const disActiveNumber =
       resources.textures.find(
-        (v) => v.id === TEXTURE_IDS.DIS_ACTIVE_BATTERY_SELECTOR_NUMBER
+        (v) => v.id === TEXTURE_IDS.DIS_ACTIVE_BATTERY_SELECTOR_NUMBER,
       )?.texture ?? new THREE.Texture();
     this.#disActiveNumbers = R.times(R.identity, MAX_VALUE + 1).map(
-      (value: number) => batteryNumber(value, disActiveNumber)
+      (value: number) => batteryNumber(value, disActiveNumber),
     );
     this.#disActiveNumbers.forEach((v) => this.#group.add(v.getObject3D()));
 
     const activeNumber =
       resources.textures.find(
-        (v) => v.id === TEXTURE_IDS.BATTERY_SELECTOR_NUMBER
+        (v) => v.id === TEXTURE_IDS.BATTERY_SELECTOR_NUMBER,
       )?.texture ?? new THREE.Texture();
     this.#numbers = R.times(R.identity, MAX_VALUE + 1).map((value: number) =>
-      batteryNumber(value, activeNumber)
+      batteryNumber(value, activeNumber),
     );
     this.#numbers.forEach((v) => this.#group.add(v.getObject3D()));
 
     const needle =
       resources.canvasImages.find(
-        (v) => v.id === CANVAS_IMAGE_IDS.BATTERY_NEEDLE
+        (v) => v.id === CANVAS_IMAGE_IDS.BATTERY_NEEDLE,
       )?.image ?? new Image();
     this.#needle = new SimpleImageMesh({
       canvasSize: 512,
@@ -122,9 +122,9 @@ export class BatteryMeter {
   update(model: BatterySelectorModel): void {
     this.#needle.getObject3D().rotation.z = Math.PI * (1 - model.needle);
     const disk4Opacity = model.maxBattery === 4 ? model.opacity : 0;
-    this.#disk4.setOpacity(disk4Opacity);
+    this.#disk4.opacity(disk4Opacity);
     const disk8Opacity = model.maxBattery === 8 ? model.opacity : 0;
-    this.#disk8.setOpacity(disk8Opacity);
+    this.#disk8.opacity(disk8Opacity);
     const diskOpacity = [4, 8].includes(model.maxBattery) ? 0 : model.opacity;
     this.#disk.setOpacity(diskOpacity);
     this.#needle.setOpacity(model.opacity);
@@ -135,8 +135,8 @@ export class BatteryMeter {
       const scale = batteryNumberScale(value, model.maxBattery);
       numberMesh.getObject3D().scale.set(scale, scale, 1);
       value <= model.enableMaxBattery
-        ? numberMesh.setOpacity(model.opacity)
-        : numberMesh.setOpacity(0);
+        ? numberMesh.opacity(model.opacity)
+        : numberMesh.opacity(0);
     });
     this.#disActiveNumbers.forEach((numberMesh, value) => {
       const { x, y } = batteryNumberPosition(value, model.maxBattery);
@@ -145,8 +145,8 @@ export class BatteryMeter {
       const scale = batteryNumberScale(value, model.maxBattery);
       numberMesh.getObject3D().scale.set(scale, scale, 1);
       model.enableMaxBattery < value && value <= model.maxBattery
-        ? numberMesh.setOpacity(model.opacity)
-        : numberMesh.setOpacity(0);
+        ? numberMesh.opacity(model.opacity)
+        : numberMesh.opacity(0);
     });
   }
 

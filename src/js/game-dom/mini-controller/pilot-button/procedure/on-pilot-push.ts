@@ -8,7 +8,7 @@ import { PilotButtonProps } from "../props";
  */
 export function onPilotPush(
   props: Readonly<PilotButtonProps>,
-  action: Readonly<PushDOM>
+  action: Readonly<PushDOM>,
 ): void {
   action.event.preventDefault();
   action.event.stopPropagation();

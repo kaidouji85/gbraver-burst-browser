@@ -19,8 +19,8 @@ export function close(model: PilotButtonModel): Animate {
         {
           opacity: 0,
         },
-        200
-      )
-    )
+        200,
+      ),
+    ),
   );
 }

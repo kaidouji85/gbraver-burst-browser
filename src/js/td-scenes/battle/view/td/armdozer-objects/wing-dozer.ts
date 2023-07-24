@@ -62,7 +62,7 @@ export class WingDozerTD implements WingDozerTDField, TDArmdozerObjects {
 export function playerWingDozerTD(
   resources: Resources,
   gameObjectAction: Observable<GameObjectAction>,
-  state: Player
+  state: Player,
 ): WingDozerTD {
   return new WingDozerTD(state.playerId, {
     wingDozer: PlayerWingDozer(resources, gameObjectAction),
@@ -79,7 +79,7 @@ export function playerWingDozerTD(
 export function enemyWingDozerTD(
   resources: Resources,
   gameObjectAction: Observable<GameObjectAction>,
-  state: Player
+  state: Player,
 ): WingDozerTD {
   return new WingDozerTD(state.playerId, {
     wingDozer: EnemyWingDozer(resources, gameObjectAction),

@@ -54,7 +54,7 @@ const loader = new GLTFLoader();
  */
 export function loadGlTF(
   resourceRoot: ResourceRoot,
-  config: GlTFConfig
+  config: GlTFConfig,
 ): Promise<GlTFResource> {
   return new Promise((resolve, reject) => {
     const fullPath = `${resourceRoot.get()}/${config.path}`;

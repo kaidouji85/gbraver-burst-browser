@@ -12,7 +12,7 @@ import { parseConfig } from "./parse-config";
  */
 export function onPrevButtonPush(
   props: ConfigProps,
-  action: Readonly<PushDOM>
+  action: Readonly<PushDOM>,
 ): void {
   action.event.preventDefault();
   action.event.stopPropagation();

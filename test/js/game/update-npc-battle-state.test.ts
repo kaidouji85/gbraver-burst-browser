@@ -13,7 +13,7 @@ test("ステージクリアの処理が正しい", () => {
     updateNPCBattleState(state, {
       type: "GameOver",
       winner: player.playerId,
-    })
+    }),
   ).toEqual({
     state: { ...state, stageIndex: 1 },
     result: "StageClear",
@@ -29,7 +29,7 @@ test("ステージミスの処理が正しい", () => {
     updateNPCBattleState(state, {
       type: "GameOver",
       winner: "not-player",
-    })
+    }),
   ).toEqual({
     state,
     result: "StageMiss",
@@ -44,7 +44,7 @@ test("引き分けはステージミスとみなす", () => {
   expect(
     updateNPCBattleState(state, {
       type: "EvenMatch",
-    })
+    }),
   ).toEqual({
     state,
     result: "StageMiss",
@@ -60,7 +60,7 @@ test("最終ステージクリアの処理が正しい", () => {
     updateNPCBattleState(state, {
       type: "GameOver",
       winner: player.playerId,
-    })
+    }),
   ).toEqual({
     state,
     result: "NPCBattleComplete",
@@ -76,7 +76,7 @@ test("最終ステージミスの処理が正しい", () => {
     updateNPCBattleState(state, {
       type: "GameOver",
       winner: "not-player",
-    })
+    }),
   ).toEqual({
     state,
     result: "StageMiss",
@@ -91,7 +91,7 @@ test("最終ステージでも引き分けはミスとみなす", () => {
   expect(
     updateNPCBattleState(state, {
       type: "EvenMatch",
-    })
+    }),
   ).toEqual({
     state,
     result: "StageMiss",
@@ -107,6 +107,6 @@ test("ステート不整合の場合はnullを返す", () => {
     updateNPCBattleState(state, {
       type: "GameOver",
       winner: player.playerId,
-    })
+    }),
   ).toEqual(null);
 });

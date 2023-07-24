@@ -68,7 +68,7 @@ type Elements = {
  */
 function extractElements(root: HTMLElement, ids: DataIDs): Elements {
   const postNetworkErrorButtonElement = root.querySelector(
-    `[data-id="${ids.postNetworkErrorButton}"]`
+    `[data-id="${ids.postNetworkErrorButton}"]`,
   );
   const postNetworkErrorButton =
     postNetworkErrorButtonElement instanceof HTMLButtonElement

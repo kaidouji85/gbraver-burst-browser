@@ -12,7 +12,7 @@ import type { TextureConfig, TextureResource } from "./resource";
  */
 export function loadTexture(
   resourceRoot: ResourceRoot,
-  config: TextureConfig
+  config: TextureConfig,
 ): Promise<TextureResource> {
   const loader = new THREE.TextureLoader();
   return new Promise((resolve, reject) => {
@@ -26,7 +26,7 @@ export function loadTexture(
       undefined,
       (error) => {
         reject(error);
-      }
+      },
     );
   });
 }

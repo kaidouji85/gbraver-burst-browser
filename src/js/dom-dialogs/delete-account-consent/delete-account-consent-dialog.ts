@@ -74,14 +74,14 @@ function extractElements(root: HTMLElement, ids: DataIDs): Elements {
     root.querySelector(`[data-id="${ids.backGround}"]`) ??
     document.createElement("div");
   const deleteAccountButtonElement = root.querySelector(
-    `[data-id="${ids.deleteAccountButton}"]`
+    `[data-id="${ids.deleteAccountButton}"]`,
   );
   const deleteAccountButton =
     deleteAccountButtonElement instanceof HTMLButtonElement
       ? deleteAccountButtonElement
       : document.createElement("button");
   const closeButtonElement = root.querySelector(
-    `[data-id="${ids.closeButton}"]`
+    `[data-id="${ids.closeButton}"]`,
   );
   const closeButton =
     closeButtonElement instanceof HTMLButtonElement

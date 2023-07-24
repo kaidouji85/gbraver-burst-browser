@@ -206,7 +206,7 @@ export const SOUND_CONFIGS: SoundConfig[] = [
  */
 export function loadSound(
   resourceRoot: ResourceRoot,
-  config: SoundConfig
+  config: SoundConfig,
 ): Promise<SoundResource> {
   return new Promise((resolve, reject) => {
     const sound = new Howl({

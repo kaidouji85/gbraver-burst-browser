@@ -23,7 +23,7 @@ export class PlayerLightningView implements LightningView {
 
   constructor(resources: Resources) {
     const textureResource = resources.textures.find(
-      (v) => v.id === TEXTURE_IDS.HITMARK_LIGHTNING_RING
+      (v) => v.id === TEXTURE_IDS.HITMARK_LIGHTNING_RING,
     );
     const texture = textureResource
       ? textureResource.texture
@@ -52,7 +52,7 @@ export class PlayerLightningView implements LightningView {
     const object3D = this.#mesh.getObject3D();
     object3D.position.set(model.position.x, model.position.y, model.position.z);
     object3D.scale.set(1, 1, 1);
-    this.#mesh.setOpacity(model.opacity);
+    this.#mesh.opacity(model.opacity);
     this.#mesh.animate(model.animation.frame);
   }
 

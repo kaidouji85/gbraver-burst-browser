@@ -12,7 +12,7 @@ import { noZeroDefense } from "../stories/no-zero-defense";
  * @return 再生した否か、trueで再生した
  */
 async function executeNoZeroDefenseIfNeeded(
-  props: Readonly<BatteryCommandSelected>
+  props: Readonly<BatteryCommandSelected>,
 ): Promise<boolean> {
   const lastState = props.stateHistory[props.stateHistory.length - 1];
   if (!lastState) {
@@ -30,6 +30,7 @@ async function executeNoZeroDefenseIfNeeded(
     isEnemyTurn &&
     0 < player.armdozer.battery
   ) {
+    props.view.hud.gameObjects.batterySelector.toBatterySilently(1);
     await noZeroDefense(props);
     return true;
   }
@@ -45,7 +46,7 @@ async function executeNoZeroDefenseIfNeeded(
  */
 async function executeLessThanAttack3IfNeeded(
   props: Readonly<BatteryCommandSelected>,
-  state: Readonly<PilotSkillTutorial02State>
+  state: Readonly<PilotSkillTutorial02State>,
 ): Promise<boolean> {
   const lastState = props.stateHistory[props.stateHistory.length - 1];
   if (!lastState) {
@@ -64,6 +65,7 @@ async function executeLessThanAttack3IfNeeded(
     state.isShouldAttack5OrMoreComplete &&
     props.battery.battery < 3
   ) {
+    props.view.hud.gameObjects.batterySelector.toBatterySilently(3);
     await lessThanAttack3(props);
     return true;
   }
@@ -87,7 +89,7 @@ type Ret = {
  */
 export async function onBatteryCommandSelected(
   props: Readonly<BatteryCommandSelected>,
-  state: Readonly<PilotSkillTutorial02State>
+  state: Readonly<PilotSkillTutorial02State>,
 ): Promise<Ret> {
   const isNoZeroDefenseExecuted = await executeNoZeroDefenseIfNeeded(props);
   if (isNoZeroDefenseExecuted) {
@@ -101,7 +103,7 @@ export async function onBatteryCommandSelected(
 
   const isLessThanAttack3Executed = await executeLessThanAttack3IfNeeded(
     props,
-    state
+    state,
   );
   if (isLessThanAttack3Executed) {
     return {

@@ -1,4 +1,4 @@
-import TWEEN from "@tweenjs/tween.js";
+import * as TWEEN from "@tweenjs/tween.js";
 
 import { Animate } from "../../../../animation/animate";
 import { delay } from "../../../../animation/delay";
@@ -24,17 +24,17 @@ export function down(model: GenesisBraverModel): Animate {
             {
               x: "+70",
             },
-            500
+            500,
           )
-          .easing(TWEEN.Easing.Quadratic.Out)
-      )
+          .easing(TWEEN.Easing.Quadratic.Out),
+      ),
     )
     .chain(delay(100))
     .chain(
       process(() => {
         model.animation.type = "DOWN";
         model.animation.frame = 0;
-      })
+      }),
     )
     .chain(
       tween(model.animation, (t) =>
@@ -42,8 +42,8 @@ export function down(model: GenesisBraverModel): Animate {
           {
             frame: 1,
           },
-          300
-        )
-      )
+          300,
+        ),
+      ),
     );
 }

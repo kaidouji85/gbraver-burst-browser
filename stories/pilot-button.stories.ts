@@ -26,9 +26,9 @@ const pilotButtonStory =
   (
     generator: (
       resources: Resources,
-      gameObjectAction: Observable<GameObjectAction>
+      gameObjectAction: Observable<GameObjectAction>,
     ) => PilotButton,
-    fn: (button: PilotButton) => void
+    fn: (button: PilotButton) => void,
   ) =>
   () => {
     const stub = new HUDGameObjectStub(({ resources, gameObjectAction }) => {

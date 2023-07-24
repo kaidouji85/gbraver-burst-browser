@@ -25,7 +25,7 @@ export class BatteryNumber {
    */
   constructor(
     view: BatteryNumberView,
-    gameObjectAction: Observable<GameObjectAction>
+    gameObjectAction: Observable<GameObjectAction>,
   ) {
     this.#model = createInitialValue();
     this.#view = view;

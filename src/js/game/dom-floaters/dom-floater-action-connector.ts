@@ -11,5 +11,5 @@ import type { GameAction } from "../game-actions";
  */
 export type DomFloaterActionConnector<X> = (
   floater: X,
-  gameAction: Subject<GameAction>
+  gameAction: Subject<GameAction>,
 ) => Unsubscribable[];

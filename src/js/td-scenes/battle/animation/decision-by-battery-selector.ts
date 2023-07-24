@@ -9,14 +9,21 @@ import { BattleSceneView } from "../view";
  * @return アニメーション
  */
 export function decisionByBatterySelector(
-  view: Readonly<BattleSceneView>
+  view: Readonly<BattleSceneView>,
 ): Animate {
   return all(
     view.hud.gameObjects.batterySelector.decide(),
     view.hud.gameObjects.burstButton.close(),
+    view.hud.gameObjects.burstButtonLeadLine.hidden(),
     view.hud.gameObjects.pilotButton.close(),
-    view.hud.gameObjects.timeScaleButton.close()
+    view.hud.gameObjects.pilotButtonLeadLine.hidden(),
+    view.hud.gameObjects.timeScaleButton.close(),
   )
     .chain(delay(500))
-    .chain(view.hud.gameObjects.batterySelector.close());
+    .chain(
+      all(
+        view.hud.gameObjects.batterySelector.close(),
+        view.hud.gameObjects.batterySelectorLeadLine.hidden(),
+      ),
+    );
 }

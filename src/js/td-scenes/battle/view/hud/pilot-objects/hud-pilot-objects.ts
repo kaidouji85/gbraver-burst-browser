@@ -5,9 +5,7 @@ import * as THREE from "three";
  * HUD パイロット関連オブジェクト
  */
 export interface HUDPilotObjects {
-  /**
-   * プレイヤーID
-   */
+  /** プレイヤーID */
   playerId: PlayerId;
 
   /**
@@ -17,7 +15,6 @@ export interface HUDPilotObjects {
 
   /**
    * シーンに追加するオブジェクトを取得する
-   *
    * @return シーンに追加するオブジェクト
    */
   getObject3Ds(): THREE.Object3D[];

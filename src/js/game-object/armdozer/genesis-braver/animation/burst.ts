@@ -13,7 +13,7 @@ import { GenesisBraverSounds } from "../sounds/genesis-braver-sounds";
  */
 export function burst(
   model: GenesisBraverModel,
-  sounds: GenesisBraverSounds
+  sounds: GenesisBraverSounds,
 ): Animate {
   return process(() => {
     model.animation.type = "BURST_UP";
@@ -26,9 +26,9 @@ export function burst(
           {
             frame: 1,
           },
-          200
-        )
-      )
+          200,
+        ),
+      ),
     )
     .chain(delay(500))
     .chain(
@@ -36,7 +36,7 @@ export function burst(
         model.animation.type = "BURST_DOWN";
         model.animation.frame = 0;
         sounds.motor.sound.play();
-      })
+      }),
     )
     .chain(
       tween(model.animation, (t) =>
@@ -44,8 +44,8 @@ export function burst(
           {
             frame: 1,
           },
-          200
-        )
-      )
+          200,
+        ),
+      ),
     );
 }
