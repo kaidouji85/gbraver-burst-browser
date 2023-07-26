@@ -1,6 +1,10 @@
+import * as Handlebars from "handlebars";
+
 import { ROOT } from "./class-name";
 import { DataIDs } from "./data-ids";
-import template from "./root-inner-html.hbs";
+import hbs from "./root-inner-html.hbs";
+
+const template = Handlebars.compile(hbs);
 
 /**
  * ルートHTML要素のinnerHTMLを生成する
@@ -8,8 +12,5 @@ import template from "./root-inner-html.hbs";
  * @return 生成結果
  */
 export function rootInnerHTML(ids: DataIDs): string {
-  console.log(template);  // TODO 開発が終わったら削除する
-  return `
-    <div class="${ROOT}__batteries" data-id="${ids.batteries}"></div>
-  `;
+  return template({ ids, ROOT });
 }
