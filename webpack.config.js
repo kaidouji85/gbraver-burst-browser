@@ -48,7 +48,10 @@ module.exports = {
     ]
   },
   resolve: {
-    extensions: ['.js', '.ts', '.css']
+    extensions: ['.js', '.ts', '.css'],
+    alias: {
+      handlebars: 'handlebars/dist/handlebars.min.js'
+   }
   },
   plugins: [
     new HtmlWebpackPlugin({
