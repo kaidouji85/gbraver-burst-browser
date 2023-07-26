@@ -22,7 +22,11 @@
       "parser": "@html-eslint/parser",
       "extends": ["plugin:@html-eslint/recommended"],
       "rules": {
-        "@html-eslint/require-doctype": "off"
+        "@html-eslint/require-doctype": "off",
+        "@html-eslint/indent": ["error", 2],
+        "@html-eslint/require-closing-tags": ["error", {
+          "selfClosing": "always"
+        }]
       }
     }
   ],
