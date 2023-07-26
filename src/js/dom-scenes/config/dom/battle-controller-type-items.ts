@@ -62,6 +62,7 @@ export const battleControllerTypeItems = (selected: BattleControllerType) =>
     const checked = value === selected ? "checked" : "";
     return battleControllerItemsTemplate({
       ROOT_CLASS,
+      value,
       label,
       detail,
       checked,
