@@ -56,19 +56,23 @@ const getDetail = (value: BattleControllerType) => {
  */
 export const battleControllerTypeItems = (selected: BattleControllerType) =>
   BattleControllerTypes.map(
-    (value) => `
-    <div class="${ROOT_CLASS}__battle-controller-type-item">
-      <label class="${ROOT_CLASS}__battle-controller-type-label">
-        <input class="${ROOT_CLASS}__battle-controller-type-radio"
-          name="battle-controller-type"
-          type="radio"
-          value="${value}"
-          ${value === selected ? "checked" : ""}
-        >
-          ${battleControllerTypeOptionLabel(value)}
-        </input>
-      </label>  
-      ${getDetail(value)}
-    </div>
-  `,
+    (value) => {
+      const label = battleControllerTypeOptionLabel(value);
+      const detail = getDetail(value);
+      return `
+      <div class="${ROOT_CLASS}__battle-controller-type-item">
+        <label class="${ROOT_CLASS}__battle-controller-type-label">
+          <input class="${ROOT_CLASS}__battle-controller-type-radio"
+            name="battle-controller-type"
+            type="radio"
+            value="${value}"
+            ${value === selected ? "checked" : ""}
+          >
+            ${label}
+          </input>
+        </label>
+        ${detail}
+      </div>
+    `
+    },
   ).reduce((a, b) => a + b);
