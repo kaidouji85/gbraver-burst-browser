@@ -43,15 +43,12 @@ module.exports = {
       },
       {
         test: /\.hbs$/i,
-        type: 'asset/source',
+        use: 'handlebars-loader',
       }
     ]
   },
   resolve: {
-    extensions: ['.js', '.ts', '.css'],
-    alias: {
-      handlebars: 'handlebars/dist/handlebars.min.js'
-   }
+    extensions: ['.js', '.ts', '.css']
   },
   plugins: [
     new HtmlWebpackPlugin({
