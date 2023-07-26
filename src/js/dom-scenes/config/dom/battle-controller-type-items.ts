@@ -2,6 +2,7 @@ import {
   BattleControllerType,
   BattleControllerTypes,
 } from "../../../td-scenes/battle/controller-type";
+import bigButtonDetailTemplate from "./big-button-detail.hbs";
 import { ROOT_CLASS } from "./class-name";
 import miniControllerDetailTemplate from "./mini-controller-detail.hbs";
 
@@ -21,11 +22,7 @@ const battleControllerTypeOptionLabel = (value: BattleControllerType) => {
 };
 
 /** おおきいボタン詳細 */
-const bigButtonDetail = `
-  <div class="${ROOT_CLASS}__big-button-detail">
-    見栄え重視の、おおきいボタンのコントローラーです。
-  </div>
-`;
+const bigButtonDetail = bigButtonDetailTemplate({ ROOT_CLASS });
 
 /** accesskey参考文献URL */
 const accesskeyReference =
