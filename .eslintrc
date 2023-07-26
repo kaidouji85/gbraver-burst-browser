@@ -26,6 +26,9 @@
         "@html-eslint/indent": ["error", 2],
         "@html-eslint/require-closing-tags": ["error", {
           "selfClosing": "always"
+        }],
+        "@html-eslint/no-extra-spacing-attrs": ["error", {
+          "enforceBeforeSelfClose": true
         }]
       }
     }
