@@ -13,7 +13,18 @@
   "plugins": [
     "@typescript-eslint",
     "jest",
-    "simple-import-sort"
+    "simple-import-sort",
+    "@html-eslint"
+  ],
+  "overrides": [
+    {
+      "files": ["*.hbs"],
+      "parser": "@html-eslint/parser",
+      "extends": ["plugin:@html-eslint/recommended"],
+      "rules": {
+        "@html-eslint/require-doctype": "off"
+      }
+    }
   ],
   "rules": {
     "no-undef": "error",
