@@ -44,9 +44,7 @@ export function rootInnerHTML(
       ? LOGIN_CLASS
       : INVISIBLE_LOGIN_CLASS;
   const accountName =
-    params.account.type === "LoggedInAccount"
-      ? params.account.name
-      : "";
+    params.account.type === "LoggedInAccount" ? params.account.name : "";
   const accountClassName =
     params.isApiServerEnable && params.account.type === "LoggedInAccount"
       ? ACCOUNT_CLASS
