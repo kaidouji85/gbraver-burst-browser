@@ -13,6 +13,10 @@ module.exports = {
         }, {
           test: /\.css$/i,
           use: ['style-loader', 'css-loader', 'postcss-loader']
+        },
+        {
+          test: /\.hbs$/i,
+          use: 'handlebars-loader',
         }]
       }
     };
