@@ -1,4 +1,4 @@
 declare module '*.hbs' {
-  const value: string;
+  const value: (v: unknown) => string;
   export default value;
 }

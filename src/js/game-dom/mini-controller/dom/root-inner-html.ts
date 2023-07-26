@@ -1,10 +1,6 @@
-import * as Handlebars from "handlebars";
-
 import { ROOT } from "./class-name";
 import { DataIDs } from "./data-ids";
-import hbs from "./root-inner-html.hbs";
-
-const template = Handlebars.compile(hbs);
+import template from "./root-inner-html.hbs";
 
 /**
  * ルートHTML要素のinnerHTMLを生成する
