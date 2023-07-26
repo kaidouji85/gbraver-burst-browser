@@ -11,6 +11,7 @@
     "@gbraver-burst-network/browser-sdk": "^1.9.4",
     "@tweenjs/tween.js": "^21.0.0",
     "gbraver-burst-core": "1.19.0",
+    "handlebars": "^4.7.7",
     "howler": "^2.2.3",
     "ramda": "^0.29.0",
     "rxjs": "^7.8.1",
