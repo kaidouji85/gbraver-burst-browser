@@ -4,6 +4,7 @@ import { engageCompletedRate } from "./engage-completed-rate";
 
 /**
  * リソースのローディング進捗に変化があった際のイベント
+ * @param props 画面プロパティ
  * @param action アクション
  */
 export function onLoadingProgress(

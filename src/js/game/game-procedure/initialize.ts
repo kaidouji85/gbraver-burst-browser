@@ -1,4 +1,4 @@
-import { MailVerifiedIncomplete } from "../../dom-scenes/mail-verified-incomplete/mail-verified-incomplete";
+import { MailVerifiedIncomplete } from "../../dom-scenes/mail-verified-incomplete";
 import { invisibleFirstView } from "../../first-view/first-view-visible";
 import { titleResourceLoading } from "../../resource/loading/title-resource-loading";
 import { loadServiceWorker } from "../../service-worker/load-service-worker";
