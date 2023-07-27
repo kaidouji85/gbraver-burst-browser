@@ -22,29 +22,27 @@ export type GenerateMatchCardPropsParams = {
 
 /**
  * マッチカード画面プロパティを生成する
- * @param param パラメータ
+ * @params params パラメータ
  * @return 生成結果
  */
 export function createMatchCardProps(
-  param: GenerateMatchCardPropsParams,
+  params: GenerateMatchCardPropsParams,
 ): MatchCardProps {
   const ids = { player: domUuid(), enemy: domUuid() };
   const root = document.createElement("div");
   root.className = "match-card";
-  root.innerHTML = rootInnerHTML(ids, param.caption);
+  root.innerHTML = rootInnerHTML(ids, params.caption);
   const elements = extractElements(root, ids);
   const isPlayerLoaded = waitElementLoaded(elements.player);
-  const playerIconPath = getArmdozerIconPathId(param.player);
-  const playerIconResource = param.resources.paths.find(
-    (v) => v.id === playerIconPath,
-  );
-  elements.player.src = playerIconResource ? playerIconResource.path : "";
+  const playerIconPathId = getArmdozerIconPathId(params.player);
+  elements.player.src = params.resources.paths.find(
+    (v) => v.id === playerIconPathId,
+  )?.path ?? "";
   const isEnemyLoaded = waitElementLoaded(elements.enemy);
-  const enemyIconPath = getArmdozerIconPathId(param.enemy);
-  const enemyIconResource = param.resources.paths.find(
-    (v) => v.id === enemyIconPath,
-  );
-  elements.enemy.src = enemyIconResource ? enemyIconResource.path : "";
+  const enemyIconPathId = getArmdozerIconPathId(params.enemy);
+  elements.enemy.src = params.resources.paths.find(
+    (v) => v.id === enemyIconPathId,
+  )?.path ?? "";
   return {
     root,
     isPlayerLoaded,
