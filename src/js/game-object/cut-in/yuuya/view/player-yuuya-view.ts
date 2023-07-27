@@ -18,8 +18,8 @@ export const MAX_ANIMATION = 1;
 /** 右パディング */
 export const PADDING_RIGHT = 150;
 
-/** 下パディング */
-export const PADDING_BOTTOM = 10;
+/** 上パディング */
+export const PADDING_TOP = 10;
 
 /** プレイヤー側 ユウヤ ビュー */
 export class PlayerYuuyaView implements YuuyaView {
@@ -54,7 +54,7 @@ export class PlayerYuuyaView implements YuuyaView {
     const x =
       preRender.rendererDOM.clientWidth / 2 +
       (model.position.x - PADDING_RIGHT) * scale;
-    const y = -PADDING_BOTTOM * scale;
+    const y = -PADDING_TOP * scale;
     this.#mesh.getObject3D().scale.set(scale, scale, scale);
     this.#mesh.getObject3D().position.set(x, y, HUD_CUT_IN_ZNIDEX);
     this.#mesh.opacity(model.opacity);
