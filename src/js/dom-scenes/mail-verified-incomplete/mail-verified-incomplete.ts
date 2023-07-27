@@ -1,108 +1,24 @@
-import { Observable, Subject, Unsubscribable } from "rxjs";
+import { Observable, Unsubscribable } from "rxjs";
 
-import { escapeHTML } from "../../dom/escape-html";
-import { pop } from "../../dom/pop";
-import { domPushStream, PushDOM } from "../../dom/push-dom";
-import { Exclusive } from "../../exclusive/exclusive";
-import { domUuid } from "../../uuid/dom-uuid";
 import type { DOMScene } from "../dom-scene";
-
-/** ルート要素 class属性 */
-const ROOT_CLASS = "mail-verified-incomplete";
-
-/** data-idを集めたもの */
-type DataIDs = {
-  gotoTitle: string;
-  reload: string;
-};
-
-/**
- * ルート要素のinnerHTML
- *
- * @param ids data-idを集めたもの
- * @param mailAddress メールアドレス
- * @return ルート要素innerHTML
- */
-function rootInnerHTML(ids: DataIDs, mailAddress: string): string {
-  const escapedMailAddress = escapeHTML(mailAddress);
-  return `
-    <div class="${ROOT_CLASS}__title">メール認証を完了させてください</div>
-    <div class="${ROOT_CLASS}__caption">以下手順でメール認証を完了させてから、ゲームを開始してください</div>
-    <ol class="${ROOT_CLASS}__procedure">
-      <li class="${ROOT_CLASS}__operation">${escapedMailAddress}に送信された認証メールを開く</li>
-      <li class="${ROOT_CLASS}__operation">認証メールに記載されたVerify Linkを開く</li>
-      <li class="${ROOT_CLASS}__operation">Gブレイバーバーストを再読み込みする</li>
-    </ol>
-    <div class="${ROOT_CLASS}__controllers">
-      <button class="${ROOT_CLASS}__goto-title" data-id="${ids.gotoTitle}">タイトルへ</button>
-      <button class="${ROOT_CLASS}__reload" data-id="${ids.reload}">再読み込み</button>
-    </div>
-  `;
-}
-
-/** ルート要素の子孫要素 */
-type Elements = {
-  gotoTitle: HTMLElement;
-  reload: HTMLElement;
-};
-
-/**
- * ルート要素から子孫要素を抽出する
- *
- * @param root ルート要素
- * @param ids data-idを集めたもの
- * @return 抽出結果
- */
-function extractElements(root: HTMLElement, ids: DataIDs): Elements {
-  const gotoTitle: HTMLElement =
-    root.querySelector(`[data-id="${ids.gotoTitle}"]`) ??
-    document.createElement("div");
-  const reload: HTMLElement =
-    root.querySelector(`[data-id="${ids.reload}"]`) ??
-    document.createElement("div");
-  return {
-    gotoTitle,
-    reload,
-  };
-}
+import { bindEventListeners } from "./procedures/bind-event-listeners";
+import { createMailVerifiedIncompleteProps } from "./procedures/create-mail-verified-incomplete-props";
+import { MailVerifiedIncompleteProps } from "./props";
 
 /** メール認証未完了画面 */
 export class MailVerifiedIncomplete implements DOMScene {
-  #root: HTMLElement;
-  #gotoTitleButton: HTMLElement;
-  #reloadButton: HTMLElement;
-  #gotoTitle: Subject<void>;
-  #reload: Subject<void>;
+  /** プロパティ */
+  #props: MailVerifiedIncompleteProps;
+  /** アンサブスクライバ */
   #unsubscribers: Unsubscribable[];
-  #exclusive: Exclusive;
-
   /**
    * コンストラクタ
    *
    * @param mailAddress 認証メール送信先アドレス
    */
   constructor(mailAddress: string) {
-    const ids = {
-      gotoTitle: domUuid(),
-      reload: domUuid(),
-    };
-    this.#root = document.createElement("div");
-    this.#root.className = ROOT_CLASS;
-    this.#root.innerHTML = rootInnerHTML(ids, mailAddress);
-    const elements = extractElements(this.#root, ids);
-    this.#gotoTitleButton = elements.gotoTitle;
-    this.#reloadButton = elements.reload;
-    this.#unsubscribers = [
-      domPushStream(this.#gotoTitleButton).subscribe((action) => {
-        this.#onGotoTitleButtonPush(action);
-      }),
-      domPushStream(this.#reloadButton).subscribe((action) => {
-        this.#onReloadButtonPush(action);
-      }),
-    ];
-    this.#gotoTitle = new Subject();
-    this.#reload = new Subject();
-    this.#exclusive = new Exclusive();
+    this.#props = createMailVerifiedIncompleteProps(mailAddress);
+    this.#unsubscribers = bindEventListeners(this.#props);
   }
 
   /** @override */
@@ -114,52 +30,22 @@ export class MailVerifiedIncomplete implements DOMScene {
 
   /** @override  */
   getRootHTMLElement(): HTMLElement {
-    return this.#root;
+    return this.#props.root;
   }
 
   /**
    * タイトル遷移通知
-   *
    * @return 通知ストリーム
    */
   notifyTitleTransition(): Observable<void> {
-    return this.#gotoTitle;
+    return this.#props.gotoTitle;
   }
 
   /**
    * 再読み込み通知
-   *
    * @return 通知ストリーム
    */
   notifyReload(): Observable<void> {
-    return this.#reload;
-  }
-
-  /**
-   * タイトルへボタンが押された時の処理
-   *
-   * @param action アクション
-   */
-  #onGotoTitleButtonPush(action: PushDOM): void {
-    this.#exclusive.execute(async () => {
-      action.event.preventDefault();
-      action.event.stopPropagation();
-      await pop(this.#gotoTitleButton);
-      this.#gotoTitle.next();
-    });
-  }
-
-  /**
-   * 再読み込みボタンが押された時の処理
-   *
-   * @param action アクション
-   */
-  #onReloadButtonPush(action: PushDOM): void {
-    this.#exclusive.execute(async () => {
-      action.event.preventDefault();
-      action.event.stopPropagation();
-      await pop(this.#reloadButton);
-      this.#reload.next();
-    });
+    return this.#props.reload;
   }
 }
