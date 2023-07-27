@@ -91,8 +91,7 @@ function tsubasaBustShot(resources: Resources): PilotBustShot {
  */
 function yuuyaBustShot(resources: Resources): PilotBustShot {
   const path =
-    resources.paths.find((v) => v.id === PathIds.YUUYA_SKILL_CUTIN)?.path ??
-    "";
+    resources.paths.find((v) => v.id === PathIds.YUUYA_SKILL_CUTIN)?.path ?? "";
   const className = `${ROOT_CLASS_NAME}__yuuya`;
   return new PilotBustShot(path, className);
 }
