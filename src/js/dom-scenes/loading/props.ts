@@ -1,6 +1,6 @@
 /** ローディング画面のプロパティ */
 export type LoadingProps = {
-  /** ローディング完了率 */
+  /** @deprecated ローディング完了率 */
   completedRate: number;
   /** ルートHTML要素 */
   root: HTMLElement;
