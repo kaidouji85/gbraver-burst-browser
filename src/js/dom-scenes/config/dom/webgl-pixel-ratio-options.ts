@@ -11,15 +11,13 @@ import webglPixelRatioTemplate from "./webgl-pixel-ratio.hbs";
  * @return 生成結果
  */
 export const webGLPixelRatioOptions = (selected: WebGLPixelRatio) =>
-  WebGLPixelRatios.map(
-    (value) => {
-      const checked = value === selected ? "checked" : "";
-      const pixelRatio = Number(value).toFixed(2);
-      return webglPixelRatioTemplate({
-        ROOT_CLASS,
-        value,
-        checked,
-        pixelRatio,
-      });
-    }
-  ).reduce((a, b) => a + b);
+  WebGLPixelRatios.map((value) => {
+    const checked = value === selected ? "checked" : "";
+    const pixelRatio = Number(value).toFixed(2);
+    return webglPixelRatioTemplate({
+      ROOT_CLASS,
+      value,
+      checked,
+      pixelRatio,
+    });
+  }).reduce((a, b) => a + b);

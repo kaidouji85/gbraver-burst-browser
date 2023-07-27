@@ -13,14 +13,13 @@ import { ROOT_CLASS } from "./class-name";
 export const battleAnimationTimeScaleOptions = (
   selected: BattleAnimationTimeScale,
 ) =>
-  BattleAnimationTimeScales.map(
-    (value) => {
-      const checked = value === selected ? "checked" : "";
-      const magnification = Math.floor(1 / value);
-      return battleAnimationTimeScaleTemplate({
-        ROOT_CLASS,
-        value,
-        checked,
-        magnification
-      });
+  BattleAnimationTimeScales.map((value) => {
+    const checked = value === selected ? "checked" : "";
+    const magnification = Math.floor(1 / value);
+    return battleAnimationTimeScaleTemplate({
+      ROOT_CLASS,
+      value,
+      checked,
+      magnification,
+    });
   }).reduce((a, b) => a + b);
