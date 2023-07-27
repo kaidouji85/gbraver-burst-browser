@@ -1,5 +1,6 @@
 import { ROOT_CLASS } from "./class-name";
 import { DataIDs } from "./data-ids";
+import rootInnerHTMLTemplate from "./root-inner-html.hbs";
 
 /**
  * ルートHTML要素のinnerHTML
@@ -7,11 +8,8 @@ import { DataIDs } from "./data-ids";
  * @return innerHTML
  */
 export function rootInnerHTML(ids: DataIDs): string {
-  return `
-    <div class="${ROOT_CLASS}__face-graphic" data-id="${ids.leftFaceGraphic}"></div>
-    <div class="${ROOT_CLASS}__messages-wrapper">
-      <div class="${ROOT_CLASS}__messages" data-id="${ids.messages}"></div>
-    </div>
-    <div class="${ROOT_CLASS}__face-graphic" data-id="${ids.rightFaceGraphic}"></div>
-  `;
+  return rootInnerHTMLTemplate({
+    ROOT_CLASS,
+    ids,
+  });
 }
