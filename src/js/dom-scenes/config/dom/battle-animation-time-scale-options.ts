@@ -13,15 +13,18 @@ export const battleAnimationTimeScaleOptions = (
   selected: BattleAnimationTimeScale,
 ) =>
   BattleAnimationTimeScales.map(
-    (value) => `
-    <label class="${ROOT_CLASS}__battle-animation-time-scale-label">
-      <input class="${ROOT_CLASS}__battle-animation-time-scale-radio"
-        name="battle-animation-time-scale"
-        type="radio"
-        value="${value}"
-        ${value === selected ? "checked" : ""}
-      >
-      ${Math.floor(1 / value)}倍
-    </label>
-  `,
-  ).reduce((a, b) => a + b);
+    (value) => {
+      const checked = value === selected ? "checked" : "";
+      const magnification = Math.floor(1 / value);
+      return `
+      <label class="${ROOT_CLASS}__battle-animation-time-scale-label">
+        <input class="${ROOT_CLASS}__battle-animation-time-scale-radio"
+          name="battle-animation-time-scale"
+          type="radio"
+          value="${value}"
+          ${checked}
+        >
+        ${magnification}倍
+      </label>
+    `;
+  }).reduce((a, b) => a + b);
