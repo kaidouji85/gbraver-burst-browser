@@ -17,6 +17,11 @@ export function rootInnerHTML(
   ids: DataIDs,
   config: GbraverBurstBrowserConfig,
 ): string {
+  const battleAnimationTimeScales = battleAnimationTimeScaleOptions(config.battleAnimationTimeScale);
+  const webGLPixelRatios = webGLPixelRatioOptions(config.webGLPixelRatio);
+  const battleControllerTypes = battleControllerTypeItems(config.battleControllerType);
+  const bgmVolumeLabel = soundVolumeLabel(config.bgmVolume);
+  const seVolumeLabel = soundVolumeLabel(config.seVolume);
   return `
     <div class="${ROOT_CLASS}__title">設定</div>
     <div class="${ROOT_CLASS}__configs">
@@ -29,7 +34,7 @@ export function rootInnerHTML(
         <div class="${ROOT_CLASS}__battle-animation-time-scale-selector"
           data-id="${ids.battleAnimationTimeScaleSelector}"
         >
-          ${battleAnimationTimeScaleOptions(config.battleAnimationTimeScale)}
+          ${battleAnimationTimeScales}
         </div>
       </div>
       <div class="${ROOT_CLASS}__webgl-pixel-ratio">
@@ -42,7 +47,7 @@ export function rootInnerHTML(
         <div class="${ROOT_CLASS}__webgl-pixel-ratio-selector"
           data-id="${ids.webGLPixelRatioSelector}"
         >
-          ${webGLPixelRatioOptions(config.webGLPixelRatio)}
+          ${webGLPixelRatios}
         </div>
       </div>
       <div class="${ROOT_CLASS}__battle-controller-type">
@@ -54,7 +59,7 @@ export function rootInnerHTML(
         <div class="${ROOT_CLASS}__battle-controller-type-selector"
           data-id="${ids.battleControllerTypeSelector}"
         >
-          ${battleControllerTypeItems(config.battleControllerType)}
+          ${battleControllerTypes}
         </div>
       </div>
       <div class="${ROOT_CLASS}__bgm-volume">
@@ -71,7 +76,7 @@ export function rootInnerHTML(
         <span class="${ROOT_CLASS}__bgm-volume-value"
           data-id="${ids.bgmVolumeValue}"
         >
-        ${soundVolumeLabel(config.bgmVolume)}</span>
+        ${bgmVolumeLabel}</span>
       </div>
       <div class="${ROOT_CLASS}__se-volume">
         <div class="${ROOT_CLASS}__se-volume-caption">音量 SE</div>
@@ -86,7 +91,7 @@ export function rootInnerHTML(
         <span class="${ROOT_CLASS}__se-volume-value"
           data-id="${ids.seVolumeValue}"
         >
-        ${soundVolumeLabel(config.seVolume)}</span>
+        ${seVolumeLabel}</span>
       </div>
     </div>
     <div class="${ROOT_CLASS}__footer">
