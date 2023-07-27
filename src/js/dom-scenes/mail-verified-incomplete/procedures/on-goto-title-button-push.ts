@@ -8,7 +8,7 @@ import { MailVerifiedIncompleteProps } from "../props";
  */
 export function onGotoTitleButtonPush(
   props: Readonly<MailVerifiedIncompleteProps>,
-  action: PushDOM,
+  action: Readonly<PushDOM>,
 ): void {
   props.exclusive.execute(async () => {
     action.event.preventDefault();
