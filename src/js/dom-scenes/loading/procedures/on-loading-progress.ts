@@ -8,7 +8,7 @@ import { engageCompletedRate } from "./engage-completed-rate";
  */
 export function onLoadingProgress(
   props: LoadingProps,
-  action: LoadingProgress
+  action: LoadingProgress,
 ): void {
   props.completedRate = Math.max(action.completedRate, props.completedRate);
   engageCompletedRate(props);
