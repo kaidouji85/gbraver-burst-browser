@@ -10,13 +10,16 @@ import type { YuuyaModel } from "../model/yuuya-model";
 import type { YuuyaView } from "./yuuya-view";
 
 /** メッシュの大きさ */
-export const MESH_SIZE = 500;
+export const MESH_SIZE = 600;
 
 /** アニメーション数 */
 export const MAX_ANIMATION = 1;
 
 /** 右パディング */
 export const PADDING_RIGHT = 150;
+
+/** 下パディング */
+export const PADDING_BOTTOM = 10;
 
 /** プレイヤー側 ユウヤ ビュー */
 export class PlayerYuuyaView implements YuuyaView {
@@ -51,8 +54,9 @@ export class PlayerYuuyaView implements YuuyaView {
     const x =
       preRender.rendererDOM.clientWidth / 2 +
       (model.position.x - PADDING_RIGHT) * scale;
+    const y = -PADDING_BOTTOM * scale;
     this.#mesh.getObject3D().scale.set(scale, scale, scale);
-    this.#mesh.getObject3D().position.set(x, 0, HUD_CUT_IN_ZNIDEX);
+    this.#mesh.getObject3D().position.set(x, y, HUD_CUT_IN_ZNIDEX);
     this.#mesh.opacity(model.opacity);
   }
 
