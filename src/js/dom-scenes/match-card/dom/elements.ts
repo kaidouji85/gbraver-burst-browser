@@ -14,10 +14,7 @@ export type Elements = {
  * @param ids data-idを集めたもの
  * @return 抽出結果
  */
-export function extractElements(
-  root: HTMLElement,
-  ids: DataIDs,
-): Elements {
+export function extractElements(root: HTMLElement, ids: DataIDs): Elements {
   const foundedPlayer = root.querySelector(`[data-id="${ids.player}"]`);
   const player: HTMLImageElement =
     foundedPlayer instanceof HTMLImageElement ? foundedPlayer : new Image();

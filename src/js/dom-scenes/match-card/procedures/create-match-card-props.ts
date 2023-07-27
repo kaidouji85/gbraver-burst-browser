@@ -35,14 +35,12 @@ export function createMatchCardProps(
   const elements = extractElements(root, ids);
   const isPlayerLoaded = waitElementLoaded(elements.player);
   const playerIconPathId = getArmdozerIconPathId(params.player);
-  elements.player.src = params.resources.paths.find(
-    (v) => v.id === playerIconPathId,
-  )?.path ?? "";
+  elements.player.src =
+    params.resources.paths.find((v) => v.id === playerIconPathId)?.path ?? "";
   const isEnemyLoaded = waitElementLoaded(elements.enemy);
   const enemyIconPathId = getArmdozerIconPathId(params.enemy);
-  elements.enemy.src = params.resources.paths.find(
-    (v) => v.id === enemyIconPathId,
-  )?.path ?? "";
+  elements.enemy.src =
+    params.resources.paths.find((v) => v.id === enemyIconPathId)?.path ?? "";
   return {
     root,
     isPlayerLoaded,

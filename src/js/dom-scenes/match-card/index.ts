@@ -1,5 +1,8 @@
 import type { DOMScene } from "../dom-scene";
-import { createMatchCardProps,GenerateMatchCardPropsParams } from "./procedures/create-match-card-props";
+import {
+  createMatchCardProps,
+  GenerateMatchCardPropsParams,
+} from "./procedures/create-match-card-props";
 import { MatchCardProps } from "./props";
 
 /** コンストラクタのパラメータ */
