@@ -11,15 +11,18 @@ import { ROOT_CLASS } from "./class-name";
  */
 export const webGLPixelRatioOptions = (selected: WebGLPixelRatio) =>
   WebGLPixelRatios.map(
-    (value) => `
-    <label class="${ROOT_CLASS}__webgl-pixel-ratio-selector-label">
-      <input class="${ROOT_CLASS}__webgl-pixel-ratio-selector-radio"
-        name="webgl-pixel-ratio"
-        type="radio"
-        value="${value}" 
-        ${value === selected ? "checked" : ""}
-      >
-      ${Number(value).toFixed(2)}
-    </label>
-  `,
+    (value) => {
+      const pixelRatio = Number(value).toFixed(2);
+      return `
+      <label class="${ROOT_CLASS}__webgl-pixel-ratio-selector-label">
+        <input class="${ROOT_CLASS}__webgl-pixel-ratio-selector-radio"
+          name="webgl-pixel-ratio"
+          type="radio"
+          value="${value}" 
+          ${value === selected ? "checked" : ""}
+        >
+        ${pixelRatio}
+      </label>
+    `
+    }
   ).reduce((a, b) => a + b);
