@@ -3,7 +3,7 @@ import { battleAnimationTimeScaleOptions } from "./battle-animation-time-scale-o
 import { battleControllerTypeItems } from "./battle-controller-type-items";
 import { ROOT_CLASS } from "./class-name";
 import type { DataIDs } from "./data-ids";
-import rootInnerHTMLTemplate from "./root-inner-html-template.hbs";
+import rootInnerHTMLTemplate from "./root-inner-html.hbs";
 import { soundVolumeLabel } from "./sound-volume-label";
 import { webGLPixelRatioOptions } from "./webgl-pixel-ratio-options";
 
@@ -27,9 +27,11 @@ export function rootInnerHTML(
   );
   const bgmVolumeLabel = soundVolumeLabel(config.bgmVolume);
   const seVolumeLabel = soundVolumeLabel(config.seVolume);
+  console.log(config);
   return rootInnerHTMLTemplate({
     ROOT_CLASS,
     ids,
+    config,
     battleAnimationTimeScales,
     webGLPixelRatios,
     battleControllerTypes,
