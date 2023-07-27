@@ -7,7 +7,8 @@ import {
   gaiPilotButton,
   raitoPilotButton,
   shinyaPilotButton,
-  tsubasaPilotButton, yuuyaPilotButton,
+  tsubasaPilotButton,
+  yuuyaPilotButton,
 } from "../../../../../game-object/pilot-button";
 import { PilotButton } from "../../../../../game-object/pilot-button/pilot-button";
 import type { Resources } from "../../../../../resource";

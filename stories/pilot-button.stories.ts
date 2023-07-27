@@ -6,7 +6,8 @@ import {
   gaiPilotButton,
   raitoPilotButton,
   shinyaPilotButton,
-  tsubasaPilotButton, yuuyaPilotButton,
+  tsubasaPilotButton,
+  yuuyaPilotButton,
 } from "../src/js/game-object/pilot-button";
 import { PilotButton } from "../src/js/game-object/pilot-button/pilot-button";
 import { Resources } from "../src/js/resource";
