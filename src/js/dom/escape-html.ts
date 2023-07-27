@@ -1,4 +1,5 @@
 /**
+ * @deprecated
  * HTML特殊文字をエスケープする
  *
  * @param origin エスケープ前
