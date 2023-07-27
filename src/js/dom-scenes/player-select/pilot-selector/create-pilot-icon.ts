@@ -24,6 +24,8 @@ export function createPilotIcon(
       return raitoIcon(resources);
     case PilotIds.TSUBASA:
       return tsubasaIcon(resources);
+    case PilotIds.YUUYA:
+      return yuuyaIcon(resources);
     default:
       return shinyaIcon(resources);
   }
@@ -73,4 +75,15 @@ function tsubasaIcon(resources: Resources): PilotIcon {
   const path =
     resources.paths.find((v) => v.id === PathIds.TSUBASA_ICON)?.path ?? "";
   return new PilotIcon(resources, path, "ツバサ アイコン");
+}
+
+/**
+ * ユウヤ アイコン
+ * @param resources リソース管理オブジェクト
+ * @return 生成結果
+ */
+function yuuyaIcon(resources: Resources): PilotIcon {
+  const path =
+    resources.paths.find((v) => v.id === PathIds.YUUYA_ICON)?.path ?? "";
+  return new PilotIcon(resources, path, "ユウヤ アイコン");
 }

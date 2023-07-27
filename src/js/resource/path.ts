@@ -38,6 +38,7 @@ export const PathIds = {
   RAITO_SKILL_CUTIN: "RAITO_SKILL_CUTIN",
   TSUBASA_SKILL_CUTIN: "TSUBASA_SKILL_CUTIN",
   TSUBASA_ICON: "TSUBASA_ICON",
+  YUUYA_ICON: "YUUYA_ICON",
   END: "END",
   END_CARD: "END_CARD",
   CLOSER: "CLOSER",
@@ -139,6 +140,10 @@ export const PathConfigs: PathConfig[] = [
   {
     id: PathIds.TSUBASA_ICON,
     path: (root) => `${root.get()}/pilot/tsubasa/player-select.webp`,
+  },
+  {
+    id: PathIds.YUUYA_ICON,
+    path: (root) => `${root.get()}/pilot/yuuya/player-select.webp`,
   },
   {
     id: PathIds.END,
