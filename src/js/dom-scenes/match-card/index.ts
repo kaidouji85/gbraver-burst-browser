@@ -4,25 +4,24 @@ import type { Resources } from "../../resource";
 import type { DOMScene } from "../dom-scene";
 import { MatchCardPresentation } from "./presentation";
 
-/**
- * コンストラクタのパラメータ
- */
+/** コンストラクタのパラメータ */
 type Param = {
+  /** リソース管理オブジェクト */
   resources: Resources;
+  /** プレイヤー情報 */
   player: ArmDozerId;
+  /** 敵情報 */
   enemy: ArmDozerId;
+  /** キャプション */
   caption: string;
 };
 
-/**
- * 対戦カード
- */
+/** 対戦カード画面 */
 export class MatchCard implements DOMScene {
   #presentation: MatchCardPresentation;
 
   /**
    * コンストラクタ
-   *
    * @param param パラメータ
    */
   constructor(param: Param) {
@@ -34,27 +33,20 @@ export class MatchCard implements DOMScene {
     );
   }
 
-  /**
-   * デストラクタ相当の処理
-   */
+  /** @override */
   destructor(): void {
     // NOP
   }
 
   /**
    * 各種リソースの読み込みが完了するまで待つ
-   *
    * @return 待機結果
    */
   waitUntilLoaded(): Promise<void> {
     return this.#presentation.waitUntilLoaded();
   }
 
-  /**
-   * ルートHTML要素を取得する
-   *
-   * @return ルートHTML要素
-   */
+  /** @override */
   getRootHTMLElement(): HTMLElement {
     return this.#presentation.getRootHTMLElement();
   }

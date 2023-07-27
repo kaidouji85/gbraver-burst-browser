@@ -6,6 +6,7 @@ import { domUuid } from "../../uuid/dom-uuid";
 import { waitElementLoaded } from "../../wait/wait-element-loaded";
 
 /**
+ * @deprecated
  * 対戦カードシーン プレゼンテーション
  */
 export class MatchCardPresentation {
