@@ -9,7 +9,6 @@ export interface DOMScene {
 
   /**
    * ルートHTML要素を取得する
-   *
    * @return ルートHTML要素
    */
   getRootHTMLElement(): HTMLElement;

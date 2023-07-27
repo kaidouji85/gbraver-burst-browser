@@ -7,17 +7,17 @@ import type {
 import type { DOMScene } from "../dom-scene";
 import { LoadingPresentation } from "./presentation";
 
-/**
- * ローディング
- */
+/** ローディング画面 */
 export class Loading implements DOMScene {
+  /** ローディング完了率 */
   #completedRate: number;
+  /** @deprecated プレゼンテーション */
   #presentation: LoadingPresentation;
+  /** アンサブスクライバ */
   #unsubscriber: Unsubscribable;
 
   /**
    * コンストラクタ
-   *
    * @param loading ローディングストリーム
    */
   constructor(loading: Observable<LoadingActions>) {
@@ -30,16 +30,12 @@ export class Loading implements DOMScene {
     });
   }
 
-  /** デストラクタ相当の処理 */
+  /** @override */
   destructor(): void {
     this.#unsubscriber.unsubscribe();
   }
 
-  /**
-   * ルートHTML要素を取得する
-   *
-   * @return 取得結果
-   */
+  /** @override */
   getRootHTMLElement(): HTMLElement {
     return this.#presentation.getRootHTMLElement();
   }
