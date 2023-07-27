@@ -2,7 +2,7 @@ import {
   BattleControllerType,
   BattleControllerTypes,
 } from "../../../td-scenes/battle/controller-type";
-import battleControllerItemsTemplate from "./battle-controller-type-items.hbs";
+import battleControllerTemplate from "./battle-controller-type.hbs";
 import bigButtonDetailTemplate from "./big-button-detail.hbs";
 import { ROOT_CLASS } from "./class-name";
 import miniControllerDetailTemplate from "./mini-controller-detail.hbs";
@@ -60,7 +60,7 @@ export const battleControllerTypeItems = (selected: BattleControllerType) =>
     const label = battleControllerTypeOptionLabel(value);
     const detail = getDetail(value);
     const checked = value === selected ? "checked" : "";
-    return battleControllerItemsTemplate({
+    return battleControllerTemplate({
       ROOT_CLASS,
       value,
       label,
