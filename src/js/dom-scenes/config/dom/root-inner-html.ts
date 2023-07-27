@@ -3,6 +3,7 @@ import { battleAnimationTimeScaleOptions } from "./battle-animation-time-scale-o
 import { battleControllerTypeItems } from "./battle-controller-type-items";
 import { ROOT_CLASS } from "./class-name";
 import type { DataIDs } from "./data-ids";
+import rootInnerHTMLTemplate from "./root-inner-html.hbs";
 import { soundVolumeLabel } from "./sound-volume-label";
 import { webGLPixelRatioOptions } from "./webgl-pixel-ratio-options";
 
@@ -17,85 +18,24 @@ export function rootInnerHTML(
   ids: DataIDs,
   config: GbraverBurstBrowserConfig,
 ): string {
-  return `
-    <div class="${ROOT_CLASS}__title">設定</div>
-    <div class="${ROOT_CLASS}__configs">
-      <div class="${ROOT_CLASS}__battle-animation-time-scale">
-        <div class="${ROOT_CLASS}__battle-animation-time-scale-caption">バトル アニメ速度</div>
-        <div class="${ROOT_CLASS}__config-separation"></div>
-        <div class="${ROOT_CLASS}__battle-animation-time-scale-description">
-          バトル中のアニメーション速度を変更します。
-        </div>
-        <div class="${ROOT_CLASS}__battle-animation-time-scale-selector"
-          data-id="${ids.battleAnimationTimeScaleSelector}"
-        >
-          ${battleAnimationTimeScaleOptions(config.battleAnimationTimeScale)}
-        </div>
-      </div>
-      <div class="${ROOT_CLASS}__webgl-pixel-ratio">
-        <div class="${ROOT_CLASS}__webgl-pixel-ratio-caption">バトル ピクセルレート</div>
-        <div class="${ROOT_CLASS}__config-separation"></div>
-        <div class="${ROOT_CLASS}__webgl-pixel-ratio-description">
-          バトル中の画面解像度を変更します。
-          値が大きくなるほど画面が綺麗になりますが、負荷が高くなります。
-        </div>
-        <div class="${ROOT_CLASS}__webgl-pixel-ratio-selector"
-          data-id="${ids.webGLPixelRatioSelector}"
-        >
-          ${webGLPixelRatioOptions(config.webGLPixelRatio)}
-        </div>
-      </div>
-      <div class="${ROOT_CLASS}__battle-controller-type">
-        <div class="${ROOT_CLASS}__battle-controller-type-caption">バトル コントローラー</div>
-        <div class="${ROOT_CLASS}__config-separation"></div>
-        <div class="${ROOT_CLASS}__battle-controller-type-description">
-          バトル中のコントローラーを変更します。
-        </div>
-        <div class="${ROOT_CLASS}__battle-controller-type-selector"
-          data-id="${ids.battleControllerTypeSelector}"
-        >
-          ${battleControllerTypeItems(config.battleControllerType)}
-        </div>
-      </div>
-      <div class="${ROOT_CLASS}__bgm-volume">
-        <div class="${ROOT_CLASS}__bgm-volume-caption">音量 BGM</div>
-        <div class="${ROOT_CLASS}__config-separation"></div>
-        <div class="${ROOT_CLASS}__bgm-volume-description">
-          BGMの音量を変更します。本設定は全画面で有効です。
-        </div>
-        <input class="${ROOT_CLASS}__bgm-volume-selector" 
-          type="range" min="0" max="1" step="0.1" 
-          value="${config.bgmVolume}" 
-          data-id="${ids.bgmVolumeSelector}"
-        >
-        <span class="${ROOT_CLASS}__bgm-volume-value"
-          data-id="${ids.bgmVolumeValue}"
-        >
-        ${soundVolumeLabel(config.bgmVolume)}</span>
-      </div>
-      <div class="${ROOT_CLASS}__se-volume">
-        <div class="${ROOT_CLASS}__se-volume-caption">音量 SE</div>
-        <div class="${ROOT_CLASS}__config-separation"></div>
-        <div class="${ROOT_CLASS}__se-volume-description">
-          SEの音量を変更します。本設定は全画面で有効です。
-        </div>
-        <input class="${ROOT_CLASS}__se-volume-selector" type="range" min="0" max="1" step="0.1"
-          value="${config.seVolume}" 
-          data-id="${ids.seVolumeSelector}"
-        >
-        <span class="${ROOT_CLASS}__se-volume-value"
-          data-id="${ids.seVolumeValue}"
-        >
-        ${soundVolumeLabel(config.seVolume)}</span>
-      </div>
-    </div>
-    <div class="${ROOT_CLASS}__footer">
-      <button class="${ROOT_CLASS}__prev" data-id="${ids.prev}">戻る</button>
-      <button class="${ROOT_CLASS}__config-change"
-        data-id="${ids.configChange}"
-      >
-        この設定にする
-      </button>
-    </div>
-  `;
+  const battleAnimationTimeScales = battleAnimationTimeScaleOptions(
+    config.battleAnimationTimeScale,
+  );
+  const webGLPixelRatios = webGLPixelRatioOptions(config.webGLPixelRatio);
+  const battleControllerTypes = battleControllerTypeItems(
+    config.battleControllerType,
+  );
+  const bgmVolumeLabel = soundVolumeLabel(config.bgmVolume);
+  const seVolumeLabel = soundVolumeLabel(config.seVolume);
+  console.log(config);
+  return rootInnerHTMLTemplate({
+    ROOT_CLASS,
+    ids,
+    config,
+    battleAnimationTimeScales,
+    webGLPixelRatios,
+    battleControllerTypes,
+    bgmVolumeLabel,
+    seVolumeLabel,
+  });
 }
