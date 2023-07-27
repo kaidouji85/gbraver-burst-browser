@@ -3,6 +3,7 @@ import {
   WebGLPixelRatios,
 } from "../../../game/config/browser-config";
 import { ROOT_CLASS } from "./class-name";
+import webglPixelRatioTemplate from "./webgl-pixel-ratio.hbs";
 
 /**
  * 戦闘画面ピクセルレートのラジオボタン要素HTMLを生成する
@@ -12,17 +13,13 @@ import { ROOT_CLASS } from "./class-name";
 export const webGLPixelRatioOptions = (selected: WebGLPixelRatio) =>
   WebGLPixelRatios.map(
     (value) => {
+      const checked = value === selected ? "checked" : "";
       const pixelRatio = Number(value).toFixed(2);
-      return `
-      <label class="${ROOT_CLASS}__webgl-pixel-ratio-selector-label">
-        <input class="${ROOT_CLASS}__webgl-pixel-ratio-selector-radio"
-          name="webgl-pixel-ratio"
-          type="radio"
-          value="${value}" 
-          ${value === selected ? "checked" : ""}
-        >
-        ${pixelRatio}
-      </label>
-    `
+      return webglPixelRatioTemplate({
+        ROOT_CLASS,
+        value,
+        checked,
+        pixelRatio,
+      });
     }
   ).reduce((a, b) => a + b);
