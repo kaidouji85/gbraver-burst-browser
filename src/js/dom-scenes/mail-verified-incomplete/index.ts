@@ -11,9 +11,9 @@ export class MailVerifiedIncomplete implements DOMScene {
   #props: MailVerifiedIncompleteProps;
   /** アンサブスクライバ */
   #unsubscribers: Unsubscribable[];
+  
   /**
    * コンストラクタ
-   *
    * @param mailAddress 認証メール送信先アドレス
    */
   constructor(mailAddress: string) {

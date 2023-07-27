@@ -1,4 +1,4 @@
-import { MailVerifiedIncomplete } from "../src/js/dom-scenes/mail-verified-incomplete/mail-verified-incomplete";
+import { MailVerifiedIncomplete } from "../src/js/dom-scenes/mail-verified-incomplete";
 import type { DOMStubStory } from "./stub/dom-stub";
 import { domStub } from "./stub/dom-stub";
 

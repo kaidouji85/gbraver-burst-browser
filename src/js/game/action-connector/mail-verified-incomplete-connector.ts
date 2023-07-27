@@ -1,4 +1,4 @@
-import { MailVerifiedIncomplete } from "../../dom-scenes/mail-verified-incomplete/mail-verified-incomplete";
+import { MailVerifiedIncomplete } from "../../dom-scenes/mail-verified-incomplete";
 import type { DOMSceneActionConnector } from "../dom-scene-binder/dom-scene-action-connector";
 
 /** アクションコネクタのデータ型 */
