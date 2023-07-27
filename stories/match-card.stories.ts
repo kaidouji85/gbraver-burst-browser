@@ -3,15 +3,20 @@ import { ArmDozerIds } from "gbraver-burst-core";
 import { MatchCard } from "../src/js/dom-scenes/match-card";
 import type { DOMStubStory } from "./stub/dom-stub";
 import { domStub } from "./stub/dom-stub";
+
 export default {
   title: "match-card",
 };
+
 export const Scene: DOMStubStory = domStub((resources) => {
   const scene = new MatchCard({
     resources: resources,
     player: ArmDozerIds.LIGHTNING_DOZER,
     enemy: ArmDozerIds.GENESIS_BRAVER,
     caption: "STAGE X",
+  });
+  scene.waitUntilLoaded().then(() => {
+    console.log("load complete.");
   });
   return scene.getRootHTMLElement();
 });
