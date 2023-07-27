@@ -7,14 +7,13 @@ import {
   gaiPilotButton,
   raitoPilotButton,
   shinyaPilotButton,
-  tsubasaPilotButton,
+  tsubasaPilotButton, yuuyaPilotButton,
 } from "../../../../../game-object/pilot-button";
 import { PilotButton } from "../../../../../game-object/pilot-button/pilot-button";
 import type { Resources } from "../../../../../resource";
 
 /**
  * パイロットIDに対応したパイロットボタンを生成する
- *
  * @param resources リソース管理オブジェクト
  * @param gameObjectAction ゲームオブジェクトアクション
  * @param pilotId パイロットID
@@ -28,16 +27,14 @@ export function createPilotButton(
   switch (pilotId) {
     case PilotIds.SHINYA:
       return shinyaPilotButton(resources, gameObjectAction);
-
     case PilotIds.GAI:
       return gaiPilotButton(resources, gameObjectAction);
-
     case PilotIds.RAITO:
       return raitoPilotButton(resources, gameObjectAction);
-
     case PilotIds.TSUBASA:
       return tsubasaPilotButton(resources, gameObjectAction);
-
+    case PilotIds.YUUYA:
+      return yuuyaPilotButton(resources, gameObjectAction);
     default:
       return shinyaPilotButton(resources, gameObjectAction);
   }
