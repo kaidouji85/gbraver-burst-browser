@@ -1,56 +1,37 @@
 import { Observable, Unsubscribable } from "rxjs";
 
-import type {
-  LoadingActions,
-  LoadingProgress,
-} from "../../resource/loading/loading-actions";
+import type { LoadingActions } from "../../resource/loading/loading-actions";
 import type { DOMScene } from "../dom-scene";
-import { LoadingPresentation } from "./presentation";
+import { bindEventListeners } from "./procedures/bind-event-listeners";
+import { createLoadingProps } from "./procedures/create-loading-props";
+import { engageCompletedRate } from "./procedures/engage-completed-rate";
+import { LoadingProps } from "./props";
 
-/**
- * ローディング
- */
+/** ローディング画面 */
 export class Loading implements DOMScene {
-  #completedRate: number;
-  #presentation: LoadingPresentation;
+  /** プロパティ */
+  #props: LoadingProps;
+  /** アンサブスクライバ */
   #unsubscriber: Unsubscribable;
 
   /**
    * コンストラクタ
-   *
    * @param loading ローディングストリーム
    */
   constructor(loading: Observable<LoadingActions>) {
-    this.#completedRate = 0;
-    this.#presentation = new LoadingPresentation();
-    this.#unsubscriber = loading.subscribe((action) => {
-      if (action.type === "LoadingProgress") {
-        this.#onLoadingProgress(action);
-      }
-    });
+    this.#props = createLoadingProps();
+    this.#props.completedRate = 0;
+    engageCompletedRate(this.#props);
+    this.#unsubscriber = bindEventListeners(this.#props, loading);
   }
 
-  /** デストラクタ相当の処理 */
+  /** @override */
   destructor(): void {
     this.#unsubscriber.unsubscribe();
   }
 
-  /**
-   * ルートHTML要素を取得する
-   *
-   * @return 取得結果
-   */
+  /** @override */
   getRootHTMLElement(): HTMLElement {
-    return this.#presentation.getRootHTMLElement();
-  }
-
-  /**
-   * リソースのローディング進捗に変化があった際のイベント
-   *
-   * @param action アクション
-   */
-  #onLoadingProgress(action: LoadingProgress): void {
-    this.#completedRate = Math.max(action.completedRate, this.#completedRate);
-    this.#presentation.setCompletedRate(this.#completedRate);
+    return this.#props.root;
   }
 }
