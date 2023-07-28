@@ -38,7 +38,7 @@ export type BattleSceneProps = {
   /** バトル進行オブジェクト */
   battleProgress: BattleProgress;
   /** カスタムバトルイベント */
-  customBattleEvent: CustomBattleEvent | null | undefined;
+  customBattleEvent: CustomBattleEvent | null;
   /** 排他制御オブジェクト */
   exclusive: Exclusive;
   /** 戦闘シーンビュー */
@@ -104,7 +104,7 @@ export function createBattleSceneProps(
     stateHistory: params.initialState,
     endBattle: new Subject(),
     battleProgress: params.battleProgress,
-    customBattleEvent: params.customBattleEvent,
+    customBattleEvent: params.customBattleEvent ?? null,
     view: new BattleSceneView({
       resources: params.resources,
       renderer: params.renderer,
