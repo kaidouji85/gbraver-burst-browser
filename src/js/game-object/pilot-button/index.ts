@@ -7,6 +7,7 @@ import { GaiIcon } from "./view/gai";
 import { RaitoIcon } from "./view/raito";
 import { ShinyaIcon } from "./view/shinya";
 import { TsubasaIcon } from "./view/tsubasa";
+import { YuuyaIcon } from "./view/yuuya";
 
 /**
  * シンヤ パイロットボタン を生成する
@@ -61,5 +62,19 @@ export function tsubasaPilotButton(
   gameObjectAction: Observable<GameObjectAction>,
 ): PilotButton {
   const icon = new TsubasaIcon(resources);
+  return new PilotButton(resources, icon, gameObjectAction);
+}
+
+/**
+ * ユウヤ パイロットボタン を生成する
+ * @param resources リソース管理オブジェクト
+ * @param gameObjectAction ゲームオブジェクトアクション
+ * @return パイロットボタン
+ */
+export function yuuyaPilotButton(
+  resources: Resources,
+  gameObjectAction: Observable<GameObjectAction>,
+): PilotButton {
+  const icon = new YuuyaIcon(resources);
   return new PilotButton(resources, icon, gameObjectAction);
 }

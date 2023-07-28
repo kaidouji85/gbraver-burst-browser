@@ -31,6 +31,7 @@ export async function onEndNetworkError(
     await Promise.all([
       (async () => {
         await props.fader.fadeOut();
+        props.tdBinder.hidden();
         return await startTitle(props);
       })(),
       (async () => {

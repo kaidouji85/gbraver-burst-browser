@@ -12,6 +12,7 @@ export class DOMFader {
   constructor() {
     this._root = document.createElement("div");
     this._root.className = "dom-fader";
+    this._root.style.display = "none";
   }
 
   /**
@@ -37,16 +38,13 @@ export class DOMFader {
    */
   async fadeIn(): Promise<void> {
     this._root.style.display = "block";
-
     const animation = this._root.animate(
       [
         {
           opacity: 1,
-          display: "block",
         },
         {
           opacity: 0,
-          display: "none",
         },
       ],
       {
@@ -55,7 +53,6 @@ export class DOMFader {
         easing: "ease",
       },
     );
-
     await waitFinishAnimation(animation);
     this._root.style.display = "none";
   }
@@ -67,7 +64,6 @@ export class DOMFader {
    */
   async fadeOut(): Promise<void> {
     this._root.style.display = "block";
-
     const animation = this._root.animate(
       [
         {
@@ -83,7 +79,6 @@ export class DOMFader {
         easing: "ease",
       },
     );
-
     await waitFinishAnimation(animation);
   }
 }

@@ -7,6 +7,7 @@ import {
   raitoPilotButton,
   shinyaPilotButton,
   tsubasaPilotButton,
+  yuuyaPilotButton,
 } from "../src/js/game-object/pilot-button";
 import { PilotButton } from "../src/js/game-object/pilot-button/pilot-button";
 import { Resources } from "../src/js/resource";
@@ -69,6 +70,9 @@ export const raito = pilotButtonStory(raitoPilotButton, operatable);
 
 /** ツバサ */
 export const tsubasa = pilotButtonStory(tsubasaPilotButton, operatable);
+
+/** ユウヤ */
+export const yuuya = pilotButtonStory(yuuyaPilotButton, operatable);
 
 /**
  * 操作不可能なパイロットボタン

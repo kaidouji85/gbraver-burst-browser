@@ -40,6 +40,10 @@ module.exports = {
           'css-loader',
           'postcss-loader',
         ],
+      },
+      {
+        test: /\.hbs$/i,
+        use: 'handlebars-loader',
       }
     ]
   },

@@ -1,61 +1,41 @@
-import type { ArmDozerId } from "gbraver-burst-core";
-
-import type { Resources } from "../../resource";
 import type { DOMScene } from "../dom-scene";
-import { MatchCardPresentation } from "./presentation";
+import {
+  createMatchCardProps,
+  GenerateMatchCardPropsParams,
+} from "./procedures/create-match-card-props";
+import { MatchCardProps } from "./props";
 
-/**
- * コンストラクタのパラメータ
- */
-type Param = {
-  resources: Resources;
-  player: ArmDozerId;
-  enemy: ArmDozerId;
-  caption: string;
-};
+/** コンストラクタのパラメータ */
+type Param = GenerateMatchCardPropsParams;
 
-/**
- * 対戦カード
- */
+/** 対戦カード画面 */
 export class MatchCard implements DOMScene {
-  #presentation: MatchCardPresentation;
+  /** 画面プロパティ */
+  #props: MatchCardProps;
 
   /**
    * コンストラクタ
-   *
    * @param param パラメータ
    */
   constructor(param: Param) {
-    this.#presentation = new MatchCardPresentation(
-      param.resources,
-      param.player,
-      param.enemy,
-      param.caption,
-    );
+    this.#props = createMatchCardProps(param);
   }
 
-  /**
-   * デストラクタ相当の処理
-   */
+  /** @override */
   destructor(): void {
     // NOP
   }
 
   /**
    * 各種リソースの読み込みが完了するまで待つ
-   *
    * @return 待機結果
    */
-  waitUntilLoaded(): Promise<void> {
-    return this.#presentation.waitUntilLoaded();
+  async waitUntilLoaded(): Promise<void> {
+    await Promise.all([this.#props.isPlayerLoaded, this.#props.isEnemyLoaded]);
   }
 
-  /**
-   * ルートHTML要素を取得する
-   *
-   * @return ルートHTML要素
-   */
+  /** @override */
   getRootHTMLElement(): HTMLElement {
-    return this.#presentation.getRootHTMLElement();
+    return this.#props.root;
   }
 }

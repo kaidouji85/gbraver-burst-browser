@@ -1,5 +1,6 @@
 import { ROOT } from "./class-name";
 import { DataIDs } from "./data-ids";
+import template from "./root-inner-html.hbs";
 
 /**
  * ルートHTML要素のinnerHTMLを生成する
@@ -7,7 +8,5 @@ import { DataIDs } from "./data-ids";
  * @return 生成結果
  */
 export function rootInnerHTML(ids: DataIDs): string {
-  return `
-    <div class="${ROOT}__batteries" data-id="${ids.batteries}"></div>
-  `;
+  return template({ ids, ROOT });
 }

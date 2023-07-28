@@ -2,6 +2,7 @@ import {
   BattleAnimationTimeScale,
   BattleAnimationTimeScales,
 } from "../../../game/config/browser-config";
+import battleAnimationTimeScaleTemplate from "./battle-animation-time-scale.hbs";
 import { ROOT_CLASS } from "./class-name";
 
 /**
@@ -12,16 +13,13 @@ import { ROOT_CLASS } from "./class-name";
 export const battleAnimationTimeScaleOptions = (
   selected: BattleAnimationTimeScale,
 ) =>
-  BattleAnimationTimeScales.map(
-    (value) => `
-    <label class="${ROOT_CLASS}__battle-animation-time-scale-label">
-      <input class="${ROOT_CLASS}__battle-animation-time-scale-radio"
-        name="battle-animation-time-scale"
-        type="radio"
-        value="${value}"
-        ${value === selected ? "checked" : ""}
-      >
-      ${Math.floor(1 / value)}倍
-    </label>
-  `,
-  ).reduce((a, b) => a + b);
+  BattleAnimationTimeScales.map((value) => {
+    const checked = value === selected ? "checked" : "";
+    const magnification = Math.floor(1 / value);
+    return battleAnimationTimeScaleTemplate({
+      ROOT_CLASS,
+      value,
+      checked,
+      magnification,
+    });
+  }).reduce((a, b) => a + b);

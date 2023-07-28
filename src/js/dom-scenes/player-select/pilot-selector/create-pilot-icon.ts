@@ -7,7 +7,6 @@ import { PilotIcon } from "./pilot-icon";
 
 /**
  * パイロットアイコンを生成する
- *
  * @param resources リソース管理オブジェクト
  * @param pilotId パイロットID
  * @return 生成結果
@@ -19,16 +18,14 @@ export function createPilotIcon(
   switch (pilotId) {
     case PilotIds.SHINYA:
       return shinyaIcon(resources);
-
     case PilotIds.GAI:
       return gaiIcon(resources);
-
     case PilotIds.RAITO:
       return raitoIcon(resources);
-
     case PilotIds.TSUBASA:
       return tsubasaIcon(resources);
-
+    case PilotIds.YUUYA:
+      return yuuyaIcon(resources);
     default:
       return shinyaIcon(resources);
   }
@@ -36,7 +33,6 @@ export function createPilotIcon(
 
 /**
  * シンヤ アイコン
- *
  * @param resources リソース管理オブジェクト
  * @return 生成結果
  */
@@ -61,7 +57,6 @@ function gaiIcon(resources: Resources): PilotIcon {
 
 /**
  * ライト アイコン
- *
  * @param resources リソース管理オブジェクト
  * @return 生成結果
  */
@@ -73,7 +68,6 @@ function raitoIcon(resources: Resources): PilotIcon {
 
 /**
  * ツバサ アイコン
- *
  * @param resources リソース管理オブジェクト
  * @return 生成結果
  */
@@ -81,4 +75,15 @@ function tsubasaIcon(resources: Resources): PilotIcon {
   const path =
     resources.paths.find((v) => v.id === PathIds.TSUBASA_ICON)?.path ?? "";
   return new PilotIcon(resources, path, "ツバサ アイコン");
+}
+
+/**
+ * ユウヤ アイコン
+ * @param resources リソース管理オブジェクト
+ * @return 生成結果
+ */
+function yuuyaIcon(resources: Resources): PilotIcon {
+  const path =
+    resources.paths.find((v) => v.id === PathIds.YUUYA_ICON)?.path ?? "";
+  return new PilotIcon(resources, path, "ユウヤ アイコン");
 }

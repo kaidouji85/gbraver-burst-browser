@@ -11,12 +11,17 @@ import { bindEventListeners } from "./procedure/bind-event-listeners";
 import { start } from "./procedure/start";
 
 /** コンストラクタのパラメータ */
-type BattleSceneParams = BattleScenePropsCreatorParams;
+type BattleSceneParams = BattleScenePropsCreatorParams & {
+  /** 緊急停止通知ストリーム */
+  emergencyStop?: Observable<unknown>;
+};
 
 /** 戦闘シーン */
 export class BattleScene implements TDScene {
+  /** プロパティ */
   #props: BattleSceneProps;
-  #unsubscriber: Unsubscribable[];
+  /** アンサブスクライバ */
+  #unSubscribers: Unsubscribable[];
 
   /**
    * コンストラクタ
@@ -24,13 +29,23 @@ export class BattleScene implements TDScene {
    */
   constructor(params: BattleSceneParams) {
     this.#props = createBattleSceneProps(params);
-    this.#unsubscriber = bindEventListeners(this.#props);
+    const emergencyStopUnSubscriber = params.emergencyStop
+      ? [
+          params.emergencyStop.subscribe(() => {
+            this.#onEmergencyStop();
+          }),
+        ]
+      : [];
+    this.#unSubscribers = [
+      ...bindEventListeners(this.#props),
+      ...emergencyStopUnSubscriber,
+    ];
   }
 
   /** @override */
   destructor(): void {
     this.#props.view.destructor();
-    this.#unsubscriber.forEach((v) => {
+    this.#unSubscribers.forEach((v) => {
       v.unsubscribe();
     });
   }
@@ -55,5 +70,15 @@ export class BattleScene implements TDScene {
    */
   async start(): Promise<void> {
     await start(this.#props);
+  }
+
+  /**
+   * 緊急停止時の処理
+   */
+  #onEmergencyStop(): void {
+    this.#unSubscribers.forEach((v) => {
+      v.unsubscribe();
+    });
+    this.#unSubscribers = [];
   }
 }
