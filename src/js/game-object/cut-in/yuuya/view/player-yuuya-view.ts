@@ -10,7 +10,7 @@ import type { YuuyaModel } from "../model/yuuya-model";
 import type { YuuyaView } from "./yuuya-view";
 
 /** メッシュの大きさ */
-export const MESH_SIZE = 600;
+export const MESH_SIZE = 460;
 
 /** アニメーション数 */
 export const MAX_ANIMATION = 1;
