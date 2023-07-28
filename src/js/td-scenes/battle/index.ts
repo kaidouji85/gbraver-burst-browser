@@ -12,9 +12,9 @@ import { start } from "./procedure/start";
 
 /** コンストラクタのパラメータ */
 type BattleSceneParams = BattleScenePropsCreatorParams & {
-    /** 緊急停止通知ストリーム */
-    emergencyStop?: Observable<unknown>;
-}
+  /** 緊急停止通知ストリーム */
+  emergencyStop?: Observable<unknown>;
+};
 
 /** 戦闘シーン */
 export class BattleScene implements TDScene {
@@ -30,11 +30,11 @@ export class BattleScene implements TDScene {
   constructor(params: BattleSceneParams) {
     this.#props = createBattleSceneProps(params);
     const emergencyStopUnSubscriber = params.emergencyStop
-      ? [ params.emergencyStop.subscribe(this.#onEmergencyStop) ]
-      : []
+      ? [params.emergencyStop.subscribe(this.#onEmergencyStop)]
+      : [];
     this.#unSubscribers = [
       ...bindEventListeners(this.#props),
-      ...emergencyStopUnSubscriber
+      ...emergencyStopUnSubscriber,
     ];
   }
 
