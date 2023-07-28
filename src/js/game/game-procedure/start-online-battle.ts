@@ -91,6 +91,7 @@ export async function startOnlineBattle(
     gameLoop: props.gameLoop,
     renderer: props.renderer,
     controllerType: config.battleControllerType,
+    emergencyStop: battle.suddenlyBattleNotifier(),
   });
   props.tdBinder.bind(battleScene, battleSceneConnector);
   await waitAnimationFrame();
