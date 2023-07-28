@@ -79,5 +79,6 @@ export class BattleScene implements TDScene {
     this.#unSubscribers.forEach((v) => {
       v.unsubscribe();
     });
+    this.#unSubscribers = [];
   }
 }
