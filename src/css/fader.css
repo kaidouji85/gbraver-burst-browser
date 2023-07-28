@@ -1,9 +1,6 @@
-/**
- * フェーダー
- */
+/** フェーダー */
 @media (orientation: landscape) {
   .dom-fader {
-    display: none;
     width: var(--screen-width);
     height: var(--screen-height);
     position: fixed;
