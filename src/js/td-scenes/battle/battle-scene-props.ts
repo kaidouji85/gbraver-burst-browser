@@ -51,8 +51,6 @@ export type BattleSceneProps = {
   bgm: BGMManager;
   /** コントローラータイプ */
   controllerType: BattleControllerType;
-  /** 緊急停止通知ストリーム */
-  emergencyStop: Observable<unknown> | null;
 };
 
 /** 戦闘シーンで利用するレンダラ */
@@ -88,8 +86,6 @@ export type BattleScenePropsCreatorParams = {
   customBattleEvent?: CustomBattleEvent;
   /** コントローラータイプ */
   controllerType: BattleControllerType;
-  /** 緊急停止通知ストリーム */
-  emergencyStop?: Observable<unknown>;
 };
 
 /**
@@ -120,6 +116,5 @@ export function createBattleSceneProps(
     sounds: new BattleSceneSounds(params.resources, params.playingBGM),
     bgm: params.bgm,
     controllerType: params.controllerType,
-    emergencyStop: params.emergencyStop ?? null,
   };
 }
