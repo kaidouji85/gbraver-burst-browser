@@ -24,10 +24,10 @@ export class YuuyaIcon implements PilotIcon {
     this.#mesh = new HorizontalAnimationMesh({
       texture,
       maxAnimation: 1,
-      width: 430,
-      height: 430,
+      width: 400,
+      height: 400,
     });
-    this.#mesh.getObject3D().position.x = 0;
+    this.#mesh.getObject3D().position.x = -10;
     this.#mesh.getObject3D().position.y = 130;
     this.#group.add(this.#mesh.getObject3D());
   }
