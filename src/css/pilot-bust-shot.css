@@ -50,7 +50,7 @@
 
   position: absolute;
   left: calc(100vw - var(--width) * 0.9 - var(--safe-area-right));
-  top: calc(100 * var(--vh) - var(--height) * 0.8);
+  top: calc(100 * var(--vh) - var(--height) * 0.9);
   width: var(--width);
   height: var(--height);
 }
