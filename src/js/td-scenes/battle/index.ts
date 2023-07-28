@@ -30,7 +30,11 @@ export class BattleScene implements TDScene {
   constructor(params: BattleSceneParams) {
     this.#props = createBattleSceneProps(params);
     const emergencyStopUnSubscriber = params.emergencyStop
-      ? [params.emergencyStop.subscribe(this.#onEmergencyStop)]
+      ? [
+          params.emergencyStop.subscribe(() => {
+            this.#onEmergencyStop();
+          }),
+        ]
       : [];
     this.#unSubscribers = [
       ...bindEventListeners(this.#props),
