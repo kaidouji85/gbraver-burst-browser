@@ -16,7 +16,7 @@
     right: max(calc(var(--responsive-font-size * 1)), var(--safe-area-right));
     background-color: var(--font-color);
     border-radius: var(--dialog-border-radius);
-    z-index: var(--zindex-dialog);
+    z-index: var(--zindex-mini-controller);
     display: grid;
     grid-template-columns: 1fr 1fr;
     grid-template-rows: 1fr 1fr;

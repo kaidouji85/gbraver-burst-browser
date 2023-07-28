@@ -22,6 +22,7 @@
   --sub-background-color: #383c3c;
 
   /** z-index */
+  --zindex-mini-controller: 7;
   --zindex-background: 8;
   --zindex-dialog: 9;
   --zindex-close: 10;
