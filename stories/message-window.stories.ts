@@ -1,10 +1,8 @@
+import { attackBatteryCaptionInnerHtml } from "../src/js/custom-battle-events/battery-system-tutorial/dom/attack-battery-caption-inner-html";
 import { MessageWindow } from "../src/js/game-dom/message-window";
 import { ROOT_CLASS } from "../src/js/game-dom/message-window/dom/class-name";
 import type { DOMStubStory } from "./stub/dom-stub";
 import { domStub } from "./stub/dom-stub";
-import {
-  attackBatteryCaptionInnerHtml
-} from "../src/js/custom-battle-events/battery-system-tutorial/dom/attack-battery-caption-inner-html";
 
 export default {
   title: "message-window",
