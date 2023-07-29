@@ -1,4 +1,4 @@
-/** 防御バッテリー注釈 */
+/** @deprecated 防御バッテリー注釈 */
 export const defenseBatteryCaption = [
   "+ - ボタンで数字を調整したら ”ボウギョ” ボタンを押そう",
 ];
