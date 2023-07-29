@@ -54,6 +54,10 @@ export const PathIds = {
   TUTORIAL_IMAGE_CUT_03: "TUTORIAL_IMAGE_CUT_03",
   BATTERY_ICON: "BATTERY_ICON",
   HELP_ICON: "HELP_ICON",
+  MESSAGE_WINDOW_ATTACK_BATTERY: "MESSAGE_WINDOW_ATTACK_BATTERY",
+  MESSAGE_WINDOW_DEFENSE_BATTERY: "MESSAGE_WINDOW_DEFENSE_BATTERY",
+  MESSAGE_WINDOW_PLUS_BATTERY: "MESSAGE_WINDOW_PLUS_BATTERY",
+  MESSAGE_WINDOW_MINUS_BATTERY: "MESSAGE_WINDOW_MINUS_BATTERY",
 };
 
 /** パス設定を集めたもの */
@@ -205,6 +209,22 @@ export const PathConfigs: PathConfig[] = [
   {
     id: PathIds.HELP_ICON,
     path: (root) => `${root.get()}/help-icon.svg`,
+  },
+  {
+    id: PathIds.MESSAGE_WINDOW_ATTACK_BATTERY,
+    path: (root) => `${root.get()}/message-window/attack-battery.webp`,
+  },
+  {
+    id: PathIds.MESSAGE_WINDOW_DEFENSE_BATTERY,
+    path: (root) => `${root.get()}/message-window/defense-battery.webp`,
+  },
+  {
+    id: PathIds.MESSAGE_WINDOW_PLUS_BATTERY,
+    path: (root) => `${root.get()}/message-window/plus-battery.webp`,
+  },
+  {
+    id: PathIds.MESSAGE_WINDOW_MINUS_BATTERY,
+    path: (root) => `${root.get()}/message-window/minus-battery.webp`,
   },
 ];
 
