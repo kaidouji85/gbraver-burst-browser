@@ -14,17 +14,23 @@ import { onBurstCommandSelected } from "./listeners/on-burst-command-selected";
 import { onLastState } from "./listeners/on-last-state";
 import { onPilotSkillCommandSelected } from "./listeners/on-pilot-skill-command-selected";
 import type { BatterySystemTutorialState } from "./state";
+import {attackBatteryCaptionInnerHtml} from "./dom/attack-battery-caption-inner-html";
+import {Resources} from "../../resource";
 
 /** バッテリーシステムチュートリアル用のカスタムバトルイベント */
 class BatterySystemTutorialEvent extends EmptyCustomBattleEvent {
   /** チュートリアルのステート */
   state: BatterySystemTutorialState;
+  /** 攻撃バッテリー注釈 innerHTML */
+  attackBatteryCaption: string;
 
   /**
    * コンストラクタ
+   * @param resources リソース管理オブジェクト
    */
-  constructor() {
+  constructor(resources: Resources) {
     super();
+    this.attackBatteryCaption = attackBatteryCaptionInnerHtml(resources);
     this.state = {
       isBatterySystemDescriptionComplete: false,
     };
@@ -78,8 +84,9 @@ class BatterySystemTutorialEvent extends EmptyCustomBattleEvent {
 
 /**
  * バッテリーシステムチュートリアル用のカスタバトルイベントを生成する
+ * @param resources リソース管理オブジェクト
  * @return 生成したカスタムバトルイベント
  */
-export function createBatterySystemTutorialEvent(): CustomBattleEvent {
-  return new BatterySystemTutorialEvent();
+export function createBatterySystemTutorialEvent(resources: Resources): CustomBattleEvent {
+  return new BatterySystemTutorialEvent(resources);
 }
