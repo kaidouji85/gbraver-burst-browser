@@ -1,19 +1,21 @@
 import type { LastState } from "../../../td-scenes/battle/custom-battle-event";
 import { waitTime } from "../../../wait/wait-time";
 import { focusInBatterySelector } from "../../focus";
-import {attackBatteryCaption, defenseBatteryCaption} from "../captions";
 
 /**
  * 攻撃説明ストーリー
- *
  * @param props イベントプロパティ
+ * @param attackBatteryCaption 攻撃時のキャプション innerHTML
  * @return ストーリーが完了したら発火するPromise
  */
 export async function attackDescription(
   props: Readonly<LastState>,
+  attackBatteryCaption: string,
 ): Promise<void> {
   await focusInBatterySelector(props);
-  props.view.dom.nearBatterySelectorMessageWindow.messages(attackBatteryCaption);
+  props.view.dom.nearBatterySelectorMessageWindow.messagesInInnerHTML(
+    attackBatteryCaption,
+  );
   await props.view.hud.gameObjects.batterySelector.batteryPlus();
   await waitTime(200);
   await props.view.hud.gameObjects.batterySelector.batteryPlus();

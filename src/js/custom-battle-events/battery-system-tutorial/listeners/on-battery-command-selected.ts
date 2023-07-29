@@ -94,7 +94,9 @@ async function onZeroDefense(
   refreshConversation(props);
   if (isBatterySelectorFocused(props)) {
     await focusInBatterySelector(props);
-    props.view.dom.nearBatterySelectorMessageWindow.messages(defenseBatteryCaption);
+    props.view.dom.nearBatterySelectorMessageWindow.messages(
+      defenseBatteryCaption,
+    );
   }
 
   return {

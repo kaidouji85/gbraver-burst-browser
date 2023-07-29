@@ -22,9 +22,7 @@ import { invisibleAllMessageWindows } from "./invisible-all-message-windows";
  * @param props イベントプロパティ
  * @return 処理が完了したら発火するPromise
  */
-export const focusInBatterySelector = async (
-  props: CustomBattleEventProps,
-) => {
+export const focusInBatterySelector = async (props: CustomBattleEventProps) => {
   unAttentionAllButtons(props);
   disabledAllButtons(props);
   attentionBatterySelector(props);
