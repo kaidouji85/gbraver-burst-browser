@@ -9,6 +9,7 @@ import type {
 } from "../../td-scenes/battle/custom-battle-event";
 import { EmptyCustomBattleEvent } from "../empty-custom-battle-event";
 import { attackBatteryCaptionInnerHtml } from "./dom/attack-battery-caption-inner-html";
+import { defenseBatteryCaptionInnerHtml } from "./dom/defense-battery-caption-inner-html";
 import { afterLastState } from "./listeners/after-last-state";
 import { beforeLastState } from "./listeners/before-last-state";
 import { onBatteryCommandSelected } from "./listeners/on-battery-command-selected";
@@ -23,6 +24,8 @@ class BatterySystemTutorialEvent extends EmptyCustomBattleEvent {
   state: BatterySystemTutorialState;
   /** 攻撃バッテリー注釈 innerHTML */
   attackBatteryCaption: string;
+  /** 防御バッテリー注釈 innerHTML */
+  defenseBatteryCaption: string;
 
   /**
    * コンストラクタ
@@ -31,6 +34,7 @@ class BatterySystemTutorialEvent extends EmptyCustomBattleEvent {
   constructor(resources: Resources) {
     super();
     this.attackBatteryCaption = attackBatteryCaptionInnerHtml(resources);
+    this.defenseBatteryCaption = defenseBatteryCaptionInnerHtml(resources);
     this.state = {
       isBatterySystemDescriptionComplete: false,
     };
@@ -58,7 +62,10 @@ class BatterySystemTutorialEvent extends EmptyCustomBattleEvent {
   async onBatteryCommandSelected(
     props: BatteryCommandSelected,
   ): Promise<CommandCanceled> {
-    const { state, cancel } = await onBatteryCommandSelected(props, this.state);
+    const { state, cancel } = await onBatteryCommandSelected({
+      ...this,
+      props,
+    });
     this.state = state;
     return cancel;
   }

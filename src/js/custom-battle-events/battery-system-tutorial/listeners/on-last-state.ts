@@ -2,7 +2,6 @@ import type { GameState } from "gbraver-burst-core";
 
 import type { LastState } from "../../../td-scenes/battle/custom-battle-event";
 import { focusInBatterySelector } from "../../focus";
-import { defenseBatteryCaption } from "../captions";
 import type { BatterySystemTutorialState } from "../state";
 import { attackDescription } from "../stories/attack-description";
 
@@ -14,6 +13,8 @@ type Params = {
   state: BatterySystemTutorialState;
   /** 攻撃時のキャプション innerHTML */
   attackBatteryCaption: string;
+  /** 防御時のキャプション innerHTML */
+  defenseBatteryCaption: string;
 };
 
 /**
@@ -24,7 +25,7 @@ type Params = {
 export async function onLastState(
   params: Params,
 ): Promise<BatterySystemTutorialState> {
-  const { props, state, attackBatteryCaption } = params;
+  const { props, state, attackBatteryCaption, defenseBatteryCaption } = params;
   if (state.isBatterySystemDescriptionComplete) {
     return state;
   }
@@ -44,7 +45,7 @@ export async function onLastState(
     await attackDescription(props, attackBatteryCaption);
   } else {
     await focusInBatterySelector(props);
-    props.view.dom.nearBatterySelectorMessageWindow.messages(
+    props.view.dom.nearBatterySelectorMessageWindow.messagesInInnerHTML(
       defenseBatteryCaption,
     );
   }

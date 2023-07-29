@@ -128,7 +128,8 @@
     margin: calc(var(--responsive-font-size) * 0.2);
   }
 
-  .message-window__attack-battery {
+  .message-window__attack-battery,
+  .message-window__defense-battery {
     --size: calc(var(--responsive-font-size) * 4);
 
     width: var(--size);

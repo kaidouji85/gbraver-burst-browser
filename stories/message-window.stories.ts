@@ -1,4 +1,5 @@
 import { attackBatteryCaptionInnerHtml } from "../src/js/custom-battle-events/battery-system-tutorial/dom/attack-battery-caption-inner-html";
+import { defenseBatteryCaptionInnerHtml } from "../src/js/custom-battle-events/battery-system-tutorial/dom/defense-battery-caption-inner-html";
 import { MessageWindow } from "../src/js/game-dom/message-window";
 import { ROOT_CLASS } from "../src/js/game-dom/message-window/dom/class-name";
 import type { DOMStubStory } from "./stub/dom-stub";
@@ -254,5 +255,14 @@ export const attackBatteryCaption: DOMStubStory = domStub((resources) => {
   });
   dom.visible(true);
   dom.messagesInInnerHTML(attackBatteryCaptionInnerHtml(resources));
+  return dom.getRootHTMLElement();
+});
+
+export const defenseBatteryCaption: DOMStubStory = domStub((resources) => {
+  const dom = new MessageWindow({
+    resources,
+  });
+  dom.visible(true);
+  dom.messagesInInnerHTML(defenseBatteryCaptionInnerHtml(resources));
   return dom.getRootHTMLElement();
 });
