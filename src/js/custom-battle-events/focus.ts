@@ -42,7 +42,7 @@ export const focusInBatterySelector = async (
  * @param props イベントプロパティ
  * @return 判定結果、trueでフォーカスしている
  */
-export const isBatterySelecterFocused = (
+export const isBatterySelectorFocused = (
   props: CustomBattleEventProps,
 ): boolean => {
   return (

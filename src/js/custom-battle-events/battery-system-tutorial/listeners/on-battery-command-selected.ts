@@ -11,7 +11,7 @@ import {
   focusInBurstButton,
   focusInPilotButton,
   focusOutBatterySelector,
-  isBatterySelecterFocused,
+  isBatterySelectorFocused,
 } from "../../focus";
 import { refreshConversation } from "../../invisible-all-message-windows";
 import {
@@ -92,7 +92,7 @@ async function onZeroDefense(
   props.view.hud.gameObjects.batterySelector.toBatterySilently(1);
   await cancelZeroBatteryDefense(props);
   refreshConversation(props);
-  if (isBatterySelecterFocused(props)) {
+  if (isBatterySelectorFocused(props)) {
     await focusInBatterySelector(props, defenseBatteryCaption);
   }
 
@@ -129,7 +129,7 @@ export async function onBatteryCommandSelected(
     }
   }
 
-  if (isBatterySelecterFocused(props)) {
+  if (isBatterySelectorFocused(props)) {
     focusOutBatterySelector(props);
   }
   return {
