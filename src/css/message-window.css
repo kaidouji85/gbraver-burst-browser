@@ -86,8 +86,14 @@
     overflow: hidden;
   }
 
-  .message-window__paragraph {
+  .message-window__paragraph,
+  .message-window__paragraph--align-center {
     font-size: var(--responsive-font-size);
+  }
+
+  .message-window__paragraph--align-center {
+    display: flex;
+    align-items: center;
   }
 
   .message-window__next-message-icon {
@@ -119,6 +125,7 @@
 
     width: var(--size);
     height: var(--size);
+    margin: calc(var(--responsive-font-size) * 0.2);
   }
 
   .message-window__attack-battery {
@@ -126,6 +133,7 @@
 
     width: var(--size);
     height: var(--size);
+    margin: calc(var(--responsive-font-size) * 0.2);
   }
 }
 
