@@ -15,9 +15,12 @@ export function attackBatteryCaptionInnerHtml(
     .find(v => v.id === PathIds.MESSAGE_WINDOW_MINUS_BATTERY)?.path ?? "";
   const plusBatteryPath = resources.paths
     .find(v => v.id === PathIds.MESSAGE_WINDOW_PLUS_BATTERY)?.path ?? "";
+  const attackBatteryPath = resources.paths
+    .find(v => v.id === PathIds.MESSAGE_WINDOW_ATTACK_BATTERY)?.path ?? "";
   return template({
     MESSAGE_WINDOW_ROOT,
     minusBatteryPath,
     plusBatteryPath,
+    attackBatteryPath,
   });
 }

@@ -120,6 +120,13 @@
     width: var(--size);
     height: var(--size);
   }
+
+  .message-window__attack-battery {
+    --size: calc(var(--responsive-font-size) * 4);
+
+    width: var(--size);
+    height: var(--size);
+  }
 }
 
 @media (orientation: portrait) {
