@@ -1,4 +1,4 @@
-/** 攻撃バッテリー注釈 */
+/** @deprecated 攻撃バッテリー注釈 */
 export const attackBatteryCaption = [
   "+ - ボタンで数字を調整したら ”コウゲキ”ボタンを押そう",
 ];
