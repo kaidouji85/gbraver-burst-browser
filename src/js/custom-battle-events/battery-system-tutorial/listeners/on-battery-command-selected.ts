@@ -14,10 +14,7 @@ import {
   isBatterySelectorFocused,
 } from "../../focus";
 import { refreshConversation } from "../../invisible-all-message-windows";
-import {
-  burstCaption,
-  pilotSkillCaption,
-} from "../captions";
+import { burstCaption, pilotSkillCaption } from "../captions";
 import type { BatterySystemTutorialState } from "../state";
 import {
   cancelZeroBatteryDefense,
@@ -126,7 +123,9 @@ type OnBatteryCommandSelectedParams = {
  * @param params パラメータ
  * @return 終了情報
  */
-export async function onBatteryCommandSelected(params: OnBatteryCommandSelectedParams): Promise<Ret> {
+export async function onBatteryCommandSelected(
+  params: OnBatteryCommandSelectedParams,
+): Promise<Ret> {
   const { props, state, defenseBatteryCaption } = params;
   const foundLastState = props.stateHistory[props.stateHistory.length - 1];
   const foundPlayer = (foundLastState?.players ?? []).find(
@@ -138,7 +137,12 @@ export async function onBatteryCommandSelected(params: OnBatteryCommandSelectedP
     const player: PlayerState = foundPlayer;
     const isEnemyTurn = lastState.activePlayerId !== props.playerId;
     if (isEnemyTurn) {
-      return await onZeroDefense({props, state, defenseBatteryCaption, player});
+      return await onZeroDefense({
+        props,
+        state,
+        defenseBatteryCaption,
+        player,
+      });
     }
   }
 
