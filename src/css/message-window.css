@@ -112,6 +112,14 @@
       transform: translateY(10%);
     }
   }
+
+  .message-window__minus-battery,
+  .message-window__plus-battery {
+    --size: calc(var(--responsive-font-size) * 2);
+
+    width: var(--size);
+    height: var(--size);
+  }
 }
 
 @media (orientation: portrait) {
