@@ -1,6 +1,7 @@
 import type { Player } from "gbraver-burst-core";
 
 import type { NPC } from "../../npc/npc";
+import { Resources } from "../../resource";
 import type { SoundId } from "../../resource/sound";
 import type { CustomBattleEvent } from "../../td-scenes/battle/custom-battle-event";
 
@@ -24,12 +25,16 @@ export type TutorialStage = {
   type: TutorialType;
   /** チュートリアルタイトル */
   title: string[];
-  /** カスタムバトルイベント生成関数、カスタムバトルイベントは状態を持つので都度生成する */
-  event: () => CustomBattleEvent;
   /** NPC */
   npc: NPC;
   /** プレイヤー */
   player: Player;
   /** 再生するBGMのID */
   bgm: SoundId;
+  /**
+   * カスタムバトルイベント生成関数、カスタムバトルイベントは状態を持つので都度生成する
+   * @param resources リソース管理オブジェクト
+   * @returns カスタムバトルイベント
+   */
+  event: (resources: Resources) => CustomBattleEvent;
 };

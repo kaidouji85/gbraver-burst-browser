@@ -51,7 +51,7 @@ export async function startTutorial(
     player: npcBattle.player,
     enemy: npcBattle.enemy,
     initialState: npcBattle.stateHistory(),
-    customBattleEvent: stage.event(),
+    customBattleEvent: stage.event(props.resources),
     resize: props.resize,
     pushWindow: props.pushWindow,
     gameLoop: props.gameLoop,
