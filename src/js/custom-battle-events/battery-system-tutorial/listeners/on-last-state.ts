@@ -6,19 +6,25 @@ import { defenseBatteryCaption } from "../captions";
 import type { BatterySystemTutorialState } from "../state";
 import { attackDescription } from "../stories/attack-description";
 
+/** パラメータ */
+type Params = {
+  /** イベントプロパティ */
+  props: Readonly<LastState>;
+  /** ステート */
+  state: BatterySystemTutorialState;
+  /** 攻撃時のキャプション innerHTML */
+  attackBatteryCaption: string;
+};
+
 /**
  * 最終ステートイベント
- *
- * @param props イベントプロパティ
- * @param state ステート
- * @param attackBatteryCaption 攻撃時のキャプション innerHTML
+ * @param params パラメータ
  * @return ステート更新結果
  */
 export async function onLastState(
-  props: Readonly<LastState>,
-  state: BatterySystemTutorialState,
-  attackBatteryCaption: string,
+  params: Params,
 ): Promise<BatterySystemTutorialState> {
+  const { props, state, attackBatteryCaption } = params;
   if (state.isBatterySystemDescriptionComplete) {
     return state;
   }
