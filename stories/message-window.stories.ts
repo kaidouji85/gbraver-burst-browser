@@ -2,6 +2,9 @@ import { MessageWindow } from "../src/js/game-dom/message-window";
 import { ROOT_CLASS } from "../src/js/game-dom/message-window/dom/class-name";
 import type { DOMStubStory } from "./stub/dom-stub";
 import { domStub } from "./stub/dom-stub";
+import {
+  attackBatteryCaptionInnerHtml
+} from "../src/js/custom-battle-events/battery-system-tutorial/dom/attack-battery-caption-inner-html";
 
 export default {
   title: "message-window",
@@ -244,5 +247,14 @@ export const messagesInInnerHTML: DOMStubStory = domStub((resources) => {
     <div class="${ROOT_CLASS}__paragraph">HTMLを直接指定しています。</div>
     <div class="${ROOT_CLASS}__paragraph">これで改行されたはず。</div>
   `);
+  return dom.getRootHTMLElement();
+});
+
+export const attackBatteryCaption: DOMStubStory = domStub((resources) => {
+  const dom = new MessageWindow({
+    resources,
+  });
+  dom.visible(true);
+  dom.messagesInInnerHTML(attackBatteryCaptionInnerHtml(resources));
   return dom.getRootHTMLElement();
 });
