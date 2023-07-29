@@ -93,7 +93,8 @@ async function onZeroDefense(
   await cancelZeroBatteryDefense(props);
   refreshConversation(props);
   if (isBatterySelectorFocused(props)) {
-    await focusInBatterySelector(props, defenseBatteryCaption);
+    await focusInBatterySelector(props);
+    props.view.dom.nearBatterySelectorMessageWindow.messages(defenseBatteryCaption);
   }
 
   return {

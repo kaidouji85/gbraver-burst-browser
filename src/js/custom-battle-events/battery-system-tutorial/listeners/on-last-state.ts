@@ -38,7 +38,8 @@ export async function onLastState(
   if (isMyTurn) {
     await attackDescription(props);
   } else {
-    await focusInBatterySelector(props, defenseBatteryCaption);
+    await focusInBatterySelector(props);
+    props.view.dom.nearBatterySelectorMessageWindow.messages(defenseBatteryCaption)
   }
 
   return state;

@@ -20,12 +20,10 @@ import { invisibleAllMessageWindows } from "./invisible-all-message-windows";
  * バッテリーセレクタにフォーカスインする
  * フォーカスインしたもの以外は、操作不可能にする
  * @param props イベントプロパティ
- * @param caption 注釈メッセージ
  * @return 処理が完了したら発火するPromise
  */
 export const focusInBatterySelector = async (
   props: CustomBattleEventProps,
-  caption: string[],
 ) => {
   unAttentionAllButtons(props);
   disabledAllButtons(props);
@@ -34,7 +32,6 @@ export const focusInBatterySelector = async (
   invisibleAllMessageWindows(props);
   await props.view.hud.gameObjects.frontmostFader.opacity(0.7, 200).play();
   activeNearBatterySelectorMessageWindow(props);
-  props.view.dom.nearBatterySelectorMessageWindow.messages(caption);
 };
 
 /**
