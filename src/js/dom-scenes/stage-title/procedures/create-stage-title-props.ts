@@ -1,12 +1,13 @@
-import {Resources} from "../../../resource";
-import {ArmDozerId} from "gbraver-burst-core";
-import {domUuid} from "../../../uuid/dom-uuid";
-import {waitElementLoaded} from "../../../wait/wait-element-loaded";
-import {getArmdozerIconPathId} from "../../../path/armdozer-icon-path";
-import {ROOT_CLASS} from "../dom/class-name";
-import {rootInnerHTML} from "../dom/root-inner-html";
-import {extractElements} from "../dom/elements";
-import {StageTitleProps} from "../props";
+import { ArmDozerId } from "gbraver-burst-core";
+
+import { getArmdozerIconPathId } from "../../../path/armdozer-icon-path";
+import { Resources } from "../../../resource";
+import { domUuid } from "../../../uuid/dom-uuid";
+import { waitElementLoaded } from "../../../wait/wait-element-loaded";
+import { ROOT_CLASS } from "../dom/class-name";
+import { extractElements } from "../dom/elements";
+import { rootInnerHTML } from "../dom/root-inner-html";
+import { StageTitleProps } from "../props";
 
 /** StageTitleProps生成パラメータ */
 export type CreateStageTitleParams = {
@@ -25,7 +26,7 @@ export type CreateStageTitleParams = {
  * @param params 生成パラメータ
  */
 export function createStageTitleProps(
-  params: CreateStageTitleParams
+  params: CreateStageTitleParams,
 ): StageTitleProps {
   const ids = {
     caption: domUuid(),
@@ -37,8 +38,7 @@ export function createStageTitleProps(
   const elements = extractElements(root, ids);
   const armDozerIconPathID = getArmdozerIconPathId(params.armDozerId);
   elements.armDozerIcon.src =
-    params.resources.paths.find((v) => v.id === armDozerIconPathID)?.path ??
-    "";
+    params.resources.paths.find((v) => v.id === armDozerIconPathID)?.path ?? "";
   elements.caption.innerHTML = params.caption
     .map(
       (v) => `
@@ -50,6 +50,6 @@ export function createStageTitleProps(
     .reduce((a, b) => a + b);
   return {
     root,
-    isArmDozerIconLoaded: waitElementLoaded(elements.armDozerIcon)
+    isArmDozerIconLoaded: waitElementLoaded(elements.armDozerIcon),
   };
 }

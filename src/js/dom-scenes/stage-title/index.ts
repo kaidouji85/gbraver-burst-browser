@@ -1,6 +1,9 @@
 import type { DOMScene } from "../dom-scene";
-import {StageTitleProps} from "./props";
-import {CreateStageTitleParams, createStageTitleProps} from "./procedures/create-stage-title-props";
+import {
+  CreateStageTitleParams,
+  createStageTitleProps,
+} from "./procedures/create-stage-title-props";
+import { StageTitleProps } from "./props";
 
 /** ステージタイトルのパラメータ */
 export type StageTitleParam = CreateStageTitleParams;
