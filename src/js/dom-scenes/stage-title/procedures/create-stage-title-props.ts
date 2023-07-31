@@ -39,15 +39,6 @@ export function createStageTitleProps(
   const armDozerIconPathID = getArmdozerIconPathId(params.armDozerId);
   elements.armDozerIcon.src =
     params.resources.paths.find((v) => v.id === armDozerIconPathID)?.path ?? "";
-  elements.caption.innerHTML = params.caption
-    .map(
-      (v) => `
-        <span class="${ROOT_CLASS}__caption-clause">
-          ${v}
-        </span>
-      `,
-    )
-    .reduce((a, b) => a + b);
   return {
     root,
     isArmDozerIconLoaded: waitElementLoaded(elements.armDozerIcon),

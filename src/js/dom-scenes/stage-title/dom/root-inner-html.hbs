@@ -3,7 +3,11 @@
     <div class="{{ROOT_CLASS}}__stage-prefix">STAGE</div>
     <div class="{{ROOT_CLASS}}__stage-level">{{level}}</div>
   </div>
-  <div class="{{ROOT_CLASS}}__caption" data-id="{{ids.caption}}"></div>
+  <div class="{{ROOT_CLASS}}__caption" data-id="{{ids.caption}}">
+    {{#each caption}}
+      <span class="${ROOT_CLASS}__caption-clause">{{this}}</span>
+    {{/each}}
+  </div>
 </div>
 <img
   class="{{ROOT_CLASS}}__armdozer-icon"
