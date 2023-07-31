@@ -1,5 +1,6 @@
 import {ROOT_CLASS} from "./class-name";
 import {DataIDs} from "./data-ids";
+import template from "./root-inner-html.hbs";
 
 /**
  * ルート要素のinnerHTML
@@ -7,8 +8,8 @@ import {DataIDs} from "./data-ids";
  * @return innerHTML
  */
 export function rootInnerHTML(ids: DataIDs) {
-  return `
-    <img class="${ROOT_CLASS}__end" data-id="${ids.end}">
-    <img class="${ROOT_CLASS}__logo" data-id="${ids.logo}">
-  `;
+  return template({
+    ids,
+    ROOT_CLASS,
+  });
 }
