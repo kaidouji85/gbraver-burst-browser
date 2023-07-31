@@ -6,9 +6,10 @@ import {getArmdozerIconPathId} from "../../../path/armdozer-icon-path";
 import {ROOT_CLASS} from "../dom/class-name";
 import {rootInnerHTML} from "../dom/root-inner-html";
 import {extractElements} from "../dom/elements";
+import {StageTitleProps} from "../props";
 
 /** StageTitleProps生成パラメータ */
-export type StageTitleParams = {
+export type CreateStageTitleParams = {
   /** リソース管理オブジェクト */
   resources: Resources;
   /** ステージレベル */
@@ -24,8 +25,8 @@ export type StageTitleParams = {
  * @param params 生成パラメータ
  */
 export function createStageTitleProps(
-  params: StageTitleParams
-) {
+  params: CreateStageTitleParams
+): StageTitleProps {
   const ids = {
     caption: domUuid(),
     armDozerIcon: domUuid(),
