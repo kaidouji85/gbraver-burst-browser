@@ -64,7 +64,7 @@ function extractElements(root: HTMLElement, ids: DataIDs): Elements {
   };
 }
 
-/** NPCルート エンディング */
+/** NPCルート エンディング画面 */
 export class NPCEnding implements DOMScene {
   #root: HTMLElement;
   #isEndCardLoaded: Promise<void>;
