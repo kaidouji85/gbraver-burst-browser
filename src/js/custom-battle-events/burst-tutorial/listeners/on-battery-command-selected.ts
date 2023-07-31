@@ -14,6 +14,7 @@ import { notDefense5Carelessly } from "../stories/not-defense5-carelessly";
 import { redoBatterySelect } from "../stories/redo-battery-select";
 import { shouldDefense5 } from "../stories/should-defense5";
 import { shouldDefense5Again } from "../stories/should-defense5-again";
+import {BurstTutorialProps} from "../props";
 
 /**
  * 初回、2回目以降で「5防御しないと負け」を切り替えるヘルパー関数
@@ -41,18 +42,16 @@ type Ret = {
 /**
  * バッテリーコマンド選択イベント
  * @param props イベントプロパティ
- * @param state ステート
  * @return イベント終了情報
  */
 export async function onBatteryCommandSelected(
-  props: Readonly<BatteryCommandSelected>,
-  state: BurstTutorialState,
+  props: Readonly<BatteryCommandSelected & BurstTutorialProps>,
 ): Promise<Ret> {
   const isBattery5Command = props.battery.battery === 5;
   const foundLastState = props.stateHistory[props.stateHistory.length - 1];
   if (!foundLastState || isBattery5Command) {
     return {
-      state,
+      state: props.state,
       cancel: {
         isCommandCanceled: false,
       },
@@ -65,7 +64,7 @@ export async function onBatteryCommandSelected(
   const enemy = lastState.players.find((v) => v.playerId !== props.playerId);
   if (isPlayerTurn || !player || !enemy) {
     return {
-      state,
+      state: props.state,
       cancel: {
         isCommandCanceled: false,
       },
@@ -78,7 +77,7 @@ export async function onBatteryCommandSelected(
     enemy.armdozer.battery !== enemy.armdozer.maxBattery;
   if (isEnemyPowerLessThanPlayerHP || isNotEnemyFullBattery) {
     return {
-      state,
+      state: props.state,
       cancel: {
         isCommandCanceled: false,
       },
@@ -90,12 +89,12 @@ export async function onBatteryCommandSelected(
   const enableBurst = player.armdozer.enableBurst;
   const enablePilotSkill = player.pilot.enableSkill;
   if (!isPlayerFullBattery && enableBurst) {
-    await defense5(props, state);
+    await defense5(props, props.state);
     await doBurstToRecoverBattery(props);
     await focusInBurstButton(props, shouldBurst);
     return {
       state: {
-        ...state,
+        ...props.state,
         isLoseIfNoDefense5Complete: true,
       },
       cancel: {
@@ -105,12 +104,12 @@ export async function onBatteryCommandSelected(
   }
 
   if (!isPlayerFullBattery && !enableBurst && enablePilotSkill) {
-    await defense5(props, state);
+    await defense5(props, props.state);
     await doPilotSkillToRecoverBattery(props);
     await focusInPilotButton(props, shouldPilotSkill);
     return {
       state: {
-        ...state,
+        ...props.state,
         isLoseIfNoDefense5Complete: true,
       },
       cancel: {
@@ -120,10 +119,10 @@ export async function onBatteryCommandSelected(
   }
 
   if (!isPlayerFullBattery && !enableBurst && !enablePilotSkill) {
-    await defense5(props, state);
+    await defense5(props, props.state);
     await canNotChangeBattery(props);
     return {
-      state: { ...state, isLoseIfNoDefense5Complete: true },
+      state: { ...props.state, isLoseIfNoDefense5Complete: true },
       cancel: {
         isCommandCanceled: false,
       },
@@ -132,12 +131,12 @@ export async function onBatteryCommandSelected(
 
   if (isPlayerFullBattery) {
     props.view.hud.gameObjects.batterySelector.toBatterySilently(5);
-    await defense5(props, state);
-    state.isLoseIfNoDefense5Complete
+    await defense5(props, props.state);
+    props.state.isLoseIfNoDefense5Complete
       ? await notDefense5Carelessly(props)
       : await redoBatterySelect(props);
     return {
-      state: { ...state, isLoseIfNoDefense5Complete: true },
+      state: { ...props.state, isLoseIfNoDefense5Complete: true },
       cancel: {
         isCommandCanceled: true,
       },
@@ -145,7 +144,7 @@ export async function onBatteryCommandSelected(
   }
 
   return {
-    state,
+    state: props.state,
     cancel: {
       isCommandCanceled: false,
     },

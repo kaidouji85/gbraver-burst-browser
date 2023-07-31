@@ -44,7 +44,7 @@ class BurstTutorial extends EmptyCustomBattleEvent {
   async onBatteryCommandSelected(
     props: BatteryCommandSelected,
   ): Promise<CommandCanceled> {
-    const { state, cancel } = await onBatteryCommandSelected(props, this.state);
+    const { state, cancel } = await onBatteryCommandSelected({...props, ...this});
     this.state = state;
     return cancel;
   }
