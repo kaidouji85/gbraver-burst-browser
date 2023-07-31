@@ -60,7 +60,7 @@ function lightningBarrierOverview(burst: LightningBarrier): string {
  * @return 説明文
  */
 function continuousAttackOverview(burst: ContinuousAttack): string {
-  return `バッテリー${burst.recoverBattery}回復、2回攻撃`;
+  return `バッテリー${burst.recoverBattery}回復、2回行動`;
 }
 
 /**
