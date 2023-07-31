@@ -2,6 +2,7 @@ import { LastState } from "../../../td-scenes/battle/custom-battle-event";
 import { invisibleAllMessageWindows } from "../../invisible-all-message-windows";
 import { PilotSkillTutorial01State } from "../state";
 import { playerLose } from "../stories/player-lose";
+import {PilotSkillTutorial01Props} from "../props";
 
 /**
  * 条件を満たした場合「プレイヤー敗北ストーリー」を再生する
@@ -24,17 +25,15 @@ async function executePlayerLoseIfNeeded(
 /**
  * 最終ステート直後
  * @param props イベントプロパティ
- * @param state イベントステート
  * @return ステート更新結果
  */
 export async function afterLastState(
-  props: Readonly<LastState>,
-  state: Readonly<PilotSkillTutorial01State>,
+  props: Readonly<LastState & PilotSkillTutorial01Props>,
 ): Promise<PilotSkillTutorial01State> {
   const isPlayerLoseExecuted = await executePlayerLoseIfNeeded(props);
   if (isPlayerLoseExecuted) {
-    return state;
+    return props.state;
   }
 
-  return state;
+  return props.state;
 }
