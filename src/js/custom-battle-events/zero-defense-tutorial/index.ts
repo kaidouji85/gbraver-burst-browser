@@ -16,7 +16,7 @@ import type { ZeroDefenseTutorialState } from "./state";
 
 /** ゼロ防御チュートリアル */
 class ZeroDefenseTutorialEvent extends EmptyCustomBattleEvent {
-  /** ステート */
+  /** @deprecated ステート */
   state: ZeroDefenseTutorialState;
 
   /**
@@ -33,7 +33,7 @@ class ZeroDefenseTutorialEvent extends EmptyCustomBattleEvent {
 
   /** @override */
   async beforeLastState(props: LastState): Promise<void> {
-    this.state = await beforeLastState(props, this.state);
+    this.state = await beforeLastState({...props, ...this});
   }
 
   /** @override */
