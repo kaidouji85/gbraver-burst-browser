@@ -1,4 +1,3 @@
-import { createBurstButtonProps } from "../../game-dom/mini-controller/burst-button/props";
 import type {
   BatteryCommandSelected,
   BurstCommandSelected,
@@ -13,7 +12,7 @@ import { beforeLastState } from "./listeners/before-last-state";
 import { onBatteryCommandSelected } from "./listeners/on-battery-command-selected";
 import { onBurstCommandSelected } from "./listeners/on-burst-command-selected";
 import { onPilotSkillCommandSelected } from "./listeners/on-pilot-skill-command-selected";
-import { BurstTutorialProps } from "./props";
+import { BurstTutorialProps, createBurstTutorialProps } from "./props";
 
 /** バーストチュートリアル用のカスタムバトルイベント */
 class BurstTutorial extends EmptyCustomBattleEvent {
@@ -25,7 +24,7 @@ class BurstTutorial extends EmptyCustomBattleEvent {
    */
   constructor() {
     super();
-    this.props = createBurstButtonProps();
+    this.props = createBurstTutorialProps();
   }
 
   /** @override */
@@ -56,9 +55,9 @@ class BurstTutorial extends EmptyCustomBattleEvent {
   ): Promise<CommandCanceled> {
     const { state, cancel } = await onBurstCommandSelected({
       ...props,
-      ...this,
+      ...this.props,
     });
-    this.state = state;
+    this.props.state = state;
     return cancel;
   }
 
@@ -68,9 +67,9 @@ class BurstTutorial extends EmptyCustomBattleEvent {
   ): Promise<CommandCanceled> {
     const { state, cancel } = await onPilotSkillCommandSelected({
       ...props,
-      ...this,
+      ...this.props,
     });
-    this.state = state;
+    this.props.state = state;
     return cancel;
   }
 }
