@@ -38,7 +38,7 @@ class ZeroDefenseTutorialEvent extends EmptyCustomBattleEvent {
 
   /** @override */
   async afterLastState(props: LastState): Promise<void> {
-    this.state = await afterLastState(props, this.state);
+    this.state = await afterLastState({...props, ...this});
   }
 
   /** @override */
