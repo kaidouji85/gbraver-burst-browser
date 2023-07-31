@@ -5,6 +5,7 @@ import {
 import { PilotSkillTutorial02State } from "../state";
 import { lessThanAttack3 } from "../stories/less-than-attack3";
 import { noZeroDefense } from "../stories/no-zero-defense";
+import {PilotSkillTutorial02Props} from "../props";
 
 /**
  * 条件を満たした場合「0防御しない」を再生する
@@ -84,17 +85,15 @@ type Ret = {
 /**
  * バッテリーコマンド選択イベント
  * @param props イベントプロパティ
- * @param state イベントステート
  * @return イベント終了情報
  */
 export async function onBatteryCommandSelected(
-  props: Readonly<BatteryCommandSelected>,
-  state: Readonly<PilotSkillTutorial02State>,
+  props: Readonly<BatteryCommandSelected & PilotSkillTutorial02Props>,
 ): Promise<Ret> {
   const isNoZeroDefenseExecuted = await executeNoZeroDefenseIfNeeded(props);
   if (isNoZeroDefenseExecuted) {
     return {
-      state,
+      state: props.state,
       cancel: {
         isCommandCanceled: true,
       },
@@ -103,11 +102,11 @@ export async function onBatteryCommandSelected(
 
   const isLessThanAttack3Executed = await executeLessThanAttack3IfNeeded(
     props,
-    state,
+    props.state,
   );
   if (isLessThanAttack3Executed) {
     return {
-      state,
+      state: props.state,
       cancel: {
         isCommandCanceled: true,
       },
@@ -115,7 +114,7 @@ export async function onBatteryCommandSelected(
   }
 
   return {
-    state,
+    state: props.state,
     cancel: {
       isCommandCanceled: false,
     },
