@@ -11,6 +11,7 @@ import {
 import { focusInBurstButton, focusInPilotButton } from "../../focus";
 import { refreshConversation } from "../../invisible-all-message-windows";
 import { shouldBurst, shouldPilotSkill } from "../captions";
+import { ZeroDefenseTutorialProps } from "../props";
 import type { ZeroDefenseTutorialState } from "../state";
 import {
   cancelZeroBatteryDefense,
@@ -18,7 +19,6 @@ import {
   doPilotSkillBecauseZeroBattery,
   zeroBatteryDefenseBecauseNoBatteryRecover,
 } from "../stories/no-zero-battery";
-import {ZeroDefenseTutorialProps} from "../props";
 
 /** イベント終了情報 */
 type Ret = {

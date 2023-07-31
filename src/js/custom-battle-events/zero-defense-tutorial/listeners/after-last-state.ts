@@ -11,11 +11,11 @@ import {
   extractGameEnd,
 } from "../../game-state-extractor";
 import { refreshConversation } from "../../invisible-all-message-windows";
+import { ZeroDefenseTutorialProps } from "../props";
 import type { ZeroDefenseTutorialState } from "../state";
 import { gameEndThanks } from "../stories/game-end-thanks";
 import { playerLose } from "../stories/player-lose";
 import { zeroDefenseWin } from "../stories/zero-defense-win";
-import {ZeroDefenseTutorialProps} from "../props";
 
 /**
  * 最終ステート完了後イベント

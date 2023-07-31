@@ -3,8 +3,8 @@ import type {
   CommandCanceled,
 } from "../../../td-scenes/battle/custom-battle-event";
 import { focusOutBurstButton, isBurstButtonFocused } from "../../focus";
+import { ZeroDefenseTutorialProps } from "../props";
 import type { ZeroDefenseTutorialState } from "../state";
-import {ZeroDefenseTutorialProps} from "../props";
 
 /** イベント終了情報 */
 type Ret = {

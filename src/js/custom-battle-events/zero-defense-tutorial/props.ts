@@ -1,4 +1,4 @@
-import {ZeroDefenseTutorialState} from "./state";
+import { ZeroDefenseTutorialState } from "./state";
 
 /** ゼロ防御チュートリアル プロパティ */
 export type ZeroDefenseTutorialProps = {
