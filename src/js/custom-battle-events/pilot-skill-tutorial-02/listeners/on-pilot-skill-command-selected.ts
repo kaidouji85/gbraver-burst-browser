@@ -3,8 +3,8 @@ import {
   PilotSkillCommandSelected,
 } from "../../../td-scenes/battle/custom-battle-event";
 import { focusOutPilotButton, isPilotButtonFocused } from "../../focus";
+import { PilotSkillTutorial02Props } from "../props";
 import { PilotSkillTutorial02State } from "../state";
-import {PilotSkillTutorial02Props} from "../props";
 
 /** イベント終了情報 */
 type Ret = {

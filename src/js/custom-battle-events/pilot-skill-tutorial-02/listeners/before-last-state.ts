@@ -3,11 +3,11 @@ import { totalCorrectPower } from "gbraver-burst-core";
 import { LastState } from "../../../td-scenes/battle/custom-battle-event";
 import { invisibleAllMessageWindows } from "../../invisible-all-message-windows";
 import { turnCount } from "../../turn-count";
+import { PilotSkillTutorial02Props } from "../props";
 import { PilotSkillTutorial02State } from "../state";
 import { doPilotSkill } from "../stories/do-pilot-skill";
 import { introduction } from "../stories/introduction";
 import { shouldAttack3OrMore } from "../stories/should-attack3-or-more";
-import {PilotSkillTutorial02Props} from "../props";
 
 /**
  * 条件を満たせば「パイロットスキル発動を推奨」を再生する
@@ -58,7 +58,11 @@ async function executeShouldAttack3OrMoreIfNeeded(
 
   const correctPower = totalCorrectPower(player.armdozer.effects);
   const turn = turnCount(props.stateHistory);
-  if (0 < correctPower && turn === 2 && !props.state.isShouldAttack5OrMoreComplete) {
+  if (
+    0 < correctPower &&
+    turn === 2 &&
+    !props.state.isShouldAttack5OrMoreComplete
+  ) {
     await shouldAttack3OrMore(props);
     return true;
   }

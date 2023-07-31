@@ -10,7 +10,10 @@ import { afterLastState } from "./listeners/after-last-state";
 import { beforeLastState } from "./listeners/before-last-state";
 import { onBatteryCommandSelected } from "./listeners/on-battery-command-selected";
 import { onPilotSkillCommandSelected } from "./listeners/on-pilot-skill-command-selected";
-import {createPilotSkillTutorial02Props, PilotSkillTutorial02Props} from "./props";
+import {
+  createPilotSkillTutorial02Props,
+  PilotSkillTutorial02Props,
+} from "./props";
 
 /** パイロットスキルチュートリアル（後半）イベント */
 class PilotSkillTutorial02 extends EmptyCustomBattleEvent {
@@ -27,12 +30,12 @@ class PilotSkillTutorial02 extends EmptyCustomBattleEvent {
 
   /** @override */
   async beforeLastState(props: LastState): Promise<void> {
-    this.props.state = await beforeLastState({...props, ...this.props});
+    this.props.state = await beforeLastState({ ...props, ...this.props });
   }
 
   /** @override */
   async afterLastState(props: LastState): Promise<void> {
-    this.props.state = await afterLastState({...props, ...this.props});
+    this.props.state = await afterLastState({ ...props, ...this.props });
   }
 
   /** @override */

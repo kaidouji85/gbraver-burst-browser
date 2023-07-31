@@ -2,10 +2,10 @@ import {
   BatteryCommandSelected,
   CommandCanceled,
 } from "../../../td-scenes/battle/custom-battle-event";
+import { PilotSkillTutorial02Props } from "../props";
 import { PilotSkillTutorial02State } from "../state";
 import { lessThanAttack3 } from "../stories/less-than-attack3";
 import { noZeroDefense } from "../stories/no-zero-defense";
-import {PilotSkillTutorial02Props} from "../props";
 
 /**
  * 条件を満たした場合「0防御しない」を再生する
