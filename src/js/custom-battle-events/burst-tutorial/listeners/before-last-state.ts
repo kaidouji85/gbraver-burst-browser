@@ -5,10 +5,10 @@ import type { BurstTutorialState } from "../state";
 import { failReflectDamage } from "../stories/fail-reflect-damage";
 import { introduction } from "../stories/introduction";
 import { successReflectDamage } from "../stories/success-reflect-damage";
+import {BurstTutorialProps} from "../props";
 
 /**
  * 条件を満たした場合、ダメージ反射ストーリーを再生する
- *
  * @param props イベントプロパティ
  * @return 処理が完了したら発火するPromise
  */
@@ -51,20 +51,17 @@ async function executeReflectIfNeeded(
 
 /**
  * 最終ステート直前イベント
- *
  * @param props イベントプロパティ
- * @param state ステート
  * @return ステート更新結果
  */
 export async function beforeLastState(
-  props: Readonly<LastState>,
-  state: BurstTutorialState,
+  props: Readonly<LastState & BurstTutorialProps>,
 ): Promise<BurstTutorialState> {
-  if (!state.isIntroductionComplete) {
+  if (!props.state.isIntroductionComplete) {
     await introduction(props);
-    return { ...state, isIntroductionComplete: true };
+    return { ...props.state, isIntroductionComplete: true };
   }
 
   await executeReflectIfNeeded(props);
-  return state;
+  return props.state;
 }
