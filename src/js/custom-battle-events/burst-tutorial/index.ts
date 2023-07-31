@@ -53,7 +53,7 @@ class BurstTutorial extends EmptyCustomBattleEvent {
   async onBurstCommandSelected(
     props: BurstCommandSelected,
   ): Promise<CommandCanceled> {
-    const { state, cancel } = await onBurstCommandSelected(props, this.state);
+    const { state, cancel } = await onBurstCommandSelected({...props, ...this});
     this.state = state;
     return cancel;
   }

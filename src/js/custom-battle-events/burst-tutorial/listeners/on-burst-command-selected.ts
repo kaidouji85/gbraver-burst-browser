@@ -6,6 +6,7 @@ import { focusOutBurstButton, isBurstButtonFocused } from "../../focus";
 import { extractLastPlayer } from "../../last-player-extractor";
 import type { BurstTutorialState } from "../state";
 import { burstIsTrumpCard } from "../stories/burst-is-trump-card";
+import {BurstTutorialProps} from "../props";
 
 /** イベント終了情報 */
 type Ret = {
@@ -18,17 +19,15 @@ type Ret = {
 /**
  * バーストコマンド選択イベント
  * @param props イベントプロパティ
- * @param state ステート
  * @return イベント終了情報
  */
 export async function onBurstCommandSelected(
-  props: BurstCommandSelected,
-  state: BurstTutorialState,
+  props: Readonly<BurstCommandSelected & BurstTutorialProps>,
 ): Promise<Ret> {
   if (isBurstButtonFocused(props)) {
     focusOutBurstButton(props);
     return {
-      state,
+      state: props.state,
       cancel: {
         isCommandCanceled: false,
       },
@@ -42,7 +41,7 @@ export async function onBurstCommandSelected(
   ) {
     await burstIsTrumpCard(props);
     return {
-      state,
+      state: props.state,
       cancel: {
         isCommandCanceled: true,
       },
@@ -50,7 +49,7 @@ export async function onBurstCommandSelected(
   }
 
   return {
-    state,
+    state: props.state,
     cancel: {
       isCommandCanceled: false,
     },
