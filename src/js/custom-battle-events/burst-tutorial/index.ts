@@ -16,7 +16,7 @@ import type { BurstTutorialState } from "./state";
 
 /** バーストチュートリアル用のカスタムバトルイベント */
 class BurstTutorial extends EmptyCustomBattleEvent {
-  /** ステート */
+  /** @deprecated ステート */
   state: BurstTutorialState;
 
   /**
