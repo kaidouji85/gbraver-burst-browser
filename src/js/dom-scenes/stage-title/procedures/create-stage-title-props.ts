@@ -29,7 +29,6 @@ export function createStageTitleProps(
   params: CreateStageTitleParams,
 ): StageTitleProps {
   const ids = {
-    caption: domUuid(),
     armDozerIcon: domUuid(),
   };
   const root = document.createElement("div");
