@@ -1,4 +1,4 @@
-import { NPCEnding } from "../../dom-scenes/npc-ending/npc-ending";
+import { NPCEnding } from "../../dom-scenes/npc-ending";
 import type { DOMSceneActionConnector } from "../dom-scene-binder/dom-scene-action-connector";
 
 /** アクションコネクタのデータ型 */

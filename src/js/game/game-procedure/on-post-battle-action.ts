@@ -1,7 +1,7 @@
 import type { Player } from "gbraver-burst-core";
 
 import { fadeOut, stop } from "../../bgm/bgm-operators";
-import { NPCEnding } from "../../dom-scenes/npc-ending/npc-ending";
+import { NPCEnding } from "../../dom-scenes/npc-ending";
 import { waitTime } from "../../wait/wait-time";
 import { npcEndingConnector } from "../action-connector/npc-ending-connector";
 import { MAX_LOADING_TIME } from "../dom-scene-binder/max-loading-time";
