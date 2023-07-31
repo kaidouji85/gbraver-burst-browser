@@ -1,7 +1,7 @@
 import type { Command, Player } from "gbraver-burst-core";
 
 import { fadeOut, stop } from "../../bgm/bgm-operators";
-import { StageTitle } from "../../dom-scenes/stage-title/stage-title";
+import { StageTitle } from "../../dom-scenes/stage-title";
 import { NPCBattleRoom } from "../../npc/npc-battle-room";
 import { BattleScene } from "../../td-scenes/battle";
 import { waitAnimationFrame } from "../../wait/wait-animation-frame";
