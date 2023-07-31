@@ -42,7 +42,7 @@ class BatterySystemTutorialEvent extends EmptyCustomBattleEvent {
 
   /** @override */
   async beforeLastState(props: LastState): Promise<void> {
-    this.state = await beforeLastState(props, this.state);
+    this.state = await beforeLastState({...props, ...this});
   }
 
   /** @override */
