@@ -64,7 +64,7 @@ class BatterySystemTutorialEvent extends EmptyCustomBattleEvent {
   ): Promise<CommandCanceled> {
     const { state, cancel } = await onBatteryCommandSelected({
       ...this,
-      props,
+      ...props,
     });
     this.state = state;
     return cancel;
