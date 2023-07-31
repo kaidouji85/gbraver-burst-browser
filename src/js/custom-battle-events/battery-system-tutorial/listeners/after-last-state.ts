@@ -6,6 +6,7 @@ import {
   invisibleAllMessageWindows,
   refreshConversation,
 } from "../../invisible-all-message-windows";
+import {BatterySystemTutorialProps} from "../props";
 import type { BatterySystemTutorialState } from "../state";
 import { lose } from "../stories/lose";
 import { tutorialEnd } from "../stories/tutorial-end";
@@ -15,17 +16,15 @@ import { victory } from "../stories/victory";
  * 最終ステート完了後イベント
  *
  * @param props イベントプロパティ
- * @param state ステート
  * @return ステート更新結果
  */
 export async function afterLastState(
-  props: Readonly<LastState>,
-  state: BatterySystemTutorialState,
+  props: Readonly<LastState & BatterySystemTutorialProps>,
 ): Promise<BatterySystemTutorialState> {
   const extractedGameEnd = extractGameEnd(props.update);
 
   if (!extractedGameEnd) {
-    return state;
+    return props.state;
   }
 
   const gameEnd: GameStateX<GameEnd> = extractedGameEnd;
@@ -36,5 +35,5 @@ export async function afterLastState(
   await refreshConversation(props);
   await tutorialEnd(props);
   invisibleAllMessageWindows(props);
-  return state;
+  return props.state;
 }
