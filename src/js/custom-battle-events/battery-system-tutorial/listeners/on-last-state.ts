@@ -12,7 +12,7 @@ import { attackDescription } from "../stories/attack-description";
  * @return ステート更新結果
  */
 export async function onLastState(
-  props: (LastState & BatterySystemTutorialProps),
+  props: Readonly<LastState & BatterySystemTutorialProps>,
 ): Promise<BatterySystemTutorialState> {
   if (props.state.isBatterySystemDescriptionComplete) {
     return props.state;

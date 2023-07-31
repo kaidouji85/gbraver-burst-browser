@@ -111,7 +111,7 @@ async function onZeroDefense(params: OnZeroDefenseParams): Promise<Ret> {
  * @return 終了情報
  */
 export async function onBatteryCommandSelected(
-  props: (BatteryCommandSelected & BatterySystemTutorialProps),
+  props: Readonly<BatteryCommandSelected & BatterySystemTutorialProps>,
 ): Promise<Ret> {
   const foundLastState = props.stateHistory[props.stateHistory.length - 1];
   const foundPlayer = (foundLastState?.players ?? []).find(
