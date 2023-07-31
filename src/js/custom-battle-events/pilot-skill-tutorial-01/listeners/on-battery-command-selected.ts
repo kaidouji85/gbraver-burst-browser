@@ -5,6 +5,7 @@ import {
 import { invisibleAllMessageWindows } from "../../invisible-all-message-windows";
 import { PilotSkillTutorial01State } from "../state";
 import { noZeroDefense } from "../stories/no-zero-defense";
+import {PilotSkillTutorial01Props} from "../props";
 
 /**
  * 条件を満たした場合「0防御は即死」を再生する
@@ -50,12 +51,10 @@ type Ret = {
 /**
  * バッテリーコマンド選択イベント
  * @param props イベントプロパティ
- * @param state イベントステート
  * @return イベント終了情報
  */
 export async function onBatteryCommandSelected(
-  props: Readonly<BatteryCommandSelected>,
-  state: Readonly<PilotSkillTutorial01State>,
+  props: Readonly<BatteryCommandSelected & PilotSkillTutorial01Props>,
 ): Promise<Ret> {
   const isNoZeroDefenseExecuted = await executeNoZeroDefenseIfNeeded(props);
   if (isNoZeroDefenseExecuted) {
@@ -63,7 +62,7 @@ export async function onBatteryCommandSelected(
       cancel: {
         isCommandCanceled: true,
       },
-      state,
+      state: props.state,
     };
   }
 
@@ -71,6 +70,6 @@ export async function onBatteryCommandSelected(
     cancel: {
       isCommandCanceled: false,
     },
-    state,
+    state: props.state,
   };
 }
