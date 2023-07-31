@@ -1,8 +1,8 @@
 import { LastState } from "../../../td-scenes/battle/custom-battle-event";
 import { invisibleAllMessageWindows } from "../../invisible-all-message-windows";
+import { PilotSkillTutorial01Props } from "../props";
 import { PilotSkillTutorial01State } from "../state";
 import { playerLose } from "../stories/player-lose";
-import {PilotSkillTutorial01Props} from "../props";
 
 /**
  * 条件を満たした場合「プレイヤー敗北ストーリー」を再生する

@@ -1,10 +1,10 @@
 import { LastState } from "../../../td-scenes/battle/custom-battle-event";
 import { invisibleAllMessageWindows } from "../../invisible-all-message-windows";
 import { turnCount } from "../../turn-count";
+import { PilotSkillTutorial01Props } from "../props";
 import { PilotSkillTutorial01State } from "../state";
 import { gaiInspecting } from "../stories/gai-inspectiong";
 import { introduction } from "../stories/introduction";
-import {PilotSkillTutorial01Props} from "../props";
 
 /**
  * 最終ステート直前イベント

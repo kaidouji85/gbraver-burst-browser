@@ -1,4 +1,4 @@
-import {PilotSkillTutorial01State} from "./state";
+import { PilotSkillTutorial01State } from "./state";
 
 /** パイロットスキルチュートリアル（前半） プロパティ */
 export type PilotSkillTutorial01Props = {

@@ -3,9 +3,9 @@ import {
   CommandCanceled,
 } from "../../../td-scenes/battle/custom-battle-event";
 import { invisibleAllMessageWindows } from "../../invisible-all-message-windows";
+import { PilotSkillTutorial01Props } from "../props";
 import { PilotSkillTutorial01State } from "../state";
 import { noZeroDefense } from "../stories/no-zero-defense";
-import {PilotSkillTutorial01Props} from "../props";
 
 /**
  * 条件を満たした場合「0防御は即死」を再生する
