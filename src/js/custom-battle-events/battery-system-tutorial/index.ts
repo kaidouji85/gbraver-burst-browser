@@ -49,7 +49,7 @@ class BatterySystemTutorialEvent extends EmptyCustomBattleEvent {
   async onLastState(props: LastState): Promise<void> {
     this.state = await onLastState({
       ...this,
-      props,
+      ...props,
     });
   }
 
