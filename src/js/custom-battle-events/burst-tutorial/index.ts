@@ -12,40 +12,38 @@ import { beforeLastState } from "./listeners/before-last-state";
 import { onBatteryCommandSelected } from "./listeners/on-battery-command-selected";
 import { onBurstCommandSelected } from "./listeners/on-burst-command-selected";
 import { onPilotSkillCommandSelected } from "./listeners/on-pilot-skill-command-selected";
-import type { BurstTutorialState } from "./state";
+import {BurstTutorialProps} from "./props";
+import {createBurstButtonProps} from "../../game-dom/mini-controller/burst-button/props";
 
 /** バーストチュートリアル用のカスタムバトルイベント */
 class BurstTutorial extends EmptyCustomBattleEvent {
-  /** @deprecated ステート */
-  state: BurstTutorialState;
+  /** プロパティ */
+  props: BurstTutorialProps;
 
   /**
    * コンストラクタ
    */
   constructor() {
     super();
-    this.state = {
-      isIntroductionComplete: false,
-      isLoseIfNoDefense5Complete: false,
-    };
+    this.props = createBurstButtonProps();
   }
 
   /** @override */
   async beforeLastState(props: LastState): Promise<void> {
-    this.state = await beforeLastState({...props, ...this});
+    this.props.state = await beforeLastState({...props, ...this.props});
   }
 
   /** @override */
   async afterLastState(props: LastState): Promise<void> {
-    this.state = await afterLastState({...props, ...this});
+    this.props.state = await afterLastState({...props, ...this.props});
   }
 
   /** @override */
   async onBatteryCommandSelected(
     props: BatteryCommandSelected,
   ): Promise<CommandCanceled> {
-    const { state, cancel } = await onBatteryCommandSelected({...props, ...this});
-    this.state = state;
+    const { state, cancel } = await onBatteryCommandSelected({...props, ...this.props});
+    this.props.state = state;
     return cancel;
   }
 
