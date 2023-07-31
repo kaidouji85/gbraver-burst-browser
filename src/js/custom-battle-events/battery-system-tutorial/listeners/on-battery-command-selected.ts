@@ -15,7 +15,7 @@ import {
 } from "../../focus";
 import { refreshConversation } from "../../invisible-all-message-windows";
 import { burstCaption, pilotSkillCaption } from "../captions";
-import {BatterySystemTutorialProps} from "../props";
+import { BatterySystemTutorialProps } from "../props";
 import type { BatterySystemTutorialState } from "../state";
 import {
   cancelZeroBatteryDefense,

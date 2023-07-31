@@ -1,7 +1,7 @@
-import {Resources} from "../../resource";
-import {attackBatteryCaptionInnerHtml} from "./dom/attack-battery-caption-inner-html";
-import {defenseBatteryCaptionInnerHtml} from "./dom/defense-battery-caption-inner-html";
-import {BatterySystemTutorialState} from "./state";
+import { Resources } from "../../resource";
+import { attackBatteryCaptionInnerHtml } from "./dom/attack-battery-caption-inner-html";
+import { defenseBatteryCaptionInnerHtml } from "./dom/defense-battery-caption-inner-html";
+import { BatterySystemTutorialState } from "./state";
 
 /** バッテリーシステムチュートリアル固有のプロパティ */
 export type BatterySystemTutorialProps = {
@@ -18,7 +18,9 @@ export type BatterySystemTutorialProps = {
  * @param resources リソース管理オブジェクト
  * @return 生成結果
  */
-export function createBatterySystemTutorialProps(resources: Resources): BatterySystemTutorialProps {
+export function createBatterySystemTutorialProps(
+  resources: Resources,
+): BatterySystemTutorialProps {
   const state = {
     isBatterySystemDescriptionComplete: false,
   };

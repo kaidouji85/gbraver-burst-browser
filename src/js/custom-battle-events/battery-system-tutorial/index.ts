@@ -14,7 +14,10 @@ import { onBatteryCommandSelected } from "./listeners/on-battery-command-selecte
 import { onBurstCommandSelected } from "./listeners/on-burst-command-selected";
 import { onLastState } from "./listeners/on-last-state";
 import { onPilotSkillCommandSelected } from "./listeners/on-pilot-skill-command-selected";
-import {BatterySystemTutorialProps, createBatterySystemTutorialProps} from "./props";
+import {
+  BatterySystemTutorialProps,
+  createBatterySystemTutorialProps,
+} from "./props";
 
 /** バッテリーシステムチュートリアル用のカスタムバトルイベント */
 class BatterySystemTutorialEvent extends EmptyCustomBattleEvent {
@@ -32,7 +35,7 @@ class BatterySystemTutorialEvent extends EmptyCustomBattleEvent {
 
   /** @override */
   async beforeLastState(props: LastState): Promise<void> {
-    this.props.state = await beforeLastState({...props, ...this.props});
+    this.props.state = await beforeLastState({ ...props, ...this.props });
   }
 
   /** @override */
@@ -47,7 +50,7 @@ class BatterySystemTutorialEvent extends EmptyCustomBattleEvent {
   async afterLastState(props: LastState): Promise<void> {
     this.props.state = await afterLastState({
       ...props,
-      ...this.props
+      ...this.props,
     });
   }
 
@@ -69,7 +72,7 @@ class BatterySystemTutorialEvent extends EmptyCustomBattleEvent {
   ): Promise<CommandCanceled> {
     const { state, cancel } = await onBurstCommandSelected({
       ...props,
-      ...this.props
+      ...this.props,
     });
     this.props.state = state;
     return cancel;
@@ -81,7 +84,7 @@ class BatterySystemTutorialEvent extends EmptyCustomBattleEvent {
   ): Promise<CommandCanceled> {
     const { state, cancel } = await onPilotSkillCommandSelected({
       ...props,
-      ...this.props
+      ...this.props,
     });
     this.props.state = state;
     return cancel;

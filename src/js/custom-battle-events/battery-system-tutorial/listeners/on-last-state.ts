@@ -2,7 +2,7 @@ import type { GameState } from "gbraver-burst-core";
 
 import type { LastState } from "../../../td-scenes/battle/custom-battle-event";
 import { focusInBatterySelector } from "../../focus";
-import {BatterySystemTutorialProps} from "../props";
+import { BatterySystemTutorialProps } from "../props";
 import type { BatterySystemTutorialState } from "../state";
 import { attackDescription } from "../stories/attack-description";
 

@@ -6,7 +6,7 @@ import {
   invisibleAllMessageWindows,
   refreshConversation,
 } from "../../invisible-all-message-windows";
-import {BatterySystemTutorialProps} from "../props";
+import { BatterySystemTutorialProps } from "../props";
 import type { BatterySystemTutorialState } from "../state";
 import { lose } from "../stories/lose";
 import { tutorialEnd } from "../stories/tutorial-end";

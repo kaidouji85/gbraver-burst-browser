@@ -3,7 +3,7 @@ import { waitTime } from "../../../wait/wait-time";
 import { extractBattle, extractGameEnd } from "../../game-state-extractor";
 import { invisibleAllMessageWindows } from "../../invisible-all-message-windows";
 import { turnCount } from "../../turn-count";
-import {BatterySystemTutorialProps} from "../props";
+import { BatterySystemTutorialProps } from "../props";
 import type { BatterySystemTutorialState } from "../state";
 import { batteryRuleDescription } from "../stories/battery-rule-description";
 import { completeAttackAndDefense } from "../stories/complete-attack-and-defense";
