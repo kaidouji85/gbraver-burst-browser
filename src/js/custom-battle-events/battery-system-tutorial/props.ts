@@ -8,9 +8,9 @@ export type BatterySystemTutorialProps = {
   /** チュートリアルのステート */
   state: BatterySystemTutorialState;
   /** 攻撃バッテリー注釈 innerHTML */
-  attackBatteryCaption: string;
+  readonly attackBatteryCaption: string;
   /** 防御バッテリー注釈 innerHTML */
-  defenseBatteryCaption: string;
+  readonly defenseBatteryCaption: string;
 };
 
 /**
