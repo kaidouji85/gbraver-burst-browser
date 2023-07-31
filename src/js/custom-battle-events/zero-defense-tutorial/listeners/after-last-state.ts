@@ -11,6 +11,7 @@ import {
   extractGameEnd,
 } from "../../game-state-extractor";
 import { refreshConversation } from "../../invisible-all-message-windows";
+import { ZeroDefenseTutorialProps } from "../props";
 import type { ZeroDefenseTutorialState } from "../state";
 import { gameEndThanks } from "../stories/game-end-thanks";
 import { playerLose } from "../stories/player-lose";
@@ -18,20 +19,17 @@ import { zeroDefenseWin } from "../stories/zero-defense-win";
 
 /**
  * 最終ステート完了後イベント
- *
  * @param props イベントプロパティ
- * @param state ステート
  * @return ステート更新結果
  */
 export async function afterLastState(
-  props: Readonly<LastState>,
-  state: ZeroDefenseTutorialState,
+  props: Readonly<LastState & ZeroDefenseTutorialProps>,
 ): Promise<ZeroDefenseTutorialState> {
   const extractedBatteryDeclaration = extractBatteryDeclaration(props.update);
   const extractedGameEnd = extractGameEnd(props.update);
 
   if (!extractedBatteryDeclaration || !extractedGameEnd) {
-    return state;
+    return props.state;
   }
 
   const batteryDeclaration: GameStateX<BatteryDeclaration> =
@@ -39,7 +37,7 @@ export async function afterLastState(
   const gameEnd: GameStateX<GameEnd> = extractedGameEnd;
 
   if (gameEnd.effect.result.type !== "GameOver") {
-    return state;
+    return props.state;
   }
 
   const gameOver: GameOver = gameEnd.effect.result;
@@ -51,15 +49,15 @@ export async function afterLastState(
     await zeroDefenseWin(props);
     await refreshConversation(props);
     await gameEndThanks(props);
-    return state;
+    return props.state;
   }
 
   if (!isPlayerWin) {
     await playerLose(props);
     await refreshConversation(props);
     await gameEndThanks(props);
-    return state;
+    return props.state;
   }
 
-  return state;
+  return props.state;
 }
