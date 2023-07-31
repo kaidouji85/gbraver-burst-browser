@@ -12,22 +12,19 @@ import { afterStateAnimation } from "./listeners/after-state-animation";
 import { beforeLastState as beforeLastState } from "./listeners/before-last-state";
 import { onBatteryCommandSelected } from "./listeners/on-battery-command-selected";
 import { onStateAnimation } from "./listeners/on-state-animation";
-import { PilotSkillTutorial01State } from "./state";
+import {createPilotSkillTutorial01Props, PilotSkillTutorial01Props} from "./props";
 
 /** パイロットスキルチュートリアル（前半） */
 class PilotSkillTutorial01 extends EmptyCustomBattleEvent {
-  /** @deprecated ステート */
-  #state: PilotSkillTutorial01State;
+  /** プロパティ */
+  props: PilotSkillTutorial01Props;
 
   /**
    * コンストラクタ
    */
   constructor() {
     super();
-    this.#state = {
-      isIntroductionComplete: false,
-      isGaiInspectingComplete: false,
-    };
+    this.props = createPilotSkillTutorial01Props();
   }
 
   /** @override */
@@ -42,12 +39,12 @@ class PilotSkillTutorial01 extends EmptyCustomBattleEvent {
 
   /** @override */
   async beforeLastState(props: LastState): Promise<void> {
-    this.#state = await beforeLastState({...props, state: this.#state});
+    this.props.state = await beforeLastState({...props, ...this.props});
   }
 
   /** @override */
   async afterLastState(props: LastState): Promise<void> {
-    this.#state = await afterLastState({...props, state: this.#state});
+    this.props.state = await afterLastState({...props, ...this.props});
   }
 
   /** @override */
@@ -56,9 +53,9 @@ class PilotSkillTutorial01 extends EmptyCustomBattleEvent {
   ): Promise<CommandCanceled> {
     const { cancel, state } = await onBatteryCommandSelected({
       ...props,
-      state: this.#state,
+      ...this.props,
     });
-    this.#state = state;
+    this.props.state = state;
     return cancel;
   }
 }
