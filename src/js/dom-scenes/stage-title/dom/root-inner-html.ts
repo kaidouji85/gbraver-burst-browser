@@ -2,16 +2,23 @@ import { ROOT_CLASS } from "./class-name";
 import { DataIDs } from "./data-ids";
 import template from "./root-inner-html.hbs";
 
+/** 生成パラメータ */
+type Params = {
+  /** data-idをまとめたもの */
+  ids: DataIDs;
+  /** ステージレベル */
+  level: number;
+  /** ステージキャプション */
+  caption: string[];
+};
+
 /**
  * ルート要素のinnerHTML
- * @param ids data-idをまとめたもの
- * @param level ステージレベル
  * @return ルート要素のinnerHTML
  */
-export function rootInnerHTML(ids: DataIDs, level: number): string {
+export function rootInnerHTML(params: Params): string {
   return template({
+    ...params,
     ROOT_CLASS,
-    ids,
-    level,
   });
 }

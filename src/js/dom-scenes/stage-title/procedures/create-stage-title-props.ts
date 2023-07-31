@@ -34,7 +34,7 @@ export function createStageTitleProps(
   };
   const root = document.createElement("div");
   root.className = ROOT_CLASS;
-  root.innerHTML = rootInnerHTML(ids, params.level);
+  root.innerHTML = rootInnerHTML({...params, ids});
   const elements = extractElements(root, ids);
   const armDozerIconPathID = getArmdozerIconPathId(params.armDozerId);
   elements.armDozerIcon.src =
