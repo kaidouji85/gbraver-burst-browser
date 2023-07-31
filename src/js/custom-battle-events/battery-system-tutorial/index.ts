@@ -20,11 +20,11 @@ import type { BatterySystemTutorialState } from "./state";
 
 /** バッテリーシステムチュートリアル用のカスタムバトルイベント */
 class BatterySystemTutorialEvent extends EmptyCustomBattleEvent {
-  /** チュートリアルのステート */
+  /** @deprecated チュートリアルのステート */
   state: BatterySystemTutorialState;
-  /** 攻撃バッテリー注釈 innerHTML */
+  /** @deprecated 攻撃バッテリー注釈 innerHTML */
   attackBatteryCaption: string;
-  /** 防御バッテリー注釈 innerHTML */
+  /** @deprecated 防御バッテリー注釈 innerHTML */
   defenseBatteryCaption: string;
 
   /**
