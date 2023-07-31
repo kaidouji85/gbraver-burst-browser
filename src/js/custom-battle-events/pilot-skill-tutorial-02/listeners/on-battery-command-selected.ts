@@ -42,12 +42,10 @@ async function executeNoZeroDefenseIfNeeded(
 /**
  * 条件を満たした場合「3未満攻撃だと警告」を再生する
  * @param props イベントプロパティ
- * @param state イベントステート
  * @return 再生した否か、trueで再生した
  */
 async function executeLessThanAttack3IfNeeded(
-  props: Readonly<BatteryCommandSelected>,
-  state: Readonly<PilotSkillTutorial02State>,
+  props: Readonly<BatteryCommandSelected & PilotSkillTutorial02Props>,
 ): Promise<boolean> {
   const lastState = props.stateHistory[props.stateHistory.length - 1];
   if (!lastState) {
@@ -63,7 +61,7 @@ async function executeLessThanAttack3IfNeeded(
   if (
     isPlayerTurn &&
     3 <= player.armdozer.battery &&
-    state.isShouldAttack5OrMoreComplete &&
+    props.state.isShouldAttack5OrMoreComplete &&
     props.battery.battery < 3
   ) {
     props.view.hud.gameObjects.batterySelector.toBatterySilently(3);
@@ -100,10 +98,7 @@ export async function onBatteryCommandSelected(
     };
   }
 
-  const isLessThanAttack3Executed = await executeLessThanAttack3IfNeeded(
-    props,
-    props.state,
-  );
+  const isLessThanAttack3Executed = await executeLessThanAttack3IfNeeded(props);
   if (isLessThanAttack3Executed) {
     return {
       state: props.state,
