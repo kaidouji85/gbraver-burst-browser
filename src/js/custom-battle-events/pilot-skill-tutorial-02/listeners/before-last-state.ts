@@ -7,6 +7,7 @@ import { PilotSkillTutorial02State } from "../state";
 import { doPilotSkill } from "../stories/do-pilot-skill";
 import { introduction } from "../stories/introduction";
 import { shouldAttack3OrMore } from "../stories/should-attack3-or-more";
+import {PilotSkillTutorial02Props} from "../props";
 
 /**
  * 条件を満たせば「パイロットスキル発動を推奨」を再生する
@@ -71,33 +72,31 @@ async function executeShouldAttack3OrMoreIfNeeded(
 /**
  * 最終ステート直前イベント
  * @param props イベントプロパティ
- * @param state ステート
  * @return ステート更新結果
  */
 export async function beforeLastState(
-  props: Readonly<LastState>,
-  state: Readonly<PilotSkillTutorial02State>,
+  props: Readonly<LastState & PilotSkillTutorial02Props>,
 ): Promise<PilotSkillTutorial02State> {
   const turn = turnCount(props.stateHistory);
-  if (turn === 1 && !state.isIntroductionComplete) {
+  if (turn === 1 && !props.state.isIntroductionComplete) {
     await introduction(props);
     invisibleAllMessageWindows(props);
-    return { ...state, isIntroductionComplete: true };
+    return { ...props.state, isIntroductionComplete: true };
   }
 
   const isDoPilotSkillExecuted = await executeDoPilotSkillIfNeeded(
     props,
-    state,
+    props.state,
   );
   if (isDoPilotSkillExecuted) {
-    return { ...state, isDoPilotSkillComplete: true };
+    return { ...props.state, isDoPilotSkillComplete: true };
   }
 
   const isShouldAttack5OrMoreExecuted =
-    await executeShouldAttack3OrMoreIfNeeded(props, state);
+    await executeShouldAttack3OrMoreIfNeeded(props, props.state);
   if (isShouldAttack5OrMoreExecuted) {
-    return { ...state, isShouldAttack5OrMoreComplete: true };
+    return { ...props.state, isShouldAttack5OrMoreComplete: true };
   }
 
-  return state;
+  return props.state;
 }
