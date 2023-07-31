@@ -4,6 +4,7 @@ import {
 } from "../../../td-scenes/battle/custom-battle-event";
 import { focusOutPilotButton, isPilotButtonFocused } from "../../focus";
 import { PilotSkillTutorial02State } from "../state";
+import {PilotSkillTutorial02Props} from "../props";
 
 /** イベント終了情報 */
 type Ret = {
@@ -16,17 +17,15 @@ type Ret = {
 /**
  * パイロットスキルコマンド選択イベント
  * @param props イベントプロパティ
- * @param state ステート
  * @return イベント終了情報
  */
 export async function onPilotSkillCommandSelected(
-  props: Readonly<PilotSkillCommandSelected>,
-  state: PilotSkillTutorial02State,
+  props: Readonly<PilotSkillCommandSelected & PilotSkillTutorial02Props>,
 ): Promise<Ret> {
   if (isPilotButtonFocused(props)) {
     focusOutPilotButton(props);
     return {
-      state,
+      state: props.state,
       cancel: {
         isCommandCanceled: false,
       },
@@ -34,7 +33,7 @@ export async function onPilotSkillCommandSelected(
   }
 
   return {
-    state,
+    state: props.state,
     cancel: {
       isCommandCanceled: false,
     },
