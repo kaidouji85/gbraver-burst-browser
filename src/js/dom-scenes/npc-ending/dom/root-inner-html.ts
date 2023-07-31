@@ -1,5 +1,5 @@
-import {ROOT_CLASS} from "./class-name";
-import {DataIDs} from "./data-ids";
+import { ROOT_CLASS } from "./class-name";
+import { DataIDs } from "./data-ids";
 import template from "./root-inner-html.hbs";
 
 /**
