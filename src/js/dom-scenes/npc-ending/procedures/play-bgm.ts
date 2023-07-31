@@ -1,5 +1,5 @@
-import {fadeIn, play} from "../../../bgm/bgm-operators";
-import {NPCEndingProps} from "../props";
+import { fadeIn, play } from "../../../bgm/bgm-operators";
+import { NPCEndingProps } from "../props";
 
 /**
  * BGMの再生開始

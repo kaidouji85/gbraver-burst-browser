@@ -1,15 +1,16 @@
-import {Resources} from "../../../resource";
-import {BGMManager} from "../../../bgm/bgm-manager";
-import {domUuid} from "../../../uuid/dom-uuid";
-import {ROOT_CLASS} from "../dom/class-name";
-import {rootInnerHTML} from "../dom/root-inner-html";
-import {extractElements} from "../dom/elements";
-import {PathIds} from "../../../resource/path";
-import {waitElementLoaded} from "../../../wait/wait-element-loaded";
-import {createEmptySoundResource, SOUND_IDS} from "../../../resource/sound";
-import {Howl} from "howler";
-import {Subject} from "rxjs";
-import {NPCEndingProps} from "../props";
+import { Howl } from "howler";
+import { Subject } from "rxjs";
+
+import { BGMManager } from "../../../bgm/bgm-manager";
+import { Resources } from "../../../resource";
+import { PathIds } from "../../../resource/path";
+import { createEmptySoundResource, SOUND_IDS } from "../../../resource/sound";
+import { domUuid } from "../../../uuid/dom-uuid";
+import { waitElementLoaded } from "../../../wait/wait-element-loaded";
+import { ROOT_CLASS } from "../dom/class-name";
+import { extractElements } from "../dom/elements";
+import { rootInnerHTML } from "../dom/root-inner-html";
+import { NPCEndingProps } from "../props";
 
 /**
  * NPCEndingPropsを生成する
@@ -17,7 +18,10 @@ import {NPCEndingProps} from "../props";
  * @param bgm BGM管理オブジェクト
  * @return 生成結果
  */
-export function createNPCEndingProps(resources: Resources, bgm: BGMManager): NPCEndingProps {
+export function createNPCEndingProps(
+  resources: Resources,
+  bgm: BGMManager,
+): NPCEndingProps {
   const ids = {
     end: domUuid(),
     logo: domUuid(),
@@ -40,7 +44,7 @@ export function createNPCEndingProps(resources: Resources, bgm: BGMManager): NPC
     resources.paths.find((v) => v.id === PathIds.LOGO)?.path ?? "";
   const pushButtonSound =
     resources.sounds.find((v) => v.id === SOUND_IDS.PUSH_BUTTON)?.sound ??
-    new Howl({src: ""});
+    new Howl({ src: "" });
   const endingBGM =
     resources.sounds.find((v) => v.id === SOUND_IDS.NPC_ENDING) ??
     createEmptySoundResource();
@@ -54,5 +58,5 @@ export function createNPCEndingProps(resources: Resources, bgm: BGMManager): NPC
     endingBGM,
     canOperation: true,
     endNPCEnding: new Subject<void>(),
-  }
+  };
 }

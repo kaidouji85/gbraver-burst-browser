@@ -3,11 +3,11 @@ import { Observable, Unsubscribable } from "rxjs";
 import type { BGMManager } from "../../bgm/bgm-manager";
 import type { Resources } from "../../resource";
 import type { DOMScene } from "../dom-scene";
-import {NPCEndingProps} from "./props";
-import {createNPCEndingProps} from "./procedures/create-npc-ending-props";
-import {bindEventListeners} from "./procedures/bind-event-listeners";
-import {playBGM} from "./procedures/play-bgm";
-import {waitUntilLoaded} from "./procedures/wait-until-loaded";
+import { bindEventListeners } from "./procedures/bind-event-listeners";
+import { createNPCEndingProps } from "./procedures/create-npc-ending-props";
+import { playBGM } from "./procedures/play-bgm";
+import { waitUntilLoaded } from "./procedures/wait-until-loaded";
+import { NPCEndingProps } from "./props";
 
 /** NPCルート エンディング画面 */
 export class NPCEnding implements DOMScene {

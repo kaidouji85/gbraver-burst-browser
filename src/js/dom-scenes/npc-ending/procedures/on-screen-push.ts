@@ -1,5 +1,5 @@
-import {PushDOM} from "../../../dom/push-dom";
-import {NPCEndingProps} from "../props";
+import { PushDOM } from "../../../dom/push-dom";
+import { NPCEndingProps } from "../props";
 
 /**
  * 画面がクリックされた際の処理
@@ -11,12 +11,12 @@ export function onScreenPush(
   action: Readonly<PushDOM>,
 ): void {
   if (!props.canOperation) {
-  return;
-}
+    return;
+  }
 
-props.canOperation = false;
-action.event.preventDefault();
-action.event.stopPropagation();
-props.pushButtonSound.play();
-props.endNPCEnding.next();
+  props.canOperation = false;
+  action.event.preventDefault();
+  action.event.stopPropagation();
+  props.pushButtonSound.play();
+  props.endNPCEnding.next();
 }
