@@ -18,7 +18,7 @@ export type BatterySystemTutorialProps = {
  * @param resources リソース管理オブジェクト
  * @return 生成結果
  */
-export function createBatterySystemTutorialOwnProps(resources: Resources): BatterySystemTutorialProps {
+export function createBatterySystemTutorialProps(resources: Resources): BatterySystemTutorialProps {
   const state = {
     isBatterySystemDescriptionComplete: false,
   };
