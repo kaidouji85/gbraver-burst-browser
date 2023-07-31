@@ -16,7 +16,7 @@ import { PilotSkillTutorial01State } from "./state";
 
 /** パイロットスキルチュートリアル（前半） */
 class PilotSkillTutorial01 extends EmptyCustomBattleEvent {
-  /** ステート */
+  /** @deprecated ステート */
   #state: PilotSkillTutorial01State;
 
   /**
