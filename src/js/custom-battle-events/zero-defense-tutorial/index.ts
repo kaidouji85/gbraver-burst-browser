@@ -63,10 +63,10 @@ class ZeroDefenseTutorialEvent extends EmptyCustomBattleEvent {
   async onPilotSkillCommandSelected(
     props: PilotSkillCommandSelected,
   ): Promise<CommandCanceled> {
-    const { state, cancel } = await onPilotSkillCommandSelected(
-      props,
-      this.state,
-    );
+    const { state, cancel } = await onPilotSkillCommandSelected({
+      ...props,
+      ...this,
+    });
     this.state = state;
     return cancel;
   }
