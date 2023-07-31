@@ -12,12 +12,10 @@ import {PilotSkillTutorial02Props} from "../props";
 /**
  * 条件を満たせば「パイロットスキル発動を推奨」を再生する
  * @param props イベントプロパティ
- * @param state イベントステート
  * @return ストーリーを再生したか否か、trueで再生した
  */
 async function executeDoPilotSkillIfNeeded(
-  props: Readonly<LastState>,
-  state: Readonly<PilotSkillTutorial02State>,
+  props: Readonly<LastState & PilotSkillTutorial02Props>,
 ): Promise<boolean> {
   const lastState = props.update[props.update.length - 1];
   if (!lastState) {
@@ -31,7 +29,7 @@ async function executeDoPilotSkillIfNeeded(
 
   const correctPower = totalCorrectPower(player.armdozer.effects);
   const turn = turnCount(props.stateHistory);
-  if (correctPower <= 0 && turn === 2 && !state.isDoPilotSkillComplete) {
+  if (correctPower <= 0 && turn === 2 && !props.state.isDoPilotSkillComplete) {
     await doPilotSkill(props);
     return true;
   }
@@ -46,8 +44,7 @@ async function executeDoPilotSkillIfNeeded(
  * @return ストーリーを再生したか否か、trueで再生した
  */
 async function executeShouldAttack3OrMoreIfNeeded(
-  props: Readonly<LastState>,
-  state: Readonly<PilotSkillTutorial02State>,
+  props: Readonly<LastState & PilotSkillTutorial02Props>,
 ): Promise<boolean> {
   const lastState = props.update[props.update.length - 1];
   if (!lastState) {
@@ -61,7 +58,7 @@ async function executeShouldAttack3OrMoreIfNeeded(
 
   const correctPower = totalCorrectPower(player.armdozer.effects);
   const turn = turnCount(props.stateHistory);
-  if (0 < correctPower && turn === 2 && !state.isShouldAttack5OrMoreComplete) {
+  if (0 < correctPower && turn === 2 && !props.state.isShouldAttack5OrMoreComplete) {
     await shouldAttack3OrMore(props);
     return true;
   }
@@ -84,16 +81,13 @@ export async function beforeLastState(
     return { ...props.state, isIntroductionComplete: true };
   }
 
-  const isDoPilotSkillExecuted = await executeDoPilotSkillIfNeeded(
-    props,
-    props.state,
-  );
+  const isDoPilotSkillExecuted = await executeDoPilotSkillIfNeeded(props);
   if (isDoPilotSkillExecuted) {
     return { ...props.state, isDoPilotSkillComplete: true };
   }
 
   const isShouldAttack5OrMoreExecuted =
-    await executeShouldAttack3OrMoreIfNeeded(props, props.state);
+    await executeShouldAttack3OrMoreIfNeeded(props);
   if (isShouldAttack5OrMoreExecuted) {
     return { ...props.state, isShouldAttack5OrMoreComplete: true };
   }
