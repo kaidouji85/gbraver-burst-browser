@@ -2,53 +2,41 @@ import type { GameState } from "gbraver-burst-core";
 
 import type { LastState } from "../../../td-scenes/battle/custom-battle-event";
 import { focusInBatterySelector } from "../../focus";
+import { BatterySystemTutorialProps } from "../props";
 import type { BatterySystemTutorialState } from "../state";
 import { attackDescription } from "../stories/attack-description";
 
-/** パラメータ */
-type Params = {
-  /** イベントプロパティ */
-  props: Readonly<LastState>;
-  /** ステート */
-  state: BatterySystemTutorialState;
-  /** 攻撃時のキャプション innerHTML */
-  attackBatteryCaption: string;
-  /** 防御時のキャプション innerHTML */
-  defenseBatteryCaption: string;
-};
-
 /**
  * 最終ステートイベント
- * @param params パラメータ
+ * @param props イベントプロパティ
  * @return ステート更新結果
  */
 export async function onLastState(
-  params: Params,
+  props: Readonly<LastState & BatterySystemTutorialProps>,
 ): Promise<BatterySystemTutorialState> {
-  const { props, state, attackBatteryCaption, defenseBatteryCaption } = params;
-  if (state.isBatterySystemDescriptionComplete) {
-    return state;
+  if (props.state.isBatterySystemDescriptionComplete) {
+    return props.state;
   }
 
   const foundLastState = props.update[props.update.length - 1];
   if (!foundLastState) {
-    return state;
+    return props.state;
   }
 
   const lastState: GameState = foundLastState;
   if (lastState.effect.name !== "InputCommand") {
-    return state;
+    return props.state;
   }
 
   const isMyTurn = lastState.activePlayerId === props.playerId;
   if (isMyTurn) {
-    await attackDescription(props, attackBatteryCaption);
+    await attackDescription(props, props.attackBatteryCaption);
   } else {
     await focusInBatterySelector(props);
     props.view.dom.nearBatterySelectorMessageWindow.messagesInInnerHTML(
-      defenseBatteryCaption,
+      props.defenseBatteryCaption,
     );
   }
 
-  return state;
+  return props.state;
 }
