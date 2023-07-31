@@ -17,3 +17,13 @@ export const npcBattle: DOMStubStory = domStub((resources) => {
   });
   return scene.getRootHTMLElement();
 });
+
+export const multiCaption: DOMStubStory = domStub((resources) => {
+  const scene = new StageTitle({
+    resources,
+    level: 10,
+    caption: ["音速の騎士", "ウィングドーザ"],
+    armDozerId: ArmDozerIds.WING_DOZER,
+  });
+  return scene.getRootHTMLElement();
+});
