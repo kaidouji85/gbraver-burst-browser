@@ -4,9 +4,9 @@ import type {
 } from "../../../td-scenes/battle/custom-battle-event";
 import { focusOutBurstButton, isBurstButtonFocused } from "../../focus";
 import { extractLastPlayer } from "../../last-player-extractor";
+import { BurstTutorialProps } from "../props";
 import type { BurstTutorialState } from "../state";
 import { burstIsTrumpCard } from "../stories/burst-is-trump-card";
-import {BurstTutorialProps} from "../props";
 
 /** イベント終了情報 */
 type Ret = {

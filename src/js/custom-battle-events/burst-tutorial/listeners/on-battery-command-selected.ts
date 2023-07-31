@@ -6,6 +6,7 @@ import type {
 } from "../../../td-scenes/battle/custom-battle-event";
 import { focusInBurstButton, focusInPilotButton } from "../../focus";
 import { shouldBurst, shouldPilotSkill } from "../captions";
+import { BurstTutorialProps } from "../props";
 import type { BurstTutorialState } from "../state";
 import { canNotChangeBattery } from "../stories/can-not-change-battery";
 import { doBurstToRecoverBattery } from "../stories/do-burst-to-recover-battery";
@@ -14,7 +15,6 @@ import { notDefense5Carelessly } from "../stories/not-defense5-carelessly";
 import { redoBatterySelect } from "../stories/redo-battery-select";
 import { shouldDefense5 } from "../stories/should-defense5";
 import { shouldDefense5Again } from "../stories/should-defense5-again";
-import {BurstTutorialProps} from "../props";
 
 /**
  * 初回、2回目以降で「5防御しないと負け」を切り替えるヘルパー関数

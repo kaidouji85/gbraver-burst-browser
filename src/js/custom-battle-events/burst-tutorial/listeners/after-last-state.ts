@@ -1,10 +1,10 @@
 import type { GameEnd, GameOver } from "gbraver-burst-core";
 
 import type { LastState } from "../../../td-scenes/battle/custom-battle-event";
+import { BurstTutorialProps } from "../props";
 import type { BurstTutorialState } from "../state";
 import { playerLose } from "../stories/player-lose";
 import { playerWin } from "../stories/player-win";
-import {BurstTutorialProps} from "../props";
 
 /**
  * 最終ステート完了後イベント

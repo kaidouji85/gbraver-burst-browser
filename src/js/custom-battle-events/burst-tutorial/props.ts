@@ -1,4 +1,4 @@
-import {BurstTutorialState} from "./state";
+import { BurstTutorialState } from "./state";
 
 /** バッテリーチュートリアル プロパティ */
 export type BurstTutorialProps = {

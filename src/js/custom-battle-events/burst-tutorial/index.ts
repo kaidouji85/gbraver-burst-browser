@@ -1,3 +1,4 @@
+import { createBurstButtonProps } from "../../game-dom/mini-controller/burst-button/props";
 import type {
   BatteryCommandSelected,
   BurstCommandSelected,
@@ -12,8 +13,7 @@ import { beforeLastState } from "./listeners/before-last-state";
 import { onBatteryCommandSelected } from "./listeners/on-battery-command-selected";
 import { onBurstCommandSelected } from "./listeners/on-burst-command-selected";
 import { onPilotSkillCommandSelected } from "./listeners/on-pilot-skill-command-selected";
-import {BurstTutorialProps} from "./props";
-import {createBurstButtonProps} from "../../game-dom/mini-controller/burst-button/props";
+import { BurstTutorialProps } from "./props";
 
 /** バーストチュートリアル用のカスタムバトルイベント */
 class BurstTutorial extends EmptyCustomBattleEvent {
@@ -30,19 +30,22 @@ class BurstTutorial extends EmptyCustomBattleEvent {
 
   /** @override */
   async beforeLastState(props: LastState): Promise<void> {
-    this.props.state = await beforeLastState({...props, ...this.props});
+    this.props.state = await beforeLastState({ ...props, ...this.props });
   }
 
   /** @override */
   async afterLastState(props: LastState): Promise<void> {
-    this.props.state = await afterLastState({...props, ...this.props});
+    this.props.state = await afterLastState({ ...props, ...this.props });
   }
 
   /** @override */
   async onBatteryCommandSelected(
     props: BatteryCommandSelected,
   ): Promise<CommandCanceled> {
-    const { state, cancel } = await onBatteryCommandSelected({...props, ...this.props});
+    const { state, cancel } = await onBatteryCommandSelected({
+      ...props,
+      ...this.props,
+    });
     this.props.state = state;
     return cancel;
   }
@@ -51,7 +54,10 @@ class BurstTutorial extends EmptyCustomBattleEvent {
   async onBurstCommandSelected(
     props: BurstCommandSelected,
   ): Promise<CommandCanceled> {
-    const { state, cancel } = await onBurstCommandSelected({...props, ...this});
+    const { state, cancel } = await onBurstCommandSelected({
+      ...props,
+      ...this,
+    });
     this.state = state;
     return cancel;
   }
