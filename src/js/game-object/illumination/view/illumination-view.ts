@@ -56,10 +56,13 @@ export class IlluminationView {
    * @param model モデル
    */
   engage(model: IlluminationModel): void {
-    this.#directionalLight1.intensity = model.intensity * 0.8;
-    this.#directionalLight2.intensity = model.intensity * 0.8;
-    this.#directionalLight3.intensity = model.intensity * 0.6;
-    this.#directionalLight4.intensity = model.intensity * 0.6;
-    this.#ambientLight.intensity = model.intensity * 0.8;
+    // three.js r155 から intensity に内部的にPIを乗算しないようになったので
+    // 前のバージョンと同じ照明になるようにPIを乗算している
+    // https://discourse.threejs.org/t/updates-to-lighting-in-three-js-r155/53733
+    this.#directionalLight1.intensity = model.intensity * Math.PI * 0.8;
+    this.#directionalLight2.intensity = model.intensity * Math.PI * 0.8;
+    this.#directionalLight3.intensity = model.intensity * Math.PI * 0.6;
+    this.#directionalLight4.intensity = model.intensity * Math.PI * 0.6;
+    this.#ambientLight.intensity = model.intensity * Math.PI * 0.8;
   }
 }
