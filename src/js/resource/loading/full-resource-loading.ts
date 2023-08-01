@@ -97,7 +97,10 @@ function resourceDifferentialLoad(
   resources: Resources,
   configs: Configs,
 ): ResourceLoading {
-  const differentialConfigs = extractUnloadedResourceConfigs(configs, resources);
+  const differentialConfigs = extractUnloadedResourceConfigs(
+    configs,
+    resources,
+  );
   const loading = resourceLoading({
     ...differentialConfigs,
     resourceRoot: resources.rootPath,
