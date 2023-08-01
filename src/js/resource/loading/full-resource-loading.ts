@@ -15,7 +15,7 @@ import {
   TEXTURE_CONFIGS,
 } from "../texture/configs";
 import type { TextureConfig } from "../texture/resource";
-import { extractUnloadedResorceConfigs } from "./extract-unloaded-resorce-configs";
+import { extractUnloadedResourceConfigs } from "./extract-unloaded-resource-configs";
 import { mergeResources } from "./merge-resources";
 import type { ResourceLoading } from "./resource-loading";
 import { resourceLoading } from "./resource-loading";
@@ -97,7 +97,10 @@ function resourceDifferentialLoad(
   resources: Resources,
   configs: Configs,
 ): ResourceLoading {
-  const differentialConfigs = extractUnloadedResorceConfigs(configs, resources);
+  const differentialConfigs = extractUnloadedResourceConfigs(
+    configs,
+    resources,
+  );
   const loading = resourceLoading({
     ...differentialConfigs,
     resourceRoot: resources.rootPath,

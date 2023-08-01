@@ -9,16 +9,12 @@ import type { TextureConfig } from "../texture/resource";
 type Configs = {
   /** 読み込むGLTFモデル */
   gltfConfigs: GlTFConfig[];
-
   /** 読み込むテクスチャ */
   textureConfigs: TextureConfig[];
-
   /** 読み込むキューブテクスチャ */
   cubeTextureConfigs: CubeTextureConfig[];
-
   /** 読み込むキャンバス用画像 */
   canvasImageConfigs: CanvasImageConfig[];
-
   /** 読み込む音声 */
   soundConfigs: SoundConfig[];
 };
@@ -29,7 +25,7 @@ type Configs = {
  * @param resources 既に読みこんだリソース
  * @return 抽出結果
  */
-export function extractUnloadedResorceConfigs(
+export function extractUnloadedResourceConfigs(
   configs: Configs,
   resources: Resources,
 ): Configs {
