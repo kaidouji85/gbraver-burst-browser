@@ -20,10 +20,8 @@ import type { LoadingActions } from "./loading-actions";
 type ResourceLoadingParams = {
   /** リソースルート */
   resourceRoot: ResourceRoot;
-
-  /** プリフェッチするパス */
+  /** @deprecated プリフェッチするパス */
   preFetchPaths: PathId[];
-
   /** 読み込むGLTFモデル */
   gltfConfigs: GlTFConfig[];
 
@@ -42,21 +40,16 @@ type ResourceLoadingParams = {
 
 /** 読み込みPromiseをあつめたもの */
 type Loadings = {
-  /** プリフェッチPromise */
+  /** @deprecated プリフェッチPromise */
   preFetchPaths: Promise<Response>[];
-
   /** GLTFモデル読み込みPromise */
   gltfLoadings: Promise<GlTFResource>[];
-
   /** テクスチャ読み込みPromise */
   textureLoadings: Promise<TextureResource>[];
-
   /** キューブテクスチャ読み込みPromise */
   cubeTextureLoadings: Promise<CubeTextureResource>[];
-
   /** キャンバス用画像読み込みPromise */
   canvasImageLoadings: Promise<CanvasImageResource>[];
-
   /** 音声読み込みPromise */
   soundLoadings: Promise<SoundResource>[];
 };
@@ -152,7 +145,6 @@ async function createResources(
 export type ResourceLoading = {
   /** 読み込みストリーム */
   loading: Observable<LoadingActions>;
-
   /** 読み込んだリソース管理オブジェクト */
   resources: Promise<Resources>;
 };
