@@ -104,7 +104,7 @@ function resourceDifferentialLoad(
   const loading = resourceLoading({
     ...differentialConfigs,
     resourceRoot: resources.rootPath,
-    preFetchPaths: PRE_LOAD_IMAGE_PATH_IDS,
+    preLoadImages: PRE_LOAD_IMAGE_PATH_IDS,
   });
   return {
     ...loading,
