@@ -1,15 +1,13 @@
 import { PathIds } from "../ids";
 import { PathConfig } from "../resource";
+import { LogoPathConfigs } from "./logo";
 import { ShinBraverPathConfigs } from "./shin-braver";
 import { TitleBackPathConfigs } from "./title-back";
 
 /** パス設定を集めたもの */
 export const PathConfigs: PathConfig[] = [
   ...TitleBackPathConfigs,
-  {
-    id: PathIds.LOGO,
-    path: (root) => `${root.get()}/logo.svg`,
-  },
+  ...LogoPathConfigs,
   ...ShinBraverPathConfigs,
   {
     id: PathIds.NEO_LANDOZER_ICON,
