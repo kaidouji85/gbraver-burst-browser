@@ -6,6 +6,7 @@ import { GenesisBraverPathConfigs } from "./genesis-braver";
 import { LightningDozerPathConfigs } from "./lightning-dozer";
 import { LogoPathConfigs } from "./logo";
 import { NeoLandozerPathConfigs } from "./neo-landozer";
+import { RaitoPathConfigs } from "./raito";
 import { ShinBraverPathConfigs } from "./shin-braver";
 import { TitleBackPathConfigs } from "./title-back";
 import { WingDozerPathConfigs } from "./wing-dozer";
@@ -21,14 +22,7 @@ export const PathConfigs: PathConfig[] = [
   ...GenesisBraverPathConfigs,
   ...ShinyaPathConfigs,
   ...GaiPathConfigs,
-  {
-    id: PathIds.RAITO_SKILL_CUTIN,
-    path: (root) => `${root.get()}/pilot/raito/skill-cutin.webp`,
-  },
-  {
-    id: PathIds.RAITO_ICON,
-    path: (root) => `${root.get()}/pilot/raito/player-select.webp`,
-  },
+  ...RaitoPathConfigs,
   {
     id: PathIds.TSUBASA_SKILL_CUTIN,
     path: (root) => `${root.get()}/pilot/tsubasa/skill-cutin.webp`,
