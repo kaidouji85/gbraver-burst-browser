@@ -1,10 +1,11 @@
 import { PathIds } from "../ids";
 import { PathConfig } from "../resource";
-import { lightningDozerPathConfigs } from "./lightning-dozer";
+import { LightningDozerPathConfigs } from "./lightning-dozer";
 import { LogoPathConfigs } from "./logo";
 import { NeoLandozerPathConfigs } from "./neo-landozer";
 import { ShinBraverPathConfigs } from "./shin-braver";
 import { TitleBackPathConfigs } from "./title-back";
+import { WingDozerPathConfigs } from "./wing-dozer";
 
 /** パス設定を集めたもの */
 export const PathConfigs: PathConfig[] = [
@@ -12,15 +13,8 @@ export const PathConfigs: PathConfig[] = [
   ...LogoPathConfigs,
   ...ShinBraverPathConfigs,
   ...NeoLandozerPathConfigs,
-  ...lightningDozerPathConfigs,
-  {
-    id: PathIds.WING_DOZER_ICON,
-    path: (root) => `${root.get()}/armdozer/wing-dozer/player-select.webp`,
-  },
-  {
-    id: PathIds.WING_DOZER_BUST_SHOT,
-    path: (root) => `${root.get()}/armdozer/wing-dozer/bust-shot.webp`,
-  },
+  ...LightningDozerPathConfigs,
+  ...WingDozerPathConfigs,
   {
     id: PathIds.GENESIS_BRAVER_BUST_SHOT,
     path: (root) => `${root.get()}/armdozer/genesis-braver/bust-shot.webp`,

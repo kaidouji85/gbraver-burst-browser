@@ -2,7 +2,7 @@ import { PathIds } from "../ids";
 import { PathConfig } from "../resource";
 
 /** ライトニングドーザ パス設定 */
-export const lightningDozerPathConfigs: PathConfig[] = [
+export const LightningDozerPathConfigs: PathConfig[] = [
   {
     id: PathIds.LIGHTNING_DOZER_ICON,
     path: (root) => `${root.get()}/armdozer/lightning-dozer/player-select.webp`,
