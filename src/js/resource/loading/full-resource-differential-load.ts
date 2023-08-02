@@ -1,9 +1,16 @@
 import { Resources } from "..";
 import { PreLoadPathConfigs } from "../path/configs";
 import { extractUnloadedResourceConfigs } from "./extract-unloaded-resource-configs";
-import { DEVELOPING_FULL_RESOURCE_CONFIGS, FULL_RESOURCE_CONFIGS } from "./full-resource-configs";
+import {
+  DEVELOPING_FULL_RESOURCE_CONFIGS,
+  FULL_RESOURCE_CONFIGS,
+} from "./full-resource-configs";
 import { mergeResources } from "./merge-resources";
-import { LoadingTargetConfigs, ResourceLoading, resourceLoading } from "./resource-loading";
+import {
+  LoadingTargetConfigs,
+  ResourceLoading,
+  resourceLoading,
+} from "./resource-loading";
 
 /**
  * リソース差分読み込み

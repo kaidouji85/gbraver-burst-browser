@@ -1,6 +1,9 @@
 import { PreLoadPathConfigs } from "../path/configs";
 import type { ResourceRoot } from "../resource-root";
-import { DEVELOPING_FULL_RESOURCE_CONFIGS, FULL_RESOURCE_CONFIGS } from "./full-resource-configs";
+import {
+  DEVELOPING_FULL_RESOURCE_CONFIGS,
+  FULL_RESOURCE_CONFIGS,
+} from "./full-resource-configs";
 import { ResourceLoading, resourceLoading } from "./resource-loading";
 
 /**

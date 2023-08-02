@@ -2,7 +2,10 @@ import { CANVAS_IMAGE_CONFIGS } from "../canvas-image";
 import { CUBE_TEXTURE_CONFIGS } from "../cube-texture";
 import { GLTF_CONFIGS } from "../gltf";
 import { SOUND_CONFIGS } from "../sound";
-import { DEVELOPING_TEXTURE_CONFIGS, TEXTURE_CONFIGS } from "../texture/configs";
+import {
+  DEVELOPING_TEXTURE_CONFIGS,
+  TEXTURE_CONFIGS,
+} from "../texture/configs";
 import { LoadingTargetConfigs } from "./resource-loading";
 
 /** フルリソースの設定 */

@@ -29,14 +29,14 @@ export type LoadingTargetConfigs = {
   /** 読み込むキャンバス用画像 */
   canvasImageConfigs: CanvasImageConfig[];
   /** 読み込む音声 */
-  soundConfigs: SoundConfig[];  
+  soundConfigs: SoundConfig[];
 };
 
 /** リソース読み込み開始パラメータ */
 type LoadingStartParams = LoadingTargetConfigs & {
   /** リソースルート */
   resourceRoot: ResourceRoot;
-  /** 
+  /**
    * プリロードする画像
    * プリロードでは読み込み開始だけを行い、読み込み完了まで待たない
    */
@@ -90,7 +90,9 @@ function startLoading(params: LoadingStartParams): LoadingPromises {
  * @param loadings 読み込みPromise
  * @return 生成結果
  */
-function createLoadingActions(loadings: LoadingPromises): Observable<LoadingActions> {
+function createLoadingActions(
+  loadings: LoadingPromises,
+): Observable<LoadingActions> {
   const loadingActions = new Subject<LoadingActions>();
   const allLoadings = [
     ...loadings.gltfLoadings,
