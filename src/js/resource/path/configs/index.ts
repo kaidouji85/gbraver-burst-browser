@@ -14,10 +14,6 @@ export const PathConfigs: PathConfig[] = [
   },
   ...ShinBraverPathConfigs,
   {
-    id: PathIds.SHIN_BRAVER_STAND,
-    path: (root) => `${root.get()}/armdozer/shin-braver/stand.webp`,
-  },
-  {
     id: PathIds.NEO_LANDOZER_ICON,
     path: (root) => `${root.get()}/armdozer/neo-landozer/player-select.webp`,
   },

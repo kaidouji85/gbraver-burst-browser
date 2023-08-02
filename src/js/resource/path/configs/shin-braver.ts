@@ -11,4 +11,8 @@ export const ShinBraverPathConfigs: PathConfig[] = [
     id: PathIds.SHIN_BRAVER_BUST_SHOT,
     path: (root) => `${root.get()}/armdozer/shin-braver/bust-shot.webp`,
   },
+  {
+    id: PathIds.SHIN_BRAVER_STAND,
+    path: (root) => `${root.get()}/armdozer/shin-braver/stand.webp`,
+  },
 ];
