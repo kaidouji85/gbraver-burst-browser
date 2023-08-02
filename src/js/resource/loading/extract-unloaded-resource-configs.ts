@@ -1,23 +1,5 @@
 import type { Resources } from "..";
-import type { CanvasImageConfig } from "../canvas-image";
-import type { CubeTextureConfig } from "../cube-texture";
-import type { GlTFConfig } from "../gltf";
-import type { SoundConfig } from "../sound";
-import type { TextureConfig } from "../texture/resource";
-
-/** リソース設定をあつめたもの */
-type Configs = {
-  /** 読み込むGLTFモデル */
-  gltfConfigs: GlTFConfig[];
-  /** 読み込むテクスチャ */
-  textureConfigs: TextureConfig[];
-  /** 読み込むキューブテクスチャ */
-  cubeTextureConfigs: CubeTextureConfig[];
-  /** 読み込むキャンバス用画像 */
-  canvasImageConfigs: CanvasImageConfig[];
-  /** 読み込む音声 */
-  soundConfigs: SoundConfig[];
-};
+import { LoadingTargetConfigs } from "./resource-loading";
 
 /**
  * 読みこまれていないリソース設定を抽出する
@@ -26,9 +8,9 @@ type Configs = {
  * @return 抽出結果
  */
 export function extractUnloadedResourceConfigs(
-  configs: Configs,
+  configs: LoadingTargetConfigs,
   resources: Resources,
-): Configs {
+): LoadingTargetConfigs {
   const loadedGltfIDs = resources.gltfs.map((v) => v.id);
   const loadedTextureIDs = resources.textures.map((v) => v.id);
   const loadedCubeTextureIDs = resources.cubeTextures.map((v) => v.id);
