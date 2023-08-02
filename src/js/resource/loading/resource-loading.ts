@@ -60,7 +60,7 @@ function preLoad(src: string): void {
 /**
  * 読み込みを開始する
  * @param params パラメータ
- * @return 読み込みPromiseをあつめたもの
+ * @return リソース読み込み情報
  */
 function startLoading(params: ResourceLoadingParams): Loadings {
   PathConfigs.filter((v) => params.preLoadImages.includes(v.id)).forEach((v) =>
