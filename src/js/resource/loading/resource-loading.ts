@@ -18,12 +18,8 @@ import { loadTexture } from "../texture/load";
 import type { TextureConfig, TextureResource } from "../texture/resource";
 import type { LoadingActions } from "./loading-actions";
 
-/** リソース読み込みパラメータ */
-type ResourceLoadingParams = {
-  /** リソースルート */
-  resourceRoot: ResourceRoot;
-  /** プリロードする画像 */
-  preLoadImages: PathConfig[];
+/** 読み込み対象となるリソースの設定をあつめたもの */
+export type LoadingTargets = {
   /** 読み込むGLTFモデル */
   gltfConfigs: GlTFConfig[];
   /** 読み込むテクスチャ */
@@ -33,7 +29,18 @@ type ResourceLoadingParams = {
   /** 読み込むキャンバス用画像 */
   canvasImageConfigs: CanvasImageConfig[];
   /** 読み込む音声 */
-  soundConfigs: SoundConfig[];
+  soundConfigs: SoundConfig[];  
+};
+
+/** リソース読み込み開始パラメータ */
+type LoadingStartParams = LoadingTargets & {
+  /** リソースルート */
+  resourceRoot: ResourceRoot;
+  /** 
+   * プリロードする画像
+   * プリロードでは読み込み開始だけを行い、読み込み完了まで待たない
+   */
+  preLoadImages: PathConfig[];
 };
 
 /** リソース読み込みPromise */
@@ -51,11 +58,11 @@ type LoadingPromises = {
 };
 
 /**
- * 読み込みを開始する
+ * リソース読み込みを開始する
  * @param params パラメータ
  * @return リソース読み込み情報
  */
-function startLoading(params: ResourceLoadingParams): LoadingPromises {
+function startLoading(params: LoadingStartParams): LoadingPromises {
   params.preLoadImages
     .map((v) => toPath(v, params.resourceRoot))
     .forEach((v) => preLoadImage(v));
@@ -135,6 +142,9 @@ async function createResources(
     paths,
   };
 }
+
+/** リソース読み込みパラメータ */
+export type ResourceLoadingParams = LoadingStartParams;
 
 /** リソース読み込みオブジェクト */
 export type ResourceLoading = {
