@@ -1,6 +1,7 @@
 import { ShinyaPathConfigs } from "../../texture/configs/shinya";
 import { PathIds } from "../ids";
 import { PathConfig } from "../resource";
+import { CheckPathConfigs } from "./check";
 import { CloserPathConfig } from "./closer";
 import { EndingPathConfigs } from "./ending";
 import { GaiPathConfigs } from "./gai";
@@ -33,10 +34,7 @@ export const PathConfigs: PathConfig[] = [
   ...EndingPathConfigs,
   ...CloserPathConfig,
   ...PlayInLandscapePathConfigs,
-  {
-    id: PathIds.CHECK,
-    path: (root) => `${root.get()}/check/check.webp`,
-  },
+  ...CheckPathConfigs,
   {
     id: PathIds.NPC_COURSE_EASY_ICON,
     path: (root) => `${root.get()}/npc-course/easy.svg`,
