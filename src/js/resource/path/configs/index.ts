@@ -1,5 +1,4 @@
 import { ShinyaPathConfigs } from "../../texture/configs/shinya";
-import { PathIds } from "../ids";
 import { PathConfig } from "../resource";
 import { BatteryIconPathConfigs } from "./battery-icon";
 import { CheckPathConfigs } from "./check";
@@ -10,6 +9,7 @@ import { GenesisBraverPathConfigs } from "./genesis-braver";
 import { HelpIconPathConfigs } from "./help-icon";
 import { LightningDozerPathConfigs } from "./lightning-dozer";
 import { LogoPathConfigs } from "./logo";
+import { MessageWindowPathConfigs } from "./message-window";
 import { NeoLandozerPathConfigs } from "./neo-landozer";
 import { NPCCoursePathConfigs } from "./npc-course";
 import { PlayInLandscapePathConfigs } from "./play-in-landscape";
@@ -43,20 +43,5 @@ export const PathConfigs: PathConfig[] = [
   ...TutorialPathConfigs,
   ...BatteryIconPathConfigs,
   ...HelpIconPathConfigs,
-  {
-    id: PathIds.MESSAGE_WINDOW_ATTACK_BATTERY,
-    path: (root) => `${root.get()}/message-window/attack-battery.webp`,
-  },
-  {
-    id: PathIds.MESSAGE_WINDOW_DEFENSE_BATTERY,
-    path: (root) => `${root.get()}/message-window/defense-battery.webp`,
-  },
-  {
-    id: PathIds.MESSAGE_WINDOW_PLUS_BATTERY,
-    path: (root) => `${root.get()}/message-window/plus-battery.webp`,
-  },
-  {
-    id: PathIds.MESSAGE_WINDOW_MINUS_BATTERY,
-    path: (root) => `${root.get()}/message-window/minus-battery.webp`,
-  },
+  ...MessageWindowPathConfigs,
 ];
