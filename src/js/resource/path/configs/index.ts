@@ -11,6 +11,7 @@ import { ShinBraverPathConfigs } from "./shin-braver";
 import { TitleBackPathConfigs } from "./title-back";
 import { TsubasaPathConfigs } from "./tsubasa";
 import { WingDozerPathConfigs } from "./wing-dozer";
+import { YuuyaPathConfigs } from "./yuuya";
 
 /** パス設定を集めたもの */
 export const PathConfigs: PathConfig[] = [
@@ -25,14 +26,7 @@ export const PathConfigs: PathConfig[] = [
   ...GaiPathConfigs,
   ...RaitoPathConfigs,
   ...TsubasaPathConfigs,
-  {
-    id: PathIds.YUUYA_SKILL_CUTIN,
-    path: (root) => `${root.get()}/pilot/yuuya/skill-cutin.webp`,
-  },
-  {
-    id: PathIds.YUUYA_ICON,
-    path: (root) => `${root.get()}/pilot/yuuya/player-select.webp`,
-  },
+  ...YuuyaPathConfigs,
   {
     id: PathIds.END,
     path: (root) => `${root.get()}/ending/end.svg`,
