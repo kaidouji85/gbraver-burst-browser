@@ -1,6 +1,7 @@
 import { ShinyaPathConfigs } from "../../texture/configs/shinya";
 import { PathIds } from "../ids";
 import { PathConfig } from "../resource";
+import { BatteryIconPathConfigs } from "./battery-icon";
 import { CheckPathConfigs } from "./check";
 import { DialogPathConfig } from "./dialog";
 import { EndingPathConfigs } from "./ending";
@@ -39,10 +40,7 @@ export const PathConfigs: PathConfig[] = [
   ...CheckPathConfigs,
   ...NPCCoursePathConfigs,
   ...TutorialPathConfigs,
-  {
-    id: PathIds.BATTERY_ICON,
-    path: (root) => `${root.get()}/battery-icon.svg`,
-  },
+  ...BatteryIconPathConfigs,
   {
     id: PathIds.HELP_ICON,
     path: (root) => `${root.get()}/help-icon.svg`,
