@@ -1,5 +1,6 @@
 import { PathIds } from "../ids";
 import { PathConfig } from "../resource";
+import { lightningDozerPathConfigs } from "./lightning-dozer";
 import { LogoPathConfigs } from "./logo";
 import { NeoLandozerPathConfigs } from "./neo-landozer";
 import { ShinBraverPathConfigs } from "./shin-braver";
@@ -11,14 +12,7 @@ export const PathConfigs: PathConfig[] = [
   ...LogoPathConfigs,
   ...ShinBraverPathConfigs,
   ...NeoLandozerPathConfigs,
-  {
-    id: PathIds.LIGHTNING_DOZER_ICON,
-    path: (root) => `${root.get()}/armdozer/lightning-dozer/player-select.webp`,
-  },
-  {
-    id: PathIds.LIGHTNING_DOZER_BUST_SHOT,
-    path: (root) => `${root.get()}/armdozer/lightning-dozer/bust-shot.webp`,
-  },
+  ...lightningDozerPathConfigs,
   {
     id: PathIds.WING_DOZER_ICON,
     path: (root) => `${root.get()}/armdozer/wing-dozer/player-select.webp`,
