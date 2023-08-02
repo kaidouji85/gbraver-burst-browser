@@ -5,7 +5,7 @@ import { pop } from "../../dom/pop";
 import { domPushStream, PushDOM } from "../../dom/push-dom";
 import { Exclusive } from "../../exclusive/exclusive";
 import type { Resources } from "../../resource";
-import { PathIds } from "../../resource/path";
+import { PathIds } from "../../resource/path/ids";
 import { SOUND_IDS } from "../../resource/sound";
 import { domUuid } from "../../uuid/dom-uuid";
 import type { DOMDialog } from "../dialog";

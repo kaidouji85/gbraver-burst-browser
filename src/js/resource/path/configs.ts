@@ -1,4 +1,6 @@
-import { PathConfig, PathIds } from "../path";
+import { PathIds } from "./ids";
+import { PathConfig } from "./resource";
+
 
 /** パス設定を集めたもの */
 export const PathConfigs: PathConfig[] = [

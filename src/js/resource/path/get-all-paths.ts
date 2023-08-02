@@ -1,5 +1,7 @@
-import { Path, PathConfigs, toPath } from "../path";
 import { ResourceRoot } from "../resource-root";
+import { PathConfigs } from "./configs";
+import { Path } from "./resource";
+import { toPath } from "./to-path";
 
 /**
  * 全てのパスを取得する

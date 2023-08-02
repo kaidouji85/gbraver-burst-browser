@@ -1,5 +1,5 @@
-import { Path, PathConfig } from "../path";
 import { ResourceRoot } from "../resource-root";
+import { Path, PathConfig } from "./resource";
 
 /**
  * パス設定をパスに変換する

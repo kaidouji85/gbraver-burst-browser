@@ -2,7 +2,7 @@ import type { PilotId } from "gbraver-burst-core";
 import { PilotIds } from "gbraver-burst-core";
 
 import type { Resources } from "../../../resource";
-import { PathIds } from "../../../resource/path";
+import { PathIds } from "../../../resource/path/ids";
 import { PilotBustShot } from "./pilot-bust-shot";
 
 /** ルート要素のクラス名 */
