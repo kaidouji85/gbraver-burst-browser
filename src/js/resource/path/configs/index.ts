@@ -9,6 +9,7 @@ import { GenesisBraverPathConfigs } from "./genesis-braver";
 import { LightningDozerPathConfigs } from "./lightning-dozer";
 import { LogoPathConfigs } from "./logo";
 import { NeoLandozerPathConfigs } from "./neo-landozer";
+import { NPCCoursePathConfigs } from "./npc-course";
 import { PlayInLandscapePathConfigs } from "./play-in-landscape";
 import { RaitoPathConfigs } from "./raito";
 import { ShinBraverPathConfigs } from "./shin-braver";
@@ -35,22 +36,7 @@ export const PathConfigs: PathConfig[] = [
   ...DialogPathConfig,
   ...PlayInLandscapePathConfigs,
   ...CheckPathConfigs,
-  {
-    id: PathIds.NPC_COURSE_EASY_ICON,
-    path: (root) => `${root.get()}/npc-course/easy.svg`,
-  },
-  {
-    id: PathIds.NPC_COURSE_NORMAL_ICON,
-    path: (root) => `${root.get()}/npc-course/normal.svg`,
-  },
-  {
-    id: PathIds.NPC_COURSE_HARD_ICON,
-    path: (root) => `${root.get()}/npc-course/hard.svg`,
-  },
-  {
-    id: PathIds.NPC_COURSE_VERY_HARD_ICON,
-    path: (root) => `${root.get()}/npc-course/very-hard.svg`,
-  },
+  ...NPCCoursePathConfigs,
   {
     id: PathIds.TUTORIAL_IMAGE_CUT_01,
     path: (root) => `${root.get()}/tutorial/image-cut-01.webp`,
