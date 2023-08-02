@@ -9,6 +9,7 @@ import { NeoLandozerPathConfigs } from "./neo-landozer";
 import { RaitoPathConfigs } from "./raito";
 import { ShinBraverPathConfigs } from "./shin-braver";
 import { TitleBackPathConfigs } from "./title-back";
+import { TsubasaPathConfigs } from "./tsubasa";
 import { WingDozerPathConfigs } from "./wing-dozer";
 
 /** パス設定を集めたもの */
@@ -23,14 +24,7 @@ export const PathConfigs: PathConfig[] = [
   ...ShinyaPathConfigs,
   ...GaiPathConfigs,
   ...RaitoPathConfigs,
-  {
-    id: PathIds.TSUBASA_SKILL_CUTIN,
-    path: (root) => `${root.get()}/pilot/tsubasa/skill-cutin.webp`,
-  },
-  {
-    id: PathIds.TSUBASA_ICON,
-    path: (root) => `${root.get()}/pilot/tsubasa/player-select.webp`,
-  },
+  ...TsubasaPathConfigs,
   {
     id: PathIds.YUUYA_SKILL_CUTIN,
     path: (root) => `${root.get()}/pilot/yuuya/skill-cutin.webp`,
