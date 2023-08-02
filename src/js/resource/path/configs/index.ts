@@ -1,3 +1,4 @@
+import { ShinyaPathConfigs } from "../../texture/configs/shinya";
 import { PathIds } from "../ids";
 import { PathConfig } from "../resource";
 import { GenesisBraverPathConfigs } from "./genesis-braver";
@@ -17,14 +18,7 @@ export const PathConfigs: PathConfig[] = [
   ...LightningDozerPathConfigs,
   ...WingDozerPathConfigs,
   ...GenesisBraverPathConfigs,
-  {
-    id: PathIds.SHINYA_ICON,
-    path: (root) => `${root.get()}/pilot/shinya/player-select.webp`,
-  },
-  {
-    id: PathIds.SHINYA_SKILL_CUTIN,
-    path: (root) => `${root.get()}/pilot/shinya/skill-cutin.webp`,
-  },
+  ...ShinyaPathConfigs,
   {
     id: PathIds.GAI_ICON,
     path: (root) => `${root.get()}/pilot/gai/player-select.webp`,
