@@ -7,9 +7,10 @@ import type { CubeTextureConfig, CubeTextureResource } from "../cube-texture";
 import { loadCubeTexture } from "../cube-texture";
 import type { GlTFConfig, GlTFResource } from "../gltf";
 import { loadGlTF } from "../gltf";
-import { PathConfigs } from "../path/configs";
 import { getAllPaths } from "../path/get-all-paths";
-import { PathId } from "../path/resource";
+import { preLoadImage } from "../path/pre-load-image";
+import { PathConfig } from "../path/resource";
+import { toPath } from "../path/to-path";
 import type { ResourceRoot } from "../resource-root";
 import type { SoundConfig, SoundResource } from "../sound";
 import { loadSound } from "../sound";
@@ -22,7 +23,7 @@ type ResourceLoadingParams = {
   /** リソースルート */
   resourceRoot: ResourceRoot;
   /** プリロードする画像 */
-  preLoadImages: PathId[];
+  preLoadImages: PathConfig[];
   /** 読み込むGLTFモデル */
   gltfConfigs: GlTFConfig[];
   /** 読み込むテクスチャ */
@@ -50,23 +51,14 @@ type Loadings = {
 };
 
 /**
- * 画像をプリロードする
- * @param src 画像のパス
- */
-function preLoad(src: string): void {
-  const image = new Image();
-  image.src = src;
-}
-
-/**
  * 読み込みを開始する
  * @param params パラメータ
  * @return リソース読み込み情報
  */
 function startLoading(params: ResourceLoadingParams): Loadings {
-  PathConfigs.filter((v) => params.preLoadImages.includes(v.id)).forEach((v) =>
-    preLoad(v.path(params.resourceRoot)),
-  );
+  params.preLoadImages
+    .map((v) => toPath(v, params.resourceRoot))
+    .forEach((v) => preLoadImage(v));
   return {
     gltfLoadings: params.gltfConfigs.map((v) =>
       loadGlTF(params.resourceRoot, v),
