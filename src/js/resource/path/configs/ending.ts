@@ -11,5 +11,4 @@ export const EndingPathConfigs: PathConfig[] = [
     id: PathIds.END_CARD,
     path: (root) => `${root.get()}/ending/end-card.webp`,
   },
-
 ];
