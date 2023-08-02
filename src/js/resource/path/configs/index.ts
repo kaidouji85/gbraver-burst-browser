@@ -15,6 +15,7 @@ import { RaitoPathConfigs } from "./raito";
 import { ShinBraverPathConfigs } from "./shin-braver";
 import { TitleBackPathConfigs } from "./title-back";
 import { TsubasaPathConfigs } from "./tsubasa";
+import { TutorialPathConfigs } from "./tutorial";
 import { WingDozerPathConfigs } from "./wing-dozer";
 import { YuuyaPathConfigs } from "./yuuya";
 
@@ -37,18 +38,7 @@ export const PathConfigs: PathConfig[] = [
   ...PlayInLandscapePathConfigs,
   ...CheckPathConfigs,
   ...NPCCoursePathConfigs,
-  {
-    id: PathIds.TUTORIAL_IMAGE_CUT_01,
-    path: (root) => `${root.get()}/tutorial/image-cut-01.webp`,
-  },
-  {
-    id: PathIds.TUTORIAL_IMAGE_CUT_02,
-    path: (root) => `${root.get()}/tutorial/image-cut-02.webp`,
-  },
-  {
-    id: PathIds.TUTORIAL_IMAGE_CUT_03,
-    path: (root) => `${root.get()}/tutorial/image-cut-03.webp`,
-  },
+  ...TutorialPathConfigs,
   {
     id: PathIds.BATTERY_ICON,
     path: (root) => `${root.get()}/battery-icon.svg`,
