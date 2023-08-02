@@ -20,57 +20,53 @@ import type { LoadingActions } from "./loading-actions";
 type ResourceLoadingParams = {
   /** リソースルート */
   resourceRoot: ResourceRoot;
-
-  /** プリフェッチするパス */
-  preFetchPaths: PathId[];
-
+  /** プリロードする画像 */
+  preLoadImages: PathId[];
   /** 読み込むGLTFモデル */
   gltfConfigs: GlTFConfig[];
-
   /** 読み込むテクスチャ */
   textureConfigs: TextureConfig[];
-
   /** 読み込むキューブテクスチャ */
   cubeTextureConfigs: CubeTextureConfig[];
-
   /** 読み込むキャンバス用画像 */
   canvasImageConfigs: CanvasImageConfig[];
-
   /** 読み込む音声 */
   soundConfigs: SoundConfig[];
 };
 
-/** 読み込みPromiseをあつめたもの */
+/** リソース読み込み情報 */
 type Loadings = {
-  /** プリフェッチPromise */
-  preFetchPaths: Promise<Response>[];
-
   /** GLTFモデル読み込みPromise */
   gltfLoadings: Promise<GlTFResource>[];
-
   /** テクスチャ読み込みPromise */
   textureLoadings: Promise<TextureResource>[];
-
   /** キューブテクスチャ読み込みPromise */
   cubeTextureLoadings: Promise<CubeTextureResource>[];
-
   /** キャンバス用画像読み込みPromise */
   canvasImageLoadings: Promise<CanvasImageResource>[];
-
   /** 音声読み込みPromise */
   soundLoadings: Promise<SoundResource>[];
 };
 
 /**
- * 読み込みPromiseを生成するヘルパー関数
- * @param params パラメータ
- * @return 生成結果
+ * 画像をプリロードする
+ * @param src 画像のパス
  */
-function createLoadings(params: ResourceLoadingParams): Loadings {
+function preLoad(src: string): void {
+  const image = new Image();
+  image.src = src;
+}
+
+/**
+ * 読み込みを開始する
+ * @param params パラメータ
+ * @return リソース読み込み情報
+ */
+function startLoading(params: ResourceLoadingParams): Loadings {
+  PathConfigs.filter((v) => params.preLoadImages.includes(v.id)).forEach((v) =>
+    preLoad(v.path(params.resourceRoot)),
+  );
   return {
-    preFetchPaths: PathConfigs.filter((v) =>
-      params.preFetchPaths.includes(v.id),
-    ).map((v) => fetch(v.path(params.resourceRoot))),
     gltfLoadings: params.gltfConfigs.map((v) =>
       loadGlTF(params.resourceRoot, v),
     ),
@@ -97,7 +93,6 @@ function createLoadings(params: ResourceLoadingParams): Loadings {
 function createLoadingActions(loadings: Loadings): Observable<LoadingActions> {
   const loadingActions = new Subject<LoadingActions>();
   const allLoadings = [
-    ...loadings.preFetchPaths,
     ...loadings.gltfLoadings,
     ...loadings.textureLoadings,
     ...loadings.cubeTextureLoadings,
@@ -152,7 +147,6 @@ async function createResources(
 export type ResourceLoading = {
   /** 読み込みストリーム */
   loading: Observable<LoadingActions>;
-
   /** 読み込んだリソース管理オブジェクト */
   resources: Promise<Resources>;
 };
@@ -165,7 +159,7 @@ export type ResourceLoading = {
 export function resourceLoading(
   params: ResourceLoadingParams,
 ): ResourceLoading {
-  const loadings = createLoadings(params);
+  const loadings = startLoading(params);
   return {
     loading: createLoadingActions(loadings),
     resources: createResources(loadings, params.resourceRoot),

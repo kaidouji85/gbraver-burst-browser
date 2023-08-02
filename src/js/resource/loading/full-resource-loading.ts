@@ -20,8 +20,8 @@ import { mergeResources } from "./merge-resources";
 import type { ResourceLoading } from "./resource-loading";
 import { resourceLoading } from "./resource-loading";
 
-/** フルリソース読み込みでのプリフェッチ対象パス */
-const PRE_FETCH_PATH_IDS: PathId[] = [
+/** フルリソース読み込みでプリロードする画像のID */
+const PRE_LOAD_IMAGE_PATH_IDS: PathId[] = [
   PathIds.NPC_COURSE_EASY_ICON,
   PathIds.NPC_COURSE_NORMAL_ICON,
   PathIds.NPC_COURSE_HARD_ICON,
@@ -67,7 +67,7 @@ export function fullResourceLoading(
   return resourceLoading({
     ...FULL_RESOURCE_CONFIGS,
     resourceRoot,
-    preFetchPaths: PRE_FETCH_PATH_IDS,
+    preLoadImages: PRE_LOAD_IMAGE_PATH_IDS,
   });
 }
 
@@ -82,7 +82,7 @@ export function developingFullResourceLoading(
   return resourceLoading({
     ...DEVELOPING_FULL_RESOURCE_CONFIGS,
     resourceRoot,
-    preFetchPaths: PRE_FETCH_PATH_IDS,
+    preLoadImages: PRE_LOAD_IMAGE_PATH_IDS,
   });
 }
 
@@ -104,7 +104,7 @@ function resourceDifferentialLoad(
   const loading = resourceLoading({
     ...differentialConfigs,
     resourceRoot: resources.rootPath,
-    preFetchPaths: PRE_FETCH_PATH_IDS,
+    preLoadImages: PRE_LOAD_IMAGE_PATH_IDS,
   });
   return {
     ...loading,
