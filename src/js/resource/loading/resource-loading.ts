@@ -63,9 +63,9 @@ function preLoad(src: string): void {
  * @return 読み込みPromiseをあつめたもの
  */
 function startLoading(params: ResourceLoadingParams): Loadings {
-  PathConfigs
-    .filter(v => params.preLoadImages.includes(v.id))
-    .forEach(v => preLoad(v.path(params.resourceRoot)));
+  PathConfigs.filter((v) => params.preLoadImages.includes(v.id)).forEach((v) =>
+    preLoad(v.path(params.resourceRoot)),
+  );
   return {
     gltfLoadings: params.gltfConfigs.map((v) =>
       loadGlTF(params.resourceRoot, v),
