@@ -21,7 +21,7 @@ import { TutorialPathConfigs } from "./tutorial";
 import { WingDozerPathConfigs } from "./wing-dozer";
 import { YuuyaPathConfigs } from "./yuuya";
 
-/** パス設定を集めたもの */
+/** すべてのパス設定をあつめたもの */
 export const PathConfigs: PathConfig[] = [
   ...TitleBackPathConfigs,
   ...LogoPathConfigs,
@@ -43,5 +43,11 @@ export const PathConfigs: PathConfig[] = [
   ...TutorialPathConfigs,
   ...BatteryIconPathConfigs,
   ...HelpIconPathConfigs,
+  ...MessageWindowPathConfigs,
+];
+
+/** プリロード対象となるパス設定 */
+export const PreLoadPathConfigs: PathConfig[] = [
+  ...NPCCoursePathConfigs,
   ...MessageWindowPathConfigs,
 ];
