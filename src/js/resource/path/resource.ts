@@ -9,7 +9,7 @@ export type PathConfig = {
   id: PathId;
   /**
    * パス生成関数
-   * @param basePath リソースフォルダのルート 
+   * @param basePath リソースフォルダのルート
    * @return 生成したパス
    */
   path: (basePath: ResourceRoot) => string;
