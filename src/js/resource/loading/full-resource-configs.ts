@@ -10,7 +10,6 @@ import { LoadingTargetConfigs } from "./resource-loading";
 
 /** フルリソースの設定 */
 export const FULL_RESOURCE_CONFIGS: LoadingTargetConfigs = {
-  // eslint-disable-next-line no-undef
   gltfConfigs: GLTF_CONFIGS,
   textureConfigs: TEXTURE_CONFIGS,
   cubeTextureConfigs: CUBE_TEXTURE_CONFIGS,
