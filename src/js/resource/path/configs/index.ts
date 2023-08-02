@@ -2,7 +2,7 @@ import { ShinyaPathConfigs } from "../../texture/configs/shinya";
 import { PathIds } from "../ids";
 import { PathConfig } from "../resource";
 import { CheckPathConfigs } from "./check";
-import { CloserPathConfig } from "./closer";
+import { DialogPathConfig } from "./dialog";
 import { EndingPathConfigs } from "./ending";
 import { GaiPathConfigs } from "./gai";
 import { GenesisBraverPathConfigs } from "./genesis-braver";
@@ -32,7 +32,7 @@ export const PathConfigs: PathConfig[] = [
   ...TsubasaPathConfigs,
   ...YuuyaPathConfigs,
   ...EndingPathConfigs,
-  ...CloserPathConfig,
+  ...DialogPathConfig,
   ...PlayInLandscapePathConfigs,
   ...CheckPathConfigs,
   {
