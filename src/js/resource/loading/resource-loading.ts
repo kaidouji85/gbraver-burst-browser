@@ -19,7 +19,7 @@ import type { TextureConfig, TextureResource } from "../texture/resource";
 import type { LoadingActions } from "./loading-actions";
 
 /** 読み込み対象となるリソースの設定をあつめたもの */
-export type LoadingTargets = {
+export type LoadingTargetConfigs = {
   /** 読み込むGLTFモデル */
   gltfConfigs: GlTFConfig[];
   /** 読み込むテクスチャ */
@@ -33,7 +33,7 @@ export type LoadingTargets = {
 };
 
 /** リソース読み込み開始パラメータ */
-type LoadingStartParams = LoadingTargets & {
+type LoadingStartParams = LoadingTargetConfigs & {
   /** リソースルート */
   resourceRoot: ResourceRoot;
   /** 

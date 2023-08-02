@@ -1,35 +1,21 @@
 import type { Resources } from "..";
-import type { CanvasImageConfig } from "../canvas-image";
 import { CANVAS_IMAGE_CONFIGS } from "../canvas-image";
-import type { CubeTextureConfig } from "../cube-texture";
 import { CUBE_TEXTURE_CONFIGS } from "../cube-texture";
-import type { GlTFConfig } from "../gltf";
 import { GLTF_CONFIGS } from "../gltf";
 import { PreLoadPathConfigs } from "../path/configs";
 import type { ResourceRoot } from "../resource-root";
-import type { SoundConfig } from "../sound";
 import { SOUND_CONFIGS } from "../sound";
 import {
   DEVELOPING_TEXTURE_CONFIGS,
   TEXTURE_CONFIGS,
 } from "../texture/configs";
-import type { TextureConfig } from "../texture/resource";
 import { extractUnloadedResourceConfigs } from "./extract-unloaded-resource-configs";
 import { mergeResources } from "./merge-resources";
-import type { ResourceLoading } from "./resource-loading";
+import type { LoadingTargetConfigs, ResourceLoading } from "./resource-loading";
 import { resourceLoading } from "./resource-loading";
 
-/** リソース設定をあつめたもの */
-type Configs = {
-  gltfConfigs: GlTFConfig[];
-  textureConfigs: TextureConfig[];
-  cubeTextureConfigs: CubeTextureConfig[];
-  canvasImageConfigs: CanvasImageConfig[];
-  soundConfigs: SoundConfig[];
-};
-
 /** フルリソースの設定 */
-const FULL_RESOURCE_CONFIGS: Configs = {
+const FULL_RESOURCE_CONFIGS: LoadingTargetConfigs = {
   gltfConfigs: GLTF_CONFIGS,
   textureConfigs: TEXTURE_CONFIGS,
   cubeTextureConfigs: CUBE_TEXTURE_CONFIGS,
@@ -38,7 +24,7 @@ const FULL_RESOURCE_CONFIGS: Configs = {
 };
 
 /** 開発中素材も含めたフルリソース設定 */
-const DEVELOPING_FULL_RESOURCE_CONFIGS: Configs = {
+const DEVELOPING_FULL_RESOURCE_CONFIGS: LoadingTargetConfigs = {
   gltfConfigs: GLTF_CONFIGS,
   textureConfigs: [...TEXTURE_CONFIGS, ...DEVELOPING_TEXTURE_CONFIGS],
   cubeTextureConfigs: CUBE_TEXTURE_CONFIGS,
@@ -85,7 +71,7 @@ export function developingFullResourceLoading(
  */
 function resourceDifferentialLoad(
   resources: Resources,
-  configs: Configs,
+  configs: LoadingTargetConfigs,
 ): ResourceLoading {
   const differentialConfigs = extractUnloadedResourceConfigs(
     configs,
