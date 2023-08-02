@@ -1,6 +1,7 @@
 import { ShinyaPathConfigs } from "../../texture/configs/shinya";
 import { PathIds } from "../ids";
 import { PathConfig } from "../resource";
+import { EndingPathConfigs } from "./ending";
 import { GaiPathConfigs } from "./gai";
 import { GenesisBraverPathConfigs } from "./genesis-braver";
 import { LightningDozerPathConfigs } from "./lightning-dozer";
@@ -27,14 +28,7 @@ export const PathConfigs: PathConfig[] = [
   ...RaitoPathConfigs,
   ...TsubasaPathConfigs,
   ...YuuyaPathConfigs,
-  {
-    id: PathIds.END,
-    path: (root) => `${root.get()}/ending/end.svg`,
-  },
-  {
-    id: PathIds.END_CARD,
-    path: (root) => `${root.get()}/ending/end-card.webp`,
-  },
+  ...EndingPathConfigs,
   {
     id: PathIds.CLOSER,
     path: (root) => `${root.get()}/dialog/closer.svg`,
