@@ -1,6 +1,6 @@
 import { ROOT_CLASS as MESSAGE_WINDOW_ROOT } from "../../../game-dom/message-window/dom/class-name";
 import { Resources } from "../../../resource";
-import { PathIds } from "../../../resource/path";
+import { PathIds } from "../../../resource/path/ids";
 import template from "./attack-battery-caption-inner-html.hbs";
 
 /**

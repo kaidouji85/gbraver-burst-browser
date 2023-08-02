@@ -1,64 +1,5 @@
-import type { ResourceRoot } from "./resource-root";
-
-/** パス ID */
-export type PathId = string;
-
-/** パス設定 */
-export type PathConfig = {
-  id: PathId;
-  path: (basePath: ResourceRoot) => string;
-};
-
-/** パス */
-export type Path = {
-  id: PathId;
-  path: string;
-};
-
-/** パスIDを集めたもの */
-export const PathIds = {
-  TITLE_BACK: "TITLE_BACK",
-  LOGO: "LOGO",
-  SHIN_BRAVER_ICON: "SHIN_BRAVER_ICON",
-  SHIN_BRAVER_BUST_SHOT: "SHIN_BRAVER_BUST_SHOT",
-  SHIN_BRAVER_STAND: "SHIN_BRAVER_STAND",
-  NEO_LANDOZER_ICON: "NEO_LANDOZER_ICON",
-  NEO_LANDOZER_BUST_SHOT: "NEO_LANDOZER_BUST_SHOT",
-  LIGHTNING_DOZER_ICON: "LIGHTNING_DOZER_ICON",
-  LIGHTNING_DOZER_BUST_SHOT: "LIGHTNING_DOZER_BUST_SHOT",
-  WING_DOZER_ICON: "WING_DOZER_ICON",
-  WING_DOZER_BUST_SHOT: "WING_DOZER_BUST_SHOT",
-  GENESIS_BRAVER_BUST_SHOT: "GENESIS_BRAVER_BUST_SHOT",
-  GENESIS_BRAVER_ICON: "GENESIS_BRAVER_ICON",
-  SHINYA_ICON: "SHINYA_ICON",
-  SHINYA_SKILL_CUTIN: "SHINYA_SKILL_CUTIN",
-  GAI_ICON: "GAI_ICON",
-  GAI_SKILL_CUTIN: "GAI_SKILL_CUTIN",
-  RAITO_ICON: "RAITO_ICON",
-  RAITO_SKILL_CUTIN: "RAITO_SKILL_CUTIN",
-  TSUBASA_SKILL_CUTIN: "TSUBASA_SKILL_CUTIN",
-  TSUBASA_ICON: "TSUBASA_ICON",
-  YUUYA_SKILL_CUTIN: "YUUYA_SKILL_CUTIN",
-  YUUYA_ICON: "YUUYA_ICON",
-  END: "END",
-  END_CARD: "END_CARD",
-  CLOSER: "CLOSER",
-  PLAY_IN_LANDSCAPE: "PLAY_IN_LANDSCAPE",
-  CHECK: "CHECK",
-  NPC_COURSE_EASY_ICON: "NPC_COURSE_EASY_ICON",
-  NPC_COURSE_NORMAL_ICON: "NPC_COURSE_NORMAL_ICON",
-  NPC_COURSE_HARD_ICON: "NPC_COURSE_HARD_ICON",
-  NPC_COURSE_VERY_HARD_ICON: "NPC_COURSE_VERY_HARD_ICON",
-  TUTORIAL_IMAGE_CUT_01: "TUTORIAL_IMAGE_CUT_01",
-  TUTORIAL_IMAGE_CUT_02: "TUTORIAL_IMAGE_CUT_02",
-  TUTORIAL_IMAGE_CUT_03: "TUTORIAL_IMAGE_CUT_03",
-  BATTERY_ICON: "BATTERY_ICON",
-  HELP_ICON: "HELP_ICON",
-  MESSAGE_WINDOW_ATTACK_BATTERY: "MESSAGE_WINDOW_ATTACK_BATTERY",
-  MESSAGE_WINDOW_DEFENSE_BATTERY: "MESSAGE_WINDOW_DEFENSE_BATTERY",
-  MESSAGE_WINDOW_PLUS_BATTERY: "MESSAGE_WINDOW_PLUS_BATTERY",
-  MESSAGE_WINDOW_MINUS_BATTERY: "MESSAGE_WINDOW_MINUS_BATTERY",
-};
+import { PathIds } from "./ids";
+import { PathConfig } from "./resource";
 
 /** パス設定を集めたもの */
 export const PathConfigs: PathConfig[] = [
@@ -227,25 +168,3 @@ export const PathConfigs: PathConfig[] = [
     path: (root) => `${root.get()}/message-window/minus-battery.webp`,
   },
 ];
-
-/**
- * パス設定をパスに変換する
- * @param config 設定
- * @param resourceRoot リソースルート
- * @return パス
- */
-export function toPath(config: PathConfig, resourceRoot: ResourceRoot): Path {
-  return {
-    id: config.id,
-    path: config.path(resourceRoot),
-  };
-}
-
-/**
- * 全てのパスを取得する
- * @param resourceRoot リソースルート
- * @return 全てのパス
- */
-export function getAllPaths(resourceRoot: ResourceRoot): Path[] {
-  return PathConfigs.map((config) => toPath(config, resourceRoot));
-}

@@ -1,5 +1,5 @@
 import type { Resources } from "../../../resource";
-import { PathIds } from "../../../resource/path";
+import { PathIds } from "../../../resource/path/ids";
 
 /** ルート要素class属性 */
 const ROOT_CLASS = "play-in-landscape";
