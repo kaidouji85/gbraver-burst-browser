@@ -1,6 +1,7 @@
 import { PathIds } from "../ids";
 import { PathConfig } from "../resource";
 import { LogoPathConfigs } from "./logo";
+import { NeoLandozerPathConfigs } from "./neo-landozer";
 import { ShinBraverPathConfigs } from "./shin-braver";
 import { TitleBackPathConfigs } from "./title-back";
 
@@ -9,14 +10,7 @@ export const PathConfigs: PathConfig[] = [
   ...TitleBackPathConfigs,
   ...LogoPathConfigs,
   ...ShinBraverPathConfigs,
-  {
-    id: PathIds.NEO_LANDOZER_ICON,
-    path: (root) => `${root.get()}/armdozer/neo-landozer/player-select.webp`,
-  },
-  {
-    id: PathIds.NEO_LANDOZER_BUST_SHOT,
-    path: (root) => `${root.get()}/armdozer/neo-landozer/bust-shot.webp`,
-  },
+  ...NeoLandozerPathConfigs,
   {
     id: PathIds.LIGHTNING_DOZER_ICON,
     path: (root) => `${root.get()}/armdozer/lightning-dozer/player-select.webp`,
