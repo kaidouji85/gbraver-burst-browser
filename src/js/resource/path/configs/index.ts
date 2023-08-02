@@ -1,6 +1,7 @@
 import { ShinyaPathConfigs } from "../../texture/configs/shinya";
 import { PathIds } from "../ids";
 import { PathConfig } from "../resource";
+import { CloserPathConfig } from "./closer";
 import { EndingPathConfigs } from "./ending";
 import { GaiPathConfigs } from "./gai";
 import { GenesisBraverPathConfigs } from "./genesis-braver";
@@ -29,10 +30,7 @@ export const PathConfigs: PathConfig[] = [
   ...TsubasaPathConfigs,
   ...YuuyaPathConfigs,
   ...EndingPathConfigs,
-  {
-    id: PathIds.CLOSER,
-    path: (root) => `${root.get()}/dialog/closer.svg`,
-  },
+  ...CloserPathConfig,
   {
     id: PathIds.PLAY_IN_LANDSCAPE,
     path: (root) => `${root.get()}/waring/play-in-landscape.webp`,
