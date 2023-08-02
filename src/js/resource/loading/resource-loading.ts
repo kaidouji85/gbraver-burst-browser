@@ -36,8 +36,8 @@ type ResourceLoadingParams = {
   soundConfigs: SoundConfig[];
 };
 
-/** リソース読み込み情報 */
-type Loadings = {
+/** リソース読み込みPromise */
+type LoadingPromises = {
   /** GLTFモデル読み込みPromise */
   gltfLoadings: Promise<GlTFResource>[];
   /** テクスチャ読み込みPromise */
@@ -55,7 +55,7 @@ type Loadings = {
  * @param params パラメータ
  * @return リソース読み込み情報
  */
-function startLoading(params: ResourceLoadingParams): Loadings {
+function startLoading(params: ResourceLoadingParams): LoadingPromises {
   params.preLoadImages
     .map((v) => toPath(v, params.resourceRoot))
     .forEach((v) => preLoadImage(v));
@@ -83,7 +83,7 @@ function startLoading(params: ResourceLoadingParams): Loadings {
  * @param loadings 読み込みPromise
  * @return 生成結果
  */
-function createLoadingActions(loadings: Loadings): Observable<LoadingActions> {
+function createLoadingActions(loadings: LoadingPromises): Observable<LoadingActions> {
   const loadingActions = new Subject<LoadingActions>();
   const allLoadings = [
     ...loadings.gltfLoadings,
@@ -113,7 +113,7 @@ function createLoadingActions(loadings: Loadings): Observable<LoadingActions> {
  * @return 生成結果
  */
 async function createResources(
-  loading: Loadings,
+  loading: LoadingPromises,
   resourceRoot: ResourceRoot,
 ): Promise<Resources> {
   const [gltfs, textures, cubeTextures, canvasImages, sounds] =
