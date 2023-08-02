@@ -50,6 +50,7 @@ type Loadings = {
 };
 
 /**
+ * @deprecated
  * 画像をプリロードする
  * @param src 画像のパス
  */
