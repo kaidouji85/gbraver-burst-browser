@@ -8,6 +8,7 @@ import { GenesisBraverPathConfigs } from "./genesis-braver";
 import { LightningDozerPathConfigs } from "./lightning-dozer";
 import { LogoPathConfigs } from "./logo";
 import { NeoLandozerPathConfigs } from "./neo-landozer";
+import { PlayInLandscapePathConfigs } from "./play-in-landscape";
 import { RaitoPathConfigs } from "./raito";
 import { ShinBraverPathConfigs } from "./shin-braver";
 import { TitleBackPathConfigs } from "./title-back";
@@ -31,10 +32,7 @@ export const PathConfigs: PathConfig[] = [
   ...YuuyaPathConfigs,
   ...EndingPathConfigs,
   ...CloserPathConfig,
-  {
-    id: PathIds.PLAY_IN_LANDSCAPE,
-    path: (root) => `${root.get()}/waring/play-in-landscape.webp`,
-  },
+  ...PlayInLandscapePathConfigs,
   {
     id: PathIds.CHECK,
     path: (root) => `${root.get()}/check/check.webp`,
