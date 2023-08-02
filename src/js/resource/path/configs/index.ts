@@ -7,6 +7,7 @@ import { DialogPathConfig } from "./dialog";
 import { EndingPathConfigs } from "./ending";
 import { GaiPathConfigs } from "./gai";
 import { GenesisBraverPathConfigs } from "./genesis-braver";
+import { HelpIconPathConfigs } from "./help-icon";
 import { LightningDozerPathConfigs } from "./lightning-dozer";
 import { LogoPathConfigs } from "./logo";
 import { NeoLandozerPathConfigs } from "./neo-landozer";
@@ -41,10 +42,7 @@ export const PathConfigs: PathConfig[] = [
   ...NPCCoursePathConfigs,
   ...TutorialPathConfigs,
   ...BatteryIconPathConfigs,
-  {
-    id: PathIds.HELP_ICON,
-    path: (root) => `${root.get()}/help-icon.svg`,
-  },
+  ...HelpIconPathConfigs,
   {
     id: PathIds.MESSAGE_WINDOW_ATTACK_BATTERY,
     path: (root) => `${root.get()}/message-window/attack-battery.webp`,
