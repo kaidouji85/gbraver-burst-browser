@@ -57,7 +57,7 @@ type Loadings = {
  */
 function startLoading(params: ResourceLoadingParams): Loadings {
   params.preLoadImages
-    .map(v => toPath(v, params.resourceRoot))
+    .map((v) => toPath(v, params.resourceRoot))
     .forEach((v) => preLoadImage(v));
   return {
     gltfLoadings: params.gltfConfigs.map((v) =>
