@@ -5,8 +5,7 @@ import type { CubeTextureConfig } from "../cube-texture";
 import { CUBE_TEXTURE_CONFIGS } from "../cube-texture";
 import type { GlTFConfig } from "../gltf";
 import { GLTF_CONFIGS } from "../gltf";
-import { PathIds } from "../path/ids";
-import { PathId } from "../path/resource";
+import { PreLoadPathConfigs } from "../path/configs";
 import type { ResourceRoot } from "../resource-root";
 import type { SoundConfig } from "../sound";
 import { SOUND_CONFIGS } from "../sound";
@@ -19,15 +18,6 @@ import { extractUnloadedResourceConfigs } from "./extract-unloaded-resource-conf
 import { mergeResources } from "./merge-resources";
 import type { ResourceLoading } from "./resource-loading";
 import { resourceLoading } from "./resource-loading";
-
-/** フルリソース読み込みでプリロードする画像のID */
-const PRE_LOAD_IMAGE_PATH_IDS: PathId[] = [
-  PathIds.NPC_COURSE_EASY_ICON,
-  PathIds.NPC_COURSE_NORMAL_ICON,
-  PathIds.NPC_COURSE_HARD_ICON,
-  PathIds.NPC_COURSE_VERY_HARD_ICON,
-  PathIds.CLOSER,
-];
 
 /** リソース設定をあつめたもの */
 type Configs = {
@@ -67,7 +57,7 @@ export function fullResourceLoading(
   return resourceLoading({
     ...FULL_RESOURCE_CONFIGS,
     resourceRoot,
-    preLoadImages: PRE_LOAD_IMAGE_PATH_IDS,
+    preLoadImages: PreLoadPathConfigs,
   });
 }
 
@@ -82,7 +72,7 @@ export function developingFullResourceLoading(
   return resourceLoading({
     ...DEVELOPING_FULL_RESOURCE_CONFIGS,
     resourceRoot,
-    preLoadImages: PRE_LOAD_IMAGE_PATH_IDS,
+    preLoadImages: PreLoadPathConfigs,
   });
 }
 
@@ -104,7 +94,7 @@ function resourceDifferentialLoad(
   const loading = resourceLoading({
     ...differentialConfigs,
     resourceRoot: resources.rootPath,
-    preLoadImages: PRE_LOAD_IMAGE_PATH_IDS,
+    preLoadImages: PreLoadPathConfigs,
   });
   return {
     ...loading,
