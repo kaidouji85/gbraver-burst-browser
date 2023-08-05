@@ -1,7 +1,7 @@
 import type { CanvasImageResource } from "./canvas-image";
 import type { CubeTextureResource } from "./cube-texture";
 import type { GlTFResource } from "./gltf";
-import type { Path } from "./path";
+import type { Path } from "./path/resource";
 import type { ResourceRoot } from "./resource-root";
 import type { SoundResource } from "./sound";
 import type { TextureResource } from "./texture/resource";

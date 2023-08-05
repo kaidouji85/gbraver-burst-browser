@@ -1,4 +1,4 @@
-import { StageTitle } from "../../dom-scenes/stage-title/stage-title";
+import { StageTitle } from "../../dom-scenes/stage-title";
 import type { DOMSceneActionConnector } from "../dom-scene-binder/dom-scene-action-connector";
 
 /** アクションコネクタのデータ型 */

@@ -3,6 +3,7 @@ import type {
   CommandCanceled,
 } from "../../../td-scenes/battle/custom-battle-event";
 import { focusOutBurstButton, isBurstButtonFocused } from "../../focus";
+import { ZeroDefenseTutorialProps } from "../props";
 import type { ZeroDefenseTutorialState } from "../state";
 
 /** イベント終了情報 */
@@ -16,17 +17,15 @@ type Ret = {
 /**
  * バーストコマンド選択イベント
  * @param props イベントプロパティ
- * @param state ステート
  * @return コマンドキャンセル情報
  */
 export async function onBurstCommandSelected(
-  props: BurstCommandSelected,
-  state: ZeroDefenseTutorialState,
+  props: Readonly<BurstCommandSelected & ZeroDefenseTutorialProps>,
 ): Promise<Ret> {
   if (isBurstButtonFocused(props)) {
     focusOutBurstButton(props);
     return {
-      state,
+      state: props.state,
       cancel: {
         isCommandCanceled: false,
       },
@@ -34,7 +33,7 @@ export async function onBurstCommandSelected(
   }
 
   return {
-    state,
+    state: props.state,
     cancel: {
       isCommandCanceled: false,
     },

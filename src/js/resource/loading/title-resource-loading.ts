@@ -24,7 +24,7 @@ export function titleResourceLoading(
   );
   return resourceLoading({
     resourceRoot,
-    preFetchPaths: [],
+    preLoadImages: [],
     gltfConfigs: [],
     textureConfigs: [],
     cubeTextureConfigs: [],

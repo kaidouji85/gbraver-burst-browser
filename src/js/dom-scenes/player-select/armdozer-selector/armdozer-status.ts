@@ -2,7 +2,7 @@ import type { ArmDozerId } from "gbraver-burst-core";
 import { ArmDozers } from "gbraver-burst-core";
 
 import { Resources } from "../../../resource";
-import { PathIds } from "../../../resource/path";
+import { PathIds } from "../../../resource/path/ids";
 import { domUuid } from "../../../uuid/dom-uuid";
 import { burstDetail } from "./burst-detail";
 import { burstOverview } from "./burst-overview";

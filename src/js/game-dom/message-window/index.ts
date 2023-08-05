@@ -4,6 +4,7 @@ import { face } from "./procedure/face";
 import { faceVisible } from "./procedure/face-visible";
 import { lighten } from "./procedure/lighten";
 import { messages } from "./procedure/messages";
+import { messagesInInnerHtml } from "./procedure/messages-in-inner-html";
 import { nextMessageIconVisible } from "./procedure/next-message-icon-visible";
 import { scrollUp } from "./procedure/scroll-up";
 import { visible } from "./procedure/visible";
@@ -52,6 +53,14 @@ export class MessageWindow {
    */
   messages(values: string[]): void {
     messages(this.#props, values);
+  }
+
+  /**
+   * メッセージをinnerHTMLで指定する
+   * @param innerHTML 指定するHTML
+   */
+  messagesInInnerHTML(innerHTML: string): void {
+    messagesInInnerHtml(this.#props, innerHTML);
   }
 
   /**

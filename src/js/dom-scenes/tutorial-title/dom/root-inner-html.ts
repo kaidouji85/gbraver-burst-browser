@@ -1,5 +1,5 @@
 import type { Resources } from "../../../resource";
-import { PathIds } from "../../../resource/path";
+import { PathIds } from "../../../resource/path/ids";
 import { ROOT_CLASS } from "./class-name";
 import type { DataIDs } from "./data-ids";
 

@@ -11,14 +11,11 @@ import {
   focusInBurstButton,
   focusInPilotButton,
   focusOutBatterySelector,
-  isBatterySelecterFocused,
+  isBatterySelectorFocused,
 } from "../../focus";
 import { refreshConversation } from "../../invisible-all-message-windows";
-import {
-  burstCaption,
-  defenseBatteryCaption,
-  pilotSkillCaption,
-} from "../captions";
+import { burstCaption, pilotSkillCaption } from "../captions";
+import { BatterySystemTutorialProps } from "../props";
 import type { BatterySystemTutorialState } from "../state";
 import {
   cancelZeroBatteryDefense,
@@ -31,24 +28,25 @@ import {
 type Ret = {
   /** ステート更新結果 */
   state: BatterySystemTutorialState;
-
   /** コマンドキャンセル情報 */
   cancel: CommandCanceled;
 };
 
+/** ゼロ防御した時の処理 パラメータ */
+type OnZeroDefenseParams = {
+  /** イベントプロパティ */
+  props: Readonly<CustomBattleEventProps & BatterySystemTutorialProps>;
+  /** プレイヤー情報 */
+  player: PlayerState;
+};
+
 /**
  * ゼロ防御した時の処理
- *
- * @param props イベントプロパティ
- * @param state ステート
- * @param player プレイヤー情報
+ * @param params パラメータ
  * @return 終了情報
  */
-async function onZeroDefense(
-  props: Readonly<CustomBattleEventProps>,
-  state: BatterySystemTutorialState,
-  player: PlayerState,
-): Promise<Ret> {
+async function onZeroDefense(params: OnZeroDefenseParams): Promise<Ret> {
+  const { props, player } = params;
   const isZeroBattery = player.armdozer.battery === 0;
   const enableBurst = player.armdozer.enableBurst;
   const enablePilotSkill = player.pilot.enableSkill;
@@ -57,7 +55,7 @@ async function onZeroDefense(
     await zeroBatteryDefenseBecauseNoBatteryRecover(props);
     refreshConversation(props);
     return {
-      state,
+      state: props.state,
       cancel: {
         isCommandCanceled: false,
       },
@@ -69,7 +67,7 @@ async function onZeroDefense(
     refreshConversation(props);
     await focusInPilotButton(props, pilotSkillCaption);
     return {
-      state,
+      state: props.state,
       cancel: {
         isCommandCanceled: true,
       },
@@ -82,7 +80,7 @@ async function onZeroDefense(
     unattentionBurstButton(props);
     await focusInBurstButton(props, burstCaption);
     return {
-      state,
+      state: props.state,
       cancel: {
         isCommandCanceled: true,
       },
@@ -92,12 +90,15 @@ async function onZeroDefense(
   props.view.hud.gameObjects.batterySelector.toBatterySilently(1);
   await cancelZeroBatteryDefense(props);
   refreshConversation(props);
-  if (isBatterySelecterFocused(props)) {
-    await focusInBatterySelector(props, defenseBatteryCaption);
+  if (isBatterySelectorFocused(props)) {
+    await focusInBatterySelector(props);
+    props.view.dom.nearBatterySelectorMessageWindow.messagesInInnerHTML(
+      props.defenseBatteryCaption,
+    );
   }
 
   return {
-    state,
+    state: props.state,
     cancel: {
       isCommandCanceled: true,
     },
@@ -106,14 +107,11 @@ async function onZeroDefense(
 
 /**
  * バッテリーコマンド選択イベント
- *
  * @param props イベントプロパティ
- * @param state ステート
  * @return 終了情報
  */
 export async function onBatteryCommandSelected(
-  props: Readonly<BatteryCommandSelected>,
-  state: BatterySystemTutorialState,
+  props: Readonly<BatteryCommandSelected & BatterySystemTutorialProps>,
 ): Promise<Ret> {
   const foundLastState = props.stateHistory[props.stateHistory.length - 1];
   const foundPlayer = (foundLastState?.players ?? []).find(
@@ -125,15 +123,18 @@ export async function onBatteryCommandSelected(
     const player: PlayerState = foundPlayer;
     const isEnemyTurn = lastState.activePlayerId !== props.playerId;
     if (isEnemyTurn) {
-      return await onZeroDefense(props, state, player);
+      return await onZeroDefense({
+        props,
+        player,
+      });
     }
   }
 
-  if (isBatterySelecterFocused(props)) {
+  if (isBatterySelectorFocused(props)) {
     focusOutBatterySelector(props);
   }
   return {
-    state,
+    state: props.state,
     cancel: {
       isCommandCanceled: false,
     },

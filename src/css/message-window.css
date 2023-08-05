@@ -86,8 +86,14 @@
     overflow: hidden;
   }
 
-  .message-window__paragraph {
+  .message-window__paragraph,
+  .message-window__paragraph--align-center {
     font-size: var(--responsive-font-size);
+  }
+
+  .message-window__paragraph--align-center {
+    display: flex;
+    align-items: center;
   }
 
   .message-window__next-message-icon {
@@ -111,6 +117,24 @@
     100% {
       transform: translateY(10%);
     }
+  }
+
+  .message-window__minus-battery,
+  .message-window__plus-battery {
+    --size: calc(var(--responsive-font-size) * 2);
+
+    width: var(--size);
+    height: var(--size);
+    margin: calc(var(--responsive-font-size) * 0.2);
+  }
+
+  .message-window__attack-battery,
+  .message-window__defense-battery {
+    --size: calc(var(--responsive-font-size) * 4);
+
+    width: var(--size);
+    height: var(--size);
+    margin: calc(var(--responsive-font-size) * 0.2);
   }
 }
 

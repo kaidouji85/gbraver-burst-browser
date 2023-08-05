@@ -2,6 +2,7 @@ import {
   BatteryCommandSelected,
   CommandCanceled,
 } from "../../../td-scenes/battle/custom-battle-event";
+import { PilotSkillTutorial02Props } from "../props";
 import { PilotSkillTutorial02State } from "../state";
 import { lessThanAttack3 } from "../stories/less-than-attack3";
 import { noZeroDefense } from "../stories/no-zero-defense";
@@ -41,12 +42,10 @@ async function executeNoZeroDefenseIfNeeded(
 /**
  * 条件を満たした場合「3未満攻撃だと警告」を再生する
  * @param props イベントプロパティ
- * @param state イベントステート
  * @return 再生した否か、trueで再生した
  */
 async function executeLessThanAttack3IfNeeded(
-  props: Readonly<BatteryCommandSelected>,
-  state: Readonly<PilotSkillTutorial02State>,
+  props: Readonly<BatteryCommandSelected & PilotSkillTutorial02Props>,
 ): Promise<boolean> {
   const lastState = props.stateHistory[props.stateHistory.length - 1];
   if (!lastState) {
@@ -62,7 +61,7 @@ async function executeLessThanAttack3IfNeeded(
   if (
     isPlayerTurn &&
     3 <= player.armdozer.battery &&
-    state.isShouldAttack5OrMoreComplete &&
+    props.state.isShouldAttack5OrMoreComplete &&
     props.battery.battery < 3
   ) {
     props.view.hud.gameObjects.batterySelector.toBatterySilently(3);
@@ -84,30 +83,25 @@ type Ret = {
 /**
  * バッテリーコマンド選択イベント
  * @param props イベントプロパティ
- * @param state イベントステート
  * @return イベント終了情報
  */
 export async function onBatteryCommandSelected(
-  props: Readonly<BatteryCommandSelected>,
-  state: Readonly<PilotSkillTutorial02State>,
+  props: Readonly<BatteryCommandSelected & PilotSkillTutorial02Props>,
 ): Promise<Ret> {
   const isNoZeroDefenseExecuted = await executeNoZeroDefenseIfNeeded(props);
   if (isNoZeroDefenseExecuted) {
     return {
-      state,
+      state: props.state,
       cancel: {
         isCommandCanceled: true,
       },
     };
   }
 
-  const isLessThanAttack3Executed = await executeLessThanAttack3IfNeeded(
-    props,
-    state,
-  );
+  const isLessThanAttack3Executed = await executeLessThanAttack3IfNeeded(props);
   if (isLessThanAttack3Executed) {
     return {
-      state,
+      state: props.state,
       cancel: {
         isCommandCanceled: true,
       },
@@ -115,7 +109,7 @@ export async function onBatteryCommandSelected(
   }
 
   return {
-    state,
+    state: props.state,
     cancel: {
       isCommandCanceled: false,
     },

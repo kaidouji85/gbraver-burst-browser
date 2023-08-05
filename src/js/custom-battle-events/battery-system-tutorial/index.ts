@@ -1,3 +1,4 @@
+import { Resources } from "../../resource";
 import type {
   BatteryCommandSelected,
   BurstCommandSelected,
@@ -13,44 +14,55 @@ import { onBatteryCommandSelected } from "./listeners/on-battery-command-selecte
 import { onBurstCommandSelected } from "./listeners/on-burst-command-selected";
 import { onLastState } from "./listeners/on-last-state";
 import { onPilotSkillCommandSelected } from "./listeners/on-pilot-skill-command-selected";
-import type { BatterySystemTutorialState } from "./state";
+import {
+  BatterySystemTutorialProps,
+  createBatterySystemTutorialProps,
+} from "./props";
 
 /** バッテリーシステムチュートリアル用のカスタムバトルイベント */
 class BatterySystemTutorialEvent extends EmptyCustomBattleEvent {
-  /** チュートリアルのステート */
-  state: BatterySystemTutorialState;
+  /** プロパティ */
+  props: BatterySystemTutorialProps;
 
   /**
    * コンストラクタ
+   * @param resources リソース管理オブジェクト
    */
-  constructor() {
+  constructor(resources: Resources) {
     super();
-    this.state = {
-      isBatterySystemDescriptionComplete: false,
-    };
+    this.props = createBatterySystemTutorialProps(resources);
   }
 
   /** @override */
   async beforeLastState(props: LastState): Promise<void> {
-    this.state = await beforeLastState(props, this.state);
+    this.props.state = await beforeLastState({ ...props, ...this.props });
   }
 
   /** @override */
   async onLastState(props: LastState): Promise<void> {
-    this.state = await onLastState(props, this.state);
+    this.props.state = await onLastState({
+      ...props,
+      ...this.props,
+    });
   }
 
   /** @override */
   async afterLastState(props: LastState): Promise<void> {
-    this.state = await afterLastState(props, this.state);
+    this.props.state = await afterLastState({
+      ...props,
+      ...this.props,
+    });
   }
 
   /** @override */
   async onBatteryCommandSelected(
     props: BatteryCommandSelected,
   ): Promise<CommandCanceled> {
-    const { state, cancel } = await onBatteryCommandSelected(props, this.state);
-    this.state = state;
+    const { state, cancel } = await onBatteryCommandSelected({
+      ...props,
+      ...this.props,
+    });
+    this.props.state = state;
     return cancel;
   }
 
@@ -58,8 +70,11 @@ class BatterySystemTutorialEvent extends EmptyCustomBattleEvent {
   async onBurstCommandSelected(
     props: BurstCommandSelected,
   ): Promise<CommandCanceled> {
-    const { state, cancel } = await onBurstCommandSelected(props, this.state);
-    this.state = state;
+    const { state, cancel } = await onBurstCommandSelected({
+      ...props,
+      ...this.props,
+    });
+    this.props.state = state;
     return cancel;
   }
 
@@ -67,19 +82,22 @@ class BatterySystemTutorialEvent extends EmptyCustomBattleEvent {
   async onPilotSkillCommandSelected(
     props: PilotSkillCommandSelected,
   ): Promise<CommandCanceled> {
-    const { state, cancel } = await onPilotSkillCommandSelected(
-      props,
-      this.state,
-    );
-    this.state = state;
+    const { state, cancel } = await onPilotSkillCommandSelected({
+      ...props,
+      ...this.props,
+    });
+    this.props.state = state;
     return cancel;
   }
 }
 
 /**
  * バッテリーシステムチュートリアル用のカスタバトルイベントを生成する
+ * @param resources リソース管理オブジェクト
  * @return 生成したカスタムバトルイベント
  */
-export function createBatterySystemTutorialEvent(): CustomBattleEvent {
-  return new BatterySystemTutorialEvent();
+export function createBatterySystemTutorialEvent(
+  resources: Resources,
+): CustomBattleEvent {
+  return new BatterySystemTutorialEvent(resources);
 }
