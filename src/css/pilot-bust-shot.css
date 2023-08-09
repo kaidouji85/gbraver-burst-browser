@@ -49,8 +49,8 @@
   --height: var(--width);
 
   position: absolute;
-  left: calc(100vw - var(--width) * 0.9 - var(--safe-area-right));
-  top: calc(100 * var(--vh) - var(--height) * 0.9);
+  left: calc(100vw - var(--width) * 0.95 - var(--safe-area-right));
+  top: calc(100 * var(--vh) - var(--height) * 0.82);
   width: var(--width);
   height: var(--height);
 }
