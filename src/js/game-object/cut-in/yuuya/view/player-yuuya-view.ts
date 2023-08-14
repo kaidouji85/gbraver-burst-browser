@@ -19,7 +19,7 @@ export const MAX_ANIMATION = 1;
 export const PADDING_RIGHT = 200;
 
 /** 上パディング */
-export const PADDING_TOP = 0;
+export const PADDING_TOP = 20;
 
 /** プレイヤー側 ユウヤ ビュー */
 export class PlayerYuuyaView implements YuuyaView {
