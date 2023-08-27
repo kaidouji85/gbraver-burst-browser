@@ -7,28 +7,6 @@ import type {
 } from "gbraver-burst-core";
 
 /**
- * パイロットスキル概要
- * @param skill スキル情報
- * @return 説明文
- */
-export function pilotSkillOverview(skill: PilotSkill): string {
-  switch (skill.type) {
-    case "RecoverBatterySkill":
-      return recoverBatterySkill(skill);
-    case "BuffPowerSkill":
-      return buffPowerSkill(skill);
-    case "BatteryEnchantmentSkill":
-      return batteryEnchantmentSkill(skill);
-    case "DamageHalvedSkill":
-      return damageHalvedSkill();
-    case "BatteryBoostSkill":
-      return batteryBoostSkill(skill);
-    default:
-      return "";
-  }
-}
-
-/**
  * バッテリー回復概要
  * @param skill スキル情報
  * @return 説明文
@@ -69,5 +47,27 @@ function damageHalvedSkill(): string {
  * @return 説明文
  */
 function batteryBoostSkill(skill: BatteryBoostSkill): string {
-  return `バッテリー${skill.recoverBattery}回復、次の自分ターン開始時にバッテリー回復しない`;
+  return `バッテリー${skill.recoverBattery}回復、ターン開始のバッテリー回復をスキップ`;
+}
+
+/**
+ * パイロットスキル概要
+ * @param skill スキル情報
+ * @return 説明文
+ */
+export function pilotSkillOverview(skill: PilotSkill): string {
+  switch (skill.type) {
+    case "RecoverBatterySkill":
+      return recoverBatterySkill(skill);
+    case "BuffPowerSkill":
+      return buffPowerSkill(skill);
+    case "BatteryEnchantmentSkill":
+      return batteryEnchantmentSkill(skill);
+    case "DamageHalvedSkill":
+      return damageHalvedSkill();
+    case "BatteryBoostSkill":
+      return batteryBoostSkill(skill);
+    default:
+      return "";
+  }
 }
