@@ -1,6 +1,6 @@
-import type { GbraverBurstBrowserConfig } from "../browser-config";
+import type { GBraverBurstBrowserConfig } from "../browser-config";
 import { parseBrowserConfig } from "../parser/browser-config";
-import { GbraverBurstBrowserConfigRepository } from "./repository";
+import { GBraverBurstBrowserConfigRepository } from "./repository";
 
 /** 設定項目名とLocalStorageキーのマッピング */
 const Keys = {
@@ -22,10 +22,10 @@ const Keys = {
 
 /** ブラウザ設定リポジトリのLocalStorage実装 */
 class LocalStorageConfigRepository
-  implements GbraverBurstBrowserConfigRepository
+  implements GBraverBurstBrowserConfigRepository
 {
   /** @override */
-  async save(config: GbraverBurstBrowserConfig): Promise<void> {
+  async save(config: GBraverBurstBrowserConfig): Promise<void> {
     localStorage.setItem(Keys.WebGLPixelRatio, `${config.webGLPixelRatio}`);
     localStorage.setItem(
       Keys.BattleAnimationTimeScale,
@@ -40,7 +40,7 @@ class LocalStorageConfigRepository
   }
 
   /** @override */
-  async load(): Promise<GbraverBurstBrowserConfig> {
+  async load(): Promise<GBraverBurstBrowserConfig> {
     return parseBrowserConfig({
       webGLPixelRatio: localStorage.getItem(Keys.WebGLPixelRatio),
       battleAnimationTimeScale: localStorage.getItem(
@@ -57,6 +57,6 @@ class LocalStorageConfigRepository
  * ブラウザ設定リポジトリLocalStorage実装を生成する
  * @return 生成結果
  */
-export function createLocalStorageConfigRepository(): GbraverBurstBrowserConfigRepository {
+export function createLocalStorageConfigRepository(): GBraverBurstBrowserConfigRepository {
   return new LocalStorageConfigRepository();
 }

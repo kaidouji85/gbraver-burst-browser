@@ -17,7 +17,7 @@ import { pushWindowsStream } from "../window/push-window";
 import type { Resize } from "../window/resize";
 import { resizeStream } from "../window/resize";
 import { postBattleConnector } from "./action-connector/post-battle-connector";
-import { GbraverBurstBrowserConfigRepository } from "./config/repository/repository";
+import { GBraverBurstBrowserConfigRepository } from "./config/repository/repository";
 import { DOMDialogBinder } from "./dom-dialog-binder";
 import { DOMFloaters } from "./dom-floaters/dom-floaters";
 import { DOMSceneBinder } from "./dom-scene-binder";
@@ -50,7 +50,7 @@ export interface GameProps {
   /** APIサーバのSDK */
   api: BrowserSDK;
   /** ブラウザ設定リポジトリ */
-  config: GbraverBurstBrowserConfigRepository;
+  config: GBraverBurstBrowserConfigRepository;
   /** バトル強制終了監視 */
   suddenlyBattleEnd: FutureSuddenlyBattleEnd;
   /** リサイズ */
@@ -118,7 +118,7 @@ export type GamePropsGeneratorParam = {
   /** APIサーバのSDK */
   api: BrowserSDK;
   /** ブラウザ設定リポジトリ */
-  config: GbraverBurstBrowserConfigRepository;
+  config: GBraverBurstBrowserConfigRepository;
   /** 開発中のチュートリアルをプレイできるか否かのフラグ、trueでプレイできる */
   canPlayTutorialInDevelopment: boolean;
   /** 開発中のリソースをロードするか否かのフラグ、trueでロードする */

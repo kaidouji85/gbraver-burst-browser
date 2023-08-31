@@ -2,7 +2,7 @@ import { Howl } from "howler";
 import { Subject } from "rxjs";
 
 import { Exclusive } from "../../exclusive/exclusive";
-import type { GbraverBurstBrowserConfig } from "../../game/config/browser-config";
+import type { GBraverBurstBrowserConfig } from "../../game/config/browser-config";
 import type { Resources } from "../../resource";
 import { SOUND_IDS } from "../../resource/sound";
 import { domUuid } from "../../uuid/dom-uuid";
@@ -14,7 +14,7 @@ import { rootInnerHTML } from "./dom/root-inner-html";
 /** 設定画面プロパティ */
 export type ConfigProps = {
   /** 画面を開く前のブラウザ設定 */
-  originConfig: GbraverBurstBrowserConfig;
+  originConfig: GBraverBurstBrowserConfig;
 
   /** ルートHTML要素 */
   root: HTMLElement;
@@ -62,7 +62,7 @@ export type ConfigProps = {
   prev: Subject<void>;
 
   /** 設定変更ストリーム */
-  configChange: Subject<GbraverBurstBrowserConfig>;
+  configChange: Subject<GBraverBurstBrowserConfig>;
 };
 
 /**
@@ -74,7 +74,7 @@ export type ConfigProps = {
  */
 export function createConfigProps(
   resources: Resources,
-  config: GbraverBurstBrowserConfig,
+  config: GBraverBurstBrowserConfig,
 ): ConfigProps {
   const ids = {
     battleAnimationTimeScaleSelector: domUuid(),
@@ -114,6 +114,6 @@ export function createConfigProps(
       new Howl({ src: "" }),
     exclusive: new Exclusive(),
     prev: new Subject<void>(),
-    configChange: new Subject<GbraverBurstBrowserConfig>(),
+    configChange: new Subject<GBraverBurstBrowserConfig>(),
   };
 }
