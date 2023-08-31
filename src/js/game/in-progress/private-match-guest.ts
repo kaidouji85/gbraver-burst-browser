@@ -1,4 +1,4 @@
-import { ArmDozerId, PilotId } from "gbraver-burst-core";
+import { ArmdozerId, PilotId } from "gbraver-burst-core";
 
 /** プライベートマッチ（ゲスト）サブフロー キャラ選択 */
 export type PlayerSelect = {
@@ -9,7 +9,7 @@ export type PlayerSelect = {
 export type Entry = {
   type: "Entry";
   /** 選択したアームドーザ */
-  armdozerId: ArmDozerId;
+  armdozerId: ArmdozerId;
   /** 選択したパイロット */
   pilotId: PilotId;
 };

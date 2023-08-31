@@ -8,8 +8,8 @@ import { Update } from "../../../game-loop/update";
 import type { Resources } from "../../../resource";
 import { firstUpdate } from "../../action/first-update";
 import type { GameObjectAction } from "../../action/game-object-action";
-import type { ArmDozerSprite } from "../armdozer-sprite";
-import { EmptyArmDozerSprite } from "../empty-armdozer-sprite";
+import type { ArmdozerSprite } from "../armdozer-sprite";
+import { EmptyArmdozerSprite } from "../empty-armdozer-sprite";
 import { activeFlash } from "./animation/active-flash";
 import { backStep } from "./animation/back-step";
 import { burst } from "./animation/burst";
@@ -33,8 +33,8 @@ import type { GenesisBraverView } from "./view/genesis-braver-view";
 
 /** ジェネシスブレイバースプライト */
 export class GenesisBraver
-  extends EmptyArmDozerSprite
-  implements ArmDozerSprite
+  extends EmptyArmdozerSprite
+  implements ArmdozerSprite
 {
   /** ビュー */
   #view: GenesisBraverView;

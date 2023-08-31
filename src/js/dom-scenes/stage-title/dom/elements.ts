@@ -5,7 +5,7 @@ export type Elements = {
   /** キャプション */
   caption: HTMLElement;
   /** 対戦相手アームドーザアイコン */
-  armDozerIcon: HTMLImageElement;
+  armdozerIcon: HTMLImageElement;
 };
 
 /**
@@ -18,15 +18,15 @@ export function extractElements(root: HTMLElement, ids: DataIDs): Elements {
   const caption: HTMLElement =
     root.querySelector(`[data-id="${ids.caption}"]`) ??
     document.createElement("div");
-  const foundArmDozerIcon = root.querySelector(
-    `[data-id="${ids.armDozerIcon}"]`,
+  const foundArmdozerIcon = root.querySelector(
+    `[data-id="${ids.armdozerIcon}"]`,
   );
-  const armDozerIcon =
-    foundArmDozerIcon instanceof HTMLImageElement
-      ? foundArmDozerIcon
+  const armdozerIcon =
+    foundArmdozerIcon instanceof HTMLImageElement
+      ? foundArmdozerIcon
       : document.createElement("img");
   return {
     caption,
-    armDozerIcon,
+    armdozerIcon,
   };
 }

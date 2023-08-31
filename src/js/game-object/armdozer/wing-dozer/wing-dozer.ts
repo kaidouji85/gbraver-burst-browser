@@ -8,8 +8,8 @@ import type { Update } from "../../../game-loop/update";
 import type { Resources } from "../../../resource";
 import { firstUpdate } from "../../action/first-update";
 import type { GameObjectAction } from "../../action/game-object-action";
-import type { ArmDozerSprite } from "../armdozer-sprite";
-import { EmptyArmDozerSprite } from "../empty-armdozer-sprite";
+import type { ArmdozerSprite } from "../armdozer-sprite";
+import { EmptyArmdozerSprite } from "../empty-armdozer-sprite";
 import { activeFlash } from "./animation/active-flash";
 import { avoid } from "./animation/avoid";
 import { charge } from "./animation/charge";
@@ -31,7 +31,7 @@ import { WingDozerSounds } from "./sounds/wing-dozer-sounds";
 import type { WingDozerView } from "./view/wing-dozer-view";
 
 /** ウィングドーザ */
-export class WingDozer extends EmptyArmDozerSprite implements ArmDozerSprite {
+export class WingDozer extends EmptyArmdozerSprite implements ArmdozerSprite {
   /** モデル */
   #model: WingDozerModel;
 

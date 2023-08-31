@@ -1,4 +1,4 @@
-import { ArmDozerIds } from "gbraver-burst-core";
+import { ArmdozerIds } from "gbraver-burst-core";
 
 import { StageTitle } from "../src/js/dom-scenes/stage-title";
 import type { DOMStubStory } from "./stub/dom-stub";
@@ -13,7 +13,7 @@ export const npcBattle: DOMStubStory = domStub((resources) => {
     resources,
     level: 10,
     caption: ["敵より大きいバッテリーを出せ"],
-    armDozerId: ArmDozerIds.NEO_LANDOZER,
+    armdozerId: ArmdozerIds.NEO_LANDOZER,
   });
   return scene.getRootHTMLElement();
 });

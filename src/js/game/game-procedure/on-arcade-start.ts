@@ -28,7 +28,7 @@ export async function onArcadeStart(props: GameProps): Promise<void> {
   await props.fader.fadeOut();
   const scene = new PlayerSelect({
     resources: props.resources,
-    armDozerIds: getPlayableArmdozers(props),
+    armdozerIds: getPlayableArmdozers(props),
     pilotIds: getPlayablePilots(props),
   });
   props.domSceneBinder.bind(scene, playerSelectConnector);

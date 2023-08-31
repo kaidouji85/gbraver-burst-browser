@@ -3,7 +3,7 @@ import { Observable } from "rxjs";
 import * as THREE from "three";
 
 import type { GameObjectAction } from "../../../../../game-object/action/game-object-action";
-import type { ArmDozerSprite } from "../../../../../game-object/armdozer/armdozer-sprite";
+import type { ArmdozerSprite } from "../../../../../game-object/armdozer/armdozer-sprite";
 import {
   EnemyNeoLandozer,
   PlayerNeoLandozer,
@@ -42,7 +42,7 @@ export class NeoLandozerTD implements NeoLandozerTDField, TDArmdozerObjects {
   }
 
   /** @override */
-  sprite(): ArmDozerSprite {
+  sprite(): ArmdozerSprite {
     return this.neoLandozer;
   }
 

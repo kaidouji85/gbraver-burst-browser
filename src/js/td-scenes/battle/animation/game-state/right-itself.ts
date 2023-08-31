@@ -2,7 +2,7 @@ import type { BattleResult, GameStateX, RightItself } from "gbraver-burst-core";
 
 import { Animate } from "../../../../animation/animate";
 import { delay, empty } from "../../../../animation/delay";
-import type { ArmDozerSprite } from "../../../../game-object/armdozer/armdozer-sprite";
+import type { ArmdozerSprite } from "../../../../game-object/armdozer/armdozer-sprite";
 import type { StateAnimationProps } from "./state-animation-props";
 
 /**
@@ -42,7 +42,7 @@ export function rightItselfAnimation(
  * @return アニメーション
  */
 function getMotion(
-  sprite: ArmDozerSprite,
+  sprite: ArmdozerSprite,
   battleResult: BattleResult,
 ): Animate {
   if (battleResult.name === "NormalHit") {

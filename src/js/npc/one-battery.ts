@@ -1,6 +1,6 @@
 import {
-  ArmDozerIds,
-  ArmDozers,
+  ArmdozerIds,
+  Armdozers,
   Command,
   PilotIds,
   Pilots,
@@ -33,7 +33,7 @@ const oneBatteryRoutine: SimpleRoutine = (data) => {
  */
 export function oneBatteryNeoLandozerNPC(): NPC {
   const armdozer =
-    ArmDozers.find((v) => v.id === ArmDozerIds.NEO_LANDOZER) ?? ArmDozers[0];
+    Armdozers.find((v) => v.id === ArmdozerIds.NEO_LANDOZER) ?? Armdozers[0];
   const pilot = Pilots.find((v) => v.id === PilotIds.GAI) ?? Pilots[0];
   return new SimpleNPC(armdozer, pilot, oneBatteryRoutine, oneBatteryRoutine);
 }
@@ -44,7 +44,7 @@ export function oneBatteryNeoLandozerNPC(): NPC {
  */
 export function oneBatteryShinBraverNPC(): NPC {
   const armdozer =
-    ArmDozers.find((v) => v.id === ArmDozerIds.SHIN_BRAVER) ?? ArmDozers[0];
+    Armdozers.find((v) => v.id === ArmdozerIds.SHIN_BRAVER) ?? Armdozers[0];
   const pilot = Pilots.find((v) => v.id === PilotIds.SHINYA) ?? Pilots[0];
   return new SimpleNPC(armdozer, pilot, oneBatteryRoutine, oneBatteryRoutine);
 }
@@ -55,7 +55,7 @@ export function oneBatteryShinBraverNPC(): NPC {
  */
 export function oneBatteryGenesisBraverNPC(): NPC {
   const armdozer =
-    ArmDozers.find((v) => v.id === ArmDozerIds.GENESIS_BRAVER) ?? ArmDozers[0];
+    Armdozers.find((v) => v.id === ArmdozerIds.GENESIS_BRAVER) ?? Armdozers[0];
   const pilot = Pilots.find((v) => v.id === PilotIds.SHINYA) ?? Pilots[0];
   return new SimpleNPC(armdozer, pilot, oneBatteryRoutine, oneBatteryRoutine);
 }
