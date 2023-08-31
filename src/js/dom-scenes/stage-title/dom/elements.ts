@@ -18,12 +18,12 @@ export function extractElements(root: HTMLElement, ids: DataIDs): Elements {
   const caption: HTMLElement =
     root.querySelector(`[data-id="${ids.caption}"]`) ??
     document.createElement("div");
-  const foundArmDozerIcon = root.querySelector(
+  const foundArmdozerIcon = root.querySelector(
     `[data-id="${ids.armDozerIcon}"]`,
   );
   const armDozerIcon =
-    foundArmDozerIcon instanceof HTMLImageElement
-      ? foundArmDozerIcon
+    foundArmdozerIcon instanceof HTMLImageElement
+      ? foundArmdozerIcon
       : document.createElement("img");
   return {
     caption,

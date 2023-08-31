@@ -1,5 +1,4 @@
-import type { ArmDozerId } from "gbraver-burst-core";
-import { ArmDozerIds } from "gbraver-burst-core";
+import { ArmdozerId, ArmdozerIds } from "gbraver-burst-core";
 
 import type { Resources } from "../../../resource";
 import { PathIds } from "../../../resource/path/ids";
@@ -13,18 +12,18 @@ import { ArmdozerIcon } from "./armdozer-icon";
  */
 export function createArmdozerIcon(
   resources: Resources,
-  armdozerId: ArmDozerId,
+  armdozerId: ArmdozerId,
 ): ArmdozerIcon {
   switch (armdozerId) {
-    case ArmDozerIds.SHIN_BRAVER:
+    case ArmdozerIds.SHIN_BRAVER:
       return shinBraverIcon(resources);
-    case ArmDozerIds.NEO_LANDOZER:
+    case ArmdozerIds.NEO_LANDOZER:
       return neoLandozerIcon(resources);
-    case ArmDozerIds.LIGHTNING_DOZER:
+    case ArmdozerIds.LIGHTNING_DOZER:
       return lightningDozerIcon(resources);
-    case ArmDozerIds.WING_DOZER:
+    case ArmdozerIds.WING_DOZER:
       return wingDozerIcon(resources);
-    case ArmDozerIds.GENESIS_BRAVER:
+    case ArmdozerIds.GENESIS_BRAVER:
       return genesisBraverIcon(resources);
     default:
       return shinBraverIcon(resources);

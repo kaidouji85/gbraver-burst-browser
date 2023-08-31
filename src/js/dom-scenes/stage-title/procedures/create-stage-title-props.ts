@@ -1,4 +1,4 @@
-import { ArmDozerId } from "gbraver-burst-core";
+import { ArmdozerId } from "gbraver-burst-core";
 
 import { getArmdozerIconPathId } from "../../../path/armdozer-icon-path";
 import { Resources } from "../../../resource";
@@ -18,7 +18,7 @@ export type CreateStageTitleParams = {
   /** ステージ名 */
   caption: string[];
   /** 対戦するアームドーザのID */
-  armDozerId: ArmDozerId;
+  armDozerId: ArmdozerId;
 };
 
 /**
@@ -50,6 +50,6 @@ export function createStageTitleProps(
     .reduce((a, b) => a + b);
   return {
     root,
-    isArmDozerIconLoaded: waitElementLoaded(elements.armDozerIcon),
+    isArmdozerIconLoaded: waitElementLoaded(elements.armDozerIcon),
   };
 }

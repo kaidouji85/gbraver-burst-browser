@@ -1,4 +1,4 @@
-import { ArmDozerId, ArmDozerIds, PilotId, PilotIds } from "gbraver-burst-core";
+import { ArmdozerId, ArmdozerIds, PilotId, PilotIds } from "gbraver-burst-core";
 import { Subject } from "rxjs";
 
 import { Resources } from "../../../resource";
@@ -17,7 +17,7 @@ export type CreatePlayerSelectPropsParams = {
   /** ソース管理オブジェクト */
   resources: Resources;
   /** プレイアブルなアームドーザのID */
-  armDozerIds: ArmDozerId[];
+  armDozerIds: ArmdozerId[];
   /** プレイアブルなパイロットのID */
   pilotIds: PilotId[];
 };
@@ -31,7 +31,7 @@ export function createPlayerSelectProps(
   params: CreatePlayerSelectPropsParams,
 ): PlayerSelectProps {
   const { resources, armDozerIds, pilotIds } = params;
-  const armdozerId = ArmDozerIds.SHIN_BRAVER;
+  const armdozerId = ArmdozerIds.SHIN_BRAVER;
   const pilotId = PilotIds.SHINYA;
   const playerDecide = new Subject<PlayerDecide>();
   const prev = new Subject<void>();

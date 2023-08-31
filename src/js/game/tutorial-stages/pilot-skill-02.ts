@@ -1,4 +1,4 @@
-import { ArmDozerIds, ArmDozers, PilotIds, Pilots } from "gbraver-burst-core";
+import { ArmdozerIds, Armdozers, PilotIds, Pilots } from "gbraver-burst-core";
 
 import { createPilotSkillTutorial02Event } from "../../custom-battle-events/pilot-skill-tutorial-02";
 import { pilotSkillTutorialNPC } from "../../npc/pilot-skill-tutorial";
@@ -15,7 +15,7 @@ export const pilotSkillTutorial02: TutorialStage = {
   player: {
     playerId: playerUuid(),
     armdozer:
-      ArmDozers.find((v) => v.id === ArmDozerIds.SHIN_BRAVER) ?? ArmDozers[0],
+      Armdozers.find((v) => v.id === ArmdozerIds.SHIN_BRAVER) ?? Armdozers[0],
     pilot: Pilots.find((v) => v.id === PilotIds.GAI) ?? Pilots[0],
   },
   npc: pilotSkillTutorialNPC(),

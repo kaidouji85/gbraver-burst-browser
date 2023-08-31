@@ -5,7 +5,7 @@ import type {
   PlayerState,
 } from "gbraver-burst-core";
 
-import type { ArmDozerSprite } from "../../../../../game-object/armdozer/armdozer-sprite";
+import type { ArmdozerSprite } from "../../../../../game-object/armdozer/armdozer-sprite";
 import { TDCamera } from "../../../../../game-object/camera/td";
 import { HUDGameObjects } from "../../../view/hud/game-objects";
 import type { HUDPilotObjects } from "../../../view/hud/pilot-objects/hud-pilot-objects";
@@ -42,10 +42,10 @@ export type PilotSkillAnimationParamX<
   invokerHUD: HUDPlayer;
 
   /** スキル発動側アームドーザスプライト */
-  invokerSprite: ArmDozerSprite;
+  invokerSprite: ArmdozerSprite;
 
   /** スキル発動側でないアームドーザスプライト */
-  anotherSprite: ArmDozerSprite;
+  anotherSprite: ArmdozerSprite;
 
   /** 3Dゲームオブジェクト */
   tdObjects: TDGameObjects;

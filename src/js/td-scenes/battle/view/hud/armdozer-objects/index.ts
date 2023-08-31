@@ -1,5 +1,4 @@
-import type { Player } from "gbraver-burst-core";
-import { ArmDozerIds } from "gbraver-burst-core";
+import { ArmdozerIds, Player } from "gbraver-burst-core";
 import { Observable } from "rxjs";
 
 import type { GameObjectAction } from "../../../../../game-object/action/game-object-action";
@@ -32,15 +31,15 @@ export function playerArmdozerHUD(
   state: Player,
 ): HUDArmdozerObjects {
   switch (state.armdozer.id) {
-    case ArmDozerIds.SHIN_BRAVER:
+    case ArmdozerIds.SHIN_BRAVER:
       return playerShinBraverHUD(resources, gameObjectAction, state);
-    case ArmDozerIds.NEO_LANDOZER:
+    case ArmdozerIds.NEO_LANDOZER:
       return playerNeoLandozerHUD(resources, gameObjectAction, state);
-    case ArmDozerIds.LIGHTNING_DOZER:
+    case ArmdozerIds.LIGHTNING_DOZER:
       return playerLightningDozerHUD(resources, gameObjectAction, state);
-    case ArmDozerIds.WING_DOZER:
+    case ArmdozerIds.WING_DOZER:
       return playerWingDozerHUD(resources, gameObjectAction, state);
-    case ArmDozerIds.GENESIS_BRAVER:
+    case ArmdozerIds.GENESIS_BRAVER:
       return playerGenesisBraverHUD(resources, gameObjectAction, state);
     default:
       return new EmptyHUDArmdozer(state);
@@ -61,15 +60,15 @@ export function enemyArmdozerHUD(
   state: Player,
 ): HUDArmdozerObjects {
   switch (state.armdozer.id) {
-    case ArmDozerIds.SHIN_BRAVER:
+    case ArmdozerIds.SHIN_BRAVER:
       return enemyShinBraverHUD(resources, gameObjectAction, state);
-    case ArmDozerIds.NEO_LANDOZER:
+    case ArmdozerIds.NEO_LANDOZER:
       return enemyNeoLandozerHUD(resources, gameObjectAction, state);
-    case ArmDozerIds.LIGHTNING_DOZER:
+    case ArmdozerIds.LIGHTNING_DOZER:
       return enemyLightningDozerHUD(resources, gameObjectAction, state);
-    case ArmDozerIds.WING_DOZER:
+    case ArmdozerIds.WING_DOZER:
       return enemyWingDozerHUD(resources, gameObjectAction, state);
-    case ArmDozerIds.GENESIS_BRAVER:
+    case ArmdozerIds.GENESIS_BRAVER:
       return enemyGenesisBraverHUD(resources, gameObjectAction, state);
     default:
       return new EmptyHUDArmdozer(state);

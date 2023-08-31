@@ -1,4 +1,4 @@
-import type { ArmDozerId } from "gbraver-burst-core";
+import { ArmdozerId } from "gbraver-burst-core";
 import { Howl } from "howler";
 import { Observable, Subject, Unsubscribable } from "rxjs";
 
@@ -26,7 +26,6 @@ type DataIDs = {
 
 /**
  * ルート要素のinnerHTML
- *
  * @param ids
  * @return innerHTML
  */
@@ -51,7 +50,6 @@ type Elements = {
 
 /**
  * ルート要素から子孫要素を抽出する
- *
  * @param root ルート要素
  * @param ids data-idを集めたもの
  * @return 抽出結果
@@ -79,13 +77,13 @@ function extractElements(root: HTMLElement, ids: DataIDs): Elements {
 
 /** アームドーザアイコン関連オブジェクト */
 type IconObjects = {
-  armdozerId: ArmDozerId;
+  armdozerId: ArmdozerId;
   icon: ArmdozerIcon;
 };
 
 /** アームドーザセレクタ */
 export class ArmdozerSelector {
-  #armdozerId: ArmDozerId;
+  #armdozerId: ArmdozerId;
   #exclusive: Exclusive;
   #root: HTMLElement;
   #armdozerStatus: ArmdozerStatus;
@@ -94,22 +92,21 @@ export class ArmdozerSelector {
   #prevButton: HTMLElement;
   #changeValueSound: Howl;
   #decideSound: Howl;
-  #change: Subject<ArmDozerId>;
-  #decide: Subject<ArmDozerId>;
+  #change: Subject<ArmdozerId>;
+  #decide: Subject<ArmdozerId>;
   #prev: Subject<void>;
   #unsubscribers: Unsubscribable[];
 
   /**
    * コンストラクタ
-   *
    * @param resources リソース管理オブジェクト
    * @param armDozerIds アームドーザIDリスト
    * @param initialArmdozerId アームドーザID初期値
    */
   constructor(
     resources: Resources,
-    armDozerIds: ArmDozerId[],
-    initialArmdozerId: ArmDozerId,
+    armDozerIds: ArmdozerId[],
+    initialArmdozerId: ArmdozerId,
   ) {
     this.#armdozerId = initialArmdozerId;
     this.#exclusive = new Exclusive();
@@ -185,7 +182,6 @@ export class ArmdozerSelector {
 
   /**
    * リソース読み込みが完了するまで待つ
-   *
    * @return 待機結果
    */
   async waitUntilLoaded(): Promise<void> {
@@ -194,7 +190,6 @@ export class ArmdozerSelector {
 
   /**
    * ルートHTML要素を取得する
-   *
    * @return ルートHTML要素
    */
   getRootHTMLElement(): HTMLElement {
@@ -203,19 +198,17 @@ export class ArmdozerSelector {
 
   /**
    * アームドーザ選択の通知
-   *
    * @return イベント通知ストリーム
    */
-  notifyChanges(): Observable<ArmDozerId> {
+  notifyChanges(): Observable<ArmdozerId> {
     return this.#change;
   }
 
   /**
    * アームドーザ決定通知ストリームを取得する
-   *
    * @return アームドーザ決定通知ストリーム
    */
-  notifyDecision(): Observable<ArmDozerId> {
+  notifyDecision(): Observable<ArmdozerId> {
     return this.#decide;
   }
 
@@ -229,11 +222,10 @@ export class ArmdozerSelector {
 
   /**
    * アームドーザアイコンが選択された際の処理
-   *
    * @param armdozerId 選択されたアームドーザID
    * @return 処理結果
    */
-  #onArmdozerSelect(armdozerId: ArmDozerId): void {
+  #onArmdozerSelect(armdozerId: ArmdozerId): void {
     this.#exclusive.execute(async (): Promise<void> => {
       if (this.#armdozerId !== armdozerId) {
         this.#armdozerId = armdozerId;
@@ -258,7 +250,6 @@ export class ArmdozerSelector {
 
   /**
    * 決定ボタンが押された時の処理
-   *
    * @param action アクション
    */
   #onOkButtonPush(action: PushDOM): void {

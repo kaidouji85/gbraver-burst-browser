@@ -1,4 +1,4 @@
-import { ArmDozerIds, ArmDozers, PilotIds, Pilots } from "gbraver-burst-core";
+import { ArmdozerIds, Armdozers, PilotIds, Pilots } from "gbraver-burst-core";
 
 import { createZeroDefenseTutorialEvent } from "../../custom-battle-events/zero-defense-tutorial";
 import { zeroDefenseTutorialNPC } from "../../npc/zero-defense-tutorial";
@@ -15,7 +15,7 @@ export const zeroDefenseTutorial: TutorialStage = {
   player: {
     playerId: playerUuid(),
     armdozer:
-      ArmDozers.find((v) => v.id === ArmDozerIds.SHIN_BRAVER) ?? ArmDozers[0],
+      Armdozers.find((v) => v.id === ArmdozerIds.SHIN_BRAVER) ?? Armdozers[0],
     pilot: Pilots.find((v) => v.id === PilotIds.SHINYA) ?? Pilots[0],
   },
   npc: zeroDefenseTutorialNPC(),

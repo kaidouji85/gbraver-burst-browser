@@ -8,8 +8,8 @@ import type { Update } from "../../../game-loop/update";
 import type { Resources } from "../../../resource";
 import { firstUpdate } from "../../action/first-update";
 import type { GameObjectAction } from "../../action/game-object-action";
-import type { ArmDozerSprite } from "../armdozer-sprite";
-import { EmptyArmDozerSprite } from "../empty-armdozer-sprite";
+import type { ArmdozerSprite } from "../armdozer-sprite";
+import { EmptyArmdozerSprite } from "../empty-armdozer-sprite";
 import { activeFlash } from "./animation/active-flash";
 import { avoid } from "./animation/avoid";
 import { burst } from "./animation/burst";
@@ -33,7 +33,7 @@ import { ShinBraverSounds } from "./sounds/shin-braver-sounds";
 import type { ShinBraverView } from "./view/shin-braver-view";
 
 /** シンブレイバーのゲームオブジェクト */
-export class ShinBraver extends EmptyArmDozerSprite implements ArmDozerSprite {
+export class ShinBraver extends EmptyArmdozerSprite implements ArmdozerSprite {
   /** モデル */
   #model: ShinBraverModel;
 

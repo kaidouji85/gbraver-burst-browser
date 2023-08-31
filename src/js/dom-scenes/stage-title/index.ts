@@ -36,6 +36,6 @@ export class StageTitle implements DOMScene {
    * @return 待機結果
    */
   async waitUntilLoaded(): Promise<void> {
-    await this.#props.isArmDozerIconLoaded;
+    await this.#props.isArmdozerIconLoaded;
   }
 }

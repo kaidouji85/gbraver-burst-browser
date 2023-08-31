@@ -1,4 +1,4 @@
-import { ArmDozerId } from "gbraver-burst-core";
+import { ArmdozerId } from "gbraver-burst-core";
 
 import { PlayerSelectProps } from "../props";
 
@@ -9,7 +9,7 @@ import { PlayerSelectProps } from "../props";
  */
 export function onArmdozerChange(
   props: PlayerSelectProps,
-  armdozerId: ArmDozerId,
+  armdozerId: ArmdozerId,
 ): void {
   props.armdozerId = armdozerId;
   props.armdozerBustShot.switch(armdozerId);

@@ -1,4 +1,4 @@
-import type { ArmDozerId } from "gbraver-burst-core";
+import type { ArmdozerId } from "gbraver-burst-core";
 
 import type { Resources } from "../../../resource";
 import { ArmdozerBustShot } from "./amrodzer-bust-shot";
@@ -8,7 +8,7 @@ import { createBustShot } from "./create-bust-shot";
  * バストショット情報
  */
 type BustShot = {
-  armdozerId: ArmDozerId;
+  armdozerId: ArmdozerId;
   bustShot: ArmdozerBustShot;
 };
 
@@ -16,7 +16,6 @@ type BustShot = {
  * アームドーザバストショット
  */
 export class ArmdozerBustShotContainer {
-  #resources: Resources;
   #root: HTMLElement;
   #bustShots: BustShot[];
 
@@ -28,10 +27,9 @@ export class ArmdozerBustShotContainer {
    */
   constructor(
     resources: Resources,
-    armDozerIds: ArmDozerId[],
-    initialArmdozerId: ArmDozerId,
+    armDozerIds: ArmdozerId[],
+    initialArmdozerId: ArmdozerId,
   ) {
-    this.#resources = resources;
     this.#root = document.createElement("div");
     this.#root.className = "player-select__armdozer-bust-shot-container";
     this.#bustShots = armDozerIds.map((v) => ({
@@ -68,10 +66,9 @@ export class ArmdozerBustShotContainer {
 
   /**
    * アームドーザバストショットを切り替える
-   *
    * @param armdozerId アームドーザID
    */
-  switch(armdozerId: ArmDozerId): void {
+  switch(armdozerId: ArmdozerId): void {
     this.#bustShots
       .filter((v) => v.armdozerId === armdozerId)
       .forEach((v) => {

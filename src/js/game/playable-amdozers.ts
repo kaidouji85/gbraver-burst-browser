@@ -1,25 +1,25 @@
-import { ArmDozerId, ArmDozerIds } from "gbraver-burst-core";
+import { ArmdozerId, ArmdozerIds } from "gbraver-burst-core";
 
 import { GameProps } from "./game-props";
 
 /** プレイアブルアームドーザ */
-export const PlayableArmdozers: ArmDozerId[] = [
-  ArmDozerIds.SHIN_BRAVER,
-  ArmDozerIds.WING_DOZER,
-  ArmDozerIds.NEO_LANDOZER,
-  ArmDozerIds.LIGHTNING_DOZER,
-  ArmDozerIds.GENESIS_BRAVER,
+export const PlayableArmdozers: ArmdozerId[] = [
+  ArmdozerIds.SHIN_BRAVER,
+  ArmdozerIds.WING_DOZER,
+  ArmdozerIds.NEO_LANDOZER,
+  ArmdozerIds.LIGHTNING_DOZER,
+  ArmdozerIds.GENESIS_BRAVER,
 ];
 
 /** 開発中も含めたプレイアブルアームドーザ */
-export const DevelopingPlayableArmdozers: ArmDozerId[] = [...PlayableArmdozers];
+export const DevelopingPlayableArmdozers: ArmdozerId[] = [...PlayableArmdozers];
 
 /**
  * プレイアブルアームドーザを取得するヘルパー関数
  * @param props ゲームプロパティ
  * @return 取得結果
  */
-export function getPlayableArmdozers(props: Readonly<GameProps>): ArmDozerId[] {
+export function getPlayableArmdozers(props: Readonly<GameProps>): ArmdozerId[] {
   return props.canPlayDevelopingArmdozer
     ? DevelopingPlayableArmdozers
     : PlayableArmdozers;

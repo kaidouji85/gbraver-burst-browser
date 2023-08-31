@@ -24,7 +24,7 @@ export type LightningDozerBattle<RESULT extends BattleResult> =
 
 /**
  * アタッカーにフォーカスを合わせる
- * attentionArmDozerよりもカメラ移動は控えめ
+ * attentionArmdozerよりもカメラ移動は控えめ
  * @param camera カメラ
  * @param attacker アタッカーのスプライト
  * @return アニメーション

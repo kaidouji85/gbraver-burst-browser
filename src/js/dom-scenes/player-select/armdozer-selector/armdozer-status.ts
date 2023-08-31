@@ -1,5 +1,4 @@
-import type { ArmDozerId } from "gbraver-burst-core";
-import { ArmDozers } from "gbraver-burst-core";
+import { ArmdozerId, Armdozers } from "gbraver-burst-core";
 
 import { Resources } from "../../../resource";
 import { PathIds } from "../../../resource/path/ids";
@@ -161,8 +160,8 @@ export class ArmdozerStatus {
    *
    * @param armdozerId 表示するアームドーザID
    */
-  switch(armdozerId: ArmDozerId) {
-    const target = ArmDozers.find((v) => v.id === armdozerId);
+  switch(armdozerId: ArmdozerId) {
+    const target = Armdozers.find((v) => v.id === armdozerId);
 
     if (!target) {
       return;

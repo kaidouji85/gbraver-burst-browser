@@ -1,6 +1,6 @@
 import {
-  ArmDozerIds,
-  ArmDozers,
+  ArmdozerIds,
+  Armdozers,
   Command,
   PilotIds,
   Pilots,
@@ -53,7 +53,7 @@ const defenseRoutine: SimpleRoutine = (data) => {
  */
 export function pilotSkillTutorialNPC(): NPC {
   const armdozer =
-    ArmDozers.find((v) => v.id === ArmDozerIds.WING_DOZER) ?? ArmDozers[0];
+    Armdozers.find((v) => v.id === ArmdozerIds.WING_DOZER) ?? Armdozers[0];
   const pilot = Pilots.find((v) => v.id === PilotIds.TSUBASA) ?? Pilots[0];
   return new SimpleNPC(armdozer, pilot, attackRoutine, defenseRoutine);
 }
