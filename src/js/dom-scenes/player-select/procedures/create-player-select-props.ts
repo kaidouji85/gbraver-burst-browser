@@ -17,7 +17,7 @@ export type CreatePlayerSelectPropsParams = {
   /** ソース管理オブジェクト */
   resources: Resources;
   /** プレイアブルなアームドーザのID */
-  armDozerIds: ArmdozerId[];
+  armdozerIds: ArmdozerId[];
   /** プレイアブルなパイロットのID */
   pilotIds: PilotId[];
 };
@@ -30,7 +30,7 @@ export type CreatePlayerSelectPropsParams = {
 export function createPlayerSelectProps(
   params: CreatePlayerSelectPropsParams,
 ): PlayerSelectProps {
-  const { resources, armDozerIds, pilotIds } = params;
+  const { resources, armdozerIds, pilotIds } = params;
   const armdozerId = ArmdozerIds.SHIN_BRAVER;
   const pilotId = PilotIds.SHINYA;
   const playerDecide = new Subject<PlayerDecide>();
@@ -48,7 +48,7 @@ export function createPlayerSelectProps(
 
   const armdozerBustShot = new ArmdozerBustShotContainer(
     resources,
-    armDozerIds,
+    armdozerIds,
     armdozerId,
   );
   elements.working.appendChild(armdozerBustShot.getRootHTMLElement());
@@ -62,7 +62,7 @@ export function createPlayerSelectProps(
 
   const armdozerSelector = new ArmdozerSelector(
     resources,
-    armDozerIds,
+    armdozerIds,
     armdozerId,
   );
   elements.selector.appendChild(armdozerSelector.getRootHTMLElement());
@@ -81,7 +81,7 @@ export function createPlayerSelectProps(
     pilotId,
     playerDecide,
     prev,
-    armDozerIds,
+    armdozerIds: armdozerIds,
     pilotIds,
   };
 }

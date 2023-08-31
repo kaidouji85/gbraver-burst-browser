@@ -22,17 +22,17 @@ export class ArmdozerBustShotContainer {
   /**
    * コンストラクタ
    * @param resources リソース管理オブジェクト
-   * @param armDozerIds アームドーザIDリスト
+   * @param armdozerIds アームドーザIDリスト
    * @param initialArmdozerId アームドーザIDの初期値
    */
   constructor(
     resources: Resources,
-    armDozerIds: ArmdozerId[],
+    armdozerIds: ArmdozerId[],
     initialArmdozerId: ArmdozerId,
   ) {
     this.#root = document.createElement("div");
     this.#root.className = "player-select__armdozer-bust-shot-container";
-    this.#bustShots = armDozerIds.map((v) => ({
+    this.#bustShots = armdozerIds.map((v) => ({
       armdozerId: v,
       bustShot: createBustShot(v, resources),
     }));

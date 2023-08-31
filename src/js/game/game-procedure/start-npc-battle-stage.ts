@@ -39,7 +39,7 @@ export async function startNPCBattleStage(
     resources: props.resources,
     level,
     caption: stage.caption,
-    armDozerId: npcBattle.enemy.armdozer.id,
+    armdozerId: npcBattle.enemy.armdozer.id,
   });
   props.domSceneBinder.bind(scene, stageTitleConnector);
   await Promise.race([scene.waitUntilLoaded(), waitTime(MAX_LOADING_TIME)]);

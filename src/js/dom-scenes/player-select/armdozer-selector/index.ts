@@ -100,12 +100,12 @@ export class ArmdozerSelector {
   /**
    * コンストラクタ
    * @param resources リソース管理オブジェクト
-   * @param armDozerIds アームドーザIDリスト
+   * @param armdozerIds アームドーザIDリスト
    * @param initialArmdozerId アームドーザID初期値
    */
   constructor(
     resources: Resources,
-    armDozerIds: ArmdozerId[],
+    armdozerIds: ArmdozerId[],
     initialArmdozerId: ArmdozerId,
   ) {
     this.#armdozerId = initialArmdozerId;
@@ -132,7 +132,7 @@ export class ArmdozerSelector {
     this.#armdozerStatus = new ArmdozerStatus(resources);
     this.#armdozerStatus.switch(this.#armdozerId);
     replaceDOM(elements.dummyStatus, this.#armdozerStatus.getRootHTMLElement());
-    this.#armdozerIcons = armDozerIds.map((v) => ({
+    this.#armdozerIcons = armdozerIds.map((v) => ({
       armdozerId: v,
       icon: createArmdozerIcon(resources, v),
     }));

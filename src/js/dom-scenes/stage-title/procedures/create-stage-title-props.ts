@@ -18,7 +18,7 @@ export type CreateStageTitleParams = {
   /** ステージ名 */
   caption: string[];
   /** 対戦するアームドーザのID */
-  armDozerId: ArmdozerId;
+  armdozerId: ArmdozerId;
 };
 
 /**
@@ -30,15 +30,15 @@ export function createStageTitleProps(
 ): StageTitleProps {
   const ids = {
     caption: domUuid(),
-    armDozerIcon: domUuid(),
+    armdozerIcon: domUuid(),
   };
   const root = document.createElement("div");
   root.className = ROOT_CLASS;
   root.innerHTML = rootInnerHTML(ids, params.level);
   const elements = extractElements(root, ids);
-  const armDozerIconPathID = getArmdozerIconPathId(params.armDozerId);
-  elements.armDozerIcon.src =
-    params.resources.paths.find((v) => v.id === armDozerIconPathID)?.path ?? "";
+  const armdozerIconPathID = getArmdozerIconPathId(params.armdozerId);
+  elements.armdozerIcon.src =
+    params.resources.paths.find((v) => v.id === armdozerIconPathID)?.path ?? "";
   elements.caption.innerHTML = params.caption
     .map(
       (v) => `
@@ -50,6 +50,6 @@ export function createStageTitleProps(
     .reduce((a, b) => a + b);
   return {
     root,
-    isArmdozerIconLoaded: waitElementLoaded(elements.armDozerIcon),
+    isArmdozerIconLoaded: waitElementLoaded(elements.armdozerIcon),
   };
 }

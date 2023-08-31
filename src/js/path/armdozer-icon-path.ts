@@ -6,11 +6,11 @@ import { PathId } from "../resource/path/resource";
 /**
  * アームドーザIDに対応するアイコンのパスIDを返す
  *
- * @param armDozerId アームドーザID
+ * @param armdozerId アームドーザID
  * @return パスID
  */
-export function getArmdozerIconPathId(armDozerId: ArmdozerId): PathId {
-  switch (armDozerId) {
+export function getArmdozerIconPathId(armdozerId: ArmdozerId): PathId {
+  switch (armdozerId) {
     case ArmdozerIds.SHIN_BRAVER:
       return PathIds.SHIN_BRAVER_ICON;
     case ArmdozerIds.NEO_LANDOZER:

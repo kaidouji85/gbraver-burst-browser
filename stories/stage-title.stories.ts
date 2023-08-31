@@ -13,7 +13,7 @@ export const npcBattle: DOMStubStory = domStub((resources) => {
     resources,
     level: 10,
     caption: ["敵より大きいバッテリーを出せ"],
-    armDozerId: ArmdozerIds.NEO_LANDOZER,
+    armdozerId: ArmdozerIds.NEO_LANDOZER,
   });
   return scene.getRootHTMLElement();
 });

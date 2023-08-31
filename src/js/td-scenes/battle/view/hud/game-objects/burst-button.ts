@@ -16,15 +16,15 @@ import type { Resources } from "../../../../../resource";
  * アームドーザIDに対応したバーストボタンを生成する
  * @param resources リソース管理オブジェクト
  * @param gameObjectAction ゲームオブジェクトアクション
- * @param armDozerId アームドーザID
+ * @param armdozerId アームドーザID
  * @return バーストボタン
  */
 export function createBurstButton(
   resources: Resources,
   gameObjectAction: Observable<GameObjectAction>,
-  armDozerId: ArmdozerId,
+  armdozerId: ArmdozerId,
 ): BurstButton {
-  switch (armDozerId) {
+  switch (armdozerId) {
     case ArmdozerIds.SHIN_BRAVER:
       return shinBraverBurstButton(resources, gameObjectAction);
     case ArmdozerIds.NEO_LANDOZER:
