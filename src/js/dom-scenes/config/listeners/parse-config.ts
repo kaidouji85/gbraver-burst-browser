@@ -1,4 +1,4 @@
-import { GbraverBurstBrowserConfig } from "../../../game/config/browser-config";
+import { GBraverBurstBrowserConfig } from "../../../game/config/browser-config";
 import { parseBrowserConfig } from "../../../game/config/parser/browser-config";
 import type { ConfigProps } from "../props";
 
@@ -7,7 +7,7 @@ import type { ConfigProps } from "../props";
  * @param props 画面の入力値
  * @return パース結果
  */
-export function parseConfig(props: ConfigProps): GbraverBurstBrowserConfig {
+export function parseConfig(props: ConfigProps): GBraverBurstBrowserConfig {
   const foundBattleAnimationTimeScale =
     props.battleAnimationTimeScaleSelector.querySelector(
       'input[type="radio"]:checked',
