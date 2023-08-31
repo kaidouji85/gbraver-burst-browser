@@ -3,9 +3,9 @@ import {
   Armdozers,
   GameEndResult,
   PilotId,
+  Pilots,
   Player,
   PlayerId,
-  Pilots,
 } from "gbraver-burst-core";
 
 import type { NPC } from "../npc/npc";
