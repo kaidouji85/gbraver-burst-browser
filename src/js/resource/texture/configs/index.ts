@@ -41,9 +41,8 @@ export const TEXTURE_CONFIGS: TextureConfig[] = [
   ...TurnTexureConfigs,
   ...EffectLabelTextureConfigs,
   ...ResultTextureConfigs,
+  ...YuuyaTextureConfigs,
 ];
 
 /** 開発中のテクスチャリソース設定をあつめたもの */
-export const DEVELOPING_TEXTURE_CONFIGS: TextureConfig[] = [
-  ...YuuyaTextureConfigs,
-];
+export const DEVELOPING_TEXTURE_CONFIGS: TextureConfig[] = [];
