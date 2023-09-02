@@ -12,9 +12,7 @@ export const PlayablePilots: PilotId[] = [
 ];
 
 /** 開発中も含めたプレイアブルなパイロット */
-export const DevelopingPlayablePilots: PilotId[] = [
-  ...PlayablePilots,
-];
+export const DevelopingPlayablePilots: PilotId[] = [...PlayablePilots];
 
 /**
  * プレイアブルパイロットを取得するヘルパー関数
