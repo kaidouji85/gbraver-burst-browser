@@ -26,6 +26,7 @@ export function bowUp(model: ShinBraverModel): Animate {
     .chain(
       process(() => {
         model.animation.type = "UPRIGHT";
+        model.animation.frame = 1;
       }),
     );
 }
