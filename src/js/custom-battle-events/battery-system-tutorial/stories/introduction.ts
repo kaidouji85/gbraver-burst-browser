@@ -10,6 +10,7 @@ import {
 import { refreshConversation } from "../../invisible-all-message-windows";
 import { scrollLeftMessages, scrollRightMessages } from "../../scroll-messages";
 import { waitUntilWindowPush } from "../../wait-until-window-push";
+import {synchronizedBow} from "../../synchronized-bow";
 
 /**
  * 条件を満たした場合、気をつけ、礼をする
@@ -34,10 +35,7 @@ async function uprightBowIfNeed(props: CustomBattleEventProps): Promise<void> {
   const wingDozerTD: WingDozerTD = foundWingDozerTD;
   activeLeftMessageWindowWithFace(props, "Tsubasa");
   props.view.dom.leftMessageWindow.messages(["姿勢を正して"]);
-  await all(
-    shinBraverTD.shinBraver.upright(),
-    wingDozerTD.wingDozer.upright(),
-  ).play();
+  await synchronizedBow(props).play();
   await waitUntilWindowPush(props);
   props.sounds.sendMessage.sound.play();
   props.view.dom.leftMessageWindow.scrollUp();
