@@ -33,6 +33,8 @@ import { ShinBraverSounds } from "./sounds/shin-braver-sounds";
 import type { ShinBraverView } from "./view/shin-braver-view";
 import {upright} from "./animation/upright";
 import {uprightToStand} from "./animation/upright-to-stand";
+import {bowDown} from "./animation/bow-down";
+import {bowUp} from "./animation/bow-up";
 
 /** シンブレイバーのゲームオブジェクト */
 export class ShinBraver extends EmptyArmdozerSprite implements ArmdozerSprite {
@@ -208,6 +210,22 @@ export class ShinBraver extends EmptyArmdozerSprite implements ArmdozerSprite {
    */
   uprightToStand(): Animate {
     return uprightToStand(this.#model);
+  }
+
+  /**
+   * 礼（倒れる）
+   * @return アニメーション
+   */
+  bowDown(): Animate {
+    return bowDown(this.#model);
+  }
+
+  /**
+   * 礼（起き上がる）
+   * @return アニメーション
+   */
+  bowUp(): Animate {
+    return bowUp(this.#model);
   }
 
   /** @override */
