@@ -1,7 +1,7 @@
 import { Animate } from "../../../../animation/animate";
 import { process } from "../../../../animation/process";
 import { tween } from "../../../../animation/tween";
-import type { ShinBraverModel } from "../model/shin-braver-model";
+import { ShinBraverModel } from "../model/shin-braver-model";
 import { ShinBraverSounds } from "../sounds/shin-braver-sounds";
 
 /**
