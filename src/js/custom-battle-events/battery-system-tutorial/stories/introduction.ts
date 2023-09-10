@@ -39,7 +39,10 @@ async function uprightBowIfNeed(props: CustomBattleEventProps): Promise<void> {
     wingDozerTD.wingDozer.upright(),
   ).play();
   await waitUntilWindowPush(props);
-  await scrollLeftMessages(props, [["礼!!」"]]);
+  props.sounds.sendMessage.sound.play();
+  props.view.dom.leftMessageWindow.scrollUp();
+  props.view.dom.leftMessageWindow.messages(["礼！！」"]);
+  await delay(500).play();
   await refreshConversation(props);
   activeLeftMessageWindowWithFace(props, "Tsubasa");
   props.view.dom.leftMessageWindow.messages([
@@ -48,18 +51,21 @@ async function uprightBowIfNeed(props: CustomBattleEventProps): Promise<void> {
   ]);
   props.view.dom.leftMessageWindow.scrollUp();
   activeRightMessageWindowWithFace(props, "Shinya");
-  await scrollRightMessages(props, [["シンヤ", "「よろしくお願いします」"]]);
+  props.view.dom.rightMessageWindow.messages(["シンヤ", "「よろしくお願いします」"]);
   await all(
     shinBraverTD.shinBraver
       .bowDown()
       .chain(delay(200))
-      .chain(shinBraverTD.shinBraver.bowUp()),
+      .chain(shinBraverTD.shinBraver.bowUp())
+      .chain(delay(500))
+      .chain(shinBraverTD.shinBraver.uprightToStand()),
     wingDozerTD.wingDozer
       .bowDown()
       .chain(delay(200))
-      .chain(wingDozerTD.wingDozer.bowUp()),
-  ).play();
-  await waitUntilWindowPush(props);
+      .chain(wingDozerTD.wingDozer.bowUp())
+      .chain(delay(500))
+      .chain(wingDozerTD.wingDozer.uprightToStand()),
+  ).chain(delay(500)).play();
 }
 
 /**
