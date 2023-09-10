@@ -1,6 +1,6 @@
 import * as THREE from "three";
 
-import type { ArmDozerSprite } from "../../../../game-object/armdozer/armdozer-sprite";
+import type { ArmdozerSprite } from "../../../../game-object/armdozer/armdozer-sprite";
 import { ARMDOZER_EFFECT_STANDARD_Y } from "../../../../game-object/armdozer/position";
 import type { Coordinate } from "../../../../tracking/coordinate";
 import { toHUDCoordinate } from "../../../../tracking/coordinate";
@@ -87,7 +87,7 @@ function getTracksFromHUDArmdozer(
 function toCutInHUDPos(
   tdCamera: Readonly<THREE.PerspectiveCamera>,
   rendererDOM: Readonly<HTMLElement>,
-  sprite: Readonly<ArmDozerSprite>,
+  sprite: Readonly<ArmdozerSprite>,
 ): Coordinate {
   const target = sprite.getObject3D();
   const tdPosition = {

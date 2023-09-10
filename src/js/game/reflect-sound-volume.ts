@@ -1,7 +1,7 @@
 import type { Resources } from "../resource";
 import type { SoundResource } from "../resource/sound";
 import { howlVolume } from "../resource/sound";
-import type { GbraverBurstBrowserConfig } from "./config/browser-config";
+import type { GBraverBurstBrowserConfig } from "./config/browser-config";
 
 /**
  * サウンドリソース種別に応じたボリュームを取得する
@@ -10,7 +10,7 @@ import type { GbraverBurstBrowserConfig } from "./config/browser-config";
  * @param config ブラウザ設定
  * @return ボリューム
  */
-function getVolume(sound: SoundResource, config: GbraverBurstBrowserConfig) {
+function getVolume(sound: SoundResource, config: GBraverBurstBrowserConfig) {
   switch (sound.type) {
     case "BGM":
       return config.bgmVolume;
@@ -32,7 +32,7 @@ function getVolume(sound: SoundResource, config: GbraverBurstBrowserConfig) {
  */
 export function reflectSoundVolume(
   resources: Resources,
-  config: GbraverBurstBrowserConfig,
+  config: GBraverBurstBrowserConfig,
 ): void {
   resources.sounds.forEach((sound) => {
     sound.volume = getVolume(sound, config);

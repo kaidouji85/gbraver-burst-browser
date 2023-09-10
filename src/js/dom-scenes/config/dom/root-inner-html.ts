@@ -1,4 +1,4 @@
-import { GbraverBurstBrowserConfig } from "../../../game/config/browser-config";
+import { GBraverBurstBrowserConfig } from "../../../game/config/browser-config";
 import { battleAnimationTimeScaleOptions } from "./battle-animation-time-scale-options";
 import { battleControllerTypeItems } from "./battle-controller-type-items";
 import { ROOT_CLASS } from "./class-name";
@@ -16,7 +16,7 @@ import { webGLPixelRatioOptions } from "./webgl-pixel-ratio-options";
  */
 export function rootInnerHTML(
   ids: DataIDs,
-  config: GbraverBurstBrowserConfig,
+  config: GBraverBurstBrowserConfig,
 ): string {
   const battleAnimationTimeScales = battleAnimationTimeScaleOptions(
     config.battleAnimationTimeScale,

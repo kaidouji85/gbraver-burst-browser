@@ -1,9 +1,9 @@
-import { GbraverBurstBrowserConfig } from "../../../../../src/js/game/config/browser-config";
+import { GBraverBurstBrowserConfig } from "../../../../../src/js/game/config/browser-config";
 import { DefaultConfig } from "../../../../../src/js/game/config/default-config";
 import { parseBrowserConfig } from "../../../../../src/js/game/config/parser/browser-config";
 
 test("ブラウザ設定を正しくパースできる", () => {
-  const data: GbraverBurstBrowserConfig = {
+  const data: GBraverBurstBrowserConfig = {
     webGLPixelRatio: 2,
     battleAnimationTimeScale: 1,
     bgmVolume: 1,

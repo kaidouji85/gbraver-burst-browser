@@ -1,6 +1,6 @@
 import { z } from "zod";
 
-import { GbraverBurstBrowserConfig } from "../browser-config";
+import { GBraverBurstBrowserConfig } from "../browser-config";
 import { DefaultConfig } from "../default-config";
 import { BattleAnimationTimeScaleSchema } from "./battle-animation-time-scale";
 import { BattleControllerTypeSchema } from "./battle-controller-type";
@@ -26,7 +26,7 @@ export const BrowserConfigSchema = z.object({
  * @param config ブラウザ設定
  * @return パース結果
  */
-export function parseBrowserConfig(config: unknown): GbraverBurstBrowserConfig {
+export function parseBrowserConfig(config: unknown): GBraverBurstBrowserConfig {
   const result = BrowserConfigSchema.safeParse(config);
   return result.success ? result.data : DefaultConfig;
 }

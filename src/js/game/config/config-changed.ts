@@ -1,4 +1,4 @@
-import { GbraverBurstBrowserConfig } from "./browser-config";
+import { GBraverBurstBrowserConfig } from "./browser-config";
 
 /**
  * 設定が変更されたか否かを判定する
@@ -8,8 +8,8 @@ import { GbraverBurstBrowserConfig } from "./browser-config";
  * @return 判定結果、trueで設定変更された
  */
 export function isConfigChanged(
-  origin: GbraverBurstBrowserConfig,
-  update: GbraverBurstBrowserConfig,
+  origin: GBraverBurstBrowserConfig,
+  update: GBraverBurstBrowserConfig,
 ): boolean {
   return (
     origin.webGLPixelRatio !== update.webGLPixelRatio ||
@@ -27,8 +27,8 @@ export function isConfigChanged(
  * @return 判定結果、trueで設定変更された
  */
 export function isSoundConfigChanged(
-  origin: GbraverBurstBrowserConfig,
-  update: GbraverBurstBrowserConfig,
+  origin: GBraverBurstBrowserConfig,
+  update: GBraverBurstBrowserConfig,
 ): boolean {
   return (
     origin.bgmVolume !== update.bgmVolume || origin.seVolume !== update.seVolume

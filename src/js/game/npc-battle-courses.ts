@@ -1,5 +1,4 @@
-import type { ArmDozerId } from "gbraver-burst-core";
-import { ArmDozerIds } from "gbraver-burst-core";
+import { ArmdozerId, ArmdozerIds } from "gbraver-burst-core";
 
 import {
   attack3Defense2LightningDozerNPC,
@@ -43,7 +42,7 @@ export type NPCBattleCourseDifficulty = "Easy" | "Normal" | "Hard" | "VeryHard";
  */
 export type NPCBattleCourse = {
   /** プレイヤーが選択したアームドーザID */
-  armdozerId: ArmDozerId;
+  armdozerId: ArmdozerId;
 
   /** プレイヤーが選択した難易度 */
   difficulty: NPCBattleCourseDifficulty;
@@ -189,7 +188,7 @@ export const DefaultStages: NPCBattleStage[] = [
 /** NPCバトルコース */
 export const NPCBattleCourses: NPCBattleCourse[] = [
   {
-    armdozerId: ArmDozerIds.SHIN_BRAVER,
+    armdozerId: ArmdozerIds.SHIN_BRAVER,
     difficulty: "Easy",
     stages: [
       { ...OneBatteryNeoLandozerStage, bgm: SOUND_IDS.BATTLE_BGM_01 },
@@ -198,7 +197,7 @@ export const NPCBattleCourses: NPCBattleCourse[] = [
     ],
   },
   {
-    armdozerId: ArmDozerIds.SHIN_BRAVER,
+    armdozerId: ArmdozerIds.SHIN_BRAVER,
     difficulty: "Normal",
     stages: [
       { ...Attack4Defense1LightningDozerStage, bgm: SOUND_IDS.BATTLE_BGM_01 },
@@ -207,7 +206,7 @@ export const NPCBattleCourses: NPCBattleCourse[] = [
     ],
   },
   {
-    armdozerId: ArmDozerIds.SHIN_BRAVER,
+    armdozerId: ArmdozerIds.SHIN_BRAVER,
     difficulty: "Hard",
     stages: [
       { ...HardNeoLandozerStage, bgm: SOUND_IDS.BATTLE_BGM_01 },
@@ -216,7 +215,7 @@ export const NPCBattleCourses: NPCBattleCourse[] = [
     ],
   },
   {
-    armdozerId: ArmDozerIds.SHIN_BRAVER,
+    armdozerId: ArmdozerIds.SHIN_BRAVER,
     difficulty: "VeryHard",
     stages: [
       { ...VeryHardLightningDozer, bgm: SOUND_IDS.BATTLE_BGM_01 },
@@ -225,7 +224,7 @@ export const NPCBattleCourses: NPCBattleCourse[] = [
     ],
   },
   {
-    armdozerId: ArmDozerIds.NEO_LANDOZER,
+    armdozerId: ArmdozerIds.NEO_LANDOZER,
     difficulty: "Easy",
     stages: [
       { ...OneBatteryShinBraverStage, bgm: SOUND_IDS.BATTLE_BGM_01 },
@@ -234,7 +233,7 @@ export const NPCBattleCourses: NPCBattleCourse[] = [
     ],
   },
   {
-    armdozerId: ArmDozerIds.NEO_LANDOZER,
+    armdozerId: ArmdozerIds.NEO_LANDOZER,
     difficulty: "Normal",
     stages: [
       { ...Attack4Defense1LightningDozerStage, bgm: SOUND_IDS.BATTLE_BGM_01 },
@@ -243,7 +242,7 @@ export const NPCBattleCourses: NPCBattleCourse[] = [
     ],
   },
   {
-    armdozerId: ArmDozerIds.NEO_LANDOZER,
+    armdozerId: ArmdozerIds.NEO_LANDOZER,
     difficulty: "Hard",
     stages: [
       { ...HardShinBraverStage, bgm: SOUND_IDS.BATTLE_BGM_01 },
@@ -252,7 +251,7 @@ export const NPCBattleCourses: NPCBattleCourse[] = [
     ],
   },
   {
-    armdozerId: ArmDozerIds.NEO_LANDOZER,
+    armdozerId: ArmdozerIds.NEO_LANDOZER,
     difficulty: "VeryHard",
     stages: [
       { ...VeryHardLightningDozer, bgm: SOUND_IDS.BATTLE_BGM_01 },
@@ -261,7 +260,7 @@ export const NPCBattleCourses: NPCBattleCourse[] = [
     ],
   },
   {
-    armdozerId: ArmDozerIds.LIGHTNING_DOZER,
+    armdozerId: ArmdozerIds.LIGHTNING_DOZER,
     difficulty: "Easy",
     stages: [
       { ...OneBatteryNeoLandozerStage, bgm: SOUND_IDS.BATTLE_BGM_01 },
@@ -270,7 +269,7 @@ export const NPCBattleCourses: NPCBattleCourse[] = [
     ],
   },
   {
-    armdozerId: ArmDozerIds.LIGHTNING_DOZER,
+    armdozerId: ArmdozerIds.LIGHTNING_DOZER,
     difficulty: "Normal",
     stages: [
       { ...Attack4Defense1ShinBraverStage, bgm: SOUND_IDS.BATTLE_BGM_01 },
@@ -279,7 +278,7 @@ export const NPCBattleCourses: NPCBattleCourse[] = [
     ],
   },
   {
-    armdozerId: ArmDozerIds.LIGHTNING_DOZER,
+    armdozerId: ArmdozerIds.LIGHTNING_DOZER,
     difficulty: "Hard",
     stages: [
       { ...HardNeoLandozerStage, bgm: SOUND_IDS.BATTLE_BGM_01 },
@@ -288,7 +287,7 @@ export const NPCBattleCourses: NPCBattleCourse[] = [
     ],
   },
   {
-    armdozerId: ArmDozerIds.LIGHTNING_DOZER,
+    armdozerId: ArmdozerIds.LIGHTNING_DOZER,
     difficulty: "VeryHard",
     stages: [
       { ...VeryHardNeoLandozer, bgm: SOUND_IDS.BATTLE_BGM_01 },
@@ -297,7 +296,7 @@ export const NPCBattleCourses: NPCBattleCourse[] = [
     ],
   },
   {
-    armdozerId: ArmDozerIds.WING_DOZER,
+    armdozerId: ArmdozerIds.WING_DOZER,
     difficulty: "Easy",
     stages: [
       { ...OneBatteryNeoLandozerStage, bgm: SOUND_IDS.BATTLE_BGM_01 },
@@ -306,7 +305,7 @@ export const NPCBattleCourses: NPCBattleCourse[] = [
     ],
   },
   {
-    armdozerId: ArmDozerIds.WING_DOZER,
+    armdozerId: ArmdozerIds.WING_DOZER,
     difficulty: "Normal",
     stages: [
       { ...Attack4Defense1LightningDozerStage, bgm: SOUND_IDS.BATTLE_BGM_01 },
@@ -315,7 +314,7 @@ export const NPCBattleCourses: NPCBattleCourse[] = [
     ],
   },
   {
-    armdozerId: ArmDozerIds.WING_DOZER,
+    armdozerId: ArmdozerIds.WING_DOZER,
     difficulty: "Hard",
     stages: [
       { ...HardNeoLandozerStage, bgm: SOUND_IDS.BATTLE_BGM_01 },
@@ -324,7 +323,7 @@ export const NPCBattleCourses: NPCBattleCourse[] = [
     ],
   },
   {
-    armdozerId: ArmDozerIds.WING_DOZER,
+    armdozerId: ArmdozerIds.WING_DOZER,
     difficulty: "VeryHard",
     stages: [
       { ...VeryHardLightningDozer, bgm: SOUND_IDS.BATTLE_BGM_01 },
@@ -333,7 +332,7 @@ export const NPCBattleCourses: NPCBattleCourse[] = [
     ],
   },
   {
-    armdozerId: ArmDozerIds.SHIN_BRAVER,
+    armdozerId: ArmdozerIds.SHIN_BRAVER,
     difficulty: "Easy",
     stages: [
       { ...OneBatteryNeoLandozerStage, bgm: SOUND_IDS.BATTLE_BGM_01 },
@@ -342,7 +341,7 @@ export const NPCBattleCourses: NPCBattleCourse[] = [
     ],
   },
   {
-    armdozerId: ArmDozerIds.GENESIS_BRAVER,
+    armdozerId: ArmdozerIds.GENESIS_BRAVER,
     difficulty: "Normal",
     stages: [
       { ...Attack4Defense1LightningDozerStage, bgm: SOUND_IDS.BATTLE_BGM_01 },
@@ -351,7 +350,7 @@ export const NPCBattleCourses: NPCBattleCourse[] = [
     ],
   },
   {
-    armdozerId: ArmDozerIds.GENESIS_BRAVER,
+    armdozerId: ArmdozerIds.GENESIS_BRAVER,
     difficulty: "Hard",
     stages: [
       { ...HardNeoLandozerStage, bgm: SOUND_IDS.BATTLE_BGM_01 },
@@ -360,7 +359,7 @@ export const NPCBattleCourses: NPCBattleCourse[] = [
     ],
   },
   {
-    armdozerId: ArmDozerIds.GENESIS_BRAVER,
+    armdozerId: ArmdozerIds.GENESIS_BRAVER,
     difficulty: "VeryHard",
     stages: [
       { ...VeryHardLightningDozer, bgm: SOUND_IDS.BATTLE_BGM_01 },

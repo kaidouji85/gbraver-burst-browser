@@ -5,7 +5,7 @@ import type {
   PlayerState,
 } from "gbraver-burst-core";
 
-import type { ArmDozerSprite } from "../../../../../game-object/armdozer/armdozer-sprite";
+import type { ArmdozerSprite } from "../../../../../game-object/armdozer/armdozer-sprite";
 import { PlainHUDCamera } from "../../../../../game-object/camera/plain-hud/plain-hud-camera";
 import { TDCamera } from "../../../../../game-object/camera/td";
 import type { HUDGameObjects } from "../../../view/hud/game-objects";
@@ -22,7 +22,7 @@ import type { StateAnimationProps } from "../state-animation-props";
  * @type RESULT 戦闘結果
  */
 export type BattleAnimationParamX<
-  SPRITE extends ArmDozerSprite,
+  SPRITE extends ArmdozerSprite,
   RESULT extends BattleResult,
 > = {
   attackerState: PlayerState;
@@ -32,7 +32,7 @@ export type BattleAnimationParamX<
   defenderState: PlayerState;
   defenderTD: TDPlayer;
   defenderHUD: HUDPlayer;
-  defenderSprite: ArmDozerSprite;
+  defenderSprite: ArmdozerSprite;
   tdObjects: TDGameObjects;
   tdCamera: TDCamera;
   hudObjects: HUDGameObjects;
@@ -43,7 +43,7 @@ export type BattleAnimationParamX<
 
 /** 戦闘アニメーション共通で使うパラメータ */
 export type BattleAnimationParam = BattleAnimationParamX<
-  ArmDozerSprite,
+  ArmdozerSprite,
   BattleResult
 >;
 

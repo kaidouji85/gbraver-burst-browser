@@ -1,7 +1,7 @@
 import { Observable } from "rxjs";
 
 import { GameObjectAction } from "../../src/js/game-object/action/game-object-action";
-import { ArmDozerSprite } from "../../src/js/game-object/armdozer/armdozer-sprite";
+import { ArmdozerSprite } from "../../src/js/game-object/armdozer/armdozer-sprite";
 import { Resources } from "../../src/js/resource";
 import { TDGameObjectStub } from "./td-game-object-stub";
 
@@ -12,7 +12,7 @@ import { TDGameObjectStub } from "./td-game-object-stub";
  * @param gameObjectAction ゲームオブジェクトアクション
  * @return アームドーザスプライト
  */
-type SpriteGenerator<X extends ArmDozerSprite> = (
+type SpriteGenerator<X extends ArmdozerSprite> = (
   resources: Resources,
   gameObjectAction: Observable<GameObjectAction>,
 ) => X;
@@ -24,7 +24,7 @@ type SpriteGenerator<X extends ArmDozerSprite> = (
  * @param fn スプライト操作関数
  * @return ルートHTML要素
  */
-export const armdozerSpriteStub = <X extends ArmDozerSprite>(
+export const armdozerSpriteStub = <X extends ArmdozerSprite>(
   generator: SpriteGenerator<X>,
   fn: (sprite: X) => void,
 ): HTMLElement => {

@@ -22,7 +22,7 @@ export const WebGLPixelRatios = [0.5, 0.75, 1, 2];
 export type WebGLPixelRatio = (typeof WebGLPixelRatios)[number];
 
 /** Gブレイバーバースト ブラウザ側設定項目 */
-export type GbraverBurstBrowserConfig = {
+export type GBraverBurstBrowserConfig = {
   /** WebGLピクセルレート */
   webGLPixelRatio: WebGLPixelRatio;
 

@@ -3,7 +3,7 @@ import * as THREE from "three";
 import { Animate } from "../../animation/animate";
 
 /** アームドーザスプライト */
-export interface ArmDozerSprite {
+export interface ArmdozerSprite {
   /**
    * デストラクタ相当の処理
    */

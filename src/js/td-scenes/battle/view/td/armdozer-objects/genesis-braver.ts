@@ -3,7 +3,7 @@ import { Observable } from "rxjs";
 import * as THREE from "three";
 
 import type { GameObjectAction } from "../../../../../game-object/action/game-object-action";
-import type { ArmDozerSprite } from "../../../../../game-object/armdozer/armdozer-sprite";
+import type { ArmdozerSprite } from "../../../../../game-object/armdozer/armdozer-sprite";
 import {
   EnemyGenesisBraver,
   PlayerGenesisBraver,
@@ -44,7 +44,7 @@ export class GenesisBraverTD
   }
 
   /** @override */
-  sprite(): ArmDozerSprite {
+  sprite(): ArmdozerSprite {
     return this.genesisBraver;
   }
 

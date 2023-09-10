@@ -1,7 +1,7 @@
-import type { GbraverBurstBrowserConfig } from "../../../../src/js/game/config/browser-config";
+import type { GBraverBurstBrowserConfig } from "../../../../src/js/game/config/browser-config";
 import { isConfigChanged } from "../../../../src/js/game/config/config-changed";
 
-const origin: GbraverBurstBrowserConfig = {
+const origin: GBraverBurstBrowserConfig = {
   webGLPixelRatio: 2,
   battleAnimationTimeScale: 1,
   bgmVolume: 1,
@@ -10,12 +10,12 @@ const origin: GbraverBurstBrowserConfig = {
 };
 
 test("WebGLピクセルレートの変更を正しく検知できる", () => {
-  const update: GbraverBurstBrowserConfig = { ...origin, webGLPixelRatio: 1 };
+  const update: GBraverBurstBrowserConfig = { ...origin, webGLPixelRatio: 1 };
   expect(isConfigChanged(origin, update)).toBe(true);
 });
 
 test("戦闘アニメ再生速度の変更を正しく検知できる", () => {
-  const update: GbraverBurstBrowserConfig = {
+  const update: GBraverBurstBrowserConfig = {
     ...origin,
     battleAnimationTimeScale: 0.5,
   };
@@ -23,17 +23,17 @@ test("戦闘アニメ再生速度の変更を正しく検知できる", () => {
 });
 
 test("BGM音量の変更を正しく検知できる", () => {
-  const update: GbraverBurstBrowserConfig = { ...origin, bgmVolume: 0.5 };
+  const update: GBraverBurstBrowserConfig = { ...origin, bgmVolume: 0.5 };
   expect(isConfigChanged(origin, update)).toBe(true);
 });
 
 test("SE音量の変更を正しく検知できる", () => {
-  const update: GbraverBurstBrowserConfig = { ...origin, seVolume: 0.5 };
+  const update: GBraverBurstBrowserConfig = { ...origin, seVolume: 0.5 };
   expect(isConfigChanged(origin, update)).toBe(true);
 });
 
 test("戦闘シーンコントトーラータイプの変更を正しく検知できる", () => {
-  const update: GbraverBurstBrowserConfig = {
+  const update: GBraverBurstBrowserConfig = {
     ...origin,
     battleControllerType: "MiniController",
   };
@@ -41,7 +41,7 @@ test("戦闘シーンコントトーラータイプの変更を正しく検知�
 });
 
 test("複数項目の変更を正しく検知できる", () => {
-  const update: GbraverBurstBrowserConfig = {
+  const update: GBraverBurstBrowserConfig = {
     ...origin,
     webGLPixelRatio: 1,
     battleAnimationTimeScale: 0.25,

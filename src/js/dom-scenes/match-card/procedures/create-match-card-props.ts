@@ -1,4 +1,4 @@
-import { ArmDozerId } from "gbraver-burst-core";
+import { ArmdozerId } from "gbraver-burst-core";
 
 import { getArmdozerIconPathId } from "../../../path/armdozer-icon-path";
 import { Resources } from "../../../resource";
@@ -13,9 +13,9 @@ export type GenerateMatchCardPropsParams = {
   /** リソース管理オブジェクト */
   resources: Resources;
   /** プレイヤー情報 */
-  player: ArmDozerId;
+  player: ArmdozerId;
   /** 敵情報 */
-  enemy: ArmDozerId;
+  enemy: ArmdozerId;
   /** キャプション */
   caption: string;
 };

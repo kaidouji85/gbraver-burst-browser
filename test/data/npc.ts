@@ -1,5 +1,10 @@
-import type { Armdozer, Command, Pilot } from "gbraver-burst-core";
-import { ArmDozers, Pilots } from "gbraver-burst-core";
+import {
+  Armdozer,
+  Armdozers,
+  Command,
+  Pilot,
+  Pilots,
+} from "gbraver-burst-core";
 
 import type { NPC } from "../../src/js/npc/npc";
 /** 空NPCのシンプルな実装 */
@@ -12,7 +17,7 @@ class SimpleEmptyNPC implements NPC {
    * コンストラクタ
    */
   constructor() {
-    this.armdozer = ArmDozers[0];
+    this.armdozer = Armdozers[0];
     this.pilot = Pilots[0];
   }
 

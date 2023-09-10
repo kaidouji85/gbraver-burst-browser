@@ -1,11 +1,12 @@
-import type {
-  ArmDozerId,
+import {
+  ArmdozerId,
+  Armdozers,
   GameEndResult,
   PilotId,
+  Pilots,
   Player,
   PlayerId,
 } from "gbraver-burst-core";
-import { ArmDozers, Pilots } from "gbraver-burst-core";
 
 import type { NPC } from "../npc/npc";
 import type { SoundId } from "../resource/sound";
@@ -51,11 +52,11 @@ export type NPCBattleState = {
  */
 export function createNPCBattleState(
   playerId: PlayerId,
-  armdozerId: ArmDozerId,
+  armdozerId: ArmdozerId,
   pilotId: PilotId,
   stages: NPCBattleStage[],
 ): NPCBattleState {
-  const armdozer = ArmDozers.find((v) => v.id === armdozerId) ?? ArmDozers[0];
+  const armdozer = Armdozers.find((v) => v.id === armdozerId) ?? Armdozers[0];
   const pilot = Pilots.find((v) => v.id === pilotId) ?? Pilots[0];
   const player = {
     playerId,

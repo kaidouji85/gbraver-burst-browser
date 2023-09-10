@@ -1,4 +1,4 @@
-import { ArmDozerId, PilotId } from "gbraver-burst-core";
+import { ArmdozerId, PilotId } from "gbraver-burst-core";
 import { Subject } from "rxjs";
 
 import { ArmdozerBustShotContainer } from "./armdozer-bust-shot";
@@ -20,7 +20,7 @@ export type PlayerSelectProps = {
   /** パイロットセレクタ */
   pilotSelector: PilotSelector;
   /** 現在選択中のアームドーザID */
-  armdozerId: ArmDozerId;
+  armdozerId: ArmdozerId;
   /** 現在選択中のパイロットID */
   pilotId: PilotId;
   /** プレイヤー決定ストリーム */
@@ -28,7 +28,7 @@ export type PlayerSelectProps = {
   /** 戻るストリーム */
   prev: Subject<void>;
   /** 本画面で選択可能なアームドーザのID */
-  readonly armDozerIds: ArmDozerId[];
+  readonly armdozerIds: ArmdozerId[];
   /** 本画面で選択可能なパイロットのID */
   readonly pilotIds: PilotId[];
 };

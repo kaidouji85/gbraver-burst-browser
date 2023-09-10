@@ -1,6 +1,6 @@
 import {
-  ArmDozerIds,
-  ArmDozers,
+  ArmdozerIds,
+  Armdozers,
   Command,
   PilotIds,
   Pilots,
@@ -50,7 +50,7 @@ const defenseRoutine: SimpleRoutine = (data) => {
  */
 export function attack4Defense1LightningDozerNPC(): NPC {
   const armdozer =
-    ArmDozers.find((v) => v.id === ArmDozerIds.LIGHTNING_DOZER) ?? ArmDozers[0];
+    Armdozers.find((v) => v.id === ArmdozerIds.LIGHTNING_DOZER) ?? Armdozers[0];
   const pilot = Pilots.find((v) => v.id === PilotIds.RAITO) ?? Pilots[0];
   return new SimpleNPC(armdozer, pilot, attackRoutine, defenseRoutine);
 }
@@ -62,7 +62,7 @@ export function attack4Defense1LightningDozerNPC(): NPC {
  */
 export function attack4Defense1ShinBraverNPC(): NPC {
   const armdozer =
-    ArmDozers.find((v) => v.id === ArmDozerIds.SHIN_BRAVER) ?? ArmDozers[0];
+    Armdozers.find((v) => v.id === ArmdozerIds.SHIN_BRAVER) ?? Armdozers[0];
   const pilot = Pilots.find((v) => v.id === PilotIds.SHINYA) ?? Pilots[0];
   return new SimpleNPC(armdozer, pilot, attackRoutine, defenseRoutine);
 }

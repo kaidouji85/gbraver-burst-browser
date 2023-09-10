@@ -1,5 +1,4 @@
-import type { Player } from "gbraver-burst-core";
-import { ArmDozerIds } from "gbraver-burst-core";
+import { ArmdozerIds, Player } from "gbraver-burst-core";
 import { Observable } from "rxjs";
 
 import type { GameObjectAction } from "../../../../../game-object/action/game-object-action";
@@ -16,7 +15,6 @@ import { enemyWingDozerTD, playerWingDozerTD } from "./wing-dozer";
 
 /**
  * プレイヤー側  3Dレイヤー アームドーザ固有オブジェクト
- *
  * @param resources リソース管理オブジェクト
  * @param gameObjectAction ゲームオブジェクトアクション
  * @param state プレイヤーの状態
@@ -28,21 +26,16 @@ export function playerTDArmdozer(
   state: Player,
 ): TDArmdozerObjects {
   switch (state.armdozer.id) {
-    case ArmDozerIds.SHIN_BRAVER:
+    case ArmdozerIds.SHIN_BRAVER:
       return playerShinBraverTD(resources, gameObjectAction, state);
-
-    case ArmDozerIds.LIGHTNING_DOZER:
+    case ArmdozerIds.LIGHTNING_DOZER:
       return playerLightningDozerTD(resources, gameObjectAction, state);
-
-    case ArmDozerIds.WING_DOZER:
+    case ArmdozerIds.WING_DOZER:
       return playerWingDozerTD(resources, gameObjectAction, state);
-
-    case ArmDozerIds.NEO_LANDOZER:
+    case ArmdozerIds.NEO_LANDOZER:
       return playerNeoLandozerTD(resources, gameObjectAction, state);
-
-    case ArmDozerIds.GENESIS_BRAVER:
+    case ArmdozerIds.GENESIS_BRAVER:
       return playerGenesisBraverTD(resources, gameObjectAction, state);
-
     default:
       return playerShinBraverTD(resources, gameObjectAction, state);
   }
@@ -50,7 +43,6 @@ export function playerTDArmdozer(
 
 /**
  * 敵側  3Dレイヤー アームドーザ固有オブジェクト
- *
  * @param resources リソース管理オブジェクト
  * @param gameObjectAction ゲームオブジェクトアクション
  * @param state プレイヤーの状態
@@ -62,21 +54,16 @@ export function enemyTDArmdozer(
   state: Player,
 ): TDArmdozerObjects {
   switch (state.armdozer.id) {
-    case ArmDozerIds.SHIN_BRAVER:
+    case ArmdozerIds.SHIN_BRAVER:
       return enemyShinBraverTD(resources, gameObjectAction, state);
-
-    case ArmDozerIds.LIGHTNING_DOZER:
+    case ArmdozerIds.LIGHTNING_DOZER:
       return enemyLightningDozerTD(resources, gameObjectAction, state);
-
-    case ArmDozerIds.WING_DOZER:
+    case ArmdozerIds.WING_DOZER:
       return enemyWingDozerTD(resources, gameObjectAction, state);
-
-    case ArmDozerIds.NEO_LANDOZER:
+    case ArmdozerIds.NEO_LANDOZER:
       return enemyNeoLandozerTD(resources, gameObjectAction, state);
-
-    case ArmDozerIds.GENESIS_BRAVER:
+    case ArmdozerIds.GENESIS_BRAVER:
       return enemyGenesisBraverTD(resources, gameObjectAction, state);
-
     default:
       return enemyShinBraverTD(resources, gameObjectAction, state);
   }

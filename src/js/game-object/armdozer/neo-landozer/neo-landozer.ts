@@ -8,8 +8,8 @@ import type { Update } from "../../../game-loop/update";
 import type { Resources } from "../../../resource";
 import { firstUpdate } from "../../action/first-update";
 import type { GameObjectAction } from "../../action/game-object-action";
-import type { ArmDozerSprite } from "../armdozer-sprite";
-import { EmptyArmDozerSprite } from "../empty-armdozer-sprite";
+import type { ArmdozerSprite } from "../armdozer-sprite";
+import { EmptyArmdozerSprite } from "../empty-armdozer-sprite";
 import { activeFlash } from "./animation/active-flash";
 import { armHammer } from "./animation/arm-hammer";
 import { avoid } from "./animation/avoid";
@@ -31,7 +31,7 @@ import { NeoLandozerSounds } from "./sounds/neo-landozer-sounds";
 import type { NeoLandozerView } from "./view/neo-landozer-view";
 
 /** ネオランドーザのゲームオブジェクト */
-export class NeoLandozer extends EmptyArmDozerSprite implements ArmDozerSprite {
+export class NeoLandozer extends EmptyArmdozerSprite implements ArmdozerSprite {
   /** モデル */
   #model: NeoLandozerModel;
 

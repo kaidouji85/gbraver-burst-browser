@@ -1,6 +1,6 @@
 import { Observable, Unsubscribable } from "rxjs";
 
-import type { GbraverBurstBrowserConfig } from "../../game/config/browser-config";
+import type { GBraverBurstBrowserConfig } from "../../game/config/browser-config";
 import type { Resources } from "../../resource";
 import type { DOMScene } from "../dom-scene";
 import { bindEventListeners } from "./listeners";
@@ -18,7 +18,7 @@ export class Config implements DOMScene {
    * @param resources リソース管理オブジェクト
    * @param config Gブレイバーバースト ブラウザ側設定項目
    */
-  constructor(resources: Resources, config: GbraverBurstBrowserConfig) {
+  constructor(resources: Resources, config: GBraverBurstBrowserConfig) {
     this.#props = createConfigProps(resources, config);
     this.#unsubscriber = bindEventListeners(this.#props);
   }
@@ -50,7 +50,7 @@ export class Config implements DOMScene {
    *
    * @return 通知ストリーム
    */
-  notifyConfigChanges(): Observable<GbraverBurstBrowserConfig> {
+  notifyConfigChanges(): Observable<GBraverBurstBrowserConfig> {
     return this.#props.configChange;
   }
 }

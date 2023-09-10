@@ -2,13 +2,13 @@ import * as THREE from "three";
 
 import { Animate } from "../../animation/animate";
 import { empty } from "../../animation/delay";
-import type { ArmDozerSprite } from "./armdozer-sprite";
+import type { ArmdozerSprite } from "./armdozer-sprite";
 
 /**
  * 空のアームドーザスプライト
- * ArmDozerSpriteのデフォルト実装を定義する目的で、本クラスを利用すること
+ * ArmdozerSpriteのデフォルト実装を定義する目的で、本クラスを利用すること
  */
-export class EmptyArmDozerSprite implements ArmDozerSprite {
+export class EmptyArmdozerSprite implements ArmdozerSprite {
   /** @override */
   destructor(): void {
     // NOP

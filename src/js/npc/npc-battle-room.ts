@@ -1,11 +1,11 @@
 import type {
   Command,
   GameState,
-  GbraverBurstCore,
+  GBraverBurstCore,
   Player,
   PlayerCommand,
 } from "gbraver-burst-core";
-import { startGbraverBurst } from "gbraver-burst-core";
+import { startGBraverBurst } from "gbraver-burst-core";
 
 import { playerUuid } from "../uuid/player";
 import type { NPC } from "./npc";
@@ -14,24 +14,23 @@ import type { NPC } from "./npc";
 export class NPCBattleRoom {
   player: Player;
   enemy: Player;
-  _core: GbraverBurstCore;
-  _npc: NPC;
+  #core: GBraverBurstCore;
+  #npc: NPC;
 
   /**
    * コンストラクタ
-   *
    * @param player プレイヤー
    * @param npc NPC
    */
   constructor(player: Player, npc: NPC) {
     this.player = player;
-    this._npc = npc;
+    this.#npc = npc;
     this.enemy = {
       playerId: playerUuid(),
       armdozer: npc.armdozer,
       pilot: npc.pilot,
     };
-    this._core = startGbraverBurst([player, this.enemy]);
+    this.#core = startGBraverBurst([player, this.enemy]);
   }
 
   /**
@@ -40,7 +39,7 @@ export class NPCBattleRoom {
    * @return 取得結果
    */
   stateHistory(): GameState[] {
-    return this._core.stateHistory();
+    return this.#core.stateHistory();
   }
 
   /**
@@ -56,11 +55,11 @@ export class NPCBattleRoom {
     };
     const enemyCommand: PlayerCommand = {
       playerId: this.enemy.playerId,
-      command: this._npc.routine(
+      command: this.#npc.routine(
         this.enemy.playerId,
-        this._core.stateHistory(),
+        this.#core.stateHistory(),
       ),
     };
-    return this._core.progress([playerCommand, enemyCommand]);
+    return this.#core.progress([playerCommand, enemyCommand]);
   }
 }
