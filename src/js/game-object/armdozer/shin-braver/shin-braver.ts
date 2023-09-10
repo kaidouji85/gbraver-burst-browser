@@ -31,6 +31,7 @@ import { createInitialValue } from "./model/initial-value";
 import type { ShinBraverModel } from "./model/shin-braver-model";
 import { ShinBraverSounds } from "./sounds/shin-braver-sounds";
 import type { ShinBraverView } from "./view/shin-braver-view";
+import {upright} from "./animation/upright";
 
 /** シンブレイバーのゲームオブジェクト */
 export class ShinBraver extends EmptyArmdozerSprite implements ArmdozerSprite {
@@ -190,6 +191,14 @@ export class ShinBraver extends EmptyArmdozerSprite implements ArmdozerSprite {
    */
   burstToStand(): Animate {
     return burstToStand(this.#model, this.#sounds);
+  }
+
+  /**
+   * 気をつけ
+   * @return アニメーション
+   */
+  upright(): Animate {
+    return upright(this.#model);
   }
 
   /** @override */

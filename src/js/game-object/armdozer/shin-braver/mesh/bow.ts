@@ -4,7 +4,7 @@ import { AnimationMesh } from "./animation-mesh";
 import { createAnimationMeshes } from "./create-animation-meshes";
 
 /** テクスチャID */
-export const TEXTURE_ID = TEXTURE_IDS.SHIN_BRAVER_BOW
+export const TEXTURE_ID = TEXTURE_IDS.SHIN_BRAVER_BOW;
 /** アニメーション枚数 */
 export const MAX_ANIMATION = 4;
 
