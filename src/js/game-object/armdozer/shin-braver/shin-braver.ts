@@ -12,6 +12,8 @@ import type { ArmdozerSprite } from "../armdozer-sprite";
 import { EmptyArmdozerSprite } from "../empty-armdozer-sprite";
 import { activeFlash } from "./animation/active-flash";
 import { avoid } from "./animation/avoid";
+import { bowDown } from "./animation/bow-down";
+import { bowUp } from "./animation/bow-up";
 import { burst } from "./animation/burst";
 import { burstToStand } from "./animation/burst-to-stand";
 import { charge } from "./animation/charge";
@@ -27,14 +29,12 @@ import { knockBackToStand } from "./animation/knock-back-to-stand";
 import { punchToStand } from "./animation/punch-to-stand";
 import { startActive } from "./animation/start-active";
 import { straightPunch } from "./animation/straight-punch";
+import { upright } from "./animation/upright";
+import { uprightToStand } from "./animation/upright-to-stand";
 import { createInitialValue } from "./model/initial-value";
 import type { ShinBraverModel } from "./model/shin-braver-model";
 import { ShinBraverSounds } from "./sounds/shin-braver-sounds";
 import type { ShinBraverView } from "./view/shin-braver-view";
-import {upright} from "./animation/upright";
-import {uprightToStand} from "./animation/upright-to-stand";
-import {bowDown} from "./animation/bow-down";
-import {bowUp} from "./animation/bow-up";
 
 /** シンブレイバーのゲームオブジェクト */
 export class ShinBraver extends EmptyArmdozerSprite implements ArmdozerSprite {

@@ -12,17 +12,21 @@ export function uprightToStand(model: ShinBraverModel): Animate {
   return process(() => {
     model.animation.type = "UPRIGHT";
     model.animation.frame = 1;
-  }).chain(
-    tween(model.animation, (t) =>
-      t.to(
-        {
-          frame: 0,
-        },
-        200,
+  })
+    .chain(
+      tween(model.animation, (t) =>
+        t.to(
+          {
+            frame: 0,
+          },
+          200,
+        ),
       ),
-    ),
-  ).chain(process(() => {
-    model.animation.type = "STAND";
-    model.animation.frame = 0;
-  }))
+    )
+    .chain(
+      process(() => {
+        model.animation.type = "STAND";
+        model.animation.frame = 0;
+      }),
+    );
 }

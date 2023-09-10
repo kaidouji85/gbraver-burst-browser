@@ -294,14 +294,21 @@ const uprightBow = (sprite: ShinBraver) => {
   delay(1000)
     .chain(sprite.upright())
     .chain(delay(1000))
+    .chain(sprite.bowDown())
+    .chain(delay(1000))
+    .chain(sprite.bowUp())
+    .chain(delay(1000))
+    .chain(sprite.uprightToStand())
     .loop();
 };
 
 /** プレイヤー 気をつけ、礼 */
-export const playerUprightBow = () => armdozerSpriteStub(PlayerShinBraver, uprightBow);
+export const playerUprightBow = () =>
+  armdozerSpriteStub(PlayerShinBraver, uprightBow);
 
 /** 敵 気をつけ、礼 */
-export const enemyUprightBow = () => armdozerSpriteStub(EnemyShinBraver, uprightBow);
+export const enemyUprightBow = () =>
+  armdozerSpriteStub(EnemyShinBraver, uprightBow);
 
 /**
  * アクティブ 気をつけ、礼
@@ -310,10 +317,12 @@ export const enemyUprightBow = () => armdozerSpriteStub(EnemyShinBraver, upright
 const activeUprightBow = (sprite: ShinBraver) => {
   uprightBow(sprite);
   sprite.startActive().play();
-}
+};
 
 /** プレイヤー アクティブ 気をつけ、礼 */
-export const playerActiveUprightBow = () => armdozerSpriteStub(PlayerShinBraver, activeUprightBow);
+export const playerActiveUprightBow = () =>
+  armdozerSpriteStub(PlayerShinBraver, activeUprightBow);
 
 /** 敵 アクティブ 気をつけ、礼 */
-export const enemyActiveUprightBow = () => armdozerSpriteStub(EnemyShinBraver, activeUprightBow);
+export const enemyActiveUprightBow = () =>
+  armdozerSpriteStub(EnemyShinBraver, activeUprightBow);
