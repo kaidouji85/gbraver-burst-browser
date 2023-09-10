@@ -71,4 +71,24 @@ export class EmptyArmdozerSprite implements ArmdozerSprite {
   down(): Animate {
     return empty();
   }
+
+  /** @override */
+  upright(): Animate {
+    return empty();
+  }
+
+  /** @override */
+  uprightToStand(): Animate {
+    return empty();
+  }
+
+  /** @override */
+  bowDown(): Animate {
+    return empty();
+  }
+
+  /** @override */
+  bowUp(): Animate {
+    return empty();
+  }
 }

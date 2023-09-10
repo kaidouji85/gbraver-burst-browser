@@ -38,16 +38,12 @@ import type { WingDozerView } from "./view/wing-dozer-view";
 export class WingDozer extends EmptyArmdozerSprite implements ArmdozerSprite {
   /** モデル */
   #model: WingDozerModel;
-
   /** ビュー */
   #view: WingDozerView;
-
   /** サウンド */
   #sounds: WingDozerSounds;
-
   /** アクティブフラッシュTweenグループ */
   #activeFlashTween: TWEEN.Group;
-
   /** アンサブスクライバ */
   #unsubscribers: Unsubscribable[];
 
@@ -125,34 +121,22 @@ export class WingDozer extends EmptyArmdozerSprite implements ArmdozerSprite {
     return dashToStand(this.#model, this.#sounds);
   }
 
-  /**
-   * 気をつけ
-   * @return アニメーション
-   */
+  /** @override */
   upright(): Animate {
     return upright(this.#model, this.#sounds);
   }
 
-  /**
-   * 気をつけ -> 立ち
-   * @return アニメーション
-   */
+  /** @override */
   uprightToStand(): Animate {
     return uprightToStand(this.#model, this.#sounds);
   }
 
-  /**
-   * 礼（倒れる）
-   * @return アニメーション
-   */
+  /** @override */
   bowDown(): Animate {
     return bowDown(this.#model, this.#sounds);
   }
 
-  /**
-   * 礼（起き上がる）
-   * @return アニメーション
-   */
+  /** @override */
   bowUp(): Animate {
     return bowUp(this.#model, this.#sounds);
   }
