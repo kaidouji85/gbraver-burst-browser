@@ -63,4 +63,12 @@ export const WingDozerTextureConfigs: TextureConfig[] = [
     id: TEXTURE_IDS.WING_DOZER_BURST_BUTTON_ICON,
     path: "armdozer/wing-dozer/burst-button-icon.webp",
   },
+  {
+    id: TEXTURE_IDS.WING_DOZER_UPRIGHT,
+    path: "armdozer/wing-dozer/upright.webp",
+  },
+  {
+    id: TEXTURE_IDS.WING_DOZER_BOW,
+    path: "armdozer/wing-dozer/bow.webp",
+  },
 ];
