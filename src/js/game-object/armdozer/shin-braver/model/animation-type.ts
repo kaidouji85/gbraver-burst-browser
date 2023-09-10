@@ -12,4 +12,6 @@ export type AnimationType =
   | "BURST_UP"
   | "BURST_DOWN"
   | "BACK_STEP"
-  | "FRONT_STEP";
+  | "FRONT_STEP"
+  | "UPRIGHT"
+  | "BOW";
