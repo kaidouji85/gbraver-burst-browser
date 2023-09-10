@@ -1,7 +1,7 @@
 import { Resources } from "../../../../resource";
 import { AnimationMesh } from "./animation-mesh";
 import { backStep } from "./back-step";
-import {bow} from "./bow";
+import { bow } from "./bow";
 import { dashDown } from "./dash-down";
 import { dashToStand } from "./dash-to-stand";
 import { dashUp } from "./dash-up";
@@ -13,7 +13,7 @@ import { stand } from "./stand";
 import { upperAttack } from "./upper-attack";
 import { upperCharge } from "./upper-charge";
 import { upperToStand } from "./upper-to-stand";
-import {upright} from "./upright";
+import { upright } from "./upright";
 
 /**
  * ビューで利用するすべてのメッシュを生成する
