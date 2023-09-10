@@ -1,6 +1,6 @@
-import {all} from "../animation/all";
-import {Animate} from "../animation/animate";
-import {CustomBattleEventProps} from "../td-scenes/battle/custom-battle-event";
+import { all } from "../animation/all";
+import { Animate } from "../animation/animate";
+import { CustomBattleEventProps } from "../td-scenes/battle/custom-battle-event";
 
 /**
  * 互いに気をつけする
@@ -8,9 +8,5 @@ import {CustomBattleEventProps} from "../td-scenes/battle/custom-battle-event";
  * @return アニメーション
  */
 export function synchronizedUpright(props: CustomBattleEventProps): Animate {
-  return all(
-    ...props.view.td.armdozerObjects.map(v =>
-      v.sprite().upright()
-    )
-  );
+  return all(...props.view.td.armdozerObjects.map((v) => v.sprite().upright()));
 }
