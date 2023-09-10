@@ -1,3 +1,4 @@
+import { all } from "../../../animation/all";
 import { delay } from "../../../animation/delay";
 import { CustomBattleEventProps } from "../../../td-scenes/battle/custom-battle-event";
 import { ShinBraverTD } from "../../../td-scenes/battle/view/td/armdozer-objects/shin-braver";
@@ -8,8 +9,7 @@ import {
 } from "../../active-message-window";
 import { refreshConversation } from "../../invisible-all-message-windows";
 import { scrollLeftMessages, scrollRightMessages } from "../../scroll-messages";
-import {all} from "../../../animation/all";
-import {waitUntilWindowPush} from "../../wait-until-window-push";
+import { waitUntilWindowPush } from "../../wait-until-window-push";
 
 /**
  * 条件を満たした場合、気をつけ、礼をする
@@ -51,7 +51,10 @@ async function uprightBowIfNeed(props: CustomBattleEventProps): Promise<void> {
   ]);
   props.view.dom.leftMessageWindow.scrollUp();
   activeRightMessageWindowWithFace(props, "Shinya");
-  props.view.dom.rightMessageWindow.messages(["シンヤ", "「よろしくお願いします」"]);
+  props.view.dom.rightMessageWindow.messages([
+    "シンヤ",
+    "「よろしくお願いします」",
+  ]);
   await all(
     shinBraverTD.shinBraver
       .bowDown()
@@ -65,7 +68,9 @@ async function uprightBowIfNeed(props: CustomBattleEventProps): Promise<void> {
       .chain(wingDozerTD.wingDozer.bowUp())
       .chain(delay(500))
       .chain(wingDozerTD.wingDozer.uprightToStand()),
-  ).chain(delay(500)).play();
+  )
+    .chain(delay(500))
+    .play();
 }
 
 /**
