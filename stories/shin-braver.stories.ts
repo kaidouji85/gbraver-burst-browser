@@ -302,3 +302,18 @@ export const playerUprightBow = () => armdozerSpriteStub(PlayerShinBraver, uprig
 
 /** 敵 気をつけ、礼 */
 export const enemyUprightBow = () => armdozerSpriteStub(EnemyShinBraver, uprightBow);
+
+/**
+ * アクティブ 気をつけ、礼
+ * @param sprite スプライト
+ */
+const activeUprightBow = (sprite: ShinBraver) => {
+  uprightBow(sprite);
+  sprite.startActive().play();
+}
+
+/** プレイヤー アクティブ 気をつけ、礼 */
+export const playerActiveUprightBow = () => armdozerSpriteStub(PlayerShinBraver, activeUprightBow);
+
+/** 敵 アクティブ 気をつけ、礼 */
+export const enemyActiveUprightBow = () => armdozerSpriteStub(EnemyShinBraver, activeUprightBow);
