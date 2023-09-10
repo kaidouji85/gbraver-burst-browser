@@ -74,4 +74,28 @@ export interface ArmdozerSprite {
    * @return アニメーション
    */
   down(): Animate;
+
+  /**
+   * 気をつけ
+   * @return アニメーション
+   */
+  upright(): Animate;
+
+  /**
+   * 気をつけ -> 立ち
+   * @return アニメーション
+   */
+  uprightToStand(): Animate;
+
+  /**
+   * 礼（倒れる）
+   * @return アニメーション
+   */
+  bowDown(): Animate;
+
+  /**
+   * 礼（起き上がる）
+   * @return アニメーション
+   */
+  bowUp(): Animate;
 }
