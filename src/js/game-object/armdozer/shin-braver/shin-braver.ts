@@ -201,7 +201,7 @@ export class ShinBraver extends EmptyArmdozerSprite implements ArmdozerSprite {
    * @return アニメーション
    */
   upright(): Animate {
-    return upright(this.#model);
+    return upright(this.#model, this.#sounds);
   }
 
   /**
@@ -209,7 +209,7 @@ export class ShinBraver extends EmptyArmdozerSprite implements ArmdozerSprite {
    * @return アニメーション
    */
   uprightToStand(): Animate {
-    return uprightToStand(this.#model);
+    return uprightToStand(this.#model, this.#sounds);
   }
 
   /**
@@ -217,7 +217,7 @@ export class ShinBraver extends EmptyArmdozerSprite implements ArmdozerSprite {
    * @return アニメーション
    */
   bowDown(): Animate {
-    return bowDown(this.#model);
+    return bowDown(this.#model, this.#sounds);
   }
 
   /**
@@ -225,7 +225,7 @@ export class ShinBraver extends EmptyArmdozerSprite implements ArmdozerSprite {
    * @return アニメーション
    */
   bowUp(): Animate {
-    return bowUp(this.#model);
+    return bowUp(this.#model, this.#sounds);
   }
 
   /** @override */

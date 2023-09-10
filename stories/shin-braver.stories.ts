@@ -293,11 +293,11 @@ export const enemyActiveDown = () =>
 const uprightBow = (sprite: ShinBraver) => {
   delay(1000)
     .chain(sprite.upright())
-    .chain(delay(1000))
+    .chain(delay(500))
     .chain(sprite.bowDown())
-    .chain(delay(1000))
+    .chain(delay(200))
     .chain(sprite.bowUp())
-    .chain(delay(1000))
+    .chain(delay(500))
     .chain(sprite.uprightToStand())
     .loop();
 };
