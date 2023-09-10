@@ -285,3 +285,20 @@ export const enemyDown = () => armdozerSpriteStub(EnemyShinBraver, down);
 /** 敵 アクティブ ダウン */
 export const enemyActiveDown = () =>
   armdozerSpriteStub(EnemyShinBraver, activeDown);
+
+/**
+ * 気をつけ、礼
+ * @param sprite スプライト
+ */
+const uprightBow = (sprite: ShinBraver) => {
+  delay(1000)
+    .chain(sprite.upright())
+    .chain(delay(1000))
+    .loop();
+};
+
+/** プレイヤー 気をつけ、礼 */
+export const playerUprightBow = () => armdozerSpriteStub(PlayerShinBraver, uprightBow);
+
+/** 敵 気をつけ、礼 */
+export const enemyUprightBow = () => armdozerSpriteStub(EnemyShinBraver, uprightBow);
