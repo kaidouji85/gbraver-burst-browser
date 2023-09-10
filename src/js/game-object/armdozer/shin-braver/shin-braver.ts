@@ -40,16 +40,12 @@ import type { ShinBraverView } from "./view/shin-braver-view";
 export class ShinBraver extends EmptyArmdozerSprite implements ArmdozerSprite {
   /** モデル */
   #model: ShinBraverModel;
-
   /** ビュー */
   #view: ShinBraverView;
-
   /** サウンド */
   #sounds: ShinBraverSounds;
-
   /** アクティブフラッシュTweenグループ */
   #activeFlashTween: TWEEN.Group;
-
   /** アンサブスクライバ */
   #unsubscribers: Unsubscribable[];
 
@@ -196,34 +192,22 @@ export class ShinBraver extends EmptyArmdozerSprite implements ArmdozerSprite {
     return burstToStand(this.#model, this.#sounds);
   }
 
-  /**
-   * 気をつけ
-   * @return アニメーション
-   */
+  /** @override */
   upright(): Animate {
     return upright(this.#model, this.#sounds);
   }
 
-  /**
-   * 気をつけ -> 立ち
-   * @return アニメーション
-   */
+  /** @override */
   uprightToStand(): Animate {
     return uprightToStand(this.#model, this.#sounds);
   }
 
-  /**
-   * 礼（倒れる）
-   * @return アニメーション
-   */
+  /** @override */
   bowDown(): Animate {
     return bowDown(this.#model, this.#sounds);
   }
 
-  /**
-   * 礼（起き上がる）
-   * @return アニメーション
-   */
+  /** @override */
   bowUp(): Animate {
     return bowUp(this.#model, this.#sounds);
   }
