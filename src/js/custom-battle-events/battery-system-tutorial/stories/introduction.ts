@@ -1,4 +1,3 @@
-import { all } from "../../../animation/all";
 import { delay } from "../../../animation/delay";
 import { CustomBattleEventProps } from "../../../td-scenes/battle/custom-battle-event";
 import { ShinBraverTD } from "../../../td-scenes/battle/view/td/armdozer-objects/shin-braver";
@@ -9,6 +8,7 @@ import {
 } from "../../active-message-window";
 import { refreshConversation } from "../../invisible-all-message-windows";
 import { scrollLeftMessages, scrollRightMessages } from "../../scroll-messages";
+import {synchronizedUpright} from "../../synchronized-upright";
 import { waitUntilWindowPush } from "../../wait-until-window-push";
 import {synchronizedBow} from "../../synchronized-bow";
 
@@ -35,7 +35,7 @@ async function uprightBowIfNeed(props: CustomBattleEventProps): Promise<void> {
   const wingDozerTD: WingDozerTD = foundWingDozerTD;
   activeLeftMessageWindowWithFace(props, "Tsubasa");
   props.view.dom.leftMessageWindow.messages(["姿勢を正して"]);
-  await synchronizedBow(props).play();
+  await synchronizedUpright(props).play();
   await waitUntilWindowPush(props);
   props.sounds.sendMessage.sound.play();
   props.view.dom.leftMessageWindow.scrollUp();
@@ -53,20 +53,7 @@ async function uprightBowIfNeed(props: CustomBattleEventProps): Promise<void> {
     "シンヤ",
     "「よろしくお願いします」",
   ]);
-  await all(
-    shinBraverTD.shinBraver
-      .bowDown()
-      .chain(delay(200))
-      .chain(shinBraverTD.shinBraver.bowUp())
-      .chain(delay(500))
-      .chain(shinBraverTD.shinBraver.uprightToStand()),
-    wingDozerTD.wingDozer
-      .bowDown()
-      .chain(delay(200))
-      .chain(wingDozerTD.wingDozer.bowUp())
-      .chain(delay(500))
-      .chain(wingDozerTD.wingDozer.uprightToStand()),
-  )
+  await synchronizedBow(props)
     .chain(delay(500))
     .play();
 }
