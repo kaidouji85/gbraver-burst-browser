@@ -36,6 +36,7 @@ export const introduction = async (props: CustomBattleEventProps) => {
   ]);
   props.view.dom.rightMessageWindow.messages(["一同 姿勢を正して"]);
   await synchronizedUpright(props).play();
+  props.view.dom.rightMessageWindow.nextMessageIconVisible(true);
   await waitUntilWindowPush(props);
   props.sounds.sendMessage.sound.play();
   props.view.dom.leftMessageWindow.scrollUp();
@@ -49,6 +50,7 @@ export const introduction = async (props: CustomBattleEventProps) => {
   ]);
   props.view.dom.leftMessageWindow.scrollUp();
   activeRightMessageWindowWithFace(props, "Shinya");
+  props.view.dom.rightMessageWindow.nextMessageIconVisible(false);
   props.view.dom.rightMessageWindow.messages([
     "シンヤ",
     "「よろしくお願いします」",
