@@ -1,16 +1,14 @@
+import { delay } from "../../../animation/delay";
 import type { CustomBattleEventProps } from "../../../td-scenes/battle/custom-battle-event";
 import {
   activeLeftMessageWindowWithFace,
   activeRightMessageWindowWithFace,
 } from "../../active-message-window";
-import {
-  refreshConversation,
-} from "../../invisible-all-message-windows";
+import { refreshConversation } from "../../invisible-all-message-windows";
 import { scrollLeftMessages, scrollRightMessages } from "../../scroll-messages";
-import {synchronizedUpright} from "../../synchronized-upright";
-import {waitUntilWindowPush} from "../../wait-until-window-push";
-import {delay} from "../../../animation/delay";
-import {synchronizedBow} from "../../synchronized-bow";
+import { synchronizedBow } from "../../synchronized-bow";
+import { synchronizedUpright } from "../../synchronized-upright";
+import { waitUntilWindowPush } from "../../wait-until-window-push";
 
 /**
  * ストーリー 冒頭
