@@ -22,8 +22,10 @@ export async function introduction(props: CustomBattleEventProps) {
   ]);
   props.view.dom.leftMessageWindow.messages(["姿勢を正して"]);
   await synchronizedUpright(props).play();
+  props.view.dom.leftMessageWindow.nextMessageIconVisible(true);
   await waitUntilWindowPush(props);
   props.sounds.sendMessage.sound.play();
+  props.view.dom.leftMessageWindow.nextMessageIconVisible(false);
   props.view.dom.leftMessageWindow.scrollUp();
   props.view.dom.leftMessageWindow.messages(["礼！！」"]);
   await delay(500).play();
