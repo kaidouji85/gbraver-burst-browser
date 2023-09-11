@@ -4,10 +4,13 @@ import {
   activeRightMessageWindowWithFace,
 } from "../../active-message-window";
 import {
-  invisibleAllMessageWindows,
   refreshConversation,
 } from "../../invisible-all-message-windows";
 import { scrollLeftMessages, scrollRightMessages } from "../../scroll-messages";
+import {synchronizedUpright} from "../../synchronized-upright";
+import {waitUntilWindowPush} from "../../wait-until-window-push";
+import {delay} from "../../../animation/delay";
+import {synchronizedBow} from "../../synchronized-bow";
 
 /**
  * ストーリー 冒頭
@@ -30,10 +33,15 @@ export const introduction = async (props: CustomBattleEventProps) => {
   activeRightMessageWindowWithFace(props, "Tsubasa");
   await scrollRightMessages(props, [
     ["ツバサ", "「間もなく 台東高校 大田高校の合同練習試合を開始する"],
-    ["一同 姿勢を正して 礼!!」"],
   ]);
-  props.view.dom.leftMessageWindow.darken();
-  await refreshConversation(props, 100);
+  props.view.dom.rightMessageWindow.messages(["一同 姿勢を正して"]);
+  await synchronizedUpright(props).play();
+  await waitUntilWindowPush(props);
+  props.sounds.sendMessage.sound.play();
+  props.view.dom.leftMessageWindow.scrollUp();
+  props.view.dom.leftMessageWindow.messages(["礼！！」"]);
+  await delay(500).play();
+  await refreshConversation(props);
   activeLeftMessageWindowWithFace(props, "Gai");
   props.view.dom.leftMessageWindow.messages([
     "ガイ",
@@ -41,6 +49,10 @@ export const introduction = async (props: CustomBattleEventProps) => {
   ]);
   props.view.dom.leftMessageWindow.scrollUp();
   activeRightMessageWindowWithFace(props, "Shinya");
-  await scrollRightMessages(props, [["シンヤ", "「よろしくお願いします」"]]);
-  invisibleAllMessageWindows(props);
+  props.view.dom.rightMessageWindow.messages([
+    "シンヤ",
+    "「よろしくお願いします」",
+  ]);
+  await synchronizedBow(props).chain(delay(500)).play();
+  await refreshConversation(props, 100);
 };
