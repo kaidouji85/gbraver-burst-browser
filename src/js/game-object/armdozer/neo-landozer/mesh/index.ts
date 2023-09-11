@@ -11,6 +11,8 @@ import { hmCharge } from "./hm-charge";
 import { hmToStand } from "./hm-to-stand";
 import { knockBack } from "./knock-back";
 import { stand } from "./stand";
+import {upright} from "./upright";
+import {bow} from "./bow";
 
 /**
  * ビューで利用するすべてのメッシュを生成する
@@ -30,5 +32,7 @@ export function createAllMeshes(resources: Resources): AnimationMesh[] {
     ...gutsUp(resources),
     ...backStep(resources),
     ...frontStep(resources),
+    ...upright(resources),
+    ...bow(resources),
   ];
 }
