@@ -248,3 +248,44 @@ export const enemyDown = () => armdozerSpriteStub(EnemyLightningDozer, down);
 /** 敵 アクティブ ダウン */
 export const enemyActiveDown = () =>
   armdozerSpriteStub(EnemyLightningDozer, activeDown);
+
+/**
+ * 気をつけ、礼
+ * @param sprite スプライト
+ */
+const uprightBow = (sprite: LightningDozer) => {
+  delay(1000)
+    .chain(sprite.upright())
+    .chain(delay(500))
+    .chain(sprite.bowDown())
+    .chain(delay(200))
+    .chain(sprite.bowUp())
+    .chain(delay(500))
+    .chain(sprite.uprightToStand())
+    .loop();
+};
+
+/** プレイヤー 気をつけ、礼 */
+export const playerUprightBow = () =>
+  armdozerSpriteStub(PlayerLightningDozer, uprightBow);
+
+/** 敵 気をつけ、礼 */
+export const enemyUprightBow = () =>
+  armdozerSpriteStub(EnemyLightningDozer, uprightBow);
+
+/**
+ * アクティブ 気をつけ、礼
+ * @param sprite スプライト
+ */
+const activeUprightBow = (sprite: LightningDozer) => {
+  uprightBow(sprite);
+  sprite.startActive().play();
+};
+
+/** プレイヤー アクティブ 気をつけ、礼 */
+export const playerActiveUprightBow = () =>
+  armdozerSpriteStub(PlayerLightningDozer, activeUprightBow);
+
+/** 敵 アクティブ 気をつけ、礼 */
+export const enemyActiveUprightBow = () =>
+  armdozerSpriteStub(EnemyLightningDozer, activeUprightBow);
