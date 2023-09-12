@@ -13,6 +13,8 @@ import { EmptyArmdozerSprite } from "../empty-armdozer-sprite";
 import { activeFlash } from "./animation/active-flash";
 import { armHammer } from "./animation/arm-hammer";
 import { avoid } from "./animation/avoid";
+import { bowDown } from "./animation/bow-down";
+import { bowUp } from "./animation/bow-up";
 import { charge } from "./animation/charge";
 import { down } from "./animation/down";
 import { endActive } from "./animation/end-active";
@@ -25,14 +27,12 @@ import { hmToStand } from "./animation/hm-to-stand";
 import { knockBack } from "./animation/knock-back";
 import { knockBackToStand } from "./animation/knock-back-to-stand";
 import { startActive } from "./animation/start-active";
+import { upright } from "./animation/upright";
+import { uprightToStand } from "./animation/upright-to-stand";
 import { createInitialValue } from "./model/initial-value";
 import type { LightningDozerModel } from "./model/lightning-dozer-model";
 import { LightningDozerSounds } from "./sounds/lightning-dozer-sounds";
 import type { LightningDozerView } from "./view/lightning-dozer-view";
-import {upright} from "./animation/upright";
-import {uprightToStand} from "./animation/upright-to-stand";
-import {bowDown} from "./animation/bow-down";
-import {bowUp} from "./animation/bow-up";
 
 /** ライトニングドーザ */
 export class LightningDozer

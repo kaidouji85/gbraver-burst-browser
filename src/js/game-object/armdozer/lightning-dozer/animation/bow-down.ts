@@ -1,8 +1,8 @@
 import { Animate } from "../../../../animation/animate";
 import { process } from "../../../../animation/process";
 import { tween } from "../../../../animation/tween";
-import {LightningDozerModel} from "../model/lightning-dozer-model";
-import {LightningDozerSounds} from "../sounds/lightning-dozer-sounds";
+import { LightningDozerModel } from "../model/lightning-dozer-model";
+import { LightningDozerSounds } from "../sounds/lightning-dozer-sounds";
 
 /**
  * 礼（倒れる）

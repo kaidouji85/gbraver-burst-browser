@@ -1,8 +1,8 @@
 import { Animate } from "../../../../animation/animate";
 import { process } from "../../../../animation/process";
 import { tween } from "../../../../animation/tween";
-import {LightningDozerModel} from "../model/lightning-dozer-model";
-import {LightningDozerSounds} from "../sounds/lightning-dozer-sounds";
+import { LightningDozerModel } from "../model/lightning-dozer-model";
+import { LightningDozerSounds } from "../sounds/lightning-dozer-sounds";
 
 /**
  * 礼（起き上がる）
@@ -10,7 +10,10 @@ import {LightningDozerSounds} from "../sounds/lightning-dozer-sounds";
  * @param sounds ライトニングドーザサウンド
  * @return アニメーション
  */
-export function bowUp(model: LightningDozerModel, sounds: LightningDozerSounds): Animate {
+export function bowUp(
+  model: LightningDozerModel,
+  sounds: LightningDozerSounds,
+): Animate {
   return process(() => {
     model.animation.type = "BOW";
     model.animation.frame = 1;
