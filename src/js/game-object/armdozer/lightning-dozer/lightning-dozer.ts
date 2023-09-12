@@ -29,6 +29,10 @@ import { createInitialValue } from "./model/initial-value";
 import type { LightningDozerModel } from "./model/lightning-dozer-model";
 import { LightningDozerSounds } from "./sounds/lightning-dozer-sounds";
 import type { LightningDozerView } from "./view/lightning-dozer-view";
+import {upright} from "./animation/upright";
+import {uprightToStand} from "./animation/upright-to-stand";
+import {bowDown} from "./animation/bow-down";
+import {bowUp} from "./animation/bow-up";
 
 /** ライトニングドーザ */
 export class LightningDozer
@@ -182,6 +186,26 @@ export class LightningDozer
   /** @override */
   down(): Animate {
     return down(this.#model);
+  }
+
+  /** @override */
+  upright(): Animate {
+    return upright(this.#model, this.#sounds);
+  }
+
+  /** @override */
+  uprightToStand(): Animate {
+    return uprightToStand(this.#model, this.#sounds);
+  }
+
+  /** @override */
+  bowDown(): Animate {
+    return bowDown(this.#model, this.#sounds);
+  }
+
+  /** @override */
+  bowUp(): Animate {
+    return bowUp(this.#model, this.#sounds);
   }
 
   /**
