@@ -1,3 +1,4 @@
+import { delay } from "../../../animation/delay";
 import { CustomBattleEventProps } from "../../../td-scenes/battle/custom-battle-event";
 import {
   activeLeftMessageWindowWithFace,
@@ -5,10 +6,9 @@ import {
 } from "../../active-message-window";
 import { refreshConversation } from "../../invisible-all-message-windows";
 import { scrollLeftMessages, scrollRightMessages } from "../../scroll-messages";
-import {synchronizedUpright} from "../../synchronized-upright";
-import {waitUntilWindowPush} from "../../wait-until-window-push";
-import {delay} from "../../../animation/delay";
-import {synchronizedBow} from "../../synchronized-bow";
+import { synchronizedBow } from "../../synchronized-bow";
+import { synchronizedUpright } from "../../synchronized-upright";
+import { waitUntilWindowPush } from "../../wait-until-window-push";
 
 /**
  * 序盤
@@ -19,9 +19,7 @@ export async function introduction(
   props: Readonly<CustomBattleEventProps>,
 ): Promise<void> {
   activeLeftMessageWindowWithFace(props, "Tsubasa");
-  await scrollLeftMessages(props, [
-    ["ツバサ", "「これより摸擬戦を行う"],
-  ]);
+  await scrollLeftMessages(props, [["ツバサ", "「これより摸擬戦を行う"]]);
   props.view.dom.leftMessageWindow.messages(["姿勢を正して"]);
   await synchronizedUpright(props).play();
   props.view.dom.leftMessageWindow.nextMessageIconVisible(true);
