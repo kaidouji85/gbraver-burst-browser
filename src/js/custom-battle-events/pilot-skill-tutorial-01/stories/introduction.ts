@@ -5,6 +5,10 @@ import {
 } from "../../active-message-window";
 import { refreshConversation } from "../../invisible-all-message-windows";
 import { scrollLeftMessages, scrollRightMessages } from "../../scroll-messages";
+import {synchronizedUpright} from "../../synchronized-upright";
+import {waitUntilWindowPush} from "../../wait-until-window-push";
+import {delay} from "../../../animation/delay";
+import {synchronizedBow} from "../../synchronized-bow";
 
 /**
  * 序盤
@@ -17,8 +21,16 @@ export async function introduction(
   activeLeftMessageWindowWithFace(props, "Tsubasa");
   await scrollLeftMessages(props, [
     ["ツバサ", "「これより摸擬戦を行う"],
-    ["姿勢を正して 礼!!」"],
   ]);
+  props.view.dom.leftMessageWindow.messages(["姿勢を正して"]);
+  await synchronizedUpright(props).play();
+  props.view.dom.leftMessageWindow.nextMessageIconVisible(true);
+  await waitUntilWindowPush(props);
+  props.sounds.sendMessage.sound.play();
+  props.view.dom.leftMessageWindow.nextMessageIconVisible(false);
+  props.view.dom.leftMessageWindow.scrollUp();
+  props.view.dom.leftMessageWindow.messages(["礼！！」"]);
+  await delay(500).play();
   await refreshConversation(props);
   activeLeftMessageWindowWithFace(props, "Tsubasa");
   props.view.dom.leftMessageWindow.messages([
@@ -27,7 +39,11 @@ export async function introduction(
   ]);
   props.view.dom.leftMessageWindow.scrollUp();
   activeRightMessageWindowWithFace(props, "Shinya");
-  await scrollRightMessages(props, [["シンヤ", "「よろしくお願いします」"]]);
+  props.view.dom.rightMessageWindow.messages([
+    "シンヤ",
+    "「よろしくお願いします」",
+  ]);
+  await synchronizedBow(props).chain(delay(500)).play();
   await refreshConversation(props, 100);
   activeLeftMessageWindowWithFace(props, "Tsubasa");
   await scrollLeftMessages(props, [
