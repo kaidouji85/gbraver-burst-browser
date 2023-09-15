@@ -61,7 +61,7 @@ export type BattleSceneProps = {
 interface OwnRenderer extends OverlapNotifier, RendererDomGetter, Rendering {}
 
 /** 戦闘シーンプロパティ生成関数のパラメータ */
-export type BattleScenePropsCreatorParams = {
+export type BattleScenePropsCreatorParams = Readonly<{
   /** リソース管理オブジェクト */
   resources: Resources;
   /** BGM管理オブジェクト */
@@ -90,7 +90,7 @@ export type BattleScenePropsCreatorParams = {
   customBattleEvent?: CustomBattleEvent;
   /** コントローラータイプ */
   controllerType: BattleControllerType;
-};
+}>;
 
 /**
  * 戦闘シーンプロパティを生成する
