@@ -30,8 +30,6 @@ export type BattleEnd = {
 export type BattleSceneProps = {
   /** 画面を開いているプレイヤーのID */
   playerId: PlayerId;
-  /** @deprecated アニメーションタイムスケール */
-  animationTimeScale: number;
   /** アニメーションプレイヤー */
   animatePlayer: AnimatePlayer;
   /** ゲームステートヒストリー */
@@ -101,7 +99,6 @@ export function createBattleSceneProps(
 ): BattleSceneProps {
   return {
     playerId: params.player.playerId,
-    animationTimeScale: params.initialAnimationTimeScale,
     animatePlayer: createAnimatePlayer({
       timeScale: params.initialAnimationTimeScale
     }),
