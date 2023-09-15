@@ -32,29 +32,29 @@ export type BattleEnd = {
 /** 戦闘シーンプロパティ */
 export type BattleSceneProps = {
   /** 画面を開いているプレイヤーのID */
-  playerId: PlayerId;
+  readonly playerId: PlayerId;
   /** アニメーションプレイヤー */
-  animatePlayer: AnimatePlayer;
+  readonly animatePlayer: AnimatePlayer;
   /** ゲームステートヒストリー */
   stateHistory: GameState[];
   /** バトル終了ストリーム */
-  endBattle: Subject<BattleEnd>;
+  readonly endBattle: Subject<BattleEnd>;
   /** バトル進行オブジェクト */
-  battleProgress: BattleProgress;
+  readonly battleProgress: BattleProgress;
   /** カスタムバトルイベント */
-  customBattleEvent: CustomBattleEvent | null;
+  readonly customBattleEvent: CustomBattleEvent | null;
   /** 排他制御オブジェクト */
-  exclusive: Exclusive;
+  readonly exclusive: Exclusive;
   /** 戦闘シーンビュー */
-  view: BattleSceneView;
+  readonly view: BattleSceneView;
   /** ウインドウ押下ストリーム */
-  pushWindow: Observable<PushWindow>;
+  readonly pushWindow: Observable<PushWindow>;
   /** 戦闘シーン効果音 */
-  sounds: BattleSceneSounds;
+  readonly sounds: BattleSceneSounds;
   /** BGM管理オブジェクト */
-  bgm: BGMManager;
+  readonly bgm: BGMManager;
   /** コントローラータイプ */
-  controllerType: BattleControllerType;
+  readonly controllerType: BattleControllerType;
 };
 
 /** 戦闘シーンで利用するレンダラ */
