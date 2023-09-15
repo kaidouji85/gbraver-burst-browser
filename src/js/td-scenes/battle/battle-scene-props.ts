@@ -1,6 +1,10 @@
 import type { GameEnd, GameState, Player, PlayerId } from "gbraver-burst-core";
 import { Observable, Subject } from "rxjs";
 
+import {
+  AnimatePlayer,
+  createAnimatePlayer,
+} from "../../animation/animate-player";
 import type { BGMManager } from "../../bgm/bgm-manager";
 import { Exclusive } from "../../exclusive/exclusive";
 import type { GameLoop } from "../../game-loop/game-loop";
@@ -28,36 +32,36 @@ export type BattleEnd = {
 /** 戦闘シーンプロパティ */
 export type BattleSceneProps = {
   /** 画面を開いているプレイヤーのID */
-  playerId: PlayerId;
-  /** アニメーションタイムスケール */
-  animationTimeScale: number;
+  readonly playerId: PlayerId;
+  /** アニメーションプレイヤー */
+  readonly animatePlayer: AnimatePlayer;
   /** ゲームステートヒストリー */
   stateHistory: GameState[];
   /** バトル終了ストリーム */
-  endBattle: Subject<BattleEnd>;
+  readonly endBattle: Subject<BattleEnd>;
   /** バトル進行オブジェクト */
-  battleProgress: BattleProgress;
+  readonly battleProgress: BattleProgress;
   /** カスタムバトルイベント */
-  customBattleEvent: CustomBattleEvent | null;
+  readonly customBattleEvent: CustomBattleEvent | null;
   /** 排他制御オブジェクト */
-  exclusive: Exclusive;
+  readonly exclusive: Exclusive;
   /** 戦闘シーンビュー */
-  view: BattleSceneView;
+  readonly view: BattleSceneView;
   /** ウインドウ押下ストリーム */
-  pushWindow: Observable<PushWindow>;
+  readonly pushWindow: Observable<PushWindow>;
   /** 戦闘シーン効果音 */
-  sounds: BattleSceneSounds;
+  readonly sounds: BattleSceneSounds;
   /** BGM管理オブジェクト */
-  bgm: BGMManager;
+  readonly bgm: BGMManager;
   /** コントローラータイプ */
-  controllerType: BattleControllerType;
+  readonly controllerType: BattleControllerType;
 };
 
 /** 戦闘シーンで利用するレンダラ */
 interface OwnRenderer extends OverlapNotifier, RendererDomGetter, Rendering {}
 
 /** 戦闘シーンプロパティ生成関数のパラメータ */
-export type BattleScenePropsCreatorParams = {
+export type BattleScenePropsCreatorParams = Readonly<{
   /** リソース管理オブジェクト */
   resources: Resources;
   /** BGM管理オブジェクト */
@@ -86,7 +90,7 @@ export type BattleScenePropsCreatorParams = {
   customBattleEvent?: CustomBattleEvent;
   /** コントローラータイプ */
   controllerType: BattleControllerType;
-};
+}>;
 
 /**
  * 戦闘シーンプロパティを生成する
@@ -98,7 +102,9 @@ export function createBattleSceneProps(
 ): BattleSceneProps {
   return {
     playerId: params.player.playerId,
-    animationTimeScale: params.initialAnimationTimeScale,
+    animatePlayer: createAnimatePlayer({
+      timeScale: params.initialAnimationTimeScale,
+    }),
     pushWindow: params.pushWindow,
     exclusive: new Exclusive(),
     stateHistory: params.initialState,
