@@ -16,7 +16,7 @@ export interface AnimatePlayer extends AnimatePlayerProps {
    * @param animate アニメーション
    * @return アニメーションが完了したら発火するPromise
    */
-  play(animate: Animate) : Promise<void>;
+  play(animate: Animate): Promise<void>;
 }
 
 /** AnimatePlayerのシンプルな実装 */
@@ -43,6 +43,8 @@ class SimpleAnimatePlayer implements AnimatePlayer {
  * @param initialProps プロパティ初期値
  * @return 生成したAnimatePlayer
  */
-export function createAnimatePlayer(initialProps: AnimatePlayerProps): AnimatePlayer {
+export function createAnimatePlayer(
+  initialProps: AnimatePlayerProps,
+): AnimatePlayer {
   return new SimpleAnimatePlayer(initialProps);
 }
