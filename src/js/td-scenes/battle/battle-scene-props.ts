@@ -1,6 +1,7 @@
 import type { GameEnd, GameState, Player, PlayerId } from "gbraver-burst-core";
 import { Observable, Subject } from "rxjs";
 
+import { AnimatePlayer, createAnimatePlayer } from "../../animation/animate-player";
 import type { BGMManager } from "../../bgm/bgm-manager";
 import { Exclusive } from "../../exclusive/exclusive";
 import type { GameLoop } from "../../game-loop/game-loop";
@@ -29,8 +30,10 @@ export type BattleEnd = {
 export type BattleSceneProps = {
   /** 画面を開いているプレイヤーのID */
   playerId: PlayerId;
-  /** アニメーションタイムスケール */
+  /** @deprecated アニメーションタイムスケール */
   animationTimeScale: number;
+  /** アニメーションプレイヤー */
+  animatePlayer: AnimatePlayer;
   /** ゲームステートヒストリー */
   stateHistory: GameState[];
   /** バトル終了ストリーム */
@@ -99,6 +102,9 @@ export function createBattleSceneProps(
   return {
     playerId: params.player.playerId,
     animationTimeScale: params.initialAnimationTimeScale,
+    animatePlayer: createAnimatePlayer({
+      timeScale: params.initialAnimationTimeScale
+    }),
     pushWindow: params.pushWindow,
     exclusive: new Exclusive(),
     stateHistory: params.initialState,
