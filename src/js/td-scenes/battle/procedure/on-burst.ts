@@ -1,9 +1,8 @@
 import { BurstCommand } from "gbraver-burst-core";
 
-import type { DoBurst } from "../actions/do-burst";
+import { DoBurst } from "../actions/do-burst";
 import { decisionByBurstButton } from "../animation/decision-by-burst-button";
-import { animationPlayer } from "../animation-player";
-import type { BattleSceneProps } from "../battle-scene-props";
+import { BattleSceneProps } from "../battle-scene-props";
 import { doBurstEventIfNeeded } from "./do-burst-event-if-needed";
 import { progressGame } from "./progress-game";
 
@@ -31,7 +30,7 @@ export function onBurst(
       return;
     }
 
-    await animationPlayer(props).play(decisionByBurstButton(props.view));
+    await props.animatePlayer.play(decisionByBurstButton(props.view));
     await progressGame(props, burstCommand);
   });
 }

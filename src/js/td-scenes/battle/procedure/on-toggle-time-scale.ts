@@ -12,5 +12,5 @@ export function onToggleTimeScale(
   props: BattleSceneProps,
   action: ToggleTimeScale,
 ): void {
-  props.animationTimeScale = action.timeScale;
+  props.animatePlayer.timeScale = action.timeScale;
 }
