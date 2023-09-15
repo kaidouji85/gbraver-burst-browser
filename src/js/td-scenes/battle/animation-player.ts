@@ -2,6 +2,7 @@ import { Animate } from "../../animation/animate";
 import type { BattleSceneProps } from "./battle-scene-props";
 
 /**
+ * @deprecated
  * 戦闘シーン専用アニメーションプレイヤー
  * 戦闘シーンステートに設定されたタイムスケールを常にセットするために、本オブジェクトを利用する
  */
@@ -16,6 +17,7 @@ type AnimationPlayer = {
 };
 
 /**
+ * @deprecated
  * アニメーションプレイヤーを生成する
  *
  * @param props 戦闘シーンプロパティ
