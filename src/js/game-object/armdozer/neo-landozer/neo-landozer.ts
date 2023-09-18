@@ -13,6 +13,8 @@ import { EmptyArmdozerSprite } from "../empty-armdozer-sprite";
 import { activeFlash } from "./animation/active-flash";
 import { armHammer } from "./animation/arm-hammer";
 import { avoid } from "./animation/avoid";
+import { bowDown } from "./animation/bow-down";
+import { bowUp } from "./animation/bow-up";
 import { charge } from "./animation/charge";
 import { down } from "./animation/down";
 import { endActive } from "./animation/end-active";
@@ -25,6 +27,8 @@ import { hmToStand } from "./animation/hm-to-stand";
 import { knockBack } from "./animation/knock-back";
 import { knockBackToStand } from "./animation/knock-back-to-stand";
 import { startActive } from "./animation/start-active";
+import { upright } from "./animation/upright";
+import { uprightToStand } from "./animation/upright-to-stand";
 import { createInitialValue } from "./model/initial-value";
 import type { NeoLandozerModel } from "./model/neo-landozer-model";
 import { NeoLandozerSounds } from "./sounds/neo-landozer-sounds";
@@ -174,6 +178,26 @@ export class NeoLandozer extends EmptyArmdozerSprite implements ArmdozerSprite {
   /** @override */
   down(): Animate {
     return down(this.#model);
+  }
+
+  /** @override */
+  upright(): Animate {
+    return upright(this.#model, this.#sounds);
+  }
+
+  /** @override */
+  uprightToStand(): Animate {
+    return uprightToStand(this.#model, this.#sounds);
+  }
+
+  /** @override */
+  bowDown(): Animate {
+    return bowDown(this.#model, this.#sounds);
+  }
+
+  /** @override */
+  bowUp(): Animate {
+    return bowUp(this.#model, this.#sounds);
   }
 
   /** @override */

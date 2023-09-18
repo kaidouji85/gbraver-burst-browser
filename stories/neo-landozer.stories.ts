@@ -245,3 +245,44 @@ export const enemyDown = () => armdozerSpriteStub(EnemyNeoLandozer, down);
 /** 敵 アクティブ ダウン */
 export const enemyActiveDown = () =>
   armdozerSpriteStub(EnemyNeoLandozer, activeDown);
+
+/**
+ * 気をつけ、礼
+ * @param sprite スプライト
+ */
+const uprightBow = (sprite: NeoLandozer) => {
+  delay(1000)
+    .chain(sprite.upright())
+    .chain(delay(500))
+    .chain(sprite.bowDown())
+    .chain(delay(200))
+    .chain(sprite.bowUp())
+    .chain(delay(500))
+    .chain(sprite.uprightToStand())
+    .loop();
+};
+
+/** プレイヤー 気をつけ、礼 */
+export const playerUprightBow = () =>
+  armdozerSpriteStub(PlayerNeoLandozer, uprightBow);
+
+/** 敵 気をつけ、礼 */
+export const enemyUprightBow = () =>
+  armdozerSpriteStub(EnemyNeoLandozer, uprightBow);
+
+/**
+ * アクティブ 気をつけ、礼
+ * @param sprite スプライト
+ */
+const activeUprightBow = (sprite: NeoLandozer) => {
+  uprightBow(sprite);
+  sprite.startActive().play();
+};
+
+/** プレイヤー アクティブ 気をつけ、礼 */
+export const playerActiveUprightBow = () =>
+  armdozerSpriteStub(PlayerNeoLandozer, activeUprightBow);
+
+/** 敵 アクティブ 気をつけ、礼 */
+export const enemyActiveUprightBow = () =>
+  armdozerSpriteStub(EnemyNeoLandozer, activeUprightBow);

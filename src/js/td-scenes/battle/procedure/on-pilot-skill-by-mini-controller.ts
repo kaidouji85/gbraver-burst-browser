@@ -2,7 +2,6 @@ import { PilotSkillCommand } from "gbraver-burst-core";
 
 import { decisionByMiniController } from "../animation/decision-by-mini-controller";
 import { decisionByPilotButton } from "../animation/decision-by-pilot-button";
-import { animationPlayer } from "../animation-player";
 import { BattleSceneProps } from "../battle-scene-props";
 import { doPilotSkillEventIfNeeded } from "./do-pilot-skill-event-if-needed";
 import { progressGame } from "./progress-game";
@@ -34,7 +33,7 @@ export function onPilotSkillByMiniController(
       props.controllerType === "BigButton"
         ? decisionByPilotButton(props.view)
         : decisionByMiniController(props.view);
-    await animationPlayer(props).play(decisionAnimation);
+    await props.animatePlayer.play(decisionAnimation);
     await progressGame(props, pilotSkillCommand);
   });
 }

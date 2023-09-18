@@ -63,4 +63,12 @@ export const LightningDozerTextureConfigs: TextureConfig[] = [
     id: TEXTURE_IDS.LIGHTNING_DOZER_BURST_BUTTON_ICON,
     path: "armdozer/lightning-dozer/burst-button-icon.webp",
   },
+  {
+    id: TEXTURE_IDS.LIGHTNING_DOZER_UPRIGHT,
+    path: "armdozer/lightning-dozer/upright.webp",
+  },
+  {
+    id: TEXTURE_IDS.LIGHTNING_DOZER_BOW,
+    path: "armdozer/lightning-dozer/bow.webp",
+  },
 ];

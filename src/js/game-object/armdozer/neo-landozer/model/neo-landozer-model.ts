@@ -1,4 +1,4 @@
-import type { AnimationType } from "./animation-type";
+import { AnimationType } from "./animation-type";
 
 /** ネオランドーザのモデル */
 export interface NeoLandozerModel {
@@ -13,7 +13,6 @@ export interface NeoLandozerModel {
   animation: {
     /** タイプ */
     type: AnimationType;
-
     /** フレーム */
     frame: number;
   };
@@ -22,7 +21,6 @@ export interface NeoLandozerModel {
   active: {
     /** 0〜1で指定するアクティブレイヤーの強さ */
     strength: number;
-
     /** 不透明度 */
     opacity: number;
   };

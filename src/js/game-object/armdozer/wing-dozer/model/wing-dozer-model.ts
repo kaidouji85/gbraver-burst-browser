@@ -13,7 +13,9 @@ export type AnimationType =
   | "DOWN"
   | "BACK_STEP"
   | "FRONT_STEP"
-  | "GUARD";
+  | "GUARD"
+  | "UPRIGHT"
+  | "BOW";
 
 /**
  * ウィングドーザ モデル

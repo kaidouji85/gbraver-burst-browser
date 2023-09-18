@@ -12,6 +12,8 @@ import type { ArmdozerSprite } from "../armdozer-sprite";
 import { EmptyArmdozerSprite } from "../empty-armdozer-sprite";
 import { activeFlash } from "./animation/active-flash";
 import { avoid } from "./animation/avoid";
+import { bowDown } from "./animation/bow-down";
+import { bowUp } from "./animation/bow-up";
 import { charge } from "./animation/charge";
 import { dash } from "./animation/dash";
 import { dashToStand } from "./animation/dash-to-stand";
@@ -25,6 +27,8 @@ import { knockBackToStand } from "./animation/knock-back-to-stand";
 import { startActive } from "./animation/start-active";
 import { upper } from "./animation/upper";
 import { upperToStand } from "./animation/upper-to-stand";
+import { upright } from "./animation/upright";
+import { uprightToStand } from "./animation/upright-to-stand";
 import { createInitialValue } from "./model/initial-value";
 import type { WingDozerModel } from "./model/wing-dozer-model";
 import { WingDozerSounds } from "./sounds/wing-dozer-sounds";
@@ -34,16 +38,12 @@ import type { WingDozerView } from "./view/wing-dozer-view";
 export class WingDozer extends EmptyArmdozerSprite implements ArmdozerSprite {
   /** モデル */
   #model: WingDozerModel;
-
   /** ビュー */
   #view: WingDozerView;
-
   /** サウンド */
   #sounds: WingDozerSounds;
-
   /** アクティブフラッシュTweenグループ */
   #activeFlashTween: TWEEN.Group;
-
   /** アンサブスクライバ */
   #unsubscribers: Unsubscribable[];
 
@@ -119,6 +119,26 @@ export class WingDozer extends EmptyArmdozerSprite implements ArmdozerSprite {
    */
   dashToStand(): Animate {
     return dashToStand(this.#model, this.#sounds);
+  }
+
+  /** @override */
+  upright(): Animate {
+    return upright(this.#model, this.#sounds);
+  }
+
+  /** @override */
+  uprightToStand(): Animate {
+    return uprightToStand(this.#model, this.#sounds);
+  }
+
+  /** @override */
+  bowDown(): Animate {
+    return bowDown(this.#model, this.#sounds);
+  }
+
+  /** @override */
+  bowUp(): Animate {
+    return bowUp(this.#model, this.#sounds);
   }
 
   /** @override */

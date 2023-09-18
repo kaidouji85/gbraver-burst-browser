@@ -3,7 +3,6 @@ import { GameState } from "gbraver-burst-core";
 import { all } from "../../../animation/all";
 import { empty } from "../../../animation/delay";
 import { stateAnimation } from "../animation/game-state";
-import { animationPlayer } from "../animation-player";
 import { BattleSceneProps } from "../battle-scene-props";
 
 /**
@@ -32,7 +31,7 @@ export async function playStateHistory(
   }
 
   const removeLastState = gameStateHistory.slice(0, -1);
-  await animationPlayer(props).play(
+  await props.animatePlayer.play(
     removeLastState
       .map((gameState, index) => {
         const next = removeLastState[index + 1];
@@ -78,7 +77,7 @@ export async function playStateHistory(
     await props.customBattleEvent.beforeLastState(eventProps);
   }
   await Promise.all([
-    animationPlayer(props).play(stateAnimation(props, lastState)),
+    props.animatePlayer.play(stateAnimation(props, lastState)),
     props.customBattleEvent
       ? props.customBattleEvent.onLastState(eventProps)
       : Promise.resolve(),

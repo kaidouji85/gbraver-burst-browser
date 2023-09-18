@@ -1,10 +1,14 @@
-import type { CustomBattleEventProps } from "../../../td-scenes/battle/custom-battle-event";
+import { delay } from "../../../animation/delay";
+import { CustomBattleEventProps } from "../../../td-scenes/battle/custom-battle-event";
 import {
   activeLeftMessageWindowWithFace,
   activeRightMessageWindowWithFace,
 } from "../../active-message-window";
 import { refreshConversation } from "../../invisible-all-message-windows";
 import { scrollLeftMessages, scrollRightMessages } from "../../scroll-messages";
+import { synchronizedBow } from "../../synchronized-bow";
+import { synchronizedUpright } from "../../synchronized-upright";
+import { waitUntilWindowPush } from "../../wait-until-window-push";
 
 /**
  * ストーリー 冒頭
@@ -15,8 +19,16 @@ export async function introduction(props: CustomBattleEventProps) {
   activeLeftMessageWindowWithFace(props, "Tsubasa");
   await scrollLeftMessages(props, [
     ["ツバサ", "「これより 操縦訓練を開始する"],
-    ["姿勢を正して 礼!!」"],
   ]);
+  props.view.dom.leftMessageWindow.messages(["姿勢を正して"]);
+  await synchronizedUpright(props).play();
+  props.view.dom.leftMessageWindow.nextMessageIconVisible(true);
+  await waitUntilWindowPush(props);
+  props.sounds.sendMessage.sound.play();
+  props.view.dom.leftMessageWindow.nextMessageIconVisible(false);
+  props.view.dom.leftMessageWindow.scrollUp();
+  props.view.dom.leftMessageWindow.messages(["礼！！」"]);
+  await delay(500).play();
   await refreshConversation(props);
   activeLeftMessageWindowWithFace(props, "Tsubasa");
   props.view.dom.leftMessageWindow.messages([
@@ -25,7 +37,11 @@ export async function introduction(props: CustomBattleEventProps) {
   ]);
   props.view.dom.leftMessageWindow.scrollUp();
   activeRightMessageWindowWithFace(props, "Shinya");
-  await scrollRightMessages(props, [["シンヤ", "「よろしくお願いします」"]]);
+  props.view.dom.rightMessageWindow.messages([
+    "シンヤ",
+    "「よろしくお願いします」",
+  ]);
+  await synchronizedBow(props).chain(delay(500)).play();
   await refreshConversation(props, 100);
   activeLeftMessageWindowWithFace(props, "Tsubasa");
   await scrollLeftMessages(props, [

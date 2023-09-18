@@ -10,4 +10,6 @@ export type AnimationType =
   | "GUTS_DOWN"
   | "GUTS_UP"
   | "BACK_STEP"
-  | "FRONT_STEP";
+  | "FRONT_STEP"
+  | "UPRIGHT"
+  | "BOW";
