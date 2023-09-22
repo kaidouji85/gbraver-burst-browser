@@ -75,7 +75,7 @@
     "webpack-dev-server": "^4.15.1"
   },
   "engines": {
-    "node": "^18.16.1"
+    "node": "^18.18.0"
   },
   "homepage": "https://github.com/kaidouji85/study-three-js#readme",
   "keywords": [
