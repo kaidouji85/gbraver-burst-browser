@@ -13,9 +13,9 @@ export type VisibilityChange = {
  */
 export function createVisibilityChange(): Observable<VisibilityChange> {
   return fromEvent(document, "visibilitychange").pipe(
-    map(event => ({
+    map((event) => ({
       type: "VisibilityChange",
       event,
-    }))
+    })),
   );
 }

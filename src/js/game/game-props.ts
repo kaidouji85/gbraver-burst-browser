@@ -12,6 +12,10 @@ import { Renderer } from "../render";
 import type { Resources } from "../resource";
 import { emptyResources } from "../resource";
 import type { ResourceRoot } from "../resource/resource-root";
+import {
+  createVisibilityChange,
+  VisibilityChange,
+} from "../visibility-change/visibility-change";
 import type { PushWindow } from "../window/push-window";
 import { pushWindowsStream } from "../window/push-window";
 import type { Resize } from "../window/resize";
@@ -25,7 +29,6 @@ import { FutureSuddenlyBattleEnd } from "./future-suddenly-battle-end";
 import type { InProgress } from "./in-progress/in-progress";
 import { InterruptScenes } from "./innterrupt-scenes";
 import { TDSceneBinder } from "./td-scene-binder";
-import {createVisibilityChange, VisibilityChange} from "../visibility-change/visibility-change";
 
 /**
  * ゲームプロパティ

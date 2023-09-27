@@ -3,6 +3,7 @@ import { map, Observable, Unsubscribable } from "rxjs";
 import { GameAction } from "./game-actions";
 import { initialize } from "./game-procedure/initialize";
 import { onGameAction } from "./game-procedure/on-game-action";
+import { onVisibilityChange } from "./game-procedure/on-visibility-change";
 import type { GameProps, GamePropsGeneratorParam } from "./game-props";
 import { generateGameProps } from "./game-props";
 
@@ -11,12 +12,13 @@ type Param = GamePropsGeneratorParam;
 
 /** ゲーム管理オブジェクト */
 export class Game {
+  /** ゲームプロパティ */
   #props: GameProps;
+  /** アンサブスクライバ */
   #unsubscribers: Unsubscribable[];
 
   /**
    * コンストラクタ
-   *
    * @param param パラメータ
    */
   constructor(param: Param) {
@@ -57,11 +59,16 @@ export class Game {
       suddenlyBattleEnd,
       webSocketAPIError,
     ];
-    this.#unsubscribers = gameActionStreams.map((v) =>
-      v.subscribe((action) => {
-        onGameAction(this.#props, action);
+    this.#unsubscribers = [
+      ...gameActionStreams.map((v) =>
+        v.subscribe((action) => {
+          onGameAction(this.#props, action);
+        }),
+      ),
+      this.#props.visibilityChange.subscribe((action) => {
+        onVisibilityChange(action);
       }),
-    );
+    ];
   }
 
   /**
