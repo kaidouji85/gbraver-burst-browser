@@ -68,8 +68,8 @@ export class Game {
           onGameAction(this.#props, action);
         }),
       ),
-      this.#props.visibilityChange.subscribe((action) => {
-        onVisibilityChange(action);
+      this.#props.visibilityChange.subscribe(() => {
+        onVisibilityChange();
       }),
     ];
   }
