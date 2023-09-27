@@ -25,6 +25,7 @@ import { FutureSuddenlyBattleEnd } from "./future-suddenly-battle-end";
 import type { InProgress } from "./in-progress/in-progress";
 import { InterruptScenes } from "./innterrupt-scenes";
 import { TDSceneBinder } from "./td-scene-binder";
+import {createVisibilityChange, VisibilityChange} from "../visibility-change/visibility-change";
 
 /**
  * ゲームプロパティ
@@ -59,6 +60,8 @@ export interface GameProps {
   pushWindow: Observable<PushWindow>;
   /** ゲームループ */
   gameLoop: Observable<GameLoop>;
+  /** VisibilityChange */
+  visibilityChange: Observable<VisibilityChange>;
   /** cssカスタムプロパティ --vh */
   vh: CssVH;
   /** cssカスタムプロパティ --hud-ui-scale */
@@ -158,6 +161,7 @@ export function generateGameProps(param: GamePropsGeneratorParam): GameProps {
     resize,
     pushWindow,
     gameLoop,
+    visibilityChange: createVisibilityChange(),
     vh: new CssVH(resize),
     hudUIScale: new CssHUDUIScale(renderer.getRendererDOM(), resize),
     api: param.api,

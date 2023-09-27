@@ -1,6 +1,6 @@
-import {fromEvent, map, Observable} from "rxjs";
+import { fromEvent, map, Observable } from "rxjs";
 
-/** 視認性変更イベント */
+/** VisibilityChangeイベント */
 export type VisibilityChange = {
   type: "VisibilityChange";
   /** イベント */
