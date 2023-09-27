@@ -4,8 +4,11 @@ import { GameAction } from "./game-actions";
 import { initialize } from "./game-procedure/initialize";
 import { onGameAction } from "./game-procedure/on-game-action";
 import { onVisibilityChange } from "./game-procedure/on-visibility-change";
-import type { GameProps, GamePropsGeneratorParam } from "./game-props";
-import { generateGameProps } from "./game-props";
+import {
+  GameProps,
+  GamePropsGeneratorParam,
+  generateGameProps,
+} from "./game-props";
 
 /** コンストラクタのパラメータ */
 type Param = GamePropsGeneratorParam;
@@ -73,7 +76,6 @@ export class Game {
 
   /**
    * ゲームの初期化を行う
-   *
    * @return 処理が完了したら発火するPromise
    */
   async initialize(): Promise<void> {
