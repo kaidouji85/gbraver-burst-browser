@@ -12,6 +12,10 @@ import { Renderer } from "../render";
 import type { Resources } from "../resource";
 import { emptyResources } from "../resource";
 import type { ResourceRoot } from "../resource/resource-root";
+import {
+  createVisibilityChange,
+  VisibilityChange,
+} from "../visibility-change/visibility-change";
 import type { PushWindow } from "../window/push-window";
 import { pushWindowsStream } from "../window/push-window";
 import type { Resize } from "../window/resize";
@@ -59,6 +63,8 @@ export interface GameProps {
   pushWindow: Observable<PushWindow>;
   /** ゲームループ */
   gameLoop: Observable<GameLoop>;
+  /** VisibilityChange */
+  visibilityChange: Observable<VisibilityChange>;
   /** cssカスタムプロパティ --vh */
   vh: CssVH;
   /** cssカスタムプロパティ --hud-ui-scale */
@@ -158,6 +164,7 @@ export function generateGameProps(param: GamePropsGeneratorParam): GameProps {
     resize,
     pushWindow,
     gameLoop,
+    visibilityChange: createVisibilityChange(),
     vh: new CssVH(resize),
     hudUIScale: new CssHUDUIScale(renderer.getRendererDOM(), resize),
     api: param.api,
