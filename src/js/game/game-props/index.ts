@@ -20,6 +20,7 @@ import {FutureSuddenlyBattleEnd} from "../future-suddenly-battle-end";
 import type {InProgress} from "../in-progress/in-progress";
 import {InterruptScenes} from "../innterrupt-scenes";
 import {TDSceneBinder} from "../td-scene-binder";
+import {GameAction} from "../game-actions";
 
 /**
  * ゲームプロパティ
@@ -56,6 +57,8 @@ export interface GameProps {
   gameLoop: Observable<GameLoop>;
   /** VisibilityChange */
   visibilityChange: Observable<VisibilityChange>;
+  /** ゲームアクションのストリーム */
+  gameAction: Observable<GameAction>;
   /** cssカスタムプロパティ --vh */
   vh: CssVH;
   /** cssカスタムプロパティ --hud-ui-scale */

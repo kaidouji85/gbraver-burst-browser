@@ -40,13 +40,13 @@ export class Game {
     elements.forEach((element) => {
       body.appendChild(element);
     });
-    const suddenlyBattleEnd: Observable<GameAction> =
+    const suddenlyBattleEndNotifier: Observable<GameAction> =
       this.#props.suddenlyBattleEnd.stream().pipe(
         map(() => ({
           type: "SuddenlyBattleEnd",
         })),
       );
-    const webSocketAPIError: Observable<GameAction> = this.#props.api
+    const webSocketAPIErrorNotifier: Observable<GameAction> = this.#props.api
       .websocketErrorNotifier()
       .pipe(
         map((error) => ({
@@ -60,8 +60,8 @@ export class Game {
       this.#props.domSceneBinder.gameActionNotifier(),
       this.#props.domDialogBinder.gameActionNotifier(),
       this.#props.domFloaters.gameActionNotifier(),
-      suddenlyBattleEnd,
-      webSocketAPIError,
+      suddenlyBattleEndNotifier,
+      webSocketAPIErrorNotifier,
     ];
     this.#unsubscribers = [
       ...gameActionStreams.map((v) =>

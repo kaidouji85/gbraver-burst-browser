@@ -19,6 +19,8 @@ import {postBattleConnector} from "../action-connector/post-battle-connector";
 import {TDSceneBinder} from "../td-scene-binder";
 import {createBGMManager} from "../../bgm/bgm-manager";
 import {GameProps} from "./index";
+import {map, merge, Observable} from "rxjs";
+import {GameAction} from "../game-actions";
 
 /** GamePropsジェネレータパラメータ */
 export type GamePropsGeneratorParam = {
@@ -64,6 +66,35 @@ export function generateGameProps(param: GamePropsGeneratorParam): GameProps {
   const renderer = new Renderer(resize);
   const gameLoop = gameLoopStream();
   const hudUIScale = new CssHUDUIScale(renderer.getRendererDOM(), resize);
+  const suddenlyBattleEnd = new FutureSuddenlyBattleEnd();
+  const suddenlyBattleEndNotifier: Observable<GameAction> =
+    suddenlyBattleEnd.stream().pipe(
+      map(() => ({
+        type: "SuddenlyBattleEnd",
+      })),
+    );
+  const webSocketAPIErrorNotifier: Observable<GameAction> = param.api
+    .websocketErrorNotifier()
+    .pipe(
+      map((error) => ({
+        type: "WebSocketAPIError",
+        error,
+      })),
+    );
+  const tdBinder = new TDSceneBinder(renderer, hudUIScale);
+  const domSceneBinder = new DOMSceneBinder();
+  const domDialogBinder = new DOMDialogBinder()
+  const domFloaters = new DOMFloaters({
+    postBattleConnector,
+  });
+  const gameAction: Observable<GameAction> = merge(
+    tdBinder.gameActionNotifier(),
+    domSceneBinder.gameActionNotifier(),
+    domDialogBinder.gameActionNotifier(),
+    domFloaters.gameActionNotifier(),
+    suddenlyBattleEndNotifier,
+    webSocketAPIErrorNotifier,
+  );
   return {
     resourceRoot: param.resourceRoot,
     resources: emptyResources(param.resourceRoot),
@@ -81,21 +112,20 @@ export function generateGameProps(param: GamePropsGeneratorParam): GameProps {
     resize,
     pushWindow,
     gameLoop,
+    gameAction,
     visibilityChange: createVisibilityChange(),
     vh: new CssVH(resize),
     hudUIScale: new CssHUDUIScale(renderer.getRendererDOM(), resize),
     api: param.api,
     config: param.config,
-    suddenlyBattleEnd: new FutureSuddenlyBattleEnd(),
+    suddenlyBattleEnd,
     fader: new DOMFader(),
     interruptScenes: new InterruptScenes(),
-    domSceneBinder: new DOMSceneBinder(),
-    domDialogBinder: new DOMDialogBinder(),
-    domFloaters: new DOMFloaters({
-      postBattleConnector,
-    }),
+    domSceneBinder,
+    domDialogBinder,
+    domFloaters,
     renderer,
-    tdBinder: new TDSceneBinder(renderer, hudUIScale),
+    tdBinder,
     serviceWorker: null,
     bgm: createBGMManager(),
     canPlayTutorialInDevelopment: param.canPlayTutorialInDevelopment,
