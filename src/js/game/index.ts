@@ -1,6 +1,6 @@
-import { map, Observable, Unsubscribable } from "rxjs";
+import { Unsubscribable } from "rxjs";
 
-import { GameAction } from "./game-actions";
+import { createGameActionNotifier } from "./game-procedure/create-game-action-notifier";
 import { initialize } from "./game-procedure/initialize";
 import { onGameAction } from "./game-procedure/on-game-action";
 import { onVisibilityChange } from "./game-procedure/on-visibility-change";
@@ -39,35 +39,11 @@ export class Game {
     elements.forEach((element) => {
       body.appendChild(element);
     });
-    const suddenlyBattleEnd: Observable<GameAction> =
-      this.#props.suddenlyBattleEnd.stream().pipe(
-        map(() => ({
-          type: "SuddenlyBattleEnd",
-        })),
-      );
-    const webSocketAPIError: Observable<GameAction> = this.#props.api
-      .websocketErrorNotifier()
-      .pipe(
-        map((error) => ({
-          type: "WebSocketAPIError",
-          error,
-        })),
-      );
-
-    const gameActionStreams: Observable<GameAction>[] = [
-      this.#props.tdBinder.gameActionNotifier(),
-      this.#props.domSceneBinder.gameActionNotifier(),
-      this.#props.domDialogBinder.gameActionNotifier(),
-      this.#props.domFloaters.gameActionNotifier(),
-      suddenlyBattleEnd,
-      webSocketAPIError,
-    ];
+    const gameActionNotifier = createGameActionNotifier(this.#props);
     this.#unsubscribers = [
-      ...gameActionStreams.map((v) =>
-        v.subscribe((action) => {
-          onGameAction(this.#props, action);
-        }),
-      ),
+      gameActionNotifier.subscribe((action) => {
+        onGameAction(this.#props, action);
+      }),
       this.#props.visibilityChange.subscribe(() => {
         onVisibilityChange();
       }),
