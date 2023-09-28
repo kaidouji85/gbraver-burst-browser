@@ -5,7 +5,7 @@ import { NetworkErrorDialog } from "../../dom-dialogs/network-error/network-erro
 import { matchingDialogConnector } from "../action-connector/matching-dialog-connector";
 import { networkErrorDialogConnector } from "../action-connector/network-error-dialog-connector";
 import { SelectionComplete } from "../game-actions/selection-complete";
-import { GameProps } from "../game-props";
+import { GameProps } from "../game-props/game-props";
 
 /**
  * カジュアルマッチングするまで待機するヘルパー関数

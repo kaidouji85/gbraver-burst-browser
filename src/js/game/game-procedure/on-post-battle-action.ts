@@ -6,7 +6,7 @@ import { waitTime } from "../../wait/wait-time";
 import { npcEndingConnector } from "../action-connector/npc-ending-connector";
 import { MAX_LOADING_TIME } from "../dom-scene-binder/max-loading-time";
 import { PostBattleAction } from "../game-actions/post-battle-action";
-import type { GameProps } from "../game-props";
+import type { GameProps } from "../game-props/game-props";
 import type { InProgress } from "../in-progress/in-progress";
 import type { PlayingTutorialStage } from "../in-progress/tutorial";
 import type { NPCBattleStage, NPCBattleState } from "../npc-battle";

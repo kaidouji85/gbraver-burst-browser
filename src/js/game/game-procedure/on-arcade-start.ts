@@ -2,7 +2,7 @@ import { PlayerSelect } from "../../dom-scenes/player-select";
 import { waitTime } from "../../wait/wait-time";
 import { playerSelectConnector } from "../action-connector/player-select-connector";
 import { MAX_LOADING_TIME } from "../dom-scene-binder/max-loading-time";
-import type { GameProps } from "../game-props";
+import type { GameProps } from "../game-props/game-props";
 import { getPlayableArmdozers } from "../playable-amdozers";
 import { getPlayablePilots } from "../playable-pilots";
 import { loadFullResource } from "./load-full-resource";

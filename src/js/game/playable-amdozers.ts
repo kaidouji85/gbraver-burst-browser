@@ -1,6 +1,6 @@
 import { ArmdozerId, ArmdozerIds } from "gbraver-burst-core";
 
-import { GameProps } from "./game-props";
+import { GameProps } from "./game-props/game-props";
 
 /** プレイアブルアームドーザ */
 export const PlayableArmdozers: ArmdozerId[] = [

@@ -1,5 +1,5 @@
 import { SelectionComplete } from "../../game-actions/selection-complete";
-import type { GameProps } from "../../game-props";
+import type { GameProps } from "../../game-props/game-props";
 import { startCasualMatchIfNeeded } from "./start-casual-match-start-if-needed";
 import { startDifficultySelectionIfNeeded } from "./start-difficulty-selection-if-needed";
 import { startPrivateMatchGuestIfNeeded } from "./start-private-match-guest-if-needed";

@@ -1,6 +1,6 @@
 import { fadeIn, play } from "../../bgm/bgm-operators";
 import { createEmptySoundResource, SOUND_IDS } from "../../resource/sound";
-import type { GameProps } from "../game-props";
+import type { GameProps } from "../game-props/game-props";
 
 /**
  * タイトルBGMを再生するヘルパー関数

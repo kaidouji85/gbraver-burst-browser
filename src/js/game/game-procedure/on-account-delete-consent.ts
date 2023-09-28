@@ -1,6 +1,6 @@
 import { DeleteAccountConsentDialog } from "../../dom-dialogs/delete-account-consent/delete-account-consent-dialog";
 import { deleteAccountConsentDialogConnector } from "../action-connector/delete-account-consent-dialog-connector";
-import type { GameProps } from "../game-props";
+import type { GameProps } from "../game-props/game-props";
 
 /**
  * アカウント削除同意

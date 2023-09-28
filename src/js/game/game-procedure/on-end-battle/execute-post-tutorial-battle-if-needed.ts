@@ -1,6 +1,6 @@
 import { PostTutorialButtons } from "../../dom-floaters/post-battle/post-battle-buttons";
 import { EndBattle } from "../../game-actions/end-battle";
-import { GameProps } from "../../game-props";
+import { GameProps } from "../../game-props/game-props";
 
 /**
  * 条件を満たした場合、チュートリアル終了後処理を実行する

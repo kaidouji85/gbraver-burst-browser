@@ -1,4 +1,4 @@
-import type { GameProps } from "../game-props";
+import type { GameProps } from "../game-props/game-props";
 
 /**
  * 難易度選択キャンセル時のイベント

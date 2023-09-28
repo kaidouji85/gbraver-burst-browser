@@ -8,7 +8,7 @@ import {
   GameProps,
   GamePropsGeneratorParam,
   generateGameProps,
-} from "./game-props";
+} from "./game-props/game-props";
 
 /** コンストラクタのパラメータ */
 type Param = GamePropsGeneratorParam;

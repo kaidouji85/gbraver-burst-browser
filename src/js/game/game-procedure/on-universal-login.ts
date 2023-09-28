@@ -1,4 +1,4 @@
-import type { GameProps } from "../game-props";
+import type { GameProps } from "../game-props/game-props";
 
 /**
  * ユニバーサルログイン

@@ -6,7 +6,7 @@ import {
 import { waitTime } from "../../wait/wait-time";
 import { titleConnector } from "../action-connector/title-connector";
 import { MAX_LOADING_TIME } from "../dom-scene-binder/max-loading-time";
-import type { GameProps } from "../game-props";
+import type { GameProps } from "../game-props/game-props";
 
 /**
  * タイトル画面を開始するヘルパー関数

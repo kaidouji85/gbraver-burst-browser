@@ -7,7 +7,7 @@ import { waitTime } from "../../wait/wait-time";
 import { battleSceneConnector } from "../action-connector/battle-scene-connector";
 import { tutorialTitleConnector } from "../action-connector/tutorial-title-connector";
 import { MAX_LOADING_TIME } from "../dom-scene-binder/max-loading-time";
-import type { GameProps } from "../game-props";
+import type { GameProps } from "../game-props/game-props";
 import type { TutorialStage } from "../tutorial-stages/tutorial-stage";
 
 /**

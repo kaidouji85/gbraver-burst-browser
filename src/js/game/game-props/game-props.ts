@@ -1,34 +1,34 @@
 import { BrowserSDK } from "@gbraver-burst-network/browser-sdk";
 import { Observable } from "rxjs";
 
-import type { BGMManager } from "../bgm/bgm-manager";
-import { createBGMManager } from "../bgm/bgm-manager";
-import { DOMFader } from "../components/dom-fader/dom-fader";
-import { CssHUDUIScale } from "../css/hud-ui-scale";
-import { CssVH } from "../css/vh";
-import type { GameLoop } from "../game-loop/game-loop";
-import { gameLoopStream } from "../game-loop/game-loop";
-import { Renderer } from "../render";
-import type { Resources } from "../resource";
-import { emptyResources } from "../resource";
-import type { ResourceRoot } from "../resource/resource-root";
+import type { BGMManager } from "../../bgm/bgm-manager";
+import { createBGMManager } from "../../bgm/bgm-manager";
+import { DOMFader } from "../../components/dom-fader/dom-fader";
+import { CssHUDUIScale } from "../../css/hud-ui-scale";
+import { CssVH } from "../../css/vh";
+import type { GameLoop } from "../../game-loop/game-loop";
+import { gameLoopStream } from "../../game-loop/game-loop";
+import { Renderer } from "../../render";
+import type { Resources } from "../../resource";
+import { emptyResources } from "../../resource";
+import type { ResourceRoot } from "../../resource/resource-root";
 import {
   createVisibilityChange,
   VisibilityChange,
-} from "../visibility-change/visibility-change";
-import type { PushWindow } from "../window/push-window";
-import { pushWindowsStream } from "../window/push-window";
-import type { Resize } from "../window/resize";
-import { resizeStream } from "../window/resize";
-import { postBattleConnector } from "./action-connector/post-battle-connector";
-import { GBraverBurstBrowserConfigRepository } from "./config/repository/repository";
-import { DOMDialogBinder } from "./dom-dialog-binder";
-import { DOMFloaters } from "./dom-floaters/dom-floaters";
-import { DOMSceneBinder } from "./dom-scene-binder";
-import { FutureSuddenlyBattleEnd } from "./future-suddenly-battle-end";
-import type { InProgress } from "./in-progress/in-progress";
-import { InterruptScenes } from "./innterrupt-scenes";
-import { TDSceneBinder } from "./td-scene-binder";
+} from "../../visibility-change/visibility-change";
+import type { PushWindow } from "../../window/push-window";
+import { pushWindowsStream } from "../../window/push-window";
+import type { Resize } from "../../window/resize";
+import { resizeStream } from "../../window/resize";
+import { postBattleConnector } from "../action-connector/post-battle-connector";
+import { GBraverBurstBrowserConfigRepository } from "../config/repository/repository";
+import { DOMDialogBinder } from "../dom-dialog-binder";
+import { DOMFloaters } from "../dom-floaters/dom-floaters";
+import { DOMSceneBinder } from "../dom-scene-binder";
+import { FutureSuddenlyBattleEnd } from "../future-suddenly-battle-end";
+import type { InProgress } from "../in-progress/in-progress";
+import { InterruptScenes } from "../innterrupt-scenes";
+import { TDSceneBinder } from "../td-scene-binder";
 
 /**
  * ゲームプロパティ

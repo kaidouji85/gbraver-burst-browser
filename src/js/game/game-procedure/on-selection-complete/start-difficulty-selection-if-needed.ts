@@ -1,7 +1,7 @@
 import { DifficultyDialog } from "../../../dom-dialogs/difficulty";
 import { difficultyDialogConnector } from "../../action-connector/difficulty-dialog-connector";
 import { SelectionComplete } from "../../game-actions/selection-complete";
-import { GameProps } from "../../game-props";
+import { GameProps } from "../../game-props/game-props";
 
 /**
  * 条件を満たした場合、難易度選択を開始する

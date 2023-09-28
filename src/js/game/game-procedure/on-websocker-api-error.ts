@@ -1,7 +1,7 @@
 import { NetworkErrorDialog } from "../../dom-dialogs/network-error/network-error-dialog";
 import { networkErrorDialogConnector } from "../action-connector/network-error-dialog-connector";
 import { WebSocketAPIError } from "../game-actions/web-socket-api-error";
-import type { GameProps } from "../game-props";
+import type { GameProps } from "../game-props/game-props";
 
 /**
  * WebSocketAPIエラー時の処理

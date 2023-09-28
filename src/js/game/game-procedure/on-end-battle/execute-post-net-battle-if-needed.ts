@@ -1,5 +1,5 @@
 import { PostNetworkBattleButtons } from "../../dom-floaters/post-battle/post-battle-buttons";
-import { GameProps } from "../../game-props";
+import { GameProps } from "../../game-props/game-props";
 
 /**
  * 条件を満たしたら、ネット対戦後処理を実行する
