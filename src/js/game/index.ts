@@ -1,6 +1,5 @@
+import { bindListeners } from "./game-procedure/bind-listeners";
 import { initialize } from "./game-procedure/initialize";
-import { onGameAction } from "./game-procedure/on-game-action";
-import { onVisibilityChange } from "./game-procedure/on-visibility-change";
 import { GameProps } from "./game-props";
 import {
   GamePropsGeneratorParam,
@@ -34,12 +33,7 @@ export class Game {
     elements.forEach((element) => {
       body.appendChild(element);
     });
-    this.#props.gameAction.subscribe((action) => {
-      onGameAction(this.#props, action);
-    });
-    this.#props.visibilityChange.subscribe(() => {
-      onVisibilityChange();
-    });
+    bindListeners(this.#props);
   }
 
   /**
