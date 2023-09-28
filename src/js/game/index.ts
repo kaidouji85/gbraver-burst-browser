@@ -1,5 +1,6 @@
 import { Unsubscribable } from "rxjs";
 
+import { appendChildToBody } from "./game-procedure/append-children-to-body";
 import { createGameActionNotifier } from "./game-procedure/create-game-action-notifier";
 import { initialize } from "./game-procedure/initialize";
 import { onGameAction } from "./game-procedure/on-game-action";
@@ -26,19 +27,7 @@ export class Game {
    */
   constructor(param: Param) {
     this.#props = generateGameProps(param);
-    const body = document.body || document.createElement("div");
-    const elements = [
-      this.#props.fader.getRootHTMLElement(),
-      this.#props.interruptScenes.getRootHTMLElement(),
-      this.#props.domDialogBinder.getRootHTMLElement(),
-      this.#props.domSceneBinder.getRootHTMLElement(),
-      this.#props.domFloaters.getRootHTMLElement(),
-      this.#props.renderer.getRendererDOM(),
-      ...this.#props.tdBinder.getDOMLayerElements(),
-    ];
-    elements.forEach((element) => {
-      body.appendChild(element);
-    });
+    appendChildToBody(this.#props);
     const gameActionNotifier = createGameActionNotifier(this.#props);
     this.#unsubscribers = [
       gameActionNotifier.subscribe((action) => {
