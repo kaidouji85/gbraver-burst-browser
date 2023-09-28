@@ -26,9 +26,10 @@ export function createGameActionNotifier(
         error,
       })),
     );
-  const visibilityChange: Observable<GameAction> = fromEvent(document, "visibilitychange").pipe(
-    map(() => ({ type: "VisibilityChange" })),
-  )
+  const visibilityChange: Observable<GameAction> = fromEvent(
+    document,
+    "visibilitychange",
+  ).pipe(map(() => ({ type: "VisibilityChange" })));
   return merge(
     props.tdBinder.gameActionNotifier(),
     props.domSceneBinder.gameActionNotifier(),
