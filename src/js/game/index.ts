@@ -1,6 +1,6 @@
 import { Unsubscribable } from "rxjs";
 
-import { appendChildToBody } from "./game-procedure/append-children-to-body";
+import { appendChildrenToBody } from "./game-procedure/append-children-to-body";
 import { createGameActionNotifier } from "./game-procedure/create-game-action-notifier";
 import { initialize } from "./game-procedure/initialize";
 import { onGameAction } from "./game-procedure/on-game-action";
@@ -27,7 +27,7 @@ export class Game {
    */
   constructor(param: Param) {
     this.#props = generateGameProps(param);
-    appendChildToBody(this.#props);
+    appendChildrenToBody(this.#props);
     const gameActionNotifier = createGameActionNotifier(this.#props);
     this.#unsubscribers = [
       gameActionNotifier.subscribe((action) => {
