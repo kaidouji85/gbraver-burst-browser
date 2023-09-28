@@ -1,4 +1,4 @@
-import type { GameProps } from "../game-props/game-props";
+import type { GameProps } from "../game-props";
 
 /**
  * 画面リロード依頼時の処理

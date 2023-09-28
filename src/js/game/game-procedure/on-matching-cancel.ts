@@ -1,6 +1,6 @@
 import { WaitingDialog } from "../../dom-dialogs/waiting/waiting-dialog";
 import { waitingDialogConnector } from "../action-connector/waiting-dialog-connector";
-import type { GameProps } from "../game-props/game-props";
+import type { GameProps } from "../game-props";
 
 /**
  * マッチング中止

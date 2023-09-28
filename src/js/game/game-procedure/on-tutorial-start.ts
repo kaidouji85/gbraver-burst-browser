@@ -1,4 +1,4 @@
-import type { GameProps } from "../game-props/game-props";
+import type { GameProps } from "../game-props";
 import { loadFullResource } from "./load-full-resource";
 import { startTutorialSelector } from "./start-tutorial-selector";
 

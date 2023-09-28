@@ -1,6 +1,6 @@
 import { isSoundConfigChanged } from "../config/config-changed";
 import { ConfigChangeComplete } from "../game-actions/config-change-complete";
-import type { GameProps } from "../game-props/game-props";
+import type { GameProps } from "../game-props";
 import { reflectSoundVolume } from "../reflect-sound-volume";
 import { startTitle } from "./start-title";
 

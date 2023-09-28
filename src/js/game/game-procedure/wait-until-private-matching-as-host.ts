@@ -7,7 +7,7 @@ import { networkErrorDialogConnector } from "../action-connector/network-error-d
 import { privateMatchHostDialogConnector } from "../action-connector/private-match-host-dialog-connector";
 import { waitingDialogConnector } from "../action-connector/waiting-dialog-connector";
 import { SelectionComplete } from "../game-actions/selection-complete";
-import { GameProps } from "../game-props/game-props";
+import { GameProps } from "../game-props";
 
 /**
  * プライベートマッチ（ホスト）でマッチング成立まで待つ

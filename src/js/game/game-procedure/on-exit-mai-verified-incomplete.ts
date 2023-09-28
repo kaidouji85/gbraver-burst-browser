@@ -1,4 +1,4 @@
-import type { GameProps } from "../game-props/game-props";
+import type { GameProps } from "../game-props";
 
 /**
  * メール認証未完了画面を抜ける時の処理

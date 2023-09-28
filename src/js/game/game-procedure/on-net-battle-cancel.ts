@@ -1,4 +1,4 @@
-import { GameProps } from "../game-props/game-props";
+import { GameProps } from "../game-props";
 
 /**
  * ネット対戦キャンセル時の処理

@@ -9,7 +9,7 @@ import { waitTime } from "../../wait/wait-time";
 import { battleSceneConnector } from "../action-connector/battle-scene-connector";
 import { stageTitleConnector } from "../action-connector/stage-title-connector";
 import { MAX_LOADING_TIME } from "../dom-scene-binder/max-loading-time";
-import type { GameProps } from "../game-props/game-props";
+import type { GameProps } from "../game-props";
 import type { NPCBattleStage } from "../npc-battle";
 
 /**

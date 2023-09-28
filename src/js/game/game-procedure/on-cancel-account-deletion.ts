@@ -1,4 +1,4 @@
-import type { GameProps } from "../game-props/game-props";
+import type { GameProps } from "../game-props";
 
 /**
  * アカウント削除キャンセル

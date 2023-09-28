@@ -2,7 +2,7 @@ import { TutorialSelector } from "../../dom-scenes/tutorial-selector";
 import { waitTime } from "../../wait/wait-time";
 import { tutorialSelectorConnector } from "../action-connector/tutorial-selector-connection";
 import { MAX_LOADING_TIME } from "../dom-scene-binder/max-loading-time";
-import type { GameProps } from "../game-props/game-props";
+import type { GameProps } from "../game-props";
 import {
   TutorialStages,
   TutorialStagesInDevelopment,

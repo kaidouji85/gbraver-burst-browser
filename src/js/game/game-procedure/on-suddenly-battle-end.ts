@@ -1,6 +1,6 @@
 import { NetworkErrorDialog } from "../../dom-dialogs/network-error/network-error-dialog";
 import { networkErrorDialogConnector } from "../action-connector/network-error-dialog-connector";
-import type { GameProps } from "../game-props/game-props";
+import type { GameProps } from "../game-props";
 
 /**
  * バトル強制終了時の処理

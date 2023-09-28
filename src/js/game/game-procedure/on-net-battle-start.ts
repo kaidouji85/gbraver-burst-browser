@@ -6,7 +6,7 @@ import { loginDialogConnector } from "../action-connector/login-dialog-connector
 import { netBattleSelectorDialogConnector } from "../action-connector/net-battle-selector-dialog-connector";
 import { networkErrorDialogConnector } from "../action-connector/network-error-dialog-connector";
 import { waitingDialogConnector } from "../action-connector/waiting-dialog-connector";
-import { GameProps } from "../game-props/game-props";
+import { GameProps } from "../game-props";
 
 /**
  * ログインチェックAPIを呼び出す

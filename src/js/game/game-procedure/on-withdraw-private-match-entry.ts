@@ -1,4 +1,4 @@
-import { GameProps } from "../game-props/game-props";
+import { GameProps } from "../game-props";
 
 /**
  * ゲストがプライベートマッチエントリを取り下げる

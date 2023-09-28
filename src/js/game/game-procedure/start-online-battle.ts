@@ -14,7 +14,7 @@ import { matchCardConnector } from "../action-connector/match-card-connector";
 import { networkErrorDialogConnector } from "../action-connector/network-error-dialog-connector";
 import { waitingDialogConnector } from "../action-connector/waiting-dialog-connector";
 import { MAX_LOADING_TIME } from "../dom-scene-binder/max-loading-time";
-import { GameProps } from "../game-props/game-props";
+import { GameProps } from "../game-props";
 
 /**
  * BattleProgressを生成するヘルパー関数

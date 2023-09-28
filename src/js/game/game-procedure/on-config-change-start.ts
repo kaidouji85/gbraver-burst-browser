@@ -1,6 +1,6 @@
 import { Config } from "../../dom-scenes/config";
 import { configConnector } from "../action-connector/config-connector";
-import type { GameProps } from "../game-props/game-props";
+import type { GameProps } from "../game-props";
 
 /**
  * 設定変更開始時の処理

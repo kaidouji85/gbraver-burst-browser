@@ -1,5 +1,5 @@
 import { fadeOut, stop } from "../../bgm/bgm-operators";
-import type { GameProps } from "../game-props/game-props";
+import type { GameProps } from "../game-props";
 import { playTitleBGM } from "./play-title-bgm";
 import { startTitle } from "./start-title";
 
