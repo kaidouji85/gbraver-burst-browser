@@ -1,26 +1,27 @@
-import {ResourceRoot} from "../../resource/resource-root";
-import {BrowserSDK} from "@gbraver-burst-network/browser-sdk";
-import {GBraverBurstBrowserConfigRepository} from "../config/repository/repository";
-import {resizeStream} from "../../window/resize";
-import {pushWindowsStream} from "../../window/push-window";
-import {Renderer} from "../../render";
-import {gameLoopStream} from "../../game-loop/game-loop";
-import {CssHUDUIScale} from "../../css/hud-ui-scale";
-import {emptyResources} from "../../resource";
-import {createVisibilityChange} from "../../visibility-change/visibility-change";
-import {CssVH} from "../../css/vh";
-import {FutureSuddenlyBattleEnd} from "../future-suddenly-battle-end";
-import {DOMFader} from "../../components/dom-fader/dom-fader";
-import {InterruptScenes} from "../innterrupt-scenes";
-import {DOMSceneBinder} from "../dom-scene-binder";
-import {DOMDialogBinder} from "../dom-dialog-binder";
-import {DOMFloaters} from "../dom-floaters/dom-floaters";
-import {postBattleConnector} from "../action-connector/post-battle-connector";
-import {TDSceneBinder} from "../td-scene-binder";
-import {createBGMManager} from "../../bgm/bgm-manager";
-import {GameProps} from "./index";
-import {map, merge, Observable} from "rxjs";
-import {GameAction} from "../game-actions";
+import { BrowserSDK } from "@gbraver-burst-network/browser-sdk";
+import { map, merge, Observable } from "rxjs";
+
+import { createBGMManager } from "../../bgm/bgm-manager";
+import { DOMFader } from "../../components/dom-fader/dom-fader";
+import { CssHUDUIScale } from "../../css/hud-ui-scale";
+import { CssVH } from "../../css/vh";
+import { gameLoopStream } from "../../game-loop/game-loop";
+import { Renderer } from "../../render";
+import { emptyResources } from "../../resource";
+import { ResourceRoot } from "../../resource/resource-root";
+import { createVisibilityChange } from "../../visibility-change/visibility-change";
+import { pushWindowsStream } from "../../window/push-window";
+import { resizeStream } from "../../window/resize";
+import { postBattleConnector } from "../action-connector/post-battle-connector";
+import { GBraverBurstBrowserConfigRepository } from "../config/repository/repository";
+import { DOMDialogBinder } from "../dom-dialog-binder";
+import { DOMFloaters } from "../dom-floaters/dom-floaters";
+import { DOMSceneBinder } from "../dom-scene-binder";
+import { FutureSuddenlyBattleEnd } from "../future-suddenly-battle-end";
+import { GameAction } from "../game-actions";
+import { InterruptScenes } from "../innterrupt-scenes";
+import { TDSceneBinder } from "../td-scene-binder";
+import { GameProps } from "./index";
 
 /** GamePropsジェネレータパラメータ */
 export type GamePropsGeneratorParam = {
@@ -67,8 +68,9 @@ export function generateGameProps(param: GamePropsGeneratorParam): GameProps {
   const gameLoop = gameLoopStream();
   const hudUIScale = new CssHUDUIScale(renderer.getRendererDOM(), resize);
   const suddenlyBattleEnd = new FutureSuddenlyBattleEnd();
-  const suddenlyBattleEndNotifier: Observable<GameAction> =
-    suddenlyBattleEnd.stream().pipe(
+  const suddenlyBattleEndNotifier: Observable<GameAction> = suddenlyBattleEnd
+    .stream()
+    .pipe(
       map(() => ({
         type: "SuddenlyBattleEnd",
       })),
@@ -83,7 +85,7 @@ export function generateGameProps(param: GamePropsGeneratorParam): GameProps {
     );
   const tdBinder = new TDSceneBinder(renderer, hudUIScale);
   const domSceneBinder = new DOMSceneBinder();
-  const domDialogBinder = new DOMDialogBinder()
+  const domDialogBinder = new DOMDialogBinder();
   const domFloaters = new DOMFloaters({
     postBattleConnector,
   });
