@@ -4,11 +4,8 @@ import { GameAction } from "./game-actions";
 import { initialize } from "./game-procedure/initialize";
 import { onGameAction } from "./game-procedure/on-game-action";
 import { onVisibilityChange } from "./game-procedure/on-visibility-change";
-import {
-  GameProps,
-  GamePropsGeneratorParam,
-  generateGameProps,
-} from "./game-props";
+import { GameProps } from "./game-props";
+import { GamePropsGeneratorParam, generateGameProps } from "./game-props/generate-game-props";
 
 /** コンストラクタのパラメータ */
 type Param = GamePropsGeneratorParam;
