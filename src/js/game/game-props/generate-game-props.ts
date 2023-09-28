@@ -8,9 +8,7 @@ import { gameLoopStream } from "../../game-loop/game-loop";
 import { Renderer } from "../../render";
 import { emptyResources } from "../../resource";
 import type { ResourceRoot } from "../../resource/resource-root";
-import {
-  createVisibilityChange,
-} from "../../visibility-change/visibility-change";
+import { createVisibilityChange } from "../../visibility-change/visibility-change";
 import { pushWindowsStream } from "../../window/push-window";
 import { resizeStream } from "../../window/resize";
 import { postBattleConnector } from "../action-connector/post-battle-connector";

@@ -9,9 +9,7 @@ import { GameLoop } from "../../game-loop/game-loop";
 import { Renderer } from "../../render";
 import { Resources } from "../../resource";
 import { ResourceRoot } from "../../resource/resource-root";
-import {
-  VisibilityChange,
-} from "../../visibility-change/visibility-change";
+import { VisibilityChange } from "../../visibility-change/visibility-change";
 import { PushWindow } from "../../window/push-window";
 import { Resize } from "../../window/resize";
 import { GBraverBurstBrowserConfigRepository } from "../config/repository/repository";
