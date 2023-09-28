@@ -9,7 +9,6 @@ import { GameLoop } from "../../game-loop/game-loop";
 import { Renderer } from "../../render";
 import { Resources } from "../../resource";
 import { ResourceRoot } from "../../resource/resource-root";
-import { VisibilityChange } from "../../visibility-change/visibility-change";
 import { PushWindow } from "../../window/push-window";
 import { Resize } from "../../window/resize";
 import { GBraverBurstBrowserConfigRepository } from "../config/repository/repository";
@@ -54,8 +53,6 @@ export interface GameProps {
   pushWindow: Observable<PushWindow>;
   /** ゲームループ */
   gameLoop: Observable<GameLoop>;
-  /** VisibilityChange */
-  visibilityChange: Observable<VisibilityChange>;
   /** cssカスタムプロパティ --vh */
   vh: CssVH;
   /** cssカスタムプロパティ --hud-ui-scale */

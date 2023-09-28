@@ -1,10 +1,7 @@
-import { Unsubscribable } from "rxjs";
-
 import { appendChildrenToBody } from "./game-procedure/append-children-to-body";
 import { createGameActionNotifier } from "./game-procedure/create-game-action-notifier";
 import { initialize } from "./game-procedure/initialize";
 import { onGameAction } from "./game-procedure/on-game-action";
-import { onVisibilityChange } from "./game-procedure/on-visibility-change";
 import { GameProps } from "./game-props";
 import {
   GamePropsGeneratorParam,
@@ -18,8 +15,6 @@ type Param = GamePropsGeneratorParam;
 export class Game {
   /** ゲームプロパティ */
   #props: GameProps;
-  /** アンサブスクライバ */
-  #unsubscribers: Unsubscribable[];
 
   /**
    * コンストラクタ
@@ -29,14 +24,9 @@ export class Game {
     this.#props = generateGameProps(param);
     appendChildrenToBody(this.#props);
     const gameActionNotifier = createGameActionNotifier(this.#props);
-    this.#unsubscribers = [
-      gameActionNotifier.subscribe((action) => {
-        onGameAction(this.#props, action);
-      }),
-      this.#props.visibilityChange.subscribe(() => {
-        onVisibilityChange();
-      }),
-    ];
+    gameActionNotifier.subscribe((action) => {
+      onGameAction(this.#props, action);
+    });
   }
 
   /**

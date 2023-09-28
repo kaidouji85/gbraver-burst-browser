@@ -1,4 +1,4 @@
-import { map, merge, Observable } from "rxjs";
+import { fromEvent, map, merge, Observable } from "rxjs";
 
 import { GameAction } from "../game-actions";
 import { GameProps } from "../game-props";
@@ -26,6 +26,9 @@ export function createGameActionNotifier(
         error,
       })),
     );
+  const visibilityChange: Observable<GameAction> = fromEvent(document, "visibilitychange").pipe(
+    map(() => ({ type: "VisibilityChange" })),
+  )
   return merge(
     props.tdBinder.gameActionNotifier(),
     props.domSceneBinder.gameActionNotifier(),
@@ -33,5 +36,6 @@ export function createGameActionNotifier(
     props.domFloaters.gameActionNotifier(),
     suddenlyBattleEnd,
     webSocketAPIError,
+    visibilityChange,
   );
 }

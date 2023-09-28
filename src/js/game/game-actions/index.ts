@@ -29,6 +29,7 @@ import { SelectionComplete } from "./selection-complete";
 import { SuddenlyBattleEnd } from "./suddenly-battle-end";
 import { TutorialStart } from "./tutorial-start";
 import { UniversalLogin } from "./universal-login";
+import { VisibilityChange } from "./visibility-change";
 import { WebSocketAPIError } from "./web-socket-api-error";
 import { WithdrawPrivateMatchEntry } from "./withdraw-private-match-entry";
 
@@ -66,4 +67,5 @@ export type GameAction =
   | ConfigChangeCancel
   | TutorialStart
   | CancelTutorialSelect
-  | SelectTutorialStage;
+  | SelectTutorialStage
+  | VisibilityChange;
