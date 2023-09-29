@@ -1,6 +1,6 @@
 /** チュートリアルステージ情報 */
 @media (orientation: landscape) {
-  .tutorial-stage {
+  .episode {
     position: relative;
     display: flex;
     align-items: center;
@@ -14,14 +14,14 @@
 }
 
 @media (orientation: portrait) {
-  .tutorial-stage {
+  .episode {
     display: none;
   }
 }
 
-.tutorial-stage__beginner,
-.tutorial-stage__intermediate,
-.tutorial-stage__advanced {
+.episode__beginner,
+.episode__intermediate,
+.episode__advanced {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -32,23 +32,23 @@
   border-radius: calc(var(--responsive-font-size) * 0.4);
 }
 
-.tutorial-stage__beginner {
+.episode__beginner {
   background-color: var(--button-background-color);
 }
 
-.tutorial-stage__intermediate {
+.episode__intermediate {
   background-color: #00a497;
 }
 
-.tutorial-stage__advanced {
+.episode__advanced {
   background-color: #d7003a;
 }
 
-.tutorial-stage__level {
+.episode__level {
   padding-right: calc(var(--responsive-font-size) * 0.2);
 }
 
-.tutorial-stage__overlay {
+.episode__overlay {
   position: absolute;
   border-radius: var(--button-border-radius);
   background-color: var(--font-color);
