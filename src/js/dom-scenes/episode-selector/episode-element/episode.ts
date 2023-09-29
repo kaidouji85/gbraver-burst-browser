@@ -5,10 +5,10 @@ import {
 
 /** エピソード情報 */
 export type Episode = {
-  /** チュートリアルステージID */
+  /** エピソードID */
   id: EpisodeID;
-  /** チュートリアルタイプ */
+  /** エピソードタイプ */
   type: EpisodeType;
-  /** チュートリアルステージタイトル */
+  /** タイトル */
   title: string;
 };

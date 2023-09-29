@@ -13,11 +13,11 @@ const intermediate = () =>
 const advanced = () => `<div class="${ROOT_CLASS}__advanced">上級</div>`;
 
 /**
- * チュートリアル対応に応じたアイコンを生成する
- * @param type チュートリアルタイプ
+ * エピソードタイプに応じたアイコンを生成する
+ * @param type エピソードタイプ
  * @return アイコン
  */
-const tutorialType = (type: EpisodeType): string => {
+const episodeType = (type: EpisodeType): string => {
   switch (type) {
     case "Beginner":
       return beginner();
@@ -33,7 +33,7 @@ const tutorialType = (type: EpisodeType): string => {
 /**
  * ルート要素のinnerHTML
  * @param ids data-idをあつめたもの
- * @param type チュートリアルタイプ
+ * @param type エピソードタイプ
  * @param level ステージレベル
  * @param title ステージタイトル
  * @return innerHTML
@@ -45,7 +45,7 @@ export function rootInnerHTML(
   title: string,
 ): string {
   return `
-    ${tutorialType(type)}
+    ${episodeType(type)}
     <div class="${ROOT_CLASS}__level">${level}.</div>
     <div class="${ROOT_CLASS}__title">${title}</div>
     <div class="${ROOT_CLASS}__overlay" data-id="${ids.overlay}"></div>
