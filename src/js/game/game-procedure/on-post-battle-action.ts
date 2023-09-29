@@ -17,7 +17,7 @@ import { playTitleBGM } from "./play-title-bgm";
 import { startNPCBattleStage } from "./start-npc-battle-stage";
 import { startTitle } from "./start-title";
 import { startTutorial } from "./start-tutorial";
-import { startTutorialSelector } from "./start-tutorial-selector";
+import { startEpisodeSelector } from "./start-episode-selector";
 
 /**
  * タイトルに遷移する
@@ -126,7 +126,7 @@ const gotoTutorial = async (
  */
 const gotoTutorialSelector = async (props: Readonly<GameProps>) => {
   props.domFloaters.hiddenPostBattle();
-  await startTutorialSelector(props);
+  await startEpisodeSelector(props);
   playTitleBGM(props);
 };
 

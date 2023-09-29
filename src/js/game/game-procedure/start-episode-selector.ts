@@ -6,12 +6,11 @@ import { TutorialEpisodes, TutorialEpisodesInDevelopment } from "../episodes";
 import type { GameProps } from "../game-props";
 
 /**
- * チュートリアルステージセレクタを開始するヘルパー関数
- *
+ * エピソードセレクタ画面を開始するヘルパー関数
  * @param props ゲームプロパティ
  * @return 処理が完了したら発火するPromise
  */
-export async function startTutorialSelector(props: Readonly<GameProps>) {
+export async function startEpisodeSelector(props: Readonly<GameProps>) {
   await props.fader.fadeOut();
   const tutorialStages = props.canPlayTutorialInDevelopment
     ? TutorialEpisodesInDevelopment
