@@ -1,6 +1,6 @@
 import type { GameProps } from "../game-props";
 import { loadFullResource } from "./load-full-resource";
-import { startTutorialSelector } from "./start-tutorial-selector";
+import { startEpisodeSelector } from "./start-episode-selector";
 
 /**
  * チュートリアル開始時の処理
@@ -14,7 +14,7 @@ export async function onTutorialStart(props: GameProps): Promise<void> {
     await loadFullResource(props);
   }
 
-  await startTutorialSelector(props);
+  await startEpisodeSelector(props);
   props.inProgress = {
     type: "Tutorial",
     tutorial: {

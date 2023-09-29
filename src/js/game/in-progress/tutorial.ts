@@ -1,4 +1,4 @@
-import type { TutorialStage } from "../tutorial-stages/tutorial-stage";
+import type { Episode } from "../episodes/episode";
 
 /** チュートリアル */
 export type Tutorial = {
@@ -18,8 +18,8 @@ export type TutorialStageSelect = {
 /** チュートリアルステージプレイ中 */
 export type PlayingTutorialStage = {
   type: "PlayingTutorialStage";
-  /** プレイ中のチュートリアルステージID */
-  stage: TutorialStage;
-  /** プレイ中のチュートリアルステージレベル */
+  /** プレイ中のエピソード */
+  episode: Episode;
+  /** プレイ中のレベル */
   level: number;
 };

@@ -5,6 +5,7 @@ import { NPCEnding } from "../../dom-scenes/npc-ending";
 import { waitTime } from "../../wait/wait-time";
 import { npcEndingConnector } from "../action-connector/npc-ending-connector";
 import { MAX_LOADING_TIME } from "../dom-scene-binder/max-loading-time";
+import type { Episode } from "../episodes/episode";
 import { PostBattleAction } from "../game-actions/post-battle-action";
 import type { GameProps } from "../game-props";
 import type { InProgress } from "../in-progress/in-progress";
@@ -12,12 +13,11 @@ import type { PlayingTutorialStage } from "../in-progress/tutorial";
 import type { NPCBattleStage, NPCBattleState } from "../npc-battle";
 import { getCurrentNPCStage, getNPCStageLevel } from "../npc-battle";
 import { DefaultStage } from "../npc-battle-courses";
-import type { TutorialStage } from "../tutorial-stages/tutorial-stage";
 import { playTitleBGM } from "./play-title-bgm";
+import { startEpisodeSelector } from "./start-episode-selector";
 import { startNPCBattleStage } from "./start-npc-battle-stage";
 import { startTitle } from "./start-title";
 import { startTutorial } from "./start-tutorial";
-import { startTutorialSelector } from "./start-tutorial-selector";
 
 /**
  * タイトルに遷移する
@@ -104,19 +104,18 @@ const gotoNPCBattleStage = async (
 
 /**
  * チュートリアルに遷移する
- *
  * @param props ゲームプロパティ
  * @param level チュートリアルステージレベル
- * @param stage チュートリアルステージ
+ * @param episode エピソード
  * @return 処理が完了したら発火するPromise
  */
 const gotoTutorial = async (
   props: Readonly<GameProps>,
   level: number,
-  stage: TutorialStage,
+  episode: Episode,
 ) => {
   props.domFloaters.hiddenPostBattle();
-  await startTutorial(props, level, stage);
+  await startTutorial(props, level, episode);
 };
 
 /**
@@ -127,7 +126,7 @@ const gotoTutorial = async (
  */
 const gotoTutorialSelector = async (props: Readonly<GameProps>) => {
   props.domFloaters.hiddenPostBattle();
-  await startTutorialSelector(props);
+  await startEpisodeSelector(props);
   playTitleBGM(props);
 };
 
@@ -180,7 +179,7 @@ export async function onPostBattleAction(
     props.inProgress.tutorial.type === "PlayingTutorialStage"
   ) {
     const playingTutorial: PlayingTutorialStage = props.inProgress.tutorial;
-    await gotoTutorial(props, playingTutorial.level, playingTutorial.stage);
+    await gotoTutorial(props, playingTutorial.level, playingTutorial.episode);
   } else if (action.action.type === "GotoTutorialSelect") {
     props.inProgress = {
       type: "Tutorial",
