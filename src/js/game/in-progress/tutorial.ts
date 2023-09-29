@@ -1,4 +1,4 @@
-import type { Episode } from "../tutorial-stages/episode";
+import type { Episode } from "../episodes/episode";
 
 /** チュートリアル */
 export type Tutorial = {

@@ -1,4 +1,4 @@
-import { EpisodeType } from "../../../../game/tutorial-stages/episode";
+import { EpisodeType } from "../../../../game/episodes/episode";
 import { ROOT_CLASS } from "./class-name";
 import { DataIDs } from "./data-ids";
 

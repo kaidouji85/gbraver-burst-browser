@@ -1,7 +1,7 @@
 import {
   EpisodeID,
   EpisodeType,
-} from "../../../game/tutorial-stages/episode";
+} from "../../../game/episodes/episode";
 
 /** エピソード情報 */
 export type Episode = {

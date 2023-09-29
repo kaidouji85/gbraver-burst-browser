@@ -6,7 +6,7 @@ import type { GameProps } from "../game-props";
 import {
   TutorialStages,
   TutorialStagesInDevelopment,
-} from "../tutorial-stages";
+} from "../episodes";
 
 /**
  * チュートリアルステージセレクタを開始するヘルパー関数

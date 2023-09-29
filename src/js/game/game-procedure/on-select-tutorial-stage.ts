@@ -4,7 +4,7 @@ import type { Tutorial } from "../in-progress/tutorial";
 import {
   TutorialStages,
   TutorialStagesInDevelopment,
-} from "../tutorial-stages";
+} from "../episodes";
 import { startTutorial } from "./start-tutorial";
 
 /**

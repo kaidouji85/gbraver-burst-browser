@@ -1,4 +1,4 @@
-import { EpisodeID } from "../tutorial-stages/episode";
+import { EpisodeID } from "../episodes/episode";
 
 /** チュートリアルステージ選択完了 */
 export type SelectTutorialStage = {

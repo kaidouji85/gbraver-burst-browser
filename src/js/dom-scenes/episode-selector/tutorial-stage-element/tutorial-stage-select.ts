@@ -1,4 +1,4 @@
-import { EpisodeID } from "../../../game/tutorial-stages/episode";
+import { EpisodeID } from "../../../game/episodes/episode";
 
 /** チュートリアルステージ選択情報 */
 export type TutorialStageSelect = {

@@ -8,7 +8,7 @@ import { battleSceneConnector } from "../action-connector/battle-scene-connector
 import { tutorialTitleConnector } from "../action-connector/tutorial-title-connector";
 import { MAX_LOADING_TIME } from "../dom-scene-binder/max-loading-time";
 import type { GameProps } from "../game-props";
-import type { Episode } from "../tutorial-stages/episode";
+import type { Episode } from "../episodes/episode";
 
 /**
  * チュートリアルを開始するヘルパー関数
