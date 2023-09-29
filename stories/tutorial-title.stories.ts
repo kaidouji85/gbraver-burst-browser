@@ -1,4 +1,4 @@
-import { TutorialTitle } from "../src/js/dom-scenes/episode-title";
+import { EpisodeTitle } from "../src/js/dom-scenes/episode-title";
 import { domStub } from "./stub/dom-stub";
 
 export default {
@@ -13,7 +13,7 @@ export default {
  */
 const tutorialTitleStory = (title: string[], level: number) =>
   domStub((resources) => {
-    const scene = new TutorialTitle({
+    const scene = new EpisodeTitle({
       resources,
       title,
       level,
