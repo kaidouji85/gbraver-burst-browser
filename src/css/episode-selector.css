@@ -1,6 +1,6 @@
-/** チュートリアルステージセレクト画面 */
+/** エピソードセレクト画面 */
 @media (orientation: landscape) {
-  .tutorial-selector {
+  .episode-selector {
     --controllers-z-index: 1;
 
     width: var(--screen-width);
@@ -18,12 +18,12 @@
 }
 
 @media (orientation: portrait) {
-  .tutorial-selector {
+  .episode-selector {
     display: none;
   }
 }
 
-.tutorial-selector__title {
+.episode-selector__title {
   grid-row: 1;
   grid-column: 2;
   font-size: calc(var(--responsive-font-size) * 1);
@@ -36,14 +36,14 @@
   justify-content: center;
 }
 
-.tutorial-selector__image-cuts {
+.episode-selector__image-cuts {
   grid-row: 1 / 4;
   grid-column: 1;
   position: relative;
   border-radius: var(--button-border-radius);
 }
 
-.tutorial-selector__image-cuts img {
+.episode-selector__image-cuts img {
   --animation: slide 9s infinite ease;
   --cut-01-delay: 0s;
   --cut-02-delay: 3s;
@@ -61,17 +61,17 @@
   left: 0;
 }
 
-.tutorial-selector__cut-01 {
+.episode-selector__cut-01 {
   animation: var(--animation);
   animation-delay: var(--cut-01-delay);
 }
 
-.tutorial-selector__cut-02 {
+.episode-selector__cut-02 {
   animation: var(--animation);
   animation-delay: var(--cut-02-delay);
 }
 
-.tutorial-selector__cut-03 {
+.episode-selector__cut-03 {
   animation: var(--animation);
   animation-delay: var(--cut-03-delay);
 }
@@ -98,7 +98,7 @@
   }
 }
 
-.tutorial-selector__stages {
+.episode-selector__stages {
   grid-row: 2;
   grid-column: 2;
   display: flex;
@@ -110,12 +110,12 @@
   overflow-y: scroll;
 }
 
-.tutorial-selector__stage-separator {
+.episode-selector__stage-separator {
   border-bottom: dashed 1px var(--font-color);
   margin-bottom: calc(var(--responsive-font-size) * 0.7) 0;
 }
 
-.tutorial-selector__prev {
+.episode-selector__prev {
   grid-row: 3;
   grid-column: 2;
   min-height: calc(var(--responsive-font-size) * 3);
