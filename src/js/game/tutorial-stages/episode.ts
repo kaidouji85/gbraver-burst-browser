@@ -5,11 +5,11 @@ import { Resources } from "../../resource";
 import type { SoundId } from "../../resource/sound";
 import type { CustomBattleEvent } from "../../td-scenes/battle/custom-battle-event";
 
-/** チュートリアルステージID */
-export type TutorialStageID = string;
+/** エピソードID */
+export type EpisodeID = string;
 
-/** チュートリアルタイプ */
-export type TutorialType =
+/** @deprecated エピソードタイプ */
+export type EpisodeType =
   /** 初級 */
   | "Beginner"
   /** 中級 */
@@ -17,13 +17,13 @@ export type TutorialType =
   /** 上級 */
   | "Advanced";
 
-/** チュートリアルステージ */
-export type TutorialStage = {
-  /** チュートリアルステージID */
-  id: TutorialStageID;
-  /** チュートリアルタイプ */
-  type: TutorialType;
-  /** チュートリアルタイトル */
+/** エピソード */
+export type Episode = {
+  /** エピソードID */
+  id: EpisodeID;
+  /** エピソードタイプ */
+  type: EpisodeType;
+  /** タイトル */
   title: string[];
   /** NPC */
   npc: NPC;

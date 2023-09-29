@@ -1,10 +1,10 @@
-import { TutorialStageID } from "../tutorial-stages/tutorial-stage";
+import { EpisodeID } from "../tutorial-stages/episode";
 
 /** チュートリアルステージ選択完了 */
 export type SelectTutorialStage = {
   type: "SelectTutorialStage";
   /** ステージID */
-  id: TutorialStageID;
+  id: EpisodeID;
   /** ステージレベル */
   level: number;
 };

@@ -14,7 +14,7 @@ import { extractElements } from "./dom/elements";
 import { rootInnerHTML } from "./dom/root-inner-html";
 import { stageSeparator } from "./dom/stage-separator";
 import { TutorialStageElement } from "./tutorial-stage-element";
-import { TutorialStage } from "./tutorial-stage-element/tutorial-stage";
+import { Episode } from "./tutorial-stage-element/episode";
 import { TutorialStageSelect } from "./tutorial-stage-element/tutorial-stage-select";
 
 /** エピソードセレクタ画面プロパティ */
@@ -45,7 +45,7 @@ export type EpisodeSelectorProps = {
  */
 export function createTutorialSelectorProps(
   resources: Resources,
-  stages: TutorialStage[],
+  stages: Episode[],
 ): EpisodeSelectorProps {
   const ids = {
     stages: domUuid(),

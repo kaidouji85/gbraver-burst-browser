@@ -4,7 +4,7 @@ import type { Resources } from "../../resource";
 import type { DOMScene } from "../dom-scene";
 import { bindEventListeners } from "./listeners/bind-event-listeners";
 import { createTutorialSelectorProps, EpisodeSelectorProps } from "./props";
-import { TutorialStage } from "./tutorial-stage-element/tutorial-stage";
+import { Episode } from "./tutorial-stage-element/episode";
 import { TutorialStageSelect } from "./tutorial-stage-element/tutorial-stage-select";
 
 /** エピソードセレクト画面 */
@@ -17,9 +17,9 @@ export class EpisodeSelector implements DOMScene {
   /**
    * コンストラクタ
    * @param resources リソース管理オブジェクト
-   * @param stages チュートリアルステージ情報
+   * @param stages エピソード情報
    */
-  constructor(resources: Resources, stages: TutorialStage[]) {
+  constructor(resources: Resources, stages: Episode[]) {
     this.#props = createTutorialSelectorProps(resources, stages);
     this.#unsubscribers = bindEventListeners(this.#props);
   }

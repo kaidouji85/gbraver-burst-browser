@@ -1,12 +1,12 @@
 import { batterySystemTutorial } from "./battery-system";
 import { burstTutorial } from "./burst";
+import { Episode } from "./episode";
 import { pilotSkillTutorial01 } from "./pilot-skill-01";
 import { pilotSkillTutorial02 } from "./pilot-skill-02";
-import { TutorialStage } from "./tutorial-stage";
 import { zeroDefenseTutorial } from "./zero-defense";
 
 /** チュートリアルステージを集めたもの */
-export const TutorialStages: TutorialStage[] = [
+export const TutorialStages: Episode[] = [
   batterySystemTutorial,
   zeroDefenseTutorial,
   burstTutorial,
@@ -15,4 +15,4 @@ export const TutorialStages: TutorialStage[] = [
 ];
 
 /** 開発中のチュートリアルのステージをあつめたもの */
-export const TutorialStagesInDevelopment: TutorialStage[] = [...TutorialStages];
+export const TutorialStagesInDevelopment: Episode[] = [...TutorialStages];

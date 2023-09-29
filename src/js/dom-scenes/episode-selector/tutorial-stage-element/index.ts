@@ -1,18 +1,18 @@
 import { Observable } from "rxjs";
 
-import type { TutorialStageID } from "../../../game/tutorial-stages/tutorial-stage";
+import type { EpisodeID } from "../../../game/tutorial-stages/episode";
 import type { Resources } from "../../../resource";
+import { Episode } from "./episode";
 import { selected } from "./procedure/selected";
 import {
   createTutorialStageElementProps,
   TutorialStageElementProps,
 } from "./props";
-import { TutorialStage } from "./tutorial-stage";
 
 /** チュートリアルステージ HTML要素 */
 export class TutorialStageElement {
   /** ステージID */
-  readonly id: TutorialStageID;
+  readonly id: EpisodeID;
   /** ステージレベル */
   readonly level: number;
   /** プロパティ */
@@ -24,7 +24,7 @@ export class TutorialStageElement {
    * @param stage ステージ情報
    * @param level ステージレベル
    */
-  constructor(resources: Resources, stage: TutorialStage, level: number) {
+  constructor(resources: Resources, stage: Episode, level: number) {
     this.id = stage.id;
     this.level = level;
     this.#props = createTutorialStageElementProps(resources, stage, level);

@@ -4,11 +4,11 @@ import { createPilotSkillTutorial01Event } from "../../custom-battle-events/pilo
 import { pilotSkillTutorialNPC } from "../../npc/pilot-skill-tutorial";
 import { SOUND_IDS } from "../../resource/sound";
 import { playerUuid } from "../../uuid/player";
-import { TutorialStage } from "./tutorial-stage";
+import { Episode } from "./episode";
 import { TutorialStageIDs } from "./tutorial-stage-ids";
 
 /** パイロットスキルチュートリアル（前半） */
-export const pilotSkillTutorial01: TutorialStage = {
+export const pilotSkillTutorial01: Episode = {
   id: TutorialStageIDs.Pilot01,
   type: "Advanced",
   title: ["パイロット次第では詰み（負けイベント）"],

@@ -8,7 +8,7 @@ import { battleSceneConnector } from "../action-connector/battle-scene-connector
 import { tutorialTitleConnector } from "../action-connector/tutorial-title-connector";
 import { MAX_LOADING_TIME } from "../dom-scene-binder/max-loading-time";
 import type { GameProps } from "../game-props";
-import type { TutorialStage } from "../tutorial-stages/tutorial-stage";
+import type { Episode } from "../tutorial-stages/episode";
 
 /**
  * チュートリアルを開始するヘルパー関数
@@ -21,7 +21,7 @@ import type { TutorialStage } from "../tutorial-stages/tutorial-stage";
 export async function startTutorial(
   props: Readonly<GameProps>,
   level: number,
-  stage: TutorialStage,
+  stage: Episode,
 ): Promise<void> {
   const npcBattle = new NPCBattleRoom(stage.player, stage.npc);
   await Promise.all([

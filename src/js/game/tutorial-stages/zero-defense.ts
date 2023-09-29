@@ -4,11 +4,11 @@ import { createZeroDefenseTutorialEvent } from "../../custom-battle-events/zero-
 import { zeroDefenseTutorialNPC } from "../../npc/zero-defense-tutorial";
 import { SOUND_IDS } from "../../resource/sound";
 import { playerUuid } from "../../uuid/player";
-import { TutorialStage } from "./tutorial-stage";
+import { Episode } from "./episode";
 import { TutorialStageIDs } from "./tutorial-stage-ids";
 
 /** ゼロ防御チュートリアル */
-export const zeroDefenseTutorial: TutorialStage = {
+export const zeroDefenseTutorial: Episode = {
   id: TutorialStageIDs.ZERO_DEFENSE,
   type: "Beginner",
   title: ["ゼロ防御だと即死する"],

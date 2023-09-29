@@ -1,4 +1,4 @@
-import { TutorialType } from "../../../../game/tutorial-stages/tutorial-stage";
+import { EpisodeType } from "../../../../game/tutorial-stages/episode";
 import { ROOT_CLASS } from "./class-name";
 import { DataIDs } from "./data-ids";
 
@@ -17,7 +17,7 @@ const advanced = () => `<div class="${ROOT_CLASS}__advanced">上級</div>`;
  * @param type チュートリアルタイプ
  * @return アイコン
  */
-const tutorialType = (type: TutorialType): string => {
+const tutorialType = (type: EpisodeType): string => {
   switch (type) {
     case "Beginner":
       return beginner();
@@ -40,7 +40,7 @@ const tutorialType = (type: TutorialType): string => {
  */
 export function rootInnerHTML(
   ids: DataIDs,
-  type: TutorialType,
+  type: EpisodeType,
   level: number,
   title: string,
 ): string {

@@ -12,7 +12,7 @@ import type { PlayingTutorialStage } from "../in-progress/tutorial";
 import type { NPCBattleStage, NPCBattleState } from "../npc-battle";
 import { getCurrentNPCStage, getNPCStageLevel } from "../npc-battle";
 import { DefaultStage } from "../npc-battle-courses";
-import type { TutorialStage } from "../tutorial-stages/tutorial-stage";
+import type { Episode } from "../tutorial-stages/episode";
 import { playTitleBGM } from "./play-title-bgm";
 import { startNPCBattleStage } from "./start-npc-battle-stage";
 import { startTitle } from "./start-title";
@@ -113,7 +113,7 @@ const gotoNPCBattleStage = async (
 const gotoTutorial = async (
   props: Readonly<GameProps>,
   level: number,
-  stage: TutorialStage,
+  stage: Episode,
 ) => {
   props.domFloaters.hiddenPostBattle();
   await startTutorial(props, level, stage);
