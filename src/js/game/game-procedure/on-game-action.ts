@@ -31,6 +31,7 @@ import { onSelectionComplete } from "./on-selection-complete";
 import { onSuddenlyEndBattle } from "./on-suddenly-battle-end";
 import { onTutorialStart } from "./on-tutorial-start";
 import { onUniversalLogin } from "./on-universal-login";
+import { onVisibilityChange } from "./on-visibility-change";
 import { onWebSocketAPIError } from "./on-websocker-api-error";
 import { onWithdrawPrivateMatchEntry } from "./on-withdraw-private-match-entry";
 
@@ -107,5 +108,7 @@ export function onGameAction(props: GameProps, action: GameAction) {
     onWithdrawPrivateMatchEntry(props);
   } else if (action.type === "PrivateMatchEntry") {
     onPrivateMatchEntry(props, action);
+  } else if (action.type === "VisibilityChange") {
+    onVisibilityChange();
   }
 }
