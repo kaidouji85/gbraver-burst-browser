@@ -14,8 +14,8 @@ import { extractElements } from "./dom/elements";
 import { rootInnerHTML } from "./dom/root-inner-html";
 import { Episode } from "./episode";
 
-/** チュートリアルステージ HTML要素 プロパティ */
-export type TutorialStageElementProps = {
+/** エピソードHTML要素プロパティ */
+export type EpisodeElementProps = {
   /** ルートHTML要素 */
   root: HTMLElement;
   /** オーバーレイ */
@@ -27,13 +27,13 @@ export type TutorialStageElementProps = {
 };
 
 /**
- * TutorialStageElementPropsを生成する
+ * EpisodeElementPropsを生成する
  * @param resources リソース管理オブジェクト
  * @param stage ステージ情報
  * @param level レベル
  * @return 生成結果
  */
-export function createTutorialStageElementProps(
+export function createEpisodeElementProps(
   resources: Readonly<Resources>,
   stage: Readonly<Episode>,
   level: Readonly<number>,

@@ -1,12 +1,12 @@
 import { flash } from "../../../../dom/flash";
-import { TutorialStageElementProps } from "../props";
+import { EpisodeElementProps } from "../props";
 
 /**
  * ステージ選択アニメーション
  * @return アニメーションが完了したら発火するPromise
  */
 export async function selected(
-  props: Readonly<TutorialStageElementProps>,
+  props: Readonly<EpisodeElementProps>,
 ): Promise<void> {
   props.pushButton.sound.play();
   await flash(props.overlay);

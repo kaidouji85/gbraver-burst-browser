@@ -1,5 +1,5 @@
 import { EpisodeSelectorProps } from "../props";
-import { TutorialStageElement } from "../episode-element";
+import { EpisodeElement } from "../episode-element";
 
 /**
  * チュートリアルステージ選択
@@ -8,7 +8,7 @@ import { TutorialStageElement } from "../episode-element";
  */
 export function onTutorialStageSelect(
   props: Readonly<EpisodeSelectorProps>,
-  stageElement: TutorialStageElement,
+  stageElement: EpisodeElement,
 ): void {
   props.exclusive.execute(async () => {
     await stageElement.selected();

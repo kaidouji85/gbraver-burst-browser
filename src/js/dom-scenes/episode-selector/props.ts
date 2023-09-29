@@ -13,7 +13,7 @@ import { ROOT_CLASS } from "./dom/class-name";
 import { extractElements } from "./dom/elements";
 import { rootInnerHTML } from "./dom/root-inner-html";
 import { stageSeparator } from "./dom/stage-separator";
-import { TutorialStageElement } from "./episode-element";
+import { EpisodeElement } from "./episode-element";
 import { Episode } from "./episode-element/episode";
 import { TutorialStageSelect } from "./episode-element/tutorial-stage-select";
 
@@ -22,7 +22,7 @@ export type EpisodeSelectorProps = {
   /** ルートHTML要素 */
   root: HTMLElement;
   /** チュートリアルステージ */
-  stageElements: TutorialStageElement[];
+  stageElements: EpisodeElement[];
   /** 戻るボタン */
   prevButton: HTMLElement;
   /** 排他制御 */
@@ -57,7 +57,7 @@ export function createTutorialSelectorProps(
   root.innerHTML = rootInnerHTML(ids, resources);
   const elements = extractElements(root, ids);
   const stageElements = stages.map(
-    (stage, index) => new TutorialStageElement(resources, stage, index + 1),
+    (stage, index) => new EpisodeElement(resources, stage, index + 1),
   );
   const stageElementsWithLastRemoved = stageElements.slice(0, -1);
   stageElementsWithLastRemoved.forEach((stage) => {

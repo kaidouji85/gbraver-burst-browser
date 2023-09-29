@@ -5,18 +5,18 @@ import type { Resources } from "../../../resource";
 import { Episode } from "./episode";
 import { selected } from "./procedure/selected";
 import {
-  createTutorialStageElementProps,
-  TutorialStageElementProps,
+  createEpisodeElementProps,
+  EpisodeElementProps,
 } from "./props";
 
-/** チュートリアルステージ HTML要素 */
-export class TutorialStageElement {
-  /** ステージID */
+/** エピソードHTML要素 */
+export class EpisodeElement {
+  /** ID */
   readonly id: EpisodeID;
-  /** ステージレベル */
+  /** レベル */
   readonly level: number;
   /** プロパティ */
-  #props: TutorialStageElementProps;
+  #props: EpisodeElementProps;
 
   /**
    * コンストラクタ
@@ -27,7 +27,7 @@ export class TutorialStageElement {
   constructor(resources: Resources, stage: Episode, level: number) {
     this.id = stage.id;
     this.level = level;
-    this.#props = createTutorialStageElementProps(resources, stage, level);
+    this.#props = createEpisodeElementProps(resources, stage, level);
   }
 
   /**
