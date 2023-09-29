@@ -1,20 +1,19 @@
 import { TutorialEpisodes, TutorialEpisodesInDevelopment } from "../episodes";
-import { SelectTutorialStage } from "../game-actions/select-tutorial-stage";
+import { SelectEpisode } from "../game-actions/select-episode";
 import type { GameProps } from "../game-props";
 import type { Tutorial } from "../in-progress/tutorial";
 import { startTutorial } from "./start-tutorial";
 
 /**
- * チュートリアルステージ選択時の処理
+ * エピソード選択時の処理
  * 本関数にはinProgressを変更する副作用がある
- *
  * @param props ゲームプロパティ
  * @param action アクション
  * @return 処理が完了したら発火するPromise
  */
-export async function onSelectTutorialStage(
+export async function onSelectEpisode(
   props: GameProps,
-  action: SelectTutorialStage,
+  action: SelectEpisode,
 ): Promise<void> {
   if (props.inProgress.type !== "Tutorial") {
     return;

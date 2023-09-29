@@ -25,7 +25,7 @@ import { onPrivateMatchEntry } from "./on-private-match-entry";
 import { onPrivateMatchGuestStart } from "./on-private-match-guest-start";
 import { onPrivateMatchHostStart } from "./on-private-match-host-start";
 import { onReloadRequest } from "./on-reload-request";
-import { onSelectTutorialStage } from "./on-select-tutorial-stage";
+import { onSelectEpisode } from "./on-select-episode";
 import { onSelectionCancel } from "./on-selection-cancel";
 import { onSelectionComplete } from "./on-selection-complete";
 import { onSuddenlyEndBattle } from "./on-suddenly-battle-end";
@@ -94,8 +94,8 @@ export function onGameAction(props: GameProps, action: GameAction) {
     onTutorialStart(props);
   } else if (action.type === "CancelTutorialSelect") {
     onCancelTutorialSelect(props);
-  } else if (action.type === "SelectTutorialStage") {
-    onSelectTutorialStage(props, action);
+  } else if (action.type === "SelectEpisode") {
+    onSelectEpisode(props, action);
   } else if (action.type === "NetBattleStart") {
     onNetBattleStart(props);
   } else if (action.type === "NetBattleCancel") {

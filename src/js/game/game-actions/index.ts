@@ -23,7 +23,7 @@ import { PrivateMatchEntry } from "./private-match-entry";
 import { PrivateMatchGuestStart } from "./private-match-guest-start";
 import { PrivateMatchHostStart } from "./private-match-host-start";
 import { ReloadRequest } from "./reload-request";
-import { SelectTutorialStage } from "./select-tutorial-stage";
+import { SelectEpisode } from "./select-episode";
 import { SelectionCancel } from "./selection-cancel";
 import { SelectionComplete } from "./selection-complete";
 import { SuddenlyBattleEnd } from "./suddenly-battle-end";
@@ -67,5 +67,5 @@ export type GameAction =
   | ConfigChangeCancel
   | TutorialStart
   | CancelTutorialSelect
-  | SelectTutorialStage
+  | SelectEpisode
   | VisibilityChange;
