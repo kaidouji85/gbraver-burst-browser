@@ -14,10 +14,10 @@ import type { NPCBattleStage, NPCBattleState } from "../npc-battle";
 import { getCurrentNPCStage, getNPCStageLevel } from "../npc-battle";
 import { DefaultStage } from "../npc-battle-courses";
 import { playTitleBGM } from "./play-title-bgm";
+import { startEpisodeSelector } from "./start-episode-selector";
 import { startNPCBattleStage } from "./start-npc-battle-stage";
 import { startTitle } from "./start-title";
 import { startTutorial } from "./start-tutorial";
-import { startEpisodeSelector } from "./start-episode-selector";
 
 /**
  * タイトルに遷移する
