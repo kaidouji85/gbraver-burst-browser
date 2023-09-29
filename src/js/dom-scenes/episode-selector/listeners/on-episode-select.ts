@@ -12,7 +12,7 @@ export function onEpisodeSelect(
 ): void {
   props.exclusive.execute(async () => {
     await episodeElement.selected();
-    props.stageSelect.next({
+    props.episodeSelect.next({
       id: episodeElement.id,
       level: episodeElement.level,
     });

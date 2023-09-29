@@ -8,7 +8,7 @@ import { createEpisodeElementProps, EpisodeElementProps } from "./props";
 
 /** エピソードHTML要素 */
 export class EpisodeElement {
-  /** ID */
+  /** エピソードID */
   readonly id: EpisodeID;
   /** レベル */
   readonly level: number;
@@ -36,10 +36,10 @@ export class EpisodeElement {
   }
 
   /**
-   * ステージ選択通知
+   * 選択通知
    * @return 通知ストリーム
    */
-  notifyStageSelection(): Observable<void> {
+  notifySelection(): Observable<void> {
     return this.#props.select;
   }
 

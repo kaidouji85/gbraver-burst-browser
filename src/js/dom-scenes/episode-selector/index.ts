@@ -17,10 +17,10 @@ export class EpisodeSelector implements DOMScene {
   /**
    * コンストラクタ
    * @param resources リソース管理オブジェクト
-   * @param stages エピソード情報
+   * @param episodes エピソード情報
    */
-  constructor(resources: Resources, stages: Episode[]) {
-    this.#props = createEpisodeSelectorProps(resources, stages);
+  constructor(resources: Resources, episodes: Episode[]) {
+    this.#props = createEpisodeSelectorProps(resources, episodes);
     this.#unsubscribers = bindEventListeners(this.#props);
   }
 
@@ -53,10 +53,10 @@ export class EpisodeSelector implements DOMScene {
   }
 
   /**
-   * ステージ選択通知
+   * 選択通知
    * @return 通知ストリーム
    */
-  notifyStageSelection(): Observable<EpisodeSelect> {
-    return this.#props.stageSelect;
+  notifySelection(): Observable<EpisodeSelect> {
+    return this.#props.episodeSelect;
   }
 }

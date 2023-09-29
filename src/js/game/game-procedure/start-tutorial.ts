@@ -15,15 +15,15 @@ import type { GameProps } from "../game-props";
  *
  * @param props ゲームプロパティ
  * @param level チュートリアルステージレベル
- * @param stage チュートリアルステージ
+ * @param episode エピソード
  * @return 処理が完了したら発火するPromise
  */
 export async function startTutorial(
   props: Readonly<GameProps>,
   level: number,
-  stage: Episode,
+  episode: Episode,
 ): Promise<void> {
-  const npcBattle = new NPCBattleRoom(stage.player, stage.npc);
+  const npcBattle = new NPCBattleRoom(episode.player, episode.npc);
   await Promise.all([
     props.fader.fadeOut(),
     (async () => {
@@ -34,7 +34,7 @@ export async function startTutorial(
   const scene = new TutorialTitle({
     resources: props.resources,
     level,
-    title: stage.title,
+    title: episode.title,
   });
   props.domSceneBinder.bind(scene, tutorialTitleConnector);
   await Promise.race([scene.waitUntilLoaded(), waitTime(MAX_LOADING_TIME)]);
@@ -45,13 +45,13 @@ export async function startTutorial(
   const battleScene = new BattleScene({
     resources: props.resources,
     bgm: props.bgm,
-    playingBGM: stage.bgm,
+    playingBGM: episode.bgm,
     initialAnimationTimeScale: config.battleAnimationTimeScale,
     battleProgress: npcBattle,
     player: npcBattle.player,
     enemy: npcBattle.enemy,
     initialState: npcBattle.stateHistory(),
-    customBattleEvent: stage.event(props.resources),
+    customBattleEvent: episode.event(props.resources),
     resize: props.resize,
     pushWindow: props.pushWindow,
     gameLoop: props.gameLoop,

@@ -18,8 +18,8 @@ export type TutorialStageSelect = {
 /** チュートリアルステージプレイ中 */
 export type PlayingTutorialStage = {
   type: "PlayingTutorialStage";
-  /** プレイ中のチュートリアルステージID */
-  stage: Episode;
-  /** プレイ中のチュートリアルステージレベル */
+  /** プレイ中のエピソード */
+  episode: Episode;
+  /** プレイ中のレベル */
   level: number;
 };

@@ -11,7 +11,7 @@ export const tutorialSelectorConnector: Connector = (scene, gameAction) => [
       type: "CancelTutorialSelect",
     });
   }),
-  scene.notifyStageSelection().subscribe((stageSelect) => {
+  scene.notifySelection().subscribe((stageSelect) => {
     gameAction.next({ ...stageSelect, type: "SelectTutorialStage" });
   }),
 ];

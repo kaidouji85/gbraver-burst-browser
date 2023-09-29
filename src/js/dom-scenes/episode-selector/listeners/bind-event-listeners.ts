@@ -18,7 +18,7 @@ export function bindEventListeners(
       onPrevPush(props, action);
     }),
     ...props.episodeElements.map((stage) =>
-      stage.notifyStageSelection().subscribe(() => {
+      stage.notifySelection().subscribe(() => {
         onEpisodeSelect(props, stage);
       }),
     ),

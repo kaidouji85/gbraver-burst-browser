@@ -104,19 +104,18 @@ const gotoNPCBattleStage = async (
 
 /**
  * チュートリアルに遷移する
- *
  * @param props ゲームプロパティ
  * @param level チュートリアルステージレベル
- * @param stage チュートリアルステージ
+ * @param episode エピソード
  * @return 処理が完了したら発火するPromise
  */
 const gotoTutorial = async (
   props: Readonly<GameProps>,
   level: number,
-  stage: Episode,
+  episode: Episode,
 ) => {
   props.domFloaters.hiddenPostBattle();
-  await startTutorial(props, level, stage);
+  await startTutorial(props, level, episode);
 };
 
 /**
@@ -180,7 +179,7 @@ export async function onPostBattleAction(
     props.inProgress.tutorial.type === "PlayingTutorialStage"
   ) {
     const playingTutorial: PlayingTutorialStage = props.inProgress.tutorial;
-    await gotoTutorial(props, playingTutorial.level, playingTutorial.stage);
+    await gotoTutorial(props, playingTutorial.level, playingTutorial.episode);
   } else if (action.action.type === "GotoTutorialSelect") {
     props.inProgress = {
       type: "Tutorial",

@@ -29,8 +29,8 @@ export type EpisodeSelectorProps = {
   exclusive: Exclusive;
   /** 戻るストリーム */
   prev: Subject<void>;
-  /** ステージ選択完了ストリーム */
-  stageSelect: Subject<EpisodeSelect>;
+  /** エピソード選択ストリーム */
+  episodeSelect: Subject<EpisodeSelect>;
   /** 値変更効果音 */
   changeValue: SoundResource;
   /** イメージカットのロード完了したら発火するPromise */
@@ -56,26 +56,26 @@ export function createEpisodeSelectorProps(
   root.className = ROOT_CLASS;
   root.innerHTML = rootInnerHTML(ids, resources);
   const elements = extractElements(root, ids);
-  const stageElements = episodes.map(
+  const episodeElements = episodes.map(
     (stage, index) => new EpisodeElement(resources, stage, index + 1),
   );
-  const stageElementsWithLastRemoved = stageElements.slice(0, -1);
+  const stageElementsWithLastRemoved = episodeElements.slice(0, -1);
   stageElementsWithLastRemoved.forEach((stage) => {
     elements.stages.appendChild(stage.getRootHTMLElement());
     elements.stages.appendChild(stageSeparator());
   });
-  const lastStageElement = stageElements[stageElements.length - 1];
+  const lastStageElement = episodeElements[episodeElements.length - 1];
   if (lastStageElement) {
     elements.stages.appendChild(lastStageElement.getRootHTMLElement());
   }
 
   return {
     root,
-    episodeElements: stageElements,
+    episodeElements: episodeElements,
     prevButton: elements.prevButton,
     exclusive: new Exclusive(),
     prev: new Subject(),
-    stageSelect: new Subject(),
+    episodeSelect: new Subject(),
     changeValue:
       resources.sounds.find((v) => v.id === SOUND_IDS.CHANGE_VALUE) ??
       createEmptySoundResource(),

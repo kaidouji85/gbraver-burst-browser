@@ -2,7 +2,7 @@ import { EpisodeSelector } from "../../dom-scenes/episode-selector";
 import { waitTime } from "../../wait/wait-time";
 import { tutorialSelectorConnector } from "../action-connector/tutorial-selector-connection";
 import { MAX_LOADING_TIME } from "../dom-scene-binder/max-loading-time";
-import { TutorialStages, TutorialStagesInDevelopment } from "../episodes";
+import { TutorialEpisodes, TutorialEpisodesInDevelopment } from "../episodes";
 import type { GameProps } from "../game-props";
 
 /**
@@ -14,8 +14,8 @@ import type { GameProps } from "../game-props";
 export async function startTutorialSelector(props: Readonly<GameProps>) {
   await props.fader.fadeOut();
   const tutorialStages = props.canPlayTutorialInDevelopment
-    ? TutorialStagesInDevelopment
-    : TutorialStages;
+    ? TutorialEpisodesInDevelopment
+    : TutorialEpisodes;
   const stages = tutorialStages.map((stage) => ({
     id: stage.id,
     title: stage.title.join(""),
