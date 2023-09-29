@@ -21,8 +21,8 @@ import { EpisodeSelect } from "./episode-element/episode-select";
 export type EpisodeSelectorProps = {
   /** ルートHTML要素 */
   root: HTMLElement;
-  /** チュートリアルステージ */
-  stageElements: EpisodeElement[];
+  /** エピソード要素をあつめたもの */
+  episodeElements: EpisodeElement[];
   /** 戻るボタン */
   prevButton: HTMLElement;
   /** 排他制御 */
@@ -40,12 +40,12 @@ export type EpisodeSelectorProps = {
 /**
  * EpisodeSelectorPropsを生成する
  * @param resources リソース管理オブジェクト
- * @param stages チュートリアルステージ情報
- * @return 生成したTutorialSelectorProps
+ * @param episodes エピソード
+ * @return 生成したEpisodeSelectorProps
  */
-export function createTutorialSelectorProps(
+export function createEpisodeSelectorProps(
   resources: Resources,
-  stages: Episode[],
+  episodes: Episode[],
 ): EpisodeSelectorProps {
   const ids = {
     stages: domUuid(),
@@ -56,7 +56,7 @@ export function createTutorialSelectorProps(
   root.className = ROOT_CLASS;
   root.innerHTML = rootInnerHTML(ids, resources);
   const elements = extractElements(root, ids);
-  const stageElements = stages.map(
+  const stageElements = episodes.map(
     (stage, index) => new EpisodeElement(resources, stage, index + 1),
   );
   const stageElementsWithLastRemoved = stageElements.slice(0, -1);
@@ -71,7 +71,7 @@ export function createTutorialSelectorProps(
 
   return {
     root,
-    stageElements,
+    episodeElements: stageElements,
     prevButton: elements.prevButton,
     exclusive: new Exclusive(),
     prev: new Subject(),

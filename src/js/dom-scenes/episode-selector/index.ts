@@ -3,7 +3,7 @@ import { Observable, Unsubscribable } from "rxjs";
 import type { Resources } from "../../resource";
 import type { DOMScene } from "../dom-scene";
 import { bindEventListeners } from "./listeners/bind-event-listeners";
-import { createTutorialSelectorProps, EpisodeSelectorProps } from "./props";
+import { createEpisodeSelectorProps, EpisodeSelectorProps } from "./props";
 import { Episode } from "./episode-element/episode";
 import { EpisodeSelect } from "./episode-element/episode-select";
 
@@ -20,7 +20,7 @@ export class EpisodeSelector implements DOMScene {
    * @param stages エピソード情報
    */
   constructor(resources: Resources, stages: Episode[]) {
-    this.#props = createTutorialSelectorProps(resources, stages);
+    this.#props = createEpisodeSelectorProps(resources, stages);
     this.#unsubscribers = bindEventListeners(this.#props);
   }
 

@@ -17,7 +17,7 @@ export function bindEventListeners(
     domPushStream(props.prevButton).subscribe((action) => {
       onPrevPush(props, action);
     }),
-    ...props.stageElements.map((stage) =>
+    ...props.episodeElements.map((stage) =>
       stage.notifyStageSelection().subscribe(() => {
         onTutorialStageSelect(props, stage);
       }),
