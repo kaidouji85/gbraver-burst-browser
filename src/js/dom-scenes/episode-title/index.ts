@@ -1,6 +1,6 @@
 import type { DOMScene } from "../dom-scene";
-import type { CreatePropsParams, TutorialTitleProps } from "./props";
-import { createTutorialTitleProps } from "./props";
+import type { CreatePropsParams, EpisodeTitleProps } from "./props";
+import { createEpisodeTitleProps } from "./props";
 
 /** エピソードタイトル画面パラメータ */
 export type EpisodeTitleParams = CreatePropsParams;
@@ -8,14 +8,14 @@ export type EpisodeTitleParams = CreatePropsParams;
 /** エピソードタイトル画面 */
 export class EpisodeTitle implements DOMScene {
   /** プロパティ */
-  #props: TutorialTitleProps;
+  #props: EpisodeTitleProps;
 
   /**
    * コンストラクタ
    * @param params パラメータ
    */
   constructor(params: EpisodeTitleParams) {
-    this.#props = createTutorialTitleProps(params);
+    this.#props = createEpisodeTitleProps(params);
   }
 
   /** @override */
