@@ -1,4 +1,4 @@
-import { TutorialSelectorProps } from "../props";
+import { EpisodeSelectorProps } from "../props";
 import { TutorialStageElement } from "../tutorial-stage-element";
 
 /**
@@ -7,7 +7,7 @@ import { TutorialStageElement } from "../tutorial-stage-element";
  * @param stageElement チュートリアルステージ HTML要素
  */
 export function onTutorialStageSelect(
-  props: Readonly<TutorialSelectorProps>,
+  props: Readonly<EpisodeSelectorProps>,
   stageElement: TutorialStageElement,
 ): void {
   props.exclusive.execute(async () => {

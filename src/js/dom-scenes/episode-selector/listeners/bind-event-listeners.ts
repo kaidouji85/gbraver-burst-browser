@@ -1,7 +1,7 @@
 import { Unsubscribable } from "rxjs";
 
 import { domPushStream } from "../../../dom/push-dom";
-import { TutorialSelectorProps } from "../props";
+import { EpisodeSelectorProps } from "../props";
 import { onPrevPush } from "./on-prev-push";
 import { onTutorialStageSelect } from "./on-tutorial-stage-select";
 
@@ -11,7 +11,7 @@ import { onTutorialStageSelect } from "./on-tutorial-stage-select";
  * @return バインドしたイベントリスナのアンサブスクライバ
  */
 export function bindEventListeners(
-  props: Readonly<TutorialSelectorProps>,
+  props: Readonly<EpisodeSelectorProps>,
 ): Unsubscribable[] {
   return [
     domPushStream(props.prevButton).subscribe((action) => {

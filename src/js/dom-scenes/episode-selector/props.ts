@@ -17,8 +17,8 @@ import { TutorialStageElement } from "./tutorial-stage-element";
 import { TutorialStage } from "./tutorial-stage-element/tutorial-stage";
 import { TutorialStageSelect } from "./tutorial-stage-element/tutorial-stage-select";
 
-/** チュートリアルセレクタ画面プロパティ */
-export type TutorialSelectorProps = {
+/** エピソードセレクタ画面プロパティ */
+export type EpisodeSelectorProps = {
   /** ルートHTML要素 */
   root: HTMLElement;
   /** チュートリアルステージ */
@@ -38,7 +38,7 @@ export type TutorialSelectorProps = {
 };
 
 /**
- * TutorialSelectorPropsを生成する
+ * EpisodeSelectorPropsを生成する
  * @param resources リソース管理オブジェクト
  * @param stages チュートリアルステージ情報
  * @return 生成したTutorialSelectorProps
@@ -46,7 +46,7 @@ export type TutorialSelectorProps = {
 export function createTutorialSelectorProps(
   resources: Resources,
   stages: TutorialStage[],
-): TutorialSelectorProps {
+): EpisodeSelectorProps {
   const ids = {
     stages: domUuid(),
     imageCuts: domUuid(),

@@ -3,14 +3,14 @@ import { Observable, Unsubscribable } from "rxjs";
 import type { Resources } from "../../resource";
 import type { DOMScene } from "../dom-scene";
 import { bindEventListeners } from "./listeners/bind-event-listeners";
-import { createTutorialSelectorProps, TutorialSelectorProps } from "./props";
+import { createTutorialSelectorProps, EpisodeSelectorProps } from "./props";
 import { TutorialStage } from "./tutorial-stage-element/tutorial-stage";
 import { TutorialStageSelect } from "./tutorial-stage-element/tutorial-stage-select";
 
 /** エピソードセレクト画面 */
 export class EpisodeSelector implements DOMScene {
   /** プロパティ */
-  #props: TutorialSelectorProps;
+  #props: EpisodeSelectorProps;
   /** アンサブスクライバ */
   #unsubscribers: Unsubscribable[];
 

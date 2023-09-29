@@ -1,6 +1,6 @@
 import { pop } from "../../../dom/pop";
 import { PushDOM } from "../../../dom/push-dom";
-import { TutorialSelectorProps } from "../props";
+import { EpisodeSelectorProps } from "../props";
 
 /**
  * 戻るボタンを押した時の処理
@@ -8,7 +8,7 @@ import { TutorialSelectorProps } from "../props";
  * @param action アクション
  */
 export function onPrevPush(
-  props: Readonly<TutorialSelectorProps>,
+  props: Readonly<EpisodeSelectorProps>,
   action: Readonly<PushDOM>,
 ): void {
   action.event.stopPropagation();
