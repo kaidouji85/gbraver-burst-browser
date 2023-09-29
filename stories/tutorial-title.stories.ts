@@ -1,8 +1,8 @@
-import { TutorialTitle } from "../src/js/dom-scenes/tutorial-title";
+import { TutorialTitle } from "../src/js/dom-scenes/episode-title";
 import { domStub } from "./stub/dom-stub";
 
 export default {
-  title: "tutorial-title",
+  title: "episode-title",
 };
 
 /**

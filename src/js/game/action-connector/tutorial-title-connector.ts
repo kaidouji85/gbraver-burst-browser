@@ -1,4 +1,4 @@
-import { TutorialTitle } from "../../dom-scenes/tutorial-title";
+import { TutorialTitle } from "../../dom-scenes/episode-title";
 import type { DOMSceneActionConnector } from "../dom-scene-binder/dom-scene-action-connector";
 
 /** アクションコネクタのデータ型 */

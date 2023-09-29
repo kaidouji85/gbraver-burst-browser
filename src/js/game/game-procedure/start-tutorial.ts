@@ -1,5 +1,5 @@
 import { fadeOut, stop } from "../../bgm/bgm-operators";
-import { TutorialTitle } from "../../dom-scenes/tutorial-title";
+import { TutorialTitle } from "../../dom-scenes/episode-title";
 import { NPCBattleRoom } from "../../npc/npc-battle-room";
 import { BattleScene } from "../../td-scenes/battle";
 import { waitAnimationFrame } from "../../wait/wait-animation-frame";
