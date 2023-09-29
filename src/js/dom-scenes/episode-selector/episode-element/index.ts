@@ -21,13 +21,13 @@ export class EpisodeElement {
   /**
    * コンストラクタ
    * @param resources リソース管理オブジェクト
-   * @param stage ステージ情報
+   * @param episode エピソード情報
    * @param level ステージレベル
    */
-  constructor(resources: Resources, stage: Episode, level: number) {
-    this.id = stage.id;
+  constructor(resources: Resources, episode: Episode, level: number) {
+    this.id = episode.id;
     this.level = level;
-    this.#props = createEpisodeElementProps(resources, stage, level);
+    this.#props = createEpisodeElementProps(resources, episode, level);
   }
 
   /**

@@ -15,7 +15,7 @@ import { rootInnerHTML } from "./dom/root-inner-html";
 import { stageSeparator } from "./dom/stage-separator";
 import { EpisodeElement } from "./episode-element";
 import { Episode } from "./episode-element/episode";
-import { TutorialStageSelect } from "./episode-element/tutorial-stage-select";
+import { EpisodeSelect } from "./episode-element/episode-select";
 
 /** エピソードセレクタ画面プロパティ */
 export type EpisodeSelectorProps = {
@@ -30,7 +30,7 @@ export type EpisodeSelectorProps = {
   /** 戻るストリーム */
   prev: Subject<void>;
   /** ステージ選択完了ストリーム */
-  stageSelect: Subject<TutorialStageSelect>;
+  stageSelect: Subject<EpisodeSelect>;
   /** 値変更効果音 */
   changeValue: SoundResource;
   /** イメージカットのロード完了したら発火するPromise */

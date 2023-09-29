@@ -5,7 +5,7 @@ import type { DOMScene } from "../dom-scene";
 import { bindEventListeners } from "./listeners/bind-event-listeners";
 import { createTutorialSelectorProps, EpisodeSelectorProps } from "./props";
 import { Episode } from "./episode-element/episode";
-import { TutorialStageSelect } from "./episode-element/tutorial-stage-select";
+import { EpisodeSelect } from "./episode-element/episode-select";
 
 /** エピソードセレクト画面 */
 export class EpisodeSelector implements DOMScene {
@@ -56,7 +56,7 @@ export class EpisodeSelector implements DOMScene {
    * ステージ選択通知
    * @return 通知ストリーム
    */
-  notifyStageSelection(): Observable<TutorialStageSelect> {
+  notifyStageSelection(): Observable<EpisodeSelect> {
     return this.#props.stageSelect;
   }
 }
