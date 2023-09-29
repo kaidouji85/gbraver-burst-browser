@@ -13,9 +13,9 @@ import { ROOT_CLASS } from "./dom/class-name";
 import { extractElements } from "./dom/elements";
 import { rootInnerHTML } from "./dom/root-inner-html";
 import { stageSeparator } from "./dom/stage-separator";
-import { TutorialStageElement } from "./tutorial-stage-element";
-import { Episode } from "./tutorial-stage-element/episode";
-import { TutorialStageSelect } from "./tutorial-stage-element/tutorial-stage-select";
+import { TutorialStageElement } from "./episode-element";
+import { Episode } from "./episode-element/episode";
+import { TutorialStageSelect } from "./episode-element/tutorial-stage-select";
 
 /** エピソードセレクタ画面プロパティ */
 export type EpisodeSelectorProps = {

@@ -4,8 +4,8 @@ import type { Resources } from "../../resource";
 import type { DOMScene } from "../dom-scene";
 import { bindEventListeners } from "./listeners/bind-event-listeners";
 import { createTutorialSelectorProps, EpisodeSelectorProps } from "./props";
-import { Episode } from "./tutorial-stage-element/episode";
-import { TutorialStageSelect } from "./tutorial-stage-element/tutorial-stage-select";
+import { Episode } from "./episode-element/episode";
+import { TutorialStageSelect } from "./episode-element/tutorial-stage-select";
 
 /** エピソードセレクト画面 */
 export class EpisodeSelector implements DOMScene {

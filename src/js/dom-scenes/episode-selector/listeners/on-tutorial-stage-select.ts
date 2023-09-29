@@ -1,5 +1,5 @@
 import { EpisodeSelectorProps } from "../props";
-import { TutorialStageElement } from "../tutorial-stage-element";
+import { TutorialStageElement } from "../episode-element";
 
 /**
  * チュートリアルステージ選択
