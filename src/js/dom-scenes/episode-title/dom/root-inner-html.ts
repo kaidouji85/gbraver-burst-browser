@@ -4,9 +4,8 @@ import { ROOT_CLASS } from "./class-name";
 import type { DataIDs } from "./data-ids";
 
 /**
- * ステージ名のHTMLタグ
- *
- * @param title ステージタイトル
+ * タイトルのHTMLタグ
+ * @param title タイトル
  * @return 生成したHTMLタグ
  */
 function captionClauses(title: string[]): string {
@@ -27,7 +26,7 @@ export type RootInnerHTMLParams = {
   resources: Resources;
   /** タイトル */
   title: string[];
-  /** チュートリアルレベル */
+  /** レベル */
   level: number;
 };
 

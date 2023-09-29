@@ -1,22 +1,21 @@
 import type { DOMScene } from "../dom-scene";
-import type { CreatePropsParams, TutorialTitleProps } from "./props";
-import { createTutorialTitleProps } from "./props";
+import type { CreatePropsParams, EpisodeTitleProps } from "./props";
+import { createEpisodeTitleProps } from "./props";
 
-/** チュートリアルタイトル画面パラメータ */
-export type TutorialTitleParams = CreatePropsParams;
+/** エピソードタイトル画面パラメータ */
+export type EpisodeTitleParams = CreatePropsParams;
 
-/** チュートリアル タイトル画面 */
-export class TutorialTitle implements DOMScene {
+/** エピソードタイトル画面 */
+export class EpisodeTitle implements DOMScene {
   /** プロパティ */
-  #props: TutorialTitleProps;
+  #props: EpisodeTitleProps;
 
   /**
    * コンストラクタ
-   *
    * @param params パラメータ
    */
-  constructor(params: TutorialTitleParams) {
-    this.#props = createTutorialTitleProps(params);
+  constructor(params: EpisodeTitleParams) {
+    this.#props = createEpisodeTitleProps(params);
   }
 
   /** @override */
@@ -31,7 +30,6 @@ export class TutorialTitle implements DOMScene {
 
   /**
    * 各種リソースの読み込みが完了するまで待つ
-   *
    * @return 待機結果
    */
   async waitUntilLoaded(): Promise<void> {

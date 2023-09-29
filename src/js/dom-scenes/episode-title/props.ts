@@ -5,14 +5,12 @@ import { extractElements } from "./dom/elements";
 import type { RootInnerHTMLParams } from "./dom/root-inner-html";
 import { rootInnerHtml } from "./dom/root-inner-html";
 
-/** チュートリアルタイトル画面プロパティ */
-export type TutorialTitleProps = {
+/** エピソードタイトル画面プロパティ */
+export type EpisodeTitleProps = {
   /** ルートHTML要素 */
   root: HTMLElement;
-
   /** 立ち画像を読み込んだら発火するPromise */
   isStandLoaded: Promise<void>;
-
   /** バストショット画像を読み込んだら発火するPromise */
   isBustShotLoaded: Promise<void>;
 };
@@ -21,14 +19,13 @@ export type TutorialTitleProps = {
 export type CreatePropsParams = RootInnerHTMLParams;
 
 /**
- * チュートリアルタイトル画面プロパティを生成する
- *
+ * エピソードタイトル画面プロパティを生成する
  * @param params パラメータ
  * @return 生成した画面プロパティ
  */
-export function createTutorialTitleProps(
+export function createEpisodeTitleProps(
   params: CreatePropsParams,
-): TutorialTitleProps {
+): EpisodeTitleProps {
   const ids = {
     stand: domUuid(),
     bustShot: domUuid(),

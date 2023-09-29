@@ -1,8 +1,8 @@
 /**
- * チュートリアルタイトル画面
+ * エピソードタイトル画面
  */
 @media (orientation: landscape) {
-  .tutorial-title {
+  .episode-title {
     --zindex-bust-shot: 0;
     --zindex-stand: 1;
     --zindex-title: 2;
@@ -21,12 +21,12 @@
 }
 
 @media (orientation: portrait) {
-  .tutorial-title {
+  .episode-title {
     display: none;
   }
 }
 
-.tutorial-title__title {
+.episode-title__title {
   position: absolute;
   font-size: var(--font-size);
   z-index: var(--zindex-title);
@@ -35,38 +35,38 @@
   transform: translate(0, 0%);
 }
 
-.tutorial-title__stage {
+.episode-title__stage {
   display: flex;
   align-items: baseline;
 }
 
-.tutorial-title__stage-prefix::first-letter {
+.episode-title__stage-prefix::first-letter {
   font-size: calc(var(--font-size) * 1.5);
   font-weight: bold;
 }
 
-.tutorial-title__stage-level {
+.episode-title__stage-level {
   font-size: calc(var(--font-size) * 1.5);
   font-weight: bold;
 }
 
-.tutorial-title__caption {
+.episode-title__caption {
   display: flex;
   align-items: baseline;
   margin-left: calc(var(--responsive-font-size) * 2);
 }
 
-.tutorial-title__caption-clause {
+.episode-title__caption-clause {
   white-space: nowrap;
 }
 
-.tutorial-title__caption-clause::first-letter {
+.episode-title__caption-clause::first-letter {
   font-size: calc(var(--font-size) * 1.5);
   font-weight: bold;
   white-space: nowrap;
 }
 
-.tutorial-title__shin-braver-bust-shot {
+.episode-title__shin-braver-bust-shot {
   --width: calc(var(--vh) * 200);
 
   position: absolute;
@@ -77,7 +77,7 @@
   z-index: var(--zindex-bust-shot);
 }
 
-.tutorial-title__shin-braver-stand {
+.episode-title__shin-braver-stand {
   --size: calc(140 * var(--vh));
 
   position: absolute;
