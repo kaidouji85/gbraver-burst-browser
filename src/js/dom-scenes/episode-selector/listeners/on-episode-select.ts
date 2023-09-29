@@ -2,19 +2,19 @@ import { EpisodeSelectorProps } from "../props";
 import { EpisodeElement } from "../episode-element";
 
 /**
- * チュートリアルステージ選択
+ * エピソード選択時の処理
  * @param props 画面プロパティ
- * @param stageElement チュートリアルステージ HTML要素
+ * @param episodeElement チュートリアルステージ HTML要素
  */
-export function onTutorialStageSelect(
+export function onEpisodeSelect(
   props: Readonly<EpisodeSelectorProps>,
-  stageElement: EpisodeElement,
+  episodeElement: EpisodeElement,
 ): void {
   props.exclusive.execute(async () => {
-    await stageElement.selected();
+    await episodeElement.selected();
     props.stageSelect.next({
-      id: stageElement.id,
-      level: stageElement.level,
+      id: episodeElement.id,
+      level: episodeElement.level,
     });
   });
 }

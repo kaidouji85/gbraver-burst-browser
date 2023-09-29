@@ -3,7 +3,7 @@ import { Unsubscribable } from "rxjs";
 import { domPushStream } from "../../../dom/push-dom";
 import { EpisodeSelectorProps } from "../props";
 import { onPrevPush } from "./on-prev-push";
-import { onTutorialStageSelect } from "./on-tutorial-stage-select";
+import { onEpisodeSelect } from "./on-episode-select";
 
 /**
  * 画面にイベントリスナをバインドする
@@ -19,7 +19,7 @@ export function bindEventListeners(
     }),
     ...props.episodeElements.map((stage) =>
       stage.notifyStageSelection().subscribe(() => {
-        onTutorialStageSelect(props, stage);
+        onEpisodeSelect(props, stage);
       }),
     ),
   ];
