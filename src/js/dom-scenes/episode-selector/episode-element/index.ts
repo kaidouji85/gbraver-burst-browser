@@ -4,10 +4,7 @@ import type { EpisodeID } from "../../../game/episodes/episode";
 import type { Resources } from "../../../resource";
 import { Episode } from "./episode";
 import { selected } from "./procedure/selected";
-import {
-  createEpisodeElementProps,
-  EpisodeElementProps,
-} from "./props";
+import { createEpisodeElementProps, EpisodeElementProps } from "./props";
 
 /** エピソードHTML要素 */
 export class EpisodeElement {

@@ -1,5 +1,5 @@
-import { EpisodeSelectorProps } from "../props";
 import { EpisodeElement } from "../episode-element";
+import { EpisodeSelectorProps } from "../props";
 
 /**
  * エピソード選択時の処理

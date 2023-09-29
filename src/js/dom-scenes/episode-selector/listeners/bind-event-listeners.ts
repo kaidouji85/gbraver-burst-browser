@@ -2,8 +2,8 @@ import { Unsubscribable } from "rxjs";
 
 import { domPushStream } from "../../../dom/push-dom";
 import { EpisodeSelectorProps } from "../props";
-import { onPrevPush } from "./on-prev-push";
 import { onEpisodeSelect } from "./on-episode-select";
+import { onPrevPush } from "./on-prev-push";
 
 /**
  * 画面にイベントリスナをバインドする

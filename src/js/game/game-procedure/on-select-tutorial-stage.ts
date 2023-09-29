@@ -1,10 +1,7 @@
+import { TutorialStages, TutorialStagesInDevelopment } from "../episodes";
 import { SelectTutorialStage } from "../game-actions/select-tutorial-stage";
 import type { GameProps } from "../game-props";
 import type { Tutorial } from "../in-progress/tutorial";
-import {
-  TutorialStages,
-  TutorialStagesInDevelopment,
-} from "../episodes";
 import { startTutorial } from "./start-tutorial";
 
 /**

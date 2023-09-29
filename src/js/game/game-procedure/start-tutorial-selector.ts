@@ -2,11 +2,8 @@ import { EpisodeSelector } from "../../dom-scenes/episode-selector";
 import { waitTime } from "../../wait/wait-time";
 import { tutorialSelectorConnector } from "../action-connector/tutorial-selector-connection";
 import { MAX_LOADING_TIME } from "../dom-scene-binder/max-loading-time";
+import { TutorialStages, TutorialStagesInDevelopment } from "../episodes";
 import type { GameProps } from "../game-props";
-import {
-  TutorialStages,
-  TutorialStagesInDevelopment,
-} from "../episodes";
 
 /**
  * チュートリアルステージセレクタを開始するヘルパー関数

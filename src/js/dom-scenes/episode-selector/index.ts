@@ -2,10 +2,10 @@ import { Observable, Unsubscribable } from "rxjs";
 
 import type { Resources } from "../../resource";
 import type { DOMScene } from "../dom-scene";
-import { bindEventListeners } from "./listeners/bind-event-listeners";
-import { createEpisodeSelectorProps, EpisodeSelectorProps } from "./props";
 import { Episode } from "./episode-element/episode";
 import { EpisodeSelect } from "./episode-element/episode-select";
+import { bindEventListeners } from "./listeners/bind-event-listeners";
+import { createEpisodeSelectorProps, EpisodeSelectorProps } from "./props";
 
 /** エピソードセレクト画面 */
 export class EpisodeSelector implements DOMScene {
