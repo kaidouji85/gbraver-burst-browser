@@ -1,4 +1,4 @@
-import { TutorialSelector } from "../../dom-scenes/tutorial-selector";
+import { TutorialSelector } from "../../dom-scenes/episode-selector";
 import type { DOMSceneActionConnector } from "../dom-scene-binder/dom-scene-action-connector";
 
 /** アクションコネクタのデータ型 */
