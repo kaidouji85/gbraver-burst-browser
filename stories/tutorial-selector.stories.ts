@@ -1,11 +1,11 @@
-import { TutorialSelector } from "../src/js/dom-scenes/episode-selector";
+import { EpisodeSelector } from "../src/js/dom-scenes/episode-selector";
 import type { DOMStubStory } from "./stub/dom-stub";
 import { domStub } from "./stub/dom-stub";
 export default {
   title: "tutorial-selector",
 };
 export const scene: DOMStubStory = domStub((resources) => {
-  const scene = new TutorialSelector(resources, [
+  const scene = new EpisodeSelector(resources, [
     {
       id: "01",
       type: "Beginner",

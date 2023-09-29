@@ -7,8 +7,8 @@ import { createTutorialSelectorProps, TutorialSelectorProps } from "./props";
 import { TutorialStage } from "./tutorial-stage-element/tutorial-stage";
 import { TutorialStageSelect } from "./tutorial-stage-element/tutorial-stage-select";
 
-/** チュートリアルステージセレクト画面 */
-export class TutorialSelector implements DOMScene {
+/** エピソードセレクト画面 */
+export class EpisodeSelector implements DOMScene {
   /** プロパティ */
   #props: TutorialSelectorProps;
   /** アンサブスクライバ */
@@ -53,7 +53,7 @@ export class TutorialSelector implements DOMScene {
   }
 
   /**
-   * チュートリアルステージ選択通知
+   * ステージ選択通知
    * @return 通知ストリーム
    */
   notifyStageSelection(): Observable<TutorialStageSelect> {
