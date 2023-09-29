@@ -5,7 +5,6 @@ import type { DataIDs } from "./data-ids";
 
 /**
  * ステージ名のHTMLタグ
- *
  * @param title ステージタイトル
  * @return 生成したHTMLタグ
  */
@@ -27,7 +26,7 @@ export type RootInnerHTMLParams = {
   resources: Resources;
   /** タイトル */
   title: string[];
-  /** チュートリアルレベル */
+  /** レベル */
   level: number;
 };
 
