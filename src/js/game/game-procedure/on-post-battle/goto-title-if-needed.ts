@@ -1,8 +1,8 @@
-import {GameProps} from "../../game-props";
-import {PostBattleAction} from "../../game-actions/post-battle-action";
-import {startTitle} from "../start-title";
 import {fadeOut, stop} from "../../../bgm/bgm-operators";
+import {PostBattleAction} from "../../game-actions/post-battle-action";
+import {GameProps} from "../../game-props";
 import {playTitleBGM} from "../play-title-bgm";
+import {startTitle} from "../start-title";
 
 /**
  * 条件を満たしていればタイトルに遷移する

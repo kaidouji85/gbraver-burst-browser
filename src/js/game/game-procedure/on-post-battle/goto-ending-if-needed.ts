@@ -1,9 +1,9 @@
-import {GameProps} from "../../game-props";
-import {PostBattleAction} from "../../game-actions/post-battle-action";
 import {NPCEnding} from "../../../dom-scenes/npc-ending";
-import {npcEndingConnector} from "../../action-connector/npc-ending-connector";
 import {waitTime} from "../../../wait/wait-time";
+import {npcEndingConnector} from "../../action-connector/npc-ending-connector";
 import {MAX_LOADING_TIME} from "../../dom-scene-binder/max-loading-time";
+import {PostBattleAction} from "../../game-actions/post-battle-action";
+import {GameProps} from "../../game-props";
 
 /**
  * 条件を満たした場合、エンディングに遷移する

@@ -12,8 +12,8 @@ import { playTitleBGM } from "../play-title-bgm";
 import { startEpisodeSelector } from "../start-episode-selector";
 import { startNPCBattleStage } from "../start-npc-battle-stage";
 import { startTutorial } from "../start-tutorial";
-import {gotoTitleIfNeeded} from "./goto-title-if-needed";
 import {gotoEndingIfNeeded} from "./goto-ending-if-needed";
+import {gotoTitleIfNeeded} from "./goto-title-if-needed";
 
 /**
  * NPCバトル進行中に利用するデータを生成する
