@@ -2,6 +2,7 @@ import { PostTutorialButtons } from "../../dom-floaters/post-battle/post-battle-
 import { EndBattle } from "../../game-actions/end-battle";
 import { GameProps } from "../../game-props";
 
+// TODO executePostEpisodeIfNeededとリネームする
 /**
  * 条件を満たした場合、チュートリアル終了後処理を実行する
  * @param props ゲームプロパティ
@@ -13,8 +14,8 @@ export async function executePostTutorialBattleIfNeeded(
   action: Readonly<EndBattle>,
 ): Promise<boolean> {
   if (
-    props.inProgress.type !== "Tutorial" ||
-    props.inProgress.tutorial.type !== "PlayingTutorialStage" ||
+    props.inProgress.type !== "Story" ||
+    props.inProgress.story.type !== "PlayingEpisode" ||
     action.gameEnd.result.type !== "GameOver"
   ) {
     return false;

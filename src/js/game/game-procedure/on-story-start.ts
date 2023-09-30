@@ -15,9 +15,9 @@ export async function onStoryStart(props: GameProps): Promise<void> {
 
   await startEpisodeSelector(props);
   props.inProgress = {
-    type: "Tutorial",
-    tutorial: {
-      type: "TutorialStageSelect",
+    type: "Story",
+    story: {
+      type: "EpisodeSelect",
     },
   };
 }
