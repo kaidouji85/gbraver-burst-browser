@@ -20,7 +20,7 @@ import { onLogout } from "./on-logout";
 import { onMatchingCanceled } from "./on-matching-cancel";
 import { onNetBattleCancel } from "./on-net-battle-cancel";
 import { onNetBattleStart } from "./on-net-battle-start";
-import { onPostBattleAction } from "./on-post-battle-action";
+import { onPostBattleAction } from "./on-post-battle";
 import { onPrivateMatchEntry } from "./on-private-match-entry";
 import { onPrivateMatchGuestStart } from "./on-private-match-guest-start";
 import { onPrivateMatchHostStart } from "./on-private-match-host-start";
