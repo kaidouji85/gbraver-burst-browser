@@ -14,50 +14,7 @@ import { startNPCBattleStage } from "../start-npc-battle-stage";
 import { startTutorial } from "../start-tutorial";
 import {gotoEndingIfNeeded} from "./goto-ending-if-needed";
 import {gotoTitleIfNeeded} from "./goto-title-if-needed";
-
-/**
- * NPCバトル進行中に利用するデータを生成する
- *
- * @param inProgress 進行中のフロー
- * @return 生成結果、NPCバトル中でない場合はnullを返す
- */
-const createNPCBattle = (inProgress: InProgress) => {
-  if (
-    inProgress.type !== "NPCBattle" ||
-    inProgress.npcBattle.type !== "PlayingNPCBattle"
-  ) {
-    return null;
-  }
-
-  const state: NPCBattleState = inProgress.npcBattle.state;
-  const stage = getCurrentNPCStage(state) ?? DefaultStage;
-  const level = getNPCStageLevel(state);
-  const player = state.player;
-  return {
-    player,
-    stage,
-    level,
-  };
-};
-
-/**
- * NPCバトルステージに遷移する
- *
- * @param props ゲームプロパティ
- * @param player プレイヤー情報
- * @param stage ステージ情報
- * @param level レベル
- * @return 処理が完了したら発火するPromise
- */
-const gotoNPCBattleStage = async (
-  props: Readonly<GameProps>,
-  player: Player,
-  stage: NPCBattleStage,
-  level: number,
-) => {
-  props.domFloaters.hiddenPostBattle();
-  await startNPCBattleStage(props, player, stage, level);
-};
+import {gotoNPCBattleStageIfNeeded} from "./goto-npc-battle-stage";
 
 /**
  * チュートリアルに遷移する
@@ -115,20 +72,12 @@ export async function onPostBattleAction(
     return;
   }
 
-  const npcBattle = createNPCBattle(props.inProgress);
-  if (
-    npcBattle &&
-    (action.action.type === "NextStage" || action.action.type === "Retry")
-  ) {
-    await gotoNPCBattleStage(
-      props,
-      npcBattle.player,
-      npcBattle.stage,
-      npcBattle.level,
-    );
+  const isGotoNPCBattleStageExecuted = await gotoNPCBattleStageIfNeeded(props, action);
+  if (isGotoNPCBattleStageExecuted) {
     return;
   }
 
+  //const npcBattle = createNPCBattle(props.inProgress);
   if (
     action.action.type === "Retry" &&
     props.inProgress.type === "Story" &&
