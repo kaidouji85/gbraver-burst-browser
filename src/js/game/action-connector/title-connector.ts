@@ -38,7 +38,7 @@ export const titleConnector: Connector = (scene, gameAction) => [
   }),
   scene.notifyTutorial().subscribe(() => {
     gameAction.next({
-      type: "TutorialStart",
+      type: "StoryStart",
     });
   }),
 ];
