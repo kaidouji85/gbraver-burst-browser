@@ -1,36 +1,11 @@
-import { Player } from "gbraver-burst-core";
-
-import { Episode } from "../../episodes/episode";
 import { PostBattleAction } from "../../game-actions/post-battle-action";
 import { GameProps } from "../../game-props";
-import { InProgress } from "../../in-progress/in-progress";
-import { PlayingEpisode } from "../../in-progress/story";
-import { NPCBattleStage, NPCBattleState } from "../../npc-battle";
-import { getCurrentNPCStage, getNPCStageLevel } from "../../npc-battle";
-import { DefaultStage } from "../../npc-battle-courses";
 import { playTitleBGM } from "../play-title-bgm";
 import { startEpisodeSelector } from "../start-episode-selector";
-import { startNPCBattleStage } from "../start-npc-battle-stage";
-import { startTutorial } from "../start-tutorial";
 import {gotoEndingIfNeeded} from "./goto-ending-if-needed";
-import {gotoTitleIfNeeded} from "./goto-title-if-needed";
 import {gotoNPCBattleStageIfNeeded} from "./goto-npc-battle-stage";
-
-/**
- * チュートリアルに遷移する
- * @param props ゲームプロパティ
- * @param level チュートリアルステージレベル
- * @param episode エピソード
- * @return 処理が完了したら発火するPromise
- */
-const gotoTutorial = async (
-  props: Readonly<GameProps>,
-  level: number,
-  episode: Episode,
-) => {
-  props.domFloaters.hiddenPostBattle();
-  await startTutorial(props, level, episode);
-};
+import {gotoTitleIfNeeded} from "./goto-title-if-needed";
+import {gotoTutorialIfNeeded} from "./goto-tutorial-if-needed";
 
 /**
  * チュートリアル選択画面に遷移する
@@ -77,15 +52,11 @@ export async function onPostBattleAction(
     return;
   }
 
-  //const npcBattle = createNPCBattle(props.inProgress);
-  if (
-    action.action.type === "Retry" &&
-    props.inProgress.type === "Story" &&
-    props.inProgress.story.type === "PlayingEpisode"
-  ) {
-    const playingTutorial: PlayingEpisode = props.inProgress.story;
-    await gotoTutorial(props, playingTutorial.level, playingTutorial.episode);
-  } else if (action.action.type === "GotoTutorialSelect") {
+  const isGotoTutorialExecuted = await gotoTutorialIfNeeded(props, action);
+  if (isGotoTutorialExecuted) {
+    return;
+  }
+  if (action.action.type === "GotoTutorialSelect") {
     props.inProgress = {
       type: "Story",
       story: {

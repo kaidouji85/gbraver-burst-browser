@@ -1,5 +1,5 @@
-import {GameProps} from "../../game-props";
 import {PostBattleAction} from "../../game-actions/post-battle-action";
+import {GameProps} from "../../game-props";
 import {getCurrentNPCStage, getNPCStageLevel, NPCBattleState} from "../../npc-battle";
 import {DefaultStage} from "../../npc-battle-courses";
 import {startNPCBattleStage} from "../start-npc-battle-stage";
