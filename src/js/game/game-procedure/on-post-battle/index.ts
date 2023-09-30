@@ -1,15 +1,11 @@
-import type { Player } from "gbraver-burst-core";
+import { Player } from "gbraver-burst-core";
 
-import { NPCEnding } from "../../../dom-scenes/npc-ending";
-import { waitTime } from "../../../wait/wait-time";
-import { npcEndingConnector } from "../../action-connector/npc-ending-connector";
-import { MAX_LOADING_TIME } from "../../dom-scene-binder/max-loading-time";
-import type { Episode } from "../../episodes/episode";
+import { Episode } from "../../episodes/episode";
 import { PostBattleAction } from "../../game-actions/post-battle-action";
-import type { GameProps } from "../../game-props";
-import type { InProgress } from "../../in-progress/in-progress";
-import type { PlayingEpisode } from "../../in-progress/story";
-import type { NPCBattleStage, NPCBattleState } from "../../npc-battle";
+import { GameProps } from "../../game-props";
+import { InProgress } from "../../in-progress/in-progress";
+import { PlayingEpisode } from "../../in-progress/story";
+import { NPCBattleStage, NPCBattleState } from "../../npc-battle";
 import { getCurrentNPCStage, getNPCStageLevel } from "../../npc-battle";
 import { DefaultStage } from "../../npc-battle-courses";
 import { playTitleBGM } from "../play-title-bgm";
@@ -17,23 +13,7 @@ import { startEpisodeSelector } from "../start-episode-selector";
 import { startNPCBattleStage } from "../start-npc-battle-stage";
 import { startTutorial } from "../start-tutorial";
 import {gotoTitleIfNeeded} from "./goto-title-if-needed";
-
-/**
- * エンディングに遷移する
- *
- * @param props ゲームプロパティ
- * @return 処理が完了したら発火するPromise
- */
-const gotoEnding = async (props: Readonly<GameProps>) => {
-  props.domFloaters.hiddenPostBattle();
-  await props.fader.fadeOut();
-  props.tdBinder.hidden();
-  const scene = new NPCEnding(props.resources, props.bgm);
-  props.domSceneBinder.bind(scene, npcEndingConnector);
-  await Promise.race([scene.waitUntilLoaded(), waitTime(MAX_LOADING_TIME)]);
-  await props.fader.fadeIn();
-  scene.playBGM();
-};
+import {gotoEndingIfNeeded} from "./goto-ending-if-needed";
 
 /**
  * NPCバトル進行中に利用するデータを生成する
@@ -119,22 +99,23 @@ export async function onPostBattleAction(
   props: GameProps,
   action: PostBattleAction,
 ): Promise<void> {
+  const isGotoTitleExecuted = await gotoTitleIfNeeded(props, action);
+  if (isGotoTitleExecuted) {
+    props.inProgress = {
+      type: "None",
+    };
+    return;
+  }
+
+  const isGotoEndingExecuted = await gotoEndingIfNeeded(props, action);
+  if (isGotoEndingExecuted) {
+    props.inProgress = {
+      type: "None",
+    };
+    return;
+  }
+
   const npcBattle = createNPCBattle(props.inProgress);
-  if (await gotoTitleIfNeeded(props, action)) {
-    props.inProgress = {
-      type: "None",
-    };
-    return;
-  }
-
-  if (action.action.type === "GotoEnding") {
-    props.inProgress = {
-      type: "None",
-    };
-    await gotoEnding(props);
-    return;
-  }
-
   if (
     npcBattle &&
     (action.action.type === "NextStage" || action.action.type === "Retry")
