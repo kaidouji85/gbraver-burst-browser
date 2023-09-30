@@ -1,6 +1,5 @@
 import type { Player } from "gbraver-burst-core";
 
-import { fadeOut, stop } from "../../../bgm/bgm-operators";
 import { NPCEnding } from "../../../dom-scenes/npc-ending";
 import { waitTime } from "../../../wait/wait-time";
 import { npcEndingConnector } from "../../action-connector/npc-ending-connector";
@@ -16,30 +15,8 @@ import { DefaultStage } from "../../npc-battle-courses";
 import { playTitleBGM } from "../play-title-bgm";
 import { startEpisodeSelector } from "../start-episode-selector";
 import { startNPCBattleStage } from "../start-npc-battle-stage";
-import { startTitle } from "../start-title";
 import { startTutorial } from "../start-tutorial";
-
-/**
- * タイトルに遷移する
- *
- * @param props ゲームプロパティ
- * @return 処理が完了したら発火するPromise
- */
-const gotoTitle = async (props: Readonly<GameProps>) => {
-  props.domFloaters.hiddenPostBattle();
-  await Promise.all([
-    (async () => {
-      await props.fader.fadeOut();
-      return await startTitle(props);
-    })(),
-    (async () => {
-      await props.bgm.do(fadeOut);
-      await props.bgm.do(stop);
-    })(),
-  ]);
-  await props.fader.fadeIn();
-  playTitleBGM(props);
-};
+import {gotoTitleIfNeeded} from "./goto-title-if-needed";
 
 /**
  * エンディングに遷移する
@@ -143,12 +120,10 @@ export async function onPostBattleAction(
   action: PostBattleAction,
 ): Promise<void> {
   const npcBattle = createNPCBattle(props.inProgress);
-
-  if (action.action.type === "GotoTitle") {
+  if (await gotoTitleIfNeeded(props, action)) {
     props.inProgress = {
       type: "None",
     };
-    await gotoTitle(props);
     return;
   }
 
