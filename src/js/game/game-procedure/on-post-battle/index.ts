@@ -1,23 +1,23 @@
 import type { Player } from "gbraver-burst-core";
 
-import { fadeOut, stop } from "../../bgm/bgm-operators";
-import { NPCEnding } from "../../dom-scenes/npc-ending";
-import { waitTime } from "../../wait/wait-time";
-import { npcEndingConnector } from "../action-connector/npc-ending-connector";
-import { MAX_LOADING_TIME } from "../dom-scene-binder/max-loading-time";
-import type { Episode } from "../episodes/episode";
-import { PostBattleAction } from "../game-actions/post-battle-action";
-import type { GameProps } from "../game-props";
-import type { InProgress } from "../in-progress/in-progress";
-import type { PlayingEpisode } from "../in-progress/story";
-import type { NPCBattleStage, NPCBattleState } from "../npc-battle";
-import { getCurrentNPCStage, getNPCStageLevel } from "../npc-battle";
-import { DefaultStage } from "../npc-battle-courses";
-import { playTitleBGM } from "./play-title-bgm";
-import { startEpisodeSelector } from "./start-episode-selector";
-import { startNPCBattleStage } from "./start-npc-battle-stage";
-import { startTitle } from "./start-title";
-import { startTutorial } from "./start-tutorial";
+import { fadeOut, stop } from "../../../bgm/bgm-operators";
+import { NPCEnding } from "../../../dom-scenes/npc-ending";
+import { waitTime } from "../../../wait/wait-time";
+import { npcEndingConnector } from "../../action-connector/npc-ending-connector";
+import { MAX_LOADING_TIME } from "../../dom-scene-binder/max-loading-time";
+import type { Episode } from "../../episodes/episode";
+import { PostBattleAction } from "../../game-actions/post-battle-action";
+import type { GameProps } from "../../game-props";
+import type { InProgress } from "../../in-progress/in-progress";
+import type { PlayingEpisode } from "../../in-progress/story";
+import type { NPCBattleStage, NPCBattleState } from "../../npc-battle";
+import { getCurrentNPCStage, getNPCStageLevel } from "../../npc-battle";
+import { DefaultStage } from "../../npc-battle-courses";
+import { playTitleBGM } from "../play-title-bgm";
+import { startEpisodeSelector } from "../start-episode-selector";
+import { startNPCBattleStage } from "../start-npc-battle-stage";
+import { startTitle } from "../start-title";
+import { startTutorial } from "../start-tutorial";
 
 /**
  * タイトルに遷移する
