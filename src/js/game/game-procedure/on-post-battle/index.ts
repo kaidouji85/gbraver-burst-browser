@@ -1,23 +1,10 @@
 import { PostBattleAction } from "../../game-actions/post-battle-action";
 import { GameProps } from "../../game-props";
-import { playTitleBGM } from "../play-title-bgm";
-import { startEpisodeSelector } from "../start-episode-selector";
 import {gotoEndingIfNeeded} from "./goto-ending-if-needed";
 import {gotoNPCBattleStageIfNeeded} from "./goto-npc-battle-stage";
 import {gotoTitleIfNeeded} from "./goto-title-if-needed";
 import {gotoTutorialIfNeeded} from "./goto-tutorial-if-needed";
-
-/**
- * チュートリアル選択画面に遷移する
- *
- * @param props ゲームプロパティ
- * @return 処理が完了したら発火するPromise
- */
-const gotoTutorialSelector = async (props: Readonly<GameProps>) => {
-  props.domFloaters.hiddenPostBattle();
-  await startEpisodeSelector(props);
-  playTitleBGM(props);
-};
+import {gotoTutorialSelectorIfNeeded} from "./goto-tutorial-selector-if-needed";
 
 /**
  * 戦闘終了後アクション決定時の処理
@@ -56,13 +43,15 @@ export async function onPostBattleAction(
   if (isGotoTutorialExecuted) {
     return;
   }
-  if (action.action.type === "GotoTutorialSelect") {
+
+  const isGotoTutorialSelectorExecuted = await gotoTutorialSelectorIfNeeded(props, action);
+  if (isGotoTutorialSelectorExecuted) {
     props.inProgress = {
       type: "Story",
       story: {
         type: "EpisodeSelect",
       },
     };
-    await gotoTutorialSelector(props);
+    return;
   }
 }
