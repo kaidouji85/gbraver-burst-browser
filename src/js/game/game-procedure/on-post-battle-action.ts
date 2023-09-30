@@ -9,7 +9,7 @@ import type { Episode } from "../episodes/episode";
 import { PostBattleAction } from "../game-actions/post-battle-action";
 import type { GameProps } from "../game-props";
 import type { InProgress } from "../in-progress/in-progress";
-import type { PlayingTutorialStage } from "../in-progress/tutorial";
+import type { PlayingEpisode } from "../in-progress/story";
 import type { NPCBattleStage, NPCBattleState } from "../npc-battle";
 import { getCurrentNPCStage, getNPCStageLevel } from "../npc-battle";
 import { DefaultStage } from "../npc-battle-courses";
@@ -175,16 +175,16 @@ export async function onPostBattleAction(
 
   if (
     action.action.type === "Retry" &&
-    props.inProgress.type === "Tutorial" &&
-    props.inProgress.tutorial.type === "PlayingTutorialStage"
+    props.inProgress.type === "Story" &&
+    props.inProgress.story.type === "PlayingEpisode"
   ) {
-    const playingTutorial: PlayingTutorialStage = props.inProgress.tutorial;
+    const playingTutorial: PlayingEpisode = props.inProgress.story;
     await gotoTutorial(props, playingTutorial.level, playingTutorial.episode);
   } else if (action.action.type === "GotoTutorialSelect") {
     props.inProgress = {
-      type: "Tutorial",
-      tutorial: {
-        type: "TutorialStageSelect",
+      type: "Story",
+      story: {
+        type: "EpisodeSelect",
       },
     };
     await gotoTutorialSelector(props);

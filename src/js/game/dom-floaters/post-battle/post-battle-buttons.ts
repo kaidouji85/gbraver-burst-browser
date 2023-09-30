@@ -51,8 +51,8 @@ export const PostNetworkBattleButtons: PostBattleButtonConfig[] = [
   },
 ];
 
-/** チュートリアル後のアクションボタン */
-export const PostTutorialButtons: PostBattleButtonConfig[] = [
+/** エピソード後のアクションボタン */
+export const PostEpisodeButtons: PostBattleButtonConfig[] = [
   {
     style: "MainButton",
     action: {

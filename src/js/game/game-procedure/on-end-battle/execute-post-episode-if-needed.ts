@@ -1,4 +1,4 @@
-import { PostTutorialButtons } from "../../dom-floaters/post-battle/post-battle-buttons";
+import { PostEpisodeButtons } from "../../dom-floaters/post-battle/post-battle-buttons";
 import { EndBattle } from "../../game-actions/end-battle";
 import { GameProps } from "../../game-props";
 
@@ -8,18 +8,18 @@ import { GameProps } from "../../game-props";
  * @param action アクション
  * @return チュートリアル終了後処理を実行したか否か、trueで実行した
  */
-export async function executePostTutorialBattleIfNeeded(
+export async function executePostEpisodeIfNeeded(
   props: Readonly<GameProps>,
   action: Readonly<EndBattle>,
 ): Promise<boolean> {
   if (
-    props.inProgress.type !== "Tutorial" ||
-    props.inProgress.tutorial.type !== "PlayingTutorialStage" ||
+    props.inProgress.type !== "Story" ||
+    props.inProgress.story.type !== "PlayingEpisode" ||
     action.gameEnd.result.type !== "GameOver"
   ) {
     return false;
   }
 
-  await props.domFloaters.showPostBattle(props.resources, PostTutorialButtons);
+  await props.domFloaters.showPostBattle(props.resources, PostEpisodeButtons);
   return true;
 }

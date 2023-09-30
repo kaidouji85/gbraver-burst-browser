@@ -28,8 +28,8 @@ import { onReloadRequest } from "./on-reload-request";
 import { onSelectEpisode } from "./on-select-episode";
 import { onSelectionCancel } from "./on-selection-cancel";
 import { onSelectionComplete } from "./on-selection-complete";
+import { onStoryStart } from "./on-story-start";
 import { onSuddenlyEndBattle } from "./on-suddenly-battle-end";
-import { onTutorialStart } from "./on-tutorial-start";
 import { onUniversalLogin } from "./on-universal-login";
 import { onVisibilityChange } from "./on-visibility-change";
 import { onWebSocketAPIError } from "./on-websocker-api-error";
@@ -90,8 +90,8 @@ export function onGameAction(props: GameProps, action: GameAction) {
     onConfigChangeCancel(props);
   } else if (action.type === "ConfigChangeComplete") {
     onConfigChangeComplete(props, action);
-  } else if (action.type === "TutorialStart") {
-    onTutorialStart(props);
+  } else if (action.type === "StoryStart") {
+    onStoryStart(props);
   } else if (action.type === "CancelTutorialSelect") {
     onCancelTutorialSelect(props);
   } else if (action.type === "SelectEpisode") {

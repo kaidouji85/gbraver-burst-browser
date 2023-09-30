@@ -3,22 +3,21 @@ import { loadFullResource } from "./load-full-resource";
 import { startEpisodeSelector } from "./start-episode-selector";
 
 /**
- * チュートリアル開始時の処理
+ * ストーリーモード開始時の処理
  * 本関数にはpropsを変更する副作用がある
- *
  * @param props ゲームプロパティ
  * @return 処理が完了したら発火するPromise
  */
-export async function onTutorialStart(props: GameProps): Promise<void> {
+export async function onStoryStart(props: GameProps): Promise<void> {
   if (!props.isFullResourceLoaded) {
     await loadFullResource(props);
   }
 
   await startEpisodeSelector(props);
   props.inProgress = {
-    type: "Tutorial",
-    tutorial: {
-      type: "TutorialStageSelect",
+    type: "Story",
+    story: {
+      type: "EpisodeSelect",
     },
   };
 }
