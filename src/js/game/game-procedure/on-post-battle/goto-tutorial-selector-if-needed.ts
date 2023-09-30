@@ -1,7 +1,7 @@
-import {GameProps} from "../../game-props";
-import {PostBattleAction} from "../../game-actions/post-battle-action";
-import {startEpisodeSelector} from "../start-episode-selector";
-import {playTitleBGM} from "../play-title-bgm";
+import { PostBattleAction } from "../../game-actions/post-battle-action";
+import { GameProps } from "../../game-props";
+import { playTitleBGM } from "../play-title-bgm";
+import { startEpisodeSelector } from "../start-episode-selector";
 
 /**
  * 条件を満たした場合、チュートリアル選択画面に遷移する

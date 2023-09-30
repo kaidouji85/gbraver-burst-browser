@@ -1,7 +1,7 @@
-import {PostBattleAction} from "../../game-actions/post-battle-action";
-import {GameProps} from "../../game-props";
-import {PlayingEpisode} from "../../in-progress/story";
-import {startTutorial} from "../start-tutorial";
+import { PostBattleAction } from "../../game-actions/post-battle-action";
+import { GameProps } from "../../game-props";
+import { PlayingEpisode } from "../../in-progress/story";
+import { startTutorial } from "../start-tutorial";
 
 /**
  * 条件を満たしていればチュートリアルに遷移する

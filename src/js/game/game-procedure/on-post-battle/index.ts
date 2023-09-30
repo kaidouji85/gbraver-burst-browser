@@ -1,10 +1,10 @@
 import { PostBattleAction } from "../../game-actions/post-battle-action";
 import { GameProps } from "../../game-props";
-import {gotoEndingIfNeeded} from "./goto-ending-if-needed";
-import {gotoNPCBattleStageIfNeeded} from "./goto-npc-battle-stage";
-import {gotoTitleIfNeeded} from "./goto-title-if-needed";
-import {gotoTutorialIfNeeded} from "./goto-tutorial-if-needed";
-import {gotoTutorialSelectorIfNeeded} from "./goto-tutorial-selector-if-needed";
+import { gotoEndingIfNeeded } from "./goto-ending-if-needed";
+import { gotoNPCBattleStageIfNeeded } from "./goto-npc-battle-stage";
+import { gotoTitleIfNeeded } from "./goto-title-if-needed";
+import { gotoTutorialIfNeeded } from "./goto-tutorial-if-needed";
+import { gotoTutorialSelectorIfNeeded } from "./goto-tutorial-selector-if-needed";
 
 /**
  * 戦闘終了後アクション決定時の処理
@@ -34,7 +34,10 @@ export async function onPostBattleAction(
     return;
   }
 
-  const isGotoNPCBattleStageExecuted = await gotoNPCBattleStageIfNeeded(props, action);
+  const isGotoNPCBattleStageExecuted = await gotoNPCBattleStageIfNeeded(
+    props,
+    action,
+  );
   if (isGotoNPCBattleStageExecuted) {
     return;
   }
@@ -44,7 +47,10 @@ export async function onPostBattleAction(
     return;
   }
 
-  const isGotoTutorialSelectorExecuted = await gotoTutorialSelectorIfNeeded(props, action);
+  const isGotoTutorialSelectorExecuted = await gotoTutorialSelectorIfNeeded(
+    props,
+    action,
+  );
   if (isGotoTutorialSelectorExecuted) {
     props.inProgress = {
       type: "Story",
