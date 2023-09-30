@@ -1,9 +1,9 @@
 import { parseBrowserConfig } from "../../config/parser/browser-config";
 import { EndBattle } from "../../game-actions/end-battle";
 import type { GameProps } from "../../game-props";
+import { executePostEpisodeIfNeeded } from "./execute-post-episode-if-needed";
 import { executePostNetBattleIfNeeded } from "./execute-post-net-battle-if-needed";
 import { executePostNPCBattleIfNeeded } from "./execute-post-npc-baattle-if-needed";
-import { executePostEpisodeIfNeeded } from "./execute-post-episode-if-needed";
 
 /**
  * 戦闘終了時の処理
