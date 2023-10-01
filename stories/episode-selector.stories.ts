@@ -8,18 +8,21 @@ export const scene: DOMStubStory = domStub((resources) => {
   const scene = new EpisodeSelector(resources, [
     {
       id: "01",
-      type: "Beginner",
+      type: "Episode",
+      number: 1,
       title: "バッテリーシステム基礎",
     },
     {
       id: "02",
-      type: "Intermediate",
+      type: "Episode",
+      number: 2,
       title: "ゼロ防御は即死",
     },
     {
       id: "03",
-      type: "Advanced",
-      title: "バースト基礎",
+      type: "Episode",
+      number: 3,
+      title: "バーストで一発逆転",
     },
   ]);
   scene.notifyPrev().subscribe(() => {

@@ -57,7 +57,7 @@ export function createEpisodeSelectorProps(
   root.innerHTML = rootInnerHTML(ids, resources);
   const elements = extractElements(root, ids);
   const episodeElements = episodes.map(
-    (stage, index) => new EpisodeElement(resources, stage, index + 1),
+    (episode) => new EpisodeElement(resources, episode)
   );
   const stageElementsWithLastRemoved = episodeElements.slice(0, -1);
   stageElementsWithLastRemoved.forEach((stage) => {

@@ -30,13 +30,11 @@ export type EpisodeElementProps = {
  * EpisodeElementPropsを生成する
  * @param resources リソース管理オブジェクト
  * @param episode エピソード情報
- * @param level レベル
  * @return 生成結果
  */
 export function createEpisodeElementProps(
   resources: Readonly<Resources>,
   episode: Readonly<Episode>,
-  level: Readonly<number>,
 ) {
   const ids: DataIDs = {
     overlay: domUuid(),
@@ -46,7 +44,7 @@ export function createEpisodeElementProps(
     createEmptySoundResource();
   const root = document.createElement("div");
   root.className = ROOT_CLASS;
-  root.innerHTML = rootInnerHTML(ids, episode.type, level, episode.title);
+  root.innerHTML = rootInnerHTML(ids, episode.type, episode.number, episode.title);
   const elements = extractElements(root, ids);
   const select = domClickStream(root).pipe(
     map((action) => {

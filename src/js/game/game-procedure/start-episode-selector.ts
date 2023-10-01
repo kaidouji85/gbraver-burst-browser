@@ -19,6 +19,7 @@ export async function startEpisodeSelector(props: Readonly<GameProps>) {
     id: stage.id,
     title: stage.title.join(""),
     type: stage.type,
+    number: stage.number
   }));
   const scene = new EpisodeSelector(props.resources, stages);
   props.domSceneBinder.bind(scene, tutorialSelectorConnector);
