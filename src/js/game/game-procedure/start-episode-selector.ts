@@ -15,13 +15,7 @@ export async function startEpisodeSelector(props: Readonly<GameProps>) {
   const episodes = props.canPlayEpisodeInDevelopment
     ? EpisodesInDevelopment
     : Episodes;
-  const stages = episodes.map((stage) => ({
-    id: stage.id,
-    title: stage.title.join(""),
-    type: stage.type,
-    number: stage.number
-  }));
-  const scene = new EpisodeSelector(props.resources, stages);
+  const scene = new EpisodeSelector(props.resources, episodes);
   props.domSceneBinder.bind(scene, tutorialSelectorConnector);
   await Promise.race([scene.waitUntilLoaded(), waitTime(MAX_LOADING_TIME)]);
   await props.fader.fadeIn();

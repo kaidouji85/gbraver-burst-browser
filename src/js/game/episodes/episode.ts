@@ -28,9 +28,8 @@ export type EpisodeNumber = number;
 export type EpisodeConfig = {
   /** エピソードID */
   id: EpisodeID;
-  // TODO stringに修正する
   /** タイトル */
-  title: string[];
+  title: string;
   /** NPC */
   npc: NPC;
   /** プレイヤー */

@@ -24,6 +24,7 @@ function captionClauses(title: string[]): string {
 export type RootInnerHTMLParams = {
   /** リソース管理オブジェクト */
   resources: Resources;
+  // TODO stringにする
   /** タイトル */
   title: string[];
   /** レベル */

@@ -10,7 +10,7 @@ import { EpisodeIDs } from "./episode-ids";
 /** バッテリーチュートリアル */
 export const batterySystemTutorial: EpisodeConfig = {
   id: EpisodeIDs.BATTERY_SYSTEM,
-  title: ["バッテリーシステムの基本"],
+  title: "バッテリーシステムの基本",
   player: {
     playerId: playerUuid(),
     armdozer:

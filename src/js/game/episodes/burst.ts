@@ -10,7 +10,7 @@ import { EpisodeIDs } from "./episode-ids";
 /** バーストチュートリアル */
 export const burstTutorial: EpisodeConfig = {
   id: EpisodeIDs.BURST,
-  title: ["バーストで一発逆転"],
+  title: "バーストで一発逆転",
   player: {
     playerId: playerUuid(),
     armdozer:

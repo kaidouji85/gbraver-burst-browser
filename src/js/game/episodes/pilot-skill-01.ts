@@ -10,7 +10,7 @@ import { EpisodeIDs } from "./episode-ids";
 /** パイロットスキルチュートリアル（前半） */
 export const pilotSkillTutorial01: EpisodeConfig = {
   id: EpisodeIDs.Pilot01,
-  title: ["パイロット次第では詰み（負けイベント）"],
+  title: "パイロット次第では詰み（負けイベント）",
   player: {
     playerId: playerUuid(),
     armdozer:

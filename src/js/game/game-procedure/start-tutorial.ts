@@ -34,7 +34,7 @@ export async function startTutorial(
   const scene = new EpisodeTitle({
     resources: props.resources,
     level,
-    title: episode.title,
+    title: [episode.title],
   });
   props.domSceneBinder.bind(scene, tutorialTitleConnector);
   await Promise.race([scene.waitUntilLoaded(), waitTime(MAX_LOADING_TIME)]);

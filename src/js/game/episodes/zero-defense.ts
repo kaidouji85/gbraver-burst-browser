@@ -10,7 +10,7 @@ import { EpisodeIDs } from "./episode-ids";
 /** ゼロ防御チュートリアル */
 export const zeroDefenseTutorial: EpisodeConfig = {
   id: EpisodeIDs.ZERO_DEFENSE,
-  title: ["ゼロ防御だと即死する"],
+  title: "ゼロ防御だと即死する",
   player: {
     playerId: playerUuid(),
     armdozer:
