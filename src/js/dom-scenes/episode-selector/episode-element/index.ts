@@ -1,6 +1,6 @@
 import { Observable } from "rxjs";
 
-import type { EpisodeID } from "../../../game/episodes/episode";
+import type {EpisodeID, EpisodeNumber} from "../../../game/episodes/episode";
 import type { Resources } from "../../../resource";
 import { Episode } from "./episode";
 import { selected } from "./procedure/selected";
@@ -10,8 +10,8 @@ import { createEpisodeElementProps, EpisodeElementProps } from "./props";
 export class EpisodeElement {
   /** エピソードID */
   readonly id: EpisodeID;
-  /** レベル */
-  readonly level: number;
+  /** エピソード番号 */
+  readonly number: EpisodeNumber;
   /** プロパティ */
   #props: EpisodeElementProps;
 
@@ -23,7 +23,7 @@ export class EpisodeElement {
    */
   constructor(resources: Resources, episode: Episode, level: number) {
     this.id = episode.id;
-    this.level = level;
+    this.number = level;
     this.#props = createEpisodeElementProps(resources, episode, level);
   }
 
