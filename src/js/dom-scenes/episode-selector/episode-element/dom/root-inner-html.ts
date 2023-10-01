@@ -51,6 +51,6 @@ export function rootInnerHTML(
     episodeType: episodeType(type),
     type,
     level,
-    title
+    title,
   });
 }
