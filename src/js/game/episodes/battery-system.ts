@@ -4,7 +4,7 @@ import { createBatterySystemTutorialEvent } from "../../custom-battle-events/bat
 import { batterySystemTutorialNPC } from "../../npc/battery-system-tutorial";
 import { SOUND_IDS } from "../../resource/sound";
 import { playerUuid } from "../../uuid/player";
-import { EpisodeConfig} from "./episode";
+import { EpisodeConfig } from "./episode";
 import { EpisodeIDs } from "./episode-ids";
 
 /** バッテリーチュートリアル */

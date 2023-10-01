@@ -1,4 +1,8 @@
-import {EpisodeID, EpisodeNumber, EpisodeType} from "../../../game/episodes/episode";
+import {
+  EpisodeID,
+  EpisodeNumber,
+  EpisodeType,
+} from "../../../game/episodes/episode";
 
 /** エピソード情報 */
 export type Episode = {

@@ -4,7 +4,7 @@ import { createPilotSkillTutorial02Event } from "../../custom-battle-events/pilo
 import { pilotSkillTutorialNPC } from "../../npc/pilot-skill-tutorial";
 import { SOUND_IDS } from "../../resource/sound";
 import { playerUuid } from "../../uuid/player";
-import {EpisodeConfig} from "./episode";
+import { EpisodeConfig } from "./episode";
 import { EpisodeIDs } from "./episode-ids";
 
 /** パイロットスキルチュートリアル（後半） */

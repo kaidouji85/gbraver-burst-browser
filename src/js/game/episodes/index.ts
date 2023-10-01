@@ -13,7 +13,7 @@ export const MainEpisodes: Episode[] = [
 ].map((config, index) => ({
   ...config,
   type: "Episode",
-  number: index + 1
+  number: index + 1,
 }));
 
 /** サイドエピソード */
@@ -23,15 +23,12 @@ export const SideEpisodes: Episode[] = [
 ].map((config, index) => ({
   ...config,
   type: "Episode",
-  number: index + 1
+  number: index + 1,
 }));
 
 /** エピソードを集めたもの */
 
-export const Episodes: Episode[] = [
-  ...MainEpisodes,
-  ...SideEpisodes,
-];
+export const Episodes: Episode[] = [...MainEpisodes, ...SideEpisodes];
 
 /** 開発中のエピソードをあつめたもの */
 export const EpisodesInDevelopment: Episode[] = [...Episodes];

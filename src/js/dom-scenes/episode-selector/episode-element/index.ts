@@ -1,6 +1,6 @@
 import { Observable } from "rxjs";
 
-import type {EpisodeID, EpisodeNumber} from "../../../game/episodes/episode";
+import type { EpisodeID, EpisodeNumber } from "../../../game/episodes/episode";
 import type { Resources } from "../../../resource";
 import { Episode } from "./episode";
 import { selected } from "./procedure/selected";

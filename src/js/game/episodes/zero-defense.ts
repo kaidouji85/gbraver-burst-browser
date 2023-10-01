@@ -4,7 +4,7 @@ import { createZeroDefenseTutorialEvent } from "../../custom-battle-events/zero-
 import { zeroDefenseTutorialNPC } from "../../npc/zero-defense-tutorial";
 import { SOUND_IDS } from "../../resource/sound";
 import { playerUuid } from "../../uuid/player";
-import {EpisodeConfig} from "./episode";
+import { EpisodeConfig } from "./episode";
 import { EpisodeIDs } from "./episode-ids";
 
 /** ゼロ防御チュートリアル */
