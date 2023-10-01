@@ -26,12 +26,12 @@ export const SideEpisodes: Episode[] = [
   number: index + 1
 }));
 
-/** @deprecated チュートリアルエピソードを集めたもの */
+/** エピソードを集めたもの */
 
-export const TutorialEpisodes: Episode[] = [
+export const Episodes: Episode[] = [
   ...MainEpisodes,
   ...SideEpisodes,
 ];
 
-/** @deprecated 開発中のチュートリアルのエピソードをあつめたもの */
-export const TutorialEpisodesInDevelopment: Episode[] = [...TutorialEpisodes];
+/** 開発中のエピソードをあつめたもの */
+export const EpisodesInDevelopment: Episode[] = [...Episodes];

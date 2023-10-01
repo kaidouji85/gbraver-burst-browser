@@ -1,4 +1,4 @@
-import { TutorialEpisodes, TutorialEpisodesInDevelopment } from "../episodes";
+import { Episodes, EpisodesInDevelopment } from "../episodes";
 import { SelectEpisode } from "../game-actions/select-episode";
 import type { GameProps } from "../game-props";
 import type { Story } from "../in-progress/story";
@@ -21,8 +21,8 @@ export async function onSelectEpisode(
 
   const inProgress: Story = props.inProgress;
   const tutorialStages = props.canPlayTutorialInDevelopment
-    ? TutorialEpisodesInDevelopment
-    : TutorialEpisodes;
+    ? EpisodesInDevelopment
+    : Episodes;
   const stage =
     tutorialStages.find((v) => v.id === action.id) ?? tutorialStages[0];
   props.inProgress = {
