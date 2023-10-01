@@ -20,7 +20,7 @@ export async function onSelectEpisode(
   }
 
   const inProgress: Story = props.inProgress;
-  const tutorialStages = props.canPlayTutorialInDevelopment
+  const tutorialStages = props.canPlayEpisodeInDevelopment
     ? EpisodesInDevelopment
     : Episodes;
   const stage =

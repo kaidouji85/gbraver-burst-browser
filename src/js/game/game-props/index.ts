@@ -81,8 +81,8 @@ export interface GameProps {
   serviceWorker: ServiceWorkerRegistration | null | undefined;
   /** BGM管理オブジェクト */
   bgm: BGMManager;
-  /** 開発中のチュートリアルをプレイできるか否かのフラグ、trueでプレイできる */
-  canPlayTutorialInDevelopment: boolean;
+  /** 開発中のエピソードをプレイできるか否かのフラグ、trueでプレイできる */
+  canPlayEpisodeInDevelopment: boolean;
   /** 開発中のリソースをロードするか否かのフラグ、trueでロードする */
   shouldLoadDevelopingResource: boolean;
   /** 開発中のアームドーザを選択できるか否かのフラグ、trueで選択できる */

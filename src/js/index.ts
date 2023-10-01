@@ -23,7 +23,7 @@ declare let GBRAVER_BURST_IS_API_SERVER_ENABLE: string;
 declare let GBRAVER_BURST_AUTH0_DOMAIN: string;
 declare let GBRAVER_BURST_AUTH0_CLIENT_ID: string;
 declare let GBRAVER_BURST_AUTH0_AUDIENCE: string;
-declare let GBRAVER_BURST_CAN_PLAY_TUTORIAL_IN_DEVELOPMENT: string;
+declare let GBRAVER_BURST_CAN_PLAY_EPISODE_IN_DEVELOPMENT: string;
 declare let GBRAVER_BURST_SHOULD_LOAD_DEVELOPING_RESOURCE: string;
 declare let GBRAVER_BURST_CAN_PLAY_DEVELOPING_ARMDOZER: string;
 declare let GBRAVER_BURST_CAN_PLAY_DEVELOPING_PILOT: string;
@@ -66,8 +66,8 @@ async function main(): Promise<void> {
       GBRAVER_BURST_IS_PERFORMANCE_STATS_VISIBLE === "true",
     isServiceWorkerUsed: GBRAVER_BURST_IS_SERVICE_WORKER_USED === "true",
     isAPIServerEnable: GBRAVER_BURST_IS_API_SERVER_ENABLE === "true",
-    canPlayTutorialInDevelopment:
-      GBRAVER_BURST_CAN_PLAY_TUTORIAL_IN_DEVELOPMENT === "true",
+    canPlayEpisodeInDevelopment:
+      GBRAVER_BURST_CAN_PLAY_EPISODE_IN_DEVELOPMENT === "true",
     shouldLoadDevelopingResource:
       GBRAVER_BURST_SHOULD_LOAD_DEVELOPING_RESOURCE === "true",
     canPlayDevelopingArmdozer:

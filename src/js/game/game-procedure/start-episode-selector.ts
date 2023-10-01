@@ -12,10 +12,10 @@ import type { GameProps } from "../game-props";
  */
 export async function startEpisodeSelector(props: Readonly<GameProps>) {
   await props.fader.fadeOut();
-  const tutorialStages = props.canPlayTutorialInDevelopment
+  const episodes = props.canPlayEpisodeInDevelopment
     ? EpisodesInDevelopment
     : Episodes;
-  const stages = tutorialStages.map((stage) => ({
+  const stages = episodes.map((stage) => ({
     id: stage.id,
     title: stage.title.join(""),
     type: stage.type,
