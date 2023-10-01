@@ -8,21 +8,26 @@ import type { CustomBattleEvent } from "../../td-scenes/battle/custom-battle-eve
 /** エピソードID */
 export type EpisodeID = string;
 
-/** @deprecated エピソードタイプ */
+/** エピソードタイプ */
 export type EpisodeType =
-  /** 初級 */
+  /** @deprecated 初級 */
   | "Beginner"
-  /** 中級 */
+  /** @deprecated 中級 */
   | "Intermediate"
-  /** 上級 */
-  | "Advanced";
+  /** @deprecated 上級 */
+  | "Advanced"
+  /** エピソード */
+  | "Episode"
+  /** サイドエピソード */
+  | "Side episode";
 
-/** エピソード */
-export type Episode = {
+/** エピソード番号 */
+export type EpisodeNumber = number;
+
+/** エピソード設定 */
+export type EpisodeConfig = {
   /** エピソードID */
   id: EpisodeID;
-  /** エピソードタイプ */
-  type: EpisodeType;
   /** タイトル */
   title: string[];
   /** NPC */
@@ -37,4 +42,12 @@ export type Episode = {
    * @returns カスタムバトルイベント
    */
   event: (resources: Resources) => CustomBattleEvent;
+};
+
+/** エピソード */
+export type Episode = EpisodeConfig & {
+  /** エピソードタイプ */
+  type: EpisodeType;
+  /** エピソード番号 */
+  number: EpisodeNumber;
 };

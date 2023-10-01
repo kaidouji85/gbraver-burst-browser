@@ -4,13 +4,12 @@ import { createBurstTutorialEvent } from "../../custom-battle-events/burst-tutor
 import { burstTutorialNPC } from "../../npc/burst-tutorial";
 import { SOUND_IDS } from "../../resource/sound";
 import { playerUuid } from "../../uuid/player";
-import { Episode } from "./episode";
-import { TutorialStageIDs } from "./tutorial-stage-ids";
+import {EpisodeConfig} from "./episode";
+import { EpisodeIDs } from "./episode-ids";
 
 /** バーストチュートリアル */
-export const burstTutorial: Episode = {
-  id: TutorialStageIDs.BURST,
-  type: "Intermediate",
+export const burstTutorial: EpisodeConfig = {
+  id: EpisodeIDs.BURST,
   title: ["バーストで一発逆転"],
   player: {
     playerId: playerUuid(),

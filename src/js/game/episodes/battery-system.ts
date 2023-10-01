@@ -4,13 +4,12 @@ import { createBatterySystemTutorialEvent } from "../../custom-battle-events/bat
 import { batterySystemTutorialNPC } from "../../npc/battery-system-tutorial";
 import { SOUND_IDS } from "../../resource/sound";
 import { playerUuid } from "../../uuid/player";
-import { Episode } from "./episode";
-import { TutorialStageIDs } from "./tutorial-stage-ids";
+import { EpisodeConfig} from "./episode";
+import { EpisodeIDs } from "./episode-ids";
 
 /** バッテリーチュートリアル */
-export const batterySystemTutorial: Episode = {
-  id: TutorialStageIDs.BATTERY_SYSTEM,
-  type: "Beginner",
+export const batterySystemTutorial: EpisodeConfig = {
+  id: EpisodeIDs.BATTERY_SYSTEM,
   title: ["バッテリーシステムの基本"],
   player: {
     playerId: playerUuid(),

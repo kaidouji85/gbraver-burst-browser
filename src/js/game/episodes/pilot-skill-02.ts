@@ -4,13 +4,12 @@ import { createPilotSkillTutorial02Event } from "../../custom-battle-events/pilo
 import { pilotSkillTutorialNPC } from "../../npc/pilot-skill-tutorial";
 import { SOUND_IDS } from "../../resource/sound";
 import { playerUuid } from "../../uuid/player";
-import { Episode } from "./episode";
-import { TutorialStageIDs } from "./tutorial-stage-ids";
+import {EpisodeConfig} from "./episode";
+import { EpisodeIDs } from "./episode-ids";
 
 /** パイロットスキルチュートリアル（後半） */
-export const pilotSkillTutorial02: Episode = {
-  id: TutorialStageIDs.Pilot02,
-  type: "Advanced",
+export const pilotSkillTutorial02: EpisodeConfig = {
+  id: EpisodeIDs.Pilot02,
   title: ["パイロットスキルで意表を突け"],
   player: {
     playerId: playerUuid(),
