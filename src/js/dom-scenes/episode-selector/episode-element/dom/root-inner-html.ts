@@ -1,6 +1,7 @@
 import { EpisodeType } from "../../../../game/episodes/episode";
 import { ROOT_CLASS } from "./class-name";
 import { DataIDs } from "./data-ids";
+import rootInnerHTMLTemplate from "./root-inner-html.hbs";
 
 /** 初級 */
 const beginner = () => `<div class="${ROOT_CLASS}__beginner">初級</div>`;
@@ -44,10 +45,12 @@ export function rootInnerHTML(
   level: number,
   title: string,
 ): string {
-  return `
-    ${episodeType(type)}
-    <div class="${ROOT_CLASS}__level">${level}.</div>
-    <div class="${ROOT_CLASS}__title">${title}</div>
-    <div class="${ROOT_CLASS}__overlay" data-id="${ids.overlay}"></div>
-  `;
+  return rootInnerHTMLTemplate({
+    ids,
+    ROOT_CLASS,
+    episodeType: episodeType(type),
+    type,
+    level,
+    title,
+  });
 }
