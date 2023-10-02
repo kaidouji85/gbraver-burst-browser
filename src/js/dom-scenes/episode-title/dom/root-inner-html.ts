@@ -54,6 +54,6 @@ export function rootInnerHtml(
     ROOT_CLASS,
     bustShot,
     stand,
-    captionClauses: captionClauses(params.title)
+    captionClauses: captionClauses(params.title),
   });
 }
