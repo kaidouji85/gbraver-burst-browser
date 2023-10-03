@@ -1,5 +1,5 @@
-/** チュートリアルIDを集めたもの */
-export const TutorialStageIDs = {
+/** エピソードIDを集めたもの */
+export const EpisodeIDs = {
   BATTERY_SYSTEM: "BATTERY_SYSTEM",
   ZERO_DEFENSE: "ZERO_DEFENSE",
   BURST: "BURST",

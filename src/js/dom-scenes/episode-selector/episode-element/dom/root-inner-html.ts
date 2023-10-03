@@ -1,17 +1,14 @@
 import { EpisodeType } from "../../../../game/episodes/episode";
+import { Episode } from "../episode";
 import { ROOT_CLASS } from "./class-name";
 import { DataIDs } from "./data-ids";
 import rootInnerHTMLTemplate from "./root-inner-html.hbs";
 
-/** 初級 */
-const beginner = () => `<div class="${ROOT_CLASS}__beginner">初級</div>`;
+/** エピソード */
+const main = () => `<div class="${ROOT_CLASS}__main">メイン</div>`;
 
-/** 中級 */
-const intermediate = () =>
-  `<div class="${ROOT_CLASS}__intermediate">中級</div>`;
-
-/** 上級 */
-const advanced = () => `<div class="${ROOT_CLASS}__advanced">上級</div>`;
+/** サイドエピソード */
+const side = () => `<div class="${ROOT_CLASS}__side">サイド</div>`;
 
 /**
  * エピソードタイプに応じたアイコンを生成する
@@ -20,37 +17,26 @@ const advanced = () => `<div class="${ROOT_CLASS}__advanced">上級</div>`;
  */
 const episodeType = (type: EpisodeType): string => {
   switch (type) {
-    case "Beginner":
-      return beginner();
-    case "Intermediate":
-      return intermediate();
-    case "Advanced":
-      return advanced();
+    case "Episode":
+      return main();
+    case "Side Episode":
+      return side();
     default:
-      return beginner();
+      return main();
   }
 };
 
 /**
  * ルート要素のinnerHTML
  * @param ids data-idをあつめたもの
- * @param type エピソードタイプ
- * @param level ステージレベル
- * @param title ステージタイトル
+ * @param episode エピソード情報
  * @return innerHTML
  */
-export function rootInnerHTML(
-  ids: DataIDs,
-  type: EpisodeType,
-  level: number,
-  title: string,
-): string {
+export function rootInnerHTML(ids: DataIDs, episode: Episode): string {
   return rootInnerHTMLTemplate({
+    ...episode,
     ids,
     ROOT_CLASS,
-    episodeType: episodeType(type),
-    type,
-    level,
-    title,
+    type: episodeType(episode.type),
   });
 }

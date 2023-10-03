@@ -1,7 +1,7 @@
 import { PostBattleAction } from "../../game-actions/post-battle-action";
 import { GameProps } from "../../game-props";
 import { PlayingEpisode } from "../../in-progress/story";
-import { startTutorial } from "../start-tutorial";
+import { startEpisode } from "../start-episode";
 
 /**
  * 条件を満たしていればチュートリアルに遷移する
@@ -21,8 +21,8 @@ export async function gotoTutorialIfNeeded(
     return false;
   }
 
-  const playingTutorial: PlayingEpisode = props.inProgress.story;
+  const playingEpisode: PlayingEpisode = props.inProgress.story;
   props.domFloaters.hiddenPostBattle();
-  await startTutorial(props, playingTutorial.level, playingTutorial.episode);
+  await startEpisode(props, playingEpisode.episode);
   return true;
 }

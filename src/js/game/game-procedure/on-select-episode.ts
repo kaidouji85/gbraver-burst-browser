@@ -1,8 +1,8 @@
-import { TutorialEpisodes, TutorialEpisodesInDevelopment } from "../episodes";
 import { SelectEpisode } from "../game-actions/select-episode";
 import type { GameProps } from "../game-props";
 import type { Story } from "../in-progress/story";
-import { startTutorial } from "./start-tutorial";
+import { getEpisodes } from "./get-episodes";
+import { startEpisode } from "./start-episode";
 
 /**
  * エピソード選択時の処理
@@ -20,18 +20,14 @@ export async function onSelectEpisode(
   }
 
   const inProgress: Story = props.inProgress;
-  const tutorialStages = props.canPlayTutorialInDevelopment
-    ? TutorialEpisodesInDevelopment
-    : TutorialEpisodes;
-  const stage =
-    tutorialStages.find((v) => v.id === action.id) ?? tutorialStages[0];
+  const episodes = getEpisodes(props);
+  const episode = episodes.find((v) => v.id === action.id) ?? episodes[0];
   props.inProgress = {
     ...inProgress,
     story: {
       type: "PlayingEpisode",
-      episode: stage,
-      level: action.level,
+      episode,
     },
   };
-  await startTutorial(props, action.level, stage);
+  await startEpisode(props, episode);
 }

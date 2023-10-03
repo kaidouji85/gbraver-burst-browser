@@ -11,16 +11,13 @@ import type { Episode } from "../episodes/episode";
 import type { GameProps } from "../game-props";
 
 /**
- * チュートリアルを開始するヘルパー関数
- *
+ * エピソードを開始するヘルパー関数
  * @param props ゲームプロパティ
- * @param level チュートリアルステージレベル
  * @param episode エピソード
  * @return 処理が完了したら発火するPromise
  */
-export async function startTutorial(
+export async function startEpisode(
   props: Readonly<GameProps>,
-  level: number,
   episode: Episode,
 ): Promise<void> {
   const npcBattle = new NPCBattleRoom(episode.player, episode.npc);
@@ -32,9 +29,8 @@ export async function startTutorial(
     })(),
   ]);
   const scene = new EpisodeTitle({
+    ...episode,
     resources: props.resources,
-    level,
-    title: episode.title,
   });
   props.domSceneBinder.bind(scene, tutorialTitleConnector);
   await Promise.race([scene.waitUntilLoaded(), waitTime(MAX_LOADING_TIME)]);
