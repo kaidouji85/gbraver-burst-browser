@@ -30,7 +30,6 @@ export async function onSelectEpisode(
     story: {
       type: "PlayingEpisode",
       episode,
-      level: action.level,
     },
   };
   await startEpisode(props, episode);

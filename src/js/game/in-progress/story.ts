@@ -20,6 +20,4 @@ export type PlayingEpisode = {
   type: "PlayingEpisode";
   /** プレイ中のエピソード */
   episode: Episode;
-  /** @deprecated プレイ中のレベル */
-  level: number;
 };
