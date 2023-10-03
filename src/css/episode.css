@@ -44,7 +44,7 @@
   background-color: #d7003a;
 }
 
-.episode__level {
+.episode__number {
   padding-right: calc(var(--responsive-font-size) * 0.2);
 }
 
