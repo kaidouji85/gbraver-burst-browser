@@ -40,6 +40,6 @@ export function rootInnerHTML(
     ...episode,
     ids,
     ROOT_CLASS,
-    episodeType: episodeType(episode.type),
+    type: episodeType(episode.type),
   });
 }
