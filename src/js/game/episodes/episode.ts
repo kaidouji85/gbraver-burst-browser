@@ -10,12 +10,6 @@ export type EpisodeID = string;
 
 /** エピソードタイプ */
 export type EpisodeType =
-  /** @deprecated 初級 */
-  | "Beginner"
-  /** @deprecated 中級 */
-  | "Intermediate"
-  /** @deprecated 上級 */
-  | "Advanced"
   /** エピソード */
   | "Episode"
   /** サイドエピソード */
