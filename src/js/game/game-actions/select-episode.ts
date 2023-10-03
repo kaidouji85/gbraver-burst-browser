@@ -5,6 +5,4 @@ export type SelectEpisode = {
   type: "SelectEpisode";
   /** エピソードID */
   id: EpisodeID;
-  /** レベル */
-  level: number;
 };
