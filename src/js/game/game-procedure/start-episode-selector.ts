@@ -2,8 +2,8 @@ import { EpisodeSelector } from "../../dom-scenes/episode-selector";
 import { waitTime } from "../../wait/wait-time";
 import { tutorialSelectorConnector } from "../action-connector/tutorial-selector-connection";
 import { MAX_LOADING_TIME } from "../dom-scene-binder/max-loading-time";
-import { Episodes, EpisodesInDevelopment } from "../episodes";
 import type { GameProps } from "../game-props";
+import { getEpisodes } from "./get-episodes";
 
 /**
  * エピソードセレクタ画面を開始するヘルパー関数
@@ -12,9 +12,7 @@ import type { GameProps } from "../game-props";
  */
 export async function startEpisodeSelector(props: Readonly<GameProps>) {
   await props.fader.fadeOut();
-  const episodes = props.canPlayEpisodeInDevelopment
-    ? EpisodesInDevelopment
-    : Episodes;
+  const episodes = getEpisodes(props);
   const scene = new EpisodeSelector(props.resources, episodes);
   props.domSceneBinder.bind(scene, tutorialSelectorConnector);
   await Promise.race([scene.waitUntilLoaded(), waitTime(MAX_LOADING_TIME)]);
