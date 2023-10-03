@@ -22,7 +22,7 @@ export const SideEpisodes: Episode[] = [
   pilotSkillTutorial02,
 ].map((config, index) => ({
   ...config,
-  type: "Episode",
+  type: "Side Episode",
   number: index + 1,
 }));
 

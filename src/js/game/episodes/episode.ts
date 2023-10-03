@@ -19,7 +19,7 @@ export type EpisodeType =
   /** エピソード */
   | "Episode"
   /** サイドエピソード */
-  | "Side episode";
+  | "Side Episode";
 
 /** エピソード番号 */
 export type EpisodeNumber = number;
