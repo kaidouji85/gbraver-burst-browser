@@ -46,9 +46,7 @@ export function createEpisodeElementProps(
   root.className = ROOT_CLASS;
   root.innerHTML = rootInnerHTML(
     ids,
-    episode.type,
-    episode.number,
-    episode.title,
+    episode
   );
   const elements = extractElements(root, ids);
   const select = domClickStream(root).pipe(

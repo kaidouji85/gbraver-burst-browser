@@ -1,7 +1,8 @@
-import { EpisodeNumber, EpisodeType } from "../../../../game/episodes/episode";
+import { EpisodeType } from "../../../../game/episodes/episode";
 import { ROOT_CLASS } from "./class-name";
 import { DataIDs } from "./data-ids";
 import rootInnerHTMLTemplate from "./root-inner-html.hbs";
+import {Episode} from "../episode";
 
 /** エピソード */
 const main = () => `<div class="${ROOT_CLASS}__main">メイン</div>`;
@@ -28,23 +29,17 @@ const episodeType = (type: EpisodeType): string => {
 /**
  * ルート要素のinnerHTML
  * @param ids data-idをあつめたもの
- * @param type エピソードタイプ
- * @param number エピソード番号
- * @param title タイトル
+ * @param episode エピソード情報
  * @return innerHTML
  */
 export function rootInnerHTML(
   ids: DataIDs,
-  type: EpisodeType,
-  number: EpisodeNumber,
-  title: string,
+  episode: Episode
 ): string {
   return rootInnerHTMLTemplate({
+    ...episode,
     ids,
     ROOT_CLASS,
-    episodeType: episodeType(type),
-    type,
-    number,
-    title,
+    episodeType: episodeType(episode.type),
   });
 }
