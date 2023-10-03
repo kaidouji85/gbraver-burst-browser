@@ -42,7 +42,7 @@ export type GamePropsGeneratorParam = {
   api: BrowserSDK;
   /** ブラウザ設定リポジトリ */
   config: GBraverBurstBrowserConfigRepository;
-  /** 開発中のチュートリアルをプレイできるか否かのフラグ、trueでプレイできる */
+  /** 開発中のエピソードをプレイできるか否かのフラグ、trueでプレイできる */
   canPlayEpisodeInDevelopment: boolean;
   /** 開発中のリソースをロードするか否かのフラグ、trueでロードする */
   shouldLoadDevelopingResource: boolean;
