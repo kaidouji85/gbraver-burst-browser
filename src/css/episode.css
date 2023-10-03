@@ -19,9 +19,8 @@
   }
 }
 
-.episode__beginner,
-.episode__intermediate,
-.episode__advanced {
+.episode__main,
+.episode__side {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -32,16 +31,12 @@
   border-radius: calc(var(--responsive-font-size) * 0.4);
 }
 
-.episode__beginner {
+.episode__main {
   background-color: var(--button-background-color);
 }
 
-.episode__intermediate {
+.episode__side {
   background-color: #00a497;
-}
-
-.episode__advanced {
-  background-color: #d7003a;
 }
 
 .episode__number {
