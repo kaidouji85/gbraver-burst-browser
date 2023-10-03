@@ -28,19 +28,26 @@ const episodeTitleStory = (
     return scene.getRootHTMLElement();
   });
 
-/** チュートリアル1 */
-export const tutorial1 = episodeTitleStory(
+/** エピソード1 */
+export const episode1 = episodeTitleStory(
   "バッテリーシステムの基礎",
   "Episode",
   1,
 );
 
-/** チュートリアル2 */
-export const tutorial2 = episodeTitleStory(
+/** エピソード2 */
+export const episode2 = episodeTitleStory(
   "ゼロ防御だと即死する",
   "Episode",
   2,
 );
 
-/** チュートリアル3 */
-export const tutorial3 = episodeTitleStory("バーストで一発逆転", "Episode", 3);
+/** エピソード3 */
+export const episode3 = episodeTitleStory("バーストで一発逆転", "Episode", 3);
+
+/** サイドエピソード1 */
+export const sideEpisode1 = episodeTitleStory(
+  "パイロット次第では詰み（負けイベント）",
+  "Side Episode",
+  1,
+);
