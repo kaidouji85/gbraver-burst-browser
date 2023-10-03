@@ -4,6 +4,4 @@ import { EpisodeID } from "../../../game/episodes/episode";
 export type EpisodeSelect = {
   /** エピソードID */
   id: EpisodeID;
-  /** ステージレベル */
-  level: number;
 };

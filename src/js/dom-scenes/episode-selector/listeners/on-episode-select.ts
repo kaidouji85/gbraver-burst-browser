@@ -14,7 +14,6 @@ export function onEpisodeSelect(
     await episodeElement.selected();
     props.episodeSelect.next({
       id: episodeElement.id,
-      level: episodeElement.number,
     });
   });
 }
