@@ -1,4 +1,4 @@
-import { EpisodeType } from "../../../../game/episodes/episode";
+import {EpisodeNumber, EpisodeType} from "../../../../game/episodes/episode";
 import { ROOT_CLASS } from "./class-name";
 import { DataIDs } from "./data-ids";
 import rootInnerHTMLTemplate from "./root-inner-html.hbs";
@@ -35,14 +35,14 @@ const episodeType = (type: EpisodeType): string => {
  * ルート要素のinnerHTML
  * @param ids data-idをあつめたもの
  * @param type エピソードタイプ
- * @param level ステージレベル
- * @param title ステージタイトル
+ * @param number エピソード番号
+ * @param title タイトル
  * @return innerHTML
  */
 export function rootInnerHTML(
   ids: DataIDs,
   type: EpisodeType,
-  level: number,
+  number: EpisodeNumber,
   title: string,
 ): string {
   return rootInnerHTMLTemplate({
@@ -50,7 +50,7 @@ export function rootInnerHTML(
     ROOT_CLASS,
     episodeType: episodeType(type),
     type,
-    level,
+    number,
     title,
   });
 }

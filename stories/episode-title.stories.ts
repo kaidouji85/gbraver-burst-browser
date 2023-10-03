@@ -7,13 +7,13 @@ export default {
 };
 
 /**
- * チュートリアルタイトルストーリー
+ * エピソードタイトルストーリー
  * @param title タイトル
  * @param type エピソードタイプ
  * @param number エピソード番号
  * @return ストーリー
  */
-const tutorialTitleStory = (
+const episodeTitleStory = (
   title: string,
   type: EpisodeType,
   number: EpisodeNumber,
@@ -29,18 +29,18 @@ const tutorialTitleStory = (
   });
 
 /** チュートリアル1 */
-export const tutorial1 = tutorialTitleStory(
+export const tutorial1 = episodeTitleStory(
   "バッテリーシステムの基礎",
   "Episode",
   1,
 );
 
 /** チュートリアル2 */
-export const tutorial2 = tutorialTitleStory(
+export const tutorial2 = episodeTitleStory(
   "ゼロ防御だと即死する",
   "Episode",
   2,
 );
 
 /** チュートリアル3 */
-export const tutorial3 = tutorialTitleStory("バーストで一発逆転", "Episode", 3);
+export const tutorial3 = episodeTitleStory("バーストで一発逆転", "Episode", 3);

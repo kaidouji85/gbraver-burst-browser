@@ -45,7 +45,7 @@
   font-weight: bold;
 }
 
-.episode-title__stage-level {
+.episode-title__stage-number {
   font-size: calc(var(--font-size) * 1.5);
   font-weight: bold;
 }
