@@ -1,4 +1,4 @@
-import {EpisodeNumber, EpisodeType} from "../../../../game/episodes/episode";
+import { EpisodeNumber, EpisodeType } from "../../../../game/episodes/episode";
 import { ROOT_CLASS } from "./class-name";
 import { DataIDs } from "./data-ids";
 import rootInnerHTMLTemplate from "./root-inner-html.hbs";

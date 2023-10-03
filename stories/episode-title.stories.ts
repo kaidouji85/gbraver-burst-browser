@@ -36,11 +36,7 @@ export const episode1 = episodeTitleStory(
 );
 
 /** エピソード2 */
-export const episode2 = episodeTitleStory(
-  "ゼロ防御だと即死する",
-  "Episode",
-  2,
-);
+export const episode2 = episodeTitleStory("ゼロ防御だと即死する", "Episode", 2);
 
 /** エピソード3 */
 export const episode3 = episodeTitleStory("バーストで一発逆転", "Episode", 3);
