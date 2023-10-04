@@ -8,12 +8,18 @@ import { playerUuid } from "../../uuid/player";
 import { EpisodeConfig } from "./episode";
 import { EpisodeIDs } from "./episode-ids";
 
+/** イントロダクション */
+const introduction = `
+そう遠くない未来、高校生が巨大ロボットで戦う「機動倶楽部」が実現していた。
+大田高校機動倶楽部の新人パイロットであるシンヤは、ツバサ先輩から操縦レクチャーを受けるのであった。
+`;
+
 /** バッテリーチュートリアル */
 export const batterySystemTutorial: EpisodeConfig = {
   id: EpisodeIDs.BATTERY_SYSTEM,
   title: "バッテリーシステムの基本",
-  introduction: "",                             // TODO ちゃんと書く
-  imageCutPath: PathIds.TUTORIAL_IMAGE_CUT_01,  // TODO 正しい画像を指定する
+  introduction,
+  imageCutPath: PathIds.TUTORIAL_IMAGE_CUT_01,
   player: {
     playerId: playerUuid(),
     armdozer:
