@@ -115,15 +115,29 @@
   margin-bottom: calc(var(--responsive-font-size) * 0.7) 0;
 }
 
-.episode-selector__prev {
+.episode-selector__controllers {
   grid-row: 3;
   grid-column: 2;
+  display: flex;
+  gap: calc(var(--responsive-font-size) * 0.5);
+}
+
+.episode-selector__prev,
+.episode-selector__play-episode {
+  flex: 1;
   min-height: calc(var(--responsive-font-size) * 3);
   font-size: var(--responsive-font-size);
   border-radius: var(--button-border-radius);
-  background-color: var(--sub-button-background-color);
   color: var(--button-font-color);
   border: var(--button-border);
   box-shadow: var(--button-box-shadow);
   z-index: var(--controllers-z-index);
+}
+
+.episode-selector__prev {
+  background-color: var(--sub-button-background-color);
+}
+
+.episode-selector__play-episode {
+  background-color: var(--button-background-color);
 }
