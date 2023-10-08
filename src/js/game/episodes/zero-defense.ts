@@ -13,7 +13,7 @@ export const zeroDefenseTutorial: EpisodeConfig = {
   id: EpisodeIDs.ZERO_DEFENSE,
   title: "ゼロ防御だと即死する",
   introduction: "", // TODO ちゃんと書く
-  imageCutPath: PathIds.TUTORIAL_IMAGE_CUT_02, // TODO 正しい画像を指定する
+  imageCutPathId: PathIds.TUTORIAL_IMAGE_CUT_02, // TODO 正しい画像を指定する
   player: {
     playerId: playerUuid(),
     armdozer:

@@ -16,6 +16,6 @@ export type Episode = {
   title: string;
   /** 導入 */
   introduction: string;
-  /** イメージカットのパス */
-  imageCutPath: string;
+  /** イメージカットのパスID */
+  imageCutPathId: string;
 };

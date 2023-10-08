@@ -13,9 +13,7 @@ export const scene: DOMStubStory = domStub((resources) => {
       number: 1,
       title: "バッテリーシステム基礎",
       introduction: "導入",
-      imageCutPath:
-        resources.paths.find((v) => v.id === PathIds.TUTORIAL_IMAGE_CUT_01)
-          ?.path ?? "",
+      imageCutPathId: PathIds.TUTORIAL_IMAGE_CUT_01,
     },
     {
       id: "02",
@@ -23,9 +21,7 @@ export const scene: DOMStubStory = domStub((resources) => {
       number: 2,
       title: "ゼロ防御は即死",
       introduction: "導入",
-      imageCutPath:
-        resources.paths.find((v) => v.id === PathIds.TUTORIAL_IMAGE_CUT_02)
-          ?.path ?? "",
+      imageCutPathId: PathIds.TUTORIAL_IMAGE_CUT_02,
     },
     {
       id: "03",
@@ -33,9 +29,7 @@ export const scene: DOMStubStory = domStub((resources) => {
       number: 3,
       title: "バーストで一発逆転",
       introduction: "導入",
-      imageCutPath:
-        resources.paths.find((v) => v.id === PathIds.TUTORIAL_IMAGE_CUT_03)
-          ?.path ?? "",
+      imageCutPathId: PathIds.TUTORIAL_IMAGE_CUT_03,
     },
   ]);
   scene.notifyPrev().subscribe(() => {

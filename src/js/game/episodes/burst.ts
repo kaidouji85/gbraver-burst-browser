@@ -13,7 +13,7 @@ export const burstTutorial: EpisodeConfig = {
   id: EpisodeIDs.BURST,
   title: "バーストで一発逆転",
   introduction: "", // TODO ちゃんと書く
-  imageCutPath: PathIds.TUTORIAL_IMAGE_CUT_03, // TODO 正しい画像を指定する
+  imageCutPathId: PathIds.TUTORIAL_IMAGE_CUT_03, // TODO 正しい画像を指定する
   player: {
     playerId: playerUuid(),
     armdozer:

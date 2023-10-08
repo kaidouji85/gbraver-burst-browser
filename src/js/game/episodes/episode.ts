@@ -28,7 +28,7 @@ export type EpisodeConfig = {
   /** エピソード導入の文章 */
   introduction: string;
   /** イメージカットのパスID */
-  imageCutPath: PathId;
+  imageCutPathId: PathId;
   /** NPC */
   npc: NPC;
   /** プレイヤー */
