@@ -17,6 +17,6 @@ export function extractElements(root: HTMLElement, ids: DataIDs): Elements {
     root.querySelector(`[data-id="${ids.check}"]`) ??
     document.createElement("div");
   return {
-    check
+    check,
   };
 }

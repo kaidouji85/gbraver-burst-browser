@@ -5,7 +5,7 @@ type Elements = {
   /** エピソード一覧 */
   episodes: HTMLElement;
   /** エピソードのイメージカット */
-  episodeImageCut: HTMLElement;
+  episodeImageCut: HTMLImageElement;
   /** エピソードタイトル */
   episodeTitle: HTMLElement;
   /** エピソード導入 */
@@ -24,9 +24,13 @@ export function extractElements(root: HTMLElement, ids: DataIDs): Elements {
   const episodes: HTMLElement =
     root.querySelector(`[data-id="${ids.episodes}"]`) ??
     document.createElement("div");
-  const episodeImageCut: HTMLElement =
-    root.querySelector(`[data-id="${ids.episodeImageCut}"]`) ??
-    document.createElement("div");
+  const foundEpisodeImageCut = root.querySelector(
+    `[data-id="${ids.episodeImageCut}"]`,
+  );
+  const episodeImageCut: HTMLImageElement =
+    foundEpisodeImageCut instanceof HTMLImageElement
+      ? foundEpisodeImageCut
+      : document.createElement("img");
   const episodeTitle: HTMLElement =
     root.querySelector(`[data-id="${ids.episodeTitle}"]`) ??
     document.createElement("div");

@@ -4,13 +4,19 @@ import type { EpisodeID } from "../../../game/episodes/episode";
 import type { Resources } from "../../../resource";
 import { Episode } from "./episode";
 import { check } from "./procedure/check";
-import {uncheck} from "./procedure/uncheck";
+import { uncheck } from "./procedure/uncheck";
 import { createEpisodeElementProps, EpisodeElementProps } from "./props";
 
 /** エピソードHTML要素 */
 export class EpisodeElement {
   /** エピソードID */
   readonly id: EpisodeID;
+  /** イメージカットのパス */
+  readonly imageCutPath: string;
+  /** タイトル */
+  readonly title: string;
+  /** 導入 */
+  readonly introduction: string;
   /** プロパティ */
   #props: EpisodeElementProps;
 
@@ -21,6 +27,9 @@ export class EpisodeElement {
    */
   constructor(resources: Resources, episode: Episode) {
     this.id = episode.id;
+    this.imageCutPath = episode.imageCutPath;
+    this.title = episode.title;
+    this.introduction = episode.introduction;
     this.#props = createEpisodeElementProps(resources, episode);
   }
 

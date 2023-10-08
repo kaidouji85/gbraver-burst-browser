@@ -21,6 +21,7 @@
 
 .episode__check {
   --size: calc(var(--responsive-font-size) * 2);
+
   height: var(--size);
   width: var(--size);
   margin-right: calc(var(--responsive-font-size) * 0.5);

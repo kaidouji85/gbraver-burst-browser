@@ -1,7 +1,7 @@
 import { EpisodeSelector } from "../src/js/dom-scenes/episode-selector";
+import { PathIds } from "../src/js/resource/path/ids";
 import type { DOMStubStory } from "./stub/dom-stub";
 import { domStub } from "./stub/dom-stub";
-import {PathIds} from "../src/js/resource/path/ids";
 export default {
   title: "episode-selector",
 };
@@ -13,7 +13,9 @@ export const scene: DOMStubStory = domStub((resources) => {
       number: 1,
       title: "バッテリーシステム基礎",
       introduction: "導入",
-      imageCutPath: resources.paths.find(v => v.id === PathIds.TUTORIAL_IMAGE_CUT_01)?.path ?? "",
+      imageCutPath:
+        resources.paths.find((v) => v.id === PathIds.TUTORIAL_IMAGE_CUT_01)
+          ?.path ?? "",
     },
     {
       id: "02",
@@ -21,7 +23,9 @@ export const scene: DOMStubStory = domStub((resources) => {
       number: 2,
       title: "ゼロ防御は即死",
       introduction: "導入",
-      imageCutPath: resources.paths.find(v => v.id === PathIds.TUTORIAL_IMAGE_CUT_02)?.path ?? "",
+      imageCutPath:
+        resources.paths.find((v) => v.id === PathIds.TUTORIAL_IMAGE_CUT_02)
+          ?.path ?? "",
     },
     {
       id: "03",
@@ -29,7 +33,9 @@ export const scene: DOMStubStory = domStub((resources) => {
       number: 3,
       title: "バーストで一発逆転",
       introduction: "導入",
-      imageCutPath: resources.paths.find(v => v.id === PathIds.TUTORIAL_IMAGE_CUT_03)?.path ?? "",
+      imageCutPath:
+        resources.paths.find((v) => v.id === PathIds.TUTORIAL_IMAGE_CUT_03)
+          ?.path ?? "",
     },
   ]);
   scene.notifyPrev().subscribe(() => {

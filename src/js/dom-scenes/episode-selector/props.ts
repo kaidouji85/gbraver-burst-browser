@@ -23,7 +23,7 @@ export type EpisodeSelectorProps = {
   /** エピソード要素をあつめたもの */
   episodeElements: EpisodeElement[];
   /** エピソードのイメージカット */
-  episodeImageCut: HTMLElement;
+  episodeImageCut: HTMLImageElement;
   /** エピソードタイトル */
   episodeTitle: HTMLElement;
   /** エピソード導入 */
@@ -89,6 +89,6 @@ export function createEpisodeSelectorProps(
     changeValue:
       resources.sounds.find((v) => v.id === SOUND_IDS.CHANGE_VALUE) ??
       createEmptySoundResource(),
-    isImageCutsLoaded: Promise.resolve()
+    isImageCutsLoaded: Promise.resolve(),
   };
 }
