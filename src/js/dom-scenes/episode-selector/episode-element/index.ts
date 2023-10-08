@@ -29,7 +29,7 @@ export class EpisodeElement {
     this.id = episode.id;
     this.imageCutPath =
       resources.paths.find((v) => v.id === episode.imageCutPathId)?.path ?? "";
-    this.title = episode.title;
+    this.title = `${episode.type}${episode.number}. ${episode.title}`;
     this.introduction = episode.introduction;
     this.#props = createEpisodeElementProps(resources, episode);
   }

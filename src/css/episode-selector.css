@@ -47,6 +47,13 @@
   overflow: auto;
 }
 
+.episode-selector__episode-title {
+  margin-top: calc(var(--responsive-font-size) * 1);
+  margin-bottom: calc(var(--responsive-font-size) * 1);
+  border-bottom: dashed 1px var(--font-color);
+  /*margin-bottom: calc(var(--responsive-font-size) * 0.7) 0;*/
+}
+
 .episode-selector__episode-image-cut {
   width: 100%;
   border-radius: var(--button-border-radius);
