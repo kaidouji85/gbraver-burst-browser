@@ -14,4 +14,8 @@ export type Episode = {
   type: EpisodeType;
   /** タイトル */
   title: string;
+  /** 導入 */
+  introduction: string;
+  /** イメージカットのパス */
+  imageCutPath: string;
 };
