@@ -2,15 +2,21 @@ import { ArmdozerIds, Armdozers, PilotIds, Pilots } from "gbraver-burst-core";
 
 import { createZeroDefenseTutorialEvent } from "../../custom-battle-events/zero-defense-tutorial";
 import { zeroDefenseTutorialNPC } from "../../npc/zero-defense-tutorial";
+import { PathIds } from "../../resource/path/ids";
 import { SOUND_IDS } from "../../resource/sound";
 import { playerUuid } from "../../uuid/player";
 import { EpisodeConfig } from "./episode";
 import { EpisodeIDs } from "./episode-ids";
 
+/** イントロダクション */
+const introduction = `今日は機動倶楽部の新人戦、シンヤは同学年のガイと対峙することになるが序盤からリードをとられてしまい……。`;
+
 /** ゼロ防御チュートリアル */
 export const zeroDefenseTutorial: EpisodeConfig = {
   id: EpisodeIDs.ZERO_DEFENSE,
   title: "ゼロ防御だと即死する",
+  introduction,
+  imageCutPathId: PathIds.TUTORIAL_IMAGE_CUT_02, // TODO 正しい画像を指定する
   player: {
     playerId: playerUuid(),
     armdozer:

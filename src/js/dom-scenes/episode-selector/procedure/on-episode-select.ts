@@ -1,5 +1,6 @@
 import { EpisodeElement } from "../episode-element";
 import { EpisodeSelectorProps } from "../props";
+import { setEpisodeDetail } from "./set-episode-detail";
 
 /**
  * エピソード選択時の処理
@@ -10,10 +11,10 @@ export function onEpisodeSelect(
   props: Readonly<EpisodeSelectorProps>,
   episodeElement: EpisodeElement,
 ): void {
-  props.exclusive.execute(async () => {
-    await episodeElement.selected();
-    props.episodeSelect.next({
-      id: episodeElement.id,
-    });
-  });
+  episodeElement.check();
+  setEpisodeDetail(props, episodeElement);
+  props.changeValueSound.sound.play();
+  props.episodeElements
+    .filter((v) => v.id !== episodeElement.id)
+    .forEach((v) => v.uncheck());
 }

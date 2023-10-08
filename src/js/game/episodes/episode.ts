@@ -2,6 +2,7 @@ import type { Player } from "gbraver-burst-core";
 
 import type { NPC } from "../../npc/npc";
 import { Resources } from "../../resource";
+import { PathId } from "../../resource/path/resource";
 import type { SoundId } from "../../resource/sound";
 import type { CustomBattleEvent } from "../../td-scenes/battle/custom-battle-event";
 
@@ -24,6 +25,10 @@ export type EpisodeConfig = {
   id: EpisodeID;
   /** タイトル */
   title: string;
+  /** エピソード導入の文章 */
+  introduction: string;
+  /** イメージカットのパスID */
+  imageCutPathId: PathId;
   /** NPC */
   npc: NPC;
   /** プレイヤー */

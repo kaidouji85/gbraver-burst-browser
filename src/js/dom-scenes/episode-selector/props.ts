@@ -8,11 +8,10 @@ import {
   SoundResource,
 } from "../../resource/sound";
 import { domUuid } from "../../uuid/dom-uuid";
-import { waitElementLoaded } from "../../wait/wait-element-loaded";
 import { ROOT_CLASS } from "./dom/class-name";
 import { extractElements } from "./dom/elements";
+import { episodeSeparator } from "./dom/episode-separator";
 import { rootInnerHTML } from "./dom/root-inner-html";
-import { stageSeparator } from "./dom/stage-separator";
 import { EpisodeElement } from "./episode-element";
 import { Episode } from "./episode-element/episode";
 import { EpisodeSelect } from "./episode-element/episode-select";
@@ -23,6 +22,14 @@ export type EpisodeSelectorProps = {
   root: HTMLElement;
   /** エピソード要素をあつめたもの */
   episodeElements: EpisodeElement[];
+  /** エピソードのイメージカット */
+  episodeImageCut: HTMLImageElement;
+  /** エピソードタイトル */
+  episodeTitle: HTMLElement;
+  /** エピソード導入 */
+  episodeIntroduction: HTMLElement;
+  /** このエピソードをプレイボタン */
+  playButton: HTMLElement;
   /** 戻るボタン */
   prevButton: HTMLElement;
   /** 排他制御 */
@@ -31,8 +38,10 @@ export type EpisodeSelectorProps = {
   prev: Subject<void>;
   /** エピソード選択ストリーム */
   episodeSelect: Subject<EpisodeSelect>;
-  /** 値変更効果音 */
-  changeValue: SoundResource;
+  /** 値変更 効果音 */
+  changeValueSound: SoundResource;
+  /** ボタン押下 効果音 */
+  pushButtonSound: SoundResource;
   /** イメージカットのロード完了したら発火するPromise */
   isImageCutsLoaded: Promise<unknown>;
 };
@@ -48,8 +57,11 @@ export function createEpisodeSelectorProps(
   episodes: Episode[],
 ): EpisodeSelectorProps {
   const ids = {
-    stages: domUuid(),
-    imageCuts: domUuid(),
+    episodes: domUuid(),
+    episodeImageCut: domUuid(),
+    episodeTitle: domUuid(),
+    episodeIntroduction: domUuid(),
+    playButton: domUuid(),
     prevButton: domUuid(),
   };
   const root = document.createElement("div");
@@ -61,28 +73,31 @@ export function createEpisodeSelectorProps(
   );
   const stageElementsWithLastRemoved = episodeElements.slice(0, -1);
   stageElementsWithLastRemoved.forEach((stage) => {
-    elements.stages.appendChild(stage.getRootHTMLElement());
-    elements.stages.appendChild(stageSeparator());
+    elements.episodes.appendChild(stage.getRootHTMLElement());
+    elements.episodes.appendChild(episodeSeparator());
   });
   const lastStageElement = episodeElements[episodeElements.length - 1];
   if (lastStageElement) {
-    elements.stages.appendChild(lastStageElement.getRootHTMLElement());
+    elements.episodes.appendChild(lastStageElement.getRootHTMLElement());
   }
 
   return {
     root,
     episodeElements: episodeElements,
+    episodeImageCut: elements.episodeImageCut,
+    episodeTitle: elements.episodeTitle,
+    episodeIntroduction: elements.episodeIntroduction,
+    playButton: elements.playButton,
     prevButton: elements.prevButton,
     exclusive: new Exclusive(),
     prev: new Subject(),
     episodeSelect: new Subject(),
-    changeValue:
+    changeValueSound:
       resources.sounds.find((v) => v.id === SOUND_IDS.CHANGE_VALUE) ??
       createEmptySoundResource(),
-    isImageCutsLoaded: Promise.all(
-      Array.from(elements.imageCuts.children).map((img) =>
-        waitElementLoaded(img as HTMLElement),
-      ),
-    ),
+    pushButtonSound:
+      resources.sounds.find((v) => v.id === SOUND_IDS.PUSH_BUTTON) ??
+      createEmptySoundResource(),
+    isImageCutsLoaded: Promise.resolve(),
   };
 }

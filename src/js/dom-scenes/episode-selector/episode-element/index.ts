@@ -1,17 +1,23 @@
 import { Observable } from "rxjs";
 
-import type { EpisodeID, EpisodeNumber } from "../../../game/episodes/episode";
+import type { EpisodeID } from "../../../game/episodes/episode";
 import type { Resources } from "../../../resource";
 import { Episode } from "./episode";
-import { selected } from "./procedure/selected";
+import { check } from "./procedure/check";
+import { isChecked } from "./procedure/is-checked";
+import { uncheck } from "./procedure/uncheck";
 import { createEpisodeElementProps, EpisodeElementProps } from "./props";
 
 /** エピソードHTML要素 */
 export class EpisodeElement {
   /** エピソードID */
   readonly id: EpisodeID;
-  /** エピソード番号 */
-  readonly number: EpisodeNumber;
+  /** イメージカットのパス */
+  readonly imageCutPath: string;
+  /** タイトル */
+  readonly title: string;
+  /** 導入 */
+  readonly introduction: string;
   /** プロパティ */
   #props: EpisodeElementProps;
 
@@ -22,7 +28,10 @@ export class EpisodeElement {
    */
   constructor(resources: Resources, episode: Episode) {
     this.id = episode.id;
-    this.number = episode.number;
+    this.imageCutPath =
+      resources.paths.find((v) => v.id === episode.imageCutPathId)?.path ?? "";
+    this.title = `${episode.type}${episode.number}. ${episode.title}`;
+    this.introduction = episode.introduction;
     this.#props = createEpisodeElementProps(resources, episode);
   }
 
@@ -38,15 +47,29 @@ export class EpisodeElement {
    * 選択通知
    * @return 通知ストリーム
    */
-  notifySelection(): Observable<void> {
+  selectionNotifier(): Observable<void> {
     return this.#props.select;
   }
 
   /**
-   * ステージ選択アニメーション
-   * @return アニメーションが完了したら発火するPromise
+   * チェックする
    */
-  async selected(): Promise<void> {
-    await selected(this.#props);
+  check(): void {
+    check(this.#props);
+  }
+
+  /**
+   * チェックを外す
+   */
+  uncheck(): void {
+    uncheck(this.#props);
+  }
+
+  /**
+   * チェックされているか否かを判定する
+   * @return trueでチェックされている
+   */
+  isChecked(): boolean {
+    return isChecked(this.#props);
   }
 }

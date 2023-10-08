@@ -1,14 +1,15 @@
 /** エピソード情報 */
 @media (orientation: landscape) {
-  .episode {
+  .episode,
+  .episode--checked {
     position: relative;
     display: flex;
     align-items: center;
-    border-radius: var(--button-border-radius);
     min-height: calc(var(--responsive-font-size) * 3);
     box-sizing: border-box;
     font-size: var(--responsive-font-size);
     padding: calc(var(--responsive-font-size) * 0.5);
+    color: var(--font-color);
     background-color: var(--sub-background-color);
   }
 }
@@ -19,37 +20,28 @@
   }
 }
 
-.episode__main,
-.episode__side {
-  display: flex;
-  align-items: center;
-  justify-content: center;
+.episode__checker {
+  --size: calc(var(--responsive-font-size) * 1);
+
+  width: var(--size);
+  height: var(--size);
   margin-right: calc(var(--responsive-font-size) * 0.5);
-  min-width: calc(var(--responsive-font-size) * 3);
-  min-height: calc(var(--responsive-font-size) * 2);
-  padding: calc(var(--responsive-font-size) * 0.2);
-  border-radius: calc(var(--responsive-font-size) * 0.4);
-}
-
-.episode__main {
-  background-color: var(--button-background-color);
-}
-
-.episode__side {
-  background-color: #00a497;
-}
-
-.episode__number {
-  padding-right: calc(var(--responsive-font-size) * 0.2);
+  flex-shrink: 0;
 }
 
 .episode__overlay {
   position: absolute;
-  border-radius: var(--button-border-radius);
   background-color: var(--font-color);
-  filter: opacity(0);
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
+}
+
+.episode .episode__overlay {
+  opacity: 0;
+}
+
+.episode--checked .episode__overlay {
+  opacity: 0.2;
 }

@@ -3,6 +3,7 @@ import { Unsubscribable } from "rxjs";
 import { domPushStream } from "../../../dom/push-dom";
 import { EpisodeSelectorProps } from "../props";
 import { onEpisodeSelect } from "./on-episode-select";
+import { onPlayPush } from "./on-play-push";
 import { onPrevPush } from "./on-prev-push";
 
 /**
@@ -17,8 +18,11 @@ export function bindEventListeners(
     domPushStream(props.prevButton).subscribe((action) => {
       onPrevPush(props, action);
     }),
+    domPushStream(props.playButton).subscribe((action) => {
+      onPlayPush(props, action);
+    }),
     ...props.episodeElements.map((stage) =>
-      stage.notifySelection().subscribe(() => {
+      stage.selectionNotifier().subscribe(() => {
         onEpisodeSelect(props, stage);
       }),
     ),

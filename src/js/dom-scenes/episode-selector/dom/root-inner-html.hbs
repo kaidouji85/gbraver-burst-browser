@@ -1,20 +1,28 @@
 <div class="{{ROOT_CLASS}}__title">チュートリアル</div>
-<div class="{{ROOT_CLASS}}__image-cuts" data-id="{{ids.imageCuts}}">
+<div class="{{ROOT_CLASS}}__episode-detail">
+  <div
+    class="{{ROOT_CLASS}}__episode-title"
+    data-id="{{ids.episodeTitle}}"
+  ></div>
   <img
-    class="{{ROOT_CLASS}}__cut-01"
-    src="{{imageCut01}}"
-    alt="イメージカット01"
+    class="{{ROOT_CLASS}}__episode-image-cut"
+    src=""
+    alt="エピソードのイメージカット"
+    data-id="{{ids.episodeImageCut}}"
   />
-  <img
-    class="{{ROOT_CLASS}}__cut-02"
-    src="{{imageCut02}}"
-    alt="イメージカット02"
-  />
-  <img
-    class="{{ROOT_CLASS}}__cut-03"
-    src="{{imageCut03}}"
-    alt="イメージカット03"
-  />
+  <div
+    class="{{ROOT_CLASS}}__episode-introduction"
+    data-id="{{ids.episodeIntroduction}}"
+  ></div>
 </div>
-<div class="{{ROOT_CLASS}}__stages" data-id="{{ids.stages}}"></div>
-<button class="{{ROOT_CLASS}}__prev" data-id="{{ids.prevButton}}">戻る</button>
+<div class="{{ROOT_CLASS}}__episodes" data-id="{{ids.episodes}}"></div>
+<div class="{{ROOT_CLASS}}__controllers">
+  <button
+    class="{{ROOT_CLASS}}__prev"
+    data-id="{{ids.prevButton}}"
+  >戻る</button>
+  <button
+    class="{{ROOT_CLASS}}__play-episode"
+    data-id="{{ids.playButton}}"
+  >このエピソードをプレイ</button>
+</div>

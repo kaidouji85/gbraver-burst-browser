@@ -3,19 +3,26 @@ import { PushDOM } from "../../../dom/push-dom";
 import { EpisodeSelectorProps } from "../props";
 
 /**
- * 戻るボタンを押した時の処理
+ * このエピソードをプレイボタンが押された時の処理
  * @param props 画面プロパティ
  * @param action アクション
  */
-export function onPrevPush(
+export function onPlayPush(
   props: Readonly<EpisodeSelectorProps>,
   action: Readonly<PushDOM>,
 ): void {
   action.event.stopPropagation();
   action.event.preventDefault();
+  const episode = props.episodeElements.find((v) => v.isChecked());
+  if (!episode) {
+    return;
+  }
+
   props.exclusive.execute(async () => {
-    props.changeValue.sound.play();
-    await pop(props.prevButton);
-    props.prev.next();
+    props.pushButtonSound.sound.play();
+    await pop(props.playButton);
+    props.episodeSelect.next({
+      id: episode.id,
+    });
   });
 }
