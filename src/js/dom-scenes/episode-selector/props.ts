@@ -28,6 +28,8 @@ export type EpisodeSelectorProps = {
   episodeTitle: HTMLElement;
   /** エピソード導入 */
   episodeIntroduction: HTMLElement;
+  /** このエピソードをプレイボタン */
+  playButton: HTMLElement;
   /** 戻るボタン */
   prevButton: HTMLElement;
   /** 排他制御 */
@@ -57,6 +59,7 @@ export function createEpisodeSelectorProps(
     episodeImageCut: domUuid(),
     episodeTitle: domUuid(),
     episodeIntroduction: domUuid(),
+    playButton: domUuid(),
     prevButton: domUuid(),
   };
   const root = document.createElement("div");
@@ -82,6 +85,7 @@ export function createEpisodeSelectorProps(
     episodeImageCut: elements.episodeImageCut,
     episodeTitle: elements.episodeTitle,
     episodeIntroduction: elements.episodeIntroduction,
+    playButton: elements.playButton,
     prevButton: elements.prevButton,
     exclusive: new Exclusive(),
     prev: new Subject(),

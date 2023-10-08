@@ -8,6 +8,8 @@ export type DataIDs = {
   episodeTitle: string;
   /** エピソード導入 */
   episodeIntroduction: string;
+  /** このエピソードをプレイボタン */
+  playButton: string;
   /** 戻るボタン */
   prevButton: string;
 };

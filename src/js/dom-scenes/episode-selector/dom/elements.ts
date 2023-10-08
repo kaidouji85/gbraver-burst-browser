@@ -10,6 +10,8 @@ type Elements = {
   episodeTitle: HTMLElement;
   /** エピソード導入 */
   episodeIntroduction: HTMLElement;
+  /** このエピソードで遊ぶボタン */
+  playButton: HTMLElement;
   /** 戻るボタン */
   prevButton: HTMLElement;
 };
@@ -37,6 +39,9 @@ export function extractElements(root: HTMLElement, ids: DataIDs): Elements {
   const episodeIntroduction: HTMLElement =
     root.querySelector(`[data-id="${ids.episodeIntroduction}"]`) ??
     document.createElement("div");
+  const playButton: HTMLElement =
+    root.querySelector(`[data-id="${ids.playButton}"]`) ??
+    document.createElement("div");
   const prevButton: HTMLElement =
     root.querySelector(`[data-id="${ids.prevButton}"]`) ??
     document.createElement("div");
@@ -45,6 +50,7 @@ export function extractElements(root: HTMLElement, ids: DataIDs): Elements {
     episodeImageCut,
     episodeTitle,
     episodeIntroduction,
+    playButton,
     prevButton,
   };
 }
