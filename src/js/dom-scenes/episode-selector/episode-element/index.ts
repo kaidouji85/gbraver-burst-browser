@@ -4,7 +4,6 @@ import type { EpisodeID } from "../../../game/episodes/episode";
 import type { Resources } from "../../../resource";
 import { Episode } from "./episode";
 import { check } from "./procedure/check";
-import { selected } from "./procedure/selected";
 import {uncheck} from "./procedure/uncheck";
 import { createEpisodeElementProps, EpisodeElementProps } from "./props";
 
@@ -53,14 +52,5 @@ export class EpisodeElement {
    */
   uncheck(): void {
     uncheck(this.#props);
-  }
-
-  /**
-   * @deprecated
-   * ステージ選択アニメーション
-   * @return アニメーションが完了したら発火するPromise
-   */
-  async selected(): Promise<void> {
-    await selected(this.#props);
   }
 }

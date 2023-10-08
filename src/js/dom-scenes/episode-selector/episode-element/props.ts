@@ -20,8 +20,6 @@ export type EpisodeElementProps = {
   root: HTMLElement;
   /** チェック */
   check: HTMLElement;
-  /** オーバーレイ */
-  overlay: HTMLElement;
   /** プッシュボタン効果音 */
   pushButton: SoundResource;
   /** 選択通知ストリーム */
@@ -39,7 +37,6 @@ export function createEpisodeElementProps(
   episode: Readonly<Episode>,
 ) {
   const ids: DataIDs = {
-    overlay: domUuid(),
     check: domUuid(),
   };
   const pushButton =
