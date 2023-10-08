@@ -19,22 +19,19 @@
   }
 }
 
-.episode__check {
+.episode__check,
+.episode__check--checked {
   --size: calc(var(--responsive-font-size) * 2);
 
   height: var(--size);
   width: var(--size);
   margin-right: calc(var(--responsive-font-size) * 0.5);
-  filter: opacity(0);
 }
 
-.episode__overlay {
-  position: absolute;
-  border-radius: var(--button-border-radius);
-  background-color: var(--font-color);
-  filter: opacity(0);
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
+.episode__check {
+  visibility: hidden;
+}
+
+.episode__check--checked {
+  visibility: visible;
 }
