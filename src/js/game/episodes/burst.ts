@@ -8,11 +8,14 @@ import { playerUuid } from "../../uuid/player";
 import { EpisodeConfig } from "./episode";
 import { EpisodeIDs } from "./episode-ids";
 
+/** 導入 */
+const introduction = `デビュー戦を見事勝利で飾ったシンヤ、そんなシンヤを見て台東高校のライト先輩は何かを企んでいるようだが……。`;
+
 /** バーストチュートリアル */
 export const burstTutorial: EpisodeConfig = {
   id: EpisodeIDs.BURST,
   title: "バーストで一発逆転",
-  introduction: "", // TODO ちゃんと書く
+  introduction,
   imageCutPathId: PathIds.TUTORIAL_IMAGE_CUT_03, // TODO 正しい画像を指定する
   player: {
     playerId: playerUuid(),
