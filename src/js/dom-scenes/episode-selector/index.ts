@@ -5,8 +5,8 @@ import type { DOMScene } from "../dom-scene";
 import { Episode } from "./episode-element/episode";
 import { EpisodeSelect } from "./episode-element/episode-select";
 import { bindEventListeners } from "./procedure/bind-event-listeners";
-import { createEpisodeSelectorProps, EpisodeSelectorProps } from "./props";
 import {initialize} from "./procedure/initialize";
+import { createEpisodeSelectorProps, EpisodeSelectorProps } from "./props";
 
 /** エピソードセレクト画面 */
 export class EpisodeSelector implements DOMScene {

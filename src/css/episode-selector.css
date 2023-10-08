@@ -11,7 +11,7 @@
     padding: var(--screen-padding-top) var(--screen-padding-right)
       var(--screen-padding-bottom) var(--screen-padding-left);
     display: grid;
-    grid-template-columns: 1fr auto;
+    grid-template-columns: 1fr 1fr;
     grid-template-rows: auto 1fr auto;
     grid-gap: calc(var(--responsive-font-size) * 0.5);
   }

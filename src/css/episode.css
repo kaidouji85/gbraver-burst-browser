@@ -28,10 +28,6 @@
   filter: opacity(0);
 }
 
-.episode__number {
-  padding-right: calc(var(--responsive-font-size) * 0.2);
-}
-
 .episode__overlay {
   position: absolute;
   border-radius: var(--button-border-radius);
