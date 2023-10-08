@@ -2,6 +2,7 @@ import { flash } from "../../../../dom/flash";
 import { EpisodeElementProps } from "../props";
 
 /**
+ * @deprecated
  * ステージ選択アニメーション
  * @return アニメーションが完了したら発火するPromise
  */

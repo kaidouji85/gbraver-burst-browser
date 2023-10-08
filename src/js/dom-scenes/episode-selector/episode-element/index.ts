@@ -3,7 +3,9 @@ import { Observable } from "rxjs";
 import type { EpisodeID } from "../../../game/episodes/episode";
 import type { Resources } from "../../../resource";
 import { Episode } from "./episode";
+import { check } from "./procedure/check";
 import { selected } from "./procedure/selected";
+import {uncheck} from "./procedure/uncheck";
 import { createEpisodeElementProps, EpisodeElementProps } from "./props";
 
 /** エピソードHTML要素 */
@@ -37,6 +39,20 @@ export class EpisodeElement {
    */
   notifySelection(): Observable<void> {
     return this.#props.select;
+  }
+
+  /**
+   * チェックする
+   */
+  check(): void {
+    check(this.#props);
+  }
+
+  /**
+   * チェックを外す
+   */
+  uncheck(): void {
+    uncheck(this.#props);
   }
 
   /**

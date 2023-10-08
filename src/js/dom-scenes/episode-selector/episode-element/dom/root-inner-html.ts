@@ -1,9 +1,9 @@
 import { Resources } from "../../../../resource";
+import {PathIds} from "../../../../resource/path/ids";
 import { Episode } from "../episode";
 import { ROOT_CLASS } from "./class-name";
 import { DataIDs } from "./data-ids";
 import rootInnerHTMLTemplate from "./root-inner-html.hbs";
-import {PathIds} from "../../../../resource/path/ids";
 
 /**
  * ルート要素のinnerHTML
