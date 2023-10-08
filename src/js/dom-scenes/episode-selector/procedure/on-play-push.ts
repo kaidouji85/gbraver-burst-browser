@@ -1,6 +1,6 @@
-import {EpisodeSelectorProps} from "../props";
-import {PushDOM} from "../../../dom/push-dom";
-import {pop} from "../../../dom/pop";
+import { pop } from "../../../dom/pop";
+import { PushDOM } from "../../../dom/push-dom";
+import { EpisodeSelectorProps } from "../props";
 
 /**
  * このエピソードをプレイボタンが押された時の処理
@@ -13,9 +13,16 @@ export function onPlayPush(
 ): void {
   action.event.stopPropagation();
   action.event.preventDefault();
+  const episode = props.episodeElements.find((v) => v.isChecked());
+  if (!episode) {
+    return;
+  }
+
   props.exclusive.execute(async () => {
     props.changeValue.sound.play();
     await pop(props.playButton);
-    //props.prev.next();
+    props.episodeSelect.next({
+      id: episode.id,
+    });
   });
 }

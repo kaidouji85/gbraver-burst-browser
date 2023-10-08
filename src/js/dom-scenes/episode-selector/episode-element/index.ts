@@ -4,9 +4,9 @@ import type { EpisodeID } from "../../../game/episodes/episode";
 import type { Resources } from "../../../resource";
 import { Episode } from "./episode";
 import { check } from "./procedure/check";
+import { isChecked } from "./procedure/is-checked";
 import { uncheck } from "./procedure/uncheck";
 import { createEpisodeElementProps, EpisodeElementProps } from "./props";
-import {isChecked} from "./procedure/is-checked";
 
 /** エピソードHTML要素 */
 export class EpisodeElement {

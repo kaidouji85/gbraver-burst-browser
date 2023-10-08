@@ -1,4 +1,4 @@
-import {EpisodeElementProps} from "../props";
+import { EpisodeElementProps } from "../props";
 
 /**
  * チェックされているか否かを判定する

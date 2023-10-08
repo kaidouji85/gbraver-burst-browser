@@ -1,4 +1,4 @@
-import {ROOT_CLASS__CHECKED} from "../dom/class-name";
+import { ROOT_CLASS__CHECKED } from "../dom/class-name";
 import { EpisodeElementProps } from "../props";
 
 /**

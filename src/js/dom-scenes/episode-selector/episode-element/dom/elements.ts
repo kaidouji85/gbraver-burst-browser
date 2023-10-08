@@ -15,7 +15,9 @@ export type Elements = {
 export function extractElements(root: HTMLElement, ids: DataIDs): Elements {
   const foundChecker = root.querySelector(`[data-id="${ids.checker}"]`);
   const checker: HTMLInputElement =
-    foundChecker instanceof HTMLInputElement ? foundChecker : document.createElement("input");
+    foundChecker instanceof HTMLInputElement
+      ? foundChecker
+      : document.createElement("input");
   return {
     checker,
   };

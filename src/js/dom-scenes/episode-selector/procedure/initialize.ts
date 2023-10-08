@@ -1,5 +1,5 @@
-import {EpisodeSelectorProps} from "../props";
-import {setEpisodeDetail} from "./set-episode-detail";
+import { EpisodeSelectorProps } from "../props";
+import { setEpisodeDetail } from "./set-episode-detail";
 
 /**
  * 初期化

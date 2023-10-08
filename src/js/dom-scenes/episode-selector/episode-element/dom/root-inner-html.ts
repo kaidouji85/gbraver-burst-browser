@@ -9,10 +9,7 @@ import rootInnerHTMLTemplate from "./root-inner-html.hbs";
  * @param episode エピソード情報
  * @return innerHTML
  */
-export function rootInnerHTML(
-  ids: DataIDs,
-  episode: Episode,
-): string {
+export function rootInnerHTML(ids: DataIDs, episode: Episode): string {
   return rootInnerHTMLTemplate({
     ...episode,
     ids,
