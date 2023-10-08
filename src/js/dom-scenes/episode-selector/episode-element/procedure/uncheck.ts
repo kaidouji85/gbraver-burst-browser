@@ -1,5 +1,5 @@
-import { EpisodeElementProps } from "../props";
 import {ROOT_CLASS} from "../dom/class-name";
+import { EpisodeElementProps } from "../props";
 
 /**
  * チェックを外す
