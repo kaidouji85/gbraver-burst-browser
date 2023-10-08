@@ -18,6 +18,8 @@ import { Episode } from "./episode";
 export type EpisodeElementProps = {
   /** ルートHTML要素 */
   root: HTMLElement;
+  /** チェック */
+  check: HTMLElement;
   /** オーバーレイ */
   overlay: HTMLElement;
   /** プッシュボタン効果音 */
@@ -38,6 +40,7 @@ export function createEpisodeElementProps(
 ) {
   const ids: DataIDs = {
     overlay: domUuid(),
+    check: domUuid(),
   };
   const pushButton =
     resources.sounds.find((v) => v.id === SOUND_IDS.PUSH_BUTTON) ??
@@ -53,8 +56,8 @@ export function createEpisodeElementProps(
     }),
   );
   return {
+    ...elements,
     root,
-    overlay: elements.overlay,
     pushButton,
     select,
   };

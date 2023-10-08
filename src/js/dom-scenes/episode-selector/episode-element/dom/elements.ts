@@ -2,6 +2,8 @@ import { DataIDs } from "./data-ids";
 
 /** ルート要素の子孫要素 */
 export type Elements = {
+  /** チェック */
+  check: HTMLElement;
   /** オーバーレイ */
   overlay: HTMLElement;
 };
@@ -16,7 +18,11 @@ export function extractElements(root: HTMLElement, ids: DataIDs): Elements {
   const overlay: HTMLElement =
     root.querySelector(`[data-id="${ids.overlay}"]`) ??
     document.createElement("div");
+  const check: HTMLElement =
+    root.querySelector(`[data-id="${ids.check}"]`) ??
+    document.createElement("div");
   return {
     overlay,
+    check
   };
 }
