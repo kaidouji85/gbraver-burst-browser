@@ -44,7 +44,7 @@ export function createEpisodeElementProps(
     createEmptySoundResource();
   const root = document.createElement("div");
   root.className = ROOT_CLASS;
-  root.innerHTML = rootInnerHTML(ids, resources, episode);
+  root.innerHTML = rootInnerHTML(ids, episode);
   const elements = extractElements(root, ids);
   const select = domClickStream(root).pipe(
     map((action) => {

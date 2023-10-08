@@ -5,21 +5,12 @@
     position: relative;
     display: flex;
     align-items: center;
-    border-radius: var(--button-border-radius);
     min-height: calc(var(--responsive-font-size) * 3);
     box-sizing: border-box;
     font-size: var(--responsive-font-size);
     padding: calc(var(--responsive-font-size) * 0.5);
-
-  }
-
-  .episode {
     color: var(--font-color);
     background-color: var(--sub-background-color);
-  }
-
-  .episode--checked {
-    background-color: #a9a9a9;
   }
 }
 
@@ -29,18 +20,19 @@
   }
 }
 
-.episode__check {
-  --size: calc(var(--responsive-font-size) * 2);
-
-  height: var(--size);
-  width: var(--size);
-  margin-right: calc(var(--responsive-font-size) * 0.5);
+.episode__overlay {
+  position: absolute;
+  background-color: var(--font-color);
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
 }
 
-.episode .episode__check {
-  visibility: hidden;
+.episode .episode__overlay {
+  opacity: 0;
 }
 
-.episode--checked .episode__check {
-  visibility: visible;
+.episode--checked .episode__overlay {
+  opacity: 0.4;
 }
