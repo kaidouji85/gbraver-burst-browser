@@ -1,7 +1,7 @@
 import { Resources } from "../../../../resource";
 import { PathIds } from "../../../../resource/path/ids";
 import { Episode } from "../episode";
-import {CHECK, ROOT_CLASS } from "./class-name";
+import {CHECK_CLASS, ROOT_CLASS } from "./class-name";
 import { DataIDs } from "./data-ids";
 import rootInnerHTMLTemplate from "./root-inner-html.hbs";
 
@@ -22,7 +22,7 @@ export function rootInnerHTML(
     ...episode,
     ids,
     ROOT_CLASS,
-    CHECK,
+    CHECK_CLASS,
     check,
   });
 }
