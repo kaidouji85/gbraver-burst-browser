@@ -27,7 +27,8 @@ export class EpisodeElement {
    */
   constructor(resources: Resources, episode: Episode) {
     this.id = episode.id;
-    this.imageCutPath = episode.imageCutPathId;
+    this.imageCutPath =
+      resources.paths.find((v) => v.id === episode.imageCutPathId)?.path ?? "";
     this.title = episode.title;
     this.introduction = episode.introduction;
     this.#props = createEpisodeElementProps(resources, episode);

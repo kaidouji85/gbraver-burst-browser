@@ -11,7 +11,7 @@ import { domUuid } from "../../uuid/dom-uuid";
 import { ROOT_CLASS } from "./dom/class-name";
 import { extractElements } from "./dom/elements";
 import { rootInnerHTML } from "./dom/root-inner-html";
-import { stageSeparator } from "./dom/stage-separator";
+import { episodeSeparator } from "./dom/episode-separator";
 import { EpisodeElement } from "./episode-element";
 import { Episode } from "./episode-element/episode";
 import { EpisodeSelect } from "./episode-element/episode-select";
@@ -69,7 +69,7 @@ export function createEpisodeSelectorProps(
   const stageElementsWithLastRemoved = episodeElements.slice(0, -1);
   stageElementsWithLastRemoved.forEach((stage) => {
     elements.episodes.appendChild(stage.getRootHTMLElement());
-    elements.episodes.appendChild(stageSeparator());
+    elements.episodes.appendChild(episodeSeparator());
   });
   const lastStageElement = episodeElements[episodeElements.length - 1];
   if (lastStageElement) {

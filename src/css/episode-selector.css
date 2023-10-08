@@ -36,19 +36,14 @@
   justify-content: center;
 }
 
-.episode-selector__image-cuts {
+.episode-selector__episode-detail {
   grid-row: 1 / 4;
   grid-column: 1;
-  position: relative;
-  border-radius: var(--button-border-radius);
-}
-
-.episode-selector__episode-detail {
   border-radius: var(--button-border-radius);
   filter: brightness(0.7);
 }
 
-.episode-selector__stages {
+.episode-selector__episodes {
   grid-row: 2;
   grid-column: 2;
   display: flex;
@@ -60,7 +55,7 @@
   overflow-y: scroll;
 }
 
-.episode-selector__stage-separator {
+.episode-selector__episode-separator {
   border-bottom: dashed 1px var(--font-color);
   margin-bottom: calc(var(--responsive-font-size) * 0.7) 0;
 }
