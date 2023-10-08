@@ -38,8 +38,10 @@ export type EpisodeSelectorProps = {
   prev: Subject<void>;
   /** エピソード選択ストリーム */
   episodeSelect: Subject<EpisodeSelect>;
-  /** 値変更効果音 */
-  changeValue: SoundResource;
+  /** 値変更 効果音 */
+  changeValueSound: SoundResource;
+  /** ボタン押下 効果音 */
+  pushButtonSound: SoundResource;
   /** イメージカットのロード完了したら発火するPromise */
   isImageCutsLoaded: Promise<unknown>;
 };
@@ -90,8 +92,11 @@ export function createEpisodeSelectorProps(
     exclusive: new Exclusive(),
     prev: new Subject(),
     episodeSelect: new Subject(),
-    changeValue:
+    changeValueSound:
       resources.sounds.find((v) => v.id === SOUND_IDS.CHANGE_VALUE) ??
+      createEmptySoundResource(),
+    pushButtonSound:
+      resources.sounds.find((v) => v.id === SOUND_IDS.PUSH_BUTTON) ??
       createEmptySoundResource(),
     isImageCutsLoaded: Promise.resolve(),
   };

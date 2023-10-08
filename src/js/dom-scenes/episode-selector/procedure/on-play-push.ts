@@ -19,7 +19,7 @@ export function onPlayPush(
   }
 
   props.exclusive.execute(async () => {
-    props.changeValue.sound.play();
+    props.pushButtonSound.sound.play();
     await pop(props.playButton);
     props.episodeSelect.next({
       id: episode.id,

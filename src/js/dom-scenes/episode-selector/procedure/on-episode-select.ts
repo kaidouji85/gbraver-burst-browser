@@ -13,6 +13,7 @@ export function onEpisodeSelect(
 ): void {
   episodeElement.check();
   setEpisodeDetail(props, episodeElement);
+  props.changeValueSound.sound.play();
   props.episodeElements
     .filter((v) => v.id !== episodeElement.id)
     .forEach((v) => v.uncheck());
