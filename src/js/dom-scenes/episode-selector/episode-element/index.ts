@@ -37,7 +37,7 @@ export class EpisodeElement {
    * 選択通知
    * @return 通知ストリーム
    */
-  notifySelection(): Observable<void> {
+  selectionNotifier(): Observable<void> {
     return this.#props.select;
   }
 

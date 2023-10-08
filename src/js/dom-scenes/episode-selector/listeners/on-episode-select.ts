@@ -10,10 +10,8 @@ export function onEpisodeSelect(
   props: Readonly<EpisodeSelectorProps>,
   episodeElement: EpisodeElement,
 ): void {
-  props.exclusive.execute(async () => {
-    await episodeElement.selected();
-    props.episodeSelect.next({
-      id: episodeElement.id,
-    });
-  });
+  episodeElement.check();
+  props.episodeElements
+    .filter(v => v.id !== episodeElement.id)
+    .forEach(v => v.uncheck());
 }

@@ -6,5 +6,4 @@ import {EpisodeElementProps} from "../props";
  */
 export function uncheck(props: Readonly<EpisodeElementProps>): void {
   props.check.style.filter = "opacity(0)";
-  props.overlay.style.filter = "opacity(0)";
 }
