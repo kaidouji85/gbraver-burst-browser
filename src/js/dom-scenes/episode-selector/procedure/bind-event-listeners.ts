@@ -4,6 +4,7 @@ import { domPushStream } from "../../../dom/push-dom";
 import { EpisodeSelectorProps } from "../props";
 import { onEpisodeSelect } from "./on-episode-select";
 import { onPrevPush } from "./on-prev-push";
+import {onPlayPush} from "./on-play-push";
 
 /**
  * 画面にイベントリスナをバインドする
@@ -16,6 +17,9 @@ export function bindEventListeners(
   return [
     domPushStream(props.prevButton).subscribe((action) => {
       onPrevPush(props, action);
+    }),
+    domPushStream(props.playButton).subscribe((action) => {
+      onPlayPush(props, action);
     }),
     ...props.episodeElements.map((stage) =>
       stage.selectionNotifier().subscribe(() => {

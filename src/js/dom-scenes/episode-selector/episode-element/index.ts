@@ -6,6 +6,7 @@ import { Episode } from "./episode";
 import { check } from "./procedure/check";
 import { uncheck } from "./procedure/uncheck";
 import { createEpisodeElementProps, EpisodeElementProps } from "./props";
+import {isChecked} from "./procedure/is-checked";
 
 /** エピソードHTML要素 */
 export class EpisodeElement {
@@ -62,5 +63,13 @@ export class EpisodeElement {
    */
   uncheck(): void {
     uncheck(this.#props);
+  }
+
+  /**
+   * チェックされているか否かを判定する
+   * @return trueでチェックされている
+   */
+  isChecked(): boolean {
+    return isChecked(this.#props);
   }
 }
