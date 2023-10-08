@@ -4,8 +4,9 @@ import type { Resources } from "../../resource";
 import type { DOMScene } from "../dom-scene";
 import { Episode } from "./episode-element/episode";
 import { EpisodeSelect } from "./episode-element/episode-select";
-import { bindEventListeners } from "./listeners/bind-event-listeners";
+import { bindEventListeners } from "./procedure/bind-event-listeners";
 import { createEpisodeSelectorProps, EpisodeSelectorProps } from "./props";
+import {initialize} from "./procedure/initialize";
 
 /** エピソードセレクト画面 */
 export class EpisodeSelector implements DOMScene {
@@ -22,6 +23,7 @@ export class EpisodeSelector implements DOMScene {
   constructor(resources: Resources, episodes: Episode[]) {
     this.#props = createEpisodeSelectorProps(resources, episodes);
     this.#unsubscribers = bindEventListeners(this.#props);
+    initialize(this.#props);
   }
 
   /** @override */
