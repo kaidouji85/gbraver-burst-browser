@@ -39,12 +39,12 @@
 .episode-selector__episode-detail {
   grid-row: 1 / 4;
   grid-column: 1;
-  border-radius: var(--button-border-radius);
-  filter: brightness(0.7);
 }
 
 .episode-selector__episode-image-cut {
   width: 100%;
+  border-radius: var(--button-border-radius);
+  filter: brightness(0.7);
 }
 
 .episode-selector__episodes {
