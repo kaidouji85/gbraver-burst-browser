@@ -2,8 +2,15 @@ import { DataIDs } from "./data-ids";
 
 /** ルート要素の子孫要素 */
 type Elements = {
-  stages: HTMLElement;
-  imageCuts: HTMLElement;
+  /** エピソード一覧 */
+  episodes: HTMLElement;
+  /** エピソードのイメージカット */
+  episodeImageCut: HTMLElement;
+  /** エピソードタイトル */
+  episodeTitle: HTMLElement;
+  /** エピソード導入 */
+  episodeIntroduction: HTMLElement;
+  /** 戻るボタン */
   prevButton: HTMLElement;
 };
 
@@ -14,18 +21,26 @@ type Elements = {
  * @return 抽出結果
  */
 export function extractElements(root: HTMLElement, ids: DataIDs): Elements {
-  const stages: HTMLElement =
-    root.querySelector(`[data-id="${ids.stages}"]`) ??
+  const episodes: HTMLElement =
+    root.querySelector(`[data-id="${ids.episodes}"]`) ??
     document.createElement("div");
-  const imageCuts: HTMLElement =
-    root.querySelector(`[data-id="${ids.imageCuts}"]`) ??
+  const episodeImageCut: HTMLElement =
+    root.querySelector(`[data-id="${ids.episodeImageCut}"]`) ??
+    document.createElement("div");
+  const episodeTitle: HTMLElement =
+    root.querySelector(`[data-id="${ids.episodeTitle}"]`) ??
+    document.createElement("div");
+  const episodeIntroduction: HTMLElement =
+    root.querySelector(`[data-id="${ids.episodeIntroduction}"]`) ??
     document.createElement("div");
   const prevButton: HTMLElement =
     root.querySelector(`[data-id="${ids.prevButton}"]`) ??
     document.createElement("div");
   return {
-    stages,
-    imageCuts,
+    episodes,
+    episodeImageCut,
+    episodeTitle,
+    episodeIntroduction,
     prevButton,
   };
 }
