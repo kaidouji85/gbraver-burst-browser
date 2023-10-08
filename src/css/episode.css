@@ -31,6 +31,12 @@
   border-radius: calc(var(--responsive-font-size) * 0.4);
 }
 
+.episode__check {
+  --size: calc(var(--responsive-font-size) * 1.5);
+  height: var(--size);
+  width: var(--size);
+}
+
 .episode__main {
   background-color: var(--button-background-color);
 }

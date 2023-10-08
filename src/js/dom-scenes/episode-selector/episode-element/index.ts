@@ -40,6 +40,7 @@ export class EpisodeElement {
   }
 
   /**
+   * @deprecated
    * ステージ選択アニメーション
    * @return アニメーションが完了したら発火するPromise
    */
