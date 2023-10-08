@@ -19,7 +19,7 @@ export type EpisodeElementProps = {
   /** ルートHTML要素 */
   root: HTMLElement;
   /** チェック */
-  check: HTMLElement;
+  checker: HTMLInputElement;
   /** プッシュボタン効果音 */
   pushButton: SoundResource;
   /** 選択通知ストリーム */
@@ -37,7 +37,7 @@ export function createEpisodeElementProps(
   episode: Readonly<Episode>,
 ) {
   const ids: DataIDs = {
-    check: domUuid(),
+    checker: domUuid(),
   };
   const pushButton =
     resources.sounds.find((v) => v.id === SOUND_IDS.PUSH_BUTTON) ??

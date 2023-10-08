@@ -3,7 +3,7 @@ import { DataIDs } from "./data-ids";
 /** ルート要素の子孫要素 */
 export type Elements = {
   /** チェック */
-  check: HTMLElement;
+  checker: HTMLInputElement;
 };
 
 /**
@@ -13,10 +13,10 @@ export type Elements = {
  * @return 抽出結果
  */
 export function extractElements(root: HTMLElement, ids: DataIDs): Elements {
-  const check: HTMLElement =
-    root.querySelector(`[data-id="${ids.check}"]`) ??
-    document.createElement("div");
+  const foundChecker = root.querySelector(`[data-id="${ids.checker}"]`);
+  const checker: HTMLInputElement =
+    foundChecker instanceof HTMLInputElement ? foundChecker : document.createElement("input");
   return {
-    check,
+    checker,
   };
 }

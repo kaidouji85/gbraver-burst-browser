@@ -7,4 +7,5 @@ import { EpisodeElementProps } from "../props";
  */
 export function uncheck(props: Readonly<EpisodeElementProps>): void {
   props.root.className = ROOT_CLASS;
+  props.checker.checked = false;
 }

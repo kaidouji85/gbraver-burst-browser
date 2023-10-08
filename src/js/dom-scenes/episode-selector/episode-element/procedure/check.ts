@@ -7,4 +7,5 @@ import { EpisodeElementProps } from "../props";
  */
 export function check(props: Readonly<EpisodeElementProps>): void {
   props.root.className = ROOT_CLASS__CHECKED;
+  props.checker.checked = true;
 }
