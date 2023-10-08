@@ -2,6 +2,7 @@
 @media (orientation: landscape) {
   .episode-selector {
     --controllers-z-index: 1;
+    --gap: calc(var(--responsive-font-size) * 0.4);
 
     width: var(--screen-width);
     height: var(--screen-height);
@@ -13,7 +14,7 @@
     display: grid;
     grid-template-columns: 1fr 1fr;
     grid-template-rows: auto 1fr auto;
-    grid-gap: calc(var(--responsive-font-size) * 0.5);
+    grid-gap: var(--gap);
   }
 }
 
@@ -79,7 +80,7 @@
   grid-row: 3;
   grid-column: 2;
   display: flex;
-  gap: calc(var(--responsive-font-size) * 0.5);
+  gap: var(--gap);
 }
 
 .episode-selector__prev,
