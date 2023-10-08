@@ -39,6 +39,12 @@
 .episode-selector__episode-detail {
   grid-row: 1 / 4;
   grid-column: 1;
+  border-radius: var(--button-border-radius);
+  box-sizing: border-box;
+  font-size: var(--responsive-font-size);
+  padding: calc(var(--responsive-font-size) * 0.5);
+  background-color: var(--sub-background-color);
+  overflow: auto;
 }
 
 .episode-selector__episode-image-cut {
