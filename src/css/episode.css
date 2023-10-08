@@ -19,30 +19,11 @@
   }
 }
 
-.episode__main,
-.episode__side {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-right: calc(var(--responsive-font-size) * 0.5);
-  min-width: calc(var(--responsive-font-size) * 3);
-  min-height: calc(var(--responsive-font-size) * 2);
-  padding: calc(var(--responsive-font-size) * 0.2);
-  border-radius: calc(var(--responsive-font-size) * 0.4);
-}
-
 .episode__check {
-  --size: calc(var(--responsive-font-size) * 1.5);
+  --size: calc(var(--responsive-font-size) * 2);
   height: var(--size);
   width: var(--size);
-}
-
-.episode__main {
-  background-color: var(--button-background-color);
-}
-
-.episode__side {
-  background-color: #00a497;
+  margin-right: calc(var(--responsive-font-size) * 0.5);
 }
 
 .episode__number {
