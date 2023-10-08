@@ -19,7 +19,6 @@
   }
 
   .episode--checked {
-    /*color: gray;*/
     background-color: #a9a9a9;
   }
 }
@@ -30,8 +29,7 @@
   }
 }
 
-.episode__check,
-.episode__check--checked {
+.episode__check {
   --size: calc(var(--responsive-font-size) * 2);
 
   height: var(--size);
@@ -39,10 +37,10 @@
   margin-right: calc(var(--responsive-font-size) * 0.5);
 }
 
-.episode__check {
+.episode .episode__check {
   visibility: hidden;
 }
 
-.episode__check--checked {
+.episode--checked .episode__check {
   visibility: visible;
 }
