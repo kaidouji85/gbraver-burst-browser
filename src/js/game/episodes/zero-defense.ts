@@ -9,7 +9,7 @@ import { EpisodeConfig } from "./episode";
 import { EpisodeIDs } from "./episode-ids";
 
 /** イントロダクション */
-const introduction = `今日は機動倶楽部の新人戦、シンヤは同学年のガイと対峙することになるが序盤からリードをとられてしまい……`;
+const introduction = `今日は機動倶楽部の新人戦、シンヤは同学年のガイと対峙することになるが序盤からリードをとられてしまい……。`;
 
 /** ゼロ防御チュートリアル */
 export const zeroDefenseTutorial: EpisodeConfig = {
