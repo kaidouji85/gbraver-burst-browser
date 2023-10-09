@@ -1,12 +1,7 @@
 import { map, Observable } from "rxjs";
 
-import { domClickStream } from "../../../dom/push-dom";
+import { domPushStream } from "../../../dom/push-dom";
 import { Resources } from "../../../resource";
-import {
-  createEmptySoundResource,
-  SOUND_IDS,
-  SoundResource,
-} from "../../../resource/sound";
 import { domUuid } from "../../../uuid/dom-uuid";
 import { ROOT_CLASS } from "./dom/class-name";
 import { DataIDs } from "./dom/data-ids";
@@ -20,8 +15,6 @@ export type EpisodeElementProps = {
   root: HTMLElement;
   /** チェック */
   checker: HTMLInputElement;
-  /** プッシュボタン効果音 */
-  pushButton: SoundResource;
   /** 選択通知ストリーム */
   select: Observable<void>;
 };
@@ -39,14 +32,11 @@ export function createEpisodeElementProps(
   const ids: DataIDs = {
     checker: domUuid(),
   };
-  const pushButton =
-    resources.sounds.find((v) => v.id === SOUND_IDS.PUSH_BUTTON) ??
-    createEmptySoundResource();
   const root = document.createElement("div");
   root.className = ROOT_CLASS;
   root.innerHTML = rootInnerHTML(ids, episode);
   const elements = extractElements(root, ids);
-  const select = domClickStream(root).pipe(
+  const select = domPushStream(root).pipe(
     map((action) => {
       action.event.preventDefault();
       action.event.stopPropagation();
@@ -55,7 +45,6 @@ export function createEpisodeElementProps(
   return {
     ...elements,
     root,
-    pushButton,
     select,
   };
 }
