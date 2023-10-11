@@ -32,7 +32,7 @@ export class EpisodeElement {
       resources.paths.find((v) => v.id === episode.imageCutPathId)?.path ?? "";
     this.title = `${episode.type}${episode.number}. ${episode.title}`;
     this.introduction = episode.introduction;
-    this.#props = createEpisodeElementProps(resources, episode);
+    this.#props = createEpisodeElementProps(episode);
   }
 
   /**
@@ -47,7 +47,7 @@ export class EpisodeElement {
    * 選択通知
    * @return 通知ストリーム
    */
-  selectionNotifier(): Observable<void> {
+  selectionNotifier(): Observable<EpisodeID> {
     return this.#props.select;
   }
 
