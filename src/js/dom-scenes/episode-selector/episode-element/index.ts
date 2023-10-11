@@ -4,6 +4,7 @@ import { EpisodeID } from "../../../game/episodes/episode";
 import { Episode } from "../episode";
 import { isChecked } from "./procedure/is-checked";
 import { createEpisodeElementProps, EpisodeElementProps } from "./props";
+import { checked } from "./procedure/checked";
 
 /** エピソードHTML要素 */
 export class EpisodeElement {
@@ -43,5 +44,13 @@ export class EpisodeElement {
    */
   isChecked(): boolean {
     return isChecked(this.#props);
+  }
+
+  /**
+   * チェック状態を変更する
+   * @param isChecked trueでチェックする
+   */
+  checked(isChecked: boolean): void {
+    checked(this.#props, isChecked);
   }
 }
