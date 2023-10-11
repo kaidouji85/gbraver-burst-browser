@@ -18,5 +18,9 @@ export const TutorialPathConfigs: PathConfig[] = [
   {
     id: PathIds.IMAGE_CUT_PILOT_SKILL_01,
     path: (root) => `${root.get()}/episodes/image-cut-pilot-skill-01.webp`,
-  }
+  },
+  {
+    id: PathIds.IMAGE_CUT_PILOT_SKILL_02,
+    path: (root) => `${root.get()}/episodes/image-cut-pilot-skill-02.webp`,
+  },
 ];

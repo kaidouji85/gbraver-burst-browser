@@ -8,12 +8,15 @@ import { playerUuid } from "../../uuid/player";
 import { EpisodeConfig } from "./episode";
 import { EpisodeIDs } from "./episode-ids";
 
+/** 導入 */
+const introduction = `なぜか大田高校と合同練習することになったガイ。あのシンヤも勝てなかったツバサ先輩に、ガイは勝利することはできるのだろうか……。`;
+
 /** パイロットスキルチュートリアル（後半） */
 export const pilotSkillTutorial02: EpisodeConfig = {
   id: EpisodeIDs.Pilot02,
   title: "パイロットスキルで意表を突け",
-  introduction: "", // TODO ちゃんと書く
-  imageCutPathId: PathIds.IMAGE_CUT_BATTERY_SYSTEM, // TODO 正しい画像を指定する
+  introduction,
+  imageCutPathId: PathIds.IMAGE_CUT_PILOT_SKILL_02,
   player: {
     playerId: playerUuid(),
     armdozer:
