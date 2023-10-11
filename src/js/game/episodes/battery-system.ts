@@ -17,7 +17,7 @@ export const batterySystemTutorial: EpisodeConfig = {
   id: EpisodeIDs.BATTERY_SYSTEM,
   title: "バッテリーシステムの基本",
   introduction,
-  imageCutPathId: PathIds.TUTORIAL_IMAGE_CUT_01,
+  imageCutPathId: PathIds.IMAGE_CUT_BATTERY_SYSTEM,
   player: {
     playerId: playerUuid(),
     armdozer:

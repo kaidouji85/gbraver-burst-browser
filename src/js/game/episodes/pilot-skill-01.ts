@@ -13,7 +13,7 @@ export const pilotSkillTutorial01: EpisodeConfig = {
   id: EpisodeIDs.Pilot01,
   title: "パイロット次第では詰み（負けイベント）",
   introduction: "", // TODO ちゃんと書く
-  imageCutPathId: PathIds.TUTORIAL_IMAGE_CUT_01, // TODO 正しい画像を指定する
+  imageCutPathId: PathIds.IMAGE_CUT_BATTERY_SYSTEM, // TODO 正しい画像を指定する
   player: {
     playerId: playerUuid(),
     armdozer:

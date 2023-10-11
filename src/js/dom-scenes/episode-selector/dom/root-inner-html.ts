@@ -12,13 +12,13 @@ import rootInnerHTMLTemplate from "./root-inner-html.hbs";
  */
 export function rootInnerHTML(ids: DataIDs, resources: Resources): string {
   const imageCut01 =
-    resources.paths.find((v) => v.id === PathIds.TUTORIAL_IMAGE_CUT_01)?.path ??
+    resources.paths.find((v) => v.id === PathIds.IMAGE_CUT_BATTERY_SYSTEM)?.path ??
     "";
   const imageCut02 =
-    resources.paths.find((v) => v.id === PathIds.TUTORIAL_IMAGE_CUT_02)?.path ??
+    resources.paths.find((v) => v.id === PathIds.IMAGE_CUT_ZERO_DEFENSE)?.path ??
     "";
   const imageCut03 =
-    resources.paths.find((v) => v.id === PathIds.TUTORIAL_IMAGE_CUT_03)?.path ??
+    resources.paths.find((v) => v.id === PathIds.IMAGE_CUT_BURST)?.path ??
     "";
   return rootInnerHTMLTemplate({
     ids,

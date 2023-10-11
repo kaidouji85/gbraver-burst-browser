@@ -13,7 +13,7 @@ export const pilotSkillTutorial02: EpisodeConfig = {
   id: EpisodeIDs.Pilot02,
   title: "パイロットスキルで意表を突け",
   introduction: "", // TODO ちゃんと書く
-  imageCutPathId: PathIds.TUTORIAL_IMAGE_CUT_01, // TODO 正しい画像を指定する
+  imageCutPathId: PathIds.IMAGE_CUT_BATTERY_SYSTEM, // TODO 正しい画像を指定する
   player: {
     playerId: playerUuid(),
     armdozer:
