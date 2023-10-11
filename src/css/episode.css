@@ -39,9 +39,10 @@
 }
 
 .episode .episode__overlay {
-  opacity: 0;
+  display: none;
 }
 
-.episode--checked .episode__overlay {
+.episode__checker:checked ~ .episode__overlay {
   opacity: 0.2;
+  display: block;
 }
