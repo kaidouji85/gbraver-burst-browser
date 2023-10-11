@@ -7,7 +7,7 @@ import { ROOT_CLASS } from "./dom/class-name";
 import { DataIDs } from "./dom/data-ids";
 import { extractElements } from "./dom/elements";
 import { rootInnerHTML } from "./dom/root-inner-html";
-import { Episode } from "./episode";
+import { Episode } from "../episode";
 
 /** エピソードHTML要素プロパティ */
 export type EpisodeElementProps = {

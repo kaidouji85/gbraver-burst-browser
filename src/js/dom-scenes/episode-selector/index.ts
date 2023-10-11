@@ -2,7 +2,7 @@ import { Observable, Unsubscribable } from "rxjs";
 
 import type { Resources } from "../../resource";
 import type { DOMScene } from "../dom-scene";
-import { Episode } from "./episode-element/episode";
+import { Episode } from "./episode";
 import { EpisodeSelect } from "./episode-element/episode-select";
 import { bindEventListeners } from "./procedure/bind-event-listeners";
 import { initialize } from "./procedure/initialize";

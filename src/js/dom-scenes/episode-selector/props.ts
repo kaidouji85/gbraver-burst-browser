@@ -13,7 +13,7 @@ import { extractElements } from "./dom/elements";
 import { episodeSeparator } from "./dom/episode-separator";
 import { rootInnerHTML } from "./dom/root-inner-html";
 import { EpisodeElement } from "./episode-element";
-import { Episode } from "./episode-element/episode";
+import { Episode } from "./episode";
 import { EpisodeSelect } from "./episode-element/episode-select";
 
 /** エピソードセレクタ画面プロパティ */

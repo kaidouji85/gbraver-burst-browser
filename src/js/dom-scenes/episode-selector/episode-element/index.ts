@@ -2,7 +2,7 @@ import { Observable } from "rxjs";
 
 import type { EpisodeID } from "../../../game/episodes/episode";
 import type { Resources } from "../../../resource";
-import { Episode } from "./episode";
+import { Episode } from "../episode";
 import { check } from "./procedure/check";
 import { isChecked } from "./procedure/is-checked";
 import { uncheck } from "./procedure/uncheck";
