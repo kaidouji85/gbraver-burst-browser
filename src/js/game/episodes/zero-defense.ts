@@ -16,7 +16,7 @@ export const zeroDefenseTutorial: EpisodeConfig = {
   id: EpisodeIDs.ZERO_DEFENSE,
   title: "ゼロ防御だと即死する",
   introduction,
-  imageCutPathId: PathIds.IMAGE_CUT_ZERO_DEFENSE, // TODO 正しい画像を指定する
+  imageCutPathId: PathIds.IMAGE_CUT_ZERO_DEFENSE,
   player: {
     playerId: playerUuid(),
     armdozer:

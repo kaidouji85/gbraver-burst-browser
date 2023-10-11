@@ -4,7 +4,7 @@ import { BatteryIconPathConfigs } from "./battery-icon";
 import { CheckPathConfigs } from "./check";
 import { DialogPathConfig } from "./dialog";
 import { EndingPathConfigs } from "./ending";
-import { TutorialPathConfigs } from "./episodes";
+import { EpisodePathConfigs } from "./episodes";
 import { GaiPathConfigs } from "./gai";
 import { GenesisBraverPathConfigs } from "./genesis-braver";
 import { HelpIconPathConfigs } from "./help-icon";
@@ -40,7 +40,7 @@ export const PathConfigs: PathConfig[] = [
   ...PlayInLandscapePathConfigs,
   ...CheckPathConfigs,
   ...NPCCoursePathConfigs,
-  ...TutorialPathConfigs,
+  ...EpisodePathConfigs,
   ...BatteryIconPathConfigs,
   ...HelpIconPathConfigs,
   ...MessageWindowPathConfigs,

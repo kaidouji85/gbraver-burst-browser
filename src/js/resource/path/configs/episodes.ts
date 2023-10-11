@@ -1,8 +1,8 @@
 import { PathIds } from "../ids";
 import { PathConfig } from "../resource";
 
-/** チュートリアル パス設定 */
-export const TutorialPathConfigs: PathConfig[] = [
+/** エピソード パス設定 */
+export const EpisodePathConfigs: PathConfig[] = [
   {
     id: PathIds.IMAGE_CUT_BATTERY_SYSTEM,
     path: (root) => `${root.get()}/episodes/image-cut-battery-system.webp`,
