@@ -33,8 +33,8 @@ export function createEpisodeElementProps(episode: Readonly<Episode>) {
   const elements = extractElements(root, ids);
   const select = domPushStream(root).pipe(
     map((action) => {
-      action.event.preventDefault();
-      action.event.stopPropagation();
+      //action.event.preventDefault();
+      //action.event.stopPropagation();
     }),
   );
   return {

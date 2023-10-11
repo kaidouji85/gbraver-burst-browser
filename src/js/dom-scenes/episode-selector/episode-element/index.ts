@@ -40,17 +40,19 @@ export class EpisodeElement {
   }
 
   /**
+   * @deprecated
    * チェックする
    */
   check(): void {
-    check(this.#props);
+    //check(this.#props);
   }
 
   /**
+   * @deprecated
    * チェックを外す
    */
   uncheck(): void {
-    uncheck(this.#props);
+    //uncheck(this.#props);
   }
 
   /**
