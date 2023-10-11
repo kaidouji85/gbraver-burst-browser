@@ -1,4 +1,4 @@
-import {fromEvent, Observable} from "rxjs";
+import { fromEvent, Observable } from "rxjs";
 
 import { domUuid } from "../../../uuid/dom-uuid";
 import { Episode } from "../episode";
