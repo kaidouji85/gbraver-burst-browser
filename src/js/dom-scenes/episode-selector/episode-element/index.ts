@@ -2,9 +2,7 @@ import { Observable } from "rxjs";
 
 import { EpisodeID } from "../../../game/episodes/episode";
 import { Episode } from "../episode";
-import { check } from "./procedure/check";
 import { isChecked } from "./procedure/is-checked";
-import { uncheck } from "./procedure/uncheck";
 import { createEpisodeElementProps, EpisodeElementProps } from "./props";
 
 /** エピソードHTML要素 */
@@ -37,22 +35,6 @@ export class EpisodeElement {
    */
   selectionNotifier(): Observable<unknown> {
     return this.#props.select;
-  }
-
-  /**
-   * @deprecated
-   * チェックする
-   */
-  check(): void {
-    //check(this.#props);
-  }
-
-  /**
-   * @deprecated
-   * チェックを外す
-   */
-  uncheck(): void {
-    //uncheck(this.#props);
   }
 
   /**

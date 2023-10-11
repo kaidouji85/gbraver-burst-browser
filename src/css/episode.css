@@ -1,7 +1,6 @@
 /** エピソード情報 */
 @media (orientation: landscape) {
-  .episode,
-  .episode--checked {
+  .episode {
     position: relative;
     display: flex;
     align-items: center;
