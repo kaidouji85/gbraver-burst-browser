@@ -16,5 +16,6 @@ export function initialize(props: Readonly<EpisodeSelectorProps>): void {
     return;
   }
 
+  episode.checked(true);
   setEpisodeDetail(props, episodeDetail);
 }

@@ -74,10 +74,6 @@ export function createEpisodeSelectorProps(
   const episodeElements = episodes.map(
     (episode) => new EpisodeElement(episode),
   );
-  const firstEpisodeElement = episodeElements.at(0);
-  if (firstEpisodeElement) {
-    firstEpisodeElement.checked(true);
-  }
   const episodeElementsWithLastRemoved = episodeElements.slice(0, -1);
   episodeElementsWithLastRemoved.forEach((stage) => {
     elements.episodes.appendChild(stage.getRootHTMLElement());

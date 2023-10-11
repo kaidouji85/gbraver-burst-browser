@@ -1,6 +1,6 @@
 import { Observable } from "rxjs";
 
-import { domPushStream } from "../../../dom/push-dom";
+import { domPushStream, PushDOM } from "../../../dom/push-dom";
 import { domUuid } from "../../../uuid/dom-uuid";
 import { Episode } from "../episode";
 import { ROOT_CLASS } from "./dom/class-name";
@@ -15,7 +15,7 @@ export type EpisodeElementProps = {
   /** チェック */
   checker: HTMLInputElement;
   /** 選択通知ストリーム */
-  select: Observable<unknown>;
+  select: Observable<PushDOM>;
 };
 
 /**
