@@ -26,7 +26,7 @@ export function createEpisodeDetail(
 ): EpisodeDetail {
   return {
     id: origin.id,
-    title: origin.title,
+    title: `${origin.type}${origin.number}. ${origin.title}`,
     imageCutPath: resources.paths.find(v => v.id === origin.imageCutPathId)?.path ?? "",
     introduction: origin.introduction,
   }

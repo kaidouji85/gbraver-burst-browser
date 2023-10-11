@@ -11,8 +11,13 @@ export function onEpisodeSelect(
   props: Readonly<EpisodeSelectorProps>,
   episodeElement: EpisodeElement,
 ): void {
+  const episodeDetail = props.episodeDetails.find((v) => v.id === episodeElement.id);
+  if (!episodeDetail) {
+    return;
+  }
+
   episodeElement.check();
-  setEpisodeDetail(props, episodeElement);
+  setEpisodeDetail(props, episodeDetail);
   props.changeValueSound.sound.play();
   props.episodeElements
     .filter((v) => v.id !== episodeElement.id)

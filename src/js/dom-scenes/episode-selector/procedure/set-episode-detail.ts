@@ -1,16 +1,16 @@
-import { EpisodeElement } from "../episode-element";
+import { EpisodeDetail } from "../episode-detail";
 import { EpisodeSelectorProps } from "../props";
 
 /**
  * ストーリー詳細を設定する
  * @param props 画面プロパティ
- * @param episode エピソード情報
+ * @param episodeDetail エピソード詳細
  */
 export function setEpisodeDetail(
   props: Readonly<EpisodeSelectorProps>,
-  episode: EpisodeElement,
+  episodeDetail: EpisodeDetail,
 ) {
-  props.episodeTitle.innerText = episode.title;
-  props.episodeIntroduction.innerText = episode.introduction;
-  props.episodeImageCut.src = episode.imageCutPath;
+  props.episodeTitle.innerText = episodeDetail.title;
+  props.episodeIntroduction.innerText = episodeDetail.introduction;
+  props.episodeImageCut.src = episodeDetail.imageCutPath;
 }
