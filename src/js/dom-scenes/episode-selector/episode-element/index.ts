@@ -10,14 +10,8 @@ import { createEpisodeElementProps, EpisodeElementProps } from "./props";
 
 /** エピソードHTML要素 */
 export class EpisodeElement {
-  /** @deprecated エピソードID */
+  /** エピソードID */
   readonly id: EpisodeID;
-  /** @deprecated イメージカットのパス */
-  readonly imageCutPath: string;
-  /** @deprecated タイトル */
-  readonly title: string;
-  /** @deprecated 導入 */
-  readonly introduction: string;
   /** プロパティ */
   #props: EpisodeElementProps;
 
@@ -28,10 +22,6 @@ export class EpisodeElement {
    */
   constructor(resources: Resources, episode: Episode) {
     this.id = episode.id;
-    this.imageCutPath =
-      resources.paths.find((v) => v.id === episode.imageCutPathId)?.path ?? "";
-    this.title = `${episode.type}${episode.number}. ${episode.title}`;
-    this.introduction = episode.introduction;
     this.#props = createEpisodeElementProps(episode);
   }
 
@@ -47,7 +37,7 @@ export class EpisodeElement {
    * 選択通知
    * @return 通知ストリーム
    */
-  selectionNotifier(): Observable<EpisodeID> {
+  selectionNotifier(): Observable<void> {
     return this.#props.select;
   }
 
