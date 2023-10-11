@@ -11,7 +11,9 @@ export function onEpisodeSelect(
   props: Readonly<EpisodeSelectorProps>,
   episodeElement: EpisodeElement,
 ): void {
-  const episodeDetail = props.episodeDetails.find((v) => v.id === episodeElement.id);
+  const episodeDetail = props.episodeDetails.find(
+    (v) => v.id === episodeElement.id,
+  );
   if (!episodeDetail) {
     return;
   }

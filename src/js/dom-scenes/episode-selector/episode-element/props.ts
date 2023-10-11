@@ -23,9 +23,7 @@ export type EpisodeElementProps = {
  * @param episode エピソード情報
  * @return 生成結果
  */
-export function createEpisodeElementProps(
-  episode: Readonly<Episode>,
-) {
+export function createEpisodeElementProps(episode: Readonly<Episode>) {
   const ids: DataIDs = {
     checker: domUuid(),
   };

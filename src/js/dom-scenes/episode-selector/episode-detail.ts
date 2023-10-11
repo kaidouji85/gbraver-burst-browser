@@ -22,12 +22,13 @@ export type EpisodeDetail = {
  */
 export function createEpisodeDetail(
   resources: Resources,
-  origin: Episode
+  origin: Episode,
 ): EpisodeDetail {
   return {
     id: origin.id,
     title: `${origin.type}${origin.number}. ${origin.title}`,
-    imageCutPath: resources.paths.find(v => v.id === origin.imageCutPathId)?.path ?? "",
+    imageCutPath:
+      resources.paths.find((v) => v.id === origin.imageCutPathId)?.path ?? "",
     introduction: origin.introduction,
-  }
+  };
 }

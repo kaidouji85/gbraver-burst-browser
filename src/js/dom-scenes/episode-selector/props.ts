@@ -92,7 +92,7 @@ export function createEpisodeSelectorProps(
     episodeIntroduction: elements.episodeIntroduction,
     playButton: elements.playButton,
     prevButton: elements.prevButton,
-    episodeDetails: episodes.map(v => createEpisodeDetail(resources, v)),
+    episodeDetails: episodes.map((v) => createEpisodeDetail(resources, v)),
     exclusive: new Exclusive(),
     prev: new Subject(),
     episodeSelect: new Subject(),

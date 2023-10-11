@@ -11,7 +11,7 @@ export function initialize(props: Readonly<EpisodeSelectorProps>): void {
     return;
   }
 
-  const episodeDetail = props.episodeDetails.find(v => v.id === episode.id);
+  const episodeDetail = props.episodeDetails.find((v) => v.id === episode.id);
   if (!episodeDetail) {
     return;
   }
