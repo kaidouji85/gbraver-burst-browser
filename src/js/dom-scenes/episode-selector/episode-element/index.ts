@@ -1,6 +1,5 @@
 import { Observable } from "rxjs";
 
-import { PushDOM } from "../../../dom/push-dom";
 import { EpisodeID } from "../../../game/episodes/episode";
 import { Episode } from "../episode";
 import { checked } from "./procedure/checked";
@@ -35,7 +34,7 @@ export class EpisodeElement {
    * 選択通知
    * @return 通知ストリーム
    */
-  selectionNotifier(): Observable<PushDOM> {
+  selectionNotifier(): Observable<unknown> {
     return this.#props.select;
   }
 

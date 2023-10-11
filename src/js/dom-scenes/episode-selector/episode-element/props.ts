@@ -1,6 +1,5 @@
-import { Observable } from "rxjs";
+import {fromEvent, Observable} from "rxjs";
 
-import { domPushStream, PushDOM } from "../../../dom/push-dom";
 import { domUuid } from "../../../uuid/dom-uuid";
 import { Episode } from "../episode";
 import { ROOT_CLASS } from "./dom/class-name";
@@ -15,7 +14,7 @@ export type EpisodeElementProps = {
   /** チェック */
   checker: HTMLInputElement;
   /** 選択通知ストリーム */
-  select: Observable<PushDOM>;
+  select: Observable<unknown>;
 };
 
 /**
@@ -31,7 +30,7 @@ export function createEpisodeElementProps(episode: Readonly<Episode>) {
   root.className = ROOT_CLASS;
   root.innerHTML = rootInnerHTML(ids, episode);
   const elements = extractElements(root, ids);
-  const select = domPushStream(root);
+  const select = fromEvent(root, "change");
   return {
     ...elements,
     root,
