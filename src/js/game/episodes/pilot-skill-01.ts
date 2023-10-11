@@ -8,12 +8,15 @@ import { playerUuid } from "../../uuid/player";
 import { EpisodeConfig } from "./episode";
 import { EpisodeIDs } from "./episode-ids";
 
+/** 導入 */
+const introduction = `新人戦を終え練習に励む大田高校、その様子を密かに見つめる人物がいるようだが……。`;
+
 /** パイロットスキルチュートリアル（前半） */
 export const pilotSkillTutorial01: EpisodeConfig = {
   id: EpisodeIDs.Pilot01,
   title: "パイロット次第では詰み（負けイベント）",
-  introduction: "", // TODO ちゃんと書く
-  imageCutPathId: PathIds.IMAGE_CUT_BATTERY_SYSTEM, // TODO 正しい画像を指定する
+  introduction,
+  imageCutPathId: PathIds.IMAGE_CUT_PILOT_SKILL_01,
   player: {
     playerId: playerUuid(),
     armdozer:
