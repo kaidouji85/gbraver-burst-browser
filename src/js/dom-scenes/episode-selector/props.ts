@@ -32,6 +32,8 @@ export type EpisodeSelectorProps = {
   playButton: HTMLElement;
   /** 戻るボタン */
   prevButton: HTMLElement;
+  /** エピソード情報 */
+  episodes: Episode[];
   /** 排他制御 */
   exclusive: Exclusive;
   /** 戻るストリーム */
@@ -89,6 +91,7 @@ export function createEpisodeSelectorProps(
     episodeIntroduction: elements.episodeIntroduction,
     playButton: elements.playButton,
     prevButton: elements.prevButton,
+    episodes,
     exclusive: new Exclusive(),
     prev: new Subject(),
     episodeSelect: new Subject(),
