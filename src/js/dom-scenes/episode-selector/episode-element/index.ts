@@ -10,13 +10,13 @@ import { createEpisodeElementProps, EpisodeElementProps } from "./props";
 
 /** エピソードHTML要素 */
 export class EpisodeElement {
-  /** エピソードID */
+  /** @deprecated エピソードID */
   readonly id: EpisodeID;
-  /** イメージカットのパス */
+  /** @deprecated イメージカットのパス */
   readonly imageCutPath: string;
-  /** タイトル */
+  /** @deprecated タイトル */
   readonly title: string;
-  /** 導入 */
+  /** @deprecated 導入 */
   readonly introduction: string;
   /** プロパティ */
   #props: EpisodeElementProps;
