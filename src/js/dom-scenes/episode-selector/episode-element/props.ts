@@ -1,13 +1,12 @@
 import { map, Observable } from "rxjs";
 
 import { domPushStream } from "../../../dom/push-dom";
-import { Resources } from "../../../resource";
 import { domUuid } from "../../../uuid/dom-uuid";
+import { Episode } from "../episode";
 import { ROOT_CLASS } from "./dom/class-name";
 import { DataIDs } from "./dom/data-ids";
 import { extractElements } from "./dom/elements";
 import { rootInnerHTML } from "./dom/root-inner-html";
-import { Episode } from "./episode";
 
 /** エピソードHTML要素プロパティ */
 export type EpisodeElementProps = {
@@ -21,14 +20,10 @@ export type EpisodeElementProps = {
 
 /**
  * EpisodeElementPropsを生成する
- * @param resources リソース管理オブジェクト
  * @param episode エピソード情報
  * @return 生成結果
  */
-export function createEpisodeElementProps(
-  resources: Readonly<Resources>,
-  episode: Readonly<Episode>,
-) {
+export function createEpisodeElementProps(episode: Readonly<Episode>) {
   const ids: DataIDs = {
     checker: domUuid(),
   };

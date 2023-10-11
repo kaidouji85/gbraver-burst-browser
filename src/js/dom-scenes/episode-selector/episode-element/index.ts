@@ -2,7 +2,7 @@ import { Observable } from "rxjs";
 
 import type { EpisodeID } from "../../../game/episodes/episode";
 import type { Resources } from "../../../resource";
-import { Episode } from "./episode";
+import { Episode } from "../episode";
 import { check } from "./procedure/check";
 import { isChecked } from "./procedure/is-checked";
 import { uncheck } from "./procedure/uncheck";
@@ -12,12 +12,6 @@ import { createEpisodeElementProps, EpisodeElementProps } from "./props";
 export class EpisodeElement {
   /** エピソードID */
   readonly id: EpisodeID;
-  /** イメージカットのパス */
-  readonly imageCutPath: string;
-  /** タイトル */
-  readonly title: string;
-  /** 導入 */
-  readonly introduction: string;
   /** プロパティ */
   #props: EpisodeElementProps;
 
@@ -28,11 +22,7 @@ export class EpisodeElement {
    */
   constructor(resources: Resources, episode: Episode) {
     this.id = episode.id;
-    this.imageCutPath =
-      resources.paths.find((v) => v.id === episode.imageCutPathId)?.path ?? "";
-    this.title = `${episode.type}${episode.number}. ${episode.title}`;
-    this.introduction = episode.introduction;
-    this.#props = createEpisodeElementProps(resources, episode);
+    this.#props = createEpisodeElementProps(episode);
   }
 
   /**

@@ -1,4 +1,4 @@
-import { Episode } from "../episode";
+import { Episode } from "../../episode";
 import { ROOT_CLASS } from "./class-name";
 import { DataIDs } from "./data-ids";
 import rootInnerHTMLTemplate from "./root-inner-html.hbs";

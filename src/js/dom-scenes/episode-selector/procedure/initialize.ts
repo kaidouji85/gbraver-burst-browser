@@ -11,6 +11,11 @@ export function initialize(props: Readonly<EpisodeSelectorProps>): void {
     return;
   }
 
+  const episodeDetail = props.episodeDetails.find((v) => v.id === episode.id);
+  if (!episodeDetail) {
+    return;
+  }
+
   episode.check();
-  setEpisodeDetail(props, episode);
+  setEpisodeDetail(props, episodeDetail);
 }
