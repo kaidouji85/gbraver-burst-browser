@@ -2,9 +2,9 @@ import { Observable } from "rxjs";
 
 import { EpisodeID } from "../../../game/episodes/episode";
 import { Episode } from "../episode";
+import { checked } from "./procedure/checked";
 import { isChecked } from "./procedure/is-checked";
 import { createEpisodeElementProps, EpisodeElementProps } from "./props";
-import { checked } from "./procedure/checked";
 
 /** エピソードHTML要素 */
 export class EpisodeElement {
