@@ -18,10 +18,6 @@ export function onEpisodeSelect(
     return;
   }
 
-  episodeElement.check();
   setEpisodeDetail(props, episodeDetail);
   props.changeValueSound.sound.play();
-  props.episodeElements
-    .filter((v) => v.id !== episodeElement.id)
-    .forEach((v) => v.uncheck());
 }

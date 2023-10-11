@@ -1,10 +1,10 @@
 import { Observable } from "rxjs";
 
+import { PushDOM } from "../../../dom/push-dom";
 import { EpisodeID } from "../../../game/episodes/episode";
 import { Episode } from "../episode";
-import { check } from "./procedure/check";
+import { checked } from "./procedure/checked";
 import { isChecked } from "./procedure/is-checked";
-import { uncheck } from "./procedure/uncheck";
 import { createEpisodeElementProps, EpisodeElementProps } from "./props";
 
 /** エピソードHTML要素 */
@@ -35,22 +35,8 @@ export class EpisodeElement {
    * 選択通知
    * @return 通知ストリーム
    */
-  selectionNotifier(): Observable<void> {
+  selectionNotifier(): Observable<PushDOM> {
     return this.#props.select;
-  }
-
-  /**
-   * チェックする
-   */
-  check(): void {
-    check(this.#props);
-  }
-
-  /**
-   * チェックを外す
-   */
-  uncheck(): void {
-    uncheck(this.#props);
   }
 
   /**
@@ -59,5 +45,13 @@ export class EpisodeElement {
    */
   isChecked(): boolean {
     return isChecked(this.#props);
+  }
+
+  /**
+   * チェック状態を変更する
+   * @param isChecked trueでチェックする
+   */
+  checked(isChecked: boolean): void {
+    checked(this.#props, isChecked);
   }
 }

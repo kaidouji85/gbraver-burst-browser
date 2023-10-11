@@ -74,14 +74,14 @@ export function createEpisodeSelectorProps(
   const episodeElements = episodes.map(
     (episode) => new EpisodeElement(episode),
   );
-  const stageElementsWithLastRemoved = episodeElements.slice(0, -1);
-  stageElementsWithLastRemoved.forEach((stage) => {
+  const episodeElementsWithLastRemoved = episodeElements.slice(0, -1);
+  episodeElementsWithLastRemoved.forEach((stage) => {
     elements.episodes.appendChild(stage.getRootHTMLElement());
     elements.episodes.appendChild(episodeSeparator());
   });
-  const lastStageElement = episodeElements[episodeElements.length - 1];
-  if (lastStageElement) {
-    elements.episodes.appendChild(lastStageElement.getRootHTMLElement());
+  const lastEpisodeElement = episodeElements.at(-1);
+  if (lastEpisodeElement) {
+    elements.episodes.appendChild(lastEpisodeElement.getRootHTMLElement());
   }
 
   return {
