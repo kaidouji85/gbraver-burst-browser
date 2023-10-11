@@ -12,8 +12,9 @@ import { ROOT_CLASS } from "./dom/class-name";
 import { extractElements } from "./dom/elements";
 import { episodeSeparator } from "./dom/episode-separator";
 import { rootInnerHTML } from "./dom/root-inner-html";
-import { EpisodeElement } from "./episode-element";
 import { Episode } from "./episode";
+import { createEpisodeDetail, EpisodeDetail } from "./episode-detail";
+import { EpisodeElement } from "./episode-element";
 import { EpisodeSelect } from "./episode-element/episode-select";
 
 /** エピソードセレクタ画面プロパティ */
@@ -32,8 +33,8 @@ export type EpisodeSelectorProps = {
   playButton: HTMLElement;
   /** 戻るボタン */
   prevButton: HTMLElement;
-  /** エピソード情報 */
-  episodes: Episode[];
+  /** エピソード詳細をあつめたもの */
+  episodeDetails: EpisodeDetail[];
   /** 排他制御 */
   exclusive: Exclusive;
   /** 戻るストリーム */
@@ -91,7 +92,7 @@ export function createEpisodeSelectorProps(
     episodeIntroduction: elements.episodeIntroduction,
     playButton: elements.playButton,
     prevButton: elements.prevButton,
-    episodes,
+    episodeDetails: episodes.map(v => createEpisodeDetail(resources, v)),
     exclusive: new Exclusive(),
     prev: new Subject(),
     episodeSelect: new Subject(),
