@@ -1,21 +1,23 @@
+import { EpisodeType } from "../../../game/episodes/episode";
 import { EpisodeSelectorProps } from "../props";
+import { getFirstVisibleEpisode } from "./get-first-visible-episode";
 import { setEpisodeDetail } from "./set-episode-detail";
+import { setEpisodeTab } from "./set-episode-tab";
+import { setEpisodesVisible } from "./set-episodes-visible";
 
 /**
  * 初期化
  * @param props 画面プロパティ
  */
 export function initialize(props: Readonly<EpisodeSelectorProps>): void {
-  const episode = props.episodeElements.at(0);
-  if (!episode) {
+  const episodeType: EpisodeType = "Episode";
+  setEpisodeTab(props, episodeType);
+  setEpisodesVisible(props, episodeType);
+  const firstVisible = getFirstVisibleEpisode(props);
+  if (!firstVisible) {
     return;
   }
 
-  const episodeDetail = props.episodeDetails.find((v) => v.id === episode.id);
-  if (!episodeDetail) {
-    return;
-  }
-
-  episode.checked(true);
-  setEpisodeDetail(props, episodeDetail);
+  firstVisible.episode.checked(true);
+  setEpisodeDetail(props, firstVisible.episodeDetail);
 }

@@ -2,7 +2,10 @@ import { PushDOM } from "../../../dom/push-dom";
 import { EpisodeType } from "../../../game/episodes/episode";
 import { EPISODE_TYPE, EPISODE_TYPE_SELECTED } from "../dom/class-name";
 import { EpisodeSelectorProps } from "../props";
+import { getFirstVisibleEpisode } from "./get-first-visible-episode";
 import { setEpisodeDetail } from "./set-episode-detail";
+import { setEpisodeTab } from "./set-episode-tab";
+import { setEpisodesVisible } from "./set-episodes-visible";
 
 /**
  * メインエピソードタブが選択された時の処理
@@ -15,27 +18,15 @@ export function onMainEpisodeTabSelected(
 ): void {
   action.event.preventDefault();
   action.event.stopPropagation();
-
-  props.mainEpisodeTab.className = EPISODE_TYPE_SELECTED;
-  props.sideEpisodeTab.className = EPISODE_TYPE;
+  props.changeValueSound.sound.play();
   const episodeType: EpisodeType = "Episode";
-  props.episodeElements.forEach((episode) => {
-    episode.visible(episode.type === episodeType);
-  });
-  const firstVisibleEpisode = props.episodeElements.find((episode) =>
-    episode.isVisible(),
-  );
-  if (!firstVisibleEpisode) {
+  setEpisodeTab(props, episodeType);
+  setEpisodesVisible(props, episodeType);
+  const firstVisible = getFirstVisibleEpisode(props);
+  if (!firstVisible) {
     return;
   }
 
-  firstVisibleEpisode.checked(true);
-  const episodeDetail = props.episodeDetails.find(
-    (episodeDetail) => episodeDetail.id === firstVisibleEpisode.id,
-  );
-  if (!episodeDetail) {
-    return;
-  }
-
-  setEpisodeDetail(props, episodeDetail);
+  firstVisible.episode.checked(true);
+  setEpisodeDetail(props, firstVisible.episodeDetail);
 }

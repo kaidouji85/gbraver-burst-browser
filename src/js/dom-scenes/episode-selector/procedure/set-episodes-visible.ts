@@ -2,14 +2,14 @@ import { EpisodeType } from "../../../game/episodes/episode";
 import { EpisodeSelectorProps } from "../props";
 
 /**
- * エピソードタイプに応じたエピソードを表示する
+ * エピソード対応に応じたタブ表示にする
  * @param props 画面プロパティ
  * @param episodeType エピソードタイプ
  */
-export function switchEpisodes(
+export function setEpisodesVisible(
   props: Readonly<EpisodeSelectorProps>,
   episodeType: EpisodeType,
-): void {
+) {
   props.episodeElements.forEach((episode) => {
     episode.visible(episode.type === episodeType);
   });
