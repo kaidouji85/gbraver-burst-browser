@@ -1,6 +1,5 @@
 import { PushDOM } from "../../../dom/push-dom";
 import { EpisodeType } from "../../../game/episodes/episode";
-import { EPISODE_TYPE, EPISODE_TYPE_SELECTED } from "../dom/class-name";
 import { EpisodeSelectorProps } from "../props";
 import { getFirstVisibleEpisode } from "./get-first-visible-episode";
 import { setEpisodeDetail } from "./set-episode-detail";
