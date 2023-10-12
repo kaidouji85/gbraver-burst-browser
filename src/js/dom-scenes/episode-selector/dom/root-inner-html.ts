@@ -1,6 +1,6 @@
 import { Resources } from "../../../resource";
 import { PathIds } from "../../../resource/path/ids";
-import { ROOT_CLASS } from "./class-name";
+import { EPISODE_TYPE, EPISODE_TYPE_SELECTED, ROOT_CLASS } from "./class-name";
 import { DataIDs } from "./data-ids";
 import rootInnerHTMLTemplate from "./root-inner-html.hbs";
 
@@ -22,6 +22,8 @@ export function rootInnerHTML(ids: DataIDs, resources: Resources): string {
   return rootInnerHTMLTemplate({
     ids,
     ROOT_CLASS,
+    EPISODE_TYPE,
+    EPISODE_TYPE_SELECTED,
     imageCut01,
     imageCut02,
     imageCut03,
