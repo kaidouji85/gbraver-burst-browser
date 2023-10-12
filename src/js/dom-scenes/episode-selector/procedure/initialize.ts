@@ -1,9 +1,9 @@
 import { EpisodeType } from "../../../game/episodes/episode";
 import { EpisodeSelectorProps } from "../props";
-import { getFirstVisibleEpisode } from "./get-first-visible-episode";
+import { getFirstVisibleEpisodeAndDetail } from "./get-first-visible-episode-and-detail";
 import { setEpisodeDetail } from "./set-episode-detail";
-import { setEpisodeTab } from "./set-episode-tab";
 import { setEpisodesVisible } from "./set-episodes-visible";
+import { switchEpisodeTab } from "./switch-episode-tab";
 
 /**
  * 初期化
@@ -11,9 +11,9 @@ import { setEpisodesVisible } from "./set-episodes-visible";
  */
 export function initialize(props: Readonly<EpisodeSelectorProps>): void {
   const episodeType: EpisodeType = "Episode";
-  setEpisodeTab(props, episodeType);
+  switchEpisodeTab(props, episodeType);
   setEpisodesVisible(props, episodeType);
-  const firstVisible = getFirstVisibleEpisode(props);
+  const firstVisible = getFirstVisibleEpisodeAndDetail(props);
   if (!firstVisible) {
     return;
   }

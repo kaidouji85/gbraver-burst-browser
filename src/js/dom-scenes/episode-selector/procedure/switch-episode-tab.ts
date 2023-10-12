@@ -3,11 +3,11 @@ import { EPISODE_TYPE, EPISODE_TYPE_SELECTED } from "../dom/class-name";
 import { EpisodeSelectorProps } from "../props";
 
 /**
- * エピソード対応に応じたタブ表示にする
+ * エピソード対応に応じたタブが選択された状態にする
  * @param props 画面プロパティ
  * @param episodeType エピソードタイプ
  */
-export function setEpisodeTab(
+export function switchEpisodeTab(
   props: Readonly<EpisodeSelectorProps>,
   episodeType: EpisodeType,
 ): void {

@@ -5,7 +5,9 @@ import { EpisodeSelectorProps } from "../props";
  * @param props 画面プロパティ
  * @returns 取得結果、見つからない場合はnull
  */
-export function getFirstVisibleEpisode(props: Readonly<EpisodeSelectorProps>) {
+export function getFirstVisibleEpisodeAndDetail(
+  props: Readonly<EpisodeSelectorProps>,
+) {
   const firstVisibleEpisode = props.episodeElements.find((episode) =>
     episode.isVisible(),
   );
