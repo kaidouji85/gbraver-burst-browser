@@ -1,3 +1,4 @@
+import { PushDOM } from "../../../dom/push-dom";
 import { EpisodeType } from "../../../game/episodes/episode";
 import { EpisodeSelectorProps } from "../props";
 import { getFirstVisibleEpisodeAndDetail } from "./get-first-visible-episode-and-detail";
@@ -6,10 +7,17 @@ import { setEpisodesVisible } from "./set-episodes-visible";
 import { switchEpisodeTab } from "./switch-episode-tab";
 
 /**
- * 初期化
+ * メインエピソードタブが選択された時の処理
  * @param props 画面プロパティ
+ * @param action アクション
  */
-export function initialize(props: Readonly<EpisodeSelectorProps>): void {
+export function onMainEpisodeTabSelected(
+  props: Readonly<EpisodeSelectorProps>,
+  action: Readonly<PushDOM>,
+): void {
+  action.event.preventDefault();
+  action.event.stopPropagation();
+  props.changeValueSound.sound.play();
   const episodeType: EpisodeType = "Episode";
   switchEpisodeTab(props, episodeType);
   setEpisodesVisible(props, episodeType);

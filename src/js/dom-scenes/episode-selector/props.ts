@@ -10,7 +10,6 @@ import {
 import { domUuid } from "../../uuid/dom-uuid";
 import { ROOT_CLASS } from "./dom/class-name";
 import { extractElements } from "./dom/elements";
-import { episodeSeparator } from "./dom/episode-separator";
 import { rootInnerHTML } from "./dom/root-inner-html";
 import { Episode } from "./episode";
 import { createEpisodeDetail, EpisodeDetail } from "./episode-detail";
@@ -25,6 +24,10 @@ export type EpisodeSelectorProps = {
   episodeElements: EpisodeElement[];
   /** エピソードのイメージカット */
   episodeImageCut: HTMLImageElement;
+  /** メインエピソードタブ */
+  mainEpisodeTab: HTMLElement;
+  /** サイドエピソードタブ */
+  sideEpisodeTab: HTMLElement;
   /** エピソードタイトル */
   episodeTitle: HTMLElement;
   /** エピソード導入 */
@@ -62,6 +65,8 @@ export function createEpisodeSelectorProps(
   const ids = {
     episodes: domUuid(),
     episodeImageCut: domUuid(),
+    mainEpisodeTab: domUuid(),
+    sideEpisodeTab: domUuid(),
     episodeTitle: domUuid(),
     episodeIntroduction: domUuid(),
     playButton: domUuid(),
@@ -74,20 +79,15 @@ export function createEpisodeSelectorProps(
   const episodeElements = episodes.map(
     (episode) => new EpisodeElement(episode),
   );
-  const episodeElementsWithLastRemoved = episodeElements.slice(0, -1);
-  episodeElementsWithLastRemoved.forEach((stage) => {
-    elements.episodes.appendChild(stage.getRootHTMLElement());
-    elements.episodes.appendChild(episodeSeparator());
+  episodeElements.forEach((episodeElement) => {
+    elements.episodes.appendChild(episodeElement.getRootHTMLElement());
   });
-  const lastEpisodeElement = episodeElements.at(-1);
-  if (lastEpisodeElement) {
-    elements.episodes.appendChild(lastEpisodeElement.getRootHTMLElement());
-  }
-
   return {
     root,
     episodeElements: episodeElements,
     episodeImageCut: elements.episodeImageCut,
+    mainEpisodeTab: elements.mainEpisodeTab,
+    sideEpisodeTab: elements.sideEpisodeTab,
     episodeTitle: elements.episodeTitle,
     episodeIntroduction: elements.episodeIntroduction,
     playButton: elements.playButton,

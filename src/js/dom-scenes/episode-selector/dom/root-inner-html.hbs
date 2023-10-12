@@ -14,7 +14,16 @@
     data-id="{{ids.episodeIntroduction}}"
   ></div>
 </div>
-<div class="{{ROOT_CLASS}}__episodes" data-id="{{ids.episodes}}"></div>
+<div class="{{ROOT_CLASS}}__selector">
+  <div class="{{ROOT_CLASS}}__episode-type-tabs">
+    <div
+      class="{{EPISODE_TYPE_SELECTED}}"
+      data-id="{{ids.mainEpisodeTab}}"
+    >メイン</div>
+    <div class="{{EPISODE_TYPE}}" data-id="{{ids.sideEpisodeTab}}">サイド</div>
+  </div>
+  <div class="{{ROOT_CLASS}}__episodes" data-id="{{ids.episodes}}"></div>
+</div>
 <div class="{{ROOT_CLASS}}__controllers">
   <button
     class="{{ROOT_CLASS}}__prev"

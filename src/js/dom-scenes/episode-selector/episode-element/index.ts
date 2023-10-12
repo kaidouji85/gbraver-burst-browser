@@ -1,15 +1,19 @@
 import { Observable } from "rxjs";
 
-import { EpisodeID } from "../../../game/episodes/episode";
+import { EpisodeID, EpisodeType } from "../../../game/episodes/episode";
 import { Episode } from "../episode";
 import { checked } from "./procedure/checked";
 import { isChecked } from "./procedure/is-checked";
+import { isVisible } from "./procedure/is-visible";
+import { visible } from "./procedure/visible";
 import { createEpisodeElementProps, EpisodeElementProps } from "./props";
 
 /** エピソードHTML要素 */
 export class EpisodeElement {
   /** エピソードID */
   readonly id: EpisodeID;
+  /** エピソードタイプ */
+  readonly type: EpisodeType;
   /** プロパティ */
   #props: EpisodeElementProps;
 
@@ -19,6 +23,7 @@ export class EpisodeElement {
    */
   constructor(episode: Episode) {
     this.id = episode.id;
+    this.type = episode.type;
     this.#props = createEpisodeElementProps(episode);
   }
 
@@ -52,5 +57,21 @@ export class EpisodeElement {
    */
   checked(isChecked: boolean): void {
     checked(this.#props, isChecked);
+  }
+
+  /**
+   * 表示、非表示を切り替える
+   * @param isVisible trueで表示する
+   */
+  visible(isVisible: boolean): void {
+    visible(this.#props, isVisible);
+  }
+
+  /**
+   * 表示されているか否かを判定する
+   * @return trueで表示されている
+   */
+  isVisible(): boolean {
+    return isVisible(this.#props);
   }
 }
