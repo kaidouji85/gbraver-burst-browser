@@ -4,6 +4,7 @@ import { EpisodeID, EpisodeType } from "../../../game/episodes/episode";
 import { Episode } from "../episode";
 import { checked } from "./procedure/checked";
 import { isChecked } from "./procedure/is-checked";
+import { isVisible } from "./procedure/is-visible";
 import { visible } from "./procedure/visible";
 import { createEpisodeElementProps, EpisodeElementProps } from "./props";
 
@@ -64,5 +65,13 @@ export class EpisodeElement {
    */
   visible(isVisible: boolean): void {
     visible(this.#props, isVisible);
+  }
+
+  /**
+   * 表示されているか否かを判定する
+   * @return trueで表示されている
+   */
+  isVisible(): boolean {
+    return isVisible(this.#props);
   }
 }
