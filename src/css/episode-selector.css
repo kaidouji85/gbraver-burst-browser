@@ -65,6 +65,14 @@
   background-color: var(--sub-background-color);
 }
 
+.episode-selector__episode-type:first-child {
+  border-top-left-radius: var(--button-border-radius);
+}
+
+.episode-selector__episode-type:last-child {
+  border-top-right-radius: var(--button-border-radius);
+}
+
 .episode-selector__episodes {
   flex: 1;
   grid-row: 1;
