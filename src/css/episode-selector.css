@@ -46,13 +46,33 @@
   filter: brightness(0.7);
 }
 
+.episode-selector__selector {
+  display: flex;
+  flex-direction: column;
+}
+
+.episode-selector__episode-type-tabs {
+  display: flex;
+}
+
+.episode-selector__episode-type {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: calc(var(--responsive-font-size) * 3);
+  font-size: var(--responsive-font-size);
+  background-color: var(--sub-background-color);
+}
+
 .episode-selector__episodes {
+  flex: 1;
   grid-row: 1;
   grid-column: 2;
   display: flex;
   flex-direction: column;
   z-index: var(--controllers-z-index);
-  border-radius: var(--button-border-radius);
+  border-radius: 0 0 var(--button-border-radius) var(--button-border-radius);
   background-color: var(--sub-background-color);
   padding: calc(var(--responsive-font-size) * 0.5);
   overflow-y: scroll;
