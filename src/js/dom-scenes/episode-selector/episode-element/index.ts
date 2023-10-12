@@ -1,6 +1,6 @@
 import { Observable } from "rxjs";
 
-import { EpisodeID } from "../../../game/episodes/episode";
+import { EpisodeID, EpisodeType } from "../../../game/episodes/episode";
 import { Episode } from "../episode";
 import { checked } from "./procedure/checked";
 import { isChecked } from "./procedure/is-checked";
@@ -10,6 +10,8 @@ import { createEpisodeElementProps, EpisodeElementProps } from "./props";
 export class EpisodeElement {
   /** エピソードID */
   readonly id: EpisodeID;
+  /** エピソードタイプ */
+  readonly type: EpisodeType;
   /** プロパティ */
   #props: EpisodeElementProps;
 
@@ -19,6 +21,7 @@ export class EpisodeElement {
    */
   constructor(episode: Episode) {
     this.id = episode.id;
+    this.type = episode.type;
     this.#props = createEpisodeElementProps(episode);
   }
 
