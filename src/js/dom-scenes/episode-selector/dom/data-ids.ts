@@ -4,6 +4,10 @@ export type DataIDs = {
   episodes: string;
   /** エピソードのイメージカット */
   episodeImageCut: string;
+  /** メインエピソードタブ */
+  mainEpisodeTab: string;
+  /** サイドエピソードタブ */
+  sideEpisodeTab: string;
   /** エピソードタイトル */
   episodeTitle: string;
   /** エピソード導入 */

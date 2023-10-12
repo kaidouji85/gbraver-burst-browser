@@ -6,6 +6,10 @@ type Elements = {
   episodes: HTMLElement;
   /** エピソードのイメージカット */
   episodeImageCut: HTMLImageElement;
+  /** メインエピソードタブ */
+  mainEpisodeTab: HTMLElement;
+  /** サイドエピソードタブ */
+  sideEpisodeTab: HTMLElement;
   /** エピソードタイトル */
   episodeTitle: HTMLElement;
   /** エピソード導入 */
@@ -33,6 +37,12 @@ export function extractElements(root: HTMLElement, ids: DataIDs): Elements {
     foundEpisodeImageCut instanceof HTMLImageElement
       ? foundEpisodeImageCut
       : document.createElement("img");
+  const mainEpisodeTab: HTMLElement =
+    root.querySelector(`[data-id="${ids.mainEpisodeTab}"]`) ??
+    document.createElement("div");
+  const sideEpisodeTab: HTMLElement =
+    root.querySelector(`[data-id="${ids.sideEpisodeTab}"]`) ??
+    document.createElement("div");
   const episodeTitle: HTMLElement =
     root.querySelector(`[data-id="${ids.episodeTitle}"]`) ??
     document.createElement("div");
@@ -48,6 +58,8 @@ export function extractElements(root: HTMLElement, ids: DataIDs): Elements {
   return {
     episodes,
     episodeImageCut,
+    mainEpisodeTab,
+    sideEpisodeTab,
     episodeTitle,
     episodeIntroduction,
     playButton,

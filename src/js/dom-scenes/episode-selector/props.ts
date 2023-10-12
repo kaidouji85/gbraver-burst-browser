@@ -25,6 +25,10 @@ export type EpisodeSelectorProps = {
   episodeElements: EpisodeElement[];
   /** エピソードのイメージカット */
   episodeImageCut: HTMLImageElement;
+  /** メインエピソードタブ */
+  mainEpisodeTab: HTMLElement;
+  /** サイドエピソードタブ */
+  sideEpisodeTab: HTMLElement;
   /** エピソードタイトル */
   episodeTitle: HTMLElement;
   /** エピソード導入 */
@@ -62,6 +66,8 @@ export function createEpisodeSelectorProps(
   const ids = {
     episodes: domUuid(),
     episodeImageCut: domUuid(),
+    mainEpisodeTab: domUuid(),
+    sideEpisodeTab: domUuid(),
     episodeTitle: domUuid(),
     episodeIntroduction: domUuid(),
     playButton: domUuid(),
@@ -88,6 +94,8 @@ export function createEpisodeSelectorProps(
     root,
     episodeElements: episodeElements,
     episodeImageCut: elements.episodeImageCut,
+    mainEpisodeTab: elements.mainEpisodeTab,
+    sideEpisodeTab: elements.sideEpisodeTab,
     episodeTitle: elements.episodeTitle,
     episodeIntroduction: elements.episodeIntroduction,
     playButton: elements.playButton,
