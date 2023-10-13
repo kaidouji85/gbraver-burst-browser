@@ -1,3 +1,4 @@
+import { CHECKER_CLASS, CHECKER_CLASS_INVISIBLE } from "../dom/class-name";
 import { EpisodeElementProps } from "../props";
 
 /**
@@ -9,5 +10,5 @@ export function checked(
   props: Readonly<EpisodeElementProps>,
   isChecked: boolean,
 ): void {
-  props.checker.checked = isChecked;
+  props.checker.className = isChecked ? CHECKER_CLASS : CHECKER_CLASS_INVISIBLE;
 }

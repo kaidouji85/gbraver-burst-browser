@@ -1,3 +1,4 @@
+import { CHECKER_CLASS } from "../dom/class-name";
 import { EpisodeElementProps } from "../props";
 
 /**
@@ -6,5 +7,5 @@ import { EpisodeElementProps } from "../props";
  * @return trueでチェックされている
  */
 export function isChecked(props: Readonly<EpisodeElementProps>): boolean {
-  return props.checker.checked;
+  return props.checker.className === CHECKER_CLASS;
 }

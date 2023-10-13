@@ -1,19 +1,19 @@
 import { fromEvent, Observable } from "rxjs";
 
+import { Resources } from "../../../resource";
 import { domUuid } from "../../../uuid/dom-uuid";
 import { Episode } from "../episode";
 import { ROOT_CLASS } from "./dom/class-name";
 import { DataIDs } from "./dom/data-ids";
 import { extractElements } from "./dom/elements";
 import { rootInnerHTML } from "./dom/root-inner-html";
-import { Resources } from "../../../resource";
 
 /** エピソードHTML要素プロパティ */
 export type EpisodeElementProps = {
   /** ルートHTML要素 */
   root: HTMLElement;
   /** チェック */
-  checker: HTMLInputElement;
+  checker: HTMLElement;
   /** 選択通知ストリーム */
   select: Observable<unknown>;
 };
