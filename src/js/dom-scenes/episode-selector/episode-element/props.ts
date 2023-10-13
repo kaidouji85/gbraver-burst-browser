@@ -28,7 +28,7 @@ export function createEpisodeElementProps(resources: Resources, episode: Readonl
   const ids: DataIDs = {
     checker: domUuid(),
   };
-  const root: HTMLElement = document.createElement("label");
+  const root: HTMLElement = document.createElement("div");
   root.className = ROOT_CLASS;
   root.innerHTML = rootInnerHTML(resources, ids, episode);
   const elements = extractElements(root, ids);
