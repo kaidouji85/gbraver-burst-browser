@@ -4,7 +4,7 @@ import { gotoEndingIfNeeded } from "./goto-ending-if-needed";
 import { gotoNPCBattleStageIfNeeded } from "./goto-npc-battle-stage";
 import { gotoTitleIfNeeded } from "./goto-title-if-needed";
 import { gotoTutorialIfNeeded } from "./goto-tutorial-if-needed";
-import { gotoTutorialSelectorIfNeeded } from "./goto-tutorial-selector-if-needed";
+import { gotoEpisodeSelectorIfNeeded } from "./goto-tutorial-selector-if-needed";
 
 /**
  * 戦闘終了後アクション決定時の処理
@@ -47,7 +47,7 @@ export async function onPostBattleAction(
     return;
   }
 
-  const isGotoTutorialSelectorExecuted = await gotoTutorialSelectorIfNeeded(
+  const isGotoTutorialSelectorExecuted = await gotoEpisodeSelectorIfNeeded(
     props,
     action,
   );

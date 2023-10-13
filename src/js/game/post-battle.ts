@@ -2,7 +2,7 @@
 export type PostBattle =
   | GotoTitle
   | NextStage
-  | GotoTutorialSelect
+  | GotoEpisodeSelect
   | Retry
   | GotoEnding;
 
@@ -16,9 +16,9 @@ export type NextStage = {
   type: "NextStage";
 };
 
-/** チュートリアル選択画面へ */
-export type GotoTutorialSelect = {
-  type: "GotoTutorialSelect";
+/** エピソード選択画面へ */
+export type GotoEpisodeSelect = {
+  type: "GotoEpisodeSelect";
 };
 
 /** リトライ */

@@ -56,8 +56,8 @@ export const PostEpisodeButtons: PostBattleButtonConfig[] = [
   {
     style: "MainButton",
     action: {
-      type: "GotoTutorialSelect",
+      type: "GotoEpisodeSelect",
     },
-    label: "ステージ選択へ",
+    label: "エピソード選択へ",
   },
 ];
