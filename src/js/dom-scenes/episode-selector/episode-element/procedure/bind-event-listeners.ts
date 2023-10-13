@@ -10,11 +10,11 @@ import { onRootPush } from "./on-root-push";
  * @return サンサブスクライバ
  */
 export function bindEventListeners(
-  props: Readonly<EpisodeElementProps>
+  props: Readonly<EpisodeElementProps>,
 ): Unsubscribable[] {
   return [
-    domPushStream(props.root).subscribe(action => {
+    domPushStream(props.root).subscribe((action) => {
       onRootPush(props, action);
-    })
+    }),
   ];
 }

@@ -8,7 +8,7 @@ import { EpisodeElementProps } from "../props";
  */
 export function onRootPush(
   props: Readonly<EpisodeElementProps>,
-  action: Readonly<PushDOM>
+  action: Readonly<PushDOM>,
 ): void {
   action.event.preventDefault();
   action.event.stopPropagation();

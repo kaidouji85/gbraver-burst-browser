@@ -13,8 +13,9 @@ export type Elements = {
  * @return 抽出結果
  */
 export function extractElements(root: HTMLElement, ids: DataIDs): Elements {
-  const checker: HTMLElement = root.querySelector(`[data-id="${ids.checker}"]`)
-    ?? document.createElement("div");
+  const checker: HTMLElement =
+    root.querySelector(`[data-id="${ids.checker}"]`) ??
+    document.createElement("div");
   return {
     checker,
   };

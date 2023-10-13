@@ -10,7 +10,7 @@ export function selectEpisodeElement(
   props: Readonly<EpisodeSelectorProps>,
   episodeID: EpisodeID,
 ) {
-  props.episodeElements.forEach(episodeElement => {
+  props.episodeElements.forEach((episodeElement) => {
     episodeElement.checked(episodeElement.id === episodeID);
   });
 }

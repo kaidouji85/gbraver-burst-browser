@@ -15,7 +15,9 @@ function isEpisodeTabSelected(tab: HTMLElement): boolean {
  * @param props 画面プロパティ
  * @return trueで選択されている
  */
-export function isMainEpisodeTabSelected(props: Readonly<EpisodeSelectorProps>): boolean {
+export function isMainEpisodeTabSelected(
+  props: Readonly<EpisodeSelectorProps>,
+): boolean {
   return isEpisodeTabSelected(props.mainEpisodeTab);
 }
 
@@ -24,6 +26,8 @@ export function isMainEpisodeTabSelected(props: Readonly<EpisodeSelectorProps>):
  * @param props 画面プロパティ
  * @return trueで選択されている
  */
-export function isSideEpisodeTabSelected(props: Readonly<EpisodeSelectorProps>): boolean {
+export function isSideEpisodeTabSelected(
+  props: Readonly<EpisodeSelectorProps>,
+): boolean {
   return isEpisodeTabSelected(props.sideEpisodeTab);
 }

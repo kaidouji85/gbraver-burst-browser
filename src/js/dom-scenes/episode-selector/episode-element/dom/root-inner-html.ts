@@ -12,8 +12,13 @@ import rootInnerHTMLTemplate from "./root-inner-html.hbs";
  * @param episode エピソード情報
  * @return innerHTML
  */
-export function rootInnerHTML(resources: Resources, ids: DataIDs, episode: Episode): string {
-  const checkPath = resources.paths.find(v => v.id === PathIds.CHECK)?.path ?? "";
+export function rootInnerHTML(
+  resources: Resources,
+  ids: DataIDs,
+  episode: Episode,
+): string {
+  const checkPath =
+    resources.paths.find((v) => v.id === PathIds.CHECK)?.path ?? "";
   return rootInnerHTMLTemplate({
     ...episode,
     ids,

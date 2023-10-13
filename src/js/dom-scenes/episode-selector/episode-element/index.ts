@@ -37,7 +37,7 @@ export class EpisodeElement {
    * デストラクタ相当の処理
    */
   destructor(): void {
-    this.#unsubscribers.forEach(unsubscribe => unsubscribe.unsubscribe());
+    this.#unsubscribers.forEach((unsubscribe) => unsubscribe.unsubscribe());
   }
 
   /**
