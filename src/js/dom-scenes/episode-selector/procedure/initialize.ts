@@ -10,9 +10,14 @@ import { switchEpisodeTab } from "./switch-episode-tab";
  * @param props 画面プロパティ
  * @param initialSelectedEpisodeID 初期選択エピソードID
  */
-export function initialize(props: Readonly<EpisodeSelectorProps>, initialSelectedEpisodeID?: EpisodeID): void {
+export function initialize(
+  props: Readonly<EpisodeSelectorProps>,
+  initialSelectedEpisodeID?: EpisodeID,
+): void {
   const episode = initialSelectedEpisodeID
-    ? props.episodeElements.find((episode) => episode.id === initialSelectedEpisodeID)
+    ? props.episodeElements.find(
+        (episode) => episode.id === initialSelectedEpisodeID,
+      )
     : props.episodeElements.at(0);
   if (!episode) {
     return;
@@ -21,7 +26,9 @@ export function initialize(props: Readonly<EpisodeSelectorProps>, initialSelecte
   selectEpisodeElement(props, episode.id);
   switchEpisodeTab(props, episode.type);
   setEpisodesVisible(props, episode.type);
-  const episodeDetail = props.episodeDetails.find((episodeDetail) => episodeDetail.id === episode.id);
+  const episodeDetail = props.episodeDetails.find(
+    (episodeDetail) => episodeDetail.id === episode.id,
+  );
   if (!episodeDetail) {
     return;
   }
