@@ -77,7 +77,7 @@ export function createEpisodeSelectorProps(
   root.innerHTML = rootInnerHTML(ids, resources);
   const elements = extractElements(root, ids);
   const episodeElements = episodes.map(
-    (episode) => new EpisodeElement(episode),
+    (episode) => new EpisodeElement(resources, episode),
   );
   episodeElements.forEach((episodeElement) => {
     elements.episodes.appendChild(episodeElement.getRootHTMLElement());
