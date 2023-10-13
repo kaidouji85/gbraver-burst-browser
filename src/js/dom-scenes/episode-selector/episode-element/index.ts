@@ -1,13 +1,14 @@
-import { Observable } from "rxjs";
+import { Observable, Unsubscribable } from "rxjs";
 
 import { EpisodeID, EpisodeType } from "../../../game/episodes/episode";
+import { Resources } from "../../../resource";
 import { Episode } from "../episode";
+import { bindEventListeners } from "./procedure/bind-event-listeners";
 import { checked } from "./procedure/checked";
 import { isChecked } from "./procedure/is-checked";
 import { isVisible } from "./procedure/is-visible";
 import { visible } from "./procedure/visible";
 import { createEpisodeElementProps, EpisodeElementProps } from "./props";
-import { Resources } from "../../../resource";
 
 /** エピソードHTML要素 */
 export class EpisodeElement {
@@ -17,6 +18,8 @@ export class EpisodeElement {
   readonly type: EpisodeType;
   /** プロパティ */
   #props: EpisodeElementProps;
+  /** アンサブスクライバ */
+  #unsubscribers: Unsubscribable[];
 
   /**
    * コンストラクタ
@@ -27,6 +30,14 @@ export class EpisodeElement {
     this.id = episode.id;
     this.type = episode.type;
     this.#props = createEpisodeElementProps(resources, episode);
+    this.#unsubscribers = bindEventListeners(this.#props);
+  }
+
+  /**
+   * デストラクタ相当の処理
+   */
+  destructor(): void {
+    this.#unsubscribers.forEach(unsubscribe => unsubscribe.unsubscribe());
   }
 
   /**
@@ -41,7 +52,7 @@ export class EpisodeElement {
    * 選択通知
    * @return 通知ストリーム
    */
-  selectionNotifier(): Observable<unknown> {
+  selectionNotifier(): Observable<void> {
     return this.#props.select;
   }
 

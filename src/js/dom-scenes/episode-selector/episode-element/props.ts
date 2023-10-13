@@ -1,4 +1,4 @@
-import { fromEvent, Observable } from "rxjs";
+import { Subject } from "rxjs";
 
 import { Resources } from "../../../resource";
 import { domUuid } from "../../../uuid/dom-uuid";
@@ -15,7 +15,7 @@ export type EpisodeElementProps = {
   /** チェック */
   checker: HTMLElement;
   /** 選択通知ストリーム */
-  select: Observable<unknown>;
+  select: Subject<void>;
 };
 
 /**
@@ -32,7 +32,7 @@ export function createEpisodeElementProps(resources: Resources, episode: Readonl
   root.className = ROOT_CLASS;
   root.innerHTML = rootInnerHTML(resources, ids, episode);
   const elements = extractElements(root, ids);
-  const select = fromEvent(root, "change");
+  const select = new Subject<void>();
   return {
     ...elements,
     root,
