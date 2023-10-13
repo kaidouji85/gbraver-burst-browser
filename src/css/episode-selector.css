@@ -13,7 +13,7 @@
       var(--screen-padding-bottom) var(--screen-padding-left);
     display: grid;
     grid-template-columns: 1fr 1fr;
-    grid-template-rows: 1fr auto;
+    grid-template-rows: minmax(calc(var(--responsive-font-size) * 7), 1fr) auto;
     grid-gap: var(--gap);
   }
 }
