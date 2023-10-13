@@ -1,5 +1,6 @@
 import { EpisodeElement } from "../episode-element";
 import { EpisodeSelectorProps } from "../props";
+import { selectEpisodeElement } from "./select-episode";
 import { setEpisodeDetail } from "./set-episode-detail";
 
 /**
@@ -18,6 +19,7 @@ export function onEpisodeSelect(
     return;
   }
 
+  selectEpisodeElement(props, episodeElement.id);
   setEpisodeDetail(props, episodeDetail);
   props.changeValueSound.sound.play();
 }

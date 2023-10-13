@@ -10,5 +10,7 @@ export function onRootPush(
   props: Readonly<EpisodeElementProps>,
   action: Readonly<PushDOM>
 ): void {
-  // TODO 処理を書く
+  action.event.preventDefault();
+  action.event.stopPropagation();
+  props.select.next();
 }
