@@ -38,21 +38,3 @@
 .episode__checker--invisible {
   opacity: 0;
 }
-
-.episode__overlay {
-  position: absolute;
-  background-color: var(--font-color);
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-}
-
-.episode .episode__overlay {
-  display: none;
-}
-
-.episode__checker:checked ~ .episode__overlay {
-  opacity: 0.2;
-  display: block;
-}
