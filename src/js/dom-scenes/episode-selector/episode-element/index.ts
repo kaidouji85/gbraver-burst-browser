@@ -7,6 +7,7 @@ import { isChecked } from "./procedure/is-checked";
 import { isVisible } from "./procedure/is-visible";
 import { visible } from "./procedure/visible";
 import { createEpisodeElementProps, EpisodeElementProps } from "./props";
+import { Resources } from "../../../resource";
 
 /** エピソードHTML要素 */
 export class EpisodeElement {
@@ -19,12 +20,13 @@ export class EpisodeElement {
 
   /**
    * コンストラクタ
+   * @param resources リソース管理オブジェクト
    * @param episode エピソード情報
    */
-  constructor(episode: Episode) {
+  constructor(resources: Resources, episode: Episode) {
     this.id = episode.id;
     this.type = episode.type;
-    this.#props = createEpisodeElementProps(episode);
+    this.#props = createEpisodeElementProps(resources, episode);
   }
 
   /**
