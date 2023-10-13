@@ -3,7 +3,7 @@ import { GameProps } from "../../game-props";
 import { gotoEndingIfNeeded } from "./goto-ending-if-needed";
 import { gotoNPCBattleStageIfNeeded } from "./goto-npc-battle-stage";
 import { gotoTitleIfNeeded } from "./goto-title-if-needed";
-import { gotoTutorialIfNeeded } from "./goto-tutorial-if-needed";
+import { gotoEpisodeIfNeeded } from "./goto-tutorial-if-needed";
 import { gotoEpisodeSelectorIfNeeded } from "./goto-tutorial-selector-if-needed";
 
 /**
@@ -18,40 +18,29 @@ export async function onPostBattleAction(
   props: GameProps,
   action: PostBattleAction,
 ): Promise<void> {
-  const isGotoTitleExecuted = await gotoTitleIfNeeded(props, action);
-  if (isGotoTitleExecuted) {
+  if (await gotoTitleIfNeeded(props, action)) {
     props.inProgress = {
       type: "None",
     };
     return;
   }
 
-  const isGotoEndingExecuted = await gotoEndingIfNeeded(props, action);
-  if (isGotoEndingExecuted) {
+  if (await gotoEndingIfNeeded(props, action)) {
     props.inProgress = {
       type: "None",
     };
     return;
   }
 
-  const isGotoNPCBattleStageExecuted = await gotoNPCBattleStageIfNeeded(
-    props,
-    action,
-  );
-  if (isGotoNPCBattleStageExecuted) {
+  if (await gotoNPCBattleStageIfNeeded(props, action)) {
     return;
   }
 
-  const isGotoTutorialExecuted = await gotoTutorialIfNeeded(props, action);
-  if (isGotoTutorialExecuted) {
+  if (await gotoEpisodeIfNeeded(props, action)) {
     return;
   }
 
-  const isGotoEpisodeSelectorExecuted = await gotoEpisodeSelectorIfNeeded(
-    props,
-    action,
-  );
-  if (isGotoEpisodeSelectorExecuted) {
+  if (await gotoEpisodeSelectorIfNeeded(props, action)) {
     props.inProgress = {
       type: "Story",
       story: {
