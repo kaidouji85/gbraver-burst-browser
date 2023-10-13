@@ -28,6 +28,9 @@ export class EpisodeSelector implements DOMScene {
 
   /** @override */
   destructor(): void {
+    this.#props.episodeElements.forEach((episodeElement) => {
+      episodeElement.destructor();
+    });
     this.#unsubscribers.forEach((unsubscriber) => {
       unsubscriber.unsubscribe();
     });
