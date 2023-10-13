@@ -25,13 +25,18 @@
   }
 }
 
-.episode__checker {
+.episode__checker,
+.episode__checker--invisible {
   --size: calc(var(--responsive-font-size) * 1);
 
   width: var(--size);
   height: var(--size);
   margin-right: calc(var(--responsive-font-size) * 0.5);
   flex-shrink: 0;
+}
+
+.episode__checker--invisible {
+  opacity: 0;
 }
 
 .episode__overlay {
