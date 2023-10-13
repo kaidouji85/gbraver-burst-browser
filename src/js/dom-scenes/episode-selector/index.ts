@@ -1,5 +1,6 @@
 import { Observable, Unsubscribable } from "rxjs";
 
+import { EpisodeID } from "../../game/episodes/episode";
 import type { Resources } from "../../resource";
 import type { DOMScene } from "../dom-scene";
 import { Episode } from "./episode";
@@ -19,11 +20,12 @@ export class EpisodeSelector implements DOMScene {
    * コンストラクタ
    * @param resources リソース管理オブジェクト
    * @param episodes エピソード情報
+   * @param initialSelectedEpisodeID 初期選択エピソードID
    */
-  constructor(resources: Resources, episodes: Episode[]) {
+  constructor(resources: Resources, episodes: Episode[], initialSelectedEpisodeID?: EpisodeID) {
     this.#props = createEpisodeSelectorProps(resources, episodes);
     this.#unsubscribers = bindEventListeners(this.#props);
-    initialize(this.#props);
+    initialize(this.#props, initialSelectedEpisodeID);
   }
 
   /** @override */
