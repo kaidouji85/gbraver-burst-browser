@@ -1,5 +1,6 @@
 import { PostBattleAction } from "../../game-actions/post-battle-action";
 import { GameProps } from "../../game-props";
+import { PlayingEpisode } from "../../in-progress/story";
 import { playTitleBGM } from "../play-title-bgm";
 import { startEpisodeSelector } from "../start-episode-selector";
 
@@ -17,8 +18,16 @@ export async function gotoEpisodeSelectorIfNeeded(
     return false;
   }
 
+  if (
+    props.inProgress.type !== "Story" ||
+    props.inProgress.story.type !== "PlayingEpisode"
+  ) {
+    return false;
+  }
+
+  const playingEpisode: PlayingEpisode = props.inProgress.story;
   props.domFloaters.hiddenPostBattle();
-  await startEpisodeSelector(props);
+  await startEpisodeSelector(props, playingEpisode.episode.id);
   playTitleBGM(props);
   return true;
 }

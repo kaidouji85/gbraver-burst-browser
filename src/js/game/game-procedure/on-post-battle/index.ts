@@ -47,11 +47,11 @@ export async function onPostBattleAction(
     return;
   }
 
-  const isGotoTutorialSelectorExecuted = await gotoEpisodeSelectorIfNeeded(
+  const isGotoEpisodeSelectorExecuted = await gotoEpisodeSelectorIfNeeded(
     props,
     action,
   );
-  if (isGotoTutorialSelectorExecuted) {
+  if (isGotoEpisodeSelectorExecuted) {
     props.inProgress = {
       type: "Story",
       story: {
