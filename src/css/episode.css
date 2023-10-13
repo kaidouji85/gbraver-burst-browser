@@ -7,7 +7,7 @@
     min-height: calc(var(--responsive-font-size) * 3);
     box-sizing: border-box;
     font-size: var(--responsive-font-size);
-    padding: calc(var(--responsive-font-size) * 0.3);
+    padding: calc(var(--responsive-font-size) * 0.1);
     color: var(--font-color);
     background-color: var(--sub-background-color);
     border-bottom: dashed 1px var(--font-color);
@@ -41,7 +41,7 @@
 
 .episode__title {
   flex: 1;
-  padding: calc(var(--responsive-font-size) * 0.5);
+  padding: calc(var(--responsive-font-size) * 0.4);
   border-radius: var(--button-border-radius);
 }
 

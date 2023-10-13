@@ -2,6 +2,7 @@ import { PushDOM } from "../../../dom/push-dom";
 import { EpisodeType } from "../../../game/episodes/episode";
 import { EpisodeSelectorProps } from "../props";
 import { getFirstVisibleEpisodeAndDetail } from "./get-first-visible-episode-and-detail";
+import { isSideEpisodeTabSelected } from "./is-episode-tab-selected";
 import { selectEpisodeElement } from "./select-episode";
 import { setEpisodeDetail } from "./set-episode-detail";
 import { setEpisodesVisible } from "./set-episodes-visible";
@@ -18,6 +19,10 @@ export function onSideEpisodeTabSelected(
 ): void {
   action.event.preventDefault();
   action.event.stopPropagation();
+  if (isSideEpisodeTabSelected(props)) {
+    return;
+  }
+
   props.changeValueSound.sound.play();
   const episodeType: EpisodeType = "Side Episode";
   switchEpisodeTab(props, episodeType);
