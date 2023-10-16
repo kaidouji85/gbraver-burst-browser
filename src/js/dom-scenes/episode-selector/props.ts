@@ -68,7 +68,7 @@ export function createEpisodeSelectorProps(
 ): EpisodeSelectorProps {
   const ids = {
     episodes: domUuid(),
-    episodeImageCut: domUuid(),
+    episodeImageCutContainer: domUuid(),
     mainEpisodeTab: domUuid(),
     sideEpisodeTab: domUuid(),
     episodeTitle: domUuid(),
@@ -90,7 +90,7 @@ export function createEpisodeSelectorProps(
     createEpisodeImageCut(resources, v),
   );
   episodeImageCuts.forEach((episodeImageCut) => {
-    elements.episodeImageCut.appendChild(episodeImageCut.image);
+    elements.episodeImageCutContainer.appendChild(episodeImageCut.image);
   });
   return {
     root,
