@@ -4,8 +4,8 @@ import { DataIDs } from "./data-ids";
 type Elements = {
   /** エピソード一覧 */
   episodes: HTMLElement;
-  /** エピソードのイメージカット */
-  episodeImageCut: HTMLImageElement;
+  /** イメージカット集合のルート要素 */
+  episodeImageCutContainer: HTMLElement;
   /** メインエピソードタブ */
   mainEpisodeTab: HTMLElement;
   /** サイドエピソードタブ */
@@ -30,13 +30,9 @@ export function extractElements(root: HTMLElement, ids: DataIDs): Elements {
   const episodes: HTMLElement =
     root.querySelector(`[data-id="${ids.episodes}"]`) ??
     document.createElement("div");
-  const foundEpisodeImageCut = root.querySelector(
-    `[data-id="${ids.episodeImageCut}"]`,
-  );
-  const episodeImageCut: HTMLImageElement =
-    foundEpisodeImageCut instanceof HTMLImageElement
-      ? foundEpisodeImageCut
-      : document.createElement("img");
+  const episodeImageCutContainer: HTMLElement =
+    root.querySelector(`[data-id="${ids.episodeImageCutContainer}"]`) ??
+    document.createElement("div");
   const mainEpisodeTab: HTMLElement =
     root.querySelector(`[data-id="${ids.mainEpisodeTab}"]`) ??
     document.createElement("div");
@@ -57,7 +53,7 @@ export function extractElements(root: HTMLElement, ids: DataIDs): Elements {
     document.createElement("div");
   return {
     episodes,
-    episodeImageCut,
+    episodeImageCutContainer,
     mainEpisodeTab,
     sideEpisodeTab,
     episodeTitle,

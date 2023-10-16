@@ -10,6 +10,10 @@ import {
 import { domUuid } from "../../uuid/dom-uuid";
 import { ROOT_CLASS } from "./dom/class-name";
 import { extractElements } from "./dom/elements";
+import {
+  createEpisodeImageCut,
+  EpisodeImageCut,
+} from "./dom/episode-image-cut";
 import { rootInnerHTML } from "./dom/root-inner-html";
 import { Episode } from "./episode";
 import { createEpisodeDetail, EpisodeDetail } from "./episode-detail";
@@ -22,8 +26,8 @@ export type EpisodeSelectorProps = {
   root: HTMLElement;
   /** エピソード要素をあつめたもの */
   episodeElements: EpisodeElement[];
-  /** エピソードのイメージカット */
-  episodeImageCut: HTMLImageElement;
+  /** イメージカットを集めたもの */
+  episodeImageCuts: EpisodeImageCut[];
   /** メインエピソードタブ */
   mainEpisodeTab: HTMLElement;
   /** サイドエピソードタブ */
@@ -64,7 +68,7 @@ export function createEpisodeSelectorProps(
 ): EpisodeSelectorProps {
   const ids = {
     episodes: domUuid(),
-    episodeImageCut: domUuid(),
+    episodeImageCutContainer: domUuid(),
     mainEpisodeTab: domUuid(),
     sideEpisodeTab: domUuid(),
     episodeTitle: domUuid(),
@@ -82,10 +86,16 @@ export function createEpisodeSelectorProps(
   episodeElements.forEach((episodeElement) => {
     elements.episodes.appendChild(episodeElement.getRootHTMLElement());
   });
+  const episodeImageCuts = episodes.map((v) =>
+    createEpisodeImageCut(resources, v),
+  );
+  episodeImageCuts.forEach((episodeImageCut) => {
+    elements.episodeImageCutContainer.appendChild(episodeImageCut.image);
+  });
   return {
     root,
     episodeElements: episodeElements,
-    episodeImageCut: elements.episodeImageCut,
+    episodeImageCuts,
     mainEpisodeTab: elements.mainEpisodeTab,
     sideEpisodeTab: elements.sideEpisodeTab,
     episodeTitle: elements.episodeTitle,
@@ -102,6 +112,8 @@ export function createEpisodeSelectorProps(
     pushButtonSound:
       resources.sounds.find((v) => v.id === SOUND_IDS.PUSH_BUTTON) ??
       createEmptySoundResource(),
-    isImageCutsLoaded: Promise.resolve(),
+    isImageCutsLoaded: Promise.all(
+      episodeImageCuts.map((v) => v.waitUntilLoaded),
+    ),
   };
 }

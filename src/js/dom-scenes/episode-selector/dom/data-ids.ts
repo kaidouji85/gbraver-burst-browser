@@ -2,8 +2,8 @@
 export type DataIDs = {
   /** エピソード一覧 */
   episodes: string;
-  /** エピソードのイメージカット */
-  episodeImageCut: string;
+  /** イメージカット集合のルート要素 */
+  episodeImageCutContainer: string;
   /** メインエピソードタブ */
   mainEpisodeTab: string;
   /** サイドエピソードタブ */
