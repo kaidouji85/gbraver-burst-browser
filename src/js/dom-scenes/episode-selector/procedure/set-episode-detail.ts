@@ -12,7 +12,6 @@ export function setEpisodeDetail(
 ) {
   props.episodeTitle.innerText = episodeDetail.title;
   props.episodeIntroduction.innerText = episodeDetail.introduction;
-  //props.episodeImageCut.src = episodeDetail.imageCutPath;
   props.episodeImageCuts.forEach((imageCut) => {
     imageCut.visible(imageCut.id === episodeDetail.id);
   });

@@ -29,7 +29,7 @@ export interface EpisodeImageCut {
 }
 
 /** イメージカットのシンプルな実装 */
-class SimpleImageCut {
+class SimpleEpisodeImageCut implements EpisodeImageCut {
   /** @override */
   id: EpisodeID;
   /** @override */
@@ -68,5 +68,5 @@ export function createEpisodeImageCut(
   resources: Resources,
   config: EpisodeImageCutConfig,
 ): EpisodeImageCut {
-  return new SimpleImageCut(resources, config);
+  return new SimpleEpisodeImageCut(resources, config);
 }

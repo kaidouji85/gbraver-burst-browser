@@ -30,7 +30,7 @@ export function extractElements(root: HTMLElement, ids: DataIDs): Elements {
   const episodes: HTMLElement =
     root.querySelector(`[data-id="${ids.episodes}"]`) ??
     document.createElement("div");
-  const episodeImageCut: HTMLElement =
+  const episodeImageCutContainer: HTMLElement =
     root.querySelector(`[data-id="${ids.episodeImageCutContainer}"]`) ??
     document.createElement("div");
   const mainEpisodeTab: HTMLElement =
@@ -53,7 +53,7 @@ export function extractElements(root: HTMLElement, ids: DataIDs): Elements {
     document.createElement("div");
   return {
     episodes,
-    episodeImageCutContainer: episodeImageCut,
+    episodeImageCutContainer,
     mainEpisodeTab,
     sideEpisodeTab,
     episodeTitle,
