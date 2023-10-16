@@ -112,6 +112,8 @@ export function createEpisodeSelectorProps(
     pushButtonSound:
       resources.sounds.find((v) => v.id === SOUND_IDS.PUSH_BUTTON) ??
       createEmptySoundResource(),
-    isImageCutsLoaded: Promise.resolve(),
+    isImageCutsLoaded: Promise.all(
+      episodeImageCuts.map((v) => v.waitUntilLoaded),
+    ),
   };
 }
