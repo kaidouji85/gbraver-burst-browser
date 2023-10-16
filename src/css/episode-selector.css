@@ -46,6 +46,10 @@
   filter: brightness(0.7);
 }
 
+.episode-selector__episode-image-cut--invisible {
+  display: none;
+}
+
 .episode-selector__selector {
   display: flex;
   flex-direction: column;

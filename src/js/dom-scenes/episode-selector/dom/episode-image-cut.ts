@@ -2,10 +2,10 @@ import { EpisodeID } from "../../../game/episodes/episode";
 import { Resources } from "../../../resource";
 import { PathId } from "../../../resource/path/resource";
 import { waitElementLoaded } from "../../../wait/wait-element-loaded";
-import { IMAGE_CUT, IMAGE_CUT_INVISIBLE } from "./class-name";
+import { EPISODE_IMAGE_CUT, EPISODE_IMAGE_CUT_INVISIBLE } from "./class-name";
 
 /** イメージカット設定 */
-type ImageCutConfig = {
+type EpisodeImageCutConfig = {
   /** エピソードID */
   id: EpisodeID;
   /** イメージカットのパスID */
@@ -13,7 +13,7 @@ type ImageCutConfig = {
 };
 
 /** イメージカット */
-export interface ImageCut {
+export interface EpisodeImageCut {
   /** エピソードID */
   readonly id: EpisodeID;
   /** イメージカットのイメージ要素 */
@@ -42,7 +42,7 @@ class SimpleImageCut {
    * @param resources  リソース管理オブジェクト
    * @param config イメージカット設定
    */
-  constructor(resources: Resources, config: ImageCutConfig) {
+  constructor(resources: Resources, config: EpisodeImageCutConfig) {
     this.id = config.id;
     this.image = document.createElement("img");
     this.waitUntilLoaded = waitElementLoaded(this.image);
@@ -52,7 +52,9 @@ class SimpleImageCut {
 
   /** @override */
   visible(isVisible: boolean): void {
-    this.image.className = isVisible ? IMAGE_CUT : IMAGE_CUT_INVISIBLE;
+    this.image.className = isVisible
+      ? EPISODE_IMAGE_CUT
+      : EPISODE_IMAGE_CUT_INVISIBLE;
   }
 }
 
@@ -62,9 +64,9 @@ class SimpleImageCut {
  * @param config イメージカット設定
  * @return 生成結果
  */
-export function createImageCut(
+export function createEpisodeImageCut(
   resources: Resources,
-  config: ImageCutConfig,
-): ImageCut {
+  config: EpisodeImageCutConfig,
+): EpisodeImageCut {
   return new SimpleImageCut(resources, config);
 }

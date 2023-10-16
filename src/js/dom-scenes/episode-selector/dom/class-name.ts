@@ -8,7 +8,7 @@ export const EPISODE_TYPE = `${ROOT_CLASS}__episode-type`;
 export const EPISODE_TYPE_SELECTED = `${EPISODE_TYPE}--selected`;
 
 /** イメージカット class属性 */
-export const IMAGE_CUT = `${ROOT_CLASS}__image-cut`;
+export const EPISODE_IMAGE_CUT = `${ROOT_CLASS}__episode-image-cut`;
 
 /** イメージカット 非表示 class属性 */
-export const IMAGE_CUT_INVISIBLE = `${IMAGE_CUT}--invisible`;
+export const EPISODE_IMAGE_CUT_INVISIBLE = `${EPISODE_IMAGE_CUT}--invisible`;
