@@ -34,13 +34,15 @@ export function createEpisodeSelectorProps(
   const root = document.createElement("div");
   root.className = BLOCK;
   root.innerHTML = rootInnerHTML();
+
   const episodeElements = episodes.map(
     (episode) => new EpisodeElement(resources, episode),
   );
-  const episodesElement = extractEpisodes(root);
+  const extractedEpisodes = extractEpisodes(root);
   episodeElements.forEach((episodeElement) => {
-    episodesElement.appendChild(episodeElement.getRootHTMLElement());
+    extractedEpisodes.appendChild(episodeElement.getRootHTMLElement());
   });
+
   const episodeImageCuts = episodes.map((v) =>
     createEpisodeImageCut(resources, v),
   );
@@ -50,7 +52,7 @@ export function createEpisodeSelectorProps(
   });
   return {
     root,
-    episodeElements: episodeElements,
+    episodeElements,
     episodeImageCuts,
     mainEpisodeTab: extractMainEpisodeTab(root),
     sideEpisodeTab: extractSideEpisodeTab(root),
