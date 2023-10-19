@@ -33,7 +33,7 @@ export function createEpisodeSelectorProps(
 ): EpisodeSelectorProps {
   const root = document.createElement("div");
   root.className = BLOCK;
-  root.innerHTML = rootInnerHTML(resources);
+  root.innerHTML = rootInnerHTML();
   const episodeElements = episodes.map(
     (episode) => new EpisodeElement(resources, episode),
   );
