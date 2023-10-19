@@ -1,32 +1,27 @@
 import { DataIDs } from "./data-ids";
 
-/** ルート要素の子孫要素 */
-export type Elements = {
-  /** キャプション */
-  caption: HTMLElement;
-  /** 対戦相手アームドーザアイコン */
-  armdozerIcon: HTMLImageElement;
-};
-
 /**
- * ルート要素から子孫要素を抽出する
+ * キャプションを抽出する
  * @param root ルート要素
  * @param ids data-idを集めたもの
  * @return 抽出結果
  */
-export function extractElements(root: HTMLElement, ids: DataIDs): Elements {
-  const caption: HTMLElement =
-    root.querySelector(`[data-id="${ids.caption}"]`) ??
+export function extractCaption(root: HTMLElement, ids: DataIDs): HTMLElement {
+  return root.querySelector(`[data-id="${ids.caption}"]`) ?? 
     document.createElement("div");
+}
+
+/**
+ * アームドーザアイコンを抽出する
+ * @param root ルート要素
+ * @param ids data-idを集めたもの
+ * @return 抽出結果
+ */
+export function extractArmdozerIcon(root: HTMLElement, ids: DataIDs): HTMLImageElement {
   const foundArmdozerIcon = root.querySelector(
     `[data-id="${ids.armdozerIcon}"]`,
   );
-  const armdozerIcon =
-    foundArmdozerIcon instanceof HTMLImageElement
-      ? foundArmdozerIcon
-      : document.createElement("img");
-  return {
-    caption,
-    armdozerIcon,
-  };
+  return foundArmdozerIcon instanceof HTMLImageElement
+    ? foundArmdozerIcon
+    : document.createElement("img");
 }

@@ -2,10 +2,10 @@ import { ArmdozerId } from "gbraver-burst-core";
 
 import { getArmdozerIconPathId } from "../../../path/armdozer-icon-path";
 import { Resources } from "../../../resource";
-import { domUuid } from "../../../uuid/dom-uuid";
 import { waitElementLoaded } from "../../../wait/wait-element-loaded";
 import { ROOT_CLASS } from "../dom/class-name";
-import { extractElements } from "../dom/elements";
+import { createDataIDs } from "../dom/data-ids";
+import { extractArmdozerIcon, extractCaption } from "../dom/elements";
 import { rootInnerHTML } from "../dom/root-inner-html";
 import { StageTitleProps } from "../props";
 
@@ -28,18 +28,18 @@ export type CreateStageTitleParams = {
 export function createStageTitleProps(
   params: CreateStageTitleParams,
 ): StageTitleProps {
-  const ids = {
-    caption: domUuid(),
-    armdozerIcon: domUuid(),
-  };
+  const ids = createDataIDs();
   const root = document.createElement("div");
   root.className = ROOT_CLASS;
   root.innerHTML = rootInnerHTML(ids, params.level);
-  const elements = extractElements(root, ids);
+
   const armdozerIconPathID = getArmdozerIconPathId(params.armdozerId);
-  elements.armdozerIcon.src =
+  const armdozerIcon = extractArmdozerIcon(root, ids);
+  armdozerIcon.src =
     params.resources.paths.find((v) => v.id === armdozerIconPathID)?.path ?? "";
-  elements.caption.innerHTML = params.caption
+
+  const caption = extractCaption(root, ids);
+  caption.innerHTML = params.caption
     .map(
       (v) => `
         <span class="${ROOT_CLASS}__caption-clause">
@@ -48,8 +48,9 @@ export function createStageTitleProps(
       `,
     )
     .reduce((a, b) => a + b);
-  return {
-    root,
-    isArmdozerIconLoaded: waitElementLoaded(elements.armdozerIcon),
-  };
+
+    return {
+      root,
+      isArmdozerIconLoaded: waitElementLoaded(armdozerIcon),
+    };
 }
