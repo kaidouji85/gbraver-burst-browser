@@ -1,10 +1,10 @@
-import {Subject} from "rxjs";
+import { Subject } from "rxjs";
 
-import {Resources} from "../../../../resource";
-import {Episode} from "../../episode";
-import {BLOCK} from "../dom/class-name";
-import {extractChecker} from "../dom/extract-element";
-import {rootInnerHTML} from "../dom/root-inner-html";
+import { Resources } from "../../../../resource";
+import { Episode } from "../../episode";
+import { BLOCK } from "../dom/class-name";
+import { extractChecker } from "../dom/extract-element";
+import { rootInnerHTML } from "../dom/root-inner-html";
 
 /**
  * EpisodeElementPropsを生成する
