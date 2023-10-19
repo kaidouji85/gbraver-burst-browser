@@ -8,7 +8,7 @@ import {
   SoundResource,
 } from "../../resource/sound";
 import { domUuid } from "../../uuid/dom-uuid";
-import { ROOT_CLASS } from "./dom/class-name";
+import { BLOCK } from "./dom/class-name";
 import { extractElements } from "./dom/elements";
 import {
   createEpisodeImageCut,
@@ -77,7 +77,7 @@ export function createEpisodeSelectorProps(
     prevButton: domUuid(),
   };
   const root = document.createElement("div");
-  root.className = ROOT_CLASS;
+  root.className = BLOCK;
   root.innerHTML = rootInnerHTML(ids, resources);
   const elements = extractElements(root, ids);
   const episodeElements = episodes.map(

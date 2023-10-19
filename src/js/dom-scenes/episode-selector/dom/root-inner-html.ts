@@ -1,6 +1,6 @@
 import { Resources } from "../../../resource";
 import { PathIds } from "../../../resource/path/ids";
-import { EPISODE_TYPE, EPISODE_TYPE_SELECTED, ROOT_CLASS } from "./class-name";
+import { BLOCK, EPISODE_TYPE, EPISODE_TYPE_SELECTED } from "./class-name";
 import { DataIDs } from "./data-ids";
 import rootInnerHTMLTemplate from "./root-inner-html.hbs";
 
@@ -21,7 +21,7 @@ export function rootInnerHTML(ids: DataIDs, resources: Resources): string {
     resources.paths.find((v) => v.id === PathIds.IMAGE_CUT_BURST)?.path ?? "";
   return rootInnerHTMLTemplate({
     ids,
-    ROOT_CLASS,
+    BLOCK,
     EPISODE_TYPE,
     EPISODE_TYPE_SELECTED,
     imageCut01,
