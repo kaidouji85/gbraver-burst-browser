@@ -14,8 +14,6 @@ export type CreateStageTitleParams = {
   resources: Resources;
   /** ステージレベル */
   level: number;
-  /** ステージ名 */
-  caption: string[];
   /** 対戦するアームドーザのID */
   armdozerId: ArmdozerId;
 };
@@ -36,19 +34,9 @@ export function createStageTitleProps(
   armdozerIcon.src =
     params.resources.paths.find((v) => v.id === armdozerIconPathID)?.path ?? "";
 
-  const caption = extractCaption(root);
-  caption.innerHTML = params.caption
-    .map(
-      (v) => `
-        <span class="${BLOCK}__caption-clause">
-          ${v}
-        </span>
-      `,
-    )
-    .reduce((a, b) => a + b);
-
   return {
     root,
+    caption: extractCaption(root),
     isArmdozerIconLoaded: waitElementLoaded(armdozerIcon),
   };
 }

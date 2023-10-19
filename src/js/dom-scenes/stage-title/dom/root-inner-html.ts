@@ -3,7 +3,6 @@ import template from "./root-inner-html.hbs";
 
 /**
  * ルート要素のinnerHTML
- * @param ids data-idをまとめたもの
  * @param level ステージレベル
  * @return ルート要素のinnerHTML
  */
