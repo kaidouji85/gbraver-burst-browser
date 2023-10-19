@@ -7,13 +7,21 @@ import {
   SOUND_IDS,
   SoundResource,
 } from "../../resource/sound";
-import { domUuid } from "../../uuid/dom-uuid";
 import { BLOCK } from "./dom/class-name";
-import { extractElements } from "./dom/elements";
 import {
   createEpisodeImageCut,
   EpisodeImageCut,
 } from "./dom/episode-image-cut";
+import {
+  extractEpisodeImageCutContainer,
+  extractEpisodeIntroduction,
+  extractEpisodes,
+  extractEpisodeTitle,
+  extractMainEpisodeTab,
+  extractPlayButton,
+  extractPrevButton,
+  extractSideEpisodeTab,
+} from "./dom/extract-element";
 import { rootInnerHTML } from "./dom/root-inner-html";
 import { Episode } from "./episode";
 import { createEpisodeDetail, EpisodeDetail } from "./episode-detail";
@@ -66,42 +74,33 @@ export function createEpisodeSelectorProps(
   resources: Resources,
   episodes: Episode[],
 ): EpisodeSelectorProps {
-  const ids = {
-    episodes: domUuid(),
-    episodeImageCutContainer: domUuid(),
-    mainEpisodeTab: domUuid(),
-    sideEpisodeTab: domUuid(),
-    episodeTitle: domUuid(),
-    episodeIntroduction: domUuid(),
-    playButton: domUuid(),
-    prevButton: domUuid(),
-  };
   const root = document.createElement("div");
   root.className = BLOCK;
-  root.innerHTML = rootInnerHTML(ids, resources);
-  const elements = extractElements(root, ids);
+  root.innerHTML = rootInnerHTML(resources);
   const episodeElements = episodes.map(
     (episode) => new EpisodeElement(resources, episode),
   );
+  const episodesElement = extractEpisodes(root);
   episodeElements.forEach((episodeElement) => {
-    elements.episodes.appendChild(episodeElement.getRootHTMLElement());
+    episodesElement.appendChild(episodeElement.getRootHTMLElement());
   });
   const episodeImageCuts = episodes.map((v) =>
     createEpisodeImageCut(resources, v),
   );
+  const episodeImageCutContainer = extractEpisodeImageCutContainer(root);
   episodeImageCuts.forEach((episodeImageCut) => {
-    elements.episodeImageCutContainer.appendChild(episodeImageCut.image);
+    episodeImageCutContainer.appendChild(episodeImageCut.image);
   });
   return {
     root,
     episodeElements: episodeElements,
     episodeImageCuts,
-    mainEpisodeTab: elements.mainEpisodeTab,
-    sideEpisodeTab: elements.sideEpisodeTab,
-    episodeTitle: elements.episodeTitle,
-    episodeIntroduction: elements.episodeIntroduction,
-    playButton: elements.playButton,
-    prevButton: elements.prevButton,
+    mainEpisodeTab: extractMainEpisodeTab(root),
+    sideEpisodeTab: extractSideEpisodeTab(root),
+    episodeTitle: extractEpisodeTitle(root),
+    episodeIntroduction: extractEpisodeIntroduction(root),
+    playButton: extractPlayButton(root),
+    prevButton: extractPrevButton(root),
     episodeDetails: episodes.map((v) => createEpisodeDetail(resources, v)),
     exclusive: new Exclusive(),
     prev: new Subject(),
