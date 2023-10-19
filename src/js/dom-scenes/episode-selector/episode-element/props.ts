@@ -1,11 +1,9 @@
 import { Subject } from "rxjs";
 
 import { Resources } from "../../../resource";
-import { domUuid } from "../../../uuid/dom-uuid";
 import { Episode } from "../episode";
 import { BLOCK } from "./dom/class-name";
-import { DataIDs } from "./dom/data-ids";
-import { extractElements } from "./dom/elements";
+import { extractChecker } from "./dom/extract-element";
 import { rootInnerHTML } from "./dom/root-inner-html";
 
 /** エピソードHTML要素プロパティ */
@@ -28,17 +26,12 @@ export function createEpisodeElementProps(
   resources: Resources,
   episode: Readonly<Episode>,
 ) {
-  const ids: DataIDs = {
-    checker: domUuid(),
-  };
   const root: HTMLElement = document.createElement("div");
   root.className = BLOCK;
-  root.innerHTML = rootInnerHTML(resources, ids, episode);
-  const elements = extractElements(root, ids);
-  const select = new Subject<void>();
+  root.innerHTML = rootInnerHTML(resources, episode);
   return {
-    ...elements,
     root,
-    select,
+    checker: extractChecker(root),
+    select: new Subject<void>(),
   };
 }
