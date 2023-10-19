@@ -3,7 +3,7 @@ import { ArmdozerId } from "gbraver-burst-core";
 import { getArmdozerIconPathId } from "../../../path/armdozer-icon-path";
 import { Resources } from "../../../resource";
 import { waitElementLoaded } from "../../../wait/wait-element-loaded";
-import { ROOT_CLASS } from "../dom/class-name";
+import { BLOCK } from "../dom/class-name";
 import { createDataIDs } from "../dom/data-ids";
 import { extractArmdozerIcon, extractCaption } from "../dom/extract-element";
 import { rootInnerHTML } from "../dom/root-inner-html";
@@ -30,7 +30,7 @@ export function createStageTitleProps(
 ): StageTitleProps {
   const ids = createDataIDs();
   const root = document.createElement("div");
-  root.className = ROOT_CLASS;
+  root.className = BLOCK;
   root.innerHTML = rootInnerHTML(ids, params.level);
 
   const armdozerIconPathID = getArmdozerIconPathId(params.armdozerId);
@@ -42,15 +42,15 @@ export function createStageTitleProps(
   caption.innerHTML = params.caption
     .map(
       (v) => `
-        <span class="${ROOT_CLASS}__caption-clause">
+        <span class="${BLOCK}__caption-clause">
           ${v}
         </span>
       `,
     )
     .reduce((a, b) => a + b);
 
-    return {
-      root,
-      isArmdozerIconLoaded: waitElementLoaded(armdozerIcon),
-    };
+  return {
+    root,
+    isArmdozerIconLoaded: waitElementLoaded(armdozerIcon),
+  };
 }
