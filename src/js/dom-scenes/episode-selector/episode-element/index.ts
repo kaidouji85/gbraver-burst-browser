@@ -5,10 +5,11 @@ import { Resources } from "../../../resource";
 import { Episode } from "../episode";
 import { bindEventListeners } from "./procedure/bind-event-listeners";
 import { checked } from "./procedure/checked";
+import { createEpisodeElementProps } from "./procedure/create-episode-element-props";
 import { isChecked } from "./procedure/is-checked";
 import { isVisible } from "./procedure/is-visible";
 import { visible } from "./procedure/visible";
-import { createEpisodeElementProps, EpisodeElementProps } from "./props";
+import { EpisodeElementProps } from "./props";
 
 /** エピソードHTML要素 */
 export class EpisodeElement {
