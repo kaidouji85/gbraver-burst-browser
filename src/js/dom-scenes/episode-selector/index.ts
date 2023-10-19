@@ -1,13 +1,14 @@
 import { Observable, Unsubscribable } from "rxjs";
 
 import { EpisodeID } from "../../game/episodes/episode";
-import type { Resources } from "../../resource";
-import type { DOMScene } from "../dom-scene";
+import { Resources } from "../../resource";
+import { DOMScene } from "../dom-scene";
 import { Episode } from "./episode";
 import { EpisodeSelect } from "./episode-element/episode-select";
 import { bindEventListeners } from "./procedure/bind-event-listeners";
+import { createEpisodeSelectorProps } from "./procedure/create-episode-selector-props";
 import { initialize } from "./procedure/initialize";
-import { createEpisodeSelectorProps, EpisodeSelectorProps } from "./props";
+import { EpisodeSelectorProps } from "./props";
 
 /** エピソードセレクト画面 */
 export class EpisodeSelector implements DOMScene {
