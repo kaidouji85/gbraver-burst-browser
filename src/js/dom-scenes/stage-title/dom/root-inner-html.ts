@@ -1,5 +1,4 @@
 import { BLOCK } from "./class-name";
-import { DataIDs } from "./data-ids";
 import template from "./root-inner-html.hbs";
 
 /**
@@ -8,10 +7,9 @@ import template from "./root-inner-html.hbs";
  * @param level ステージレベル
  * @return ルート要素のinnerHTML
  */
-export function rootInnerHTML(ids: DataIDs, level: number): string {
+export function rootInnerHTML(level: number): string {
   return template({
     BLOCK,
-    ids,
     level,
   });
 }

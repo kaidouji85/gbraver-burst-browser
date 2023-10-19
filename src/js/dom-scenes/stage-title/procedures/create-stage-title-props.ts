@@ -4,7 +4,6 @@ import { getArmdozerIconPathId } from "../../../path/armdozer-icon-path";
 import { Resources } from "../../../resource";
 import { waitElementLoaded } from "../../../wait/wait-element-loaded";
 import { BLOCK } from "../dom/class-name";
-import { createDataIDs } from "../dom/data-ids";
 import { extractArmdozerIcon, extractCaption } from "../dom/extract-element";
 import { rootInnerHTML } from "../dom/root-inner-html";
 import { StageTitleProps } from "../props";
@@ -28,17 +27,16 @@ export type CreateStageTitleParams = {
 export function createStageTitleProps(
   params: CreateStageTitleParams,
 ): StageTitleProps {
-  const ids = createDataIDs();
   const root = document.createElement("div");
   root.className = BLOCK;
-  root.innerHTML = rootInnerHTML(ids, params.level);
+  root.innerHTML = rootInnerHTML(params.level);
 
   const armdozerIconPathID = getArmdozerIconPathId(params.armdozerId);
-  const armdozerIcon = extractArmdozerIcon(root, ids);
+  const armdozerIcon = extractArmdozerIcon(root);
   armdozerIcon.src =
     params.resources.paths.find((v) => v.id === armdozerIconPathID)?.path ?? "";
 
-  const caption = extractCaption(root, ids);
+  const caption = extractCaption(root);
   caption.innerHTML = params.caption
     .map(
       (v) => `
