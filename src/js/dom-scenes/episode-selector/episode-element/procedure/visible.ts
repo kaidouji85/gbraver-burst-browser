@@ -1,4 +1,4 @@
-import { ROOT_CLASS, ROOT_CLASS_INVISIBLE } from "../dom/class-name";
+import { BLOCK, BLOCK_INVISIBLE } from "../dom/class-name";
 import { EpisodeElementProps } from "../props";
 
 /**
@@ -10,5 +10,5 @@ export function visible(
   props: Readonly<EpisodeElementProps>,
   isVisible: boolean,
 ): void {
-  props.root.className = isVisible ? ROOT_CLASS : ROOT_CLASS_INVISIBLE;
+  props.root.className = isVisible ? BLOCK : BLOCK_INVISIBLE;
 }

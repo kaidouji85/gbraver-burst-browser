@@ -1,11 +1,11 @@
-/** ルートHTML要素 class属性 */
-export const ROOT_CLASS = "episode";
+/** BEM ブロック */
+export const BLOCK = "episode";
 
-/** ルートHTML要素 非表示 class属性 */
-export const ROOT_CLASS_INVISIBLE = `${ROOT_CLASS}--invisible`;
+/** ルートHTML要素 非表示 */
+export const BLOCK_INVISIBLE = `${BLOCK}--invisible`;
 
-/** チェックマーク class属性 */
-export const CHECKER_CLASS = `${ROOT_CLASS}__checker`;
+/** チェックマーク */
+export const CHECKER = `${BLOCK}__checker`;
 
-/** チェックマーク 非表示 class属性 */
-export const CHECKER_CLASS_INVISIBLE = `${CHECKER_CLASS}--invisible`;
+/** チェックマーク 非表示 */
+export const CHECKER_INVISIBLE = `${CHECKER}--invisible`;

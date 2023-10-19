@@ -1,4 +1,4 @@
-import { ROOT_CLASS } from "../dom/class-name";
+import { BLOCK } from "../dom/class-name";
 import { EpisodeElementProps } from "../props";
 
 /**
@@ -7,5 +7,5 @@ import { EpisodeElementProps } from "../props";
  * @return trueで表示されている
  */
 export function isVisible(props: Readonly<EpisodeElementProps>): boolean {
-  return props.root.className === ROOT_CLASS;
+  return props.root.className === BLOCK;
 }

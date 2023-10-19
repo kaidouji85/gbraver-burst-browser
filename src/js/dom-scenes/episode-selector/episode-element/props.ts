@@ -3,7 +3,7 @@ import { Subject } from "rxjs";
 import { Resources } from "../../../resource";
 import { domUuid } from "../../../uuid/dom-uuid";
 import { Episode } from "../episode";
-import { ROOT_CLASS } from "./dom/class-name";
+import { BLOCK } from "./dom/class-name";
 import { DataIDs } from "./dom/data-ids";
 import { extractElements } from "./dom/elements";
 import { rootInnerHTML } from "./dom/root-inner-html";
@@ -32,7 +32,7 @@ export function createEpisodeElementProps(
     checker: domUuid(),
   };
   const root: HTMLElement = document.createElement("div");
-  root.className = ROOT_CLASS;
+  root.className = BLOCK;
   root.innerHTML = rootInnerHTML(resources, ids, episode);
   const elements = extractElements(root, ids);
   const select = new Subject<void>();

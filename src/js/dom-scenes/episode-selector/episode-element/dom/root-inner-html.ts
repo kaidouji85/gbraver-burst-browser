@@ -1,7 +1,7 @@
 import { Resources } from "../../../../resource";
 import { PathIds } from "../../../../resource/path/ids";
 import { Episode } from "../../episode";
-import { CHECKER_CLASS_INVISIBLE, ROOT_CLASS } from "./class-name";
+import { BLOCK, CHECKER_INVISIBLE } from "./class-name";
 import { DataIDs } from "./data-ids";
 import rootInnerHTMLTemplate from "./root-inner-html.hbs";
 
@@ -22,8 +22,8 @@ export function rootInnerHTML(
   return rootInnerHTMLTemplate({
     ...episode,
     ids,
-    ROOT_CLASS,
-    CHECKER_CLASS_INVISIBLE,
+    BLOCK,
+    CHECKER_INVISIBLE,
     checkPath,
   });
 }
