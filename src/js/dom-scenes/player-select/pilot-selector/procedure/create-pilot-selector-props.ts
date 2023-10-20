@@ -14,13 +14,13 @@ import { PilotStatus } from "../pilot-status";
 import { PilotSelectorProps } from "../props";
 
 /**
- * PilotIconPropsを生成する
+ * PilotSelectorPropsを生成する
  * @param resources リソース管理オブジェクト
  * @param pilotIds 選択可能なパイロットIDリスト
  * @param initialPilotId パイロットIDの初期値
  * @return 生成結果
  */
-export function createPilotIconProps(
+export function createPilotSelectorProps(
   resources: Resources,
   pilotIds: PilotId[],
   initialPilotId: PilotId,
