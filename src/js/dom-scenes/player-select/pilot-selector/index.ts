@@ -1,4 +1,4 @@
-import type { PilotId } from "gbraver-burst-core";
+import { PilotId } from "gbraver-burst-core";
 import { Howl } from "howler";
 import { Observable, Subject, Unsubscribable } from "rxjs";
 
@@ -6,76 +6,14 @@ import { pop } from "../../../dom/pop";
 import { domPushStream, PushDOM } from "../../../dom/push-dom";
 import { replaceDOM } from "../../../dom/replace-dom";
 import { Exclusive } from "../../../exclusive/exclusive";
-import type { Resources } from "../../../resource";
+import { Resources } from "../../../resource";
 import { SOUND_IDS } from "../../../resource/sound";
-import { domUuid } from "../../../uuid/dom-uuid";
 import { createPilotIcon } from "./create-pilot-icon";
+import { BLOCK } from "./dom/class-name";
+import { extractDummyStatus, extractIcons, extractOkButton, extractPrevButton } from "./dom/extract-element";
+import { rootInnerHTML } from "./dom/root-inner-html";
 import { PilotIcon } from "./pilot-icon";
 import { PilotStatus } from "./pilot-status";
-
-/**ルート要素のclass名 */
-export const ROOT_CLASS_NAME = "pilot-selector";
-
-/** data-idを集めたもの*/
-type DataIDs = {
-  dummyStatus: string;
-  icons: string;
-  okButton: string;
-  prevButton: string;
-};
-
-/**
- * ルート要素のinnerHTML
- *
- * @param ids data-idを集めたもの
- * @return innerHTML
- */
-function rootInnerHTML(ids: DataIDs): string {
-  return `
-    <div data-id="${ids.dummyStatus}"></div>
-    <div class="${ROOT_CLASS_NAME}__icons" data-id="${ids.icons}"></div>
-    <div class="${ROOT_CLASS_NAME}__controllers">
-    <button class="${ROOT_CLASS_NAME}__prev-button" data-id="${ids.prevButton}">戻る</button>
-    <button class="${ROOT_CLASS_NAME}__ok-button" data-id="${ids.okButton}">これを載せる</button>
-    </div>
-  `;
-}
-
-/** ルート要素の子孫要素 */
-type Elements = {
-  dummyStatus: HTMLElement;
-  icons: HTMLElement;
-  okButton: HTMLElement;
-  prevButton: HTMLElement;
-};
-
-/**
- *  ルート要素の子孫要素を抽出する
- *
- * @param root ルート要素
- * @param ids data-idを集めたもの
- * @return 抽出結果
- */
-function extractElements(root: HTMLElement, ids: DataIDs): Elements {
-  const dummyStatus: HTMLElement =
-    root.querySelector(`[data-id="${ids.dummyStatus}"]`) ??
-    document.createElement("div");
-  const icons: HTMLElement =
-    root.querySelector(`[data-id="${ids.icons}"]`) ??
-    document.createElement("div");
-  const okButton: HTMLElement =
-    root.querySelector(`[data-id="${ids.okButton}"]`) ??
-    document.createElement("button");
-  const prevButton: HTMLElement =
-    root.querySelector(`[data-id="${ids.prevButton}"]`) ??
-    document.createElement("button");
-  return {
-    dummyStatus,
-    icons,
-    okButton,
-    prevButton,
-  };
-}
 
 /**パイロットセレクタ */
 export class PilotSelector {
@@ -119,29 +57,30 @@ export class PilotSelector {
     this.#decideSound =
       resources.sounds.find((v) => v.id === SOUND_IDS.PUSH_BUTTON)?.sound ??
       new Howl({ src: "" });
-    const dataIDs = {
-      dummyStatus: domUuid(),
-      icons: domUuid(),
-      okButton: domUuid(),
-      prevButton: domUuid(),
-    };
+    
     this.#root = document.createElement("div");
-    this.#root.className = ROOT_CLASS_NAME;
-    this.#root.innerHTML = rootInnerHTML(dataIDs);
-    const elements = extractElements(this.#root, dataIDs);
+    this.#root.className = BLOCK;
+    this.#root.innerHTML = rootInnerHTML();
+    
     this.#pilotStatus = new PilotStatus();
     this.#pilotStatus.switch(this.#pilotId);
-    replaceDOM(elements.dummyStatus, this.#pilotStatus.getRootHTMLElement());
+    const dummyStatus = extractDummyStatus(this.#root);
+    replaceDOM(dummyStatus, this.#pilotStatus.getRootHTMLElement());
     this.#pilotIcons = pilotIds.map((v) => ({
       pilotId: v,
       icon: createPilotIcon(resources, v),
     }));
+
+    const icons = extractIcons(this.#root);
     this.#pilotIcons.forEach((v) => {
       v.icon.selected(v.pilotId === initialPilotId);
-      elements.icons.appendChild(v.icon.getRootHTMLElement());
+      icons.appendChild(v.icon.getRootHTMLElement());
     });
-    this.#okButton = elements.okButton;
-    this.#prevButton = elements.prevButton;
+
+    this.#okButton = extractOkButton(this.#root);
+    
+    this.#prevButton = extractPrevButton(this.#root);
+    
     this.#unsubscribers = [
       ...this.#pilotIcons.map((v) =>
         v.icon.notifySelection().subscribe(() => {
@@ -176,7 +115,7 @@ export class PilotSelector {
       return;
     }
 
-    this.#root.className = ROOT_CLASS_NAME;
+    this.#root.className = BLOCK;
     this.#pilotId = pilotId;
     selected.icon.selected(true);
     this.#pilotStatus.switch(pilotId);
@@ -191,7 +130,7 @@ export class PilotSelector {
    * 本コンポネントを非表示にする
    */
   hidden(): void {
-    this.#root.className = `${ROOT_CLASS_NAME}--hidden`;
+    this.#root.className = `${BLOCK}--hidden`;
   }
 
   /**
