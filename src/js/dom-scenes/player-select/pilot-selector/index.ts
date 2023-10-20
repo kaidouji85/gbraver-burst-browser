@@ -9,8 +9,8 @@ import { Exclusive } from "../../../exclusive/exclusive";
 import type { Resources } from "../../../resource";
 import { SOUND_IDS } from "../../../resource/sound";
 import { domUuid } from "../../../uuid/dom-uuid";
-import { createPilotIcon } from "./create-pilot-icon";
-import { PilotIcon } from "./pilot-icon";
+import { createPilotIcon } from "./pilot-icon/create-pilot-icon";
+import { PilotIcon } from "./pilot-icon/pilot-icon";
 import { PilotStatus } from "./pilot-status";
 
 /**ルート要素のclass名 */

@@ -1,10 +1,10 @@
 import { Observable, tap } from "rxjs";
 
-import { pop } from "../../../dom/pop";
-import { domPushStream, PushDOM } from "../../../dom/push-dom";
-import type { Resources } from "../../../resource";
-import { PathIds } from "../../../resource/path/ids";
-import { waitElementLoaded } from "../../../wait/wait-element-loaded";
+import { pop } from "../../../../dom/pop";
+import { domPushStream, PushDOM } from "../../../../dom/push-dom";
+import type { Resources } from "../../../../resource";
+import { PathIds } from "../../../../resource/path/ids";
+import { waitElementLoaded } from "../../../../wait/wait-element-loaded";
 const ROOT_CLASS_NAME = "pilot-icon";
 const IMAGE_CLASS_NAME = `${ROOT_CLASS_NAME}__image`;
 const CHECK_CLASS_NAME = `${ROOT_CLASS_NAME}__check`;
