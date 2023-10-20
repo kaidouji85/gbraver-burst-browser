@@ -6,6 +6,7 @@ import { domPushStream, PushDOM } from "../../../dom/push-dom";
 import { Resources } from "../../../resource";
 import { createPilotSelectorProps } from "./procedure/create-pilot-selector-props";
 import { hidden } from "./procedure/hidden";
+import { onPilotChange } from "./procedure/on-pilot-change";
 import { show } from "./procedure/show";
 import { waitUntilLoaded } from "./procedure/wait-until-loaded";
 import { PilotSelectorProps } from "./props";
@@ -33,7 +34,7 @@ export class PilotSelector {
     this.#unsubscribers = [
       ...this.#props.pilotIcons.map((v) =>
         v.icon.notifySelection().subscribe(() => {
-          this.#onPilotChange(v.pilotId);
+          onPilotChange(this.#props, v.pilotId);
         }),
       ),
       domPushStream(this.#props.okButton).subscribe((action) => {
@@ -111,36 +112,6 @@ export class PilotSelector {
    */
   notifyPrev(): Observable<void> {
     return this.#props.prev;
-  }
-
-  /**
-   * パイロットが変更された時の処理
-   *
-   * @param pilotId 変更したパイロットのID
-   */
-  #onPilotChange(pilotId: PilotId): void {
-    this.#props.exclusive.execute(async (): Promise<void> => {
-      const selected = this.#props.pilotIcons.find((v) => v.pilotId === pilotId);
-
-      if (!selected) {
-        return;
-      }
-
-      if (this.#props.pilotId !== pilotId) {
-        this.#props.change.next(pilotId);
-      }
-
-      this.#props.pilotId = pilotId;
-      this.#props.pilotStatus.switch(pilotId);
-      selected.icon.pop();
-      this.#props.changeValueSound.play();
-      selected.icon.selected(true);
-      this.#props.pilotIcons
-        .filter((v) => v.pilotId !== pilotId)
-        .forEach((v) => {
-          v.icon.selected(false);
-        });
-    });
   }
 
   /**
