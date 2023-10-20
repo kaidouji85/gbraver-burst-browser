@@ -8,74 +8,12 @@ import { replaceDOM } from "../../../dom/replace-dom";
 import { Exclusive } from "../../../exclusive/exclusive";
 import { Resources } from "../../../resource";
 import { SOUND_IDS } from "../../../resource/sound";
-import { domUuid } from "../../../uuid/dom-uuid";
 import { ArmdozerIcon } from "./armdozer-icon";
 import { ArmdozerStatus } from "./armdozer-status";
 import { createArmdozerIcon } from "./create-armdozer-icon";
-
-/** @deprecated ルートHTML要素 class */
-const ROOT_CLASS_NAME = "armdozer-selector";
-
-/** @deprecated data-idを集めたもの */
-type DataIDs = {
-  dummyStatus: string;
-  okButton: string;
-  prevButton: string;
-  icons: string;
-};
-
-/**
- * @deprecated
- * ルート要素のinnerHTML
- * @param ids
- * @return innerHTML
- */
-function rootInnerHTML(ids: DataIDs): string {
-  return `
-    <div data-id="${ids.dummyStatus}"></div>
-    <div class="${ROOT_CLASS_NAME}__icons" data-id="${ids.icons}"></div>
-    <div class="${ROOT_CLASS_NAME}__controllers">
-      <button class="${ROOT_CLASS_NAME}__prev-button" data-id="${ids.prevButton}">戻る</button>
-      <button class="${ROOT_CLASS_NAME}__ok-button" data-id="${ids.okButton}">これで出撃</button>
-    </div>
-  `;
-}
-
-/** @deprecated ルート要素の子孫要素 */
-type Elements = {
-  dummyStatus: HTMLElement;
-  okButton: HTMLElement;
-  prevButton: HTMLElement;
-  icons: HTMLElement;
-};
-
-/**
- * @deprecated
- * ルート要素から子孫要素を抽出する
- * @param root ルート要素
- * @param ids data-idを集めたもの
- * @return 抽出結果
- */
-function extractElements(root: HTMLElement, ids: DataIDs): Elements {
-  const dummyStatus: HTMLElement =
-    root.querySelector(`[data-id="${ids.dummyStatus}"]`) ??
-    document.createElement("div");
-  const icons: HTMLElement =
-    root.querySelector(`[data-id="${ids.icons}"]`) ??
-    document.createElement("div");
-  const okButton: HTMLElement =
-    root.querySelector(`[data-id="${ids.okButton}"]`) ??
-    document.createElement("button");
-  const prevButton: HTMLElement =
-    root.querySelector(`[data-id="${ids.prevButton}"]`) ??
-    document.createElement("button");
-  return {
-    dummyStatus,
-    icons,
-    okButton,
-    prevButton,
-  };
-}
+import { BLOCK, BLOCK_HIDDEN } from "./dom/class-name";
+import { extractDummyStatus, extractIcons, extractOkButton, extractPrevButton } from "./dom/extract-element";
+import { rootInnerHTML } from "./dom/root-inner-html";
 
 /** アームドーザアイコン関連オブジェクト */
 type IconObjects = {
@@ -113,39 +51,41 @@ export class ArmdozerSelector {
     initialArmdozerId: ArmdozerId,
   ) {
     this.#armdozerId = initialArmdozerId;
+
     this.#exclusive = new Exclusive();
     this.#change = new Subject();
     this.#decide = new Subject();
     this.#prev = new Subject();
+
     this.#changeValueSound =
       resources.sounds.find((v) => v.id === SOUND_IDS.CHANGE_VALUE)?.sound ??
       new Howl({ src: "" });
     this.#decideSound =
       resources.sounds.find((v) => v.id === SOUND_IDS.PUSH_BUTTON)?.sound ??
       new Howl({ src: "" });
-    const dataIDs = {
-      dummyStatus: domUuid(),
-      okButton: domUuid(),
-      prevButton: domUuid(),
-      icons: domUuid(),
-    };
+
     this.#root = document.createElement("div");
-    this.#root.className = ROOT_CLASS_NAME;
-    this.#root.innerHTML = rootInnerHTML(dataIDs);
-    const elements = extractElements(this.#root, dataIDs);
+    this.#root.className = BLOCK;
+    this.#root.innerHTML = rootInnerHTML();
+
     this.#armdozerStatus = new ArmdozerStatus(resources);
     this.#armdozerStatus.switch(this.#armdozerId);
-    replaceDOM(elements.dummyStatus, this.#armdozerStatus.getRootHTMLElement());
+    const dummyStatus = extractDummyStatus(this.#root);
+    replaceDOM(dummyStatus, this.#armdozerStatus.getRootHTMLElement());
     this.#armdozerIcons = armdozerIds.map((v) => ({
       armdozerId: v,
       icon: createArmdozerIcon(resources, v),
     }));
+
+    const icons = extractIcons(this.#root);
     this.#armdozerIcons.forEach((v) => {
       v.icon.selected(v.armdozerId === initialArmdozerId);
-      elements.icons.appendChild(v.icon.getRootHTMLElement());
+      icons.appendChild(v.icon.getRootHTMLElement());
     });
-    this.#okButton = elements.okButton;
-    this.#prevButton = elements.prevButton;
+
+    this.#okButton = extractOkButton(this.#root);
+    this.#prevButton = extractPrevButton(this.#root);
+
     this.#unsubscribers = [
       ...this.#armdozerIcons.map((v) =>
         v.icon.notifySelection().subscribe(() => {
@@ -174,14 +114,14 @@ export class ArmdozerSelector {
    * 本コンポネントを表示する
    */
   show(): void {
-    this.#root.className = ROOT_CLASS_NAME;
+    this.#root.className = BLOCK;
   }
 
   /**
    * 本コンポネントを非表示にする
    */
   hidden(): void {
-    this.#root.className = `${ROOT_CLASS_NAME}--hidden`;
+    this.#root.className = BLOCK_HIDDEN;
   }
 
   /**
