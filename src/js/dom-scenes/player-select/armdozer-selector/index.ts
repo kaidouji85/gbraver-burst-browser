@@ -6,17 +6,17 @@ import { pop } from "../../../dom/pop";
 import { domPushStream, PushDOM } from "../../../dom/push-dom";
 import { replaceDOM } from "../../../dom/replace-dom";
 import { Exclusive } from "../../../exclusive/exclusive";
-import type { Resources } from "../../../resource";
+import { Resources } from "../../../resource";
 import { SOUND_IDS } from "../../../resource/sound";
 import { domUuid } from "../../../uuid/dom-uuid";
 import { ArmdozerIcon } from "./armdozer-icon";
 import { ArmdozerStatus } from "./armdozer-status";
 import { createArmdozerIcon } from "./create-armdozer-icon";
 
-/** ルートHTML要素 class */
+/** @deprecated ルートHTML要素 class */
 const ROOT_CLASS_NAME = "armdozer-selector";
 
-/** data-idを集めたもの */
+/** @deprecated data-idを集めたもの */
 type DataIDs = {
   dummyStatus: string;
   okButton: string;
@@ -25,6 +25,7 @@ type DataIDs = {
 };
 
 /**
+ * @deprecated
  * ルート要素のinnerHTML
  * @param ids
  * @return innerHTML
@@ -40,7 +41,7 @@ function rootInnerHTML(ids: DataIDs): string {
   `;
 }
 
-/** ルート要素の子孫要素 */
+/** @deprecated ルート要素の子孫要素 */
 type Elements = {
   dummyStatus: HTMLElement;
   okButton: HTMLElement;
@@ -49,6 +50,7 @@ type Elements = {
 };
 
 /**
+ * @deprecated
  * ルート要素から子孫要素を抽出する
  * @param root ルート要素
  * @param ids data-idを集めたもの
@@ -77,7 +79,9 @@ function extractElements(root: HTMLElement, ids: DataIDs): Elements {
 
 /** アームドーザアイコン関連オブジェクト */
 type IconObjects = {
+  /** アームドーザID */
   armdozerId: ArmdozerId;
+  /** アームドーザアイコン */
   icon: ArmdozerIcon;
 };
 
