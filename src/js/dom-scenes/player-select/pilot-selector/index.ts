@@ -1,13 +1,10 @@
 import { PilotId } from "gbraver-burst-core";
 import { Observable, Unsubscribable } from "rxjs";
 
-import { domPushStream } from "../../../dom/push-dom";
 import { Resources } from "../../../resource";
+import { bindEventListeners } from "./procedure/bind-event-lienters";
 import { createPilotSelectorProps } from "./procedure/create-pilot-selector-props";
 import { hidden } from "./procedure/hidden";
-import { onOkButtonPush } from "./procedure/on-ok-button-push";
-import { onPilotChange } from "./procedure/on-pilot-change";
-import { onPrevButtonPush } from "./procedure/on-prev-button-push";
 import { show } from "./procedure/show";
 import { waitUntilLoaded } from "./procedure/wait-until-loaded";
 import { PilotSelectorProps } from "./props";
@@ -31,19 +28,7 @@ export class PilotSelector {
     initialPilotId: PilotId,
   ) {
     this.#props = createPilotSelectorProps(resources, pilotIds, initialPilotId);
-    this.#unsubscribers = [
-      ...this.#props.pilotIcons.map((v) =>
-        v.icon.notifySelection().subscribe(() => {
-          onPilotChange(this.#props, v.pilotId);
-        }),
-      ),
-      domPushStream(this.#props.okButton).subscribe((action) => {
-        onOkButtonPush(this.#props, action);
-      }),
-      domPushStream(this.#props.prevButton).subscribe((action) => {
-        onPrevButtonPush(this.#props, action);
-      }),
-    ];
+    this.#unsubscribers = bindEventListeners(this.#props);
   }
 
   /**
