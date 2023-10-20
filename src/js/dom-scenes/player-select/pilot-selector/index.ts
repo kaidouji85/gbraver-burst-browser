@@ -1,13 +1,13 @@
 import { PilotId } from "gbraver-burst-core";
 import { Observable, Unsubscribable } from "rxjs";
 
-import { pop } from "../../../dom/pop";
-import { domPushStream, PushDOM } from "../../../dom/push-dom";
+import { domPushStream } from "../../../dom/push-dom";
 import { Resources } from "../../../resource";
 import { createPilotSelectorProps } from "./procedure/create-pilot-selector-props";
 import { hidden } from "./procedure/hidden";
 import { onOkButtonPush } from "./procedure/on-ok-button-push";
 import { onPilotChange } from "./procedure/on-pilot-change";
+import { onPrevButtonPush } from "./procedure/on-prev-button-push";
 import { show } from "./procedure/show";
 import { waitUntilLoaded } from "./procedure/wait-until-loaded";
 import { PilotSelectorProps } from "./props";
@@ -21,7 +21,6 @@ export class PilotSelector {
 
   /**
    * コンストラクタ
-   *
    * @param resources リソース管理オブジェクト
    * @param pilotIds 選択可能なパイロットIDリスト
    * @param initialPilotId パイロットIDの初期値
@@ -42,7 +41,7 @@ export class PilotSelector {
         onOkButtonPush(this.#props, action);
       }),
       domPushStream(this.#props.prevButton).subscribe((action) => {
-        this.#onPrevButtonPush(action);
+        onPrevButtonPush(this.#props, action);
       }),
     ];
   }
@@ -73,7 +72,6 @@ export class PilotSelector {
 
   /**
    * リソース読み込みが完了するまで待つ
-   *
    * @return 待機結果
    */
   async waitUntilLoaded(): Promise<void> {
@@ -82,7 +80,6 @@ export class PilotSelector {
 
   /**
    * ルートHTML要素を取得する
-   *
    * @return 取得結果
    */
   getRootHTMLElement(): HTMLElement {
@@ -91,7 +88,6 @@ export class PilotSelector {
 
   /**
    * パイロット変更通知
-   *
    * @return 通知ストリーム
    */
   notifyChanges(): Observable<PilotId> {
@@ -100,7 +96,6 @@ export class PilotSelector {
 
   /**
    * パイロット選択通知
-   *
    * @return 通知ストリーム
    */
   notifyDecision(): Observable<PilotId> {
@@ -113,19 +108,5 @@ export class PilotSelector {
    */
   notifyPrev(): Observable<void> {
     return this.#props.prev;
-  }
-
-  /**
-   * 戻るボタンを押した時の処理
-   *
-   * @param action アクション
-   */
-  #onPrevButtonPush(action: PushDOM): void {
-    this.#props.exclusive.execute(async (): Promise<void> => {
-      action.event.preventDefault();
-      this.#props.changeValueSound.play();
-      await pop(this.#props.prevButton);
-      this.#props.prev.next();
-    });
   }
 }
