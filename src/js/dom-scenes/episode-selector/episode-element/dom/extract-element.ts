@@ -4,4 +4,4 @@
  * @return 抽出結果
  */
 export const extractChecker = (root: HTMLElement): HTMLElement =>
-  root.querySelector(`[data-id="chekcer"]`) ?? document.createElement("div");
+  root.querySelector(`[data-id="checker"]`) ?? document.createElement("div");
