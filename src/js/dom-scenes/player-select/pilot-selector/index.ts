@@ -6,6 +6,7 @@ import { domPushStream, PushDOM } from "../../../dom/push-dom";
 import { Resources } from "../../../resource";
 import { createPilotSelectorProps } from "./procedure/create-pilot-selector-props";
 import { hidden } from "./procedure/hidden";
+import { onOkButtonPush } from "./procedure/on-ok-button-push";
 import { onPilotChange } from "./procedure/on-pilot-change";
 import { show } from "./procedure/show";
 import { waitUntilLoaded } from "./procedure/wait-until-loaded";
@@ -38,7 +39,7 @@ export class PilotSelector {
         }),
       ),
       domPushStream(this.#props.okButton).subscribe((action) => {
-        this.#onOkButtonPush(action);
+        onOkButtonPush(this.#props, action);
       }),
       domPushStream(this.#props.prevButton).subscribe((action) => {
         this.#onPrevButtonPush(action);
@@ -112,20 +113,6 @@ export class PilotSelector {
    */
   notifyPrev(): Observable<void> {
     return this.#props.prev;
-  }
-
-  /**
-   * OKボタンを押した時の処理
-   *
-   * @param action アクション
-   */
-  #onOkButtonPush(action: PushDOM): void {
-    this.#props.exclusive.execute(async (): Promise<void> => {
-      action.event.preventDefault();
-      this.#props.decideSound.play();
-      await pop(this.#props.okButton);
-      this.#props.decide.next(this.#props.pilotId);
-    });
   }
 
   /**
