@@ -1,42 +1,19 @@
 import { ArmdozerId } from "gbraver-burst-core";
-import { Howl } from "howler";
-import { Observable, Subject, Unsubscribable } from "rxjs";
+import { Observable, Unsubscribable } from "rxjs";
 
 import { pop } from "../../../dom/pop";
 import { domPushStream, PushDOM } from "../../../dom/push-dom";
-import { replaceDOM } from "../../../dom/replace-dom";
-import { Exclusive } from "../../../exclusive/exclusive";
 import { Resources } from "../../../resource";
-import { SOUND_IDS } from "../../../resource/sound";
-import { ArmdozerIcon } from "./armdozer-icon";
-import { ArmdozerStatus } from "./armdozer-status";
-import { createArmdozerIcon } from "./create-armdozer-icon";
 import { BLOCK, BLOCK_HIDDEN } from "./dom/class-name";
-import { extractDummyStatus, extractIcons, extractOkButton, extractPrevButton } from "./dom/extract-element";
-import { rootInnerHTML } from "./dom/root-inner-html";
+import { createArmdozerSelectorProps } from "./procedure/create-armdozer-selector-props";
+import { ArmdozerSelectorProps } from "./props";
 
-/** アームドーザアイコン関連オブジェクト */
-type IconObjects = {
-  /** アームドーザID */
-  armdozerId: ArmdozerId;
-  /** アームドーザアイコン */
-  icon: ArmdozerIcon;
-};
 
 /** アームドーザセレクタ */
 export class ArmdozerSelector {
-  #armdozerId: ArmdozerId;
-  #exclusive: Exclusive;
-  #root: HTMLElement;
-  #armdozerStatus: ArmdozerStatus;
-  #armdozerIcons: IconObjects[];
-  #okButton: HTMLElement;
-  #prevButton: HTMLElement;
-  #changeValueSound: Howl;
-  #decideSound: Howl;
-  #change: Subject<ArmdozerId>;
-  #decide: Subject<ArmdozerId>;
-  #prev: Subject<void>;
+  /** プロパティ */
+  #props: ArmdozerSelectorProps;
+  /** アンサブスクライバ */
   #unsubscribers: Unsubscribable[];
 
   /**
@@ -50,52 +27,17 @@ export class ArmdozerSelector {
     armdozerIds: ArmdozerId[],
     initialArmdozerId: ArmdozerId,
   ) {
-    this.#armdozerId = initialArmdozerId;
-
-    this.#exclusive = new Exclusive();
-    this.#change = new Subject();
-    this.#decide = new Subject();
-    this.#prev = new Subject();
-
-    this.#changeValueSound =
-      resources.sounds.find((v) => v.id === SOUND_IDS.CHANGE_VALUE)?.sound ??
-      new Howl({ src: "" });
-    this.#decideSound =
-      resources.sounds.find((v) => v.id === SOUND_IDS.PUSH_BUTTON)?.sound ??
-      new Howl({ src: "" });
-
-    this.#root = document.createElement("div");
-    this.#root.className = BLOCK;
-    this.#root.innerHTML = rootInnerHTML();
-
-    this.#armdozerStatus = new ArmdozerStatus(resources);
-    this.#armdozerStatus.switch(this.#armdozerId);
-    const dummyStatus = extractDummyStatus(this.#root);
-    replaceDOM(dummyStatus, this.#armdozerStatus.getRootHTMLElement());
-    this.#armdozerIcons = armdozerIds.map((v) => ({
-      armdozerId: v,
-      icon: createArmdozerIcon(resources, v),
-    }));
-
-    const icons = extractIcons(this.#root);
-    this.#armdozerIcons.forEach((v) => {
-      v.icon.selected(v.armdozerId === initialArmdozerId);
-      icons.appendChild(v.icon.getRootHTMLElement());
-    });
-
-    this.#okButton = extractOkButton(this.#root);
-    this.#prevButton = extractPrevButton(this.#root);
-
+    this.#props = createArmdozerSelectorProps(resources, armdozerIds, initialArmdozerId);
     this.#unsubscribers = [
-      ...this.#armdozerIcons.map((v) =>
+      ...this.#props.armdozerIcons.map((v) =>
         v.icon.notifySelection().subscribe(() => {
           this.#onArmdozerSelect(v.armdozerId);
         }),
       ),
-      domPushStream(this.#okButton).subscribe((action) => {
+      domPushStream(this.#props.okButton).subscribe((action) => {
         this.#onOkButtonPush(action);
       }),
-      domPushStream(this.#prevButton).subscribe((action) => {
+      domPushStream(this.#props.prevButton).subscribe((action) => {
         this.#onPrevButtonPush(action);
       }),
     ];
@@ -114,14 +56,14 @@ export class ArmdozerSelector {
    * 本コンポネントを表示する
    */
   show(): void {
-    this.#root.className = BLOCK;
+    this.#props.root.className = BLOCK;
   }
 
   /**
    * 本コンポネントを非表示にする
    */
   hidden(): void {
-    this.#root.className = BLOCK_HIDDEN;
+    this.#props.root.className = BLOCK_HIDDEN;
   }
 
   /**
@@ -129,7 +71,7 @@ export class ArmdozerSelector {
    * @return 待機結果
    */
   async waitUntilLoaded(): Promise<void> {
-    await Promise.all(this.#armdozerIcons.map((v) => v.icon.waitUntilLoaded()));
+    await Promise.all(this.#props.armdozerIcons.map((v) => v.icon.waitUntilLoaded()));
   }
 
   /**
@@ -137,7 +79,7 @@ export class ArmdozerSelector {
    * @return ルートHTML要素
    */
   getRootHTMLElement(): HTMLElement {
-    return this.#root;
+    return this.#props.root;
   }
 
   /**
@@ -145,7 +87,7 @@ export class ArmdozerSelector {
    * @return イベント通知ストリーム
    */
   notifyChanges(): Observable<ArmdozerId> {
-    return this.#change;
+    return this.#props.change;
   }
 
   /**
@@ -153,7 +95,7 @@ export class ArmdozerSelector {
    * @return アームドーザ決定通知ストリーム
    */
   notifyDecision(): Observable<ArmdozerId> {
-    return this.#decide;
+    return this.#props.decide;
   }
 
   /**
@@ -161,7 +103,7 @@ export class ArmdozerSelector {
    * @return 通知ストリーム
    */
   notifyPrev(): Observable<void> {
-    return this.#prev;
+    return this.#props.prev;
   }
 
   /**
@@ -170,21 +112,21 @@ export class ArmdozerSelector {
    * @return 処理結果
    */
   #onArmdozerSelect(armdozerId: ArmdozerId): void {
-    this.#exclusive.execute(async (): Promise<void> => {
-      if (this.#armdozerId !== armdozerId) {
-        this.#armdozerId = armdozerId;
-        this.#armdozerStatus.switch(armdozerId);
-        this.#change.next(this.#armdozerId);
+    this.#props.exclusive.execute(async (): Promise<void> => {
+      if (this.#props.armdozerId !== armdozerId) {
+        this.#props.armdozerId = armdozerId;
+        this.#props.armdozerStatus.switch(armdozerId);
+        this.#props.change.next(this.#props.armdozerId);
       }
 
-      this.#changeValueSound.play();
-      this.#armdozerIcons
+      this.#props.changeValueSound.play();
+      this.#props.armdozerIcons
         .filter((v) => v.armdozerId === armdozerId)
         .forEach((v) => {
           v.icon.pop();
           v.icon.selected(true);
         });
-      this.#armdozerIcons
+      this.#props.armdozerIcons
         .filter((v) => v.armdozerId !== armdozerId)
         .forEach((v) => {
           v.icon.selected(false);
@@ -197,11 +139,11 @@ export class ArmdozerSelector {
    * @param action アクション
    */
   #onOkButtonPush(action: PushDOM): void {
-    this.#exclusive.execute(async (): Promise<void> => {
+    this.#props.exclusive.execute(async (): Promise<void> => {
       action.event.preventDefault();
-      this.#decideSound.play();
-      await pop(this.#okButton);
-      this.#decide.next(this.#armdozerId);
+      this.#props.decideSound.play();
+      await pop(this.#props.okButton);
+      this.#props.decide.next(this.#props.armdozerId);
     });
   }
 
@@ -211,11 +153,11 @@ export class ArmdozerSelector {
    * @param action アクション
    */
   #onPrevButtonPush(action: PushDOM): void {
-    this.#exclusive.execute(async (): Promise<void> => {
+    this.#props.exclusive.execute(async (): Promise<void> => {
       action.event.preventDefault();
-      this.#changeValueSound.play();
-      await pop(this.#prevButton);
-      this.#prev.next();
+      this.#props.changeValueSound.play();
+      await pop(this.#props.prevButton);
+      this.#props.prev.next();
     });
   }
 }
