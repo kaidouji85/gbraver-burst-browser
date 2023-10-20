@@ -7,6 +7,7 @@ import { Resources } from "../../../resource";
 import { createPilotSelectorProps } from "./procedure/create-pilot-selector-props";
 import { hidden } from "./procedure/hidden";
 import { show } from "./procedure/show";
+import { waitUntilLoaded } from "./procedure/wait-until-loaded";
 import { PilotSelectorProps } from "./props";
 
 /**パイロットセレクタ */
@@ -74,7 +75,7 @@ export class PilotSelector {
    * @return 待機結果
    */
   async waitUntilLoaded(): Promise<void> {
-    await Promise.all(this.#props.pilotIcons.map((v) => v.icon.waitUntilLoaded()));
+    await waitUntilLoaded(this.#props);
   }
 
   /**
