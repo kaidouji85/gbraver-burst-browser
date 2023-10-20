@@ -5,13 +5,10 @@ import { PilotSelectorProps } from "../props";
 
 /**
  * 本コンポネントを表示する
-* @param props プロパティ 
-* @param pilotId 選択するパイロットID
+ * @param props プロパティ
+ * @param pilotId 選択するパイロットID
  */
-export function show(
-  props: PilotSelectorProps,
-  pilotId: PilotId,
-) {
+export function show(props: PilotSelectorProps, pilotId: PilotId) {
   const selected = props.pilotIcons.find((v) => v.pilotId === pilotId);
   if (!selected) {
     return;

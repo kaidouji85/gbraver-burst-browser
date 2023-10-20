@@ -8,6 +8,6 @@ import template from "./root-inner-html.hbs";
  */
 export function rootInnerHTML() {
   return template({
-    BLOCK
+    BLOCK,
   });
 }
