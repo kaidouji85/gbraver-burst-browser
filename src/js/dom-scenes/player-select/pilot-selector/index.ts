@@ -1,5 +1,5 @@
 import { PilotId } from "gbraver-burst-core";
-import { Observable, Subject, Unsubscribable } from "rxjs";
+import { Observable, Unsubscribable } from "rxjs";
 
 import { pop } from "../../../dom/pop";
 import { domPushStream, PushDOM } from "../../../dom/push-dom";
