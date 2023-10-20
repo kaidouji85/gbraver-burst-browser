@@ -6,6 +6,7 @@ import { domPushStream, PushDOM } from "../../../dom/push-dom";
 import { Resources } from "../../../resource";
 import { BLOCK } from "./dom/class-name";
 import { createPilotSelectorProps } from "./procedure/create-pilot-selector-props";
+import { show } from "./procedure/show";
 import { PilotSelectorProps } from "./props";
 
 /**パイロットセレクタ */
@@ -57,20 +58,7 @@ export class PilotSelector {
    * @param pilotId 選択するパイロットID
    */
   show(pilotId: PilotId): void {
-    const selected = this.#props.pilotIcons.find((v) => v.pilotId === pilotId);
-    if (!selected) {
-      return;
-    }
-
-    this.#props.root.className = BLOCK;
-    this.#props.pilotId = pilotId;
-    selected.icon.selected(true);
-    this.#props.pilotStatus.switch(pilotId);
-    this.#props.pilotIcons
-      .filter((v) => v.pilotId !== pilotId)
-      .forEach((v) => {
-        v.icon.selected(false);
-      });
+    show(this.#props, pilotId);
   }
 
   /**
