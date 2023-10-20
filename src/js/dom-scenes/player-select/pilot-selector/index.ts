@@ -4,8 +4,8 @@ import { Observable, Unsubscribable } from "rxjs";
 import { pop } from "../../../dom/pop";
 import { domPushStream, PushDOM } from "../../../dom/push-dom";
 import { Resources } from "../../../resource";
-import { BLOCK } from "./dom/class-name";
 import { createPilotSelectorProps } from "./procedure/create-pilot-selector-props";
+import { hidden } from "./procedure/hidden";
 import { show } from "./procedure/show";
 import { PilotSelectorProps } from "./props";
 
@@ -65,7 +65,7 @@ export class PilotSelector {
    * 本コンポネントを非表示にする
    */
   hidden(): void {
-    this.#props.root.className = `${BLOCK}--hidden`;
+    hidden(this.#props);
   }
 
   /**
