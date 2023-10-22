@@ -4,11 +4,11 @@ import { Observable, Unsubscribable } from "rxjs";
 import { pop } from "../../../dom/pop";
 import { domPushStream, PushDOM } from "../../../dom/push-dom";
 import { Resources } from "../../../resource";
-import { BLOCK, BLOCK_HIDDEN } from "./dom/class-name";
 import { createArmdozerSelectorProps } from "./procedure/create-armdozer-selector-props";
 import { ArmdozerSelectorProps } from "./props";
 import { show } from "./procedure/show";
 import { hidden } from "./procedure/hidden";
+import { waitUntilLoaded } from "./procedure/wait-until-loaded";
 
 
 /** アームドーザセレクタ */
@@ -73,7 +73,7 @@ export class ArmdozerSelector {
    * @return 待機結果
    */
   async waitUntilLoaded(): Promise<void> {
-    await Promise.all(this.#props.armdozerIcons.map((v) => v.icon.waitUntilLoaded()));
+    await waitUntilLoaded(this.#props);
   }
 
   /**
