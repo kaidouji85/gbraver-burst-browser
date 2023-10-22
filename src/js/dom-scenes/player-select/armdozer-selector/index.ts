@@ -9,6 +9,7 @@ import { ArmdozerSelectorProps } from "./props";
 import { show } from "./procedure/show";
 import { hidden } from "./procedure/hidden";
 import { waitUntilLoaded } from "./procedure/wait-until-loaded";
+import { onArmdozerSelect } from "./procedure/on-armdozer-select";
 
 
 /** アームドーザセレクタ */
@@ -33,7 +34,7 @@ export class ArmdozerSelector {
     this.#unsubscribers = [
       ...this.#props.armdozerIcons.map((v) =>
         v.icon.notifySelection().subscribe(() => {
-          this.#onArmdozerSelect(v.armdozerId);
+          onArmdozerSelect(this.#props, v.armdozerId);
         }),
       ),
       domPushStream(this.#props.okButton).subscribe((action) => {
@@ -106,34 +107,6 @@ export class ArmdozerSelector {
    */
   notifyPrev(): Observable<void> {
     return this.#props.prev;
-  }
-
-  /**
-   * アームドーザアイコンが選択された際の処理
-   * @param armdozerId 選択されたアームドーザID
-   * @return 処理結果
-   */
-  #onArmdozerSelect(armdozerId: ArmdozerId): void {
-    this.#props.exclusive.execute(async (): Promise<void> => {
-      if (this.#props.armdozerId !== armdozerId) {
-        this.#props.armdozerId = armdozerId;
-        this.#props.armdozerStatus.switch(armdozerId);
-        this.#props.change.next(this.#props.armdozerId);
-      }
-
-      this.#props.changeValueSound.play();
-      this.#props.armdozerIcons
-        .filter((v) => v.armdozerId === armdozerId)
-        .forEach((v) => {
-          v.icon.pop();
-          v.icon.selected(true);
-        });
-      this.#props.armdozerIcons
-        .filter((v) => v.armdozerId !== armdozerId)
-        .forEach((v) => {
-          v.icon.selected(false);
-        });
-    });
   }
 
   /**
