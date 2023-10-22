@@ -10,6 +10,7 @@ import { show } from "./procedure/show";
 import { hidden } from "./procedure/hidden";
 import { waitUntilLoaded } from "./procedure/wait-until-loaded";
 import { onArmdozerSelect } from "./procedure/on-armdozer-select";
+import {onOkButtonPush} from "./procedure/on-ok-button-push";
 
 
 /** アームドーザセレクタ */
@@ -38,7 +39,7 @@ export class ArmdozerSelector {
         }),
       ),
       domPushStream(this.#props.okButton).subscribe((action) => {
-        this.#onOkButtonPush(action);
+        onOkButtonPush(this.#props, action);
       }),
       domPushStream(this.#props.prevButton).subscribe((action) => {
         this.#onPrevButtonPush(action);
@@ -107,19 +108,6 @@ export class ArmdozerSelector {
    */
   notifyPrev(): Observable<void> {
     return this.#props.prev;
-  }
-
-  /**
-   * 決定ボタンが押された時の処理
-   * @param action アクション
-   */
-  #onOkButtonPush(action: PushDOM): void {
-    this.#props.exclusive.execute(async (): Promise<void> => {
-      action.event.preventDefault();
-      this.#props.decideSound.play();
-      await pop(this.#props.okButton);
-      this.#props.decide.next(this.#props.armdozerId);
-    });
   }
 
   /**
