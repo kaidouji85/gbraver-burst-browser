@@ -7,6 +7,8 @@ import { Resources } from "../../../resource";
 import { BLOCK, BLOCK_HIDDEN } from "./dom/class-name";
 import { createArmdozerSelectorProps } from "./procedure/create-armdozer-selector-props";
 import { ArmdozerSelectorProps } from "./props";
+import { show } from "./procedure/show";
+import { hidden } from "./procedure/hidden";
 
 
 /** アームドーザセレクタ */
@@ -56,14 +58,14 @@ export class ArmdozerSelector {
    * 本コンポネントを表示する
    */
   show(): void {
-    this.#props.root.className = BLOCK;
+    show(this.#props);
   }
 
   /**
    * 本コンポネントを非表示にする
    */
   hidden(): void {
-    this.#props.root.className = BLOCK_HIDDEN;
+    hidden(this.#props);
   }
 
   /**
