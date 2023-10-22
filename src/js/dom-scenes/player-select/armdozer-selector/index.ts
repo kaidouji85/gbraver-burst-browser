@@ -1,100 +1,19 @@
 import { ArmdozerId } from "gbraver-burst-core";
-import { Howl } from "howler";
-import { Observable, Subject, Unsubscribable } from "rxjs";
+import { Observable, Unsubscribable } from "rxjs";
 
-import { pop } from "../../../dom/pop";
-import { domPushStream, PushDOM } from "../../../dom/push-dom";
-import { replaceDOM } from "../../../dom/replace-dom";
-import { Exclusive } from "../../../exclusive/exclusive";
-import type { Resources } from "../../../resource";
-import { SOUND_IDS } from "../../../resource/sound";
-import { domUuid } from "../../../uuid/dom-uuid";
-import { ArmdozerIcon } from "./armdozer-icon";
-import { ArmdozerStatus } from "./armdozer-status";
-import { createArmdozerIcon } from "./create-armdozer-icon";
-
-/** ルートHTML要素 class */
-const ROOT_CLASS_NAME = "armdozer-selector";
-
-/** data-idを集めたもの */
-type DataIDs = {
-  dummyStatus: string;
-  okButton: string;
-  prevButton: string;
-  icons: string;
-};
-
-/**
- * ルート要素のinnerHTML
- * @param ids
- * @return innerHTML
- */
-function rootInnerHTML(ids: DataIDs): string {
-  return `
-    <div data-id="${ids.dummyStatus}"></div>
-    <div class="${ROOT_CLASS_NAME}__icons" data-id="${ids.icons}"></div>
-    <div class="${ROOT_CLASS_NAME}__controllers">
-      <button class="${ROOT_CLASS_NAME}__prev-button" data-id="${ids.prevButton}">戻る</button>
-      <button class="${ROOT_CLASS_NAME}__ok-button" data-id="${ids.okButton}">これで出撃</button>
-    </div>
-  `;
-}
-
-/** ルート要素の子孫要素 */
-type Elements = {
-  dummyStatus: HTMLElement;
-  okButton: HTMLElement;
-  prevButton: HTMLElement;
-  icons: HTMLElement;
-};
-
-/**
- * ルート要素から子孫要素を抽出する
- * @param root ルート要素
- * @param ids data-idを集めたもの
- * @return 抽出結果
- */
-function extractElements(root: HTMLElement, ids: DataIDs): Elements {
-  const dummyStatus: HTMLElement =
-    root.querySelector(`[data-id="${ids.dummyStatus}"]`) ??
-    document.createElement("div");
-  const icons: HTMLElement =
-    root.querySelector(`[data-id="${ids.icons}"]`) ??
-    document.createElement("div");
-  const okButton: HTMLElement =
-    root.querySelector(`[data-id="${ids.okButton}"]`) ??
-    document.createElement("button");
-  const prevButton: HTMLElement =
-    root.querySelector(`[data-id="${ids.prevButton}"]`) ??
-    document.createElement("button");
-  return {
-    dummyStatus,
-    icons,
-    okButton,
-    prevButton,
-  };
-}
-
-/** アームドーザアイコン関連オブジェクト */
-type IconObjects = {
-  armdozerId: ArmdozerId;
-  icon: ArmdozerIcon;
-};
+import { Resources } from "../../../resource";
+import { bindEventListener } from "./procedure/bind-event-listener";
+import { createArmdozerSelectorProps } from "./procedure/create-armdozer-selector-props";
+import { hidden } from "./procedure/hidden";
+import { show } from "./procedure/show";
+import { waitUntilLoaded } from "./procedure/wait-until-loaded";
+import { ArmdozerSelectorProps } from "./props";
 
 /** アームドーザセレクタ */
 export class ArmdozerSelector {
-  #armdozerId: ArmdozerId;
-  #exclusive: Exclusive;
-  #root: HTMLElement;
-  #armdozerStatus: ArmdozerStatus;
-  #armdozerIcons: IconObjects[];
-  #okButton: HTMLElement;
-  #prevButton: HTMLElement;
-  #changeValueSound: Howl;
-  #decideSound: Howl;
-  #change: Subject<ArmdozerId>;
-  #decide: Subject<ArmdozerId>;
-  #prev: Subject<void>;
+  /** プロパティ */
+  #props: ArmdozerSelectorProps;
+  /** アンサブスクライバ */
   #unsubscribers: Unsubscribable[];
 
   /**
@@ -108,53 +27,12 @@ export class ArmdozerSelector {
     armdozerIds: ArmdozerId[],
     initialArmdozerId: ArmdozerId,
   ) {
-    this.#armdozerId = initialArmdozerId;
-    this.#exclusive = new Exclusive();
-    this.#change = new Subject();
-    this.#decide = new Subject();
-    this.#prev = new Subject();
-    this.#changeValueSound =
-      resources.sounds.find((v) => v.id === SOUND_IDS.CHANGE_VALUE)?.sound ??
-      new Howl({ src: "" });
-    this.#decideSound =
-      resources.sounds.find((v) => v.id === SOUND_IDS.PUSH_BUTTON)?.sound ??
-      new Howl({ src: "" });
-    const dataIDs = {
-      dummyStatus: domUuid(),
-      okButton: domUuid(),
-      prevButton: domUuid(),
-      icons: domUuid(),
-    };
-    this.#root = document.createElement("div");
-    this.#root.className = ROOT_CLASS_NAME;
-    this.#root.innerHTML = rootInnerHTML(dataIDs);
-    const elements = extractElements(this.#root, dataIDs);
-    this.#armdozerStatus = new ArmdozerStatus(resources);
-    this.#armdozerStatus.switch(this.#armdozerId);
-    replaceDOM(elements.dummyStatus, this.#armdozerStatus.getRootHTMLElement());
-    this.#armdozerIcons = armdozerIds.map((v) => ({
-      armdozerId: v,
-      icon: createArmdozerIcon(resources, v),
-    }));
-    this.#armdozerIcons.forEach((v) => {
-      v.icon.selected(v.armdozerId === initialArmdozerId);
-      elements.icons.appendChild(v.icon.getRootHTMLElement());
-    });
-    this.#okButton = elements.okButton;
-    this.#prevButton = elements.prevButton;
-    this.#unsubscribers = [
-      ...this.#armdozerIcons.map((v) =>
-        v.icon.notifySelection().subscribe(() => {
-          this.#onArmdozerSelect(v.armdozerId);
-        }),
-      ),
-      domPushStream(this.#okButton).subscribe((action) => {
-        this.#onOkButtonPush(action);
-      }),
-      domPushStream(this.#prevButton).subscribe((action) => {
-        this.#onPrevButtonPush(action);
-      }),
-    ];
+    this.#props = createArmdozerSelectorProps(
+      resources,
+      armdozerIds,
+      initialArmdozerId,
+    );
+    this.#unsubscribers = bindEventListener(this.#props);
   }
 
   /**
@@ -170,14 +48,14 @@ export class ArmdozerSelector {
    * 本コンポネントを表示する
    */
   show(): void {
-    this.#root.className = ROOT_CLASS_NAME;
+    show(this.#props);
   }
 
   /**
    * 本コンポネントを非表示にする
    */
   hidden(): void {
-    this.#root.className = `${ROOT_CLASS_NAME}--hidden`;
+    hidden(this.#props);
   }
 
   /**
@@ -185,7 +63,7 @@ export class ArmdozerSelector {
    * @return 待機結果
    */
   async waitUntilLoaded(): Promise<void> {
-    await Promise.all(this.#armdozerIcons.map((v) => v.icon.waitUntilLoaded()));
+    await waitUntilLoaded(this.#props);
   }
 
   /**
@@ -193,7 +71,7 @@ export class ArmdozerSelector {
    * @return ルートHTML要素
    */
   getRootHTMLElement(): HTMLElement {
-    return this.#root;
+    return this.#props.root;
   }
 
   /**
@@ -201,7 +79,7 @@ export class ArmdozerSelector {
    * @return イベント通知ストリーム
    */
   notifyChanges(): Observable<ArmdozerId> {
-    return this.#change;
+    return this.#props.change;
   }
 
   /**
@@ -209,7 +87,7 @@ export class ArmdozerSelector {
    * @return アームドーザ決定通知ストリーム
    */
   notifyDecision(): Observable<ArmdozerId> {
-    return this.#decide;
+    return this.#props.decide;
   }
 
   /**
@@ -217,61 +95,6 @@ export class ArmdozerSelector {
    * @return 通知ストリーム
    */
   notifyPrev(): Observable<void> {
-    return this.#prev;
-  }
-
-  /**
-   * アームドーザアイコンが選択された際の処理
-   * @param armdozerId 選択されたアームドーザID
-   * @return 処理結果
-   */
-  #onArmdozerSelect(armdozerId: ArmdozerId): void {
-    this.#exclusive.execute(async (): Promise<void> => {
-      if (this.#armdozerId !== armdozerId) {
-        this.#armdozerId = armdozerId;
-        this.#armdozerStatus.switch(armdozerId);
-        this.#change.next(this.#armdozerId);
-      }
-
-      this.#changeValueSound.play();
-      this.#armdozerIcons
-        .filter((v) => v.armdozerId === armdozerId)
-        .forEach((v) => {
-          v.icon.pop();
-          v.icon.selected(true);
-        });
-      this.#armdozerIcons
-        .filter((v) => v.armdozerId !== armdozerId)
-        .forEach((v) => {
-          v.icon.selected(false);
-        });
-    });
-  }
-
-  /**
-   * 決定ボタンが押された時の処理
-   * @param action アクション
-   */
-  #onOkButtonPush(action: PushDOM): void {
-    this.#exclusive.execute(async (): Promise<void> => {
-      action.event.preventDefault();
-      this.#decideSound.play();
-      await pop(this.#okButton);
-      this.#decide.next(this.#armdozerId);
-    });
-  }
-
-  /**
-   * 戻るボタンが押された時の処理
-   *
-   * @param action アクション
-   */
-  #onPrevButtonPush(action: PushDOM): void {
-    this.#exclusive.execute(async (): Promise<void> => {
-      action.event.preventDefault();
-      this.#changeValueSound.play();
-      await pop(this.#prevButton);
-      this.#prev.next();
-    });
+    return this.#props.prev;
   }
 }
