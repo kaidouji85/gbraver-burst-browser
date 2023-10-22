@@ -1,8 +1,7 @@
 import { ArmdozerId } from "gbraver-burst-core";
 import { Observable, Unsubscribable } from "rxjs";
 
-import { pop } from "../../../dom/pop";
-import { domPushStream, PushDOM } from "../../../dom/push-dom";
+import { domPushStream } from "../../../dom/push-dom";
 import { Resources } from "../../../resource";
 import { createArmdozerSelectorProps } from "./procedure/create-armdozer-selector-props";
 import { ArmdozerSelectorProps } from "./props";
@@ -11,6 +10,7 @@ import { hidden } from "./procedure/hidden";
 import { waitUntilLoaded } from "./procedure/wait-until-loaded";
 import { onArmdozerSelect } from "./procedure/on-armdozer-select";
 import {onOkButtonPush} from "./procedure/on-ok-button-push";
+import {onPrevButtonPush} from "./procedure/on-prev-button-push";
 
 
 /** アームドーザセレクタ */
@@ -42,7 +42,7 @@ export class ArmdozerSelector {
         onOkButtonPush(this.#props, action);
       }),
       domPushStream(this.#props.prevButton).subscribe((action) => {
-        this.#onPrevButtonPush(action);
+        onPrevButtonPush(this.#props, action);
       }),
     ];
   }
@@ -108,19 +108,5 @@ export class ArmdozerSelector {
    */
   notifyPrev(): Observable<void> {
     return this.#props.prev;
-  }
-
-  /**
-   * 戻るボタンが押された時の処理
-   *
-   * @param action アクション
-   */
-  #onPrevButtonPush(action: PushDOM): void {
-    this.#props.exclusive.execute(async (): Promise<void> => {
-      action.event.preventDefault();
-      this.#props.changeValueSound.play();
-      await pop(this.#props.prevButton);
-      this.#props.prev.next();
-    });
   }
 }
