@@ -1,9 +1,10 @@
-import {ArmdozerSelectorProps} from "../props";
-import {Unsubscribable} from "rxjs";
-import {onArmdozerSelect} from "./on-armdozer-select";
-import {domPushStream} from "../../../../dom/push-dom";
-import {onOkButtonPush} from "./on-ok-button-push";
-import {onPrevButtonPush} from "./on-prev-button-push";
+import { Unsubscribable } from "rxjs";
+
+import { domPushStream } from "../../../../dom/push-dom";
+import { ArmdozerSelectorProps } from "../props";
+import { onArmdozerSelect } from "./on-armdozer-select";
+import { onOkButtonPush } from "./on-ok-button-push";
+import { onPrevButtonPush } from "./on-prev-button-push";
 
 /**
  * イベントリスナを本コンポ年とに関連づける

@@ -1,6 +1,6 @@
-import {ArmdozerSelectorProps} from "../props";
-import {PushDOM} from "../../../../dom/push-dom";
-import {pop} from "../../../../dom/pop";
+import { pop } from "../../../../dom/pop";
+import { PushDOM } from "../../../../dom/push-dom";
+import { ArmdozerSelectorProps } from "../props";
 
 /**
  * 戻るボタンが押された時の処理

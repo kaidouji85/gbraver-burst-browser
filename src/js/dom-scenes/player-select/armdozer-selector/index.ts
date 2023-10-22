@@ -2,13 +2,12 @@ import { ArmdozerId } from "gbraver-burst-core";
 import { Observable, Unsubscribable } from "rxjs";
 
 import { Resources } from "../../../resource";
+import { bindEventListener } from "./procedure/bind-event-listener";
 import { createArmdozerSelectorProps } from "./procedure/create-armdozer-selector-props";
-import { ArmdozerSelectorProps } from "./props";
-import { show } from "./procedure/show";
 import { hidden } from "./procedure/hidden";
+import { show } from "./procedure/show";
 import { waitUntilLoaded } from "./procedure/wait-until-loaded";
-import {bindEventListener} from "./procedure/bind-event-listener";
-
+import { ArmdozerSelectorProps } from "./props";
 
 /** アームドーザセレクタ */
 export class ArmdozerSelector {
@@ -28,7 +27,11 @@ export class ArmdozerSelector {
     armdozerIds: ArmdozerId[],
     initialArmdozerId: ArmdozerId,
   ) {
-    this.#props = createArmdozerSelectorProps(resources, armdozerIds, initialArmdozerId);
+    this.#props = createArmdozerSelectorProps(
+      resources,
+      armdozerIds,
+      initialArmdozerId,
+    );
     this.#unsubscribers = bindEventListener(this.#props);
   }
 

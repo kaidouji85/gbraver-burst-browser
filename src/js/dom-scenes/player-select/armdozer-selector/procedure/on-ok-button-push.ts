@@ -1,6 +1,6 @@
-import {ArmdozerSelectorProps} from "../props";
-import {PushDOM} from "../../../../dom/push-dom";
-import {pop} from "../../../../dom/pop";
+import { pop } from "../../../../dom/pop";
+import { PushDOM } from "../../../../dom/push-dom";
+import { ArmdozerSelectorProps } from "../props";
 
 /**
  * 決定ボタンが押された時の処理
@@ -9,7 +9,7 @@ import {pop} from "../../../../dom/pop";
  */
 export function onOkButtonPush(
   props: Readonly<ArmdozerSelectorProps>,
-  action: PushDOM
+  action: PushDOM,
 ) {
   props.exclusive.execute(async (): Promise<void> => {
     action.event.preventDefault();

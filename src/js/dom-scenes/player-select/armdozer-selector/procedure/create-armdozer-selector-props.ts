@@ -9,7 +9,12 @@ import { SOUND_IDS } from "../../../../resource/sound";
 import { ArmdozerStatus } from "../armdozer-status";
 import { createArmdozerIcon } from "../create-armdozer-icon";
 import { BLOCK } from "../dom/class-name";
-import { extractDummyStatus, extractIcons, extractOkButton, extractPrevButton } from "../dom/extract-element";
+import {
+  extractDummyStatus,
+  extractIcons,
+  extractOkButton,
+  extractPrevButton,
+} from "../dom/extract-element";
 import { rootInnerHTML } from "../dom/root-inner-html";
 import { ArmdozerSelectorProps } from "../props";
 
@@ -33,7 +38,7 @@ export function createArmdozerSelectorProps(
   armdozerStatus.switch(initialArmdozerId);
   const dummyStatus = extractDummyStatus(root);
   replaceDOM(dummyStatus, armdozerStatus.getRootHTMLElement());
-  
+
   const armdozerIcons = armdozerIds.map((v) => ({
     armdozerId: v,
     icon: createArmdozerIcon(resources, v),
@@ -51,10 +56,14 @@ export function createArmdozerSelectorProps(
     armdozerIcons,
     okButton: extractOkButton(root),
     prevButton: extractPrevButton(root),
-    changeValueSound: resources.sounds.find((v) => v.id === SOUND_IDS.CHANGE_VALUE)?.sound ?? new Howl({ src: "" }),
-    decideSound: resources.sounds.find((v) => v.id === SOUND_IDS.PUSH_BUTTON)?.sound ?? new Howl({ src: "" }),
+    changeValueSound:
+      resources.sounds.find((v) => v.id === SOUND_IDS.CHANGE_VALUE)?.sound ??
+      new Howl({ src: "" }),
+    decideSound:
+      resources.sounds.find((v) => v.id === SOUND_IDS.PUSH_BUTTON)?.sound ??
+      new Howl({ src: "" }),
     change: new Subject(),
     decide: new Subject(),
     prev: new Subject(),
-  }
+  };
 }

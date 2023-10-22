@@ -1,5 +1,6 @@
-import {ArmdozerId} from "gbraver-burst-core";
-import {ArmdozerSelectorProps} from "../props";
+import { ArmdozerId } from "gbraver-burst-core";
+
+import { ArmdozerSelectorProps } from "../props";
 
 /**
  * アームドーザアイコンが選択された際の処理
@@ -9,7 +10,7 @@ import {ArmdozerSelectorProps} from "../props";
  */
 export function onArmdozerSelect(
   props: ArmdozerSelectorProps,
-  armdozerId: ArmdozerId
+  armdozerId: ArmdozerId,
 ) {
   props.exclusive.execute(async (): Promise<void> => {
     if (props.armdozerId !== armdozerId) {
