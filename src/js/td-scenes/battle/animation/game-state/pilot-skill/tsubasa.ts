@@ -55,9 +55,9 @@ function tsubasaBatteryEnchantment(
     .chain(delay(500))
     .chain(param.pilot.cutIn.hidden())
     .chain(delay(200))
+    .chain(param.invokerTD.armdozerEffects.batteryEnchantment.popUp())
     .chain(
       all(
-        param.invokerTD.armdozerEffects.batteryEnchantment.popUp(),
         toInitial(param.tdCamera, 500),
         param.tdObjects.skyBrightness.brightness(1, 500),
         param.tdObjects.illumination.intensity(1, 500),
