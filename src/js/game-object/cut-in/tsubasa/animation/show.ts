@@ -15,7 +15,7 @@ import { TsubasaSounds } from "../sounds/tsubasa-sounds";
 export function show(model: TsubasaModel, sounds: TsubasaSounds): Animate {
   return process(() => {
     model.opacity = 0;
-    model.position.x = 200;
+    model.position.x = -200;
   })
     .chain(
       all(

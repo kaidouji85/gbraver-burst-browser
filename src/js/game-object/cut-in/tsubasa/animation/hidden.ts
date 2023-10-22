@@ -26,7 +26,7 @@ export function hidden(model: TsubasaModel): Animate {
       tween(model.position, (t) =>
         t.to(
           {
-            x: "+100",
+            x: "-100",
           },
           300,
         ),
