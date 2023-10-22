@@ -4,7 +4,6 @@ import { all } from "../../../../../animation/all";
 import { Animate } from "../../../../../animation/animate";
 import { delay, empty } from "../../../../../animation/delay";
 import { GaiHUD } from "../../../view/hud/pilot-objects/gai";
-import { dolly, toInitial, track } from "../../td-camera";
 import type { PilotSkillAnimationParamX } from "./animation-param";
 
 /**
@@ -46,8 +45,6 @@ const outDuration = 400;
 function gaiBuffPower(param: GaiAnimationParamX<BuffPowerSkill>): Animate {
   return all(
     param.pilot.cutIn.show(),
-    track(param.tdCamera, param.invokerSprite.getObject3D().position.x, inDuration),
-    dolly(param.tdCamera, "-40", inDuration),
     param.tdObjects.skyBrightness.brightness(0.2, inDuration),
     param.tdObjects.illumination.intensity(0.2, inDuration),
     param.isActivePlayer
@@ -60,7 +57,6 @@ function gaiBuffPower(param: GaiAnimationParamX<BuffPowerSkill>): Animate {
     .chain(param.invokerTD.armdozerEffects.powerUp.popUp())
     .chain(
       all(
-        toInitial(param.tdCamera, outDuration),
         param.tdObjects.skyBrightness.brightness(1, outDuration),
         param.tdObjects.illumination.intensity(1, outDuration),
       ),
