@@ -33,9 +33,13 @@ export function tsubasaAnimation(param: TsubasaAnimationParam): Animate {
   return empty();
 }
 
+/** イン アニメーション時間 */
+const inDuration = 400;
+/** アウト アニメーション時間 */
+const outDuration = 400;
+
 /**
  * ツバサ バッテリー回復 アニメーション
- *
  * @param param パラメータ
  * @return アニメーション
  */
@@ -44,23 +48,23 @@ function tsubasaBatteryEnchantment(
 ): Animate {
   return all(
     param.pilot.cutIn.show(),
-    track(param.tdCamera, param.invokerSprite.getObject3D().position.x, 500),
-    dolly(param.tdCamera, "-40", 500),
-    param.tdObjects.skyBrightness.brightness(0.2, 500),
-    param.tdObjects.illumination.intensity(0.2, 500),
+    track(param.tdCamera, param.invokerSprite.getObject3D().position.x, inDuration),
+    dolly(param.tdCamera, "-40", inDuration),
+    param.tdObjects.skyBrightness.brightness(0.2, inDuration),
+    param.tdObjects.illumination.intensity(0.2, inDuration),
     param.isActivePlayer
       ? param.invokerSprite.endActive()
       : param.anotherSprite.endActive(),
   )
-    .chain(delay(500))
+    .chain(delay(800))
     .chain(param.pilot.cutIn.hidden())
     .chain(delay(200))
     .chain(param.invokerTD.armdozerEffects.batteryEnchantment.popUp())
     .chain(
       all(
-        toInitial(param.tdCamera, 500),
-        param.tdObjects.skyBrightness.brightness(1, 500),
-        param.tdObjects.illumination.intensity(1, 500),
+        toInitial(param.tdCamera, outDuration),
+        param.tdObjects.skyBrightness.brightness(1, outDuration),
+        param.tdObjects.illumination.intensity(1, outDuration),
       ),
     )
     .chain(delay(200));
