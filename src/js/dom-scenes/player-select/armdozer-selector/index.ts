@@ -1,16 +1,13 @@
 import { ArmdozerId } from "gbraver-burst-core";
 import { Observable, Unsubscribable } from "rxjs";
 
-import { domPushStream } from "../../../dom/push-dom";
 import { Resources } from "../../../resource";
 import { createArmdozerSelectorProps } from "./procedure/create-armdozer-selector-props";
 import { ArmdozerSelectorProps } from "./props";
 import { show } from "./procedure/show";
 import { hidden } from "./procedure/hidden";
 import { waitUntilLoaded } from "./procedure/wait-until-loaded";
-import { onArmdozerSelect } from "./procedure/on-armdozer-select";
-import {onOkButtonPush} from "./procedure/on-ok-button-push";
-import {onPrevButtonPush} from "./procedure/on-prev-button-push";
+import {bindEventListener} from "./procedure/bind-event-listener";
 
 
 /** アームドーザセレクタ */
@@ -32,19 +29,7 @@ export class ArmdozerSelector {
     initialArmdozerId: ArmdozerId,
   ) {
     this.#props = createArmdozerSelectorProps(resources, armdozerIds, initialArmdozerId);
-    this.#unsubscribers = [
-      ...this.#props.armdozerIcons.map((v) =>
-        v.icon.notifySelection().subscribe(() => {
-          onArmdozerSelect(this.#props, v.armdozerId);
-        }),
-      ),
-      domPushStream(this.#props.okButton).subscribe((action) => {
-        onOkButtonPush(this.#props, action);
-      }),
-      domPushStream(this.#props.prevButton).subscribe((action) => {
-        onPrevButtonPush(this.#props, action);
-      }),
-    ];
+    this.#unsubscribers = bindEventListener(this.#props);
   }
 
   /**
