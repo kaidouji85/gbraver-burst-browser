@@ -17,7 +17,7 @@ const duration = 400;
 export function show(model: ShinyaModel, sounds: ShinyaSounds): Animate {
   return process(() => {
     model.opacity = 0;
-    model.position.x = -100;
+    model.position.x = -50;
   })
     .chain(
       all(

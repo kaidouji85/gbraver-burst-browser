@@ -14,9 +14,7 @@ import type { PilotSkillAnimationParamX } from "./animation-param";
 export type TsubasaAnimationParamX<SKILL extends PilotSkill> =
   PilotSkillAnimationParamX<SKILL, TsubasaHUD>;
 
-/**
- * パイロットスキル ツバサ アニメーションパラメータ
- */
+/** パイロットスキル ツバサ アニメーションパラメータ */
 export type TsubasaAnimationParam = TsubasaAnimationParamX<PilotSkill>;
 
 /**
@@ -49,7 +47,7 @@ function tsubasaBatteryEnchantment(
   return all(
     param.pilot.cutIn.show(),
     track(param.tdCamera, param.invokerSprite.getObject3D().position.x, inDuration),
-    dolly(param.tdCamera, "-40", inDuration),
+    dolly(param.tdCamera, "-20", inDuration),
     param.tdObjects.skyBrightness.brightness(0.2, inDuration),
     param.tdObjects.illumination.intensity(0.2, inDuration),
     param.isActivePlayer

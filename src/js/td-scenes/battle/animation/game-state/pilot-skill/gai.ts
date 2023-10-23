@@ -1,11 +1,11 @@
-import type { BuffPowerSkill, PilotSkill } from "gbraver-burst-core";
+import { BuffPowerSkill, PilotSkill } from "gbraver-burst-core";
 
 import { all } from "../../../../../animation/all";
 import { Animate } from "../../../../../animation/animate";
 import { delay, empty } from "../../../../../animation/delay";
 import { GaiHUD } from "../../../view/hud/pilot-objects/gai";
-import type { PilotSkillAnimationParamX } from "./animation-param";
 import {dolly, toInitial, track} from "../../td-camera";
+import { PilotSkillAnimationParamX } from "./animation-param";
 
 /**
  * パイロットスキル ガイ アニメーションパラメータ

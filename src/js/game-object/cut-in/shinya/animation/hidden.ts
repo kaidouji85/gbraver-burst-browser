@@ -28,7 +28,7 @@ export function hidden(model: ShinyaModel): Animate {
       tween(model.position, (t) =>
         t.to(
           {
-            x: "-50",
+            x: "-25",
           },
           duration,
         ),
