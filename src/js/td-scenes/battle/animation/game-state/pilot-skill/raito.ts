@@ -14,9 +14,7 @@ import { PilotSkillAnimationParamX } from "./animation-param";
 export type RaitoAnimationParamX<SKILL extends PilotSkill> =
   PilotSkillAnimationParamX<SKILL, RaitoHUD>;
 
-/**
- * パイロットスキル ライト アニメーションパラメータ
- */
+/** パイロットスキル ライト アニメーションパラメータ */
 export type RaitoAnimationParam = RaitoAnimationParamX<PilotSkill>;
 
 /**
