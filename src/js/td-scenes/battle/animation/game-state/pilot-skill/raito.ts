@@ -50,7 +50,11 @@ function raitoDamageHalved(
 ): Animate {
   return all(
     param.pilot.cutIn.show(),
-    track(param.tdCamera, param.invokerSprite.getObject3D().position.x, inDuration),
+    track(
+      param.tdCamera,
+      param.invokerSprite.getObject3D().position.x,
+      inDuration,
+    ),
     dolly(param.tdCamera, "-20", inDuration),
     param.tdObjects.skyBrightness.brightness(0.2, inDuration),
     param.tdObjects.illumination.intensity(0.2, inDuration),
