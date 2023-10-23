@@ -4,9 +4,11 @@ import { process } from "../../../../animation/process";
 import { tween } from "../../../../animation/tween";
 import type { ShinyaModel } from "../model/shinya-model";
 
+/** アニメ時間 */
+const duration = 200;
+
 /**
  * カットインを非表示にする
- *
  * @param model モデル
  * @return アニメーション
  */
@@ -20,15 +22,15 @@ export function hidden(model: ShinyaModel): Animate {
           {
             opacity: 0,
           },
-          300,
+          duration,
         ),
       ),
       tween(model.position, (t) =>
         t.to(
           {
-            x: "+100",
+            x: "-25",
           },
-          300,
+          duration,
         ),
       ),
     ),

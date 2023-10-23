@@ -5,6 +5,9 @@ import { tween } from "../../../../animation/tween";
 import type { YuuyaModel } from "../model/yuuya-model";
 import { YuuyaSounds } from "../sounds/yuuya-sounds";
 
+/** アニメ時間 */
+const duration = 400;
+
 /**
  * カットインを表示する
  * @param model モデル
@@ -14,7 +17,7 @@ import { YuuyaSounds } from "../sounds/yuuya-sounds";
 export function show(model: YuuyaModel, sounds: YuuyaSounds): Animate {
   return process(() => {
     model.opacity = 0;
-    model.position.x = 200;
+    model.position.x = -50;
   })
     .chain(
       all(
@@ -23,7 +26,7 @@ export function show(model: YuuyaModel, sounds: YuuyaSounds): Animate {
             {
               opacity: 1,
             },
-            500,
+            duration,
           ),
         ),
         tween(model.position, (t) =>
@@ -31,7 +34,7 @@ export function show(model: YuuyaModel, sounds: YuuyaSounds): Animate {
             {
               x: 0,
             },
-            500,
+            duration,
           ),
         ),
       ),

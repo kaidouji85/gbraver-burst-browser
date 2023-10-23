@@ -14,9 +14,7 @@ import type { PilotSkillAnimationParamX } from "./animation-param";
 export type ShinyaAnimationParamX<SKILL extends PilotSkill> =
   PilotSkillAnimationParamX<SKILL, ShinyaHUD>;
 
-/**
- * パイロットスキル シンヤ アニメーションパラメータ
- */
+/** パイロットスキル シンヤ アニメーションパラメータ */
 export type ShinyaAnimationParam = ShinyaAnimationParamX<PilotSkill>;
 
 /**
@@ -33,9 +31,13 @@ export function shinyaAnimation(param: ShinyaAnimationParam): Animate {
   return empty();
 }
 
+/** イン アニメーション時間 */
+const inDuration = 400;
+/** アウト アニメーション時間 */
+const outDuration = 400;
+
 /**
  * シンヤ バッテリー回復 アニメーション
- *
  * @param param パラメータ
  * @return アニメーション
  */
@@ -44,10 +46,14 @@ function shinyaRecoverBattery(
 ): Animate {
   return all(
     param.pilot.cutIn.show(),
-    track(param.tdCamera, param.invokerSprite.getObject3D().position.x, 500),
-    dolly(param.tdCamera, "-40", 500),
-    param.tdObjects.skyBrightness.brightness(0.2, 500),
-    param.tdObjects.illumination.intensity(0.2, 500),
+    track(
+      param.tdCamera,
+      param.invokerSprite.getObject3D().position.x,
+      inDuration,
+    ),
+    dolly(param.tdCamera, "-20", inDuration),
+    param.tdObjects.skyBrightness.brightness(0.2, inDuration),
+    param.tdObjects.illumination.intensity(0.2, inDuration),
     param.isActivePlayer
       ? param.invokerSprite.endActive()
       : param.anotherSprite.endActive(),
@@ -63,9 +69,9 @@ function shinyaRecoverBattery(
     )
     .chain(
       all(
-        toInitial(param.tdCamera, 500),
-        param.tdObjects.skyBrightness.brightness(1, 500),
-        param.tdObjects.illumination.intensity(1, 500),
+        toInitial(param.tdCamera, outDuration),
+        param.tdObjects.skyBrightness.brightness(1, outDuration),
+        param.tdObjects.illumination.intensity(1, outDuration),
       ),
     )
     .chain(delay(200));
