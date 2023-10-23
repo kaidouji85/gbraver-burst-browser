@@ -14,9 +14,7 @@ import { PilotSkillAnimationParamX } from "./animation-param";
 export type GaiAnimationParamX<SKILL extends PilotSkill> =
   PilotSkillAnimationParamX<SKILL, GaiHUD>;
 
-/**
- * パイロットスキル ガイ アニメーションパラメータ
- */
+/** パイロットスキル ガイ アニメーションパラメータ */
 export type GaiAnimationParam = GaiAnimationParamX<PilotSkill>;
 
 /**
