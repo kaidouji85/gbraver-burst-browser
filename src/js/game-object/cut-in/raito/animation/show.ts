@@ -17,7 +17,7 @@ const duration = 400;
 export function show(model: RaitoModel, sounds: RaitoSounds): Animate {
   return process(() => {
     model.opacity = 0;
-    model.position.x = -50;
+    model.position.x = -25;
   })
     .chain(
       all(
