@@ -1,0 +1,87 @@
+/**
+ * エピソードタイトル画面
+ */
+@media (orientation: landscape) {
+  .episode-title {
+    --zindex-bust-shot: 0;
+    --zindex-stand: 1;
+    --zindex-title: 2;
+    --font-size: calc(var(--responsive-font-size) * 2);
+
+    width: var(--screen-width);
+    height: var(--screen-height);
+    background-color: var(--background-color);
+    color: var(--font-color);
+    box-sizing: border-box;
+    padding: var(--screen-padding-top) var(--screen-padding-right)
+      var(--screen-padding-bottom) var(--screen-padding-left);
+    background-size: cover;
+    background-position: 50% 0;
+  }
+}
+
+@media (orientation: portrait) {
+  .episode-title {
+    display: none;
+  }
+}
+
+.episode-title__title {
+  position: absolute;
+  font-size: var(--font-size);
+  z-index: var(--zindex-title);
+  left: max(var(--safe-area-left), calc(var(--font-size) * 2));
+  top: max(var(--safe-area-top), calc(var(--font-size) * 2));
+}
+
+.episode-title__prefix {
+  display: flex;
+  align-items: baseline;
+}
+
+.episode-title__episode-type {
+  margin-right: calc(var(--font-size) * 0.5);
+}
+
+.episode-title__episode-type::first-letter {
+  font-size: calc(var(--font-size) * 1.5);
+  font-weight: bold;
+}
+
+.episode-title__episode-number {
+  font-size: calc(var(--font-size) * 1.5);
+  font-weight: bold;
+}
+
+.episode-title__caption {
+  margin-left: calc(var(--responsive-font-size) * 2);
+}
+
+.episode-title__caption::first-letter {
+  font-size: calc(var(--font-size) * 1.5);
+  font-weight: bold;
+  white-space: nowrap;
+}
+
+.episode-title__shin-braver-bust-shot {
+  --width: calc(var(--vh) * 200);
+
+  position: absolute;
+  top: calc(var(--vh) * -10);
+  right: calc(-0.2 * var(--width));
+  width: var(--width);
+  filter: brightness(20%);
+  z-index: var(--zindex-bust-shot);
+}
+
+.episode-title__shin-braver-stand {
+  --size: calc(140 * var(--vh));
+
+  position: absolute;
+  right: calc(-0.2 * var(--size));
+  bottom: 0;
+  transform: translateY(25%);
+  width: var(--size);
+  height: var(--size);
+  z-index: var(--zindex-stand);
+}

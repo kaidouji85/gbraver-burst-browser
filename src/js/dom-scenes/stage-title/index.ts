@@ -1,12 +1,16 @@
-import type { DOMScene } from "../dom-scene";
+import { DOMScene } from "../dom-scene";
 import {
   CreateStageTitleParams,
   createStageTitleProps,
 } from "./procedures/create-stage-title-props";
+import { setCaption } from "./procedures/set-caption";
 import { StageTitleProps } from "./props";
 
 /** ステージタイトルのパラメータ */
-export type StageTitleParam = CreateStageTitleParams;
+export type StageTitleParam = CreateStageTitleParams & {
+  /** ステージ名 */
+  caption: string[];
+};
 
 /** ステージタイトル */
 export class StageTitle implements DOMScene {
@@ -19,6 +23,7 @@ export class StageTitle implements DOMScene {
    */
   constructor(params: StageTitleParam) {
     this.#props = createStageTitleProps(params);
+    setCaption(this.#props, params.caption);
   }
 
   /** @override */

@@ -4,6 +4,7 @@ import { BatteryIconPathConfigs } from "./battery-icon";
 import { CheckPathConfigs } from "./check";
 import { DialogPathConfig } from "./dialog";
 import { EndingPathConfigs } from "./ending";
+import { EpisodePathConfigs } from "./episodes";
 import { GaiPathConfigs } from "./gai";
 import { GenesisBraverPathConfigs } from "./genesis-braver";
 import { HelpIconPathConfigs } from "./help-icon";
@@ -17,7 +18,6 @@ import { RaitoPathConfigs } from "./raito";
 import { ShinBraverPathConfigs } from "./shin-braver";
 import { TitleBackPathConfigs } from "./title-back";
 import { TsubasaPathConfigs } from "./tsubasa";
-import { TutorialPathConfigs } from "./tutorial";
 import { WingDozerPathConfigs } from "./wing-dozer";
 import { YuuyaPathConfigs } from "./yuuya";
 
@@ -40,7 +40,7 @@ export const PathConfigs: PathConfig[] = [
   ...PlayInLandscapePathConfigs,
   ...CheckPathConfigs,
   ...NPCCoursePathConfigs,
-  ...TutorialPathConfigs,
+  ...EpisodePathConfigs,
   ...BatteryIconPathConfigs,
   ...HelpIconPathConfigs,
   ...MessageWindowPathConfigs,

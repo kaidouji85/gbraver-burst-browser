@@ -42,8 +42,8 @@ export type GamePropsGeneratorParam = {
   api: BrowserSDK;
   /** ブラウザ設定リポジトリ */
   config: GBraverBurstBrowserConfigRepository;
-  /** 開発中のチュートリアルをプレイできるか否かのフラグ、trueでプレイできる */
-  canPlayTutorialInDevelopment: boolean;
+  /** 開発中のエピソードをプレイできるか否かのフラグ、trueでプレイできる */
+  canPlayEpisodeInDevelopment: boolean;
   /** 開発中のリソースをロードするか否かのフラグ、trueでロードする */
   shouldLoadDevelopingResource: boolean;
   /** 開発中のアームドーザを選択できるか否かのフラグ、trueで選択できる */
@@ -97,7 +97,7 @@ export function generateGameProps(param: GamePropsGeneratorParam): GameProps {
     tdBinder: new TDSceneBinder(renderer, hudUIScale),
     serviceWorker: null,
     bgm: createBGMManager(),
-    canPlayTutorialInDevelopment: param.canPlayTutorialInDevelopment,
+    canPlayEpisodeInDevelopment: param.canPlayEpisodeInDevelopment,
     shouldLoadDevelopingResource: param.shouldLoadDevelopingResource,
     canPlayDevelopingArmdozer: param.canPlayDevelopingArmdozer,
     canPlayDevelopingPilot: param.canPlayDevelopingPilot,

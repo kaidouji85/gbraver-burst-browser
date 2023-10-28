@@ -23,11 +23,11 @@ import { PrivateMatchEntry } from "./private-match-entry";
 import { PrivateMatchGuestStart } from "./private-match-guest-start";
 import { PrivateMatchHostStart } from "./private-match-host-start";
 import { ReloadRequest } from "./reload-request";
-import { SelectTutorialStage } from "./select-tutorial-stage";
+import { SelectEpisode } from "./select-episode";
 import { SelectionCancel } from "./selection-cancel";
 import { SelectionComplete } from "./selection-complete";
+import { StoryStart } from "./story-start";
 import { SuddenlyBattleEnd } from "./suddenly-battle-end";
-import { TutorialStart } from "./tutorial-start";
 import { UniversalLogin } from "./universal-login";
 import { VisibilityChange } from "./visibility-change";
 import { WebSocketAPIError } from "./web-socket-api-error";
@@ -65,7 +65,7 @@ export type GameAction =
   | ConfigChangeStart
   | ConfigChangeComplete
   | ConfigChangeCancel
-  | TutorialStart
+  | StoryStart
   | CancelTutorialSelect
-  | SelectTutorialStage
+  | SelectEpisode
   | VisibilityChange;

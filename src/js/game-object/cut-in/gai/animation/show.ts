@@ -5,9 +5,11 @@ import { tween } from "../../../../animation/tween";
 import type { GaiModel } from "../model/gai-model";
 import { GaiSounds } from "../sounds/gai-sounds";
 
+/** アニメ時間 */
+const duration = 400;
+
 /**
  * カットインを表示する
- *
  * @param model モデル
  * @param sounds 効果音
  * @return アニメーション
@@ -15,7 +17,7 @@ import { GaiSounds } from "../sounds/gai-sounds";
 export function show(model: GaiModel, sounds: GaiSounds): Animate {
   return process(() => {
     model.opacity = 0;
-    model.position.x = 200;
+    model.position.x = -25;
   })
     .chain(
       all(
@@ -24,7 +26,7 @@ export function show(model: GaiModel, sounds: GaiSounds): Animate {
             {
               opacity: 1,
             },
-            500,
+            duration,
           ),
         ),
         tween(model.position, (t) =>
@@ -32,7 +34,7 @@ export function show(model: GaiModel, sounds: GaiSounds): Animate {
             {
               x: 0,
             },
-            500,
+            duration,
           ),
         ),
       ),

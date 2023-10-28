@@ -20,16 +20,16 @@ import { onLogout } from "./on-logout";
 import { onMatchingCanceled } from "./on-matching-cancel";
 import { onNetBattleCancel } from "./on-net-battle-cancel";
 import { onNetBattleStart } from "./on-net-battle-start";
-import { onPostBattleAction } from "./on-post-battle-action";
+import { onPostBattleAction } from "./on-post-battle";
 import { onPrivateMatchEntry } from "./on-private-match-entry";
 import { onPrivateMatchGuestStart } from "./on-private-match-guest-start";
 import { onPrivateMatchHostStart } from "./on-private-match-host-start";
 import { onReloadRequest } from "./on-reload-request";
-import { onSelectTutorialStage } from "./on-select-tutorial-stage";
+import { onSelectEpisode } from "./on-select-episode";
 import { onSelectionCancel } from "./on-selection-cancel";
 import { onSelectionComplete } from "./on-selection-complete";
+import { onStoryStart } from "./on-story-start";
 import { onSuddenlyEndBattle } from "./on-suddenly-battle-end";
-import { onTutorialStart } from "./on-tutorial-start";
 import { onUniversalLogin } from "./on-universal-login";
 import { onVisibilityChange } from "./on-visibility-change";
 import { onWebSocketAPIError } from "./on-websocker-api-error";
@@ -90,12 +90,12 @@ export function onGameAction(props: GameProps, action: GameAction) {
     onConfigChangeCancel(props);
   } else if (action.type === "ConfigChangeComplete") {
     onConfigChangeComplete(props, action);
-  } else if (action.type === "TutorialStart") {
-    onTutorialStart(props);
+  } else if (action.type === "StoryStart") {
+    onStoryStart(props);
   } else if (action.type === "CancelTutorialSelect") {
     onCancelTutorialSelect(props);
-  } else if (action.type === "SelectTutorialStage") {
-    onSelectTutorialStage(props, action);
+  } else if (action.type === "SelectEpisode") {
+    onSelectEpisode(props, action);
   } else if (action.type === "NetBattleStart") {
     onNetBattleStart(props);
   } else if (action.type === "NetBattleCancel") {

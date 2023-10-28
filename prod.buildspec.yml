@@ -7,7 +7,7 @@ env:
     SHOULD_LOAD_DEVELOPING_RESOURCE: false
     CAN_PLAY_DEVELOPING_ARMDOZER: false
     CAN_PLAY_DEVELOPING_PILOT: false
-    CAN_PLAY_TUTORIAL_IN_DEVELOPMENT: false
+    CAN_PLAY_EPISODE_IN_DEVELOPMENT: false
   parameter-store:
     SERVICE: /GbraverBurst/prod/service
     STAGE: /GbraverBurst/prod/stage
