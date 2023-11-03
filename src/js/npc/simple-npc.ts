@@ -19,17 +19,14 @@ const ZERO_BATTERY: Command = {
 export type SimpleRoutineData = {
   /** NPCが選択できるコマンド */
   commands: Command[];
-
   /** NPCの最新ステート */
   enemy: PlayerState;
-
   /** プレイヤーの最新ステート */
   player: PlayerState;
 };
 
 /**
  * シンプルなルーチン
- *
  * @param data ルーチンに渡すデータ
  * @return NPCが選択するコマンド
  */
@@ -37,14 +34,17 @@ export type SimpleRoutine = (data: SimpleRoutineData) => Command;
 
 /** シンプルな実装のNPC */
 export class SimpleNPC implements NPC {
+  /** @override */
   armdozer: Armdozer;
+  /** @override */
   pilot: Pilot;
+  /** 攻撃ルーチン */
   attackRoutine: SimpleRoutine;
+  /** 防御ルーチン */
   defenseRoutine: SimpleRoutine;
 
   /**
    * コンストラクタ
-   *
    * @param armdozer NPCのアームドーザ
    * @param pilot NPCのパイロット
    * @param attackRoutine 攻撃ルーチン
@@ -69,7 +69,6 @@ export class SimpleNPC implements NPC {
     }
 
     const lastState = gameStateHistory[gameStateHistory.length - 1];
-
     if (lastState.effect.name !== "InputCommand") {
       return ZERO_BATTERY;
     }
@@ -79,12 +78,11 @@ export class SimpleNPC implements NPC {
     );
     const enemy = lastState.players.find((v) => v.playerId === enemyId);
     const player = lastState.players.find((v) => v.playerId !== enemyId);
-
     if (!enableCommand || !enemy || !player) {
       return ZERO_BATTERY;
     }
 
-    if (enableCommand.selectable === false) {
+    if (!enableCommand.selectable) {
       return enableCommand.nextTurnCommand;
     }
 

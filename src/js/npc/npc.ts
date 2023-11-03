@@ -10,13 +10,11 @@ import type {
 export interface NPC {
   /** アームドーザ */
   armdozer: Armdozer;
-
   /** パイロット */
   pilot: Pilot;
 
   /**
    * NPCのルーチン
-   *
    * @param enemyId 敵のプレイヤーID
    * @param gameStateHistory ゲーム状態の履歴
    * @return コマンド
