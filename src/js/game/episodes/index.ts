@@ -1,5 +1,6 @@
 import { batterySystemTutorial } from "./battery-system";
 import { burstTutorial } from "./burst";
+import { confrontationTwoBraver } from "./confrontation-two-braver";
 import { Episode } from "./episode";
 import { pilotSkillTutorial01 } from "./pilot-skill-01";
 import { pilotSkillTutorial02 } from "./pilot-skill-02";
@@ -31,4 +32,11 @@ export const SideEpisodes: Episode[] = [
 export const Episodes: Episode[] = [...MainEpisodes, ...SideEpisodes];
 
 /** 開発中のエピソードをあつめたもの */
-export const EpisodesInDevelopment: Episode[] = [...Episodes];
+export const EpisodesInDevelopment: Episode[] = [
+  ...Episodes,
+  {
+    ...confrontationTwoBraver,
+    type: "Episode",
+    number: MainEpisodes.length + 1,
+  },
+];
