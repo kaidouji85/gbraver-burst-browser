@@ -36,10 +36,10 @@ const defenseRoutine: SimpleRoutine = (data) => {
 };
 
 /**
- * ストーリー ジェネシスブレイバー 初戦
+ * ジェネシスブレイバーNPC
  * @return NPC
  */
-export function firstBattleGenesisBraver(): NPC {
+export function genesisBraverNPC(): NPC {
   const armdozer =
     Armdozers.find((v) => v.id === ArmdozerIds.GENESIS_BRAVER) ?? Armdozers[0];
   const pilot = Pilots.find((v) => v.id === PilotIds.TSUBASA) ?? Pilots[0];

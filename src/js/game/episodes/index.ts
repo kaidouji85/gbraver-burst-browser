@@ -4,6 +4,7 @@ import { Episode } from "./episode";
 import { pilotSkillTutorial01 } from "./pilot-skill-01";
 import { pilotSkillTutorial02 } from "./pilot-skill-02";
 import { zeroDefenseTutorial } from "./zero-defense";
+import {confrontationTwoBraver} from "./confrontation-two-braver";
 
 /** メインエピソード */
 export const MainEpisodes: Episode[] = [
@@ -31,4 +32,11 @@ export const SideEpisodes: Episode[] = [
 export const Episodes: Episode[] = [...MainEpisodes, ...SideEpisodes];
 
 /** 開発中のエピソードをあつめたもの */
-export const EpisodesInDevelopment: Episode[] = [...Episodes];
+export const EpisodesInDevelopment: Episode[] = [
+  ...Episodes,
+  {
+    ...confrontationTwoBraver,
+    type: "Episode",
+    number: MainEpisodes.length + 1,
+  }
+];
