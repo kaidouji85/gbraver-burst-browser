@@ -18,21 +18,29 @@ const ZERO_BATTERY: Command = {
 
 /** @override 攻撃ルーチン */
 const attackRoutine: SimpleRoutine = (data) => {
-  const battery2 = data.commands.find(
-    (v) => v.type === "BATTERY_COMMAND" && v.battery === 2,
+  const battery5 = data.commands.find(
+    (v) => v.type === "BATTERY_COMMAND" && v.battery === 5,
   );
-  return battery2 ?? ZERO_BATTERY;
+  const battery4 = data.commands.find(
+    (v) => v.type === "BATTERY_COMMAND" && v.battery === 4,
+  );
+  return battery5 ?? battery4 ?? ZERO_BATTERY;
 };
 
 /** @override 防御ルーチン */
 const defenseRoutine: SimpleRoutine = (data) => {
-  const battery2 = data.commands.find(
-    (v) => v.type === "BATTERY_COMMAND" && v.battery === 2,
+  const burst = data.commands.find((v) => v.type === "BURST_COMMAND");
+  const battery6 = data.commands.find(
+    (v) => v.type === "BATTERY_COMMAND" && v.battery === 6,
   );
-  const battery1 = data.commands.find(
-    (v) => v.type === "BATTERY_COMMAND" && v.battery === 1,
+  const battery3 = data.commands.find(
+    (v) => v.type === "BATTERY_COMMAND" && v.battery === 3,
   );
-  return battery2 ?? battery1 ?? ZERO_BATTERY;
+  if (burst && data.enemy.armdozer.battery <= 0) {
+    return burst;
+  }
+
+  return battery6 ?? battery3 ?? ZERO_BATTERY;
 };
 
 /**
