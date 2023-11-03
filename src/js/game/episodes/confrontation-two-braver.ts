@@ -1,12 +1,12 @@
 import { ArmdozerIds, Armdozers, PilotIds, Pilots } from "gbraver-burst-core";
 
-import { createBurstTutorialEvent } from "../../custom-battle-events/burst-tutorial";
 import { genesisBraverNPC } from "../../npc/genesis-braver";
 import { PathIds } from "../../resource/path/ids";
 import { SOUND_IDS } from "../../resource/sound";
 import { playerUuid } from "../../uuid/player";
 import { EpisodeConfig } from "./episode";
 import { EpisodeIDs } from "./episode-ids";
+import {createConfrontationTwoBraverEvent} from "../../custom-battle-events/confrontation-two-braver";
 
 /** 導入 */
 const introduction = `あとで考える`;
@@ -24,6 +24,6 @@ export const confrontationTwoBraver: EpisodeConfig = {
     pilot: Pilots.find((v) => v.id === PilotIds.SHINYA) ?? Pilots[0],
   },
   npc: genesisBraverNPC(),
-  event: createBurstTutorialEvent,
+  event: () => createConfrontationTwoBraverEvent(),
   bgm: SOUND_IDS.BATTLE_BGM_03,
 };
