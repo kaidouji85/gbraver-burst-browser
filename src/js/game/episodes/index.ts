@@ -1,10 +1,10 @@
 import { batterySystemTutorial } from "./battery-system";
 import { burstTutorial } from "./burst";
+import { confrontationTwoBraver } from "./confrontation-two-braver";
 import { Episode } from "./episode";
 import { pilotSkillTutorial01 } from "./pilot-skill-01";
 import { pilotSkillTutorial02 } from "./pilot-skill-02";
 import { zeroDefenseTutorial } from "./zero-defense";
-import {confrontationTwoBraver} from "./confrontation-two-braver";
 
 /** メインエピソード */
 export const MainEpisodes: Episode[] = [
@@ -38,5 +38,5 @@ export const EpisodesInDevelopment: Episode[] = [
     ...confrontationTwoBraver,
     type: "Episode",
     number: MainEpisodes.length + 1,
-  }
+  },
 ];
