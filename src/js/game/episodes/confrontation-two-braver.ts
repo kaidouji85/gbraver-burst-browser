@@ -14,7 +14,7 @@ const introduction = `あとで考える`;
 /** 対決、二人のブレイバー！！ */
 export const confrontationTwoBraver: EpisodeConfig = {
   id: EpisodeIDs.TWO_BRAVER,
-  title: "対決、二人のブレイバー！！",
+  title: "（開発中）対決、二人のブレイバー！！",
   introduction,
   imageCutPathId: PathIds.IMAGE_CUT_BURST,
   player: {
