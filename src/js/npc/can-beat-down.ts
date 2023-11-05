@@ -8,7 +8,6 @@ import {
 
 /**
  * 攻撃側が防御側を倒すことができるか否かを判定する
- *
  * @param attacker 攻撃側のステータス
  * @param attackBattery 攻撃側が出すバッテリー
  * @param defender 防御側のステータス
