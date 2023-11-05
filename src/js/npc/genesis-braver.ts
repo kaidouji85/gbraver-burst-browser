@@ -6,6 +6,7 @@ import {
   Pilots,
 } from "gbraver-burst-core";
 
+import { canBeatDown } from "./can-beat-down";
 import type { NPC } from "./npc";
 import type { SimpleRoutine } from "./simple-npc";
 import { SimpleNPC } from "./simple-npc";
@@ -30,21 +31,38 @@ const attackRoutine: SimpleRoutine = (data) => {
 /** @override 防御ルーチン */
 const defenseRoutine: SimpleRoutine = (data) => {
   const burst = data.commands.find((v) => v.type === "BURST_COMMAND");
-  const pilot = data.commands.find( (v) => v.type === "PILOT_SKILL_COMMAND");
-  const battery6 = data.commands.find(
-    (v) => v.type === "BATTERY_COMMAND" && v.battery === 6,
-  );
+  const pilot = data.commands.find((v) => v.type === "PILOT_SKILL_COMMAND");
   const battery3 = data.commands.find(
     (v) => v.type === "BATTERY_COMMAND" && v.battery === 3,
   );
+  const battery1 = data.commands.find(
+    (v) => v.type === "BATTERY_COMMAND" && v.battery === 1,
+  );
+
+  if (
+    data.enemy.armdozer.battery === data.enemy.armdozer.maxBattery &&
+    battery3 &&
+    !canBeatDown(data.player, data.player.armdozer.battery, data.enemy, 3)
+  ) {
+    return battery3;
+  }
+
+  if (
+    battery1 &&
+    !canBeatDown(data.player, data.player.armdozer.battery, data.enemy, 1)
+  ) {
+    return battery1;
+  }
+
   if (burst && data.enemy.armdozer.battery <= 0) {
     return burst;
   }
+
   if (pilot && data.enemy.armdozer.battery <= 0) {
     return pilot;
   }
 
-  return battery6 ?? battery3 ?? ZERO_BATTERY;
+  return battery1 ?? ZERO_BATTERY;
 };
 
 /**
