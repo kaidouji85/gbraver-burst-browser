@@ -7,12 +7,12 @@ import {
 } from "gbraver-burst-core";
 
 import { canBeatDown } from "./can-beat-down";
+import { getMinimumBatteryToHitOrCritical } from "./get-minimum-battery-to-hit-or-critical";
+import { getMinimumBeatDownBattery } from "./get-minimum-beat-down-battery";
 import { getMinimumSurvivableBattery } from "./get-minimum-survivable-battery";
 import type { NPC } from "./npc";
 import type { SimpleRoutine } from "./simple-npc";
 import { SimpleNPC } from "./simple-npc";
-import {getMinimumBatteryToHitOrCritical} from "./get-minimum-battery-to-hit-or-critical";
-import {getMinimumBeatDownBattery} from "./get-minimum-beat-down-battery";
 
 /** 0バッテリー */
 const ZERO_BATTERY: Command = {
@@ -29,12 +29,20 @@ const attackRoutine: SimpleRoutine = (data) => {
     return battery4;
   }
 
-  const minimumBeatDownBattery = getMinimumBeatDownBattery(data.enemy, data.player, data.player.armdozer.battery);
+  const minimumBeatDownBattery = getMinimumBeatDownBattery(
+    data.enemy,
+    data.player,
+    data.player.armdozer.battery,
+  );
   if (minimumBeatDownBattery !== null) {
     return { type: "BATTERY_COMMAND", battery: minimumBeatDownBattery };
   }
 
-  const minimumBatteryToHitOrCritical = getMinimumBatteryToHitOrCritical(data.enemy, data.player, data.player.armdozer.battery);
+  const minimumBatteryToHitOrCritical = getMinimumBatteryToHitOrCritical(
+    data.enemy,
+    data.player,
+    data.player.armdozer.battery,
+  );
   if (minimumBatteryToHitOrCritical !== null) {
     return { type: "BATTERY_COMMAND", battery: minimumBatteryToHitOrCritical };
   }
