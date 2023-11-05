@@ -15,8 +15,8 @@ export function getMinimumBeatDownBattery(
   defender: PlayerState,
   defenderBattery: number,
 ): number | null {
-  const defenderBatteries = R.range(1, defender.armdozer.battery + 1);
-  const beatDownBatteries = defenderBatteries.filter((battery) =>
+  const attackerBatteries = R.range(1, attacker.armdozer.battery + 1);
+  const beatDownBatteries = attackerBatteries.filter((battery) =>
     canBeatDown(attacker, battery, defender, defenderBattery),
   );
   return 0 < beatDownBatteries.length ? Math.min(...beatDownBatteries) : null;

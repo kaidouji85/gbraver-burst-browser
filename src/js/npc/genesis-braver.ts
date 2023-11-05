@@ -11,6 +11,8 @@ import { getMinimumSurvivableBattery } from "./get-minimum-survivable-battery";
 import type { NPC } from "./npc";
 import type { SimpleRoutine } from "./simple-npc";
 import { SimpleNPC } from "./simple-npc";
+import {getMinimumBatteryToHitOrCritical} from "./get-minimum-battery-to-hit-or-critical";
+import {getMinimumBeatDownBattery} from "./get-minimum-beat-down-battery";
 
 /** 0バッテリー */
 const ZERO_BATTERY: Command = {
@@ -20,13 +22,24 @@ const ZERO_BATTERY: Command = {
 
 /** @override 攻撃ルーチン */
 const attackRoutine: SimpleRoutine = (data) => {
-  const battery5 = data.commands.find(
-    (v) => v.type === "BATTERY_COMMAND" && v.battery === 5,
-  );
   const battery4 = data.commands.find(
     (v) => v.type === "BATTERY_COMMAND" && v.battery === 4,
   );
-  return battery5 ?? battery4 ?? ZERO_BATTERY;
+  if (data.enemy.armdozer.maxBattery === 4 && battery4) {
+    return battery4;
+  }
+
+  const minimumBeatDownBattery = getMinimumBeatDownBattery(data.enemy, data.player, data.player.armdozer.battery);
+  if (minimumBeatDownBattery !== null) {
+    return { type: "BATTERY_COMMAND", battery: minimumBeatDownBattery };
+  }
+
+  const minimumBatteryToHitOrCritical = getMinimumBatteryToHitOrCritical(data.enemy, data.player, data.player.armdozer.battery);
+  if (minimumBatteryToHitOrCritical !== null) {
+    return { type: "BATTERY_COMMAND", battery: minimumBatteryToHitOrCritical };
+  }
+
+  return ZERO_BATTERY;
 };
 
 /** @override 防御ルーチン */
