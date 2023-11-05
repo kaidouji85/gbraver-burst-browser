@@ -10,6 +10,7 @@ import { canBeatDown } from "./can-beat-down";
 import type { NPC } from "./npc";
 import type { SimpleRoutine } from "./simple-npc";
 import { SimpleNPC } from "./simple-npc";
+import {getMinimumSurvivableBattery} from "./get-minimum-survivable-battery";
 
 /** 0バッテリー */
 const ZERO_BATTERY: Command = {
@@ -47,11 +48,13 @@ const defenseRoutine: SimpleRoutine = (data) => {
     return battery3;
   }
 
-  if (
-    battery1 &&
-    !canBeatDown(data.player, data.player.armdozer.battery, data.enemy, 1)
-  ) {
-    return battery1;
+  const minimumSurvivableBattery = getMinimumSurvivableBattery(
+    data.enemy,
+    data.player,
+    data.player.armdozer.battery,
+  );
+  if (minimumSurvivableBattery !== null) {
+    return {type: "BATTERY_COMMAND", battery: minimumSurvivableBattery};
   }
 
   if (burst && data.enemy.armdozer.battery <= 0) {
