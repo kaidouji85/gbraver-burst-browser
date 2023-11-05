@@ -30,6 +30,7 @@ const attackRoutine: SimpleRoutine = (data) => {
 /** @override 防御ルーチン */
 const defenseRoutine: SimpleRoutine = (data) => {
   const burst = data.commands.find((v) => v.type === "BURST_COMMAND");
+  const pilot = data.commands.find( (v) => v.type === "PILOT_SKILL_COMMAND");
   const battery6 = data.commands.find(
     (v) => v.type === "BATTERY_COMMAND" && v.battery === 6,
   );
@@ -38,6 +39,9 @@ const defenseRoutine: SimpleRoutine = (data) => {
   );
   if (burst && data.enemy.armdozer.battery <= 0) {
     return burst;
+  }
+  if (pilot && data.enemy.armdozer.battery <= 0) {
+    return pilot;
   }
 
   return battery6 ?? battery3 ?? ZERO_BATTERY;
@@ -50,6 +54,6 @@ const defenseRoutine: SimpleRoutine = (data) => {
 export function genesisBraverNPC(): NPC {
   const armdozer =
     Armdozers.find((v) => v.id === ArmdozerIds.GENESIS_BRAVER) ?? Armdozers[0];
-  const pilot = Pilots.find((v) => v.id === PilotIds.TSUBASA) ?? Pilots[0];
+  const pilot = Pilots.find((v) => v.id === PilotIds.YUUYA) ?? Pilots[0];
   return new SimpleNPC(armdozer, pilot, attackRoutine, defenseRoutine);
 }
