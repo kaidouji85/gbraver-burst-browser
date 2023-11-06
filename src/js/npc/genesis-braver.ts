@@ -90,7 +90,9 @@ const attackRoutine: SimpleRoutine = (data) => {
 /** @override 防御ルーチン */
 const defenseRoutine: SimpleRoutine = (data) => {
   const burst = data.commands.find((v) => v.type === "BURST_COMMAND");
-  const pilot = data.commands.find((v) => v.type === "PILOT_SKILL_COMMAND");
+  const pilotSkill = data.commands.find(
+    (v) => v.type === "PILOT_SKILL_COMMAND",
+  );
   const battery3 = data.commands.find(
     (v) => v.type === "BATTERY_COMMAND" && v.battery === 3,
   );
@@ -119,8 +121,18 @@ const defenseRoutine: SimpleRoutine = (data) => {
     return burst;
   }
 
-  if (pilot && data.enemy.armdozer.battery <= 0) {
-    return pilot;
+  const enemyAfterPilotSkill = getEnemyStateAfterPilotSkill(data.enemy);
+  const minimumSurvivableBatteryAfterPilotSkill = getMinimumSurvivableBattery(
+    enemyAfterPilotSkill,
+    data.player,
+    data.player.armdozer.battery,
+  );
+  if (minimumSurvivableBatteryAfterPilotSkill && pilotSkill) {
+    return pilotSkill;
+  }
+
+  if (pilotSkill && data.enemy.armdozer.battery <= 0) {
+    return pilotSkill;
   }
 
   return battery1 ?? ZERO_BATTERY;
