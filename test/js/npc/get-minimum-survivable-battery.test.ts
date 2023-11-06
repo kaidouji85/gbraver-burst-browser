@@ -1,4 +1,8 @@
-import { EMPTY_ARMDOZER_STATE, EMPTY_PLAYER_STATE, PlayerState } from "gbraver-burst-core";
+import {
+  EMPTY_ARMDOZER_STATE,
+  EMPTY_PLAYER_STATE,
+  PlayerState,
+} from "gbraver-burst-core";
 
 import { getMinimumSurvivableBattery } from "../../../src/js/npc/get-minimum-survivable-battery";
 
@@ -11,8 +15,8 @@ const defender: PlayerState = {
     hp: 2000,
     maxHp: 3100,
     battery: 4,
-    maxBattery: 5
-  }
+    maxBattery: 5,
+  },
 };
 
 /**
@@ -26,17 +30,23 @@ const createAttacker = (power: number): PlayerState => ({
   armdozer: {
     ...EMPTY_ARMDOZER_STATE,
     power,
-  }
-})
+  },
+});
 
 test("防御して生き延びられるバッテリーをを正しく計算できる", () => {
-  expect(getMinimumSurvivableBattery(defender, createAttacker(2000), 2)).toBe(2);
+  expect(getMinimumSurvivableBattery(defender, createAttacker(2000), 2)).toBe(
+    2,
+  );
 });
 
 test("回避して生き延びられるバッテリーをを正しく計算できる", () => {
-  expect(getMinimumSurvivableBattery(defender, createAttacker(4000), 2)).toBe(3);
+  expect(getMinimumSurvivableBattery(defender, createAttacker(4000), 2)).toBe(
+    3,
+  );
 });
 
 test("生き延びられない場合はnullを返す", () => {
-  expect(getMinimumSurvivableBattery(defender, createAttacker(2000), 5)).toBe(null);
+  expect(getMinimumSurvivableBattery(defender, createAttacker(2000), 5)).toBe(
+    null,
+  );
 });
