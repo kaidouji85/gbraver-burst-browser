@@ -1,9 +1,11 @@
 import {
   ArmdozerIds,
   Armdozers,
+  BatteryBoostSkill,
   Command,
   PilotIds,
   Pilots,
+  PlayerState,
 } from "gbraver-burst-core";
 
 import { canBeatDown } from "./can-beat-down";
@@ -20,11 +22,35 @@ const ZERO_BATTERY: Command = {
   battery: 0,
 };
 
+/**
+ * 敵のパイロットスキル発動後ステートを取得する
+ * @param enemy
+ * @returns
+ */
+const getEnemyStateAfterPilotSkill = (enemy: PlayerState): PlayerState => {
+  if (enemy.pilot.skill.type !== "BatteryBoostSkill") {
+    return enemy;
+  }
+
+  const skill: BatteryBoostSkill = enemy.pilot.skill;
+  return {
+    ...enemy,
+    armdozer: {
+      ...enemy.armdozer,
+      battery: Math.min(enemy.armdozer.battery + skill.recoverBattery),
+    },
+  };
+};
+
 /** @override 攻撃ルーチン */
 const attackRoutine: SimpleRoutine = (data) => {
   const battery4 = data.commands.find(
     (v) => v.type === "BATTERY_COMMAND" && v.battery === 4,
   );
+  const pilotSkill = data.commands.find(
+    (v) => v.type === "PILOT_SKILL_COMMAND",
+  );
+
   if (data.enemy.armdozer.maxBattery === 4 && battery4) {
     return battery4;
   }
@@ -36,6 +62,17 @@ const attackRoutine: SimpleRoutine = (data) => {
   );
   if (minimumBeatDownBattery !== null) {
     return { type: "BATTERY_COMMAND", battery: minimumBeatDownBattery };
+  }
+
+  const enemyAfterPilotSkill = getEnemyStateAfterPilotSkill(data.enemy);
+  const canBeatDownAfterPilotSkill = canBeatDown(
+    enemyAfterPilotSkill,
+    enemyAfterPilotSkill.armdozer.battery,
+    data.player,
+    data.player.armdozer.battery,
+  );
+  if (canBeatDownAfterPilotSkill && pilotSkill) {
+    return pilotSkill;
   }
 
   const minimumBatteryToHitOrCritical = getMinimumBatteryToHitOrCritical(
