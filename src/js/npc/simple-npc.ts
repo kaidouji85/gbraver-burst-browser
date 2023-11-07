@@ -1,9 +1,7 @@
 import type {
   Armdozer,
   Command,
-  GameState,
   Pilot,
-  PlayerId,
   PlayerState,
 } from "gbraver-burst-core";
 
@@ -23,6 +21,8 @@ export type SimpleRoutineData = {
   enemy: PlayerState;
   /** プレイヤーの最新ステート */
   player: PlayerState;
+  /** プレイヤーが出したコマンド */
+  playerCommand: Command;
 };
 
 /**
@@ -64,7 +64,7 @@ export class SimpleNPC implements NPC {
 
   /** @override */
   routine(params: NPCRoutineParams): Command {
-    const { gameStateHistory, enemyId } = params;
+    const { gameStateHistory, enemyId, playerCommand } = params;
     if (gameStateHistory.length <= 0) {
       return ZERO_BATTERY;
     }
@@ -89,16 +89,14 @@ export class SimpleNPC implements NPC {
 
     const commands: Command[] = enemyCommand.command;
     const isAttacker = lastState.activePlayerId === enemyId;
+    const routineData: SimpleRoutineData = {
+      commands,
+      enemy,
+      player,
+      playerCommand
+    };
     return isAttacker
-      ? this.attackRoutine({
-          commands,
-          enemy,
-          player,
-        })
-      : this.defenseRoutine({
-          commands,
-          enemy,
-          player,
-        });
+      ? this.attackRoutine(routineData)
+      : this.defenseRoutine(routineData);
   }
 }
