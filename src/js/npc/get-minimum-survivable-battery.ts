@@ -15,7 +15,7 @@ export function getMinimumSurvivableBattery(
   attacker: PlayerState,
   attackerBattery: number,
 ): number | null {
-  const defenderBatteries = R.range(1, defender.armdozer.battery + 1);
+  const defenderBatteries = R.range(0, defender.armdozer.battery + 1);
   const survivableBatteries = defenderBatteries.filter(
     (battery) => !canBeatDown(attacker, attackerBattery, defender, battery),
   );

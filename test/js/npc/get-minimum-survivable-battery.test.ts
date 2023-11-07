@@ -45,6 +45,12 @@ test("回避して生き延びられるバッテリーをを正しく計算で�
   );
 });
 
+test("相手が0攻撃の場合、0防御でも生き残れる", () => {
+  expect(getMinimumSurvivableBattery(defender, createAttacker(4000), 0)).toBe(
+    0,
+  );
+});
+
 test("生き延びられない場合はnullを返す", () => {
   expect(getMinimumSurvivableBattery(defender, createAttacker(2000), 5)).toBe(
     null,

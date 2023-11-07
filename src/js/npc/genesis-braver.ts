@@ -71,7 +71,11 @@ const attackRoutine: SimpleRoutine = (data) => {
     data.player,
     data.player.armdozer.battery,
   );
-  if (canBeatDownAfterPilotSkill && pilotSkill) {
+  if (
+    canBeatDownAfterPilotSkill &&
+    pilotSkill &&
+    data.enemy.armdozer.battery < data.enemy.armdozer.maxBattery
+  ) {
     return pilotSkill;
   }
 
@@ -99,11 +103,19 @@ const defenseRoutine: SimpleRoutine = (data) => {
   const battery1 = data.commands.find(
     (v) => v.type === "BATTERY_COMMAND" && v.battery === 1,
   );
+  const playerDefensiveBatteryPrediction =
+    data.playerCommand.type === "BATTERY_COMMAND"
+      ? data.playerCommand.battery
+      : data.player.armdozer.battery;
+
+  if (burst && data.enemy.armdozer.battery <= 0) {
+    return burst;
+  }
 
   if (
     data.enemy.armdozer.battery === data.enemy.armdozer.maxBattery &&
     battery3 &&
-    !canBeatDown(data.player, data.player.armdozer.battery, data.enemy, 3)
+    !canBeatDown(data.player, playerDefensiveBatteryPrediction, data.enemy, 3)
   ) {
     return battery3;
   }
@@ -111,21 +123,17 @@ const defenseRoutine: SimpleRoutine = (data) => {
   const minimumSurvivableBattery = getMinimumSurvivableBattery(
     data.enemy,
     data.player,
-    data.player.armdozer.battery,
+    playerDefensiveBatteryPrediction,
   );
   if (minimumSurvivableBattery !== null) {
     return { type: "BATTERY_COMMAND", battery: minimumSurvivableBattery };
-  }
-
-  if (burst && data.enemy.armdozer.battery <= 0) {
-    return burst;
   }
 
   const enemyAfterPilotSkill = getEnemyStateAfterPilotSkill(data.enemy);
   const minimumSurvivableBatteryAfterPilotSkill = getMinimumSurvivableBattery(
     enemyAfterPilotSkill,
     data.player,
-    data.player.armdozer.battery,
+    playerDefensiveBatteryPrediction,
   );
   if (minimumSurvivableBatteryAfterPilotSkill && pilotSkill) {
     return pilotSkill;
