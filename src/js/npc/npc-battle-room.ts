@@ -55,10 +55,11 @@ export class NPCBattleRoom {
     };
     const enemyCommand: PlayerCommand = {
       playerId: this.enemy.playerId,
-      command: this.#npc.routine(
-        this.enemy.playerId,
-        this.#core.stateHistory(),
-      ),
+      command: this.#npc.routine({
+        enemyId: this.enemy.playerId,
+        gameStateHistory: this.#core.stateHistory(),
+        playerCommand: command,
+      }),
     };
     return this.#core.progress([playerCommand, enemyCommand]);
   }

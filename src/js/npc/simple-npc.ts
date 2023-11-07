@@ -7,7 +7,7 @@ import type {
   PlayerState,
 } from "gbraver-burst-core";
 
-import type { NPC } from "./npc";
+import type { NPC, NPCRoutineParams } from "./npc";
 
 /** 0バッテリー */
 const ZERO_BATTERY: Command = {
@@ -63,7 +63,8 @@ export class SimpleNPC implements NPC {
   }
 
   /** @override */
-  routine(enemyId: PlayerId, gameStateHistory: GameState[]): Command {
+  routine(params: NPCRoutineParams): Command {
+    const { gameStateHistory, enemyId } = params;
     if (gameStateHistory.length <= 0) {
       return ZERO_BATTERY;
     }
@@ -73,20 +74,20 @@ export class SimpleNPC implements NPC {
       return ZERO_BATTERY;
     }
 
-    const enableCommand = lastState.effect.players.find(
+    const enemyCommand = lastState.effect.players.find(
       (v) => v.playerId === enemyId,
     );
     const enemy = lastState.players.find((v) => v.playerId === enemyId);
     const player = lastState.players.find((v) => v.playerId !== enemyId);
-    if (!enableCommand || !enemy || !player) {
+    if (!enemyCommand || !enemy || !player) {
       return ZERO_BATTERY;
     }
 
-    if (!enableCommand.selectable) {
-      return enableCommand.nextTurnCommand;
+    if (!enemyCommand.selectable) {
+      return enemyCommand.nextTurnCommand;
     }
 
-    const commands: Command[] = enableCommand.command;
+    const commands: Command[] = enemyCommand.command;
     const isAttacker = lastState.activePlayerId === enemyId;
     return isAttacker
       ? this.attackRoutine({

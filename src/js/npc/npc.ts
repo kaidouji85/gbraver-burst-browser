@@ -6,6 +6,16 @@ import type {
   PlayerId,
 } from "gbraver-burst-core";
 
+/** NPCルーチン関数のパラメータ */
+export type NPCRoutineParams = {
+  /** 敵のプレイヤーID */
+  enemyId: PlayerId;
+  /** ゲーム状態の履歴 */
+  gameStateHistory: GameState[];
+  /** プレイヤーが選択したコマンド */
+  playerCommand: Command;
+};
+
 /** NPC */
 export interface NPC {
   /** アームドーザ */
@@ -14,10 +24,10 @@ export interface NPC {
   pilot: Pilot;
 
   /**
-   * NPCのルーチン
+   * NPCルーチン関数
    * @param enemyId 敵のプレイヤーID
    * @param gameStateHistory ゲーム状態の履歴
    * @return コマンド
    */
-  routine(enemyId: PlayerId, gameStateHistory: GameState[]): Command;
+  routine(params: NPCRoutineParams): Command;
 }
