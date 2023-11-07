@@ -1,9 +1,4 @@
-import type {
-  Armdozer,
-  Command,
-  Pilot,
-  PlayerState,
-} from "gbraver-burst-core";
+import type { Armdozer, Command, Pilot, PlayerState } from "gbraver-burst-core";
 
 import type { NPC, NPCRoutineParams } from "./npc";
 
@@ -93,7 +88,7 @@ export class SimpleNPC implements NPC {
       commands,
       enemy,
       player,
-      playerCommand
+      playerCommand,
     };
     return isAttacker
       ? this.attackRoutine(routineData)
