@@ -7,8 +7,8 @@ import {
 } from "gbraver-burst-core";
 
 import type { NPC } from "../../src/js/npc/npc";
-/** 空NPCのシンプルな実装 */
 
+/** 空NPCのシンプルな実装 */
 class SimpleEmptyNPC implements NPC {
   armdozer: Armdozer;
   pilot: Pilot;
@@ -29,12 +29,11 @@ class SimpleEmptyNPC implements NPC {
     };
   }
 }
+
 /**
  * 空NPCを生成する
- *
  * @return 生成結果
  */
-
 export function createEmptyNPC(): NPC {
   return new SimpleEmptyNPC();
 }
