@@ -71,7 +71,11 @@ const attackRoutine: SimpleRoutine = (data) => {
     data.player,
     data.player.armdozer.battery,
   );
-  if (canBeatDownAfterPilotSkill && pilotSkill) {
+  if (
+    canBeatDownAfterPilotSkill &&
+    pilotSkill &&
+    data.enemy.armdozer.battery < data.enemy.armdozer.maxBattery
+  ) {
     return pilotSkill;
   }
 
@@ -99,9 +103,10 @@ const defenseRoutine: SimpleRoutine = (data) => {
   const battery1 = data.commands.find(
     (v) => v.type === "BATTERY_COMMAND" && v.battery === 1,
   );
-  const playerDefensiveBatteryPrediction = data.playerCommand.type === "BATTERY_COMMAND"
-    ? data.playerCommand.battery
-    : data.player.armdozer.battery;
+  const playerDefensiveBatteryPrediction =
+    data.playerCommand.type === "BATTERY_COMMAND"
+      ? data.playerCommand.battery
+      : data.player.armdozer.battery;
 
   if (burst && data.enemy.armdozer.battery <= 0) {
     return burst;
