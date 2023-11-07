@@ -103,6 +103,10 @@ const defenseRoutine: SimpleRoutine = (data) => {
     ? data.playerCommand.battery
     : data.player.armdozer.battery;
 
+  if (burst && data.enemy.armdozer.battery <= 0) {
+    return burst;
+  }
+
   if (
     data.enemy.armdozer.battery === data.enemy.armdozer.maxBattery &&
     battery3 &&
@@ -118,10 +122,6 @@ const defenseRoutine: SimpleRoutine = (data) => {
   );
   if (minimumSurvivableBattery !== null) {
     return { type: "BATTERY_COMMAND", battery: minimumSurvivableBattery };
-  }
-
-  if (burst && data.enemy.armdozer.battery <= 0) {
-    return burst;
   }
 
   const enemyAfterPilotSkill = getEnemyStateAfterPilotSkill(data.enemy);
