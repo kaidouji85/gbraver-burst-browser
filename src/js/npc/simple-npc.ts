@@ -60,11 +60,11 @@ export class SimpleNPC implements NPC {
   /** @override */
   routine(params: NPCRoutineParams): Command {
     const { gameStateHistory, enemyId, playerCommand } = params;
-    if (gameStateHistory.length <= 0) {
+    const lastState = gameStateHistory.at(-1);
+    if (!lastState) {
       return ZERO_BATTERY;
     }
 
-    const lastState = gameStateHistory[gameStateHistory.length - 1];
     if (lastState.effect.name !== "InputCommand") {
       return ZERO_BATTERY;
     }
