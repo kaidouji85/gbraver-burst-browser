@@ -1,14 +1,14 @@
-import type {
+import {
   Command,
   GameState,
   GBraverBurstCore,
   Player,
   PlayerCommand,
+  startGBraverBurst,
 } from "gbraver-burst-core";
-import { startGBraverBurst } from "gbraver-burst-core";
 
 import { playerUuid } from "../uuid/player";
-import type { NPC } from "./npc";
+import { NPC } from "./npc";
 
 /** NPCバトルルーム */
 export class NPCBattleRoom {
@@ -35,7 +35,6 @@ export class NPCBattleRoom {
 
   /**
    * ステートヒストリーを取得する
-   *
    * @return 取得結果
    */
   stateHistory(): GameState[] {
@@ -44,8 +43,7 @@ export class NPCBattleRoom {
 
   /**
    * バトルを進める
-   *
-   * @param command コマンド
+   * @param command プレイヤーが入力したコマンド
    * @return 更新されたステート
    */
   async progress(command: Command): Promise<GameState[]> {

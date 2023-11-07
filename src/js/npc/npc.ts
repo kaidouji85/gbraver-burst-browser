@@ -1,4 +1,4 @@
-import type {
+import {
   Armdozer,
   Command,
   GameState,
@@ -25,9 +25,9 @@ export interface NPC {
 
   /**
    * NPCルーチン関数
-   * @param enemyId 敵のプレイヤーID
-   * @param gameStateHistory ゲーム状態の履歴
-   * @return コマンド
+   * NPCが出すコマンドを計算する
+   * @param params パラメータ
+   * @return NPCが出すコマンド
    */
   routine(params: NPCRoutineParams): Command;
 }
