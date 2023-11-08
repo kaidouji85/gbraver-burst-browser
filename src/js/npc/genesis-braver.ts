@@ -135,7 +135,7 @@ const defenseRoutine: SimpleRoutine = (data) => {
     data.player,
     playerDefensiveBatteryPrediction,
   );
-  if (minimumSurvivableBatteryAfterPilotSkill && pilotSkill) {
+  if (minimumSurvivableBatteryAfterPilotSkill.isExist && pilotSkill) {
     return pilotSkill;
   }
 
