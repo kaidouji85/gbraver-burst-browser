@@ -33,20 +33,20 @@ const defender: PlayerState = {
 
 test("ヒットする最小バッテリーを正しく計算できる", () => {
   expect(getMinimumBatteryToHitOrCritical(attacker, defender, 2)).toEqual({
-    isSuccess: true,
+    isExist: true,
     value: 3,
   });
 });
 
 test("クリティカルする最小バッテリーを正しく計算できる", () => {
   expect(getMinimumBatteryToHitOrCritical(attacker, defender, 0)).toEqual({
-    isSuccess: true,
+    isExist: true,
     value: 1,
   });
 });
 
 test("ヒット、クリティカルできない場合はnullを返す", () => {
   expect(getMinimumBatteryToHitOrCritical(attacker, defender, 5)).toEqual({
-    isSuccess: false,
+    isExist: false,
   });
 });
