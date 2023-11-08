@@ -1,45 +1,24 @@
 import {
   ArmdozerIds,
   Armdozers,
-  BatteryBoostSkill,
   Command,
   PilotIds,
   Pilots,
-  PlayerState,
 } from "gbraver-burst-core";
 
 import { canBeatDown } from "./can-beat-down";
+import { getExpectedPlayer } from "./get-expected-player";
 import { getMinimumBatteryToHitOrCritical } from "./get-minimum-battery-to-hit-or-critical";
 import { getMinimumBeatDownBattery } from "./get-minimum-beat-down-battery";
 import { getMinimumSurvivableBattery } from "./get-minimum-survivable-battery";
-import type { NPC } from "./npc";
-import type { SimpleRoutine } from "./simple-npc";
-import { SimpleNPC } from "./simple-npc";
+import { getStateAfterPilotSkill } from "./get-state-after-pilot-skill";
+import { NPC } from "./npc";
+import { SimpleNPC, SimpleRoutine } from "./simple-npc";
 
 /** 0バッテリー */
 const ZERO_BATTERY: Command = {
   type: "BATTERY_COMMAND",
   battery: 0,
-};
-
-/**
- * 敵のパイロットスキル発動後ステートを取得する
- * @param enemy
- * @returns
- */
-const getEnemyStateAfterPilotSkill = (enemy: PlayerState): PlayerState => {
-  if (enemy.pilot.skill.type !== "BatteryBoostSkill") {
-    return enemy;
-  }
-
-  const skill: BatteryBoostSkill = enemy.pilot.skill;
-  return {
-    ...enemy,
-    armdozer: {
-      ...enemy.armdozer,
-      battery: Math.min(enemy.armdozer.battery + skill.recoverBattery),
-    },
-  };
 };
 
 /** @override 攻撃ルーチン */
@@ -50,6 +29,7 @@ const attackRoutine: SimpleRoutine = (data) => {
   const pilotSkill = data.commands.find(
     (v) => v.type === "PILOT_SKILL_COMMAND",
   );
+  const { expectedPlayer } = getExpectedPlayer(data);
 
   if (data.enemy.armdozer.maxBattery === 4 && battery4) {
     return battery4;
@@ -57,19 +37,22 @@ const attackRoutine: SimpleRoutine = (data) => {
 
   const minimumBeatDownBattery = getMinimumBeatDownBattery(
     data.enemy,
-    data.player,
-    data.player.armdozer.battery,
+    expectedPlayer,
+    expectedPlayer.armdozer.battery,
   );
   if (minimumBeatDownBattery.isExist) {
     return { type: "BATTERY_COMMAND", battery: minimumBeatDownBattery.value };
   }
 
-  const enemyAfterPilotSkill = getEnemyStateAfterPilotSkill(data.enemy);
+  const { invoker: enemyAfterPilotSkill } = getStateAfterPilotSkill({
+    invoker: data.enemy,
+    other: expectedPlayer,
+  });
   const canBeatDownAfterPilotSkill = canBeatDown(
     enemyAfterPilotSkill,
     enemyAfterPilotSkill.armdozer.battery,
-    data.player,
-    data.player.armdozer.battery,
+    expectedPlayer,
+    expectedPlayer.armdozer.battery,
   );
   if (
     canBeatDownAfterPilotSkill &&
@@ -81,8 +64,8 @@ const attackRoutine: SimpleRoutine = (data) => {
 
   const minimumBatteryToHitOrCritical = getMinimumBatteryToHitOrCritical(
     data.enemy,
-    data.player,
-    data.player.armdozer.battery,
+    expectedPlayer,
+    expectedPlayer.armdozer.battery,
   );
   if (minimumBatteryToHitOrCritical.isExist) {
     return {
@@ -106,10 +89,7 @@ const defenseRoutine: SimpleRoutine = (data) => {
   const battery1 = data.commands.find(
     (v) => v.type === "BATTERY_COMMAND" && v.battery === 1,
   );
-  const playerDefensiveBatteryPrediction =
-    data.playerCommand.type === "BATTERY_COMMAND"
-      ? data.playerCommand.battery
-      : data.player.armdozer.battery;
+  const { expectedPlayer, expectedPlayerBattery } = getExpectedPlayer(data);
 
   if (burst && data.enemy.armdozer.battery <= 0) {
     return burst;
@@ -118,25 +98,28 @@ const defenseRoutine: SimpleRoutine = (data) => {
   if (
     data.enemy.armdozer.battery === data.enemy.armdozer.maxBattery &&
     battery3 &&
-    !canBeatDown(data.player, playerDefensiveBatteryPrediction, data.enemy, 3)
+    !canBeatDown(expectedPlayer, expectedPlayerBattery, data.enemy, 3)
   ) {
     return battery3;
   }
 
   const minimumSurvivableBattery = getMinimumSurvivableBattery(
     data.enemy,
-    data.player,
-    playerDefensiveBatteryPrediction,
+    expectedPlayer,
+    expectedPlayerBattery,
   );
   if (minimumSurvivableBattery.isExist) {
     return { type: "BATTERY_COMMAND", battery: minimumSurvivableBattery.value };
   }
 
-  const enemyAfterPilotSkill = getEnemyStateAfterPilotSkill(data.enemy);
+  const { invoker: enemyAfterPilotSkill } = getStateAfterPilotSkill({
+    invoker: data.enemy,
+    other: expectedPlayer,
+  });
   const minimumSurvivableBatteryAfterPilotSkill = getMinimumSurvivableBattery(
     enemyAfterPilotSkill,
-    data.player,
-    playerDefensiveBatteryPrediction,
+    expectedPlayer,
+    expectedPlayerBattery,
   );
   if (minimumSurvivableBatteryAfterPilotSkill.isExist && pilotSkill) {
     return pilotSkill;
