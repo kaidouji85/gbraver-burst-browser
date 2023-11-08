@@ -11,7 +11,7 @@ import { getMinimumBatteryToHitOrCritical } from "./get-minimum-battery-to-hit-o
 import { getMinimumBeatDownBattery } from "./get-minimum-beat-down-battery";
 import { getMinimumSurvivableBattery } from "./get-minimum-survivable-battery";
 import { NPC } from "./npc";
-import { SimpleRoutine } from "./simple-npc";
+import { SimpleRoutine, SimpleRoutineData } from "./simple-npc";
 import { SimpleNPC } from "./simple-npc";
 import { getStateAfterPilotSkill } from "./get-state-after-pilot-skill";
 import { getStateAfterBurst } from "./get-state-after-burst";
@@ -21,6 +21,39 @@ const ZERO_BATTERY: Command = {
   type: "BATTERY_COMMAND",
   battery: 0,
 };
+
+/**
+ * プレイヤーの各種予想を計算する
+ * @param data ルーチンに渡されるデータ
+ * @return プレイヤーの各種予想
+ */
+function calcExpectedPlayer(data: SimpleRoutineData) {
+  const { invoker: playerAfterBurst } = getStateAfterBurst({
+    invoker: data.player,
+    other: data.enemy,
+  });
+  const { invoker: playerAfterPilotSkill } = getStateAfterPilotSkill({
+    invoker: data.player,
+    other: data.enemy,
+  });
+  const expectedPlayer = (() => {
+    if (data.playerCommand.type === "BURST_COMMAND") {
+      return playerAfterBurst;
+    } else if (data.playerCommand.type === "PILOT_SKILL_COMMAND") {
+      return playerAfterPilotSkill;
+    } else {
+      return data.player;
+    }
+  })();
+  const expectedPlayerBattery = (() => {
+    if (data.playerCommand.type === "BATTERY_COMMAND") {
+      return data.playerCommand.battery;
+    } else {
+      return expectedPlayer.armdozer.battery;
+    }
+  })();
+  return { expectedPlayer, expectedPlayerBattery };
+}
 
 /** @override 攻撃ルーチン */
 const attackRoutine: SimpleRoutine = (data) => {
@@ -89,30 +122,8 @@ const defenseRoutine: SimpleRoutine = (data) => {
   const battery1 = data.commands.find(
     (v) => v.type === "BATTERY_COMMAND" && v.battery === 1,
   );
-  const { invoker: playerAfterBurst } = getStateAfterBurst({
-    invoker: data.player,
-    other: data.enemy,
-  });
-  const { invoker: playerAfterPilotSkill } = getStateAfterPilotSkill({
-    invoker: data.player,
-    other: data.enemy,
-  });
-  const expectedPlayer = (() => {
-    if (data.playerCommand.type === "BURST_COMMAND") {
-      return playerAfterBurst;
-    } else if (data.playerCommand.type === "PILOT_SKILL_COMMAND") {
-      return playerAfterPilotSkill;
-    } else {
-      return data.player;
-    }
-  })();
-  const expectedPlayerBattery = (() => {
-    if (data.playerCommand.type === "BATTERY_COMMAND") {
-      return data.playerCommand.battery;
-    } else {
-      return expectedPlayer.armdozer.battery;
-    }
-  })();
+  const { expectedPlayer, expectedPlayerBattery } = calcExpectedPlayer(data);
+
   if (burst && data.enemy.armdozer.battery <= 0) {
     return burst;
   }
