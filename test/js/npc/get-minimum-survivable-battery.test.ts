@@ -34,25 +34,36 @@ const createAttacker = (power: number): PlayerState => ({
 });
 
 test("防御して生き延びられるバッテリーをを正しく計算できる", () => {
-  expect(getMinimumSurvivableBattery(defender, createAttacker(2000), 2)).toBe(
-    2,
-  );
+  expect(
+    getMinimumSurvivableBattery(defender, createAttacker(2000), 2),
+  ).toEqual({
+    isExist: true,
+    value: 2,
+  });
 });
 
 test("回避して生き延びられるバッテリーをを正しく計算できる", () => {
-  expect(getMinimumSurvivableBattery(defender, createAttacker(4000), 2)).toBe(
-    3,
-  );
+  expect(
+    getMinimumSurvivableBattery(defender, createAttacker(4000), 2),
+  ).toEqual({
+    isExist: true,
+    value: 3,
+  });
 });
 
 test("相手が0攻撃の場合、0防御でも生き残れる", () => {
-  expect(getMinimumSurvivableBattery(defender, createAttacker(4000), 0)).toBe(
-    0,
-  );
+  expect(
+    getMinimumSurvivableBattery(defender, createAttacker(4000), 0),
+  ).toEqual({
+    isExist: true,
+    value: 0,
+  });
 });
 
 test("生き延びられない場合はnullを返す", () => {
-  expect(getMinimumSurvivableBattery(defender, createAttacker(2000), 5)).toBe(
-    null,
-  );
+  expect(
+    getMinimumSurvivableBattery(defender, createAttacker(2000), 5),
+  ).toEqual({
+    isExist: false,
+  });
 });
