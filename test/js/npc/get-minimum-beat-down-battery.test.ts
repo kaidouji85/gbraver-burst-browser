@@ -32,9 +32,14 @@ const defender: PlayerState = {
 };
 
 test("相手を倒せる最小限のバッテリーを正しく計算できる", () => {
-  expect(getMinimumBeatDownBattery(attacker, defender, 2)).toEqual({isExist: true, value: 4});
+  expect(getMinimumBeatDownBattery(attacker, defender, 2)).toEqual({
+    isExist: true,
+    value: 4,
+  });
 });
 
 test("相手を倒せない場合はnullを返す", () => {
-  expect(getMinimumBeatDownBattery(attacker, defender, 5)).toEqual({isExist: false});
+  expect(getMinimumBeatDownBattery(attacker, defender, 5)).toEqual({
+    isExist: false,
+  });
 });

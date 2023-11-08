@@ -41,6 +41,6 @@ export function getMinimumBatteryToHitOrCritical(
     return result.name === "NormalHit" || result.name === "CriticalHit";
   });
   return 0 < batteriesToHitOrCritical.length
-    ? { isExist: true, value: Math.min(...batteriesToHitOrCritical)}
-    : { isExist: false};
+    ? { isExist: true, value: Math.min(...batteriesToHitOrCritical) }
+    : { isExist: false };
 }

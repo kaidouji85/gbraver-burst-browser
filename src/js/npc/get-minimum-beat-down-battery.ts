@@ -34,7 +34,7 @@ export function getMinimumBeatDownBattery(
   const beatDownBatteries = attackerBatteries.filter((battery) =>
     canBeatDown(attacker, battery, defender, defenderBattery),
   );
-  return 0 < beatDownBatteries.length 
-  ? { isExist: true, value: Math.min(...beatDownBatteries) }
-  : { isExist: false};
+  return 0 < beatDownBatteries.length
+    ? { isExist: true, value: Math.min(...beatDownBatteries) }
+    : { isExist: false };
 }

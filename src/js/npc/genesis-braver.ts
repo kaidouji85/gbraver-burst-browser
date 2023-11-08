@@ -85,7 +85,10 @@ const attackRoutine: SimpleRoutine = (data) => {
     data.player.armdozer.battery,
   );
   if (minimumBatteryToHitOrCritical.isExist) {
-    return { type: "BATTERY_COMMAND", battery: minimumBatteryToHitOrCritical.value };
+    return {
+      type: "BATTERY_COMMAND",
+      battery: minimumBatteryToHitOrCritical.value,
+    };
   }
 
   return ZERO_BATTERY;
@@ -125,8 +128,8 @@ const defenseRoutine: SimpleRoutine = (data) => {
     data.player,
     playerDefensiveBatteryPrediction,
   );
-  if (minimumSurvivableBattery !== null) {
-    return { type: "BATTERY_COMMAND", battery: minimumSurvivableBattery };
+  if (minimumSurvivableBattery.isExist) {
+    return { type: "BATTERY_COMMAND", battery: minimumSurvivableBattery.value };
   }
 
   const enemyAfterPilotSkill = getEnemyStateAfterPilotSkill(data.enemy);

@@ -35,6 +35,6 @@ export function getMinimumSurvivableBattery(
     (battery) => !canBeatDown(attacker, attackerBattery, defender, battery),
   );
   return 0 < survivableBatteries.length
-    ? { isExist: true, value: Math.min(...survivableBatteries)}
+    ? { isExist: true, value: Math.min(...survivableBatteries) }
     : { isExist: false };
 }
