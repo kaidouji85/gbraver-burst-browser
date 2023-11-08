@@ -84,8 +84,8 @@ const attackRoutine: SimpleRoutine = (data) => {
     data.player,
     data.player.armdozer.battery,
   );
-  if (minimumBatteryToHitOrCritical !== null) {
-    return { type: "BATTERY_COMMAND", battery: minimumBatteryToHitOrCritical };
+  if (minimumBatteryToHitOrCritical.isSuccess) {
+    return { type: "BATTERY_COMMAND", battery: minimumBatteryToHitOrCritical.value };
   }
 
   return ZERO_BATTERY;

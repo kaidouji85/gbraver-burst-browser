@@ -3,6 +3,21 @@ import * as R from "ramda";
 
 import { getBattleResult } from "./get-battle-result";
 
+/** 成功 */
+type Success = {
+  isSuccess: true;
+  /** バッテリー値 */
+  value: number;
+};
+
+/** 失敗 */
+type Failure = {
+  isSuccess: false;
+};
+
+/** 結果 */
+type Result = Success | Failure;
+
 /**
  * ヒットまたはクリティカルする最小バッテリーを計算する
  * @param attacker 攻撃側のステータス
@@ -14,7 +29,7 @@ export function getMinimumBatteryToHitOrCritical(
   attacker: PlayerState,
   defender: PlayerState,
   defenderBattery: number,
-): number | null {
+): Result {
   const attackerBatteries = R.range(1, attacker.armdozer.battery + 1);
   const batteriesToHitOrCritical = attackerBatteries.filter((battery) => {
     const result = getBattleResult(
@@ -26,6 +41,6 @@ export function getMinimumBatteryToHitOrCritical(
     return result.name === "NormalHit" || result.name === "CriticalHit";
   });
   return 0 < batteriesToHitOrCritical.length
-    ? Math.min(...batteriesToHitOrCritical)
-    : null;
+    ? { isSuccess: true, value: Math.min(...batteriesToHitOrCritical)}
+    : { isSuccess: false};
 }
