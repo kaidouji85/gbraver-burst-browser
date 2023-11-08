@@ -3,6 +3,21 @@ import * as R from "ramda";
 
 import { canBeatDown } from "./can-beat-down";
 
+/** 最小バッテリーが存在する */
+type Exist = {
+  isExist: true;
+  /** バッテリー値 */
+  value: number;
+};
+
+/** 最小バッテリーが存在しない */
+type NotExist = {
+  isExist: false;
+};
+
+/** 結果 */
+type Result = Exist | NotExist;
+
 /**
  * 生き延びられる最低限のバッテリーを取得する
  * @param defender 防御側ステータス
@@ -14,12 +29,12 @@ export function getMinimumSurvivableBattery(
   defender: PlayerState,
   attacker: PlayerState,
   attackerBattery: number,
-): number | null {
+): Result {
   const defenderBatteries = R.range(0, defender.armdozer.battery + 1);
   const survivableBatteries = defenderBatteries.filter(
     (battery) => !canBeatDown(attacker, attackerBattery, defender, battery),
   );
   return 0 < survivableBatteries.length
-    ? Math.min(...survivableBatteries)
-    : null;
+    ? { isExist: true, value: Math.min(...survivableBatteries) }
+    : { isExist: false };
 }

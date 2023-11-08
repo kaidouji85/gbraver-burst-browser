@@ -60,8 +60,8 @@ const attackRoutine: SimpleRoutine = (data) => {
     data.player,
     data.player.armdozer.battery,
   );
-  if (minimumBeatDownBattery !== null) {
-    return { type: "BATTERY_COMMAND", battery: minimumBeatDownBattery };
+  if (minimumBeatDownBattery.isExist) {
+    return { type: "BATTERY_COMMAND", battery: minimumBeatDownBattery.value };
   }
 
   const enemyAfterPilotSkill = getEnemyStateAfterPilotSkill(data.enemy);
@@ -84,8 +84,11 @@ const attackRoutine: SimpleRoutine = (data) => {
     data.player,
     data.player.armdozer.battery,
   );
-  if (minimumBatteryToHitOrCritical !== null) {
-    return { type: "BATTERY_COMMAND", battery: minimumBatteryToHitOrCritical };
+  if (minimumBatteryToHitOrCritical.isExist) {
+    return {
+      type: "BATTERY_COMMAND",
+      battery: minimumBatteryToHitOrCritical.value,
+    };
   }
 
   return ZERO_BATTERY;
@@ -125,8 +128,8 @@ const defenseRoutine: SimpleRoutine = (data) => {
     data.player,
     playerDefensiveBatteryPrediction,
   );
-  if (minimumSurvivableBattery !== null) {
-    return { type: "BATTERY_COMMAND", battery: minimumSurvivableBattery };
+  if (minimumSurvivableBattery.isExist) {
+    return { type: "BATTERY_COMMAND", battery: minimumSurvivableBattery.value };
   }
 
   const enemyAfterPilotSkill = getEnemyStateAfterPilotSkill(data.enemy);
@@ -135,7 +138,7 @@ const defenseRoutine: SimpleRoutine = (data) => {
     data.player,
     playerDefensiveBatteryPrediction,
   );
-  if (minimumSurvivableBatteryAfterPilotSkill && pilotSkill) {
+  if (minimumSurvivableBatteryAfterPilotSkill.isExist && pilotSkill) {
     return pilotSkill;
   }
 
