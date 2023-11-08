@@ -1,11 +1,9 @@
 import {
   ArmdozerIds,
   Armdozers,
-  BatteryBoostSkill,
   Command,
   PilotIds,
   Pilots,
-  PlayerState,
 } from "gbraver-burst-core";
 
 import { canBeatDown } from "./can-beat-down";
@@ -15,31 +13,12 @@ import { getMinimumSurvivableBattery } from "./get-minimum-survivable-battery";
 import type { NPC } from "./npc";
 import type { SimpleRoutine } from "./simple-npc";
 import { SimpleNPC } from "./simple-npc";
+import { getStateAfterPilotSkill } from "./get-state-after-pilot-skill";
 
 /** 0バッテリー */
 const ZERO_BATTERY: Command = {
   type: "BATTERY_COMMAND",
   battery: 0,
-};
-
-/**
- * 敵のパイロットスキル発動後ステートを取得する
- * @param enemy
- * @returns
- */
-const getEnemyStateAfterPilotSkill = (enemy: PlayerState): PlayerState => {
-  if (enemy.pilot.skill.type !== "BatteryBoostSkill") {
-    return enemy;
-  }
-
-  const skill: BatteryBoostSkill = enemy.pilot.skill;
-  return {
-    ...enemy,
-    armdozer: {
-      ...enemy.armdozer,
-      battery: Math.min(enemy.armdozer.battery + skill.recoverBattery),
-    },
-  };
 };
 
 /** @override 攻撃ルーチン */
@@ -64,7 +43,10 @@ const attackRoutine: SimpleRoutine = (data) => {
     return { type: "BATTERY_COMMAND", battery: minimumBeatDownBattery.value };
   }
 
-  const enemyAfterPilotSkill = getEnemyStateAfterPilotSkill(data.enemy);
+  const { invoker: enemyAfterPilotSkill } = getStateAfterPilotSkill({
+    invoker: data.enemy,
+    other: data.player,
+  });
   const canBeatDownAfterPilotSkill = canBeatDown(
     enemyAfterPilotSkill,
     enemyAfterPilotSkill.armdozer.battery,
@@ -132,7 +114,10 @@ const defenseRoutine: SimpleRoutine = (data) => {
     return { type: "BATTERY_COMMAND", battery: minimumSurvivableBattery.value };
   }
 
-  const enemyAfterPilotSkill = getEnemyStateAfterPilotSkill(data.enemy);
+  const { invoker: enemyAfterPilotSkill } = getStateAfterPilotSkill({
+    invoker: data.enemy,
+    other: data.player,
+  });
   const minimumSurvivableBatteryAfterPilotSkill = getMinimumSurvivableBattery(
     enemyAfterPilotSkill,
     data.player,
