@@ -60,8 +60,8 @@ const attackRoutine: SimpleRoutine = (data) => {
     data.player,
     data.player.armdozer.battery,
   );
-  if (minimumBeatDownBattery !== null) {
-    return { type: "BATTERY_COMMAND", battery: minimumBeatDownBattery };
+  if (minimumBeatDownBattery.isExist) {
+    return { type: "BATTERY_COMMAND", battery: minimumBeatDownBattery.value };
   }
 
   const enemyAfterPilotSkill = getEnemyStateAfterPilotSkill(data.enemy);
