@@ -29,6 +29,7 @@ const attackRoutine: SimpleRoutine = (data) => {
   const pilotSkill = data.commands.find(
     (v) => v.type === "PILOT_SKILL_COMMAND",
   );
+  const { expectedPlayer, expectedPlayerBattery } = getExpectedPlayer(data);
 
   if (data.enemy.armdozer.maxBattery === 4 && battery4) {
     return battery4;
@@ -36,8 +37,8 @@ const attackRoutine: SimpleRoutine = (data) => {
 
   const minimumBeatDownBattery = getMinimumBeatDownBattery(
     data.enemy,
-    data.player,
-    data.player.armdozer.battery,
+    expectedPlayer,
+    expectedPlayerBattery,
   );
   if (minimumBeatDownBattery.isExist) {
     return { type: "BATTERY_COMMAND", battery: minimumBeatDownBattery.value };
@@ -45,13 +46,13 @@ const attackRoutine: SimpleRoutine = (data) => {
 
   const { invoker: enemyAfterPilotSkill } = getStateAfterPilotSkill({
     invoker: data.enemy,
-    other: data.player,
+    other: expectedPlayer,
   });
   const canBeatDownAfterPilotSkill = canBeatDown(
     enemyAfterPilotSkill,
     enemyAfterPilotSkill.armdozer.battery,
-    data.player,
-    data.player.armdozer.battery,
+    expectedPlayer,
+    expectedPlayerBattery,
   );
   if (
     canBeatDownAfterPilotSkill &&
@@ -63,8 +64,8 @@ const attackRoutine: SimpleRoutine = (data) => {
 
   const minimumBatteryToHitOrCritical = getMinimumBatteryToHitOrCritical(
     data.enemy,
-    data.player,
-    data.player.armdozer.battery,
+    expectedPlayer,
+    expectedPlayerBattery,
   );
   if (minimumBatteryToHitOrCritical.isExist) {
     return {
