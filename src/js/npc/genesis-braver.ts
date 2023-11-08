@@ -10,10 +10,11 @@ import { canBeatDown } from "./can-beat-down";
 import { getMinimumBatteryToHitOrCritical } from "./get-minimum-battery-to-hit-or-critical";
 import { getMinimumBeatDownBattery } from "./get-minimum-beat-down-battery";
 import { getMinimumSurvivableBattery } from "./get-minimum-survivable-battery";
-import type { NPC } from "./npc";
-import type { SimpleRoutine } from "./simple-npc";
+import { NPC } from "./npc";
+import { SimpleRoutine } from "./simple-npc";
 import { SimpleNPC } from "./simple-npc";
 import { getStateAfterPilotSkill } from "./get-state-after-pilot-skill";
+import { getStateAfterBurst } from "./get-state-after-burst";
 
 /** 0バッテリー */
 const ZERO_BATTERY: Command = {
@@ -88,11 +89,30 @@ const defenseRoutine: SimpleRoutine = (data) => {
   const battery1 = data.commands.find(
     (v) => v.type === "BATTERY_COMMAND" && v.battery === 1,
   );
-  const playerDefensiveBatteryPrediction =
-    data.playerCommand.type === "BATTERY_COMMAND"
-      ? data.playerCommand.battery
-      : data.player.armdozer.battery;
-
+  const { invoker: playerAfterBurst } = getStateAfterBurst({
+    invoker: data.player,
+    other: data.enemy,
+  });
+  const { invoker: playerAfterPilotSkill } = getStateAfterPilotSkill({
+    invoker: data.player,
+    other: data.enemy,
+  });
+  const expectedPlayer = (() => {
+    if (data.playerCommand.type === "BURST_COMMAND") {
+      return playerAfterBurst;
+    } else if (data.playerCommand.type === "PILOT_SKILL_COMMAND") {
+      return playerAfterPilotSkill;
+    } else {
+      return data.player;
+    }
+  })();
+  const expectedPlayerBattery = (() => {
+    if (data.playerCommand.type === "BATTERY_COMMAND") {
+      return data.playerCommand.battery;
+    } else {
+      return expectedPlayer.armdozer.battery;
+    }
+  })();
   if (burst && data.enemy.armdozer.battery <= 0) {
     return burst;
   }
@@ -100,15 +120,15 @@ const defenseRoutine: SimpleRoutine = (data) => {
   if (
     data.enemy.armdozer.battery === data.enemy.armdozer.maxBattery &&
     battery3 &&
-    !canBeatDown(data.player, playerDefensiveBatteryPrediction, data.enemy, 3)
+    !canBeatDown(expectedPlayer, expectedPlayerBattery, data.enemy, 3)
   ) {
     return battery3;
   }
 
   const minimumSurvivableBattery = getMinimumSurvivableBattery(
     data.enemy,
-    data.player,
-    playerDefensiveBatteryPrediction,
+    expectedPlayer,
+    expectedPlayerBattery,
   );
   if (minimumSurvivableBattery.isExist) {
     return { type: "BATTERY_COMMAND", battery: minimumSurvivableBattery.value };
@@ -116,12 +136,12 @@ const defenseRoutine: SimpleRoutine = (data) => {
 
   const { invoker: enemyAfterPilotSkill } = getStateAfterPilotSkill({
     invoker: data.enemy,
-    other: data.player,
+    other: expectedPlayer,
   });
   const minimumSurvivableBatteryAfterPilotSkill = getMinimumSurvivableBattery(
     enemyAfterPilotSkill,
-    data.player,
-    playerDefensiveBatteryPrediction,
+    expectedPlayer,
+    expectedPlayerBattery,
   );
   if (minimumSurvivableBatteryAfterPilotSkill.isExist && pilotSkill) {
     return pilotSkill;
