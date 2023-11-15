@@ -11,6 +11,7 @@ import { getExpectedPlayer } from "./get-expected-player";
 import { getMinimumBatteryToHitOrCritical } from "./get-minimum-battery-to-hit-or-critical";
 import { getMinimumBeatDownBattery } from "./get-minimum-beat-down-battery";
 import { getMinimumSurvivableBattery } from "./get-minimum-survivable-battery";
+import { getStateAfterBurst } from "./get-state-after-burst";
 import { getStateAfterPilotSkill } from "./get-state-after-pilot-skill";
 import { NPC } from "./npc";
 import { SimpleNPC, SimpleRoutine } from "./simple-npc";
@@ -110,6 +111,19 @@ const defenseRoutine: SimpleRoutine = (data) => {
   );
   if (minimumSurvivableBattery.isExist) {
     return { type: "BATTERY_COMMAND", battery: minimumSurvivableBattery.value };
+  }
+
+  const { invoker: enemyAfterBurst } = getStateAfterBurst({
+    invoker: data.enemy,
+    other: expectedPlayer,
+  });
+  const minimumSurvivableBatteryAfterBurst = getMinimumSurvivableBattery(
+    enemyAfterBurst,
+    expectedPlayer,
+    expectedPlayerBattery,
+  );
+  if (minimumSurvivableBatteryAfterBurst.isExist && burst) {
+    return burst;
   }
 
   const { invoker: enemyAfterPilotSkill } = getStateAfterPilotSkill({
