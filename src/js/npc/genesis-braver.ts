@@ -151,12 +151,8 @@ const defenseRoutine: SimpleRoutine = (data) => {
  * @return NPC
  */
 export function genesisBraverNPC(): NPC {
-  const foundArmdozer =
+  const armdozer =
     Armdozers.find((v) => v.id === ArmdozerIds.GENESIS_BRAVER) ?? Armdozers[0];
-  const armdozer = {
-    ...foundArmdozer,
-    maxHp: 2000,
-  };
   const pilot = Pilots.find((v) => v.id === PilotIds.YUUYA) ?? Pilots[0];
   return new SimpleNPC(armdozer, pilot, attackRoutine, defenseRoutine);
 }
