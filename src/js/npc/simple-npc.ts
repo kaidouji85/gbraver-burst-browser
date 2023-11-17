@@ -1,13 +1,6 @@
-import type {
-  Armdozer,
-  Command,
-  GameState,
-  Pilot,
-  PlayerId,
-  PlayerState,
-} from "gbraver-burst-core";
+import type { Armdozer, Command, Pilot, PlayerState } from "gbraver-burst-core";
 
-import type { NPC } from "./npc";
+import type { NPC, NPCRoutineParams } from "./npc";
 
 /** 0バッテリー */
 const ZERO_BATTERY: Command = {
@@ -19,17 +12,16 @@ const ZERO_BATTERY: Command = {
 export type SimpleRoutineData = {
   /** NPCが選択できるコマンド */
   commands: Command[];
-
   /** NPCの最新ステート */
   enemy: PlayerState;
-
   /** プレイヤーの最新ステート */
   player: PlayerState;
+  /** プレイヤーが出したコマンド */
+  playerCommand: Command;
 };
 
 /**
  * シンプルなルーチン
- *
  * @param data ルーチンに渡すデータ
  * @return NPCが選択するコマンド
  */
@@ -37,14 +29,17 @@ export type SimpleRoutine = (data: SimpleRoutineData) => Command;
 
 /** シンプルな実装のNPC */
 export class SimpleNPC implements NPC {
+  /** @override */
   armdozer: Armdozer;
+  /** @override */
   pilot: Pilot;
+  /** 攻撃ルーチン */
   attackRoutine: SimpleRoutine;
+  /** 防御ルーチン */
   defenseRoutine: SimpleRoutine;
 
   /**
    * コンストラクタ
-   *
    * @param armdozer NPCのアームドーザ
    * @param pilot NPCのパイロット
    * @param attackRoutine 攻撃ルーチン
@@ -63,43 +58,40 @@ export class SimpleNPC implements NPC {
   }
 
   /** @override */
-  routine(enemyId: PlayerId, gameStateHistory: GameState[]): Command {
-    if (gameStateHistory.length <= 0) {
+  routine(params: NPCRoutineParams): Command {
+    const { gameStateHistory, enemyId, playerCommand } = params;
+    const lastState = gameStateHistory.at(-1);
+    if (!lastState) {
       return ZERO_BATTERY;
     }
-
-    const lastState = gameStateHistory[gameStateHistory.length - 1];
 
     if (lastState.effect.name !== "InputCommand") {
       return ZERO_BATTERY;
     }
 
-    const enableCommand = lastState.effect.players.find(
+    const enemyCommand = lastState.effect.players.find(
       (v) => v.playerId === enemyId,
     );
     const enemy = lastState.players.find((v) => v.playerId === enemyId);
     const player = lastState.players.find((v) => v.playerId !== enemyId);
-
-    if (!enableCommand || !enemy || !player) {
+    if (!enemyCommand || !enemy || !player) {
       return ZERO_BATTERY;
     }
 
-    if (enableCommand.selectable === false) {
-      return enableCommand.nextTurnCommand;
+    if (!enemyCommand.selectable) {
+      return enemyCommand.nextTurnCommand;
     }
 
-    const commands: Command[] = enableCommand.command;
+    const commands: Command[] = enemyCommand.command;
     const isAttacker = lastState.activePlayerId === enemyId;
+    const routineData: SimpleRoutineData = {
+      commands,
+      enemy,
+      player,
+      playerCommand,
+    };
     return isAttacker
-      ? this.attackRoutine({
-          commands,
-          enemy,
-          player,
-        })
-      : this.defenseRoutine({
-          commands,
-          enemy,
-          player,
-        });
+      ? this.attackRoutine(routineData)
+      : this.defenseRoutine(routineData);
   }
 }
