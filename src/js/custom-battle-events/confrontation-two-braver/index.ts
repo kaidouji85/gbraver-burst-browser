@@ -6,6 +6,7 @@ import { EmptyCustomBattleEvent } from "../empty-custom-battle-event";
 import {ConfrontationTwoBraverProps} from "./props";
 import { introduction } from "./stories/introduction";
 import {createConfrontationTwoBraverProps} from "./procedures/create-confrontation-two-braver-props";
+import { beforeLastState } from "./procedures/before-last-state";
 
 /** 「対決、二人のブレイバー！！」カスタムバトルイベント */
 class ConfrontationTwoBraverEvent extends EmptyCustomBattleEvent {
@@ -22,7 +23,7 @@ class ConfrontationTwoBraverEvent extends EmptyCustomBattleEvent {
 
   /** @override */
   async beforeLastState(props: LastState): Promise<void> {
-    await introduction(props);
+    this.#props.state = await beforeLastState({ ...props, ...this.#props });
   }
 }
 
