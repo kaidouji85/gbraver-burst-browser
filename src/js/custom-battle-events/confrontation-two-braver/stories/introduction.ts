@@ -1,6 +1,7 @@
 import { CustomBattleEventProps } from "../../../td-scenes/battle/custom-battle-event";
-import {activeRightMessageWindowWithFace} from "../../active-message-window";
-import {scrollRightMessages} from "../../scroll-messages";
+import { activeRightMessageWindowWithFace } from "../../active-message-window";
+import { invisibleAllMessageWindows } from "../../invisible-all-message-windows";
+import { scrollRightMessages } from "../../scroll-messages";
 
 /**
  * 導入
@@ -15,4 +16,5 @@ export async function introduction(
     ["シンヤ", "「全国大会の覇者 ユウヤさん"],
     ["俺はこの人に憧れて 機動倶楽部に入ったんだ」"],
   ]);
+  invisibleAllMessageWindows(props);
 }
