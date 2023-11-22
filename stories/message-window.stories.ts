@@ -191,7 +191,10 @@ export const yuuya: DOMStubStory = domStub((resources) => {
   dom.visible(true);
   dom.face("Yuuya");
   dom.faceVisible(true);
-  dom.messages(["ユウヤ", "「愛機にブレイバーと名付ける奴が 俺以外にもいるとはな」"]);
+  dom.messages([
+    "ユウヤ",
+    "「愛機にブレイバーと名付ける奴が 俺以外にもいるとはな」",
+  ]);
   return dom.getRootHTMLElement();
 });
 
@@ -205,7 +208,10 @@ export const yuuyaRight: DOMStubStory = domStub((resources) => {
   dom.visible(true);
   dom.face("Yuuya");
   dom.faceVisible(true);
-  dom.messages(["ユウヤ", "「愛機にブレイバーと名付ける奴が 俺以外にもいるとはな」"]);
+  dom.messages([
+    "ユウヤ",
+    "「愛機にブレイバーと名付ける奴が 俺以外にもいるとはな」",
+  ]);
   return dom.getRootHTMLElement();
 });
 
