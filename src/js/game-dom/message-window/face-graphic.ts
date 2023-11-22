@@ -130,9 +130,10 @@ export class FaceGraphic {
         return;
       }
 
-      img.className = faceOrientation === "Right"
-        ? config.rightwardClassName
-        : config.className;
+      img.className =
+        faceOrientation === "Right"
+          ? config.rightwardClassName
+          : config.className;
     });
   }
 }
