@@ -8,7 +8,7 @@ const ROOT_CLASS = "face-graphic";
 const ROOT_CLASS_INVISIBLE = `${ROOT_CLASS}--invisible`;
 
 /** 顔画像タイプ */
-export type FaceType = "Shinya" | "Gai" | "Raito" | "Tsubasa";
+export type FaceType = "Shinya" | "Gai" | "Raito" | "Tsubasa" | "Yuuya";
 
 /** 顔画像の向き */
 export type FaceOrientation = "Left" | "Right";
@@ -68,6 +68,15 @@ const configs: Config[] = [
     className: `${ROOT_CLASS}__tsubasa`,
     rightwardClassName: `${ROOT_CLASS}__tsubasa--right`,
     invisibleClassName: `${ROOT_CLASS}__tsubasa--invisible`,
+  },
+  {
+    type: "Yuuya",
+    src: (resources) =>
+      resources.paths.find((v) => v.id === PathIds.YUUYA_SKILL_CUTIN)?.path ??
+      "",
+    className: `${ROOT_CLASS}__yuuya`,
+    rightwardClassName: `${ROOT_CLASS}__yuuya--right`,
+    invisibleClassName: `${ROOT_CLASS}__yuuya--invisible`,
   },
 ];
 

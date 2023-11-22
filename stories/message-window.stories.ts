@@ -181,6 +181,40 @@ export const tsubasaRight: DOMStubStory = domStub((resources) => {
   return dom.getRootHTMLElement();
 });
 
+export const yuuya: DOMStubStory = domStub((resources) => {
+  const dom = new MessageWindow({
+    resources,
+    type: "Right",
+    faceOrientation: "Left",
+    facePosition: "Right",
+  });
+  dom.visible(true);
+  dom.face("Yuuya");
+  dom.faceVisible(true);
+  dom.messages([
+    "ユウヤ",
+    "「愛機にブレイバーと名付ける奴が 俺以外にもいるとはな」",
+  ]);
+  return dom.getRootHTMLElement();
+});
+
+export const yuuyaRight: DOMStubStory = domStub((resources) => {
+  const dom = new MessageWindow({
+    resources,
+    type: "Left",
+    faceOrientation: "Right",
+    facePosition: "Left",
+  });
+  dom.visible(true);
+  dom.face("Yuuya");
+  dom.faceVisible(true);
+  dom.messages([
+    "ユウヤ",
+    "「愛機にブレイバーと名付ける奴が 俺以外にもいるとはな」",
+  ]);
+  return dom.getRootHTMLElement();
+});
+
 export const doubleMessageWindows: DOMStubStory = domStub((resources) => {
   const root = document.createElement("div");
   const rightMessageWindow = new MessageWindow({
