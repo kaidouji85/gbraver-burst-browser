@@ -1,4 +1,4 @@
-import type { Resources } from "../../resource";
+import { Resources } from "../../resource";
 import { PathIds } from "../../resource/path/ids";
 
 /** ルートHTML要素class属性 */
@@ -125,18 +125,14 @@ export class FaceGraphic {
         return;
       }
 
-      img.className = (() => {
-        if (faceType === img.dataset.facetype && faceOrientation === "Left") {
-          return config.className;
-        } else if (
-          faceType === img.dataset.facetype &&
-          faceOrientation === "Right"
-        ) {
-          return config.rightwardClassName;
-        } else {
-          return config.invisibleClassName;
-        }
-      })();
+      if (faceType !== img.dataset.facetype) {
+        img.className = config.invisibleClassName;
+        return;
+      }
+
+      img.className = faceOrientation === "Right"
+        ? config.rightwardClassName
+        : config.className;
     });
   }
 }
