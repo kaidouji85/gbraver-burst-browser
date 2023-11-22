@@ -14,13 +14,15 @@ export async function introduction(
   activeRightMessageWindowWithFace(props, "Shinya");
   await scrollRightMessages(props, [
     ["シンヤ", "「全国大会の覇者 ユウヤさん"],
-    ["俺はこの人に憧れて 機動倶楽部に入ったんだ」"],
+    ["……俺はこの人に憧れて 機動倶楽部に入ったんだ」"],
   ]);
   props.view.dom.rightMessageWindow.darken();
   activeLeftMessageWindowWithFace(props, "Yuuya");
   await scrollLeftMessages(props, [
-    ["ユウヤ", "「愛機にブレイバーと名付ける奴が 俺以外にもいるとはな"],
-    ["その力 見せてもらおうか シンブレイバー！！」"],
+    ["ユウヤ", "「シンヤ お前も慣例を無視して"],
+    ["愛機にブレイバーと名付けたか"],
+    ["面白い！！"],
+    ["その力 見せてもらうぞ シンブレイバー！！」"],
   ]);
   invisibleAllMessageWindows(props);
 }
