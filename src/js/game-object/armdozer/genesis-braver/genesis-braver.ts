@@ -3,12 +3,12 @@ import { Observable, Unsubscribable } from "rxjs";
 import * as THREE from "three";
 
 import { Animate } from "../../../animation/animate";
-import type { PreRender } from "../../../game-loop/pre-render";
+import { PreRender } from "../../../game-loop/pre-render";
 import { Update } from "../../../game-loop/update";
-import type { Resources } from "../../../resource";
+import { Resources } from "../../../resource";
 import { firstUpdate } from "../../action/first-update";
-import type { GameObjectAction } from "../../action/game-object-action";
-import type { ArmdozerSprite } from "../armdozer-sprite";
+import { GameObjectAction } from "../../action/game-object-action";
+import { ArmdozerSprite } from "../armdozer-sprite";
 import { EmptyArmdozerSprite } from "../empty-armdozer-sprite";
 import { activeFlash } from "./animation/active-flash";
 import { backStep } from "./animation/back-step";
@@ -25,11 +25,11 @@ import { knockBackToStand } from "./animation/knock-back-to-stand";
 import { spToStand } from "./animation/sp-to-stand";
 import { startActive } from "./animation/start-active";
 import { straightPunch } from "./animation/straight-punch";
-import type { GenesisBraverModel } from "./model/genesis-braver-model";
+import { GenesisBraverModel } from "./model/genesis-braver-model";
 import { createInitialValue } from "./model/initial-value";
-import type { GenesisBraverSounds } from "./sounds/genesis-braver-sounds";
+import { GenesisBraverSounds } from "./sounds/genesis-braver-sounds";
 import { createGenesisBraverSounds } from "./sounds/genesis-braver-sounds";
-import type { GenesisBraverView } from "./view/genesis-braver-view";
+import { GenesisBraverView } from "./view/genesis-braver-view";
 
 /** ジェネシスブレイバースプライト */
 export class GenesisBraver
