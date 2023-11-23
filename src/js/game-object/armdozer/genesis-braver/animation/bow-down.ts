@@ -1,8 +1,8 @@
 import { Animate } from "../../../../animation/animate";
 import { process } from "../../../../animation/process";
 import { tween } from "../../../../animation/tween";
-import {GenesisBraverModel} from "../model/genesis-braver-model";
-import {GenesisBraverSounds} from "../sounds/genesis-braver-sounds";
+import { GenesisBraverModel } from "../model/genesis-braver-model";
+import { GenesisBraverSounds } from "../sounds/genesis-braver-sounds";
 
 /**
  * 礼（倒れる）

@@ -17,7 +17,7 @@ export function upright(
   return process(() => {
     model.animation.type = "UPRIGHT";
     model.animation.frame = 0;
-    sounds.motor.sound.play()
+    sounds.motor.sound.play();
   }).chain(
     tween(model.animation, (t) =>
       t.to(
