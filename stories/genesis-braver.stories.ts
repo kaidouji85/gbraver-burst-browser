@@ -246,3 +246,44 @@ export const enemyBurst = () => armdozerSpriteStub(EnemyGenesisBraver, burst);
 /** 敵 アクティブ バースト */
 export const enemyActiveBurst = () =>
   armdozerSpriteStub(EnemyGenesisBraver, activeBurst);
+
+/**
+ * 気をつけ、礼
+ * @param sprite スプライト
+ */
+const uprightBow = (sprite: GenesisBraver) => {
+  delay(1000)
+    .chain(sprite.upright())
+    .chain(delay(500))
+    .chain(sprite.bowDown())
+    .chain(delay(200))
+    .chain(sprite.bowUp())
+    .chain(delay(500))
+    .chain(sprite.uprightToStand())
+    .loop();
+};
+
+/**
+ * アクティブ 気をつけ、礼
+ * @param sprite スプライト
+ */
+const activeUprightBow = (sprite: GenesisBraver) => {
+  uprightBow(sprite);
+  sprite.startActive().play();
+};
+
+/** プレイヤー 気をつけ、礼 */
+export const playerUprightBow = () =>
+  armdozerSpriteStub(PlayerGenesisBraver, uprightBow);
+
+/** プレイヤー アクティブ 気をつけ、礼 */
+export const playerActiveUprightBow = () =>
+  armdozerSpriteStub(PlayerGenesisBraver, activeUprightBow);
+
+/** 敵 気をつけ、礼 */
+export const enemyUprightBow = () =>
+  armdozerSpriteStub(EnemyGenesisBraver, uprightBow);
+
+/** 敵 アクティブ 気をつけ、礼 */
+export const enemyActiveUprightBow = () =>
+  armdozerSpriteStub(EnemyGenesisBraver, activeUprightBow);
