@@ -12,6 +12,8 @@ import { ArmdozerSprite } from "../armdozer-sprite";
 import { EmptyArmdozerSprite } from "../empty-armdozer-sprite";
 import { activeFlash } from "./animation/active-flash";
 import { backStep } from "./animation/back-step";
+import { bowDown } from "./animation/bow-down";
+import { bowUp } from "./animation/bow-up";
 import { burst } from "./animation/burst";
 import { burstToStand } from "./animation/burst-to-stand";
 import { charge } from "./animation/charge";
@@ -25,6 +27,8 @@ import { knockBackToStand } from "./animation/knock-back-to-stand";
 import { spToStand } from "./animation/sp-to-stand";
 import { startActive } from "./animation/start-active";
 import { straightPunch } from "./animation/straight-punch";
+import { upright } from "./animation/upright";
+import { uprightToStand } from "./animation/upright-to-stand";
 import { GenesisBraverModel } from "./model/genesis-braver-model";
 import { createInitialValue } from "./model/initial-value";
 import { GenesisBraverSounds } from "./sounds/genesis-braver-sounds";
@@ -158,6 +162,26 @@ export class GenesisBraver
   /** @override */
   avoidToStand(): Animate {
     return frontStep(this.#model, this.#sounds);
+  }
+
+  /** @override */
+  upright(): Animate {
+    return upright(this.#model, this.#sounds);
+  }
+
+  /** @override */
+  uprightToStand(): Animate {
+    return uprightToStand(this.#model, this.#sounds);
+  }
+
+  /** @override */
+  bowDown(): Animate {
+    return bowDown(this.#model, this.#sounds);
+  }
+
+  /** @override */
+  bowUp(): Animate {
+    return bowUp(this.#model, this.#sounds);
   }
 
   /** @override */
