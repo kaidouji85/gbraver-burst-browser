@@ -1,7 +1,7 @@
 import { CustomBattleEventProps } from "../../../td-scenes/battle/custom-battle-event";
 import { ConfrontationTwoBraverProps } from "../props";
 import { ConfrontationTwoBraverState } from "../state";
-import {introduction} from "../stories/introduction";
+import { introduction } from "../stories/introduction";
 
 /** beforeLastStateのプロパティ */
 type Props = CustomBattleEventProps & ConfrontationTwoBraverProps;

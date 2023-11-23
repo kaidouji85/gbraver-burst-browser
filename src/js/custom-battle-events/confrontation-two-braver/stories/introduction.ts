@@ -1,11 +1,17 @@
+import { delay } from "../../../animation/delay";
 import { CustomBattleEventProps } from "../../../td-scenes/battle/custom-battle-event";
-import { activeLeftMessageWindowWithFace, activeRightMessageWindowWithFace } from "../../active-message-window";
-import {invisibleAllMessageWindows, refreshConversation} from "../../invisible-all-message-windows";
+import {
+  activeLeftMessageWindowWithFace,
+  activeRightMessageWindowWithFace,
+} from "../../active-message-window";
+import {
+  invisibleAllMessageWindows,
+  refreshConversation,
+} from "../../invisible-all-message-windows";
 import { scrollLeftMessages, scrollRightMessages } from "../../scroll-messages";
-import {synchronizedUpright} from "../../synchronized-upright";
-import {waitUntilWindowPush} from "../../wait-until-window-push";
-import {delay} from "../../../animation/delay";
-import {synchronizedBow} from "../../synchronized-bow";
+import { synchronizedBow } from "../../synchronized-bow";
+import { synchronizedUpright } from "../../synchronized-upright";
+import { waitUntilWindowPush } from "../../wait-until-window-push";
 
 /**
  * 導入
@@ -27,7 +33,7 @@ export async function introduction(
     ["本来 ブレイバーの称号は 全国一位のロボに与えられるもの"],
     ["それを こんなひよっ子が名乗るとは"],
     ["……面白い 気に入ったぞ シンヤ！！"],
-    ["シンブレイバーの力 とくと拝見させてもらおうか」"]
+    ["シンブレイバーの力 とくと拝見させてもらおうか」"],
   ]);
   invisibleAllMessageWindows(props);
   activeRightMessageWindowWithFace(props, "Tsubasa");

@@ -6,5 +6,5 @@ export function createConfrontationTwoBraverProps() {
   const state = {
     isIntroductionComplete: false,
   };
-  return {state};
+  return { state };
 }

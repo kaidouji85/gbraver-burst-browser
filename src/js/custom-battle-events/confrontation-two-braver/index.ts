@@ -3,10 +3,9 @@ import {
   LastState,
 } from "../../td-scenes/battle/custom-battle-event";
 import { EmptyCustomBattleEvent } from "../empty-custom-battle-event";
-import {ConfrontationTwoBraverProps} from "./props";
-import { introduction } from "./stories/introduction";
-import {createConfrontationTwoBraverProps} from "./procedures/create-confrontation-two-braver-props";
 import { beforeLastState } from "./procedures/before-last-state";
+import { createConfrontationTwoBraverProps } from "./procedures/create-confrontation-two-braver-props";
+import { ConfrontationTwoBraverProps } from "./props";
 
 /** 「対決、二人のブレイバー！！」カスタムバトルイベント */
 class ConfrontationTwoBraverEvent extends EmptyCustomBattleEvent {
