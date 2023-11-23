@@ -35,7 +35,7 @@ export async function introduction(
     ["……面白い 気に入ったぞ シンヤ！！"],
     ["シンブレイバーの力 とくと拝見させてもらおうか」"],
   ]);
-  invisibleAllMessageWindows(props);
+  await refreshConversation(props, 100);
   activeRightMessageWindowWithFace(props, "Tsubasa");
   await scrollRightMessages(props, [
     ["ツバサ", "「間もなく 都立大田高校 府立洛内高校 の練習試合を行う"],
