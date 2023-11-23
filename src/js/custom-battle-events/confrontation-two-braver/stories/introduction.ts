@@ -23,14 +23,16 @@ export async function introduction(
   props.view.dom.rightMessageWindow.darken();
   activeLeftMessageWindowWithFace(props, "Yuuya");
   await scrollLeftMessages(props, [
-    ["ユウヤ", "「全国一位のロボに与えられる ブレイバーの称号"],
+    ["ユウヤ", "「……シンブレイバーか"],
+    ["本来 ブレイバーの称号は 全国一位のロボに与えられるもの"],
     ["それを こんなひよっ子が名乗るとは"],
-    ["面白い 気に入った！！」"],
+    ["……面白い 気に入ったぞ シンヤ！！"],
+    ["シンブレイバーの力 とくと拝見させてもらおうか」"]
   ]);
   invisibleAllMessageWindows(props);
   activeRightMessageWindowWithFace(props, "Tsubasa");
   await scrollRightMessages(props, [
-    ["ツバサ", "「これより都立大田高校 府立洛内高校 の練習試合を行う"],
+    ["ツバサ", "「間もなく 都立大田高校 府立洛内高校 の練習試合を行う"],
   ]);
   props.view.dom.rightMessageWindow.messages(["姿勢を正して"]);
   await synchronizedUpright(props).play();
