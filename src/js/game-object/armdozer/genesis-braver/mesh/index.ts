@@ -1,6 +1,7 @@
 import { Resources } from "../../../../resource";
 import { AnimationMesh } from "./animation-mesh";
 import { backStep } from "./back-step";
+import { bow } from "./bow";
 import { burstDown } from "./burst-down";
 import { burstUp } from "./burst-up";
 import { down } from "./down";
@@ -11,6 +12,7 @@ import { spAttack } from "./sp-attack";
 import { spCharge } from "./sp-charge";
 import { spToStand } from "./sp-to-stand";
 import { stand } from "./stand";
+import { upright } from "./upright";
 
 /**
  * ビューで利用するすべてのメッシュを生成する
@@ -30,5 +32,7 @@ export function createAllMeshes(resources: Resources): AnimationMesh[] {
     ...down(resources),
     ...burstUp(resources),
     ...burstDown(resources),
+    ...upright(resources),
+    ...bow(resources),
   ];
 }
