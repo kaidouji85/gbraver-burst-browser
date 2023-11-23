@@ -11,6 +11,8 @@ import { spAttack } from "./sp-attack";
 import { spCharge } from "./sp-charge";
 import { spToStand } from "./sp-to-stand";
 import { stand } from "./stand";
+import { upright } from "./upright";
+import { bow } from "./bow";
 
 /**
  * ビューで利用するすべてのメッシュを生成する
@@ -30,5 +32,7 @@ export function createAllMeshes(resources: Resources): AnimationMesh[] {
     ...down(resources),
     ...burstUp(resources),
     ...burstDown(resources),
+    ...upright(resources),
+    ...bow(resources),
   ];
 }
