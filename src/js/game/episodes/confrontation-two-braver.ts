@@ -25,5 +25,5 @@ export const confrontationTwoBraver: EpisodeConfig = {
   },
   npc: genesisBraverNPC(),
   event: () => createConfrontationTwoBraverEvent(),
-  bgm: SOUND_IDS.BATTLE_BGM_03,
+  bgm: SOUND_IDS.YUUYA_BATTLE,
 };
