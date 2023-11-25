@@ -2,6 +2,8 @@ import { CustomBattleEventProps } from "../../../td-scenes/battle/custom-battle-
 import { ConfrontationTwoBraverProps } from "../props";
 import { ConfrontationTwoBraverState } from "../state";
 import { introduction } from "../stories/introduction";
+import {turnCount} from "../../turn-count";
+import {shinyaHasAdvantage} from "../stories/shinya-has-advantage";
 
 /** beforeLastStateのプロパティ */
 type Props = CustomBattleEventProps & ConfrontationTwoBraverProps;
@@ -19,6 +21,16 @@ export async function beforeLastState(
     return {
       ...props.state,
       isIntroductionComplete: true,
+    };
+  }
+
+  const turn = turnCount(props.stateHistory);
+  if (turn === 3 && !props.state.isTurn3StartPlayed) {
+    // TODO 状況に応じてストーリーを出し分ける
+    await shinyaHasAdvantage(props);
+    return {
+      ...props.state,
+      isTurn3StartPlayed: true,
     };
   }
 

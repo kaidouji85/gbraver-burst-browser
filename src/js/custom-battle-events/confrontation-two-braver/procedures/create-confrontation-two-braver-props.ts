@@ -5,6 +5,7 @@
 export function createConfrontationTwoBraverProps() {
   const state = {
     isIntroductionComplete: false,
+    isTurn3StartPlayed: false,
   };
   return { state };
 }
