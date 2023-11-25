@@ -1,9 +1,9 @@
 import { CustomBattleEventProps } from "../../../td-scenes/battle/custom-battle-event";
+import { turnCount } from "../../turn-count";
 import { ConfrontationTwoBraverProps } from "../props";
 import { ConfrontationTwoBraverState } from "../state";
 import { introduction } from "../stories/introduction";
-import {turnCount} from "../../turn-count";
-import {shinyaHasAdvantage} from "../stories/shinya-has-advantage";
+import { shinyaHasAdvantage } from "../stories/shinya-has-advantage";
 
 /** beforeLastStateのプロパティ */
 type Props = CustomBattleEventProps & ConfrontationTwoBraverProps;
