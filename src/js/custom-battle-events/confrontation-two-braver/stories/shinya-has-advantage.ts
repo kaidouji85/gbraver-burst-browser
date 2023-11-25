@@ -1,6 +1,6 @@
 import { CustomBattleEventProps } from "../../../td-scenes/battle/custom-battle-event";
 import { activeRightMessageWindowWithFace } from "../../active-message-window";
-import { invisibleAllMessageWindows} from "../../invisible-all-message-windows";
+import { invisibleAllMessageWindows } from "../../invisible-all-message-windows";
 import { scrollRightMessages } from "../../scroll-messages";
 
 /**
