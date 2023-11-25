@@ -2,8 +2,8 @@ import { Animate } from "../../../animation/animate";
 import { empty } from "../../../animation/delay";
 import { CustomStateAnimation } from "../../../td-scenes/battle/custom-battle-event";
 import { turnCount } from "../../turn-count";
-import { yuuyaBatteryDeclarationCryWhenShinyaHasAdvantage } from "../animation/yuuya-battery-declaration-cry-when-shinya-has-advantage";
-import { yuuyaBurstCryWhenShinyaHasAdvantage } from "../animation/yuuya-burst-cry-when-shinya-has-advantage";
+import { yuuyaCry2WhenShinyaHasAdvantage } from "../animation/yuuya-cry2-when-shinya-has-advantage";
+import { yuuyaCry1WhenShinyaHasAdvantage } from "../animation/yuuya-cry1-when-shinya-has-advantage";
 import { hasYuuyaActivatedBurst } from "./has-yuuya-activated-burst";
 
 /**
@@ -16,11 +16,11 @@ export function onStateAnimation(
 ): Animate {
   const turn = turnCount(props.stateHistory);
   if (turn === 3 && hasYuuyaActivatedBurst(props)) {
-    return yuuyaBurstCryWhenShinyaHasAdvantage(props);
+    return yuuyaCry1WhenShinyaHasAdvantage(props);
   }
 
   if (turn === 3 && props.currentState.effect.name === "BatteryDeclaration") {
-    return yuuyaBatteryDeclarationCryWhenShinyaHasAdvantage(props);
+    return yuuyaCry2WhenShinyaHasAdvantage(props);
   }
 
   return empty();

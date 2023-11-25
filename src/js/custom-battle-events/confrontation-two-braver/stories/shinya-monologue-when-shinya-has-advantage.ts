@@ -4,11 +4,11 @@ import { invisibleAllMessageWindows } from "../../invisible-all-message-windows"
 import { scrollRightMessages } from "../../scroll-messages";
 
 /**
- * シンヤが有利
+ * チャプター シンヤ有利 シンヤ独白
  * @param props イベントプロパティ
- * @return ストーリーが完了したら発火するPromise
+ * @return アニメーション
  */
-export async function shinyaHasAdvantage(
+export async function shinyaMonologueWhenShinyaHasAdvantage(
   props: Readonly<CustomBattleEventProps>,
 ): Promise<void> {
   activeRightMessageWindowWithFace(props, "Shinya");

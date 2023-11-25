@@ -3,7 +3,7 @@ import { turnCount } from "../../turn-count";
 import { ConfrontationTwoBraverProps } from "../props";
 import { ConfrontationTwoBraverState } from "../state";
 import { introduction } from "../stories/introduction";
-import { shinyaHasAdvantage } from "../stories/shinya-has-advantage";
+import { shinyaMonologueWhenShinyaHasAdvantage } from "../stories/shinya-monologue-when-shinya-has-advantage";
 
 /** beforeLastStateのプロパティ */
 type Props = CustomBattleEventProps & ConfrontationTwoBraverProps;
@@ -27,7 +27,7 @@ export async function beforeLastState(
   const turn = turnCount(props.stateHistory);
   if (turn === 3 && !props.state.isTurn3StartPlayed) {
     // TODO 状況に応じてストーリーを出し分ける
-    await shinyaHasAdvantage(props);
+    await shinyaMonologueWhenShinyaHasAdvantage(props);
     return {
       ...props.state,
       isTurn3StartPlayed: true,
