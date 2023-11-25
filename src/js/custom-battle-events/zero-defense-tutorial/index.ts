@@ -7,11 +7,11 @@ import type {
   PilotSkillCommandSelected,
 } from "../../td-scenes/battle/custom-battle-event";
 import { EmptyCustomBattleEvent } from "../empty-custom-battle-event";
-import { afterLastState } from "./listeners/after-last-state";
-import { beforeLastState } from "./listeners/before-last-state";
-import { onBatteryCommandSelected } from "./listeners/on-battery-command-selected";
-import { onBurstCommandSelected } from "./listeners/on-burst-command-selected";
-import { onPilotSkillCommandSelected } from "./listeners/on-pilot-skill-command-selected";
+import { afterLastState } from "./procedures/after-last-state";
+import { beforeLastState } from "./procedures/before-last-state";
+import { onBatteryCommandSelected } from "./procedures/on-battery-command-selected";
+import { onBurstCommandSelected } from "./procedures/on-burst-command-selected";
+import { onPilotSkillCommandSelected } from "./procedures/on-pilot-skill-command-selected";
 import {
   createZeroDefenseTutorialProps,
   ZeroDefenseTutorialProps,
