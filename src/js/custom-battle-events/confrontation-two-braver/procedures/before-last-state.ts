@@ -5,16 +5,13 @@ import { introduction } from "../stories/introduction";
 import { isChapterThatShinyaHasAdvantageEnd } from "./is-chapter-that-shinya-has-advantage-end";
 import { startShinyaHasAdvantageIfNeeded } from "./start-shinya-has-advantage-if-needed";
 
-/** beforeLastStateのプロパティ */
-export type Props = CustomBattleEventProps & ConfrontationTwoBraverProps;
-
 /**
  * 最終ステート直前イベント
  * @param props イベントプロパティ
  * @return ステート更新結果
  */
 export async function beforeLastState(
-  props: Readonly<Props>,
+  props: Readonly<CustomBattleEventProps & ConfrontationTwoBraverProps>,
 ): Promise<ConfrontationTwoBraverState> {
   if (!props.state.isIntroductionComplete) {
     await introduction(props);

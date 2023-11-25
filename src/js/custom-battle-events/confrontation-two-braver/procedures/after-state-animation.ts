@@ -2,7 +2,7 @@ import { Animate } from "../../../animation/animate";
 import { empty } from "../../../animation/delay";
 import { process } from "../../../animation/process";
 import { CustomStateAnimation } from "../../../td-scenes/battle/custom-battle-event";
-import { turnCount } from "../../turn-count";
+import { ConfrontationTwoBraverProps } from "../props";
 import { hasYuuyaActivatedBurst } from "./has-yuuya-activated-burst";
 
 /**
@@ -11,7 +11,7 @@ import { hasYuuyaActivatedBurst } from "./has-yuuya-activated-burst";
  * @return アニメーション
  */
 const invisibleEnemyCryMessageWindow = (
-  props: Readonly<CustomStateAnimation>,
+  props: Readonly<CustomStateAnimation & ConfrontationTwoBraverProps>,
 ) =>
   process(() => {
     props.view.dom.enemyCryMessageWindow.visible(false);
@@ -23,14 +23,19 @@ const invisibleEnemyCryMessageWindow = (
  * @return カスタムステートアニメーション
  */
 export function afterStateAnimation(
-  props: Readonly<CustomStateAnimation>,
+  props: Readonly<CustomStateAnimation & ConfrontationTwoBraverProps>,
 ): Animate {
-  const turn = turnCount(props.stateHistory);
-  if (turn === 3 && hasYuuyaActivatedBurst(props)) {
+  if (
+    props.state.chapter.type === "ShinyaHasAdvantage" &&
+    hasYuuyaActivatedBurst(props)
+  ) {
     return invisibleEnemyCryMessageWindow(props);
   }
 
-  if (turn === 3 && props.currentState.effect.name === "BatteryDeclaration") {
+  if (
+    props.state.chapter.type === "ShinyaHasAdvantage" &&
+    props.currentState.effect.name === "BatteryDeclaration"
+  ) {
     return invisibleEnemyCryMessageWindow(props);
   }
 

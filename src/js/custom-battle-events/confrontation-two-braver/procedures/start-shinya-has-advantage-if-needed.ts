@@ -4,18 +4,15 @@ import { Chapter } from "../chapter";
 import { ConfrontationTwoBraverProps } from "../props";
 import { shinyaMonologueWhenShinyaHasAdvantage } from "../stories/shinya-monologue-when-shinya-has-advantage";
 
-/** startShinyaHasAdvantageIfNeededのプロパティ */
-export type Props = CustomBattleEventProps & ConfrontationTwoBraverProps;
-
 /**
  * 条件を満たした場合、チャプター「シンヤ有利」を開始する
  * @param props イベントプロパティ
  * @return 開始した場合はチャプター情報を返す、そうでなかったらnullを返す
  */
 export async function startShinyaHasAdvantageIfNeeded(
-  props: Readonly<Props>,
+  props: Readonly<CustomBattleEventProps & ConfrontationTwoBraverProps>,
 ): Promise<null | Chapter> {
-  if (props.state.chapter.type !== "None") {
+  if (props.state.chapter.type === "ShinyaHasAdvantage") {
     return null;
   }
 
@@ -28,8 +25,5 @@ export async function startShinyaHasAdvantageIfNeeded(
   await shinyaMonologueWhenShinyaHasAdvantage(props);
   return {
     type: "ShinyaHasAdvantage",
-    isShinyaMonologuePlayed: true,
-    isYuuyaCry1Played: false,
-    isYuuyaCry2Played: false,
   };
 }

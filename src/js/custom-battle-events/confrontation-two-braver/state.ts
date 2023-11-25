@@ -1,4 +1,4 @@
-import {Chapter} from "./chapter";
+import { Chapter } from "./chapter";
 
 /** 「対決、二人のブレイバー！！」のステート */
 export type ConfrontationTwoBraverState = Readonly<{

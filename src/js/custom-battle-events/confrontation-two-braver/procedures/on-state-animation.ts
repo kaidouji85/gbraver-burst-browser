@@ -1,9 +1,9 @@
 import { Animate } from "../../../animation/animate";
 import { empty } from "../../../animation/delay";
 import { CustomStateAnimation } from "../../../td-scenes/battle/custom-battle-event";
-import { turnCount } from "../../turn-count";
-import { yuuyaCry2WhenShinyaHasAdvantage } from "../animation/yuuya-cry2-when-shinya-has-advantage";
 import { yuuyaCry1WhenShinyaHasAdvantage } from "../animation/yuuya-cry1-when-shinya-has-advantage";
+import { yuuyaCry2WhenShinyaHasAdvantage } from "../animation/yuuya-cry2-when-shinya-has-advantage";
+import { ConfrontationTwoBraverProps } from "../props";
 import { hasYuuyaActivatedBurst } from "./has-yuuya-activated-burst";
 
 /**
@@ -12,14 +12,19 @@ import { hasYuuyaActivatedBurst } from "./has-yuuya-activated-burst";
  * @return アニメーション
  */
 export function onStateAnimation(
-  props: Readonly<CustomStateAnimation>,
+  props: Readonly<CustomStateAnimation & ConfrontationTwoBraverProps>,
 ): Animate {
-  const turn = turnCount(props.stateHistory);
-  if (turn === 3 && hasYuuyaActivatedBurst(props)) {
+  if (
+    props.state.chapter.type === "ShinyaHasAdvantage" &&
+    hasYuuyaActivatedBurst(props)
+  ) {
     return yuuyaCry1WhenShinyaHasAdvantage(props);
   }
 
-  if (turn === 3 && props.currentState.effect.name === "BatteryDeclaration") {
+  if (
+    props.state.chapter.type === "ShinyaHasAdvantage" &&
+    props.currentState.effect.name === "BatteryDeclaration"
+  ) {
     return yuuyaCry2WhenShinyaHasAdvantage(props);
   }
 
