@@ -5,6 +5,7 @@ export type NoneChapter = {
 
 /** シンヤが有利 */
 export type ShinyaHasAdvantage = {
+  type: "ShinyaHasAdvantage";
   /** シンヤの独白を再生したか、trueで再生した */
   isShinyaMonologuePlayed: boolean;
   /** ユウヤの叫び1を再生したか、trueで再生した */
@@ -13,5 +14,5 @@ export type ShinyaHasAdvantage = {
   isYuuyaCry2Played: boolean;
 };
 
-/** 複数フェイズにまたがるチャプチャーの情報 */
+/** 複数フェイズにまたがるチャプターの情報 */
 export type Chapter = NoneChapter | ShinyaHasAdvantage;

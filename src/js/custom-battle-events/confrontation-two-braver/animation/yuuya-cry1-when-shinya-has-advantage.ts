@@ -2,7 +2,7 @@ import { CustomBattleEventProps } from "../../../td-scenes/battle/custom-battle-
 import { enemyPilotCry } from "../../pilot-cry";
 
 /**
- * チャプター シンヤ有利 ユウヤ叫び2
+ * チャプター シンヤ有利 ユウヤ叫び1
  * @param props イベントプロパティ
  * @return アニメーション
  */
