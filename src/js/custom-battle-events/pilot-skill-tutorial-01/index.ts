@@ -7,11 +7,11 @@ import {
   LastState,
 } from "../../td-scenes/battle/custom-battle-event";
 import { EmptyCustomBattleEvent } from "../empty-custom-battle-event";
-import { afterLastState } from "./listeners/after-last-state";
-import { afterStateAnimation } from "./listeners/after-state-animation";
-import { beforeLastState as beforeLastState } from "./listeners/before-last-state";
-import { onBatteryCommandSelected } from "./listeners/on-battery-command-selected";
-import { onStateAnimation } from "./listeners/on-state-animation";
+import { afterLastState } from "./procedures/after-last-state";
+import { afterStateAnimation } from "./procedures/after-state-animation";
+import { beforeLastState as beforeLastState } from "./procedures/before-last-state";
+import { onBatteryCommandSelected } from "./procedures/on-battery-command-selected";
+import { onStateAnimation } from "./procedures/on-state-animation";
 import {
   createPilotSkillTutorial01Props,
   PilotSkillTutorial01Props,
