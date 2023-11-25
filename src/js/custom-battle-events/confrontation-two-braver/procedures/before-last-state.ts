@@ -2,6 +2,7 @@ import { CustomBattleEventProps } from "../../../td-scenes/battle/custom-battle-
 import { ConfrontationTwoBraverProps } from "../props";
 import { ConfrontationTwoBraverState } from "../state";
 import { introduction } from "../stories/introduction";
+import { isChapterThatShinyaHasAdvantageEnd } from "./is-chapter-that-shinya-has-advantage-end";
 import { startShinyaHasAdvantageIfNeeded } from "./start-shinya-has-advantage-if-needed";
 
 /** beforeLastStateのプロパティ */
@@ -28,6 +29,15 @@ export async function beforeLastState(
     return {
       ...props.state,
       chapter: shinyaHasAdvantage,
+    };
+  }
+
+  if (isChapterThatShinyaHasAdvantageEnd(props)) {
+    return {
+      ...props.state,
+      chapter: {
+        type: "None",
+      },
     };
   }
 

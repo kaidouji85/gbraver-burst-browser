@@ -8,7 +8,7 @@ import { hasYuuyaActivatedBurst } from "./has-yuuya-activated-burst";
 /**
  * 敵叫びメッセージウィンドウを非表示にする
  * @param props イベントプロパティ
- * @return あにメーション
+ * @return アニメーション
  */
 const invisibleEnemyCryMessageWindow = (
   props: Readonly<CustomStateAnimation>,
