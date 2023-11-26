@@ -4,7 +4,6 @@ import { CustomStateAnimation } from "../../../td-scenes/battle/custom-battle-ev
 import { yuuyaCry1WhenShinyaHasAdvantage } from "../animation/yuuya-cry1-when-shinya-has-advantage";
 import { yuuyaCry2WhenShinyaHasAdvantage } from "../animation/yuuya-cry2-when-shinya-has-advantage";
 import { ConfrontationTwoBraverProps } from "../props";
-import { hasYuuyaActivatedBurst } from "./has-yuuya-activated-burst";
 
 /**
  * カスタムステートアニメーション
@@ -16,7 +15,8 @@ export function onStateAnimation(
 ): Animate {
   if (
     props.state.chapter.type === "ShinyaHasAdvantage" &&
-    hasYuuyaActivatedBurst(props)
+    props.currentState.effect.name === "BurstEffect" &&
+    props.currentState.effect.burstPlayer !== props.playerId
   ) {
     return yuuyaCry1WhenShinyaHasAdvantage(props);
   }
