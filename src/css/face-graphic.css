@@ -79,17 +79,17 @@
 .face-graphic__yuuya,
 .face-graphic__yuuya--right {
   --icon-size: calc(var(--responsive-font-size) * 9.5);
-
+  --translateY: 10%;
   width: var(--icon-size);
   height: var(--icon-size);
 }
 
 .face-graphic__yuuya {
-  transform: translateX(-15%);
+  transform: translateX(-15%) translateY(var(--translateY));
 }
 
 .face-graphic__yuuya--right {
-  transform: translateX(-25%) scaleX(-1);
+  transform: translateX(-25%) translateY(var(--translateY)) scaleX(-1);
 }
 
 .face-graphic__shinya--invisible,
