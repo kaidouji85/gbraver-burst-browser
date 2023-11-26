@@ -17,6 +17,17 @@ export function invisibleEnemyCryIfNeeded(
     return;
   }
 
+  const playerCommand = lastState.effect.players.find(
+    (v) => v.playerId === props.playerId,
+  );
+  if (!playerCommand) {
+    return;
+  }
+
+  if (!playerCommand.selectable) {
+    return;
+  }
+
   if (props.state.chapter.type !== "ShinyaHasAdvantage") {
     return;
   }

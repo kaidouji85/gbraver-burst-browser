@@ -1,6 +1,6 @@
 import { Animate } from "../../../animation/animate";
 import { empty } from "../../../animation/delay";
-import {process} from "../../../animation/process";
+import { process } from "../../../animation/process";
 import { CustomStateAnimation } from "../../../td-scenes/battle/custom-battle-event";
 import { ConfrontationTwoBraverProps } from "../props";
 
