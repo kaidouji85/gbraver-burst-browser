@@ -23,11 +23,12 @@ export async function beforeLastState(
     };
   }
 
-  const shinyaHasAdvantage = await startShinyaHasAdvantageIfNeeded(props);
-  if (shinyaHasAdvantage) {
+  if (await startShinyaHasAdvantageIfNeeded(props)) {
     return {
       ...props.state,
-      chapter: shinyaHasAdvantage,
+      chapter: {
+        type: "ShinyaHasAdvantage",
+      },
     };
   }
 
