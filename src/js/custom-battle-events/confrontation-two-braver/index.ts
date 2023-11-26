@@ -8,7 +8,6 @@ import { EmptyCustomBattleEvent } from "../empty-custom-battle-event";
 import { afterStateAnimation } from "./procedures/after-state-animation";
 import { beforeLastState } from "./procedures/before-last-state";
 import { createConfrontationTwoBraverProps } from "./procedures/create-confrontation-two-braver-props";
-import { onLastState } from "./procedures/on-last-state";
 import { onStateAnimation } from "./procedures/on-state-animation";
 import { ConfrontationTwoBraverProps } from "./props";
 
@@ -28,11 +27,6 @@ class ConfrontationTwoBraverEvent extends EmptyCustomBattleEvent {
   /** @override */
   async beforeLastState(props: LastState): Promise<void> {
     this.#props.state = await beforeLastState({ ...props, ...this.#props });
-  }
-
-  /** @override */
-  async onLastState(props: LastState): Promise<void> {
-    await onLastState({ ...props, ...this.#props });
   }
 
   /** @override */

@@ -1,8 +1,8 @@
-import {Animate} from "../../../animation/animate";
-import {empty} from "../../../animation/delay";
-import {CustomStateAnimation} from "../../../td-scenes/battle/custom-battle-event";
-import {ConfrontationTwoBraverProps} from "../props";
-import {invisibleEnemyCryMessageWindow} from "../animation/invisible-enemy-cry-message-window";
+import { Animate } from "../../../animation/animate";
+import { empty } from "../../../animation/delay";
+import {process} from "../../../animation/process";
+import { CustomStateAnimation } from "../../../td-scenes/battle/custom-battle-event";
+import { ConfrontationTwoBraverProps } from "../props";
 
 /**
  * ステートアニメ終了後に呼ばれる、カスタムステートアニメーション
@@ -16,7 +16,9 @@ export function afterStateAnimation(
     props.state.chapter.type === "ShinyaHasAdvantage" &&
     props.currentState.effect.name === "BatteryDeclaration"
   ) {
-    return invisibleEnemyCryMessageWindow(props);
+    return process(() => {
+      props.view.dom.enemyCryMessageWindow.visible(false);
+    });
   }
 
   return empty();
