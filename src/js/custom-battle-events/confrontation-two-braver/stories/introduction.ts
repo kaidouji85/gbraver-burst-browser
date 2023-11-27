@@ -31,8 +31,7 @@ export async function introduction(
   await scrollLeftMessages(props, [
     ["ユウヤ", "「ブレイバーの称号は 全国一位のロボに与えられるもの"],
     ["それを こんなひよっ子が名乗るとは"],
-    ["……面白い 気に入ったぜ シンヤ！！"],
-    ["シンブレイバーの力 見せてもらおうか」"],
+    ["……面白い 気に入ったぜ シンヤ！！」"],
   ]);
   await refreshConversation(props, 100);
   activeRightMessageWindowWithFace(props, "Tsubasa");
