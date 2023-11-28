@@ -32,7 +32,7 @@ export type ConfigProps = {
   /** se音量値 */
   seVolumeValue: HTMLElement;
   /** パフォーマンス統計表示設定セレクタ */
-  statsVisibilitySelector: HTMLElement;
+  performanceStatsVisibilitySelector: HTMLElement;
   /** 戻るボタン */
   prevButton: HTMLElement;
   /** 設定変更ボタン */
@@ -90,7 +90,8 @@ export function createConfigProps(
     seVolumeSelector: elements.seVolumeSelector,
     seVolumeValue: elements.seVolumeValue,
     prevButton: elements.prev,
-    statsVisibilitySelector: elements.performanceStatsVisibilitySelector,
+    performanceStatsVisibilitySelector:
+      elements.performanceStatsVisibilitySelector,
     configChangeButton: elements.configChange,
     dialog,
     pushButton:

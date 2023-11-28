@@ -31,12 +31,13 @@ export function parseConfig(props: ConfigProps): GBraverBurstBrowserConfig {
     foundBattleControllerType instanceof HTMLInputElement
       ? foundBattleControllerType.value
       : null;
-  const foundStatsVisibility = props.statsVisibilitySelector.querySelector(
-    'input[type="radio"]:checked',
-  );
-  const statsVisibility =
-    foundStatsVisibility instanceof HTMLInputElement
-      ? foundStatsVisibility.value
+  const foundPerformanceStatsVisibility =
+    props.performanceStatsVisibilitySelector.querySelector(
+      'input[type="radio"]:checked',
+    );
+  const performanceStatsVisibility =
+    foundPerformanceStatsVisibility instanceof HTMLInputElement
+      ? foundPerformanceStatsVisibility.value
       : null;
   return parseBrowserConfig({
     battleAnimationTimeScale,
@@ -44,6 +45,6 @@ export function parseConfig(props: ConfigProps): GBraverBurstBrowserConfig {
     battleControllerType,
     bgmVolume: props.bgmVolumeSelector.value,
     seVolume: props.seVolumeSelector.value,
-    statsVisibility,
+    performanceStatsVisibility,
   });
 }

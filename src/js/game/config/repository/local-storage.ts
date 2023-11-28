@@ -15,7 +15,7 @@ const Keys = {
   /** SE音量 */
   SEVolume: "SEVolume",
   /** パフォーマンス統計表示設定 */
-  StatsVisibility: "StatsVisibility",
+  PerformanceStatsVisibility: "PerformanceStatsVisibility",
 };
 
 /** ブラウザ設定リポジトリのLocalStorage実装 */
@@ -36,7 +36,7 @@ class LocalStorageConfigRepository
     localStorage.setItem(Keys.BGMVolume, `${config.bgmVolume}`);
     localStorage.setItem(Keys.SEVolume, `${config.seVolume}`);
     localStorage.setItem(
-      Keys.StatsVisibility,
+      Keys.PerformanceStatsVisibility,
       config.performanceStatsVisibility,
     );
   }
@@ -51,7 +51,7 @@ class LocalStorageConfigRepository
       battleControllerType: localStorage.getItem(Keys.BattleControllerType),
       bgmVolume: localStorage.getItem(Keys.BGMVolume),
       seVolume: localStorage.getItem(Keys.SEVolume),
-      statsVisibility: localStorage.getItem(Keys.StatsVisibility),
+      statsVisibility: localStorage.getItem(Keys.PerformanceStatsVisibility),
     });
   }
 }

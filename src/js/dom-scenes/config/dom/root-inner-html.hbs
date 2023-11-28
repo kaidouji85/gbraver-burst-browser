@@ -103,7 +103,8 @@
           type="radio"
           name="stats-visibility"
           value="visible"
-          {{#if isPerformanceStatsVisible}}checked{{ />表示する
+          {{checkedOfStatsVisible}}
+        />表示する
       </label>
       <label class="{{ROOT_CLASS}}__performance-stats-visibility-label">
         <input
@@ -111,7 +112,8 @@
           type="radio"
           name="stats-visibility"
           value="hidden"
-          {{#unless isPerformanceStatsVisible}}checked{{ />表示しない
+          {{checkedOfStatsHidden}}
+        />表示しない
       </label>
     </div>
   </div>

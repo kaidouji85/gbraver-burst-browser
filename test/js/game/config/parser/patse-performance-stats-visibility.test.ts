@@ -2,12 +2,17 @@ import { PerformanceStatsVisibility } from "../../../../../src/js/game/config/br
 import { parsePerformanceStatsVisibility } from "../../../../../src/js/game/config/parser/performance-stats-visibility";
 
 /** パフォーマンス統計表示設定をあつめたもの */
-const performanceStatsVisibilities: PerformanceStatsVisibility[] = ["visible", "hidden"];
+const performanceStatsVisibilities: PerformanceStatsVisibility[] = [
+  "visible",
+  "hidden",
+];
 
-test("PerformanceStatsVisibilityはパースできる", ()=> {
-  performanceStatsVisibilities.forEach(statsVisibility => {
-    expect(parsePerformanceStatsVisibility(statsVisibility)).toBe(statsVisibility);
-  })
+test("PerformanceStatsVisibilityはパースできる", () => {
+  performanceStatsVisibilities.forEach((statsVisibility) => {
+    expect(parsePerformanceStatsVisibility(statsVisibility)).toBe(
+      statsVisibility,
+    );
+  });
 });
 
 test("空文字はパースできない", () => {
