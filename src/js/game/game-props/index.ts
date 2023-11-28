@@ -26,8 +26,6 @@ import { TDSceneBinder } from "../td-scene-binder";
  * 本オブジェクトはゲーム管理オブジェクト内部、各種ヘルパーで利用することを想定している
  */
 export interface GameProps {
-  /** @deprecated FPS統計を表示するか否か、trueで表示する */
-  isPerformanceStatsVisible: boolean;
   /** パフォーマンス統計、表示されていない場合はnullが入る */
   performanceStats: PerformanceStats | null;
   /** サービスワーカーを利用するか否か、trueで利用する */
