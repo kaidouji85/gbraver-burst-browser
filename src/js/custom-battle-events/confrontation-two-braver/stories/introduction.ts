@@ -23,15 +23,15 @@ export async function introduction(
 ): Promise<void> {
   activeRightMessageWindowWithFace(props, "Shinya");
   await scrollRightMessages(props, [
-    ["シンヤ", "「ジェネシスブレイバーとユウヤさん"],
-    ["……俺はこの人に憧れて シンブレイバーを造ったんだ」"],
+    ["シンヤ", "「全国大会の覇者 ユウヤさん"],
+    ["……俺はこの人に憧れて 機動倶楽部を始めたんだ」"],
   ]);
   props.view.dom.rightMessageWindow.darken();
   activeLeftMessageWindowWithFace(props, "Yuuya");
   await scrollLeftMessages(props, [
-    ["ユウヤ", "「ブレイバーの称号は 全国一位のロボに与えられるもの"],
+    ["ユウヤ", "「ブレイバーの称号は 日本で一番強いロボに与えられるもの"],
     ["それを こんなひよっ子が名乗るとは"],
-    ["……面白い 気に入ったぜ シンヤ！！」"],
+    ["……面白い 気に入ったぜ シンブレイバー！！」"],
   ]);
   await refreshConversation(props, 100);
   activeRightMessageWindowWithFace(props, "Tsubasa");
