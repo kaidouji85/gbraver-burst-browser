@@ -2,9 +2,9 @@ import Stats from "stats.js";
 
 /**
  * @deprecated
- * パフォーマンス情報を表示する
+ * パフォーマンス統計を表示する
  *
- * @param dom パフォーマンス情報をアペンドするHTML要素
+ * @param dom パフォーマンス統計をアペンドするHTML要素
  */
 export function viewPerformanceStats(dom: HTMLElement): void {
   const stats = new Stats();

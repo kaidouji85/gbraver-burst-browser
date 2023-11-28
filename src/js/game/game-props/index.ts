@@ -19,14 +19,17 @@ import { FutureSuddenlyBattleEnd } from "../future-suddenly-battle-end";
 import { InProgress } from "../in-progress/in-progress";
 import { InterruptScenes } from "../innterrupt-scenes";
 import { TDSceneBinder } from "../td-scene-binder";
+import { PerformanceStats } from "../../stats/performance-stats";
 
 /**
  * ゲームプロパティ
  * 本オブジェクトはゲーム管理オブジェクト内部、各種ヘルパーで利用することを想定している
  */
 export interface GameProps {
-  /** FPS統計を表示するか否か、trueで表示する */
+  /** @deprecated FPS統計を表示するか否か、trueで表示する */
   isPerformanceStatsVisible: boolean;
+  /** パフォーマンス統計 */
+  performanceStats: PerformanceStats | null;
   /** サービスワーカーを利用するか否か、trueで利用する */
   isServiceWorkerUsed: boolean;
   /** 遊び方スライドのURL */

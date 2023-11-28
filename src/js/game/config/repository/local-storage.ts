@@ -14,7 +14,7 @@ const Keys = {
   BGMVolume: "BGMVolume",
   /** SE音量 */
   SEVolume: "SEVolume",
-  /** パフォーマンス情報表示設定 */
+  /** パフォーマンス統計表示設定 */
   StatsVisibility: "StatsVisibility",
 };
 

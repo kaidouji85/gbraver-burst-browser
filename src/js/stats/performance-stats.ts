@@ -3,7 +3,7 @@ import Stats from "stats.js";
 
 import { gameLoopStream } from "../game-loop/game-loop";
 
-/** パフォーマンス情報 */
+/** パフォーマンス統計 */
 export class PerformanceStats {
   /** Statsインスタンス */
   #stats: Stats;

@@ -31,7 +31,7 @@ export type ConfigProps = {
   seVolumeSelector: HTMLInputElement;
   /** se音量値 */
   seVolumeValue: HTMLElement;
-  /** パフォーマンス情報表示設定セレクタ */
+  /** パフォーマンス統計表示設定セレクタ */
   statsVisibilitySelector: HTMLElement;
   /** 戻るボタン */
   prevButton: HTMLElement;

@@ -2,7 +2,7 @@ import { z } from "zod";
 
 import { StatsVisibility } from "../browser-config";
 
-/** パフォーマンス情報の表示設定 zod schema */
+/** パフォーマンス統計の表示設定 zod schema */
 export const StatsVisibilitySchema = z.union([
   z.literal("visible"),
   z.literal("hidden"),
