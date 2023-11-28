@@ -35,7 +35,7 @@ class LocalStorageConfigRepository
     );
     localStorage.setItem(Keys.BGMVolume, `${config.bgmVolume}`);
     localStorage.setItem(Keys.SEVolume, `${config.seVolume}`);
-    localStorage.setItem(Keys.StatsVisibility, config.statsVisibility);
+    localStorage.setItem(Keys.StatsVisibility, config.performanceStatsVisibility);
   }
 
   /** @override */

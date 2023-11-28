@@ -9,7 +9,7 @@ test("ブラウザ設定を正しくパースできる", () => {
     bgmVolume: 1,
     seVolume: 1,
     battleControllerType: "BigButton",
-    statsVisibility: "hidden",
+    performanceStatsVisibility: "hidden",
   };
   expect(parseBrowserConfig(data)).toEqual(data);
 });

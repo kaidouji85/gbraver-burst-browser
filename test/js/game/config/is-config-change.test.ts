@@ -7,7 +7,7 @@ const origin: GBraverBurstBrowserConfig = {
   bgmVolume: 1,
   seVolume: 1,
   battleControllerType: "BigButton",
-  statsVisibility: "hidden",
+  performanceStatsVisibility: "hidden",
 };
 
 test("WebGLピクセルレートの変更を正しく検知できる", () => {

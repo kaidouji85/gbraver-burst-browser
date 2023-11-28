@@ -39,7 +39,7 @@ export async function initialize(props: GameProps): Promise<void> {
   const resourceLoading = titleResourceLoading(props.resourceRoot);
   props.resources = await resourceLoading.resources;
   const config = await props.config.load();
-  reflectPerformanceStatsVisibility(props, config.statsVisibility);
+  reflectPerformanceStatsVisibility(props, config.performanceStatsVisibility);
   reflectSoundVolume(props.resources, config);
   await startTitle(props);
   props.interruptScenes.bind(props.resources);

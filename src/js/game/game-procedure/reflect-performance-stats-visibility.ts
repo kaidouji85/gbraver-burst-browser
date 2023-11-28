@@ -1,5 +1,5 @@
 import { PerformanceStats } from "../../stats/performance-stats";
-import { StatsVisibility } from "../config/browser-config";
+import { PerformanceStatsVisibility } from "../config/browser-config";
 import { GameProps } from "../game-props";
 
 /**
@@ -46,7 +46,7 @@ function hiddenPerformanceStats(
  * @param props ゲームプロパティ
  * @param statsVisibility パフォーマンス統計表示設定
  */
-export function reflectPerformanceStatsVisibility(props: GameProps, statsVisibility: StatsVisibility): void {
+export function reflectPerformanceStatsVisibility(props: GameProps, statsVisibility: PerformanceStatsVisibility): void {
   statsVisibility === "visible"
     ? visiblePerformanceStats(props)
     : hiddenPerformanceStats(props);

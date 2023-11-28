@@ -22,7 +22,7 @@ export const WebGLPixelRatios = [0.5, 0.75, 1, 2];
 export type WebGLPixelRatio = (typeof WebGLPixelRatios)[number];
 
 /** パフォーマンス統計の表示設定 */
-export type StatsVisibility = "visible" | "hidden";
+export type PerformanceStatsVisibility = "visible" | "hidden";
 
 /** Gブレイバーバースト ブラウザ側設定項目 */
 export type GBraverBurstBrowserConfig = {
@@ -37,5 +37,5 @@ export type GBraverBurstBrowserConfig = {
   /** 戦闘シーンコントローラータイプ */
   battleControllerType: BattleControllerType;
   /** パフォーマンス統計の表示設定 */
-  statsVisibility: StatsVisibility;
+  performanceStatsVisibility: PerformanceStatsVisibility;
 };

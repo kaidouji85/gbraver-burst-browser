@@ -36,6 +36,6 @@ export function rootInnerHTML(
     battleControllerTypes,
     bgmVolumeLabel,
     seVolumeLabel,
-    isPerformanceStatsVisible: config.statsVisibility === "visible"
+    isPerformanceStatsVisible: config.performanceStatsVisibility === "visible"
   });
 }

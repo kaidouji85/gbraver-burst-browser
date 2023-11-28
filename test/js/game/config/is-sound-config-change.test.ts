@@ -7,7 +7,7 @@ const origin: GBraverBurstBrowserConfig = {
   bgmVolume: 1,
   seVolume: 1,
   battleControllerType: "BigButton",
-  statsVisibility: "hidden",
+  performanceStatsVisibility: "hidden",
 };
 
 test("BGM音量が変更された場合、音量関係設定が変更されたとみなす", () => {
