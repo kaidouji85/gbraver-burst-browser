@@ -27,7 +27,6 @@ export function rootInnerHTML(
   );
   const bgmVolumeLabel = soundVolumeLabel(config.bgmVolume);
   const seVolumeLabel = soundVolumeLabel(config.seVolume);
-  console.log(config);
   return rootInnerHTMLTemplate({
     ROOT_CLASS,
     ids,
@@ -37,5 +36,6 @@ export function rootInnerHTML(
     battleControllerTypes,
     bgmVolumeLabel,
     seVolumeLabel,
+    isPerformanceStatsVisible: config.statsVisibility === "visible"
   });
 }
