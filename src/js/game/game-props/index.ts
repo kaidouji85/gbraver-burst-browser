@@ -9,6 +9,7 @@ import { GameLoop } from "../../game-loop/game-loop";
 import { Renderer } from "../../render";
 import { Resources } from "../../resource";
 import { ResourceRoot } from "../../resource/resource-root";
+import { PerformanceStats } from "../../stats/performance-stats";
 import { PushWindow } from "../../window/push-window";
 import { Resize } from "../../window/resize";
 import { GBraverBurstBrowserConfigRepository } from "../config/repository/repository";
@@ -19,7 +20,6 @@ import { FutureSuddenlyBattleEnd } from "../future-suddenly-battle-end";
 import { InProgress } from "../in-progress/in-progress";
 import { InterruptScenes } from "../innterrupt-scenes";
 import { TDSceneBinder } from "../td-scene-binder";
-import { PerformanceStats } from "../../stats/performance-stats";
 
 /**
  * ゲームプロパティ
@@ -28,7 +28,7 @@ import { PerformanceStats } from "../../stats/performance-stats";
 export interface GameProps {
   /** @deprecated FPS統計を表示するか否か、trueで表示する */
   isPerformanceStatsVisible: boolean;
-  /** パフォーマンス統計 */
+  /** パフォーマンス統計、表示されていない場合はnullが入る */
   performanceStats: PerformanceStats | null;
   /** サービスワーカーを利用するか否か、trueで利用する */
   isServiceWorkerUsed: boolean;
