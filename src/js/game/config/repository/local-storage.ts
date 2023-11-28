@@ -51,7 +51,9 @@ class LocalStorageConfigRepository
       battleControllerType: localStorage.getItem(Keys.BattleControllerType),
       bgmVolume: localStorage.getItem(Keys.BGMVolume),
       seVolume: localStorage.getItem(Keys.SEVolume),
-      statsVisibility: localStorage.getItem(Keys.PerformanceStatsVisibility),
+      performanceStatsVisibility: localStorage.getItem(
+        Keys.PerformanceStatsVisibility,
+      ),
     });
   }
 }
