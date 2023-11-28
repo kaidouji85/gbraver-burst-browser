@@ -7,6 +7,7 @@ export type DataIDs = {
   bgmVolumeValue: string;
   seVolumeSelector: string;
   seVolumeValue: string;
+  statsVisibilitySelector: string;
   prev: string;
   configChange: string;
 };
