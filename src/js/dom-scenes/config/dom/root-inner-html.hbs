@@ -84,6 +84,39 @@
     >
       {{seVolumeLabel}}</span>
   </div>
+  <div class="{{ROOT_CLASS}}__performance-stats-visibility">
+    <div
+      class="{{ROOT_CLASS}}__performance-stats-visibility-caption"
+    >パフォーマンス統計</div>
+    <div class="{{ROOT_CLASS}}__config-separation"></div>
+    <div class="{{ROOT_CLASS}}__performance-stats-visibility-description">
+      FPSなどのパフォーマンス統計を画面に表示するかどうかを変更します。
+      パフォーマンス統計を表示することで、一部画面では操作が困難になる場合があります。
+    </div>
+    <div
+      class="{{ROOT_CLASS}}__performance-stats-visibility-selector"
+      data-id="{{ids.performanceStatsVisibilitySelector}}"
+    >
+      <label class="{{ROOT_CLASS}}__performance-stats-visibility-label">
+        <input
+          class="{{ROOT_CLASS}}__performance-stats-visibility-radio"
+          type="radio"
+          name="performance-stats-visibility"
+          value="visible"
+          {{checkedOfStatsVisible}}
+        />表示する
+      </label>
+      <label class="{{ROOT_CLASS}}__performance-stats-visibility-label">
+        <input
+          class="{{ROOT_CLASS}}__performance-stats-visibility-radio"
+          type="radio"
+          name="performance-stats-visibility"
+          value="hidden"
+          {{checkedOfStatsHidden}}
+        />表示しない
+      </label>
+    </div>
+  </div>
 </div>
 <div class="{{ROOT_CLASS}}__footer">
   <button class="{{ROOT_CLASS}}__prev" data-id="{{ids.prev}}">戻る</button>

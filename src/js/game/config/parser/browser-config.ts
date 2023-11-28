@@ -4,6 +4,7 @@ import { GBraverBurstBrowserConfig } from "../browser-config";
 import { DefaultConfig } from "../default-config";
 import { BattleAnimationTimeScaleSchema } from "./battle-animation-time-scale";
 import { BattleControllerTypeSchema } from "./battle-controller-type";
+import { PerformanceStatsVisibilitySchema } from "./performance-stats-visibility";
 import { SoundVolumeSchema } from "./sound-volume";
 import { WebGLPixelRatioSchema } from "./web-gl-pixel-ratio";
 
@@ -17,6 +18,9 @@ export const BrowserConfigSchema = z.object({
   seVolume: SoundVolumeSchema.catch(DefaultConfig.seVolume),
   battleControllerType: BattleControllerTypeSchema.catch(
     DefaultConfig.battleControllerType,
+  ),
+  performanceStatsVisibility: PerformanceStatsVisibilitySchema.catch(
+    DefaultConfig.performanceStatsVisibility,
   ),
 });
 

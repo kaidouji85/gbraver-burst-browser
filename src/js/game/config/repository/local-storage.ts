@@ -6,18 +6,16 @@ import { GBraverBurstBrowserConfigRepository } from "./repository";
 const Keys = {
   /** WebGLのピクセルレート */
   WebGLPixelRatio: "WebGLPixelRatio",
-
   /** 戦闘アニメタイムスケール */
   BattleAnimationTimeScale: "BattleAnimationTimeScale",
-
   /** 戦闘画面コントローラータイプ */
   BattleControllerType: "BattleControllerType",
-
   /** BGM音量 */
   BGMVolume: "BGMVolume",
-
   /** SE音量 */
   SEVolume: "SEVolume",
+  /** パフォーマンス統計表示設定 */
+  PerformanceStatsVisibility: "PerformanceStatsVisibility",
 };
 
 /** ブラウザ設定リポジトリのLocalStorage実装 */
@@ -37,6 +35,10 @@ class LocalStorageConfigRepository
     );
     localStorage.setItem(Keys.BGMVolume, `${config.bgmVolume}`);
     localStorage.setItem(Keys.SEVolume, `${config.seVolume}`);
+    localStorage.setItem(
+      Keys.PerformanceStatsVisibility,
+      config.performanceStatsVisibility,
+    );
   }
 
   /** @override */
@@ -49,6 +51,9 @@ class LocalStorageConfigRepository
       battleControllerType: localStorage.getItem(Keys.BattleControllerType),
       bgmVolume: localStorage.getItem(Keys.BGMVolume),
       seVolume: localStorage.getItem(Keys.SEVolume),
+      performanceStatsVisibility: localStorage.getItem(
+        Keys.PerformanceStatsVisibility,
+      ),
     });
   }
 }

@@ -32,8 +32,6 @@ export type GamePropsGeneratorParam = {
   contactURL: string;
   /** プライバシーポリシーページのURL */
   privacyPolicyURL: string;
-  /** FPS統計を表示するか否か、trueで表示する */
-  isPerformanceStatsVisible: boolean;
   /** サービスワーカーを利用するか否か、trueで利用する */
   isServiceWorkerUsed: boolean;
   /** APIサーバ系機能が利用可能か否か、trueで利用可能 */
@@ -65,11 +63,11 @@ export function generateGameProps(param: GamePropsGeneratorParam): GameProps {
   const gameLoop = gameLoopStream();
   const hudUIScale = new CssHUDUIScale(renderer.getRendererDOM(), resize);
   return {
+    performanceStats: null,
     resourceRoot: param.resourceRoot,
     resources: emptyResources(param.resourceRoot),
     isFullResourceLoaded: false,
     isServiceWorkerUsed: param.isServiceWorkerUsed,
-    isPerformanceStatsVisible: param.isPerformanceStatsVisible,
     howToPlayURL: param.howToPlayURL,
     termsOfServiceURL: param.termsOfServiceURL,
     privacyPolicyURL: param.privacyPolicyURL,

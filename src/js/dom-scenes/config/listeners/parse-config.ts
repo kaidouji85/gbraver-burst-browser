@@ -31,11 +31,20 @@ export function parseConfig(props: ConfigProps): GBraverBurstBrowserConfig {
     foundBattleControllerType instanceof HTMLInputElement
       ? foundBattleControllerType.value
       : null;
+  const foundPerformanceStatsVisibility =
+    props.performanceStatsVisibilitySelector.querySelector(
+      'input[type="radio"]:checked',
+    );
+  const performanceStatsVisibility =
+    foundPerformanceStatsVisibility instanceof HTMLInputElement
+      ? foundPerformanceStatsVisibility.value
+      : null;
   return parseBrowserConfig({
     battleAnimationTimeScale,
     webGLPixelRatio,
     battleControllerType,
     bgmVolume: props.bgmVolumeSelector.value,
     seVolume: props.seVolumeSelector.value,
+    performanceStatsVisibility,
   });
 }

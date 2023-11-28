@@ -2,12 +2,12 @@ import { MailVerifiedIncomplete } from "../../dom-scenes/mail-verified-incomplet
 import { invisibleFirstView } from "../../first-view/first-view-visible";
 import { titleResourceLoading } from "../../resource/loading/title-resource-loading";
 import { loadServiceWorker } from "../../service-worker/load-service-worker";
-import { viewPerformanceStats } from "../../stats/view-performance-stats";
 import { waitTime } from "../../wait/wait-time";
 import { mailVerifiedIncompleteConnector } from "../action-connector/mail-verified-incomplete-connector";
 import type { GameProps } from "../game-props";
 import { reflectSoundVolume } from "../reflect-sound-volume";
 import { playTitleBGM } from "./play-title-bgm";
+import { reflectPerformanceStatsVisibility } from "./reflect-performance-stats-visibility";
 import { startTitle } from "./start-title";
 
 /**
@@ -19,11 +19,6 @@ import { startTitle } from "./start-title";
  */
 export async function initialize(props: GameProps): Promise<void> {
   const startTime = Date.now();
-
-  if (props.isPerformanceStatsVisible && document.body) {
-    viewPerformanceStats(document.body);
-  }
-
   if (props.isServiceWorkerUsed) {
     props.serviceWorker = await loadServiceWorker();
   }
@@ -32,7 +27,6 @@ export async function initialize(props: GameProps): Promise<void> {
     props.api.isLogin(),
     props.api.isMailVerified(),
   ]);
-
   if (isLogin && !isMailVerified) {
     const mailAddress = await props.api.getMail();
     const scene = new MailVerifiedIncomplete(mailAddress);
@@ -45,6 +39,7 @@ export async function initialize(props: GameProps): Promise<void> {
   const resourceLoading = titleResourceLoading(props.resourceRoot);
   props.resources = await resourceLoading.resources;
   const config = await props.config.load();
+  reflectPerformanceStatsVisibility(props, config.performanceStatsVisibility);
   reflectSoundVolume(props.resources, config);
   await startTitle(props);
   props.interruptScenes.bind(props.resources);

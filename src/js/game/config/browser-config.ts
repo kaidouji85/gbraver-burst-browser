@@ -1,6 +1,6 @@
-/** 設定可能な戦闘アニメタイムスケールをあつめたもの */
 import { BattleControllerType } from "../../td-scenes/battle/controller-type";
 
+/** 設定可能な戦闘アニメタイムスケールをあつめたもの */
 export const BattleAnimationTimeScales = [1, 0.5, 0.25] as const;
 
 /** 戦闘アニメタイムスケール */
@@ -21,20 +21,21 @@ export const WebGLPixelRatios = [0.5, 0.75, 1, 2];
 /** WebGLピクセルレート */
 export type WebGLPixelRatio = (typeof WebGLPixelRatios)[number];
 
+/** パフォーマンス統計の表示設定 */
+export type PerformanceStatsVisibility = "visible" | "hidden";
+
 /** Gブレイバーバースト ブラウザ側設定項目 */
 export type GBraverBurstBrowserConfig = {
   /** WebGLピクセルレート */
   webGLPixelRatio: WebGLPixelRatio;
-
   /** 戦闘アニメタイムスケール */
   battleAnimationTimeScale: BattleAnimationTimeScale;
-
   /** BGM音量 */
   bgmVolume: SoundVolume;
-
   /** SE音量 */
   seVolume: SoundVolume;
-
   /** 戦闘シーンコントローラータイプ */
   battleControllerType: BattleControllerType;
+  /** パフォーマンス統計の表示設定 */
+  performanceStatsVisibility: PerformanceStatsVisibility;
 };
