@@ -1,6 +1,7 @@
 import Stats from "stats.js";
 
 /**
+ * @deprecated
  * パフォーマンス情報を表示する
  *
  * @param dom パフォーマンス情報をアペンドするHTML要素
