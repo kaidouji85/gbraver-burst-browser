@@ -2,6 +2,7 @@ import { isSoundConfigChanged } from "../config/config-changed";
 import { ConfigChangeComplete } from "../game-actions/config-change-complete";
 import type { GameProps } from "../game-props";
 import { reflectSoundVolume } from "../reflect-sound-volume";
+import { reflectPerformanceStatsVisibility } from "./reflect-performance-stats-visibility";
 import { startTitle } from "./start-title";
 
 /**
@@ -19,6 +20,8 @@ export async function onConfigChangeComplete(
   const origin = await props.config.load();
   isSoundConfigChanged(origin, action.config) &&
     reflectSoundVolume(props.resources, action.config);
+  origin.statsVisibility !== action.config.statsVisibility &&
+    reflectPerformanceStatsVisibility(props, action.config.statsVisibility);
   await props.config.save(action.config);
   await startTitle(props);
   await props.fader.fadeIn();

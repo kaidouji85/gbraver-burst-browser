@@ -38,6 +38,7 @@ function hiddenPerformanceStats(
 
   props.performanceStats.destructor();
   document.body.removeChild(props.performanceStats.getRootHTMLElement());
+  props.performanceStats = null;
 }
 
 /**
