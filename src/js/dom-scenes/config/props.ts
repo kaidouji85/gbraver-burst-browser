@@ -15,59 +15,42 @@ import { rootInnerHTML } from "./dom/root-inner-html";
 export type ConfigProps = {
   /** 画面を開く前のブラウザ設定 */
   originConfig: GBraverBurstBrowserConfig;
-
   /** ルートHTML要素 */
   root: HTMLElement;
-
   /** 戦闘アニメ速度セレクタ */
   battleAnimationTimeScaleSelector: HTMLElement;
-
   /** webglピクセルレートセレクタ */
   webGLPixelRatioSelector: HTMLElement;
-
   /** 戦闘画面コントローラセレクタ */
   battleControllerTypeSelector: HTMLElement;
-
   /** bgm音量セレクタ */
   bgmVolumeSelector: HTMLInputElement;
-
   /** bgm音量値 */
   bgmVolumeValue: HTMLElement;
-
   /** se音量セレクタ */
   seVolumeSelector: HTMLInputElement;
-
   /** se音量値 */
   seVolumeValue: HTMLElement;
-
   /** 戻るボタン */
   prevButton: HTMLElement;
-
   /** 設定変更ボタン */
   configChangeButton: HTMLElement;
-
   /** 設定変更通知ダイアログ */
   dialog: ConfigChangedDialog;
-
   /** SE 値変更 */
   changeValue: Howl;
-
   /** SE ボタン押下 */
   pushButton: Howl;
-
   /** 排他制御 */
   exclusive: Exclusive;
-
   /** 戻るストリーム */
   prev: Subject<void>;
-
   /** 設定変更ストリーム */
   configChange: Subject<GBraverBurstBrowserConfig>;
 };
 
 /**
  * 設定画面プロパティを生成する
- *
  * @param resources リソース管理オブジェクト
  * @param config ブラウザ設定
  * @return 生成した設定画面プロパティ
@@ -84,6 +67,7 @@ export function createConfigProps(
     bgmVolumeValue: domUuid(),
     seVolumeSelector: domUuid(),
     seVolumeValue: domUuid(),
+    statsVisibilitySelector: domUuid(),
     prev: domUuid(),
     configChange: domUuid(),
   };

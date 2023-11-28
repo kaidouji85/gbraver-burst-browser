@@ -6,16 +6,12 @@ import { GBraverBurstBrowserConfigRepository } from "./repository";
 const Keys = {
   /** WebGLのピクセルレート */
   WebGLPixelRatio: "WebGLPixelRatio",
-
   /** 戦闘アニメタイムスケール */
   BattleAnimationTimeScale: "BattleAnimationTimeScale",
-
   /** 戦闘画面コントローラータイプ */
   BattleControllerType: "BattleControllerType",
-
   /** BGM音量 */
   BGMVolume: "BGMVolume",
-
   /** SE音量 */
   SEVolume: "SEVolume",
 };
