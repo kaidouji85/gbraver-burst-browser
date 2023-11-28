@@ -14,6 +14,8 @@ const Keys = {
   BGMVolume: "BGMVolume",
   /** SE音量 */
   SEVolume: "SEVolume",
+  /** パフォーマンス情報表示設定 */
+  StatsVisibility: "StatsVisibility",
 };
 
 /** ブラウザ設定リポジトリのLocalStorage実装 */
@@ -33,6 +35,7 @@ class LocalStorageConfigRepository
     );
     localStorage.setItem(Keys.BGMVolume, `${config.bgmVolume}`);
     localStorage.setItem(Keys.SEVolume, `${config.seVolume}`);
+    localStorage.setItem(Keys.StatsVisibility, config.statsVisibility);
   }
 
   /** @override */
@@ -45,6 +48,7 @@ class LocalStorageConfigRepository
       battleControllerType: localStorage.getItem(Keys.BattleControllerType),
       bgmVolume: localStorage.getItem(Keys.BGMVolume),
       seVolume: localStorage.getItem(Keys.SEVolume),
+      statsVisibility: localStorage.getItem(Keys.StatsVisibility),
     });
   }
 }
