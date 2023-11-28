@@ -14,7 +14,9 @@ export const PerformanceStatsVisibilitySchema = z.union([
  * @param origin パース元
  * @return パース結果
  */
-export function parsePerformanceStatsVisibility(origin: unknown): PerformanceStatsVisibility | null {
+export function parsePerformanceStatsVisibility(
+  origin: unknown,
+): PerformanceStatsVisibility | null {
   const result = PerformanceStatsVisibilitySchema.safeParse(origin);
   return result.success ? result.data : null;
 }

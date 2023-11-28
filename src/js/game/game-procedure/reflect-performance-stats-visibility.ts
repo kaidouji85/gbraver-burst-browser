@@ -6,10 +6,8 @@ import { GameProps } from "../game-props";
  * パフォーマンス統計を表示する
  * @param props ゲームプロパティ
  */
-function visiblePerformanceStats(
-  props: GameProps, 
-): void {
-  if(!document.body) {
+function visiblePerformanceStats(props: GameProps): void {
+  if (!document.body) {
     return;
   }
 
@@ -25,10 +23,8 @@ function visiblePerformanceStats(
  * パフォーマンス統計を非表示にする
  * @param props ゲームプロパティ
  */
-function hiddenPerformanceStats(
-  props: GameProps,
-): void {
-  if(!document.body) {
+function hiddenPerformanceStats(props: GameProps): void {
+  if (!document.body) {
     return;
   }
 
@@ -46,7 +42,10 @@ function hiddenPerformanceStats(
  * @param props ゲームプロパティ
  * @param statsVisibility パフォーマンス統計表示設定
  */
-export function reflectPerformanceStatsVisibility(props: GameProps, statsVisibility: PerformanceStatsVisibility): void {
+export function reflectPerformanceStatsVisibility(
+  props: GameProps,
+  statsVisibility: PerformanceStatsVisibility,
+): void {
   statsVisibility === "visible"
     ? visiblePerformanceStats(props)
     : hiddenPerformanceStats(props);

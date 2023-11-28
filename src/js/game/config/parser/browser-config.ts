@@ -19,7 +19,9 @@ export const BrowserConfigSchema = z.object({
   battleControllerType: BattleControllerTypeSchema.catch(
     DefaultConfig.battleControllerType,
   ),
-  performanceStatsVisibility: PerformanceStatsVisibilitySchema.catch(DefaultConfig.performanceStatsVisibility),
+  performanceStatsVisibility: PerformanceStatsVisibilitySchema.catch(
+    DefaultConfig.performanceStatsVisibility,
+  ),
 });
 
 /**

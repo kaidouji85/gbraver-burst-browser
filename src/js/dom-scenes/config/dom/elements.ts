@@ -52,8 +52,9 @@ export function extractElements(root: HTMLElement, ids: DataIDs): Elements {
     root.querySelector(`[data-id="${ids.seVolumeValue}"]`) ??
     document.createElement("div");
   const performanceStatsVisibilitySelector: HTMLElement =
-    root.querySelector(`[data-id="${ids.performanceStatsVisibilitySelector}"]`) ??
-    document.createElement("div");
+    root.querySelector(
+      `[data-id="${ids.performanceStatsVisibilitySelector}"]`,
+    ) ?? document.createElement("div");
   const prev: HTMLElement =
     root.querySelector(`[data-id="${ids.prev}"]`) ??
     document.createElement("button");
