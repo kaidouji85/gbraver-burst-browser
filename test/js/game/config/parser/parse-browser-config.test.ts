@@ -22,7 +22,7 @@ test("データ型が異なっているも、ある程度はパースできる",
       bgmVolume: "1",
       seVolume: "1",
       battleControllerType: "BigButton",
-      statsVisibility: "false",
+      statsVisibility: "hidden",
     }),
   ).toEqual({
     webGLPixelRatio: 2,
@@ -30,7 +30,7 @@ test("データ型が異なっているも、ある程度はパースできる",
     bgmVolume: 1,
     seVolume: 1,
     battleControllerType: "BigButton",
-    statsVisibility: false,
+    statsVisibility: "hidden",
   });
 });
 
