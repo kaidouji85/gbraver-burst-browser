@@ -61,7 +61,7 @@
 .config__battle-controller-type-caption,
 .config__bgm-volume-caption,
 .config__se-volume-caption,
-.config__stats-visibility-caption {
+.config__performance-stats-visibility-caption {
   background-color: var(--sub-button-background-color);
   border-radius: calc(var(--responsive-font-size) * 0.5);
   padding: calc(var(--responsive-font-size) * 0.3);
@@ -72,7 +72,7 @@
 .config__battle-controller-type-description,
 .config__bgm-volume-description,
 .config__se-volume-description,
-.config__stats-visibility-description {
+.config__performance-stats-visibility-description {
   margin-bottom: calc(var(--responsive-font-size) * 0.5);
 }
 
@@ -92,7 +92,7 @@
 .config__battle-animation-time-scale-label,
 .config__webgl-pixel-ratio-selector-label,
 .config__battle-controller-type-label,
-.config__stats-visibility-label {
+.config__performance-stats-visibility-label {
   display: flex;
   align-items: center;
 }
@@ -100,7 +100,7 @@
 .config__battle-animation-time-scale-radio,
 .config__webgl-pixel-ratio-selector-radio,
 .config__battle-controller-type-radio,
-.config__stats-visibility-radio {
+.config__performance-stats-visibility-radio {
   margin: 0;
   height: var(--font-size);
   width: var(--font-size);
@@ -163,7 +163,7 @@
   margin-right: calc(var(--responsive-font-size) * 2);
 }
 
-.config__stats-visibility-selector {
+.config__performance-stats-visibility-selector {
   display: flex;
   gap: calc(var(--responsive-font-size) * 2);
 }

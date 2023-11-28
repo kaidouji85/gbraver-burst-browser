@@ -84,31 +84,31 @@
     >
       {{seVolumeLabel}}</span>
   </div>
-  <div class="{{ROOT_CLASS}}__stats-visibility">
+  <div class="{{ROOT_CLASS}}__performance-stats-visibility">
     <div
-      class="{{ROOT_CLASS}}__stats-visibility-caption"
+      class="{{ROOT_CLASS}}__performance-stats-visibility-caption"
     >パフォーマンス統計</div>
     <div class="{{ROOT_CLASS}}__config-separation"></div>
-    <div class="{{ROOT_CLASS}}__stats-visibility-description">
+    <div class="{{ROOT_CLASS}}__performance-stats-visibility-description">
       FPSなどのパフォーマンス統計を画面に表示するかどうかを変更します。
       パフォーマンス統計を表示することで、一部画面では操作が困難になる場合があります。
     </div>
     <div
-      class="{{ROOT_CLASS}}__stats-visibility-selector"
-      data-id="{{ids.statsVisibilitySelector}}"
+      class="{{ROOT_CLASS}}__performance-stats-visibility-selector"
+      data-id="{{ids.performanceStatsVisibilitySelector}}"
     >
-      <label class="{{ROOT_CLASS}}__stats-visibility-label">
+      <label class="{{ROOT_CLASS}}__performance-stats-visibility-label">
         <input
-          class="{{ROOT_CLASS}}__stats-visibility-radio"
+          class="{{ROOT_CLASS}}__performance-stats-visibility-radio"
           type="radio"
           name="stats-visibility"
           value="visible"
           {{#if isPerformanceStatsVisible}}checked{{/if}}
         />表示する
       </label>
-      <label class="{{ROOT_CLASS}}__stats-visibility-label">
+      <label class="{{ROOT_CLASS}}__performance-stats-visibility-label">
         <input
-          class="{{ROOT_CLASS}}__stats-visibility-radio"
+          class="{{ROOT_CLASS}}__performance-stats-visibility-radio"
           type="radio"
           name="stats-visibility"
           value="hidden"

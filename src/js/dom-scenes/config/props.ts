@@ -69,7 +69,7 @@ export function createConfigProps(
     bgmVolumeValue: domUuid(),
     seVolumeSelector: domUuid(),
     seVolumeValue: domUuid(),
-    statsVisibilitySelector: domUuid(),
+    performanceStatsVisibilitySelector: domUuid(),
     prev: domUuid(),
     configChange: domUuid(),
   };
@@ -90,7 +90,7 @@ export function createConfigProps(
     seVolumeSelector: elements.seVolumeSelector,
     seVolumeValue: elements.seVolumeValue,
     prevButton: elements.prev,
-    statsVisibilitySelector: elements.statsVisibilitySelector,
+    statsVisibilitySelector: elements.performanceStatsVisibilitySelector,
     configChangeButton: elements.configChange,
     dialog,
     pushButton:

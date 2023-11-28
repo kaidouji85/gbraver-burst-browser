@@ -5,5 +5,5 @@ export const DefaultConfig = {
   bgmVolume: 1,
   seVolume: 1,
   battleControllerType: "BigButton",
-  statsVisibility: "hidden",
+  performanceStatsVisibility: "hidden",
 } as const;

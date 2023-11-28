@@ -9,7 +9,7 @@ type Elements = {
   bgmVolumeValue: HTMLElement;
   seVolumeSelector: HTMLInputElement;
   seVolumeValue: HTMLElement;
-  statsVisibilitySelector: HTMLElement;
+  performanceStatsVisibilitySelector: HTMLElement;
   prev: HTMLElement;
   configChange: HTMLElement;
 };
@@ -51,8 +51,8 @@ export function extractElements(root: HTMLElement, ids: DataIDs): Elements {
   const seVolumeValue: HTMLElement =
     root.querySelector(`[data-id="${ids.seVolumeValue}"]`) ??
     document.createElement("div");
-  const statsVisibilitySelector: HTMLElement =
-    root.querySelector(`[data-id="${ids.statsVisibilitySelector}"]`) ??
+  const performanceStatsVisibilitySelector: HTMLElement =
+    root.querySelector(`[data-id="${ids.performanceStatsVisibilitySelector}"]`) ??
     document.createElement("div");
   const prev: HTMLElement =
     root.querySelector(`[data-id="${ids.prev}"]`) ??
@@ -70,6 +70,6 @@ export function extractElements(root: HTMLElement, ids: DataIDs): Elements {
     bgmVolumeValue,
     seVolumeSelector,
     seVolumeValue,
-    statsVisibilitySelector,
+    performanceStatsVisibilitySelector,
   };
 }
