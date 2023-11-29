@@ -33,7 +33,7 @@ export async function beforeLastState(
     };
   }
 
-  if ( await startYuuyaHasAdvantageIfNeeded(props)) {
+  if (await startYuuyaHasAdvantageIfNeeded(props)) {
     return {
       ...props.state,
       chapter: {

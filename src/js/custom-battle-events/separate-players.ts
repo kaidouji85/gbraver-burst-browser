@@ -8,7 +8,7 @@ type SeparatedPlayers = {
   player: PlayerState;
   /** 敵 */
   enemy: PlayerState;
-}
+};
 
 /**
  * プレイヤーを分割する
@@ -16,15 +16,19 @@ type SeparatedPlayers = {
  * @return 分割されたプレイヤー、分割できない場合null
  */
 export function separatePlayers(
-  props: Readonly<CustomBattleEventProps>
+  props: Readonly<CustomBattleEventProps>,
 ): SeparatedPlayers | null {
   const lastState = props.stateHistory.at(-1);
   if (!lastState) {
     return null;
   }
 
-  const player = lastState.players.find(player => player.playerId === props.playerId);
-  const enemy = lastState.players.find(player => player.playerId !== props.playerId);
+  const player = lastState.players.find(
+    (player) => player.playerId === props.playerId,
+  );
+  const enemy = lastState.players.find(
+    (player) => player.playerId !== props.playerId,
+  );
   if (!player || !enemy) {
     return null;
   }

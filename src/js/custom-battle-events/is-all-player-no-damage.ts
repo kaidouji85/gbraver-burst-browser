@@ -6,9 +6,9 @@ import { PlayerState } from "gbraver-burst-core";
  * @return 判定結果、すべてのプレイヤーがノーダメージである場合true
  */
 export function isAllPlayerNoDamage(
-  players: Readonly<[PlayerState, PlayerState]>
+  players: Readonly<[PlayerState, PlayerState]>,
 ): boolean {
   return players
-    .map(player => player.armdozer.maxHp === player.armdozer.hp)
+    .map((player) => player.armdozer.maxHp === player.armdozer.hp)
     .reduce((a, b) => a && b, true);
 }

@@ -1,4 +1,3 @@
-
 import { CustomBattleEventProps } from "../../../td-scenes/battle/custom-battle-event";
 import { isAllPlayerNoDamage } from "../../is-all-player-no-damage";
 import { separatePlayers } from "../../separate-players";
