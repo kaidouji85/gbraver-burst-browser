@@ -4,17 +4,17 @@ import { invisibleAllMessageWindows } from "../../invisible-all-message-windows"
 import { scrollRightMessages } from "../../scroll-messages";
 
 /**
- * チャプター シンヤ有利 シンヤ独白
+ * チャプター ユウヤ有利 シンヤ独白
  * @param props イベントプロパティ
  * @return アニメーション
  */
-export async function shinyaMonologueWhenShinyaHasAdvantage(
+export async function shinyaMonologueWhenYuuyaHasAdvantage(
   props: Readonly<CustomBattleEventProps>,
 ): Promise<void> {
   activeRightMessageWindowWithFace(props, "Shinya");
   await scrollRightMessages(props, [
-    ["シンヤ", "「Gブレイバー相手に リードをとった"],
-    ["この勝負 いただきッス」"],
+    ["シンヤ", "「さすがGブレイバー"],
+    ["一筋縄ではいなかいッスね」"],
   ]);
   invisibleAllMessageWindows(props);
 }
