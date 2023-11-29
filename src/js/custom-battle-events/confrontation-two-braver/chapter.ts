@@ -8,5 +8,10 @@ export type ShinyaHasAdvantage = {
   type: "ShinyaHasAdvantage";
 };
 
+/** ユウヤが有利 */
+export type YuuyaHasAdvantage = {
+  type: "YuuyaHasAdvantage"
+};
+
 /** 複数フェイズにまたがるチャプターの情報 */
-export type Chapter = NoneChapter | ShinyaHasAdvantage;
+export type Chapter = NoneChapter | ShinyaHasAdvantage | YuuyaHasAdvantage;
