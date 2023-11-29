@@ -6,6 +6,7 @@ import { invisibleEnemyCryIfNeeded } from "./invisible-enemy-cry-if-needed";
 import { isChapterThatShinyaHasAdvantageEnd } from "./is-chapter-that-shinya-has-advantage-end";
 import { startShinyaHasAdvantageIfNeeded } from "./start-shinya-has-advantage-if-needed";
 import { startYuuyaHasAdvantageIfNeeded } from "./start-yuuya-has-advantage-if-needed";
+import {isChapterThatYuuyaHasAdvantageEnd} from "./is-chapter-that-yuuya-has-advantage-end";
 
 /**
  * 最終ステート直前イベント
@@ -42,7 +43,10 @@ export async function beforeLastState(
     };
   }
 
-  if (isChapterThatShinyaHasAdvantageEnd(props)) {
+  if (
+    isChapterThatShinyaHasAdvantageEnd(props) ||
+    isChapterThatYuuyaHasAdvantageEnd(props)
+  ) {
     return {
       ...props.state,
       chapter: {
