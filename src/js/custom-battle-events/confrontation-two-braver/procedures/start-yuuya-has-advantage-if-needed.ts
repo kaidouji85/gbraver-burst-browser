@@ -3,17 +3,17 @@ import { isAllPlayerNoDamage } from "../../is-all-player-no-damage";
 import { separatePlayers } from "../../separate-players";
 import { turnCount } from "../../turn-count";
 import { ConfrontationTwoBraverProps } from "../props";
-import { shinyaMonologueWhenShinyaHasAdvantage } from "../stories/shinya-monologue-when-shinya-has-advantage";
+import { shinyaMonologueWhenYuuyaHasAdvantage } from "../stories/shinya-monologue-when-yuuya-has-advantage";
 
 /**
- * 条件を満たした場合、チャプター「シンヤ有利」を開始する
+ * 条件を満たした場合、チャプター「ユウヤ有利」を開始する
  * @param props イベントプロパティ
  * @return チャプターを開始した場合、trueを返す
  */
-export async function startShinyaHasAdvantageIfNeeded(
+export async function startYuuyaHasAdvantageIfNeeded(
   props: Readonly<CustomBattleEventProps & ConfrontationTwoBraverProps>,
 ): Promise<boolean> {
-  if (props.state.chapter.type === "ShinyaHasAdvantage") {
+  if (props.state.chapter.type === "YuuyaHasAdvantage") {
     return false;
   }
 
@@ -33,7 +33,7 @@ export async function startShinyaHasAdvantageIfNeeded(
   }
 
   const { player: shinya, enemy: yuuya } = separatedPlayers;
-  if (shinya.armdozer.hp < yuuya.armdozer.hp) {
+  if (yuuya.armdozer.hp < shinya.armdozer.hp) {
     return false;
   }
 
@@ -41,6 +41,6 @@ export async function startShinyaHasAdvantageIfNeeded(
     return false;
   }
 
-  await shinyaMonologueWhenShinyaHasAdvantage(props);
+  await shinyaMonologueWhenYuuyaHasAdvantage(props);
   return true;
 }
