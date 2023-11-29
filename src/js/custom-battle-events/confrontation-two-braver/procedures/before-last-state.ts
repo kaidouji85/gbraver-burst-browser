@@ -4,6 +4,7 @@ import { ConfrontationTwoBraverState } from "../state";
 import { introduction } from "../stories/introduction";
 import { invisibleEnemyCryIfNeeded } from "./invisible-enemy-cry-if-needed";
 import { isChapterThatShinyaHasAdvantageEnd } from "./is-chapter-that-shinya-has-advantage-end";
+import { isChapterThatYuuyaHasAdvantageEnd } from "./is-chapter-that-yuuya-has-advantage-end";
 import { startShinyaHasAdvantageIfNeeded } from "./start-shinya-has-advantage-if-needed";
 import { startYuuyaHasAdvantageIfNeeded } from "./start-yuuya-has-advantage-if-needed";
 
@@ -42,7 +43,10 @@ export async function beforeLastState(
     };
   }
 
-  if (isChapterThatShinyaHasAdvantageEnd(props)) {
+  if (
+    isChapterThatShinyaHasAdvantageEnd(props) ||
+    isChapterThatYuuyaHasAdvantageEnd(props)
+  ) {
     return {
       ...props.state,
       chapter: {
