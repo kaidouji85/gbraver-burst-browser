@@ -27,12 +27,12 @@ export async function startShinyaHasAdvantageIfNeeded(
     return false;
   }
 
-  const separatedResult = separatePlayers(props);
-  if (!separatedResult) {
+  const separatedPlayers = separatePlayers(props);
+  if (!separatedPlayers) {
     return false;
   }
 
-  const { player: shinya, enemy: yuuya } = separatedResult;
+  const { player: shinya, enemy: yuuya } = separatedPlayers;
   if (shinya.armdozer.hp < yuuya.armdozer.hp) {
     return false;
   }
