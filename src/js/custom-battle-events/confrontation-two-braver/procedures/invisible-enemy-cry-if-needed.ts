@@ -28,7 +28,7 @@ export function invisibleEnemyCryIfNeeded(
     return;
   }
 
-  if (props.state.chapter.type !== "ShinyaHasAdvantage") {
+  if (props.state.chapter.type === "None") {
     return;
   }
 
