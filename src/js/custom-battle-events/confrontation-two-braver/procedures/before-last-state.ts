@@ -51,7 +51,7 @@ export async function beforeLastState(
       chapter: {
         type: "EvenMatch",
       },
-    }
+    };
   }
 
   if (

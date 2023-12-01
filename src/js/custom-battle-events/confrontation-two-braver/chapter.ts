@@ -19,4 +19,8 @@ export type EvenMatch = {
 };
 
 /** 複数フェイズにまたがるチャプターの情報 */
-export type Chapter = NoneChapter | ShinyaHasAdvantage | YuuyaHasAdvantage | EvenMatch;
+export type Chapter =
+  | NoneChapter
+  | ShinyaHasAdvantage
+  | YuuyaHasAdvantage
+  | EvenMatch;
