@@ -4,7 +4,7 @@ import {
   PlayerState,
 } from "gbraver-burst-core";
 
-import { isShinyaAdvantage } from "../../../../../src/js/custom-battle-events/confrontation-two-braver/procedures/is-shinya-advantage";
+import { isYuuyaAdvantage } from "../../../../../src/js/custom-battle-events/confrontation-two-braver/procedures/is-yuuya-advantage";
 
 /**
  * シンヤのプレイヤーステートを生成する
@@ -36,36 +36,36 @@ const createYuuya = (hp: number): PlayerState => ({
   },
 });
 
-test("シンヤのHPが大きい場合、シンヤ有利とみなす", () => {
+test("ユウヤのHPが大きい場合、ユウヤ有利とみなす", () => {
   expect(
-    isShinyaAdvantage({
-      shinya: createShinya(3100),
-      yuuya: createYuuya(900),
+    isYuuyaAdvantage({
+      shinya: createShinya(900),
+      yuuya: createYuuya(3000),
     }),
   ).toBe(true);
 });
 
-test("ユウヤのHPが大きい場合、シンヤ有利ではない", () => {
+test("シンヤのHPが大きい場合、ユウヤ有利ではない", () => {
   expect(
-    isShinyaAdvantage({
-      shinya: createShinya(900),
-      yuuya: createYuuya(3000),
+    isYuuyaAdvantage({
+      shinya: createShinya(3100),
+      yuuya: createYuuya(1000),
     }),
   ).toBe(false);
 });
 
-test("互いがノーダメージなら、シンヤのHPが大きい場合でも、シンヤ有利ではない", () => {
+test("互いにノーダメージの場合、ユウヤ有利ではない", () => {
   expect(
-    isShinyaAdvantage({
+    isYuuyaAdvantage({
       shinya: createShinya(3100),
       yuuya: createYuuya(3000),
     }),
   ).toBe(false);
 });
 
-test("互いのHPが同じなら、シンヤ有利ではない", () => {
+test("互いのHPが同じ場合、ユウヤ有利ではない", () => {
   expect(
-    isShinyaAdvantage({
+    isYuuyaAdvantage({
       shinya: createShinya(900),
       yuuya: createYuuya(900),
     }),

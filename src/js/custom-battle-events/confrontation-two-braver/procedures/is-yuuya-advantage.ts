@@ -1,4 +1,6 @@
-import { PlayerState } from "gbraver-burst-core"
+import { PlayerState } from "gbraver-burst-core";
+
+import { isAllPlayerNoDamage } from "../../is-all-player-no-damage";
 
 /** ゲーム参加プレイヤー */
 type Players = {
@@ -15,5 +17,8 @@ type Players = {
  */
 export function isYuuyaAdvantage(players: Players): boolean {
   const { shinya, yuuya } = players;
-  return  shinya.armdozer.hp < yuuya.armdozer.hp;
+  return (
+    !isAllPlayerNoDamage([shinya, yuuya]) &&
+    shinya.armdozer.hp < yuuya.armdozer.hp
+  );
 }
