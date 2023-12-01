@@ -18,9 +18,15 @@ export type EvenMatch = {
   type: "EvenMatch";
 };
 
+/** 生き延びるためにユウヤがスキルを発動する */
+export type YuuyaActivateSkillToSurvive = {
+  type: "YuuyaActivateSkillToSurvive"
+};
+
 /** 複数フェイズにまたがるチャプターの情報 */
 export type Chapter =
   | NoneChapter
   | ShinyaHasAdvantage
   | YuuyaHasAdvantage
-  | EvenMatch;
+  | EvenMatch
+  | YuuyaActivateSkillToSurvive;
