@@ -3,11 +3,11 @@ import { turnCount } from "../../turn-count";
 import { ConfrontationTwoBraverProps } from "../props";
 
 /**
- * チャプター イーブンマッチ が終了したか
+ * チャプター「イーブンマッチ」が終了したか
  * @param props イベントプロパティ
  * @return trueで終了した
  */
-export function isChapterThatEvenMatchEnd(
+export function isEvenMatchEnd(
   props: Readonly<CustomBattleEventProps & ConfrontationTwoBraverProps>,
 ): boolean {
   const turn = turnCount(props.stateHistory);

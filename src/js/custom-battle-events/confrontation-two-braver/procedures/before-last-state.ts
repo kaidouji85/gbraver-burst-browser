@@ -3,9 +3,9 @@ import { ConfrontationTwoBraverProps } from "../props";
 import { ConfrontationTwoBraverState } from "../state";
 import { introduction } from "../stories/introduction";
 import { invisibleEnemyCryIfNeeded } from "./invisible-enemy-cry-if-needed";
-import { isChapterThatEvenMatchEnd } from "./is-chapter-that-even-match-end";
-import { isChapterThatShinyaHasAdvantageEnd } from "./is-chapter-that-shinya-has-advantage-end";
-import { isChapterThatYuuyaHasAdvantageEnd } from "./is-chapter-that-yuuya-has-advantage-end";
+import { isEvenMatchEnd } from "./is-even-match-end";
+import { isShinyaAdvantageEnd } from "./is-shinya-advantage-end";
+import { isYuuyaAdvantageEnd } from "./is-yuuya-advantage-end";
 import { startEvenMatchIfNeeded } from "./start-even-match-if-needed";
 import { startShinyaHasAdvantageIfNeeded } from "./start-shinya-has-advantage-if-needed";
 import { startYuuyaHasAdvantageIfNeeded } from "./start-yuuya-has-advantage-if-needed";
@@ -55,9 +55,9 @@ export async function beforeLastState(
   }
 
   if (
-    isChapterThatShinyaHasAdvantageEnd(props) ||
-    isChapterThatYuuyaHasAdvantageEnd(props) ||
-    isChapterThatEvenMatchEnd(props)
+    isShinyaAdvantageEnd(props) ||
+    isYuuyaAdvantageEnd(props) ||
+    isEvenMatchEnd(props)
   ) {
     return {
       ...props.state,
