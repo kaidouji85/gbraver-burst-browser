@@ -1,4 +1,4 @@
-import { PlayerState } from "gbraver-burst-core"
+import { PlayerState } from "gbraver-burst-core";
 
 import { isAllPlayerNoDamage } from "../../is-all-player-no-damage";
 
@@ -17,6 +17,8 @@ type Players = {
  */
 export function isEvenMatch(players: Players): boolean {
   const { shinya, yuuya } = players;
-  return isAllPlayerNoDamage([players.shinya, players.yuuya]) ||
-    yuuya.armdozer.hp === shinya.armdozer.hp;
+  return (
+    isAllPlayerNoDamage([players.shinya, players.yuuya]) ||
+    yuuya.armdozer.hp === shinya.armdozer.hp
+  );
 }
