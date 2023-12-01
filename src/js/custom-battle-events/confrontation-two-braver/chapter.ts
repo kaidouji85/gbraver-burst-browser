@@ -13,5 +13,14 @@ export type YuuyaHasAdvantage = {
   type: "YuuyaHasAdvantage";
 };
 
+/** イーブンマッチ */
+export type EvenMatch = {
+  type: "EvenMatch";
+};
+
 /** 複数フェイズにまたがるチャプターの情報 */
-export type Chapter = NoneChapter | ShinyaHasAdvantage | YuuyaHasAdvantage;
+export type Chapter =
+  | NoneChapter
+  | ShinyaHasAdvantage
+  | YuuyaHasAdvantage
+  | EvenMatch;
