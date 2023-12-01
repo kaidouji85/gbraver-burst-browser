@@ -3,13 +3,13 @@ import { turnCount } from "../../turn-count";
 import { ConfrontationTwoBraverProps } from "../props";
 
 /**
- * チャプター ユウヤ有利 が終了したか
+ * チャプター「シンヤ有利」が終了したか
  * @param props イベントプロパティ
  * @return trueで終了した
  */
-export function isChapterThatYuuyaHasAdvantageEnd(
+export function isShinyaAdvantageEnd(
   props: Readonly<CustomBattleEventProps & ConfrontationTwoBraverProps>,
 ): boolean {
   const turn = turnCount(props.stateHistory);
-  return 3 < turn && props.state.chapter.type === "YuuyaHasAdvantage";
+  return 3 < turn && props.state.chapter.type === "ShinyaHasAdvantage";
 }
