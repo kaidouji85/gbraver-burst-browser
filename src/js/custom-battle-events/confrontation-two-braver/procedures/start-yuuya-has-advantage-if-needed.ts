@@ -33,11 +33,10 @@ export async function startYuuyaHasAdvantageIfNeeded(
   }
 
   const { player: shinya, enemy: yuuya } = separatedPlayers;
-  if (yuuya.armdozer.hp <= shinya.armdozer.hp) {
-    return false;
-  }
-
-  if (isAllPlayerNoDamage([shinya, yuuya])) {
+  if (
+    yuuya.armdozer.hp <= shinya.armdozer.hp ||
+    isAllPlayerNoDamage([shinya, yuuya])
+  ) {
     return false;
   }
 

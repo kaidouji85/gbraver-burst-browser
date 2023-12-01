@@ -33,10 +33,6 @@ export async function startEvenMatchIfNeeded(
   }
 
   const { player: shinya, enemy: yuuya } = separatedPlayers;
-  if (shinya.armdozer.hp < yuuya.armdozer.hp) {
-    return false;
-  }
-
   if (
     !isAllPlayerNoDamage([shinya, yuuya]) &&
     shinya.armdozer.hp !== yuuya.armdozer.hp
