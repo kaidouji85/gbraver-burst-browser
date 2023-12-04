@@ -8,9 +8,11 @@ import { ConfrontationTwoBraverProps } from "../props";
  * @return trueで終了する
  */
 export function isYuuyaActivateSkillToSurviveEnd(
-  props: Readonly<CustomBattleEventProps & ConfrontationTwoBraverProps>
+  props: Readonly<CustomBattleEventProps & ConfrontationTwoBraverProps>,
 ): boolean {
   const turn = turnCount(props.stateHistory);
-  return props.state.chapter.type === "YuuyaActivateSkillToSurvive"
-    && props.state.chapter.startTurn < turn;
+  return (
+    props.state.chapter.type === "YuuyaActivateSkillToSurvive" &&
+    props.state.chapter.startTurn < turn
+  );
 }
