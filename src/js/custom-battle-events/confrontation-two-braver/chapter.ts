@@ -25,7 +25,6 @@ export type YuuyaActivateSkillToSurvive = {
   startTurn: number;
 };
 
-
 /** とどめをさすためにユウヤがスキルを発動する */
 export type YuuyaActivateSkillToFinish = {
   type: "YuuyaActivateSkillToFinish";
