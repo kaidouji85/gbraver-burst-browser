@@ -46,7 +46,6 @@ export async function playStateHistory(
         const customStateAnimationProps = {
           ...props,
           currentState: gameState,
-          update: gameStateHistory,
         };
         const anime = all(
           stateAnimation(props, gameState),
