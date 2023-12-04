@@ -6,6 +6,6 @@ import { enemyPilotCry } from "../../pilot-cry";
  * @param props イベントプロパティ
  * @return アニメーション
  */
-export const yuuyaCry1WhenYuuyaActivateSkillToSurvive = (
+export const yuuyaCry2WhenYuuyaActivateSkillToSurvive = (
   props: Readonly<CustomBattleEventProps>,
 ) => enemyPilotCry(props, "Yuuya", "やるな シンヤ");

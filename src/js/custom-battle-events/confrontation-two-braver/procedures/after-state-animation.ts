@@ -39,5 +39,14 @@ export function afterStateAnimation(
     });
   }
 
+  if (
+    props.state.chapter.type === "YuuyaActivateSkillToSurvive" &&
+    props.currentState.effect.name === "BatteryDeclaration"
+  ) {
+    return process(() => {
+      props.view.dom.enemyCryMessageWindow.visible(false);
+    });
+  }
+
   return empty();
 }
