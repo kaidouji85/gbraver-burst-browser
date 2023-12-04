@@ -1,6 +1,4 @@
-import { GameState } from "gbraver-burst-core";
-
-import { CustomBattleEventProps } from "../../../td-scenes/battle/custom-battle-event";
+import { StateUpdateStarted } from "../../../td-scenes/battle/custom-battle-event";
 
 /**
  * ユウヤがスキルを発動したかどうかを判定する
@@ -9,10 +7,9 @@ import { CustomBattleEventProps } from "../../../td-scenes/battle/custom-battle-
  * @return ユウヤがスキルを発動したかどうか
  */
 export function isYuuyaSkillActivated(
-  props: Readonly<CustomBattleEventProps>,
-  update: Readonly<GameState[]>,
+  props: Readonly<StateUpdateStarted>,
 ): boolean {
-  return update.some(
+  return props.update.some(
     (state) =>
       state.effect.name === "PilotSkillEffect" &&
       state.effect.invokerId !== props.playerId,

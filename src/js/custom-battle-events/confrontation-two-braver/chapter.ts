@@ -20,7 +20,9 @@ export type EvenMatch = {
 
 /** 生き延びるためにユウヤがスキルを発動する */
 export type YuuyaActivateSkillToSurvive = {
-  type: "YuuyaActivateSkillToSurvive"
+  type: "YuuyaActivateSkillToSurvive";
+  /** 本チャプターが開始されたターン */
+  startTurn: number;
 };
 
 /** 複数フェイズにまたがるチャプターの情報 */
