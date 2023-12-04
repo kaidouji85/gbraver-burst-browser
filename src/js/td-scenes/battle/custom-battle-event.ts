@@ -29,12 +29,16 @@ export type CustomBattleEventProps = {
   readonly stateHistory: GameState[];
 };
 
+/** ステート更新開始イベントのプロパティ */
+export type StateUpdateStarted = CustomBattleEventProps & {
+  /** コマンド入力から最終ステートまでのステート更新履歴 */
+  update: GameState[];
+};
+
 /** カスタムステートアニメーションのプロパティ */
 export type CustomStateAnimation = CustomBattleEventProps & {
   /** 再生するステート */
   readonly currentState: GameState;
-  /** コマンド入力から最終ステートまでのステート更新履歴 */
-  readonly update: GameState[];
 };
 
 /** 最終ステート系イベントのプロパティ */
@@ -69,6 +73,12 @@ export type CommandCanceled = {
 
 /** カスタムバトルイベント */
 export interface CustomBattleEvent {
+  /**
+   * ステート更新が開始された時に呼ばれるイベント
+   * @param props イベントプロパティ
+   */
+  onStateUpdateStarted(props: StateUpdateStarted): void;
+
   /**
    * カスタムステートアニメーション
    * 最終ステート以外のステートアニメーション再生時に、本メソッドが呼び出さる
