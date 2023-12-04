@@ -29,5 +29,19 @@ export function onStateUpdateStarted(
     };
   }
 
+  if (
+    isYuuyaSkillActivated(props) &&
+    props.state.chapter.type !== "YuuyaActivateSkillToSurvive" &&
+    !isPlayerTurn
+  ) {
+    return {
+      ...props.state,
+      chapter: {
+        type: "YuuyaActivateSkillToFinish",
+        startTurn: turnCount(props.stateHistory),
+      },
+    };
+  }
+
   return props.state;
 }

@@ -25,10 +25,19 @@ export type YuuyaActivateSkillToSurvive = {
   startTurn: number;
 };
 
+
+/** とどめをさすためにユウヤがスキルを発動する */
+export type YuuyaActivateSkillToFinish = {
+  type: "YuuyaActivateSkillToFinish";
+  /** 本チャプターが開始されたターン */
+  startTurn: number;
+};
+
 /** 複数フェイズにまたがるチャプターの情報 */
 export type Chapter =
   | NoneChapter
   | ShinyaHasAdvantage
   | YuuyaHasAdvantage
   | EvenMatch
-  | YuuyaActivateSkillToSurvive;
+  | YuuyaActivateSkillToSurvive
+  | YuuyaActivateSkillToFinish;

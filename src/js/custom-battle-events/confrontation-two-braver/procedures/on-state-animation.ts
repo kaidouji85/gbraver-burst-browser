@@ -3,10 +3,12 @@ import { empty } from "../../../animation/delay";
 import { CustomStateAnimation } from "../../../td-scenes/battle/custom-battle-event";
 import { yuuyaCry1WhenEvenMatch } from "../animation/yuuya-cry1-when-even-match";
 import { yuuyaCry1WhenShinyaHasAdvantage } from "../animation/yuuya-cry1-when-shinya-has-advantage";
+import { yuuyaCry1WhenYuuyaActivateSkillToFinish } from "../animation/yuuya-cry1-when-yuuya-activate-skill-to-finish";
 import { yuuyaCry1WhenYuuyaActivateSkillToSurvive } from "../animation/yuuya-cry1-when-yuuya-activate-skill-to-survive";
 import { yuuyaCry1WhenYuuyaHasAdvantage } from "../animation/yuuya-cry1-when-yuuya-has-advantage";
 import { yuuyaCry2WhenEvenMatch } from "../animation/yuuya-cry2-when-even-match";
 import { yuuyaCry2WhenShinyaHasAdvantage } from "../animation/yuuya-cry2-when-shinya-has-advantage";
+import { yuuyaCry2WhenYuuyaActivateSkillToFinish } from "../animation/yuuya-cry2-when-yuuya-activate-skill-to-finish";
 import { yuuyaCry2WhenYuuyaActivateSkillToSurvive } from "../animation/yuuya-cry2-when-yuuya-activate-skill-to-survive";
 import { yuuyaCry2WhenYuuyaHasAdvantage } from "../animation/yuuya-cry2-when-yuuya-has-advantage";
 import { ConfrontationTwoBraverProps } from "../props";
@@ -76,6 +78,20 @@ export function onStateAnimation(
     props.currentState.effect.name === "BatteryDeclaration"
   ) {
     return yuuyaCry2WhenYuuyaActivateSkillToSurvive(props);
+  }
+
+  if (
+    props.state.chapter.type === "YuuyaActivateSkillToFinish" &&
+    props.currentState.effect.name === "PilotSkillEffect"
+  ) {
+    return yuuyaCry1WhenYuuyaActivateSkillToFinish(props);
+  }
+
+  if (
+    props.state.chapter.type === "YuuyaActivateSkillToFinish" &&
+    props.currentState.effect.name === "BatteryDeclaration"
+  ) {
+    return yuuyaCry2WhenYuuyaActivateSkillToFinish(props);
   }
 
   return empty();
