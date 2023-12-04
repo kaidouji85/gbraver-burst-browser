@@ -5,6 +5,7 @@ import { introduction } from "../stories/introduction";
 import { invisibleEnemyCryIfNeeded } from "./invisible-enemy-cry-if-needed";
 import { isEvenMatchEnd } from "./is-even-match-end";
 import { isShinyaAdvantageEnd } from "./is-shinya-advantage-end";
+import { isYuuyaActivateSkillToFinishEnd } from "./is-yuuya-activate-skill-to-finish-end";
 import { isYuuyaActivateSkillToSurviveEnd } from "./is-yuuya-activate-skill-to-survive-end";
 import { isYuuyaAdvantageEnd } from "./is-yuuya-advantage-end";
 import { startEvenMatchIfNeeded } from "./start-even-match-if-needed";
@@ -59,7 +60,8 @@ export async function beforeLastState(
     isShinyaAdvantageEnd(props) ||
     isYuuyaAdvantageEnd(props) ||
     isEvenMatchEnd(props) ||
-    isYuuyaActivateSkillToSurviveEnd(props)
+    isYuuyaActivateSkillToSurviveEnd(props) ||
+    isYuuyaActivateSkillToFinishEnd(props)
   ) {
     return {
       ...props.state,
