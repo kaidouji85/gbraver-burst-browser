@@ -6,7 +6,7 @@ import { scrollRightMessages } from "../../scroll-messages";
 /**
  * チャプター イーブンマッチ シンヤ独白
  * @param props イベントプロパティ
- * @return アニメーション
+ * @return ストーリーが完了したら発火するPromise
  */
 export async function shinyaMonologueWhenEvenMatch(
   props: Readonly<CustomBattleEventProps>,

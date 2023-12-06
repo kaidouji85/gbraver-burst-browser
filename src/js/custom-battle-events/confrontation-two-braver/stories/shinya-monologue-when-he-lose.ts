@@ -1,20 +1,20 @@
 import { CustomBattleEventProps } from "../../../td-scenes/battle/custom-battle-event";
 import { activeRightMessageWindowWithFace } from "../../active-message-window";
-import { invisibleAllMessageWindows } from "../../invisible-all-message-windows";
 import { scrollRightMessages } from "../../scroll-messages";
 
 /**
- * チャプター ユウヤ有利 シンヤ独白
+ * シンヤ敗北時のシンヤ独白
  * @param props イベントプロパティ
  * @return ストーリーが完了したら発火するPromise
  */
-export async function shinyaMonologueWhenYuuyaHasAdvantage(
-  props: Readonly<CustomBattleEventProps>,
+export async function shinyaMonologueWhenHeLose(
+  props: Readonly<CustomBattleEventProps>
 ): Promise<void> {
+  props.view.dom.leftMessageWindow.darken();
   activeRightMessageWindowWithFace(props, "Shinya");
   await scrollRightMessages(props, [
-    ["シンヤ", "「さすがGブレイバー"],
-    ["一筋縄ではいなかいッスね」"],
+    ["シンヤ", "「俺は今まで ユウヤさんの真似をしてきた"],
+    ["けど それじゃあ絶対にGブレイバーを超えられない"],
+    ["何か 根本的に戦い方を変えないと」"],
   ]);
-  invisibleAllMessageWindows(props);
 }
