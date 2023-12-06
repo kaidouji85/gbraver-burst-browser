@@ -1,6 +1,6 @@
 import { CustomBattleEventProps } from "../../../td-scenes/battle/custom-battle-event";
 import { activeLeftMessageWindowWithFace } from "../../active-message-window";
-import { scrollRightMessages } from "../../scroll-messages";
+import { scrollLeftMessages } from "../../scroll-messages";
 
 /**
  * ユウヤ勝利時のユウヤ台詞
@@ -11,7 +11,7 @@ export async function yuuyaCryWhenYuuyaVictory(
   props: Readonly<CustomBattleEventProps>,
 ): Promise<void> {
   activeLeftMessageWindowWithFace(props, "Yuuya");
-  await scrollRightMessages(props, [
+  await scrollLeftMessages(props, [
     ["ユウヤ", "「Gブレイバーに傷を付けるとは"],
     ["少しはやるな シンブレイバー」"],
   ]);

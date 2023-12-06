@@ -1,4 +1,5 @@
 import { LastState } from "../../../td-scenes/battle/custom-battle-event";
+import { invisibleAllMessageWindows } from "../../invisible-all-message-windows";
 import { separatePlayers } from "../../separate-players";
 import { shinyaMonologueWhenHeLose } from "../stories/shinya-monologue-when-he-lose";
 import { yuuyaCryWhenYuuyaCompleteVictory } from "../stories/yuuya-cry-when-yuuya-complete-victory";
@@ -35,5 +36,6 @@ export async function endGameIfNeeded(
   }
 
   await shinyaMonologueWhenHeLose(props);
+  invisibleAllMessageWindows(props);
   return true;
 }

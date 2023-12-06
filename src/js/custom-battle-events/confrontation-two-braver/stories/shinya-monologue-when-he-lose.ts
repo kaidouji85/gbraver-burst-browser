@@ -14,7 +14,6 @@ export async function shinyaMonologueWhenHeLose(
   activeRightMessageWindowWithFace(props, "Shinya");
   await scrollRightMessages(props, [
     ["シンヤ", "「俺は今まで ユウヤさんの真似をしてきた"],
-    ["けど それじゃあ絶対にGブレイバーを超えられない"],
-    ["何か 根本的に戦い方を変えないと」"],
+    ["けど それじゃあ絶対にGブレイバーを超えられない」"],
   ]);
 }
