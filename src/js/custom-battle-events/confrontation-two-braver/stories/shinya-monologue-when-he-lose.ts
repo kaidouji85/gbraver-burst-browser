@@ -8,7 +8,7 @@ import { scrollRightMessages } from "../../scroll-messages";
  * @return ストーリーが完了したら発火するPromise
  */
 export async function shinyaMonologueWhenHeLose(
-  props: Readonly<CustomBattleEventProps>
+  props: Readonly<CustomBattleEventProps>,
 ): Promise<void> {
   props.view.dom.leftMessageWindow.darken();
   activeRightMessageWindowWithFace(props, "Shinya");
