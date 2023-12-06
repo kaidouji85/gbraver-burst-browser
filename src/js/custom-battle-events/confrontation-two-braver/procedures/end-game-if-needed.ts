@@ -22,12 +22,13 @@ export async function endGameIfNeeded(
   }
 
   const { enemy: yuuya } = separatedPlayers;
-  if (yuuya.armdozer.hp === yuuya.armdozer.maxHp && yuuya.pilot.enableSkill) {
+  const isYuuyaCompleteVictory =
+    yuuya.armdozer.hp === yuuya.armdozer.maxHp && yuuya.pilot.enableSkill;
+  const isYuuyaNarrowVictory =
+    yuuya.armdozer.hp < yuuya.armdozer.maxHp && !yuuya.pilot.enableSkill;
+  if (isYuuyaCompleteVictory) {
     await yuuyaCryWhenYuuyaCompleteVictory(props);
-  } else if (
-    yuuya.armdozer.hp < yuuya.armdozer.maxHp &&
-    !yuuya.pilot.enableSkill
-  ) {
+  } else if (isYuuyaNarrowVictory) {
     await yuuyaCryWhenYuuyaNarrowVictory(props);
   } else {
     await yuuyaCryWhenYuuyaVictory(props);
