@@ -22,7 +22,7 @@ const createDefender = (battery: number) => ({
   },
 });
 
-/** 部分的なバッテリー宣言 */
+/** 防御側系プロパティを取り除いたバッテリー宣言 */
 const partialBatteryDeclaration = {
   name: "BatteryDeclaration",
   attacker: "attacker",
@@ -43,4 +43,34 @@ test("バッテリーが残っているのに0防御したことを正しく判�
       },
     }),
   ).toBe(true);
+});
+
+test("バッテリー0で0防御したならfalseを返す", () => {
+  const defender = createDefender(0);
+  expect(
+    isZeroDefenseButBatteryPositive({
+      activePlayerId: attacker.playerId,
+      players: [attacker, defender],
+      effect: {
+        ...partialBatteryDeclaration,
+        defenderBattery: 0,
+        originalBatteryOfDefender: 0,
+      },
+    }),
+  ).toBe(false);
+});
+
+test("0より大きいバッテリーを出したらfalseを返す", () => {
+  const defender = createDefender(2);
+  expect(
+    isZeroDefenseButBatteryPositive({
+      activePlayerId: attacker.playerId,
+      players: [attacker, defender],
+      effect: {
+        ...partialBatteryDeclaration,
+        defenderBattery: 1,
+        originalBatteryOfDefender: 1,
+      },
+    }),
+  ).toBe(false);
 });
