@@ -1,5 +1,4 @@
 import { LastState } from "../../../td-scenes/battle/custom-battle-event";
-import { isZeroDefenseButBatteryPositive } from "../../is-zero-defense-but-battery-positive";
 import { isZeroDefenseButEnableBurst } from "../../is-zero-defense-but-enable-burst";
 import { zeroDefenseButEnableBurst } from "../stories/zero-defense-but-enable-burst";
 
