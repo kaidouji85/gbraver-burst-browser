@@ -11,7 +11,7 @@ export function isZeroDefenseButEnableBurst(
   const defender = batteryDeclaration.players.find(
     (player) => player.playerId !== batteryDeclaration.activePlayerId,
   );
-  if (!defender) {
+  if (defender === undefined) {
     return false;
   }
 

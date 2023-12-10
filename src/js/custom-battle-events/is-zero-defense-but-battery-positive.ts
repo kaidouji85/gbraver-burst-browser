@@ -11,11 +11,11 @@ export function isZeroDefenseButBatteryPositive(
   const defender = batteryDeclaration.players.find(
     (player) => player.playerId !== batteryDeclaration.activePlayerId,
   );
-  if (!defender) {
+  if (defender === undefined) {
     return false;
   }
 
   const isZeroDefense = batteryDeclaration.effect.defenderBattery === 0;
-  const isDefenderPositiveBattery = 0 < defender.armdozer.battery;
-  return isZeroDefense && isDefenderPositiveBattery;
+  const isBatteryPositive = 0 < defender.armdozer.battery;
+  return isZeroDefense && isBatteryPositive;
 }
