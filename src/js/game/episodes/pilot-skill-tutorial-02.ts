@@ -7,9 +7,12 @@ import { SOUND_IDS } from "../../resource/sound";
 import { playerUuid } from "../../uuid/player";
 import { EpisodeConfig } from "./episode";
 import { EpisodeIDs } from "./episode-ids";
+import { pilotSkillTutorial01 } from "./pilot-skill-tutorial-01";
 
 /** 導入 */
-const introduction = `なぜか大田高校と合同練習することになったガイ。あのシンヤも勝てなかったツバサ先輩に、ガイは勝利することはできるのだろうか……。`;
+const introduction = `〜 Side Episode1. ${pilotSkillTutorial01.title} からの続き 〜
+
+なぜか大田高校と合同練習することになったガイ。あのシンヤも勝てなかったツバサ先輩に、ガイは勝利することはできるのだろうか……。`;
 
 /** パイロットスキルチュートリアル（後半） */
 export const pilotSkillTutorial02: EpisodeConfig = {
