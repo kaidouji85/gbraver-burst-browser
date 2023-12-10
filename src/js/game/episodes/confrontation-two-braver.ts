@@ -14,7 +14,7 @@ const introduction = `デビュー戦から数日後、シンヤのもとに 全
 /** 対決、二人のブレイバー！！ */
 export const confrontationTwoBraver: EpisodeConfig = {
   id: EpisodeIDs.TWO_BRAVER,
-  title: "対決、二人のブレイバー！！",
+  title: "対決、二人のブレイバー！！（負けイベント）",
   introduction,
   imageCutPathId: PathIds.IMAGE_CUT_CONFRONTATION_TWO_BRAVER,
   player: {
