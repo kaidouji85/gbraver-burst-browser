@@ -10,30 +10,23 @@ import { zeroDefenseButPositiveBattery } from "../stories/zero-defense-but-posit
 export async function playZeroDefenseButPositiveBatteryIfNeeded(
   props: Readonly<LastState>,
 ): Promise<boolean> {
-  const hasGameOver = props.update.some(
+  const isGameOver = props.update.some(
     (state) =>
       state.effect.name === "GameEnd" &&
       state.effect.result.type === "GameOver",
   );
-  if (!hasGameOver) {
-    return false;
-  }
-
-  const foundBatteryDeclaration = props.update.find(
+  const batteryDeclaration = props.update.find(
     (state) => state.effect.name === "BatteryDeclaration",
   );
-  if (
-    foundBatteryDeclaration === undefined ||
-    foundBatteryDeclaration.effect.name !== "BatteryDeclaration"
-  ) {
+  if (!isGameOver || batteryDeclaration === undefined) {
     return false;
   }
 
-  const btteryDeclaration = foundBatteryDeclaration.effect;
   if (
+    batteryDeclaration.effect.name === "BatteryDeclaration" &&
     isZeroDefenseButBatteryPositive({
-      ...foundBatteryDeclaration,
-      effect: btteryDeclaration,
+      ...batteryDeclaration,
+      effect: batteryDeclaration.effect,
     })
   ) {
     await zeroDefenseButPositiveBattery(props);
