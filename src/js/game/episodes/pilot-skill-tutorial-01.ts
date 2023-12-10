@@ -5,11 +5,14 @@ import { pilotSkillTutorialNPC } from "../../npc/pilot-skill-tutorial";
 import { PathIds } from "../../resource/path/ids";
 import { SOUND_IDS } from "../../resource/sound";
 import { playerUuid } from "../../uuid/player";
+import { burstTutorial } from "./burst-tutorial";
 import { EpisodeConfig } from "./episode";
 import { EpisodeIDs } from "./episode-ids";
 
 /** 導入 */
-const introduction = `新人戦を終え練習に励む大田高校、その様子を密かに見つめる人物がいるようだが……。`;
+const introduction = `〜 Episode3. ${burstTutorial.title} からの続き 〜
+
+新人戦を終え練習に励む大田高校、その様子を密かに見つめる人物がいるようだが……。`;
 
 /** パイロットスキルチュートリアル（前半） */
 export const pilotSkillTutorial01: EpisodeConfig = {
