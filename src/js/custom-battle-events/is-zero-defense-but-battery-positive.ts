@@ -8,12 +8,12 @@ import { GameState } from "gbraver-burst-core";
 export function isZeroDefenseButBatteryPositive(
   stateHistory: Readonly<GameState[]>,
 ): boolean {
-  const hasGameOver = stateHistory.find(
+  const gameOver = stateHistory.find(
     (state) =>
       state.effect.name === "GameEnd" &&
       state.effect.result.type === "GameOver",
   );
-  if (!hasGameOver) {
+  if (!gameOver || gameOver.effect.name !== "GameEnd" || gameOver.effect.result.type !== "GameOver") {
     return false;
   }
 
@@ -34,7 +34,8 @@ export function isZeroDefenseButBatteryPositive(
     return false;
   }
 
+  const isDefenderBeatedDown = gameOver.effect.result.winner !== defender.playerId;
   const isZeroDefense = batteryDeclaration.effect.defenderBattery === 0;
   const isDefenderPositiveBattery = 0 < defender.armdozer.battery;
-  return isZeroDefense && isDefenderPositiveBattery;
+  return isDefenderBeatedDown && isZeroDefense && isDefenderPositiveBattery;
 }
