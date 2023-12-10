@@ -1,5 +1,6 @@
 import { LastState } from "../../../td-scenes/battle/custom-battle-event";
 import { endGameIfNeeded } from "./end-game-if-needed";
+import { playZeroDefenseButPositiveBatteryIfNeeded } from "./play-zero-defense-but-positive-battery-if-needed";
 
 /**
  * 最終ステート完了後イベント
@@ -9,5 +10,9 @@ import { endGameIfNeeded } from "./end-game-if-needed";
 export async function afterLastState(
   props: Readonly<LastState>,
 ): Promise<void> {
+  if (await playZeroDefenseButPositiveBatteryIfNeeded(props)) {
+    return;
+  }
+
   await endGameIfNeeded(props);
 }
