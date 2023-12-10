@@ -16,7 +16,7 @@ export const confrontationTwoBraver: EpisodeConfig = {
   id: EpisodeIDs.TWO_BRAVER,
   title: "（開発中）対決、二人のブレイバー！！",
   introduction,
-  imageCutPathId: PathIds.IMAGE_CUT_BURST,
+  imageCutPathId: PathIds.IMAGE_CUT_CONFRONTATION_TWO_BRAVER,
   player: {
     playerId: playerUuid(),
     armdozer:
