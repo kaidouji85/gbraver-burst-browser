@@ -1,9 +1,9 @@
-import { batterySystemTutorial } from "./battery-system";
-import { burstTutorial } from "./burst";
+import { batterySystemTutorial } from "./battery-system-tutorial";
+import { burstTutorial } from "./burst-tutorial";
 import { confrontationTwoBraver } from "./confrontation-two-braver";
 import { Episode } from "./episode";
-import { pilotSkillTutorial01 } from "./pilot-skill-01";
-import { pilotSkillTutorial02 } from "./pilot-skill-02";
+import { pilotSkillTutorial01 } from "./pilot-skill-tutorial-01";
+import { pilotSkillTutorial02 } from "./pilot-skill-tutorial-02";
 import { zeroDefenseTutorial } from "./zero-defense";
 
 /** メインエピソード */
