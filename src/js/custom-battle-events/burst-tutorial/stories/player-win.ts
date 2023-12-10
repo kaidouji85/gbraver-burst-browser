@@ -3,7 +3,10 @@ import {
   activeLeftMessageWindowWithFace,
   activeRightMessageWindowWithFace,
 } from "../../active-message-window";
-import {invisibleAllMessageWindows, refreshConversation} from "../../invisible-all-message-windows";
+import {
+  invisibleAllMessageWindows,
+  refreshConversation,
+} from "../../invisible-all-message-windows";
 import { scrollLeftMessages, scrollRightMessages } from "../../scroll-messages";
 
 /**
