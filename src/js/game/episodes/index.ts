@@ -11,6 +11,7 @@ export const MainEpisodes: Episode[] = [
   batterySystemTutorial,
   zeroDefenseTutorial,
   burstTutorial,
+  confrontationTwoBraver,
 ].map((config, index) => ({
   ...config,
   type: "Episode",
@@ -32,11 +33,4 @@ export const SideEpisodes: Episode[] = [
 export const Episodes: Episode[] = [...MainEpisodes, ...SideEpisodes];
 
 /** 開発中のエピソードをあつめたもの */
-export const EpisodesInDevelopment: Episode[] = [
-  ...Episodes,
-  {
-    ...confrontationTwoBraver,
-    type: "Episode",
-    number: MainEpisodes.length + 1,
-  },
-];
+export const EpisodesInDevelopment: Episode[] = Episodes;

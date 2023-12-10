@@ -43,5 +43,11 @@ export const playerWin = async (props: CustomBattleEventProps) => {
   props.view.dom.leftMessageWindow.scrollUp();
   activeRightMessageWindowWithFace(props, "Shinya");
   await scrollRightMessages(props, [["シンヤ", "「ありがとうございました」"]]);
+  await refreshConversation(props, 200);
+  activeRightMessageWindowWithFace(props, "Yuuya");
+  await scrollRightMessages(props, [
+    ["ユウヤ", "「野暮用で関東まで来てみたが 面白い奴を見つけたな"],
+    ["シンブレイバー 貴様の力 試させてもらう」"],
+  ]);
   invisibleAllMessageWindows(props);
 };

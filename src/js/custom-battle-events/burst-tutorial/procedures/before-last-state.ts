@@ -1,8 +1,8 @@
-import type { Battle, GameState } from "gbraver-burst-core";
+import { Battle, GameState } from "gbraver-burst-core";
 
-import type { LastState } from "../../../td-scenes/battle/custom-battle-event";
+import { LastState } from "../../../td-scenes/battle/custom-battle-event";
 import { BurstTutorialProps } from "../props";
-import type { BurstTutorialState } from "../state";
+import { BurstTutorialState } from "../state";
 import { failReflectDamage } from "../stories/fail-reflect-damage";
 import { introduction } from "../stories/introduction";
 import { successReflectDamage } from "../stories/success-reflect-damage";
@@ -16,7 +16,6 @@ async function executeReflectIfNeeded(
   props: Readonly<LastState>,
 ): Promise<void> {
   const foundLastBattle = props.update.find((v) => v.effect.name === "Battle");
-
   if (!foundLastBattle) {
     return;
   }
@@ -24,7 +23,6 @@ async function executeReflectIfNeeded(
   const lastBattle: GameState = foundLastBattle;
   const player = lastBattle.players.find((v) => v.playerId === props.playerId);
   const enemy = lastBattle.players.find((v) => v.playerId !== props.playerId);
-
   if (!player || !enemy || lastBattle.effect.name !== "Battle") {
     return;
   }
@@ -33,7 +31,6 @@ async function executeReflectIfNeeded(
   const isEnemyAttack = battleEffect.attacker !== props.playerId;
   const hasNotEnemyTryReflect =
     enemy.armdozer.effects.filter((v) => v.type === "TryReflect").length <= 0;
-
   if (isEnemyAttack || hasNotEnemyTryReflect) {
     return;
   }
