@@ -74,3 +74,18 @@ test("バーストが使る状態で0より大きい防御をしたら、false�
     }),
   ).toBe(false);
 });
+
+test("バーストが使ない状態で0より大きい防御をしたら、falseを返す", () => {
+  const defender = createDefender(false);
+  expect(
+    isZeroDefenseButEnableBurst({
+      activePlayerId: attacker.playerId,
+      players: [attacker, defender],
+      effect: {
+        ...partialBatteryDeclaration,
+        defenderBattery: 1,
+        originalBatteryOfDefender: 1,
+      },
+    }),
+  ).toBe(false);
+});
