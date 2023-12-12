@@ -8,7 +8,6 @@ import {
   refreshConversation,
 } from "../../invisible-all-message-windows";
 import { scrollLeftMessages, scrollRightMessages } from "../../scroll-messages";
-import {darken} from "../../../game-dom/message-window/procedure/darken";
 
 /**
  * プレイヤー勝利
