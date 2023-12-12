@@ -61,7 +61,7 @@ export async function playerWin(
   activeLeftMessageWindowWithFace(props, "Yuuya");
   await scrollLeftMessages(props, [
     ["ユウヤ", "「俺は京都府立洛内高校 三年生 ユウヤ"],
-    ["早速だがシンヤ この俺様と勝負しろ！！」"],
+    ["早速だが この俺と勝負してもらおう」"],
   ]);
   invisibleAllMessageWindows(props);
 }
