@@ -23,23 +23,34 @@ export async function playerWin(
   await refreshConversation(props);
   activeRightMessageWindowWithFace(props, "Gai");
   await scrollRightMessages(props, [
-    ["ガイ", "「……パイロットを変えるだけで ここまで変わるのか」"],
+    ["ガイ", "「見たかシンヤ"],
+    ["ツバサ先輩に勝ったぞ"],
   ]);
   props.view.dom.rightMessageWindow.darken();
   activeLeftMessageWindowWithFace(props, "Tsubasa");
   await scrollLeftMessages(props, [
-    ["ツバサ", "「シンヤ ガイ君 これがロボとパイロットの相性だ"],
+    ["ツバサ", "「見事だ ガイ君"],
+    ["パイロットスキルの効果はバーストに比べると小さいが"],
+    ["普段ならギリギリ倒しきれない相手にとどめを刺せるなど"],
+    ["意表を突くような使い方が可能だ"],
   ]);
-  await refreshConversation(props);
-  activeRightMessageWindowWithFace(props, "Shinya");
-  await scrollRightMessages(props, [["シンヤ", "「姿勢を正して 礼！！」"]]);
   await refreshConversation(props);
   activeLeftMessageWindowWithFace(props, "Tsubasa");
-  props.view.dom.leftMessageWindow.messages([
-    "ツバサ",
-    "「ありがとうございました」",
+  await scrollLeftMessages(props, [
+    ["ツバサ", "(そしてパイロットスキルを使いこなせば"],
+    ["Gブレイバーへの雪辱も果たせる)"],
   ]);
-  props.view.dom.leftMessageWindow.scrollUp();
-  activeRightMessageWindowWithFace(props, "Gai");
-  await scrollRightMessages(props, [["ガイ", "「ありがとうございました」"]]);
+  await refreshConversation(props);
+  activeLeftMessageWindowWithFace(props, "Raito");
+  await scrollLeftMessages(props, [
+    ["ライト", "「こないなところにおったんか 大田高校のエース君"],
+    ["あんさんに会いたがっとる人を連れてきたで」"],
+  ]);
+  await refreshConversation(props);
+  activeLeftMessageWindowWithFace(props, "Yuuya");
+  await scrollLeftMessages(props, [
+    ["ユウヤ", "「はじめましてだな 大田高校 新入生のシンヤ君"],
+    ["俺は京都府立洛内高校 三年生 ユウヤだ"],
+    ["早速だがシンヤ この俺様と勝負しろ！！」"],
+  ]);
 }
