@@ -3,8 +3,12 @@ import {
   activeLeftMessageWindowWithFace,
   activeRightMessageWindowWithFace,
 } from "../../active-message-window";
-import { refreshConversation } from "../../invisible-all-message-windows";
+import {
+  invisibleAllMessageWindows,
+  refreshConversation,
+} from "../../invisible-all-message-windows";
 import { scrollLeftMessages, scrollRightMessages } from "../../scroll-messages";
+import {darken} from "../../../game-dom/message-window/procedure/darken";
 
 /**
  * プレイヤー勝利
@@ -49,8 +53,15 @@ export async function playerWin(
   await refreshConversation(props);
   activeLeftMessageWindowWithFace(props, "Yuuya");
   await scrollLeftMessages(props, [
-    ["ユウヤ", "「はじめましてだな 大田高校 新入生のシンヤ君"],
-    ["俺は京都府立洛内高校 三年生 ユウヤだ"],
+    ["ユウヤ", "「はじめましてだな 大田高校 新入生のシンヤ君」"],
+  ]);
+  props.view.dom.leftMessageWindow.darken();
+  activeRightMessageWindowWithFace(props, "Shinya");
+  await scrollRightMessages(props, [["シンヤ", "「……！！」"]]);
+  activeLeftMessageWindowWithFace(props, "Yuuya");
+  await scrollLeftMessages(props, [
+    ["ユウヤ", "「俺は京都府立洛内高校 三年生 ユウヤ"],
     ["早速だがシンヤ この俺様と勝負しろ！！」"],
   ]);
+  invisibleAllMessageWindows(props);
 }
