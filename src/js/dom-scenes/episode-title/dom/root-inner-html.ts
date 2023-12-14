@@ -1,4 +1,4 @@
-import { EpisodeNumber, EpisodeType } from "../../../game/episodes/episode";
+import { EpisodeNumber } from "../../../game/episodes/episode";
 import { Resources } from "../../../resource";
 import { PathIds } from "../../../resource/path/ids";
 import { ROOT_CLASS } from "./class-name";
@@ -9,8 +9,6 @@ import rootInnerHTMLTemplate from "./root-inner-html.hbs";
 export type RootInnerHTMLParams = {
   /** リソース管理オブジェクト */
   resources: Resources;
-  /** エピソードタイプ */
-  type: EpisodeType;
   /** エピソード番号 */
   number: EpisodeNumber;
   /** タイトル */
