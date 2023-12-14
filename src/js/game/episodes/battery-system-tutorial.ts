@@ -16,7 +16,7 @@ const introduction = `高校生が巨大ロボットで戦う「機動倶楽部�
 export const batterySystemTutorial: Episode = {
   id: EpisodeIDs.BATTERY_SYSTEM,
   type: "Episode",
-  number: "1.",
+  number: "1",
   title: "バッテリーシステムの基本",
   introduction,
   imageCutPathId: PathIds.IMAGE_CUT_BATTERY_SYSTEM,

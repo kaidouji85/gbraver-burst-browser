@@ -34,5 +34,5 @@ export const episode3 = episodeTitleStory("バーストで一発逆転", "3");
 /** サイドエピソード1 */
 export const sideEpisode1 = episodeTitleStory(
   "パイロット次第では詰み（負けイベント）",
-  "3.1.",
+  "3.1",
 );

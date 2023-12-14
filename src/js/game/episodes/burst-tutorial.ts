@@ -15,7 +15,7 @@ const introduction = `デビュー戦を見事勝利で飾ったシンヤ、そ�
 export const burstTutorial: Episode = {
   id: EpisodeIDs.BURST,
   type: "Episode",
-  number: "3.",
+  number: "3",
   title: "バーストで一発逆転",
   introduction,
   imageCutPathId: PathIds.IMAGE_CUT_BURST,
