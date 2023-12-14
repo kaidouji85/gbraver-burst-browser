@@ -5,7 +5,7 @@ import { batterySystemTutorialNPC } from "../../npc/battery-system-tutorial";
 import { PathIds } from "../../resource/path/ids";
 import { SOUND_IDS } from "../../resource/sound";
 import { playerUuid } from "../../uuid/player";
-import { EpisodeConfig } from "./episode";
+import { Episode } from "./episode";
 import { EpisodeIDs } from "./episode-ids";
 
 /** イントロダクション */
@@ -13,8 +13,10 @@ const introduction = `高校生が巨大ロボットで戦う「機動倶楽部�
 大田高校機動倶楽部の新人パイロットであるシンヤは、ツバサ先輩から操縦レクチャーを受けるのであった。`;
 
 /** バッテリーチュートリアル */
-export const batterySystemTutorial: EpisodeConfig = {
+export const batterySystemTutorial: Episode = {
   id: EpisodeIDs.BATTERY_SYSTEM,
+  type: "Episode",
+  number: "1.",
   title: "バッテリーシステムの基本",
   introduction,
   imageCutPathId: PathIds.IMAGE_CUT_BATTERY_SYSTEM,

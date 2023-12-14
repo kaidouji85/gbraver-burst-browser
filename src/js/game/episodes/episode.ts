@@ -1,10 +1,10 @@
-import type { Player } from "gbraver-burst-core";
+import { Player } from "gbraver-burst-core";
 
-import type { NPC } from "../../npc/npc";
+import { NPC } from "../../npc/npc";
 import { Resources } from "../../resource";
 import { PathId } from "../../resource/path/resource";
-import type { SoundId } from "../../resource/sound";
-import type { CustomBattleEvent } from "../../td-scenes/battle/custom-battle-event";
+import { SoundId } from "../../resource/sound";
+import { CustomBattleEvent } from "../../td-scenes/battle/custom-battle-event";
 
 /** エピソードID */
 export type EpisodeID = string;
@@ -13,20 +13,24 @@ export type EpisodeID = string;
 export type EpisodeType =
   /** エピソード */
   | "Episode"
-  /** サイドエピソード */
+  /** サイドエピソド */
   | "Side Episode";
 
-/** 
+/**
  * エピソード番号
  * サイドエピソードに1.10などの番号をつけたいが、
  * number型では実現できないのでstring型にしている
  */
 export type EpisodeNumber = string;
 
-/** エピソード設定 */
-export type EpisodeConfig = {
+/** エピソード */
+export type Episode = {
   /** エピソードID */
   id: EpisodeID;
+  /** エピソードタイプ */
+  type: EpisodeType;
+  /** エピソード番号 */
+  number: EpisodeNumber;
   /** タイトル */
   title: string;
   /** エピソード導入の文章 */
@@ -45,12 +49,4 @@ export type EpisodeConfig = {
    * @returns カスタムバトルイベント
    */
   event: (resources: Resources) => CustomBattleEvent;
-};
-
-/** エピソード */
-export type Episode = EpisodeConfig & {
-  /** エピソードタイプ */
-  type: EpisodeType;
-  /** エピソード番号 */
-  number: EpisodeNumber;
 };
