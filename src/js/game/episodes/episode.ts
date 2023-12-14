@@ -18,8 +18,10 @@ export type EpisodeType =
 
 /**
  * エピソード番号
- * サイドエピソードに1.10などの番号をつけたいが、
- * number型では実現できないのでstring型にしている
+ * サイドエピソードに1.10などの番号をつけたいが、number型では実現できないのでstring型にしている
+ * 番号の末尾に.(ドット)をつけてばならない
+ *   OK 3.1
+ *   NG 3.1.
  */
 export type EpisodeNumber = string;
 
