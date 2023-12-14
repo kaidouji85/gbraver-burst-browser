@@ -5,15 +5,17 @@ import { burstTutorialNPC } from "../../npc/burst-tutorial";
 import { PathIds } from "../../resource/path/ids";
 import { SOUND_IDS } from "../../resource/sound";
 import { playerUuid } from "../../uuid/player";
-import { EpisodeConfig } from "./episode";
+import { Episode } from "./episode";
 import { EpisodeIDs } from "./episode-ids";
 
 /** 導入 */
 const introduction = `デビュー戦を見事勝利で飾ったシンヤ、そんなシンヤを見て台東高校のライト先輩は何かを企んでいるようだが……。`;
 
 /** バーストチュートリアル */
-export const burstTutorial: EpisodeConfig = {
+export const burstTutorial: Episode = {
   id: EpisodeIDs.BURST,
+  type: "Episode",
+  number: "3.",
   title: "バーストで一発逆転",
   introduction,
   imageCutPathId: PathIds.IMAGE_CUT_BURST,

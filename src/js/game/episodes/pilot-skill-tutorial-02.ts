@@ -5,15 +5,17 @@ import { pilotSkillTutorialNPC } from "../../npc/pilot-skill-tutorial";
 import { PathIds } from "../../resource/path/ids";
 import { SOUND_IDS } from "../../resource/sound";
 import { playerUuid } from "../../uuid/player";
-import { EpisodeConfig } from "./episode";
+import { Episode } from "./episode";
 import { EpisodeIDs } from "./episode-ids";
 
 /** 導入 */
 const introduction = `なぜか大田高校と合同練習することになったガイ。あのシンヤも勝てなかったツバサ先輩に、ガイは勝利することはできるのだろうか……。`;
 
 /** パイロットスキルチュートリアル（後半） */
-export const pilotSkillTutorial02: EpisodeConfig = {
+export const pilotSkillTutorial02: Episode = {
   id: EpisodeIDs.Pilot02,
+  type: "Side Episode",
+  number: "3.2.",
   title: "パイロットスキルで意表を突け",
   introduction,
   imageCutPathId: PathIds.IMAGE_CUT_PILOT_SKILL_02,
