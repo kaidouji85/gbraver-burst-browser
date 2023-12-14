@@ -15,7 +15,7 @@ const introduction = `今日は機動倶楽部の新人戦、シンヤは同学�
 export const zeroDefenseTutorial: Episode = {
   id: EpisodeIDs.ZERO_DEFENSE,
   type: "Episode",
-  number: "2.",
+  number: "2",
   title: "ゼロ防御だと即死する",
   introduction,
   imageCutPathId: PathIds.IMAGE_CUT_ZERO_DEFENSE,
