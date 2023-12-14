@@ -16,8 +16,12 @@ export type EpisodeType =
   /** サイドエピソード */
   | "Side Episode";
 
-/** エピソード番号 */
-export type EpisodeNumber = number;
+/** 
+ * エピソード番号
+ * サイドエピソードに1.10などの番号をつけたいが、
+ * number型では実現できないのでstring型にしている
+ */
+export type EpisodeNumber = string;
 
 /** エピソード設定 */
 export type EpisodeConfig = {
