@@ -9,7 +9,6 @@ export default {
 /**
  * エピソードタイトルストーリー
  * @param title タイトル
- * @param type エピソードタイプ
  * @param number エピソード番号
  * @return ストーリー
  */
