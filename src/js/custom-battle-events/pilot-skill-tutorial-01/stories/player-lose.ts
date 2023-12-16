@@ -31,7 +31,7 @@ export async function playerLose(
   activeLeftMessageWindowWithFace(props, "Tsubasa");
   await scrollLeftMessages(props, [
     ["ツバサ", "「君がすべてのバッテリーを防御に回したとしても"],
-    ["私の攻撃に耐えることはできない\n」"],
+    ["私の攻撃に耐えることはできない」"],
   ]);
   props.view.dom.leftMessageWindow.darken();
   activeRightMessageWindowWithFace(props, "Shinya");
@@ -43,7 +43,7 @@ export async function playerLose(
   await scrollLeftMessages(props, [
     ["ツバサ", "「良い発想だが それも難しいな"],
     ["君が後攻なので 私を一撃で倒せなければ勝機はないが"],
-    ["シンブレイバーの5攻撃で ウィングドーザを即死させることはできないんだ」"],
+    ["シンブレイバーの5攻撃で ウィングドーザを即死させることはできない」"],
   ]);
   props.view.dom.leftMessageWindow.darken();
   activeRightMessageWindowWithFace(props, "Shinya");
