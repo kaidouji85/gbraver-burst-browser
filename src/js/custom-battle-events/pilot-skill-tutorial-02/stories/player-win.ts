@@ -33,9 +33,21 @@ export async function playerWin(
   activeLeftMessageWindowWithFace(props, "Tsubasa");
   await scrollLeftMessages(props, [
     ["ツバサ", "「見事だ ガイ君"],
-    ["パイロットスキルの効果はバーストに比べると小さいが"],
+    ["シンブレイバーの攻撃力をガイ君のスキルで底上げしたから"],
+    ["ウィングドーザを一撃で倒すことができたんだ」"],
+  ]);
+  props.view.dom.leftMessageWindow.darken();
+  activeRightMessageWindowWithFace(props, "Shinya");
+  await scrollRightMessages(props, [
+    ["シンヤ", "「なるほど"],
+    ["これがロボとパイロットの相性ってことッスね」"],
+  ]);
+  props.view.dom.rightMessageWindow.darken();
+  activeLeftMessageWindowWithFace(props, "Tsubasa");
+  await scrollLeftMessages(props, [
+    ["ツバサ", "「パイロットスキルの効果はバーストに比べると小さいが"],
     ["普段ならギリギリ倒しきれない相手にとどめを刺せるなど"],
-    ["意表を突くような使い方が可能だ"],
+    ["相手の意表を突くことができる」"],
   ]);
   await refreshConversation(props);
   activeLeftMessageWindowWithFace(props, "Tsubasa");
