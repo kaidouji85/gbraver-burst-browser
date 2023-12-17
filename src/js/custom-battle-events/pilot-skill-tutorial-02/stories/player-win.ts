@@ -49,11 +49,10 @@ export async function playerWin(
     ["普段ならギリギリ倒しきれない相手にとどめを刺せるなど"],
     ["相手の意表を突くことができる」"],
   ]);
-  await refreshConversation(props);
   activeLeftMessageWindowWithFace(props, "Tsubasa");
   await scrollLeftMessages(props, [
-    ["ツバサ", "(そしてパイロットスキルを使いこなせば"],
-    ["Gブレイバーへの雪辱も果たせる)"],
+    ["(そしてパイロットスキルを使いこなせば"],
+    ["Gブレイバーにも届きうる)"],
   ]);
   await refreshConversation(props);
   activeLeftMessageWindowWithFace(props, "Raito");
