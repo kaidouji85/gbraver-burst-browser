@@ -17,13 +17,6 @@ import { scrollLeftMessages, scrollRightMessages } from "../../scroll-messages";
 export async function playerWin(
   props: Readonly<CustomBattleEventProps>,
 ): Promise<void> {
-  activeRightMessageWindowWithFace(props, "Shinya");
-  await scrollRightMessages(props, [
-    ["シンヤ", "「そこまで"],
-    ["この試合 ガイの勝ちッス」"],
-  ]);
-  props.view.dom.rightMessageWindow.darken();
-  await refreshConversation(props);
   activeRightMessageWindowWithFace(props, "Gai");
   await scrollRightMessages(props, [
     ["ガイ", "「見たかシンヤ"],
@@ -47,12 +40,12 @@ export async function playerWin(
   await scrollLeftMessages(props, [
     ["ツバサ", "「パイロットスキルの効果はバーストに比べると小さいが"],
     ["普段ならギリギリ倒しきれない相手にとどめを刺せるなど"],
-    ["相手の意表を突くことができる」"],
+    ["相手の意表を突くことができるんだ」"],
   ]);
   activeLeftMessageWindowWithFace(props, "Tsubasa");
   await scrollLeftMessages(props, [
     ["(そしてパイロットスキルを使いこなせば"],
-    ["Gブレイバーにも届きうる)"],
+    ["奴にも ……Gブレイバーにも届きうる)"],
   ]);
   await refreshConversation(props);
   activeLeftMessageWindowWithFace(props, "Raito");
@@ -63,15 +56,15 @@ export async function playerWin(
   await refreshConversation(props);
   activeLeftMessageWindowWithFace(props, "Yuuya");
   await scrollLeftMessages(props, [
-    ["ユウヤ", "「はじめましてだな 大田高校 新入生のシンヤ君」"],
+    ["ユウヤ", "「俺は京都府立洛内高校 三年生 ユウヤだ」"],
   ]);
   props.view.dom.leftMessageWindow.darken();
   activeRightMessageWindowWithFace(props, "Shinya");
   await scrollRightMessages(props, [["シンヤ", "「……！！」"]]);
+  props.view.dom.rightMessageWindow.darken();
   activeLeftMessageWindowWithFace(props, "Yuuya");
   await scrollLeftMessages(props, [
-    ["ユウヤ", "「俺は京都府立洛内高校 三年生 ユウヤ"],
-    ["早速だが この俺と勝負してもらおう」"],
+    ["ユウヤ", "「早速だがシンヤ この俺様と勝負してもらおうか」"],
   ]);
   invisibleAllMessageWindows(props);
 }

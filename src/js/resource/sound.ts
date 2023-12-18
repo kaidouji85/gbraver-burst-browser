@@ -87,6 +87,7 @@ export const SOUND_IDS = {
   BATTLE_BGM_02: "BATTLE_BGM_02",
   BATTLE_BGM_03: "BATTLE_BGM_03",
   YUUYA_BATTLE: "YUUYA_BATTLE",
+  GAI_BATTLE: "GAI_BATTLE",
   NPC_ENDING: "NPC_ENDING",
 };
 
@@ -190,6 +191,12 @@ export const SOUND_CONFIGS: SoundConfig[] = [
     id: SOUND_IDS.YUUYA_BATTLE,
     type: "BGM",
     path: (resourceRoot) => `${resourceRoot.get()}/sounds/yuuya-battle.mp3`,
+    volumeScale: 0.2,
+  },
+  {
+    id: SOUND_IDS.GAI_BATTLE,
+    type: "BGM",
+    path: (resourceRoot) => `${resourceRoot.get()}/sounds/gai-battle.mp3`,
     volumeScale: 0.2,
   },
   {

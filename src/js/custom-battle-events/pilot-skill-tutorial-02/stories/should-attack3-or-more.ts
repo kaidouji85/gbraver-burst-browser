@@ -12,6 +12,6 @@ export async function shouldAttack3OrMore(
   props: Readonly<CustomBattleEventProps>,
 ): Promise<void> {
   activeLeftMessageWindowWithFace(props, "Tsubasa");
-  await scrollLeftMessages(props, [["ツバサ", "「ガイ君 次は3以上で攻撃だ」"]]);
+  await scrollLeftMessages(props, [["ツバサ", "「よし 次は3以上で攻撃だ」"]]);
   invisibleAllMessageWindows(props);
 }
