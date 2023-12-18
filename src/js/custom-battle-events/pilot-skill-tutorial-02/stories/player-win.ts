@@ -56,15 +56,15 @@ export async function playerWin(
   await refreshConversation(props);
   activeLeftMessageWindowWithFace(props, "Yuuya");
   await scrollLeftMessages(props, [
-    ["ユウヤ", "「はじめましてだな 大田高校 新入生のシンヤ君」"],
+    ["ユウヤ", "「俺は京都府立洛内高校 三年生 ユウヤだ」"],
   ]);
   props.view.dom.leftMessageWindow.darken();
   activeRightMessageWindowWithFace(props, "Shinya");
   await scrollRightMessages(props, [["シンヤ", "「……！！」"]]);
+  props.view.dom.rightMessageWindow.darken();
   activeLeftMessageWindowWithFace(props, "Yuuya");
   await scrollLeftMessages(props, [
-    ["ユウヤ", "「俺は京都府立洛内高校 三年生 ユウヤ"],
-    ["シンヤ 早速だがこの俺と勝負してもらおう」"],
+    ["ユウヤ", "「早速だがシンヤ この俺様と勝負してもらおうか」"],
   ]);
   invisibleAllMessageWindows(props);
 }
