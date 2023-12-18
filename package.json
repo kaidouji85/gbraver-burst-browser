@@ -61,7 +61,7 @@
     "postcss-preset-env": "^9.3.0",
     "prettier": "3.1.1",
     "rimraf": "^5.0.5",
-    "sharp": "^0.32.6",
+    "sharp": "^0.33.1",
     "storybook": "^7.6.4",
     "style-loader": "^3.3.3",
     "stylelint": "^16.0.2",
