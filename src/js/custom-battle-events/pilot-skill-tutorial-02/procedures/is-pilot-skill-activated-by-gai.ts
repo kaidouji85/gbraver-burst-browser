@@ -3,7 +3,7 @@ import { CustomStateAnimation } from "../../../td-scenes/battle/custom-battle-ev
 /**
  * ガイのパイロットスキル発動か否かを判定する
  * @param props イベントプロパティ
- * @return trueでツバサ先輩がスキル発動
+ * @return trueでガイがスキル発動
  */
 export function isPilotSkillActivatedByGai(
   props: Readonly<CustomStateAnimation>,
