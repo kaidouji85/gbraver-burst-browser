@@ -1,7 +1,7 @@
 /** マッチング ダイアログ */
 @media (orientation: landscape) {
   .matching {
-    --dialog-width: calc(min(var(--dialog-height) * 16 / 9, 50vw));
+    --dialog-width: calc(min(var(--dialog-height) * 16 / 9, 50dvw));
     --dialog-height: calc(var(--responsive-font-size) * 10);
     --closer-width: 48px;
     --closer-height: 48px;

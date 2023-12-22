@@ -12,7 +12,7 @@
   .message-window--enemy-cry {
     /** 本カスタムプロパティはJavaScriptから変更される */
     --brightness: brightness(1);
-    --margin-x: max(3vw, var(--safe-area-left), var(--safe-area-right));
+    --margin-x: max(3dvw, var(--safe-area-left), var(--safe-area-right));
     --window-height: calc(var(--responsive-font-size) * 7);
     --cry-window-height: auto;
 
@@ -26,7 +26,7 @@
     border: var(--dialog-border);
     border-radius: var(--dialog-border-radius);
     padding: calc(var(--responsive-font-size) * 1);
-    width: calc(49vw - var(--margin-x));
+    width: calc(49dvw - var(--margin-x));
     filter: var(--brightness);
   }
 

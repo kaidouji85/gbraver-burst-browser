@@ -26,7 +26,7 @@
 
 .stage-title__armdozer-icon {
   object-fit: cover;
-  width: 20vw;
+  width: 20dvw;
   margin-top: var(--responsive-font-size);
   transform: scale(-1, 1);
 }

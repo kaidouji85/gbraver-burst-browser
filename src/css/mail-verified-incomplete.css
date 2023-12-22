@@ -3,7 +3,7 @@
  */
 @media (orientation: landscape) {
   .mail-verified-incomplete {
-    --padding: 5vh;
+    --padding: 5dvh;
     --control-button-width: calc(var(--responsive-font-size) * 10);
     --control-button-height: calc(var(--responsive-font-size) * 3);
 

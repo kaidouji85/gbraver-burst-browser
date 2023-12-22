@@ -23,16 +23,16 @@
 
 .npc-ending__end {
   object-fit: cover;
-  width: 40vw;
+  width: 40dvw;
   position: absolute;
-  left: max(var(--safe-area-left), 5vh);
-  bottom: max(var(--safe-area-bottom), 5vh);
+  left: max(var(--safe-area-left), 5dvh);
+  bottom: max(var(--safe-area-bottom), 5dvh);
 }
 
 .npc-ending__logo {
   object-fit: cover;
-  width: 35vw;
+  width: 35dvw;
   position: absolute;
-  right: max(var(--safe-area-right), 5vh);
-  bottom: max(var(--safe-area-bottom), 5vh);
+  right: max(var(--safe-area-right), 5dvh);
+  bottom: max(var(--safe-area-bottom), 5dvh);
 }

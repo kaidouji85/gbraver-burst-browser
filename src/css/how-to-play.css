@@ -4,7 +4,7 @@
 @media (orientation: landscape) {
   .how-to-play {
     --how-to-play-dialog-width: calc(
-      min(var(--how-to-play-dialog-height) * 16 / 9, 90vw)
+      min(var(--how-to-play-dialog-height) * 16 / 9, 90dvw)
     );
     --how-to-play-dialog-height: 80dvh;
     --how-to-play-dialog-top: 50dvh;

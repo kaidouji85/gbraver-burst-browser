@@ -6,7 +6,7 @@
 
     position: absolute;
     bottom: max(var(--safe-area-bottom), 20dvh);
-    left: 50vw;
+    left: 50dvw;
   }
 }
 
