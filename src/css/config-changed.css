@@ -25,8 +25,8 @@
 .config-changed__dialog {
   --dialog-padding: var(--responsive-font-size);
 
-  top: calc(var(--vh, 1vh) * 50);
-  left: 50vw;
+  top: 50dvh;
+  left: 50dvw;
   transform: translate(-50%, -50%);
   color: var(--font-color);
   font-size: var(--responsive-font-size);

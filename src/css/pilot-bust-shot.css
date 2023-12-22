@@ -1,56 +1,56 @@
 /** プレイヤー選択画面 パイロットバストショット */
 
 .pilot-bust-shot__shinya {
-  --width: calc(var(--vh) * 85);
+  --width: 85dvh;
   --height: var(--width);
 
   position: absolute;
-  left: calc(100vw - var(--width) * 0.9 - var(--safe-area-right));
-  top: calc(100 * var(--vh) - var(--height) * 0.9);
+  left: calc(100dvw - var(--width) * 0.9 - var(--safe-area-right));
+  top: calc(100dvh - var(--height) * 0.9);
   width: var(--width);
   height: var(--height);
 }
 
 .pilot-bust-shot__gai {
-  --width: calc(var(--vh) * 85);
+  --width: 85dvh;
   --height: var(--width);
 
   position: absolute;
-  left: calc(100vw - var(--width) * 0.9 - var(--safe-area-right));
-  top: calc(100 * var(--vh) - var(--height) * 0.9);
+  left: calc(100dvw - var(--width) * 0.9 - var(--safe-area-right));
+  top: calc(100dvh - var(--height) * 0.9);
   width: var(--width);
   height: var(--height);
 }
 
 .pilot-bust-shot__raito {
-  --width: calc(var(--vh) * 85);
+  --width: 85dvh;
   --height: var(--width);
 
   position: absolute;
-  left: calc(100vw - var(--width) * 0.9 - var(--safe-area-right));
-  top: calc(100 * var(--vh) - var(--height) * 0.9);
+  left: calc(100dvw - var(--width) * 0.9 - var(--safe-area-right));
+  top: calc(100dvh - var(--height) * 0.9);
   width: var(--width);
   height: var(--height);
 }
 
 .pilot-bust-shot__tsubasa {
-  --width: calc(var(--vh) * 95);
+  --width: 95dvh;
   --height: var(--width);
 
   position: absolute;
-  left: calc(100vw - var(--width) * 0.9 - var(--safe-area-right));
-  top: calc(100 * var(--vh) - var(--height) * 0.9);
+  left: calc(100dvw - var(--width) * 0.9 - var(--safe-area-right));
+  top: calc(100dvh - var(--height) * 0.9);
   width: var(--width);
   height: var(--height);
 }
 
 .pilot-bust-shot__yuuya {
-  --width: calc(var(--vh) * 100);
+  --width: 100dvh;
   --height: var(--width);
 
   position: absolute;
-  left: calc(100vw - var(--width) * 0.95 - var(--safe-area-right));
-  top: calc(100 * var(--vh) - var(--height) * 0.82);
+  left: calc(100dvw - var(--width) * 0.95 - var(--safe-area-right));
+  top: calc(100dvh - var(--height) * 0.82);
   width: var(--width);
   height: var(--height);
 }
