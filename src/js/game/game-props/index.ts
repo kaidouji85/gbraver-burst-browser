@@ -4,7 +4,6 @@ import { Observable } from "rxjs";
 import { BGMManager } from "../../bgm/bgm-manager";
 import { DOMFader } from "../../components/dom-fader/dom-fader";
 import { CssHUDUIScale } from "../../css/hud-ui-scale";
-import { CssVH } from "../../css/vh";
 import { GameLoop } from "../../game-loop/game-loop";
 import { Renderer } from "../../render";
 import { Resources } from "../../resource";
@@ -54,8 +53,6 @@ export interface GameProps {
   pushWindow: Observable<PushWindow>;
   /** ゲームループ */
   gameLoop: Observable<GameLoop>;
-  /** cssカスタムプロパティ --vh */
-  vh: CssVH;
   /** cssカスタムプロパティ --hud-ui-scale */
   hudUIScale: CssHUDUIScale;
   /** DOMフェーダ */

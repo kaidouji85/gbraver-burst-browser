@@ -3,7 +3,6 @@ import { BrowserSDK } from "@gbraver-burst-network/browser-sdk";
 import { createBGMManager } from "../../bgm/bgm-manager";
 import { DOMFader } from "../../components/dom-fader/dom-fader";
 import { CssHUDUIScale } from "../../css/hud-ui-scale";
-import { CssVH } from "../../css/vh";
 import { gameLoopStream } from "../../game-loop/game-loop";
 import { Renderer } from "../../render";
 import { emptyResources } from "../../resource";
@@ -79,7 +78,6 @@ export function generateGameProps(param: GamePropsGeneratorParam): GameProps {
     resize,
     pushWindow,
     gameLoop,
-    vh: new CssVH(resize),
     hudUIScale: new CssHUDUIScale(renderer.getRendererDOM(), resize),
     api: param.api,
     config: param.config,

@@ -15,7 +15,7 @@
 }
 
 .armdozer-icon__check {
-  --width: 6vw;
+  --width: 6dvw;
 
   width: var(--width);
   position: absolute;
