@@ -30,7 +30,9 @@ export const RESIZE_DELAY = 50;
 export function resizeStream(): Observable<Resize> {
   return new Observable<Resize>((subscriber) => {
     window.addEventListener("resize", () => {
+      console.log("resize fire", getViewPortWidth(), getViewPortHeight());  //TODO 原因調査が終わったら削除する
       setTimeout(() => {
+        console.log(getViewPortWidth(), getViewPortHeight());               //TODO 原因調査が終わったら削除する
         subscriber.next({
           type: "resize",
           width: getViewPortWidth(),
