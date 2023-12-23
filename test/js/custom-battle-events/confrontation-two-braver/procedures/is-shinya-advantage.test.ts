@@ -4,14 +4,14 @@ import {
   PlayerState,
 } from "gbraver-burst-core";
 
-import { isShinyaAdvantage } from "../../../../../src/js/custom-battle-events/confrontation-two-braver/procedures/is-shinya-advantage";
+import { isPlayerAdvantage } from "../../../../../src/js/custom-battle-events/is-player-advantage";
 
 /**
- * シンヤのプレイヤーステートを生成する
+ * プレイヤーのプレイヤーステートを生成する
  * @param hp HP、最大値である3100を超えてはならない
  * @return 生成結果
  */
-const createShinya = (hp: number): PlayerState => ({
+const createPlayer = (hp: number): PlayerState => ({
   ...EMPTY_PLAYER_STATE,
   playerId: "shinya",
   armdozer: {
@@ -22,11 +22,11 @@ const createShinya = (hp: number): PlayerState => ({
 });
 
 /**
- * ユウヤのプレイヤーステートを生成する
+ * 敵のプレイヤーステートを生成する
  * @param hp HP、最大値である3000を超えてはならない
  * @return 生成結果
  */
-const createYuuya = (hp: number): PlayerState => ({
+const createEnemy = (hp: number): PlayerState => ({
   ...EMPTY_PLAYER_STATE,
   playerId: "yuuya",
   armdozer: {
@@ -36,38 +36,38 @@ const createYuuya = (hp: number): PlayerState => ({
   },
 });
 
-test("シンヤのHPが大きい場合、シンヤ有利とみなす", () => {
+test("プレイヤーのHPが大きい場合、プレイヤー有利とみなす", () => {
   expect(
-    isShinyaAdvantage({
-      shinya: createShinya(3100),
-      yuuya: createYuuya(900),
+    isPlayerAdvantage({
+      player: createPlayer(3100),
+      enemy: createEnemy(900),
     }),
   ).toBe(true);
 });
 
-test("ユウヤのHPが大きい場合、シンヤ有利ではない", () => {
+test("敵のHPが大きい場合、 プレイヤー有利ではない", () => {
   expect(
-    isShinyaAdvantage({
-      shinya: createShinya(900),
-      yuuya: createYuuya(3000),
+    isPlayerAdvantage({
+      player: createPlayer(900),
+      enemy: createEnemy(3000),
     }),
   ).toBe(false);
 });
 
-test("互いがノーダメージなら、シンヤのHPが大きい場合でも、シンヤ有利ではない", () => {
+test("互いがノーダメージなら、プレイヤーのHPが大きい場合でも、プレイヤー有利ではない", () => {
   expect(
-    isShinyaAdvantage({
-      shinya: createShinya(3100),
-      yuuya: createYuuya(3000),
+    isPlayerAdvantage({
+      player: createPlayer(3100),
+      enemy: createEnemy(3000),
     }),
   ).toBe(false);
 });
 
-test("互いのHPが同じなら、シンヤ有利ではない", () => {
+test("互いのHPが同じなら、プレイヤー有利ではない", () => {
   expect(
-    isShinyaAdvantage({
-      shinya: createShinya(900),
-      yuuya: createYuuya(900),
+    isPlayerAdvantage({
+      player: createPlayer(900),
+      enemy: createEnemy(900),
     }),
   ).toBe(false);
 });

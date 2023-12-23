@@ -11,14 +11,14 @@ type Players = {
 };
 
 /**
- * 敵有利かを判定する
+ * プレイヤー有利かを判定する
  * @param players ゲーム参加プレイヤー
- * @return 敵有利の場合、trueを返す
+ * @return プレイヤー有利の場合、trueを返す
  */
-export function isEnemyAdvantage(players: Players): boolean {
+export function isPlayerAdvantage(players: Players): boolean {
   const { player, enemy } = players;
   return (
     !isAllPlayerNoDamage([player, enemy]) &&
-    player.armdozer.hp < enemy.armdozer.hp
+    enemy.armdozer.hp < player.armdozer.hp
   );
 }
