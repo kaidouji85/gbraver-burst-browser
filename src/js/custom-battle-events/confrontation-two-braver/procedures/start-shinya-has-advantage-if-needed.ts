@@ -1,9 +1,9 @@
 import { CustomBattleEventProps } from "../../../td-scenes/battle/custom-battle-event";
+import { isPlayerAdvantage } from "../../is-player-advantage";
 import { separatePlayers } from "../../separate-players";
 import { turnCount } from "../../turn-count";
 import { ConfrontationTwoBraverProps } from "../props";
 import { shinyaMonologueWhenShinyaHasAdvantage } from "../stories/shinya-monologue-when-shinya-has-advantage";
-import { isShinyaAdvantage } from "./is-shinya-advantage";
 
 /**
  * 条件を満たした場合、チャプター「シンヤ有利」を開始する
@@ -18,12 +18,12 @@ export async function startShinyaHasAdvantageIfNeeded(
     return false;
   }
 
-  const { player: shinya, enemy: yuuya } = separatedPlayers;
+  const { player, enemy } = separatedPlayers;
   const turn = turnCount(props.stateHistory);
   if (
     props.state.chapter.type !== "ShinyaHasAdvantage" &&
     turn === 3 &&
-    isShinyaAdvantage({ shinya, yuuya })
+    isPlayerAdvantage({ player, enemy })
   ) {
     await shinyaMonologueWhenShinyaHasAdvantage(props);
     return true;
