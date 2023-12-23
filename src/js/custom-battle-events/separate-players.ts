@@ -15,7 +15,7 @@ type SeparatedPlayers = {
  * @param props カスタムバトルイベントプロパティ
  * @return 分割されたプレイヤー、分割できない場合null
  */
-export function separatePlayers(
+export function separatePlayersFromLastState(
   props: Readonly<CustomBattleEventProps>,
 ): SeparatedPlayers | null {
   const lastState = props.stateHistory.at(-1);

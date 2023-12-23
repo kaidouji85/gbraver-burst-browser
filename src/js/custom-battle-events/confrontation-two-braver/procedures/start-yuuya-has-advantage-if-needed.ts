@@ -1,6 +1,6 @@
 import { CustomBattleEventProps } from "../../../td-scenes/battle/custom-battle-event";
 import { isEnemyAdvantage } from "../../is-enemy-advantage";
-import { separatePlayers } from "../../separate-players";
+import { separatePlayersFromLastState } from "../../separate-players";
 import { turnCount } from "../../turn-count";
 import { ConfrontationTwoBraverProps } from "../props";
 import { shinyaMonologueWhenYuuyaHasAdvantage } from "../stories/shinya-monologue-when-yuuya-has-advantage";
@@ -13,7 +13,7 @@ import { shinyaMonologueWhenYuuyaHasAdvantage } from "../stories/shinya-monologu
 export async function startYuuyaHasAdvantageIfNeeded(
   props: Readonly<CustomBattleEventProps & ConfrontationTwoBraverProps>,
 ): Promise<boolean> {
-  const separatedPlayers = separatePlayers(props);
+  const separatedPlayers = separatePlayersFromLastState(props);
   if (!separatedPlayers) {
     return false;
   }

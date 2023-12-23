@@ -1,6 +1,6 @@
 import { CustomBattleEventProps } from "../../../td-scenes/battle/custom-battle-event";
 import { isPlayerAdvantage } from "../../is-player-advantage";
-import { separatePlayers } from "../../separate-players";
+import { separatePlayersFromLastState } from "../../separate-players";
 import { turnCount } from "../../turn-count";
 import { ConfrontationTwoBraverProps } from "../props";
 import { shinyaMonologueWhenShinyaHasAdvantage } from "../stories/shinya-monologue-when-shinya-has-advantage";
@@ -13,7 +13,7 @@ import { shinyaMonologueWhenShinyaHasAdvantage } from "../stories/shinya-monolog
 export async function startShinyaHasAdvantageIfNeeded(
   props: Readonly<CustomBattleEventProps & ConfrontationTwoBraverProps>,
 ): Promise<boolean> {
-  const separatedPlayers = separatePlayers(props);
+  const separatedPlayers = separatePlayersFromLastState(props);
   if (!separatedPlayers) {
     return false;
   }

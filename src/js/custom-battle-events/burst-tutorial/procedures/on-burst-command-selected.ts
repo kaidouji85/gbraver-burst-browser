@@ -3,7 +3,7 @@ import {
   CommandCanceled,
 } from "../../../td-scenes/battle/custom-battle-event";
 import { focusOutBurstButton, isBurstButtonFocused } from "../../focus";
-import {separatePlayers} from "../../separate-players";
+import {separatePlayersFromLastState} from "../../separate-players";
 import { BurstTutorialProps } from "../props";
 import { BurstTutorialState } from "../state";
 import { burstIsTrumpCard } from "../stories/burst-is-trump-card";
@@ -34,7 +34,7 @@ export async function onBurstCommandSelected(
     };
   }
 
-  const player = separatePlayers(props)?.player;
+  const player = separatePlayersFromLastState(props)?.player;
   if (
     player &&
     player.armdozer.battery === player.armdozer.maxBattery
