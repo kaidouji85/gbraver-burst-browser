@@ -3,7 +3,7 @@ import { separatePlayers } from "../../separate-players";
 import { turnCount } from "../../turn-count";
 import { ConfrontationTwoBraverProps } from "../props";
 import { shinyaMonologueWhenYuuyaHasAdvantage } from "../stories/shinya-monologue-when-yuuya-has-advantage";
-import { isYuuyaAdvantage } from "./is-yuuya-advantage";
+import { isEnemyAdvantage } from "../../is-enemy-advantage";
 
 /**
  * 条件を満たした場合、チャプター「ユウヤ有利」を開始する
@@ -18,12 +18,12 @@ export async function startYuuyaHasAdvantageIfNeeded(
     return false;
   }
 
-  const { player: shinya, enemy: yuuya } = separatedPlayers;
+  const { player, enemy } = separatedPlayers;
   const turn = turnCount(props.stateHistory);
   if (
     props.state.chapter.type !== "YuuyaHasAdvantage" &&
     turn === 3 &&
-    isYuuyaAdvantage({ shinya, yuuya })
+    isEnemyAdvantage({ player, enemy })
   ) {
     await shinyaMonologueWhenYuuyaHasAdvantage(props);
     return true;
