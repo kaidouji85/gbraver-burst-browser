@@ -1,6 +1,13 @@
 import { Animate } from "../../../animation/animate";
 import { empty } from "../../../animation/delay";
 import { CustomStateAnimation } from "../../../td-scenes/battle/custom-battle-event";
+import { isEnemyAdvantage } from "../../is-enemy-advantage";
+import { isEvenMatch } from "../../is-even-match";
+import { isPlayerAdvantage } from "../../is-player-advantage";
+import { separatePlayersFromCurrentState } from "../../separate-players";
+import { shinyaPilotSkillWhenEvenMatch } from "../animation/shinya-pilot-skill-when-even-match";
+import { shinyaPilotSkillWhenShinyaHasAdvantage } from "../animation/shinya-pilot-skill-when-shinya-has-advantage";
+import { shinyaPilotSkillWhenYuuyaHasAdvantage } from "../animation/shinya-pilot-skill-when-yuuya-has-advantage";
 import { yuuyaCry1WhenEvenMatch } from "../animation/yuuya-cry1-when-even-match";
 import { yuuyaCry1WhenShinyaHasAdvantage } from "../animation/yuuya-cry1-when-shinya-has-advantage";
 import { yuuyaCry1WhenYuuyaActivateSkillToFinish } from "../animation/yuuya-cry1-when-yuuya-activate-skill-to-finish";
@@ -92,6 +99,34 @@ export function onStateAnimation(
     props.currentState.effect.name === "BatteryDeclaration"
   ) {
     return yuuyaCry2WhenYuuyaActivateSkillToFinish(props);
+  }
+
+  const separatedPlayers = separatePlayersFromCurrentState(props);
+  if (
+    props.currentState.effect.name === "PilotSkillEffect" &&
+    props.currentState.effect.invokerId === props.playerId &&
+    separatedPlayers &&
+    isPlayerAdvantage(separatedPlayers)
+  ) {
+    return shinyaPilotSkillWhenShinyaHasAdvantage(props);
+  }
+
+  if (
+    props.currentState.effect.name === "PilotSkillEffect" &&
+    props.currentState.effect.invokerId === props.playerId &&
+    separatedPlayers &&
+    isEnemyAdvantage(separatedPlayers)
+  ) {
+    return shinyaPilotSkillWhenYuuyaHasAdvantage(props);
+  }
+
+  if (
+    props.currentState.effect.name === "PilotSkillEffect" &&
+    props.currentState.effect.invokerId === props.playerId &&
+    separatedPlayers &&
+    isEvenMatch(separatedPlayers)
+  ) {
+    return shinyaPilotSkillWhenEvenMatch(props);
   }
 
   return empty();

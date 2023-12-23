@@ -57,5 +57,14 @@ export function afterStateAnimation(
     });
   }
 
+  if (
+    props.currentState.effect.name === "PilotSkillEffect" &&
+    props.currentState.effect.invokerId === props.playerId
+  ) {
+    return process(() => {
+      props.view.dom.playerCryMessageWindow.visible(false);
+    });
+  }
+
   return empty();
 }
