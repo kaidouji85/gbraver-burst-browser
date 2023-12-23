@@ -28,10 +28,12 @@ import { ConfrontationTwoBraverProps } from "../props";
 export function onStateAnimation(
   props: Readonly<CustomStateAnimation & ConfrontationTwoBraverProps>,
 ): Animate {
+  const isEnemyBurstActivated =
+    props.currentState.effect.name === "BurstEffect" &&
+    props.currentState.effect.burstPlayer !== props.playerId;
   if (
     props.state.chapter.type === "ShinyaHasAdvantage" &&
-    props.currentState.effect.name === "BurstEffect" &&
-    props.currentState.effect.burstPlayer !== props.playerId
+    isEnemyBurstActivated
   ) {
     return yuuyaCry1WhenShinyaHasAdvantage(props);
   }
@@ -45,8 +47,7 @@ export function onStateAnimation(
 
   if (
     props.state.chapter.type === "YuuyaHasAdvantage" &&
-    props.currentState.effect.name === "BurstEffect" &&
-    props.currentState.effect.burstPlayer !== props.playerId
+    isEnemyBurstActivated
   ) {
     return yuuyaCry1WhenYuuyaHasAdvantage(props);
   }
@@ -58,11 +59,7 @@ export function onStateAnimation(
     return yuuyaCry2WhenYuuyaHasAdvantage(props);
   }
 
-  if (
-    props.state.chapter.type === "EvenMatch" &&
-    props.currentState.effect.name === "BurstEffect" &&
-    props.currentState.effect.burstPlayer !== props.playerId
-  ) {
+  if (props.state.chapter.type === "EvenMatch" && isEnemyBurstActivated) {
     return yuuyaCry1WhenEvenMatch(props);
   }
 
@@ -101,10 +98,12 @@ export function onStateAnimation(
     return yuuyaCry2WhenYuuyaActivateSkillToFinish(props);
   }
 
+  const isPlayerSkillActivated =
+    props.currentState.effect.name === "PilotSkillEffect" &&
+    props.currentState.effect.invokerId === props.playerId;
   const separatedPlayers = separatePlayersFromCurrentState(props);
   if (
-    props.currentState.effect.name === "PilotSkillEffect" &&
-    props.currentState.effect.invokerId === props.playerId &&
+    isPlayerSkillActivated &&
     separatedPlayers &&
     isPlayerAdvantage(separatedPlayers)
   ) {
@@ -112,8 +111,7 @@ export function onStateAnimation(
   }
 
   if (
-    props.currentState.effect.name === "PilotSkillEffect" &&
-    props.currentState.effect.invokerId === props.playerId &&
+    isPlayerSkillActivated &&
     separatedPlayers &&
     isEnemyAdvantage(separatedPlayers)
   ) {
@@ -121,8 +119,7 @@ export function onStateAnimation(
   }
 
   if (
-    props.currentState.effect.name === "PilotSkillEffect" &&
-    props.currentState.effect.invokerId === props.playerId &&
+    isPlayerSkillActivated &&
     separatedPlayers &&
     isEvenMatch(separatedPlayers)
   ) {
