@@ -4,10 +4,10 @@ import {
   PlayerState,
 } from "gbraver-burst-core";
 
-import { isEvenMatch } from "../../../../../src/js/custom-battle-events/confrontation-two-braver/procedures/is-even-match";
+import { isEvenMatch } from "../../../src/js/custom-battle-events/is-even-match";
 
 /**
- * シンヤのプレイヤーステートを生成する
+ * プレイヤーのプレイヤーステートを生成する
  * @param hp HP、最大値である3100を超えてはならない
  * @return 生成結果
  */
@@ -22,7 +22,7 @@ const createShinya = (hp: number): PlayerState => ({
 });
 
 /**
- * ユウヤのプレイヤーステートを生成する
+ * 敵のプレイヤーステートを生成する
  * @param hp HP、最大値である3000を超えてはならない
  * @return 生成結果
  */
@@ -39,8 +39,8 @@ const createYuuya = (hp: number): PlayerState => ({
 test("互いのHPが同じ場合、イーブンマッチであると見なす", () => {
   expect(
     isEvenMatch({
-      shinya: createShinya(900),
-      yuuya: createYuuya(900),
+      player: createShinya(900),
+      enemy: createYuuya(900),
     }),
   ).toBe(true);
 });
@@ -48,26 +48,26 @@ test("互いのHPが同じ場合、イーブンマッチであると見なす", 
 test("互いにノーダメージの場合、イーブンマッチであると見なす", () => {
   expect(
     isEvenMatch({
-      shinya: createShinya(3100),
-      yuuya: createYuuya(3000),
+      player: createShinya(3100),
+      enemy: createYuuya(3000),
     }),
   ).toBe(true);
 });
 
-test("ユウヤのHPが大きい場合、イーブンマッチでない", () => {
+test("敵のHPが大きい場合、イーブンマッチでない", () => {
   expect(
     isEvenMatch({
-      shinya: createShinya(900),
-      yuuya: createYuuya(3000),
+      player: createShinya(900),
+      enemy: createYuuya(3000),
     }),
   ).toBe(false);
 });
 
-test("シンヤのHPが大きい場合、イーブンマッチでない", () => {
+test("プレイヤーのHPが大きい場合、イーブンマッチでない", () => {
   expect(
     isEvenMatch({
-      shinya: createShinya(3100),
-      yuuya: createYuuya(1000),
+      player: createShinya(3100),
+      enemy: createYuuya(1000),
     }),
   ).toBe(false);
 });
