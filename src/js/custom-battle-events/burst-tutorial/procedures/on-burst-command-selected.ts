@@ -1,11 +1,11 @@
-import type {
+import {
   BurstCommandSelected,
   CommandCanceled,
 } from "../../../td-scenes/battle/custom-battle-event";
 import { focusOutBurstButton, isBurstButtonFocused } from "../../focus";
-import { extractLastPlayer } from "../../last-player-extractor";
+import { separatePlayersFromLastState } from "../../separate-players";
 import { BurstTutorialProps } from "../props";
-import type { BurstTutorialState } from "../state";
+import { BurstTutorialState } from "../state";
 import { burstIsTrumpCard } from "../stories/burst-is-trump-card";
 
 /** イベント終了情報 */
@@ -34,11 +34,8 @@ export async function onBurstCommandSelected(
     };
   }
 
-  const lastPlayer = extractLastPlayer(props, props.stateHistory);
-  if (
-    lastPlayer &&
-    lastPlayer.armdozer.battery === lastPlayer.armdozer.maxBattery
-  ) {
+  const player = separatePlayersFromLastState(props)?.player;
+  if (player && player.armdozer.battery === player.armdozer.maxBattery) {
     await burstIsTrumpCard(props);
     return {
       state: props.state,
