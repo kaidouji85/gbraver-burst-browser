@@ -1,6 +1,6 @@
 import { CustomBattleEventProps } from "../../../td-scenes/battle/custom-battle-event";
 import { isEvenMatch } from "../../is-even-match";
-import { separatePlayers } from "../../separate-players";
+import { separatePlayersFromLastState } from "../../separate-players";
 import { turnCount } from "../../turn-count";
 import { ConfrontationTwoBraverProps } from "../props";
 import { shinyaMonologueWhenEvenMatch } from "../stories/shinya-monologue-when-even-match";
@@ -13,7 +13,7 @@ import { shinyaMonologueWhenEvenMatch } from "../stories/shinya-monologue-when-e
 export async function startEvenMatchIfNeeded(
   props: Readonly<CustomBattleEventProps & ConfrontationTwoBraverProps>,
 ): Promise<boolean> {
-  const separatedPlayers = separatePlayers(props);
+  const separatedPlayers = separatePlayersFromLastState(props);
   if (!separatedPlayers) {
     return false;
   }
