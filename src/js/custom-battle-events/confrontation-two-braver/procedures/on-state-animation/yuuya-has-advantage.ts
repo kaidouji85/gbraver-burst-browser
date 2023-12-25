@@ -4,9 +4,7 @@ import { yuuyaCry1WhenYuuyaHasAdvantage } from "../../animation/yuuya-cry1-when-
 import { yuuyaCry2WhenYuuyaHasAdvantage } from "../../animation/yuuya-cry2-when-yuuya-has-advantage";
 import { ConfrontationTwoBraverProps } from "../../props";
 
-/**
- * ユウヤ有利 カスタムステートアニメーション
- */
+/** ユウヤ有利 カスタムステートアニメーション */
 export const yuuyaHasAdvantage: ConditionalAnimation<
   CustomStateAnimation & ConfrontationTwoBraverProps
 >[] = [

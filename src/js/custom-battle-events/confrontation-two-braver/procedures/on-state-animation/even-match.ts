@@ -4,9 +4,7 @@ import { yuuyaCry1WhenEvenMatch } from "../../animation/yuuya-cry1-when-even-mat
 import { yuuyaCry2WhenEvenMatch } from "../../animation/yuuya-cry2-when-even-match";
 import { ConfrontationTwoBraverProps } from "../../props";
 
-/**
- * イーブンマッチ カスタムステートアニメーション
- */
+/** イーブンマッチ カスタムステートアニメーション */
 export const evanMatch: ConditionalAnimation<
   CustomStateAnimation & ConfrontationTwoBraverProps
 >[] = [

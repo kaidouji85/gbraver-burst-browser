@@ -4,9 +4,7 @@ import { yuuyaCry1WhenShinyaHasAdvantage } from "../../animation/yuuya-cry1-when
 import { yuuyaCry2WhenShinyaHasAdvantage } from "../../animation/yuuya-cry2-when-shinya-has-advantage";
 import { ConfrontationTwoBraverProps } from "../../props";
 
-/**
- * シンヤ有利 カスタムステートアニメーション
- */
+/** シンヤ有利 カスタムステートアニメーション */
 export const shinyaHasAdvantage: ConditionalAnimation<
   CustomStateAnimation & ConfrontationTwoBraverProps
 >[] = [
