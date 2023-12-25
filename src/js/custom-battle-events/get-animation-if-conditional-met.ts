@@ -1,5 +1,5 @@
-import { Animate } from "../../animation/animate";
-import { CustomStateAnimation } from "../../td-scenes/battle/custom-battle-event";
+import { Animate } from "../animation/animate";
+import { CustomStateAnimation } from "../td-scenes/battle/custom-battle-event";
 
 /** アニメーションを再生する */
 export type ShouldPlayAnimation = {
