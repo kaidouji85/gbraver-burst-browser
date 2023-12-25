@@ -2,6 +2,7 @@ import { CustomStateAnimation } from "../../../../td-scenes/battle/custom-battle
 import { ConditionalAnimation } from "../../../get-animation-if-conditional-met";
 import { isEnemyAdvantage } from "../../../is-enemy-advantage";
 import { isEvenMatch } from "../../../is-even-match";
+import { isPlayerPilotSkillActivated } from "../../../is-pilot-skill-activated";
 import { isPlayerAdvantage } from "../../../is-player-advantage";
 import { separatePlayersFromCurrentState } from "../../../separate-players";
 import { shinyaPilotSkillWhenEvenMatch } from "../../animation/shinya-pilot-skill-when-even-match";
@@ -14,33 +15,24 @@ export const shinyaPilotSkill: ConditionalAnimation<
   CustomStateAnimation & ConfrontationTwoBraverProps
 >[] = [
   (props) => {
-    const isPlayerSkillActivated =
-      props.currentState.effect.name === "PilotSkillEffect" &&
-      props.currentState.effect.invokerId === props.playerId;
     const separatedPlayers = separatePlayersFromCurrentState(props);
-    return isPlayerSkillActivated &&
+    return isPlayerPilotSkillActivated(props) &&
       separatedPlayers &&
       isPlayerAdvantage(separatedPlayers)
       ? shinyaPilotSkillWhenShinyaHasAdvantage(props)
       : null;
   },
   (props) => {
-    const isPlayerSkillActivated =
-      props.currentState.effect.name === "PilotSkillEffect" &&
-      props.currentState.effect.invokerId === props.playerId;
     const separatedPlayers = separatePlayersFromCurrentState(props);
-    return isPlayerSkillActivated &&
+    return isPlayerPilotSkillActivated(props) &&
       separatedPlayers &&
       isEnemyAdvantage(separatedPlayers)
       ? shinyaPilotSkillWhenYuuyaHasAdvantage(props)
       : null;
   },
   (props) => {
-    const isPlayerSkillActivated =
-      props.currentState.effect.name === "PilotSkillEffect" &&
-      props.currentState.effect.invokerId === props.playerId;
     const separatedPlayers = separatePlayersFromCurrentState(props);
-    return isPlayerSkillActivated &&
+    return isPlayerPilotSkillActivated(props) &&
       separatedPlayers &&
       isEvenMatch(separatedPlayers)
       ? shinyaPilotSkillWhenEvenMatch(props)
