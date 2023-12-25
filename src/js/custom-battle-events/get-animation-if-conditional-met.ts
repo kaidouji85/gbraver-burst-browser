@@ -12,6 +12,7 @@ export type ConditionalAnimation<X extends CustomStateAnimation> = (
 
 /**
  * 再生条件を満たしたアニメーションを1つだけ再生する
+ * 再生条件を満たすアニメーションが複数ある場合は、最初に見つかったアニメーションを再生する
  * @param props イベントプロパティ
  * @param animations 再生条件とアニメーションのリスト
  * @return 再生するアニメーション、再生条件を満たすアニメーションがない場合はnull
