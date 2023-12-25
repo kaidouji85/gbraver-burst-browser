@@ -5,7 +5,7 @@ import { yuuyaCry2WhenEvenMatch } from "../../animation/yuuya-cry2-when-even-mat
 import { ConfrontationTwoBraverProps } from "../../props";
 
 /** イーブンマッチ カスタムステートアニメーション */
-export const evanMatch: ConditionalAnimation<
+export const evenMatch: ConditionalAnimation<
   CustomStateAnimation & ConfrontationTwoBraverProps
 >[] = [
   (props) => {
