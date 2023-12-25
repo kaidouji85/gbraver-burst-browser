@@ -10,13 +10,13 @@ export const yuuyaActivateSkillToFinish: ConditionalAnimation<
 >[] = [
   (props) => {
     return props.state.chapter.type === "YuuyaActivateSkillToFinish" &&
-    props.currentState.effect.name === "PilotSkillEffect"
+      props.currentState.effect.name === "PilotSkillEffect"
       ? yuuyaCry1WhenYuuyaActivateSkillToFinish(props)
       : null;
   },
   (props) => {
     return props.state.chapter.type === "YuuyaActivateSkillToFinish" &&
-    props.currentState.effect.name === "BatteryDeclaration"
+      props.currentState.effect.name === "BatteryDeclaration"
       ? yuuyaCry2WhenYuuyaActivateSkillToFinish(props)
       : null;
   },
