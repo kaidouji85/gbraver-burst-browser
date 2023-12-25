@@ -1,5 +1,6 @@
 import { CustomStateAnimation } from "../../../../td-scenes/battle/custom-battle-event";
 import { ConditionalAnimation } from "../../../get-animation-if-conditional-met";
+import { isEnemyBurstActivated } from "../../../is-burst-activated";
 import { yuuyaCry1WhenEvenMatch } from "../../animation/yuuya-cry1-when-even-match";
 import { yuuyaCry2WhenEvenMatch } from "../../animation/yuuya-cry2-when-even-match";
 import { ConfrontationTwoBraverProps } from "../../props";
@@ -9,10 +10,8 @@ export const evenMatch: ConditionalAnimation<
   CustomStateAnimation & ConfrontationTwoBraverProps
 >[] = [
   (props) => {
-    const isEnemyBurstActivated =
-      props.currentState.effect.name === "BurstEffect" &&
-      props.currentState.effect.burstPlayer !== props.playerId;
-    return props.state.chapter.type === "EvenMatch" && isEnemyBurstActivated
+    return props.state.chapter.type === "EvenMatch" &&
+      isEnemyBurstActivated(props)
       ? yuuyaCry1WhenEvenMatch(props)
       : null;
   },
