@@ -8,4 +8,4 @@ import { playerPilotCry } from "../../pilot-cry";
  */
 export const shinyaPilotSkillWhenShinyaHasAdvantage = (
   props: Readonly<CustomBattleEventProps>,
-) => playerPilotCry(props, "Shinya", "このまま一気に押し切るッス");
+) => playerPilotCry(props, "Shinya", "このままリードを保つッス");
