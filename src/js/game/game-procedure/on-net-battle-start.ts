@@ -1,4 +1,4 @@
-import { LoginDialog } from "../../dom-dialogs/login/login-dialog";
+import { LoginDialog } from "../../dom-dialogs/login";
 import { NetBattleSelectorDialog } from "../../dom-dialogs/net-battle-selector";
 import { NetworkErrorDialog } from "../../dom-dialogs/network-error/network-error-dialog";
 import { WaitingDialog } from "../../dom-dialogs/waiting/waiting-dialog";
