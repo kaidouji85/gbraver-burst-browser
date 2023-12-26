@@ -5,7 +5,7 @@ import { CustomStateAnimation } from "../../../td-scenes/battle/custom-battle-ev
 import { isPlayerBurstActivated } from "../../is-burst-activated";
 import { isPlayerPilotSkillActivated } from "../../is-pilot-skill-activated";
 import { ConfrontationTwoBraverProps } from "../props";
-import { turnCount } from "../../turn-count";
+import { battleCount } from "../../battle-count";
 
 /**
  * ステートアニメ終了後に呼ばれる、カスタムステートアニメーション
@@ -61,7 +61,7 @@ export function afterStateAnimation(
   }
 
   if (
-    turnCount(props.stateHistory) === 1 &&
+    battleCount(props.stateHistory) === 1 &&
     props.currentState.effect.name === "BatteryDeclaration"
   ) {
     return process(() => {
