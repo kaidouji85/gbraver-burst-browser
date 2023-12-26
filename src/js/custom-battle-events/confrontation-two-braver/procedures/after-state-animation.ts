@@ -5,6 +5,7 @@ import { CustomStateAnimation } from "../../../td-scenes/battle/custom-battle-ev
 import { isPlayerBurstActivated } from "../../is-burst-activated";
 import { isPlayerPilotSkillActivated } from "../../is-pilot-skill-activated";
 import { ConfrontationTwoBraverProps } from "../props";
+import { turnCount } from "../../turn-count";
 
 /**
  * ステートアニメ終了後に呼ばれる、カスタムステートアニメーション
@@ -52,6 +53,15 @@ export function afterStateAnimation(
 
   if (
     props.state.chapter.type === "YuuyaActivateSkillToFinish" &&
+    props.currentState.effect.name === "BatteryDeclaration"
+  ) {
+    return process(() => {
+      props.view.dom.enemyCryMessageWindow.visible(false);
+    });
+  }
+
+  if (
+    turnCount(props.stateHistory) === 1 &&
     props.currentState.effect.name === "BatteryDeclaration"
   ) {
     return process(() => {

@@ -13,6 +13,7 @@ import { shinyaPilotSkill } from "./shinya-pilot-skill";
 import { yuuyaActivateSkillToFinish } from "./yuuya-activate-skill-to-finish";
 import { yuuyaActivateSkillToSurvive } from "./yuuya-activate-skill-to-survive";
 import { yuuyaHasAdvantage } from "./yuuya-has-advantage";
+import {firstBattle} from "./first-battle";
 
 /**
  * カスタムステートアニメーション
@@ -32,6 +33,7 @@ export function onStateAnimation(
     ...yuuyaActivateSkillToFinish,
     ...shinyaPilotSkill,
     ...shinyaBurst,
+    ...firstBattle,
   ];
   return getAnimationIfConditionMet(props, conditionalAnimations) ?? empty();
 }
