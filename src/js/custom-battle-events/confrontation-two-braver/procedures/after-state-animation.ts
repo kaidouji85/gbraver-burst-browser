@@ -2,10 +2,10 @@ import { Animate } from "../../../animation/animate";
 import { empty } from "../../../animation/delay";
 import { process } from "../../../animation/process";
 import { CustomStateAnimation } from "../../../td-scenes/battle/custom-battle-event";
+import { battleCount } from "../../battle-count";
 import { isPlayerBurstActivated } from "../../is-burst-activated";
 import { isPlayerPilotSkillActivated } from "../../is-pilot-skill-activated";
 import { ConfrontationTwoBraverProps } from "../props";
-import { battleCount } from "../../battle-count";
 
 /**
  * ステートアニメ終了後に呼ばれる、カスタムステートアニメーション

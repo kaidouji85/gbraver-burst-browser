@@ -7,13 +7,13 @@ import {
 } from "../../../get-animation-if-conditional-met";
 import { ConfrontationTwoBraverProps } from "../../props";
 import { evenMatch } from "./even-match";
+import { firstBattle } from "./first-battle";
 import { shinyaBurst } from "./shinya-burst";
 import { shinyaHasAdvantage } from "./shinya-has-advantage";
 import { shinyaPilotSkill } from "./shinya-pilot-skill";
 import { yuuyaActivateSkillToFinish } from "./yuuya-activate-skill-to-finish";
 import { yuuyaActivateSkillToSurvive } from "./yuuya-activate-skill-to-survive";
 import { yuuyaHasAdvantage } from "./yuuya-has-advantage";
-import {firstBattle} from "./first-battle";
 
 /**
  * カスタムステートアニメーション

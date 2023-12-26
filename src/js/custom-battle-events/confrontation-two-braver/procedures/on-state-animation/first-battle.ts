@@ -1,8 +1,8 @@
-import { ConditionalAnimation } from "../../../get-animation-if-conditional-met";
 import { CustomStateAnimation } from "../../../../td-scenes/battle/custom-battle-event";
-import { ConfrontationTwoBraverProps } from "../../props";
-import { yuuyaMonologueWhenFirstBattle } from "../../animation/yuuya-monologue-when-first-battle";
 import { battleCount } from "../../../battle-count";
+import { ConditionalAnimation } from "../../../get-animation-if-conditional-met";
+import { yuuyaMonologueWhenFirstBattle } from "../../animation/yuuya-monologue-when-first-battle";
+import { ConfrontationTwoBraverProps } from "../../props";
 
 /** 最初の戦闘 */
 export const firstBattle: ConditionalAnimation<
