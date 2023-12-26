@@ -5,7 +5,11 @@ import { Exclusive } from "../../../exclusive/exclusive";
 import { Resources } from "../../../resource";
 import { SOUND_IDS } from "../../../resource/sound";
 import { ROOT_CLASS_NAME } from "../dom/class-name";
-import { extractCloseButton, extractCloser, extractLoginButton } from "../dom/elements";
+import {
+  extractCloseButton,
+  extractCloser,
+  extractLoginButton,
+} from "../dom/extract-element";
 import { rootInnerHTML } from "../dom/root-inner-html";
 import { LoginDialogProps } from "../props";
 
@@ -17,16 +21,16 @@ import { LoginDialogProps } from "../props";
  */
 export function createProps(
   resources: Resources,
-  caption: string
+  caption: string,
 ): LoginDialogProps {
   const root = document.createElement("div");
   root.className = ROOT_CLASS_NAME;
   root.innerHTML = rootInnerHTML(resources, caption);
-  
+
   const closer = extractCloser(root);
   const loginButton = extractLoginButton(root);
   const closeButton = extractCloseButton(root);
-  
+
   const closeDialog = new Subject<void>();
   const login = new Subject<void>();
   const changeValue =
@@ -47,5 +51,5 @@ export function createProps(
     changeValue,
     pushButton,
     exclusive,
-  }
+  };
 }

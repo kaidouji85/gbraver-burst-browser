@@ -1,4 +1,4 @@
-import { LoginDialog } from "../src/js/dom-dialogs/login/login-dialog";
+import { LoginDialog } from "../src/js/dom-dialogs/login";
 import type { DOMStubStory } from "./stub/dom-stub";
 import { domStub } from "./stub/dom-stub";
 export default {

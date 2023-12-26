@@ -1,7 +1,7 @@
 import { Unsubscribable } from "rxjs";
 
 import { domPushStream } from "../../../dom/push-dom";
-import { extractBackGround } from "../dom/elements";
+import { extractBackGround } from "../dom/extract-element";
 import { LoginDialogProps } from "../props";
 import { onCloseButtonPush } from "./on-close-button-push";
 import { onCloserPush } from "./on-closer-push";
@@ -13,9 +13,7 @@ import { onPushOutsideOfDialog } from "./on-push-outside-of-dialog";
  * @param props ログインダイアログのプロパティ
  * @return アンサブスクライバ
  */
-export function bindEventListeners(
-  props: LoginDialogProps,
-): Unsubscribable[] {
+export function bindEventListeners(props: LoginDialogProps): Unsubscribable[] {
   const backGround = extractBackGround(props.root);
   return [
     domPushStream(props.loginButton).subscribe((action) => {

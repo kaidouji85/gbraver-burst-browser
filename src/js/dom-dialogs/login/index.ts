@@ -1,4 +1,3 @@
-
 import { Observable, Unsubscribable } from "rxjs";
 
 import { Resources } from "../../resource";
@@ -13,7 +12,7 @@ export class LoginDialog implements DOMDialog {
   #props: LoginDialogProps;
   /** アンサブスクライバ */
   #unsubscribers: Unsubscribable[];
-  
+
   /**
    * コンストラクタ
    * @param resources リソース管理オブジェクト
@@ -21,7 +20,7 @@ export class LoginDialog implements DOMDialog {
    */
   constructor(resources: Resources, caption: string) {
     this.#props = createProps(resources, caption);
-    this.#unsubscribers = bindEventListeners(this.#props)
+    this.#unsubscribers = bindEventListeners(this.#props);
   }
 
   /**

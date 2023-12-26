@@ -1,4 +1,4 @@
-import { LoginDialog } from "../../dom-dialogs/login/login-dialog";
+import { LoginDialog } from "../../dom-dialogs/login";
 import type { DomDialogActionConnector } from "../dom-dialog-binder/dom-dialog-action-connector";
 
 /** コネクタのデータ型 */
