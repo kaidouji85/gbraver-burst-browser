@@ -1,11 +1,19 @@
 import { Animate } from "../../../../animation/animate";
 import { empty } from "../../../../animation/delay";
-import { process } from "../../../../animation/process";
 import { CustomStateAnimation } from "../../../../td-scenes/battle/custom-battle-event";
-import { battleCount } from "../../../battle-count";
-import { isPlayerBurstActivated } from "../../../is-burst-activated";
-import { isPlayerPilotSkillActivated } from "../../../is-pilot-skill-activated";
+import {
+  ConditionalAnimation,
+  getAnimationIfConditionMet,
+} from "../../../get-animation-if-conditional-met";
 import { ConfrontationTwoBraverProps } from "../../props";
+import { evenMatch } from "./even-match";
+import { firstBattle } from "./first-battle";
+import { shinyaHasAdvantage } from "./shinya-has-advantage";
+import { yuuyaActivateSkillToFinish } from "./yuuya-activate-skill-to-finish";
+import { yuuyaActivateSkillToSurvive } from "./yuuya-activate-skill-to-survive";
+import { yuuyaHasAdvantage } from "./yuuya-has-advantage";
+import { shinyaPilotSkill } from "./sinya-pilot-skill";
+import { shinyaBurst } from "./sinya-burst";
 
 /**
  * ステートアニメ終了後に呼ばれる、カスタムステートアニメーション
@@ -15,71 +23,17 @@ import { ConfrontationTwoBraverProps } from "../../props";
 export function afterStateAnimation(
   props: Readonly<CustomStateAnimation & ConfrontationTwoBraverProps>,
 ): Animate {
-  if (
-    props.state.chapter.type === "ShinyaHasAdvantage" &&
-    props.currentState.effect.name === "BatteryDeclaration"
-  ) {
-    return process(() => {
-      props.view.dom.enemyCryMessageWindow.visible(false);
-    });
-  }
-
-  if (
-    props.state.chapter.type === "YuuyaHasAdvantage" &&
-    props.currentState.effect.name === "BatteryDeclaration"
-  ) {
-    return process(() => {
-      props.view.dom.enemyCryMessageWindow.visible(false);
-    });
-  }
-
-  if (
-    props.state.chapter.type === "EvenMatch" &&
-    props.currentState.effect.name === "BatteryDeclaration"
-  ) {
-    return process(() => {
-      props.view.dom.enemyCryMessageWindow.visible(false);
-    });
-  }
-
-  if (
-    props.state.chapter.type === "YuuyaActivateSkillToSurvive" &&
-    props.currentState.effect.name === "BatteryDeclaration"
-  ) {
-    return process(() => {
-      props.view.dom.enemyCryMessageWindow.visible(false);
-    });
-  }
-
-  if (
-    props.state.chapter.type === "YuuyaActivateSkillToFinish" &&
-    props.currentState.effect.name === "BatteryDeclaration"
-  ) {
-    return process(() => {
-      props.view.dom.enemyCryMessageWindow.visible(false);
-    });
-  }
-
-  if (
-    battleCount(props.stateHistory) === 1 &&
-    props.currentState.effect.name === "BatteryDeclaration"
-  ) {
-    return process(() => {
-      props.view.dom.enemyCryMessageWindow.visible(false);
-    });
-  }
-
-  if (isPlayerPilotSkillActivated(props)) {
-    return process(() => {
-      props.view.dom.playerCryMessageWindow.visible(false);
-    });
-  }
-
-  if (isPlayerBurstActivated(props)) {
-    return process(() => {
-      props.view.dom.playerCryMessageWindow.visible(false);
-    });
-  }
-
-  return empty();
+  const conditionalAnimations: ConditionalAnimation<
+    CustomStateAnimation & ConfrontationTwoBraverProps
+  >[] = [
+    ...shinyaHasAdvantage,
+    ...yuuyaHasAdvantage,
+    ...evenMatch,
+    ...yuuyaActivateSkillToSurvive,
+    ...yuuyaActivateSkillToFinish,
+    ...firstBattle,
+    ...shinyaPilotSkill,
+    ...shinyaBurst,
+  ];
+  return getAnimationIfConditionMet(props, conditionalAnimations) ?? empty();
 }

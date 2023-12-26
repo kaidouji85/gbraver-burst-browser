@@ -5,7 +5,7 @@ import { isPlayerPilotSkillActivated } from "../../../is-pilot-skill-activated";
 import { ConfrontationTwoBraverProps } from "../../props";
 
 /** シンヤ パイロットスキル発動 カスタムステートアニメ終了 */
-export const sinyaPilotSkill: ConditionalAnimation<
+export const shinyaPilotSkill: ConditionalAnimation<
   CustomStateAnimation & ConfrontationTwoBraverProps
 >[] = [
   (props) => {

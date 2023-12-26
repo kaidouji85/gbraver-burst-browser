@@ -4,8 +4,8 @@ import { battleCount } from "../../../battle-count";
 import { ConditionalAnimation } from "../../../get-animation-if-conditional-met";
 import { ConfrontationTwoBraverProps } from "../../props";
 
-/** 戦闘 カスタムステートアニメ終了 */
-export const battle: ConditionalAnimation<
+/** 最初の戦闘 カスタムステートアニメ終了 */
+export const firstBattle: ConditionalAnimation<
   CustomStateAnimation & ConfrontationTwoBraverProps
 >[] = [
   (props) => {

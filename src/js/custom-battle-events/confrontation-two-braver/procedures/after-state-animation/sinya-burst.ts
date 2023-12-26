@@ -5,7 +5,7 @@ import { isPlayerBurstActivated } from "../../../is-burst-activated";
 import { ConfrontationTwoBraverProps } from "../../props";
 
 /** シンヤ バースト発動 カスタムステートアニメ終了 */
-export const playerActivateSkill: ConditionalAnimation<
+export const shinyaBurst: ConditionalAnimation<
   CustomStateAnimation & ConfrontationTwoBraverProps
 >[] = [
   (props) => {
