@@ -2,6 +2,8 @@ import { Animate } from "../../../animation/animate";
 import { empty } from "../../../animation/delay";
 import { process } from "../../../animation/process";
 import { CustomStateAnimation } from "../../../td-scenes/battle/custom-battle-event";
+import { isPlayerBurstActivated } from "../../is-burst-activated";
+import { isPlayerPilotSkillActivated } from "../../is-pilot-skill-activated";
 import { ConfrontationTwoBraverProps } from "../props";
 
 /**
@@ -57,10 +59,13 @@ export function afterStateAnimation(
     });
   }
 
-  if (
-    props.currentState.effect.name === "PilotSkillEffect" &&
-    props.currentState.effect.invokerId === props.playerId
-  ) {
+  if (isPlayerPilotSkillActivated(props)) {
+    return process(() => {
+      props.view.dom.playerCryMessageWindow.visible(false);
+    });
+  }
+
+  if (isPlayerBurstActivated(props)) {
     return process(() => {
       props.view.dom.playerCryMessageWindow.visible(false);
     });
