@@ -7,7 +7,7 @@ import { Exclusive } from "../../exclusive/exclusive";
 export type LoginDialogProps = {
   /** ルートHTML要素 */
   root: HTMLElement;
-  /** クロージャ */
+  /** クローザー */
   closer: HTMLImageElement;
   /** ログインボタン */
   loginButton: HTMLButtonElement;
