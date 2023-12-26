@@ -1,6 +1,6 @@
 import { process } from "../../../../animation/process";
-import { ConditionalAnimation } from "../../../get-animation-if-conditional-met";
 import { CustomStateAnimation } from "../../../../td-scenes/battle/custom-battle-event";
+import { ConditionalAnimation } from "../../../get-animation-if-conditional-met";
 import { ConfrontationTwoBraverProps } from "../../props";
 
 /** ユウヤ有利 カスタムステートアニメ終了 */
