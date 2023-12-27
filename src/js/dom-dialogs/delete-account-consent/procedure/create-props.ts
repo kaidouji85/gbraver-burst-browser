@@ -5,7 +5,12 @@ import { Exclusive } from "../../../exclusive/exclusive";
 import { Resources } from "../../../resource";
 import { SOUND_IDS } from "../../../resource/sound";
 import { ROOT_CLASS } from "../dom/class-name";
-import { extractBackGround, extractCloseButton, extractCloser, extractDeleteAccountButton } from "../dom/extract-element";
+import {
+  extractBackGround,
+  extractCloseButton,
+  extractCloser,
+  extractDeleteAccountButton,
+} from "../dom/extract-element";
 import { rootInnerHTML } from "../dom/root-inner-html";
 import { DeleteAccountConsentDialogProps } from "../props";
 
@@ -15,7 +20,7 @@ import { DeleteAccountConsentDialogProps } from "../props";
  * @return 生成結果
  */
 export function createProps(
-  resources: Resources
+  resources: Resources,
 ): DeleteAccountConsentDialogProps {
   const root = document.createElement("div");
   root.innerHTML = rootInnerHTML(resources);
