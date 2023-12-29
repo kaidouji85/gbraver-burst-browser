@@ -16,11 +16,11 @@ export const yuuyaFirstBattle: ConditionalAnimation<
     }
 
     return playerBattleCount(props.stateHistory, enemy.playerId) === 1 &&
-    props.currentState.effect.name === "Battle" &&
-    props.currentState.effect.attacker === enemy.playerId
+      props.currentState.effect.name === "Battle" &&
+      props.currentState.effect.attacker === enemy.playerId
       ? process(() => {
-        props.view.dom.enemyCryMessageWindow.visible(false);
-      })
+          props.view.dom.enemyCryMessageWindow.visible(false);
+        })
       : null;
   },
 ];
