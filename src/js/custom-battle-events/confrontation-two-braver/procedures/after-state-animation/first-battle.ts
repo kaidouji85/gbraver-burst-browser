@@ -10,9 +10,9 @@ export const firstBattle: ConditionalAnimation<
 >[] = [
   (props) => {
     return battleCount(props.stateHistory) === 1 &&
-      props.currentState.effect.name === "BatteryDeclaration"
+      props.currentState.effect.name === "Battle"
       ? process(() => {
-          props.view.dom.enemyCryMessageWindow.visible(false);
+          props.view.dom.playerCryMessageWindow.visible(false);
         })
       : null;
   },
