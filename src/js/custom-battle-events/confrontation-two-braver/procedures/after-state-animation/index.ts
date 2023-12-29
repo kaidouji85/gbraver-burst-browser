@@ -15,6 +15,7 @@ import { yuuyaActivateSkillToFinish } from "./yuuya-activate-skill-to-finish";
 import { yuuyaActivateSkillToSurvive } from "./yuuya-activate-skill-to-survive";
 import { yuuyaFirstBattle } from "./yuuya-first-battle";
 import { yuuyaHasAdvantage } from "./yuuya-has-advantage";
+import {yuuyaFinishBlow} from "./yuuya-finish-blow";
 
 /**
  * ステートアニメ終了後に呼ばれる、カスタムステートアニメーション
@@ -36,6 +37,7 @@ export function afterStateAnimation(
     ...shinyaPilotSkill,
     ...shinyaBurst,
     ...yuuyaFirstBattle,
+    ...yuuyaFinishBlow,
   ];
   return getAnimationIfConditionMet(props, conditionalAnimations) ?? empty();
 }
