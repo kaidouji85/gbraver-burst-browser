@@ -33,7 +33,7 @@ export async function introduction(
     ["ユウヤ", "「シンブレイバーか"],
     ["……本来ブレイバーの称号は 日本で一番強いロボに与えられるもの"],
     ["それを こんなひよっ子が名乗るとは"],
-    ["面白い 気に入ったぜ シンヤ！！」"],
+    ["面白い 気に入ったぜ シンヤ」"],
   ]);
   await refreshConversation(props, 100);
   activeRightMessageWindowWithFace(props, "Tsubasa");
