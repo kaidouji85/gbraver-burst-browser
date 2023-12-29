@@ -1,7 +1,7 @@
-import { LastState } from "../../../td-scenes/battle/custom-battle-event";
-import { ConfrontationTwoBraverProps } from "../props";
-import { ConfrontationTwoBraverState } from "../state";
-import { introduction } from "../stories/introduction";
+import { LastState } from "../../../../td-scenes/battle/custom-battle-event";
+import { ConfrontationTwoBraverProps } from "../../props";
+import { ConfrontationTwoBraverState } from "../../state";
+import { introduction } from "../../stories/introduction";
 import { invisibleEnemyCryIfNeeded } from "./invisible-enemy-cry-if-needed";
 import { isEvenMatchEnd } from "./is-even-match-end";
 import { isShinyaAdvantageEnd } from "./is-shinya-advantage-end";

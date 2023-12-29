@@ -1,9 +1,9 @@
-import { CustomBattleEventProps } from "../../../td-scenes/battle/custom-battle-event";
-import { isEnemyAdvantage } from "../../is-enemy-advantage";
-import { separatePlayersFromLastState } from "../../separate-players";
-import { turnCount } from "../../turn-count";
-import { ConfrontationTwoBraverProps } from "../props";
-import { shinyaMonologueWhenYuuyaHasAdvantage } from "../stories/shinya-monologue-when-yuuya-has-advantage";
+import { CustomBattleEventProps } from "../../../../td-scenes/battle/custom-battle-event";
+import { isEnemyAdvantage } from "../../../is-enemy-advantage";
+import { separatePlayersFromLastState } from "../../../separate-players";
+import { turnCount } from "../../../turn-count";
+import { ConfrontationTwoBraverProps } from "../../props";
+import { shinyaMonologueWhenYuuyaHasAdvantage } from "../../stories/shinya-monologue-when-yuuya-has-advantage";
 
 /**
  * 条件を満たした場合、チャプター「ユウヤ有利」を開始する

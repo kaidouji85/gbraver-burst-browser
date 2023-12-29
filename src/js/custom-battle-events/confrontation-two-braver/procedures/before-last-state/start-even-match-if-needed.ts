@@ -1,9 +1,9 @@
-import { CustomBattleEventProps } from "../../../td-scenes/battle/custom-battle-event";
-import { isEvenMatch } from "../../is-even-match";
-import { separatePlayersFromLastState } from "../../separate-players";
-import { turnCount } from "../../turn-count";
-import { ConfrontationTwoBraverProps } from "../props";
-import { shinyaMonologueWhenEvenMatch } from "../stories/shinya-monologue-when-even-match";
+import { CustomBattleEventProps } from "../../../../td-scenes/battle/custom-battle-event";
+import { isEvenMatch } from "../../../is-even-match";
+import { separatePlayersFromLastState } from "../../../separate-players";
+import { turnCount } from "../../../turn-count";
+import { ConfrontationTwoBraverProps } from "../../props";
+import { shinyaMonologueWhenEvenMatch } from "../../stories/shinya-monologue-when-even-match";
 
 /**
  * 条件を満たした場合、チャプター「イーブンマッチ」を開始する

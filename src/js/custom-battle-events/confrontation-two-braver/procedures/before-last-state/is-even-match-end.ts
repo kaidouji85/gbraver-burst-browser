@@ -1,6 +1,6 @@
-import { CustomBattleEventProps } from "../../../td-scenes/battle/custom-battle-event";
-import { turnCount } from "../../turn-count";
-import { ConfrontationTwoBraverProps } from "../props";
+import { CustomBattleEventProps } from "../../../../td-scenes/battle/custom-battle-event";
+import { turnCount } from "../../../turn-count";
+import { ConfrontationTwoBraverProps } from "../../props";
 
 /**
  * チャプター「イーブンマッチ」が終了したか

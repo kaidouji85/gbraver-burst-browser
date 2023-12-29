@@ -1,5 +1,5 @@
-import { LastState } from "../../../td-scenes/battle/custom-battle-event";
-import { ConfrontationTwoBraverProps } from "../props";
+import { LastState } from "../../../../td-scenes/battle/custom-battle-event";
+import { ConfrontationTwoBraverProps } from "../../props";
 
 /**
  * 条件を満たした場合、敵叫びメッセージウインドウを非表示にする
