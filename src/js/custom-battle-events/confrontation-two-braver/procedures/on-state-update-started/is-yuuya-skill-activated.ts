@@ -1,4 +1,4 @@
-import { StateUpdateStarted } from "../../../td-scenes/battle/custom-battle-event";
+import { StateUpdateStarted } from "../../../../td-scenes/battle/custom-battle-event";
 
 /**
  * ユウヤがスキルを発動したかどうかを判定する
