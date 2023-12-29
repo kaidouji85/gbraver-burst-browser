@@ -8,4 +8,4 @@ import { enemyPilotCry } from "../../pilot-cry";
  */
 export const yuuyaCry1WhenShinyaHasAdvantage = (
   props: Readonly<CustomBattleEventProps>,
-) => enemyPilotCry(props, "Yuuya", "甘いぜ シンヤ！！");
+) => enemyPilotCry(props, "Yuuya", "甘いぜ シンヤ");

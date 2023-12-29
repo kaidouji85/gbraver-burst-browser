@@ -14,7 +14,7 @@ export async function zeroDefenseButPositiveBattery(
   activeLeftMessageWindowWithFace(props, "Yuuya");
   await scrollLeftMessages(props, [
     ["ユウヤ", "「バッテリーが残っているのに0防御しただと"],
-    ["俺を愚弄する気か シンヤ！！」"],
+    ["俺を愚弄する気か シンヤ」"],
   ]);
   invisibleAllMessageWindows(props);
 }

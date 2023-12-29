@@ -14,7 +14,7 @@ export async function zeroDefenseButEnableBurst(
   activeLeftMessageWindowWithFace(props, "Yuuya");
   await scrollLeftMessages(props, [
     ["ユウヤ", "「0防御だと"],
-    ["何故バーストを使わない 俺をバカにしているのか シンヤ！！」"],
+    ["何故バーストを使わない 俺をバカにしているのか シンヤ」"],
   ]);
   invisibleAllMessageWindows(props);
 }

@@ -7,4 +7,4 @@ import { playerPilotCry } from "../../pilot-cry";
  * @return アニメーション
  */
 export const earlyShinyaBurstCry = (props: Readonly<CustomBattleEventProps>) =>
-  playerPilotCry(props, "Shinya", "序盤から飛ばすッスよ ユウヤさん");
+  playerPilotCry(props, "Shinya", "はじめから飛ばすッスよ ユウヤさん");
