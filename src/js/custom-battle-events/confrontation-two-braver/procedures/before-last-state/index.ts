@@ -1,8 +1,8 @@
-import { LastState } from "../../../td-scenes/battle/custom-battle-event";
-import { ConfrontationTwoBraverProps } from "../props";
-import { ConfrontationTwoBraverState } from "../state";
-import { introduction } from "../stories/introduction";
-import { invisibleEnemyCryIfNeeded } from "./invisible-enemy-cry-if-needed";
+import { LastState } from "../../../../td-scenes/battle/custom-battle-event";
+import { invisibleCryMessageWindowIfNeeded } from "../../../invisible-cry-message-window-if-needed";
+import { ConfrontationTwoBraverProps } from "../../props";
+import { ConfrontationTwoBraverState } from "../../state";
+import { introduction } from "../../stories/introduction";
 import { isEvenMatchEnd } from "./is-even-match-end";
 import { isShinyaAdvantageEnd } from "./is-shinya-advantage-end";
 import { isYuuyaActivateSkillToFinishEnd } from "./is-yuuya-activate-skill-to-finish-end";
@@ -20,7 +20,7 @@ import { startYuuyaHasAdvantageIfNeeded } from "./start-yuuya-has-advantage-if-n
 export async function beforeLastState(
   props: Readonly<LastState & ConfrontationTwoBraverProps>,
 ): Promise<ConfrontationTwoBraverState> {
-  invisibleEnemyCryIfNeeded(props);
+  invisibleCryMessageWindowIfNeeded(props);
   if (!props.state.isIntroductionComplete) {
     await introduction(props);
     return {

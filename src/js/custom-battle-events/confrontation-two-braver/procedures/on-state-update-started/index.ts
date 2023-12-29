@@ -1,7 +1,7 @@
-import { StateUpdateStarted } from "../../../td-scenes/battle/custom-battle-event";
-import { turnCount } from "../../turn-count";
-import { ConfrontationTwoBraverProps } from "../props";
-import { ConfrontationTwoBraverState } from "../state";
+import { StateUpdateStarted } from "../../../../td-scenes/battle/custom-battle-event";
+import { turnCount } from "../../../turn-count";
+import { ConfrontationTwoBraverProps } from "../../props";
+import { ConfrontationTwoBraverState } from "../../state";
 import { isYuuyaSkillActivated } from "./is-yuuya-skill-activated";
 
 /**
@@ -31,7 +31,7 @@ export function onStateUpdateStarted(
 
   if (
     isYuuyaSkillActivated(props) &&
-    props.state.chapter.type !== "YuuyaActivateSkillToSurvive" &&
+    props.state.chapter.type !== "YuuyaActivateSkillToFinish" &&
     !isPlayerTurn
   ) {
     return {

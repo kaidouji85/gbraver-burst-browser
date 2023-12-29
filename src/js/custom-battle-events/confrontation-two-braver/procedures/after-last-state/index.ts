@@ -1,4 +1,4 @@
-import { LastState } from "../../../td-scenes/battle/custom-battle-event";
+import { LastState } from "../../../../td-scenes/battle/custom-battle-event";
 import { endGameIfNeeded } from "./end-game-if-needed";
 import { playZeroDefenseButEnableBurstIfNeeded } from "./play-zero-defense-but-enable-burst-if-needed";
 import { playZeroDefenseButPositiveBatteryIfNeeded } from "./play-zero-defense-but-positive-battery-if-needed";
