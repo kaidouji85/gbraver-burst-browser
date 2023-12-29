@@ -1,5 +1,6 @@
 import { CustomStateAnimation } from "../../../../td-scenes/battle/custom-battle-event";
 import { ConditionalAnimation } from "../../../get-animation-if-conditional-met";
+import { hasDeliveredFinishBlow } from "../../../has-delivered-finish-blow";
 import { separatePlayersFromCurrentState } from "../../../separate-players";
 import { yuuyaCryWhenHeDeliversFinalBlow } from "../../animation/yuuya-cry-when-he-delivers-final-blow";
 import { ConfrontationTwoBraverProps } from "../../props";
@@ -14,11 +15,9 @@ export const yuuyaFinishBlow: ConditionalAnimation<
       return null;
     }
 
-    const hasEnemyDeliveredFinishBlow = props.stateHistory.some(
-      (state) =>
-        state.effect.name === "Battle" &&
-        state.effect.attacker === enemy.playerId &&
-        state.effect.isDeath,
+    const hasEnemyDeliveredFinishBlow = hasDeliveredFinishBlow(
+      props.stateHistory,
+      enemy.playerId,
     );
     return props.currentState.effect.name === "BatteryDeclaration" &&
       props.currentState.effect.attacker === enemy.playerId &&
