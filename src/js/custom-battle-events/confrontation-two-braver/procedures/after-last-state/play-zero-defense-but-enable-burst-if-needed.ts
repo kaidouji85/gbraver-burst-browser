@@ -1,13 +1,13 @@
-import { LastState } from "../../../td-scenes/battle/custom-battle-event";
-import { isZeroDefenseButBatteryPositive } from "../../is-zero-defense-but-battery-positive";
-import { zeroDefenseButPositiveBattery } from "../stories/zero-defense-but-positive-battery";
+import { LastState } from "../../../../td-scenes/battle/custom-battle-event";
+import { isZeroDefenseButEnableBurst } from "../../../is-zero-defense-but-enable-burst";
+import { zeroDefenseButEnableBurst } from "../../stories/zero-defense-but-enable-burst";
 
 /**
- * 条件を満たした場合、バッテリーが残っているのに0防御したストーリーを再生する
+ * 条件を満たした場合、バーストできるのに0防御したストーリーを再生する
  * @param props イベントプロパティ
  * @return ストーリーを再生したらtrueを返す
  */
-export async function playZeroDefenseButPositiveBatteryIfNeeded(
+export async function playZeroDefenseButEnableBurstIfNeeded(
   props: Readonly<LastState>,
 ): Promise<boolean> {
   const isGameOver = props.update.some(
@@ -24,12 +24,12 @@ export async function playZeroDefenseButPositiveBatteryIfNeeded(
 
   if (
     batteryDeclaration.effect.name === "BatteryDeclaration" &&
-    isZeroDefenseButBatteryPositive({
+    isZeroDefenseButEnableBurst({
       ...batteryDeclaration,
       effect: batteryDeclaration.effect,
     })
   ) {
-    await zeroDefenseButPositiveBattery(props);
+    await zeroDefenseButEnableBurst(props);
     return true;
   }
 

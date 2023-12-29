@@ -1,10 +1,10 @@
-import { LastState } from "../../../td-scenes/battle/custom-battle-event";
-import { invisibleAllMessageWindows } from "../../invisible-all-message-windows";
-import { separatePlayersFromLastState } from "../../separate-players";
-import { shinyaMonologueWhenHeLose } from "../stories/shinya-monologue-when-he-lose";
-import { yuuyaCryWhenYuuyaCompleteVictory } from "../stories/yuuya-cry-when-yuuya-complete-victory";
-import { yuuyaCryWhenYuuyaNarrowVictory } from "../stories/yuuya-cry-when-yuuya-narrow-victory";
-import { yuuyaCryWhenYuuyaVictory } from "../stories/yuuya-cry-when-yuuya-victory";
+import { LastState } from "../../../../td-scenes/battle/custom-battle-event";
+import { invisibleAllMessageWindows } from "../../../invisible-all-message-windows";
+import { separatePlayersFromLastState } from "../../../separate-players";
+import { shinyaMonologueWhenHeLose } from "../../stories/shinya-monologue-when-he-lose";
+import { yuuyaCryWhenYuuyaCompleteVictory } from "../../stories/yuuya-cry-when-yuuya-complete-victory";
+import { yuuyaCryWhenYuuyaNarrowVictory } from "../../stories/yuuya-cry-when-yuuya-narrow-victory";
+import { yuuyaCryWhenYuuyaVictory } from "../../stories/yuuya-cry-when-yuuya-victory";
 
 /**
  * 条件を満たした場合、ゲーム終了時のシナリオを再生する
