@@ -2,23 +2,23 @@ import { CustomStateAnimation } from "../../../../td-scenes/battle/custom-battle
 import { playerBattleCount } from "../../../battle-count";
 import { ConditionalAnimation } from "../../../get-animation-if-conditional-met";
 import { separatePlayersFromCurrentState } from "../../../separate-players";
-import { shinyaCryWhenFirstBattle } from "../../animation/shinya-cry-when-first-battle";
+import { yuuyaCryWhenFirstBattle } from "../../animation/yuuya-cry-when-first-battle";
 import { ConfrontationTwoBraverProps } from "../../props";
 
-/** シンヤ ファーストバトル */
-export const shinyaFirstBattle: ConditionalAnimation<
+/** ユウヤ ファーストバトル */
+export const yuuyaFirstBattle: ConditionalAnimation<
   CustomStateAnimation & ConfrontationTwoBraverProps
 >[] = [
   (props) => {
-    const player = separatePlayersFromCurrentState(props)?.player;
-    if (!player) {
+    const enemy = separatePlayersFromCurrentState(props)?.enemy;
+    if (!enemy) {
       return null;
     }
 
-    return playerBattleCount(props.stateHistory, player.playerId) === 1 &&
+    return playerBattleCount(props.stateHistory, enemy.playerId) === 1 &&
       props.currentState.effect.name === "BatteryDeclaration" &&
-      props.currentState.effect.attacker === player.playerId
-      ? shinyaCryWhenFirstBattle(props)
+      props.currentState.effect.attacker === enemy.playerId
+      ? yuuyaCryWhenFirstBattle(props)
       : null;
   },
 ];
