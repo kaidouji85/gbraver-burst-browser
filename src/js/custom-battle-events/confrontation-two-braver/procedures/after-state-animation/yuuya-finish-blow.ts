@@ -15,11 +15,11 @@ export const yuuyaFinishBlow: ConditionalAnimation<
     }
 
     return props.currentState.effect.name === "Battle" &&
-    props.currentState.effect.attacker === enemy.playerId &&
-    props.currentState.effect.isDeath
+      props.currentState.effect.attacker === enemy.playerId &&
+      props.currentState.effect.isDeath
       ? process(() => {
-        props.view.dom.enemyCryMessageWindow.visible(false);
-      })
+          props.view.dom.enemyCryMessageWindow.visible(false);
+        })
       : null;
   },
 ];

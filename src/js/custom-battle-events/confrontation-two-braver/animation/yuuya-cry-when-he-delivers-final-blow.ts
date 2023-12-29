@@ -6,6 +6,6 @@ import { enemyPilotCry } from "../../pilot-cry";
  * @param props イベントプロパティ
  * @return アニメーション
  */
-export const yuuyaCryWhenHeDeliversFinalBlow= (
+export const yuuyaCryWhenHeDeliversFinalBlow = (
   props: Readonly<CustomBattleEventProps>,
 ) => enemyPilotCry(props, "Yuuya", "これで終わりだ シンブレイバー");
