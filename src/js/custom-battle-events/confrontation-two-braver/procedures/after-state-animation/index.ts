@@ -7,7 +7,7 @@ import {
 } from "../../../get-animation-if-conditional-met";
 import { ConfrontationTwoBraverProps } from "../../props";
 import { evenMatch } from "./even-match";
-import { firstBattle } from "./first-battle";
+import { shinyaFirstBattle } from "./shinya-first-battle";
 import { shinyaHasAdvantage } from "./shinya-has-advantage";
 import { shinyaBurst } from "./sinya-burst";
 import { shinyaPilotSkill } from "./sinya-pilot-skill";
@@ -31,7 +31,7 @@ export function afterStateAnimation(
     ...evenMatch,
     ...yuuyaActivateSkillToSurvive,
     ...yuuyaActivateSkillToFinish,
-    ...firstBattle,
+    ...shinyaFirstBattle,
     ...shinyaPilotSkill,
     ...shinyaBurst,
   ];

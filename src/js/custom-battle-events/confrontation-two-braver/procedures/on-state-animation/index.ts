@@ -7,7 +7,7 @@ import {
 } from "../../../get-animation-if-conditional-met";
 import { ConfrontationTwoBraverProps } from "../../props";
 import { evenMatch } from "./even-match";
-import { firstBattle } from "./first-battle";
+import { shinyaFirstBattle } from "./shinya-first-battle";
 import { shinyaBurst } from "./shinya-burst";
 import { shinyaHasAdvantage } from "./shinya-has-advantage";
 import { shinyaPilotSkill } from "./shinya-pilot-skill";
@@ -33,7 +33,7 @@ export function onStateAnimation(
     ...yuuyaActivateSkillToFinish,
     ...shinyaPilotSkill,
     ...shinyaBurst,
-    ...firstBattle,
+    ...shinyaFirstBattle,
   ];
   return getAnimationIfConditionMet(props, conditionalAnimations) ?? empty();
 }
