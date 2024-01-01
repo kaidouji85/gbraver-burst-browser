@@ -6,8 +6,10 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    width: var(--screen-width);
-    height: var(--screen-height);
+    width: 100vw;
+    width: 100dvw;
+    height: 100vh;
+    height: 100dvh;
     background-color: var(--background-color);
     color: var(--font-color);
     box-sizing: border-box;
@@ -69,8 +71,8 @@
 .title__account-menu {
   --margin-horizontal: calc(var(--responsive-font-size) * 1.5);
   --margin-vertical: calc(var(--margin-horizontal) * 0.5);
-  --menu-min-width: 30dvw;
-  --menu-max-width: 95dvw;
+  --menu-min-width: 30vw;
+  --menu-max-width: 95vw;
 
   margin-top: calc(var(--responsive-font-size) * 0.7);
   color: var(--font-color);
@@ -133,7 +135,7 @@
 .title__help-menu {
   --margin-horizontal: calc(var(--responsive-font-size) * 1);
   --margin-vertical: calc(var(--margin-horizontal) * 0.5);
-  --menu-max-width: 95dvw;
+  --menu-max-width: 95vw;
 
   display: flex;
   flex-direction: column;
@@ -185,11 +187,12 @@
 }
 
 .title__logo {
-  height: 35dvh;
+  height: 35vh;
   object-fit: contain;
 }
 
 .title__game-menu {
+  width: 100vw;
   width: 100dvw;
   display: flex;
   flex-direction: row;
@@ -227,6 +230,7 @@
   left: 0;
   bottom: 0;
   box-sizing: border-box;
+  width: 100vw;
   width: 100dvw;
   display: flex;
   flex-direction: row;

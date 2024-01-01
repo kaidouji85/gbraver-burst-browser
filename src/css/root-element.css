@@ -10,8 +10,8 @@
   --screen-padding-left: calc(var(--safe-area-left) + 1rem);
   --screen-padding-right: calc(var(--safe-area-right) + 1rem);
   --screen-padding-bottom: calc(var(--safe-area-bottom) + 1rem);
-  --screen-width: 100dvw;
-  --screen-height: 100dvh;
+  --screen-width: 100vw; /** @deprecated */
+  --screen-height: 100vh; /** @deprecated */
 
   /** フォント */
   --font-color: rgb(240 240 240);
@@ -45,7 +45,7 @@
 /* iPhoneXランドスケープ画面高以上の場合に有効になるメディアクエリ */
 @media (height >= 375px) {
   :root {
-    --responsive-font-size: max(3dvh, 1rem);
+    --responsive-font-size: max(3vh, 1rem);
   }
 }
 
