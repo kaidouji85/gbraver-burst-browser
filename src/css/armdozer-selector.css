@@ -1,8 +1,5 @@
 /** プレイヤー選択画面 アームドーザセレクタ */
 .armdozer-selector {
-  --control-button-width: 24vw;
-  --control-button-height: calc(var(--responsive-font-size) * 3);
-
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -20,25 +17,27 @@
   width: 50vw;
 }
 
-.armdozer-selector__ok-button {
-  width: var(--control-button-width);
-  height: var(--control-button-height);
+.armdozer-selector__controllers {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-gap: calc(var(--responsive-font-size) * 0.5);
+  width: 50vw;
+}
+
+.armdozer-selector__ok-button,
+.armdozer-selector__prev-button {
+  height: calc(var(--responsive-font-size) * 3);
   font-size: var(--responsive-font-size);
   border-radius: var(--button-border-radius);
-  background-color: var(--button-background-color);
   color: var(--button-font-color);
   border: var(--button-border);
   box-shadow: var(--button-box-shadow);
 }
 
+.armdozer-selector__ok-button {
+  background-color: var(--button-background-color);
+}
+
 .armdozer-selector__prev-button {
-  width: var(--control-button-width);
-  height: var(--control-button-height);
-  margin-right: 1vw;
-  font-size: var(--responsive-font-size);
-  border-radius: var(--button-border-radius);
   background-color: var(--sub-button-background-color);
-  color: var(--button-font-color);
-  border: var(--button-border);
-  box-shadow: var(--button-box-shadow);
 }
