@@ -4,8 +4,9 @@
   position: absolute;
   top: -10vh;
   top: -10dvh;
-  left: calc(100vw - 180vh - var(--safe-area-right));
-  left: calc(100dvw - 180dvh - var(--safe-area-right));
+  right: -25vh;
+  right: -25dvh;
+  padding-right: var(--safe-area-right);
   width: 200vh;
   width: 200dvh;
 }
@@ -14,8 +15,9 @@
   position: absolute;
   top: -25vh;
   top: -25dvh;
-  left: calc(100vw - 180vh - var(--safe-area-right));
-  left: calc(100dvw - 180dvh - var(--safe-area-right));
+  right: -25vh;
+  right: -25dvh;
+  padding-right: var(--safe-area-right);
   width: 200vh;
   width: 200dvh;
 }
@@ -24,8 +26,9 @@
   position: absolute;
   top: -25vh;
   top: -25dvh;
-  left: calc(100vw - 180vh - var(--safe-area-right));
-  left: calc(100dvw - 180dvh - var(--safe-area-right));
+  right: -25vh;
+  right: -25dvh;
+  padding-right: var(--safe-area-right);
   width: 200vh;
   width: 200dvh;
 }
@@ -34,8 +37,9 @@
   position: absolute;
   top: -40vh;
   top: -40dvh;
-  left: calc(100vw - 160vh - var(--safe-area-right));
-  left: calc(100dvw - 160dvh - var(--safe-area-right));
+  right: -45vh;
+  right: -45dvh;
+  padding-right: var(--safe-area-right);
   width: 200vh;
   width: 200dvh;
 }
@@ -44,8 +48,9 @@
   position: absolute;
   top: -20vh;
   top: -20dvh;
-  left: calc(100vw - 170vh - var(--safe-area-right));
-  left: calc(100dvw - 170dvh - var(--safe-area-right));
+  right: -35vh;
+  right: -35dvh;
+  padding-right: var(--safe-area-right);
   width: 200vh;
   width: 200dvh;
 }
