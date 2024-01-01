@@ -17,8 +17,10 @@
 
 .private-match-guest__background {
   position: absolute;
-  width: var(--screen-width);
-  height: var(--screen-height);
+  width: 100vw;
+  width: 100dvw;
+  height: 100vh;
+  height: 100dvh;
   background-color: #000;
   opacity: 0.5;
   z-index: var(--zindex-background);
@@ -40,7 +42,7 @@
   padding: max(var(--dialog-padding), calc(var(--closer-height) / 2))
     var(--dialog-padding) var(--dialog-padding) var(--dialog-padding);
   min-width: calc(var(--responsive-font-size) * 20);
-  min-height: 30dvh;
+  min-height: 30vh;
   display: grid;
   grid-template-rows: auto 1fr auto auto;
 }

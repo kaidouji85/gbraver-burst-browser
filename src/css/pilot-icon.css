@@ -15,7 +15,7 @@
 }
 
 .pilot-icon__check {
-  --width: 6dvw;
+  --width: 6vw;
 
   width: var(--width);
   position: absolute;
