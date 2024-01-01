@@ -1,46 +1,51 @@
 /** プレイヤー選択画面 アームドーザバストショット */
 
 .armdozer-bust-shot__shin-braver {
-  --width: 200vh;
-
   position: absolute;
   top: -10vh;
-  left: calc(100vw - 0.9 * var(--width) - var(--safe-area-right));
-  width: var(--width);
+  top: -10dvh;
+  left: calc(100vw - 180vh - var(--safe-area-right));
+  left: calc(100dvw - 180dvh - var(--safe-area-right));
+  width: 200vh;
+  width: 200dvh;
 }
 
 .armdozer-bust-shot__neo-landozer {
-  --width: 200vh;
-
   position: absolute;
   top: -25vh;
-  left: calc(100vw - 0.9 * var(--width) - var(--safe-area-right));
-  width: var(--width);
+  top: -25dvh;
+  left: calc(100vw - 180vh - var(--safe-area-right));
+  left: calc(100dvw - 180dvh - var(--safe-area-right));
+  width: 200vh;
+  width: 200dvh;
 }
 
 .armdozer-bust-shot__lightning-dozer {
-  --width: 200vh;
-
   position: absolute;
   top: -25vh;
-  left: calc(100vw - 0.9 * var(--width) - var(--safe-area-right));
-  width: var(--width);
+  top: -25dvh;
+  left: calc(100vw - 180vh - var(--safe-area-right));
+  left: calc(100dvw - 180dvh - var(--safe-area-right));
+  width: 200vh;
+  width: 200dvh;
 }
 
 .armdozer-bust-shot__wing-dozer {
-  --width: 200vh;
-
   position: absolute;
   top: -40vh;
-  left: calc(100vw - 0.8 * var(--width) - var(--safe-area-right));
-  width: var(--width);
+  top: -40dvh;
+  left: calc(100vw - 180vh - var(--safe-area-right));
+  left: calc(100dvw - 180dvh - var(--safe-area-right));
+  width: 200vh;
+  width: 200dvh;
 }
 
 .armdozer-bust-shot__genesis-braver {
-  --width: 200vh;
-
   position: absolute;
   top: -20vh;
-  left: calc(100vw - 0.85 * var(--width) - var(--safe-area-right));
-  width: var(--width);
+  top: -20dvh;
+  left: calc(100vw - 170vh - var(--safe-area-right));
+  left: calc(100dvw - 170dvh - var(--safe-area-right));
+  width: 200vh;
+  width: 200dvh;
 }
