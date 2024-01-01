@@ -1,7 +1,5 @@
 /** プレイヤー選択画面 パイロットセレクタ */
 .pilot-selector {
-  --control-button-height: calc(var(--responsive-font-size) * 3);
-
   z-index: var(--selector-zindex);
   display: flex;
   flex-direction: column;
@@ -27,22 +25,20 @@
   width: 50vw;
 }
 
-.pilot-selector__ok-button {
-  height: var(--control-button-height);
+.pilot-selector__ok-button,
+.pilot-selector__prev-button {
+  height: calc(var(--responsive-font-size) * 3);
   font-size: var(--responsive-font-size);
   border-radius: var(--button-border-radius);
-  background-color: var(--button-background-color);
   color: var(--button-font-color);
   border: var(--button-border);
   box-shadow: var(--button-box-shadow);
 }
 
+.pilot-selector__ok-button {
+  background-color: var(--button-background-color);
+}
+
 .pilot-selector__prev-button {
-  height: var(--control-button-height);
-  font-size: var(--responsive-font-size);
-  border-radius: var(--button-border-radius);
   background-color: var(--sub-button-background-color);
-  color: var(--button-font-color);
-  border: var(--button-border);
-  box-shadow: var(--button-box-shadow);
 }
