@@ -2,8 +2,9 @@
 
 .pilot-bust-shot__shinya {
   position: absolute;
-  left: calc(100vw - 76.5vh - var(--safe-area-right));
-  left: calc(100dvw - 76.5dvh - var(--safe-area-right));
+  right: -13vh;
+  right: -13dvh;
+  margin-right: var(--safe-area-right);
   top: calc(100vh - 76.5vh);
   top: calc(100dvh - 76.5dvh);
   width: 85vh;
@@ -14,8 +15,9 @@
 
 .pilot-bust-shot__gai {
   position: absolute;
-  left: calc(100vw - 76.5vh - var(--safe-area-right));
-  left: calc(100dvw - 76.5dvh - var(--safe-area-right));
+  right: -13vh;
+  right: -13dvh;
+  margin-right: var(--safe-area-right);
   top: calc(100vh - 76.5vh);
   top: calc(100dvh - 76.5dvh);
   width: 85vh;
@@ -26,8 +28,9 @@
 
 .pilot-bust-shot__raito {
   position: absolute;
-  left: calc(100vw - 76.5vh - var(--safe-area-right));
-  left: calc(100dvw - 76.5dvh - var(--safe-area-right));
+  right: -13vh;
+  right: -13dvh;
+  margin-right: var(--safe-area-right);
   top: calc(100vh - 76.5vh);
   top: calc(100dvh - 76.5dvh);
   width: 85vh;
@@ -38,8 +41,9 @@
 
 .pilot-bust-shot__tsubasa {
   position: absolute;
-  left: calc(100vw - 85.5vh - var(--safe-area-right));
-  left: calc(100dvw - 85.5dvh - var(--safe-area-right));
+  right: -13vh;
+  right: -13dvh;
+  margin-right: var(--safe-area-right);
   top: calc(100vh - 85.5vh);
   top: calc(100dvh - 85.5dvh);
   width: 95vh;
@@ -50,8 +54,9 @@
 
 .pilot-bust-shot__yuuya {
   position: absolute;
-  left: calc(100vw - 95vh - var(--safe-area-right));
-  left: calc(100dvw - 95dvh - var(--safe-area-right));
+  right: -13vh;
+  right: -13dvh;
+  margin-right: var(--safe-area-right);
   top: calc(100vh - 82vh);
   top: calc(100dvh - 82dvh);
   width: 100vh;
