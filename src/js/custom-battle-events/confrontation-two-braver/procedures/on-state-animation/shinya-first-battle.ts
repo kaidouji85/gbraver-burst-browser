@@ -16,7 +16,7 @@ export const shinyaFirstBattle: ConditionalAnimation<
     }
 
     return playerBattleCount(props.stateHistory, player.playerId) === 1 &&
-      props.currentState.effect.name === "BatteryDeclaration" &&
+      props.currentState.effect.name === "Battle" &&
       props.currentState.effect.attacker === player.playerId
       ? shinyaCryWhenFirstBattle(props)
       : null;
