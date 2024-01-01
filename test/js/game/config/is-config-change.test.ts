@@ -41,6 +41,14 @@ test("戦闘シーンコントトーラータイプの変更を正しく検知�
   expect(isConfigChanged(origin, update)).toBe(true);
 });
 
+test("パフォーマンス統計の表示設定の変更を正しく検知できる", () => {
+  const update: GBraverBurstBrowserConfig = {
+    ...origin,
+    performanceStatsVisibility: "visible",
+  };
+  expect(isConfigChanged(origin, update)).toBe(true);
+});
+
 test("複数項目の変更を正しく検知できる", () => {
   const update: GBraverBurstBrowserConfig = {
     ...origin,

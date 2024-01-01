@@ -15,7 +15,8 @@ export function isConfigChanged(
     origin.webGLPixelRatio !== update.webGLPixelRatio ||
     origin.battleAnimationTimeScale !== update.battleAnimationTimeScale ||
     origin.battleControllerType !== update.battleControllerType ||
-    isSoundConfigChanged(origin, update)
+    isSoundConfigChanged(origin, update) ||
+    origin.performanceStatsVisibility !== update.performanceStatsVisibility
   );
 }
 
