@@ -34,8 +34,8 @@
   position: absolute;
   top: -40vh;
   top: -40dvh;
-  left: calc(100vw - 180vh - var(--safe-area-right));
-  left: calc(100dvw - 180dvh - var(--safe-area-right));
+  left: calc(100vw - 160vh - var(--safe-area-right));
+  left: calc(100dvw - 160dvh - var(--safe-area-right));
   width: 200vh;
   width: 200dvh;
 }
