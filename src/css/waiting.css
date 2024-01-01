@@ -29,6 +29,7 @@
 .waiting__dialog {
   padding: 0 calc(var(--responsive-font-size) * 3);
   height: var(--wating-dialog-height);
+  top: 50vh;
   top: 50dvh;
   left: 50%;
   transform: translate(-50%, -50%);

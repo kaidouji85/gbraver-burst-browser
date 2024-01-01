@@ -10,8 +10,6 @@
   --screen-padding-left: calc(var(--safe-area-left) + 1rem);
   --screen-padding-right: calc(var(--safe-area-right) + 1rem);
   --screen-padding-bottom: calc(var(--safe-area-bottom) + 1rem);
-  --screen-width: 100vw; /** @deprecated */
-  --screen-height: 100vh; /** @deprecated */
 
   /** フォント */
   --font-color: rgb(240 240 240);

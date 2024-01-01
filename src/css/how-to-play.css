@@ -4,11 +4,11 @@
 @media (orientation: landscape) {
   .how-to-play {
     --how-to-play-dialog-width: calc(
-      min(var(--how-to-play-dialog-height) * 16 / 9, 90dvw)
+      min(var(--how-to-play-dialog-height) * 16 / 9, 90vw)
     );
-    --how-to-play-dialog-height: 80dvh;
-    --how-to-play-dialog-top: 50dvh;
-    --how-to-play-dialog-left: 50dvw;
+    --how-to-play-dialog-height: 80vh;
+    --how-to-play-dialog-top: 50vh;
+    --how-to-play-dialog-left: 50vw;
 
     display: block;
   }
@@ -34,6 +34,7 @@
 .how-to-play__dialog {
   width: var(--how-to-play-dialog-width);
   height: var(--how-to-play-dialog-height);
+  top: 50vh;
   top: 50dvh;
   left: 50%;
   transform: translate(-50%, -50%);

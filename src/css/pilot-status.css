@@ -1,7 +1,7 @@
 /** プレイヤー選択画面 パイロットステータスウインドウ */
 .pilot-status {
   font-size: calc(var(--responsive-font-size) * 0.8);
-  width: 50dvw;
+  width: 50vw;
   box-sizing: border-box;
   min-height: calc(var(--responsive-font-size) * 8);
   padding: calc(var(--responsive-font-size) * 0.5);

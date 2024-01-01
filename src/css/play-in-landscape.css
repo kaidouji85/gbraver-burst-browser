@@ -9,7 +9,9 @@
 
 @media (orientation: portrait) {
   .play-in-landscape {
+    width: 100vw;
     width: 100dvw;
+    height: 100vh;
     height: 100dvh;
     background-color: var(--background-color);
     color: var(--font-color);
@@ -29,7 +31,7 @@
 }
 
 .play-in-landscape__image {
-  --icon-width: 20dvw;
+  --icon-width: 20vw;
   --icon-height: calc(var(--icon-width) * 0.45);
 
   width: var(--icon-width);
