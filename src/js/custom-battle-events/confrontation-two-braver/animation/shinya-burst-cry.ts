@@ -7,4 +7,8 @@ import { switchPlayerPilotCry } from "../../pilot-cry";
  * @return アニメーション
  */
 export const shinyaBurstCry = (props: Readonly<CustomBattleEventProps>) =>
-  switchPlayerPilotCry(props, "Shinya", "ユウヤさん これで決めさせてもらうッス");
+  switchPlayerPilotCry(
+    props,
+    "Shinya",
+    "ユウヤさん これで決めさせてもらうッス",
+  );
