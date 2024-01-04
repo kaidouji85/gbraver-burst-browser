@@ -16,7 +16,7 @@ export const yuuyaFirstBattle: ConditionalAnimation<
     }
 
     return playerBattleCount(props.stateHistory, enemy.playerId) === 1 &&
-      props.currentState.effect.name === "Battle" &&
+      props.currentState.effect.name === "BatteryDeclaration" &&
       props.currentState.effect.attacker === enemy.playerId
       ? yuuyaCryWhenFirstBattle(props)
       : null;

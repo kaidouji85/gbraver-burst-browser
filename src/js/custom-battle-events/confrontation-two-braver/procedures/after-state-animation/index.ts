@@ -7,13 +7,11 @@ import {
 } from "../../../get-animation-if-conditional-met";
 import { ConfrontationTwoBraverProps } from "../../props";
 import { evenMatch } from "./even-match";
-import { shinyaFirstBattle } from "./shinya-first-battle";
 import { shinyaHasAdvantage } from "./shinya-has-advantage";
 import { shinyaBurst } from "./sinya-burst";
 import { shinyaPilotSkill } from "./sinya-pilot-skill";
 import { yuuyaActivateSkillToFinish } from "./yuuya-activate-skill-to-finish";
 import { yuuyaActivateSkillToSurvive } from "./yuuya-activate-skill-to-survive";
-import { yuuyaFirstBattle } from "./yuuya-first-battle";
 import { yuuyaHasAdvantage } from "./yuuya-has-advantage";
 
 /**
@@ -32,10 +30,8 @@ export function afterStateAnimation(
     ...evenMatch,
     ...yuuyaActivateSkillToSurvive,
     ...yuuyaActivateSkillToFinish,
-    ...shinyaFirstBattle,
     ...shinyaPilotSkill,
     ...shinyaBurst,
-    ...yuuyaFirstBattle,
   ];
   return getAnimationIfConditionMet(props, conditionalAnimations) ?? empty();
 }

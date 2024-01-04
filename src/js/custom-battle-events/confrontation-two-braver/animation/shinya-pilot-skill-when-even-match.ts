@@ -1,5 +1,5 @@
 import { CustomBattleEventProps } from "../../../td-scenes/battle/custom-battle-event";
-import { playerPilotCry } from "../../pilot-cry";
+import { switchPlayerPilotCry } from "../../pilot-cry";
 
 /**
  * イーブンマッチ シンヤ パイロットスキル
@@ -8,4 +8,4 @@ import { playerPilotCry } from "../../pilot-cry";
  */
 export const shinyaPilotSkillWhenEvenMatch = (
   props: Readonly<CustomBattleEventProps>,
-) => playerPilotCry(props, "Shinya", "ここで勝負をかけるッス");
+) => switchPlayerPilotCry(props, "Shinya", "ここで勝負をかけるッス");
