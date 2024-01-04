@@ -14,7 +14,6 @@ const DESKTOP_RESOURCE_ROOT = `${RESOURCE_ROOT}/desktop`;
 const MOBILE_RESOURCE_ROOT = `${RESOURCE_ROOT}/mobile`;
 const OUTPUT_JS_NAME = `index.js`;
 
-
 module.exports = {
   mode: 'development',
   entry: path.resolve(__dirname, 'src/js/index.ts'),
