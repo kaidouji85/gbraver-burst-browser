@@ -1,6 +1,5 @@
 require('dotenv').config();
 
-const SpeedMeasurePlugin = require("speed-measure-webpack-plugin");
 const path = require('path');
 const webpack = require('webpack');
 const uuid = require('uuid');
@@ -15,9 +14,8 @@ const DESKTOP_RESOURCE_ROOT = `${RESOURCE_ROOT}/desktop`;
 const MOBILE_RESOURCE_ROOT = `${RESOURCE_ROOT}/mobile`;
 const OUTPUT_JS_NAME = `index.js`;
 
-const smp = new SpeedMeasurePlugin();
 
-module.exports = smp.wrap({
+module.exports = {
   mode: 'development',
   entry: path.resolve(__dirname, 'src/js/index.ts'),
   output: {
@@ -123,4 +121,4 @@ module.exports = smp.wrap({
       GBRAVER_BURST_CAN_PLAY_DEVELOPING_PILOT: JSON.stringify(process.env.CAN_PLAY_DEVELOPING_PILOT),
     })
   ]
-});
+};
