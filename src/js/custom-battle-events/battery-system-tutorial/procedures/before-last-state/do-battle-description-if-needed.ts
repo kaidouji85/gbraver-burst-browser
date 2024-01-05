@@ -19,12 +19,16 @@ import { playerAttack } from "../../stories/player-attack";
 export async function doBattleDescriptionIfNeeded(
   props: Readonly<LastState & BatterySystemTutorialProps>,
 ): Promise<BatterySystemTutorialState | null> {
-  const hasGameEnd = props.update.some(state => state.effect.name === "GameEnd");
+  const hasGameEnd = props.update.some(
+    (state) => state.effect.name === "GameEnd",
+  );
   if (hasGameEnd) {
     return null;
   }
 
-  const foundBattle = props.update.find(state => state.effect.name === "Battle");
+  const foundBattle = props.update.find(
+    (state) => state.effect.name === "Battle",
+  );
   if (!foundBattle) {
     return null;
   }
