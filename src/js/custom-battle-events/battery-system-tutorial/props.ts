@@ -23,6 +23,8 @@ export function createBatterySystemTutorialProps(
 ): BatterySystemTutorialProps {
   const state = {
     isBatterySystemDescriptionComplete: false,
+    isExplainedBurstAtZeroBurst: false,
+    isExplainedPilotSkillAtZeroBattery: false,
   };
   return {
     state,

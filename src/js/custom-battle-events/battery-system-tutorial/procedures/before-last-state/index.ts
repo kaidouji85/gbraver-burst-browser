@@ -4,6 +4,8 @@ import { BatterySystemTutorialProps } from "../../props";
 import { BatterySystemTutorialState } from "../../state";
 import { introduction } from "../../stories/introduction";
 import { doBattleDescriptionIfNeeded } from "./do-battle-description-if-needed";
+import { doSelfInitiatedPilotSkillIfNeeded } from "./do-self-initialated-pilot-skill-if-needed";
+import { doSelfInitiatedBurstIfNeeded } from "./do-self-initiated-burst-if-needed";
 
 /**
  * 最終ステート直前イベント
@@ -22,6 +24,14 @@ export async function beforeLastState(
   const doneBattleDescription = await doBattleDescriptionIfNeeded(props);
   if (doneBattleDescription) {
     return doneBattleDescription;
+  }
+
+  if (await doSelfInitiatedBurstIfNeeded(props)) {
+    return props.state;
+  }
+
+  if (await doSelfInitiatedPilotSkillIfNeeded(props)) {
+    return props.state;
   }
 
   return props.state;
