@@ -1,15 +1,15 @@
-import type { LastState } from "../../../td-scenes/battle/custom-battle-event";
-import { waitTime } from "../../../wait/wait-time";
-import { extractBattle, extractGameEnd } from "../../game-state-extractor";
-import { invisibleAllMessageWindows } from "../../invisible-all-message-windows";
-import { turnCount } from "../../turn-count";
-import { BatterySystemTutorialProps } from "../props";
-import type { BatterySystemTutorialState } from "../state";
-import { batteryRuleDescription } from "../stories/battery-rule-description";
-import { completeAttackAndDefense } from "../stories/complete-attack-and-defense";
-import { enemyAttack } from "../stories/enemy-attack";
-import { introduction } from "../stories/introduction";
-import { playerAttack } from "../stories/player-attack";
+import type { LastState } from "../../../../td-scenes/battle/custom-battle-event";
+import { waitTime } from "../../../../wait/wait-time";
+import { extractBattle, extractGameEnd } from "../../../game-state-extractor";
+import { invisibleAllMessageWindows } from "../../../invisible-all-message-windows";
+import { turnCount } from "../../../turn-count";
+import { BatterySystemTutorialProps } from "../../props";
+import type { BatterySystemTutorialState } from "../../state";
+import { batteryRuleDescription } from "../../stories/battery-rule-description";
+import { completeAttackAndDefense } from "../../stories/complete-attack-and-defense";
+import { enemyAttack } from "../../stories/enemy-attack";
+import { introduction } from "../../stories/introduction";
+import { playerAttack } from "../../stories/player-attack";
 
 /**
  * 最終ステート直前イベント
