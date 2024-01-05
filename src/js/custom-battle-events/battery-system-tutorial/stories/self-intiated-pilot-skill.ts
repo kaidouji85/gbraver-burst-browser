@@ -3,18 +3,18 @@ import { activeLeftMessageWindowWithFace } from "../../active-message-window";
 import { scrollLeftMessages } from "../../scroll-messages";
 
 /**
- * プレイヤーが自主的にバーストを発動した
+ * プレイヤーが自主的にパイロットスキルを発動した
  * @param props イベントプロパティ
  * @return ストーリーが完了したら発火するPromise
  */
-export async function selfInitiatedBurst(
+export async function selfInitiatedPilotSkill(
   props: Readonly<CustomBattleEventProps>
 ): Promise<void> {
   activeLeftMessageWindowWithFace(props, "Tsubasa");
   await scrollLeftMessages(props, [
-    ["ツバサ", "「素晴らしいぞシンヤ さっそくバーストを試したのか"],
-    ["バーストは一試合に一回だけ使える大技で"],
-    ["ターン消費なしでバッテリーを大幅回復できるんだ"],
-    ["さらにロボ毎に固有の追加効果もあるが それは追々解説しよう」"]
+    ["ツバサ", "「もうパイロットスキルを発動できるとは これは将来有望だな"],
+    ["パイロットスキルは一試合に一回だけ使える技で"],
+    ["パイロット毎に固有の効果を発動できる"],
+    ["君のパイロットスキルは バッテリー2回復だ」"]
   ]);
 }
