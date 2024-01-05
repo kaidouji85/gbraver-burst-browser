@@ -7,7 +7,7 @@ import { selfInitiatedPilotSkill } from "../../stories/self-intiated-pilot-skill
  * @param props イベントプロパティ
  * @return 実行した場合はtrue、そうでない場合はfalse
  */
-export async function selfInitiatedPilotSkillIfNeeded(
+export async function doSelfInitiatedPilotSkillIfNeeded(
   props: Readonly<LastState & BatterySystemTutorialProps>,
 ): Promise<boolean> {
   const hasPilotSkill = props.update.some(

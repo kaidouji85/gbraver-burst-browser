@@ -4,7 +4,7 @@ import { BatterySystemTutorialProps } from "../../props";
 import { BatterySystemTutorialState } from "../../state";
 import { introduction } from "../../stories/introduction";
 import { doBattleDescriptionIfNeeded } from "./do-battle-description-if-needed";
-import { selfInitiatedPilotSkillIfNeeded } from "./do-self-initialated-pilot-skill-if-needed";
+import { doSelfInitiatedPilotSkillIfNeeded } from "./do-self-initialated-pilot-skill-if-needed";
 import { doSelfInitiatedBurstIfNeeded } from "./do-self-initiated-burst-if-needed";
 
 /**
@@ -30,7 +30,7 @@ export async function beforeLastState(
     return props.state;
   }
 
-  if (await selfInitiatedPilotSkillIfNeeded(props)) {
+  if (await doSelfInitiatedPilotSkillIfNeeded(props)) {
     return props.state;
   }
 
