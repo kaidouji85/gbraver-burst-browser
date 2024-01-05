@@ -40,14 +40,11 @@ export async function doBattleDescriptionIfNeeded(
     ? await playerAttack(props, battle.result)
     : await enemyAttack(props, battle.result);
   invisibleAllMessageWindows(props);
-
   if (turn === 2) {
     await waitTime(200);
     await batteryRuleDescription(props);
     return props.state;
-  }
-
-  if (turn === 3) {
+  } else if (turn === 3) {
     await waitTime(200);
     await completeAttackAndDefense(props);
     invisibleAllMessageWindows(props);
@@ -55,7 +52,7 @@ export async function doBattleDescriptionIfNeeded(
       ...props.state,
       isBatterySystemDescriptionComplete: true,
     };
+  } else {
+    return props.state;
   }
-
-  return null;
 }
