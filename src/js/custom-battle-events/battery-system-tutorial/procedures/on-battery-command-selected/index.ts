@@ -16,23 +16,15 @@ import {
 import { refreshConversation } from "../../../invisible-all-message-windows";
 import { burstCaption, pilotSkillCaption } from "../../captions";
 import { BatterySystemTutorialProps } from "../../props";
-import type { BatterySystemTutorialState } from "../../state";
 import {
   cancelZeroBatteryDefense,
   doBurstBecauseZeroBattery,
   doPilotSkillBecauseZeroBattery,
   zeroBatteryDefenseBecauseNoBatteryRecover,
 } from "../../stories/zero-battery";
+import { BatteryCommandSelectedEnd } from "./battery-command-selected-end";
 
-/** イベントリスト終了情報 */
-type Ret = {
-  /** ステート更新結果 */
-  state: BatterySystemTutorialState;
-  /** コマンドキャンセル情報 */
-  cancel: CommandCanceled;
-};
-
-/** ゼロ防御した時の処理 パラメータ */
+/** @deprecated ゼロ防御した時の処理 パラメータ */
 type OnZeroDefenseParams = {
   /** イベントプロパティ */
   props: Readonly<CustomBattleEventProps & BatterySystemTutorialProps>;
@@ -41,11 +33,12 @@ type OnZeroDefenseParams = {
 };
 
 /**
+ * @deprecated
  * ゼロ防御した時の処理
  * @param params パラメータ
  * @return 終了情報
  */
-async function onZeroDefense(params: OnZeroDefenseParams): Promise<Ret> {
+async function onZeroDefense(params: OnZeroDefenseParams): Promise<BatteryCommandSelectedEnd> {
   const { props, player } = params;
   const isZeroBattery = player.armdozer.battery === 0;
   const enableBurst = player.armdozer.enableBurst;
@@ -112,7 +105,7 @@ async function onZeroDefense(params: OnZeroDefenseParams): Promise<Ret> {
  */
 export async function onBatteryCommandSelected(
   props: Readonly<BatteryCommandSelected & BatterySystemTutorialProps>,
-): Promise<Ret> {
+): Promise<BatteryCommandSelectedEnd> {
   const foundLastState = props.stateHistory[props.stateHistory.length - 1];
   const foundPlayer = (foundLastState?.players ?? []).find(
     (v) => v.playerId === props.playerId,

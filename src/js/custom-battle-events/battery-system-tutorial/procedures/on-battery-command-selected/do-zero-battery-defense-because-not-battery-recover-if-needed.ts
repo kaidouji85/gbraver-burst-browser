@@ -1,24 +1,18 @@
-import {
-  CommandCanceled,
-  CustomBattleEventProps,
-} from "../../../../td-scenes/battle/custom-battle-event";
+import { CustomBattleEventProps } from "../../../../td-scenes/battle/custom-battle-event";
 import { refreshConversation } from "../../../invisible-all-message-windows";
 import { separatePlayers } from "../../../separate-players";
 import { BatterySystemTutorialProps } from "../../props";
-import { BatterySystemTutorialState } from "../../state";
 import { zeroBatteryDefenseBecauseNoBatteryRecover } from "../../stories/zero-battery";
+import { BatteryCommandSelectedEnd } from "./battery-command-selected-end";
 
-/** イベントリスト終了情報 */
-type Ret = {
-  /** ステート更新結果 */
-  state: BatterySystemTutorialState;
-  /** コマンドキャンセル情報 */
-  cancel: CommandCanceled;
-};
-
+/**
+ * 条件を満たした場合「バースト、パイロットスキルが使えず0バッテリーなので負け確定」を実行する
+ * @param props イベントプロパティ
+ * @return 実行した場合は終了情報、しなかった場合はnull
+ */
 export async function doZeroBatteryDefenseBecauseNotBatteryRecoverIfNeeded(
   props: Readonly<CustomBattleEventProps & BatterySystemTutorialProps>,
-): Promise<Ret | null> {
+): Promise<BatteryCommandSelectedEnd | null> {
   const lastState = props.stateHistory.at(-1);
   if (!lastState) {
     return null;
