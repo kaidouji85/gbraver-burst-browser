@@ -2,7 +2,6 @@ import type { GameState, PlayerState } from "gbraver-burst-core";
 
 import type {
   BatteryCommandSelected,
-  CommandCanceled,
   CustomBattleEventProps,
 } from "../../../../td-scenes/battle/custom-battle-event";
 import { unattentionBurstButton } from "../../../attention";
