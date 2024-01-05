@@ -1,11 +1,21 @@
 import { BatteryCommandSelected } from "../../../../td-scenes/battle/custom-battle-event";
 import { unattentionBurstButton } from "../../../attention";
-import { focusInBatterySelector, focusInBurstButton, focusInPilotButton, isBatterySelectorFocused } from "../../../focus";
+import {
+  focusInBatterySelector,
+  focusInBurstButton,
+  focusInPilotButton,
+  isBatterySelectorFocused,
+} from "../../../focus";
 import { refreshConversation } from "../../../invisible-all-message-windows";
 import { separatePlayers } from "../../../separate-players";
 import { burstCaption, pilotSkillCaption } from "../../captions";
 import { BatterySystemTutorialProps } from "../../props";
-import { cancelZeroBatteryDefense, doBurstBecauseZeroBattery, doPilotSkillBecauseZeroBattery, zeroBatteryDefenseBecauseNoBatteryRecover } from "../../stories/zero-battery";
+import {
+  cancelZeroBatteryDefense,
+  doBurstBecauseZeroBattery,
+  doPilotSkillBecauseZeroBattery,
+  zeroBatteryDefenseBecauseNoBatteryRecover,
+} from "../../stories/zero-battery";
 import { BatteryCommandSelectedEnd } from "./battery-command-selected-end";
 
 /**
@@ -30,7 +40,7 @@ export async function doZeroBatteryIdNeeded(
   if (!separatedPlayers) {
     return null;
   }
-  
+
   const { player } = separatedPlayers;
   const isPlayerTurn = lastState.activePlayerId === player.playerId;
   if (isPlayerTurn) {
