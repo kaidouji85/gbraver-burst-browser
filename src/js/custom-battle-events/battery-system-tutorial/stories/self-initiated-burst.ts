@@ -9,14 +9,14 @@ import { scrollLeftMessages } from "../../scroll-messages";
  * @return ストーリーが完了したら発火するPromise
  */
 export async function selfInitiatedBurst(
-  props: Readonly<CustomBattleEventProps>
+  props: Readonly<CustomBattleEventProps>,
 ): Promise<void> {
   activeLeftMessageWindowWithFace(props, "Tsubasa");
   await scrollLeftMessages(props, [
     ["ツバサ", "「素晴らしいぞシンヤ さっそくバーストを試したのか"],
     ["バーストは一試合に一回だけ使える大技で"],
     ["ターン消費なしでバッテリーを大幅回復できるんだ"],
-    ["さらにロボ毎に固有の追加効果もあるが それは追々解説しよう」"]
+    ["さらにロボ毎に固有の追加効果もあるが それは追々解説しよう」"],
   ]);
   invisibleAllMessageWindows(props);
 }

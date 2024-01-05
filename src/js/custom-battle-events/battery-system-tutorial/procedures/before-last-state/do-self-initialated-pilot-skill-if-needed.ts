@@ -8,9 +8,11 @@ import { selfInitiatedPilotSkill } from "../../stories/self-intiated-pilot-skill
  * @return 実行した場合はtrue、そうでない場合はfalse
  */
 export async function selfInitiatedPilotSkillIfNeeded(
-  props: Readonly<LastState & BatterySystemTutorialProps>
+  props: Readonly<LastState & BatterySystemTutorialProps>,
 ): Promise<boolean> {
-  const hasPilotSkill = props.update.some(state => state.effect.name === "PilotSkillEffect");
+  const hasPilotSkill = props.update.some(
+    (state) => state.effect.name === "PilotSkillEffect",
+  );
   if (hasPilotSkill && !props.state.isExplainedPilotSkillAtZeroBattery) {
     await selfInitiatedPilotSkill(props);
     return true;

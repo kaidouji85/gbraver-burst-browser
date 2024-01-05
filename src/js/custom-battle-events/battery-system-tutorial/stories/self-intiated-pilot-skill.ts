@@ -9,13 +9,13 @@ import { scrollLeftMessages } from "../../scroll-messages";
  * @return ストーリーが完了したら発火するPromise
  */
 export async function selfInitiatedPilotSkill(
-  props: Readonly<CustomBattleEventProps>
+  props: Readonly<CustomBattleEventProps>,
 ): Promise<void> {
   activeLeftMessageWindowWithFace(props, "Tsubasa");
   await scrollLeftMessages(props, [
     ["ツバサ", "「もうパイロットスキルを発動できるとは これは将来有望だな"],
     ["パイロットスキルでは 一試合に一回だけパイロット固有のスキルを発動できる"],
-    ["君のパイロットスキルは バッテリー2回復だ」"]
+    ["君のパイロットスキルは バッテリー2回復だ」"],
   ]);
   invisibleAllMessageWindows(props);
 }
