@@ -14,8 +14,7 @@ export async function selfInitiatedPilotSkill(
   activeLeftMessageWindowWithFace(props, "Tsubasa");
   await scrollLeftMessages(props, [
     ["ツバサ", "「もうパイロットスキルを発動できるとは これは将来有望だな"],
-    ["パイロットスキルは一試合に一回だけ使える技で"],
-    ["パイロット毎に固有の効果を発動できる"],
+    ["パイロットスキルでは 一試合に一回だけパイロット固有のスキルを発動できる"],
     ["君のパイロットスキルは バッテリー2回復だ」"]
   ]);
   invisibleAllMessageWindows(props);
