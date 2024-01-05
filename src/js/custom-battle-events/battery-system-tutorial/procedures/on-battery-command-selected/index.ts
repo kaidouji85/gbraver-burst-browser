@@ -4,25 +4,25 @@ import type {
   BatteryCommandSelected,
   CommandCanceled,
   CustomBattleEventProps,
-} from "../../../td-scenes/battle/custom-battle-event";
-import { unattentionBurstButton } from "../../attention";
+} from "../../../../td-scenes/battle/custom-battle-event";
+import { unattentionBurstButton } from "../../../attention";
 import {
   focusInBatterySelector,
   focusInBurstButton,
   focusInPilotButton,
   focusOutBatterySelector,
   isBatterySelectorFocused,
-} from "../../focus";
-import { refreshConversation } from "../../invisible-all-message-windows";
-import { burstCaption, pilotSkillCaption } from "../captions";
-import { BatterySystemTutorialProps } from "../props";
-import type { BatterySystemTutorialState } from "../state";
+} from "../../../focus";
+import { refreshConversation } from "../../../invisible-all-message-windows";
+import { burstCaption, pilotSkillCaption } from "../../captions";
+import { BatterySystemTutorialProps } from "../../props";
+import type { BatterySystemTutorialState } from "../../state";
 import {
   cancelZeroBatteryDefense,
   doBurstBecauseZeroBattery,
   doPilotSkillBecauseZeroBattery,
   zeroBatteryDefenseBecauseNoBatteryRecover,
-} from "../stories/zero-battery";
+} from "../../stories/zero-battery";
 
 /** イベントリスト終了情報 */
 type Ret = {
