@@ -8,6 +8,7 @@ import type {
 } from "gbraver-burst-core";
 
 /**
+ * @deprecated
  * GameStateX<Battle>にキャストする
  * キャストできない場合はnullを返す
  *
@@ -26,6 +27,7 @@ export function castBattle(
 }
 
 /**
+ * @deprecated
  * ステートヒストリーからGameStateX<Battle>を抽出する
  * 抽出できない場合はnullを返す
  *
@@ -40,6 +42,7 @@ export function extractBattle(
 }
 
 /**
+ * @deprecated
  * GameStateX<InputCommand>にキャストする
  * キャストできない場合はnullを返す
  *
@@ -58,6 +61,7 @@ export function castInputCommand(
 }
 
 /**
+ * @deprecated
  * ステートヒストリーからGameStateX<InputCommand>を抽出する
  * 抽出できない場合はnullを返す
  *
@@ -72,6 +76,7 @@ export function extractInputCommand(
 }
 
 /**
+ * @deprecated
  * GameStateX<BatteryDeclaration>にキャストする
  * キャストできない場合はnullを返す
  *
@@ -90,6 +95,7 @@ export function castBatteryDeclaration(
 }
 
 /**
+ * @deprecated
  * ステートヒストリーからGameStateX<BatteryDeclaration>を抽出する
  * 抽出できない場合はnullを返す
  *
@@ -106,6 +112,7 @@ export function extractBatteryDeclaration(
 }
 
 /**
+ * @deprecated
  * GameStateX<GameEnd>にキャストする
  * キャストできない場合はnullを返す
  *
@@ -124,6 +131,7 @@ export function castGameEnd(
 }
 
 /**
+ * @deprecated
  * ステートヒストリーからGameStateX<GameEnd>を抽出する
  * 抽出できない場合はnullを返す
  *
