@@ -19,7 +19,7 @@ type SeparatedPlayers = {
  * @param state ゲームステート
  * @return 分割されたプレイヤー、分割できない場合null
  */
-function separatePlayers(
+export function separatePlayers(
   props: Readonly<CustomBattleEventProps>,
   state: Readonly<GameState>,
 ) {
