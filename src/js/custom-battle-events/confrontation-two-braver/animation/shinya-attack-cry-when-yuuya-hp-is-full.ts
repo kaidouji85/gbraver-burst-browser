@@ -6,7 +6,9 @@ import { switchPlayerPilotCry } from "../../pilot-cry";
  * @param props イベントプロパティ
  * @return アニメーション
  */
-export const shinyaAttackCryWhenYuuyaHPIsFull = (props: Readonly<CustomBattleEventProps>) =>
+export const shinyaAttackCryWhenYuuyaHPIsFull = (
+  props: Readonly<CustomBattleEventProps>,
+) =>
   switchPlayerPilotCry(
     props,
     "Shinya",

@@ -15,7 +15,7 @@ export const shinyaBattleWhenYuuyaTakesDamage: ConditionalAnimation<
     }
 
     const { player, enemy } = separatedResult;
-    const isYuuyaDamaged = enemy.armdozer.hp < enemy.armdozer.maxHp; 
+    const isYuuyaDamaged = enemy.armdozer.hp < enemy.armdozer.maxHp;
     return isYuuyaDamaged &&
       props.currentState.effect.name === "BatteryDeclaration" &&
       props.currentState.effect.attacker === player.playerId
