@@ -1,5 +1,6 @@
 import { CustomBattleEventProps } from "../../../td-scenes/battle/custom-battle-event";
 import { activeLeftMessageWindowWithFace } from "../../active-message-window";
+import { invisibleAllMessageWindows } from "../../invisible-all-message-windows";
 import { scrollLeftMessages } from "../../scroll-messages";
 
 /**
@@ -17,4 +18,5 @@ export async function selfInitiatedPilotSkill(
     ["パイロット毎に固有の効果を発動できる"],
     ["君のパイロットスキルは バッテリー2回復だ」"]
   ]);
+  invisibleAllMessageWindows(props);
 }

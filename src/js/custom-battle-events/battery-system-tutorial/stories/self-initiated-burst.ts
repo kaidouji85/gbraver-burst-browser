@@ -1,5 +1,6 @@
 import { CustomBattleEventProps } from "../../../td-scenes/battle/custom-battle-event";
 import { activeLeftMessageWindowWithFace } from "../../active-message-window";
+import { invisibleAllMessageWindows } from "../../invisible-all-message-windows";
 import { scrollLeftMessages } from "../../scroll-messages";
 
 /**
@@ -17,4 +18,5 @@ export async function selfInitiatedBurst(
     ["ターン消費なしでバッテリーを大幅回復できるんだ"],
     ["さらにロボ毎に固有の追加効果もあるが それは追々解説しよう」"]
   ]);
+  invisibleAllMessageWindows(props);
 }
