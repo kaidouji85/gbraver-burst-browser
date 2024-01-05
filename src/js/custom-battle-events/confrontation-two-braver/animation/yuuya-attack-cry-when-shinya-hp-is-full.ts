@@ -8,4 +8,4 @@ import { switchEnemyPilotCry } from "../../pilot-cry";
  */
 export const yuuyaAttackCryWhenShinyaHPIsFull = (
   props: Readonly<CustomBattleEventProps>,
-) => switchEnemyPilotCry(props, "Yuuya", "これが躱せるかな シンヤ");
+) => switchEnemyPilotCry(props, "Yuuya", "シンヤ これが躱せるかな");
