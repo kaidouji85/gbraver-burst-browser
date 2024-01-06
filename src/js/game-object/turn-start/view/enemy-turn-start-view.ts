@@ -9,7 +9,7 @@ import type { TurnStartModel } from "../model/turn-start-model";
 import type { TurnStartView } from "./turn-start-view";
 
 /** メッシュサイズ */
-export const MESH_SIZE = 370;
+export const MESH_SIZE = 400;
 
 /** 敵ターンスタートビュー */
 export class EnemyTurnStartView implements TurnStartView {
