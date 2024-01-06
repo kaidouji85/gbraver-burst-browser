@@ -15,15 +15,13 @@ function pilotCry(
   messageWindow: MessageWindow,
   face: FaceType,
   message: string,
-): Animate {
-  return process(() => {
-    messageWindow.visible(true);
-    messageWindow.lighten();
-    messageWindow.face(face);
-    messageWindow.faceVisible(true);
-    messageWindow.messages([message]);
-    messageWindow.nextMessageIconVisible(false);
-  });
+): void {
+  messageWindow.visible(true);
+  messageWindow.lighten();
+  messageWindow.face(face);
+  messageWindow.faceVisible(true);
+  messageWindow.messages([message]);
+  messageWindow.nextMessageIconVisible(false);
 }
 
 /**
@@ -36,25 +34,11 @@ export const playerPilotCry = (
   props: Readonly<CustomBattleEventProps>,
   face: FaceType,
   message: string,
-): Animate => pilotCry(props.view.dom.playerCryMessageWindow, face, message);
-
-/**
- * プレイヤーパイロットの叫びだけを表示する
- * @param props カスタムイベントプロパティ
- * @param face 顔グラフィック
- * @param message メッセージ
- */
-export const switchPlayerPilotCry = (
-  props: Readonly<CustomBattleEventProps>,
-  face: FaceType,
-  message: string,
 ): Animate =>
-  all(
-    playerPilotCry(props, face, message),
-    process(() => {
-      props.view.dom.enemyCryMessageWindow.visible(false);
-    }),
-  );
+  process(() => {
+    pilotCry(props.view.dom.playerCryMessageWindow, face, message);
+    props.view.dom.enemyCryMessageWindow.visible(false);
+  });
 
 /**
  * 敵パイロットの叫び
@@ -66,9 +50,14 @@ export const enemyPilotCry = (
   props: Readonly<CustomBattleEventProps>,
   face: FaceType,
   message: string,
-): Animate => pilotCry(props.view.dom.enemyCryMessageWindow, face, message);
+): Animate =>
+  process(() => {
+    pilotCry(props.view.dom.enemyCryMessageWindow, face, message);
+    props.view.dom.playerCryMessageWindow.visible(false);
+  });
 
 /**
+ * @deprecated
  * 敵パイロットの叫びだけを表示する
  * @param props カスタムイベントプロパティ
  * @param face 顔グラフィック
