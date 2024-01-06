@@ -1,4 +1,3 @@
-import { all } from "../animation/all";
 import { Animate } from "../animation/animate";
 import { process } from "../animation/process";
 import { MessageWindow } from "../game-dom/message-window";
