@@ -1,11 +1,14 @@
-import {CustomBattleEventProps, LastState} from "../td-scenes/battle/custom-battle-event";
+import {
+  CustomBattleEventProps,
+  LastState,
+} from "../td-scenes/battle/custom-battle-event";
 
 /**
  * 全ての叫びウインドウを非表示にする
  * @param props イベントプロパティ
  */
 function invisibleCryMessageWindow(
-  props: Readonly<CustomBattleEventProps>
+  props: Readonly<CustomBattleEventProps>,
 ): void {
   props.view.dom.playerCryMessageWindow.visible(false);
   props.view.dom.enemyCryMessageWindow.visible(false);
@@ -17,7 +20,7 @@ function invisibleCryMessageWindow(
  * @param props イベントプロパティ
  */
 export function invisibleCryMessageWindowWhenInputCommand(
-  props: Readonly<LastState>
+  props: Readonly<LastState>,
 ): void {
   const lastState = props.update.at(-1);
   if (!lastState) {
@@ -46,7 +49,7 @@ export function invisibleCryMessageWindowWhenInputCommand(
  * @param props イベントプロパティ
  */
 export function invisibleCryMessageWindowWhenGameEnd(
-  props: Readonly<LastState>
+  props: Readonly<LastState>,
 ): void {
   const lastState = props.update.at(-1);
   if (!lastState) {
