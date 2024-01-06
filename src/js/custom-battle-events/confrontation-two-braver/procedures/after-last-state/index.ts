@@ -1,4 +1,5 @@
 import { LastState } from "../../../../td-scenes/battle/custom-battle-event";
+import { invisibleCryMessageWindowWhenGameEnd } from "../../../invisible-cry-message-window";
 import { endGameIfNeeded } from "./end-game-if-needed";
 import { playZeroDefenseButEnableBurstIfNeeded } from "./play-zero-defense-but-enable-burst-if-needed";
 import { playZeroDefenseButPositiveBatteryIfNeeded } from "./play-zero-defense-but-positive-battery-if-needed";
@@ -11,6 +12,7 @@ import { playZeroDefenseButPositiveBatteryIfNeeded } from "./play-zero-defense-b
 export async function afterLastState(
   props: Readonly<LastState>,
 ): Promise<void> {
+  invisibleCryMessageWindowWhenGameEnd(props);
   if (await playZeroDefenseButPositiveBatteryIfNeeded(props)) {
     return;
   }
