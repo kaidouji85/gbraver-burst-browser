@@ -13,19 +13,22 @@
     /** 本カスタムプロパティはJavaScriptから変更される */
     --brightness: brightness(1);
     --margin-x: max(3vw, var(--safe-area-left), var(--safe-area-right));
-    --window-height: calc(var(--responsive-font-size) * 7);
+    --window-height: calc(var(--battle-window-font-size) * 7);
     --cry-window-height: auto;
 
     box-sizing: border-box;
     display: flex;
     position: fixed;
-    bottom: max(calc(var(--responsive-font-size) * 1), var(--safe-area-bottom));
+    bottom: max(
+      calc(var(--battle-window-font-size) * 1),
+      var(--safe-area-bottom)
+    );
     color: var(--font-color);
-    font-size: var(--responsive-font-size);
+    font-size: var(--battle-window-font-size);
     background-color: #2b2b2b;
     border: var(--dialog-border);
     border-radius: var(--dialog-border-radius);
-    padding: calc(var(--responsive-font-size) * 1);
+    padding: calc(var(--battle-window-font-size) * 1);
     width: calc(49vw - var(--margin-x));
     filter: var(--brightness);
   }
@@ -88,7 +91,7 @@
 
   .message-window__paragraph,
   .message-window__paragraph--align-center {
-    font-size: var(--responsive-font-size);
+    font-size: var(--battle-window-font-size);
   }
 
   .message-window__paragraph--align-center {
@@ -98,7 +101,7 @@
 
   .message-window__next-message-icon {
     display: inline-block;
-    margin-left: calc(var(--responsive-font-size) * 0.5);
+    margin-left: calc(var(--battle-window-font-size) * 0.5);
     animation-name: icon-up-down;
     animation-fill-mode: backwards;
     animation-duration: 0.5s;
@@ -121,20 +124,20 @@
 
   .message-window__minus-battery,
   .message-window__plus-battery {
-    --size: calc(var(--responsive-font-size) * 2);
+    --size: calc(var(--battle-window-font-size) * 2);
 
     width: var(--size);
     height: var(--size);
-    margin: calc(var(--responsive-font-size) * 0.2);
+    margin: calc(var(--battle-window-font-size) * 0.2);
   }
 
   .message-window__attack-battery,
   .message-window__defense-battery {
-    --size: calc(var(--responsive-font-size) * 4);
+    --size: calc(var(--battle-window-font-size) * 4);
 
     width: var(--size);
     height: var(--size);
-    margin: calc(var(--responsive-font-size) * 0.2);
+    margin: calc(var(--battle-window-font-size) * 0.2);
   }
 }
 

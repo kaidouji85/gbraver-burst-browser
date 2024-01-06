@@ -7,6 +7,8 @@ import { TEXTURE_IDS } from "../../../resource/texture/ids";
 import { HUDCutInScale } from "../../scale";
 import type { TurnStartModel } from "../model/turn-start-model";
 import type { TurnStartView } from "./turn-start-view";
+
+/** メッシュサイズ */
 export const MESH_SIZE = 400;
 
 /** プレイヤーターンスタートビュー */
