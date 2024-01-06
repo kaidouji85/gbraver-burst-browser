@@ -5,6 +5,7 @@ import {
   ConditionalAnimation,
   getAnimationIfConditionMet,
 } from "../../../get-animation-if-conditional-met";
+import { invisibleCryMessageWindowWhenTurnChange } from "../../../invisible-cry-message-window";
 import { ConfrontationTwoBraverProps } from "../../props";
 import { evenMatch } from "./even-match";
 import { shinyaBattleWhenYuuyaHPIsFull } from "./shinya-battle-when-yuuya-hp-is-full";
@@ -19,7 +20,6 @@ import { yuuyaBattleWhenShinyaHPIsFull } from "./yuuya-battle-when-shinya-hp-is-
 import { yuuyaFinishBlow } from "./yuuya-finish-blow";
 import { yuuyaFirstBattle } from "./yuuya-first-battle";
 import { yuuyaHasAdvantage } from "./yuuya-has-advantage";
-import { invisibleCryMessageWindowWhenTurnChange } from "../../../invisible-cry-message-window";
 
 /**
  * カスタムステートアニメーション
