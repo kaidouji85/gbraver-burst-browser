@@ -1,5 +1,8 @@
+import { Animate } from "../animation/animate";
+import { process } from "../animation/process";
 import {
   CustomBattleEventProps,
+  CustomStateAnimation,
   LastState,
 } from "../td-scenes/battle/custom-battle-event";
 
@@ -15,32 +18,19 @@ function invisibleCryMessageWindow(
 }
 
 /**
- * コマンド入力開始時に叫びウインドウを非表示にする
- * 本関数はbeforeLastStateで呼び出す想定である
+ * ターン開始時に叫びウインドウを非表示にする
+ * 本関数はonStateAnimationで呼び出す想定である
  * @param props イベントプロパティ
+ * @returns ターン開始時なら再生するアニメーション、それ以外はnull
  */
-export function invisibleCryMessageWindowWhenInputCommand(
-  props: Readonly<LastState>,
-): void {
-  const lastState = props.update.at(-1);
-  if (!lastState) {
-    return;
-  }
-
-  if (lastState.effect.name !== "InputCommand") {
-    return;
-  }
-
-  const playerCommand = lastState.effect.players.find(
-    (v) => v.playerId === props.playerId,
-  );
-  if (!playerCommand) {
-    return;
-  }
-
-  if (playerCommand.selectable) {
-    invisibleCryMessageWindow(props);
-  }
+export function invisibleCryMessageWindowWhenTurnChange(
+  props: Readonly<CustomStateAnimation>,
+): Animate | null {
+  return props.currentState.effect.name === "TurnChange"
+    ? process(() => {
+        invisibleCryMessageWindow(props);
+      })
+    : null;
 }
 
 /**

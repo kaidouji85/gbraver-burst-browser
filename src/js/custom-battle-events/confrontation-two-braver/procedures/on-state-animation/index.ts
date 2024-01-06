@@ -5,6 +5,7 @@ import {
   ConditionalAnimation,
   getAnimationIfConditionMet,
 } from "../../../get-animation-if-conditional-met";
+import { invisibleCryMessageWindowWhenTurnChange } from "../../../invisible-cry-message-window";
 import { ConfrontationTwoBraverProps } from "../../props";
 import { evenMatch } from "./even-match";
 import { shinyaBattleWhenYuuyaHPIsFull } from "./shinya-battle-when-yuuya-hp-is-full";
@@ -44,6 +45,7 @@ export function onStateAnimation(
     ...shinyaBattleWhenYuuyaHPIsFull,
     ...shinyaBattleWhenYuuyaTakesDamage,
     ...yuuyaBattleWhenShinyaHPIsFull,
+    invisibleCryMessageWindowWhenTurnChange,
   ];
   return getAnimationIfConditionMet(props, conditionalAnimations) ?? empty();
 }
