@@ -26,13 +26,11 @@ function invisibleCryMessageWindow(
 export function invisibleCryMessageWindowWhenTurnChange(
   props: Readonly<CustomStateAnimation>,
 ): Animate | null {
-  if (props.currentState.effect.name !== "TurnChange") {
-    return null;
-  }
-
-  return process(() => {
-    invisibleCryMessageWindow(props);
-  });
+  return props.currentState.effect.name === "TurnChange"
+    ? process(() => {
+        invisibleCryMessageWindow(props);
+      })
+    : null;
 }
 
 /**
