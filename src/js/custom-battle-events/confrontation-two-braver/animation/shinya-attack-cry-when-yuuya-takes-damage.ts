@@ -6,6 +6,6 @@ import { playerPilotCry } from "../../pilot-cry";
  * @param props イベントプロパティ
  * @return アニメーション
  */
-export const shinyaAttackCryWhenYuuyaTakesNoDamage = (
+export const shinyaAttackCryWhenYuuyaTakesDamage = (
   props: Readonly<CustomBattleEventProps>,
 ) => playerPilotCry(props, "Shinya", "あと一回直撃させれば 俺の勝ちッス");
