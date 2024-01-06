@@ -1,5 +1,5 @@
 import { CustomBattleEventProps } from "../../../td-scenes/battle/custom-battle-event";
-import { switchEnemyPilotCry } from "../../pilot-cry";
+import { enemyPilotCry } from "../../pilot-cry";
 
 /**
  * トドメの一撃 ユウヤ 叫び
@@ -8,4 +8,4 @@ import { switchEnemyPilotCry } from "../../pilot-cry";
  */
 export const yuuyaCryWhenHeDeliversFinalBlow = (
   props: Readonly<CustomBattleEventProps>,
-) => switchEnemyPilotCry(props, "Yuuya", "これで終わりだ シンブレイバー");
+) => enemyPilotCry(props, "Yuuya", "これで終わりだ シンブレイバー");

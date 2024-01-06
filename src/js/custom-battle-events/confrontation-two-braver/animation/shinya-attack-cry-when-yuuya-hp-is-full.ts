@@ -1,5 +1,5 @@
 import { CustomBattleEventProps } from "../../../td-scenes/battle/custom-battle-event";
-import { switchPlayerPilotCry } from "../../pilot-cry";
+import { playerPilotCry } from "../../pilot-cry";
 
 /**
  * シンヤ 戦闘 ユウヤのHPが満タン
@@ -9,7 +9,7 @@ import { switchPlayerPilotCry } from "../../pilot-cry";
 export const shinyaAttackCryWhenYuuyaHPIsFull = (
   props: Readonly<CustomBattleEventProps>,
 ) =>
-  switchPlayerPilotCry(
+  playerPilotCry(
     props,
     "Shinya",
     "まだノーダメージなんて さすがユウヤさんッス",
