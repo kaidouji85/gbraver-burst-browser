@@ -1,19 +1,22 @@
-import { GameState } from "gbraver-burst-core";
-
 import { LastState } from "../td-scenes/battle/custom-battle-event";
 
 /**
  * プレイヤーがコマンド選択不可であるかを判定する
- * @param lastState 最終ゲームステート
+ * @param props イベントプロパティ
  * @return 判定結果、trueであればプレイヤーがコマンド選択不可である
  */
-function isPlayerNotSelectable(lastState: GameState): boolean {
+function isPlayerNotSelectable(props: Readonly<LastState>): boolean {
+  const lastState = props.update.at(-1);
+  if (!lastState) {
+    return false;
+  }
+
   if (lastState.effect.name !== "InputCommand") {
     return false;
   }
 
   const playerCommand = lastState.effect.players.find(
-    (v) => v.playerId === "player",
+    (v) => v.playerId === props.playerId,
   );
   if (!playerCommand) {
     return false;
@@ -30,8 +33,7 @@ function isPlayerNotSelectable(lastState: GameState): boolean {
 export function invisibleCryMessageWindowIfNeeded(
   props: Readonly<LastState>,
 ): void {
-  const lastState = props.update.at(-1);
-  if (lastState && isPlayerNotSelectable(lastState)) {
+  if (isPlayerNotSelectable(props)) {
     return;
   }
 
