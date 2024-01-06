@@ -19,6 +19,7 @@ import { yuuyaBattleWhenShinyaHPIsFull } from "./yuuya-battle-when-shinya-hp-is-
 import { yuuyaFinishBlow } from "./yuuya-finish-blow";
 import { yuuyaFirstBattle } from "./yuuya-first-battle";
 import { yuuyaHasAdvantage } from "./yuuya-has-advantage";
+import { invisibleCryMessageWindowWhenTurnChange } from "../../../invisible-cry-message-window";
 
 /**
  * カスタムステートアニメーション
@@ -44,6 +45,7 @@ export function onStateAnimation(
     ...shinyaBattleWhenYuuyaHPIsFull,
     ...shinyaBattleWhenYuuyaTakesDamage,
     ...yuuyaBattleWhenShinyaHPIsFull,
+    invisibleCryMessageWindowWhenTurnChange,
   ];
   return getAnimationIfConditionMet(props, conditionalAnimations) ?? empty();
 }
