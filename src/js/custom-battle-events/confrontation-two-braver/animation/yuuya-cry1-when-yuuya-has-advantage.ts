@@ -1,5 +1,5 @@
 import { CustomBattleEventProps } from "../../../td-scenes/battle/custom-battle-event";
-import { switchEnemyPilotCry } from "../../pilot-cry";
+import { enemyPilotCry } from "../../pilot-cry";
 
 /**
  * チャプター ユウヤ有利 ユウヤ叫び1
@@ -8,4 +8,4 @@ import { switchEnemyPilotCry } from "../../pilot-cry";
  */
 export const yuuyaCry1WhenYuuyaHasAdvantage = (
   props: Readonly<CustomBattleEventProps>,
-) => switchEnemyPilotCry(props, "Yuuya", "どうしたシンブレイバー");
+) => enemyPilotCry(props, "Yuuya", "どうしたシンブレイバー");

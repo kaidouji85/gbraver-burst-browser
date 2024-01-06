@@ -55,22 +55,3 @@ export const enemyPilotCry = (
     pilotCry(props.view.dom.enemyCryMessageWindow, face, message);
     props.view.dom.playerCryMessageWindow.visible(false);
   });
-
-/**
- * @deprecated
- * 敵パイロットの叫びだけを表示する
- * @param props カスタムイベントプロパティ
- * @param face 顔グラフィック
- * @param message メッセージ
- */
-export const switchEnemyPilotCry = (
-  props: Readonly<CustomBattleEventProps>,
-  face: FaceType,
-  message: string,
-): Animate =>
-  all(
-    enemyPilotCry(props, face, message),
-    process(() => {
-      props.view.dom.playerCryMessageWindow.visible(false);
-    }),
-  );
