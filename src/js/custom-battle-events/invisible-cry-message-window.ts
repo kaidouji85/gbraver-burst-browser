@@ -34,6 +34,35 @@ export function invisibleCryMessageWindowWhenTurnChange(
 }
 
 /**
+ * コマンド入力時に叫びウインドウを非表示にする
+ * 本関数はbeforeLastStateで呼び出す想定である
+ * @param props イベントプロパティ
+ */
+export function invisibleCryMessageWindowWhenInputCommand(
+  props: Readonly<LastState>,
+): void {
+  const lastState = props.update.at(-1);
+  if (!lastState) {
+    return;
+  }
+
+  if (lastState.effect.name !== "InputCommand") {
+    return;
+  }
+
+  const playerCommand = lastState.effect.players.find(
+    (command) => command.playerId === props.playerId,
+  );
+  if (!playerCommand) {
+    return;
+  }
+
+  if (playerCommand.selectable) {
+    invisibleCryMessageWindow(props);
+  }
+}
+
+/**
  * ゲーム終了時後に叫びウインドウを非表示にする
  * 本関数はafterLastStateで呼び出す想定である
  * @param props イベントプロパティ
