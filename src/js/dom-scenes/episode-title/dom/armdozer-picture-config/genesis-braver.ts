@@ -8,13 +8,13 @@ import { ArmdozerPictureConfig } from "./armdozer-picture-config";
  * @return 生成結果
  */
 export const genesisBraver = (resources: Resources): ArmdozerPictureConfig => ({
-  standPath: {
+  stand: {
     path:
       resources.paths.find((v) => v.id === PathIds.GENESIS_BRAVER_STAND)
         ?.path ?? "",
     className: `${ROOT_CLASS}__genesis-braver-stand`,
   },
-  bustShotPath: {
+  bustShot: {
     path:
       resources.paths.find((v) => v.id === PathIds.GENESIS_BRAVER_BUST_SHOT)
         ?.path ?? "",

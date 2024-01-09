@@ -1,6 +1,8 @@
+import { ArmdozerId } from "gbraver-burst-core";
+
 import { EpisodeNumber } from "../../../game/episodes/episode";
 import { Resources } from "../../../resource";
-import { PathIds } from "../../../resource/path/ids";
+import { createArmdozerPictureConfig } from "./armdozer-picture-config";
 import { ROOT_CLASS } from "./class-name";
 import rootInnerHTMLTemplate from "./root-inner-html.hbs";
 
@@ -12,6 +14,8 @@ export type RootInnerHTMLParams = {
   number: EpisodeNumber;
   /** タイトル */
   title: string;
+  /** タイトルに表示するアームドーザのID */
+  armdozerId: ArmdozerId;
 };
 
 /**
@@ -21,12 +25,9 @@ export type RootInnerHTMLParams = {
  * @return innerHTML
  */
 export function rootInnerHtml(params: RootInnerHTMLParams): string {
-  const bustShot =
-    params.resources.paths.find((v) => v.id === PathIds.SHIN_BRAVER_BUST_SHOT)
-      ?.path ?? "";
-  const stand =
-    params.resources.paths.find((v) => v.id === PathIds.SHIN_BRAVER_STAND)
-      ?.path ?? "";
+  const { resources, armdozerId } = params;
+  const pictureConfig = createArmdozerPictureConfig(resources, armdozerId);
+  const { bustShot, stand } = pictureConfig;
   return rootInnerHTMLTemplate({
     params,
     ROOT_CLASS,

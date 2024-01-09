@@ -9,13 +9,13 @@ import { ArmdozerPictureConfig } from "./armdozer-picture-config";
  * @return 生成結果
  */
 export const shinBraver = (resources: Resources): ArmdozerPictureConfig => ({
-  standPath: {
+  stand: {
     path:
       resources.paths.find((v) => v.id === PathIds.SHIN_BRAVER_STAND)?.path ??
       "",
     className: `${ROOT_CLASS}__shin-braver-stand`,
   },
-  bustShotPath: {
+  bustShot: {
     path:
       resources.paths.find((v) => v.id === PathIds.SHIN_BRAVER_BUST_SHOT)
         ?.path ?? "",

@@ -7,8 +7,8 @@ import { waitTime } from "../../wait/wait-time";
 import { battleSceneConnector } from "../action-connector/battle-scene-connector";
 import { tutorialTitleConnector } from "../action-connector/tutorial-title-connector";
 import { MAX_LOADING_TIME } from "../dom-scene-binder/max-loading-time";
-import type { Episode } from "../episodes/episode";
-import type { GameProps } from "../game-props";
+import { Episode } from "../episodes/episode";
+import { GameProps } from "../game-props";
 
 /**
  * エピソードを開始するヘルパー関数
@@ -31,6 +31,7 @@ export async function startEpisode(
   const scene = new EpisodeTitle({
     ...episode,
     resources: props.resources,
+    armdozerId: episode.player.armdozer.id,
   });
   props.domSceneBinder.bind(scene, tutorialTitleConnector);
   await Promise.race([scene.waitUntilLoaded(), waitTime(MAX_LOADING_TIME)]);
