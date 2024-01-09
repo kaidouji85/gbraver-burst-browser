@@ -13,7 +13,7 @@ const introduction = `あとで考える`;
 
 /** 全国大会のリベンジ */
 export const nationalTournamentRevenge: Episode = {
-  id: EpisodeIDs.Pilot02,
+  id: EpisodeIDs.NATIONAL_TOURNAMENT_REVENGE,
   type: "Side Episode",
   number: "4.1",
   title: "（開発中）全国大会のリベンジ",
