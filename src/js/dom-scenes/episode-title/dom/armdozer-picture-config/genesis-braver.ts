@@ -2,6 +2,7 @@ import { Resources } from "../../../../resource";
 import { PathIds } from "../../../../resource/path/ids";
 import { ROOT_CLASS } from "../class-name";
 import { ArmdozerPictureConfig } from "./armdozer-picture-config";
+
 /**
  * ジェネシスブレイバー画像設定を生成する
  * @param resources リソース管理オブジェクト
