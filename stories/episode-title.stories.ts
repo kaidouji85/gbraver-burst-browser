@@ -51,6 +51,13 @@ export const episode3 = episodeTitleStory(
   ArmdozerIds.SHIN_BRAVER,
 );
 
+/** エピソード4 */
+export const episode4 = episodeTitleStory(
+  "4",
+  "対決、二人のブレイバー！！（負けイベント）",
+  ArmdozerIds.SHIN_BRAVER,
+);
+
 /** サイドエピソード3.1 */
 export const sideEpisode31 = episodeTitleStory(
   "3.1",
@@ -63,4 +70,11 @@ export const sideEpisode32 = episodeTitleStory(
   "3.2",
   "パイロットスキルで意表を突け",
   ArmdozerIds.SHIN_BRAVER,
+);
+
+/** サイドエピソード4.1 */
+export const sideEpisode41 = episodeTitleStory(
+  "4.1",
+  "リベンジ",
+  ArmdozerIds.GENESIS_BRAVER
 );
