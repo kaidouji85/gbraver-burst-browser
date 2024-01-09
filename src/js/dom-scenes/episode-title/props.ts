@@ -1,8 +1,7 @@
-import { domUuid } from "../../uuid/dom-uuid";
 import { waitElementLoaded } from "../../wait/wait-element-loaded";
 import { ROOT_CLASS } from "./dom/class-name";
-import { extractElements } from "./dom/elements";
-import type { RootInnerHTMLParams } from "./dom/root-inner-html";
+import { extractBustShot, extractStand } from "./dom/elements";
+import { RootInnerHTMLParams } from "./dom/root-inner-html";
 import { rootInnerHtml } from "./dom/root-inner-html";
 
 /** エピソードタイトル画面プロパティ */
@@ -26,14 +25,11 @@ export type CreatePropsParams = RootInnerHTMLParams;
 export function createEpisodeTitleProps(
   params: CreatePropsParams,
 ): EpisodeTitleProps {
-  const ids = {
-    stand: domUuid(),
-    bustShot: domUuid(),
-  };
   const root = document.createElement("div");
   root.className = ROOT_CLASS;
-  root.innerHTML = rootInnerHtml(ids, params);
-  const { stand, bustShot } = extractElements(root, ids);
+  root.innerHTML = rootInnerHtml(params);
+  const stand = extractStand(root);
+  const bustShot = extractBustShot(root);
   const isStandLoaded = waitElementLoaded(stand);
   const isBustShotLoaded = waitElementLoaded(bustShot);
   return {
