@@ -76,5 +76,5 @@ export const sideEpisode32 = episodeTitleStory(
 export const sideEpisode41 = episodeTitleStory(
   "4.1",
   "リベンジ",
-  ArmdozerIds.GENESIS_BRAVER
+  ArmdozerIds.GENESIS_BRAVER,
 );
