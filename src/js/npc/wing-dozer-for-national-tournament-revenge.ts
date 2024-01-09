@@ -42,10 +42,10 @@ const defenseRoutine: SimpleRoutine = (data) => {
 };
 
 /**
- * サイドエピソード「リベンジ」 ウィングドーザ NPC
+ * サイドエピソード「全国大会のリベンジ」 ウィングドーザ NPC
  * @return NPC
  */
-export function wingDozerNPCForRevenge(): NPC {
+export function wingDozerNPCForNationalTournamentRevenge(): NPC {
   const armdozer =
     Armdozers.find((v) => v.id === ArmdozerIds.WING_DOZER) ?? Armdozers[0];
   const pilot = Pilots.find((v) => v.id === PilotIds.TSUBASA) ?? Pilots[0];
