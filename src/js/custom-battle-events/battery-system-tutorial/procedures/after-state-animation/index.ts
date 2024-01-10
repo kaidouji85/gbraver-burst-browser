@@ -10,7 +10,7 @@ import { shinyaBurst } from "./shinya-burst";
 import { shinyaPilotSkill } from "./shinya-pilot-skill";
 
 /**
- * カスタムステートアニメーション
+ * ステートアニメ終了後に呼ばれるアニメーション
  * @param props イベントプロパティ
  * @return アニメーション
  */
