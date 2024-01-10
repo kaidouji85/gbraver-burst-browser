@@ -4,13 +4,12 @@ import type {
   BatteryCommandSelected,
   CommandCanceled,
 } from "../../../td-scenes/battle/custom-battle-event";
-import { focusInBurstButton, focusInPilotButton } from "../../focus";
-import { shouldBurst, shouldPilotSkill } from "../captions";
+import { focusInBurstButton } from "../../focus";
+import { shouldBurst } from "../captions";
 import { BurstTutorialProps } from "../props";
 import type { BurstTutorialState } from "../state";
 import { canNotChangeBattery } from "../stories/can-not-change-battery";
 import { doBurstToRecoverBattery } from "../stories/do-burst-to-recover-battery";
-import { doPilotSkillToRecoverBattery } from "../stories/do-pilot-skill-to-recover-battery";
 import { notDefense5Carelessly } from "../stories/not-defense5-carelessly";
 import { redoBatterySelect } from "../stories/redo-battery-select";
 import { shouldDefense5 } from "../stories/should-defense5";
@@ -91,21 +90,6 @@ export async function onBatteryCommandSelected(
     await defense5(props);
     await doBurstToRecoverBattery(props);
     await focusInBurstButton(props, shouldBurst);
-    return {
-      state: {
-        ...props.state,
-        isLoseIfNoDefense5Complete: true,
-      },
-      cancel: {
-        isCommandCanceled: true,
-      },
-    };
-  }
-
-  if (!isPlayerFullBattery && !enableBurst && enablePilotSkill) {
-    await defense5(props);
-    await doPilotSkillToRecoverBattery(props);
-    await focusInPilotButton(props, shouldPilotSkill);
     return {
       state: {
         ...props.state,
