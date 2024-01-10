@@ -6,11 +6,5 @@ import { playerPilotCry } from "../../pilot-cry";
  * @param props イベントプロパティ
  * @return アニメーション
  */
-export const shinyaPilotSkillCry = (
-  props: Readonly<CustomBattleEventProps>,
-) =>
-  playerPilotCry(
-    props,
-    "Shinya",
-    "なぜか無性にやる気が出てきたッス",
-  );
+export const shinyaPilotSkillCry = (props: Readonly<CustomBattleEventProps>) =>
+  playerPilotCry(props, "Shinya", "なぜか無性にやる気が出てきたッス");

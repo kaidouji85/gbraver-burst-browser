@@ -8,7 +8,6 @@ import { BatterySystemTutorialProps } from "../../props";
 export const shinyaPilotSkill: ConditionalAnimation<
   CustomStateAnimation & BatterySystemTutorialProps
 >[] = [
-  (props) => isPlayerPilotSkillActivated(props)
-    ? shinyaPilotSkillCry(props)
-    : null,
+  (props) =>
+    isPlayerPilotSkillActivated(props) ? shinyaPilotSkillCry(props) : null,
 ];

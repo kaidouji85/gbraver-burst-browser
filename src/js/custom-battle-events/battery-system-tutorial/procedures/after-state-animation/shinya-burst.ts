@@ -8,9 +8,10 @@ import { BatterySystemTutorialProps } from "../../props";
 export const shinyaBurst: ConditionalAnimation<
   CustomStateAnimation & BatterySystemTutorialProps
 >[] = [
-  (props) => isPlayerBurstActivated(props)
-    ? process(() => {
-      props.view.dom.playerCryMessageWindow.visible(false);
-    })
-    : null,
+  (props) =>
+    isPlayerBurstActivated(props)
+      ? process(() => {
+          props.view.dom.playerCryMessageWindow.visible(false);
+        })
+      : null,
 ];

@@ -8,7 +8,5 @@ import { BatterySystemTutorialProps } from "../../props";
 export const shinyaBurst: ConditionalAnimation<
   CustomStateAnimation & BatterySystemTutorialProps
 >[] = [
-  (props) => isPlayerBurstActivated(props)
-    ? shinyaBurstCry(props)
-    : null,
+  (props) => (isPlayerBurstActivated(props) ? shinyaBurstCry(props) : null),
 ];

@@ -19,9 +19,6 @@ export function onStateAnimation(
 ): Animate {
   const conditionalAnimations: ConditionalAnimation<
     CustomStateAnimation & BatterySystemTutorialProps
-  >[] = [
-    ...shinyaBurst,
-    ...shinyaPilotSkill,
-  ];
+  >[] = [...shinyaBurst, ...shinyaPilotSkill];
   return getAnimationIfConditionMet(props, conditionalAnimations) ?? empty();
 }
