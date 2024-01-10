@@ -6,6 +6,7 @@ import {
   getAnimationIfConditionMet,
 } from "../../../get-animation-if-conditional-met";
 import { BatterySystemTutorialProps } from "../../props";
+import { shinyaPilotSkill } from "./shinya-pilot-skill";
 
 /**
  * カスタムステートアニメーション
@@ -17,6 +18,8 @@ export function afterStateAnimation(
 ): Animate {
   const conditionalAnimations: ConditionalAnimation<
     CustomStateAnimation & BatterySystemTutorialProps
-  >[] = [];
+  >[] = [
+    ...shinyaPilotSkill,
+  ];
   return getAnimationIfConditionMet(props, conditionalAnimations) ?? empty();
 }
