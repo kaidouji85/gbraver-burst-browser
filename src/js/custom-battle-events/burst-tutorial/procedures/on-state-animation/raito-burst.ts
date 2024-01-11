@@ -7,6 +7,4 @@ import { BurstTutorialProps } from "../../props";
 /** ライト バースト発動 */
 export const raitoBurst: ConditionalAnimation<
   CustomStateAnimation & BurstTutorialProps
->[] = [
-  (props) => (isEnemyBurstActivated(props) ? raitoBurstCry(props) : null),
-];
+>[] = [(props) => (isEnemyBurstActivated(props) ? raitoBurstCry(props) : null)];
