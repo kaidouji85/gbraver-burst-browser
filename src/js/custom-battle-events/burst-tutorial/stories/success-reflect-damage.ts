@@ -11,8 +11,8 @@ import { scrollLeftMessages } from "../../scroll-messages";
 export const successReflectDamage = async (props: CustomBattleEventProps) => {
   activeLeftMessageWindowWithFace(props, "Raito");
   await scrollLeftMessages(props, [
-    ["ライト", "「かかったな大田高校"],
-    ["これぞ奥義 電撃バリアや」"],
+    ["ライト", "「かかったな大田高校のエース君"],
+    ["これぞ奥義ライトニングバーストや」"],
   ]);
   invisibleAllMessageWindows(props);
 };

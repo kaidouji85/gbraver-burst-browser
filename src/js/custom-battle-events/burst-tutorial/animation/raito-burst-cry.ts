@@ -1,5 +1,5 @@
 import { CustomBattleEventProps } from "../../../td-scenes/battle/custom-battle-event";
-import { playerPilotCry } from "../../pilot-cry";
+import { enemyPilotCry } from "../../pilot-cry";
 
 /**
  * ライト バースト 叫び
@@ -7,4 +7,4 @@ import { playerPilotCry } from "../../pilot-cry";
  * @return アニメーション
  */
 export const raitoBurstCry = (props: Readonly<CustomBattleEventProps>) =>
-  playerPilotCry(props, "Raito", "奥義 ライトニングバースト！！");
+  enemyPilotCry(props, "Raito", "奥義 ライトニングバースト！！");

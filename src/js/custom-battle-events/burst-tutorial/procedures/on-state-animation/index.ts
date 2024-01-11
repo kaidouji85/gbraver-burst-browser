@@ -6,6 +6,7 @@ import {
   getAnimationIfConditionMet,
 } from "../../../get-animation-if-conditional-met";
 import { BurstTutorialProps } from "../../props";
+import { raitoBurst } from "./raito-burst";
 import { shinyaBurst } from "./shinya-burst";
 
 /**
@@ -18,6 +19,6 @@ export function onStateAnimation(
 ): Animate {
   const conditionalAnimations: ConditionalAnimation<
     CustomStateAnimation & BurstTutorialProps
-  >[] = [...shinyaBurst];
+  >[] = [...shinyaBurst, ...raitoBurst];
   return getAnimationIfConditionMet(props, conditionalAnimations) ?? empty();
 }
