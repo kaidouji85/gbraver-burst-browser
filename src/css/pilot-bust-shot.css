@@ -2,7 +2,7 @@
 
 .pilot-bust-shot__shinya {
   position: absolute;
-  right: -13vh;
+  right: -8.5vh;
   top: calc(100vh - 76.5vh);
   width: 85vh;
   height: 85vh;
@@ -10,7 +10,7 @@
 
 .pilot-bust-shot__gai {
   position: absolute;
-  right: -13vh;
+  right: -8.5vh;
   top: calc(100vh - 76.5vh);
   width: 85vh;
   height: 85vh;
@@ -18,7 +18,7 @@
 
 .pilot-bust-shot__raito {
   position: absolute;
-  right: -13vh;
+  right: -8.5vh;
   top: calc(100vh - 76.5vh);
   width: 85vh;
   height: 85vh;
@@ -26,7 +26,7 @@
 
 .pilot-bust-shot__tsubasa {
   position: absolute;
-  right: -13vh;
+  right: -9.5vh;
   top: calc(100vh - 85.5vh);
   width: 95vh;
   height: 95vh;
@@ -34,7 +34,7 @@
 
 .pilot-bust-shot__yuuya {
   position: absolute;
-  right: -13vh;
+  right: -5vh;
   top: calc(100vh - 82vh);
   width: 100vh;
   height: 100vh;
