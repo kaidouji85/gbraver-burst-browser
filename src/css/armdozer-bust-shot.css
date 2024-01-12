@@ -6,7 +6,6 @@
   top: -10dvh;
   right: -25vh;
   right: -25dvh;
-  padding-right: var(--safe-area-right);
   width: 200vh;
   width: 200dvh;
 }
