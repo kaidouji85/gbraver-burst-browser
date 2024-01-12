@@ -3,17 +3,25 @@
 .pilot-bust-shot__shinya {
   position: absolute;
   right: -8.5vh;
+  right: -8.5dvh;
   top: calc(100vh - 76.5vh);
+  top: calc(100dvh - 76.5dvh);
   width: 85vh;
+  width: 85dvh;
   height: 85vh;
+  height: 85dvh;
 }
 
 .pilot-bust-shot__gai {
   position: absolute;
   right: -8.5vh;
+  right: -8.5dvh;
   top: calc(100vh - 76.5vh);
+  top: calc(100dvh - 76.5dvh);
   width: 85vh;
+  width: 85dvh;
   height: 85vh;
+  height: 85dvh;
 }
 
 .pilot-bust-shot__raito {
