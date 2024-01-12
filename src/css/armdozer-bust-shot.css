@@ -17,7 +17,6 @@
   top: -25dvh;
   right: -25vh;
   right: -25dvh;
-  padding-right: var(--safe-area-right);
   width: 200vh;
   width: 200dvh;
 }
@@ -28,7 +27,6 @@
   top: -25dvh;
   right: -25vh;
   right: -25dvh;
-  padding-right: var(--safe-area-right);
   width: 200vh;
   width: 200dvh;
 }
@@ -39,7 +37,6 @@
   top: -40dvh;
   right: -45vh;
   right: -45dvh;
-  padding-right: var(--safe-area-right);
   width: 200vh;
   width: 200dvh;
 }
@@ -50,7 +47,6 @@
   top: -20dvh;
   right: -35vh;
   right: -35dvh;
-  padding-right: var(--safe-area-right);
   width: 200vh;
   width: 200dvh;
 }

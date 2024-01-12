@@ -4,7 +4,6 @@
   position: absolute;
   right: -13vh;
   right: -13dvh;
-  margin-right: var(--safe-area-right);
   top: calc(100vh - 76.5vh);
   top: calc(100dvh - 76.5dvh);
   width: 85vh;
@@ -17,7 +16,6 @@
   position: absolute;
   right: -13vh;
   right: -13dvh;
-  margin-right: var(--safe-area-right);
   top: calc(100vh - 76.5vh);
   top: calc(100dvh - 76.5dvh);
   width: 85vh;
@@ -30,7 +28,6 @@
   position: absolute;
   right: -13vh;
   right: -13dvh;
-  margin-right: var(--safe-area-right);
   top: calc(100vh - 76.5vh);
   top: calc(100dvh - 76.5dvh);
   width: 85vh;
@@ -43,7 +40,6 @@
   position: absolute;
   right: -13vh;
   right: -13dvh;
-  margin-right: var(--safe-area-right);
   top: calc(100vh - 85.5vh);
   top: calc(100dvh - 85.5dvh);
   width: 95vh;
@@ -56,7 +52,6 @@
   position: absolute;
   right: -13vh;
   right: -13dvh;
-  margin-right: var(--safe-area-right);
   top: calc(100vh - 82vh);
   top: calc(100dvh - 82dvh);
   width: 100vh;
