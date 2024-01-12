@@ -2,8 +2,8 @@
 
 .pilot-bust-shot__shinya {
   position: absolute;
-  right: -8.5vh;
-  right: -8.5dvh;
+  right: -18.5vh;
+  right: -18.5dvh;
   top: calc(100vh - 76.5vh);
   top: calc(100dvh - 76.5dvh);
   width: 85vh;
