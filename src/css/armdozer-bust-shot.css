@@ -1,11 +1,11 @@
 /** プレイヤー選択画面 アームドーザバストショット */
 
 .armdozer-bust-shot__shin-braver {
-  position: absolute;
+  position: fixed;
   top: -10vh;
   top: -10dvh;
-  right: -35vh;
-  right: -35dvh;
+  right: -20vh;
+  right: -20dvh;
   width: 200vh;
   width: 200dvh;
   height: 200vh;
@@ -13,11 +13,11 @@
 }
 
 .armdozer-bust-shot__neo-landozer {
-  position: absolute;
+  position: fixed;
   top: -25vh;
   top: -25dvh;
-  right: -35vh;
-  right: -35dvh;
+  right: -20vh;
+  right: -20dvh;
   width: 200vh;
   width: 200dvh;
   height: 200vh;
@@ -25,11 +25,11 @@
 }
 
 .armdozer-bust-shot__lightning-dozer {
-  position: absolute;
+  position: fixed;
   top: -25vh;
   top: -25dvh;
-  right: -35vh;
-  right: -35dvh;
+  right: -20vh;
+  right: -20dvh;
   width: 200vh;
   width: 200dvh;
   height: 200vh;
@@ -37,11 +37,11 @@
 }
 
 .armdozer-bust-shot__wing-dozer {
-  position: absolute;
+  position: fixed;
   top: -40vh;
   top: -40dvh;
-  right: -55vh;
-  right: -55dvh;
+  right: -40vh;
+  right: -40dvh;
   width: 200vh;
   width: 200dvh;
   height: 200vh;
@@ -49,11 +49,11 @@
 }
 
 .armdozer-bust-shot__genesis-braver {
-  position: absolute;
+  position: fixed;
   top: -20vh;
   top: -20dvh;
-  right: -45vh;
-  right: -45dvh;
+  right: -30vh;
+  right: -30dvh;
   width: 200vh;
   width: 200dvh;
   height: 200vh;
