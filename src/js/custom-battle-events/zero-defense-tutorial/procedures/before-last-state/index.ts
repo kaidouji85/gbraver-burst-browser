@@ -1,12 +1,12 @@
 import type { Battle, GameState, GameStateX } from "gbraver-burst-core";
 
-import type { LastState } from "../../../td-scenes/battle/custom-battle-event";
-import { extractBattle, extractGameEnd } from "../../game-state-extractor";
-import { ZeroDefenseTutorialProps } from "../props";
-import type { ZeroDefenseTutorialState } from "../state";
-import { damageRace } from "../stories/damage-race";
-import { introduction } from "../stories/introduction";
-import { zeroBatteryChance } from "../stories/zero-battery-chance";
+import type { LastState } from "../../../../td-scenes/battle/custom-battle-event";
+import { extractBattle, extractGameEnd } from "../../../game-state-extractor";
+import { ZeroDefenseTutorialProps } from "../../props";
+import type { ZeroDefenseTutorialState } from "../../state";
+import { damageRace } from "../../stories/damage-race";
+import { introduction } from "../../stories/introduction";
+import { zeroBatteryChance } from "../../stories/zero-battery-chance";
 
 /**
  * 条件を満たした場合、ダメージレースストーリーを再生する
