@@ -1,5 +1,4 @@
 import { LastState } from "../../../../td-scenes/battle/custom-battle-event";
-import { extractGameEnd } from "../../../game-state-extractor";
 import { ZeroDefenseTutorialProps } from "../../props";
 import { ZeroDefenseTutorialState } from "../../state";
 import { introduction } from "../../stories/introduction";
@@ -19,7 +18,10 @@ export async function beforeLastState(
     return { ...props.state, isIntroductionComplete: true };
   }
 
-  if (extractGameEnd(props.update)) {
+  const hasGameEnd = props.update.some(
+    (state) => state.effect.name === "GameEnd",
+  );
+  if (hasGameEnd) {
     return props.state;
   }
 
