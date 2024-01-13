@@ -8,4 +8,4 @@ import { playerPilotCry } from "../../pilot-cry";
  */
 export const shinyaPilotSkillCryToAvoidDeath = (
   props: Readonly<CustomBattleEventProps>,
-) => playerPilotCry(props, "Shinya", "これで緊急回避ッス");
+) => playerPilotCry(props, "Shinya", "ガイ まだ終わりじゃないッスよ");
