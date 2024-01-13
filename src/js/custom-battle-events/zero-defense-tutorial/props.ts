@@ -15,6 +15,8 @@ export function createZeroDefenseTutorialProps(): ZeroDefenseTutorialProps {
     isIntroductionComplete: false,
     isDamageRaceComplete: false,
     isZeroBatteryChangeComplete: false,
+    isExplainedBurstAtZeroBurst: false,
+    isExplainedPilotSkillAtZeroBattery: false,
   };
   return { state };
 }
