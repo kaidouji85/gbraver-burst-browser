@@ -6,6 +6,8 @@ import {
   getAnimationIfConditionMet,
 } from "../../../get-animation-if-conditional-met";
 import { ZeroDefenseTutorialProps } from "../../props";
+import { shinyaBurst } from "./shinya-burst";
+import { shinyaPilotSkill } from "./shinya-pilot-skill";
 
 /**
  * ステートアニメ終了後に呼ばれるアニメーション
@@ -17,6 +19,6 @@ export function afterStateAnimation(
 ): Animate {
   const conditionalAnimations: ConditionalAnimation<
     CustomStateAnimation & ZeroDefenseTutorialProps
-  >[] = [];
+  >[] = [...shinyaBurst, ...shinyaPilotSkill];
   return getAnimationIfConditionMet(props, conditionalAnimations) ?? empty();
 }
