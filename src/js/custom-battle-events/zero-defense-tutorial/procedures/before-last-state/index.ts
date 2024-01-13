@@ -3,6 +3,7 @@ import { ZeroDefenseTutorialProps } from "../../props";
 import { ZeroDefenseTutorialState } from "../../state";
 import { introduction } from "../../stories/introduction";
 import { executeDamageRaceIfNeeded } from "./execute-damage-race-if-needed";
+import { executeSelfInitiatedPilotSkillIfNeeded } from "./execute-self-initialated-pilot-skill-if-needed";
 import { executeSelfInitiatedBurstIfNeeded } from "./execute-self-initiated-burst-if-needed";
 import { executeZeroBatteryChanceIfNeeded } from "./execute-zero-battery-chance-if-needed";
 
@@ -28,6 +29,7 @@ export async function beforeLastState(
 
   const executors = [
     executeSelfInitiatedBurstIfNeeded,
+    executeSelfInitiatedPilotSkillIfNeeded,
     executeDamageRaceIfNeeded,
     executeZeroBatteryChanceIfNeeded,
   ];
