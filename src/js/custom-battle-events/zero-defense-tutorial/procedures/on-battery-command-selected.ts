@@ -80,7 +80,7 @@ export async function onBatteryCommandSelected(
     return {
       state: {
         ...props.state,
-        isExplainedBurstAtZeroBurst: true,
+        isExplainedBurstAtZeroBattery: true,
       },
       cancel: {
         isCommandCanceled: true,

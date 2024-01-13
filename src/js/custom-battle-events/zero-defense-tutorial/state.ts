@@ -7,7 +7,7 @@ export type ZeroDefenseTutorialState = Readonly<{
   /** 0バッテリーチャンスを再生したか、trueで再生した */
   isZeroBatteryChangeComplete: boolean;
   /** 0バッテリー時バーストの説明をされたか、trueでした */
-  isExplainedBurstAtZeroBurst: boolean;
+  isExplainedBurstAtZeroBattery: boolean;
   /** 0バッテリー時パイロットスキルの説明をされたか、trueでした */
   isExplainedPilotSkillAtZeroBattery: boolean;
 }>;

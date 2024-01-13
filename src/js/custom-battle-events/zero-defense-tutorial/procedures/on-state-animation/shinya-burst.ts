@@ -13,7 +13,7 @@ export const shinyaBurst: ConditionalAnimation<
     if (!isPlayerBurstActivated(props)) {
       return null;
     }
-    return props.state.isExplainedBurstAtZeroBurst
+    return props.state.isExplainedBurstAtZeroBattery
       ? shinyaBurstCryToAvoidDeath(props)
       : shinyaBurstCry(props);
   },
