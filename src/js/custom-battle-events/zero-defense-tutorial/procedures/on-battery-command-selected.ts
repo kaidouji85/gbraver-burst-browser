@@ -78,7 +78,10 @@ export async function onBatteryCommandSelected(
     unattentionBurstButton(props);
     await focusInBurstButton(props, shouldBurst);
     return {
-      state: props.state,
+      state: {
+        ...props.state,
+        isExplainedBurstAtZeroBattery: true,
+      },
       cancel: {
         isCommandCanceled: true,
       },
@@ -90,7 +93,10 @@ export async function onBatteryCommandSelected(
     unattentionPilotButton(props);
     await focusInPilotButton(props, shouldPilotSkill);
     return {
-      state: props.state,
+      state: {
+        ...props.state,
+        isExplainedPilotSkillAtZeroBattery: true,
+      },
       cancel: {
         isCommandCanceled: true,
       },
