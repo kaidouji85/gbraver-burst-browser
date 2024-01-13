@@ -1,45 +1,10 @@
 import type {
   BatteryDeclaration,
-  Battle,
   GameEnd,
   GameState,
   GameStateX,
   InputCommand,
 } from "gbraver-burst-core";
-
-/**
- * @deprecated
- * GameStateX<Battle>にキャストする
- * キャストできない場合はnullを返す
- *
- * @param state キャスト元
- * @return キャスト結果
- */
-export function castBattle(
-  state: GameState,
-): GameStateX<Battle> | null | undefined {
-  if (state.effect.name === "Battle") {
-    const effect: Battle = state.effect;
-    return { ...state, effect };
-  }
-
-  return null;
-}
-
-/**
- * @deprecated
- * ステートヒストリーからGameStateX<Battle>を抽出する
- * 抽出できない場合はnullを返す
- *
- * @param stateHistory ステートヒストリー
- * @return 抽出結果
- */
-export function extractBattle(
-  stateHistory: GameState[],
-): GameStateX<Battle> | null | undefined {
-  const foundState = stateHistory.find((v) => v.effect.name === "Battle");
-  return foundState ? castBattle(foundState) : null;
-}
 
 /**
  * @deprecated
