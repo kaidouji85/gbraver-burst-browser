@@ -1,7 +1,5 @@
-import { Battle, GameStateX } from "gbraver-burst-core";
-
 import { LastState } from "../../../../td-scenes/battle/custom-battle-event";
-import { extractBattle } from "../../../game-state-extractor";
+import { separatePlayers } from "../../../separate-players";
 import { ZeroDefenseTutorialProps } from "../../props";
 import { ZeroDefenseTutorialState } from "../../state";
 import { damageRace } from "../../stories/damage-race";
@@ -18,17 +16,19 @@ export async function executeDamageRaceIfNeeded(
     return props.state;
   }
 
-  const extractedBattle = extractBattle(props.update);
-  if (!extractedBattle) {
+  const battle = props.update.find((state) => state.effect.name === "Battle");
+  if (!battle || battle.effect.name !== "Battle") {
     return props.state;
   }
 
-  const battle: GameStateX<Battle> = extractedBattle;
-  const player = battle.players.find((v) => v.playerId === props.playerId);
-  const enemy = battle.players.find((v) => v.playerId !== props.playerId);
-  const isEnemyAttack = battle.effect.attacker !== props.playerId;
+  const separatedPlayers = separatePlayers(props, battle);
+  if (!separatedPlayers) {
+    return props.state;
+  }
 
-  if (player && enemy && isEnemyAttack) {
+  const { player, enemy } = separatedPlayers;
+  const isEnemyAttack = battle.effect.attacker === enemy.playerId;
+  if (isEnemyAttack) {
     await damageRace(props, player.armdozer.hp, enemy.armdozer.hp);
     return { ...props.state, isDamageRaceComplete: true };
   }
