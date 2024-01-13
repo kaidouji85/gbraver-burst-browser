@@ -6,5 +6,6 @@ import { playerPilotCry } from "../../pilot-cry";
  * @param props イベントプロパティ
  * @return アニメーション
  */
-export const shinyaPilotSkillCryToAvoidDeath = (props: Readonly<CustomBattleEventProps>) =>
-  playerPilotCry(props, "Shinya", "これで緊急回避ッス");
+export const shinyaPilotSkillCryToAvoidDeath = (
+  props: Readonly<CustomBattleEventProps>,
+) => playerPilotCry(props, "Shinya", "これで緊急回避ッス");

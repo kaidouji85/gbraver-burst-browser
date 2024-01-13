@@ -1,7 +1,7 @@
 import { LastState } from "../../../../td-scenes/battle/custom-battle-event";
 import { ZeroDefenseTutorialProps } from "../../props";
 import { ZeroDefenseTutorialState } from "../../state";
-import {selfInitiatedPilotSkill} from "../../stories/self-intiated-pilot-skill";
+import { selfInitiatedPilotSkill } from "../../stories/self-intiated-pilot-skill";
 
 /**
  * 条件を満たした場合、「自発的にパイロットスキル発動」を再生する

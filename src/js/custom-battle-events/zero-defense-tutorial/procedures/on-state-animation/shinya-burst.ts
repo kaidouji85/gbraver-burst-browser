@@ -2,8 +2,8 @@ import { CustomStateAnimation } from "../../../../td-scenes/battle/custom-battle
 import { ConditionalAnimation } from "../../../get-animation-if-conditional-met";
 import { isPlayerBurstActivated } from "../../../is-burst-activated";
 import { shinyaBurstCry } from "../../animation/shinya-burst-cry";
-import { ZeroDefenseTutorialProps } from "../../props";
 import { shinyaBurstCryToAvoidDeath } from "../../animation/shinya-burst-cry-to-avoid-death";
+import { ZeroDefenseTutorialProps } from "../../props";
 
 /** シンヤ バースト発動 */
 export const shinyaBurst: ConditionalAnimation<
