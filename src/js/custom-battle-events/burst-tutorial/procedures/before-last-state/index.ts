@@ -3,8 +3,8 @@ import { BurstTutorialProps } from "../../props";
 import { BurstTutorialState } from "../../state";
 import { introduction } from "../../stories/introduction";
 import { executeReflectIfNeeded } from "./execute-reflect-if-needed";
-import {executeSelfInitiatedBurstIfNeeded} from "./execute-self-initiated-burst-if-needed";
-import {executeSelfInitiatedPilotSkillIfNeeded} from "./execute-self-initiated-pilot-skill-if-needed";
+import { executeSelfInitiatedBurstIfNeeded } from "./execute-self-initiated-burst-if-needed";
+import { executeSelfInitiatedPilotSkillIfNeeded } from "./execute-self-initiated-pilot-skill-if-needed";
 
 /**
  * 最終ステート直前イベント
