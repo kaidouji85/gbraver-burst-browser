@@ -1,11 +1,11 @@
 import { Battle, GameState } from "gbraver-burst-core";
 
-import { LastState } from "../../../td-scenes/battle/custom-battle-event";
-import { BurstTutorialProps } from "../props";
-import { BurstTutorialState } from "../state";
-import { failReflectDamage } from "../stories/fail-reflect-damage";
-import { introduction } from "../stories/introduction";
-import { successReflectDamage } from "../stories/success-reflect-damage";
+import { LastState } from "../../../../td-scenes/battle/custom-battle-event";
+import { BurstTutorialProps } from "../../props";
+import { BurstTutorialState } from "../../state";
+import { failReflectDamage } from "../../stories/fail-reflect-damage";
+import { introduction } from "../../stories/introduction";
+import { successReflectDamage } from "../../stories/success-reflect-damage";
 
 /**
  * 条件を満たした場合、ダメージ反射ストーリーを再生する
