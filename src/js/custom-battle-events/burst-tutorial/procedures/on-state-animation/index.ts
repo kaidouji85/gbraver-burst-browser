@@ -8,6 +8,7 @@ import {
 import { BurstTutorialProps } from "../../props";
 import { raitoBurst } from "./raito-burst";
 import { shinyaBurst } from "./shinya-burst";
+import { shinyaPilotSkill } from "./shinya-pilot-skill";
 
 /**
  * カスタムステートアニメーション
@@ -19,6 +20,6 @@ export function onStateAnimation(
 ): Animate {
   const conditionalAnimations: ConditionalAnimation<
     CustomStateAnimation & BurstTutorialProps
-  >[] = [...shinyaBurst, ...raitoBurst];
+  >[] = [...shinyaBurst, ...shinyaPilotSkill, ...raitoBurst];
   return getAnimationIfConditionMet(props, conditionalAnimations) ?? empty();
 }
