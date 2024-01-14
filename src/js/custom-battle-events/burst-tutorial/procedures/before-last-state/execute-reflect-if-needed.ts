@@ -1,18 +1,15 @@
 import { Battle, GameState } from "gbraver-burst-core";
 
-import { LastState } from "../../../td-scenes/battle/custom-battle-event";
-import { BurstTutorialProps } from "../props";
-import { BurstTutorialState } from "../state";
-import { failReflectDamage } from "../stories/fail-reflect-damage";
-import { introduction } from "../stories/introduction";
-import { successReflectDamage } from "../stories/success-reflect-damage";
+import { LastState } from "../../../../td-scenes/battle/custom-battle-event";
+import { failReflectDamage } from "../../stories/fail-reflect-damage";
+import { successReflectDamage } from "../../stories/success-reflect-damage";
 
 /**
  * 条件を満たした場合、ダメージ反射ストーリーを再生する
  * @param props イベントプロパティ
  * @return 処理が完了したら発火するPromise
  */
-async function executeReflectIfNeeded(
+export async function executeReflectIfNeeded(
   props: Readonly<LastState>,
 ): Promise<void> {
   const foundLastBattle = props.update.find((v) => v.effect.name === "Battle");
@@ -44,21 +41,4 @@ async function executeReflectIfNeeded(
   reflectSuccessful
     ? await successReflectDamage(props)
     : await failReflectDamage(props);
-}
-
-/**
- * 最終ステート直前イベント
- * @param props イベントプロパティ
- * @return ステート更新結果
- */
-export async function beforeLastState(
-  props: Readonly<LastState & BurstTutorialProps>,
-): Promise<BurstTutorialState> {
-  if (!props.state.isIntroductionComplete) {
-    await introduction(props);
-    return { ...props.state, isIntroductionComplete: true };
-  }
-
-  await executeReflectIfNeeded(props);
-  return props.state;
 }
