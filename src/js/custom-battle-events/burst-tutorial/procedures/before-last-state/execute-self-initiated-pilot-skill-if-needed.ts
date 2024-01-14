@@ -15,7 +15,7 @@ export async function executeSelfInitiatedPilotSkillIfNeeded(
       state.effect.name === "PilotSkillEffect" &&
       state.effect.invokerId === props.playerId,
   );
-  if (hasPlayerPilotSkill && !props.state.isLoseIfNoDefense5Complete) {
+  if (hasPlayerPilotSkill) {
     await selfInitiatedPilotSkill(props);
   }
 }
