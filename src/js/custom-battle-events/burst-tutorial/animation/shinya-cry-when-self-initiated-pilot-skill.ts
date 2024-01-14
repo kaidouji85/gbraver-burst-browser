@@ -1,7 +1,7 @@
-import { playerCry } from "../../../../../stories/message-window.stories";
 import { CustomBattleEventProps } from "../../../td-scenes/battle/custom-battle-event";
+import {playerPilotCry} from "../../pilot-cry";
 
 /** シンヤ叫び 自発的にパイロットスキル発動 */
-export const shinyaCryWhenSelfInitiatedBurst = (
+export const shinyaCryWhenSelfInitiatedPilotSkill = (
   props: Readonly<CustomBattleEventProps>,
-) => playerCry(props, "Shinya", "先輩だからって 遠慮しないッスよ");
+) => playerPilotCry(props, "Shinya", "先輩だからって 遠慮しないッスよ");
