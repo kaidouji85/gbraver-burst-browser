@@ -1,8 +1,8 @@
-import {LastState} from "../../../../td-scenes/battle/custom-battle-event";
-import {BurstTutorialProps} from "../../props";
-import {BurstTutorialState} from "../../state";
-import {introduction} from "../../stories/introduction";
-import {executeReflectIfNeeded} from "./execute-reflect-if-needed";
+import { LastState } from "../../../../td-scenes/battle/custom-battle-event";
+import { BurstTutorialProps } from "../../props";
+import { BurstTutorialState } from "../../state";
+import { introduction } from "../../stories/introduction";
+import { executeReflectIfNeeded } from "./execute-reflect-if-needed";
 
 /**
  * 最終ステート直前イベント
