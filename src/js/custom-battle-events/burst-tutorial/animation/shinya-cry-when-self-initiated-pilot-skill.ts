@@ -4,4 +4,4 @@ import {playerPilotCry} from "../../pilot-cry";
 /** シンヤ叫び 自発的にパイロットスキル発動 */
 export const shinyaCryWhenSelfInitiatedPilotSkill = (
   props: Readonly<CustomBattleEventProps>,
-) => playerPilotCry(props, "Shinya", "先輩だからって 遠慮しないッスよ");
+) => playerPilotCry(props, "Shinya", "何故か無償にやる気が出てきたッス");

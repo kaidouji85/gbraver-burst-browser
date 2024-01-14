@@ -14,10 +14,10 @@ export async function selfInitiatedBurst(
   activeLeftMessageWindowWithFace(props, "Tsubasa");
   await scrollLeftMessages(props, [
     ["ツバサ", "「今 君が発動したのはバーストといい"],
-    ["一試合に一回だけバッテリー回復をしつつ"],
-    ["ロボ固有の追加効果を得ることができるんだ"],
-    ["君の搭乗機であるシンブレイバーに追加効果はないが"],
-    ["バッテリーを全回復することができる"],
+    [
+      "一試合に一回だけバッテリー回復をしつつ　ロボ固有の追加効果を得られるんだ",
+    ],
+    ["シンブレイバーに追加効果はないが バッテリーを全回復することができる"],
     ["使いこなせば どんな相手とも渡り合えるぞ」"],
   ]);
   invisibleAllMessageWindows(props);

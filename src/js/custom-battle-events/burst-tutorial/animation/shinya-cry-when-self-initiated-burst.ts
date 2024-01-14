@@ -4,4 +4,4 @@ import { playerPilotCry } from "../../pilot-cry";
 /** シンヤ叫び 自発的にバースト発動 */
 export const shinyaCryWhenSelfInitiatedBurst = (
   props: Readonly<CustomBattleEventProps>,
-) => playerPilotCry(props, "Shinya", "このレバーは一体？");
+) => playerPilotCry(props, "Shinya", "バーストON？ 何なんすかこのレバーは？");
