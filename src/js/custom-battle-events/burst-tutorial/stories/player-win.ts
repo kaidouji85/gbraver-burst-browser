@@ -18,31 +18,19 @@ export const playerWin = async (props: CustomBattleEventProps) => {
   activeLeftMessageWindowWithFace(props, "Gai");
   await scrollLeftMessages(props, [
     ["ガイ", "「やめ!!"],
-    ["この試合 ……シンヤの勝ち"],
+    ["この試合 ……シンヤの勝ち」"],
   ]);
   props.view.dom.leftMessageWindow.darken();
   activeRightMessageWindowWithFace(props, "Shinya");
   await scrollRightMessages(props, [
     ["シンヤ", "「やった 上級生に勝てたッス」"],
   ]);
-  await refreshConversation(props);
+  props.view.dom.rightMessageWindow.darken();
   activeLeftMessageWindowWithFace(props, "Raito");
   await scrollLeftMessages(props, [
     ["ライト", "「下級生やと思て 舐めとったわ"],
-    ["さすがやな 大田高校」"],
+    ["さすがやな 大田高校のエース君」"],
   ]);
-  await refreshConversation(props);
-  activeLeftMessageWindowWithFace(props, "Gai");
-  await scrollLeftMessages(props, [["ガイ", "「双方 姿勢を正して 礼!!」"]]);
-  await refreshConversation(props, 100);
-  activeLeftMessageWindowWithFace(props, "Raito");
-  props.view.dom.leftMessageWindow.messages([
-    "ライト",
-    "「ありがとうございました」",
-  ]);
-  props.view.dom.leftMessageWindow.scrollUp();
-  activeRightMessageWindowWithFace(props, "Shinya");
-  await scrollRightMessages(props, [["シンヤ", "「ありがとうございました」"]]);
   await refreshConversation(props, 200);
   activeRightMessageWindowWithFace(props, "Yuuya");
   await scrollRightMessages(props, [
