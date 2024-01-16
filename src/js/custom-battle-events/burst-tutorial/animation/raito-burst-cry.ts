@@ -7,4 +7,4 @@ import { enemyPilotCry } from "../../pilot-cry";
  * @return アニメーション
  */
 export const raitoBurstCry = (props: Readonly<CustomBattleEventProps>) =>
-  enemyPilotCry(props, "Raito", "ほないくで 大田高校のエース君");
+  enemyPilotCry(props, "Raito", "先手必勝や");
