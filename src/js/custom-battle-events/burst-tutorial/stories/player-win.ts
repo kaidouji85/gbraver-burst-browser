@@ -31,6 +31,18 @@ export const playerWin = async (props: CustomBattleEventProps) => {
     ["ライト", "「下級生やと思て 舐めとったわ"],
     ["さすがやな 大田高校のエース君」"],
   ]);
+  await refreshConversation(props);
+  activeLeftMessageWindowWithFace(props, "Gai");
+  await scrollLeftMessages(props, [["ガイ", "「双方 姿勢を正して 礼!!」"]]);
+  await refreshConversation(props, 100);
+  activeLeftMessageWindowWithFace(props, "Raito");
+  props.view.dom.leftMessageWindow.messages([
+    "ライト",
+    "「ありがとうございました」",
+  ]);
+  props.view.dom.leftMessageWindow.scrollUp();
+  activeRightMessageWindowWithFace(props, "Shinya");
+  await scrollRightMessages(props, [["シンヤ", "「ありがとうございました」"]]);
   await refreshConversation(props, 200);
   activeRightMessageWindowWithFace(props, "Yuuya");
   await scrollRightMessages(props, [
