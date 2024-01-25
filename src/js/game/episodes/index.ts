@@ -12,6 +12,7 @@ export const MainEpisodes: Episode[] = [
   batterySystemTutorial,
   zeroDefenseTutorial,
   burstTutorial,
+  confrontationTwoBraver,
 ];
 
 /** サイドエピソード */
@@ -26,6 +27,5 @@ export const Episodes: Episode[] = [...MainEpisodes, ...SideEpisodes];
 /** 開発中のエピソードをあつめたもの */
 export const EpisodesInDevelopment: Episode[] = [
   ...Episodes,
-  confrontationTwoBraver,
   nationalTournamentRevenge,
 ];
