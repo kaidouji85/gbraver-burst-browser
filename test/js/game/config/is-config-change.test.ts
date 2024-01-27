@@ -7,6 +7,7 @@ const origin: GBraverBurstBrowserConfig = {
   bgmVolume: 1,
   seVolume: 1,
   battleControllerType: "BigButton",
+  performanceStatsVisibility: "hidden",
 };
 
 test("WebGLピクセルレートの変更を正しく検知できる", () => {
@@ -36,6 +37,14 @@ test("戦闘シーンコントトーラータイプの変更を正しく検知�
   const update: GBraverBurstBrowserConfig = {
     ...origin,
     battleControllerType: "MiniController",
+  };
+  expect(isConfigChanged(origin, update)).toBe(true);
+});
+
+test("パフォーマンス統計の表示設定の変更を正しく検知できる", () => {
+  const update: GBraverBurstBrowserConfig = {
+    ...origin,
+    performanceStatsVisibility: "visible",
   };
   expect(isConfigChanged(origin, update)).toBe(true);
 });

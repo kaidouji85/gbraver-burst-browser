@@ -1,6 +1,6 @@
 import { Howl } from "howler";
 
-import type { ResourceRoot } from "./resource-root";
+import { ResourceRoot } from "./resource-root";
 
 /** 音リソースのユニークID */
 export type SoundId = string;
@@ -18,25 +18,25 @@ export type SoundType = "BGM" | "SE";
 export type SoundConfig = {
   /** 音ID*/
   id: SoundId;
-
   /** 音種別 */
   type: SoundType;
-
-  /** 素材のパス */
-  path: (resourceRoot: ResourceRoot) => string;
-
   /** ボリュームスケール */
   volumeScale: number;
+
+  /**
+   * 素材のパス
+   * @param resourceRoot リソースルート
+   * @return 素材のパス
+   */
+  path: (resourceRoot: ResourceRoot) => string;
 };
 
 /**音リソース */
 export type SoundResource = {
   /** 音ID */
   id: SoundId;
-
   /** 音種別 */
   type: SoundType;
-
   /** 音声データ */
   sound: Howl;
 
@@ -62,7 +62,6 @@ export type SoundResource = {
 
 /**
  * Howlで利用するボリューム
- *
  * @param sound 音リソース
  * @return Howlで使うボリューム
  */
@@ -70,9 +69,7 @@ export function howlVolume(sound: SoundResource): number {
   return sound.volumeScale * sound.volume;
 }
 
-/**
- * 音IDを集めたもの
- */
+/** 音IDを集めたもの */
 export const SOUND_IDS = {
   PUSH_BUTTON: "PUSH_BUTTON",
   CHANGE_VALUE: "CHANGE_VALUE",
@@ -89,6 +86,8 @@ export const SOUND_IDS = {
   BATTLE_BGM_01: "BATTLE_BGM_01",
   BATTLE_BGM_02: "BATTLE_BGM_02",
   BATTLE_BGM_03: "BATTLE_BGM_03",
+  YUUYA_BATTLE: "YUUYA_BATTLE",
+  GAI_BATTLE: "GAI_BATTLE",
   NPC_ENDING: "NPC_ENDING",
 };
 
@@ -186,6 +185,18 @@ export const SOUND_CONFIGS: SoundConfig[] = [
     id: SOUND_IDS.BATTLE_BGM_03,
     type: "BGM",
     path: (resourceRoot) => `${resourceRoot.get()}/sounds/battle-03.mp3`,
+    volumeScale: 0.2,
+  },
+  {
+    id: SOUND_IDS.YUUYA_BATTLE,
+    type: "BGM",
+    path: (resourceRoot) => `${resourceRoot.get()}/sounds/yuuya-battle.mp3`,
+    volumeScale: 0.2,
+  },
+  {
+    id: SOUND_IDS.GAI_BATTLE,
+    type: "BGM",
+    path: (resourceRoot) => `${resourceRoot.get()}/sounds/gai-battle.mp3`,
     volumeScale: 0.2,
   },
   {

@@ -4,8 +4,10 @@
     --controllers-z-index: 1;
     --gap: calc(var(--responsive-font-size) * 0.4);
 
-    width: var(--screen-width);
-    height: var(--screen-height);
+    width: 100vw;
+    width: 100dvw;
+    height: 100vh;
+    height: 100dvh;
     background-color: var(--background-color);
     color: var(--font-color);
     box-sizing: border-box;

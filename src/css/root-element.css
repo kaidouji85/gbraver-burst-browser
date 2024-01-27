@@ -10,12 +10,11 @@
   --screen-padding-left: calc(var(--safe-area-left) + 1rem);
   --screen-padding-right: calc(var(--safe-area-right) + 1rem);
   --screen-padding-bottom: calc(var(--safe-area-bottom) + 1rem);
-  --screen-width: 100vw;
-  --screen-height: calc(var(--vh, 1vh) * 100);
 
   /** フォント */
   --font-color: rgb(240 240 240);
   --responsive-font-size: 10px;
+  --battle-window-font-size: calc(var(--responsive-font-size) * 1.3);
 
   /** 背景 */
   --background-color: rgb(23 23 23);

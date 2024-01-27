@@ -10,7 +10,9 @@
 @media (orientation: portrait) {
   .play-in-landscape {
     width: 100vw;
+    width: 100dvw;
     height: 100vh;
+    height: 100dvh;
     background-color: var(--background-color);
     color: var(--font-color);
     display: flex;

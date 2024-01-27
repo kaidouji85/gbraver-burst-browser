@@ -5,15 +5,17 @@ import { zeroDefenseTutorialNPC } from "../../npc/zero-defense-tutorial";
 import { PathIds } from "../../resource/path/ids";
 import { SOUND_IDS } from "../../resource/sound";
 import { playerUuid } from "../../uuid/player";
-import { EpisodeConfig } from "./episode";
+import { Episode } from "./episode";
 import { EpisodeIDs } from "./episode-ids";
 
 /** イントロダクション */
 const introduction = `今日は機動倶楽部の新人戦、シンヤは同学年のガイと対峙することになるが序盤からリードをとられてしまい……。`;
 
 /** ゼロ防御チュートリアル */
-export const zeroDefenseTutorial: EpisodeConfig = {
+export const zeroDefenseTutorial: Episode = {
   id: EpisodeIDs.ZERO_DEFENSE,
+  type: "Episode",
+  number: "2",
   title: "ゼロ防御だと即死する",
   introduction,
   imageCutPathId: PathIds.IMAGE_CUT_ZERO_DEFENSE,

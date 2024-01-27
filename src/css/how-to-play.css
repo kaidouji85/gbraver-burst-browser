@@ -6,8 +6,8 @@
     --how-to-play-dialog-width: calc(
       min(var(--how-to-play-dialog-height) * 16 / 9, 90vw)
     );
-    --how-to-play-dialog-height: calc(var(--vh) * 80);
-    --how-to-play-dialog-top: calc(var(--vh, 1vh) * 50);
+    --how-to-play-dialog-height: 80vh;
+    --how-to-play-dialog-top: 50vh;
     --how-to-play-dialog-left: 50vw;
 
     display: block;
@@ -22,8 +22,10 @@
 
 .how-to-play__background {
   position: absolute;
-  width: var(--screen-width);
-  height: var(--screen-height);
+  width: 100vw;
+  width: 100dvw;
+  height: 100vh;
+  height: 100dvh;
   background-color: #000;
   opacity: 0.5;
   z-index: var(--zindex-background);
@@ -32,7 +34,8 @@
 .how-to-play__dialog {
   width: var(--how-to-play-dialog-width);
   height: var(--how-to-play-dialog-height);
-  top: calc(var(--vh, 1vh) * 50);
+  top: 50vh;
+  top: 50dvh;
   left: 50%;
   transform: translate(-50%, -50%);
   background-color: var(--background-color);

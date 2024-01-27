@@ -14,6 +14,7 @@ export const Scene: DOMStubStory = domStub((resources) => {
     bgmVolume: 1,
     seVolume: 1,
     battleControllerType: "BigButton",
+    performanceStatsVisibility: "hidden",
   });
   scene.notifyPrev().subscribe(() => {
     console.log("prev");

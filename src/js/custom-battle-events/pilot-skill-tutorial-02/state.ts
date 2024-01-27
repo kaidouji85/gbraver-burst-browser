@@ -4,6 +4,6 @@ export type PilotSkillTutorial02State = {
   isIntroductionComplete: boolean;
   /** 「パイロットスキル発動を推奨」を再生したか、trueで再生した */
   isDoPilotSkillComplete: boolean;
-  /** 「5以上で攻撃する」を再生したか、trueで再生した */
-  isShouldAttack5OrMoreComplete: boolean;
+  /** 「3以上で攻撃する」を再生したか、trueで再生した */
+  isShouldAttack3OrMoreComplete: boolean;
 };

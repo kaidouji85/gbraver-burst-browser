@@ -17,8 +17,10 @@
 
 .waiting__background {
   position: absolute;
-  width: var(--screen-width);
-  height: var(--screen-height);
+  width: 100vw;
+  width: 100dvw;
+  height: 100vh;
+  height: 100dvh;
   background-color: #000;
   opacity: 0.5;
   z-index: var(--zindex-background);
@@ -27,7 +29,8 @@
 .waiting__dialog {
   padding: 0 calc(var(--responsive-font-size) * 3);
   height: var(--wating-dialog-height);
-  top: calc(var(--vh, 1vh) * 50);
+  top: 50vh;
+  top: 50dvh;
   left: 50%;
   transform: translate(-50%, -50%);
   color: var(--font-color);

@@ -23,4 +23,9 @@ export const EpisodePathConfigs: PathConfig[] = [
     id: PathIds.IMAGE_CUT_PILOT_SKILL_02,
     path: (root) => `${root.get()}/episodes/image-cut-pilot-skill-02.webp`,
   },
+  {
+    id: PathIds.IMAGE_CUT_CONFRONTATION_TWO_BRAVER,
+    path: (root) =>
+      `${root.get()}/episodes/image-cut-confrontation-two-braver.webp`,
+  },
 ];

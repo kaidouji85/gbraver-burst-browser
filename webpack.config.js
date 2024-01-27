@@ -31,7 +31,12 @@ module.exports = {
       {
         test: /\.ts$/,
         exclude: /node_modules/,
-        use: 'ts-loader'
+        use: [{
+          loader: 'ts-loader',
+          options: {
+            transpileOnly: true,
+          } 
+        }]
       },
       {
         test: /\.css$/i,
@@ -102,7 +107,6 @@ module.exports = {
       GBRAVER_BURST_TERMS_OF_SERVICE_URL: JSON.stringify(process.env.TERMS_OF_SERVICE_URL),
       GBRAVER_BURST_PRIVACY_POLICY_URL: JSON.stringify(process.env.PRIVACY_POLICY_URL),
       GBRAVER_BURST_CONTACT_URL: JSON.stringify(process.env.CONTACT_URL),
-      GBRAVER_BURST_IS_PERFORMANCE_STATS_VISIBLE: JSON.stringify(process.env.IS_PERFORMANCE_STATS_VISIBLE),
       GBRAVER_BURST_IS_SERVICE_WORKER_USED: JSON.stringify(process.env.IS_SERVICE_WORKER_USED),
       GBRAVER_BURST_IS_API_SERVER_ENABLE: JSON.stringify(process.env.IS_API_SERVER_ENABLE),
       GBRAVER_BURST_REST_API_URL: JSON.stringify(process.env.REST_API_URL),

@@ -60,7 +60,6 @@ npm start
     | /GbraverBurst/dev/termsOfServiceUrl | String | 利用規約ページのURL |
     | /GbraverBurst/dev/privacyPolicyUrl | String | プライバシーポリシーページのURL |
     | /GbraverBurst/dev/contactURL | String | 問い合わせページのURL |
-    | /GbraverBurst/dev/isPerformanceStatsVisible | String | FPSを表示するか否かのフラグ、```true```でFPSを表示 |
     | /GbraverBurst/dev/isAPIServerEnable | String | APIサーバが利用できるか否かのフラグ、```true```で利用可能 |
     | /GbraverBurst/dev/auth0ClientId | SecureString | auth0 application client ID |
     
@@ -82,7 +81,6 @@ npm start
     | /GbraverBurst/prod/termsOfServiceUrl | String | 利用規約ページのURL |
     | /GbraverBurst/prod/privacyPolicyUrl | String | プライバシーポリシーページのURL |
     | /GbraverBurst/prod/contactURL | String | 問い合わせページのURL |
-    | /GbraverBurst/prod/isPerformanceStatsVisible | String | FPSを表示するか否かのフラグ、```true```でFPSを表示 |
     | /GbraverBurst/prod/isAPIServerEnable | String | APIサーバが利用できるか否かのフラグ、```true```で利用可能 |
     | /GbraverBurst/prod/auth0ClientId | SecureString | auth0 application client ID |
 

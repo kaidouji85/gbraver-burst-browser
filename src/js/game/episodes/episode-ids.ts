@@ -6,4 +6,5 @@ export const EpisodeIDs = {
   TWO_BRAVER: "TWO_BRAVER",
   Pilot01: "Pilot01",
   Pilot02: "Pilot02",
+  NATIONAL_TOURNAMENT_REVENGE: "NATIONAL_TOURNAMENT_REVENGE",
 };

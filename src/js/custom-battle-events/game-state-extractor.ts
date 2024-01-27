@@ -1,6 +1,5 @@
 import type {
   BatteryDeclaration,
-  Battle,
   GameEnd,
   GameState,
   GameStateX,
@@ -8,38 +7,7 @@ import type {
 } from "gbraver-burst-core";
 
 /**
- * GameStateX<Battle>にキャストする
- * キャストできない場合はnullを返す
- *
- * @param state キャスト元
- * @return キャスト結果
- */
-export function castBattle(
-  state: GameState,
-): GameStateX<Battle> | null | undefined {
-  if (state.effect.name === "Battle") {
-    const effect: Battle = state.effect;
-    return { ...state, effect };
-  }
-
-  return null;
-}
-
-/**
- * ステートヒストリーからGameStateX<Battle>を抽出する
- * 抽出できない場合はnullを返す
- *
- * @param stateHistory ステートヒストリー
- * @return 抽出結果
- */
-export function extractBattle(
-  stateHistory: GameState[],
-): GameStateX<Battle> | null | undefined {
-  const foundState = stateHistory.find((v) => v.effect.name === "Battle");
-  return foundState ? castBattle(foundState) : null;
-}
-
-/**
+ * @deprecated
  * GameStateX<InputCommand>にキャストする
  * キャストできない場合はnullを返す
  *
@@ -58,6 +26,7 @@ export function castInputCommand(
 }
 
 /**
+ * @deprecated
  * ステートヒストリーからGameStateX<InputCommand>を抽出する
  * 抽出できない場合はnullを返す
  *
@@ -72,6 +41,7 @@ export function extractInputCommand(
 }
 
 /**
+ * @deprecated
  * GameStateX<BatteryDeclaration>にキャストする
  * キャストできない場合はnullを返す
  *
@@ -90,6 +60,7 @@ export function castBatteryDeclaration(
 }
 
 /**
+ * @deprecated
  * ステートヒストリーからGameStateX<BatteryDeclaration>を抽出する
  * 抽出できない場合はnullを返す
  *
@@ -106,6 +77,7 @@ export function extractBatteryDeclaration(
 }
 
 /**
+ * @deprecated
  * GameStateX<GameEnd>にキャストする
  * キャストできない場合はnullを返す
  *
@@ -124,6 +96,7 @@ export function castGameEnd(
 }
 
 /**
+ * @deprecated
  * ステートヒストリーからGameStateX<GameEnd>を抽出する
  * 抽出できない場合はnullを返す
  *

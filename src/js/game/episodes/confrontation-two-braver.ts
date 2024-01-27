@@ -5,18 +5,20 @@ import { genesisBraverNPC } from "../../npc/genesis-braver";
 import { PathIds } from "../../resource/path/ids";
 import { SOUND_IDS } from "../../resource/sound";
 import { playerUuid } from "../../uuid/player";
-import { EpisodeConfig } from "./episode";
+import { Episode } from "./episode";
 import { EpisodeIDs } from "./episode-ids";
 
 /** 導入 */
-const introduction = `あとで考える`;
+const introduction = `新人戦から数日後、シンヤのもとに 全国大会の覇者ユウヤから対戦申し込みが入った。憧れの人と対戦できることに、心躍らせるシンヤであったが……。`;
 
 /** 対決、二人のブレイバー！！ */
-export const confrontationTwoBraver: EpisodeConfig = {
+export const confrontationTwoBraver: Episode = {
   id: EpisodeIDs.TWO_BRAVER,
-  title: "（開発中）対決、二人のブレイバー！！",
+  type: "Episode",
+  number: "4",
+  title: "対決、二人のブレイバー！！（負けイベント）",
   introduction,
-  imageCutPathId: PathIds.IMAGE_CUT_BURST,
+  imageCutPathId: PathIds.IMAGE_CUT_CONFRONTATION_TWO_BRAVER,
   player: {
     playerId: playerUuid(),
     armdozer:
@@ -25,5 +27,5 @@ export const confrontationTwoBraver: EpisodeConfig = {
   },
   npc: genesisBraverNPC(),
   event: () => createConfrontationTwoBraverEvent(),
-  bgm: SOUND_IDS.BATTLE_BGM_03,
+  bgm: SOUND_IDS.YUUYA_BATTLE,
 };

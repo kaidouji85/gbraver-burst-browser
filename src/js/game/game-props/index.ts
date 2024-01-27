@@ -4,11 +4,11 @@ import { Observable } from "rxjs";
 import { BGMManager } from "../../bgm/bgm-manager";
 import { DOMFader } from "../../components/dom-fader/dom-fader";
 import { CssHUDUIScale } from "../../css/hud-ui-scale";
-import { CssVH } from "../../css/vh";
 import { GameLoop } from "../../game-loop/game-loop";
 import { Renderer } from "../../render";
 import { Resources } from "../../resource";
 import { ResourceRoot } from "../../resource/resource-root";
+import { PerformanceStats } from "../../stats/performance-stats";
 import { PushWindow } from "../../window/push-window";
 import { Resize } from "../../window/resize";
 import { GBraverBurstBrowserConfigRepository } from "../config/repository/repository";
@@ -25,8 +25,8 @@ import { TDSceneBinder } from "../td-scene-binder";
  * 本オブジェクトはゲーム管理オブジェクト内部、各種ヘルパーで利用することを想定している
  */
 export interface GameProps {
-  /** FPS統計を表示するか否か、trueで表示する */
-  isPerformanceStatsVisible: boolean;
+  /** パフォーマンス統計、表示されていない場合はnullが入る */
+  performanceStats: PerformanceStats | null;
   /** サービスワーカーを利用するか否か、trueで利用する */
   isServiceWorkerUsed: boolean;
   /** 遊び方スライドのURL */
@@ -53,8 +53,6 @@ export interface GameProps {
   pushWindow: Observable<PushWindow>;
   /** ゲームループ */
   gameLoop: Observable<GameLoop>;
-  /** cssカスタムプロパティ --vh */
-  vh: CssVH;
   /** cssカスタムプロパティ --hud-ui-scale */
   hudUIScale: CssHUDUIScale;
   /** DOMフェーダ */

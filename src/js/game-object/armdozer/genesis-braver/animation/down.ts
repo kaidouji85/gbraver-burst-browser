@@ -8,8 +8,7 @@ import { GenesisBraverModel } from "../model/genesis-braver-model";
 
 /**
  * ダウン
- *
- * @param model シンブレイバーモデル
+ * @param model ジェネシスブレイバーモデル
  * @return アニメーション
  */
 export function down(model: GenesisBraverModel): Animate {

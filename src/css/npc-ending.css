@@ -3,8 +3,10 @@
  */
 @media (orientation: landscape) {
   .npc-ending {
-    width: var(--screen-width);
-    height: var(--screen-height);
+    width: 100vw;
+    width: 100dvw;
+    height: 100vh;
+    height: 100dvh;
     background-color: var(--background-color);
     color: var(--font-color);
     box-sizing: border-box;
@@ -23,7 +25,7 @@
 
 .npc-ending__end {
   object-fit: cover;
-  width: 40vw;
+  width: 40dvw;
   position: absolute;
   left: max(var(--safe-area-left), 5vh);
   bottom: max(var(--safe-area-bottom), 5vh);

@@ -14,7 +14,7 @@ export function createPilotSkillTutorial02Props(): PilotSkillTutorial02Props {
   const state = {
     isIntroductionComplete: false,
     isDoPilotSkillComplete: false,
-    isShouldAttack5OrMoreComplete: false,
+    isShouldAttack3OrMoreComplete: false,
   };
   return { state };
 }

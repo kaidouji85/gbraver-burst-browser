@@ -1,22 +1,11 @@
-import { Animate } from "../../../animation/animate";
-import { process } from "../../../animation/process";
 import { CustomBattleEventProps } from "../../../td-scenes/battle/custom-battle-event";
+import { enemyPilotCry } from "../../pilot-cry";
 
 /**
  * ツバサ先輩勝利宣言
  * @param props イベントプロパティ
  * @return アニメーション
  */
-export function tsubasaVictoryDeclaration(
+export const tsubasaVictoryDeclaration = (
   props: Readonly<CustomBattleEventProps>,
-): Animate {
-  const messageWindow = props.view.dom.enemyCryMessageWindow;
-  return process(() => {
-    messageWindow.visible(true);
-    messageWindow.lighten();
-    messageWindow.face("Tsubasa");
-    messageWindow.faceVisible(true);
-    messageWindow.messages(["この瞬間 私の勝利が確定した"]);
-    messageWindow.nextMessageIconVisible(false);
-  });
-}
+) => enemyPilotCry(props, "Tsubasa", "この瞬間 私の勝利が確定した");

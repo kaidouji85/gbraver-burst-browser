@@ -9,6 +9,7 @@ type Elements = {
   bgmVolumeValue: HTMLElement;
   seVolumeSelector: HTMLInputElement;
   seVolumeValue: HTMLElement;
+  performanceStatsVisibilitySelector: HTMLElement;
   prev: HTMLElement;
   configChange: HTMLElement;
 };
@@ -50,6 +51,10 @@ export function extractElements(root: HTMLElement, ids: DataIDs): Elements {
   const seVolumeValue: HTMLElement =
     root.querySelector(`[data-id="${ids.seVolumeValue}"]`) ??
     document.createElement("div");
+  const performanceStatsVisibilitySelector: HTMLElement =
+    root.querySelector(
+      `[data-id="${ids.performanceStatsVisibilitySelector}"]`,
+    ) ?? document.createElement("div");
   const prev: HTMLElement =
     root.querySelector(`[data-id="${ids.prev}"]`) ??
     document.createElement("button");
@@ -66,5 +71,6 @@ export function extractElements(root: HTMLElement, ids: DataIDs): Elements {
     bgmVolumeValue,
     seVolumeSelector,
     seVolumeValue,
+    performanceStatsVisibilitySelector,
   };
 }

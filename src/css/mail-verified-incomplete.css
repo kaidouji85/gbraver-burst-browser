@@ -7,8 +7,10 @@
     --control-button-width: calc(var(--responsive-font-size) * 10);
     --control-button-height: calc(var(--responsive-font-size) * 3);
 
-    width: var(--screen-width);
-    height: var(--screen-height);
+    width: 100vw;
+    width: 100dvw;
+    height: 100vh;
+    height: 100dvh;
     box-sizing: border-box;
     padding: max(var(--safe-area-top), var(--padding))
       max(var(--safe-area-right), var(--padding))

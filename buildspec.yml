@@ -21,7 +21,6 @@ env:
     TERMS_OF_SERVICE_URL: /GbraverBurst/dev/termsOfServiceUrl
     PRIVACY_POLICY_URL: /GbraverBurst/dev/privacyPolicyUrl
     CONTACT_URL: /GbraverBurst/dev/contactURL
-    IS_PERFORMANCE_STATS_VISIBLE: /GbraverBurst/dev/isPerformanceStatsVisible
     IS_API_SERVER_ENABLE: /GbraverBurst/dev/isAPIServerEnable
     AUTH0_DOMAIN: /GbraverBurst/dev/auth0Domain
     AUTH0_CLIENT_ID: /GbraverBurst/dev/auth0ClientId
@@ -29,7 +28,7 @@ env:
 phases:
   install:
     runtime-versions:
-      nodejs: 18
+      nodejs: 20
   pre_build:
     commands:
       - npm ci

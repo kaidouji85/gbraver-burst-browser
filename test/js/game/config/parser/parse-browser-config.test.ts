@@ -9,6 +9,7 @@ test("ブラウザ設定を正しくパースできる", () => {
     bgmVolume: 1,
     seVolume: 1,
     battleControllerType: "BigButton",
+    performanceStatsVisibility: "visible",
   };
   expect(parseBrowserConfig(data)).toEqual(data);
 });
@@ -21,6 +22,7 @@ test("データ型が異なっているも、ある程度はパースできる",
       bgmVolume: "1",
       seVolume: "1",
       battleControllerType: "BigButton",
+      performanceStatsVisibility: "hidden",
     }),
   ).toEqual({
     webGLPixelRatio: 2,
@@ -28,6 +30,7 @@ test("データ型が異なっているも、ある程度はパースできる",
     bgmVolume: 1,
     seVolume: 1,
     battleControllerType: "BigButton",
+    performanceStatsVisibility: "hidden",
   });
 });
 

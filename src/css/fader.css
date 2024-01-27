@@ -1,8 +1,10 @@
 /** フェーダー */
 @media (orientation: landscape) {
   .dom-fader {
-    width: var(--screen-width);
-    height: var(--screen-height);
+    width: 100vw;
+    width: 100dvw;
+    height: 100vh;
+    height: 100dvh;
     position: fixed;
     z-index: var(--zindex-fader);
     background-color: var(--background-color);

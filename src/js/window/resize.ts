@@ -16,13 +16,6 @@ export type Resize = {
 };
 
 /**
- * リサイズストリーム発火を遅らせる時間（ミリ秒）
- * ios Safariだと、リサイズ発火直後には正しいビューポートの値が取れない
- * なので、少しだけの時間待つ
- */
-export const RESIZE_DELAY = 50;
-
-/**
  * リサイズストリームを生成する
  *
  * @return ストリーム
@@ -30,14 +23,12 @@ export const RESIZE_DELAY = 50;
 export function resizeStream(): Observable<Resize> {
   return new Observable<Resize>((subscriber) => {
     window.addEventListener("resize", () => {
-      setTimeout(() => {
-        subscriber.next({
-          type: "resize",
-          width: getViewPortWidth(),
-          height: getViewPortHeight(),
-          safeAreaInset: createSafeAreaInset(),
-        });
-      }, RESIZE_DELAY);
+      subscriber.next({
+        type: "resize",
+        width: getViewPortWidth(),
+        height: getViewPortHeight(),
+        safeAreaInset: createSafeAreaInset(),
+      });
     });
   });
 }

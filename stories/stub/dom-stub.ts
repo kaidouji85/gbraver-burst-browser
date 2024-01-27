@@ -2,11 +2,9 @@ import "../../src/css/style.css";
 
 import * as TWEEN from "@tweenjs/tween.js";
 
-import { CssVH } from "../../src/js/css/vh";
 import { gameLoopStream } from "../../src/js/game-loop/game-loop";
 import type { Resources } from "../../src/js/resource";
 import { developingFullResourceLoading } from "../../src/js/resource/loading/full-resource-loading";
-import { resizeStream } from "../../src/js/window/resize";
 import { StorybookResourceRoot } from "../storybook-resource-root";
 
 /**
@@ -34,8 +32,6 @@ export const domStub =
   (creator: DOMCreator): DOMStubStory =>
   () => {
     const root = document.createElement("div");
-    const resize = resizeStream();
-    new CssVH(resize);
     const resourceRoot = new StorybookResourceRoot();
     const resourceLoading = developingFullResourceLoading(resourceRoot);
     resourceLoading.resources.then((resources) => {

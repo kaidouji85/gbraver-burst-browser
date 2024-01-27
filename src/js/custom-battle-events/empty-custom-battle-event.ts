@@ -8,6 +8,7 @@ import type {
   CustomStateAnimation,
   LastState,
   PilotSkillCommandSelected,
+  StateUpdateStarted,
 } from "../td-scenes/battle/custom-battle-event";
 
 /**
@@ -15,6 +16,13 @@ import type {
  * CustomBattleEventのデフォルト実装を定義する目的で、本クラスを利用すること
  */
 export class EmptyCustomBattleEvent implements CustomBattleEvent {
+  /** @override */
+  /* eslint-disable @typescript-eslint/no-unused-vars */
+  onStateUpdateStarted(props: StateUpdateStarted): void {
+    /* eslint-enable @typescript-eslint/no-unused-vars */
+    // NOP
+  }
+
   /** @override */
   /* eslint-disable @typescript-eslint/no-unused-vars */
   onStateAnimation(props: CustomStateAnimation): Animate {

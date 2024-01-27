@@ -15,8 +15,10 @@
   position: fixed;
   top: 0;
   left: 0;
-  width: var(--screen-width);
-  height: var(--screen-height);
+  width: 100vw;
+  width: 100dvw;
+  height: 100vh;
+  height: 100dvh;
   background-color: #000;
   opacity: 0.5;
   z-index: var(--zindex-background);
@@ -25,8 +27,10 @@
 .config-changed__dialog {
   --dialog-padding: var(--responsive-font-size);
 
-  top: calc(var(--vh, 1vh) * 50);
+  top: 50vh;
+  top: 50dvh;
   left: 50vw;
+  left: 50dvw;
   transform: translate(-50%, -50%);
   color: var(--font-color);
   font-size: var(--responsive-font-size);

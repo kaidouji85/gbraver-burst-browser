@@ -10,7 +10,7 @@ export const scene: DOMStubStory = domStub((resources) => {
     {
       id: "01",
       type: "Episode",
-      number: 1,
+      number: "1",
       title: "バッテリーシステム基礎",
       introduction: "導入",
       imageCutPathId: PathIds.IMAGE_CUT_BATTERY_SYSTEM,
@@ -18,7 +18,7 @@ export const scene: DOMStubStory = domStub((resources) => {
     {
       id: "02",
       type: "Episode",
-      number: 2,
+      number: "2",
       title: "ゼロ防御は即死",
       introduction: "導入",
       imageCutPathId: PathIds.IMAGE_CUT_ZERO_DEFENSE,
@@ -26,7 +26,7 @@ export const scene: DOMStubStory = domStub((resources) => {
     {
       id: "03",
       type: "Episode",
-      number: 3,
+      number: "3",
       title: "バーストで一発逆転",
       introduction: "導入",
       imageCutPathId: PathIds.IMAGE_CUT_BURST,

@@ -4,8 +4,10 @@
     --button-width: calc(var(--responsive-font-size) * 10);
     --button-height: calc(var(--responsive-font-size) * 3);
 
-    width: var(--screen-width);
-    height: var(--screen-height);
+    width: 100vw;
+    width: 100dvw;
+    height: 100vh;
+    height: 100dvh;
     background-color: var(--background-color);
     color: var(--font-color);
     box-sizing: border-box;
@@ -60,7 +62,8 @@
 .config__webgl-pixel-ratio-caption,
 .config__battle-controller-type-caption,
 .config__bgm-volume-caption,
-.config__se-volume-caption {
+.config__se-volume-caption,
+.config__performance-stats-visibility-caption {
   background-color: var(--sub-button-background-color);
   border-radius: calc(var(--responsive-font-size) * 0.5);
   padding: calc(var(--responsive-font-size) * 0.3);
@@ -70,7 +73,8 @@
 .config__webgl-pixel-ratio-description,
 .config__battle-controller-type-description,
 .config__bgm-volume-description,
-.config__se-volume-description {
+.config__se-volume-description,
+.config__performance-stats-visibility-description {
   margin-bottom: calc(var(--responsive-font-size) * 0.5);
 }
 
@@ -89,14 +93,16 @@
 
 .config__battle-animation-time-scale-label,
 .config__webgl-pixel-ratio-selector-label,
-.config__battle-controller-type-label {
+.config__battle-controller-type-label,
+.config__performance-stats-visibility-label {
   display: flex;
   align-items: center;
 }
 
 .config__battle-animation-time-scale-radio,
 .config__webgl-pixel-ratio-selector-radio,
-.config__battle-controller-type-radio {
+.config__battle-controller-type-radio,
+.config__performance-stats-visibility-radio {
   margin: 0;
   height: var(--font-size);
   width: var(--font-size);
@@ -157,6 +163,11 @@
 .config__se-volume-selector {
   width: calc(var(--responsive-font-size) * 14);
   margin-right: calc(var(--responsive-font-size) * 2);
+}
+
+.config__performance-stats-visibility-selector {
+  display: flex;
+  gap: calc(var(--responsive-font-size) * 2);
 }
 
 .config__footer {

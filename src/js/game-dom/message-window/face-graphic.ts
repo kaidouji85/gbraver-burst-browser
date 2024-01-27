@@ -1,4 +1,4 @@
-import type { Resources } from "../../resource";
+import { Resources } from "../../resource";
 import { PathIds } from "../../resource/path/ids";
 
 /** ルートHTML要素class属性 */
@@ -8,7 +8,7 @@ const ROOT_CLASS = "face-graphic";
 const ROOT_CLASS_INVISIBLE = `${ROOT_CLASS}--invisible`;
 
 /** 顔画像タイプ */
-export type FaceType = "Shinya" | "Gai" | "Raito" | "Tsubasa";
+export type FaceType = "Shinya" | "Gai" | "Raito" | "Tsubasa" | "Yuuya";
 
 /** 顔画像の向き */
 export type FaceOrientation = "Left" | "Right";
@@ -17,6 +17,12 @@ export type FaceOrientation = "Left" | "Right";
 type Config = {
   /** 顔画像タイプ */
   type: FaceType;
+  /** class属性 */
+  className: string;
+  /** 右向き時のclass属性 */
+  rightwardClassName: string;
+  /** 非表示時のclass属性 */
+  invisibleClassName: string;
 
   /**
    * 顔画像パス
@@ -24,15 +30,6 @@ type Config = {
    * @return 顔画像パス
    */
   src: (resources: Resources) => string;
-
-  /** class属性 */
-  className: string;
-
-  /** 右向き時のclass属性 */
-  rightwardClassName: string;
-
-  /** 非表示時のclass属性 */
-  invisibleClassName: string;
 };
 
 /** 顔画像設定をあつめたもの */
@@ -72,16 +69,26 @@ const configs: Config[] = [
     rightwardClassName: `${ROOT_CLASS}__tsubasa--right`,
     invisibleClassName: `${ROOT_CLASS}__tsubasa--invisible`,
   },
+  {
+    type: "Yuuya",
+    src: (resources) =>
+      resources.paths.find((v) => v.id === PathIds.YUUYA_SKILL_CUTIN)?.path ??
+      "",
+    className: `${ROOT_CLASS}__yuuya`,
+    rightwardClassName: `${ROOT_CLASS}__yuuya--right`,
+    invisibleClassName: `${ROOT_CLASS}__yuuya--invisible`,
+  },
 ];
 
 /** 顔画像 */
 export class FaceGraphic {
+  /** ルートHTML要素 */
   #root: HTMLElement;
+  /** 顔グラフィックを集めたもの */
   #images: HTMLImageElement[];
 
   /**
    * コンストラクタ
-   *
    * @param resources リソース管理オブジェクト
    */
   constructor(resources: Resources) {
@@ -101,7 +108,6 @@ export class FaceGraphic {
 
   /**
    * ルートHTML要素を取得する
-   *
    * @return 取得結果
    */
   getRootHTMLElement(): HTMLElement {
@@ -110,7 +116,6 @@ export class FaceGraphic {
 
   /**
    * 表示、非表示を設定する
-   *
    * @param isVisible 表示フラグ、trueで表示する
    */
   visible(isVisible: boolean): void {
@@ -119,30 +124,25 @@ export class FaceGraphic {
 
   /**
    * 顔画像を変更する
-   *
    * @param faceType 変更する顔画像
    * @param faceOrientation 顔画像の方向
    */
   face(faceType: FaceType, faceOrientation: FaceOrientation): void {
     this.#images.forEach((img) => {
       const config = configs.find((v) => v.type === img.dataset.facetype);
-
       if (!config) {
         return;
       }
 
-      img.className = (() => {
-        if (faceType === img.dataset.facetype && faceOrientation === "Left") {
-          return config.className;
-        } else if (
-          faceType === img.dataset.facetype &&
-          faceOrientation === "Right"
-        ) {
-          return config.rightwardClassName;
-        } else {
-          return config.invisibleClassName;
-        }
-      })();
+      if (faceType !== img.dataset.facetype) {
+        img.className = config.invisibleClassName;
+        return;
+      }
+
+      img.className =
+        faceOrientation === "Right"
+          ? config.rightwardClassName
+          : config.className;
     });
   }
 }

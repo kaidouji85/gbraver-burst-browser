@@ -18,18 +18,18 @@ export const playerWin = async (props: CustomBattleEventProps) => {
   activeLeftMessageWindowWithFace(props, "Gai");
   await scrollLeftMessages(props, [
     ["ガイ", "「やめ!!"],
-    ["この試合 ……シンヤの勝ち"],
+    ["この試合 ……シンヤの勝ち」"],
   ]);
   props.view.dom.leftMessageWindow.darken();
   activeRightMessageWindowWithFace(props, "Shinya");
   await scrollRightMessages(props, [
     ["シンヤ", "「やった 上級生に勝てたッス」"],
   ]);
-  await refreshConversation(props);
+  props.view.dom.rightMessageWindow.darken();
   activeLeftMessageWindowWithFace(props, "Raito");
   await scrollLeftMessages(props, [
     ["ライト", "「下級生やと思て 舐めとったわ"],
-    ["さすがやな 大田高校」"],
+    ["さすがやな 大田高校のエース君」"],
   ]);
   await refreshConversation(props);
   activeLeftMessageWindowWithFace(props, "Gai");
@@ -43,5 +43,11 @@ export const playerWin = async (props: CustomBattleEventProps) => {
   props.view.dom.leftMessageWindow.scrollUp();
   activeRightMessageWindowWithFace(props, "Shinya");
   await scrollRightMessages(props, [["シンヤ", "「ありがとうございました」"]]);
+  await refreshConversation(props, 200);
+  activeRightMessageWindowWithFace(props, "Yuuya");
+  await scrollRightMessages(props, [
+    ["ユウヤ", "「……シンブレイバーか"],
+    ["野暮用で関東まで来てみたが 面白い奴を見つけたな」"],
+  ]);
   invisibleAllMessageWindows(props);
 };

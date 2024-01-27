@@ -1,5 +1,7 @@
+import { ArmdozerId, ArmdozerIds } from "gbraver-burst-core";
+
 import { EpisodeTitle } from "../src/js/dom-scenes/episode-title";
-import { EpisodeNumber, EpisodeType } from "../src/js/game/episodes/episode";
+import { EpisodeNumber } from "../src/js/game/episodes/episode";
 import { domStub } from "./stub/dom-stub";
 
 export default {
@@ -8,42 +10,71 @@ export default {
 
 /**
  * エピソードタイトルストーリー
- * @param title タイトル
- * @param type エピソードタイプ
  * @param number エピソード番号
+ * @param title タイトル
+ * @param armdozerId アームドーザID
  * @return ストーリー
  */
 const episodeTitleStory = (
-  title: string,
-  type: EpisodeType,
   number: EpisodeNumber,
+  title: string,
+  armdozerId: ArmdozerId,
 ) =>
   domStub((resources) => {
     const scene = new EpisodeTitle({
       resources,
-      type,
       number,
       title,
+      armdozerId,
     });
     return scene.getRootHTMLElement();
   });
 
 /** エピソード1 */
 export const episode1 = episodeTitleStory(
+  "1",
   "バッテリーシステムの基礎",
-  "Episode",
-  1,
+  ArmdozerIds.SHIN_BRAVER,
 );
 
 /** エピソード2 */
-export const episode2 = episodeTitleStory("ゼロ防御だと即死する", "Episode", 2);
+export const episode2 = episodeTitleStory(
+  "2",
+  "ゼロ防御だと即死する",
+  ArmdozerIds.SHIN_BRAVER,
+);
 
 /** エピソード3 */
-export const episode3 = episodeTitleStory("バーストで一発逆転", "Episode", 3);
+export const episode3 = episodeTitleStory(
+  "3",
+  "バーストで一発逆転",
+  ArmdozerIds.SHIN_BRAVER,
+);
 
-/** サイドエピソード1 */
-export const sideEpisode1 = episodeTitleStory(
+/** エピソード4 */
+export const episode4 = episodeTitleStory(
+  "4",
+  "対決、二人のブレイバー！！（負けイベント）",
+  ArmdozerIds.SHIN_BRAVER,
+);
+
+/** サイドエピソード3.1 */
+export const sideEpisode31 = episodeTitleStory(
+  "3.1",
   "パイロット次第では詰み（負けイベント）",
-  "Side Episode",
-  1,
+  ArmdozerIds.SHIN_BRAVER,
+);
+
+/** サイドエピソード3.2 */
+export const sideEpisode32 = episodeTitleStory(
+  "3.2",
+  "パイロットスキルで意表を突け",
+  ArmdozerIds.SHIN_BRAVER,
+);
+
+/** サイドエピソード4.1 */
+export const sideEpisode41 = episodeTitleStory(
+  "4.1",
+  "リベンジ",
+  ArmdozerIds.GENESIS_BRAVER,
 );

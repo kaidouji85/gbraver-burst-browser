@@ -76,9 +76,27 @@
   transform: translateX(-25%) scaleX(-1);
 }
 
+.face-graphic__yuuya,
+.face-graphic__yuuya--right {
+  --icon-size: calc(var(--responsive-font-size) * 9.5);
+  --translate-y: 10%;
+
+  width: var(--icon-size);
+  height: var(--icon-size);
+}
+
+.face-graphic__yuuya {
+  transform: translateX(-15%) translateY(var(--translate-y));
+}
+
+.face-graphic__yuuya--right {
+  transform: translateX(-25%) translateY(var(--translate-y)) scaleX(-1);
+}
+
 .face-graphic__shinya--invisible,
 .face-graphic__gai--invisible,
 .face-graphic__raito--invisible,
-.face-graphic__tsubasa--invisible {
+.face-graphic__tsubasa--invisible,
+.face-graphic__yuuya--invisible {
   display: none;
 }

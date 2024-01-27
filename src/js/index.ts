@@ -17,7 +17,6 @@ declare let GBRAVER_BURST_PRIVACY_POLICY_URL: string;
 declare let GBRAVER_BURST_CONTACT_URL: string;
 declare let GBRAVER_BURST_REST_API_URL: string;
 declare let GBRAVER_BURST_WEBSOCKET_API_URL: string;
-declare let GBRAVER_BURST_IS_PERFORMANCE_STATS_VISIBLE: string;
 declare let GBRAVER_BURST_IS_SERVICE_WORKER_USED: string;
 declare let GBRAVER_BURST_IS_API_SERVER_ENABLE: string;
 declare let GBRAVER_BURST_AUTH0_DOMAIN: string;
@@ -62,8 +61,6 @@ async function main(): Promise<void> {
     termsOfServiceURL: GBRAVER_BURST_TERMS_OF_SERVICE_URL,
     privacyPolicyURL: GBRAVER_BURST_PRIVACY_POLICY_URL,
     contactURL: GBRAVER_BURST_CONTACT_URL,
-    isPerformanceStatsVisible:
-      GBRAVER_BURST_IS_PERFORMANCE_STATS_VISIBLE === "true",
     isServiceWorkerUsed: GBRAVER_BURST_IS_SERVICE_WORKER_USED === "true",
     isAPIServerEnable: GBRAVER_BURST_IS_API_SERVER_ENABLE === "true",
     canPlayEpisodeInDevelopment:

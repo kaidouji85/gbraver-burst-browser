@@ -30,11 +30,15 @@ export async function playStateHistory(
     return;
   }
 
-  const removeLastState = gameStateHistory.slice(0, -1);
+  props.customBattleEvent?.onStateUpdateStarted({
+    ...props,
+    update: gameStateHistory,
+  });
+  const stateHistoryWithLastRemoved = gameStateHistory.slice(0, -1);
   await props.animatePlayer.play(
-    removeLastState
+    stateHistoryWithLastRemoved
       .map((gameState, index) => {
-        const next = removeLastState[index + 1];
+        const next = stateHistoryWithLastRemoved[index + 1];
         const isParallel =
           next &&
           parallelPlayEffects.includes(next.effect.name) &&
@@ -45,18 +49,14 @@ export async function playStateHistory(
         };
         const anime = all(
           stateAnimation(props, gameState),
-          props.customBattleEvent
-            ? props.customBattleEvent.onStateAnimation(
-                customStateAnimationProps,
-              )
-            : empty(),
+          props.customBattleEvent?.onStateAnimation(
+            customStateAnimationProps,
+          ) ?? empty(),
         ).chain(
           empty(),
-          props.customBattleEvent
-            ? props.customBattleEvent.afterStateAnimation(
-                customStateAnimationProps,
-              )
-            : empty(),
+          props.customBattleEvent?.afterStateAnimation(
+            customStateAnimationProps,
+          ) ?? empty(),
         );
         return {
           anime,
@@ -71,18 +71,13 @@ export async function playStateHistory(
         empty(),
       ),
   );
+
   const lastState = gameStateHistory[gameStateHistory.length - 1];
   const eventProps = { ...props, update: gameStateHistory };
-  if (props.customBattleEvent) {
-    await props.customBattleEvent.beforeLastState(eventProps);
-  }
+  await props.customBattleEvent?.beforeLastState(eventProps);
   await Promise.all([
     props.animatePlayer.play(stateAnimation(props, lastState)),
-    props.customBattleEvent
-      ? props.customBattleEvent.onLastState(eventProps)
-      : Promise.resolve(),
+    props.customBattleEvent?.onLastState(eventProps) ?? Promise.resolve(),
   ]);
-  if (props.customBattleEvent) {
-    await props.customBattleEvent.afterLastState(eventProps);
-  }
+  await props.customBattleEvent?.afterLastState(eventProps);
 }

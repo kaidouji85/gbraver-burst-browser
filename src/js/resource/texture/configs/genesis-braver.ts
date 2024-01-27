@@ -48,6 +48,14 @@ export const GenesisBraverTextureConfigs: TextureConfig[] = [
     path: "armdozer/genesis-braver/burst-down.webp",
   },
   {
+    id: TEXTURE_IDS.GENESIS_BRAVER_UPRIGHT,
+    path: "armdozer/genesis-braver/upright.webp",
+  },
+  {
+    id: TEXTURE_IDS.GENESIS_BRAVER_BOW,
+    path: "armdozer/genesis-braver/bow.webp",
+  },
+  {
     id: TEXTURE_IDS.GENESIS_BRAVER_CUTIN_BURST_UP,
     path: "armdozer/genesis-braver/cutin-burst-up.webp",
   },

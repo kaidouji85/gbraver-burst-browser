@@ -17,8 +17,10 @@
 
 .private-match-guest__background {
   position: absolute;
-  width: var(--screen-width);
-  height: var(--screen-height);
+  width: 100vw;
+  width: 100dvw;
+  height: 100vh;
+  height: 100dvh;
   background-color: #000;
   opacity: 0.5;
   z-index: var(--zindex-background);
@@ -27,8 +29,8 @@
 .private-match-guest__dialog {
   --dialog-padding: calc(var(--responsive-font-size) * 2);
 
-  top: calc(var(--vh, 1vh) * 50);
-  left: 50vw;
+  top: 50dvh;
+  left: 50dvw;
   transform: translate(-50%, -50%);
   color: var(--font-color);
   background-color: var(--background-color);
@@ -40,7 +42,7 @@
   padding: max(var(--dialog-padding), calc(var(--closer-height) / 2))
     var(--dialog-padding) var(--dialog-padding) var(--dialog-padding);
   min-width: calc(var(--responsive-font-size) * 20);
-  min-height: calc(var(--vh) * 30);
+  min-height: 30vh;
   display: grid;
   grid-template-rows: auto 1fr auto auto;
 }

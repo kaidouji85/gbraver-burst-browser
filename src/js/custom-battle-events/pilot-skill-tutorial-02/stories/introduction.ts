@@ -30,8 +30,8 @@ export async function introduction(props: Readonly<CustomBattleEventProps>) {
   activeLeftMessageWindowWithFace(props, "Tsubasa");
   await scrollLeftMessages(props, [
     ["ツバサ", "「それではガイ君 練習をはじめようか"],
-    ["私は先程と全く同じ戦略で戦うが 君のパイロットスキルなら"],
-    ["2ターン目で私を倒すことができるはずだ」"],
+    ["私は先程と全く同じ戦術で戦うが"],
+    ["君のスキルなら勝利を掴むことができるだろう」"],
   ]);
   props.view.dom.leftMessageWindow.darken();
   await refreshConversation(props);

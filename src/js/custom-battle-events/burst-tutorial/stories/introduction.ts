@@ -36,11 +36,6 @@ export const introduction = async (props: CustomBattleEventProps) => {
   await refreshConversation(props, 100);
   activeRightMessageWindowWithFace(props, "Shinya");
   await scrollRightMessages(props, [["シンヤ", "「了解ッス」"]]);
-  props.view.dom.rightMessageWindow.darken();
-  activeLeftMessageWindowWithFace(props, "Raito");
-  await scrollLeftMessages(props, [
-    ["ライト", "「ほないくで 大田高校のエース君」"],
-  ]);
   await refreshConversation(props, 100);
   activeLeftMessageWindowWithFace(props, "Gai");
   props.view.dom.leftMessageWindow.messages(["ガイ", "「双方 姿勢を正して"]);

@@ -8,8 +8,10 @@
     --zindex-title: 2;
     --font-size: calc(var(--responsive-font-size) * 2);
 
-    width: var(--screen-width);
-    height: var(--screen-height);
+    width: 100vw;
+    width: 100dvw;
+    height: 100vh;
+    height: 100dvh;
     background-color: var(--background-color);
     color: var(--font-color);
     box-sizing: border-box;
@@ -64,10 +66,10 @@
 }
 
 .episode-title__shin-braver-bust-shot {
-  --width: calc(var(--vh) * 200);
+  --width: 200vh;
 
   position: absolute;
-  top: calc(var(--vh) * -10);
+  top: -10vh;
   right: calc(-0.2 * var(--width));
   width: var(--width);
   filter: brightness(20%);
@@ -75,7 +77,30 @@
 }
 
 .episode-title__shin-braver-stand {
-  --size: calc(140 * var(--vh));
+  --size: 140vh;
+
+  position: absolute;
+  right: calc(-0.2 * var(--size));
+  bottom: 0;
+  transform: translateY(25%);
+  width: var(--size);
+  height: var(--size);
+  z-index: var(--zindex-stand);
+}
+
+.episode-title__genesis-braver-bust-shot {
+  --width: 200vh;
+
+  position: absolute;
+  top: -10vh;
+  right: calc(-0.2 * var(--width));
+  width: var(--width);
+  filter: brightness(20%);
+  z-index: var(--zindex-bust-shot);
+}
+
+.episode-title__genesis-braver-stand {
+  --size: 140vh;
 
   position: absolute;
   right: calc(-0.2 * var(--size));
