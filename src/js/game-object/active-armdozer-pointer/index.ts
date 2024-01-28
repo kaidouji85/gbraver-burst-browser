@@ -1,5 +1,6 @@
 import { Resources } from "../../resource";
 import { ActiveArmdozerPointer } from "./active-armdozer-pointer";
+import { PlayerArmdozerPointerView } from "./view/player-armdozer-pointer-view";
 
 /**
  * プレイヤー側のアクティブアームドーザポインターを作成する
@@ -9,5 +10,6 @@ import { ActiveArmdozerPointer } from "./active-armdozer-pointer";
 export function playerActiveArmdozerPointer(
   resources: Resources,
 ): ActiveArmdozerPointer {
-  return new ActiveArmdozerPointer(resources);
+  const view = new PlayerArmdozerPointerView(resources);
+  return new ActiveArmdozerPointer(view);
 }

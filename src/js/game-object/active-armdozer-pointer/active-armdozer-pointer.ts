@@ -1,29 +1,21 @@
 import * as THREE from "three";
 
-import { HorizontalAnimationMesh } from "../../mesh/horizontal-animation";
-import { Resources } from "../../resource";
-import { TEXTURE_IDS } from "../../resource/texture/ids";
+import { ActiveArmdozerPointerModel } from "./model/active-armdozer-pointer-model";
+import { createInitialValue } from "./model/create-initial-value";
+import { ActiveArmdozerPointerView } from "./view/active-armdozer-pointer-view";
 
 /** アクティブアームドーザポインター */
 export class ActiveArmdozerPointer {
-  /** メッシュ */
-  #mesh: HorizontalAnimationMesh;
+  #model: ActiveArmdozerPointerModel;
+  #view: ActiveArmdozerPointerView;
 
   /**
    * コンストラクタ
-   * @param resources リソース管理オブジェクト
+   * @param view ビュー
    */
-  constructor(resources: Resources) {
-    const texture =
-      resources.textures.find(
-        (v) => v.id === TEXTURE_IDS.ACTIVE_ARMDOZER_POINTER,
-      )?.texture ?? new THREE.Texture();
-    this.#mesh = new HorizontalAnimationMesh({
-      texture,
-      maxAnimation: 1,
-      width: 100,
-      height: 100,
-    });
+  constructor(view: ActiveArmdozerPointerView) {
+    this.#model = createInitialValue();
+    this.#view = view;
   }
 
   /**
@@ -31,6 +23,6 @@ export class ActiveArmdozerPointer {
    * @return シーンに追加するオブジェクト
    */
   getObject3D(): THREE.Object3D {
-    return this.#mesh.getObject3D();
+    return this.#view.getObject3D();
   }
 }
