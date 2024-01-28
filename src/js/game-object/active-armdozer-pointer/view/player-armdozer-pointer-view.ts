@@ -26,6 +26,7 @@ export class PlayerArmdozerPointerView implements ActiveArmdozerPointerView {
       width: 100,
       height: 100,
     });
+    this.#mesh.getObject3D().rotation.z = Math.PI / 4;
   }
 
   /** @override */
@@ -41,5 +42,7 @@ export class PlayerArmdozerPointerView implements ActiveArmdozerPointerView {
   /** @override */
   engage(model: ActiveArmdozerPointerModel) {
     this.#mesh.opacity(model.opacity);
+    this.#mesh.getObject3D().position.x = model.position.x;
+    this.#mesh.getObject3D().position.y = model.position.y;
   }
 }

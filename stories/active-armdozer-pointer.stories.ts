@@ -50,6 +50,7 @@ const activeArmdozerPointerStory =
  * @param activeArmdozerPointer
  */
 const display = (activeArmdozerPointer: ActiveArmdozerPointer) => {
+  activeArmdozerPointer.setPosition(100, 100);
   activeArmdozerPointer.show()
     .chain(delay(3000))
     .chain(activeArmdozerPointer.hidden())
