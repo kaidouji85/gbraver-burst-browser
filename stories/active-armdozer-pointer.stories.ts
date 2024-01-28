@@ -2,7 +2,7 @@ import {Observable} from "rxjs";
 
 import { delay } from "../src/js/animation/delay";
 import { GameObjectAction } from "../src/js/game-object/action/game-object-action";
-import { playerActiveArmdozerPointer } from "../src/js/game-object/active-armdozer-pointer";
+import {enemyActiveArmdozerPointer, playerActiveArmdozerPointer} from "../src/js/game-object/active-armdozer-pointer";
 import { ActiveArmdozerPointer } from "../src/js/game-object/active-armdozer-pointer/active-armdozer-pointer";
 import { Resources } from "../src/js/resource";
 import { TDGameObjectStub } from "./stub/td-game-object-stub";
@@ -61,5 +61,10 @@ const display = (activeArmdozerPointer: ActiveArmdozerPointer) => {
 /** プレイヤー側 アクティブアームドーザポインタ */
 export const playerPointer = activeArmdozerPointerStory(
   playerActiveArmdozerPointer,
+  display,
+);
+
+export const enemyPointer = activeArmdozerPointerStory(
+  enemyActiveArmdozerPointer,
   display,
 );
