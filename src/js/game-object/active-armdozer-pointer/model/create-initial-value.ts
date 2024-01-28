@@ -6,6 +6,6 @@ import { ActiveArmdozerPointerModel } from "./active-armdozer-pointer-model";
  */
 export function createInitialValue(): ActiveArmdozerPointerModel {
   return {
-    opacity: 0,
+    opacity: 1,
   };
 }
