@@ -1,7 +1,10 @@
 import { Observable, Unsubscribable } from "rxjs";
 import * as THREE from "three";
 
+import { Animate } from "../../animation/animate";
 import { GameObjectAction } from "../action/game-object-action";
+import { hidden } from "./animation/hidden";
+import { show } from "./animation/show";
 import { ActiveArmdozerPointerModel } from "./model/active-armdozer-pointer-model";
 import { createInitialValue } from "./model/create-initial-value";
 import { ActiveArmdozerPointerView } from "./view/active-armdozer-pointer-view";
@@ -47,6 +50,22 @@ export class ActiveArmdozerPointer {
    */
   getObject3D(): THREE.Object3D {
     return this.#view.getObject3D();
+  }
+
+  /**
+   * 表示する
+   * @return アニメーション
+   */
+  show(): Animate {
+    return show(this.#model);
+  }
+
+  /**
+   * 消す
+   * @return アニメーション
+   */
+  hidden(): Animate {
+    return hidden(this.#model);
   }
 
   /**
