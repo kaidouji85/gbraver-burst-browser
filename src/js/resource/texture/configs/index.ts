@@ -1,4 +1,5 @@
 import { TextureConfig } from "../resource";
+import { ActiveArmdozerPointerConfigs } from "./active-armdozer-pointer";
 import { BatteryNumberTextureConfigs } from "./battery-number";
 import { BatterySelectorTextureConfigs } from "./battery-selector";
 import { DamageNumberTextureConfigs } from "./damage-number";
@@ -42,6 +43,7 @@ export const TEXTURE_CONFIGS: TextureConfig[] = [
   ...EffectLabelTextureConfigs,
   ...ResultTextureConfigs,
   ...YuuyaTextureConfigs,
+  ...ActiveArmdozerPointerConfigs,
 ];
 
 /** 開発中のテクスチャリソース設定をあつめたもの */
