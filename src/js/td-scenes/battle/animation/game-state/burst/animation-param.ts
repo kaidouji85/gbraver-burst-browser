@@ -30,37 +30,26 @@ export type BurstAnimationParamX<
 > = {
   /** バースト発動側ステート */
   burstPlayerState: PlayerState;
-
   /** バースト情報 */
   burst: BURST;
-
-  /** バースト発動側がアクティブプレイヤーか否か、trueでアクティブプレイヤー */
-  isActive: boolean;
-
   /** バースト発動側3Dプレイヤーオブジェクト */
   burstPlayerTD: TDPlayer;
-
   /** バースト発動側HUDプレイヤーオブジェクト */
   burstPlayerHUD: HUDPlayer;
-
   /** バースト発動側HUDアームドーザ */
   burstArmdozerHUD: HUD_ARMDOZER;
-
   /** バースト発動側3Dアームドーザ */
   burstArmdozerTD: TD_ARMDOZER;
-
   /** バースト発動側でない3Dアームドーザ */
   anotherArmdozerTD: TDArmdozerObjects;
-
+  /** このターン中アクティブなアームドーザのスプライト */
+  activeArmdozerTD: TDArmdozerObjects;
   /** 3Dレイヤーオブジェクト */
   tdObjects: TDGameObjects;
-
   /** 3Dカメラ */
   tdCamera: TDCamera;
-
   /** HUDレイヤーオブジェクト */
   hudObjects: HUDGameObjects;
-
   /** HUDカメラ */
   hudCamera: PlainHUDCamera;
 };
@@ -102,6 +91,9 @@ export function toBurstAnimationParam(
   const anotherArmdozerTD = props.view.td.armdozerObjects.find(
     (v) => v.playerId !== effect.burstPlayer,
   );
+  const activeArmdozerTD = props.view.td.armdozerObjects.find(
+    (v) => v.playerId === gameState.activePlayerId,
+  );
 
   if (
     !burstPlayerState ||
@@ -109,7 +101,8 @@ export function toBurstAnimationParam(
     !burstPlayerHUD ||
     !burstArmdozerHUD ||
     !burstArmdozerTD ||
-    !anotherArmdozerTD
+    !anotherArmdozerTD ||
+    !activeArmdozerTD
   ) {
     return null;
   }
@@ -117,12 +110,12 @@ export function toBurstAnimationParam(
   return {
     burstPlayerState,
     burst: effect.burst,
-    isActive: gameState.activePlayerId === burstPlayerState.playerId,
     burstPlayerTD,
     burstPlayerHUD,
     burstArmdozerHUD,
     burstArmdozerTD,
     anotherArmdozerTD,
+    activeArmdozerTD,
     tdObjects: props.view.td.gameObjects,
     tdCamera: props.view.td.camera,
     hudObjects: props.view.hud.gameObjects,
