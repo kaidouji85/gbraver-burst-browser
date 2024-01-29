@@ -18,6 +18,7 @@ import {
   EnemyShinBraver,
   PlayerShinBraver,
 } from "../src/js/game-object/armdozer/shin-braver";
+import { EnemyWingDozer, PlayerWingDozer } from "../src/js/game-object/armdozer/wing-dozer";
 import { Resources } from "../src/js/resource";
 import { TDGameObjectStub } from "./stub/td-game-object-stub";
 
@@ -126,5 +127,19 @@ export const playerLightningDozer = activeArmdozerPointerStory(
 export const enemyLightningDozer = activeArmdozerPointerStory(
   activeArmdozerPointer,
   EnemyLightningDozer,
+  display,
+);
+
+/** プレイヤー側 ウィングドーザ */
+export const playerWingDozer = activeArmdozerPointerStory(
+  activeArmdozerPointer,
+  PlayerWingDozer,
+  display,
+);
+
+/** 敵側 ウィングドーザ */
+export const enemyWingDozer = activeArmdozerPointerStory(
+  activeArmdozerPointer,
+  EnemyWingDozer,
   display,
 );
