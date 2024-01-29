@@ -10,6 +10,7 @@ import { TDCamera } from "../../../../../game-object/camera/td";
 import { HUDGameObjects } from "../../../view/hud/game-objects";
 import type { HUDPilotObjects } from "../../../view/hud/pilot-objects/hud-pilot-objects";
 import { HUDPlayer } from "../../../view/hud/player";
+import { TDArmdozerObjects } from "../../../view/td/armdozer-objects/armdozer-objects";
 import { TDGameObjects } from "../../../view/td/game-objects";
 import type { TDPlayer } from "../../../view/td/player";
 import type { StateAnimationProps } from "../state-animation-props";
@@ -25,34 +26,24 @@ export type PilotSkillAnimationParamX<
 > = {
   /** スキル情報 */
   skill: SKILL;
-
   /** スキル発動側パイロットHUD */
   pilot: PILOT;
-
-  /** スキル発動者がアクティブプレイヤーであるか否か、trueでアクティブプレイヤー */
-  isActivePlayer: boolean;
-
   /** スキル発動側プレイヤーステート */
   invokerState: PlayerState;
-
   /** スキル発動側3Dプレイヤー */
   invokerTD: TDPlayer;
-
   /** スキル発動側HUDプレイヤー */
   invokerHUD: HUDPlayer;
-
   /** スキル発動側アームドーザスプライト */
   invokerSprite: ArmdozerSprite;
-
   /** スキル発動側でないアームドーザスプライト */
   anotherSprite: ArmdozerSprite;
-
+  /** このターン中アクティブなアームドーザのスプライト */
+  activeTDArmdozer: TDArmdozerObjects;
   /** 3Dゲームオブジェクト */
   tdObjects: TDGameObjects;
-
   /** HUDオブジェクト */
   hudObjects: HUDGameObjects;
-
   /** 3Dカメラ */
   tdCamera: TDCamera;
 };
@@ -96,6 +87,9 @@ export function toPilotSkillAnimationParam(
   const anotherArmdozer = props.view.td.armdozerObjects.find(
     (v) => v.playerId !== effect.invokerId,
   );
+  const activeTDArmdozer = props.view.td.armdozerObjects.find(
+    (v) => v.playerId === gameState.activePlayerId,
+  );
 
   if (
     !invokerState ||
@@ -103,7 +97,8 @@ export function toPilotSkillAnimationParam(
     !invokerArmdozer ||
     !invokerTD ||
     !invokerHUD ||
-    !anotherArmdozer
+    !anotherArmdozer ||
+    !activeTDArmdozer
   ) {
     return null;
   }
@@ -111,12 +106,12 @@ export function toPilotSkillAnimationParam(
   return {
     skill: effect.skill,
     pilot: pilot,
-    isActivePlayer: invokerState.playerId === gameState.activePlayerId,
     invokerState: invokerState,
     invokerSprite: invokerArmdozer.sprite(),
     invokerTD: invokerTD,
     invokerHUD: invokerHUD,
     anotherSprite: anotherArmdozer.sprite(),
+    activeTDArmdozer,
     tdObjects: props.view.td.gameObjects,
     hudObjects: props.view.hud.gameObjects,
     tdCamera: props.view.td.camera,
