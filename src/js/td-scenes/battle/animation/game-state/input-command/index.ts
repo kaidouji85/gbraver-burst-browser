@@ -62,6 +62,6 @@ export function inputCommandAnimation(
     props.view.hud.gameObjects.timeScaleButton.open(
       props.animatePlayer.timeScale,
     ),
-    activeTDArmdozer.sprite().startActive()
+    activeTDArmdozer.sprite().startActive(),
   );
 }
