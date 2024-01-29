@@ -41,8 +41,9 @@ export class PlayerArmdozerPointerView implements ActiveArmdozerPointerView {
   /** @override */
   engage(model: ActiveArmdozerPointerModel) {
     this.#mesh.opacity(model.opacity);
-    this.#mesh.getObject3D().position.x = model.position.x;
-    this.#mesh.getObject3D().position.y = model.position.y;
+    this.#mesh.getObject3D().position.x = 100;
+    this.#mesh.getObject3D().position.y = 280;
+    this.#mesh.getObject3D().position.z = 1;
     this.#mesh.getObject3D().rotation.z = Math.PI / 4;
   }
 }
