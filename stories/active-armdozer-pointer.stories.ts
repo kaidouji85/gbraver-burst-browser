@@ -1,9 +1,18 @@
-import {Observable} from "rxjs";
+import { Observable } from "rxjs";
 
+import { all } from "../src/js/animation/all";
 import { delay } from "../src/js/animation/delay";
 import { GameObjectAction } from "../src/js/game-object/action/game-object-action";
-import {enemyActiveArmdozerPointer, playerActiveArmdozerPointer} from "../src/js/game-object/active-armdozer-pointer";
+import {
+  enemyActiveArmdozerPointer,
+  playerActiveArmdozerPointer,
+} from "../src/js/game-object/active-armdozer-pointer";
 import { ActiveArmdozerPointer } from "../src/js/game-object/active-armdozer-pointer/active-armdozer-pointer";
+import { ArmdozerSprite } from "../src/js/game-object/armdozer/armdozer-sprite";
+import {
+  EnemyShinBraver,
+  PlayerShinBraver,
+} from "../src/js/game-object/armdozer/shin-braver";
 import { Resources } from "../src/js/resource";
 import { TDGameObjectStub } from "./stub/td-game-object-stub";
 
@@ -23,22 +32,37 @@ type ActiveArmdozerPointerGenerator = (
 ) => ActiveArmdozerPointer;
 
 /**
+ * アームドーザ生成関数
+ * @param resources リソース管理オブジェクト
+ * @param gameObjectAction ゲームオブジェクトアクション
+ * @return 生成したアームドーザ
+ */
+type ArmdozerGenerator = (
+  resources: Resources,
+  gameObjectAction: Observable<GameObjectAction>,
+) => ArmdozerSprite;
+
+/**
  * アクティブアームドーザポインタストーリー
- * @param generator アクティブアームドーザポインタ生成関数
- * @param fn アクティブアームドーザポインタに対する処理
+ * @param pointerGenerator アクティブアームドーザポインタ生成関数
+ * @param armdozerGenerator アームドーザ生成関数
+ * @param pointerFn アクティブアームドーザポインタに対する処理
  * @return ストーリー
  */
 const activeArmdozerPointerStory =
   (
-    generator: ActiveArmdozerPointerGenerator,
-    fn: (activeArmdozerPointer: ActiveArmdozerPointer) => void,
+    pointerGenerator: ActiveArmdozerPointerGenerator,
+    armdozerGenerator: ArmdozerGenerator,
+    fn: (pointer: ActiveArmdozerPointer, armdozer: ArmdozerSprite) => void,
   ) =>
   () => {
     const stub = new TDGameObjectStub(({ resources, gameObjectAction }) => {
-      const activeArmdozerPointer = generator(resources, gameObjectAction);
-      fn(activeArmdozerPointer);
+      const pointer = pointerGenerator(resources, gameObjectAction);
+      const armdozer = armdozerGenerator(resources, gameObjectAction);
+      armdozer.addObject3D(pointer.getObject3D());
+      fn(pointer, armdozer);
       return {
-        objects: [activeArmdozerPointer.getObject3D()],
+        objects: [pointer.getObject3D(), armdozer.getObject3D()],
       };
     });
     stub.start();
@@ -47,24 +71,27 @@ const activeArmdozerPointerStory =
 
 /**
  * ポインタの表示、非表示
- * @param activeArmdozerPointer
+ * @param pointer アクティブアームドーザポインタ
+ * @param armdozer アームドーザ
  */
-const display = (activeArmdozerPointer: ActiveArmdozerPointer) => {
-  activeArmdozerPointer.setPosition(100, 100);
-  activeArmdozerPointer.show()
+const display = (pointer: ActiveArmdozerPointer, armdozer: ArmdozerSprite) => {
+  all(pointer.show(), armdozer.startActive())
     .chain(delay(3000))
-    .chain(activeArmdozerPointer.hidden())
+    .chain(all(pointer.hidden(), armdozer.endActive()))
     .chain(delay(3000))
     .loop();
 };
 
-/** プレイヤー側 アクティブアームドーザポインタ */
-export const playerPointer = activeArmdozerPointerStory(
+/** プレイヤー側 シンブレイバー */
+export const playerShinBraverPointer = activeArmdozerPointerStory(
   playerActiveArmdozerPointer,
+  PlayerShinBraver,
   display,
 );
 
-export const enemyPointer = activeArmdozerPointerStory(
+/** 敵側 シンブレイバー */
+export const enemyShinBraverPointer = activeArmdozerPointerStory(
   enemyActiveArmdozerPointer,
+  EnemyShinBraver,
   display,
 );
