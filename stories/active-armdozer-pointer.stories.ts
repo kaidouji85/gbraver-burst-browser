@@ -7,6 +7,10 @@ import { activeArmdozerPointer } from "../src/js/game-object/active-armdozer-poi
 import { ActiveArmdozerPointer } from "../src/js/game-object/active-armdozer-pointer/active-armdozer-pointer";
 import { ArmdozerSprite } from "../src/js/game-object/armdozer/armdozer-sprite";
 import {
+  EnemyLightningDozer,
+  PlayerLightningDozer,
+} from "../src/js/game-object/armdozer/lightning-dozer";
+import {
   EnemyNeoLandozer,
   PlayerNeoLandozer,
 } from "../src/js/game-object/armdozer/neo-landozer";
@@ -108,5 +112,19 @@ export const playerNeoLandozer = activeArmdozerPointerStory(
 export const enemyNeoLandozer = activeArmdozerPointerStory(
   activeArmdozerPointer,
   EnemyNeoLandozer,
+  display,
+);
+
+/** プレイヤー側 ライトニングドーザ */
+export const playerLightningDozer = activeArmdozerPointerStory(
+  activeArmdozerPointer,
+  PlayerLightningDozer,
+  display,
+);
+
+/** 敵側 ライトニングドーザ */
+export const enemyLightningDozer = activeArmdozerPointerStory(
+  activeArmdozerPointer,
+  EnemyLightningDozer,
   display,
 );
