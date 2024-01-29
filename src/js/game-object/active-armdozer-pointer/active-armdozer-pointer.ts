@@ -53,16 +53,6 @@ export class ActiveArmdozerPointer {
   }
 
   /**
-   * 座標を設定する
-   * @param x X座標
-   * @param y Y座標
-   */
-  setPosition(x: number, y: number): void {
-    this.#model.position.x = x;
-    this.#model.position.y = y;
-  }
-
-  /**
    * 表示する
    * @return アニメーション
    */
