@@ -15,8 +15,5 @@ export class EnemyArmdozerPointerView extends PlayerArmdozerPointerView {
   /** @override */
   engage(model: ActiveArmdozerPointerModel): void {
     super.engage(model);
-    this.getObject3D().position.x *= -1;
-    this.getObject3D().scale.x = -1;
-    this.getObject3D().rotation.z *= -1;
   }
 }
