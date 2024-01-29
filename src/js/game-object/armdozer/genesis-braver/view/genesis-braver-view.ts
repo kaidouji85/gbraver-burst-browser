@@ -26,4 +26,10 @@ export interface GenesisBraverView {
    * @param camera カメラ
    */
   lookAt(camera: THREE.Camera): void;
+
+  /**
+   * スプライト配下のオブジェクトを追加する
+   * @param object オブジェクト
+   */
+  addObject3D(object: THREE.Object3D): void;
 }

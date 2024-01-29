@@ -89,6 +89,11 @@ export class GenesisBraver
     });
   }
 
+  /** @override */
+  addObject3D(object: THREE.Object3D): void {
+    this.#view.addObject3D(object);
+  }
+
   /**
    * チャージ
    * @return アニメーション
