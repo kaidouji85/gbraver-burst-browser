@@ -62,7 +62,7 @@ const activeArmdozerPointerStory =
       armdozer.addObject3D(pointer.getObject3D());
       fn(pointer, armdozer);
       return {
-        objects: [pointer.getObject3D(), armdozer.getObject3D()],
+        objects: [armdozer.getObject3D()],
       };
     });
     stub.start();
