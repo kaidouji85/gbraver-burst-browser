@@ -6,8 +6,8 @@ import { TEXTURE_IDS } from "../../../resource/texture/ids";
 import { ActiveArmdozerPointerModel } from "../model/active-armdozer-pointer-model";
 import { ActiveArmdozerPointerView } from "./active-armdozer-pointer-view";
 
-/** プレイヤー側 アクティブアームドーザポインター ビュー */
-export class PlayerArmdozerPointerView implements ActiveArmdozerPointerView {
+/** アクティブアームドーザポインター ビュー シンプルな実装 */
+export class SimpleArmdozerPointerView implements ActiveArmdozerPointerView {
   /** メッシュ */
   #mesh: HorizontalAnimationMesh;
 

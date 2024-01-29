@@ -3,10 +3,7 @@ import { Observable } from "rxjs";
 import { all } from "../src/js/animation/all";
 import { delay } from "../src/js/animation/delay";
 import { GameObjectAction } from "../src/js/game-object/action/game-object-action";
-import {
-  enemyActiveArmdozerPointer,
-  playerActiveArmdozerPointer,
-} from "../src/js/game-object/active-armdozer-pointer";
+import { activeArmdozerPointer } from "../src/js/game-object/active-armdozer-pointer";
 import { ActiveArmdozerPointer } from "../src/js/game-object/active-armdozer-pointer/active-armdozer-pointer";
 import { ArmdozerSprite } from "../src/js/game-object/armdozer/armdozer-sprite";
 import {
@@ -84,14 +81,14 @@ const display = (pointer: ActiveArmdozerPointer, armdozer: ArmdozerSprite) => {
 
 /** プレイヤー側 シンブレイバー */
 export const playerShinBraverPointer = activeArmdozerPointerStory(
-  playerActiveArmdozerPointer,
+  activeArmdozerPointer,
   PlayerShinBraver,
   display,
 );
 
 /** 敵側 シンブレイバー */
 export const enemyShinBraverPointer = activeArmdozerPointerStory(
-  enemyActiveArmdozerPointer,
+  activeArmdozerPointer,
   EnemyShinBraver,
   display,
 );
