@@ -82,4 +82,9 @@ export class PlayerGenesisBraverView implements GenesisBraverView {
   lookAt(camera: THREE.Camera): void {
     this.#group.quaternion.copy(camera.quaternion);
   }
+
+  /** @override */
+  addObject3D(object: THREE.Object3D): void {
+    this.#group.add(object);
+  }
 }

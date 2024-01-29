@@ -7,6 +7,10 @@ import { activeArmdozerPointer } from "../src/js/game-object/active-armdozer-poi
 import { ActiveArmdozerPointer } from "../src/js/game-object/active-armdozer-pointer/active-armdozer-pointer";
 import { ArmdozerSprite } from "../src/js/game-object/armdozer/armdozer-sprite";
 import {
+  EnemyGenesisBraver,
+  PlayerGenesisBraver,
+} from "../src/js/game-object/armdozer/genesis-braver";
+import {
   EnemyLightningDozer,
   PlayerLightningDozer,
 } from "../src/js/game-object/armdozer/lightning-dozer";
@@ -18,7 +22,10 @@ import {
   EnemyShinBraver,
   PlayerShinBraver,
 } from "../src/js/game-object/armdozer/shin-braver";
-import { EnemyWingDozer, PlayerWingDozer } from "../src/js/game-object/armdozer/wing-dozer";
+import {
+  EnemyWingDozer,
+  PlayerWingDozer,
+} from "../src/js/game-object/armdozer/wing-dozer";
 import { Resources } from "../src/js/resource";
 import { TDGameObjectStub } from "./stub/td-game-object-stub";
 
@@ -141,5 +148,19 @@ export const playerWingDozer = activeArmdozerPointerStory(
 export const enemyWingDozer = activeArmdozerPointerStory(
   activeArmdozerPointer,
   EnemyWingDozer,
+  display,
+);
+
+/** プレイヤー側 ジェネシスブレイバー */
+export const playerGenesisBraver = activeArmdozerPointerStory(
+  activeArmdozerPointer,
+  PlayerGenesisBraver,
+  display,
+);
+
+/** 敵側 ジェネシスブレイバー */
+export const enemyGenesisBraver = activeArmdozerPointerStory(
+  activeArmdozerPointer,
+  EnemyGenesisBraver,
   display,
 );
