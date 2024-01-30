@@ -21,7 +21,6 @@ export function createInitialValue(): NeoLandozerModel {
       frame: 0,
     },
     active: {
-      strength: 0,
       opacity: 0,
     },
   };

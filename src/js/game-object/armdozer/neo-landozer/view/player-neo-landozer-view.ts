@@ -45,8 +45,7 @@ export class PlayerNeoLandozerView implements NeoLandozerView {
     if (currentStandardMesh) {
       currentStandardMesh.mesh.opacity(1);
       currentStandardMesh.mesh.animate(model.animation.frame);
-      const colorStrength =
-        1 - (0.2 + model.active.strength * 0.1) * model.active.opacity;
+      const colorStrength = 1 - 0.2 * model.active.opacity;
       currentStandardMesh.mesh.color(
         colorStrength,
         colorStrength,
@@ -59,8 +58,7 @@ export class PlayerNeoLandozerView implements NeoLandozerView {
         v.meshType === "OUTLINE" && v.animationType === model.animation.type,
     );
     if (currentOutlineMesh) {
-      const outlineOpacity =
-        (0.9 + model.active.strength * 0.1) * model.active.opacity;
+      const outlineOpacity = model.active.opacity;
       currentOutlineMesh.mesh.opacity(outlineOpacity);
       currentOutlineMesh.mesh.animate(model.animation.frame);
     }
