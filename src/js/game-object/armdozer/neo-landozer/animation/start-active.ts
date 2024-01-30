@@ -1,4 +1,4 @@
-import {all} from "../../../../animation/all";
+import { all } from "../../../../animation/all";
 import { Animate } from "../../../../animation/animate";
 import { tween } from "../../../../animation/tween";
 import type { NeoLandozerModel } from "../model/neo-landozer-model";
