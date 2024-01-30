@@ -1,16 +1,12 @@
-import * as TWEEN from "@tweenjs/tween.js";
 import { Observable, Unsubscribable } from "rxjs";
 import * as THREE from "three";
 
 import { Animate } from "../../../animation/animate";
 import type { PreRender } from "../../../game-loop/pre-render";
-import type { Update } from "../../../game-loop/update";
 import type { Resources } from "../../../resource";
-import { firstUpdate } from "../../action/first-update";
 import type { GameObjectAction } from "../../action/game-object-action";
 import type { ArmdozerSprite } from "../armdozer-sprite";
 import { EmptyArmdozerSprite } from "../empty-armdozer-sprite";
-import { activeFlash } from "./animation/active-flash";
 import { armHammer } from "./animation/arm-hammer";
 import { avoid } from "./animation/avoid";
 import { bowDown } from "./animation/bow-down";
@@ -38,16 +34,10 @@ import type { NeoLandozerView } from "./view/neo-landozer-view";
 export class NeoLandozer extends EmptyArmdozerSprite implements ArmdozerSprite {
   /** モデル */
   #model: NeoLandozerModel;
-
   /** ビュー */
   #view: NeoLandozerView;
-
   /** サウンド */
   #sounds: NeoLandozerSounds;
-
-  /** アクティブフラッシュTweenグループ */
-  #activeFlashTween: TWEEN.Group;
-
   /** アンサブスクライバ */
   #unsubscribers: Unsubscribable[];
 
@@ -66,17 +56,13 @@ export class NeoLandozer extends EmptyArmdozerSprite implements ArmdozerSprite {
     this.#model = createInitialValue();
     this.#view = view;
     this.#sounds = new NeoLandozerSounds(resources);
-    this.#activeFlashTween = new TWEEN.Group();
     this.#unsubscribers = [
       gameObjectAction.subscribe((action) => {
         if (action.type === "Update") {
-          this.#update(action);
+          this.#update();
         } else if (action.type === "PreRender") {
           this.#preRender(action);
         }
-      }),
-      firstUpdate(gameObjectAction).subscribe((action) => {
-        this.#onFirstUpdate(action);
       }),
     ];
   }
@@ -87,7 +73,6 @@ export class NeoLandozer extends EmptyArmdozerSprite implements ArmdozerSprite {
     this.#unsubscribers.forEach((v) => {
       v.unsubscribe();
     });
-    this.#activeFlashTween.removeAll();
   }
 
   /** @override */
@@ -207,19 +192,9 @@ export class NeoLandozer extends EmptyArmdozerSprite implements ArmdozerSprite {
 
   /**
    * Update時の処理
-   * @param action アクション
    */
-  #update(action: Update): void {
-    this.#activeFlashTween.update(action.time);
+  #update(): void {
     this.#view.engage(this.#model);
-  }
-
-  /**
-   * 最初のUpdate時だけ実行する処理
-   * @param action アクション
-   */
-  #onFirstUpdate(action: Update): void {
-    activeFlash(this.#model, this.#activeFlashTween).loop(action.time);
   }
 
   /**
