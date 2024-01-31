@@ -1,16 +1,12 @@
-import * as TWEEN from "@tweenjs/tween.js";
 import { Observable, Unsubscribable } from "rxjs";
 import * as THREE from "three";
 
 import { Animate } from "../../../animation/animate";
 import { PreRender } from "../../../game-loop/pre-render";
-import { Update } from "../../../game-loop/update";
 import { Resources } from "../../../resource";
-import { firstUpdate } from "../../action/first-update";
 import { GameObjectAction } from "../../action/game-object-action";
 import { ArmdozerSprite } from "../armdozer-sprite";
 import { EmptyArmdozerSprite } from "../empty-armdozer-sprite";
-import { activeFlash } from "./animation/active-flash";
 import { backStep } from "./animation/back-step";
 import { bowDown } from "./animation/bow-down";
 import { bowUp } from "./animation/bow-up";
@@ -46,8 +42,6 @@ export class GenesisBraver
   #sounds: GenesisBraverSounds;
   /** モデル */
   #model: GenesisBraverModel;
-  /** アクティブフラッシュTweenグループ */
-  #activeFlashTween: TWEEN.Group;
   /** アンサブスクライバ */
   #unsubscribers: Unsubscribable[];
 
@@ -66,17 +60,13 @@ export class GenesisBraver
     this.#view = view;
     this.#sounds = createGenesisBraverSounds(resources);
     this.#model = createInitialValue();
-    this.#activeFlashTween = new TWEEN.Group();
     this.#unsubscribers = [
       gameAction.subscribe((action) => {
         if (action.type === "PreRender") {
           this.#onPreRender(action);
         } else if (action.type === "Update") {
-          this.#onUpdate(action);
+          this.#onUpdate();
         }
-      }),
-      firstUpdate(gameAction).subscribe((action) => {
-        this.#onFirstUpdate(action);
       }),
     ];
   }
@@ -206,10 +196,8 @@ export class GenesisBraver
 
   /**
    * アップデート時の処理
-   * @param action アクション
    */
-  #onUpdate(action: Update): void {
-    this.#activeFlashTween.update(action.time);
+  #onUpdate(): void {
     this.#view.engage(this.#model);
   }
 
@@ -219,13 +207,5 @@ export class GenesisBraver
    */
   #onPreRender(action: PreRender): void {
     this.#view.lookAt(action.camera);
-  }
-
-  /**
-   * 最初のUpdate時だけ実行する処理
-   * @param action アクション
-   */
-  #onFirstUpdate(action: Update): void {
-    activeFlash(this.#model, this.#activeFlashTween).loop(action.time);
   }
 }
