@@ -1,16 +1,12 @@
-import * as TWEEN from "@tweenjs/tween.js";
 import { Observable, Unsubscribable } from "rxjs";
 import * as THREE from "three";
 
 import { Animate } from "../../../animation/animate";
 import type { PreRender } from "../../../game-loop/pre-render";
-import type { Update } from "../../../game-loop/update";
 import type { Resources } from "../../../resource";
-import { firstUpdate } from "../../action/first-update";
 import type { GameObjectAction } from "../../action/game-object-action";
 import type { ArmdozerSprite } from "../armdozer-sprite";
 import { EmptyArmdozerSprite } from "../empty-armdozer-sprite";
-import { activeFlash } from "./animation/active-flash";
 import { armHammer } from "./animation/arm-hammer";
 import { avoid } from "./animation/avoid";
 import { bowDown } from "./animation/bow-down";
@@ -41,16 +37,10 @@ export class LightningDozer
 {
   /** モデル */
   #model: LightningDozerModel;
-
   /** ビュー */
   #view: LightningDozerView;
-
   /** サウンド */
   #sounds: LightningDozerSounds;
-
-  /** アクティブフラッシュTweenグループ */
-  #activeFlashTween: TWEEN.Group;
-
   /** アンサブスクライバ */
   #unsubscribers: Unsubscribable[];
 
@@ -69,17 +59,13 @@ export class LightningDozer
     this.#model = createInitialValue();
     this.#view = view;
     this.#sounds = new LightningDozerSounds(resources);
-    this.#activeFlashTween = new TWEEN.Group();
     this.#unsubscribers = [
       gameObjectAction.subscribe((action) => {
         if (action.type === "Update") {
-          this.#onUpdate(action);
+          this.#onUpdate();
         } else if (action.type === "PreRender") {
           this.#onPreRender(action);
         }
-      }),
-      firstUpdate(gameObjectAction).subscribe((action) => {
-        this.#onFirstUpdate(action);
       }),
     ];
   }
@@ -90,7 +76,6 @@ export class LightningDozer
     this.#unsubscribers.forEach((v) => {
       v.unsubscribe();
     });
-    this.#activeFlashTween.removeAll();
   }
 
   /** @override */
@@ -210,19 +195,9 @@ export class LightningDozer
 
   /**
    * Update時の処理
-   * @param action アクション
    */
-  #onUpdate(action: Update): void {
-    this.#activeFlashTween.update(action.time);
+  #onUpdate(): void {
     this.#view.engage(this.#model);
-  }
-
-  /**
-   * 最初のUpdate時だけ実行する処理
-   * @param action アクション
-   */
-  #onFirstUpdate(action: Update): void {
-    activeFlash(this.#model, this.#activeFlashTween).loop(action.time);
   }
 
   /**

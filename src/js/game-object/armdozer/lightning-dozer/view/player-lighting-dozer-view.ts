@@ -45,12 +45,10 @@ export class PlayerLightingDozerView implements LightningDozerView {
     if (currentStandardMesh) {
       currentStandardMesh.mesh.opacity(1);
       currentStandardMesh.mesh.animate(model.animation.frame);
-      const colorStrength =
-        1 - (0.2 + model.active.strength * 0.1) * model.active.opacity;
       currentStandardMesh.mesh.color(
-        colorStrength,
-        colorStrength,
-        colorStrength,
+        model.standard.colorStrength,
+        model.standard.colorStrength,
+        model.standard.colorStrength,
       );
     }
 
@@ -59,9 +57,7 @@ export class PlayerLightingDozerView implements LightningDozerView {
         v.meshType === "OUTLINE" && v.animationType === model.animation.type,
     );
     if (currentOutlineMesh) {
-      const outlineOpacity =
-        (0.9 + model.active.strength * 0.1) * model.active.opacity;
-      currentOutlineMesh.mesh.opacity(outlineOpacity);
+      currentOutlineMesh.mesh.opacity(model.outline.opacity);
       currentOutlineMesh.mesh.animate(model.animation.frame);
     }
 
