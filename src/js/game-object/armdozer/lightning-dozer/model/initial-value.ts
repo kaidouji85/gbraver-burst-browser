@@ -21,8 +21,10 @@ export function createInitialValue(): LightningDozerModel {
       type: "STAND",
       frame: 0,
     },
-    active: {
-      strength: 0,
+    standard: {
+      colorStrength: 1,
+    },
+    outline: {
       opacity: 0,
     },
   };
