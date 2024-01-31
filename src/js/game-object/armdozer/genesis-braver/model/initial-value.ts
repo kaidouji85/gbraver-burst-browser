@@ -20,9 +20,11 @@ export function createInitialValue(): GenesisBraverModel {
       y: ARMDOZER_SPRITE_STANDARD_Y,
       z: ARMDOZER_SPRITE_STANDARD_Z,
     },
-    active: {
+    standard: {
+      colorStrength: 1,
+    },
+    outline: {
       opacity: 0,
-      strength: 0,
     },
   };
 }
