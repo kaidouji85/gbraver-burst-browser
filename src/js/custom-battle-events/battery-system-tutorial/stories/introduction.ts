@@ -5,6 +5,7 @@ import {
   activeRightMessageWindowWithFace,
 } from "../../active-message-window";
 import { refreshConversation } from "../../invisible-all-message-windows";
+import { enemyPilotShout, playerPilotShout } from "../../pilot-shout";
 import { scrollLeftMessages, scrollRightMessages } from "../../scroll-messages";
 import { synchronizedBow } from "../../synchronized-bow";
 import { synchronizedUpright } from "../../synchronized-upright";
@@ -30,17 +31,8 @@ export async function introduction(props: CustomBattleEventProps) {
   props.view.dom.leftMessageWindow.messages(["礼！！」"]);
   await delay(500).play();
   await refreshConversation(props);
-  activeLeftMessageWindowWithFace(props, "Tsubasa");
-  props.view.dom.leftMessageWindow.messages([
-    "ツバサ",
-    "「よろしくお願いします」",
-  ]);
-  props.view.dom.leftMessageWindow.scrollUp();
-  activeRightMessageWindowWithFace(props, "Shinya");
-  props.view.dom.rightMessageWindow.messages([
-    "シンヤ",
-    "「よろしくお願いします」",
-  ]);
+  playerPilotShout(props, "Shinya", "よろしくお願いします");
+  enemyPilotShout(props, "Tsubasa", "よろしくお願いします");
   await synchronizedBow(props).chain(delay(500)).play();
   await refreshConversation(props, 100);
   activeLeftMessageWindowWithFace(props, "Tsubasa");
