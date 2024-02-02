@@ -1,13 +1,13 @@
 import { WindowType } from "../window-type";
 import {
   ROOT_CLASS,
-  ROOT_CLASS_ENEMY_CRY,
+  ROOT_CLASS_ENEMY_SHOUT,
   ROOT_CLASS_INVISIBLE,
   ROOT_CLASS_LEFT,
   ROOT_CLASS_NEAR_BATTERY_SELECTOR,
   ROOT_CLASS_NEAR_BURST_BUTTON,
   ROOT_CLASS_NEAR_PILOT_BUTTON,
-  ROOT_CLASS_PLAYER_CRY,
+  ROOT_CLASS_PLAYER_SHOUT,
   ROOT_CLASS_RIGHT,
 } from "./class-name";
 
@@ -31,9 +31,9 @@ export function toRootClass(type: WindowType): string {
     case "NearPilotButton":
       return ROOT_CLASS_NEAR_PILOT_BUTTON;
     case "PlayerCry":
-      return ROOT_CLASS_PLAYER_CRY;
+      return ROOT_CLASS_PLAYER_SHOUT;
     case "EnemyCry":
-      return ROOT_CLASS_ENEMY_CRY;
+      return ROOT_CLASS_ENEMY_SHOUT;
     default:
       return ROOT_CLASS_INVISIBLE;
   }
