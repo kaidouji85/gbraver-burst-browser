@@ -7,4 +7,8 @@ import { playerPilotOnlyShout } from "../../pilot-shout";
  * @return アニメーション
  */
 export const shinyaBurstShout = (props: Readonly<CustomBattleEventProps>) =>
-  playerPilotOnlyShout(props, "Shinya", "ユウヤさん これで決めさせてもらうッス");
+  playerPilotOnlyShout(
+    props,
+    "Shinya",
+    "ユウヤさん これで決めさせてもらうッス",
+  );

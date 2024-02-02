@@ -9,6 +9,7 @@ import { CustomBattleEventProps } from "../td-scenes/battle/custom-battle-event"
  * @param messageWindow メッセージウィンドウ
  * @param face 顔グラフィック
  * @param message メッセージ
+ * @return アニメーション
  */
 function pilotShout(
   messageWindow: MessageWindow,
@@ -28,6 +29,7 @@ function pilotShout(
  * @param props カスタムイベントプロパティ
  * @param face 顔グラフィック
  * @param message メッセージ
+ * @return アニメーション
  */
 export const playerPilotShout = (
   props: Readonly<CustomBattleEventProps>,
@@ -43,6 +45,7 @@ export const playerPilotShout = (
  * @param props カスタムイベントプロパティ
  * @param face 顔グラフィック
  * @param message メッセージ
+ * @return アニメーション
  */
 export const playerPilotOnlyShout = (
   props: Readonly<CustomBattleEventProps>,
@@ -59,6 +62,7 @@ export const playerPilotOnlyShout = (
  * @param props カスタムイベントプロパティ
  * @param face 顔グラフィック
  * @param message メッセージ
+ * @return アニメーション
  */
 export const enemyPilotShout = (
   props: Readonly<CustomBattleEventProps>,
@@ -74,6 +78,7 @@ export const enemyPilotShout = (
  * @param props カスタムイベントプロパティ
  * @param face 顔グラフィック
  * @param message メッセージ
+ * @return アニメーション
  */
 export const enemyPilotOnlyShout = (
   props: Readonly<CustomBattleEventProps>,

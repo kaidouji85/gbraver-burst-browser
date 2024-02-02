@@ -9,4 +9,8 @@ import { playerPilotOnlyShout } from "../../pilot-shout";
 export const shinyaPilotSkillShout = (
   props: Readonly<CustomBattleEventProps>,
 ) =>
-  playerPilotOnlyShout(props, "Shinya", "うぉぉぉぉ 何故か叫びたくなってきたッス");
+  playerPilotOnlyShout(
+    props,
+    "Shinya",
+    "うぉぉぉぉ 何故か叫びたくなってきたッス",
+  );

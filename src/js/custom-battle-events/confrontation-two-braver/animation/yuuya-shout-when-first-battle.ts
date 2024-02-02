@@ -8,4 +8,9 @@ import { enemyPilotOnlyShout } from "../../pilot-shout";
  */
 export const yuuyaShoutWhenFirstBattle = (
   props: Readonly<CustomBattleEventProps>,
-) => enemyPilotOnlyShout(props, "Yuuya", "見せてもらおうか シンブレイバーの実力を");
+) =>
+  enemyPilotOnlyShout(
+    props,
+    "Yuuya",
+    "見せてもらおうか シンブレイバーの実力を",
+  );
