@@ -6,6 +6,6 @@ import { enemyPilotShout } from "../../pilot-shout";
  * @param props イベントプロパティ
  * @return アニメーション
  */
-export const yuuyaCry2WhenYuuyaActivateSkillToFinish = (
+export const yuuyaShout2WhenYuuyaActivateSkillToFinish = (
   props: Readonly<CustomBattleEventProps>,
 ) => enemyPilotShout(props, "Yuuya", "だが これで終わりだ");

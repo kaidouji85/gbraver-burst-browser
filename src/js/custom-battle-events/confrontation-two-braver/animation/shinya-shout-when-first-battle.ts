@@ -2,15 +2,10 @@ import { CustomBattleEventProps } from "../../../td-scenes/battle/custom-battle-
 import { playerPilotShout } from "../../pilot-shout";
 
 /**
- * シンヤ 戦闘 ユウヤのHPが満タン
+ * 最初の戦闘 シンヤ 叫び
  * @param props イベントプロパティ
  * @return アニメーション
  */
-export const shinyaAttackCryWhenYuuyaHPIsFull = (
+export const shinyaShoutWhenFirstBattle = (
   props: Readonly<CustomBattleEventProps>,
-) =>
-  playerPilotShout(
-    props,
-    "Shinya",
-    "まだノーダメージなんて さすがユウヤさんッス",
-  );
+) => playerPilotShout(props, "Shinya", "いくッスよ ユウヤさん");

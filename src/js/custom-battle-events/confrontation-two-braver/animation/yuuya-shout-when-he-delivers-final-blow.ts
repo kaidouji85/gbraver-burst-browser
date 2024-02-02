@@ -2,10 +2,10 @@ import { CustomBattleEventProps } from "../../../td-scenes/battle/custom-battle-
 import { enemyPilotShout } from "../../pilot-shout";
 
 /**
- * チャプター シンヤ有利 ユウヤ叫び2
+ * トドメの一撃 ユウヤ 叫び
  * @param props イベントプロパティ
  * @return アニメーション
  */
-export const yuuyaCry2WhenShinyaHasAdvantage = (
+export const yuuyaShoutWhenHeDeliversFinalBlow = (
   props: Readonly<CustomBattleEventProps>,
-) => enemyPilotShout(props, "Yuuya", "Gブレイバーを舐めるな");
+) => enemyPilotShout(props, "Yuuya", "これで終わりだ シンブレイバー");
