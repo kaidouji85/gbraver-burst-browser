@@ -1,5 +1,3 @@
-import { Animate } from "../animation/animate";
-import { process } from "../animation/process";
 import { MessageWindow } from "../game-dom/message-window";
 import { FaceType } from "../game-dom/message-window/face-graphic";
 import { CustomBattleEventProps } from "../td-scenes/battle/custom-battle-event";
@@ -9,7 +7,6 @@ import { CustomBattleEventProps } from "../td-scenes/battle/custom-battle-event"
  * @param messageWindow メッセージウィンドウ
  * @param face 顔グラフィック
  * @param message メッセージ
- * @return アニメーション
  */
 function pilotShout(
   messageWindow: MessageWindow,
@@ -29,63 +26,55 @@ function pilotShout(
  * @param props カスタムイベントプロパティ
  * @param face 顔グラフィック
  * @param message メッセージ
- * @return アニメーション
  */
-export const playerPilotShout = (
+export function playerPilotShout(
   props: Readonly<CustomBattleEventProps>,
   face: FaceType,
   message: string,
-): Animate =>
-  process(() => {
-    pilotShout(props.view.dom.playerShoutMessageWindow, face, message);
-  });
+): void {
+  pilotShout(props.view.dom.playerShoutMessageWindow, face, message);
+}
 
 /**
  * プレイヤーパイロットの叫びだけを表示する
  * @param props カスタムイベントプロパティ
  * @param face 顔グラフィック
  * @param message メッセージ
- * @return アニメーション
  */
-export const playerPilotOnlyShout = (
+export function playerPilotOnlyShout(
   props: Readonly<CustomBattleEventProps>,
   face: FaceType,
   message: string,
-): Animate =>
-  process(() => {
-    playerPilotShout(props, face, message);
-    props.view.dom.enemyShoutMessageWindow.visible(false);
-  });
+): void {
+  playerPilotShout(props, face, message);
+  props.view.dom.enemyShoutMessageWindow.visible(false);
+}
 
 /**
  * 敵パイロットの叫び
  * @param props カスタムイベントプロパティ
  * @param face 顔グラフィック
  * @param message メッセージ
- * @return アニメーション
  */
-export const enemyPilotShout = (
+export function enemyPilotShout(
   props: Readonly<CustomBattleEventProps>,
   face: FaceType,
   message: string,
-): Animate =>
-  process(() => {
-    pilotShout(props.view.dom.enemyShoutMessageWindow, face, message);
-  });
+): void {
+  pilotShout(props.view.dom.enemyShoutMessageWindow, face, message);
+}
 
 /**
  * 敵パイロットの叫びだけを表示する
  * @param props カスタムイベントプロパティ
  * @param face 顔グラフィック
  * @param message メッセージ
- * @return アニメーション
  */
-export const enemyPilotOnlyShout = (
+export function enemyPilotOnlyShout(
   props: Readonly<CustomBattleEventProps>,
   face: FaceType,
   message: string,
-): Animate =>
-  process(() => {
-    enemyPilotOnlyShout(props, face, message),
-      props.view.dom.playerShoutMessageWindow.visible(false);
-  });
+): void {
+  enemyPilotShout(props, face, message);
+  props.view.dom.playerShoutMessageWindow.visible(false);
+}

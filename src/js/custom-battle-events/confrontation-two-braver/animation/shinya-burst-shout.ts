@@ -1,3 +1,4 @@
+import { process } from "../../../animation/process";
 import { CustomBattleEventProps } from "../../../td-scenes/battle/custom-battle-event";
 import { playerPilotOnlyShout } from "../../pilot-shout";
 
@@ -7,8 +8,10 @@ import { playerPilotOnlyShout } from "../../pilot-shout";
  * @return アニメーション
  */
 export const shinyaBurstShout = (props: Readonly<CustomBattleEventProps>) =>
-  playerPilotOnlyShout(
-    props,
-    "Shinya",
-    "ユウヤさん これで決めさせてもらうッス",
-  );
+  process(() => {
+    playerPilotOnlyShout(
+      props,
+      "Shinya",
+      "ユウヤさん これで決めさせてもらうッス",
+    );
+  });
