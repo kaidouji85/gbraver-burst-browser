@@ -24,6 +24,21 @@ function pilotShout(
 }
 
 /**
+ * プレイヤーパイロットの叫び
+ * @param props カスタムイベントプロパティ
+ * @param face 顔グラフィック
+ * @param message メッセージ
+ */
+export const playerPilotShout = (
+  props: Readonly<CustomBattleEventProps>,
+  face: FaceType,
+  message: string,
+): Animate =>
+  process(() => {
+    pilotShout(props.view.dom.playerShoutMessageWindow, face, message);
+  });
+
+/**
  * プレイヤーパイロットの叫びだけを表示する
  * @param props カスタムイベントプロパティ
  * @param face 顔グラフィック
@@ -35,8 +50,23 @@ export const playerPilotOnlyShout = (
   message: string,
 ): Animate =>
   process(() => {
-    pilotShout(props.view.dom.playerShoutMessageWindow, face, message);
+    playerPilotShout(props, face, message);
     props.view.dom.enemyShoutMessageWindow.visible(false);
+  });
+
+/**
+ * 敵パイロットの叫び
+ * @param props カスタムイベントプロパティ
+ * @param face 顔グラフィック
+ * @param message メッセージ
+ */
+export const enemyPilotShout = (
+  props: Readonly<CustomBattleEventProps>,
+  face: FaceType,
+  message: string,
+): Animate =>
+  process(() => {
+    pilotShout(props.view.dom.enemyShoutMessageWindow, face, message);
   });
 
 /**
@@ -51,6 +81,6 @@ export const enemyPilotOnlyShout = (
   message: string,
 ): Animate =>
   process(() => {
-    pilotShout(props.view.dom.enemyShoutMessageWindow, face, message);
-    props.view.dom.playerShoutMessageWindow.visible(false);
+    enemyPilotOnlyShout(props, face, message),
+      props.view.dom.playerShoutMessageWindow.visible(false);
   });
