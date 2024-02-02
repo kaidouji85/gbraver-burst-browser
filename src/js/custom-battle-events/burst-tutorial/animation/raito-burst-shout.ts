@@ -1,3 +1,4 @@
+import { process } from "../../../animation/process";
 import { CustomBattleEventProps } from "../../../td-scenes/battle/custom-battle-event";
 import { enemyPilotOnlyShout } from "../../pilot-shout";
 
@@ -7,4 +8,6 @@ import { enemyPilotOnlyShout } from "../../pilot-shout";
  * @return アニメーション
  */
 export const raitoBurstShout = (props: Readonly<CustomBattleEventProps>) =>
-  enemyPilotOnlyShout(props, "Raito", "ほないくで 大田高校のエース君");
+  process(() => {
+    enemyPilotOnlyShout(props, "Raito", "ほないくで 大田高校のエース君");
+  });

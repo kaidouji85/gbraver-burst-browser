@@ -1,3 +1,4 @@
+import { process } from "../../../animation/process";
 import { CustomBattleEventProps } from "../../../td-scenes/battle/custom-battle-event";
 import { enemyPilotOnlyShout } from "../../pilot-shout";
 
@@ -9,8 +10,10 @@ import { enemyPilotOnlyShout } from "../../pilot-shout";
 export const yuuyaShoutWhenFirstBattle = (
   props: Readonly<CustomBattleEventProps>,
 ) =>
-  enemyPilotOnlyShout(
-    props,
-    "Yuuya",
-    "見せてもらおうか シンブレイバーの実力を",
-  );
+  process(() => {
+    enemyPilotOnlyShout(
+      props,
+      "Yuuya",
+      "見せてもらおうか シンブレイバーの実力を",
+    );
+  });
