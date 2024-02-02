@@ -243,10 +243,10 @@ export const doubleMessageWindows: DOMStubStory = domStub((resources) => {
   return root;
 });
 
-export const playerCry: DOMStubStory = domStub((resources) => {
+export const playerShout: DOMStubStory = domStub((resources) => {
   const dom = new MessageWindow({
     resources,
-    type: "PlayerCry",
+    type: "PlayerShout",
     faceOrientation: "Left",
     facePosition: "Right",
   });
@@ -257,10 +257,10 @@ export const playerCry: DOMStubStory = domStub((resources) => {
   return dom.getRootHTMLElement();
 });
 
-export const enemyCry: DOMStubStory = domStub((resources) => {
+export const enemyShout: DOMStubStory = domStub((resources) => {
   const dom = new MessageWindow({
     resources,
-    type: "EnemyCry",
+    type: "EnemyShout",
     faceOrientation: "Right",
     facePosition: "Left",
   });
