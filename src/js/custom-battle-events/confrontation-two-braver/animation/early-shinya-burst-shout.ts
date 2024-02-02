@@ -6,5 +6,6 @@ import { playerPilotShout } from "../../pilot-shout";
  * @param props イベントプロパティ
  * @return アニメーション
  */
-export const earlyShinyaBurstShout = (props: Readonly<CustomBattleEventProps>) =>
-  playerPilotShout(props, "Shinya", "はじめから飛ばすッスよ ユウヤさん");
+export const earlyShinyaBurstShout = (
+  props: Readonly<CustomBattleEventProps>,
+) => playerPilotShout(props, "Shinya", "はじめから飛ばすッスよ ユウヤさん");
