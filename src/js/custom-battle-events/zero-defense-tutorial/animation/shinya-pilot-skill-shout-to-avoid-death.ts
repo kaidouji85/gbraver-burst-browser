@@ -6,6 +6,6 @@ import { playerPilotShout } from "../../pilot-shout";
  * @param props イベントプロパティ
  * @return アニメーション
  */
-export const shinyaPilotSkillCryToAvoidDeath = (
+export const shinyaPilotSkillShoutToAvoidDeath = (
   props: Readonly<CustomBattleEventProps>,
 ) => playerPilotShout(props, "Shinya", "ガイ まだ終わりじゃないッスよ");
