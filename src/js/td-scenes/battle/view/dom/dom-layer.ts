@@ -72,14 +72,14 @@ export class DOMLayer {
     this.nearPilotButtonMessageWindow.visible(false);
     this.playerShoutMessageWindow = new MessageWindow({
       resources,
-      type: "PlayerCry",
+      type: "PlayerShout",
       faceOrientation: "Left",
       facePosition: "Right",
     });
     this.playerShoutMessageWindow.visible(false);
     this.enemyShoutMessageWindow = new MessageWindow({
       resources,
-      type: "EnemyCry",
+      type: "EnemyShout",
       faceOrientation: "Right",
       facePosition: "Left",
     });

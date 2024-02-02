@@ -30,9 +30,9 @@ export function toRootClass(type: WindowType): string {
       return ROOT_CLASS_NEAR_BURST_BUTTON;
     case "NearPilotButton":
       return ROOT_CLASS_NEAR_PILOT_BUTTON;
-    case "PlayerCry":
+    case "PlayerShout":
       return ROOT_CLASS_PLAYER_SHOUT;
-    case "EnemyCry":
+    case "EnemyShout":
       return ROOT_CLASS_ENEMY_SHOUT;
     default:
       return ROOT_CLASS_INVISIBLE;
