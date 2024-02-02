@@ -10,7 +10,7 @@ import {
  * 全ての叫びウインドウを非表示にする
  * @param props イベントプロパティ
  */
-function invisibleCryMessageWindow(
+function invisibleShoutMessageWindow(
   props: Readonly<CustomBattleEventProps>,
 ): void {
   props.view.dom.playerShoutMessageWindow.visible(false);
@@ -23,12 +23,12 @@ function invisibleCryMessageWindow(
  * @param props イベントプロパティ
  * @returns ターン開始時なら再生するアニメーション、それ以外はnull
  */
-export function invisibleCryMessageWindowWhenTurnChange(
+export function invisibleShoutMessageWindowWhenTurnChange(
   props: Readonly<CustomStateAnimation>,
 ): Animate | null {
   return props.currentState.effect.name === "TurnChange"
     ? process(() => {
-        invisibleCryMessageWindow(props);
+        invisibleShoutMessageWindow(props);
       })
     : null;
 }
@@ -38,7 +38,7 @@ export function invisibleCryMessageWindowWhenTurnChange(
  * 本関数はbeforeLastStateで呼び出す想定である
  * @param props イベントプロパティ
  */
-export function invisibleCryMessageWindowWhenInputCommand(
+export function invisibleShoutMessageWindowWhenInputCommand(
   props: Readonly<LastState>,
 ): void {
   const lastState = props.update.at(-1);
@@ -58,7 +58,7 @@ export function invisibleCryMessageWindowWhenInputCommand(
   }
 
   if (playerCommand.selectable) {
-    invisibleCryMessageWindow(props);
+    invisibleShoutMessageWindow(props);
   }
 }
 
@@ -67,7 +67,7 @@ export function invisibleCryMessageWindowWhenInputCommand(
  * 本関数はafterLastStateで呼び出す想定である
  * @param props イベントプロパティ
  */
-export function invisibleCryMessageWindowWhenGameEnd(
+export function invisibleShoutMessageWindowWhenGameEnd(
   props: Readonly<LastState>,
 ): void {
   const lastState = props.update.at(-1);
@@ -76,6 +76,6 @@ export function invisibleCryMessageWindowWhenGameEnd(
   }
 
   if (lastState.effect.name === "GameEnd") {
-    invisibleCryMessageWindow(props);
+    invisibleShoutMessageWindow(props);
   }
 }
