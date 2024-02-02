@@ -2,9 +2,9 @@ import { LastState } from "../../../../td-scenes/battle/custom-battle-event";
 import { invisibleAllMessageWindows } from "../../../invisible-all-message-windows";
 import { separatePlayersFromLastState } from "../../../separate-players";
 import { shinyaMonologueWhenHeLose } from "../../stories/shinya-monologue-when-he-lose";
-import { yuuyaCryWhenYuuyaCompleteVictory } from "../../stories/yuuya-cry-when-yuuya-complete-victory";
-import { yuuyaCryWhenYuuyaNarrowVictory } from "../../stories/yuuya-cry-when-yuuya-narrow-victory";
-import { yuuyaCryWhenYuuyaVictory } from "../../stories/yuuya-cry-when-yuuya-victory";
+import { yuuyaShoutWhenYuuyaCompleteVictory } from "../../stories/yuuya-shout-when-yuuya-complete-victory";
+import { yuuyaShoutWhenYuuyaNarrowVictory } from "../../stories/yuuya-shout-when-yuuya-narrow-victory";
+import { yuuyaShoutWhenYuuyaVictory } from "../../stories/yuuya-shout-when-yuuya-victory";
 
 /**
  * 条件を満たした場合、ゲーム終了時のシナリオを再生する
@@ -29,11 +29,11 @@ export async function endGameIfNeeded(
     yuuya.armdozer.hp < yuuya.armdozer.maxHp && !yuuya.pilot.enableSkill;
   props.view.dom.enemyShoutMessageWindow.visible(false);
   if (isYuuyaCompleteVictory) {
-    await yuuyaCryWhenYuuyaCompleteVictory(props);
+    await yuuyaShoutWhenYuuyaCompleteVictory(props);
   } else if (isYuuyaNarrowVictory) {
-    await yuuyaCryWhenYuuyaNarrowVictory(props);
+    await yuuyaShoutWhenYuuyaNarrowVictory(props);
   } else {
-    await yuuyaCryWhenYuuyaVictory(props);
+    await yuuyaShoutWhenYuuyaVictory(props);
   }
 
   await shinyaMonologueWhenHeLose(props);

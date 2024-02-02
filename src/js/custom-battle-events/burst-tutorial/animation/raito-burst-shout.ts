@@ -6,5 +6,5 @@ import { enemyPilotShout } from "../../pilot-shout";
  * @param props イベントプロパティ
  * @return アニメーション
  */
-export const raitoBurstCry = (props: Readonly<CustomBattleEventProps>) =>
+export const raitoBurstShout = (props: Readonly<CustomBattleEventProps>) =>
   enemyPilotShout(props, "Raito", "ほないくで 大田高校のエース君");

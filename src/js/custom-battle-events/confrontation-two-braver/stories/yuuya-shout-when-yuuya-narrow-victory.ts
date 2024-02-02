@@ -3,16 +3,16 @@ import { activeLeftMessageWindowWithFace } from "../../active-message-window";
 import { scrollLeftMessages } from "../../scroll-messages";
 
 /**
- * ユウヤ完全勝利時のユウヤ台詞
+ * ユウヤ辛勝時のユウヤ台詞
  * @param props イベントプロパティ
  * @return ストーリーが完了したら発火するPromise
  */
-export async function yuuyaCryWhenYuuyaCompleteVictory(
+export async function yuuyaShoutWhenYuuyaNarrowVictory(
   props: Readonly<CustomBattleEventProps>,
 ): Promise<void> {
   activeLeftMessageWindowWithFace(props, "Yuuya");
   await scrollLeftMessages(props, [
-    ["ユウヤ", "「……退屈凌ぎにもならかったな"],
-    ["少々がっかりだぜ シンブレイバー」"],
+    ["ユウヤ", "「全力を出さなければ やられていた"],
+    ["こいつ本当に新入生か」"],
   ]);
 }
