@@ -1,5 +1,5 @@
 import { CustomBattleEventProps } from "../../../td-scenes/battle/custom-battle-event";
-import { playerPilotShout } from "../../pilot-shout";
+import { playerPilotOnlyShout } from "../../pilot-shout";
 
 /**
  * シンヤ叫び 即死を避けるためにバースト発動
@@ -8,4 +8,4 @@ import { playerPilotShout } from "../../pilot-shout";
  */
 export const shinyaBurstShoutToAvoidDeath = (
   props: Readonly<CustomBattleEventProps>,
-) => playerPilotShout(props, "Shinya", "シンブレイバー バーストON！！");
+) => playerPilotOnlyShout(props, "Shinya", "シンブレイバー バーストON！！");

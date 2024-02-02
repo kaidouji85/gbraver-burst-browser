@@ -1,5 +1,5 @@
 import { CustomBattleEventProps } from "../../../td-scenes/battle/custom-battle-event";
-import { playerPilotShout } from "../../pilot-shout";
+import { playerPilotOnlyShout } from "../../pilot-shout";
 
 /**
  * シンヤ叫び 即死を避けるためにパイロットスキル発動
@@ -8,4 +8,4 @@ import { playerPilotShout } from "../../pilot-shout";
  */
 export const shinyaPilotSkillShoutToAvoidDeath = (
   props: Readonly<CustomBattleEventProps>,
-) => playerPilotShout(props, "Shinya", "ガイ まだ終わりじゃないッスよ");
+) => playerPilotOnlyShout(props, "Shinya", "ガイ まだ終わりじゃないッスよ");

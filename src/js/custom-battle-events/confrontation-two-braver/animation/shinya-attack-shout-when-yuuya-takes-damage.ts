@@ -1,5 +1,5 @@
 import { CustomBattleEventProps } from "../../../td-scenes/battle/custom-battle-event";
-import { playerPilotShout } from "../../pilot-shout";
+import { playerPilotOnlyShout } from "../../pilot-shout";
 
 /**
  * シンヤ 戦闘 ユウヤがダメージを受けた
@@ -8,4 +8,4 @@ import { playerPilotShout } from "../../pilot-shout";
  */
 export const shinyaAttackShoutWhenYuuyaTakesDamage = (
   props: Readonly<CustomBattleEventProps>,
-) => playerPilotShout(props, "Shinya", "あと一回直撃させれば 俺の勝ちッス");
+) => playerPilotOnlyShout(props, "Shinya", "あと一回直撃させれば 俺の勝ちッス");

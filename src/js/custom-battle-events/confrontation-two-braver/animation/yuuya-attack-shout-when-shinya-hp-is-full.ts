@@ -1,5 +1,5 @@
 import { CustomBattleEventProps } from "../../../td-scenes/battle/custom-battle-event";
-import { enemyPilotShout } from "../../pilot-shout";
+import { enemyPilotOnlyShout } from "../../pilot-shout";
 
 /**
  * ユウヤ 戦闘 シンヤのHPが満タン
@@ -8,4 +8,4 @@ import { enemyPilotShout } from "../../pilot-shout";
  */
 export const yuuyaAttackShoutWhenShinyaHPIsFull = (
   props: Readonly<CustomBattleEventProps>,
-) => enemyPilotShout(props, "Yuuya", "シンヤ これが躱せるかな");
+) => enemyPilotOnlyShout(props, "Yuuya", "シンヤ これが躱せるかな");

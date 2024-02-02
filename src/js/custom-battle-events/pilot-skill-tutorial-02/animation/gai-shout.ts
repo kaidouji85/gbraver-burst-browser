@@ -1,5 +1,5 @@
 import { CustomBattleEventProps } from "../../../td-scenes/battle/custom-battle-event";
-import { playerPilotShout } from "../../pilot-shout";
+import { playerPilotOnlyShout } from "../../pilot-shout";
 
 /**
  * ガイ パイロットスキル叫び
@@ -7,4 +7,4 @@ import { playerPilotShout } from "../../pilot-shout";
  * @return アニメーション
  */
 export const gaiShout = (props: Readonly<CustomBattleEventProps>) =>
-  playerPilotShout(props, "Gai", "俺の根性 見せてやる");
+  playerPilotOnlyShout(props, "Gai", "俺の根性 見せてやる");

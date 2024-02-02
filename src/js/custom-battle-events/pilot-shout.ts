@@ -24,12 +24,12 @@ function pilotShout(
 }
 
 /**
- * プレイヤーパイロットの叫び
+ * プレイヤーパイロットの叫びだけを表示する
  * @param props カスタムイベントプロパティ
  * @param face 顔グラフィック
  * @param message メッセージ
  */
-export const playerPilotShout = (
+export const playerPilotOnlyShout = (
   props: Readonly<CustomBattleEventProps>,
   face: FaceType,
   message: string,
@@ -40,12 +40,12 @@ export const playerPilotShout = (
   });
 
 /**
- * 敵パイロットの叫び
+ * 敵パイロットの叫びだけを表示する
  * @param props カスタムイベントプロパティ
  * @param face 顔グラフィック
  * @param message メッセージ
  */
-export const enemyPilotShout = (
+export const enemyPilotOnlyShout = (
   props: Readonly<CustomBattleEventProps>,
   face: FaceType,
   message: string,

@@ -1,5 +1,5 @@
 import { CustomBattleEventProps } from "../../../td-scenes/battle/custom-battle-event";
-import { enemyPilotShout } from "../../pilot-shout";
+import { enemyPilotOnlyShout } from "../../pilot-shout";
 
 /**
  * ツバサ先輩勝利宣言
@@ -8,4 +8,4 @@ import { enemyPilotShout } from "../../pilot-shout";
  */
 export const tsubasaVictoryDeclaration = (
   props: Readonly<CustomBattleEventProps>,
-) => enemyPilotShout(props, "Tsubasa", "この瞬間 私の勝利が確定した");
+) => enemyPilotOnlyShout(props, "Tsubasa", "この瞬間 私の勝利が確定した");

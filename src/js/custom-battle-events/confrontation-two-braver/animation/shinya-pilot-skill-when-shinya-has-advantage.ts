@@ -1,5 +1,5 @@
 import { CustomBattleEventProps } from "../../../td-scenes/battle/custom-battle-event";
-import { playerPilotShout } from "../../pilot-shout";
+import { playerPilotOnlyShout } from "../../pilot-shout";
 
 /**
  * シンヤ有利 シンヤ パイロットスキル
@@ -8,4 +8,4 @@ import { playerPilotShout } from "../../pilot-shout";
  */
 export const shinyaPilotSkillWhenShinyaHasAdvantage = (
   props: Readonly<CustomBattleEventProps>,
-) => playerPilotShout(props, "Shinya", "このままリードを保つッス");
+) => playerPilotOnlyShout(props, "Shinya", "このままリードを保つッス");
