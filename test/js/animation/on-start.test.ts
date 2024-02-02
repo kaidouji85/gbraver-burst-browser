@@ -1,6 +1,6 @@
 import { onStart } from "../../../src/js/animation/on-start";
 
-test("processの再生時間は0である", () => {
+test("onStartの再生時間は0である", () => {
   const v = onStart(() => {
     // NOP
   });
