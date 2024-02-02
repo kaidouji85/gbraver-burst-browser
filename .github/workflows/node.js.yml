@@ -1,9 +1,9 @@
 name: Node.js CI
 on:
   push:
-    branches: [ master, develop ]
+    branches: [master, develop]
   pull_request:
-    branches: [ master, develop ]
+    branches: [master, develop]
 env:
   NODE_JS_VERSION: 20.x
 jobs:
@@ -50,6 +50,16 @@ jobs:
           cache: npm
       - run: npm ci
       - run: npm run build:production
+  buildStorybook:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: ${{ env.NODE_JS_VERSION }}
+          cache: npm
+      - run: npm ci
+      - run: npm run build:storybook
   buildOthers:
     runs-on: ubuntu-latest
     steps:
@@ -61,4 +71,3 @@ jobs:
       - run: npm ci
       - run: npm run build:sw
       - run: npm run build:clear-sw
-      - run: npm run build:storybook
