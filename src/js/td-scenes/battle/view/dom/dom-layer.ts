@@ -21,9 +21,9 @@ export class DOMLayer {
   /** メッセージウインドウ パイロットボタン隣 */
   nearPilotButtonMessageWindow: MessageWindow;
   /** 叫びメッセージウインドウ プレイヤー */
-  playerCryMessageWindow: MessageWindow;
+  playerShoutMessageWindow: MessageWindow;
   /** 叫びメッセージウインドウ 敵 */
-  enemyCryMessageWindow: MessageWindow;
+  enemyShoutMessageWindow: MessageWindow;
   /** ミニコントローラー */
   miniController: MiniController;
   /** 戦闘シーンアクション */
@@ -70,20 +70,20 @@ export class DOMLayer {
       faceOrientation: "Left",
     });
     this.nearPilotButtonMessageWindow.visible(false);
-    this.playerCryMessageWindow = new MessageWindow({
+    this.playerShoutMessageWindow = new MessageWindow({
       resources,
       type: "PlayerCry",
       faceOrientation: "Left",
       facePosition: "Right",
     });
-    this.playerCryMessageWindow.visible(false);
-    this.enemyCryMessageWindow = new MessageWindow({
+    this.playerShoutMessageWindow.visible(false);
+    this.enemyShoutMessageWindow = new MessageWindow({
       resources,
       type: "EnemyCry",
       faceOrientation: "Right",
       facePosition: "Left",
     });
-    this.enemyCryMessageWindow.visible(false);
+    this.enemyShoutMessageWindow.visible(false);
     this.miniController = new MiniController(resources);
     this.#battleAction = merge(
       this.miniController.batteryPushNotifier().pipe(
@@ -138,8 +138,8 @@ export class DOMLayer {
       this.nearBatterySelectorMessageWindow.getRootHTMLElement(),
       this.nearBurstButtonMessageWindow.getRootHTMLElement(),
       this.nearPilotButtonMessageWindow.getRootHTMLElement(),
-      this.playerCryMessageWindow.getRootHTMLElement(),
-      this.enemyCryMessageWindow.getRootHTMLElement(),
+      this.playerShoutMessageWindow.getRootHTMLElement(),
+      this.enemyShoutMessageWindow.getRootHTMLElement(),
       this.miniController.getRootHTMLElement(),
     ];
   }

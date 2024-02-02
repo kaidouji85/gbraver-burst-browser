@@ -11,7 +11,7 @@ export const yuuyaActivateSkillToSurvive: ConditionalAnimation<
     return props.state.chapter.type === "YuuyaActivateSkillToSurvive" &&
       props.currentState.effect.name === "BatteryDeclaration"
       ? process(() => {
-          props.view.dom.enemyCryMessageWindow.visible(false);
+          props.view.dom.enemyShoutMessageWindow.visible(false);
         })
       : null;
   },

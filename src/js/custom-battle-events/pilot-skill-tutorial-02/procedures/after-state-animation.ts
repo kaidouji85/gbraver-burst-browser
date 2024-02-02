@@ -14,7 +14,7 @@ export function afterStateAnimation(
 ): Animate {
   if (isPilotSkillActivatedByGai(props)) {
     return process(() => {
-      props.view.dom.playerCryMessageWindow.visible(false);
+      props.view.dom.playerShoutMessageWindow.visible(false);
     });
   }
 

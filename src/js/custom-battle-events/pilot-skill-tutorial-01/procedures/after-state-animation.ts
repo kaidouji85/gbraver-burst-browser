@@ -14,7 +14,7 @@ export function afterStateAnimation(
 ): Animate {
   if (isPilotSkillActivatedByTsubasa(props)) {
     return process(() => {
-      props.view.dom.enemyCryMessageWindow.visible(false);
+      props.view.dom.enemyShoutMessageWindow.visible(false);
     });
   }
 

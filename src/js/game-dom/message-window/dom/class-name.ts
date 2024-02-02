@@ -20,10 +20,10 @@ export const ROOT_CLASS_NEAR_BURST_BUTTON = `${ROOT_CLASS}--near-burst-button`;
 export const ROOT_CLASS_NEAR_PILOT_BUTTON = `${ROOT_CLASS}--near-pilot-button`;
 
 /** ルート要素がプレイヤー側叫びウインドウの場合のclass属性 */
-export const ROOT_CLASS_PLAYER_CRY = `${ROOT_CLASS}--player-cry`;
+export const ROOT_CLASS_PLAYER_SHOUT = `${ROOT_CLASS}--player-shout`;
 
 /** ルート要素が敵側叫びウインドウの場合のclass属性 */
-export const ROOT_CLASS_ENEMY_CRY = `${ROOT_CLASS}--enemy-cry`;
+export const ROOT_CLASS_ENEMY_SHOUT = `${ROOT_CLASS}--enemy-shout`;
 
 /** 次メッセージアイコンのclass属性 */
 export const NEXT_MESSAGE_ICON_CLASS = `${ROOT_CLASS}__next-message-icon`;

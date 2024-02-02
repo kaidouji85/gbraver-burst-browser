@@ -2,7 +2,7 @@ import { CustomStateAnimation } from "../../../../td-scenes/battle/custom-battle
 import { ConditionalAnimation } from "../../../get-animation-if-conditional-met";
 import { hasDeliveredFinishBlow } from "../../../has-delivered-finish-blow";
 import { separatePlayersFromCurrentState } from "../../../separate-players";
-import { yuuyaCryWhenHeDeliversFinalBlow } from "../../animation/yuuya-cry-when-he-delivers-final-blow";
+import { yuuyaShoutWhenHeDeliversFinalBlow } from "../../animation/yuuya-shout-when-he-delivers-final-blow";
 import { ConfrontationTwoBraverProps } from "../../props";
 
 /** ユウヤ トドメの一撃 */
@@ -22,7 +22,7 @@ export const yuuyaFinishBlow: ConditionalAnimation<
     return props.currentState.effect.name === "BatteryDeclaration" &&
       props.currentState.effect.attacker === enemy.playerId &&
       hasEnemyDeliveredFinishBlow
-      ? yuuyaCryWhenHeDeliversFinalBlow(props)
+      ? yuuyaShoutWhenHeDeliversFinalBlow(props)
       : null;
   },
 ];
