@@ -13,7 +13,7 @@ const duration = 200;
  */
 export function startActive(model: LightningDozerModel): Animate {
   return all(
-    tween(model.standard, (t) => t.to({ colorStrength: 0.8 }, duration)),
+    tween(model.standard, (t) => t.to({ colorStrength: 0.9 }, duration)),
     tween(model.outline, (t) => t.to({ opacity: 1 }, duration)),
   );
 }
