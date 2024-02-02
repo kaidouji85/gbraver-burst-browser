@@ -1,5 +1,5 @@
 import { CustomBattleEventProps } from "../../../td-scenes/battle/custom-battle-event";
-import { enemyPilotCry } from "../../pilot-cry";
+import { enemyPilotShout } from "../../pilot-shout";
 
 /**
  * チャプター「生き延びるためにユウヤがスキルを発動する」ユウヤ叫び1
@@ -8,4 +8,4 @@ import { enemyPilotCry } from "../../pilot-cry";
  */
 export const yuuyaCry1WhenYuuyaActivateSkillToSurvive = (
   props: Readonly<CustomBattleEventProps>,
-) => enemyPilotCry(props, "Yuuya", "俺にパイロットスキルを使わせるとは");
+) => enemyPilotShout(props, "Yuuya", "俺にパイロットスキルを使わせるとは");

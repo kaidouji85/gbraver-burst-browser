@@ -10,7 +10,7 @@ import { CustomBattleEventProps } from "../td-scenes/battle/custom-battle-event"
  * @param face 顔グラフィック
  * @param message メッセージ
  */
-function pilotCry(
+function pilotShout(
   messageWindow: MessageWindow,
   face: FaceType,
   message: string,
@@ -29,13 +29,13 @@ function pilotCry(
  * @param face 顔グラフィック
  * @param message メッセージ
  */
-export const playerPilotCry = (
+export const playerPilotShout = (
   props: Readonly<CustomBattleEventProps>,
   face: FaceType,
   message: string,
 ): Animate =>
   process(() => {
-    pilotCry(props.view.dom.playerCryMessageWindow, face, message);
+    pilotShout(props.view.dom.playerCryMessageWindow, face, message);
     props.view.dom.enemyCryMessageWindow.visible(false);
   });
 
@@ -45,12 +45,12 @@ export const playerPilotCry = (
  * @param face 顔グラフィック
  * @param message メッセージ
  */
-export const enemyPilotCry = (
+export const enemyPilotShout = (
   props: Readonly<CustomBattleEventProps>,
   face: FaceType,
   message: string,
 ): Animate =>
   process(() => {
-    pilotCry(props.view.dom.enemyCryMessageWindow, face, message);
+    pilotShout(props.view.dom.enemyCryMessageWindow, face, message);
     props.view.dom.playerCryMessageWindow.visible(false);
   });

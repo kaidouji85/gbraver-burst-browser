@@ -1,5 +1,5 @@
 import { CustomBattleEventProps } from "../../../td-scenes/battle/custom-battle-event";
-import { playerPilotCry } from "../../pilot-cry";
+import { playerPilotShout } from "../../pilot-shout";
 
 /**
  * シンヤ叫び パイロットスキル発動
@@ -7,4 +7,4 @@ import { playerPilotCry } from "../../pilot-cry";
  * @return アニメーション
  */
 export const shinyaPilotSkillCry = (props: Readonly<CustomBattleEventProps>) =>
-  playerPilotCry(props, "Shinya", "うぉぉぉぉ 何故か叫びたくなってきたッス");
+  playerPilotShout(props, "Shinya", "うぉぉぉぉ 何故か叫びたくなってきたッス");
