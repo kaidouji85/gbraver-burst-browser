@@ -2,7 +2,7 @@ import type { GameStateX, StartGame } from "gbraver-burst-core";
 
 import { Animate } from "../../../../animation/animate";
 import { delay, empty } from "../../../../animation/delay";
-import { process } from "../../../../animation/process";
+import { onStart } from "../../../../animation/on-start";
 import type { StateAnimationProps } from "./state-animation-props";
 
 /**
@@ -29,7 +29,7 @@ export function startGameAnimation(
 
   return empty().chain(
     delay(800),
-    process(() => {
+    onStart(() => {
       props.sounds.batteryRecover.play();
     }),
     activeHUDPlayer.turnStart

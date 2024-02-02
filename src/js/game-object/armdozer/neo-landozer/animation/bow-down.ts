@@ -1,5 +1,5 @@
 import { Animate } from "../../../../animation/animate";
-import { process } from "../../../../animation/process";
+import { onStart } from "../../../../animation/on-start";
 import { tween } from "../../../../animation/tween";
 import { NeoLandozerModel } from "../model/neo-landozer-model";
 import { NeoLandozerSounds } from "../sounds/neo-landozer-sounds";
@@ -14,7 +14,7 @@ export function bowDown(
   model: NeoLandozerModel,
   sounds: NeoLandozerSounds,
 ): Animate {
-  return process(() => {
+  return onStart(() => {
     model.animation.type = "BOW";
     model.animation.frame = 0;
     sounds.motor.play();

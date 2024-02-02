@@ -1,11 +1,11 @@
 import { Animate } from "../../../../animation/animate";
-import { process } from "../../../../animation/process";
+import { onStart } from "../../../../animation/on-start";
 import { tween } from "../../../../animation/tween";
 import type { NeoLandozerModel } from "../model/neo-landozer-model";
 
 /** アームハンマー */
 export function armHammer(model: NeoLandozerModel): Animate {
-  return process(() => {
+  return onStart(() => {
     model.animation.type = "HM_ATTACK";
     model.animation.frame = 0;
   }).chain(

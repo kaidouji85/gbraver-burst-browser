@@ -2,7 +2,7 @@ import * as TWEEN from "@tweenjs/tween.js";
 
 import { all } from "../../../animation/all";
 import { Animate } from "../../../animation/animate";
-import { process } from "../../../animation/process";
+import { onStart } from "../../../animation/on-start";
 import { tween } from "../../../animation/tween";
 import type { ResultIndicatorModel } from "../model/result-indicator-model";
 
@@ -15,7 +15,7 @@ import type { ResultIndicatorModel } from "../model/result-indicator-model";
 export function slideIn(model: ResultIndicatorModel): Animate {
   const duration = 200;
   const distance = 50;
-  return process(() => {
+  return onStart(() => {
     model.opacity = 0;
     model.worldCoordinate.x = 0;
     model.worldCoordinate.y = 0;

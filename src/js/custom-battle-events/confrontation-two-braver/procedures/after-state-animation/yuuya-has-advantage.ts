@@ -1,4 +1,4 @@
-import { process } from "../../../../animation/process";
+import { onStart } from "../../../../animation/on-start";
 import { CustomStateAnimation } from "../../../../td-scenes/battle/custom-battle-event";
 import { ConditionalAnimation } from "../../../get-animation-if-conditional-met";
 import { ConfrontationTwoBraverProps } from "../../props";
@@ -10,7 +10,7 @@ export const yuuyaHasAdvantage: ConditionalAnimation<
   (props) => {
     return props.state.chapter.type === "YuuyaHasAdvantage" &&
       props.currentState.effect.name === "BatteryDeclaration"
-      ? process(() => {
+      ? onStart(() => {
           props.view.dom.enemyShoutMessageWindow.visible(false);
         })
       : null;

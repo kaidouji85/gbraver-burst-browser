@@ -1,6 +1,6 @@
 import { Animate } from "../../../../animation/animate";
 import { delay } from "../../../../animation/delay";
-import { process } from "../../../../animation/process";
+import { onStart } from "../../../../animation/on-start";
 import { tween } from "../../../../animation/tween";
 import type { WingDozerModel } from "../model/wing-dozer-model";
 import { WingDozerSounds } from "../sounds/wing-dozer-sounds";
@@ -13,7 +13,7 @@ import { WingDozerSounds } from "../sounds/wing-dozer-sounds";
  * @return アニメーション
  */
 export function dash(model: WingDozerModel, sounds: WingDozerSounds): Animate {
-  return process(() => {
+  return onStart(() => {
     model.animation.type = "DASH_UP";
     model.animation.frame = 0;
     sounds.motor.play();
@@ -30,7 +30,7 @@ export function dash(model: WingDozerModel, sounds: WingDozerSounds): Animate {
     )
     .chain(delay(500))
     .chain(
-      process(() => {
+      onStart(() => {
         model.animation.type = "DASH_DOWN";
         model.animation.frame = 0;
         sounds.motor.play();

@@ -1,5 +1,5 @@
 import { Animate } from "../../../../animation/animate";
-import { process } from "../../../../animation/process";
+import { onStart } from "../../../../animation/on-start";
 import { tween } from "../../../../animation/tween";
 import { ARMDOZER_SPRITE_STANDARD_Z } from "../../position";
 import type { LightningDozerModel } from "../model/lightning-dozer-model";
@@ -16,7 +16,7 @@ export function charge(
   model: LightningDozerModel,
   sounds: LightningDozerSounds,
 ): Animate {
-  return process(() => {
+  return onStart(() => {
     model.animation.type = "HM_CHARGE";
     model.animation.frame = 0;
     model.position.z = ARMDOZER_SPRITE_STANDARD_Z;

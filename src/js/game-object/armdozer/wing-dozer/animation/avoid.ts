@@ -1,7 +1,7 @@
 import { all } from "../../../../animation/all";
 import { Animate } from "../../../../animation/animate";
 import { delay } from "../../../../animation/delay";
-import { process } from "../../../../animation/process";
+import { onStart } from "../../../../animation/on-start";
 import { tween } from "../../../../animation/tween";
 import type { WingDozerModel } from "../model/wing-dozer-model";
 import { WingDozerSounds } from "../sounds/wing-dozer-sounds";
@@ -14,7 +14,7 @@ import { WingDozerSounds } from "../sounds/wing-dozer-sounds";
  * @return アニメーション
  */
 export function avoid(model: WingDozerModel, sounds: WingDozerSounds): Animate {
-  return process(() => {
+  return onStart(() => {
     model.animation.type = "BACK_STEP";
     model.animation.frame = 0;
     sounds.motor.play();
@@ -41,7 +41,7 @@ export function avoid(model: WingDozerModel, sounds: WingDozerSounds): Animate {
     )
     .chain(delay(300))
     .chain(
-      process(() => {
+      onStart(() => {
         sounds.motor.play();
       }),
     )
@@ -56,7 +56,7 @@ export function avoid(model: WingDozerModel, sounds: WingDozerSounds): Animate {
       ),
     )
     .chain(
-      process(() => {
+      onStart(() => {
         model.animation.type = "STAND";
         model.animation.frame = 0;
       }),

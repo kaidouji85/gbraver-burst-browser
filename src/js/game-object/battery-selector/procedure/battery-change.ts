@@ -1,6 +1,6 @@
 import { all } from "../../../animation/all";
 import { Animate } from "../../../animation/animate";
-import { process } from "../../../animation/process";
+import { onStart } from "../../../animation/on-start";
 import { changeNeedle } from "../animation/change-needle";
 import { getNeedleValue } from "../model/needle-value";
 import { BatterySelectorProps } from "../props";
@@ -19,7 +19,7 @@ export function batteryChange(
   props.batteryChangeTween.removeAll();
   const needle = getNeedleValue(battery, props.model.maxBattery);
   return all(
-    process(() => {
+    onStart(() => {
       props.model.battery = battery;
     }),
     changeNeedle(props.model, props.batteryChangeTween, needle),

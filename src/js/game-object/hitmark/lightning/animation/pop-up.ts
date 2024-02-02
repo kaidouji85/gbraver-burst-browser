@@ -1,6 +1,6 @@
 import { all } from "../../../../animation/all";
 import { Animate } from "../../../../animation/animate";
-import { process } from "../../../../animation/process";
+import { onStart } from "../../../../animation/on-start";
 import { tween } from "../../../../animation/tween";
 import type { LightningModel } from "../model/lightning-model";
 import { LightningSounds } from "../sounds/lightning-sounds";
@@ -13,7 +13,7 @@ import { LightningSounds } from "../sounds/lightning-sounds";
  * @return アニメーション
  */
 export function popUp(model: LightningModel, sounds: LightningSounds): Animate {
-  return process(() => {
+  return onStart(() => {
     model.animation.frame = 0;
     model.opacity = 1;
     sounds.lightning.play();

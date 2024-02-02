@@ -1,6 +1,6 @@
 import { all } from "../../../animation/all";
 import { Animate } from "../../../animation/animate";
-import { process } from "../../../animation/process";
+import { onStart } from "../../../animation/on-start";
 import { tween } from "../../../animation/tween";
 import type { GaugeModel } from "../model/gauge-model";
 import { getBatteryGaugeUnitOpacity } from "../model/get-battery-gauge-unit-opacity";
@@ -13,7 +13,7 @@ import { getBatteryGaugeUnitOpacity } from "../model/get-battery-gauge-unit-opac
  */
 export function maxBattery(model: GaugeModel, value: number): Animate {
   return all(
-    process(() => {
+    onStart(() => {
       model.maxBattery = value;
     }),
     ...model.batteryList.map((gaugeUnit) =>

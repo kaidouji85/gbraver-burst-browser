@@ -2,7 +2,7 @@ import * as TWEEN from "@tweenjs/tween.js";
 
 import { Animate } from "../../../animation/animate";
 import { delay } from "../../../animation/delay";
-import { process } from "../../../animation/process";
+import { onStart } from "../../../animation/on-start";
 import { tween } from "../../../animation/tween";
 import type { TurnIndicatorModel } from "../model/turn-indicator-model";
 
@@ -17,7 +17,7 @@ export function waiting(
   model: TurnIndicatorModel,
   group: TWEEN.Group,
 ): Animate {
-  return process(() => {
+  return onStart(() => {
     model.animation = 0;
   }, group)
     .chain(

@@ -1,5 +1,5 @@
 import { Animate } from "../../../animation/animate";
-import { process } from "../../../animation/process";
+import { onStart } from "../../../animation/on-start";
 import { tween } from "../../../animation/tween";
 import type { PilotButtonModel } from "../model/pilot-button-model";
 import { PilotButtonSounds } from "../sounds/pilot-button-sounds";
@@ -15,7 +15,7 @@ export function decide(
   model: PilotButtonModel,
   sounds: PilotButtonSounds,
 ): Animate {
-  return process(() => {
+  return onStart(() => {
     model.isPushNotifierDisabled = true;
     sounds.pushButton.play();
   })

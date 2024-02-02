@@ -1,7 +1,7 @@
 import { all } from "../../../../animation/all";
 import { Animate } from "../../../../animation/animate";
 import { delay } from "../../../../animation/delay";
-import { process } from "../../../../animation/process";
+import { onStart } from "../../../../animation/on-start";
 import { tween } from "../../../../animation/tween";
 import { GenesisBraverCutInModel } from "../model/genesis-braver-cutin-model";
 
@@ -12,7 +12,7 @@ import { GenesisBraverCutInModel } from "../model/genesis-braver-cutin-model";
  */
 export function show(model: GenesisBraverCutInModel): Animate {
   return all(
-    process(() => {
+    onStart(() => {
       model.animation.type = "BURST_UP";
       model.animation.frame = 0;
     })
@@ -28,7 +28,7 @@ export function show(model: GenesisBraverCutInModel): Animate {
       )
       .chain(delay(500))
       .chain(
-        process(() => {
+        onStart(() => {
           model.animation.type = "BURST_DOWN";
           model.animation.frame = 0;
         }),
@@ -43,7 +43,7 @@ export function show(model: GenesisBraverCutInModel): Animate {
           ),
         ),
       ),
-    process(() => {
+    onStart(() => {
       model.opacity = 0;
     }).chain(
       tween(model, (t) =>
@@ -55,7 +55,7 @@ export function show(model: GenesisBraverCutInModel): Animate {
         ),
       ),
     ),
-    process(() => {
+    onStart(() => {
       model.scale = 0.9;
     }).chain(
       tween(model, (t) =>

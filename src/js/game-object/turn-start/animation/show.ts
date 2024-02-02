@@ -1,6 +1,6 @@
 import { all } from "../../../animation/all";
 import { Animate } from "../../../animation/animate";
-import { process } from "../../../animation/process";
+import { onStart } from "../../../animation/on-start";
 import { tween } from "../../../animation/tween";
 import type { TurnStartModel } from "../model/turn-start-model";
 
@@ -11,7 +11,7 @@ import type { TurnStartModel } from "../model/turn-start-model";
  * @return アニメーション
  */
 export function show(model: TurnStartModel): Animate {
-  return process(() => {
+  return onStart(() => {
     model.opacity = 0;
     model.position.x = 200;
   }).chain(

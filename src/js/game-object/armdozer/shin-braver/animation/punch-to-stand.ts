@@ -1,5 +1,5 @@
 import { Animate } from "../../../../animation/animate";
-import { process } from "../../../../animation/process";
+import { onStart } from "../../../../animation/on-start";
 import { tween } from "../../../../animation/tween";
 import { ARMDOZER_SPRITE_STANDARD_Z } from "../../position";
 import type { ShinBraverModel } from "../model/shin-braver-model";
@@ -10,7 +10,7 @@ export function punchToStand(
   model: ShinBraverModel,
   sounds: ShinBraverSounds,
 ): Animate {
-  return process(() => {
+  return onStart(() => {
     model.animation.type = "SP_TO_STAND";
     model.animation.frame = 0;
     sounds.motor.play();
@@ -34,7 +34,7 @@ export function punchToStand(
       ),
     )
     .chain(
-      process(() => {
+      onStart(() => {
         model.animation.type = "STAND";
         model.animation.frame = 0;
         model.position.z = ARMDOZER_SPRITE_STANDARD_Z;

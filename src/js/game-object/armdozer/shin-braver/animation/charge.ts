@@ -1,5 +1,5 @@
 import { Animate } from "../../../../animation/animate";
-import { process } from "../../../../animation/process";
+import { onStart } from "../../../../animation/on-start";
 import { tween } from "../../../../animation/tween";
 import { ARMDOZER_SPRITE_ATTACKER_Z } from "../../position";
 import type { ShinBraverModel } from "../model/shin-braver-model";
@@ -16,7 +16,7 @@ export function charge(
   model: ShinBraverModel,
   sounds: ShinBraverSounds,
 ): Animate {
-  return process(() => {
+  return onStart(() => {
     model.animation.type = "SP_CHARGE";
     model.animation.frame = 0;
     model.position.z = ARMDOZER_SPRITE_ATTACKER_Z;

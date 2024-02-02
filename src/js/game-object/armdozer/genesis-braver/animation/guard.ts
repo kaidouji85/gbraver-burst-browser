@@ -1,6 +1,6 @@
 import { all } from "../../../../animation/all";
 import { Animate } from "../../../../animation/animate";
-import { process } from "../../../../animation/process";
+import { onStart } from "../../../../animation/on-start";
 import { tween } from "../../../../animation/tween";
 import { GenesisBraverModel } from "../model/genesis-braver-model";
 
@@ -10,7 +10,7 @@ import { GenesisBraverModel } from "../model/genesis-braver-model";
  * @return アニメーション
  */
 export function guard(model: GenesisBraverModel): Animate {
-  const motion = process(() => {
+  const motion = onStart(() => {
     model.animation.frame = 1;
     model.animation.type = "GUARD";
   });

@@ -4,13 +4,12 @@ import { Animate } from "./animate";
 import { tween } from "./tween";
 
 /**
- * アニメーション中に任意処理を行う
- *
+ * アニメーション開始時に任意処理を行う
  * @param fn 処理内容
  * @param group TWeenGroup
  * @return アニメーション
  */
-export function process(fn: () => void, group?: TWEEN.Group): Animate {
+export function onStart(fn: () => void, group?: TWEEN.Group): Animate {
   return tween(
     {},
     (t) =>

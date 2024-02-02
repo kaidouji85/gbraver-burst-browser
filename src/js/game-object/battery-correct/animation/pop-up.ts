@@ -1,6 +1,6 @@
 import { all } from "../../../animation/all";
 import { Animate } from "../../../animation/animate";
-import { process } from "../../../animation/process";
+import { onStart } from "../../../animation/on-start";
 import { tween } from "../../../animation/tween";
 import { ARMDOZER_EFFECT_STANDARD_Y } from "../../armdozer/position";
 import type { BatteryCorrectModel } from "../model/battery-correct-model";
@@ -13,7 +13,7 @@ import type { BatteryCorrectModel } from "../model/battery-correct-model";
  * @return アニメーション
  */
 export function popUp(model: BatteryCorrectModel, value: number): Animate {
-  return process(() => {
+  return onStart(() => {
     model.position.y = ARMDOZER_EFFECT_STANDARD_Y + 80;
     model.opacity = 1;
     model.correctValue = value;
