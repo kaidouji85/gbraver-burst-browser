@@ -4,7 +4,7 @@ import * as THREE from "three";
 
 import { all } from "../../animation/all";
 import { Animate } from "../../animation/animate";
-import { process } from "../../animation/process";
+import { onStart } from "../../animation/on-start";
 import type { PreRender } from "../../game-loop/pre-render";
 import type { Update } from "../../game-loop/update";
 import type { Resources } from "../../resource";
@@ -69,7 +69,7 @@ export class TurnIndicator {
   show(isPlayerTurn: boolean): Animate {
     return all(
       show(isPlayerTurn, this.#model),
-      process(() => {
+      onStart(() => {
         waiting(this.#model, this.#tweenGroup).loop();
       }),
     );
@@ -82,7 +82,7 @@ export class TurnIndicator {
   invisible(): Animate {
     return all(
       invisible(this.#model),
-      process(() => {
+      onStart(() => {
         this.#tweenGroup.removeAll();
       }),
     );

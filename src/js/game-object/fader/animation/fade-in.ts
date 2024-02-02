@@ -1,5 +1,5 @@
 import { Animate } from "../../../animation/animate";
-import { process } from "../../../animation/process";
+import { onStart } from "../../../animation/on-start";
 import { tween } from "../../../animation/tween";
 import type { FaderModel } from "../model/fader-model";
 
@@ -10,7 +10,7 @@ import type { FaderModel } from "../model/fader-model";
  * @return アニメーション
  */
 export function fadeIn(model: FaderModel): Animate {
-  return process(() => {
+  return onStart(() => {
     model.opacity = 1;
   }).chain(
     tween(model, (t) =>

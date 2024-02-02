@@ -1,5 +1,5 @@
 import type { Animate } from "../../../animation/animate";
-import { process } from "../../../animation/process";
+import { onStart } from "../../../animation/on-start";
 import { tween } from "../../../animation/tween";
 import type { TimeScaleButtonModel } from "../model/time-scale-button-model";
 
@@ -10,7 +10,7 @@ import type { TimeScaleButtonModel } from "../model/time-scale-button-model";
  * @return アニメーション
  */
 export function close(model: TimeScaleButtonModel): Animate {
-  return process(() => {
+  return onStart(() => {
     model.isPushNotifierDisabled = true;
     model.opacity = 1;
   }).chain(

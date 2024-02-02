@@ -1,5 +1,5 @@
 import { Animate } from "../animation/animate";
-import { process } from "../animation/process";
+import { onStart } from "../animation/on-start";
 import {
   CustomBattleEventProps,
   CustomStateAnimation,
@@ -27,7 +27,7 @@ export function invisibleShoutMessageWindowWhenTurnChange(
   props: Readonly<CustomStateAnimation>,
 ): Animate | null {
   return props.currentState.effect.name === "TurnChange"
-    ? process(() => {
+    ? onStart(() => {
         invisibleShoutMessageWindow(props);
       })
     : null;

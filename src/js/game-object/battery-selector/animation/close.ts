@@ -1,5 +1,5 @@
 import { Animate } from "../../../animation/animate";
-import { process } from "../../../animation/process";
+import { onStart } from "../../../animation/on-start";
 import { tween } from "../../../animation/tween";
 import type { BatterySelectorModel } from "../model";
 
@@ -10,7 +10,7 @@ import type { BatterySelectorModel } from "../model";
  * @return アニメーション
  */
 export function close(model: BatterySelectorModel): Animate {
-  return process(() => {
+  return onStart(() => {
     model.isPushNotifierDisabled = true;
     model.opacity = 1;
   }).chain(

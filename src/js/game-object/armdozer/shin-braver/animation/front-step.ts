@@ -1,7 +1,7 @@
 import { all } from "../../../../animation/all";
 import { Animate } from "../../../../animation/animate";
 import { delay } from "../../../../animation/delay";
-import { process } from "../../../../animation/process";
+import { onStart } from "../../../../animation/on-start";
 import { tween } from "../../../../animation/tween";
 import type { ShinBraverModel } from "../model/shin-braver-model";
 import { ShinBraverSounds } from "../sounds/shin-braver-sounds";
@@ -19,7 +19,7 @@ export function frontStep(
   sounds: ShinBraverSounds,
   distance = 100,
 ): Animate {
-  return process(() => {
+  return onStart(() => {
     model.animation.type = "FRONT_STEP";
     model.animation.frame = 0;
     sounds.motor.play();
@@ -46,7 +46,7 @@ export function frontStep(
     )
     .chain(delay(300))
     .chain(
-      process(() => {
+      onStart(() => {
         sounds.motor.play();
       }),
     )
@@ -61,7 +61,7 @@ export function frontStep(
       ),
     )
     .chain(
-      process(() => {
+      onStart(() => {
         model.animation.type = "STAND";
         model.animation.frame = 0;
       }),

@@ -1,6 +1,6 @@
 import { all } from "../../../../animation/all";
 import { Animate } from "../../../../animation/animate";
-import { process } from "../../../../animation/process";
+import { onStart } from "../../../../animation/on-start";
 import { tween } from "../../../../animation/tween";
 import { ARMDOZER_SPRITE_STANDARD_Z } from "../../position";
 import type { LightningDozerModel } from "../model/lightning-dozer-model";
@@ -18,7 +18,7 @@ export function hmToStand(
   sounds: LightningDozerSounds,
 ): Animate {
   return all(
-    process(() => {
+    onStart(() => {
       model.animation.type = "HM_TO_STAND";
       model.animation.frame = 0;
       sounds.motor.play();
@@ -34,7 +34,7 @@ export function hmToStand(
         ),
       )
       .chain(
-        process(() => {
+        onStart(() => {
           model.animation.type = "STAND";
           model.animation.frame = 0;
         }),
@@ -47,7 +47,7 @@ export function hmToStand(
         400,
       ),
     ).chain(
-      process(() => {
+      onStart(() => {
         model.position.z = ARMDOZER_SPRITE_STANDARD_Z;
       }),
     ),

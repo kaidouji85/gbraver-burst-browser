@@ -2,7 +2,7 @@ import * as TWEEN from "@tweenjs/tween.js";
 
 import { all } from "../../../../animation/all";
 import { Animate } from "../../../../animation/animate";
-import { process } from "../../../../animation/process";
+import { onStart } from "../../../../animation/on-start";
 import { tween } from "../../../../animation/tween";
 import type {
   ShockWaveLineModel,
@@ -33,7 +33,7 @@ export function popUp(model: ShockWaveModel): Animate {
  * @return アニメーション
  */
 function lineAnimation(model: ShockWaveLineModel): Animate {
-  return process(() => {
+  return onStart(() => {
     model.opacity = 1;
     model.scale = 0;
     model.distance = 8;
@@ -59,7 +59,7 @@ function lineAnimation(model: ShockWaveLineModel): Animate {
  * @return アニメーション
  */
 function ringAnimation(model: ShockWaveRingModel): Animate {
-  return process(() => {
+  return onStart(() => {
     model.opacity = 1;
     model.scale = 0;
   }).chain(

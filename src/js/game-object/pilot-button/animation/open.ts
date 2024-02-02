@@ -1,5 +1,5 @@
 import { Animate } from "../../../animation/animate";
-import { process } from "../../../animation/process";
+import { onStart } from "../../../animation/on-start";
 import { tween } from "../../../animation/tween";
 import type { PilotButtonModel } from "../model/pilot-button-model";
 
@@ -11,7 +11,7 @@ import type { PilotButtonModel } from "../model/pilot-button-model";
  * @return アニメーション
  */
 export function open(model: PilotButtonModel, canPilot: boolean): Animate {
-  return process(() => {
+  return onStart(() => {
     model.isPushNotifierDisabled = true;
     model.canPilot = canPilot;
     model.opacity = 0;
@@ -27,7 +27,7 @@ export function open(model: PilotButtonModel, canPilot: boolean): Animate {
       ),
     )
     .chain(
-      process(() => {
+      onStart(() => {
         model.isPushNotifierDisabled = false;
       }),
     );

@@ -2,7 +2,7 @@ import type { GameStateX, TurnChange } from "gbraver-burst-core";
 
 import { Animate } from "../../../../animation/animate";
 import { delay, empty } from "../../../../animation/delay";
-import { process } from "../../../../animation/process";
+import { onStart } from "../../../../animation/on-start";
 import type { StateAnimationProps } from "./state-animation-props";
 
 /**
@@ -56,7 +56,7 @@ export function turnChangeAnimation(
   const forContinuousAttack = empty().chain(
     delay(800),
     turnStart,
-    process(() => {
+    onStart(() => {
       props.sounds.batteryRecover.play();
     }),
     activeTDArmdozer.sprite().startActive(),

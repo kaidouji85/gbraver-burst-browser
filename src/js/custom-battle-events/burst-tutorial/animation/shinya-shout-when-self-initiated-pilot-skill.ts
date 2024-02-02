@@ -1,4 +1,4 @@
-import { process } from "../../../animation/process";
+import { onStart } from "../../../animation/on-start";
 import { CustomBattleEventProps } from "../../../td-scenes/battle/custom-battle-event";
 import { playerPilotOnlyShout } from "../../pilot-shout";
 
@@ -6,6 +6,6 @@ import { playerPilotOnlyShout } from "../../pilot-shout";
 export const shinyaShoutWhenSelfInitiatedPilotSkill = (
   props: Readonly<CustomBattleEventProps>,
 ) =>
-  process(() => {
+  onStart(() => {
     playerPilotOnlyShout(props, "Shinya", "何故か無性にやる気が出てきたッス");
   });

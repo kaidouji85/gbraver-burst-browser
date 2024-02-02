@@ -1,5 +1,5 @@
 import { Animate } from "../../../animation/animate";
-import { process } from "../../../animation/process";
+import { onStart } from "../../../animation/on-start";
 import { tween } from "../../../animation/tween";
 import type { BatteryNumberModel } from "../model/battery-number-model";
 
@@ -11,7 +11,7 @@ import type { BatteryNumberModel } from "../model/battery-number-model";
  * @return アニメーション
  */
 export function change(model: BatteryNumberModel, battery: number): Animate {
-  return process(() => {
+  return onStart(() => {
     model.battery = battery;
   })
     .chain(

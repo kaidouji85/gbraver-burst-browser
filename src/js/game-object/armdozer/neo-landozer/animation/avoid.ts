@@ -1,7 +1,7 @@
 import { all } from "../../../../animation/all";
 import { Animate } from "../../../../animation/animate";
 import { delay } from "../../../../animation/delay";
-import { process } from "../../../../animation/process";
+import { onStart } from "../../../../animation/on-start";
 import { tween } from "../../../../animation/tween";
 import type { NeoLandozerModel } from "../model/neo-landozer-model";
 import type { NeoLandozerSounds } from "../sounds/neo-landozer-sounds";
@@ -11,7 +11,7 @@ export function avoid(
   model: NeoLandozerModel,
   sounds: NeoLandozerSounds,
 ): Animate {
-  return process(() => {
+  return onStart(() => {
     model.animation.type = "BACK_STEP";
     model.animation.frame = 0;
     sounds.motor.play();
@@ -38,7 +38,7 @@ export function avoid(
     )
     .chain(delay(300))
     .chain(
-      process(() => {
+      onStart(() => {
         sounds.motor.play();
       }),
     )
@@ -53,7 +53,7 @@ export function avoid(
       ),
     )
     .chain(
-      process(() => {
+      onStart(() => {
         model.animation.type = "STAND";
         model.animation.frame = 0;
       }),

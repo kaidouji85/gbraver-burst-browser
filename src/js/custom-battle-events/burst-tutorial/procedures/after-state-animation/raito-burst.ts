@@ -1,4 +1,4 @@
-import { process } from "../../../../animation/process";
+import { onStart } from "../../../../animation/on-start";
 import { CustomStateAnimation } from "../../../../td-scenes/battle/custom-battle-event";
 import { ConditionalAnimation } from "../../../get-animation-if-conditional-met";
 import { isEnemyBurstActivated } from "../../../is-burst-activated";
@@ -10,7 +10,7 @@ export const raitoBurst: ConditionalAnimation<
 >[] = [
   (props) =>
     isEnemyBurstActivated(props)
-      ? process(() => {
+      ? onStart(() => {
           props.view.dom.enemyShoutMessageWindow.visible(false);
         })
       : null,

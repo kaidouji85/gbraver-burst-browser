@@ -1,5 +1,5 @@
 import { Animate } from "../../../animation/animate";
-import { process } from "../../../animation/process";
+import { onStart } from "../../../animation/on-start";
 import { tween } from "../../../animation/tween";
 import type { BurstButtonModel } from "../model/burst-button-model";
 
@@ -10,7 +10,7 @@ import type { BurstButtonModel } from "../model/burst-button-model";
  * @return アニメーション
  */
 export function open(model: BurstButtonModel, canBurst: boolean): Animate {
-  return process(() => {
+  return onStart(() => {
     model.isPushNotifierDisabled = true;
     model.canBurst = canBurst;
     model.opacity = 0;
@@ -26,7 +26,7 @@ export function open(model: BurstButtonModel, canBurst: boolean): Animate {
       ),
     )
     .chain(
-      process(() => {
+      onStart(() => {
         model.isPushNotifierDisabled = false;
       }),
     );

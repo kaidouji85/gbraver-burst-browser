@@ -1,6 +1,6 @@
 import { Animate } from "../../../../animation/animate";
 import { delay } from "../../../../animation/delay";
-import { process } from "../../../../animation/process";
+import { onStart } from "../../../../animation/on-start";
 import { tween } from "../../../../animation/tween";
 import { GenesisBraverModel } from "../model/genesis-braver-model";
 import { GenesisBraverSounds } from "../sounds/genesis-braver-sounds";
@@ -15,7 +15,7 @@ export function burstToStand(
   model: GenesisBraverModel,
   sounds: GenesisBraverSounds,
 ): Animate {
-  return process(() => {
+  return onStart(() => {
     model.animation.type = "BURST_DOWN";
     model.animation.frame = 1;
     sounds.motor.sound.play();
@@ -31,14 +31,14 @@ export function burstToStand(
       ),
     )
     .chain(
-      process(() => {
+      onStart(() => {
         model.animation.type = "BURST_UP";
         model.animation.frame = 1;
       }),
     )
     .chain(delay(500))
     .chain(
-      process(() => {
+      onStart(() => {
         sounds.motor.sound.play();
       }),
     )
@@ -53,7 +53,7 @@ export function burstToStand(
       ),
     )
     .chain(
-      process(() => {
+      onStart(() => {
         model.animation.type = "STAND";
         model.animation.frame = 0;
       }),

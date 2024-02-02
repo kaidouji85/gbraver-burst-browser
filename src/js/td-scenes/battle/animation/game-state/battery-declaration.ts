@@ -3,7 +3,7 @@ import type { BatteryDeclaration, GameStateX } from "gbraver-burst-core";
 import { all } from "../../../../animation/all";
 import { Animate } from "../../../../animation/animate";
 import { delay, empty } from "../../../../animation/delay";
-import { process } from "../../../../animation/process";
+import { onStart } from "../../../../animation/on-start";
 import { BattleSceneSounds } from "../../sounds/sounds";
 import type { TDPlayer } from "../../view/td/player";
 import type { StateAnimationProps } from "./state-animation-props";
@@ -28,7 +28,7 @@ function declaration(td: TDPlayer, value: number): Animate {
  * @return アニメーション
  */
 function declarationSound(sounds: BattleSceneSounds): Animate {
-  return process(() => {
+  return onStart(() => {
     sounds.batteryDeclaration.play();
   });
 }
@@ -65,12 +65,12 @@ function declarationWithCorrect(
  * @return アニメーション
  */
 function declarationSoundWithCorrect(sounds: BattleSceneSounds): Animate {
-  return process(() => {
+  return onStart(() => {
     sounds.batteryDeclaration.play();
   })
     .chain(delay(600))
     .chain(
-      process(() => {
+      onStart(() => {
         sounds.batteryDeclaration.play();
       }),
     );

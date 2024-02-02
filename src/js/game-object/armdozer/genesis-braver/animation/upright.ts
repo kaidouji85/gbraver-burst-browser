@@ -1,5 +1,5 @@
 import { Animate } from "../../../../animation/animate";
-import { process } from "../../../../animation/process";
+import { onStart } from "../../../../animation/on-start";
 import { tween } from "../../../../animation/tween";
 import { GenesisBraverModel } from "../model/genesis-braver-model";
 import { GenesisBraverSounds } from "../sounds/genesis-braver-sounds";
@@ -14,7 +14,7 @@ export function upright(
   model: GenesisBraverModel,
   sounds: GenesisBraverSounds,
 ): Animate {
-  return process(() => {
+  return onStart(() => {
     model.animation.type = "UPRIGHT";
     model.animation.frame = 0;
     sounds.motor.sound.play();

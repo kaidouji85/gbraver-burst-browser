@@ -1,7 +1,7 @@
 import * as TWEEN from "@tweenjs/tween.js";
 
 import { Animate } from "../../../animation/animate";
-import { process } from "../../../animation/process";
+import { onStart } from "../../../animation/on-start";
 import { tween } from "../../../animation/tween";
 import type { BatterySelectorModel } from "../model";
 import type { BatterySelectorSounds } from "../sounds/battery-selector-sounds";
@@ -53,7 +53,7 @@ export function batteryPlusPop(
   sounds: BatterySelectorSounds,
   group: TWEEN.Group,
 ): Animate {
-  return process(() => {
+  return onStart(() => {
     sounds.batteryChangeSound.play();
   }).chain(silentlyBatteryPlusPop(model, group));
 }

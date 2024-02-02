@@ -1,5 +1,5 @@
 import { Animate } from "../../../animation/animate";
-import { process } from "../../../animation/process";
+import { onStart } from "../../../animation/on-start";
 import { tween } from "../../../animation/tween";
 import { BatterySelectorOpenParam } from "../battery-selector-open-param";
 import type { BatterySelectorModel } from "../model";
@@ -15,7 +15,7 @@ export function open(
   model: BatterySelectorModel,
   param: BatterySelectorOpenParam,
 ): Animate {
-  return process(() => {
+  return onStart(() => {
     model.isPushNotifierDisabled = true;
     model.opacity = 0;
     model.battery = param.initialValue;
@@ -35,7 +35,7 @@ export function open(
       ),
     )
     .chain(
-      process(() => {
+      onStart(() => {
         model.isPushNotifierDisabled = false;
       }),
     );

@@ -1,13 +1,13 @@
 import { all } from "../../../../animation/all";
 import { Animate } from "../../../../animation/animate";
 import { empty } from "../../../../animation/delay";
-import { process } from "../../../../animation/process";
+import { onStart } from "../../../../animation/on-start";
 import { tween } from "../../../../animation/tween";
 import type { ShinBraverModel } from "../model/shin-braver-model";
 
 /** ノックバック */
 export function knockBack(model: ShinBraverModel): Animate {
-  const motion = process(() => {
+  const motion = onStart(() => {
     model.animation.frame = 1;
     model.animation.type = "KNOCK_BACK";
   });

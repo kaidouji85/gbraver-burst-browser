@@ -1,5 +1,5 @@
 import { Animate } from "../../../animation/animate";
-import { process } from "../../../animation/process";
+import { onStart } from "../../../animation/on-start";
 import type { ResultIndicatorModel } from "../model/result-indicator-model";
 
 /**
@@ -9,7 +9,7 @@ import type { ResultIndicatorModel } from "../model/result-indicator-model";
  * @return アニメーション
  */
 export function hidden(model: ResultIndicatorModel): Animate {
-  return process(() => {
+  return onStart(() => {
     model.opacity = 0;
   });
 }

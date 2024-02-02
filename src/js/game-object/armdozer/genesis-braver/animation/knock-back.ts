@@ -1,6 +1,6 @@
 import { all } from "../../../../animation/all";
 import { Animate } from "../../../../animation/animate";
-import { process } from "../../../../animation/process";
+import { onStart } from "../../../../animation/on-start";
 import { tween } from "../../../../animation/tween";
 import { GenesisBraverModel } from "../model/genesis-braver-model";
 
@@ -11,7 +11,7 @@ import { GenesisBraverModel } from "../model/genesis-braver-model";
  */
 export function knockBack(model: GenesisBraverModel): Animate {
   return all(
-    process(() => {
+    onStart(() => {
       model.animation.type = "KNOCK_BACK";
       model.animation.frame = 1;
     }),

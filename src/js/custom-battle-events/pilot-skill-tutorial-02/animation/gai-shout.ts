@@ -1,4 +1,4 @@
-import { process } from "../../../animation/process";
+import { onStart } from "../../../animation/on-start";
 import { CustomBattleEventProps } from "../../../td-scenes/battle/custom-battle-event";
 import { playerPilotOnlyShout } from "../../pilot-shout";
 
@@ -8,6 +8,6 @@ import { playerPilotOnlyShout } from "../../pilot-shout";
  * @return アニメーション
  */
 export const gaiShout = (props: Readonly<CustomBattleEventProps>) =>
-  process(() => {
+  onStart(() => {
     playerPilotOnlyShout(props, "Gai", "俺の根性 見せてやる");
   });

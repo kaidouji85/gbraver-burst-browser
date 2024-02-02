@@ -1,5 +1,5 @@
 import { Animate } from "../../../../animation/animate";
-import { process } from "../../../../animation/process";
+import { onStart } from "../../../../animation/on-start";
 import { tween } from "../../../../animation/tween";
 import type { WingDozerModel } from "../model/wing-dozer-model";
 
@@ -10,7 +10,7 @@ import type { WingDozerModel } from "../model/wing-dozer-model";
  * @return アニメーション
  */
 export function knockBack(model: WingDozerModel): Animate {
-  return process(() => {
+  return onStart(() => {
     model.animation.frame = 1;
     model.animation.type = "KNOCK_BACK";
   })

@@ -1,6 +1,6 @@
 import { Animate } from "../../../../animation/animate";
 import { delay } from "../../../../animation/delay";
-import { process } from "../../../../animation/process";
+import { onStart } from "../../../../animation/on-start";
 import { tween } from "../../../../animation/tween";
 import type { ShinBraverModel } from "../model/shin-braver-model";
 import { ShinBraverSounds } from "../sounds/shin-braver-sounds";
@@ -16,7 +16,7 @@ export function gutsToStand(
   model: ShinBraverModel,
   sounds: ShinBraverSounds,
 ): Animate {
-  return process(() => {
+  return onStart(() => {
     model.animation.type = "GUTS_DOWN";
     model.animation.frame = 1;
     sounds.motor.play();
@@ -32,14 +32,14 @@ export function gutsToStand(
       ),
     )
     .chain(
-      process(() => {
+      onStart(() => {
         model.animation.type = "GUTS_UP";
         model.animation.frame = 1;
       }),
     )
     .chain(delay(500))
     .chain(
-      process(() => {
+      onStart(() => {
         sounds.motor.play();
       }),
     )
@@ -54,7 +54,7 @@ export function gutsToStand(
       ),
     )
     .chain(
-      process(() => {
+      onStart(() => {
         model.animation.type = "STAND";
         model.animation.frame = 0;
       }),

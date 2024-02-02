@@ -3,7 +3,7 @@ import { Observable, Unsubscribable } from "rxjs";
 import * as THREE from "three";
 
 import { Animate } from "../../../animation/animate";
-import { process } from "../../../animation/process";
+import { onStart } from "../../../animation/on-start";
 import type { PreRender } from "../../../game-loop/pre-render";
 import type { Resources } from "../../../resource";
 import { SOUND_IDS } from "../../../resource/sound";
@@ -64,7 +64,7 @@ export class ShockWave {
    * @return アニメーション
    */
   popUp(): Animate {
-    return process(() => {
+    return onStart(() => {
       this.#hitSound.play();
     }).chain(popUp(this.#model));
   }

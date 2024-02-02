@@ -1,6 +1,6 @@
 import { Animate } from "../../../../animation/animate";
 import { delay } from "../../../../animation/delay";
-import { process } from "../../../../animation/process";
+import { onStart } from "../../../../animation/on-start";
 import { tween } from "../../../../animation/tween";
 import type { ShinBraverModel } from "../model/shin-braver-model";
 import { ShinBraverSounds } from "../sounds/shin-braver-sounds";
@@ -16,7 +16,7 @@ export function burst(
   model: ShinBraverModel,
   sounds: ShinBraverSounds,
 ): Animate {
-  return process(() => {
+  return onStart(() => {
     model.animation.type = "BURST_UP";
     model.animation.frame = 0;
     sounds.motor.play();
@@ -33,7 +33,7 @@ export function burst(
     )
     .chain(delay(500))
     .chain(
-      process(() => {
+      onStart(() => {
         model.animation.type = "BURST_DOWN";
         model.animation.frame = 0;
         sounds.motor.play();

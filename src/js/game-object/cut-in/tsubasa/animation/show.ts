@@ -1,6 +1,6 @@
 import { all } from "../../../../animation/all";
 import { Animate } from "../../../../animation/animate";
-import { process } from "../../../../animation/process";
+import { onStart } from "../../../../animation/on-start";
 import { tween } from "../../../../animation/tween";
 import type { TsubasaModel } from "../model/tsubasa-model";
 import { TsubasaSounds } from "../sounds/tsubasa-sounds";
@@ -15,7 +15,7 @@ const duration = 400;
  * @return アニメーション
  */
 export function show(model: TsubasaModel, sounds: TsubasaSounds): Animate {
-  return process(() => {
+  return onStart(() => {
     model.opacity = 0;
     model.position.x = -25;
   })
@@ -40,7 +40,7 @@ export function show(model: TsubasaModel, sounds: TsubasaSounds): Animate {
       ),
     )
     .chain(
-      process(() => {
+      onStart(() => {
         sounds.benefitEffect.play();
       }),
     );

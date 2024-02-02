@@ -1,4 +1,4 @@
-import { process } from "../../../animation/process";
+import { onStart } from "../../../animation/on-start";
 import { CustomBattleEventProps } from "../../../td-scenes/battle/custom-battle-event";
 import { enemyPilotOnlyShout } from "../../pilot-shout";
 
@@ -10,6 +10,6 @@ import { enemyPilotOnlyShout } from "../../pilot-shout";
 export const yuuyaShout2WhenYuuyaHasAdvantage = (
   props: Readonly<CustomBattleEventProps>,
 ) =>
-  process(() => {
+  onStart(() => {
     enemyPilotOnlyShout(props, "Yuuya", "それではブレイバーの名が泣くぞ");
   });

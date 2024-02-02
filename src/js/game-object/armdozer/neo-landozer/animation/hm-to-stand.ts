@@ -1,5 +1,5 @@
 import { Animate } from "../../../../animation/animate";
-import { process } from "../../../../animation/process";
+import { onStart } from "../../../../animation/on-start";
 import { tween } from "../../../../animation/tween";
 import { ARMDOZER_SPRITE_STANDARD_Z } from "../../position";
 import type { NeoLandozerModel } from "../model/neo-landozer-model";
@@ -10,7 +10,7 @@ export function hmToStand(
   model: NeoLandozerModel,
   sounds: NeoLandozerSounds,
 ): Animate {
-  return process(() => {
+  return onStart(() => {
     model.animation.type = "HM_TO_STAND";
     model.animation.frame = 0;
     sounds.motor.play();
@@ -34,7 +34,7 @@ export function hmToStand(
       ),
     )
     .chain(
-      process(() => {
+      onStart(() => {
         model.animation.type = "STAND";
         model.animation.frame = 0;
         model.position.z = ARMDOZER_SPRITE_STANDARD_Z;

@@ -1,5 +1,5 @@
 import { Animate } from "../../../animation/animate";
-import { process } from "../../../animation/process";
+import { onStart } from "../../../animation/on-start";
 import { tween } from "../../../animation/tween";
 import type { TurnIndicatorModel } from "../model/turn-indicator-model";
 
@@ -13,7 +13,7 @@ export function show(
   isPlayerTurn: boolean,
   model: TurnIndicatorModel,
 ): Animate {
-  return process(() => {
+  return onStart(() => {
     model.isPlayerTurn = isPlayerTurn;
   }).chain(
     tween(model, (t) =>
