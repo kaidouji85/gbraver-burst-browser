@@ -11,7 +11,7 @@ export const shinyaBurst: ConditionalAnimation<
   (props) =>
     isPlayerBurstActivated(props)
       ? process(() => {
-          props.view.dom.playerCryMessageWindow.visible(false);
+          props.view.dom.playerShoutMessageWindow.visible(false);
         })
       : null,
 ];

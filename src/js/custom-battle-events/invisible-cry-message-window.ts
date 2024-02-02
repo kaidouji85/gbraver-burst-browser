@@ -13,8 +13,8 @@ import {
 function invisibleCryMessageWindow(
   props: Readonly<CustomBattleEventProps>,
 ): void {
-  props.view.dom.playerCryMessageWindow.visible(false);
-  props.view.dom.enemyCryMessageWindow.visible(false);
+  props.view.dom.playerShoutMessageWindow.visible(false);
+  props.view.dom.enemyShoutMessageWindow.visible(false);
 }
 
 /**

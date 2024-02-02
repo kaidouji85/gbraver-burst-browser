@@ -11,7 +11,7 @@ export const shinyaPilotSkill: ConditionalAnimation<
   (props) =>
     isPlayerPilotSkillActivated(props)
       ? process(() => {
-          props.view.dom.playerCryMessageWindow.visible(false);
+          props.view.dom.playerShoutMessageWindow.visible(false);
         })
       : null,
 ];

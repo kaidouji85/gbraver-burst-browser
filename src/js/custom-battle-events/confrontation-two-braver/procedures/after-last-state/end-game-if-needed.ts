@@ -27,7 +27,7 @@ export async function endGameIfNeeded(
     yuuya.armdozer.hp === yuuya.armdozer.maxHp && yuuya.pilot.enableSkill;
   const isYuuyaNarrowVictory =
     yuuya.armdozer.hp < yuuya.armdozer.maxHp && !yuuya.pilot.enableSkill;
-  props.view.dom.enemyCryMessageWindow.visible(false);
+  props.view.dom.enemyShoutMessageWindow.visible(false);
   if (isYuuyaCompleteVictory) {
     await yuuyaCryWhenYuuyaCompleteVictory(props);
   } else if (isYuuyaNarrowVictory) {

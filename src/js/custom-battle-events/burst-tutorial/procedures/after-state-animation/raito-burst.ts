@@ -11,7 +11,7 @@ export const raitoBurst: ConditionalAnimation<
   (props) =>
     isEnemyBurstActivated(props)
       ? process(() => {
-          props.view.dom.enemyCryMessageWindow.visible(false);
+          props.view.dom.enemyShoutMessageWindow.visible(false);
         })
       : null,
 ];

@@ -35,8 +35,8 @@ export const playerPilotShout = (
   message: string,
 ): Animate =>
   process(() => {
-    pilotShout(props.view.dom.playerCryMessageWindow, face, message);
-    props.view.dom.enemyCryMessageWindow.visible(false);
+    pilotShout(props.view.dom.playerShoutMessageWindow, face, message);
+    props.view.dom.enemyShoutMessageWindow.visible(false);
   });
 
 /**
@@ -51,6 +51,6 @@ export const enemyPilotShout = (
   message: string,
 ): Animate =>
   process(() => {
-    pilotShout(props.view.dom.enemyCryMessageWindow, face, message);
-    props.view.dom.playerCryMessageWindow.visible(false);
+    pilotShout(props.view.dom.enemyShoutMessageWindow, face, message);
+    props.view.dom.playerShoutMessageWindow.visible(false);
   });
