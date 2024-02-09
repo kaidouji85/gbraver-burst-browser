@@ -5,6 +5,7 @@ import { PilotSkillShout } from "./pilot-skill-shout";
 import { raitoAttackShout, raitoDefenseShout } from "./raito-shout";
 import { shinyaAttackShout, shinyaDefenseShout } from "./shinya-shout";
 import { tsubasaAttackShout, tsubasaDefenseShout } from "./tsubasa-shout";
+import { yuuyaAttackShout, yuuyaDefenseShout } from "./yuuya-shout";
 
 /**
  * 状況に応じたパイロット叫び情報を取得する
@@ -46,6 +47,14 @@ export function getPilotSkillShout(
 
   if (player.pilot.id === PilotIds.RAITO && !isPilotSkillInvokerActive) {
     return raitoDefenseShout();
+  }
+
+  if (player.pilot.id === PilotIds.YUUYA && isPilotSkillInvokerActive) {
+    return yuuyaAttackShout(player);
+  }
+
+  if (player.pilot.id === PilotIds.YUUYA && !isPilotSkillInvokerActive) {
+    return yuuyaDefenseShout(player);
   }
 
   return null;
