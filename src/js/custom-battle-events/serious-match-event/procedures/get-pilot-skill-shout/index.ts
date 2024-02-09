@@ -3,6 +3,7 @@ import { PilotIds, PlayerState } from "gbraver-burst-core";
 import { gaiAttackShout, gaiDefenseShout } from "./gai-shout";
 import { PilotSkillShout } from "./pilot-skill-shout";
 import { shinyaAttackShout, shinyaDefenseShout } from "./shinya-shout";
+import { tsubasaAttackShout, tsubasaDefenseShout } from "./tsubasa-shout";
 
 /**
  * 状況に応じたパイロット叫び情報を取得する
@@ -28,6 +29,14 @@ export function getPilotSkillShout(
 
   if (player.pilot.id === PilotIds.GAI && !isPilotSkillInvokerActive) {
     return gaiDefenseShout();
+  }
+
+  if (player.pilot.id === PilotIds.TSUBASA && isPilotSkillInvokerActive) {
+    return tsubasaAttackShout(player);
+  }
+
+  if (player.pilot.id === PilotIds.TSUBASA && !isPilotSkillInvokerActive) {
+    return tsubasaDefenseShout();
   }
 
   return null;
