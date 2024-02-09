@@ -20,21 +20,26 @@ export function onStateAnimation(
   }
 
   const pilotSkill: PilotSkillEffect = props.currentState.effect;
-  const invokerPlayer = props.currentState.players.find((p) => p.playerId === pilotSkill.invokerId);
+  const invokerPlayer = props.currentState.players.find(
+    (p) => p.playerId === pilotSkill.invokerId,
+  );
   if (!invokerPlayer) {
     return empty();
   }
 
-  const isPilotSkillInvokerActive = props.currentState.effect.invokerId === props.currentState.activePlayerId;
+  const isPilotSkillInvokerActive =
+    props.currentState.effect.invokerId === props.currentState.activePlayerId;
   const shout = getPilotSkillShout(invokerPlayer, isPilotSkillInvokerActive);
   if (!shout) {
     return empty();
   }
 
   const isPlayerInvokePilotSkill = pilotSkill.invokerId === props.playerId;
-  const shoutFunc = isPlayerInvokePilotSkill ? playerPilotShout : enemyPilotShout;
+  const shoutFunc = isPlayerInvokePilotSkill
+    ? playerPilotShout
+    : enemyPilotShout;
   const { face, message } = shout;
   return onStart(() => {
     shoutFunc(props, face, message);
-  });  
+  });
 }

@@ -7,55 +7,47 @@ import { shinyaAttackShout, shinyaDefenseShout } from "./shinya-shout";
 import { tsubasaAttackShout, tsubasaDefenseShout } from "./tsubasa-shout";
 import { yuuyaAttackShout, yuuyaDefenseShout } from "./yuuya-shout";
 
+/** パイロット叫びマスタ */
+const pilotShouts = {
+  [PilotIds.SHINYA]: {
+    attack: shinyaAttackShout,
+    defense: shinyaDefenseShout,
+  },
+  [PilotIds.GAI]: {
+    attack: gaiAttackShout,
+    defense: gaiDefenseShout,
+  },
+  [PilotIds.TSUBASA]: {
+    attack: tsubasaAttackShout,
+    defense: tsubasaDefenseShout,
+  },
+  [PilotIds.RAITO]: {
+    attack: raitoAttackShout,
+    defense: raitoDefenseShout,
+  },
+  [PilotIds.YUUYA]: {
+    attack: yuuyaAttackShout,
+    defense: yuuyaDefenseShout,
+  },
+};
+
 /**
  * 状況に応じたパイロット叫び情報を取得する
- * @param player プレイヤー情報
+ * @param pilotSkillInvoker スキル発動者のステート
  * @param isPilotSkillInvokerActive パイロットスキル発動者のターンか、trueで発動者のターン
  * @return 取得結果、見つからない場合はnullを返す
  */
 export function getPilotSkillShout(
-  player: PlayerState,
+  pilotSkillInvoker: PlayerState,
   isPilotSkillInvokerActive: boolean,
 ): PilotSkillShout | null {
-  if (player.pilot.id === PilotIds.SHINYA && isPilotSkillInvokerActive) {
-    return shinyaAttackShout();
+  const pilotShout = pilotShouts[pilotSkillInvoker.pilot.id];
+  if (!pilotShout) {
+    return null;
   }
 
-  if (player.pilot.id === PilotIds.SHINYA && !isPilotSkillInvokerActive) {
-    return shinyaDefenseShout(player);
-  }
-
-  if (player.pilot.id === PilotIds.GAI && isPilotSkillInvokerActive) {
-    return gaiAttackShout(player);
-  }
-
-  if (player.pilot.id === PilotIds.GAI && !isPilotSkillInvokerActive) {
-    return gaiDefenseShout();
-  }
-
-  if (player.pilot.id === PilotIds.TSUBASA && isPilotSkillInvokerActive) {
-    return tsubasaAttackShout(player);
-  }
-
-  if (player.pilot.id === PilotIds.TSUBASA && !isPilotSkillInvokerActive) {
-    return tsubasaDefenseShout();
-  }
-
-  if (player.pilot.id === PilotIds.RAITO && isPilotSkillInvokerActive) {
-    return raitoAttackShout();
-  }
-
-  if (player.pilot.id === PilotIds.RAITO && !isPilotSkillInvokerActive) {
-    return raitoDefenseShout();
-  }
-
-  if (player.pilot.id === PilotIds.YUUYA && isPilotSkillInvokerActive) {
-    return yuuyaAttackShout(player);
-  }
-
-  if (player.pilot.id === PilotIds.YUUYA && !isPilotSkillInvokerActive) {
-    return yuuyaDefenseShout(player);
-  }
-
-  return null;
+  const shoutFunc = isPilotSkillInvokerActive
+    ? pilotShout.attack
+    : pilotShout.defense;
+  return shoutFunc(pilotSkillInvoker);
 }

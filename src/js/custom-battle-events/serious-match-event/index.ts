@@ -1,5 +1,8 @@
 import { Animate } from "../../animation/animate";
-import { CustomBattleEvent, CustomStateAnimation } from "../../td-scenes/battle/custom-battle-event";
+import {
+  CustomBattleEvent,
+  CustomStateAnimation,
+} from "../../td-scenes/battle/custom-battle-event";
 import { EmptyCustomBattleEvent } from "../empty-custom-battle-event";
 import { afterStateAnimation } from "./procedures/after-state-animation";
 import { onStateAnimation } from "./procedures/on-state-animation";
