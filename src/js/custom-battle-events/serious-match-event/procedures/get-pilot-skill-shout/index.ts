@@ -1,5 +1,6 @@
 import { PilotIds, PlayerState } from "gbraver-burst-core";
 
+import { gaiAttackShout, gaiDefenseShout } from "./gai-shout";
 import { PilotSkillShout } from "./pilot-skill-shout";
 import { shinyaAttackShout, shinyaDefenseShout } from "./shinya-shout";
 
@@ -15,11 +16,19 @@ export function getPilotSkillShout(
 ): PilotSkillShout | null {
   if (player.pilot.id === PilotIds.SHINYA && isPilotSkillInvokerActive) {
     return shinyaAttackShout();
-  } else if (
-    player.pilot.id === PilotIds.SHINYA &&
-    !isPilotSkillInvokerActive
-  ) {
+  }
+
+  if (player.pilot.id === PilotIds.SHINYA && !isPilotSkillInvokerActive) {
     return shinyaDefenseShout(player);
   }
+
+  if (player.pilot.id === PilotIds.GAI && isPilotSkillInvokerActive) {
+    return gaiAttackShout(player);
+  }
+
+  if (player.pilot.id === PilotIds.GAI && !isPilotSkillInvokerActive) {
+    return gaiDefenseShout();
+  }
+
   return null;
 }
