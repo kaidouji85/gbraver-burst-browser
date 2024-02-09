@@ -34,12 +34,12 @@ export function onStateAnimation(
     return empty();
   }
 
-  const isPlayerInvokePilotSkill = pilotSkill.invokerId === props.playerId;
-  const shoutFunc = isPlayerInvokePilotSkill
+  const isPlayerPilotSkillInvoker = pilotSkill.invokerId === props.playerId;
+  const pilotShout = isPlayerPilotSkillInvoker
     ? playerPilotShout
     : enemyPilotShout;
   const { face, message } = shout;
   return onStart(() => {
-    shoutFunc(props, face, message);
+    pilotShout(props, face, message);
   });
 }
