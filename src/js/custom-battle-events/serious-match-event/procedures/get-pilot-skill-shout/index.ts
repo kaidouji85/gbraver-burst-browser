@@ -2,6 +2,7 @@ import { PilotIds, PlayerState } from "gbraver-burst-core";
 
 import { gaiAttackShout, gaiDefenseShout } from "./gai-shout";
 import { PilotSkillShout } from "./pilot-skill-shout";
+import { raitoAttackShout, raitoDefenseShout } from "./raito-shout";
 import { shinyaAttackShout, shinyaDefenseShout } from "./shinya-shout";
 import { tsubasaAttackShout, tsubasaDefenseShout } from "./tsubasa-shout";
 
@@ -37,6 +38,14 @@ export function getPilotSkillShout(
 
   if (player.pilot.id === PilotIds.TSUBASA && !isPilotSkillInvokerActive) {
     return tsubasaDefenseShout();
+  }
+
+  if (player.pilot.id === PilotIds.RAITO && isPilotSkillInvokerActive) {
+    return raitoAttackShout();
+  }
+
+  if (player.pilot.id === PilotIds.RAITO && !isPilotSkillInvokerActive) {
+    return raitoDefenseShout();
   }
 
   return null;
