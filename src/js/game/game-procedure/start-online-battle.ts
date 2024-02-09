@@ -1,6 +1,7 @@
 import { Battle as BattleSDK } from "@gbraver-burst-network/browser-sdk";
 
 import { fadeOut, stop } from "../../bgm/bgm-operators";
+import { createSeriousMatchEvent } from "../../custom-battle-events/serious-match-event";
 import { NetworkErrorDialog } from "../../dom-dialogs/network-error/network-error-dialog";
 import { WaitingDialog } from "../../dom-dialogs/waiting/waiting-dialog";
 import { MatchCard } from "../../dom-scenes/match-card";
@@ -92,6 +93,7 @@ export async function startOnlineBattle(
     renderer: props.renderer,
     controllerType: config.battleControllerType,
     emergencyStop: battle.suddenlyBattleNotifier(),
+    customBattleEvent: createSeriousMatchEvent(),
   });
   props.tdBinder.bind(battleScene, battleSceneConnector);
   await waitAnimationFrame();
