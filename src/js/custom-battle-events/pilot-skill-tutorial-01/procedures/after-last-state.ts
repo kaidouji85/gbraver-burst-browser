@@ -1,5 +1,6 @@
 import { LastState } from "../../../td-scenes/battle/custom-battle-event";
 import { invisibleAllMessageWindows } from "../../invisible-all-message-windows";
+import { invisibleShoutMessageWindowWhenGameEnd } from "../../invisible-shout-message-window";
 import { PilotSkillTutorial01Props } from "../props";
 import { PilotSkillTutorial01State } from "../state";
 import { playerLose } from "../stories/player-lose";
@@ -30,8 +31,8 @@ async function executePlayerLoseIfNeeded(
 export async function afterLastState(
   props: Readonly<LastState & PilotSkillTutorial01Props>,
 ): Promise<PilotSkillTutorial01State> {
-  const isPlayerLoseExecuted = await executePlayerLoseIfNeeded(props);
-  if (isPlayerLoseExecuted) {
+  invisibleShoutMessageWindowWhenGameEnd(props);
+  if (await executePlayerLoseIfNeeded(props)) {
     return props.state;
   }
 
