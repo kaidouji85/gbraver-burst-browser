@@ -11,5 +11,5 @@ export const tsubasaBurstShout = (
   props: Readonly<CustomBattleEventProps>,
 ) =>
   onStart(() => {
-    enemyPilotOnlyShout(props, "Tsubasa", "バーストで0防御回避だ");
+    enemyPilotOnlyShout(props, "Tsubasa", "バーストで0防御の隙をカバーだ");
   });
