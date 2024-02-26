@@ -18,5 +18,5 @@ export const tsubasaAttackShout = (player: PlayerState): PilotSkillShout => ({
  */
 export const tsubasaDefenseShout = (): PilotSkillShout => ({
   face: "Tsubasa",
-  message: `このターンを凌げば`,
+  message: `このターンを凌げれば`,
 });
