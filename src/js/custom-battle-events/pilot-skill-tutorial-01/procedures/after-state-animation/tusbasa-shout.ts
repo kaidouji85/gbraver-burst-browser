@@ -8,9 +8,10 @@ import { PilotSkillTutorial01Props } from "../../props";
 export const tsubasaShout: ConditionalAnimation<
   CustomStateAnimation & PilotSkillTutorial01Props
 >[] = [
-  (props) => isEnemyPilotSkillActivated(props)
-    ? onStart(() => {
-      props.view.dom.enemyShoutMessageWindow.visible(false);
-    })
-    : null,
+  (props) =>
+    isEnemyPilotSkillActivated(props)
+      ? onStart(() => {
+          props.view.dom.enemyShoutMessageWindow.visible(false);
+        })
+      : null,
 ];

@@ -1,7 +1,10 @@
 import { Animate } from "../../../../animation/animate";
 import { empty } from "../../../../animation/delay";
 import { CustomStateAnimation } from "../../../../td-scenes/battle/custom-battle-event";
-import { ConditionalAnimation, getAnimationIfConditionMet } from "../../../get-animation-if-conditional-met";
+import {
+  ConditionalAnimation,
+  getAnimationIfConditionMet,
+} from "../../../get-animation-if-conditional-met";
 import { PilotSkillTutorial01Props } from "../../props";
 import { tsubasaShout } from "./tusbasa-shout";
 
@@ -15,8 +18,6 @@ export function afterStateAnimation(
 ): Animate {
   const conditionalAnimations: ConditionalAnimation<
     CustomStateAnimation & PilotSkillTutorial01Props
-  >[] = [
-    ...tsubasaShout,
-  ];
+  >[] = [...tsubasaShout];
   return getAnimationIfConditionMet(props, conditionalAnimations) ?? empty();
 }
