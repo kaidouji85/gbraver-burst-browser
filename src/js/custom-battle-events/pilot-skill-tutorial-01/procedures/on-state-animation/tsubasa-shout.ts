@@ -1,8 +1,11 @@
 import { CustomStateAnimation } from "../../../../td-scenes/battle/custom-battle-event";
+import { playerBattleCount } from "../../../battle-count";
 import { ConditionalAnimation } from "../../../get-animation-if-conditional-met";
 import { isEnemyBurstActivated } from "../../../is-burst-activated";
 import { isEnemyPilotSkillActivated } from "../../../is-pilot-skill-activated";
+import { separatePlayersFromCurrentState } from "../../../separate-players";
 import { tsubasaBurstShout } from "../../animation/tsubasa-burst-shout";
+import { tsubasaFirstAttackShout } from "../../animation/tsubasa-first-attack-shout";
 import { tsubasaVictoryDeclaration } from "../../animation/tsubasa-victory-declaration";
 import { PilotSkillTutorial01Props } from "../../props";
 
@@ -13,4 +16,17 @@ export const tsubasaShout: ConditionalAnimation<
   (props) =>
     isEnemyPilotSkillActivated(props) ? tsubasaVictoryDeclaration(props) : null,
   (props) => (isEnemyBurstActivated(props) ? tsubasaBurstShout(props) : null),
+  (props) => {
+    const players = separatePlayersFromCurrentState(props);
+    if (!players) {
+      return null;
+    }
+
+    const { enemy } = players;
+    return playerBattleCount(props.stateHistory, enemy.playerId) === 1 &&
+      props.currentState.effect.name === "BatteryDeclaration" &&
+      props.currentState.effect.attacker === enemy.playerId
+      ? tsubasaFirstAttackShout(props)
+      : null;
+  },
 ];
