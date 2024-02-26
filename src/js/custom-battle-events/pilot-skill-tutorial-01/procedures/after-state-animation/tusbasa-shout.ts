@@ -1,6 +1,7 @@
 import { onStart } from "../../../../animation/on-start";
 import { CustomStateAnimation } from "../../../../td-scenes/battle/custom-battle-event";
 import { ConditionalAnimation } from "../../../get-animation-if-conditional-met";
+import { isEnemyBurstActivated } from "../../../is-burst-activated";
 import { isEnemyPilotSkillActivated } from "../../../is-pilot-skill-activated";
 import { PilotSkillTutorial01Props } from "../../props";
 
@@ -10,6 +11,12 @@ export const tsubasaShout: ConditionalAnimation<
 >[] = [
   (props) =>
     isEnemyPilotSkillActivated(props)
+      ? onStart(() => {
+          props.view.dom.enemyShoutMessageWindow.visible(false);
+        })
+      : null,
+  (props) =>
+    isEnemyBurstActivated(props)
       ? onStart(() => {
           props.view.dom.enemyShoutMessageWindow.visible(false);
         })
