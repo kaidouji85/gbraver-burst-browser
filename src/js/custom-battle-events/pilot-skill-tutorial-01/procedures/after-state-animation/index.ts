@@ -1,8 +1,8 @@
-import { Animate } from "../../../animation/animate";
-import { empty } from "../../../animation/delay";
-import { onStart } from "../../../animation/on-start";
-import { CustomStateAnimation } from "../../../td-scenes/battle/custom-battle-event";
-import { isPilotSkillActivatedByTsubasa } from "./is-pilot-skill-activated-by-tsubasa";
+import { Animate } from "../../../../animation/animate";
+import { empty } from "../../../../animation/delay";
+import { onStart } from "../../../../animation/on-start";
+import { CustomStateAnimation } from "../../../../td-scenes/battle/custom-battle-event";
+import { isPilotSkillActivatedByTsubasa } from "../is-pilot-skill-activated-by-tsubasa";
 
 /**
  * ステートアニメ終了後に呼ばれる、カスタムステートアニメーション
