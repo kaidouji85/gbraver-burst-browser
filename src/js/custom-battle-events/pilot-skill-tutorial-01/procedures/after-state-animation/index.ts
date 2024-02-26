@@ -1,8 +1,9 @@
 import { Animate } from "../../../../animation/animate";
 import { empty } from "../../../../animation/delay";
-import { onStart } from "../../../../animation/on-start";
 import { CustomStateAnimation } from "../../../../td-scenes/battle/custom-battle-event";
-import { isPilotSkillActivatedByTsubasa } from "../is-pilot-skill-activated-by-tsubasa";
+import { ConditionalAnimation, getAnimationIfConditionMet } from "../../../get-animation-if-conditional-met";
+import { PilotSkillTutorial01Props } from "../../props";
+import { tsubasaShout } from "./tusbasa-shout";
 
 /**
  * ステートアニメ終了後に呼ばれる、カスタムステートアニメーション
@@ -10,13 +11,12 @@ import { isPilotSkillActivatedByTsubasa } from "../is-pilot-skill-activated-by-t
  * @return カスタムステートアニメーション
  */
 export function afterStateAnimation(
-  props: Readonly<CustomStateAnimation>,
+  props: Readonly<CustomStateAnimation & PilotSkillTutorial01Props>,
 ): Animate {
-  if (isPilotSkillActivatedByTsubasa(props)) {
-    return onStart(() => {
-      props.view.dom.enemyShoutMessageWindow.visible(false);
-    });
-  }
-
-  return empty();
+  const conditionalAnimations: ConditionalAnimation<
+    CustomStateAnimation & PilotSkillTutorial01Props
+  >[] = [
+    ...tsubasaShout,
+  ];
+  return getAnimationIfConditionMet(props, conditionalAnimations) ?? empty();
 }
