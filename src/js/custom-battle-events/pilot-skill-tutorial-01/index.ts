@@ -32,12 +32,12 @@ class PilotSkillTutorial01 extends EmptyCustomBattleEvent {
 
   /** @override */
   onStateAnimation(props: CustomStateAnimation): Animate {
-    return onStateAnimation(props);
+    return onStateAnimation({ ...props, ...this.props });
   }
 
   /** @override */
   afterStateAnimation(props: CustomStateAnimation): Animate {
-    return afterStateAnimation(props);
+    return afterStateAnimation({ ...props, ...this.props });
   }
 
   /** @override */
