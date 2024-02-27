@@ -7,6 +7,7 @@ import {
 } from "../../../get-animation-if-conditional-met";
 import { invisibleShoutMessageWindowWhenTurnChange } from "../../../invisible-shout-message-window";
 import { PilotSkillTutorial01Props } from "../../props";
+import { shinyaShout } from "./shinya-shout";
 import { tsubasaShout } from "./tsubasa-shout";
 
 /**
@@ -19,6 +20,10 @@ export function onStateAnimation(
 ): Animate {
   const conditionalAnimations: ConditionalAnimation<
     CustomStateAnimation & PilotSkillTutorial01Props
-  >[] = [...tsubasaShout, invisibleShoutMessageWindowWhenTurnChange];
+  >[] = [
+    ...tsubasaShout,
+    ...shinyaShout,
+    invisibleShoutMessageWindowWhenTurnChange,
+  ];
   return getAnimationIfConditionMet(props, conditionalAnimations) ?? empty();
 }

@@ -1,15 +1,19 @@
 import { onStart } from "../../../animation/on-start";
 import { CustomBattleEventProps } from "../../../td-scenes/battle/custom-battle-event";
-import { enemyPilotOnlyShout } from "../../pilot-shout";
+import { playerPilotOnlyShout } from "../../pilot-shout";
 
 /**
- * ツバサ先輩 バースト 叫び
+ * シンヤ ファーストアタック 叫び2
  * @param props イベントプロパティ
  * @return アニメーション
  */
-export const tsubasaBurstShout = (
+export const shinyaFirstAttackShout2 = (
   props: Readonly<CustomBattleEventProps>,
 ) =>
   onStart(() => {
-    enemyPilotOnlyShout(props, "Tsubasa", "ウィングドーザ バーストON！！");
+    playerPilotOnlyShout(
+      props,
+      "Shinya",
+      "バーストにはこういう使い方もあるんスね",
+    );
   });
