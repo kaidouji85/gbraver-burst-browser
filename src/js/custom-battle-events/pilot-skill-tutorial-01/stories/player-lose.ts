@@ -16,7 +16,7 @@ export async function playerLose(
 ): Promise<void> {
   activeRightMessageWindowWithFace(props, "Shinya");
   await scrollRightMessages(props, [
-    ["シンヤ", "「クッ あと少しで勝てそうだったのに」"],
+    ["シンヤ", "「あと少しで勝てそうだったのに」"],
   ]);
   props.view.dom.rightMessageWindow.darken();
   activeLeftMessageWindowWithFace(props, "Tsubasa");
