@@ -38,11 +38,14 @@ export const tsubasaShout: ConditionalAnimation<
     }
 
     const { enemy } = players;
-    const hasEnemyDeliveredFinishBlow = hasDeliveredFinishBlow(props.stateHistory, enemy.playerId);
+    const hasEnemyDeliveredFinishBlow = hasDeliveredFinishBlow(
+      props.stateHistory,
+      enemy.playerId,
+    );
     return props.currentState.effect.name === "BatteryDeclaration" &&
-    props.currentState.effect.attacker === enemy.playerId &&
-    hasEnemyDeliveredFinishBlow
-    ? tsubasaFinishBlowShout(props)
-    : null;
-  }
+      props.currentState.effect.attacker === enemy.playerId &&
+      hasEnemyDeliveredFinishBlow
+      ? tsubasaFinishBlowShout(props)
+      : null;
+  },
 ];

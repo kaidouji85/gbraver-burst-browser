@@ -7,9 +7,7 @@ import { enemyPilotOnlyShout } from "../../pilot-shout";
  * @param props イベントプロパティ
  * @return アニメーション
  */
-export const tsubasaBurstShout = (
-  props: Readonly<CustomBattleEventProps>,
-) =>
+export const tsubasaBurstShout = (props: Readonly<CustomBattleEventProps>) =>
   onStart(() => {
     enemyPilotOnlyShout(props, "Tsubasa", "ウィングドーザ バーストON！！");
   });
