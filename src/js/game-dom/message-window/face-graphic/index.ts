@@ -1,8 +1,8 @@
 import { Resources } from "../../../resource";
-import { ROOT_CLASS, ROOT_CLASS_INVISIBLE } from "./class-name";
-import { faceConfigs } from "./face-configs";
-import { FaceOrientation } from "./face-orientation";
-import { FaceType } from "./face-type";
+import { ROOT_CLASS, ROOT_CLASS_INVISIBLE } from "./dom/class-name";
+import { faceConfigs } from "./face/face-configs";
+import { FaceOrientation } from "./face/face-orientation";
+import { FaceType } from "./face/face-type";
 
 /** 顔画像 */
 export class FaceGraphic {

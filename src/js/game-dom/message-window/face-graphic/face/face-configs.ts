@@ -1,5 +1,5 @@
-import { PathIds } from "../../../resource/path/ids";
-import { ROOT_CLASS } from "./class-name";
+import { PathIds } from "../../../../resource/path/ids";
+import { ROOT_CLASS } from "../dom/class-name";
 import { FaceConfig } from "./face-config";
 
 /** 顔画像設定をあつめたもの */

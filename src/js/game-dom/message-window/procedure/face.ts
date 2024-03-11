@@ -1,4 +1,4 @@
-import { FaceType } from "../face-graphic/face-type";
+import { FaceType } from "../face-graphic/face/face-type";
 import { MessageWindowProps } from "../props";
 import { getTargetFaceGraphic } from "./get-target-face-graphic";
 

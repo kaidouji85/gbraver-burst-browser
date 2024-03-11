@@ -1,4 +1,4 @@
-import { FaceType } from "../../../../game-dom/message-window/face-graphic/face-type";
+import { FaceType } from "../../../../game-dom/message-window/face-graphic/face/face-type";
 
 /** パイロット叫び情報 */
 export type PilotSkillShout = {

@@ -1,5 +1,5 @@
 import { MessageWindow } from "../game-dom/message-window";
-import { FaceType } from "../game-dom/message-window/face-graphic/face-type";
+import { FaceType } from "../game-dom/message-window/face-graphic/face/face-type";
 import { CustomBattleEventProps } from "../td-scenes/battle/custom-battle-event";
 
 /**

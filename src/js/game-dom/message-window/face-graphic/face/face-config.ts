@@ -1,4 +1,4 @@
-import { Resources } from "../../../resource";
+import { Resources } from "../../../../resource";
 import { FaceType } from "./face-type";
 
 /** 顔画像設定 */
