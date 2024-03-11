@@ -1,5 +1,5 @@
-import { Resources } from "../../resource";
-import { PathIds } from "../../resource/path/ids";
+import { Resources } from "../../../resource";
+import { PathIds } from "../../../resource/path/ids";
 
 /** ルートHTML要素class属性 */
 const ROOT_CLASS = "face-graphic";
