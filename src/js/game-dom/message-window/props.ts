@@ -5,7 +5,8 @@ import { NEXT_MESSAGE_ICON_CLASS_INVISIBLE } from "./dom/class-name";
 import { extractElements } from "./dom/elements";
 import { rootInnerHTML } from "./dom/root-inner-html";
 import { toRootClass } from "./dom/to-root-class";
-import { FaceGraphic, FaceOrientation } from "./face-graphic";
+import { FaceGraphic } from "./face-graphic";
+import { FaceOrientation } from "./face-graphic/config/face-orientation";
 import { FacePosition } from "./face-position";
 import { WindowType } from "./window-type";
 
