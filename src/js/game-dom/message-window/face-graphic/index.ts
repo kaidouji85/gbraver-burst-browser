@@ -1,33 +1,22 @@
 import { Resources } from "../../../resource";
-import { ROOT_CLASS, ROOT_CLASS_INVISIBLE } from "./dom/class-name";
-import { faceConfigs } from "./face/face-configs";
 import { FaceOrientation } from "./face/face-orientation";
 import { FaceType } from "./face/face-type";
+import { createFaceGraphicProps } from "./procedures/create-face-graphic-props";
+import { face } from "./procedures/face";
+import { visible } from "./procedures/visible";
+import { FaceGraphicProps } from "./props";
 
 /** 顔画像 */
 export class FaceGraphic {
-  /** ルートHTML要素 */
-  #root: HTMLElement;
-  /** 顔グラフィックを集めたもの */
-  #images: HTMLImageElement[];
+  /** コンポネントのプロパティ */
+  #props: FaceGraphicProps;
 
   /**
    * コンストラクタ
    * @param resources リソース管理オブジェクト
    */
   constructor(resources: Resources) {
-    this.#root = document.createElement("div");
-    this.#root.className = ROOT_CLASS_INVISIBLE;
-    this.#images = faceConfigs.map((config) => {
-      const img = document.createElement("img");
-      img.className = config.invisibleClassName;
-      img.src = config.src(resources);
-      img.dataset.facetype = config.type;
-      return img;
-    });
-    this.#images.forEach((img) => {
-      this.#root.appendChild(img);
-    });
+    this.#props = createFaceGraphicProps(resources);
   }
 
   /**
@@ -35,7 +24,7 @@ export class FaceGraphic {
    * @return 取得結果
    */
   getRootHTMLElement(): HTMLElement {
-    return this.#root;
+    return this.#props.root;
   }
 
   /**
@@ -43,7 +32,7 @@ export class FaceGraphic {
    * @param isVisible 表示フラグ、trueで表示する
    */
   visible(isVisible: boolean): void {
-    this.#root.className = isVisible ? ROOT_CLASS : ROOT_CLASS_INVISIBLE;
+    visible(this.#props, isVisible);
   }
 
   /**
@@ -52,21 +41,6 @@ export class FaceGraphic {
    * @param faceOrientation 顔画像の方向
    */
   face(faceType: FaceType, faceOrientation: FaceOrientation): void {
-    this.#images.forEach((img) => {
-      const config = faceConfigs.find((v) => v.type === img.dataset.facetype);
-      if (!config) {
-        return;
-      }
-
-      if (faceType !== img.dataset.facetype) {
-        img.className = config.invisibleClassName;
-        return;
-      }
-
-      img.className =
-        faceOrientation === "Right"
-          ? config.rightwardClassName
-          : config.className;
-    });
+    face(this.#props, faceType, faceOrientation);
   }
 }
