@@ -1,12 +1,8 @@
 import { Resources } from "../../../resource";
 import { PathIds } from "../../../resource/path/ids";
+import { FaceOrientation } from "./face-orientation";
 import { ROOT_CLASS, ROOT_CLASS_INVISIBLE } from "./class-name";
-
-/** 顔画像タイプ */
-export type FaceType = "Shinya" | "Gai" | "Raito" | "Tsubasa" | "Yuuya";
-
-/** 顔画像の向き */
-export type FaceOrientation = "Left" | "Right";
+import { FaceType } from "./face-type";
 
 /** 顔画像設定 */
 type Config = {
