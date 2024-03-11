@@ -1,75 +1,8 @@
 import { Resources } from "../../../resource";
-import { PathIds } from "../../../resource/path/ids";
-import { FaceOrientation } from "./face-orientation";
 import { ROOT_CLASS, ROOT_CLASS_INVISIBLE } from "./class-name";
+import { faceConfigs } from "./face-configs";
+import { FaceOrientation } from "./face-orientation";
 import { FaceType } from "./face-type";
-
-/** 顔画像設定 */
-type Config = {
-  /** 顔画像タイプ */
-  type: FaceType;
-  /** class属性 */
-  className: string;
-  /** 右向き時のclass属性 */
-  rightwardClassName: string;
-  /** 非表示時のclass属性 */
-  invisibleClassName: string;
-
-  /**
-   * 顔画像パス
-   * @param resources リソース管理オブジェクト
-   * @return 顔画像パス
-   */
-  src: (resources: Resources) => string;
-};
-
-/** 顔画像設定をあつめたもの */
-const configs: Config[] = [
-  {
-    type: "Shinya",
-    src: (resources) =>
-      resources.paths.find((v) => v.id === PathIds.SHINYA_SKILL_CUTIN)?.path ??
-      "",
-    className: `${ROOT_CLASS}__shinya`,
-    rightwardClassName: `${ROOT_CLASS}__shinya--right`,
-    invisibleClassName: `${ROOT_CLASS}__shinya--invisible`,
-  },
-  {
-    type: "Gai",
-    src: (resources) =>
-      resources.paths.find((v) => v.id === PathIds.GAI_SKILL_CUTIN)?.path ?? "",
-    className: `${ROOT_CLASS}__gai`,
-    rightwardClassName: `${ROOT_CLASS}__gai--right`,
-    invisibleClassName: `${ROOT_CLASS}__gai--invisible`,
-  },
-  {
-    type: "Raito",
-    src: (resources) =>
-      resources.paths.find((v) => v.id === PathIds.RAITO_SKILL_CUTIN)?.path ??
-      "",
-    className: `${ROOT_CLASS}__raito`,
-    rightwardClassName: `${ROOT_CLASS}__raito--right`,
-    invisibleClassName: `${ROOT_CLASS}__raito--invisible`,
-  },
-  {
-    type: "Tsubasa",
-    src: (resources) =>
-      resources.paths.find((v) => v.id === PathIds.TSUBASA_SKILL_CUTIN)?.path ??
-      "",
-    className: `${ROOT_CLASS}__tsubasa`,
-    rightwardClassName: `${ROOT_CLASS}__tsubasa--right`,
-    invisibleClassName: `${ROOT_CLASS}__tsubasa--invisible`,
-  },
-  {
-    type: "Yuuya",
-    src: (resources) =>
-      resources.paths.find((v) => v.id === PathIds.YUUYA_SKILL_CUTIN)?.path ??
-      "",
-    className: `${ROOT_CLASS}__yuuya`,
-    rightwardClassName: `${ROOT_CLASS}__yuuya--right`,
-    invisibleClassName: `${ROOT_CLASS}__yuuya--invisible`,
-  },
-];
 
 /** 顔画像 */
 export class FaceGraphic {
@@ -85,7 +18,7 @@ export class FaceGraphic {
   constructor(resources: Resources) {
     this.#root = document.createElement("div");
     this.#root.className = ROOT_CLASS_INVISIBLE;
-    this.#images = configs.map((config) => {
+    this.#images = faceConfigs.map((config) => {
       const img = document.createElement("img");
       img.className = config.invisibleClassName;
       img.src = config.src(resources);
@@ -120,7 +53,7 @@ export class FaceGraphic {
    */
   face(faceType: FaceType, faceOrientation: FaceOrientation): void {
     this.#images.forEach((img) => {
-      const config = configs.find((v) => v.type === img.dataset.facetype);
+      const config = faceConfigs.find((v) => v.type === img.dataset.facetype);
       if (!config) {
         return;
       }
