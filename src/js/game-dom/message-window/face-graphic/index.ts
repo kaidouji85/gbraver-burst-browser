@@ -1,11 +1,6 @@
 import { Resources } from "../../../resource";
 import { PathIds } from "../../../resource/path/ids";
-
-/** ルートHTML要素class属性 */
-const ROOT_CLASS = "face-graphic";
-
-/** 顔画像非表示時のルートHTML要素class属性 */
-const ROOT_CLASS_INVISIBLE = `${ROOT_CLASS}--invisible`;
+import { ROOT_CLASS, ROOT_CLASS_INVISIBLE } from "./class-name";
 
 /** 顔画像タイプ */
 export type FaceType = "Shinya" | "Gai" | "Raito" | "Tsubasa" | "Yuuya";
