@@ -6,7 +6,7 @@ import { extractElements } from "./dom/elements";
 import { rootInnerHTML } from "./dom/root-inner-html";
 import { toRootClass } from "./dom/to-root-class";
 import { FaceGraphic } from "./face-graphic";
-import { FaceOrientation } from "./face-graphic/face/face-orientation";
+import { FaceOrientation } from "./face-graphic/config/face-orientation";
 import { FacePosition } from "./face-position";
 import { WindowType } from "./window-type";
 

@@ -1,6 +1,6 @@
-import { faceConfigs } from "../face/face-configs";
-import { FaceOrientation } from "../face/face-orientation";
-import { FaceType } from "../face/face-type";
+import { faceConfigs } from "../config/face-configs";
+import { FaceOrientation } from "../config/face-orientation";
+import { FaceType } from "../config/face-type";
 import { FaceGraphicProps } from "../props";
 
 /**

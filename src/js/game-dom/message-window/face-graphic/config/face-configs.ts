@@ -6,7 +6,8 @@ import { FaceConfig } from "./face-config";
 export const faceConfigs: FaceConfig[] = [
   {
     type: "Shinya",
-    src: (resources) => resources.paths.find((v) => v.id === PathIds.SHINYA_SKILL_CUTIN)?.path ??
+    src: (resources) =>
+      resources.paths.find((v) => v.id === PathIds.SHINYA_SKILL_CUTIN)?.path ??
       "",
     className: `${ROOT_CLASS}__shinya`,
     rightwardClassName: `${ROOT_CLASS}__shinya--right`,
@@ -14,14 +15,16 @@ export const faceConfigs: FaceConfig[] = [
   },
   {
     type: "Gai",
-    src: (resources) => resources.paths.find((v) => v.id === PathIds.GAI_SKILL_CUTIN)?.path ?? "",
+    src: (resources) =>
+      resources.paths.find((v) => v.id === PathIds.GAI_SKILL_CUTIN)?.path ?? "",
     className: `${ROOT_CLASS}__gai`,
     rightwardClassName: `${ROOT_CLASS}__gai--right`,
     invisibleClassName: `${ROOT_CLASS}__gai--invisible`,
   },
   {
     type: "Raito",
-    src: (resources) => resources.paths.find((v) => v.id === PathIds.RAITO_SKILL_CUTIN)?.path ??
+    src: (resources) =>
+      resources.paths.find((v) => v.id === PathIds.RAITO_SKILL_CUTIN)?.path ??
       "",
     className: `${ROOT_CLASS}__raito`,
     rightwardClassName: `${ROOT_CLASS}__raito--right`,
@@ -29,7 +32,8 @@ export const faceConfigs: FaceConfig[] = [
   },
   {
     type: "Tsubasa",
-    src: (resources) => resources.paths.find((v) => v.id === PathIds.TSUBASA_SKILL_CUTIN)?.path ??
+    src: (resources) =>
+      resources.paths.find((v) => v.id === PathIds.TSUBASA_SKILL_CUTIN)?.path ??
       "",
     className: `${ROOT_CLASS}__tsubasa`,
     rightwardClassName: `${ROOT_CLASS}__tsubasa--right`,
@@ -37,7 +41,8 @@ export const faceConfigs: FaceConfig[] = [
   },
   {
     type: "Yuuya",
-    src: (resources) => resources.paths.find((v) => v.id === PathIds.YUUYA_SKILL_CUTIN)?.path ??
+    src: (resources) =>
+      resources.paths.find((v) => v.id === PathIds.YUUYA_SKILL_CUTIN)?.path ??
       "",
     className: `${ROOT_CLASS}__yuuya`,
     rightwardClassName: `${ROOT_CLASS}__yuuya--right`,

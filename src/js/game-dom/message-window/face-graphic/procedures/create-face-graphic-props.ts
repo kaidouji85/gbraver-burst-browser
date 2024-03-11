@@ -1,6 +1,6 @@
 import { Resources } from "../../../../resource";
+import { faceConfigs } from "../config/face-configs";
 import { ROOT_CLASS_INVISIBLE } from "../dom/class-name";
-import { faceConfigs } from "../face/face-configs";
 import { FaceGraphicProps } from "../props";
 
 /**
@@ -8,12 +8,10 @@ import { FaceGraphicProps } from "../props";
  * @param resources リソース管理オブジェクト
  * @return 生成結果
  */
-export function createFaceGraphicProps(
-  resources: Resources
-): FaceGraphicProps {
+export function createFaceGraphicProps(resources: Resources): FaceGraphicProps {
   const root = document.createElement("div");
   root.className = ROOT_CLASS_INVISIBLE;
-  
+
   const images = faceConfigs.map((config) => {
     const img = document.createElement("img");
     img.className = config.invisibleClassName;

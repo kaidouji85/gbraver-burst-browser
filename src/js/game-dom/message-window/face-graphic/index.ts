@@ -1,6 +1,6 @@
 import { Resources } from "../../../resource";
-import { FaceOrientation } from "./face/face-orientation";
-import { FaceType } from "./face/face-type";
+import { FaceOrientation } from "./config/face-orientation";
+import { FaceType } from "./config/face-type";
 import { createFaceGraphicProps } from "./procedures/create-face-graphic-props";
 import { face } from "./procedures/face";
 import { visible } from "./procedures/visible";
