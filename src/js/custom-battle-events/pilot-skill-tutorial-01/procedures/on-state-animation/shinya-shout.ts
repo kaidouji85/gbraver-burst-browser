@@ -1,8 +1,10 @@
 import { CustomStateAnimation } from "../../../../td-scenes/battle/custom-battle-event";
 import { playerBattleCount } from "../../../battle-count";
 import { ConditionalAnimation } from "../../../get-animation-if-conditional-met";
+import { isPlayerBurstActivated } from "../../../is-burst-activated";
 import { isPlayerPilotSkillActivated } from "../../../is-pilot-skill-activated";
 import { separatePlayersFromCurrentState } from "../../../separate-players";
+import { shinyaBurstShout } from "../../animation/shinya-burst-shout";
 import { shinyaFirstAttackShout } from "../../animation/shinya-first-attack-shout";
 import { shinyaPilotSkillShoutWhenHeAttack } from "../../animation/shinya-pilot-skill-shout-when-he-attack";
 import { shinyaPilotSkillShoutWhenHeDefense } from "../../animation/shinya-pilot-skill-shout-when-he-defense";
@@ -34,7 +36,7 @@ export const shinyaShout: ConditionalAnimation<
 
     const { player } = players;
     const battleCount = playerBattleCount(props.stateHistory, player.playerId);
-    if (battleCount === 1) {
+    if (battleCount === 0) {
       return shinyaPilotSkillShoutWhenHeFullBattery(props);
     }
 
@@ -42,4 +44,7 @@ export const shinyaShout: ConditionalAnimation<
       ? shinyaPilotSkillShoutWhenHeAttack(props)
       : shinyaPilotSkillShoutWhenHeDefense(props);
   },
+  (props) => isPlayerBurstActivated(props)
+    ? shinyaBurstShout(props)
+    : null,
 ];
