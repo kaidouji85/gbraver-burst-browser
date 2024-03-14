@@ -6,6 +6,7 @@ import {
   getAnimationIfConditionMet,
 } from "../../../get-animation-if-conditional-met";
 import { PilotSkillTutorial01Props } from "../../props";
+import { shinyaShout } from "./shinya-shout";
 import { tsubasaShout } from "./tusbasa-shout";
 
 /**
@@ -18,6 +19,6 @@ export function afterStateAnimation(
 ): Animate {
   const conditionalAnimations: ConditionalAnimation<
     CustomStateAnimation & PilotSkillTutorial01Props
-  >[] = [...tsubasaShout];
+  >[] = [...tsubasaShout, ...shinyaShout];
   return getAnimationIfConditionMet(props, conditionalAnimations) ?? empty();
 }

@@ -33,9 +33,8 @@ export const shinyaShout: ConditionalAnimation<
     }
 
     const { player } = players;
-    const isPlayerFullBattery =
-      player.armdozer.battery === player.armdozer.maxBattery;
-    if (isPlayerFullBattery) {
+    const battleCount = playerBattleCount(props.stateHistory, player.playerId);
+    if (battleCount === 1) {
       return shinyaPilotSkillShoutWhenHeFullBattery(props);
     }
 
