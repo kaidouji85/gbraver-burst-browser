@@ -2,7 +2,7 @@ import { ROOT_CLASS as MESSAGE_WINDOW_ROOT } from "../game-dom/message-window/do
 import template from "./yoroshiku-onegai-shimasu.hbs";
 
 /**
- * よろしくお願いしますの innerHTML を生成する
+ * メッセージウインドウのinnerHTMLで使う「よろしくお願いします」を生成する
  * @returns 生成したinnerHTML
  */
 export const yoroshikuOnegaiShimasu = (): string =>

@@ -7,12 +7,13 @@ import {
 import { refreshConversation } from "../../invisible-all-message-windows";
 import {
   enemyPilotShoutInInnerHTML,
-  playerPilotShoutInInnerHTML
+  playerPilotShoutInInnerHTML,
 } from "../../pilot-shout";
 import { scrollLeftMessages, scrollRightMessages } from "../../scroll-messages";
 import { synchronizedBow } from "../../synchronized-bow";
 import { synchronizedUpright } from "../../synchronized-upright";
 import { waitUntilWindowPush } from "../../wait-until-window-push";
+import { yoroshikuOnegaiShimasu } from "../../yoroshiku-onegai-shimasu";
 
 /**
  * ストーリー 冒頭
@@ -34,8 +35,8 @@ export async function introduction(props: CustomBattleEventProps) {
   props.view.dom.leftMessageWindow.messages(["礼！！」"]);
   await delay(500).play();
   await refreshConversation(props);
-  playerPilotShoutInInnerHTML(props, "Shinya", "よろしく<wbr>お願いします");
-  enemyPilotShoutInInnerHTML(props, "Tsubasa", "よろしくお願いします");
+  playerPilotShoutInInnerHTML(props, "Shinya", yoroshikuOnegaiShimasu());
+  enemyPilotShoutInInnerHTML(props, "Tsubasa", yoroshikuOnegaiShimasu());
   await synchronizedBow(props).chain(delay(500)).play();
   await refreshConversation(props, 100);
   activeLeftMessageWindowWithFace(props, "Tsubasa");
