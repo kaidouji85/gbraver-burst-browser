@@ -44,7 +44,5 @@ export const shinyaShout: ConditionalAnimation<
       ? shinyaPilotSkillShoutWhenHeAttack(props)
       : shinyaPilotSkillShoutWhenHeDefense(props);
   },
-  (props) => isPlayerBurstActivated(props)
-    ? shinyaBurstShout(props)
-    : null,
+  (props) => (isPlayerBurstActivated(props) ? shinyaBurstShout(props) : null),
 ];
