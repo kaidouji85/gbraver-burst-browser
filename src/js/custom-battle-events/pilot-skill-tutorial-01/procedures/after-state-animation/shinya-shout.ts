@@ -12,13 +12,13 @@ export const shinyaShout: ConditionalAnimation<
   (props) =>
     isPlayerPilotSkillActivated(props)
       ? onStart(() => {
-          props.view.dom.enemyShoutMessageWindow.visible(false);
+          props.view.dom.playerShoutMessageWindow.visible(false);
         })
       : null,
   (props) =>
     isPlayerBurstActivated(props)
       ? onStart(() => {
-          props.view.dom.enemyShoutMessageWindow.visible(false);
+          props.view.dom.playerShoutMessageWindow.visible(false);
         })
       : null,
 ];
