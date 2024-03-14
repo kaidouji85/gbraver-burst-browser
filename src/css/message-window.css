@@ -92,6 +92,8 @@
   .message-window__paragraph,
   .message-window__paragraph--align-center {
     font-size: var(--battle-window-font-size);
+    word-break: keep-all;
+    overflow-wrap: anywhere;
   }
 
   .message-window__paragraph--align-center {
