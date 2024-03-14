@@ -8,6 +8,7 @@ import {MessageWindow} from "../src/js/game-dom/message-window";
 import {ROOT_CLASS} from "../src/js/game-dom/message-window/dom/class-name";
 import type {DOMStubStory} from "./stub/dom-stub";
 import {domStub} from "./stub/dom-stub";
+import {yoroshikuOnegaiShimasu} from "../src/js/custom-battle-events/yoroshiku-onegai-shimasu";
 
 export default {
   title: "message-window",
@@ -316,7 +317,7 @@ export const playerYorosikuOnegaishimasu: DOMStubStory = domStub((resources) => 
   dom.lighten();
   dom.face("Shinya");
   dom.faceVisible(true);
-  dom.messagesInInnerHTML("よろしく<wbr>お願いします");
+  dom.messagesInInnerHTML(yoroshikuOnegaiShimasu());
   dom.nextMessageIconVisible(false);
   return dom.getRootHTMLElement();
 });
