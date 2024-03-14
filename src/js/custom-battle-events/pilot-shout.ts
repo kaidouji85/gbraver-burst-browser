@@ -65,7 +65,11 @@ export function playerPilotShoutInInnerHTML(
   face: FaceType,
   innerHTML: string,
 ): void {
-  pilotShoutInInnerHTML(props.view.dom.playerShoutMessageWindow, face, innerHTML);
+  pilotShoutInInnerHTML(
+    props.view.dom.playerShoutMessageWindow,
+    face,
+    innerHTML,
+  );
 }
 
 /**
@@ -108,7 +112,11 @@ export function enemyPilotShoutInInnerHTML(
   face: FaceType,
   innerHTML: string,
 ): void {
-  pilotShoutInInnerHTML(props.view.dom.enemyShoutMessageWindow, face, innerHTML);
+  pilotShoutInInnerHTML(
+    props.view.dom.enemyShoutMessageWindow,
+    face,
+    innerHTML,
+  );
 }
 
 /**
