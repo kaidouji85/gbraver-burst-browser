@@ -22,6 +22,25 @@ function pilotShout(
 }
 
 /**
+ * innerHTMLで指定するパイロットの叫び
+ * @param messageWindow メッセージウィンドウ
+ * @param face 顔グラフィック
+ * @param innerHTML メッセージ要素配下のinnerHTML
+ */
+function pilotShoutInInnerHTML(
+  messageWindow: MessageWindow,
+  face: FaceType,
+  innerHTML: string,
+): void {
+  messageWindow.visible(true);
+  messageWindow.lighten();
+  messageWindow.face(face);
+  messageWindow.faceVisible(true);
+  messageWindow.messagesInInnerHTML(innerHTML);
+  messageWindow.nextMessageIconVisible(false);
+}
+
+/**
  * プレイヤーパイロットの叫び
  * @param props カスタムイベントプロパティ
  * @param face 顔グラフィック
@@ -33,6 +52,24 @@ export function playerPilotShout(
   message: string,
 ): void {
   pilotShout(props.view.dom.playerShoutMessageWindow, face, message);
+}
+
+/**
+ * innerHTMLで指定するプレイヤーパイロットの叫び
+ * @param props カスタムイベントプロパティ
+ * @param face 顔グラフィック
+ * @param innerHTML メッセージ要素配下のinnerHTML
+ */
+export function playerPilotShoutInInnerHTML(
+  props: Readonly<CustomBattleEventProps>,
+  face: FaceType,
+  innerHTML: string,
+): void {
+  pilotShoutInInnerHTML(
+    props.view.dom.playerShoutMessageWindow,
+    face,
+    innerHTML,
+  );
 }
 
 /**
@@ -62,6 +99,24 @@ export function enemyPilotShout(
   message: string,
 ): void {
   pilotShout(props.view.dom.enemyShoutMessageWindow, face, message);
+}
+
+/**
+ * innerHTMLで指定する敵パイロットの叫び
+ * @param props カスタムイベントプロパティ
+ * @param face 顔グラフィック
+ * @param innerHTML メッセージ要素配下のinnerHTML
+ */
+export function enemyPilotShoutInInnerHTML(
+  props: Readonly<CustomBattleEventProps>,
+  face: FaceType,
+  innerHTML: string,
+): void {
+  pilotShoutInInnerHTML(
+    props.view.dom.enemyShoutMessageWindow,
+    face,
+    innerHTML,
+  );
 }
 
 /**
