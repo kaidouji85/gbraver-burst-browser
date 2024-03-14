@@ -8,11 +8,15 @@ import {
   invisibleAllMessageWindows,
   refreshConversation,
 } from "../../invisible-all-message-windows";
-import { enemyPilotShout, playerPilotShout } from "../../pilot-shout";
+import {
+  enemyPilotShoutInInnerHTML,
+  playerPilotShoutInInnerHTML,
+} from "../../pilot-shout";
 import { scrollLeftMessages, scrollRightMessages } from "../../scroll-messages";
 import { synchronizedBow } from "../../synchronized-bow";
 import { synchronizedUpright } from "../../synchronized-upright";
 import { waitUntilWindowPush } from "../../wait-until-window-push";
+import { yoroshikuOnegaiShimasu } from "../../yoroshiku-onegai-shimasu";
 
 /**
  * 導入
@@ -51,8 +55,8 @@ export async function introduction(
   props.view.dom.rightMessageWindow.messages(["礼！！」"]);
   await delay(500).play();
   await refreshConversation(props);
-  playerPilotShout(props, "Shinya", "よろしくお願いします");
-  enemyPilotShout(props, "Yuuya", "よろしくお願いします");
+  playerPilotShoutInInnerHTML(props, "Shinya", yoroshikuOnegaiShimasu());
+  enemyPilotShoutInInnerHTML(props, "Yuuya", yoroshikuOnegaiShimasu());
   await synchronizedBow(props).chain(delay(500)).play();
   invisibleAllMessageWindows(props);
 }
