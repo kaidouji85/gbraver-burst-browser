@@ -43,6 +43,8 @@
   flex: 1;
   padding: calc(var(--responsive-font-size) * 0.4);
   border-radius: var(--button-border-radius);
+  word-break: keep-all;
+  overflow-wrap: anywhere;
 }
 
 .episode__checker + .episode__title {

@@ -40,6 +40,8 @@
 .episode-selector__episode-title {
   margin-bottom: calc(var(--responsive-font-size) * 1);
   border-bottom: dashed 1px var(--font-color);
+  word-break: keep-all;
+  overflow-wrap: anywhere;
 }
 
 .episode-selector__episode-image-cut {
