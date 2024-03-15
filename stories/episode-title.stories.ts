@@ -54,14 +54,14 @@ export const episode3 = episodeTitleStory(
 /** エピソード4 */
 export const episode4 = episodeTitleStory(
   "4",
-  "対決、二人のブレイバー！！ （負けイベント）",
+  "対決、二人のブレイバー！！（負けイベント）",
   ArmdozerIds.SHIN_BRAVER,
 );
 
 /** サイドエピソード3.1 */
 export const sideEpisode31 = episodeTitleStory(
   "3.1",
-  "パイロット次第では詰み （負けイベント）",
+  "パイロット次第では詰み（負けイベント）",
   ArmdozerIds.SHIN_BRAVER,
 );
 
