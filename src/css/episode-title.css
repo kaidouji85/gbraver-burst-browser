@@ -34,6 +34,8 @@
   z-index: var(--zindex-title);
   left: max(var(--safe-area-left), calc(var(--font-size) * 2));
   top: max(var(--safe-area-top), calc(var(--font-size) * 2));
+  word-break: keep-all;
+  overflow-wrap: anywhere;
 }
 
 .episode-title__prefix {
