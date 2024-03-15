@@ -117,6 +117,8 @@
   border: var(--button-border);
   box-shadow: var(--button-box-shadow);
   z-index: var(--controllers-z-index);
+  word-break: keep-all;
+  overflow-wrap: anywhere;
 }
 
 .episode-selector__prev {
