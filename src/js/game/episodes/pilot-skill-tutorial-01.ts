@@ -19,7 +19,7 @@ export const pilotSkillTutorial01: Episode = {
   id: EpisodeIDs.Pilot01,
   type: "Side Episode",
   number: "3.1",
-  title: "パイロット次第では詰み（負けイベント）",
+  title: "パイロット次第では詰み （負けイベント）",
   introduction,
   imageCutPathId: PathIds.IMAGE_CUT_PILOT_SKILL_01,
   player: {
