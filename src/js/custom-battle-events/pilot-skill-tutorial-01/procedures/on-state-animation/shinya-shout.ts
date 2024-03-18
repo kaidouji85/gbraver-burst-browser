@@ -1,5 +1,5 @@
 import { CustomStateAnimation } from "../../../../td-scenes/battle/custom-battle-event";
-import { playerBattleCount } from "../../../battle-count";
+import { battleCount, playerBattleCount } from "../../../battle-count";
 import { ConditionalAnimation } from "../../../get-animation-if-conditional-met";
 import { isPlayerBurstActivated } from "../../../is-burst-activated";
 import { isPlayerPilotSkillActivated } from "../../../is-pilot-skill-activated";
@@ -29,14 +29,11 @@ export const shinyaShout: ConditionalAnimation<
       : null;
   },
   (props) => {
-    const players = separatePlayersFromCurrentState(props);
-    if (!isPlayerPilotSkillActivated(props) || !players) {
+    if (!isPlayerPilotSkillActivated(props)) {
       return null;
     }
 
-    const { player } = players;
-    const battleCount = playerBattleCount(props.stateHistory, player.playerId);
-    if (battleCount === 0) {
+    if (battleCount(props.stateHistory) === 0) {
       return shinyaPilotSkillShoutWhenHeFullBattery(props);
     }
 
