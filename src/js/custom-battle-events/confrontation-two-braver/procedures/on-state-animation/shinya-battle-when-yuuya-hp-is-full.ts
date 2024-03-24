@@ -1,7 +1,7 @@
 import { CustomStateAnimation } from "../../../../td-scenes/battle/custom-battle-event";
 import { ConditionalAnimation } from "../../../get-animation-if-conditional-met";
 import { separatePlayersFromCurrentState } from "../../../separate-players";
-import { shinyaAttackCryWhenYuuyaHPIsFull } from "../../animation/shinya-attack-cry-when-yuuya-hp-is-full";
+import { shinyaAttackShoutWhenYuuyaHPIsFull } from "../../animation/shinya-attack-shout-when-yuuya-hp-is-full";
 import { ConfrontationTwoBraverProps } from "../../props";
 
 /** シンヤ 戦闘 ユウヤのHPが満タン */
@@ -19,7 +19,7 @@ export const shinyaBattleWhenYuuyaHPIsFull: ConditionalAnimation<
     return isYuuyaHPFull &&
       props.currentState.effect.name === "BatteryDeclaration" &&
       props.currentState.effect.attacker === player.playerId
-      ? shinyaAttackCryWhenYuuyaHPIsFull(props)
+      ? shinyaAttackShoutWhenYuuyaHPIsFull(props)
       : null;
   },
 ];

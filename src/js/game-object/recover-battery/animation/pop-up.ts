@@ -1,6 +1,6 @@
 import { Animate } from "../../../animation/animate";
 import { delay } from "../../../animation/delay";
-import { process } from "../../../animation/process";
+import { onStart } from "../../../animation/on-start";
 import { tween } from "../../../animation/tween";
 import type { RecoverBatteryModel } from "../model/recover-battery-model";
 import { RecoverBatterySounds } from "../sounds/recover-battery-sounds";
@@ -34,7 +34,7 @@ export function show(
   sounds: RecoverBatterySounds,
   value: number,
 ): Animate {
-  return process(() => {
+  return onStart(() => {
     model.scale = 1.2;
     model.value = value;
     model.opacity = 0;

@@ -1,6 +1,6 @@
 import { all } from "../../../../animation/all";
 import { Animate } from "../../../../animation/animate";
-import { process } from "../../../../animation/process";
+import { onStart } from "../../../../animation/on-start";
 import { tween } from "../../../../animation/tween";
 import type { ShinyaModel } from "../model/shinya-model";
 
@@ -13,7 +13,7 @@ const duration = 200;
  * @return アニメーション
  */
 export function hidden(model: ShinyaModel): Animate {
-  return process(() => {
+  return onStart(() => {
     model.opacity = 1;
   }).chain(
     all(

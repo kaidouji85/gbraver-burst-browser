@@ -1,4 +1,4 @@
-import { process } from "../../../../animation/process";
+import { onStart } from "../../../../animation/on-start";
 import { CustomStateAnimation } from "../../../../td-scenes/battle/custom-battle-event";
 import { ConditionalAnimation } from "../../../get-animation-if-conditional-met";
 import { isPlayerBurstActivated } from "../../../is-burst-activated";
@@ -10,8 +10,8 @@ export const shinyaBurst: ConditionalAnimation<
 >[] = [
   (props) =>
     isPlayerBurstActivated(props)
-      ? process(() => {
-          props.view.dom.playerCryMessageWindow.visible(false);
+      ? onStart(() => {
+          props.view.dom.playerShoutMessageWindow.visible(false);
         })
       : null,
 ];

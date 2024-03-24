@@ -8,13 +8,13 @@
   .message-window--near-battery-selector,
   .message-window--near-burst-button,
   .message-window--near-pilot-button,
-  .message-window--player-cry,
-  .message-window--enemy-cry {
+  .message-window--player-shout,
+  .message-window--enemy-shout {
     /** 本カスタムプロパティはJavaScriptから変更される */
     --brightness: brightness(1);
     --margin-x: max(3vw, var(--safe-area-left), var(--safe-area-right));
     --window-height: calc(var(--battle-window-font-size) * 7);
-    --cry-window-height: auto;
+    --shout-window-height: auto;
 
     box-sizing: border-box;
     display: flex;
@@ -74,14 +74,14 @@
     min-height: var(--window-height);
   }
 
-  .message-window--player-cry {
+  .message-window--player-shout {
     right: var(--margin-x);
-    height: var(--cry-window-height);
+    height: var(--shout-window-height);
   }
 
-  .message-window--enemy-cry {
+  .message-window--enemy-shout {
     left: var(--margin-x);
-    height: var(--cry-window-height);
+    height: var(--shout-window-height);
   }
 
   .message-window__messages-wrapper {
@@ -92,6 +92,8 @@
   .message-window__paragraph,
   .message-window__paragraph--align-center {
     font-size: var(--battle-window-font-size);
+    word-break: keep-all;
+    overflow-wrap: anywhere;
   }
 
   .message-window__paragraph--align-center {
@@ -148,8 +150,8 @@
   .message-window--near-battery-selector,
   .message-window--near-burst-button,
   .message-window--near-pilot-button,
-  .message-window--player-cry,
-  .message-window--enemy-cry,
+  .message-window--player-shout,
+  .message-window--enemy-shout,
   .message-window--invisible {
     display: none;
   }

@@ -1,4 +1,4 @@
-import type { FaceType } from "./face-graphic";
+import type { FaceType } from "./face-graphic/config/face-type";
 import { darken } from "./procedure/darken";
 import { face } from "./procedure/face";
 import { faceVisible } from "./procedure/face-visible";

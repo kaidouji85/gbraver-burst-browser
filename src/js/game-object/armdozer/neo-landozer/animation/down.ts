@@ -2,7 +2,7 @@ import * as TWEEN from "@tweenjs/tween.js";
 
 import { Animate } from "../../../../animation/animate";
 import { delay } from "../../../../animation/delay";
-import { process } from "../../../../animation/process";
+import { onStart } from "../../../../animation/on-start";
 import { tween } from "../../../../animation/tween";
 import type { NeoLandozerModel } from "../model/neo-landozer-model";
 
@@ -13,7 +13,7 @@ import type { NeoLandozerModel } from "../model/neo-landozer-model";
  * @return アニメーション
  */
 export function down(model: NeoLandozerModel): Animate {
-  return process(() => {
+  return onStart(() => {
     model.animation.type = "KNOCK_BACK";
     model.animation.frame = 1;
   })
@@ -31,7 +31,7 @@ export function down(model: NeoLandozerModel): Animate {
     )
     .chain(delay(100))
     .chain(
-      process(() => {
+      onStart(() => {
         model.animation.type = "DOWN";
         model.animation.frame = 0;
       }),

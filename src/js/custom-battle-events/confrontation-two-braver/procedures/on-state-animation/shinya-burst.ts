@@ -2,8 +2,8 @@ import { CustomStateAnimation } from "../../../../td-scenes/battle/custom-battle
 import { ConditionalAnimation } from "../../../get-animation-if-conditional-met";
 import { isPlayerBurstActivated } from "../../../is-burst-activated";
 import { turnCount } from "../../../turn-count";
-import { earlyShinyaBurstCry } from "../../animation/early-shinya-burst-cry";
-import { shinyaBurstCry } from "../../animation/shinya-burst-cry";
+import { earlyShinyaBurstShout } from "../../animation/early-shinya-burst-shout";
+import { shinyaBurstShout } from "../../animation/shinya-burst-shout";
 import { ConfrontationTwoBraverProps } from "../../props";
 
 /** 序盤とされるターン数の上限 */
@@ -16,13 +16,13 @@ export const shinyaBurst: ConditionalAnimation<
   (props) => {
     return turnCount(props.stateHistory) <= EARLY_TURN_LIMIT &&
       isPlayerBurstActivated(props)
-      ? earlyShinyaBurstCry(props)
+      ? earlyShinyaBurstShout(props)
       : null;
   },
   (props) => {
     return EARLY_TURN_LIMIT < turnCount(props.stateHistory) &&
       isPlayerBurstActivated(props)
-      ? shinyaBurstCry(props)
+      ? shinyaBurstShout(props)
       : null;
   },
 ];

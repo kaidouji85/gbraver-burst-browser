@@ -1,6 +1,7 @@
 import type { Command, Player } from "gbraver-burst-core";
 
 import { fadeOut, stop } from "../../bgm/bgm-operators";
+import { createSeriousMatchEvent } from "../../custom-battle-events/serious-match-event";
 import { StageTitle } from "../../dom-scenes/stage-title";
 import { NPCBattleRoom } from "../../npc/npc-battle-room";
 import { BattleScene } from "../../td-scenes/battle";
@@ -64,6 +65,7 @@ export async function startNPCBattleStage(
     gameLoop: props.gameLoop,
     renderer: props.renderer,
     controllerType: config.battleControllerType,
+    customBattleEvent: createSeriousMatchEvent(),
   });
   props.tdBinder.bind(battleScene, battleSceneConnector);
   await waitAnimationFrame();

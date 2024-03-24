@@ -1,7 +1,7 @@
 import * as TWEEN from "@tweenjs/tween.js";
 
 import { Animate } from "../../../../animation/animate";
-import { process } from "../../../../animation/process";
+import { onStart } from "../../../../animation/on-start";
 import { tween } from "../../../../animation/tween";
 import type { LightningBarrierModel } from "../model/lightning-barrier-model";
 
@@ -16,7 +16,7 @@ export function electrification(
   model: LightningBarrierModel,
   group: TWEEN.Group,
 ): Animate {
-  return process(() => {
+  return onStart(() => {
     model.animation.frame = 0;
   }, group).chain(
     tween(

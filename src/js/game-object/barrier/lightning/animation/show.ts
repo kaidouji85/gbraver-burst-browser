@@ -1,5 +1,5 @@
 import { Animate } from "../../../../animation/animate";
-import { process } from "../../../../animation/process";
+import { onStart } from "../../../../animation/on-start";
 import { tween } from "../../../../animation/tween";
 import type { LightningBarrierModel } from "../model/lightning-barrier-model";
 import { LightningBarrierSounds } from "../sounds/lightning-barrier-sounds";
@@ -15,7 +15,7 @@ export function show(
   model: LightningBarrierModel,
   sounds: LightningBarrierSounds,
 ): Animate {
-  return process(() => {
+  return onStart(() => {
     sounds.lightningBarrier.play();
   }).chain(
     tween(model, (t) =>

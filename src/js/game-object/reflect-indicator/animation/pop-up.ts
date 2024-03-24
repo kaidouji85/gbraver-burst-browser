@@ -1,6 +1,6 @@
 import { Animate } from "../../../animation/animate";
 import { delay } from "../../../animation/delay";
-import { process } from "../../../animation/process";
+import { onStart } from "../../../animation/on-start";
 import { tween } from "../../../animation/tween";
 import type { ReflectIndocatorModel } from "../model/reflect-indocator-model";
 
@@ -11,7 +11,7 @@ import type { ReflectIndocatorModel } from "../model/reflect-indocator-model";
  * @return アニメーション
  */
 export function popUp(model: ReflectIndocatorModel): Animate {
-  return process(() => {
+  return onStart(() => {
     model.opacity = 0;
     model.scale = 1.2;
   })

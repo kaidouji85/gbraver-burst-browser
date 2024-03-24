@@ -1,6 +1,6 @@
 import { Animate } from "../../../animation/animate";
 import { delay } from "../../../animation/delay";
-import { process } from "../../../animation/process";
+import { onStart } from "../../../animation/on-start";
 import { tween } from "../../../animation/tween";
 import type { DamageIndicatorModel } from "../model/damage-indicator-model";
 
@@ -12,7 +12,7 @@ import type { DamageIndicatorModel } from "../model/damage-indicator-model";
  * @return アニメーション
  */
 export function popUp(model: DamageIndicatorModel, damage: number): Animate {
-  return process(() => {
+  return onStart(() => {
     model.opacity = 0;
     model.damage = damage;
     model.scale = 1.1;

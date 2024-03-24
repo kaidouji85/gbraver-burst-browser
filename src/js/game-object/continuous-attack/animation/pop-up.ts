@@ -1,6 +1,6 @@
 import { Animate } from "../../../animation/animate";
 import { delay } from "../../../animation/delay";
-import { process } from "../../../animation/process";
+import { onStart } from "../../../animation/on-start";
 import { tween } from "../../../animation/tween";
 import type { ContinuousAttackModel } from "../model/continuous-attack-model";
 import { ContinuousAttackSounds } from "../sounds/continuous-attack-sounds";
@@ -16,7 +16,7 @@ export function popUp(
   model: ContinuousAttackModel,
   sounds: ContinuousAttackSounds,
 ): Animate {
-  return process(() => {
+  return onStart(() => {
     model.opacity = 0;
     model.scale = 1.2;
     sounds.benefitEffect.play();

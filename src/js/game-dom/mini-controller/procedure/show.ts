@@ -1,5 +1,5 @@
 import { Animate } from "../../../animation/animate";
-import { process } from "../../../animation/process";
+import { onStart } from "../../../animation/on-start";
 import { showRoot } from "../animation/show-root";
 import { ROOT } from "../dom/class-name";
 import { MiniControllerProps } from "../props";
@@ -10,7 +10,7 @@ import { MiniControllerProps } from "../props";
  * @return アニメーション
  */
 export function show(props: MiniControllerProps): Animate {
-  return process(() => {
+  return onStart(() => {
     props.root.className = ROOT;
   }).chain(showRoot(props));
 }

@@ -1,6 +1,6 @@
 import { Animate } from "../../../../animation/animate";
 import { delay } from "../../../../animation/delay";
-import { process } from "../../../../animation/process";
+import { onStart } from "../../../../animation/on-start";
 import { tween } from "../../../../animation/tween";
 import type { NeoLandozerModel } from "../model/neo-landozer-model";
 import { NeoLandozerSounds } from "../sounds/neo-landozer-sounds";
@@ -16,7 +16,7 @@ export function guts(
   model: NeoLandozerModel,
   sounds: NeoLandozerSounds,
 ): Animate {
-  return process(() => {
+  return onStart(() => {
     model.animation.type = "GUTS_UP";
     model.animation.frame = 0;
     sounds.motor.play();
@@ -33,7 +33,7 @@ export function guts(
     )
     .chain(delay(500))
     .chain(
-      process(() => {
+      onStart(() => {
         model.animation.type = "GUTS_DOWN";
         model.animation.frame = 0;
         sounds.motor.play();

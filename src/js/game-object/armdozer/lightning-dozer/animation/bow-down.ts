@@ -1,5 +1,5 @@
 import { Animate } from "../../../../animation/animate";
-import { process } from "../../../../animation/process";
+import { onStart } from "../../../../animation/on-start";
 import { tween } from "../../../../animation/tween";
 import { LightningDozerModel } from "../model/lightning-dozer-model";
 import { LightningDozerSounds } from "../sounds/lightning-dozer-sounds";
@@ -14,7 +14,7 @@ export function bowDown(
   model: LightningDozerModel,
   sounds: LightningDozerSounds,
 ): Animate {
-  return process(() => {
+  return onStart(() => {
     model.animation.type = "BOW";
     model.animation.frame = 0;
     sounds.motor.play();

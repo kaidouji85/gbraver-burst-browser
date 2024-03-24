@@ -1,5 +1,5 @@
 import { Animate } from "../../../animation/animate";
-import { process } from "../../../animation/process";
+import { onStart } from "../../../animation/on-start";
 import { popRoot } from "../animation/pop-root";
 import { MiniControllerProps } from "../props";
 
@@ -9,7 +9,7 @@ import { MiniControllerProps } from "../props";
  * @return アニメーション
  */
 export function decided(props: Readonly<MiniControllerProps>): Animate {
-  return process(() => {
+  return onStart(() => {
     props.pushButtonSound.sound.play();
   }).chain(popRoot(props));
 }

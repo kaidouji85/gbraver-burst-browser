@@ -1,5 +1,5 @@
 import { Animate } from "../../../animation/animate";
-import { process } from "../../../animation/process";
+import { onStart } from "../../../animation/on-start";
 import { tween } from "../../../animation/tween";
 import type { BatterySelectorModel } from "../model";
 import { BatterySelectorSounds } from "../sounds/battery-selector-sounds";
@@ -14,7 +14,7 @@ export function decide(
   model: BatterySelectorModel,
   sounds: BatterySelectorSounds,
 ): Animate {
-  return process(() => {
+  return onStart(() => {
     sounds.pushButtonSound.play();
   })
     .chain(

@@ -2,7 +2,7 @@ import { CustomStateAnimation } from "../../../../td-scenes/battle/custom-battle
 import { playerBattleCount } from "../../../battle-count";
 import { ConditionalAnimation } from "../../../get-animation-if-conditional-met";
 import { separatePlayersFromCurrentState } from "../../../separate-players";
-import { shinyaCryWhenFirstBattle } from "../../animation/shinya-cry-when-first-battle";
+import { shinyaShoutWhenFirstBattle } from "../../animation/shinya-shout-when-first-battle";
 import { ConfrontationTwoBraverProps } from "../../props";
 
 /** シンヤ ファーストバトル */
@@ -18,7 +18,7 @@ export const shinyaFirstBattle: ConditionalAnimation<
     return playerBattleCount(props.stateHistory, player.playerId) === 1 &&
       props.currentState.effect.name === "BatteryDeclaration" &&
       props.currentState.effect.attacker === player.playerId
-      ? shinyaCryWhenFirstBattle(props)
+      ? shinyaShoutWhenFirstBattle(props)
       : null;
   },
 ];

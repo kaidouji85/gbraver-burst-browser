@@ -1,6 +1,6 @@
 import { all } from "../../../../animation/all";
 import { Animate } from "../../../../animation/animate";
-import { process } from "../../../../animation/process";
+import { onStart } from "../../../../animation/on-start";
 import { tween } from "../../../../animation/tween";
 import type { LightningDozerModel } from "../model/lightning-dozer-model";
 
@@ -12,7 +12,7 @@ import type { LightningDozerModel } from "../model/lightning-dozer-model";
  */
 export function guard(model: LightningDozerModel): Animate {
   return all(
-    process(() => {
+    onStart(() => {
       model.animation.frame = 1;
       model.animation.type = "GUARD";
     }),

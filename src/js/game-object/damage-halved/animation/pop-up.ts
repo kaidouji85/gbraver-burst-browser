@@ -1,6 +1,6 @@
 import { Animate } from "../../../animation/animate";
 import { delay } from "../../../animation/delay";
-import { process } from "../../../animation/process";
+import { onStart } from "../../../animation/on-start";
 import { tween } from "../../../animation/tween";
 import type { DamageHalvedModel } from "../model/damage-halved-model";
 import { DamageHalvedSounds } from "../sounds/damage-halved-sounds";
@@ -16,7 +16,7 @@ export function popUp(
   model: DamageHalvedModel,
   sounds: DamageHalvedSounds,
 ): Animate {
-  return process(() => {
+  return onStart(() => {
     model.opacity = 0;
     model.scale = 1.2;
     sounds.benefitEffect.play();

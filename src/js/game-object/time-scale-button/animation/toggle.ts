@@ -1,7 +1,7 @@
 import * as TWEEN from "@tweenjs/tween.js";
 
 import type { Animate } from "../../../animation/animate";
-import { process } from "../../../animation/process";
+import { onStart } from "../../../animation/on-start";
 import { tween } from "../../../animation/tween";
 import type { TimeScaleButtonModel } from "../model/time-scale-button-model";
 import type { TimeScaleButtonSounds } from "../sounds/time-scale-sounds";
@@ -21,7 +21,7 @@ export function toggle(
   group: TWEEN.Group,
   timeScale: number,
 ): Animate {
-  return process(() => {
+  return onStart(() => {
     model.timeScale = timeScale;
     model.scale = 1;
     sounds.changeValue.play();

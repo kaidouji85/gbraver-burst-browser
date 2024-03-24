@@ -1,6 +1,6 @@
 import { Animate } from "../../../animation/animate";
 import { delay } from "../../../animation/delay";
-import { process } from "../../../animation/process";
+import { onStart } from "../../../animation/on-start";
 import { tween } from "../../../animation/tween";
 import type { BatteryEnchantmentModel } from "../model/battery-enchantment-model";
 import { BatteryEnchantmentSounds } from "../sounds/battery-enchantment-sounds";
@@ -16,7 +16,7 @@ export function popUp(
   model: BatteryEnchantmentModel,
   sounds: BatteryEnchantmentSounds,
 ): Animate {
-  return process(() => {
+  return onStart(() => {
     model.opacity = 0;
     model.scale = 1.2;
     sounds.benefitEffect.play();

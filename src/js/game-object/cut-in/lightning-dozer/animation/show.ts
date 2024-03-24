@@ -1,7 +1,7 @@
 import { all } from "../../../../animation/all";
 import { Animate } from "../../../../animation/animate";
 import { delay } from "../../../../animation/delay";
-import { process } from "../../../../animation/process";
+import { onStart } from "../../../../animation/on-start";
 import { tween } from "../../../../animation/tween";
 import type { LightningDozerCutInModel } from "../model/lightning-dozer-cutin-model";
 
@@ -13,7 +13,7 @@ import type { LightningDozerCutInModel } from "../model/lightning-dozer-cutin-mo
  */
 export function show(model: LightningDozerCutInModel): Animate {
   return all(
-    process(() => {
+    onStart(() => {
       model.animation.type = "CUT_IN_UP";
       model.animation.frame = 0;
     })
@@ -29,7 +29,7 @@ export function show(model: LightningDozerCutInModel): Animate {
       )
       .chain(delay(600))
       .chain(
-        process(() => {
+        onStart(() => {
           model.animation.type = "CUT_IN_DOWN";
           model.animation.frame = 0;
         }),
@@ -44,7 +44,7 @@ export function show(model: LightningDozerCutInModel): Animate {
           ),
         ),
       ),
-    process(() => {
+    onStart(() => {
       model.opacity = 0;
     }).chain(
       tween(model, (t) =>
@@ -56,7 +56,7 @@ export function show(model: LightningDozerCutInModel): Animate {
         ),
       ),
     ),
-    process(() => {
+    onStart(() => {
       model.scale = 0.9;
     }).chain(
       tween(model, (t) =>

@@ -8,7 +8,6 @@ import { showCommand } from "./show-command";
 
 /**
  * コマンド入力フェイズのアニメーション
- *
  * @param props 戦闘シーンビュー
  * @param gameState ゲーム状態
  * @return アニメーション
@@ -21,28 +20,24 @@ export function inputCommandAnimation(
   const playerCommand = gameState.effect.players.find(
     (v) => v.playerId === props.playerId,
   );
-  const playerTDArmdozer = props.view.td.armdozerObjects.find(
-    (v) => v.playerId === props.playerId,
-  );
   const playerHUD = props.view.hud.players.find(
     (v) => v.playerId === props.playerId,
   );
   const enemy = gameState.players.find((v) => v.playerId !== props.playerId);
-  const enemyTDArmdozer = props.view.td.armdozerObjects.find(
-    (v) => v.playerId !== props.playerId,
-  );
   const enemyHUD = props.view.hud.players.find(
     (v) => v.playerId !== props.playerId,
+  );
+  const activeTDArmdozer = props.view.td.armdozerObjects.find(
+    (v) => v.playerId === gameState.activePlayerId,
   );
 
   if (
     !player ||
-    !playerTDArmdozer ||
     !playerCommand ||
     !playerHUD ||
     !enemy ||
-    !enemyTDArmdozer ||
-    !enemyHUD
+    !enemyHUD ||
+    !activeTDArmdozer
   ) {
     return empty();
   }
@@ -67,8 +62,6 @@ export function inputCommandAnimation(
     props.view.hud.gameObjects.timeScaleButton.open(
       props.animatePlayer.timeScale,
     ),
-    isPlayerTurn
-      ? playerTDArmdozer.sprite().startActive()
-      : enemyTDArmdozer.sprite().startActive(),
+    activeTDArmdozer.sprite().startActive(),
   );
 }

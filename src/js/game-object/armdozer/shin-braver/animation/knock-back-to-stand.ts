@@ -1,5 +1,5 @@
 import { Animate } from "../../../../animation/animate";
-import { process } from "../../../../animation/process";
+import { onStart } from "../../../../animation/on-start";
 import { tween } from "../../../../animation/tween";
 import type { ShinBraverModel } from "../model/shin-braver-model";
 import { ShinBraverSounds } from "../sounds/shin-braver-sounds";
@@ -9,7 +9,7 @@ export function knockBackToStand(
   model: ShinBraverModel,
   sounds: ShinBraverSounds,
 ): Animate {
-  return process(() => {
+  return onStart(() => {
     model.animation.frame = 1;
     model.animation.type = "KNOCK_BACK";
     sounds.motor.play();
@@ -25,7 +25,7 @@ export function knockBackToStand(
       ),
     )
     .chain(
-      process(() => {
+      onStart(() => {
         model.animation.frame = 0;
         model.animation.type = "STAND";
       }),

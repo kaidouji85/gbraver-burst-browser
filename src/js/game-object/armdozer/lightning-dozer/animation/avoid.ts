@@ -1,7 +1,7 @@
 import { all } from "../../../../animation/all";
 import { Animate } from "../../../../animation/animate";
 import { delay } from "../../../../animation/delay";
-import { process } from "../../../../animation/process";
+import { onStart } from "../../../../animation/on-start";
 import { tween } from "../../../../animation/tween";
 import type { LightningDozerModel } from "../model/lightning-dozer-model";
 import { LightningDozerSounds } from "../sounds/lightning-dozer-sounds";
@@ -17,7 +17,7 @@ export function avoid(
   model: LightningDozerModel,
   sounds: LightningDozerSounds,
 ): Animate {
-  return process(() => {
+  return onStart(() => {
     model.animation.type = "BACK_STEP";
     model.animation.frame = 0;
     sounds.motor.play();
@@ -44,7 +44,7 @@ export function avoid(
     )
     .chain(delay(300))
     .chain(
-      process(() => {
+      onStart(() => {
         sounds.motor.play();
       }),
     )
@@ -59,7 +59,7 @@ export function avoid(
       ),
     )
     .chain(
-      process(() => {
+      onStart(() => {
         model.animation.type = "STAND";
         model.animation.frame = 0;
       }),

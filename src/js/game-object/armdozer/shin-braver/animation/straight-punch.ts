@@ -1,5 +1,5 @@
 import { Animate } from "../../../../animation/animate";
-import { process } from "../../../../animation/process";
+import { onStart } from "../../../../animation/on-start";
 import { tween } from "../../../../animation/tween";
 import type { ShinBraverModel } from "../model/shin-braver-model";
 
@@ -10,7 +10,7 @@ import type { ShinBraverModel } from "../model/shin-braver-model";
  * @return アニメーション
  */
 export function straightPunch(model: ShinBraverModel): Animate {
-  return process(() => {
+  return onStart(() => {
     model.animation.type = "SP_ATTACK";
     model.animation.frame = 0;
   }).chain(
