@@ -1,5 +1,5 @@
 import { ArmdozerId } from "gbraver-burst-core";
-import { map, Observable, tap } from "rxjs";
+import { Observable, tap } from "rxjs";
 
 import { pop } from "../../../dom/pop";
 import { domPushStream, PushDOM } from "../../../dom/push-dom";
@@ -17,28 +17,22 @@ const IMAGE_CLASS_NAME = `${ROOT_CLASS_NAME}__image`;
 /** チェックマークのclass属性 */
 const CHECK_CLASS_NAME = `${ROOT_CLASS_NAME}__check`;
 
-/** アームドーザ選択通知 */
-type ArmdozerIconSelected = PushDOM & {
-  /** アームドーザID */
-  armdozerId: ArmdozerId;
-}
-
 /** アームドーザアイコン */
 export class ArmdozerIcon {
-  /** ルートHTML要素 */
-  #root: HTMLElement;
-  /** アイコン画像 */
-  #image: HTMLImageElement;
-  /** チェックマーク */
-  #check: HTMLImageElement;
   /** アームドーザID */
-  #armdozerId: ArmdozerId;
+  readonly armdozerId: ArmdozerId;
+  /** ルートHTML要素 */
+  readonly #root: HTMLElement;
+  /** アイコン画像 */
+  readonly #image: HTMLImageElement;
+  /** チェックマーク */
+  readonly #check: HTMLImageElement;
   /** アイコン画像の読み込みが完了したら発火するPromise */
-  #isImageLoaded: Promise<void>;
+  readonly #isImageLoaded: Promise<void>;
   /** チェックマーク画像の読み込みが完了したら発火するPromise */
-  #isCheckLoaded: Promise<void>;
+  readonly #isCheckLoaded: Promise<void>;
   /** 選択通知ストリーム */
-  #select: Observable<PushDOM>;
+  readonly #select: Observable<PushDOM>;
 
   /**
    * コンストラクタ
@@ -67,7 +61,7 @@ export class ArmdozerIcon {
     this.#check.hidden = true;
     this.#root.appendChild(this.#check);
 
-    this.#armdozerId = armdozerId;
+    this.armdozerId = armdozerId;
 
     this.#select = domPushStream(this.#root).pipe(
       tap((action) => {
@@ -96,10 +90,8 @@ export class ArmdozerIcon {
    * アイコン選択通知
    * @return 通知ストリーム
    */
-  notifySelection(): Observable<ArmdozerIconSelected> {
-    return this.#select.pipe(
-      map((action) => ({...action, armdozerId: this.#armdozerId}))
-    );
+  notifySelection(): Observable<PushDOM> {
+    return this.#select;
   }
 
   /**

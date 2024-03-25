@@ -8,5 +8,5 @@ import { ArmdozerSelectorProps } from "../props";
 export async function waitUntilLoaded(
   props: Readonly<ArmdozerSelectorProps>,
 ): Promise<void> {
-  await Promise.all(props.armdozerIcons.map((v) => v.icon.waitUntilLoaded()));
+  await Promise.all(props.armdozerIcons.map((icon) => icon.waitUntilLoaded()));
 }

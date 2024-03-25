@@ -21,15 +21,15 @@ export function onArmdozerSelect(
 
     props.changeValueSound.play();
     props.armdozerIcons
-      .filter((v) => v.armdozerId === armdozerId)
-      .forEach((v) => {
-        v.icon.pop();
-        v.icon.selected(true);
+      .filter((icon) => icon.armdozerId === armdozerId)
+      .forEach((icon) => {
+        icon.pop();
+        icon.selected(true);
       });
     props.armdozerIcons
-      .filter((v) => v.armdozerId !== armdozerId)
-      .forEach((v) => {
-        v.icon.selected(false);
+      .filter((icon) => icon.armdozerId !== armdozerId)
+      .forEach((icon) => {
+        icon.selected(false);
       });
   });
 }

@@ -15,9 +15,9 @@ export function bindEventListener(
   props: Readonly<ArmdozerSelectorProps>,
 ): Unsubscribable[] {
   return [
-    ...props.armdozerIcons.map((v) =>
-      v.icon.notifySelection().subscribe(() => {
-        onArmdozerSelect(props, v.armdozerId);
+    ...props.armdozerIcons.map((icon) =>
+      icon.notifySelection().subscribe(() => {
+        onArmdozerSelect(props, icon.armdozerId);
       }),
     ),
     domPushStream(props.okButton).subscribe((action) => {

@@ -39,14 +39,11 @@ export function createArmdozerSelectorProps(
   const dummyStatus = extractDummyStatus(root);
   replaceDOM(dummyStatus, armdozerStatus.getRootHTMLElement());
 
-  const armdozerIcons = armdozerIds.map((v) => ({
-    armdozerId: v,
-    icon: createArmdozerIcon(resources, v),
-  }));
+  const armdozerIcons = armdozerIds.map((id) => createArmdozerIcon(resources, id));
   const icons = extractIcons(root);
-  armdozerIcons.forEach((v) => {
-    v.icon.selected(v.armdozerId === initialArmdozerId);
-    icons.appendChild(v.icon.getRootHTMLElement());
+  armdozerIcons.forEach((icon) => {
+    icon.selected(icon.armdozerId === initialArmdozerId);
+    icons.appendChild(icon.getRootHTMLElement());
   });
   return {
     armdozerId: initialArmdozerId,
