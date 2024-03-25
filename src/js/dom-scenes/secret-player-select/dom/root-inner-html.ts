@@ -1,3 +1,4 @@
+import { ROOT } from "./class-name";
 import template from "./root-inner-html.hbs";
 
 /**
@@ -5,5 +6,7 @@ import template from "./root-inner-html.hbs";
  * @return 生成結果
  */
 export function rootInnerHTML(): string {
-  return template({});
+  return template({
+    ROOT
+  });
 }
