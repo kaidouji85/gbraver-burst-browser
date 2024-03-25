@@ -39,8 +39,8 @@ export function createArmdozerSelectorProps(
   const dummyStatus = extractDummyStatus(root);
   replaceDOM(dummyStatus, armdozerStatus.getRootHTMLElement());
 
-  const armdozerIcons = armdozerIds.map((id) =>
-    new ArmdozerIcon(resources, id, `アイコン ${id}`),
+  const armdozerIcons = armdozerIds.map(
+    (id) => new ArmdozerIcon(resources, id, `アイコン ${id}`),
   );
   const icons = extractIcons(root);
   armdozerIcons.forEach((icon) => {
