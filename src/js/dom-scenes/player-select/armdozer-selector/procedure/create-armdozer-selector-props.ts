@@ -6,8 +6,8 @@ import { replaceDOM } from "../../../../dom/replace-dom";
 import { Exclusive } from "../../../../exclusive/exclusive";
 import { Resources } from "../../../../resource";
 import { SOUND_IDS } from "../../../../resource/sound";
+import { ArmdozerIcon } from "../armdozer-icon";
 import { ArmdozerStatus } from "../armdozer-status";
-import { createArmdozerIcon } from "../create-armdozer-icon";
 import { BLOCK } from "../dom/class-name";
 import {
   extractDummyStatus,
@@ -40,7 +40,7 @@ export function createArmdozerSelectorProps(
   replaceDOM(dummyStatus, armdozerStatus.getRootHTMLElement());
 
   const armdozerIcons = armdozerIds.map((id) =>
-    createArmdozerIcon(resources, id),
+    new ArmdozerIcon(resources, id, `アイコン ${id}`),
   );
   const icons = extractIcons(root);
   armdozerIcons.forEach((icon) => {
