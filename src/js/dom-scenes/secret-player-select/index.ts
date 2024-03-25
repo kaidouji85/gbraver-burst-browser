@@ -24,6 +24,6 @@ export class SecretPlayerSelect implements DOMScene {
 
   /** @override */
   getRootHTMLElement(): HTMLElement {
-    return this.#props;
+    return this.#props.root;
   }
 }

@@ -1,3 +1,5 @@
+import { ROOT } from "../dom/class-name";
+import { rootInnerHTML } from "../dom/root-inner-html";
 import { SecretPlayerSelectProps } from "../props";
 
 /**
@@ -6,5 +8,7 @@ import { SecretPlayerSelectProps } from "../props";
  */
 export function createSecretPlayerSelectProps(): SecretPlayerSelectProps {
   const root = document.createElement("div");
+  root.className = ROOT;
+  root.innerHTML = rootInnerHTML();
   return { root };
 }
