@@ -5,24 +5,33 @@ import { domPushStream, PushDOM } from "../../../dom/push-dom";
 import type { Resources } from "../../../resource";
 import { PathIds } from "../../../resource/path/ids";
 import { waitElementLoaded } from "../../../wait/wait-element-loaded";
+
+/** ルートHTML要素のclass属性 */
 const ROOT_CLASS_NAME = "armdozer-icon";
+
+/** 画像のclass属性 */
 const IMAGE_CLASS_NAME = `${ROOT_CLASS_NAME}__image`;
+
+/** チェックマークのclass属性 */
 const CHECK_CLASS_NAME = `${ROOT_CLASS_NAME}__check`;
 
-/**
- * アームドーザアイコン ビュー
- */
+/** アームドーザアイコン */
 export class ArmdozerIcon {
+  /** ルートHTML要素 */
   #root: HTMLElement;
+  /** アイコン画像 */
   #image: HTMLImageElement;
+  /** チェックマーク */
   #check: HTMLImageElement;
+  /** アイコン画像の読み込みが完了したら発火するPromise */
   #isImageLoaded: Promise<void>;
+  /** チェックマーク画像の読み込みが完了したら発火するPromise */
   #isCheckLoaded: Promise<void>;
+  /** 選択通知ストリーム */
   #select: Observable<PushDOM>;
 
   /**
    * コンストラクタ
-   *
    * @param resources リソース管理オブジェクト
    * @param imagePath 画像ファイルのパス
    * @param alt 代替テキスト
@@ -52,7 +61,6 @@ export class ArmdozerIcon {
 
   /**
    * リソース読み込みが完了するまで待つ
-   *
    * @return 待機結果
    */
   async waitUntilLoaded(): Promise<void> {
@@ -61,7 +69,6 @@ export class ArmdozerIcon {
 
   /**
    * ルートHTMLを取得する
-   *
    * @return 取得結果
    */
   getRootHTMLElement(): HTMLElement {
@@ -70,7 +77,6 @@ export class ArmdozerIcon {
 
   /**
    * アイコン選択通知
-   *
    * @return 通知ストリーム
    */
   notifySelection(): Observable<PushDOM> {
@@ -79,7 +85,6 @@ export class ArmdozerIcon {
 
   /**
    * ポップアニメーション
-   *
    * @return アニメーション
    */
   async pop(): Promise<void> {
@@ -88,7 +93,6 @@ export class ArmdozerIcon {
 
   /**
    * アイコンが選択された状態にする
-   *
    * @param isSelected 選択されたか否かのフラグ、trueで選択された
    */
   selected(isSelected: boolean): void {
