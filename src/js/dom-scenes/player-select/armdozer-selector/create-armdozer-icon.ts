@@ -5,6 +5,71 @@ import { PathIds } from "../../../resource/path/ids";
 import { ArmdozerIcon } from "./armdozer-icon";
 
 /**
+ * シンブレイバーアイコン
+ * @param resources リソース管理オブジェクト
+ * @return 生成結果
+ */
+function shinBraverIcon(resources: Resources): ArmdozerIcon {
+  return new ArmdozerIcon(
+    resources,
+    PathIds.SHIN_BRAVER_ICON,
+    "シンブレイバー アイコン",
+  );
+}
+
+/**
+ * ネオランドーザアイコン
+ * @param resources リソース管理オブジェクト
+ * @return 生成結果
+ */
+function neoLandozerIcon(resources: Resources): ArmdozerIcon {
+  return new ArmdozerIcon(
+    resources,
+    PathIds.NEO_LANDOZER_ICON,
+    "ネオランドーザ アイコン",
+  );
+}
+
+/**
+ * ライトニングドーザアイコン
+ * @param resources リソース管理オブジェクト
+ * @return 生成結果
+ */
+function lightningDozerIcon(resources: Resources): ArmdozerIcon {
+  return new ArmdozerIcon(
+    resources,
+    PathIds.LIGHTNING_DOZER_ICON,
+    "ライトニングドーザ アイコン",
+  );
+}
+
+/**
+ * ウィングドーザアイコン
+ * @param resources リソース管理オブジェクト
+ * @return 生成結果
+ */
+function wingDozerIcon(resources: Resources): ArmdozerIcon {
+  return new ArmdozerIcon(
+    resources,
+    PathIds.WING_DOZER_ICON,
+    "ウィングドーザ アイコン",
+  );
+}
+
+/**
+ * ジェネシスブレイバーアイコン
+ * @param resources リソース管理オブジェクト
+ * @return 生成結果
+ */
+function genesisBraverIcon(resources: Resources): ArmdozerIcon {
+  return new ArmdozerIcon(
+    resources,
+    PathIds.GENESIS_BRAVER_ICON,
+    "ジェネシスブレイバー アイコン",
+  );
+}
+
+/**
  * アームドーザアイコンを生成する
  * @param resources リソース管理オブジェクト
  * @param armdozerId アームドーザID
@@ -28,61 +93,4 @@ export function createArmdozerIcon(
     default:
       return shinBraverIcon(resources);
   }
-}
-
-/**
- * シンブレイバーアイコン
- * @param resources リソース管理オブジェクト
- * @return 生成結果
- */
-function shinBraverIcon(resources: Resources): ArmdozerIcon {
-  const path =
-    resources.paths.find((v) => v.id === PathIds.SHIN_BRAVER_ICON)?.path ?? "";
-  return new ArmdozerIcon(resources, path, "シンブレイバー アイコン");
-}
-
-/**
- * ネオランドーザアイコン
- * @param resources リソース管理オブジェクト
- * @return 生成結果
- */
-function neoLandozerIcon(resources: Resources): ArmdozerIcon {
-  const path =
-    resources.paths.find((v) => v.id === PathIds.NEO_LANDOZER_ICON)?.path ?? "";
-  return new ArmdozerIcon(resources, path, "ネオランドーザ アイコン");
-}
-
-/**
- * ライトニングドーザアイコン
- * @param resources リソース管理オブジェクト
- * @return 生成結果
- */
-function lightningDozerIcon(resources: Resources): ArmdozerIcon {
-  const path =
-    resources.paths.find((v) => v.id === PathIds.LIGHTNING_DOZER_ICON)?.path ??
-    "";
-  return new ArmdozerIcon(resources, path, "ライトニングドーザ アイコン");
-}
-
-/**
- * ウィングドーザアイコン
- * @param resources リソース管理オブジェクト
- * @return 生成結果
- */
-function wingDozerIcon(resources: Resources): ArmdozerIcon {
-  const path =
-    resources.paths.find((v) => v.id === PathIds.WING_DOZER_ICON)?.path ?? "";
-  return new ArmdozerIcon(resources, path, "ウィングドーザ アイコン");
-}
-
-/**
- * ジェネシスブレイバーアイコン
- * @param resources リソース管理オブジェクト
- * @return 生成結果
- */
-function genesisBraverIcon(resources: Resources): ArmdozerIcon {
-  const path =
-    resources.paths.find((v) => v.id === PathIds.GENESIS_BRAVER_ICON)?.path ??
-    "";
-  return new ArmdozerIcon(resources, path, "ジェネシスブレイバー アイコン");
 }

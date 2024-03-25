@@ -1,7 +1,9 @@
-import { Observable, tap } from "rxjs";
+import { ArmdozerId } from "gbraver-burst-core";
+import { map, Observable, tap } from "rxjs";
 
 import { pop } from "../../../dom/pop";
 import { domPushStream, PushDOM } from "../../../dom/push-dom";
+import { getArmdozerIconPathId } from "../../../path/armdozer-icon-path";
 import type { Resources } from "../../../resource";
 import { PathIds } from "../../../resource/path/ids";
 import { waitElementLoaded } from "../../../wait/wait-element-loaded";
@@ -15,6 +17,12 @@ const IMAGE_CLASS_NAME = `${ROOT_CLASS_NAME}__image`;
 /** チェックマークのclass属性 */
 const CHECK_CLASS_NAME = `${ROOT_CLASS_NAME}__check`;
 
+/** アームドーザ選択通知 */
+type ArmdozerIconSelected = PushDOM & {
+  /** アームドーザID */
+  armdozerId: ArmdozerId;
+}
+
 /** アームドーザアイコン */
 export class ArmdozerIcon {
   /** ルートHTML要素 */
@@ -23,6 +31,8 @@ export class ArmdozerIcon {
   #image: HTMLImageElement;
   /** チェックマーク */
   #check: HTMLImageElement;
+  /** アームドーザID */
+  #armdozerId: ArmdozerId;
   /** アイコン画像の読み込みが完了したら発火するPromise */
   #isImageLoaded: Promise<void>;
   /** チェックマーク画像の読み込みが完了したら発火するPromise */
@@ -36,15 +46,19 @@ export class ArmdozerIcon {
    * @param imagePath 画像ファイルのパス
    * @param alt 代替テキスト
    */
-  constructor(resources: Resources, imagePath: string, alt: string) {
+  constructor(resources: Resources, armdozerId: ArmdozerId, alt: string) {
     this.#root = document.createElement("div");
     this.#root.className = ROOT_CLASS_NAME;
+
     this.#image = document.createElement("img");
     this.#image.className = IMAGE_CLASS_NAME;
     this.#isImageLoaded = waitElementLoaded(this.#image);
-    this.#image.src = imagePath;
+    this.#image.src =
+      resources.paths.find((p) => p.id === getArmdozerIconPathId(armdozerId))
+        ?.path ?? "";
     this.#image.alt = alt;
     this.#root.appendChild(this.#image);
+
     this.#check = document.createElement("img");
     this.#check.className = CHECK_CLASS_NAME;
     this.#isCheckLoaded = waitElementLoaded(this.#check);
@@ -52,6 +66,9 @@ export class ArmdozerIcon {
       resources.paths.find((v) => v.id === PathIds.CHECK)?.path ?? "";
     this.#check.hidden = true;
     this.#root.appendChild(this.#check);
+
+    this.#armdozerId = armdozerId;
+
     this.#select = domPushStream(this.#root).pipe(
       tap((action) => {
         action.event.preventDefault();
@@ -79,8 +96,10 @@ export class ArmdozerIcon {
    * アイコン選択通知
    * @return 通知ストリーム
    */
-  notifySelection(): Observable<PushDOM> {
-    return this.#select;
+  notifySelection(): Observable<ArmdozerIconSelected> {
+    return this.#select.pipe(
+      map((action) => ({...action, armdozerId: this.#armdozerId}))
+    );
   }
 
   /**
