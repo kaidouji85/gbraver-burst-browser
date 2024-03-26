@@ -5,24 +5,33 @@ import { domPushStream, PushDOM } from "../../../dom/push-dom";
 import type { Resources } from "../../../resource";
 import { PathIds } from "../../../resource/path/ids";
 import { waitElementLoaded } from "../../../wait/wait-element-loaded";
+
+/** ルートHTML要素のclass属性 */
 const ROOT_CLASS_NAME = "pilot-icon";
+
+/** アイコン画像のclass属性 */
 const IMAGE_CLASS_NAME = `${ROOT_CLASS_NAME}__image`;
+
+/** チェックマークのclass属性 */
 const CHECK_CLASS_NAME = `${ROOT_CLASS_NAME}__check`;
 
-/**
- * パイロットアイコン
- */
+/** パイロットアイコン */
 export class PilotIcon {
+  /** ルートHTML要素 */
   #root: HTMLElement;
+  /** 画像要素 */
   #image: HTMLImageElement;
+  /** チェックマーク画像要素 */
   #check: HTMLImageElement;
+  /** 画像の読み込みが完了したら発火するPromise */
   #isImageLoaded: Promise<void>;
+  /** チェックマークの読みこみが完了したら発火するPromise */
   #isCheckLoaded: Promise<void>;
+  /** パイロット選択通知 */
   #select: Observable<PushDOM>;
 
   /**
    * コンストラクタ
-   *
    * @param resources リソース管理オブジェクト
    * @param path 画像パス
    * @param alt 代替テキスト
@@ -52,16 +61,14 @@ export class PilotIcon {
 
   /**
    * リソース読み込みが完了するまで待つ
-   *
    * @return 待機結果
    */
-  waitUntilLoaded(): Promise<void> {
-    return this.#isImageLoaded;
+  async waitUntilLoaded(): Promise<void> {
+    await Promise.all([this.#isImageLoaded, this.#isCheckLoaded]);
   }
 
   /**
    * ルートHTMLを取得する
-   *
    * @return 取得結果
    */
   getRootHTMLElement(): HTMLElement {
@@ -70,7 +77,6 @@ export class PilotIcon {
 
   /**
    * アイコン選択通知
-   *
    * @return 通知ストリーム
    */
   notifySelection(): Observable<PushDOM> {
@@ -79,7 +85,6 @@ export class PilotIcon {
 
   /**
    * ポップアニメーション
-   *
    * @return アニメーション
    */
   async pop(): Promise<void> {
@@ -88,7 +93,6 @@ export class PilotIcon {
 
   /**
    * アイコンが選択された状態にする
-   *
    * @param isSelected 選択されたか否かのフラグ、trueで選択された
    */
   selected(isSelected: boolean): void {
