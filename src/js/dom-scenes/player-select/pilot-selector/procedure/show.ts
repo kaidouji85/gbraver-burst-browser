@@ -9,18 +9,18 @@ import { PilotSelectorProps } from "../props";
  * @param pilotId 選択するパイロットID
  */
 export function show(props: PilotSelectorProps, pilotId: PilotId) {
-  const selected = props.pilotIcons.find((v) => v.pilotId === pilotId);
+  const selected = props.pilotIcons.find((icon) => icon.pilotId === pilotId);
   if (!selected) {
     return;
   }
 
   props.root.className = BLOCK;
   props.pilotId = pilotId;
-  selected.icon.selected(true);
+  selected.selected(true);
   props.pilotStatus.switch(pilotId);
   props.pilotIcons
-    .filter((v) => v.pilotId !== pilotId)
-    .forEach((v) => {
-      v.icon.selected(false);
+    .filter((icon) => icon.pilotId !== pilotId)
+    .forEach((icon) => {
+      icon.selected(false);
     });
 }

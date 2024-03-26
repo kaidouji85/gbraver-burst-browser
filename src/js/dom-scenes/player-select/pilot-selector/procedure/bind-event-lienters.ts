@@ -15,9 +15,9 @@ export function bindEventListeners(
   props: PilotSelectorProps,
 ): Unsubscribable[] {
   return [
-    ...props.pilotIcons.map((v) =>
-      v.icon.notifySelection().subscribe(() => {
-        onPilotChange(props, v.pilotId);
+    ...props.pilotIcons.map((icon) =>
+      icon.notifySelection().subscribe(() => {
+        onPilotChange(props, icon.pilotId);
       }),
     ),
     domPushStream(props.okButton).subscribe((action) => {

@@ -8,5 +8,5 @@ import { PilotSelectorProps } from "../props";
 export async function waitUntilLoaded(
   props: Readonly<PilotSelectorProps>,
 ): Promise<void> {
-  await Promise.all(props.pilotIcons.map((v) => v.icon.waitUntilLoaded()));
+  await Promise.all(props.pilotIcons.map((icon) => icon.waitUntilLoaded()));
 }

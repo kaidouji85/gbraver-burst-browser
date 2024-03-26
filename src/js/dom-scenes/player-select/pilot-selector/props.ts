@@ -17,12 +17,7 @@ export type PilotSelectorProps = {
   /** パイロットステータス */
   pilotStatus: PilotStatus;
   /** パイロットアイコンをあつめたもの */
-  pilotIcons: Array<{
-    /** パイロットID */
-    pilotId: PilotId;
-    /** パイロットアイコン */
-    icon: PilotIcon;
-  }>;
+  pilotIcons: PilotIcon[];
   /** OKボタン */
   okButton: HTMLElement;
   /** 戻るボタン */
