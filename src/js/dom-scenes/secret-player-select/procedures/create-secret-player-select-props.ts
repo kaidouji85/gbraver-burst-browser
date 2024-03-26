@@ -3,6 +3,7 @@ import { ArmdozerId } from "gbraver-burst-core";
 import { Resources } from "../../../resource";
 import { ArmdozerIcon } from "../armdozer-icon";
 import { ROOT } from "../dom/class-name";
+import { extractArmdozerIcons } from "../dom/extract-elements";
 import { rootInnerHTML } from "../dom/root-inner-html";
 import { SecretPlayerSelectProps } from "../props";
 
@@ -27,9 +28,10 @@ export function createSecretPlayerSelectProps(
   root.innerHTML = rootInnerHTML();
 
   const { resources, armdozerIds } = params;
+  const armdozerIconsContainer = extractArmdozerIcons(root);
   const armdozerIcons = armdozerIds.map(armdozerId => new ArmdozerIcon(resources, armdozerId));
   armdozerIcons.forEach(icon => {
-    root.appendChild(icon.getRootHTMLElement());
+    armdozerIconsContainer.appendChild(icon.getRootHTMLElement());
   });
   
   return { root };

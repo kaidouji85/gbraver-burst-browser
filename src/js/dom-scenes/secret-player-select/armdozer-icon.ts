@@ -6,22 +6,23 @@ import { ARMDOZER_ICON } from "./dom/class-name";
 
 /** アームドーザアイコン */
 export class ArmdozerIcon {
+  /** アームドーザID */
+  readonly armdozerId: ArmdozerId;
   /** ルートHTML要素 */
-  #root: HTMLImageElement;
-  /** 割当てらたアームドーザID */
-  #armdozerId: ArmdozerId;
+  readonly #root: HTMLImageElement;
 
   /**
    * コンストラクタ
-   * @param resources リソース管理オブジェクト 
+   * @param resources リソース管理オブジェクト
    * @param armdozerId アームドーザID
    */
   constructor(resources: Resources, armdozerId: ArmdozerId) {
-    this.#root = document.createElement('img');
+    this.armdozerId = armdozerId;
+
+    this.#root = document.createElement("img");
     const pathId = getArmdozerIconPathId(armdozerId);
-    this.#root.src = resources.paths.find(p => p.id === pathId)?.path ?? '';
+    this.#root.src = resources.paths.find((p) => p.id === pathId)?.path ?? "";
     this.#root.className = ARMDOZER_ICON;
-    this.#armdozerId = armdozerId;
   }
 
   /**
