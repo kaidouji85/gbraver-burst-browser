@@ -38,9 +38,8 @@ export class ArmdozerIcon {
    * コンストラクタ
    * @param resources リソース管理オブジェクト
    * @param imagePath 画像ファイルのパス
-   * @param alt 代替テキスト
    */
-  constructor(resources: Resources, armdozerId: ArmdozerId, alt: string) {
+  constructor(resources: Resources, armdozerId: ArmdozerId) {
     this.#root = document.createElement("div");
     this.#root.className = ROOT_CLASS_NAME;
 
@@ -50,7 +49,7 @@ export class ArmdozerIcon {
     this.#image.src =
       resources.paths.find((p) => p.id === getArmdozerIconPathId(armdozerId))
         ?.path ?? "";
-    this.#image.alt = alt;
+    this.#image.alt = `アームドーザアイコン ${armdozerId}`;
     this.#root.appendChild(this.#image);
 
     this.#check = document.createElement("img");

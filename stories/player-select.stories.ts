@@ -3,7 +3,6 @@ import { ArmdozerIds, PilotIds } from "gbraver-burst-core";
 import { PlayerSelect } from "../src/js/dom-scenes/player-select";
 import { ArmdozerSelector } from "../src/js/dom-scenes/player-select/armdozer-selector";
 import { PilotSelector } from "../src/js/dom-scenes/player-select/pilot-selector";
-import { createPilotIcon } from "../src/js/dom-scenes/player-select/pilot-selector/create-pilot-icon";
 import { PlayableArmdozers } from "../src/js/game/playable-amdozers";
 import { PlayablePilots } from "../src/js/game/playable-pilots";
 import type { DOMStubStory } from "./stub/dom-stub";
@@ -20,14 +19,6 @@ export const scene: DOMStubStory = domStub((resources) => {
     pilotIds: PlayablePilots,
   });
   return scene.getRootHTMLElement();
-});
-
-export const pilotIcon: DOMStubStory = domStub((resources) => {
-  const icon = createPilotIcon(resources, PilotIds.SHINYA);
-  icon.notifySelection().subscribe(() => {
-    // NOP
-  });
-  return icon.getRootHTMLElement();
 });
 
 export const armdozerSelector: DOMStubStory = domStub((resources) => {

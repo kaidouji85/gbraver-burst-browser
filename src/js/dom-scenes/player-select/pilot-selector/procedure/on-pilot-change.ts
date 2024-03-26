@@ -12,7 +12,7 @@ export function onPilotChange(
   pilotId: PilotId,
 ): void {
   props.exclusive.execute(async (): Promise<void> => {
-    const selected = props.pilotIcons.find((v) => v.pilotId === pilotId);
+    const selected = props.pilotIcons.find((icon) => icon.pilotId === pilotId);
     if (!selected) {
       return;
     }
@@ -22,13 +22,13 @@ export function onPilotChange(
     }
     props.pilotId = pilotId;
     props.pilotStatus.switch(pilotId);
-    selected.icon.pop();
+    selected.pop();
     props.changeValueSound.play();
-    selected.icon.selected(true);
+    selected.selected(true);
     props.pilotIcons
-      .filter((v) => v.pilotId !== pilotId)
-      .forEach((v) => {
-        v.icon.selected(false);
+      .filter((icon) => icon.pilotId !== pilotId)
+      .forEach((icon) => {
+        icon.selected(false);
       });
   });
 }
