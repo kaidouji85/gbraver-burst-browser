@@ -6,7 +6,6 @@ import { replaceDOM } from "../../../../dom/replace-dom";
 import { Exclusive } from "../../../../exclusive/exclusive";
 import { Resources } from "../../../../resource";
 import { SOUND_IDS } from "../../../../resource/sound";
-import { createPilotIcon } from "../create-pilot-icon";
 import { BLOCK } from "../dom/class-name";
 import {
   extractDummyStatus,
@@ -15,6 +14,7 @@ import {
   extractPrevButton,
 } from "../dom/extract-element";
 import { rootInnerHTML } from "../dom/root-inner-html";
+import { PilotIcon } from "../pilot-icon";
 import { PilotStatus } from "../pilot-status";
 import { PilotSelectorProps } from "../props";
 
@@ -39,14 +39,11 @@ export function createPilotSelectorProps(
   const dummyStatus = extractDummyStatus(root);
   replaceDOM(dummyStatus, pilotStatus.getRootHTMLElement());
 
-  const pilotIcons = pilotIds.map((v) => ({
-    pilotId: v,
-    icon: createPilotIcon(resources, v),
-  }));
+  const pilotIcons = pilotIds.map((id) => new PilotIcon(resources, id));
   const icons = extractIcons(root);
-  pilotIcons.forEach((v) => {
-    v.icon.selected(v.pilotId === initialPilotId);
-    icons.appendChild(v.icon.getRootHTMLElement());
+  pilotIcons.forEach((icon) => {
+    icon.selected(icon.pilotId === initialPilotId);
+    icons.appendChild(icon.getRootHTMLElement());
   });
 
   return {
