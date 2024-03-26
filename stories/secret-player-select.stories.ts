@@ -1,4 +1,4 @@
-import { ArmdozerIds } from "gbraver-burst-core";
+import { ArmdozerIds, PilotIds } from "gbraver-burst-core";
 
 import { SecretPlayerSelect } from "../src/js/dom-scenes/secret-player-select";
 import { domStub } from "./stub/dom-stub";
@@ -17,6 +17,13 @@ export const scene = domStub((resources) => {
       ArmdozerIds.NEO_LANDOZER,
       ArmdozerIds.LIGHTNING_DOZER,
       ArmdozerIds.GENESIS_BRAVER,
+    ],
+    pilotIds: [
+      PilotIds.SHINYA,
+      PilotIds.TSUBASA,
+      PilotIds.GAI,
+      PilotIds.RAITO,
+      PilotIds.YUUYA,
     ],
   });
   return scene.getRootHTMLElement();
