@@ -3,25 +3,17 @@ import type { PilotId } from "gbraver-burst-core";
 import type { Resources } from "../../../resource";
 import { PilotBustShot } from "./pilot-bust-shot";
 
-/**
- * バストショットとパイロットIDの紐づけ
- */
-type BustShot = {
-  pilotId: PilotId;
-  bustShot: PilotBustShot;
-};
-
-/**
- * パイロット バストショット
- */
+/** パイロット バストショット */
 export class PilotBustShotContainer {
+  /** 現在選択中のパイロットID */
   #pilotId: PilotId;
-  #bustShots: BustShot[];
+  /** バストショットをあつめたもの */
+  #bustShots: PilotBustShot[];
+  /** ルートHTML要素 */
   #root: HTMLElement;
 
   /**
    * コンストラクタ
-   *
    * @param resources リソース管理オブジェクト
    * @param pilotIds パイロットIDリスト
    * @param initialPilotId パイロットID初期値
@@ -32,20 +24,18 @@ export class PilotBustShotContainer {
     initialPilotId: PilotId,
   ) {
     this.#pilotId = initialPilotId;
+
     this.#root = document.createElement("div");
-    this.#bustShots = pilotIds.map((id) => ({
-      pilotId: id,
-      bustShot: new PilotBustShot(resources, id),
-    }));
-    this.#bustShots.forEach((v) => {
-      v.pilotId === this.#pilotId ? v.bustShot.show() : v.bustShot.hidden();
-      this.#root.appendChild(v.bustShot.getRootHTMLElement());
+
+    this.#bustShots = pilotIds.map((id) => new PilotBustShot(resources, id));
+    this.#bustShots.forEach((bustShot) => {
+      bustShot.pilotId === this.#pilotId ? bustShot.show() : bustShot.hidden();
+      this.#root.appendChild(bustShot.getRootHTMLElement());
     });
   }
 
   /**
    * ルートHTML要素を取得する
-   *
    * @return 取得結果
    */
   getRootHTMLElement(): HTMLElement {
@@ -54,54 +44,56 @@ export class PilotBustShotContainer {
 
   /**
    * パイロットカットインを切り替える
-   *
    * @param pilotId 切り替えるパイロットID
    */
   switch(pilotId: PilotId): void {
-    const target = this.#bustShots.find((v) => v.pilotId === pilotId);
+    const target = this.#bustShots.find(
+      (bustShot) => bustShot.pilotId === pilotId,
+    );
     if (!target) {
       return;
     }
 
     this.#pilotId = pilotId;
-    const others = this.#bustShots.filter((v) => v !== target);
-    others.forEach((v) => {
-      v.bustShot.hidden();
+    const others = this.#bustShots.filter((bustShot) => bustShot !== target);
+    others.forEach((bustShot) => {
+      bustShot.hidden();
     });
-    target.bustShot.show();
-    target.bustShot.enter();
+    target.show();
+    target.enter();
   }
 
   /**
    * 退場
-   *
    * @return アニメーション
    */
   async exit(): Promise<void> {
-    const target = this.#bustShots.find((v) => v.pilotId === this.#pilotId);
-
+    const target = this.#bustShots.find(
+      (bustShot) => bustShot.pilotId === this.#pilotId,
+    );
     if (!target) {
       return;
     }
 
-    await target.bustShot.exit();
+    await target.exit();
   }
 
   /**
    * 非表示にする
    */
   hidden(): void {
-    this.#bustShots.forEach((v) => {
-      v.bustShot.hidden();
+    this.#bustShots.forEach((bustShot) => {
+      bustShot.hidden();
     });
   }
 
   /**
    * リソース読み込みが完了するまで待つ
-   *
    * @return 待機結果
    */
-  async waitUnlillLoaded(): Promise<void> {
-    await Promise.all(this.#bustShots.map((v) => v.bustShot.waitUntilLoaded()));
+  async waitUntilLoaded(): Promise<void> {
+    await Promise.all(
+      this.#bustShots.map((bustShot) => bustShot.waitUntilLoaded()),
+    );
   }
 }
