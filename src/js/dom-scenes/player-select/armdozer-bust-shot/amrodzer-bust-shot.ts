@@ -2,6 +2,7 @@ import { waitFinishAnimation } from "../../../dom/wait-finish-animation";
 import { waitElementLoaded } from "../../../wait/wait-element-loaded";
 
 /**
+ * @deprecated
  * cssクラス名のプレフィックス
  */
 export const CLASS_NAME_PREFIX = "armdozer-bust-shot";
