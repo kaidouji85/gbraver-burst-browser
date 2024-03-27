@@ -17,5 +17,5 @@ const PilotSkillCutinPathIds: Record<PilotId, PathId> = {
  * @param pilotId パイロットID
  * @return パスID
  */
-export const getPilotIconPathId = (pilotId: PilotId): PathId =>
+export const getPilotSkillCutinPathId = (pilotId: PilotId): PathId =>
   PilotSkillCutinPathIds[pilotId] ?? PathIds.SHINYA_SKILL_CUTIN;
