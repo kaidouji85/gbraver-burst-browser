@@ -4,6 +4,7 @@ import type { Resources } from "../../../resource";
 import { ArmdozerBustShot } from "./amrodzer-bust-shot";
 
 /**
+ * @deprecated
  * バストショット情報
  */
 type BustShot = {
@@ -11,11 +12,11 @@ type BustShot = {
   bustShot: ArmdozerBustShot;
 };
 
-/**
- * アームドーザバストショット
- */
+/** アームドーザバストショット */
 export class ArmdozerBustShotContainer {
+  /** ルートHTML要素 */
   #root: HTMLElement;
+  /** バストショットをあつめたもの */
   #bustShots: BustShot[];
 
   /**
@@ -47,7 +48,6 @@ export class ArmdozerBustShotContainer {
 
   /**
    * ルートHTML要素を取得する
-   *
    * @return 取得結果
    */
   getRootHTMLElement(): HTMLElement {
@@ -56,7 +56,6 @@ export class ArmdozerBustShotContainer {
 
   /**
    * リソースの読み込みが完了するまで待つ
-   *
    * @return 待機結果
    */
   async waitUntilLoaded(): Promise<void> {
