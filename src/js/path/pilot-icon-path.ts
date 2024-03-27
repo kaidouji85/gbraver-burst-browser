@@ -18,4 +18,4 @@ const PilotIconPathIds: Record<PilotId, PathId> = {
  * @return パスID
  */
 export const getPilotIconPathId = (pilotId: PilotId): PathId =>
-  PilotIconPathIds[pilotId] ?? PilotIds.SHINYA;
+  PilotIconPathIds[pilotId] ?? PathIds.SHINYA_ICON;
