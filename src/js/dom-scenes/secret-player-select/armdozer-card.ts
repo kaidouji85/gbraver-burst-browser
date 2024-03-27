@@ -2,10 +2,12 @@ import { ArmdozerId } from "gbraver-burst-core";
 
 import { getArmdozerIconPathId } from "../../path/armdozer-icon-path";
 import { Resources } from "../../resource";
-import { ARMDOZER_ICON } from "./dom/class-name";
 
-/** アームドーザアイコン */
-export class ArmdozerIcon {
+/** ルートHTML要素のclass属性 */
+const ROOT = "armdozer-card";
+
+/** アームドーザカード */
+export class ArmdozerCard {
   /** アームドーザID */
   readonly armdozerId: ArmdozerId;
   /** ルートHTML要素 */
@@ -22,7 +24,7 @@ export class ArmdozerIcon {
     this.#root = document.createElement("img");
     const pathId = getArmdozerIconPathId(armdozerId);
     this.#root.src = resources.paths.find((p) => p.id === pathId)?.path ?? "";
-    this.#root.className = ARMDOZER_ICON;
+    this.#root.className = ROOT;
   }
 
   /**

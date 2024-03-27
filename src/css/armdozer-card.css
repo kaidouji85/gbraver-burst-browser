@@ -1,0 +1,5 @@
+/** アームドーザカード */
+.armdozer-card {
+  width: calc(var(--responsive-font-size) * 5);
+  height: calc(var(--responsive-font-size) * 3);
+}
