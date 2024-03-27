@@ -22,7 +22,7 @@ export class PilotBustShot {
    */
   constructor(resources: Resources, pilotId: PilotId) {
     this.pilotId = pilotId;
-    
+
     this.#image = document.createElement("img");
     this.#image.src =
       resources.paths.find((p) => p.id === getPilotSkillCutinPathId(pilotId))
