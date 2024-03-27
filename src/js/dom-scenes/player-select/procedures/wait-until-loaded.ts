@@ -11,7 +11,7 @@ export async function waitUntilLoaded(
   await Promise.all([
     props.armdozerBustShot.waitUntilLoaded(),
     props.armdozerSelector.waitUntilLoaded(),
-    props.pilotBustShot.waitUnlillLoaded(),
+    props.pilotBustShot.waitUntilLoaded(),
     props.pilotSelector.waitUntilLoaded(),
   ]);
 }

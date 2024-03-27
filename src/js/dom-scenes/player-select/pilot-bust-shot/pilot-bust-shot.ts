@@ -8,6 +8,8 @@ import { getPilotBustShotClassName } from "./class-name";
 
 /** パイロットバストショット */
 export class PilotBustShot {
+  /** パイロットID */
+  pilotId: PilotId;
   /** 画像要素 */
   #image: HTMLImageElement;
   /** 画像が読みこみ完了したら発火するPromise */
@@ -19,11 +21,14 @@ export class PilotBustShot {
    * @param pilotId パイロットID
    */
   constructor(resources: Resources, pilotId: PilotId) {
+    this.pilotId = pilotId;
+
     this.#image = document.createElement("img");
     this.#image.src =
       resources.paths.find((p) => p.id === getPilotSkillCutinPathId(pilotId))
         ?.path ?? "";
     this.#image.className = getPilotBustShotClassName(pilotId);
+
     this.#isLoaded = waitElementLoaded(this.#image);
   }
 
