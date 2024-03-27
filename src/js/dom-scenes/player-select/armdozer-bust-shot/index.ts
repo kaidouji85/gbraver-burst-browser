@@ -3,20 +3,12 @@ import type { ArmdozerId } from "gbraver-burst-core";
 import type { Resources } from "../../../resource";
 import { ArmdozerBustShot } from "./amrodzer-bust-shot";
 
-/**
- * バストショット情報
- */
-type BustShot = {
-  armdozerId: ArmdozerId;
-  bustShot: ArmdozerBustShot;
-};
-
-/**
- * アームドーザバストショット
- */
+/** アームドーザバストショット */
 export class ArmdozerBustShotContainer {
+  /** ルートHTML要素 */
   #root: HTMLElement;
-  #bustShots: BustShot[];
+  /** バストショットをあつめたもの */
+  #bustShots: ArmdozerBustShot[];
 
   /**
    * コンストラクタ
@@ -31,23 +23,21 @@ export class ArmdozerBustShotContainer {
   ) {
     this.#root = document.createElement("div");
     this.#root.className = "player-select__armdozer-bust-shot-container";
-    this.#bustShots = armdozerIds.map((id) => ({
-      armdozerId: id,
-      bustShot: new ArmdozerBustShot(resources, id),
-    }));
-    this.#bustShots.forEach((v) => {
-      this.#root.appendChild(v.bustShot.getRootHTMLElement());
+    this.#bustShots = armdozerIds.map(
+      (id) => new ArmdozerBustShot(resources, id),
+    );
+    this.#bustShots.forEach((bustShot) => {
+      this.#root.appendChild(bustShot.getRootHTMLElement());
     });
     this.#bustShots
-      .filter((v) => v.armdozerId !== initialArmdozerId)
-      .forEach((v) => {
-        v.bustShot.hidden();
+      .filter((bustShot) => bustShot.armdozerId !== initialArmdozerId)
+      .forEach((bustShot) => {
+        bustShot.hidden();
       });
   }
 
   /**
    * ルートHTML要素を取得する
-   *
    * @return 取得結果
    */
   getRootHTMLElement(): HTMLElement {
@@ -56,11 +46,12 @@ export class ArmdozerBustShotContainer {
 
   /**
    * リソースの読み込みが完了するまで待つ
-   *
    * @return 待機結果
    */
   async waitUntilLoaded(): Promise<void> {
-    await Promise.all(this.#bustShots.map((v) => v.bustShot.waitUntilLoaded()));
+    await Promise.all(
+      this.#bustShots.map((bustShot) => bustShot.waitUntilLoaded()),
+    );
   }
 
   /**
@@ -69,15 +60,15 @@ export class ArmdozerBustShotContainer {
    */
   switch(armdozerId: ArmdozerId): void {
     this.#bustShots
-      .filter((v) => v.armdozerId === armdozerId)
-      .forEach((v) => {
-        v.bustShot.show();
-        v.bustShot.move();
+      .filter((bustShot) => bustShot.armdozerId === armdozerId)
+      .forEach((bustShot) => {
+        bustShot.show();
+        bustShot.move();
       });
     this.#bustShots
-      .filter((v) => v.armdozerId !== armdozerId)
-      .forEach((v) => {
-        v.bustShot.hidden();
+      .filter((bustShot) => bustShot.armdozerId !== armdozerId)
+      .forEach((bustShot) => {
+        bustShot.hidden();
       });
   }
 }

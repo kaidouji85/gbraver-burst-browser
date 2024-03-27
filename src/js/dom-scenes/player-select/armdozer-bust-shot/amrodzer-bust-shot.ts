@@ -8,10 +8,12 @@ import { getArmdozerBustShotClassName } from "./class-name";
 
 /** アームドーザバストショット */
 export class ArmdozerBustShot {
+  /** アームドーザID */
+  readonly armdozerId: ArmdozerId;
   /** 画像要素 */
-  #image: HTMLImageElement;
+  readonly #image: HTMLImageElement;
   /** 画像の読みこみが完了したら発火するPromise */
-  #isLoaded: Promise<void>;
+  readonly #isLoaded: Promise<void>;
 
   /**
    * コンストラクタ
@@ -19,6 +21,8 @@ export class ArmdozerBustShot {
    * @param armdozerId アームドーザID
    */
   constructor(resources: Resources, armdozerId: ArmdozerId) {
+    this.armdozerId = armdozerId;
+
     this.#image = document.createElement("img");
     this.#image.src =
       resources.paths.find(
