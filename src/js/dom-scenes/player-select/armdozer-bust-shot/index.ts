@@ -2,7 +2,6 @@ import type { ArmdozerId } from "gbraver-burst-core";
 
 import type { Resources } from "../../../resource";
 import { ArmdozerBustShot } from "./amrodzer-bust-shot";
-import { createBustShot } from "./create-bust-shot";
 
 /**
  * バストショット情報
@@ -32,9 +31,9 @@ export class ArmdozerBustShotContainer {
   ) {
     this.#root = document.createElement("div");
     this.#root.className = "player-select__armdozer-bust-shot-container";
-    this.#bustShots = armdozerIds.map((v) => ({
-      armdozerId: v,
-      bustShot: createBustShot(v, resources),
+    this.#bustShots = armdozerIds.map((id) => ({
+      armdozerId: id,
+      bustShot: new ArmdozerBustShot(resources, id),
     }));
     this.#bustShots.forEach((v) => {
       this.#root.appendChild(v.bustShot.getRootHTMLElement());
