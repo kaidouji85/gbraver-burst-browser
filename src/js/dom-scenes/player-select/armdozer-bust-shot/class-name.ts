@@ -18,4 +18,5 @@ const ArmdozerBustShotClassNames: Record<ArmdozerId, string> = {
  * @return class属性
  */
 export const getArmdozerBustShotClassName = (armdozerId: ArmdozerId): string =>
-  ArmdozerBustShotClassNames[armdozerId] ?? ArmdozerBustShotClassNames[ArmdozerIds.SHIN_BRAVER];
+  ArmdozerBustShotClassNames[armdozerId] ??
+  ArmdozerBustShotClassNames[ArmdozerIds.SHIN_BRAVER];
