@@ -1,7 +1,6 @@
 import type { PilotId } from "gbraver-burst-core";
 
 import type { Resources } from "../../../resource";
-import { createPilotBustShot } from "./create-bust-shot";
 import { PilotBustShot } from "./pilot-bust-shot";
 
 /**
@@ -34,9 +33,9 @@ export class PilotBustShotContainer {
   ) {
     this.#pilotId = initialPilotId;
     this.#root = document.createElement("div");
-    this.#bustShots = pilotIds.map((v) => ({
-      pilotId: v,
-      bustShot: createPilotBustShot(resources, v),
+    this.#bustShots = pilotIds.map((id) => ({
+      pilotId: id,
+      bustShot: new PilotBustShot(resources, id),
     }));
     this.#bustShots.forEach((v) => {
       v.pilotId === this.#pilotId ? v.bustShot.show() : v.bustShot.hidden();

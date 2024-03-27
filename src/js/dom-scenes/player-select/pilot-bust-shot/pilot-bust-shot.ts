@@ -1,29 +1,34 @@
-import { waitFinishAnimation } from "../../../dom/wait-finish-animation";
-import { waitElementLoaded } from "../../../wait/wait-element-loaded";
+import { PilotId } from "gbraver-burst-core";
 
-/**
- * パイロットバストショット
- */
+import { waitFinishAnimation } from "../../../dom/wait-finish-animation";
+import { getPilotSkillCutinPathId } from "../../../path/pilot-skill-cutin-path";
+import { Resources } from "../../../resource";
+import { waitElementLoaded } from "../../../wait/wait-element-loaded";
+import { getPilotBustShotClassName } from "./class-name";
+
+/** パイロットバストショット */
 export class PilotBustShot {
+  /** 画像要素 */
   #image: HTMLImageElement;
+  /** 画像が読みこみ完了したら発火するPromise */
   #isLoaded: Promise<void>;
 
   /**
    * コンストラクタ
-   *
-   * @param path 画像パス
-   * @param className cssクラス名
+   * @param resources リソース管理オブジェクト
+   * @param pilotId パイロットID
    */
-  constructor(path: string, className: string) {
+  constructor(resources: Resources, pilotId: PilotId) {
     this.#image = document.createElement("img");
-    this.#image.src = path;
-    this.#image.className = className;
+    this.#image.src =
+      resources.paths.find((p) => p.id === getPilotSkillCutinPathId(pilotId))
+        ?.path ?? "";
+    this.#image.className = getPilotBustShotClassName(pilotId);
     this.#isLoaded = waitElementLoaded(this.#image);
   }
 
   /**
    * ルートHTML要素を取得する
-   *
    * @return ルートHTML要素
    */
   getRootHTMLElement(): HTMLElement {
@@ -32,7 +37,6 @@ export class PilotBustShot {
 
   /**
    * 読み込みが完了するまで待つ
-   *
    * @return 待機結果
    */
   waitUntilLoaded(): Promise<void> {
@@ -55,7 +59,6 @@ export class PilotBustShot {
 
   /**
    * 入場
-   *
    * @return アニメーション
    */
   enter(): Promise<void> {
@@ -79,7 +82,6 @@ export class PilotBustShot {
 
   /**
    * 退場
-   *
    * @return アニメーション
    */
   exit(): Promise<void> {
