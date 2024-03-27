@@ -1,5 +1,17 @@
 /** アームドーザカード */
 .armdozer-card {
-  width: calc(var(--responsive-font-size) * 5);
-  height: calc(var(--responsive-font-size) * 3);
+  width: 40vh;
+  height: 25vh;
+  user-select: none;
+  overflow: hidden;
+  background-color: rgb(10 10 10 / 70%);
+  border: var(--dialog-border);
+  border-radius: var(--dialog-border-radius);
+  box-sizing: border-box;
+  font-size: calc(var(--responsive-font-size) * 0.8);
+  color: var(--font-color);
+}
+
+.armdozer-card__shin-braver-bust-shot {
+  height: 40vh;
 }
