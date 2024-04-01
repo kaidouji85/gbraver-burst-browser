@@ -1,7 +1,7 @@
 /** アームドーザカード */
 .armdozer-card {
   --font-size: calc(var(--responsive-font-size) * 0.8);
-  --gap: calc(var(--font-size) * 0.2);
+  --gap: calc(var(--font-size) * 0.3);
   --text-height: calc(var(--font-size) * 1.5);
   --label-width: calc(var(--font-size) * 4.5);
   --icon-size: calc(var(--text-height) * 4 + var(--gap) * 3);
@@ -22,22 +22,17 @@
 
 .armdozer-card__status {
   display: grid;
-  row-gap: var(--gap);
-}
-
-.armdozer-card__name {
-  grid-row: 1;
-}
-
-.armdozer-card__basic-params {
-  grid-row: 2;
-  display: grid;
+  gap: var(--gap);
   grid-template-columns:
     var(--label-width)
     1fr
     var(--label-width)
     1fr;
-  row-gap: var(--gap);
+}
+
+.armdozer-card__name {
+  grid-row: 1;
+  grid-column: 1 / 5;
 }
 
 .armdozer-card__battery-label,
@@ -52,7 +47,7 @@
 }
 
 .armdozer-card__battery-label {
-  grid-row: 1;
+  grid-row: 2;
   grid-column: 1;
   display: grid;
   place-items: center;
@@ -64,48 +59,51 @@
 }
 
 .armdozer-card__battery-value {
-  grid-row: 1;
+  grid-row: 2;
   grid-column: 2;
 }
 
 .armdozer-card__hp-label {
-  grid-row: 1;
+  grid-row: 2;
   grid-column: 3;
 }
 
 .armdozer-card__hp-value {
-  grid-row: 1;
+  grid-row: 2;
   grid-column: 4;
 }
 
 .armdozer-card__power-label {
-  grid-row: 2;
+  grid-row: 3;
   grid-column: 1;
 }
 
 .armdozer-card__power-value {
-  grid-row: 2;
+  grid-row: 3;
   grid-column: 2;
 }
 
 .armdozer-card__speed-label {
-  grid-row: 2;
+  grid-row: 3;
   grid-column: 3;
 }
 
 .armdozer-card__speed-value {
-  grid-row: 2;
+  grid-row: 3;
   grid-column: 4;
 }
 
-.armdozer-card__burst {
-  grid-row: 3;
+.armdozer-card__burst-label {
+  grid-row: 4;
+  grid-column: 1;
+  display: inline-block;
+  width: var(--label-width);
+  height: var(--text-height);
 }
 
-.armdozer-card__burst-label {
-  display: inline-block;
-  min-width: var(--label-width);
-  height: var(--text-height);
+.armdozer-card__burst-value {
+  grid-row: 4;
+  grid-column: 2 / 5;
 }
 
 .armdozer-card__shin-braver-icon {
