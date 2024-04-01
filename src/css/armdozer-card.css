@@ -1,8 +1,10 @@
 /** アームドーザカード */
 .armdozer-card {
   --font-size: calc(var(--responsive-font-size) * 0.8);
-  --icon-size: calc(var(--font-size) * 6);
+  --gap: calc(var(--font-size) * 0.2);
+  --text-height: calc(var(--font-size) * 1.5);
   --label-width: calc(var(--font-size) * 4.5);
+  --icon-size: calc(var(--text-height) * 4 + var(--gap) * 3);
 
   display: grid;
   grid-template-columns: var(--icon-size) 1fr;
@@ -18,13 +20,24 @@
   text-align: start;
 }
 
+.armdozer-card__status {
+  display: grid;
+  row-gap: var(--gap);
+}
+
+.armdozer-card__name {
+  grid-row: 1;
+}
+
 .armdozer-card__basic-params {
+  grid-row: 2;
   display: grid;
   grid-template-columns:
     var(--label-width)
     1fr
     var(--label-width)
     1fr;
+  row-gap: var(--gap);
 }
 
 .armdozer-card__battery-label,
@@ -35,6 +48,7 @@
   background-color: var(--button-background-color);
   text-align: center;
   border-radius: calc(var(--responsive-font-size) * 0.2);
+  min-height: var(--text-height);
 }
 
 .armdozer-card__battery-label {
@@ -84,11 +98,17 @@
   grid-column: 4;
 }
 
+.armdozer-card__burst {
+  grid-row: 3;
+}
+
 .armdozer-card__burst-label {
   display: inline-block;
   min-width: var(--label-width);
+  height: var(--text-height);
 }
 
 .armdozer-card__shin-braver-icon {
+  place-self: center;
   height: var(--icon-size);
 }
