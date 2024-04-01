@@ -1,21 +1,33 @@
 /** アームドーザカード */
 .armdozer-card {
-  --parameter-label-width: calc(var(--responsive-font-size) * 2.2);
+  --font-size: calc(var(--responsive-font-size) * 0.8);
 
-  width: calc(var(--responsive-font-size) * 0.8 * 25);
-  height:calc(var(--responsive-font-size) * 0.8 * 6);
+  position: relative;
+  width: calc(var(--font-size) * 25);
+  height:calc(var(--font-size) * 10);
   user-select: none;
   overflow: hidden;
   background-color: rgb(10 10 10 / 70%);
   border: var(--dialog-border);
   border-radius: var(--dialog-border-radius);
   box-sizing: border-box;
-  font-size: calc(var(--responsive-font-size) * 0.8);
+  font-size: var(--font-size);
   color: var(--font-color);
   text-align: start;
 }
 
+.armdozer-card__status {
+  display: grid;
+  grid-template-rows: 1fr auto auto auto;
+  height: 100%;
+}
+
+.armdozer-card__name {
+  grid-row: 2;
+}
+
 .armdozer-card__basic-params {
+  grid-row: 3;
   display: grid;
   grid-template-columns:
     auto
@@ -31,38 +43,49 @@
 .armdozer-card__battery-label,
 .armdozer-card__hp-label,
 .armdozer-card__power-label,
-.armdozer-card__speed-label {
-  min-width: var(--parameter-label-width);
+.armdozer-card__speed-label,
+.armdozer-card__burst-label {
   background-color: var(--button-background-color);
   text-align: center;
   border-radius: calc(var(--responsive-font-size) * 0.2);
 }
 
 .armdozer-card__battery-label {
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  display: grid;
+  place-items: center;
+  min-width: calc(var(--font-size) * 1.5);
 }
 
 .armdozer-card__battery-icon {
-  width: var(--responsive-font-size);
-  height: var(--responsive-font-size);
+  width: var(--font-size);
+  height: var(--font-size);
 }
 
 .armdozer-card__battery-value {
-  margin-right: calc(var(--responsive-font-size) * 1);
+  margin-right: calc(var(--font-size) * 0.5);
+}
+
+.armdozer-card__hp-label,
+.armdozer-card__power-label,
+.armdozer-card__speed-label {
+  min-width: (var(--font-size) * 2.5);
 }
 
 .armdozer-card__hp-value,
 .armdozer-card__power-value {
-  margin-right: calc(var(--responsive-font-size) * 0.5);
+  margin-right: calc(var(--font-size) * 0.5);
 }
 
-.armdozer-card__burst-overview {
-  margin-top: calc(var(--responsive-font-size) * 0.5);
-  margin-bottom: calc(var(--responsive-font-size) * 0.5);
+.armdozer-card__burst {
+  grid-row: 4;
+}
+
+.armdozer-card__burst-label {
+  display: inline-block;
+  min-width: calc(var(--font-size) * 3);
 }
 
 .armdozer-card__shin-braver-bust-shot {
   height: 40vh;
+  position: absolute;
 }
