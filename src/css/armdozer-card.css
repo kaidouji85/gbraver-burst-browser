@@ -21,6 +21,11 @@
   text-align: start;
 }
 
+.armdozer-card__armdozer-icon {
+  place-self: center;
+  height: var(--icon-size);
+}
+
 .armdozer-card__status {
   place-self: center auto;
   display: grid;
@@ -103,9 +108,4 @@
 .armdozer-card__burst-value {
   grid-row: 4;
   grid-column: 2 / 5;
-}
-
-.armdozer-card__shin-braver-icon {
-  place-self: center;
-  height: var(--icon-size);
 }
