@@ -4,16 +4,17 @@
   --gap: calc(var(--font-size) * 0.3);
   --text-height: calc(var(--font-size) * 1.5);
   --label-width: calc(var(--font-size) * 4.5);
-  --icon-size: calc(var(--text-height) * 4 + var(--gap) * 3);
+  --icon-size: calc(var(--text-height) * 4 + var(--gap) * 3 + var(--font-size) * 0.3);
 
   display: grid;
   grid-template-columns: var(--icon-size) 1fr;
-  width: calc(var(--font-size) * 25);
+  width: calc(var(--font-size) * 30);
   user-select: none;
   overflow: hidden;
   background-color: rgb(10 10 10 / 70%);
   border: var(--dialog-border);
   border-radius: var(--dialog-border-radius);
+  padding: calc(var(--font-size) * 0.3);
   box-sizing: border-box;
   font-size: var(--font-size);
   color: var(--font-color);
@@ -21,11 +22,12 @@
 }
 
 .armdozer-card__status {
+  place-self: center auto;
   display: grid;
   gap: var(--gap);
   grid-template-columns:
     var(--label-width)
-    1fr
+    calc(var(--font-size) * 3)
     var(--label-width)
     1fr;
 }
@@ -96,9 +98,6 @@
 .armdozer-card__burst-label {
   grid-row: 4;
   grid-column: 1;
-  display: inline-block;
-  width: var(--label-width);
-  height: var(--text-height);
 }
 
 .armdozer-card__burst-value {
