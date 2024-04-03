@@ -1,5 +1,6 @@
 import { PilotId, Pilots } from "gbraver-burst-core";
 
+import { pilotSkillOverview } from "../../../game-description/pilot-skill-overview";
 import { getPilotIconPathId } from "../../../path/pilot-icon-path";
 import { Resources } from "../../../resource";
 import { ROOT } from "./class-name";
@@ -26,7 +27,8 @@ export class PilotCard {
       resources.paths.find((p) => p.id === getPilotIconPathId(pilotId))?.path ??
       "";
     const pilot = Pilots.find((p) => p.id === pilotId) ?? Pilots[0];
-    this.#root.innerHTML = template({ ROOT, pilotIconPath, pilot });
+    const pilotSkill = pilotSkillOverview(pilot.skill);
+    this.#root.innerHTML = template({ ROOT, pilotIconPath, pilot, pilotSkill });
   }
 
   /**

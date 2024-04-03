@@ -29,3 +29,21 @@
   place-self: center;
   height: var(--icon-size);
 }
+
+.armdozer-card__status {
+  height: 100%;
+  place-self: center auto;
+  display: grid;
+  gap: var(--gap);
+  grid-template-columns:
+    var(--label-width)
+    1fr;
+}
+
+.pilot-card__skill-label {
+  display: inline-block;
+  background-color: var(--button-background-color);
+  text-align: center;
+  border-radius: calc(var(--responsive-font-size) * 0.2);
+  min-height: var(--text-height);
+}
