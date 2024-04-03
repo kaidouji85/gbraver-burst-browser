@@ -4,15 +4,13 @@
   --gap: calc(var(--font-size) * 0.3);
   --text-height: calc(var(--font-size) * 1.5);
   --label-width: calc(var(--font-size) * 4.5);
-  --icon-size: calc(
-    var(--text-height) * 5 + var(--gap) * 3 + var(--font-size) * 0.5
-  );
+  --icon-size: calc(var(--text-height) * 3);
 
   display: grid;
   gap: var(--gap);
   grid-template-columns: var(--icon-size) 1fr;
-  width: calc(var(--font-size) * 26);
-  min-height: calc(var(--font-size) * 10);
+  width: calc(var(--font-size) * 20);
+  min-height: calc(var(--font-size) * 9);
   user-select: none;
   overflow: hidden;
   background-color: rgb(10 10 10 / 70%);
@@ -30,7 +28,7 @@
   height: var(--icon-size);
 }
 
-.armdozer-card__status {
+.pilot-card__status {
   height: 100%;
   place-self: center auto;
   display: grid;
