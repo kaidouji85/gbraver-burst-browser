@@ -1,10 +1,10 @@
 import { ArmdozerId, Armdozers } from "gbraver-burst-core";
 
+import { burstDetail } from "../../../game-description/burst-detail";
+import { burstOverview } from "../../../game-description/burst-overview";
 import { Resources } from "../../../resource";
 import { PathIds } from "../../../resource/path/ids";
 import { domUuid } from "../../../uuid/dom-uuid";
-import { burstDetail } from "./burst-detail";
-import { burstOverview } from "./burst-overview";
 
 /**ルート要素のクラス名 */
 const ROOT_CLASS_NAME = "armdozer-status";
