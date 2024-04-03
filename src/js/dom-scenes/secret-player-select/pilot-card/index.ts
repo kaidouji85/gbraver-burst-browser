@@ -1,5 +1,6 @@
-import { PilotId } from "gbraver-burst-core";
+import { PilotId, Pilots } from "gbraver-burst-core";
 
+import { getPilotIconPathId } from "../../../path/pilot-icon-path";
 import { Resources } from "../../../resource";
 import { ROOT } from "./class-name";
 import template from "./inner-html.hbs";
@@ -21,7 +22,11 @@ export class PilotCard {
 
     this.#root = document.createElement("button");
     this.#root.className = ROOT;
-    this.#root.innerHTML = template({ ROOT });
+    const pilotIconPath =
+      resources.paths.find((p) => p.id === getPilotIconPathId(pilotId))?.path ??
+      "";
+    const pilot = Pilots.find((p) => p.id === pilotId) ?? Pilots[0];
+    this.#root.innerHTML = template({ ROOT, pilotIconPath, pilot });
   }
 
   /**

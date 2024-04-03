@@ -24,3 +24,8 @@
   color: var(--font-color);
   text-align: start;
 }
+
+.pilot-card__pilot-icon {
+  place-self: center;
+  height: var(--icon-size);
+}
