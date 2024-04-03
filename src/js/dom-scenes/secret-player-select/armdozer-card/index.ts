@@ -1,10 +1,11 @@
-import { ArmdozerId } from "gbraver-burst-core";
+import { ArmdozerId, Armdozers } from "gbraver-burst-core";
 
 import { getArmdozerIconPathId } from "../../../path/armdozer-icon-path";
 import { Resources } from "../../../resource";
 import { PathIds } from "../../../resource/path/ids";
 import { ROOT } from "./class-name";
 import template from "./inner-html.hbs";
+import { burstOverview } from "../../../game-description/burst-overview";
 
 /** アームドーザカード */
 export class ArmdozerCard {
@@ -25,11 +26,18 @@ export class ArmdozerCard {
     this.#root.className = ROOT;
     const batteryIconPath =
       resources.paths.find((p) => p.id === PathIds.BATTERY_ICON)?.path ?? "";
-    const iconPath =
-      resources.paths.find(
-        (p) => p.id === getArmdozerIconPathId(armdozerId),
-      )?.path ?? "";
-    this.#root.innerHTML = template({ ROOT, batteryIconPath, iconPath });
+    const armdozerIconPath =
+      resources.paths.find((p) => p.id === getArmdozerIconPathId(armdozerId))
+        ?.path ?? "";
+    const armdozer = Armdozers.find((a) => a.id === armdozerId) ?? Armdozers[0];
+    const burst = burstOverview(armdozer.burst);
+    this.#root.innerHTML = template({
+      ROOT,
+      batteryIconPath,
+      armdozerIconPath,
+      armdozer,
+      burst
+    });
   }
 
   /**

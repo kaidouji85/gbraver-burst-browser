@@ -1,6 +1,6 @@
-<img class="{{ROOT}}__armdozer-icon" src="{{iconPath}}" />
+<img class="{{ROOT}}__armdozer-icon" src="{{armdozerIconPath}}" />
 <div class="{{ROOT}}__status">
-  <div class="{{ROOT}}__name">シンブレイバー</div>
+  <div class="{{ROOT}}__name">{{armdozer.name}}</div>
   <div class="{{ROOT}}__battery-label">
     <img
       class="{{ROOT}}__battery-icon"
@@ -8,13 +8,13 @@
       alt="バッテリーアイコン"
     />
   </div>
-  <div class="{{ROOT}}__battery-value">5</div>
+  <div class="{{ROOT}}__battery-value">{{armdozer.maxBattery}}</div>
   <div class="{{ROOT}}__hp-label">HP</div>
-  <div class="{{ROOT}}__hp-value">3100</div>
+  <div class="{{ROOT}}__hp-value">{{armdozer.maxHp}}</div>
   <div class="{{ROOT}}__power-label">攻撃</div>
-  <div class="{{ROOT}}__power-value">2000</div>
+  <div class="{{ROOT}}__power-value">{{armdozer.power}}</div>
   <div class="{{ROOT}}__speed-label">機動</div>
-  <div class="{{ROOT}}__speed-value">2000</div>
+  <div class="{{ROOT}}__speed-value">{{armdozer.speed}}</div>
   <div class="{{ROOT}}__burst-label">バースト</div>
-  <div class="{{ROOT}}__burst-value">バッテリーを5回復する</div>
+  <div class="{{ROOT}}__burst-value">{{burst}}</div>
 </div>
