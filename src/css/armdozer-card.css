@@ -19,7 +19,7 @@
   overflow: hidden;
   background-color: rgb(10 10 10 / 70%);
   border: var(--dialog-border);
-  border-radius: var(--dialog-border-radius);
+  border-radius: calc(var(--dialog-border-radius) * 0.6);
   padding: calc(var(--font-size) * 0.3);
   box-sizing: border-box;
   font-size: var(--font-size);

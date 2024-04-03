@@ -1,6 +1,6 @@
 /** パイロットカード */
 .pilot-card {
-  --font-size: calc(var(--responsive-font-size) * 0.6);
+  --font-size: calc(var(--responsive-font-size) * 0.7);
   --gap: calc(var(--font-size) * 0.3);
   --text-height: calc(var(--font-size) * 1.5);
   --label-width: calc(var(--font-size) * 4.5);
@@ -10,12 +10,12 @@
   gap: var(--gap);
   grid-template-columns: var(--icon-size) 1fr;
   width: calc(var(--font-size) * 14);
-  min-height: calc(var(--font-size) * 8);
+  min-height: calc(var(--font-size) * 11);
   user-select: none;
   overflow: hidden;
   background-color: rgb(10 10 10 / 70%);
   border: var(--dialog-border);
-  border-radius: var(--dialog-border-radius);
+  border-radius: calc(var(--dialog-border-radius) * 0.6);
   padding: calc(var(--font-size) * 0.3);
   box-sizing: border-box;
   font-size: var(--font-size);
