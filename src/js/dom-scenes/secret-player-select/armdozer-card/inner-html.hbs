@@ -3,24 +3,18 @@
   src="{{armdozerIconPath}}"
   alt="{{armdozer.name}}のアイコン"
 />
-<div class="{{ROOT}}__status">
-  <div class="{{ROOT}}__name">{{armdozer.name}}</div>
-  <div class="{{ROOT}}__battery-label">
-    <img
-      class="{{ROOT}}__battery-icon"
-      src="{{batteryIconPath}}"
-      alt="バッテリーアイコン"
-    />
-  </div>
-  <div class="{{ROOT}}__battery-value">{{armdozer.maxBattery}}</div>
-  <div class="{{ROOT}}__hp-label">HP</div>
-  <div class="{{ROOT}}__hp-value">{{armdozer.maxHp}}</div>
-  <div class="{{ROOT}}__power-label">攻</div>
-  <div class="{{ROOT}}__power-value">{{armdozer.power}}</div>
-  <div class="{{ROOT}}__speed-label">機</div>
-  <div class="{{ROOT}}__speed-value">{{armdozer.speed}}</div>
-  <div class="{{ROOT}}__burst">
-    <span class="{{ROOT}}__burst-label">バ</span>
-    <span class="{{ROOT}}__burst-value">{{burst}}</span>
-  </div>
+<div class="{{ROOT}}__battery-label">
+  <img
+    class="{{ROOT}}__battery-icon"
+    src="{{batteryIconPath}}"
+    alt="バッテリーアイコン"
+  />
 </div>
+<div class="{{ROOT}}__battery-value">{{armdozer.maxBattery}}</div>
+<div class="{{ROOT}}__hp-label">HP</div>
+<div class="{{ROOT}}__hp-value">{{armdozer.maxHp}}</div>
+<div class="{{ROOT}}__power-label">攻</div>
+<div class="{{ROOT}}__power-value">{{armdozer.power}}</div>
+<div class="{{ROOT}}__speed-label">機</div>
+<div class="{{ROOT}}__speed-value">{{armdozer.speed}}</div>
+<div class="{{ROOT}}__burst">{{burst}}</div>
