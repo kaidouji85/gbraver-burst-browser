@@ -4,13 +4,12 @@
   --gap: calc(var(--font-size) * 0.3);
   --text-height: calc(var(--font-size) * 1.5);
   --label-width: calc(var(--font-size) * 4.5);
-  --icon-size: calc(
-    var(--text-height) * 4 + var(--gap) * 3 + var(--font-size) * 0.3
-  );
+  --icon-size: calc(var(--text-height) * 6 + var(--gap) * 3);
 
   display: grid;
   grid-template-columns: var(--icon-size) 1fr;
-  width: calc(var(--font-size) * 30);
+  width: calc(var(--font-size) * 26);
+  min-height: calc(var(--font-size) * 10);
   user-select: none;
   overflow: hidden;
   background-color: rgb(10 10 10 / 70%);
@@ -29,6 +28,7 @@
 }
 
 .armdozer-card__status {
+  height: 100%;
   place-self: center auto;
   display: grid;
   gap: var(--gap);
@@ -36,6 +36,11 @@
     var(--label-width)
     calc(var(--font-size) * 3)
     var(--label-width)
+    1fr;
+  grid-template-rows:
+    auto
+    auto
+    auto
     1fr;
 }
 
@@ -102,12 +107,13 @@
   grid-column: 4;
 }
 
-.armdozer-card__burst-label {
+.armdozer-card__burst {
   grid-row: 4;
-  grid-column: 1;
+  grid-column: 1 / 5;
 }
 
-.armdozer-card__burst-value {
-  grid-row: 4;
-  grid-column: 2 / 5;
+.armdozer-card__burst-label {
+  display: inline-block;
+  width: var(--label-width);
+  height: var(--text-height);
 }
