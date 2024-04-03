@@ -1,11 +1,11 @@
 import { ArmdozerId, Armdozers } from "gbraver-burst-core";
 
+import { burstOverview } from "../../../game-description/burst-overview";
 import { getArmdozerIconPathId } from "../../../path/armdozer-icon-path";
 import { Resources } from "../../../resource";
 import { PathIds } from "../../../resource/path/ids";
 import { ROOT } from "./class-name";
 import template from "./inner-html.hbs";
-import { burstOverview } from "../../../game-description/burst-overview";
 
 /** アームドーザカード */
 export class ArmdozerCard {
@@ -36,7 +36,7 @@ export class ArmdozerCard {
       batteryIconPath,
       armdozerIconPath,
       armdozer,
-      burst
+      burst,
     });
   }
 

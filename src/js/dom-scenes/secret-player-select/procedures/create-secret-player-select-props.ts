@@ -3,7 +3,10 @@ import { ArmdozerId, PilotId } from "gbraver-burst-core";
 import { Resources } from "../../../resource";
 import { ArmdozerCard } from "../armdozer-card";
 import { ROOT } from "../dom/class-name";
-import { extractArmdozerIconContainer, extractPilotIconContainer } from "../dom/extract-elements";
+import {
+  extractArmdozerIconContainer,
+  extractPilotIconContainer,
+} from "../dom/extract-elements";
 import { rootInnerHTML } from "../dom/root-inner-html";
 import { PilotIcon } from "../pilot-icon";
 import { SecretPlayerSelectProps } from "../props";
@@ -32,16 +35,18 @@ export function createSecretPlayerSelectProps(
 
   const { resources, armdozerIds, pilotIds } = params;
   const armdozerIconContainer = extractArmdozerIconContainer(root);
-  const armdozerIcons = armdozerIds.map(armdozerId => new ArmdozerCard(resources, armdozerId));
-  armdozerIcons.forEach(icon => {
+  const armdozerIcons = armdozerIds.map(
+    (armdozerId) => new ArmdozerCard(resources, armdozerId),
+  );
+  armdozerIcons.forEach((icon) => {
     armdozerIconContainer.appendChild(icon.getRootHTMLElement());
   });
 
   const pilotIconContainer = extractPilotIconContainer(root);
-  const pilotIcons = pilotIds.map(id => new PilotIcon(resources, id));
-  pilotIcons.forEach(icon => {
+  const pilotIcons = pilotIds.map((id) => new PilotIcon(resources, id));
+  pilotIcons.forEach((icon) => {
     pilotIconContainer.appendChild(icon.getRootHTMLElement());
   });
-  
+
   return { root };
 }

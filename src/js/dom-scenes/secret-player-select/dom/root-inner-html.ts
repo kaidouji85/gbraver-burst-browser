@@ -7,6 +7,6 @@ import template from "./root-inner-html.hbs";
  */
 export function rootInnerHTML(): string {
   return template({
-    ROOT
+    ROOT,
   });
 }

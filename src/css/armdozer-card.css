@@ -4,7 +4,9 @@
   --gap: calc(var(--font-size) * 0.3);
   --text-height: calc(var(--font-size) * 1.5);
   --label-width: calc(var(--font-size) * 4.5);
-  --icon-size: calc(var(--text-height) * 4 + var(--gap) * 3 + var(--font-size) * 0.3);
+  --icon-size: calc(
+    var(--text-height) * 4 + var(--gap) * 3 + var(--font-size) * 0.3
+  );
 
   display: grid;
   grid-template-columns: var(--icon-size) 1fr;
