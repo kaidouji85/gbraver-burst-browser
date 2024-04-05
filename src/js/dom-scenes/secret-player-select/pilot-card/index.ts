@@ -5,6 +5,7 @@ import { getPilotIconPathId } from "../../../path/pilot-icon-path";
 import { Resources } from "../../../resource";
 import { ROOT } from "./class-name";
 import template from "./inner-html.hbs";
+import { getPilotSkillCutinPathId } from "../../../path/pilot-skill-cutin-path";
 
 /** パイロットカード */
 export class PilotCard {
@@ -24,7 +25,7 @@ export class PilotCard {
     this.#root = document.createElement("button");
     this.#root.className = ROOT;
     const pilotIconPath =
-      resources.paths.find((p) => p.id === getPilotIconPathId(pilotId))?.path ??
+      resources.paths.find((p) => p.id === getPilotSkillCutinPathId(pilotId))?.path ??
       "";
     const pilot = Pilots.find((p) => p.id === pilotId) ?? Pilots[0];
     const pilotSkill = pilotSkillOverview(pilot.skill);
