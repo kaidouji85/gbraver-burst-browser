@@ -1,17 +1,17 @@
 /**
- * アームドカードコンテナを抽出する
+ * アームドーザ アイコン コンテナを抽出する
  * @param root 抽出元となるルートHTML要素
  * @return 抽出結果
  */
 export const extractArmdozerIconContainer = (root: HTMLElement): HTMLElement =>
-  root.querySelector('[data-id="armdozer-card-container"]') ??
+  root.querySelector('[data-id="armdozer-icon-container"]') ??
   document.createElement("div");
 
 /**
- * パイロットカードコンテナを抽出する
+ * パイロット アイコン コンテナを抽出する
  * @param root 抽出元となるルートHTML要素
  * @return 抽出結果
  */
-export const extractPilotCardContainer = (root: HTMLElement): HTMLElement =>
-  root.querySelector('[data-id="pilot-card-container"]') ??
+export const extractPilotIconContainer = (root: HTMLElement): HTMLElement =>
+  root.querySelector('[data-id="pilot-icon-container"]') ??
   document.createElement("div");
