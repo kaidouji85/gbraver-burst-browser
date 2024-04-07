@@ -12,7 +12,9 @@ export const extractArmdozerIconContainer = (root: HTMLElement): HTMLElement =>
  * @param root 抽出元となるルートHTML要素
  * @return 抽出結果
  */
-export const extractArmdozerSelectionIndicator = (root: HTMLElement): HTMLElement =>
+export const extractArmdozerSelectionIndicator = (
+  root: HTMLElement,
+): HTMLElement =>
   root.querySelector('[data-id="armdozer-selection-indicator"]') ??
   document.createElement("div");
 
@@ -21,7 +23,9 @@ export const extractArmdozerSelectionIndicator = (root: HTMLElement): HTMLElemen
  * @param root 抽出元となるルートHTML要素
  * @return 抽出結果
  */
-export const extractArmdozerSelectionDetail = (root: HTMLElement): HTMLElement =>
+export const extractArmdozerSelectionDetail = (
+  root: HTMLElement,
+): HTMLElement =>
   root.querySelector('[data-id="armdozer-selection-detail"]') ??
   document.createElement("div");
 

@@ -1,5 +1,5 @@
-import {ArmdozerSelection} from "./armdozer-selection";
-import {ArmdozerIcon} from "./armdozer-icon";
+import { ArmdozerIcon } from "./armdozer-icon";
+import { ArmdozerSelection } from "./armdozer-selection";
 
 /** シークレットプレイヤーセレクト画面のプロパティ */
 export type SecretPlayerSelectProps = {

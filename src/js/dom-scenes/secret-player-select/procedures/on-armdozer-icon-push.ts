@@ -1,8 +1,8 @@
 import { ArmdozerId } from "gbraver-burst-core";
 
+import { ARMDOZER_SELECTION_COMPLETE } from "../dom/class-name";
 import { SecretPlayerSelectProps } from "../props";
 import { getArmdozerSeelctionDetail } from "./get-armdozer-seelction-detail";
-import { ARMDOZER_SELECTION_COMPLETE } from "../dom/class-name";
 
 /**
  * アームドーザアイコンが押された際の処理
