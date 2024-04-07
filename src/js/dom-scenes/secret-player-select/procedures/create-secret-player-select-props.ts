@@ -48,5 +48,9 @@ export function createSecretPlayerSelectProps(
     pilotIconContainer.appendChild(icon.getRootHTMLElement());
   });
 
-  return { root, armdozerSelection: { type: "ArmdozerUnselected" } };
+  return {
+    root,
+    armdozerIcons,
+    armdozerSelection: { type: "ArmdozerUnselected" },
+  };
 }

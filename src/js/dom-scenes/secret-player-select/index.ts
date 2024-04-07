@@ -1,4 +1,7 @@
+import { Unsubscribable } from "rxjs";
+
 import { DOMScene } from "../dom-scene";
+import { bindEventListeners } from "./procedures/bind-event-listeners";
 import {
   createSecretPlayerSelectProps,
   CreateSecretPlayerSelectPropsParams,
@@ -15,17 +18,21 @@ type Params = CreateSecretPlayerSelectPropsParams;
 export class SecretPlayerSelect implements DOMScene {
   /** プロパティ */
   #props: SecretPlayerSelectProps;
+  #unsubscribers: Unsubscribable[];
 
   /**
    * コンストラクタ
    */
   constructor(params: Params) {
     this.#props = createSecretPlayerSelectProps(params);
+    this.#unsubscribers = bindEventListeners(this.#props);
   }
 
   /** @override */
   destructor(): void {
-    // NOP
+    this.#unsubscribers.forEach((u) => {
+      u.unsubscribe();
+    });
   }
 
   /** @override */

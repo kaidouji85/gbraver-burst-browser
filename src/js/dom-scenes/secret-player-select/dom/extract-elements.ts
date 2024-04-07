@@ -8,6 +8,24 @@ export const extractArmdozerIconContainer = (root: HTMLElement): HTMLElement =>
   document.createElement("div");
 
 /**
+ * アームドーザ 選択インジケータを抽出する
+ * @param root 抽出元となるルートHTML要素
+ * @return 抽出結果
+ */
+export const extractArmdozerSelectionIndicator = (root: HTMLElement): HTMLElement =>
+  root.querySelector('[data-id="armdozer-selection-indicator"]') ??
+  document.createElement("div");
+
+/**
+ * アームドーザ 選択詳細を抽出する
+ * @param root 抽出元となるルートHTML要素
+ * @return 抽出結果
+ */
+export const extractArmdozerSelectionDetail = (root: HTMLElement): HTMLElement =>
+  root.querySelector('[data-id="armdozer-selection-detail"]') ??
+  document.createElement("div");
+
+/**
  * パイロット アイコン コンテナを抽出する
  * @param root 抽出元となるルートHTML要素
  * @return 抽出結果

@@ -3,6 +3,8 @@ import { ArmdozerId } from "gbraver-burst-core";
 import { getArmdozerIconPathId } from "../../path/armdozer-icon-path";
 import { Resources } from "../../resource";
 import { ARMDOZER_ICON } from "./dom/class-name";
+import { Observable, tap } from "rxjs";
+import { domPushStream, PushDOM } from "../../dom/push-dom";
 
 /** アームドーザアイコン */
 export class ArmdozerIcon {
@@ -32,5 +34,18 @@ export class ArmdozerIcon {
    */
   getRootHTMLElement(): HTMLElement {
     return this.#root;
+  }
+
+  /**
+   * ボタン押下通知
+   * @returns 通知ストリーム
+   */
+  notifyPush(): Observable<unknown> {
+    return domPushStream(this.#root).pipe(
+      tap((action) => {
+        action.event.preventDefault();
+        action.event.stopPropagation();
+      }),
+    );
   }
 }
