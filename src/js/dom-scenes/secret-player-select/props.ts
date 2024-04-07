@@ -33,4 +33,6 @@ export type SecretPlayerSelectProps = {
 
   /** 決定音 */
   pushButtonSound: SoundResource;
+  /** 値変更音 */
+  changeValueSound: SoundResource;
 };

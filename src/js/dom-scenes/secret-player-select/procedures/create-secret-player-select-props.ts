@@ -1,6 +1,7 @@
 import { ArmdozerId, PilotId } from "gbraver-burst-core";
 
 import { Resources } from "../../../resource";
+import { createEmptySoundResource, SOUND_IDS } from "../../../resource/sound";
 import { ArmdozerIcon } from "../armdozer-icon";
 import { ROOT } from "../dom/class-name";
 import {
@@ -16,7 +17,6 @@ import {
 import { rootInnerHTML } from "../dom/root-inner-html";
 import { PilotIcon } from "../pilot-icon";
 import { SecretPlayerSelectProps } from "../props";
-import { createEmptySoundResource, SOUND_IDS } from "../../../resource/sound";
 
 /** SecretPlayerSelectProps生成パラメータ */
 export type CreateSecretPlayerSelectPropsParams = {
@@ -72,6 +72,9 @@ export function createSecretPlayerSelectProps(
 
     pushButtonSound:
       resources.sounds.find((s) => s.id === SOUND_IDS.PUSH_BUTTON) ??
+      createEmptySoundResource(),
+    changeValueSound:
+      resources.sounds.find((s) => s.id === SOUND_IDS.CHANGE_VALUE) ??
       createEmptySoundResource(),
   };
 }

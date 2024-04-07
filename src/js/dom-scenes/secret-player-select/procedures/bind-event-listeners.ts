@@ -5,6 +5,7 @@ import { SecretPlayerSelectProps } from "../props";
 import { onArmdozerIconPush } from "./on-armdozer-icon-push";
 import { onOKButtonPush } from "./on-ok-button-push";
 import { onPilotIconPush } from "./on-pilot-icon-push";
+import { onPrevButtonPush } from "./on-prev-button-push";
 
 /**
  * イベントリスナをバインドする
@@ -27,6 +28,9 @@ export function bindEventListeners(
     ),
     domPushStream(props.okButton).subscribe((action) => {
       onOKButtonPush(props, action);
+    }),
+    domPushStream(props.prevButton).subscribe((action) => {
+      onPrevButtonPush(props, action);
     }),
   ];
 }
