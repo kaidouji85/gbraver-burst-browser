@@ -3,6 +3,7 @@ import { PilotId } from "gbraver-burst-core";
 import { PILOT_SELECTION_COMPLETE } from "../dom/class-name";
 import { SecretPlayerSelectProps } from "../props";
 import { getPilotSeelctionDetail } from "./get-pilot-selection-detail";
+import {pop} from "../../../dom/pop";
 
 /**
  * パイロットアイコンが押された際の処理
@@ -26,4 +27,6 @@ export function onPilotIconPush(
   props.pilotSelectionDetail.innerText = getPilotSeelctionDetail(
     props.pilotSelection,
   );
+  props.pushButtonSound.sound.play();
+  pop(props.pilotSelectionIndicator, 1.2);
 }

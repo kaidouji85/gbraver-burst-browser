@@ -1,5 +1,6 @@
 import { ArmdozerId } from "gbraver-burst-core";
 
+import { pop } from "../../../dom/pop";
 import { ARMDOZER_SELECTION_COMPLETE } from "../dom/class-name";
 import { SecretPlayerSelectProps } from "../props";
 import { getArmdozerSeelctionDetail } from "./get-armdozer-seelction-detail";
@@ -26,4 +27,6 @@ export function onArmdozerIconPush(
   props.armdozerSelectionDetail.innerText = getArmdozerSeelctionDetail(
     props.armdozerSelection,
   );
+  props.pushButtonSound.sound.play();
+  pop(props.armdozerSelectionIndicator, 1.2);
 }

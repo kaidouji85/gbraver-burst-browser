@@ -2,6 +2,7 @@ import { ArmdozerIcon } from "./armdozer-icon";
 import { ArmdozerSelection } from "./armdozer-selection";
 import {PilotIcon} from "./pilot-icon";
 import {PilotSelection} from "./pilot-selection";
+import {SoundResource} from "../../resource/sound";
 
 /** シークレットプレイヤーセレクト画面のプロパティ */
 export type SecretPlayerSelectProps = {
@@ -25,4 +26,7 @@ export type SecretPlayerSelectProps = {
   pilotIcons: PilotIcon[];
   /** パイロット選択状況 */
   pilotSelection: PilotSelection;
+
+  /** 決定音 */
+  pushButtonSound: SoundResource;
 };

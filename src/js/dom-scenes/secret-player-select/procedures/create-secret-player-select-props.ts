@@ -7,11 +7,14 @@ import {
   extractArmdozerIconContainer,
   extractArmdozerSelectionDetail,
   extractArmdozerSelectionIndicator,
-  extractPilotIconContainer, extractPilotSelectionDetail, extractPilotSelectionIndicator,
+  extractPilotIconContainer,
+  extractPilotSelectionDetail,
+  extractPilotSelectionIndicator,
 } from "../dom/extract-elements";
 import { rootInnerHTML } from "../dom/root-inner-html";
 import { PilotIcon } from "../pilot-icon";
 import { SecretPlayerSelectProps } from "../props";
+import { createEmptySoundResource, SOUND_IDS } from "../../../resource/sound";
 
 /** SecretPlayerSelectProps生成パラメータ */
 export type CreateSecretPlayerSelectPropsParams = {
@@ -60,5 +63,8 @@ export function createSecretPlayerSelectProps(
     armdozerSelection: { type: "ArmdozerUnselected" },
     pilotIcons,
     pilotSelection: { type: "PilotUnselected" },
+    pushButtonSound:
+      resources.sounds.find((s) => s.id === SOUND_IDS.PUSH_BUTTON) ??
+      createEmptySoundResource(),
   };
 }
