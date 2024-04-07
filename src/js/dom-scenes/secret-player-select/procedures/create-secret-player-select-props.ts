@@ -4,7 +4,9 @@ import { Resources } from "../../../resource";
 import { ArmdozerIcon } from "../armdozer-icon";
 import { ROOT } from "../dom/class-name";
 import {
-  extractArmdozerIconContainer as extractArmdozerCardContainer,
+  extractArmdozerIconContainer,
+  extractArmdozerSelectionDetail,
+  extractArmdozerSelectionIndicator,
   extractPilotIconContainer,
 } from "../dom/extract-elements";
 import { rootInnerHTML } from "../dom/root-inner-html";
@@ -34,7 +36,7 @@ export function createSecretPlayerSelectProps(
   root.innerHTML = rootInnerHTML();
 
   const { resources, armdozerIds, pilotIds } = params;
-  const armdozerIconContainer = extractArmdozerCardContainer(root);
+  const armdozerIconContainer = extractArmdozerIconContainer(root);
   const armdozerIcons = armdozerIds.map(
     (armdozerId) => new ArmdozerIcon(resources, armdozerId),
   );
@@ -50,6 +52,8 @@ export function createSecretPlayerSelectProps(
 
   return {
     root,
+    armdozerSelectionIndicator: extractArmdozerSelectionIndicator(root),
+    armdozerSelectionDetail: extractArmdozerSelectionDetail(root),
     armdozerIcons,
     armdozerSelection: { type: "ArmdozerUnselected" },
   };

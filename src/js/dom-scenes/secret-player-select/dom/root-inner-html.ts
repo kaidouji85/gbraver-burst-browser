@@ -1,4 +1,4 @@
-import { ROOT } from "./class-name";
+import { ARMDOZER_UNSELECTED, ROOT } from "./class-name";
 import template from "./root-inner-html.hbs";
 
 /**
@@ -8,5 +8,6 @@ import template from "./root-inner-html.hbs";
 export function rootInnerHTML(): string {
   return template({
     ROOT,
+    ARMDOZER_UNSELECTED,
   });
 }
