@@ -7,9 +7,11 @@ import {
   extractArmdozerIconContainer,
   extractArmdozerSelectionDetail,
   extractArmdozerSelectionIndicator,
+  extractOKButton,
   extractPilotIconContainer,
   extractPilotSelectionDetail,
   extractPilotSelectionIndicator,
+  extractPrevButton,
 } from "../dom/extract-elements";
 import { rootInnerHTML } from "../dom/root-inner-html";
 import { PilotIcon } from "../pilot-icon";
@@ -59,10 +61,15 @@ export function createSecretPlayerSelectProps(
     armdozerSelectionDetail: extractArmdozerSelectionDetail(root),
     pilotSelectionIndicator: extractPilotSelectionIndicator(root),
     pilotSelectionDetail: extractPilotSelectionDetail(root),
+    okButton: extractOKButton(root),
+    prevButton: extractPrevButton(root),
+
     armdozerIcons,
     armdozerSelection: { type: "ArmdozerUnselected" },
+
     pilotIcons,
     pilotSelection: { type: "PilotUnselected" },
+
     pushButtonSound:
       resources.sounds.find((s) => s.id === SOUND_IDS.PUSH_BUTTON) ??
       createEmptySoundResource(),

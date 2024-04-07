@@ -16,6 +16,10 @@ export type SecretPlayerSelectProps = {
   pilotSelectionIndicator: HTMLElement;
   /** パイロット選択詳細 */
   pilotSelectionDetail: HTMLElement;
+  /** 決定ボタン */
+  okButton: HTMLElement;
+  /** 戻るボタン */
+  prevButton: HTMLElement;
 
   /** アームドーザアイコンをあつめたもの */
   armdozerIcons: ArmdozerIcon[];

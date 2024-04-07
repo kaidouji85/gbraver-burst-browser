@@ -1,9 +1,9 @@
 import { PilotId } from "gbraver-burst-core";
 
+import {pop} from "../../../dom/pop";
 import { PILOT_SELECTION_COMPLETE } from "../dom/class-name";
 import { SecretPlayerSelectProps } from "../props";
 import { getPilotSeelctionDetail } from "./get-pilot-selection-detail";
-import {pop} from "../../../dom/pop";
 
 /**
  * パイロットアイコンが押された際の処理

@@ -57,3 +57,21 @@ export const extractPilotSelectionIndicator = (
 export const extractPilotSelectionDetail = (root: HTMLElement): HTMLElement =>
   root.querySelector('[data-id="pilot-selection-detail"]') ??
   document.createElement("div");
+
+/**
+ * 決定ボタンを抽出する
+ * @param root 抽出元となるルートHTML要素
+ * @return 抽出結果
+ */
+export const extractOKButton = (root: HTMLElement): HTMLElement =>
+  root.querySelector('[data-id="ok-button"]') ??
+  document.createElement("button");
+
+/**
+ * 戻るボタンを抽出する
+ * @param root 抽出元となるルートHTML要素
+ * @return 抽出結果
+ */
+export const extractPrevButton = (root: HTMLElement): HTMLElement =>
+  root.querySelector('[data-id="prev-button"]') ??
+  document.createElement("button");

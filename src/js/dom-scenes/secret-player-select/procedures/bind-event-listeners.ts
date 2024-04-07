@@ -1,7 +1,9 @@
 import { Unsubscribable } from "rxjs";
 
+import { domPushStream } from "../../../dom/push-dom";
 import { SecretPlayerSelectProps } from "../props";
 import { onArmdozerIconPush } from "./on-armdozer-icon-push";
+import { onOKButtonPush } from "./on-ok-button-push";
 import { onPilotIconPush } from "./on-pilot-icon-push";
 
 /**
@@ -23,5 +25,8 @@ export function bindEventListeners(
         onPilotIconPush(props, pilotIcon.pilotId);
       }),
     ),
+    domPushStream(props.okButton).subscribe((action) => {
+      onOKButtonPush(props, action);
+    }),
   ];
 }
