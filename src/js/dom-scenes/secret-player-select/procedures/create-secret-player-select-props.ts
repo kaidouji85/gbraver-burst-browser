@@ -1,4 +1,5 @@
 import { ArmdozerId, PilotId } from "gbraver-burst-core";
+import { Subject } from "rxjs";
 
 import { Exclusive } from "../../../exclusive/exclusive";
 import { Resources } from "../../../resource";
@@ -79,5 +80,8 @@ export function createSecretPlayerSelectProps(
     changeValueSound:
       resources.sounds.find((s) => s.id === SOUND_IDS.CHANGE_VALUE) ??
       createEmptySoundResource(),
+
+    ok: new Subject(),
+    prev: new Subject(),
   };
 }

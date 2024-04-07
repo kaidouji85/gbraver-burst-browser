@@ -1,6 +1,7 @@
-import { Unsubscribable } from "rxjs";
+import { Observable, Unsubscribable } from "rxjs";
 
 import { DOMScene } from "../dom-scene";
+import { PlayerSelection } from "./player-selection";
 import { bindEventListeners } from "./procedures/bind-event-listeners";
 import {
   createSecretPlayerSelectProps,
@@ -38,5 +39,21 @@ export class SecretPlayerSelect implements DOMScene {
   /** @override */
   getRootHTMLElement(): HTMLElement {
     return this.#props.root;
+  }
+
+  /**
+   * 決定通知
+   * @return 決定通知ストリーム
+   */
+  notifyOK(): Observable<PlayerSelection> {
+    return this.#props.ok;
+  }
+
+  /**
+   * 戻る通知
+   * @return 戻る通知ストリーム
+   */
+  notifyPrev(): Observable<void> {
+    return this.#props.prev;
   }
 }

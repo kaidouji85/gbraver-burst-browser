@@ -1,9 +1,12 @@
+import { Subject } from "rxjs";
+
 import { Exclusive } from "../../exclusive/exclusive";
 import { SoundResource } from "../../resource/sound";
 import { ArmdozerIcon } from "./armdozer-icon";
 import { ArmdozerSelection } from "./armdozer-selection";
 import { PilotIcon } from "./pilot-icon";
 import { PilotSelection } from "./pilot-selection";
+import { PlayerSelection } from "./player-selection";
 
 /** シークレットプレイヤーセレクト画面のプロパティ */
 export type SecretPlayerSelectProps = {
@@ -39,4 +42,9 @@ export type SecretPlayerSelectProps = {
   pushButtonSound: SoundResource;
   /** 値変更音 */
   changeValueSound: SoundResource;
+
+  /** 選択完了通知ストリーム */
+  ok: Subject<PlayerSelection>;
+  /** 戻る通知ストリーム */
+  prev: Subject<void>;
 };

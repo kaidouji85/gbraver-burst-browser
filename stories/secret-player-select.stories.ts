@@ -26,5 +26,11 @@ export const scene = domStub((resources) => {
       PilotIds.YUUYA,
     ],
   });
+  scene.notifyOK().subscribe((selection) => {
+    console.log("ok", selection);
+  });
+  scene.notifyPrev().subscribe(() => {
+    console.log("prev");
+  });
   return scene.getRootHTMLElement();
 });

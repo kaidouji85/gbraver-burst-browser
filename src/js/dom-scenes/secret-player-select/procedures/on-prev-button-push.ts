@@ -16,5 +16,6 @@ export function onPrevButtonPush(
   props.exclusive.execute(async () => {
     props.changeValueSound.sound.play();
     await pop(props.prevButton);
+    props.prev.next();
   });
 }
