@@ -7,12 +7,14 @@ import { SecretPlayerSelectProps } from "../props";
  * @param props 画面プロパティ
  * @param action アクション
  */
-export async function onPrevButtonPush(
+export function onPrevButtonPush(
   props: SecretPlayerSelectProps,
   action: PushDOM,
 ) {
   action.event.preventDefault();
   action.event.stopPropagation();
-  props.changeValueSound.sound.play();
-  await pop(props.prevButton);
+  props.exclusive.execute(async () => {
+    props.changeValueSound.sound.play();
+    await pop(props.prevButton);
+  });
 }

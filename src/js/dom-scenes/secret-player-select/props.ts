@@ -3,6 +3,7 @@ import { ArmdozerSelection } from "./armdozer-selection";
 import {PilotIcon} from "./pilot-icon";
 import {PilotSelection} from "./pilot-selection";
 import {SoundResource} from "../../resource/sound";
+import {Exclusive} from "../../exclusive/exclusive";
 
 /** シークレットプレイヤーセレクト画面のプロパティ */
 export type SecretPlayerSelectProps = {
@@ -20,6 +21,9 @@ export type SecretPlayerSelectProps = {
   okButton: HTMLElement;
   /** 戻るボタン */
   prevButton: HTMLElement;
+
+  /** 排他制御 */
+  exclusive: Exclusive;
 
   /** アームドーザアイコンをあつめたもの */
   armdozerIcons: ArmdozerIcon[];

@@ -1,5 +1,6 @@
 import { ArmdozerId, PilotId } from "gbraver-burst-core";
 
+import { Exclusive } from "../../../exclusive/exclusive";
 import { Resources } from "../../../resource";
 import { createEmptySoundResource, SOUND_IDS } from "../../../resource/sound";
 import { ArmdozerIcon } from "../armdozer-icon";
@@ -63,6 +64,8 @@ export function createSecretPlayerSelectProps(
     pilotSelectionDetail: extractPilotSelectionDetail(root),
     okButton: extractOKButton(root),
     prevButton: extractPrevButton(root),
+
+    exclusive: new Exclusive(),
 
     armdozerIcons,
     armdozerSelection: { type: "ArmdozerUnselected" },

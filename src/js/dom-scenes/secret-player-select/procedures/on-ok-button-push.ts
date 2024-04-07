@@ -13,6 +13,8 @@ export async function onOKButtonPush(
 ) {
   action.event.preventDefault();
   action.event.stopPropagation();
-  props.pushButtonSound.sound.play();
-  await pop(props.okButton);
+  props.exclusive.execute(async () => {
+    props.pushButtonSound.sound.play();
+    await pop(props.okButton);
+  });
 }
