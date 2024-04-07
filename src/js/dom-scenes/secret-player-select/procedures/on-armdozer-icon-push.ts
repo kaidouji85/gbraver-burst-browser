@@ -3,6 +3,7 @@ import { ArmdozerId } from "gbraver-burst-core";
 import { pop } from "../../../dom/pop";
 import { ARMDOZER_SELECTION_COMPLETE } from "../dom/class-name";
 import { SecretPlayerSelectProps } from "../props";
+import { enableOKButtonIfNeeded } from "./enable-ok-button-if-needed";
 import { getArmdozerSeelctionDetail } from "./get-armdozer-seelction-detail";
 
 /**
@@ -29,4 +30,5 @@ export function onArmdozerIconPush(
   );
   props.pushButtonSound.sound.play();
   pop(props.armdozerSelectionIndicator, 1.2);
+  enableOKButtonIfNeeded(props);
 }

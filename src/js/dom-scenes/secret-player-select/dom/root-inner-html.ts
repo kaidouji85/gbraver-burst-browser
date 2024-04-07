@@ -1,4 +1,9 @@
-import {ARMDOZER_UNSELECTED, PILOT_UNSELECTED, ROOT} from "./class-name";
+import {
+  ARMDOZER_UNSELECTED,
+  OK_BUTTON_DISABLED,
+  PILOT_UNSELECTED,
+  ROOT,
+} from "./class-name";
 import template from "./root-inner-html.hbs";
 
 /**
@@ -10,5 +15,6 @@ export function rootInnerHTML(): string {
     ROOT,
     ARMDOZER_UNSELECTED,
     PILOT_UNSELECTED,
+    OK_BUTTON_DISABLED,
   });
 }

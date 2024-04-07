@@ -63,9 +63,12 @@ export const extractPilotSelectionDetail = (root: HTMLElement): HTMLElement =>
  * @param root 抽出元となるルートHTML要素
  * @return 抽出結果
  */
-export const extractOKButton = (root: HTMLElement): HTMLElement =>
-  root.querySelector('[data-id="ok-button"]') ??
-  document.createElement("button");
+export const extractOKButton = (root: HTMLElement): HTMLButtonElement => {
+  const foundOKButton = root.querySelector('[data-id="ok-button"]');
+  return foundOKButton instanceof HTMLButtonElement
+    ? foundOKButton
+    : document.createElement("button");
+};
 
 /**
  * 戻るボタンを抽出する

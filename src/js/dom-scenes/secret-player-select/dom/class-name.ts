@@ -24,3 +24,9 @@ export const PILOT_UNSELECTED = `${PILOT_SELECTION_INDICATOR}--unselected`;
 
 /** パイロット選択インジケータ（選択完了） */
 export const PILOT_SELECTION_COMPLETE = `${PILOT_SELECTION_INDICATOR}--selection-complete`;
+
+/** 決定ボタン */
+export const OK_BUTTON = `${ROOT}__ok`;
+
+/** 決定ボタン（選択不可能） */
+export const OK_BUTTON_DISABLED = `${OK_BUTTON}--disabled`;

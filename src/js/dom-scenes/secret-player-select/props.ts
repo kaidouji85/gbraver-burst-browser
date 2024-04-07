@@ -1,9 +1,9 @@
+import { Exclusive } from "../../exclusive/exclusive";
+import { SoundResource } from "../../resource/sound";
 import { ArmdozerIcon } from "./armdozer-icon";
 import { ArmdozerSelection } from "./armdozer-selection";
-import {PilotIcon} from "./pilot-icon";
-import {PilotSelection} from "./pilot-selection";
-import {SoundResource} from "../../resource/sound";
-import {Exclusive} from "../../exclusive/exclusive";
+import { PilotIcon } from "./pilot-icon";
+import { PilotSelection } from "./pilot-selection";
 
 /** シークレットプレイヤーセレクト画面のプロパティ */
 export type SecretPlayerSelectProps = {
@@ -18,7 +18,7 @@ export type SecretPlayerSelectProps = {
   /** パイロット選択詳細 */
   pilotSelectionDetail: HTMLElement;
   /** 決定ボタン */
-  okButton: HTMLElement;
+  okButton: HTMLButtonElement;
   /** 戻るボタン */
   prevButton: HTMLElement;
 

@@ -3,6 +3,7 @@ import { PilotId } from "gbraver-burst-core";
 import {pop} from "../../../dom/pop";
 import { PILOT_SELECTION_COMPLETE } from "../dom/class-name";
 import { SecretPlayerSelectProps } from "../props";
+import {enableOKButtonIfNeeded} from "./enable-ok-button-if-needed";
 import { getPilotSeelctionDetail } from "./get-pilot-selection-detail";
 
 /**
@@ -29,4 +30,5 @@ export function onPilotIconPush(
   );
   props.pushButtonSound.sound.play();
   pop(props.pilotSelectionIndicator, 1.2);
+  enableOKButtonIfNeeded(props);
 }
