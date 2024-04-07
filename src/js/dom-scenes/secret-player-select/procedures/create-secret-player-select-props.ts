@@ -7,7 +7,7 @@ import {
   extractArmdozerIconContainer,
   extractArmdozerSelectionDetail,
   extractArmdozerSelectionIndicator,
-  extractPilotIconContainer,
+  extractPilotIconContainer, extractPilotSelectionDetail, extractPilotSelectionIndicator,
 } from "../dom/extract-elements";
 import { rootInnerHTML } from "../dom/root-inner-html";
 import { PilotIcon } from "../pilot-icon";
@@ -54,7 +54,11 @@ export function createSecretPlayerSelectProps(
     root,
     armdozerSelectionIndicator: extractArmdozerSelectionIndicator(root),
     armdozerSelectionDetail: extractArmdozerSelectionDetail(root),
+    pilotSelectionIndicator: extractPilotSelectionIndicator(root),
+    pilotSelectionDetail: extractPilotSelectionDetail(root),
     armdozerIcons,
     armdozerSelection: { type: "ArmdozerUnselected" },
+    pilotIcons,
+    pilotSelection: { type: "PilotUnselected" },
   };
 }

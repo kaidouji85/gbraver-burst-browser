@@ -1,5 +1,7 @@
 import { PilotId } from "gbraver-burst-core";
+import { Observable, tap } from "rxjs";
 
+import { domPushStream } from "../../dom/push-dom";
 import { getPilotIconPathId } from "../../path/pilot-icon-path";
 import { Resources } from "../../resource";
 import { PILOT_ICON } from "./dom/class-name";
@@ -31,5 +33,18 @@ export class PilotIcon {
    */
   getRootHTMLElement(): HTMLElement {
     return this.#root;
+  }
+
+  /**
+   * ボタン押下通知
+   * @return 通知ストリーム
+   */
+  notifyPush(): Observable<unknown> {
+    return domPushStream(this.#root).pipe(
+      tap((action) => {
+        action.event.preventDefault();
+        action.event.stopPropagation();
+      }),
+    );
   }
 }
