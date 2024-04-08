@@ -7,14 +7,13 @@ const simpleImportSort = require("eslint-plugin-simple-import-sort");
 module.exports = [
   eslint.configs.recommended,
   ...tseslint.configs.recommended,
-  // TODO srcとそれ以外でglobalsを出し分けする
   {
     languageOptions: {
       globals: {
         ...globals.browser,
         ...globals.node,
-      }
-    }
+      },
+    },
   },
   {
     plugins: {
@@ -32,5 +31,5 @@ module.exports = [
     rules: {
       ...jest.configs["flat/recommended"].rules,
     },
-  }
+  },
 ];

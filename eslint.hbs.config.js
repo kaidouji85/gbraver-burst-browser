@@ -14,12 +14,18 @@ module.exports = [
     rules: {
       "@html-eslint/require-doctype": "off",
       "@html-eslint/indent": ["error", 2],
-      "@html-eslint/require-closing-tags": ["error", {
-        "selfClosing": "always"
-      }],
-      "@html-eslint/no-extra-spacing-attrs": ["error", {
-        "enforceBeforeSelfClose": true
-      }]
-    }
+      "@html-eslint/require-closing-tags": [
+        "error",
+        {
+          selfClosing: "always",
+        },
+      ],
+      "@html-eslint/no-extra-spacing-attrs": [
+        "error",
+        {
+          enforceBeforeSelfClose: true,
+        },
+      ],
+    },
   },
 ];
