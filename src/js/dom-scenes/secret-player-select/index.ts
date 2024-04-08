@@ -42,6 +42,17 @@ export class SecretPlayerSelect implements DOMScene {
   }
 
   /**
+   * 本シーンの読みこみが完了するまで待つ
+   * @return 読み込みが完了したら発火するPromise
+   */
+  async waitUntilLoaded(): Promise<void> {
+    await Promise.all([
+      ...this.#props.armdozerIcons.map((a) => a.waitUntilLoaded()),
+      ...this.#props.pilotIcons.map((p) => p.waitUntilLoaded()),
+    ]);
+  }
+
+  /**
    * 決定通知
    * @return 決定通知ストリーム
    */

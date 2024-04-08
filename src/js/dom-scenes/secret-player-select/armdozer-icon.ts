@@ -4,6 +4,7 @@ import { Observable, tap } from "rxjs";
 import { domPushStream } from "../../dom/push-dom";
 import { getArmdozerIconPathId } from "../../path/armdozer-icon-path";
 import { Resources } from "../../resource";
+import { waitElementLoaded } from "../../wait/wait-element-loaded";
 import { ARMDOZER_ICON } from "./dom/class-name";
 
 /** アームドーザアイコン */
@@ -12,6 +13,8 @@ export class ArmdozerIcon {
   readonly armdozerId: ArmdozerId;
   /** ルートHTML要素 */
   readonly #root: HTMLImageElement;
+  /** 画像読み込みが完了したら発火するPromise */
+  readonly #waitImageLoaded: Promise<void>;
 
   /**
    * コンストラクタ
@@ -22,6 +25,7 @@ export class ArmdozerIcon {
     this.armdozerId = armdozerId;
 
     this.#root = document.createElement("img");
+    this.#waitImageLoaded = waitElementLoaded(this.#root);
     this.#root.className = ARMDOZER_ICON;
     this.#root.src =
       resources.paths.find((p) => p.id === getArmdozerIconPathId(armdozerId))
@@ -47,5 +51,13 @@ export class ArmdozerIcon {
         action.event.stopPropagation();
       }),
     );
+  }
+
+  /**
+   * 画像読み込みが完了するまで待つ
+   * @return 読み込みが完了したら発火するPromise
+   */
+  async waitUntilLoaded(): Promise<void> {
+    await this.#waitImageLoaded;
   }
 }
