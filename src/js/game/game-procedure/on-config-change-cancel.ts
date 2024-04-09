@@ -1,6 +1,6 @@
 import type { GameProps } from "../game-props";
+import { reflectSoundVolume } from "../reflect-sound-volume";
 import { startTitle } from "./start-title";
-import {reflectSoundVolume} from "../reflect-sound-volume";
 
 /**
  * 設定変更キャンセル時の処理

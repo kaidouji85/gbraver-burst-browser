@@ -1,17 +1,17 @@
 import { Subject } from "rxjs";
 
+import { BGMManager } from "../../bgm/bgm-manager";
 import { Exclusive } from "../../exclusive/exclusive";
 import type { GBraverBurstBrowserConfig } from "../../game/config/browser-config";
 import type { Resources } from "../../resource";
+import { createEmptySoundResource } from "../../resource/sound/empty-sound-resource";
 import { SOUND_IDS } from "../../resource/sound/ids";
+import { SoundResource } from "../../resource/sound/resource";
 import { domUuid } from "../../uuid/dom-uuid";
 import { ConfigChangedDialog } from "./config-changed-dialog";
 import { ROOT_CLASS } from "./dom/class-name";
 import { extractElements } from "./dom/elements";
 import { rootInnerHTML } from "./dom/root-inner-html";
-import { SoundResource } from "../../resource/sound/resource";
-import { createEmptySoundResource } from "../../resource/sound/empty-sound-resource";
-import {BGMManager} from "../../bgm/bgm-manager";
 
 /** 設定画面プロパティ */
 export type ConfigProps = {
@@ -71,7 +71,7 @@ export type ConfigProps = {
 export function createConfigProps(
   resources: Resources,
   config: GBraverBurstBrowserConfig,
-  bgm: BGMManager
+  bgm: BGMManager,
 ): ConfigProps {
   const ids = {
     battleAnimationTimeScaleSelector: domUuid(),

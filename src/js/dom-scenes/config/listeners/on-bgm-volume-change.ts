@@ -1,8 +1,8 @@
+import { changeVolume } from "../../../bgm/bgm-operators";
 import type { InputDOM } from "../../../dom/input-dom";
 import { parseSoundVolume } from "../../../game/config/parser/sound-volume";
 import { soundVolumeLabel } from "../dom/sound-volume-label";
 import type { ConfigProps } from "../props";
-import { changeVolume } from "../../../bgm/bgm-operators";
 
 /**
  * BGM音量を変更した際の処理

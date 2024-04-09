@@ -1,6 +1,29 @@
+import { BGMManager } from "../bgm/bgm-manager";
 import { changeVolume } from "../bgm/bgm-operators";
+import { Resources } from "../resource";
+import { SoundResource } from "../resource/sound/resource";
 import { GBraverBurstBrowserConfig } from "./config/browser-config";
-import { GameProps } from "./game-props";
+
+/**
+ * SEの音量を変更する
+ * @param sounds 音リソースの配列
+ * @param volume 音量
+ */
+function changeSEVolume(sounds: SoundResource[], volume: number): void {
+  sounds
+    .filter((sound) => sound.type === "SE")
+    .forEach((sound) => {
+      sound.sound.volume(sound.volumeScale * volume);
+    });
+}
+
+/** GamePropsから音関連のプロパティを取り出しもの */
+type SoundProps = {
+  /** リソース管理オブジェクト */
+  resources: Resources;
+  /** BGM管理オブジェクト */
+  bgm: BGMManager;
+};
 
 /**
  * 音量設定を各種音リソースに反映する
@@ -9,13 +32,9 @@ import { GameProps } from "./game-props";
  * @param config 反映するブラウザ設定
  */
 export async function reflectSoundVolume(
-  props: GameProps,
+  props: SoundProps,
   config: GBraverBurstBrowserConfig,
 ): Promise<void> {
-  props.resources.sounds
-    .filter((sound) => sound.type === "SE")
-    .forEach((sound) => {
-      sound.sound.volume(sound.volumeScale * config.seVolume);
-    });
+  changeSEVolume(props.resources.sounds, config.seVolume);
   await props.bgm.do(changeVolume(config.bgmVolume));
 }
