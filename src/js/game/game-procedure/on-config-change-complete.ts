@@ -1,8 +1,7 @@
-import { changeVolume } from "../../bgm/bgm-operators";
 import { isSoundConfigChanged } from "../config/config-changed";
 import { ConfigChangeComplete } from "../game-actions/config-change-complete";
 import type { GameProps } from "../game-props";
-import { reflectSEVolume } from "../reflect-se-volume";
+import { reflectSoundVolume } from "../reflect-sound-volume";
 import { reflectPerformanceStatsVisibility } from "./reflect-performance-stats-visibility";
 import { startTitle } from "./start-title";
 
@@ -20,8 +19,7 @@ export async function onConfigChangeComplete(
   await props.fader.fadeOut();
   const origin = await props.config.load();
   if (isSoundConfigChanged(origin, action.config)) {
-    reflectSEVolume(props.resources, action.config);
-    await props.bgm.do(changeVolume(action.config.bgmVolume));
+    await reflectSoundVolume(props, action.config);
   }
 
   if (

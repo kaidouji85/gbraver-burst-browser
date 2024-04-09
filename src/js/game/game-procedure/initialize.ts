@@ -5,11 +5,10 @@ import { loadServiceWorker } from "../../service-worker/load-service-worker";
 import { waitTime } from "../../wait/wait-time";
 import { mailVerifiedIncompleteConnector } from "../action-connector/mail-verified-incomplete-connector";
 import type { GameProps } from "../game-props";
-import { reflectSEVolume } from "../reflect-se-volume";
+import { reflectSoundVolume } from "../reflect-sound-volume";
 import { playTitleBGM } from "./play-title-bgm";
 import { reflectPerformanceStatsVisibility } from "./reflect-performance-stats-visibility";
 import { startTitle } from "./start-title";
-import {changeVolume} from "../../bgm/bgm-operators";
 
 /**
  * ゲームの初期化
@@ -41,8 +40,7 @@ export async function initialize(props: GameProps): Promise<void> {
   props.resources = await resourceLoading.resources;
   const config = await props.config.load();
   reflectPerformanceStatsVisibility(props, config.performanceStatsVisibility);
-  reflectSEVolume(props.resources, config);
-  await props.bgm.do(changeVolume(config.bgmVolume));
+  await reflectSoundVolume(props, config);
   await startTitle(props);
   props.interruptScenes.bind(props.resources);
   const latency = Date.now() - startTime;
