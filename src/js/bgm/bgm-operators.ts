@@ -1,11 +1,9 @@
-import { howlVolume } from "../resource/sound/howl-volume";
 import type { SoundResource } from "../resource/sound/resource";
 import { waitTime } from "../wait/wait-time";
 import type { BGM } from "./bgm";
 
 /**
  * BGMオペレータ
- *
  * @param bgm 現在のBGM
  * @return オペレーション後のBGM
  */
@@ -15,7 +13,11 @@ export type BGMOperator = (bgm: BGM) => Promise<BGM>;
 export const fadeOut: BGMOperator = async (bgm: BGM): Promise<BGM> => {
   if (bgm.type === "NowPlayingBGM") {
     const duration = 500;
-    bgm.resource.sound.fade(bgm.bgmVolume * bgm.resource.volumeScale, 0, duration);
+    bgm.resource.sound.fade(
+      bgm.bgmVolume * bgm.resource.volumeScale,
+      0,
+      duration,
+    );
     await waitTime(duration);
   }
 
@@ -26,7 +28,11 @@ export const fadeOut: BGMOperator = async (bgm: BGM): Promise<BGM> => {
 export const fadeIn: BGMOperator = async (bgm: BGM): Promise<BGM> => {
   if (bgm.type === "NowPlayingBGM") {
     const duration = 500;
-    bgm.resource.sound.fade(0, bgm.bgmVolume * bgm.resource.volumeScale, duration);
+    bgm.resource.sound.fade(
+      0,
+      bgm.bgmVolume * bgm.resource.volumeScale,
+      duration,
+    );
     await waitTime(duration);
   }
 
@@ -41,6 +47,24 @@ export const stop = async (bgm: BGM): Promise<BGM> => {
     type: "NoBGM",
   };
 };
+
+/**
+ * BGMの音量を変更する
+ * @param bgmVolume BGMの音量、0〜1の範囲
+ * @return BGMオペレータ
+ */
+export const changeVolume =
+  (bgmVolume: number) =>
+  async (bgm: BGM): Promise<BGM> => {
+    if (bgm.type === "NowPlayingBGM") {
+      bgm.resource.sound.volume(bgmVolume * bgm.resource.volumeScale);
+    }
+
+    return {
+      ...bgm,
+      bgmVolume,
+    };
+  };
 
 /**
  * BGMを再生する
