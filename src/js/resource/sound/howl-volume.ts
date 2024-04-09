@@ -1,6 +1,7 @@
 import { SoundResource } from "./resource";
 
 /**
+ * @deprecated
  * Howlで利用するボリューム
  * @param sound 音リソース
  * @return Howlで使うボリューム

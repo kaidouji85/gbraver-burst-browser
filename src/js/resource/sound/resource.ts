@@ -39,6 +39,7 @@ export type SoundResource = {
   readonly sound: Howl;
 
   /**
+   * @deprecated
    * ボリューム
    * 本プロパティには設定画面の入力内容をセットする想定であり、フェードイン、フェードアウトで利用する
    * フェードイン処理とは音量を0 -> X に変更することだが、
