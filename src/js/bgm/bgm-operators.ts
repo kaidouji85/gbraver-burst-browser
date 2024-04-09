@@ -50,6 +50,7 @@ export const stop = async (bgm: BGM): Promise<BGM> => {
 
 /**
  * BGMの音量を変更する
+ * 本関数には設定画面における音量設定を指定すること
  * @param bgmVolume BGMの音量、0〜1の範囲
  * @return BGMオペレータ
  */

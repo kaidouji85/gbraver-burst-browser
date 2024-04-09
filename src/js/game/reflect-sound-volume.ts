@@ -17,5 +17,5 @@ export async function reflectSoundVolume(
     .forEach((sound) => {
       sound.sound.volume(sound.volumeScale * config.seVolume);
     });
-  props.bgm.do(changeVolume(config.bgmVolume));
+  await props.bgm.do(changeVolume(config.bgmVolume));
 }
