@@ -14,7 +14,6 @@ export function createEmptySoundResource(): SoundResource {
       src: "",
       mute: true,
     }),
-    volume: 1,
     volumeScale: 1,
   };
 }

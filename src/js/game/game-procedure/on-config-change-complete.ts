@@ -18,14 +18,20 @@ export async function onConfigChangeComplete(
 ): Promise<void> {
   await props.fader.fadeOut();
   const origin = await props.config.load();
-  isSoundConfigChanged(origin, action.config) &&
-    reflectSoundVolume(props.resources, action.config);
-  origin.performanceStatsVisibility !==
-    action.config.performanceStatsVisibility &&
+  if (isSoundConfigChanged(origin, action.config)) {
+    await reflectSoundVolume(props, action.config);
+  }
+
+  if (
+    origin.performanceStatsVisibility !==
+    action.config.performanceStatsVisibility
+  ) {
     reflectPerformanceStatsVisibility(
       props,
       action.config.performanceStatsVisibility,
     );
+  }
+
   await props.config.save(action.config);
   await startTitle(props);
   await props.fader.fadeIn();

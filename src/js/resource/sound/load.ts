@@ -24,7 +24,6 @@ export function loadSound(
       type: config.type,
       sound: sound,
       volumeScale: config.volumeScale,
-      volume: 1,
     };
 
     if (sound.state() === "loaded") {

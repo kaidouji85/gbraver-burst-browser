@@ -24,6 +24,6 @@ export async function loadFullResource(props: GameProps): Promise<void> {
   await props.fader.fadeIn();
   props.resources = await resourceLoading.resources;
   const config = await props.config.load();
-  reflectSoundVolume(props.resources, config);
+  await reflectSoundVolume(props, config);
   props.isFullResourceLoaded = true;
 }

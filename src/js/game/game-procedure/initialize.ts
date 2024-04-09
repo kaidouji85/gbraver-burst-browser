@@ -40,7 +40,7 @@ export async function initialize(props: GameProps): Promise<void> {
   props.resources = await resourceLoading.resources;
   const config = await props.config.load();
   reflectPerformanceStatsVisibility(props, config.performanceStatsVisibility);
-  reflectSoundVolume(props.resources, config);
+  await reflectSoundVolume(props, config);
   await startTitle(props);
   props.interruptScenes.bind(props.resources);
   const latency = Date.now() - startTime;
