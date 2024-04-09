@@ -3,15 +3,20 @@ import type { SoundResource } from "../resource/sound/resource";
 /** BGMの状態 */
 export type BGM = NowPlayingBGM | NoBGM;
 
-/** BGM再生中 */
-export type NowPlayingBGM = {
-  type: "NowPlayingBGM";
+/** すべての状態で共通するプロパティ */
+type CommonProps = {
+  /** 設定画面のBGM音量レベルをセットする */
+  readonly bgmVolume: number;
+}
 
+/** BGM再生中 */
+export type NowPlayingBGM = CommonProps & {
+  type: "NowPlayingBGM";
   /** 再生中のBGM */
-  resource: SoundResource;
+  readonly resource: SoundResource;
 };
 
 /** BGMなし */
-export type NoBGM = {
+export type NoBGM = CommonProps & {
   type: "NoBGM";
 };
