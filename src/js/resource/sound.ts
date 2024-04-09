@@ -17,11 +17,11 @@ export type SoundType = "BGM" | "SE";
  */
 export type SoundConfig = {
   /** 音ID*/
-  id: SoundId;
+  readonly id: SoundId;
   /** 音種別 */
-  type: SoundType;
+  readonly type: SoundType;
   /** ボリュームスケール */
-  volumeScale: number;
+  readonly volumeScale: number;
 
   /**
    * 素材のパス
@@ -34,11 +34,11 @@ export type SoundConfig = {
 /**音リソース */
 export type SoundResource = {
   /** 音ID */
-  id: SoundId;
+  readonly id: SoundId;
   /** 音種別 */
-  type: SoundType;
+  readonly type: SoundType;
   /** 音声データ */
-  sound: Howl;
+  readonly sound: Howl;
 
   /**
    * ボリューム
@@ -57,7 +57,7 @@ export type SoundResource = {
    *   効果音A volumeScale = 0.5
    * とする
    */
-  volumeScale: number;
+  readonly volumeScale: number;
 };
 
 /**
