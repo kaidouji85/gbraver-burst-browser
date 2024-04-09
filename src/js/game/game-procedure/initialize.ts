@@ -9,6 +9,7 @@ import { reflectSoundVolume } from "../reflect-sound-volume";
 import { playTitleBGM } from "./play-title-bgm";
 import { reflectPerformanceStatsVisibility } from "./reflect-performance-stats-visibility";
 import { startTitle } from "./start-title";
+import {changeVolume} from "../../bgm/bgm-operators";
 
 /**
  * ゲームの初期化
@@ -41,6 +42,7 @@ export async function initialize(props: GameProps): Promise<void> {
   const config = await props.config.load();
   reflectPerformanceStatsVisibility(props, config.performanceStatsVisibility);
   reflectSoundVolume(props.resources, config);
+  await props.bgm.do(changeVolume(config.bgmVolume));
   await startTitle(props);
   props.interruptScenes.bind(props.resources);
   const latency = Date.now() - startTime;
