@@ -12,7 +12,6 @@ export interface BGMManager {
 }
 
 /** BGM管理オブジェクトのシンプルな実装 */
-
 class SimpleBGMManager implements BGMManager {
   /** BGMの状態 */
   #bgm: BGM;
