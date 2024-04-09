@@ -9,7 +9,7 @@ import {
 } from "gbraver-burst-core";
 
 import type { NPC } from "../npc/npc";
-import type { SoundId } from "../resource/sound";
+import type { SoundId } from "../resource/sound/resource";
 
 /** NPCバトル ステージ */
 export type NPCBattleStage = {

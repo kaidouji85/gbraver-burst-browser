@@ -1,7 +1,7 @@
 import { Subject } from "rxjs";
 
 import { Exclusive } from "../../exclusive/exclusive";
-import { SoundResource } from "../../resource/sound";
+import { SoundResource } from "../../resource/sound/resource";
 import { ArmdozerIcon } from "./armdozer-icon";
 import { ArmdozerSelection } from "./armdozer-selection";
 import { PilotIcon } from "./pilot-icon";

@@ -1,7 +1,7 @@
 import { Howl } from "howler";
 
 import type { Resources } from "../../../../resource";
-import { SOUND_IDS } from "../../../../resource/sound";
+import { SOUND_IDS } from "../../../../resource/sound/ids";
 
 /**
  * ツバサ カットイン 効果音

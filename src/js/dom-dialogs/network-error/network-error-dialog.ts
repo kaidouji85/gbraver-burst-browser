@@ -6,7 +6,7 @@ import { domPushStream, PushDOM } from "../../dom/push-dom";
 import { Exclusive } from "../../exclusive/exclusive";
 import type { PostNetworkError } from "../../game/post-network-error";
 import type { Resources } from "../../resource";
-import { SOUND_IDS } from "../../resource/sound";
+import { SOUND_IDS } from "../../resource/sound/ids";
 import { domUuid } from "../../uuid/dom-uuid";
 import type { DOMDialog } from "../dialog";
 

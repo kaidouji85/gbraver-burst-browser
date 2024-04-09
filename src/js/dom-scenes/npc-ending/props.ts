@@ -2,7 +2,7 @@ import { Howl } from "howler";
 import { Subject } from "rxjs";
 
 import { BGMManager } from "../../bgm/bgm-manager";
-import { SoundResource } from "../../resource/sound";
+import { SoundResource } from "../../resource/sound/resource";
 
 /** NPCルート エンディング画面 プロパティ */
 export type NPCEndingProps = {

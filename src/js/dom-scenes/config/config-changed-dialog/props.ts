@@ -3,7 +3,7 @@ import { Subject } from "rxjs";
 
 import { Exclusive } from "../../../exclusive/exclusive";
 import type { Resources } from "../../../resource";
-import { SOUND_IDS } from "../../../resource/sound";
+import { SOUND_IDS } from "../../../resource/sound/ids";
 import { domUuid } from "../../../uuid/dom-uuid";
 import { ROOT_CLASS_INVISIBLE } from "./dom/class-name";
 import { extractElements } from "./dom/elements";

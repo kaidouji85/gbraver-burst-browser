@@ -3,7 +3,7 @@ import { Subject } from "rxjs";
 
 import { Exclusive } from "../../../exclusive/exclusive";
 import { Resources } from "../../../resource";
-import { SOUND_IDS } from "../../../resource/sound";
+import { SOUND_IDS } from "../../../resource/sound/ids";
 import { ROOT_CLASS_NAME } from "../dom/class-name";
 import {
   extractCloseButton,

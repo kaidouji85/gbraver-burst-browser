@@ -1,6 +1,6 @@
 import type { Resources } from "../resource";
-import type { SoundResource } from "../resource/sound";
-import { howlVolume } from "../resource/sound";
+import { howlVolume } from "../resource/sound/howl-volume";
+import type { SoundResource } from "../resource/sound/resource";
 import type { GBraverBurstBrowserConfig } from "./config/browser-config";
 
 /**

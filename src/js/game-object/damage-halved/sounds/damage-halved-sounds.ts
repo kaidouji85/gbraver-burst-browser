@@ -1,7 +1,7 @@
 import { Howl } from "howler";
 
 import type { Resources } from "../../../resource";
-import { SOUND_IDS } from "../../../resource/sound";
+import { SOUND_IDS } from "../../../resource/sound/ids";
 
 /** ダメージ半減 効果音 */
 export class DamageHalvedSounds {

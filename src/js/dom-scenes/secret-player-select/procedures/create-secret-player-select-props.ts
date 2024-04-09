@@ -3,7 +3,8 @@ import { Subject } from "rxjs";
 
 import { Exclusive } from "../../../exclusive/exclusive";
 import { Resources } from "../../../resource";
-import { createEmptySoundResource, SOUND_IDS } from "../../../resource/sound";
+import { createEmptySoundResource } from "../../../resource/sound/empty-sound-resource";
+import { SOUND_IDS } from "../../../resource/sound/ids";
 import { ArmdozerIcon } from "../armdozer-icon";
 import { ROOT } from "../dom/class-name";
 import {
