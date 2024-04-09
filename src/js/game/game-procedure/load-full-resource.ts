@@ -5,7 +5,8 @@ import {
 } from "../../resource/loading/full-resource-differential-load";
 import { loadingConnector } from "../action-connector/loading-connector";
 import type { GameProps } from "../game-props";
-import { reflectSoundVolume } from "../reflect-sound-volume";
+import { reflectSEVolume } from "../reflect-se-volume";
+import {changeVolume} from "../../bgm/bgm-operators";
 
 /**
  * フルリソース読み込みを行うヘルパー関数
@@ -24,6 +25,7 @@ export async function loadFullResource(props: GameProps): Promise<void> {
   await props.fader.fadeIn();
   props.resources = await resourceLoading.resources;
   const config = await props.config.load();
-  reflectSoundVolume(props.resources, config);
+  reflectSEVolume(props.resources, config);
+  await props.bgm.do(changeVolume(config.bgmVolume));
   props.isFullResourceLoaded = true;
 }

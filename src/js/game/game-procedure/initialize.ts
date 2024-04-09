@@ -5,7 +5,7 @@ import { loadServiceWorker } from "../../service-worker/load-service-worker";
 import { waitTime } from "../../wait/wait-time";
 import { mailVerifiedIncompleteConnector } from "../action-connector/mail-verified-incomplete-connector";
 import type { GameProps } from "../game-props";
-import { reflectSoundVolume } from "../reflect-sound-volume";
+import { reflectSEVolume } from "../reflect-se-volume";
 import { playTitleBGM } from "./play-title-bgm";
 import { reflectPerformanceStatsVisibility } from "./reflect-performance-stats-visibility";
 import { startTitle } from "./start-title";
@@ -41,7 +41,7 @@ export async function initialize(props: GameProps): Promise<void> {
   props.resources = await resourceLoading.resources;
   const config = await props.config.load();
   reflectPerformanceStatsVisibility(props, config.performanceStatsVisibility);
-  reflectSoundVolume(props.resources, config);
+  reflectSEVolume(props.resources, config);
   await props.bgm.do(changeVolume(config.bgmVolume));
   await startTitle(props);
   props.interruptScenes.bind(props.resources);
