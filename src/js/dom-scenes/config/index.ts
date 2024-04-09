@@ -1,5 +1,6 @@
 import { Observable, Unsubscribable } from "rxjs";
 
+import { BGMManager } from "../../bgm/bgm-manager";
 import type { GBraverBurstBrowserConfig } from "../../game/config/browser-config";
 import type { Resources } from "../../resource";
 import type { DOMScene } from "../dom-scene";
@@ -14,12 +15,16 @@ export class Config implements DOMScene {
 
   /**
    * コンストラクタ
-   *
    * @param resources リソース管理オブジェクト
    * @param config Gブレイバーバースト ブラウザ側設定項目
+   * @param bgm BGM管理オブジェクト
    */
-  constructor(resources: Resources, config: GBraverBurstBrowserConfig) {
-    this.#props = createConfigProps(resources, config);
+  constructor(
+    resources: Resources,
+    config: GBraverBurstBrowserConfig,
+    bgm: BGMManager,
+  ) {
+    this.#props = createConfigProps(resources, config, bgm);
     this.#unsubscriber = bindEventListeners(this.#props);
   }
 
@@ -38,7 +43,6 @@ export class Config implements DOMScene {
 
   /**
    * 戻る通知
-   *
    * @return 通知ストリーム
    */
   notifyPrev(): Observable<void> {
@@ -47,7 +51,6 @@ export class Config implements DOMScene {
 
   /**
    * 設定変更通知
-   *
    * @return 通知ストリーム
    */
   notifyConfigChanges(): Observable<GBraverBurstBrowserConfig> {

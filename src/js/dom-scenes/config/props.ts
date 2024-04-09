@@ -1,10 +1,12 @@
-import { Howl } from "howler";
 import { Subject } from "rxjs";
 
+import { BGMManager } from "../../bgm/bgm-manager";
 import { Exclusive } from "../../exclusive/exclusive";
 import type { GBraverBurstBrowserConfig } from "../../game/config/browser-config";
 import type { Resources } from "../../resource";
+import { createEmptySoundResource } from "../../resource/sound/empty-sound-resource";
 import { SOUND_IDS } from "../../resource/sound/ids";
+import { SoundResource } from "../../resource/sound/resource";
 import { domUuid } from "../../uuid/dom-uuid";
 import { ConfigChangedDialog } from "./config-changed-dialog";
 import { ROOT_CLASS } from "./dom/class-name";
@@ -15,6 +17,7 @@ import { rootInnerHTML } from "./dom/root-inner-html";
 export type ConfigProps = {
   /** 画面を開く前のブラウザ設定 */
   originConfig: GBraverBurstBrowserConfig;
+
   /** ルートHTML要素 */
   root: HTMLElement;
   /** 戦闘アニメ速度セレクタ */
@@ -37,14 +40,21 @@ export type ConfigProps = {
   prevButton: HTMLElement;
   /** 設定変更ボタン */
   configChangeButton: HTMLElement;
+
   /** 設定変更通知ダイアログ */
   dialog: ConfigChangedDialog;
+
   /** SE 値変更 */
-  changeValue: Howl;
+  changeValue: SoundResource;
   /** SE ボタン押下 */
-  pushButton: Howl;
+  pushButton: SoundResource;
+
+  /** BGM管理オブジェクト */
+  bgm: BGMManager;
+
   /** 排他制御 */
   exclusive: Exclusive;
+
   /** 戻るストリーム */
   prev: Subject<void>;
   /** 設定変更ストリーム */
@@ -55,11 +65,13 @@ export type ConfigProps = {
  * 設定画面プロパティを生成する
  * @param resources リソース管理オブジェクト
  * @param config ブラウザ設定
+ * @param bgm BGM管理オブジェクト
  * @return 生成した設定画面プロパティ
  */
 export function createConfigProps(
   resources: Resources,
   config: GBraverBurstBrowserConfig,
+  bgm: BGMManager,
 ): ConfigProps {
   const ids = {
     battleAnimationTimeScaleSelector: domUuid(),
@@ -81,6 +93,7 @@ export function createConfigProps(
   root.appendChild(dialog.getRootHTMLElement());
   return {
     originConfig: config,
+
     root,
     battleAnimationTimeScaleSelector: elements.battleAnimationTimeScaleSelector,
     webGLPixelRatioSelector: elements.webGLPixelRatioSelector,
@@ -93,14 +106,20 @@ export function createConfigProps(
     performanceStatsVisibilitySelector:
       elements.performanceStatsVisibilitySelector,
     configChangeButton: elements.configChange,
+
     dialog,
+
     pushButton:
-      resources.sounds.find((v) => v.id === SOUND_IDS.PUSH_BUTTON)?.sound ??
-      new Howl({ src: "" }),
+      resources.sounds.find((v) => v.id === SOUND_IDS.PUSH_BUTTON) ??
+      createEmptySoundResource(),
     changeValue:
-      resources.sounds.find((v) => v.id === SOUND_IDS.CHANGE_VALUE)?.sound ??
-      new Howl({ src: "" }),
+      resources.sounds.find((v) => v.id === SOUND_IDS.CHANGE_VALUE) ??
+      createEmptySoundResource(),
+
+    bgm,
+
     exclusive: new Exclusive(),
+
     prev: new Subject<void>(),
     configChange: new Subject<GBraverBurstBrowserConfig>(),
   };
