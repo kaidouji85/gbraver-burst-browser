@@ -6,6 +6,7 @@ import type { DOMScene } from "../dom-scene";
 import { bindEventListeners } from "./listeners";
 import type { ConfigProps } from "./props";
 import { createConfigProps } from "./props";
+import {BGMManager} from "../../bgm/bgm-manager";
 
 /** 設定画面 */
 export class Config implements DOMScene {
@@ -17,9 +18,10 @@ export class Config implements DOMScene {
    *
    * @param resources リソース管理オブジェクト
    * @param config Gブレイバーバースト ブラウザ側設定項目
+   * @param bgm BGM管理オブジェクト
    */
-  constructor(resources: Resources, config: GBraverBurstBrowserConfig) {
-    this.#props = createConfigProps(resources, config);
+  constructor(resources: Resources, config: GBraverBurstBrowserConfig, bgm: BGMManager ) {
+    this.#props = createConfigProps(resources, config, bgm);
     this.#unsubscriber = bindEventListeners(this.#props);
   }
 

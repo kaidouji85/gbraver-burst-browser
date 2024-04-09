@@ -1,3 +1,4 @@
+import { createBGMManager } from "../src/js/bgm/bgm-manager";
 import { Config } from "../src/js/dom-scenes/config";
 import { ConfigChangedDialog } from "../src/js/dom-scenes/config/config-changed-dialog";
 import type { DOMStubStory } from "./stub/dom-stub";
@@ -8,14 +9,18 @@ export default {
 };
 
 export const Scene: DOMStubStory = domStub((resources) => {
-  const scene = new Config(resources, {
-    webGLPixelRatio: 2,
-    battleAnimationTimeScale: 1,
-    bgmVolume: 1,
-    seVolume: 1,
-    battleControllerType: "BigButton",
-    performanceStatsVisibility: "hidden",
-  });
+  const scene = new Config(
+    resources,
+    {
+      webGLPixelRatio: 2,
+      battleAnimationTimeScale: 1,
+      bgmVolume: 1,
+      seVolume: 1,
+      battleControllerType: "BigButton",
+      performanceStatsVisibility: "hidden",
+    },
+    createBGMManager(),
+  );
   scene.notifyPrev().subscribe(() => {
     console.log("prev");
   });

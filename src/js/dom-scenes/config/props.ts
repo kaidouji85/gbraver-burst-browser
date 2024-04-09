@@ -11,6 +11,7 @@ import { extractElements } from "./dom/elements";
 import { rootInnerHTML } from "./dom/root-inner-html";
 import { SoundResource } from "../../resource/sound/resource";
 import { createEmptySoundResource } from "../../resource/sound/empty-sound-resource";
+import {BGMManager} from "../../bgm/bgm-manager";
 
 /** 設定画面プロパティ */
 export type ConfigProps = {
@@ -48,6 +49,9 @@ export type ConfigProps = {
   /** SE ボタン押下 */
   pushButton: SoundResource;
 
+  /** BGM管理オブジェクト */
+  bgm: BGMManager;
+
   /** 排他制御 */
   exclusive: Exclusive;
 
@@ -61,11 +65,13 @@ export type ConfigProps = {
  * 設定画面プロパティを生成する
  * @param resources リソース管理オブジェクト
  * @param config ブラウザ設定
+ * @param bgm BGM管理オブジェクト
  * @return 生成した設定画面プロパティ
  */
 export function createConfigProps(
   resources: Resources,
   config: GBraverBurstBrowserConfig,
+  bgm: BGMManager
 ): ConfigProps {
   const ids = {
     battleAnimationTimeScaleSelector: domUuid(),
@@ -87,6 +93,7 @@ export function createConfigProps(
   root.appendChild(dialog.getRootHTMLElement());
   return {
     originConfig: config,
+
     root,
     battleAnimationTimeScaleSelector: elements.battleAnimationTimeScaleSelector,
     webGLPixelRatioSelector: elements.webGLPixelRatioSelector,
@@ -99,14 +106,20 @@ export function createConfigProps(
     performanceStatsVisibilitySelector:
       elements.performanceStatsVisibilitySelector,
     configChangeButton: elements.configChange,
+
     dialog,
+
     pushButton:
       resources.sounds.find((v) => v.id === SOUND_IDS.PUSH_BUTTON) ??
       createEmptySoundResource(),
     changeValue:
       resources.sounds.find((v) => v.id === SOUND_IDS.CHANGE_VALUE) ??
       createEmptySoundResource(),
+
+    bgm,
+
     exclusive: new Exclusive(),
+
     prev: new Subject<void>(),
     configChange: new Subject<GBraverBurstBrowserConfig>(),
   };
