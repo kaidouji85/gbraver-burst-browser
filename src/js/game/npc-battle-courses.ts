@@ -30,7 +30,7 @@ import { veryHardLightningDozer } from "../npc/very-hard-lightning-dozer";
 import { veryHardNeoLandozer } from "../npc/very-hard-neo-landozer";
 import { veryHardShinBraver } from "../npc/very-hard-shin-braver";
 import { veryHardWingDozerNPC } from "../npc/very-hard-wing-dozer";
-import { SOUND_IDS } from "../resource/sound";
+import { SOUND_IDS } from "../resource/sound/ids";
 import type { NPCBattleStage } from "./npc-battle";
 
 /** NPCバトルコース難易度 */

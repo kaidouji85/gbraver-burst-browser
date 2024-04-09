@@ -2,11 +2,9 @@ import * as R from "ramda";
 import { merge, Observable } from "rxjs";
 
 import { Resources } from "../../resource";
-import {
-  createEmptySoundResource,
-  SOUND_IDS,
-  SoundResource,
-} from "../../resource/sound";
+import { createEmptySoundResource } from "../../resource/sound/empty-sound-resource";
+import { SOUND_IDS } from "../../resource/sound/ids";
+import { SoundResource } from "../../resource/sound/resource";
 import { domUuid } from "../../uuid/dom-uuid";
 import { BatteryButton } from "./battery-button";
 import { BurstButton } from "./burst-button";

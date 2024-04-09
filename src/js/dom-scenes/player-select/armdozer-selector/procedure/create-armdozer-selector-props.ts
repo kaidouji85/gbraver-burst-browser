@@ -5,7 +5,7 @@ import { Subject } from "rxjs";
 import { replaceDOM } from "../../../../dom/replace-dom";
 import { Exclusive } from "../../../../exclusive/exclusive";
 import { Resources } from "../../../../resource";
-import { SOUND_IDS } from "../../../../resource/sound";
+import { SOUND_IDS } from "../../../../resource/sound/ids";
 import { ArmdozerIcon } from "../armdozer-icon";
 import { ArmdozerStatus } from "../armdozer-status";
 import { BLOCK } from "../dom/class-name";

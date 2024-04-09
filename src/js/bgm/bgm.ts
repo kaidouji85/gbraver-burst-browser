@@ -1,4 +1,4 @@
-import type { SoundResource } from "../resource/sound";
+import type { SoundResource } from "../resource/sound/resource";
 
 /** BGMの状態 */
 export type BGM = NowPlayingBGM | NoBGM;

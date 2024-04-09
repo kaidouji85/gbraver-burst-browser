@@ -1,5 +1,5 @@
-import type { SoundResource } from "../resource/sound";
-import { howlVolume } from "../resource/sound";
+import { howlVolume } from "../resource/sound/howl-volume";
+import type { SoundResource } from "../resource/sound/resource";
 import { waitTime } from "../wait/wait-time";
 import type { BGM } from "./bgm";
 

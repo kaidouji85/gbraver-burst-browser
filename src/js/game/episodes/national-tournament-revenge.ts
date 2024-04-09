@@ -3,7 +3,7 @@ import { ArmdozerIds, Armdozers, PilotIds, Pilots } from "gbraver-burst-core";
 import { EmptyCustomBattleEvent } from "../../custom-battle-events/empty-custom-battle-event";
 import { wingDozerNPCForNationalTournamentRevenge } from "../../npc/wing-dozer-for-national-tournament-revenge";
 import { PathIds } from "../../resource/path/ids";
-import { SOUND_IDS } from "../../resource/sound";
+import { SOUND_IDS } from "../../resource/sound/ids";
 import { playerUuid } from "../../uuid/player";
 import { Episode } from "./episode";
 import { EpisodeIDs } from "./episode-ids";

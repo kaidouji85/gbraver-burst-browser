@@ -4,7 +4,7 @@ import { Subject } from "rxjs";
 import { Exclusive } from "../../exclusive/exclusive";
 import type { GBraverBurstBrowserConfig } from "../../game/config/browser-config";
 import type { Resources } from "../../resource";
-import { SOUND_IDS } from "../../resource/sound";
+import { SOUND_IDS } from "../../resource/sound/ids";
 import { domUuid } from "../../uuid/dom-uuid";
 import { ConfigChangedDialog } from "./config-changed-dialog";
 import { ROOT_CLASS } from "./dom/class-name";

@@ -6,7 +6,7 @@ import { Animate } from "../../../animation/animate";
 import { onStart } from "../../../animation/on-start";
 import type { PreRender } from "../../../game-loop/pre-render";
 import type { Resources } from "../../../resource";
-import { SOUND_IDS } from "../../../resource/sound";
+import { SOUND_IDS } from "../../../resource/sound/ids";
 import type { GameObjectAction } from "../../action/game-object-action";
 import { popUp } from "./animation/pop-up";
 import type { ShockWaveModel } from "./model/shock-wave-model";

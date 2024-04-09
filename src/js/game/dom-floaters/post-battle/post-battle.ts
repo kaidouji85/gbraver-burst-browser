@@ -6,7 +6,7 @@ import { domPushStream } from "../../../dom/push-dom";
 import { waitFinishAnimation } from "../../../dom/wait-finish-animation";
 import { Exclusive } from "../../../exclusive/exclusive";
 import type { Resources } from "../../../resource";
-import { SOUND_IDS } from "../../../resource/sound";
+import { SOUND_IDS } from "../../../resource/sound/ids";
 import type { PostBattle } from "../../post-battle";
 import type {
   ButtonStyle,

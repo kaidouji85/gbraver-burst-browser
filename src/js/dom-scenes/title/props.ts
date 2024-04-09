@@ -4,7 +4,7 @@ import { Subject } from "rxjs";
 import { Exclusive } from "../../exclusive/exclusive";
 import type { Resources } from "../../resource";
 import { PathIds } from "../../resource/path/ids";
-import { SOUND_IDS } from "../../resource/sound";
+import { SOUND_IDS } from "../../resource/sound/ids";
 import { domUuid } from "../../uuid/dom-uuid";
 import { waitElementLoaded } from "../../wait/wait-element-loaded";
 import { ROOT_CLASS } from "./dom/class-name";

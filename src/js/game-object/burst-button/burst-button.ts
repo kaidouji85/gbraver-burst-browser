@@ -5,7 +5,7 @@ import * as THREE from "three";
 import { Animate } from "../../animation/animate";
 import type { PreRender } from "../../game-loop/pre-render";
 import type { Resources } from "../../resource";
-import { SOUND_IDS } from "../../resource/sound";
+import { SOUND_IDS } from "../../resource/sound/ids";
 import type { GameObjectAction } from "../action/game-object-action";
 import { close } from "./animation/close";
 import { decide } from "./animation/decide";

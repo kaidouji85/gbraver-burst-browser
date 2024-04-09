@@ -5,7 +5,7 @@ import { createSeriousMatchEvent } from "../../custom-battle-events/serious-matc
 import { NetworkErrorDialog } from "../../dom-dialogs/network-error/network-error-dialog";
 import { WaitingDialog } from "../../dom-dialogs/waiting/waiting-dialog";
 import { MatchCard } from "../../dom-scenes/match-card";
-import { SOUND_IDS } from "../../resource/sound";
+import { SOUND_IDS } from "../../resource/sound/ids";
 import { BattleScene } from "../../td-scenes/battle";
 import { BattleProgress } from "../../td-scenes/battle/battle-progress";
 import { waitAnimationFrame } from "../../wait/wait-animation-frame";

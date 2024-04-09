@@ -1,7 +1,7 @@
 import { Subject } from "rxjs";
 
 import { Exclusive } from "../../exclusive/exclusive";
-import { SoundResource } from "../../resource/sound";
+import { SoundResource } from "../../resource/sound/resource";
 import { EpisodeImageCut } from "./dom/episode-image-cut";
 import { EpisodeDetail } from "./episode-detail";
 import { EpisodeElement } from "./episode-element";
