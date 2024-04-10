@@ -5,7 +5,7 @@ import { SkyBrightness } from "../../../../game-object/sky-brightness/sky-bright
 import SchoolField from "../../../../game-object/stage/shopping-street/shopping-street";
 import type { Stage } from "../../../../game-object/stage/stage";
 import { TurnIndicator } from "../../../../game-object/turn-indicator/turn-indicator";
-import {GenerateTDLayerObjectParams} from "./generate-params";
+import { GenerateTDLayerObjectParams } from "./generate-params";
 
 /** 3Dレイヤーのゲームオブジェクト */
 export class TDGameObjects {

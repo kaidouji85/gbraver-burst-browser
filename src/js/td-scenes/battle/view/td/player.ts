@@ -53,8 +53,7 @@ import {
   playerReflectIndicator,
 } from "../../../../game-object/reflect-indicator";
 import { ReflectIndicator } from "../../../../game-object/reflect-indicator/reflect-indicator";
-import { GenerateBattleViewParams } from "../generate-params";
-import {GenerateTDLayerObjectParams} from "./generate-params";
+import { GenerateTDLayerObjectParams } from "./generate-params";
 
 /**
  * 3Dレイヤー プレイヤー関係オブジェクト フィールド

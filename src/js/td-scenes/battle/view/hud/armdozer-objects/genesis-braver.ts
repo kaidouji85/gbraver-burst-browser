@@ -1,15 +1,13 @@
-import type { Player, PlayerId } from "gbraver-burst-core";
-import { Observable } from "rxjs";
+import type { PlayerId } from "gbraver-burst-core";
 import * as THREE from "three";
 
-import type { GameObjectAction } from "../../../../../game-object/action/game-object-action";
 import {
   enemyGenesisBraverCutIn,
   playerGenesisBraverCutIn,
 } from "../../../../../game-object/cut-in/genesis-braver";
 import { GenesisBraverCutIn } from "../../../../../game-object/cut-in/genesis-braver/genesis-braver-cutin";
-import type { Resources } from "../../../../../resource";
-import type { HUDArmdozerObjects } from "./hud-armdozer-ibjects";
+import { GenerateHUDLayerObjectParams } from "../generate-params";
+import type { HUDArmdozerObjects } from "./hud-armdozer-objects";
 
 /** コンストラクタのパラメータ */
 type Param = {
@@ -48,36 +46,30 @@ export class GenesisBraverHUD implements HUDArmdozerObjects {
 
 /**
  * プレイヤー ジェネシスブレイバーHUD を生成する
- * @param resources リソース管理オブジェクト
- * @param gameObjectAction ゲームオブジェクトアクション
- * @param state プレイヤーの状態
+ * @param params 生成パラメータ
  * @return 生成結果
  */
 export function playerGenesisBraverHUD(
-  resources: Resources,
-  gameObjectAction: Observable<GameObjectAction>,
-  state: Player,
+  params: GenerateHUDLayerObjectParams,
 ): HUDArmdozerObjects {
+  const { resources, player, gameObjectAction } = params;
   return new GenesisBraverHUD({
-    playerId: state.playerId,
+    playerId: player.playerId,
     cutIn: playerGenesisBraverCutIn(resources, gameObjectAction),
   });
 }
 
 /**
  * 敵 ジェネシスブレイバーHUD を生成する
- * @param resources リソース管理オブジェクト
- * @param gameObjectAction ゲームオブジェクトアクション
- * @param state プレイヤーの状態
+ * @param params 生成パラメータ
  * @return 生成結果
  */
 export function enemyGenesisBraverHUD(
-  resources: Resources,
-  gameObjectAction: Observable<GameObjectAction>,
-  state: Player,
+  params: GenerateHUDLayerObjectParams,
 ): HUDArmdozerObjects {
+  const { resources, enemy, gameObjectAction } = params;
   return new GenesisBraverHUD({
-    playerId: state.playerId,
+    playerId: enemy.playerId,
     cutIn: enemyGenesisBraverCutIn(resources, gameObjectAction),
   });
 }

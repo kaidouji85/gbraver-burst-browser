@@ -1,5 +1,6 @@
 import { ArmdozerIds } from "gbraver-burst-core";
 
+import { GenerateTDLayerObjectParams } from "../generate-params";
 import type { TDArmdozerObjects } from "./armdozer-objects";
 import { enemyGenesisBraverTD, playerGenesisBraverTD } from "./genesis-braver";
 import {
@@ -9,7 +10,6 @@ import {
 import { enemyNeoLandozerTD, playerNeoLandozerTD } from "./neo-landozer";
 import { enemyShinBraverTD, playerShinBraverTD } from "./shin-braver";
 import { enemyWingDozerTD, playerWingDozerTD } from "./wing-dozer";
-import { GenerateTDLayerObjectParams } from "../generate-params";
 
 /**
  * プレイヤー側  3Dレイヤー アームドーザ固有オブジェクト

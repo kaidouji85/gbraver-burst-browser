@@ -7,7 +7,7 @@ import {
   PlayerGenesisBraver,
 } from "../../../../../game-object/armdozer/genesis-braver";
 import { GenesisBraver } from "../../../../../game-object/armdozer/genesis-braver/genesis-braver";
-import {GenerateTDLayerObjectParams} from "../generate-params";
+import { GenerateTDLayerObjectParams } from "../generate-params";
 import type { TDArmdozerObjects } from "./armdozer-objects";
 
 /** ジェネシスブレイバー 3Dレイヤー フィールド */

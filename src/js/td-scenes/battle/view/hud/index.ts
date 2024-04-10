@@ -11,7 +11,7 @@ import type { OverlapNotifier } from "../../../../render/overlap-notifier";
 import type { BattleSceneAction } from "../../actions";
 import { GenerateBattleViewParams } from "../generate-params";
 import { enemyArmdozerHUD, playerArmdozerHUD } from "./armdozer-objects";
-import type { HUDArmdozerObjects } from "./armdozer-objects/hud-armdozer-ibjects";
+import type { HUDArmdozerObjects } from "./armdozer-objects/hud-armdozer-objects";
 import { HUDGameObjects } from "./game-objects";
 import { GenerateHUDLayerObjectParams } from "./generate-params";
 import { enemyHUDPilotObjects, playerHUDPilotObjects } from "./pilot-objects";
@@ -71,8 +71,8 @@ export class HudLayer {
         this.scene.add(v);
       });
     this.armdozers = [
-      playerArmdozerHUD(param.resources, this.#gameObjectAction, param.player),
-      enemyArmdozerHUD(param.resources, this.#gameObjectAction, param.enemy),
+      playerArmdozerHUD(generateParams),
+      enemyArmdozerHUD(generateParams),
     ];
     this.armdozers
       .map((v) => v.getObject3Ds())

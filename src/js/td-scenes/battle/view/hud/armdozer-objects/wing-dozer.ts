@@ -1,15 +1,13 @@
-import type { Player, PlayerId } from "gbraver-burst-core";
-import { Observable } from "rxjs";
+import type { PlayerId } from "gbraver-burst-core";
 import * as THREE from "three";
 
-import type { GameObjectAction } from "../../../../../game-object/action/game-object-action";
 import {
   enemyWingDozerCutIn,
   playerWingDozerCutIn,
 } from "../../../../../game-object/cut-in/wing-dozer";
 import { WingDozerCutIn } from "../../../../../game-object/cut-in/wing-dozer/wing-dozer-cutin";
-import type { Resources } from "../../../../../resource";
-import type { HUDArmdozerObjects } from "./hud-armdozer-ibjects";
+import { GenerateHUDLayerObjectParams } from "../generate-params";
+import type { HUDArmdozerObjects } from "./hud-armdozer-objects";
 
 /** コンストラクタのパラメータ */
 type Param = {
@@ -48,38 +46,30 @@ export class WingDozerHUD implements HUDArmdozerObjects {
 
 /**
  * プレイヤー側 ウィングドーザHUD
- *
- * @param resources リソース管理オブジェクト
- * @param gameObjectAction ゲームオブジェクトアクション
- * @param state プレイヤーの状態
+ * @param params 生成パラメータ
  * @return ウィングドーザHUD
  */
 export function playerWingDozerHUD(
-  resources: Resources,
-  gameObjectAction: Observable<GameObjectAction>,
-  state: Player,
+  params: GenerateHUDLayerObjectParams,
 ): WingDozerHUD {
+  const { resources, player, gameObjectAction } = params;
   return new WingDozerHUD({
-    playerId: state.playerId,
+    playerId: player.playerId,
     cutIn: playerWingDozerCutIn(resources, gameObjectAction),
   });
 }
 
 /**
  * 敵側 ウィングドーザHUD
- *
- * @param resources リソース管理オブジェクト
- * @param gameObjectAction ゲームオブジェクトアクション
- * @param state プレイヤーの状態
+ * @param params 生成パラメータ
  * @return ウィングドーザHUD
  */
 export function enemyWingDozerHUD(
-  resources: Resources,
-  gameObjectAction: Observable<GameObjectAction>,
-  state: Player,
+  params: GenerateHUDLayerObjectParams,
 ): WingDozerHUD {
+  const { resources, enemy, gameObjectAction } = params;
   return new WingDozerHUD({
-    playerId: state.playerId,
+    playerId: enemy.playerId,
     cutIn: enemyWingDozerCutIn(resources, gameObjectAction),
   });
 }

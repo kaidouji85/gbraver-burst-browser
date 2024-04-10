@@ -7,8 +7,8 @@ import {
   PlayerShinBraver,
 } from "../../../../../game-object/armdozer/shin-braver";
 import { ShinBraver } from "../../../../../game-object/armdozer/shin-braver/shin-braver";
+import { GenerateTDLayerObjectParams } from "../generate-params";
 import type { TDArmdozerObjects } from "./armdozer-objects";
-import {GenerateTDLayerObjectParams} from "../generate-params";
 
 /**3Dレイヤー シンブレイバー 3Dレイヤー フィールド */
 interface ShinBraverTDField {
@@ -56,7 +56,7 @@ export class ShinBraverTD implements ShinBraverTDField, TDArmdozerObjects {
  * @return 生成結果
  */
 export function playerShinBraverTD(
-  params: GenerateTDLayerObjectParams
+  params: GenerateTDLayerObjectParams,
 ): ShinBraverTD {
   const { player } = params;
   return new ShinBraverTD(player.playerId, {
@@ -70,7 +70,7 @@ export function playerShinBraverTD(
  * @return 生成結果
  */
 export function enemyShinBraverTD(
-  params: GenerateTDLayerObjectParams
+  params: GenerateTDLayerObjectParams,
 ): ShinBraverTD {
   const { enemy } = params;
   return new ShinBraverTD(enemy.playerId, {

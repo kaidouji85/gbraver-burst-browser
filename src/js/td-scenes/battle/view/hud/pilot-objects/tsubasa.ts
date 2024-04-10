@@ -6,7 +6,7 @@ import {
   playerTsubasaCutIn,
 } from "../../../../../game-object/cut-in/tsubasa";
 import { TsubasaCutIn } from "../../../../../game-object/cut-in/tsubasa/tsubasa";
-import {GenerateHUDLayerObjectParams} from "../generate-params";
+import { GenerateHUDLayerObjectParams } from "../generate-params";
 import type { HUDPilotObjects } from "./hud-pilot-objects";
 
 /**
@@ -57,7 +57,7 @@ export class TsubasaHUD implements HUDPilotObjects {
  * @return ツバサHUD
  */
 export function playerTsubasaHUD(
-  params: GenerateHUDLayerObjectParams
+  params: GenerateHUDLayerObjectParams,
 ): TsubasaHUD {
   const { resources, player, gameObjectAction } = params;
   return new TsubasaHUD({
@@ -72,7 +72,7 @@ export function playerTsubasaHUD(
  * @return ツバサHUD
  */
 export function enemyTsubasaHUD(
-  params: GenerateHUDLayerObjectParams
+  params: GenerateHUDLayerObjectParams,
 ): TsubasaHUD {
   const { resources, enemy, gameObjectAction } = params;
   return new TsubasaHUD({
