@@ -8,6 +8,10 @@ export class BatteryEnchantmentSounds {
   /** メリット効果 */
   benefitEffect: SoundResource;
 
+  /**
+   * コンストラクタ
+   * @param resources リソース管理オブジェクト
+   */
   constructor(resources: Resources) {
     this.benefitEffect =
       resources.sounds.find((v) => v.id === SOUND_IDS.BENEFIT_EFFECT) ??
