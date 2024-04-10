@@ -50,8 +50,8 @@ export class ThreeDimensionLayer {
       this.#overlap,
     );
     this.players = [
-      playerTDObjects(param.resources, param.player, this.#gameObjectAction),
-      enemyTDObject(param.resources, param.enemy, this.#gameObjectAction),
+      playerTDObjects({ ...param, gameObjectAction: this.#gameObjectAction }),
+      enemyTDObject({ ...param, gameObjectAction: this.#gameObjectAction }),
     ];
     this.players
       .map((v) => v.getObject3Ds())

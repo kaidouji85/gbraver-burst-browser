@@ -1,4 +1,4 @@
-import type { Player, PlayerId } from "gbraver-burst-core";
+import type { PlayerId } from "gbraver-burst-core";
 import { Observable } from "rxjs";
 import * as THREE from "three";
 
@@ -56,6 +56,7 @@ import {
 } from "../../../../game-object/reflect-indicator";
 import { ReflectIndicator } from "../../../../game-object/reflect-indicator/reflect-indicator";
 import type { Resources } from "../../../../resource";
+import { GenerateBattleSceneParams } from "../generate-params";
 
 /**
  * 3Dレイヤー プレイヤー関係オブジェクト フィールド
@@ -79,9 +80,7 @@ export interface TDPlayerField {
   damageIndicator: DamageIndicator;
 }
 
-/**
- * 3Dレイヤー プレイヤー関係オブジェクト
- */
+/** 3Dレイヤー プレイヤー関係オブジェクト */
 export interface TDPlayer extends TDPlayerField {
   /**
    * デストラクタ相当の処理
@@ -166,21 +165,20 @@ export class TDPlayerImpl implements TDPlayer {
   }
 }
 
+/** プレイヤーオブジェクト生成パラメータ */
+type GenerateTDPlayerParams = GenerateBattleSceneParams & {
+  gameObjectAction: Observable<GameObjectAction>;
+};
+
 /**
  * プレイヤー側の3Dプレイヤーオブジェクト
- *
- * @param resources リソース管理オブジェクト
- * @param state プレイヤーステータス
- * @param gameObjectAction ゲームオブジェクトアクション
+ * @param params プレイヤーオブジェクト生成パラメータ
  * @return 3Dプレイヤーオブジェクト
  */
-export function playerTDObjects(
-  resources: Resources,
-  state: Player,
-  gameObjectAction: Observable<GameObjectAction>,
-): TDPlayer {
+export function playerTDObjects(params: GenerateTDPlayerParams): TDPlayer {
+  const { resources, player, gameObjectAction } = params;
   return new TDPlayerImpl({
-    playerId: state.playerId,
+    playerId: player.playerId,
     hitMark: {
       shockWave: playerShockWave(resources, gameObjectAction),
       lightning: playerLightning(resources, gameObjectAction),
@@ -201,19 +199,13 @@ export function playerTDObjects(
 
 /**
  * 敵側の3Dプレイヤーオブジェクト
- *
- * @param resources リソース管理オブジェクト
- * @param state プレイヤーステータス
- * @param gameObjectAction ゲームオブジェクトアクション
+ * @param params プレイヤーオブジェクト生成パラメータ
  * @return 3Dプレイヤーオブジェクト
  */
-export function enemyTDObject(
-  resources: Resources,
-  state: Player,
-  gameObjectAction: Observable<GameObjectAction>,
-): TDPlayer {
+export function enemyTDObject(params: GenerateTDPlayerParams): TDPlayer {
+  const { resources, enemy, gameObjectAction } = params;
   return new TDPlayerImpl({
-    playerId: state.playerId,
+    playerId: enemy.playerId,
     hitMark: {
       shockWave: enemyShockWave(resources, gameObjectAction),
       lightning: enemyLightning(resources, gameObjectAction),
