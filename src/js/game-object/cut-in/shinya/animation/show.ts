@@ -41,7 +41,7 @@ export function show(model: ShinyaModel, sounds: ShinyaSounds): Animate {
     )
     .chain(
       onStart(() => {
-        sounds.benefitEffect.play();
+        sounds.benefitEffect.sound.play();
       }),
     );
 }

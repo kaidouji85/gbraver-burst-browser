@@ -29,7 +29,7 @@ function declaration(td: TDPlayer, value: number): Animate {
  */
 function declarationSound(sounds: BattleSceneSounds): Animate {
   return onStart(() => {
-    sounds.batteryDeclaration.play();
+    sounds.batteryDeclaration.sound.play();
   });
 }
 
@@ -66,12 +66,12 @@ function declarationWithCorrect(
  */
 function declarationSoundWithCorrect(sounds: BattleSceneSounds): Animate {
   return onStart(() => {
-    sounds.batteryDeclaration.play();
+    sounds.batteryDeclaration.sound.play();
   })
     .chain(delay(600))
     .chain(
       onStart(() => {
-        sounds.batteryDeclaration.play();
+        sounds.batteryDeclaration.sound.play();
       }),
     );
 }

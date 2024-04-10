@@ -14,7 +14,7 @@ export function onTutorialPush(
 ): void {
   props.exclusive.execute(async (): Promise<void> => {
     action.event.preventDefault();
-    props.pushButton.play();
+    props.pushButton.sound.play();
     await pop(props.tutorial);
     props.pushTutorial.next();
   });

@@ -7,7 +7,6 @@ import { WingDozerSounds } from "../sounds/wing-dozer-sounds";
 
 /**
  * アッパー -> 立ち
- *
  * @param model モデル
  * @param sounds 音
  * @return アニメーション
@@ -19,7 +18,7 @@ export function upperToStand(
   return onStart(() => {
     model.animation.type = "UPPER_TO_STAND";
     model.animation.frame = 0;
-    sounds.motor.play();
+    sounds.motor.sound.play();
   })
     .chain(
       tween(model.animation, (t) =>

@@ -1,5 +1,3 @@
-import { Howl } from "howler";
-
 import type { Resources } from "../../../resource";
 import { createEmptySoundResource } from "../../../resource/sound/empty-sound-resource";
 import { SOUND_IDS } from "../../../resource/sound/ids";
@@ -8,9 +6,13 @@ import type { SoundId } from "../../../resource/sound/resource";
 
 /** 戦闘シーン 効果音 */
 export class BattleSceneSounds {
-  batteryDeclaration: Howl;
-  batteryRecover: Howl;
+  /** バッテリー決定音 */
+  batteryDeclaration: SoundResource;
+  /** バッテリー回復音 */
+  batteryRecover: SoundResource;
+  /** メッセージ送り音 */
   sendMessage: SoundResource;
+  /** BGM */
   bgm: SoundResource;
 
   /**
@@ -21,11 +23,11 @@ export class BattleSceneSounds {
    */
   constructor(resources: Resources, playingBGM: SoundId) {
     this.batteryDeclaration =
-      resources.sounds.find((v) => v.id === SOUND_IDS.BATTERY_DECLARATION)
-        ?.sound ?? new Howl({ src: "" });
+      resources.sounds.find((v) => v.id === SOUND_IDS.BATTERY_DECLARATION) ??
+      createEmptySoundResource();
     this.batteryRecover =
-      resources.sounds.find((v) => v.id === SOUND_IDS.BATTERY_RECOVER)?.sound ??
-      new Howl({ src: "" });
+      resources.sounds.find((v) => v.id === SOUND_IDS.BATTERY_RECOVER) ??
+      createEmptySoundResource();
     this.sendMessage =
       resources.sounds.find((v) => v.id === SOUND_IDS.SEND_MESSAGE) ??
       createEmptySoundResource();

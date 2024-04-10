@@ -20,7 +20,7 @@ export function charge(
     model.animation.type = "HM_CHARGE";
     model.animation.frame = 0;
     model.position.z = ARMDOZER_SPRITE_STANDARD_Z;
-    sounds.motor.play();
+    sounds.motor.sound.play();
   }).chain(
     tween(model.animation, (t) =>
       t.to(

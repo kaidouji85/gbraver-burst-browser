@@ -17,7 +17,7 @@ export function uprightToStand(
   return onStart(() => {
     model.animation.type = "UPRIGHT";
     model.animation.frame = 1;
-    sounds.motor.play();
+    sounds.motor.sound.play();
   })
     .chain(
       tween(model.animation, (t) =>

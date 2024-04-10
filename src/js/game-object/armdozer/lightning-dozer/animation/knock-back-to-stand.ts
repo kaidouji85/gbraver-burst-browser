@@ -6,7 +6,6 @@ import { LightningDozerSounds } from "../sounds/lightning-dozer-sounds";
 
 /**
  * ノックバック -> 立ち
- *
  * @param model モデル
  * @param sounds 音
  * @return アニメーション
@@ -18,7 +17,7 @@ export function knockBackToStand(
   return onStart(() => {
     model.animation.type = "KNOCK_BACK";
     model.animation.frame = 1;
-    sounds.motor.play();
+    sounds.motor.sound.play();
   })
     .chain(
       tween(model.animation, (t) =>

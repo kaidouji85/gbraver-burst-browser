@@ -6,7 +6,6 @@ import { LightningDozerSounds } from "../sounds/lightning-dozer-sounds";
 
 /**
  * ガード -> 立ち
- *
  * @param model モデル
  * @param sounds 音
  * @return アニメーション
@@ -18,7 +17,7 @@ export function guardToStand(
   return onStart(() => {
     model.animation.frame = 1;
     model.animation.type = "GUARD";
-    sounds.motor.play();
+    sounds.motor.sound.play();
   })
     .chain(
       tween(model.animation, (t) =>

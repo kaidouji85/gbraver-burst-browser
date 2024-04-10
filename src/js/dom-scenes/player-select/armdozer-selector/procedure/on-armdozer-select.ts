@@ -19,7 +19,7 @@ export function onArmdozerSelect(
       props.change.next(props.armdozerId);
     }
 
-    props.changeValueSound.play();
+    props.changeValueSound.sound.play();
     props.armdozerIcons
       .filter((icon) => icon.armdozerId === armdozerId)
       .forEach((icon) => {

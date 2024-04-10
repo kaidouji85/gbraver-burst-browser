@@ -1,4 +1,3 @@
-import { Howl } from "howler";
 import { Subject } from "rxjs";
 
 import { BGMManager } from "../../bgm/bgm-manager";
@@ -15,7 +14,7 @@ export type NPCEndingProps = {
   /** ロゴが読み込み完了したら発火するPromise */
   isLogoLoader: Promise<void>;
   /** 効果音 ボタンプッシュ */
-  pushButtonSound: Howl;
+  pushButtonSound: SoundResource;
   /** BGM管理オブジェクト */
   bgm: BGMManager;
   /** エンディングBGM */

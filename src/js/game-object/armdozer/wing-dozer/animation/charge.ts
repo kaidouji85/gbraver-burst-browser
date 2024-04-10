@@ -7,7 +7,6 @@ import { WingDozerSounds } from "../sounds/wing-dozer-sounds";
 
 /**
  * チャージ
- *
  * @param model モデル
  * @param sounds 音
  * @return アニメーション
@@ -20,7 +19,7 @@ export function charge(
     model.animation.type = "UPPER_CHARGE";
     model.animation.frame = 0;
     model.position.z = ARMDOZER_SPRITE_ATTACKER_Z;
-    sounds.motor.play();
+    sounds.motor.sound.play();
   }).chain(
     tween(model.animation, (t) =>
       t.to(

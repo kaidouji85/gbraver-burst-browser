@@ -1,4 +1,3 @@
-import { Howl } from "howler";
 import { Observable, Subject, Unsubscribable } from "rxjs";
 
 import { pop } from "../../../dom/pop";
@@ -6,6 +5,7 @@ import { domPushStream } from "../../../dom/push-dom";
 import { waitFinishAnimation } from "../../../dom/wait-finish-animation";
 import { Exclusive } from "../../../exclusive/exclusive";
 import type { Resources } from "../../../resource";
+import { createEmptySoundResource } from "../../../resource/sound/empty-sound-resource";
 import { SOUND_IDS } from "../../../resource/sound/ids";
 import type { PostBattle } from "../../post-battle";
 import type {
@@ -140,11 +140,11 @@ export class PostBattleFloater {
     buttons: PostBattleButtonConfig[],
   ): ActionButton[] {
     const pushButton =
-      resources.sounds.find((v) => v.id === SOUND_IDS.PUSH_BUTTON)?.sound ??
-      new Howl({ src: "" });
+      resources.sounds.find((v) => v.id === SOUND_IDS.PUSH_BUTTON) ??
+      createEmptySoundResource();
     const changeValue =
-      resources.sounds.find((v) => v.id === SOUND_IDS.CHANGE_VALUE)?.sound ??
-      new Howl({ src: "" });
+      resources.sounds.find((v) => v.id === SOUND_IDS.CHANGE_VALUE) ??
+      createEmptySoundResource();
 
     const createButtonStyle = (style: ButtonStyle) => {
       switch (style) {
@@ -172,7 +172,7 @@ export class PostBattleFloater {
         this.#exclusive.execute(async () => {
           event.preventDefault();
           event.stopPropagation();
-          sound.play();
+          sound.sound.play();
           await pop(button);
           this.#selectionComplete.next(action);
         });

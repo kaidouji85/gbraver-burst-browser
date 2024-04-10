@@ -6,7 +6,12 @@ import { tween } from "../../../../animation/tween";
 import type { ShinBraverModel } from "../model/shin-braver-model";
 import { ShinBraverSounds } from "../sounds/shin-braver-sounds";
 
-/** 避ける */
+/**
+ * 避ける
+ * @param model モデル
+ * @param sounds 音
+ * @return アニメーション
+ */
 export function avoid(
   model: ShinBraverModel,
   sounds: ShinBraverSounds,
@@ -14,7 +19,7 @@ export function avoid(
   return onStart(() => {
     model.animation.type = "BACK_STEP";
     model.animation.frame = 0;
-    sounds.motor.play();
+    sounds.motor.sound.play();
   })
     .chain(
       all(
@@ -39,7 +44,7 @@ export function avoid(
     .chain(delay(300))
     .chain(
       onStart(() => {
-        sounds.motor.play();
+        sounds.motor.sound.play();
       }),
     )
     .chain(

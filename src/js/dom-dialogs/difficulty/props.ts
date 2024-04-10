@@ -1,10 +1,11 @@
-import { Howl } from "howler";
 import { Subject } from "rxjs";
 
 import { Exclusive } from "../../exclusive/exclusive";
 import type { NPCBattleCourseDifficulty } from "../../game/npc-battle-courses";
 import type { Resources } from "../../resource";
+import { createEmptySoundResource } from "../../resource/sound/empty-sound-resource";
 import { SOUND_IDS } from "../../resource/sound/ids";
+import { SoundResource } from "../../resource/sound/resource";
 import { domUuid } from "../../uuid/dom-uuid";
 import { ROOT_CLASS } from "./dom/class-name";
 import { extractElements } from "./dom/elements";
@@ -55,15 +56,14 @@ export type DifficultyDialogProps = {
   closeDialog: Subject<void>;
 
   /** 効果音 値変更 */
-  changeValue: Howl;
+  changeValue: SoundResource;
 
   /** 効果音 ボタン押下 */
-  pushButton: Howl;
+  pushButton: SoundResource;
 };
 
 /**
  * 難易度選択ダイアログプロパティを生成する
- *
  * @param resources リソース管理オブジェクト
  * @return 生成したプロパティ
  */
@@ -100,11 +100,11 @@ export function createDifficultyDialogProps(
   const closeDialog = new Subject<void>();
   const exclusive = new Exclusive();
   const changeValue =
-    resources.sounds.find((v) => v.id === SOUND_IDS.CHANGE_VALUE)?.sound ??
-    new Howl({ src: "" });
+    resources.sounds.find((v) => v.id === SOUND_IDS.CHANGE_VALUE) ??
+    createEmptySoundResource();
   const pushButton =
-    resources.sounds.find((v) => v.id === SOUND_IDS.PUSH_BUTTON)?.sound ??
-    new Howl({ src: "" });
+    resources.sounds.find((v) => v.id === SOUND_IDS.PUSH_BUTTON) ??
+    createEmptySoundResource();
   return {
     root,
     closer,

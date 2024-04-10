@@ -7,7 +7,6 @@ import { NeoLandozerSounds } from "../sounds/neo-landozer-sounds";
 
 /**
  * チャージ
- *
  * @param model モデル
  * @param sounds 音
  * @return アニメーション
@@ -20,7 +19,7 @@ export function charge(
     model.animation.type = "HM_CHARGE";
     model.animation.frame = 0;
     model.position.z = ARMDOZER_SPRITE_ATTACKER_Z;
-    sounds.motor.play();
+    sounds.motor.sound.play();
   }).chain(
     tween(model.animation, (t) =>
       t.to(

@@ -13,7 +13,7 @@ export function onOkButtonPush(
 ): void {
   props.exclusive.execute(async (): Promise<void> => {
     action.event.preventDefault();
-    props.decideSound.play();
+    props.decideSound.sound.play();
     await pop(props.okButton);
     props.decide.next(props.pilotId);
   });

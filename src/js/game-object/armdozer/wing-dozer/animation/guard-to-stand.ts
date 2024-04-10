@@ -6,10 +6,9 @@ import { WingDozerSounds } from "../sounds/wing-dozer-sounds";
 
 /**
  * ガード -> 立ち
- *
- *  @param model モデル
- *  @param sounds 音
- *  @return アニメーション
+ * @param model モデル
+ * @param sounds 音
+ * @return アニメーション
  */
 export function guardToStand(
   model: WingDozerModel,
@@ -18,7 +17,7 @@ export function guardToStand(
   return onStart(() => {
     model.animation.frame = 1;
     model.animation.type = "GUARD";
-    sounds.motor.play();
+    sounds.motor.sound.play();
   })
     .chain(
       tween(model.animation, (t) =>

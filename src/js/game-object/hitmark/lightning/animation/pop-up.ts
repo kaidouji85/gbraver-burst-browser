@@ -7,7 +7,6 @@ import { LightningSounds } from "../sounds/lightning-sounds";
 
 /**
  * エフェクトを一瞬だけ表示する
- *
  * @param model モデル
  * @param sounds 音
  * @return アニメーション
@@ -16,7 +15,7 @@ export function popUp(model: LightningModel, sounds: LightningSounds): Animate {
   return onStart(() => {
     model.animation.frame = 0;
     model.opacity = 1;
-    sounds.lightning.play();
+    sounds.lightning.sound.play();
   }).chain(
     all(
       tween(model.animation, (t) =>

@@ -4,7 +4,6 @@ import type { DifficultyDialogProps } from "../props";
 
 /**
  * Easyが押された際の処理
- *
  * @param props ダイアログプロパティ
  * @param action アクション
  */
@@ -15,7 +14,7 @@ export function onEasyPush(
   action.event.preventDefault();
   action.event.stopPropagation();
   props.exclusive.execute(async () => {
-    props.pushButton.play();
+    props.pushButton.sound.play();
     await pop(props.easyButton);
     props.selectionComplete.next("Easy");
   });

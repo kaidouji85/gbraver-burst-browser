@@ -8,7 +8,6 @@ import { LightningDozerSounds } from "../sounds/lightning-dozer-sounds";
 
 /**
  * 避け
- *
  * @param model モデル
  * @param sounds 音
  * @return アニメーション
@@ -20,7 +19,7 @@ export function avoid(
   return onStart(() => {
     model.animation.type = "BACK_STEP";
     model.animation.frame = 0;
-    sounds.motor.play();
+    sounds.motor.sound.play();
   })
     .chain(
       all(
@@ -45,7 +44,7 @@ export function avoid(
     .chain(delay(300))
     .chain(
       onStart(() => {
-        sounds.motor.play();
+        sounds.motor.sound.play();
       }),
     )
     .chain(

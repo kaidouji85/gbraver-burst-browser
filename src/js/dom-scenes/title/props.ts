@@ -1,10 +1,11 @@
-import { Howl } from "howler";
 import { Subject } from "rxjs";
 
 import { Exclusive } from "../../exclusive/exclusive";
 import type { Resources } from "../../resource";
 import { PathIds } from "../../resource/path/ids";
+import { createEmptySoundResource } from "../../resource/sound/empty-sound-resource";
 import { SOUND_IDS } from "../../resource/sound/ids";
+import { SoundResource } from "../../resource/sound/resource";
 import { domUuid } from "../../uuid/dom-uuid";
 import { waitElementLoaded } from "../../wait/wait-element-loaded";
 import { ROOT_CLASS } from "./dom/class-name";
@@ -67,10 +68,10 @@ export type TitleProps = {
   isHelpIconLoaded: Promise<void>;
 
   /** SE 値変更 */
-  changeValue: Howl;
+  changeValue: SoundResource;
 
   /** SE ボタン押下 */
-  pushButton: Howl;
+  pushButton: SoundResource;
 
   /** ログイン押下ストリーム */
   pushLogin: Subject<void>;
@@ -163,11 +164,11 @@ export function createTitleProps(params: CreateTitlePropsParams): TitleProps {
     isTitleBackLoaded,
     isHelpIconLoaded,
     pushButton:
-      params.resources.sounds.find((v) => v.id === SOUND_IDS.PUSH_BUTTON)
-        ?.sound ?? new Howl({ src: "" }),
+      params.resources.sounds.find((v) => v.id === SOUND_IDS.PUSH_BUTTON) ??
+      createEmptySoundResource(),
     changeValue:
-      params.resources.sounds.find((v) => v.id === SOUND_IDS.CHANGE_VALUE)
-        ?.sound ?? new Howl({ src: "" }),
+      params.resources.sounds.find((v) => v.id === SOUND_IDS.CHANGE_VALUE) ??
+      createEmptySoundResource(),
     pushLogin: new Subject(),
     pushDeleteAccount: new Subject(),
     pushLogout: new Subject(),

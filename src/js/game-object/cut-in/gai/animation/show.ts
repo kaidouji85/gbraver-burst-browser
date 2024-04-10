@@ -41,7 +41,7 @@ export function show(model: GaiModel, sounds: GaiSounds): Animate {
     )
     .chain(
       onStart(() => {
-        sounds.benefitEffect.play();
+        sounds.benefitEffect.sound.play();
       }),
     );
 }

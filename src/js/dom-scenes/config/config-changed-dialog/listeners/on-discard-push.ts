@@ -15,7 +15,7 @@ export function onDiscardPush(
   action.event.preventDefault();
   action.event.stopPropagation();
   props.exclusive.execute(async () => {
-    props.changeValue.play();
+    props.changeValue.sound.play();
     await pop(props.discard);
     props.discardStream.next();
   });

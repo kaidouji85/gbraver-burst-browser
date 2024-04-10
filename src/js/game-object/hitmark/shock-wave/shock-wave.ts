@@ -1,4 +1,3 @@
-import { Howl } from "howler";
 import { Observable, Unsubscribable } from "rxjs";
 import * as THREE from "three";
 
@@ -6,24 +5,27 @@ import { Animate } from "../../../animation/animate";
 import { onStart } from "../../../animation/on-start";
 import type { PreRender } from "../../../game-loop/pre-render";
 import type { Resources } from "../../../resource";
+import { createEmptySoundResource } from "../../../resource/sound/empty-sound-resource";
 import { SOUND_IDS } from "../../../resource/sound/ids";
+import { SoundResource } from "../../../resource/sound/resource";
 import type { GameObjectAction } from "../../action/game-object-action";
 import { popUp } from "./animation/pop-up";
 import type { ShockWaveModel } from "./model/shock-wave-model";
 import type { ShockWaveView } from "./view/shock-wave-view";
 
-/**
- * 衝撃波
- */
+/** 衝撃波 */
 export class ShockWave {
+  /** モデル */
   #model: ShockWaveModel;
+  /** ビュー */
   #view: ShockWaveView;
-  #hitSound: Howl;
+  /** ヒット音 */
+  #hitSound: SoundResource;
+  /** アンサブスクライバ */
   #unsubscriber: Unsubscribable;
 
   /**
    * リソース管理オブジェクト
-   *
    * @param view ビュー
    * @param initialModel モデルの初期値
    * @param resources リソース管理オブジェクト
@@ -37,10 +39,9 @@ export class ShockWave {
   ) {
     this.#model = initialModel;
     this.#view = view;
-    const hitResource = resources.sounds.find(
-      (v) => v.id === SOUND_IDS.MECHA_IMPACT,
-    );
-    this.#hitSound = hitResource ? hitResource.sound : new Howl({ src: "" });
+    this.#hitSound =
+      resources.sounds.find((v) => v.id === SOUND_IDS.MECHA_IMPACT) ??
+      createEmptySoundResource();
     this.#unsubscriber = gameObjectAction.subscribe((action) => {
       if (action.type === "Update") {
         this.#onUpdate();
@@ -65,7 +66,7 @@ export class ShockWave {
    */
   popUp(): Animate {
     return onStart(() => {
-      this.#hitSound.play();
+      this.#hitSound.sound.play();
     }).chain(popUp(this.#model));
   }
 

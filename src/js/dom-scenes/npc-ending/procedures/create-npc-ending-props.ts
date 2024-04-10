@@ -1,4 +1,3 @@
-import { Howl } from "howler";
 import { Subject } from "rxjs";
 
 import { BGMManager } from "../../../bgm/bgm-manager";
@@ -44,8 +43,8 @@ export function createNPCEndingProps(
   elements.logo.src =
     resources.paths.find((v) => v.id === PathIds.LOGO)?.path ?? "";
   const pushButtonSound =
-    resources.sounds.find((v) => v.id === SOUND_IDS.PUSH_BUTTON)?.sound ??
-    new Howl({ src: "" });
+    resources.sounds.find((v) => v.id === SOUND_IDS.PUSH_BUTTON) ??
+    createEmptySoundResource();
   const endingBGM =
     resources.sounds.find((v) => v.id === SOUND_IDS.NPC_ENDING) ??
     createEmptySoundResource();

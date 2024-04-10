@@ -1,4 +1,3 @@
-import { Howl } from "howler";
 import { Observable, Subject, Unsubscribable } from "rxjs";
 
 import { pop } from "../../dom/pop";
@@ -6,7 +5,9 @@ import { domPushStream, PushDOM } from "../../dom/push-dom";
 import { Exclusive } from "../../exclusive/exclusive";
 import type { Resources } from "../../resource";
 import { PathIds } from "../../resource/path/ids";
+import { createEmptySoundResource } from "../../resource/sound/empty-sound-resource";
 import { SOUND_IDS } from "../../resource/sound/ids";
+import { SoundResource } from "../../resource/sound/resource";
 import { domUuid } from "../../uuid/dom-uuid";
 import type { DOMDialog } from "../dialog";
 
@@ -64,15 +65,13 @@ function extractElements(root: HTMLElement, ids: DataIDs): Elements {
 export class MatchingDialog implements DOMDialog {
   #root: HTMLElement;
   #closer: HTMLImageElement;
-  #changeValue: Howl;
-  #pushButton: Howl;
+  #changeValue: SoundResource;
   #exclusive: Exclusive;
   #matchingCanceled: Subject<void>;
   #unsubscribers: Unsubscribable[];
 
   /**
    * コンストラクタ
-   *
    * @param resources リソース管理オブジェクト
    */
   constructor(resources: Resources) {
@@ -86,11 +85,8 @@ export class MatchingDialog implements DOMDialog {
     const elements = extractElements(this.#root, ids);
     this.#closer = elements.closer;
     this.#changeValue =
-      resources.sounds.find((v) => v.id === SOUND_IDS.CHANGE_VALUE)?.sound ??
-      new Howl({ src: "" });
-    this.#pushButton =
-      resources.sounds.find((v) => v.id === SOUND_IDS.PUSH_BUTTON)?.sound ??
-      new Howl({ src: "" });
+      resources.sounds.find((v) => v.id === SOUND_IDS.CHANGE_VALUE) ??
+      createEmptySoundResource();
     this.#exclusive = new Exclusive();
     this.#matchingCanceled = new Subject();
     this.#unsubscribers = [
@@ -100,27 +96,20 @@ export class MatchingDialog implements DOMDialog {
     ];
   }
 
-  /**
-   * デストラクタ相当の処理
-   */
+  /** @override */
   destructor(): void {
     this.#unsubscribers.forEach((v) => {
       v.unsubscribe();
     });
   }
 
-  /**
-   * ルートのHTML要素を取得する
-   *
-   * @return 取得結果
-   */
+  /** @override */
   getRootHTMLElement(): HTMLElement {
     return this.#root;
   }
 
   /**
    * マッチングキャンセル通知
-   *
    * @return 通知ストリーム
    */
   notifyMatchingCanceled(): Observable<void> {
@@ -129,14 +118,13 @@ export class MatchingDialog implements DOMDialog {
 
   /**
    * クローザが押された際の処理
-   *
    * @param action アクション
    */
   #onCloserPush(action: PushDOM): void {
     action.event.preventDefault();
     action.event.stopPropagation();
     this.#exclusive.execute(async () => {
-      this.#changeValue.play();
+      this.#changeValue.sound.play();
       await pop(this.#closer, 1.3);
       this.#matchingCanceled.next();
     });
