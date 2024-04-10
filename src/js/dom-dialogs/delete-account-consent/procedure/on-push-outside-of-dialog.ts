@@ -12,7 +12,7 @@ export function onPushOutsideOfDialog(
 ): void {
   props.exclusive.execute(async (): Promise<void> => {
     action.event.stopPropagation();
-    await props.changeValue.play();
+    props.changeValue.sound.play();
     props.closeDialog.next();
   });
 }

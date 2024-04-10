@@ -14,10 +14,8 @@ export function onDeleteAccountButtonPush(
   props.exclusive.execute(async (): Promise<void> => {
     action.event.preventDefault();
     action.event.stopPropagation();
-    await Promise.all([
-      pop(props.deleteAccountButton),
-      props.pushButton.play(),
-    ]);
+    props.pushButton.sound.play();
+    await pop(props.deleteAccountButton);
     props.deleteAccount.next();
   });
 }

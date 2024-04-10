@@ -1,8 +1,8 @@
-import { Howl } from "howler";
 import { Subject } from "rxjs";
 
 import { Exclusive } from "../../../exclusive/exclusive";
 import { Resources } from "../../../resource";
+import { createEmptySoundResource } from "../../../resource/sound/empty-sound-resource";
 import { SOUND_IDS } from "../../../resource/sound/ids";
 import { ROOT_CLASS } from "../dom/class-name";
 import {
@@ -32,11 +32,11 @@ export function createProps(
   const deleteAccount = new Subject<void>();
   const closeDialog = new Subject<void>();
   const changeValue =
-    resources.sounds.find((v) => v.id === SOUND_IDS.CHANGE_VALUE)?.sound ??
-    new Howl({ src: "" });
+    resources.sounds.find((v) => v.id === SOUND_IDS.CHANGE_VALUE) ??
+    createEmptySoundResource();
   const pushButton =
-    resources.sounds.find((v) => v.id === SOUND_IDS.PUSH_BUTTON)?.sound ??
-    new Howl({ src: "" });
+    resources.sounds.find((v) => v.id === SOUND_IDS.PUSH_BUTTON) ??
+    createEmptySoundResource();
   const exclusive = new Exclusive();
   return {
     root,

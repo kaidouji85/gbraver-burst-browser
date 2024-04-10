@@ -14,7 +14,8 @@ export function onCloserPush(
   props.exclusive.execute(async (): Promise<void> => {
     action.event.preventDefault();
     action.event.stopPropagation();
-    await Promise.all([pop(props.closer, 1.3), props.changeValue.play()]);
+    props.changeValue.sound.play();
+    await pop(props.closer, 1.3);
     props.closeDialog.next();
   });
 }
