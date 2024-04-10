@@ -5,7 +5,12 @@ import { ARMDOZER_SPRITE_STANDARD_Z } from "../../position";
 import type { ShinBraverModel } from "../model/shin-braver-model";
 import { ShinBraverSounds } from "../sounds/shin-braver-sounds";
 
-/** ストレートパンチ -> 立ち */
+/** 
+ * ストレートパンチ -> 立ち
+ * @param model シンブレイバーモデル
+ * @param sounds シンブレイバーサウンド
+ * @return アニメーション
+ */
 export function punchToStand(
   model: ShinBraverModel,
   sounds: ShinBraverSounds,
@@ -13,7 +18,7 @@ export function punchToStand(
   return onStart(() => {
     model.animation.type = "SP_TO_STAND";
     model.animation.frame = 0;
-    sounds.motor.play();
+    sounds.motor.sound.play();
   })
     .chain(
       tween(model.animation, (t) =>

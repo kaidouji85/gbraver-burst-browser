@@ -7,7 +7,6 @@ import { ShinBraverSounds } from "../sounds/shin-braver-sounds";
 
 /**
  * バースト -> 立ち
- *
  * @param model モデル
  * @param sounds 音
  * @return アニメーション
@@ -19,7 +18,7 @@ export function burstToStand(
   return onStart(() => {
     model.animation.type = "BURST_DOWN";
     model.animation.frame = 1;
-    sounds.motor.play();
+    sounds.motor.sound.play();
   })
     .chain(
       tween(model.animation, (t) =>
@@ -40,7 +39,7 @@ export function burstToStand(
     .chain(delay(500))
     .chain(
       onStart(() => {
-        sounds.motor.play();
+        sounds.motor.sound.play();
       }),
     )
     .chain(

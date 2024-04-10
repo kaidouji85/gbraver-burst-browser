@@ -4,7 +4,12 @@ import { tween } from "../../../../animation/tween";
 import type { ShinBraverModel } from "../model/shin-braver-model";
 import { ShinBraverSounds } from "../sounds/shin-braver-sounds";
 
-/** ノックバック -> 立ち */
+/** 
+ * ノックバック -> 立ち
+ * @param model モデル
+ * @param sounds 音
+ * @return アニメーション
+ */
 export function knockBackToStand(
   model: ShinBraverModel,
   sounds: ShinBraverSounds,
@@ -12,7 +17,7 @@ export function knockBackToStand(
   return onStart(() => {
     model.animation.frame = 1;
     model.animation.type = "KNOCK_BACK";
-    sounds.motor.play();
+    sounds.motor.sound.play();
   })
     .chain(
       tween(model.animation, (t) =>

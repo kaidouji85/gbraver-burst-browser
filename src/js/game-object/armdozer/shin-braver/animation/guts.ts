@@ -7,7 +7,6 @@ import { ShinBraverSounds } from "../sounds/shin-braver-sounds";
 
 /**
  * ガッツ
- *
  * @param model モデル
  * @param sounds 効果音
  * @return アニメーション
@@ -19,7 +18,7 @@ export function guts(
   return onStart(() => {
     model.animation.type = "GUTS_UP";
     model.animation.frame = 0;
-    sounds.motor.play();
+    sounds.motor.sound.play();
   })
     .chain(
       tween(model.animation, (t) =>
@@ -36,7 +35,7 @@ export function guts(
       onStart(() => {
         model.animation.type = "GUTS_DOWN";
         model.animation.frame = 0;
-        sounds.motor.play();
+        sounds.motor.sound.play();
       }),
     )
     .chain(
