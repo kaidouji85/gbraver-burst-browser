@@ -1,8 +1,8 @@
 import { PilotId } from "gbraver-burst-core";
-import { Howl } from "howler";
 import { Subject } from "rxjs";
 
 import { Exclusive } from "../../../exclusive/exclusive";
+import { SoundResource } from "../../../resource/sound/resource";
 import { PilotIcon } from "./pilot-icon";
 import { PilotStatus } from "./pilot-status";
 
@@ -23,9 +23,9 @@ export type PilotSelectorProps = {
   /** 戻るボタン */
   prevButton: HTMLElement;
   /** 値変更 効果音 */
-  changeValueSound: Howl;
+  changeValueSound: SoundResource;
   /** 決定 効果音 */
-  decideSound: Howl;
+  decideSound: SoundResource;
   /** パイロット変更通知ストリーム */
   change: Subject<PilotId>;
   /** パイロット決定通知ストリーム */
