@@ -54,6 +54,6 @@ export function batteryPlusPop(
   group: TWEEN.Group,
 ): Animate {
   return onStart(() => {
-    sounds.batteryChangeSound.play();
+    sounds.batteryChangeSound.sound.play();
   }).chain(silentlyBatteryPlusPop(model, group));
 }

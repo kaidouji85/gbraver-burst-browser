@@ -15,7 +15,7 @@ export function decide(
   sounds: BatterySelectorSounds,
 ): Animate {
   return onStart(() => {
-    sounds.pushButtonSound.play();
+    sounds.pushButtonSound.sound.play();
   })
     .chain(
       tween(model, (t) =>
