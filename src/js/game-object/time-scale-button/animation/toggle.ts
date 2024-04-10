@@ -8,7 +8,6 @@ import type { TimeScaleButtonSounds } from "../sounds/time-scale-sounds";
 
 /**
  * タイムスケールの値を入れ替える
- *
  * @param model モデル
  * @param sounds サウンド
  * @param group TWEENグループ
@@ -24,7 +23,7 @@ export function toggle(
   return onStart(() => {
     model.timeScale = timeScale;
     model.scale = 1;
-    sounds.changeValue.play();
+    sounds.changeValue.sound.play();
   }, group)
     .chain(
       tween(
