@@ -6,7 +6,7 @@ import type { Resources } from "../../../resource";
 import type { Resize } from "../../../window/resize";
 
 /** 戦闘画面ビュー生成処理のすべての処理で利用できるパラメータ */
-export type GenerateBattleSceneParams = {
+export type GenerateBattleViewParams = {
   /** リソース管理オブジェクト */
   resources: Resources;
   /** プレイヤー情報 */

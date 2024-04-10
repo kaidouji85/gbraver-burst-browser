@@ -56,7 +56,7 @@ import {
 } from "../../../../game-object/reflect-indicator";
 import { ReflectIndicator } from "../../../../game-object/reflect-indicator/reflect-indicator";
 import type { Resources } from "../../../../resource";
-import { GenerateBattleSceneParams } from "../generate-params";
+import { GenerateBattleViewParams } from "../generate-params";
 
 /**
  * 3Dレイヤー プレイヤー関係オブジェクト フィールド
@@ -166,7 +166,7 @@ export class TDPlayerImpl implements TDPlayer {
 }
 
 /** プレイヤーオブジェクト生成パラメータ */
-type GenerateTDPlayerParams = GenerateBattleSceneParams & {
+type GenerateTDPlayerParams = GenerateBattleViewParams & {
   gameObjectAction: Observable<GameObjectAction>;
 };
 

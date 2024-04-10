@@ -8,7 +8,7 @@ import { gameObjectStream } from "../../../../game-object/action/game-object-act
 import { TDCamera } from "../../../../game-object/camera/td";
 import type { OverlapEvent } from "../../../../render/overlap-event/overlap-event";
 import { OverlapNotifier } from "../../../../render/overlap-notifier";
-import { GenerateBattleSceneParams } from "../generate-params";
+import { GenerateBattleViewParams } from "../generate-params";
 import { enemyTDArmdozer, playerTDArmdozer } from "./armdozer-objects";
 import type { TDArmdozerObjects } from "./armdozer-objects/armdozer-objects";
 import { TDGameObjects } from "./game-objects";
@@ -17,9 +17,12 @@ import { enemyTDObject, playerTDObjects } from "./player";
 import { skyBox } from "./sky-box";
 
 /** コンストラクタのパラメータ */
-type Param = GenerateBattleSceneParams & {
+type Param = GenerateBattleViewParams & {
+  /** レンダラ */
   renderer: OverlapNotifier;
+  /** アップデート */
   update: Observable<Update>;
+  /** プリレンダ */
   preRender: Observable<PreRender>;
 };
 
@@ -69,10 +72,10 @@ export class ThreeDimensionLayer {
       .forEach((v) => {
         this.scene.add(v);
       });
-    this.gameObjects = new TDGameObjects(
-      param.resources,
-      this.#gameObjectAction,
-    );
+    this.gameObjects = new TDGameObjects({
+      ...param,
+      gameObjectAction: this.#gameObjectAction,
+    });
     this.gameObjects.getObject3Ds().forEach((object) => {
       this.scene.add(object);
     });

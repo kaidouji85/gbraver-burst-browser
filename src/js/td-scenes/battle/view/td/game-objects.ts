@@ -7,11 +7,15 @@ import { SkyBrightness } from "../../../../game-object/sky-brightness/sky-bright
 import SchoolField from "../../../../game-object/stage/shopping-street/shopping-street";
 import type { Stage } from "../../../../game-object/stage/stage";
 import { TurnIndicator } from "../../../../game-object/turn-indicator/turn-indicator";
-import type { Resources } from "../../../../resource";
+import { GenerateBattleViewParams } from "../generate-params";
 
-/**
- * 3Dレイヤーのゲームオブジェクト
- */
+/** 3Dレイヤーゲームオブジェクト コンストラクタのパラメータ */
+type GenerateTDGameObjectsParams = GenerateBattleViewParams & {
+  /** ゲームオブジェクトアクション */
+  gameObjectAction: Observable<GameObjectAction>;
+};
+
+/** 3Dレイヤーのゲームオブジェクト */
 export class TDGameObjects {
   stage: Stage;
   turnIndicator: TurnIndicator;
@@ -20,14 +24,10 @@ export class TDGameObjects {
 
   /**
    * コンストラクタ
-   *
-   * @param resources リソース管理オブジェクト
-   * @param gameObjectAction ゲームオブジェクトアクション
+   * @param params パラメータ
    */
-  constructor(
-    resources: Resources,
-    gameObjectAction: Observable<GameObjectAction>,
-  ) {
+  constructor(params: GenerateTDGameObjectsParams) {
+    const { resources, gameObjectAction } = params;
     this.stage = new SchoolField(resources);
     this.turnIndicator = new TurnIndicator({
       gameObjectAction: gameObjectAction,
@@ -49,7 +49,6 @@ export class TDGameObjects {
 
   /**
    * シーンに追加するオブジェクトを取得する
-   *
    * @return シーンに追加するオブジェクト
    */
   getObject3Ds(): THREE.Object3D[] {
