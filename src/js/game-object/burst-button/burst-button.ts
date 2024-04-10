@@ -1,11 +1,12 @@
-import { Howl } from "howler";
 import { Observable, Subject, Unsubscribable } from "rxjs";
 import * as THREE from "three";
 
 import { Animate } from "../../animation/animate";
 import type { PreRender } from "../../game-loop/pre-render";
 import type { Resources } from "../../resource";
+import { createEmptySoundResource } from "../../resource/sound/empty-sound-resource";
 import { SOUND_IDS } from "../../resource/sound/ids";
+import { SoundResource } from "../../resource/sound/resource";
 import type { GameObjectAction } from "../action/game-object-action";
 import { close } from "./animation/close";
 import { decide } from "./animation/decide";
@@ -17,10 +18,15 @@ import { BurstButtonView } from "./view/burst-button-view";
 
 /** バーストボタン */
 export class BurstButton {
+  /** モデル */
   #model: BurstButtonModel;
+  /** ビュー */
   #view: BurstButtonView;
-  #pushButtonSound: Howl;
+  /** 効果音 ボタン押下 */
+  #pushButtonSound: SoundResource;
+  /** ボタン押下通知 */
   #pushButton: Subject<Event>;
+  /** アンサブスクライバ */
   #unsubscriber: Unsubscribable;
 
   /**
@@ -34,12 +40,8 @@ export class BurstButton {
     gameObjectAction: Observable<GameObjectAction>,
     armdozerIcon: ArmdozerIcon,
   ) {
-    const pushButtonResource = resources.sounds.find(
-      (v) => v.id === SOUND_IDS.PUSH_BUTTON,
-    );
-    this.#pushButtonSound = pushButtonResource
-      ? pushButtonResource.sound
-      : new Howl({ src: "" });
+    this.#pushButtonSound = resources.sounds.find((v) => v.id === SOUND_IDS.PUSH_BUTTON)
+      ?? createEmptySoundResource();
     this.#pushButton = new Subject();
     this.#model = createInitialValue();
     this.#view = new BurstButtonView({
@@ -79,7 +81,7 @@ export class BurstButton {
    * @return アニメーション
    */
   decide(): Animate {
-    this.#pushButtonSound.play();
+    this.#pushButtonSound.sound.play();
     return decide(this.#model);
   }
 
