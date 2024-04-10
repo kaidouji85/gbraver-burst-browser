@@ -8,7 +8,6 @@ import { WingDozerSounds } from "../sounds/wing-dozer-sounds";
 
 /**
  * 避け
- *
  * @param model モデル
  * @param sounds 音
  * @return アニメーション
@@ -17,7 +16,7 @@ export function avoid(model: WingDozerModel, sounds: WingDozerSounds): Animate {
   return onStart(() => {
     model.animation.type = "BACK_STEP";
     model.animation.frame = 0;
-    sounds.motor.play();
+    sounds.motor.sound.play();
   })
     .chain(
       all(
@@ -42,7 +41,7 @@ export function avoid(model: WingDozerModel, sounds: WingDozerSounds): Animate {
     .chain(delay(300))
     .chain(
       onStart(() => {
-        sounds.motor.play();
+        sounds.motor.sound.play();
       }),
     )
     .chain(

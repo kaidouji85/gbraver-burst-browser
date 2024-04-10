@@ -1,13 +1,12 @@
-import { Howl } from "howler";
-
 import type { Resources } from "../../../../resource";
+import { createEmptySoundResource } from "../../../../resource/sound/empty-sound-resource";
 import { SOUND_IDS } from "../../../../resource/sound/ids";
+import { SoundResource } from "../../../../resource/sound/resource";
 
-/**
- * ウィングドーザ関連の音
- */
+/** ウィングドーザ関連の音 */
 export class WingDozerSounds {
-  motor: Howl;
+  /** モーター音 */
+  motor: SoundResource;
 
   /**
    * コンストラクタ
@@ -15,9 +14,7 @@ export class WingDozerSounds {
    * @param resources リソース管理オブジェクト
    */
   constructor(resources: Resources) {
-    const motorResource = resources.sounds.find(
-      (v) => v.id === SOUND_IDS.MOTOR,
-    );
-    this.motor = motorResource ? motorResource.sound : new Howl({ src: "" });
+    this.motor = resources.sounds.find((v) => v.id === SOUND_IDS.MOTOR)
+      ?? createEmptySoundResource();
   }
 }

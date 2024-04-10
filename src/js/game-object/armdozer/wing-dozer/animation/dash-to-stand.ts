@@ -6,7 +6,6 @@ import { WingDozerSounds } from "../sounds/wing-dozer-sounds";
 
 /**
  * ダッシュ -> 立ち
- *
  * @param model モデル
  * @param sounds 音
  * @return アニメーション
@@ -18,7 +17,7 @@ export function dashToStand(
   return onStart(() => {
     model.animation.type = "DASH_TO_STAND";
     model.animation.frame = 0;
-    sounds.motor.play();
+    sounds.motor.sound.play();
   })
     .chain(
       tween(model.animation, (t) =>
