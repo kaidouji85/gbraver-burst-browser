@@ -1,8 +1,6 @@
-import type { Player, PlayerId } from "gbraver-burst-core";
-import { Observable } from "rxjs";
+import type { PlayerId } from "gbraver-burst-core";
 import * as THREE from "three";
 
-import type { GameObjectAction } from "../../../../game-object/action/game-object-action";
 import { enemyGauge, playerGauge } from "../../../../game-object/gauge";
 import { Gauge } from "../../../../game-object/gauge/gauge";
 import {
@@ -15,7 +13,7 @@ import {
   playerTurnStart,
 } from "../../../../game-object/turn-start";
 import { TurnStart } from "../../../../game-object/turn-start/turn-start";
-import type { Resources } from "../../../../resource";
+import {GenerateHUDLayerObjectParams} from "./generate-params";
 
 /**
  * HUDレイヤー プレイヤー固有オブジェクト フィールド
@@ -68,24 +66,20 @@ export class HUDPlayer implements HUDPlayerField {
 
 /**
  * プレイヤー側 HUDレイヤープレイヤー固有オブジェクト
- *
- * @param resources リソース管理オブジェクト
- * @param state プレイヤー情報
- * @param gameObjectAction ゲームオブジェクトアクション
+ * @param params 生成パラメータ
  * @return 生成結果
  */
 export function playerHUDObjects(
-  resources: Resources,
-  state: Player,
-  gameObjectAction: Observable<GameObjectAction>,
+  params: GenerateHUDLayerObjectParams
 ): HUDPlayer {
+  const { resources, player, gameObjectAction } = params;
   return new HUDPlayer({
-    playerId: state.playerId,
+    playerId: player.playerId,
     gauge: playerGauge({
       resources: resources,
       gameObjectAction: gameObjectAction,
-      hp: state.armdozer.maxHp,
-      battery: state.armdozer.maxBattery,
+      hp: player.armdozer.maxHp,
+      battery: player.armdozer.maxBattery,
     }),
     turnStart: playerTurnStart(resources, gameObjectAction),
     resultIndicator: winIndicator(resources, gameObjectAction),
@@ -94,24 +88,20 @@ export function playerHUDObjects(
 
 /**
  * 敵側 HUDレイヤープレイヤー固有オブジェクト
- *
- * @param resources リソース管理オブジェクト
- * @param state プレイヤー情報
- * @param gameObjectAction ゲームオブジェクトアクション
+ * @param params 生成パラメータ
  * @return 生成結果
  */
 export function enemyHUDObjects(
-  resources: Resources,
-  state: Player,
-  gameObjectAction: Observable<GameObjectAction>,
+  params: GenerateHUDLayerObjectParams
 ): HUDPlayer {
+  const { resources, enemy, gameObjectAction } = params;
   return new HUDPlayer({
-    playerId: state.playerId,
+    playerId: enemy.playerId,
     gauge: enemyGauge({
       resources: resources,
       gameObjectAction: gameObjectAction,
-      hp: state.armdozer.maxHp,
-      battery: state.armdozer.maxBattery,
+      hp: enemy.armdozer.maxHp,
+      battery: enemy.armdozer.maxBattery,
     }),
     turnStart: enemyTurnStart(resources, gameObjectAction),
     resultIndicator: loseIndicator(resources, gameObjectAction),
