@@ -12,6 +12,6 @@ export function onLogoutPush(
   action: Readonly<PushDOM>,
 ): void {
   action.event.preventDefault();
-  props.changeValue.play();
+  props.changeValue.sound.play();
   props.pushLogout.next();
 }

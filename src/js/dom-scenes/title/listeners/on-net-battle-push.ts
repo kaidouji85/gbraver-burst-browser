@@ -14,7 +14,7 @@ export function onNetBattlePush(
 ): void {
   props.exclusive.execute(async (): Promise<void> => {
     action.event.preventDefault();
-    props.pushButton.play();
+    props.pushButton.sound.play();
     await pop(props.netBattle);
     props.pushNetBattle.next();
   });

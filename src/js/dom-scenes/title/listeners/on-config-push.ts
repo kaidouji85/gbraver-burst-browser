@@ -14,7 +14,7 @@ export function onConfigPush(
 ): void {
   props.exclusive.execute(async (): Promise<void> => {
     action.event.preventDefault();
-    props.changeValue.play();
+    props.changeValue.sound.play();
     await pop(props.config);
     props.pushConfig.next();
   });
