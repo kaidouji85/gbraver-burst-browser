@@ -14,7 +14,7 @@ export function onBackGroundPush(
   action.event.preventDefault();
   action.event.stopPropagation();
   props.exclusive.execute(async () => {
-    props.changeValue.play();
+    props.changeValue.sound.play();
     props.closeStream.next();
   });
 }

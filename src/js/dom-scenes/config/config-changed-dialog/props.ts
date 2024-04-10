@@ -1,9 +1,10 @@
-import { Howl } from "howler";
 import { Subject } from "rxjs";
 
 import { Exclusive } from "../../../exclusive/exclusive";
 import type { Resources } from "../../../resource";
+import { createEmptySoundResource } from "../../../resource/sound/empty-sound-resource";
 import { SOUND_IDS } from "../../../resource/sound/ids";
+import { SoundResource } from "../../../resource/sound/resource";
 import { domUuid } from "../../../uuid/dom-uuid";
 import { ROOT_CLASS_INVISIBLE } from "./dom/class-name";
 import { extractElements } from "./dom/elements";
@@ -30,10 +31,10 @@ export type ConfigChangedDialogProps = {
   exclusive: Exclusive;
 
   /** SE 値変更 */
-  changeValue: Howl;
+  changeValue: SoundResource;
 
   /** SE ボタン押下 */
-  pushButton: Howl;
+  pushButton: SoundResource;
 
   /** 閉じるストリーム */
   closeStream: Subject<void>;
@@ -69,11 +70,11 @@ export function createConfigChangedDialogProps(
   const discard = elements.discard;
   const accept = elements.accept;
   const pushButton =
-    resources.sounds.find((v) => v.id === SOUND_IDS.PUSH_BUTTON)?.sound ??
-    new Howl({ src: "" });
+    resources.sounds.find((v) => v.id === SOUND_IDS.PUSH_BUTTON) ??
+    createEmptySoundResource();
   const changeValue =
-    resources.sounds.find((v) => v.id === SOUND_IDS.CHANGE_VALUE)?.sound ??
-    new Howl({ src: "" });
+    resources.sounds.find((v) => v.id === SOUND_IDS.CHANGE_VALUE) ??
+    createEmptySoundResource();
   const exclusive = new Exclusive();
   const closeStream = new Subject<void>();
   const acceptStream = new Subject<void>();
