@@ -3,7 +3,7 @@ import { delay } from "../../../animation/delay";
 import { onStart } from "../../../animation/on-start";
 import { tween } from "../../../animation/tween";
 import type { RecoverBatteryModel } from "../model/recover-battery-model";
-import { RecoverBatterySounds } from "../sounds/recover-battery-sounds";
+import RecoverBatterySounds from "../sounds/recover-battery-sounds";
 
 /**
  * バッテリー回復 ポップアップ
@@ -23,7 +23,6 @@ export function popUp(
 
 /**
  * 表示
- *
  * @param model モデル
  * @param sounds 効果音
  * @param value 回復値
@@ -38,7 +37,7 @@ export function show(
     model.scale = 1.2;
     model.value = value;
     model.opacity = 0;
-    sounds.recoverBattery.play();
+    sounds.recoverBattery.sound.play();
   }).chain(
     tween(model, (t) =>
       t.to(
