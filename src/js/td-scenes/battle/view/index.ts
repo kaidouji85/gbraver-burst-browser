@@ -22,6 +22,7 @@ interface OwnRenderer extends OverlapNotifier, RendererDomGetter, Rendering {}
 
 /** コンストラクタのパラメータ */
 type Param = GenerateBattleViewParams & {
+  /** レンダラ */
   renderer: OwnRenderer;
 };
 
