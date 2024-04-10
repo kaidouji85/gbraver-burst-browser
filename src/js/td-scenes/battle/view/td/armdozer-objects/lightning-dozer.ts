@@ -77,7 +77,7 @@ export function playerLightningDozerTD(
   state: Player,
 ): LightningDozerTD {
   return new LightningDozerTD(state.playerId, {
-    lightningDozer: PlayerLightningDozer(resources, gameObjectAction),
+    lightningDozer: PlayerLightningDozer({ resources, gameObjectAction }),
     lightningBarrier: new LightningBarrierGameEffect(
       resources,
       gameObjectAction,
@@ -98,7 +98,7 @@ export function enemyLightningDozerTD(
   state: Player,
 ): LightningDozerTD {
   return new LightningDozerTD(state.playerId, {
-    lightningDozer: EnemyLightningDozer(resources, gameObjectAction),
+    lightningDozer: EnemyLightningDozer({ resources, gameObjectAction }),
     lightningBarrier: new LightningBarrierGameEffect(
       resources,
       gameObjectAction,

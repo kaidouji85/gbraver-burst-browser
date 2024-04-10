@@ -65,7 +65,7 @@ export function playerShinBraverTD(
   state: Player,
 ): ShinBraverTD {
   return new ShinBraverTD(state.playerId, {
-    shinBraver: PlayerShinBraver(resources, gameObjectAction),
+    shinBraver: PlayerShinBraver({ resources, gameObjectAction }),
   });
 }
 
@@ -82,6 +82,6 @@ export function enemyShinBraverTD(
   state: Player,
 ): ShinBraverTD {
   return new ShinBraverTD(state.playerId, {
-    shinBraver: EnemyShinBraver(resources, gameObjectAction),
+    shinBraver: EnemyShinBraver({ resources, gameObjectAction }),
   });
 }
