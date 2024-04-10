@@ -6,7 +6,6 @@ import { PilotButtonSounds } from "../sounds/pilot-button-sounds";
 
 /**
  * ボタンクリック
- *
  * @param model モデル
  * @param sounds 効果音
  * @return アニメーション
@@ -17,7 +16,7 @@ export function decide(
 ): Animate {
   return onStart(() => {
     model.isPushNotifierDisabled = true;
-    sounds.pushButton.play();
+    sounds.pushButton.sound.play();
   })
     .chain(
       tween(model, (t) =>
