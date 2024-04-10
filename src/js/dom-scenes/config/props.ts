@@ -94,7 +94,7 @@ export function createConfigProps(
   root.innerHTML = rootInnerHTML(ids, config);
   root.className = ROOT_CLASS;
   const elements = extractElements(root, ids);
-  const dialog = new ConfigChangedDialog(resources);
+  const dialog = new ConfigChangedDialog(resources, se);
   root.appendChild(dialog.getRootHTMLElement());
   return {
     originConfig: config,

@@ -33,8 +33,8 @@ export const Scene: DOMStubStory = domStub((resources) => {
   return scene.getRootHTMLElement();
 });
 
-export const ConfigChanged: DOMStubStory = domStub((resources) => {
-  const dialog = new ConfigChangedDialog(resources);
+export const ConfigChanged: DOMStubStory = domStub((resources, se) => {
+  const dialog = new ConfigChangedDialog(resources, se);
   dialog.show();
   dialog.notifyClosed().subscribe(() => {
     console.log("on close");
