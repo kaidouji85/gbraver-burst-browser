@@ -1,4 +1,3 @@
-import { Howl } from "howler";
 import { Observable, Subject, Unsubscribable } from "rxjs";
 
 import { pop } from "../../dom/pop";
@@ -6,7 +5,9 @@ import { domPushStream, PushDOM } from "../../dom/push-dom";
 import { Exclusive } from "../../exclusive/exclusive";
 import type { PostNetworkError } from "../../game/post-network-error";
 import type { Resources } from "../../resource";
+import { createEmptySoundResource } from "../../resource/sound/empty-sound-resource";
 import { SOUND_IDS } from "../../resource/sound/ids";
+import { SoundResource } from "../../resource/sound/resource";
 import { domUuid } from "../../uuid/dom-uuid";
 import type { DOMDialog } from "../dialog";
 
@@ -85,7 +86,7 @@ export class NetworkErrorDialog implements DOMDialog {
   #postNetworkErrorButton: HTMLButtonElement;
   #postNetworkError: PostNetworkError;
   #postNetworkErrorSource: Subject<PostNetworkError>;
-  #pushButton: Howl;
+  #pushButton: SoundResource;
   #unsubscribers: Unsubscribable[];
   #exclusive: Exclusive;
 
@@ -114,8 +115,8 @@ export class NetworkErrorDialog implements DOMDialog {
     ];
     this.#exclusive = new Exclusive();
     this.#pushButton =
-      resources.sounds.find((v) => v.id === SOUND_IDS.PUSH_BUTTON)?.sound ??
-      new Howl({ src: "" });
+      resources.sounds.find((v) => v.id === SOUND_IDS.PUSH_BUTTON) ??
+      createEmptySoundResource()
   }
 
   /**
@@ -153,10 +154,8 @@ export class NetworkErrorDialog implements DOMDialog {
   #onPostNetworkErrorButtonPush(action: PushDOM): void {
     this.#exclusive.execute(async () => {
       action.event.preventDefault();
-      await Promise.all([
-        this.#pushButton.play(),
-        pop(this.#postNetworkErrorButton),
-      ]);
+      this.#pushButton.sound.play();
+      await pop(this.#postNetworkErrorButton);
       this.#postNetworkErrorSource.next(this.#postNetworkError);
     });
   }
