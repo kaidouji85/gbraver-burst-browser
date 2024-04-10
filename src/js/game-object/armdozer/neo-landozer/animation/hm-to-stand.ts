@@ -5,7 +5,12 @@ import { ARMDOZER_SPRITE_STANDARD_Z } from "../../position";
 import type { NeoLandozerModel } from "../model/neo-landozer-model";
 import { NeoLandozerSounds } from "../sounds/neo-landozer-sounds";
 
-/** アームハンマー -> 立ち */
+/** 
+ * アームハンマー -> 立ち
+ * @param model モデル
+ * @param sounds 音
+ * @return アニメーション
+ */
 export function hmToStand(
   model: NeoLandozerModel,
   sounds: NeoLandozerSounds,
@@ -13,7 +18,7 @@ export function hmToStand(
   return onStart(() => {
     model.animation.type = "HM_TO_STAND";
     model.animation.frame = 0;
-    sounds.motor.play();
+    sounds.motor.sound.play();
   })
     .chain(
       tween(model.animation, (t) =>

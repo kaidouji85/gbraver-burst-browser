@@ -4,7 +4,12 @@ import { tween } from "../../../../animation/tween";
 import type { NeoLandozerModel } from "../model/neo-landozer-model";
 import type { NeoLandozerSounds } from "../sounds/neo-landozer-sounds";
 
-/** ノックバック -> 立ち */
+/** 
+ * ノックバック -> 立ち
+ * @param model モデル
+ * @param sounds 音
+ * @return アニメーション
+ */
 export function knockBackToStand(
   model: NeoLandozerModel,
   sounds: NeoLandozerSounds,
@@ -12,7 +17,7 @@ export function knockBackToStand(
   return onStart(() => {
     model.animation.frame = 1;
     model.animation.type = "KNOCK_BACK";
-    sounds.motor.play();
+    sounds.motor.sound.play();
   })
     .chain(
       tween(model.animation, (t) =>

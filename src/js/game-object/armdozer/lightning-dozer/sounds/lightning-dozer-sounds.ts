@@ -3,15 +3,13 @@ import { createEmptySoundResource } from "../../../../resource/sound/empty-sound
 import { SOUND_IDS } from "../../../../resource/sound/ids";
 import { SoundResource } from "../../../../resource/sound/resource";
 
-/**
- * ライトニングドーザ 音
- */
+/** イトニングドーザ 音 */
 export class LightningDozerSounds {
+  /** モーター音 */
   motor: SoundResource;
 
   /**
    * コンストラクタ
-   *
    * @param resources リソース管理オブジェクト
    */
   constructor(resources: Resources) {
