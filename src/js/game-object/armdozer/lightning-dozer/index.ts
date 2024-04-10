@@ -20,7 +20,7 @@ type GenerateLightningDozerParams = {
  * @return プレイヤー側のライトニングドーザ
  */
 export function PlayerLightningDozer(
-  params: GenerateLightningDozerParams
+  params: GenerateLightningDozerParams,
 ): LightningDozer {
   const { resources, gameObjectAction } = params;
   const view = new PlayerLightingDozerView(resources);
@@ -33,7 +33,7 @@ export function PlayerLightningDozer(
  * @return 敵側のライトニングドーザ
  */
 export function EnemyLightningDozer(
-  params: GenerateLightningDozerParams
+  params: GenerateLightningDozerParams,
 ): LightningDozer {
   const { resources, gameObjectAction } = params;
   const view = new EnemyLightningDozerView(resources);
