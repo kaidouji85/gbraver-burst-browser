@@ -6,7 +6,6 @@ import { LightningBarrierSounds } from "../sounds/lightning-barrier-sounds";
 
 /**
  * バリアを表示する
- *
  * @param model モデル
  * @param sounds 効果音
  * @return アニメーション
@@ -16,7 +15,7 @@ export function show(
   sounds: LightningBarrierSounds,
 ): Animate {
   return onStart(() => {
-    sounds.lightningBarrier.play();
+    sounds.lightningBarrier.sound.play();
   }).chain(
     tween(model, (t) =>
       t.to(
