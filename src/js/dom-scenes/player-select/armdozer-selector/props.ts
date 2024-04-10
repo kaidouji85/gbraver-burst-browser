@@ -1,8 +1,8 @@
 import { ArmdozerId } from "gbraver-burst-core";
-import { Howl } from "howler";
 import { Subject } from "rxjs";
 
 import { Exclusive } from "../../../exclusive/exclusive";
+import { SoundResource } from "../../../resource/sound/resource";
 import { ArmdozerIcon } from "./armdozer-icon";
 import { ArmdozerStatus } from "./armdozer-status";
 
@@ -23,9 +23,9 @@ export type ArmdozerSelectorProps = {
   /** 戻るボタン */
   prevButton: HTMLElement;
   /** 値変更 効果音 */
-  changeValueSound: Howl;
+  changeValueSound: SoundResource;
   /** 決定 効果音 */
-  decideSound: Howl;
+  decideSound: SoundResource;
   /** 選択変更通知ストリーム */
   change: Subject<ArmdozerId>;
   /** 決定通知ストリーム */

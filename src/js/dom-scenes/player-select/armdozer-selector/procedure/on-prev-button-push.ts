@@ -13,7 +13,7 @@ export function onPrevButtonPush(
 ): void {
   props.exclusive.execute(async (): Promise<void> => {
     action.event.preventDefault();
-    props.changeValueSound.play();
+    props.changeValueSound.sound.play();
     await pop(props.prevButton);
     props.prev.next();
   });
