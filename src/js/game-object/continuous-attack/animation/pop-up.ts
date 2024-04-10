@@ -7,7 +7,6 @@ import { ContinuousAttackSounds } from "../sounds/continuous-attack-sounds";
 
 /**
  * ポップアップ
- *
  * @param model モデル
  * @param sounds 効果音
  * @return アニメーション
@@ -19,7 +18,7 @@ export function popUp(
   return onStart(() => {
     model.opacity = 0;
     model.scale = 1.2;
-    sounds.benefitEffect.play();
+    sounds.benefitEffect.sound.play();
   })
     .chain(
       tween(model, (t) =>
