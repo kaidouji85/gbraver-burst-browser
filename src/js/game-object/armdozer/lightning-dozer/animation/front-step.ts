@@ -8,7 +8,6 @@ import { LightningDozerSounds } from "../sounds/lightning-dozer-sounds";
 
 /**
  * フロントステップ
- *
  * @param model モデル
  * @param sounds 音
  * @param distance 移動距離を絶対値で指定する
@@ -22,7 +21,7 @@ export function frontStep(
   return onStart(() => {
     model.animation.type = "FRONT_STEP";
     model.animation.frame = 0;
-    sounds.motor.play();
+    sounds.motor.sound.play();
   })
     .chain(
       all(
@@ -47,7 +46,7 @@ export function frontStep(
     .chain(delay(300))
     .chain(
       onStart(() => {
-        sounds.motor.play();
+        sounds.motor.sound.play();
       }),
     )
     .chain(

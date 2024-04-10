@@ -8,7 +8,6 @@ import { LightningDozerSounds } from "../sounds/lightning-dozer-sounds";
 
 /**
  * アームハンマー -> 立ち
- *
  * @param model モデル
  * @param sounds 音
  * @return アニメーション
@@ -21,7 +20,7 @@ export function hmToStand(
     onStart(() => {
       model.animation.type = "HM_TO_STAND";
       model.animation.frame = 0;
-      sounds.motor.play();
+      sounds.motor.sound.play();
     })
       .chain(
         tween(model.animation, (t) =>

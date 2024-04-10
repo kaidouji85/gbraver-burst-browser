@@ -18,7 +18,7 @@ export function gutsToStand(
   return onStart(() => {
     model.animation.type = "GUTS_TO_STAND";
     model.animation.frame = 0;
-    sounds.motor.play();
+    sounds.motor.sound.play();
   })
     .chain(
       tween(model.animation, (t) =>

@@ -17,7 +17,7 @@ export function bowUp(
   return onStart(() => {
     model.animation.type = "BOW";
     model.animation.frame = 1;
-    sounds.motor.play();
+    sounds.motor.sound.play();
   })
     .chain(
       tween(model.animation, (t) =>
