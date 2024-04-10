@@ -41,7 +41,7 @@ export function show(model: YuuyaModel, sounds: YuuyaSounds): Animate {
     )
     .chain(
       onStart(() => {
-        sounds.benefitEffect.play();
+        sounds.benefitEffect.sound.play();
       }),
     );
 }
