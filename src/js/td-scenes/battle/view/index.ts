@@ -60,7 +60,7 @@ export class BattleSceneView {
       update: this.#updateHUD,
       preRender: this.#preRenderHUD,
     });
-    this.dom = new DOMLayer(param.resources);
+    this.dom = new DOMLayer(param);
     param.gameLoop.subscribe((action) => {
       this.#gameLoop(action);
     });
