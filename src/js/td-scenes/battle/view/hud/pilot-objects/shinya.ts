@@ -1,14 +1,12 @@
-import type { Player, PlayerId } from "gbraver-burst-core";
-import { Observable } from "rxjs";
+import type { PlayerId } from "gbraver-burst-core";
 import * as THREE from "three";
 
-import type { GameObjectAction } from "../../../../../game-object/action/game-object-action";
 import {
   enemyShinyaCutIn,
   playerShinyaCutIn,
 } from "../../../../../game-object/cut-in/shinya";
 import { ShinyaCutIn } from "../../../../../game-object/cut-in/shinya/shinya";
-import type { Resources } from "../../../../../resource";
+import { GenerateHUDLayerObjectParams } from "../generate-params";
 import type { HUDPilotObjects } from "./hud-pilot-objects";
 
 /**
@@ -55,38 +53,30 @@ export class ShinyaHUD implements HUDPilotObjects {
 
 /**
  * プレイヤー側 シンヤHUD
- *
- * @param resources リソース管理オブジェクト
- * @param gameObjectAction ゲームオブジェクトアクション
- * @param state プレイヤーの状態
+ * @param params 生成パラメータ
  * @return シンヤHUD
  */
 export function playerShinyaHUD(
-  resources: Resources,
-  gameObjectAction: Observable<GameObjectAction>,
-  state: Player,
+  params: GenerateHUDLayerObjectParams,
 ): ShinyaHUD {
+  const { resources, player, gameObjectAction } = params;
   return new ShinyaHUD({
-    playerId: state.playerId,
+    playerId: player.playerId,
     cutIn: playerShinyaCutIn(resources, gameObjectAction),
   });
 }
 
 /**
  * 敵側 シンヤHUD
- *
- * @param resources リソース管理オブジェクト
- * @param gameObjectAction ゲームオブジェクトアクション
- * @param state プレイヤーの状態
+ * @param params 生成パラメータ
  * @return シンヤHUD
  */
 export function enemyShinyaHUD(
-  resources: Resources,
-  gameObjectAction: Observable<GameObjectAction>,
-  state: Player,
+  params: GenerateHUDLayerObjectParams,
 ): ShinyaHUD {
+  const { resources, enemy, gameObjectAction } = params;
   return new ShinyaHUD({
-    playerId: state.playerId,
+    playerId: enemy.playerId,
     cutIn: enemyShinyaCutIn(resources, gameObjectAction),
   });
 }

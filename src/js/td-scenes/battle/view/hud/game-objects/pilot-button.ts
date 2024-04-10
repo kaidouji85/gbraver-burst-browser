@@ -1,8 +1,5 @@
-import type { PilotId } from "gbraver-burst-core";
 import { PilotIds } from "gbraver-burst-core";
-import { Observable } from "rxjs";
 
-import type { GameObjectAction } from "../../../../../game-object/action/game-object-action";
 import {
   gaiPilotButton,
   raitoPilotButton,
@@ -11,21 +8,18 @@ import {
   yuuyaPilotButton,
 } from "../../../../../game-object/pilot-button";
 import { PilotButton } from "../../../../../game-object/pilot-button/pilot-button";
-import type { Resources } from "../../../../../resource";
+import { GenerateHUDLayerObjectParams } from "../generate-params";
 
 /**
  * パイロットIDに対応したパイロットボタンを生成する
- * @param resources リソース管理オブジェクト
- * @param gameObjectAction ゲームオブジェクトアクション
- * @param pilotId パイロットID
+ * @param params 生成パラメータ
  * @return パイロットボタン
  */
 export function createPilotButton(
-  resources: Resources,
-  gameObjectAction: Observable<GameObjectAction>,
-  pilotId: PilotId,
+  params: GenerateHUDLayerObjectParams,
 ): PilotButton {
-  switch (pilotId) {
+  const { resources, player, gameObjectAction } = params;
+  switch (player.pilot.id) {
     case PilotIds.SHINYA:
       return shinyaPilotButton(resources, gameObjectAction);
     case PilotIds.GAI:

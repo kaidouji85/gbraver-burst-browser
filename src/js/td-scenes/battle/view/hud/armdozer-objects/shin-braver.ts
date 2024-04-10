@@ -1,15 +1,13 @@
-import type { Player, PlayerId } from "gbraver-burst-core";
-import { Observable } from "rxjs";
+import type { PlayerId } from "gbraver-burst-core";
 import * as THREE from "three";
 
-import type { GameObjectAction } from "../../../../../game-object/action/game-object-action";
 import {
   enemyShinBraverCutIn,
   playerShinBraverCutIn,
 } from "../../../../../game-object/cut-in/shin-braver";
 import { ShinBraverCutIn } from "../../../../../game-object/cut-in/shin-braver/shin-braver-cutin";
-import type { Resources } from "../../../../../resource";
-import type { HUDArmdozerObjects } from "./hud-armdozer-ibjects";
+import { GenerateHUDLayerObjectParams } from "../generate-params";
+import type { HUDArmdozerObjects } from "./hud-armdozer-objects";
 
 /** コンストラクタのパラメータ */
 type Param = {
@@ -48,38 +46,30 @@ export class ShinBraverHUD implements HUDArmdozerObjects {
 
 /**
  * プレイヤー側 シンブレイバーHUD
- *
- * @param resources リソース管理オブジェクト
- * @param gameObjectAction ゲームオブジェクトアクション
- * @param state プレイヤーの状態
+ * @param params 生成パラメータ
  * @return シンブレイバーHUD
  */
 export function playerShinBraverHUD(
-  resources: Resources,
-  gameObjectAction: Observable<GameObjectAction>,
-  state: Player,
+  params: GenerateHUDLayerObjectParams,
 ): HUDArmdozerObjects {
+  const { resources, player, gameObjectAction } = params;
   return new ShinBraverHUD({
-    playerId: state.playerId,
+    playerId: player.playerId,
     cutIn: playerShinBraverCutIn(resources, gameObjectAction),
   });
 }
 
 /**
  * 敵側 シンブレイバーHUD
- *
- * @param resources リソース管理オブジェクト
- * @param gameObjectAction ゲームオブジェクトアクション
- * @param state プレイヤーの状態
+ * @param params 生成パラメータ
  * @return シンブレイバーHUD
  */
 export function enemyShinBraverHUD(
-  resources: Resources,
-  gameObjectAction: Observable<GameObjectAction>,
-  state: Player,
+  params: GenerateHUDLayerObjectParams,
 ): HUDArmdozerObjects {
+  const { resources, enemy, gameObjectAction } = params;
   return new ShinBraverHUD({
-    playerId: state.playerId,
+    playerId: enemy.playerId,
     cutIn: enemyShinBraverCutIn(resources, gameObjectAction),
   });
 }

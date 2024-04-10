@@ -1,14 +1,12 @@
-import type { Player, PlayerId } from "gbraver-burst-core";
-import { Observable } from "rxjs";
+import type { PlayerId } from "gbraver-burst-core";
 import * as THREE from "three";
 
-import type { GameObjectAction } from "../../../../../game-object/action/game-object-action";
 import {
   enemyRaitoCutIn,
   playerRaitoCutIn,
 } from "../../../../../game-object/cut-in/raito";
 import { RaitoCutIn } from "../../../../../game-object/cut-in/raito/raito";
-import type { Resources } from "../../../../../resource";
+import { GenerateHUDLayerObjectParams } from "../generate-params";
 import type { HUDPilotObjects } from "./hud-pilot-objects";
 
 /**
@@ -55,38 +53,26 @@ export class RaitoHUD implements HUDPilotObjects {
 
 /**
  * プレイヤー側 ライトHUD
- *
- * @param resources リソース管理オブジェクト
- * @param gameObjectAction ゲームオブジェクトアクション
- * @param state プレイヤーの状態
+ * @param params 生成パラメータ
  * @return ライトHUD
  */
-export function playerRaitoHUD(
-  resources: Resources,
-  gameObjectAction: Observable<GameObjectAction>,
-  state: Player,
-): RaitoHUD {
+export function playerRaitoHUD(params: GenerateHUDLayerObjectParams): RaitoHUD {
+  const { resources, player, gameObjectAction } = params;
   return new RaitoHUD({
-    playerId: state.playerId,
+    playerId: player.playerId,
     cutIn: playerRaitoCutIn(resources, gameObjectAction),
   });
 }
 
 /**
  * 敵側 ライトHUD
- *
- * @param resources リソース管理オブジェクト
- * @param gameObjectAction ゲームオブジェクトアクション
- * @param state プレイヤーの状態
+ * @param params 生成パラメータ
  * @return ライトHUD
  */
-export function enemyRaitoHUD(
-  resources: Resources,
-  gameObjectAction: Observable<GameObjectAction>,
-  state: Player,
-): RaitoHUD {
+export function enemyRaitoHUD(params: GenerateHUDLayerObjectParams): RaitoHUD {
+  const { resources, enemy, gameObjectAction } = params;
   return new RaitoHUD({
-    playerId: state.playerId,
+    playerId: enemy.playerId,
     cutIn: enemyRaitoCutIn(resources, gameObjectAction),
   });
 }

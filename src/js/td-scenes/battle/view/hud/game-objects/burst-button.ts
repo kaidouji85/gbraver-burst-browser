@@ -1,7 +1,5 @@
-import { ArmdozerId, ArmdozerIds } from "gbraver-burst-core";
-import { Observable } from "rxjs";
+import { ArmdozerIds } from "gbraver-burst-core";
 
-import type { GameObjectAction } from "../../../../../game-object/action/game-object-action";
 import {
   genesisBraverBurstButton,
   lightningDozerBurstButton,
@@ -10,21 +8,18 @@ import {
   wingDozerBurstButton,
 } from "../../../../../game-object/burst-button";
 import { BurstButton } from "../../../../../game-object/burst-button/burst-button";
-import type { Resources } from "../../../../../resource";
+import { GenerateHUDLayerObjectParams } from "../generate-params";
 
 /**
  * アームドーザIDに対応したバーストボタンを生成する
- * @param resources リソース管理オブジェクト
- * @param gameObjectAction ゲームオブジェクトアクション
- * @param armdozerId アームドーザID
+ * @param params 生成パラメータ
  * @return バーストボタン
  */
 export function createBurstButton(
-  resources: Resources,
-  gameObjectAction: Observable<GameObjectAction>,
-  armdozerId: ArmdozerId,
+  params: GenerateHUDLayerObjectParams,
 ): BurstButton {
-  switch (armdozerId) {
+  const { resources, player, gameObjectAction } = params;
+  switch (player.armdozer.id) {
     case ArmdozerIds.SHIN_BRAVER:
       return shinBraverBurstButton(resources, gameObjectAction);
     case ArmdozerIds.NEO_LANDOZER:
