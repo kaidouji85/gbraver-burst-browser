@@ -3,11 +3,10 @@ import { delay } from "../../../animation/delay";
 import { onStart } from "../../../animation/on-start";
 import { tween } from "../../../animation/tween";
 import type { RecoverBatteryModel } from "../model/recover-battery-model";
-import RecoverBatterySounds from "../sounds/recover-battery-sounds";
+import { RecoverBatterySounds } from "../sounds/recover-battery-sounds";
 
 /**
  * バッテリー回復 ポップアップ
- *
  * @param model モデル
  * @param sounds 効果音
  * @param value 回復値
