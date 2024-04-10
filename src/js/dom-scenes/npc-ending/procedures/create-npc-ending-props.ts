@@ -1,4 +1,3 @@
-import { Howl } from "howler";
 import { Subject } from "rxjs";
 
 import { BGMManager } from "../../../bgm/bgm-manager";
