@@ -10,7 +10,8 @@ import { LoginDialogProps } from "../props";
 export function onCloserPush(props: LoginDialogProps, action: PushDOM): void {
   props.exclusive.execute(async () => {
     action.event.preventDefault();
-    await Promise.all([pop(props.closer, 1.3), props.changeValue.play()]);
+    props.changeValue.sound.play()
+    await pop(props.closer, 1.3);
     props.closeDialog.next();
   });
 }
