@@ -1,5 +1,5 @@
 import * as TWEEN from "@tweenjs/tween.js";
-import type { Player, PlayerId } from "gbraver-burst-core";
+import type { PlayerId } from "gbraver-burst-core";
 import { merge, Observable, Subject } from "rxjs";
 
 import type { GameLoop } from "../../../game-loop/game-loop";
@@ -8,12 +8,11 @@ import type { Update } from "../../../game-loop/update";
 import type { OverlapNotifier } from "../../../render/overlap-notifier";
 import type { RendererDomGetter } from "../../../render/renderer-dom-getter";
 import type { Rendering } from "../../../render/rendering";
-import type { Resources } from "../../../resource";
 import type { SafeAreaInset } from "../../../safe-area/safe-area-inset";
 import { createSafeAreaInset } from "../../../safe-area/safe-area-inset";
-import type { Resize } from "../../../window/resize";
 import type { BattleSceneAction } from "../actions";
 import { DOMLayer } from "./dom/dom-layer";
+import { GenerateBattleSceneParams } from "./generate-params";
 import { HudLayer } from "./hud";
 import { ThreeDimensionLayer } from "./td";
 import { tracking } from "./tracking";
@@ -22,18 +21,11 @@ import { tracking } from "./tracking";
 interface OwnRenderer extends OverlapNotifier, RendererDomGetter, Rendering {}
 
 /** コンストラクタのパラメータ */
-type Param = {
-  resources: Resources;
+type Param = GenerateBattleSceneParams & {
   renderer: OwnRenderer;
-  player: Player;
-  enemy: Player;
-  gameLoop: Observable<GameLoop>;
-  resize: Observable<Resize>;
 };
 
-/**
- * 戦闘画面のビュー
- */
+/** 戦闘画面のビュー */
 export class BattleSceneView {
   td: ThreeDimensionLayer;
   hud: HudLayer;
@@ -46,6 +38,10 @@ export class BattleSceneView {
   #updateHUD: Subject<Update>;
   #preRenderHUD: Subject<PreRender>;
 
+  /**
+   * コンストラクタ
+   * @param param パラメータ
+   */
   constructor(param: Param) {
     this.#playerId = param.player.playerId;
     this.#safeAreaInset = createSafeAreaInset();
@@ -55,20 +51,12 @@ export class BattleSceneView {
     this.#updateHUD = new Subject();
     this.#preRenderHUD = new Subject();
     this.td = new ThreeDimensionLayer({
-      resources: param.resources,
-      renderer: param.renderer,
-      player: param.player,
-      enemy: param.enemy,
-      resize: param.resize,
+      ...param,
       update: this.#updateTD,
       preRender: this.#preRenderTD,
     });
     this.hud = new HudLayer({
-      resources: param.resources,
-      renderer: param.renderer,
-      player: param.player,
-      enemy: param.enemy,
-      resize: param.resize,
+      ...param,
       update: this.#updateHUD,
       preRender: this.#preRenderHUD,
     });
@@ -100,7 +88,6 @@ export class BattleSceneView {
 
   /**
    * ゲームループ
-   *
    * @param action アクション
    */
   #gameLoop(action: GameLoop): void {

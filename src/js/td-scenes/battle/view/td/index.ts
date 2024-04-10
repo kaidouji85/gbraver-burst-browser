@@ -1,4 +1,3 @@
-import type { Player } from "gbraver-burst-core";
 import { Observable } from "rxjs";
 import * as THREE from "three";
 
@@ -8,9 +7,8 @@ import type { GameObjectAction } from "../../../../game-object/action/game-objec
 import { gameObjectStream } from "../../../../game-object/action/game-object-action";
 import { TDCamera } from "../../../../game-object/camera/td";
 import type { OverlapEvent } from "../../../../render/overlap-event/overlap-event";
-import type { OverlapNotifier } from "../../../../render/overlap-notifier";
-import type { Resources } from "../../../../resource";
-import type { Resize } from "../../../../window/resize";
+import { OverlapNotifier } from "../../../../render/overlap-notifier";
+import { GenerateBattleSceneParams } from "../generate-params";
 import { enemyTDArmdozer, playerTDArmdozer } from "./armdozer-objects";
 import type { TDArmdozerObjects } from "./armdozer-objects/armdozer-objects";
 import { TDGameObjects } from "./game-objects";
@@ -19,12 +17,8 @@ import { enemyTDObject, playerTDObjects } from "./player";
 import { skyBox } from "./sky-box";
 
 /** コンストラクタのパラメータ */
-type Param = {
-  resources: Resources;
+type Param = GenerateBattleSceneParams & {
   renderer: OverlapNotifier;
-  player: Player;
-  enemy: Player;
-  resize: Observable<Resize>;
   update: Observable<Update>;
   preRender: Observable<PreRender>;
 };
@@ -41,7 +35,6 @@ export class ThreeDimensionLayer {
 
   /**
    * コンストラクタ
-   *
    * @param param パラメータ
    */
   constructor(param: Param) {
