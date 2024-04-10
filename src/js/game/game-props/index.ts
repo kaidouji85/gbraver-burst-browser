@@ -19,6 +19,7 @@ import { FutureSuddenlyBattleEnd } from "../future-suddenly-battle-end";
 import { InProgress } from "../in-progress/in-progress";
 import { InterruptScenes } from "../innterrupt-scenes";
 import { TDSceneBinder } from "../td-scene-binder";
+import {SEPlayer} from "../../se/se-player";
 
 /**
  * ゲームプロパティ
@@ -79,6 +80,8 @@ export interface GameProps {
   serviceWorker: ServiceWorkerRegistration | null | undefined;
   /** BGM管理オブジェクト */
   bgm: BGMManager;
+  /** SE再生オブジェクト */
+  se: SEPlayer;
   /** 開発中のエピソードをプレイできるか否かのフラグ、trueでプレイできる */
   canPlayEpisodeInDevelopment: boolean;
   /** 開発中のリソースをロードするか否かのフラグ、trueでロードする */

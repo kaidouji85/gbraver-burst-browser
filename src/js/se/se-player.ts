@@ -1,7 +1,6 @@
 import { SoundResource } from "../resource/sound/resource";
-import { Resources } from "../resource";
 
-/** 効果音再生オブジェクト */
+/** SE再生オブジェクト */
 export interface SEPlayer {
   /** 効果音のマスターボリューム、設定画面で入力したものをセットする */
   volume: number;
@@ -13,7 +12,7 @@ export interface SEPlayer {
   play(sound: SoundResource): void;
 }
 
-/** シンプルな効果音再生オブジェクト */
+/** SE再生オブジェクトのシンプルな実装 */
 class SimpleSEPlayer implements SEPlayer {
   /** @override */
   volume: number;
