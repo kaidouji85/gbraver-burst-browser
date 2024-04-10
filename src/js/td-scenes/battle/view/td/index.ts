@@ -1,4 +1,3 @@
-import type { Player } from "gbraver-burst-core";
 import { Observable } from "rxjs";
 import * as THREE from "three";
 
@@ -8,24 +7,23 @@ import type { GameObjectAction } from "../../../../game-object/action/game-objec
 import { gameObjectStream } from "../../../../game-object/action/game-object-action";
 import { TDCamera } from "../../../../game-object/camera/td";
 import type { OverlapEvent } from "../../../../render/overlap-event/overlap-event";
-import type { OverlapNotifier } from "../../../../render/overlap-notifier";
-import type { Resources } from "../../../../resource";
-import type { Resize } from "../../../../window/resize";
+import { OverlapNotifier } from "../../../../render/overlap-notifier";
+import { GenerateBattleViewParams } from "../generate-params";
 import { enemyTDArmdozer, playerTDArmdozer } from "./armdozer-objects";
 import type { TDArmdozerObjects } from "./armdozer-objects/armdozer-objects";
 import { TDGameObjects } from "./game-objects";
+import { GenerateTDLayerObjectParams } from "./generate-params";
 import type { TDPlayer } from "./player";
 import { enemyTDObject, playerTDObjects } from "./player";
 import { skyBox } from "./sky-box";
 
 /** コンストラクタのパラメータ */
-type Param = {
-  resources: Resources;
+type Param = GenerateBattleViewParams & {
+  /** レンダラ */
   renderer: OverlapNotifier;
-  player: Player;
-  enemy: Player;
-  resize: Observable<Resize>;
+  /** アップデート */
   update: Observable<Update>;
+  /** プリレンダ */
   preRender: Observable<PreRender>;
 };
 
@@ -41,7 +39,6 @@ export class ThreeDimensionLayer {
 
   /**
    * コンストラクタ
-   *
    * @param param パラメータ
    */
   constructor(param: Param) {
@@ -56,9 +53,13 @@ export class ThreeDimensionLayer {
       param.preRender,
       this.#overlap,
     );
+    const generateParams: GenerateTDLayerObjectParams = {
+      ...param,
+      gameObjectAction: this.#gameObjectAction,
+    };
     this.players = [
-      playerTDObjects(param.resources, param.player, this.#gameObjectAction),
-      enemyTDObject(param.resources, param.enemy, this.#gameObjectAction),
+      playerTDObjects(generateParams),
+      enemyTDObject(generateParams),
     ];
     this.players
       .map((v) => v.getObject3Ds())
@@ -67,8 +68,8 @@ export class ThreeDimensionLayer {
         this.scene.add(v);
       });
     this.armdozerObjects = [
-      playerTDArmdozer(param.resources, this.#gameObjectAction, param.player),
-      enemyTDArmdozer(param.resources, this.#gameObjectAction, param.enemy),
+      playerTDArmdozer(generateParams),
+      enemyTDArmdozer(generateParams),
     ];
     this.armdozerObjects
       .map((v) => v.getObject3Ds())
@@ -76,10 +77,7 @@ export class ThreeDimensionLayer {
       .forEach((v) => {
         this.scene.add(v);
       });
-    this.gameObjects = new TDGameObjects(
-      param.resources,
-      this.#gameObjectAction,
-    );
+    this.gameObjects = new TDGameObjects(generateParams);
     this.gameObjects.getObject3Ds().forEach((object) => {
       this.scene.add(object);
     });

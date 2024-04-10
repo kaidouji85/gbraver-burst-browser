@@ -1,17 +1,13 @@
-import { Observable } from "rxjs";
 import * as THREE from "three";
 
-import type { GameObjectAction } from "../../../../game-object/action/game-object-action";
 import { Illumination } from "../../../../game-object/illumination/illumination";
 import { SkyBrightness } from "../../../../game-object/sky-brightness/sky-brightness";
 import SchoolField from "../../../../game-object/stage/shopping-street/shopping-street";
 import type { Stage } from "../../../../game-object/stage/stage";
 import { TurnIndicator } from "../../../../game-object/turn-indicator/turn-indicator";
-import type { Resources } from "../../../../resource";
+import { GenerateTDLayerObjectParams } from "./generate-params";
 
-/**
- * 3Dレイヤーのゲームオブジェクト
- */
+/** 3Dレイヤーのゲームオブジェクト */
 export class TDGameObjects {
   stage: Stage;
   turnIndicator: TurnIndicator;
@@ -20,14 +16,10 @@ export class TDGameObjects {
 
   /**
    * コンストラクタ
-   *
-   * @param resources リソース管理オブジェクト
-   * @param gameObjectAction ゲームオブジェクトアクション
+   * @param params パラメータ
    */
-  constructor(
-    resources: Resources,
-    gameObjectAction: Observable<GameObjectAction>,
-  ) {
+  constructor(params: GenerateTDLayerObjectParams) {
+    const { resources, gameObjectAction } = params;
     this.stage = new SchoolField(resources);
     this.turnIndicator = new TurnIndicator({
       gameObjectAction: gameObjectAction,
@@ -49,7 +41,6 @@ export class TDGameObjects {
 
   /**
    * シーンに追加するオブジェクトを取得する
-   *
    * @return シーンに追加するオブジェクト
    */
   getObject3Ds(): THREE.Object3D[] {

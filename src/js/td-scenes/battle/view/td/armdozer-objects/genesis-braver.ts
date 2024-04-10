@@ -1,15 +1,13 @@
-import type { Player, PlayerId } from "gbraver-burst-core";
-import { Observable } from "rxjs";
+import type { PlayerId } from "gbraver-burst-core";
 import * as THREE from "three";
 
-import type { GameObjectAction } from "../../../../../game-object/action/game-object-action";
 import type { ArmdozerSprite } from "../../../../../game-object/armdozer/armdozer-sprite";
 import {
   EnemyGenesisBraver,
   PlayerGenesisBraver,
 } from "../../../../../game-object/armdozer/genesis-braver";
 import { GenesisBraver } from "../../../../../game-object/armdozer/genesis-braver/genesis-braver";
-import type { Resources } from "../../../../../resource";
+import { GenerateTDLayerObjectParams } from "../generate-params";
 import type { TDArmdozerObjects } from "./armdozer-objects";
 
 /** ジェネシスブレイバー 3Dレイヤー フィールド */
@@ -56,34 +54,28 @@ export class GenesisBraverTD
 
 /**
  * プレイヤー ジェネシスブレイバー 3Dレイヤー
- * @param resources リソース管理オブジェクト
- * @param gameObjectAction ゲームオブジェクトアクション
- * @param state プレイヤー情報
+ * @param params 生成パラメータ
  * @return 生成結果
  */
 export function playerGenesisBraverTD(
-  resources: Resources,
-  gameObjectAction: Observable<GameObjectAction>,
-  state: Player,
+  params: GenerateTDLayerObjectParams,
 ): GenesisBraverTD {
-  return new GenesisBraverTD(state.playerId, {
-    genesisBraver: PlayerGenesisBraver({ resources, gameObjectAction }),
+  const { player } = params;
+  return new GenesisBraverTD(player.playerId, {
+    genesisBraver: PlayerGenesisBraver(params),
   });
 }
 
 /**
  * 敵 ジェネシスブレイバー 3Dレイヤー
- * @param resources リソース管理オブジェクト
- * @param gameObjectAction ゲームオブジェクトアクション
- * @param state プレイヤー情報
+ * @param params 生成パラメータ
  * @return 生成結果
  */
 export function enemyGenesisBraverTD(
-  resources: Resources,
-  gameObjectAction: Observable<GameObjectAction>,
-  state: Player,
+  params: GenerateTDLayerObjectParams,
 ): GenesisBraverTD {
-  return new GenesisBraverTD(state.playerId, {
-    genesisBraver: EnemyGenesisBraver({ resources, gameObjectAction }),
+  const { enemy } = params;
+  return new GenesisBraverTD(enemy.playerId, {
+    genesisBraver: EnemyGenesisBraver(params),
   });
 }

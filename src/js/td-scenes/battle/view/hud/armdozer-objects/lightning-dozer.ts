@@ -1,15 +1,13 @@
-import type { Player, PlayerId } from "gbraver-burst-core";
-import { Observable } from "rxjs";
+import type { PlayerId } from "gbraver-burst-core";
 import * as THREE from "three";
 
-import type { GameObjectAction } from "../../../../../game-object/action/game-object-action";
 import {
   enemyLightningiDozerCutIn,
   playerLightningDozerCutIn,
 } from "../../../../../game-object/cut-in/lightning-dozer";
 import { LightningDozerCutIn } from "../../../../../game-object/cut-in/lightning-dozer/lightning-dozer-cutin";
-import type { Resources } from "../../../../../resource";
-import type { HUDArmdozerObjects } from "./hud-armdozer-ibjects";
+import { GenerateHUDLayerObjectParams } from "../generate-params";
+import type { HUDArmdozerObjects } from "./hud-armdozer-objects";
 
 /**
  * HUDレイヤー ライトニングドーザ固有オブジェクト フィールド
@@ -57,36 +55,28 @@ export class LightningDozerHUD
 
 /**
  * プレイヤー HUDレイヤー ライトニングドーザ固有オブジェクト
- *
- * @param resources リソース管理オブジェクト
- * @param gameObjectAction ゲームオブジェクトアクション
- * @param state プレイヤー情報
+ * @param params 生成パラメータ
  * @return 生成結果
  */
 export function playerLightningDozerHUD(
-  resources: Resources,
-  gameObjectAction: Observable<GameObjectAction>,
-  state: Player,
+  params: GenerateHUDLayerObjectParams,
 ): LightningDozerHUD {
-  return new LightningDozerHUD(state.playerId, {
+  const { resources, player, gameObjectAction } = params;
+  return new LightningDozerHUD(player.playerId, {
     cutIn: playerLightningDozerCutIn(resources, gameObjectAction),
   });
 }
 
 /**
  * 敵 HUDレイヤー ライトニングドーザ固有オブジェクト
- *
- * @param resources リソース管理オブジェクト
- * @param gameObjectAction ゲームオブジェクトアクション
- * @param state プレイヤー情報
+ * @param params 生成パラメータ
  * @return 生成結果
  */
 export function enemyLightningDozerHUD(
-  resources: Resources,
-  gameObjectAction: Observable<GameObjectAction>,
-  state: Player,
+  params: GenerateHUDLayerObjectParams,
 ): LightningDozerHUD {
-  return new LightningDozerHUD(state.playerId, {
+  const { resources, enemy, gameObjectAction } = params;
+  return new LightningDozerHUD(enemy.playerId, {
     cutIn: enemyLightningiDozerCutIn(resources, gameObjectAction),
   });
 }

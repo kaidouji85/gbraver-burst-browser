@@ -101,26 +101,16 @@ export function createBattleSceneProps(
   params: BattleScenePropsCreatorParams,
 ): BattleSceneProps {
   return {
+    ...params,
     playerId: params.player.playerId,
     animatePlayer: createAnimatePlayer({
       timeScale: params.initialAnimationTimeScale,
     }),
-    pushWindow: params.pushWindow,
     exclusive: new Exclusive(),
     stateHistory: params.initialState,
     endBattle: new Subject(),
-    battleProgress: params.battleProgress,
     customBattleEvent: params.customBattleEvent ?? null,
-    view: new BattleSceneView({
-      resources: params.resources,
-      renderer: params.renderer,
-      player: params.player,
-      enemy: params.enemy,
-      gameLoop: params.gameLoop,
-      resize: params.resize,
-    }),
+    view: new BattleSceneView(params),
     sounds: new BattleSceneSounds(params.resources, params.playingBGM),
-    bgm: params.bgm,
-    controllerType: params.controllerType,
   };
 }

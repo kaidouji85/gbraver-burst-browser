@@ -1,9 +1,6 @@
-import type { Player } from "gbraver-burst-core";
 import { PilotIds } from "gbraver-burst-core";
-import { Observable } from "rxjs";
 
-import type { GameObjectAction } from "../../../../../game-object/action/game-object-action";
-import type { Resources } from "../../../../../resource";
+import { GenerateHUDLayerObjectParams } from "../generate-params";
 import { enemyGaiHUD, playerGaiHUD } from "./gai";
 import type { HUDPilotObjects } from "./hud-pilot-objects";
 import { enemyRaitoHUD, playerRaitoHUD } from "./raito";
@@ -13,56 +10,50 @@ import { enemyYuuyaHUD, playerYuuyaHUD } from "./yuuya";
 
 /**
  * プレイヤー側 HUDパイロット
- * @param resources リソース管理オブジェクト
- * @param gameObjectAction ゲームオブジェクトアクション
- * @param state プレイヤー状態
+ * @param params 生成パラメータ
  * @return HUDパイロット
  */
 export function playerHUDPilotObjects(
-  resources: Resources,
-  gameObjectAction: Observable<GameObjectAction>,
-  state: Player,
+  params: GenerateHUDLayerObjectParams,
 ): HUDPilotObjects {
-  switch (state.pilot.id) {
+  const { player } = params;
+  switch (player.pilot.id) {
     case PilotIds.SHINYA:
-      return playerShinyaHUD(resources, gameObjectAction, state);
+      return playerShinyaHUD(params);
     case PilotIds.GAI:
-      return playerGaiHUD(resources, gameObjectAction, state);
+      return playerGaiHUD(params);
     case PilotIds.RAITO:
-      return playerRaitoHUD(resources, gameObjectAction, state);
+      return playerRaitoHUD(params);
     case PilotIds.TSUBASA:
-      return playerTsubasaHUD(resources, gameObjectAction, state);
+      return playerTsubasaHUD(params);
     case PilotIds.YUUYA:
-      return playerYuuyaHUD(resources, gameObjectAction, state);
+      return playerYuuyaHUD(params);
     default:
-      return playerShinyaHUD(resources, gameObjectAction, state);
+      return playerShinyaHUD(params);
   }
 }
 
 /**
  * 敵側 HUDパイロット
- * @param resources リソース管理オブジェクト
- * @param gameObjectAction ゲームオブジェクトアクション
- * @param state プレイヤー状態
+ * @param params 生成パラメータ
  * @return HUDパイロット
  */
 export function enemyHUDPilotObjects(
-  resources: Resources,
-  gameObjectAction: Observable<GameObjectAction>,
-  state: Player,
+  params: GenerateHUDLayerObjectParams,
 ): HUDPilotObjects {
-  switch (state.pilot.id) {
+  const { enemy } = params;
+  switch (enemy.pilot.id) {
     case PilotIds.SHINYA:
-      return enemyShinyaHUD(resources, gameObjectAction, state);
+      return enemyShinyaHUD(params);
     case PilotIds.GAI:
-      return enemyGaiHUD(resources, gameObjectAction, state);
+      return enemyGaiHUD(params);
     case PilotIds.RAITO:
-      return enemyRaitoHUD(resources, gameObjectAction, state);
+      return enemyRaitoHUD(params);
     case PilotIds.TSUBASA:
-      return enemyTsubasaHUD(resources, gameObjectAction, state);
+      return enemyTsubasaHUD(params);
     case PilotIds.YUUYA:
-      return enemyYuuyaHUD(resources, gameObjectAction, state);
+      return enemyYuuyaHUD(params);
     default:
-      return enemyShinyaHUD(resources, gameObjectAction, state);
+      return enemyShinyaHUD(params);
   }
 }

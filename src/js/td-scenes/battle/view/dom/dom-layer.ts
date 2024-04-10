@@ -2,11 +2,11 @@ import { map, merge, Observable } from "rxjs";
 
 import { MessageWindow } from "../../../../game-dom/message-window";
 import { MiniController } from "../../../../game-dom/mini-controller";
-import type { Resources } from "../../../../resource";
 import { BattleSceneAction } from "../../actions";
 import { DecideBatteryByMiniController } from "../../actions/decide-battery-by-mini-controller";
 import { DoBurstByMiniController } from "../../actions/do-burst-by-mini-controller";
 import { DoPilotSkillByMiniController } from "../../actions/do-pilot-skill-by-mini-controller";
+import { GenerateBattleViewParams } from "../generate-params";
 
 /** HTML要素レイヤー */
 export class DOMLayer {
@@ -31,10 +31,10 @@ export class DOMLayer {
 
   /**
    * コンストラクタ
-   *
-   * @param resources リソース管理オブジェクト
+   * @param params 生成パラメータ
    */
-  constructor(resources: Resources) {
+  constructor(params: GenerateBattleViewParams) {
+    const { resources } = params;
     this.rightMessageWindow = new MessageWindow({
       resources,
       type: "Right",

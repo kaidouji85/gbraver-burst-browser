@@ -1,4 +1,3 @@
-import type { Player } from "gbraver-burst-core";
 import { Observable } from "rxjs";
 import * as THREE from "three";
 
@@ -9,25 +8,24 @@ import { gameObjectStream } from "../../../../game-object/action/game-object-act
 import { PlainHUDCamera } from "../../../../game-object/camera/plain-hud/plain-hud-camera";
 import type { OverlapEvent } from "../../../../render/overlap-event/overlap-event";
 import type { OverlapNotifier } from "../../../../render/overlap-notifier";
-import type { Resources } from "../../../../resource";
-import type { Resize } from "../../../../window/resize";
 import type { BattleSceneAction } from "../../actions";
+import { GenerateBattleViewParams } from "../generate-params";
 import { enemyArmdozerHUD, playerArmdozerHUD } from "./armdozer-objects";
-import type { HUDArmdozerObjects } from "./armdozer-objects/hud-armdozer-ibjects";
+import type { HUDArmdozerObjects } from "./armdozer-objects/hud-armdozer-objects";
 import { HUDGameObjects } from "./game-objects";
+import { GenerateHUDLayerObjectParams } from "./generate-params";
 import { enemyHUDPilotObjects, playerHUDPilotObjects } from "./pilot-objects";
 import type { HUDPilotObjects } from "./pilot-objects/hud-pilot-objects";
 import { enemyHUDObjects, HUDPlayer, playerHUDObjects } from "./player";
 
 /** コンストラクタのパラメータ */
-export type Param = {
-  resources: Resources;
+type Param = GenerateBattleViewParams & {
+  /** レンダラ */
   renderer: OverlapNotifier;
-  player: Player;
-  enemy: Player;
+  /** アップデート */
   update: Observable<Update>;
+  /** プリレンダ */
   preRender: Observable<PreRender>;
-  resize: Observable<Resize>;
 };
 
 /**
@@ -54,17 +52,17 @@ export class HudLayer {
       param.preRender,
       this.#overlap,
     );
-    this.gameObjects = new HUDGameObjects(
-      param.resources,
-      this.#gameObjectAction,
-      param.player,
-    );
+    const generateParams: GenerateHUDLayerObjectParams = {
+      ...param,
+      gameObjectAction: this.#gameObjectAction,
+    };
+    this.gameObjects = new HUDGameObjects(generateParams);
     this.gameObjects.getObject3Ds().forEach((object) => {
       this.scene.add(object);
     });
     this.players = [
-      playerHUDObjects(param.resources, param.player, this.#gameObjectAction),
-      enemyHUDObjects(param.resources, param.enemy, this.#gameObjectAction),
+      playerHUDObjects(generateParams),
+      enemyHUDObjects(generateParams),
     ];
     this.players
       .map((v) => v.getObject3Ds())
@@ -73,8 +71,8 @@ export class HudLayer {
         this.scene.add(v);
       });
     this.armdozers = [
-      playerArmdozerHUD(param.resources, this.#gameObjectAction, param.player),
-      enemyArmdozerHUD(param.resources, this.#gameObjectAction, param.enemy),
+      playerArmdozerHUD(generateParams),
+      enemyArmdozerHUD(generateParams),
     ];
     this.armdozers
       .map((v) => v.getObject3Ds())
@@ -83,16 +81,8 @@ export class HudLayer {
         this.scene.add(v);
       });
     this.pilots = [
-      playerHUDPilotObjects(
-        param.resources,
-        this.#gameObjectAction,
-        param.player,
-      ),
-      enemyHUDPilotObjects(
-        param.resources,
-        this.#gameObjectAction,
-        param.enemy,
-      ),
+      playerHUDPilotObjects(generateParams),
+      enemyHUDPilotObjects(generateParams),
     ];
     this.pilots
       .map((v) => v.getObject3Ds())

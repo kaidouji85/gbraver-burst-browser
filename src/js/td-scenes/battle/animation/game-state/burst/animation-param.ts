@@ -7,7 +7,7 @@ import type {
 
 import { PlainHUDCamera } from "../../../../../game-object/camera/plain-hud/plain-hud-camera";
 import { TDCamera } from "../../../../../game-object/camera/td";
-import type { HUDArmdozerObjects } from "../../../view/hud/armdozer-objects/hud-armdozer-ibjects";
+import type { HUDArmdozerObjects } from "../../../view/hud/armdozer-objects/hud-armdozer-objects";
 import type { HUDGameObjects } from "../../../view/hud/game-objects";
 import { HUDPlayer } from "../../../view/hud/player";
 import type { TDArmdozerObjects } from "../../../view/td/armdozer-objects/armdozer-objects";

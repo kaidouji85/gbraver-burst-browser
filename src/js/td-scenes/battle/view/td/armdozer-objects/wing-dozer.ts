@@ -1,15 +1,13 @@
-import type { Player, PlayerId } from "gbraver-burst-core";
-import { Observable } from "rxjs";
+import type { PlayerId } from "gbraver-burst-core";
 import * as THREE from "three";
 
-import type { GameObjectAction } from "../../../../../game-object/action/game-object-action";
 import type { ArmdozerSprite } from "../../../../../game-object/armdozer/armdozer-sprite";
 import {
   EnemyWingDozer,
   PlayerWingDozer,
 } from "../../../../../game-object/armdozer/wing-dozer";
 import { WingDozer } from "../../../../../game-object/armdozer/wing-dozer/wing-dozer";
-import type { Resources } from "../../../../../resource";
+import { GenerateTDLayerObjectParams } from "../generate-params";
 import type { TDArmdozerObjects } from "./armdozer-objects";
 
 /** ウィングドーザ 3Dレイヤー フィールド */
@@ -54,34 +52,28 @@ export class WingDozerTD implements WingDozerTDField, TDArmdozerObjects {
 
 /**
  * プレイヤー 3Dレイヤー ウィングドーザ 3Dレイヤー
- * @param resources リソース管理オブジェクト
- * @param gameObjectAction ゲームオブジェクトアクション
- * @param state プレイヤー情報
+ * @param params 生成パラメータ
  * @return 生成結果
  */
 export function playerWingDozerTD(
-  resources: Resources,
-  gameObjectAction: Observable<GameObjectAction>,
-  state: Player,
+  params: GenerateTDLayerObjectParams,
 ): WingDozerTD {
-  return new WingDozerTD(state.playerId, {
-    wingDozer: PlayerWingDozer({ resources, gameObjectAction }),
+  const { player } = params;
+  return new WingDozerTD(player.playerId, {
+    wingDozer: PlayerWingDozer(params),
   });
 }
 
 /**
  * 敵 3Dレイヤー ウィングドーザ 3Dレイヤー
- * @param resources リソース管理オブジェクト
- * @param gameObjectAction ゲームオブジェクトアクション
- * @param state プレイヤー情報
+ * @param params 生成パラメータ
  * @return 生成結果
  */
 export function enemyWingDozerTD(
-  resources: Resources,
-  gameObjectAction: Observable<GameObjectAction>,
-  state: Player,
+  params: GenerateTDLayerObjectParams,
 ): WingDozerTD {
-  return new WingDozerTD(state.playerId, {
-    wingDozer: EnemyWingDozer({ resources, gameObjectAction }),
+  const { enemy } = params;
+  return new WingDozerTD(enemy.playerId, {
+    wingDozer: EnemyWingDozer(params),
   });
 }

@@ -7,7 +7,7 @@ import { toHUDCoordinate } from "../../../../tracking/coordinate";
 import type { HUDTracking } from "../../../../tracking/hud-tracking";
 import { HudLayer } from "../hud";
 import { GenesisBraverHUD } from "../hud/armdozer-objects/genesis-braver";
-import type { HUDArmdozerObjects } from "../hud/armdozer-objects/hud-armdozer-ibjects";
+import type { HUDArmdozerObjects } from "../hud/armdozer-objects/hud-armdozer-objects";
 import { LightningDozerHUD } from "../hud/armdozer-objects/lightning-dozer";
 import { NeoLandozerHUD } from "../hud/armdozer-objects/neo-landozer";
 import { ShinBraverHUD } from "../hud/armdozer-objects/shin-braver";

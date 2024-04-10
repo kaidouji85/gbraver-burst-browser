@@ -1,15 +1,13 @@
-import type { Player, PlayerId } from "gbraver-burst-core";
-import { Observable } from "rxjs";
+import type { PlayerId } from "gbraver-burst-core";
 import * as THREE from "three";
 
-import type { GameObjectAction } from "../../../../../game-object/action/game-object-action";
 import type { ArmdozerSprite } from "../../../../../game-object/armdozer/armdozer-sprite";
 import {
   EnemyShinBraver,
   PlayerShinBraver,
 } from "../../../../../game-object/armdozer/shin-braver";
 import { ShinBraver } from "../../../../../game-object/armdozer/shin-braver/shin-braver";
-import type { Resources } from "../../../../../resource";
+import { GenerateTDLayerObjectParams } from "../generate-params";
 import type { TDArmdozerObjects } from "./armdozer-objects";
 
 /**3Dレイヤー シンブレイバー 3Dレイヤー フィールド */
@@ -54,34 +52,28 @@ export class ShinBraverTD implements ShinBraverTDField, TDArmdozerObjects {
 
 /**
  * プレイヤー シンブレイバー 3Dレイヤー
- * @param resources リソース管理オブジェクト
- * @param gameObjectAction ゲームオブジェクトアクション
- * @param state プレイヤー情報
+ * @param params 生成パラメータ
  * @return 生成結果
  */
 export function playerShinBraverTD(
-  resources: Resources,
-  gameObjectAction: Observable<GameObjectAction>,
-  state: Player,
+  params: GenerateTDLayerObjectParams,
 ): ShinBraverTD {
-  return new ShinBraverTD(state.playerId, {
-    shinBraver: PlayerShinBraver({ resources, gameObjectAction }),
+  const { player } = params;
+  return new ShinBraverTD(player.playerId, {
+    shinBraver: PlayerShinBraver(params),
   });
 }
 
 /**
  * 敵 シンブレイバー 3Dレイヤー
- * @param resources リソース管理オブジェクト
- * @param gameObjectAction ゲームオブジェクトアクション
- * @param state プレイヤー情報
+ * @param params 生成パラメータ
  * @return 生成結果
  */
 export function enemyShinBraverTD(
-  resources: Resources,
-  gameObjectAction: Observable<GameObjectAction>,
-  state: Player,
+  params: GenerateTDLayerObjectParams,
 ): ShinBraverTD {
-  return new ShinBraverTD(state.playerId, {
-    shinBraver: EnemyShinBraver({ resources, gameObjectAction }),
+  const { enemy } = params;
+  return new ShinBraverTD(enemy.playerId, {
+    shinBraver: EnemyShinBraver(params),
   });
 }
