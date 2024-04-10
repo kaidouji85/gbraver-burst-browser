@@ -5,7 +5,7 @@ import type { GameLoop } from "../../../game-loop/game-loop";
 import type { Resources } from "../../../resource";
 import type { Resize } from "../../../window/resize";
 
-/** 戦闘画面ビュー生成処理のすべての処理で利用できるパラメータ */
+/** すべての戦闘画面ビュー生成処理で利用できるパラメータ */
 export type GenerateBattleViewParams = {
   /** リソース管理オブジェクト */
   resources: Resources;
