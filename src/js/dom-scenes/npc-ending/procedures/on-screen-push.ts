@@ -17,6 +17,6 @@ export function onScreenPush(
   props.canOperation = false;
   action.event.preventDefault();
   action.event.stopPropagation();
-  props.pushButtonSound.play();
+  props.pushButtonSound.sound.play();
   props.endNPCEnding.next();
 }
