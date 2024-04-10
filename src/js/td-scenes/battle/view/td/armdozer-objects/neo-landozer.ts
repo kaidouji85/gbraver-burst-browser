@@ -1,15 +1,13 @@
-import type { Player, PlayerId } from "gbraver-burst-core";
-import { Observable } from "rxjs";
+import type { PlayerId } from "gbraver-burst-core";
 import * as THREE from "three";
 
-import type { GameObjectAction } from "../../../../../game-object/action/game-object-action";
 import type { ArmdozerSprite } from "../../../../../game-object/armdozer/armdozer-sprite";
 import {
   EnemyNeoLandozer,
   PlayerNeoLandozer,
 } from "../../../../../game-object/armdozer/neo-landozer";
 import { NeoLandozer } from "../../../../../game-object/armdozer/neo-landozer/neo-landozer";
-import type { Resources } from "../../../../../resource";
+import { GenerateTDLayerObjectParams } from "../generate-params";
 import type { TDArmdozerObjects } from "./armdozer-objects";
 
 /** ネオランドーザ 3Dレイヤー フィールド */
@@ -54,34 +52,28 @@ export class NeoLandozerTD implements NeoLandozerTDField, TDArmdozerObjects {
 
 /**
  * プレイヤー 3Dレイヤー ネオランドーザ 3Dレイヤー
- * @param resources リソース管理オブジェクト
- * @param gameObjectAction ゲームオブジェクトアクション
- * @param state プレイヤー情報
+ * @param params 生成パラメータ
  * @return 生成結果
  */
 export function playerNeoLandozerTD(
-  resources: Resources,
-  gameObjectAction: Observable<GameObjectAction>,
-  state: Player,
+  params: GenerateTDLayerObjectParams,
 ): NeoLandozerTD {
-  return new NeoLandozerTD(state.playerId, {
-    neoLandozer: PlayerNeoLandozer({ resources, gameObjectAction }),
+  const { player } = params;
+  return new NeoLandozerTD(player.playerId, {
+    neoLandozer: PlayerNeoLandozer(params),
   });
 }
 
 /**
  * 敵 3Dレイヤー ネオランドーザ 3Dレイヤー
- * @param resources リソース管理オブジェクト
- * @param gameObjectAction ゲームオブジェクトアクション
- * @param state プレイヤー情報
+ * @param params 生成パラメータ
  * @return 生成結果
  */
 export function enemyNeoLandozerTD(
-  resources: Resources,
-  gameObjectAction: Observable<GameObjectAction>,
-  state: Player,
+  params: GenerateTDLayerObjectParams,
 ): NeoLandozerTD {
-  return new NeoLandozerTD(state.playerId, {
-    neoLandozer: EnemyNeoLandozer({ resources, gameObjectAction }),
+  const { enemy } = params;
+  return new NeoLandozerTD(enemy.playerId, {
+    neoLandozer: EnemyNeoLandozer(params),
   });
 }

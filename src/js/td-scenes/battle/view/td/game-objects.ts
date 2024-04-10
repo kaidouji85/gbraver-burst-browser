@@ -1,19 +1,11 @@
-import { Observable } from "rxjs";
 import * as THREE from "three";
 
-import type { GameObjectAction } from "../../../../game-object/action/game-object-action";
 import { Illumination } from "../../../../game-object/illumination/illumination";
 import { SkyBrightness } from "../../../../game-object/sky-brightness/sky-brightness";
 import SchoolField from "../../../../game-object/stage/shopping-street/shopping-street";
 import type { Stage } from "../../../../game-object/stage/stage";
 import { TurnIndicator } from "../../../../game-object/turn-indicator/turn-indicator";
-import { GenerateBattleViewParams } from "../generate-params";
-
-/** 3Dレイヤーゲームオブジェクト コンストラクタのパラメータ */
-type GenerateTDGameObjectsParams = GenerateBattleViewParams & {
-  /** ゲームオブジェクトアクション */
-  gameObjectAction: Observable<GameObjectAction>;
-};
+import {GenerateTDLayerObjectParams} from "./generate-params";
 
 /** 3Dレイヤーのゲームオブジェクト */
 export class TDGameObjects {
@@ -26,7 +18,7 @@ export class TDGameObjects {
    * コンストラクタ
    * @param params パラメータ
    */
-  constructor(params: GenerateTDGameObjectsParams) {
+  constructor(params: GenerateTDLayerObjectParams) {
     const { resources, gameObjectAction } = params;
     this.stage = new SchoolField(resources);
     this.turnIndicator = new TurnIndicator({

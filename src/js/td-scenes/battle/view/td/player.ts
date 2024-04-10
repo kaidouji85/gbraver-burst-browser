@@ -1,8 +1,6 @@
 import type { PlayerId } from "gbraver-burst-core";
-import { Observable } from "rxjs";
 import * as THREE from "three";
 
-import type { GameObjectAction } from "../../../../game-object/action/game-object-action";
 import {
   enemyBatteryCorrect,
   playerBatteryCorrect,
@@ -55,8 +53,8 @@ import {
   playerReflectIndicator,
 } from "../../../../game-object/reflect-indicator";
 import { ReflectIndicator } from "../../../../game-object/reflect-indicator/reflect-indicator";
-import type { Resources } from "../../../../resource";
 import { GenerateBattleViewParams } from "../generate-params";
+import {GenerateTDLayerObjectParams} from "./generate-params";
 
 /**
  * 3Dレイヤー プレイヤー関係オブジェクト フィールド
@@ -165,17 +163,12 @@ export class TDPlayerImpl implements TDPlayer {
   }
 }
 
-/** プレイヤーオブジェクト生成パラメータ */
-type GenerateTDPlayerParams = GenerateBattleViewParams & {
-  gameObjectAction: Observable<GameObjectAction>;
-};
-
 /**
  * プレイヤー側の3Dプレイヤーオブジェクト
  * @param params プレイヤーオブジェクト生成パラメータ
  * @return 3Dプレイヤーオブジェクト
  */
-export function playerTDObjects(params: GenerateTDPlayerParams): TDPlayer {
+export function playerTDObjects(params: GenerateTDLayerObjectParams): TDPlayer {
   const { resources, player, gameObjectAction } = params;
   return new TDPlayerImpl({
     playerId: player.playerId,
@@ -202,7 +195,7 @@ export function playerTDObjects(params: GenerateTDPlayerParams): TDPlayer {
  * @param params プレイヤーオブジェクト生成パラメータ
  * @return 3Dプレイヤーオブジェクト
  */
-export function enemyTDObject(params: GenerateTDPlayerParams): TDPlayer {
+export function enemyTDObject(params: GenerateTDLayerObjectParams): TDPlayer {
   const { resources, enemy, gameObjectAction } = params;
   return new TDPlayerImpl({
     playerId: enemy.playerId,

@@ -1,8 +1,5 @@
-import { ArmdozerIds, Player } from "gbraver-burst-core";
-import { Observable } from "rxjs";
+import { ArmdozerIds } from "gbraver-burst-core";
 
-import type { GameObjectAction } from "../../../../../game-object/action/game-object-action";
-import type { Resources } from "../../../../../resource";
 import type { TDArmdozerObjects } from "./armdozer-objects";
 import { enemyGenesisBraverTD, playerGenesisBraverTD } from "./genesis-braver";
 import {
@@ -12,59 +9,54 @@ import {
 import { enemyNeoLandozerTD, playerNeoLandozerTD } from "./neo-landozer";
 import { enemyShinBraverTD, playerShinBraverTD } from "./shin-braver";
 import { enemyWingDozerTD, playerWingDozerTD } from "./wing-dozer";
+import { GenerateTDLayerObjectParams } from "../generate-params";
 
 /**
  * プレイヤー側  3Dレイヤー アームドーザ固有オブジェクト
- * @param resources リソース管理オブジェクト
- * @param gameObjectAction ゲームオブジェクトアクション
- * @param state プレイヤーの状態
+ * @param params 生成パラメータ
  * @return 生成結果
  */
 export function playerTDArmdozer(
-  resources: Resources,
-  gameObjectAction: Observable<GameObjectAction>,
-  state: Player,
+  params: GenerateTDLayerObjectParams,
 ): TDArmdozerObjects {
-  switch (state.armdozer.id) {
+  const { player } = params;
+  switch (player.armdozer.id) {
     case ArmdozerIds.SHIN_BRAVER:
-      return playerShinBraverTD(resources, gameObjectAction, state);
+      return playerShinBraverTD(params);
     case ArmdozerIds.LIGHTNING_DOZER:
-      return playerLightningDozerTD(resources, gameObjectAction, state);
+      return playerLightningDozerTD(params);
     case ArmdozerIds.WING_DOZER:
-      return playerWingDozerTD(resources, gameObjectAction, state);
+      return playerWingDozerTD(params);
     case ArmdozerIds.NEO_LANDOZER:
-      return playerNeoLandozerTD(resources, gameObjectAction, state);
+      return playerNeoLandozerTD(params);
     case ArmdozerIds.GENESIS_BRAVER:
-      return playerGenesisBraverTD(resources, gameObjectAction, state);
+      return playerGenesisBraverTD(params);
     default:
-      return playerShinBraverTD(resources, gameObjectAction, state);
+      return playerShinBraverTD(params);
   }
 }
 
 /**
  * 敵側  3Dレイヤー アームドーザ固有オブジェクト
- * @param resources リソース管理オブジェクト
- * @param gameObjectAction ゲームオブジェクトアクション
- * @param state プレイヤーの状態
+ * @param params 生成パラメータ
  * @return 生成結果
  */
 export function enemyTDArmdozer(
-  resources: Resources,
-  gameObjectAction: Observable<GameObjectAction>,
-  state: Player,
+  params: GenerateTDLayerObjectParams,
 ): TDArmdozerObjects {
-  switch (state.armdozer.id) {
+  const { enemy } = params;
+  switch (enemy.armdozer.id) {
     case ArmdozerIds.SHIN_BRAVER:
-      return enemyShinBraverTD(resources, gameObjectAction, state);
+      return enemyShinBraverTD(params);
     case ArmdozerIds.LIGHTNING_DOZER:
-      return enemyLightningDozerTD(resources, gameObjectAction, state);
+      return enemyLightningDozerTD(params);
     case ArmdozerIds.WING_DOZER:
-      return enemyWingDozerTD(resources, gameObjectAction, state);
+      return enemyWingDozerTD(params);
     case ArmdozerIds.NEO_LANDOZER:
-      return enemyNeoLandozerTD(resources, gameObjectAction, state);
+      return enemyNeoLandozerTD(params);
     case ArmdozerIds.GENESIS_BRAVER:
-      return enemyGenesisBraverTD(resources, gameObjectAction, state);
+      return enemyGenesisBraverTD(params);
     default:
-      return enemyShinBraverTD(resources, gameObjectAction, state);
+      return enemyShinBraverTD(params);
   }
 }

@@ -12,6 +12,7 @@ import { GenerateBattleViewParams } from "../generate-params";
 import { enemyTDArmdozer, playerTDArmdozer } from "./armdozer-objects";
 import type { TDArmdozerObjects } from "./armdozer-objects/armdozer-objects";
 import { TDGameObjects } from "./game-objects";
+import { GenerateTDLayerObjectParams } from "./generate-params";
 import type { TDPlayer } from "./player";
 import { enemyTDObject, playerTDObjects } from "./player";
 import { skyBox } from "./sky-box";
@@ -52,9 +53,13 @@ export class ThreeDimensionLayer {
       param.preRender,
       this.#overlap,
     );
+    const generateParams: GenerateTDLayerObjectParams = {
+      ...param,
+      gameObjectAction: this.#gameObjectAction,
+    };
     this.players = [
-      playerTDObjects({ ...param, gameObjectAction: this.#gameObjectAction }),
-      enemyTDObject({ ...param, gameObjectAction: this.#gameObjectAction }),
+      playerTDObjects(generateParams),
+      enemyTDObject(generateParams),
     ];
     this.players
       .map((v) => v.getObject3Ds())
@@ -63,8 +68,8 @@ export class ThreeDimensionLayer {
         this.scene.add(v);
       });
     this.armdozerObjects = [
-      playerTDArmdozer(param.resources, this.#gameObjectAction, param.player),
-      enemyTDArmdozer(param.resources, this.#gameObjectAction, param.enemy),
+      playerTDArmdozer(generateParams),
+      enemyTDArmdozer(generateParams),
     ];
     this.armdozerObjects
       .map((v) => v.getObject3Ds())
@@ -72,10 +77,7 @@ export class ThreeDimensionLayer {
       .forEach((v) => {
         this.scene.add(v);
       });
-    this.gameObjects = new TDGameObjects({
-      ...param,
-      gameObjectAction: this.#gameObjectAction,
-    });
+    this.gameObjects = new TDGameObjects(generateParams);
     this.gameObjects.getObject3Ds().forEach((object) => {
       this.scene.add(object);
     });
