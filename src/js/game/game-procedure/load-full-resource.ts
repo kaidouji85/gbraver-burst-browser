@@ -5,7 +5,7 @@ import {
 } from "../../resource/loading/full-resource-differential-load";
 import { loadingConnector } from "../action-connector/loading-connector";
 import type { GameProps } from "../game-props";
-import { reflectSoundVolume } from "../reflect-sound-volume";
+import { reflectSoundVolume } from "./reflect-sound-volume";
 
 /**
  * フルリソース読み込みを行うヘルパー関数
