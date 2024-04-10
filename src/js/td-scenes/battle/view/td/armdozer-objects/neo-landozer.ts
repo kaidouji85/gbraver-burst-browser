@@ -65,7 +65,7 @@ export function playerNeoLandozerTD(
   state: Player,
 ): NeoLandozerTD {
   return new NeoLandozerTD(state.playerId, {
-    neoLandozer: PlayerNeoLandozer(resources, gameObjectAction),
+    neoLandozer: PlayerNeoLandozer({ resources, gameObjectAction }),
   });
 }
 
@@ -82,6 +82,6 @@ export function enemyNeoLandozerTD(
   state: Player,
 ): NeoLandozerTD {
   return new NeoLandozerTD(state.playerId, {
-    neoLandozer: EnemyNeoLandozer(resources, gameObjectAction),
+    neoLandozer: EnemyNeoLandozer({ resources, gameObjectAction }),
   });
 }
