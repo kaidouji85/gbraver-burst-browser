@@ -13,7 +13,7 @@ export async function onConfigChangeStart(
 ): Promise<void> {
   await props.fader.fadeOut();
   const config = await props.config.load();
-  const scene = new Config(props.resources, config, props.bgm);
+  const scene = new Config(props.resources, config, props.bgm, props.se);
   props.domSceneBinder.bind(scene, configConnector);
   await props.fader.fadeIn();
 }

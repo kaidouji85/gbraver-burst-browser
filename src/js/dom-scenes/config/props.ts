@@ -7,6 +7,7 @@ import type { Resources } from "../../resource";
 import { createEmptySoundResource } from "../../resource/sound/empty-sound-resource";
 import { SOUND_IDS } from "../../resource/sound/ids";
 import { SoundResource } from "../../resource/sound/resource";
+import { SEPlayer } from "../../se/se-player";
 import { domUuid } from "../../uuid/dom-uuid";
 import { ConfigChangedDialog } from "./config-changed-dialog";
 import { ROOT_CLASS } from "./dom/class-name";
@@ -51,6 +52,8 @@ export type ConfigProps = {
 
   /** BGM管理オブジェクト */
   bgm: BGMManager;
+  /** SE再生オブジェクト */
+  se: SEPlayer;
 
   /** 排他制御 */
   exclusive: Exclusive;
@@ -66,12 +69,14 @@ export type ConfigProps = {
  * @param resources リソース管理オブジェクト
  * @param config ブラウザ設定
  * @param bgm BGM管理オブジェクト
+ * @param se SE再生オブジェクト
  * @return 生成した設定画面プロパティ
  */
 export function createConfigProps(
   resources: Resources,
   config: GBraverBurstBrowserConfig,
   bgm: BGMManager,
+  se: SEPlayer,
 ): ConfigProps {
   const ids = {
     battleAnimationTimeScaleSelector: domUuid(),
@@ -117,6 +122,7 @@ export function createConfigProps(
       createEmptySoundResource(),
 
     bgm,
+    se,
 
     exclusive: new Exclusive(),
 

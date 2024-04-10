@@ -18,9 +18,7 @@ export function onSEVolumeChange(
   props.exclusive.execute(async () => {
     const value = parseSoundVolume(props.seVolumeSelector.value) ?? 1;
     props.seVolumeValue.innerText = soundVolumeLabel(value);
-    [props.changeValue, props.pushButton].forEach((s) => {
-      s.sound.volume(s.volumeScale * value);
-    });
-    props.changeValue.sound.play();
+    props.se.volume = value;
+    props.se.play(props.changeValue);
   });
 }

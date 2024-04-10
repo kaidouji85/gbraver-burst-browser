@@ -27,6 +27,7 @@ class SimpleSEPlayer implements SEPlayer {
   /** @override */
   play(sound: SoundResource): void {
     sound.sound.volume(this.volume * sound.volumeScale);
+    sound.sound.play();
   }
 }
 

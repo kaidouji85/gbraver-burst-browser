@@ -8,6 +8,7 @@ import { GameLoop } from "../../game-loop/game-loop";
 import { Renderer } from "../../render";
 import { Resources } from "../../resource";
 import { ResourceRoot } from "../../resource/resource-root";
+import { SEPlayer } from "../../se/se-player";
 import { PerformanceStats } from "../../stats/performance-stats";
 import { PushWindow } from "../../window/push-window";
 import { Resize } from "../../window/resize";
@@ -19,7 +20,6 @@ import { FutureSuddenlyBattleEnd } from "../future-suddenly-battle-end";
 import { InProgress } from "../in-progress/in-progress";
 import { InterruptScenes } from "../innterrupt-scenes";
 import { TDSceneBinder } from "../td-scene-binder";
-import {SEPlayer} from "../../se/se-player";
 
 /**
  * ゲームプロパティ
