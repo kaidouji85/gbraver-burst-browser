@@ -1,14 +1,12 @@
-import type { Player, PlayerId } from "gbraver-burst-core";
-import { Observable } from "rxjs";
+import type { PlayerId } from "gbraver-burst-core";
 import * as THREE from "three";
 
-import type { GameObjectAction } from "../../../../../game-object/action/game-object-action";
 import {
   enemyTsubasaCutIn,
   playerTsubasaCutIn,
 } from "../../../../../game-object/cut-in/tsubasa";
 import { TsubasaCutIn } from "../../../../../game-object/cut-in/tsubasa/tsubasa";
-import type { Resources } from "../../../../../resource";
+import {GenerateHUDLayerObjectParams} from "../generate-params";
 import type { HUDPilotObjects } from "./hud-pilot-objects";
 
 /**
@@ -55,38 +53,30 @@ export class TsubasaHUD implements HUDPilotObjects {
 
 /**
  * プレイヤー側 ツバサHUD
- *
- * @param resources リソース管理オブジェクト
- * @param gameObjectAction ゲームオブジェクトアクション
- * @param state プレイヤーの状態
+ * @param params 生成パラメータ
  * @return ツバサHUD
  */
 export function playerTsubasaHUD(
-  resources: Resources,
-  gameObjectAction: Observable<GameObjectAction>,
-  state: Player,
+  params: GenerateHUDLayerObjectParams
 ): TsubasaHUD {
+  const { resources, player, gameObjectAction } = params;
   return new TsubasaHUD({
-    playerId: state.playerId,
+    playerId: player.playerId,
     cutIn: playerTsubasaCutIn(resources, gameObjectAction),
   });
 }
 
 /**
  * 敵側 ツバサHUD
- *
- * @param resources リソース管理オブジェクト
- * @param gameObjectAction ゲームオブジェクトアクション
- * @param state プレイヤーの状態
+ * @param params 生成パラメータ
  * @return ツバサHUD
  */
 export function enemyTsubasaHUD(
-  resources: Resources,
-  gameObjectAction: Observable<GameObjectAction>,
-  state: Player,
+  params: GenerateHUDLayerObjectParams
 ): TsubasaHUD {
+  const { resources, enemy, gameObjectAction } = params;
   return new TsubasaHUD({
-    playerId: state.playerId,
+    playerId: enemy.playerId,
     cutIn: enemyTsubasaCutIn(resources, gameObjectAction),
   });
 }

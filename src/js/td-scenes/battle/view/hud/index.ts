@@ -13,10 +13,10 @@ import { GenerateBattleViewParams } from "../generate-params";
 import { enemyArmdozerHUD, playerArmdozerHUD } from "./armdozer-objects";
 import type { HUDArmdozerObjects } from "./armdozer-objects/hud-armdozer-ibjects";
 import { HUDGameObjects } from "./game-objects";
+import { GenerateHUDLayerObjectParams } from "./generate-params";
 import { enemyHUDPilotObjects, playerHUDPilotObjects } from "./pilot-objects";
 import type { HUDPilotObjects } from "./pilot-objects/hud-pilot-objects";
 import { enemyHUDObjects, HUDPlayer, playerHUDObjects } from "./player";
-import {GenerateHUDLayerObjectParams} from "./generate-params";
 
 /** コンストラクタのパラメータ */
 type Param = GenerateBattleViewParams & {
@@ -52,12 +52,11 @@ export class HudLayer {
       param.preRender,
       this.#overlap,
     );
-    const generateParams: GenerateHUDLayerObjectParams = {...param, gameObjectAction: this.#gameObjectAction};
-    this.gameObjects = new HUDGameObjects(
-      param.resources,
-      this.#gameObjectAction,
-      param.player,
-    );
+    const generateParams: GenerateHUDLayerObjectParams = {
+      ...param,
+      gameObjectAction: this.#gameObjectAction,
+    };
+    this.gameObjects = new HUDGameObjects(generateParams);
     this.gameObjects.getObject3Ds().forEach((object) => {
       this.scene.add(object);
     });
@@ -82,16 +81,8 @@ export class HudLayer {
         this.scene.add(v);
       });
     this.pilots = [
-      playerHUDPilotObjects(
-        param.resources,
-        this.#gameObjectAction,
-        param.player,
-      ),
-      enemyHUDPilotObjects(
-        param.resources,
-        this.#gameObjectAction,
-        param.enemy,
-      ),
+      playerHUDPilotObjects(generateParams),
+      enemyHUDPilotObjects(generateParams),
     ];
     this.pilots
       .map((v) => v.getObject3Ds())

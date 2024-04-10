@@ -1,15 +1,13 @@
-import type { Player, PlayerId } from "gbraver-burst-core";
-import { Observable } from "rxjs";
+import type { PlayerId } from "gbraver-burst-core";
 import * as THREE from "three";
 
-import type { GameObjectAction } from "../../../../../game-object/action/game-object-action";
 import {
   enemyYuuyaCutIn,
   playerYuuyaCutIn,
 } from "../../../../../game-object/cut-in/yuuya";
 import { YuuyaCutIn } from "../../../../../game-object/cut-in/yuuya/yuuya";
-import type { Resources } from "../../../../../resource";
 import type { HUDPilotObjects } from "./hud-pilot-objects";
+import {GenerateHUDLayerObjectParams} from "../generate-params";
 
 /** コンストラクタのパラメータ */
 type Params = {
@@ -48,36 +46,30 @@ export class YuuyaHUD implements HUDPilotObjects {
 
 /**
  * プレイヤー側 ユウヤHUD
- * @param resources リソース管理オブジェクト
- * @param gameObjectAction ゲームオブジェクトアクション
- * @param state プレイヤーの状態
+ * @param params 生成パラメータ
  * @return ユウヤHUD
  */
 export function playerYuuyaHUD(
-  resources: Resources,
-  gameObjectAction: Observable<GameObjectAction>,
-  state: Player,
+  params: GenerateHUDLayerObjectParams,
 ): YuuyaHUD {
+  const { resources, player, gameObjectAction } = params;
   return new YuuyaHUD({
-    playerId: state.playerId,
+    playerId: player.playerId,
     cutIn: playerYuuyaCutIn(resources, gameObjectAction),
   });
 }
 
 /**
  * 敵側 ユウヤHUD
- * @param resources リソース管理オブジェクト
- * @param gameObjectAction ゲームオブジェクトアクション
- * @param state プレイヤーの状態
+ * @param params 生成パラメータ
  * @return ユウヤHUD
  */
 export function enemyYuuyaHUD(
-  resources: Resources,
-  gameObjectAction: Observable<GameObjectAction>,
-  state: Player,
+  params: GenerateHUDLayerObjectParams
 ): YuuyaHUD {
+  const { resources, enemy, gameObjectAction } = params;
   return new YuuyaHUD({
-    playerId: state.playerId,
+    playerId: enemy.playerId,
     cutIn: enemyYuuyaCutIn(resources, gameObjectAction),
   });
 }

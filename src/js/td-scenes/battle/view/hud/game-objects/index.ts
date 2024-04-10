@@ -1,8 +1,6 @@
-import type { Player } from "gbraver-burst-core";
 import { Observable, Subject, Unsubscribable } from "rxjs";
 import * as THREE from "three";
 
-import type { GameObjectAction } from "../../../../../game-object/action/game-object-action";
 import { BatterySelector } from "../../../../../game-object/battery-selector";
 import { BurstButton } from "../../../../../game-object/burst-button/burst-button";
 import {
@@ -20,8 +18,8 @@ import { PilotButton } from "../../../../../game-object/pilot-button/pilot-butto
 import { drawIndicator } from "../../../../../game-object/result-indicator";
 import { ResultIndicator } from "../../../../../game-object/result-indicator/result-indicator";
 import { TimeScaleButton } from "../../../../../game-object/time-scale-button/time-scale-button";
-import type { Resources } from "../../../../../resource";
 import type { BattleSceneAction } from "../../../actions";
+import { GenerateHUDLayerObjectParams } from "../generate-params";
 import { createBurstButton } from "./burst-button";
 import { createPilotButton } from "./pilot-button";
 
@@ -54,33 +52,19 @@ export class HUDGameObjects {
 
   /**
    * コンストラクタ
-   *
-   * @param resources リソース管理オブジェクト
-   * @param gameObjectAction ゲームオブジェクトアクション
-   * @param playerInfo プレイヤー情報
+   * @param params 生成パラメータ
    */
-  constructor(
-    resources: Resources,
-    gameObjectAction: Observable<GameObjectAction>,
-    playerInfo: Player,
-  ) {
+  constructor(params: GenerateHUDLayerObjectParams) {
+    const { resources, gameObjectAction } = params;
     this.#battleAction = new Subject();
     this.batterySelector = new BatterySelector({
-      gameObjectAction: gameObjectAction,
-      resources: resources,
+      gameObjectAction,
+      resources,
     });
     this.batterySelectorLeadLine = batterySelectorLeadLine(gameObjectAction);
-    this.burstButton = createBurstButton(
-      resources,
-      gameObjectAction,
-      playerInfo.armdozer.id,
-    );
+    this.burstButton = createBurstButton(params);
     this.burstButtonLeadLine = burstButtonLeadLine(gameObjectAction);
-    this.pilotButton = createPilotButton(
-      resources,
-      gameObjectAction,
-      playerInfo.pilot.id,
-    );
+    this.pilotButton = createPilotButton(params);
     this.pilotButtonLeadLine = pilotButtonLeadLine(gameObjectAction);
     this.timeScaleButton = new TimeScaleButton(resources, gameObjectAction);
     this.frontmostFader = frontmostFader({

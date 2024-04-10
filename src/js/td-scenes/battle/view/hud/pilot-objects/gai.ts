@@ -1,14 +1,12 @@
-import type { Player, PlayerId } from "gbraver-burst-core";
-import { Observable } from "rxjs";
+import type { PlayerId } from "gbraver-burst-core";
 import * as THREE from "three";
 
-import type { GameObjectAction } from "../../../../../game-object/action/game-object-action";
 import {
   enemyGaiCutIn,
   playerGaiCutIn,
 } from "../../../../../game-object/cut-in/gai";
 import { GaiCutIn } from "../../../../../game-object/cut-in/gai/gai";
-import type { Resources } from "../../../../../resource";
+import { GenerateHUDLayerObjectParams } from "../generate-params";
 import type { HUDPilotObjects } from "./hud-pilot-objects";
 
 /**
@@ -55,38 +53,26 @@ export class GaiHUD implements HUDPilotObjects {
 
 /**
  * プレイヤー側 ガイHUD
- *
- * @param resources リソース管理オブジェクト
- * @param gameObjectAction ゲームオブジェクトアクション
- * @param state プレイヤーの状態
+ * @param params 生成パラメータ
  * @return ガイHUD
  */
-export function playerGaiHUD(
-  resources: Resources,
-  gameObjectAction: Observable<GameObjectAction>,
-  state: Player,
-): GaiHUD {
+export function playerGaiHUD(params: GenerateHUDLayerObjectParams): GaiHUD {
+  const { resources, player, gameObjectAction } = params;
   return new GaiHUD({
-    playerId: state.playerId,
+    playerId: player.playerId,
     cutIn: playerGaiCutIn(resources, gameObjectAction),
   });
 }
 
 /**
  * 敵側 ガイHUD
- *
- * @param resources リソース管理オブジェクト
- * @param gameObjectAction ゲームオブジェクトアクション
- * @param state プレイヤーの状態
+ * @param params 生成パラメータ
  * @return ガイHUD
  */
-export function enemyGaiHUD(
-  resources: Resources,
-  gameObjectAction: Observable<GameObjectAction>,
-  state: Player,
-): GaiHUD {
+export function enemyGaiHUD(params: GenerateHUDLayerObjectParams): GaiHUD {
+  const { resources, enemy, gameObjectAction } = params;
   return new GaiHUD({
-    playerId: state.playerId,
+    playerId: enemy.playerId,
     cutIn: enemyGaiCutIn(resources, gameObjectAction),
   });
 }
