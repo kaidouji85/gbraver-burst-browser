@@ -13,7 +13,8 @@ export class LightningDozerSounds {
    * @param resources リソース管理オブジェクト
    */
   constructor(resources: Resources) {
-    this.motor = resources.sounds.find((v) => v.id === SOUND_IDS.MOTOR)
-      ?? createEmptySoundResource();
+    this.motor =
+      resources.sounds.find((v) => v.id === SOUND_IDS.MOTOR) ??
+      createEmptySoundResource();
   }
 }

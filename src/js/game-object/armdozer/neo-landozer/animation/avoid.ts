@@ -6,7 +6,7 @@ import { tween } from "../../../../animation/tween";
 import type { NeoLandozerModel } from "../model/neo-landozer-model";
 import type { NeoLandozerSounds } from "../sounds/neo-landozer-sounds";
 
-/** 
+/**
  * 避ける
  * @param model モデル
  * @param sounds 効果音

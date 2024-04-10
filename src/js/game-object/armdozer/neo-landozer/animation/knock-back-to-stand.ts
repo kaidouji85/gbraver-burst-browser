@@ -4,7 +4,7 @@ import { tween } from "../../../../animation/tween";
 import type { NeoLandozerModel } from "../model/neo-landozer-model";
 import type { NeoLandozerSounds } from "../sounds/neo-landozer-sounds";
 
-/** 
+/**
  * ノックバック -> 立ち
  * @param model モデル
  * @param sounds 音

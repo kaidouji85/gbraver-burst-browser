@@ -40,8 +40,9 @@ export class BurstButton {
     gameObjectAction: Observable<GameObjectAction>,
     armdozerIcon: ArmdozerIcon,
   ) {
-    this.#pushButtonSound = resources.sounds.find((v) => v.id === SOUND_IDS.PUSH_BUTTON)
-      ?? createEmptySoundResource();
+    this.#pushButtonSound =
+      resources.sounds.find((v) => v.id === SOUND_IDS.PUSH_BUTTON) ??
+      createEmptySoundResource();
     this.#pushButton = new Subject();
     this.#model = createInitialValue();
     this.#view = new BurstButtonView({

@@ -15,6 +15,6 @@ export class DamageHalvedSounds {
   constructor(resources: Resources) {
     this.benefitEffect =
       resources.sounds.find((v) => v.id === SOUND_IDS.BENEFIT_EFFECT) ??
-      createEmptySoundResource()
+      createEmptySoundResource();
   }
 }

@@ -4,7 +4,7 @@ import { tween } from "../../../../animation/tween";
 import type { ShinBraverModel } from "../model/shin-braver-model";
 import { ShinBraverSounds } from "../sounds/shin-braver-sounds";
 
-/** 
+/**
  * ノックバック -> 立ち
  * @param model モデル
  * @param sounds 音

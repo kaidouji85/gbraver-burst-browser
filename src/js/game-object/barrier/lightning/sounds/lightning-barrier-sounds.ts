@@ -13,7 +13,8 @@ export class LightningBarrierSounds {
    * @param resources リソース管理オブジェクト
    */
   constructor(resources: Resources) {
-    this.lightningBarrier = resources.sounds.find((v) => v.id === SOUND_IDS.LIGHTNING_BARRIER)
-      ?? createEmptySoundResource();
+    this.lightningBarrier =
+      resources.sounds.find((v) => v.id === SOUND_IDS.LIGHTNING_BARRIER) ??
+      createEmptySoundResource();
   }
 }

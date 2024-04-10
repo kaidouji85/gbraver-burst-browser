@@ -164,11 +164,11 @@ export function createTitleProps(params: CreateTitlePropsParams): TitleProps {
     isTitleBackLoaded,
     isHelpIconLoaded,
     pushButton:
-      params.resources.sounds.find((v) => v.id === SOUND_IDS.PUSH_BUTTON)
-        ?? createEmptySoundResource(),
+      params.resources.sounds.find((v) => v.id === SOUND_IDS.PUSH_BUTTON) ??
+      createEmptySoundResource(),
     changeValue:
-      params.resources.sounds.find((v) => v.id === SOUND_IDS.CHANGE_VALUE)
-      ?? createEmptySoundResource(),
+      params.resources.sounds.find((v) => v.id === SOUND_IDS.CHANGE_VALUE) ??
+      createEmptySoundResource(),
     pushLogin: new Subject(),
     pushDeleteAccount: new Subject(),
     pushLogout: new Subject(),

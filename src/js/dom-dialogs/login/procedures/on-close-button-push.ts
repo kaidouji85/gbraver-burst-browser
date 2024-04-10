@@ -13,7 +13,7 @@ export function onCloseButtonPush(
 ): void {
   props.exclusive.execute(async () => {
     action.event.preventDefault();
-    props.changeValue.sound.play()
+    props.changeValue.sound.play();
     await pop(props.closeButton);
     props.closeDialog.next();
   });

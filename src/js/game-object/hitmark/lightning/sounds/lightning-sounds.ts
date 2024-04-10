@@ -13,7 +13,8 @@ export class LightningSounds {
    * @param resources リソース管理オブジェクト
    */
   constructor(resources: Resources) {
-    this.lightning = resources.sounds.find((v) => v.id === SOUND_IDS.LIGHTNING_ATTACK)
-      ?? createEmptySoundResource();
+    this.lightning =
+      resources.sounds.find((v) => v.id === SOUND_IDS.LIGHTNING_ATTACK) ??
+      createEmptySoundResource();
   }
 }

@@ -13,7 +13,8 @@ export class PilotButtonSounds {
    * @param resources リソース管理オブジェクト
    */
   constructor(resources: Resources) {
-    this.pushButton = resources.sounds.find((v) => v.id === SOUND_IDS.PUSH_BUTTON)
-      ?? createEmptySoundResource();
+    this.pushButton =
+      resources.sounds.find((v) => v.id === SOUND_IDS.PUSH_BUTTON) ??
+      createEmptySoundResource();
   }
 }

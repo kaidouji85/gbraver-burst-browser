@@ -44,7 +44,7 @@ export function createNPCEndingProps(
     resources.paths.find((v) => v.id === PathIds.LOGO)?.path ?? "";
   const pushButtonSound =
     resources.sounds.find((v) => v.id === SOUND_IDS.PUSH_BUTTON) ??
-    createEmptySoundResource()
+    createEmptySoundResource();
   const endingBGM =
     resources.sounds.find((v) => v.id === SOUND_IDS.NPC_ENDING) ??
     createEmptySoundResource();

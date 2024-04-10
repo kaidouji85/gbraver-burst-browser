@@ -116,7 +116,7 @@ export class NetworkErrorDialog implements DOMDialog {
     this.#exclusive = new Exclusive();
     this.#pushButton =
       resources.sounds.find((v) => v.id === SOUND_IDS.PUSH_BUTTON) ??
-      createEmptySoundResource()
+      createEmptySoundResource();
   }
 
   /**

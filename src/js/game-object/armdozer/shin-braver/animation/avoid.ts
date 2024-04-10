@@ -6,7 +6,7 @@ import { tween } from "../../../../animation/tween";
 import type { ShinBraverModel } from "../model/shin-braver-model";
 import { ShinBraverSounds } from "../sounds/shin-braver-sounds";
 
-/** 
+/**
  * 避ける
  * @param model モデル
  * @param sounds 音

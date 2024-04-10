@@ -5,7 +5,7 @@ import { ARMDOZER_SPRITE_STANDARD_Z } from "../../position";
 import type { ShinBraverModel } from "../model/shin-braver-model";
 import { ShinBraverSounds } from "../sounds/shin-braver-sounds";
 
-/** 
+/**
  * ストレートパンチ -> 立ち
  * @param model シンブレイバーモデル
  * @param sounds シンブレイバーサウンド

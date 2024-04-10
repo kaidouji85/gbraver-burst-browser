@@ -39,8 +39,9 @@ export class ShockWave {
   ) {
     this.#model = initialModel;
     this.#view = view;
-    this.#hitSound = resources.sounds.find((v) => v.id === SOUND_IDS.MECHA_IMPACT)
-      ?? createEmptySoundResource();
+    this.#hitSound =
+      resources.sounds.find((v) => v.id === SOUND_IDS.MECHA_IMPACT) ??
+      createEmptySoundResource();
     this.#unsubscriber = gameObjectAction.subscribe((action) => {
       if (action.type === "Update") {
         this.#onUpdate();
