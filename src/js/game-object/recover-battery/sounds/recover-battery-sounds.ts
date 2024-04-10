@@ -4,7 +4,7 @@ import { SOUND_IDS } from "../../../resource/sound/ids";
 import { SoundResource } from "../../../resource/sound/resource";
 
 /** バッテリー回復 効果音 */
-export default class RecoverBatterySounds {
+export class RecoverBatterySounds {
   /** バッテリー回復音 */
   recoverBattery: SoundResource;
 

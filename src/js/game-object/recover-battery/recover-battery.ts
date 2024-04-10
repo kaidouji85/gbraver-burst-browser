@@ -8,7 +8,7 @@ import type { GameObjectAction } from "../action/game-object-action";
 import { hidden, popUp, show } from "./animation/pop-up";
 import { createInitialValue } from "./model/initial-value";
 import type { RecoverBatteryModel } from "./model/recover-battery-model";
-import RecoverBatterySounds from "./sounds/recover-battery-sounds";
+import { RecoverBatterySounds } from "./sounds/recover-battery-sounds";
 import type { RecoverBatteryView } from "./view/recover-battery-view";
 
 /**
