@@ -1,5 +1,5 @@
 import type { GameProps } from "../game-props";
-import { reflectSoundVolume } from "../reflect-sound-volume";
+import { reflectSoundVolume } from "./reflect-sound-volume";
 import { startTitle } from "./start-title";
 
 /**

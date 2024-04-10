@@ -5,9 +5,9 @@ import { loadServiceWorker } from "../../service-worker/load-service-worker";
 import { waitTime } from "../../wait/wait-time";
 import { mailVerifiedIncompleteConnector } from "../action-connector/mail-verified-incomplete-connector";
 import type { GameProps } from "../game-props";
-import { reflectSoundVolume } from "../reflect-sound-volume";
 import { playTitleBGM } from "./play-title-bgm";
 import { reflectPerformanceStatsVisibility } from "./reflect-performance-stats-visibility";
+import { reflectSoundVolume } from "./reflect-sound-volume";
 import { startTitle } from "./start-title";
 
 /**
