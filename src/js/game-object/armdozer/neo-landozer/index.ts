@@ -6,32 +6,36 @@ import { NeoLandozer } from "./neo-landozer";
 import { EnemyNeoLandozerView } from "./view/enemy-neo-landozer-view";
 import { PlayerNeoLandozerView } from "./view/player-neo-landozer-view";
 
+/** ネオランドーザ生成関数パラメータ */
+type GenerateNeoLandozerParams = {
+  /** リソース管理オブジェクト */
+  resources: Resources;
+  /** ゲームオブジェクトアクション */
+  gameObjectAction: Observable<GameObjectAction>;
+};
+
 /**
  * プレイヤー側ネオランドーザ
- *
- * @param resources リソース管理オブジェクト
- * @param gameObjectAction ゲームオブジェクトアクション
+ * @param params 生成パラメータ
  * @return ネオランドーザ
  */
 export function PlayerNeoLandozer(
-  resources: Resources,
-  gameObjectAction: Observable<GameObjectAction>,
+  params: GenerateNeoLandozerParams,
 ): NeoLandozer {
+  const { resources, gameObjectAction } = params;
   const view = new PlayerNeoLandozerView(resources);
   return new NeoLandozer(view, resources, gameObjectAction);
 }
 
 /**
  * 敵側ネオランドーザ
- *
- * @param resources リソース管理オブジェクト
- * @param gameObjectAction ゲームオブジェクトアクション
+ * @param params 生成パラメータ
  * @return ネオランドーザ
  */
 export function EnemyNeoLandozer(
-  resources: Resources,
-  gameObjectAction: Observable<GameObjectAction>,
+  params: GenerateNeoLandozerParams,
 ): NeoLandozer {
+  const { resources, gameObjectAction } = params;
   const view = new EnemyNeoLandozerView(resources);
   return new NeoLandozer(view, resources, gameObjectAction);
 }

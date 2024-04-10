@@ -67,7 +67,7 @@ export function playerGenesisBraverTD(
   state: Player,
 ): GenesisBraverTD {
   return new GenesisBraverTD(state.playerId, {
-    genesisBraver: PlayerGenesisBraver(resources, gameObjectAction),
+    genesisBraver: PlayerGenesisBraver({ resources, gameObjectAction }),
   });
 }
 
@@ -84,6 +84,6 @@ export function enemyGenesisBraverTD(
   state: Player,
 ): GenesisBraverTD {
   return new GenesisBraverTD(state.playerId, {
-    genesisBraver: EnemyGenesisBraver(resources, gameObjectAction),
+    genesisBraver: EnemyGenesisBraver({ resources, gameObjectAction }),
   });
 }

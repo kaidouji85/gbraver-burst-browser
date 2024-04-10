@@ -65,7 +65,7 @@ export function playerWingDozerTD(
   state: Player,
 ): WingDozerTD {
   return new WingDozerTD(state.playerId, {
-    wingDozer: PlayerWingDozer(resources, gameObjectAction),
+    wingDozer: PlayerWingDozer({ resources, gameObjectAction }),
   });
 }
 
@@ -82,6 +82,6 @@ export function enemyWingDozerTD(
   state: Player,
 ): WingDozerTD {
   return new WingDozerTD(state.playerId, {
-    wingDozer: EnemyWingDozer(resources, gameObjectAction),
+    wingDozer: EnemyWingDozer({ resources, gameObjectAction }),
   });
 }

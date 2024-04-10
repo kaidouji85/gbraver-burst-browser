@@ -6,32 +6,36 @@ import { ShinBraver } from "./shin-braver";
 import { EnemyShinBraverView } from "./view/enemy-shin-braver-view";
 import { PlayerShinBraverView } from "./view/player-shin-braver-view";
 
+/** シンブレイバー生成関数パラメータ */
+type GenerateShinBraverParams = {
+  /** リソース管理オブジェクト */
+  resources: Resources;
+  /** ゲームオブジェクトアクション */
+  gameObjectAction: Observable<GameObjectAction>;
+};
+
 /**
  * プレイヤー側シンブレイバー
- *
- * @param resources リソース管理オブジェクト
- * @param gameObjectAction ゲームオブジェクトアクション
+ * @param params 生成パラメータ
  * @return シンブレイバー
  */
 export function PlayerShinBraver(
-  resources: Resources,
-  gameObjectAction: Observable<GameObjectAction>,
+  params: GenerateShinBraverParams
 ): ShinBraver {
+  const { resources, gameObjectAction } = params;
   const view = new PlayerShinBraverView(resources);
   return new ShinBraver(view, resources, gameObjectAction);
 }
 
 /**
  * 敵側シンブレイバー
- *
- * @param resources リソース管理オブジェクト
- * @param gameObjectAction ゲームオブジェクトアクション
+ * @param params 生成パラメータ
  * @return シンブレイバー
  */
 export function EnemyShinBraver(
-  resources: Resources,
-  gameObjectAction: Observable<GameObjectAction>,
+  params: GenerateShinBraverParams
 ): ShinBraver {
+  const { resources, gameObjectAction } = params;
   const view = new EnemyShinBraverView(resources);
   return new ShinBraver(view, resources, gameObjectAction);
 }
