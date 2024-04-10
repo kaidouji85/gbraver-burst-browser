@@ -41,7 +41,7 @@ export function show(model: TsubasaModel, sounds: TsubasaSounds): Animate {
     )
     .chain(
       onStart(() => {
-        sounds.benefitEffect.play();
+        sounds.benefitEffect.sound.play();
       }),
     );
 }
