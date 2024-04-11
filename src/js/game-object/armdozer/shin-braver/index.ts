@@ -20,9 +20,9 @@ type GenerateShinBraverParams = {
  * @return シンブレイバー
  */
 export function PlayerShinBraver(params: GenerateShinBraverParams): ShinBraver {
-  const { resources, gameObjectAction } = params;
+  const { resources } = params;
   const view = new PlayerShinBraverView(resources);
-  return new ShinBraver(view, resources, gameObjectAction);
+  return new ShinBraver({ ...params, view });
 }
 
 /**
@@ -31,7 +31,7 @@ export function PlayerShinBraver(params: GenerateShinBraverParams): ShinBraver {
  * @return シンブレイバー
  */
 export function EnemyShinBraver(params: GenerateShinBraverParams): ShinBraver {
-  const { resources, gameObjectAction } = params;
+  const { resources } = params;
   const view = new EnemyShinBraverView(resources);
-  return new ShinBraver(view, resources, gameObjectAction);
+  return new ShinBraver({ ...params, view });
 }
