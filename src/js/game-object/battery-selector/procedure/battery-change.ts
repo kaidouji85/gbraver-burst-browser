@@ -3,7 +3,7 @@ import { Animate } from "../../../animation/animate";
 import { onStart } from "../../../animation/on-start";
 import { changeNeedle } from "../animation/change-needle";
 import { getNeedleValue } from "../model/needle-value";
-import { BatterySelectorProps } from "../props";
+import { BatterySelectorProps } from "../props/battery-selector-props";
 
 /**
  * バッテリー値を変更するヘルパー関数

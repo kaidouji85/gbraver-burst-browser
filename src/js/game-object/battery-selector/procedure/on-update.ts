@@ -1,5 +1,5 @@
 import { Update } from "../../../game-loop/update";
-import { BatterySelectorProps } from "../props";
+import { BatterySelectorProps } from "../props/battery-selector-props";
 
 /**
  * Update時の処理

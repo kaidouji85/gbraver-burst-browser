@@ -1,5 +1,5 @@
 import { canBatteryMinus } from "../model/can-battery-minus";
-import { BatterySelectorProps } from "../props";
+import { BatterySelectorProps } from "../props/battery-selector-props";
 
 /**
  * バッテリーマイナスボタン押下時の処理

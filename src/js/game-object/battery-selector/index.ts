@@ -2,8 +2,6 @@ import { Observable, Unsubscribable } from "rxjs";
 import * as THREE from "three";
 
 import { Animate } from "../../animation/animate";
-import type { Resources } from "../../resource";
-import type { GameObjectAction } from "../action/game-object-action";
 import { close } from "./animation/close";
 import { decide } from "./animation/decide";
 import { open } from "./animation/open";
@@ -12,15 +10,14 @@ import { batteryMinus } from "./procedure/battery-minus";
 import { batteryPlus } from "./procedure/battery-plus";
 import { bindEventListeners } from "./procedure/bind-event-listeners";
 import { toBatterySilently } from "./procedure/to-battery-silently";
-import { BatterySelectorProps, createBatterySelectorProps } from "./props";
+import { BatterySelectorProps } from "./props/battery-selector-props";
+import {
+  createBatterySelectorProps,
+  GenerateBatterySelectorPropsParam,
+} from "./props/create-battery-selector-props";
 
 /** コンストラクタのパラメータ */
-type Param = {
-  /** リソース管理オブジェクト */
-  resources: Resources;
-  /** ゲームオブジェクトアクション */
-  gameObjectAction: Observable<GameObjectAction>;
-};
+type Param = GenerateBatterySelectorPropsParam;
 
 /** バッテリーセレクタ */
 export class BatterySelector {
