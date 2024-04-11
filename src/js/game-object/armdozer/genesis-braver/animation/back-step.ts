@@ -3,19 +3,15 @@ import { Animate } from "../../../../animation/animate";
 import { delay } from "../../../../animation/delay";
 import { onStart } from "../../../../animation/on-start";
 import { tween } from "../../../../animation/tween";
-import { GenesisBraverModel } from "../model/genesis-braver-model";
-import { GenesisBraverSounds } from "../sounds/genesis-braver-sounds";
+import { GenesisBraverAnimationProps } from "./animation-props";
 
 /**
  * バックステップ
- * @param model モデル
- * @param sounds 効果音
+ * @param props アニメーションプロパティ
  * @return アニメーション
  */
-export function backStep(
-  model: GenesisBraverModel,
-  sounds: GenesisBraverSounds,
-): Animate {
+export function backStep(props: GenesisBraverAnimationProps): Animate {
+  const { model, sounds } = props;
   return onStart(() => {
     model.animation.type = "BACK_STEP";
     model.animation.frame = 0;

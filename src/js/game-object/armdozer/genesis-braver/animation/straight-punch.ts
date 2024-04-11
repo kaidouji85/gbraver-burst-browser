@@ -1,14 +1,15 @@
 import { Animate } from "../../../../animation/animate";
 import { onStart } from "../../../../animation/on-start";
 import { tween } from "../../../../animation/tween";
-import type { GenesisBraverModel } from "../model/genesis-braver-model";
+import { GenesisBraverAnimationProps } from "./animation-props";
 
 /**
  * ストレートパンチ
- * @param model モデル
+ * @param props アニメーションプロパティ
  * @return アニメーション
  */
-export function straightPunch(model: GenesisBraverModel): Animate {
+export function straightPunch(props: GenesisBraverAnimationProps): Animate {
+  const { model } = props;
   return onStart(() => {
     model.animation.type = "SP_ATTACK";
     model.animation.frame = 0;
