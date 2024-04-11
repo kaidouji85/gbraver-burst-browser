@@ -1,19 +1,15 @@
 import { Animate } from "../../../../animation/animate";
 import { onStart } from "../../../../animation/on-start";
 import { tween } from "../../../../animation/tween";
-import type { LightningDozerModel } from "../model/lightning-dozer-model";
-import { LightningDozerSounds } from "../sounds/lightning-dozer-sounds";
+import { LightningDozerAnimationProps } from "./animation-props";
 
 /**
  * ノックバック -> 立ち
- * @param model モデル
- * @param sounds 音
+ * @param props アニメーションプロパティ
  * @return アニメーション
  */
-export function knockBackToStand(
-  model: LightningDozerModel,
-  sounds: LightningDozerSounds,
-): Animate {
+export function knockBackToStand(props: LightningDozerAnimationProps): Animate {
+  const { model, sounds } = props;
   return onStart(() => {
     model.animation.type = "KNOCK_BACK";
     model.animation.frame = 1;
