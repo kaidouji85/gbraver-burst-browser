@@ -1,19 +1,15 @@
 import { Animate } from "../../../../animation/animate";
 import { onStart } from "../../../../animation/on-start";
 import { tween } from "../../../../animation/tween";
-import { ShinBraverModel } from "../model/shin-braver-model";
-import { ShinBraverSounds } from "../sounds/shin-braver-sounds";
+import { ShinBraverAnimationProps } from "./animation-props";
 
 /**
  * 気をつけ
- * @param model シンブレイバーモデル
- * @param sounds シンブレイバーサウンド
+ * @param props アニメーションプロパティ
  * @return アニメーション
  */
-export function upright(
-  model: ShinBraverModel,
-  sounds: ShinBraverSounds,
-): Animate {
+export function upright(props: ShinBraverAnimationProps): Animate {
+  const { model, sounds } = props;
   return onStart(() => {
     model.animation.type = "UPRIGHT";
     model.animation.frame = 0;

@@ -4,15 +4,15 @@ import { Animate } from "../../../../animation/animate";
 import { delay } from "../../../../animation/delay";
 import { onStart } from "../../../../animation/on-start";
 import { tween } from "../../../../animation/tween";
-import type { ShinBraverModel } from "../model/shin-braver-model";
+import { ShinBraverAnimationProps } from "./animation-props";
 
 /**
  * ダウン
- *
- * @param model シンブレイバーモデル
+ * @param props アニメーションプロパティ
  * @return アニメーション
  */
-export function down(model: ShinBraverModel): Animate {
+export function down(props: ShinBraverAnimationProps): Animate {
+  const { model } = props;
   return onStart(() => {
     model.animation.type = "KNOCK_BACK";
     model.animation.frame = 1;
