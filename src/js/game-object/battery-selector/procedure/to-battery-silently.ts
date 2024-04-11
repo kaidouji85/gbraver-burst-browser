@@ -26,11 +26,11 @@ async function plusButton(props: BatterySelectorProps): Promise<void> {
  * @return 処理が完了したら発火するPromise
  */
 async function minusButton(props: BatterySelectorProps): Promise<void> {
-  const { batteryPlusTween, model } = props;
-  batteryPlusTween.update();
-  batteryPlusTween.removeAll();
+  const { batteryMinusTween, model } = props;
+  batteryMinusTween.update();
+  batteryMinusTween.removeAll();
   await all(
-    silentlyBatteryMinusPop(props, batteryPlusTween),
+    silentlyBatteryMinusPop(props, batteryMinusTween),
     batteryChange(props, model.battery - 1),
   ).play();
 }
