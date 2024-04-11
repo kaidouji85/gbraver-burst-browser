@@ -20,9 +20,9 @@ type GenerateWingDozerParams = {
  * @return 生成結果
  */
 export function PlayerWingDozer(params: GenerateWingDozerParams): WingDozer {
-  const { resources, gameObjectAction } = params;
+  const { resources } = params;
   const view = new PlayerWingDozerView(resources);
-  return new WingDozer(view, resources, gameObjectAction);
+  return new WingDozer({ ...params, view });
 }
 
 /**
@@ -31,7 +31,7 @@ export function PlayerWingDozer(params: GenerateWingDozerParams): WingDozer {
  * @return 生成結果
  */
 export function EnemyWingDozer(params: GenerateWingDozerParams): WingDozer {
-  const { resources, gameObjectAction } = params;
+  const { resources } = params;
   const view = new EnemyWingDozerView(resources);
-  return new WingDozer(view, resources, gameObjectAction);
+  return new WingDozer({ ...params, view });
 }

@@ -1,19 +1,15 @@
 import { Animate } from "../../../../animation/animate";
 import { onStart } from "../../../../animation/on-start";
 import { tween } from "../../../../animation/tween";
-import { WingDozerModel } from "../model/wing-dozer-model";
-import { WingDozerSounds } from "../sounds/wing-dozer-sounds";
+import { WingDozerAnimationProps } from "./animation-props";
 
 /**
  * 礼（倒れる）
- * @param model ウィングドーザモデル
- * @param sounds ウィングドーザサウンド
+ * @param props アニメーションプロパティ
  * @return アニメーション
  */
-export function bowDown(
-  model: WingDozerModel,
-  sounds: WingDozerSounds,
-): Animate {
+export function bowDown(props: WingDozerAnimationProps): Animate {
+  const { model, sounds } = props;
   return onStart(() => {
     model.animation.type = "BOW";
     model.animation.frame = 0;
