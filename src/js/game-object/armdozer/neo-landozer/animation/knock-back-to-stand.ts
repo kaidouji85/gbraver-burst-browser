@@ -1,19 +1,17 @@
 import { Animate } from "../../../../animation/animate";
 import { onStart } from "../../../../animation/on-start";
 import { tween } from "../../../../animation/tween";
-import type { NeoLandozerModel } from "../model/neo-landozer-model";
-import type { NeoLandozerSounds } from "../sounds/neo-landozer-sounds";
+import { NeoLandozerAnimationProps } from "./animation-props";
 
 /**
  * ノックバック -> 立ち
- * @param model モデル
- * @param sounds 音
+ * @param props アニメーションプロパティ
  * @return アニメーション
  */
 export function knockBackToStand(
-  model: NeoLandozerModel,
-  sounds: NeoLandozerSounds,
+  props: NeoLandozerAnimationProps
 ): Animate {
+  const { model, sounds } = props;
   return onStart(() => {
     model.animation.frame = 1;
     model.animation.type = "KNOCK_BACK";

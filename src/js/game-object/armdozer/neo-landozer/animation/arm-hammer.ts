@@ -1,10 +1,15 @@
 import { Animate } from "../../../../animation/animate";
 import { onStart } from "../../../../animation/on-start";
 import { tween } from "../../../../animation/tween";
-import type { NeoLandozerModel } from "../model/neo-landozer-model";
+import { NeoLandozerAnimationProps } from "./animation-props";
 
-/** アームハンマー */
-export function armHammer(model: NeoLandozerModel): Animate {
+/** 
+ * アームハンマー
+ * @param props アニメーションプロパティ
+ * @return アニメーション
+ */
+export function armHammer(props: NeoLandozerAnimationProps): Animate {
+  const { model } = props;
   return onStart(() => {
     model.animation.type = "HM_ATTACK";
     model.animation.frame = 0;

@@ -2,10 +2,15 @@ import { all } from "../../../../animation/all";
 import { Animate } from "../../../../animation/animate";
 import { onStart } from "../../../../animation/on-start";
 import { tween } from "../../../../animation/tween";
-import type { NeoLandozerModel } from "../model/neo-landozer-model";
+import { NeoLandozerAnimationProps } from "./animation-props";
 
-/** ガード */
-export function guard(model: NeoLandozerModel): Animate {
+/** 
+ * ガード
+ * @param props アニメーションプロパティ
+ * @return アニメーション
+ */
+export function guard(props: NeoLandozerAnimationProps): Animate {
+  const { model } = props;
   const motion = onStart(() => {
     model.animation.frame = 1;
     model.animation.type = "GUARD";

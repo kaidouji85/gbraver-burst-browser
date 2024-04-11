@@ -2,19 +2,17 @@ import { Animate } from "../../../../animation/animate";
 import { onStart } from "../../../../animation/on-start";
 import { tween } from "../../../../animation/tween";
 import { ARMDOZER_SPRITE_ATTACKER_Z } from "../../position";
-import type { NeoLandozerModel } from "../model/neo-landozer-model";
-import { NeoLandozerSounds } from "../sounds/neo-landozer-sounds";
+import { NeoLandozerAnimationProps } from "./animation-props";
 
 /**
  * チャージ
- * @param model モデル
- * @param sounds 音
+ * @param props アニメーションプロパティ
  * @return アニメーション
  */
 export function charge(
-  model: NeoLandozerModel,
-  sounds: NeoLandozerSounds,
+  props: NeoLandozerAnimationProps
 ): Animate {
+  const { model, sounds } = props;
   return onStart(() => {
     model.animation.type = "HM_CHARGE";
     model.animation.frame = 0;

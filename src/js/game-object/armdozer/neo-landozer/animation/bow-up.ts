@@ -1,19 +1,17 @@
 import { Animate } from "../../../../animation/animate";
 import { onStart } from "../../../../animation/on-start";
 import { tween } from "../../../../animation/tween";
-import { NeoLandozerModel } from "../model/neo-landozer-model";
-import { NeoLandozerSounds } from "../sounds/neo-landozer-sounds";
+import { NeoLandozerAnimationProps } from "./animation-props";
 
 /**
  * 礼（起き上がる）
- * @param model ネオランドーザモデル
- * @param sounds ネオランドーザサウンド
+ * @param props アニメーションプロパティ
  * @return アニメーション
  */
 export function bowUp(
-  model: NeoLandozerModel,
-  sounds: NeoLandozerSounds,
+  props: NeoLandozerAnimationProps
 ): Animate {
+  const { model, sounds } = props;
   return onStart(() => {
     model.animation.type = "BOW";
     model.animation.frame = 1;
