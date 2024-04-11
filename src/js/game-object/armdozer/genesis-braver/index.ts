@@ -22,9 +22,9 @@ type GenerateGenesisBraverParams = {
 export function PlayerGenesisBraver(
   params: GenerateGenesisBraverParams,
 ): GenesisBraver {
-  const { resources, gameObjectAction } = params;
+  const { resources } = params;
   const view = new PlayerGenesisBraverView(resources);
-  return new GenesisBraver(view, resources, gameObjectAction);
+  return new GenesisBraver({ ...params, view });
 }
 
 /**
@@ -35,7 +35,7 @@ export function PlayerGenesisBraver(
 export function EnemyGenesisBraver(
   params: GenerateGenesisBraverParams,
 ): GenesisBraver {
-  const { resources, gameObjectAction } = params;
+  const { resources } = params;
   const view = new EnemyGenesisBraverView(resources);
-  return new GenesisBraver(view, resources, gameObjectAction);
+  return new GenesisBraver({ ...params, view });
 }

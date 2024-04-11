@@ -2,7 +2,6 @@ import { Observable, Unsubscribable } from "rxjs";
 import * as THREE from "three";
 
 import { Animate } from "../../../animation/animate";
-import { Resources } from "../../../resource";
 import { GameObjectAction } from "../../action/game-object-action";
 import { ArmdozerSprite } from "../armdozer-sprite";
 import { EmptyArmdozerSprite } from "../empty-armdozer-sprite";
@@ -25,9 +24,13 @@ import { straightPunch } from "./animation/straight-punch";
 import { upright } from "./animation/upright";
 import { uprightToStand } from "./animation/upright-to-stand";
 import { bindEventListeners } from "./procedure/bind-event-listeners";
-import { createGenesisBraverProps } from "./props/create-genesis-braver-props";
+import { createGenesisBraverProps,GenerateGenesisBraverPropsParams } from "./props/create-genesis-braver-props";
 import { GenesisBraverProps } from "./props/genesis-braver-props";
-import { GenesisBraverView } from "./view/genesis-braver-view";
+
+/** コンストラクタのパラメータ */
+type Params = GenerateGenesisBraverPropsParams & {
+  gameObjectAction: Observable<GameObjectAction>;
+}
 
 /** ジェネシスブレイバースプライト */
 export class GenesisBraver
@@ -41,17 +44,12 @@ export class GenesisBraver
 
   /**
    * コンストラクタ
-   * @param view ビュー
-   * @param resources リソース管理オブジェクト
-   * @param gameAction ゲームアクション
+   * @param params パラメータ
    */
-  constructor(
-    view: GenesisBraverView,
-    resources: Resources,
-    gameObjectAction: Observable<GameObjectAction>,
-  ) {
+  constructor(params: Params) {
     super();
-    this.#props = createGenesisBraverProps({view, resources});
+    const { gameObjectAction } = params;
+    this.#props = createGenesisBraverProps(params);
     this.#unsubscribers = bindEventListeners({ gameObjectAction, props: this.#props });
   }
 

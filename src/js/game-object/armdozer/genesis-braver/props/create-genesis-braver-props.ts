@@ -5,7 +5,7 @@ import { GenesisBraverView } from "../view/genesis-braver-view";
 import { GenesisBraverProps } from "./genesis-braver-props";
 
 /** GenesisBraverProps生成パラメータ */
-type GenerateGenesisBraverParams = {
+export type GenerateGenesisBraverPropsParams = {
   /** ビュー */
   view: GenesisBraverView;
   /** リソース管理オブジェクト */
@@ -17,7 +17,9 @@ type GenerateGenesisBraverParams = {
  * @param params 生成パラメータ
  * @return 生成結果
  */
-export function createGenesisBraverProps(params: GenerateGenesisBraverParams): GenesisBraverProps {
+export function createGenesisBraverProps(
+  params: GenerateGenesisBraverPropsParams,
+): GenesisBraverProps {
   const { resources, view } = params;
   return {
     view,
