@@ -22,6 +22,6 @@ export function batteryChange(
     onStart(() => {
       props.model.battery = battery;
     }),
-    changeNeedle(props.model, props.batteryChangeTween, needle),
+    changeNeedle(props, props.batteryChangeTween, needle),
   );
 }
