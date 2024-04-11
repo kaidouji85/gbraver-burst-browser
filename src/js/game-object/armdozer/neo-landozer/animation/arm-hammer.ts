@@ -3,7 +3,7 @@ import { onStart } from "../../../../animation/on-start";
 import { tween } from "../../../../animation/tween";
 import { NeoLandozerAnimationProps } from "./animation-props";
 
-/** 
+/**
  * アームハンマー
  * @param props アニメーションプロパティ
  * @return アニメーション

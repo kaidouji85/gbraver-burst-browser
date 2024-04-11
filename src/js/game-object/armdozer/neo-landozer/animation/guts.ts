@@ -9,9 +9,7 @@ import { NeoLandozerAnimationProps } from "./animation-props";
  * @param props アニメーションプロパティ
  * @return アニメーション
  */
-export function guts(
-  props: NeoLandozerAnimationProps
-): Animate {
+export function guts(props: NeoLandozerAnimationProps): Animate {
   const { model, sounds } = props;
   return onStart(() => {
     model.animation.type = "GUTS_UP";

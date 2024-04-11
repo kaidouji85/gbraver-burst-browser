@@ -8,9 +8,7 @@ import { NeoLandozerAnimationProps } from "./animation-props";
  * @param props アニメーションプロパティ
  * @return アニメーション
  */
-export function guardToStand(
-  props: NeoLandozerAnimationProps
-): Animate {
+export function guardToStand(props: NeoLandozerAnimationProps): Animate {
   const { model, sounds } = props;
   return onStart(() => {
     model.animation.frame = 1;

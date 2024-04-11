@@ -10,9 +10,7 @@ import { NeoLandozerAnimationProps } from "./animation-props";
  * @param props アニメーションプロパティ
  * @return アニメーション
  */
-export function avoid(
-  props: NeoLandozerAnimationProps
-): Animate {
+export function avoid(props: NeoLandozerAnimationProps): Animate {
   const { model, sounds } = props;
   return onStart(() => {
     model.animation.type = "BACK_STEP";

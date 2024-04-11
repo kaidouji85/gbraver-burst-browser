@@ -9,9 +9,7 @@ import { NeoLandozerAnimationProps } from "./animation-props";
  * @param props アニメーションプロパティ
  * @return アニメーション
  */
-export function hmToStand(
-  props: NeoLandozerAnimationProps
-): Animate {
+export function hmToStand(props: NeoLandozerAnimationProps): Animate {
   const { model, sounds } = props;
   return onStart(() => {
     model.animation.type = "HM_TO_STAND";

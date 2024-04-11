@@ -8,10 +8,10 @@ import { onUpdate } from "./on-update";
 /** パラメータ */
 type Params = {
   /** ゲームオブジェクトプロパティ */
-  props: NeoLandozerProps,
+  props: NeoLandozerProps;
   /** ゲームオブジェクトアクション */
-  gameObjectAction: Observable<GameObjectAction>,
-}
+  gameObjectAction: Observable<GameObjectAction>;
+};
 
 /**
  * イベントリスナーを登録する
@@ -28,5 +28,5 @@ export function bindEventListeners(params: Params): Unsubscribable[] {
         onPreRender(props, action);
       }
     }),
-  ]
+  ];
 }

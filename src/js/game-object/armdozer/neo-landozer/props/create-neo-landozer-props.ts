@@ -17,7 +17,9 @@ export type GenerateNeoLandozerPropsParams = {
  * @param params 生成パラメータ
  * @return 生成結果
  */
-export function createNeoLandozerProps(params: GenerateNeoLandozerPropsParams): NeoLandozerProps {
+export function createNeoLandozerProps(
+  params: GenerateNeoLandozerPropsParams,
+): NeoLandozerProps {
   const { resources, view } = params;
   return {
     view,
