@@ -1,15 +1,15 @@
 import { Animate } from "../../../animation/animate";
 import { onStart } from "../../../animation/on-start";
 import { tween } from "../../../animation/tween";
-import type { BatterySelectorModel } from "../model";
+import { BatterySelectorAnimationProps } from "./animation-props";
 
 /**
  * バッテリーセレクタを閉じる
- *
- * @param model モデル
+ * @param props アニメーションプロパティ
  * @return アニメーション
  */
-export function close(model: BatterySelectorModel): Animate {
+export function close(props: BatterySelectorAnimationProps): Animate {
+  const { model } = props;
   return onStart(() => {
     model.isPushNotifierDisabled = true;
     model.opacity = 1;
