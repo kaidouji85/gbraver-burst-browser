@@ -3,19 +3,17 @@ import { Animate } from "../../../../animation/animate";
 import { onStart } from "../../../../animation/on-start";
 import { tween } from "../../../../animation/tween";
 import { ARMDOZER_SPRITE_STANDARD_Z } from "../../position";
-import type { LightningDozerModel } from "../model/lightning-dozer-model";
-import { LightningDozerSounds } from "../sounds/lightning-dozer-sounds";
+import { LightningDozerAnimationProps } from "./animation-props";
 
 /**
  * アームハンマー -> 立ち
- * @param model モデル
- * @param sounds 音
+ * @param props アニメーションプロパティ
  * @return アニメーション
  */
 export function hmToStand(
-  model: LightningDozerModel,
-  sounds: LightningDozerSounds,
+  props: LightningDozerAnimationProps
 ): Animate {
+  const { model, sounds } = props;
   return all(
     onStart(() => {
       model.animation.type = "HM_TO_STAND";

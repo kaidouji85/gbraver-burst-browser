@@ -2,15 +2,15 @@ import { all } from "../../../../animation/all";
 import { Animate } from "../../../../animation/animate";
 import { onStart } from "../../../../animation/on-start";
 import { tween } from "../../../../animation/tween";
-import type { LightningDozerModel } from "../model/lightning-dozer-model";
+import { LightningDozerAnimationProps } from "./animation-props";
 
 /**
  * アームハンマー
- *
- * @param model モデル
+ * @param props アニメーションプロパティ
  * @return アニメーション
  */
-export function armHammer(model: LightningDozerModel): Animate {
+export function armHammer(props: LightningDozerAnimationProps): Animate {
+  const { model } = props;
   return all(
     onStart(() => {
       model.animation.type = "HM_ATTACK";

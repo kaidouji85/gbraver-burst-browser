@@ -2,19 +2,17 @@ import { Animate } from "../../../../animation/animate";
 import { delay } from "../../../../animation/delay";
 import { onStart } from "../../../../animation/on-start";
 import { tween } from "../../../../animation/tween";
-import type { LightningDozerModel } from "../model/lightning-dozer-model";
-import { LightningDozerSounds } from "../sounds/lightning-dozer-sounds";
+import { LightningDozerAnimationProps } from "./animation-props";
 
 /**
  * ガッツ
- * @param model モデル
- * @param sounds 効果音
+ * @param props アニメーションプロパティ
  * @return アニメーション
  */
 export function guts(
-  model: LightningDozerModel,
-  sounds: LightningDozerSounds,
+  props: LightningDozerAnimationProps
 ): Animate {
+  const { model, sounds } = props;
   return onStart(() => {
     model.animation.type = "GUTS_UP";
     model.animation.frame = 0;
