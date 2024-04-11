@@ -2,8 +2,6 @@ import { Observable, Unsubscribable } from "rxjs";
 import * as THREE from "three";
 
 import { Animate } from "../../../animation/animate";
-import type { PreRender } from "../../../game-loop/pre-render";
-import type { Resources } from "../../../resource";
 import type { GameObjectAction } from "../../action/game-object-action";
 import type { ArmdozerSprite } from "../armdozer-sprite";
 import { EmptyArmdozerSprite } from "../empty-armdozer-sprite";
@@ -25,51 +23,43 @@ import { knockBackToStand } from "./animation/knock-back-to-stand";
 import { startActive } from "./animation/start-active";
 import { upright } from "./animation/upright";
 import { uprightToStand } from "./animation/upright-to-stand";
-import { createInitialValue } from "./model/initial-value";
-import type { NeoLandozerModel } from "./model/neo-landozer-model";
-import { NeoLandozerSounds } from "./sounds/neo-landozer-sounds";
-import type { NeoLandozerView } from "./view/neo-landozer-view";
+import { bindEventListeners } from "./procedure/bind-event-listeners";
+import {
+  createNeoLandozerProps,
+  GenerateNeoLandozerPropsParams,
+} from "./props/create-neo-landozer-props";
+import { NeoLandozerProps } from "./props/neo-landozer-props";
+
+/** コンストラクタのパラメータ */
+type Params = GenerateNeoLandozerPropsParams & {
+  /** ゲームオブジェクトアクション */
+  gameObjectAction: Observable<GameObjectAction>;
+};
 
 /** ネオランドーザのゲームオブジェクト */
 export class NeoLandozer extends EmptyArmdozerSprite implements ArmdozerSprite {
-  /** モデル */
-  #model: NeoLandozerModel;
-  /** ビュー */
-  #view: NeoLandozerView;
-  /** サウンド */
-  #sounds: NeoLandozerSounds;
+  /** プロパティ */
+  #props: NeoLandozerProps;
   /** アンサブスクライバ */
   #unsubscribers: Unsubscribable[];
 
   /**
    * コンストラクタ
-   * @param view ビュー
-   * @param resources リソース管理オブジェクト
-   * @param gameObjectAction ゲームオブジェクトアクション
+   * @param params パラメータ
    */
-  constructor(
-    view: NeoLandozerView,
-    resources: Resources,
-    gameObjectAction: Observable<GameObjectAction>,
-  ) {
+  constructor(params: Params) {
     super();
-    this.#model = createInitialValue();
-    this.#view = view;
-    this.#sounds = new NeoLandozerSounds(resources);
-    this.#unsubscribers = [
-      gameObjectAction.subscribe((action) => {
-        if (action.type === "Update") {
-          this.#update();
-        } else if (action.type === "PreRender") {
-          this.#preRender(action);
-        }
-      }),
-    ];
+    const { gameObjectAction } = params;
+    this.#props = createNeoLandozerProps(params);
+    this.#unsubscribers = bindEventListeners({
+      props: this.#props,
+      gameObjectAction,
+    });
   }
 
   /** @overview */
   destructor(): void {
-    this.#view.destructor();
+    this.#props.view.destructor();
     this.#unsubscribers.forEach((v) => {
       v.unsubscribe();
     });
@@ -77,17 +67,17 @@ export class NeoLandozer extends EmptyArmdozerSprite implements ArmdozerSprite {
 
   /** @override */
   addObject3D(object: THREE.Object3D): void {
-    this.#view.addObject3D(object);
+    this.#props.view.addObject3D(object);
   }
 
   /** @override */
   startActive(): Animate {
-    return startActive(this.#model);
+    return startActive(this.#props);
   }
 
   /** @override */
   endActive(): Animate {
-    return endActive(this.#model);
+    return endActive(this.#props);
   }
 
   /**
@@ -95,7 +85,7 @@ export class NeoLandozer extends EmptyArmdozerSprite implements ArmdozerSprite {
    * @return アニメーション
    */
   charge(): Animate {
-    return charge(this.#model, this.#sounds);
+    return charge(this.#props);
   }
 
   /**
@@ -103,7 +93,7 @@ export class NeoLandozer extends EmptyArmdozerSprite implements ArmdozerSprite {
    * @return アニメーション
    */
   armHammer(): Animate {
-    return armHammer(this.#model);
+    return armHammer(this.#props);
   }
 
   /**
@@ -111,7 +101,7 @@ export class NeoLandozer extends EmptyArmdozerSprite implements ArmdozerSprite {
    * @return アニメーション
    */
   hmToStand(): Animate {
-    return hmToStand(this.#model, this.#sounds);
+    return hmToStand(this.#props);
   }
 
   /**
@@ -119,7 +109,7 @@ export class NeoLandozer extends EmptyArmdozerSprite implements ArmdozerSprite {
    * @return アニメーション
    */
   guts(): Animate {
-    return guts(this.#model, this.#sounds);
+    return guts(this.#props);
   }
 
   /**
@@ -127,81 +117,66 @@ export class NeoLandozer extends EmptyArmdozerSprite implements ArmdozerSprite {
    * @return アニメーション
    */
   gutsToStand(): Animate {
-    return gutsToStand(this.#model, this.#sounds);
+    return gutsToStand(this.#props);
   }
 
   /** @override */
   knockBack(): Animate {
-    return knockBack(this.#model);
+    return knockBack(this.#props);
   }
 
   /** @override */
   knockBackToStand(): Animate {
-    return knockBackToStand(this.#model, this.#sounds);
+    return knockBackToStand(this.#props);
   }
 
   /** @override */
   guard(): Animate {
-    return guard(this.#model);
+    return guard(this.#props);
   }
 
   /** @override */
   guardToStand(): Animate {
-    return guardToStand(this.#model, this.#sounds);
+    return guardToStand(this.#props);
   }
 
   /** @override */
   avoid(): Animate {
-    return avoid(this.#model, this.#sounds);
+    return avoid(this.#props);
   }
 
   /** @override */
   avoidToStand(): Animate {
-    return frontStep(this.#model, this.#sounds);
+    return frontStep(this.#props);
   }
 
   /** @override */
   down(): Animate {
-    return down(this.#model);
+    return down(this.#props);
   }
 
   /** @override */
   upright(): Animate {
-    return upright(this.#model, this.#sounds);
+    return upright(this.#props);
   }
 
   /** @override */
   uprightToStand(): Animate {
-    return uprightToStand(this.#model, this.#sounds);
+    return uprightToStand(this.#props);
   }
 
   /** @override */
   bowDown(): Animate {
-    return bowDown(this.#model, this.#sounds);
+    return bowDown(this.#props);
   }
 
   /** @override */
   bowUp(): Animate {
-    return bowUp(this.#model, this.#sounds);
+    return bowUp(this.#props);
   }
 
   /** @override */
   getObject3D(): THREE.Object3D {
-    return this.#view.getObject3D();
-  }
-
-  /**
-   * Update時の処理
-   */
-  #update(): void {
-    this.#view.engage(this.#model);
-  }
-
-  /**
-   * PreRender時の処理
-   * @param action アクション
-   */
-  #preRender(action: PreRender): void {
-    this.#view.lookAt(action.camera);
+    return this.#props.view.getObject3D();
   }
 }

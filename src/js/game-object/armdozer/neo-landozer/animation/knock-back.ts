@@ -3,10 +3,15 @@ import { Animate } from "../../../../animation/animate";
 import { empty } from "../../../../animation/delay";
 import { onStart } from "../../../../animation/on-start";
 import { tween } from "../../../../animation/tween";
-import type { NeoLandozerModel } from "../model/neo-landozer-model";
+import { NeoLandozerAnimationProps } from "./animation-props";
 
-/** ノックバック */
-export function knockBack(model: NeoLandozerModel): Animate {
+/**
+ * ノックバック
+ * @param props アニメーションプロパティ
+ * @return アニメーション
+ */
+export function knockBack(props: NeoLandozerAnimationProps): Animate {
+  const { model } = props;
   const motion = onStart(() => {
     model.animation.frame = 1;
     model.animation.type = "KNOCK_BACK";
