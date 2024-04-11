@@ -11,11 +11,12 @@ import { batteryChange } from "./battery-change";
  * @return 処理が完了したら発火するPromise
  */
 async function plusButton(props: BatterySelectorProps): Promise<void> {
-  props.batteryPlusTween.update();
-  props.batteryPlusTween.removeAll();
+  const { batteryPlusTween, model } = props;
+  batteryPlusTween.update();
+  batteryPlusTween.removeAll();
   await all(
-    silentlyBatteryPlusPop(props.model, props.batteryPlusTween),
-    batteryChange(props, props.model.battery + 1),
+    silentlyBatteryPlusPop(props, batteryPlusTween),
+    batteryChange(props, model.battery + 1),
   ).play();
 }
 
@@ -25,11 +26,12 @@ async function plusButton(props: BatterySelectorProps): Promise<void> {
  * @return 処理が完了したら発火するPromise
  */
 async function minusButton(props: BatterySelectorProps): Promise<void> {
-  props.batteryPlusTween.update();
-  props.batteryPlusTween.removeAll();
+  const { batteryMinusTween, model } = props;
+  batteryMinusTween.update();
+  batteryMinusTween.removeAll();
   await all(
-    silentlyBatteryMinusPop(props.model, props.batteryPlusTween),
-    batteryChange(props, props.model.battery - 1),
+    silentlyBatteryMinusPop(props, batteryMinusTween),
+    batteryChange(props, model.battery - 1),
   ).play();
 }
 
@@ -45,7 +47,8 @@ export async function toBatterySilently(
   battery: number,
   duration: number,
 ): Promise<void> {
-  const diff = battery - props.model.battery;
+  const { model } = props;
+  const diff = battery - model.battery;
   const count = Math.abs(diff);
   const pushButton = () => (0 < diff ? plusButton(props) : minusButton(props));
   for (let i = 0; i < count; i++) {

@@ -10,5 +10,6 @@ export function onPreRender(
   props: Readonly<BatterySelectorProps>,
   action: PreRender,
 ): void {
-  props.view.engage(props.model, action);
+  const { view, model } = props;
+  view.engage(model, action);
 }

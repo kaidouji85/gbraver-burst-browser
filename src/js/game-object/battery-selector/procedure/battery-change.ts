@@ -15,13 +15,14 @@ export function batteryChange(
   props: BatterySelectorProps,
   battery: number,
 ): Animate {
-  props.batteryChangeTween.update();
-  props.batteryChangeTween.removeAll();
-  const needle = getNeedleValue(battery, props.model.maxBattery);
+  const { batteryChangeTween, model } = props;
+  batteryChangeTween.update();
+  batteryChangeTween.removeAll();
+  const needle = getNeedleValue(battery, model.maxBattery);
   return all(
     onStart(() => {
-      props.model.battery = battery;
+      model.battery = battery;
     }),
-    changeNeedle(props.model, props.batteryChangeTween, needle),
+    changeNeedle(props, batteryChangeTween, needle),
   );
 }
