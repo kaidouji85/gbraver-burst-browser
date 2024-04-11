@@ -1,13 +1,8 @@
-import { GenesisBraverModel } from "../model/genesis-braver-model";
-import { GenesisBraverSounds } from "../sounds/genesis-braver-sounds";
+import { GenesisBraverAnimationProps } from "../animation/animation-props";
 import { GenesisBraverView } from "../view/genesis-braver-view";
 
 /** ジェネシスブレイバーのプロパティ */
-export type GenesisBraverProps = {
+export type GenesisBraverProps = GenesisBraverAnimationProps & {
   /** ビュー */
   view: GenesisBraverView;
-  /** 効果音 */
-  sounds: GenesisBraverSounds;
-  /** モデル */
-  model: GenesisBraverModel;
 };
