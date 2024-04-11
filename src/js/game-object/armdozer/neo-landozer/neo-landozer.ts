@@ -3,7 +3,6 @@ import * as THREE from "three";
 
 import { Animate } from "../../../animation/animate";
 import type { PreRender } from "../../../game-loop/pre-render";
-import type { Resources } from "../../../resource";
 import type { GameObjectAction } from "../../action/game-object-action";
 import type { ArmdozerSprite } from "../armdozer-sprite";
 import { EmptyArmdozerSprite } from "../empty-armdozer-sprite";
@@ -25,30 +24,33 @@ import { knockBackToStand } from "./animation/knock-back-to-stand";
 import { startActive } from "./animation/start-active";
 import { upright } from "./animation/upright";
 import { uprightToStand } from "./animation/upright-to-stand";
-import { createNeoLandozerProps } from "./props/create-neo-landozer-props";
+import {
+  createNeoLandozerProps,
+  GenerateNeoLandozerPropsParams,
+} from "./props/create-neo-landozer-props";
 import { NeoLandozerProps } from "./props/neo-landozer-props";
-import type { NeoLandozerView } from "./view/neo-landozer-view";
+
+/** コンストラクタのパラメータ */
+type Params = GenerateNeoLandozerPropsParams & {
+  /** ゲームオブジェクトアクション */
+  gameObjectAction: Observable<GameObjectAction>;
+};
 
 /** ネオランドーザのゲームオブジェクト */
 export class NeoLandozer extends EmptyArmdozerSprite implements ArmdozerSprite {
   /** プロパティ */
-  #props: NeoLandozerProps
+  #props: NeoLandozerProps;
   /** アンサブスクライバ */
   #unsubscribers: Unsubscribable[];
 
   /**
    * コンストラクタ
-   * @param view ビュー
-   * @param resources リソース管理オブジェクト
-   * @param gameObjectAction ゲームオブジェクトアクション
+   * @param params パラメータ
    */
-  constructor(
-    view: NeoLandozerView,
-    resources: Resources,
-    gameObjectAction: Observable<GameObjectAction>,
-  ) {
+  constructor(params: Params) {
     super();
-    this.#props = createNeoLandozerProps({ view, resources });
+    const { gameObjectAction } = params;
+    this.#props = createNeoLandozerProps(params);
     this.#unsubscribers = [
       gameObjectAction.subscribe((action) => {
         if (action.type === "Update") {
