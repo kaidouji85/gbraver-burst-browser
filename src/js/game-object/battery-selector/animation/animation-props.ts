@@ -1,5 +1,3 @@
-import * as TWEEN from "@tweenjs/tween.js";
-
 import { BatterySelectorModel } from "../model";
 import { BatterySelectorSounds } from "../sounds/battery-selector-sounds";
 
@@ -9,10 +7,4 @@ export type BatterySelectorAnimationProps = {
   model: BatterySelectorModel;
   /** 効果音 */
   sounds: BatterySelectorSounds;
-  /** バッテリー変更TweenGroup */
-  batteryChangeTween: TWEEN.Group;
-  /** -ボタンTweenGroup */
-  batteryMinusTween: TWEEN.Group;
-  /** +ボタンTweenGroup */
-  batteryPlusTween: TWEEN.Group;
-};
+}
