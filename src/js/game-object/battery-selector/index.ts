@@ -54,7 +54,7 @@ export class BatterySelector {
    * @return アニメーション
    */
   open(param: BatterySelectorOpenParam): Animate {
-    return open(this.#props.model, param);
+    return open(this.#props, param);
   }
 
   /**
