@@ -25,9 +25,17 @@ import { knockBackToStand } from "./animation/knock-back-to-stand";
 import { startActive } from "./animation/start-active";
 import { upright } from "./animation/upright";
 import { uprightToStand } from "./animation/upright-to-stand";
-import { createLightningDozerProps } from "./props/create-lightning-dozer-props";
+import {
+  GenerateLightningDozerPropsParams,
+  createLightningDozerProps,
+} from "./props/create-lightning-dozer-props";
 import { LightningDozerProps } from "./props/lightning-dozer-props";
 import type { LightningDozerView } from "./view/lightning-dozer-view";
+
+type Params = GenerateLightningDozerPropsParams & {
+  /** ゲームオブジェクトアクション */
+  gameObjectAction: Observable<GameObjectAction>;
+};
 
 /** ライトニングドーザ */
 export class LightningDozer
@@ -41,17 +49,12 @@ export class LightningDozer
 
   /**
    * コンストラクタ
-   * @param resources リソース管理オブジェクト
-   * @param gameObjectAction ゲームオブジェクトアクション
-   * @param view ビュー
+   * @param params パラメータ
    */
-  constructor(
-    resources: Resources,
-    gameObjectAction: Observable<GameObjectAction>,
-    view: LightningDozerView,
-  ) {
+  constructor(params: Params) {
     super();
-    this.#props = createLightningDozerProps({ view, resources });
+    const { gameObjectAction } = params;
+    this.#props = createLightningDozerProps(params);
     this.#unsubscribers = [
       gameObjectAction.subscribe((action) => {
         if (action.type === "Update") {
