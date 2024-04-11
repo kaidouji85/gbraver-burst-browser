@@ -2,16 +2,15 @@ import { Animate } from "../../../../animation/animate";
 import { delay } from "../../../../animation/delay";
 import { onStart } from "../../../../animation/on-start";
 import { tween } from "../../../../animation/tween";
-import type { WingDozerModel } from "../model/wing-dozer-model";
-import { WingDozerSounds } from "../sounds/wing-dozer-sounds";
+import { WingDozerAnimationProps } from "./animation-props";
 
 /**
  * ダッシュ
- * @param model モデル
- * @param sounds 音
+ * @param props アニメーションプロパティ
  * @return アニメーション
  */
-export function dash(model: WingDozerModel, sounds: WingDozerSounds): Animate {
+export function dash(props: WingDozerAnimationProps): Animate {
+  const { model, sounds } = props;
   return onStart(() => {
     model.animation.type = "DASH_UP";
     model.animation.frame = 0;
