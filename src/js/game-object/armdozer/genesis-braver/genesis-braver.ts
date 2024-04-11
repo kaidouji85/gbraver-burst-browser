@@ -32,6 +32,7 @@ import { GenesisBraverProps } from "./props/genesis-braver-props";
 
 /** コンストラクタのパラメータ */
 type Params = GenerateGenesisBraverPropsParams & {
+  /** ゲームオブジェクトアクション */
   gameObjectAction: Observable<GameObjectAction>;
 };
 
