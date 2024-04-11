@@ -2,7 +2,6 @@ import { Observable, Unsubscribable } from "rxjs";
 import * as THREE from "three";
 
 import { Animate } from "../../../animation/animate";
-import { PreRender } from "../../../game-loop/pre-render";
 import { Resources } from "../../../resource";
 import { GameObjectAction } from "../../action/game-object-action";
 import { ArmdozerSprite } from "../armdozer-sprite";
@@ -25,10 +24,9 @@ import { startActive } from "./animation/start-active";
 import { straightPunch } from "./animation/straight-punch";
 import { upright } from "./animation/upright";
 import { uprightToStand } from "./animation/upright-to-stand";
-import { GenesisBraverModel } from "./model/genesis-braver-model";
-import { createInitialValue } from "./model/initial-value";
-import { GenesisBraverSounds } from "./sounds/genesis-braver-sounds";
-import { createGenesisBraverSounds } from "./sounds/genesis-braver-sounds";
+import { bindEventListeners } from "./procedure/bind-event-listeners";
+import { createGenesisBraverProps } from "./props/create-genesis-braver-props";
+import { GenesisBraverProps } from "./props/genesis-braver-props";
 import { GenesisBraverView } from "./view/genesis-braver-view";
 
 /** ジェネシスブレイバースプライト */
@@ -36,12 +34,8 @@ export class GenesisBraver
   extends EmptyArmdozerSprite
   implements ArmdozerSprite
 {
-  /** ビュー */
-  #view: GenesisBraverView;
-  /** 効果音 */
-  #sounds: GenesisBraverSounds;
-  /** モデル */
-  #model: GenesisBraverModel;
+  /** プロパティ */
+  #props: GenesisBraverProps;
   /** アンサブスクライバ */
   #unsubscribers: Unsubscribable[];
 
@@ -54,26 +48,16 @@ export class GenesisBraver
   constructor(
     view: GenesisBraverView,
     resources: Resources,
-    gameAction: Observable<GameObjectAction>,
+    gameObjectAction: Observable<GameObjectAction>,
   ) {
     super();
-    this.#view = view;
-    this.#sounds = createGenesisBraverSounds(resources);
-    this.#model = createInitialValue();
-    this.#unsubscribers = [
-      gameAction.subscribe((action) => {
-        if (action.type === "PreRender") {
-          this.#onPreRender(action);
-        } else if (action.type === "Update") {
-          this.#onUpdate();
-        }
-      }),
-    ];
+    this.#props = createGenesisBraverProps({view, resources});
+    this.#unsubscribers = bindEventListeners({ gameObjectAction, props: this.#props });
   }
 
   /** @override */
   destructor() {
-    this.#view.destructor();
+    this.#props.view.destructor();
     this.#unsubscribers.forEach((v) => {
       v.unsubscribe();
     });
@@ -81,7 +65,7 @@ export class GenesisBraver
 
   /** @override */
   addObject3D(object: THREE.Object3D): void {
-    this.#view.addObject3D(object);
+    this.#props.view.addObject3D(object);
   }
 
   /**
@@ -89,7 +73,7 @@ export class GenesisBraver
    * @return アニメーション
    */
   charge(): Animate {
-    return charge(this.#model, this.#sounds);
+    return charge(this.#props.model, this.#props.sounds);
   }
 
   /**
@@ -97,7 +81,7 @@ export class GenesisBraver
    * @return アニメーション
    */
   straightPunch(): Animate {
-    return straightPunch(this.#model);
+    return straightPunch(this.#props.model);
   }
 
   /**
@@ -105,7 +89,7 @@ export class GenesisBraver
    * @return アニメーション
    */
   spToStand(): Animate {
-    return spToStand(this.#model, this.#sounds);
+    return spToStand(this.#props.model, this.#props.sounds);
   }
 
   /**
@@ -113,7 +97,7 @@ export class GenesisBraver
    * @return アニメーション
    */
   burst(): Animate {
-    return burst(this.#model, this.#sounds);
+    return burst(this.#props.model, this.#props.sounds);
   }
 
   /**
@@ -121,91 +105,76 @@ export class GenesisBraver
    * @return アニメーション
    */
   burstToStand(): Animate {
-    return burstToStand(this.#model, this.#sounds);
+    return burstToStand(this.#props.model, this.#props.sounds);
   }
 
   /** @override */
   knockBack(): Animate {
-    return knockBack(this.#model);
+    return knockBack(this.#props.model);
   }
 
   /** @override */
   knockBackToStand(): Animate {
-    return knockBackToStand(this.#model, this.#sounds);
+    return knockBackToStand(this.#props.model, this.#props.sounds);
   }
 
   /** @override */
   down(): Animate {
-    return down(this.#model);
+    return down(this.#props.model);
   }
 
   /** @override */
   guard(): Animate {
-    return guard(this.#model);
+    return guard(this.#props.model);
   }
 
   /** @override */
   guardToStand(): Animate {
-    return guardToStand(this.#model, this.#sounds);
+    return guardToStand(this.#props.model, this.#props.sounds);
   }
 
   /** @override */
   avoid(): Animate {
-    return backStep(this.#model, this.#sounds);
+    return backStep(this.#props.model, this.#props.sounds);
   }
 
   /** @override */
   avoidToStand(): Animate {
-    return frontStep(this.#model, this.#sounds);
+    return frontStep(this.#props.model, this.#props.sounds);
   }
 
   /** @override */
   upright(): Animate {
-    return upright(this.#model, this.#sounds);
+    return upright(this.#props.model, this.#props.sounds);
   }
 
   /** @override */
   uprightToStand(): Animate {
-    return uprightToStand(this.#model, this.#sounds);
+    return uprightToStand(this.#props.model, this.#props.sounds);
   }
 
   /** @override */
   bowDown(): Animate {
-    return bowDown(this.#model, this.#sounds);
+    return bowDown(this.#props.model, this.#props.sounds);
   }
 
   /** @override */
   bowUp(): Animate {
-    return bowUp(this.#model, this.#sounds);
+    return bowUp(this.#props.model, this.#props.sounds);
   }
 
   /** @override */
   getObject3D(): THREE.Object3D {
-    return this.#view.getObject3D();
+    return this.#props.view.getObject3D();
   }
 
   /** @override */
   startActive(): Animate {
-    return startActive(this.#model);
+    return startActive(this.#props.model);
   }
 
   /** @override */
   endActive(): Animate {
-    return endActive(this.#model);
-  }
-
-  /**
-   * アップデート時の処理
-   */
-  #onUpdate(): void {
-    this.#view.engage(this.#model);
-  }
-
-  /**
-   * プリレンダー時の処理
-   * @param action アクション
-   */
-  #onPreRender(action: PreRender): void {
-    this.#view.lookAt(action.camera);
+    return endActive(this.#props.model);
   }
 }
