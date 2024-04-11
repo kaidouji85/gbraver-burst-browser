@@ -1,19 +1,17 @@
 import { Animate } from "../../../../animation/animate";
 import { onStart } from "../../../../animation/on-start";
 import { tween } from "../../../../animation/tween";
-import type { ShinBraverModel } from "../model/shin-braver-model";
-import { ShinBraverSounds } from "../sounds/shin-braver-sounds";
+import { ShinBraverAnimationProps } from "./animation-props";
 
 /**
  * ノックバック -> 立ち
- * @param model モデル
- * @param sounds 音
+ * @param props アニメーションプロパティ
  * @return アニメーション
  */
 export function knockBackToStand(
-  model: ShinBraverModel,
-  sounds: ShinBraverSounds,
+  props: ShinBraverAnimationProps
 ): Animate {
+  const { model, sounds } = props;
   return onStart(() => {
     model.animation.frame = 1;
     model.animation.type = "KNOCK_BACK";

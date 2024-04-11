@@ -2,19 +2,17 @@ import { Animate } from "../../../../animation/animate";
 import { delay } from "../../../../animation/delay";
 import { onStart } from "../../../../animation/on-start";
 import { tween } from "../../../../animation/tween";
-import type { ShinBraverModel } from "../model/shin-braver-model";
-import { ShinBraverSounds } from "../sounds/shin-braver-sounds";
+import { ShinBraverAnimationProps } from "./animation-props";
 
 /**
  * バースト
- * @param model モデル
- * @param sounds 音
+ * @param props アニメーションプロパティ
  * @return アニメーション
  */
 export function burst(
-  model: ShinBraverModel,
-  sounds: ShinBraverSounds,
+  props: ShinBraverAnimationProps
 ): Animate {
+  const { model, sounds } = props;
   return onStart(() => {
     model.animation.type = "BURST_UP";
     model.animation.frame = 0;

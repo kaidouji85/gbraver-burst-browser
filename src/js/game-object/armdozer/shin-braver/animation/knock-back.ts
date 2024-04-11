@@ -3,10 +3,15 @@ import { Animate } from "../../../../animation/animate";
 import { empty } from "../../../../animation/delay";
 import { onStart } from "../../../../animation/on-start";
 import { tween } from "../../../../animation/tween";
-import type { ShinBraverModel } from "../model/shin-braver-model";
+import { ShinBraverAnimationProps } from "./animation-props";
 
-/** ノックバック */
-export function knockBack(model: ShinBraverModel): Animate {
+/** 
+ * ノックバック
+ * @param props アニメーションプロパティ
+ * @return アニメーション
+ */
+export function knockBack(props: ShinBraverAnimationProps): Animate {
+  const { model } = props;
   const motion = onStart(() => {
     model.animation.frame = 1;
     model.animation.type = "KNOCK_BACK";

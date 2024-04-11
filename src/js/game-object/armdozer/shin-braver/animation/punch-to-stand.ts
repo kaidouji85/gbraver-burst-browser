@@ -2,19 +2,17 @@ import { Animate } from "../../../../animation/animate";
 import { onStart } from "../../../../animation/on-start";
 import { tween } from "../../../../animation/tween";
 import { ARMDOZER_SPRITE_STANDARD_Z } from "../../position";
-import type { ShinBraverModel } from "../model/shin-braver-model";
-import { ShinBraverSounds } from "../sounds/shin-braver-sounds";
+import { ShinBraverAnimationProps } from "./animation-props";
 
 /**
  * ストレートパンチ -> 立ち
- * @param model シンブレイバーモデル
- * @param sounds シンブレイバーサウンド
+ * @param props アニメーションプロパティ
  * @return アニメーション
  */
 export function punchToStand(
-  model: ShinBraverModel,
-  sounds: ShinBraverSounds,
+  props: ShinBraverAnimationProps
 ): Animate {
+  const { model, sounds } = props;
   return onStart(() => {
     model.animation.type = "SP_TO_STAND";
     model.animation.frame = 0;

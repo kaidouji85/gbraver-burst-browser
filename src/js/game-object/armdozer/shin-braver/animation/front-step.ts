@@ -3,21 +3,19 @@ import { Animate } from "../../../../animation/animate";
 import { delay } from "../../../../animation/delay";
 import { onStart } from "../../../../animation/on-start";
 import { tween } from "../../../../animation/tween";
-import type { ShinBraverModel } from "../model/shin-braver-model";
-import { ShinBraverSounds } from "../sounds/shin-braver-sounds";
+import { ShinBraverAnimationProps } from "./animation-props";
 
 /**
  * 避け -> 立ち
- * @param model モデル
- * @param sounds 効果音
+ * @param props アニメーションプロパティ
  * @param distance 移動距離を絶対値で指定する
  * @return アニメーション
  */
 export function frontStep(
-  model: ShinBraverModel,
-  sounds: ShinBraverSounds,
+  props: ShinBraverAnimationProps,
   distance = 100,
 ): Animate {
+  const { model, sounds } = props;
   return onStart(() => {
     model.animation.type = "FRONT_STEP";
     model.animation.frame = 0;

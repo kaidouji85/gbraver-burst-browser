@@ -74,12 +74,12 @@ export class ShinBraver extends EmptyArmdozerSprite implements ArmdozerSprite {
 
   /** @override */
   startActive(): Animate {
-    return startActive(this.#props.model);
+    return startActive(this.#props);
   }
 
   /** @override */
   endActive(): Animate {
-    return endActive(this.#props.model);
+    return endActive(this.#props);
   }
 
   /**
@@ -87,7 +87,7 @@ export class ShinBraver extends EmptyArmdozerSprite implements ArmdozerSprite {
    * @return アニメーション
    */
   charge(): Animate {
-    return charge(this.#props.model, this.#props.sounds);
+    return charge(this.#props);
   }
 
   /**
@@ -95,12 +95,12 @@ export class ShinBraver extends EmptyArmdozerSprite implements ArmdozerSprite {
    * @return アニメーション
    */
   straightPunch(): Animate {
-    return straightPunch(this.#props.model);
+    return straightPunch(this.#props);
   }
 
   /** @override */
   punchToStand(): Animate {
-    return punchToStand(this.#props.model, this.#props.sounds);
+    return punchToStand(this.#props);
   }
 
   /**
@@ -108,7 +108,7 @@ export class ShinBraver extends EmptyArmdozerSprite implements ArmdozerSprite {
    * @return アニメーション
    */
   guts(): Animate {
-    return guts(this.#props.model, this.#props.sounds);
+    return guts(this.#props);
   }
 
   /**
@@ -116,42 +116,42 @@ export class ShinBraver extends EmptyArmdozerSprite implements ArmdozerSprite {
    * @return アニメーション
    */
   gutsToStand(): Animate {
-    return gutsToStand(this.#props.model, this.#props.sounds);
+    return gutsToStand(this.#props);
   }
 
   /** @override */
   knockBack(): Animate {
-    return knockBack(this.#props.model);
+    return knockBack(this.#props);
   }
 
   /** @override */
   knockBackToStand(): Animate {
-    return knockBackToStand(this.#props.model, this.#props.sounds);
+    return knockBackToStand(this.#props);
   }
 
   /** @override */
   guard(): Animate {
-    return guard(this.#props.model);
+    return guard(this.#props);
   }
 
   /** @override */
   guardToStand(): Animate {
-    return guardToStand(this.#props.model, this.#props.sounds);
+    return guardToStand(this.#props);
   }
 
   /** @override */
   avoid(): Animate {
-    return avoid(this.#props.model, this.#props.sounds);
+    return avoid(this.#props);
   }
 
   /** @override */
   avoidToStand(): Animate {
-    return frontStep(this.#props.model, this.#props.sounds);
+    return frontStep(this.#props);
   }
 
   /** @override */
   down(): Animate {
-    return down(this.#props.model);
+    return down(this.#props);
   }
 
   /**
@@ -159,7 +159,7 @@ export class ShinBraver extends EmptyArmdozerSprite implements ArmdozerSprite {
    * @return アニメーション
    */
   burst(): Animate {
-    return burst(this.#props.model, this.#props.sounds);
+    return burst(this.#props);
   }
 
   /**
@@ -167,27 +167,27 @@ export class ShinBraver extends EmptyArmdozerSprite implements ArmdozerSprite {
    * @return アニメーション
    */
   burstToStand(): Animate {
-    return burstToStand(this.#props.model, this.#props.sounds);
+    return burstToStand(this.#props);
   }
 
   /** @override */
   upright(): Animate {
-    return upright(this.#props.model, this.#props.sounds);
+    return upright(this.#props);
   }
 
   /** @override */
   uprightToStand(): Animate {
-    return uprightToStand(this.#props.model, this.#props.sounds);
+    return uprightToStand(this.#props);
   }
 
   /** @override */
   bowDown(): Animate {
-    return bowDown(this.#props.model, this.#props.sounds);
+    return bowDown(this.#props);
   }
 
   /** @override */
   bowUp(): Animate {
-    return bowUp(this.#props.model, this.#props.sounds);
+    return bowUp(this.#props);
   }
 
   /** @override */
