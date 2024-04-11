@@ -70,7 +70,7 @@ export class BatterySelector {
    * @return アニメーション
    */
   close(): Animate {
-    return close(this.#props.model);
+    return close(this.#props);
   }
 
   /**
