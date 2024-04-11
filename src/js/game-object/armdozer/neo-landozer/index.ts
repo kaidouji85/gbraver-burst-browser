@@ -22,9 +22,9 @@ type GenerateNeoLandozerParams = {
 export function PlayerNeoLandozer(
   params: GenerateNeoLandozerParams,
 ): NeoLandozer {
-  const { resources, gameObjectAction } = params;
+  const { resources } = params;
   const view = new PlayerNeoLandozerView(resources);
-  return new NeoLandozer(view, resources, gameObjectAction);
+  return new NeoLandozer({ ...params, view });
 }
 
 /**
@@ -35,7 +35,7 @@ export function PlayerNeoLandozer(
 export function EnemyNeoLandozer(
   params: GenerateNeoLandozerParams,
 ): NeoLandozer {
-  const { resources, gameObjectAction } = params;
+  const { resources } = params;
   const view = new EnemyNeoLandozerView(resources);
-  return new NeoLandozer(view, resources, gameObjectAction);
+  return new NeoLandozer({ ...params, view });
 }
