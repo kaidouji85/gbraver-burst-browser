@@ -12,7 +12,8 @@ import { batteryMinus } from "./procedure/battery-minus";
 import { batteryPlus } from "./procedure/battery-plus";
 import { bindEventListeners } from "./procedure/bind-event-listeners";
 import { toBatterySilently } from "./procedure/to-battery-silently";
-import { BatterySelectorProps, createBatterySelectorProps } from "./props";
+import { createBatterySelectorProps } from "./props";
+import { BatterySelectorProps } from "./props/battery-selector-props";
 
 /** コンストラクタのパラメータ */
 type Param = {

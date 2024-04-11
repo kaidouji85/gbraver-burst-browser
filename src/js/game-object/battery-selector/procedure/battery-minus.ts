@@ -1,7 +1,7 @@
 import { all } from "../../../animation/all";
 import { batteryMinusPop as batteryMinusPopAnimate } from "../animation/battery-minus-pop";
 import { canBatteryMinus } from "../model/can-battery-minus";
-import { BatterySelectorProps } from "../props";
+import { BatterySelectorProps } from "../props/battery-selector-props";
 import { batteryChange } from "./battery-change";
 
 /**
