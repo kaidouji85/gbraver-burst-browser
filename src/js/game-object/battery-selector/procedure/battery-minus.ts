@@ -11,14 +11,15 @@ import { batteryChange } from "./battery-change";
  * @return 処理が完了したら発火するPromise
  */
 export async function batteryMinus(props: BatterySelectorProps): Promise<void> {
-  if (!canBatteryMinus(props.model)) {
+  const { batteryMinusTween, model } = props;
+  if (!canBatteryMinus(model)) {
     return;
   }
 
-  props.batteryMinusTween.update();
-  props.batteryMinusTween.removeAll();
+  batteryMinusTween.update();
+  batteryMinusTween.removeAll();
   await all(
-    batteryMinusPop(props, props.batteryMinusTween),
-    batteryChange(props, props.model.battery - 1),
+    batteryMinusPop(props, batteryMinusTween),
+    batteryChange(props, model.battery - 1),
   ).play();
 }

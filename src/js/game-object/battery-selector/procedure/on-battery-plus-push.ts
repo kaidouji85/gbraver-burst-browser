@@ -6,13 +6,14 @@ import { BatterySelectorProps } from "../props/battery-selector-props";
  * @param props ゲームオブジェクトプロパティ
  */
 export function onBatteryPlusPush(props: Readonly<BatterySelectorProps>): void {
+  const { model, batteryPlusPush } = props;
   if (
-    props.model.isPushNotifierDisabled ||
-    props.model.disabled ||
-    !canBatteryPlus(props.model)
+    model.isPushNotifierDisabled ||
+    model.disabled ||
+    !canBatteryPlus(model)
   ) {
     return;
   }
 
-  props.batteryPlusPush.next();
+  batteryPlusPush.next();
 }
