@@ -25,9 +25,8 @@ import { knockBackToStand } from "./animation/knock-back-to-stand";
 import { startActive } from "./animation/start-active";
 import { upright } from "./animation/upright";
 import { uprightToStand } from "./animation/upright-to-stand";
-import { createInitialValue } from "./model/initial-value";
-import type { LightningDozerModel } from "./model/lightning-dozer-model";
-import { LightningDozerSounds } from "./sounds/lightning-dozer-sounds";
+import { createLightningDozerProps } from "./props/create-lightning-dozer-props";
+import { LightningDozerProps } from "./props/lightning-dozer-props";
 import type { LightningDozerView } from "./view/lightning-dozer-view";
 
 /** ライトニングドーザ */
@@ -35,12 +34,8 @@ export class LightningDozer
   extends EmptyArmdozerSprite
   implements ArmdozerSprite
 {
-  /** モデル */
-  #model: LightningDozerModel;
-  /** ビュー */
-  #view: LightningDozerView;
-  /** サウンド */
-  #sounds: LightningDozerSounds;
+  /** プロパティ */
+  #props: LightningDozerProps;
   /** アンサブスクライバ */
   #unsubscribers: Unsubscribable[];
 
@@ -56,9 +51,7 @@ export class LightningDozer
     view: LightningDozerView,
   ) {
     super();
-    this.#model = createInitialValue();
-    this.#view = view;
-    this.#sounds = new LightningDozerSounds(resources);
+    this.#props = createLightningDozerProps({ view, resources });
     this.#unsubscribers = [
       gameObjectAction.subscribe((action) => {
         if (action.type === "Update") {
@@ -72,7 +65,7 @@ export class LightningDozer
 
   /** @override */
   destructor() {
-    this.#view.destructor();
+    this.#props.view.destructor();
     this.#unsubscribers.forEach((v) => {
       v.unsubscribe();
     });
@@ -80,22 +73,22 @@ export class LightningDozer
 
   /** @override */
   getObject3D(): THREE.Object3D {
-    return this.#view.getObject3D();
+    return this.#props.view.getObject3D();
   }
 
   /** @override */
   addObject3D(object: THREE.Object3D): void {
-    this.#view.addObject3D(object);
+    this.#props.view.addObject3D(object);
   }
 
   /** @override */
   startActive(): Animate {
-    return startActive(this.#model);
+    return startActive(this.#props.model);
   }
 
   /** @override */
   endActive(): Animate {
-    return endActive(this.#model);
+    return endActive(this.#props.model);
   }
 
   /**
@@ -103,7 +96,7 @@ export class LightningDozer
    * @return アニメーション
    */
   charge(): Animate {
-    return charge(this.#model, this.#sounds);
+    return charge(this.#props.model, this.#props.sounds);
   }
 
   /**
@@ -111,7 +104,7 @@ export class LightningDozer
    * @return アニメーション
    */
   armHammer(): Animate {
-    return armHammer(this.#model);
+    return armHammer(this.#props.model);
   }
 
   /**
@@ -119,7 +112,7 @@ export class LightningDozer
    * @return アニメーション
    */
   hmToStand(): Animate {
-    return hmToStand(this.#model, this.#sounds);
+    return hmToStand(this.#props.model, this.#props.sounds);
   }
 
   /**
@@ -127,7 +120,7 @@ export class LightningDozer
    * @return アニメーション
    */
   guts(): Animate {
-    return guts(this.#model, this.#sounds);
+    return guts(this.#props.model, this.#props.sounds);
   }
 
   /**
@@ -135,69 +128,69 @@ export class LightningDozer
    * @return アニメーション
    */
   gutsToStand(): Animate {
-    return gutsToStand(this.#model, this.#sounds);
+    return gutsToStand(this.#props.model, this.#props.sounds);
   }
 
   /** @override */
   knockBack(): Animate {
-    return knockBack(this.#model);
+    return knockBack(this.#props.model);
   }
 
   /** @override */
   knockBackToStand(): Animate {
-    return knockBackToStand(this.#model, this.#sounds);
+    return knockBackToStand(this.#props.model, this.#props.sounds);
   }
 
   /** @override */
   guard(): Animate {
-    return guard(this.#model);
+    return guard(this.#props.model);
   }
 
   /** @override */
   guardToStand(): Animate {
-    return guardToStand(this.#model, this.#sounds);
+    return guardToStand(this.#props.model, this.#props.sounds);
   }
 
   /** @override */
   avoid(): Animate {
-    return avoid(this.#model, this.#sounds);
+    return avoid(this.#props.model, this.#props.sounds);
   }
 
   /** @override */
   avoidToStand(): Animate {
-    return frontStep(this.#model, this.#sounds);
+    return frontStep(this.#props.model, this.#props.sounds);
   }
 
   /** @override */
   down(): Animate {
-    return down(this.#model);
+    return down(this.#props.model);
   }
 
   /** @override */
   upright(): Animate {
-    return upright(this.#model, this.#sounds);
+    return upright(this.#props.model, this.#props.sounds);
   }
 
   /** @override */
   uprightToStand(): Animate {
-    return uprightToStand(this.#model, this.#sounds);
+    return uprightToStand(this.#props.model, this.#props.sounds);
   }
 
   /** @override */
   bowDown(): Animate {
-    return bowDown(this.#model, this.#sounds);
+    return bowDown(this.#props.model, this.#props.sounds);
   }
 
   /** @override */
   bowUp(): Animate {
-    return bowUp(this.#model, this.#sounds);
+    return bowUp(this.#props.model, this.#props.sounds);
   }
 
   /**
    * Update時の処理
    */
   #onUpdate(): void {
-    this.#view.engage(this.#model);
+    this.#props.view.engage(this.#props.model);
   }
 
   /**
@@ -205,6 +198,6 @@ export class LightningDozer
    * @param action アクション
    */
   #onPreRender(action: PreRender): void {
-    this.#view.lookAt(action.camera);
+    this.#props.view.lookAt(action.camera);
   }
 }
