@@ -8,9 +8,7 @@ import { WingDozerAnimationProps } from "./animation-props";
  * @param props アニメーションプロパティ
  * @return アニメーション
  */
-export function knockBackToStand(
-  props: WingDozerAnimationProps
-): Animate {
+export function knockBackToStand(props: WingDozerAnimationProps): Animate {
   const { model, sounds } = props;
   return onStart(() => {
     model.animation.frame = 1;

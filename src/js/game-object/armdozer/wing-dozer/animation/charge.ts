@@ -9,9 +9,7 @@ import { WingDozerAnimationProps } from "./animation-props";
  * @param props アニメーションプロパティ
  * @return アニメーション
  */
-export function charge(
-  props: WingDozerAnimationProps
-): Animate {
+export function charge(props: WingDozerAnimationProps): Animate {
   const { model, sounds } = props;
   return onStart(() => {
     model.animation.type = "UPPER_CHARGE";

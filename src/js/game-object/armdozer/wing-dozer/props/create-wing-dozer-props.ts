@@ -17,11 +17,13 @@ export type GenerateWingDozerPropsParams = {
  * @param params 生成パラメータ
  * @return 生成結果
  */
-export function createWingDozerProps(params: GenerateWingDozerPropsParams): WingDozerProps {
+export function createWingDozerProps(
+  params: GenerateWingDozerPropsParams,
+): WingDozerProps {
   const { view, resources } = params;
   return {
     view,
     model: createInitialValue(),
-    sounds: new WingDozerSounds(resources)
-  }
+    sounds: new WingDozerSounds(resources),
+  };
 }

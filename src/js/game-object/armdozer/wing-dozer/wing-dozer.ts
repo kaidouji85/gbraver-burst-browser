@@ -24,14 +24,17 @@ import { upper } from "./animation/upper";
 import { upperToStand } from "./animation/upper-to-stand";
 import { upright } from "./animation/upright";
 import { uprightToStand } from "./animation/upright-to-stand";
-import { createWingDozerProps,GenerateWingDozerPropsParams } from "./props/create-wing-dozer-props";
+import {
+  createWingDozerProps,
+  GenerateWingDozerPropsParams,
+} from "./props/create-wing-dozer-props";
 import { WingDozerProps } from "./props/wing-dozer-props";
 
 /** コンストラクタのパラメータ */
 type Params = GenerateWingDozerPropsParams & {
   /** ゲームオブジェクトアクション */
-  gameObjectAction: Observable<GameObjectAction>,
-}
+  gameObjectAction: Observable<GameObjectAction>;
+};
 
 /** ウィングドーザ */
 export class WingDozer extends EmptyArmdozerSprite implements ArmdozerSprite {

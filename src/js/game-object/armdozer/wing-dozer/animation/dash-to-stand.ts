@@ -8,9 +8,7 @@ import { WingDozerAnimationProps } from "./animation-props";
  * @param props アニメーションプロパティ
  * @return アニメーション
  */
-export function dashToStand(
-  props: WingDozerAnimationProps
-): Animate {
+export function dashToStand(props: WingDozerAnimationProps): Animate {
   const { model, sounds } = props;
   return onStart(() => {
     model.animation.type = "DASH_TO_STAND";
