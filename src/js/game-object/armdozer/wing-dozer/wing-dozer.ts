@@ -3,7 +3,6 @@ import * as THREE from "three";
 
 import { Animate } from "../../../animation/animate";
 import type { PreRender } from "../../../game-loop/pre-render";
-import type { Resources } from "../../../resource";
 import type { GameObjectAction } from "../../action/game-object-action";
 import type { ArmdozerSprite } from "../armdozer-sprite";
 import { EmptyArmdozerSprite } from "../empty-armdozer-sprite";
@@ -25,9 +24,14 @@ import { upper } from "./animation/upper";
 import { upperToStand } from "./animation/upper-to-stand";
 import { upright } from "./animation/upright";
 import { uprightToStand } from "./animation/upright-to-stand";
-import { createWingDozerProps } from "./props/create-wing-dozer-props";
+import { createWingDozerProps,GenerateWingDozerPropsParams } from "./props/create-wing-dozer-props";
 import { WingDozerProps } from "./props/wing-dozer-props";
-import type { WingDozerView } from "./view/wing-dozer-view";
+
+/** コンストラクタのパラメータ */
+type Params = GenerateWingDozerPropsParams & {
+  /** ゲームオブジェクトアクション */
+  gameObjectAction: Observable<GameObjectAction>,
+}
 
 /** ウィングドーザ */
 export class WingDozer extends EmptyArmdozerSprite implements ArmdozerSprite {
@@ -38,17 +42,12 @@ export class WingDozer extends EmptyArmdozerSprite implements ArmdozerSprite {
 
   /**
    * コンストラクタ
-   * @param view ビュー
-   * @param resources リソース管理オブジェクト
-   * @param gameObjectAction ゲームオブジェクトアクション
+   * @param params パラメータ
    */
-  constructor(
-    view: WingDozerView,
-    resources: Resources,
-    gameObjectAction: Observable<GameObjectAction>,
-  ) {
+  constructor(params: Params) {
     super();
-    this.#props = createWingDozerProps({ view, resources });
+    const { gameObjectAction } = params;
+    this.#props = createWingDozerProps(params);
     this.#unsubscribers = [
       gameObjectAction.subscribe((action) => {
         if (action.type === "Update") {
