@@ -1,13 +1,8 @@
-import { WingDozerModel } from "../model/wing-dozer-model";
-import { WingDozerSounds } from "../sounds/wing-dozer-sounds";
+import { WingDozerAnimationProps } from "../animation/animation-props";
 import { WingDozerView } from "../view/wing-dozer-view";
 
 /** ウィングドーザ プロパティ */
-export type WingDozerProps = {
-  /** モデル */
-  model: WingDozerModel;
+export type WingDozerProps = WingDozerAnimationProps & {
   /** ビュー */
   view: WingDozerView;
-  /** サウンド */
-  sounds: WingDozerSounds;
 };
