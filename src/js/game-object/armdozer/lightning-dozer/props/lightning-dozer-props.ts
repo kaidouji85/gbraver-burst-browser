@@ -1,13 +1,8 @@
-import { LightningDozerModel } from "../model/lightning-dozer-model";
-import { LightningDozerSounds } from "../sounds/lightning-dozer-sounds";
+import { LightningDozerAnimationProps } from "../animation/animation-props";
 import { LightningDozerView } from "../view/lightning-dozer-view";
 
 /** ライトニングドーザのプロパティ */
-export type LightningDozerProps = {
-  /** モデル */
-  model: LightningDozerModel;
+export type LightningDozerProps = LightningDozerAnimationProps & {
   /** ビュー */
-  view: LightningDozerView;
-  /** サウンド */
-  sounds: LightningDozerSounds;
+  view: LightningDozerView;  
 };
