@@ -9,9 +9,7 @@ import { ShinBraverAnimationProps } from "./animation-props";
  * @param props アニメーションプロパティ
  * @return アニメーション
  */
-export function burstToStand(
-  props: ShinBraverAnimationProps
-): Animate {
+export function burstToStand(props: ShinBraverAnimationProps): Animate {
   const { model, sounds } = props;
   return onStart(() => {
     model.animation.type = "BURST_DOWN";

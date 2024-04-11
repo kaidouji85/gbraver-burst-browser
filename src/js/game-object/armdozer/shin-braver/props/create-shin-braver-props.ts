@@ -17,7 +17,9 @@ export type GenerateShinBraverPropsParams = {
  * @param params 生成パラメータ
  * @return 生成結果
  */
-export function createShinBraverProps(params: GenerateShinBraverPropsParams): ShinBraverProps {
+export function createShinBraverProps(
+  params: GenerateShinBraverPropsParams,
+): ShinBraverProps {
   const { view, resources } = params;
   return {
     view,

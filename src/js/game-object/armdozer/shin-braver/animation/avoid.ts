@@ -10,9 +10,7 @@ import { ShinBraverAnimationProps } from "./animation-props";
  * @param props アニメーションプロパティ
  * @return アニメーション
  */
-export function avoid(
-  props: ShinBraverAnimationProps
-): Animate {
+export function avoid(props: ShinBraverAnimationProps): Animate {
   const { model, sounds } = props;
   return onStart(() => {
     model.animation.type = "BACK_STEP";

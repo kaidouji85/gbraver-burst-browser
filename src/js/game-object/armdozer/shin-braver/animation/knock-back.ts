@@ -5,7 +5,7 @@ import { onStart } from "../../../../animation/on-start";
 import { tween } from "../../../../animation/tween";
 import { ShinBraverAnimationProps } from "./animation-props";
 
-/** 
+/**
  * ノックバック
  * @param props アニメーションプロパティ
  * @return アニメーション

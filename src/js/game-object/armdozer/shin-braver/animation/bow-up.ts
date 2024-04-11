@@ -8,9 +8,7 @@ import { ShinBraverAnimationProps } from "./animation-props";
  * @param props アニメーションプロパティ
  * @return アニメーション
  */
-export function bowUp(
-  props: ShinBraverAnimationProps
-): Animate {
+export function bowUp(props: ShinBraverAnimationProps): Animate {
   const { model, sounds } = props;
   return onStart(() => {
     model.animation.type = "BOW";
