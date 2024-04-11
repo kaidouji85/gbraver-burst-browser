@@ -62,7 +62,7 @@ export class BatterySelector {
    * @return アニメーション
    */
   decide(): Animate {
-    return decide(this.#props.model, this.#props.sounds);
+    return decide(this.#props);
   }
 
   /**
