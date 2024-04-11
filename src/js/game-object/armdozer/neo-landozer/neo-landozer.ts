@@ -2,7 +2,6 @@ import { Observable, Unsubscribable } from "rxjs";
 import * as THREE from "three";
 
 import { Animate } from "../../../animation/animate";
-import type { PreRender } from "../../../game-loop/pre-render";
 import type { GameObjectAction } from "../../action/game-object-action";
 import type { ArmdozerSprite } from "../armdozer-sprite";
 import { EmptyArmdozerSprite } from "../empty-armdozer-sprite";
@@ -24,6 +23,7 @@ import { knockBackToStand } from "./animation/knock-back-to-stand";
 import { startActive } from "./animation/start-active";
 import { upright } from "./animation/upright";
 import { uprightToStand } from "./animation/upright-to-stand";
+import { bindEventListeners } from "./procedure/bind-event-listeners";
 import {
   createNeoLandozerProps,
   GenerateNeoLandozerPropsParams,
@@ -51,15 +51,10 @@ export class NeoLandozer extends EmptyArmdozerSprite implements ArmdozerSprite {
     super();
     const { gameObjectAction } = params;
     this.#props = createNeoLandozerProps(params);
-    this.#unsubscribers = [
-      gameObjectAction.subscribe((action) => {
-        if (action.type === "Update") {
-          this.#update();
-        } else if (action.type === "PreRender") {
-          this.#preRender(action);
-        }
-      }),
-    ];
+    this.#unsubscribers = bindEventListeners({
+      props: this.#props,
+      gameObjectAction,
+    });
   }
 
   /** @overview */
@@ -183,20 +178,5 @@ export class NeoLandozer extends EmptyArmdozerSprite implements ArmdozerSprite {
   /** @override */
   getObject3D(): THREE.Object3D {
     return this.#props.view.getObject3D();
-  }
-
-  /**
-   * Update時の処理
-   */
-  #update(): void {
-    this.#props.view.engage(this.#props.model);
-  }
-
-  /**
-   * PreRender時の処理
-   * @param action アクション
-   */
-  #preRender(action: PreRender): void {
-    this.#props.view.lookAt(action.camera);
   }
 }
