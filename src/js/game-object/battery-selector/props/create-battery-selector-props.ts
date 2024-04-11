@@ -1,14 +1,12 @@
 import * as TWEEN from "@tweenjs/tween.js";
 import { Observable, Subject } from "rxjs";
 
-import { Resources } from "../../resource";
-import { GameObjectAction } from "../action/game-object-action";
-import { initialValue } from "./model/initial-value";
-import { BatterySelectorProps } from "./props/battery-selector-props";
-import {
-  createBatterySelectorSounds,
-} from "./sounds/battery-selector-sounds";
-import { BatterySelectorView } from "./view";
+import { Resources } from "../../../resource";
+import { GameObjectAction } from "../../action/game-object-action";
+import { initialValue } from "../model/initial-value";
+import { createBatterySelectorSounds } from "../sounds/battery-selector-sounds";
+import { BatterySelectorView } from "../view";
+import { BatterySelectorProps } from "./battery-selector-props";
 
 /** バッテリーセレクタプロパティ生成パラメータ */
 export type GenerateBatterySelectorPropsParam = {
