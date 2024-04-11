@@ -24,13 +24,16 @@ import { straightPunch } from "./animation/straight-punch";
 import { upright } from "./animation/upright";
 import { uprightToStand } from "./animation/upright-to-stand";
 import { bindEventListeners } from "./procedure/bind-event-listeners";
-import { createGenesisBraverProps,GenerateGenesisBraverPropsParams } from "./props/create-genesis-braver-props";
+import {
+  createGenesisBraverProps,
+  GenerateGenesisBraverPropsParams,
+} from "./props/create-genesis-braver-props";
 import { GenesisBraverProps } from "./props/genesis-braver-props";
 
 /** コンストラクタのパラメータ */
 type Params = GenerateGenesisBraverPropsParams & {
   gameObjectAction: Observable<GameObjectAction>;
-}
+};
 
 /** ジェネシスブレイバースプライト */
 export class GenesisBraver
@@ -50,7 +53,10 @@ export class GenesisBraver
     super();
     const { gameObjectAction } = params;
     this.#props = createGenesisBraverProps(params);
-    this.#unsubscribers = bindEventListeners({ gameObjectAction, props: this.#props });
+    this.#unsubscribers = bindEventListeners({
+      gameObjectAction,
+      props: this.#props,
+    });
   }
 
   /** @override */

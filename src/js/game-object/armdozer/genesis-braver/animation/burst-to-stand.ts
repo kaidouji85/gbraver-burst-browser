@@ -9,9 +9,7 @@ import { GenesisBraverAnimationProps } from "./animation-props";
  * @param props アニメーションプロパティ
  * @return アニメーション
  */
-export function burstToStand(
-  props: GenesisBraverAnimationProps,
-): Animate {
+export function burstToStand(props: GenesisBraverAnimationProps): Animate {
   const { model, sounds } = props;
   return onStart(() => {
     model.animation.type = "BURST_DOWN";

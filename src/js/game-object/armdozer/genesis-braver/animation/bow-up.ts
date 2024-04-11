@@ -8,9 +8,7 @@ import { GenesisBraverAnimationProps } from "./animation-props";
  * @param props アニメーションプロパティ
  * @return アニメーション
  */
-export function bowUp(
-  props: GenesisBraverAnimationProps
-): Animate {
+export function bowUp(props: GenesisBraverAnimationProps): Animate {
   const { model, sounds } = props;
   return onStart(() => {
     model.animation.type = "BOW";

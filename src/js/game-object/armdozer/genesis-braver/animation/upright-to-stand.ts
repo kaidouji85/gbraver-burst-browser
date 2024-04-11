@@ -8,9 +8,7 @@ import { GenesisBraverAnimationProps } from "./animation-props";
  * @param props アニメーションプロパティ
  * @return アニメーション
  */
-export function uprightToStand(
-  props: GenesisBraverAnimationProps,
-): Animate {
+export function uprightToStand(props: GenesisBraverAnimationProps): Animate {
   const { model, sounds } = props;
   return onStart(() => {
     model.animation.type = "UPRIGHT";

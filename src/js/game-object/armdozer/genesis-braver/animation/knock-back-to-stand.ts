@@ -8,9 +8,7 @@ import { GenesisBraverAnimationProps } from "./animation-props";
  * @param props アニメーションプロパティ
  * @return アニメーション
  */
-export function knockBackToStand(
-  props: GenesisBraverAnimationProps,
-): Animate {
+export function knockBackToStand(props: GenesisBraverAnimationProps): Animate {
   const { model, sounds } = props;
   return onStart(() => {
     model.animation.frame = 1;

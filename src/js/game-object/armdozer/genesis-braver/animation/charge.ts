@@ -9,9 +9,7 @@ import { GenesisBraverAnimationProps } from "./animation-props";
  * @param props アニメーションプロパティ
  * @return アニメーション
  */
-export function charge(
-  props: GenesisBraverAnimationProps
-): Animate {
+export function charge(props: GenesisBraverAnimationProps): Animate {
   const { model, sounds } = props;
   return onStart(() => {
     model.animation.type = "SP_CHARGE";

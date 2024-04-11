@@ -10,9 +10,7 @@ import { GenesisBraverAnimationProps } from "./animation-props";
  * @param props アニメーションプロパティ
  * @return アニメーション
  */
-export function backStep(
-  props: GenesisBraverAnimationProps
-): Animate {
+export function backStep(props: GenesisBraverAnimationProps): Animate {
   const { model, sounds } = props;
   return onStart(() => {
     model.animation.type = "BACK_STEP";
