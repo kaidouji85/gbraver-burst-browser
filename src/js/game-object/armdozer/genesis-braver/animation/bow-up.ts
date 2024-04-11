@@ -1,19 +1,17 @@
 import { Animate } from "../../../../animation/animate";
 import { onStart } from "../../../../animation/on-start";
 import { tween } from "../../../../animation/tween";
-import { GenesisBraverModel } from "../model/genesis-braver-model";
-import { GenesisBraverSounds } from "../sounds/genesis-braver-sounds";
+import { GenesisBraverAnimationProps } from "./animation-props";
 
 /**
  * 礼（起き上がる）
- * @param model ジェネシスブレイバーモデル
- * @param sounds ジェネシスブレイバーサウンド
+ * @param props アニメーションプロパティ
  * @return アニメーション
  */
 export function bowUp(
-  model: GenesisBraverModel,
-  sounds: GenesisBraverSounds,
+  props: GenesisBraverAnimationProps
 ): Animate {
+  const { model, sounds } = props;
   return onStart(() => {
     model.animation.type = "BOW";
     model.animation.frame = 1;

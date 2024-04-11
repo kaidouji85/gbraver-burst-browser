@@ -1,19 +1,17 @@
 import { Animate } from "../../../../animation/animate";
 import { onStart } from "../../../../animation/on-start";
 import { tween } from "../../../../animation/tween";
-import { GenesisBraverModel } from "../model/genesis-braver-model";
-import { GenesisBraverSounds } from "../sounds/genesis-braver-sounds";
+import { GenesisBraverAnimationProps } from "./animation-props";
 
 /**
  * ガード -> 立ち
- * @param model モデル
- * @param sounds 効果音
+ * @param props アニメーションプロパティ
  * @return アニメーション
  */
 export function guardToStand(
-  model: GenesisBraverModel,
-  sounds: GenesisBraverSounds,
+  props: GenesisBraverAnimationProps
 ): Animate {
+  const { model, sounds } = props;
   return onStart(() => {
     model.animation.frame = 1;
     model.animation.type = "GUARD";

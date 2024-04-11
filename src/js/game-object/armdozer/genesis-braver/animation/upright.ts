@@ -1,19 +1,17 @@
 import { Animate } from "../../../../animation/animate";
 import { onStart } from "../../../../animation/on-start";
 import { tween } from "../../../../animation/tween";
-import { GenesisBraverModel } from "../model/genesis-braver-model";
-import { GenesisBraverSounds } from "../sounds/genesis-braver-sounds";
+import { GenesisBraverAnimationProps } from "./animation-props";
 
 /**
  * 気をつけ
- * @param model ジェネシスブレイバーモデル
- * @param sounds ジェネシスブレイバーサウンド
+ * @param props アニメーションプロパティ
  * @return アニメーション
  */
 export function upright(
-  model: GenesisBraverModel,
-  sounds: GenesisBraverSounds,
+  props: GenesisBraverAnimationProps
 ): Animate {
+  const { model, sounds } = props;
   return onStart(() => {
     model.animation.type = "UPRIGHT";
     model.animation.frame = 0;

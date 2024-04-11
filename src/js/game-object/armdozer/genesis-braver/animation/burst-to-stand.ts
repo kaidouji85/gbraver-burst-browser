@@ -2,19 +2,17 @@ import { Animate } from "../../../../animation/animate";
 import { delay } from "../../../../animation/delay";
 import { onStart } from "../../../../animation/on-start";
 import { tween } from "../../../../animation/tween";
-import { GenesisBraverModel } from "../model/genesis-braver-model";
-import { GenesisBraverSounds } from "../sounds/genesis-braver-sounds";
+import { GenesisBraverAnimationProps } from "./animation-props";
 
 /**
  * バースト -> 立ち
- * @param model モデル
- * @param sounds 音
+ * @param props アニメーションプロパティ
  * @return アニメーション
  */
 export function burstToStand(
-  model: GenesisBraverModel,
-  sounds: GenesisBraverSounds,
+  props: GenesisBraverAnimationProps,
 ): Animate {
+  const { model, sounds } = props;
   return onStart(() => {
     model.animation.type = "BURST_DOWN";
     model.animation.frame = 1;
