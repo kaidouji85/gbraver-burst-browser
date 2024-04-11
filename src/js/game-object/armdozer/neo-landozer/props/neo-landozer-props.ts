@@ -1,13 +1,8 @@
-import { NeoLandozerModel } from "../model/neo-landozer-model";
-import { NeoLandozerSounds } from "../sounds/neo-landozer-sounds";
+import { NeoLandozerAnimationProps } from "../animation/animation-props";
 import { NeoLandozerView } from "../view/neo-landozer-view";
 
 /** ネオランドーザ プロパティ */
-export type NeoLandozerProps = {
-  /** モデル */
-  model: NeoLandozerModel;
+export type NeoLandozerProps = NeoLandozerAnimationProps & {
   /** ビュー */
   view: NeoLandozerView;
-  /** サウンド */
-  sounds: NeoLandozerSounds;
 };
