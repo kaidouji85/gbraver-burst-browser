@@ -1,4 +1,4 @@
-import { BatterySelectorProps } from "../props";
+import { BatterySelectorProps } from "../props/battery-selector-props";
 
 /**
  * 決定ボタン押下時の処理

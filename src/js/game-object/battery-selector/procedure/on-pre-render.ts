@@ -1,5 +1,5 @@
 import { PreRender } from "../../../game-loop/pre-render";
-import { BatterySelectorProps } from "../props";
+import { BatterySelectorProps } from "../props/battery-selector-props";
 
 /**
  * プリレンダー
