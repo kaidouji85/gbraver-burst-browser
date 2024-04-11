@@ -3,7 +3,6 @@ import * as THREE from "three";
 
 import { Animate } from "../../../animation/animate";
 import type { PreRender } from "../../../game-loop/pre-render";
-import type { Resources } from "../../../resource";
 import type { GameObjectAction } from "../../action/game-object-action";
 import type { ArmdozerSprite } from "../armdozer-sprite";
 import { EmptyArmdozerSprite } from "../empty-armdozer-sprite";
@@ -27,11 +26,17 @@ import { startActive } from "./animation/start-active";
 import { straightPunch } from "./animation/straight-punch";
 import { upright } from "./animation/upright";
 import { uprightToStand } from "./animation/upright-to-stand";
-import { createInitialValue } from "./model/initial-value";
+import {
+  createShinBraverProps,
+  GenerateShinBraverPropsParams,
+} from "./props/create-shin-braver-props";
 import { ShinBraverProps } from "./props/shin-braver-props";
-import { ShinBraverSounds } from "./sounds/shin-braver-sounds";
-import type { ShinBraverView } from "./view/shin-braver-view";
-import { createShinBraverProps } from "./props/create-shin-braver-props";
+
+/** コンストラクタのパラメータ */
+type Params = GenerateShinBraverPropsParams & {
+  /** ゲームオブジェクトアクション */
+  gameObjectAction: Observable<GameObjectAction>;
+};
 
 /** シンブレイバーのゲームオブジェクト */
 export class ShinBraver extends EmptyArmdozerSprite implements ArmdozerSprite {
@@ -42,18 +47,12 @@ export class ShinBraver extends EmptyArmdozerSprite implements ArmdozerSprite {
 
   /**
    * コンストラクタ
-   *
-   * @param view ビュー
-   * @param resources リソース管理オブジェクト
-   * @param gameObjectAction ゲームオブジェクトアクション
+   * @param params パラメータ
    */
-  constructor(
-    view: ShinBraverView,
-    resources: Resources,
-    gameObjectAction: Observable<GameObjectAction>,
-  ) {
+  constructor(params: Params) {
     super();
-    this.#props = createShinBraverProps({ view, resources });
+    const { gameObjectAction } = params;
+    this.#props = createShinBraverProps(params);
     this.#unsubscribers = [
       gameObjectAction.subscribe((action) => {
         if (action.type === "Update") {

@@ -5,7 +5,7 @@ import { ShinBraverView } from "../view/shin-braver-view";
 import { ShinBraverProps } from "./shin-braver-props";
 
 /** ShinBraverProps生成パラメータ */
-type GenerateShinBraverPropsParams = {
+export type GenerateShinBraverPropsParams = {
   /** ビュー */
   view: ShinBraverView;
   /** リソース管理オブジェクト */
