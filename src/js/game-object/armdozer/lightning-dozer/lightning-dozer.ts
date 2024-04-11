@@ -30,6 +30,7 @@ import {
 } from "./props/create-lightning-dozer-props";
 import { LightningDozerProps } from "./props/lightning-dozer-props";
 
+/** コンストラクタのパラメータ */
 type Params = GenerateLightningDozerPropsParams & {
   /** ゲームオブジェクトアクション */
   gameObjectAction: Observable<GameObjectAction>;
