@@ -1,15 +1,15 @@
 import { Animate } from "../../../../animation/animate";
 import { onStart } from "../../../../animation/on-start";
 import { tween } from "../../../../animation/tween";
-import type { WingDozerModel } from "../model/wing-dozer-model";
+import { WingDozerAnimationProps } from "./animation-props";
 
 /**
  * アッパー
- *
- * @param model モデル
+ * @param props アニメーションプロパティ
  * @return アニメーション
  */
-export function upper(model: WingDozerModel): Animate {
+export function upper(props: WingDozerAnimationProps): Animate {
+  const { model } = props;
   return onStart(() => {
     model.animation.type = "UPPER_ATTACK";
     model.animation.frame = 0;

@@ -3,16 +3,15 @@ import { Animate } from "../../../../animation/animate";
 import { delay } from "../../../../animation/delay";
 import { onStart } from "../../../../animation/on-start";
 import { tween } from "../../../../animation/tween";
-import type { WingDozerModel } from "../model/wing-dozer-model";
-import { WingDozerSounds } from "../sounds/wing-dozer-sounds";
+import { WingDozerAnimationProps } from "./animation-props";
 
 /**
  * 避け
- * @param model モデル
- * @param sounds 音
+ * @param props アニメーションプロパティ
  * @return アニメーション
  */
-export function avoid(model: WingDozerModel, sounds: WingDozerSounds): Animate {
+export function avoid(props: WingDozerAnimationProps): Animate {
+  const { model, sounds } = props;
   return onStart(() => {
     model.animation.type = "BACK_STEP";
     model.animation.frame = 0;

@@ -2,19 +2,17 @@ import { Animate } from "../../../../animation/animate";
 import { onStart } from "../../../../animation/on-start";
 import { tween } from "../../../../animation/tween";
 import { ARMDOZER_SPRITE_STANDARD_Z } from "../../position";
-import type { WingDozerModel } from "../model/wing-dozer-model";
-import { WingDozerSounds } from "../sounds/wing-dozer-sounds";
+import { WingDozerAnimationProps } from "./animation-props";
 
 /**
  * アッパー -> 立ち
- * @param model モデル
- * @param sounds 音
+ * @param props アニメーションプロパティ
  * @return アニメーション
  */
 export function upperToStand(
-  model: WingDozerModel,
-  sounds: WingDozerSounds,
+  props: WingDozerAnimationProps
 ): Animate {
+  const { model, sounds } = props;
   return onStart(() => {
     model.animation.type = "UPPER_TO_STAND";
     model.animation.frame = 0;
