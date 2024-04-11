@@ -2,7 +2,6 @@ import { Observable, Unsubscribable } from "rxjs";
 import * as THREE from "three";
 
 import { Animate } from "../../../animation/animate";
-import type { PreRender } from "../../../game-loop/pre-render";
 import type { GameObjectAction } from "../../action/game-object-action";
 import type { ArmdozerSprite } from "../armdozer-sprite";
 import { EmptyArmdozerSprite } from "../empty-armdozer-sprite";
@@ -24,6 +23,7 @@ import { upper } from "./animation/upper";
 import { upperToStand } from "./animation/upper-to-stand";
 import { upright } from "./animation/upright";
 import { uprightToStand } from "./animation/upright-to-stand";
+import { bindEventListeners } from "./procedure/bind-event-listeners";
 import {
   createWingDozerProps,
   GenerateWingDozerPropsParams,
@@ -51,15 +51,10 @@ export class WingDozer extends EmptyArmdozerSprite implements ArmdozerSprite {
     super();
     const { gameObjectAction } = params;
     this.#props = createWingDozerProps(params);
-    this.#unsubscribers = [
-      gameObjectAction.subscribe((action) => {
-        if (action.type === "Update") {
-          this.#onUpdate();
-        } else if (action.type === "PreRender") {
-          this.#onPreRender(action);
-        }
-      }),
-    ];
+    this.#unsubscribers = bindEventListeners({
+      props: this.#props,
+      gameObjectAction,
+    });
   }
 
   /** @override */
@@ -183,20 +178,5 @@ export class WingDozer extends EmptyArmdozerSprite implements ArmdozerSprite {
    */
   upperToStand(): Animate {
     return upperToStand(this.#props);
-  }
-
-  /**
-   * Update時の処理
-   */
-  #onUpdate(): void {
-    this.#props.view.engage(this.#props.model);
-  }
-
-  /**
-   * PreRender時の処理
-   * @param action アクション
-   */
-  #onPreRender(action: PreRender): void {
-    this.#props.view.lookAt(action.camera);
   }
 }
