@@ -2,14 +2,15 @@ import { all } from "../../../../animation/all";
 import { Animate } from "../../../../animation/animate";
 import { onStart } from "../../../../animation/on-start";
 import { tween } from "../../../../animation/tween";
-import { GenesisBraverModel } from "../model/genesis-braver-model";
+import { GenesisBraverAnimationProps } from "./animation-props";
 
 /**
  * ノックバック
- * @param model モデル
+ * @param props アニメーションプロパティ
  * @return アニメーション
  */
-export function knockBack(model: GenesisBraverModel): Animate {
+export function knockBack(props: GenesisBraverAnimationProps): Animate {
+  const { model } = props;
   return all(
     onStart(() => {
       model.animation.type = "KNOCK_BACK";
