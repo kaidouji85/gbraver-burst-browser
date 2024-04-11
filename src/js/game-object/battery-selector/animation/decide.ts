@@ -8,9 +8,7 @@ import { BatterySelectorAnimationProps } from "./animation-props";
  * @param props アニメーションプロパティ
  * @return アニメーション
  */
-export function decide(
-  props: BatterySelectorAnimationProps
-): Animate {
+export function decide(props: BatterySelectorAnimationProps): Animate {
   const { model, sounds } = props;
   return onStart(() => {
     sounds.pushButtonSound.sound.play();

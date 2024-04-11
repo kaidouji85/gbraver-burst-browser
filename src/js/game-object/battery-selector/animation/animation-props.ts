@@ -7,4 +7,4 @@ export type BatterySelectorAnimationProps = {
   model: BatterySelectorModel;
   /** 効果音 */
   sounds: BatterySelectorSounds;
-}
+};
