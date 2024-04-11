@@ -2,8 +2,6 @@ import { Observable, Unsubscribable } from "rxjs";
 import * as THREE from "three";
 
 import { Animate } from "../../../animation/animate";
-import type { PreRender } from "../../../game-loop/pre-render";
-import type { Resources } from "../../../resource";
 import type { GameObjectAction } from "../../action/game-object-action";
 import type { ArmdozerSprite } from "../armdozer-sprite";
 import { EmptyArmdozerSprite } from "../empty-armdozer-sprite";
@@ -25,12 +23,12 @@ import { knockBackToStand } from "./animation/knock-back-to-stand";
 import { startActive } from "./animation/start-active";
 import { upright } from "./animation/upright";
 import { uprightToStand } from "./animation/upright-to-stand";
+import { bindEventListeners } from "./procedure/bind-event-listeners";
 import {
-  GenerateLightningDozerPropsParams,
   createLightningDozerProps,
+  GenerateLightningDozerPropsParams,
 } from "./props/create-lightning-dozer-props";
 import { LightningDozerProps } from "./props/lightning-dozer-props";
-import type { LightningDozerView } from "./view/lightning-dozer-view";
 
 type Params = GenerateLightningDozerPropsParams & {
   /** ゲームオブジェクトアクション */
@@ -55,15 +53,10 @@ export class LightningDozer
     super();
     const { gameObjectAction } = params;
     this.#props = createLightningDozerProps(params);
-    this.#unsubscribers = [
-      gameObjectAction.subscribe((action) => {
-        if (action.type === "Update") {
-          this.#onUpdate();
-        } else if (action.type === "PreRender") {
-          this.#onPreRender(action);
-        }
-      }),
-    ];
+    this.#unsubscribers = bindEventListeners({
+      props: this.#props,
+      gameObjectAction,
+    });
   }
 
   /** @override */
@@ -187,20 +180,5 @@ export class LightningDozer
   /** @override */
   bowUp(): Animate {
     return bowUp(this.#props.model, this.#props.sounds);
-  }
-
-  /**
-   * Update時の処理
-   */
-  #onUpdate(): void {
-    this.#props.view.engage(this.#props.model);
-  }
-
-  /**
-   * PreRender時の処理
-   * @param action アクション
-   */
-  #onPreRender(action: PreRender): void {
-    this.#props.view.lookAt(action.camera);
   }
 }
