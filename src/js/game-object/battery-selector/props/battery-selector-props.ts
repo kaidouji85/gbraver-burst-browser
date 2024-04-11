@@ -1,18 +1,13 @@
 import * as TWEEN from "@tweenjs/tween.js";
 import { Subject } from "rxjs";
 
-import { BatterySelectorModel } from "../model";
-import { BatterySelectorSounds } from "../sounds/battery-selector-sounds";
+import { BatterySelectorAnimationProps } from "../animation/animation-props";
 import { BatterySelectorView } from "../view";
 
 /** バッテリーセレクタプロパティ */
-export type BatterySelectorProps = {
-  /** モデル */
-  model: BatterySelectorModel;
+export type BatterySelectorProps = BatterySelectorAnimationProps & {
   /** ビュー */
   view: BatterySelectorView;
-  /** 効果音 */
-  sounds: BatterySelectorSounds;
   /** バッテリー変更TweenGroup */
   batteryChangeTween: TWEEN.Group;
   /** -ボタンTweenGroup */
