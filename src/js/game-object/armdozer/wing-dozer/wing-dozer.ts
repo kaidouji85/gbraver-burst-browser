@@ -25,19 +25,14 @@ import { upper } from "./animation/upper";
 import { upperToStand } from "./animation/upper-to-stand";
 import { upright } from "./animation/upright";
 import { uprightToStand } from "./animation/upright-to-stand";
-import { createInitialValue } from "./model/initial-value";
-import type { WingDozerModel } from "./model/wing-dozer-model";
-import { WingDozerSounds } from "./sounds/wing-dozer-sounds";
+import { createWingDozerProps } from "./props/create-wing-dozer-props";
+import { WingDozerProps } from "./props/wing-dozer-props";
 import type { WingDozerView } from "./view/wing-dozer-view";
 
 /** ウィングドーザ */
 export class WingDozer extends EmptyArmdozerSprite implements ArmdozerSprite {
-  /** モデル */
-  #model: WingDozerModel;
-  /** ビュー */
-  #view: WingDozerView;
-  /** サウンド */
-  #sounds: WingDozerSounds;
+  /** プロパティ */
+  #props: WingDozerProps;
   /** アンサブスクライバ */
   #unsubscribers: Unsubscribable[];
 
@@ -53,9 +48,7 @@ export class WingDozer extends EmptyArmdozerSprite implements ArmdozerSprite {
     gameObjectAction: Observable<GameObjectAction>,
   ) {
     super();
-    this.#model = createInitialValue();
-    this.#view = view;
-    this.#sounds = new WingDozerSounds(resources);
+    this.#props = createWingDozerProps({ view, resources });
     this.#unsubscribers = [
       gameObjectAction.subscribe((action) => {
         if (action.type === "Update") {
@@ -69,7 +62,7 @@ export class WingDozer extends EmptyArmdozerSprite implements ArmdozerSprite {
 
   /** @override */
   destructor(): void {
-    this.#view.destructor();
+    this.#props.view.destructor();
     this.#unsubscribers.forEach((v) => {
       v.unsubscribe();
     });
@@ -77,22 +70,22 @@ export class WingDozer extends EmptyArmdozerSprite implements ArmdozerSprite {
 
   /** @override */
   getObject3D(): THREE.Object3D {
-    return this.#view.getObject3D();
+    return this.#props.view.getObject3D();
   }
 
   /** @override */
   addObject3D(object: THREE.Object3D): void {
-    this.#view.addObject3D(object);
+    this.#props.view.addObject3D(object);
   }
 
   /** @override */
   startActive(): Animate {
-    return startActive(this.#model);
+    return startActive(this.#props.model);
   }
 
   /** @override */
   endActive(): Animate {
-    return endActive(this.#model);
+    return endActive(this.#props.model);
   }
 
   /**
@@ -100,7 +93,7 @@ export class WingDozer extends EmptyArmdozerSprite implements ArmdozerSprite {
    * @return アニメーション
    */
   dash(): Animate {
-    return dash(this.#model, this.#sounds);
+    return dash(this.#props.model, this.#props.sounds);
   }
 
   /**
@@ -108,62 +101,62 @@ export class WingDozer extends EmptyArmdozerSprite implements ArmdozerSprite {
    * @return アニメーション
    */
   dashToStand(): Animate {
-    return dashToStand(this.#model, this.#sounds);
+    return dashToStand(this.#props.model, this.#props.sounds);
   }
 
   /** @override */
   upright(): Animate {
-    return upright(this.#model, this.#sounds);
+    return upright(this.#props.model, this.#props.sounds);
   }
 
   /** @override */
   uprightToStand(): Animate {
-    return uprightToStand(this.#model, this.#sounds);
+    return uprightToStand(this.#props.model, this.#props.sounds);
   }
 
   /** @override */
   bowDown(): Animate {
-    return bowDown(this.#model, this.#sounds);
+    return bowDown(this.#props.model, this.#props.sounds);
   }
 
   /** @override */
   bowUp(): Animate {
-    return bowUp(this.#model, this.#sounds);
+    return bowUp(this.#props.model, this.#props.sounds);
   }
 
   /** @override */
   knockBack(): Animate {
-    return knockBack(this.#model);
+    return knockBack(this.#props.model);
   }
 
   /** @override */
   knockBackToStand(): Animate {
-    return knockBackToStand(this.#model, this.#sounds);
+    return knockBackToStand(this.#props.model, this.#props.sounds);
   }
 
   /** @override */
   guard(): Animate {
-    return guard(this.#model);
+    return guard(this.#props.model);
   }
 
   /** @override */
   guardToStand(): Animate {
-    return guardToStand(this.#model, this.#sounds);
+    return guardToStand(this.#props.model, this.#props.sounds);
   }
 
   /** @override */
   avoid(): Animate {
-    return avoid(this.#model, this.#sounds);
+    return avoid(this.#props.model, this.#props.sounds);
   }
 
   /** @override */
   avoidToStand(): Animate {
-    return frontStep(this.#model, this.#sounds);
+    return frontStep(this.#props.model, this.#props.sounds);
   }
 
   /** @override */
   down(): Animate {
-    return down(this.#model);
+    return down(this.#props.model);
   }
 
   /**
@@ -171,7 +164,7 @@ export class WingDozer extends EmptyArmdozerSprite implements ArmdozerSprite {
    * @return アニメーション
    */
   charge(): Animate {
-    return charge(this.#model, this.#sounds);
+    return charge(this.#props.model, this.#props.sounds);
   }
 
   /**
@@ -179,7 +172,7 @@ export class WingDozer extends EmptyArmdozerSprite implements ArmdozerSprite {
    * @return アニメーション
    */
   upper(): Animate {
-    return upper(this.#model);
+    return upper(this.#props.model);
   }
 
   /**
@@ -187,14 +180,14 @@ export class WingDozer extends EmptyArmdozerSprite implements ArmdozerSprite {
    * @return アニメーション
    */
   upperToStand(): Animate {
-    return upperToStand(this.#model, this.#sounds);
+    return upperToStand(this.#props.model, this.#props.sounds);
   }
 
   /**
    * Update時の処理
    */
   #onUpdate(): void {
-    this.#view.engage(this.#model);
+    this.#props.view.engage(this.#props.model);
   }
 
   /**
@@ -202,6 +195,6 @@ export class WingDozer extends EmptyArmdozerSprite implements ArmdozerSprite {
    * @param action アクション
    */
   #onPreRender(action: PreRender): void {
-    this.#view.lookAt(action.camera);
+    this.#props.view.lookAt(action.camera);
   }
 }
