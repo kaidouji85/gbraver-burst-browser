@@ -10,9 +10,7 @@ import { LightningDozerAnimationProps } from "./animation-props";
  * @param props アニメーションプロパティ
  * @return アニメーション
  */
-export function hmToStand(
-  props: LightningDozerAnimationProps
-): Animate {
+export function hmToStand(props: LightningDozerAnimationProps): Animate {
   const { model, sounds } = props;
   return all(
     onStart(() => {

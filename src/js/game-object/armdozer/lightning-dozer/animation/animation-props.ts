@@ -3,8 +3,8 @@ import { LightningDozerSounds } from "../sounds/lightning-dozer-sounds";
 
 /** ライトニングドーザ アニメーション プロパティ */
 export type LightningDozerAnimationProps = {
-    /** モデル */
-    model: LightningDozerModel;
-    /** サウンド */
-    sounds: LightningDozerSounds;
+  /** モデル */
+  model: LightningDozerModel;
+  /** サウンド */
+  sounds: LightningDozerSounds;
 };

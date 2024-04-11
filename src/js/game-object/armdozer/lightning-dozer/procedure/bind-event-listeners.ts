@@ -1,6 +1,6 @@
-import { Observable, Unsubscribable } from "rxjs"
+import { Observable, Unsubscribable } from "rxjs";
 
-import { GameObjectAction } from "../../../action/game-object-action"
+import { GameObjectAction } from "../../../action/game-object-action";
 import { LightningDozerProps } from "../props/lightning-dozer-props";
 import { onPreRender } from "./on-pre-render";
 import { onUpdate } from "./on-update";
@@ -11,7 +11,7 @@ type Params = {
   props: LightningDozerProps;
   /** ゲームオブジェクトアクション */
   gameObjectAction: Observable<GameObjectAction>;
-}
+};
 
 /**
  * イベントリスナを登録する
@@ -27,6 +27,6 @@ export function bindEventListeners(params: Params): Unsubscribable[] {
       } else if (action.type === "PreRender") {
         onPreRender(props, action);
       }
-    })
+    }),
   ];
 }

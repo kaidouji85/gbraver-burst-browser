@@ -8,9 +8,7 @@ import { LightningDozerAnimationProps } from "./animation-props";
  * @param props アニメーションプロパティ
  * @return アニメーション
  */
-export function knockBackToStand(
-  props: LightningDozerAnimationProps
-): Animate {
+export function knockBackToStand(props: LightningDozerAnimationProps): Animate {
   const { model, sounds } = props;
   return onStart(() => {
     model.animation.type = "KNOCK_BACK";

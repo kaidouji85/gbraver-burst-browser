@@ -8,9 +8,7 @@ import { LightningDozerAnimationProps } from "./animation-props";
  * @param props アニメーションプロパティ
  * @return アニメーション
  */
-export function guardToStand(
-  props: LightningDozerAnimationProps
-): Animate {
+export function guardToStand(props: LightningDozerAnimationProps): Animate {
   const { model, sounds } = props;
   return onStart(() => {
     model.animation.frame = 1;

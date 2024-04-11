@@ -8,9 +8,7 @@ import { LightningDozerAnimationProps } from "./animation-props";
  * @param props アニメーションプロパティ
  * @return アニメーション
  */
-export function upright(
-  props: LightningDozerAnimationProps
-): Animate {
+export function upright(props: LightningDozerAnimationProps): Animate {
   const { model, sounds } = props;
   return onStart(() => {
     model.animation.type = "UPRIGHT";
