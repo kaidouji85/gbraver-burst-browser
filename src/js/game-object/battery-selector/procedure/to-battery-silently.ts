@@ -14,7 +14,7 @@ async function plusButton(props: BatterySelectorProps): Promise<void> {
   props.batteryPlusTween.update();
   props.batteryPlusTween.removeAll();
   await all(
-    silentlyBatteryPlusPop(props.model, props.batteryPlusTween),
+    silentlyBatteryPlusPop(props, props.batteryPlusTween),
     batteryChange(props, props.model.battery + 1),
   ).play();
 }
