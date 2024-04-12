@@ -27,7 +27,7 @@ export class BurstButton {
   /** ボタン押下通知 */
   #pushButton: Subject<Event>;
   /** アンサブスクライバ */
-  #unsubscriber: Unsubscribable;
+  #unsubscribers: Unsubscribable[];
 
   /**
    * コンストラクタ
@@ -49,15 +49,17 @@ export class BurstButton {
       resources: resources,
       gameObjectAction: gameObjectAction,
       armdozerIcon: armdozerIcon,
-      onPush: (event) => {
+    });
+    this.#unsubscribers = [
+      gameObjectAction.subscribe((action) => {
+        if (action.type === "PreRender") {
+          this.#onPreRender(action);
+        }
+      }),
+      this.#view.notifyPush().subscribe((event) => {
         this.#onPush(event);
-      },
-    });
-    this.#unsubscriber = gameObjectAction.subscribe((action) => {
-      if (action.type === "PreRender") {
-        this.#onPreRender(action);
-      }
-    });
+      }),
+    ];
   }
 
   /**
@@ -65,7 +67,9 @@ export class BurstButton {
    */
   destructor(): void {
     this.#view.destructor();
-    this.#unsubscriber.unsubscribe();
+    this.#unsubscribers.forEach((u) => {
+      u.unsubscribe();
+    });
   }
 
   /**
