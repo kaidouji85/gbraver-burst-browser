@@ -8,7 +8,10 @@ import { close } from "./animation/close";
 import { open } from "./animation/open";
 import { toggle } from "./animation/toggle";
 import { getNextTimeScale } from "./model/next-time-scale";
-import { createTimeScaleButtonProps,GenerateTimeScaleButtonPropsParams } from "./props/create-time-scale-button-props";
+import {
+  createTimeScaleButtonProps,
+  GenerateTimeScaleButtonPropsParams,
+} from "./props/create-time-scale-button-props";
 import { TimeScaleButtonProps } from "./props/time-scale-button-props";
 
 /** コンストラクタのパラメータ */
@@ -90,7 +93,7 @@ export class TimeScaleButton {
    * @return アニメーション
    */
   open(timeScale: number): Animate {
-    return open(this.#props.model, timeScale);
+    return open(this.#props, timeScale);
   }
 
   /**
@@ -98,7 +101,7 @@ export class TimeScaleButton {
    * @return アニメーション
    */
   close(): Animate {
-    return close(this.#props.model);
+    return close(this.#props);
   }
 
   /**
@@ -131,12 +134,7 @@ export class TimeScaleButton {
     this.#props.toggleTween.update();
     this.#props.toggleTween.removeAll();
     const nextTimeScale = getNextTimeScale(this.#props.model.timeScale);
-    toggle(
-      this.#props.model,
-      this.#props.sounds,
-      this.#props.toggleTween,
-      nextTimeScale,
-    ).play();
+    toggle(this.#props, this.#props.toggleTween, nextTimeScale).play();
     this.#props.toggle.next(nextTimeScale);
   }
 }
