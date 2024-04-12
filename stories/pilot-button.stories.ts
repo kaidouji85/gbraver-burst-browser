@@ -25,15 +25,15 @@ export default {
  */
 const pilotButtonStory =
   (
-    generator: (
+    generator: (params: {
       resources: Resources,
       gameObjectAction: Observable<GameObjectAction>,
-    ) => PilotButton,
+    }) => PilotButton,
     fn: (button: PilotButton) => void,
   ) =>
   () => {
-    const stub = new HUDGameObjectStub(({ resources, gameObjectAction }) => {
-      const button = generator(resources, gameObjectAction);
+    const stub = new HUDGameObjectStub((params) => {
+      const button = generator(params);
       fn(button);
       return [button.getObject3D()];
     });

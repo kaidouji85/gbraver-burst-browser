@@ -18,19 +18,19 @@ import { GenerateHUDLayerObjectParams } from "../generate-params";
 export function createPilotButton(
   params: GenerateHUDLayerObjectParams,
 ): PilotButton {
-  const { resources, player, gameObjectAction } = params;
+  const { player } = params;
   switch (player.pilot.id) {
     case PilotIds.SHINYA:
-      return shinyaPilotButton(resources, gameObjectAction);
+      return shinyaPilotButton(params);
     case PilotIds.GAI:
-      return gaiPilotButton(resources, gameObjectAction);
+      return gaiPilotButton(params);
     case PilotIds.RAITO:
-      return raitoPilotButton(resources, gameObjectAction);
+      return raitoPilotButton(params);
     case PilotIds.TSUBASA:
-      return tsubasaPilotButton(resources, gameObjectAction);
+      return tsubasaPilotButton(params);
     case PilotIds.YUUYA:
-      return yuuyaPilotButton(resources, gameObjectAction);
+      return yuuyaPilotButton(params);
     default:
-      return shinyaPilotButton(resources, gameObjectAction);
+      return shinyaPilotButton(params);
   }
 }

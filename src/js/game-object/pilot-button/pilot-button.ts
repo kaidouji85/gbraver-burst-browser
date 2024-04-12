@@ -3,14 +3,14 @@ import * as THREE from "three";
 
 import { Animate } from "../../animation/animate";
 import type { PreRender } from "../../game-loop/pre-render";
-import type { Resources } from "../../resource";
-import type { GameObjectAction } from "../action/game-object-action";
 import { close } from "./animation/close";
 import { decide } from "./animation/decide";
 import { open } from "./animation/open";
-import { createPilotButtonProps } from "./props/create-pilot-button-props";
+import { createPilotButtonProps,GeneratePilotButtonPropsParams } from "./props/create-pilot-button-props";
 import { PilotButtonProps } from "./props/pilot-button-props";
-import type { PilotIcon } from "./view/pilot-icon";
+
+/** コンストラクタのパラメータ */
+type Params = GeneratePilotButtonPropsParams;
 
 /** パイロットボタン */
 export class PilotButton {
@@ -25,12 +25,9 @@ export class PilotButton {
    * @param pilotIcon パイロットアイコン
    * @param gameObjectAction ゲームオブジェクトアクション
    */
-  constructor(
-    resources: Resources,
-    pilotIcon: PilotIcon,
-    gameObjectAction: Observable<GameObjectAction>,
-  ) {
-    this.#props = createPilotButtonProps({ resources, pilotIcon, gameObjectAction });
+  constructor(params: Params) {
+    const { gameObjectAction } = params;
+    this.#props = createPilotButtonProps(params);
     this.#unsubscribers = [
       gameObjectAction.subscribe((action) => {
         if (action.type === "PreRender") {

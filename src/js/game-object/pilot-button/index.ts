@@ -9,60 +9,54 @@ import { ShinyaIcon } from "./view/shinya";
 import { TsubasaIcon } from "./view/tsubasa";
 import { YuuyaIcon } from "./view/yuuya";
 
+/** 生成パラメータ */
+type Params = {
+  resources: Resources;
+  gameObjectAction: Observable<GameObjectAction>;
+};
+
 /**
  * シンヤ パイロットボタン を生成する
- * @param resources リソース管理オブジェクト
- * @param gameObjectAction ゲームオブジェクトアクション
+ * @param params 生成パラメータ
  * @return パイロットボタン
  */
-export function shinyaPilotButton(
-  resources: Resources,
-  gameObjectAction: Observable<GameObjectAction>,
-): PilotButton {
-  const icon = new ShinyaIcon(resources);
-  return new PilotButton(resources, icon, gameObjectAction);
+export function shinyaPilotButton(params: Params): PilotButton {
+  const { resources } = params;
+  const pilotIcon = new ShinyaIcon(resources);
+  return new PilotButton({ ...params, pilotIcon });
 }
 
 /**
  * ガイ パイロットボタン を生成する
- * @param resources リソース管理オブジェクト
- * @param gameObjectAction ゲームオブジェクトアクション
+ * @param params 生成パラメータ
  * @return パイロットボタン
  */
-export function gaiPilotButton(
-  resources: Resources,
-  gameObjectAction: Observable<GameObjectAction>,
-): PilotButton {
-  const icon = new GaiIcon(resources);
-  return new PilotButton(resources, icon, gameObjectAction);
+export function gaiPilotButton(params: Params): PilotButton {
+  const { resources } = params;
+  const pilotIcon = new GaiIcon(resources);
+  return new PilotButton({ ...params, pilotIcon });
 }
 
 /**
  * ライト パイロットボタン を生成する
- * @param resources リソース管理オブジェクト
- * @param gameObjectAction ゲームオブジェクトアクション
+ * @param params 生成パラメータ
  * @return パイロットボタン
  */
-export function raitoPilotButton(
-  resources: Resources,
-  gameObjectAction: Observable<GameObjectAction>,
-): PilotButton {
-  const icon = new RaitoIcon(resources);
-  return new PilotButton(resources, icon, gameObjectAction);
+export function raitoPilotButton(params: Params): PilotButton {
+  const { resources } = params;
+  const pilotIcon = new RaitoIcon(resources);
+  return new PilotButton({ ...params, pilotIcon });
 }
 
 /**
  * ツバサ パイロットボタン を生成する
- * @param resources リソース管理オブジェクト
- * @param gameObjectAction ゲームオブジェクトアクション
+ * @param params 生成パラメータ
  * @return パイロットボタン
  */
-export function tsubasaPilotButton(
-  resources: Resources,
-  gameObjectAction: Observable<GameObjectAction>,
-): PilotButton {
-  const icon = new TsubasaIcon(resources);
-  return new PilotButton(resources, icon, gameObjectAction);
+export function tsubasaPilotButton(params: Params): PilotButton {
+  const { resources } = params;
+  const pilotIcon = new TsubasaIcon(resources);
+  return new PilotButton({ ...params, pilotIcon });
 }
 
 /**
@@ -71,10 +65,8 @@ export function tsubasaPilotButton(
  * @param gameObjectAction ゲームオブジェクトアクション
  * @return パイロットボタン
  */
-export function yuuyaPilotButton(
-  resources: Resources,
-  gameObjectAction: Observable<GameObjectAction>,
-): PilotButton {
-  const icon = new YuuyaIcon(resources);
-  return new PilotButton(resources, icon, gameObjectAction);
+export function yuuyaPilotButton(params: Params): PilotButton {
+  const { resources } = params;
+  const pilotIcon = new YuuyaIcon(resources);
+  return new PilotButton({ ...params, pilotIcon });
 }
