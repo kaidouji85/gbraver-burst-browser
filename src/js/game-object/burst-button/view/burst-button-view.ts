@@ -1,4 +1,4 @@
-import { Observable, Unsubscribable } from "rxjs";
+import { Observable } from "rxjs";
 import * as THREE from "three";
 
 import type { PreRender } from "../../../game-loop/pre-render";
@@ -16,33 +16,29 @@ import type { ArmdozerIcon } from "./armdozer-icon";
 type Param = {
   /** リソース管理オブジェクト */
   resources: Resources;
-
   /** ゲームオブジェクトアクション */
   gameObjectAction: Observable<GameObjectAction>;
-
   /** アームドーザアイコン */
   armdozerIcon: ArmdozerIcon;
-
-  /**
-   * ボタンを押した時に呼ばれるコールバック関数
-   * @param event イベント
-   */
-  onPush: (event: Event) => void;
 };
 
 /** バーストボタンのビュー */
 export class BurstButtonView {
+  /** バーストボタン */
   #burstButton: SimpleImageMesh;
+  /** アームドーザアイコン */
   #armdozerIcon: ArmdozerIcon;
+  /** ラベル */
   #label: SimpleImageMesh;
+  /** ボタン無効化オーバーレイ */
   #buttonDisabled: SimpleImageMesh;
+  /** ボタン押下判定 */
   #pushDetector: PushDetector;
+  /** グループ */
   #group: THREE.Group;
-  #unsubscribers: Unsubscribable[];
 
   /**
    * コンストラクタ
-   *
    * @param param パラメータ
    */
   constructor(param: Param) {
@@ -90,26 +86,21 @@ export class BurstButtonView {
       gameObjectAction: param.gameObjectAction,
     });
     this.#group.add(this.#pushDetector.getObject3D());
-    this.#unsubscribers = [
-      this.#pushDetector.notifyPressed().subscribe(param.onPush),
-    ];
   }
 
-  /** デストラクタ */
+  /** 
+   * デストラクタ相当の処理
+   */
   destructor(): void {
     this.#burstButton.destructor();
     this.#armdozerIcon.destructor();
     this.#buttonDisabled.destructor();
     this.#label.destructor();
     this.#pushDetector.destructor();
-    this.#unsubscribers.forEach((unsubscriber) => {
-      unsubscriber.unsubscribe();
-    });
   }
 
   /**
    * モデルをビューに反映させる
-   *
    * @param model モデル
    * @param preRender プリレンダー情報
    */
@@ -145,10 +136,17 @@ export class BurstButtonView {
 
   /**
    * 本ビューで使うthree.jsオブジェクトを取得する
-   *
    * @return
    */
   getObject3D(): THREE.Object3D {
     return this.#group;
+  }
+
+  /**
+   * ボタン押下通知
+   * @returns 
+   */
+  notifyPush(): Observable<Event> {
+    return this.#pushDetector.notifyPressed();
   }
 }
