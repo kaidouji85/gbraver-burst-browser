@@ -8,9 +8,7 @@ import { PilotButtonAnimationProps } from "./animation-props";
  * @param props アニメーションプロパティ
  * @return アニメーション
  */
-export function decide(
-  props: PilotButtonAnimationProps
-): Animate {
+export function decide(props: PilotButtonAnimationProps): Animate {
   const { model, sounds } = props;
   return onStart(() => {
     model.shouldPushNotifierStop = true;

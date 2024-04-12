@@ -26,8 +26,8 @@ export default {
 const pilotButtonStory =
   (
     generator: (params: {
-      resources: Resources,
-      gameObjectAction: Observable<GameObjectAction>,
+      resources: Resources;
+      gameObjectAction: Observable<GameObjectAction>;
     }) => PilotButton,
     fn: (button: PilotButton) => void,
   ) =>

@@ -6,7 +6,10 @@ import type { PreRender } from "../../game-loop/pre-render";
 import { close } from "./animation/close";
 import { decide } from "./animation/decide";
 import { open } from "./animation/open";
-import { createPilotButtonProps,GeneratePilotButtonPropsParams } from "./props/create-pilot-button-props";
+import {
+  createPilotButtonProps,
+  GeneratePilotButtonPropsParams,
+} from "./props/create-pilot-button-props";
 import { PilotButtonProps } from "./props/pilot-button-props";
 
 /** コンストラクタのパラメータ */

@@ -9,7 +9,10 @@ import { PilotButtonAnimationProps } from "./animation-props";
  * @param canPilot パイロットボタン利用可能フラグ
  * @return アニメーション
  */
-export function open(props: PilotButtonAnimationProps, canPilot: boolean): Animate {
+export function open(
+  props: PilotButtonAnimationProps,
+  canPilot: boolean,
+): Animate {
   const { model } = props;
   return onStart(() => {
     model.shouldPushNotifierStop = true;

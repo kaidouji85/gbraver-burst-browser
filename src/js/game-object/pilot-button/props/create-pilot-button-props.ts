@@ -11,11 +11,11 @@ import { PilotButtonProps } from "./pilot-button-props";
 /** PilotButtonProps生成パラメータ */
 export type GeneratePilotButtonPropsParams = {
   /** リソース管理オブジェクト */
-  resources: Resources,
+  resources: Resources;
   /** パイロットアイコン */
-  pilotIcon: PilotIcon,
+  pilotIcon: PilotIcon;
   /** ゲームオブジェクトアクション */
-  gameObjectAction: Observable<GameObjectAction>,
+  gameObjectAction: Observable<GameObjectAction>;
 };
 
 /**
@@ -23,7 +23,9 @@ export type GeneratePilotButtonPropsParams = {
  * @param params 生成パラメータ
  * @return 生成結果
  */
-export function createPilotButtonProps(params: GeneratePilotButtonPropsParams): PilotButtonProps {
+export function createPilotButtonProps(
+  params: GeneratePilotButtonPropsParams,
+): PilotButtonProps {
   const { resources, pilotIcon, gameObjectAction } = params;
   return {
     model: createInitialValue(),

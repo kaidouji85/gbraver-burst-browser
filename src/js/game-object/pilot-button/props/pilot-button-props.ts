@@ -9,4 +9,4 @@ export type PilotButtonProps = PilotButtonAnimationProps & {
   view: PilotButtonView;
   /** ボタン押下通知 */
   pushButton: Subject<Event>;
-}
+};
