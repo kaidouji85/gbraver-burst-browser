@@ -12,8 +12,8 @@ import type { PilotButtonModel } from "../model/pilot-button-model";
  */
 export function open(model: PilotButtonModel, canPilot: boolean): Animate {
   return onStart(() => {
-    model.isPushNotifierDisabled = true;
-    model.canPilot = canPilot;
+    model.shouldPushNotifierStop = true;
+    model.canActivatePilotSkill = canPilot;
     model.opacity = 0;
   })
     .chain(
@@ -28,7 +28,7 @@ export function open(model: PilotButtonModel, canPilot: boolean): Animate {
     )
     .chain(
       onStart(() => {
-        model.isPushNotifierDisabled = false;
+        model.shouldPushNotifierStop = false;
       }),
     );
 }
