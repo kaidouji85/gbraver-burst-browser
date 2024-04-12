@@ -15,7 +15,7 @@ export function decide(
   sounds: PilotButtonSounds,
 ): Animate {
   return onStart(() => {
-    model.isPushNotifierDisabled = true;
+    model.shouldPushNotifierStop = true;
     sounds.pushButton.sound.play();
   })
     .chain(

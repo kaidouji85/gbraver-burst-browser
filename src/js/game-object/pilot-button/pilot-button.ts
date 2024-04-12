@@ -130,9 +130,9 @@ export class PilotButton {
    */
   #onPush(event: Event): void {
     if (
-      !this.#model.isPushNotifierDisabled &&
+      !this.#model.shouldPushNotifierStop &&
       !this.#model.disabled &&
-      this.#model.canPilot
+      this.#model.canActivatePilotSkill
     ) {
       this.#pushButton.next(event);
     }
