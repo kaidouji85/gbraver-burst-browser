@@ -88,7 +88,7 @@ export class BurstButtonView {
     this.#group.add(this.#pushDetector.getObject3D());
   }
 
-  /** 
+  /**
    * デストラクタ相当の処理
    */
   destructor(): void {
@@ -144,7 +144,7 @@ export class BurstButtonView {
 
   /**
    * ボタン押下通知
-   * @returns 
+   * @returns
    */
   notifyPush(): Observable<Event> {
     return this.#pushDetector.notifyPressed();
