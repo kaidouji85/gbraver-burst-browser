@@ -8,9 +8,7 @@ import { LightningBarrierAnimationProps } from "./animation-props";
  * @param props アニメーションプロパティ
  * @return アニメーション
  */
-export function show(
-  props: LightningBarrierAnimationProps
-): Animate {
+export function show(props: LightningBarrierAnimationProps): Animate {
   const { model, sounds } = props;
   return onStart(() => {
     sounds.lightningBarrier.sound.play();
