@@ -16,9 +16,7 @@ import type { LightningBarrierModel } from "./model/lightning-barrier-model";
 import { LightningBarrierSounds } from "./sounds/lightning-barrier-sounds";
 import { LightningBarrierView } from "./view/lightning-barrier-view";
 
-/**
- * 電撃バリア
- */
+/** 電撃バリア */
 export class LightningBarrierGameEffect {
   #model: LightningBarrierModel;
   #view: LightningBarrierView;
