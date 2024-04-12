@@ -70,13 +70,10 @@ export class LightningDozerTD
 export function playerLightningDozerTD(
   params: GenerateTDLayerObjectParams,
 ): LightningDozerTD {
-  const { player, resources, gameObjectAction } = params;
+  const { player } = params;
   return new LightningDozerTD(player.playerId, {
     lightningDozer: PlayerLightningDozer(params),
-    lightningBarrier: new LightningBarrierGameEffect(
-      resources,
-      gameObjectAction,
-    ),
+    lightningBarrier: new LightningBarrierGameEffect(params),
   });
 }
 
@@ -88,12 +85,9 @@ export function playerLightningDozerTD(
 export function enemyLightningDozerTD(
   params: GenerateTDLayerObjectParams,
 ): LightningDozerTD {
-  const { enemy, resources, gameObjectAction } = params;
+  const { enemy } = params;
   return new LightningDozerTD(enemy.playerId, {
     lightningDozer: EnemyLightningDozer(params),
-    lightningBarrier: new LightningBarrierGameEffect(
-      resources,
-      gameObjectAction,
-    ),
+    lightningBarrier: new LightningBarrierGameEffect(params),
   });
 }
