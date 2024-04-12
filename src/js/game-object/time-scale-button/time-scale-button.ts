@@ -4,14 +4,15 @@ import * as THREE from "three";
 import type { Animate } from "../../animation/animate";
 import type { PreRender } from "../../game-loop/pre-render";
 import type { Update } from "../../game-loop/update";
-import type { Resources } from "../../resource";
-import type { GameObjectAction } from "../action/game-object-action";
 import { close } from "./animation/close";
 import { open } from "./animation/open";
 import { toggle } from "./animation/toggle";
 import { getNextTimeScale } from "./model/next-time-scale";
-import { createTimeScaleButtonProps } from "./props/create-time-scale-button-props";
+import { createTimeScaleButtonProps,GenerateTimeScaleButtonPropsParams } from "./props/create-time-scale-button-props";
 import { TimeScaleButtonProps } from "./props/time-scale-button-props";
+
+/** コンストラクタのパラメータ */
+type Params = GenerateTimeScaleButtonPropsParams;
 
 /** アニメーションタイムスケールボタン */
 export class TimeScaleButton {
@@ -22,14 +23,11 @@ export class TimeScaleButton {
 
   /**
    * コンストラクタ
-   * @param resources リソース管理オブジェクト
-   * @param gameObjectAction ゲームオブジェクトアクション
+   * @param params パラメータ
    */
-  constructor(
-    resources: Resources,
-    gameObjectAction: Observable<GameObjectAction>,
-  ) {
-    this.#props = createTimeScaleButtonProps({ resources, gameObjectAction });
+  constructor(params: Params) {
+    const { gameObjectAction } = params;
+    this.#props = createTimeScaleButtonProps(params);
     this.#unsubscribers = [
       gameObjectAction.subscribe((action) => {
         if (action.type === "Update") {
