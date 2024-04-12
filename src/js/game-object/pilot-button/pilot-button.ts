@@ -1,4 +1,4 @@
-import { filter, Observable, Unsubscribable } from "rxjs";
+import { Observable, Subject, Unsubscribable } from "rxjs";
 import * as THREE from "three";
 
 import { Animate } from "../../animation/animate";
@@ -19,8 +19,8 @@ export class PilotButton {
   #model: PilotButtonModel;
   #sounds: PilotButtonSounds;
   #view: PilotButtonView;
-  #pushButton: Observable<Event>;
-  #unsubscriber: Unsubscribable;
+  #pushButton: Subject<Event>;
+  #unsubscribers: Unsubscribable[];
 
   /**
    * コンストラクタ
@@ -36,21 +36,17 @@ export class PilotButton {
     this.#model = createInitialValue();
     this.#sounds = new PilotButtonSounds(resources);
     this.#view = new PilotButtonView(resources, pilotIcon, gameObjectAction);
-    this.#pushButton = this.#view
-      .notifyPressed()
-      .pipe(
-        filter(
-          () =>
-            !this.#model.isPushNotifierDisabled &&
-            !this.#model.disabled &&
-            this.#model.canPilot,
-        ),
-      );
-    this.#unsubscriber = gameObjectAction.subscribe((action) => {
-      if (action.type === "PreRender") {
-        this.#onPreRender(action);
-      }
-    });
+    this.#pushButton = new Subject();
+    this.#unsubscribers = [
+      gameObjectAction.subscribe((action) => {
+        if (action.type === "PreRender") {
+          this.#onPreRender(action);
+        }
+      }),
+      this.#view.notifyPressed().subscribe((event) => {
+        this.#onPush(event);
+      }),
+    ];
   }
 
   /**
@@ -58,7 +54,9 @@ export class PilotButton {
    */
   destructor(): void {
     this.#view.destructor();
-    this.#unsubscriber.unsubscribe();
+    this.#unsubscribers.forEach((u) => {
+      u.unsubscribe();
+    });
   }
 
   /**
@@ -124,5 +122,19 @@ export class PilotButton {
    */
   #onPreRender(action: PreRender): void {
     this.#view.engage(this.#model, action);
+  }
+
+  /**
+   * ボタン押下時の処理
+   * @param event イベント
+   */
+  #onPush(event: Event): void {
+    if (
+      !this.#model.isPushNotifierDisabled &&
+      !this.#model.disabled &&
+      this.#model.canPilot
+    ) {
+      this.#pushButton.next(event);
+    }
   }
 }
