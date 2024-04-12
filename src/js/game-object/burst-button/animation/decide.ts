@@ -11,7 +11,7 @@ import { BurstButtonAnimationProps } from "./animation-props";
 export function decide(props: BurstButtonAnimationProps): Animate {
   const { model } = props;
   return onStart(() => {
-    model.isPushNotifierDisabled = true;
+    model.shouldPushNotifierStop = true;
     props.pushButtonSound.sound.play();
   })
     .chain(

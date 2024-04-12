@@ -11,7 +11,7 @@ import { BurstButtonAnimationProps } from "./animation-props";
 export function close(props: BurstButtonAnimationProps): Animate {
   const { model } = props;
   return onStart(() => {
-    model.isPushNotifierDisabled = true;
+    model.shouldPushNotifierStop = true;
     model.opacity = 1;
   }).chain(
     tween(model, (t) =>
