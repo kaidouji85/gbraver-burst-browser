@@ -11,7 +11,7 @@ import type { TimeScaleButtonModel } from "../model/time-scale-button-model";
  */
 export function close(model: TimeScaleButtonModel): Animate {
   return onStart(() => {
-    model.isPushNotifierDisabled = true;
+    model.shouldPushNotifierStop = true;
     model.opacity = 1;
   }).chain(
     tween(model, (t) =>

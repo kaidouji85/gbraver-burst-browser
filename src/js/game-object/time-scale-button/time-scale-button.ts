@@ -133,7 +133,7 @@ export class TimeScaleButton {
    * ボタン押下時の処理
    */
   #onButtonPush(): void {
-    if (this.#model.isPushNotifierDisabled || this.#model.disabled) {
+    if (this.#model.shouldPushNotifierStop || this.#model.disabled) {
       return;
     }
 
