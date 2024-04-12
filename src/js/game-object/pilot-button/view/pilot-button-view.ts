@@ -112,10 +112,10 @@ export class PilotButtonView {
    */
   engage(model: PilotButtonModel, preRender: PreRender): void {
     this.#button.setOpacity(model.opacity);
-    const labelOpacity = model.canPilot ? model.opacity : 0;
+    const labelOpacity = model.canActivatePilotSkill ? model.opacity : 0;
     this.#label.setOpacity(labelOpacity);
     this.#pilotIcon.setOpacity(labelOpacity);
-    const disabledOpacity = model.canPilot ? 0 : model.opacity;
+    const disabledOpacity = model.canActivatePilotSkill ? 0 : model.opacity;
     this.#buttonDisabled.setOpacity(disabledOpacity);
     const devicePerScale = HUDUIScale(
       preRender.rendererDOM,

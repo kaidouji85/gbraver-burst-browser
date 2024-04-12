@@ -11,7 +11,7 @@ import type { PilotButtonModel } from "../model/pilot-button-model";
  */
 export function close(model: PilotButtonModel): Animate {
   return onStart(() => {
-    model.isPushNotifierDisabled = true;
+    model.shouldPushNotifierStop = true;
     model.opacity = 1;
   }).chain(
     tween(model, (t) =>

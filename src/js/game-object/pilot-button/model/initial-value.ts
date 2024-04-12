@@ -8,9 +8,9 @@ import type { PilotButtonModel } from "./pilot-button-model";
 export function createInitialValue(): PilotButtonModel {
   return {
     opacity: 0,
-    isPushNotifierDisabled: true,
+    shouldPushNotifierStop: true,
     disabled: false,
     scale: 1,
-    canPilot: true,
+    canActivatePilotSkill: true,
   };
 }
