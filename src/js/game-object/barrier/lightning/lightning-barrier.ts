@@ -75,7 +75,7 @@ export class LightningBarrierGameEffect {
    * @return アニメーション
    */
   show(): Animate {
-    return show(this.#props.model, this.#props.sounds);
+    return show(this.#props);
   }
 
   /**
@@ -84,14 +84,14 @@ export class LightningBarrierGameEffect {
    * @return アニメーション
    */
   hidden(): Animate {
-    return hidden(this.#props.model);
+    return hidden(this.#props);
   }
 
   /**
    * 初回のアップデート処理
    */
   #onFirstUpdate(): void {
-    electrification(this.#props.model, this.#props.tweenGroup).loop();
+    electrification(this.#props, this.#props.tweenGroup).loop();
   }
 
   /**
