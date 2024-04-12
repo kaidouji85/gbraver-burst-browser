@@ -3,14 +3,17 @@ import * as THREE from "three";
 
 import { Animate } from "../../animation/animate";
 import type { PreRender } from "../../game-loop/pre-render";
-import type { Resources } from "../../resource";
-import type { GameObjectAction } from "../action/game-object-action";
 import { close } from "./animation/close";
 import { decide } from "./animation/decide";
 import { open } from "./animation/open";
 import { BurstButtonProps } from "./props/burst-button-props";
-import { createBurstButtonProps } from "./props/create-burst-button-props";
-import type { ArmdozerIcon } from "./view/armdozer-icon";
+import {
+  createBurstButtonProps,
+  GenerateBurstButtonPropsParams,
+} from "./props/create-burst-button-props";
+
+/** コンストラクタのパラメータ */
+type Params = GenerateBurstButtonPropsParams;
 
 /** バーストボタン */
 export class BurstButton {
@@ -21,20 +24,11 @@ export class BurstButton {
 
   /**
    * コンストラクタ
-   * @param resources リソース管理オブジェクト
-   * @param gameObjectAction ゲームオブジェクトアクション
-   * @param armdozerIcon アームドーザアイコン
+   * @param params パラメータ
    */
-  constructor(
-    resources: Resources,
-    gameObjectAction: Observable<GameObjectAction>,
-    armdozerIcon: ArmdozerIcon,
-  ) {
-    this.#props = createBurstButtonProps({
-      resources,
-      gameObjectAction,
-      armdozerIcon,
-    });
+  constructor(params: Params) {
+    const { gameObjectAction } = params;
+    this.#props = createBurstButtonProps(params);
     this.#unsubscribers = [
       gameObjectAction.subscribe((action) => {
         if (action.type === "PreRender") {
