@@ -67,7 +67,7 @@ export class PilotButton {
    * @return アニメーション
    */
   open(canPilot: boolean): Animate {
-    return open(this.#props.model, canPilot);
+    return open(this.#props, canPilot);
   }
 
   /**
@@ -75,7 +75,7 @@ export class PilotButton {
    * @return アニメーション
    */
   decide(): Animate {
-    return decide(this.#props.model, this.#props.sounds);
+    return decide(this.#props);
   }
 
   /**
@@ -83,7 +83,7 @@ export class PilotButton {
    * @return アニメーション
    */
   close(): Animate {
-    return close(this.#props.model);
+    return close(this.#props);
   }
 
   /**

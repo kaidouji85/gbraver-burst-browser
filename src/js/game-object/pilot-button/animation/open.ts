@@ -1,16 +1,16 @@
 import { Animate } from "../../../animation/animate";
 import { onStart } from "../../../animation/on-start";
 import { tween } from "../../../animation/tween";
-import type { PilotButtonModel } from "../model/pilot-button-model";
+import { PilotButtonAnimationProps } from "./animation-props";
 
 /**
  * パイロットボタンを表示する
- *
- * @param model モデル
+ * @param props アニメーションプロパティ
  * @param canPilot パイロットボタン利用可能フラグ
  * @return アニメーション
  */
-export function open(model: PilotButtonModel, canPilot: boolean): Animate {
+export function open(props: PilotButtonAnimationProps, canPilot: boolean): Animate {
+  const { model } = props;
   return onStart(() => {
     model.shouldPushNotifierStop = true;
     model.canActivatePilotSkill = canPilot;
