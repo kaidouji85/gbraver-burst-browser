@@ -66,7 +66,7 @@ export class HUDGameObjects {
     this.burstButtonLeadLine = burstButtonLeadLine(gameObjectAction);
     this.pilotButton = createPilotButton(params);
     this.pilotButtonLeadLine = pilotButtonLeadLine(gameObjectAction);
-    this.timeScaleButton = new TimeScaleButton(resources, gameObjectAction);
+    this.timeScaleButton = new TimeScaleButton(params);
     this.frontmostFader = frontmostFader({
       gameObjectAction: gameObjectAction,
       isVisible: false,
