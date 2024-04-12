@@ -45,7 +45,8 @@ export async function introduction(
     ["それでは早速だが パイロットスキルについてレクチャーする"],
     ["ロボとパイロットは自由に組み合わせることができるが"],
     ["この相性で勝負が決まると言っても過言ではない"],
-    ["……と言われても実感が湧かないと思うので　まずは試合を進めてみよう」"],
+    ["……と言われても実感が湧かないと思うので"],
+    ["まずは試合を進めてみよう」"],
   ]);
   props.view.dom.leftMessageWindow.darken();
   activeRightMessageWindowWithFace(props, "Shinya");
