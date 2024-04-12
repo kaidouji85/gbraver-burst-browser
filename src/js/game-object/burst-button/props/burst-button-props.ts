@@ -9,4 +9,4 @@ export type BurstButtonProps = BurstButtonAnimationProps & {
   view: BurstButtonView;
   /** ボタン押下通知 */
   pushButton: Subject<Event>;
-}
+};

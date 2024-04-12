@@ -22,8 +22,8 @@ export default {
  * @return バーストボタン
  */
 type BurstButtonGenerator = (params: {
-  resources: Resources,
-  gameObjectAction: Observable<GameObjectAction>,
+  resources: Resources;
+  gameObjectAction: Observable<GameObjectAction>;
 }) => BurstButton;
 
 /**

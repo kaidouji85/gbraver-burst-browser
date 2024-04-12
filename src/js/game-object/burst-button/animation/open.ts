@@ -8,7 +8,10 @@ import { BurstButtonAnimationProps } from "./animation-props";
  * @param props アニメーションプロパティ
  * @return アニメーション
  */
-export function open(props: BurstButtonAnimationProps, canBurst: boolean): Animate {
+export function open(
+  props: BurstButtonAnimationProps,
+  canBurst: boolean,
+): Animate {
   const { model } = props;
   return onStart(() => {
     model.isPushNotifierDisabled = true;
