@@ -3,23 +3,21 @@ import * as TWEEN from "@tweenjs/tween.js";
 import type { Animate } from "../../../animation/animate";
 import { onStart } from "../../../animation/on-start";
 import { tween } from "../../../animation/tween";
-import type { TimeScaleButtonModel } from "../model/time-scale-button-model";
-import type { TimeScaleButtonSounds } from "../sounds/time-scale-sounds";
+import { TimeScaleAnimationProps } from "./animation-props";
 
 /**
  * タイムスケールの値を入れ替える
- * @param model モデル
- * @param sounds サウンド
+ * @param props アニメーションプロパティ
  * @param group TWEENグループ
  * @param timeScale タイムスケール
  * @return アニメーション
  */
 export function toggle(
-  model: TimeScaleButtonModel,
-  sounds: TimeScaleButtonSounds,
+  props: TimeScaleAnimationProps,
   group: TWEEN.Group,
   timeScale: number,
 ): Animate {
+  const { model, sounds } = props;
   return onStart(() => {
     model.timeScale = timeScale;
     model.scale = 1;
