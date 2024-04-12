@@ -10,7 +10,7 @@ export function createInitialValue(): TimeScaleButtonModel {
     timeScale: 1,
     scale: 1,
     opacity: 0,
-    isPushNotifierDisabled: true,
+    shouldPushNotifierStop: true,
     disabled: false,
   };
 }

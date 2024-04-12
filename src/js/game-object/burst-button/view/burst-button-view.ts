@@ -106,12 +106,12 @@ export class BurstButtonView {
    */
   engage(model: BurstButtonModel, preRender: PreRender): void {
     this.#burstButton.setOpacity(model.opacity);
-    const iconOpacity = !model.canBurst ? 0 : model.opacity;
+    const iconOpacity = !model.canActivateBurst ? 0 : model.opacity;
     this.#armdozerIcon.setOpacity(iconOpacity);
-    const labelOpacity = !model.canBurst ? 0 : model.opacity;
+    const labelOpacity = !model.canActivateBurst ? 0 : model.opacity;
     this.#label.setOpacity(labelOpacity);
     this.#label.getObject3D().position.y = -80;
-    const disabledOpacity = model.canBurst ? 0 : model.opacity;
+    const disabledOpacity = model.canActivateBurst ? 0 : model.opacity;
     this.#buttonDisabled.setOpacity(disabledOpacity);
     const devicePerScale = HUDUIScale(
       preRender.rendererDOM,

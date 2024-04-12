@@ -122,9 +122,9 @@ export class BurstButton {
    */
   #onPush(event: Event): void {
     if (
-      this.#props.model.isPushNotifierDisabled ||
+      this.#props.model.shouldPushNotifierStop ||
       this.#props.model.disabled ||
-      !this.#props.model.canBurst
+      !this.#props.model.canActivateBurst
     ) {
       return;
     }

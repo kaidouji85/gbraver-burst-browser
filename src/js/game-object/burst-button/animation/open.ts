@@ -14,8 +14,8 @@ export function open(
 ): Animate {
   const { model } = props;
   return onStart(() => {
-    model.isPushNotifierDisabled = true;
-    model.canBurst = canBurst;
+    model.shouldPushNotifierStop = true;
+    model.canActivateBurst = canBurst;
     model.opacity = 0;
   })
     .chain(
@@ -30,7 +30,7 @@ export function open(
     )
     .chain(
       onStart(() => {
-        model.isPushNotifierDisabled = false;
+        model.shouldPushNotifierStop = false;
       }),
     );
 }

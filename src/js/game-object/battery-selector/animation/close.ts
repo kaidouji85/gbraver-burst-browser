@@ -11,7 +11,7 @@ import { BatterySelectorAnimationProps } from "./animation-props";
 export function close(props: BatterySelectorAnimationProps): Animate {
   const { model } = props;
   return onStart(() => {
-    model.isPushNotifierDisabled = true;
+    model.shouldPushNotifierStop = true;
     model.opacity = 1;
   }).chain(
     tween(model, (t) =>

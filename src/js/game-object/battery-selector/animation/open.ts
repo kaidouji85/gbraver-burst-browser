@@ -17,7 +17,7 @@ export function open(
 ): Animate {
   const { model } = props;
   return onStart(() => {
-    model.isPushNotifierDisabled = true;
+    model.shouldPushNotifierStop = true;
     model.opacity = 0;
     model.battery = param.initialValue;
     model.maxBattery = param.maxBattery;
@@ -37,7 +37,7 @@ export function open(
     )
     .chain(
       onStart(() => {
-        model.isPushNotifierDisabled = false;
+        model.shouldPushNotifierStop = false;
       }),
     );
 }

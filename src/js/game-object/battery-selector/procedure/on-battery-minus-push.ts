@@ -10,7 +10,7 @@ export function onBatteryMinusPush(
 ): void {
   const { model, batteryMinusPush } = props;
   if (
-    model.isPushNotifierDisabled ||
+    model.shouldPushNotifierStop ||
     model.disabled ||
     !canBatteryMinus(model)
   ) {

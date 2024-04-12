@@ -12,7 +12,7 @@ import type { TimeScaleButtonModel } from "../model/time-scale-button-model";
  */
 export function open(model: TimeScaleButtonModel, timeScale: number): Animate {
   return onStart(() => {
-    model.isPushNotifierDisabled = true;
+    model.shouldPushNotifierStop = true;
     model.opacity = 0;
     model.timeScale = timeScale;
   })
@@ -28,7 +28,7 @@ export function open(model: TimeScaleButtonModel, timeScale: number): Animate {
     )
     .chain(
       onStart(() => {
-        model.isPushNotifierDisabled = false;
+        model.shouldPushNotifierStop = false;
       }),
     );
 }
