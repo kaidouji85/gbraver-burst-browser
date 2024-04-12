@@ -11,5 +11,5 @@ export type TimeScaleButtonProps = TimeScaleAnimationProps & {
   /** トグルTweenグループ */
   toggleTween: TWEEN.Group;
   /** トグル通知 */
-  toggle: Subject<number>;
+  toggleNotify: Subject<number>;
 };

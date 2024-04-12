@@ -30,6 +30,6 @@ export function createTimeScaleButtonProps(
     view: new TimeScaleButtonView(resources, gameObjectAction),
     sounds: createTimeScaleButtonSounds(resources),
     toggleTween: new TWEEN.Group(),
-    toggle: new Subject(),
+    toggleNotify: new Subject(),
   };
 }

@@ -68,7 +68,7 @@ export class TimeScaleButton {
    * @return 通知ストリーム
    */
   notifyToggled(): Observable<number> {
-    return this.#props.toggle;
+    return this.#props.toggleNotify;
   }
 
   /**
@@ -124,17 +124,15 @@ export class TimeScaleButton {
    * ボタン押下時の処理
    */
   #onButtonPush(): void {
-    if (
-      this.#props.model.shouldPushNotifierStop ||
-      this.#props.model.disabled
-    ) {
+    const { model, toggleTween, toggleNotify } = this.#props;
+    if (model.shouldPushNotifierStop || model.disabled) {
       return;
     }
 
-    this.#props.toggleTween.update();
-    this.#props.toggleTween.removeAll();
-    const nextTimeScale = getNextTimeScale(this.#props.model.timeScale);
-    toggle(this.#props, this.#props.toggleTween, nextTimeScale).play();
-    this.#props.toggle.next(nextTimeScale);
+    toggleTween.update();
+    toggleTween.removeAll();
+    const nextTimeScale = getNextTimeScale(model.timeScale);
+    toggle(this.#props, toggleTween, nextTimeScale).play();
+    toggleNotify.next(nextTimeScale);
   }
 }
