@@ -18,14 +18,13 @@ export default {
 
 /**
  * バーストボタン生成関数
- * @param resources リソース管理オブジェクト
- * @param gameObjectAction ゲームオブジェクトアクション
+ * @param params 生成パラメータ
  * @return バーストボタン
  */
-type BurstButtonGenerator = (
-  resources: Resources,
-  gameObjectAction: Observable<GameObjectAction>,
-) => BurstButton;
+type BurstButtonGenerator = (params: {
+  resources: Resources;
+  gameObjectAction: Observable<GameObjectAction>;
+}) => BurstButton;
 
 /**
  * バーストボタンストーリー
@@ -35,8 +34,8 @@ type BurstButtonGenerator = (
 const buttonStory =
   (generator: BurstButtonGenerator, fn: (burstButton: BurstButton) => void) =>
   () => {
-    const stub = new HUDGameObjectStub(({ resources, gameObjectAction }) => {
-      const burstButton = generator(resources, gameObjectAction);
+    const stub = new HUDGameObjectStub((params) => {
+      const burstButton = generator(params);
       fn(burstButton);
       return [burstButton.getObject3D()];
     });

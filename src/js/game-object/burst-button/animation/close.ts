@@ -1,15 +1,15 @@
 import { Animate } from "../../../animation/animate";
 import { onStart } from "../../../animation/on-start";
 import { tween } from "../../../animation/tween";
-import type { BurstButtonModel } from "../model/burst-button-model";
+import { BurstButtonAnimationProps } from "./animation-props";
 
 /**
  * バーストボタンを非表示にする
- *
- * @param model モデル
+ * @param props アニメーションプロパティ
  * @return アニメーション
  */
-export function close(model: BurstButtonModel): Animate {
+export function close(props: BurstButtonAnimationProps): Animate {
+  const { model } = props;
   return onStart(() => {
     model.isPushNotifierDisabled = true;
     model.opacity = 1;

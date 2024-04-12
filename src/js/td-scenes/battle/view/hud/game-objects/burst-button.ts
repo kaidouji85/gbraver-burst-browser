@@ -18,19 +18,19 @@ import { GenerateHUDLayerObjectParams } from "../generate-params";
 export function createBurstButton(
   params: GenerateHUDLayerObjectParams,
 ): BurstButton {
-  const { resources, player, gameObjectAction } = params;
+  const { player } = params;
   switch (player.armdozer.id) {
     case ArmdozerIds.SHIN_BRAVER:
-      return shinBraverBurstButton(resources, gameObjectAction);
+      return shinBraverBurstButton(params);
     case ArmdozerIds.NEO_LANDOZER:
-      return neoLandozerBurstButton(resources, gameObjectAction);
+      return neoLandozerBurstButton(params);
     case ArmdozerIds.LIGHTNING_DOZER:
-      return lightningDozerBurstButton(resources, gameObjectAction);
+      return lightningDozerBurstButton(params);
     case ArmdozerIds.WING_DOZER:
-      return wingDozerBurstButton(resources, gameObjectAction);
+      return wingDozerBurstButton(params);
     case ArmdozerIds.GENESIS_BRAVER:
-      return genesisBraverBurstButton(resources, gameObjectAction);
+      return genesisBraverBurstButton(params);
     default:
-      return shinBraverBurstButton(resources, gameObjectAction);
+      return shinBraverBurstButton(params);
   }
 }
