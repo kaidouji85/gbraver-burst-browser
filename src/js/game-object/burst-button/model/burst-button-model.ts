@@ -7,11 +7,11 @@ export type BurstButtonModel = {
    * 表示、非表示アニメーション再生中、あるいは非表示時に本プロパティにtrueをセットして、
    * バーストボタンが反応しないようにする
    */
-  isPushNotifierDisabled: boolean;
+  shouldPushNotifierStop: boolean;
   /** バーストボタンが操作不可能であるか否か、trueで操作不可能である */
   disabled: boolean;
   /** 拡大率 */
   scale: number;
-  /** バースト可能フラグ、trueでバースト可能 */
-  canBurst: boolean;
+  /** ゲーム的にバースト発動可能であるか否か、trueで発動可能 */
+  canActivateBurst: boolean;
 };
