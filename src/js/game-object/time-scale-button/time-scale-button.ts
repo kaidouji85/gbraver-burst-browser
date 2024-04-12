@@ -1,5 +1,4 @@
-import * as TWEEN from "@tweenjs/tween.js";
-import { Observable, Subject, Unsubscribable } from "rxjs";
+import { Observable, Unsubscribable } from "rxjs";
 import * as THREE from "three";
 
 import type { Animate } from "../../animation/animate";
@@ -10,20 +9,15 @@ import type { GameObjectAction } from "../action/game-object-action";
 import { close } from "./animation/close";
 import { open } from "./animation/open";
 import { toggle } from "./animation/toggle";
-import { createInitialValue } from "./model/initial-value";
 import { getNextTimeScale } from "./model/next-time-scale";
-import type { TimeScaleButtonModel } from "./model/time-scale-button-model";
-import type { TimeScaleButtonSounds } from "./sounds/time-scale-sounds";
-import { createTimeScaleButtonSounds } from "./sounds/time-scale-sounds";
-import { TimeScaleButtonView } from "./view/time-scale-button-view";
+import { createTimeScaleButtonProps } from "./props/create-time-scale-button-props";
+import { TimeScaleButtonProps } from "./props/time-scale-button-props";
 
 /** アニメーションタイムスケールボタン */
 export class TimeScaleButton {
-  #model: TimeScaleButtonModel;
-  #view: TimeScaleButtonView;
-  #sounds: TimeScaleButtonSounds;
-  #toggleTween: TWEEN.Group;
-  #toggle: Subject<number>;
+  /** プロパティ */
+  #props: TimeScaleButtonProps;
+  /** アンサブスクライバ */
   #unsubscribers: Unsubscribable[];
 
   /**
@@ -35,11 +29,7 @@ export class TimeScaleButton {
     resources: Resources,
     gameObjectAction: Observable<GameObjectAction>,
   ) {
-    this.#model = createInitialValue();
-    this.#view = new TimeScaleButtonView(resources, gameObjectAction);
-    this.#sounds = createTimeScaleButtonSounds(resources);
-    this.#toggleTween = new TWEEN.Group();
-    this.#toggle = new Subject();
+    this.#props = createTimeScaleButtonProps({ resources, gameObjectAction });
     this.#unsubscribers = [
       gameObjectAction.subscribe((action) => {
         if (action.type === "Update") {
@@ -48,7 +38,7 @@ export class TimeScaleButton {
           this.#onPreRender(action);
         }
       }),
-      this.#view.notifyPressed().subscribe(() => {
+      this.#props.view.notifyPressed().subscribe(() => {
         this.#onButtonPush();
       }),
     ];
@@ -58,7 +48,7 @@ export class TimeScaleButton {
    * デストラクタ相当の処理
    */
   destructor(): void {
-    this.#view.destructor();
+    this.#props.view.destructor();
     this.#unsubscribers.forEach((v) => {
       v.unsubscribe();
     });
@@ -69,7 +59,7 @@ export class TimeScaleButton {
    * @return シーンに追加するオブジェクト
    */
   getObject3D(): THREE.Object3D {
-    return this.#view.getObject3D();
+    return this.#props.view.getObject3D();
   }
 
   /**
@@ -77,7 +67,7 @@ export class TimeScaleButton {
    * @return 通知ストリーム
    */
   notifyToggled(): Observable<number> {
-    return this.#toggle;
+    return this.#props.toggle;
   }
 
   /**
@@ -85,7 +75,7 @@ export class TimeScaleButton {
    * @param isDisabled trueで操作不可能
    */
   disabled(isDisabled: boolean): void {
-    this.#model.disabled = isDisabled;
+    this.#props.model.disabled = isDisabled;
   }
 
   /**
@@ -93,7 +83,7 @@ export class TimeScaleButton {
    * @return trueで操作不可能
    */
   isDisabled(): boolean {
-    return this.#model.disabled;
+    return this.#props.model.disabled;
   }
 
   /**
@@ -102,7 +92,7 @@ export class TimeScaleButton {
    * @return アニメーション
    */
   open(timeScale: number): Animate {
-    return open(this.#model, timeScale);
+    return open(this.#props.model, timeScale);
   }
 
   /**
@@ -110,7 +100,7 @@ export class TimeScaleButton {
    * @return アニメーション
    */
   close(): Animate {
-    return close(this.#model);
+    return close(this.#props.model);
   }
 
   /**
@@ -118,7 +108,7 @@ export class TimeScaleButton {
    * @param action アクション
    */
   #onUpdate(action: Update): void {
-    this.#toggleTween.update(action.time);
+    this.#props.toggleTween.update(action.time);
   }
 
   /**
@@ -126,21 +116,29 @@ export class TimeScaleButton {
    * @param action アクション
    */
   #onPreRender(action: PreRender): void {
-    this.#view.engage(this.#model, action);
+    this.#props.view.engage(this.#props.model, action);
   }
 
   /**
    * ボタン押下時の処理
    */
   #onButtonPush(): void {
-    if (this.#model.shouldPushNotifierStop || this.#model.disabled) {
+    if (
+      this.#props.model.shouldPushNotifierStop ||
+      this.#props.model.disabled
+    ) {
       return;
     }
 
-    this.#toggleTween.update();
-    this.#toggleTween.removeAll();
-    const nextTimeScale = getNextTimeScale(this.#model.timeScale);
-    toggle(this.#model, this.#sounds, this.#toggleTween, nextTimeScale).play();
-    this.#toggle.next(nextTimeScale);
+    this.#props.toggleTween.update();
+    this.#props.toggleTween.removeAll();
+    const nextTimeScale = getNextTimeScale(this.#props.model.timeScale);
+    toggle(
+      this.#props.model,
+      this.#props.sounds,
+      this.#props.toggleTween,
+      nextTimeScale,
+    ).play();
+    this.#props.toggle.next(nextTimeScale);
   }
 }
