@@ -11,8 +11,11 @@ import { BurstButtonProps } from "./burst-button-props";
 
 /** BurstButtonProps生成パラメータ */
 export type GenerateBurstButtonPropsParams = {
+  /** リソース管理オブジェクト */
   resources: Resources;
+  /** ゲームオブジェクトアクション */
   gameObjectAction: Observable<GameObjectAction>;
+  /** アームドーザアイコン */
   armdozerIcon: ArmdozerIcon;
 };
 
