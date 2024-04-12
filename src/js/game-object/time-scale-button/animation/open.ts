@@ -9,7 +9,10 @@ import { TimeScaleAnimationProps } from "./animation-props";
  * @param timeScale タイムスケール値
  * @return アニメーション
  */
-export function open(props: TimeScaleAnimationProps, timeScale: number): Animate {
+export function open(
+  props: TimeScaleAnimationProps,
+  timeScale: number,
+): Animate {
   const { model } = props;
   return onStart(() => {
     model.shouldPushNotifierStop = true;
