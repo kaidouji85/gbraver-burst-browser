@@ -1,4 +1,3 @@
-import * as TWEEN from "@tweenjs/tween.js";
 import { Observable, Unsubscribable } from "rxjs";
 import * as THREE from "three";
 
@@ -11,17 +10,14 @@ import type { GameObjectAction } from "../../action/game-object-action";
 import { electrification } from "./animation/electrification";
 import { hidden } from "./animation/hidden";
 import { show } from "./animation/show";
-import { createInitialValue } from "./model/initial-value";
-import type { LightningBarrierModel } from "./model/lightning-barrier-model";
-import { LightningBarrierSounds } from "./sounds/lightning-barrier-sounds";
-import { LightningBarrierView } from "./view/lightning-barrier-view";
+import { createLightningBarrierProps } from "./props/create-lightning-barrier-props";
+import { LightningBarrierProps } from "./props/lightning-barrier-props";
 
 /** 電撃バリア */
 export class LightningBarrierGameEffect {
-  #model: LightningBarrierModel;
-  #view: LightningBarrierView;
-  #sounds: LightningBarrierSounds;
-  #tweenGroup: TWEEN.Group;
+  /** プロパティ */
+  #props: LightningBarrierProps;
+  /** アンサブスクライバ */
   #unsubscribers: Unsubscribable[];
 
   /**
@@ -34,10 +30,7 @@ export class LightningBarrierGameEffect {
     resources: Resources,
     gameObjectAction: Observable<GameObjectAction>,
   ) {
-    this.#model = createInitialValue();
-    this.#view = new LightningBarrierView(resources);
-    this.#sounds = new LightningBarrierSounds(resources);
-    this.#tweenGroup = new TWEEN.Group();
+    this.#props = createLightningBarrierProps({resources});
     this.#unsubscribers = [
       gameObjectAction.subscribe((action) => {
         if (action.type === "Update") {
@@ -56,11 +49,11 @@ export class LightningBarrierGameEffect {
    * デストラクタ相当の処理
    */
   destructor(): void {
-    this.#view.destructor();
+    this.#props.view.destructor();
     this.#unsubscribers.forEach((v) => {
       v.unsubscribe();
     });
-    this.#tweenGroup.removeAll();
+    this.#props.tweenGroup.removeAll();
   }
 
   /**
@@ -69,7 +62,7 @@ export class LightningBarrierGameEffect {
    * @return シーンに追加するオブジェクト
    */
   getObject3D(): THREE.Object3D {
-    return this.#view.getObject3D();
+    return this.#props.view.getObject3D();
   }
 
   /**
@@ -78,7 +71,7 @@ export class LightningBarrierGameEffect {
    * @return アニメーション
    */
   show(): Animate {
-    return show(this.#model, this.#sounds);
+    return show(this.#props.model, this.#props.sounds);
   }
 
   /**
@@ -87,14 +80,14 @@ export class LightningBarrierGameEffect {
    * @return アニメーション
    */
   hidden(): Animate {
-    return hidden(this.#model);
+    return hidden(this.#props.model);
   }
 
   /**
    * 初回のアップデート処理
    */
   #onFirstUpdate(): void {
-    electrification(this.#model, this.#tweenGroup).loop();
+    electrification(this.#props.model, this.#props.tweenGroup).loop();
   }
 
   /**
@@ -103,8 +96,8 @@ export class LightningBarrierGameEffect {
    * @param action アクション
    */
   #onUpdate(action: Update): void {
-    this.#tweenGroup.update(action.time);
-    this.#view.engage(this.#model);
+    this.#props.tweenGroup.update(action.time);
+    this.#props.view.engage(this.#props.model);
   }
 
   /**
@@ -113,6 +106,6 @@ export class LightningBarrierGameEffect {
    * @param action アクション
    */
   #onPreRender(action: PreRender): void {
-    this.#view.lookAt(action.camera);
+    this.#props.view.lookAt(action.camera);
   }
 }
