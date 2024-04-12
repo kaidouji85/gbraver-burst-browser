@@ -1,31 +1,21 @@
-import { Observable, Subject, Unsubscribable } from "rxjs";
+import { Observable, Unsubscribable } from "rxjs";
 import * as THREE from "three";
 
 import { Animate } from "../../animation/animate";
 import type { PreRender } from "../../game-loop/pre-render";
 import type { Resources } from "../../resource";
-import { createEmptySoundResource } from "../../resource/sound/empty-sound-resource";
-import { SOUND_IDS } from "../../resource/sound/ids";
-import { SoundResource } from "../../resource/sound/resource";
 import type { GameObjectAction } from "../action/game-object-action";
 import { close } from "./animation/close";
 import { decide } from "./animation/decide";
 import { open } from "./animation/open";
-import type { BurstButtonModel } from "./model/burst-button-model";
-import { createInitialValue } from "./model/initial-value";
+import { BurstButtonProps } from "./props/burst-button-props";
+import { createBurstButtonProps } from "./props/create-burst-button-props";
 import type { ArmdozerIcon } from "./view/armdozer-icon";
-import { BurstButtonView } from "./view/burst-button-view";
 
 /** バーストボタン */
 export class BurstButton {
-  /** モデル */
-  #model: BurstButtonModel;
-  /** ビュー */
-  #view: BurstButtonView;
-  /** 効果音 ボタン押下 */
-  #pushButtonSound: SoundResource;
-  /** ボタン押下通知 */
-  #pushButton: Subject<Event>;
+  /** プロパティ */
+  #props: BurstButtonProps;
   /** アンサブスクライバ */
   #unsubscribers: Unsubscribable[];
 
@@ -40,15 +30,10 @@ export class BurstButton {
     gameObjectAction: Observable<GameObjectAction>,
     armdozerIcon: ArmdozerIcon,
   ) {
-    this.#pushButtonSound =
-      resources.sounds.find((v) => v.id === SOUND_IDS.PUSH_BUTTON) ??
-      createEmptySoundResource();
-    this.#pushButton = new Subject();
-    this.#model = createInitialValue();
-    this.#view = new BurstButtonView({
-      resources: resources,
-      gameObjectAction: gameObjectAction,
-      armdozerIcon: armdozerIcon,
+    this.#props = createBurstButtonProps({
+      resources,
+      gameObjectAction,
+      armdozerIcon,
     });
     this.#unsubscribers = [
       gameObjectAction.subscribe((action) => {
@@ -56,7 +41,7 @@ export class BurstButton {
           this.#onPreRender(action);
         }
       }),
-      this.#view.notifyPush().subscribe((event) => {
+      this.#props.view.notifyPush().subscribe((event) => {
         this.#onPush(event);
       }),
     ];
@@ -66,7 +51,7 @@ export class BurstButton {
    * デストラクタ相当の処理
    */
   destructor(): void {
-    this.#view.destructor();
+    this.#props.view.destructor();
     this.#unsubscribers.forEach((u) => {
       u.unsubscribe();
     });
@@ -78,7 +63,7 @@ export class BurstButton {
    * @return アニメーション
    */
   open(canBurst: boolean): Animate {
-    return open(this.#model, canBurst);
+    return open(this.#props.model, canBurst);
   }
 
   /**
@@ -86,8 +71,8 @@ export class BurstButton {
    * @return アニメーション
    */
   decide(): Animate {
-    this.#pushButtonSound.sound.play();
-    return decide(this.#model);
+    this.#props.pushButtonSound.sound.play();
+    return decide(this.#props.model);
   }
 
   /**
@@ -95,7 +80,7 @@ export class BurstButton {
    * @return アニメーション
    */
   close(): Animate {
-    return close(this.#model);
+    return close(this.#props.model);
   }
 
   /**
@@ -103,7 +88,7 @@ export class BurstButton {
    * @return 取得結果
    */
   getObject3D(): THREE.Object3D {
-    return this.#view.getObject3D();
+    return this.#props.view.getObject3D();
   }
 
   /**
@@ -111,7 +96,7 @@ export class BurstButton {
    * @return 通知ストリーム
    */
   notifyPressed(): Observable<Event> {
-    return this.#pushButton;
+    return this.#props.pushButton;
   }
 
   /**
@@ -119,7 +104,7 @@ export class BurstButton {
    * @param isDisabled trueで操作不可能
    */
   disabled(isDisabled: boolean): void {
-    this.#model.disabled = isDisabled;
+    this.#props.model.disabled = isDisabled;
   }
 
   /**
@@ -127,7 +112,7 @@ export class BurstButton {
    * @return trueで操作不可能
    */
   isDisabled(): boolean {
-    return this.#model.disabled;
+    return this.#props.model.disabled;
   }
 
   /**
@@ -135,7 +120,7 @@ export class BurstButton {
    * @param action プリレンダー情報
    */
   #onPreRender(action: PreRender): void {
-    this.#view.engage(this.#model, action);
+    this.#props.view.engage(this.#props.model, action);
   }
 
   /**
@@ -144,13 +129,13 @@ export class BurstButton {
    */
   #onPush(event: Event): void {
     if (
-      this.#model.isPushNotifierDisabled ||
-      this.#model.disabled ||
-      !this.#model.canBurst
+      this.#props.model.isPushNotifierDisabled ||
+      this.#props.model.disabled ||
+      !this.#props.model.canBurst
     ) {
       return;
     }
 
-    this.#pushButton.next(event);
+    this.#props.pushButton.next(event);
   }
 }
