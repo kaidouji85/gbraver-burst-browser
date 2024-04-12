@@ -4,14 +4,22 @@ import * as THREE from "three";
 import { Animate } from "../../../animation/animate";
 import type { PreRender } from "../../../game-loop/pre-render";
 import type { Update } from "../../../game-loop/update";
-import type { Resources } from "../../../resource";
 import { firstUpdate } from "../../action/first-update";
 import type { GameObjectAction } from "../../action/game-object-action";
 import { electrification } from "./animation/electrification";
 import { hidden } from "./animation/hidden";
 import { show } from "./animation/show";
-import { createLightningBarrierProps } from "./props/create-lightning-barrier-props";
+import {
+  createLightningBarrierProps,
+  GenerateLightningBarrierPropsParams,
+} from "./props/create-lightning-barrier-props";
 import { LightningBarrierProps } from "./props/lightning-barrier-props";
+
+/** コンストラクタのパラメータ */
+type Params = GenerateLightningBarrierPropsParams & {
+  /** ゲームオブジェクトアクション */
+  gameObjectAction: Observable<GameObjectAction>;
+};
 
 /** 電撃バリア */
 export class LightningBarrierGameEffect {
@@ -22,15 +30,11 @@ export class LightningBarrierGameEffect {
 
   /**
    * コンストラクタ
-   *
-   * @param resources リソース管理オブジェクト
-   * @param gameObjectAction ゲームオブジェクトアクション
+   * @param params パラメータ
    */
-  constructor(
-    resources: Resources,
-    gameObjectAction: Observable<GameObjectAction>,
-  ) {
-    this.#props = createLightningBarrierProps({resources});
+  constructor(params: Params) {
+    const { gameObjectAction } = params;
+    this.#props = createLightningBarrierProps(params);
     this.#unsubscribers = [
       gameObjectAction.subscribe((action) => {
         if (action.type === "Update") {
