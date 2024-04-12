@@ -57,7 +57,7 @@ export class BurstButton {
    * @return アニメーション
    */
   open(canBurst: boolean): Animate {
-    return open(this.#props.model, canBurst);
+    return open(this.#props, canBurst);
   }
 
   /**
@@ -65,8 +65,7 @@ export class BurstButton {
    * @return アニメーション
    */
   decide(): Animate {
-    this.#props.pushButtonSound.sound.play();
-    return decide(this.#props.model);
+    return decide(this.#props);
   }
 
   /**
@@ -74,7 +73,7 @@ export class BurstButton {
    * @return アニメーション
    */
   close(): Animate {
-    return close(this.#props.model);
+    return close(this.#props);
   }
 
   /**

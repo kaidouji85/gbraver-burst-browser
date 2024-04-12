@@ -1,17 +1,12 @@
 import { Subject } from "rxjs";
 
-import { SoundResource } from "../../../resource/sound/resource";
-import { BurstButtonModel } from "../model/burst-button-model";
+import { BurstButtonAnimationProps } from "../animation/animation-props";
 import { BurstButtonView } from "../view/burst-button-view";
 
 /** バーストボタンプロパティ */
-export type BurstButtonProps = {
-  /** モデル */
-  model: BurstButtonModel;
+export type BurstButtonProps = BurstButtonAnimationProps & {
   /** ビュー */
   view: BurstButtonView;
-  /** 効果音 ボタン押下 */
-  pushButtonSound: SoundResource;
   /** ボタン押下通知 */
   pushButton: Subject<Event>;
 }

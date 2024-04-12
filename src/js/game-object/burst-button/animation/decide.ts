@@ -1,17 +1,18 @@
 import { Animate } from "../../../animation/animate";
 import { onStart } from "../../../animation/on-start";
 import { tween } from "../../../animation/tween";
-import type { BurstButtonModel } from "../model/burst-button-model";
+import { BurstButtonAnimationProps } from "./animation-props";
 
 /**
  * 決定アニメーション
- *
- * @param model モデル
+ * @param props アニメーションプロパティ
  * @return アニメーション
  */
-export function decide(model: BurstButtonModel): Animate {
+export function decide(props: BurstButtonAnimationProps): Animate {
+  const { model } = props;
   return onStart(() => {
     model.isPushNotifierDisabled = true;
+    props.pushButtonSound.sound.play();
   })
     .chain(
       tween(model, (t) =>
