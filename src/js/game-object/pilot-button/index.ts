@@ -11,7 +11,9 @@ import { YuuyaIcon } from "./view/yuuya";
 
 /** 生成パラメータ */
 type Params = {
+  /** リソース管理オブジェクト */
   resources: Resources;
+  /** ゲームオブジェクトアクション */
   gameObjectAction: Observable<GameObjectAction>;
 };
 
