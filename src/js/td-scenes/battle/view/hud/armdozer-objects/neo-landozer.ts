@@ -53,9 +53,9 @@ export class NeoLandozerHUD implements HUDArmdozerObjects, NeoLandozerHUDField {
 export function playerNeoLandozerHUD(
   params: GenerateHUDLayerObjectParams,
 ): NeoLandozerHUD {
-  const { resources, player, gameObjectAction } = params;
+  const { player } = params;
   return new NeoLandozerHUD(player.playerId, {
-    cutIn: playerNeoLandozerCutIn(resources, gameObjectAction),
+    cutIn: playerNeoLandozerCutIn(params),
   });
 }
 
@@ -67,8 +67,8 @@ export function playerNeoLandozerHUD(
 export function enemyNeoLandozerHUD(
   params: GenerateHUDLayerObjectParams,
 ): NeoLandozerHUD {
-  const { resources, enemy, gameObjectAction } = params;
+  const { enemy } = params;
   return new NeoLandozerHUD(enemy.playerId, {
-    cutIn: enemyNeoLandozerCutIn(resources, gameObjectAction),
+    cutIn: enemyNeoLandozerCutIn(params),
   });
 }
