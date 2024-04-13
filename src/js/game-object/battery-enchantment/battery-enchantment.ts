@@ -3,16 +3,20 @@ import * as THREE from "three";
 
 import { Animate } from "../../animation/animate";
 import type { PreRender } from "../../game-loop/pre-render";
-import type { Resources } from "../../resource";
 import type { GameObjectAction } from "../action/game-object-action";
 import { popUp } from "./animation/pop-up";
-import type { BatteryEnchantmentView } from "./view/battery-enchantment-view";
 import {BatteryEnchantmentProps} from "./props/battery-enchantment-props";
-import {createBatteryEnchantmentProps} from "./props/create-battery-enchantment-props";
+import {
+  createBatteryEnchantmentProps,
+  GenerateBatteryEnchantmentPropsParams
+} from "./props/create-battery-enchantment-props";
 
-/**
- * バッテリー増強
- */
+/** コンストラクタのパラメータ */
+type Params = GenerateBatteryEnchantmentPropsParams & {
+  gameObjectAction: Observable<GameObjectAction>;
+};
+
+/** バッテリー増強 */
 export class BatteryEnchantment {
   /** プロパティ */
   #props: BatteryEnchantmentProps;
@@ -21,16 +25,11 @@ export class BatteryEnchantment {
 
   /**
    * コンストラクタ
-   * @param view ビュー
-   * @param resources リソース管理オブジェクト
-   * @param gameObjectAction ゲームオブジェクトアクション
+   * @param params パラメータ
    */
-  constructor(
-    view: BatteryEnchantmentView,
-    resources: Resources,
-    gameObjectAction: Observable<GameObjectAction>,
-  ) {
-    this.#props = createBatteryEnchantmentProps({ view , resources });
+  constructor(params: Params) {
+    const { gameObjectAction } = params;
+    this.#props = createBatteryEnchantmentProps(params);
     this.#unsubscriber = gameObjectAction.subscribe((action) => {
       if (action.type === "Update") {
         this.#onUpdate();
