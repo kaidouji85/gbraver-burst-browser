@@ -178,7 +178,7 @@ export function playerTDObjects(params: GenerateTDLayerObjectParams): TDPlayer {
     armdozerEffects: {
       powerUp: playerPowerUp(resources, gameObjectAction),
       reflect: playerReflectIndicator(resources, gameObjectAction),
-      continuousAttack: playerContinuousAttack(resources, gameObjectAction),
+      continuousAttack: playerContinuousAttack(params),
       damageHalved: playerDamageHalved(resources, gameObjectAction),
       batteryEnchantment: playerBatteryEnchantment(params),
     },
@@ -205,7 +205,7 @@ export function enemyTDObject(params: GenerateTDLayerObjectParams): TDPlayer {
     armdozerEffects: {
       powerUp: enemyPowerUp(resources, gameObjectAction),
       reflect: enemyReflectIndicator(resources, gameObjectAction),
-      continuousAttack: enemyContinuousAttack(resources, gameObjectAction),
+      continuousAttack: enemyContinuousAttack(params),
       damageHalved: enemyDamageHalved(resources, gameObjectAction),
       batteryEnchantment: enemyBatteryEnchantment(params),
     },

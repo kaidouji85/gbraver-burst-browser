@@ -6,32 +6,36 @@ import { ContinuousAttackIndicator } from "./continuous-attack-indicator";
 import { EnemyContinuousAttackView } from "./view/enemy-continuous-attack-view";
 import { PlayerContinuousAttackView } from "./view/player-continuous-attack-view";
 
+/** 連続攻撃生成パラメータ */
+export type GenerateContinuousAttackIndicatorParams = {
+  /** リソース管理オブジェクト */
+  resources: Resources;
+  /** ゲームオブジェクトアクション */
+  gameObjectAction: Observable<GameObjectAction>;
+};
+
 /**
  * プレイヤー側 連続攻撃
- *
- * @param resources リソース管理オブジェクト
- * @param gameObjectAction ゲームオブジェクトアクション
+ * @param params 生成パラメータ
  * @return 生成結果
  */
 export function playerContinuousAttack(
-  resources: Resources,
-  gameObjectAction: Observable<GameObjectAction>,
+  params: GenerateContinuousAttackIndicatorParams,
 ): ContinuousAttackIndicator {
+  const { resources } = params;
   const view = new PlayerContinuousAttackView(resources);
-  return new ContinuousAttackIndicator(view, resources, gameObjectAction);
+  return new ContinuousAttackIndicator({ ...params, view });
 }
 
 /**
  * 敵側 連続攻撃
- *
- * @param resources リソース管理オブジェクト
- * @param gameObjectAction ゲームオブジェクトアクション
+ * @param params 生成パラメータ
  * @return 生成結果
  */
 export function enemyContinuousAttack(
-  resources: Resources,
-  gameObjectAction: Observable<GameObjectAction>,
+  params: GenerateContinuousAttackIndicatorParams,
 ): ContinuousAttackIndicator {
+  const { resources } = params;
   const view = new EnemyContinuousAttackView(resources);
-  return new ContinuousAttackIndicator(view, resources, gameObjectAction);
+  return new ContinuousAttackIndicator({ ...params, view });
 }
