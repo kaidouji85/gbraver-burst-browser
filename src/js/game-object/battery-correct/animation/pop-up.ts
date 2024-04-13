@@ -3,16 +3,16 @@ import { Animate } from "../../../animation/animate";
 import { onStart } from "../../../animation/on-start";
 import { tween } from "../../../animation/tween";
 import { ARMDOZER_EFFECT_STANDARD_Y } from "../../armdozer/position";
-import type { BatteryCorrectModel } from "../model/battery-correct-model";
+import {BatteryCorrectAnimationProps} from "./animation-props";
 
 /**
  * ポップアップ表示
- *
- * @param model モデル
+ * @param props アニメーションプロパティ
  * @param value バッテリー補正の値
  * @return アニメーション
  */
-export function popUp(model: BatteryCorrectModel, value: number): Animate {
+export function popUp(props: BatteryCorrectAnimationProps, value: number): Animate {
+  const { model } = props;
   return onStart(() => {
     model.position.y = ARMDOZER_EFFECT_STANDARD_Y + 80;
     model.opacity = 1;

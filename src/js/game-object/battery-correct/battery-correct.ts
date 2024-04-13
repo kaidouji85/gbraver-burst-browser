@@ -61,7 +61,7 @@ export class BatteryCorrect {
    * @return アニメーション
    */
   popUp(value: number): Animate {
-    return popUp(this.#props.model, value);
+    return popUp(this.#props, value);
   }
 
   /**

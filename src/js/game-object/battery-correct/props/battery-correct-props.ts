@@ -1,10 +1,8 @@
-import { BatteryCorrectModel } from "../model/battery-correct-model";
 import { BatteryCorrectView } from "../view/battery-correct-view";
+import {BatteryCorrectAnimationProps} from "../animation/animation-props";
 
 /** バッテリー補正 プロパティ */
-export type BatteryCorrectProps = {
-  /** モデル */
-  model: BatteryCorrectModel;
+export type BatteryCorrectProps = BatteryCorrectAnimationProps & {
   /** ビュー */
   view: BatteryCorrectView;
 };
