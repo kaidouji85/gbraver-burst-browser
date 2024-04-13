@@ -6,8 +6,13 @@ import type { PreRender } from "../../game-loop/pre-render";
 import type { GameObjectAction } from "../action/game-object-action";
 import { popUp } from "./animation/pop-up";
 import { BatteryCorrectProps } from "./props/battery-correct-props";
-import { createBatteryCorrectProps } from "./props/create-battery-correct-props";
-import type { BatteryCorrectView } from "./view/battery-correct-view";
+import {createBatteryCorrectProps, GenerateBatteryCorrectPropsParams} from "./props/create-battery-correct-props";
+
+/** コンストラクタのパラメータ */
+type Params = GenerateBatteryCorrectPropsParams & {
+  /** ゲームオブジェクトアクション */
+  gameObjectAction: Observable<GameObjectAction>,
+}
 
 /** バッテリー補正 */
 export class BatteryCorrect {
@@ -18,13 +23,10 @@ export class BatteryCorrect {
 
   /**
    * コンストラクタ
-   * @param view ビュー
-   * @param gameObjectAction ゲームオブジェクトアクション
+   * @param params パラメータ
    */
-  constructor(
-    view: BatteryCorrectView,
-    gameObjectAction: Observable<GameObjectAction>,
-  ) {
+  constructor(params: Params) {
+    const { gameObjectAction, view } = params;
     this.#props = createBatteryCorrectProps({ view });
     this.#unsubscribers = [
       gameObjectAction.subscribe((action) => {

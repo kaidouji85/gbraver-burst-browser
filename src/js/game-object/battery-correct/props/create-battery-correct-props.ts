@@ -3,7 +3,7 @@ import { BatteryCorrectView } from "../view/battery-correct-view";
 import { BatteryCorrectProps } from "./battery-correct-props";
 
 /** BatteryCorrectProps生成パラメータ */
-type GenerateBatteryCorrectPropsParams = {
+export type GenerateBatteryCorrectPropsParams = {
   /** ビュー */
   view: BatteryCorrectView;
 };
