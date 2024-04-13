@@ -13,11 +13,8 @@ export default {
  */
 const batterySelectorStory =
   (fn: (selector: BatterySelector) => void) => () => {
-    const stub = new HUDGameObjectStub(({ resources, gameObjectAction }) => {
-      const selector: BatterySelector = new BatterySelector({
-        resources: resources,
-        gameObjectAction: gameObjectAction,
-      });
+    const stub = new HUDGameObjectStub((params) => {
+      const selector: BatterySelector = new BatterySelector(params);
       fn(selector);
       return [selector.getObject3D()];
     });

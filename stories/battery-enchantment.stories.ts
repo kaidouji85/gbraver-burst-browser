@@ -1,13 +1,10 @@
-import { Observable } from "rxjs";
-
 import { delay } from "../src/js/animation/delay";
-import { GameObjectAction } from "../src/js/game-object/action/game-object-action";
 import {
   enemyBatteryEnchantment,
+  GenerateBatteryEnchantmentParams,
   playerBatteryEnchantment,
 } from "../src/js/game-object/battery-enchantment";
 import { BatteryEnchantment } from "../src/js/game-object/battery-enchantment/battery-enchantment";
-import { Resources } from "../src/js/resource";
 import { TDGameObjectStub } from "./stub/td-game-object-stub";
 
 export default {
@@ -22,10 +19,7 @@ export default {
  */
 const batteryEnchantmentStory =
   (
-    generator: (params: {
-      resources: Resources;
-      gameObjectAction: Observable<GameObjectAction>;
-    }) => BatteryEnchantment,
+    generator: (params: GenerateBatteryEnchantmentParams) => BatteryEnchantment,
     fn: (batteryEnchantment: BatteryEnchantment) => void,
   ) =>
   () => {
