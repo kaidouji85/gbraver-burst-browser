@@ -3,7 +3,7 @@ import { GenesisBraverCutInView } from "../view/genesis-braver-cutin-view";
 import { createInitialValue } from "../model/initial-value";
 
 /** GenesisBraverCutInProps生成パラメータ */
-type GenerateGenesisBraverCutInPropsParams = {
+export type GenerateGenesisBraverCutInPropsParams = {
   /** ビュー */
   view: GenesisBraverCutInView;
 };

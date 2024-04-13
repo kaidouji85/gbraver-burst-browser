@@ -7,9 +7,18 @@ import { HUDTracking } from "../../../tracking/hud-tracking";
 import { GameObjectAction } from "../../action/game-object-action";
 import { hidden } from "./animation/hidden";
 import { show } from "./animation/show";
-import { GenesisBraverCutInView } from "./view/genesis-braver-cutin-view";
 import { GenesisBraverCutInProps } from "./props/genesis-braver-cutin-props";
-import { createGenesisBraverCutInProps } from "./props/create-genesis-braver-cutin-props";
+import {
+  createGenesisBraverCutInProps,
+  GenerateGenesisBraverCutInPropsParams
+} from "./props/create-genesis-braver-cutin-props";
+
+/** コンストラクタのパラメータ */
+export type ConstructGenesisBraverCutInParams =
+  GenerateGenesisBraverCutInPropsParams & {
+    /** ゲームオブジェクトアクション */
+    gameObjectAction: Observable<GameObjectAction>;
+  };
 
 /** ジェネシスブレイバー カットイン */
 export class GenesisBraverCutIn implements HUDTracking {
@@ -20,14 +29,11 @@ export class GenesisBraverCutIn implements HUDTracking {
 
   /**
    * コンストラクタ
-   * @param resources ビュー
-   * @param gameObjectAction ゲームオブジェクトアクション
+   * @param params パラメータ
    */
-  constructor(
-    view: GenesisBraverCutInView,
-    gameObjectAction: Observable<GameObjectAction>,
-  ) {
-    this.#props = createGenesisBraverCutInProps({ view });
+  constructor(params: ConstructGenesisBraverCutInParams) {
+    const { gameObjectAction } = params;
+    this.#props = createGenesisBraverCutInProps(params);
     this.#unsubscribers = [
       gameObjectAction.subscribe((action) => {
         if (action.type === "PreRender") {
