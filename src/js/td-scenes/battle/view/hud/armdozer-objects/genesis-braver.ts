@@ -52,10 +52,10 @@ export class GenesisBraverHUD implements HUDArmdozerObjects {
 export function playerGenesisBraverHUD(
   params: GenerateHUDLayerObjectParams,
 ): HUDArmdozerObjects {
-  const { resources, player, gameObjectAction } = params;
+  const { player } = params;
   return new GenesisBraverHUD({
     playerId: player.playerId,
-    cutIn: playerGenesisBraverCutIn(resources, gameObjectAction),
+    cutIn: playerGenesisBraverCutIn(params),
   });
 }
 
@@ -67,9 +67,9 @@ export function playerGenesisBraverHUD(
 export function enemyGenesisBraverHUD(
   params: GenerateHUDLayerObjectParams,
 ): HUDArmdozerObjects {
-  const { resources, enemy, gameObjectAction } = params;
+  const { enemy } = params;
   return new GenesisBraverHUD({
     playerId: enemy.playerId,
-    cutIn: enemyGenesisBraverCutIn(resources, gameObjectAction),
+    cutIn: enemyGenesisBraverCutIn(params),
   });
 }
