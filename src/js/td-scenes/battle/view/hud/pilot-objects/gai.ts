@@ -57,10 +57,10 @@ export class GaiHUD implements HUDPilotObjects {
  * @return ガイHUD
  */
 export function playerGaiHUD(params: GenerateHUDLayerObjectParams): GaiHUD {
-  const { resources, player, gameObjectAction } = params;
+  const { player } = params;
   return new GaiHUD({
     playerId: player.playerId,
-    cutIn: playerGaiCutIn(resources, gameObjectAction),
+    cutIn: playerGaiCutIn(params),
   });
 }
 
@@ -70,9 +70,9 @@ export function playerGaiHUD(params: GenerateHUDLayerObjectParams): GaiHUD {
  * @return ガイHUD
  */
 export function enemyGaiHUD(params: GenerateHUDLayerObjectParams): GaiHUD {
-  const { resources, enemy, gameObjectAction } = params;
+  const { enemy } = params;
   return new GaiHUD({
     playerId: enemy.playerId,
-    cutIn: enemyGaiCutIn(resources, gameObjectAction),
+    cutIn: enemyGaiCutIn(params),
   });
 }

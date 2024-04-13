@@ -3,39 +3,35 @@ import * as THREE from "three";
 
 import { Animate } from "../../../animation/animate";
 import type { PreRender } from "../../../game-loop/pre-render";
-import type { Resources } from "../../../resource";
 import type { GameObjectAction } from "../../action/game-object-action";
 import { hidden } from "./animation/hidden";
 import { show } from "./animation/show";
-import type { GaiModel } from "./model/gai-model";
-import { createInitialValue } from "./model/initial-value";
-import { GaiSounds } from "./sounds/gai-sounds";
-import type { GaiView } from "./view/gai-view";
+import {
+  createGaiCutInProps,
+  GenerateGaiCutInPropsParams,
+} from "./props/create-gai-cutin-props";
+import { GaiCutInProps } from "./props/gai-cutin-props";
 
-/**
- * ガイ カットイン
- */
+/** コンストラクタのパラメータ */
+export type ConstructGaiCutInParams = GenerateGaiCutInPropsParams & {
+  /** ゲームオブジェクトアクション */
+  gameObjectAction: Observable<GameObjectAction>;
+};
+
+/**ガイ カットイン */
 export class GaiCutIn {
-  #model: GaiModel;
-  #view: GaiView;
-  #sounds: GaiSounds;
+  /** プロパティ */
+  #props: GaiCutInProps;
+  /** アンサブスクライバ */
   #unsubscriber: Unsubscribable;
 
   /**
    * コンストラクタ
-   *
-   * @param view ビュー
-   * @param resources リソース管理オブジェクト
-   * @param gameObjectAction ゲームオブジェクトアクション
+   * @param params パラメータ
    */
-  constructor(
-    view: GaiView,
-    resources: Resources,
-    gameObjectAction: Observable<GameObjectAction>,
-  ) {
-    this.#model = createInitialValue();
-    this.#view = view;
-    this.#sounds = new GaiSounds(resources);
+  constructor(params: ConstructGaiCutInParams) {
+    const { gameObjectAction } = params;
+    this.#props = createGaiCutInProps(params);
     this.#unsubscriber = gameObjectAction.subscribe((action) => {
       if (action.type === "PreRender") {
         this.#onPreRender(action);
@@ -47,7 +43,7 @@ export class GaiCutIn {
    * デストラクタ相当の処理
    */
   destructor(): void {
-    this.#view.destructor();
+    this.#props.view.destructor();
     this.#unsubscriber.unsubscribe();
   }
 
@@ -57,7 +53,7 @@ export class GaiCutIn {
    * @return アニメーション
    */
   show(): Animate {
-    return show(this.#model, this.#sounds);
+    return show(this.#props);
   }
 
   /**
@@ -66,7 +62,7 @@ export class GaiCutIn {
    * @return アニメーション
    */
   hidden(): Animate {
-    return hidden(this.#model);
+    return hidden(this.#props);
   }
 
   /**
@@ -75,7 +71,7 @@ export class GaiCutIn {
    * @return シーンに追加するオブジェクト
    */
   getObject3D(): THREE.Object3D {
-    return this.#view.getObject3D();
+    return this.#props.view.getObject3D();
   }
 
   /**
@@ -84,6 +80,6 @@ export class GaiCutIn {
    * @param action アクション
    */
   #onPreRender(action: PreRender): void {
-    this.#view.engage(this.#model, action);
+    this.#props.view.engage(this.#props.model, action);
   }
 }
