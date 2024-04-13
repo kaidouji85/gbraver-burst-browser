@@ -57,10 +57,10 @@ export class RaitoHUD implements HUDPilotObjects {
  * @return ライトHUD
  */
 export function playerRaitoHUD(params: GenerateHUDLayerObjectParams): RaitoHUD {
-  const { resources, player, gameObjectAction } = params;
+  const { player } = params;
   return new RaitoHUD({
     playerId: player.playerId,
-    cutIn: playerRaitoCutIn(resources, gameObjectAction),
+    cutIn: playerRaitoCutIn(params),
   });
 }
 
@@ -70,9 +70,9 @@ export function playerRaitoHUD(params: GenerateHUDLayerObjectParams): RaitoHUD {
  * @return ライトHUD
  */
 export function enemyRaitoHUD(params: GenerateHUDLayerObjectParams): RaitoHUD {
-  const { resources, enemy, gameObjectAction } = params;
+  const { enemy } = params;
   return new RaitoHUD({
     playerId: enemy.playerId,
-    cutIn: enemyRaitoCutIn(resources, gameObjectAction),
+    cutIn: enemyRaitoCutIn(params),
   });
 }

@@ -3,13 +3,17 @@ import * as THREE from "three";
 
 import { Animate } from "../../../animation/animate";
 import type { PreRender } from "../../../game-loop/pre-render";
-import type { Resources } from "../../../resource";
 import type { GameObjectAction } from "../../action/game-object-action";
 import { hidden } from "./animation/hidden";
 import { show } from "./animation/show";
-import { createRaitoCutInProps } from "./props/create-raito-cutin-props";
+import {createRaitoCutInProps, GenerateRaitoCutInPropsParams} from "./props/create-raito-cutin-props";
 import { RaitoCutInProps } from "./props/raito-cutin-props";
-import type { RaitoView } from "./view/raito-view";
+
+/** コンストラクタのパラメータ */
+export type ConstructRaitoCutInParams = GenerateRaitoCutInPropsParams & {
+  /** ゲームオブジェクトアクション */
+  gameObjectAction: Observable<GameObjectAction>,
+};
 
 /** ライト カットイン */
 export class RaitoCutIn {
@@ -20,17 +24,11 @@ export class RaitoCutIn {
 
   /**
    * コンストラクタ
-   *
-   * @param view ビュー
-   * @param resources リソース管理オブジェクト
-   * @param gameObjectAction ゲームオブジェクトアクション
+   * @param params パラメータ
    */
-  constructor(
-    view: RaitoView,
-    resources: Resources,
-    gameObjectAction: Observable<GameObjectAction>,
-  ) {
-    this.#props = createRaitoCutInProps({ view, resources });
+  constructor(params: ConstructRaitoCutInParams) {
+    const { gameObjectAction } = params;
+    this.#props = createRaitoCutInProps(params);
     this.#unsubscriber = gameObjectAction.subscribe((action) => {
       if (action.type === "PreRender") {
         this.#onPreRender(action);
