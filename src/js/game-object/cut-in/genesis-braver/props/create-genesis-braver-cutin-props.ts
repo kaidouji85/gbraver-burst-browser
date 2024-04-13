@@ -1,6 +1,6 @@
-import { GenesisBraverCutInProps } from "./genesis-braver-cutin-props";
-import { GenesisBraverCutInView } from "../view/genesis-braver-cutin-view";
 import { createInitialValue } from "../model/initial-value";
+import { GenesisBraverCutInView } from "../view/genesis-braver-cutin-view";
+import { GenesisBraverCutInProps } from "./genesis-braver-cutin-props";
 
 /** GenesisBraverCutInProps生成パラメータ */
 export type GenerateGenesisBraverCutInPropsParams = {

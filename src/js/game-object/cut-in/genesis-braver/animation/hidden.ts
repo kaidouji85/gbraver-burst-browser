@@ -1,6 +1,6 @@
 import { Animate } from "../../../../animation/animate";
 import { tween } from "../../../../animation/tween";
-import {GenesisBraverCutInAnimationProps} from "./animation-props";
+import { GenesisBraverCutInAnimationProps } from "./animation-props";
 
 /**
  * カットインを非表示にする
@@ -8,7 +8,7 @@ import {GenesisBraverCutInAnimationProps} from "./animation-props";
  * @return アニメーション
  */
 export function hidden(props: GenesisBraverCutInAnimationProps): Animate {
-  const {model} = props;
+  const { model } = props;
   return tween(model, (t) =>
     t.to(
       {

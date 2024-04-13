@@ -9,7 +9,7 @@ import { hidden } from "./animation/hidden";
 import { show } from "./animation/show";
 import {
   createGenesisBraverCutInProps,
-  GenerateGenesisBraverCutInPropsParams
+  GenerateGenesisBraverCutInPropsParams,
 } from "./props/create-genesis-braver-cutin-props";
 import { GenesisBraverCutInProps } from "./props/genesis-braver-cutin-props";
 
