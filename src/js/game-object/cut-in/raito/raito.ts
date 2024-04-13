@@ -12,9 +12,7 @@ import type { RaitoModel } from "./model/raito-model";
 import { RaitoSounds } from "./sounds/raito-sounds";
 import type { RaitoView } from "./view/raito-view";
 
-/**
- * ライト カットイン
- */
+/** ライト カットイン */
 export class RaitoCutIn {
   #model: RaitoModel;
   #view: RaitoView;
