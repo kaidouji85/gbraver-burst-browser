@@ -2,19 +2,18 @@ import { all } from "../../../../animation/all";
 import { Animate } from "../../../../animation/animate";
 import { onStart } from "../../../../animation/on-start";
 import { tween } from "../../../../animation/tween";
-import type { GaiModel } from "../model/gai-model";
-import { GaiSounds } from "../sounds/gai-sounds";
+import { GaiCutInAnimationProps } from "./animation-props";
 
 /** アニメ時間 */
 const duration = 400;
 
 /**
  * カットインを表示する
- * @param model モデル
- * @param sounds 効果音
+ * @param props アニメーションプロパティ
  * @return アニメーション
  */
-export function show(model: GaiModel, sounds: GaiSounds): Animate {
+export function show(props: GaiCutInAnimationProps): Animate {
+  const { model, sounds } = props;
   return onStart(() => {
     model.opacity = 0;
     model.position.x = -25;
