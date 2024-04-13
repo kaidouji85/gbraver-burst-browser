@@ -51,7 +51,7 @@ export class BatteryNumber {
    * @return アニメーション
    */
   show(battery: number): Animate {
-    return show(this.#props.model, battery);
+    return show(this.#props, battery);
   }
 
   /**
@@ -61,7 +61,7 @@ export class BatteryNumber {
    * @return アニメーション
    */
   change(battery: number): Animate {
-    return change(this.#props.model, battery);
+    return change(this.#props, battery);
   }
 
   /**
@@ -70,7 +70,7 @@ export class BatteryNumber {
    * @return アニメーション
    */
   hidden(): Animate {
-    return hidden(this.#props.model);
+    return hidden(this.#props);
   }
 
   /** シーンに追加するオブジェクトを返す */
