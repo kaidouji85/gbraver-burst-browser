@@ -23,8 +23,8 @@ export default {
 const batteryEnchantmentStory =
   (
     generator: (params: {
-      resources: Resources,
-      gameObjectAction: Observable<GameObjectAction>,
+      resources: Resources;
+      gameObjectAction: Observable<GameObjectAction>;
     }) => BatteryEnchantment,
     fn: (batteryEnchantment: BatteryEnchantment) => void,
   ) =>

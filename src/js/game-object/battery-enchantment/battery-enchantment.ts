@@ -5,10 +5,10 @@ import { Animate } from "../../animation/animate";
 import type { PreRender } from "../../game-loop/pre-render";
 import type { GameObjectAction } from "../action/game-object-action";
 import { popUp } from "./animation/pop-up";
-import {BatteryEnchantmentProps} from "./props/battery-enchantment-props";
+import { BatteryEnchantmentProps } from "./props/battery-enchantment-props";
 import {
   createBatteryEnchantmentProps,
-  GenerateBatteryEnchantmentPropsParams
+  GenerateBatteryEnchantmentPropsParams,
 } from "./props/create-battery-enchantment-props";
 
 /** コンストラクタのパラメータ */
