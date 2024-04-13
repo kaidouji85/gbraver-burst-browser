@@ -3,17 +3,22 @@ import * as THREE from "three";
 
 import { Animate } from "../../../animation/animate";
 import type { PreRender } from "../../../game-loop/pre-render";
-import type { Resources } from "../../../resource";
 import type { GameObjectAction } from "../../action/game-object-action";
 import { hidden } from "./animation/hidden";
 import { show } from "./animation/show";
-import {createGaiCutInProps} from "./props/create-gai-cutin-props";
-import {GaiCutInProps} from "./props/gai-cutin-props";
-import type { GaiView } from "./view/gai-view";
+import {
+  createGaiCutInProps,
+  GenerateGaiCutInPropsParams,
+} from "./props/create-gai-cutin-props";
+import { GaiCutInProps } from "./props/gai-cutin-props";
 
-/**
- * ガイ カットイン
- */
+/** コンストラクタのパラメータ */
+export type ConstructGaiCutInParams = GenerateGaiCutInPropsParams & {
+  /** ゲームオブジェクトアクション */
+  gameObjectAction: Observable<GameObjectAction>;
+};
+
+/**ガイ カットイン */
 export class GaiCutIn {
   /** プロパティ */
   #props: GaiCutInProps;
@@ -22,17 +27,11 @@ export class GaiCutIn {
 
   /**
    * コンストラクタ
-   *
-   * @param view ビュー
-   * @param resources リソース管理オブジェクト
-   * @param gameObjectAction ゲームオブジェクトアクション
+   * @param params パラメータ
    */
-  constructor(
-    view: GaiView,
-    resources: Resources,
-    gameObjectAction: Observable<GameObjectAction>,
-  ) {
-    this.#props = createGaiCutInProps({ view, resources });
+  constructor(params: ConstructGaiCutInParams) {
+    const { gameObjectAction } = params;
+    this.#props = createGaiCutInProps(params);
     this.#unsubscriber = gameObjectAction.subscribe((action) => {
       if (action.type === "PreRender") {
         this.#onPreRender(action);

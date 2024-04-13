@@ -5,7 +5,7 @@ import { GaiView } from "../view/gai-view";
 import { GaiCutInProps } from "./gai-cutin-props";
 
 /** GaiCutInProps生成パラメータ */
-type GenerateGaiCutInPropsParams = {
+export type GenerateGaiCutInPropsParams = {
   /** ビュー */
   view: GaiView;
   /** リソース管理オブジェクト */
