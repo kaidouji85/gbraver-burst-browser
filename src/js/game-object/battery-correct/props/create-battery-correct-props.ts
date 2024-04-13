@@ -1,5 +1,5 @@
 import { initialValue } from "../model/initial-value";
-import type { BatteryCorrectView } from "../view/battery-correct-view";
+import { BatteryCorrectView } from "../view/battery-correct-view";
 import { BatteryCorrectProps } from "./battery-correct-props";
 
 /** BatteryCorrectProps生成パラメータ */
