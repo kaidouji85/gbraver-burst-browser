@@ -1,10 +1,8 @@
-import {NeoLandozerCutInModel} from "../model/neo-landozer-cutin-model";
-import {NeoLandozerCutInView} from "../view/neo-landozer-cutin-view";
+import { NeoLandozerCutInView } from "../view/neo-landozer-cutin-view";
+import { NeoLandozerCutInAnimationProps } from "../animation/animation-props";
 
 /** ネオランドーザ カットイン プロパティ */
-export type NeoLandozerCutInProps = {
-  /** モデル */
-  model: NeoLandozerCutInModel;
+export type NeoLandozerCutInProps = NeoLandozerCutInAnimationProps & {
   /** ビュー */
   view: NeoLandozerCutInView;
-}
+};

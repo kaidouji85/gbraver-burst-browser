@@ -3,15 +3,15 @@ import { Animate } from "../../../../animation/animate";
 import { delay } from "../../../../animation/delay";
 import { onStart } from "../../../../animation/on-start";
 import { tween } from "../../../../animation/tween";
-import type { NeoLandozerCutInModel } from "../model/neo-landozer-cutin-model";
+import {NeoLandozerCutInAnimationProps} from "./animation-props";
 
 /**
  * カットインを表示する
- *
- * @param model モデル
+ * @param props アニメーションプロパティ
  * @return アニメーション
  */
-export function show(model: NeoLandozerCutInModel): Animate {
+export function show(props: NeoLandozerCutInAnimationProps): Animate {
+  const { model } = props;
   return all(
     onStart(() => {
       model.animation.type = "CUT_IN_UP";
