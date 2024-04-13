@@ -1,6 +1,6 @@
 import { Animate } from "../../../../animation/animate";
 import { tween } from "../../../../animation/tween";
-import {LightningDozerCutInAnimationProps} from "./animation-props";
+import { LightningDozerCutInAnimationProps } from "./animation-props";
 
 /**
  * カットインを非表示にする

@@ -9,20 +9,22 @@ import { PlayerLightningDozerCutInView } from "./view/player-lightning-dozer-cut
 /** ライトニングドーザ カットイン生成パラメータ */
 export type GenerateLightningDozerCutInParams = {
   /** リソース管理オブジェクト */
-  resources: Resources,
+  resources: Resources;
   /** ゲームオブジェクトアクション */
-  gameObjectAction: Observable<GameObjectAction>,
-}
+  gameObjectAction: Observable<GameObjectAction>;
+};
 
 /**
  * プレイヤー ライトニングドーザ カットイン
  * @param params 生成パラメータ
  * @return 生成結果
  */
-export function playerLightningDozerCutIn(params: GenerateLightningDozerCutInParams): LightningDozerCutIn {
-  const  {resources} = params;
+export function playerLightningDozerCutIn(
+  params: GenerateLightningDozerCutInParams,
+): LightningDozerCutIn {
+  const { resources } = params;
   const view = new PlayerLightningDozerCutInView(resources);
-  return new LightningDozerCutIn({...params, view});
+  return new LightningDozerCutIn({ ...params, view });
 }
 
 /**
@@ -30,8 +32,10 @@ export function playerLightningDozerCutIn(params: GenerateLightningDozerCutInPar
  * @param params 生成パラメータ
  * @return 生成結果
  */
-export function enemyLightningiDozerCutIn(params: GenerateLightningDozerCutInParams): LightningDozerCutIn {
-  const  {resources} = params;
+export function enemyLightningiDozerCutIn(
+  params: GenerateLightningDozerCutInParams,
+): LightningDozerCutIn {
+  const { resources } = params;
   const view = new EnemyLightningDozerCutInView(resources);
-  return new LightningDozerCutIn({...params, view});
+  return new LightningDozerCutIn({ ...params, view });
 }

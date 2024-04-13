@@ -3,7 +3,7 @@ import { Animate } from "../../../../animation/animate";
 import { delay } from "../../../../animation/delay";
 import { onStart } from "../../../../animation/on-start";
 import { tween } from "../../../../animation/tween";
-import {LightningDozerCutInAnimationProps} from "./animation-props";
+import { LightningDozerCutInAnimationProps } from "./animation-props";
 
 /**
  * カットインを表示する
