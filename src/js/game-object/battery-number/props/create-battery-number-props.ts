@@ -3,7 +3,7 @@ import { BatteryNumberView } from "../view/battery-number-view";
 import { BatteryNumberProps } from "./battery-number-props";
 
 /** BatteryEnchantmentProps生成パラメータ */
-type GenerateBatteryNumberPropsParams = {
+export type GenerateBatteryNumberPropsParams = {
   /** ビュー */
   view: BatteryNumberView;
 };

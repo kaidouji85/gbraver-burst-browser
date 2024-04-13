@@ -8,8 +8,12 @@ import { change } from "./animation/change";
 import { hidden } from "./animation/hidden";
 import { show } from "./animation/show";
 import { BatteryNumberProps } from "./props/battery-number-props";
-import { createBatteryNumberProps } from "./props/create-battery-number-props";
-import type { BatteryNumberView } from "./view/battery-number-view";
+import {createBatteryNumberProps, GenerateBatteryNumberPropsParams} from "./props/create-battery-number-props";
+
+/** コンストラクタのパラメータ */
+type Params = GenerateBatteryNumberPropsParams & {
+  gameObjectAction: Observable<GameObjectAction>;
+};
 
 /** バッテリー数字 */
 export class BatteryNumber {
@@ -20,14 +24,11 @@ export class BatteryNumber {
 
   /**
    * コンストラクタ
-   * @param view ビュー
-   * @param gameObjectAction ゲームオブジェクトアクション
+   * @param params パラメータ
    */
-  constructor(
-    view: BatteryNumberView,
-    gameObjectAction: Observable<GameObjectAction>,
-  ) {
-    this.#props = createBatteryNumberProps({ view });
+  constructor(params: Params) {
+    const { gameObjectAction } = params;
+    this.#props = createBatteryNumberProps(params);
     this.#unsubscriber = gameObjectAction.subscribe((action) => {
       if (action.type === "Update") {
         this.#update();
