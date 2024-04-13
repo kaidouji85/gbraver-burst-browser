@@ -5,7 +5,7 @@ import { BatteryEnchantmentView } from "../view/battery-enchantment-view";
 import { BatteryEnchantmentProps } from "./battery-enchantment-props";
 
 /** BatteryEnchantmentProps生成パラメータ */
-type GenerateBatteryEnchantmentPropsParams = {
+export type GenerateBatteryEnchantmentPropsParams = {
   /** ビュー */
   view: BatteryEnchantmentView;
   /** リソース管理オブジェクト */
