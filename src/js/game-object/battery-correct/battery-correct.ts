@@ -29,8 +29,8 @@ export class BatteryCorrect {
    * @param params パラメータ
    */
   constructor(params: Params) {
-    const { gameObjectAction, view } = params;
-    this.#props = createBatteryCorrectProps({ view });
+    const { gameObjectAction } = params;
+    this.#props = createBatteryCorrectProps(params);
     this.#unsubscribers = [
       gameObjectAction.subscribe((action) => {
         if (action.type === "PreRender") {
