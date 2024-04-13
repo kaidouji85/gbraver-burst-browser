@@ -3,15 +3,15 @@ import { Animate } from "../../../../animation/animate";
 import { delay } from "../../../../animation/delay";
 import { onStart } from "../../../../animation/on-start";
 import { tween } from "../../../../animation/tween";
-import type { LightningDozerCutInModel } from "../model/lightning-dozer-cutin-model";
+import {LightningDozerCutInAnimationProps} from "./animation-props";
 
 /**
  * カットインを表示する
- *
- * @param model モデル
+ * @param props アニメーションプロパティ
  * @return アニメーション
  */
-export function show(model: LightningDozerCutInModel): Animate {
+export function show(props: LightningDozerCutInAnimationProps): Animate {
+  const { model } = props;
   return all(
     onStart(() => {
       model.animation.type = "CUT_IN_UP";

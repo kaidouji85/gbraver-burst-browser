@@ -1,10 +1,8 @@
-import type {LightningDozerCutInModel} from "../model/lightning-dozer-cutin-model";
-import type {LightningDozerCutInView} from "../view/lightning-dozer-cutin-view";
+import { LightningDozerCutInAnimationProps } from "../animation/animation-props";
+import { LightningDozerCutInView } from "../view/lightning-dozer-cutin-view";
 
 /** ライトニングドーザ カットイン プロパティ */
-export type LightningDozerCutInProps = {
-  /** モデル */
-  model: LightningDozerCutInModel;
+export type LightningDozerCutInProps = LightningDozerCutInAnimationProps & {
   /** ビュー */
   view: LightningDozerCutInView;
-}
+};
