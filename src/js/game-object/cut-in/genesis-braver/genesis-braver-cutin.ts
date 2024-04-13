@@ -7,11 +7,11 @@ import { HUDTracking } from "../../../tracking/hud-tracking";
 import { GameObjectAction } from "../../action/game-object-action";
 import { hidden } from "./animation/hidden";
 import { show } from "./animation/show";
-import { GenesisBraverCutInProps } from "./props/genesis-braver-cutin-props";
 import {
   createGenesisBraverCutInProps,
   GenerateGenesisBraverCutInPropsParams
 } from "./props/create-genesis-braver-cutin-props";
+import { GenesisBraverCutInProps } from "./props/genesis-braver-cutin-props";
 
 /** コンストラクタのパラメータ */
 export type ConstructGenesisBraverCutInParams =
@@ -72,7 +72,7 @@ export class GenesisBraverCutIn implements HUDTracking {
    * @return アニメーション
    */
   show(): Animate {
-    return show(this.#props.model);
+    return show(this.#props);
   }
 
   /**
@@ -80,7 +80,7 @@ export class GenesisBraverCutIn implements HUDTracking {
    * @return アニメーション
    */
   hidden(): Animate {
-    return hidden(this.#props.model);
+    return hidden(this.#props);
   }
 
   /**
