@@ -1,7 +1,7 @@
 import { Animate } from "../../../animation/animate";
 import { onStart } from "../../../animation/on-start";
 import { tween } from "../../../animation/tween";
-import {BatteryNumberProps} from "../props/battery-number-props";
+import { BatteryNumberProps } from "../props/battery-number-props";
 
 /**
  * バッテリー数字を表示する

@@ -8,7 +8,10 @@ import { change } from "./animation/change";
 import { hidden } from "./animation/hidden";
 import { show } from "./animation/show";
 import { BatteryNumberProps } from "./props/battery-number-props";
-import {createBatteryNumberProps, GenerateBatteryNumberPropsParams} from "./props/create-battery-number-props";
+import {
+  createBatteryNumberProps,
+  GenerateBatteryNumberPropsParams,
+} from "./props/create-battery-number-props";
 
 /** コンストラクタのパラメータ */
 type Params = GenerateBatteryNumberPropsParams & {
