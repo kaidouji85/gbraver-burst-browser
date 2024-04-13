@@ -6,32 +6,36 @@ import { BatteryNumber } from "./battery-number";
 import { EnemyBatteryNumberView } from "./view/enemy-battery-number-view";
 import { PlayerBatteryNumberView } from "./view/player-battery-number-view";
 
+/** 生成パラメータ */
+export type GenerateBatteryNumberParams = {
+  /** リソース管理オブジェクト */
+  resources: Resources;
+  /** ゲームオブジェクトアクション */
+  gameObjectAction: Observable<GameObjectAction>;
+};
+
 /**
  * プレイヤーのバッテリービュー
- *
- * @param resources リソース管理オブジェクト
- * @param gameObjectAction ゲームオブジェクトアクション
+ * @param params 生成パラメータ
  * @return バッテリービュー
  */
 export function playerBatteryNumber(
-  resources: Resources,
-  gameObjectAction: Observable<GameObjectAction>,
+  params: GenerateBatteryNumberParams,
 ): BatteryNumber {
+  const { resources } = params;
   const view = new PlayerBatteryNumberView(resources);
-  return new BatteryNumber(view, gameObjectAction);
+  return new BatteryNumber({ ...params, view });
 }
 
 /**
  * 敵のバッテリービュー
- *
- * @param resources リソース管理オブジェクト
- * @param gameObjectAction ゲームオブジェクトアクション
+ * @param params 生成パラメータ
  * @return バッテリービュー
  */
 export function enemyBatteryNumber(
-  resources: Resources,
-  gameObjectAction: Observable<GameObjectAction>,
+  params: GenerateBatteryNumberParams,
 ): BatteryNumber {
+  const { resources } = params;
   const view = new EnemyBatteryNumberView(resources);
-  return new BatteryNumber(view, gameObjectAction);
+  return new BatteryNumber({ ...params, view });
 }
