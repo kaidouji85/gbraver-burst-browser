@@ -6,13 +6,16 @@ import type { PreRender } from "../../../game-loop/pre-render";
 import type { GameObjectAction } from "../../action/game-object-action";
 import { hidden } from "./animation/hidden";
 import { show } from "./animation/show";
-import {createRaitoCutInProps, GenerateRaitoCutInPropsParams} from "./props/create-raito-cutin-props";
+import {
+  createRaitoCutInProps,
+  GenerateRaitoCutInPropsParams,
+} from "./props/create-raito-cutin-props";
 import { RaitoCutInProps } from "./props/raito-cutin-props";
 
 /** コンストラクタのパラメータ */
 export type ConstructRaitoCutInParams = GenerateRaitoCutInPropsParams & {
   /** ゲームオブジェクトアクション */
-  gameObjectAction: Observable<GameObjectAction>,
+  gameObjectAction: Observable<GameObjectAction>;
 };
 
 /** ライト カットイン */
@@ -50,7 +53,7 @@ export class RaitoCutIn {
    * @return アニメーション
    */
   show(): Animate {
-    return show(this.#props.model, this.#props.sounds);
+    return show(this.#props);
   }
 
   /**
@@ -59,7 +62,7 @@ export class RaitoCutIn {
    * @return アニメーション
    */
   hidden(): Animate {
-    return hidden(this.#props.model);
+    return hidden(this.#props);
   }
 
   /**
