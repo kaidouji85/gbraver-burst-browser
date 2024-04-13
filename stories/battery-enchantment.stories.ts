@@ -22,15 +22,15 @@ export default {
  */
 const batteryEnchantmentStory =
   (
-    generator: (
-      resources: Resources,
-      gameObjectAction: Observable<GameObjectAction>,
-    ) => BatteryEnchantment,
+    generator: (params: {
+      resources: Resources;
+      gameObjectAction: Observable<GameObjectAction>;
+    }) => BatteryEnchantment,
     fn: (batteryEnchantment: BatteryEnchantment) => void,
   ) =>
   () => {
-    const stub = new TDGameObjectStub(({ resources, gameObjectAction }) => {
-      const batteryEnchantment = generator(resources, gameObjectAction);
+    const stub = new TDGameObjectStub((params) => {
+      const batteryEnchantment = generator(params);
       fn(batteryEnchantment);
       return {
         objects: [batteryEnchantment.getObject3D()],

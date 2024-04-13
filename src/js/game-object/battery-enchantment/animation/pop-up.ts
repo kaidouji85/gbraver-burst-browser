@@ -2,19 +2,15 @@ import { Animate } from "../../../animation/animate";
 import { delay } from "../../../animation/delay";
 import { onStart } from "../../../animation/on-start";
 import { tween } from "../../../animation/tween";
-import type { BatteryEnchantmentModel } from "../model/battery-enchantment-model";
-import { BatteryEnchantmentSounds } from "../sounds/battery-enchantment-sounds";
+import { BatteryEnchantmentAnimationProps } from "./animation-props";
 
 /**
  * ポップアップ
- * @param model モデル
- * @param sounds 効果音
+ * @param props アニメーションプロパティ
  * @return アニメーション
  */
-export function popUp(
-  model: BatteryEnchantmentModel,
-  sounds: BatteryEnchantmentSounds,
-): Animate {
+export function popUp(props: BatteryEnchantmentAnimationProps): Animate {
+  const { model, sounds } = props;
   return onStart(() => {
     model.opacity = 0;
     model.scale = 1.2;
