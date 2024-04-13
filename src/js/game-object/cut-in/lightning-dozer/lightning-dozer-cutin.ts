@@ -7,13 +7,20 @@ import type { HUDTracking } from "../../../tracking/hud-tracking";
 import type { GameObjectAction } from "../../action/game-object-action";
 import { hidden } from "./animation/hidden";
 import { show } from "./animation/show";
-import type { LightningDozerCutInView } from "./view/lightning-dozer-cutin-view";
-import {LightningDozerCutInProps} from "./props/lightning-dozer-cutin-props";
-import {createLightningDozerCutInProps} from "./props/create-lightning-dozer-cutin-props";
+import {
+  createLightningDozerCutInProps,
+  GenerateLightningDozerCutInPropsParams,
+} from "./props/create-lightning-dozer-cutin-props";
+import { LightningDozerCutInProps } from "./props/lightning-dozer-cutin-props";
 
-/**
- * ライトニングドーザ カットイン
- */
+/** コンストラクタのパラメータ */
+export type ConstructLightningDozerCutInParams =
+  GenerateLightningDozerCutInPropsParams & {
+    /** ゲームオブジェクトアクション */
+    gameObjectAction: Observable<GameObjectAction>;
+  };
+
+/** ライトニングドーザ カットイン */
 export class LightningDozerCutIn implements HUDTracking {
   /** プロパティ */
   #props: LightningDozerCutInProps;
@@ -22,15 +29,11 @@ export class LightningDozerCutIn implements HUDTracking {
 
   /**
    * コンストラクタ
-   *
-   * @param view ビュー
-   * @param gameObjectAction ゲームオブジェクトアクション
+   * @param params パラメータ
    */
-  constructor(
-    view: LightningDozerCutInView,
-    gameObjectAction: Observable<GameObjectAction>,
-  ) {
-    this.#props = createLightningDozerCutInProps({ view });
+  constructor(params: ConstructLightningDozerCutInParams) {
+    const { gameObjectAction } = params;
+    this.#props = createLightningDozerCutInProps(params);
     this.#unsubscriber = gameObjectAction.subscribe((action) => {
       if (action.type === "PreRender") {
         this.#onPreRender(action);

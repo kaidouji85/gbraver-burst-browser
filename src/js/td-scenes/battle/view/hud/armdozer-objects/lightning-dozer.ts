@@ -61,9 +61,9 @@ export class LightningDozerHUD
 export function playerLightningDozerHUD(
   params: GenerateHUDLayerObjectParams,
 ): LightningDozerHUD {
-  const { resources, player, gameObjectAction } = params;
+  const { player } = params;
   return new LightningDozerHUD(player.playerId, {
-    cutIn: playerLightningDozerCutIn(resources, gameObjectAction),
+    cutIn: playerLightningDozerCutIn(params),
   });
 }
 
@@ -75,8 +75,8 @@ export function playerLightningDozerHUD(
 export function enemyLightningDozerHUD(
   params: GenerateHUDLayerObjectParams,
 ): LightningDozerHUD {
-  const { resources, enemy, gameObjectAction } = params;
+  const { enemy } = params;
   return new LightningDozerHUD(enemy.playerId, {
-    cutIn: enemyLightningiDozerCutIn(resources, gameObjectAction),
+    cutIn: enemyLightningiDozerCutIn(params),
   });
 }
