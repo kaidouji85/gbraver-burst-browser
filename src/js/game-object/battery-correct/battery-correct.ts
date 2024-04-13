@@ -6,13 +6,16 @@ import type { PreRender } from "../../game-loop/pre-render";
 import type { GameObjectAction } from "../action/game-object-action";
 import { popUp } from "./animation/pop-up";
 import { BatteryCorrectProps } from "./props/battery-correct-props";
-import {createBatteryCorrectProps, GenerateBatteryCorrectPropsParams} from "./props/create-battery-correct-props";
+import {
+  createBatteryCorrectProps,
+  GenerateBatteryCorrectPropsParams,
+} from "./props/create-battery-correct-props";
 
 /** コンストラクタのパラメータ */
 type Params = GenerateBatteryCorrectPropsParams & {
   /** ゲームオブジェクトアクション */
-  gameObjectAction: Observable<GameObjectAction>,
-}
+  gameObjectAction: Observable<GameObjectAction>;
+};
 
 /** バッテリー補正 */
 export class BatteryCorrect {

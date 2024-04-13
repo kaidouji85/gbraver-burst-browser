@@ -3,7 +3,7 @@ import { Animate } from "../../../animation/animate";
 import { onStart } from "../../../animation/on-start";
 import { tween } from "../../../animation/tween";
 import { ARMDOZER_EFFECT_STANDARD_Y } from "../../armdozer/position";
-import {BatteryCorrectAnimationProps} from "./animation-props";
+import { BatteryCorrectAnimationProps } from "./animation-props";
 
 /**
  * ポップアップ表示
@@ -11,7 +11,10 @@ import {BatteryCorrectAnimationProps} from "./animation-props";
  * @param value バッテリー補正の値
  * @return アニメーション
  */
-export function popUp(props: BatteryCorrectAnimationProps, value: number): Animate {
+export function popUp(
+  props: BatteryCorrectAnimationProps,
+  value: number,
+): Animate {
   const { model } = props;
   return onStart(() => {
     model.position.y = ARMDOZER_EFFECT_STANDARD_Y + 80;
