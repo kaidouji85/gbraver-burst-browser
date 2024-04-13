@@ -15,6 +15,7 @@ import {
 
 /** コンストラクタのパラメータ */
 type Params = GenerateBatteryNumberPropsParams & {
+  /** ゲームオブジェクトアクション */
   gameObjectAction: Observable<GameObjectAction>;
 };
 
