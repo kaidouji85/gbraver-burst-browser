@@ -1,8 +1,8 @@
-import { RaitoCutInProps } from "./raito-cutin-props";
-import { RaitoView } from "../view/raito-view";
 import { Resources } from "../../../../resource";
 import { createInitialValue } from "../model/initial-value";
 import { RaitoSounds } from "../sounds/raito-sounds";
+import { RaitoView } from "../view/raito-view";
+import { RaitoCutInProps } from "./raito-cutin-props";
 
 /** 生成パラメータ */
 export type GenerateRaitoCutInPropsParams = {
