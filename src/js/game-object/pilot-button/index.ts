@@ -10,7 +10,7 @@ import { TsubasaIcon } from "./view/tsubasa";
 import { YuuyaIcon } from "./view/yuuya";
 
 /** 生成パラメータ */
-type Params = {
+export type GeneratePilotButtonParams = {
   /** リソース管理オブジェクト */
   resources: Resources;
   /** ゲームオブジェクトアクション */
@@ -22,7 +22,9 @@ type Params = {
  * @param params 生成パラメータ
  * @return パイロットボタン
  */
-export function shinyaPilotButton(params: Params): PilotButton {
+export function shinyaPilotButton(
+  params: GeneratePilotButtonParams,
+): PilotButton {
   const { resources } = params;
   const pilotIcon = new ShinyaIcon(resources);
   return new PilotButton({ ...params, pilotIcon });
@@ -33,7 +35,7 @@ export function shinyaPilotButton(params: Params): PilotButton {
  * @param params 生成パラメータ
  * @return パイロットボタン
  */
-export function gaiPilotButton(params: Params): PilotButton {
+export function gaiPilotButton(params: GeneratePilotButtonParams): PilotButton {
   const { resources } = params;
   const pilotIcon = new GaiIcon(resources);
   return new PilotButton({ ...params, pilotIcon });
@@ -44,7 +46,9 @@ export function gaiPilotButton(params: Params): PilotButton {
  * @param params 生成パラメータ
  * @return パイロットボタン
  */
-export function raitoPilotButton(params: Params): PilotButton {
+export function raitoPilotButton(
+  params: GeneratePilotButtonParams,
+): PilotButton {
   const { resources } = params;
   const pilotIcon = new RaitoIcon(resources);
   return new PilotButton({ ...params, pilotIcon });
@@ -55,7 +59,9 @@ export function raitoPilotButton(params: Params): PilotButton {
  * @param params 生成パラメータ
  * @return パイロットボタン
  */
-export function tsubasaPilotButton(params: Params): PilotButton {
+export function tsubasaPilotButton(
+  params: GeneratePilotButtonParams,
+): PilotButton {
   const { resources } = params;
   const pilotIcon = new TsubasaIcon(resources);
   return new PilotButton({ ...params, pilotIcon });
@@ -67,7 +73,9 @@ export function tsubasaPilotButton(params: Params): PilotButton {
  * @param gameObjectAction ゲームオブジェクトアクション
  * @return パイロットボタン
  */
-export function yuuyaPilotButton(params: Params): PilotButton {
+export function yuuyaPilotButton(
+  params: GeneratePilotButtonParams,
+): PilotButton {
   const { resources } = params;
   const pilotIcon = new YuuyaIcon(resources);
   return new PilotButton({ ...params, pilotIcon });
