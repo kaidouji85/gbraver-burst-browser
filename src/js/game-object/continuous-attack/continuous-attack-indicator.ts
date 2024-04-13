@@ -6,18 +6,17 @@ import type { PreRender } from "../../game-loop/pre-render";
 import type { Resources } from "../../resource";
 import type { GameObjectAction } from "../action/game-object-action";
 import { popUp } from "./animation/pop-up";
-import type { ContinuousAttackModel } from "./model/continuous-attack-model";
-import { createInitialValue } from "./model/initial-value";
-import { ContinuousAttackSounds } from "./sounds/continuous-attack-sounds";
+import { ContinuousAttackProps } from "./props/continuous-attack-props";
+import { createContinuousAttackProps } from "./props/create-continuous-attack-props";
 import type { ContinuousAttackView } from "./view/continuous-attack-view";
 
 /**
  * 連続攻撃
  */
 export class ContinuousAttackIndicator {
-  #model: ContinuousAttackModel;
-  #view: ContinuousAttackView;
-  #sounds: ContinuousAttackSounds;
+  /** プロパティ */
+  #props: ContinuousAttackProps;
+  /** アンサブスクライバ */
   #unsubscriber: Unsubscribable;
 
   /**
@@ -32,9 +31,7 @@ export class ContinuousAttackIndicator {
     resources: Resources,
     gameObjectAction: Observable<GameObjectAction>,
   ) {
-    this.#model = createInitialValue();
-    this.#view = view;
-    this.#sounds = new ContinuousAttackSounds(resources);
+    this.#props = createContinuousAttackProps({ view, resources });
     this.#unsubscriber = gameObjectAction.subscribe((action) => {
       if (action.type === "Update") {
         this.#onUpdate();
@@ -46,7 +43,7 @@ export class ContinuousAttackIndicator {
 
   /** デストラクタ相当の処理 */
   destructor(): void {
-    this.#view.destructor();
+    this.#props.view.destructor();
     this.#unsubscriber.unsubscribe();
   }
 
@@ -56,7 +53,7 @@ export class ContinuousAttackIndicator {
    * @return アニメーション
    */
   popUp(): Animate {
-    return popUp(this.#model, this.#sounds);
+    return popUp(this.#props.model, this.#props.sounds);
   }
 
   /**
@@ -65,14 +62,14 @@ export class ContinuousAttackIndicator {
    * @return シーンに追加するオブジェクト
    */
   getObject3D(): THREE.Object3D {
-    return this.#view.getObject3D();
+    return this.#props.view.getObject3D();
   }
 
   /**
    * アップデート時の処理
    */
   #onUpdate(): void {
-    this.#view.engage(this.#model);
+    this.#props.view.engage(this.#props.model);
   }
 
   /**
@@ -81,6 +78,6 @@ export class ContinuousAttackIndicator {
    * @param action アクション
    */
   #onPreRender(action: PreRender): void {
-    this.#view.lookAt(action.camera);
+    this.#props.view.lookAt(action.camera);
   }
 }
