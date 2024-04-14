@@ -7,13 +7,20 @@ import type { HUDTracking } from "../../../tracking/hud-tracking";
 import type { GameObjectAction } from "../../action/game-object-action";
 import { hidden } from "./animation/hidden";
 import { show } from "./animation/show";
-import type { ShinBraverCutInView } from "./view/shin-braver-cutin-view";
+import {
+  createShinBraverCutInProps,
+  GenerateShinBraverCutInPropsParams,
+} from "./props/create-shin-braver-cutin-props";
 import { ShinBraverCutInProps } from "./props/shin-braver-cutin-props";
-import { createShinBraverCutInProps } from "./props/create-shin-braver-cutin-props";
 
-/**
- * シンブレイバーカットイン
- */
+/** コンストラクタのパラメータ */
+export type ConstructShinBraverCutInParams =
+  GenerateShinBraverCutInPropsParams & {
+    /** ゲームオブジェクトアクション */
+    gameObjectAction: Observable<GameObjectAction>;
+  };
+
+/** シンブレイバーカットイン */
 export class ShinBraverCutIn implements HUDTracking {
   /** プロパティ */
   #props: ShinBraverCutInProps;
@@ -22,14 +29,11 @@ export class ShinBraverCutIn implements HUDTracking {
 
   /**
    * コンストラクタ
-   * @param view ビュー
-   * @param gameObjectAction ゲームオブジェクトアクション
+   * @param params パラメータ
    */
-  constructor(
-    view: ShinBraverCutInView,
-    gameObjectAction: Observable<GameObjectAction>,
-  ) {
-    this.#props = createShinBraverCutInProps({ view });
+  constructor(params: ConstructShinBraverCutInParams) {
+    const { gameObjectAction } = params;
+    this.#props = createShinBraverCutInProps(params);
     this.#unsubscriber = gameObjectAction.subscribe((action) => {
       if (action.type === "PreRender") {
         this.#onPreRender(action);
