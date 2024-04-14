@@ -7,11 +7,11 @@ import type { HUDTracking } from "../../../tracking/hud-tracking";
 import type { GameObjectAction } from "../../action/game-object-action";
 import { hidden } from "./animation/hidden";
 import { show } from "./animation/show";
-import { WingDozerCutInProps } from "./props/wing-dozer-cutin-props";
 import {
   createWingDozerCutInProps,
   GenerateWingDozerCutInPropsParams,
 } from "./props/create-wing-dozer-cutin-props";
+import { WingDozerCutInProps } from "./props/wing-dozer-cutin-props";
 
 /** コンストラクタのパラメータ */
 export type ConstructWingDozerCutInParams =
