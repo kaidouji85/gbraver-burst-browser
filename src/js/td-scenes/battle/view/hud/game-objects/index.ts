@@ -57,10 +57,7 @@ export class HUDGameObjects {
   constructor(params: GenerateHUDLayerObjectParams) {
     const { resources, gameObjectAction } = params;
     this.#battleAction = new Subject();
-    this.batterySelector = new BatterySelector({
-      gameObjectAction,
-      resources,
-    });
+    this.batterySelector = new BatterySelector(params);
     this.batterySelectorLeadLine = batterySelectorLeadLine(gameObjectAction);
     this.burstButton = createBurstButton(params);
     this.burstButtonLeadLine = burstButtonLeadLine(gameObjectAction);

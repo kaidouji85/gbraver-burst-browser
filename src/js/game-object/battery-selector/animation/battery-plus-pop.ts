@@ -51,8 +51,8 @@ export function batteryPlusPop(
   props: BatterySelectorAnimationProps,
   group: TWEEN.Group,
 ): Animate {
-  const { sounds } = props;
+  const { sounds, se } = props;
   return onStart(() => {
-    sounds.batteryChangeSound.sound.play();
+    se.play(sounds.batteryChangeSound);
   }).chain(silentlyBatteryPlusPop(props, group));
 }

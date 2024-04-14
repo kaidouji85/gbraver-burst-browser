@@ -7,11 +7,14 @@ import { initialValue } from "../model/initial-value";
 import { createBatterySelectorSounds } from "../sounds/battery-selector-sounds";
 import { BatterySelectorView } from "../view";
 import { BatterySelectorProps } from "./battery-selector-props";
+import { SEPlayer } from "../../../se/se-player";
 
 /** バッテリーセレクタプロパティ生成パラメータ */
 export type GenerateBatterySelectorPropsParam = {
   /** リソース管理オブジェクト */
   resources: Resources;
+  /** SE再生オブジェクト */
+  se: SEPlayer;
   /** ゲームオブジェクトアクション */
   gameObjectAction: Observable<GameObjectAction>;
 };
@@ -25,6 +28,7 @@ export function createBatterySelectorProps(
   param: GenerateBatterySelectorPropsParam,
 ): BatterySelectorProps {
   return {
+    ...param,
     model: initialValue(),
     batteryChangeTween: new TWEEN.Group(),
     batteryMinusTween: new TWEEN.Group(),

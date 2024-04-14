@@ -9,9 +9,9 @@ import { BatterySelectorAnimationProps } from "./animation-props";
  * @return アニメーション
  */
 export function decide(props: BatterySelectorAnimationProps): Animate {
-  const { model, sounds } = props;
+  const { model, sounds, se } = props;
   return onStart(() => {
-    sounds.pushButtonSound.sound.play();
+    se.play(sounds.pushButtonSound);
   })
     .chain(
       tween(model, (t) =>
