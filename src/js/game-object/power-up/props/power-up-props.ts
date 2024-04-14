@@ -1,13 +1,8 @@
-import { PowerUpModel } from "../model/power-up-model";
-import { PowerUpSounds } from "../sounds/power-up-sounds";
+import { PowerUpAnimationProps } from "../animation/animation-props";
 import { PowerUpView } from "../view/power-up-view";
 
 /** 攻撃アップ プロパティ */
-export type PowerUpProps = {
-  /** モデル */
-  model: PowerUpModel;
+export type PowerUpProps = PowerUpAnimationProps & {
   /** ビュー */
   view: PowerUpView;
-  /** サウンド */
-  sounds: PowerUpSounds;
 };
