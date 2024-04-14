@@ -1,5 +1,5 @@
-import {PowerUpModel} from "../model/power-up-model";
-import {PowerUpSounds} from "../sounds/power-up-sounds";
+import { PowerUpModel } from "../model/power-up-model";
+import { PowerUpSounds } from "../sounds/power-up-sounds";
 
 /** パワーアップ アニメーション プロパティ */
 export type PowerUpAnimationProps = {
@@ -7,4 +7,4 @@ export type PowerUpAnimationProps = {
   model: PowerUpModel;
   /** サウンド */
   sounds: PowerUpSounds;
-}
+};

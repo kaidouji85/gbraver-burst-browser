@@ -1,14 +1,10 @@
-import { Observable } from "rxjs";
-
 import { delay } from "../src/js/animation/delay";
-import { GameObjectAction } from "../src/js/game-object/action/game-object-action";
 import {
   enemyPowerUp,
   GeneratePowerUpParams,
   playerPowerUp,
 } from "../src/js/game-object/power-up";
 import { PowerUp } from "../src/js/game-object/power-up/power-up";
-import { Resources } from "../src/js/resource";
 import { TDGameObjectStub } from "./stub/td-game-object-stub";
 
 export default {
