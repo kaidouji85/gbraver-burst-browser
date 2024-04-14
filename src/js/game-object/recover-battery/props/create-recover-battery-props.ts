@@ -1,4 +1,5 @@
 import { Resources } from "../../../resource";
+import { SEPlayer } from "../../../se/se-player";
 import { createInitialValue } from "../model/initial-value";
 import { RecoverBatterySounds } from "../sounds/recover-battery-sounds";
 import { RecoverBatteryView } from "../view/recover-battery-view";
@@ -10,6 +11,8 @@ export type GenerateRecoverBatteryPropsParams = {
   view: RecoverBatteryView;
   /** リソース管理オブジェクト */
   resources: Resources;
+  /** SE再生オブジェクト */
+  se: SEPlayer;
 };
 
 /**
@@ -20,10 +23,10 @@ export type GenerateRecoverBatteryPropsParams = {
 export function createRecoverBatteryProps(
   params: GenerateRecoverBatteryPropsParams,
 ): RecoverBatteryProps {
-  const { view, resources } = params;
+  const { resources } = params;
   return {
+    ...params,
     model: createInitialValue(),
-    view,
     sounds: new RecoverBatterySounds(resources),
   };
 }
