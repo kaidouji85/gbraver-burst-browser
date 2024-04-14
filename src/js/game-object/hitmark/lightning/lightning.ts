@@ -4,11 +4,11 @@ import * as THREE from "three";
 import { Animate } from "../../../animation/animate";
 import type { GameObjectAction } from "../../action/game-object-action";
 import { popUp } from "./animation/pop-up";
-import { LightningProps } from "./props/lightning-props";
 import {
   createLightningProps,
   GenerateLightningPropsParams,
 } from "./props/create-lightning-props";
+import { LightningProps } from "./props/lightning-props";
 
 /** コンストラクタのパラメータ */
 export type ConstructLightningParams = GenerateLightningPropsParams & {
