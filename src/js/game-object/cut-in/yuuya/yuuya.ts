@@ -11,15 +11,13 @@ import { createInitialValue } from "./model/initial-value";
 import type { YuuyaModel } from "./model/yuuya-model";
 import { YuuyaSounds } from "./sounds/yuuya-sounds";
 import type { YuuyaView } from "./view/yuuya-view";
+import {YuuyaCutInProps} from "./props/yuuya-cutin-props";
+import {createYuuyaCutInProps} from "./props/create-yuuya-cutin-props";
 
 /** ユウヤ カットイン */
 export class YuuyaCutIn {
-  /** モデル */
-  #model: YuuyaModel;
-  /** ビュー */
-  #view: YuuyaView;
-  /** 効果音 */
-  #sounds: YuuyaSounds;
+  /** プロパティ */
+  #props: YuuyaCutInProps;
   /** アンサブスクライバ */
   #unsubscriber: Unsubscribable;
 
@@ -34,9 +32,7 @@ export class YuuyaCutIn {
     resources: Resources,
     gameObjectAction: Observable<GameObjectAction>,
   ) {
-    this.#model = createInitialValue();
-    this.#view = view;
-    this.#sounds = new YuuyaSounds(resources);
+    this.#props = createYuuyaCutInProps({ view, resources });
     this.#unsubscriber = gameObjectAction.subscribe((action) => {
       if (action.type === "PreRender") {
         this.#onPreRender(action);
@@ -48,7 +44,7 @@ export class YuuyaCutIn {
    * デストラクタ相当の処理
    */
   destructor(): void {
-    this.#view.destructor();
+    this.#props.view.destructor();
     this.#unsubscriber.unsubscribe();
   }
 
@@ -57,7 +53,7 @@ export class YuuyaCutIn {
    * @return アニメーション
    */
   show(): Animate {
-    return show(this.#model, this.#sounds);
+    return show(this.#props.model, this.#props.sounds);
   }
 
   /**
@@ -65,7 +61,7 @@ export class YuuyaCutIn {
    * @return アニメーション
    */
   hidden(): Animate {
-    return hidden(this.#model);
+    return hidden(this.#props.model);
   }
 
   /**
@@ -73,7 +69,7 @@ export class YuuyaCutIn {
    * @return シーンに追加するオブジェクト
    */
   getObject3D(): THREE.Object3D {
-    return this.#view.getObject3D();
+    return this.#props.view.getObject3D();
   }
 
   /**
@@ -81,6 +77,6 @@ export class YuuyaCutIn {
    * @param action アクション
    */
   #onPreRender(action: PreRender): void {
-    this.#view.engage(this.#model, action);
+    this.#props.view.engage(this.#props.model, action);
   }
 }
