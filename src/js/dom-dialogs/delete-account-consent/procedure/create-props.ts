@@ -4,6 +4,7 @@ import { Exclusive } from "../../../exclusive/exclusive";
 import { Resources } from "../../../resource";
 import { createEmptySoundResource } from "../../../resource/sound/empty-sound-resource";
 import { SOUND_IDS } from "../../../resource/sound/ids";
+import { SEPlayer } from "../../../se/se-player";
 import { ROOT_CLASS } from "../dom/class-name";
 import {
   extractBackGround,
@@ -14,14 +15,23 @@ import {
 import { rootInnerHTML } from "../dom/root-inner-html";
 import { DeleteAccountConsentDialogProps } from "../props";
 
+/** 生成パラメータ */
+export type GenerateDeleteAccountConsentDialogPropsParams = {
+  /** リソース管理オブジェクト */
+  resources: Resources;
+  /** SE再生オブジェクト */
+  se: SEPlayer;
+};
+
 /**
  * DeleteAccountConsentDialogPropsを生成する
- * @param resources リソース管理オブジェクト
+ * @param params 生成パラメータ
  * @return 生成結果
  */
 export function createProps(
-  resources: Resources,
+  params: GenerateDeleteAccountConsentDialogPropsParams,
 ): DeleteAccountConsentDialogProps {
+  const { resources } = params;
   const root = document.createElement("div");
   root.innerHTML = rootInnerHTML(resources);
   root.className = ROOT_CLASS;
@@ -39,6 +49,7 @@ export function createProps(
     createEmptySoundResource();
   const exclusive = new Exclusive();
   return {
+    ...params,
     root,
     backGround,
     closer,
