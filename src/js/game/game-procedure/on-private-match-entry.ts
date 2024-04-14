@@ -37,7 +37,7 @@ export async function onPrivateMatchEntry(
   );
   if (!battle) {
     props.domDialogBinder.bind(
-      new RejectPrivateMatchEntryDialog(props.resources),
+      new RejectPrivateMatchEntryDialog(props),
       rejectPrivateMatcEntryDialogConnector,
     );
     return;
