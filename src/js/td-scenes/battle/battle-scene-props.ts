@@ -20,6 +20,7 @@ import { BattleControllerType } from "./controller-type";
 import type { CustomBattleEvent } from "./custom-battle-event";
 import { BattleSceneSounds } from "./sounds/sounds";
 import { BattleSceneView } from "./view";
+import {SEPlayer} from "../../se/se-player";
 
 /** バトル終了情報 */
 export type BattleEnd = {
@@ -66,6 +67,8 @@ export type BattleScenePropsCreatorParams = Readonly<{
   resources: Resources;
   /** BGM管理オブジェクト */
   bgm: BGMManager;
+  /** SE再生オブジェクト */
+  se: SEPlayer;
   /** 再生するBGM ID */
   playingBGM: SoundId;
   /** レンダラ */
