@@ -5,9 +5,14 @@ import { Animate } from "../../animation/animate";
 import type { PreRender } from "../../game-loop/pre-render";
 import type { GameObjectAction } from "../action/game-object-action";
 import { popUp } from "./animation/pop-up";
-import type { DamageIndicatorView } from "./view/damage-indicator-view";
 import { DamageIndicatorProps } from "./props/damage-indicator-props";
-import { createDamageIndicatorProps } from "./props/create-damage-indicator-props";
+import {createDamageIndicatorProps, GenerateDamageIndicatorPropsParams} from "./props/create-damage-indicator-props";
+
+/** コンストラクタのパラメータ */
+export type ConstructDamageIndicatorParams = GenerateDamageIndicatorPropsParams & {
+  /** ゲームオブジェクトアクション */
+  gameObjectAction: Observable<GameObjectAction>,
+}
 
 /** ダメージインジケータ */
 export class DamageIndicator {
@@ -18,15 +23,11 @@ export class DamageIndicator {
 
   /**
    * コンストラクタ
-   *
-   * @param view ビュー
-   * @param gameObjectAction Stream<GameObjectAction>
+   * @param params パラメータ
    */
-  constructor(
-    view: DamageIndicatorView,
-    gameObjectAction: Observable<GameObjectAction>,
-  ) {
-    this.#props = createDamageIndicatorProps({ view });
+  constructor(params: ConstructDamageIndicatorParams) {
+    const { gameObjectAction } = params;
+    this.#props = createDamageIndicatorProps(params);
     this.#unsubscriber = gameObjectAction.subscribe((action) => {
       if (action.type === "Update") {
         this.#update();
