@@ -41,10 +41,10 @@ export async function onNetBattleStart(
   props.domDialogBinder.hidden();
   if (!isLogin) {
     props.domDialogBinder.bind(
-      new LoginDialog(
-        props.resources,
-        "ネット対戦をするにはログインをしてください",
-      ),
+      new LoginDialog({
+        ...props,
+        caption: "ネット対戦をするにはログインをしてください",
+      }),
       loginDialogConnector,
     );
     return;

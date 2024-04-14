@@ -2,6 +2,7 @@ import { Subject } from "rxjs";
 
 import { Exclusive } from "../../exclusive/exclusive";
 import { SoundResource } from "../../resource/sound/resource";
+import { SEPlayer } from "../../se/se-player";
 
 /** ログインダイアログのプロパティ */
 export type LoginDialogProps = {
@@ -21,6 +22,8 @@ export type LoginDialogProps = {
   changeValue: SoundResource;
   /** 効果音 ボタン押下 */
   pushButton: SoundResource;
+  /** SE再生 */
+  se: SEPlayer;
   /** 排他制御 */
   exclusive: Exclusive;
 };

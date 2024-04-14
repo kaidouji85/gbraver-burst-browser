@@ -1,10 +1,15 @@
 import { Observable, Unsubscribable } from "rxjs";
 
-import { Resources } from "../../resource";
 import { DOMDialog } from "../dialog";
 import { bindEventListeners } from "./procedures/bind-event-listeners";
-import { createProps } from "./procedures/create-props";
+import {
+  createProps,
+  GenerateLoginDialogPropsParams,
+} from "./procedures/create-props";
 import { LoginDialogProps } from "./props";
+
+/** コンストラクタのパラメータ */
+export type ConstructLoginDialogParams = GenerateLoginDialogPropsParams;
 
 /** ログイン ダイアログ */
 export class LoginDialog implements DOMDialog {
@@ -15,11 +20,10 @@ export class LoginDialog implements DOMDialog {
 
   /**
    * コンストラクタ
-   * @param resources リソース管理オブジェクト
-   * @param caption 入力フォームに表示されるメッセージ
+   * @param params パラメータ
    */
-  constructor(resources: Resources, caption: string) {
-    this.#props = createProps(resources, caption);
+  constructor(params: ConstructLoginDialogParams) {
+    this.#props = createProps(params);
     this.#unsubscribers = bindEventListeners(this.#props);
   }
 
