@@ -1,10 +1,8 @@
-import { WingDozerCutInModel } from "../model/wing-dozer-cutin-model";
+import { WingDozerCutInAnimationProps } from "../animation/animation-props";
 import { WingDozerCutInView } from "../view/wing-dozer-cutin-view";
 
 /** ウィングドーザ カットイン プロパティ */
-export type WingDozerCutInProps = {
-  /** モデル */
-  model: WingDozerCutInModel;
+export type WingDozerCutInProps = WingDozerCutInAnimationProps & {
   /** ビュー */
   view: WingDozerCutInView;
 };

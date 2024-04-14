@@ -62,7 +62,7 @@ export class WingDozerCutIn implements HUDTracking {
    * @return アニメーション
    */
   show(): Animate {
-    return show(this.#props.model);
+    return show(this.#props);
   }
 
   /**
@@ -70,7 +70,7 @@ export class WingDozerCutIn implements HUDTracking {
    * @return アニメーション
    */
   hidden(): Animate {
-    return hidden(this.#props.model);
+    return hidden(this.#props);
   }
 
   /** @override */
