@@ -55,7 +55,7 @@ export class ShockWave {
    */
   popUp(): Animate {
     return onStart(() => {
-      this.#props.hitSound.sound.play();
+      this.#props.se.play(this.#props.hitSound);
     }).chain(popUp(this.#props.model));
   }
 
