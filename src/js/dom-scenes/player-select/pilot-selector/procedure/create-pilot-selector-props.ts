@@ -6,6 +6,7 @@ import { Exclusive } from "../../../../exclusive/exclusive";
 import { Resources } from "../../../../resource";
 import { createEmptySoundResource } from "../../../../resource/sound/empty-sound-resource";
 import { SOUND_IDS } from "../../../../resource/sound/ids";
+import { SEPlayer } from "../../../../se/se-player";
 import { BLOCK } from "../dom/class-name";
 import {
   extractDummyStatus,
@@ -17,7 +18,6 @@ import { rootInnerHTML } from "../dom/root-inner-html";
 import { PilotIcon } from "../pilot-icon";
 import { PilotStatus } from "../pilot-status";
 import { PilotSelectorProps } from "../props";
-import {SEPlayer} from "../../../../se/se-player";
 
 /** PilotSelectorProps生成パラメータ */
 export type GeneratePilotSelectorPropsParams = {
@@ -37,7 +37,7 @@ export type GeneratePilotSelectorPropsParams = {
  * @return 生成結果
  */
 export function createPilotSelectorProps(
-  params: GeneratePilotSelectorPropsParams
+  params: GeneratePilotSelectorPropsParams,
 ): PilotSelectorProps {
   const { resources, pilotIds, initialPilotId } = params;
   const root = document.createElement("div");

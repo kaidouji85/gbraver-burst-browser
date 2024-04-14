@@ -17,7 +17,7 @@ export function onHelpIconPush(
 
   if (!isHelpMenuOpen(props)) {
     action.event.stopPropagation();
-    props.changeValue.sound.play();
+    props.se.play(props.changeValue);
     pop(props.helpIcon, 1.3);
     openHelpMenu(props);
   }

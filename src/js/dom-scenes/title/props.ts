@@ -6,6 +6,7 @@ import { PathIds } from "../../resource/path/ids";
 import { createEmptySoundResource } from "../../resource/sound/empty-sound-resource";
 import { SOUND_IDS } from "../../resource/sound/ids";
 import { SoundResource } from "../../resource/sound/resource";
+import { SEPlayer } from "../../se/se-player";
 import { domUuid } from "../../uuid/dom-uuid";
 import { waitElementLoaded } from "../../wait/wait-element-loaded";
 import { ROOT_CLASS } from "./dom/class-name";
@@ -73,6 +74,9 @@ export type TitleProps = {
   /** SE ボタン押下 */
   pushButton: SoundResource;
 
+  /** SE再生オブジェクト */
+  se: SEPlayer;
+
   /** ログイン押下ストリーム */
   pushLogin: Subject<void>;
 
@@ -99,6 +103,8 @@ export type TitleProps = {
 export type CreateTitlePropsParams = RootInnerHTMLParams & {
   /** リソース管理オブジェクト */
   resources: Resources;
+  /** SE再生オブジェクト */
+  se: SEPlayer;
 };
 
 /**
@@ -146,6 +152,7 @@ export function createTitleProps(params: CreateTitlePropsParams): TitleProps {
   elements.helpIcon.src =
     params.resources.paths.find((v) => v.id === PathIds.HELP_ICON)?.path ?? "";
   return {
+    ...params,
     exclusive: new Exclusive(),
     root,
     login: elements.login,

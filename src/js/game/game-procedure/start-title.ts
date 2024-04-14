@@ -36,13 +36,8 @@ export async function startTitle(props: Readonly<GameProps>): Promise<Title> {
         type: "GuestAccount",
       };
   const scene = new Title({
-    resources: props.resources,
+    ...props,
     account,
-    howToPlayURL: props.howToPlayURL,
-    isApiServerEnable: props.isAPIServerEnable,
-    termsOfServiceURL: props.termsOfServiceURL,
-    privacyPolicyURL: props.privacyPolicyURL,
-    contactURL: props.contactURL,
   });
   props.domSceneBinder.bind(scene, titleConnector);
   await Promise.race([scene.waitUntilLoaded(), waitTime(MAX_LOADING_TIME)]);

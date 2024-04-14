@@ -5,7 +5,7 @@ import { Exclusive } from "../../../exclusive/exclusive";
 import { Resources } from "../../../resource";
 import { createEmptySoundResource } from "../../../resource/sound/empty-sound-resource";
 import { SOUND_IDS } from "../../../resource/sound/ids";
-import {SEPlayer} from "../../../se/se-player";
+import { SEPlayer } from "../../../se/se-player";
 import { ArmdozerIcon } from "../armdozer-icon";
 import { ROOT } from "../dom/class-name";
 import {

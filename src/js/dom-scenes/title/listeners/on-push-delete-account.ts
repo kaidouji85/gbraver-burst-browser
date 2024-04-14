@@ -12,6 +12,6 @@ export function onPushDeleteAccount(
   action: Readonly<PushDOM>,
 ): void {
   action.event.preventDefault();
-  props.changeValue.sound.play();
+  props.se.play(props.changeValue);
   props.pushDeleteAccount.next();
 }
