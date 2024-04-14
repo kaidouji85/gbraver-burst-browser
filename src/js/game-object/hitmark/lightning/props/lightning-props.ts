@@ -1,13 +1,8 @@
-import { LightningModel } from "../model/lightning-model";
-import { LightningSounds } from "../sounds/lightning-sounds";
+import { LightningAnimationProps } from "../animation/animation-props";
 import { LightningView } from "../view/lightning-view";
 
 /** 電撃ヒットマーク プロパティ */
-export type LightningProps = {
-  /** モデル */
-  model: LightningModel;
+export type LightningProps = LightningAnimationProps & {
   /** ビュー */
   view: LightningView;
-  /** サウンド */
-  sounds: LightningSounds;
 };

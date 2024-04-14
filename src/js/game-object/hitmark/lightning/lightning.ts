@@ -50,7 +50,7 @@ export class Lightning {
    * @return アニメーション
    */
   popUp(): Animate {
-    return popUp(this.#props.model, this.#props.sounds);
+    return popUp(this.#props);
   }
 
   /**
