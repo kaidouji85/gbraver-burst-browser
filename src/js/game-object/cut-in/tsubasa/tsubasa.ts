@@ -3,17 +3,22 @@ import * as THREE from "three";
 
 import { Animate } from "../../../animation/animate";
 import type { PreRender } from "../../../game-loop/pre-render";
-import type { Resources } from "../../../resource";
 import type { GameObjectAction } from "../../action/game-object-action";
 import { hidden } from "./animation/hidden";
 import { show } from "./animation/show";
-import { createTsubasaCutInProps } from "./props/create-tsubasa-cutin-props";
+import {
+  createTsubasaCutInProps,
+  GenerateTsubasaCutInPropsParams,
+} from "./props/create-tsubasa-cutin-props";
 import { TsubasaCutInProps } from "./props/tsubasa-cutin-props";
-import type { TsubasaView } from "./view/tsubasa-view";
 
-/**
- * ツバサ カットイン
- */
+/** コンストラクタのパラメータ */
+export type ConstructTsubasaCutInParams = GenerateTsubasaCutInPropsParams & {
+  /** ゲームオブジェクトアクション */
+  gameObjectAction: Observable<GameObjectAction>;
+};
+
+/** ツバサ カットイン */
 export class TsubasaCutIn {
   /** プロパティ */
   #props: TsubasaCutInProps;
@@ -22,17 +27,11 @@ export class TsubasaCutIn {
 
   /**
    * コンストラクタ
-   *
-   * @param view ビュー
-   * @param resources リソース管理オブジェクト
-   * @param gameObjectAction ゲームオブジェクトアクション
+   * @param params パラメータ
    */
-  constructor(
-    view: TsubasaView,
-    resources: Resources,
-    gameObjectAction: Observable<GameObjectAction>,
-  ) {
-    this.#props = createTsubasaCutInProps({ view, resources });
+  constructor(params: ConstructTsubasaCutInParams) {
+    const { gameObjectAction } = params;
+    this.#props = createTsubasaCutInProps(params);
     this.#unsubscriber = gameObjectAction.subscribe((action) => {
       if (action.type === "PreRender") {
         this.#onPreRender(action);
