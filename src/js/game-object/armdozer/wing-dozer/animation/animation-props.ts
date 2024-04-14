@@ -1,6 +1,6 @@
+import { SEPlayer } from "../../../../se/se-player";
 import { WingDozerModel } from "../model/wing-dozer-model";
 import { WingDozerSounds } from "../sounds/wing-dozer-sounds";
-import {SEPlayer} from "../../../../se/se-player";
 
 /** ウィングドーザ アニメーションプロパティ */
 export type WingDozerAnimationProps = {

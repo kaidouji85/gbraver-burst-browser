@@ -9,7 +9,7 @@ import { WingDozerAnimationProps } from "./animation-props";
  * @return アニメーション
  */
 export function guardToStand(props: WingDozerAnimationProps): Animate {
-  const { model, sounds, se  } = props;
+  const { model, sounds, se } = props;
   return onStart(() => {
     model.animation.frame = 1;
     model.animation.type = "GUARD";

@@ -1,4 +1,4 @@
-import {SEPlayer} from "../../../../se/se-player";
+import { SEPlayer } from "../../../../se/se-player";
 import { ShinBraverModel } from "../model/shin-braver-model";
 import { ShinBraverSounds } from "../sounds/shin-braver-sounds";
 

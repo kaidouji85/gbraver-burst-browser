@@ -1,9 +1,9 @@
 import { Resources } from "../../../../resource";
+import { SEPlayer } from "../../../../se/se-player";
 import { createInitialValue } from "../model/initial-value";
 import { ShinBraverSounds } from "../sounds/shin-braver-sounds";
 import { ShinBraverView } from "../view/shin-braver-view";
 import { ShinBraverProps } from "./shin-braver-props";
-import { SEPlayer } from "../../../../se/se-player";
 
 /** ShinBraverProps生成パラメータ */
 export type GenerateShinBraverPropsParams = {
