@@ -1,10 +1,8 @@
-import { ShinBraverCutInModel } from "../model/shin-braver-cutin-model";
+import { ShinBraverCutInAnimationProps } from "../animation/animation-props";
 import { ShinBraverCutInView } from "../view/shin-braver-cutin-view";
 
 /** シンブレイバーカットイン プロパティ */
-export type ShinBraverCutInProps = {
-  /** モデル */
-  model: ShinBraverCutInModel;
+export type ShinBraverCutInProps = ShinBraverCutInAnimationProps & {
   /** ビュー */
   view: ShinBraverCutInView;
 };
