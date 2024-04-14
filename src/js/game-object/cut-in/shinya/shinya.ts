@@ -7,18 +7,15 @@ import type { Resources } from "../../../resource";
 import type { GameObjectAction } from "../../action/game-object-action";
 import { hidden } from "./animation/hidden";
 import { show } from "./animation/show";
-import { createInitialValue } from "./model/initial-value";
-import type { ShinyaModel } from "./model/shinya-model";
-import { ShinyaSounds } from "./sounds/shinya-sounds";
 import type { ShinyaView } from "./view/shinya-view";
+import { ShinyaCutInProps } from "./props/shinya-cutin-props";
+import { createShinyaCutInProps } from "./props/create-shinya-cutin-props";
 
-/**
- * シンヤ カットイン
- */
+/** シンヤ カットイン */
 export class ShinyaCutIn {
-  #model: ShinyaModel;
-  #view: ShinyaView;
-  #sounds: ShinyaSounds;
+  /** プロパティ */
+  #props: ShinyaCutInProps;
+  /** アンサブスクライバ */
   #unsubscriber: Unsubscribable;
 
   /**
@@ -33,9 +30,7 @@ export class ShinyaCutIn {
     resources: Resources,
     gameObjectAction: Observable<GameObjectAction>,
   ) {
-    this.#model = createInitialValue();
-    this.#view = view;
-    this.#sounds = new ShinyaSounds(resources);
+    this.#props = createShinyaCutInProps({ view, resources });
     this.#unsubscriber = gameObjectAction.subscribe((action) => {
       if (action.type === "PreRender") {
         this.#onPreRender(action);
@@ -47,7 +42,7 @@ export class ShinyaCutIn {
    * デストラクタ相当の処理
    */
   destructor(): void {
-    this.#view.destructor();
+    this.#props.view.destructor();
     this.#unsubscriber.unsubscribe();
   }
 
@@ -57,7 +52,7 @@ export class ShinyaCutIn {
    * @return アニメーション
    */
   show(): Animate {
-    return show(this.#model, this.#sounds);
+    return show(this.#props.model, this.#props.sounds);
   }
 
   /**
@@ -66,7 +61,7 @@ export class ShinyaCutIn {
    * @return アニメーション
    */
   hidden(): Animate {
-    return hidden(this.#model);
+    return hidden(this.#props.model);
   }
 
   /**
@@ -75,7 +70,7 @@ export class ShinyaCutIn {
    * @return シーンに追加するオブジェクト
    */
   getObject3D(): THREE.Object3D {
-    return this.#view.getObject3D();
+    return this.#props.view.getObject3D();
   }
 
   /**
@@ -84,6 +79,6 @@ export class ShinyaCutIn {
    * @param action アクション
    */
   #onPreRender(action: PreRender): void {
-    this.#view.engage(this.#model, action);
+    this.#props.view.engage(this.#props.model, action);
   }
 }
