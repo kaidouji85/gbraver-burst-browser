@@ -59,10 +59,10 @@ export class TsubasaHUD implements HUDPilotObjects {
 export function playerTsubasaHUD(
   params: GenerateHUDLayerObjectParams,
 ): TsubasaHUD {
-  const { resources, player, gameObjectAction } = params;
+  const { player } = params;
   return new TsubasaHUD({
     playerId: player.playerId,
-    cutIn: playerTsubasaCutIn(resources, gameObjectAction),
+    cutIn: playerTsubasaCutIn(params),
   });
 }
 
@@ -74,9 +74,9 @@ export function playerTsubasaHUD(
 export function enemyTsubasaHUD(
   params: GenerateHUDLayerObjectParams,
 ): TsubasaHUD {
-  const { resources, enemy, gameObjectAction } = params;
+  const { enemy } = params;
   return new TsubasaHUD({
     playerId: enemy.playerId,
-    cutIn: enemyTsubasaCutIn(resources, gameObjectAction),
+    cutIn: enemyTsubasaCutIn(params),
   });
 }

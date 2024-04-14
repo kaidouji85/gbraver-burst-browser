@@ -3,39 +3,35 @@ import * as THREE from "three";
 
 import { Animate } from "../../../animation/animate";
 import type { PreRender } from "../../../game-loop/pre-render";
-import type { Resources } from "../../../resource";
 import type { GameObjectAction } from "../../action/game-object-action";
 import { hidden } from "./animation/hidden";
 import { show } from "./animation/show";
-import { createInitialValue } from "./model/initial-value";
-import type { TsubasaModel } from "./model/tsubasa-model";
-import { TsubasaSounds } from "./sounds/tsubasa-sounds";
-import type { TsubasaView } from "./view/tsubasa-view";
+import {
+  createTsubasaCutInProps,
+  GenerateTsubasaCutInPropsParams,
+} from "./props/create-tsubasa-cutin-props";
+import { TsubasaCutInProps } from "./props/tsubasa-cutin-props";
 
-/**
- * ツバサ カットイン
- */
+/** コンストラクタのパラメータ */
+export type ConstructTsubasaCutInParams = GenerateTsubasaCutInPropsParams & {
+  /** ゲームオブジェクトアクション */
+  gameObjectAction: Observable<GameObjectAction>;
+};
+
+/** ツバサ カットイン */
 export class TsubasaCutIn {
-  #model: TsubasaModel;
-  #view: TsubasaView;
-  #sounds: TsubasaSounds;
+  /** プロパティ */
+  #props: TsubasaCutInProps;
+  /** アンサブスクライバ */
   #unsubscriber: Unsubscribable;
 
   /**
    * コンストラクタ
-   *
-   * @param view ビュー
-   * @param resources リソース管理オブジェクト
-   * @param gameObjectAction ゲームオブジェクトアクション
+   * @param params パラメータ
    */
-  constructor(
-    view: TsubasaView,
-    resources: Resources,
-    gameObjectAction: Observable<GameObjectAction>,
-  ) {
-    this.#model = createInitialValue();
-    this.#view = view;
-    this.#sounds = new TsubasaSounds(resources);
+  constructor(params: ConstructTsubasaCutInParams) {
+    const { gameObjectAction } = params;
+    this.#props = createTsubasaCutInProps(params);
     this.#unsubscriber = gameObjectAction.subscribe((action) => {
       if (action.type === "PreRender") {
         this.#onPreRender(action);
@@ -47,7 +43,7 @@ export class TsubasaCutIn {
    * デストラクタ相当の処理
    */
   destructor(): void {
-    this.#view.destructor();
+    this.#props.view.destructor();
     this.#unsubscriber.unsubscribe();
   }
 
@@ -57,7 +53,7 @@ export class TsubasaCutIn {
    * @return アニメーション
    */
   show(): Animate {
-    return show(this.#model, this.#sounds);
+    return show(this.#props);
   }
 
   /**
@@ -66,7 +62,7 @@ export class TsubasaCutIn {
    * @return アニメーション
    */
   hidden(): Animate {
-    return hidden(this.#model);
+    return hidden(this.#props);
   }
 
   /**
@@ -75,7 +71,7 @@ export class TsubasaCutIn {
    * @return シーンに追加するオブジェクト
    */
   getObject3D(): THREE.Object3D {
-    return this.#view.getObject3D();
+    return this.#props.view.getObject3D();
   }
 
   /**
@@ -84,6 +80,6 @@ export class TsubasaCutIn {
    * @param action アクション
    */
   #onPreRender(action: PreRender): void {
-    this.#view.engage(this.#model, action);
+    this.#props.view.engage(this.#props.model, action);
   }
 }
