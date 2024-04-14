@@ -5,6 +5,7 @@ import { Resources } from "../../resource";
 import { createEmptySoundResource } from "../../resource/sound/empty-sound-resource";
 import { SOUND_IDS } from "../../resource/sound/ids";
 import { SoundResource } from "../../resource/sound/resource";
+import { SEPlayer } from "../../se/se-player";
 import { domUuid } from "../../uuid/dom-uuid";
 import { ROOT_CLASS } from "./dom/class-name";
 import { DataIDs } from "./dom/data-ids";
@@ -27,6 +28,8 @@ export type PrivateMatchGuestDialogProps = {
   changeValue: SoundResource;
   /** 効果音 ボタンプッシュ */
   pushButton: SoundResource;
+  /** SE再生オブジェクト */
+  se: SEPlayer;
   /** ダイアログ閉じる通知 */
   dialogClosed: Subject<void>;
   /**
@@ -36,14 +39,23 @@ export type PrivateMatchGuestDialogProps = {
   privateMatchStart: Subject<string>;
 };
 
+/** PrivateMatchGuestDialogProps生成パラメータ */
+export type GeneratePrivateMatchGuestDialogPropsParams = {
+  /** リソース管理オブジェクト */
+  resources: Resources;
+  /** SE再生オブジェクト */
+  se: SEPlayer;
+};
+
 /**
  * PrivateMatchGuestDialogPropsを生成する
- * @param resources リソース管理オブジェクト
+ * @param params 生成パラメータ
  * @return 生成結果
  */
 export function createPrivateMatchGuestDialogProps(
-  resources: Resources,
+  params: GeneratePrivateMatchGuestDialogPropsParams,
 ): PrivateMatchGuestDialogProps {
+  const { resources, se } = params;
   const root = document.createElement("div");
   root.className = ROOT_CLASS;
   const dataIDs: DataIDs = {
@@ -64,6 +76,7 @@ export function createPrivateMatchGuestDialogProps(
     pushButton:
       resources.sounds.find((v) => v.id === SOUND_IDS.PUSH_BUTTON) ??
       createEmptySoundResource(),
+    se,
     exclusive: new Exclusive(),
   };
 }

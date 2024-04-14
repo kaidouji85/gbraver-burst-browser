@@ -14,7 +14,7 @@ export function onEnterButtonPush(
   props.exclusive.execute(async () => {
     action.event.preventDefault();
     action.event.stopPropagation();
-    props.pushButton.sound.play();
+    props.se.play(props.pushButton);
     await pop(props.enterButton);
     props.privateMatchStart.next(props.roomID.value);
   });
