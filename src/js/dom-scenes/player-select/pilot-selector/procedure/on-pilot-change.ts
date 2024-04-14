@@ -23,7 +23,7 @@ export function onPilotChange(
     props.pilotId = pilotId;
     props.pilotStatus.switch(pilotId);
     selected.pop();
-    props.changeValueSound.sound.play();
+    props.se.play(props.changeValueSound);
     selected.selected(true);
     props.pilotIcons
       .filter((icon) => icon.pilotId !== pilotId)

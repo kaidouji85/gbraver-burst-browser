@@ -3,6 +3,7 @@ import { Subject } from "rxjs";
 
 import { Exclusive } from "../../../exclusive/exclusive";
 import { SoundResource } from "../../../resource/sound/resource";
+import { SEPlayer } from "../../../se/se-player";
 import { PilotIcon } from "./pilot-icon";
 import { PilotStatus } from "./pilot-status";
 
@@ -26,6 +27,8 @@ export type PilotSelectorProps = {
   changeValueSound: SoundResource;
   /** 決定 効果音 */
   decideSound: SoundResource;
+  /** SE再生オブジェクト */
+  se: SEPlayer;
   /** パイロット変更通知ストリーム */
   change: Subject<PilotId>;
   /** パイロット決定通知ストリーム */

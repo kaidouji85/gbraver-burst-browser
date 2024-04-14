@@ -17,19 +17,29 @@ import { rootInnerHTML } from "../dom/root-inner-html";
 import { PilotIcon } from "../pilot-icon";
 import { PilotStatus } from "../pilot-status";
 import { PilotSelectorProps } from "../props";
+import {SEPlayer} from "../../../../se/se-player";
+
+/** PilotSelectorProps生成パラメータ */
+export type GeneratePilotSelectorPropsParams = {
+  /** リソース管理オブジェクト */
+  resources: Resources;
+  /** SE再生オブジェクト */
+  se: SEPlayer;
+  /** 選択可能なパイロットIDリスト */
+  pilotIds: PilotId[];
+  /** パイロットIDの初期値 */
+  initialPilotId: PilotId;
+};
 
 /**
  * PilotSelectorPropsを生成する
- * @param resources リソース管理オブジェクト
- * @param pilotIds 選択可能なパイロットIDリスト
- * @param initialPilotId パイロットIDの初期値
+ * @param params 生成パラメータ
  * @return 生成結果
  */
 export function createPilotSelectorProps(
-  resources: Resources,
-  pilotIds: PilotId[],
-  initialPilotId: PilotId,
+  params: GeneratePilotSelectorPropsParams
 ): PilotSelectorProps {
+  const { resources, pilotIds, initialPilotId } = params;
   const root = document.createElement("div");
   root.className = BLOCK;
   root.innerHTML = rootInnerHTML();
@@ -47,6 +57,7 @@ export function createPilotSelectorProps(
   });
 
   return {
+    ...params,
     pilotId: initialPilotId,
     exclusive: new Exclusive(),
     root,

@@ -1,13 +1,18 @@
 import { PilotId } from "gbraver-burst-core";
 import { Observable, Unsubscribable } from "rxjs";
 
-import { Resources } from "../../../resource";
 import { bindEventListeners } from "./procedure/bind-event-lienters";
-import { createPilotSelectorProps } from "./procedure/create-pilot-selector-props";
+import {
+  createPilotSelectorProps,
+  GeneratePilotSelectorPropsParams,
+} from "./procedure/create-pilot-selector-props";
 import { hidden } from "./procedure/hidden";
 import { show } from "./procedure/show";
 import { waitUntilLoaded } from "./procedure/wait-until-loaded";
 import { PilotSelectorProps } from "./props";
+
+/** コンストラクタのパラメータ */
+export type ConstructPilotSelectorParams = GeneratePilotSelectorPropsParams;
 
 /**パイロットセレクタ */
 export class PilotSelector {
@@ -18,16 +23,10 @@ export class PilotSelector {
 
   /**
    * コンストラクタ
-   * @param resources リソース管理オブジェクト
-   * @param pilotIds 選択可能なパイロットIDリスト
-   * @param initialPilotId パイロットIDの初期値
+   * @param params パラメータ
    */
-  constructor(
-    resources: Resources,
-    pilotIds: PilotId[],
-    initialPilotId: PilotId,
-  ) {
-    this.#props = createPilotSelectorProps(resources, pilotIds, initialPilotId);
+  constructor(params: ConstructPilotSelectorParams) {
+    this.#props = createPilotSelectorProps(params);
     this.#unsubscribers = bindEventListeners(this.#props);
   }
 

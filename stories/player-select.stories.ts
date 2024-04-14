@@ -38,8 +38,13 @@ export const armdozerSelector: DOMStubStory = domStub((resources, se) => {
   return component.getRootHTMLElement();
 });
 
-export const pilotSelector: DOMStubStory = domStub((resources) => {
+export const pilotSelector: DOMStubStory = domStub((resources, se) => {
   const pilotIds = [PilotIds.SHINYA, PilotIds.GAI];
-  const component = new PilotSelector(resources, pilotIds, PilotIds.SHINYA);
+  const component = new PilotSelector({
+    resources,
+    se,
+    pilotIds,
+    initialPilotId: PilotIds.SHINYA,
+  });
   return component.getRootHTMLElement();
 });

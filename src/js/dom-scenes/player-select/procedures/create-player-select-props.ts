@@ -69,7 +69,11 @@ export function createPlayerSelectProps(
   });
   elements.selector.appendChild(armdozerSelector.getRootHTMLElement());
 
-  const pilotSelector = new PilotSelector(resources, pilotIds, pilotId);
+  const pilotSelector = new PilotSelector({
+    ...params,
+    pilotIds,
+    initialPilotId: pilotId,
+  });
   pilotSelector.hidden();
   elements.selector.appendChild(pilotSelector.getRootHTMLElement());
 
