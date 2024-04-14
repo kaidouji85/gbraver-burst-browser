@@ -19,9 +19,9 @@ export async function executePostNetBattleIfNeeded(
 
   props.suddenlyBattleEnd.unbind();
   await props.api.disconnectWebsocket();
-  await props.domFloaters.showPostBattle(
-    props.resources,
-    PostNetworkBattleButtons,
-  );
+  await props.domFloaters.showPostBattle({
+    ...props,
+    buttons: PostNetworkBattleButtons,
+  });
   return true;
 }

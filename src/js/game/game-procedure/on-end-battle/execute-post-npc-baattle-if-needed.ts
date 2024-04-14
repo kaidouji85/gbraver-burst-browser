@@ -68,10 +68,10 @@ export async function executePostNPCBattleIfNeeded(
     return { isExecuted: false };
   }
 
-  await props.domFloaters.showPostBattle(
-    props.resources,
-    postNPCBattleButtons(updated.result),
-  );
+  await props.domFloaters.showPostBattle({
+    ...props,
+    buttons: postNPCBattleButtons(updated.result),
+  });
   return {
     isExecuted: true,
     inProgress: {

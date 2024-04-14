@@ -7,6 +7,7 @@ import { Exclusive } from "../../../exclusive/exclusive";
 import type { Resources } from "../../../resource";
 import { createEmptySoundResource } from "../../../resource/sound/empty-sound-resource";
 import { SOUND_IDS } from "../../../resource/sound/ids";
+import { SEPlayer } from "../../../se/se-player";
 import type { PostBattle } from "../../post-battle";
 import type {
   ButtonStyle,
@@ -20,9 +21,18 @@ const ROOT_CLASS = "post-battle";
 type ActionButton = {
   /** ボタンのHTML要素 */
   button: HTMLButtonElement;
-
   /** ボタンイベントのUnsubscriber */
   unsubscriber: Unsubscribable;
+};
+
+/** showメソッドのパラメータ */
+export type ShowParams = {
+  /** リソース管理オブジェクト */
+  resources: Resources;
+  /** SE再生オブジェクト */
+  se: SEPlayer;
+  /** アクションボタン設定 */
+  buttons: PostBattleButtonConfig[];
 };
 
 /** バトル終了後行動選択フローター */
@@ -67,16 +77,12 @@ export class PostBattleFloater {
   /**
    * アニメーション付きでフローターを表示する
    *
-   * @param resources リソース管理オブジェクト
-   * @param buttons アクションボタン設定
+   * @param params 表示パラメータ
    * @return アニメーションが完了したら発火するPromise
    */
-  async show(
-    resources: Resources,
-    buttons: PostBattleButtonConfig[],
-  ): Promise<void> {
+  async show(params: ShowParams): Promise<void> {
     await this.#exclusive.execute(async () => {
-      const actionButtons = this.#createActionButtons(resources, buttons);
+      const actionButtons = this.#createActionButtons(params);
       actionButtons.forEach((v) => {
         this.#root.appendChild(v.button);
       });
@@ -130,15 +136,11 @@ export class PostBattleFloater {
 
   /**
    * 戦闘後アクションボタンを生成する
-   *
-   * @param resources リソース管理オブジェクト
-   * @param buttons ボタン設定
+   * @param params 生成パラメータ
    * @return 生成結果
    */
-  #createActionButtons(
-    resources: Resources,
-    buttons: PostBattleButtonConfig[],
-  ): ActionButton[] {
+  #createActionButtons(params: ShowParams): ActionButton[] {
+    const { resources, se, buttons } = params;
     const pushButton =
       resources.sounds.find((v) => v.id === SOUND_IDS.PUSH_BUTTON) ??
       createEmptySoundResource();
@@ -172,7 +174,7 @@ export class PostBattleFloater {
         this.#exclusive.execute(async () => {
           event.preventDefault();
           event.stopPropagation();
-          sound.sound.play();
+          se.play(sound);
           await pop(button);
           this.#selectionComplete.next(action);
         });
