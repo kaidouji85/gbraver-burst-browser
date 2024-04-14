@@ -1,6 +1,6 @@
+import { SEPlayer } from "../../../../se/se-player";
 import { GenesisBraverModel } from "../model/genesis-braver-model";
 import { GenesisBraverSounds } from "../sounds/genesis-braver-sounds";
-import {SEPlayer} from "../../../../se/se-player";
 
 /** ジェネシスブレイバーのアニメーションで利用するプロパティ */
 export type GenesisBraverAnimationProps = {

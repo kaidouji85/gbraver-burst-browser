@@ -1,9 +1,9 @@
 import { Resources } from "../../../../resource";
+import { SEPlayer } from "../../../../se/se-player";
 import { createInitialValue } from "../model/initial-value";
 import { createGenesisBraverSounds } from "../sounds/genesis-braver-sounds";
 import { GenesisBraverView } from "../view/genesis-braver-view";
 import { GenesisBraverProps } from "./genesis-braver-props";
-import {SEPlayer} from "../../../../se/se-player";
 
 /** GenesisBraverProps生成パラメータ */
 export type GenerateGenesisBraverPropsParams = {
@@ -23,10 +23,9 @@ export type GenerateGenesisBraverPropsParams = {
 export function createGenesisBraverProps(
   params: GenerateGenesisBraverPropsParams,
 ): GenesisBraverProps {
-  const { resources, view, se } = params;
+  const { resources } = params;
   return {
-    view,
-    se,
+    ...params,
     sounds: createGenesisBraverSounds(resources),
     model: createInitialValue(),
   };

@@ -1,11 +1,11 @@
 import { Observable } from "rxjs";
 
 import type { Resources } from "../../../resource";
+import { SEPlayer } from "../../../se/se-player";
 import type { GameObjectAction } from "../../action/game-object-action";
 import { LightningDozer } from "./lightning-dozer";
 import { EnemyLightningDozerView } from "./view/enemy-lightning-dozer-view";
 import { PlayerLightingDozerView } from "./view/player-lighting-dozer-view";
-import {SEPlayer} from "../../../se/se-player";
 
 /** ライトニングドーザ生成関数パラメータ */
 type GenerateLightningDozerParams = {

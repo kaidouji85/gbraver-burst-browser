@@ -3,8 +3,8 @@ import { Observable } from "rxjs";
 import { GameObjectAction } from "../../src/js/game-object/action/game-object-action";
 import { ArmdozerSprite } from "../../src/js/game-object/armdozer/armdozer-sprite";
 import { Resources } from "../../src/js/resource";
+import { SEPlayer } from "../../src/js/se/se-player";
 import { TDGameObjectStub } from "./td-game-object-stub";
-import {SEPlayer} from "../../src/js/se/se-player";
 
 /** アームドーザスプライト ジェネレータ パラメータ */
 type GeneratorParams = {

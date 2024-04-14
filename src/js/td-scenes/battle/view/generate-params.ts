@@ -3,8 +3,8 @@ import { Observable } from "rxjs";
 
 import type { GameLoop } from "../../../game-loop/game-loop";
 import type { Resources } from "../../../resource";
+import { SEPlayer } from "../../../se/se-player";
 import type { Resize } from "../../../window/resize";
-import {SEPlayer} from "../../../se/se-player";
 
 /** すべての戦闘画面ビュー生成処理で利用できるパラメータ */
 export type GenerateBattleViewParams = {

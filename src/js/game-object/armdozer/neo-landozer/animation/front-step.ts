@@ -14,11 +14,11 @@ export function frontStep(
   props: NeoLandozerAnimationProps,
   distance = 100,
 ): Animate {
-  const { model, sounds } = props;
+  const { model, sounds, se } = props;
   return onStart(() => {
     model.animation.type = "FRONT_STEP";
     model.animation.frame = 0;
-    sounds.motor.sound.play();
+    se.play(sounds.motor);
   })
     .chain(
       all(
@@ -43,7 +43,7 @@ export function frontStep(
     .chain(delay(300))
     .chain(
       onStart(() => {
-        sounds.motor.sound.play();
+        se.play(sounds.motor);
       }),
     )
     .chain(

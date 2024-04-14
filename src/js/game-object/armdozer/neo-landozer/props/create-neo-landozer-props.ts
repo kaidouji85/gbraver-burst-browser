@@ -1,4 +1,5 @@
 import { Resources } from "../../../../resource";
+import { SEPlayer } from "../../../../se/se-player";
 import { createInitialValue } from "../model/initial-value";
 import { NeoLandozerSounds } from "../sounds/neo-landozer-sounds";
 import { NeoLandozerView } from "../view/neo-landozer-view";
@@ -10,6 +11,8 @@ export type GenerateNeoLandozerPropsParams = {
   resources: Resources;
   /** ビュー */
   view: NeoLandozerView;
+  /** SE再生 */
+  se: SEPlayer;
 };
 
 /**
@@ -20,9 +23,9 @@ export type GenerateNeoLandozerPropsParams = {
 export function createNeoLandozerProps(
   params: GenerateNeoLandozerPropsParams,
 ): NeoLandozerProps {
-  const { resources, view } = params;
+  const { resources } = params;
   return {
-    view,
+    ...params,
     model: createInitialValue(),
     sounds: new NeoLandozerSounds(resources),
   };
