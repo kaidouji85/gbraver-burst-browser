@@ -8,6 +8,7 @@ import type { Resources } from "../../resource";
 import { createEmptySoundResource } from "../../resource/sound/empty-sound-resource";
 import { SOUND_IDS } from "../../resource/sound/ids";
 import { SoundResource } from "../../resource/sound/resource";
+import { SEPlayer } from "../../se/se-player";
 import { domUuid } from "../../uuid/dom-uuid";
 import type { DOMDialog } from "../dialog";
 
@@ -80,23 +81,42 @@ function extractElements(root: HTMLElement, ids: DataIDs): Elements {
   };
 }
 
+/** コンストラクタのパラメータ */
+export type ConstructNetworkErrorDialogParams = {
+  /** リソース管理オブジェクト */
+  resources: Resources;
+  /** 効果音再生オブジェクト */
+  se: SEPlayer;
+  /** 通信エラーの後処理 */
+  postNetworkError: PostNetworkError;
+};
+
 /** 通信エラー ダイアログ */
 export class NetworkErrorDialog implements DOMDialog {
+  /** ルート要素 */
   #root: HTMLElement;
+  /** 通信エラーの後処理実行ボタン */
   #postNetworkErrorButton: HTMLButtonElement;
+  /** 通信エラーの後処理 */
   #postNetworkError: PostNetworkError;
+  /** 通信エラーの後処理実行通知 */
   #postNetworkErrorSource: Subject<PostNetworkError>;
+  /** ボタン押下通知 */
   #pushButton: SoundResource;
+  /** アンサブスクライバ */
   #unsubscribers: Unsubscribable[];
+  /** 排他制御 */
   #exclusive: Exclusive;
+  /** SE再生オブジェクト */
+  #se: SEPlayer;
 
   /**
    * コンストラクタ
-   *
-   * @param resources リソース管理オブジェクト
-   * @param postNetworkError 通信エラーの後処理情報
+   * @param params パラメータ
    */
-  constructor(resources: Resources, postNetworkError: PostNetworkError) {
+  constructor(params: ConstructNetworkErrorDialogParams) {
+    const { resources, se, postNetworkError } = params;
+    this.#se = se;
     this.#postNetworkError = postNetworkError;
     const dataIDs = {
       postNetworkErrorButton: domUuid(),

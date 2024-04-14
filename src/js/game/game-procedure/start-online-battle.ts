@@ -36,8 +36,11 @@ function createBattleProgress(
         props.domDialogBinder.hidden();
         return update;
       } catch (e) {
-        const dialog = new NetworkErrorDialog(props.resources, {
-          type: "GotoTitle",
+        const dialog = new NetworkErrorDialog({
+          ...props,
+          postNetworkError: {
+            type: "GotoTitle",
+          },
         });
         props.domDialogBinder.bind(dialog, networkErrorDialogConnector);
         throw e;

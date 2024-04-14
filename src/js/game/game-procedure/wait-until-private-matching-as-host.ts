@@ -35,8 +35,11 @@ export async function waitUntilPrivateMatchingAsHost(
     return await room.waitUntilMatching();
   } catch (e) {
     props.domDialogBinder.bind(
-      new NetworkErrorDialog(props.resources, {
-        type: "GotoTitle",
+      new NetworkErrorDialog({
+        ...props,
+        postNetworkError: {
+          type: "GotoTitle",
+        },
       }),
       networkErrorDialogConnector,
     );

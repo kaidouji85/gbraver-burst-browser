@@ -24,8 +24,11 @@ export async function waitUntilCasualMatching(
     );
     return await props.api.startCasualMatch(action.armdozerId, action.pilotId);
   } catch (e) {
-    const dialog = new NetworkErrorDialog(props.resources, {
-      type: "GotoTitle",
+    const dialog = new NetworkErrorDialog({
+      ...props,
+      postNetworkError: {
+        type: "GotoTitle",
+      },
     });
     props.domDialogBinder.bind(dialog, networkErrorDialogConnector);
     throw e;

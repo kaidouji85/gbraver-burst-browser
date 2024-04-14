@@ -11,8 +11,11 @@ import type { GameProps } from "../game-props";
 export async function onSuddenlyEndBattle(
   props: Readonly<GameProps>,
 ): Promise<void> {
-  const dialog = new NetworkErrorDialog(props.resources, {
-    type: "GotoTitle",
+  const dialog = new NetworkErrorDialog({
+    ...props,
+    postNetworkError: {
+      type: "GotoTitle",
+    }
   });
   props.domDialogBinder.bind(dialog, networkErrorDialogConnector);
   props.suddenlyBattleEnd.unbind();

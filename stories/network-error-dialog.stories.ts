@@ -7,11 +7,11 @@ export default {
   title: "network-error-dialog",
 };
 
-export const dialog: DOMStubStory = domStub((resources) => {
+export const dialog: DOMStubStory = domStub((resources, se) => {
   const postNetworkError: Close = {
     type: "Close",
   };
-  const dialog = new NetworkErrorDialog(resources, postNetworkError);
+  const dialog = new NetworkErrorDialog({ resources, se, postNetworkError });
   dialog.notifyPostNetworkError().subscribe(() => {
     console.log("post network error");
   });
