@@ -9,11 +9,11 @@ import { LightningDozerAnimationProps } from "./animation-props";
  * @return アニメーション
  */
 export function gutsToStand(props: LightningDozerAnimationProps): Animate {
-  const { model, sounds } = props;
+  const { model, sounds, se } = props;
   return onStart(() => {
     model.animation.type = "GUTS_TO_STAND";
     model.animation.frame = 0;
-    sounds.motor.sound.play();
+    se.play(sounds.motor);
   })
     .chain(
       tween(model.animation, (t) =>

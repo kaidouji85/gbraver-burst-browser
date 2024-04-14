@@ -10,11 +10,11 @@ import { ShinBraverAnimationProps } from "./animation-props";
  * @return アニメーション
  */
 export function guts(props: ShinBraverAnimationProps): Animate {
-  const { model, sounds } = props;
+  const { model, sounds, se } = props;
   return onStart(() => {
     model.animation.type = "GUTS_UP";
     model.animation.frame = 0;
-    sounds.motor.sound.play();
+    se.play(sounds.motor);
   })
     .chain(
       tween(model.animation, (t) =>
@@ -31,7 +31,7 @@ export function guts(props: ShinBraverAnimationProps): Animate {
       onStart(() => {
         model.animation.type = "GUTS_DOWN";
         model.animation.frame = 0;
-        sounds.motor.sound.play();
+        se.play(sounds.motor);
       }),
     )
     .chain(

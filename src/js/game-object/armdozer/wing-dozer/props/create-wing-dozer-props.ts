@@ -1,4 +1,5 @@
 import { Resources } from "../../../../resource";
+import { SEPlayer } from "../../../../se/se-player";
 import { createInitialValue } from "../model/initial-value";
 import { WingDozerSounds } from "../sounds/wing-dozer-sounds";
 import { WingDozerView } from "../view/wing-dozer-view";
@@ -10,6 +11,8 @@ export type GenerateWingDozerPropsParams = {
   view: WingDozerView;
   /** リソース管理オブジェクト */
   resources: Resources;
+  /** SE再生 */
+  se: SEPlayer;
 };
 
 /**
@@ -20,9 +23,9 @@ export type GenerateWingDozerPropsParams = {
 export function createWingDozerProps(
   params: GenerateWingDozerPropsParams,
 ): WingDozerProps {
-  const { view, resources } = params;
+  const { resources } = params;
   return {
-    view,
+    ...params,
     model: createInitialValue(),
     sounds: new WingDozerSounds(resources),
   };

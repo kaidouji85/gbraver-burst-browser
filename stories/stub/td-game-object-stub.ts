@@ -15,6 +15,7 @@ import type { Resources } from "../../src/js/resource";
 import { developingFullResourceLoading } from "../../src/js/resource/loading/full-resource-loading";
 import type { SafeAreaInset } from "../../src/js/safe-area/safe-area-inset";
 import { createSafeAreaInset } from "../../src/js/safe-area/safe-area-inset";
+import { createSEPlayer, SEPlayer } from "../../src/js/se/se-player";
 import type { Resize } from "../../src/js/window/resize";
 import { resizeStream } from "../../src/js/window/resize";
 import { StorybookResourceRoot } from "../storybook-resource-root";
@@ -23,12 +24,12 @@ import { StorybookResourceRoot } from "../storybook-resource-root";
 type Object3DCreatorParams = {
   /** リソース管理オブジェクト */
   resources: Resources;
-
   /** ゲームオブジェクトアクション */
   gameObjectAction: Observable<GameObjectAction>;
-
   /** カメラ */
   camera: TDCamera;
+  /** SE再生 */
+  se: SEPlayer;
 };
 
 /** スタブに追加するthree.jsオブジェクト */
@@ -105,6 +106,7 @@ export class TDGameObjectStub {
 
     const { objects, skyBox } = this._creator({
       resources,
+      se: createSEPlayer(),
       gameObjectAction: this._gameObjectAction,
       camera: this._camera,
     });

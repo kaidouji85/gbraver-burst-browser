@@ -10,11 +10,11 @@ import { WingDozerAnimationProps } from "./animation-props";
  * @return アニメーション
  */
 export function dash(props: WingDozerAnimationProps): Animate {
-  const { model, sounds } = props;
+  const { model, sounds, se } = props;
   return onStart(() => {
     model.animation.type = "DASH_UP";
     model.animation.frame = 0;
-    sounds.motor.sound.play();
+    se.play(sounds.motor);
   })
     .chain(
       tween(model.animation, (t) =>
@@ -31,7 +31,7 @@ export function dash(props: WingDozerAnimationProps): Animate {
       onStart(() => {
         model.animation.type = "DASH_DOWN";
         model.animation.frame = 0;
-        sounds.motor.sound.play();
+        se.play(sounds.motor);
       }),
     )
     .chain(

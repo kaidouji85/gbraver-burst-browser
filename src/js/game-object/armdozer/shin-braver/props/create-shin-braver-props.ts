@@ -1,4 +1,5 @@
 import { Resources } from "../../../../resource";
+import { SEPlayer } from "../../../../se/se-player";
 import { createInitialValue } from "../model/initial-value";
 import { ShinBraverSounds } from "../sounds/shin-braver-sounds";
 import { ShinBraverView } from "../view/shin-braver-view";
@@ -10,6 +11,8 @@ export type GenerateShinBraverPropsParams = {
   view: ShinBraverView;
   /** リソース管理オブジェクト */
   resources: Resources;
+  /** SE再生 */
+  se: SEPlayer;
 };
 
 /**
@@ -20,9 +23,9 @@ export type GenerateShinBraverPropsParams = {
 export function createShinBraverProps(
   params: GenerateShinBraverPropsParams,
 ): ShinBraverProps {
-  const { view, resources } = params;
+  const { resources } = params;
   return {
-    view,
+    ...params,
     model: createInitialValue(),
     sounds: new ShinBraverSounds(resources),
   };

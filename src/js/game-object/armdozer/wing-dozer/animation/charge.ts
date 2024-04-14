@@ -10,12 +10,12 @@ import { WingDozerAnimationProps } from "./animation-props";
  * @return アニメーション
  */
 export function charge(props: WingDozerAnimationProps): Animate {
-  const { model, sounds } = props;
+  const { model, sounds, se } = props;
   return onStart(() => {
     model.animation.type = "UPPER_CHARGE";
     model.animation.frame = 0;
     model.position.z = ARMDOZER_SPRITE_ATTACKER_Z;
-    sounds.motor.sound.play();
+    se.play(sounds.motor);
   }).chain(
     tween(model.animation, (t) =>
       t.to(

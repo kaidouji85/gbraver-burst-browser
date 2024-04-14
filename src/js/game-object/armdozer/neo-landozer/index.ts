@@ -1,6 +1,7 @@
 import { Observable } from "rxjs";
 
 import type { Resources } from "../../../resource";
+import { SEPlayer } from "../../../se/se-player";
 import type { GameObjectAction } from "../../action/game-object-action";
 import { NeoLandozer } from "./neo-landozer";
 import { EnemyNeoLandozerView } from "./view/enemy-neo-landozer-view";
@@ -10,6 +11,8 @@ import { PlayerNeoLandozerView } from "./view/player-neo-landozer-view";
 type GenerateNeoLandozerParams = {
   /** リソース管理オブジェクト */
   resources: Resources;
+  /** SE再生 */
+  se: SEPlayer;
   /** ゲームオブジェクトアクション */
   gameObjectAction: Observable<GameObjectAction>;
 };

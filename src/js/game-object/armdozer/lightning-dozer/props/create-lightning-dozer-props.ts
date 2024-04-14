@@ -1,4 +1,5 @@
 import { Resources } from "../../../../resource";
+import { SEPlayer } from "../../../../se/se-player";
 import { createInitialValue } from "../model/initial-value";
 import { LightningDozerSounds } from "../sounds/lightning-dozer-sounds";
 import { LightningDozerView } from "../view/lightning-dozer-view";
@@ -8,6 +9,8 @@ import { LightningDozerProps } from "./lightning-dozer-props";
 export type GenerateLightningDozerPropsParams = {
   /** リソース管理オブジェクト */
   resources: Resources;
+  /** SE再生 */
+  se: SEPlayer;
   /** ビュー */
   view: LightningDozerView;
 };
@@ -20,9 +23,9 @@ export type GenerateLightningDozerPropsParams = {
 export function createLightningDozerProps(
   params: GenerateLightningDozerPropsParams,
 ): LightningDozerProps {
-  const { view, resources } = params;
+  const { resources } = params;
   return {
-    view,
+    ...params,
     model: createInitialValue(),
     sounds: new LightningDozerSounds(resources),
   };

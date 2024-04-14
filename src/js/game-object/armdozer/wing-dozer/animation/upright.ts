@@ -9,11 +9,11 @@ import { WingDozerAnimationProps } from "./animation-props";
  * @return アニメーション
  */
 export function upright(props: WingDozerAnimationProps): Animate {
-  const { model, sounds } = props;
+  const { model, sounds, se } = props;
   return onStart(() => {
     model.animation.type = "UPRIGHT";
     model.animation.frame = 0;
-    sounds.motor.sound.play();
+    se.play(sounds.motor);
   }).chain(
     tween(model.animation, (t) =>
       t.to(

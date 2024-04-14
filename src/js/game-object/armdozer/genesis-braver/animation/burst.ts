@@ -10,11 +10,11 @@ import { GenesisBraverAnimationProps } from "./animation-props";
  * @return アニメーション
  */
 export function burst(props: GenesisBraverAnimationProps): Animate {
-  const { model, sounds } = props;
+  const { model, sounds, se } = props;
   return onStart(() => {
     model.animation.type = "BURST_UP";
     model.animation.frame = 0;
-    sounds.motor.sound.play();
+    se.play(sounds.motor);
   })
     .chain(
       tween(model.animation, (t) =>
@@ -31,7 +31,7 @@ export function burst(props: GenesisBraverAnimationProps): Animate {
       onStart(() => {
         model.animation.type = "BURST_DOWN";
         model.animation.frame = 0;
-        sounds.motor.sound.play();
+        se.play(sounds.motor);
       }),
     )
     .chain(

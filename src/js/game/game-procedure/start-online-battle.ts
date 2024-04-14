@@ -79,18 +79,13 @@ export async function startOnlineBattle(
   const config = await props.config.load();
   props.renderer.setPixelRatio(config.webGLPixelRatio);
   const battleScene = new BattleScene({
-    resources: props.resources,
-    bgm: props.bgm,
+    ...props,
     playingBGM: SOUND_IDS.BATTLE_BGM_01,
     initialAnimationTimeScale: config.battleAnimationTimeScale,
     battleProgress,
     player: battle.player,
     enemy: battle.enemy,
     initialState: battle.initialState,
-    resize: props.resize,
-    pushWindow: props.pushWindow,
-    gameLoop: props.gameLoop,
-    renderer: props.renderer,
     controllerType: config.battleControllerType,
     emergencyStop: battle.suddenlyBattleNotifier(),
     customBattleEvent: createSeriousMatchEvent(),

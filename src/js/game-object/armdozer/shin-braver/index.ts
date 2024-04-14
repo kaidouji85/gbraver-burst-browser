@@ -1,6 +1,7 @@
 import { Observable } from "rxjs";
 
 import type { Resources } from "../../../resource";
+import { SEPlayer } from "../../../se/se-player";
 import type { GameObjectAction } from "../../action/game-object-action";
 import { ShinBraver } from "./shin-braver";
 import { EnemyShinBraverView } from "./view/enemy-shin-braver-view";
@@ -10,6 +11,8 @@ import { PlayerShinBraverView } from "./view/player-shin-braver-view";
 type GenerateShinBraverParams = {
   /** リソース管理オブジェクト */
   resources: Resources;
+  /** SE再生 */
+  se: SEPlayer;
   /** ゲームオブジェクトアクション */
   gameObjectAction: Observable<GameObjectAction>;
 };
