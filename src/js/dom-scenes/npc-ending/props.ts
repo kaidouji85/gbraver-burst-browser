@@ -2,6 +2,7 @@ import { Subject } from "rxjs";
 
 import { BGMManager } from "../../bgm/bgm-manager";
 import { SoundResource } from "../../resource/sound/resource";
+import { SEPlayer } from "../../se/se-player";
 
 /** NPCルート エンディング画面 プロパティ */
 export type NPCEndingProps = {
@@ -19,6 +20,8 @@ export type NPCEndingProps = {
   bgm: BGMManager;
   /** エンディングBGM */
   endingBGM: SoundResource;
+  /** SE再生オブジェクト */
+  se: SEPlayer;
   /** 操作可能であるか否かのフラグ、trueで操作可能 */
   canOperation: boolean;
   /** エンディング終了通知ストリーム */

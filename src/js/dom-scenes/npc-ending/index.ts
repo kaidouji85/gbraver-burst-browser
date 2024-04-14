@@ -1,13 +1,17 @@
 import { Observable, Unsubscribable } from "rxjs";
 
-import type { BGMManager } from "../../bgm/bgm-manager";
-import type { Resources } from "../../resource";
 import type { DOMScene } from "../dom-scene";
 import { bindEventListeners } from "./procedures/bind-event-listeners";
-import { createNPCEndingProps } from "./procedures/create-npc-ending-props";
+import {
+  createNPCEndingProps,
+  GenerateNPCEndingPropsParams,
+} from "./procedures/create-npc-ending-props";
 import { playBGM } from "./procedures/play-bgm";
 import { waitUntilLoaded } from "./procedures/wait-until-loaded";
 import { NPCEndingProps } from "./props";
+
+/** コンストラクタのパラメータ */
+export type ConstructNPCEndingParams = GenerateNPCEndingPropsParams;
 
 /** NPCルート エンディング画面 */
 export class NPCEnding implements DOMScene {
@@ -18,11 +22,10 @@ export class NPCEnding implements DOMScene {
 
   /**
    * コンストラクタ
-   * @param resources リソース管理オブジェクト
-   * @param bgm BGM管理オブジェクト
+   * @param params パラメータ
    */
-  constructor(resources: Resources, bgm: BGMManager) {
-    this.#props = createNPCEndingProps(resources, bgm);
+  constructor(params: ConstructNPCEndingParams) {
+    this.#props = createNPCEndingProps(params);
     this.#unSubscriber = bindEventListeners(this.#props);
   }
 
