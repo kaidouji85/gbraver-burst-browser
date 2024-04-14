@@ -17,11 +17,11 @@ export function toggle(
   group: TWEEN.Group,
   timeScale: number,
 ): Animate {
-  const { model, sounds } = props;
+  const { model, sounds, se } = props;
   return onStart(() => {
     model.timeScale = timeScale;
     model.scale = 1;
-    sounds.changeValue.sound.play();
+    se.play(sounds.changeValue);
   }, group)
     .chain(
       tween(
