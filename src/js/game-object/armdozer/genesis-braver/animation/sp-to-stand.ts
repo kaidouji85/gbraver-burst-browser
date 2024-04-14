@@ -10,11 +10,11 @@ import { GenesisBraverAnimationProps } from "./animation-props";
  * @return アニメーション
  */
 export function spToStand(props: GenesisBraverAnimationProps): Animate {
-  const { model, sounds } = props;
+  const { model, sounds, se } = props;
   return onStart(() => {
     model.animation.type = "SP_TO_STAND";
     model.animation.frame = 0;
-    sounds.motor.sound.play();
+    se.play(sounds.motor);
   })
     .chain(
       tween(model.animation, (t) =>

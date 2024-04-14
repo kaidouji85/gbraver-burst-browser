@@ -9,11 +9,11 @@ import { GenesisBraverAnimationProps } from "./animation-props";
  * @return アニメーション
  */
 export function bowUp(props: GenesisBraverAnimationProps): Animate {
-  const { model, sounds } = props;
+  const { model, sounds, se } = props;
   return onStart(() => {
     model.animation.type = "BOW";
     model.animation.frame = 1;
-    sounds.motor.sound.play();
+    se.play(sounds.motor);
   })
     .chain(
       tween(model.animation, (t) =>

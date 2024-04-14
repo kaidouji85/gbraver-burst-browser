@@ -11,11 +11,11 @@ import { GenesisBraverAnimationProps } from "./animation-props";
  * @return アニメーション
  */
 export function backStep(props: GenesisBraverAnimationProps): Animate {
-  const { model, sounds } = props;
+  const { model, sounds, se } = props;
   return onStart(() => {
     model.animation.type = "BACK_STEP";
     model.animation.frame = 0;
-    sounds.motor.sound.play();
+    se.play(sounds.motor);
   })
     .chain(
       all(
@@ -40,7 +40,7 @@ export function backStep(props: GenesisBraverAnimationProps): Animate {
     .chain(delay(300))
     .chain(
       onStart(() => {
-        sounds.motor.sound.play();
+        se.play(sounds.motor);
       }),
     )
     .chain(
