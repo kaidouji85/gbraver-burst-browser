@@ -1,4 +1,5 @@
 import { Resources } from "../../../../resource";
+import { SEPlayer } from "../../../../se/se-player";
 import { createInitialValue } from "../model/initial-value";
 import { TsubasaSounds } from "../sounds/tsubasa-sounds";
 import { TsubasaView } from "../view/tsubasa-view";
@@ -10,6 +11,8 @@ export type GenerateTsubasaCutInPropsParams = {
   view: TsubasaView;
   /** リソース管理オブジェクト */
   resources: Resources;
+  /** SE再生オブジェクト */
+  se: SEPlayer;
 };
 
 /**
@@ -20,10 +23,10 @@ export type GenerateTsubasaCutInPropsParams = {
 export function createTsubasaCutInProps(
   params: GenerateTsubasaCutInPropsParams,
 ): TsubasaCutInProps {
-  const { resources, view } = params;
+  const { resources } = params;
   return {
+    ...params,
     model: createInitialValue(),
-    view,
     sounds: new TsubasaSounds(resources),
   };
 }

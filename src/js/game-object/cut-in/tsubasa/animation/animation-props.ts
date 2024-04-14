@@ -1,3 +1,4 @@
+import { SEPlayer } from "../../../../se/se-player";
 import { TsubasaModel } from "../model/tsubasa-model";
 import { TsubasaSounds } from "../sounds/tsubasa-sounds";
 
@@ -7,4 +8,6 @@ export type TsubasaCutInAnimationProps = {
   model: TsubasaModel;
   /** サウンド */
   sounds: TsubasaSounds;
+  /** SE再生オブジェクト */
+  se: SEPlayer;
 };

@@ -5,11 +5,14 @@ import type { GameObjectAction } from "../../action/game-object-action";
 import { TsubasaCutIn } from "./tsubasa";
 import { EnemyTsubasaView } from "./view/enemy-tsubasa-view";
 import { PlayerTsubasaView } from "./view/player-tsubasa-view";
+import {SEPlayer} from "../../../se/se-player";
 
 /** 生成パラメータ */
 export type GenerateTsubasaCutInParams = {
   /** リソース管理オブジェクト */
   resources: Resources;
+  /** SE再生オブジェクト */
+  se: SEPlayer;
   /** ゲームオブジェクトアクション */
   gameObjectAction: Observable<GameObjectAction>;
 };
