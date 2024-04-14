@@ -23,7 +23,7 @@ export async function startDifficultySelectionIfNeeded(
     pilotId: action.pilotId,
   };
   props.domDialogBinder.bind(
-    new DifficultyDialog(props.resources),
+    new DifficultyDialog(props),
     difficultyDialogConnector,
   );
   return true;
