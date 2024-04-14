@@ -4,7 +4,6 @@ import { all } from "../../../../animation/all";
 import { Animate } from "../../../../animation/animate";
 import { delay, empty } from "../../../../animation/delay";
 import { onStart } from "../../../../animation/on-start";
-import { BattleSceneSounds } from "../../sounds/sounds";
 import type { TDPlayer } from "../../view/td/player";
 import type { StateAnimationProps } from "./state-animation-props";
 
@@ -23,13 +22,13 @@ function declaration(td: TDPlayer, value: number): Animate {
  * バッテリー宣言の効果音
  * プレイヤー、敵側で同時再生したくないので、
  * declarationとは別関数に切り出している
- *
- * @param sounds 効果音
+ * @param props 戦闘シーンプロパティ
  * @return アニメーション
  */
-function declarationSound(sounds: BattleSceneSounds): Animate {
+function declarationSound(props: StateAnimationProps): Animate {
+  const { sounds, se } = props;
   return onStart(() => {
-    sounds.batteryDeclaration.sound.play();
+    se.play(sounds.batteryDeclaration);
   });
 }
 
@@ -61,17 +60,18 @@ function declarationWithCorrect(
  * バッテリー補正ありの場合の効果音
  * declarationWithCorrectとタイミングを合わせている
  *
- * @param sounds 効果音
+ * @param props 戦闘シーンプロパティ
  * @return アニメーション
  */
-function declarationSoundWithCorrect(sounds: BattleSceneSounds): Animate {
+function declarationSoundWithCorrect(props: StateAnimationProps): Animate {
+  const { sounds, se } = props;
   return onStart(() => {
-    sounds.batteryDeclaration.sound.play();
+    se.play(sounds.batteryDeclaration);
   })
     .chain(delay(600))
     .chain(
       onStart(() => {
-        sounds.batteryDeclaration.sound.play();
+        se.play(sounds.batteryDeclaration);
       }),
     );
 }
@@ -153,8 +153,8 @@ export function batteryDeclarationAnimation(
       : declaration(defenderTD, defenderBattery);
   const sound =
     attackerCorrect !== 0 || defenderCorrect !== 0
-      ? declarationSoundWithCorrect(props.sounds)
-      : declarationSound(props.sounds);
+      ? declarationSoundWithCorrect(props)
+      : declarationSound(props);
   return all(
     sound,
     props.view.td.gameObjects.turnIndicator.show(isAttacker),
