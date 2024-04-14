@@ -1,13 +1,8 @@
-import { YuuyaModel } from "../model/yuuya-model";
-import { YuuyaSounds } from "../sounds/yuuya-sounds";
+import { YuuyaCutInAnimationProps } from "../animation/animation-props";
 import { YuuyaView } from "../view/yuuya-view";
 
 /** ユウヤ カットイン プロパティ */
-export type YuuyaCutInProps = {
-  /** モデル */
-  model: YuuyaModel;
+export type YuuyaCutInProps = YuuyaCutInAnimationProps & {
   /** ビュー */
   view: YuuyaView;
-  /** 効果音 */
-  sounds: YuuyaSounds;
 };
