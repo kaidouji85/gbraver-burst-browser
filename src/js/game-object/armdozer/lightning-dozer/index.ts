@@ -5,11 +5,14 @@ import type { GameObjectAction } from "../../action/game-object-action";
 import { LightningDozer } from "./lightning-dozer";
 import { EnemyLightningDozerView } from "./view/enemy-lightning-dozer-view";
 import { PlayerLightingDozerView } from "./view/player-lighting-dozer-view";
+import {SEPlayer} from "../../../se/se-player";
 
 /** ライトニングドーザ生成関数パラメータ */
 type GenerateLightningDozerParams = {
   /** リソース管理オブジェクト */
   resources: Resources;
+  /** SE再生 */
+  se: SEPlayer;
   /** ゲームオブジェクトアクション */
   gameObjectAction: Observable<GameObjectAction>;
 };

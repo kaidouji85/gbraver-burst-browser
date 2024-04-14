@@ -11,12 +11,12 @@ import { LightningDozerAnimationProps } from "./animation-props";
  * @return アニメーション
  */
 export function hmToStand(props: LightningDozerAnimationProps): Animate {
-  const { model, sounds } = props;
+  const { model, sounds, se } = props;
   return all(
     onStart(() => {
       model.animation.type = "HM_TO_STAND";
       model.animation.frame = 0;
-      sounds.motor.sound.play();
+      se.play(sounds.motor);
     })
       .chain(
         tween(model.animation, (t) =>
