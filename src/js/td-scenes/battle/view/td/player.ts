@@ -172,7 +172,7 @@ export function playerTDObjects(params: GenerateTDLayerObjectParams): TDPlayer {
   return new TDPlayerImpl({
     playerId: player.playerId,
     hitMark: {
-      shockWave: playerShockWave(resources, gameObjectAction),
+      shockWave: playerShockWave(params),
       lightning: playerLightning(params),
     },
     armdozerEffects: {
@@ -199,7 +199,7 @@ export function enemyTDObject(params: GenerateTDLayerObjectParams): TDPlayer {
   return new TDPlayerImpl({
     playerId: enemy.playerId,
     hitMark: {
-      shockWave: enemyShockWave(resources, gameObjectAction),
+      shockWave: enemyShockWave(params),
       lightning: enemyLightning(params),
     },
     armdozerEffects: {

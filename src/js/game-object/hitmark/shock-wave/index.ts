@@ -7,34 +7,34 @@ import { ShockWave } from "./shock-wave";
 import { EnemyShockWaveView } from "./view/enemy-shock-wave-view";
 import { PlayerShockWaveView } from "./view/player-shock-wave-view";
 
+/** 生成パラメータ */
+export type GenerateShockWaveParams = {
+  /** リソース管理オブジェクト */
+  resources: Resources;
+  /** ゲームオブジェクトアクション */
+  gameObjectAction: Observable<GameObjectAction>;
+};
+
 /**
  * プレイヤーの衝撃波を生成する
- *
- * @param resources リソース管理オブジェクト
- * @param gameObjectAction ゲームオブジェクトアクション
+ * @param params 生成パラメータ
  * @return 衝撃波
  */
-export function playerShockWave(
-  resources: Resources,
-  gameObjectAction: Observable<GameObjectAction>,
-): ShockWave {
-  const model = initialValue();
-  const view = new PlayerShockWaveView(resources, model);
-  return new ShockWave(view, model, resources, gameObjectAction);
+export function playerShockWave(params: GenerateShockWaveParams): ShockWave {
+  const { resources } = params;
+  const initialModel = initialValue();
+  const view = new PlayerShockWaveView(resources, initialModel);
+  return new ShockWave({ ...params, view, initialModel });
 }
 
 /**
  * 敵の衝撃波を生成する
- *
- * @param resources リソース管理オブジェクト
- * @param gameObjectAction ゲームオブジェクトアクション
+ * @param params 生成パラメータ
  * @return 衝撃波
  */
-export function enemyShockWave(
-  resources: Resources,
-  gameObjectAction: Observable<GameObjectAction>,
-): ShockWave {
-  const model = initialValue();
-  const view = new EnemyShockWaveView(resources, model);
-  return new ShockWave(view, model, resources, gameObjectAction);
+export function enemyShockWave(params: GenerateShockWaveParams): ShockWave {
+  const { resources } = params;
+  const initialModel = initialValue();
+  const view = new EnemyShockWaveView(resources, initialModel);
+  return new ShockWave({ ...params, view, initialModel });
 }

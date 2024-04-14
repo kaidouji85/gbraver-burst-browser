@@ -4,13 +4,19 @@ import * as THREE from "three";
 import { Animate } from "../../../animation/animate";
 import { onStart } from "../../../animation/on-start";
 import type { PreRender } from "../../../game-loop/pre-render";
-import type { Resources } from "../../../resource";
 import type { GameObjectAction } from "../../action/game-object-action";
 import { popUp } from "./animation/pop-up";
-import type { ShockWaveModel } from "./model/shock-wave-model";
-import { createShockWaveProps } from "./props/create-shock-wave-props";
+import {
+  createShockWaveProps,
+  GenerateShockWavePropsParams,
+} from "./props/create-shock-wave-props";
 import { ShockWaveProps } from "./props/shock-wave-props";
-import type { ShockWaveView } from "./view/shock-wave-view";
+
+/** コンストラクタのパラメータ */
+export type ConstructShockWaveParams = GenerateShockWavePropsParams & {
+  /** ゲームオブジェクトアクション */
+  gameObjectAction: Observable<GameObjectAction>;
+};
 
 /** 衝撃波 */
 export class ShockWave {
@@ -21,18 +27,11 @@ export class ShockWave {
 
   /**
    * リソース管理オブジェクト
-   * @param view ビュー
-   * @param initialModel モデルの初期値
-   * @param resources リソース管理オブジェクト
-   * @param gameObjectAction ゲームオブジェクトアクション
+   * @param params パラメータ
    */
-  constructor(
-    view: ShockWaveView,
-    initialModel: ShockWaveModel,
-    resources: Resources,
-    gameObjectAction: Observable<GameObjectAction>,
-  ) {
-    this.#props = createShockWaveProps({ view, initialModel, resources });
+  constructor(params: ConstructShockWaveParams) {
+    const { gameObjectAction } = params;
+    this.#props = createShockWaveProps(params);
     this.#unsubscriber = gameObjectAction.subscribe((action) => {
       if (action.type === "Update") {
         this.#onUpdate();
