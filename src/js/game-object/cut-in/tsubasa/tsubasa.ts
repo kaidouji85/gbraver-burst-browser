@@ -53,7 +53,7 @@ export class TsubasaCutIn {
    * @return アニメーション
    */
   show(): Animate {
-    return show(this.#props.model, this.#props.sounds);
+    return show(this.#props);
   }
 
   /**
@@ -62,7 +62,7 @@ export class TsubasaCutIn {
    * @return アニメーション
    */
   hidden(): Animate {
-    return hidden(this.#props.model);
+    return hidden(this.#props);
   }
 
   /**
