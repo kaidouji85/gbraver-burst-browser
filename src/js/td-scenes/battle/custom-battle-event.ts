@@ -8,6 +8,7 @@ import type {
 import { Observable } from "rxjs";
 
 import { Animate } from "../../animation/animate";
+import { SEPlayer } from "../../se/se-player";
 import type { PushWindow } from "../../window/push-window";
 import { BattleSceneSounds } from "./sounds/sounds";
 import { BattleSceneView } from "./view";
@@ -25,6 +26,8 @@ export type CustomBattleEventProps = {
   readonly pushWindow: Observable<PushWindow>;
   /** 戦闘シーン効果音 */
   readonly sounds: BattleSceneSounds;
+  /** SE再生オブジェクト */
+  readonly se: SEPlayer;
   /** ステートヒストリー */
   readonly stateHistory: GameState[];
 };

@@ -54,6 +54,8 @@ export type BattleSceneProps = {
   readonly sounds: BattleSceneSounds;
   /** BGM管理オブジェクト */
   readonly bgm: BGMManager;
+  /** SE再生オブジェクト */
+  readonly se: SEPlayer;
   /** コントローラータイプ */
   readonly controllerType: BattleControllerType;
 };
