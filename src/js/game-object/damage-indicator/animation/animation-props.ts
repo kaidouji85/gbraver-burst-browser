@@ -1,4 +1,4 @@
-import {DamageIndicatorModel} from "../model/damage-indicator-model";
+import { DamageIndicatorModel } from "../model/damage-indicator-model";
 
 /** ダメージインジケータ アニメーションプロパティ */
 export type DamageIndicatorAnimationProps = {

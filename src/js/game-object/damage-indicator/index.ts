@@ -9,20 +9,22 @@ import { PlayerDamageIndicatorView } from "./view/player-damage-indicator-view";
 /** 生成パラメータ */
 export type GenerateDamageIndicatorParams = {
   /** リソース管理オブジェクト */
-  resources: Resources,
+  resources: Resources;
   /** ゲームオブジェクトアクション */
-  gameObjectAction: Observable<GameObjectAction>,
-}
+  gameObjectAction: Observable<GameObjectAction>;
+};
 
 /**
  * プレイヤーのダメージインジケータ
  * @param params 生成パラメータ
  * @return ダメージインジケータ
  */
-export function playerDamageIndicator(params: GenerateDamageIndicatorParams): DamageIndicator {
+export function playerDamageIndicator(
+  params: GenerateDamageIndicatorParams,
+): DamageIndicator {
   const { resources } = params;
   const view = new PlayerDamageIndicatorView(resources);
-  return new DamageIndicator({...params, view});
+  return new DamageIndicator({ ...params, view });
 }
 
 /**
@@ -30,8 +32,10 @@ export function playerDamageIndicator(params: GenerateDamageIndicatorParams): Da
  * @param params 生成パラメータ
  * @return ダメージインジケータ
  */
-export function enemyDamageIndicator(params: GenerateDamageIndicatorParams): DamageIndicator {
+export function enemyDamageIndicator(
+  params: GenerateDamageIndicatorParams,
+): DamageIndicator {
   const { resources } = params;
   const view = new EnemyDamageIndicatorView(resources);
-  return new DamageIndicator({...params, view});
+  return new DamageIndicator({ ...params, view });
 }

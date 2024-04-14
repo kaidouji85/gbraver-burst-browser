@@ -5,11 +5,11 @@ import { Animate } from "../../animation/animate";
 import type { PreRender } from "../../game-loop/pre-render";
 import type { GameObjectAction } from "../action/game-object-action";
 import { popUp } from "./animation/pop-up";
-import { DamageIndicatorProps } from "./props/damage-indicator-props";
 import {
   createDamageIndicatorProps,
   GenerateDamageIndicatorPropsParams,
 } from "./props/create-damage-indicator-props";
+import { DamageIndicatorProps } from "./props/damage-indicator-props";
 
 /** コンストラクタのパラメータ */
 export type ConstructDamageIndicatorParams =
