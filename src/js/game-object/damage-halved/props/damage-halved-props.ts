@@ -1,13 +1,8 @@
-import { DamageHalvedModel } from "../model/damage-halved-model";
-import { DamageHalvedSounds } from "../sounds/damage-halved-sounds";
+import { DamageHalvedAnimationProps } from "../animation/animation-props";
 import { DamageHalvedView } from "../view/damage-halved-view";
 
 /** ダメージ半減 プロパティ */
-export type DamageHalvedProps = {
-  /** モデル */
-  model: DamageHalvedModel;
+export type DamageHalvedProps = DamageHalvedAnimationProps & {
   /** ビュー */
   view: DamageHalvedView;
-  /** サウンド */
-  sounds: DamageHalvedSounds;
 };
