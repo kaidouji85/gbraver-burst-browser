@@ -3,38 +3,33 @@ import * as THREE from "three";
 
 import { Animate } from "../../animation/animate";
 import type { PreRender } from "../../game-loop/pre-render";
-import type { Resources } from "../../resource";
 import type { GameObjectAction } from "../action/game-object-action";
 import { popUp } from "./animation/pop-up";
-import type { BatteryEnchantmentModel } from "./model/battery-enchantment-model";
-import { createInitialValue } from "./model/initial-value";
-import { BatteryEnchantmentSounds } from "./sounds/battery-enchantment-sounds";
-import type { BatteryEnchantmentView } from "./view/battery-enchantment-view";
+import { BatteryEnchantmentProps } from "./props/battery-enchantment-props";
+import {
+  createBatteryEnchantmentProps,
+  GenerateBatteryEnchantmentPropsParams,
+} from "./props/create-battery-enchantment-props";
 
-/**
- * バッテリー増強
- */
+/** コンストラクタのパラメータ */
+type Params = GenerateBatteryEnchantmentPropsParams & {
+  gameObjectAction: Observable<GameObjectAction>;
+};
+
+/** バッテリー増強 */
 export class BatteryEnchantment {
-  #model: BatteryEnchantmentModel;
-  #view: BatteryEnchantmentView;
-  #sounds: BatteryEnchantmentSounds;
+  /** プロパティ */
+  #props: BatteryEnchantmentProps;
+  /** アンサブスクライバ */
   #unsubscriber: Unsubscribable;
 
   /**
    * コンストラクタ
-   *
-   * @param view ビュー
-   * @param resources リソース管理オブジェクト
-   * @param gameObjectAction ゲームオブジェクトアクション
+   * @param params パラメータ
    */
-  constructor(
-    view: BatteryEnchantmentView,
-    resources: Resources,
-    gameObjectAction: Observable<GameObjectAction>,
-  ) {
-    this.#model = createInitialValue();
-    this.#view = view;
-    this.#sounds = new BatteryEnchantmentSounds(resources);
+  constructor(params: Params) {
+    const { gameObjectAction } = params;
+    this.#props = createBatteryEnchantmentProps(params);
     this.#unsubscriber = gameObjectAction.subscribe((action) => {
       if (action.type === "Update") {
         this.#onUpdate();
@@ -44,43 +39,42 @@ export class BatteryEnchantment {
     });
   }
 
-  /** デストラクタ相当の処理 */
+  /**
+   * デストラクタ相当の処理
+   */
   destructor(): void {
-    this.#view.destructor();
+    this.#props.view.destructor();
     this.#unsubscriber.unsubscribe();
   }
 
   /**
    * ポップアップ
-   *
    * @return アニメーション
    */
   popUp(): Animate {
-    return popUp(this.#model, this.#sounds);
+    return popUp(this.#props);
   }
 
   /**
    * シーンに追加するオブジェクトを取得する
-   *
    * @return シーンに追加するオブジェクト
    */
   getObject3D(): THREE.Object3D {
-    return this.#view.getObject3D();
+    return this.#props.view.getObject3D();
   }
 
   /**
    * アップデート時の処理
    */
   #onUpdate(): void {
-    this.#view.engage(this.#model);
+    this.#props.view.engage(this.#props.model);
   }
 
   /**
    * プリレンダー時の処置
-   *
    * @param action アクション
    */
   #onPreRender(action: PreRender): void {
-    this.#view.lookAt(action.camera);
+    this.#props.view.lookAt(action.camera);
   }
 }

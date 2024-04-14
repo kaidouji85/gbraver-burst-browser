@@ -36,7 +36,6 @@ export class WingDozerHUD implements HUDArmdozerObjects {
 
   /**
    * シーンに追加するオブジェクトを取得する
-   *
    * @return シーンに追加するオブジェクト
    */
   getObject3Ds(): THREE.Object3D[] {
@@ -52,10 +51,10 @@ export class WingDozerHUD implements HUDArmdozerObjects {
 export function playerWingDozerHUD(
   params: GenerateHUDLayerObjectParams,
 ): WingDozerHUD {
-  const { resources, player, gameObjectAction } = params;
+  const { player } = params;
   return new WingDozerHUD({
     playerId: player.playerId,
-    cutIn: playerWingDozerCutIn(resources, gameObjectAction),
+    cutIn: playerWingDozerCutIn(params),
   });
 }
 
@@ -67,9 +66,9 @@ export function playerWingDozerHUD(
 export function enemyWingDozerHUD(
   params: GenerateHUDLayerObjectParams,
 ): WingDozerHUD {
-  const { resources, enemy, gameObjectAction } = params;
+  const { enemy } = params;
   return new WingDozerHUD({
     playerId: enemy.playerId,
-    cutIn: enemyWingDozerCutIn(resources, gameObjectAction),
+    cutIn: enemyWingDozerCutIn(params),
   });
 }

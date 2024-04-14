@@ -6,32 +6,36 @@ import { BatteryCorrect } from "./battery-correct";
 import { EnemyBatteryCorrectView } from "./view/enemy-battery-correct-view";
 import { PlayerBatteryCorrectView } from "./view/player-battery-correct-view";
 
+/** 生成パラメータ */
+export type GenerateBatteryCorrectParams = {
+  /** リソース管理オブジェクト */
+  resources: Resources;
+  /** ゲームオブジェクトアクション */
+  gameObjectAction: Observable<GameObjectAction>;
+};
+
 /**
  * プレイヤー側 バッテリー補正
- *
- * @param resources リソースか管理オブジェクト
- * @param gameObjectAction ゲームオブジェクトアクション
+ * @param params パラメータ
  * @return バッテリー補正
  */
 export function playerBatteryCorrect(
-  resources: Resources,
-  gameObjectAction: Observable<GameObjectAction>,
+  params: GenerateBatteryCorrectParams,
 ): BatteryCorrect {
+  const { resources } = params;
   const view = new PlayerBatteryCorrectView(resources);
-  return new BatteryCorrect(view, gameObjectAction);
+  return new BatteryCorrect({ ...params, view });
 }
 
 /**
  * 敵側 バッテリー補正
- *
- * @param resources リソースか管理オブジェクト
- * @param gameObjectAction ゲームオブジェクトアクション
+ * @param params パラメータ
  * @return バッテリー補正
  */
 export function enemyBatteryCorrect(
-  resources: Resources,
-  gameObjectAction: Observable<GameObjectAction>,
+  params: GenerateBatteryCorrectParams,
 ): BatteryCorrect {
+  const { resources } = params;
   const view = new EnemyBatteryCorrectView(resources);
-  return new BatteryCorrect(view, gameObjectAction);
+  return new BatteryCorrect({ ...params, view });
 }

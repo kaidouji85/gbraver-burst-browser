@@ -7,30 +7,33 @@ import { HUDTracking } from "../../../tracking/hud-tracking";
 import { GameObjectAction } from "../../action/game-object-action";
 import { hidden } from "./animation/hidden";
 import { show } from "./animation/show";
-import { GenesisBraverCutInModel } from "./model/genesis-braver-cutin-model";
-import { createInitialValue } from "./model/initial-value";
-import { GenesisBraverCutInView } from "./view/genesis-braver-cutin-view";
+import {
+  createGenesisBraverCutInProps,
+  GenerateGenesisBraverCutInPropsParams,
+} from "./props/create-genesis-braver-cutin-props";
+import { GenesisBraverCutInProps } from "./props/genesis-braver-cutin-props";
+
+/** コンストラクタのパラメータ */
+export type ConstructGenesisBraverCutInParams =
+  GenerateGenesisBraverCutInPropsParams & {
+    /** ゲームオブジェクトアクション */
+    gameObjectAction: Observable<GameObjectAction>;
+  };
 
 /** ジェネシスブレイバー カットイン */
 export class GenesisBraverCutIn implements HUDTracking {
-  /** モデル */
-  #model: GenesisBraverCutInModel;
-  /** ビュー */
-  #view: GenesisBraverCutInView;
+  /** プロパティ */
+  #props: GenesisBraverCutInProps;
   /** アンサブスクライバ */
   #unsubscribers: Unsubscribable[];
 
   /**
    * コンストラクタ
-   * @param resources ビュー
-   * @param gameObjectAction ゲームオブジェクトアクション
+   * @param params パラメータ
    */
-  constructor(
-    view: GenesisBraverCutInView,
-    gameObjectAction: Observable<GameObjectAction>,
-  ) {
-    this.#model = createInitialValue();
-    this.#view = view;
+  constructor(params: ConstructGenesisBraverCutInParams) {
+    const { gameObjectAction } = params;
+    this.#props = createGenesisBraverCutInProps(params);
     this.#unsubscribers = [
       gameObjectAction.subscribe((action) => {
         if (action.type === "PreRender") {
@@ -47,13 +50,13 @@ export class GenesisBraverCutIn implements HUDTracking {
     this.#unsubscribers.forEach((v) => {
       v.unsubscribe();
     });
-    this.#view.destructor();
+    this.#props.view.destructor();
   }
 
   /** @override */
   tracking(x: number, y: number): void {
-    this.#model.tracking.x = x;
-    this.#model.tracking.y = y;
+    this.#props.model.tracking.x = x;
+    this.#props.model.tracking.y = y;
   }
 
   /**
@@ -61,7 +64,7 @@ export class GenesisBraverCutIn implements HUDTracking {
    * @return 取得結果
    */
   getObject3D(): THREE.Object3D {
-    return this.#view.getObject3D();
+    return this.#props.view.getObject3D();
   }
 
   /**
@@ -69,7 +72,7 @@ export class GenesisBraverCutIn implements HUDTracking {
    * @return アニメーション
    */
   show(): Animate {
-    return show(this.#model);
+    return show(this.#props);
   }
 
   /**
@@ -77,13 +80,13 @@ export class GenesisBraverCutIn implements HUDTracking {
    * @return アニメーション
    */
   hidden(): Animate {
-    return hidden(this.#model);
+    return hidden(this.#props);
   }
 
   /**
    * プリレンダー時の処理
    */
   #onPreRender(action: PreRender): void {
-    this.#view.engage(this.#model, action);
+    this.#props.view.engage(this.#props.model, action);
   }
 }

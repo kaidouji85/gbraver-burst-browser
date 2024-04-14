@@ -1,16 +1,13 @@
-import { Observable } from "rxjs";
-
 import { delay } from "../src/js/animation/delay";
-import { GameObjectAction } from "../src/js/game-object/action/game-object-action";
 import {
   gaiPilotButton,
+  GeneratePilotButtonParams,
   raitoPilotButton,
   shinyaPilotButton,
   tsubasaPilotButton,
   yuuyaPilotButton,
 } from "../src/js/game-object/pilot-button";
 import { PilotButton } from "../src/js/game-object/pilot-button/pilot-button";
-import { Resources } from "../src/js/resource";
 import { HUDGameObjectStub } from "./stub/hud-game-object-stub";
 
 export default {
@@ -25,10 +22,7 @@ export default {
  */
 const pilotButtonStory =
   (
-    generator: (params: {
-      resources: Resources;
-      gameObjectAction: Observable<GameObjectAction>;
-    }) => PilotButton,
+    generator: (params: GeneratePilotButtonParams) => PilotButton,
     fn: (button: PilotButton) => void,
   ) =>
   () => {

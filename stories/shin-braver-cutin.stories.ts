@@ -20,8 +20,8 @@ function cutInAnimation(cutIn: ShinBraverCutIn): Animate {
 }
 
 export const Player = (): HTMLElement => {
-  const stub = new HUDGameObjectStub(({ resources, gameObjectAction }) => {
-    const cutIn = playerShinBraverCutIn(resources, gameObjectAction);
+  const stub = new HUDGameObjectStub((params) => {
+    const cutIn = playerShinBraverCutIn(params);
     cutInAnimation(cutIn).loop();
     return [cutIn.getObject3D()];
   });
@@ -30,8 +30,8 @@ export const Player = (): HTMLElement => {
 };
 
 export const Enemy = (): HTMLElement => {
-  const stub = new HUDGameObjectStub(({ resources, gameObjectAction }) => {
-    const cutIn = enemyShinBraverCutIn(resources, gameObjectAction);
+  const stub = new HUDGameObjectStub((params) => {
+    const cutIn = enemyShinBraverCutIn(params);
     cutInAnimation(cutIn).loop();
     return [cutIn.getObject3D()];
   });

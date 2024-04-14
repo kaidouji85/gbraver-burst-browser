@@ -17,7 +17,7 @@ import {
 } from "./props/create-battery-selector-props";
 
 /** コンストラクタのパラメータ */
-type Param = GenerateBatterySelectorPropsParam;
+export type GenerateBatterySelectorParam = GenerateBatterySelectorPropsParam;
 
 /** バッテリーセレクタ */
 export class BatterySelector {
@@ -30,7 +30,7 @@ export class BatterySelector {
    * コンストラクタ
    * @param param パラメータ
    */
-  constructor(param: Param) {
+  constructor(param: GenerateBatterySelectorParam) {
     this.#props = createBatterySelectorProps(param);
     this.#unsubscribers = bindEventListeners(
       this.#props,

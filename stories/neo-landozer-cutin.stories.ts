@@ -20,8 +20,8 @@ function cutInAnimation(cutIn: NeoLandozerCutIn): Animate {
 }
 
 export const Player = (): HTMLElement => {
-  const stub = new HUDGameObjectStub(({ resources, gameObjectAction }) => {
-    const cutIn = playerNeoLandozerCutIn(resources, gameObjectAction);
+  const stub = new HUDGameObjectStub((params) => {
+    const cutIn = playerNeoLandozerCutIn(params);
     cutInAnimation(cutIn).loop();
     return [cutIn.getObject3D()];
   });
@@ -30,8 +30,8 @@ export const Player = (): HTMLElement => {
 };
 
 export const Enemy = (): HTMLElement => {
-  const stub = new HUDGameObjectStub(({ resources, gameObjectAction }) => {
-    const cutIn = enemyNeoLandozerCutIn(resources, gameObjectAction);
+  const stub = new HUDGameObjectStub((params) => {
+    const cutIn = enemyNeoLandozerCutIn(params);
     cutInAnimation(cutIn).loop();
     return [cutIn.getObject3D()];
   });

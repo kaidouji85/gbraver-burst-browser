@@ -1,10 +1,10 @@
-import { Observable } from "rxjs";
-
 import { delay } from "../src/js/animation/delay";
-import { GameObjectAction } from "../src/js/game-object/action/game-object-action";
-import { enemyPowerUp, playerPowerUp } from "../src/js/game-object/power-up";
+import {
+  enemyPowerUp,
+  GeneratePowerUpParams,
+  playerPowerUp,
+} from "../src/js/game-object/power-up";
 import { PowerUp } from "../src/js/game-object/power-up/power-up";
-import { Resources } from "../src/js/resource";
 import { TDGameObjectStub } from "./stub/td-game-object-stub";
 
 export default {
@@ -19,15 +19,12 @@ export default {
  */
 const powerUpStory =
   (
-    generator: (
-      resources: Resources,
-      gameObjectAction: Observable<GameObjectAction>,
-    ) => PowerUp,
+    generator: (params: GeneratePowerUpParams) => PowerUp,
     fn: (powerUp: PowerUp) => void,
   ) =>
   () => {
-    const stub = new TDGameObjectStub(({ resources, gameObjectAction }) => {
-      const powerUp = generator(resources, gameObjectAction);
+    const stub = new TDGameObjectStub((params) => {
+      const powerUp = generator(params);
       fn(powerUp);
       return {
         objects: [powerUp.getObject3D()],

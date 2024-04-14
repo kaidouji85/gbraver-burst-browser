@@ -1,13 +1,10 @@
-import { Observable } from "rxjs";
-
 import { delay } from "../src/js/animation/delay";
-import { GameObjectAction } from "../src/js/game-object/action/game-object-action";
 import {
   enemyYuuyaCutIn,
+  GenerateYuuyaCutInParams,
   playerYuuyaCutIn,
 } from "../src/js/game-object/cut-in/yuuya";
 import { YuuyaCutIn } from "../src/js/game-object/cut-in/yuuya/yuuya";
-import { Resources } from "../src/js/resource";
 import { HUDGameObjectStub } from "./stub/hud-game-object-stub";
 
 export default {
@@ -20,10 +17,7 @@ export default {
  * @param gameObjectAction ゲームオブジェクトアクション
  * @return カットイン
  */
-type CutInGenerator = (
-  resources: Resources,
-  gameObjectAction: Observable<GameObjectAction>,
-) => YuuyaCutIn;
+type CutInGenerator = (params: GenerateYuuyaCutInParams) => YuuyaCutIn;
 
 /**
  * カットイン ストーリー
@@ -34,8 +28,8 @@ type CutInGenerator = (
 const cutInStory =
   (generator: CutInGenerator, fn: (cutIn: YuuyaCutIn) => void) =>
   (): HTMLElement => {
-    const stub = new HUDGameObjectStub(({ resources, gameObjectAction }) => {
-      const cutIn = generator(resources, gameObjectAction);
+    const stub = new HUDGameObjectStub((params) => {
+      const cutIn = generator(params);
       fn(cutIn);
       return [cutIn.getObject3D()];
     });

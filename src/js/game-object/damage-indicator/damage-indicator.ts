@@ -5,28 +5,33 @@ import { Animate } from "../../animation/animate";
 import type { PreRender } from "../../game-loop/pre-render";
 import type { GameObjectAction } from "../action/game-object-action";
 import { popUp } from "./animation/pop-up";
-import type { DamageIndicatorModel } from "./model/damage-indicator-model";
-import { createInitialValue } from "./model/initial-value";
-import type { DamageIndicatorView } from "./view/damage-indicator-view";
+import {
+  createDamageIndicatorProps,
+  GenerateDamageIndicatorPropsParams,
+} from "./props/create-damage-indicator-props";
+import { DamageIndicatorProps } from "./props/damage-indicator-props";
+
+/** コンストラクタのパラメータ */
+export type ConstructDamageIndicatorParams =
+  GenerateDamageIndicatorPropsParams & {
+    /** ゲームオブジェクトアクション */
+    gameObjectAction: Observable<GameObjectAction>;
+  };
 
 /** ダメージインジケータ */
 export class DamageIndicator {
-  #model: DamageIndicatorModel;
-  #view: DamageIndicatorView;
+  /** プロパティ */
+  #props: DamageIndicatorProps;
+  /** アンサブスクライバ */
   #unsubscriber: Unsubscribable;
 
   /**
    * コンストラクタ
-   *
-   * @param view ビュー
-   * @param gameObjectAction Stream<GameObjectAction>
+   * @param params パラメータ
    */
-  constructor(
-    view: DamageIndicatorView,
-    gameObjectAction: Observable<GameObjectAction>,
-  ) {
-    this.#view = view;
-    this.#model = createInitialValue();
+  constructor(params: ConstructDamageIndicatorParams) {
+    const { gameObjectAction } = params;
+    this.#props = createDamageIndicatorProps(params);
     this.#unsubscriber = gameObjectAction.subscribe((action) => {
       if (action.type === "Update") {
         this.#update();
@@ -38,27 +43,32 @@ export class DamageIndicator {
 
   /** デストラクタ */
   destructor(): void {
-    this.#view.destructor();
+    this.#props.view.destructor();
     this.#unsubscriber.unsubscribe();
   }
 
   /** ダメージ数字を表示する */
   popUp(damage: number): Animate {
-    return popUp(this.#model, damage);
+    return popUp(this.#props, damage);
   }
 
   /** シーンに追加するオブジェクトを取得する */
   getObject3D(): THREE.Object3D {
-    return this.#view.getObject3D();
+    return this.#props.view.getObject3D();
   }
 
-  /** 状態更新 */
+  /**
+   * アップデート時の処理
+   */
   #update() {
-    this.#view.engage(this.#model);
+    this.#props.view.engage(this.#props.model);
   }
 
-  /** プリレンダー */
+  /**
+   * プリレンダー時の処理
+   * @param action アクション
+   */
   #preRender(action: PreRender): void {
-    this.#view.lookAt(action.camera);
+    this.#props.view.lookAt(action.camera);
   }
 }

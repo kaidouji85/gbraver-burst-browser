@@ -172,20 +172,20 @@ export function playerTDObjects(params: GenerateTDLayerObjectParams): TDPlayer {
   return new TDPlayerImpl({
     playerId: player.playerId,
     hitMark: {
-      shockWave: playerShockWave(resources, gameObjectAction),
-      lightning: playerLightning(resources, gameObjectAction),
+      shockWave: playerShockWave(params),
+      lightning: playerLightning(params),
     },
     armdozerEffects: {
-      powerUp: playerPowerUp(resources, gameObjectAction),
+      powerUp: playerPowerUp(params),
       reflect: playerReflectIndicator(resources, gameObjectAction),
-      continuousAttack: playerContinuousAttack(resources, gameObjectAction),
-      damageHalved: playerDamageHalved(resources, gameObjectAction),
-      batteryEnchantment: playerBatteryEnchantment(resources, gameObjectAction),
+      continuousAttack: playerContinuousAttack(params),
+      damageHalved: playerDamageHalved(params),
+      batteryEnchantment: playerBatteryEnchantment(params),
     },
-    batteryNumber: playerBatteryNumber(resources, gameObjectAction),
-    batteryCorrect: playerBatteryCorrect(resources, gameObjectAction),
-    recoverBattery: playerRecoverBattery(resources, gameObjectAction),
-    damageIndicator: playerDamageIndicator(resources, gameObjectAction),
+    batteryNumber: playerBatteryNumber(params),
+    batteryCorrect: playerBatteryCorrect(params),
+    recoverBattery: playerRecoverBattery(params),
+    damageIndicator: playerDamageIndicator(params),
   });
 }
 
@@ -199,19 +199,19 @@ export function enemyTDObject(params: GenerateTDLayerObjectParams): TDPlayer {
   return new TDPlayerImpl({
     playerId: enemy.playerId,
     hitMark: {
-      shockWave: enemyShockWave(resources, gameObjectAction),
-      lightning: enemyLightning(resources, gameObjectAction),
+      shockWave: enemyShockWave(params),
+      lightning: enemyLightning(params),
     },
     armdozerEffects: {
-      powerUp: enemyPowerUp(resources, gameObjectAction),
+      powerUp: enemyPowerUp(params),
       reflect: enemyReflectIndicator(resources, gameObjectAction),
-      continuousAttack: enemyContinuousAttack(resources, gameObjectAction),
-      damageHalved: enemyDamageHalved(resources, gameObjectAction),
-      batteryEnchantment: enemyBatteryEnchantment(resources, gameObjectAction),
+      continuousAttack: enemyContinuousAttack(params),
+      damageHalved: enemyDamageHalved(params),
+      batteryEnchantment: enemyBatteryEnchantment(params),
     },
-    batteryNumber: enemyBatteryNumber(resources, gameObjectAction),
-    batteryCorrect: enemyBatteryCorrect(resources, gameObjectAction),
-    recoverBattery: enemyRecoverBattery(resources, gameObjectAction),
-    damageIndicator: enemyDamageIndicator(resources, gameObjectAction),
+    batteryNumber: enemyBatteryNumber(params),
+    batteryCorrect: enemyBatteryCorrect(params),
+    recoverBattery: enemyRecoverBattery(params),
+    damageIndicator: enemyDamageIndicator(params),
   });
 }

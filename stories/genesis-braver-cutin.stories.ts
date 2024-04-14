@@ -24,8 +24,8 @@ const story = (cutIn: GenesisBraverCutIn) => {
 
 /** プレイヤーカットイン */
 export const playerCutIn = () => {
-  const stub = new HUDGameObjectStub(({ resources, gameObjectAction }) => {
-    const cutIn = playerGenesisBraverCutIn(resources, gameObjectAction);
+  const stub = new HUDGameObjectStub((params) => {
+    const cutIn = playerGenesisBraverCutIn(params);
     story(cutIn);
     return [cutIn.getObject3D()];
   });
@@ -35,8 +35,8 @@ export const playerCutIn = () => {
 
 /** 敵カットイン */
 export const enemyCutIn = () => {
-  const stub = new HUDGameObjectStub(({ resources, gameObjectAction }) => {
-    const cutIn = enemyGenesisBraverCutIn(resources, gameObjectAction);
+  const stub = new HUDGameObjectStub((params) => {
+    const cutIn = enemyGenesisBraverCutIn(params);
     story(cutIn);
     return [cutIn.getObject3D()];
   });

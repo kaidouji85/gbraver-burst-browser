@@ -2,19 +2,18 @@ import { all } from "../../../../animation/all";
 import { Animate } from "../../../../animation/animate";
 import { onStart } from "../../../../animation/on-start";
 import { tween } from "../../../../animation/tween";
-import type { RaitoModel } from "../model/raito-model";
-import { RaitoSounds } from "../sounds/raito-sounds";
+import { RaitoCutInAnimationProps } from "./animation-props";
 
 /** アニメ時間 */
 const duration = 400;
 
 /**
  * カットインを表示する
- * @param model モデル
- * @param sounds 効果音
+ * @param props アニメーションプロパティ
  * @return アニメーション
  */
-export function show(model: RaitoModel, sounds: RaitoSounds): Animate {
+export function show(props: RaitoCutInAnimationProps): Animate {
+  const { model, sounds } = props;
   return onStart(() => {
     model.opacity = 0;
     model.position.x = -25;

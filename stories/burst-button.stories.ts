@@ -29,7 +29,7 @@ type BurstButtonGenerator = (params: {
 /**
  * バーストボタンストーリー
  * @param generator バーストボタン生成関数
- * @param burstButton バーストボタン操作関数
+ * @param fn バーストボタンに対する処理
  */
 const buttonStory =
   (generator: BurstButtonGenerator, fn: (burstButton: BurstButton) => void) =>
