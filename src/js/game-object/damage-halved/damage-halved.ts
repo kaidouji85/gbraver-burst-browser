@@ -3,12 +3,19 @@ import * as THREE from "three";
 
 import { Animate } from "../../animation/animate";
 import type { PreRender } from "../../game-loop/pre-render";
-import type { Resources } from "../../resource";
 import type { GameObjectAction } from "../action/game-object-action";
 import { popUp } from "./animation/pop-up";
-import { createDamageHalvedProps } from "./props/create-damage-halved-props";
+import {
+  createDamageHalvedProps,
+  GenerateDamageHalvedPropsParams,
+} from "./props/create-damage-halved-props";
 import { DamageHalvedProps } from "./props/damage-halved-props";
-import type { DamageHalvedView } from "./view/damage-halved-view";
+
+/** コンストラクタのパラメータ */
+export type ConstructDamageHalvedParams = GenerateDamageHalvedPropsParams & {
+  /** ゲームオブジェクトアクション */
+  gameObjectAction: Observable<GameObjectAction>;
+};
 
 /** ダメージ半減 */
 export class DamageHalved {
@@ -19,16 +26,11 @@ export class DamageHalved {
 
   /**
    * コンストラクタ
-   * @param view ビュー
-   * @param resources リソース管理オブジェクト
-   * @param gameObjectAction ゲームオブジェクトアクション
+   * @param params パラメータ
    */
-  constructor(
-    view: DamageHalvedView,
-    resources: Resources,
-    gameObjectAction: Observable<GameObjectAction>,
-  ) {
-    this.#props = createDamageHalvedProps({ resources, view });
+  constructor(params: ConstructDamageHalvedParams) {
+    const { gameObjectAction } = params;
+    this.#props = createDamageHalvedProps(params);
     this.#unsubscriber = gameObjectAction.subscribe((action) => {
       if (action.type === "Update") {
         this.#onUpdate();
