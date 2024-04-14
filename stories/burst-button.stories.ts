@@ -1,7 +1,5 @@
-import { Observable } from "rxjs";
-
-import { GameObjectAction } from "../src/js/game-object/action/game-object-action";
 import {
+  GenerateBurstButtonParams,
   genesisBraverBurstButton,
   lightningDozerBurstButton,
   neoLandozerBurstButton,
@@ -9,7 +7,6 @@ import {
   wingDozerBurstButton,
 } from "../src/js/game-object/burst-button";
 import { BurstButton } from "../src/js/game-object/burst-button/burst-button";
-import { Resources } from "../src/js/resource";
 import { HUDGameObjectStub } from "./stub/hud-game-object-stub";
 
 export default {
@@ -21,10 +18,7 @@ export default {
  * @param params 生成パラメータ
  * @return バーストボタン
  */
-type BurstButtonGenerator = (params: {
-  resources: Resources;
-  gameObjectAction: Observable<GameObjectAction>;
-}) => BurstButton;
+type BurstButtonGenerator = (params: GenerateBurstButtonParams) => BurstButton;
 
 /**
  * バーストボタンストーリー

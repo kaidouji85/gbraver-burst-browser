@@ -8,11 +8,14 @@ import { LightningDozerIcon } from "./view/lightning-dozer-icon";
 import { NeoLandozerIcon } from "./view/neo-landozer-icon";
 import { ShinBraverIcon } from "./view/shin-braver-icon";
 import { WingDozerIcon } from "./view/wing-dozer-icon";
+import {SEPlayer} from "../../se/se-player";
 
 /** 生成パラメータ */
 export type GenerateBurstButtonParams = {
   /** リソース管理オブジェクト */
   resources: Resources;
+  /** SE再生オブジェクト */
+  se: SEPlayer;
   /** ゲームオブジェクトアクション */
   gameObjectAction: Observable<GameObjectAction>;
 };
