@@ -29,7 +29,7 @@ export async function introduction(
   await synchronizedUpright(props).play();
   props.view.dom.leftMessageWindow.nextMessageIconVisible(true);
   await waitUntilWindowPush(props);
-  props.sounds.sendMessage.sound.play();
+  props.se.play(props.sounds.sendMessage);
   props.view.dom.leftMessageWindow.nextMessageIconVisible(false);
   props.view.dom.leftMessageWindow.scrollUp();
   props.view.dom.leftMessageWindow.messages(["礼！！」"]);
