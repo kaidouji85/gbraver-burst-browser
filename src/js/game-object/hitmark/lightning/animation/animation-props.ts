@@ -1,3 +1,4 @@
+import { SEPlayer } from "../../../../se/se-player";
 import { LightningModel } from "../model/lightning-model";
 import { LightningSounds } from "../sounds/lightning-sounds";
 
@@ -7,4 +8,6 @@ export type LightningAnimationProps = {
   model: LightningModel;
   /** サウンド */
   sounds: LightningSounds;
+  /** SE再生オブジェクト */
+  se: SEPlayer;
 };
