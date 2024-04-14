@@ -51,7 +51,7 @@ export async function onNetBattleStart(
   }
 
   props.domDialogBinder.bind(
-    new NetBattleSelectorDialog(props.resources),
+    new NetBattleSelectorDialog(props),
     netBattleSelectorDialogConnector,
   );
 }
