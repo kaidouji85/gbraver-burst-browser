@@ -2,38 +2,34 @@ import { Observable, Unsubscribable } from "rxjs";
 import * as THREE from "three";
 
 import { Animate } from "../../../animation/animate";
-import type { Resources } from "../../../resource";
 import type { GameObjectAction } from "../../action/game-object-action";
 import { popUp } from "./animation/pop-up";
-import { createInitialValue } from "./model/initial-value";
-import type { LightningModel } from "./model/lightning-model";
-import { LightningSounds } from "./sounds/lightning-sounds";
-import type { LightningView } from "./view/lightning-view";
+import {
+  createLightningProps,
+  GenerateLightningPropsParams,
+} from "./props/create-lightning-props";
+import { LightningProps } from "./props/lightning-props";
 
-/**
- * 電撃ヒットマーク
- */
+/** コンストラクタのパラメータ */
+export type ConstructLightningParams = GenerateLightningPropsParams & {
+  /** ゲームオブジェクトアクション */
+  gameObjectAction: Observable<GameObjectAction>;
+};
+
+/**電撃ヒットマーク */
 export class Lightning {
-  #model: LightningModel;
-  #view: LightningView;
-  #sounds: LightningSounds;
+  /** プロパティ */
+  #props: LightningProps;
+  /** アンサブスクライバ */
   #unsubscriber: Unsubscribable;
 
   /**
    * コンストラクタ
-   *
-   * @param view ビュー
-   * @param resources リソース管理オブジェクト
-   * @param gameObjectAction ゲームオブジェクトアクション
+   * @param params パラメータ
    */
-  constructor(
-    view: LightningView,
-    resources: Resources,
-    gameObjectAction: Observable<GameObjectAction>,
-  ) {
-    this.#model = createInitialValue();
-    this.#view = view;
-    this.#sounds = new LightningSounds(resources);
+  constructor(params: ConstructLightningParams) {
+    const { gameObjectAction } = params;
+    this.#props = createLightningProps(params);
     this.#unsubscriber = gameObjectAction.subscribe((action) => {
       if (action.type === "Update") {
         this.#onUpdate();
@@ -45,32 +41,30 @@ export class Lightning {
    * デストラクタ相当の処理
    */
   destructor(): void {
-    this.#view.destructor();
+    this.#props.view.destructor();
     this.#unsubscriber.unsubscribe();
   }
 
   /**
    * エフェクトを一瞬だけ表示する
-   *
    * @return アニメーション
    */
   popUp(): Animate {
-    return popUp(this.#model, this.#sounds);
+    return popUp(this.#props);
   }
 
   /**
    * シーンに追加するオブジェクトを取得する
-   *
    * @return シーンに追加するオブジェクト
    */
   getObject3D(): THREE.Object3D {
-    return this.#view.getObject3D();
+    return this.#props.view.getObject3D();
   }
 
   /**
    * アップデート時の処理
    */
   #onUpdate(): void {
-    this.#view.engage(this.#model);
+    this.#props.view.engage(this.#props.model);
   }
 }

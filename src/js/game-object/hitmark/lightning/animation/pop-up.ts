@@ -2,16 +2,15 @@ import { all } from "../../../../animation/all";
 import { Animate } from "../../../../animation/animate";
 import { onStart } from "../../../../animation/on-start";
 import { tween } from "../../../../animation/tween";
-import type { LightningModel } from "../model/lightning-model";
-import { LightningSounds } from "../sounds/lightning-sounds";
+import { LightningAnimationProps } from "./animation-props";
 
 /**
  * エフェクトを一瞬だけ表示する
- * @param model モデル
- * @param sounds 音
+ * @param props アニメーションプロパティ
  * @return アニメーション
  */
-export function popUp(model: LightningModel, sounds: LightningSounds): Animate {
+export function popUp(props: LightningAnimationProps): Animate {
+  const { model, sounds } = props;
   return onStart(() => {
     model.animation.frame = 0;
     model.opacity = 1;
