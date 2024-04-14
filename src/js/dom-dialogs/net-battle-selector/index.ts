@@ -8,12 +8,14 @@ import { onCloserPush } from "./listeners/on-closer-push";
 import { onPrivateMatchGuestSelect } from "./listeners/on-private-match-guest-select";
 import { onPrivateMatchHostSelect } from "./listeners/on-private-match-host-select";
 import {
-  createNetBattleSelectrProps, GenerateNetBattleSelectorDialogPropsParams,
+  createNetBattleSelectrProps,
+  GenerateNetBattleSelectorDialogPropsParams,
   NetBattleSelectorDialogProps,
 } from "./props";
 
 /** コンストラクタのパラメータ */
-export type ConstructNetBattleSelectorDialogParams = GenerateNetBattleSelectorDialogPropsParams;
+export type ConstructNetBattleSelectorDialogParams =
+  GenerateNetBattleSelectorDialogPropsParams;
 
 /** ネットバトルセレクターダイアログ */
 export class NetBattleSelectorDialog implements DOMDialog {

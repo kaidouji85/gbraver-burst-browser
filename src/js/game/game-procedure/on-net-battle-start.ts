@@ -21,7 +21,7 @@ async function callLoginCheckAPI(props: Readonly<GameProps>): Promise<boolean> {
       ...props,
       postNetworkError: {
         type: "Close",
-      }
+      },
     });
     props.domDialogBinder.bind(dialog, networkErrorDialogConnector);
     throw e;

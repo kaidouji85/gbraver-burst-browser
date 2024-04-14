@@ -15,7 +15,7 @@ export async function onSuddenlyEndBattle(
     ...props,
     postNetworkError: {
       type: "GotoTitle",
-    }
+    },
   });
   props.domDialogBinder.bind(dialog, networkErrorDialogConnector);
   props.suddenlyBattleEnd.unbind();

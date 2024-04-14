@@ -6,7 +6,7 @@ export default {
 };
 
 export const dialog: DOMStubStory = domStub((resources, se) => {
-  const dialog = new PrivateMatchGuestDialog({resources, se});
+  const dialog = new PrivateMatchGuestDialog({ resources, se });
   dialog.notifyDialogClosed().subscribe(() => {
     console.log("dialog closed.");
   });

@@ -29,7 +29,10 @@ export async function waitUntilPrivateMatchingAsHost(
       action.pilotId,
     );
     props.domDialogBinder.bind(
-      new PrivateMatchHostDialog(props.resources, room.roomID),
+      new PrivateMatchHostDialog({
+        ...props,
+        roomID: room.roomID,
+      }),
       privateMatchHostDialogConnector,
     );
     return await room.waitUntilMatching();

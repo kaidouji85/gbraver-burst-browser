@@ -6,7 +6,7 @@ export default {
 };
 
 export const dialog: DOMStubStory = domStub((resources, se) => {
-  const dialog = new NetBattleSelectorDialog({resources, se});
+  const dialog = new NetBattleSelectorDialog({ resources, se });
   dialog.notifyCasualMatchSelection().subscribe(() => {
     console.log("select casual match");
   });
