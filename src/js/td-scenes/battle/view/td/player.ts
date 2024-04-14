@@ -176,7 +176,7 @@ export function playerTDObjects(params: GenerateTDLayerObjectParams): TDPlayer {
       lightning: playerLightning(params),
     },
     armdozerEffects: {
-      powerUp: playerPowerUp(resources, gameObjectAction),
+      powerUp: playerPowerUp(params),
       reflect: playerReflectIndicator(resources, gameObjectAction),
       continuousAttack: playerContinuousAttack(params),
       damageHalved: playerDamageHalved(params),
@@ -203,7 +203,7 @@ export function enemyTDObject(params: GenerateTDLayerObjectParams): TDPlayer {
       lightning: enemyLightning(params),
     },
     armdozerEffects: {
-      powerUp: enemyPowerUp(resources, gameObjectAction),
+      powerUp: enemyPowerUp(params),
       reflect: enemyReflectIndicator(resources, gameObjectAction),
       continuousAttack: enemyContinuousAttack(params),
       damageHalved: enemyDamageHalved(params),
