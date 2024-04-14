@@ -1,3 +1,4 @@
+import { SEPlayer } from "../../../se/se-player";
 import { ContinuousAttackModel } from "../model/continuous-attack-model";
 import { ContinuousAttackSounds } from "../sounds/continuous-attack-sounds";
 
@@ -7,4 +8,6 @@ export type ContinuousAttackAnimationProps = {
   model: ContinuousAttackModel;
   /** サウンド */
   sounds: ContinuousAttackSounds;
+  /** SE再生オブジェクト */
+  se: SEPlayer;
 };
