@@ -185,7 +185,7 @@ export function playerTDObjects(params: GenerateTDLayerObjectParams): TDPlayer {
     batteryNumber: playerBatteryNumber(params),
     batteryCorrect: playerBatteryCorrect(params),
     recoverBattery: playerRecoverBattery(resources, gameObjectAction),
-    damageIndicator: playerDamageIndicator(resources, gameObjectAction),
+    damageIndicator: playerDamageIndicator(params),
   });
 }
 
@@ -212,6 +212,6 @@ export function enemyTDObject(params: GenerateTDLayerObjectParams): TDPlayer {
     batteryNumber: enemyBatteryNumber(params),
     batteryCorrect: enemyBatteryCorrect(params),
     recoverBattery: enemyRecoverBattery(resources, gameObjectAction),
-    damageIndicator: enemyDamageIndicator(resources, gameObjectAction),
+    damageIndicator: enemyDamageIndicator(params),
   });
 }
