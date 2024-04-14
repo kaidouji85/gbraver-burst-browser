@@ -6,32 +6,32 @@ import { ShinyaCutIn } from "./shinya";
 import { EnemyShinyaView } from "./view/enemy-shinya-view";
 import { PlayerShinyaView } from "./view/player-shinya-view";
 
+/** 生成パラメータ */
+export type GenerateShinyaCutInParams = {
+  /** リソース管理オブジェクト */
+  resources: Resources,
+  /** ゲームオブジェクトアクション */
+  gameObjectAction: Observable<GameObjectAction>,
+}
+
 /**
  * プレイヤー側 シンヤ カットイン
- *
- * @param resources リソース管理オブジェクト
- * @param gameObjectAction ゲームオブジェクトアクション
+ * @param params 生成パラメータ
  * @return シンヤ カットイン
  */
-export function playerShinyaCutIn(
-  resources: Resources,
-  gameObjectAction: Observable<GameObjectAction>,
-): ShinyaCutIn {
+export function playerShinyaCutIn(params: GenerateShinyaCutInParams): ShinyaCutIn {
+  const { resources } = params;
   const view = new PlayerShinyaView(resources);
-  return new ShinyaCutIn(view, resources, gameObjectAction);
+  return new ShinyaCutIn({...params, view});
 }
 
 /**
  * 敵側 シンヤ カットイン
- *
- * @param resources リソース管理オブジェクト
- * @param gameObjectAction ゲームオブジェクトアクション
+ * @param params 生成パラメータ
  * @return シンヤ カットイン
  */
-export function enemyShinyaCutIn(
-  resources: Resources,
-  gameObjectAction: Observable<GameObjectAction>,
-): ShinyaCutIn {
+export function enemyShinyaCutIn(params: GenerateShinyaCutInParams): ShinyaCutIn {
+  const { resources } = params;
   const view = new EnemyShinyaView(resources);
-  return new ShinyaCutIn(view, resources, gameObjectAction);
+  return new ShinyaCutIn({...params, view});
 }

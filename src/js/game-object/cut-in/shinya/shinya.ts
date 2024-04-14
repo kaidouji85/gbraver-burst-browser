@@ -3,13 +3,20 @@ import * as THREE from "three";
 
 import { Animate } from "../../../animation/animate";
 import type { PreRender } from "../../../game-loop/pre-render";
-import type { Resources } from "../../../resource";
 import type { GameObjectAction } from "../../action/game-object-action";
 import { hidden } from "./animation/hidden";
 import { show } from "./animation/show";
-import type { ShinyaView } from "./view/shinya-view";
+import {
+  createShinyaCutInProps,
+  GenerateShinyaCutInPropsParams,
+} from "./props/create-shinya-cutin-props";
 import { ShinyaCutInProps } from "./props/shinya-cutin-props";
-import { createShinyaCutInProps } from "./props/create-shinya-cutin-props";
+
+/** コンストラクタのパラメータ */
+export type ConstructShinyaCutInParams = GenerateShinyaCutInPropsParams & {
+  /** ゲームオブジェクトアクション */
+  gameObjectAction: Observable<GameObjectAction>;
+};
 
 /** シンヤ カットイン */
 export class ShinyaCutIn {
@@ -20,17 +27,11 @@ export class ShinyaCutIn {
 
   /**
    * コンストラクタ
-   *
-   * @param view ビュー
-   * @param resources リソース管理オブジェクト
-   * @param gameObjectAction ゲームオブジェクトアクション
+   * @param params パラメータ
    */
-  constructor(
-    view: ShinyaView,
-    resources: Resources,
-    gameObjectAction: Observable<GameObjectAction>,
-  ) {
-    this.#props = createShinyaCutInProps({ view, resources });
+  constructor(params: ConstructShinyaCutInParams) {
+    const { gameObjectAction } = params;
+    this.#props = createShinyaCutInProps(params);
     this.#unsubscriber = gameObjectAction.subscribe((action) => {
       if (action.type === "PreRender") {
         this.#onPreRender(action);
@@ -48,7 +49,6 @@ export class ShinyaCutIn {
 
   /**
    * カットインを表示する
-   *
    * @return アニメーション
    */
   show(): Animate {
@@ -57,7 +57,6 @@ export class ShinyaCutIn {
 
   /**
    * カットインを非表示にする
-   *
    * @return アニメーション
    */
   hidden(): Animate {
@@ -66,7 +65,6 @@ export class ShinyaCutIn {
 
   /**
    * シーンに追加するオブジェクトを取得する
-   *
    * @return シーンに追加するオブジェクト
    */
   getObject3D(): THREE.Object3D {
@@ -75,7 +73,6 @@ export class ShinyaCutIn {
 
   /**
    * プリレンダー時の処理
-   *
    * @param action アクション
    */
   #onPreRender(action: PreRender): void {

@@ -10,8 +10,8 @@ export default {
 };
 
 export const player = (): HTMLElement => {
-  const stub = new HUDGameObjectStub(({ resources, gameObjectAction }) => {
-    const pilot = playerShinyaCutIn(resources, gameObjectAction);
+  const stub = new HUDGameObjectStub((params) => {
+    const pilot = playerShinyaCutIn(params);
     pilot
       .show()
       .chain(delay(2000))
@@ -25,8 +25,8 @@ export const player = (): HTMLElement => {
 };
 
 export const enemy = (): HTMLElement => {
-  const stub = new HUDGameObjectStub(({ resources, gameObjectAction }) => {
-    const pilot = enemyShinyaCutIn(resources, gameObjectAction);
+  const stub = new HUDGameObjectStub((params) => {
+    const pilot = enemyShinyaCutIn(params);
     pilot
       .show()
       .chain(delay(2000))
