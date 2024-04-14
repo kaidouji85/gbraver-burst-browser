@@ -3,21 +3,16 @@ import * as THREE from "three";
 
 import { Animate } from "../../animation/animate";
 import type { PreRender } from "../../game-loop/pre-render";
-import type { Resources } from "../../resource";
 import type { GameObjectAction } from "../action/game-object-action";
 import { hidden, popUp, show } from "./animation/pop-up";
-import type { RecoverBatteryView } from "./view/recover-battery-view";
-import {RecoverBatteryProps} from "./props/recover-battery-props";
-import {createRecoverBatteryProps} from "./props/create-recover-battery-props";
+import {
+  createRecoverBatteryProps,
+  GenerateRecoverBatteryPropsParams,
+} from "./props/create-recover-battery-props";
+import { RecoverBatteryProps } from "./props/recover-battery-props";
 
-/**
- * コンストラクタのパラメータ
- */
-type Param = {
-  /** ビュー */
-  view: RecoverBatteryView;
-  /** リソース管理オブジェクト */
-  resources: Resources;
+/** コンストラクタのパラメータ */
+export type ConstructRecoverBatteryParams = GenerateRecoverBatteryPropsParams & {
   /** ゲームオブジェクトアクション */
   gameObjectAction: Observable<GameObjectAction>;
 };
@@ -36,7 +31,7 @@ export class RecoverBattery {
    *
    * @param param パラメータ
    */
-  constructor(param: Param) {
+  constructor(param: ConstructRecoverBatteryParams) {
     this.#props = createRecoverBatteryProps(param);
     this.#unsubscriber = param.gameObjectAction.subscribe((action) => {
       if (action.type === "Update") {
