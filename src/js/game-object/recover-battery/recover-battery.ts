@@ -50,31 +50,28 @@ export class RecoverBattery {
 
   /**
    * 回復バッテリーを一定時間表示する
-   *
    * @param value バッテリー回復量
    * @return アニメーション
    */
   popUp(value: number): Animate {
-    return popUp(this.#props.model, this.#props.sounds, value);
+    return popUp(this.#props, value);
   }
 
   /**
    * 表示
-   *
    * @param value バッテリー回復量
    * @return アニメーション
    */
   show(value: number): Animate {
-    return show(this.#props.model, this.#props.sounds, value);
+    return show(this.#props, value);
   }
 
   /**
    * 非表示
-   *
    * @return アニメーション
    */
   hidden(): Animate {
-    return hidden(this.#props.model);
+    return hidden(this.#props);
   }
 
   /**

@@ -1,13 +1,8 @@
-import { RecoverBatteryModel } from "../model/recover-battery-model";
-import { RecoverBatterySounds } from "../sounds/recover-battery-sounds";
+import { RecoverBatteryAnimationProps } from "../animation/animation-props";
 import { RecoverBatteryView } from "../view/recover-battery-view";
 
 /** バッテリー回復 プロパティ */
-export type RecoverBatteryProps = {
-  /** モデル */
-  model: RecoverBatteryModel;
+export type RecoverBatteryProps = RecoverBatteryAnimationProps & {
   /** ビュー */
   view: RecoverBatteryView;
-  /** サウンド */
-  sounds: RecoverBatterySounds;
 };
