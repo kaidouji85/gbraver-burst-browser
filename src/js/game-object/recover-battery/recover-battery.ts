@@ -3,35 +3,28 @@ import * as THREE from "three";
 
 import { Animate } from "../../animation/animate";
 import type { PreRender } from "../../game-loop/pre-render";
-import type { Resources } from "../../resource";
 import type { GameObjectAction } from "../action/game-object-action";
 import { hidden, popUp, show } from "./animation/pop-up";
-import { createInitialValue } from "./model/initial-value";
-import type { RecoverBatteryModel } from "./model/recover-battery-model";
-import { RecoverBatterySounds } from "./sounds/recover-battery-sounds";
-import type { RecoverBatteryView } from "./view/recover-battery-view";
+import {
+  createRecoverBatteryProps,
+  GenerateRecoverBatteryPropsParams,
+} from "./props/create-recover-battery-props";
+import { RecoverBatteryProps } from "./props/recover-battery-props";
 
-/**
- * コンストラクタのパラメータ
- */
-type Param = {
-  /** ビュー */
-  view: RecoverBatteryView;
-
-  /** リソース管理オブジェクト */
-  resources: Resources;
-
-  /** ゲームオブジェクトアクション */
-  gameObjectAction: Observable<GameObjectAction>;
-};
+/** コンストラクタのパラメータ */
+export type ConstructRecoverBatteryParams =
+  GenerateRecoverBatteryPropsParams & {
+    /** ゲームオブジェクトアクション */
+    gameObjectAction: Observable<GameObjectAction>;
+  };
 
 /**
  * バッテリー回復
  */
 export class RecoverBattery {
-  #model: RecoverBatteryModel;
-  #view: RecoverBatteryView;
-  #sounds: RecoverBatterySounds;
+  /** プロパティ */
+  #props: RecoverBatteryProps;
+  /** アンサブスクライバ */
   #unsubscriber: Unsubscribable;
 
   /**
@@ -39,10 +32,8 @@ export class RecoverBattery {
    *
    * @param param パラメータ
    */
-  constructor(param: Param) {
-    this.#model = createInitialValue();
-    this.#view = param.view;
-    this.#sounds = new RecoverBatterySounds(param.resources);
+  constructor(param: ConstructRecoverBatteryParams) {
+    this.#props = createRecoverBatteryProps(param);
     this.#unsubscriber = param.gameObjectAction.subscribe((action) => {
       if (action.type === "Update") {
         this.#update();
@@ -54,37 +45,34 @@ export class RecoverBattery {
 
   /** デストラクタ */
   destructor(): void {
-    this.#view.destructor();
+    this.#props.view.destructor();
     this.#unsubscriber.unsubscribe();
   }
 
   /**
    * 回復バッテリーを一定時間表示する
-   *
    * @param value バッテリー回復量
    * @return アニメーション
    */
   popUp(value: number): Animate {
-    return popUp(this.#model, this.#sounds, value);
+    return popUp(this.#props, value);
   }
 
   /**
    * 表示
-   *
    * @param value バッテリー回復量
    * @return アニメーション
    */
   show(value: number): Animate {
-    return show(this.#model, this.#sounds, value);
+    return show(this.#props, value);
   }
 
   /**
    * 非表示
-   *
    * @return アニメーション
    */
   hidden(): Animate {
-    return hidden(this.#model);
+    return hidden(this.#props);
   }
 
   /**
@@ -93,14 +81,14 @@ export class RecoverBattery {
    * @return シーンに追加するオブジェクト
    */
   getObject3D(): THREE.Object3D {
-    return this.#view.getObject3D();
+    return this.#props.view.getObject3D();
   }
 
   /**
    * ゲームオブジェクト状態更新
    */
   #update(): void {
-    this.#view.engage(this.#model);
+    this.#props.view.engage(this.#props.model);
   }
 
   /**
@@ -109,6 +97,6 @@ export class RecoverBattery {
    * @param action アクション
    */
   #preRender(action: PreRender): void {
-    this.#view.lookAt(action.camera);
+    this.#props.view.lookAt(action.camera);
   }
 }
