@@ -6,18 +6,17 @@ import type { PreRender } from "../../game-loop/pre-render";
 import type { Resources } from "../../resource";
 import type { GameObjectAction } from "../action/game-object-action";
 import { popUp } from "./animation/pop-up";
-import { createInitialValue } from "./model/initial-value";
-import type { PowerUpModel } from "./model/power-up-model";
-import { PowerUpSounds } from "./sounds/power-up-sounds";
+import { createPowerUpProps } from "./props/create-power-up-props";
+import { PowerUpProps } from "./props/power-up-props";
 import type { PowerUpView } from "./view/power-up-view";
 
 /**
  * 攻撃アップ
  */
 export class PowerUp {
-  #model: PowerUpModel;
-  #view: PowerUpView;
-  #sounds: PowerUpSounds;
+  /** プロパティ */
+  #props: PowerUpProps;
+  /** アンサブスクライバ */
   #unsubscriber: Unsubscribable;
 
   /**
@@ -32,9 +31,7 @@ export class PowerUp {
     resources: Resources,
     gameObjectAction: Observable<GameObjectAction>,
   ) {
-    this.#model = createInitialValue();
-    this.#view = view;
-    this.#sounds = new PowerUpSounds(resources);
+    this.#props = createPowerUpProps({ view, resources });
     this.#unsubscriber = gameObjectAction.subscribe((action) => {
       if (action.type === "Update") {
         this.#onUpdate();
@@ -46,7 +43,7 @@ export class PowerUp {
 
   /** デストラクタ相当の処理 */
   destructor(): void {
-    this.#view.destructor();
+    this.#props.view.destructor();
     this.#unsubscriber.unsubscribe();
   }
 
@@ -56,7 +53,7 @@ export class PowerUp {
    * @return アニメーション
    */
   popUp(): Animate {
-    return popUp(this.#model, this.#sounds);
+    return popUp(this.#props.model, this.#props.sounds);
   }
 
   /**
@@ -65,14 +62,14 @@ export class PowerUp {
    * @return シーンに追加するオブジェクト
    */
   getObject3D(): THREE.Object3D {
-    return this.#view.getObject3D();
+    return this.#props.view.getObject3D();
   }
 
   /**
    * アップデート時の処理
    */
   #onUpdate(): void {
-    this.#view.engage(this.#model);
+    this.#props.view.engage(this.#props.model);
   }
 
   /**
@@ -81,6 +78,6 @@ export class PowerUp {
    * @param action アクション
    */
   #onPreRender(action: PreRender): void {
-    this.#view.lookAt(action.camera);
+    this.#props.view.lookAt(action.camera);
   }
 }
