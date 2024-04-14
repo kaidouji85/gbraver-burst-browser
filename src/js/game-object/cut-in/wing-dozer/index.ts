@@ -6,32 +6,36 @@ import { EnemyWingDozerCutInView } from "./view/enemy-wing-dozer-cutin-view";
 import { PlayerWingDozerCutInView } from "./view/player-wing-dozer-cutin-view";
 import { WingDozerCutIn } from "./wing-dozer-cutin";
 
+/** 生成パラメータ */
+export type GenerateWingDozerCutInParams = {
+  /** リソース管理オブジェクト */
+  resources: Resources;
+  /** ゲームオブジェクトアクション */
+  gameObjectAction: Observable<GameObjectAction>;
+};
+
 /**
  * プレイヤー側 ウィングドーザ カットイン
- *
- * @param resources リソース管理オブジェクト
- * @param gameObjectAction ゲームオブジェクトアクション
+ * @param params 生成パラメータ
  * @return 生成結果
  */
 export function playerWingDozerCutIn(
-  resources: Resources,
-  gameObjectAction: Observable<GameObjectAction>,
+  params: GenerateWingDozerCutInParams,
 ): WingDozerCutIn {
+  const { resources } = params;
   const view = new PlayerWingDozerCutInView(resources);
-  return new WingDozerCutIn(view, gameObjectAction);
+  return new WingDozerCutIn({ ...params, view });
 }
 
 /**
  * 敵側 ウィングドーザ カットイン
- *
- * @param resources リソース管理オブジェクト
- * @param gameObjectAction ゲームオブジェクトアクション
+ * @param params 生成パラメータ
  * @return 生成結果
  */
 export function enemyWingDozerCutIn(
-  resources: Resources,
-  gameObjectAction: Observable<GameObjectAction>,
+  params: GenerateWingDozerCutInParams,
 ): WingDozerCutIn {
+  const { resources } = params;
   const view = new EnemyWingDozerCutInView(resources);
-  return new WingDozerCutIn(view, gameObjectAction);
+  return new WingDozerCutIn({ ...params, view });
 }

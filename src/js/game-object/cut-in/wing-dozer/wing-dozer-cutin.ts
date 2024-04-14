@@ -7,30 +7,33 @@ import type { HUDTracking } from "../../../tracking/hud-tracking";
 import type { GameObjectAction } from "../../action/game-object-action";
 import { hidden } from "./animation/hidden";
 import { show } from "./animation/show";
-import { createInitialValue } from "./model/initial-value";
-import type { WingDozerCutInModel } from "./model/wing-dozer-cutin-model";
-import type { WingDozerCutInView } from "./view/wing-dozer-cutin-view";
+import {
+  createWingDozerCutInProps,
+  GenerateWingDozerCutInPropsParams,
+} from "./props/create-wing-dozer-cutin-props";
+import { WingDozerCutInProps } from "./props/wing-dozer-cutin-props";
 
-/**
- * ウィングドーザ カットイン
- */
+/** コンストラクタのパラメータ */
+export type ConstructWingDozerCutInParams =
+  GenerateWingDozerCutInPropsParams & {
+    /** ゲームオブジェクトアクション */
+    gameObjectAction: Observable<GameObjectAction>;
+  };
+
+/** ウィングドーザ カットイン */
 export class WingDozerCutIn implements HUDTracking {
-  #model: WingDozerCutInModel;
-  #view: WingDozerCutInView;
+  /** プロパティ */
+  #props: WingDozerCutInProps;
+  /** アンサブスクライバ */
   #unsubscriber: Unsubscribable;
 
   /**
    * コンストラクタ
-   *
-   * @param view ビュー
-   * @param gameObjectAction ゲームオブジェクトアクション
+   * @param params パラメータ
    */
-  constructor(
-    view: WingDozerCutInView,
-    gameObjectAction: Observable<GameObjectAction>,
-  ) {
-    this.#model = createInitialValue();
-    this.#view = view;
+  constructor(params: ConstructWingDozerCutInParams) {
+    const { gameObjectAction } = params;
+    this.#props = createWingDozerCutInProps(params);
     this.#unsubscriber = gameObjectAction.subscribe((action) => {
       if (action.type === "PreRender") {
         this.#onPreRender(action);
@@ -42,55 +45,45 @@ export class WingDozerCutIn implements HUDTracking {
    * デストラクタ相当の処理
    */
   destructor(): void {
-    this.#view.destructor();
+    this.#props.view.destructor();
     this.#unsubscriber.unsubscribe();
   }
 
   /**
    * シーンに追加するオブジェクトを取得する
-   *
    * @return シーンに追加するオブジェクト
    */
   getObject3D(): THREE.Object3D {
-    return this.#view.getObject3D();
+    return this.#props.view.getObject3D();
   }
 
   /**
    * カットインを表示する
-   *
    * @return アニメーション
    */
   show(): Animate {
-    return show(this.#model);
+    return show(this.#props);
   }
 
   /**
    * カットインを消す
-   *
    * @return アニメーション
    */
   hidden(): Animate {
-    return hidden(this.#model);
+    return hidden(this.#props);
   }
 
-  /**
-   * 3Dレイヤーのオブジェクトをトラッキングする
-   * 本メソッドにはHUDレイヤー系座標をセットすること
-   *
-   * @param x x座標
-   * @param y y座標
-   */
+  /** @override */
   tracking(x: number, y: number): void {
-    this.#model.tracking.x = x;
-    this.#model.tracking.y = y;
+    this.#props.model.tracking.x = x;
+    this.#props.model.tracking.y = y;
   }
 
   /**
    * プリレンダー時の処理
-   *
    * @param action アクション
    */
   #onPreRender(action: PreRender): void {
-    this.#view.engage(this.#model, action);
+    this.#props.view.engage(this.#props.model, action);
   }
 }
