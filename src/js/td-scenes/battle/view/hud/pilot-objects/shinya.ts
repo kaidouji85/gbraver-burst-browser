@@ -59,10 +59,10 @@ export class ShinyaHUD implements HUDPilotObjects {
 export function playerShinyaHUD(
   params: GenerateHUDLayerObjectParams,
 ): ShinyaHUD {
-  const { resources, player, gameObjectAction } = params;
+  const { player } = params;
   return new ShinyaHUD({
     playerId: player.playerId,
-    cutIn: playerShinyaCutIn(resources, gameObjectAction),
+    cutIn: playerShinyaCutIn(params),
   });
 }
 
@@ -74,9 +74,9 @@ export function playerShinyaHUD(
 export function enemyShinyaHUD(
   params: GenerateHUDLayerObjectParams,
 ): ShinyaHUD {
-  const { resources, enemy, gameObjectAction } = params;
+  const { enemy } = params;
   return new ShinyaHUD({
     playerId: enemy.playerId,
-    cutIn: enemyShinyaCutIn(resources, gameObjectAction),
+    cutIn: enemyShinyaCutIn(params),
   });
 }
