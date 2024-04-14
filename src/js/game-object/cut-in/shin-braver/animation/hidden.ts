@@ -1,14 +1,14 @@
 import { Animate } from "../../../../animation/animate";
 import { tween } from "../../../../animation/tween";
-import type { ShinBraverCutInModel } from "../model/shin-braver-cutin-model";
+import { ShinBraverCutInAnimationProps } from "./animation-props";
 
 /**
  * カットインを非表示にする
- *
- * @param model モデル
+ * @param props アニメーションプロパティ
  * @return アニメーション
  */
-export function hidden(model: ShinBraverCutInModel): Animate {
+export function hidden(props: ShinBraverCutInAnimationProps): Animate {
+  const { model } = props;
   return tween(model, (t) =>
     t.to(
       {

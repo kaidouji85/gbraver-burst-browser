@@ -52,10 +52,10 @@ export class ShinBraverHUD implements HUDArmdozerObjects {
 export function playerShinBraverHUD(
   params: GenerateHUDLayerObjectParams,
 ): HUDArmdozerObjects {
-  const { resources, player, gameObjectAction } = params;
+  const { player } = params;
   return new ShinBraverHUD({
     playerId: player.playerId,
-    cutIn: playerShinBraverCutIn(resources, gameObjectAction),
+    cutIn: playerShinBraverCutIn(params),
   });
 }
 
@@ -67,9 +67,9 @@ export function playerShinBraverHUD(
 export function enemyShinBraverHUD(
   params: GenerateHUDLayerObjectParams,
 ): HUDArmdozerObjects {
-  const { resources, enemy, gameObjectAction } = params;
+  const { enemy } = params;
   return new ShinBraverHUD({
     playerId: enemy.playerId,
-    cutIn: enemyShinBraverCutIn(resources, gameObjectAction),
+    cutIn: enemyShinBraverCutIn(params),
   });
 }
