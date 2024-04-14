@@ -3,6 +3,7 @@ import { Subject } from "rxjs";
 
 import { Exclusive } from "../../../exclusive/exclusive";
 import { SoundResource } from "../../../resource/sound/resource";
+import { SEPlayer } from "../../../se/se-player";
 import { ArmdozerIcon } from "./armdozer-icon";
 import { ArmdozerStatus } from "./armdozer-status";
 
@@ -26,6 +27,8 @@ export type ArmdozerSelectorProps = {
   changeValueSound: SoundResource;
   /** 決定 効果音 */
   decideSound: SoundResource;
+  /** SE再生オブジェクト */
+  se: SEPlayer;
   /** 選択変更通知ストリーム */
   change: Subject<ArmdozerId>;
   /** 決定通知ストリーム */

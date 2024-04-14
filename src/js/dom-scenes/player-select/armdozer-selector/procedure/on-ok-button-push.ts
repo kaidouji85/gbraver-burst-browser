@@ -13,7 +13,7 @@ export function onOkButtonPush(
 ) {
   props.exclusive.execute(async (): Promise<void> => {
     action.event.preventDefault();
-    props.decideSound.sound.play();
+    props.se.play(props.decideSound);
     await pop(props.okButton);
     props.decide.next(props.armdozerId);
   });

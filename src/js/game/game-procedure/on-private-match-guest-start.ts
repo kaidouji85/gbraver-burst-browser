@@ -27,7 +27,7 @@ export async function onPrivateMatchGuestStart(
   };
   await props.fader.fadeOut();
   const scene = new PlayerSelect({
-    resources: props.resources,
+    ...props,
     armdozerIds: getPlayableArmdozers(props),
     pilotIds: getPlayablePilots(props),
   });
