@@ -9,20 +9,22 @@ import { PlayerTsubasaView } from "./view/player-tsubasa-view";
 /** 生成パラメータ */
 export type GenerateTsubasaCutInParams = {
   /** リソース管理オブジェクト */
-  resources: Resources,
+  resources: Resources;
   /** ゲームオブジェクトアクション */
-  gameObjectAction: Observable<GameObjectAction>,
-}
+  gameObjectAction: Observable<GameObjectAction>;
+};
 
 /**
  * プレイヤー側 ツバサ カットイン
  * @param params 生成パラメータ
  * @return ツバサ カットイン
  */
-export function playerTsubasaCutIn(params: GenerateTsubasaCutInParams): TsubasaCutIn {
+export function playerTsubasaCutIn(
+  params: GenerateTsubasaCutInParams,
+): TsubasaCutIn {
   const { resources } = params;
   const view = new PlayerTsubasaView(resources);
-  return new TsubasaCutIn({...params , view});
+  return new TsubasaCutIn({ ...params, view });
 }
 
 /**
@@ -30,8 +32,10 @@ export function playerTsubasaCutIn(params: GenerateTsubasaCutInParams): TsubasaC
  * @param params 生成パラメータ
  * @return ツバサ カットイン
  */
-export function enemyTsubasaCutIn(params: GenerateTsubasaCutInParams): TsubasaCutIn {
+export function enemyTsubasaCutIn(
+  params: GenerateTsubasaCutInParams,
+): TsubasaCutIn {
   const { resources } = params;
   const view = new EnemyTsubasaView(resources);
-  return new TsubasaCutIn({...params , view});
+  return new TsubasaCutIn({ ...params, view });
 }
