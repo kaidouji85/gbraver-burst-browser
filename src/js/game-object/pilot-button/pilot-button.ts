@@ -24,9 +24,7 @@ export class PilotButton {
 
   /**
    * コンストラクタ
-   * @param resources リソース管理オブジェクト
-   * @param pilotIcon パイロットアイコン
-   * @param gameObjectAction ゲームオブジェクトアクション
+   * @param params パラメータ
    */
   constructor(params: Params) {
     const { gameObjectAction } = params;
