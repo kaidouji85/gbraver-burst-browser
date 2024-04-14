@@ -1,10 +1,8 @@
 import { Observable, Subject, Unsubscribable } from "rxjs";
 
-import type { Resources } from "../../resource";
 import type { GameAction } from "../game-actions";
 import type { DomFloaterActionConnector } from "./dom-floater-action-connector";
-import {PostBattleFloater, ShowParams} from "./post-battle/post-battle";
-import type { PostBattleButtonConfig } from "./post-battle/post-battle-button-config";
+import { PostBattleFloater, ShowParams } from "./post-battle/post-battle";
 
 /** コンストラクタのパラメータ */
 type ConstructDOMFloatersParams = {

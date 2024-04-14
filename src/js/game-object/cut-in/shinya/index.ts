@@ -1,7 +1,7 @@
 import { Observable } from "rxjs";
 
 import type { Resources } from "../../../resource";
-import {SEPlayer} from "../../../se/se-player";
+import { SEPlayer } from "../../../se/se-player";
 import type { GameObjectAction } from "../../action/game-object-action";
 import { ShinyaCutIn } from "./shinya";
 import { EnemyShinyaView } from "./view/enemy-shinya-view";

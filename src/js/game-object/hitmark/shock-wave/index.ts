@@ -1,7 +1,7 @@
 import { Observable } from "rxjs";
 
 import type { Resources } from "../../../resource";
-import {SEPlayer} from "../../../se/se-player";
+import { SEPlayer } from "../../../se/se-player";
 import type { GameObjectAction } from "../../action/game-object-action";
 import { initialValue } from "./model/initial-value";
 import { ShockWave } from "./shock-wave";
