@@ -10,11 +10,11 @@ import { BatteryEnchantmentAnimationProps } from "./animation-props";
  * @return アニメーション
  */
 export function popUp(props: BatteryEnchantmentAnimationProps): Animate {
-  const { model, sounds } = props;
+  const { model, sounds, se } = props;
   return onStart(() => {
     model.opacity = 0;
     model.scale = 1.2;
-    sounds.benefitEffect.sound.play();
+    se.play(sounds.benefitEffect);
   })
     .chain(
       tween(model, (t) =>
