@@ -1,10 +1,8 @@
-import { DamageIndicatorModel } from "../model/damage-indicator-model";
 import { DamageIndicatorView } from "../view/damage-indicator-view";
+import { DamageIndicatorAnimationProps } from "../animation/animation-props";
 
 /** ダメージインジケータプロパティ */
-export type DamageIndicatorProps = {
-  /** モデル */
-  model: DamageIndicatorModel;
+export type DamageIndicatorProps = DamageIndicatorAnimationProps & {
   /** ビュー */
   view: DamageIndicatorView;
 };

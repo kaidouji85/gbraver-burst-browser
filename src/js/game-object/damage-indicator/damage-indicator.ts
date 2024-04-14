@@ -6,13 +6,17 @@ import type { PreRender } from "../../game-loop/pre-render";
 import type { GameObjectAction } from "../action/game-object-action";
 import { popUp } from "./animation/pop-up";
 import { DamageIndicatorProps } from "./props/damage-indicator-props";
-import {createDamageIndicatorProps, GenerateDamageIndicatorPropsParams} from "./props/create-damage-indicator-props";
+import {
+  createDamageIndicatorProps,
+  GenerateDamageIndicatorPropsParams,
+} from "./props/create-damage-indicator-props";
 
 /** コンストラクタのパラメータ */
-export type ConstructDamageIndicatorParams = GenerateDamageIndicatorPropsParams & {
-  /** ゲームオブジェクトアクション */
-  gameObjectAction: Observable<GameObjectAction>,
-}
+export type ConstructDamageIndicatorParams =
+  GenerateDamageIndicatorPropsParams & {
+    /** ゲームオブジェクトアクション */
+    gameObjectAction: Observable<GameObjectAction>;
+  };
 
 /** ダメージインジケータ */
 export class DamageIndicator {
@@ -45,7 +49,7 @@ export class DamageIndicator {
 
   /** ダメージ数字を表示する */
   popUp(damage: number): Animate {
-    return popUp(this.#props.model, damage);
+    return popUp(this.#props, damage);
   }
 
   /** シーンに追加するオブジェクトを取得する */
