@@ -5,6 +5,7 @@ import { Resources } from "../../resource";
 import { createEmptySoundResource } from "../../resource/sound/empty-sound-resource";
 import { SOUND_IDS } from "../../resource/sound/ids";
 import { SoundResource } from "../../resource/sound/resource";
+import { SEPlayer } from "../../se/se-player";
 import { domUuid } from "../../uuid/dom-uuid";
 import { BatteryButton } from "./battery-button";
 import { BurstButton } from "./burst-button";
@@ -30,16 +31,27 @@ export type MiniControllerProps = {
   batteryPush: Observable<number>;
   /** ボタン押下サウンド */
   pushButtonSound: SoundResource;
+  /** SE再生 */
+  se: SEPlayer;
+};
+
+/** 生成パラメータ */
+export type GenerateMiniControllerProps = {
+  /** リソース管理オブジェクト */
+  resources: Resources;
+  /** SE再生 */
+  se: SEPlayer;
 };
 
 /**
  * ミニコントローラープロパティを生成する
- * @param resources リソース管理オブジェクト
+ * @param params 生成パラメータ
  * @return 生成結果
  */
 export function createMiniControllerProps(
-  resources: Resources,
+  params: GenerateMiniControllerProps,
 ): MiniControllerProps {
+  const { resources, se } = params;
   const root = document.createElement("div");
   root.className = ROOT_INVISIBLE;
   const ids = { batteries: domUuid(), burst: domUuid(), pilot: domUuid() };
@@ -69,5 +81,6 @@ export function createMiniControllerProps(
     burstButton: burst,
     pilotButton: pilot,
     pushButtonSound,
+    se,
   };
 }

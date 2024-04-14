@@ -1,13 +1,19 @@
 import { Observable } from "rxjs";
 
 import { Animate } from "../../animation/animate";
-import { Resources } from "../../resource";
 import { ButtonConfig } from "./button-config";
 import { decided } from "./procedure/decided";
 import { engageButtonConfig } from "./procedure/engage-button-config";
 import { hidden } from "./procedure/hidden";
 import { show } from "./procedure/show";
-import { createMiniControllerProps, MiniControllerProps } from "./props";
+import {
+  createMiniControllerProps,
+  GenerateMiniControllerProps,
+  MiniControllerProps,
+} from "./props";
+
+/** コンストラクタのパラメータ */
+export type ConstructMiniControllerParams = GenerateMiniControllerProps;
 
 /**
  * ミニコントローラ
@@ -19,10 +25,10 @@ export class MiniController {
 
   /**
    * コンストラクタ
-   * @param resources リソース管理オブジェクト
+   * @param params コンストラクタのパラメータ
    */
-  constructor(resources: Resources) {
-    this.#props = createMiniControllerProps(resources);
+  constructor(params: ConstructMiniControllerParams) {
+    this.#props = createMiniControllerProps(params);
   }
 
   /**
