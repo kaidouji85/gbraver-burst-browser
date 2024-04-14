@@ -21,7 +21,6 @@ export function loadSound(
     });
     const resource: SoundResource = {
       id: config.id,
-      type: config.type,
       sound: sound,
       volumeScale: config.volumeScale,
     };

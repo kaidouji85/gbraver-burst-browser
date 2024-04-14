@@ -9,7 +9,6 @@ import { SoundResource } from "./resource";
 export function createEmptySoundResource(): SoundResource {
   return {
     id: "EmptyResource",
-    type: "SE",
     sound: new Howl({
       src: "",
       mute: true,
