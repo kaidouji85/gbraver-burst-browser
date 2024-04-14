@@ -1,13 +1,8 @@
-import { ShinyaModel } from "../model/shinya-model";
-import { ShinyaSounds } from "../sounds/shinya-sounds";
+import { ShinyaCutInAnimationProps } from "../animation/animation-props";
 import { ShinyaView } from "../view/shinya-view";
 
 /** シンヤ カットイン プロパティ */
-export type ShinyaCutInProps = {
-  /** モデル */
-  model: ShinyaModel;
+export type ShinyaCutInProps = ShinyaCutInAnimationProps & {
   /** ビュー */
   view: ShinyaView;
-  /** サウンド */
-  sounds: ShinyaSounds;
 };

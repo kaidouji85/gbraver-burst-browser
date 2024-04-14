@@ -2,19 +2,18 @@ import { all } from "../../../../animation/all";
 import { Animate } from "../../../../animation/animate";
 import { onStart } from "../../../../animation/on-start";
 import { tween } from "../../../../animation/tween";
-import type { ShinyaModel } from "../model/shinya-model";
-import { ShinyaSounds } from "../sounds/shinya-sounds";
+import { ShinyaCutInAnimationProps } from "./animation-props";
 
 /** アニメ時間 */
 const duration = 400;
 
 /**
  * カットインを表示する
- * @param model モデル
- * @param sounds 効果音
+ * @param props アニメーションプロパティ
  * @return アニメーション
  */
-export function show(model: ShinyaModel, sounds: ShinyaSounds): Animate {
+export function show(props: ShinyaCutInAnimationProps): Animate {
+  const { model, sounds } = props;
   return onStart(() => {
     model.opacity = 0;
     model.position.x = -25;
