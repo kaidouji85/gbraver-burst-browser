@@ -7,13 +7,20 @@ import type { HUDTracking } from "../../../tracking/hud-tracking";
 import type { GameObjectAction } from "../../action/game-object-action";
 import { hidden } from "./animation/hidden";
 import { show } from "./animation/show";
-import type { WingDozerCutInView } from "./view/wing-dozer-cutin-view";
 import { WingDozerCutInProps } from "./props/wing-dozer-cutin-props";
-import { createWingDozerCutInProps } from "./props/create-wing-dozer-cutin-props";
+import {
+  createWingDozerCutInProps,
+  GenerateWingDozerCutInPropsParams,
+} from "./props/create-wing-dozer-cutin-props";
 
-/**
- * ウィングドーザ カットイン
- */
+/** コンストラクタのパラメータ */
+export type ConstructWingDozerCutInParams =
+  GenerateWingDozerCutInPropsParams & {
+    /** ゲームオブジェクトアクション */
+    gameObjectAction: Observable<GameObjectAction>;
+  };
+
+/** ウィングドーザ カットイン */
 export class WingDozerCutIn implements HUDTracking {
   /** プロパティ */
   #props: WingDozerCutInProps;
@@ -22,15 +29,11 @@ export class WingDozerCutIn implements HUDTracking {
 
   /**
    * コンストラクタ
-   *
-   * @param view ビュー
-   * @param gameObjectAction ゲームオブジェクトアクション
+   * @param params パラメータ
    */
-  constructor(
-    view: WingDozerCutInView,
-    gameObjectAction: Observable<GameObjectAction>,
-  ) {
-    this.#props = createWingDozerCutInProps({ view });
+  constructor(params: ConstructWingDozerCutInParams) {
+    const { gameObjectAction } = params;
+    this.#props = createWingDozerCutInProps(params);
     this.#unsubscriber = gameObjectAction.subscribe((action) => {
       if (action.type === "PreRender") {
         this.#onPreRender(action);
