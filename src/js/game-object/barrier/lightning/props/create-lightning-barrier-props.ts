@@ -1,6 +1,7 @@
 import * as TWEEN from "@tweenjs/tween.js";
 
 import { Resources } from "../../../../resource";
+import { SEPlayer } from "../../../../se/se-player";
 import { createInitialValue } from "../model/initial-value";
 import { LightningBarrierSounds } from "../sounds/lightning-barrier-sounds";
 import { LightningBarrierView } from "../view/lightning-barrier-view";
@@ -10,6 +11,8 @@ import { LightningBarrierProps } from "./lightning-barrier-props";
 export type GenerateLightningBarrierPropsParams = {
   /** リソース管理オブジェクト */
   resources: Resources;
+  /** SE再生オブジェクト */
+  se: SEPlayer;
 };
 
 /**
@@ -22,6 +25,7 @@ export function createLightningBarrierProps(
 ): LightningBarrierProps {
   const { resources } = params;
   return {
+    ...params,
     model: createInitialValue(),
     view: new LightningBarrierView(resources),
     sounds: new LightningBarrierSounds(resources),
