@@ -3,16 +3,21 @@ import * as THREE from "three";
 
 import { Animate } from "../../animation/animate";
 import type { PreRender } from "../../game-loop/pre-render";
-import type { Resources } from "../../resource";
 import type { GameObjectAction } from "../action/game-object-action";
 import { popUp } from "./animation/pop-up";
-import { createPowerUpProps } from "./props/create-power-up-props";
+import {
+  createPowerUpProps,
+  GeneratePowerUpPropsParams,
+} from "./props/create-power-up-props";
 import { PowerUpProps } from "./props/power-up-props";
-import type { PowerUpView } from "./view/power-up-view";
 
-/**
- * 攻撃アップ
- */
+/** コンストラクタのパラメータ */
+export type ConstructPowerUpParams = GeneratePowerUpPropsParams & {
+  /** ゲームオブジェクトアクション */
+  gameObjectAction: Observable<GameObjectAction>;
+};
+
+/** 攻撃アップ */
 export class PowerUp {
   /** プロパティ */
   #props: PowerUpProps;
@@ -21,17 +26,11 @@ export class PowerUp {
 
   /**
    * コンストラクタ
-   *
-   * @param view ビュー
-   * @param resources リソース管理オブジェクト
-   * @param gameObjectAction ゲームオブジェクトアクション
+   * @param params パラメータ
    */
-  constructor(
-    view: PowerUpView,
-    resources: Resources,
-    gameObjectAction: Observable<GameObjectAction>,
-  ) {
-    this.#props = createPowerUpProps({ view, resources });
+  constructor(params: ConstructPowerUpParams) {
+    const { gameObjectAction } = params;
+    this.#props = createPowerUpProps(params);
     this.#unsubscriber = gameObjectAction.subscribe((action) => {
       if (action.type === "Update") {
         this.#onUpdate();
