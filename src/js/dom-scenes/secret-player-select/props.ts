@@ -2,6 +2,7 @@ import { Subject } from "rxjs";
 
 import { Exclusive } from "../../exclusive/exclusive";
 import { SoundResource } from "../../resource/sound/resource";
+import { SEPlayer } from "../../se/se-player";
 import { ArmdozerIcon } from "./armdozer-icon";
 import { ArmdozerSelection } from "./armdozer-selection";
 import { PilotIcon } from "./pilot-icon";
@@ -42,6 +43,8 @@ export type SecretPlayerSelectProps = {
   pushButtonSound: SoundResource;
   /** 値変更音 */
   changeValueSound: SoundResource;
+  /** SE再生オブジェクト */
+  se: SEPlayer;
 
   /** 選択完了通知ストリーム */
   ok: Subject<PlayerSelection>;

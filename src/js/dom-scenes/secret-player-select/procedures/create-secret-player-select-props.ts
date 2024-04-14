@@ -5,6 +5,7 @@ import { Exclusive } from "../../../exclusive/exclusive";
 import { Resources } from "../../../resource";
 import { createEmptySoundResource } from "../../../resource/sound/empty-sound-resource";
 import { SOUND_IDS } from "../../../resource/sound/ids";
+import {SEPlayer} from "../../../se/se-player";
 import { ArmdozerIcon } from "../armdozer-icon";
 import { ROOT } from "../dom/class-name";
 import {
@@ -25,6 +26,8 @@ import { SecretPlayerSelectProps } from "../props";
 export type CreateSecretPlayerSelectPropsParams = {
   /** リソース管理オブジェクト */
   resources: Resources;
+  /** SE再生オブジェクト */
+  se: SEPlayer;
   /** 選択可能なアームドーザID */
   armdozerIds: ArmdozerId[];
   /** 選択可能なパイロットID */
@@ -59,6 +62,7 @@ export function createSecretPlayerSelectProps(
   });
 
   return {
+    ...params,
     root,
     armdozerSelectionIndicator: extractArmdozerSelectionIndicator(root),
     armdozerSelectionDetail: extractArmdozerSelectionDetail(root),

@@ -28,7 +28,7 @@ export function onArmdozerIconPush(
   props.armdozerSelectionDetail.innerText = getArmdozerSeelctionDetail(
     props.armdozerSelection,
   );
-  props.pushButtonSound.sound.play();
+  props.se.play(props.pushButtonSound);
   pop(props.armdozerSelectionIndicator, 1.2);
   enableOKButtonIfNeeded(props);
 }

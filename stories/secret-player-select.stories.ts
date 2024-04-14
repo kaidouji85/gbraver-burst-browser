@@ -8,9 +8,10 @@ export default {
 };
 
 /** シーン通常表示 */
-export const scene = domStub((resources) => {
+export const scene = domStub((resources, se) => {
   const scene = new SecretPlayerSelect({
     resources,
+    se,
     armdozerIds: [
       ArmdozerIds.SHIN_BRAVER,
       ArmdozerIds.WING_DOZER,

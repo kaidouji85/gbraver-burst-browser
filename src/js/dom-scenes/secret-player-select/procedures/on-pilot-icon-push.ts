@@ -28,7 +28,7 @@ export function onPilotIconPush(
   props.pilotSelectionDetail.innerText = getPilotSeelctionDetail(
     props.pilotSelection,
   );
-  props.pushButtonSound.sound.play();
+  props.se.play(props.pushButtonSound);
   pop(props.pilotSelectionIndicator, 1.2);
   enableOKButtonIfNeeded(props);
 }

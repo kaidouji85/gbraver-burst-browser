@@ -20,7 +20,7 @@ export async function onOKButtonPush(
   }
 
   props.exclusive.execute(async () => {
-    props.pushButtonSound.sound.play();
+    props.se.play(props.pushButtonSound);
     await pop(props.okButton);
     props.ok.next(playerSelection);
   });
