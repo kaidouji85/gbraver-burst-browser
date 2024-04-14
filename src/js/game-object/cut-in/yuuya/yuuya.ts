@@ -3,16 +3,17 @@ import * as THREE from "three";
 
 import { Animate } from "../../../animation/animate";
 import type { PreRender } from "../../../game-loop/pre-render";
-import type { Resources } from "../../../resource";
 import type { GameObjectAction } from "../../action/game-object-action";
 import { hidden } from "./animation/hidden";
 import { show } from "./animation/show";
-import { createInitialValue } from "./model/initial-value";
-import type { YuuyaModel } from "./model/yuuya-model";
-import { YuuyaSounds } from "./sounds/yuuya-sounds";
-import type { YuuyaView } from "./view/yuuya-view";
-import {YuuyaCutInProps} from "./props/yuuya-cutin-props";
-import {createYuuyaCutInProps} from "./props/create-yuuya-cutin-props";
+import {createYuuyaCutInProps, GenerateYuuyaCutInPropsParams} from "./props/create-yuuya-cutin-props";
+import { YuuyaCutInProps } from "./props/yuuya-cutin-props";
+
+/** コンストラクタのパラメータ */
+export type ConstructYuuyaCutInParams = GenerateYuuyaCutInPropsParams & {
+  /** ゲームオブジェクトアクション */
+  gameObjectAction: Observable<GameObjectAction>,
+}
 
 /** ユウヤ カットイン */
 export class YuuyaCutIn {
@@ -23,16 +24,11 @@ export class YuuyaCutIn {
 
   /**
    * コンストラクタ
-   * @param view ビュー
-   * @param resources リソース管理オブジェクト
-   * @param gameObjectAction ゲームオブジェクトアクション
+   * @param params パラメータ
    */
-  constructor(
-    view: YuuyaView,
-    resources: Resources,
-    gameObjectAction: Observable<GameObjectAction>,
-  ) {
-    this.#props = createYuuyaCutInProps({ view, resources });
+  constructor(params: ConstructYuuyaCutInParams) {
+    const { gameObjectAction } = params;
+    this.#props = createYuuyaCutInProps(params);
     this.#unsubscriber = gameObjectAction.subscribe((action) => {
       if (action.type === "PreRender") {
         this.#onPreRender(action);

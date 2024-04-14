@@ -50,10 +50,10 @@ export class YuuyaHUD implements HUDPilotObjects {
  * @return ユウヤHUD
  */
 export function playerYuuyaHUD(params: GenerateHUDLayerObjectParams): YuuyaHUD {
-  const { resources, player, gameObjectAction } = params;
+  const { player } = params;
   return new YuuyaHUD({
     playerId: player.playerId,
-    cutIn: playerYuuyaCutIn(resources, gameObjectAction),
+    cutIn: playerYuuyaCutIn(params),
   });
 }
 
@@ -63,9 +63,9 @@ export function playerYuuyaHUD(params: GenerateHUDLayerObjectParams): YuuyaHUD {
  * @return ユウヤHUD
  */
 export function enemyYuuyaHUD(params: GenerateHUDLayerObjectParams): YuuyaHUD {
-  const { resources, enemy, gameObjectAction } = params;
+  const { enemy } = params;
   return new YuuyaHUD({
     playerId: enemy.playerId,
-    cutIn: enemyYuuyaCutIn(resources, gameObjectAction),
+    cutIn: enemyYuuyaCutIn(params),
   });
 }
