@@ -30,7 +30,7 @@ export function startGameAnimation(
   return empty().chain(
     delay(800),
     onStart(() => {
-      props.sounds.batteryRecover.sound.play();
+      props.se.play(props.sounds.batteryRecover);
     }),
     activeHUDPlayer.turnStart
       .show()

@@ -1,4 +1,5 @@
 import { Resources } from "../../../../resource";
+import { SEPlayer } from "../../../../se/se-player";
 import { createInitialValue } from "../model/initial-value";
 import { ShinyaSounds } from "../sounds/shinya-sounds";
 import { ShinyaView } from "../view/shinya-view";
@@ -10,6 +11,8 @@ export type GenerateShinyaCutInPropsParams = {
   view: ShinyaView;
   /** リソース管理オブジェクト */
   resources: Resources;
+  /** 効果音再生オブジェクト */
+  se: SEPlayer;
 };
 
 /**
@@ -20,10 +23,10 @@ export type GenerateShinyaCutInPropsParams = {
 export function createShinyaCutInProps(
   params: GenerateShinyaCutInPropsParams,
 ): ShinyaCutInProps {
-  const { view, resources } = params;
+  const { resources } = params;
   return {
+    ...params,
     model: createInitialValue(),
-    view,
     sounds: new ShinyaSounds(resources),
   };
 }

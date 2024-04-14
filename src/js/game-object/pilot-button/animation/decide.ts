@@ -9,10 +9,10 @@ import { PilotButtonAnimationProps } from "./animation-props";
  * @return アニメーション
  */
 export function decide(props: PilotButtonAnimationProps): Animate {
-  const { model, sounds } = props;
+  const { model, sounds, se } = props;
   return onStart(() => {
     model.shouldPushNotifierStop = true;
-    sounds.pushButton.sound.play();
+    se.play(sounds.pushButton);
   })
     .chain(
       tween(model, (t) =>

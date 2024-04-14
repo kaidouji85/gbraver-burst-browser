@@ -1,6 +1,7 @@
 import { Observable } from "rxjs";
 
 import type { Resources } from "../../../resource";
+import { SEPlayer } from "../../../se/se-player";
 import type { GameObjectAction } from "../../action/game-object-action";
 import { GenesisBraver } from "./genesis-braver";
 import { EnemyGenesisBraverView } from "./view/enemy-genesis-braver-view";
@@ -12,6 +13,8 @@ type GenerateGenesisBraverParams = {
   resources: Resources;
   /** ゲームオブジェクトアクション */
   gameObjectAction: Observable<GameObjectAction>;
+  /** SE再生 */
+  se: SEPlayer;
 };
 
 /**

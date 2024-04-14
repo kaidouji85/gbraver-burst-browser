@@ -25,7 +25,7 @@ export async function onPrivateMatchEntry(
   }
 
   props.domDialogBinder.bind(
-    new MatchingDialog(props.resources),
+    new MatchingDialog(props),
     matchingDialogConnector,
   );
   await props.api.disconnectWebsocket();
@@ -37,7 +37,7 @@ export async function onPrivateMatchEntry(
   );
   if (!battle) {
     props.domDialogBinder.bind(
-      new RejectPrivateMatchEntryDialog(props.resources),
+      new RejectPrivateMatchEntryDialog(props),
       rejectPrivateMatcEntryDialogConnector,
     );
     return;

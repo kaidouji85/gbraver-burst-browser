@@ -84,7 +84,7 @@ export class DOMLayer {
       facePosition: "Left",
     });
     this.enemyShoutMessageWindow.visible(false);
-    this.miniController = new MiniController(resources);
+    this.miniController = new MiniController(params);
     this.#battleAction = merge(
       this.miniController.batteryPushNotifier().pipe(
         map(

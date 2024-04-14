@@ -1,13 +1,19 @@
 import { ArmdozerId } from "gbraver-burst-core";
 import { Observable, Unsubscribable } from "rxjs";
 
-import { Resources } from "../../../resource";
 import { bindEventListener } from "./procedure/bind-event-listener";
-import { createArmdozerSelectorProps } from "./procedure/create-armdozer-selector-props";
+import {
+  createArmdozerSelectorProps,
+  GenerateArmdozerSelectorPropsParams,
+} from "./procedure/create-armdozer-selector-props";
 import { hidden } from "./procedure/hidden";
 import { show } from "./procedure/show";
 import { waitUntilLoaded } from "./procedure/wait-until-loaded";
 import { ArmdozerSelectorProps } from "./props";
+
+/** コンストラクタのパラメータ */
+export type ConstructArmdozerSelectorParams =
+  GenerateArmdozerSelectorPropsParams;
 
 /** アームドーザセレクタ */
 export class ArmdozerSelector {
@@ -18,20 +24,10 @@ export class ArmdozerSelector {
 
   /**
    * コンストラクタ
-   * @param resources リソース管理オブジェクト
-   * @param armdozerIds アームドーザIDリスト
-   * @param initialArmdozerId アームドーザID初期値
+   * @param params パラメータ
    */
-  constructor(
-    resources: Resources,
-    armdozerIds: ArmdozerId[],
-    initialArmdozerId: ArmdozerId,
-  ) {
-    this.#props = createArmdozerSelectorProps(
-      resources,
-      armdozerIds,
-      initialArmdozerId,
-    );
+  constructor(params: ConstructArmdozerSelectorParams) {
+    this.#props = createArmdozerSelectorProps(params);
     this.#unsubscribers = bindEventListener(this.#props);
   }
 

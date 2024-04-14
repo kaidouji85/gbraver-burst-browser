@@ -1,16 +1,17 @@
 import { Observable, Subject, Unsubscribable } from "rxjs";
 
-import type { Resources } from "../../resource";
 import type { GameAction } from "../game-actions";
 import type { DomFloaterActionConnector } from "./dom-floater-action-connector";
-import { PostBattleFloater } from "./post-battle/post-battle";
-import type { PostBattleButtonConfig } from "./post-battle/post-battle-button-config";
+import { PostBattleFloater, ShowParams } from "./post-battle/post-battle";
 
 /** コンストラクタのパラメータ */
-type Params = {
+type ConstructDOMFloatersParams = {
   /** バトル終了後行動選択フローターのアクションコネクタ */
   postBattleConnector: DomFloaterActionConnector<PostBattleFloater>;
 };
+
+/** showPostBattleメソッドのパラメータ */
+type ShowPostBattleParams = ShowParams;
 
 /** DOMフローター管理オブジェクト */
 export class DOMFloaters {
@@ -30,7 +31,7 @@ export class DOMFloaters {
    * コンストラクタ
    * @param params パラメータ
    */
-  constructor(params: Params) {
+  constructor(params: ConstructDOMFloatersParams) {
     this.#root = document.createElement("div");
     this.#gameAction = new Subject();
     this.#postBattle = new PostBattleFloater();
@@ -68,15 +69,11 @@ export class DOMFloaters {
 
   /**
    * バトル終了後行動選択フローターをアニメ付きで表示する
-   * @param resources リソース管理オブジェクト
-   * @param buttons アクションボタン設定
+   * @param params パラメータ
    * @return アニメが完了したら発火するPromise
    */
-  async showPostBattle(
-    resources: Resources,
-    buttons: PostBattleButtonConfig[],
-  ): Promise<void> {
-    await this.#postBattle.show(resources, buttons);
+  async showPostBattle(params: ShowPostBattleParams): Promise<void> {
+    await this.#postBattle.show(params);
   }
 
   /**

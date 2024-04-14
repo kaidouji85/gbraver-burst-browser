@@ -1,6 +1,7 @@
 import { Observable } from "rxjs";
 
 import type { Resources } from "../../resource";
+import { SEPlayer } from "../../se/se-player";
 import type { GameObjectAction } from "../action/game-object-action";
 import { ContinuousAttackIndicator } from "./continuous-attack-indicator";
 import { EnemyContinuousAttackView } from "./view/enemy-continuous-attack-view";
@@ -10,6 +11,8 @@ import { PlayerContinuousAttackView } from "./view/player-continuous-attack-view
 export type GenerateContinuousAttackIndicatorParams = {
   /** リソース管理オブジェクト */
   resources: Resources;
+  /** SE再生オブジェクト */
+  se: SEPlayer;
   /** ゲームオブジェクトアクション */
   gameObjectAction: Observable<GameObjectAction>;
 };

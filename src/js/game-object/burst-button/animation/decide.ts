@@ -9,10 +9,10 @@ import { BurstButtonAnimationProps } from "./animation-props";
  * @return アニメーション
  */
 export function decide(props: BurstButtonAnimationProps): Animate {
-  const { model } = props;
+  const { model, se } = props;
   return onStart(() => {
     model.shouldPushNotifierStop = true;
-    props.pushButtonSound.sound.play();
+    se.play(props.pushButtonSound);
   })
     .chain(
       tween(model, (t) =>

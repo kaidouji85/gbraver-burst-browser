@@ -1,6 +1,7 @@
 import { createBGMManager } from "../src/js/bgm/bgm-manager";
 import { Config } from "../src/js/dom-scenes/config";
 import { ConfigChangedDialog } from "../src/js/dom-scenes/config/config-changed-dialog";
+import { createSEPlayer } from "../src/js/se/se-player";
 import type { DOMStubStory } from "./stub/dom-stub";
 import { domStub } from "./stub/dom-stub";
 
@@ -20,6 +21,7 @@ export const Scene: DOMStubStory = domStub((resources) => {
       performanceStatsVisibility: "hidden",
     },
     createBGMManager(),
+    createSEPlayer(),
   );
   scene.notifyPrev().subscribe(() => {
     console.log("prev");
@@ -31,8 +33,8 @@ export const Scene: DOMStubStory = domStub((resources) => {
   return scene.getRootHTMLElement();
 });
 
-export const ConfigChanged: DOMStubStory = domStub((resources) => {
-  const dialog = new ConfigChangedDialog(resources);
+export const ConfigChanged: DOMStubStory = domStub((resources, se) => {
+  const dialog = new ConfigChangedDialog(resources, se);
   dialog.show();
   dialog.notifyClosed().subscribe(() => {
     console.log("on close");

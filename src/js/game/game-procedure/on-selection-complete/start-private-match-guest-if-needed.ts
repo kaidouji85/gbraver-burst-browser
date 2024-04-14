@@ -34,7 +34,7 @@ export async function startPrivateMatchGuestIfNeeded(
   }
 
   props.domDialogBinder.bind(
-    new PrivateMatchGuestDialog(props.resources),
+    new PrivateMatchGuestDialog(props),
     privateMatchGuestDialogConnector,
   );
   return {

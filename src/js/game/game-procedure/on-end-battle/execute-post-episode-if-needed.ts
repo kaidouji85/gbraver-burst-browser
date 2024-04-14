@@ -20,6 +20,9 @@ export async function executePostEpisodeIfNeeded(
     return false;
   }
 
-  await props.domFloaters.showPostBattle(props.resources, PostEpisodeButtons);
+  await props.domFloaters.showPostBattle({
+    ...props,
+    buttons: PostEpisodeButtons,
+  });
   return true;
 }

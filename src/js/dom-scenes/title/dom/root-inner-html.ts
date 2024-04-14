@@ -18,7 +18,7 @@ export type RootInnerHTMLParams = {
   /** アカウント情報 */
   account: TitleAccount;
   /** APIサーバが利用可能か否か、trueで利用可能である */
-  isApiServerEnable: boolean;
+  isAPIServerEnable: boolean;
   /** 遊び方スライドのURL */
   howToPlayURL: string;
   /** 利用規約ページのURL */
@@ -40,16 +40,16 @@ export function rootInnerHTML(
   params: RootInnerHTMLParams,
 ): string {
   const loginClassName =
-    params.isApiServerEnable && params.account.type === "GuestAccount"
+    params.isAPIServerEnable && params.account.type === "GuestAccount"
       ? LOGIN_CLASS
       : INVISIBLE_LOGIN_CLASS;
   const accountName =
     params.account.type === "LoggedInAccount" ? params.account.name : "";
   const accountClassName =
-    params.isApiServerEnable && params.account.type === "LoggedInAccount"
+    params.isAPIServerEnable && params.account.type === "LoggedInAccount"
       ? ACCOUNT_CLASS
       : INVISIBLE_ACCOUNT_CLASS;
-  const netBattleClassName = params.isApiServerEnable
+  const netBattleClassName = params.isAPIServerEnable
     ? NET_BATTLE_CLASS
     : INVISIBLE_NET_BATTLE_CLASS;
   return template({

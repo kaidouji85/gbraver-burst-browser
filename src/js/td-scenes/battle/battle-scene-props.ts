@@ -13,6 +13,7 @@ import type { RendererDomGetter } from "../../render/renderer-dom-getter";
 import type { Rendering } from "../../render/rendering";
 import type { Resources } from "../../resource";
 import type { SoundId } from "../../resource/sound/resource";
+import { SEPlayer } from "../../se/se-player";
 import type { PushWindow } from "../../window/push-window";
 import type { Resize } from "../../window/resize";
 import type { BattleProgress } from "./battle-progress";
@@ -53,6 +54,8 @@ export type BattleSceneProps = {
   readonly sounds: BattleSceneSounds;
   /** BGM管理オブジェクト */
   readonly bgm: BGMManager;
+  /** SE再生オブジェクト */
+  readonly se: SEPlayer;
   /** コントローラータイプ */
   readonly controllerType: BattleControllerType;
 };
@@ -66,6 +69,8 @@ export type BattleScenePropsCreatorParams = Readonly<{
   resources: Resources;
   /** BGM管理オブジェクト */
   bgm: BGMManager;
+  /** SE再生オブジェクト */
+  se: SEPlayer;
   /** 再生するBGM ID */
   playingBGM: SoundId;
   /** レンダラ */

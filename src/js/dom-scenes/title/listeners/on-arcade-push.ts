@@ -14,7 +14,7 @@ export function onArcadePush(
 ): void {
   props.exclusive.execute(async (): Promise<void> => {
     action.event.preventDefault();
-    props.pushButton.sound.play();
+    props.se.play(props.pushButton);
     await pop(props.arcade);
     props.pushArcade.next();
   });

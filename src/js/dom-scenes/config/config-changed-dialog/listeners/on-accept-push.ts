@@ -15,7 +15,7 @@ export function onAcceptPush(
   action.event.preventDefault();
   action.event.stopPropagation();
   props.exclusive.execute(async () => {
-    props.pushButton.sound.play();
+    props.se.play(props.pushButton);
     await pop(props.accept);
     props.acceptStream.next();
   });

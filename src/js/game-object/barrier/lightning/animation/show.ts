@@ -9,9 +9,9 @@ import { LightningBarrierAnimationProps } from "./animation-props";
  * @return アニメーション
  */
 export function show(props: LightningBarrierAnimationProps): Animate {
-  const { model, sounds } = props;
+  const { model, sounds, se } = props;
   return onStart(() => {
-    sounds.lightningBarrier.sound.play();
+    se.play(sounds.lightningBarrier);
   }).chain(
     tween(model, (t) =>
       t.to(

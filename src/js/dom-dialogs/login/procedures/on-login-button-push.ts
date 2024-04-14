@@ -13,7 +13,7 @@ export function onLoginButtonPush(
 ): void {
   props.exclusive.execute(async () => {
     action.event.preventDefault();
-    props.pushButton.sound.play();
+    props.se.play(props.pushButton);
     await pop(props.loginButton);
     props.login.next();
   });

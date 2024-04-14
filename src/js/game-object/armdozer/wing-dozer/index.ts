@@ -1,6 +1,7 @@
 import { Observable } from "rxjs";
 
 import type { Resources } from "../../../resource";
+import { SEPlayer } from "../../../se/se-player";
 import type { GameObjectAction } from "../../action/game-object-action";
 import { EnemyWingDozerView } from "./view/enemy-wing-dozer-view";
 import { PlayerWingDozerView } from "./view/player-wing-dozer-view";
@@ -10,6 +11,8 @@ import { WingDozer } from "./wing-dozer";
 type GenerateWingDozerParams = {
   /** リソース管理オブジェクト */
   resources: Resources;
+  /** SE再生 */
+  se: SEPlayer;
   /** ゲームオブジェクトアクション */
   gameObjectAction: Observable<GameObjectAction>;
 };

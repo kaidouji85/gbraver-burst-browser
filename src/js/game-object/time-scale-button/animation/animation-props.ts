@@ -1,3 +1,4 @@
+import { SEPlayer } from "../../../se/se-player";
 import { TimeScaleButtonModel } from "../model/time-scale-button-model";
 import { TimeScaleButtonSounds } from "../sounds/time-scale-sounds";
 
@@ -7,4 +8,6 @@ export type TimeScaleAnimationProps = {
   model: TimeScaleButtonModel;
   /** 効果音 */
   sounds: TimeScaleButtonSounds;
+  /** SE再生オブジェクト */
+  se: SEPlayer;
 };

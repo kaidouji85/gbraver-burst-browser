@@ -10,11 +10,11 @@ import { LightningAnimationProps } from "./animation-props";
  * @return アニメーション
  */
 export function popUp(props: LightningAnimationProps): Animate {
-  const { model, sounds } = props;
+  const { model, sounds, se } = props;
   return onStart(() => {
     model.animation.frame = 0;
     model.opacity = 1;
-    sounds.lightning.sound.play();
+    se.play(sounds.lightning);
   }).chain(
     all(
       tween(model.animation, (t) =>

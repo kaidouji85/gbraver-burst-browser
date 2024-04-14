@@ -1,7 +1,6 @@
 import { Observable, Unsubscribable } from "rxjs";
 
 import { domPushStream } from "../../dom/push-dom";
-import { Resources } from "../../resource";
 import { DOMDialog } from "../dialog";
 import { onBackgroundPush } from "./listeners/on-background-push";
 import { onCasualMatchSelect } from "./listeners/on-casual-match-select";
@@ -10,8 +9,13 @@ import { onPrivateMatchGuestSelect } from "./listeners/on-private-match-guest-se
 import { onPrivateMatchHostSelect } from "./listeners/on-private-match-host-select";
 import {
   createNetBattleSelectrProps,
+  GenerateNetBattleSelectorDialogPropsParams,
   NetBattleSelectorDialogProps,
 } from "./props";
+
+/** コンストラクタのパラメータ */
+export type ConstructNetBattleSelectorDialogParams =
+  GenerateNetBattleSelectorDialogPropsParams;
 
 /** ネットバトルセレクターダイアログ */
 export class NetBattleSelectorDialog implements DOMDialog {
@@ -22,10 +26,10 @@ export class NetBattleSelectorDialog implements DOMDialog {
 
   /**
    * コンストラクタ
-   * @param resources リソース管理オブジェクト
+   * @param params コンストラクタのパラメータ
    */
-  constructor(resources: Resources) {
-    this.#props = createNetBattleSelectrProps(resources);
+  constructor(params: ConstructNetBattleSelectorDialogParams) {
+    this.#props = createNetBattleSelectrProps(params);
     this.#unsubscribers = [
       domPushStream(this.#props.casualMatchButton).subscribe((action) =>
         onCasualMatchSelect(this.#props, action),

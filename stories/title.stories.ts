@@ -10,14 +10,15 @@ export default {
   title: "title",
 };
 
-export const guestAccount: DOMStubStory = domStub((resources) => {
+export const guestAccount: DOMStubStory = domStub((resources, se) => {
   const account: GuestAccount = {
     type: "GuestAccount",
   };
   const scene = new Title({
     resources,
+    se,
     account,
-    isApiServerEnable: true,
+    isAPIServerEnable: true,
     howToPlayURL: "how-to-play",
     termsOfServiceURL: "terms-of-service",
     privacyPolicyURL: "privacy-policy",
@@ -26,7 +27,7 @@ export const guestAccount: DOMStubStory = domStub((resources) => {
   return scene.getRootHTMLElement();
 });
 
-export const loggedInAccount: DOMStubStory = domStub((resources) => {
+export const loggedInAccount: DOMStubStory = domStub((resources, se) => {
   const account: LoggedInAccount = {
     type: "LoggedInAccount",
     name: "test-account",
@@ -34,8 +35,9 @@ export const loggedInAccount: DOMStubStory = domStub((resources) => {
   };
   const scene = new Title({
     resources,
+    se,
     account,
-    isApiServerEnable: true,
+    isAPIServerEnable: true,
     howToPlayURL: "how-to-play",
     termsOfServiceURL: "terms-of-service",
     privacyPolicyURL: "privacy-policy",

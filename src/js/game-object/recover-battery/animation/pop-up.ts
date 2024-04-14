@@ -27,12 +27,12 @@ export function show(
   props: RecoverBatteryAnimationProps,
   value: number,
 ): Animate {
-  const { model, sounds } = props;
+  const { model, sounds, se } = props;
   return onStart(() => {
     model.scale = 1.2;
     model.value = value;
     model.opacity = 0;
-    sounds.recoverBattery.sound.play();
+    se.play(sounds.recoverBattery);
   }).chain(
     tween(model, (t) =>
       t.to(

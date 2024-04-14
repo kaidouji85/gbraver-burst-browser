@@ -9,11 +9,11 @@ import { NeoLandozerAnimationProps } from "./animation-props";
  * @return アニメーション
  */
 export function guardToStand(props: NeoLandozerAnimationProps): Animate {
-  const { model, sounds } = props;
+  const { model, sounds, se } = props;
   return onStart(() => {
     model.animation.frame = 1;
     model.animation.type = "GUARD";
-    sounds.motor.sound.play();
+    se.play(sounds.motor);
   })
     .chain(
       tween(model.animation, (t) =>

@@ -12,32 +12,39 @@ export default {
   title: "player-select",
 };
 
-export const scene: DOMStubStory = domStub((resources) => {
+export const scene: DOMStubStory = domStub((resources, se) => {
   const scene = new PlayerSelect({
     resources,
+    se,
     armdozerIds: PlayableArmdozers,
     pilotIds: PlayablePilots,
   });
   return scene.getRootHTMLElement();
 });
 
-export const armdozerSelector: DOMStubStory = domStub((resources) => {
+export const armdozerSelector: DOMStubStory = domStub((resources, se) => {
   const armdozerIds = [
     ArmdozerIds.NEO_LANDOZER,
     ArmdozerIds.SHIN_BRAVER,
     ArmdozerIds.WING_DOZER,
     ArmdozerIds.LIGHTNING_DOZER,
   ];
-  const component = new ArmdozerSelector(
+  const component = new ArmdozerSelector({
     resources,
+    se,
     armdozerIds,
-    ArmdozerIds.SHIN_BRAVER,
-  );
+    initialArmdozerId: ArmdozerIds.SHIN_BRAVER,
+  });
   return component.getRootHTMLElement();
 });
 
-export const pilotSelector: DOMStubStory = domStub((resources) => {
+export const pilotSelector: DOMStubStory = domStub((resources, se) => {
   const pilotIds = [PilotIds.SHINYA, PilotIds.GAI];
-  const component = new PilotSelector(resources, pilotIds, PilotIds.SHINYA);
+  const component = new PilotSelector({
+    resources,
+    se,
+    pilotIds,
+    initialPilotId: PilotIds.SHINYA,
+  });
   return component.getRootHTMLElement();
 });

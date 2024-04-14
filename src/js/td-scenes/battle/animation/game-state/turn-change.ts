@@ -57,7 +57,7 @@ export function turnChangeAnimation(
     delay(800),
     turnStart,
     onStart(() => {
-      props.sounds.batteryRecover.sound.play();
+      props.se.play(props.sounds.batteryRecover);
     }),
     activeTDArmdozer.sprite().startActive(),
   );

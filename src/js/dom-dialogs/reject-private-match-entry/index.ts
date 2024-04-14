@@ -1,15 +1,19 @@
 import { Observable, Unsubscribable } from "rxjs";
 
 import { domPushStream } from "../../dom/push-dom";
-import { Resources } from "../../resource";
 import { DOMDialog } from "../dialog";
 import { onBackgroundPush } from "./listeners/on-background-push";
 import { onCloseButtonPush } from "./listeners/on-close-button-push";
 import { onCloserPush } from "./listeners/on-closer-push";
 import {
   createRejectPrivateMatchEntryDialogProps,
+  GenerateRejectPrivateMatchEntryDialogPropsParams,
   RejectPrivateMatchEntryDialogProps,
 } from "./props";
+
+/** コンストラクタのパラメータ */
+export type ConstructRejectPrivateMatchEntryDialogParams =
+  GenerateRejectPrivateMatchEntryDialogPropsParams;
 
 /** プライベートマッチエントリ拒否ダイアログ */
 export class RejectPrivateMatchEntryDialog implements DOMDialog {
@@ -20,10 +24,10 @@ export class RejectPrivateMatchEntryDialog implements DOMDialog {
 
   /**
    * コンストラクタ
-   * @param resources リソース管理オブジェクト
+   * @param params パラメータ
    */
-  constructor(resources: Resources) {
-    this.#props = createRejectPrivateMatchEntryDialogProps(resources);
+  constructor(params: ConstructRejectPrivateMatchEntryDialogParams) {
+    this.#props = createRejectPrivateMatchEntryDialogProps(params);
     this.#unsubscribers = [
       domPushStream(this.#props.closeButton).subscribe((action) => {
         onCloseButtonPush(this.#props, action);

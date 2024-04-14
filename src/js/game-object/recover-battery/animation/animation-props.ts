@@ -1,3 +1,4 @@
+import { SEPlayer } from "../../../se/se-player";
 import { RecoverBatteryModel } from "../model/recover-battery-model";
 import { RecoverBatterySounds } from "../sounds/recover-battery-sounds";
 
@@ -7,4 +8,6 @@ export type RecoverBatteryAnimationProps = {
   model: RecoverBatteryModel;
   /** サウンド */
   sounds: RecoverBatterySounds;
+  /** SE再生オブジェクト */
+  se: SEPlayer;
 };

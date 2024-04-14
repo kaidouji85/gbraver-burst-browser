@@ -3,6 +3,7 @@ import { Observable, Unsubscribable } from "rxjs";
 import { BGMManager } from "../../bgm/bgm-manager";
 import type { GBraverBurstBrowserConfig } from "../../game/config/browser-config";
 import type { Resources } from "../../resource";
+import { SEPlayer } from "../../se/se-player";
 import type { DOMScene } from "../dom-scene";
 import { bindEventListeners } from "./listeners";
 import type { ConfigProps } from "./props";
@@ -18,13 +19,15 @@ export class Config implements DOMScene {
    * @param resources リソース管理オブジェクト
    * @param config Gブレイバーバースト ブラウザ側設定項目
    * @param bgm BGM管理オブジェクト
+   * @param se SE再生オブジェクト
    */
   constructor(
     resources: Resources,
     config: GBraverBurstBrowserConfig,
     bgm: BGMManager,
+    se: SEPlayer,
   ) {
-    this.#props = createConfigProps(resources, config, bgm);
+    this.#props = createConfigProps(resources, config, bgm, se);
     this.#unsubscriber = bindEventListeners(this.#props);
   }
 

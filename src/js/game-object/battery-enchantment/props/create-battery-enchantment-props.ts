@@ -1,4 +1,5 @@
 import { Resources } from "../../../resource";
+import { SEPlayer } from "../../../se/se-player";
 import { createInitialValue } from "../model/initial-value";
 import { BatteryEnchantmentSounds } from "../sounds/battery-enchantment-sounds";
 import { BatteryEnchantmentView } from "../view/battery-enchantment-view";
@@ -10,6 +11,8 @@ export type GenerateBatteryEnchantmentPropsParams = {
   view: BatteryEnchantmentView;
   /** リソース管理オブジェクト */
   resources: Resources;
+  /** SE再生オブジェクト */
+  se: SEPlayer;
 };
 
 /**
@@ -22,6 +25,7 @@ export function createBatteryEnchantmentProps(
 ): BatteryEnchantmentProps {
   const { view, resources } = params;
   return {
+    ...params,
     model: createInitialValue(),
     view,
     sounds: new BatteryEnchantmentSounds(resources),

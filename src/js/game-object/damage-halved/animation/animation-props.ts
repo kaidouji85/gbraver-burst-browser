@@ -1,3 +1,4 @@
+import { SEPlayer } from "../../../se/se-player";
 import { DamageHalvedModel } from "../model/damage-halved-model";
 import { DamageHalvedSounds } from "../sounds/damage-halved-sounds";
 
@@ -7,4 +8,6 @@ export type DamageHalvedAnimationProps = {
   model: DamageHalvedModel;
   /** サウンド */
   sounds: DamageHalvedSounds;
+  /** SE再生オブジェクト */
+  se: SEPlayer;
 };

@@ -1,3 +1,4 @@
+import { SEPlayer } from "../../../se/se-player";
 import { PowerUpModel } from "../model/power-up-model";
 import { PowerUpSounds } from "../sounds/power-up-sounds";
 
@@ -7,4 +8,6 @@ export type PowerUpAnimationProps = {
   model: PowerUpModel;
   /** サウンド */
   sounds: PowerUpSounds;
+  /** 効果音再生オブジェクト */
+  se: SEPlayer;
 };

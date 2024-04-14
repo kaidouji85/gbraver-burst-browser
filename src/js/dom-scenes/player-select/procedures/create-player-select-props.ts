@@ -2,6 +2,7 @@ import { ArmdozerId, ArmdozerIds, PilotId, PilotIds } from "gbraver-burst-core";
 import { Subject } from "rxjs";
 
 import { Resources } from "../../../resource";
+import { SEPlayer } from "../../../se/se-player";
 import { domUuid } from "../../../uuid/dom-uuid";
 import { ArmdozerBustShotContainer } from "../armdozer-bust-shot";
 import { ArmdozerSelector } from "../armdozer-selector";
@@ -16,6 +17,8 @@ import { PlayerSelectProps } from "../props";
 export type CreatePlayerSelectPropsParams = {
   /** ソース管理オブジェクト */
   resources: Resources;
+  /** SE再生オブジェクト */
+  se: SEPlayer;
   /** プレイアブルなアームドーザのID */
   armdozerIds: ArmdozerId[];
   /** プレイアブルなパイロットのID */
@@ -60,14 +63,17 @@ export function createPlayerSelectProps(
   pilotBustShot.hidden();
   elements.working.appendChild(pilotBustShot.getRootHTMLElement());
 
-  const armdozerSelector = new ArmdozerSelector(
-    resources,
-    armdozerIds,
-    armdozerId,
-  );
+  const armdozerSelector = new ArmdozerSelector({
+    ...params,
+    initialArmdozerId: armdozerId,
+  });
   elements.selector.appendChild(armdozerSelector.getRootHTMLElement());
 
-  const pilotSelector = new PilotSelector(resources, pilotIds, pilotId);
+  const pilotSelector = new PilotSelector({
+    ...params,
+    pilotIds,
+    initialPilotId: pilotId,
+  });
   pilotSelector.hidden();
   elements.selector.appendChild(pilotSelector.getRootHTMLElement());
 

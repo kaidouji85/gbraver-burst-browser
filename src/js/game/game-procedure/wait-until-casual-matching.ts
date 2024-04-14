@@ -19,13 +19,16 @@ export async function waitUntilCasualMatching(
 ): Promise<BattleSDK> {
   try {
     props.domDialogBinder.bind(
-      new MatchingDialog(props.resources),
+      new MatchingDialog(props),
       matchingDialogConnector,
     );
     return await props.api.startCasualMatch(action.armdozerId, action.pilotId);
   } catch (e) {
-    const dialog = new NetworkErrorDialog(props.resources, {
-      type: "GotoTitle",
+    const dialog = new NetworkErrorDialog({
+      ...props,
+      postNetworkError: {
+        type: "GotoTitle",
+      },
     });
     props.domDialogBinder.bind(dialog, networkErrorDialogConnector);
     throw e;

@@ -5,6 +5,7 @@ import { Resources } from "../../resource";
 import { createEmptySoundResource } from "../../resource/sound/empty-sound-resource";
 import { SOUND_IDS } from "../../resource/sound/ids";
 import { SoundResource } from "../../resource/sound/resource";
+import { SEPlayer } from "../../se/se-player";
 import { domUuid } from "../../uuid/dom-uuid";
 import { ROOT_CLASS } from "./dom/class-name";
 import { DataIDs } from "./dom/data-ids";
@@ -29,6 +30,8 @@ export type NetBattleSelectorDialogProps = {
   pushButton: SoundResource;
   /** 効果音 値変更 */
   valueChange: SoundResource;
+  /** SE再生オブジェクト */
+  se: SEPlayer;
   /** カジュアルマッチ選択通知 */
   casualMatchSelection: Subject<void>;
   /** プライベートマッチ（ホスト）選択通知 */
@@ -41,14 +44,23 @@ export type NetBattleSelectorDialogProps = {
   exclusive: Exclusive;
 };
 
+/** NetBattleSelectorDialogProps生成パラメータ */
+export type GenerateNetBattleSelectorDialogPropsParams = {
+  /** リソース管理オブジェクト */
+  resources: Resources;
+  /** SE再生オブジェクト */
+  se: SEPlayer;
+};
+
 /**
  * NetBattleSelectrPropsを生成する
- * @param resources リソース管理オブジェクト
+ * @param params 生成パラメータ
  * @return 生成結果
  */
 export function createNetBattleSelectrProps(
-  resources: Resources,
+  params: GenerateNetBattleSelectorDialogPropsParams,
 ): NetBattleSelectorDialogProps {
+  const { resources } = params;
   const root = document.createElement("div");
   root.className = ROOT_CLASS;
   const dataIDs: DataIDs = {
@@ -61,6 +73,7 @@ export function createNetBattleSelectrProps(
   root.innerHTML = rootInnerHTML(resources, dataIDs);
   const elements = extractElements(root, dataIDs);
   return {
+    ...params,
     root,
     backGround: elements.backGround,
     closer: elements.closer,

@@ -8,6 +8,7 @@ import { GameLoop } from "../../game-loop/game-loop";
 import { Renderer } from "../../render";
 import { Resources } from "../../resource";
 import { ResourceRoot } from "../../resource/resource-root";
+import { SEPlayer } from "../../se/se-player";
 import { PerformanceStats } from "../../stats/performance-stats";
 import { PushWindow } from "../../window/push-window";
 import { Resize } from "../../window/resize";
@@ -79,6 +80,8 @@ export interface GameProps {
   serviceWorker: ServiceWorkerRegistration | null | undefined;
   /** BGM管理オブジェクト */
   bgm: BGMManager;
+  /** SE再生オブジェクト */
+  se: SEPlayer;
   /** 開発中のエピソードをプレイできるか否かのフラグ、trueでプレイできる */
   canPlayEpisodeInDevelopment: boolean;
   /** 開発中のリソースをロードするか否かのフラグ、trueでロードする */

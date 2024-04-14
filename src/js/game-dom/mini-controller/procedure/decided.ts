@@ -9,7 +9,8 @@ import { MiniControllerProps } from "../props";
  * @return アニメーション
  */
 export function decided(props: Readonly<MiniControllerProps>): Animate {
+  const { pushButtonSound, se } = props;
   return onStart(() => {
-    props.pushButtonSound.sound.play();
+    se.play(pushButtonSound);
   }).chain(popRoot(props));
 }

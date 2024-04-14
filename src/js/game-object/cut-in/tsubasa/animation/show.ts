@@ -13,7 +13,7 @@ const duration = 400;
  * @return アニメーション
  */
 export function show(props: TsubasaCutInAnimationProps): Animate {
-  const { model, sounds } = props;
+  const { model, sounds, se } = props;
   return onStart(() => {
     model.opacity = 0;
     model.position.x = -25;
@@ -40,7 +40,7 @@ export function show(props: TsubasaCutInAnimationProps): Animate {
     )
     .chain(
       onStart(() => {
-        sounds.benefitEffect.sound.play();
+        se.play(sounds.benefitEffect);
       }),
     );
 }

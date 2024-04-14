@@ -1,3 +1,4 @@
+import { SEPlayer } from "../../../se/se-player";
 import { PilotButtonModel } from "../model/pilot-button-model";
 import { PilotButtonSounds } from "../sounds/pilot-button-sounds";
 
@@ -7,4 +8,6 @@ export type PilotButtonAnimationProps = {
   model: PilotButtonModel;
   /** 効果音 */
   sounds: PilotButtonSounds;
+  /** 効果音再生オブジェクト */
+  se: SEPlayer;
 };

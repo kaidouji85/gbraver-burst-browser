@@ -1,4 +1,5 @@
 import { Resources } from "../../../../resource";
+import { SEPlayer } from "../../../../se/se-player";
 import { createInitialValue } from "../model/initial-value";
 import { GaiSounds } from "../sounds/gai-sounds";
 import { GaiView } from "../view/gai-view";
@@ -10,6 +11,8 @@ export type GenerateGaiCutInPropsParams = {
   view: GaiView;
   /** リソース管理オブジェクト */
   resources: Resources;
+  /** 効果音再生オブジェクト */
+  se: SEPlayer;
 };
 
 /**
@@ -20,10 +23,10 @@ export type GenerateGaiCutInPropsParams = {
 export function createGaiCutInProps(
   params: GenerateGaiCutInPropsParams,
 ): GaiCutInProps {
-  const { resources, view } = params;
+  const { resources } = params;
   return {
+    ...params,
     model: createInitialValue(),
-    view,
     sounds: new GaiSounds(resources),
   };
 }

@@ -1,3 +1,4 @@
+import { SEPlayer } from "../../../../se/se-player";
 import { LightningBarrierModel } from "../model/lightning-barrier-model";
 import { LightningBarrierSounds } from "../sounds/lightning-barrier-sounds";
 
@@ -7,4 +8,6 @@ export type LightningBarrierAnimationProps = {
   model: LightningBarrierModel;
   /** 効果音 */
   sounds: LightningBarrierSounds;
+  /** SE再生オブジェクト */
+  se: SEPlayer;
 };

@@ -1,4 +1,5 @@
 import { Resources } from "../../../../resource";
+import { SEPlayer } from "../../../../se/se-player";
 import { createInitialValue } from "../model/initial-value";
 import { RaitoSounds } from "../sounds/raito-sounds";
 import { RaitoView } from "../view/raito-view";
@@ -10,6 +11,8 @@ export type GenerateRaitoCutInPropsParams = {
   view: RaitoView;
   /** リソース管理オブジェクト */
   resources: Resources;
+  /** SE再生オブジェクト */
+  se: SEPlayer;
 };
 
 /**
@@ -20,10 +23,10 @@ export type GenerateRaitoCutInPropsParams = {
 export function createRaitoCutInProps(
   params: GenerateRaitoCutInPropsParams,
 ): RaitoCutInProps {
-  const { view, resources } = params;
+  const { resources } = params;
   return {
+    ...params,
     model: createInitialValue(),
-    view,
     sounds: new RaitoSounds(resources),
   };
 }

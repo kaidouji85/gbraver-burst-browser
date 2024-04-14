@@ -1,11 +1,17 @@
 import { Observable, Unsubscribable } from "rxjs";
 
 import type { NPCBattleCourseDifficulty } from "../../game/npc-battle-courses";
-import type { Resources } from "../../resource";
 import type { DOMDialog } from "../dialog";
 import { bindEventListeners } from "./listeners";
-import type { DifficultyDialogProps } from "./props";
+import {
+  DifficultyDialogProps,
+  GenerateDifficultyDialogPropsParams,
+} from "./props";
 import { createDifficultyDialogProps } from "./props";
+
+/** コンストラクタのパラメータ */
+export type ConstructDifficultyDialogParams =
+  GenerateDifficultyDialogPropsParams;
 
 /** 難易度選択ダイアログ */
 export class DifficultyDialog implements DOMDialog {
@@ -16,11 +22,10 @@ export class DifficultyDialog implements DOMDialog {
 
   /**
    * コンストラクタ
-   *
-   * @param resources リソース管理オブジェクト
+   * @param params パラメータ
    */
-  constructor(resources: Resources) {
-    this.#props = createDifficultyDialogProps(resources);
+  constructor(params: ConstructDifficultyDialogParams) {
+    this.#props = createDifficultyDialogProps(params);
     this.#unsubscribers = bindEventListeners(this.#props);
   }
 

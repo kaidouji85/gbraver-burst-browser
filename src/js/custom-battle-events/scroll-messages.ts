@@ -1,6 +1,7 @@
 import { Observable } from "rxjs";
 
 import type { MessageWindow } from "../game-dom/message-window";
+import { SEPlayer } from "../se/se-player";
 import type { CustomBattleEventProps } from "../td-scenes/battle/custom-battle-event";
 import { BattleSceneSounds } from "../td-scenes/battle/sounds/sounds";
 import type { PushWindow } from "../window/push-window";
@@ -17,6 +18,7 @@ type Paragraph = string[];
  * @param messageWindow メッセージウインドウ
  * @param pushWindow 画面押下ストリーム
  * @param sounds 戦闘シーンで利用する音声データ
+ * @param se SE再生オブジェクト
  * @param paragraphs 表示するメッセージ
  * @return 処理が完了したら発火するPromise
  */
@@ -24,12 +26,13 @@ async function scrollMessages(
   messageWindow: MessageWindow,
   pushWindow: Observable<PushWindow>,
   sounds: BattleSceneSounds,
+  se: SEPlayer,
   paragraphs: Paragraph[],
 ): Promise<void> {
   messageWindow.nextMessageIconVisible(true);
 
   for (let i = 0; i < paragraphs.length; i++) {
-    sounds.sendMessage.sound.play();
+    se.play(sounds.sendMessage);
     messageWindow.scrollUp();
     messageWindow.messages(paragraphs[i]);
     await waitUntilWindowPushWithStream(pushWindow);
@@ -53,6 +56,7 @@ export async function scrollLeftMessages(
     props.view.dom.leftMessageWindow,
     props.pushWindow,
     props.sounds,
+    props.se,
     paragraphs,
   );
 }
@@ -72,6 +76,7 @@ export async function scrollRightMessages(
     props.view.dom.rightMessageWindow,
     props.pushWindow,
     props.sounds,
+    props.se,
     paragraphs,
   );
 }

@@ -5,6 +5,7 @@ import type { Resources } from "../../../resource";
 import { createEmptySoundResource } from "../../../resource/sound/empty-sound-resource";
 import { SOUND_IDS } from "../../../resource/sound/ids";
 import { SoundResource } from "../../../resource/sound/resource";
+import { SEPlayer } from "../../../se/se-player";
 import { domUuid } from "../../../uuid/dom-uuid";
 import { ROOT_CLASS_INVISIBLE } from "./dom/class-name";
 import { extractElements } from "./dom/elements";
@@ -14,46 +15,43 @@ import { rootInnerHTML } from "./dom/root-inner-html";
 export type ConfigChangedDialogProps = {
   /** ルートHTML要素 */
   root: HTMLElement;
-
   /** 背景 */
   backGround: HTMLElement;
-
   /** クローザ */
   closer: HTMLElement;
-
   /** 設定変更を破棄 */
   discard: HTMLElement;
-
   /** 設定変更受け入れ */
   accept: HTMLElement;
 
   /** 排他制御 */
   exclusive: Exclusive;
 
+  /** SE再生オブジェクト */
+  se: SEPlayer;
+
   /** SE 値変更 */
   changeValue: SoundResource;
-
   /** SE ボタン押下 */
   pushButton: SoundResource;
 
   /** 閉じるストリーム */
   closeStream: Subject<void>;
-
   /** 設定変更受け入れ通知ストリーム */
   acceptStream: Subject<void>;
-
   /** 設定変更破棄通知ストリーム */
   discardStream: Subject<void>;
 };
 
 /**
  * 設定変更通知ダイアログプロパティを生成する
- *
  * @param resources リソース管理オブジェクト
+ * @param se SE再生オブジェクト
  * @return 生成したダイアログプロパティ
  */
 export function createConfigChangedDialogProps(
   resources: Resources,
+  se: SEPlayer,
 ): ConfigChangedDialogProps {
   const ids = {
     backGround: domUuid(),
@@ -85,6 +83,7 @@ export function createConfigChangedDialogProps(
     closer,
     discard,
     accept,
+    se,
     pushButton,
     changeValue,
     exclusive,

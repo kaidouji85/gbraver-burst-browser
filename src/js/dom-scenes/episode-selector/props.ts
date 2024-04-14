@@ -2,6 +2,7 @@ import { Subject } from "rxjs";
 
 import { Exclusive } from "../../exclusive/exclusive";
 import { SoundResource } from "../../resource/sound/resource";
+import { SEPlayer } from "../../se/se-player";
 import { EpisodeImageCut } from "./dom/episode-image-cut";
 import { EpisodeDetail } from "./episode-detail";
 import { EpisodeElement } from "./episode-element";
@@ -39,6 +40,8 @@ export type EpisodeSelectorProps = {
   changeValueSound: SoundResource;
   /** ボタン押下 効果音 */
   pushButtonSound: SoundResource;
+  /** SE再生オブジェクト */
+  se: SEPlayer;
   /** イメージカットのロード完了したら発火するPromise */
   isImageCutsLoaded: Promise<unknown>;
 };

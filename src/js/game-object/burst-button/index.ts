@@ -1,6 +1,7 @@
 import { Observable } from "rxjs";
 
 import type { Resources } from "../../resource";
+import { SEPlayer } from "../../se/se-player";
 import type { GameObjectAction } from "../action/game-object-action";
 import { BurstButton } from "./burst-button";
 import { GenesisBraverIcon } from "./view/genesis-braver-icon";
@@ -13,6 +14,8 @@ import { WingDozerIcon } from "./view/wing-dozer-icon";
 export type GenerateBurstButtonParams = {
   /** リソース管理オブジェクト */
   resources: Resources;
+  /** SE再生オブジェクト */
+  se: SEPlayer;
   /** ゲームオブジェクトアクション */
   gameObjectAction: Observable<GameObjectAction>;
 };

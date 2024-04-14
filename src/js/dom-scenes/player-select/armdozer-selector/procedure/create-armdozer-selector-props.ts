@@ -6,6 +6,7 @@ import { Exclusive } from "../../../../exclusive/exclusive";
 import { Resources } from "../../../../resource";
 import { createEmptySoundResource } from "../../../../resource/sound/empty-sound-resource";
 import { SOUND_IDS } from "../../../../resource/sound/ids";
+import { SEPlayer } from "../../../../se/se-player";
 import { ArmdozerIcon } from "../armdozer-icon";
 import { ArmdozerStatus } from "../armdozer-status";
 import { BLOCK } from "../dom/class-name";
@@ -18,18 +19,27 @@ import {
 import { rootInnerHTML } from "../dom/root-inner-html";
 import { ArmdozerSelectorProps } from "../props";
 
+/** ArmdozerSelectorProps生成パラメータ */
+export type GenerateArmdozerSelectorPropsParams = {
+  /** リソース管理オブジェクト */
+  resources: Resources;
+  /** 選択可能なアームドーザIDリスト */
+  se: SEPlayer;
+  /** 選択可能なアームドーザIDリスト */
+  armdozerIds: ArmdozerId[];
+  /** 最初に選択しているアームドーザID */
+  initialArmdozerId: ArmdozerId;
+};
+
 /**
  * ArmdozerSelectorPropsを生成する
- * @param resources リソース管理オブジェクト
- * @param armdozerIds 選択可能なアームドーザIDリスト
- * @param initialArmdozerId 最初に選択しているアームドーザID
+ * @param params 生成パラメータ
  * @return 生成結果
  */
 export function createArmdozerSelectorProps(
-  resources: Resources,
-  armdozerIds: ArmdozerId[],
-  initialArmdozerId: ArmdozerId,
+  params: GenerateArmdozerSelectorPropsParams,
 ): ArmdozerSelectorProps {
+  const { resources, armdozerIds, initialArmdozerId } = params;
   const root = document.createElement("div");
   root.className = BLOCK;
   root.innerHTML = rootInnerHTML();
@@ -48,6 +58,7 @@ export function createArmdozerSelectorProps(
     icons.appendChild(icon.getRootHTMLElement());
   });
   return {
+    ...params,
     armdozerId: initialArmdozerId,
     exclusive: new Exclusive(),
     root,

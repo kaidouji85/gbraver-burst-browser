@@ -14,7 +14,7 @@ export function onEasyPush(
   action.event.preventDefault();
   action.event.stopPropagation();
   props.exclusive.execute(async () => {
-    props.pushButton.sound.play();
+    props.se.play(props.pushButton);
     await pop(props.easyButton);
     props.selectionComplete.next("Easy");
   });

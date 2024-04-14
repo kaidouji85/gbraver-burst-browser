@@ -1,6 +1,7 @@
 import { Resources } from "../../../../resource";
 import { createEmptySoundResource } from "../../../../resource/sound/empty-sound-resource";
 import { SOUND_IDS } from "../../../../resource/sound/ids";
+import { SEPlayer } from "../../../../se/se-player";
 import { ShockWaveModel } from "../model/shock-wave-model";
 import { ShockWaveView } from "../view/shock-wave-view";
 import { ShockWaveProps } from "./shock-wave-props";
@@ -13,6 +14,8 @@ export type GenerateShockWavePropsParams = {
   initialModel: ShockWaveModel;
   /** リソース管理オブジェクト */
   resources: Resources;
+  /** SE再生オブジェクト */
+  se: SEPlayer;
 };
 
 /**
@@ -23,10 +26,10 @@ export type GenerateShockWavePropsParams = {
 export function createShockWaveProps(
   params: GenerateShockWavePropsParams,
 ): ShockWaveProps {
-  const { view, initialModel, resources } = params;
+  const { initialModel, resources } = params;
   return {
+    ...params,
     model: initialModel,
-    view,
     hitSound:
       resources.sounds.find((v) => v.id === SOUND_IDS.MECHA_IMPACT) ??
       createEmptySoundResource(),

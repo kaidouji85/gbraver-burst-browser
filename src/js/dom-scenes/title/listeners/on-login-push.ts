@@ -14,7 +14,7 @@ export function onLoginPush(
 ): void {
   props.exclusive.execute(async (): Promise<void> => {
     action.event.preventDefault();
-    props.pushButton.sound.play();
+    props.se.play(props.pushButton);
     await pop(props.login);
     props.pushLogin.next();
   });

@@ -1,3 +1,4 @@
+import { SEPlayer } from "../../../../se/se-player";
 import { ShinyaModel } from "../model/shinya-model";
 import { ShinyaSounds } from "../sounds/shinya-sounds";
 
@@ -7,4 +8,6 @@ export type ShinyaCutInAnimationProps = {
   model: ShinyaModel;
   /** サウンド */
   sounds: ShinyaSounds;
+  /** 効果音再生オブジェクト */
+  se: SEPlayer;
 };

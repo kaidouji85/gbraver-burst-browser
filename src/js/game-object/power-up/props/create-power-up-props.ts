@@ -1,4 +1,5 @@
 import { Resources } from "../../../resource";
+import { SEPlayer } from "../../../se/se-player";
 import { createInitialValue } from "../model/initial-value";
 import { PowerUpSounds } from "../sounds/power-up-sounds";
 import { PowerUpView } from "../view/power-up-view";
@@ -10,6 +11,8 @@ export type GeneratePowerUpPropsParams = {
   view: PowerUpView;
   /** リソース管理オブジェクト */
   resources: Resources;
+  /** SE再生オブジェクト */
+  se: SEPlayer;
 };
 
 /**
@@ -20,10 +23,10 @@ export type GeneratePowerUpPropsParams = {
 export function createPowerUpProps(
   params: GeneratePowerUpPropsParams,
 ): PowerUpProps {
-  const { view, resources } = params;
+  const { resources } = params;
   return {
+    ...params,
     model: createInitialValue(),
-    view,
     sounds: new PowerUpSounds(resources),
   };
 }

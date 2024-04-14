@@ -1,13 +1,17 @@
 import { Observable, Unsubscribable } from "rxjs";
 
 import { domPushStream } from "../../dom/push-dom";
-import { Resources } from "../../resource";
 import { DOMDialog } from "../dialog";
 import { onCloserPush } from "./listeners/on-closer-push";
 import {
   createPrivateMatchHostDialogProps,
+  GeneratePrivateMatchHostDialogPropsParams,
   PrivateMatchHostDialogProps,
 } from "./props";
+
+/** コンストラクタのパラメータ */
+export type ConstructPrivateMatchHostDialogParams =
+  GeneratePrivateMatchHostDialogPropsParams;
 
 /** プライベートマッチホストダイアログ */
 export class PrivateMatchHostDialog implements DOMDialog {
@@ -18,11 +22,10 @@ export class PrivateMatchHostDialog implements DOMDialog {
 
   /**
    * コンストラクタ
-   * @param resources リソース管理オブジェクト
-   * @param roomID ルームID
+   * @param params パラメータ
    */
-  constructor(resources: Resources, roomID: string) {
-    this.#props = createPrivateMatchHostDialogProps(resources, roomID);
+  constructor(params: ConstructPrivateMatchHostDialogParams) {
+    this.#props = createPrivateMatchHostDialogProps(params);
     this.#unsubscribers = [
       domPushStream(this.#props.closer).subscribe((action) => {
         onCloserPush(this.#props, action);

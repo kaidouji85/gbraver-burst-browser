@@ -5,6 +5,7 @@ import { Resources } from "../../../resource";
 import { PathIds } from "../../../resource/path/ids";
 import { createEmptySoundResource } from "../../../resource/sound/empty-sound-resource";
 import { SOUND_IDS } from "../../../resource/sound/ids";
+import { SEPlayer } from "../../../se/se-player";
 import { domUuid } from "../../../uuid/dom-uuid";
 import { waitElementLoaded } from "../../../wait/wait-element-loaded";
 import { ROOT_CLASS } from "../dom/class-name";
@@ -12,16 +13,25 @@ import { extractElements } from "../dom/elements";
 import { rootInnerHTML } from "../dom/root-inner-html";
 import { NPCEndingProps } from "../props";
 
+/** NPCEndingProps生成パラメータ */
+export type GenerateNPCEndingPropsParams = {
+  /** リソース管理オブジェクト */
+  resources: Resources;
+  /** BGM管理オブジェクト */
+  bgm: BGMManager;
+  /** SE再生オブジェクト */
+  se: SEPlayer;
+};
+
 /**
  * NPCEndingPropsを生成する
- * @param resources リソース管理オブジェクト
- * @param bgm BGM管理オブジェクト
+ * @param params 生成パラメータ
  * @return 生成結果
  */
 export function createNPCEndingProps(
-  resources: Resources,
-  bgm: BGMManager,
+  params: GenerateNPCEndingPropsParams,
 ): NPCEndingProps {
+  const { resources } = params;
   const ids = {
     end: domUuid(),
     logo: domUuid(),
@@ -49,12 +59,12 @@ export function createNPCEndingProps(
     resources.sounds.find((v) => v.id === SOUND_IDS.NPC_ENDING) ??
     createEmptySoundResource();
   return {
+    ...params,
     root,
     isEndCardLoaded,
     isEndLoaded,
     isLogoLoader,
     pushButtonSound,
-    bgm,
     endingBGM,
     canOperation: true,
     endNPCEnding: new Subject<void>(),

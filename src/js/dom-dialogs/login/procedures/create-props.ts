@@ -4,6 +4,7 @@ import { Exclusive } from "../../../exclusive/exclusive";
 import { Resources } from "../../../resource";
 import { createEmptySoundResource } from "../../../resource/sound/empty-sound-resource";
 import { SOUND_IDS } from "../../../resource/sound/ids";
+import { SEPlayer } from "../../../se/se-player";
 import { ROOT_CLASS_NAME } from "../dom/class-name";
 import {
   extractCloseButton,
@@ -13,16 +14,25 @@ import {
 import { rootInnerHTML } from "../dom/root-inner-html";
 import { LoginDialogProps } from "../props";
 
+/** 生成パラメータ */
+export type GenerateLoginDialogPropsParams = {
+  /** リソース管理オブジェクト */
+  resources: Resources;
+  /** SE再生 */
+  se: SEPlayer;
+  /** キャプション */
+  caption: string;
+};
+
 /**
  * LoginDialogPropsを生成する
- * @param resources リソース管理オブジェクト
- * @param caption キャプション
+ * @param params 生成パラメータ
  * @return 生成結果
  */
 export function createProps(
-  resources: Resources,
-  caption: string,
+  params: GenerateLoginDialogPropsParams,
 ): LoginDialogProps {
+  const { resources, caption } = params;
   const root = document.createElement("div");
   root.className = ROOT_CLASS_NAME;
   root.innerHTML = rootInnerHTML(resources, caption);
@@ -42,6 +52,7 @@ export function createProps(
   const exclusive = new Exclusive();
 
   return {
+    ...params,
     root,
     closer,
     loginButton,

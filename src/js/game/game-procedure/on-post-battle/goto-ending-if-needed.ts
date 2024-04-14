@@ -22,7 +22,7 @@ export async function gotoEndingIfNeeded(
   props.domFloaters.hiddenPostBattle();
   await props.fader.fadeOut();
   props.tdBinder.hidden();
-  const scene = new NPCEnding(props.resources, props.bgm);
+  const scene = new NPCEnding(props);
   props.domSceneBinder.bind(scene, npcEndingConnector);
   await Promise.race([scene.waitUntilLoaded(), waitTime(MAX_LOADING_TIME)]);
   await props.fader.fadeIn();

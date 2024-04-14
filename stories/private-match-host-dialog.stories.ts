@@ -5,8 +5,12 @@ export default {
   title: "private-match-host",
 };
 
-export const dialog: DOMStubStory = domStub((resources) => {
-  const dialog = new PrivateMatchHostDialog(resources, "V1StGXR8_Z5jdHi6B-myT");
+export const dialog: DOMStubStory = domStub((resources, se) => {
+  const dialog = new PrivateMatchHostDialog({
+    resources,
+    se,
+    roomID: "V1StGXR8_Z5jdHi6B-myT",
+  });
   dialog.notifyDialogClosed().subscribe(() => {
     console.log("dialog closed");
   });

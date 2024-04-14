@@ -6,6 +6,7 @@ import type { Resources } from "../../resource";
 import { createEmptySoundResource } from "../../resource/sound/empty-sound-resource";
 import { SOUND_IDS } from "../../resource/sound/ids";
 import { SoundResource } from "../../resource/sound/resource";
+import { SEPlayer } from "../../se/se-player";
 import { domUuid } from "../../uuid/dom-uuid";
 import { ROOT_CLASS } from "./dom/class-name";
 import { extractElements } from "./dom/elements";
@@ -15,61 +16,57 @@ import { rootInnerHTML } from "./dom/root-inner-html";
 export type DifficultyDialogProps = {
   /** ルートHTML要素 */
   root: HTMLElement;
-
   /** クロージャHTML要素 */
   closer: HTMLElement;
-
   /** 背景HTML要素 */
   backGround: HTMLElement;
-
   /** Easyロゴ */
   easy: HTMLElement;
-
   /** Easyボタン */
   easyButton: HTMLElement;
-
   /** Normalロゴ */
   normal: HTMLElement;
-
   /** Normalボタン */
   normalButton: HTMLElement;
-
   /** Hardロゴ */
   hard: HTMLElement;
-
   /** Hardボタン */
   hardButton: HTMLElement;
-
   /** VeryHardロゴ */
   veryHard: HTMLElement;
-
   /** VertHardボタン */
   veryHardButton: HTMLElement;
-
   /** 排他制御 */
   exclusive: Exclusive;
-
   /** 選択完了通知ストリーム */
   selectionComplete: Subject<NPCBattleCourseDifficulty>;
-
   /** ダイアログ閉じ通知ストリーム */
   closeDialog: Subject<void>;
-
   /** 効果音 値変更 */
   changeValue: SoundResource;
-
+  /** SE再生オブジェクト */
+  se: SEPlayer;
   /** 効果音 ボタン押下 */
   pushButton: SoundResource;
 };
 
+/** 生成パラメータ */
+export type GenerateDifficultyDialogPropsParams = {
+  /** リソース管理オブジェクト */
+  resources: Resources;
+  /** SE再生オブジェクト */
+  se: SEPlayer;
+};
+
 /**
  * 難易度選択ダイアログプロパティを生成する
- * @param resources リソース管理オブジェクト
+ * @param params 生成パラメータ
  * @return 生成したプロパティ
  */
 export function createDifficultyDialogProps(
-  resources: Resources,
+  params: GenerateDifficultyDialogPropsParams,
 ): DifficultyDialogProps {
+  const { resources } = params;
   const ids = {
     backGround: domUuid(),
     closer: domUuid(),
@@ -106,6 +103,7 @@ export function createDifficultyDialogProps(
     resources.sounds.find((v) => v.id === SOUND_IDS.PUSH_BUTTON) ??
     createEmptySoundResource();
   return {
+    ...params,
     root,
     closer,
     backGround,
