@@ -19,7 +19,7 @@ export async function waitUntilCasualMatching(
 ): Promise<BattleSDK> {
   try {
     props.domDialogBinder.bind(
-      new MatchingDialog(props.resources),
+      new MatchingDialog(props),
       matchingDialogConnector,
     );
     return await props.api.startCasualMatch(action.armdozerId, action.pilotId);

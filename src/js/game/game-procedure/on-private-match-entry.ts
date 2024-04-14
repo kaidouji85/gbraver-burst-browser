@@ -25,7 +25,7 @@ export async function onPrivateMatchEntry(
   }
 
   props.domDialogBinder.bind(
-    new MatchingDialog(props.resources),
+    new MatchingDialog(props),
     matchingDialogConnector,
   );
   await props.api.disconnectWebsocket();
