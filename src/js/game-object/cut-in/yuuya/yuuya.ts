@@ -6,14 +6,17 @@ import type { PreRender } from "../../../game-loop/pre-render";
 import type { GameObjectAction } from "../../action/game-object-action";
 import { hidden } from "./animation/hidden";
 import { show } from "./animation/show";
-import {createYuuyaCutInProps, GenerateYuuyaCutInPropsParams} from "./props/create-yuuya-cutin-props";
+import {
+  createYuuyaCutInProps,
+  GenerateYuuyaCutInPropsParams,
+} from "./props/create-yuuya-cutin-props";
 import { YuuyaCutInProps } from "./props/yuuya-cutin-props";
 
 /** コンストラクタのパラメータ */
 export type ConstructYuuyaCutInParams = GenerateYuuyaCutInPropsParams & {
   /** ゲームオブジェクトアクション */
-  gameObjectAction: Observable<GameObjectAction>,
-}
+  gameObjectAction: Observable<GameObjectAction>;
+};
 
 /** ユウヤ カットイン */
 export class YuuyaCutIn {
