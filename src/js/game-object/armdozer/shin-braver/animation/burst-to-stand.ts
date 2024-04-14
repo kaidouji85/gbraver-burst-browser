@@ -10,11 +10,11 @@ import { ShinBraverAnimationProps } from "./animation-props";
  * @return アニメーション
  */
 export function burstToStand(props: ShinBraverAnimationProps): Animate {
-  const { model, sounds } = props;
+  const { model, sounds, se } = props;
   return onStart(() => {
     model.animation.type = "BURST_DOWN";
     model.animation.frame = 1;
-    sounds.motor.sound.play();
+    se.play(sounds.motor);
   })
     .chain(
       tween(model.animation, (t) =>
@@ -35,7 +35,7 @@ export function burstToStand(props: ShinBraverAnimationProps): Animate {
     .chain(delay(500))
     .chain(
       onStart(() => {
-        sounds.motor.sound.play();
+        se.play(sounds.motor);
       }),
     )
     .chain(
