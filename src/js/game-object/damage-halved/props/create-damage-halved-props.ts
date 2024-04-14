@@ -1,4 +1,5 @@
 import { Resources } from "../../../resource";
+import { SEPlayer } from "../../../se/se-player";
 import { createInitialValue } from "../model/initial-value";
 import { DamageHalvedSounds } from "../sounds/damage-halved-sounds";
 import { DamageHalvedView } from "../view/damage-halved-view";
@@ -10,6 +11,8 @@ export type GenerateDamageHalvedPropsParams = {
   view: DamageHalvedView;
   /** リソース管理オブジェクト */
   resources: Resources;
+  /** SE再生オブジェクト */
+  se: SEPlayer;
 };
 
 /**
@@ -20,10 +23,10 @@ export type GenerateDamageHalvedPropsParams = {
 export function createDamageHalvedProps(
   params: GenerateDamageHalvedPropsParams,
 ): DamageHalvedProps {
-  const { resources, view } = params;
+  const { resources } = params;
   return {
+    ...params,
     model: createInitialValue(),
-    view,
     sounds: new DamageHalvedSounds(resources),
   };
 }
