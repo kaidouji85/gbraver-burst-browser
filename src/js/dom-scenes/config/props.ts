@@ -99,7 +99,7 @@ export function createConfigProps(params: PropsCreatorParams): ConfigProps {
   root.innerHTML = rootInnerHTML(ids, config);
   root.className = ROOT_CLASS;
   const elements = extractElements(root, ids);
-  const dialog = new ConfigChangedDialog(resources, se);
+  const dialog = new ConfigChangedDialog(params);
   root.appendChild(dialog.getRootHTMLElement());
   return {
     originConfig: config,
