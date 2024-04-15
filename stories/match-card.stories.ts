@@ -8,9 +8,9 @@ export default {
   title: "match-card",
 };
 
-export const Scene: DOMStubStory = domStub((resources) => {
+export const Scene: DOMStubStory = domStub((params) => {
   const scene = new MatchCard({
-    resources: resources,
+    ...params,
     player: ArmdozerIds.LIGHTNING_DOZER,
     enemy: ArmdozerIds.GENESIS_BRAVER,
     caption: "STAGE X",

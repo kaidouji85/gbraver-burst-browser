@@ -7,7 +7,7 @@ import { domStub } from "./stub/dom-stub";
 export default {
   title: "episode-selector",
 };
-export const scene: DOMStubStory = domStub((resources, se) => {
+export const scene: DOMStubStory = domStub((params) => {
   const episodes: Episode[] = [
     {
       id: "01",
@@ -35,8 +35,7 @@ export const scene: DOMStubStory = domStub((resources, se) => {
     },
   ];
   const scene = new EpisodeSelector({
-    resources,
-    se,
+    ...params,
     episodes,
   });
   scene.notifyPrev().subscribe(() => {

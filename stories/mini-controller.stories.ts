@@ -8,8 +8,8 @@ export default {
 };
 
 const miniControllerStory = (config: ButtonConfig) =>
-  domStub((resources, se) => {
-    const controller = new MiniController({ resources, se });
+  domStub((params) => {
+    const controller = new MiniController(params);
     const decide = () =>
       controller
         .decided()
@@ -98,8 +98,8 @@ export const disabledAll = miniControllerStory({
   canPilotSkill: false,
 });
 
-export const showHidden = domStub((resources, se) => {
-  const controller = new MiniController({ resources, se });
+export const showHidden = domStub((params) => {
+  const controller = new MiniController(params);
   controller.engage({
     battery: 5,
     maxBattery: 5,

@@ -6,8 +6,8 @@ export default {
   title: "difficulty",
 };
 
-export const dialog: DOMStubStory = domStub((resources, se) => {
-  const dialog = new DifficultyDialog({ resources, se });
+export const dialog: DOMStubStory = domStub((params) => {
+  const dialog = new DifficultyDialog(params);
   dialog.notifySelectionComplete().subscribe((diffuculty) => {
     console.log(diffuculty);
   });

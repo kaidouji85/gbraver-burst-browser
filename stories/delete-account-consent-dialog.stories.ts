@@ -6,11 +6,8 @@ export default {
   title: "delete-account-consent-dialog",
 };
 
-export const dialog: DOMStubStory = domStub((resources, se) => {
-  const deleteAccountConsentDialog = new DeleteAccountConsentDialog({
-    resources,
-    se,
-  });
+export const dialog: DOMStubStory = domStub((params) => {
+  const deleteAccountConsentDialog = new DeleteAccountConsentDialog(params);
   deleteAccountConsentDialog.notifyAccountDeletion().subscribe(() => {
     console.log("delete account");
   });

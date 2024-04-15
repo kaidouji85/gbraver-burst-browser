@@ -8,9 +8,9 @@ export default {
   title: "config",
 };
 
-export const Scene: DOMStubStory = domStub((resources, se) => {
+export const Scene: DOMStubStory = domStub((params,) => {
   const scene = new Config({
-    resources,
+    ...params,
     config: {
       webGLPixelRatio: 2,
       battleAnimationTimeScale: 1,
@@ -19,8 +19,6 @@ export const Scene: DOMStubStory = domStub((resources, se) => {
       battleControllerType: "BigButton",
       performanceStatsVisibility: "hidden",
     },
-    bgm: createBGMManager(),
-    se,
   });
   scene.notifyPrev().subscribe(() => {
     console.log("prev");
@@ -32,7 +30,7 @@ export const Scene: DOMStubStory = domStub((resources, se) => {
   return scene.getRootHTMLElement();
 });
 
-export const ConfigChanged: DOMStubStory = domStub((resources, se) => {
+export const ConfigChanged: DOMStubStory = domStub(({resources, se}) => {
   const dialog = new ConfigChangedDialog(resources, se);
   dialog.show();
   dialog.notifyClosed().subscribe(() => {

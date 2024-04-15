@@ -4,8 +4,8 @@ import { domStub } from "./stub/dom-stub";
 export default {
   title: "matching-dialog",
 };
-export const dialog: DOMStubStory = domStub((resources, se) => {
-  const dialog = new MatchingDialog({ resources, se });
+export const dialog: DOMStubStory = domStub((params) => {
+  const dialog = new MatchingDialog(params);
   dialog.notifyMatchingCanceled().subscribe(() => {
     console.log("matching canceled");
   });
