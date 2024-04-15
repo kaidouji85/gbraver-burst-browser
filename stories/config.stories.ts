@@ -1,4 +1,3 @@
-import { createBGMManager } from "../src/js/bgm/bgm-manager";
 import { Config } from "../src/js/dom-scenes/config";
 import { ConfigChangedDialog } from "../src/js/dom-scenes/config/config-changed-dialog";
 import type { DOMStubStory } from "./stub/dom-stub";
@@ -8,7 +7,7 @@ export default {
   title: "config",
 };
 
-export const Scene: DOMStubStory = domStub((params,) => {
+export const Scene: DOMStubStory = domStub((params) => {
   const scene = new Config({
     ...params,
     config: {

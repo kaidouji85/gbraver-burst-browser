@@ -46,10 +46,10 @@ export type ConfigChangedDialogProps = {
 /** 生成パラメータ */
 export type PropsCreatorParams = {
   /** リソース管理オブジェクト */
-  resources: Resources,
+  resources: Resources;
   /** se SE再生オブジェクト */
-  se: SEPlayer,
-}
+  se: SEPlayer;
+};
 
 /**
  * 設定変更通知ダイアログプロパティを生成する
@@ -57,7 +57,7 @@ export type PropsCreatorParams = {
  * @return 生成したダイアログプロパティ
  */
 export function createConfigChangedDialogProps(
-  params: PropsCreatorParams
+  params: PropsCreatorParams,
 ): ConfigChangedDialogProps {
   const { resources } = params;
   const ids = {

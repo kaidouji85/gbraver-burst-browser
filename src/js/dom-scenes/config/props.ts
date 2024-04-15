@@ -67,14 +67,14 @@ export type ConfigProps = {
 /** プロパティ生成関数のパラメータ */
 export type PropsCreatorParams = {
   /** リソース管理オブジェクト */
-  resources: Resources,
+  resources: Resources;
   /** ブラウザ設定 */
-  config: GBraverBurstBrowserConfig,
+  config: GBraverBurstBrowserConfig;
   /** BGM管理オブジェクト */
-  bgm: BGMManager,
+  bgm: BGMManager;
   /** SE再生オブジェクト */
-  se: SEPlayer,
-}
+  se: SEPlayer;
+};
 
 /**
  * 設定画面プロパティを生成する

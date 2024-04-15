@@ -15,7 +15,7 @@ export async function onConfigChangeStart(
   const config = await props.config.load();
   const scene = new Config({
     ...props,
-    config
+    config,
   });
   props.domSceneBinder.bind(scene, configConnector);
   await props.fader.fadeIn();

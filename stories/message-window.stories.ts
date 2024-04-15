@@ -290,20 +290,18 @@ export const defenseBatteryCaption: DOMStubStory = domStub((params) => {
   return dom.getRootHTMLElement();
 });
 
-export const playerYorosikuOnegaishimasu: DOMStubStory = domStub(
-  (params) => {
-    const dom = new MessageWindow({
-      ...params,
-      type: "PlayerShout",
-      faceOrientation: "Left",
-      facePosition: "Right",
-    });
-    dom.visible(true);
-    dom.lighten();
-    dom.face("Shinya");
-    dom.faceVisible(true);
-    dom.messagesInInnerHTML(yoroshikuOnegaiShimasu());
-    dom.nextMessageIconVisible(false);
-    return dom.getRootHTMLElement();
-  },
-);
+export const playerYorosikuOnegaishimasu: DOMStubStory = domStub((params) => {
+  const dom = new MessageWindow({
+    ...params,
+    type: "PlayerShout",
+    faceOrientation: "Left",
+    facePosition: "Right",
+  });
+  dom.visible(true);
+  dom.lighten();
+  dom.face("Shinya");
+  dom.faceVisible(true);
+  dom.messagesInInnerHTML(yoroshikuOnegaiShimasu());
+  dom.nextMessageIconVisible(false);
+  return dom.getRootHTMLElement();
+});
