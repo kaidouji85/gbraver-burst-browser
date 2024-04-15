@@ -16,7 +16,7 @@ import { rootInnerHTML } from "../dom/root-inner-html";
 import { DeleteAccountConsentDialogProps } from "../props";
 
 /** 生成パラメータ */
-export type GenerateDeleteAccountConsentDialogPropsParams = {
+export type PropsCreatorParams = {
   /** リソース管理オブジェクト */
   resources: Resources;
   /** SE再生オブジェクト */
@@ -29,7 +29,7 @@ export type GenerateDeleteAccountConsentDialogPropsParams = {
  * @return 生成結果
  */
 export function createProps(
-  params: GenerateDeleteAccountConsentDialogPropsParams,
+  params: PropsCreatorParams,
 ): DeleteAccountConsentDialogProps {
   const { resources } = params;
   const root = document.createElement("div");

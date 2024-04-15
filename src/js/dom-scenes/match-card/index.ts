@@ -1,12 +1,12 @@
 import type { DOMScene } from "../dom-scene";
 import {
   createMatchCardProps,
-  GenerateMatchCardPropsParams,
+  PropsCreatorParams,
 } from "./procedures/create-match-card-props";
 import { MatchCardProps } from "./props";
 
 /** コンストラクタのパラメータ */
-type Param = GenerateMatchCardPropsParams;
+type MatchCardParams = PropsCreatorParams;
 
 /** 対戦カード画面 */
 export class MatchCard implements DOMScene {
@@ -17,7 +17,7 @@ export class MatchCard implements DOMScene {
    * コンストラクタ
    * @param param パラメータ
    */
-  constructor(param: Param) {
+  constructor(param: MatchCardParams) {
     this.#props = createMatchCardProps(param);
   }
 

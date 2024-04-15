@@ -20,7 +20,7 @@ import { rootInnerHTML } from "../dom/root-inner-html";
 import { ArmdozerSelectorProps } from "../props";
 
 /** ArmdozerSelectorProps生成パラメータ */
-export type GenerateArmdozerSelectorPropsParams = {
+export type PropsCreatorParams = {
   /** リソース管理オブジェクト */
   resources: Resources;
   /** 選択可能なアームドーザIDリスト */
@@ -37,7 +37,7 @@ export type GenerateArmdozerSelectorPropsParams = {
  * @return 生成結果
  */
 export function createArmdozerSelectorProps(
-  params: GenerateArmdozerSelectorPropsParams,
+  params: PropsCreatorParams,
 ): ArmdozerSelectorProps {
   const { resources, armdozerIds, initialArmdozerId } = params;
   const root = document.createElement("div");

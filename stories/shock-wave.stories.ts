@@ -1,7 +1,7 @@
 import { delay } from "../src/js/animation/delay";
 import {
   enemyShockWave,
-  GenerateShockWaveParams,
+  ShockWaveCreatorParams,
   playerShockWave,
 } from "../src/js/game-object/hitmark/shock-wave";
 import { ShockWave } from "../src/js/game-object/hitmark/shock-wave/shock-wave";
@@ -19,7 +19,7 @@ export default {
  */
 const shockWaveStory =
   (
-    generator: (params: GenerateShockWaveParams) => ShockWave,
+    generator: (params: ShockWaveCreatorParams) => ShockWave,
     fn: (shockWave: ShockWave) => void,
   ) =>
   () => {

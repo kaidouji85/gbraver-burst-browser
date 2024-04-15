@@ -9,13 +9,13 @@ import { onPrivateMatchGuestSelect } from "./listeners/on-private-match-guest-se
 import { onPrivateMatchHostSelect } from "./listeners/on-private-match-host-select";
 import {
   createNetBattleSelectrProps,
-  GenerateNetBattleSelectorDialogPropsParams,
   NetBattleSelectorDialogProps,
+  PropsCreatorParams,
 } from "./props";
 
 /** コンストラクタのパラメータ */
-export type ConstructNetBattleSelectorDialogParams =
-  GenerateNetBattleSelectorDialogPropsParams;
+export type NetBattleSelectorDialogParams =
+  PropsCreatorParams;
 
 /** ネットバトルセレクターダイアログ */
 export class NetBattleSelectorDialog implements DOMDialog {
@@ -28,7 +28,7 @@ export class NetBattleSelectorDialog implements DOMDialog {
    * コンストラクタ
    * @param params コンストラクタのパラメータ
    */
-  constructor(params: ConstructNetBattleSelectorDialogParams) {
+  constructor(params: NetBattleSelectorDialogParams) {
     this.#props = createNetBattleSelectrProps(params);
     this.#unsubscribers = [
       domPushStream(this.#props.casualMatchButton).subscribe((action) =>

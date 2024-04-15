@@ -9,13 +9,13 @@ import { hidden } from "./animation/hidden";
 import { show } from "./animation/show";
 import {
   createWingDozerCutInProps,
-  GenerateWingDozerCutInPropsParams,
+  PropsCreatorParams,
 } from "./props/create-wing-dozer-cutin-props";
 import { WingDozerCutInProps } from "./props/wing-dozer-cutin-props";
 
 /** コンストラクタのパラメータ */
-export type ConstructWingDozerCutInParams =
-  GenerateWingDozerCutInPropsParams & {
+export type WingDozerCutInParams =
+  PropsCreatorParams & {
     /** ゲームオブジェクトアクション */
     gameObjectAction: Observable<GameObjectAction>;
   };
@@ -31,7 +31,7 @@ export class WingDozerCutIn implements HUDTracking {
    * コンストラクタ
    * @param params パラメータ
    */
-  constructor(params: ConstructWingDozerCutInParams) {
+  constructor(params: WingDozerCutInParams) {
     const { gameObjectAction } = params;
     this.#props = createWingDozerCutInProps(params);
     this.#unsubscriber = gameObjectAction.subscribe((action) => {

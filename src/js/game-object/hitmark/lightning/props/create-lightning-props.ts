@@ -6,7 +6,7 @@ import { LightningView } from "../view/lightning-view";
 import { LightningProps } from "./lightning-props";
 
 /** 電撃ヒットマークプロパティ生成パラメータ */
-export type GenerateLightningPropsParams = {
+export type PropsCreatorParams = {
   /** ビュー */
   view: LightningView;
   /** リソース管理オブジェクト */
@@ -21,7 +21,7 @@ export type GenerateLightningPropsParams = {
  * @return 生成結果
  */
 export function createLightningProps(
-  params: GenerateLightningPropsParams,
+  params: PropsCreatorParams,
 ): LightningProps {
   const { resources } = params;
   return {

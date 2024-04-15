@@ -7,7 +7,7 @@ import { EnemyNeoLandozerCutInView } from "./view/enemy-neo-landozer-cutin-view"
 import { PlayerNeoLandozerCutInView } from "./view/player-neo-landozer-cutin-view";
 
 /** 生成パラメータ */
-export type GenerateNeoLandozerCutInParams = {
+export type NeoLandozerCutInCreatorParams = {
   /** リソース管理オブジェクト */
   resources: Resources;
   /** ゲームオブジェクトアクション */
@@ -20,7 +20,7 @@ export type GenerateNeoLandozerCutInParams = {
  * @return 生成結果
  */
 export function playerNeoLandozerCutIn(
-  params: GenerateNeoLandozerCutInParams,
+  params: NeoLandozerCutInCreatorParams,
 ): NeoLandozerCutIn {
   const { resources } = params;
   const view = new PlayerNeoLandozerCutInView(resources);
@@ -33,7 +33,7 @@ export function playerNeoLandozerCutIn(
  * @return 生成結果
  */
 export function enemyNeoLandozerCutIn(
-  params: GenerateNeoLandozerCutInParams,
+  params: NeoLandozerCutInCreatorParams,
 ): NeoLandozerCutIn {
   const { resources } = params;
   const view = new EnemyNeoLandozerCutInView(resources);

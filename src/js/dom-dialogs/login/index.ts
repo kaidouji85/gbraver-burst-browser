@@ -4,12 +4,12 @@ import { DOMDialog } from "../dialog";
 import { bindEventListeners } from "./procedures/bind-event-listeners";
 import {
   createProps,
-  GenerateLoginDialogPropsParams,
+  PropsCreatorParams,
 } from "./procedures/create-props";
 import { LoginDialogProps } from "./props";
 
 /** コンストラクタのパラメータ */
-export type ConstructLoginDialogParams = GenerateLoginDialogPropsParams;
+export type LoginDialogParams = PropsCreatorParams;
 
 /** ログイン ダイアログ */
 export class LoginDialog implements DOMDialog {
@@ -22,7 +22,7 @@ export class LoginDialog implements DOMDialog {
    * コンストラクタ
    * @param params パラメータ
    */
-  constructor(params: ConstructLoginDialogParams) {
+  constructor(params: LoginDialogParams) {
     this.#props = createProps(params);
     this.#unsubscribers = bindEventListeners(this.#props);
   }

@@ -8,12 +8,12 @@ import { decide } from "./animation/decide";
 import { open } from "./animation/open";
 import {
   createPilotButtonProps,
-  GeneratePilotButtonPropsParams,
+  PropsCreatorParams,
 } from "./props/create-pilot-button-props";
 import { PilotButtonProps } from "./props/pilot-button-props";
 
 /** コンストラクタのパラメータ */
-type Params = GeneratePilotButtonPropsParams;
+type PilotButtonParams = PropsCreatorParams;
 
 /** パイロットボタン */
 export class PilotButton {
@@ -26,7 +26,7 @@ export class PilotButton {
    * コンストラクタ
    * @param params パラメータ
    */
-  constructor(params: Params) {
+  constructor(params: PilotButtonParams) {
     const { gameObjectAction } = params;
     this.#props = createPilotButtonProps(params);
     this.#unsubscribers = [

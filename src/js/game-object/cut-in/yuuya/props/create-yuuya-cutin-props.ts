@@ -6,7 +6,7 @@ import { YuuyaView } from "../view/yuuya-view";
 import { YuuyaCutInProps } from "./yuuya-cutin-props";
 
 /** ユウヤ カットイン プロパティ生成パラメータ */
-export type GenerateYuuyaCutInPropsParams = {
+export type PropsCreatorParams = {
   /** ビュー */
   view: YuuyaView;
   /** リソース管理オブジェクト */
@@ -21,7 +21,7 @@ export type GenerateYuuyaCutInPropsParams = {
  * @return 生成結果
  */
 export function createYuuyaCutInProps(
-  params: GenerateYuuyaCutInPropsParams,
+  params: PropsCreatorParams,
 ): YuuyaCutInProps {
   const { resources } = params;
   return {

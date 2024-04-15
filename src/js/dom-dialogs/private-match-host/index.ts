@@ -5,13 +5,13 @@ import { DOMDialog } from "../dialog";
 import { onCloserPush } from "./listeners/on-closer-push";
 import {
   createPrivateMatchHostDialogProps,
-  GeneratePrivateMatchHostDialogPropsParams,
   PrivateMatchHostDialogProps,
+  PropsCreatorParams,
 } from "./props";
 
 /** コンストラクタのパラメータ */
-export type ConstructPrivateMatchHostDialogParams =
-  GeneratePrivateMatchHostDialogPropsParams;
+export type PrivateMatchHostDialogParams =
+  PropsCreatorParams;
 
 /** プライベートマッチホストダイアログ */
 export class PrivateMatchHostDialog implements DOMDialog {
@@ -24,7 +24,7 @@ export class PrivateMatchHostDialog implements DOMDialog {
    * コンストラクタ
    * @param params パラメータ
    */
-  constructor(params: ConstructPrivateMatchHostDialogParams) {
+  constructor(params: PrivateMatchHostDialogParams) {
     this.#props = createPrivateMatchHostDialogProps(params);
     this.#unsubscribers = [
       domPushStream(this.#props.closer).subscribe((action) => {

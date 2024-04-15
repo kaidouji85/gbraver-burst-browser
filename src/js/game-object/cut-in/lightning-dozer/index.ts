@@ -7,7 +7,7 @@ import { EnemyLightningDozerCutInView } from "./view/enemy-lightning-dozer-cutin
 import { PlayerLightningDozerCutInView } from "./view/player-lightning-dozer-cutin-view";
 
 /** ライトニングドーザ カットイン生成パラメータ */
-export type GenerateLightningDozerCutInParams = {
+export type LightningDozerCutInCreatorParams = {
   /** リソース管理オブジェクト */
   resources: Resources;
   /** ゲームオブジェクトアクション */
@@ -20,7 +20,7 @@ export type GenerateLightningDozerCutInParams = {
  * @return 生成結果
  */
 export function playerLightningDozerCutIn(
-  params: GenerateLightningDozerCutInParams,
+  params: LightningDozerCutInCreatorParams,
 ): LightningDozerCutIn {
   const { resources } = params;
   const view = new PlayerLightningDozerCutInView(resources);
@@ -33,7 +33,7 @@ export function playerLightningDozerCutIn(
  * @return 生成結果
  */
 export function enemyLightningiDozerCutIn(
-  params: GenerateLightningDozerCutInParams,
+  params: LightningDozerCutInCreatorParams,
 ): LightningDozerCutIn {
   const { resources } = params;
   const view = new EnemyLightningDozerCutInView(resources);

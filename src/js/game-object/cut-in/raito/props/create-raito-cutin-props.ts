@@ -6,7 +6,7 @@ import { RaitoView } from "../view/raito-view";
 import { RaitoCutInProps } from "./raito-cutin-props";
 
 /** 生成パラメータ */
-export type GenerateRaitoCutInPropsParams = {
+export type PropsCreatorParams = {
   /** ビュー */
   view: RaitoView;
   /** リソース管理オブジェクト */
@@ -21,7 +21,7 @@ export type GenerateRaitoCutInPropsParams = {
  * @return 生成結果
  */
 export function createRaitoCutInProps(
-  params: GenerateRaitoCutInPropsParams,
+  params: PropsCreatorParams,
 ): RaitoCutInProps {
   const { resources } = params;
   return {

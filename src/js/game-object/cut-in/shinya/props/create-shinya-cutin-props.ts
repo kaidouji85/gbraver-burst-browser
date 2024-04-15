@@ -6,7 +6,7 @@ import { ShinyaView } from "../view/shinya-view";
 import { ShinyaCutInProps } from "./shinya-cutin-props";
 
 /** 生成パラメータ */
-export type GenerateShinyaCutInPropsParams = {
+export type PropsCreatorParams = {
   /** ビュー */
   view: ShinyaView;
   /** リソース管理オブジェクト */
@@ -21,7 +21,7 @@ export type GenerateShinyaCutInPropsParams = {
  * @return 生成されたプロパティ
  */
 export function createShinyaCutInProps(
-  params: GenerateShinyaCutInPropsParams,
+  params: PropsCreatorParams,
 ): ShinyaCutInProps {
   const { resources } = params;
   return {

@@ -11,7 +11,7 @@ import { TsubasaIcon } from "./view/tsubasa";
 import { YuuyaIcon } from "./view/yuuya";
 
 /** 生成パラメータ */
-export type GeneratePilotButtonParams = {
+export type PilotButtonCreatorParams = {
   /** リソース管理オブジェクト */
   resources: Resources;
   /** SE再生オブジェクト */
@@ -26,7 +26,7 @@ export type GeneratePilotButtonParams = {
  * @return パイロットボタン
  */
 export function shinyaPilotButton(
-  params: GeneratePilotButtonParams,
+  params: PilotButtonCreatorParams,
 ): PilotButton {
   const { resources } = params;
   const pilotIcon = new ShinyaIcon(resources);
@@ -38,7 +38,7 @@ export function shinyaPilotButton(
  * @param params 生成パラメータ
  * @return パイロットボタン
  */
-export function gaiPilotButton(params: GeneratePilotButtonParams): PilotButton {
+export function gaiPilotButton(params: PilotButtonCreatorParams): PilotButton {
   const { resources } = params;
   const pilotIcon = new GaiIcon(resources);
   return new PilotButton({ ...params, pilotIcon });
@@ -50,7 +50,7 @@ export function gaiPilotButton(params: GeneratePilotButtonParams): PilotButton {
  * @return パイロットボタン
  */
 export function raitoPilotButton(
-  params: GeneratePilotButtonParams,
+  params: PilotButtonCreatorParams,
 ): PilotButton {
   const { resources } = params;
   const pilotIcon = new RaitoIcon(resources);
@@ -63,7 +63,7 @@ export function raitoPilotButton(
  * @return パイロットボタン
  */
 export function tsubasaPilotButton(
-  params: GeneratePilotButtonParams,
+  params: PilotButtonCreatorParams,
 ): PilotButton {
   const { resources } = params;
   const pilotIcon = new TsubasaIcon(resources);
@@ -77,7 +77,7 @@ export function tsubasaPilotButton(
  * @return パイロットボタン
  */
 export function yuuyaPilotButton(
-  params: GeneratePilotButtonParams,
+  params: PilotButtonCreatorParams,
 ): PilotButton {
   const { resources } = params;
   const pilotIcon = new YuuyaIcon(resources);

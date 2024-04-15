@@ -7,7 +7,7 @@ import { EnemyBatteryCorrectView } from "./view/enemy-battery-correct-view";
 import { PlayerBatteryCorrectView } from "./view/player-battery-correct-view";
 
 /** 生成パラメータ */
-export type GenerateBatteryCorrectParams = {
+export type BatteryCorrectCreatorParams = {
   /** リソース管理オブジェクト */
   resources: Resources;
   /** ゲームオブジェクトアクション */
@@ -20,7 +20,7 @@ export type GenerateBatteryCorrectParams = {
  * @return バッテリー補正
  */
 export function playerBatteryCorrect(
-  params: GenerateBatteryCorrectParams,
+  params: BatteryCorrectCreatorParams,
 ): BatteryCorrect {
   const { resources } = params;
   const view = new PlayerBatteryCorrectView(resources);
@@ -33,7 +33,7 @@ export function playerBatteryCorrect(
  * @return バッテリー補正
  */
 export function enemyBatteryCorrect(
-  params: GenerateBatteryCorrectParams,
+  params: BatteryCorrectCreatorParams,
 ): BatteryCorrect {
   const { resources } = params;
   const view = new EnemyBatteryCorrectView(resources);

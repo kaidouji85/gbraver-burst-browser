@@ -5,13 +5,13 @@ import type { DOMDialog } from "../dialog";
 import { bindEventListeners } from "./listeners";
 import {
   DifficultyDialogProps,
-  GenerateDifficultyDialogPropsParams,
+  PropsCreatorParams,
 } from "./props";
 import { createDifficultyDialogProps } from "./props";
 
 /** コンストラクタのパラメータ */
-export type ConstructDifficultyDialogParams =
-  GenerateDifficultyDialogPropsParams;
+export type DifficultyDialogParams =
+  PropsCreatorParams;
 
 /** 難易度選択ダイアログ */
 export class DifficultyDialog implements DOMDialog {
@@ -24,7 +24,7 @@ export class DifficultyDialog implements DOMDialog {
    * コンストラクタ
    * @param params パラメータ
    */
-  constructor(params: ConstructDifficultyDialogParams) {
+  constructor(params: DifficultyDialogParams) {
     this.#props = createDifficultyDialogProps(params);
     this.#unsubscribers = bindEventListeners(this.#props);
   }

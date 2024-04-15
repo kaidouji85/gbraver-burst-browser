@@ -6,7 +6,7 @@ import { TsubasaView } from "../view/tsubasa-view";
 import { TsubasaCutInProps } from "./tsubasa-cutin-props";
 
 /** ツバサ カットイン プロパティ生成パラメータ */
-export type GenerateTsubasaCutInPropsParams = {
+export type PropsCreatorParams = {
   /** ビュー */
   view: TsubasaView;
   /** リソース管理オブジェクト */
@@ -21,7 +21,7 @@ export type GenerateTsubasaCutInPropsParams = {
  * @return 生成されたTsubasaCutInProps
  */
 export function createTsubasaCutInProps(
-  params: GenerateTsubasaCutInPropsParams,
+  params: PropsCreatorParams,
 ): TsubasaCutInProps {
   const { resources } = params;
   return {

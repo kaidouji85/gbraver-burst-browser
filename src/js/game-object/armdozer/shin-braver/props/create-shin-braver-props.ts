@@ -6,7 +6,7 @@ import { ShinBraverView } from "../view/shin-braver-view";
 import { ShinBraverProps } from "./shin-braver-props";
 
 /** ShinBraverProps生成パラメータ */
-export type GenerateShinBraverPropsParams = {
+export type PropsCreatorParams = {
   /** ビュー */
   view: ShinBraverView;
   /** リソース管理オブジェクト */
@@ -21,7 +21,7 @@ export type GenerateShinBraverPropsParams = {
  * @return 生成結果
  */
 export function createShinBraverProps(
-  params: GenerateShinBraverPropsParams,
+  params: PropsCreatorParams,
 ): ShinBraverProps {
   const { resources } = params;
   return {

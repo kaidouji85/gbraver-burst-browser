@@ -1,7 +1,7 @@
 import { delay } from "../src/js/animation/delay";
 import {
   enemyYuuyaCutIn,
-  GenerateYuuyaCutInParams,
+  YuuyaCutInCreatorParams,
   playerYuuyaCutIn,
 } from "../src/js/game-object/cut-in/yuuya";
 import { YuuyaCutIn } from "../src/js/game-object/cut-in/yuuya/yuuya";
@@ -17,7 +17,7 @@ export default {
  * @param gameObjectAction ゲームオブジェクトアクション
  * @return カットイン
  */
-type CutInGenerator = (params: GenerateYuuyaCutInParams) => YuuyaCutIn;
+type CutInGenerator = (params: YuuyaCutInCreatorParams) => YuuyaCutIn;
 
 /**
  * カットイン ストーリー

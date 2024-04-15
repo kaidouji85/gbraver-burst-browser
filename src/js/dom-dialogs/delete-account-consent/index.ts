@@ -4,13 +4,13 @@ import { DOMDialog } from "../dialog";
 import { bindEventListeners } from "./procedure/bind-event-listeners";
 import {
   createProps,
-  GenerateDeleteAccountConsentDialogPropsParams,
+  PropsCreatorParams,
 } from "./procedure/create-props";
 import { DeleteAccountConsentDialogProps } from "./props";
 
 /** コンストラクタのパラメータ */
-export type ConstructDeleteAccountConsentDialogParams =
-  GenerateDeleteAccountConsentDialogPropsParams;
+export type DeleteAccountConsentDialogParams =
+  PropsCreatorParams;
 
 /** アカウント削除同意ダイアログ */
 export class DeleteAccountConsentDialog implements DOMDialog {
@@ -23,7 +23,7 @@ export class DeleteAccountConsentDialog implements DOMDialog {
    * コンストラクタ
    * @param params パラメータ
    */
-  constructor(params: ConstructDeleteAccountConsentDialogParams) {
+  constructor(params: DeleteAccountConsentDialogParams) {
     this.#props = createProps(params);
     this.#unsubscribers = bindEventListeners(this.#props);
   }

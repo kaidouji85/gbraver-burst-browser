@@ -3,7 +3,7 @@ import { DamageIndicatorView } from "../view/damage-indicator-view";
 import { DamageIndicatorProps } from "./damage-indicator-props";
 
 /** DamageIndicatorProps生成パラメータ */
-export type GenerateDamageIndicatorPropsParams = {
+export type PropsCreatorParams = {
   /** ビュー */
   view: DamageIndicatorView;
 };
@@ -14,7 +14,7 @@ export type GenerateDamageIndicatorPropsParams = {
  * @return 生成結果
  */
 export function createDamageIndicatorProps(
-  params: GenerateDamageIndicatorPropsParams,
+  params: PropsCreatorParams,
 ): DamageIndicatorProps {
   const { view } = params;
   return {

@@ -6,7 +6,7 @@ import { LightningDozerView } from "../view/lightning-dozer-view";
 import { LightningDozerProps } from "./lightning-dozer-props";
 
 /** LightningDozerProps生成パラメータ */
-export type GenerateLightningDozerPropsParams = {
+export type PropsCreatorParams = {
   /** リソース管理オブジェクト */
   resources: Resources;
   /** SE再生 */
@@ -21,7 +21,7 @@ export type GenerateLightningDozerPropsParams = {
  * @return 生成結果
  */
 export function createLightningDozerProps(
-  params: GenerateLightningDozerPropsParams,
+  params: PropsCreatorParams,
 ): LightningDozerProps {
   const { resources } = params;
   return {

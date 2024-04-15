@@ -6,7 +6,7 @@ import { GaiView } from "../view/gai-view";
 import { GaiCutInProps } from "./gai-cutin-props";
 
 /** GaiCutInProps生成パラメータ */
-export type GenerateGaiCutInPropsParams = {
+export type PropsCreatorParams = {
   /** ビュー */
   view: GaiView;
   /** リソース管理オブジェクト */
@@ -21,7 +21,7 @@ export type GenerateGaiCutInPropsParams = {
  * @return 生成結果
  */
 export function createGaiCutInProps(
-  params: GenerateGaiCutInPropsParams,
+  params: PropsCreatorParams,
 ): GaiCutInProps {
   const { resources } = params;
   return {

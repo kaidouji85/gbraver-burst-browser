@@ -6,7 +6,7 @@ import { WingDozerView } from "../view/wing-dozer-view";
 import { WingDozerProps } from "./wing-dozer-props";
 
 /** WingDozerProps生成パラメータ */
-export type GenerateWingDozerPropsParams = {
+export type PropsCreatorParams = {
   /** ビュー */
   view: WingDozerView;
   /** リソース管理オブジェクト */
@@ -21,7 +21,7 @@ export type GenerateWingDozerPropsParams = {
  * @return 生成結果
  */
 export function createWingDozerProps(
-  params: GenerateWingDozerPropsParams,
+  params: PropsCreatorParams,
 ): WingDozerProps {
   const { resources } = params;
   return {

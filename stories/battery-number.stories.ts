@@ -1,7 +1,7 @@
 import { delay } from "../src/js/animation/delay";
 import {
   enemyBatteryNumber,
-  GenerateBatteryNumberParams,
+  BatteryNumberCreatorParams,
   playerBatteryNumber,
 } from "../src/js/game-object/battery-number";
 import { BatteryNumber } from "../src/js/game-object/battery-number/battery-number";
@@ -19,7 +19,7 @@ export default {
  */
 const batteryNumberStory =
   (
-    generator: (params: GenerateBatteryNumberParams) => BatteryNumber,
+    generator: (params: BatteryNumberCreatorParams) => BatteryNumber,
     fn: (batteryNumber: BatteryNumber) => void,
   ) =>
   () => {

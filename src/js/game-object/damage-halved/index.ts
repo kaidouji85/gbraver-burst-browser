@@ -8,7 +8,7 @@ import { EnemyDamageHalvedView } from "./view/enemy-damage-halved-view";
 import { PlayerDamageHalvedView } from "./view/player-damage-halved-view";
 
 /** ダメージ半減生成パラメータ */
-export type GenerateDamageHalvedParams = {
+export type DamageHalvedCreatorParams = {
   /** リソース管理オブジェクト */
   resources: Resources;
   /** SE再生オブジェクト */
@@ -23,7 +23,7 @@ export type GenerateDamageHalvedParams = {
  * @return 生成結果
  */
 export function playerDamageHalved(
-  params: GenerateDamageHalvedParams,
+  params: DamageHalvedCreatorParams,
 ): DamageHalved {
   const { resources } = params;
   const view = new PlayerDamageHalvedView(resources);
@@ -36,7 +36,7 @@ export function playerDamageHalved(
  * @return 生成結果
  */
 export function enemyDamageHalved(
-  params: GenerateDamageHalvedParams,
+  params: DamageHalvedCreatorParams,
 ): DamageHalved {
   const { resources } = params;
   const view = new EnemyDamageHalvedView(resources);

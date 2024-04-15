@@ -9,13 +9,13 @@ import { hidden } from "./animation/hidden";
 import { show } from "./animation/show";
 import {
   createGenesisBraverCutInProps,
-  GenerateGenesisBraverCutInPropsParams,
+  PropsCreatorParams,
 } from "./props/create-genesis-braver-cutin-props";
 import { GenesisBraverCutInProps } from "./props/genesis-braver-cutin-props";
 
 /** コンストラクタのパラメータ */
-export type ConstructGenesisBraverCutInParams =
-  GenerateGenesisBraverCutInPropsParams & {
+export type GenesisBraverCutInParams =
+  PropsCreatorParams & {
     /** ゲームオブジェクトアクション */
     gameObjectAction: Observable<GameObjectAction>;
   };
@@ -31,7 +31,7 @@ export class GenesisBraverCutIn implements HUDTracking {
    * コンストラクタ
    * @param params パラメータ
    */
-  constructor(params: ConstructGenesisBraverCutInParams) {
+  constructor(params: GenesisBraverCutInParams) {
     const { gameObjectAction } = params;
     this.#props = createGenesisBraverCutInProps(params);
     this.#unsubscribers = [

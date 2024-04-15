@@ -13,11 +13,11 @@ import { toBatterySilently } from "./procedure/to-battery-silently";
 import { BatterySelectorProps } from "./props/battery-selector-props";
 import {
   createBatterySelectorProps,
-  GenerateBatterySelectorPropsParam,
+  PropsCreatorParams,
 } from "./props/create-battery-selector-props";
 
 /** コンストラクタのパラメータ */
-export type GenerateBatterySelectorParam = GenerateBatterySelectorPropsParam;
+type BatterySelectorParam = PropsCreatorParams;
 
 /** バッテリーセレクタ */
 export class BatterySelector {
@@ -30,7 +30,7 @@ export class BatterySelector {
    * コンストラクタ
    * @param param パラメータ
    */
-  constructor(param: GenerateBatterySelectorParam) {
+  constructor(param: BatterySelectorParam) {
     this.#props = createBatterySelectorProps(param);
     this.#unsubscribers = bindEventListeners(
       this.#props,

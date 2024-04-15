@@ -7,7 +7,7 @@ import { EnemyDamageIndicatorView } from "./view/enemy-damage-indicator-view";
 import { PlayerDamageIndicatorView } from "./view/player-damage-indicator-view";
 
 /** 生成パラメータ */
-export type GenerateDamageIndicatorParams = {
+export type DamageIndicatorCreatprParams = {
   /** リソース管理オブジェクト */
   resources: Resources;
   /** ゲームオブジェクトアクション */
@@ -20,7 +20,7 @@ export type GenerateDamageIndicatorParams = {
  * @return ダメージインジケータ
  */
 export function playerDamageIndicator(
-  params: GenerateDamageIndicatorParams,
+  params: DamageIndicatorCreatprParams,
 ): DamageIndicator {
   const { resources } = params;
   const view = new PlayerDamageIndicatorView(resources);
@@ -33,7 +33,7 @@ export function playerDamageIndicator(
  * @return ダメージインジケータ
  */
 export function enemyDamageIndicator(
-  params: GenerateDamageIndicatorParams,
+  params: DamageIndicatorCreatprParams,
 ): DamageIndicator {
   const { resources } = params;
   const view = new EnemyDamageIndicatorView(resources);

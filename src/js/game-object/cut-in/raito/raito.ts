@@ -8,12 +8,12 @@ import { hidden } from "./animation/hidden";
 import { show } from "./animation/show";
 import {
   createRaitoCutInProps,
-  GenerateRaitoCutInPropsParams,
+  PropsCreatorParams,
 } from "./props/create-raito-cutin-props";
 import { RaitoCutInProps } from "./props/raito-cutin-props";
 
 /** コンストラクタのパラメータ */
-export type ConstructRaitoCutInParams = GenerateRaitoCutInPropsParams & {
+export type RaitoCutInParams = PropsCreatorParams & {
   /** ゲームオブジェクトアクション */
   gameObjectAction: Observable<GameObjectAction>;
 };
@@ -29,7 +29,7 @@ export class RaitoCutIn {
    * コンストラクタ
    * @param params パラメータ
    */
-  constructor(params: ConstructRaitoCutInParams) {
+  constructor(params: RaitoCutInParams) {
     const { gameObjectAction } = params;
     this.#props = createRaitoCutInProps(params);
     this.#unsubscriber = gameObjectAction.subscribe((action) => {

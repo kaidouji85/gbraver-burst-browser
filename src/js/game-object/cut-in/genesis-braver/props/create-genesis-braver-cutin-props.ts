@@ -3,7 +3,7 @@ import { GenesisBraverCutInView } from "../view/genesis-braver-cutin-view";
 import { GenesisBraverCutInProps } from "./genesis-braver-cutin-props";
 
 /** GenesisBraverCutInProps生成パラメータ */
-export type GenerateGenesisBraverCutInPropsParams = {
+export type PropsCreatorParams = {
   /** ビュー */
   view: GenesisBraverCutInView;
 };
@@ -14,7 +14,7 @@ export type GenerateGenesisBraverCutInPropsParams = {
  * @return 生成結果
  */
 export function createGenesisBraverCutInProps(
-  params: GenerateGenesisBraverCutInPropsParams,
+  params: PropsCreatorParams,
 ): GenesisBraverCutInProps {
   const { view } = params;
   return {

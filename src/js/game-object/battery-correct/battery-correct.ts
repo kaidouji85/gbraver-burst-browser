@@ -8,11 +8,11 @@ import { popUp } from "./animation/pop-up";
 import { BatteryCorrectProps } from "./props/battery-correct-props";
 import {
   createBatteryCorrectProps,
-  GenerateBatteryCorrectPropsParams,
+  PropsCreatorParams,
 } from "./props/create-battery-correct-props";
 
 /** コンストラクタのパラメータ */
-type Params = GenerateBatteryCorrectPropsParams & {
+type BatteryCorrectParams = PropsCreatorParams & {
   /** ゲームオブジェクトアクション */
   gameObjectAction: Observable<GameObjectAction>;
 };
@@ -28,7 +28,7 @@ export class BatteryCorrect {
    * コンストラクタ
    * @param params パラメータ
    */
-  constructor(params: Params) {
+  constructor(params: BatteryCorrectParams) {
     const { gameObjectAction } = params;
     this.#props = createBatteryCorrectProps(params);
     this.#unsubscribers = [

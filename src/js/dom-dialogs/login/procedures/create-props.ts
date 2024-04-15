@@ -15,7 +15,7 @@ import { rootInnerHTML } from "../dom/root-inner-html";
 import { LoginDialogProps } from "../props";
 
 /** 生成パラメータ */
-export type GenerateLoginDialogPropsParams = {
+export type PropsCreatorParams = {
   /** リソース管理オブジェクト */
   resources: Resources;
   /** SE再生 */
@@ -30,7 +30,7 @@ export type GenerateLoginDialogPropsParams = {
  * @return 生成結果
  */
 export function createProps(
-  params: GenerateLoginDialogPropsParams,
+  params: PropsCreatorParams,
 ): LoginDialogProps {
   const { resources, caption } = params;
   const root = document.createElement("div");

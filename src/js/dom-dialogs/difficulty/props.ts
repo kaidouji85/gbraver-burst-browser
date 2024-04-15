@@ -51,7 +51,7 @@ export type DifficultyDialogProps = {
 };
 
 /** 生成パラメータ */
-export type GenerateDifficultyDialogPropsParams = {
+export type PropsCreatorParams = {
   /** リソース管理オブジェクト */
   resources: Resources;
   /** SE再生オブジェクト */
@@ -64,7 +64,7 @@ export type GenerateDifficultyDialogPropsParams = {
  * @return 生成したプロパティ
  */
 export function createDifficultyDialogProps(
-  params: GenerateDifficultyDialogPropsParams,
+  params: PropsCreatorParams,
 ): DifficultyDialogProps {
   const { resources } = params;
   const ids = {

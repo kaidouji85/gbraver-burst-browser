@@ -8,7 +8,7 @@ import { PlayerWingDozerView } from "./view/player-wing-dozer-view";
 import { WingDozer } from "./wing-dozer";
 
 /** ウィングドーザ生成関数パラメータ */
-type GenerateWingDozerParams = {
+type WingDozerCreatorParams = {
   /** リソース管理オブジェクト */
   resources: Resources;
   /** SE再生 */
@@ -22,7 +22,7 @@ type GenerateWingDozerParams = {
  * @param params 生成パラメータ
  * @return 生成結果
  */
-export function PlayerWingDozer(params: GenerateWingDozerParams): WingDozer {
+export function PlayerWingDozer(params: WingDozerCreatorParams): WingDozer {
   const { resources } = params;
   const view = new PlayerWingDozerView(resources);
   return new WingDozer({ ...params, view });
@@ -33,7 +33,7 @@ export function PlayerWingDozer(params: GenerateWingDozerParams): WingDozer {
  * @param params 生成パラメータ
  * @return 生成結果
  */
-export function EnemyWingDozer(params: GenerateWingDozerParams): WingDozer {
+export function EnemyWingDozer(params: WingDozerCreatorParams): WingDozer {
   const { resources } = params;
   const view = new EnemyWingDozerView(resources);
   return new WingDozer({ ...params, view });

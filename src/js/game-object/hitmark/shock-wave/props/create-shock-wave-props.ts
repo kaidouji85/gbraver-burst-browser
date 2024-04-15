@@ -7,7 +7,7 @@ import { ShockWaveView } from "../view/shock-wave-view";
 import { ShockWaveProps } from "./shock-wave-props";
 
 /** ShockWaveProps生成パラメータ */
-export type GenerateShockWavePropsParams = {
+export type PropsCreatorParams = {
   /** ビュー */
   view: ShockWaveView;
   /** 初期モデル */
@@ -24,7 +24,7 @@ export type GenerateShockWavePropsParams = {
  * @return 生成結果
  */
 export function createShockWaveProps(
-  params: GenerateShockWavePropsParams,
+  params: PropsCreatorParams,
 ): ShockWaveProps {
   const { initialModel, resources } = params;
   return {

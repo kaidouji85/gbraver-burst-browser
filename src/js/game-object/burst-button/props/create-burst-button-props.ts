@@ -11,7 +11,7 @@ import { BurstButtonView } from "../view/burst-button-view";
 import { BurstButtonProps } from "./burst-button-props";
 
 /** BurstButtonProps生成パラメータ */
-export type GenerateBurstButtonPropsParams = {
+export type PropsCreatorParams = {
   /** リソース管理オブジェクト */
   resources: Resources;
   /** SE再生オブジェクト */
@@ -28,7 +28,7 @@ export type GenerateBurstButtonPropsParams = {
  * @return 生成結果
  */
 export function createBurstButtonProps(
-  params: GenerateBurstButtonPropsParams,
+  params: PropsCreatorParams,
 ): BurstButtonProps {
   const { resources } = params;
   return {

@@ -8,12 +8,12 @@ import { hidden } from "./animation/hidden";
 import { show } from "./animation/show";
 import {
   createGaiCutInProps,
-  GenerateGaiCutInPropsParams,
+  PropsCreatorParams,
 } from "./props/create-gai-cutin-props";
 import { GaiCutInProps } from "./props/gai-cutin-props";
 
 /** コンストラクタのパラメータ */
-export type ConstructGaiCutInParams = GenerateGaiCutInPropsParams & {
+export type GaiCutInParams = PropsCreatorParams & {
   /** ゲームオブジェクトアクション */
   gameObjectAction: Observable<GameObjectAction>;
 };
@@ -29,7 +29,7 @@ export class GaiCutIn {
    * コンストラクタ
    * @param params パラメータ
    */
-  constructor(params: ConstructGaiCutInParams) {
+  constructor(params: GaiCutInParams) {
     const { gameObjectAction } = params;
     this.#props = createGaiCutInProps(params);
     this.#unsubscriber = gameObjectAction.subscribe((action) => {

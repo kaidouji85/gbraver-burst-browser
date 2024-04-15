@@ -3,7 +3,7 @@ import { WingDozerCutInView } from "../view/wing-dozer-cutin-view";
 import { WingDozerCutInProps } from "./wing-dozer-cutin-props";
 
 /** ウィングドーザ カットイン プロパティ 生成パラメータ */
-export type GenerateWingDozerCutInPropsParams = {
+export type PropsCreatorParams = {
   /** ビュー */
   view: WingDozerCutInView;
 };
@@ -14,7 +14,7 @@ export type GenerateWingDozerCutInPropsParams = {
  * @return 生成結果
  */
 export function createWingDozerCutInProps(
-  params: GenerateWingDozerCutInPropsParams,
+  params: PropsCreatorParams,
 ): WingDozerCutInProps {
   const { view } = params;
   return {

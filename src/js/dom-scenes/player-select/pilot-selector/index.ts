@@ -4,7 +4,7 @@ import { Observable, Unsubscribable } from "rxjs";
 import { bindEventListeners } from "./procedure/bind-event-lienters";
 import {
   createPilotSelectorProps,
-  GeneratePilotSelectorPropsParams,
+  PropsCreatorParams,
 } from "./procedure/create-pilot-selector-props";
 import { hidden } from "./procedure/hidden";
 import { show } from "./procedure/show";
@@ -12,7 +12,7 @@ import { waitUntilLoaded } from "./procedure/wait-until-loaded";
 import { PilotSelectorProps } from "./props";
 
 /** コンストラクタのパラメータ */
-export type ConstructPilotSelectorParams = GeneratePilotSelectorPropsParams;
+export type PilotSelectorParams = PropsCreatorParams;
 
 /**パイロットセレクタ */
 export class PilotSelector {
@@ -25,7 +25,7 @@ export class PilotSelector {
    * コンストラクタ
    * @param params パラメータ
    */
-  constructor(params: ConstructPilotSelectorParams) {
+  constructor(params: PilotSelectorParams) {
     this.#props = createPilotSelectorProps(params);
     this.#unsubscribers = bindEventListeners(this.#props);
   }

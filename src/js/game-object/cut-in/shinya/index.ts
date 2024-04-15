@@ -8,7 +8,7 @@ import { EnemyShinyaView } from "./view/enemy-shinya-view";
 import { PlayerShinyaView } from "./view/player-shinya-view";
 
 /** 生成パラメータ */
-export type GenerateShinyaCutInParams = {
+export type ShinyaCutInCreatorParams = {
   /** リソース管理オブジェクト */
   resources: Resources;
   /** 効果音再生オブジェクト */
@@ -23,7 +23,7 @@ export type GenerateShinyaCutInParams = {
  * @return シンヤ カットイン
  */
 export function playerShinyaCutIn(
-  params: GenerateShinyaCutInParams,
+  params: ShinyaCutInCreatorParams,
 ): ShinyaCutIn {
   const { resources } = params;
   const view = new PlayerShinyaView(resources);
@@ -36,7 +36,7 @@ export function playerShinyaCutIn(
  * @return シンヤ カットイン
  */
 export function enemyShinyaCutIn(
-  params: GenerateShinyaCutInParams,
+  params: ShinyaCutInCreatorParams,
 ): ShinyaCutIn {
   const { resources } = params;
   const view = new EnemyShinyaView(resources);

@@ -4,7 +4,7 @@ import { Observable, Unsubscribable } from "rxjs";
 import { bindEventListener } from "./procedure/bind-event-listener";
 import {
   createArmdozerSelectorProps,
-  GenerateArmdozerSelectorPropsParams,
+  PropsCreatorParams,
 } from "./procedure/create-armdozer-selector-props";
 import { hidden } from "./procedure/hidden";
 import { show } from "./procedure/show";
@@ -12,8 +12,8 @@ import { waitUntilLoaded } from "./procedure/wait-until-loaded";
 import { ArmdozerSelectorProps } from "./props";
 
 /** コンストラクタのパラメータ */
-export type ConstructArmdozerSelectorParams =
-  GenerateArmdozerSelectorPropsParams;
+export type ArmdozerSelectorParams =
+  PropsCreatorParams;
 
 /** アームドーザセレクタ */
 export class ArmdozerSelector {
@@ -26,7 +26,7 @@ export class ArmdozerSelector {
    * コンストラクタ
    * @param params パラメータ
    */
-  constructor(params: ConstructArmdozerSelectorParams) {
+  constructor(params: ArmdozerSelectorParams) {
     this.#props = createArmdozerSelectorProps(params);
     this.#unsubscribers = bindEventListener(this.#props);
   }

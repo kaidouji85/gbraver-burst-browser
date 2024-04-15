@@ -3,7 +3,7 @@ import { ShinBraverCutInView } from "../view/shin-braver-cutin-view";
 import { ShinBraverCutInProps } from "./shin-braver-cutin-props";
 
 /** 生成パラメータ */
-export type GenerateShinBraverCutInPropsParams = {
+export type PropsCreatorParams = {
   /** ビュー */
   view: ShinBraverCutInView;
 };
@@ -14,7 +14,7 @@ export type GenerateShinBraverCutInPropsParams = {
  * @return 生成結果
  */
 export function createShinBraverCutInProps(
-  params: GenerateShinBraverCutInPropsParams,
+  params: PropsCreatorParams,
 ): ShinBraverCutInProps {
   const { view } = params;
   return {

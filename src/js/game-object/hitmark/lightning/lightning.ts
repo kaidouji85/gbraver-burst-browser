@@ -6,12 +6,12 @@ import type { GameObjectAction } from "../../action/game-object-action";
 import { popUp } from "./animation/pop-up";
 import {
   createLightningProps,
-  GenerateLightningPropsParams,
+  PropsCreatorParams,
 } from "./props/create-lightning-props";
 import { LightningProps } from "./props/lightning-props";
 
 /** コンストラクタのパラメータ */
-export type ConstructLightningParams = GenerateLightningPropsParams & {
+export type LightningParams = PropsCreatorParams & {
   /** ゲームオブジェクトアクション */
   gameObjectAction: Observable<GameObjectAction>;
 };
@@ -27,7 +27,7 @@ export class Lightning {
    * コンストラクタ
    * @param params パラメータ
    */
-  constructor(params: ConstructLightningParams) {
+  constructor(params: LightningParams) {
     const { gameObjectAction } = params;
     this.#props = createLightningProps(params);
     this.#unsubscriber = gameObjectAction.subscribe((action) => {

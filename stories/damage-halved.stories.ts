@@ -1,7 +1,7 @@
 import { delay } from "../src/js/animation/delay";
 import {
   enemyDamageHalved,
-  GenerateDamageHalvedParams,
+  DamageHalvedCreatorParams,
   playerDamageHalved,
 } from "../src/js/game-object/damage-halved";
 import { DamageHalved } from "../src/js/game-object/damage-halved/damage-halved";
@@ -19,7 +19,7 @@ export default {
  */
 const damageHalvedStory =
   (
-    generator: (param: GenerateDamageHalvedParams) => DamageHalved,
+    generator: (param: DamageHalvedCreatorParams) => DamageHalved,
     fn: (damageHavled: DamageHalved) => void,
   ) =>
   () => {

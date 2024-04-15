@@ -8,7 +8,7 @@ import { EnemyNeoLandozerView } from "./view/enemy-neo-landozer-view";
 import { PlayerNeoLandozerView } from "./view/player-neo-landozer-view";
 
 /** ネオランドーザ生成関数パラメータ */
-type GenerateNeoLandozerParams = {
+type NeoLandozerCreatorParams = {
   /** リソース管理オブジェクト */
   resources: Resources;
   /** SE再生 */
@@ -23,7 +23,7 @@ type GenerateNeoLandozerParams = {
  * @return ネオランドーザ
  */
 export function PlayerNeoLandozer(
-  params: GenerateNeoLandozerParams,
+  params: NeoLandozerCreatorParams,
 ): NeoLandozer {
   const { resources } = params;
   const view = new PlayerNeoLandozerView(resources);
@@ -36,7 +36,7 @@ export function PlayerNeoLandozer(
  * @return ネオランドーザ
  */
 export function EnemyNeoLandozer(
-  params: GenerateNeoLandozerParams,
+  params: NeoLandozerCreatorParams,
 ): NeoLandozer {
   const { resources } = params;
   const view = new EnemyNeoLandozerView(resources);

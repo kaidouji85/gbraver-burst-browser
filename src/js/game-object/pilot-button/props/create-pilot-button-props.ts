@@ -10,7 +10,7 @@ import { PilotIcon } from "../view/pilot-icon";
 import { PilotButtonProps } from "./pilot-button-props";
 
 /** PilotButtonProps生成パラメータ */
-export type GeneratePilotButtonPropsParams = {
+export type PropsCreatorParams = {
   /** リソース管理オブジェクト */
   resources: Resources;
   /** SE再生オブジェクト */
@@ -27,7 +27,7 @@ export type GeneratePilotButtonPropsParams = {
  * @return 生成結果
  */
 export function createPilotButtonProps(
-  params: GeneratePilotButtonPropsParams,
+  params: PropsCreatorParams,
 ): PilotButtonProps {
   const { resources, pilotIcon, gameObjectAction } = params;
   return {

@@ -1,7 +1,7 @@
 import { delay } from "../src/js/animation/delay";
 import {
   gaiPilotButton,
-  GeneratePilotButtonParams,
+  PilotButtonCreatorParams,
   raitoPilotButton,
   shinyaPilotButton,
   tsubasaPilotButton,
@@ -22,7 +22,7 @@ export default {
  */
 const pilotButtonStory =
   (
-    generator: (params: GeneratePilotButtonParams) => PilotButton,
+    generator: (params: PilotButtonCreatorParams) => PilotButton,
     fn: (button: PilotButton) => void,
   ) =>
   () => {

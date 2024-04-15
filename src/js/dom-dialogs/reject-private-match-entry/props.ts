@@ -35,7 +35,7 @@ export type RejectPrivateMatchEntryDialogProps = {
 };
 
 /** RejectPrivateMatchEntryDialogProps生成パラメータ */
-export type GenerateRejectPrivateMatchEntryDialogPropsParams = {
+export type PropsCreatorParams = {
   /** リソース管理オブジェクト */
   resources: Resources;
   /** SE再生オブジェクト */
@@ -48,7 +48,7 @@ export type GenerateRejectPrivateMatchEntryDialogPropsParams = {
  * @return 生成結果
  */
 export function createRejectPrivateMatchEntryDialogProps(
-  params: GenerateRejectPrivateMatchEntryDialogPropsParams,
+  params: PropsCreatorParams,
 ): RejectPrivateMatchEntryDialogProps {
   const { resources, se } = params;
   const root = document.createElement("div");

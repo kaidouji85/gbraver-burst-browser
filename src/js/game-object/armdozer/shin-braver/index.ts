@@ -8,7 +8,7 @@ import { EnemyShinBraverView } from "./view/enemy-shin-braver-view";
 import { PlayerShinBraverView } from "./view/player-shin-braver-view";
 
 /** シンブレイバー生成関数パラメータ */
-type GenerateShinBraverParams = {
+type ShinBraverCreatorParams = {
   /** リソース管理オブジェクト */
   resources: Resources;
   /** SE再生 */
@@ -22,7 +22,7 @@ type GenerateShinBraverParams = {
  * @param params 生成パラメータ
  * @return シンブレイバー
  */
-export function PlayerShinBraver(params: GenerateShinBraverParams): ShinBraver {
+export function PlayerShinBraver(params: ShinBraverCreatorParams): ShinBraver {
   const { resources } = params;
   const view = new PlayerShinBraverView(resources);
   return new ShinBraver({ ...params, view });
@@ -33,7 +33,7 @@ export function PlayerShinBraver(params: GenerateShinBraverParams): ShinBraver {
  * @param params 生成パラメータ
  * @return シンブレイバー
  */
-export function EnemyShinBraver(params: GenerateShinBraverParams): ShinBraver {
+export function EnemyShinBraver(params: ShinBraverCreatorParams): ShinBraver {
   const { resources } = params;
   const view = new EnemyShinBraverView(resources);
   return new ShinBraver({ ...params, view });

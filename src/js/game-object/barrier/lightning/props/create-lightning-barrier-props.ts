@@ -8,7 +8,7 @@ import { LightningBarrierView } from "../view/lightning-barrier-view";
 import { LightningBarrierProps } from "./lightning-barrier-props";
 
 /** LightningBarrierProps生成パラメータ */
-export type GenerateLightningBarrierPropsParams = {
+export type PropsCreatorParams = {
   /** リソース管理オブジェクト */
   resources: Resources;
   /** SE再生オブジェクト */
@@ -21,7 +21,7 @@ export type GenerateLightningBarrierPropsParams = {
  * @return 生成結果
  */
 export function createLightningBarrierProps(
-  params: GenerateLightningBarrierPropsParams,
+  params: PropsCreatorParams,
 ): LightningBarrierProps {
   const { resources } = params;
   return {

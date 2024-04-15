@@ -8,7 +8,7 @@ import { EnemyBatteryEnchantmentView } from "./view/enemy-battery-enchantment-vi
 import { PlayerBatteryEnchantmentView } from "./view/player-battery-enchantment-view";
 
 /** 生成パラメータ */
-export type GenerateBatteryEnchantmentParams = {
+export type BatteryEnchantmentCreatorParams = {
   /** リソース管理オブジェクト */
   resources: Resources;
   /** SE再生オブジェクト */
@@ -23,7 +23,7 @@ export type GenerateBatteryEnchantmentParams = {
  * @return 生成結果
  */
 export function playerBatteryEnchantment(
-  params: GenerateBatteryEnchantmentParams,
+  params: BatteryEnchantmentCreatorParams,
 ): BatteryEnchantment {
   const { resources } = params;
   const view = new PlayerBatteryEnchantmentView(resources);
@@ -36,7 +36,7 @@ export function playerBatteryEnchantment(
  * @return 生成結果
  */
 export function enemyBatteryEnchantment(
-  params: GenerateBatteryEnchantmentParams,
+  params: BatteryEnchantmentCreatorParams,
 ): BatteryEnchantment {
   const { resources } = params;
   const view = new EnemyBatteryEnchantmentView(resources);
