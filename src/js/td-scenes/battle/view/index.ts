@@ -12,7 +12,7 @@ import type { SafeAreaInset } from "../../../safe-area/safe-area-inset";
 import { createSafeAreaInset } from "../../../safe-area/safe-area-inset";
 import type { BattleSceneAction } from "../actions";
 import { DOMLayer } from "./dom/dom-layer";
-import { GenerateBattleViewParams } from "./generate-params";
+import { BattleViewCreatorParams } from "./creator-params";
 import { HudLayer } from "./hud";
 import { ThreeDimensionLayer } from "./td";
 import { tracking } from "./tracking";
@@ -21,7 +21,7 @@ import { tracking } from "./tracking";
 interface OwnRenderer extends OverlapNotifier, RendererDomGetter, Rendering {}
 
 /** コンストラクタのパラメータ */
-type Param = GenerateBattleViewParams & {
+type Param = BattleViewCreatorParams & {
   /** レンダラ */
   renderer: OwnRenderer;
 };

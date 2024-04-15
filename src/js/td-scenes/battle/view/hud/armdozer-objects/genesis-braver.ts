@@ -6,7 +6,7 @@ import {
   playerGenesisBraverCutIn,
 } from "../../../../../game-object/cut-in/genesis-braver";
 import { GenesisBraverCutIn } from "../../../../../game-object/cut-in/genesis-braver/genesis-braver-cutin";
-import { GenerateHUDLayerObjectParams } from "../generate-params";
+import { HUDLayerObjectCreatorParams } from "../creator-params";
 import type { HUDArmdozerObjects } from "./hud-armdozer-objects";
 
 /** コンストラクタのパラメータ */
@@ -50,7 +50,7 @@ export class GenesisBraverHUD implements HUDArmdozerObjects {
  * @return 生成結果
  */
 export function playerGenesisBraverHUD(
-  params: GenerateHUDLayerObjectParams,
+  params: HUDLayerObjectCreatorParams,
 ): HUDArmdozerObjects {
   const { player } = params;
   return new GenesisBraverHUD({
@@ -65,7 +65,7 @@ export function playerGenesisBraverHUD(
  * @return 生成結果
  */
 export function enemyGenesisBraverHUD(
-  params: GenerateHUDLayerObjectParams,
+  params: HUDLayerObjectCreatorParams,
 ): HUDArmdozerObjects {
   const { enemy } = params;
   return new GenesisBraverHUD({

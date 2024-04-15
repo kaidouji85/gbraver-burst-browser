@@ -7,13 +7,13 @@ import type { GameObjectAction } from "../action/game-object-action";
 import { hidden, popUp, show } from "./animation/pop-up";
 import {
   createRecoverBatteryProps,
-  GenerateRecoverBatteryPropsParams,
+  PropsCreatorParams,
 } from "./props/create-recover-battery-props";
 import { RecoverBatteryProps } from "./props/recover-battery-props";
 
 /** コンストラクタのパラメータ */
-export type ConstructRecoverBatteryParams =
-  GenerateRecoverBatteryPropsParams & {
+export type RecoverBatteryParams =
+  PropsCreatorParams & {
     /** ゲームオブジェクトアクション */
     gameObjectAction: Observable<GameObjectAction>;
   };
@@ -32,7 +32,7 @@ export class RecoverBattery {
    *
    * @param param パラメータ
    */
-  constructor(param: ConstructRecoverBatteryParams) {
+  constructor(param: RecoverBatteryParams) {
     this.#props = createRecoverBatteryProps(param);
     this.#unsubscriber = param.gameObjectAction.subscribe((action) => {
       if (action.type === "Update") {

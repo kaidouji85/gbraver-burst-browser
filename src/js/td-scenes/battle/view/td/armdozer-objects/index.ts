@@ -1,6 +1,6 @@
 import { ArmdozerIds } from "gbraver-burst-core";
 
-import { GenerateTDLayerObjectParams } from "../generate-params";
+import { TDLayerObjectCreatorParams } from "../creator-params";
 import type { TDArmdozerObjects } from "./armdozer-objects";
 import { enemyGenesisBraverTD, playerGenesisBraverTD } from "./genesis-braver";
 import {
@@ -17,7 +17,7 @@ import { enemyWingDozerTD, playerWingDozerTD } from "./wing-dozer";
  * @return 生成結果
  */
 export function playerTDArmdozer(
-  params: GenerateTDLayerObjectParams,
+  params: TDLayerObjectCreatorParams,
 ): TDArmdozerObjects {
   const { player } = params;
   switch (player.armdozer.id) {
@@ -42,7 +42,7 @@ export function playerTDArmdozer(
  * @return 生成結果
  */
 export function enemyTDArmdozer(
-  params: GenerateTDLayerObjectParams,
+  params: TDLayerObjectCreatorParams,
 ): TDArmdozerObjects {
   const { enemy } = params;
   switch (enemy.armdozer.id) {

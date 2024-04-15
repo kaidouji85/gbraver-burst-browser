@@ -7,7 +7,7 @@ import { SEPlayer } from "../../../se/se-player";
 import type { Resize } from "../../../window/resize";
 
 /** すべての戦闘画面ビュー生成処理で利用できるパラメータ */
-export type GenerateBattleViewParams = {
+export type BattleViewCreatorParams = {
   /** リソース管理オブジェクト */
   resources: Resources;
   /** SE再生 */

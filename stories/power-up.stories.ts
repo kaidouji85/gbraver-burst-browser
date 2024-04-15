@@ -1,7 +1,7 @@
 import { delay } from "../src/js/animation/delay";
 import {
   enemyPowerUp,
-  GeneratePowerUpParams,
+  PowerUpCreatorParams,
   playerPowerUp,
 } from "../src/js/game-object/power-up";
 import { PowerUp } from "../src/js/game-object/power-up/power-up";
@@ -19,7 +19,7 @@ export default {
  */
 const powerUpStory =
   (
-    generator: (params: GeneratePowerUpParams) => PowerUp,
+    generator: (params: PowerUpCreatorParams) => PowerUp,
     fn: (powerUp: PowerUp) => void,
   ) =>
   () => {

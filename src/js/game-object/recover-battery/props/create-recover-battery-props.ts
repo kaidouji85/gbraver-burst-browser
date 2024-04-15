@@ -6,7 +6,7 @@ import { RecoverBatteryView } from "../view/recover-battery-view";
 import { RecoverBatteryProps } from "./recover-battery-props";
 
 /** RecoverBatteryProps生成パラメータ */
-export type GenerateRecoverBatteryPropsParams = {
+export type PropsCreatorParams = {
   /** ビュー */
   view: RecoverBatteryView;
   /** リソース管理オブジェクト */
@@ -21,7 +21,7 @@ export type GenerateRecoverBatteryPropsParams = {
  * @return 生成結果
  */
 export function createRecoverBatteryProps(
-  params: GenerateRecoverBatteryPropsParams,
+  params: PropsCreatorParams,
 ): RecoverBatteryProps {
   const { resources } = params;
   return {

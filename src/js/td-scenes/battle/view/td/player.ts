@@ -53,7 +53,7 @@ import {
   playerReflectIndicator,
 } from "../../../../game-object/reflect-indicator";
 import { ReflectIndicator } from "../../../../game-object/reflect-indicator/reflect-indicator";
-import { GenerateTDLayerObjectParams } from "./generate-params";
+import { TDLayerObjectCreatorParams } from "./creator-params";
 
 /**
  * 3Dレイヤー プレイヤー関係オブジェクト フィールド
@@ -167,7 +167,7 @@ export class TDPlayerImpl implements TDPlayer {
  * @param params プレイヤーオブジェクト生成パラメータ
  * @return 3Dプレイヤーオブジェクト
  */
-export function playerTDObjects(params: GenerateTDLayerObjectParams): TDPlayer {
+export function playerTDObjects(params: TDLayerObjectCreatorParams): TDPlayer {
   const { resources, player, gameObjectAction } = params;
   return new TDPlayerImpl({
     playerId: player.playerId,
@@ -194,7 +194,7 @@ export function playerTDObjects(params: GenerateTDLayerObjectParams): TDPlayer {
  * @param params プレイヤーオブジェクト生成パラメータ
  * @return 3Dプレイヤーオブジェクト
  */
-export function enemyTDObject(params: GenerateTDLayerObjectParams): TDPlayer {
+export function enemyTDObject(params: TDLayerObjectCreatorParams): TDPlayer {
   const { resources, enemy, gameObjectAction } = params;
   return new TDPlayerImpl({
     playerId: enemy.playerId,

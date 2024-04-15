@@ -19,7 +19,7 @@ import { drawIndicator } from "../../../../../game-object/result-indicator";
 import { ResultIndicator } from "../../../../../game-object/result-indicator/result-indicator";
 import { TimeScaleButton } from "../../../../../game-object/time-scale-button/time-scale-button";
 import type { BattleSceneAction } from "../../../actions";
-import { GenerateHUDLayerObjectParams } from "../generate-params";
+import { HUDLayerObjectCreatorParams } from "../creator-params";
 import { createBurstButton } from "./burst-button";
 import { createPilotButton } from "./pilot-button";
 
@@ -54,7 +54,7 @@ export class HUDGameObjects {
    * コンストラクタ
    * @param params 生成パラメータ
    */
-  constructor(params: GenerateHUDLayerObjectParams) {
+  constructor(params: HUDLayerObjectCreatorParams) {
     const { resources, gameObjectAction } = params;
     this.#battleAction = new Subject();
     this.batterySelector = new BatterySelector(params);

@@ -6,7 +6,7 @@ import {
   playerRaitoCutIn,
 } from "../../../../../game-object/cut-in/raito";
 import { RaitoCutIn } from "../../../../../game-object/cut-in/raito/raito";
-import { GenerateHUDLayerObjectParams } from "../generate-params";
+import { HUDLayerObjectCreatorParams } from "../creator-params";
 import type { HUDPilotObjects } from "./hud-pilot-objects";
 
 /**
@@ -56,7 +56,7 @@ export class RaitoHUD implements HUDPilotObjects {
  * @param params 生成パラメータ
  * @return ライトHUD
  */
-export function playerRaitoHUD(params: GenerateHUDLayerObjectParams): RaitoHUD {
+export function playerRaitoHUD(params: HUDLayerObjectCreatorParams): RaitoHUD {
   const { player } = params;
   return new RaitoHUD({
     playerId: player.playerId,
@@ -69,7 +69,7 @@ export function playerRaitoHUD(params: GenerateHUDLayerObjectParams): RaitoHUD {
  * @param params 生成パラメータ
  * @return ライトHUD
  */
-export function enemyRaitoHUD(params: GenerateHUDLayerObjectParams): RaitoHUD {
+export function enemyRaitoHUD(params: HUDLayerObjectCreatorParams): RaitoHUD {
   const { enemy } = params;
   return new RaitoHUD({
     playerId: enemy.playerId,

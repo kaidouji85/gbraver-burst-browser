@@ -6,7 +6,7 @@ import {
   playerLightningDozerCutIn,
 } from "../../../../../game-object/cut-in/lightning-dozer";
 import { LightningDozerCutIn } from "../../../../../game-object/cut-in/lightning-dozer/lightning-dozer-cutin";
-import { GenerateHUDLayerObjectParams } from "../generate-params";
+import { HUDLayerObjectCreatorParams } from "../creator-params";
 import type { HUDArmdozerObjects } from "./hud-armdozer-objects";
 
 /**
@@ -59,7 +59,7 @@ export class LightningDozerHUD
  * @return 生成結果
  */
 export function playerLightningDozerHUD(
-  params: GenerateHUDLayerObjectParams,
+  params: HUDLayerObjectCreatorParams,
 ): LightningDozerHUD {
   const { player } = params;
   return new LightningDozerHUD(player.playerId, {
@@ -73,7 +73,7 @@ export function playerLightningDozerHUD(
  * @return 生成結果
  */
 export function enemyLightningDozerHUD(
-  params: GenerateHUDLayerObjectParams,
+  params: HUDLayerObjectCreatorParams,
 ): LightningDozerHUD {
   const { enemy } = params;
   return new LightningDozerHUD(enemy.playerId, {

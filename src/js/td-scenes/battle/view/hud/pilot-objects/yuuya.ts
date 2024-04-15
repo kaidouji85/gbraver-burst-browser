@@ -6,7 +6,7 @@ import {
   playerYuuyaCutIn,
 } from "../../../../../game-object/cut-in/yuuya";
 import { YuuyaCutIn } from "../../../../../game-object/cut-in/yuuya/yuuya";
-import { GenerateHUDLayerObjectParams } from "../generate-params";
+import { HUDLayerObjectCreatorParams } from "../creator-params";
 import type { HUDPilotObjects } from "./hud-pilot-objects";
 
 /** コンストラクタのパラメータ */
@@ -49,7 +49,7 @@ export class YuuyaHUD implements HUDPilotObjects {
  * @param params 生成パラメータ
  * @return ユウヤHUD
  */
-export function playerYuuyaHUD(params: GenerateHUDLayerObjectParams): YuuyaHUD {
+export function playerYuuyaHUD(params: HUDLayerObjectCreatorParams): YuuyaHUD {
   const { player } = params;
   return new YuuyaHUD({
     playerId: player.playerId,
@@ -62,7 +62,7 @@ export function playerYuuyaHUD(params: GenerateHUDLayerObjectParams): YuuyaHUD {
  * @param params 生成パラメータ
  * @return ユウヤHUD
  */
-export function enemyYuuyaHUD(params: GenerateHUDLayerObjectParams): YuuyaHUD {
+export function enemyYuuyaHUD(params: HUDLayerObjectCreatorParams): YuuyaHUD {
   const { enemy } = params;
   return new YuuyaHUD({
     playerId: enemy.playerId,

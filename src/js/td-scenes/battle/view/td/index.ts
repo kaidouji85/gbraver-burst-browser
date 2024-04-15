@@ -8,17 +8,17 @@ import { gameObjectStream } from "../../../../game-object/action/game-object-act
 import { TDCamera } from "../../../../game-object/camera/td";
 import type { OverlapEvent } from "../../../../render/overlap-event/overlap-event";
 import { OverlapNotifier } from "../../../../render/overlap-notifier";
-import { GenerateBattleViewParams } from "../generate-params";
+import { BattleViewCreatorParams } from "../creator-params";
 import { enemyTDArmdozer, playerTDArmdozer } from "./armdozer-objects";
 import type { TDArmdozerObjects } from "./armdozer-objects/armdozer-objects";
 import { TDGameObjects } from "./game-objects";
-import { GenerateTDLayerObjectParams } from "./generate-params";
+import { TDLayerObjectCreatorParams } from "./creator-params";
 import type { TDPlayer } from "./player";
 import { enemyTDObject, playerTDObjects } from "./player";
 import { skyBox } from "./sky-box";
 
 /** コンストラクタのパラメータ */
-type Param = GenerateBattleViewParams & {
+type Param = BattleViewCreatorParams & {
   /** レンダラ */
   renderer: OverlapNotifier;
   /** アップデート */
@@ -53,13 +53,13 @@ export class ThreeDimensionLayer {
       param.preRender,
       this.#overlap,
     );
-    const generateParams: GenerateTDLayerObjectParams = {
+    const creatorParams: TDLayerObjectCreatorParams = {
       ...param,
       gameObjectAction: this.#gameObjectAction,
     };
     this.players = [
-      playerTDObjects(generateParams),
-      enemyTDObject(generateParams),
+      playerTDObjects(creatorParams),
+      enemyTDObject(creatorParams),
     ];
     this.players
       .map((v) => v.getObject3Ds())
@@ -68,8 +68,8 @@ export class ThreeDimensionLayer {
         this.scene.add(v);
       });
     this.armdozerObjects = [
-      playerTDArmdozer(generateParams),
-      enemyTDArmdozer(generateParams),
+      playerTDArmdozer(creatorParams),
+      enemyTDArmdozer(creatorParams),
     ];
     this.armdozerObjects
       .map((v) => v.getObject3Ds())
@@ -77,7 +77,7 @@ export class ThreeDimensionLayer {
       .forEach((v) => {
         this.scene.add(v);
       });
-    this.gameObjects = new TDGameObjects(generateParams);
+    this.gameObjects = new TDGameObjects(creatorParams);
     this.gameObjects.getObject3Ds().forEach((object) => {
       this.scene.add(object);
     });

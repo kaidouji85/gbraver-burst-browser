@@ -7,7 +7,7 @@ import {
   PlayerGenesisBraver,
 } from "../../../../../game-object/armdozer/genesis-braver";
 import { GenesisBraver } from "../../../../../game-object/armdozer/genesis-braver/genesis-braver";
-import { GenerateTDLayerObjectParams } from "../generate-params";
+import { TDLayerObjectCreatorParams } from "../creator-params";
 import type { TDArmdozerObjects } from "./armdozer-objects";
 
 /** ジェネシスブレイバー 3Dレイヤー フィールド */
@@ -58,7 +58,7 @@ export class GenesisBraverTD
  * @return 生成結果
  */
 export function playerGenesisBraverTD(
-  params: GenerateTDLayerObjectParams,
+  params: TDLayerObjectCreatorParams,
 ): GenesisBraverTD {
   const { player } = params;
   return new GenesisBraverTD(player.playerId, {
@@ -72,7 +72,7 @@ export function playerGenesisBraverTD(
  * @return 生成結果
  */
 export function enemyGenesisBraverTD(
-  params: GenerateTDLayerObjectParams,
+  params: TDLayerObjectCreatorParams,
 ): GenesisBraverTD {
   const { enemy } = params;
   return new GenesisBraverTD(enemy.playerId, {

@@ -6,7 +6,7 @@ import {
   playerShinyaCutIn,
 } from "../../../../../game-object/cut-in/shinya";
 import { ShinyaCutIn } from "../../../../../game-object/cut-in/shinya/shinya";
-import { GenerateHUDLayerObjectParams } from "../generate-params";
+import { HUDLayerObjectCreatorParams } from "../creator-params";
 import type { HUDPilotObjects } from "./hud-pilot-objects";
 
 /**
@@ -57,7 +57,7 @@ export class ShinyaHUD implements HUDPilotObjects {
  * @return シンヤHUD
  */
 export function playerShinyaHUD(
-  params: GenerateHUDLayerObjectParams,
+  params: HUDLayerObjectCreatorParams,
 ): ShinyaHUD {
   const { player } = params;
   return new ShinyaHUD({
@@ -72,7 +72,7 @@ export function playerShinyaHUD(
  * @return シンヤHUD
  */
 export function enemyShinyaHUD(
-  params: GenerateHUDLayerObjectParams,
+  params: HUDLayerObjectCreatorParams,
 ): ShinyaHUD {
   const { enemy } = params;
   return new ShinyaHUD({

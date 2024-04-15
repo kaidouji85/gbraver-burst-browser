@@ -8,7 +8,7 @@ import { EnemyRecoverBatteryView } from "./view/enemy-recover-battery-view";
 import { PlayerRecoverBatteryView } from "./view/player-recover-battery-view";
 
 /** 生成パラメータ */
-export type GenerateRecoverBatteryParams = {
+export type RecoverBatteryCreatorParams = {
   /** リソース管理オブジェクト */
   resources: Resources;
   /** SE再生オブジェクト */
@@ -23,7 +23,7 @@ export type GenerateRecoverBatteryParams = {
  * @return バッテリー回復
  */
 export function playerRecoverBattery(
-  params: GenerateRecoverBatteryParams,
+  params: RecoverBatteryCreatorParams,
 ): RecoverBattery {
   const { resources } = params;
   const view = new PlayerRecoverBatteryView(resources);
@@ -36,7 +36,7 @@ export function playerRecoverBattery(
  * @return バッテリー回復
  */
 export function enemyRecoverBattery(
-  params: GenerateRecoverBatteryParams,
+  params: RecoverBatteryCreatorParams,
 ): RecoverBattery {
   const { resources } = params;
   const view = new EnemyRecoverBatteryView(resources);

@@ -6,7 +6,7 @@ import { PowerUpView } from "../view/power-up-view";
 import { PowerUpProps } from "./power-up-props";
 
 /** PowerUpProps 生成パラメータ */
-export type GeneratePowerUpPropsParams = {
+export type PropsCreatorParams = {
   /** ビュー */
   view: PowerUpView;
   /** リソース管理オブジェクト */
@@ -21,7 +21,7 @@ export type GeneratePowerUpPropsParams = {
  * @return 生成したPowerUpProps
  */
 export function createPowerUpProps(
-  params: GeneratePowerUpPropsParams,
+  params: PropsCreatorParams,
 ): PowerUpProps {
   const { resources } = params;
   return {

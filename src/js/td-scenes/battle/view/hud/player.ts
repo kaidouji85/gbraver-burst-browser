@@ -13,7 +13,7 @@ import {
   playerTurnStart,
 } from "../../../../game-object/turn-start";
 import { TurnStart } from "../../../../game-object/turn-start/turn-start";
-import { GenerateHUDLayerObjectParams } from "./generate-params";
+import { HUDLayerObjectCreatorParams } from "./creator-params";
 
 /**
  * HUDレイヤー プレイヤー固有オブジェクト フィールド
@@ -70,7 +70,7 @@ export class HUDPlayer implements HUDPlayerField {
  * @return 生成結果
  */
 export function playerHUDObjects(
-  params: GenerateHUDLayerObjectParams,
+  params: HUDLayerObjectCreatorParams,
 ): HUDPlayer {
   const { resources, player, gameObjectAction } = params;
   return new HUDPlayer({
@@ -92,7 +92,7 @@ export function playerHUDObjects(
  * @return 生成結果
  */
 export function enemyHUDObjects(
-  params: GenerateHUDLayerObjectParams,
+  params: HUDLayerObjectCreatorParams,
 ): HUDPlayer {
   const { resources, enemy, gameObjectAction } = params;
   return new HUDPlayer({

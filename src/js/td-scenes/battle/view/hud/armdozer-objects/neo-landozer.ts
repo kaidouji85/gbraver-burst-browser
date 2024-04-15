@@ -6,7 +6,7 @@ import {
   playerNeoLandozerCutIn,
 } from "../../../../../game-object/cut-in/neo-landozer";
 import { NeoLandozerCutIn } from "../../../../../game-object/cut-in/neo-landozer/neo-landozer-cutin";
-import { GenerateHUDLayerObjectParams } from "../generate-params";
+import { HUDLayerObjectCreatorParams } from "../creator-params";
 import type { HUDArmdozerObjects } from "./hud-armdozer-objects";
 
 /**
@@ -51,7 +51,7 @@ export class NeoLandozerHUD implements HUDArmdozerObjects, NeoLandozerHUDField {
  * @return 生成結果
  */
 export function playerNeoLandozerHUD(
-  params: GenerateHUDLayerObjectParams,
+  params: HUDLayerObjectCreatorParams,
 ): NeoLandozerHUD {
   const { player } = params;
   return new NeoLandozerHUD(player.playerId, {
@@ -65,7 +65,7 @@ export function playerNeoLandozerHUD(
  * @return 生成結果
  */
 export function enemyNeoLandozerHUD(
-  params: GenerateHUDLayerObjectParams,
+  params: HUDLayerObjectCreatorParams,
 ): NeoLandozerHUD {
   const { enemy } = params;
   return new NeoLandozerHUD(enemy.playerId, {

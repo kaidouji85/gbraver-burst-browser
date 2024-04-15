@@ -6,7 +6,7 @@ import { BattleSceneAction } from "../../actions";
 import { DecideBatteryByMiniController } from "../../actions/decide-battery-by-mini-controller";
 import { DoBurstByMiniController } from "../../actions/do-burst-by-mini-controller";
 import { DoPilotSkillByMiniController } from "../../actions/do-pilot-skill-by-mini-controller";
-import { GenerateBattleViewParams } from "../generate-params";
+import { BattleViewCreatorParams } from "../creator-params";
 
 /** HTML要素レイヤー */
 export class DOMLayer {
@@ -33,7 +33,7 @@ export class DOMLayer {
    * コンストラクタ
    * @param params 生成パラメータ
    */
-  constructor(params: GenerateBattleViewParams) {
+  constructor(params: BattleViewCreatorParams) {
     const { resources } = params;
     this.rightMessageWindow = new MessageWindow({
       resources,

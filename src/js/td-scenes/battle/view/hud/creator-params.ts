@@ -1,10 +1,10 @@
 import { Observable } from "rxjs";
 
 import { GameObjectAction } from "../../../../game-object/action/game-object-action";
-import { GenerateBattleViewParams } from "../generate-params";
+import { BattleViewCreatorParams } from "../creator-params";
 
 /** HUDレイヤーのすべてのゲームオブジェクト生成処理で使えるパラメータ */
-export type GenerateHUDLayerObjectParams = GenerateBattleViewParams & {
+export type HUDLayerObjectCreatorParams = BattleViewCreatorParams & {
   /** ゲームオブジェクトアクション */
   gameObjectAction: Observable<GameObjectAction>;
 };

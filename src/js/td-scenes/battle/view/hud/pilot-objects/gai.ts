@@ -6,7 +6,7 @@ import {
   playerGaiCutIn,
 } from "../../../../../game-object/cut-in/gai";
 import { GaiCutIn } from "../../../../../game-object/cut-in/gai/gai";
-import { GenerateHUDLayerObjectParams } from "../generate-params";
+import { HUDLayerObjectCreatorParams } from "../creator-params";
 import type { HUDPilotObjects } from "./hud-pilot-objects";
 
 /**
@@ -56,7 +56,7 @@ export class GaiHUD implements HUDPilotObjects {
  * @param params 生成パラメータ
  * @return ガイHUD
  */
-export function playerGaiHUD(params: GenerateHUDLayerObjectParams): GaiHUD {
+export function playerGaiHUD(params: HUDLayerObjectCreatorParams): GaiHUD {
   const { player } = params;
   return new GaiHUD({
     playerId: player.playerId,
@@ -69,7 +69,7 @@ export function playerGaiHUD(params: GenerateHUDLayerObjectParams): GaiHUD {
  * @param params 生成パラメータ
  * @return ガイHUD
  */
-export function enemyGaiHUD(params: GenerateHUDLayerObjectParams): GaiHUD {
+export function enemyGaiHUD(params: HUDLayerObjectCreatorParams): GaiHUD {
   const { enemy } = params;
   return new GaiHUD({
     playerId: enemy.playerId,
