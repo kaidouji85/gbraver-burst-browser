@@ -14,11 +14,10 @@ import {
 import { WingDozerCutInProps } from "./props/wing-dozer-cutin-props";
 
 /** コンストラクタのパラメータ */
-export type WingDozerCutInParams =
-  PropsCreatorParams & {
-    /** ゲームオブジェクトアクション */
-    gameObjectAction: Observable<GameObjectAction>;
-  };
+export type WingDozerCutInParams = PropsCreatorParams & {
+  /** ゲームオブジェクトアクション */
+  gameObjectAction: Observable<GameObjectAction>;
+};
 
 /** ウィングドーザ カットイン */
 export class WingDozerCutIn implements HUDTracking {

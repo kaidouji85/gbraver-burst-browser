@@ -20,9 +20,7 @@ export type PropsCreatorParams = {
  * @param params 生成パラメータ
  * @return 生成したPowerUpProps
  */
-export function createPowerUpProps(
-  params: PropsCreatorParams,
-): PowerUpProps {
+export function createPowerUpProps(params: PropsCreatorParams): PowerUpProps {
   const { resources } = params;
   return {
     ...params,

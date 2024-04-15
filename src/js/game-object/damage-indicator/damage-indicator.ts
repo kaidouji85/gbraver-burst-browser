@@ -12,11 +12,10 @@ import {
 import { DamageIndicatorProps } from "./props/damage-indicator-props";
 
 /** コンストラクタのパラメータ */
-export type DamageIndicatorParams =
-  PropsCreatorParams & {
-    /** ゲームオブジェクトアクション */
-    gameObjectAction: Observable<GameObjectAction>;
-  };
+export type DamageIndicatorParams = PropsCreatorParams & {
+  /** ゲームオブジェクトアクション */
+  gameObjectAction: Observable<GameObjectAction>;
+};
 
 /** ダメージインジケータ */
 export class DamageIndicator {

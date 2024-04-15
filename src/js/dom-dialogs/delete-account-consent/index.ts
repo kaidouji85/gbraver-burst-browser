@@ -2,15 +2,11 @@ import { Observable, Unsubscribable } from "rxjs";
 
 import { DOMDialog } from "../dialog";
 import { bindEventListeners } from "./procedure/bind-event-listeners";
-import {
-  createProps,
-  PropsCreatorParams,
-} from "./procedure/create-props";
+import { createProps, PropsCreatorParams } from "./procedure/create-props";
 import { DeleteAccountConsentDialogProps } from "./props";
 
 /** コンストラクタのパラメータ */
-export type DeleteAccountConsentDialogParams =
-  PropsCreatorParams;
+export type DeleteAccountConsentDialogParams = PropsCreatorParams;
 
 /** アカウント削除同意ダイアログ */
 export class DeleteAccountConsentDialog implements DOMDialog {

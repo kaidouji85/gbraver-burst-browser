@@ -1,7 +1,7 @@
 import { delay } from "../src/js/animation/delay";
 import {
-  enemyDamageHalved,
   DamageHalvedCreatorParams,
+  enemyDamageHalved,
   playerDamageHalved,
 } from "../src/js/game-object/damage-halved";
 import { DamageHalved } from "../src/js/game-object/damage-halved/damage-halved";

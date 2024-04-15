@@ -12,8 +12,7 @@ import {
 } from "./props";
 
 /** コンストラクタのパラメータ */
-export type RejectPrivateMatchEntryDialogParams =
-  PropsCreatorParams;
+export type RejectPrivateMatchEntryDialogParams = PropsCreatorParams;
 
 /** プライベートマッチエントリ拒否ダイアログ */
 export class RejectPrivateMatchEntryDialog implements DOMDialog {

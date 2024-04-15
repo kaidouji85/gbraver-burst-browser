@@ -14,11 +14,10 @@ import {
 import { NeoLandozerCutInProps } from "./props/neo-landozer-cutin-props";
 
 /** コンストラクタのパラメータ */
-export type NeoLandozerCutInParams =
-  PropsCreatorParams & {
-    /** ゲームオブジェクトアクション */
-    gameObjectAction: Observable<GameObjectAction>;
-  };
+export type NeoLandozerCutInParams = PropsCreatorParams & {
+  /** ゲームオブジェクトアクション */
+  gameObjectAction: Observable<GameObjectAction>;
+};
 
 /** ネオランドーザ カットイン */
 export class NeoLandozerCutIn implements HUDTracking {

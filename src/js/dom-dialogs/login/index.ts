@@ -2,10 +2,7 @@ import { Observable, Unsubscribable } from "rxjs";
 
 import { DOMDialog } from "../dialog";
 import { bindEventListeners } from "./procedures/bind-event-listeners";
-import {
-  createProps,
-  PropsCreatorParams,
-} from "./procedures/create-props";
+import { createProps, PropsCreatorParams } from "./procedures/create-props";
 import { LoginDialogProps } from "./props";
 
 /** コンストラクタのパラメータ */

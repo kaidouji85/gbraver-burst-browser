@@ -1,8 +1,8 @@
 import { delay } from "../src/js/animation/delay";
 import {
   enemyYuuyaCutIn,
-  YuuyaCutInCreatorParams,
   playerYuuyaCutIn,
+  YuuyaCutInCreatorParams,
 } from "../src/js/game-object/cut-in/yuuya";
 import { YuuyaCutIn } from "../src/js/game-object/cut-in/yuuya/yuuya";
 import { HUDGameObjectStub } from "./stub/hud-game-object-stub";

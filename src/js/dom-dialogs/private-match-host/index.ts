@@ -10,8 +10,7 @@ import {
 } from "./props";
 
 /** コンストラクタのパラメータ */
-export type PrivateMatchHostDialogParams =
-  PropsCreatorParams;
+export type PrivateMatchHostDialogParams = PropsCreatorParams;
 
 /** プライベートマッチホストダイアログ */
 export class PrivateMatchHostDialog implements DOMDialog {

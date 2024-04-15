@@ -14,11 +14,10 @@ import {
 import { ShinBraverCutInProps } from "./props/shin-braver-cutin-props";
 
 /** コンストラクタのパラメータ */
-export type ShinBraverCutInParams =
-  PropsCreatorParams & {
-    /** ゲームオブジェクトアクション */
-    gameObjectAction: Observable<GameObjectAction>;
-  };
+export type ShinBraverCutInParams = PropsCreatorParams & {
+  /** ゲームオブジェクトアクション */
+  gameObjectAction: Observable<GameObjectAction>;
+};
 
 /** シンブレイバーカットイン */
 export class ShinBraverCutIn implements HUDTracking {

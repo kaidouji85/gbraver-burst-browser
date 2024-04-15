@@ -71,9 +71,7 @@ export function playerShinyaHUD(
  * @param params 生成パラメータ
  * @return シンヤHUD
  */
-export function enemyShinyaHUD(
-  params: HUDLayerObjectCreatorParams,
-): ShinyaHUD {
+export function enemyShinyaHUD(params: HUDLayerObjectCreatorParams): ShinyaHUD {
   const { enemy } = params;
   return new ShinyaHUD({
     playerId: enemy.playerId,

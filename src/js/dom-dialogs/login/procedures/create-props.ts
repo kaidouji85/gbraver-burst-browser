@@ -29,9 +29,7 @@ export type PropsCreatorParams = {
  * @param params 生成パラメータ
  * @return 生成結果
  */
-export function createProps(
-  params: PropsCreatorParams,
-): LoginDialogProps {
+export function createProps(params: PropsCreatorParams): LoginDialogProps {
   const { resources, caption } = params;
   const root = document.createElement("div");
   root.className = ROOT_CLASS_NAME;

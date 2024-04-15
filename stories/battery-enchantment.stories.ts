@@ -1,7 +1,7 @@
 import { delay } from "../src/js/animation/delay";
 import {
-  enemyBatteryEnchantment,
   BatteryEnchantmentCreatorParams,
+  enemyBatteryEnchantment,
   playerBatteryEnchantment,
 } from "../src/js/game-object/battery-enchantment";
 import { BatteryEnchantment } from "../src/js/game-object/battery-enchantment/battery-enchantment";

@@ -14,8 +14,7 @@ import {
 } from "./props";
 
 /** コンストラクタのパラメータ */
-export type NetBattleSelectorDialogParams =
-  PropsCreatorParams;
+export type NetBattleSelectorDialogParams = PropsCreatorParams;
 
 /** ネットバトルセレクターダイアログ */
 export class NetBattleSelectorDialog implements DOMDialog {

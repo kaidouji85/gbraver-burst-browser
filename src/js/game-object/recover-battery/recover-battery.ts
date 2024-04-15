@@ -12,11 +12,10 @@ import {
 import { RecoverBatteryProps } from "./props/recover-battery-props";
 
 /** コンストラクタのパラメータ */
-export type RecoverBatteryParams =
-  PropsCreatorParams & {
-    /** ゲームオブジェクトアクション */
-    gameObjectAction: Observable<GameObjectAction>;
-  };
+export type RecoverBatteryParams = PropsCreatorParams & {
+  /** ゲームオブジェクトアクション */
+  gameObjectAction: Observable<GameObjectAction>;
+};
 
 /**
  * バッテリー回復

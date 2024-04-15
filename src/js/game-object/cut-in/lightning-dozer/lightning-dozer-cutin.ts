@@ -14,11 +14,10 @@ import {
 import { LightningDozerCutInProps } from "./props/lightning-dozer-cutin-props";
 
 /** コンストラクタのパラメータ */
-export type LightningDozerCutInParams =
-  PropsCreatorParams & {
-    /** ゲームオブジェクトアクション */
-    gameObjectAction: Observable<GameObjectAction>;
-  };
+export type LightningDozerCutInParams = PropsCreatorParams & {
+  /** ゲームオブジェクトアクション */
+  gameObjectAction: Observable<GameObjectAction>;
+};
 
 /** ライトニングドーザ カットイン */
 export class LightningDozerCutIn implements HUDTracking {

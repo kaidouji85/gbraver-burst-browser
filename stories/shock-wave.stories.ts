@@ -1,8 +1,8 @@
 import { delay } from "../src/js/animation/delay";
 import {
   enemyShockWave,
-  ShockWaveCreatorParams,
   playerShockWave,
+  ShockWaveCreatorParams,
 } from "../src/js/game-object/hitmark/shock-wave";
 import { ShockWave } from "../src/js/game-object/hitmark/shock-wave/shock-wave";
 import { TDGameObjectStub } from "./stub/td-game-object-stub";

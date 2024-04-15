@@ -20,9 +20,7 @@ export type PropsCreatorParams = {
  * @param params 生成パラメータ
  * @return 生成結果
  */
-export function createGaiCutInProps(
-  params: PropsCreatorParams,
-): GaiCutInProps {
+export function createGaiCutInProps(params: PropsCreatorParams): GaiCutInProps {
   const { resources } = params;
   return {
     ...params,

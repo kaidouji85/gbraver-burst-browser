@@ -1,7 +1,7 @@
 import { delay } from "../src/js/animation/delay";
 import {
-  enemyBatteryNumber,
   BatteryNumberCreatorParams,
+  enemyBatteryNumber,
   playerBatteryNumber,
 } from "../src/js/game-object/battery-number";
 import { BatteryNumber } from "../src/js/game-object/battery-number/battery-number";

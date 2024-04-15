@@ -1,7 +1,7 @@
 import { delay } from "../src/js/animation/delay";
 import {
-  enemyDamageIndicator,
   DamageIndicatorCreatprParams,
+  enemyDamageIndicator,
   playerDamageIndicator,
 } from "../src/js/game-object/damage-indicator";
 import { DamageIndicator } from "../src/js/game-object/damage-indicator/damage-indicator";

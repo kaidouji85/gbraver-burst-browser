@@ -12,11 +12,10 @@ import {
 } from "./props/create-continuous-attack-props";
 
 /** コンストラクタのパラメータ */
-type ContinuousAttackIndicatorParams =
-  PropsCreatorParams & {
-    /** ゲームオブジェクトアクション */
-    gameObjectAction: Observable<GameObjectAction>;
-  };
+type ContinuousAttackIndicatorParams = PropsCreatorParams & {
+  /** ゲームオブジェクトアクション */
+  gameObjectAction: Observable<GameObjectAction>;
+};
 
 /** 連続攻撃インジケーター */
 export class ContinuousAttackIndicator {

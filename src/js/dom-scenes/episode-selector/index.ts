@@ -12,10 +12,9 @@ import { initialize } from "./procedure/initialize";
 import { EpisodeSelectorProps } from "./props";
 
 /** コンストラクタのパラメータ */
-export type EpisodeSelectorParams =
-  PropsCreatorParams & {
-    initialSelectedEpisodeID?: EpisodeID;
-  };
+export type EpisodeSelectorParams = PropsCreatorParams & {
+  initialSelectedEpisodeID?: EpisodeID;
+};
 
 /** エピソードセレクト画面 */
 export class EpisodeSelector implements DOMScene {

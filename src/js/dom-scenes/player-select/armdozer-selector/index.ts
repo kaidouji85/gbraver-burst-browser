@@ -12,8 +12,7 @@ import { waitUntilLoaded } from "./procedure/wait-until-loaded";
 import { ArmdozerSelectorProps } from "./props";
 
 /** コンストラクタのパラメータ */
-export type ArmdozerSelectorParams =
-  PropsCreatorParams;
+export type ArmdozerSelectorParams = PropsCreatorParams;
 
 /** アームドーザセレクタ */
 export class ArmdozerSelector {

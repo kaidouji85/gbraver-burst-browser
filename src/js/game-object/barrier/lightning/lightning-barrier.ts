@@ -16,11 +16,10 @@ import {
 import { LightningBarrierProps } from "./props/lightning-barrier-props";
 
 /** コンストラクタのパラメータ */
-export type LightningBarrierGameEffectParams =
-  PropsCreatorParams & {
-    /** ゲームオブジェクトアクション */
-    gameObjectAction: Observable<GameObjectAction>;
-  };
+export type LightningBarrierGameEffectParams = PropsCreatorParams & {
+  /** ゲームオブジェクトアクション */
+  gameObjectAction: Observable<GameObjectAction>;
+};
 
 /** 電撃バリア */
 export class LightningBarrierGameEffect {

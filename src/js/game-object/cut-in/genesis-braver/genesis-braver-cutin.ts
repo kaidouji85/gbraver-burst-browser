@@ -14,11 +14,10 @@ import {
 import { GenesisBraverCutInProps } from "./props/genesis-braver-cutin-props";
 
 /** コンストラクタのパラメータ */
-export type GenesisBraverCutInParams =
-  PropsCreatorParams & {
-    /** ゲームオブジェクトアクション */
-    gameObjectAction: Observable<GameObjectAction>;
-  };
+export type GenesisBraverCutInParams = PropsCreatorParams & {
+  /** ゲームオブジェクトアクション */
+  gameObjectAction: Observable<GameObjectAction>;
+};
 
 /** ジェネシスブレイバー カットイン */
 export class GenesisBraverCutIn implements HUDTracking {
