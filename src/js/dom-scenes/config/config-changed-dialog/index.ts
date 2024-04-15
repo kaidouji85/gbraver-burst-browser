@@ -1,29 +1,30 @@
 import { Observable, Unsubscribable } from "rxjs";
 
-import type { Resources } from "../../../resource";
-import { SEPlayer } from "../../../se/se-player";
 import { ROOT_CLASS, ROOT_CLASS_INVISIBLE } from "./dom/class-name";
 import { bindEventListeners } from "./listeners";
-import type { ConfigChangedDialogProps } from "./props";
+import { ConfigChangedDialogProps, PropsCreatorParams } from "./props";
 import { createConfigChangedDialogProps } from "./props";
+
+/** コンストラクタのパラメータ */
+type ConstructorParams = PropsCreatorParams;
 
 /**
  * 設定変更通知ダイアログ
  * 本ダイアログは設定画面から呼び出されることを想定している
  */
 export class ConfigChangedDialog {
+  /** プロパティ */
   #props: ConfigChangedDialogProps;
+  /** アンサブスクライバ */
   #unsbusscriber: Unsubscribable[];
 
   /**
    * コンストラクタ
    * 本ダイアログは生成直後には非表示である
-   *
-   * @param resources リソース管理オブジェクト
-   * @param se SE再生オブジェクト
+   * @param params パラメータ
    */
-  constructor(resources: Resources, se: SEPlayer) {
-    this.#props = createConfigChangedDialogProps(resources, se);
+  constructor(params: ConstructorParams) {
+    this.#props = createConfigChangedDialogProps(params);
     this.#unsbusscriber = bindEventListeners(this.#props);
   }
 

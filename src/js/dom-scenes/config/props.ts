@@ -64,20 +64,25 @@ export type ConfigProps = {
   configChange: Subject<GBraverBurstBrowserConfig>;
 };
 
+/** プロパティ生成関数のパラメータ */
+export type PropsCreatorParams = {
+  /** リソース管理オブジェクト */
+  resources: Resources;
+  /** ブラウザ設定 */
+  config: GBraverBurstBrowserConfig;
+  /** BGM管理オブジェクト */
+  bgm: BGMManager;
+  /** SE再生オブジェクト */
+  se: SEPlayer;
+};
+
 /**
  * 設定画面プロパティを生成する
- * @param resources リソース管理オブジェクト
- * @param config ブラウザ設定
- * @param bgm BGM管理オブジェクト
- * @param se SE再生オブジェクト
+ * @param params パラメータ
  * @return 生成した設定画面プロパティ
  */
-export function createConfigProps(
-  resources: Resources,
-  config: GBraverBurstBrowserConfig,
-  bgm: BGMManager,
-  se: SEPlayer,
-): ConfigProps {
+export function createConfigProps(params: PropsCreatorParams): ConfigProps {
+  const { resources, config, bgm, se } = params;
   const ids = {
     battleAnimationTimeScaleSelector: domUuid(),
     webGLPixelRatioSelector: domUuid(),
@@ -94,7 +99,7 @@ export function createConfigProps(
   root.innerHTML = rootInnerHTML(ids, config);
   root.className = ROOT_CLASS;
   const elements = extractElements(root, ids);
-  const dialog = new ConfigChangedDialog(resources, se);
+  const dialog = new ConfigChangedDialog(params);
   root.appendChild(dialog.getRootHTMLElement());
   return {
     originConfig: config,

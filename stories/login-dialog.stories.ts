@@ -5,10 +5,9 @@ import { domStub } from "./stub/dom-stub";
 export default {
   title: "login-dialog",
 };
-export const dialog: DOMStubStory = domStub((resources, se) => {
+export const dialog: DOMStubStory = domStub((params) => {
   const dialog = new LoginDialog({
-    resources,
-    se,
+    ...params,
     caption: "ネット対戦をするにはログインしてください",
   });
   dialog.notifyLogin().subscribe(() => {

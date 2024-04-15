@@ -13,47 +13,47 @@ export default {
   title: "post-battle",
 };
 
-export const postNPCBattleWin: DOMStubStory = domStub((resources, se) => {
+export const postNPCBattleWin: DOMStubStory = domStub((params) => {
   const floater = new PostBattleFloater();
-  floater.show({ resources, se, buttons: PostNPCBattleWinButtons });
+  floater.show({ ...params, buttons: PostNPCBattleWinButtons });
   floater.selectionCompleteNotifier().subscribe((postBattle) => {
     console.log(postBattle);
   });
   return floater.getRootHTMLElement();
 });
 
-export const postNPCBattleLose: DOMStubStory = domStub((resources, se) => {
+export const postNPCBattleLose: DOMStubStory = domStub((params) => {
   const floater = new PostBattleFloater();
-  floater.show({ resources, se, buttons: PostNPCBattleLoseButtons });
+  floater.show({ ...params, buttons: PostNPCBattleLoseButtons });
   floater.selectionCompleteNotifier().subscribe((postBattle) => {
     console.log(postBattle);
   });
   return floater.getRootHTMLElement();
 });
 
-export const postNPCBattleComplete: DOMStubStory = domStub((resources, se) => {
+export const postNPCBattleComplete: DOMStubStory = domStub((params) => {
   const floater = new PostBattleFloater();
-  floater.show({ resources, se, buttons: PostNPCBattleComplete });
+  floater.show({ ...params, buttons: PostNPCBattleComplete });
   floater.selectionCompleteNotifier().subscribe((postBattle) => {
     console.log(postBattle);
   });
   return floater.getRootHTMLElement();
 });
 
-export const postNetworkBattle: DOMStubStory = domStub((resources, se) => {
+export const postNetworkBattle: DOMStubStory = domStub((params) => {
   const floater = new PostBattleFloater();
-  floater.show({ resources, se, buttons: PostNetworkBattleButtons });
+  floater.show({ ...params, buttons: PostNetworkBattleButtons });
   floater.selectionCompleteNotifier().subscribe((postBattle) => {
     console.log(postBattle);
   });
   return floater.getRootHTMLElement();
 });
 
-export const showHidden: DOMStubStory = domStub((resources, se) => {
+export const showHidden: DOMStubStory = domStub((params) => {
   const floater = new PostBattleFloater();
 
   (async () => {
-    await floater.show({ resources, se, buttons: PostNPCBattleWinButtons });
+    await floater.show({ ...params, buttons: PostNPCBattleWinButtons });
     await waitTime(3000);
     floater.hidden();
   })();

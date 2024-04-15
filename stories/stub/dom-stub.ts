@@ -2,20 +2,30 @@ import "../../src/css/style.css";
 
 import * as TWEEN from "@tweenjs/tween.js";
 
+import { BGMManager, createBGMManager } from "../../src/js/bgm/bgm-manager";
 import { gameLoopStream } from "../../src/js/game-loop/game-loop";
-import type { Resources } from "../../src/js/resource";
+import { Resources } from "../../src/js/resource";
 import { developingFullResourceLoading } from "../../src/js/resource/loading/full-resource-loading";
 import { createSEPlayer, SEPlayer } from "../../src/js/se/se-player";
 import { StorybookResourceRoot } from "../storybook-resource-root";
 
+/** 生成パラメータ */
+type DOMCreatorParams = {
+  /** リソース管理オブジェクト */
+  resources: Resources;
+  /** BGM管理オブジェクト */
+  bgm: BGMManager;
+  /** SE再生オブジェクト */
+  se: SEPlayer;
+};
+
 /**
  * HTML要素生成コールバック関数
  *
- * @param resources リソース管理オブジェクト
- * @param se SE再生オブジェクト
+ * @param params 生成パラメータ
  * @return 生成したHTML要素
  */
-export type DOMCreator = (resources: Resources, se: SEPlayer) => HTMLElement;
+export type DOMCreator = (params: DOMCreatorParams) => HTMLElement;
 
 /**
  * HTML要素スタブのストーリー
@@ -37,7 +47,11 @@ export const domStub =
     const resourceRoot = new StorybookResourceRoot();
     const resourceLoading = developingFullResourceLoading(resourceRoot);
     resourceLoading.resources.then((resources) => {
-      const component = creator(resources, createSEPlayer());
+      const component = creator({
+        resources,
+        bgm: createBGMManager(),
+        se: createSEPlayer(),
+      });
       root.appendChild(component);
     });
     gameLoopStream().subscribe((action) => {

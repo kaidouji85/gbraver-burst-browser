@@ -5,8 +5,8 @@ export default {
   title: "net-battle-selector",
 };
 
-export const dialog: DOMStubStory = domStub((resources, se) => {
-  const dialog = new NetBattleSelectorDialog({ resources, se });
+export const dialog: DOMStubStory = domStub((params) => {
+  const dialog = new NetBattleSelectorDialog(params);
   dialog.notifyCasualMatchSelection().subscribe(() => {
     console.log("select casual match");
   });

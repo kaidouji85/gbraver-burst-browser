@@ -8,9 +8,9 @@ export default {
   title: "stage-title",
 };
 
-export const npcBattle: DOMStubStory = domStub((resources) => {
+export const npcBattle: DOMStubStory = domStub((params) => {
   const scene = new StageTitle({
-    resources,
+    ...params,
     level: 10,
     caption: ["敵より大きいバッテリーを出せ"],
     armdozerId: ArmdozerIds.NEO_LANDOZER,

@@ -1,7 +1,5 @@
-import { createBGMManager } from "../src/js/bgm/bgm-manager";
 import { Config } from "../src/js/dom-scenes/config";
 import { ConfigChangedDialog } from "../src/js/dom-scenes/config/config-changed-dialog";
-import { createSEPlayer } from "../src/js/se/se-player";
 import type { DOMStubStory } from "./stub/dom-stub";
 import { domStub } from "./stub/dom-stub";
 
@@ -9,10 +7,10 @@ export default {
   title: "config",
 };
 
-export const Scene: DOMStubStory = domStub((resources) => {
-  const scene = new Config(
-    resources,
-    {
+export const Scene: DOMStubStory = domStub((params) => {
+  const scene = new Config({
+    ...params,
+    config: {
       webGLPixelRatio: 2,
       battleAnimationTimeScale: 1,
       bgmVolume: 1,
@@ -20,9 +18,7 @@ export const Scene: DOMStubStory = domStub((resources) => {
       battleControllerType: "BigButton",
       performanceStatsVisibility: "hidden",
     },
-    createBGMManager(),
-    createSEPlayer(),
-  );
+  });
   scene.notifyPrev().subscribe(() => {
     console.log("prev");
   });
@@ -33,8 +29,8 @@ export const Scene: DOMStubStory = domStub((resources) => {
   return scene.getRootHTMLElement();
 });
 
-export const ConfigChanged: DOMStubStory = domStub((resources, se) => {
-  const dialog = new ConfigChangedDialog(resources, se);
+export const ConfigChanged: DOMStubStory = domStub((params) => {
+  const dialog = new ConfigChangedDialog(params);
   dialog.show();
   dialog.notifyClosed().subscribe(() => {
     console.log("on close");

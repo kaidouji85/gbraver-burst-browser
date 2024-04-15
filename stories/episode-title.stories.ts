@@ -20,9 +20,9 @@ const episodeTitleStory = (
   title: string,
   armdozerId: ArmdozerId,
 ) =>
-  domStub((resources) => {
+  domStub((params) => {
     const scene = new EpisodeTitle({
-      resources,
+      ...params,
       number,
       title,
       armdozerId,

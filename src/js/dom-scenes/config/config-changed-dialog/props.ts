@@ -43,16 +43,23 @@ export type ConfigChangedDialogProps = {
   discardStream: Subject<void>;
 };
 
+/** 生成パラメータ */
+export type PropsCreatorParams = {
+  /** リソース管理オブジェクト */
+  resources: Resources;
+  /** se SE再生オブジェクト */
+  se: SEPlayer;
+};
+
 /**
  * 設定変更通知ダイアログプロパティを生成する
- * @param resources リソース管理オブジェクト
- * @param se SE再生オブジェクト
+ * @param params 生成パラメータ
  * @return 生成したダイアログプロパティ
  */
 export function createConfigChangedDialogProps(
-  resources: Resources,
-  se: SEPlayer,
+  params: PropsCreatorParams,
 ): ConfigChangedDialogProps {
+  const { resources } = params;
   const ids = {
     backGround: domUuid(),
     closer: domUuid(),
@@ -78,12 +85,12 @@ export function createConfigChangedDialogProps(
   const acceptStream = new Subject<void>();
   const discardStream = new Subject<void>();
   return {
+    ...params,
     root,
     backGround,
     closer,
     discard,
     accept,
-    se,
     pushButton,
     changeValue,
     exclusive,
