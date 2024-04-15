@@ -8,7 +8,7 @@ import { EnemyGaiView } from "./view/enemy-gai-view";
 import { PlayerGaiView } from "./view/player-gai-view";
 
 /** 生成パラメータ */
-export type GenerateGaiCutInParams = {
+export type GaiCutInCreatorParams = {
   /** リソース管理オブジェクト */
   resources: Resources;
   /** 効果音再生オブジェクト */
@@ -22,7 +22,7 @@ export type GenerateGaiCutInParams = {
  * @param params 生成パラメータ
  * @return ガイ カットイン
  */
-export function playerGaiCutIn(params: GenerateGaiCutInParams): GaiCutIn {
+export function playerGaiCutIn(params: GaiCutInCreatorParams): GaiCutIn {
   const { resources } = params;
   const view = new PlayerGaiView(resources);
   return new GaiCutIn({ ...params, view });
@@ -33,7 +33,7 @@ export function playerGaiCutIn(params: GenerateGaiCutInParams): GaiCutIn {
  * @param params 生成パラメータ
  * @return ガイ カットイン
  */
-export function enemyGaiCutIn(params: GenerateGaiCutInParams): GaiCutIn {
+export function enemyGaiCutIn(params: GaiCutInCreatorParams): GaiCutIn {
   const { resources } = params;
   const view = new EnemyGaiView(resources);
   return new GaiCutIn({ ...params, view });

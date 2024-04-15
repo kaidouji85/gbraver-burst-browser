@@ -1,7 +1,7 @@
 import { delay } from "../src/js/animation/delay";
 import {
+  DamageIndicatorCreatprParams,
   enemyDamageIndicator,
-  GenerateDamageIndicatorParams,
   playerDamageIndicator,
 } from "../src/js/game-object/damage-indicator";
 import { DamageIndicator } from "../src/js/game-object/damage-indicator/damage-indicator";
@@ -19,7 +19,7 @@ export default {
  */
 const damageIndicatorStory =
   (
-    generator: (params: GenerateDamageIndicatorParams) => DamageIndicator,
+    generator: (params: DamageIndicatorCreatprParams) => DamageIndicator,
     fn: (damageIndicator: DamageIndicator) => void,
   ) =>
   () => {

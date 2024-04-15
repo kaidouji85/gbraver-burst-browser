@@ -26,12 +26,12 @@ import { uprightToStand } from "./animation/upright-to-stand";
 import { bindEventListeners } from "./procedure/bind-event-listeners";
 import {
   createGenesisBraverProps,
-  GenerateGenesisBraverPropsParams,
+  PropsCreatorParams,
 } from "./props/create-genesis-braver-props";
 import { GenesisBraverProps } from "./props/genesis-braver-props";
 
 /** コンストラクタのパラメータ */
-type Params = GenerateGenesisBraverPropsParams & {
+type GenesisBraverParams = PropsCreatorParams & {
   /** ゲームオブジェクトアクション */
   gameObjectAction: Observable<GameObjectAction>;
 };
@@ -50,7 +50,7 @@ export class GenesisBraver
    * コンストラクタ
    * @param params パラメータ
    */
-  constructor(params: Params) {
+  constructor(params: GenesisBraverParams) {
     super();
     const { gameObjectAction } = params;
     this.#props = createGenesisBraverProps(params);

@@ -7,12 +7,12 @@ import type { GameObjectAction } from "../action/game-object-action";
 import { popUp } from "./animation/pop-up";
 import {
   createDamageHalvedProps,
-  GenerateDamageHalvedPropsParams,
+  PropsCreatorParams,
 } from "./props/create-damage-halved-props";
 import { DamageHalvedProps } from "./props/damage-halved-props";
 
 /** コンストラクタのパラメータ */
-export type ConstructDamageHalvedParams = GenerateDamageHalvedPropsParams & {
+export type DamageHalvedParams = PropsCreatorParams & {
   /** ゲームオブジェクトアクション */
   gameObjectAction: Observable<GameObjectAction>;
 };
@@ -28,7 +28,7 @@ export class DamageHalved {
    * コンストラクタ
    * @param params パラメータ
    */
-  constructor(params: ConstructDamageHalvedParams) {
+  constructor(params: DamageHalvedParams) {
     const { gameObjectAction } = params;
     this.#props = createDamageHalvedProps(params);
     this.#unsubscriber = gameObjectAction.subscribe((action) => {

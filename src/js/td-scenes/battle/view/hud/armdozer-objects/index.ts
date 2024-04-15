@@ -1,6 +1,6 @@
 import { ArmdozerIds } from "gbraver-burst-core";
 
-import { GenerateHUDLayerObjectParams } from "../generate-params";
+import { HUDLayerObjectCreatorParams } from "../creator-params";
 import { EmptyHUDArmdozer } from "./empty";
 import {
   enemyGenesisBraverHUD,
@@ -21,7 +21,7 @@ import { enemyWingDozerHUD, playerWingDozerHUD } from "./wing-dozer";
  * @return HUDアームドーザ
  */
 export function playerArmdozerHUD(
-  params: GenerateHUDLayerObjectParams,
+  params: HUDLayerObjectCreatorParams,
 ): HUDArmdozerObjects {
   const { player } = params;
   switch (player.armdozer.id) {
@@ -46,7 +46,7 @@ export function playerArmdozerHUD(
  * @return HUDアームドーザ
  */
 export function enemyArmdozerHUD(
-  params: GenerateHUDLayerObjectParams,
+  params: HUDLayerObjectCreatorParams,
 ): HUDArmdozerObjects {
   const { enemy } = params;
   switch (enemy.armdozer.id) {

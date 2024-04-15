@@ -8,7 +8,7 @@ import {
   yuuyaPilotButton,
 } from "../../../../../game-object/pilot-button";
 import { PilotButton } from "../../../../../game-object/pilot-button/pilot-button";
-import { GenerateHUDLayerObjectParams } from "../generate-params";
+import { HUDLayerObjectCreatorParams } from "../creator-params";
 
 /**
  * パイロットIDに対応したパイロットボタンを生成する
@@ -16,7 +16,7 @@ import { GenerateHUDLayerObjectParams } from "../generate-params";
  * @return パイロットボタン
  */
 export function createPilotButton(
-  params: GenerateHUDLayerObjectParams,
+  params: HUDLayerObjectCreatorParams,
 ): PilotButton {
   const { player } = params;
   switch (player.pilot.id) {

@@ -8,12 +8,12 @@ import { hidden } from "./animation/hidden";
 import { show } from "./animation/show";
 import {
   createYuuyaCutInProps,
-  GenerateYuuyaCutInPropsParams,
+  PropsCreatorParams,
 } from "./props/create-yuuya-cutin-props";
 import { YuuyaCutInProps } from "./props/yuuya-cutin-props";
 
 /** コンストラクタのパラメータ */
-export type ConstructYuuyaCutInParams = GenerateYuuyaCutInPropsParams & {
+export type YuuyaCutInParams = PropsCreatorParams & {
   /** ゲームオブジェクトアクション */
   gameObjectAction: Observable<GameObjectAction>;
 };
@@ -29,7 +29,7 @@ export class YuuyaCutIn {
    * コンストラクタ
    * @param params パラメータ
    */
-  constructor(params: ConstructYuuyaCutInParams) {
+  constructor(params: YuuyaCutInParams) {
     const { gameObjectAction } = params;
     this.#props = createYuuyaCutInProps(params);
     this.#unsubscriber = gameObjectAction.subscribe((action) => {

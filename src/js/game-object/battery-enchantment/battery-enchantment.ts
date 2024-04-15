@@ -8,11 +8,11 @@ import { popUp } from "./animation/pop-up";
 import { BatteryEnchantmentProps } from "./props/battery-enchantment-props";
 import {
   createBatteryEnchantmentProps,
-  GenerateBatteryEnchantmentPropsParams,
+  PropsCreatorParams,
 } from "./props/create-battery-enchantment-props";
 
 /** コンストラクタのパラメータ */
-type Params = GenerateBatteryEnchantmentPropsParams & {
+type BatteryEnchantmentParams = PropsCreatorParams & {
   gameObjectAction: Observable<GameObjectAction>;
 };
 
@@ -27,7 +27,7 @@ export class BatteryEnchantment {
    * コンストラクタ
    * @param params パラメータ
    */
-  constructor(params: Params) {
+  constructor(params: BatteryEnchantmentParams) {
     const { gameObjectAction } = params;
     this.#props = createBatteryEnchantmentProps(params);
     this.#unsubscriber = gameObjectAction.subscribe((action) => {

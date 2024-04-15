@@ -8,12 +8,12 @@ import { hidden } from "./procedure/hidden";
 import { show } from "./procedure/show";
 import {
   createMiniControllerProps,
-  GenerateMiniControllerProps,
   MiniControllerProps,
+  PropsCreatorParams,
 } from "./props";
 
 /** コンストラクタのパラメータ */
-export type ConstructMiniControllerParams = GenerateMiniControllerProps;
+export type MiniControllerParams = PropsCreatorParams;
 
 /**
  * ミニコントローラ
@@ -27,7 +27,7 @@ export class MiniController {
    * コンストラクタ
    * @param params コンストラクタのパラメータ
    */
-  constructor(params: ConstructMiniControllerParams) {
+  constructor(params: MiniControllerParams) {
     this.#props = createMiniControllerProps(params);
   }
 

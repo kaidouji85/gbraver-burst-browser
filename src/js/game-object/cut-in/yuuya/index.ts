@@ -8,7 +8,7 @@ import { PlayerYuuyaView } from "./view/player-yuuya-view";
 import { YuuyaCutIn } from "./yuuya";
 
 /** 生成パラメータ */
-export type GenerateYuuyaCutInParams = {
+export type YuuyaCutInCreatorParams = {
   /** リソース管理オブジェクト */
   resources: Resources;
   /** SE再生オブジェクト */
@@ -22,7 +22,7 @@ export type GenerateYuuyaCutInParams = {
  * @param params 生成パラメータ
  * @return ユウヤ カットイン
  */
-export function playerYuuyaCutIn(params: GenerateYuuyaCutInParams): YuuyaCutIn {
+export function playerYuuyaCutIn(params: YuuyaCutInCreatorParams): YuuyaCutIn {
   const { resources } = params;
   const view = new PlayerYuuyaView(resources);
   return new YuuyaCutIn({ ...params, view });
@@ -33,7 +33,7 @@ export function playerYuuyaCutIn(params: GenerateYuuyaCutInParams): YuuyaCutIn {
  * @param params 生成パラメータ
  * @return ユウヤ カットイン
  */
-export function enemyYuuyaCutIn(params: GenerateYuuyaCutInParams): YuuyaCutIn {
+export function enemyYuuyaCutIn(params: YuuyaCutInCreatorParams): YuuyaCutIn {
   const { resources } = params;
   const view = new EnemyYuuyaView(resources);
   return new YuuyaCutIn({ ...params, view });

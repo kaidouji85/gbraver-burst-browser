@@ -6,13 +6,12 @@ import { onCloserPush } from "./listeners/on-closer-push";
 import { onEnterButtonPush } from "./listeners/on-enter-button-push";
 import {
   createPrivateMatchGuestDialogProps,
-  GeneratePrivateMatchGuestDialogPropsParams,
   PrivateMatchGuestDialogProps,
+  PropsCreatorParams,
 } from "./props";
 
 /** コンストラクタのパラメータ */
-export type ConstructPrivateMatchGuestDialogParams =
-  GeneratePrivateMatchGuestDialogPropsParams;
+export type PrivateMatchGuestDialogParams = PropsCreatorParams;
 
 /** プライベートマッチゲストダイアログ */
 export class PrivateMatchGuestDialog implements DOMDialog {
@@ -25,7 +24,7 @@ export class PrivateMatchGuestDialog implements DOMDialog {
    * コンストラクタ
    * @param params パラメータ
    */
-  constructor(params: ConstructPrivateMatchGuestDialogParams) {
+  constructor(params: PrivateMatchGuestDialogParams) {
     this.#props = createPrivateMatchGuestDialogProps(params);
     this.#unsubscribers = [
       domPushStream(this.#props.closer).subscribe((action) => {

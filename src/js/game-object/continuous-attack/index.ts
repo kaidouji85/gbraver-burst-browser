@@ -8,7 +8,7 @@ import { EnemyContinuousAttackView } from "./view/enemy-continuous-attack-view";
 import { PlayerContinuousAttackView } from "./view/player-continuous-attack-view";
 
 /** 連続攻撃生成パラメータ */
-export type GenerateContinuousAttackIndicatorParams = {
+export type ContinuousAttackCreatorParams = {
   /** リソース管理オブジェクト */
   resources: Resources;
   /** SE再生オブジェクト */
@@ -23,7 +23,7 @@ export type GenerateContinuousAttackIndicatorParams = {
  * @return 生成結果
  */
 export function playerContinuousAttack(
-  params: GenerateContinuousAttackIndicatorParams,
+  params: ContinuousAttackCreatorParams,
 ): ContinuousAttackIndicator {
   const { resources } = params;
   const view = new PlayerContinuousAttackView(resources);
@@ -36,7 +36,7 @@ export function playerContinuousAttack(
  * @return 生成結果
  */
 export function enemyContinuousAttack(
-  params: GenerateContinuousAttackIndicatorParams,
+  params: ContinuousAttackCreatorParams,
 ): ContinuousAttackIndicator {
   const { resources } = params;
   const view = new EnemyContinuousAttackView(resources);

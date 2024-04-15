@@ -5,7 +5,7 @@ import { SkyBrightness } from "../../../../game-object/sky-brightness/sky-bright
 import SchoolField from "../../../../game-object/stage/shopping-street/shopping-street";
 import type { Stage } from "../../../../game-object/stage/stage";
 import { TurnIndicator } from "../../../../game-object/turn-indicator/turn-indicator";
-import { GenerateTDLayerObjectParams } from "./generate-params";
+import { TDLayerObjectCreatorParams } from "./creator-params";
 
 /** 3Dレイヤーのゲームオブジェクト */
 export class TDGameObjects {
@@ -18,7 +18,7 @@ export class TDGameObjects {
    * コンストラクタ
    * @param params パラメータ
    */
-  constructor(params: GenerateTDLayerObjectParams) {
+  constructor(params: TDLayerObjectCreatorParams) {
     const { resources, gameObjectAction } = params;
     this.stage = new SchoolField(resources);
     this.turnIndicator = new TurnIndicator({

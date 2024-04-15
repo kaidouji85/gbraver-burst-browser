@@ -7,13 +7,12 @@ import { onCloseButtonPush } from "./listeners/on-close-button-push";
 import { onCloserPush } from "./listeners/on-closer-push";
 import {
   createRejectPrivateMatchEntryDialogProps,
-  GenerateRejectPrivateMatchEntryDialogPropsParams,
+  PropsCreatorParams,
   RejectPrivateMatchEntryDialogProps,
 } from "./props";
 
 /** コンストラクタのパラメータ */
-export type ConstructRejectPrivateMatchEntryDialogParams =
-  GenerateRejectPrivateMatchEntryDialogPropsParams;
+export type RejectPrivateMatchEntryDialogParams = PropsCreatorParams;
 
 /** プライベートマッチエントリ拒否ダイアログ */
 export class RejectPrivateMatchEntryDialog implements DOMDialog {
@@ -26,7 +25,7 @@ export class RejectPrivateMatchEntryDialog implements DOMDialog {
    * コンストラクタ
    * @param params パラメータ
    */
-  constructor(params: ConstructRejectPrivateMatchEntryDialogParams) {
+  constructor(params: RejectPrivateMatchEntryDialogParams) {
     this.#props = createRejectPrivateMatchEntryDialogProps(params);
     this.#unsubscribers = [
       domPushStream(this.#props.closeButton).subscribe((action) => {

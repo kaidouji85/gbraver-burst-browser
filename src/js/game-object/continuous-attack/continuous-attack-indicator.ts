@@ -8,15 +8,14 @@ import { popUp } from "./animation/pop-up";
 import { ContinuousAttackProps } from "./props/continuous-attack-props";
 import {
   createContinuousAttackProps,
-  GenerateContinuousAttackPropsParams,
+  PropsCreatorParams,
 } from "./props/create-continuous-attack-props";
 
 /** コンストラクタのパラメータ */
-type ConstructContinuousAttackIndicatorParams =
-  GenerateContinuousAttackPropsParams & {
-    /** ゲームオブジェクトアクション */
-    gameObjectAction: Observable<GameObjectAction>;
-  };
+type ContinuousAttackIndicatorParams = PropsCreatorParams & {
+  /** ゲームオブジェクトアクション */
+  gameObjectAction: Observable<GameObjectAction>;
+};
 
 /** 連続攻撃インジケーター */
 export class ContinuousAttackIndicator {
@@ -29,7 +28,7 @@ export class ContinuousAttackIndicator {
    * コンストラクタ
    * @param params パラメータ
    */
-  constructor(params: ConstructContinuousAttackIndicatorParams) {
+  constructor(params: ContinuousAttackIndicatorParams) {
     const { gameObjectAction } = params;
     this.#props = createContinuousAttackProps(params);
     this.#unsubscriber = gameObjectAction.subscribe((action) => {

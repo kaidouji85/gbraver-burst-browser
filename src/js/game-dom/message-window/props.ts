@@ -23,7 +23,7 @@ export type MessageWindowProps = {
 };
 
 /** プロパティ生成パラメータ */
-export type GenerateParams = {
+export type PropsCreatorParams = {
   /** リソース管理オブジェクト */
   resources: Resources;
   /** ウインドウタイプ */
@@ -40,7 +40,7 @@ export type GenerateParams = {
  * @return 生成結果
  */
 export function createMessageWindowProps(
-  params: GenerateParams,
+  params: PropsCreatorParams,
 ): MessageWindowProps {
   const ids = {
     messages: domUuid(),

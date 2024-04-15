@@ -8,7 +8,7 @@ import {
   wingDozerBurstButton,
 } from "../../../../../game-object/burst-button";
 import { BurstButton } from "../../../../../game-object/burst-button/burst-button";
-import { GenerateHUDLayerObjectParams } from "../generate-params";
+import { HUDLayerObjectCreatorParams } from "../creator-params";
 
 /**
  * アームドーザIDに対応したバーストボタンを生成する
@@ -16,7 +16,7 @@ import { GenerateHUDLayerObjectParams } from "../generate-params";
  * @return バーストボタン
  */
 export function createBurstButton(
-  params: GenerateHUDLayerObjectParams,
+  params: HUDLayerObjectCreatorParams,
 ): BurstButton {
   const { player } = params;
   switch (player.armdozer.id) {

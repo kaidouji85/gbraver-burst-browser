@@ -24,7 +24,7 @@ import { EpisodeElement } from "../episode-element";
 import { EpisodeSelectorProps } from "../props";
 
 /** EpisodeSelectorProps生成パラメータ */
-export type GenerateEpisodeSelectorPropsParams = {
+export type PropsCreatorParams = {
   /** リソース管理オブジェクト */
   resources: Resources;
   /** SE再生オブジェクト */
@@ -39,7 +39,7 @@ export type GenerateEpisodeSelectorPropsParams = {
  * @return 生成したEpisodeSelectorProps
  */
 export function createEpisodeSelectorProps(
-  params: GenerateEpisodeSelectorPropsParams,
+  params: PropsCreatorParams,
 ): EpisodeSelectorProps {
   const { resources, episodes } = params;
   const root = document.createElement("div");

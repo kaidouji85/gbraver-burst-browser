@@ -11,16 +11,15 @@ import { hidden } from "./animation/hidden";
 import { show } from "./animation/show";
 import {
   createLightningBarrierProps,
-  GenerateLightningBarrierPropsParams,
+  PropsCreatorParams,
 } from "./props/create-lightning-barrier-props";
 import { LightningBarrierProps } from "./props/lightning-barrier-props";
 
 /** コンストラクタのパラメータ */
-export type GenerateLightningBarrierParams =
-  GenerateLightningBarrierPropsParams & {
-    /** ゲームオブジェクトアクション */
-    gameObjectAction: Observable<GameObjectAction>;
-  };
+export type LightningBarrierGameEffectParams = PropsCreatorParams & {
+  /** ゲームオブジェクトアクション */
+  gameObjectAction: Observable<GameObjectAction>;
+};
 
 /** 電撃バリア */
 export class LightningBarrierGameEffect {
@@ -33,7 +32,7 @@ export class LightningBarrierGameEffect {
    * コンストラクタ
    * @param params パラメータ
    */
-  constructor(params: GenerateLightningBarrierParams) {
+  constructor(params: LightningBarrierGameEffectParams) {
     const { gameObjectAction } = params;
     this.#props = createLightningBarrierProps(params);
     this.#unsubscribers = [

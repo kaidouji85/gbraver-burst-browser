@@ -6,7 +6,7 @@ import { ConfigChangedDialogProps, PropsCreatorParams } from "./props";
 import { createConfigChangedDialogProps } from "./props";
 
 /** コンストラクタのパラメータ */
-type ConstructorParams = PropsCreatorParams;
+type ConfigChangedDialogParams = PropsCreatorParams;
 
 /**
  * 設定変更通知ダイアログ
@@ -23,7 +23,7 @@ export class ConfigChangedDialog {
    * 本ダイアログは生成直後には非表示である
    * @param params パラメータ
    */
-  constructor(params: ConstructorParams) {
+  constructor(params: ConfigChangedDialogParams) {
     this.#props = createConfigChangedDialogProps(params);
     this.#unsbusscriber = bindEventListeners(this.#props);
   }

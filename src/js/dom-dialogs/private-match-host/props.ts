@@ -29,7 +29,7 @@ export type PrivateMatchHostDialogProps = {
 };
 
 /** PrivateMatchHostDialogProps生成パラメータ */
-export type GeneratePrivateMatchHostDialogPropsParams = {
+export type PropsCreatorParams = {
   /** リソース管理オブジェクト */
   resources: Resources;
   /** SE再生オブジェクト */
@@ -44,7 +44,7 @@ export type GeneratePrivateMatchHostDialogPropsParams = {
  * @return 生成結果
  */
 export function createPrivateMatchHostDialogProps(
-  params: GeneratePrivateMatchHostDialogPropsParams,
+  params: PropsCreatorParams,
 ): PrivateMatchHostDialogProps {
   const { resources, roomID } = params;
   const ids: DataIDs = {

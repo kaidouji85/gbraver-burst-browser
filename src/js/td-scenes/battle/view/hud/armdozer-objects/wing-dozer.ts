@@ -6,7 +6,7 @@ import {
   playerWingDozerCutIn,
 } from "../../../../../game-object/cut-in/wing-dozer";
 import { WingDozerCutIn } from "../../../../../game-object/cut-in/wing-dozer/wing-dozer-cutin";
-import { GenerateHUDLayerObjectParams } from "../generate-params";
+import { HUDLayerObjectCreatorParams } from "../creator-params";
 import type { HUDArmdozerObjects } from "./hud-armdozer-objects";
 
 /** コンストラクタのパラメータ */
@@ -49,7 +49,7 @@ export class WingDozerHUD implements HUDArmdozerObjects {
  * @return ウィングドーザHUD
  */
 export function playerWingDozerHUD(
-  params: GenerateHUDLayerObjectParams,
+  params: HUDLayerObjectCreatorParams,
 ): WingDozerHUD {
   const { player } = params;
   return new WingDozerHUD({
@@ -64,7 +64,7 @@ export function playerWingDozerHUD(
  * @return ウィングドーザHUD
  */
 export function enemyWingDozerHUD(
-  params: GenerateHUDLayerObjectParams,
+  params: HUDLayerObjectCreatorParams,
 ): WingDozerHUD {
   const { enemy } = params;
   return new WingDozerHUD({

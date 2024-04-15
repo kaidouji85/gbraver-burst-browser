@@ -6,7 +6,7 @@ import { ContinuousAttackView } from "../view/continuous-attack-view";
 import { ContinuousAttackProps } from "./continuous-attack-props";
 
 /** ContinuousAttackProps生成パラメータ */
-export type GenerateContinuousAttackPropsParams = {
+export type PropsCreatorParams = {
   /** ビュー */
   view: ContinuousAttackView;
   /** リソース管理オブジェクト */
@@ -21,7 +21,7 @@ export type GenerateContinuousAttackPropsParams = {
  * @return 生成したContinuousAttackProps
  */
 export function createContinuousAttackProps(
-  params: GenerateContinuousAttackPropsParams,
+  params: PropsCreatorParams,
 ): ContinuousAttackProps {
   const { resources } = params;
   return {

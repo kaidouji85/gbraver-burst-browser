@@ -26,12 +26,12 @@ import { uprightToStand } from "./animation/upright-to-stand";
 import { bindEventListeners } from "./procedure/bind-event-listeners";
 import {
   createNeoLandozerProps,
-  GenerateNeoLandozerPropsParams,
+  PropsCreatorParams,
 } from "./props/create-neo-landozer-props";
 import { NeoLandozerProps } from "./props/neo-landozer-props";
 
 /** コンストラクタのパラメータ */
-type Params = GenerateNeoLandozerPropsParams & {
+type NeoLandozerParams = PropsCreatorParams & {
   /** ゲームオブジェクトアクション */
   gameObjectAction: Observable<GameObjectAction>;
 };
@@ -47,7 +47,7 @@ export class NeoLandozer extends EmptyArmdozerSprite implements ArmdozerSprite {
    * コンストラクタ
    * @param params パラメータ
    */
-  constructor(params: Params) {
+  constructor(params: NeoLandozerParams) {
     super();
     const { gameObjectAction } = params;
     this.#props = createNeoLandozerProps(params);

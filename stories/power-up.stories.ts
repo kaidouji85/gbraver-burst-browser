@@ -1,8 +1,8 @@
 import { delay } from "../src/js/animation/delay";
 import {
   enemyPowerUp,
-  GeneratePowerUpParams,
   playerPowerUp,
+  PowerUpCreatorParams,
 } from "../src/js/game-object/power-up";
 import { PowerUp } from "../src/js/game-object/power-up/power-up";
 import { TDGameObjectStub } from "./stub/td-game-object-stub";
@@ -19,7 +19,7 @@ export default {
  */
 const powerUpStory =
   (
-    generator: (params: GeneratePowerUpParams) => PowerUp,
+    generator: (params: PowerUpCreatorParams) => PowerUp,
     fn: (powerUp: PowerUp) => void,
   ) =>
   () => {

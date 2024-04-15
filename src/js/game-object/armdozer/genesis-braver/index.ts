@@ -8,7 +8,7 @@ import { EnemyGenesisBraverView } from "./view/enemy-genesis-braver-view";
 import { PlayerGenesisBraverView } from "./view/player-genesis-braver-view";
 
 /** ジェネシスブレイバー生成関数パラメータ */
-type GenerateGenesisBraverParams = {
+type GenesisBraverCreatorParams = {
   /** リソース管理オブジェクト */
   resources: Resources;
   /** ゲームオブジェクトアクション */
@@ -23,7 +23,7 @@ type GenerateGenesisBraverParams = {
  * @return 生成結果
  */
 export function PlayerGenesisBraver(
-  params: GenerateGenesisBraverParams,
+  params: GenesisBraverCreatorParams,
 ): GenesisBraver {
   const { resources } = params;
   const view = new PlayerGenesisBraverView(resources);
@@ -36,7 +36,7 @@ export function PlayerGenesisBraver(
  * @return 生成結果
  */
 export function EnemyGenesisBraver(
-  params: GenerateGenesisBraverParams,
+  params: GenesisBraverCreatorParams,
 ): GenesisBraver {
   const { resources } = params;
   const view = new EnemyGenesisBraverView(resources);

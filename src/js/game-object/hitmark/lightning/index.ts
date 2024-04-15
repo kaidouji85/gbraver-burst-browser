@@ -8,7 +8,7 @@ import { EnemyLightningView } from "./view/enemy-lightning-view";
 import { PlayerLightningView } from "./view/player-lightning-view";
 
 /** 電撃ヒットマーク生成パラメータ */
-export type GenerateLightningParams = {
+export type LightningCreatorParams = {
   /** リソース管理オブジェクト */
   resources: Resources;
   /** SE再生オブジェクト */
@@ -22,7 +22,7 @@ export type GenerateLightningParams = {
  * @param params 生成パラメータ
  * @return 生成結果
  */
-export function playerLightning(params: GenerateLightningParams): Lightning {
+export function playerLightning(params: LightningCreatorParams): Lightning {
   const { resources } = params;
   const view = new PlayerLightningView(resources);
   return new Lightning({ ...params, view });
@@ -33,7 +33,7 @@ export function playerLightning(params: GenerateLightningParams): Lightning {
  * @param params 生成パラメータ
  * @return 生成結果
  */
-export function enemyLightning(params: GenerateLightningParams): Lightning {
+export function enemyLightning(params: LightningCreatorParams): Lightning {
   const { resources } = params;
   const view = new EnemyLightningView(resources);
   return new Lightning({ ...params, view });

@@ -1,7 +1,7 @@
 import { delay } from "../src/js/animation/delay";
 import {
+  ContinuousAttackCreatorParams,
   enemyContinuousAttack,
-  GenerateContinuousAttackIndicatorParams,
   playerContinuousAttack,
 } from "../src/js/game-object/continuous-attack";
 import { ContinuousAttackIndicator } from "../src/js/game-object/continuous-attack/continuous-attack-indicator";
@@ -20,7 +20,7 @@ export default {
 const continuousAttackStory =
   (
     generator: (
-      params: GenerateContinuousAttackIndicatorParams,
+      params: ContinuousAttackCreatorParams,
     ) => ContinuousAttackIndicator,
     fn: (continuousAttack: ContinuousAttackIndicator) => void,
   ) =>

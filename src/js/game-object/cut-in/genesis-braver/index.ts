@@ -7,7 +7,7 @@ import { EnemyGenesisBraverCutInView } from "./view/enemy-genesis-braver-cutin-v
 import { PlayerGenesisBraverCutInView } from "./view/player-genesis-braver-cutin-view";
 
 /** ジェネシスブレイバー カットイン生成パラメータ */
-export type GenerateGenesisBraverCutInParams = {
+export type GenesisBraverCutInCreatorParams = {
   /** リソース管理オブジェクト */
   resources: Resources;
   /** ゲームオブジェクトアクション */
@@ -20,7 +20,7 @@ export type GenerateGenesisBraverCutInParams = {
  * @return 生成結果
  */
 export function playerGenesisBraverCutIn(
-  params: GenerateGenesisBraverCutInParams,
+  params: GenesisBraverCutInCreatorParams,
 ): GenesisBraverCutIn {
   const { resources } = params;
   const view = new PlayerGenesisBraverCutInView(resources);
@@ -33,7 +33,7 @@ export function playerGenesisBraverCutIn(
  * @return 生成結果
  */
 export function enemyGenesisBraverCutIn(
-  params: GenerateGenesisBraverCutInParams,
+  params: GenesisBraverCutInCreatorParams,
 ): GenesisBraverCutIn {
   const { resources } = params;
   const view = new EnemyGenesisBraverCutInView(resources);

@@ -20,7 +20,7 @@ import { PilotStatus } from "../pilot-status";
 import { PilotSelectorProps } from "../props";
 
 /** PilotSelectorProps生成パラメータ */
-export type GeneratePilotSelectorPropsParams = {
+export type PropsCreatorParams = {
   /** リソース管理オブジェクト */
   resources: Resources;
   /** SE再生オブジェクト */
@@ -37,7 +37,7 @@ export type GeneratePilotSelectorPropsParams = {
  * @return 生成結果
  */
 export function createPilotSelectorProps(
-  params: GeneratePilotSelectorPropsParams,
+  params: PropsCreatorParams,
 ): PilotSelectorProps {
   const { resources, pilotIds, initialPilotId } = params;
   const root = document.createElement("div");

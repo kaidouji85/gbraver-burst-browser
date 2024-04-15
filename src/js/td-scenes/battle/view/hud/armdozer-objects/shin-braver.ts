@@ -6,7 +6,7 @@ import {
   playerShinBraverCutIn,
 } from "../../../../../game-object/cut-in/shin-braver";
 import { ShinBraverCutIn } from "../../../../../game-object/cut-in/shin-braver/shin-braver-cutin";
-import { GenerateHUDLayerObjectParams } from "../generate-params";
+import { HUDLayerObjectCreatorParams } from "../creator-params";
 import type { HUDArmdozerObjects } from "./hud-armdozer-objects";
 
 /** コンストラクタのパラメータ */
@@ -50,7 +50,7 @@ export class ShinBraverHUD implements HUDArmdozerObjects {
  * @return シンブレイバーHUD
  */
 export function playerShinBraverHUD(
-  params: GenerateHUDLayerObjectParams,
+  params: HUDLayerObjectCreatorParams,
 ): HUDArmdozerObjects {
   const { player } = params;
   return new ShinBraverHUD({
@@ -65,7 +65,7 @@ export function playerShinBraverHUD(
  * @return シンブレイバーHUD
  */
 export function enemyShinBraverHUD(
-  params: GenerateHUDLayerObjectParams,
+  params: HUDLayerObjectCreatorParams,
 ): HUDArmdozerObjects {
   const { enemy } = params;
   return new ShinBraverHUD({

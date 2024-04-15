@@ -6,7 +6,7 @@ import { NeoLandozerView } from "../view/neo-landozer-view";
 import { NeoLandozerProps } from "./neo-landozer-props";
 
 /** NeoLandozerProps生成パラメータ */
-export type GenerateNeoLandozerPropsParams = {
+export type PropsCreatorParams = {
   /** リソース管理オブジェクト */
   resources: Resources;
   /** ビュー */
@@ -21,7 +21,7 @@ export type GenerateNeoLandozerPropsParams = {
  * @return 生成結果
  */
 export function createNeoLandozerProps(
-  params: GenerateNeoLandozerPropsParams,
+  params: PropsCreatorParams,
 ): NeoLandozerProps {
   const { resources } = params;
   return {

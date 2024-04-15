@@ -8,12 +8,12 @@ import { hidden } from "./animation/hidden";
 import { show } from "./animation/show";
 import {
   createTsubasaCutInProps,
-  GenerateTsubasaCutInPropsParams,
+  PropsCreatorParams,
 } from "./props/create-tsubasa-cutin-props";
 import { TsubasaCutInProps } from "./props/tsubasa-cutin-props";
 
 /** コンストラクタのパラメータ */
-export type ConstructTsubasaCutInParams = GenerateTsubasaCutInPropsParams & {
+export type TsubasaCutInParams = PropsCreatorParams & {
   /** ゲームオブジェクトアクション */
   gameObjectAction: Observable<GameObjectAction>;
 };
@@ -29,7 +29,7 @@ export class TsubasaCutIn {
    * コンストラクタ
    * @param params パラメータ
    */
-  constructor(params: ConstructTsubasaCutInParams) {
+  constructor(params: TsubasaCutInParams) {
     const { gameObjectAction } = params;
     this.#props = createTsubasaCutInProps(params);
     this.#unsubscriber = gameObjectAction.subscribe((action) => {

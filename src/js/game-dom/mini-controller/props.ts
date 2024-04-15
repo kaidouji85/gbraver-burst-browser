@@ -36,7 +36,7 @@ export type MiniControllerProps = {
 };
 
 /** 生成パラメータ */
-export type GenerateMiniControllerProps = {
+export type PropsCreatorParams = {
   /** リソース管理オブジェクト */
   resources: Resources;
   /** SE再生 */
@@ -49,7 +49,7 @@ export type GenerateMiniControllerProps = {
  * @return 生成結果
  */
 export function createMiniControllerProps(
-  params: GenerateMiniControllerProps,
+  params: PropsCreatorParams,
 ): MiniControllerProps {
   const { resources, se } = params;
   const root = document.createElement("div");

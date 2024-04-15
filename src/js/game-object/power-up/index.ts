@@ -8,7 +8,7 @@ import { EnemyPowerUpView } from "./view/enemy-power-up-view";
 import { PlayerPowerUpView } from "./view/player-power-up-view";
 
 /** 生成パラメータ */
-export type GeneratePowerUpParams = {
+export type PowerUpCreatorParams = {
   /** リソース管理オブジェクト */
   resources: Resources;
   /** SE再生オブジェクト */
@@ -22,7 +22,7 @@ export type GeneratePowerUpParams = {
  * @param params 生成パラメータ
  * @return 生成結果
  */
-export function playerPowerUp(params: GeneratePowerUpParams): PowerUp {
+export function playerPowerUp(params: PowerUpCreatorParams): PowerUp {
   const { resources } = params;
   const view = new PlayerPowerUpView(resources);
   return new PowerUp({ ...params, view });
@@ -33,7 +33,7 @@ export function playerPowerUp(params: GeneratePowerUpParams): PowerUp {
  * @param params 生成パラメータ
  * @return 生成結果
  */
-export function enemyPowerUp(params: GeneratePowerUpParams): PowerUp {
+export function enemyPowerUp(params: PowerUpCreatorParams): PowerUp {
   const { resources } = params;
   const view = new EnemyPowerUpView(resources);
   return new PowerUp({ ...params, view });

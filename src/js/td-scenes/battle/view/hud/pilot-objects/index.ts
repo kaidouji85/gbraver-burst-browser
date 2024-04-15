@@ -1,6 +1,6 @@
 import { PilotIds } from "gbraver-burst-core";
 
-import { GenerateHUDLayerObjectParams } from "../generate-params";
+import { HUDLayerObjectCreatorParams } from "../creator-params";
 import { enemyGaiHUD, playerGaiHUD } from "./gai";
 import type { HUDPilotObjects } from "./hud-pilot-objects";
 import { enemyRaitoHUD, playerRaitoHUD } from "./raito";
@@ -14,7 +14,7 @@ import { enemyYuuyaHUD, playerYuuyaHUD } from "./yuuya";
  * @return HUDパイロット
  */
 export function playerHUDPilotObjects(
-  params: GenerateHUDLayerObjectParams,
+  params: HUDLayerObjectCreatorParams,
 ): HUDPilotObjects {
   const { player } = params;
   switch (player.pilot.id) {
@@ -39,7 +39,7 @@ export function playerHUDPilotObjects(
  * @return HUDパイロット
  */
 export function enemyHUDPilotObjects(
-  params: GenerateHUDLayerObjectParams,
+  params: HUDLayerObjectCreatorParams,
 ): HUDPilotObjects {
   const { enemy } = params;
   switch (enemy.pilot.id) {

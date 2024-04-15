@@ -7,7 +7,7 @@ import { PlayerWingDozerCutInView } from "./view/player-wing-dozer-cutin-view";
 import { WingDozerCutIn } from "./wing-dozer-cutin";
 
 /** 生成パラメータ */
-export type GenerateWingDozerCutInParams = {
+export type WingDozerCutInCreatorParams = {
   /** リソース管理オブジェクト */
   resources: Resources;
   /** ゲームオブジェクトアクション */
@@ -20,7 +20,7 @@ export type GenerateWingDozerCutInParams = {
  * @return 生成結果
  */
 export function playerWingDozerCutIn(
-  params: GenerateWingDozerCutInParams,
+  params: WingDozerCutInCreatorParams,
 ): WingDozerCutIn {
   const { resources } = params;
   const view = new PlayerWingDozerCutInView(resources);
@@ -33,7 +33,7 @@ export function playerWingDozerCutIn(
  * @return 生成結果
  */
 export function enemyWingDozerCutIn(
-  params: GenerateWingDozerCutInParams,
+  params: WingDozerCutInCreatorParams,
 ): WingDozerCutIn {
   const { resources } = params;
   const view = new EnemyWingDozerCutInView(resources);

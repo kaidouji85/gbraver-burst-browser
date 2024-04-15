@@ -3,7 +3,7 @@ import { NeoLandozerCutInView } from "../view/neo-landozer-cutin-view";
 import { NeoLandozerCutInProps } from "./neo-landozer-cutin-props";
 
 /** NeoLandozerCutInProps生成パラメータ */
-export type GenerateNeoLandozerCutInPropsParams = {
+export type PropsCreatorParams = {
   /** ビュー */
   view: NeoLandozerCutInView;
 };
@@ -14,7 +14,7 @@ export type GenerateNeoLandozerCutInPropsParams = {
  * @returns 生成結果
  */
 export function createNeoLandozerCutInProps(
-  params: GenerateNeoLandozerCutInPropsParams,
+  params: PropsCreatorParams,
 ): NeoLandozerCutInProps {
   const { view } = params;
   return {

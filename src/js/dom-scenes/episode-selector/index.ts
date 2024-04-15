@@ -6,16 +6,15 @@ import { EpisodeSelect } from "./episode-element/episode-select";
 import { bindEventListeners } from "./procedure/bind-event-listeners";
 import {
   createEpisodeSelectorProps,
-  GenerateEpisodeSelectorPropsParams,
+  PropsCreatorParams,
 } from "./procedure/create-episode-selector-props";
 import { initialize } from "./procedure/initialize";
 import { EpisodeSelectorProps } from "./props";
 
 /** コンストラクタのパラメータ */
-export type ConstructEpisodeSelectorParams =
-  GenerateEpisodeSelectorPropsParams & {
-    initialSelectedEpisodeID?: EpisodeID;
-  };
+export type EpisodeSelectorParams = PropsCreatorParams & {
+  initialSelectedEpisodeID?: EpisodeID;
+};
 
 /** エピソードセレクト画面 */
 export class EpisodeSelector implements DOMScene {
@@ -28,7 +27,7 @@ export class EpisodeSelector implements DOMScene {
    * コンストラクタ
    * @param params パラメータ
    */
-  constructor(params: ConstructEpisodeSelectorParams) {
+  constructor(params: EpisodeSelectorParams) {
     const { initialSelectedEpisodeID } = params;
     this.#props = createEpisodeSelectorProps(params);
     this.#unsubscribers = bindEventListeners(this.#props);

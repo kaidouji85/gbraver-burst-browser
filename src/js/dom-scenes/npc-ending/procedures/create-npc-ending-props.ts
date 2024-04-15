@@ -14,7 +14,7 @@ import { rootInnerHTML } from "../dom/root-inner-html";
 import { NPCEndingProps } from "../props";
 
 /** NPCEndingProps生成パラメータ */
-export type GenerateNPCEndingPropsParams = {
+export type PropsCreatorParams = {
   /** リソース管理オブジェクト */
   resources: Resources;
   /** BGM管理オブジェクト */
@@ -29,7 +29,7 @@ export type GenerateNPCEndingPropsParams = {
  * @return 生成結果
  */
 export function createNPCEndingProps(
-  params: GenerateNPCEndingPropsParams,
+  params: PropsCreatorParams,
 ): NPCEndingProps {
   const { resources } = params;
   const ids = {

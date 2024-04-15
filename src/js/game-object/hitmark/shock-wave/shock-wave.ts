@@ -8,12 +8,12 @@ import type { GameObjectAction } from "../../action/game-object-action";
 import { popUp } from "./animation/pop-up";
 import {
   createShockWaveProps,
-  GenerateShockWavePropsParams,
+  PropsCreatorParams,
 } from "./props/create-shock-wave-props";
 import { ShockWaveProps } from "./props/shock-wave-props";
 
 /** コンストラクタのパラメータ */
-export type ConstructShockWaveParams = GenerateShockWavePropsParams & {
+export type ShockWaveParams = PropsCreatorParams & {
   /** ゲームオブジェクトアクション */
   gameObjectAction: Observable<GameObjectAction>;
 };
@@ -29,7 +29,7 @@ export class ShockWave {
    * リソース管理オブジェクト
    * @param params パラメータ
    */
-  constructor(params: ConstructShockWaveParams) {
+  constructor(params: ShockWaveParams) {
     const { gameObjectAction } = params;
     this.#props = createShockWaveProps(params);
     this.#unsubscriber = gameObjectAction.subscribe((action) => {

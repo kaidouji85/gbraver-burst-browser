@@ -7,7 +7,7 @@ import { EnemyBatteryNumberView } from "./view/enemy-battery-number-view";
 import { PlayerBatteryNumberView } from "./view/player-battery-number-view";
 
 /** 生成パラメータ */
-export type GenerateBatteryNumberParams = {
+export type BatteryNumberCreatorParams = {
   /** リソース管理オブジェクト */
   resources: Resources;
   /** ゲームオブジェクトアクション */
@@ -20,7 +20,7 @@ export type GenerateBatteryNumberParams = {
  * @return バッテリービュー
  */
 export function playerBatteryNumber(
-  params: GenerateBatteryNumberParams,
+  params: BatteryNumberCreatorParams,
 ): BatteryNumber {
   const { resources } = params;
   const view = new PlayerBatteryNumberView(resources);
@@ -33,7 +33,7 @@ export function playerBatteryNumber(
  * @return バッテリービュー
  */
 export function enemyBatteryNumber(
-  params: GenerateBatteryNumberParams,
+  params: BatteryNumberCreatorParams,
 ): BatteryNumber {
   const { resources } = params;
   const view = new EnemyBatteryNumberView(resources);

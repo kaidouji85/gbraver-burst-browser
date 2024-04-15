@@ -9,7 +9,7 @@ import { rootInnerHTML } from "../dom/root-inner-html";
 import { MatchCardProps } from "../props";
 
 /** マッチカード画面プロパティの生成パラメータ */
-export type GenerateMatchCardPropsParams = {
+export type PropsCreatorParams = {
   /** リソース管理オブジェクト */
   resources: Resources;
   /** プレイヤー情報 */
@@ -26,7 +26,7 @@ export type GenerateMatchCardPropsParams = {
  * @return 生成結果
  */
 export function createMatchCardProps(
-  params: GenerateMatchCardPropsParams,
+  params: PropsCreatorParams,
 ): MatchCardProps {
   const ids = { player: domUuid(), enemy: domUuid() };
   const root = document.createElement("div");

@@ -9,17 +9,17 @@ import { PlainHUDCamera } from "../../../../game-object/camera/plain-hud/plain-h
 import type { OverlapEvent } from "../../../../render/overlap-event/overlap-event";
 import type { OverlapNotifier } from "../../../../render/overlap-notifier";
 import type { BattleSceneAction } from "../../actions";
-import { GenerateBattleViewParams } from "../generate-params";
+import { BattleViewCreatorParams } from "../creator-params";
 import { enemyArmdozerHUD, playerArmdozerHUD } from "./armdozer-objects";
 import type { HUDArmdozerObjects } from "./armdozer-objects/hud-armdozer-objects";
+import { HUDLayerObjectCreatorParams } from "./creator-params";
 import { HUDGameObjects } from "./game-objects";
-import { GenerateHUDLayerObjectParams } from "./generate-params";
 import { enemyHUDPilotObjects, playerHUDPilotObjects } from "./pilot-objects";
 import type { HUDPilotObjects } from "./pilot-objects/hud-pilot-objects";
 import { enemyHUDObjects, HUDPlayer, playerHUDObjects } from "./player";
 
 /** コンストラクタのパラメータ */
-type Param = GenerateBattleViewParams & {
+type Param = BattleViewCreatorParams & {
   /** レンダラ */
   renderer: OverlapNotifier;
   /** アップデート */
@@ -52,17 +52,17 @@ export class HudLayer {
       param.preRender,
       this.#overlap,
     );
-    const generateParams: GenerateHUDLayerObjectParams = {
+    const creatorParams: HUDLayerObjectCreatorParams = {
       ...param,
       gameObjectAction: this.#gameObjectAction,
     };
-    this.gameObjects = new HUDGameObjects(generateParams);
+    this.gameObjects = new HUDGameObjects(creatorParams);
     this.gameObjects.getObject3Ds().forEach((object) => {
       this.scene.add(object);
     });
     this.players = [
-      playerHUDObjects(generateParams),
-      enemyHUDObjects(generateParams),
+      playerHUDObjects(creatorParams),
+      enemyHUDObjects(creatorParams),
     ];
     this.players
       .map((v) => v.getObject3Ds())
@@ -71,8 +71,8 @@ export class HudLayer {
         this.scene.add(v);
       });
     this.armdozers = [
-      playerArmdozerHUD(generateParams),
-      enemyArmdozerHUD(generateParams),
+      playerArmdozerHUD(creatorParams),
+      enemyArmdozerHUD(creatorParams),
     ];
     this.armdozers
       .map((v) => v.getObject3Ds())
@@ -81,8 +81,8 @@ export class HudLayer {
         this.scene.add(v);
       });
     this.pilots = [
-      playerHUDPilotObjects(generateParams),
-      enemyHUDPilotObjects(generateParams),
+      playerHUDPilotObjects(creatorParams),
+      enemyHUDPilotObjects(creatorParams),
     ];
     this.pilots
       .map((v) => v.getObject3Ds())

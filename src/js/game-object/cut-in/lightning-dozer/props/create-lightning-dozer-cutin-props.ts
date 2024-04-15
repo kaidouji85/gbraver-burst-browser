@@ -3,7 +3,7 @@ import { LightningDozerCutInView } from "../view/lightning-dozer-cutin-view";
 import { LightningDozerCutInProps } from "./lightning-dozer-cutin-props";
 
 /** LightningDozerCutInProps生成パラメータ */
-export type GenerateLightningDozerCutInPropsParams = {
+export type PropsCreatorParams = {
   /** ビュー */
   view: LightningDozerCutInView;
 };
@@ -14,7 +14,7 @@ export type GenerateLightningDozerCutInPropsParams = {
  * @return 生成したLightningDozerCutInProps
  */
 export function createLightningDozerCutInProps(
-  params: GenerateLightningDozerCutInPropsParams,
+  params: PropsCreatorParams,
 ): LightningDozerCutInProps {
   const { view } = params;
   return {

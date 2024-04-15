@@ -8,7 +8,7 @@ import { EnemyRaitoView } from "./view/enemy-raito-view";
 import { PlayerRaitoView } from "./view/player-raito-view";
 
 /** 生成パラメータ */
-export type GenerateRaitoCutInParams = {
+export type RaitoCutInCreatorParams = {
   /** リソース管理オブジェクト */
   resources: Resources;
   /** SE再生オブジェクト */
@@ -22,7 +22,7 @@ export type GenerateRaitoCutInParams = {
  * @param params 生成パラメータ
  * @return ライト カットイン
  */
-export function playerRaitoCutIn(params: GenerateRaitoCutInParams): RaitoCutIn {
+export function playerRaitoCutIn(params: RaitoCutInCreatorParams): RaitoCutIn {
   const { resources } = params;
   const view = new PlayerRaitoView(resources);
   return new RaitoCutIn({ ...params, view });
@@ -33,7 +33,7 @@ export function playerRaitoCutIn(params: GenerateRaitoCutInParams): RaitoCutIn {
  * @param params 生成パラメータ
  * @return ライト カットイン
  */
-export function enemyRaitoCutIn(params: GenerateRaitoCutInParams): RaitoCutIn {
+export function enemyRaitoCutIn(params: RaitoCutInCreatorParams): RaitoCutIn {
   const { resources } = params;
   const view = new EnemyRaitoView(resources);
   return new RaitoCutIn({ ...params, view });

@@ -9,11 +9,11 @@ import { open } from "./animation/open";
 import { BurstButtonProps } from "./props/burst-button-props";
 import {
   createBurstButtonProps,
-  GenerateBurstButtonPropsParams,
+  PropsCreatorParams,
 } from "./props/create-burst-button-props";
 
 /** コンストラクタのパラメータ */
-type Params = GenerateBurstButtonPropsParams;
+type BurstButtonParams = PropsCreatorParams;
 
 /** バーストボタン */
 export class BurstButton {
@@ -26,7 +26,7 @@ export class BurstButton {
    * コンストラクタ
    * @param params パラメータ
    */
-  constructor(params: Params) {
+  constructor(params: BurstButtonParams) {
     const { gameObjectAction } = params;
     this.#props = createBurstButtonProps(params);
     this.#unsubscribers = [

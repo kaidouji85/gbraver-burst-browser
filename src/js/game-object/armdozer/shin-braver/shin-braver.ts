@@ -28,12 +28,12 @@ import { uprightToStand } from "./animation/upright-to-stand";
 import { bindEventListeners } from "./procedure/bind-event-listeners";
 import {
   createShinBraverProps,
-  GenerateShinBraverPropsParams,
+  PropsCreatorParams,
 } from "./props/create-shin-braver-props";
 import { ShinBraverProps } from "./props/shin-braver-props";
 
 /** コンストラクタのパラメータ */
-type Params = GenerateShinBraverPropsParams & {
+type ShinBraverParams = PropsCreatorParams & {
   /** ゲームオブジェクトアクション */
   gameObjectAction: Observable<GameObjectAction>;
 };
@@ -49,7 +49,7 @@ export class ShinBraver extends EmptyArmdozerSprite implements ArmdozerSprite {
    * コンストラクタ
    * @param params パラメータ
    */
-  constructor(params: Params) {
+  constructor(params: ShinBraverParams) {
     super();
     const { gameObjectAction } = params;
     this.#props = createShinBraverProps(params);

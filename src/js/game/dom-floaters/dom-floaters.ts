@@ -5,7 +5,7 @@ import type { DomFloaterActionConnector } from "./dom-floater-action-connector";
 import { PostBattleFloater, ShowParams } from "./post-battle/post-battle";
 
 /** コンストラクタのパラメータ */
-type ConstructDOMFloatersParams = {
+type DOMFloatersParams = {
   /** バトル終了後行動選択フローターのアクションコネクタ */
   postBattleConnector: DomFloaterActionConnector<PostBattleFloater>;
 };
@@ -31,7 +31,7 @@ export class DOMFloaters {
    * コンストラクタ
    * @param params パラメータ
    */
-  constructor(params: ConstructDOMFloatersParams) {
+  constructor(params: DOMFloatersParams) {
     this.#root = document.createElement("div");
     this.#gameAction = new Subject();
     this.#postBattle = new PostBattleFloater();

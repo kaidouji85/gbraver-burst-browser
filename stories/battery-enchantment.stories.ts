@@ -1,7 +1,7 @@
 import { delay } from "../src/js/animation/delay";
 import {
+  BatteryEnchantmentCreatorParams,
   enemyBatteryEnchantment,
-  GenerateBatteryEnchantmentParams,
   playerBatteryEnchantment,
 } from "../src/js/game-object/battery-enchantment";
 import { BatteryEnchantment } from "../src/js/game-object/battery-enchantment/battery-enchantment";
@@ -19,7 +19,7 @@ export default {
  */
 const batteryEnchantmentStory =
   (
-    generator: (params: GenerateBatteryEnchantmentParams) => BatteryEnchantment,
+    generator: (params: BatteryEnchantmentCreatorParams) => BatteryEnchantment,
     fn: (batteryEnchantment: BatteryEnchantment) => void,
   ) =>
   () => {

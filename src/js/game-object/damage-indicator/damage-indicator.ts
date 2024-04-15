@@ -7,16 +7,15 @@ import type { GameObjectAction } from "../action/game-object-action";
 import { popUp } from "./animation/pop-up";
 import {
   createDamageIndicatorProps,
-  GenerateDamageIndicatorPropsParams,
+  PropsCreatorParams,
 } from "./props/create-damage-indicator-props";
 import { DamageIndicatorProps } from "./props/damage-indicator-props";
 
 /** コンストラクタのパラメータ */
-export type ConstructDamageIndicatorParams =
-  GenerateDamageIndicatorPropsParams & {
-    /** ゲームオブジェクトアクション */
-    gameObjectAction: Observable<GameObjectAction>;
-  };
+export type DamageIndicatorParams = PropsCreatorParams & {
+  /** ゲームオブジェクトアクション */
+  gameObjectAction: Observable<GameObjectAction>;
+};
 
 /** ダメージインジケータ */
 export class DamageIndicator {
@@ -29,7 +28,7 @@ export class DamageIndicator {
    * コンストラクタ
    * @param params パラメータ
    */
-  constructor(params: ConstructDamageIndicatorParams) {
+  constructor(params: DamageIndicatorParams) {
     const { gameObjectAction } = params;
     this.#props = createDamageIndicatorProps(params);
     this.#unsubscriber = gameObjectAction.subscribe((action) => {

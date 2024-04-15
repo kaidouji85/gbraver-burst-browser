@@ -4,14 +4,14 @@ import type { DOMScene } from "../dom-scene";
 import { bindEventListeners } from "./procedures/bind-event-listeners";
 import {
   createNPCEndingProps,
-  GenerateNPCEndingPropsParams,
+  PropsCreatorParams,
 } from "./procedures/create-npc-ending-props";
 import { playBGM } from "./procedures/play-bgm";
 import { waitUntilLoaded } from "./procedures/wait-until-loaded";
 import { NPCEndingProps } from "./props";
 
 /** コンストラクタのパラメータ */
-export type ConstructNPCEndingParams = GenerateNPCEndingPropsParams;
+export type NPCEndingParams = PropsCreatorParams;
 
 /** NPCルート エンディング画面 */
 export class NPCEnding implements DOMScene {
@@ -24,7 +24,7 @@ export class NPCEnding implements DOMScene {
    * コンストラクタ
    * @param params パラメータ
    */
-  constructor(params: ConstructNPCEndingParams) {
+  constructor(params: NPCEndingParams) {
     this.#props = createNPCEndingProps(params);
     this.#unSubscriber = bindEventListeners(this.#props);
   }

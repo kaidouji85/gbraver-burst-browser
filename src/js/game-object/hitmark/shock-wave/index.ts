@@ -9,7 +9,7 @@ import { EnemyShockWaveView } from "./view/enemy-shock-wave-view";
 import { PlayerShockWaveView } from "./view/player-shock-wave-view";
 
 /** 生成パラメータ */
-export type GenerateShockWaveParams = {
+export type ShockWaveCreatorParams = {
   /** リソース管理オブジェクト */
   resources: Resources;
   /** SE再生オブジェクト */
@@ -23,7 +23,7 @@ export type GenerateShockWaveParams = {
  * @param params 生成パラメータ
  * @return 衝撃波
  */
-export function playerShockWave(params: GenerateShockWaveParams): ShockWave {
+export function playerShockWave(params: ShockWaveCreatorParams): ShockWave {
   const { resources } = params;
   const initialModel = initialValue();
   const view = new PlayerShockWaveView(resources, initialModel);
@@ -35,7 +35,7 @@ export function playerShockWave(params: GenerateShockWaveParams): ShockWave {
  * @param params 生成パラメータ
  * @return 衝撃波
  */
-export function enemyShockWave(params: GenerateShockWaveParams): ShockWave {
+export function enemyShockWave(params: ShockWaveCreatorParams): ShockWave {
   const { resources } = params;
   const initialModel = initialValue();
   const view = new EnemyShockWaveView(resources, initialModel);

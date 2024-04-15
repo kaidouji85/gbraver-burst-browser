@@ -7,7 +7,7 @@ import {
   PlayerNeoLandozer,
 } from "../../../../../game-object/armdozer/neo-landozer";
 import { NeoLandozer } from "../../../../../game-object/armdozer/neo-landozer/neo-landozer";
-import { GenerateTDLayerObjectParams } from "../generate-params";
+import { TDLayerObjectCreatorParams } from "../creator-params";
 import type { TDArmdozerObjects } from "./armdozer-objects";
 
 /** ネオランドーザ 3Dレイヤー フィールド */
@@ -56,7 +56,7 @@ export class NeoLandozerTD implements NeoLandozerTDField, TDArmdozerObjects {
  * @return 生成結果
  */
 export function playerNeoLandozerTD(
-  params: GenerateTDLayerObjectParams,
+  params: TDLayerObjectCreatorParams,
 ): NeoLandozerTD {
   const { player } = params;
   return new NeoLandozerTD(player.playerId, {
@@ -70,7 +70,7 @@ export function playerNeoLandozerTD(
  * @return 生成結果
  */
 export function enemyNeoLandozerTD(
-  params: GenerateTDLayerObjectParams,
+  params: TDLayerObjectCreatorParams,
 ): NeoLandozerTD {
   const { enemy } = params;
   return new NeoLandozerTD(enemy.playerId, {

@@ -7,12 +7,12 @@ import type { GameObjectAction } from "../action/game-object-action";
 import { popUp } from "./animation/pop-up";
 import {
   createPowerUpProps,
-  GeneratePowerUpPropsParams,
+  PropsCreatorParams,
 } from "./props/create-power-up-props";
 import { PowerUpProps } from "./props/power-up-props";
 
 /** コンストラクタのパラメータ */
-export type ConstructPowerUpParams = GeneratePowerUpPropsParams & {
+export type PowerUpParams = PropsCreatorParams & {
   /** ゲームオブジェクトアクション */
   gameObjectAction: Observable<GameObjectAction>;
 };
@@ -28,7 +28,7 @@ export class PowerUp {
    * コンストラクタ
    * @param params パラメータ
    */
-  constructor(params: ConstructPowerUpParams) {
+  constructor(params: PowerUpParams) {
     const { gameObjectAction } = params;
     this.#props = createPowerUpProps(params);
     this.#unsubscriber = gameObjectAction.subscribe((action) => {

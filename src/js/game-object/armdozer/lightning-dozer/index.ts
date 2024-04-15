@@ -8,7 +8,7 @@ import { EnemyLightningDozerView } from "./view/enemy-lightning-dozer-view";
 import { PlayerLightingDozerView } from "./view/player-lighting-dozer-view";
 
 /** ライトニングドーザ生成関数パラメータ */
-type GenerateLightningDozerParams = {
+type LightningDozerCreatorParams = {
   /** リソース管理オブジェクト */
   resources: Resources;
   /** SE再生 */
@@ -23,7 +23,7 @@ type GenerateLightningDozerParams = {
  * @return プレイヤー側のライトニングドーザ
  */
 export function PlayerLightningDozer(
-  params: GenerateLightningDozerParams,
+  params: LightningDozerCreatorParams,
 ): LightningDozer {
   const { resources } = params;
   const view = new PlayerLightingDozerView(resources);
@@ -36,7 +36,7 @@ export function PlayerLightningDozer(
  * @return 敵側のライトニングドーザ
  */
 export function EnemyLightningDozer(
-  params: GenerateLightningDozerParams,
+  params: LightningDozerCreatorParams,
 ): LightningDozer {
   const { resources } = params;
   const view = new EnemyLightningDozerView(resources);

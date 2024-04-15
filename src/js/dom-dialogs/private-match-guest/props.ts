@@ -40,7 +40,7 @@ export type PrivateMatchGuestDialogProps = {
 };
 
 /** PrivateMatchGuestDialogProps生成パラメータ */
-export type GeneratePrivateMatchGuestDialogPropsParams = {
+export type PropsCreatorParams = {
   /** リソース管理オブジェクト */
   resources: Resources;
   /** SE再生オブジェクト */
@@ -53,7 +53,7 @@ export type GeneratePrivateMatchGuestDialogPropsParams = {
  * @return 生成結果
  */
 export function createPrivateMatchGuestDialogProps(
-  params: GeneratePrivateMatchGuestDialogPropsParams,
+  params: PropsCreatorParams,
 ): PrivateMatchGuestDialogProps {
   const { resources, se } = params;
   const root = document.createElement("div");

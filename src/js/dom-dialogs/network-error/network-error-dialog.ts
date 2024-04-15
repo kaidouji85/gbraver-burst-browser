@@ -82,7 +82,7 @@ function extractElements(root: HTMLElement, ids: DataIDs): Elements {
 }
 
 /** コンストラクタのパラメータ */
-export type ConstructNetworkErrorDialogParams = {
+export type NetworkErrorDialogParams = {
   /** リソース管理オブジェクト */
   resources: Resources;
   /** 効果音再生オブジェクト */
@@ -114,7 +114,7 @@ export class NetworkErrorDialog implements DOMDialog {
    * コンストラクタ
    * @param params パラメータ
    */
-  constructor(params: ConstructNetworkErrorDialogParams) {
+  constructor(params: NetworkErrorDialogParams) {
     const { resources, se, postNetworkError } = params;
     this.#se = se;
     this.#postNetworkError = postNetworkError;

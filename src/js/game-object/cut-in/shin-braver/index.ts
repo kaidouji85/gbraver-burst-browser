@@ -7,7 +7,7 @@ import { EnemyShinBraverCutInView } from "./view/enemy-shin-braver-cutin-view";
 import { PlayerShinBraverCutInView } from "./view/player-shin-braver-cutin-view";
 
 /** 生成パラメータ */
-export type GenerateShinBraverCutInParams = {
+export type ShinBraverCutInCreatorParams = {
   /** リソース管理オブジェクト */
   resources: Resources;
   /** ゲームオブジェクトアクション */
@@ -20,7 +20,7 @@ export type GenerateShinBraverCutInParams = {
  * @return 生成結果
  */
 export function playerShinBraverCutIn(
-  params: GenerateShinBraverCutInParams,
+  params: ShinBraverCutInCreatorParams,
 ): ShinBraverCutIn {
   const { resources } = params;
   const view = new PlayerShinBraverCutInView(resources);
@@ -33,7 +33,7 @@ export function playerShinBraverCutIn(
  * @return 生成結果
  */
 export function enemyShinBraverCutIn(
-  params: GenerateShinBraverCutInParams,
+  params: ShinBraverCutInCreatorParams,
 ): ShinBraverCutIn {
   const { resources } = params;
   const view = new EnemyShinBraverCutInView(resources);

@@ -10,7 +10,7 @@ import { BatterySelectorView } from "../view";
 import { BatterySelectorProps } from "./battery-selector-props";
 
 /** バッテリーセレクタプロパティ生成パラメータ */
-export type GenerateBatterySelectorPropsParam = {
+export type PropsCreatorParams = {
   /** リソース管理オブジェクト */
   resources: Resources;
   /** SE再生オブジェクト */
@@ -25,7 +25,7 @@ export type GenerateBatterySelectorPropsParam = {
  * @return バッテリーセレクタプロパティ
  */
 export function createBatterySelectorProps(
-  param: GenerateBatterySelectorPropsParam,
+  param: PropsCreatorParams,
 ): BatterySelectorProps {
   return {
     ...param,

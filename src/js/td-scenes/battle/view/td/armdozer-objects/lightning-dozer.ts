@@ -8,7 +8,7 @@ import {
 } from "../../../../../game-object/armdozer/lightning-dozer";
 import { LightningDozer } from "../../../../../game-object/armdozer/lightning-dozer/lightning-dozer";
 import { LightningBarrierGameEffect } from "../../../../../game-object/barrier/lightning/lightning-barrier";
-import { GenerateTDLayerObjectParams } from "../generate-params";
+import { TDLayerObjectCreatorParams } from "../creator-params";
 import type { TDArmdozerObjects } from "./armdozer-objects";
 
 /** ライトニングドーザ 3Dレイヤー フィールド */
@@ -68,7 +68,7 @@ export class LightningDozerTD
  * @return 生成結果
  */
 export function playerLightningDozerTD(
-  params: GenerateTDLayerObjectParams,
+  params: TDLayerObjectCreatorParams,
 ): LightningDozerTD {
   const { player } = params;
   return new LightningDozerTD(player.playerId, {
@@ -83,7 +83,7 @@ export function playerLightningDozerTD(
  * @return 生成結果
  */
 export function enemyLightningDozerTD(
-  params: GenerateTDLayerObjectParams,
+  params: TDLayerObjectCreatorParams,
 ): LightningDozerTD {
   const { enemy } = params;
   return new LightningDozerTD(enemy.playerId, {

@@ -10,7 +10,7 @@ import { TimeScaleButtonView } from "../view/time-scale-button-view";
 import { TimeScaleButtonProps } from "./time-scale-button-props";
 
 /** TimeScaleButtonProps生成パラメータ */
-export type GenerateTimeScaleButtonPropsParams = {
+export type PropsCreatorParams = {
   /** リソース管理オブジェクト */
   resources: Resources;
   /** SE再生オブジェクト */
@@ -25,7 +25,7 @@ export type GenerateTimeScaleButtonPropsParams = {
  * @return 生成結果
  */
 export function createTimeScaleButtonProps(
-  params: GenerateTimeScaleButtonPropsParams,
+  params: PropsCreatorParams,
 ): TimeScaleButtonProps {
   const { resources, gameObjectAction } = params;
   return {

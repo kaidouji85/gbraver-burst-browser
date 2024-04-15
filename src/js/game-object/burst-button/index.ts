@@ -11,7 +11,7 @@ import { ShinBraverIcon } from "./view/shin-braver-icon";
 import { WingDozerIcon } from "./view/wing-dozer-icon";
 
 /** 生成パラメータ */
-export type GenerateBurstButtonParams = {
+export type BurstButtonCreatorParams = {
   /** リソース管理オブジェクト */
   resources: Resources;
   /** SE再生オブジェクト */
@@ -26,7 +26,7 @@ export type GenerateBurstButtonParams = {
  * @return バーストボタン
  */
 export function shinBraverBurstButton(
-  params: GenerateBurstButtonParams,
+  params: BurstButtonCreatorParams,
 ): BurstButton {
   const { resources } = params;
   const armdozerIcon = new ShinBraverIcon(resources);
@@ -39,7 +39,7 @@ export function shinBraverBurstButton(
  * @return バーストボタン
  */
 export function neoLandozerBurstButton(
-  params: GenerateBurstButtonParams,
+  params: BurstButtonCreatorParams,
 ): BurstButton {
   const { resources } = params;
   const armdozerIcon = new NeoLandozerIcon(resources);
@@ -52,7 +52,7 @@ export function neoLandozerBurstButton(
  * @return バーストボタン
  */
 export function lightningDozerBurstButton(
-  params: GenerateBurstButtonParams,
+  params: BurstButtonCreatorParams,
 ): BurstButton {
   const { resources } = params;
   const armdozerIcon = new LightningDozerIcon(resources);
@@ -65,7 +65,7 @@ export function lightningDozerBurstButton(
  * @return バーストボタン
  */
 export function wingDozerBurstButton(
-  params: GenerateBurstButtonParams,
+  params: BurstButtonCreatorParams,
 ): BurstButton {
   const { resources } = params;
   const armdozerIcon = new WingDozerIcon(resources);
@@ -78,7 +78,7 @@ export function wingDozerBurstButton(
  * @return バーストボタン
  */
 export function genesisBraverBurstButton(
-  params: GenerateBurstButtonParams,
+  params: BurstButtonCreatorParams,
 ): BurstButton {
   const { resources } = params;
   const armdozerIcon = new GenesisBraverIcon(resources);

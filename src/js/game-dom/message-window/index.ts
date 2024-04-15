@@ -10,12 +10,12 @@ import { scrollUp } from "./procedure/scroll-up";
 import { visible } from "./procedure/visible";
 import {
   createMessageWindowProps,
-  GenerateParams,
   MessageWindowProps,
+  PropsCreatorParams,
 } from "./props";
 
 /** コンストラクタのパラメータ */
-type Params = GenerateParams;
+type MessageWindowParams = PropsCreatorParams;
 
 /** メッセージウインドウ */
 export class MessageWindow {
@@ -26,7 +26,7 @@ export class MessageWindow {
    * コンストラクタ
    * @param params パラメータ
    */
-  constructor(params: Params) {
+  constructor(params: MessageWindowParams) {
     this.#props = createMessageWindowProps(params);
   }
 

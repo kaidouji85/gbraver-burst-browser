@@ -6,7 +6,7 @@ import { DamageHalvedView } from "../view/damage-halved-view";
 import { DamageHalvedProps } from "./damage-halved-props";
 
 /** ダメージ半減 プロパティ生成パラメータ */
-export type GenerateDamageHalvedPropsParams = {
+export type PropsCreatorParams = {
   /** ビュー */
   view: DamageHalvedView;
   /** リソース管理オブジェクト */
@@ -21,7 +21,7 @@ export type GenerateDamageHalvedPropsParams = {
  * @return 生成結果
  */
 export function createDamageHalvedProps(
-  params: GenerateDamageHalvedPropsParams,
+  params: PropsCreatorParams,
 ): DamageHalvedProps {
   const { resources } = params;
   return {

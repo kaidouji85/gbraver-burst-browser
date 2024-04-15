@@ -1,5 +1,5 @@
 import {
-  GenerateBurstButtonParams,
+  BurstButtonCreatorParams,
   genesisBraverBurstButton,
   lightningDozerBurstButton,
   neoLandozerBurstButton,
@@ -18,7 +18,7 @@ export default {
  * @param params 生成パラメータ
  * @return バーストボタン
  */
-type BurstButtonGenerator = (params: GenerateBurstButtonParams) => BurstButton;
+type BurstButtonGenerator = (params: BurstButtonCreatorParams) => BurstButton;
 
 /**
  * バーストボタンストーリー

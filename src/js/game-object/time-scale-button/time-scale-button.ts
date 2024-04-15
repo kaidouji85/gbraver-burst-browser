@@ -10,12 +10,12 @@ import { toggle } from "./animation/toggle";
 import { getNextTimeScale } from "./model/next-time-scale";
 import {
   createTimeScaleButtonProps,
-  GenerateTimeScaleButtonPropsParams,
+  PropsCreatorParams,
 } from "./props/create-time-scale-button-props";
 import { TimeScaleButtonProps } from "./props/time-scale-button-props";
 
 /** コンストラクタのパラメータ */
-type Params = GenerateTimeScaleButtonPropsParams;
+type TimeScaleButtonParams = PropsCreatorParams;
 
 /** アニメーションタイムスケールボタン */
 export class TimeScaleButton {
@@ -28,7 +28,7 @@ export class TimeScaleButton {
    * コンストラクタ
    * @param params パラメータ
    */
-  constructor(params: Params) {
+  constructor(params: TimeScaleButtonParams) {
     const { gameObjectAction } = params;
     this.#props = createTimeScaleButtonProps(params);
     this.#unsubscribers = [

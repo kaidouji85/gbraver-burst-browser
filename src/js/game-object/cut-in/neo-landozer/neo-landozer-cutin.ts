@@ -9,16 +9,15 @@ import { hidden } from "./animation/hidden";
 import { show } from "./animation/show";
 import {
   createNeoLandozerCutInProps,
-  GenerateNeoLandozerCutInPropsParams,
+  PropsCreatorParams,
 } from "./props/create-neo-landozer-cutin-props";
 import { NeoLandozerCutInProps } from "./props/neo-landozer-cutin-props";
 
 /** コンストラクタのパラメータ */
-export type ConstructNeoLandozerCutInParams =
-  GenerateNeoLandozerCutInPropsParams & {
-    /** ゲームオブジェクトアクション */
-    gameObjectAction: Observable<GameObjectAction>;
-  };
+export type NeoLandozerCutInParams = PropsCreatorParams & {
+  /** ゲームオブジェクトアクション */
+  gameObjectAction: Observable<GameObjectAction>;
+};
 
 /** ネオランドーザ カットイン */
 export class NeoLandozerCutIn implements HUDTracking {
@@ -31,7 +30,7 @@ export class NeoLandozerCutIn implements HUDTracking {
    * コンストラクタ
    * @param params パラメータ
    */
-  constructor(params: ConstructNeoLandozerCutInParams) {
+  constructor(params: NeoLandozerCutInParams) {
     const { gameObjectAction } = params;
     this.#props = createNeoLandozerCutInProps(params);
     this.#unsubscriber = gameObjectAction.subscribe((action) => {

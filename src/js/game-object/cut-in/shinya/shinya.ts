@@ -8,12 +8,12 @@ import { hidden } from "./animation/hidden";
 import { show } from "./animation/show";
 import {
   createShinyaCutInProps,
-  GenerateShinyaCutInPropsParams,
+  PropsCreatorParams,
 } from "./props/create-shinya-cutin-props";
 import { ShinyaCutInProps } from "./props/shinya-cutin-props";
 
 /** コンストラクタのパラメータ */
-export type ConstructShinyaCutInParams = GenerateShinyaCutInPropsParams & {
+export type ShinyaCutInParams = PropsCreatorParams & {
   /** ゲームオブジェクトアクション */
   gameObjectAction: Observable<GameObjectAction>;
 };
@@ -29,7 +29,7 @@ export class ShinyaCutIn {
    * コンストラクタ
    * @param params パラメータ
    */
-  constructor(params: ConstructShinyaCutInParams) {
+  constructor(params: ShinyaCutInParams) {
     const { gameObjectAction } = params;
     this.#props = createShinyaCutInProps(params);
     this.#unsubscriber = gameObjectAction.subscribe((action) => {

@@ -6,7 +6,7 @@ import { BatteryEnchantmentView } from "../view/battery-enchantment-view";
 import { BatteryEnchantmentProps } from "./battery-enchantment-props";
 
 /** BatteryEnchantmentProps生成パラメータ */
-export type GenerateBatteryEnchantmentPropsParams = {
+export type PropsCreatorParams = {
   /** ビュー */
   view: BatteryEnchantmentView;
   /** リソース管理オブジェクト */
@@ -21,7 +21,7 @@ export type GenerateBatteryEnchantmentPropsParams = {
  * @return 生成したBatteryEnchantmentProps
  */
 export function createBatteryEnchantmentProps(
-  params: GenerateBatteryEnchantmentPropsParams,
+  params: PropsCreatorParams,
 ): BatteryEnchantmentProps {
   const { view, resources } = params;
   return {

@@ -26,12 +26,12 @@ import { uprightToStand } from "./animation/upright-to-stand";
 import { bindEventListeners } from "./procedure/bind-event-listeners";
 import {
   createLightningDozerProps,
-  GenerateLightningDozerPropsParams,
+  PropsCreatorParams,
 } from "./props/create-lightning-dozer-props";
 import { LightningDozerProps } from "./props/lightning-dozer-props";
 
 /** コンストラクタのパラメータ */
-type Params = GenerateLightningDozerPropsParams & {
+type LightningDozerParams = PropsCreatorParams & {
   /** ゲームオブジェクトアクション */
   gameObjectAction: Observable<GameObjectAction>;
 };
@@ -50,7 +50,7 @@ export class LightningDozer
    * コンストラクタ
    * @param params パラメータ
    */
-  constructor(params: Params) {
+  constructor(params: LightningDozerParams) {
     super();
     const { gameObjectAction } = params;
     this.#props = createLightningDozerProps(params);

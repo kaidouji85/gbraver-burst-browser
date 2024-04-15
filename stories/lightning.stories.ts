@@ -1,7 +1,7 @@
 import { delay } from "../src/js/animation/delay";
 import {
   enemyLightning,
-  GenerateLightningParams,
+  LightningCreatorParams,
   playerLightning,
 } from "../src/js/game-object/hitmark/lightning";
 import { Lightning } from "../src/js/game-object/hitmark/lightning/lightning";
@@ -19,7 +19,7 @@ export default {
  */
 const lightingStory =
   (
-    generator: (params: GenerateLightningParams) => Lightning,
+    generator: (params: LightningCreatorParams) => Lightning,
     fn: (lightning: Lightning) => void,
   ) =>
   () => {

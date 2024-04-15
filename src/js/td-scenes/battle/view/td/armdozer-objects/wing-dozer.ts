@@ -7,7 +7,7 @@ import {
   PlayerWingDozer,
 } from "../../../../../game-object/armdozer/wing-dozer";
 import { WingDozer } from "../../../../../game-object/armdozer/wing-dozer/wing-dozer";
-import { GenerateTDLayerObjectParams } from "../generate-params";
+import { TDLayerObjectCreatorParams } from "../creator-params";
 import type { TDArmdozerObjects } from "./armdozer-objects";
 
 /** ウィングドーザ 3Dレイヤー フィールド */
@@ -56,7 +56,7 @@ export class WingDozerTD implements WingDozerTDField, TDArmdozerObjects {
  * @return 生成結果
  */
 export function playerWingDozerTD(
-  params: GenerateTDLayerObjectParams,
+  params: TDLayerObjectCreatorParams,
 ): WingDozerTD {
   const { player } = params;
   return new WingDozerTD(player.playerId, {
@@ -70,7 +70,7 @@ export function playerWingDozerTD(
  * @return 生成結果
  */
 export function enemyWingDozerTD(
-  params: GenerateTDLayerObjectParams,
+  params: TDLayerObjectCreatorParams,
 ): WingDozerTD {
   const { enemy } = params;
   return new WingDozerTD(enemy.playerId, {

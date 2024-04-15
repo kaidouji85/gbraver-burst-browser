@@ -3,7 +3,7 @@ import { BatteryNumberView } from "../view/battery-number-view";
 import { BatteryNumberProps } from "./battery-number-props";
 
 /** BatteryEnchantmentProps生成パラメータ */
-export type GenerateBatteryNumberPropsParams = {
+export type PropsCreatorParams = {
   /** ビュー */
   view: BatteryNumberView;
 };
@@ -14,7 +14,7 @@ export type GenerateBatteryNumberPropsParams = {
  * @return 生成したBatteryEnchantmentProps
  */
 export function createBatteryNumberProps(
-  params: GenerateBatteryNumberPropsParams,
+  params: PropsCreatorParams,
 ): BatteryNumberProps {
   const { view } = params;
   return {

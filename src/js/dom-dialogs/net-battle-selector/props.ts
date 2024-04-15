@@ -45,7 +45,7 @@ export type NetBattleSelectorDialogProps = {
 };
 
 /** NetBattleSelectorDialogProps生成パラメータ */
-export type GenerateNetBattleSelectorDialogPropsParams = {
+export type PropsCreatorParams = {
   /** リソース管理オブジェクト */
   resources: Resources;
   /** SE再生オブジェクト */
@@ -58,7 +58,7 @@ export type GenerateNetBattleSelectorDialogPropsParams = {
  * @return 生成結果
  */
 export function createNetBattleSelectrProps(
-  params: GenerateNetBattleSelectorDialogPropsParams,
+  params: PropsCreatorParams,
 ): NetBattleSelectorDialogProps {
   const { resources } = params;
   const root = document.createElement("div");

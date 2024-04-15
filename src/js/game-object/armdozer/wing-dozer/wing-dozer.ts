@@ -26,12 +26,12 @@ import { uprightToStand } from "./animation/upright-to-stand";
 import { bindEventListeners } from "./procedure/bind-event-listeners";
 import {
   createWingDozerProps,
-  GenerateWingDozerPropsParams,
+  PropsCreatorParams,
 } from "./props/create-wing-dozer-props";
 import { WingDozerProps } from "./props/wing-dozer-props";
 
 /** コンストラクタのパラメータ */
-type Params = GenerateWingDozerPropsParams & {
+type WingDozerParams = PropsCreatorParams & {
   /** ゲームオブジェクトアクション */
   gameObjectAction: Observable<GameObjectAction>;
 };
@@ -47,7 +47,7 @@ export class WingDozer extends EmptyArmdozerSprite implements ArmdozerSprite {
    * コンストラクタ
    * @param params パラメータ
    */
-  constructor(params: Params) {
+  constructor(params: WingDozerParams) {
     super();
     const { gameObjectAction } = params;
     this.#props = createWingDozerProps(params);
