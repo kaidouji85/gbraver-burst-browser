@@ -63,7 +63,7 @@ function extractElements(root: HTMLElement, ids: DataIDs): Elements {
 }
 
 /** コンストラクタのパラメータ */
-export type ConstructMatchingDialogParams = {
+export type MatchingDialogParams = {
   /** リソース管理オブジェクト */
   resources: Resources;
   /** SE再生オブジェクト */
@@ -91,7 +91,7 @@ export class MatchingDialog implements DOMDialog {
    * コンストラクタ
    * @param params パラメータ
    */
-  constructor(params: ConstructMatchingDialogParams) {
+  constructor(params: MatchingDialogParams) {
     const { resources, se } = params;
     const ids = {
       closer: domUuid(),

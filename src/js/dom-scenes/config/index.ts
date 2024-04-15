@@ -7,7 +7,7 @@ import type { ConfigProps, PropsCreatorParams } from "./props";
 import { createConfigProps } from "./props";
 
 /** コンストラクタのパラメータ */
-type ConstructorParams = PropsCreatorParams;
+type ConfigParams = PropsCreatorParams;
 
 /** 設定画面 */
 export class Config implements DOMScene {
@@ -21,7 +21,7 @@ export class Config implements DOMScene {
    * @param bgm BGM管理オブジェクト
    * @param se SE再生オブジェクト
    */
-  constructor(params: ConstructorParams) {
+  constructor(params: ConfigParams) {
     this.#props = createConfigProps(params);
     this.#unsubscriber = bindEventListeners(this.#props);
   }

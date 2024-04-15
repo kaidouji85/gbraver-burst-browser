@@ -1,11 +1,11 @@
 import {
   HorizontalAnimationMesh,
-  HorizontalAnimationMeshConstructParam,
+  HorizontalAnimationMeshParam,
 } from "../../../mesh/horizontal-animation";
 import type { ArmdozerAnimation } from "./armdozer-animation";
 
 /** createHorizontalAnimationのパラメータ */
-type CreatorParam = HorizontalAnimationMeshConstructParam;
+type CreatorParam = HorizontalAnimationMeshParam;
 
 /**
  * HorizontalArmdozerAnimationを生成する
