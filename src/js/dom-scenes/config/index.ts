@@ -1,13 +1,13 @@
 import { Observable, Unsubscribable } from "rxjs";
 
-import { BGMManager } from "../../bgm/bgm-manager";
 import type { GBraverBurstBrowserConfig } from "../../game/config/browser-config";
-import type { Resources } from "../../resource";
-import { SEPlayer } from "../../se/se-player";
 import type { DOMScene } from "../dom-scene";
 import { bindEventListeners } from "./listeners";
-import type { ConfigProps } from "./props";
+import type { ConfigProps, PropsCreatorParams } from "./props";
 import { createConfigProps } from "./props";
+
+/** コンストラクタのパラメータ */
+type ConstructorParams = PropsCreatorParams;
 
 /** 設定画面 */
 export class Config implements DOMScene {
@@ -21,13 +21,8 @@ export class Config implements DOMScene {
    * @param bgm BGM管理オブジェクト
    * @param se SE再生オブジェクト
    */
-  constructor(
-    resources: Resources,
-    config: GBraverBurstBrowserConfig,
-    bgm: BGMManager,
-    se: SEPlayer,
-  ) {
-    this.#props = createConfigProps(resources, config, bgm, se);
+  constructor(params: ConstructorParams) {
+    this.#props = createConfigProps(params);
     this.#unsubscriber = bindEventListeners(this.#props);
   }
 
