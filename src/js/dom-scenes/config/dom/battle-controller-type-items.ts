@@ -7,47 +7,32 @@ import bigButtonDetailTemplate from "./big-button-detail.hbs";
 import { ROOT_CLASS } from "./class-name";
 import miniControllerDetailTemplate from "./mini-controller-detail.hbs";
 
-/**
- * 戦闘画面コントローラーoptionのラベルを生成する
- * @param value 値
- * @return 生成結果
- */
-const battleControllerTypeOptionLabel = (value: BattleControllerType) => {
-  switch (value) {
-    case "MiniController":
-      return "ミニコントローラー";
-    case "BigButton":
-    default:
-      return "おおきいボタン";
-  }
-};
-
-/** おおきいボタン詳細 */
-const bigButtonDetail = bigButtonDetailTemplate({ ROOT_CLASS });
-
 /** accesskey参考文献URL */
 const accesskeyReference =
   "https://developer.mozilla.org/ja/docs/Web/HTML/Global_attributes/accesskey";
 
-/** ミニコントローラー詳細 */
-const miniControllerDetail = miniControllerDetailTemplate({
-  ROOT_CLASS,
-  accesskeyReference,
-});
 
-/**
- * 値に応じたコントローラー詳細を取得する
- * @param value 戦闘画面コントローラー
- * @return コントローラー詳細
- */
-const getDetail = (value: BattleControllerType) => {
-  switch (value) {
-    case "MiniController":
-      return miniControllerDetail;
-    case "BigButton":
-    default:
-      return bigButtonDetail;
-  }
+/** ボタン設定 */
+type ButtonConfig = {
+  /** ラベル文言 */
+  label: string;
+  /** 詳細欄に表示するHTML */
+  detail: string;
+};
+
+/** ボタン設定をあつめたもの */
+const configs: {[key in BattleControllerType]: ButtonConfig} = {
+  MiniController: {
+    label: "ミニコントローラー",
+    detail: miniControllerDetailTemplate({
+      ROOT_CLASS,
+      accesskeyReference,
+    }),
+  },
+  BigButton: {
+    label: "おおきいボタン",
+    detail: bigButtonDetailTemplate({ ROOT_CLASS }),
+  },
 };
 
 /**
@@ -57,8 +42,8 @@ const getDetail = (value: BattleControllerType) => {
  */
 export const battleControllerTypeItems = (selected: BattleControllerType) =>
   BattleControllerTypes.map((value) => {
-    const label = battleControllerTypeOptionLabel(value);
-    const detail = getDetail(value);
+    const config = configs[value] ?? configs.BigButton;
+    const { label, detail } = config;
     const checked = value === selected ? "checked" : "";
     return battleControllerTemplate({
       ROOT_CLASS,
