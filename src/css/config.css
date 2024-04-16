@@ -58,6 +58,7 @@
   margin: calc(var(--responsive-font-size) * 0.5) 0;
 }
 
+.config__player-selector-type-title,
 .config__battle-animation-time-scale-caption,
 .config__webgl-pixel-ratio-caption,
 .config__battle-controller-type-caption,
