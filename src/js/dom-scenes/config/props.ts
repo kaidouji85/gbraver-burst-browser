@@ -2,16 +2,26 @@ import { Subject } from "rxjs";
 
 import { BGMManager } from "../../bgm/bgm-manager";
 import { Exclusive } from "../../exclusive/exclusive";
-import type { GBraverBurstBrowserConfig } from "../../game/config/browser-config";
-import type { Resources } from "../../resource";
+import { GBraverBurstBrowserConfig } from "../../game/config/browser-config";
+import { Resources } from "../../resource";
 import { createEmptySoundResource } from "../../resource/sound/empty-sound-resource";
 import { SOUND_IDS } from "../../resource/sound/ids";
 import { SoundResource } from "../../resource/sound/resource";
 import { SEPlayer } from "../../se/se-player";
-import { domUuid } from "../../uuid/dom-uuid";
 import { ConfigChangedDialog } from "./config-changed-dialog";
 import { ROOT_CLASS } from "./dom/class-name";
-import { extractElements } from "./dom/elements";
+import {
+  extractBattleAnimationTimeScaleSelector,
+  extractBattleControllerTypeSelector,
+  extractBgmVolumeSelector,
+  extractBgmVolumeValue,
+  extractConfigChange,
+  extractPerformanceStatsVisibilitySelector,
+  extractPrev,
+  extractSeVolumeSelector,
+  extractSeVolumeValue,
+  extractWebGLPixelRatioSelector,
+} from "./dom/elements";
 import { rootInnerHTML } from "./dom/root-inner-html";
 
 /** 設定画面プロパティ */
@@ -83,39 +93,27 @@ export type PropsCreatorParams = {
  */
 export function createConfigProps(params: PropsCreatorParams): ConfigProps {
   const { resources, config, bgm, se } = params;
-  const ids = {
-    battleAnimationTimeScaleSelector: domUuid(),
-    webGLPixelRatioSelector: domUuid(),
-    battleControllerTypeSelector: domUuid(),
-    bgmVolumeSelector: domUuid(),
-    bgmVolumeValue: domUuid(),
-    seVolumeSelector: domUuid(),
-    seVolumeValue: domUuid(),
-    performanceStatsVisibilitySelector: domUuid(),
-    prev: domUuid(),
-    configChange: domUuid(),
-  };
   const root = document.createElement("div");
-  root.innerHTML = rootInnerHTML(ids, config);
+  root.innerHTML = rootInnerHTML(config);
   root.className = ROOT_CLASS;
-  const elements = extractElements(root, ids);
   const dialog = new ConfigChangedDialog(params);
   root.appendChild(dialog.getRootHTMLElement());
   return {
     originConfig: config,
 
     root,
-    battleAnimationTimeScaleSelector: elements.battleAnimationTimeScaleSelector,
-    webGLPixelRatioSelector: elements.webGLPixelRatioSelector,
-    bgmVolumeSelector: elements.bgmVolumeSelector,
-    battleControllerTypeSelector: elements.battleControllerTypeSelector,
-    bgmVolumeValue: elements.bgmVolumeValue,
-    seVolumeSelector: elements.seVolumeSelector,
-    seVolumeValue: elements.seVolumeValue,
-    prevButton: elements.prev,
+    battleAnimationTimeScaleSelector:
+      extractBattleAnimationTimeScaleSelector(root),
+    webGLPixelRatioSelector: extractWebGLPixelRatioSelector(root),
+    bgmVolumeSelector: extractBgmVolumeSelector(root),
+    battleControllerTypeSelector: extractBattleControllerTypeSelector(root),
+    bgmVolumeValue: extractBgmVolumeValue(root),
+    seVolumeSelector: extractSeVolumeSelector(root),
+    seVolumeValue: extractSeVolumeValue(root),
+    prevButton: extractPrev(root),
     performanceStatsVisibilitySelector:
-      elements.performanceStatsVisibilitySelector,
-    configChangeButton: elements.configChange,
+      extractPerformanceStatsVisibilitySelector(root),
+    configChangeButton: extractConfigChange(root),
 
     dialog,
 
