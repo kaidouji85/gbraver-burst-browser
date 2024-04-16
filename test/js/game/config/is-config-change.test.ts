@@ -12,7 +12,10 @@ const origin: GBraverBurstBrowserConfig = {
 };
 
 test("ロボ、パイロット選択タイプの変更を正しく検知できる", () => {
-  const update: GBraverBurstBrowserConfig = { ...origin, playerSelectorType: "secret" };
+  const update: GBraverBurstBrowserConfig = {
+    ...origin,
+    playerSelectorType: "secret",
+  };
   expect(isConfigChanged(origin, update)).toBe(true);
 });
 

@@ -14,7 +14,9 @@ import { webGLPixelRatioOptions } from "./webgl-pixel-ratio-options";
  * @return ルート要素のHTML要素
  */
 export function rootInnerHTML(config: GBraverBurstBrowserConfig): string {
-  const playerSelectorTypes = playerSelectorTypeItems(config.playerSelectorType);
+  const playerSelectorTypes = playerSelectorTypeItems(
+    config.playerSelectorType,
+  );
   const battleAnimationTimeScales = battleAnimationTimeScaleOptions(
     config.battleAnimationTimeScale,
   );
