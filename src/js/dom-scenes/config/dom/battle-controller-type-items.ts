@@ -11,7 +11,6 @@ import miniControllerDetailTemplate from "./mini-controller-detail.hbs";
 const accesskeyReference =
   "https://developer.mozilla.org/ja/docs/Web/HTML/Global_attributes/accesskey";
 
-
 /** ボタン設定 */
 type ButtonConfig = {
   /** ラベル文言 */
@@ -21,7 +20,7 @@ type ButtonConfig = {
 };
 
 /** ボタン設定をあつめたもの */
-const configs: {[key in BattleControllerType]: ButtonConfig} = {
+const configs: { [key in BattleControllerType]: ButtonConfig } = {
   MiniController: {
     label: "ミニコントローラー",
     detail: miniControllerDetailTemplate({
