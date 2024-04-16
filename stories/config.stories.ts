@@ -11,6 +11,7 @@ export const Scene: DOMStubStory = domStub((params) => {
   const scene = new Config({
     ...params,
     config: {
+      playerSelectorType: "open",
       webGLPixelRatio: 2,
       battleAnimationTimeScale: 1,
       bgmVolume: 1,

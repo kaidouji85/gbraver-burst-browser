@@ -4,6 +4,7 @@ import { parseBrowserConfig } from "../../../../../src/js/game/config/parser/bro
 
 test("ブラウザ設定を正しくパースできる", () => {
   const data: GBraverBurstBrowserConfig = {
+    playerSelectorType: "open",
     webGLPixelRatio: 2,
     battleAnimationTimeScale: 1,
     bgmVolume: 1,
@@ -17,6 +18,7 @@ test("ブラウザ設定を正しくパースできる", () => {
 test("データ型が異なっているも、ある程度はパースできる", () => {
   expect(
     parseBrowserConfig({
+      playerSelectorType: "private",
       webGLPixelRatio: "2",
       battleAnimationTimeScale: "1",
       bgmVolume: "1",
@@ -25,6 +27,7 @@ test("データ型が異なっているも、ある程度はパースできる",
       performanceStatsVisibility: "hidden",
     }),
   ).toEqual({
+    playerSelectorType: "private",
     webGLPixelRatio: 2,
     battleAnimationTimeScale: 1,
     bgmVolume: 1,

@@ -2,6 +2,7 @@ import type { GBraverBurstBrowserConfig } from "../../../../src/js/game/config/b
 import { isConfigChanged } from "../../../../src/js/game/config/config-changed";
 
 const origin: GBraverBurstBrowserConfig = {
+  playerSelectorType: "open",
   webGLPixelRatio: 2,
   battleAnimationTimeScale: 1,
   bgmVolume: 1,

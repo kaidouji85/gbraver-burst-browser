@@ -5,11 +5,15 @@ import { DefaultConfig } from "../default-config";
 import { BattleAnimationTimeScaleSchema } from "./battle-animation-time-scale";
 import { BattleControllerTypeSchema } from "./battle-controller-type";
 import { PerformanceStatsVisibilitySchema } from "./performance-stats-visibility";
+import { PlayerSelectorTypeSchema } from "./player-selector-type";
 import { SoundVolumeSchema } from "./sound-volume";
 import { WebGLPixelRatioSchema } from "./web-gl-pixel-ratio";
 
 /** ブラウザ設定 zod schema */
 export const BrowserConfigSchema = z.object({
+  playerSelectorType: PlayerSelectorTypeSchema.catch(
+    DefaultConfig.playerSelectorType,
+  ),
   webGLPixelRatio: WebGLPixelRatioSchema.catch(DefaultConfig.webGLPixelRatio),
   battleAnimationTimeScale: BattleAnimationTimeScaleSchema.catch(
     DefaultConfig.battleAnimationTimeScale,
