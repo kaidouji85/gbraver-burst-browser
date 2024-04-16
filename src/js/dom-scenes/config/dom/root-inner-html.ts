@@ -10,14 +10,10 @@ import { webGLPixelRatioOptions } from "./webgl-pixel-ratio-options";
 /**
  * ルート要素のHTML要素
  *
- * @param ids data-idを集めたもの
  * @param config Gブレイバーバースト ブラウザ側設定項目
  * @return ルート要素のHTML要素
  */
-export function rootInnerHTML(
-  ids: DataIDs,
-  config: GBraverBurstBrowserConfig,
-): string {
+export function rootInnerHTML(config: GBraverBurstBrowserConfig): string {
   const battleAnimationTimeScales = battleAnimationTimeScaleOptions(
     config.battleAnimationTimeScale,
   );
@@ -29,7 +25,6 @@ export function rootInnerHTML(
   const seVolumeLabel = soundVolumeLabel(config.seVolume);
   return rootInnerHTMLTemplate({
     ROOT_CLASS,
-    ids,
     config,
     battleAnimationTimeScales,
     webGLPixelRatios,

@@ -9,7 +9,7 @@
     </div>
     <div
       class="{{ROOT_CLASS}}__battle-animation-time-scale-selector"
-      data-id="{{ids.battleAnimationTimeScaleSelector}}"
+      data-id="battleAnimationTimeScaleSelector"
     >
       {{{battleAnimationTimeScales}}}
     </div>
@@ -23,7 +23,7 @@
     </div>
     <div
       class="{{ROOT_CLASS}}__webgl-pixel-ratio-selector"
-      data-id="{{ids.webGLPixelRatioSelector}}"
+      data-id="webGLPixelRatioSelector"
     >
       {{{webGLPixelRatios}}}
     </div>
@@ -37,7 +37,7 @@
     </div>
     <div
       class="{{ROOT_CLASS}}__battle-controller-type-selector"
-      data-id="{{ids.battleControllerTypeSelector}}"
+      data-id="battleControllerTypeSelector"
     >
       {{{battleControllerTypes}}}
     </div>
@@ -55,12 +55,9 @@
       max="1"
       step="0.1"
       value="{{config.bgmVolume}}"
-      data-id="{{ids.bgmVolumeSelector}}"
+      data-id="bgmVolumeSelector"
     />
-    <span
-      class="{{ROOT_CLASS}}__bgm-volume-value"
-      data-id="{{ids.bgmVolumeValue}}"
-    >
+    <span class="{{ROOT_CLASS}}__bgm-volume-value" data-id="bgmVolumeValue">
       {{bgmVolumeLabel}}</span>
   </div>
   <div class="{{ROOT_CLASS}}__se-volume">
@@ -76,12 +73,9 @@
       max="1"
       step="0.1"
       value="{{config.seVolume}}"
-      data-id="{{ids.seVolumeSelector}}"
+      data-id="seVolumeSelector"
     />
-    <span
-      class="{{ROOT_CLASS}}__se-volume-value"
-      data-id="{{ids.seVolumeValue}}"
-    >
+    <span class="{{ROOT_CLASS}}__se-volume-value" data-id="seVolumeValue">
       {{seVolumeLabel}}</span>
   </div>
   <div class="{{ROOT_CLASS}}__performance-stats-visibility">
@@ -95,7 +89,7 @@
     </div>
     <div
       class="{{ROOT_CLASS}}__performance-stats-visibility-selector"
-      data-id="{{ids.performanceStatsVisibilitySelector}}"
+      data-id="performanceStatsVisibilitySelector"
     >
       <label class="{{ROOT_CLASS}}__performance-stats-visibility-label">
         <input
@@ -119,8 +113,8 @@
   </div>
 </div>
 <div class="{{ROOT_CLASS}}__footer">
-  <button class="{{ROOT_CLASS}}__prev" data-id="{{ids.prev}}">戻る</button>
-  <button class="{{ROOT_CLASS}}__config-change" data-id="{{ids.configChange}}">
+  <button class="{{ROOT_CLASS}}__prev" data-id="prev">戻る</button>
+  <button class="{{ROOT_CLASS}}__config-change" data-id="configChange">
     この設定にする
   </button>
 </div>
