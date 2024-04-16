@@ -1,4 +1,15 @@
 /**
+ * ロボ、パイロット選択タイプセレクタを抽出する
+ * @param root 抽出対象となるルート要素
+ * @return 抽出結果
+ */
+export const extractPlayerSelectorTypeSelector = (
+  root: HTMLElement,
+): HTMLElement =>
+  root.querySelector(`[data-id="playerSelectorTypeSelector"]`) ??
+  document.createElement("select");
+
+/**
  * アニメーションタイムスケールセレクタを抽出する
  * @param root 抽出対象となるルート要素
  * @return 抽出結果
