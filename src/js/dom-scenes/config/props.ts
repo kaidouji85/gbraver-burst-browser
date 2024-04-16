@@ -10,7 +10,18 @@ import { SoundResource } from "../../resource/sound/resource";
 import { SEPlayer } from "../../se/se-player";
 import { ConfigChangedDialog } from "./config-changed-dialog";
 import { ROOT_CLASS } from "./dom/class-name";
-import { extractBattleAnimationTimeScaleSelector, extractBattleControllerTypeSelector, extractBgmVolumeSelector, extractBgmVolumeValue, extractConfigChange, extractElements, extractPerformanceStatsVisibilitySelector, extractPrev, extractSeVolumeSelector, extractSeVolumeValue, extractWebGLPixelRatioSelector } from "./dom/elements";
+import {
+  extractBattleAnimationTimeScaleSelector,
+  extractBattleControllerTypeSelector,
+  extractBgmVolumeSelector,
+  extractBgmVolumeValue,
+  extractConfigChange,
+  extractPerformanceStatsVisibilitySelector,
+  extractPrev,
+  extractSeVolumeSelector,
+  extractSeVolumeValue,
+  extractWebGLPixelRatioSelector,
+} from "./dom/elements";
 import { rootInnerHTML } from "./dom/root-inner-html";
 
 /** 設定画面プロパティ */
@@ -91,7 +102,8 @@ export function createConfigProps(params: PropsCreatorParams): ConfigProps {
     originConfig: config,
 
     root,
-    battleAnimationTimeScaleSelector: extractBattleAnimationTimeScaleSelector(root),
+    battleAnimationTimeScaleSelector:
+      extractBattleAnimationTimeScaleSelector(root),
     webGLPixelRatioSelector: extractWebGLPixelRatioSelector(root),
     bgmVolumeSelector: extractBgmVolumeSelector(root),
     battleControllerTypeSelector: extractBattleControllerTypeSelector(root),
