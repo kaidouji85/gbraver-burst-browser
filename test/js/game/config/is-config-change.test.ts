@@ -11,6 +11,11 @@ const origin: GBraverBurstBrowserConfig = {
   performanceStatsVisibility: "hidden",
 };
 
+test("ロボ、パイロット選択タイプの変更を正しく検知できる", () => {
+  const update: GBraverBurstBrowserConfig = { ...origin, playerSelectorType: "secret" };
+  expect(isConfigChanged(origin, update)).toBe(true);
+});
+
 test("WebGLピクセルレートの変更を正しく検知できる", () => {
   const update: GBraverBurstBrowserConfig = { ...origin, webGLPixelRatio: 1 };
   expect(isConfigChanged(origin, update)).toBe(true);
@@ -53,6 +58,7 @@ test("パフォーマンス統計の表示設定の変更を正しく検知で�
 test("複数項目の変更を正しく検知できる", () => {
   const update: GBraverBurstBrowserConfig = {
     ...origin,
+    playerSelectorType: "secret",
     webGLPixelRatio: 1,
     battleAnimationTimeScale: 0.25,
     bgmVolume: 0.5,

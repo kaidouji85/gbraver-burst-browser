@@ -1,7 +1,10 @@
 import { BattleControllerType } from "../../td-scenes/battle/controller-type";
 
+/** 有効なロボ、パイロット選択タイプ */
+export const PlayerSelectorTypes = ["open", "secret"];
+
 /** ロボ、パイロット選択タイプ */
-export type PlayerSelectorType = "open" | "secret";
+export type PlayerSelectorType = (typeof PlayerSelectorTypes)[number];
 
 /** 設定可能なWebGLピクセルレートを集めたもの */
 export const WebGLPixelRatios = [0.5, 0.75, 1, 2];

@@ -12,6 +12,7 @@ export function isConfigChanged(
   update: GBraverBurstBrowserConfig,
 ): boolean {
   return (
+    origin.playerSelectorType !== update.playerSelectorType ||
     origin.webGLPixelRatio !== update.webGLPixelRatio ||
     origin.battleAnimationTimeScale !== update.battleAnimationTimeScale ||
     origin.battleControllerType !== update.battleControllerType ||
