@@ -15,14 +15,14 @@ export function onArmdozerIconPush(
   props: SecretPlayerSelectProps,
   armdozerId: ArmdozerId,
 ): void {
-  const reselectionNumber =
+  const selectionNumber =
     props.armdozerSelection.type === "ArmdozerSelectionComplete"
-      ? props.armdozerSelection.reselectionNumber + 1
-      : 0;
+      ? props.armdozerSelection.selectionNumber + 1
+      : 1;
   props.armdozerSelection = {
     type: "ArmdozerSelectionComplete",
     armdozerId,
-    reselectionNumber,
+    selectionNumber,
   };
   props.armdozerSelectionIndicator.className = ARMDOZER_SELECTION_COMPLETE;
   props.armdozerSelectionDetail.innerText = getArmdozerSeelctionDetail(
