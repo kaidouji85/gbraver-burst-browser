@@ -19,11 +19,11 @@ type ButtonConfig = {
 export const configs: { [key in PlayerSelectorType]: ButtonConfig } = {
   open: {
     label: "オープン",
-    detail: OpenPlayerSelectorDetailTemplate({ROOT_CLASS}),
+    detail: OpenPlayerSelectorDetailTemplate({ ROOT_CLASS }),
   },
   secret: {
     label: "シークレット",
-    detail: SecretPlayerSelectorDetailTemplate({ROOT_CLASS}),
+    detail: SecretPlayerSelectorDetailTemplate({ ROOT_CLASS }),
   },
 };
 
