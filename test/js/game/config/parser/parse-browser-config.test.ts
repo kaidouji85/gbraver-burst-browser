@@ -15,7 +15,7 @@ test("ブラウザ設定を正しくパースできる", () => {
   expect(parseBrowserConfig(data)).toEqual(data);
 });
 
-test("データ型が異なっているも、ある程度はパースできる", () => {
+test("データ型が異なっても、ある程度はパースできる", () => {
   expect(
     parseBrowserConfig({
       playerSelectorType: "secret",
