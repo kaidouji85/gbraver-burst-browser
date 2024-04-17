@@ -56,7 +56,7 @@ const binders: { [key in PlayerSelectorType]: SceneBinder } = {
  * @param playerSelectorType ロボ、パイロット選択タイプ
  * @return 画面の素材読み込みまで完了したら発火するPromise
  */
-export async function createPlayerSelectAccordingToConfig(
+export async function bindPlayerSelectAccordingToConfig(
   props: GameProps,
   playerSelectorType: PlayerSelectorType,
 ): Promise<void> {

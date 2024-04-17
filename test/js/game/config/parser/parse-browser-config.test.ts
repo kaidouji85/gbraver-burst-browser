@@ -18,7 +18,7 @@ test("ブラウザ設定を正しくパースできる", () => {
 test("データ型が異なっているも、ある程度はパースできる", () => {
   expect(
     parseBrowserConfig({
-      playerSelectorType: "private",
+      playerSelectorType: "secret",
       webGLPixelRatio: "2",
       battleAnimationTimeScale: "1",
       bgmVolume: "1",
@@ -27,7 +27,7 @@ test("データ型が異なっているも、ある程度はパースできる",
       performanceStatsVisibility: "hidden",
     }),
   ).toEqual({
-    playerSelectorType: "private",
+    playerSelectorType: "secret",
     webGLPixelRatio: 2,
     battleAnimationTimeScale: 1,
     bgmVolume: 1,
