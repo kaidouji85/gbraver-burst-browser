@@ -17,7 +17,7 @@ type SceneBinderParams = GameProps & {
   pilotIds: PilotId[];
 };
 
-/** 
+/**
  * シーンバインダー
  * @param params パラメータ
  * @return 画面の素材読み込みまで完了したら発火するPromise
