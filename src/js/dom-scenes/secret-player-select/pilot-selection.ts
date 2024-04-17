@@ -10,8 +10,8 @@ export type PilotSelectionComplete = {
   type: "PilotSelectionComplete";
   /** 選択したパイロットのID */
   pilotId: PilotId;
-  /** 再選択回数 */
-  reselectionNumber: number;
+  /** 選択回数 */
+  selectionNumber: number;
 };
 
 /** パイロット選択状況 */

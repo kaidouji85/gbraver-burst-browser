@@ -7,7 +7,4 @@ import { ArmdozerSelectionComplete } from "../armdozer-selection";
  */
 export const getArmdozerSeelctionDetail = (
   selection: ArmdozerSelectionComplete,
-): string =>
-  selection.reselectionNumber === 0
-    ? "選択完了"
-    : `${selection.reselectionNumber}回再選択`;
+): string => `${selection.selectionNumber}回選択`;

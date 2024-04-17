@@ -15,14 +15,14 @@ export function onPilotIconPush(
   props: SecretPlayerSelectProps,
   pilotId: PilotId,
 ): void {
-  const reselectionNumber =
+  const selectionNumber =
     props.pilotSelection.type === "PilotSelectionComplete"
-      ? props.pilotSelection.reselectionNumber + 1
-      : 0;
+      ? props.pilotSelection.selectionNumber + 1
+      : 1;
   props.pilotSelection = {
     type: "PilotSelectionComplete",
     pilotId,
-    reselectionNumber,
+    selectionNumber,
   };
   props.pilotSelectionIndicator.className = PILOT_SELECTION_COMPLETE;
   props.pilotSelectionDetail.innerText = getPilotSeelctionDetail(

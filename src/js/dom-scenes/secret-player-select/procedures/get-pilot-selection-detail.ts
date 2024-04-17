@@ -7,7 +7,4 @@ import { PilotSelectionComplete } from "../pilot-selection";
  */
 export const getPilotSeelctionDetail = (
   selection: PilotSelectionComplete,
-): string =>
-  selection.reselectionNumber === 0
-    ? "選択完了"
-    : `${selection.reselectionNumber}回再選択`;
+): string => `${selection.selectionNumber}回選択`;
