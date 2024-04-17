@@ -17,6 +17,7 @@ import {
   extractBgmVolumeValue,
   extractConfigChange,
   extractPerformanceStatsVisibilitySelector,
+  extractPlayerSelectorTypeSelector,
   extractPrev,
   extractSeVolumeSelector,
   extractSeVolumeValue,
@@ -31,6 +32,8 @@ export type ConfigProps = {
 
   /** ルートHTML要素 */
   root: HTMLElement;
+  /** ロボ、パイロット選択タイプセレクタ */
+  playerSelectorType: HTMLElement;
   /** 戦闘アニメ速度セレクタ */
   battleAnimationTimeScaleSelector: HTMLElement;
   /** webglピクセルレートセレクタ */
@@ -102,6 +105,7 @@ export function createConfigProps(params: PropsCreatorParams): ConfigProps {
     originConfig: config,
 
     root,
+    playerSelectorType: extractPlayerSelectorTypeSelector(root),
     battleAnimationTimeScaleSelector:
       extractBattleAnimationTimeScaleSelector(root),
     webGLPixelRatioSelector: extractWebGLPixelRatioSelector(root),

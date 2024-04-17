@@ -1,6 +1,6 @@
 import { GBraverBurstBrowserConfig } from "../../../game/config/browser-config";
 import { parseBrowserConfig } from "../../../game/config/parser/browser-config";
-import type { ConfigProps } from "../props";
+import { ConfigProps } from "../props";
 
 /**
  * 画面の入力値から設定オブジェクトをパースするヘルパー関数
@@ -8,6 +8,13 @@ import type { ConfigProps } from "../props";
  * @return パース結果
  */
 export function parseConfig(props: ConfigProps): GBraverBurstBrowserConfig {
+  const foundPlayerSelectorType = props.playerSelectorType.querySelector(
+    'input[type="radio"]:checked',
+  );
+  const playerSelectorType =
+    foundPlayerSelectorType instanceof HTMLInputElement
+      ? foundPlayerSelectorType.value
+      : null;
   const foundBattleAnimationTimeScale =
     props.battleAnimationTimeScaleSelector.querySelector(
       'input[type="radio"]:checked',
@@ -40,6 +47,7 @@ export function parseConfig(props: ConfigProps): GBraverBurstBrowserConfig {
       ? foundPerformanceStatsVisibility.value
       : null;
   return parseBrowserConfig({
+    playerSelectorType,
     battleAnimationTimeScale,
     webGLPixelRatio,
     battleControllerType,
