@@ -1,0 +1,17 @@
+/** ダメージ予想 */
+
+@media (orientation: landscape) {
+  .predicated-damage {
+    position: fixed;
+  }
+}
+
+@media (orientation: portrait) {
+  .private-match-guest {
+    display: none;
+  }
+}
+
+.predicated-damage__power {
+  color: red;
+}
