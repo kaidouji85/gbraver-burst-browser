@@ -12,8 +12,8 @@
 
     min-width: calc(var(--responsive-font-size) * 15);
     position: fixed;
-    bottom: max(calc(var(--responsive-font-size * 1)), var(--safe-area-bottom));
-    right: max(calc(var(--responsive-font-size * 1)), var(--safe-area-right));
+    bottom: max(calc(var(--responsive-font-size) * 1), var(--safe-area-bottom));
+    right: max(calc(var(--responsive-font-size) * 1), var(--safe-area-right));
     background-color: var(--font-color);
     border-radius: var(--dialog-border-radius);
     z-index: var(--zindex-mini-controller);
