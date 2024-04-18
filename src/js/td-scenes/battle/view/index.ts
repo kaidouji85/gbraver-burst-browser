@@ -12,7 +12,7 @@ import type { SafeAreaInset } from "../../../safe-area/safe-area-inset";
 import { createSafeAreaInset } from "../../../safe-area/safe-area-inset";
 import type { BattleSceneAction } from "../actions";
 import { BattleViewCreatorParams } from "./creator-params";
-import { DOMLayer } from "./dom/dom-layer";
+import { createDOMLayer, DOMLayer } from "./dom/dom-layer";
 import { HudLayer } from "./hud";
 import { ThreeDimensionLayer } from "./td";
 import { tracking } from "./tracking";
@@ -61,7 +61,7 @@ export class BattleSceneView {
       update: this.#updateHUD,
       preRender: this.#preRenderHUD,
     });
-    this.dom = new DOMLayer(param);
+    this.dom = createDOMLayer(param);
     param.gameLoop.subscribe((action) => {
       this.#gameLoop(action);
     });

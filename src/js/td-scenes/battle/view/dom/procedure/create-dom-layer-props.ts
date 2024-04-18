@@ -1,6 +1,6 @@
 import { MessageWindow } from "../../../../../game-dom/message-window";
 import { MiniController } from "../../../../../game-dom/mini-controller";
-import { BattleScenePropsCreatorParams } from "../../../procedure/create-battle-scene-props";
+import { BattleViewCreatorParams } from "../../creator-params";
 import { DOMLayerProps } from "../props";
 
 /**
@@ -9,7 +9,7 @@ import { DOMLayerProps } from "../props";
  * @return 生成結果
  */
 export function createDOMLayerProps(
-  params: BattleScenePropsCreatorParams,
+  params: BattleViewCreatorParams,
 ): DOMLayerProps {
   const { resources } = params;
   const rightMessageWindow = new MessageWindow({
