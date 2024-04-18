@@ -1,3 +1,5 @@
+import { ROOT } from "../dom/class-name";
+import { rootInnerHTML } from "../dom/root-inner-html";
 import { PredicatedDamageProps } from "../props";
 
 /**
@@ -6,8 +8,7 @@ import { PredicatedDamageProps } from "../props";
  */
 export function createPredicatedDamageProps(): PredicatedDamageProps {
   const root = document.createElement("div");
-  root.innerText = "ダメージ予想";
-  return {
-    root,
-  };
+  root.className = ROOT;
+  root.innerHTML = rootInnerHTML();
+  return { root };
 }
