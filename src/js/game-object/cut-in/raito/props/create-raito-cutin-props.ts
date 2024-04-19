@@ -1,4 +1,4 @@
-import { Resources } from "../../../../resource";
+import { ResourcesContainer } from "../../../../resource";
 import { SEPlayer } from "../../../../se/se-player";
 import { createInitialValue } from "../model/initial-value";
 import { RaitoSounds } from "../sounds/raito-sounds";
@@ -6,11 +6,9 @@ import { RaitoView } from "../view/raito-view";
 import { RaitoCutInProps } from "./raito-cutin-props";
 
 /** 生成パラメータ */
-export type PropsCreatorParams = {
+export type PropsCreatorParams = ResourcesContainer & {
   /** ビュー */
   view: RaitoView;
-  /** リソース管理オブジェクト */
-  resources: Resources;
   /** SE再生オブジェクト */
   se: SEPlayer;
 };

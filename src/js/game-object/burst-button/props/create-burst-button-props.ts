@@ -1,6 +1,6 @@
 import { Observable, Subject } from "rxjs";
 
-import { Resources } from "../../../resource";
+import { ResourcesContainer } from "../../../resource";
 import { createEmptySoundResource } from "../../../resource/sound/empty-sound-resource";
 import { SOUND_IDS } from "../../../resource/sound/ids";
 import { SEPlayer } from "../../../se/se-player";
@@ -11,9 +11,7 @@ import { BurstButtonView } from "../view/burst-button-view";
 import { BurstButtonProps } from "./burst-button-props";
 
 /** BurstButtonProps生成パラメータ */
-export type PropsCreatorParams = {
-  /** リソース管理オブジェクト */
-  resources: Resources;
+export type PropsCreatorParams = ResourcesContainer & {
   /** SE再生オブジェクト */
   se: SEPlayer;
   /** ゲームオブジェクトアクション */

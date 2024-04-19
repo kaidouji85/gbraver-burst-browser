@@ -2,7 +2,7 @@ import { Observable } from "rxjs";
 import * as THREE from "three";
 
 import { SimpleImageMesh } from "../../../mesh/simple-image-mesh";
-import type { Resources } from "../../../resource";
+import type { ResourcesContainer } from "../../../resource";
 import { CANVAS_IMAGE_IDS } from "../../../resource/canvas-image";
 import type { GameObjectAction } from "../../action/game-object-action";
 import type { PushDetector } from "../../push-detector/push-detector";
@@ -11,9 +11,7 @@ import type { BatterySelectorModel } from "../model";
 import { canBatteryPlus } from "../model/can-battery-plus";
 
 /** コンストラクタのパラメータ */
-type Param = {
-  /** リソース管理オブジェクト */
-  resources: Resources;
+type Param = ResourcesContainer & {
   /** ゲームオブジェクトアクション */
   gameObjectAction: Observable<GameObjectAction>;
 };

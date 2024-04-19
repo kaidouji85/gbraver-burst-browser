@@ -1,7 +1,7 @@
 import { ArmdozerId, ArmdozerIds, PilotId, PilotIds } from "gbraver-burst-core";
 import { Subject } from "rxjs";
 
-import { Resources } from "../../../resource";
+import { ResourcesContainer } from "../../../resource";
 import { SEPlayer } from "../../../se/se-player";
 import { domUuid } from "../../../uuid/dom-uuid";
 import { ArmdozerBustShotContainer } from "../armdozer-bust-shot";
@@ -14,9 +14,7 @@ import { PlayerDecide } from "../player-decide";
 import { PlayerSelectProps } from "../props";
 
 /** 生成パラメータ */
-export type CreatePlayerSelectPropsParams = {
-  /** ソース管理オブジェクト */
-  resources: Resources;
+export type CreatePlayerSelectPropsParams = ResourcesContainer & {
   /** SE再生オブジェクト */
   se: SEPlayer;
   /** プレイアブルなアームドーザのID */

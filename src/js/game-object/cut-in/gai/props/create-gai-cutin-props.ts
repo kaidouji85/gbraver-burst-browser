@@ -1,4 +1,4 @@
-import { Resources } from "../../../../resource";
+import { ResourcesContainer } from "../../../../resource";
 import { SEPlayer } from "../../../../se/se-player";
 import { createInitialValue } from "../model/initial-value";
 import { GaiSounds } from "../sounds/gai-sounds";
@@ -6,11 +6,9 @@ import { GaiView } from "../view/gai-view";
 import { GaiCutInProps } from "./gai-cutin-props";
 
 /** GaiCutInProps生成パラメータ */
-export type PropsCreatorParams = {
+export type PropsCreatorParams = ResourcesContainer & {
   /** ビュー */
   view: GaiView;
-  /** リソース管理オブジェクト */
-  resources: Resources;
   /** 効果音再生オブジェクト */
   se: SEPlayer;
 };

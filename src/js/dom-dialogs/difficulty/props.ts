@@ -2,7 +2,7 @@ import { Subject } from "rxjs";
 
 import { Exclusive } from "../../exclusive/exclusive";
 import type { NPCBattleCourseDifficulty } from "../../game/npc-battle-courses";
-import type { Resources } from "../../resource";
+import type { ResourcesContainer } from "../../resource";
 import { createEmptySoundResource } from "../../resource/sound/empty-sound-resource";
 import { SOUND_IDS } from "../../resource/sound/ids";
 import { SoundResource } from "../../resource/sound/resource";
@@ -51,9 +51,7 @@ export type DifficultyDialogProps = {
 };
 
 /** 生成パラメータ */
-export type PropsCreatorParams = {
-  /** リソース管理オブジェクト */
-  resources: Resources;
+export type PropsCreatorParams = ResourcesContainer & {
   /** SE再生オブジェクト */
   se: SEPlayer;
 };

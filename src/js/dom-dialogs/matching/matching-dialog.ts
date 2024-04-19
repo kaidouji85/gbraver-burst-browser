@@ -3,7 +3,7 @@ import { Observable, Subject, Unsubscribable } from "rxjs";
 import { pop } from "../../dom/pop";
 import { domPushStream, PushDOM } from "../../dom/push-dom";
 import { Exclusive } from "../../exclusive/exclusive";
-import type { Resources } from "../../resource";
+import type { Resources, ResourcesContainer } from "../../resource";
 import { PathIds } from "../../resource/path/ids";
 import { createEmptySoundResource } from "../../resource/sound/empty-sound-resource";
 import { SOUND_IDS } from "../../resource/sound/ids";
@@ -63,9 +63,7 @@ function extractElements(root: HTMLElement, ids: DataIDs): Elements {
 }
 
 /** コンストラクタのパラメータ */
-export type MatchingDialogParams = {
-  /** リソース管理オブジェクト */
-  resources: Resources;
+export type MatchingDialogParams = ResourcesContainer & {
   /** SE再生オブジェクト */
   se: SEPlayer;
 };

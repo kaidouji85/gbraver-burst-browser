@@ -10,11 +10,11 @@ import {
 } from "../../armdozer/position";
 import type { ContinuousAttackModel } from "../model/continuous-attack-model";
 import type { ContinuousAttackView } from "./continuous-attack-view";
+
+/** メッシュサイズ */
 export const MESH_SIZE = 300;
 
-/**
- * プレイヤー 連続攻撃 ビュー
- */
+/**プレイヤー 連続攻撃 ビュー */
 export class PlayerContinuousAttackView implements ContinuousAttackView {
   #mesh: HorizontalAnimationMesh;
 

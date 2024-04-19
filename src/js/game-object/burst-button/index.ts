@@ -1,6 +1,6 @@
 import { Observable } from "rxjs";
 
-import type { Resources } from "../../resource";
+import type { ResourcesContainer } from "../../resource";
 import { SEPlayer } from "../../se/se-player";
 import type { GameObjectAction } from "../action/game-object-action";
 import { BurstButton } from "./burst-button";
@@ -11,9 +11,7 @@ import { ShinBraverIcon } from "./view/shin-braver-icon";
 import { WingDozerIcon } from "./view/wing-dozer-icon";
 
 /** 生成パラメータ */
-export type BurstButtonCreatorParams = {
-  /** リソース管理オブジェクト */
-  resources: Resources;
+export type BurstButtonCreatorParams = ResourcesContainer & {
   /** SE再生オブジェクト */
   se: SEPlayer;
   /** ゲームオブジェクトアクション */

@@ -6,28 +6,29 @@ import type { ResourceRoot } from "./resource-root";
 import type { SoundResource } from "./sound/resource";
 import type { TextureResource } from "./texture/resource";
 
-/**
- * ゲームで使うリソースを集めたもの
- */
+/** ゲームで使うリソースを集めたもの */
 export type Resources = {
   /** リソースフォルダのルート */
   rootPath: ResourceRoot;
-
   /** 各種リソースのパス */
   paths: Path[];
-
   /** GlTFモデル */
   gltfs: GlTFResource[];
-
   /** テクスチャ */
   textures: TextureResource[];
-
   /** キューブテクスチャ */
   cubeTextures: CubeTextureResource[];
-
   /** キャンバス用画像 */
   canvasImages: CanvasImageResource[];
-
   /** 音 */
   sounds: SoundResource[];
+};
+
+/**
+ * リソース管理オブジェクトコンテナ
+ * プロパティ、パラメータでResourcesを使う場合、
+ * 同じプロパティ名にしてオブジェクトの引き回しが出来るようにする
+ */
+export type ResourcesContainer = {
+  resources: Resources;
 };

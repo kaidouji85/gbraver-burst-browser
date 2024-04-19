@@ -1,4 +1,4 @@
-import { Resources } from "../../../../resource";
+import { ResourcesContainer } from "../../../../resource";
 import { SEPlayer } from "../../../../se/se-player";
 import { createInitialValue } from "../model/initial-value";
 import { NeoLandozerSounds } from "../sounds/neo-landozer-sounds";
@@ -6,9 +6,7 @@ import { NeoLandozerView } from "../view/neo-landozer-view";
 import { NeoLandozerProps } from "./neo-landozer-props";
 
 /** NeoLandozerProps生成パラメータ */
-export type PropsCreatorParams = {
-  /** リソース管理オブジェクト */
-  resources: Resources;
+export type PropsCreatorParams = ResourcesContainer & {
   /** ビュー */
   view: NeoLandozerView;
   /** SE再生 */

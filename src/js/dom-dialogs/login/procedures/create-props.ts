@@ -1,7 +1,7 @@
 import { Subject } from "rxjs";
 
 import { Exclusive } from "../../../exclusive/exclusive";
-import { Resources } from "../../../resource";
+import { ResourcesContainer } from "../../../resource";
 import { createEmptySoundResource } from "../../../resource/sound/empty-sound-resource";
 import { SOUND_IDS } from "../../../resource/sound/ids";
 import { SEPlayer } from "../../../se/se-player";
@@ -15,9 +15,7 @@ import { rootInnerHTML } from "../dom/root-inner-html";
 import { LoginDialogProps } from "../props";
 
 /** 生成パラメータ */
-export type PropsCreatorParams = {
-  /** リソース管理オブジェクト */
-  resources: Resources;
+export type PropsCreatorParams = ResourcesContainer & {
   /** SE再生 */
   se: SEPlayer;
   /** キャプション */

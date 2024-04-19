@@ -1,7 +1,7 @@
 import { Subject } from "rxjs";
 
 import { BGMManagerContainer } from "../../../bgm/bgm-manager";
-import { Resources } from "../../../resource";
+import { ResourcesContainer } from "../../../resource";
 import { PathIds } from "../../../resource/path/ids";
 import { createEmptySoundResource } from "../../../resource/sound/empty-sound-resource";
 import { SOUND_IDS } from "../../../resource/sound/ids";
@@ -14,12 +14,11 @@ import { rootInnerHTML } from "../dom/root-inner-html";
 import { NPCEndingProps } from "../props";
 
 /** NPCEndingProps生成パラメータ */
-export type PropsCreatorParams = BGMManagerContainer & {
-  /** リソース管理オブジェクト */
-  resources: Resources;
-  /** SE再生オブジェクト */
-  se: SEPlayer;
-};
+export type PropsCreatorParams = BGMManagerContainer &
+  ResourcesContainer & {
+    /** SE再生オブジェクト */
+    se: SEPlayer;
+  };
 
 /**
  * NPCEndingPropsを生成する

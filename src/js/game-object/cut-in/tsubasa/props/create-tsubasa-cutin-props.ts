@@ -1,4 +1,4 @@
-import { Resources } from "../../../../resource";
+import { ResourcesContainer } from "../../../../resource";
 import { SEPlayer } from "../../../../se/se-player";
 import { createInitialValue } from "../model/initial-value";
 import { TsubasaSounds } from "../sounds/tsubasa-sounds";
@@ -6,11 +6,9 @@ import { TsubasaView } from "../view/tsubasa-view";
 import { TsubasaCutInProps } from "./tsubasa-cutin-props";
 
 /** ツバサ カットイン プロパティ生成パラメータ */
-export type PropsCreatorParams = {
+export type PropsCreatorParams = ResourcesContainer & {
   /** ビュー */
   view: TsubasaView;
-  /** リソース管理オブジェクト */
-  resources: Resources;
   /** SE再生オブジェクト */
   se: SEPlayer;
 };

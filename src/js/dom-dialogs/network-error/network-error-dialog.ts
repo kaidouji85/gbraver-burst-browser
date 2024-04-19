@@ -4,7 +4,7 @@ import { pop } from "../../dom/pop";
 import { domPushStream, PushDOM } from "../../dom/push-dom";
 import { Exclusive } from "../../exclusive/exclusive";
 import type { PostNetworkError } from "../../game/post-network-error";
-import type { Resources } from "../../resource";
+import type { ResourcesContainer } from "../../resource";
 import { createEmptySoundResource } from "../../resource/sound/empty-sound-resource";
 import { SOUND_IDS } from "../../resource/sound/ids";
 import { SoundResource } from "../../resource/sound/resource";
@@ -82,9 +82,7 @@ function extractElements(root: HTMLElement, ids: DataIDs): Elements {
 }
 
 /** コンストラクタのパラメータ */
-export type NetworkErrorDialogParams = {
-  /** リソース管理オブジェクト */
-  resources: Resources;
+export type NetworkErrorDialogParams = ResourcesContainer & {
   /** 効果音再生オブジェクト */
   se: SEPlayer;
   /** 通信エラーの後処理 */

@@ -1,4 +1,4 @@
-import { Resources } from "../../../../resource";
+import { ResourcesContainer } from "../../../../resource";
 import { SEPlayer } from "../../../../se/se-player";
 import { createInitialValue } from "../model/initial-value";
 import { LightningDozerSounds } from "../sounds/lightning-dozer-sounds";
@@ -6,9 +6,7 @@ import { LightningDozerView } from "../view/lightning-dozer-view";
 import { LightningDozerProps } from "./lightning-dozer-props";
 
 /** LightningDozerProps生成パラメータ */
-export type PropsCreatorParams = {
-  /** リソース管理オブジェクト */
-  resources: Resources;
+export type PropsCreatorParams = ResourcesContainer & {
   /** SE再生 */
   se: SEPlayer;
   /** ビュー */

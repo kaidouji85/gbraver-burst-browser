@@ -1,15 +1,13 @@
 import { Observable } from "rxjs";
 
-import type { Resources } from "../../../resource";
+import type { ResourcesContainer } from "../../../resource";
 import type { GameObjectAction } from "../../action/game-object-action";
 import { EnemyWingDozerCutInView } from "./view/enemy-wing-dozer-cutin-view";
 import { PlayerWingDozerCutInView } from "./view/player-wing-dozer-cutin-view";
 import { WingDozerCutIn } from "./wing-dozer-cutin";
 
 /** 生成パラメータ */
-export type WingDozerCutInCreatorParams = {
-  /** リソース管理オブジェクト */
-  resources: Resources;
+export type WingDozerCutInCreatorParams = ResourcesContainer & {
   /** ゲームオブジェクトアクション */
   gameObjectAction: Observable<GameObjectAction>;
 };

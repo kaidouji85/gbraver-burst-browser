@@ -2,7 +2,7 @@ import { ArmdozerId, PilotId } from "gbraver-burst-core";
 import { Subject } from "rxjs";
 
 import { Exclusive } from "../../../exclusive/exclusive";
-import { Resources } from "../../../resource";
+import { ResourcesContainer } from "../../../resource";
 import { createEmptySoundResource } from "../../../resource/sound/empty-sound-resource";
 import { SOUND_IDS } from "../../../resource/sound/ids";
 import { SEPlayer } from "../../../se/se-player";
@@ -23,9 +23,7 @@ import { PilotIcon } from "../pilot-icon";
 import { SecretPlayerSelectProps } from "../props";
 
 /** SecretPlayerSelectProps生成パラメータ */
-export type CreateSecretPlayerSelectPropsParams = {
-  /** リソース管理オブジェクト */
-  resources: Resources;
+export type CreateSecretPlayerSelectPropsParams = ResourcesContainer & {
   /** SE再生オブジェクト */
   se: SEPlayer;
   /** 選択可能なアームドーザID */

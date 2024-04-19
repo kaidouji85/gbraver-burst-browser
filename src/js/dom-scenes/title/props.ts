@@ -1,7 +1,7 @@
 import { Subject } from "rxjs";
 
 import { Exclusive } from "../../exclusive/exclusive";
-import type { Resources } from "../../resource";
+import type { ResourcesContainer } from "../../resource";
 import { PathIds } from "../../resource/path/ids";
 import { createEmptySoundResource } from "../../resource/sound/empty-sound-resource";
 import { SOUND_IDS } from "../../resource/sound/ids";
@@ -100,9 +100,7 @@ export type TitleProps = {
 };
 
 /** タイトル画面プロパティ生成パラメータ */
-export type CreateTitlePropsParams = RootInnerHTMLParams & {
-  /** リソース管理オブジェクト */
-  resources: Resources;
+export type CreateTitlePropsParams = RootInnerHTMLParams & ResourcesContainer & {
   /** SE再生オブジェクト */
   se: SEPlayer;
 };

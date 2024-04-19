@@ -3,7 +3,7 @@ import { Subject } from "rxjs";
 import { BGMManagerContainer } from "../../bgm/bgm-manager";
 import { Exclusive } from "../../exclusive/exclusive";
 import { GBraverBurstBrowserConfig } from "../../game/config/browser-config";
-import { Resources } from "../../resource";
+import { ResourcesContainer } from "../../resource";
 import { createEmptySoundResource } from "../../resource/sound/empty-sound-resource";
 import { SOUND_IDS } from "../../resource/sound/ids";
 import { SoundResource } from "../../resource/sound/resource";
@@ -76,14 +76,13 @@ export type ConfigProps = BGMManagerContainer & {
 };
 
 /** プロパティ生成関数のパラメータ */
-export type PropsCreatorParams = BGMManagerContainer & {
-  /** リソース管理オブジェクト */
-  resources: Resources;
-  /** ブラウザ設定 */
-  config: GBraverBurstBrowserConfig;
-  /** SE再生オブジェクト */
-  se: SEPlayer;
-};
+export type PropsCreatorParams = BGMManagerContainer &
+  ResourcesContainer & {
+    /** ブラウザ設定 */
+    config: GBraverBurstBrowserConfig;
+    /** SE再生オブジェクト */
+    se: SEPlayer;
+  };
 
 /**
  * 設定画面プロパティを生成する
