@@ -1,16 +1,14 @@
 import { Observable } from "rxjs";
 
 import type { ResourcesContainer } from "../../resource";
-import { SEPlayer } from "../../se/se-player";
+import { SEPlayerContainer } from "../../se/se-player";
 import type { GameObjectAction } from "../action/game-object-action";
 import { BatteryEnchantment } from "./battery-enchantment";
 import { EnemyBatteryEnchantmentView } from "./view/enemy-battery-enchantment-view";
 import { PlayerBatteryEnchantmentView } from "./view/player-battery-enchantment-view";
 
 /** 生成パラメータ */
-export type BatteryEnchantmentCreatorParams = ResourcesContainer & {
-  /** SE再生オブジェクト */
-  se: SEPlayer;
+export type BatteryEnchantmentCreatorParams = ResourcesContainer & SEPlayerContainer & {
   /** ゲームオブジェクトアクション */
   gameObjectAction: Observable<GameObjectAction>;
 };

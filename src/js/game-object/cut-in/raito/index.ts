@@ -1,16 +1,14 @@
 import { Observable } from "rxjs";
 
 import type { ResourcesContainer } from "../../../resource";
-import { SEPlayer } from "../../../se/se-player";
+import { SEPlayerContainer } from "../../../se/se-player";
 import type { GameObjectAction } from "../../action/game-object-action";
 import { RaitoCutIn } from "./raito";
 import { EnemyRaitoView } from "./view/enemy-raito-view";
 import { PlayerRaitoView } from "./view/player-raito-view";
 
 /** 生成パラメータ */
-export type RaitoCutInCreatorParams = ResourcesContainer & {
-  /** SE再生オブジェクト */
-  se: SEPlayer;
+export type RaitoCutInCreatorParams = ResourcesContainer & SEPlayerContainer & {
   /** ゲームオブジェクトアクション */
   gameObjectAction: Observable<GameObjectAction>;
 };

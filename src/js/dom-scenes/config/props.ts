@@ -7,7 +7,7 @@ import { ResourcesContainer } from "../../resource";
 import { createEmptySoundResource } from "../../resource/sound/empty-sound-resource";
 import { SOUND_IDS } from "../../resource/sound/ids";
 import { SoundResource } from "../../resource/sound/resource";
-import { SEPlayer } from "../../se/se-player";
+import { SEPlayerContainer } from "../../se/se-player";
 import { ConfigChangedDialog } from "./config-changed-dialog";
 import { ROOT_CLASS } from "./dom/class-name";
 import {
@@ -26,62 +26,59 @@ import {
 import { rootInnerHTML } from "./dom/root-inner-html";
 
 /** 設定画面プロパティ */
-export type ConfigProps = BGMManagerContainer & {
-  /** 画面を開く前のブラウザ設定 */
-  originConfig: GBraverBurstBrowserConfig;
+export type ConfigProps = BGMManagerContainer &
+  SEPlayerContainer & {
+    /** 画面を開く前のブラウザ設定 */
+    originConfig: GBraverBurstBrowserConfig;
 
-  /** ルートHTML要素 */
-  root: HTMLElement;
-  /** ロボ、パイロット選択タイプセレクタ */
-  playerSelectorType: HTMLElement;
-  /** 戦闘アニメ速度セレクタ */
-  battleAnimationTimeScaleSelector: HTMLElement;
-  /** webglピクセルレートセレクタ */
-  webGLPixelRatioSelector: HTMLElement;
-  /** 戦闘画面コントローラセレクタ */
-  battleControllerTypeSelector: HTMLElement;
-  /** bgm音量セレクタ */
-  bgmVolumeSelector: HTMLInputElement;
-  /** bgm音量値 */
-  bgmVolumeValue: HTMLElement;
-  /** se音量セレクタ */
-  seVolumeSelector: HTMLInputElement;
-  /** se音量値 */
-  seVolumeValue: HTMLElement;
-  /** パフォーマンス統計表示設定セレクタ */
-  performanceStatsVisibilitySelector: HTMLElement;
-  /** 戻るボタン */
-  prevButton: HTMLElement;
-  /** 設定変更ボタン */
-  configChangeButton: HTMLElement;
+    /** ルートHTML要素 */
+    root: HTMLElement;
+    /** ロボ、パイロット選択タイプセレクタ */
+    playerSelectorType: HTMLElement;
+    /** 戦闘アニメ速度セレクタ */
+    battleAnimationTimeScaleSelector: HTMLElement;
+    /** webglピクセルレートセレクタ */
+    webGLPixelRatioSelector: HTMLElement;
+    /** 戦闘画面コントローラセレクタ */
+    battleControllerTypeSelector: HTMLElement;
+    /** bgm音量セレクタ */
+    bgmVolumeSelector: HTMLInputElement;
+    /** bgm音量値 */
+    bgmVolumeValue: HTMLElement;
+    /** se音量セレクタ */
+    seVolumeSelector: HTMLInputElement;
+    /** se音量値 */
+    seVolumeValue: HTMLElement;
+    /** パフォーマンス統計表示設定セレクタ */
+    performanceStatsVisibilitySelector: HTMLElement;
+    /** 戻るボタン */
+    prevButton: HTMLElement;
+    /** 設定変更ボタン */
+    configChangeButton: HTMLElement;
 
-  /** 設定変更通知ダイアログ */
-  dialog: ConfigChangedDialog;
+    /** 設定変更通知ダイアログ */
+    dialog: ConfigChangedDialog;
 
-  /** SE 値変更 */
-  changeValue: SoundResource;
-  /** SE ボタン押下 */
-  pushButton: SoundResource;
+    /** SE 値変更 */
+    changeValue: SoundResource;
+    /** SE ボタン押下 */
+    pushButton: SoundResource;
 
-  /** SE再生オブジェクト */
-  se: SEPlayer;
+    /** 排他制御 */
+    exclusive: Exclusive;
 
-  /** 排他制御 */
-  exclusive: Exclusive;
-
-  /** 戻るストリーム */
-  prev: Subject<void>;
-  /** 設定変更ストリーム */
-  configChange: Subject<GBraverBurstBrowserConfig>;
-};
+    /** 戻るストリーム */
+    prev: Subject<void>;
+    /** 設定変更ストリーム */
+    configChange: Subject<GBraverBurstBrowserConfig>;
+  };
 
 /** プロパティ生成関数のパラメータ */
 export type PropsCreatorParams = BGMManagerContainer &
-  ResourcesContainer & {
+  ResourcesContainer &
+  SEPlayerContainer & {
     /** ブラウザ設定 */
     config: GBraverBurstBrowserConfig;
-    /** SE再生オブジェクト */
-    se: SEPlayer;
   };
 
 /**

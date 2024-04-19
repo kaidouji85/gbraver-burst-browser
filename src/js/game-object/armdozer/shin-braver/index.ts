@@ -1,16 +1,14 @@
 import { Observable } from "rxjs";
 
 import type { ResourcesContainer } from "../../../resource";
-import { SEPlayer } from "../../../se/se-player";
+import { SEPlayerContainer } from "../../../se/se-player";
 import type { GameObjectAction } from "../../action/game-object-action";
 import { ShinBraver } from "./shin-braver";
 import { EnemyShinBraverView } from "./view/enemy-shin-braver-view";
 import { PlayerShinBraverView } from "./view/player-shin-braver-view";
 
 /** シンブレイバー生成関数パラメータ */
-type ShinBraverCreatorParams = ResourcesContainer & {
-  /** SE再生 */
-  se: SEPlayer;
+type ShinBraverCreatorParams = ResourcesContainer & SEPlayerContainer & {
   /** ゲームオブジェクトアクション */
   gameObjectAction: Observable<GameObjectAction>;
 };

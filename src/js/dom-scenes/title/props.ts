@@ -6,7 +6,7 @@ import { PathIds } from "../../resource/path/ids";
 import { createEmptySoundResource } from "../../resource/sound/empty-sound-resource";
 import { SOUND_IDS } from "../../resource/sound/ids";
 import { SoundResource } from "../../resource/sound/resource";
-import { SEPlayer } from "../../se/se-player";
+import { SEPlayerContainer } from "../../se/se-player";
 import { domUuid } from "../../uuid/dom-uuid";
 import { waitElementLoaded } from "../../wait/wait-element-loaded";
 import { ROOT_CLASS } from "./dom/class-name";
@@ -16,95 +16,69 @@ import type { RootInnerHTMLParams } from "./dom/root-inner-html";
 import { rootInnerHTML } from "./dom/root-inner-html";
 
 /** タイトル画面プロパティ */
-export type TitleProps = {
+export type TitleProps = SEPlayerContainer & {
   /** 排他制御 */
   exclusive: Exclusive;
 
   /** ルートHTML要素 */
   root: HTMLElement;
-
   /** ログイン */
   login: HTMLElement;
-
   /** アカウントメニュー */
   accountMenu: HTMLElement;
-
   /** アバター */
   avatar: HTMLImageElement;
-
   /** アカウント削除 */
   deleteAccount: HTMLElement;
-
   /** ログアウト */
   logout: HTMLElement;
-
   /** ヘルプアイコン */
   helpIcon: HTMLElement;
-
   /** ヘルプメニュー */
   helpMenu: HTMLElement;
-
   /** チュートリアル */
   tutorial: HTMLElement;
-
   /** アーケード */
   arcade: HTMLElement;
-
   /** ネット対戦 */
   netBattle: HTMLElement;
-
   /** 設定 */
   config: HTMLElement;
 
   /** タイトルバック画像を読み込んだら発火するPromise */
   isTitleBackLoaded: Promise<void>;
-
   /** アバター画像を読み込んだら発火するPromise */
   isAvatarLoaded: Promise<void>;
-
   /** ロゴ画像を読み込んだら発火するPromise */
   isLogoLoaded: Promise<void>;
-
   /** ヘルプアイコンを読み込んだら発火するPromise */
   isHelpIconLoaded: Promise<void>;
 
   /** SE 値変更 */
   changeValue: SoundResource;
-
   /** SE ボタン押下 */
   pushButton: SoundResource;
 
-  /** SE再生オブジェクト */
-  se: SEPlayer;
-
   /** ログイン押下ストリーム */
   pushLogin: Subject<void>;
-
   /** 削除押下ストリーム */
   pushDeleteAccount: Subject<void>;
-
   /** ログアウト押下ストリーム */
   pushLogout: Subject<void>;
-
   /** チュートリアル押下ストリーム */
   pushTutorial: Subject<void>;
-
   /** アーケード押下ストリーム */
   pushArcade: Subject<void>;
-
   /** ネット対戦押下ストリーム */
   pushNetBattle: Subject<void>;
-
   /** 設定押下ストリーム */
   pushConfig: Subject<void>;
 };
 
 /** タイトル画面プロパティ生成パラメータ */
 export type CreateTitlePropsParams = RootInnerHTMLParams &
-  ResourcesContainer & {
-    /** SE再生オブジェクト */
-    se: SEPlayer;
-  };
+  ResourcesContainer &
+  SEPlayerContainer;
 
 /**
  * タイトル画面プロパティを生成する

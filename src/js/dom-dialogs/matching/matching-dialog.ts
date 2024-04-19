@@ -8,7 +8,7 @@ import { PathIds } from "../../resource/path/ids";
 import { createEmptySoundResource } from "../../resource/sound/empty-sound-resource";
 import { SOUND_IDS } from "../../resource/sound/ids";
 import { SoundResource } from "../../resource/sound/resource";
-import { SEPlayer } from "../../se/se-player";
+import { SEPlayer, SEPlayerContainer } from "../../se/se-player";
 import { domUuid } from "../../uuid/dom-uuid";
 import type { DOMDialog } from "../dialog";
 
@@ -63,10 +63,7 @@ function extractElements(root: HTMLElement, ids: DataIDs): Elements {
 }
 
 /** コンストラクタのパラメータ */
-export type MatchingDialogParams = ResourcesContainer & {
-  /** SE再生オブジェクト */
-  se: SEPlayer;
-};
+export type MatchingDialogParams = ResourcesContainer & SEPlayerContainer;
 
 /** マッチング ダイアログ */
 export class MatchingDialog implements DOMDialog {

@@ -9,15 +9,13 @@ import {
 import { gameLoopStream } from "../../src/js/game-loop/game-loop";
 import { ResourcesContainer } from "../../src/js/resource";
 import { developingFullResourceLoading } from "../../src/js/resource/loading/full-resource-loading";
-import { createSEPlayer, SEPlayer } from "../../src/js/se/se-player";
+import { createSEPlayer, SEPlayerContainer } from "../../src/js/se/se-player";
 import { StorybookResourceRoot } from "../storybook-resource-root";
 
 /** 生成パラメータ */
 type DOMCreatorParams = BGMManagerContainer &
-  ResourcesContainer & {
-    /** SE再生オブジェクト */
-    se: SEPlayer;
-  };
+  ResourcesContainer &
+  SEPlayerContainer;
 
 /**
  * HTML要素生成コールバック関数

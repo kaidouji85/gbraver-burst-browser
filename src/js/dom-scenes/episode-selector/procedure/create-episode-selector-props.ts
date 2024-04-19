@@ -4,7 +4,7 @@ import { Exclusive } from "../../../exclusive/exclusive";
 import { ResourcesContainer } from "../../../resource";
 import { createEmptySoundResource } from "../../../resource/sound/empty-sound-resource";
 import { SOUND_IDS } from "../../../resource/sound/ids";
-import { SEPlayer } from "../../../se/se-player";
+import { SEPlayerContainer } from "../../../se/se-player";
 import { BLOCK } from "../dom/class-name";
 import { createEpisodeImageCut } from "../dom/episode-image-cut";
 import {
@@ -24,9 +24,7 @@ import { EpisodeElement } from "../episode-element";
 import { EpisodeSelectorProps } from "../props";
 
 /** EpisodeSelectorProps生成パラメータ */
-export type PropsCreatorParams = ResourcesContainer & {
-  /** SE再生オブジェクト */
-  se: SEPlayer;
+export type PropsCreatorParams = ResourcesContainer & SEPlayerContainer & {
   /** エピソード */
   episodes: Episode[];
 };

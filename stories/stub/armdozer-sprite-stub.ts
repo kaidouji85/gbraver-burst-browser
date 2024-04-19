@@ -3,15 +3,13 @@ import { Observable } from "rxjs";
 import { GameObjectAction } from "../../src/js/game-object/action/game-object-action";
 import { ArmdozerSprite } from "../../src/js/game-object/armdozer/armdozer-sprite";
 import { ResourcesContainer } from "../../src/js/resource";
-import { SEPlayer } from "../../src/js/se/se-player";
+import { SEPlayerContainer } from "../../src/js/se/se-player";
 import { TDGameObjectStub } from "./td-game-object-stub";
 
 /** アームドーザスプライト ジェネレータ パラメータ */
-type GeneratorParams = ResourcesContainer & {
+type GeneratorParams = ResourcesContainer & SEPlayerContainer & {
   /** ゲームオブジェクトアクション */
   gameObjectAction: Observable<GameObjectAction>;
-  /** SE再生 */
-  se: SEPlayer;
 };
 
 /**

@@ -6,7 +6,7 @@ import { Exclusive } from "../../../../exclusive/exclusive";
 import { ResourcesContainer } from "../../../../resource";
 import { createEmptySoundResource } from "../../../../resource/sound/empty-sound-resource";
 import { SOUND_IDS } from "../../../../resource/sound/ids";
-import { SEPlayer } from "../../../../se/se-player";
+import { SEPlayerContainer } from "../../../../se/se-player";
 import { BLOCK } from "../dom/class-name";
 import {
   extractDummyStatus,
@@ -20,9 +20,7 @@ import { PilotStatus } from "../pilot-status";
 import { PilotSelectorProps } from "../props";
 
 /** PilotSelectorProps生成パラメータ */
-export type PropsCreatorParams = ResourcesContainer & {
-  /** SE再生オブジェクト */
-  se: SEPlayer;
+export type PropsCreatorParams = ResourcesContainer &  SEPlayerContainer & {
   /** 選択可能なパイロットIDリスト */
   pilotIds: PilotId[];
   /** パイロットIDの初期値 */

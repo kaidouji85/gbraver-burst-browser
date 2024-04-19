@@ -1,16 +1,14 @@
 import { Observable } from "rxjs";
 
 import type { ResourcesContainer } from "../../resource";
-import { SEPlayer } from "../../se/se-player";
+import { SEPlayerContainer } from "../../se/se-player";
 import type { GameObjectAction } from "../action/game-object-action";
 import { ContinuousAttackIndicator } from "./continuous-attack-indicator";
 import { EnemyContinuousAttackView } from "./view/enemy-continuous-attack-view";
 import { PlayerContinuousAttackView } from "./view/player-continuous-attack-view";
 
 /** 連続攻撃生成パラメータ */
-export type ContinuousAttackCreatorParams = ResourcesContainer & {
-  /** SE再生オブジェクト */
-  se: SEPlayer;
+export type ContinuousAttackCreatorParams = ResourcesContainer & SEPlayerContainer & {
   /** ゲームオブジェクトアクション */
   gameObjectAction: Observable<GameObjectAction>;
 };

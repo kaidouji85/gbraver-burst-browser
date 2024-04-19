@@ -1,16 +1,14 @@
 import { ResourcesContainer } from "../../../../resource";
-import { SEPlayer } from "../../../../se/se-player";
+import { SEPlayerContainer } from "../../../../se/se-player";
 import { createInitialValue } from "../model/initial-value";
 import { ShinyaSounds } from "../sounds/shinya-sounds";
 import { ShinyaView } from "../view/shinya-view";
 import { ShinyaCutInProps } from "./shinya-cutin-props";
 
 /** 生成パラメータ */
-export type PropsCreatorParams = ResourcesContainer & {
+export type PropsCreatorParams = ResourcesContainer & SEPlayerContainer & {
   /** ビュー */
   view: ShinyaView;
-  /** 効果音再生オブジェクト */
-  se: SEPlayer;
 };
 
 /**

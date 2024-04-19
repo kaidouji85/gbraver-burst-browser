@@ -30,5 +30,6 @@ export type Resources = {
  * 同じプロパティ名にしてオブジェクトの引き回しが出来るようにする
  */
 export type ResourcesContainer = {
+  /** リソース管理オブジェクト */
   resources: Resources;
 };

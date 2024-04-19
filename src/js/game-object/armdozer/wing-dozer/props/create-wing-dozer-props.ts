@@ -1,16 +1,14 @@
 import { ResourcesContainer } from "../../../../resource";
-import { SEPlayer } from "../../../../se/se-player";
+import { SEPlayerContainer } from "../../../../se/se-player";
 import { createInitialValue } from "../model/initial-value";
 import { WingDozerSounds } from "../sounds/wing-dozer-sounds";
 import { WingDozerView } from "../view/wing-dozer-view";
 import { WingDozerProps } from "./wing-dozer-props";
 
 /** WingDozerProps生成パラメータ */
-export type PropsCreatorParams = ResourcesContainer & {
+export type PropsCreatorParams = ResourcesContainer & SEPlayerContainer & {
   /** ビュー */
   view: WingDozerView;
-  /** SE再生 */
-  se: SEPlayer;
 };
 
 /**

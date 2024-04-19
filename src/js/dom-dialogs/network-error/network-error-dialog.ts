@@ -8,7 +8,7 @@ import type { ResourcesContainer } from "../../resource";
 import { createEmptySoundResource } from "../../resource/sound/empty-sound-resource";
 import { SOUND_IDS } from "../../resource/sound/ids";
 import { SoundResource } from "../../resource/sound/resource";
-import { SEPlayer } from "../../se/se-player";
+import { SEPlayer, SEPlayerContainer } from "../../se/se-player";
 import { domUuid } from "../../uuid/dom-uuid";
 import type { DOMDialog } from "../dialog";
 
@@ -82,12 +82,11 @@ function extractElements(root: HTMLElement, ids: DataIDs): Elements {
 }
 
 /** コンストラクタのパラメータ */
-export type NetworkErrorDialogParams = ResourcesContainer & {
-  /** 効果音再生オブジェクト */
-  se: SEPlayer;
-  /** 通信エラーの後処理 */
-  postNetworkError: PostNetworkError;
-};
+export type NetworkErrorDialogParams = ResourcesContainer &
+  SEPlayerContainer & {
+    /** 通信エラーの後処理 */
+    postNetworkError: PostNetworkError;
+  };
 
 /** 通信エラー ダイアログ */
 export class NetworkErrorDialog implements DOMDialog {

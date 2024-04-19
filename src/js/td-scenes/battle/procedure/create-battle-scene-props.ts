@@ -10,7 +10,7 @@ import { RendererDomGetter } from "../../../render/renderer-dom-getter";
 import { Rendering } from "../../../render/rendering";
 import { ResourcesContainer } from "../../../resource";
 import { SoundId } from "../../../resource/sound/resource";
-import { SEPlayer } from "../../../se/se-player";
+import { SEPlayerContainer } from "../../../se/se-player";
 import { PushWindow } from "../../../window/push-window";
 import { Resize } from "../../../window/resize";
 import { BattleProgress } from "../battle-progress";
@@ -29,9 +29,8 @@ export interface OwnRenderer
 /** 戦闘シーンプロパティ生成関数のパラメータ */
 export type BattleScenePropsCreatorParams = BGMManagerContainer &
   ResourcesContainer &
+  SEPlayerContainer &
   Readonly<{
-    /** SE再生オブジェクト */
-    se: SEPlayer;
     /** 再生するBGM ID */
     playingBGM: SoundId;
     /** レンダラ */

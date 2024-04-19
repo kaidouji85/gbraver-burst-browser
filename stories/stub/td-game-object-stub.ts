@@ -15,19 +15,17 @@ import type { ResourcesContainer } from "../../src/js/resource";
 import { developingFullResourceLoading } from "../../src/js/resource/loading/full-resource-loading";
 import type { SafeAreaInset } from "../../src/js/safe-area/safe-area-inset";
 import { createSafeAreaInset } from "../../src/js/safe-area/safe-area-inset";
-import { createSEPlayer, SEPlayer } from "../../src/js/se/se-player";
+import { createSEPlayer, SEPlayerContainer } from "../../src/js/se/se-player";
 import type { Resize } from "../../src/js/window/resize";
 import { resizeStream } from "../../src/js/window/resize";
 import { StorybookResourceRoot } from "../storybook-resource-root";
 
 /** Object3D生成関数パラメータ */
-type Object3DCreatorParams = ResourcesContainer & {
+type Object3DCreatorParams = ResourcesContainer & SEPlayerContainer & {
   /** ゲームオブジェクトアクション */
   gameObjectAction: Observable<GameObjectAction>;
   /** カメラ */
   camera: TDCamera;
-  /** SE再生 */
-  se: SEPlayer;
 };
 
 /** スタブに追加するthree.jsオブジェクト */

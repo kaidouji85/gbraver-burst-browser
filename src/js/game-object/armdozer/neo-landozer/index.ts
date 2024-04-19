@@ -1,16 +1,14 @@
 import { Observable } from "rxjs";
 
 import type { ResourcesContainer } from "../../../resource";
-import { SEPlayer } from "../../../se/se-player";
+import { SEPlayerContainer } from "../../../se/se-player";
 import type { GameObjectAction } from "../../action/game-object-action";
 import { NeoLandozer } from "./neo-landozer";
 import { EnemyNeoLandozerView } from "./view/enemy-neo-landozer-view";
 import { PlayerNeoLandozerView } from "./view/player-neo-landozer-view";
 
 /** ネオランドーザ生成関数パラメータ */
-type NeoLandozerCreatorParams = ResourcesContainer & {
-  /** SE再生 */
-  se: SEPlayer;
+type NeoLandozerCreatorParams = ResourcesContainer & SEPlayerContainer & {
   /** ゲームオブジェクトアクション */
   gameObjectAction: Observable<GameObjectAction>;
 };

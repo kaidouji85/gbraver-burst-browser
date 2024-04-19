@@ -8,7 +8,7 @@ import { GameLoop } from "../../game-loop/game-loop";
 import { Renderer } from "../../render";
 import { ResourcesContainer } from "../../resource";
 import { ResourceRoot } from "../../resource/resource-root";
-import { SEPlayer } from "../../se/se-player";
+import { SEPlayerContainer } from "../../se/se-player";
 import { PerformanceStats } from "../../stats/performance-stats";
 import { PushWindow } from "../../window/push-window";
 import { Resize } from "../../window/resize";
@@ -25,7 +25,7 @@ import { TDSceneBinder } from "../td-scene-binder";
  * ゲームプロパティ
  * 本オブジェクトはゲーム管理オブジェクト内部、各種ヘルパーで利用することを想定している
  */
-export interface GameProps extends BGMManagerContainer, ResourcesContainer {
+export interface GameProps extends BGMManagerContainer, ResourcesContainer, SEPlayerContainer {
   /** パフォーマンス統計、表示されていない場合はnullが入る */
   performanceStats: PerformanceStats | null;
   /** サービスワーカーを利用するか否か、trueで利用する */
@@ -76,8 +76,6 @@ export interface GameProps extends BGMManagerContainer, ResourcesContainer {
   isFullResourceLoaded: boolean;
   /** ServiceWorkerRegistrationのキャッシュ */
   serviceWorker: ServiceWorkerRegistration | null | undefined;
-  /** SE再生オブジェクト */
-  se: SEPlayer;
   /** 開発中のエピソードをプレイできるか否かのフラグ、trueでプレイできる */
   canPlayEpisodeInDevelopment: boolean;
   /** 開発中のリソースをロードするか否かのフラグ、trueでロードする */

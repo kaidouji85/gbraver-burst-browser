@@ -4,7 +4,7 @@ import { Exclusive } from "../../../exclusive/exclusive";
 import { ResourcesContainer } from "../../../resource";
 import { createEmptySoundResource } from "../../../resource/sound/empty-sound-resource";
 import { SOUND_IDS } from "../../../resource/sound/ids";
-import { SEPlayer } from "../../../se/se-player";
+import { SEPlayerContainer } from "../../../se/se-player";
 import { ROOT_CLASS } from "../dom/class-name";
 import {
   extractBackGround,
@@ -16,10 +16,7 @@ import { rootInnerHTML } from "../dom/root-inner-html";
 import { DeleteAccountConsentDialogProps } from "../props";
 
 /** 生成パラメータ */
-export type PropsCreatorParams = ResourcesContainer & {
-  /** SE再生オブジェクト */
-  se: SEPlayer;
-};
+export type PropsCreatorParams = ResourcesContainer & SEPlayerContainer;
 
 /**
  * DeleteAccountConsentDialogPropsを生成する

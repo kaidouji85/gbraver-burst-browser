@@ -4,7 +4,7 @@ import { Observable, Subject } from "rxjs";
 import { AnimatePlayer } from "../../animation/animate-player";
 import { BGMManagerContainer } from "../../bgm/bgm-manager";
 import { Exclusive } from "../../exclusive/exclusive";
-import { SEPlayer } from "../../se/se-player";
+import { SEPlayerContainer } from "../../se/se-player";
 import { PushWindow } from "../../window/push-window";
 import { BattleProgress } from "./battle-progress";
 import { BattleControllerType } from "./controller-type";
@@ -21,7 +21,7 @@ export type BattleEnd = {
 };
 
 /** 戦闘シーンプロパティ */
-export type BattleSceneProps = BGMManagerContainer & {
+export type BattleSceneProps = BGMManagerContainer & SEPlayerContainer & {
   /** 画面を開いているプレイヤーのID */
   readonly playerId: PlayerId;
   /** アニメーションプレイヤー */
@@ -42,8 +42,6 @@ export type BattleSceneProps = BGMManagerContainer & {
   readonly pushWindow: Observable<PushWindow>;
   /** 戦闘シーン効果音 */
   readonly sounds: BattleSceneSounds;
-  /** SE再生オブジェクト */
-  readonly se: SEPlayer;
   /** コントローラータイプ */
   readonly controllerType: BattleControllerType;
 };

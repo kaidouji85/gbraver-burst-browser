@@ -1,16 +1,14 @@
 import { ResourcesContainer } from "../../../resource";
-import { SEPlayer } from "../../../se/se-player";
+import { SEPlayerContainer } from "../../../se/se-player";
 import { createInitialValue } from "../model/initial-value";
 import { ContinuousAttackSounds } from "../sounds/continuous-attack-sounds";
 import { ContinuousAttackView } from "../view/continuous-attack-view";
 import { ContinuousAttackProps } from "./continuous-attack-props";
 
 /** ContinuousAttackProps生成パラメータ */
-export type PropsCreatorParams = ResourcesContainer & {
+export type PropsCreatorParams = ResourcesContainer & SEPlayerContainer & {
   /** ビュー */
   view: ContinuousAttackView;
-  /** SE再生オブジェクト */
-  se: SEPlayer;
 };
 
 /**

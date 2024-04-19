@@ -15,15 +15,13 @@ import type { ResourcesContainer } from "../../src/js/resource";
 import { developingFullResourceLoading } from "../../src/js/resource/loading/full-resource-loading";
 import type { SafeAreaInset } from "../../src/js/safe-area/safe-area-inset";
 import { createSafeAreaInset } from "../../src/js/safe-area/safe-area-inset";
-import { createSEPlayer, SEPlayer } from "../../src/js/se/se-player";
+import { createSEPlayer, SEPlayerContainer } from "../../src/js/se/se-player";
 import type { Resize } from "../../src/js/window/resize";
 import { resizeStream } from "../../src/js/window/resize";
 import { StorybookResourceRoot } from "../storybook-resource-root";
 
 /** Object3D生成関数パラメータ */
-type Object3DParams = ResourcesContainer & {
-  /** SE再生オブジェクト */
-  se: SEPlayer;
+type Object3DParams = ResourcesContainer & SEPlayerContainer & {
   /** ゲームオブジェクトアクション */
   gameObjectAction: Observable<GameObjectAction>;
 };

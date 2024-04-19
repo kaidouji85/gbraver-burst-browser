@@ -36,3 +36,13 @@ class SimpleSEPlayer implements SEPlayer {
  * @return 生成したSEPlayer
  */
 export const createSEPlayer = (): SEPlayer => new SimpleSEPlayer();
+
+/**
+ * SE再生オブジェクトコンテナ
+ * プロパティ、パラメータでResourcesを使う場合、
+ * 同じプロパティ名にしてオブジェクトの引き回しが出来るようにする
+ */
+export type SEPlayerContainer = {
+  /** SE再生オブジェクト */
+  readonly se: SEPlayer;
+};

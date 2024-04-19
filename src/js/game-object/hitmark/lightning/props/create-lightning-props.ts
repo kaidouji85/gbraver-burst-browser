@@ -1,16 +1,14 @@
 import { ResourcesContainer } from "../../../../resource";
-import { SEPlayer } from "../../../../se/se-player";
+import { SEPlayerContainer } from "../../../../se/se-player";
 import { createInitialValue } from "../model/initial-value";
 import { LightningSounds } from "../sounds/lightning-sounds";
 import { LightningView } from "../view/lightning-view";
 import { LightningProps } from "./lightning-props";
 
 /** 電撃ヒットマークプロパティ生成パラメータ */
-export type PropsCreatorParams = ResourcesContainer & {
+export type PropsCreatorParams = ResourcesContainer & SEPlayerContainer & {
   /** ビュー */
   view: LightningView;
-  /** SE再生オブジェクト */
-  se: SEPlayer;
 };
 
 /**

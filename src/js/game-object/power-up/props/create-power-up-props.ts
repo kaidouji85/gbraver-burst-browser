@@ -1,16 +1,14 @@
 import { ResourcesContainer } from "../../../resource";
-import { SEPlayer } from "../../../se/se-player";
+import { SEPlayerContainer } from "../../../se/se-player";
 import { createInitialValue } from "../model/initial-value";
 import { PowerUpSounds } from "../sounds/power-up-sounds";
 import { PowerUpView } from "../view/power-up-view";
 import { PowerUpProps } from "./power-up-props";
 
 /** PowerUpProps 生成パラメータ */
-export type PropsCreatorParams = ResourcesContainer & {
+export type PropsCreatorParams = ResourcesContainer & SEPlayerContainer & {
   /** ビュー */
   view: PowerUpView;
-  /** SE再生オブジェクト */
-  se: SEPlayer;
 };
 
 /**

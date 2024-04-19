@@ -2,7 +2,7 @@ import * as TWEEN from "@tweenjs/tween.js";
 import { Observable, Subject } from "rxjs";
 
 import { ResourcesContainer } from "../../../resource";
-import { SEPlayer } from "../../../se/se-player";
+import { SEPlayerContainer } from "../../../se/se-player";
 import { GameObjectAction } from "../../action/game-object-action";
 import { initialValue } from "../model/initial-value";
 import { createBatterySelectorSounds } from "../sounds/battery-selector-sounds";
@@ -10,9 +10,7 @@ import { BatterySelectorView } from "../view";
 import { BatterySelectorProps } from "./battery-selector-props";
 
 /** バッテリーセレクタプロパティ生成パラメータ */
-export type PropsCreatorParams = ResourcesContainer & {
-  /** SE再生オブジェクト */
-  se: SEPlayer;
+export type PropsCreatorParams = ResourcesContainer & SEPlayerContainer & {
   /** ゲームオブジェクトアクション */
   gameObjectAction: Observable<GameObjectAction>;
 };

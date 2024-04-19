@@ -5,7 +5,7 @@ import { ResourcesContainer } from "../../../resource";
 import { PathIds } from "../../../resource/path/ids";
 import { createEmptySoundResource } from "../../../resource/sound/empty-sound-resource";
 import { SOUND_IDS } from "../../../resource/sound/ids";
-import { SEPlayer } from "../../../se/se-player";
+import { SEPlayerContainer } from "../../../se/se-player";
 import { domUuid } from "../../../uuid/dom-uuid";
 import { waitElementLoaded } from "../../../wait/wait-element-loaded";
 import { ROOT_CLASS } from "../dom/class-name";
@@ -15,10 +15,8 @@ import { NPCEndingProps } from "../props";
 
 /** NPCEndingProps生成パラメータ */
 export type PropsCreatorParams = BGMManagerContainer &
-  ResourcesContainer & {
-    /** SE再生オブジェクト */
-    se: SEPlayer;
-  };
+  ResourcesContainer &
+  SEPlayerContainer;
 
 /**
  * NPCEndingPropsを生成する

@@ -1,16 +1,14 @@
 import { Observable } from "rxjs";
 
 import type { ResourcesContainer } from "../../resource";
-import { SEPlayer } from "../../se/se-player";
+import { SEPlayerContainer } from "../../se/se-player";
 import type { GameObjectAction } from "../action/game-object-action";
 import { PowerUp } from "./power-up";
 import { EnemyPowerUpView } from "./view/enemy-power-up-view";
 import { PlayerPowerUpView } from "./view/player-power-up-view";
 
 /** 生成パラメータ */
-export type PowerUpCreatorParams = ResourcesContainer & {
-  /** SE再生オブジェクト */
-  se: SEPlayer;
+export type PowerUpCreatorParams = ResourcesContainer & SEPlayerContainer & {
   /** ゲームオブジェクトアクション */
   gameObjectAction: Observable<GameObjectAction>;
 };

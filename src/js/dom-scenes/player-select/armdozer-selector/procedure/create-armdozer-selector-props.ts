@@ -6,7 +6,7 @@ import { Exclusive } from "../../../../exclusive/exclusive";
 import { ResourcesContainer } from "../../../../resource";
 import { createEmptySoundResource } from "../../../../resource/sound/empty-sound-resource";
 import { SOUND_IDS } from "../../../../resource/sound/ids";
-import { SEPlayer } from "../../../../se/se-player";
+import { SEPlayerContainer } from "../../../../se/se-player";
 import { ArmdozerIcon } from "../armdozer-icon";
 import { ArmdozerStatus } from "../armdozer-status";
 import { BLOCK } from "../dom/class-name";
@@ -20,9 +20,7 @@ import { rootInnerHTML } from "../dom/root-inner-html";
 import { ArmdozerSelectorProps } from "../props";
 
 /** ArmdozerSelectorProps生成パラメータ */
-export type PropsCreatorParams = ResourcesContainer & {
-  /** 選択可能なアームドーザIDリスト */
-  se: SEPlayer;
+export type PropsCreatorParams = ResourcesContainer & SEPlayerContainer & {
   /** 選択可能なアームドーザIDリスト */
   armdozerIds: ArmdozerId[];
   /** 最初に選択しているアームドーザID */

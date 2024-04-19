@@ -1,16 +1,14 @@
 import { ResourcesContainer } from "../../../../resource";
-import { SEPlayer } from "../../../../se/se-player";
+import { SEPlayerContainer } from "../../../../se/se-player";
 import { createInitialValue } from "../model/initial-value";
 import { createGenesisBraverSounds } from "../sounds/genesis-braver-sounds";
 import { GenesisBraverView } from "../view/genesis-braver-view";
 import { GenesisBraverProps } from "./genesis-braver-props";
 
 /** GenesisBraverProps生成パラメータ */
-export type PropsCreatorParams = ResourcesContainer & {
+export type PropsCreatorParams = ResourcesContainer & SEPlayerContainer & {
   /** ビュー */
   view: GenesisBraverView;
-  /** SE再生 */
-  se: SEPlayer;
 };
 
 /**

@@ -3,13 +3,11 @@ import { Observable } from "rxjs";
 
 import type { GameLoop } from "../../../game-loop/game-loop";
 import type { ResourcesContainer } from "../../../resource";
-import { SEPlayer } from "../../../se/se-player";
+import { SEPlayerContainer } from "../../../se/se-player";
 import type { Resize } from "../../../window/resize";
 
 /** すべての戦闘画面ビュー生成処理で利用できるパラメータ */
-export type BattleViewCreatorParams = ResourcesContainer & {
-  /** SE再生 */
-  se: SEPlayer;
+export type BattleViewCreatorParams = ResourcesContainer & SEPlayerContainer & {
   /** プレイヤー情報 */
   player: Player;
   /** 敵情報 */

@@ -5,14 +5,14 @@ import type { ResourcesContainer } from "../../../resource";
 import { createEmptySoundResource } from "../../../resource/sound/empty-sound-resource";
 import { SOUND_IDS } from "../../../resource/sound/ids";
 import { SoundResource } from "../../../resource/sound/resource";
-import { SEPlayer } from "../../../se/se-player";
+import { SEPlayerContainer } from "../../../se/se-player";
 import { domUuid } from "../../../uuid/dom-uuid";
 import { ROOT_CLASS_INVISIBLE } from "./dom/class-name";
 import { extractElements } from "./dom/elements";
 import { rootInnerHTML } from "./dom/root-inner-html";
 
 /** 設定変更通知ダイアログプロパティ */
-export type ConfigChangedDialogProps = {
+export type ConfigChangedDialogProps = SEPlayerContainer & {
   /** ルートHTML要素 */
   root: HTMLElement;
   /** 背景 */
@@ -26,9 +26,6 @@ export type ConfigChangedDialogProps = {
 
   /** 排他制御 */
   exclusive: Exclusive;
-
-  /** SE再生オブジェクト */
-  se: SEPlayer;
 
   /** SE 値変更 */
   changeValue: SoundResource;
@@ -44,10 +41,7 @@ export type ConfigChangedDialogProps = {
 };
 
 /** 生成パラメータ */
-export type PropsCreatorParams = ResourcesContainer & {
-  /** se SE再生オブジェクト */
-  se: SEPlayer;
-};
+export type PropsCreatorParams = ResourcesContainer & SEPlayerContainer;
 
 /**
  * 設定変更通知ダイアログプロパティを生成する

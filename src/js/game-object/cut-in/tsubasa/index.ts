@@ -1,16 +1,14 @@
 import { Observable } from "rxjs";
 
 import type { ResourcesContainer } from "../../../resource";
-import { SEPlayer } from "../../../se/se-player";
+import { SEPlayerContainer } from "../../../se/se-player";
 import type { GameObjectAction } from "../../action/game-object-action";
 import { TsubasaCutIn } from "./tsubasa";
 import { EnemyTsubasaView } from "./view/enemy-tsubasa-view";
 import { PlayerTsubasaView } from "./view/player-tsubasa-view";
 
 /** 生成パラメータ */
-export type TsubasaCutInCreatorParams = ResourcesContainer & {
-  /** SE再生オブジェクト */
-  se: SEPlayer;
+export type TsubasaCutInCreatorParams = ResourcesContainer & SEPlayerContainer & {
   /** ゲームオブジェクトアクション */
   gameObjectAction: Observable<GameObjectAction>;
 };
