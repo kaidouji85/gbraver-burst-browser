@@ -46,3 +46,13 @@ class SimpleBGMManager implements BGMManager {
 export function createBGMManager(): BGMManager {
   return new SimpleBGMManager();
 }
+
+/**
+ * BGM管理オブジェクトコンテナ
+ * プロパティ、パラメータでBGMManagerを使う場合、
+ * 同じプロパティ名にしてオブジェクトの引き回しが出来るようにする
+ */
+export type BGMManagerContainer = {
+  /** BGM管理オブジェクト */
+  readonly bgm: BGMManager;
+};

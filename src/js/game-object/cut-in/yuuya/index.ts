@@ -1,21 +1,18 @@
 import { Observable } from "rxjs";
 
-import type { Resources } from "../../../resource";
-import { SEPlayer } from "../../../se/se-player";
+import type { ResourcesContainer } from "../../../resource";
+import { SEPlayerContainer } from "../../../se/se-player";
 import type { GameObjectAction } from "../../action/game-object-action";
 import { EnemyYuuyaView } from "./view/enemy-yuuya-view";
 import { PlayerYuuyaView } from "./view/player-yuuya-view";
 import { YuuyaCutIn } from "./yuuya";
 
 /** 生成パラメータ */
-export type YuuyaCutInCreatorParams = {
-  /** リソース管理オブジェクト */
-  resources: Resources;
-  /** SE再生オブジェクト */
-  se: SEPlayer;
-  /** ゲームオブジェクトアクション */
-  gameObjectAction: Observable<GameObjectAction>;
-};
+export type YuuyaCutInCreatorParams = ResourcesContainer &
+  SEPlayerContainer & {
+    /** ゲームオブジェクトアクション */
+    gameObjectAction: Observable<GameObjectAction>;
+  };
 
 /**
  * プレイヤー側 ユウヤ カットイン

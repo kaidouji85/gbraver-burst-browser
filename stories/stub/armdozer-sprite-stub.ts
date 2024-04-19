@@ -2,19 +2,16 @@ import { Observable } from "rxjs";
 
 import { GameObjectAction } from "../../src/js/game-object/action/game-object-action";
 import { ArmdozerSprite } from "../../src/js/game-object/armdozer/armdozer-sprite";
-import { Resources } from "../../src/js/resource";
-import { SEPlayer } from "../../src/js/se/se-player";
+import { ResourcesContainer } from "../../src/js/resource";
+import { SEPlayerContainer } from "../../src/js/se/se-player";
 import { TDGameObjectStub } from "./td-game-object-stub";
 
 /** アームドーザスプライト ジェネレータ パラメータ */
-type GeneratorParams = {
-  /** リソース管理オブジェクト */
-  resources: Resources;
-  /** ゲームオブジェクトアクション */
-  gameObjectAction: Observable<GameObjectAction>;
-  /** SE再生 */
-  se: SEPlayer;
-};
+type GeneratorParams = ResourcesContainer &
+  SEPlayerContainer & {
+    /** ゲームオブジェクトアクション */
+    gameObjectAction: Observable<GameObjectAction>;
+  };
 
 /**
  * アームドーザスプライト ジェネレータ

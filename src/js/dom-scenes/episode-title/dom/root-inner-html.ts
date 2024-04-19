@@ -1,15 +1,13 @@
 import { ArmdozerId } from "gbraver-burst-core";
 
 import { EpisodeNumber } from "../../../game/episodes/episode";
-import { Resources } from "../../../resource";
+import { ResourcesContainer } from "../../../resource";
 import { createArmdozerPictureConfig } from "./armdozer-picture-config";
 import { ROOT_CLASS } from "./class-name";
 import rootInnerHTMLTemplate from "./root-inner-html.hbs";
 
 /** ルート要素innerHTMLのパラメータ */
-export type RootInnerHTMLParams = {
-  /** リソース管理オブジェクト */
-  resources: Resources;
+export type RootInnerHTMLParams = ResourcesContainer & {
   /** エピソード番号 */
   number: EpisodeNumber;
   /** タイトル */

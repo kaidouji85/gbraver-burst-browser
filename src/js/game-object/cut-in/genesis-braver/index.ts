@@ -1,15 +1,13 @@
 import { Observable } from "rxjs";
 
-import { Resources } from "../../../resource";
+import { ResourcesContainer } from "../../../resource";
 import { GameObjectAction } from "../../action/game-object-action";
 import { GenesisBraverCutIn } from "./genesis-braver-cutin";
 import { EnemyGenesisBraverCutInView } from "./view/enemy-genesis-braver-cutin-view";
 import { PlayerGenesisBraverCutInView } from "./view/player-genesis-braver-cutin-view";
 
 /** ジェネシスブレイバー カットイン生成パラメータ */
-export type GenesisBraverCutInCreatorParams = {
-  /** リソース管理オブジェクト */
-  resources: Resources;
+export type GenesisBraverCutInCreatorParams = ResourcesContainer & {
   /** ゲームオブジェクトアクション */
   gameObjectAction: Observable<GameObjectAction>;
 };

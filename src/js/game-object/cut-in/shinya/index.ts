@@ -1,21 +1,18 @@
 import { Observable } from "rxjs";
 
-import type { Resources } from "../../../resource";
-import { SEPlayer } from "../../../se/se-player";
+import type { ResourcesContainer } from "../../../resource";
+import { SEPlayerContainer } from "../../../se/se-player";
 import type { GameObjectAction } from "../../action/game-object-action";
 import { ShinyaCutIn } from "./shinya";
 import { EnemyShinyaView } from "./view/enemy-shinya-view";
 import { PlayerShinyaView } from "./view/player-shinya-view";
 
 /** 生成パラメータ */
-export type ShinyaCutInCreatorParams = {
-  /** リソース管理オブジェクト */
-  resources: Resources;
-  /** 効果音再生オブジェクト */
-  se: SEPlayer;
-  /** ゲームオブジェクトアクション */
-  gameObjectAction: Observable<GameObjectAction>;
-};
+export type ShinyaCutInCreatorParams = ResourcesContainer &
+  SEPlayerContainer & {
+    /** ゲームオブジェクトアクション */
+    gameObjectAction: Observable<GameObjectAction>;
+  };
 
 /**
  * プレイヤー側 シンヤ カットイン

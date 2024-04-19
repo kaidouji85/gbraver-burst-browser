@@ -1,11 +1,11 @@
 import { Subject } from "rxjs";
 
 import { Exclusive } from "../../exclusive/exclusive";
-import { Resources } from "../../resource";
+import { ResourcesContainer } from "../../resource";
 import { createEmptySoundResource } from "../../resource/sound/empty-sound-resource";
 import { SOUND_IDS } from "../../resource/sound/ids";
 import { SoundResource } from "../../resource/sound/resource";
-import { SEPlayer } from "../../se/se-player";
+import { SEPlayerContainer } from "../../se/se-player";
 import { domUuid } from "../../uuid/dom-uuid";
 import { ROOT_CLASS } from "./dom/class-name";
 import { DataIDs } from "./dom/data-ids";
@@ -13,7 +13,7 @@ import { extractElements } from "./dom/elements";
 import { rootInnerHtml } from "./dom/root-inner-html";
 
 /** プライベートマッチゲストダイアログのプロパティ */
-export type PrivateMatchGuestDialogProps = {
+export type PrivateMatchGuestDialogProps = SEPlayerContainer & {
   /** ルートHTML要素 */
   root: HTMLElement;
   /** クロージャ */
@@ -28,8 +28,6 @@ export type PrivateMatchGuestDialogProps = {
   changeValue: SoundResource;
   /** 効果音 ボタンプッシュ */
   pushButton: SoundResource;
-  /** SE再生オブジェクト */
-  se: SEPlayer;
   /** ダイアログ閉じる通知 */
   dialogClosed: Subject<void>;
   /**
@@ -40,12 +38,7 @@ export type PrivateMatchGuestDialogProps = {
 };
 
 /** PrivateMatchGuestDialogProps生成パラメータ */
-export type PropsCreatorParams = {
-  /** リソース管理オブジェクト */
-  resources: Resources;
-  /** SE再生オブジェクト */
-  se: SEPlayer;
-};
+export type PropsCreatorParams = ResourcesContainer & SEPlayerContainer;
 
 /**
  * PrivateMatchGuestDialogPropsを生成する

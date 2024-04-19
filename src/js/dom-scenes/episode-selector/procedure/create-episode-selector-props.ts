@@ -1,10 +1,10 @@
 import { Subject } from "rxjs";
 
 import { Exclusive } from "../../../exclusive/exclusive";
-import { Resources } from "../../../resource";
+import { ResourcesContainer } from "../../../resource";
 import { createEmptySoundResource } from "../../../resource/sound/empty-sound-resource";
 import { SOUND_IDS } from "../../../resource/sound/ids";
-import { SEPlayer } from "../../../se/se-player";
+import { SEPlayerContainer } from "../../../se/se-player";
 import { BLOCK } from "../dom/class-name";
 import { createEpisodeImageCut } from "../dom/episode-image-cut";
 import {
@@ -24,14 +24,11 @@ import { EpisodeElement } from "../episode-element";
 import { EpisodeSelectorProps } from "../props";
 
 /** EpisodeSelectorProps生成パラメータ */
-export type PropsCreatorParams = {
-  /** リソース管理オブジェクト */
-  resources: Resources;
-  /** SE再生オブジェクト */
-  se: SEPlayer;
-  /** エピソード */
-  episodes: Episode[];
-};
+export type PropsCreatorParams = ResourcesContainer &
+  SEPlayerContainer & {
+    /** エピソード */
+    episodes: Episode[];
+  };
 
 /**
  * EpisodeSelectorPropsを生成する

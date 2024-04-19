@@ -1,7 +1,7 @@
 import * as THREE from "three";
 
 import { toSilhouette } from "../../../../canvas/to-silhouette";
-import { Resources } from "../../../../resource";
+import { ResourcesContainer } from "../../../../resource";
 import { TextureId } from "../../../../resource/texture/resource";
 import { CanvasDisposeTexture } from "../../../../texture/canvas-dispose-texture";
 import { ArmdozerAnimation } from "../../mesh/armdozer-animation";
@@ -34,9 +34,7 @@ function createOutlineSilhouetteTexture(texture: THREE.Texture): THREE.Texture {
 }
 
 /** パラメータ */
-type Params = {
-  /** リソース管理オブジェクト */
-  resources: Resources;
+type Params = ResourcesContainer & {
   /** テクスチャID */
   textureId: TextureId;
   /** 最大アニメーション枚数 */

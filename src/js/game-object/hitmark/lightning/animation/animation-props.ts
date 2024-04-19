@@ -1,13 +1,11 @@
-import { SEPlayer } from "../../../../se/se-player";
+import { SEPlayerContainer } from "../../../../se/se-player";
 import { LightningModel } from "../model/lightning-model";
 import { LightningSounds } from "../sounds/lightning-sounds";
 
 /** 電撃ヒットマーク アニメーション プロパティ */
-export type LightningAnimationProps = {
+export type LightningAnimationProps = SEPlayerContainer & {
   /** モデル */
   model: LightningModel;
   /** サウンド */
   sounds: LightningSounds;
-  /** SE再生オブジェクト */
-  se: SEPlayer;
 };

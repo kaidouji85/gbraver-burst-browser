@@ -1,7 +1,7 @@
 import { ArmdozerId } from "gbraver-burst-core";
 
 import { getArmdozerIconPathId } from "../../../path/armdozer-icon-path";
-import { Resources } from "../../../resource";
+import { ResourcesContainer } from "../../../resource";
 import { waitElementLoaded } from "../../../wait/wait-element-loaded";
 import { BLOCK } from "../dom/class-name";
 import { extractArmdozerIcon, extractCaption } from "../dom/extract-element";
@@ -9,9 +9,7 @@ import { rootInnerHTML } from "../dom/root-inner-html";
 import { StageTitleProps } from "../props";
 
 /** StageTitleProps生成パラメータ */
-export type CreateStageTitleParams = {
-  /** リソース管理オブジェクト */
-  resources: Resources;
+export type CreateStageTitleParams = ResourcesContainer & {
   /** ステージレベル */
   level: number;
   /** 対戦するアームドーザのID */

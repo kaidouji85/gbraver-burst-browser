@@ -1,22 +1,17 @@
 import { Observable } from "rxjs";
 
-import type { Resources } from "../../resource";
+import type { ResourcesContainer } from "../../resource";
 import type { GameObjectAction } from "../action/game-object-action";
 import { Gauge } from "./gauge";
 import { EnemyGaugeView } from "./view/enemy-gauge-view";
 import { PlayerGaugeView } from "./view/player-gauge-view";
 
 /** ゲージのパラメータ */
-type Param = {
-  /** リソース管理オブジェクト */
-  resources: Resources;
-
+type Param = ResourcesContainer & {
   /** ゲームオブジェクトアクション */
   gameObjectAction: Observable<GameObjectAction>;
-
   /** 最大HP */
   hp: number;
-
   /** 最大バッテリー */
   battery: number;
 };

@@ -1,14 +1,14 @@
 import { BrowserSDK } from "@gbraver-burst-network/browser-sdk";
 import { Observable } from "rxjs";
 
-import { BGMManager } from "../../bgm/bgm-manager";
+import { BGMManagerContainer } from "../../bgm/bgm-manager";
 import { DOMFader } from "../../components/dom-fader/dom-fader";
 import { CssHUDUIScale } from "../../css/hud-ui-scale";
 import { GameLoop } from "../../game-loop/game-loop";
 import { Renderer } from "../../render";
-import { Resources } from "../../resource";
+import { ResourcesContainer } from "../../resource";
 import { ResourceRoot } from "../../resource/resource-root";
-import { SEPlayer } from "../../se/se-player";
+import { SEPlayerContainer } from "../../se/se-player";
 import { PerformanceStats } from "../../stats/performance-stats";
 import { PushWindow } from "../../window/push-window";
 import { Resize } from "../../window/resize";
@@ -25,7 +25,10 @@ import { TDSceneBinder } from "../td-scene-binder";
  * ゲームプロパティ
  * 本オブジェクトはゲーム管理オブジェクト内部、各種ヘルパーで利用することを想定している
  */
-export interface GameProps {
+export interface GameProps
+  extends BGMManagerContainer,
+    ResourcesContainer,
+    SEPlayerContainer {
   /** パフォーマンス統計、表示されていない場合はnullが入る */
   performanceStats: PerformanceStats | null;
   /** サービスワーカーを利用するか否か、trueで利用する */
@@ -72,16 +75,10 @@ export interface GameProps {
   tdBinder: TDSceneBinder;
   /** リソースルート */
   resourceRoot: ResourceRoot;
-  /** リソース管理オブジェクト */
-  resources: Resources;
   /** 全リソースを読み込んだか否かのフラグ、trueで全リソースを読み込んだ */
   isFullResourceLoaded: boolean;
   /** ServiceWorkerRegistrationのキャッシュ */
   serviceWorker: ServiceWorkerRegistration | null | undefined;
-  /** BGM管理オブジェクト */
-  bgm: BGMManager;
-  /** SE再生オブジェクト */
-  se: SEPlayer;
   /** 開発中のエピソードをプレイできるか否かのフラグ、trueでプレイできる */
   canPlayEpisodeInDevelopment: boolean;
   /** 開発中のリソースをロードするか否かのフラグ、trueでロードする */

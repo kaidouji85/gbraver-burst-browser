@@ -11,13 +11,15 @@ import type {
   NeoLandozerCutInModel,
 } from "../model/neo-landozer-cutin-model";
 import type { NeoLandozerCutInView } from "./neo-landozer-cutin-view";
+
+/** アニメーション枚数 */
 export const MAX_ANIMATION = 4;
+/** 幅 */
 export const WIDTH = 800;
+/** 高 */
 export const HEIGHT = 800;
 
-/**
- * プレイヤー側 ネオランドーザ カットイン ビュー
- */
+/** プレイヤー側 ネオランドーザ カットイン ビュー */
 export class PlayerNeoLandozerCutInView implements NeoLandozerCutInView {
   #group: THREE.Group;
   #cutInUp: HorizontalAnimationMesh;

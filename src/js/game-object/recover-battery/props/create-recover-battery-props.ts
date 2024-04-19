@@ -1,19 +1,16 @@
-import { Resources } from "../../../resource";
-import { SEPlayer } from "../../../se/se-player";
+import { ResourcesContainer } from "../../../resource";
+import { SEPlayerContainer } from "../../../se/se-player";
 import { createInitialValue } from "../model/initial-value";
 import { RecoverBatterySounds } from "../sounds/recover-battery-sounds";
 import { RecoverBatteryView } from "../view/recover-battery-view";
 import { RecoverBatteryProps } from "./recover-battery-props";
 
 /** RecoverBatteryProps生成パラメータ */
-export type PropsCreatorParams = {
-  /** ビュー */
-  view: RecoverBatteryView;
-  /** リソース管理オブジェクト */
-  resources: Resources;
-  /** SE再生オブジェクト */
-  se: SEPlayer;
-};
+export type PropsCreatorParams = ResourcesContainer &
+  SEPlayerContainer & {
+    /** ビュー */
+    view: RecoverBatteryView;
+  };
 
 /**
  * RecoverBatteryPropsを生成する

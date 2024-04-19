@@ -2,22 +2,20 @@ import "../../src/css/style.css";
 
 import * as TWEEN from "@tweenjs/tween.js";
 
-import { BGMManager, createBGMManager } from "../../src/js/bgm/bgm-manager";
+import {
+  BGMManagerContainer,
+  createBGMManager,
+} from "../../src/js/bgm/bgm-manager";
 import { gameLoopStream } from "../../src/js/game-loop/game-loop";
-import { Resources } from "../../src/js/resource";
+import { ResourcesContainer } from "../../src/js/resource";
 import { developingFullResourceLoading } from "../../src/js/resource/loading/full-resource-loading";
-import { createSEPlayer, SEPlayer } from "../../src/js/se/se-player";
+import { createSEPlayer, SEPlayerContainer } from "../../src/js/se/se-player";
 import { StorybookResourceRoot } from "../storybook-resource-root";
 
 /** 生成パラメータ */
-type DOMCreatorParams = {
-  /** リソース管理オブジェクト */
-  resources: Resources;
-  /** BGM管理オブジェクト */
-  bgm: BGMManager;
-  /** SE再生オブジェクト */
-  se: SEPlayer;
-};
+type DOMCreatorParams = BGMManagerContainer &
+  ResourcesContainer &
+  SEPlayerContainer;
 
 /**
  * HTML要素生成コールバック関数

@@ -1,21 +1,18 @@
 import { Observable } from "rxjs";
 
-import type { Resources } from "../../../resource";
-import { SEPlayer } from "../../../se/se-player";
+import type { ResourcesContainer } from "../../../resource";
+import { SEPlayerContainer } from "../../../se/se-player";
 import type { GameObjectAction } from "../../action/game-object-action";
 import { GaiCutIn } from "./gai";
 import { EnemyGaiView } from "./view/enemy-gai-view";
 import { PlayerGaiView } from "./view/player-gai-view";
 
 /** 生成パラメータ */
-export type GaiCutInCreatorParams = {
-  /** リソース管理オブジェクト */
-  resources: Resources;
-  /** 効果音再生オブジェクト */
-  se: SEPlayer;
-  /** ゲームオブジェクトアクション */
-  gameObjectAction: Observable<GameObjectAction>;
-};
+export type GaiCutInCreatorParams = ResourcesContainer &
+  SEPlayerContainer & {
+    /** ゲームオブジェクトアクション */
+    gameObjectAction: Observable<GameObjectAction>;
+  };
 
 /**
  * プレイヤー側 ガイ カットイン

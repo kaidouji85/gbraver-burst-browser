@@ -1,21 +1,18 @@
 import { Observable } from "rxjs";
 
-import type { Resources } from "../../resource";
-import { SEPlayer } from "../../se/se-player";
+import type { ResourcesContainer } from "../../resource";
+import { SEPlayerContainer } from "../../se/se-player";
 import type { GameObjectAction } from "../action/game-object-action";
 import { DamageHalved } from "./damage-halved";
 import { EnemyDamageHalvedView } from "./view/enemy-damage-halved-view";
 import { PlayerDamageHalvedView } from "./view/player-damage-halved-view";
 
 /** ダメージ半減生成パラメータ */
-export type DamageHalvedCreatorParams = {
-  /** リソース管理オブジェクト */
-  resources: Resources;
-  /** SE再生オブジェクト */
-  se: SEPlayer;
-  /** ゲームオブジェクトアクション */
-  gameObjectAction: Observable<GameObjectAction>;
-};
+export type DamageHalvedCreatorParams = ResourcesContainer &
+  SEPlayerContainer & {
+    /** ゲームオブジェクトアクション */
+    gameObjectAction: Observable<GameObjectAction>;
+  };
 
 /**
  * プレイヤー ダメージ半減 ポップアップ

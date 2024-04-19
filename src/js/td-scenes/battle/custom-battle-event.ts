@@ -8,7 +8,7 @@ import type {
 import { Observable } from "rxjs";
 
 import { Animate } from "../../animation/animate";
-import { SEPlayer } from "../../se/se-player";
+import { SEPlayerContainer } from "../../se/se-player";
 import type { PushWindow } from "../../window/push-window";
 import { BattleSceneSounds } from "./sounds/sounds";
 import { BattleSceneView } from "./view";
@@ -17,7 +17,7 @@ import { BattleSceneView } from "./view";
  * 全カスタムイベントで利用できるプロパティ
  * BattleScenePropsからカスタムバトルイベントで利用可能なプロパティを抜粋した
  */
-export type CustomBattleEventProps = {
+export type CustomBattleEventProps = SEPlayerContainer & {
   /** 戦闘画面を開いているプレイヤーのID */
   readonly playerId: PlayerId;
   /** 戦闘シーンビュー */
@@ -26,8 +26,6 @@ export type CustomBattleEventProps = {
   readonly pushWindow: Observable<PushWindow>;
   /** 戦闘シーン効果音 */
   readonly sounds: BattleSceneSounds;
-  /** SE再生オブジェクト */
-  readonly se: SEPlayer;
   /** ステートヒストリー */
   readonly stateHistory: GameState[];
 };
