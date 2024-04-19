@@ -12,7 +12,7 @@ import type { SafeAreaInset } from "../../../safe-area/safe-area-inset";
 import { createSafeAreaInset } from "../../../safe-area/safe-area-inset";
 import type { BattleSceneAction } from "../actions";
 import { BattleViewCreatorParams } from "./creator-params";
-import { createDOMLayer, DOMLayer } from "./dom/dom-layer";
+import { createDOMLayer, DOMLayer } from "./dom";
 import { HudLayer } from "./hud";
 import { ThreeDimensionLayer } from "./td";
 import { tracking } from "./tracking";

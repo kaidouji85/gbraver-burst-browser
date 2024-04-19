@@ -41,6 +41,6 @@ export function createDOMLayer(params: BattleViewCreatorParams): DOMLayer {
       props.miniController.destructor();
     },
     battleActionNotifier: () => battleAction,
-    getHTMLElements: () => getHTMLElements(props)
-  }
+    getHTMLElements: () => getHTMLElements(props),
+  };
 }
