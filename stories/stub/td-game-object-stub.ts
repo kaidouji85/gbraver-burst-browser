@@ -11,7 +11,7 @@ import { gameObjectStream } from "../../src/js/game-object/action/game-object-ac
 import { TDCamera } from "../../src/js/game-object/camera/td";
 import { Renderer } from "../../src/js/render";
 import type { OverlapEvent } from "../../src/js/render/overlap-event/overlap-event";
-import type { Resources } from "../../src/js/resource";
+import type { ResourcesContainer } from "../../src/js/resource";
 import { developingFullResourceLoading } from "../../src/js/resource/loading/full-resource-loading";
 import type { SafeAreaInset } from "../../src/js/safe-area/safe-area-inset";
 import { createSafeAreaInset } from "../../src/js/safe-area/safe-area-inset";
@@ -21,9 +21,7 @@ import { resizeStream } from "../../src/js/window/resize";
 import { StorybookResourceRoot } from "../storybook-resource-root";
 
 /** Object3D生成関数パラメータ */
-type Object3DCreatorParams = {
-  /** リソース管理オブジェクト */
-  resources: Resources;
+type Object3DCreatorParams = ResourcesContainer & {
   /** ゲームオブジェクトアクション */
   gameObjectAction: Observable<GameObjectAction>;
   /** カメラ */

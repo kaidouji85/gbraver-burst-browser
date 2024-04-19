@@ -6,7 +6,7 @@ import { DOMFader } from "../../components/dom-fader/dom-fader";
 import { CssHUDUIScale } from "../../css/hud-ui-scale";
 import { GameLoop } from "../../game-loop/game-loop";
 import { Renderer } from "../../render";
-import { Resources } from "../../resource";
+import { ResourcesContainer } from "../../resource";
 import { ResourceRoot } from "../../resource/resource-root";
 import { SEPlayer } from "../../se/se-player";
 import { PerformanceStats } from "../../stats/performance-stats";
@@ -25,7 +25,7 @@ import { TDSceneBinder } from "../td-scene-binder";
  * ゲームプロパティ
  * 本オブジェクトはゲーム管理オブジェクト内部、各種ヘルパーで利用することを想定している
  */
-export interface GameProps extends BGMManagerContainer {
+export interface GameProps extends BGMManagerContainer ,ResourcesContainer {
   /** パフォーマンス統計、表示されていない場合はnullが入る */
   performanceStats: PerformanceStats | null;
   /** サービスワーカーを利用するか否か、trueで利用する */
@@ -72,8 +72,6 @@ export interface GameProps extends BGMManagerContainer {
   tdBinder: TDSceneBinder;
   /** リソースルート */
   resourceRoot: ResourceRoot;
-  /** リソース管理オブジェクト */
-  resources: Resources;
   /** 全リソースを読み込んだか否かのフラグ、trueで全リソースを読み込んだ */
   isFullResourceLoaded: boolean;
   /** ServiceWorkerRegistrationのキャッシュ */

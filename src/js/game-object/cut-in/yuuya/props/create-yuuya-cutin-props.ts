@@ -1,4 +1,4 @@
-import { Resources } from "../../../../resource";
+import { ResourcesContainer } from "../../../../resource";
 import { SEPlayer } from "../../../../se/se-player";
 import { createInitialValue } from "../model/initial-value";
 import { YuuyaSounds } from "../sounds/yuuya-sounds";
@@ -6,11 +6,9 @@ import { YuuyaView } from "../view/yuuya-view";
 import { YuuyaCutInProps } from "./yuuya-cutin-props";
 
 /** ユウヤ カットイン プロパティ生成パラメータ */
-export type PropsCreatorParams = {
+export type PropsCreatorParams = ResourcesContainer & {
   /** ビュー */
   view: YuuyaView;
-  /** リソース管理オブジェクト */
-  resources: Resources;
   /** SE再生オブジェクト */
   se: SEPlayer;
 };

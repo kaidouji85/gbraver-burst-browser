@@ -1,6 +1,6 @@
 import { Observable } from "rxjs";
 
-import type { Resources } from "../../resource";
+import type { ResourcesContainer } from "../../resource";
 import { SEPlayer } from "../../se/se-player";
 import type { GameObjectAction } from "../action/game-object-action";
 import { PilotButton } from "./pilot-button";
@@ -11,9 +11,7 @@ import { TsubasaIcon } from "./view/tsubasa";
 import { YuuyaIcon } from "./view/yuuya";
 
 /** 生成パラメータ */
-export type PilotButtonCreatorParams = {
-  /** リソース管理オブジェクト */
-  resources: Resources;
+export type PilotButtonCreatorParams = ResourcesContainer & {
   /** SE再生オブジェクト */
   se: SEPlayer;
   /** ゲームオブジェクトアクション */

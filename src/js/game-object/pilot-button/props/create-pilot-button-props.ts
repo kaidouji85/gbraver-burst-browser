@@ -1,6 +1,6 @@
 import { Observable, Subject } from "rxjs";
 
-import { Resources } from "../../../resource";
+import { ResourcesContainer } from "../../../resource";
 import { SEPlayer } from "../../../se/se-player";
 import { GameObjectAction } from "../../action/game-object-action";
 import { createInitialValue } from "../model/initial-value";
@@ -10,9 +10,7 @@ import { PilotIcon } from "../view/pilot-icon";
 import { PilotButtonProps } from "./pilot-button-props";
 
 /** PilotButtonProps生成パラメータ */
-export type PropsCreatorParams = {
-  /** リソース管理オブジェクト */
-  resources: Resources;
+export type PropsCreatorParams = ResourcesContainer & {
   /** SE再生オブジェクト */
   se: SEPlayer;
   /** パイロットアイコン */

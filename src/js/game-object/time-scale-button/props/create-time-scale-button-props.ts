@@ -1,7 +1,7 @@
 import * as TWEEN from "@tweenjs/tween.js";
 import { Observable, Subject } from "rxjs";
 
-import { Resources } from "../../../resource";
+import { ResourcesContainer } from "../../../resource";
 import { SEPlayer } from "../../../se/se-player";
 import { GameObjectAction } from "../../action/game-object-action";
 import { createInitialValue } from "../model/initial-value";
@@ -10,9 +10,7 @@ import { TimeScaleButtonView } from "../view/time-scale-button-view";
 import { TimeScaleButtonProps } from "./time-scale-button-props";
 
 /** TimeScaleButtonProps生成パラメータ */
-export type PropsCreatorParams = {
-  /** リソース管理オブジェクト */
-  resources: Resources;
+export type PropsCreatorParams = ResourcesContainer & {
   /** SE再生オブジェクト */
   se: SEPlayer;
   /** ゲームオブジェクトアクション */

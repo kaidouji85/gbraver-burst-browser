@@ -8,7 +8,7 @@ import { GameLoop } from "../../../game-loop/game-loop";
 import { OverlapNotifier } from "../../../render/overlap-notifier";
 import { RendererDomGetter } from "../../../render/renderer-dom-getter";
 import { Rendering } from "../../../render/rendering";
-import { Resources } from "../../../resource";
+import { ResourcesContainer } from "../../../resource";
 import { SoundId } from "../../../resource/sound/resource";
 import { SEPlayer } from "../../../se/se-player";
 import { PushWindow } from "../../../window/push-window";
@@ -28,9 +28,8 @@ export interface OwnRenderer
 
 /** 戦闘シーンプロパティ生成関数のパラメータ */
 export type BattleScenePropsCreatorParams = BGMManagerContainer &
+  ResourcesContainer &
   Readonly<{
-    /** リソース管理オブジェクト */
-    resources: Resources;
     /** SE再生オブジェクト */
     se: SEPlayer;
     /** 再生するBGM ID */

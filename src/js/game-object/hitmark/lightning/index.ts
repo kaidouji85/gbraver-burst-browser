@@ -1,6 +1,6 @@
 import { Observable } from "rxjs";
 
-import type { Resources } from "../../../resource";
+import type { ResourcesContainer } from "../../../resource";
 import { SEPlayer } from "../../../se/se-player";
 import type { GameObjectAction } from "../../action/game-object-action";
 import { Lightning } from "./lightning";
@@ -8,9 +8,7 @@ import { EnemyLightningView } from "./view/enemy-lightning-view";
 import { PlayerLightningView } from "./view/player-lightning-view";
 
 /** 電撃ヒットマーク生成パラメータ */
-export type LightningCreatorParams = {
-  /** リソース管理オブジェクト */
-  resources: Resources;
+export type LightningCreatorParams = ResourcesContainer & {
   /** SE再生オブジェクト */
   se: SEPlayer;
   /** ゲームオブジェクトアクション */

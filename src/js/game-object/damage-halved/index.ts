@@ -1,6 +1,6 @@
 import { Observable } from "rxjs";
 
-import type { Resources } from "../../resource";
+import type { ResourcesContainer } from "../../resource";
 import { SEPlayer } from "../../se/se-player";
 import type { GameObjectAction } from "../action/game-object-action";
 import { DamageHalved } from "./damage-halved";
@@ -8,9 +8,7 @@ import { EnemyDamageHalvedView } from "./view/enemy-damage-halved-view";
 import { PlayerDamageHalvedView } from "./view/player-damage-halved-view";
 
 /** ダメージ半減生成パラメータ */
-export type DamageHalvedCreatorParams = {
-  /** リソース管理オブジェクト */
-  resources: Resources;
+export type DamageHalvedCreatorParams = ResourcesContainer & {
   /** SE再生オブジェクト */
   se: SEPlayer;
   /** ゲームオブジェクトアクション */
