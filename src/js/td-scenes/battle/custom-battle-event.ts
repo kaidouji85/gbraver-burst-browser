@@ -3,32 +3,21 @@ import type {
   BurstCommand,
   GameState,
   PilotSkillCommand,
-  PlayerId,
 } from "gbraver-burst-core";
-import { Observable } from "rxjs";
 
 import { Animate } from "../../animation/animate";
-import { SEPlayerContainer } from "../../se/se-player";
-import type { PushWindow } from "../../window/push-window";
-import { BattleSceneSounds } from "./sounds/sounds";
-import { BattleSceneView } from "./view";
+import { BattleSceneProps } from "./battle-scene-props";
 
 /**
  * 全カスタムイベントで利用できるプロパティ
  * BattleScenePropsからカスタムバトルイベントで利用可能なプロパティを抜粋した
  */
-export type CustomBattleEventProps = SEPlayerContainer & {
-  /** 戦闘画面を開いているプレイヤーのID */
-  readonly playerId: PlayerId;
-  /** 戦闘シーンビュー */
-  readonly view: BattleSceneView;
-  /** window押下ストリーム */
-  readonly pushWindow: Observable<PushWindow>;
-  /** 戦闘シーン効果音 */
-  readonly sounds: BattleSceneSounds;
-  /** ステートヒストリー */
-  readonly stateHistory: GameState[];
-};
+export type CustomBattleEventProps = Readonly<
+  Pick<
+    BattleSceneProps,
+    "se" | "playerId" | "view" | "pushWindow" | "sounds" | "stateHistory"
+  >
+>;
 
 /** ステート更新開始イベントのプロパティ */
 export type StateUpdateStarted = CustomBattleEventProps & {
