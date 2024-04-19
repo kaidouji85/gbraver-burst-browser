@@ -2,7 +2,10 @@ import "../../src/css/style.css";
 
 import * as TWEEN from "@tweenjs/tween.js";
 
-import { BGMManagerContainer, createBGMManager } from "../../src/js/bgm/bgm-manager";
+import {
+  BGMManagerContainer,
+  createBGMManager,
+} from "../../src/js/bgm/bgm-manager";
 import { gameLoopStream } from "../../src/js/game-loop/game-loop";
 import { Resources } from "../../src/js/resource";
 import { developingFullResourceLoading } from "../../src/js/resource/loading/full-resource-loading";

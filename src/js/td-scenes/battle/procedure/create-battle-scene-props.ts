@@ -27,36 +27,37 @@ export interface OwnRenderer
     Rendering {}
 
 /** 戦闘シーンプロパティ生成関数のパラメータ */
-export type BattleScenePropsCreatorParams = BGMManagerContainer & Readonly<{
-  /** リソース管理オブジェクト */
-  resources: Resources;
-  /** SE再生オブジェクト */
-  se: SEPlayer;
-  /** 再生するBGM ID */
-  playingBGM: SoundId;
-  /** レンダラ */
-  renderer: OwnRenderer;
-  /** バトル進行オブジェクト */
-  battleProgress: BattleProgress;
-  /** アニメーションスケールの初期値 */
-  initialAnimationTimeScale: number;
-  /** 初期ゲームステート */
-  initialState: GameState[];
-  /** プレイヤー情報 */
-  player: Player;
-  /** 敵情報 */
-  enemy: Player;
-  /** ゲームループストリーム */
-  gameLoop: Observable<GameLoop>;
-  /** リサイズストリーム */
-  resize: Observable<Resize>;
-  /** window押下ストリーム */
-  pushWindow: Observable<PushWindow>;
-  /** カスタムバトルイベント */
-  customBattleEvent?: CustomBattleEvent;
-  /** コントローラータイプ */
-  controllerType: BattleControllerType;
-}>;
+export type BattleScenePropsCreatorParams = BGMManagerContainer &
+  Readonly<{
+    /** リソース管理オブジェクト */
+    resources: Resources;
+    /** SE再生オブジェクト */
+    se: SEPlayer;
+    /** 再生するBGM ID */
+    playingBGM: SoundId;
+    /** レンダラ */
+    renderer: OwnRenderer;
+    /** バトル進行オブジェクト */
+    battleProgress: BattleProgress;
+    /** アニメーションスケールの初期値 */
+    initialAnimationTimeScale: number;
+    /** 初期ゲームステート */
+    initialState: GameState[];
+    /** プレイヤー情報 */
+    player: Player;
+    /** 敵情報 */
+    enemy: Player;
+    /** ゲームループストリーム */
+    gameLoop: Observable<GameLoop>;
+    /** リサイズストリーム */
+    resize: Observable<Resize>;
+    /** window押下ストリーム */
+    pushWindow: Observable<PushWindow>;
+    /** カスタムバトルイベント */
+    customBattleEvent?: CustomBattleEvent;
+    /** コントローラータイプ */
+    controllerType: BattleControllerType;
+  }>;
 
 /**
  * 戦闘シーンプロパティを生成する
