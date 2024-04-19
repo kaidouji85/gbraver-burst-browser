@@ -1,19 +1,16 @@
-import { Resources } from "../../../resource";
-import { SEPlayer } from "../../../se/se-player";
+import { ResourcesContainer } from "../../../resource";
+import { SEPlayerContainer } from "../../../se/se-player";
 import { createInitialValue } from "../model/initial-value";
 import { BatteryEnchantmentSounds } from "../sounds/battery-enchantment-sounds";
 import { BatteryEnchantmentView } from "../view/battery-enchantment-view";
 import { BatteryEnchantmentProps } from "./battery-enchantment-props";
 
 /** BatteryEnchantmentProps生成パラメータ */
-export type PropsCreatorParams = {
-  /** ビュー */
-  view: BatteryEnchantmentView;
-  /** リソース管理オブジェクト */
-  resources: Resources;
-  /** SE再生オブジェクト */
-  se: SEPlayer;
-};
+export type PropsCreatorParams = ResourcesContainer &
+  SEPlayerContainer & {
+    /** ビュー */
+    view: BatteryEnchantmentView;
+  };
 
 /**
  * BatteryEnchantmentPropsを生成する

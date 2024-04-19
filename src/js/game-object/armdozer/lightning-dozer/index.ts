@@ -1,21 +1,18 @@
 import { Observable } from "rxjs";
 
-import type { Resources } from "../../../resource";
-import { SEPlayer } from "../../../se/se-player";
+import type { ResourcesContainer } from "../../../resource";
+import { SEPlayerContainer } from "../../../se/se-player";
 import type { GameObjectAction } from "../../action/game-object-action";
 import { LightningDozer } from "./lightning-dozer";
 import { EnemyLightningDozerView } from "./view/enemy-lightning-dozer-view";
 import { PlayerLightingDozerView } from "./view/player-lighting-dozer-view";
 
 /** ライトニングドーザ生成関数パラメータ */
-type LightningDozerCreatorParams = {
-  /** リソース管理オブジェクト */
-  resources: Resources;
-  /** SE再生 */
-  se: SEPlayer;
-  /** ゲームオブジェクトアクション */
-  gameObjectAction: Observable<GameObjectAction>;
-};
+type LightningDozerCreatorParams = ResourcesContainer &
+  SEPlayerContainer & {
+    /** ゲームオブジェクトアクション */
+    gameObjectAction: Observable<GameObjectAction>;
+  };
 
 /**
  * プレイヤー側のライトニングドーザを生成する

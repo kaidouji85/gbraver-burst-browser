@@ -11,24 +11,21 @@ import { gameObjectStream } from "../../src/js/game-object/action/game-object-ac
 import { PlainHUDCamera } from "../../src/js/game-object/camera/plain-hud/plain-hud-camera";
 import { Renderer } from "../../src/js/render";
 import type { OverlapEvent } from "../../src/js/render/overlap-event/overlap-event";
-import type { Resources } from "../../src/js/resource";
+import type { ResourcesContainer } from "../../src/js/resource";
 import { developingFullResourceLoading } from "../../src/js/resource/loading/full-resource-loading";
 import type { SafeAreaInset } from "../../src/js/safe-area/safe-area-inset";
 import { createSafeAreaInset } from "../../src/js/safe-area/safe-area-inset";
-import { createSEPlayer, SEPlayer } from "../../src/js/se/se-player";
+import { createSEPlayer, SEPlayerContainer } from "../../src/js/se/se-player";
 import type { Resize } from "../../src/js/window/resize";
 import { resizeStream } from "../../src/js/window/resize";
 import { StorybookResourceRoot } from "../storybook-resource-root";
 
 /** Object3D生成関数パラメータ */
-type Object3DParams = {
-  /** リソース管理オブジェクト */
-  resources: Resources;
-  /** SE再生オブジェクト */
-  se: SEPlayer;
-  /** ゲームオブジェクトアクション */
-  gameObjectAction: Observable<GameObjectAction>;
-};
+type Object3DParams = ResourcesContainer &
+  SEPlayerContainer & {
+    /** ゲームオブジェクトアクション */
+    gameObjectAction: Observable<GameObjectAction>;
+  };
 
 /**
  * Object3D生成関数

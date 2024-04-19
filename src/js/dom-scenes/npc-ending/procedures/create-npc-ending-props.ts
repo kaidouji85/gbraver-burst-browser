@@ -1,11 +1,11 @@
 import { Subject } from "rxjs";
 
-import { BGMManager } from "../../../bgm/bgm-manager";
-import { Resources } from "../../../resource";
+import { BGMManagerContainer } from "../../../bgm/bgm-manager";
+import { ResourcesContainer } from "../../../resource";
 import { PathIds } from "../../../resource/path/ids";
 import { createEmptySoundResource } from "../../../resource/sound/empty-sound-resource";
 import { SOUND_IDS } from "../../../resource/sound/ids";
-import { SEPlayer } from "../../../se/se-player";
+import { SEPlayerContainer } from "../../../se/se-player";
 import { domUuid } from "../../../uuid/dom-uuid";
 import { waitElementLoaded } from "../../../wait/wait-element-loaded";
 import { ROOT_CLASS } from "../dom/class-name";
@@ -14,14 +14,9 @@ import { rootInnerHTML } from "../dom/root-inner-html";
 import { NPCEndingProps } from "../props";
 
 /** NPCEndingProps生成パラメータ */
-export type PropsCreatorParams = {
-  /** リソース管理オブジェクト */
-  resources: Resources;
-  /** BGM管理オブジェクト */
-  bgm: BGMManager;
-  /** SE再生オブジェクト */
-  se: SEPlayer;
-};
+export type PropsCreatorParams = BGMManagerContainer &
+  ResourcesContainer &
+  SEPlayerContainer;
 
 /**
  * NPCEndingPropsを生成する

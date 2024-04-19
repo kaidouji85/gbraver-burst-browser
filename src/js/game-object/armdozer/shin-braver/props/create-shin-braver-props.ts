@@ -1,19 +1,16 @@
-import { Resources } from "../../../../resource";
-import { SEPlayer } from "../../../../se/se-player";
+import { ResourcesContainer } from "../../../../resource";
+import { SEPlayerContainer } from "../../../../se/se-player";
 import { createInitialValue } from "../model/initial-value";
 import { ShinBraverSounds } from "../sounds/shin-braver-sounds";
 import { ShinBraverView } from "../view/shin-braver-view";
 import { ShinBraverProps } from "./shin-braver-props";
 
 /** ShinBraverProps生成パラメータ */
-export type PropsCreatorParams = {
-  /** ビュー */
-  view: ShinBraverView;
-  /** リソース管理オブジェクト */
-  resources: Resources;
-  /** SE再生 */
-  se: SEPlayer;
-};
+export type PropsCreatorParams = ResourcesContainer &
+  SEPlayerContainer & {
+    /** ビュー */
+    view: ShinBraverView;
+  };
 
 /**
  * ShinBraverPropsを生成する

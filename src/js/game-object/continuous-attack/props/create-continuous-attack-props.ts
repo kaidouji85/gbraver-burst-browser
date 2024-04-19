@@ -1,19 +1,16 @@
-import { Resources } from "../../../resource";
-import { SEPlayer } from "../../../se/se-player";
+import { ResourcesContainer } from "../../../resource";
+import { SEPlayerContainer } from "../../../se/se-player";
 import { createInitialValue } from "../model/initial-value";
 import { ContinuousAttackSounds } from "../sounds/continuous-attack-sounds";
 import { ContinuousAttackView } from "../view/continuous-attack-view";
 import { ContinuousAttackProps } from "./continuous-attack-props";
 
 /** ContinuousAttackProps生成パラメータ */
-export type PropsCreatorParams = {
-  /** ビュー */
-  view: ContinuousAttackView;
-  /** リソース管理オブジェクト */
-  resources: Resources;
-  /** SE再生オブジェクト */
-  se: SEPlayer;
-};
+export type PropsCreatorParams = ResourcesContainer &
+  SEPlayerContainer & {
+    /** ビュー */
+    view: ContinuousAttackView;
+  };
 
 /**
  * ContinuousAttackPropsを生成する

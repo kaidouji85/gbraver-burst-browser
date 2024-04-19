@@ -1,10 +1,10 @@
 import { Subject } from "rxjs";
 
 import { Exclusive } from "../../../exclusive/exclusive";
-import { Resources } from "../../../resource";
+import { ResourcesContainer } from "../../../resource";
 import { createEmptySoundResource } from "../../../resource/sound/empty-sound-resource";
 import { SOUND_IDS } from "../../../resource/sound/ids";
-import { SEPlayer } from "../../../se/se-player";
+import { SEPlayerContainer } from "../../../se/se-player";
 import { ROOT_CLASS_NAME } from "../dom/class-name";
 import {
   extractCloseButton,
@@ -15,14 +15,11 @@ import { rootInnerHTML } from "../dom/root-inner-html";
 import { LoginDialogProps } from "../props";
 
 /** 生成パラメータ */
-export type PropsCreatorParams = {
-  /** リソース管理オブジェクト */
-  resources: Resources;
-  /** SE再生 */
-  se: SEPlayer;
-  /** キャプション */
-  caption: string;
-};
+export type PropsCreatorParams = ResourcesContainer &
+  SEPlayerContainer & {
+    /** キャプション */
+    caption: string;
+  };
 
 /**
  * LoginDialogPropsを生成する

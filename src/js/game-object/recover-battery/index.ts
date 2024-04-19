@@ -1,21 +1,18 @@
 import { Observable } from "rxjs";
 
-import type { Resources } from "../../resource";
-import { SEPlayer } from "../../se/se-player";
+import type { ResourcesContainer } from "../../resource";
+import { SEPlayerContainer } from "../../se/se-player";
 import type { GameObjectAction } from "../action/game-object-action";
 import { RecoverBattery } from "./recover-battery";
 import { EnemyRecoverBatteryView } from "./view/enemy-recover-battery-view";
 import { PlayerRecoverBatteryView } from "./view/player-recover-battery-view";
 
 /** 生成パラメータ */
-export type RecoverBatteryCreatorParams = {
-  /** リソース管理オブジェクト */
-  resources: Resources;
-  /** SE再生オブジェクト */
-  se: SEPlayer;
-  /** ゲームオブジェクトアクション */
-  gameObjectAction: Observable<GameObjectAction>;
-};
+export type RecoverBatteryCreatorParams = ResourcesContainer &
+  SEPlayerContainer & {
+    /** ゲームオブジェクトアクション */
+    gameObjectAction: Observable<GameObjectAction>;
+  };
 
 /**
  * プレイヤー側 バッテリー回復

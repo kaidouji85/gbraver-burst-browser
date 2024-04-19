@@ -18,7 +18,7 @@ export function playerTurnStart(
   gameObjectAction: Observable<GameObjectAction>,
 ): TurnStart {
   const view = new PlayerTurnStartView(resources);
-  return new TurnStart(view, resources, gameObjectAction);
+  return new TurnStart(view, gameObjectAction);
 }
 
 /**
@@ -33,5 +33,5 @@ export function enemyTurnStart(
   gameObjectAction: Observable<GameObjectAction>,
 ): TurnStart {
   const view = new EnemyTurnStartView(resources);
-  return new TurnStart(view, resources, gameObjectAction);
+  return new TurnStart(view, gameObjectAction);
 }

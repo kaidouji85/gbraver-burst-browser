@@ -1,13 +1,11 @@
-import { SEPlayer } from "../../../../se/se-player";
+import { SEPlayerContainer } from "../../../../se/se-player";
 import { WingDozerModel } from "../model/wing-dozer-model";
 import { WingDozerSounds } from "../sounds/wing-dozer-sounds";
 
 /** ウィングドーザ アニメーションプロパティ */
-export type WingDozerAnimationProps = {
+export type WingDozerAnimationProps = SEPlayerContainer & {
   /** モデル */
   model: WingDozerModel;
   /** サウンド */
   sounds: WingDozerSounds;
-  /** SE再生 */
-  se: SEPlayer;
 };

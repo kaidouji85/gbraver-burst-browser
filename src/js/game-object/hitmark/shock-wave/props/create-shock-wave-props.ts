@@ -1,22 +1,19 @@
-import { Resources } from "../../../../resource";
+import { ResourcesContainer } from "../../../../resource";
 import { createEmptySoundResource } from "../../../../resource/sound/empty-sound-resource";
 import { SOUND_IDS } from "../../../../resource/sound/ids";
-import { SEPlayer } from "../../../../se/se-player";
+import { SEPlayerContainer } from "../../../../se/se-player";
 import { ShockWaveModel } from "../model/shock-wave-model";
 import { ShockWaveView } from "../view/shock-wave-view";
 import { ShockWaveProps } from "./shock-wave-props";
 
 /** ShockWaveProps生成パラメータ */
-export type PropsCreatorParams = {
-  /** ビュー */
-  view: ShockWaveView;
-  /** 初期モデル */
-  initialModel: ShockWaveModel;
-  /** リソース管理オブジェクト */
-  resources: Resources;
-  /** SE再生オブジェクト */
-  se: SEPlayer;
-};
+export type PropsCreatorParams = ResourcesContainer &
+  SEPlayerContainer & {
+    /** ビュー */
+    view: ShockWaveView;
+    /** 初期モデル */
+    initialModel: ShockWaveModel;
+  };
 
 /**
  * ShockWavePropsを生成する

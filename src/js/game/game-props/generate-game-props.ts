@@ -5,7 +5,7 @@ import { DOMFader } from "../../components/dom-fader/dom-fader";
 import { CssHUDUIScale } from "../../css/hud-ui-scale";
 import { gameLoopStream } from "../../game-loop/game-loop";
 import { Renderer } from "../../render";
-import { emptyResources } from "../../resource";
+import { emptyResources } from "../../resource/empty-resources";
 import type { ResourceRoot } from "../../resource/resource-root";
 import { createSEPlayer } from "../../se/se-player";
 import { pushWindowsStream } from "../../window/push-window";

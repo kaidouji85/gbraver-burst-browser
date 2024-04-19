@@ -1,15 +1,13 @@
 import { Observable } from "rxjs";
 
-import type { Resources } from "../../resource";
+import type { ResourcesContainer } from "../../resource";
 import type { GameObjectAction } from "../action/game-object-action";
 import { BatteryNumber } from "./battery-number";
 import { EnemyBatteryNumberView } from "./view/enemy-battery-number-view";
 import { PlayerBatteryNumberView } from "./view/player-battery-number-view";
 
 /** 生成パラメータ */
-export type BatteryNumberCreatorParams = {
-  /** リソース管理オブジェクト */
-  resources: Resources;
+export type BatteryNumberCreatorParams = ResourcesContainer & {
   /** ゲームオブジェクトアクション */
   gameObjectAction: Observable<GameObjectAction>;
 };

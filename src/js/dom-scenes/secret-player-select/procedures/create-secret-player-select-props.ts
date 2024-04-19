@@ -2,10 +2,10 @@ import { ArmdozerId, PilotId } from "gbraver-burst-core";
 import { Subject } from "rxjs";
 
 import { Exclusive } from "../../../exclusive/exclusive";
-import { Resources } from "../../../resource";
+import { ResourcesContainer } from "../../../resource";
 import { createEmptySoundResource } from "../../../resource/sound/empty-sound-resource";
 import { SOUND_IDS } from "../../../resource/sound/ids";
-import { SEPlayer } from "../../../se/se-player";
+import { SEPlayerContainer } from "../../../se/se-player";
 import { ArmdozerIcon } from "../armdozer-icon";
 import { ROOT } from "../dom/class-name";
 import {
@@ -23,16 +23,13 @@ import { PilotIcon } from "../pilot-icon";
 import { SecretPlayerSelectProps } from "../props";
 
 /** SecretPlayerSelectProps生成パラメータ */
-export type CreateSecretPlayerSelectPropsParams = {
-  /** リソース管理オブジェクト */
-  resources: Resources;
-  /** SE再生オブジェクト */
-  se: SEPlayer;
-  /** 選択可能なアームドーザID */
-  armdozerIds: ArmdozerId[];
-  /** 選択可能なパイロットID */
-  pilotIds: PilotId[];
-};
+export type CreateSecretPlayerSelectPropsParams = ResourcesContainer &
+  SEPlayerContainer & {
+    /** 選択可能なアームドーザID */
+    armdozerIds: ArmdozerId[];
+    /** 選択可能なパイロットID */
+    pilotIds: PilotId[];
+  };
 
 /**
  * SecretPlayerSelectPropsを生成する

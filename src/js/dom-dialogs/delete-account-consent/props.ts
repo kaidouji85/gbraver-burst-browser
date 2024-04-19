@@ -2,10 +2,10 @@ import { Subject } from "rxjs";
 
 import { Exclusive } from "../../exclusive/exclusive";
 import { SoundResource } from "../../resource/sound/resource";
-import { SEPlayer } from "../../se/se-player";
+import { SEPlayerContainer } from "../../se/se-player";
 
 /** アカウント削除同意ダイアログ プロパティ */
-export type DeleteAccountConsentDialogProps = {
+export type DeleteAccountConsentDialogProps = SEPlayerContainer & {
   /** ルートHTML要素 */
   root: HTMLElement;
   /** 背景 */
@@ -24,8 +24,6 @@ export type DeleteAccountConsentDialogProps = {
   changeValue: SoundResource;
   /** 効果音 ボタン押下 */
   pushButton: SoundResource;
-  /** SE再生オブジェクト */
-  se: SEPlayer;
   /** 排他制御 */
   exclusive: Exclusive;
 };

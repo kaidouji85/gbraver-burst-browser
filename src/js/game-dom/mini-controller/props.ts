@@ -1,11 +1,11 @@
 import * as R from "ramda";
 import { merge, Observable } from "rxjs";
 
-import { Resources } from "../../resource";
+import { ResourcesContainer } from "../../resource";
 import { createEmptySoundResource } from "../../resource/sound/empty-sound-resource";
 import { SOUND_IDS } from "../../resource/sound/ids";
 import { SoundResource } from "../../resource/sound/resource";
-import { SEPlayer } from "../../se/se-player";
+import { SEPlayerContainer } from "../../se/se-player";
 import { domUuid } from "../../uuid/dom-uuid";
 import { BatteryButton } from "./battery-button";
 import { BurstButton } from "./burst-button";
@@ -18,7 +18,7 @@ import { PilotButton } from "./pilot-button";
 const MAX_BATTERY_BUTTON = 9;
 
 /** ミニコントローラープロパティ */
-export type MiniControllerProps = {
+export type MiniControllerProps = SEPlayerContainer & {
   /** ルートHTML要素 */
   root: HTMLElement;
   /** 全バッテリーボタン */
@@ -31,17 +31,10 @@ export type MiniControllerProps = {
   batteryPush: Observable<number>;
   /** ボタン押下サウンド */
   pushButtonSound: SoundResource;
-  /** SE再生 */
-  se: SEPlayer;
 };
 
 /** 生成パラメータ */
-export type PropsCreatorParams = {
-  /** リソース管理オブジェクト */
-  resources: Resources;
-  /** SE再生 */
-  se: SEPlayer;
-};
+export type PropsCreatorParams = ResourcesContainer & SEPlayerContainer;
 
 /**
  * ミニコントローラープロパティを生成する

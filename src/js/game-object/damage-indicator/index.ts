@@ -1,15 +1,13 @@
 import { Observable } from "rxjs";
 
-import type { Resources } from "../../resource";
+import type { ResourcesContainer } from "../../resource";
 import type { GameObjectAction } from "../action/game-object-action";
 import { DamageIndicator } from "./damage-indicator";
 import { EnemyDamageIndicatorView } from "./view/enemy-damage-indicator-view";
 import { PlayerDamageIndicatorView } from "./view/player-damage-indicator-view";
 
 /** 生成パラメータ */
-export type DamageIndicatorCreatprParams = {
-  /** リソース管理オブジェクト */
-  resources: Resources;
+export type DamageIndicatorCreatprParams = ResourcesContainer & {
   /** ゲームオブジェクトアクション */
   gameObjectAction: Observable<GameObjectAction>;
 };

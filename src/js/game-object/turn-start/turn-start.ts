@@ -3,7 +3,6 @@ import * as THREE from "three";
 
 import { Animate } from "../../animation/animate";
 import type { PreRender } from "../../game-loop/pre-render";
-import type { Resources } from "../../resource";
 import type { GameObjectAction } from "../action/game-object-action";
 import { hidden } from "./animation/hidden";
 import { show } from "./animation/show";
@@ -21,14 +20,11 @@ export class TurnStart {
 
   /**
    * コンストラクタ
-   *
    * @param view ビュー
-   * @param resources リソース管理オブジェクト
    * @param gameObjectAction ゲームオブジェクトアクション
    */
   constructor(
     view: TurnStartView,
-    resources: Resources,
     gameObjectAction: Observable<GameObjectAction>,
   ) {
     this.#model = createInitialValue();

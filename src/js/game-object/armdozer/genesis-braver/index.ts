@@ -1,21 +1,18 @@
 import { Observable } from "rxjs";
 
-import type { Resources } from "../../../resource";
-import { SEPlayer } from "../../../se/se-player";
+import type { ResourcesContainer } from "../../../resource";
+import { SEPlayerContainer } from "../../../se/se-player";
 import type { GameObjectAction } from "../../action/game-object-action";
 import { GenesisBraver } from "./genesis-braver";
 import { EnemyGenesisBraverView } from "./view/enemy-genesis-braver-view";
 import { PlayerGenesisBraverView } from "./view/player-genesis-braver-view";
 
 /** ジェネシスブレイバー生成関数パラメータ */
-type GenesisBraverCreatorParams = {
-  /** リソース管理オブジェクト */
-  resources: Resources;
-  /** ゲームオブジェクトアクション */
-  gameObjectAction: Observable<GameObjectAction>;
-  /** SE再生 */
-  se: SEPlayer;
-};
+type GenesisBraverCreatorParams = ResourcesContainer &
+  SEPlayerContainer & {
+    /** ゲームオブジェクトアクション */
+    gameObjectAction: Observable<GameObjectAction>;
+  };
 
 /**
  * プレイヤージェネシスブレイバーを生成

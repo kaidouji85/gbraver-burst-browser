@@ -3,10 +3,10 @@ import { Subject } from "rxjs";
 
 import { replaceDOM } from "../../../../dom/replace-dom";
 import { Exclusive } from "../../../../exclusive/exclusive";
-import { Resources } from "../../../../resource";
+import { ResourcesContainer } from "../../../../resource";
 import { createEmptySoundResource } from "../../../../resource/sound/empty-sound-resource";
 import { SOUND_IDS } from "../../../../resource/sound/ids";
-import { SEPlayer } from "../../../../se/se-player";
+import { SEPlayerContainer } from "../../../../se/se-player";
 import { BLOCK } from "../dom/class-name";
 import {
   extractDummyStatus,
@@ -20,16 +20,13 @@ import { PilotStatus } from "../pilot-status";
 import { PilotSelectorProps } from "../props";
 
 /** PilotSelectorProps生成パラメータ */
-export type PropsCreatorParams = {
-  /** リソース管理オブジェクト */
-  resources: Resources;
-  /** SE再生オブジェクト */
-  se: SEPlayer;
-  /** 選択可能なパイロットIDリスト */
-  pilotIds: PilotId[];
-  /** パイロットIDの初期値 */
-  initialPilotId: PilotId;
-};
+export type PropsCreatorParams = ResourcesContainer &
+  SEPlayerContainer & {
+    /** 選択可能なパイロットIDリスト */
+    pilotIds: PilotId[];
+    /** パイロットIDの初期値 */
+    initialPilotId: PilotId;
+  };
 
 /**
  * PilotSelectorPropsを生成する

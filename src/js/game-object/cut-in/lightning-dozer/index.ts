@@ -1,15 +1,13 @@
 import { Observable } from "rxjs";
 
-import type { Resources } from "../../../resource";
+import type { ResourcesContainer } from "../../../resource";
 import type { GameObjectAction } from "../../action/game-object-action";
 import { LightningDozerCutIn } from "./lightning-dozer-cutin";
 import { EnemyLightningDozerCutInView } from "./view/enemy-lightning-dozer-cutin-view";
 import { PlayerLightningDozerCutInView } from "./view/player-lightning-dozer-cutin-view";
 
 /** ライトニングドーザ カットイン生成パラメータ */
-export type LightningDozerCutInCreatorParams = {
-  /** リソース管理オブジェクト */
-  resources: Resources;
+export type LightningDozerCutInCreatorParams = ResourcesContainer & {
   /** ゲームオブジェクトアクション */
   gameObjectAction: Observable<GameObjectAction>;
 };

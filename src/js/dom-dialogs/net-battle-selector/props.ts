@@ -1,11 +1,11 @@
 import { Subject } from "rxjs";
 
 import { Exclusive } from "../../exclusive/exclusive";
-import { Resources } from "../../resource";
+import { ResourcesContainer } from "../../resource";
 import { createEmptySoundResource } from "../../resource/sound/empty-sound-resource";
 import { SOUND_IDS } from "../../resource/sound/ids";
 import { SoundResource } from "../../resource/sound/resource";
-import { SEPlayer } from "../../se/se-player";
+import { SEPlayerContainer } from "../../se/se-player";
 import { domUuid } from "../../uuid/dom-uuid";
 import { ROOT_CLASS } from "./dom/class-name";
 import { DataIDs } from "./dom/data-ids";
@@ -13,7 +13,7 @@ import { extractElements } from "./dom/elements";
 import { rootInnerHTML } from "./dom/root-inner-html";
 
 /** ネットバトルセレクターダイアログのプロパティ */
-export type NetBattleSelectorDialogProps = {
+export type NetBattleSelectorDialogProps = SEPlayerContainer & {
   /** ルートHTML要素 */
   root: HTMLElement;
   /** 背景 */
@@ -30,8 +30,6 @@ export type NetBattleSelectorDialogProps = {
   pushButton: SoundResource;
   /** 効果音 値変更 */
   valueChange: SoundResource;
-  /** SE再生オブジェクト */
-  se: SEPlayer;
   /** カジュアルマッチ選択通知 */
   casualMatchSelection: Subject<void>;
   /** プライベートマッチ（ホスト）選択通知 */
@@ -45,12 +43,7 @@ export type NetBattleSelectorDialogProps = {
 };
 
 /** NetBattleSelectorDialogProps生成パラメータ */
-export type PropsCreatorParams = {
-  /** リソース管理オブジェクト */
-  resources: Resources;
-  /** SE再生オブジェクト */
-  se: SEPlayer;
-};
+export type PropsCreatorParams = ResourcesContainer & SEPlayerContainer;
 
 /**
  * NetBattleSelectrPropsを生成する

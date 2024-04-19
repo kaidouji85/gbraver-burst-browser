@@ -1,15 +1,13 @@
 import { Observable } from "rxjs";
 
-import type { Resources } from "../../../resource";
+import type { ResourcesContainer } from "../../../resource";
 import type { GameObjectAction } from "../../action/game-object-action";
 import { NeoLandozerCutIn } from "./neo-landozer-cutin";
 import { EnemyNeoLandozerCutInView } from "./view/enemy-neo-landozer-cutin-view";
 import { PlayerNeoLandozerCutInView } from "./view/player-neo-landozer-cutin-view";
 
 /** 生成パラメータ */
-export type NeoLandozerCutInCreatorParams = {
-  /** リソース管理オブジェクト */
-  resources: Resources;
+export type NeoLandozerCutInCreatorParams = ResourcesContainer & {
   /** ゲームオブジェクトアクション */
   gameObjectAction: Observable<GameObjectAction>;
 };

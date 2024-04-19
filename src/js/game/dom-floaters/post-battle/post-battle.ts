@@ -4,10 +4,10 @@ import { pop } from "../../../dom/pop";
 import { domPushStream } from "../../../dom/push-dom";
 import { waitFinishAnimation } from "../../../dom/wait-finish-animation";
 import { Exclusive } from "../../../exclusive/exclusive";
-import type { Resources } from "../../../resource";
+import type { ResourcesContainer } from "../../../resource";
 import { createEmptySoundResource } from "../../../resource/sound/empty-sound-resource";
 import { SOUND_IDS } from "../../../resource/sound/ids";
-import { SEPlayer } from "../../../se/se-player";
+import { SEPlayerContainer } from "../../../se/se-player";
 import type { PostBattle } from "../../post-battle";
 import type {
   ButtonStyle,
@@ -26,14 +26,11 @@ type ActionButton = {
 };
 
 /** showメソッドのパラメータ */
-export type ShowParams = {
-  /** リソース管理オブジェクト */
-  resources: Resources;
-  /** SE再生オブジェクト */
-  se: SEPlayer;
-  /** アクションボタン設定 */
-  buttons: PostBattleButtonConfig[];
-};
+export type ShowParams = ResourcesContainer &
+  SEPlayerContainer & {
+    /** アクションボタン設定 */
+    buttons: PostBattleButtonConfig[];
+  };
 
 /** バトル終了後行動選択フローター */
 export class PostBattleFloater {

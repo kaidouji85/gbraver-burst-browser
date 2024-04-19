@@ -1,21 +1,18 @@
 import { Observable } from "rxjs";
 
-import type { Resources } from "../../resource";
-import { SEPlayer } from "../../se/se-player";
+import type { ResourcesContainer } from "../../resource";
+import { SEPlayerContainer } from "../../se/se-player";
 import type { GameObjectAction } from "../action/game-object-action";
 import { PowerUp } from "./power-up";
 import { EnemyPowerUpView } from "./view/enemy-power-up-view";
 import { PlayerPowerUpView } from "./view/player-power-up-view";
 
 /** 生成パラメータ */
-export type PowerUpCreatorParams = {
-  /** リソース管理オブジェクト */
-  resources: Resources;
-  /** SE再生オブジェクト */
-  se: SEPlayer;
-  /** ゲームオブジェクトアクション */
-  gameObjectAction: Observable<GameObjectAction>;
-};
+export type PowerUpCreatorParams = ResourcesContainer &
+  SEPlayerContainer & {
+    /** ゲームオブジェクトアクション */
+    gameObjectAction: Observable<GameObjectAction>;
+  };
 
 /**
  * プレイヤー 攻撃アップ ポップアップ

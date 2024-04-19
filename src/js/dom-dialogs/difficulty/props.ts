@@ -2,18 +2,18 @@ import { Subject } from "rxjs";
 
 import { Exclusive } from "../../exclusive/exclusive";
 import type { NPCBattleCourseDifficulty } from "../../game/npc-battle-courses";
-import type { Resources } from "../../resource";
+import type { ResourcesContainer } from "../../resource";
 import { createEmptySoundResource } from "../../resource/sound/empty-sound-resource";
 import { SOUND_IDS } from "../../resource/sound/ids";
 import { SoundResource } from "../../resource/sound/resource";
-import { SEPlayer } from "../../se/se-player";
+import { SEPlayerContainer } from "../../se/se-player";
 import { domUuid } from "../../uuid/dom-uuid";
 import { ROOT_CLASS } from "./dom/class-name";
 import { extractElements } from "./dom/elements";
 import { rootInnerHTML } from "./dom/root-inner-html";
 
 /** 難易度選択ダイアログ プロパティ */
-export type DifficultyDialogProps = {
+export type DifficultyDialogProps = SEPlayerContainer & {
   /** ルートHTML要素 */
   root: HTMLElement;
   /** クロージャHTML要素 */
@@ -44,19 +44,12 @@ export type DifficultyDialogProps = {
   closeDialog: Subject<void>;
   /** 効果音 値変更 */
   changeValue: SoundResource;
-  /** SE再生オブジェクト */
-  se: SEPlayer;
   /** 効果音 ボタン押下 */
   pushButton: SoundResource;
 };
 
 /** 生成パラメータ */
-export type PropsCreatorParams = {
-  /** リソース管理オブジェクト */
-  resources: Resources;
-  /** SE再生オブジェクト */
-  se: SEPlayer;
-};
+export type PropsCreatorParams = ResourcesContainer & SEPlayerContainer;
 
 /**
  * 難易度選択ダイアログプロパティを生成する

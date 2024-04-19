@@ -1,4 +1,4 @@
-import { Resources } from "../../../../resource";
+import { ResourcesContainer } from "../../../../resource";
 import { TextureId } from "../../../../resource/texture/resource";
 import { AnimationType } from "../model/animation-type";
 import { AnimationMesh } from "./animation-mesh";
@@ -6,9 +6,7 @@ import { createOutlineMesh } from "./create-outline-mesh";
 import { createStandardMesh } from "./create-standard-mesh";
 
 /** パラメータ */
-type Params = {
-  /** リソース管理オブジェクト */
-  resources: Resources;
+type Params = ResourcesContainer & {
   /** アニメーションタイプ */
   animationType: AnimationType;
   /** テクスチャID */
