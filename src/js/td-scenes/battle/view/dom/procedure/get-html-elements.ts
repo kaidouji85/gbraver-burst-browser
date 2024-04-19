@@ -15,5 +15,6 @@ export function getHTMLElements(props: DOMLayerProps): HTMLElement[] {
     props.playerShoutMessageWindow.getRootHTMLElement(),
     props.enemyShoutMessageWindow.getRootHTMLElement(),
     props.miniController.getRootHTMLElement(),
+    props.predicatedDamage.getRootHTMLElement(),
   ];
 }

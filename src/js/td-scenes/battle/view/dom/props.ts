@@ -1,5 +1,6 @@
 import { MessageWindow } from "../../../../game-dom/message-window";
 import { MiniController } from "../../../../game-dom/mini-controller";
+import { PredicatedDamage } from "../../../../game-dom/predicated-damage";
 
 /** DOMレイヤーのプロパティ */
 export type DOMLayerProps = {
@@ -19,4 +20,6 @@ export type DOMLayerProps = {
   enemyShoutMessageWindow: MessageWindow;
   /** ミニコントローラー */
   miniController: MiniController;
+  /** ダメージ予想 */
+  predicatedDamage: PredicatedDamage;
 };

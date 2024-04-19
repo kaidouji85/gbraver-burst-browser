@@ -1,5 +1,6 @@
 import { MessageWindow } from "../../../../../game-dom/message-window";
 import { MiniController } from "../../../../../game-dom/mini-controller";
+import { PredicatedDamage } from "../../../../../game-dom/predicated-damage";
 import { BattleViewCreatorParams } from "../../creator-params";
 import { DOMLayerProps } from "../props";
 
@@ -69,6 +70,8 @@ export function createDOMLayerProps(
   enemyShoutMessageWindow.visible(false);
 
   const miniController = new MiniController(params);
+
+  const predicatedDamage = new PredicatedDamage();
   return {
     rightMessageWindow,
     leftMessageWindow,
@@ -78,5 +81,6 @@ export function createDOMLayerProps(
     playerShoutMessageWindow,
     enemyShoutMessageWindow,
     miniController,
+    predicatedDamage,
   };
 }
