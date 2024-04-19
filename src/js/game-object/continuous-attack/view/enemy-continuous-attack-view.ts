@@ -4,7 +4,6 @@ import { PlayerContinuousAttackView } from "./player-continuous-attack-view";
 
 /** 敵 攻撃アップ ビュー */
 export class EnemyContinuousAttackView extends PlayerContinuousAttackView {
-
   /**
    * コンストラクタ
    * @param resources リソース管理オブジェクト

@@ -100,10 +100,11 @@ export type TitleProps = {
 };
 
 /** タイトル画面プロパティ生成パラメータ */
-export type CreateTitlePropsParams = RootInnerHTMLParams & ResourcesContainer & {
-  /** SE再生オブジェクト */
-  se: SEPlayer;
-};
+export type CreateTitlePropsParams = RootInnerHTMLParams &
+  ResourcesContainer & {
+    /** SE再生オブジェクト */
+    se: SEPlayer;
+  };
 
 /**
  * タイトル画面プロパティを生成する

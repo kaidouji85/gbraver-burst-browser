@@ -8,7 +8,7 @@ import { PlayerBatteryEnchantmentView } from "./player-battery-enchantment-view"
 export class EnemyBatteryEnchantmentView extends PlayerBatteryEnchantmentView {
   /**
    * コンストラクタ
-   * @param resources リソース管理オブジェクト 
+   * @param resources リソース管理オブジェクト
    */
   constructor(resources: Resources) {
     super(resources);

@@ -7,7 +7,7 @@ import { PlayerNeoLandozerCutInView } from "./player-neo-landozer-cutin-view";
 export class EnemyNeoLandozerCutInView extends PlayerNeoLandozerCutInView {
   /**
    * コンストラクタ
-   * @param resources リソース管理オブジェクト 
+   * @param resources リソース管理オブジェクト
    */
   constructor(resources: Resources) {
     super(resources);
