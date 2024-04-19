@@ -1,11 +1,11 @@
 import { Subject } from "rxjs";
 
-import { BGMManager } from "../../bgm/bgm-manager";
+import { BGMManagerContainer } from "../../bgm/bgm-manager";
 import { SoundResource } from "../../resource/sound/resource";
 import { SEPlayer } from "../../se/se-player";
 
 /** NPCルート エンディング画面 プロパティ */
-export type NPCEndingProps = {
+export type NPCEndingProps = BGMManagerContainer & {
   /** ルートHTML要素 */
   root: HTMLElement;
   /** エンドカードが読み込み完了したら発火するPromise */
@@ -16,8 +16,6 @@ export type NPCEndingProps = {
   isLogoLoader: Promise<void>;
   /** 効果音 ボタンプッシュ */
   pushButtonSound: SoundResource;
-  /** BGM管理オブジェクト */
-  bgm: BGMManager;
   /** エンディングBGM */
   endingBGM: SoundResource;
   /** SE再生オブジェクト */

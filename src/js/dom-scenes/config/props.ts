@@ -1,6 +1,6 @@
 import { Subject } from "rxjs";
 
-import { BGMManager } from "../../bgm/bgm-manager";
+import { BGMManagerContainer } from "../../bgm/bgm-manager";
 import { Exclusive } from "../../exclusive/exclusive";
 import { GBraverBurstBrowserConfig } from "../../game/config/browser-config";
 import { Resources } from "../../resource";
@@ -26,7 +26,7 @@ import {
 import { rootInnerHTML } from "./dom/root-inner-html";
 
 /** 設定画面プロパティ */
-export type ConfigProps = {
+export type ConfigProps = BGMManagerContainer & {
   /** 画面を開く前のブラウザ設定 */
   originConfig: GBraverBurstBrowserConfig;
 
@@ -63,8 +63,6 @@ export type ConfigProps = {
   /** SE ボタン押下 */
   pushButton: SoundResource;
 
-  /** BGM管理オブジェクト */
-  bgm: BGMManager;
   /** SE再生オブジェクト */
   se: SEPlayer;
 
@@ -78,13 +76,11 @@ export type ConfigProps = {
 };
 
 /** プロパティ生成関数のパラメータ */
-export type PropsCreatorParams = {
+export type PropsCreatorParams = BGMManagerContainer & {
   /** リソース管理オブジェクト */
   resources: Resources;
   /** ブラウザ設定 */
   config: GBraverBurstBrowserConfig;
-  /** BGM管理オブジェクト */
-  bgm: BGMManager;
   /** SE再生オブジェクト */
   se: SEPlayer;
 };

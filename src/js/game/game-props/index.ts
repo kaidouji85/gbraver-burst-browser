@@ -1,7 +1,7 @@
 import { BrowserSDK } from "@gbraver-burst-network/browser-sdk";
 import { Observable } from "rxjs";
 
-import { BGMManager } from "../../bgm/bgm-manager";
+import { BGMManagerContainer } from "../../bgm/bgm-manager";
 import { DOMFader } from "../../components/dom-fader/dom-fader";
 import { CssHUDUIScale } from "../../css/hud-ui-scale";
 import { GameLoop } from "../../game-loop/game-loop";
@@ -25,7 +25,7 @@ import { TDSceneBinder } from "../td-scene-binder";
  * ゲームプロパティ
  * 本オブジェクトはゲーム管理オブジェクト内部、各種ヘルパーで利用することを想定している
  */
-export interface GameProps {
+export interface GameProps extends BGMManagerContainer {
   /** パフォーマンス統計、表示されていない場合はnullが入る */
   performanceStats: PerformanceStats | null;
   /** サービスワーカーを利用するか否か、trueで利用する */
@@ -78,8 +78,6 @@ export interface GameProps {
   isFullResourceLoaded: boolean;
   /** ServiceWorkerRegistrationのキャッシュ */
   serviceWorker: ServiceWorkerRegistration | null | undefined;
-  /** BGM管理オブジェクト */
-  bgm: BGMManager;
   /** SE再生オブジェクト */
   se: SEPlayer;
   /** 開発中のエピソードをプレイできるか否かのフラグ、trueでプレイできる */

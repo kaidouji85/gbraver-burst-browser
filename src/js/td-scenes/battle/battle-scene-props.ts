@@ -2,7 +2,7 @@ import { GameEnd, GameState, PlayerId } from "gbraver-burst-core";
 import { Observable, Subject } from "rxjs";
 
 import { AnimatePlayer } from "../../animation/animate-player";
-import { BGMManager } from "../../bgm/bgm-manager";
+import { BGMManagerContainer } from "../../bgm/bgm-manager";
 import { Exclusive } from "../../exclusive/exclusive";
 import { SEPlayer } from "../../se/se-player";
 import { PushWindow } from "../../window/push-window";
@@ -21,7 +21,7 @@ export type BattleEnd = {
 };
 
 /** 戦闘シーンプロパティ */
-export type BattleSceneProps = {
+export type BattleSceneProps = BGMManagerContainer & {
   /** 画面を開いているプレイヤーのID */
   readonly playerId: PlayerId;
   /** アニメーションプレイヤー */
@@ -42,8 +42,6 @@ export type BattleSceneProps = {
   readonly pushWindow: Observable<PushWindow>;
   /** 戦闘シーン効果音 */
   readonly sounds: BattleSceneSounds;
-  /** BGM管理オブジェクト */
-  readonly bgm: BGMManager;
   /** SE再生オブジェクト */
   readonly se: SEPlayer;
   /** コントローラータイプ */

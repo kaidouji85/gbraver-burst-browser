@@ -2,7 +2,7 @@ import { GameState, Player } from "gbraver-burst-core";
 import { Observable, Subject } from "rxjs";
 
 import { createAnimatePlayer } from "../../../animation/animate-player";
-import { BGMManager } from "../../../bgm/bgm-manager";
+import { BGMManagerContainer } from "../../../bgm/bgm-manager";
 import { Exclusive } from "../../../exclusive/exclusive";
 import { GameLoop } from "../../../game-loop/game-loop";
 import { OverlapNotifier } from "../../../render/overlap-notifier";
@@ -27,11 +27,9 @@ export interface OwnRenderer
     Rendering {}
 
 /** 戦闘シーンプロパティ生成関数のパラメータ */
-export type BattleScenePropsCreatorParams = Readonly<{
+export type BattleScenePropsCreatorParams = BGMManagerContainer & Readonly<{
   /** リソース管理オブジェクト */
   resources: Resources;
-  /** BGM管理オブジェクト */
-  bgm: BGMManager;
   /** SE再生オブジェクト */
   se: SEPlayer;
   /** 再生するBGM ID */

@@ -1,6 +1,6 @@
 import { Subject } from "rxjs";
 
-import { BGMManager } from "../../../bgm/bgm-manager";
+import { BGMManagerContainer } from "../../../bgm/bgm-manager";
 import { Resources } from "../../../resource";
 import { PathIds } from "../../../resource/path/ids";
 import { createEmptySoundResource } from "../../../resource/sound/empty-sound-resource";
@@ -14,11 +14,9 @@ import { rootInnerHTML } from "../dom/root-inner-html";
 import { NPCEndingProps } from "../props";
 
 /** NPCEndingProps生成パラメータ */
-export type PropsCreatorParams = {
+export type PropsCreatorParams = BGMManagerContainer & {
   /** リソース管理オブジェクト */
   resources: Resources;
-  /** BGM管理オブジェクト */
-  bgm: BGMManager;
   /** SE再生オブジェクト */
   se: SEPlayer;
 };
