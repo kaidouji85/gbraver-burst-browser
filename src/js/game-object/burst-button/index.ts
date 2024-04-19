@@ -11,10 +11,11 @@ import { ShinBraverIcon } from "./view/shin-braver-icon";
 import { WingDozerIcon } from "./view/wing-dozer-icon";
 
 /** 生成パラメータ */
-export type BurstButtonCreatorParams = ResourcesContainer & SEPlayerContainer & {
-  /** ゲームオブジェクトアクション */
-  gameObjectAction: Observable<GameObjectAction>;
-};
+export type BurstButtonCreatorParams = ResourcesContainer &
+  SEPlayerContainer & {
+    /** ゲームオブジェクトアクション */
+    gameObjectAction: Observable<GameObjectAction>;
+  };
 
 /**
  * シンブレイバー バーストボタンを生成する

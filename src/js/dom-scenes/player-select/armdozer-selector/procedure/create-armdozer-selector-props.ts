@@ -20,12 +20,13 @@ import { rootInnerHTML } from "../dom/root-inner-html";
 import { ArmdozerSelectorProps } from "../props";
 
 /** ArmdozerSelectorProps生成パラメータ */
-export type PropsCreatorParams = ResourcesContainer & SEPlayerContainer & {
-  /** 選択可能なアームドーザIDリスト */
-  armdozerIds: ArmdozerId[];
-  /** 最初に選択しているアームドーザID */
-  initialArmdozerId: ArmdozerId;
-};
+export type PropsCreatorParams = ResourcesContainer &
+  SEPlayerContainer & {
+    /** 選択可能なアームドーザIDリスト */
+    armdozerIds: ArmdozerId[];
+    /** 最初に選択しているアームドーザID */
+    initialArmdozerId: ArmdozerId;
+  };
 
 /**
  * ArmdozerSelectorPropsを生成する

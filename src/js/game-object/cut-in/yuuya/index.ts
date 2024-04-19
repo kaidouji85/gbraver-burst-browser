@@ -8,10 +8,11 @@ import { PlayerYuuyaView } from "./view/player-yuuya-view";
 import { YuuyaCutIn } from "./yuuya";
 
 /** 生成パラメータ */
-export type YuuyaCutInCreatorParams = ResourcesContainer & SEPlayerContainer & {
-  /** ゲームオブジェクトアクション */
-  gameObjectAction: Observable<GameObjectAction>;
-};
+export type YuuyaCutInCreatorParams = ResourcesContainer &
+  SEPlayerContainer & {
+    /** ゲームオブジェクトアクション */
+    gameObjectAction: Observable<GameObjectAction>;
+  };
 
 /**
  * プレイヤー側 ユウヤ カットイン

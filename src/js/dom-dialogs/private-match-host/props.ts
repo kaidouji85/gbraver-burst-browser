@@ -27,10 +27,11 @@ export type PrivateMatchHostDialogProps = SEPlayerContainer & {
 };
 
 /** PrivateMatchHostDialogProps生成パラメータ */
-export type PropsCreatorParams = ResourcesContainer & SEPlayerContainer & {
-  /** ルームID */
-  roomID: string;
-};
+export type PropsCreatorParams = ResourcesContainer &
+  SEPlayerContainer & {
+    /** ルームID */
+    roomID: string;
+  };
 
 /**
  * PrivateMatchHostDialogPropsを生成する

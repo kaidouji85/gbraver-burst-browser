@@ -8,10 +8,11 @@ import { EnemyPowerUpView } from "./view/enemy-power-up-view";
 import { PlayerPowerUpView } from "./view/player-power-up-view";
 
 /** 生成パラメータ */
-export type PowerUpCreatorParams = ResourcesContainer & SEPlayerContainer & {
-  /** ゲームオブジェクトアクション */
-  gameObjectAction: Observable<GameObjectAction>;
-};
+export type PowerUpCreatorParams = ResourcesContainer &
+  SEPlayerContainer & {
+    /** ゲームオブジェクトアクション */
+    gameObjectAction: Observable<GameObjectAction>;
+  };
 
 /**
  * プレイヤー 攻撃アップ ポップアップ

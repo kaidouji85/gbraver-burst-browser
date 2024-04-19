@@ -8,10 +8,11 @@ import { EnemyShinyaView } from "./view/enemy-shinya-view";
 import { PlayerShinyaView } from "./view/player-shinya-view";
 
 /** 生成パラメータ */
-export type ShinyaCutInCreatorParams = ResourcesContainer & SEPlayerContainer & {
-  /** ゲームオブジェクトアクション */
-  gameObjectAction: Observable<GameObjectAction>;
-};
+export type ShinyaCutInCreatorParams = ResourcesContainer &
+  SEPlayerContainer & {
+    /** ゲームオブジェクトアクション */
+    gameObjectAction: Observable<GameObjectAction>;
+  };
 
 /**
  * プレイヤー側 シンヤ カットイン

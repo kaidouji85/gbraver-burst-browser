@@ -8,10 +8,11 @@ import { EnemyTsubasaView } from "./view/enemy-tsubasa-view";
 import { PlayerTsubasaView } from "./view/player-tsubasa-view";
 
 /** 生成パラメータ */
-export type TsubasaCutInCreatorParams = ResourcesContainer & SEPlayerContainer & {
-  /** ゲームオブジェクトアクション */
-  gameObjectAction: Observable<GameObjectAction>;
-};
+export type TsubasaCutInCreatorParams = ResourcesContainer &
+  SEPlayerContainer & {
+    /** ゲームオブジェクトアクション */
+    gameObjectAction: Observable<GameObjectAction>;
+  };
 
 /**
  * プレイヤー側 ツバサ カットイン

@@ -11,12 +11,13 @@ import { BurstButtonView } from "../view/burst-button-view";
 import { BurstButtonProps } from "./burst-button-props";
 
 /** BurstButtonProps生成パラメータ */
-export type PropsCreatorParams = ResourcesContainer & SEPlayerContainer & {
-  /** ゲームオブジェクトアクション */
-  gameObjectAction: Observable<GameObjectAction>;
-  /** アームドーザアイコン */
-  armdozerIcon: ArmdozerIcon;
-};
+export type PropsCreatorParams = ResourcesContainer &
+  SEPlayerContainer & {
+    /** ゲームオブジェクトアクション */
+    gameObjectAction: Observable<GameObjectAction>;
+    /** アームドーザアイコン */
+    armdozerIcon: ArmdozerIcon;
+  };
 
 /**
  * BurstButtonPropsを生成する

@@ -11,10 +11,11 @@ import { TsubasaIcon } from "./view/tsubasa";
 import { YuuyaIcon } from "./view/yuuya";
 
 /** 生成パラメータ */
-export type PilotButtonCreatorParams = ResourcesContainer & SEPlayerContainer & {
-  /** ゲームオブジェクトアクション */
-  gameObjectAction: Observable<GameObjectAction>;
-};
+export type PilotButtonCreatorParams = ResourcesContainer &
+  SEPlayerContainer & {
+    /** ゲームオブジェクトアクション */
+    gameObjectAction: Observable<GameObjectAction>;
+  };
 
 /**
  * シンヤ パイロットボタン を生成する

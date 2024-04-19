@@ -21,10 +21,11 @@ import { resizeStream } from "../../src/js/window/resize";
 import { StorybookResourceRoot } from "../storybook-resource-root";
 
 /** Object3D生成関数パラメータ */
-type Object3DParams = ResourcesContainer & SEPlayerContainer & {
-  /** ゲームオブジェクトアクション */
-  gameObjectAction: Observable<GameObjectAction>;
-};
+type Object3DParams = ResourcesContainer &
+  SEPlayerContainer & {
+    /** ゲームオブジェクトアクション */
+    gameObjectAction: Observable<GameObjectAction>;
+  };
 
 /**
  * Object3D生成関数

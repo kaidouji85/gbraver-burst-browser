@@ -6,10 +6,11 @@ import { BatteryEnchantmentView } from "../view/battery-enchantment-view";
 import { BatteryEnchantmentProps } from "./battery-enchantment-props";
 
 /** BatteryEnchantmentProps生成パラメータ */
-export type PropsCreatorParams = ResourcesContainer & SEPlayerContainer & {
-  /** ビュー */
-  view: BatteryEnchantmentView;
-};
+export type PropsCreatorParams = ResourcesContainer &
+  SEPlayerContainer & {
+    /** ビュー */
+    view: BatteryEnchantmentView;
+  };
 
 /**
  * BatteryEnchantmentPropsを生成する

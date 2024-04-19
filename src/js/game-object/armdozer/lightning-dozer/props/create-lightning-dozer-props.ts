@@ -6,10 +6,11 @@ import { LightningDozerView } from "../view/lightning-dozer-view";
 import { LightningDozerProps } from "./lightning-dozer-props";
 
 /** LightningDozerProps生成パラメータ */
-export type PropsCreatorParams = ResourcesContainer & SEPlayerContainer & {
-  /** ビュー */
-  view: LightningDozerView;
-};
+export type PropsCreatorParams = ResourcesContainer &
+  SEPlayerContainer & {
+    /** ビュー */
+    view: LightningDozerView;
+  };
 
 /**
  * LightningDozerPropsを生成する

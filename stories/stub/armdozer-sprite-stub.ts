@@ -7,10 +7,11 @@ import { SEPlayerContainer } from "../../src/js/se/se-player";
 import { TDGameObjectStub } from "./td-game-object-stub";
 
 /** アームドーザスプライト ジェネレータ パラメータ */
-type GeneratorParams = ResourcesContainer & SEPlayerContainer & {
-  /** ゲームオブジェクトアクション */
-  gameObjectAction: Observable<GameObjectAction>;
-};
+type GeneratorParams = ResourcesContainer &
+  SEPlayerContainer & {
+    /** ゲームオブジェクトアクション */
+    gameObjectAction: Observable<GameObjectAction>;
+  };
 
 /**
  * アームドーザスプライト ジェネレータ

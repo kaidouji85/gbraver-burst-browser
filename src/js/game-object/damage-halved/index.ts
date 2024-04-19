@@ -8,10 +8,11 @@ import { EnemyDamageHalvedView } from "./view/enemy-damage-halved-view";
 import { PlayerDamageHalvedView } from "./view/player-damage-halved-view";
 
 /** ダメージ半減生成パラメータ */
-export type DamageHalvedCreatorParams = ResourcesContainer &  SEPlayerContainer & {
-  /** ゲームオブジェクトアクション */
-  gameObjectAction: Observable<GameObjectAction>;
-};
+export type DamageHalvedCreatorParams = ResourcesContainer &
+  SEPlayerContainer & {
+    /** ゲームオブジェクトアクション */
+    gameObjectAction: Observable<GameObjectAction>;
+  };
 
 /**
  * プレイヤー ダメージ半減 ポップアップ

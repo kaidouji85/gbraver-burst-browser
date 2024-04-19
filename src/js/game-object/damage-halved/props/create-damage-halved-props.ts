@@ -6,10 +6,11 @@ import { DamageHalvedView } from "../view/damage-halved-view";
 import { DamageHalvedProps } from "./damage-halved-props";
 
 /** ダメージ半減 プロパティ生成パラメータ */
-export type PropsCreatorParams = ResourcesContainer &  SEPlayerContainer & {
-  /** ビュー */
-  view: DamageHalvedView;
-};
+export type PropsCreatorParams = ResourcesContainer &
+  SEPlayerContainer & {
+    /** ビュー */
+    view: DamageHalvedView;
+  };
 
 /**
  * ダメージ半減 プロパティを生成する

@@ -21,12 +21,13 @@ import { resizeStream } from "../../src/js/window/resize";
 import { StorybookResourceRoot } from "../storybook-resource-root";
 
 /** Object3D生成関数パラメータ */
-type Object3DCreatorParams = ResourcesContainer & SEPlayerContainer & {
-  /** ゲームオブジェクトアクション */
-  gameObjectAction: Observable<GameObjectAction>;
-  /** カメラ */
-  camera: TDCamera;
-};
+type Object3DCreatorParams = ResourcesContainer &
+  SEPlayerContainer & {
+    /** ゲームオブジェクトアクション */
+    gameObjectAction: Observable<GameObjectAction>;
+    /** カメラ */
+    camera: TDCamera;
+  };
 
 /** スタブに追加するthree.jsオブジェクト */
 type Object3Ds = {

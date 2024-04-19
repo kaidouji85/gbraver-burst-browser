@@ -10,12 +10,13 @@ import { PilotIcon } from "../view/pilot-icon";
 import { PilotButtonProps } from "./pilot-button-props";
 
 /** PilotButtonProps生成パラメータ */
-export type PropsCreatorParams = ResourcesContainer & SEPlayerContainer & {
-  /** パイロットアイコン */
-  pilotIcon: PilotIcon;
-  /** ゲームオブジェクトアクション */
-  gameObjectAction: Observable<GameObjectAction>;
-};
+export type PropsCreatorParams = ResourcesContainer &
+  SEPlayerContainer & {
+    /** パイロットアイコン */
+    pilotIcon: PilotIcon;
+    /** ゲームオブジェクトアクション */
+    gameObjectAction: Observable<GameObjectAction>;
+  };
 
 /**
  * PilotButtonPropsを生成する

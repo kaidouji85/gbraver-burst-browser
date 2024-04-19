@@ -23,12 +23,13 @@ import { PilotIcon } from "../pilot-icon";
 import { SecretPlayerSelectProps } from "../props";
 
 /** SecretPlayerSelectProps生成パラメータ */
-export type CreateSecretPlayerSelectPropsParams = ResourcesContainer & SEPlayerContainer & {
-  /** 選択可能なアームドーザID */
-  armdozerIds: ArmdozerId[];
-  /** 選択可能なパイロットID */
-  pilotIds: PilotId[];
-};
+export type CreateSecretPlayerSelectPropsParams = ResourcesContainer &
+  SEPlayerContainer & {
+    /** 選択可能なアームドーザID */
+    armdozerIds: ArmdozerId[];
+    /** 選択可能なパイロットID */
+    pilotIds: PilotId[];
+  };
 
 /**
  * SecretPlayerSelectPropsを生成する

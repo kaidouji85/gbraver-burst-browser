@@ -10,10 +10,11 @@ import { TimeScaleButtonView } from "../view/time-scale-button-view";
 import { TimeScaleButtonProps } from "./time-scale-button-props";
 
 /** TimeScaleButtonProps生成パラメータ */
-export type PropsCreatorParams = ResourcesContainer & SEPlayerContainer & {
-  /** ゲームオブジェクトアクション */
-  gameObjectAction: Observable<GameObjectAction>;
-};
+export type PropsCreatorParams = ResourcesContainer &
+  SEPlayerContainer & {
+    /** ゲームオブジェクトアクション */
+    gameObjectAction: Observable<GameObjectAction>;
+  };
 
 /**
  * TimeScaleButtonPropsを生成する

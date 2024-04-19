@@ -6,10 +6,11 @@ import { ContinuousAttackView } from "../view/continuous-attack-view";
 import { ContinuousAttackProps } from "./continuous-attack-props";
 
 /** ContinuousAttackProps生成パラメータ */
-export type PropsCreatorParams = ResourcesContainer & SEPlayerContainer & {
-  /** ビュー */
-  view: ContinuousAttackView;
-};
+export type PropsCreatorParams = ResourcesContainer &
+  SEPlayerContainer & {
+    /** ビュー */
+    view: ContinuousAttackView;
+  };
 
 /**
  * ContinuousAttackPropsを生成する

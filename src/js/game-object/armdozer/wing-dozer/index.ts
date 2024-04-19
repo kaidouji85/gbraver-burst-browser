@@ -8,10 +8,11 @@ import { PlayerWingDozerView } from "./view/player-wing-dozer-view";
 import { WingDozer } from "./wing-dozer";
 
 /** ウィングドーザ生成関数パラメータ */
-type WingDozerCreatorParams = ResourcesContainer & SEPlayerContainer & {
-  /** ゲームオブジェクトアクション */
-  gameObjectAction: Observable<GameObjectAction>;
-};
+type WingDozerCreatorParams = ResourcesContainer &
+  SEPlayerContainer & {
+    /** ゲームオブジェクトアクション */
+    gameObjectAction: Observable<GameObjectAction>;
+  };
 
 /**
  * プレイヤー側 ウィングドーザを生成する

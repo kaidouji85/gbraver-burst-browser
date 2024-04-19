@@ -10,10 +10,11 @@ import { BatterySelectorView } from "../view";
 import { BatterySelectorProps } from "./battery-selector-props";
 
 /** バッテリーセレクタプロパティ生成パラメータ */
-export type PropsCreatorParams = ResourcesContainer & SEPlayerContainer & {
-  /** ゲームオブジェクトアクション */
-  gameObjectAction: Observable<GameObjectAction>;
-};
+export type PropsCreatorParams = ResourcesContainer &
+  SEPlayerContainer & {
+    /** ゲームオブジェクトアクション */
+    gameObjectAction: Observable<GameObjectAction>;
+  };
 
 /**
  * バッテリーセレクタプロパティを生成する

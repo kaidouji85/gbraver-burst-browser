@@ -20,12 +20,13 @@ import { PilotStatus } from "../pilot-status";
 import { PilotSelectorProps } from "../props";
 
 /** PilotSelectorProps生成パラメータ */
-export type PropsCreatorParams = ResourcesContainer &  SEPlayerContainer & {
-  /** 選択可能なパイロットIDリスト */
-  pilotIds: PilotId[];
-  /** パイロットIDの初期値 */
-  initialPilotId: PilotId;
-};
+export type PropsCreatorParams = ResourcesContainer &
+  SEPlayerContainer & {
+    /** 選択可能なパイロットIDリスト */
+    pilotIds: PilotId[];
+    /** パイロットIDの初期値 */
+    initialPilotId: PilotId;
+  };
 
 /**
  * PilotSelectorPropsを生成する

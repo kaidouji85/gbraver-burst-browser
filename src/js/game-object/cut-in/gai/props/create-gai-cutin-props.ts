@@ -6,10 +6,11 @@ import { GaiView } from "../view/gai-view";
 import { GaiCutInProps } from "./gai-cutin-props";
 
 /** GaiCutInProps生成パラメータ */
-export type PropsCreatorParams = ResourcesContainer & SEPlayerContainer & {
-  /** ビュー */
-  view: GaiView;
-};
+export type PropsCreatorParams = ResourcesContainer &
+  SEPlayerContainer & {
+    /** ビュー */
+    view: GaiView;
+  };
 
 /**
  * GaiCutInPropsを生成する

@@ -8,10 +8,11 @@ import { EnemyNeoLandozerView } from "./view/enemy-neo-landozer-view";
 import { PlayerNeoLandozerView } from "./view/player-neo-landozer-view";
 
 /** ネオランドーザ生成関数パラメータ */
-type NeoLandozerCreatorParams = ResourcesContainer & SEPlayerContainer & {
-  /** ゲームオブジェクトアクション */
-  gameObjectAction: Observable<GameObjectAction>;
-};
+type NeoLandozerCreatorParams = ResourcesContainer &
+  SEPlayerContainer & {
+    /** ゲームオブジェクトアクション */
+    gameObjectAction: Observable<GameObjectAction>;
+  };
 
 /**
  * プレイヤー側ネオランドーザ

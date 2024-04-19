@@ -6,10 +6,11 @@ import { RecoverBatteryView } from "../view/recover-battery-view";
 import { RecoverBatteryProps } from "./recover-battery-props";
 
 /** RecoverBatteryProps生成パラメータ */
-export type PropsCreatorParams = ResourcesContainer & SEPlayerContainer & {
-  /** ビュー */
-  view: RecoverBatteryView;
-};
+export type PropsCreatorParams = ResourcesContainer &
+  SEPlayerContainer & {
+    /** ビュー */
+    view: RecoverBatteryView;
+  };
 
 /**
  * RecoverBatteryPropsを生成する

@@ -6,10 +6,11 @@ import { YuuyaView } from "../view/yuuya-view";
 import { YuuyaCutInProps } from "./yuuya-cutin-props";
 
 /** ユウヤ カットイン プロパティ生成パラメータ */
-export type PropsCreatorParams = ResourcesContainer & SEPlayerContainer & {
-  /** ビュー */
-  view: YuuyaView;
-};
+export type PropsCreatorParams = ResourcesContainer &
+  SEPlayerContainer & {
+    /** ビュー */
+    view: YuuyaView;
+  };
 
 /**
  * ユウヤ カットイン プロパティを生成する

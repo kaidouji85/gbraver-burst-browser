@@ -14,12 +14,13 @@ import { PlayerDecide } from "../player-decide";
 import { PlayerSelectProps } from "../props";
 
 /** 生成パラメータ */
-export type CreatePlayerSelectPropsParams = ResourcesContainer & SEPlayerContainer & {
-  /** プレイアブルなアームドーザのID */
-  armdozerIds: ArmdozerId[];
-  /** プレイアブルなパイロットのID */
-  pilotIds: PilotId[];
-};
+export type CreatePlayerSelectPropsParams = ResourcesContainer &
+  SEPlayerContainer & {
+    /** プレイアブルなアームドーザのID */
+    armdozerIds: ArmdozerId[];
+    /** プレイアブルなパイロットのID */
+    pilotIds: PilotId[];
+  };
 
 /**
  * プレイヤーセレクト画面プロパティを生成する

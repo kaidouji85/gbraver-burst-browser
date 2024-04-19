@@ -24,10 +24,11 @@ import { EpisodeElement } from "../episode-element";
 import { EpisodeSelectorProps } from "../props";
 
 /** EpisodeSelectorProps生成パラメータ */
-export type PropsCreatorParams = ResourcesContainer & SEPlayerContainer & {
-  /** エピソード */
-  episodes: Episode[];
-};
+export type PropsCreatorParams = ResourcesContainer &
+  SEPlayerContainer & {
+    /** エピソード */
+    episodes: Episode[];
+  };
 
 /**
  * EpisodeSelectorPropsを生成する

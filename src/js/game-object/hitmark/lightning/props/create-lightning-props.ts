@@ -6,10 +6,11 @@ import { LightningView } from "../view/lightning-view";
 import { LightningProps } from "./lightning-props";
 
 /** 電撃ヒットマークプロパティ生成パラメータ */
-export type PropsCreatorParams = ResourcesContainer & SEPlayerContainer & {
-  /** ビュー */
-  view: LightningView;
-};
+export type PropsCreatorParams = ResourcesContainer &
+  SEPlayerContainer & {
+    /** ビュー */
+    view: LightningView;
+  };
 
 /**
  * 電撃ヒットマークプロパティを生成する

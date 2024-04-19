@@ -8,10 +8,11 @@ import { EnemyContinuousAttackView } from "./view/enemy-continuous-attack-view";
 import { PlayerContinuousAttackView } from "./view/player-continuous-attack-view";
 
 /** 連続攻撃生成パラメータ */
-export type ContinuousAttackCreatorParams = ResourcesContainer & SEPlayerContainer & {
-  /** ゲームオブジェクトアクション */
-  gameObjectAction: Observable<GameObjectAction>;
-};
+export type ContinuousAttackCreatorParams = ResourcesContainer &
+  SEPlayerContainer & {
+    /** ゲームオブジェクトアクション */
+    gameObjectAction: Observable<GameObjectAction>;
+  };
 
 /**
  * プレイヤー側 連続攻撃

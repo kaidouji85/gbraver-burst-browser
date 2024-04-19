@@ -7,12 +7,13 @@ import { ShockWaveView } from "../view/shock-wave-view";
 import { ShockWaveProps } from "./shock-wave-props";
 
 /** ShockWaveProps生成パラメータ */
-export type PropsCreatorParams = ResourcesContainer & SEPlayerContainer & {
-  /** ビュー */
-  view: ShockWaveView;
-  /** 初期モデル */
-  initialModel: ShockWaveModel;
-};
+export type PropsCreatorParams = ResourcesContainer &
+  SEPlayerContainer & {
+    /** ビュー */
+    view: ShockWaveView;
+    /** 初期モデル */
+    initialModel: ShockWaveModel;
+  };
 
 /**
  * ShockWavePropsを生成する

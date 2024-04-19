@@ -8,10 +8,11 @@ import { EnemyBatteryEnchantmentView } from "./view/enemy-battery-enchantment-vi
 import { PlayerBatteryEnchantmentView } from "./view/player-battery-enchantment-view";
 
 /** 生成パラメータ */
-export type BatteryEnchantmentCreatorParams = ResourcesContainer & SEPlayerContainer & {
-  /** ゲームオブジェクトアクション */
-  gameObjectAction: Observable<GameObjectAction>;
-};
+export type BatteryEnchantmentCreatorParams = ResourcesContainer &
+  SEPlayerContainer & {
+    /** ゲームオブジェクトアクション */
+    gameObjectAction: Observable<GameObjectAction>;
+  };
 
 /**
  * プレイヤー バッテリー増強 ポップアップ

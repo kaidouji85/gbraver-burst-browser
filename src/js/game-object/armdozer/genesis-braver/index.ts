@@ -8,10 +8,11 @@ import { EnemyGenesisBraverView } from "./view/enemy-genesis-braver-view";
 import { PlayerGenesisBraverView } from "./view/player-genesis-braver-view";
 
 /** ジェネシスブレイバー生成関数パラメータ */
-type GenesisBraverCreatorParams = ResourcesContainer & SEPlayerContainer & {
-  /** ゲームオブジェクトアクション */
-  gameObjectAction: Observable<GameObjectAction>;
-};
+type GenesisBraverCreatorParams = ResourcesContainer &
+  SEPlayerContainer & {
+    /** ゲームオブジェクトアクション */
+    gameObjectAction: Observable<GameObjectAction>;
+  };
 
 /**
  * プレイヤージェネシスブレイバーを生成

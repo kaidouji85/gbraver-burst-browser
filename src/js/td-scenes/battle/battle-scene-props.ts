@@ -21,27 +21,28 @@ export type BattleEnd = {
 };
 
 /** 戦闘シーンプロパティ */
-export type BattleSceneProps = BGMManagerContainer & SEPlayerContainer & {
-  /** 画面を開いているプレイヤーのID */
-  readonly playerId: PlayerId;
-  /** アニメーションプレイヤー */
-  readonly animatePlayer: AnimatePlayer;
-  /** ゲームステートヒストリー */
-  stateHistory: GameState[];
-  /** バトル終了ストリーム */
-  readonly endBattle: Subject<BattleEnd>;
-  /** バトル進行オブジェクト */
-  readonly battleProgress: BattleProgress;
-  /** カスタムバトルイベント */
-  readonly customBattleEvent: CustomBattleEvent | null;
-  /** 排他制御オブジェクト */
-  readonly exclusive: Exclusive;
-  /** 戦闘シーンビュー */
-  readonly view: BattleSceneView;
-  /** ウインドウ押下ストリーム */
-  readonly pushWindow: Observable<PushWindow>;
-  /** 戦闘シーン効果音 */
-  readonly sounds: BattleSceneSounds;
-  /** コントローラータイプ */
-  readonly controllerType: BattleControllerType;
-};
+export type BattleSceneProps = BGMManagerContainer &
+  SEPlayerContainer & {
+    /** 画面を開いているプレイヤーのID */
+    readonly playerId: PlayerId;
+    /** アニメーションプレイヤー */
+    readonly animatePlayer: AnimatePlayer;
+    /** ゲームステートヒストリー */
+    stateHistory: GameState[];
+    /** バトル終了ストリーム */
+    readonly endBattle: Subject<BattleEnd>;
+    /** バトル進行オブジェクト */
+    readonly battleProgress: BattleProgress;
+    /** カスタムバトルイベント */
+    readonly customBattleEvent: CustomBattleEvent | null;
+    /** 排他制御オブジェクト */
+    readonly exclusive: Exclusive;
+    /** 戦闘シーンビュー */
+    readonly view: BattleSceneView;
+    /** ウインドウ押下ストリーム */
+    readonly pushWindow: Observable<PushWindow>;
+    /** 戦闘シーン効果音 */
+    readonly sounds: BattleSceneSounds;
+    /** コントローラータイプ */
+    readonly controllerType: BattleControllerType;
+  };

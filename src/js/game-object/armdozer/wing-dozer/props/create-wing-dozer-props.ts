@@ -6,10 +6,11 @@ import { WingDozerView } from "../view/wing-dozer-view";
 import { WingDozerProps } from "./wing-dozer-props";
 
 /** WingDozerProps生成パラメータ */
-export type PropsCreatorParams = ResourcesContainer & SEPlayerContainer & {
-  /** ビュー */
-  view: WingDozerView;
-};
+export type PropsCreatorParams = ResourcesContainer &
+  SEPlayerContainer & {
+    /** ビュー */
+    view: WingDozerView;
+  };
 
 /**
  * WingDozerPropsを生成する

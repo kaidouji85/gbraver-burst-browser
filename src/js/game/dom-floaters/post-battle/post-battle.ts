@@ -26,10 +26,11 @@ type ActionButton = {
 };
 
 /** showメソッドのパラメータ */
-export type ShowParams = ResourcesContainer & SEPlayerContainer & {
-  /** アクションボタン設定 */
-  buttons: PostBattleButtonConfig[];
-};
+export type ShowParams = ResourcesContainer &
+  SEPlayerContainer & {
+    /** アクションボタン設定 */
+    buttons: PostBattleButtonConfig[];
+  };
 
 /** バトル終了後行動選択フローター */
 export class PostBattleFloater {

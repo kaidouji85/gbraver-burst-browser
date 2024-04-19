@@ -6,10 +6,11 @@ import { GenesisBraverView } from "../view/genesis-braver-view";
 import { GenesisBraverProps } from "./genesis-braver-props";
 
 /** GenesisBraverProps生成パラメータ */
-export type PropsCreatorParams = ResourcesContainer & SEPlayerContainer & {
-  /** ビュー */
-  view: GenesisBraverView;
-};
+export type PropsCreatorParams = ResourcesContainer &
+  SEPlayerContainer & {
+    /** ビュー */
+    view: GenesisBraverView;
+  };
 
 /**
  * GenesisBraverPropsを生成する

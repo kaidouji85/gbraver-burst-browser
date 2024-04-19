@@ -1,17 +1,18 @@
 import { Observable } from "rxjs";
 
 import type { ResourcesContainer } from "../../../resource";
-import { SEPlayer, SEPlayerContainer } from "../../../se/se-player";
+import { SEPlayerContainer } from "../../../se/se-player";
 import type { GameObjectAction } from "../../action/game-object-action";
 import { GaiCutIn } from "./gai";
 import { EnemyGaiView } from "./view/enemy-gai-view";
 import { PlayerGaiView } from "./view/player-gai-view";
 
 /** 生成パラメータ */
-export type GaiCutInCreatorParams = ResourcesContainer & SEPlayerContainer & {
-  /** ゲームオブジェクトアクション */
-  gameObjectAction: Observable<GameObjectAction>;
-};
+export type GaiCutInCreatorParams = ResourcesContainer &
+  SEPlayerContainer & {
+    /** ゲームオブジェクトアクション */
+    gameObjectAction: Observable<GameObjectAction>;
+  };
 
 /**
  * プレイヤー側 ガイ カットイン

@@ -25,7 +25,10 @@ import { TDSceneBinder } from "../td-scene-binder";
  * ゲームプロパティ
  * 本オブジェクトはゲーム管理オブジェクト内部、各種ヘルパーで利用することを想定している
  */
-export interface GameProps extends BGMManagerContainer, ResourcesContainer, SEPlayerContainer {
+export interface GameProps
+  extends BGMManagerContainer,
+    ResourcesContainer,
+    SEPlayerContainer {
   /** パフォーマンス統計、表示されていない場合はnullが入る */
   performanceStats: PerformanceStats | null;
   /** サービスワーカーを利用するか否か、trueで利用する */

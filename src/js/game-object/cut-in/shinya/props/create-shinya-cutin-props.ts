@@ -6,10 +6,11 @@ import { ShinyaView } from "../view/shinya-view";
 import { ShinyaCutInProps } from "./shinya-cutin-props";
 
 /** 生成パラメータ */
-export type PropsCreatorParams = ResourcesContainer & SEPlayerContainer & {
-  /** ビュー */
-  view: ShinyaView;
-};
+export type PropsCreatorParams = ResourcesContainer &
+  SEPlayerContainer & {
+    /** ビュー */
+    view: ShinyaView;
+  };
 
 /**
  * シンヤ カットイン プロパティを生成する

@@ -9,10 +9,11 @@ import { EnemyShockWaveView } from "./view/enemy-shock-wave-view";
 import { PlayerShockWaveView } from "./view/player-shock-wave-view";
 
 /** 生成パラメータ */
-export type ShockWaveCreatorParams = ResourcesContainer & SEPlayerContainer & {
-  /** ゲームオブジェクトアクション */
-  gameObjectAction: Observable<GameObjectAction>;
-};
+export type ShockWaveCreatorParams = ResourcesContainer &
+  SEPlayerContainer & {
+    /** ゲームオブジェクトアクション */
+    gameObjectAction: Observable<GameObjectAction>;
+  };
 
 /**
  * プレイヤーの衝撃波を生成する

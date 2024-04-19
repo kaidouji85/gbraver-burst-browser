@@ -6,10 +6,11 @@ import { TsubasaView } from "../view/tsubasa-view";
 import { TsubasaCutInProps } from "./tsubasa-cutin-props";
 
 /** ツバサ カットイン プロパティ生成パラメータ */
-export type PropsCreatorParams = ResourcesContainer & SEPlayerContainer & {
-  /** ビュー */
-  view: TsubasaView;
-};
+export type PropsCreatorParams = ResourcesContainer &
+  SEPlayerContainer & {
+    /** ビュー */
+    view: TsubasaView;
+  };
 
 /**
  * TsubasaCutInPropsを生成する

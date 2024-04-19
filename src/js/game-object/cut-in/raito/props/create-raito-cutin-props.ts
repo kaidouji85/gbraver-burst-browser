@@ -6,10 +6,11 @@ import { RaitoView } from "../view/raito-view";
 import { RaitoCutInProps } from "./raito-cutin-props";
 
 /** 生成パラメータ */
-export type PropsCreatorParams = ResourcesContainer & SEPlayerContainer & {
-  /** ビュー */
-  view: RaitoView;
-};
+export type PropsCreatorParams = ResourcesContainer &
+  SEPlayerContainer & {
+    /** ビュー */
+    view: RaitoView;
+  };
 
 /**
  * RaitoCutInPropsを生成する

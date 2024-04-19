@@ -6,10 +6,11 @@ import { NeoLandozerView } from "../view/neo-landozer-view";
 import { NeoLandozerProps } from "./neo-landozer-props";
 
 /** NeoLandozerProps生成パラメータ */
-export type PropsCreatorParams = ResourcesContainer & SEPlayerContainer & {
-  /** ビュー */
-  view: NeoLandozerView;
-};
+export type PropsCreatorParams = ResourcesContainer &
+  SEPlayerContainer & {
+    /** ビュー */
+    view: NeoLandozerView;
+  };
 
 /**
  * NeoLandozerPropsを生成する

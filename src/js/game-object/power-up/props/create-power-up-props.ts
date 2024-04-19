@@ -6,10 +6,11 @@ import { PowerUpView } from "../view/power-up-view";
 import { PowerUpProps } from "./power-up-props";
 
 /** PowerUpProps 生成パラメータ */
-export type PropsCreatorParams = ResourcesContainer & SEPlayerContainer & {
-  /** ビュー */
-  view: PowerUpView;
-};
+export type PropsCreatorParams = ResourcesContainer &
+  SEPlayerContainer & {
+    /** ビュー */
+    view: PowerUpView;
+  };
 
 /**
  * PowerUpPropsを生成する

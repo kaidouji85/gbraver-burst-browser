@@ -8,10 +8,11 @@ import { EnemyShinBraverView } from "./view/enemy-shin-braver-view";
 import { PlayerShinBraverView } from "./view/player-shin-braver-view";
 
 /** シンブレイバー生成関数パラメータ */
-type ShinBraverCreatorParams = ResourcesContainer & SEPlayerContainer & {
-  /** ゲームオブジェクトアクション */
-  gameObjectAction: Observable<GameObjectAction>;
-};
+type ShinBraverCreatorParams = ResourcesContainer &
+  SEPlayerContainer & {
+    /** ゲームオブジェクトアクション */
+    gameObjectAction: Observable<GameObjectAction>;
+  };
 
 /**
  * プレイヤー側シンブレイバー

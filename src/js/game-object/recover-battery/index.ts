@@ -8,10 +8,11 @@ import { EnemyRecoverBatteryView } from "./view/enemy-recover-battery-view";
 import { PlayerRecoverBatteryView } from "./view/player-recover-battery-view";
 
 /** 生成パラメータ */
-export type RecoverBatteryCreatorParams = ResourcesContainer & SEPlayerContainer & {
-  /** ゲームオブジェクトアクション */
-  gameObjectAction: Observable<GameObjectAction>;
-};
+export type RecoverBatteryCreatorParams = ResourcesContainer &
+  SEPlayerContainer & {
+    /** ゲームオブジェクトアクション */
+    gameObjectAction: Observable<GameObjectAction>;
+  };
 
 /**
  * プレイヤー側 バッテリー回復

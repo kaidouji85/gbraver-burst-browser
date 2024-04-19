@@ -8,10 +8,11 @@ import { EnemyLightningDozerView } from "./view/enemy-lightning-dozer-view";
 import { PlayerLightingDozerView } from "./view/player-lighting-dozer-view";
 
 /** ライトニングドーザ生成関数パラメータ */
-type LightningDozerCreatorParams = ResourcesContainer & SEPlayerContainer & {
-  /** ゲームオブジェクトアクション */
-  gameObjectAction: Observable<GameObjectAction>;
-};
+type LightningDozerCreatorParams = ResourcesContainer &
+  SEPlayerContainer & {
+    /** ゲームオブジェクトアクション */
+    gameObjectAction: Observable<GameObjectAction>;
+  };
 
 /**
  * プレイヤー側のライトニングドーザを生成する

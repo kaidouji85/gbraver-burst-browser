@@ -8,10 +8,11 @@ import { EnemyRaitoView } from "./view/enemy-raito-view";
 import { PlayerRaitoView } from "./view/player-raito-view";
 
 /** 生成パラメータ */
-export type RaitoCutInCreatorParams = ResourcesContainer & SEPlayerContainer & {
-  /** ゲームオブジェクトアクション */
-  gameObjectAction: Observable<GameObjectAction>;
-};
+export type RaitoCutInCreatorParams = ResourcesContainer &
+  SEPlayerContainer & {
+    /** ゲームオブジェクトアクション */
+    gameObjectAction: Observable<GameObjectAction>;
+  };
 
 /**
  * プレイヤー側 ライト カットイン

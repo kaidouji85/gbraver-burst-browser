@@ -6,10 +6,11 @@ import { ShinBraverView } from "../view/shin-braver-view";
 import { ShinBraverProps } from "./shin-braver-props";
 
 /** ShinBraverProps生成パラメータ */
-export type PropsCreatorParams = ResourcesContainer & SEPlayerContainer & {
-  /** ビュー */
-  view: ShinBraverView;
-};
+export type PropsCreatorParams = ResourcesContainer &
+  SEPlayerContainer & {
+    /** ビュー */
+    view: ShinBraverView;
+  };
 
 /**
  * ShinBraverPropsを生成する
