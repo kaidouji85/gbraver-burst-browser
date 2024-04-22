@@ -20,7 +20,7 @@ import { TrackingParams } from "./tracking-params";
  * @param rendererDOM レンダラDOM
  */
 export function trackingArmdozerSprites(params: TrackingParams): void {
-  const {td, hud, rendererDOM} = params;
+  const { td, hud, rendererDOM } = params;
   td.armdozerObjects.forEach((tdArmdozer) => {
     const hudArmdozer = hud.armdozers.find(
       (v) => v.playerId === tdArmdozer.playerId,

@@ -16,7 +16,7 @@ import { TrackingParams } from "./tracking-params";
  * @param params パラメータ
  */
 export function trackingGauges(params: TrackingParams): void {
-  const {td, hud, activePlayerId, rendererDOM} = params;
+  const { td, hud, activePlayerId, rendererDOM } = params;
   hud.players.forEach((hudPlayer) => {
     const isActivePlayer = hudPlayer.playerId === activePlayerId;
     const hudPosition = isActivePlayer
