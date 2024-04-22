@@ -109,8 +109,7 @@ export class BattleSceneView {
       time: action.time,
     });
     tracking({
-      td: this.td,
-      hud: this.hud,
+      ...this,
       activePlayerId: this.#playerId,
       rendererDOM: this.#renderer.getRendererDOM(),
     });
