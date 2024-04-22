@@ -5,9 +5,9 @@ import {
   ARMDOZER_EFFECT_STANDARD_Y,
   ARMDOZER_EFFECT_STANDARD_Z,
 } from "../../../../game-object/armdozer/position";
-import type { Coordinate } from "../../../../tracking/coordinate";
-import { toHUDCoordinate } from "../../../../tracking/coordinate";
-import type { HUDTracking } from "../../../../tracking/hud-tracking";
+import { HUDCoordinate } from "../../../../tracking/coordinate";
+import { HUDTracking } from "../../../../tracking/hud-tracking";
+import { toHUDCoordinate } from "../../../../tracking/to-hud-coordinate";
 import { HUDPlayer } from "../hud/player";
 import { TrackingParams } from "./tracking-params";
 
@@ -49,7 +49,7 @@ function getTracksFromHUDPlayer(hudPlayer: Readonly<HUDPlayer>): HUDTracking[] {
 function toPlayerGaugeHUDPos(
   tdCamera: Readonly<THREE.PerspectiveCamera>,
   rendererDOM: Readonly<HTMLElement>,
-): Coordinate {
+): HUDCoordinate {
   const tdCoordinate = {
     x: ARMDOZER_EFFECT_STANDARD_X,
     y: ARMDOZER_EFFECT_STANDARD_Y + 200,
@@ -68,7 +68,7 @@ function toPlayerGaugeHUDPos(
 function toEnemyGaugeHUDPos(
   tdCamera: Readonly<THREE.PerspectiveCamera>,
   rendererDOM: Readonly<HTMLElement>,
-): Coordinate {
+): HUDCoordinate {
   const tdCoordinate = {
     x: -ARMDOZER_EFFECT_STANDARD_X,
     y: ARMDOZER_EFFECT_STANDARD_Y + 200,
