@@ -5,7 +5,7 @@ import {
 } from "../../../../game-object/armdozer/position";
 import { Coordinate, toHUDCoordinate } from "../../../../tracking/coordinate";
 import { HudLayer } from "../hud";
-import { ThreeDimensionLayer } from "../td";
+import { TrackingParams } from "./tracking-params";
 
 /** 引き出し線が指し示す3Dレイヤー座標 */
 const targetTDCoordinate = {
@@ -16,12 +16,10 @@ const targetTDCoordinate = {
 
 /**
  * バッテリーセレクタ引き出し線をトラッキングする
- * @param td 3Dレイヤー
  * @param hud HUDレイヤー
  * @param targetHUDCoordinate 引き出し線が指し示すHUDレイヤー座標
  */
 function trackingBatterySelectorLeadLine(
-  td: Readonly<ThreeDimensionLayer>,
   hud: Readonly<HudLayer>,
   targetHUDCoordinate: Readonly<Coordinate>,
 ): void {
@@ -41,12 +39,10 @@ function trackingBatterySelectorLeadLine(
 
 /**
  * バーストボタン引き出し線をトラッキングする
- * @param td 3Dレイヤー
  * @param hud HUDレイヤー
  * @param targetHUDCoordinate 引き出し線が指し示すHUDレイヤー座標
  */
 function trackingBurstButtonLeadLine(
-  td: Readonly<ThreeDimensionLayer>,
   hud: Readonly<HudLayer>,
   targetHUDCoordinate: Readonly<Coordinate>,
 ): void {
@@ -66,12 +62,10 @@ function trackingBurstButtonLeadLine(
 
 /**
  * パイロットボタン引き出し線をトラッキングする
- * @param td 3Dレイヤー
  * @param hud HUDレイヤー
  * @param targetHUDCoordinate 引き出し線が指し示すHUDレイヤー座標
  */
 function trackingPilotButtonLeadLine(
-  td: Readonly<ThreeDimensionLayer>,
   hud: Readonly<HudLayer>,
   targetHUDCoordinate: Readonly<Coordinate>,
 ): void {
@@ -91,21 +85,16 @@ function trackingPilotButtonLeadLine(
 
 /**
  * 引き出し線をトラッキングする
- * @param td 3Dレイヤー
- * @param hud HUDレイヤー
- * @param rendererDOM レンダラDOM
+ * @param params パラメータ
  */
-export function trackingLeadLine(
-  td: Readonly<ThreeDimensionLayer>,
-  hud: Readonly<HudLayer>,
-  rendererDOM: Readonly<HTMLElement>,
-): void {
+export function trackingLeadLine(params: TrackingParams): void {
+  const { td, hud, rendererDOM } = params;
   const targetHUDCoordinate = toHUDCoordinate(
     targetTDCoordinate,
     td.camera.getCamera(),
     rendererDOM,
   );
-  trackingBatterySelectorLeadLine(td, hud, targetHUDCoordinate);
-  trackingBurstButtonLeadLine(td, hud, targetHUDCoordinate);
-  trackingPilotButtonLeadLine(td, hud, targetHUDCoordinate);
+  trackingBatterySelectorLeadLine(hud, targetHUDCoordinate);
+  trackingBurstButtonLeadLine(hud, targetHUDCoordinate);
+  trackingPilotButtonLeadLine(hud, targetHUDCoordinate);
 }

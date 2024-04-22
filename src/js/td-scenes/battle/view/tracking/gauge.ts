@@ -1,4 +1,3 @@
-import type { PlayerId } from "gbraver-burst-core";
 import * as THREE from "three";
 
 import {
@@ -9,23 +8,15 @@ import {
 import type { Coordinate } from "../../../../tracking/coordinate";
 import { toHUDCoordinate } from "../../../../tracking/coordinate";
 import type { HUDTracking } from "../../../../tracking/hud-tracking";
-import { HudLayer } from "../hud";
 import { HUDPlayer } from "../hud/player";
-import { ThreeDimensionLayer } from "../td";
+import { TrackingParams } from "./tracking-params";
 
 /**
  * ゲージをトラッキングする
- * @param td 3Dレイヤー
- * @param hud HUDレイヤー
- * @param activePlayerId アクティブプレイヤーID
- * @param rendererDOM レンダラDOM
+ * @param params パラメータ
  */
-export function trackingGauges(
-  td: Readonly<ThreeDimensionLayer>,
-  hud: Readonly<HudLayer>,
-  activePlayerId: Readonly<PlayerId>,
-  rendererDOM: Readonly<HTMLElement>,
-): void {
+export function trackingGauges(params: TrackingParams): void {
+  const {td, hud, activePlayerId, rendererDOM} = params;
   hud.players.forEach((hudPlayer) => {
     const isActivePlayer = hudPlayer.playerId === activePlayerId;
     const hudPosition = isActivePlayer
