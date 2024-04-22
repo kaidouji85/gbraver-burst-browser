@@ -5,26 +5,20 @@ import { ARMDOZER_EFFECT_STANDARD_Y } from "../../../../game-object/armdozer/pos
 import type { Coordinate } from "../../../../tracking/coordinate";
 import { toHUDCoordinate } from "../../../../tracking/coordinate";
 import type { HUDTracking } from "../../../../tracking/hud-tracking";
-import { HudLayer } from "../hud";
 import { GenesisBraverHUD } from "../hud/armdozer-objects/genesis-braver";
 import type { HUDArmdozerObjects } from "../hud/armdozer-objects/hud-armdozer-objects";
 import { LightningDozerHUD } from "../hud/armdozer-objects/lightning-dozer";
 import { NeoLandozerHUD } from "../hud/armdozer-objects/neo-landozer";
 import { ShinBraverHUD } from "../hud/armdozer-objects/shin-braver";
 import { WingDozerHUD } from "../hud/armdozer-objects/wing-dozer";
-import { ThreeDimensionLayer } from "../td";
+import { TrackingParams } from "./tracking-params";
 
 /**
  * アームドーザスプライトをトラッキングする
- * @param td 3Dレイヤー
- * @param hud HUDレイヤー
- * @param rendererDOM レンダラDOM
+ * @param params パラメータ
  */
-export function trackingArmdozerSprites(
-  td: Readonly<ThreeDimensionLayer>,
-  hud: Readonly<HudLayer>,
-  rendererDOM: Readonly<HTMLElement>,
-): void {
+export function trackingArmdozerSprites(params: TrackingParams): void {
+  const { td, hud, rendererDOM } = params;
   td.armdozerObjects.forEach((tdArmdozer) => {
     const hudArmdozer = hud.armdozers.find(
       (v) => v.playerId === tdArmdozer.playerId,

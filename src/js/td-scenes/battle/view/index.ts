@@ -108,12 +108,12 @@ export class BattleSceneView {
       type: "Update",
       time: action.time,
     });
-    tracking(
-      this.td,
-      this.hud,
-      this.#playerId,
-      this.#renderer.getRendererDOM(),
-    );
+    tracking({
+      td: this.td,
+      hud: this.hud,
+      activePlayerId: this.#playerId,
+      rendererDOM: this.#renderer.getRendererDOM(),
+    });
     this.#preRenderHUD.next({
       type: "PreRender",
       camera: this.hud.camera.getCamera(),
