@@ -3,7 +3,8 @@ import {
   ARMDOZER_EFFECT_STANDARD_Y,
   ARMDOZER_EFFECT_STANDARD_Z,
 } from "../../../../game-object/armdozer/position";
-import { Coordinate, toHUDCoordinate } from "../../../../tracking/coordinate";
+import { HUDCoordinate } from "../../../../tracking/coordinate";
+import { toHUDCoordinate } from "../../../../tracking/to-hud-coordinate";
 import { HudLayer } from "../hud";
 import { TrackingParams } from "./tracking-params";
 
@@ -21,7 +22,7 @@ const targetTDCoordinate = {
  */
 function trackingBatterySelectorLeadLine(
   hud: Readonly<HudLayer>,
-  targetHUDCoordinate: Readonly<Coordinate>,
+  targetHUDCoordinate: Readonly<HUDCoordinate>,
 ): void {
   const batterySelectorPosition =
     hud.gameObjects.batterySelector.getObject3D().position;
@@ -44,7 +45,7 @@ function trackingBatterySelectorLeadLine(
  */
 function trackingBurstButtonLeadLine(
   hud: Readonly<HudLayer>,
-  targetHUDCoordinate: Readonly<Coordinate>,
+  targetHUDCoordinate: Readonly<HUDCoordinate>,
 ): void {
   const burstButtonPosition =
     hud.gameObjects.burstButton.getObject3D().position;
@@ -67,7 +68,7 @@ function trackingBurstButtonLeadLine(
  */
 function trackingPilotButtonLeadLine(
   hud: Readonly<HudLayer>,
-  targetHUDCoordinate: Readonly<Coordinate>,
+  targetHUDCoordinate: Readonly<HUDCoordinate>,
 ): void {
   const pilotButtonPosition =
     hud.gameObjects.pilotButton.getObject3D().position;

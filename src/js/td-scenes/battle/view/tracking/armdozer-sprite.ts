@@ -1,12 +1,12 @@
 import * as THREE from "three";
 
-import type { ArmdozerSprite } from "../../../../game-object/armdozer/armdozer-sprite";
+import { ArmdozerSprite } from "../../../../game-object/armdozer/armdozer-sprite";
 import { ARMDOZER_EFFECT_STANDARD_Y } from "../../../../game-object/armdozer/position";
-import type { Coordinate } from "../../../../tracking/coordinate";
-import { toHUDCoordinate } from "../../../../tracking/coordinate";
-import type { HUDTracking } from "../../../../tracking/hud-tracking";
+import { HUDCoordinate } from "../../../../tracking/coordinate";
+import { HUDTracking } from "../../../../tracking/hud-tracking";
+import { toHUDCoordinate } from "../../../../tracking/to-hud-coordinate";
 import { GenesisBraverHUD } from "../hud/armdozer-objects/genesis-braver";
-import type { HUDArmdozerObjects } from "../hud/armdozer-objects/hud-armdozer-objects";
+import { HUDArmdozerObjects } from "../hud/armdozer-objects/hud-armdozer-objects";
 import { LightningDozerHUD } from "../hud/armdozer-objects/lightning-dozer";
 import { NeoLandozerHUD } from "../hud/armdozer-objects/neo-landozer";
 import { ShinBraverHUD } from "../hud/armdozer-objects/shin-braver";
@@ -82,7 +82,7 @@ function toCutInHUDPos(
   tdCamera: Readonly<THREE.PerspectiveCamera>,
   rendererDOM: Readonly<HTMLElement>,
   sprite: Readonly<ArmdozerSprite>,
-): Coordinate {
+): HUDCoordinate {
   const target = sprite.getObject3D();
   const tdPosition = {
     x: target.position.x,
