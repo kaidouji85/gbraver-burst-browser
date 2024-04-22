@@ -1,8 +1,11 @@
+import { DOMCoordinate } from "../../tracking/coordinate";
+import { DOMTracking } from "../../tracking/dom-tracking";
 import { createPredicatedDamageProps } from "./procedure/create-predicated-damage-props";
+import { tracking } from "./procedure/tracking";
 import { PredicatedDamageProps } from "./props";
 
 /** ダメージ予想 */
-export class PredicatedDamage {
+export class PredicatedDamage implements DOMTracking {
   /** プロパティ */
   #props: PredicatedDamageProps;
 
@@ -19,5 +22,10 @@ export class PredicatedDamage {
    */
   getRootHTMLElement(): HTMLElement {
     return this.#props.root;
+  }
+
+  /** @override */
+  tracking(coordinate: DOMCoordinate): void {
+    tracking(this.#props, coordinate);
   }
 }
