@@ -17,3 +17,11 @@ export type HUDCoordinate = {
   /** z座標 */
   z: number;
 };
+
+/** DOMレイヤーの座標 */
+export type DOMCoordinate = {
+  /** css top（単位は%） */
+  top: number;
+  /** css left（単位は%） */
+  left: number;
+}
