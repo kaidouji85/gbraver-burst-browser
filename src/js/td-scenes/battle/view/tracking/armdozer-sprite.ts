@@ -15,9 +15,7 @@ import { TrackingParams } from "./tracking-params";
 
 /**
  * アームドーザスプライトをトラッキングする
- * @param td 3Dレイヤー
- * @param hud HUDレイヤー
- * @param rendererDOM レンダラDOM
+ * @param params パラメータ
  */
 export function trackingArmdozerSprites(params: TrackingParams): void {
   const { td, hud, rendererDOM } = params;
