@@ -1,7 +1,7 @@
-import type { PlayerId } from "gbraver-burst-core";
+import { PlayerId } from "gbraver-burst-core";
 import * as THREE from "three";
 
-import type { ArmdozerSprite } from "../../../../../game-object/armdozer/armdozer-sprite";
+import { ArmdozerSprite } from "../../../../../game-object/armdozer/armdozer-sprite";
 import {
   EnemyLightningDozer,
   PlayerLightningDozer,
@@ -9,39 +9,21 @@ import {
 import { LightningDozer } from "../../../../../game-object/armdozer/lightning-dozer/lightning-dozer";
 import { LightningBarrierGameEffect } from "../../../../../game-object/barrier/lightning/lightning-barrier";
 import { TDLayerObjectCreatorParams } from "../creator-params";
-import type { TDArmdozerObjects } from "./armdozer-objects";
-
-/** ライトニングドーザ 3Dレイヤー フィールド */
-interface LightningDozerTDField {
-  /** ライトニングドーザ */
-  lightningDozer: LightningDozer;
-
-  /** 電撃バリア */
-  lightningBarrier: LightningBarrierGameEffect;
-}
+import { TDArmdozerObjects } from "./armdozer-objects";
 
 /** ライトニングドーザ 3Dレイヤー */
-export class LightningDozerTD
-  implements TDArmdozerObjects, LightningDozerTDField
-{
-  /** @override */
-  playerId: PlayerId;
-
-  /** @override */
-  lightningDozer: LightningDozer;
-
-  /** @override */
-  lightningBarrier: LightningBarrierGameEffect;
-
+export class LightningDozerTD implements TDArmdozerObjects {
   /**
    * コンストラクタ
    * @param playerId プレイヤーID
-   * @param filed フィールド
+   * @param lightningDozer スプライト
+   * @param lightningBarrier 電撃バリア
    */
-  constructor(playerId: PlayerId, filed: LightningDozerTDField) {
-    this.playerId = playerId;
-    this.lightningDozer = filed.lightningDozer;
-    this.lightningBarrier = filed.lightningBarrier;
+  constructor(
+    readonly playerId: PlayerId,
+    readonly lightningDozer: LightningDozer,
+    readonly lightningBarrier: LightningBarrierGameEffect,
+  ) {
     this.lightningDozer.addObject3D(this.lightningBarrier.getObject3D());
   }
 
@@ -71,10 +53,11 @@ export function playerLightningDozerTD(
   params: TDLayerObjectCreatorParams,
 ): LightningDozerTD {
   const { player } = params;
-  return new LightningDozerTD(player.playerId, {
-    lightningDozer: PlayerLightningDozer(params),
-    lightningBarrier: new LightningBarrierGameEffect(params),
-  });
+  return new LightningDozerTD(
+    player.playerId,
+    PlayerLightningDozer(params),
+    new LightningBarrierGameEffect(params),
+  );
 }
 
 /**
@@ -86,8 +69,9 @@ export function enemyLightningDozerTD(
   params: TDLayerObjectCreatorParams,
 ): LightningDozerTD {
   const { enemy } = params;
-  return new LightningDozerTD(enemy.playerId, {
-    lightningDozer: EnemyLightningDozer(params),
-    lightningBarrier: new LightningBarrierGameEffect(params),
-  });
+  return new LightningDozerTD(
+    enemy.playerId,
+    EnemyLightningDozer(params),
+    new LightningBarrierGameEffect(params),
+  );
 }

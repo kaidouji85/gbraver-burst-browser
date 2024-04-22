@@ -1,38 +1,26 @@
-import type { PlayerId } from "gbraver-burst-core";
+import { PlayerId } from "gbraver-burst-core";
 import * as THREE from "three";
 
-import type { ArmdozerSprite } from "../../../../../game-object/armdozer/armdozer-sprite";
+import { ArmdozerSprite } from "../../../../../game-object/armdozer/armdozer-sprite";
 import {
   EnemyNeoLandozer,
   PlayerNeoLandozer,
 } from "../../../../../game-object/armdozer/neo-landozer";
 import { NeoLandozer } from "../../../../../game-object/armdozer/neo-landozer/neo-landozer";
 import { TDLayerObjectCreatorParams } from "../creator-params";
-import type { TDArmdozerObjects } from "./armdozer-objects";
-
-/** ネオランドーザ 3Dレイヤー フィールド */
-interface NeoLandozerTDField {
-  /** ネオランドーザ */
-  neoLandozer: NeoLandozer;
-}
+import { TDArmdozerObjects } from "./armdozer-objects";
 
 /** ネオランドーザ 3Dレイヤー */
-export class NeoLandozerTD implements NeoLandozerTDField, TDArmdozerObjects {
-  /** @override */
-  playerId: PlayerId;
-
-  /** @override */
-  neoLandozer: NeoLandozer;
-
+export class NeoLandozerTD implements TDArmdozerObjects {
   /**
    * コンストラクタ
    * @param playerId プレイヤーID
-   * @param field フィールド
+   * @param neoLandozer スプライト
    */
-  constructor(playerId: PlayerId, field: NeoLandozerTDField) {
-    this.playerId = playerId;
-    this.neoLandozer = field.neoLandozer;
-  }
+  constructor(
+    readonly playerId: PlayerId,
+    readonly neoLandozer: NeoLandozer,
+  ) {}
 
   /** @override */
   destructor(): void {
@@ -59,9 +47,7 @@ export function playerNeoLandozerTD(
   params: TDLayerObjectCreatorParams,
 ): NeoLandozerTD {
   const { player } = params;
-  return new NeoLandozerTD(player.playerId, {
-    neoLandozer: PlayerNeoLandozer(params),
-  });
+  return new NeoLandozerTD(player.playerId, PlayerNeoLandozer(params));
 }
 
 /**
@@ -73,7 +59,5 @@ export function enemyNeoLandozerTD(
   params: TDLayerObjectCreatorParams,
 ): NeoLandozerTD {
   const { enemy } = params;
-  return new NeoLandozerTD(enemy.playerId, {
-    neoLandozer: EnemyNeoLandozer(params),
-  });
+  return new NeoLandozerTD(enemy.playerId, EnemyNeoLandozer(params));
 }

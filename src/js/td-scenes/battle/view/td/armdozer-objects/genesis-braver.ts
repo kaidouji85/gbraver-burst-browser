@@ -1,40 +1,26 @@
-import type { PlayerId } from "gbraver-burst-core";
+import { PlayerId } from "gbraver-burst-core";
 import * as THREE from "three";
 
-import type { ArmdozerSprite } from "../../../../../game-object/armdozer/armdozer-sprite";
+import { ArmdozerSprite } from "../../../../../game-object/armdozer/armdozer-sprite";
 import {
   EnemyGenesisBraver,
   PlayerGenesisBraver,
 } from "../../../../../game-object/armdozer/genesis-braver";
 import { GenesisBraver } from "../../../../../game-object/armdozer/genesis-braver/genesis-braver";
 import { TDLayerObjectCreatorParams } from "../creator-params";
-import type { TDArmdozerObjects } from "./armdozer-objects";
-
-/** ジェネシスブレイバー 3Dレイヤー フィールド */
-interface GenesisBraverTDField {
-  /** スプライト */
-  genesisBraver: GenesisBraver;
-}
+import { TDArmdozerObjects } from "./armdozer-objects";
 
 /** ジェネシスブレイバー 3Dレイヤー */
-export class GenesisBraverTD
-  implements GenesisBraverTDField, TDArmdozerObjects
-{
-  /** @override */
-  playerId: PlayerId;
-
-  /** @override */
-  genesisBraver: GenesisBraver;
-
+export class GenesisBraverTD implements TDArmdozerObjects {
   /**
    * コンストラクタ
    * @param playerId プレイヤーID
-   * @param field フィールド
+   * @param genesisBraver スプライト
    */
-  constructor(playerId: PlayerId, field: GenesisBraverTDField) {
-    this.playerId = playerId;
-    this.genesisBraver = field.genesisBraver;
-  }
+  constructor(
+    readonly playerId: PlayerId,
+    readonly genesisBraver: GenesisBraver,
+  ) {}
 
   /** @override */
   destructor(): void {
@@ -61,9 +47,7 @@ export function playerGenesisBraverTD(
   params: TDLayerObjectCreatorParams,
 ): GenesisBraverTD {
   const { player } = params;
-  return new GenesisBraverTD(player.playerId, {
-    genesisBraver: PlayerGenesisBraver(params),
-  });
+  return new GenesisBraverTD(player.playerId, PlayerGenesisBraver(params));
 }
 
 /**
@@ -75,7 +59,5 @@ export function enemyGenesisBraverTD(
   params: TDLayerObjectCreatorParams,
 ): GenesisBraverTD {
   const { enemy } = params;
-  return new GenesisBraverTD(enemy.playerId, {
-    genesisBraver: EnemyGenesisBraver(params),
-  });
+  return new GenesisBraverTD(enemy.playerId, EnemyGenesisBraver(params));
 }
