@@ -4,6 +4,7 @@ import { BattleSceneAction } from "../../actions";
 import { BattleViewCreatorParams } from "../creator-params";
 import { createBattleAction } from "./procedure/create-battle-action";
 import { createDOMLayerProps } from "./procedure/create-dom-layer-props";
+import { destructor } from "./procedure/destructor";
 import { getHTMLElements } from "./procedure/get-html-elements";
 import { DOMLayerProps } from "./props";
 
@@ -37,9 +38,7 @@ export function createDOMLayer(params: BattleViewCreatorParams): DOMLayer {
   const battleAction = createBattleAction(props);
   return {
     ...props,
-    destructor: () => {
-      props.miniController.destructor();
-    },
+    destructor: () => destructor(props),
     battleActionNotifier: () => battleAction,
     getHTMLElements: () => getHTMLElements(props),
   };
