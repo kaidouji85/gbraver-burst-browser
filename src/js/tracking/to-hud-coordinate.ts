@@ -9,7 +9,6 @@ import { HUDCoordinate, TDCoordinate } from "./coordinate";
  * @param rendererDOM レンダリング対象のHTML要素
  * @return 変換結果
  */
-
 export function toHUDCoordinate(
   tdCoordinate: TDCoordinate,
   camera: THREE.PerspectiveCamera,
