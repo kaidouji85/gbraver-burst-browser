@@ -1,4 +1,4 @@
-import type { PlayerId } from "gbraver-burst-core";
+import { PlayerId } from "gbraver-burst-core";
 import * as THREE from "three";
 
 import {
@@ -7,32 +7,19 @@ import {
 } from "../../../../../game-object/cut-in/shinya";
 import { ShinyaCutIn } from "../../../../../game-object/cut-in/shinya/shinya";
 import { HUDLayerObjectCreatorParams } from "../creator-params";
-import type { HUDPilotObjects } from "./hud-pilot-objects";
+import { HUDPilotObjects } from "./hud-pilot-objects";
 
-/**
- * コンストラクタのパラメータ
- */
-type Params = {
-  playerId: PlayerId;
-  cutIn: ShinyaCutIn;
-};
-
-/**
- * HUDレイヤー シンヤ固有のオブジェクトをあつめたもの
- */
+/** シンヤ HUDオブジェクト */
 export class ShinyaHUD implements HUDPilotObjects {
-  playerId: PlayerId;
-  cutIn: ShinyaCutIn;
-
   /**
    * コンストラクタ
-   *
-   * @param params パラメータ
+   * @param playerId プレイヤーID
+   * @param cutIn カットイン
    */
-  constructor(params: Params) {
-    this.playerId = params.playerId;
-    this.cutIn = params.cutIn;
-  }
+  constructor(
+    readonly playerId: PlayerId,
+    readonly cutIn: ShinyaCutIn,
+  ) {}
 
   /**
    * デストラクタ相当の処理
@@ -60,10 +47,7 @@ export function playerShinyaHUD(
   params: HUDLayerObjectCreatorParams,
 ): ShinyaHUD {
   const { player } = params;
-  return new ShinyaHUD({
-    playerId: player.playerId,
-    cutIn: playerShinyaCutIn(params),
-  });
+  return new ShinyaHUD(player.playerId, playerShinyaCutIn(params));
 }
 
 /**
@@ -73,8 +57,5 @@ export function playerShinyaHUD(
  */
 export function enemyShinyaHUD(params: HUDLayerObjectCreatorParams): ShinyaHUD {
   const { enemy } = params;
-  return new ShinyaHUD({
-    playerId: enemy.playerId,
-    cutIn: enemyShinyaCutIn(params),
-  });
+  return new ShinyaHUD(enemy.playerId, enemyShinyaCutIn(params));
 }
