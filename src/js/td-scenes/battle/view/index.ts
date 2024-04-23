@@ -14,7 +14,7 @@ import type { BattleSceneAction } from "../actions";
 import { BattleViewCreatorParams } from "./creator-params";
 import { createDOMLayer, DOMLayer } from "./dom";
 import { createHUDLayer, HUDLayer } from "./hud";
-import { TDLayer } from "./td";
+import { createTDLayer, TDLayer } from "./td";
 import { tracking } from "./tracking";
 
 /** 戦闘シーンビューで利用するレンダラ */
@@ -51,7 +51,7 @@ export class BattleSceneView {
     this.#preRenderTD = new Subject();
     this.#updateHUD = new Subject();
     this.#preRenderHUD = new Subject();
-    this.td = new TDLayer({
+    this.td = createTDLayer({
       ...param,
       update: this.#updateTD,
       preRender: this.#preRenderTD,
