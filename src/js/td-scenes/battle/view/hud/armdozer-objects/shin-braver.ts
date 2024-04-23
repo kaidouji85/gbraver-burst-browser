@@ -1,4 +1,4 @@
-import type { PlayerId } from "gbraver-burst-core";
+import { PlayerId } from "gbraver-burst-core";
 import * as THREE from "three";
 
 import {
@@ -7,38 +7,26 @@ import {
 } from "../../../../../game-object/cut-in/shin-braver";
 import { ShinBraverCutIn } from "../../../../../game-object/cut-in/shin-braver/shin-braver-cutin";
 import { HUDLayerObjectCreatorParams } from "../creator-params";
-import type { HUDArmdozerObjects } from "./hud-armdozer-objects";
+import { HUDArmdozerObjects } from "./hud-armdozer-objects";
 
-/** コンストラクタのパラメータ */
-type Param = {
-  playerId: PlayerId;
-  cutIn: ShinBraverCutIn;
-};
-
-/**
- * HUDレイヤー シンブレイバー固有のオブジェクトをあつめたもの
- */
+/** HUDレイヤー シンブレイバー固有のオブジェクトをあつめたもの */
 export class ShinBraverHUD implements HUDArmdozerObjects {
-  playerId: PlayerId;
-  cutIn: ShinBraverCutIn;
-
-  constructor(param: Param) {
-    this.playerId = param.playerId;
-    this.cutIn = param.cutIn;
-  }
-
   /**
-   * デストラクタ相当の処理
+   * コンストラクタ
+   * @param playerId プレイヤーID
+   * @param cutIn カットイン
    */
+  constructor(
+    readonly playerId: PlayerId,
+    readonly cutIn: ShinBraverCutIn,
+  ) {}
+
+  /** @override */
   destructor(): void {
     this.cutIn.destructor();
   }
 
-  /**
-   * シーンに追加するオブジェクトを取得する
-   *
-   * @return シーンに追加するオブジェクト
-   */
+  /** @override */
   getObject3Ds(): THREE.Object3D[] {
     return [this.cutIn.getObject3D()];
   }
@@ -53,10 +41,7 @@ export function playerShinBraverHUD(
   params: HUDLayerObjectCreatorParams,
 ): HUDArmdozerObjects {
   const { player } = params;
-  return new ShinBraverHUD({
-    playerId: player.playerId,
-    cutIn: playerShinBraverCutIn(params),
-  });
+  return new ShinBraverHUD(player.playerId, playerShinBraverCutIn(params));
 }
 
 /**
@@ -68,8 +53,5 @@ export function enemyShinBraverHUD(
   params: HUDLayerObjectCreatorParams,
 ): HUDArmdozerObjects {
   const { enemy } = params;
-  return new ShinBraverHUD({
-    playerId: enemy.playerId,
-    cutIn: enemyShinBraverCutIn(params),
-  });
+  return new ShinBraverHUD(enemy.playerId, enemyShinBraverCutIn(params));
 }
