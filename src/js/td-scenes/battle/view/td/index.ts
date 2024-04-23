@@ -28,7 +28,7 @@ type Param = BattleViewCreatorParams & {
 };
 
 /** 3Dレイヤー */
-export class ThreeDimensionLayer {
+export class TDLayer {
   scene: THREE.Scene;
   camera: TDCamera;
   players: TDPlayer[];
