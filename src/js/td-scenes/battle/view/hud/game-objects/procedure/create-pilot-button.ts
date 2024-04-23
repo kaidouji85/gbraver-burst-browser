@@ -6,9 +6,9 @@ import {
   shinyaPilotButton,
   tsubasaPilotButton,
   yuuyaPilotButton,
-} from "../../../../../game-object/pilot-button";
-import { PilotButton } from "../../../../../game-object/pilot-button/pilot-button";
-import { HUDLayerObjectCreatorParams } from "../creator-params";
+} from "../../../../../../game-object/pilot-button";
+import { PilotButton } from "../../../../../../game-object/pilot-button/pilot-button";
+import { HUDLayerObjectCreatorParams } from "../../creator-params";
 
 /**
  * パイロットIDに対応したパイロットボタンを生成する

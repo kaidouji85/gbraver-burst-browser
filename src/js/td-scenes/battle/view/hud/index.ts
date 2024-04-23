@@ -13,7 +13,7 @@ import { BattleViewCreatorParams } from "../creator-params";
 import { enemyArmdozerHUD, playerArmdozerHUD } from "./armdozer-objects";
 import type { HUDArmdozerObjects } from "./armdozer-objects/hud-armdozer-objects";
 import { HUDLayerObjectCreatorParams } from "./creator-params";
-import { HUDGameObjects } from "./game-objects";
+import { createHUDGameObjects, HUDGameObjects } from "./game-objects";
 import { enemyHUDPilotObjects, playerHUDPilotObjects } from "./pilot-objects";
 import type { HUDPilotObjects } from "./pilot-objects/hud-pilot-objects";
 import { enemyHUDObjects, HUDPlayer, playerHUDObjects } from "./player";
@@ -56,7 +56,7 @@ export class HudLayer {
       ...param,
       gameObjectAction: this.#gameObjectAction,
     };
-    this.gameObjects = new HUDGameObjects(creatorParams);
+    this.gameObjects = createHUDGameObjects(creatorParams);
     this.gameObjects.getObject3Ds().forEach((object) => {
       this.scene.add(object);
     });
