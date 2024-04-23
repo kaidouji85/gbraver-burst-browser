@@ -35,7 +35,7 @@ export function trackingArmdozerSprites(params: TrackingParams): void {
         rendererDOM,
         tdArmdozer.sprite(),
       );
-      v.tracking(position.x, position.y);
+      v.tracking(position);
     });
   });
 }

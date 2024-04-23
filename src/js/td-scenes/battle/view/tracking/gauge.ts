@@ -24,7 +24,7 @@ export function trackingGauges(params: TrackingParams): void {
       : toEnemyGaugeHUDPos(td.camera.getCamera(), rendererDOM);
     const tracks = getTracksFromHUDPlayer(hudPlayer);
     tracks.forEach((v) => {
-      v.tracking(hudPosition.x, hudPosition.y);
+      v.tracking(hudPosition);
     });
   });
 }

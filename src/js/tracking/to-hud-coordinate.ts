@@ -23,6 +23,5 @@ export function toHUDCoordinate(
   return {
     x: (origin.x * rendererDOM.clientWidth) / 2,
     y: (origin.y * rendererDOM.clientHeight) / 2,
-    z: origin.z,
   };
 }

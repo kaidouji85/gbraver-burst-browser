@@ -3,6 +3,7 @@ import * as THREE from "three";
 
 import { Animate } from "../../animation/animate";
 import type { PreRender } from "../../game-loop/pre-render";
+import { HUDCoordinate } from "../../tracking/coordinate";
 import type { HUDTracking } from "../../tracking/hud-tracking";
 import type { GameObjectAction } from "../action/game-object-action";
 import { battery } from "./animation/battery";
@@ -79,13 +80,9 @@ export class Gauge implements HUDTracking {
     return maxBattery(this.#model, value);
   }
 
-  /**
-   * 3Dレイヤーのオブジェクをトラッキングする
-   * 座標にはHUDレイヤー系座標に変換したものを指定する
-   * @param x x座標
-   * @param y y座標
-   */
-  tracking(x: number, y: number): void {
+  /** @override */
+  tracking(coordinate: HUDCoordinate): void {
+    const { x, y } = coordinate;
     this.#model.tracking.x = x;
     this.#model.tracking.y = y;
   }
