@@ -30,7 +30,7 @@ export function playerLightningDozerCutIn(
  * @param params 生成パラメータ
  * @return 生成結果
  */
-export function enemyLightningiDozerCutIn(
+export function enemyLightningDozerCutIn(
   params: LightningDozerCutInCreatorParams,
 ): LightningDozerCutIn {
   const { resources } = params;
