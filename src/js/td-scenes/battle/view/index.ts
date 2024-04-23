@@ -14,7 +14,7 @@ import type { BattleSceneAction } from "../actions";
 import { BattleViewCreatorParams } from "./creator-params";
 import { createDOMLayer, DOMLayer } from "./dom";
 import { createHUDLayer, HUDLayer } from "./hud";
-import { ThreeDimensionLayer } from "./td";
+import { createTDLayer, TDLayer } from "./td";
 import { tracking } from "./tracking";
 
 /** 戦闘シーンビューで利用するレンダラ */
@@ -28,7 +28,7 @@ type Param = BattleViewCreatorParams & {
 
 /** 戦闘画面のビュー */
 export class BattleSceneView {
-  td: ThreeDimensionLayer;
+  td: TDLayer;
   hud: HUDLayer;
   dom: DOMLayer;
   #playerId: PlayerId;
@@ -51,7 +51,7 @@ export class BattleSceneView {
     this.#preRenderTD = new Subject();
     this.#updateHUD = new Subject();
     this.#preRenderHUD = new Subject();
-    this.td = new ThreeDimensionLayer({
+    this.td = createTDLayer({
       ...param,
       update: this.#updateTD,
       preRender: this.#preRenderTD,
