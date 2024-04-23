@@ -17,7 +17,7 @@ export type TDLayerProps = {
   /** プレイヤーオブジェクト */
   players: TDPlayer[];
   /** アームドーザ */
-  armdozerObjects: TDArmdozerObjects[];
+  armdozers: TDArmdozerObjects[];
   /** その他ゲームオブジェクト */
   gameObjects: TDGameObjects;
   /** オーバーラップ */

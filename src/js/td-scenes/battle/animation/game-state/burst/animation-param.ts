@@ -85,13 +85,13 @@ export function toBurstAnimationParam(
   const burstArmdozerHUD = props.view.hud.armdozers.find(
     (v) => v.playerId === effect.burstPlayer,
   );
-  const burstArmdozerTD = props.view.td.armdozerObjects.find(
+  const burstArmdozerTD = props.view.td.armdozers.find(
     (v) => v.playerId === effect.burstPlayer,
   );
-  const anotherArmdozerTD = props.view.td.armdozerObjects.find(
+  const anotherArmdozerTD = props.view.td.armdozers.find(
     (v) => v.playerId !== effect.burstPlayer,
   );
-  const activeArmdozerTD = props.view.td.armdozerObjects.find(
+  const activeArmdozerTD = props.view.td.armdozers.find(
     (v) => v.playerId === gameState.activePlayerId,
   );
 

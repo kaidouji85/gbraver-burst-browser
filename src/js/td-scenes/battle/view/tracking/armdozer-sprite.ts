@@ -19,7 +19,7 @@ import { TrackingParams } from "./tracking-params";
  */
 export function trackingArmdozerSprites(params: TrackingParams): void {
   const { td, hud, rendererDOM } = params;
-  td.armdozerObjects.forEach((tdArmdozer) => {
+  td.armdozers.forEach((tdArmdozer) => {
     const hudArmdozer = hud.armdozers.find(
       (v) => v.playerId === tdArmdozer.playerId,
     );

@@ -58,11 +58,11 @@ export function createTDLayerProps(
       scene.add(v);
     });
 
-  const armdozerObjects = [
+  const armdozers = [
     playerTDArmdozer(creatorParams),
     enemyTDArmdozer(creatorParams),
   ];
-  armdozerObjects
+  armdozers
     .map((v) => v.getObject3Ds())
     .flat()
     .forEach((v) => {
@@ -80,7 +80,7 @@ export function createTDLayerProps(
     overlap,
     gameObjectAction,
     players,
-    armdozerObjects,
+    armdozers,
     gameObjects,
   };
 }

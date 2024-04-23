@@ -27,7 +27,7 @@ export function inputCommandAnimation(
   const enemyHUD = props.view.hud.players.find(
     (v) => v.playerId !== props.playerId,
   );
-  const activeTDArmdozer = props.view.td.armdozerObjects.find(
+  const activeTDArmdozer = props.view.td.armdozers.find(
     (v) => v.playerId === gameState.activePlayerId,
   );
 

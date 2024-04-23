@@ -10,7 +10,7 @@ import { CustomBattleEventProps } from "../td-scenes/battle/custom-battle-event"
  */
 export function synchronizedBow(props: CustomBattleEventProps): Animate {
   return all(
-    ...props.view.td.armdozerObjects.map((v) =>
+    ...props.view.td.armdozers.map((v) =>
       v
         .sprite()
         .bowDown()

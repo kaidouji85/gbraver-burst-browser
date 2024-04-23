@@ -31,7 +31,7 @@ export function toGameOverParam(
   props: StateAnimationProps,
   gameOver: GameOver,
 ): GameOverParam | null | undefined {
-  const winnerArmdozer = props.view.td.armdozerObjects.find(
+  const winnerArmdozer = props.view.td.armdozers.find(
     (v) => v.playerId === gameOver.winner,
   );
 
