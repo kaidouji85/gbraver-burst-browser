@@ -4,56 +4,56 @@ import * as THREE from "three";
 import {
   enemyBatteryCorrect,
   playerBatteryCorrect,
-} from "../../../../game-object/battery-correct";
-import { BatteryCorrect } from "../../../../game-object/battery-correct/battery-correct";
+} from "../../../../../game-object/battery-correct";
+import { BatteryCorrect } from "../../../../../game-object/battery-correct/battery-correct";
 import {
   enemyBatteryEnchantment,
   playerBatteryEnchantment,
-} from "../../../../game-object/battery-enchantment";
-import { BatteryEnchantment } from "../../../../game-object/battery-enchantment/battery-enchantment";
+} from "../../../../../game-object/battery-enchantment";
+import { BatteryEnchantment } from "../../../../../game-object/battery-enchantment/battery-enchantment";
 import {
   enemyBatteryNumber,
   playerBatteryNumber,
-} from "../../../../game-object/battery-number";
-import { BatteryNumber } from "../../../../game-object/battery-number/battery-number";
+} from "../../../../../game-object/battery-number";
+import { BatteryNumber } from "../../../../../game-object/battery-number/battery-number";
 import {
   enemyContinuousAttack,
   playerContinuousAttack,
-} from "../../../../game-object/continuous-attack";
-import { ContinuousAttackIndicator } from "../../../../game-object/continuous-attack/continuous-attack-indicator";
+} from "../../../../../game-object/continuous-attack";
+import { ContinuousAttackIndicator } from "../../../../../game-object/continuous-attack/continuous-attack-indicator";
 import {
   enemyDamageHalved,
   playerDamageHalved,
-} from "../../../../game-object/damage-halved";
-import { DamageHalved } from "../../../../game-object/damage-halved/damage-halved";
+} from "../../../../../game-object/damage-halved";
+import { DamageHalved } from "../../../../../game-object/damage-halved/damage-halved";
 import {
   enemyDamageIndicator,
   playerDamageIndicator,
-} from "../../../../game-object/damage-indicator";
-import { DamageIndicator } from "../../../../game-object/damage-indicator/damage-indicator";
+} from "../../../../../game-object/damage-indicator";
+import { DamageIndicator } from "../../../../../game-object/damage-indicator/damage-indicator";
 import {
   enemyLightning,
   playerLightning,
-} from "../../../../game-object/hitmark/lightning";
-import { Lightning } from "../../../../game-object/hitmark/lightning/lightning";
+} from "../../../../../game-object/hitmark/lightning";
+import { Lightning } from "../../../../../game-object/hitmark/lightning/lightning";
 import {
   enemyShockWave,
   playerShockWave,
-} from "../../../../game-object/hitmark/shock-wave";
-import { ShockWave } from "../../../../game-object/hitmark/shock-wave/shock-wave";
-import { enemyPowerUp, playerPowerUp } from "../../../../game-object/power-up";
-import { PowerUp } from "../../../../game-object/power-up/power-up";
+} from "../../../../../game-object/hitmark/shock-wave";
+import { ShockWave } from "../../../../../game-object/hitmark/shock-wave/shock-wave";
+import { enemyPowerUp, playerPowerUp } from "../../../../../game-object/power-up";
+import { PowerUp } from "../../../../../game-object/power-up/power-up";
 import {
   enemyRecoverBattery,
   playerRecoverBattery,
-} from "../../../../game-object/recover-battery";
-import { RecoverBattery } from "../../../../game-object/recover-battery/recover-battery";
+} from "../../../../../game-object/recover-battery";
+import { RecoverBattery } from "../../../../../game-object/recover-battery/recover-battery";
 import {
   enemyReflectIndicator,
   playerReflectIndicator,
-} from "../../../../game-object/reflect-indicator";
-import { ReflectIndicator } from "../../../../game-object/reflect-indicator/reflect-indicator";
-import { TDLayerObjectCreatorParams } from "./creator-params";
+} from "../../../../../game-object/reflect-indicator";
+import { ReflectIndicator } from "../../../../../game-object/reflect-indicator/reflect-indicator";
+import { TDLayerObjectCreatorParams } from "../creator-params";
 
 /**
  * 3Dレイヤー プレイヤー関係オブジェクト フィールド
@@ -95,7 +95,7 @@ export interface TDPlayer extends TDPlayerField {
 /**
  * 3Dレイヤー プレイヤー関係オブジェクト 実装
  */
-export class TDPlayerImpl implements TDPlayer {
+class TDPlayerImpl implements TDPlayer {
   playerId: PlayerId;
   hitMark: {
     shockWave: ShockWave;
