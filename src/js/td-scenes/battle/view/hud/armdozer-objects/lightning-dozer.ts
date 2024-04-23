@@ -1,40 +1,27 @@
-import type { PlayerId } from "gbraver-burst-core";
+import { PlayerId } from "gbraver-burst-core";
 import * as THREE from "three";
 
 import {
-  enemyLightningiDozerCutIn,
+  enemyLightningiDozerCutIn as enemyLightningDozerCutIn,
   playerLightningDozerCutIn,
 } from "../../../../../game-object/cut-in/lightning-dozer";
 import { LightningDozerCutIn } from "../../../../../game-object/cut-in/lightning-dozer/lightning-dozer-cutin";
 import { HUDLayerObjectCreatorParams } from "../creator-params";
-import type { HUDArmdozerObjects } from "./hud-armdozer-objects";
-
-/**
- * HUDレイヤー ライトニングドーザ固有オブジェクト フィールド
- */
-interface LightningDozerHUDField {
-  cutIn: LightningDozerCutIn;
-}
+import { HUDArmdozerObjects } from "./hud-armdozer-objects";
 
 /**
  * HUDレイヤー ライトニングドーザ固有オブジェクト
  */
-export class LightningDozerHUD
-  implements HUDArmdozerObjects, LightningDozerHUDField
-{
-  playerId: PlayerId;
-  cutIn: LightningDozerCutIn;
-
+export class LightningDozerHUD implements HUDArmdozerObjects {
   /**
    * コンストラクタ
-   *
    * @param playerId プレイヤーID
-   * @param param フィールド
+   * @param cutIn カットイン
    */
-  constructor(playerId: PlayerId, param: LightningDozerHUDField) {
-    this.playerId = playerId;
-    this.cutIn = param.cutIn;
-  }
+  constructor(
+    readonly playerId: PlayerId,
+    readonly cutIn: LightningDozerCutIn,
+  ) {}
 
   /**
    * デストラクタ相当の処理
@@ -62,9 +49,10 @@ export function playerLightningDozerHUD(
   params: HUDLayerObjectCreatorParams,
 ): LightningDozerHUD {
   const { player } = params;
-  return new LightningDozerHUD(player.playerId, {
-    cutIn: playerLightningDozerCutIn(params),
-  });
+  return new LightningDozerHUD(
+    player.playerId,
+    playerLightningDozerCutIn(params),
+  );
 }
 
 /**
@@ -76,7 +64,8 @@ export function enemyLightningDozerHUD(
   params: HUDLayerObjectCreatorParams,
 ): LightningDozerHUD {
   const { enemy } = params;
-  return new LightningDozerHUD(enemy.playerId, {
-    cutIn: enemyLightningiDozerCutIn(params),
-  });
+  return new LightningDozerHUD(
+    enemy.playerId,
+    enemyLightningDozerCutIn(params),
+  );
 }

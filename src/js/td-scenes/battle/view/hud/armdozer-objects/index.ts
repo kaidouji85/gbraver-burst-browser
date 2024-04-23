@@ -6,7 +6,7 @@ import {
   enemyGenesisBraverHUD,
   playerGenesisBraverHUD,
 } from "./genesis-braver";
-import type { HUDArmdozerObjects } from "./hud-armdozer-objects";
+import { HUDArmdozerObjects } from "./hud-armdozer-objects";
 import {
   enemyLightningDozerHUD,
   playerLightningDozerHUD,
