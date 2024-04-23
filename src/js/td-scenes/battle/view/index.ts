@@ -1,6 +1,6 @@
 import * as TWEEN from "@tweenjs/tween.js";
 import type { PlayerId } from "gbraver-burst-core";
-import { merge, Observable, Subject } from "rxjs";
+import { merge, Observable, Subject, Unsubscribable } from "rxjs";
 
 import type { GameLoop } from "../../../game-loop/game-loop";
 import type { PreRender } from "../../../game-loop/pre-render";
@@ -28,16 +28,28 @@ type Param = BattleViewCreatorParams & {
 
 /** 戦闘画面のビュー */
 export class BattleSceneView {
+  /** 3Dレイヤー */
   td: TDLayer;
+  /** HUDレイヤー */
   hud: HUDLayer;
+  /** DOMレイヤー */
   dom: DOMLayer;
+  /** 画面を開いているプレイヤーのID */
   #playerId: PlayerId;
+  /** セーフエリア員セット */
   #safeAreaInset: SafeAreaInset;
+  /** レンダラ */
   #renderer: OwnRenderer;
+  /** 3Dレイヤー アップデート */
   #updateTD: Subject<Update>;
+  /** 3Dレイヤー プリレンダ */
   #preRenderTD: Subject<PreRender>;
+  /** HUDレイヤー アップデート */
   #updateHUD: Subject<Update>;
+  /** HUDレイヤー プリレンダ */
   #preRenderHUD: Subject<PreRender>;
+  /** アンサブスクライバ */
+  #unsubscribers: Unsubscribable[];
 
   /**
    * コンストラクタ
@@ -62,9 +74,11 @@ export class BattleSceneView {
       preRender: this.#preRenderHUD,
     });
     this.dom = createDOMLayer(param);
-    param.gameLoop.subscribe((action) => {
-      this.#gameLoop(action);
-    });
+    this.#unsubscribers = [
+      param.gameLoop.subscribe((action) => {
+        this.#gameLoop(action);
+      }),
+    ];
   }
 
   /**
@@ -74,6 +88,9 @@ export class BattleSceneView {
     this.hud.destructor();
     this.td.destructor();
     this.dom.destructor();
+    this.#unsubscribers.forEach((u) => {
+      u.unsubscribe();
+    });
   }
 
   /**
