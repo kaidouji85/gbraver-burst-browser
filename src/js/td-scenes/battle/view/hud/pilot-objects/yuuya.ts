@@ -13,7 +13,8 @@ import { HUDPilotObjects } from "./hud-pilot-objects";
 export class YuuyaHUD implements HUDPilotObjects {
   /**
    * コンストラクタ
-   * @param params パラメータ
+   * @param playerId プレイヤーID
+   * @param cutIn カットイン
    */
   constructor(
     readonly playerId: PlayerId,
