@@ -12,7 +12,7 @@ import { BattleViewCreatorParams } from "../creator-params";
 import { enemyTDArmdozer, playerTDArmdozer } from "./armdozer-objects";
 import type { TDArmdozerObjects } from "./armdozer-objects/armdozer-objects";
 import { TDLayerObjectCreatorParams } from "./creator-params";
-import { TDGameObjects } from "./game-objects";
+import { createTDGameObjects, TDGameObjects } from "./game-objects";
 import type { TDPlayer } from "./player";
 import { enemyTDObject, playerTDObjects } from "./player";
 import { skyBox } from "./sky-box";
@@ -77,7 +77,7 @@ export class ThreeDimensionLayer {
       .forEach((v) => {
         this.scene.add(v);
       });
-    this.gameObjects = new TDGameObjects(creatorParams);
+    this.gameObjects = createTDGameObjects(creatorParams);
     this.gameObjects.getObject3Ds().forEach((object) => {
       this.scene.add(object);
     });
