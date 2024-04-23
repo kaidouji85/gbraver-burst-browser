@@ -20,7 +20,7 @@ export function turnChangeAnimation(
   const activeTDPlayer = props.view.td.players.find(
     (v) => v.playerId === gameState.activePlayerId,
   );
-  const activeTDArmdozer = props.view.td.armdozerObjects.find(
+  const activeTDArmdozer = props.view.td.armdozers.find(
     (v) => v.playerId === gameState.activePlayerId,
   );
   const activeHUDPlayer = props.view.hud.players.find(

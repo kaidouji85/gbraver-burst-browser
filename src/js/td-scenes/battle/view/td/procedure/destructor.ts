@@ -7,10 +7,10 @@ import { TDLayerProps } from "../props";
  * @param props レイヤープロパティ
  */
 export function destructor(props: TDLayerProps) {
-  const { scene, camera, players, armdozerObjects, gameObjects } = props;
+  const { scene, camera, players, armdozers, gameObjects } = props;
   const removeTargets: THREE.Object3D[] = [
     ...players.flatMap((v) => v.getObject3Ds()),
-    ...armdozerObjects.flatMap((v) => v.getObject3Ds()),
+    ...armdozers.flatMap((v) => v.getObject3Ds()),
     ...gameObjects.getObject3Ds(),
   ];
   removeTargets.forEach((v) => {
@@ -23,7 +23,7 @@ export function destructor(props: TDLayerProps) {
   players.forEach((player) => {
     player.destructor();
   });
-  armdozerObjects.forEach((armdozer) => {
+  armdozers.forEach((armdozer) => {
     armdozer.destructor();
   });
   gameObjects.destructor();

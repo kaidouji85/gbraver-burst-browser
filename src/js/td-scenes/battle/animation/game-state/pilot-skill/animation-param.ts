@@ -72,7 +72,7 @@ export function toPilotSkillAnimationParam(
   const invokerState = gameState.players.find(
     (v) => v.playerId === effect.invokerId,
   );
-  const invokerArmdozer = props.view.td.armdozerObjects.find(
+  const invokerArmdozer = props.view.td.armdozers.find(
     (v) => v.playerId === effect.invokerId,
   );
   const pilot = props.view.hud.pilots.find(
@@ -84,10 +84,10 @@ export function toPilotSkillAnimationParam(
   const invokerHUD = props.view.hud.players.find(
     (v) => v.playerId === effect.invokerId,
   );
-  const anotherArmdozer = props.view.td.armdozerObjects.find(
+  const anotherArmdozer = props.view.td.armdozers.find(
     (v) => v.playerId !== effect.invokerId,
   );
-  const activeTDArmdozer = props.view.td.armdozerObjects.find(
+  const activeTDArmdozer = props.view.td.armdozers.find(
     (v) => v.playerId === gameState.activePlayerId,
   );
 

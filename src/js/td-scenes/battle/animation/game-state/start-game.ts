@@ -16,7 +16,7 @@ export function startGameAnimation(
   props: StateAnimationProps,
   gameState: GameStateX<StartGame>,
 ): Animate {
-  const activeTDArmdozer = props.view.td.armdozerObjects.find(
+  const activeTDArmdozer = props.view.td.armdozers.find(
     (v) => v.playerId === gameState.activePlayerId,
   );
   const activeHUDPlayer = props.view.hud.players.find(

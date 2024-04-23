@@ -21,7 +21,7 @@ export function reflectAnimation(
   const stateOfDamaged = gameState.players.find(
     (v) => v.playerId === effect.damagedPlayer,
   );
-  const tdArmdozerOfDamaged = props.view.td.armdozerObjects.find(
+  const tdArmdozerOfDamaged = props.view.td.armdozers.find(
     (v) => v.playerId === effect.damagedPlayer,
   );
   const tdPlayerOfDamaged = props.view.td.players.find(

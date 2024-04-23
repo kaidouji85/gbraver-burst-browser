@@ -21,7 +21,7 @@ export function rightItselfAnimation(
   }
 
   const effect: RightItself = gameState.effect;
-  const defenderArmdozer = props.view.td.armdozerObjects.find(
+  const defenderArmdozer = props.view.td.armdozers.find(
     (v) => v.playerId === effect.defender,
   );
 

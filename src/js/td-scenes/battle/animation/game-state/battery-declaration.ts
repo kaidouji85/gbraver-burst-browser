@@ -101,7 +101,7 @@ export function batteryDeclarationAnimation(
   const attackerTD = props.view.td.players.find(
     (v) => v.playerId === attacker.playerId,
   );
-  const attackerTDArmdozer = props.view.td.armdozerObjects.find(
+  const attackerTDArmdozer = props.view.td.armdozers.find(
     (v) => v.playerId === attacker.playerId,
   );
   const attackerHUD = props.view.hud.players.find(

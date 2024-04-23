@@ -8,5 +8,5 @@ import { CustomBattleEventProps } from "../td-scenes/battle/custom-battle-event"
  * @return アニメーション
  */
 export function synchronizedUpright(props: CustomBattleEventProps): Animate {
-  return all(...props.view.td.armdozerObjects.map((v) => v.sprite().upright()));
+  return all(...props.view.td.armdozers.map((v) => v.sprite().upright()));
 }
