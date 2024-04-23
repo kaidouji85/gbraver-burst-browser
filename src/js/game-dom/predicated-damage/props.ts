@@ -2,4 +2,4 @@
 export type PredicatedDamageProps = {
   /** ルートHTML要素 */
   root: HTMLElement;
-}
+};

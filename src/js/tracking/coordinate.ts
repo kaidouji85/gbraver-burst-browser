@@ -22,4 +22,4 @@ export type DOMCoordinate = {
   top: number;
   /** css left（単位はpx） */
   left: number;
-}
+};

@@ -23,5 +23,5 @@ export function toDOMCoordinate(
   return {
     top: 50 * (origin.y + 1) * rendererDOM.clientHeight,
     left: 50 * (origin.x + 1) * rendererDOM.clientWidth,
-  }
+  };
 }
