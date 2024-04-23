@@ -1,11 +1,11 @@
 import * as THREE from "three";
 
-import { Illumination } from "../../../../game-object/illumination/illumination";
-import { SkyBrightness } from "../../../../game-object/sky-brightness/sky-brightness";
-import SchoolField from "../../../../game-object/stage/shopping-street/shopping-street";
-import type { Stage } from "../../../../game-object/stage/stage";
-import { TurnIndicator } from "../../../../game-object/turn-indicator/turn-indicator";
-import { TDLayerObjectCreatorParams } from "./creator-params";
+import { Illumination } from "../../../../../game-object/illumination/illumination";
+import { SkyBrightness } from "../../../../../game-object/sky-brightness/sky-brightness";
+import SchoolField from "../../../../../game-object/stage/shopping-street/shopping-street";
+import type { Stage } from "../../../../../game-object/stage/stage";
+import { TurnIndicator } from "../../../../../game-object/turn-indicator/turn-indicator";
+import { TDLayerObjectCreatorParams } from "../creator-params";
 
 /** 3Dレイヤーのゲームオブジェクト */
 export class TDGameObjects {
