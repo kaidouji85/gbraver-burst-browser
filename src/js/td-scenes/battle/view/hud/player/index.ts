@@ -1,19 +1,19 @@
 import type { PlayerId } from "gbraver-burst-core";
 import * as THREE from "three";
 
-import { enemyGauge, playerGauge } from "../../../../game-object/gauge";
-import { Gauge } from "../../../../game-object/gauge/gauge";
+import { enemyGauge, playerGauge } from "../../../../../game-object/gauge";
+import { Gauge } from "../../../../../game-object/gauge/gauge";
 import {
   loseIndicator,
   winIndicator,
-} from "../../../../game-object/result-indicator";
-import { ResultIndicator } from "../../../../game-object/result-indicator/result-indicator";
+} from "../../../../../game-object/result-indicator";
+import { ResultIndicator } from "../../../../../game-object/result-indicator/result-indicator";
 import {
   enemyTurnStart,
   playerTurnStart,
-} from "../../../../game-object/turn-start";
-import { TurnStart } from "../../../../game-object/turn-start/turn-start";
-import { HUDLayerObjectCreatorParams } from "./creator-params";
+} from "../../../../../game-object/turn-start";
+import { TurnStart } from "../../../../../game-object/turn-start/turn-start";
+import { HUDLayerObjectCreatorParams } from "../creator-params";
 
 /**
  * HUDレイヤー プレイヤー固有オブジェクト フィールド
