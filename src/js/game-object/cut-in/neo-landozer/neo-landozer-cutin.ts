@@ -3,6 +3,7 @@ import * as THREE from "three";
 
 import { Animate } from "../../../animation/animate";
 import type { PreRender } from "../../../game-loop/pre-render";
+import { HUDCoordinate } from "../../../tracking/coordinate";
 import type { HUDTracking } from "../../../tracking/hud-tracking";
 import type { GameObjectAction } from "../../action/game-object-action";
 import { hidden } from "./animation/hidden";
@@ -48,14 +49,9 @@ export class NeoLandozerCutIn implements HUDTracking {
     this.#unsubscriber.unsubscribe();
   }
 
-  /**
-   * トラッキング
-   * HUD座標系に変換したものをセットすること
-   *
-   * @param x x座標
-   * @param y y座標
-   */
-  tracking(x: number, y: number): void {
+  /** @override */
+  tracking(coordinate: HUDCoordinate): void {
+    const { x, y } = coordinate;
     this.#props.model.tracking.x = x;
     this.#props.model.tracking.y = y;
   }

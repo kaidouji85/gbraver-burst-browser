@@ -3,6 +3,7 @@ import * as THREE from "three";
 
 import { Animate } from "../../../animation/animate";
 import { PreRender } from "../../../game-loop/pre-render";
+import { HUDCoordinate } from "../../../tracking/coordinate";
 import { HUDTracking } from "../../../tracking/hud-tracking";
 import { GameObjectAction } from "../../action/game-object-action";
 import { hidden } from "./animation/hidden";
@@ -53,7 +54,8 @@ export class GenesisBraverCutIn implements HUDTracking {
   }
 
   /** @override */
-  tracking(x: number, y: number): void {
+  tracking(coordinate: HUDCoordinate): void {
+    const { x, y } = coordinate;
     this.#props.model.tracking.x = x;
     this.#props.model.tracking.y = y;
   }
