@@ -4,8 +4,7 @@ import { HUDCoordinate } from "./coordinate";
 export interface HUDTracking {
   /**
    * 3Dレイヤーのオブジェクトをトラッキングする
-   * 本メソッドにはHUDレイヤー系座標をセットすること
-   * @param coordinate トラッキング先のHUDレイヤー系座標
+   * @param coordinate トラッキング先、3Dレイヤー座標をHUDレイヤー座標に変換したもの
    */
   tracking(coordinate: HUDCoordinate): void;
 }
