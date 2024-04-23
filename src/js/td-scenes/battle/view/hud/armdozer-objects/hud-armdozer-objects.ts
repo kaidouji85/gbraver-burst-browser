@@ -6,7 +6,7 @@ export interface HUDArmdozerObjects {
   /** プレイヤーID */
   playerId: PlayerId;
 
-  /** 
+  /**
    * デストラクタ相当の処理
    */
   destructor(): void;
