@@ -2,7 +2,7 @@ import { PlayerId } from "gbraver-burst-core";
 import * as THREE from "three";
 
 import {
-  enemyLightningiDozerCutIn as enemyLightningDozerCutIn,
+  enemyLightningDozerCutIn,
   playerLightningDozerCutIn,
 } from "../../../../../game-object/cut-in/lightning-dozer";
 import { LightningDozerCutIn } from "../../../../../game-object/cut-in/lightning-dozer/lightning-dozer-cutin";

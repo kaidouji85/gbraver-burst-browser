@@ -1,4 +1,4 @@
-import type { PlayerId } from "gbraver-burst-core";
+import { PlayerId } from "gbraver-burst-core";
 import * as THREE from "three";
 
 import {
@@ -7,32 +7,19 @@ import {
 } from "../../../../../game-object/cut-in/gai";
 import { GaiCutIn } from "../../../../../game-object/cut-in/gai/gai";
 import { HUDLayerObjectCreatorParams } from "../creator-params";
-import type { HUDPilotObjects } from "./hud-pilot-objects";
+import { HUDPilotObjects } from "./hud-pilot-objects";
 
-/**
- * コンストラクタのパラメータ
- */
-type Params = {
-  playerId: PlayerId;
-  cutIn: GaiCutIn;
-};
-
-/**
- * HUDレイヤー ガイ固有のオブジェクトをあつめたもの
- */
+/** HUDレイヤー ガイ固有のオブジェクトをあつめたもの */
 export class GaiHUD implements HUDPilotObjects {
-  playerId: PlayerId;
-  cutIn: GaiCutIn;
-
   /**
    * コンストラクタ
-   *
-   * @param params パラメータ
+   * @param playerId プレイヤーID
+   * @param cutIn カットイン
    */
-  constructor(params: Params) {
-    this.playerId = params.playerId;
-    this.cutIn = params.cutIn;
-  }
+  constructor(
+    readonly playerId: PlayerId,
+    readonly cutIn: GaiCutIn,
+  ) {}
 
   /**
    * デストラクタ相当の処理
@@ -58,10 +45,7 @@ export class GaiHUD implements HUDPilotObjects {
  */
 export function playerGaiHUD(params: HUDLayerObjectCreatorParams): GaiHUD {
   const { player } = params;
-  return new GaiHUD({
-    playerId: player.playerId,
-    cutIn: playerGaiCutIn(params),
-  });
+  return new GaiHUD(player.playerId, playerGaiCutIn(params));
 }
 
 /**
@@ -71,8 +55,5 @@ export function playerGaiHUD(params: HUDLayerObjectCreatorParams): GaiHUD {
  */
 export function enemyGaiHUD(params: HUDLayerObjectCreatorParams): GaiHUD {
   const { enemy } = params;
-  return new GaiHUD({
-    playerId: enemy.playerId,
-    cutIn: enemyGaiCutIn(params),
-  });
+  return new GaiHUD(enemy.playerId, enemyGaiCutIn(params));
 }

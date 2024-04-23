@@ -1,4 +1,4 @@
-import type { PlayerId } from "gbraver-burst-core";
+import { PlayerId } from "gbraver-burst-core";
 import * as THREE from "three";
 
 import {
@@ -7,32 +7,19 @@ import {
 } from "../../../../../game-object/cut-in/tsubasa";
 import { TsubasaCutIn } from "../../../../../game-object/cut-in/tsubasa/tsubasa";
 import { HUDLayerObjectCreatorParams } from "../creator-params";
-import type { HUDPilotObjects } from "./hud-pilot-objects";
+import { HUDPilotObjects } from "./hud-pilot-objects";
 
-/**
- * コンストラクタのパラメータ
- */
-type Params = {
-  playerId: PlayerId;
-  cutIn: TsubasaCutIn;
-};
-
-/**
- * HUDレイヤー ツバサ固有のオブジェクトをあつめたもの
- */
+/** ツバサ HUDオブジェクト */
 export class TsubasaHUD implements HUDPilotObjects {
-  playerId: PlayerId;
-  cutIn: TsubasaCutIn;
-
   /**
    * コンストラクタ
-   *
-   * @param params パラメータ
+   * @param playerId プレイヤーID
+   * @param cutIn カットイン
    */
-  constructor(params: Params) {
-    this.playerId = params.playerId;
-    this.cutIn = params.cutIn;
-  }
+  constructor(
+    readonly playerId: PlayerId,
+    readonly cutIn: TsubasaCutIn,
+  ) {}
 
   /**
    * デストラクタ相当の処理
@@ -60,10 +47,7 @@ export function playerTsubasaHUD(
   params: HUDLayerObjectCreatorParams,
 ): TsubasaHUD {
   const { player } = params;
-  return new TsubasaHUD({
-    playerId: player.playerId,
-    cutIn: playerTsubasaCutIn(params),
-  });
+  return new TsubasaHUD(player.playerId, playerTsubasaCutIn(params));
 }
 
 /**
@@ -75,8 +59,5 @@ export function enemyTsubasaHUD(
   params: HUDLayerObjectCreatorParams,
 ): TsubasaHUD {
   const { enemy } = params;
-  return new TsubasaHUD({
-    playerId: enemy.playerId,
-    cutIn: enemyTsubasaCutIn(params),
-  });
+  return new TsubasaHUD(enemy.playerId, enemyTsubasaCutIn(params));
 }

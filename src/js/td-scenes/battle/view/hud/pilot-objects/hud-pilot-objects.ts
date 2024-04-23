@@ -1,9 +1,7 @@
 import type { PlayerId } from "gbraver-burst-core";
 import * as THREE from "three";
 
-/**
- * HUD パイロット関連オブジェクト
- */
+/** HUD パイロットオブジェクト */
 export interface HUDPilotObjects {
   /** プレイヤーID */
   playerId: PlayerId;
