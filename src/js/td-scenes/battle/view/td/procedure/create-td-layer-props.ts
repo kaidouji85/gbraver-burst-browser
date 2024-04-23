@@ -12,7 +12,7 @@ import { TDLayerObjectCreatorParams } from "../creator-params";
 import { createTDGameObjects } from "../game-objects";
 import { enemyTDObject, playerTDObjects } from "../player";
 import { TDLayerProps } from "../props";
-import { skyBox } from "../sky-box";
+import { createSkyBox } from "../sky-box";
 
 /** 生成パラメータ */
 export type TDLayerPropsCreatorParams = BattleViewCreatorParams & {
@@ -32,14 +32,14 @@ export type TDLayerPropsCreatorParams = BattleViewCreatorParams & {
 export function createTDLayerProps(
   params: TDLayerPropsCreatorParams,
 ): TDLayerProps {
-  const { resources, update, resize, preRender } = params;
+  const { resources, update, preRender, resize, renderer } = params;
 
   const scene = new THREE.Scene();
-  scene.background = skyBox(resources);
+  scene.background = createSkyBox(resources);
 
   const camera = new TDCamera(update, resize);
 
-  const overlap = params.renderer.createOverlapNotifier(camera.getCamera());
+  const overlap = renderer.createOverlapNotifier(camera.getCamera());
 
   const gameObjectAction = gameObjectStream(update, preRender, overlap);
   const creatorParams: TDLayerObjectCreatorParams = {

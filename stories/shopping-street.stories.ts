@@ -1,6 +1,6 @@
 import { Illumination } from "../src/js/game-object/illumination/illumination";
 import ShoppingStreet from "../src/js/game-object/stage/shopping-street/shopping-street";
-import { skyBox as createSkyBox } from "../src/js/td-scenes/battle/view/td/sky-box";
+import { createSkyBox as createSkyBox } from "../src/js/td-scenes/battle/view/td/sky-box";
 import type { Object3DsGeneratorParams } from "./stub/still-image-stub";
 import { stillImageStub } from "./stub/still-image-stub";
 import { TDGameObjectStub } from "./stub/td-game-object-stub";
