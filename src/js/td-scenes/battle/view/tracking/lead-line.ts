@@ -5,7 +5,7 @@ import {
 } from "../../../../game-object/armdozer/position";
 import { HUDCoordinate } from "../../../../tracking/coordinate";
 import { toHUDCoordinate } from "../../../../tracking/to-hud-coordinate";
-import { HudLayer } from "../hud";
+import { HUDLayer } from "../hud";
 import { TrackingParams } from "./tracking-params";
 
 /** 引き出し線が指し示す3Dレイヤー座標 */
@@ -21,7 +21,7 @@ const targetTDCoordinate = {
  * @param targetHUDCoordinate 引き出し線が指し示すHUDレイヤー座標
  */
 function trackingBatterySelectorLeadLine(
-  hud: Readonly<HudLayer>,
+  hud: Readonly<HUDLayer>,
   targetHUDCoordinate: Readonly<HUDCoordinate>,
 ): void {
   const batterySelectorPosition =
@@ -44,7 +44,7 @@ function trackingBatterySelectorLeadLine(
  * @param targetHUDCoordinate 引き出し線が指し示すHUDレイヤー座標
  */
 function trackingBurstButtonLeadLine(
-  hud: Readonly<HudLayer>,
+  hud: Readonly<HUDLayer>,
   targetHUDCoordinate: Readonly<HUDCoordinate>,
 ): void {
   const burstButtonPosition =
@@ -67,7 +67,7 @@ function trackingBurstButtonLeadLine(
  * @param targetHUDCoordinate 引き出し線が指し示すHUDレイヤー座標
  */
 function trackingPilotButtonLeadLine(
-  hud: Readonly<HudLayer>,
+  hud: Readonly<HUDLayer>,
   targetHUDCoordinate: Readonly<HUDCoordinate>,
 ): void {
   const pilotButtonPosition =
