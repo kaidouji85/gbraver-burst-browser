@@ -32,19 +32,16 @@ export type HUDLayerPropsCreatorParams = BattleViewCreatorParams & {
 export function createHUDLayerProps(
   params: HUDLayerPropsCreatorParams,
 ): HUDLayerProps {
+  const { renderer, update, preRender, resize } = params;
   const scene = new THREE.Scene();
-  const camera = new PlainHUDCamera(params.resize);
-  const overlap = params.renderer.createOverlapNotifier(camera.getCamera());
-  const gameObjectAction = gameObjectStream(
-    params.update,
-    params.preRender,
-    overlap,
-  );
-
+  const camera = new PlainHUDCamera(resize);
+  const overlap = renderer.createOverlapNotifier(camera.getCamera());
+  const gameObjectAction = gameObjectStream(update, preRender, overlap);
   const creatorParams: HUDLayerObjectCreatorParams = {
     ...params,
     gameObjectAction,
   };
+
   const gameObjects = createHUDGameObjects(creatorParams);
   gameObjects.getObject3Ds().forEach((object) => {
     scene.add(object);
