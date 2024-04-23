@@ -1,4 +1,4 @@
-import type { PlayerId } from "gbraver-burst-core";
+import { PlayerId } from "gbraver-burst-core";
 import * as THREE from "three";
 
 import {
@@ -7,31 +7,19 @@ import {
 } from "../../../../../game-object/cut-in/yuuya";
 import { YuuyaCutIn } from "../../../../../game-object/cut-in/yuuya/yuuya";
 import { HUDLayerObjectCreatorParams } from "../creator-params";
-import type { HUDPilotObjects } from "./hud-pilot-objects";
+import { HUDPilotObjects } from "./hud-pilot-objects";
 
-/** コンストラクタのパラメータ */
-type Params = {
-  /** プレイヤーID */
-  playerId: PlayerId;
-  /** カットイン */
-  cutIn: YuuyaCutIn;
-};
-
-/** HUDレイヤー ユウヤ固有のオブジェクトをあつめたもの */
+/** ユウヤ HUDオブジェクト */
 export class YuuyaHUD implements HUDPilotObjects {
-  /** @override */
-  playerId: PlayerId;
-  /** カットイン */
-  cutIn: YuuyaCutIn;
-
   /**
    * コンストラクタ
-   * @param params パラメータ
+   * @param playerId プレイヤーID
+   * @param cutIn カットイン
    */
-  constructor(params: Params) {
-    this.playerId = params.playerId;
-    this.cutIn = params.cutIn;
-  }
+  constructor(
+    readonly playerId: PlayerId,
+    readonly cutIn: YuuyaCutIn,
+  ) {}
 
   /** @override */
   destructor(): void {
@@ -51,10 +39,7 @@ export class YuuyaHUD implements HUDPilotObjects {
  */
 export function playerYuuyaHUD(params: HUDLayerObjectCreatorParams): YuuyaHUD {
   const { player } = params;
-  return new YuuyaHUD({
-    playerId: player.playerId,
-    cutIn: playerYuuyaCutIn(params),
-  });
+  return new YuuyaHUD(player.playerId, playerYuuyaCutIn(params));
 }
 
 /**
@@ -64,8 +49,5 @@ export function playerYuuyaHUD(params: HUDLayerObjectCreatorParams): YuuyaHUD {
  */
 export function enemyYuuyaHUD(params: HUDLayerObjectCreatorParams): YuuyaHUD {
   const { enemy } = params;
-  return new YuuyaHUD({
-    playerId: enemy.playerId,
-    cutIn: enemyYuuyaCutIn(params),
-  });
+  return new YuuyaHUD(enemy.playerId, enemyYuuyaCutIn(params));
 }

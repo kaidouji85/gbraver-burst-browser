@@ -1,4 +1,4 @@
-import type { PlayerId } from "gbraver-burst-core";
+import { PlayerId } from "gbraver-burst-core";
 import * as THREE from "three";
 
 import {
@@ -7,32 +7,19 @@ import {
 } from "../../../../../game-object/cut-in/raito";
 import { RaitoCutIn } from "../../../../../game-object/cut-in/raito/raito";
 import { HUDLayerObjectCreatorParams } from "../creator-params";
-import type { HUDPilotObjects } from "./hud-pilot-objects";
+import { HUDPilotObjects } from "./hud-pilot-objects";
 
-/**
- * コンストラクタのパラメータ
- */
-type Params = {
-  playerId: PlayerId;
-  cutIn: RaitoCutIn;
-};
-
-/**
- * ライトHUD
- */
+/** ライトHUDオブジェクト */
 export class RaitoHUD implements HUDPilotObjects {
-  playerId: PlayerId;
-  cutIn: RaitoCutIn;
-
   /**
    * コンストラクタ
-   *
-   * @param params パラメータ
+   * @param pilotId パイロットID
+   * @param cutIn カットイン
    */
-  constructor(params: Params) {
-    this.playerId = params.playerId;
-    this.cutIn = params.cutIn;
-  }
+  constructor(
+    readonly playerId: PlayerId,
+    readonly cutIn: RaitoCutIn,
+  ) {}
 
   /**
    * デストラクタ相当の処理
@@ -58,10 +45,7 @@ export class RaitoHUD implements HUDPilotObjects {
  */
 export function playerRaitoHUD(params: HUDLayerObjectCreatorParams): RaitoHUD {
   const { player } = params;
-  return new RaitoHUD({
-    playerId: player.playerId,
-    cutIn: playerRaitoCutIn(params),
-  });
+  return new RaitoHUD(player.playerId, playerRaitoCutIn(params));
 }
 
 /**
@@ -71,8 +55,5 @@ export function playerRaitoHUD(params: HUDLayerObjectCreatorParams): RaitoHUD {
  */
 export function enemyRaitoHUD(params: HUDLayerObjectCreatorParams): RaitoHUD {
   const { enemy } = params;
-  return new RaitoHUD({
-    playerId: enemy.playerId,
-    cutIn: enemyRaitoCutIn(params),
-  });
+  return new RaitoHUD(enemy.playerId, enemyRaitoCutIn(params));
 }
