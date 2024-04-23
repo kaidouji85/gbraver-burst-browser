@@ -1,4 +1,4 @@
-import type { PlayerId } from "gbraver-burst-core";
+import { PlayerId } from "gbraver-burst-core";
 import * as THREE from "three";
 
 import {
@@ -7,31 +7,19 @@ import {
 } from "../../../../../game-object/cut-in/genesis-braver";
 import { GenesisBraverCutIn } from "../../../../../game-object/cut-in/genesis-braver/genesis-braver-cutin";
 import { HUDLayerObjectCreatorParams } from "../creator-params";
-import type { HUDArmdozerObjects } from "./hud-armdozer-objects";
-
-/** コンストラクタのパラメータ */
-type Param = {
-  /** プレイヤーID */
-  playerId: PlayerId;
-  /** カットイン */
-  cutIn: GenesisBraverCutIn;
-};
+import { HUDArmdozerObjects } from "./hud-armdozer-objects";
 
 /** HUDレイヤー ジェネシスブレイバー固有オブジェクト */
 export class GenesisBraverHUD implements HUDArmdozerObjects {
-  /** @override */
-  playerId: PlayerId;
-  /** カットイン */
-  cutIn: GenesisBraverCutIn;
-
   /**
    * コンストラクタ
    * @param param パラメータ
+   * @param cutIn カットイン
    */
-  constructor(param: Param) {
-    this.playerId = param.playerId;
-    this.cutIn = param.cutIn;
-  }
+  constructor(
+    readonly playerId: PlayerId,
+    readonly cutIn: GenesisBraverCutIn,
+  ) {}
 
   /** @override */
   destructor(): void {
@@ -53,10 +41,10 @@ export function playerGenesisBraverHUD(
   params: HUDLayerObjectCreatorParams,
 ): HUDArmdozerObjects {
   const { player } = params;
-  return new GenesisBraverHUD({
-    playerId: player.playerId,
-    cutIn: playerGenesisBraverCutIn(params),
-  });
+  return new GenesisBraverHUD(
+    player.playerId,
+    playerGenesisBraverCutIn(params),
+  );
 }
 
 /**
@@ -68,8 +56,5 @@ export function enemyGenesisBraverHUD(
   params: HUDLayerObjectCreatorParams,
 ): HUDArmdozerObjects {
   const { enemy } = params;
-  return new GenesisBraverHUD({
-    playerId: enemy.playerId,
-    cutIn: enemyGenesisBraverCutIn(params),
-  });
+  return new GenesisBraverHUD(enemy.playerId, enemyGenesisBraverCutIn(params));
 }

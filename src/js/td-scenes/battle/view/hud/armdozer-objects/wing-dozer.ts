@@ -1,4 +1,4 @@
-import type { PlayerId } from "gbraver-burst-core";
+import { PlayerId } from "gbraver-burst-core";
 import * as THREE from "three";
 
 import {
@@ -7,37 +7,26 @@ import {
 } from "../../../../../game-object/cut-in/wing-dozer";
 import { WingDozerCutIn } from "../../../../../game-object/cut-in/wing-dozer/wing-dozer-cutin";
 import { HUDLayerObjectCreatorParams } from "../creator-params";
-import type { HUDArmdozerObjects } from "./hud-armdozer-objects";
+import { HUDArmdozerObjects } from "./hud-armdozer-objects";
 
-/** コンストラクタのパラメータ */
-type Param = {
-  playerId: PlayerId;
-  cutIn: WingDozerCutIn;
-};
-
-/**
- * HUDレイヤー ウィングドーザ固有のオブジェクトをあつめたもの
- */
+/** HUDレイヤー ウィングドーザ固有のオブジェクトをあつめたもの */
 export class WingDozerHUD implements HUDArmdozerObjects {
-  playerId: PlayerId;
-  cutIn: WingDozerCutIn;
-
-  constructor(param: Param) {
-    this.playerId = param.playerId;
-    this.cutIn = param.cutIn;
-  }
-
   /**
-   * デストラクタ相当の処理
+   * コンストラクタ
+   * @param playerId プレイヤーID
+   * @param cutIn カットイン
    */
+  constructor(
+    readonly playerId: PlayerId,
+    readonly cutIn: WingDozerCutIn,
+  ) {}
+
+  /** @override */
   destructor(): void {
     this.cutIn.destructor();
   }
 
-  /**
-   * シーンに追加するオブジェクトを取得する
-   * @return シーンに追加するオブジェクト
-   */
+  /** @override */
   getObject3Ds(): THREE.Object3D[] {
     return [this.cutIn.getObject3D()];
   }
@@ -52,10 +41,7 @@ export function playerWingDozerHUD(
   params: HUDLayerObjectCreatorParams,
 ): WingDozerHUD {
   const { player } = params;
-  return new WingDozerHUD({
-    playerId: player.playerId,
-    cutIn: playerWingDozerCutIn(params),
-  });
+  return new WingDozerHUD(player.playerId, playerWingDozerCutIn(params));
 }
 
 /**
@@ -67,8 +53,5 @@ export function enemyWingDozerHUD(
   params: HUDLayerObjectCreatorParams,
 ): WingDozerHUD {
   const { enemy } = params;
-  return new WingDozerHUD({
-    playerId: enemy.playerId,
-    cutIn: enemyWingDozerCutIn(params),
-  });
+  return new WingDozerHUD(enemy.playerId, enemyWingDozerCutIn(params));
 }

@@ -1,4 +1,4 @@
-import type { PlayerId } from "gbraver-burst-core";
+import { PlayerId } from "gbraver-burst-core";
 import * as THREE from "three";
 
 import {
@@ -7,39 +7,26 @@ import {
 } from "../../../../../game-object/cut-in/neo-landozer";
 import { NeoLandozerCutIn } from "../../../../../game-object/cut-in/neo-landozer/neo-landozer-cutin";
 import { HUDLayerObjectCreatorParams } from "../creator-params";
-import type { HUDArmdozerObjects } from "./hud-armdozer-objects";
+import { HUDArmdozerObjects } from "./hud-armdozer-objects";
 
-/**
- * HUDレイヤー ネオランドーザ固有オブジェクト フィールド
- */
-interface NeoLandozerHUDField {
-  cutIn: NeoLandozerCutIn;
-}
-
-/**
- * HUDレイヤー ネオランドーザ固有のオブジェクトをあつめたもの
- */
-export class NeoLandozerHUD implements HUDArmdozerObjects, NeoLandozerHUDField {
-  playerId: PlayerId;
-  cutIn: NeoLandozerCutIn;
-
-  constructor(playerId: PlayerId, field: NeoLandozerHUDField) {
-    this.playerId = playerId;
-    this.cutIn = field.cutIn;
-  }
-
+/** HUDレイヤー ネオランドーザ固有のオブジェクトをあつめたもの */
+export class NeoLandozerHUD implements HUDArmdozerObjects {
   /**
-   * デストラクタ相当の処理
+   * コンストラクタ
+   * @param playerId プレイヤーID
+   * @param cutIn カットイン
    */
+  constructor(
+    readonly playerId: PlayerId,
+    readonly cutIn: NeoLandozerCutIn,
+  ) {}
+
+  /** @override */
   destructor(): void {
     this.cutIn.destructor();
   }
 
-  /**
-   * シーンに追加するオブジェクトを取得する
-   *
-   * @return シーンに追加するオブジェクト
-   */
+  /** @override */
   getObject3Ds(): THREE.Object3D[] {
     return [this.cutIn.getObject3D()];
   }
@@ -54,9 +41,7 @@ export function playerNeoLandozerHUD(
   params: HUDLayerObjectCreatorParams,
 ): NeoLandozerHUD {
   const { player } = params;
-  return new NeoLandozerHUD(player.playerId, {
-    cutIn: playerNeoLandozerCutIn(params),
-  });
+  return new NeoLandozerHUD(player.playerId, playerNeoLandozerCutIn(params));
 }
 
 /**
@@ -68,7 +53,5 @@ export function enemyNeoLandozerHUD(
   params: HUDLayerObjectCreatorParams,
 ): NeoLandozerHUD {
   const { enemy } = params;
-  return new NeoLandozerHUD(enemy.playerId, {
-    cutIn: enemyNeoLandozerCutIn(params),
-  });
+  return new NeoLandozerHUD(enemy.playerId, enemyNeoLandozerCutIn(params));
 }
