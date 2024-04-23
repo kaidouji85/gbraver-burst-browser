@@ -3,6 +3,7 @@ import * as THREE from "three";
 
 import { Animate } from "../../../animation/animate";
 import type { PreRender } from "../../../game-loop/pre-render";
+import { HUDCoordinate } from "../../../tracking/coordinate";
 import type { HUDTracking } from "../../../tracking/hud-tracking";
 import type { GameObjectAction } from "../../action/game-object-action";
 import { hidden } from "./animation/hidden";
@@ -57,7 +58,8 @@ export class ShinBraverCutIn implements HUDTracking {
   }
 
   /** @override */
-  tracking(x: number, y: number): void {
+  tracking(coordinate: HUDCoordinate): void {
+    const { x, y } = coordinate;
     this.#props.model.tracking.x = x;
     this.#props.model.tracking.y = y;
   }

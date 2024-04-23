@@ -14,6 +14,4 @@ export type HUDCoordinate = {
   x: number;
   /** y座標 */
   y: number;
-  /** z座標 */
-  z: number;
 };
