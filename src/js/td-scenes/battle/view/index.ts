@@ -13,7 +13,7 @@ import { createSafeAreaInset } from "../../../safe-area/safe-area-inset";
 import type { BattleSceneAction } from "../actions";
 import { BattleViewCreatorParams } from "./creator-params";
 import { createDOMLayer, DOMLayer } from "./dom";
-import { HudLayer } from "./hud";
+import { HUDLayer } from "./hud";
 import { ThreeDimensionLayer } from "./td";
 import { tracking } from "./tracking";
 
@@ -29,7 +29,7 @@ type Param = BattleViewCreatorParams & {
 /** 戦闘画面のビュー */
 export class BattleSceneView {
   td: ThreeDimensionLayer;
-  hud: HudLayer;
+  hud: HUDLayer;
   dom: DOMLayer;
   #playerId: PlayerId;
   #safeAreaInset: SafeAreaInset;
@@ -56,7 +56,7 @@ export class BattleSceneView {
       update: this.#updateTD,
       preRender: this.#preRenderTD,
     });
-    this.hud = new HudLayer({
+    this.hud = new HUDLayer({
       ...param,
       update: this.#updateHUD,
       preRender: this.#preRenderHUD,

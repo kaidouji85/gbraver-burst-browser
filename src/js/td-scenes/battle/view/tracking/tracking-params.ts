@@ -1,6 +1,6 @@
 import { PlayerId } from "gbraver-burst-core";
 
-import { HudLayer } from "../hud";
+import { HUDLayer } from "../hud";
 import { ThreeDimensionLayer } from "../td";
 
 /** トラッキングのパラメータ */
@@ -8,7 +8,7 @@ export type TrackingParams = {
   /** 3Dレイヤー */
   readonly td: ThreeDimensionLayer;
   /** HUDレイヤー */
-  readonly hud: HudLayer;
+  readonly hud: HUDLayer;
   /** アクティブプレイヤー */
   readonly activePlayerId: PlayerId;
   /** レンダリング対象のDOM */

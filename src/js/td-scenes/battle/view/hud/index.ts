@@ -19,7 +19,7 @@ import type { HUDPilotObjects } from "./pilot-objects/hud-pilot-objects";
 import { enemyHUDObjects, HUDPlayer, playerHUDObjects } from "./player";
 
 /** コンストラクタのパラメータ */
-type Param = BattleViewCreatorParams & {
+type HUDLayerConstructorParams = BattleViewCreatorParams & {
   /** レンダラ */
   renderer: OverlapNotifier;
   /** アップデート */
@@ -28,10 +28,8 @@ type Param = BattleViewCreatorParams & {
   preRender: Observable<PreRender>;
 };
 
-/**
- * HUDレイヤーで使用するオブジェクトを全て集めたもの
- */
-export class HudLayer {
+/** HUDレイヤーで使用するオブジェクトを全て集めたもの */
+export class HUDLayer {
   scene: THREE.Scene;
   camera: PlainHUDCamera;
   players: HUDPlayer[];
@@ -41,7 +39,7 @@ export class HudLayer {
   #overlap: Observable<OverlapEvent>;
   #gameObjectAction: Observable<GameObjectAction>;
 
-  constructor(param: Param) {
+  constructor(param: HUDLayerConstructorParams) {
     this.scene = new THREE.Scene();
     this.camera = new PlainHUDCamera(param.resize);
     this.#overlap = param.renderer.createOverlapNotifier(
