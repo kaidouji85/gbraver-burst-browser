@@ -2,7 +2,7 @@ import * as TWEEN from "@tweenjs/tween.js";
 
 import { GameLoop } from "../../../../game-loop/game-loop";
 import { BattleSceneViewProps } from "../props";
-import { tracking } from "../tracking";
+import { tracking } from "./tracking";
 
 /**
  * ゲームループ時の処理

@@ -4,11 +4,11 @@ import {
   ARMDOZER_EFFECT_STANDARD_X,
   ARMDOZER_EFFECT_STANDARD_Y,
   ARMDOZER_EFFECT_STANDARD_Z,
-} from "../../../../game-object/armdozer/position";
-import { HUDCoordinate } from "../../../../tracking/coordinate";
-import { HUDTracking } from "../../../../tracking/hud-tracking";
-import { toHUDCoordinate } from "../../../../tracking/to-hud-coordinate";
-import { HUDPlayer } from "../hud/player";
+} from "../../../../../game-object/armdozer/position";
+import { HUDCoordinate } from "../../../../../tracking/coordinate";
+import { HUDTracking } from "../../../../../tracking/hud-tracking";
+import { toHUDCoordinate } from "../../../../../tracking/to-hud-coordinate";
+import { HUDPlayer } from "../../hud/player";
 import { TrackingParams } from "./tracking-params";
 
 /**
