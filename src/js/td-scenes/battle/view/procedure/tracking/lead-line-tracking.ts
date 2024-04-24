@@ -16,11 +16,11 @@ const targetTDCoordinate = {
 };
 
 /**
- * バッテリーセレクタ引き出し線をトラッキングする
+ * バッテリーセレクタ引き出し線のトラッキング
  * @param hud HUDレイヤー
  * @param targetHUDCoordinate 引き出し線が指し示すHUDレイヤー座標
  */
-function trackingBatterySelectorLeadLine(
+function batterySelectorLeadLineTracking(
   hud: Readonly<HUDLayer>,
   targetHUDCoordinate: Readonly<HUDCoordinate>,
 ): void {
@@ -39,11 +39,11 @@ function trackingBatterySelectorLeadLine(
 }
 
 /**
- * バーストボタン引き出し線をトラッキングする
+ * バーストボタン引き出し線のトラッキング
  * @param hud HUDレイヤー
  * @param targetHUDCoordinate 引き出し線が指し示すHUDレイヤー座標
  */
-function trackingBurstButtonLeadLine(
+function burstButtonLeadLineTracking(
   hud: Readonly<HUDLayer>,
   targetHUDCoordinate: Readonly<HUDCoordinate>,
 ): void {
@@ -62,11 +62,11 @@ function trackingBurstButtonLeadLine(
 }
 
 /**
- * パイロットボタン引き出し線をトラッキングする
+ * パイロットボタン引き出し線のトラッキング
  * @param hud HUDレイヤー
  * @param targetHUDCoordinate 引き出し線が指し示すHUDレイヤー座標
  */
-function trackingPilotButtonLeadLine(
+function pilotButtonLeadLineTracking(
   hud: Readonly<HUDLayer>,
   targetHUDCoordinate: Readonly<HUDCoordinate>,
 ): void {
@@ -85,17 +85,17 @@ function trackingPilotButtonLeadLine(
 }
 
 /**
- * 引き出し線をトラッキングする
+ * 引き出し線のトラッキング
  * @param params パラメータ
  */
-export function trackingLeadLine(params: TrackingParams): void {
+export function leadLineTracking(params: TrackingParams): void {
   const { td, hud, rendererDOM } = params;
   const targetHUDCoordinate = toHUDCoordinate(
     targetTDCoordinate,
     td.camera.getCamera(),
     rendererDOM,
   );
-  trackingBatterySelectorLeadLine(hud, targetHUDCoordinate);
-  trackingBurstButtonLeadLine(hud, targetHUDCoordinate);
-  trackingPilotButtonLeadLine(hud, targetHUDCoordinate);
+  batterySelectorLeadLineTracking(hud, targetHUDCoordinate);
+  burstButtonLeadLineTracking(hud, targetHUDCoordinate);
+  pilotButtonLeadLineTracking(hud, targetHUDCoordinate);
 }

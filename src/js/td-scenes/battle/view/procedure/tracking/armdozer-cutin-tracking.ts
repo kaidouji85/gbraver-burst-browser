@@ -3,7 +3,6 @@ import * as THREE from "three";
 import { ArmdozerSprite } from "../../../../../game-object/armdozer/armdozer-sprite";
 import { ARMDOZER_EFFECT_STANDARD_Y } from "../../../../../game-object/armdozer/position";
 import { HUDCoordinate } from "../../../../../tracking/coordinate";
-import { HUDTracking } from "../../../../../tracking/hud-tracking";
 import { toHUDCoordinate } from "../../../../../tracking/to-hud-coordinate";
 import { GenesisBraverHUD } from "../../hud/armdozer-objects/genesis-braver";
 import { HUDArmdozerObjects } from "../../hud/armdozer-objects/hud-armdozer-objects";
@@ -14,61 +13,22 @@ import { WingDozerHUD } from "../../hud/armdozer-objects/wing-dozer";
 import { TrackingParams } from "./tracking-params";
 
 /**
- * アームドーザスプライトをトラッキングする
- * @param params パラメータ
- */
-export function trackingArmdozerSprites(params: TrackingParams): void {
-  const { td, hud, rendererDOM } = params;
-  td.armdozers.forEach((tdArmdozer) => {
-    const hudArmdozer = hud.armdozers.find(
-      (v) => v.playerId === tdArmdozer.playerId,
-    );
-
-    if (!hudArmdozer) {
-      return;
-    }
-
-    const tracks = getTracksFromHUDArmdozer(hudArmdozer);
-    tracks.forEach((v) => {
-      const position = toCutInHUDPos(
-        td.camera.getCamera(),
-        rendererDOM,
-        tdArmdozer.sprite(),
-      );
-      v.tracking(position);
-    });
-  });
-}
-
-/**
- * HUDアームドーザからHUDTrackingを取得する
+ * アームドーザカットインを抽出する
  * @param hudArmdozer 取得元
- * @return 取得結果
+ * @return 取得結果、抽出できない場合はnullを返す
  */
-function getTracksFromHUDArmdozer(
-  hudArmdozer: Readonly<HUDArmdozerObjects>,
-): HUDTracking[] {
-  if (hudArmdozer instanceof ShinBraverHUD) {
-    return [hudArmdozer.cutIn];
+function extractArmdozerCutIn(hudArmdozer: Readonly<HUDArmdozerObjects>) {
+  if (
+    hudArmdozer instanceof ShinBraverHUD ||
+    hudArmdozer instanceof NeoLandozerHUD ||
+    hudArmdozer instanceof LightningDozerHUD ||
+    hudArmdozer instanceof WingDozerHUD ||
+    hudArmdozer instanceof GenesisBraverHUD
+  ) {
+    return hudArmdozer.cutIn;
   }
 
-  if (hudArmdozer instanceof NeoLandozerHUD) {
-    return [hudArmdozer.cutIn];
-  }
-
-  if (hudArmdozer instanceof LightningDozerHUD) {
-    return [hudArmdozer.cutIn];
-  }
-
-  if (hudArmdozer instanceof WingDozerHUD) {
-    return [hudArmdozer.cutIn];
-  }
-
-  if (hudArmdozer instanceof GenesisBraverHUD) {
-    return [hudArmdozer.cutIn];
-  }
-
-  return [];
+  return null;
 }
 
 /**
@@ -90,4 +50,32 @@ function toCutInHUDPos(
     z: target.position.z,
   };
   return toHUDCoordinate(tdPosition, tdCamera, rendererDOM);
+}
+
+/**
+ * アームドーザカットインのトラッキング
+ * @param params パラメータ
+ */
+export function armdozerCutInTracking(params: TrackingParams): void {
+  const { td, hud, rendererDOM } = params;
+  td.armdozers.forEach((tdArmdozer) => {
+    const hudArmdozer = hud.armdozers.find(
+      (a) => a.playerId === tdArmdozer.playerId,
+    );
+    if (!hudArmdozer) {
+      return;
+    }
+
+    const cutIn = extractArmdozerCutIn(hudArmdozer);
+    if (!cutIn) {
+      return;
+    }
+
+    const hudCoordinate = toCutInHUDPos(
+      td.camera.getCamera(),
+      rendererDOM,
+      tdArmdozer.sprite(),
+    );
+    cutIn.tracking(hudCoordinate);
+  });
 }
