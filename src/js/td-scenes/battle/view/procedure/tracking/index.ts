@@ -1,6 +1,6 @@
-import { trackingArmdozerSprites } from "./armdozer-sprite";
+import { armdozerCutInTracking } from "./armdozer-cutin-tracking";
 import { gaugeTracking } from "./gauge-tracking";
-import { trackingLeadLine } from "./lead-line";
+import { leadLineTracking } from "./lead-line-tracking";
 import { TrackingParams } from "./tracking-params";
 
 /**
@@ -9,6 +9,6 @@ import { TrackingParams } from "./tracking-params";
  */
 export function tracking(params: TrackingParams): void {
   gaugeTracking(params);
-  trackingArmdozerSprites(params);
-  trackingLeadLine(params);
+  armdozerCutInTracking(params);
+  leadLineTracking(params);
 }

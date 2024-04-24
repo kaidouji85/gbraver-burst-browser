@@ -14,10 +14,10 @@ import { WingDozerHUD } from "../../hud/armdozer-objects/wing-dozer";
 import { TrackingParams } from "./tracking-params";
 
 /**
- * アームドーザスプライトをトラッキングする
+ * アームドーザカットインのトラッキング
  * @param params パラメータ
  */
-export function trackingArmdozerSprites(params: TrackingParams): void {
+export function armdozerCutInTracking(params: TrackingParams): void {
   const { td, hud, rendererDOM } = params;
   td.armdozers.forEach((tdArmdozer) => {
     const hudArmdozer = hud.armdozers.find(
