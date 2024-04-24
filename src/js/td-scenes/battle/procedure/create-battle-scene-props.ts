@@ -18,7 +18,7 @@ import { BattleSceneProps } from "../battle-scene-props";
 import { BattleControllerType } from "../controller-type";
 import { CustomBattleEvent } from "../custom-battle-event";
 import { BattleSceneSounds } from "../sounds/sounds";
-import { BattleSceneView } from "../view";
+import { createBattleSceneView } from "../view";
 
 /** 戦闘シーンで利用するレンダラ */
 export interface OwnRenderer
@@ -75,7 +75,7 @@ export function createBattleSceneProps(
     stateHistory: params.initialState,
     endBattle: new Subject(),
     customBattleEvent: params.customBattleEvent ?? null,
-    view: new BattleSceneView(params),
+    view: createBattleSceneView(params),
     sounds: new BattleSceneSounds(params.resources, params.playingBGM),
   };
 }
