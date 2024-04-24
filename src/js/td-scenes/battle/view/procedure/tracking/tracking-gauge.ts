@@ -5,74 +5,61 @@ import {
   ARMDOZER_EFFECT_STANDARD_Y,
   ARMDOZER_EFFECT_STANDARD_Z,
 } from "../../../../../game-object/armdozer/position";
-import { HUDCoordinate } from "../../../../../tracking/coordinate";
-import { HUDTracking } from "../../../../../tracking/hud-tracking";
+import { Gauge } from "../../../../../game-object/gauge/gauge";
 import { toHUDCoordinate } from "../../../../../tracking/to-hud-coordinate";
-import { HUDPlayer } from "../../hud/player";
 import { TrackingParams } from "./tracking-params";
 
 /**
- * ゲージをトラッキングする
- * @param params パラメータ
- */
-export function trackingGauges(params: TrackingParams): void {
-  const { td, hud, activePlayerId, rendererDOM } = params;
-  hud.players.forEach((hudPlayer) => {
-    const isActivePlayer = hudPlayer.playerId === activePlayerId;
-    const hudPosition = isActivePlayer
-      ? toPlayerGaugeHUDPos(td.camera.getCamera(), rendererDOM)
-      : toEnemyGaugeHUDPos(td.camera.getCamera(), rendererDOM);
-    const tracks = getTracksFromHUDPlayer(hudPlayer);
-    tracks.forEach((v) => {
-      v.tracking(hudPosition);
-    });
-  });
-}
-
-/**
- * HUDプレイヤーオブジェクトからトラッキング対象を取得する
- *
- * @param hudPlayer HUDプレイヤーオブジェクト
- * @return 取得結果
- */
-function getTracksFromHUDPlayer(hudPlayer: Readonly<HUDPlayer>): HUDTracking[] {
-  return [hudPlayer.gauge];
-}
-
-/**
- * プレイヤーゲージ用に3D系座標をHUD系座標に変換する
- *
+ * プレイヤー側ゲージのトラッキング
+ * @param gauge トラッキングするゲージ
  * @param tdCamera 3Dレイヤーのカメラ
  * @param rendererDOM レンダラDOM
  * @return 変換結果
  */
-function toPlayerGaugeHUDPos(
+function trackingPlayerGauge(
+  gauge: Gauge,
   tdCamera: Readonly<THREE.PerspectiveCamera>,
   rendererDOM: Readonly<HTMLElement>,
-): HUDCoordinate {
-  const tdCoordinate = {
+) {
+  const origin = {
     x: ARMDOZER_EFFECT_STANDARD_X,
     y: ARMDOZER_EFFECT_STANDARD_Y + 200,
     z: ARMDOZER_EFFECT_STANDARD_Z,
   };
-  return toHUDCoordinate(tdCoordinate, tdCamera, rendererDOM);
+  const hudCoordinate = toHUDCoordinate(origin, tdCamera, rendererDOM);
+  gauge.tracking(hudCoordinate);
 }
 
 /**
- * 敵ゲージ用に3D系座標をHUD系座標に変換する
- *
+ * 敵側ゲージのトラッキング
+ * @param gauge トラッキングするゲージ
  * @param tdCamera 3Dレイヤーのカメラ
  * @param rendererDOM レンダラDOM
  * @return 変換結果
  */
-function toEnemyGaugeHUDPos(
+function trackingEnemyGauge(
+  gauge: Gauge,
   tdCamera: Readonly<THREE.PerspectiveCamera>,
   rendererDOM: Readonly<HTMLElement>,
-): HUDCoordinate {
-  const tdCoordinate = {
+) {
+  const origin = {
     x: -ARMDOZER_EFFECT_STANDARD_X,
     y: ARMDOZER_EFFECT_STANDARD_Y + 200,
     z: ARMDOZER_EFFECT_STANDARD_Z,
   };
-  return toHUDCoordinate(tdCoordinate, tdCamera, rendererDOM);
+  const hudCoordinate = toHUDCoordinate(origin, tdCamera, rendererDOM);
+  gauge.tracking(hudCoordinate);
+}
+
+/**
+ * ゲージのトラッキング
+ * @param params パラメータ
+ */
+export function trackingGauges(params: TrackingParams): void {
+  const { td, hud, activePlayerId, rendererDOM } = params;
+  hud.players.forEach(({ playerId, gauge }) => {
+    const tracking =
+      playerId === activePlayerId ? trackingPlayerGauge : trackingEnemyGauge;
+    tracking(gauge, td.camera.getCamera(), rendererDOM);
+  });
 }
