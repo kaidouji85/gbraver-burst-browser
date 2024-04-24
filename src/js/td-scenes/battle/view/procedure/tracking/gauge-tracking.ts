@@ -16,7 +16,7 @@ import { TrackingParams } from "./tracking-params";
  * @param rendererDOM レンダラDOM
  * @return 変換結果
  */
-function trackingPlayerGauge(
+function playerGaugeTracking(
   gauge: Gauge,
   tdCamera: Readonly<THREE.PerspectiveCamera>,
   rendererDOM: Readonly<HTMLElement>,
@@ -37,7 +37,7 @@ function trackingPlayerGauge(
  * @param rendererDOM レンダラDOM
  * @return 変換結果
  */
-function trackingEnemyGauge(
+function enemyGaugeTracking(
   gauge: Gauge,
   tdCamera: Readonly<THREE.PerspectiveCamera>,
   rendererDOM: Readonly<HTMLElement>,
@@ -55,11 +55,11 @@ function trackingEnemyGauge(
  * ゲージのトラッキング
  * @param params パラメータ
  */
-export function trackingGauges(params: TrackingParams): void {
+export function gaugeTracking(params: TrackingParams): void {
   const { td, hud, activePlayerId, rendererDOM } = params;
   hud.players.forEach(({ playerId, gauge }) => {
     const tracking =
-      playerId === activePlayerId ? trackingPlayerGauge : trackingEnemyGauge;
+      playerId === activePlayerId ? playerGaugeTracking : enemyGaugeTracking;
     tracking(gauge, td.camera.getCamera(), rendererDOM);
   });
 }
