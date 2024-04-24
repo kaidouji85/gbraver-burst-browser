@@ -17,9 +17,7 @@ import { TrackingParams } from "./tracking-params";
  * @param hudArmdozer 取得元
  * @return 取得結果、抽出できない場合はnullを返す
  */
-function extractArmdozerCutIn(
-  hudArmdozer: Readonly<HUDArmdozerObjects>,
-) {
+function extractArmdozerCutIn(hudArmdozer: Readonly<HUDArmdozerObjects>) {
   if (
     hudArmdozer instanceof ShinBraverHUD ||
     hudArmdozer instanceof NeoLandozerHUD ||
