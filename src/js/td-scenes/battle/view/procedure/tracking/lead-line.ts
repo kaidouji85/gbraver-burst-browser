@@ -2,10 +2,10 @@ import {
   ARMDOZER_EFFECT_STANDARD_X,
   ARMDOZER_EFFECT_STANDARD_Y,
   ARMDOZER_EFFECT_STANDARD_Z,
-} from "../../../../game-object/armdozer/position";
-import { HUDCoordinate } from "../../../../tracking/coordinate";
-import { toHUDCoordinate } from "../../../../tracking/to-hud-coordinate";
-import { HUDLayer } from "../hud";
+} from "../../../../../game-object/armdozer/position";
+import { HUDCoordinate } from "../../../../../tracking/coordinate";
+import { toHUDCoordinate } from "../../../../../tracking/to-hud-coordinate";
+import { HUDLayer } from "../../hud";
 import { TrackingParams } from "./tracking-params";
 
 /** 引き出し線が指し示す3Dレイヤー座標 */

@@ -1,7 +1,7 @@
 import { PlayerId } from "gbraver-burst-core";
 
-import { HUDLayer } from "../hud";
-import { TDLayer } from "../td";
+import { HUDLayer } from "../../hud";
+import { TDLayer } from "../../td";
 
 /** トラッキングのパラメータ */
 export type TrackingParams = {
