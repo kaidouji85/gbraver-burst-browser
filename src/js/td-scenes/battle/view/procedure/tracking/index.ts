@@ -1,6 +1,6 @@
 import { trackingArmdozerSprites } from "./armdozer-sprite";
-import { trackingGauges } from "./gauge";
 import { trackingLeadLine } from "./lead-line";
+import { trackingGauges } from "./tracking-gauge";
 import { TrackingParams } from "./tracking-params";
 
 /**
