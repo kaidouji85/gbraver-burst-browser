@@ -8,7 +8,7 @@ export type ZeroDefenseTutorialProps = {
 
 /**
  * ゼロ防御チュートリアル用のプロパティを生成する
- * @return 生成結果
+ * @returns 生成結果
  */
 export function createZeroDefenseTutorialProps(): ZeroDefenseTutorialProps {
   const state = {

@@ -8,7 +8,7 @@ import { RecoverBatteryAnimationProps } from "./animation-props";
  * バッテリー回復 ポップアップ
  * @param props アニメーションプロパティ
  * @param value 回復値
- * @return アニメーション
+ * @returns アニメーション
  */
 export function popUp(
   props: RecoverBatteryAnimationProps,
@@ -21,7 +21,7 @@ export function popUp(
  * 表示
  * @param props アニメーションプロパティ
  * @param value 回復値
- * @return アニメーション
+ * @returns アニメーション
  */
 export function show(
   props: RecoverBatteryAnimationProps,
@@ -49,7 +49,7 @@ export function show(
 /**
  * 非表示
  * @param props アニメーションプロパティ
- * @return アニメーション
+ * @returns アニメーション
  */
 export function hidden(props: RecoverBatteryAnimationProps): Animate {
   const { model } = props;

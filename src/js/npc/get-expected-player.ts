@@ -5,7 +5,7 @@ import { SimpleRoutineData } from "./simple-npc";
 /**
  * プレイヤーの各種予想を取得する
  * @param data ルーチンに渡されるデータ
- * @return プレイヤーの各種予想
+ * @returns プレイヤーの各種予想
  */
 export function getExpectedPlayer(data: SimpleRoutineData) {
   const { invoker: playerAfterBurst } = getStateAfterBurst({

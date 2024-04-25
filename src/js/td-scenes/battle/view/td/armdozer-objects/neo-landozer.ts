@@ -41,7 +41,7 @@ export class NeoLandozerTD implements TDArmdozerObjects {
 /**
  * プレイヤー 3Dレイヤー ネオランドーザ 3Dレイヤー
  * @param params 生成パラメータ
- * @return 生成結果
+ * @returns 生成結果
  */
 export function playerNeoLandozerTD(
   params: TDLayerObjectCreatorParams,
@@ -53,7 +53,7 @@ export function playerNeoLandozerTD(
 /**
  * 敵 3Dレイヤー ネオランドーザ 3Dレイヤー
  * @param params 生成パラメータ
- * @return 生成結果
+ * @returns 生成結果
  */
 export function enemyNeoLandozerTD(
   params: TDLayerObjectCreatorParams,

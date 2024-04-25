@@ -8,7 +8,7 @@ import { shouldAttack3OrMore } from "../stories/should-attack3-or-more";
 /**
  * 条件を満たせば「3以上で攻撃する」を再生する
  * @param props イベントプロパティ
- * @return ストーリーを再生したか否か、trueで再生した
+ * @returns ストーリーを再生したか否か、trueで再生した
  */
 export async function executeShouldAttack3OrMoreIfNeeded(
   props: Readonly<LastState & PilotSkillTutorial02Props>,

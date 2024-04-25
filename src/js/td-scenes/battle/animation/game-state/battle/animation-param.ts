@@ -52,7 +52,7 @@ export type BattleAnimationParam = BattleAnimationParamX<
  *
  * @param props 戦闘シーンプロパティ
  * @param gameState ゲームステート
- * @return 戦闘アニメパラメータ
+ * @returns 戦闘アニメパラメータ
  */
 export function toBattleAnimationParam(
   props: StateAnimationProps,

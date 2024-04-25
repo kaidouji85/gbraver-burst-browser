@@ -14,7 +14,7 @@ export default {
  * 座標確認用の円を生成する
  * @param radius 円の半径
  * @param color 円の色
- * @return 生成した円
+ * @returns 生成した円
  */
 const circle = (radius: number, color = 0xffff00) => {
   const geometry = new THREE.CircleGeometry(radius, 32);
@@ -25,7 +25,7 @@ const circle = (radius: number, color = 0xffff00) => {
 /**
  * 引き出し線生成関数
  * @param gameObjectAction ゲームオブジェクトアクション
- * @return 引き出し線、点A、点B
+ * @returns 引き出し線、点A、点B
  */
 type Generator = (
   gameObjectAction: Observable<GameObjectAction>,

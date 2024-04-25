@@ -10,7 +10,7 @@ import { isAllPlayerNoDamage } from "../../../src/js/custom-battle-events/is-all
 /**
  * ノーダメージのプレイヤーを生成する
  * @param playerId プレイヤーID
- * @return 生成結果
+ * @returns 生成結果
  */
 const noDamagePlayer = (playerId: PlayerId): PlayerState => ({
   ...EMPTY_PLAYER_STATE,
@@ -25,7 +25,7 @@ const noDamagePlayer = (playerId: PlayerId): PlayerState => ({
 /**
  * ダメージを負ったプレイヤーを生成する
  * @param playerId プレイヤーID
- * @return 生成結果
+ * @returns 生成結果
  */
 const damagedPlayer = (playerId: PlayerId): PlayerState => ({
   ...EMPTY_PLAYER_STATE,

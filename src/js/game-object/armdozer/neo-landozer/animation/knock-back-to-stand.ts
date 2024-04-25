@@ -6,7 +6,7 @@ import { NeoLandozerAnimationProps } from "./animation-props";
 /**
  * ノックバック -> 立ち
  * @param props アニメーションプロパティ
- * @return アニメーション
+ * @returns アニメーション
  */
 export function knockBackToStand(props: NeoLandozerAnimationProps): Animate {
   const { model, sounds, se } = props;

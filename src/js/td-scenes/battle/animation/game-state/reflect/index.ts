@@ -11,7 +11,7 @@ import { deathLightning, lightning } from "./lightning";
  *
  * @param props 戦闘シーンプロパティ
  * @param gameState ゲームステート
- * @return アニメーション
+ * @returns アニメーション
  */
 export function reflectAnimation(
   props: StateAnimationProps,

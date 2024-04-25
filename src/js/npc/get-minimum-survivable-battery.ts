@@ -23,7 +23,7 @@ type Result = Exist | NotExist;
  * @param defender 防御側ステータス
  * @param attacker 攻撃側ステータス
  * @param attackerBattery 攻撃側バッテリー
- * @return 計算結果、今のバッテリーで生き延びられない場合はnullを返す
+ * @returns 計算結果、今のバッテリーで生き延びられない場合はnullを返す
  */
 export function getMinimumSurvivableBattery(
   defender: PlayerState,

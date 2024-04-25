@@ -6,7 +6,7 @@ import { LightningDozerAnimationProps } from "./animation-props";
 /**
  * 礼（起き上がる）
  * @param props アニメーションプロパティ
- * @return アニメーション
+ * @returns アニメーション
  */
 export function bowUp(props: LightningDozerAnimationProps): Animate {
   const { model, sounds, se } = props;

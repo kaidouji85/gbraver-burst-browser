@@ -13,7 +13,7 @@ import { tsubasaShout } from "./tsubasa-shout";
 /**
  * カスタムステートアニメーション
  * @param props イベントプロパティ
- * @return アニメーション
+ * @returns アニメーション
  */
 export function onStateAnimation(
   props: Readonly<CustomStateAnimation & PilotSkillTutorial01Props>,

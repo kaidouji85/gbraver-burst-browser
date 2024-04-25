@@ -108,7 +108,7 @@ class BatterySystemTutorialEvent extends EmptyCustomBattleEvent {
 /**
  * バッテリーシステムチュートリアル用のカスタバトルイベントを生成する
  * @param resources リソース管理オブジェクト
- * @return 生成したカスタムバトルイベント
+ * @returns 生成したカスタムバトルイベント
  */
 export function createBatterySystemTutorialEvent(
   resources: Resources,

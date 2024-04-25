@@ -5,7 +5,7 @@ import { playerPilotOnlyShout } from "../../pilot-shout";
 /**
  * シンヤ 自分が防御側でパイロットスキル 叫び
  * @param props イベントプロパティ
- * @return アニメーション
+ * @returns アニメーション
  */
 export const shinyaPilotSkillShoutWhenHeDefense = (
   props: Readonly<CustomBattleEventProps>,

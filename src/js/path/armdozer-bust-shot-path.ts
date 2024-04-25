@@ -15,7 +15,7 @@ const ArmdozerBurstShotPathIds: Record<ArmdozerId, PathId> = {
 /**
  * アームドーザIDに対応するバストショットのパスIDを返す
  * @param armdozerId アームドーザID
- * @return パスID
+ * @returns パスID
  */
 export const getArmdozerBustShotPathId = (armdozerId: ArmdozerId): PathId =>
   ArmdozerBurstShotPathIds[armdozerId] ?? PathIds.SHIN_BRAVER_BUST_SHOT;

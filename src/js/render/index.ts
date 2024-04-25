@@ -53,7 +53,7 @@ export class Renderer implements OverlapNotifier, RendererDomGetter, Rendering {
   /**
    * オーバーラップイベント通知を生成する
    * @param camera カメラ
-   * @return 生成結果
+   * @returns 生成結果
    */
   createOverlapNotifier(camera: THREE.Camera): Observable<OverlapEvent> {
     return toOverlapStream(this.#domEvent, this.getRendererDOM(), camera);
@@ -61,7 +61,7 @@ export class Renderer implements OverlapNotifier, RendererDomGetter, Rendering {
 
   /**
    * デバッグ用情報を返す
-   * @return デバッグ用情報
+   * @returns デバッグ用情報
    */
   info(): WebGLInfo {
     return this.#threeJsRender.info;
@@ -69,7 +69,7 @@ export class Renderer implements OverlapNotifier, RendererDomGetter, Rendering {
 
   /**
    * three.jsレンダラのHTML要素を取得する
-   * @return 取得結果
+   * @returns 取得結果
    */
   getRendererDOM(): HTMLElement {
     return this.#threeJsRender.domElement;

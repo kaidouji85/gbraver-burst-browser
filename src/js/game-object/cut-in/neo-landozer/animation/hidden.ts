@@ -5,7 +5,7 @@ import { NeoLandozerCutInAnimationProps } from "./animation-props";
 /**
  * カットインを非表示にする
  * @param props アニメーションプロパティ
- * @return アニメーション
+ * @returns アニメーション
  */
 export function hidden(props: NeoLandozerCutInAnimationProps): Animate {
   const { model } = props;

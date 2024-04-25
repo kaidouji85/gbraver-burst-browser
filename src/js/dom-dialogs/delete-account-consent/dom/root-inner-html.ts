@@ -6,7 +6,7 @@ import template from "./root-inner-html.hbs";
 /**
  * ルート要素のinnerHTMLを生成する
  * @param resources リソース管理オブジェクト
- * @return 生成結果
+ * @returns 生成結果
  */
 export function rootInnerHTML(resources: Resources): string {
   const closerPath =

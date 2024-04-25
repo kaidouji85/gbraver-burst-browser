@@ -8,7 +8,7 @@ import rootInnerHTMLTemplate from "./root-inner-html.hbs";
  * ルート要素のinnerHTML
  * @param resources リソース管理オブジェクト
  * @param episode エピソード情報
- * @return innerHTML
+ * @returns innerHTML
  */
 export function rootInnerHTML(resources: Resources, episode: Episode): string {
   const checkPath =

@@ -12,7 +12,7 @@ export const PerformanceStatsVisibilitySchema = z.union([
  * PerformanceStatsVisibilityにパースする
  * パースできない場合はnullを返す
  * @param origin パース元
- * @return パース結果
+ * @returns パース結果
  */
 export function parsePerformanceStatsVisibility(
   origin: unknown,

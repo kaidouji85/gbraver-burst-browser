@@ -12,7 +12,7 @@ import { startNPCBattleStage } from "../start-npc-battle-stage";
  * 条件を満たした場合、NPCバトルステージに遷移する
  * @param props ゲームプロパティ
  * @param action 戦闘終了後アクション
- * @return 遷移した場合はtrue
+ * @returns 遷移した場合はtrue
  */
 export async function gotoNPCBattleStageIfNeeded(
   props: Readonly<GameProps>,

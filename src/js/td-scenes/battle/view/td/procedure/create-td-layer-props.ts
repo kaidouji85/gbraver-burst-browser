@@ -27,7 +27,7 @@ export type TDLayerPropsCreatorParams = BattleViewCreatorParams & {
 /**
  * TDLayerPropsを生成する
  * @params params 生成パラメータ
- * @return 生成結果
+ * @returns 生成結果
  */
 export function createTDLayerProps(
   params: TDLayerPropsCreatorParams,

@@ -10,7 +10,7 @@ import { onPrevButtonPush } from "./on-prev-button-push";
 /**
  * イベントリスナをバインドする
  * @param props プロパティ
- * @return アンサブスクライバ
+ * @returns アンサブスクライバ
  */
 export function bindEventListeners(
   props: SecretPlayerSelectProps,

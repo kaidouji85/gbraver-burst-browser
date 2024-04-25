@@ -5,7 +5,7 @@ import rootInnerHTMLTemplate from "./root-inner-html.hbs";
 /**
  * ルートHTML要素のinnerHTML
  * @param ids data-idを集めたもの
- * @return innerHTML
+ * @returns innerHTML
  */
 export function rootInnerHTML(ids: DataIDs): string {
   return rootInnerHTMLTemplate({

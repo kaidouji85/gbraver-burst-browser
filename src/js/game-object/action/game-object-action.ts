@@ -13,7 +13,7 @@ export type GameObjectAction = Update | PreRender | OverlapEvent;
  * @param update アップデート
  * @param preRender プリレンダー
  * @param overlap 当たり判定
- * @return 生成したストリーム
+ * @returns 生成したストリーム
  */
 export function gameObjectStream(
   update: Observable<Update>,

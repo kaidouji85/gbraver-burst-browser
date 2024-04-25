@@ -6,7 +6,7 @@ import { PilotButtonAnimationProps } from "./animation-props";
 /**
  * パイロットボタンを非表示にする
  * @param props アニメーションプロパティ
- * @return アニメーション
+ * @returns アニメーション
  */
 export function close(props: PilotButtonAnimationProps): Animate {
   const { model } = props;

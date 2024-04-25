@@ -35,7 +35,7 @@ export class MailVerifiedIncomplete implements DOMScene {
 
   /**
    * タイトル遷移通知
-   * @return 通知ストリーム
+   * @returns 通知ストリーム
    */
   notifyTitleTransition(): Observable<void> {
     return this.#props.gotoTitle;
@@ -43,7 +43,7 @@ export class MailVerifiedIncomplete implements DOMScene {
 
   /**
    * 再読み込み通知
-   * @return 通知ストリーム
+   * @returns 通知ストリーム
    */
   notifyReload(): Observable<void> {
     return this.#props.reload;

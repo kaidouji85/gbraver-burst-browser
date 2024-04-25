@@ -7,7 +7,7 @@ import { WingDozerAnimationProps } from "./animation-props";
 /**
  * ダッシュ
  * @param props アニメーションプロパティ
- * @return アニメーション
+ * @returns アニメーション
  */
 export function dash(props: WingDozerAnimationProps): Animate {
   const { model, sounds, se } = props;

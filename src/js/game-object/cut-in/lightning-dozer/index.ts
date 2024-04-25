@@ -15,7 +15,7 @@ export type LightningDozerCutInCreatorParams = ResourcesContainer & {
 /**
  * プレイヤー ライトニングドーザ カットイン
  * @param params 生成パラメータ
- * @return 生成結果
+ * @returns 生成結果
  */
 export function playerLightningDozerCutIn(
   params: LightningDozerCutInCreatorParams,
@@ -28,7 +28,7 @@ export function playerLightningDozerCutIn(
 /**
  * 敵 ライトニングドーザ カットイン
  * @param params 生成パラメータ
- * @return 生成結果
+ * @returns 生成結果
  */
 export function enemyLightningDozerCutIn(
   params: LightningDozerCutInCreatorParams,

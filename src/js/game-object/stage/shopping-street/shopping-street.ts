@@ -36,7 +36,7 @@ export default class ShoppingStreet implements Stage {
   /**
    * 本クラスに関連するオブジェクトを配列にまとめる
    *
-   * @return 配列にまとめた結果
+   * @returns 配列にまとめた結果
    */
   getThreeJsObjects(): THREE.Object3D[] {
     return [this.#gltf.object];

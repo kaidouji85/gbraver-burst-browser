@@ -8,7 +8,7 @@ import { NeoLandozerAnimationProps } from "./animation-props";
 /**
  * フロントステップ
  * @param props アニメーションプロパティ
- * @return アニメーション
+ * @returns アニメーション
  */
 export function frontStep(
   props: NeoLandozerAnimationProps,

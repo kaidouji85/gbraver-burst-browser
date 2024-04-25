@@ -18,7 +18,7 @@ export class DOMFader {
   /**
    * ルートのHTML要素を取得する
    *
-   * @return 取得結果
+   * @returns 取得結果
    */
   getRootHTMLElement(): HTMLElement {
     return this._root;
@@ -34,7 +34,7 @@ export class DOMFader {
   /**
    * フェードイン
    *
-   * @return アニメーション
+   * @returns アニメーション
    */
   async fadeIn(): Promise<void> {
     this._root.style.display = "block";
@@ -60,7 +60,7 @@ export class DOMFader {
   /**
    * フェードアウト
    *
-   * @return アニメーション
+   * @returns アニメーション
    */
   async fadeOut(): Promise<void> {
     this._root.style.display = "block";

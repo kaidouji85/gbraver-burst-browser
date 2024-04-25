@@ -32,7 +32,7 @@ export const BrowserConfigSchema = z.object({
  * ブラウザ設定をパースする
  * パースできない場合、デフォルト値を返す
  * @param config ブラウザ設定
- * @return パース結果
+ * @returns パース結果
  */
 export function parseBrowserConfig(config: unknown): GBraverBurstBrowserConfig {
   const result = BrowserConfigSchema.safeParse(config);

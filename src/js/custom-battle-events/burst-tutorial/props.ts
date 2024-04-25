@@ -8,7 +8,7 @@ export type BurstTutorialProps = {
 
 /**
  * バーストチュートリアルのプロパティを作成する
- * @return 生成結果
+ * @returns 生成結果
  */
 export function createBurstTutorialProps() {
   const state = {

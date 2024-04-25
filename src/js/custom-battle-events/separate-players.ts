@@ -17,7 +17,7 @@ type SeparatedPlayers = {
  * プレイヤーを自キャラ、敵に分割する
  * @param props カスタムバトルイベントプロパティ
  * @param state ゲームステート
- * @return 分割されたプレイヤー、分割できない場合null
+ * @returns 分割されたプレイヤー、分割できない場合null
  */
 export function separatePlayers(
   props: Readonly<CustomBattleEventProps>,
@@ -35,7 +35,7 @@ export function separatePlayers(
 /**
  * 最終ステートからプレイヤーを自キャラ、敵に分割する
  * @param props カスタムバトルイベントプロパティ
- * @return 分割されたプレイヤー、分割できない場合null
+ * @returns 分割されたプレイヤー、分割できない場合null
  */
 export function separatePlayersFromLastState(
   props: Readonly<CustomBattleEventProps>,
@@ -47,7 +47,7 @@ export function separatePlayersFromLastState(
 /**
  * 現在ステートからプレイヤーを自キャラ、敵に分割する
  * @param props カスタムバトルイベントプロパティ
- * @return 分割されたプレイヤー、分割できない場合null
+ * @returns 分割されたプレイヤー、分割できない場合null
  */
 export function separatePlayersFromCurrentState(
   props: Readonly<CustomStateAnimation>,

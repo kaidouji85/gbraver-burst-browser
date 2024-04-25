@@ -11,7 +11,7 @@ export interface GenesisBraverView {
 
   /**
    * シーンに追加するオブジェクトを取得する
-   * @return 取得結果
+   * @returns 取得結果
    */
   getObject3D(): THREE.Object3D;
 

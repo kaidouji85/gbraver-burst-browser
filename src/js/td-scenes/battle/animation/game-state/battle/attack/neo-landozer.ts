@@ -26,7 +26,7 @@ export type NeoLandozerBattle<RESULT extends BattleResult> =
  * アタッカーにフォーカスを合わせる
  * @param camera カメラ
  * @param attacker アタッカーのスプライト
- * @return アニメーション
+ * @returns アニメーション
  */
 function focusToAttacker(camera: TDCamera, attacker: NeoLandozer): Animate {
   const duration = 400;
@@ -42,7 +42,7 @@ type AttackResult = NormalHit | CriticalHit;
 /**
  * 攻撃ヒット
  * @param param パラメータ
- * @return アニメーション
+ * @returns アニメーション
  */
 function attack(param: NeoLandozerBattle<AttackResult>): Animate {
   return all(
@@ -65,7 +65,7 @@ function attack(param: NeoLandozerBattle<AttackResult>): Animate {
 /**
  * ガード
  * @param param パラメータ
- * @return アニメーション
+ * @returns アニメーション
  */
 function guard(param: NeoLandozerBattle<Guard>): Animate {
   return param.attackerSprite
@@ -86,7 +86,7 @@ function guard(param: NeoLandozerBattle<Guard>): Animate {
 /**
  * ミス
  * @param param パラメータ
- * @return アニメーション
+ * @returns アニメーション
  */
 function miss(param: NeoLandozerBattle<Miss>): Animate {
   return param.attackerSprite
@@ -102,7 +102,7 @@ function miss(param: NeoLandozerBattle<Miss>): Animate {
 /**
  * フェイント
  * @param param パラメータ
- * @return アニメーション
+ * @returns アニメーション
  */
 function feint(param: NeoLandozerBattle<Feint>): Animate {
   if (!param.result.isDefenderMoved) {
@@ -118,7 +118,7 @@ type DownResult = NormalHit | Guard | CriticalHit;
 /**
  * とどめ
  * @param param パラメータ
- * @return アニメーション
+ * @returns アニメーション
  */
 function down(param: NeoLandozerBattle<DownResult>): Animate {
   return all(
@@ -145,7 +145,7 @@ function down(param: NeoLandozerBattle<DownResult>): Animate {
 /**
  * ネオランドーザの攻撃アニメーション
  * @param param パラメータ
- * @return アニメーション
+ * @returns アニメーション
  */
 export function neoLandozerAttack(
   param: NeoLandozerBattle<BattleResult>,

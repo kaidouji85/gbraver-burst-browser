@@ -130,7 +130,7 @@ const defenseRoutine: SimpleRoutine = (data) => {
 /**
  * ベリーハードコース ウィングドーザ NPC
  *
- * @return NPC
+ * @returns NPC
  */
 export function veryHardWingDozerNPC(): NPC {
   const armdozer =

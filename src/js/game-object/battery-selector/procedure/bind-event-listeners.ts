@@ -12,7 +12,7 @@ import { onUpdate } from "./on-update";
  * イベントリスナーをバインドする
  * @param props ゲームオブジェクトプロパティ
  * @param gameObjectAction ゲームオブジェクトアクション
- * @return アンサブスクライバ
+ * @returns アンサブスクライバ
  */
 export function bindEventListeners(
   props: BatterySelectorProps,

@@ -25,7 +25,7 @@ type AnimationParam = {
 /**
  * アニメーションパラメータをミニコントローラボタン設定に変換する
  * @param origin 変換元
- * @return 変換結果
+ * @returns 変換結果
  */
 function toMiniControllerConfig(origin: AnimationParam): ButtonConfig {
   const battery = getEnableMaxBattery(origin.commands);
@@ -42,7 +42,7 @@ function toMiniControllerConfig(origin: AnimationParam): ButtonConfig {
 /**
  * ボタン表示アニメーション
  * @param param パラメータ
- * @return アニメーション
+ * @returns アニメーション
  */
 function showButtons(param: Readonly<AnimationParam>): Animate {
   const enableMaxBattery = getEnableMaxBattery(param.commands);
@@ -70,7 +70,7 @@ function showButtons(param: Readonly<AnimationParam>): Animate {
 /**
  * ミニコントローラー表示アニメーション
  * @param param パラメータ
- * @return アニメーション
+ * @returns アニメーション
  */
 function showMiniController(param: AnimationParam): Animate {
   const miniControllerConfig = toMiniControllerConfig(param);
@@ -88,7 +88,7 @@ export type ShowCommandParam = AnimationParam & {
  * 各種コマンドを表示するヘルパー関数
  * controllerTypeに応じて、表示するものが変わる
  * @param param パラメータ
- * @return アニメーション
+ * @returns アニメーション
  */
 export function showCommand(param: ShowCommandParam): Animate {
   switch (param.controllerType) {

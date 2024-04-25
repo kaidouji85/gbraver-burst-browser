@@ -8,7 +8,7 @@ import type { SkyBrightnessModel } from "../model/sky-brightness-model";
  * @param model モデル
  * @param value 空の明るさ
  * @param duration アニメーション時間
- * @return アニメーション
+ * @returns アニメーション
  */
 export function brightness(
   model: SkyBrightnessModel,

@@ -52,7 +52,7 @@ export class BatteryNumber {
    * バッテリー数字を表示する
    *
    * @param battery バッテリー値
-   * @return アニメーション
+   * @returns アニメーション
    */
   show(battery: number): Animate {
     return show(this.#props, battery);
@@ -62,7 +62,7 @@ export class BatteryNumber {
    * 数字を変更する
    *
    * @param battery 変更する値
-   * @return アニメーション
+   * @returns アニメーション
    */
   change(battery: number): Animate {
     return change(this.#props, battery);
@@ -71,7 +71,7 @@ export class BatteryNumber {
   /**
    * バッテリー数字を消す
    *
-   * @return アニメーション
+   * @returns アニメーション
    */
   hidden(): Animate {
     return hidden(this.#props);

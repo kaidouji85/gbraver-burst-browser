@@ -8,7 +8,7 @@ import type { GameOverParamX } from "./game-over-param";
  * シンブレイバー 勝利
  *
  * @param param パラメータ
- * @return アニメーション
+ * @returns アニメーション
  */
 export function shinBraverWin(param: GameOverParamX<ShinBraverTD>): Animate {
   return all(

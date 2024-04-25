@@ -17,7 +17,7 @@ export type PowerUpCreatorParams = ResourcesContainer &
 /**
  * プレイヤー 攻撃アップ ポップアップ
  * @param params 生成パラメータ
- * @return 生成結果
+ * @returns 生成結果
  */
 export function playerPowerUp(params: PowerUpCreatorParams): PowerUp {
   const { resources } = params;
@@ -28,7 +28,7 @@ export function playerPowerUp(params: PowerUpCreatorParams): PowerUp {
 /**
  * 敵 攻撃アップ ポップアップ
  * @param params 生成パラメータ
- * @return 生成結果
+ * @returns 生成結果
  */
 export function enemyPowerUp(params: PowerUpCreatorParams): PowerUp {
   const { resources } = params;

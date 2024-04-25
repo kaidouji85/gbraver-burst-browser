@@ -10,7 +10,7 @@ const duration = 200;
 /**
  * カットインを非表示にする
  * @param props アニメーションプロパティ
- * @return アニメーション
+ * @returns アニメーション
  */
 export function hidden(props: RaitoCutInAnimationProps): Animate {
   const { model } = props;

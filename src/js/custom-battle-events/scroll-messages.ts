@@ -20,7 +20,7 @@ type Paragraph = string[];
  * @param sounds 戦闘シーンで利用する音声データ
  * @param se SE再生オブジェクト
  * @param paragraphs 表示するメッセージ
- * @return 処理が完了したら発火するPromise
+ * @returns 処理が完了したら発火するPromise
  */
 async function scrollMessages(
   messageWindow: MessageWindow,
@@ -46,7 +46,7 @@ async function scrollMessages(
  *
  * @param props イベントプロパティ
  * @param paragraphs 表示するメッセージ
- * @return 処理が完了したら発火するPromise
+ * @returns 処理が完了したら発火するPromise
  */
 export async function scrollLeftMessages(
   props: CustomBattleEventProps,
@@ -66,7 +66,7 @@ export async function scrollLeftMessages(
  *
  * @param props イベントプロパティ
  * @param paragraphs 表示するメッセージ
- * @return 処理が完了したら発火するPromise
+ * @returns 処理が完了したら発火するPromise
  */
 export async function scrollRightMessages(
   props: CustomBattleEventProps,

@@ -12,7 +12,7 @@ import type {
  * キャストできない場合はnullを返す
  *
  * @param state キャスト元
- * @return キャスト結果
+ * @returns キャスト結果
  */
 export function castInputCommand(
   state: GameState,
@@ -31,7 +31,7 @@ export function castInputCommand(
  * 抽出できない場合はnullを返す
  *
  * @param stateHistory ステートヒストリー
- * @return 抽出結果
+ * @returns 抽出結果
  */
 export function extractInputCommand(
   stateHistory: GameState[],
@@ -46,7 +46,7 @@ export function extractInputCommand(
  * キャストできない場合はnullを返す
  *
  * @param state キャスト元
- * @return キャスト結果
+ * @returns キャスト結果
  */
 export function castBatteryDeclaration(
   state: GameState,
@@ -65,7 +65,7 @@ export function castBatteryDeclaration(
  * 抽出できない場合はnullを返す
  *
  * @param stateHistory ステートヒストリー
- * @return 抽出結果
+ * @returns 抽出結果
  */
 export function extractBatteryDeclaration(
   stateHistory: GameState[],
@@ -82,7 +82,7 @@ export function extractBatteryDeclaration(
  * キャストできない場合はnullを返す
  *
  * @param state キャスト元
- * @return キャスト結果
+ * @returns キャスト結果
  */
 export function castGameEnd(
   state: GameState,
@@ -101,7 +101,7 @@ export function castGameEnd(
  * 抽出できない場合はnullを返す
  *
  * @param stateHistory ステートヒストリー
- * @return 抽出結果
+ * @returns 抽出結果
  */
 export function extractGameEnd(
   stateHistory: GameState[],

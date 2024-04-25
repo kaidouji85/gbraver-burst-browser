@@ -5,7 +5,7 @@ import { scrollLeftMessages } from "../../scroll-messages";
 /**
  * ユウヤ辛勝時のユウヤ台詞
  * @param props イベントプロパティ
- * @return ストーリーが完了したら発火するPromise
+ * @returns ストーリーが完了したら発火するPromise
  */
 export async function yuuyaShoutWhenYuuyaNarrowVictory(
   props: Readonly<CustomBattleEventProps>,

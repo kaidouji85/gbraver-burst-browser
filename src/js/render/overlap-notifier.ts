@@ -11,7 +11,7 @@ export interface OverlapNotifier {
    * オーバーラップイベント通知を生成する
    *
    * @param camera カメラ
-   * @return 生成結果
+   * @returns 生成結果
    */
   createOverlapNotifier(camera: THREE.Camera): Observable<OverlapEvent>;
 }

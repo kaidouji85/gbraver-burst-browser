@@ -23,7 +23,7 @@ type Ret = IsPrivateMatchGuestStarted | IsNotPrivateatchGuestStarted;
  * 条件を満たした場合、プライベートマッチ（ゲスト）を開始する
  * @param props ゲームプロパティ
  * @param action アクション
- * @return プライベートマッチ（ゲスト）開始情報
+ * @returns プライベートマッチ（ゲスト）開始情報
  */
 export async function startPrivateMatchGuestIfNeeded(
   props: Readonly<GameProps>,

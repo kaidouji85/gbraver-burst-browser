@@ -4,7 +4,7 @@ import type { LightningBarrierModel } from "./lightning-barrier-model";
 /**
  * 初期値を生成する
  *
- * @return 初期値
+ * @returns 初期値
  */
 export function createInitialValue(): LightningBarrierModel {
   return {

@@ -25,7 +25,7 @@ export const INITIAL_VIEW_POINT_Z = 0;
  *
  * @param camera カメラ
  * @param duration アニメーション時間
- * @return アニメーション
+ * @returns アニメーション
  */
 export function toInitial(camera: TDCamera, duration: number): Animate {
   return all(
@@ -54,7 +54,7 @@ export function toInitial(camera: TDCamera, duration: number): Animate {
  * @param camera カメラ
  * @param z 移動量
  * @param duration 移動時間
- * @return アニメーション
+ * @returns アニメーション
  */
 export function dolly(
   camera: TDCamera,
@@ -83,7 +83,7 @@ export function dolly(
  * @param camera カメラ
  * @param x 移動量
  * @param duration 移動時間
- * @return アニメーション
+ * @returns アニメーション
  */
 export function track(
   camera: TDCamera,

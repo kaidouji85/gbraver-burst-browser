@@ -18,7 +18,7 @@ export type ShockWaveCreatorParams = ResourcesContainer &
 /**
  * プレイヤーの衝撃波を生成する
  * @param params 生成パラメータ
- * @return 衝撃波
+ * @returns 衝撃波
  */
 export function playerShockWave(params: ShockWaveCreatorParams): ShockWave {
   const { resources } = params;
@@ -30,7 +30,7 @@ export function playerShockWave(params: ShockWaveCreatorParams): ShockWave {
 /**
  * 敵の衝撃波を生成する
  * @param params 生成パラメータ
- * @return 衝撃波
+ * @returns 衝撃波
  */
 export function enemyShockWave(params: ShockWaveCreatorParams): ShockWave {
   const { resources } = params;

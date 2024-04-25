@@ -10,7 +10,7 @@ import type { StateAnimationProps } from "./state-animation-props";
  *
  * @param props 戦闘シーンプロパティ
  * @param gameState ゲーム状態
- * @return アニメーション
+ * @returns アニメーション
  */
 export function turnChangeAnimation(
   props: StateAnimationProps,

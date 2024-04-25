@@ -21,7 +21,7 @@ export type RaitoAnimationParam = RaitoAnimationParamX<PilotSkill>;
  * ライト パイロットスキルアニメーション
  *
  * @param param パラメータ
- * @return アニメーション
+ * @returns アニメーション
  */
 export function raitoAnimation(param: RaitoAnimationParam): Animate {
   if (param.skill.type === "DamageHalvedSkill") {
@@ -41,7 +41,7 @@ const outDuration = 400;
  * ライト ダメージ半減 アニメーション
  *
  * @param param パラメータ
- * @return アニメーション
+ * @returns アニメーション
  */
 function raitoDamageHalved(
   param: RaitoAnimationParamX<DamageHalvedSkill>,

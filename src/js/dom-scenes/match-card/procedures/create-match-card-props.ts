@@ -21,7 +21,7 @@ export type PropsCreatorParams = ResourcesContainer & {
 /**
  * マッチカード画面プロパティを生成する
  * @params params パラメータ
- * @return 生成結果
+ * @returns 生成結果
  */
 export function createMatchCardProps(
   params: PropsCreatorParams,

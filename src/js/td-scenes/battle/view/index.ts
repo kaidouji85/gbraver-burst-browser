@@ -19,7 +19,7 @@ export type BattleSceneView = BattleSceneLayers & {
 
   /**
    * 戦闘シーンアクションを通知する
-   * @return 通知ストリーム
+   * @returns 通知ストリーム
    */
   battleActionNotifier(): Observable<BattleSceneAction>;
 };
@@ -30,7 +30,7 @@ type BattleViewCreatorParams = BattleSceneViewPropsCreatorParams;
 /**
  * BattleSceneViewを生成する
  * @param params 生成パラメータ
- * @return 生成結果
+ * @returns 生成結果
  */
 export function createBattleSceneView(
   params: BattleViewCreatorParams,

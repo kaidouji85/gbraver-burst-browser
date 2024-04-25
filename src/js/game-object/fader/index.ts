@@ -20,7 +20,7 @@ type Param = {
  * 最前面画面フェーダ
  *
  * @param param パラメータ
- * @return 画面フェーダ
+ * @returns 画面フェーダ
  */
 export function frontmostFader(param: Param): Fader {
   return new Fader({
@@ -34,7 +34,7 @@ export function frontmostFader(param: Param): Fader {
  * 最背面画面フェーダ
  *
  * @param param パラメータ
- * @return 画面フェーダ
+ * @returns 画面フェーダ
  */
 export function rearmostFader(param: Param): Fader {
   return new Fader({

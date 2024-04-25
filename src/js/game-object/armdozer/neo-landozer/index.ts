@@ -17,7 +17,7 @@ type NeoLandozerCreatorParams = ResourcesContainer &
 /**
  * プレイヤー側ネオランドーザ
  * @param params 生成パラメータ
- * @return ネオランドーザ
+ * @returns ネオランドーザ
  */
 export function PlayerNeoLandozer(
   params: NeoLandozerCreatorParams,
@@ -30,7 +30,7 @@ export function PlayerNeoLandozer(
 /**
  * 敵側ネオランドーザ
  * @param params 生成パラメータ
- * @return ネオランドーザ
+ * @returns ネオランドーザ
  */
 export function EnemyNeoLandozer(
   params: NeoLandozerCreatorParams,

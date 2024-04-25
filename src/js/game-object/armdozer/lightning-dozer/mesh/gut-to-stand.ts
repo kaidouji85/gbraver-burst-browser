@@ -11,7 +11,7 @@ export const MAX_ANIMATION = 4;
 /**
  * ガッツ -> 立ち メッシュ生成
  * @param resources リソース管理オブジェクト
- * @return 生成結果
+ * @returns 生成結果
  */
 export function gutsToStand(resources: Resources): AnimationMesh[] {
   return createAnimationMeshes({

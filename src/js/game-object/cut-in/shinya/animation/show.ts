@@ -10,7 +10,7 @@ const duration = 400;
 /**
  * カットインを表示する
  * @param props アニメーションプロパティ
- * @return アニメーション
+ * @returns アニメーション
  */
 export function show(props: ShinyaCutInAnimationProps): Animate {
   const { model, sounds, se } = props;

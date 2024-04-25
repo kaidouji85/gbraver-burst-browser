@@ -10,7 +10,7 @@ type CreatorParam = HorizontalAnimationMeshParam;
 /**
  * HorizontalArmdozerAnimationを生成する
  * @param param パラメータ
- * @return 生成結果
+ * @returns 生成結果
  */
 export function createHorizontalAnimation(
   param: CreatorParam,

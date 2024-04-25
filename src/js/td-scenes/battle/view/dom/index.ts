@@ -17,13 +17,13 @@ export interface DOMLayer extends DOMLayerProps {
 
   /**
    * 戦闘シーンアクション通知
-   * @return 通知ストリーム
+   * @returns 通知ストリーム
    */
   battleActionNotifier(): Observable<BattleSceneAction>;
 
   /**
    * シーンに追加するHTML要素群を取得する
-   * @return シーンに追加するHTML要素群
+   * @returns シーンに追加するHTML要素群
    */
   getHTMLElements(): HTMLElement[];
 }
@@ -31,7 +31,7 @@ export interface DOMLayer extends DOMLayerProps {
 /**
  * DOMレイヤーを生成する
  * @param params 生成パラメータ
- * @return 生成結果
+ * @returns 生成結果
  */
 export function createDOMLayer(params: BattleViewCreatorParams): DOMLayer {
   const props = createDOMLayerProps(params);

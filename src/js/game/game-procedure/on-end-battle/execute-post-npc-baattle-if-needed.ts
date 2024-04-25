@@ -12,7 +12,7 @@ import { NPCBattleResult, updateNPCBattleState } from "../../npc-battle";
 /**
  * NPCバトル終了後に表示するアクションボタンを求める
  * @param result NPCバトル結果
- * @return 表示するアクションボタン
+ * @returns 表示するアクションボタン
  */
 const postNPCBattleButtons = (
   result: NPCBattleResult,
@@ -47,7 +47,7 @@ type Ret = IsExecuted | IsNotExecuted;
  * 条件を満たした場合、NPCバトル終了後処理を実行する
  * @param props ゲームプロパティ
  * @param action アクション
- * @return NPCバトル終了処理の実行情報
+ * @returns NPCバトル終了処理の実行情報
  */
 export async function executePostNPCBattleIfNeeded(
   props: Readonly<GameProps>,

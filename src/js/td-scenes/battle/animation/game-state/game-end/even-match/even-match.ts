@@ -7,7 +7,7 @@ import type { StateAnimationProps } from "../../state-animation-props";
  * 引き分けアニメーション
  *
  * @param props 戦闘シーンプロパティ
- * @return アニメーション
+ * @returns アニメーション
  */
 export function evenMatchAnimation(props: StateAnimationProps): Animate {
   return all(

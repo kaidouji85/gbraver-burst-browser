@@ -8,7 +8,7 @@ import { NeoLandozerAnimationProps } from "./animation-props";
 /**
  * 避ける
  * @param props アニメーションプロパティ
- * @return アニメーション
+ * @returns アニメーション
  */
 export function avoid(props: NeoLandozerAnimationProps): Animate {
   const { model, sounds, se } = props;

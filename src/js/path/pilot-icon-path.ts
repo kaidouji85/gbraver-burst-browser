@@ -15,7 +15,7 @@ const PilotIconPathIds: Record<PilotId, PathId> = {
 /**
  * パイロットIDに対応するアイコンのパスIDを返す
  * @param pilotId パイロットID
- * @return パスID
+ * @returns パスID
  */
 export const getPilotIconPathId = (pilotId: PilotId): PathId =>
   PilotIconPathIds[pilotId] ?? PathIds.SHINYA_ICON;

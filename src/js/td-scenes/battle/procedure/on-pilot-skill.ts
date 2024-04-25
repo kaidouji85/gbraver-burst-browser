@@ -11,7 +11,7 @@ import { progressGame } from "./progress-game";
  *
  * @param props 戦闘シーンプロパティ
  * @param action パイロットスキル発動アクション
- * @return 処理が完了したら発火するPromise
+ * @returns 処理が完了したら発火するPromise
  */
 export function onPilotSkill(
   props: Readonly<BattleSceneProps>,

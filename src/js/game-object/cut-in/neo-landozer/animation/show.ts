@@ -8,7 +8,7 @@ import { NeoLandozerCutInAnimationProps } from "./animation-props";
 /**
  * カットインを表示する
  * @param props アニメーションプロパティ
- * @return アニメーション
+ * @returns アニメーション
  */
 export function show(props: NeoLandozerCutInAnimationProps): Animate {
   const { model } = props;

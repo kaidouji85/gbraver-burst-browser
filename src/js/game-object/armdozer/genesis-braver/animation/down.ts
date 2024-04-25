@@ -9,7 +9,7 @@ import { GenesisBraverAnimationProps } from "./animation-props";
 /**
  * ダウン
  * @param props アニメーションプロパティ
- * @return アニメーション
+ * @returns アニメーション
  */
 export function down(props: GenesisBraverAnimationProps): Animate {
   const { model } = props;

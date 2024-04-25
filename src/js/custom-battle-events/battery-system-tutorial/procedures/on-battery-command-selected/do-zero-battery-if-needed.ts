@@ -21,7 +21,7 @@ import { BatteryCommandSelectedEnd } from "./battery-command-selected-end";
 /**
  * 条件を満たした場合、0防御系ストーリーを実行する
  * @param props イベントプロパティ
- * @return 実行した場合は終了情報、しなかった場合はnull
+ * @returns 実行した場合は終了情報、しなかった場合はnull
  */
 export async function doZeroBatteryIdNeeded(
   props: Readonly<BatteryCommandSelected & BatterySystemTutorialProps>,

@@ -8,7 +8,7 @@ import { DataIDs } from "./data-ids";
  * @param resources リソース管理オブジェクト
  * @param ids data-idをあつめたもの
  * @param roomID 表示するルームID
- * @return 生成結果
+ * @returns 生成結果
  */
 export function rootInnerHTML(
   resources: Resources,

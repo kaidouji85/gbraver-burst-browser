@@ -10,7 +10,7 @@ import type { GameAction } from "../game-actions";
  * @template X シーンのデータ型
  * @param scene 3Dシーン
  * @param gameAction ゲームアクションストリーム
- * @return ゲームションションのアンサブスクライブ
+ * @returns ゲームションションのアンサブスクライブ
  */
 export type TDSceneActionConnector<X extends TDScene> = (
   scene: X,

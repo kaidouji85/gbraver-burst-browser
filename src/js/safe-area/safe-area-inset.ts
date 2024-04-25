@@ -39,7 +39,7 @@ export const EMPTY_SAFE_AREA_INSET: SafeAreaInset = {
 /**
  * DocumentRootからセーフエリアインセットを生成する
  *
- * @return 生成結果
+ * @returns 生成結果
  */
 export function createSafeAreaInset(): SafeAreaInset {
   if (!document.documentElement) {
@@ -73,7 +73,7 @@ export function createSafeAreaInset(): SafeAreaInset {
  *
  *
  * @param origin パース前
- * @return パース結果
+ * @returns パース結果
  */
 export function getSize(origin: string): number {
   const reg = /(?<size>[+-]?([0-9]+(\.[0-9]*)?|\.[0-9]+)([eE][+-]?[0-9]+)?)px/;

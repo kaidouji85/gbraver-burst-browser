@@ -8,7 +8,7 @@ import { tween } from "./tween";
  *
  * @param time 停止時間(ms)
  * @param group TweenGroup
- * @return アニメーション
+ * @returns アニメーション
  */
 export function delay(time: number, group?: TWEEN.Group): Animate {
   return tween({}, (t) => t.to({}, time), group);
@@ -17,7 +17,7 @@ export function delay(time: number, group?: TWEEN.Group): Animate {
 /**
  * 何もしないアニメーションを返す
  *
- * @return アニメーション
+ * @returns アニメーション
  */
 export function empty(): Animate {
   return delay(0);

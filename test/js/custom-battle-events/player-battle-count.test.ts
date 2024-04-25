@@ -11,7 +11,7 @@ import { playerBattleCount } from "../../../src/js/custom-battle-events/battle-c
 /**
  * Battleのゲームステートを生成する
  * @param attacker 攻撃側プレイヤーID
- * @return Battleのゲームステート
+ * @returns Battleのゲームステート
  */
 const createBattle = (attacker: PlayerId): GameStateX<Battle> => ({
   ...EMPTY_GAME_STATE,

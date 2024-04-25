@@ -20,7 +20,7 @@ const parallelPlayEffects = [
  * 本関数を呼び出す前にprops.stateHistoryを最新化すること
  * @param props 戦闘シーンプロパティ
  * @param gameStateHistory 再生するゲームステートヒストリー
- * @return アニメーション
+ * @returns アニメーション
  */
 export async function playStateHistory(
   props: Readonly<BattleSceneProps>,

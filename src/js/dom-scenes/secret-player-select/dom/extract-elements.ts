@@ -1,7 +1,7 @@
 /**
  * アームドーザ アイコン コンテナを抽出する
  * @param root 抽出元となるルートHTML要素
- * @return 抽出結果
+ * @returns 抽出結果
  */
 export const extractArmdozerIconContainer = (root: HTMLElement): HTMLElement =>
   root.querySelector('[data-id="armdozer-icon-container"]') ??
@@ -10,7 +10,7 @@ export const extractArmdozerIconContainer = (root: HTMLElement): HTMLElement =>
 /**
  * アームドーザ 選択インジケータを抽出する
  * @param root 抽出元となるルートHTML要素
- * @return 抽出結果
+ * @returns 抽出結果
  */
 export const extractArmdozerSelectionIndicator = (
   root: HTMLElement,
@@ -21,7 +21,7 @@ export const extractArmdozerSelectionIndicator = (
 /**
  * アームドーザ 選択詳細を抽出する
  * @param root 抽出元となるルートHTML要素
- * @return 抽出結果
+ * @returns 抽出結果
  */
 export const extractArmdozerSelectionDetail = (
   root: HTMLElement,
@@ -32,7 +32,7 @@ export const extractArmdozerSelectionDetail = (
 /**
  * パイロット アイコン コンテナを抽出する
  * @param root 抽出元となるルートHTML要素
- * @return 抽出結果
+ * @returns 抽出結果
  */
 export const extractPilotIconContainer = (root: HTMLElement): HTMLElement =>
   root.querySelector('[data-id="pilot-icon-container"]') ??
@@ -41,7 +41,7 @@ export const extractPilotIconContainer = (root: HTMLElement): HTMLElement =>
 /**
  * パイロット 選択インジケータを抽出する
  * @param root 抽出元となるルートHTML要素
- * @return 抽出結果
+ * @returns 抽出結果
  */
 export const extractPilotSelectionIndicator = (
   root: HTMLElement,
@@ -52,7 +52,7 @@ export const extractPilotSelectionIndicator = (
 /**
  * パイロット 選択詳細を抽出する
  * @param root 抽出元となるルートHTML要素
- * @return 抽出結果
+ * @returns 抽出結果
  */
 export const extractPilotSelectionDetail = (root: HTMLElement): HTMLElement =>
   root.querySelector('[data-id="pilot-selection-detail"]') ??
@@ -61,7 +61,7 @@ export const extractPilotSelectionDetail = (root: HTMLElement): HTMLElement =>
 /**
  * 決定ボタンを抽出する
  * @param root 抽出元となるルートHTML要素
- * @return 抽出結果
+ * @returns 抽出結果
  */
 export const extractOKButton = (root: HTMLElement): HTMLButtonElement => {
   const foundOKButton = root.querySelector('[data-id="ok-button"]');
@@ -73,7 +73,7 @@ export const extractOKButton = (root: HTMLElement): HTMLButtonElement => {
 /**
  * 戻るボタンを抽出する
  * @param root 抽出元となるルートHTML要素
- * @return 抽出結果
+ * @returns 抽出結果
  */
 export const extractPrevButton = (root: HTMLElement): HTMLElement =>
   root.querySelector('[data-id="prev-button"]') ??

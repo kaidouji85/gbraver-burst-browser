@@ -8,7 +8,7 @@ const ROOT_CLASS = "play-in-landscape";
  * ルート要素innerHTML
  *
  * @param resources リソース管理オブジェクト
- * @return ルート要素innerHTML
+ * @returns ルート要素innerHTML
  */
 function rootInnerHTML(resources: Resources) {
   const playInLandscapePath =
@@ -37,7 +37,7 @@ export class PlayInLandscape {
   /**
    * ルートHTML要素を取得する
    *
-   * @return 取得結果
+   * @returns 取得結果
    */
   getRootHTMLElement(): HTMLElement {
     return this.#root;

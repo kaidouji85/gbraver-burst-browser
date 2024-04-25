@@ -3,7 +3,7 @@ import * as TWEEN from "@tweenjs/tween.js";
 /**
  * Tween単体の再生時間を計算する
  *
- * @return 再生時間
+ * @returns 再生時間
  */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 export function tweenDuration(tween: TWEEN.Tween<any>): number {

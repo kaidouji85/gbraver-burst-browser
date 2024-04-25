@@ -17,7 +17,7 @@ type LightningDozerCreatorParams = ResourcesContainer &
 /**
  * プレイヤー側のライトニングドーザを生成する
  * @param params 生成パラメータ
- * @return プレイヤー側のライトニングドーザ
+ * @returns プレイヤー側のライトニングドーザ
  */
 export function PlayerLightningDozer(
   params: LightningDozerCreatorParams,
@@ -30,7 +30,7 @@ export function PlayerLightningDozer(
 /**
  * 敵側のライトニングドーザを生成する
  * @param params 生成パラメータ
- * @return 敵側のライトニングドーザ
+ * @returns 敵側のライトニングドーザ
  */
 export function EnemyLightningDozer(
   params: LightningDozerCreatorParams,

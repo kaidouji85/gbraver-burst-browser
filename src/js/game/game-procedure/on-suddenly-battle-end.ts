@@ -6,7 +6,7 @@ import type { GameProps } from "../game-props";
  * バトル強制終了時の処理
  *
  * @param props ゲームプロパティ
- * @return 処理が終了すると発火するPromise
+ * @returns 処理が終了すると発火するPromise
  */
 export async function onSuddenlyEndBattle(
   props: Readonly<GameProps>,

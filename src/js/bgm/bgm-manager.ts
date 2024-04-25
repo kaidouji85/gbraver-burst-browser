@@ -6,7 +6,7 @@ export interface BGMManager {
   /**
    * BGMにオペレータを適用する
    * @param operator オペレータ
-   * @return オペレータ後のBGM
+   * @returns オペレータ後のBGM
    */
   do(operator: BGMOperator): Promise<BGM>;
 }
@@ -41,7 +41,7 @@ class SimpleBGMManager implements BGMManager {
 
 /**
  * BGM管理オブジェクトを生成する
- * @return 生成結果
+ * @returns 生成結果
  */
 export function createBGMManager(): BGMManager {
   return new SimpleBGMManager();

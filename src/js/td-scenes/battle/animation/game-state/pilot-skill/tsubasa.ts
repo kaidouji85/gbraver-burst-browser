@@ -20,7 +20,7 @@ export type TsubasaAnimationParam = TsubasaAnimationParamX<PilotSkill>;
 /**
  * ツバサ パイロットスキルアニメーション
  * @param param パラメータ
- * @return アニメーション
+ * @returns アニメーション
  */
 export function tsubasaAnimation(param: TsubasaAnimationParam): Animate {
   if (param.skill.type === "BatteryEnchantmentSkill") {
@@ -39,7 +39,7 @@ const outDuration = 400;
 /**
  * ツバサ バッテリー回復 アニメーション
  * @param param パラメータ
- * @return アニメーション
+ * @returns アニメーション
  */
 function tsubasaBatteryEnchantment(
   param: TsubasaAnimationParamX<BatteryEnchantmentSkill>,

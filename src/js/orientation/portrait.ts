@@ -3,7 +3,7 @@
  *
  * @param screenWidth 画面幅
  * @param screenHeight 画面高
- * @return 判定結果、trueでポートレートである
+ * @returns 判定結果、trueでポートレートである
  */
 export function isPortrait(screenWidth: number, screenHeight: number): boolean {
   return screenWidth < screenHeight;

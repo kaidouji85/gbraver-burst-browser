@@ -9,7 +9,7 @@ import { SimpleIndicatorView } from "./simple-result-indicator";
  * DRAWビューを生成する
  *
  * @param resources リソース管理オブジェクト
- * @return 生成結果
+ * @returns 生成結果
  */
 export function drawIndicatorView(resources: Resources): ResultIndicatorView {
   const texture =

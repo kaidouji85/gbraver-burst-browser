@@ -32,7 +32,7 @@ export class MessageWindow {
 
   /**
    * ルートHTML要素を取得する
-   * @return 取得結果
+   * @returns 取得結果
    */
   getRootHTMLElement(): HTMLElement {
     return this.#props.root;
@@ -65,7 +65,7 @@ export class MessageWindow {
 
   /**
    * メッセージを上スクロールする
-   * @return アニメーションが完了したら発火するPromise
+   * @returns アニメーションが完了したら発火するPromise
    */
   async scrollUp(): Promise<void> {
     await scrollUp(this.#props);

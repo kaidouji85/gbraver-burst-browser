@@ -31,7 +31,7 @@ type Ret = {
 /**
  * バッテリーコマンド選択イベント
  * @param props イベントプロパティ
- * @return イベント終了情報
+ * @returns イベント終了情報
  */
 export async function onBatteryCommandSelected(
   props: Readonly<BatteryCommandSelected & ZeroDefenseTutorialProps>,

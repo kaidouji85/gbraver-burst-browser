@@ -34,7 +34,7 @@ export class PilotBustShot {
 
   /**
    * ルートHTML要素を取得する
-   * @return ルートHTML要素
+   * @returns ルートHTML要素
    */
   getRootHTMLElement(): HTMLElement {
     return this.#image;
@@ -42,7 +42,7 @@ export class PilotBustShot {
 
   /**
    * 読み込みが完了するまで待つ
-   * @return 待機結果
+   * @returns 待機結果
    */
   waitUntilLoaded(): Promise<void> {
     return this.#isLoaded;
@@ -64,7 +64,7 @@ export class PilotBustShot {
 
   /**
    * 入場
-   * @return アニメーション
+   * @returns アニメーション
    */
   enter(): Promise<void> {
     const animation = this.#image.animate(
@@ -87,7 +87,7 @@ export class PilotBustShot {
 
   /**
    * 退場
-   * @return アニメーション
+   * @returns アニメーション
    */
   exit(): Promise<void> {
     const animation = this.#image.animate(

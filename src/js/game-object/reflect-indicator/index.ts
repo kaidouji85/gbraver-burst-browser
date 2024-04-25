@@ -11,7 +11,7 @@ import { PlayerReflectIndicatorView } from "./view/player-reflect-indicator-view
  *
  * @param resources リソース管理オブジェクト
  * @param gameObjectAction ゲームオブジェクトアクション
- * @return 生成結果
+ * @returns 生成結果
  */
 export function playerReflectIndicator(
   resources: Resources,
@@ -26,7 +26,7 @@ export function playerReflectIndicator(
  *
  * @param resources リソース管理オブジェクト
  * @param gameObjectAction ゲームオブジェクトアクション
- * @return 生成結果
+ * @returns 生成結果
  */
 export function enemyReflectIndicator(
   resources: Resources,

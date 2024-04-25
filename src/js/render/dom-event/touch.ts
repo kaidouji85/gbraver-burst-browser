@@ -22,7 +22,7 @@ export type TouchEnd = {
  * タッチスタートストリームを生成する
  *
  * @param renderDom レンダラーDOM
- * @return ストリーム
+ * @returns ストリーム
  */
 export function createTouchStartStream(
   renderDom: HTMLElement,
@@ -42,7 +42,7 @@ export function createTouchStartStream(
  * タッチムーブストリームを生成する
  *
  * @param renderDom レンダラーDOM
- * @return ストリーム
+ * @returns ストリーム
  */
 export function createTouchMoveStream(
   renderDom: HTMLElement,
@@ -62,7 +62,7 @@ export function createTouchMoveStream(
  * タッチエンドストリームを生成する
  *
  * @param renderDom レンダラーDOM
- * @return ストリーム
+ * @returns ストリーム
  */
 export function createTouchEndStream(
   renderDom: HTMLElement,

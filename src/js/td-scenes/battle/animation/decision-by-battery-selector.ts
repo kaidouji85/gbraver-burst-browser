@@ -6,7 +6,7 @@ import { BattleSceneView } from "../view";
 /**
  * バッテリーセレクタによる決定アニメーション
  * @param view ビュー
- * @return アニメーション
+ * @returns アニメーション
  */
 export function decisionByBatterySelector(
   view: Readonly<BattleSceneView>,

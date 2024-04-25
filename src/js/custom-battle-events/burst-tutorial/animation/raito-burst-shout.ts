@@ -5,7 +5,7 @@ import { enemyPilotOnlyShout } from "../../pilot-shout";
 /**
  * ライト バースト 叫び
  * @param props イベントプロパティ
- * @return アニメーション
+ * @returns アニメーション
  */
 export const raitoBurstShout = (props: Readonly<CustomBattleEventProps>) =>
   onStart(() => {

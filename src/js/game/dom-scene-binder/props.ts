@@ -21,7 +21,7 @@ export type DOMSceneBinderProps = {
 /**
  * DomSceneBinderプロパティを生成する
  *
- * @return 生成したプロパティ
+ * @returns 生成したプロパティ
  */
 export function createDOMSceneBinderProps(): DOMSceneBinderProps {
   const root = document.createElement("div");

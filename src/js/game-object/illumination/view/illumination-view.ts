@@ -39,7 +39,7 @@ export class IlluminationView {
 
   /**
    * シーンに追加するオブジェクトを配列で返す
-   * @return シーンに追加するオブジェクト
+   * @returns シーンに追加するオブジェクト
    */
   getObject3Ds(): THREE.Object3D[] {
     return [

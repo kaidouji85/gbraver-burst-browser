@@ -15,7 +15,7 @@ export type PropsCreatorParams = ResourcesContainer &
 /**
  * PowerUpPropsを生成する
  * @param params 生成パラメータ
- * @return 生成したPowerUpProps
+ * @returns 生成したPowerUpProps
  */
 export function createPowerUpProps(params: PropsCreatorParams): PowerUpProps {
   const { resources } = params;

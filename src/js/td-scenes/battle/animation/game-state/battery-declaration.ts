@@ -12,7 +12,7 @@ import type { StateAnimationProps } from "./state-animation-props";
  *
  * @param td 3Dレイヤーのプレイヤーオブジェクト
  * @param value バッテリー値
- * @return アニメーション
+ * @returns アニメーション
  */
 function declaration(td: TDPlayer, value: number): Animate {
   return td.batteryNumber.show(value).chain(delay(800));
@@ -23,7 +23,7 @@ function declaration(td: TDPlayer, value: number): Animate {
  * プレイヤー、敵側で同時再生したくないので、
  * declarationとは別関数に切り出している
  * @param props 戦闘シーンプロパティ
- * @return アニメーション
+ * @returns アニメーション
  */
 function declarationSound(props: StateAnimationProps): Animate {
   const { sounds, se } = props;
@@ -39,7 +39,7 @@ function declarationSound(props: StateAnimationProps): Animate {
  * @param origin 本来のバッテリー
  * @param correct バッテリー補正値
  * @param value 出したバッテリー
- * @return アニメーション
+ * @returns アニメーション
  */
 function declarationWithCorrect(
   td: TDPlayer,
@@ -61,7 +61,7 @@ function declarationWithCorrect(
  * declarationWithCorrectとタイミングを合わせている
  *
  * @param props 戦闘シーンプロパティ
- * @return アニメーション
+ * @returns アニメーション
  */
 function declarationSoundWithCorrect(props: StateAnimationProps): Animate {
   const { sounds, se } = props;
@@ -81,7 +81,7 @@ function declarationSoundWithCorrect(props: StateAnimationProps): Animate {
  *
  * @param props 戦闘シーンプロパティ
  * @param gameState ゲームの状態
- * @return アニメーション
+ * @returns アニメーション
  */
 export function batteryDeclarationAnimation(
   props: StateAnimationProps,

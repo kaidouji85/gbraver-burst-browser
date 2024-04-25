@@ -14,7 +14,7 @@ import { TrackingParams } from "./tracking-params";
  * @param gauge トラッキングするゲージ
  * @param tdCamera 3Dレイヤーのカメラ
  * @param rendererDOM レンダラDOM
- * @return 変換結果
+ * @returns 変換結果
  */
 function playerGaugeTracking(
   gauge: Gauge,
@@ -35,7 +35,7 @@ function playerGaugeTracking(
  * @param gauge トラッキングするゲージ
  * @param tdCamera 3Dレイヤーのカメラ
  * @param rendererDOM レンダラDOM
- * @return 変換結果
+ * @returns 変換結果
  */
 function enemyGaugeTracking(
   gauge: Gauge,

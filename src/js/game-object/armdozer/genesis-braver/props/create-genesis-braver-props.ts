@@ -15,7 +15,7 @@ export type PropsCreatorParams = ResourcesContainer &
 /**
  * GenesisBraverPropsを生成する
  * @param params 生成パラメータ
- * @return 生成結果
+ * @returns 生成結果
  */
 export function createGenesisBraverProps(
   params: PropsCreatorParams,

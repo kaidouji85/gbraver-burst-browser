@@ -6,7 +6,7 @@ import { MiniControllerProps } from "../props";
 /**
  * コマンド決定アニメーション
  * @param props コンポネントプロパティ
- * @return アニメーション
+ * @returns アニメーション
  */
 export function decided(props: Readonly<MiniControllerProps>): Animate {
   const { pushButtonSound, se } = props;

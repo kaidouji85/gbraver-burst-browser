@@ -7,7 +7,7 @@ import { HUDPlayerProps } from "../props";
 /**
  * プレイヤー側のHUDPlayerPropsを生成する
  * @param params 生成パラメータ
- * @return 生成結果
+ * @returns 生成結果
  */
 export function createPlayerProps(
   params: HUDLayerObjectCreatorParams,

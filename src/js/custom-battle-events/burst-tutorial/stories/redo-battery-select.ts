@@ -6,7 +6,7 @@ import { scrollRightMessages } from "../../scroll-messages";
 /**
  * ストーリー 5防御するためにバッテリー選択キャンセル
  * @param props イベントプロパティ
- * @return ストーリーが完了したら発火するPromise
+ * @returns ストーリーが完了したら発火するPromise
  */
 export const redoBatterySelect = async (props: CustomBattleEventProps) => {
   activeRightMessageWindowWithFace(props, "Shinya");

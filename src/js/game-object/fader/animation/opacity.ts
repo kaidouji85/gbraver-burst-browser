@@ -8,7 +8,7 @@ import type { FaderModel } from "../model/fader-model";
  * @param value モデル
  * @param opacity 不透明度
  * @param duration アニメーション時間
- * @return アニメーション
+ * @returns アニメーション
  */
 export function opacity(
   value: FaderModel,

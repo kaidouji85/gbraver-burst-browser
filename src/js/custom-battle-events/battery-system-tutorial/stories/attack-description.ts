@@ -6,7 +6,7 @@ import { focusInBatterySelector } from "../../focus";
  * 攻撃説明ストーリー
  * @param props イベントプロパティ
  * @param attackBatteryCaption 攻撃時のキャプション innerHTML
- * @return ストーリーが完了したら発火するPromise
+ * @returns ストーリーが完了したら発火するPromise
  */
 export async function attackDescription(
   props: Readonly<LastState>,

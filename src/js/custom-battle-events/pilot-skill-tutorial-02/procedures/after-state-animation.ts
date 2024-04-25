@@ -7,7 +7,7 @@ import { isPilotSkillActivatedByGai } from "./is-pilot-skill-activated-by-gai";
 /**
  * ステートアニメ終了後に呼ばれる、カスタムステートアニメーション
  * @param props イベントプロパティ
- * @return カスタムステートアニメーション
+ * @returns カスタムステートアニメーション
  */
 export function afterStateAnimation(
   props: Readonly<CustomStateAnimation>,

@@ -4,7 +4,7 @@ import { SoundResource } from "./resource";
 
 /**
  * 空の音リソースを生成する
- * @return 生成結果
+ * @returns 生成結果
  */
 export function createEmptySoundResource(): SoundResource {
   return {

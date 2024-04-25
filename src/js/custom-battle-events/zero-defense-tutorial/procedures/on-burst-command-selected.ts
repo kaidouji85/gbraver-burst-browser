@@ -17,7 +17,7 @@ type Ret = {
 /**
  * バーストコマンド選択イベント
  * @param props イベントプロパティ
- * @return コマンドキャンセル情報
+ * @returns コマンドキャンセル情報
  */
 export async function onBurstCommandSelected(
   props: Readonly<BurstCommandSelected & ZeroDefenseTutorialProps>,

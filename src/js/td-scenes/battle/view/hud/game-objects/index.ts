@@ -18,13 +18,13 @@ export type HUDGameObjects = Omit<HUDGameObjectsProps, "battleAction"> & {
 
   /**
    * シーンに追加するオブジェクトを取得する
-   * @return シーンに追加するオブジェクト
+   * @returns シーンに追加するオブジェクト
    */
   getObject3Ds(): THREE.Object3D[];
 
   /**
    * 戦闘シーンアクションを通知する
-   * @return 通知ストリーム
+   * @returns 通知ストリーム
    */
   battleActionNotifier(): Observable<BattleSceneAction>;
 };
@@ -32,7 +32,7 @@ export type HUDGameObjects = Omit<HUDGameObjectsProps, "battleAction"> & {
 /**
  * HUDGameObjectsを生成する
  * @param params 生成パラメータ
- * @return 生成結果
+ * @returns 生成結果
  */
 export function createHUDGameObjects(
   params: HUDLayerObjectCreatorParams,

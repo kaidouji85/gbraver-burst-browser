@@ -2,7 +2,7 @@
  * サービスワーカーを登録する
  * 登録できない場合はnullを返す
  *
- * @return 登録したサービスワーカー
+ * @returns 登録したサービスワーカー
  */
 export async function loadServiceWorker(): Promise<ServiceWorkerRegistration | null> {
   if (!navigator.serviceWorker) {

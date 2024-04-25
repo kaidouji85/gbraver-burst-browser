@@ -20,7 +20,7 @@ import { createPilotButton } from "./create-pilot-button";
 /**
  * HUDGameObjectsPropsを生成する
  * @param params 生成パラメータ
- * @return 生成結果
+ * @returns 生成結果
  */
 export function createHUDGameObjectsProps(
   params: HUDLayerObjectCreatorParams,

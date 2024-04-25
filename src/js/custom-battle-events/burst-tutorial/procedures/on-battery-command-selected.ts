@@ -19,7 +19,7 @@ import { shouldDefense5Again } from "../stories/should-defense5-again";
  * 初回、2回目以降で「5防御しないと負け」を切り替えるヘルパー関数
  * @param props イベントプロパティ
  * @param state ステート
- * @return 処理が完了したら発火するPromise
+ * @returns 処理が完了したら発火するPromise
  */
 async function defense5(
   props: Readonly<BatteryCommandSelected & BurstTutorialProps>,
@@ -40,7 +40,7 @@ type Ret = {
 /**
  * バッテリーコマンド選択イベント
  * @param props イベントプロパティ
- * @return イベント終了情報
+ * @returns イベント終了情報
  */
 export async function onBatteryCommandSelected(
   props: Readonly<BatteryCommandSelected & BurstTutorialProps>,

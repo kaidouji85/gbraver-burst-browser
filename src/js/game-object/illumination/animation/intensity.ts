@@ -8,7 +8,7 @@ import type { IlluminationModel } from "../model/illumination-model";
  * @param model モデル
  * @param value 照明の強さ
  * @param duration アニメーション時間
- * @return アニメーション
+ * @returns アニメーション
  */
 export function intensity(
   model: IlluminationModel,

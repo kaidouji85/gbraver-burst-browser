@@ -19,7 +19,7 @@ type DataIDs = {
  * ルート要素のinnerHTML
  *
  * @param ids data-idを集めたもの
- * @return innerHTML
+ * @returns innerHTML
  */
 function rootInnerHTML(ids: DataIDs): string {
   return `
@@ -49,7 +49,7 @@ type Elements = {
  *
  * @param root ルート要素
  * @param ids data-idを集めたもの
- * @return 抽出結果
+ * @returns 抽出結果
  */
 function extractElements(root: HTMLElement, ids: DataIDs): Elements {
   const name: HTMLElement =
@@ -95,7 +95,7 @@ export class PilotStatus {
 
   /**
    * ルートHTML要素を取得する
-   * @return ルートHTML要素
+   * @returns ルートHTML要素
    */
   getRootHTMLElement(): HTMLElement {
     return this.#root;

@@ -45,7 +45,7 @@ export class TurnStart {
   /**
    * 表示する
    *
-   * @return アニメーション
+   * @returns アニメーション
    */
   show(): Animate {
     return show(this.#model);
@@ -54,7 +54,7 @@ export class TurnStart {
   /**
    * 非表示にする
    *
-   * @return アニメーション
+   * @returns アニメーション
    */
   hidden(): Animate {
     return hidden(this.#model);
@@ -63,7 +63,7 @@ export class TurnStart {
   /**
    * シーンに追加するオブジェクトを取得する
    *
-   * @return シーンに追加するオブジェクト
+   * @returns シーンに追加するオブジェクト
    */
   getObject3D(): THREE.Object3D {
     return this.#view.getObject3D();

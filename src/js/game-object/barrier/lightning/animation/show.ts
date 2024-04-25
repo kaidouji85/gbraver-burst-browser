@@ -6,7 +6,7 @@ import { LightningBarrierAnimationProps } from "./animation-props";
 /**
  * バリアを表示する
  * @param props アニメーションプロパティ
- * @return アニメーション
+ * @returns アニメーション
  */
 export function show(props: LightningBarrierAnimationProps): Animate {
   const { model, sounds, se } = props;

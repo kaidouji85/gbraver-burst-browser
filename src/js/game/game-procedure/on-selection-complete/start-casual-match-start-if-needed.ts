@@ -22,7 +22,7 @@ type Ret = IsCasualMatchStarted | IsNotCasualMatchStarted;
  * 条件を満たせば、カジュアルマッチを開始する
  * @param props ゲームプロパティ
  * @param action アクション
- * @return カジュアルマッチ開始情報
+ * @returns カジュアルマッチ開始情報
  */
 export async function startCasualMatchIfNeeded(
   props: Readonly<GameProps>,

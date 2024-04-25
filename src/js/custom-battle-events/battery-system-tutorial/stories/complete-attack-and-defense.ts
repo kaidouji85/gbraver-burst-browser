@@ -5,7 +5,7 @@ import { scrollLeftMessages } from "../../scroll-messages";
 /**
  * ストーリー 攻撃、防御を一通り体験した
  * @param props イベントプロパティ
- * @return ストーリーが完了したら発火するPromise
+ * @returns ストーリーが完了したら発火するPromise
  */
 export const completeAttackAndDefense = async (
   props: CustomBattleEventProps,

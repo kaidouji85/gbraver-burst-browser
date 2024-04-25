@@ -9,7 +9,7 @@ import { BatteryCorrectAnimationProps } from "./animation-props";
  * ポップアップ表示
  * @param props アニメーションプロパティ
  * @param value バッテリー補正の値
- * @return アニメーション
+ * @returns アニメーション
  */
 export function popUp(
   props: BatteryCorrectAnimationProps,

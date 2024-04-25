@@ -7,7 +7,7 @@ import { tween } from "./tween";
  * アニメーション開始時に任意処理を行う
  * @param fn 処理内容
  * @param group TWeenGroup
- * @return アニメーション
+ * @returns アニメーション
  */
 export function onStart(fn: () => void, group?: TWEEN.Group): Animate {
   return tween(

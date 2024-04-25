@@ -1,7 +1,7 @@
 /**
  * ルート要素から背景を抽出する
  * @param root ルート要素
- * @return 抽出結果
+ * @returns 抽出結果
  */
 export function extractBackGround(root: HTMLElement): HTMLElement {
   return (
@@ -13,7 +13,7 @@ export function extractBackGround(root: HTMLElement): HTMLElement {
 /**
  * ルート要素からクローザーを抽出する
  * @param root ルート要素
- * @return 抽出結果
+ * @returns 抽出結果
  */
 export function extractCloser(root: HTMLElement): HTMLImageElement {
   const closerElement = root.querySelector(`[data-id="closer"]`);
@@ -25,7 +25,7 @@ export function extractCloser(root: HTMLElement): HTMLImageElement {
 /**
  * ルート要素からアカウント削除ボタンを抽出する
  * @param root ルート要素
- * @return 抽出結果
+ * @returns 抽出結果
  */
 export function extractDeleteAccountButton(
   root: HTMLElement,
@@ -41,7 +41,7 @@ export function extractDeleteAccountButton(
 /**
  * ルート要素から閉じるボタンを抽出する
  * @param root ルート要素
- * @return 抽出結果
+ * @returns 抽出結果
  */
 export function extractCloseButton(root: HTMLElement): HTMLButtonElement {
   const closeButtonElement = root.querySelector(`[data-id="closeButton"]`);

@@ -17,7 +17,7 @@ import { upright } from "./upright";
 /**
  * ビューで利用するすべてのメッシュを生成する
  * @param resources リソース管理オブジェクト
- * @return 生成結果
+ * @returns 生成結果
  */
 export function createAllMeshes(resources: Resources): AnimationMesh[] {
   return [

@@ -5,7 +5,7 @@ import { LightningDozerCutInAnimationProps } from "./animation-props";
 /**
  * カットインを非表示にする
  * @param props アニメーションプロパティ
- * @return アニメーション
+ * @returns アニメーション
  */
 export function hidden(props: LightningDozerCutInAnimationProps): Animate {
   const { model } = props;

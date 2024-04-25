@@ -123,7 +123,7 @@ export class BatteryButton {
 
   /**
    * シーンに追加するオブジェクトを取得する
-   * @return シーンに追加するオブジェクト
+   * @returns シーンに追加するオブジェクト
    */
   getObject3D(): THREE.Object3D {
     return this.#group;
@@ -131,7 +131,7 @@ export class BatteryButton {
 
   /**
    * ボタン押下通知
-   * @return 通知ストリーム
+   * @returns 通知ストリーム
    */
   pushNotifier(): Observable<Event> {
     return this.#pushDetector.notifyPressed();

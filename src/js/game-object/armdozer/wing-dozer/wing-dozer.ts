@@ -87,7 +87,7 @@ export class WingDozer extends EmptyArmdozerSprite implements ArmdozerSprite {
 
   /**
    * ダッシュ
-   * @return アニメーション
+   * @returns アニメーション
    */
   dash(): Animate {
     return dash(this.#props);
@@ -95,7 +95,7 @@ export class WingDozer extends EmptyArmdozerSprite implements ArmdozerSprite {
 
   /**
    * ダッシュ -> 立ち
-   * @return アニメーション
+   * @returns アニメーション
    */
   dashToStand(): Animate {
     return dashToStand(this.#props);
@@ -158,7 +158,7 @@ export class WingDozer extends EmptyArmdozerSprite implements ArmdozerSprite {
 
   /**
    * チャージ
-   * @return アニメーション
+   * @returns アニメーション
    */
   charge(): Animate {
     return charge(this.#props);
@@ -166,7 +166,7 @@ export class WingDozer extends EmptyArmdozerSprite implements ArmdozerSprite {
 
   /**
    * アッパー
-   * @return アニメーション
+   * @returns アニメーション
    */
   upper(): Animate {
     return upper(this.#props);
@@ -174,7 +174,7 @@ export class WingDozer extends EmptyArmdozerSprite implements ArmdozerSprite {
 
   /**
    * アッパー -> 立ち
-   * @return アニメーション
+   * @returns アニメーション
    */
   upperToStand(): Animate {
     return upperToStand(this.#props);

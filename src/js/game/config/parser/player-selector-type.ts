@@ -12,7 +12,7 @@ export const PlayerSelectorTypeSchema = z.union([
  * 任意のオブジェクトをロボ、パイロット選択タイプにパースする
  * パースできない場合はnullを返す
  * @param origin パース元
- * @return パース結果
+ * @returns パース結果
  */
 export function parsePlayerSelectorType(
   origin: unknown,

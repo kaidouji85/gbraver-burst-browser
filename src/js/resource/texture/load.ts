@@ -8,7 +8,7 @@ import type { TextureConfig, TextureResource } from "./resource";
  *
  * @param resourceRoot リソースルート
  * @param config テクスチャ設定
- * @return 読み込み結果
+ * @returns 読み込み結果
  */
 export function loadTexture(
   resourceRoot: ResourceRoot,

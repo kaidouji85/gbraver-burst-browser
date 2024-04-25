@@ -3,7 +3,7 @@ import type { ResultIndicatorModel } from "./result-indicator-model";
 /**
  * モデルの初期値を生成する
  *
- * @return 生成結果
+ * @returns 生成結果
  */
 export function createInitialValue(): ResultIndicatorModel {
   return {

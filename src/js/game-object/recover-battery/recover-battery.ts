@@ -51,7 +51,7 @@ export class RecoverBattery {
   /**
    * 回復バッテリーを一定時間表示する
    * @param value バッテリー回復量
-   * @return アニメーション
+   * @returns アニメーション
    */
   popUp(value: number): Animate {
     return popUp(this.#props, value);
@@ -60,7 +60,7 @@ export class RecoverBattery {
   /**
    * 表示
    * @param value バッテリー回復量
-   * @return アニメーション
+   * @returns アニメーション
    */
   show(value: number): Animate {
     return show(this.#props, value);
@@ -68,7 +68,7 @@ export class RecoverBattery {
 
   /**
    * 非表示
-   * @return アニメーション
+   * @returns アニメーション
    */
   hidden(): Animate {
     return hidden(this.#props);
@@ -77,7 +77,7 @@ export class RecoverBattery {
   /**
    * シーンに追加するオブジェクトを取得する
    *
-   * @return シーンに追加するオブジェクト
+   * @returns シーンに追加するオブジェクト
    */
   getObject3D(): THREE.Object3D {
     return this.#props.view.getObject3D();

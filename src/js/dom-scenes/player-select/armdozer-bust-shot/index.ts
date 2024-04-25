@@ -38,7 +38,7 @@ export class ArmdozerBustShotContainer {
 
   /**
    * ルートHTML要素を取得する
-   * @return 取得結果
+   * @returns 取得結果
    */
   getRootHTMLElement(): HTMLElement {
     return this.#root;
@@ -46,7 +46,7 @@ export class ArmdozerBustShotContainer {
 
   /**
    * リソースの読み込みが完了するまで待つ
-   * @return 待機結果
+   * @returns 待機結果
    */
   async waitUntilLoaded(): Promise<void> {
     await Promise.all(

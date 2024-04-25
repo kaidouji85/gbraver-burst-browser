@@ -7,7 +7,7 @@ import { NeoLandozerAnimationProps } from "./animation-props";
 /**
  * ガード
  * @param props アニメーションプロパティ
- * @return アニメーション
+ * @returns アニメーション
  */
 export function guard(props: NeoLandozerAnimationProps): Animate {
   const { model } = props;

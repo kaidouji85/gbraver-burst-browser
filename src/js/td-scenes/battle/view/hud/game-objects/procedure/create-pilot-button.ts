@@ -13,7 +13,7 @@ import { HUDLayerObjectCreatorParams } from "../../creator-params";
 /**
  * パイロットIDに対応したパイロットボタンを生成する
  * @param params 生成パラメータ
- * @return パイロットボタン
+ * @returns パイロットボタン
  */
 export function createPilotButton(
   params: HUDLayerObjectCreatorParams,

@@ -15,7 +15,7 @@ const PilotBustShotClassNames: Record<PilotId, string> = {
 /**
  * パイロットIDに対応したバストショットのクラス名を取得する
  * @param pilotId パイロットID
- * @return バストショットのclass属性
+ * @returns バストショットのclass属性
  */
 export const getPilotBustShotClassName = (pilotId: PilotId): string =>
   PilotBustShotClassNames[pilotId] ?? PilotBustShotClassNames[PilotIds.SHINYA];

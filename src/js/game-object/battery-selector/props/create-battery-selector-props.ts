@@ -19,7 +19,7 @@ export type PropsCreatorParams = ResourcesContainer &
 /**
  * バッテリーセレクタプロパティを生成する
  * @param param パラメータ
- * @return バッテリーセレクタプロパティ
+ * @returns バッテリーセレクタプロパティ
  */
 export function createBatterySelectorProps(
   param: PropsCreatorParams,

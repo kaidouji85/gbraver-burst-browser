@@ -6,7 +6,7 @@ import { scrollRightMessages } from "../../scroll-messages";
 /**
  * チャプター ユウヤ有利 シンヤ独白
  * @param props イベントプロパティ
- * @return ストーリーが完了したら発火するPromise
+ * @returns ストーリーが完了したら発火するPromise
  */
 export async function shinyaMonologueWhenYuuyaHasAdvantage(
   props: Readonly<CustomBattleEventProps>,

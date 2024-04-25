@@ -51,7 +51,7 @@ export class ShockWave {
 
   /**
    * 衝撃波を表示する
-   * @return アニメーション
+   * @returns アニメーション
    */
   popUp(): Animate {
     return onStart(() => {
@@ -61,7 +61,7 @@ export class ShockWave {
 
   /**
    * シーンに追加するオブジェクトを返す
-   * @return シーンに追加するオブジェクト
+   * @returns シーンに追加するオブジェクト
    */
   getObject3D(): THREE.Object3D {
     return this.#props.view.getObject3D();

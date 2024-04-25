@@ -5,7 +5,7 @@ import { enemyPilotOnlyShout } from "../../pilot-shout";
 /**
  * チャプター「とどめをさすためにユウヤがスキルを発動する」ユウヤ叫び1
  * @param props イベントプロパティ
- * @return アニメーション
+ * @returns アニメーション
  */
 export const yuuyaShout2WhenYuuyaActivateSkillToFinish = (
   props: Readonly<CustomBattleEventProps>,

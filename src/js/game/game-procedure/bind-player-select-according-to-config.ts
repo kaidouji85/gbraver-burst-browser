@@ -20,14 +20,14 @@ type SceneBinderParams = GameProps & {
 /**
  * シーンバインダー
  * @param params パラメータ
- * @return 画面の素材読み込みまで完了したら発火するPromise
+ * @returns 画面の素材読み込みまで完了したら発火するPromise
  */
 type SceneBinder = (params: SceneBinderParams) => Promise<void>;
 
 /**
  * プレイヤー選択画面をバインドする
  * @param params パラメータ
- * @return 画面の素材読み込みまで完了したら発火するPromise
+ * @returns 画面の素材読み込みまで完了したら発火するPromise
  */
 const bindPlayerSelect: SceneBinder = async (params) => {
   const { domSceneBinder } = params;
@@ -39,7 +39,7 @@ const bindPlayerSelect: SceneBinder = async (params) => {
 /**
  * シークレットプレイヤー選択画面をバインドする
  * @param params パラメータ
- * @return 画面の素材読み込みまで完了したら発火するPromise
+ * @returns 画面の素材読み込みまで完了したら発火するPromise
  */
 const bindSecretPlayerSelect: SceneBinder = async (params) => {
   const { domSceneBinder } = params;
@@ -58,7 +58,7 @@ const binders: { [key in PlayerSelectorType]: SceneBinder } = {
  * 設定値に応じたプレイヤー選択画面をバインドする
  * @param props ゲームプロパティ
  * @param playerSelectorType ロボ、パイロット選択タイプ
- * @return 画面の素材読み込みまで完了したら発火するPromise
+ * @returns 画面の素材読み込みまで完了したら発火するPromise
  */
 export async function bindPlayerSelectAccordingToConfig(
   props: GameProps,

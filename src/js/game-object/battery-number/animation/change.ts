@@ -7,7 +7,7 @@ import { BatteryNumberProps } from "../props/battery-number-props";
  * 数字を変更する
  * @param props アニメーションプロパティ
  * @param battery 変更する値
- * @return アニメーション
+ * @returns アニメーション
  */
 export function change(props: BatteryNumberProps, battery: number): Animate {
   const { model } = props;

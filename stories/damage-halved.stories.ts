@@ -15,7 +15,7 @@ export default {
  * ダメージ半減インジケータのストーリー
  * @param generator ダメージ半減インジケータ生成関数
  * @param fn ダメージ半減インジケータ操作関数
- * @return story
+ * @returns story
  */
 const damageHalvedStory =
   (

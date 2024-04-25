@@ -15,7 +15,7 @@ export type GenesisBraverCutInCreatorParams = ResourcesContainer & {
 /**
  * プレイヤー ジェネシスブレイバー カットイン を生成する
  * @param params 生成パラメータ
- * @return 生成結果
+ * @returns 生成結果
  */
 export function playerGenesisBraverCutIn(
   params: GenesisBraverCutInCreatorParams,
@@ -28,7 +28,7 @@ export function playerGenesisBraverCutIn(
 /**
  * 敵 ジェネシスブレイバー カットイン を生成する
  * @param params 生成パラメータ
- * @return 生成結果
+ * @returns 生成結果
  */
 export function enemyGenesisBraverCutIn(
   params: GenesisBraverCutInCreatorParams,

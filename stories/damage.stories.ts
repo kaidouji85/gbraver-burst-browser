@@ -15,7 +15,7 @@ export default {
  * ダメージインジケータのストーリー
  * @param generator ダメージインジケータ生成関数
  * @param fn ダメージインジケータ操作関数
- * @return story
+ * @returns story
  */
 const damageIndicatorStory =
   (

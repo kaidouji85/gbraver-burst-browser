@@ -32,7 +32,7 @@ export type OverlapEvent =
  * @param origin 変換元
  * @param rendererDOM レンダラがバインドされているHTML要素
  * @param camera カメラ
- * @return 当たり判定ストリーム
+ * @returns 当たり判定ストリーム
  */
 export function toOverlapStream(
   origin: Observable<RendererDOMEvent>,

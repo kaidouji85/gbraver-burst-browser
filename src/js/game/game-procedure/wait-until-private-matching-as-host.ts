@@ -13,7 +13,7 @@ import { GameProps } from "../game-props";
  * プライベートマッチ（ホスト）でマッチング成立まで待つ
  * @param props ゲームプロパティ
  * @param action アクション
- * @return バトルSDK
+ * @returns バトルSDK
  */
 export async function waitUntilPrivateMatchingAsHost(
   props: Readonly<GameProps>,

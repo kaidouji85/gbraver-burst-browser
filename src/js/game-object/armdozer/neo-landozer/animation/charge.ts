@@ -7,7 +7,7 @@ import { NeoLandozerAnimationProps } from "./animation-props";
 /**
  * チャージ
  * @param props アニメーションプロパティ
- * @return アニメーション
+ * @returns アニメーション
  */
 export function charge(props: NeoLandozerAnimationProps): Animate {
   const { model, sounds, se } = props;

@@ -8,7 +8,7 @@ import { LightningDozerAnimationProps } from "./animation-props";
 /**
  * 避け
  * @param props アニメーションプロパティ
- * @return アニメーション
+ * @returns アニメーション
  */
 export function avoid(props: LightningDozerAnimationProps): Animate {
   const { model, sounds, se } = props;

@@ -8,7 +8,7 @@ export interface TDScene {
   /**
    * DOMレイヤーが利用しているHTML要素を全て取得する
    *
-   * @return 取得結果
+   * @returns 取得結果
    */
   getDOMLayerElements(): HTMLElement[];
 }

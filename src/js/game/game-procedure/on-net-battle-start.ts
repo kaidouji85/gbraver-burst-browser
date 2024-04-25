@@ -11,7 +11,7 @@ import { GameProps } from "../game-props";
 /**
  * ログインチェックAPIを呼び出す
  * @param props ゲームプロパティ
- * @return API実行結果、trueでログインしている
+ * @returns API実行結果、trueでログインしている
  */
 async function callLoginCheckAPI(props: Readonly<GameProps>): Promise<boolean> {
   try {
@@ -31,7 +31,7 @@ async function callLoginCheckAPI(props: Readonly<GameProps>): Promise<boolean> {
 /**
  * ネットバトル開始
  * @param props ゲームプロパティ
- * @return 処理が完了したら発火するPromise
+ * @returns 処理が完了したら発火するPromise
  */
 export async function onNetBattleStart(
   props: Readonly<GameProps>,

@@ -18,7 +18,7 @@ import { yoroshikuOnegaiShimasu } from "../../yoroshiku-onegai-shimasu";
 /**
  * イントロダクション
  * @param props イベントプロパティ
- * @return ストーリーが完了したら発火するPromise
+ * @returns ストーリーが完了したら発火するPromise
  */
 export async function introduction(props: Readonly<CustomBattleEventProps>) {
   activeRightMessageWindowWithFace(props, "Shinya");

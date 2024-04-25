@@ -35,7 +35,7 @@ export class WingDozerHUD implements HUDArmdozerObjects {
 /**
  * プレイヤー側 ウィングドーザHUD
  * @param params 生成パラメータ
- * @return ウィングドーザHUD
+ * @returns ウィングドーザHUD
  */
 export function playerWingDozerHUD(
   params: HUDLayerObjectCreatorParams,
@@ -47,7 +47,7 @@ export function playerWingDozerHUD(
 /**
  * 敵側 ウィングドーザHUD
  * @param params 生成パラメータ
- * @return ウィングドーザHUD
+ * @returns ウィングドーザHUD
  */
 export function enemyWingDozerHUD(
   params: HUDLayerObjectCreatorParams,

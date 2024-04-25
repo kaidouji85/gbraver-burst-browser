@@ -84,7 +84,7 @@ export class ShinBraver extends EmptyArmdozerSprite implements ArmdozerSprite {
 
   /**
    * チャージ
-   * @return アニメーション
+   * @returns アニメーション
    */
   charge(): Animate {
     return charge(this.#props);
@@ -92,7 +92,7 @@ export class ShinBraver extends EmptyArmdozerSprite implements ArmdozerSprite {
 
   /**
    * ストレートパンチ
-   * @return アニメーション
+   * @returns アニメーション
    */
   straightPunch(): Animate {
     return straightPunch(this.#props);
@@ -105,7 +105,7 @@ export class ShinBraver extends EmptyArmdozerSprite implements ArmdozerSprite {
 
   /**
    * ガッツ
-   * @return アニメーション
+   * @returns アニメーション
    */
   guts(): Animate {
     return guts(this.#props);
@@ -113,7 +113,7 @@ export class ShinBraver extends EmptyArmdozerSprite implements ArmdozerSprite {
 
   /**
    * ガッツ -> 立ち
-   * @return アニメーション
+   * @returns アニメーション
    */
   gutsToStand(): Animate {
     return gutsToStand(this.#props);
@@ -156,7 +156,7 @@ export class ShinBraver extends EmptyArmdozerSprite implements ArmdozerSprite {
 
   /**
    * バースト
-   * @return アニメーション
+   * @returns アニメーション
    */
   burst(): Animate {
     return burst(this.#props);
@@ -164,7 +164,7 @@ export class ShinBraver extends EmptyArmdozerSprite implements ArmdozerSprite {
 
   /**
    * バースト -> 立ち
-   * @return アニメーション
+   * @returns アニメーション
    */
   burstToStand(): Animate {
     return burstToStand(this.#props);

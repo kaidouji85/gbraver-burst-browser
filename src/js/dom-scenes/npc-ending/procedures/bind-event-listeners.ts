@@ -7,7 +7,7 @@ import { onScreenPush } from "./on-screen-push";
 /**
  * 画面にイベントを関連づける
  * @param props 画面プロパティ
- * @return アンサブスクライバ
+ * @returns アンサブスクライバ
  */
 export function bindEventListeners(props: NPCEndingProps): Unsubscribable[] {
   return [

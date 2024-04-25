@@ -62,7 +62,7 @@ class SimpleEpisodeImageCut implements EpisodeImageCut {
  * イメージカットを生成する
  * @param resources リソース管理オブジェクト
  * @param config イメージカット設定
- * @return 生成結果
+ * @returns 生成結果
  */
 export function createEpisodeImageCut(
   resources: Resources,

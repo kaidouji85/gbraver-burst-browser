@@ -43,7 +43,7 @@ export class Illumination {
   /**
    * シーンに追加するオブジェクトを配列で返す
    *
-   * @return シーンに追加するオブジェクト
+   * @returns シーンに追加するオブジェクト
    */
   getObject3Ds(): THREE.Object3D[] {
     return this.#view.getObject3Ds();
@@ -54,7 +54,7 @@ export class Illumination {
    *
    * @param value 照明の強さ
    * @param duration アニメーション時間
-   * @return アニメーション
+   * @returns アニメーション
    */
   intensity(value: number, duration: number): Animate {
     return intensity(this.#model, value, duration);

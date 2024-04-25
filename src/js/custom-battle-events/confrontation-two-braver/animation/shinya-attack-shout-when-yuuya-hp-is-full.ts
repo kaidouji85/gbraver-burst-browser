@@ -5,7 +5,7 @@ import { playerPilotOnlyShout } from "../../pilot-shout";
 /**
  * シンヤ 戦闘 ユウヤのHPが満タン
  * @param props イベントプロパティ
- * @return アニメーション
+ * @returns アニメーション
  */
 export const shinyaAttackShoutWhenYuuyaHPIsFull = (
   props: Readonly<CustomBattleEventProps>,

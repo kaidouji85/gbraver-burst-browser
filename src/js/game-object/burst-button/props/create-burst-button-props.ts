@@ -22,7 +22,7 @@ export type PropsCreatorParams = ResourcesContainer &
 /**
  * BurstButtonPropsを生成する
  * @param params 生成パラメータ
- * @return 生成結果
+ * @returns 生成結果
  */
 export function createBurstButtonProps(
   params: PropsCreatorParams,

@@ -6,7 +6,7 @@ import { NeoLandozerAnimationProps } from "./animation-props";
 /**
  * 礼（倒れる）
  * @param props アニメーションプロパティ
- * @return アニメーション
+ * @returns アニメーション
  */
 export function bowDown(props: NeoLandozerAnimationProps): Animate {
   const { model, sounds, se } = props;

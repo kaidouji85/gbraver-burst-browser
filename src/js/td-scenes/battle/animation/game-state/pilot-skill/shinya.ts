@@ -20,7 +20,7 @@ export type ShinyaAnimationParam = ShinyaAnimationParamX<PilotSkill>;
 /**
  * シンヤ パイロットスキルアニメーション
  * @param param パラメータ
- * @return アニメーション
+ * @returns アニメーション
  */
 export function shinyaAnimation(param: ShinyaAnimationParam): Animate {
   if (param.skill.type === "RecoverBatterySkill") {
@@ -39,7 +39,7 @@ const outDuration = 400;
 /**
  * シンヤ バッテリー回復 アニメーション
  * @param param パラメータ
- * @return アニメーション
+ * @returns アニメーション
  */
 function shinyaRecoverBattery(
   param: ShinyaAnimationParamX<RecoverBatterySkill>,

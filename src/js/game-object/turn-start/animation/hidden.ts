@@ -6,7 +6,7 @@ import type { TurnStartModel } from "../model/turn-start-model";
  * 非表示アニメーション
  *
  * @param model モデル
- * @return アニメーション
+ * @returns アニメーション
  */
 export function hidden(model: TurnStartModel): Animate {
   return tween(model, (t) =>

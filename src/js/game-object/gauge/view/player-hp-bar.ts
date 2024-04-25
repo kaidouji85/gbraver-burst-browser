@@ -112,7 +112,7 @@ export class PlayerHpBar {
   /**
    * シーンに追加するオブジェクトを取得する
    *
-   * @return シーンに追加するオブジェクト
+   * @returns シーンに追加するオブジェクト
    */
   getObject3D(): THREE.Object3D {
     return this.#group;
@@ -122,7 +122,7 @@ export class PlayerHpBar {
    * HPバーの入力値が0〜1になるように補正する
    *
    * @param value オリジナルの値
-   * @return 補正結果
+   * @returns 補正結果
    */
   #correctValue(value: number): number {
     if (1 < value) {

@@ -20,7 +20,7 @@ export type GaiAnimationParam = GaiAnimationParamX<PilotSkill>;
 /**
  * ガイ パイロットスキルアニメーション
  * @param param パラメータ
- * @return アニメーション
+ * @returns アニメーション
  */
 export function gaiAnimation(param: GaiAnimationParam): Animate {
   if (param.skill.type === "BuffPowerSkill") {
@@ -39,7 +39,7 @@ const outDuration = 400;
 /**
  * ガイ 攻撃バフ アニメーション
  * @param param パラメータ
- * @return アニメーション
+ * @returns アニメーション
  */
 function gaiBuffPower(param: GaiAnimationParamX<BuffPowerSkill>): Animate {
   return all(

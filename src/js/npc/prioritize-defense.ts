@@ -67,7 +67,7 @@ const defenseRoutine: SimpleRoutine = ({ commands, enemy, player }) => {
 /**
  * 防御優先、ウィングドーザNPC
  *
- * @return NPC
+ * @returns NPC
  */
 export function prioritizeDefenseWingDozer(): NPC {
   const armdozer =
@@ -79,7 +79,7 @@ export function prioritizeDefenseWingDozer(): NPC {
 /**
  * 防御優先、シンブレイバーNPC
  *
- * @return NPC
+ * @returns NPC
  */
 export function prioritizeDefenseShinBraverNPC(): NPC {
   const armdozer =

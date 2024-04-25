@@ -56,7 +56,7 @@ export class Gauge implements HUDTracking {
   /**
    * HP変更
    * @param value 変更値
-   * @return アニメーション
+   * @returns アニメーション
    */
   hp(value: number): Animate {
     return hp(this.#model, value);
@@ -65,7 +65,7 @@ export class Gauge implements HUDTracking {
   /**
    * バッテリー変更
    * @param value 変更値
-   * @return アニメーション
+   * @returns アニメーション
    */
   battery(value: number): Animate {
     return battery(this.#model, value);
@@ -74,7 +74,7 @@ export class Gauge implements HUDTracking {
   /**
    * 最大バッテリー変更
    * @param value 変更値
-   * @return アニメーション
+   * @returns アニメーション
    */
   maxBattery(value: number): Animate {
     return maxBattery(this.#model, value);
@@ -89,7 +89,7 @@ export class Gauge implements HUDTracking {
 
   /**
    * ゲージで使われているthree.jsオブジェクトを取得する
-   * @return 取得結果
+   * @returns 取得結果
    */
   getObject3D(): THREE.Object3D {
     return this.#view.getObject3D();

@@ -8,7 +8,7 @@ import { LightningDozerAnimationProps } from "./animation-props";
 /**
  * アームハンマー -> 立ち
  * @param props アニメーションプロパティ
- * @return アニメーション
+ * @returns アニメーション
  */
 export function hmToStand(props: LightningDozerAnimationProps): Animate {
   const { model, sounds, se } = props;

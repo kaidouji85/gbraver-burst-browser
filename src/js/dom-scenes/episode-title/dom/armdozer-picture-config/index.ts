@@ -9,7 +9,7 @@ import { shinBraver } from "./shin-braver";
  * アームドーザIDに応じた画像設定を生成する
  * @param resources リソース管理オブジェクト
  * @param armdozerId アームドーザID
- * @return 生成結果
+ * @returns 生成結果
  */
 export function createArmdozerPictureConfig(
   resources: Resources,

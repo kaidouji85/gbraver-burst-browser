@@ -35,7 +35,7 @@ export class ArmdozerBustShot {
 
   /**
    * ルートHTML要素を取得する
-   * @return ルートHTML要素
+   * @returns ルートHTML要素
    */
   getRootHTMLElement(): HTMLElement {
     return this.#image;
@@ -43,7 +43,7 @@ export class ArmdozerBustShot {
 
   /**
    * 読み込みが完了するまで待つ
-   * @return 待機結果
+   * @returns 待機結果
    */
   waitUntilLoaded(): Promise<void> {
     return this.#isLoaded;
@@ -65,7 +65,7 @@ export class ArmdozerBustShot {
 
   /**
    * 移動する
-   * @return アニメーション
+   * @returns アニメーション
    */
   move(): Promise<void> {
     const animation = this.#image.animate(

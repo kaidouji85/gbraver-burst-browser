@@ -9,7 +9,7 @@ import { onPrevButtonPush } from "./on-prev-button-push";
 /**
  * コンポネントにイベントリスナを関連付ける
  * @param props プロパティ
- * @return アンサブスクライバ
+ * @returns アンサブスクライバ
  */
 export function bindEventListeners(
   props: PilotSelectorProps,

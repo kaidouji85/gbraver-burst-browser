@@ -19,7 +19,7 @@ export default {
  * リザルトインジケータのストーリー
  * @param generator リザルトインジケータ生成関数
  * @param fn リザルトインジケータ操作関数
- * @return story
+ * @returns story
  */
 const resultIndicatorStory =
   (

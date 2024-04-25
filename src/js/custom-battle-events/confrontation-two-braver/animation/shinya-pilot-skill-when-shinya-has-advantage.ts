@@ -5,7 +5,7 @@ import { playerPilotOnlyShout } from "../../pilot-shout";
 /**
  * シンヤ有利 シンヤ パイロットスキル
  * @param props イベントプロパティ
- * @return アニメーション
+ * @returns アニメーション
  */
 export const shinyaPilotSkillWhenShinyaHasAdvantage = (
   props: Readonly<CustomBattleEventProps>,

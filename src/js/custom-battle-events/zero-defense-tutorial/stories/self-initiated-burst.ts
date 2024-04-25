@@ -6,7 +6,7 @@ import { scrollLeftMessages } from "../../scroll-messages";
 /**
  * プレイヤーが自主的にバーストを発動した
  * @param props イベントプロパティ
- * @return ストーリーが完了したら発火するPromise
+ * @returns ストーリーが完了したら発火するPromise
  */
 export async function selfInitiatedBurst(
   props: Readonly<CustomBattleEventProps>,

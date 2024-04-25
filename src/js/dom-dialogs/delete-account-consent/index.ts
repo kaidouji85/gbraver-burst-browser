@@ -38,7 +38,7 @@ export class DeleteAccountConsentDialog implements DOMDialog {
 
   /**
    * アカウント削除通知
-   * @return 通知ストリーム
+   * @returns 通知ストリーム
    */
   notifyAccountDeletion(): Observable<void> {
     return this.#props.deleteAccount;
@@ -46,7 +46,7 @@ export class DeleteAccountConsentDialog implements DOMDialog {
 
   /**
    * ダイアログを閉じる通知
-   * @return 通知ストリーム
+   * @returns 通知ストリーム
    */
   notifyClosed(): Observable<void> {
     return this.#props.closeDialog;

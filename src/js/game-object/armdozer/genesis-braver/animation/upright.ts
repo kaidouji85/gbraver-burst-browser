@@ -6,7 +6,7 @@ import { GenesisBraverAnimationProps } from "./animation-props";
 /**
  * 気をつけ
  * @param props アニメーションプロパティ
- * @return アニメーション
+ * @returns アニメーション
  */
 export function upright(props: GenesisBraverAnimationProps): Animate {
   const { model, sounds, se } = props;

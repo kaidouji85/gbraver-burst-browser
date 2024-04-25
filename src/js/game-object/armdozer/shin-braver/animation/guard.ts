@@ -7,7 +7,7 @@ import { ShinBraverAnimationProps } from "./animation-props";
 /**
  * ガード
  * @param props アニメーションプロパティ
- * @return アニメーション
+ * @returns アニメーション
  */
 export function guard(props: ShinBraverAnimationProps): Animate {
   const { model } = props;

@@ -9,7 +9,7 @@ import { WingDozerAnimationProps } from "./animation-props";
  * フロントステップ
  * @param props アニメーションプロパティ
  * @param distance 移動距離を絶対値で指定
- * @return アニメーション
+ * @returns アニメーション
  */
 export function frontStep(
   props: WingDozerAnimationProps,

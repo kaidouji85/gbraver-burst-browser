@@ -10,7 +10,7 @@ import { scrollLeftMessages, scrollRightMessages } from "../../scroll-messages";
  * ストーリー 0防御は即死
  *
  * @param props イベントプロパティ
- * @return ストーリーが完了したら発火するPromise
+ * @returns ストーリーが完了したら発火するPromise
  */
 export async function noZeroBatteryDefense(props: CustomBattleEventProps) {
   invisibleAllMessageWindows(props);
@@ -26,7 +26,7 @@ export async function noZeroBatteryDefense(props: CustomBattleEventProps) {
  * ストーリー 0防御なのでコマンドキャンセル
  *
  * @param props イベントプロパティ
- * @return ストーリーが完了したら発火するPromise
+ * @returns ストーリーが完了したら発火するPromise
  */
 export async function cancelZeroBatteryDefense(props: CustomBattleEventProps) {
   await noZeroBatteryDefense(props);
@@ -42,7 +42,7 @@ export async function cancelZeroBatteryDefense(props: CustomBattleEventProps) {
  * ストーリー 0防御0バッテリーなのでバーストする
  *
  * @param props イベントプロパティ
- * @return ストーリーが完了したら発火するPromise
+ * @returns ストーリーが完了したら発火するPromise
  */
 export async function doBurstBecauseZeroBattery(props: CustomBattleEventProps) {
   await noZeroBatteryDefense(props);
@@ -64,7 +64,7 @@ export async function doBurstBecauseZeroBattery(props: CustomBattleEventProps) {
  * ストーリー 0防御0バッテリーなのでパイロットスキルを使う
  *
  * @param props イベントプロパティ
- * @return ストーリーが完了したら発火するPromise
+ * @returns ストーリーが完了したら発火するPromise
  */
 export async function doPilotSkillBecauseZeroBattery(
   props: CustomBattleEventProps,
@@ -96,7 +96,7 @@ export async function doPilotSkillBecauseZeroBattery(
 /**
  * ストーリー バースト、パイロットスキルが使えず0バッテリーなので負け確定
  * @param props イベントプロパティ
- * @return ストーリーが完了したら発火するPromise
+ * @returns ストーリーが完了したら発火するPromise
  */
 export async function zeroBatteryDefenseBecauseNoBatteryRecover(
   props: CustomBattleEventProps,

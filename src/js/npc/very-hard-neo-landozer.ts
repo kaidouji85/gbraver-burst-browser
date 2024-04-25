@@ -144,7 +144,7 @@ const defenseRoutine: SimpleRoutine = (data) => {
 /**
  * ベリーハードコース ネオランドーザ NPC
  *
- * @return NPC
+ * @returns NPC
  */
 export function veryHardNeoLandozer(): NPC {
   const armdozer =

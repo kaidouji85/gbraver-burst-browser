@@ -7,7 +7,7 @@ import { LightningDozerAnimationProps } from "./animation-props";
 /**
  * ガード
  * @param props アニメーションプロパティ
- * @return アニメーション
+ * @returns アニメーション
  */
 export function guard(props: LightningDozerAnimationProps): Animate {
   const { model } = props;

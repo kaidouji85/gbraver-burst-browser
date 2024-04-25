@@ -15,7 +15,7 @@ export default {
  * 電撃アタックストーリー
  * @param generator 電撃アタック生成関数
  * @param fn 電撃アタックを操作する関数
- * @return story
+ * @returns story
  */
 const lightingStory =
   (

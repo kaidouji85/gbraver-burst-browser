@@ -15,7 +15,7 @@ export type DamageIndicatorCreatprParams = ResourcesContainer & {
 /**
  * プレイヤーのダメージインジケータ
  * @param params 生成パラメータ
- * @return ダメージインジケータ
+ * @returns ダメージインジケータ
  */
 export function playerDamageIndicator(
   params: DamageIndicatorCreatprParams,
@@ -28,7 +28,7 @@ export function playerDamageIndicator(
 /**
  * 敵のダメージインジケータ
  * @param params 生成パラメータ
- * @return ダメージインジケータ
+ * @returns ダメージインジケータ
  */
 export function enemyDamageIndicator(
   params: DamageIndicatorCreatprParams,

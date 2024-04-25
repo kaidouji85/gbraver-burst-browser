@@ -62,7 +62,7 @@ export class NetBattleSelectorDialog implements DOMDialog {
 
   /**
    * カジュアルマッチを選択したことを通知する
-   * @return 通知ストリーム
+   * @returns 通知ストリーム
    */
   notifyCasualMatchSelection(): Observable<void> {
     return this.#props.casualMatchSelection;
@@ -70,7 +70,7 @@ export class NetBattleSelectorDialog implements DOMDialog {
 
   /**
    * プライベートマッチ（ホスト）を選択したことを通知する
-   * @return 通知ストリーム
+   * @returns 通知ストリーム
    */
   notifyPrivateMatchHostSelection(): Observable<void> {
     return this.#props.privateMatchHostSelection;
@@ -78,7 +78,7 @@ export class NetBattleSelectorDialog implements DOMDialog {
 
   /**
    * プライベートマッチ（ゲスト）を選択したことを通知する
-   * @return 通知ストリーム
+   * @returns 通知ストリーム
    */
   notifyPrivateMatchGuestSelection(): Observable<void> {
     return this.#props.privateMatchGuestSelection;
@@ -86,7 +86,7 @@ export class NetBattleSelectorDialog implements DOMDialog {
 
   /**
    * ダイアログクローズを通知する
-   * @return 通知ストリーム
+   * @returns 通知ストリーム
    */
   notifyClosed(): Observable<void> {
     return this.#props.dialogClosed;

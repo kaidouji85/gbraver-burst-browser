@@ -18,7 +18,7 @@ export default {
  * パイロットボタンのストーリー
  * @param generator パイロットボタン生成関数
  * @param fn パイロットボタン操作関数
- * @return story
+ * @returns story
  */
 const pilotButtonStory =
   (

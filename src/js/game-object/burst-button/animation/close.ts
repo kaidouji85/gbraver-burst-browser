@@ -6,7 +6,7 @@ import { BurstButtonAnimationProps } from "./animation-props";
 /**
  * バーストボタンを非表示にする
  * @param props アニメーションプロパティ
- * @return アニメーション
+ * @returns アニメーション
  */
 export function close(props: BurstButtonAnimationProps): Animate {
   const { model } = props;

@@ -26,7 +26,7 @@ import { wingDozerBurst } from "./wingdozer";
  *
  * @param props 戦闘シーンプロパティ
  * @param gameState ゲーム状態
- * @return バーストアニメーション
+ * @returns バーストアニメーション
  */
 export function burstAnimation(
   props: StateAnimationProps,
@@ -45,7 +45,7 @@ export function burstAnimation(
  * アームドーザごとのバーストアニメーション
  *
  * @param param バーストアニメパラメータ
- * @return バーストアニメーション
+ * @returns バーストアニメーション
  */
 function armdozerAnimation(param: BurstAnimationParam): Animate {
   if (

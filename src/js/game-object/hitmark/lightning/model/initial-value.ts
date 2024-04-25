@@ -8,7 +8,7 @@ import type { LightningModel } from "./lightning-model";
 /**
  * 電撃ヒットマークモデルの初期値を生成する
  *
- * @return 生成結果
+ * @returns 生成結果
  */
 export function createInitialValue(): LightningModel {
   return {

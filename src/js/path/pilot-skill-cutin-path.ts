@@ -15,7 +15,7 @@ const PilotSkillCutinPathIds: Record<PilotId, PathId> = {
 /**
  * パイロットIDに対応するスキルカットインのパスIDを返す
  * @param pilotId パイロットID
- * @return パスID
+ * @returns パスID
  */
 export const getPilotSkillCutinPathId = (pilotId: PilotId): PathId =>
   PilotSkillCutinPathIds[pilotId] ?? PathIds.SHINYA_SKILL_CUTIN;

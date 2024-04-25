@@ -17,7 +17,7 @@ type GeneratorParams = ResourcesContainer &
  * アームドーザスプライト ジェネレータ
  * @template X スプライトのデータ型
  * @param params ジェネレータパラメータ
- * @return アームドーザスプライト
+ * @returns アームドーザスプライト
  */
 type SpriteGenerator<X extends ArmdozerSprite> = (params: GeneratorParams) => X;
 
@@ -26,7 +26,7 @@ type SpriteGenerator<X extends ArmdozerSprite> = (params: GeneratorParams) => X;
  * @template X スプライトのデータ型
  * @param generator スプライトジェネレータ
  * @param fn スプライト操作関数
- * @return ルートHTML要素
+ * @returns ルートHTML要素
  */
 export const armdozerSpriteStub = <X extends ArmdozerSprite>(
   generator: SpriteGenerator<X>,

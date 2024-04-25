@@ -20,7 +20,7 @@ import { invisibleAllMessageWindows } from "./invisible-all-message-windows";
  * バッテリーセレクタにフォーカスインする
  * フォーカスインしたもの以外は、操作不可能にする
  * @param props イベントプロパティ
- * @return 処理が完了したら発火するPromise
+ * @returns 処理が完了したら発火するPromise
  */
 export const focusInBatterySelector = async (props: CustomBattleEventProps) => {
   unAttentionAllButtons(props);
@@ -35,7 +35,7 @@ export const focusInBatterySelector = async (props: CustomBattleEventProps) => {
 /**
  * バッテリーセレクタにフォーカスしているか判定する
  * @param props イベントプロパティ
- * @return 判定結果、trueでフォーカスしている
+ * @returns 判定結果、trueでフォーカスしている
  */
 export const isBatterySelectorFocused = (
   props: CustomBattleEventProps,
@@ -50,7 +50,7 @@ export const isBatterySelectorFocused = (
 /**
  * バッテリーセレクタからフォーカスアウトする
  * @param props イベントプロパティ
- * @return 処理が完了したら発火するPromise
+ * @returns 処理が完了したら発火するPromise
  */
 export const focusOutBatterySelector = async (
   props: CustomBattleEventProps,
@@ -66,7 +66,7 @@ export const focusOutBatterySelector = async (
  * フォーカスインしたもの以外は、操作不可能にする
  * @param props イベントプロパティ
  * @param caption 注釈メッセージ
- * @return 処理が完了したら発火するPromise
+ * @returns 処理が完了したら発火するPromise
  */
 export const focusInBurstButton = async (
   props: CustomBattleEventProps,
@@ -85,7 +85,7 @@ export const focusInBurstButton = async (
 /**
  * バーストボタンにフォーカスしているか判定する
  * @param props イベントプロパティ
- * @return 判定結果、trueでフォーカスしている
+ * @returns 判定結果、trueでフォーカスしている
  */
 export const isBurstButtonFocused = (
   props: CustomBattleEventProps,
@@ -100,7 +100,7 @@ export const isBurstButtonFocused = (
 /**
  * バーストボタンからフォーカスアウトする
  * @param props イベントプロパティ
- * @return 処理が完了したら発火するPromise
+ * @returns 処理が完了したら発火するPromise
  */
 export const focusOutBurstButton = async (props: CustomBattleEventProps) => {
   props.view.dom.nearBurstButtonMessageWindow.visible(false);
@@ -114,7 +114,7 @@ export const focusOutBurstButton = async (props: CustomBattleEventProps) => {
  * フォーカスインしたもの以外は、操作不可能にする
  * @param props イベントプロパティ
  * @param caption 注釈メッセージ
- * @return 処理が完了したら発火するPromise
+ * @returns 処理が完了したら発火するPromise
  */
 export const focusInPilotButton = async (
   props: CustomBattleEventProps,
@@ -133,7 +133,7 @@ export const focusInPilotButton = async (
 /**
  * パイロットボタンにフォーカスしているか判定する
  * @param props イベントプロパティ
- * @return 判定結果、trueでフォーカスしている
+ * @returns 判定結果、trueでフォーカスしている
  */
 export const isPilotButtonFocused = (
   props: CustomBattleEventProps,
@@ -148,7 +148,7 @@ export const isPilotButtonFocused = (
 /**
  * パイロットボタンからフォーカスアウトする
  * @param props イベントプロパティ
- * @return 処理が完了したら発火するPromise
+ * @returns 処理が完了したら発火するPromise
  */
 export const focusOutPilotButton = async (props: CustomBattleEventProps) => {
   props.view.dom.nearPilotButtonMessageWindow.visible(false);

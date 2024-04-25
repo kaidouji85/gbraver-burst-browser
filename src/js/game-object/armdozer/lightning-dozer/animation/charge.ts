@@ -8,7 +8,7 @@ import { LightningDozerAnimationProps } from "./animation-props";
  * チャージ
  *
  * @param props アニメーションプロパティ
- * @return アニメーション
+ * @returns アニメーション
  */
 export function charge(props: LightningDozerAnimationProps): Animate {
   const { model, sounds, se } = props;

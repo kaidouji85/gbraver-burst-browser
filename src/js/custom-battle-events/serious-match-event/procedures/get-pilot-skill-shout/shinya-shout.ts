@@ -4,7 +4,7 @@ import { PilotSkillShout } from "./pilot-skill-shout";
 
 /**
  * シンヤ攻撃時の叫び
- * @return パイロット叫び情報
+ * @returns パイロット叫び情報
  */
 export const shinyaAttackShout = (): PilotSkillShout => ({
   face: "Shinya",
@@ -14,7 +14,7 @@ export const shinyaAttackShout = (): PilotSkillShout => ({
 /**
  * シンヤ防御時の叫び
  * @param player プレイヤー情報
- * @return パイロット叫び情報
+ * @returns パイロット叫び情報
  */
 export const shinyaDefenseShout = (player: PlayerState): PilotSkillShout => ({
   face: "Shinya",

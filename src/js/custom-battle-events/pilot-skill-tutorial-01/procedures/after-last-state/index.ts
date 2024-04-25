@@ -7,7 +7,7 @@ import { executePlayerLoseIfNeeded } from "./execute-player-lose-if-needed";
 /**
  * 最終ステート直後
  * @param props イベントプロパティ
- * @return ステート更新結果
+ * @returns ステート更新結果
  */
 export async function afterLastState(
   props: Readonly<LastState & PilotSkillTutorial01Props>,

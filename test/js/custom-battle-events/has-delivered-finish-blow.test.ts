@@ -12,7 +12,7 @@ import { hasDeliveredFinishBlow } from "../../../src/js/custom-battle-events/has
  * Battleのゲームステートを生成する
  * @param attacker 攻撃側プレイヤーID
  * @param isDeath 防御側が死亡したかどうか、trueで死亡
- * @return Battleのゲームステート
+ * @returns Battleのゲームステート
  */
 const createBattle = (
   attacker: PlayerId,

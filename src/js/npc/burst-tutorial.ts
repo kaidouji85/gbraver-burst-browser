@@ -36,7 +36,7 @@ const defenseRoutine: SimpleRoutine = (data) => {
 /**
  * バーストチュートリアル用ライトニングドーザNPC
  *
- * @return NPC
+ * @returns NPC
  */
 export function burstTutorialNPC(): NPC {
   const armdozer =

@@ -17,7 +17,7 @@ type ShinBraverCreatorParams = ResourcesContainer &
 /**
  * プレイヤー側シンブレイバー
  * @param params 生成パラメータ
- * @return シンブレイバー
+ * @returns シンブレイバー
  */
 export function PlayerShinBraver(params: ShinBraverCreatorParams): ShinBraver {
   const { resources } = params;
@@ -28,7 +28,7 @@ export function PlayerShinBraver(params: ShinBraverCreatorParams): ShinBraver {
 /**
  * 敵側シンブレイバー
  * @param params 生成パラメータ
- * @return シンブレイバー
+ * @returns シンブレイバー
  */
 export function EnemyShinBraver(params: ShinBraverCreatorParams): ShinBraver {
   const { resources } = params;

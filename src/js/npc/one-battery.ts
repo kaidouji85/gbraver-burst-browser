@@ -29,7 +29,7 @@ const oneBatteryRoutine: SimpleRoutine = (data) => {
 
 /**
  * バッテリー1をひたすら出す、ネオランドーザNPC
- * @return NPC
+ * @returns NPC
  */
 export function oneBatteryNeoLandozerNPC(): NPC {
   const armdozer =
@@ -40,7 +40,7 @@ export function oneBatteryNeoLandozerNPC(): NPC {
 
 /**
  * バッテリー1をひたすら出す、シンブレイバーNPC
- * @return NPC
+ * @returns NPC
  */
 export function oneBatteryShinBraverNPC(): NPC {
   const armdozer =
@@ -51,7 +51,7 @@ export function oneBatteryShinBraverNPC(): NPC {
 
 /**
  * バッテリー1をひたすら出す、ジェネシスブレイバーNPC
- * @return NPC
+ * @returns NPC
  */
 export function oneBatteryGenesisBraverNPC(): NPC {
   const armdozer =

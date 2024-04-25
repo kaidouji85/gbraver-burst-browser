@@ -21,7 +21,7 @@ export type GenesisBraverBurst<BURST extends Burst> = BurstAnimationParamX<
 /**
  * ジェネシスブレイバー バーストアニネーション
  * @param param パラメータ
- * @return アニメーション
+ * @returns アニメーション
  */
 export function genesisBraverBurst(param: GenesisBraverBurst<Burst>): Animate {
   if (param.burst.type === "BatteryLimitBreak") {

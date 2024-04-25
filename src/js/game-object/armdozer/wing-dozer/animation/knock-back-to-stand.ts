@@ -6,7 +6,7 @@ import { WingDozerAnimationProps } from "./animation-props";
 /**
  * ノックバック -> 立ち
  * @param props アニメーションプロパティ
- * @return アニメーション
+ * @returns アニメーション
  */
 export function knockBackToStand(props: WingDozerAnimationProps): Animate {
   const { model, sounds, se } = props;

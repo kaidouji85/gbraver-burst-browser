@@ -37,7 +37,7 @@ const configs: { [key in BattleControllerType]: ButtonConfig } = {
 /**
  * 戦闘画面コントローラーのラジオボタン要素HTMLを生成する
  * @param selected 選択中の戦闘画面コントローラー
- * @return 生成結果
+ * @returns 生成結果
  */
 export const battleControllerTypeItems = (selected: BattleControllerType) =>
   BattleControllerTypes.map((value) => {

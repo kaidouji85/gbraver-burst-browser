@@ -23,7 +23,7 @@ type Ret = IsPrivateMatchHostStarted | IsNotPrivateMatchHostStarted;
  * 条件を満たした場合、プライベートマッチ（ホスト）を開始する
  * @param props ゲームプロパティ
  * @param action アクション
- * @return プライベートマッチ（ホスト）開始情報
+ * @returns プライベートマッチ（ホスト）開始情報
  */
 export async function startPrivateMatchHostIfNeeded(
   props: Readonly<GameProps>,

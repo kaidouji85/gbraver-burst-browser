@@ -35,7 +35,7 @@ export class ShinBraverHUD implements HUDArmdozerObjects {
 /**
  * プレイヤー側 シンブレイバーHUD
  * @param params 生成パラメータ
- * @return シンブレイバーHUD
+ * @returns シンブレイバーHUD
  */
 export function playerShinBraverHUD(
   params: HUDLayerObjectCreatorParams,
@@ -47,7 +47,7 @@ export function playerShinBraverHUD(
 /**
  * 敵側 シンブレイバーHUD
  * @param params 生成パラメータ
- * @return シンブレイバーHUD
+ * @returns シンブレイバーHUD
  */
 export function enemyShinBraverHUD(
   params: HUDLayerObjectCreatorParams,

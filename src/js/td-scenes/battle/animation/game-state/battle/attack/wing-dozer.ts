@@ -27,7 +27,7 @@ export type WingDozerBattle<Result extends BattleResult> =
  * attentionArmdozerよりもカメラ移動は控えめ
  * @param camera カメラ
  * @param attacker アタッカーのスプライト
- * @return アニメーション
+ * @returns アニメーション
  */
 function focusToAttacker(camera: TDCamera, attacker: WingDozer): Animate {
   const duration = 400;
@@ -43,7 +43,7 @@ type AttackResult = NormalHit | CriticalHit;
 /**
  * ウィングドーザ 攻撃ヒット
  * @param param パラメータ
- * @return アニメーション
+ * @returns アニメーション
  */
 function attack(param: WingDozerBattle<AttackResult>): Animate {
   return all(
@@ -68,7 +68,7 @@ function attack(param: WingDozerBattle<AttackResult>): Animate {
 /**
  * ウィングドーザ 攻撃ガード
  * @param param パラメータ
- * @return アニメーション
+ * @returns アニメーション
  */
 function guard(param: WingDozerBattle<Guard>): Animate {
   return param.attackerSprite
@@ -91,7 +91,7 @@ function guard(param: WingDozerBattle<Guard>): Animate {
 /**
  * ウィングドーザ 攻撃ミス
  * @param param パラメータ
- * @return アニメーション
+ * @returns アニメーション
  */
 function miss(param: WingDozerBattle<Miss>): Animate {
   return param.attackerSprite
@@ -107,7 +107,7 @@ function miss(param: WingDozerBattle<Miss>): Animate {
 /**
  * フェイント
  * @param param パラメータ
- * @return アニメーション
+ * @returns アニメーション
  */
 function feint(param: WingDozerBattle<Feint>): Animate {
   if (!param.result.isDefenderMoved) {
@@ -123,7 +123,7 @@ type DownResult = NormalHit | CriticalHit | Guard;
 /**
  * とどめ
  * @param param パラメータ
- * @return アニメーション
+ * @returns アニメーション
  */
 function down(param: WingDozerBattle<DownResult>): Animate {
   return all(
@@ -152,7 +152,7 @@ function down(param: WingDozerBattle<DownResult>): Animate {
 /**
  * ウィングドーザ 戦闘アニメーション
  * @param param パラメータ
- * @return アニメーション
+ * @returns アニメーション
  */
 export function wingDozerAttack(param: WingDozerBattle<BattleResult>): Animate {
   if (param.result.name === "NormalHit" && param.isDeath) {

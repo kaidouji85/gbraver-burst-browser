@@ -6,7 +6,7 @@ import { LightningDozerAnimationProps } from "./animation-props";
 /**
  * 礼（倒れる）
  * @param props アニメーションプロパティ
- * @return アニメーション
+ * @returns アニメーション
  */
 export function bowDown(props: LightningDozerAnimationProps): Animate {
   const { model, sounds, se } = props;

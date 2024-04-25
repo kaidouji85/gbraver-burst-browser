@@ -7,7 +7,7 @@ import { ShinBraverAnimationProps } from "./animation-props";
 /**
  * ガッツ
  * @param props アニメーションプロパティ
- * @return アニメーション
+ * @returns アニメーション
  */
 export function guts(props: ShinBraverAnimationProps): Animate {
   const { model, sounds, se } = props;

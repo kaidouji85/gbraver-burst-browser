@@ -12,7 +12,7 @@ export type PilotButtonProps = {
 
 /**
  * パイロットボタンプロパティを生成する
- * @return 生成結果
+ * @returns 生成結果
  */
 export function createPilotButtonProps(): PilotButtonProps {
   const root = document.createElement("button");

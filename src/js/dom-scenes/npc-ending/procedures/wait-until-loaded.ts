@@ -3,7 +3,7 @@ import { NPCEndingProps } from "../props";
 /**
  * 各種リソースの読み込みが完了するまで待つ
  * @param props 画面プロパティ
- * @return 読み込みが完了したら発火するPromise
+ * @returns 読み込みが完了したら発火するPromise
  */
 export async function waitUntilLoaded(
   props: Readonly<NPCEndingProps>,

@@ -8,7 +8,7 @@ import type { GameOverParamX } from "./game-over-param";
  * ネオランドーザ 勝利
  *
  * @param param パラメータ
- * @return アニメーション
+ * @returns アニメーション
  */
 export function neoLandozerWin(param: GameOverParamX<NeoLandozerTD>): Animate {
   return all(

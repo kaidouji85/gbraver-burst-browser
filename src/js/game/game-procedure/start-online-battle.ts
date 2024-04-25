@@ -21,7 +21,7 @@ import { GameProps } from "../game-props";
  * BattleProgressを生成するヘルパー関数
  * @param props ゲームプロパティ
  * @param battle バトルSDK
- * @return 生成結果
+ * @returns 生成結果
  */
 function createBattleProgress(
   props: Readonly<GameProps>,

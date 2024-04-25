@@ -13,7 +13,7 @@ import { HUDLayerObjectCreatorParams } from "../../creator-params";
 /**
  * アームドーザIDに対応したバーストボタンを生成する
  * @param params 生成パラメータ
- * @return バーストボタン
+ * @returns バーストボタン
  */
 export function createBurstButton(
   params: HUDLayerObjectCreatorParams,

@@ -9,7 +9,7 @@ const duration = 200;
 /**
  * アクティブ状態を終了する
  * @param props アニメーションプロパティ
- * @return アニメーション
+ * @returns アニメーション
  */
 export function endActive(props: WingDozerAnimationProps): Animate {
   const { model } = props;

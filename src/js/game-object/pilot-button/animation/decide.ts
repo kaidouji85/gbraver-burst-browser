@@ -6,7 +6,7 @@ import { PilotButtonAnimationProps } from "./animation-props";
 /**
  * ボタンクリック
  * @param props アニメーションプロパティ
- * @return アニメーション
+ * @returns アニメーション
  */
 export function decide(props: PilotButtonAnimationProps): Animate {
   const { model, sounds, se } = props;

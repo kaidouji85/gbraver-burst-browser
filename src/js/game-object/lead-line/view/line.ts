@@ -13,7 +13,7 @@ export type LineMesh = THREE.Mesh<
  * 線メッシュを生成する
  * @param color 線の色
  * @param width 線の幅
- * @return 生成結果
+ * @returns 生成結果
  */
 export function createLine(
   color: THREE.ColorRepresentation,

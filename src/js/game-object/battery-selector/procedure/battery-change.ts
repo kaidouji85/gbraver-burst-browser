@@ -9,7 +9,7 @@ import { BatterySelectorProps } from "../props/battery-selector-props";
  * バッテリー値を変更するヘルパー関数
  * @param props ゲームオブジェクトプロパティ
  * @param battery 変更するバッテリー値
- * @return アニメーション
+ * @returns アニメーション
  */
 export function batteryChange(
   props: BatterySelectorProps,

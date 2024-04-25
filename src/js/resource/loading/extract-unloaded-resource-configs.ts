@@ -5,7 +5,7 @@ import { LoadingTargetConfigs } from "./resource-loading";
  * 読みこまれていないリソース設定を抽出する
  * @param configs 抽出対象となるリソース設定
  * @param resources 既に読みこんだリソース
- * @return 抽出結果
+ * @returns 抽出結果
  */
 export function extractUnloadedResourceConfigs(
   configs: LoadingTargetConfigs,

@@ -41,7 +41,7 @@ export class Config implements DOMScene {
 
   /**
    * 戻る通知
-   * @return 通知ストリーム
+   * @returns 通知ストリーム
    */
   notifyPrev(): Observable<void> {
     return this.#props.prev;
@@ -49,7 +49,7 @@ export class Config implements DOMScene {
 
   /**
    * 設定変更通知
-   * @return 通知ストリーム
+   * @returns 通知ストリーム
    */
   notifyConfigChanges(): Observable<GBraverBurstBrowserConfig> {
     return this.#props.configChange;

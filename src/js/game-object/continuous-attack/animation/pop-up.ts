@@ -7,7 +7,7 @@ import { ContinuousAttackAnimationProps } from "./animation-props";
 /**
  * ポップアップ
  * @param props アニメーションプロパティ
- * @return アニメーション
+ * @returns アニメーション
  */
 export function popUp(props: ContinuousAttackAnimationProps): Animate {
   const { model, sounds, se } = props;

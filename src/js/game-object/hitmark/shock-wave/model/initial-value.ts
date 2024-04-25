@@ -32,7 +32,7 @@ export const LINE_RANDOM_SEEDS = [
 /**
  * 衝撃波モデルの初期値を生成する
  *
- * @return 生成した初期値
+ * @returns 生成した初期値
  */
 export function initialValue(): ShockWaveModel {
   const maxLine = LINE_RANDOM_SEEDS.length;

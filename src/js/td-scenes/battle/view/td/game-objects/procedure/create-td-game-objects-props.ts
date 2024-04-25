@@ -8,7 +8,7 @@ import { TDGameObjectsProps } from "../props";
 /**
  * TDGameObjectsPropsを生成する
  * @param params 生成パラメータ
- * @return 生成結果
+ * @returns 生成結果
  */
 export function createTDGameObjectProps(
   params: TDLayerObjectCreatorParams,

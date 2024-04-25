@@ -6,7 +6,7 @@ import { BattleSceneView } from "../view";
 /**
  * ミニコントローラーによる決定アニメーション
  * @param view 戦闘シーンビュー
- * @return アニメーションが完了したら発火するPromise
+ * @returns アニメーションが完了したら発火するPromise
  */
 export function decisionByMiniController(
   view: Readonly<BattleSceneView>,

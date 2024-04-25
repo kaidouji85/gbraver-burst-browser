@@ -53,7 +53,7 @@ export class DOMFloaters {
 
   /**
    * 本クラスのルートHTML要素を取得する
-   * @return 取得結果
+   * @returns 取得結果
    */
   getRootHTMLElement(): HTMLElement {
     return this.#root;
@@ -61,7 +61,7 @@ export class DOMFloaters {
 
   /**
    * ゲームアクション通知
-   * @return 通知ストリーム
+   * @returns 通知ストリーム
    */
   gameActionNotifier(): Observable<GameAction> {
     return this.#gameAction;
@@ -70,7 +70,7 @@ export class DOMFloaters {
   /**
    * バトル終了後行動選択フローターをアニメ付きで表示する
    * @param params パラメータ
-   * @return アニメが完了したら発火するPromise
+   * @returns アニメが完了したら発火するPromise
    */
   async showPostBattle(params: ShowPostBattleParams): Promise<void> {
     await this.#postBattle.show(params);

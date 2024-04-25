@@ -15,7 +15,7 @@ export default {
  * 攻撃アップのストーリー
  * @param generator 攻撃アップ生成関数
  * @param fn 攻撃アップ操作関数
- * @return story
+ * @returns story
  */
 const powerUpStory =
   (

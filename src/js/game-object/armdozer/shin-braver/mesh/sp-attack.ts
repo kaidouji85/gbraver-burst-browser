@@ -11,7 +11,7 @@ export const MAX_ANIMATION = 4;
 /**
  * ストレートパンチ攻撃 メッシュ群を生成
  * @param resources リソース管理オブジェクト
- * @return 生成結果
+ * @returns 生成結果
  */
 export function spAttack(resources: Resources): AnimationMesh[] {
   return createAnimationMeshes({

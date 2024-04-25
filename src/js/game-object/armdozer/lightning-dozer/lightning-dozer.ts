@@ -90,7 +90,7 @@ export class LightningDozer
 
   /**
    * チャージ
-   * @return アニメーション
+   * @returns アニメーション
    */
   charge(): Animate {
     return charge(this.#props);
@@ -98,7 +98,7 @@ export class LightningDozer
 
   /**
    * アームハンマー
-   * @return アニメーション
+   * @returns アニメーション
    */
   armHammer(): Animate {
     return armHammer(this.#props);
@@ -106,7 +106,7 @@ export class LightningDozer
 
   /**
    * アームハンマー -> 立ち
-   * @return アニメーション
+   * @returns アニメーション
    */
   hmToStand(): Animate {
     return hmToStand(this.#props);
@@ -114,7 +114,7 @@ export class LightningDozer
 
   /**
    * ガッツ
-   * @return アニメーション
+   * @returns アニメーション
    */
   guts(): Animate {
     return guts(this.#props);
@@ -122,7 +122,7 @@ export class LightningDozer
 
   /**
    * ガッツ -> 立ち
-   * @return アニメーション
+   * @returns アニメーション
    */
   gutsToStand(): Animate {
     return gutsToStand(this.#props);

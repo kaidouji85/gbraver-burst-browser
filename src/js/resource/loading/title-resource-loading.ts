@@ -15,7 +15,7 @@ const TITLE_SOUND_IDS = [
  * タイトルで利用するリソースを読み込む
  *
  * @param resourceRoot リソースルート
- * @return リソース読み込みオブジェクト
+ * @returns リソース読み込みオブジェクト
  */
 export function titleResourceLoading(
   resourceRoot: ResourceRoot,

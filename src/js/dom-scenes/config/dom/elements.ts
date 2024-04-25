@@ -1,7 +1,7 @@
 /**
  * ロボ、パイロット選択タイプセレクタを抽出する
  * @param root 抽出対象となるルート要素
- * @return 抽出結果
+ * @returns 抽出結果
  */
 export const extractPlayerSelectorTypeSelector = (
   root: HTMLElement,
@@ -12,7 +12,7 @@ export const extractPlayerSelectorTypeSelector = (
 /**
  * アニメーションタイムスケールセレクタを抽出する
  * @param root 抽出対象となるルート要素
- * @return 抽出結果
+ * @returns 抽出結果
  */
 export const extractBattleAnimationTimeScaleSelector = (
   root: HTMLElement,
@@ -23,7 +23,7 @@ export const extractBattleAnimationTimeScaleSelector = (
 /**
  * 戦闘画面ピクセルレートセレクタを抽出する
  * @param root 抽出対象となるルート要素
- * @return 抽出結果
+ * @returns 抽出結果
  */
 export const extractWebGLPixelRatioSelector = (
   root: HTMLElement,
@@ -34,7 +34,7 @@ export const extractWebGLPixelRatioSelector = (
 /**
  * バトルコントローラータイプセレクタを抽出する
  * @param root 抽出対象となるルート要素
- * @return 抽出結果
+ * @returns 抽出結果
  */
 export const extractBattleControllerTypeSelector = (
   root: HTMLElement,
@@ -45,7 +45,7 @@ export const extractBattleControllerTypeSelector = (
 /**
  * BGM音量セレクタを抽出する
  * @param root 抽出対象となるルート要素
- * @return 抽出結果
+ * @returns 抽出結果
  */
 export const extractBgmVolumeSelector = (
   root: HTMLElement,
@@ -61,7 +61,7 @@ export const extractBgmVolumeSelector = (
 /**
  * BGM音量値を抽出する
  * @param root 抽出対象となるルート要素
- * @return 抽出結果
+ * @returns 抽出結果
  */
 export const extractBgmVolumeValue = (root: HTMLElement): HTMLElement =>
   root.querySelector(`[data-id="bgmVolumeValue"]`) ??
@@ -70,7 +70,7 @@ export const extractBgmVolumeValue = (root: HTMLElement): HTMLElement =>
 /**
  * SE音量セレクタを抽出する
  * @param root 抽出対象となるルート要素
- * @return 抽出結果
+ * @returns 抽出結果
  */
 export const extractSeVolumeSelector = (
   root: HTMLElement,
@@ -86,7 +86,7 @@ export const extractSeVolumeSelector = (
 /**
  * SE音量値を抽出する
  * @param root 抽出対象となるルート要素
- * @return 抽出結果
+ * @returns 抽出結果
  */
 export const extractSeVolumeValue = (root: HTMLElement): HTMLElement =>
   root.querySelector(`[data-id="seVolumeValue"]`) ??
@@ -95,7 +95,7 @@ export const extractSeVolumeValue = (root: HTMLElement): HTMLElement =>
 /**
  * パフォーマンス統計セレクタを抽出する
  * @param root 抽出対象となるルート要素
- * @return 抽出結果
+ * @returns 抽出結果
  */
 export const extractPerformanceStatsVisibilitySelector = (
   root: HTMLElement,
@@ -106,7 +106,7 @@ export const extractPerformanceStatsVisibilitySelector = (
 /**
  * 「戻る」ボタンを抽出する
  * @param root 抽出対象となるルート要素
- * @return 抽出結果
+ * @returns 抽出結果
  */
 export const extractPrev = (root: HTMLElement): HTMLElement =>
   root.querySelector(`[data-id="prev"]`) ?? document.createElement("button");
@@ -114,7 +114,7 @@ export const extractPrev = (root: HTMLElement): HTMLElement =>
 /**
  * 「この設定にする」ボタンを抽出する
  * @param root 抽出対象となるルート要素
- * @return 抽出結果
+ * @returns 抽出結果
  */
 export const extractConfigChange = (root: HTMLElement): HTMLElement =>
   root.querySelector(`[data-id="configChange"]`) ??

@@ -7,7 +7,7 @@ import { shouldPilotSkill } from "../captions";
 /**
  * パイロットスキル発動を推奨
  * @param props イベントプロパティ
- * @return ストーリーが完了したら発火するPromise
+ * @returns ストーリーが完了したら発火するPromise
  */
 export async function doPilotSkill(
   props: Readonly<CustomBattleEventProps>,

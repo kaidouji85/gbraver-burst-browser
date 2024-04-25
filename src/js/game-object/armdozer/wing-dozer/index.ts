@@ -17,7 +17,7 @@ type WingDozerCreatorParams = ResourcesContainer &
 /**
  * プレイヤー側 ウィングドーザを生成する
  * @param params 生成パラメータ
- * @return 生成結果
+ * @returns 生成結果
  */
 export function PlayerWingDozer(params: WingDozerCreatorParams): WingDozer {
   const { resources } = params;
@@ -28,7 +28,7 @@ export function PlayerWingDozer(params: WingDozerCreatorParams): WingDozer {
 /**
  * 敵側 ウィングドーザを生成する
  * @param params 生成パラメータ
- * @return 生成結果
+ * @returns 生成結果
  */
 export function EnemyWingDozer(params: WingDozerCreatorParams): WingDozer {
   const { resources } = params;

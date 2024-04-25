@@ -15,7 +15,7 @@ export type PropsCreatorParams = ResourcesContainer &
 /**
  * BatteryEnchantmentPropsを生成する
  * @param params 生成パラメータ
- * @return 生成したBatteryEnchantmentProps
+ * @returns 生成したBatteryEnchantmentProps
  */
 export function createBatteryEnchantmentProps(
   params: PropsCreatorParams,

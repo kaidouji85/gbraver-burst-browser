@@ -12,7 +12,7 @@ export type GenesisBraverSounds = {
 /**
  * ジェネシスブレイバー効果音を生成する
  * @param resources リソース管理オブジェクト
- * @return 生成結果
+ * @returns 生成結果
  */
 export function createGenesisBraverSounds(
   resources: Resources,

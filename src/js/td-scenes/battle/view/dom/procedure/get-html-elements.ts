@@ -3,7 +3,7 @@ import { DOMLayerProps } from "../props";
 /**
  * シーンに追加するHTML要素群を取得する
  * @param props レイヤープロパティ
- * @return シーンに追加するHTML要素群
+ * @returns シーンに追加するHTML要素群
  */
 export function getHTMLElements(props: DOMLayerProps): HTMLElement[] {
   return [

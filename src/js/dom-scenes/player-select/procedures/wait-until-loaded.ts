@@ -3,7 +3,7 @@ import { PlayerSelectProps } from "../props";
 /**
  * リソース読み込みが完了するまで待つ
  * @param props シーンプロパティ
- * @return 読み込み完了したら発火するPromise
+ * @returns 読み込み完了したら発火するPromise
  */
 export async function waitUntilLoaded(
   props: Readonly<PlayerSelectProps>,

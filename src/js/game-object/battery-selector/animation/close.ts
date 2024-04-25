@@ -6,7 +6,7 @@ import { BatterySelectorAnimationProps } from "./animation-props";
 /**
  * バッテリーセレクタを閉じる
  * @param props アニメーションプロパティ
- * @return アニメーション
+ * @returns アニメーション
  */
 export function close(props: BatterySelectorAnimationProps): Animate {
   const { model } = props;

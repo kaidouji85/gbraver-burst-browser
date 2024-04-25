@@ -6,7 +6,7 @@ import { LeadLineModel } from "../model/lead-line-model";
 /**
  * 引き出し線を消す
  * @param model モデル
- * @return アニメーション
+ * @returns アニメーション
  */
 export function hidden(model: LeadLineModel): Animate {
   return onStart(() => {

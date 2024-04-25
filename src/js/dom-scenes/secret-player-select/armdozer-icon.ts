@@ -55,7 +55,7 @@ export class ArmdozerIcon {
 
   /**
    * 画像読み込みが完了するまで待つ
-   * @return 読み込みが完了したら発火するPromise
+   * @returns 読み込みが完了したら発火するPromise
    */
   async waitUntilLoaded(): Promise<void> {
     await this.#waitImageLoaded;

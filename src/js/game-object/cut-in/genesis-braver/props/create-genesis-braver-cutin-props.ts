@@ -11,7 +11,7 @@ export type PropsCreatorParams = {
 /**
  * GenesisBraverCutInPropsを生成する
  * @param params 生成パラメータ
- * @return 生成結果
+ * @returns 生成結果
  */
 export function createGenesisBraverCutInProps(
   params: PropsCreatorParams,

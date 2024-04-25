@@ -12,7 +12,7 @@ const OPACITY = 0.8;
 /**
  * バッテリーセレクタの引き出し線を生成する
  * @param gameObjectAction ゲームオブジェクトアクション
- * @return 引き出し線
+ * @returns 引き出し線
  */
 export function batterySelectorLeadLine(
   gameObjectAction: Observable<GameObjectAction>,
@@ -24,7 +24,7 @@ export function batterySelectorLeadLine(
 /**
  * バーストボタンの引き出し線を生成する
  * @param gameObjectAction ゲームオブジェクトアクション
- * @return 引き出し線
+ * @returns 引き出し線
  */
 export function burstButtonLeadLine(
   gameObjectAction: Observable<GameObjectAction>,
@@ -36,7 +36,7 @@ export function burstButtonLeadLine(
 /**
  * パイロットボタンの引き出し線を生成する
  * @param gameObjectAction ゲームオブジェクトアクション
- * @return 引き出し線
+ * @returns 引き出し線
  */
 export function pilotButtonLeadLine(
   gameObjectAction: Observable<GameObjectAction>,

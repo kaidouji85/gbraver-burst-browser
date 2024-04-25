@@ -16,7 +16,7 @@ export default {
 /**
  * バーストボタン生成関数
  * @param params 生成パラメータ
- * @return バーストボタン
+ * @returns バーストボタン
  */
 type BurstButtonGenerator = (params: BurstButtonCreatorParams) => BurstButton;
 

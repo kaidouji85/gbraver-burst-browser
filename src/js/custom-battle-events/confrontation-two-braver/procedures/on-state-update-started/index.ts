@@ -8,7 +8,7 @@ import { isYuuyaSkillActivated } from "./is-yuuya-skill-activated";
  * ゲームステート更新開始イベント
  * 状況に応じてイベントステートを更新する
  * @param props イベントプロパティ
- * @return 更新後のイベントステート
+ * @returns 更新後のイベントステート
  */
 export function onStateUpdateStarted(
   props: Readonly<StateUpdateStarted & ConfrontationTwoBraverProps>,

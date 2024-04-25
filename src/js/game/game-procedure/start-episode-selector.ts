@@ -10,7 +10,7 @@ import { getEpisodes } from "./get-episodes";
  * エピソードセレクタ画面を開始するヘルパー関数
  * @param props ゲームプロパティ
  * @param initialSelectedEpisodeID 初期選択エピソードID
- * @return 処理が完了したら発火するPromise
+ * @returns 処理が完了したら発火するPromise
  */
 export async function startEpisodeSelector(
   props: Readonly<GameProps>,

@@ -35,7 +35,7 @@ export class GenesisBraverHUD implements HUDArmdozerObjects {
 /**
  * プレイヤー ジェネシスブレイバーHUD を生成する
  * @param params 生成パラメータ
- * @return 生成結果
+ * @returns 生成結果
  */
 export function playerGenesisBraverHUD(
   params: HUDLayerObjectCreatorParams,
@@ -50,7 +50,7 @@ export function playerGenesisBraverHUD(
 /**
  * 敵 ジェネシスブレイバーHUD を生成する
  * @param params 生成パラメータ
- * @return 生成結果
+ * @returns 生成結果
  */
 export function enemyGenesisBraverHUD(
   params: HUDLayerObjectCreatorParams,

@@ -9,7 +9,7 @@ import { scrollRightMessages } from "../../scroll-messages";
 /**
  * ストーリー バースト、パイロットスキルが使えないのでバッテリー変更なし
  * @param props イベントプロパティ
- * @return ストーリーが完了したら発火するPromise
+ * @returns ストーリーが完了したら発火するPromise
  */
 export const canNotChangeBattery = async (props: CustomBattleEventProps) => {
   activeRightMessageWindowWithFace(props, "Shinya");

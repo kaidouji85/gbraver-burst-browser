@@ -23,7 +23,7 @@ export interface ShinBraverView {
 
   /**
    * Sceneに追加するThree.jsオブジェクトを取得する
-   * @return 取得結果
+   * @returns 取得結果
    */
   getObject3D(): THREE.Object3D;
 

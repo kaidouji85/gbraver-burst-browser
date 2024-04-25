@@ -6,7 +6,7 @@ import { ShinBraverAnimationProps } from "./animation-props";
 /**
  * 気をつけ -> 立ち
  * @param props アニメーションプロパティ
- * @return アニメーション
+ * @returns アニメーション
  */
 export function uprightToStand(props: ShinBraverAnimationProps): Animate {
   const { model, sounds, se } = props;

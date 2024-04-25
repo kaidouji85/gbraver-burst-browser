@@ -60,7 +60,7 @@ export type BattleScenePropsCreatorParams = BGMManagerContainer &
 /**
  * 戦闘シーンプロパティを生成する
  * @param params パラメータ
- * @return 生成結果
+ * @returns 生成結果
  */
 export function createBattleSceneProps(
   params: BattleScenePropsCreatorParams,

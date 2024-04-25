@@ -10,7 +10,7 @@ import { MailVerifiedIncompleteProps } from "../props";
 /**
  * メール認証未完了画面のプロパティを生成する
  * @param mailAddress メールアドレス
- * @return 生成結果
+ * @returns 生成結果
  */
 export function createMailVerifiedIncompleteProps(
   mailAddress: string,

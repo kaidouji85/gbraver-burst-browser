@@ -7,7 +7,7 @@ import { onBatteryPush } from "./on-battery-push";
 /**
  * イベントリスナをバインドする
  * @param props 画面プロパティ
- * @return バインドしたイベントリスナのアンサブスクライバ
+ * @returns バインドしたイベントリスナのアンサブスクライバ
  */
 export function bindEventListeners(
   props: BatteryButtonProps,

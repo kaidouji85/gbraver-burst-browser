@@ -46,7 +46,7 @@ export type PropsCreatorParams = ResourcesContainer & SEPlayerContainer;
 /**
  * 設定変更通知ダイアログプロパティを生成する
  * @param params 生成パラメータ
- * @return 生成したダイアログプロパティ
+ * @returns 生成したダイアログプロパティ
  */
 export function createConfigChangedDialogProps(
   params: PropsCreatorParams,

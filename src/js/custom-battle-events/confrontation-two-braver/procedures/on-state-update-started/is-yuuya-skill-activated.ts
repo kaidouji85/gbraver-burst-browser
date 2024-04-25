@@ -3,7 +3,7 @@ import { StateUpdateStarted } from "../../../../td-scenes/battle/custom-battle-e
 /**
  * ユウヤがスキルを発動したかどうかを判定する
  * @param props カスタムバトルイベントプロパティ
- * @return ユウヤがスキルを発動したかどうか
+ * @returns ユウヤがスキルを発動したかどうか
  */
 export function isYuuyaSkillActivated(
   props: Readonly<StateUpdateStarted>,

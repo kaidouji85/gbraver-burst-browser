@@ -30,7 +30,7 @@ export type TouchRaycaster = {
  * @param event タッチベント
  * @param rendererDOM レンダラがバインドされているHTML要素
  * @param camera カメラ
- * @return タッチイベントから作成したレイキャスト
+ * @returns タッチイベントから作成したレイキャスト
  */
 export function createTouchEventRaycaster(
   event: TouchEvent,

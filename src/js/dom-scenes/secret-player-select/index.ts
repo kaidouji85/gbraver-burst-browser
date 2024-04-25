@@ -43,7 +43,7 @@ export class SecretPlayerSelect implements DOMScene {
 
   /**
    * 本シーンの読みこみが完了するまで待つ
-   * @return 読み込みが完了したら発火するPromise
+   * @returns 読み込みが完了したら発火するPromise
    */
   async waitUntilLoaded(): Promise<void> {
     await Promise.all([
@@ -54,7 +54,7 @@ export class SecretPlayerSelect implements DOMScene {
 
   /**
    * 決定通知
-   * @return 決定通知ストリーム
+   * @returns 決定通知ストリーム
    */
   notifyOK(): Observable<PlayerSelection> {
     return this.#props.ok;
@@ -62,7 +62,7 @@ export class SecretPlayerSelect implements DOMScene {
 
   /**
    * 戻る通知
-   * @return 戻る通知ストリーム
+   * @returns 戻る通知ストリーム
    */
   notifyPrev(): Observable<void> {
     return this.#props.prev;

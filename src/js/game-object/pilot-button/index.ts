@@ -20,7 +20,7 @@ export type PilotButtonCreatorParams = ResourcesContainer &
 /**
  * シンヤ パイロットボタン を生成する
  * @param params 生成パラメータ
- * @return パイロットボタン
+ * @returns パイロットボタン
  */
 export function shinyaPilotButton(
   params: PilotButtonCreatorParams,
@@ -33,7 +33,7 @@ export function shinyaPilotButton(
 /**
  * ガイ パイロットボタン を生成する
  * @param params 生成パラメータ
- * @return パイロットボタン
+ * @returns パイロットボタン
  */
 export function gaiPilotButton(params: PilotButtonCreatorParams): PilotButton {
   const { resources } = params;
@@ -44,7 +44,7 @@ export function gaiPilotButton(params: PilotButtonCreatorParams): PilotButton {
 /**
  * ライト パイロットボタン を生成する
  * @param params 生成パラメータ
- * @return パイロットボタン
+ * @returns パイロットボタン
  */
 export function raitoPilotButton(
   params: PilotButtonCreatorParams,
@@ -57,7 +57,7 @@ export function raitoPilotButton(
 /**
  * ツバサ パイロットボタン を生成する
  * @param params 生成パラメータ
- * @return パイロットボタン
+ * @returns パイロットボタン
  */
 export function tsubasaPilotButton(
   params: PilotButtonCreatorParams,
@@ -71,7 +71,7 @@ export function tsubasaPilotButton(
  * ユウヤ パイロットボタン を生成する
  * @param resources リソース管理オブジェクト
  * @param gameObjectAction ゲームオブジェクトアクション
- * @return パイロットボタン
+ * @returns パイロットボタン
  */
 export function yuuyaPilotButton(
   params: PilotButtonCreatorParams,

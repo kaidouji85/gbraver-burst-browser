@@ -5,7 +5,7 @@ import { playerPilotOnlyShout } from "../../pilot-shout";
 /**
  * 最初の戦闘 シンヤ 叫び
  * @param props イベントプロパティ
- * @return アニメーション
+ * @returns アニメーション
  */
 export const shinyaShoutWhenFirstBattle = (
   props: Readonly<CustomBattleEventProps>,

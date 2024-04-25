@@ -8,7 +8,7 @@ import { CommandCanceled } from "../custom-battle-event";
  * 実行結果としてコマンドキャンセル情報を返す
  * @param props 戦闘シーンプロパティ
  * @param battery バッテリーコマンド
- * @return コマンドキャンセル情報
+ * @returns コマンドキャンセル情報
  */
 export async function doBatteryEventIfNeeded(
   props: Readonly<BattleSceneProps>,

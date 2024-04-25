@@ -50,7 +50,7 @@ export class PrivateMatchGuestDialog implements DOMDialog {
 
   /**
    * ダイアログ閉じる通知
-   * @return 通知ストリーム
+   * @returns 通知ストリーム
    */
   notifyDialogClosed(): Observable<void> {
     return this.#props.dialogClosed;
@@ -59,7 +59,7 @@ export class PrivateMatchGuestDialog implements DOMDialog {
   /**
    * プライベートマッチ開始の通知
    * ユーザが入力したルームIDはストリームのデータとして渡す
-   * @return 通知ストリーム
+   * @returns 通知ストリーム
    */
   notifyPrivateMatchStart(): Observable<string> {
     return this.#props.privateMatchStart;

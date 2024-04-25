@@ -20,7 +20,7 @@ export type YuuyaAnimationParam = YuuyaAnimationParamX<PilotSkill>;
 /**
  * ユウヤ パイロットスキルアニメーション
  * @param param パラメータ
- * @return アニメーション
+ * @returns アニメーション
  */
 export function yuuyaAnimation(param: YuuyaAnimationParam): Animate {
   if (param.skill.type === "BatteryBoostSkill") {
@@ -39,7 +39,7 @@ const outDuration = 400;
 /**
  * ユウヤ バッテリーブースト アニメーション
  * @param param パラメータ
- * @return アニメーション
+ * @returns アニメーション
  */
 function yuuyaBatteryBoost(
   param: YuuyaAnimationParamX<BatteryBoostSkill>,

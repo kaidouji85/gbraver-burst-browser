@@ -7,7 +7,7 @@ import type { ReflectAnimationParam } from "./animation-param";
  * 電撃バリア
  *
  * @param param パラメータ
- * @return アニメーション
+ * @returns アニメーション
  */
 export function lightning(param: ReflectAnimationParam): Animate {
   return all(
@@ -29,7 +29,7 @@ export function lightning(param: ReflectAnimationParam): Animate {
  * 電撃バリア 死亡
  *
  * @param param パラメータ
- * @return アニメーション
+ * @returns アニメーション
  */
 export function deathLightning(param: ReflectAnimationParam): Animate {
   return all(

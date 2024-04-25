@@ -66,7 +66,7 @@ export type BurstAnimationParam = BurstAnimationParamX<
  *
  * @param props 戦闘シーンプロパティ
  * @param gameState ゲームステート
- * @return バーストアニメーションパラメータ
+ * @returns バーストアニメーションパラメータ
  */
 export function toBurstAnimationParam(
   props: StateAnimationProps,

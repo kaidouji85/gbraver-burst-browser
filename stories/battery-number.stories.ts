@@ -15,7 +15,7 @@ export default {
  * バッテリーナンバーのストーリー
  * @param generator バッテリーナンバー生成関数
  * @param fn バッテリーナンバー操作関数
- * @return story
+ * @returns story
  */
 const batteryNumberStory =
   (
@@ -37,7 +37,7 @@ const batteryNumberStory =
 /**
  * バッテリーナンバー表示
  * @param value バッテリー値
- * @return バッテリーナンバー操作関数
+ * @returns バッテリーナンバー操作関数
  */
 const popUp = (value: number) => (batteryNumber: BatteryNumber) => {
   delay(1000)

@@ -2,7 +2,7 @@ import type { YuuyaModel } from "./yuuya-model";
 
 /**
  * モデルの初期値を生成する
- * @return モデルの初期値
+ * @returns モデルの初期値
  */
 export function createInitialValue(): YuuyaModel {
   return {

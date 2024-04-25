@@ -18,7 +18,7 @@ import { yoroshikuOnegaiShimasu } from "../../yoroshiku-onegai-shimasu";
 /**
  * 序盤
  * @param props イベントプロパティ
- * @return 処理が完了したら発火するPromise
+ * @returns 処理が完了したら発火するPromise
  */
 export async function introduction(
   props: Readonly<CustomBattleEventProps>,

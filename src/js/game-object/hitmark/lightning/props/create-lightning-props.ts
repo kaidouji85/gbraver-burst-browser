@@ -15,7 +15,7 @@ export type PropsCreatorParams = ResourcesContainer &
 /**
  * 電撃ヒットマークプロパティを生成する
  * @param params 生成パラメータ
- * @return 生成結果
+ * @returns 生成結果
  */
 export function createLightningProps(
   params: PropsCreatorParams,

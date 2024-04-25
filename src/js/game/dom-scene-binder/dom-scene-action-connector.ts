@@ -10,7 +10,7 @@ import type { GameAction } from "../game-actions";
  * @template X シーンのデータ型
  * @param scene DOMシーン
  * @param gameAction ゲームアクションストリーム
- * @return ゲームションションのアンサブスクライブ
+ * @returns ゲームションションのアンサブスクライブ
  */
 export type DOMSceneActionConnector<X extends DOMScene> = (
   scene: X,

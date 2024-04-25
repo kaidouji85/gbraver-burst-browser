@@ -22,7 +22,7 @@ export type ShinBraverBurst<BURST extends Burst> = BurstAnimationParamX<
  * シンブレイバーのバーストアニメーション
  *
  * @param param バーストアニメーションパラメータ
- * @return バーストアニメーション
+ * @returns バーストアニメーション
  */
 export function shinBraverBurst(param: ShinBraverBurst<Burst>): Animate {
   if (param.burst.type === "RecoverBattery") {
@@ -37,7 +37,7 @@ export function shinBraverBurst(param: ShinBraverBurst<Burst>): Animate {
  * バッテリー回復バースト
  *
  * @param param アニメーションパラメータ
- * @return アニメーション
+ * @returns アニメーション
  */
 function recoverBattery(param: ShinBraverBurst<RecoverBattery>): Animate {
   return all(

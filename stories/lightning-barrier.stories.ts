@@ -9,7 +9,7 @@ export default {
 /**
  * 電撃バリアストーリー
  * @param fn 電撃バリア操作関数
- * @return story
+ * @returns story
  */
 const lightningBarrierStory =
   (fn: (lightningBarrier: LightningBarrierGameEffect) => void) => () => {

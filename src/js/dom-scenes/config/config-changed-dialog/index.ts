@@ -54,7 +54,7 @@ export class ConfigChangedDialog {
   /**
    * ルートのHTML要素を取得する
    *
-   * @return 取得結果
+   * @returns 取得結果
    */
   getRootHTMLElement(): HTMLElement {
     return this.#props.root;
@@ -63,7 +63,7 @@ export class ConfigChangedDialog {
   /**
    * ダイアログ閉じる通知
    *
-   * @return 通知ストリーム
+   * @returns 通知ストリーム
    */
   notifyClosed(): Observable<void> {
     return this.#props.closeStream;
@@ -72,7 +72,7 @@ export class ConfigChangedDialog {
   /**
    * 設定変更受け入れ通知
    *
-   * @return 通知ストリーム
+   * @returns 通知ストリーム
    */
   notifyAcceptance(): Observable<void> {
     return this.#props.acceptStream;
@@ -81,7 +81,7 @@ export class ConfigChangedDialog {
   /**
    * 設定変更破棄通知
    *
-   * @return 通知ストリーム
+   * @returns 通知ストリーム
    */
   notifyDiscard(): Observable<void> {
     return this.#props.discardStream;

@@ -54,7 +54,7 @@ export type PropsCreatorParams = ResourcesContainer & SEPlayerContainer;
 /**
  * 難易度選択ダイアログプロパティを生成する
  * @param params 生成パラメータ
- * @return 生成したプロパティ
+ * @returns 生成したプロパティ
  */
 export function createDifficultyDialogProps(
   params: PropsCreatorParams,

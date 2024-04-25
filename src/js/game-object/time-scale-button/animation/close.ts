@@ -6,7 +6,7 @@ import { TimeScaleAnimationProps } from "./animation-props";
 /**
  * ボタンを非表示にする
  * @param props アニメーションプロパティ
- * @return アニメーション
+ * @returns アニメーション
  */
 export function close(props: TimeScaleAnimationProps): Animate {
   const { model } = props;

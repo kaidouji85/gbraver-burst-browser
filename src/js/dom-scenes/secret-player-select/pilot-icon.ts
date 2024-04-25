@@ -34,7 +34,7 @@ export class PilotIcon {
 
   /**
    * ルートHTML要素を取得する
-   * @return 取得結果
+   * @returns 取得結果
    */
   getRootHTMLElement(): HTMLElement {
     return this.#root;
@@ -42,7 +42,7 @@ export class PilotIcon {
 
   /**
    * ボタン押下通知
-   * @return 通知ストリーム
+   * @returns 通知ストリーム
    */
   notifyPush(): Observable<unknown> {
     return domPushStream(this.#root).pipe(
@@ -55,7 +55,7 @@ export class PilotIcon {
 
   /**
    * 画像読み込みが完了するまで待つ
-   * @return 読み込みが完了したら発火するPromise
+   * @returns 読み込みが完了したら発火するPromise
    */
   async waitUntilLoaded(): Promise<void> {
     await this.#waitImageLoaded;

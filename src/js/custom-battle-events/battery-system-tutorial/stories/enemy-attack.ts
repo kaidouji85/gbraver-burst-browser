@@ -11,7 +11,7 @@ import { scrollLeftMessages, scrollRightMessages } from "../../scroll-messages";
  * ストーリー 敵攻撃回避
  *
  * @param props イベントプロパティ
- * @return ストーリーが完了したら発火するPromise
+ * @returns ストーリーが完了したら発火するPromise
  */
 export async function enemyAttackMiss(props: CustomBattleEventProps) {
   activeRightMessageWindowWithFace(props, "Shinya");
@@ -29,7 +29,7 @@ export async function enemyAttackMiss(props: CustomBattleEventProps) {
  * ストーリー 敵攻撃ガード
  *
  * @param props イベントプロパティ
- * @return ストーリーが完了したら発火するPromise
+ * @returns ストーリーが完了したら発火するPromise
  */
 export async function enemyAttackGuarded(props: CustomBattleEventProps) {
   activeRightMessageWindowWithFace(props, "Shinya");
@@ -50,7 +50,7 @@ export async function enemyAttackGuarded(props: CustomBattleEventProps) {
  * ストーリー 敵攻撃ヒット
  *
  * @param props イベントプロパティ
- * @return ストーリーが完了したら発火するPromise
+ * @returns ストーリーが完了したら発火するPromise
  */
 export async function enemyAttackHit(props: CustomBattleEventProps) {
   activeRightMessageWindowWithFace(props, "Shinya");
@@ -72,7 +72,7 @@ export async function enemyAttackHit(props: CustomBattleEventProps) {
  *
  * @param props イベントプロパティ
  * @param battleResult 戦闘結果
- * @return ストーリーが完了したら発火するPromise
+ * @returns ストーリーが完了したら発火するPromise
  */
 export async function enemyAttack(
   props: CustomBattleEventProps,

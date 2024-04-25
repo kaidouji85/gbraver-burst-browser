@@ -17,7 +17,7 @@ import {
  * 引数のリソース管理オブジェクトで読み込まれたものはスキップする
  * @param resources 読み込んだリソース
  * @param configs フルフリース設定
- * @return リソース読み込みオブジェクト
+ * @returns リソース読み込みオブジェクト
  */
 function resourceDifferentialLoad(
   resources: Resources,
@@ -45,7 +45,7 @@ function resourceDifferentialLoad(
  * 開発中素材も含めたフルリソースの差分読み込み
  * 引数のリソース管理オブジェクトで読み込まれたものはスキップする
  * @param resources リソース管理オブジェクト
- * @return リソース読み込みオブジェクト
+ * @returns リソース読み込みオブジェクト
  */
 export function fullResourceDifferentialLoad(
   resources: Resources,
@@ -57,7 +57,7 @@ export function fullResourceDifferentialLoad(
  * フルリソースの差分読み込み
  * 引数のリソース管理オブジェクトで読み込まれたものはスキップする
  * @param resources リソース管理オブジェクト
- * @return リソース読み込みオブジェクト
+ * @returns リソース読み込みオブジェクト
  */
 export function developingFullResourceDifferentialLoad(
   resources: Resources,

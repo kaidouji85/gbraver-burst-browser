@@ -7,7 +7,7 @@ import { GenesisBraverAnimationProps } from "./animation-props";
 /**
  * ガード
  * @param props アニメーションプロパティ
- * @return アニメーション
+ * @returns アニメーション
  */
 export function guard(props: GenesisBraverAnimationProps): Animate {
   const { model } = props;

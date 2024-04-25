@@ -35,7 +35,7 @@ export class YuuyaHUD implements HUDPilotObjects {
 /**
  * プレイヤー側 ユウヤHUD
  * @param params 生成パラメータ
- * @return ユウヤHUD
+ * @returns ユウヤHUD
  */
 export function playerYuuyaHUD(params: HUDLayerObjectCreatorParams): YuuyaHUD {
   const { player } = params;
@@ -45,7 +45,7 @@ export function playerYuuyaHUD(params: HUDLayerObjectCreatorParams): YuuyaHUD {
 /**
  * 敵側 ユウヤHUD
  * @param params 生成パラメータ
- * @return ユウヤHUD
+ * @returns ユウヤHUD
  */
 export function enemyYuuyaHUD(params: HUDLayerObjectCreatorParams): YuuyaHUD {
   const { enemy } = params;

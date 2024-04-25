@@ -15,7 +15,7 @@ export type WingDozerCutInCreatorParams = ResourcesContainer & {
 /**
  * プレイヤー側 ウィングドーザ カットイン
  * @param params 生成パラメータ
- * @return 生成結果
+ * @returns 生成結果
  */
 export function playerWingDozerCutIn(
   params: WingDozerCutInCreatorParams,
@@ -28,7 +28,7 @@ export function playerWingDozerCutIn(
 /**
  * 敵側 ウィングドーザ カットイン
  * @param params 生成パラメータ
- * @return 生成結果
+ * @returns 生成結果
  */
 export function enemyWingDozerCutIn(
   params: WingDozerCutInCreatorParams,

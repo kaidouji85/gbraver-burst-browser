@@ -11,7 +11,7 @@ import { PlayerTurnStartView } from "./view/player-turn-start-view";
  *
  * @param resources リソース管理オブジェクト
  * @param gameObjectAction ゲームオブジェクトアクション
- * @return 生成結果
+ * @returns 生成結果
  */
 export function playerTurnStart(
   resources: Resources,
@@ -26,7 +26,7 @@ export function playerTurnStart(
  *
  * @param resources リソース管理オブジェクト
  * @param gameObjectAction ゲームオブジェクトアクション
- * @return 生成結果
+ * @returns 生成結果
  */
 export function enemyTurnStart(
   resources: Resources,

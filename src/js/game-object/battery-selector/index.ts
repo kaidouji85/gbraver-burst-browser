@@ -51,7 +51,7 @@ export class BatterySelector {
   /**
    * バッテリーセレクターを開く
    * @param param パラメータ
-   * @return アニメーション
+   * @returns アニメーション
    */
   open(param: BatterySelectorOpenParam): Animate {
     return open(this.#props, param);
@@ -59,7 +59,7 @@ export class BatterySelector {
 
   /**
    * バッテリー決定アニメーション
-   * @return アニメーション
+   * @returns アニメーション
    */
   decide(): Animate {
     return decide(this.#props);
@@ -67,7 +67,7 @@ export class BatterySelector {
 
   /**
    * バッテリーセレクタを閉じる
-   * @return アニメーション
+   * @returns アニメーション
    */
   close(): Animate {
     return close(this.#props);
@@ -76,7 +76,7 @@ export class BatterySelector {
   /**
    * バッテリープラス
    * メモリ最大値の場合は何もしない
-   * @return 処理が完了したら発火するPromise
+   * @returns 処理が完了したら発火するPromise
    */
   async batteryPlus(): Promise<void> {
     await batteryPlus(this.#props);
@@ -85,7 +85,7 @@ export class BatterySelector {
   /**
    * バッテリーマイナス
    * メモリ最小値の場合は何もしない
-   * @return 処理が完了したら発火するPromise
+   * @returns 処理が完了したら発火するPromise
    */
   async batteryMinus(): Promise<void> {
     await batteryMinus(this.#props);
@@ -95,7 +95,7 @@ export class BatterySelector {
    * 無音でバッテリー値を設定する
    * @param battery バッテリー設定値
    * @param duration ボタンを押す間隔（ミリ秒）
-   * @return 処理が完了したら発火するPromise
+   * @returns 処理が完了したら発火するPromise
    */
   async toBatterySilently(battery: number, duration = 200): Promise<void> {
     await toBatterySilently(this.#props, battery, duration);
@@ -103,7 +103,7 @@ export class BatterySelector {
 
   /**
    * 現在のバッテリー値を取得する
-   * @return 取得結果
+   * @returns 取得結果
    */
   getBattery(): number {
     return this.#props.model.battery;
@@ -119,7 +119,7 @@ export class BatterySelector {
 
   /**
    * 操作不可能であるか否かを判定する、trueで操作不可能である
-   * @return 判定結果
+   * @returns 判定結果
    */
   isDisabled(): boolean {
     return this.#props.model.disabled;
@@ -127,7 +127,7 @@ export class BatterySelector {
 
   /**
    * シーンに追加するthree.jsオブジェクトを取得する
-   * @return 取得結果
+   * @returns 取得結果
    */
   getObject3D(): THREE.Object3D {
     return this.#props.view.getObject3D();
@@ -135,7 +135,7 @@ export class BatterySelector {
 
   /**
    * 決定ボタン押下ストリーム
-   * @return 通知ストリーム
+   * @returns 通知ストリーム
    */
   notifyDecision(): Observable<Event> {
     return this.#props.decidePush;
@@ -143,7 +143,7 @@ export class BatterySelector {
 
   /**
    * バッテリープラスボタン押下ストリーム
-   * @return 通知ストリーム
+   * @returns 通知ストリーム
    */
   notifyBatteryPlus(): Observable<void> {
     return this.#props.batteryPlusPush;
@@ -151,7 +151,7 @@ export class BatterySelector {
 
   /**
    * バッテリーマイナスボタン押下ストリーム
-   * @return 通知ストリーム
+   * @returns 通知ストリーム
    */
   notifyBatteryMinus(): Observable<void> {
     return this.#props.batteryMinusPush;

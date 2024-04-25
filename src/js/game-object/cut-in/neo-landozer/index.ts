@@ -15,7 +15,7 @@ export type NeoLandozerCutInCreatorParams = ResourcesContainer & {
 /**
  * プレイヤー側 ネオランドーザ カットイン
  * @param params 生成パラメータ
- * @return 生成結果
+ * @returns 生成結果
  */
 export function playerNeoLandozerCutIn(
   params: NeoLandozerCutInCreatorParams,
@@ -28,7 +28,7 @@ export function playerNeoLandozerCutIn(
 /**
  * 敵側 ネオランドーザ カットイン
  * @param params 生成パラメータ
- * @return 生成結果
+ * @returns 生成結果
  */
 export function enemyNeoLandozerCutIn(
   params: NeoLandozerCutInCreatorParams,

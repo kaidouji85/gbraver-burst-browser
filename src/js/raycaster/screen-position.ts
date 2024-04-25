@@ -7,7 +7,7 @@ import * as THREE from "three";
  * @param clientY マウス、指のY座標
  * @param canvasWidth 画面幅
  * @param canvasHeight 画面高
- * @return three.js画面上でのマウス、指の座標
+ * @returns three.js画面上でのマウス、指の座標
  */
 export function getScreenPosition(
   clientX: number,
