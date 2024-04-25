@@ -7,7 +7,7 @@ export class StorybookResourceRoot implements ResourceRoot {
   /**
    * リソースベースパスを取得する
    *
-   *  @return 取得結果
+   *  @returns 取得結果
    */
   get(): string {
     return "";

@@ -21,14 +21,14 @@ type DOMCreatorParams = BGMManagerContainer &
  * HTML要素生成コールバック関数
  *
  * @param params 生成パラメータ
- * @return 生成したHTML要素
+ * @returns 生成したHTML要素
  */
 export type DOMCreator = (params: DOMCreatorParams) => HTMLElement;
 
 /**
  * HTML要素スタブのストーリー
  *
- * @return 表示するHTML要素
+ * @returns 表示するHTML要素
  */
 export type DOMStubStory = () => HTMLElement;
 
@@ -36,7 +36,7 @@ export type DOMStubStory = () => HTMLElement;
  *HTML要素スタブ
  *
  * @param creator HTML要素生成コールバック関数
- * @return ストーリー
+ * @returns ストーリー
  */
 export const domStub =
   (creator: DOMCreator): DOMStubStory =>

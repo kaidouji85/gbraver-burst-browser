@@ -15,7 +15,7 @@ export default {
  * バッテリー増強インジケータのストーリー
  * @param generator バッテリー増強インジケータ生成関数
  * @param fn バッテリー増強インジケータ操作関数
- * @return story
+ * @returns story
  */
 const batteryEnchantmentStory =
   (

@@ -18,7 +18,7 @@ export default {
  * ターンスタートのストーリー
  * @param generator ターンスタート生成関数
  * @param fn ターンスタート操作関数
- * @return story
+ * @returns story
  */
 const turnStartStory =
   (

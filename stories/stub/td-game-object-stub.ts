@@ -42,7 +42,7 @@ type Object3Ds = {
  * Object3D生成関数
  *
  * @param params パラメータ
- * @return シーンに追加するObject3D
+ * @returns シーンに追加するObject3D
  */
 type Object3DCreator = (params: Object3DCreatorParams) => Object3Ds;
 
@@ -94,7 +94,7 @@ export class TDGameObjectStub {
   /**
    * シーンを開始する
    *
-   * @return 実行結果
+   * @returns 実行結果
    */
   async start(): Promise<void> {
     const resourceRoot = new StorybookResourceRoot();
@@ -117,7 +117,7 @@ export class TDGameObjectStub {
   /**
    * レンダリング対象のHTML要素を取得する
    *
-   * @return レンダリング対象HTML要素
+   * @returns レンダリング対象HTML要素
    */
   domElement(): HTMLElement {
     return this._renderer.getRendererDOM();

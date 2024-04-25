@@ -15,7 +15,7 @@ export default {
  * 連続攻撃インジケータのストーリー
  * @param generator 連続攻撃インジケータ生成関数
  * @param fn 連続攻撃インジケータ操作関数
- * @return story
+ * @returns story
  */
 const continuousAttackStory =
   (

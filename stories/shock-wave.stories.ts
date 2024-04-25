@@ -15,7 +15,7 @@ export default {
  * 衝撃波ストーリー
  * @param generator 衝撃波生成オブジェクト
  * @param fn 衝撃波を操作する関数
- * @return story
+ * @returns story
  */
 const shockWaveStory =
   (

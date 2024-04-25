@@ -8,7 +8,7 @@ export default {
 /**
  * タイムスケールボタンのストーリー
  * @param fn タイムスケールボタン操作関数
- * @return story
+ * @returns story
  */
 const timeScaleButtonStory =
   (fn: (timeScaleButton: TimeScaleButton) => void) => () => {

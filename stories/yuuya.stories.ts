@@ -15,7 +15,7 @@ export default {
  * カットイン生成関数
  * @param resources リソース管理オブジェクト
  * @param gameObjectAction ゲームオブジェクトアクション
- * @return カットイン
+ * @returns カットイン
  */
 type CutInGenerator = (params: YuuyaCutInCreatorParams) => YuuyaCutIn;
 
@@ -23,7 +23,7 @@ type CutInGenerator = (params: YuuyaCutInCreatorParams) => YuuyaCutIn;
  * カットイン ストーリー
  * @param generator カットイン生成関数
  * @param fn カットイン操作関数
- * @return ルートHTML要素
+ * @returns ルートHTML要素
  */
 const cutInStory =
   (generator: CutInGenerator, fn: (cutIn: YuuyaCutIn) => void) =>

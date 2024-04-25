@@ -64,7 +64,7 @@ export type Object3DsGeneratorParams = ResourcesContainer & {
  * three.jsオブジェクトジェネレータ
  *
  * @param params パラメータ
- * @return スタブに追加するオブジェクト群
+ * @returns スタブに追加するオブジェクト群
  */
 export type Object3DsGenerator = (
   params: Object3DsGeneratorParams,
@@ -86,7 +86,7 @@ type StubParams = {
  * 静止画スタブ
  *
  * @param params パラメータ
- * @return storybookが利用するHTMLElement
+ * @returns storybookが利用するHTMLElement
  */
 export function stillImageStub(params: StubParams): HTMLElement {
   const renderer = new THREE.WebGLRenderer();

@@ -31,7 +31,7 @@ type Object3DParams = ResourcesContainer &
  * Object3D生成関数
  *
  * @param params パラメータ
- * @return シーンに追加するObject3D
+ * @returns シーンに追加するObject3D
  */
 export type Object3DCreator = (params: Object3DParams) => THREE.Object3D[];
 
@@ -83,7 +83,7 @@ export class HUDGameObjectStub {
   /**
    * シーンを開始する
    *
-   * @return 実行結果
+   * @returns 実行結果
    */
   async start(): Promise<void> {
     const resourceRoot = new StorybookResourceRoot();
@@ -104,7 +104,7 @@ export class HUDGameObjectStub {
   /**
    * レンダリング対象のHTML要素を取得する
    *
-   * @return {HTMLElement}
+   * @returns {HTMLElement}
    */
   domElement(): HTMLElement {
     return this._renderer.getRendererDOM();

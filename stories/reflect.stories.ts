@@ -18,7 +18,7 @@ export default {
  * ダメージ反射インジケータのストーリー
  * @param generator ダメージ反射インジケータ生成関数
  * @param fn ダメージ反射インジケータ操作関数
- * @return story
+ * @returns story
  */
 const reflectIndicatorStory =
   (
