@@ -23,7 +23,7 @@ type NeoLandozerBurst<BURST extends Burst> = BurstAnimationParamX<
  * ネオランドーザ バースト アニメーション
  *
  * @param param パラメータ
- * @return アニメーション
+ * @returns アニメーション
  */
 export function neoLandozerBurst(param: NeoLandozerBurst<Burst>): Animate {
   if (param.burst.type === "BuffPower") {
@@ -38,7 +38,7 @@ export function neoLandozerBurst(param: NeoLandozerBurst<Burst>): Animate {
  * ネオランドーザ バフパワー
  *
  * @param param パラメータ
- * @return アニメーション
+ * @returns アニメーション
  */
 function neoLandozerBuffPower(param: NeoLandozerBurst<BuffPower>): Animate {
   return all(

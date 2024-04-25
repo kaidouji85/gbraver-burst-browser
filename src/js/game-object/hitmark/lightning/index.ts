@@ -17,7 +17,7 @@ export type LightningCreatorParams = ResourcesContainer &
 /**
  * プレイヤー側 電撃ヒットマーク
  * @param params 生成パラメータ
- * @return 生成結果
+ * @returns 生成結果
  */
 export function playerLightning(params: LightningCreatorParams): Lightning {
   const { resources } = params;
@@ -28,7 +28,7 @@ export function playerLightning(params: LightningCreatorParams): Lightning {
 /**
  * 敵側 電撃ヒットマーク
  * @param params 生成パラメータ
- * @return 生成結果
+ * @returns 生成結果
  */
 export function enemyLightning(params: LightningCreatorParams): Lightning {
   const { resources } = params;

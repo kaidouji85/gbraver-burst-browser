@@ -8,7 +8,7 @@ import { shinyaMonologueWhenShinyaHasAdvantage } from "../../stories/shinya-mono
 /**
  * 条件を満たした場合、チャプター「シンヤ有利」を開始する
  * @param props イベントプロパティ
- * @return チャプターを開始した場合、trueを返す
+ * @returns チャプターを開始した場合、trueを返す
  */
 export async function startShinyaHasAdvantageIfNeeded(
   props: Readonly<CustomBattleEventProps & ConfrontationTwoBraverProps>,

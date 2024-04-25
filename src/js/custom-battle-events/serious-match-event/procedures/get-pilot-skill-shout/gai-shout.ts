@@ -5,7 +5,7 @@ import { PilotSkillShout } from "./pilot-skill-shout";
 /**
  * ガイ攻撃時の叫び
  * @param player プレイヤー情報
- * @return パイロット叫び情報
+ * @returns パイロット叫び情報
  */
 export const gaiAttackShout = (player: PlayerState): PilotSkillShout => ({
   face: "Gai",
@@ -14,7 +14,7 @@ export const gaiAttackShout = (player: PlayerState): PilotSkillShout => ({
 
 /**
  * ガイ防御時の叫び
- * @return パイロット叫び情報
+ * @returns パイロット叫び情報
  */
 export const gaiDefenseShout = (): PilotSkillShout => ({
   face: "Gai",

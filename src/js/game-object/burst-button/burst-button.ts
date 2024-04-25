@@ -54,7 +54,7 @@ export class BurstButton {
   /**
    * ボタンを表示する
    * @param canBurst バースト可能フラグ、trueでバースト可能
-   * @return アニメーション
+   * @returns アニメーション
    */
   open(canBurst: boolean): Animate {
     return open(this.#props, canBurst);
@@ -62,7 +62,7 @@ export class BurstButton {
 
   /**
    * 決定アニメーション
-   * @return アニメーション
+   * @returns アニメーション
    */
   decide(): Animate {
     return decide(this.#props);
@@ -70,7 +70,7 @@ export class BurstButton {
 
   /**
    * ボタンを非表示にする
-   * @return アニメーション
+   * @returns アニメーション
    */
   close(): Animate {
     return close(this.#props);
@@ -78,7 +78,7 @@ export class BurstButton {
 
   /**
    * three.jsオブジェクトを取得する
-   * @return 取得結果
+   * @returns 取得結果
    */
   getObject3D(): THREE.Object3D {
     return this.#props.view.getObject3D();
@@ -86,7 +86,7 @@ export class BurstButton {
 
   /**
    * ボタン押下通知
-   * @return 通知ストリーム
+   * @returns 通知ストリーム
    */
   notifyPressed(): Observable<Event> {
     return this.#props.pushButton;
@@ -102,7 +102,7 @@ export class BurstButton {
 
   /**
    * 操作不可能であるか否かを判定する
-   * @return trueで操作不可能
+   * @returns trueで操作不可能
    */
   isDisabled(): boolean {
     return this.#props.model.disabled;

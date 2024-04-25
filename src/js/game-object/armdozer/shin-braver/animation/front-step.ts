@@ -9,7 +9,7 @@ import { ShinBraverAnimationProps } from "./animation-props";
  * 避け -> 立ち
  * @param props アニメーションプロパティ
  * @param distance 移動距離を絶対値で指定する
- * @return アニメーション
+ * @returns アニメーション
  */
 export function frontStep(
   props: ShinBraverAnimationProps,

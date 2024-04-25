@@ -6,7 +6,7 @@ import { HUDLayerProps } from "../props";
 /**
  * 戦闘シーンアクション通知
  * @param props レイヤープロパティ
- * @return 通知ストリーム
+ * @returns 通知ストリーム
  */
 export function battleActionNotifier(
   props: HUDLayerProps,

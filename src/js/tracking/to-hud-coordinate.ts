@@ -7,7 +7,7 @@ import { HUDCoordinate, TDCoordinate } from "./coordinate";
  * @param tdCoordinate 3Dレイヤーの座標
  * @param camera 3Dレイヤーのカメラ
  * @param rendererDOM レンダリング対象のHTML要素
- * @return 変換結果
+ * @returns 変換結果
  */
 export function toHUDCoordinate(
   tdCoordinate: TDCoordinate,

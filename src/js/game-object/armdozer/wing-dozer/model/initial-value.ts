@@ -8,7 +8,7 @@ import type { WingDozerModel } from "./wing-dozer-model";
 /**
  * 初期値を生成する
  *
- * @return 生成した初期値
+ * @returns 生成した初期値
  */
 export function createInitialValue(): WingDozerModel {
   return {

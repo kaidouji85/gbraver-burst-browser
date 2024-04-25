@@ -16,7 +16,7 @@ import { wingDozerWin } from "./wing-dozer";
  * ゲームオーバアニメーション
  *
  * @param param アニメーションパラメータ
- * @return アニメーション
+ * @returns アニメーション
  */
 export function gameOverAnimation(param: GameOverParam): Animate {
   if (param.winnerTdArmdozer instanceof ShinBraverTD) {

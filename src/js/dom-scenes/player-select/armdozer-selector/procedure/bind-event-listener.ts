@@ -9,7 +9,7 @@ import { onPrevButtonPush } from "./on-prev-button-push";
 /**
  * イベントリスナを本コンポ年とに関連づける
  * @param props プロパティ
- * @return アンサブスクライバ
+ * @returns アンサブスクライバ
  */
 export function bindEventListener(
   props: Readonly<ArmdozerSelectorProps>,

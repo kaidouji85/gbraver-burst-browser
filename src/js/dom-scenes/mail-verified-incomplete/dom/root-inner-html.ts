@@ -7,7 +7,7 @@ import rootInnerHTMLTemplate from "./root-inner-html.hbs";
  *
  * @param ids data-idを集めたもの
  * @param mailAddress メールアドレス
- * @return ルート要素innerHTML
+ * @returns ルート要素innerHTML
  */
 export function rootInnerHTML(ids: DataIDs, mailAddress: string): string {
   return rootInnerHTMLTemplate({

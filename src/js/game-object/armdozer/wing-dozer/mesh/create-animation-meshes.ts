@@ -18,7 +18,7 @@ type Params = ResourcesContainer & {
 /**
  * アニメーション対応に対応したメッシュ群を生成する
  * @param params パラメータ
- * @return 生成結果
+ * @returns 生成結果
  */
 export function createAnimationMeshes(params: Params): AnimationMesh[] {
   const { animationType } = params;

@@ -6,7 +6,7 @@ import { BatterySelectorAnimationProps } from "./animation-props";
 /**
  * バッテリー決定アニメーション
  * @param props アニメーションプロパティ
- * @return アニメーション
+ * @returns アニメーション
  */
 export function decide(props: BatterySelectorAnimationProps): Animate {
   const { model, sounds, se } = props;

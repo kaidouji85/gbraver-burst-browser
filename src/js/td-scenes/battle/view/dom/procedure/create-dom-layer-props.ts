@@ -6,7 +6,7 @@ import { DOMLayerProps } from "../props";
 /**
  * DOMLayerPropsを生成する
  * @param params 生成パラメータ
- * @return 生成結果
+ * @returns 生成結果
  */
 export function createDOMLayerProps(
   params: BattleViewCreatorParams,

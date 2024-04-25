@@ -8,7 +8,7 @@ import { SoundConfig, SoundResource } from "./resource";
  * ボリュームには初期値として1がセットされる
  * @param resourceRoot リソースルート
  * @param config 音設定
- * @return 読み込み結果
+ * @returns 読み込み結果
  */
 export function loadSound(
   resourceRoot: ResourceRoot,

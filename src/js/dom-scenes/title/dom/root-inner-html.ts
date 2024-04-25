@@ -33,7 +33,7 @@ export type RootInnerHTMLParams = {
  * ルート要素のinnerHTML
  * @param ids data-idを集めたもの
  * @param params ids以外のパラメータ
- * @return innerHTML
+ * @returns innerHTML
  */
 export function rootInnerHTML(
   ids: DataIDs,

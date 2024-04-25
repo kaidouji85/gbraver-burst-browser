@@ -9,7 +9,7 @@ import { DamageIndicatorAnimationProps } from "./animation-props";
  *
  * @param props アニメーションプロパティ
  * @param damage ダメージ
- * @return アニメーション
+ * @returns アニメーション
  */
 export function popUp(
   props: DamageIndicatorAnimationProps,

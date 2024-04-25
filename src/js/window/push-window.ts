@@ -9,7 +9,7 @@ export type PushWindow = {
 /**
  * window押下ストリームを生成する
  *
- * @return window押下ストリーム
+ * @returns window押下ストリーム
  */
 export function pushWindowsStream(): Observable<PushWindow> {
   const click: Observable<PushWindow> = fromEvent<MouseEvent>(

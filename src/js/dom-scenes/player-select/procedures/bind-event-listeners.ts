@@ -11,7 +11,7 @@ import { onPilotSelectorPrev } from "./on-pilot-selector-prev";
 /**
  * シーンにイベントリスナをバインドする
  * @param props シーンプロパティ
- * @return アンサブスクライバ
+ * @returns アンサブスクライバ
  */
 export function bindEventListeners(
   props: Readonly<PlayerSelectProps>,

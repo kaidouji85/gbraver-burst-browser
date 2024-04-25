@@ -6,7 +6,7 @@ import { ShinBraverAnimationProps } from "./animation-props";
 /**
  * ストレートパンチ
  * @param props アニメーションプロパティ
- * @return アニメーション
+ * @returns アニメーション
  */
 export function straightPunch(props: ShinBraverAnimationProps): Animate {
   const { model } = props;

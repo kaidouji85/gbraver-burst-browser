@@ -24,7 +24,7 @@ export interface RecoverBatteryView {
   /**
    * シーンに追加するオブジェクトを取得する
    *
-   * @return オブジェクト
+   * @returns オブジェクト
    */
   getObject3D(): THREE.Object3D;
 }

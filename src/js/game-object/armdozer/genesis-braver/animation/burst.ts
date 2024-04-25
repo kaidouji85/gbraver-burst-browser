@@ -7,7 +7,7 @@ import { GenesisBraverAnimationProps } from "./animation-props";
 /**
  * バースト
  * @param props アニメーションプロパティ
- * @return アニメーション
+ * @returns アニメーション
  */
 export function burst(props: GenesisBraverAnimationProps): Animate {
   const { model, sounds, se } = props;

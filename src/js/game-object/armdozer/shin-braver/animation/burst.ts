@@ -7,7 +7,7 @@ import { ShinBraverAnimationProps } from "./animation-props";
 /**
  * バースト
  * @param props アニメーションプロパティ
- * @return アニメーション
+ * @returns アニメーション
  */
 export function burst(props: ShinBraverAnimationProps): Animate {
   const { model, sounds, se } = props;

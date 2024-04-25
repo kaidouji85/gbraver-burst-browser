@@ -25,7 +25,7 @@ export type GameOverParam = GameOverParamX<TDArmdozerObjects>;
  *
  * @param props 戦闘シーンプロパティ
  * @param gameOver ゲームオーバー情報
- * @return 変換結果
+ * @returns 変換結果
  */
 export function toGameOverParam(
   props: StateAnimationProps,

@@ -75,7 +75,7 @@ export class GenesisBraver
 
   /**
    * チャージ
-   * @return アニメーション
+   * @returns アニメーション
    */
   charge(): Animate {
     return charge(this.#props);
@@ -83,7 +83,7 @@ export class GenesisBraver
 
   /**
    * ストレートパンチ
-   * @return アニメーション
+   * @returns アニメーション
    */
   straightPunch(): Animate {
     return straightPunch(this.#props);
@@ -91,7 +91,7 @@ export class GenesisBraver
 
   /**
    * ストレートパンチ -> 立ち
-   * @return アニメーション
+   * @returns アニメーション
    */
   spToStand(): Animate {
     return spToStand(this.#props);
@@ -99,7 +99,7 @@ export class GenesisBraver
 
   /**
    * バースト
-   * @return アニメーション
+   * @returns アニメーション
    */
   burst(): Animate {
     return burst(this.#props);
@@ -107,7 +107,7 @@ export class GenesisBraver
 
   /**
    * バースト -> 立ち
-   * @return アニメーション
+   * @returns アニメーション
    */
   burstToStand(): Animate {
     return burstToStand(this.#props);

@@ -9,7 +9,7 @@ import type { Position } from "../position";
  * @param model モデル
  * @param position 移動先座標
  * @param duration 移動時間
- * @return アニメーション
+ * @returns アニメーション
  */
 export function move(
   model: Battle3DCameraModel,

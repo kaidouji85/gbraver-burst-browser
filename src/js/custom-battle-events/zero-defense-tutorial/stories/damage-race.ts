@@ -6,7 +6,7 @@ import { scrollLeftMessages } from "../../scroll-messages";
 /**
  * ストーリー ダメージレースイーブン
  * @param props イベントプロパティ
- * @return ストーリーが完了したら発火するPromise
+ * @returns ストーリーが完了したら発火するPromise
  */
 const damageRaceEven = async (props: CustomBattleEventProps) => {
   activeLeftMessageWindowWithFace(props, "Gai");
@@ -20,7 +20,7 @@ const damageRaceEven = async (props: CustomBattleEventProps) => {
 /**
  * ストーリー ダメージレース有利
  * @param props イベントプロパティ
- * @return ストーリーが完了したら発火するPromise
+ * @returns ストーリーが完了したら発火するPromise
  */
 const damageRaceAdvantage = async (props: CustomBattleEventProps) => {
   activeLeftMessageWindowWithFace(props, "Gai");
@@ -34,7 +34,7 @@ const damageRaceAdvantage = async (props: CustomBattleEventProps) => {
 /**
  * ストーリー ダメージレース不利
  * @param props イベントプロパティ
- * @return ストーリーが完了したら発火するPromise
+ * @returns ストーリーが完了したら発火するPromise
  */
 const damageRaceDisadvantage = async (props: CustomBattleEventProps) => {
   activeLeftMessageWindowWithFace(props, "Gai");
@@ -51,7 +51,7 @@ const damageRaceDisadvantage = async (props: CustomBattleEventProps) => {
  * @param props イベントプロパティ
  * @param playerHP プレイヤーHP
  * @param enemyHP 敵HP
- * @return ストーリーが完了したら発火するPromise
+ * @returns ストーリーが完了したら発火するPromise
  */
 export const damageRace = async (
   props: CustomBattleEventProps,

@@ -15,7 +15,7 @@ export type PropsCreatorParams = ResourcesContainer &
 /**
  * ダメージ半減 プロパティを生成する
  * @param params パラメータ
- * @return 生成結果
+ * @returns 生成結果
  */
 export function createDamageHalvedProps(
   params: PropsCreatorParams,

@@ -15,7 +15,7 @@ export type PropsCreatorParams = ResourcesContainer &
 /**
  * シンヤ カットイン プロパティを生成する
  * @param params 生成パラメータ
- * @return 生成されたプロパティ
+ * @returns 生成されたプロパティ
  */
 export function createShinyaCutInProps(
   params: PropsCreatorParams,

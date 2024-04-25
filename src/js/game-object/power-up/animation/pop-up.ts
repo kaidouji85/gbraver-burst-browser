@@ -7,7 +7,7 @@ import { PowerUpAnimationProps } from "./animation-props";
 /**
  * ポップアップ
  * @param props アニメーションプロパティ
- * @return アニメーション
+ * @returns アニメーション
  */
 export function popUp(props: PowerUpAnimationProps): Animate {
   const { model, sounds, se } = props;

@@ -41,7 +41,7 @@ export class ShinBraverTD implements TDArmdozerObjects {
 /**
  * プレイヤー シンブレイバー 3Dレイヤー
  * @param params 生成パラメータ
- * @return 生成結果
+ * @returns 生成結果
  */
 export function playerShinBraverTD(
   params: TDLayerObjectCreatorParams,
@@ -53,7 +53,7 @@ export function playerShinBraverTD(
 /**
  * 敵 シンブレイバー 3Dレイヤー
  * @param params 生成パラメータ
- * @return 生成結果
+ * @returns 生成結果
  */
 export function enemyShinBraverTD(
   params: TDLayerObjectCreatorParams,

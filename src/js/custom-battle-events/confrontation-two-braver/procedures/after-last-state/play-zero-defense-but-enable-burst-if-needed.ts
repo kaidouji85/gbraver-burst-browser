@@ -5,7 +5,7 @@ import { zeroDefenseButEnableBurst } from "../../stories/zero-defense-but-enable
 /**
  * 条件を満たした場合、バーストできるのに0防御したストーリーを再生する
  * @param props イベントプロパティ
- * @return ストーリーを再生したらtrueを返す
+ * @returns ストーリーを再生したらtrueを返す
  */
 export async function playZeroDefenseButEnableBurstIfNeeded(
   props: Readonly<LastState>,

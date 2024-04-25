@@ -9,7 +9,7 @@ import { SimpleIndicatorView } from "./simple-result-indicator";
  * LOSEビューを生成する
  *
  * @param resources リソース管理オブジェクト
- * @return 生成結果
+ * @returns 生成結果
  */
 export function loseIndicatorView(resources: Resources): ResultIndicatorView {
   const texture =

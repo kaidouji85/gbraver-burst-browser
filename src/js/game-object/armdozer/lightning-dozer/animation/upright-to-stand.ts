@@ -6,7 +6,7 @@ import { LightningDozerAnimationProps } from "./animation-props";
 /**
  * 気をつけ -> 立ち
  * @param props アニメーションプロパティ
- * @return アニメーション
+ * @returns アニメーション
  */
 export function uprightToStand(props: LightningDozerAnimationProps): Animate {
   const { model, sounds, se } = props;

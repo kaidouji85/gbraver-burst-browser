@@ -9,7 +9,7 @@ import { DOMLayerProps } from "../props";
 /**
  * 戦闘シーンアクション通知を生成する
  * @param props レイヤープロパティ
- * @return 生成結果
+ * @returns 生成結果
  */
 export function createBattleAction(
   props: DOMLayerProps,

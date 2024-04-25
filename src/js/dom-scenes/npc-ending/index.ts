@@ -43,7 +43,7 @@ export class NPCEnding implements DOMScene {
 
   /**
    * BGMの再生開始
-   * @return BGM再生が完了したら発火するPromise
+   * @returns BGM再生が完了したら発火するPromise
    */
   async playBGM(): Promise<void> {
     await playBGM(this.#props);
@@ -51,7 +51,7 @@ export class NPCEnding implements DOMScene {
 
   /**
    * NPCエンディング終了を通知する
-   * @return 通知ストリーム
+   * @returns 通知ストリーム
    */
   notifyFinish(): Observable<void> {
     return this.#props.endNPCEnding;
@@ -59,7 +59,7 @@ export class NPCEnding implements DOMScene {
 
   /**
    * 各種リソースの読み込みが完了するまで待つ
-   * @return 待機結果
+   * @returns 待機結果
    */
   async waitUntilLoaded(): Promise<void> {
     await waitUntilLoaded(this.#props);

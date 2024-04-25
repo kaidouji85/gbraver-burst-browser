@@ -1,7 +1,7 @@
 /**
  * エピソード一覧を抽出する
  * @param root ルート要素
- * @return 取得結果
+ * @returns 取得結果
  */
 export const extractEpisodes = (root: HTMLElement): HTMLElement =>
   root.querySelector(`[data-id="episodes"]`) ?? document.createElement("div");
@@ -9,7 +9,7 @@ export const extractEpisodes = (root: HTMLElement): HTMLElement =>
 /**
  * イメージカット集合のルート要素を抽出する
  * @param root ルート要素
- * @return 取得結果
+ * @returns 取得結果
  */
 export const extractEpisodeImageCutContainer = (
   root: HTMLElement,
@@ -20,7 +20,7 @@ export const extractEpisodeImageCutContainer = (
 /**
  * メインエピソードタブを抽出する
  * @param root ルート要素
- * @return 取得結果
+ * @returns 取得結果
  */
 export const extractMainEpisodeTab = (root: HTMLElement): HTMLElement =>
   root.querySelector(`[data-id="mainEpisodeTab"]`) ??
@@ -29,7 +29,7 @@ export const extractMainEpisodeTab = (root: HTMLElement): HTMLElement =>
 /**
  * サイドエピソードタブを抽出する
  * @param root ルート要素
- * @return 取得結果
+ * @returns 取得結果
  */
 export const extractSideEpisodeTab = (root: HTMLElement): HTMLElement =>
   root.querySelector(`[data-id="sideEpisodeTab"]`) ??
@@ -38,7 +38,7 @@ export const extractSideEpisodeTab = (root: HTMLElement): HTMLElement =>
 /**
  * エピソードタイトルを抽出する
  * @param root ルート要素
- * @return 取得結果
+ * @returns 取得結果
  */
 export const extractEpisodeTitle = (root: HTMLElement): HTMLElement =>
   root.querySelector(`[data-id="episodeTitle"]`) ??
@@ -47,7 +47,7 @@ export const extractEpisodeTitle = (root: HTMLElement): HTMLElement =>
 /**
  * エピソード導入を抽出する
  * @param root ルート要素
- * @return 取得結果
+ * @returns 取得結果
  */
 export const extractEpisodeIntroduction = (root: HTMLElement): HTMLElement =>
   root.querySelector(`[data-id="episodeIntroduction"]`) ??
@@ -56,7 +56,7 @@ export const extractEpisodeIntroduction = (root: HTMLElement): HTMLElement =>
 /**
  * 戻るボタンを抽出する
  * @param root ルート要素
- * @return 取得結果
+ * @returns 取得結果
  */
 export const extractPlayButton = (root: HTMLElement): HTMLElement =>
   root.querySelector(`[data-id="playButton"]`) ?? document.createElement("div");
@@ -64,7 +64,7 @@ export const extractPlayButton = (root: HTMLElement): HTMLElement =>
 /**
  * 戻るボタンを抽出する
  * @param root ルート要素
- * @return 取得結果
+ * @returns 取得結果
  */
 export const extractPrevButton = (root: HTMLElement): HTMLElement =>
   root.querySelector(`[data-id="prevButton"]`) ?? document.createElement("div");

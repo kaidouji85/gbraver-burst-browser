@@ -16,7 +16,7 @@ export type TDPlayer = TDPlayerProps & {
 
   /**
    * シーンに追加するオブジェクトを取得する
-   * @return シーンに追加するオブジェクト
+   * @returns シーンに追加するオブジェクト
    */
   getObject3Ds(): THREE.Object3D[];
 };
@@ -24,7 +24,7 @@ export type TDPlayer = TDPlayerProps & {
 /**
  * TDPlayer生成関数
  * @param props プロパティ
- * @return 生成結果
+ * @returns 生成結果
  */
 function createTDPlayer(props: TDPlayerProps): TDPlayer {
   return {
@@ -37,7 +37,7 @@ function createTDPlayer(props: TDPlayerProps): TDPlayer {
 /**
  * プレイヤー側の3Dプレイヤーオブジェクト
  * @param params プレイヤーオブジェクト生成パラメータ
- * @return 3Dプレイヤーオブジェクト
+ * @returns 3Dプレイヤーオブジェクト
  */
 export function playerTDObjects(params: TDLayerObjectCreatorParams): TDPlayer {
   const props = createPlayerProps(params);
@@ -47,7 +47,7 @@ export function playerTDObjects(params: TDLayerObjectCreatorParams): TDPlayer {
 /**
  * 敵側の3Dプレイヤーオブジェクト
  * @param params プレイヤーオブジェクト生成パラメータ
- * @return 3Dプレイヤーオブジェクト
+ * @returns 3Dプレイヤーオブジェクト
  */
 export function enemyTDObject(params: TDLayerObjectCreatorParams): TDPlayer {
   const props = createEnemyProps(params);

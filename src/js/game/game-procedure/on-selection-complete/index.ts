@@ -10,7 +10,7 @@ import { startPrivateMatchHostIfNeeded } from "./start-private-match-host-if-nee
  * 本関数にはpropsを変更する副作用がある
  * @param props ゲームプロパティ
  * @param action アクション
- * @return 処理が完了したら発火するPromise
+ * @returns 処理が完了したら発火するPromise
  */
 export async function onSelectionComplete(
   props: GameProps,

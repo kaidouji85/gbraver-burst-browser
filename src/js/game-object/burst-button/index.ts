@@ -20,7 +20,7 @@ export type BurstButtonCreatorParams = ResourcesContainer &
 /**
  * シンブレイバー バーストボタンを生成する
  * @param params 生成パラメータ
- * @return バーストボタン
+ * @returns バーストボタン
  */
 export function shinBraverBurstButton(
   params: BurstButtonCreatorParams,
@@ -33,7 +33,7 @@ export function shinBraverBurstButton(
 /**
  * ネオランドーザ バーストボタンを生成する
  * @param params 生成パラメータ
- * @return バーストボタン
+ * @returns バーストボタン
  */
 export function neoLandozerBurstButton(
   params: BurstButtonCreatorParams,
@@ -46,7 +46,7 @@ export function neoLandozerBurstButton(
 /**
  * ライトニングドーザ バーストボタンを生成する
  * @param params 生成パラメータ
- * @return バーストボタン
+ * @returns バーストボタン
  */
 export function lightningDozerBurstButton(
   params: BurstButtonCreatorParams,
@@ -59,7 +59,7 @@ export function lightningDozerBurstButton(
 /**
  * ウィングドーザ バーストボタンを生成する
  * @param params 生成パラメータ
- * @return バーストボタン
+ * @returns バーストボタン
  */
 export function wingDozerBurstButton(
   params: BurstButtonCreatorParams,
@@ -72,7 +72,7 @@ export function wingDozerBurstButton(
 /**
  * ジェネシスブレイバー バーストボタンを生成する
  * @param params 生成パラメータ
- * @return バーストボタン
+ * @returns バーストボタン
  */
 export function genesisBraverBurstButton(
   params: BurstButtonCreatorParams,

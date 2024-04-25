@@ -10,7 +10,7 @@ import type { ResultIndicatorModel } from "../model/result-indicator-model";
  * スライドイン表示
  *
  * @param model モデル
- * @return アニメーション
+ * @returns アニメーション
  */
 export function slideIn(model: ResultIndicatorModel): Animate {
   const duration = 200;

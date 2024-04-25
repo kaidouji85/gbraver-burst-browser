@@ -7,7 +7,7 @@ const ROOT_CLASS_NAME = "waiting";
  * ルート要素のinnerHTML
  *
  * @param caption ダイアログに表示する文言
- * @return innerHTML
+ * @returns innerHTML
  */
 function rootInnerHTML(caption: string): string {
   return `
@@ -43,7 +43,7 @@ export class WaitingDialog implements DOMDialog {
   /**
    * ルートのHTML要素を取得する
    *
-   * @return 取得結果
+   * @returns 取得結果
    */
   getRootHTMLElement(): HTMLElement {
     return this.#root;

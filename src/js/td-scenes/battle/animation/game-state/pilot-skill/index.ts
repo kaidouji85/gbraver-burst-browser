@@ -20,7 +20,7 @@ import { yuuyaAnimation } from "./yuuya";
  * パイロット効果 アニメーション
  * @param props 戦闘シーンプロパティ
  * @param gameState ゲーム状態
- * @return アニメーション
+ * @returns アニメーション
  */
 export function pilotSkillAnimation(
   props: StateAnimationProps,
@@ -37,7 +37,7 @@ export function pilotSkillAnimation(
 /**
  * パイロットカットイン
  * @param param パラメータ
- * @return アニメーション
+ * @returns アニメーション
  */
 function cutIn(param: PilotSkillAnimationParam): Animate {
   if (param.pilot instanceof ShinyaHUD) {

@@ -7,7 +7,7 @@ import { PilotButtonAnimationProps } from "./animation-props";
  * パイロットボタンを表示する
  * @param props アニメーションプロパティ
  * @param canPilot パイロットボタン利用可能フラグ
- * @return アニメーション
+ * @returns アニメーション
  */
 export function open(
   props: PilotButtonAnimationProps,

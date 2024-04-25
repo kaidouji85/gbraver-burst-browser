@@ -12,7 +12,7 @@ import { reflectSoundVolume } from "./reflect-sound-volume";
  * リソース読み込み中は専用画面に遷移し、読み込んだ音リソースには音量設定が反映される
  * 本関数にはpropsを変更する副作用がある
  * @param props ゲームプロパティ
- * @return 処理完了したら発火するPromise
+ * @returns 処理完了したら発火するPromise
  */
 export async function loadFullResource(props: GameProps): Promise<void> {
   await props.fader.fadeOut();

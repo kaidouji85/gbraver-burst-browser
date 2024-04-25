@@ -14,7 +14,7 @@ import {
 /**
  * メッセージウインドウタイプに対応したroot要素class属性を取得する
  * @param type メッセージウインドウタイプ
- * @return root要素のclass属性
+ * @returns root要素のclass属性
  */
 export function toRootClass(type: WindowType): string {
   switch (type) {

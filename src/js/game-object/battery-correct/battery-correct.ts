@@ -52,7 +52,7 @@ export class BatteryCorrect {
 
   /**
    * シーンに追加するオブジェクトを取得する
-   * @return シーンに追加するオブジェクト
+   * @returns シーンに追加するオブジェクト
    */
   getObject3D(): THREE.Object3D {
     return this.#props.view.getObject3D();
@@ -61,7 +61,7 @@ export class BatteryCorrect {
   /**
    * ポップアップ表示
    * @param value 補正値
-   * @return アニメーション
+   * @returns アニメーション
    */
   popUp(value: number): Animate {
     return popUp(this.#props, value);

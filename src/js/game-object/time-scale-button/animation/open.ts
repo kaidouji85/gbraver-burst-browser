@@ -7,7 +7,7 @@ import { TimeScaleAnimationProps } from "./animation-props";
  * ボタンを表示する
  * @param props アニメーションプロパティ
  * @param timeScale タイムスケール値
- * @return アニメーション
+ * @returns アニメーション
  */
 export function open(
   props: TimeScaleAnimationProps,

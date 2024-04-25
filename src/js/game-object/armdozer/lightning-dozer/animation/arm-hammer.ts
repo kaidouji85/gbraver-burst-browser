@@ -7,7 +7,7 @@ import { LightningDozerAnimationProps } from "./animation-props";
 /**
  * アームハンマー
  * @param props アニメーションプロパティ
- * @return アニメーション
+ * @returns アニメーション
  */
 export function armHammer(props: LightningDozerAnimationProps): Animate {
   const { model } = props;

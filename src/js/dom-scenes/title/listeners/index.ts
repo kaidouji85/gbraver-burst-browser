@@ -18,7 +18,7 @@ import { onTutorialPush } from "./on-tutorial-push";
  * タイトル画面にイベントリスナをバインドする
  *
  * @param props 画面プロパティ
- * @return バインドしたイベントリスナのアンサブスクライバ
+ * @returns バインドしたイベントリスナのアンサブスクライバ
  */
 export function bindEventListeners(props: TitleProps): Unsubscribable[] {
   return [

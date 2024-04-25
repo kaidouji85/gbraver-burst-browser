@@ -5,7 +5,7 @@ import { scrollRightMessages } from "../../scroll-messages";
 /**
  * ガイの視察
  * @param props イベントプロパティ
- * @return 処理が完了したら発火するPromise
+ * @returns 処理が完了したら発火するPromise
  */
 export async function gaiInspecting(
   props: Readonly<CustomBattleEventProps>,

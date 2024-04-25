@@ -15,7 +15,7 @@ export type TDGameObjects = TDGameObjectsProps & {
 
   /**
    * シーンに追加するオブジェクトを取得する
-   * @return シーンに追加するオブジェクト
+   * @returns シーンに追加するオブジェクト
    */
   getObject3Ds(): THREE.Object3D[];
 };
@@ -23,7 +23,7 @@ export type TDGameObjects = TDGameObjectsProps & {
 /**
  * TDGameObjectsを生成する
  * @params 生成パラメータ
- * @return 生成結果
+ * @returns 生成結果
  */
 export function createTDGameObjects(
   params: TDLayerObjectCreatorParams,

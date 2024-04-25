@@ -11,7 +11,7 @@ import { GameProps } from "../game-props";
  * カジュアルマッチングするまで待機するヘルパー関数
  * @param props ゲームプロパティ
  * @param action アクション
- * @return バトルSDK
+ * @returns バトルSDK
  */
 export async function waitUntilCasualMatching(
   props: Readonly<GameProps>,

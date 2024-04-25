@@ -9,7 +9,7 @@ import { BatterySelectorAnimationProps } from "./animation-props";
  * ボタン表示アニメーション
  * @param props アニメーションプロパティ
  * @param param ボタン表示パラメータ
- * @return アニメーション
+ * @returns アニメーション
  */
 export function open(
   props: BatterySelectorAnimationProps,

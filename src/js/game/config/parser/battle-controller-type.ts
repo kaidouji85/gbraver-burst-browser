@@ -12,7 +12,7 @@ export const BattleControllerTypeSchema = z.union([
  * 任意のオブジェクトを戦闘シーンコントローラータイプにパースする
  * パースできない場合はnull返す
  * @param origin パース元
- * @return パース結果
+ * @returns パース結果
  */
 export function parseBattleControllerType(
   origin: unknown,

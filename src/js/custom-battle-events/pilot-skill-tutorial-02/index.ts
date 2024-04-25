@@ -79,7 +79,7 @@ class PilotSkillTutorial02 extends EmptyCustomBattleEvent {
 
 /**
  * パイロットスキルチュートリアル（後半）用のカスタムバトルイベントを作成する
- * @return 生成したカスタムバトルイベント
+ * @returns 生成したカスタムバトルイベント
  */
 export function createPilotSkillTutorial02Event(): CustomBattleEvent {
   return new PilotSkillTutorial02();

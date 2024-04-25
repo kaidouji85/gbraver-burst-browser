@@ -12,7 +12,7 @@ import { toGameOverParam } from "./game-over/game-over-param";
  *
  * @param props 戦闘シーンプロパティ
  * @param gameState ゲームの状態
- * @return アニメーション
+ * @returns アニメーション
  */
 export function gameEndAnimation(
   props: StateAnimationProps,

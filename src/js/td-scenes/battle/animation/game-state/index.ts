@@ -33,7 +33,7 @@ import { updateRemainingTurnAnimation } from "./update-remaining-turn";
  *
  * @param props 戦闘シーンプロパティ
  * @param gameState 変換対象のゲームステート
- * @return アニメーション
+ * @returns アニメーション
  */
 export function stateAnimation(
   props: StateAnimationProps,

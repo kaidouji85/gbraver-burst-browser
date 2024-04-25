@@ -46,7 +46,7 @@ const defenseRoutine: SimpleRoutine = (data) => {
 /**
  * 4攻撃、1防御、ライトニングドーザNPC
  *
- * @return NPC
+ * @returns NPC
  */
 export function attack4Defense1LightningDozerNPC(): NPC {
   const armdozer =
@@ -58,7 +58,7 @@ export function attack4Defense1LightningDozerNPC(): NPC {
 /**
  * 4攻撃、1防御、シンブレイバーNPC
  *
- * @return NPC
+ * @returns NPC
  */
 export function attack4Defense1ShinBraverNPC(): NPC {
   const armdozer =

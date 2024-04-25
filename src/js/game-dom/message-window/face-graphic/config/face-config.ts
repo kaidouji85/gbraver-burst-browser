@@ -15,7 +15,7 @@ export type FaceConfig = {
   /**
    * 顔画像パス
    * @param resources リソース管理オブジェクト
-   * @return 顔画像パス
+   * @returns 顔画像パス
    */
   src: (resources: Resources) => string;
 };

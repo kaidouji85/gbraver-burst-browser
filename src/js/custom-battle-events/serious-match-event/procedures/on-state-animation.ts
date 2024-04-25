@@ -10,7 +10,7 @@ import { getPilotSkillShout } from "./get-pilot-skill-shout";
 /**
  * カスタムステートアニメーション
  * @param props イベントプロパティ
- * @return アニメーション
+ * @returns アニメーション
  */
 export function onStateAnimation(
   props: Readonly<CustomStateAnimation>,

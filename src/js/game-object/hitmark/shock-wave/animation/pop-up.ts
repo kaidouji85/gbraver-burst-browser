@@ -17,7 +17,7 @@ export const DURATION = 800;
  * 衝撃波アニメーション
  *
  * @param model モデル
- * @return アニメーション
+ * @returns アニメーション
  */
 export function popUp(model: ShockWaveModel): Animate {
   return all(
@@ -30,7 +30,7 @@ export function popUp(model: ShockWaveModel): Animate {
  * 衝撃波軌跡アニメーション
  *
  * @param model モデル
- * @return アニメーション
+ * @returns アニメーション
  */
 function lineAnimation(model: ShockWaveLineModel): Animate {
   return onStart(() => {
@@ -56,7 +56,7 @@ function lineAnimation(model: ShockWaveLineModel): Animate {
  * 衝撃波リングアニメーション
  *
  * @param model モデル
- * @return アニメーション
+ * @returns アニメーション
  */
 function ringAnimation(model: ShockWaveRingModel): Animate {
   return onStart(() => {

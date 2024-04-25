@@ -24,7 +24,7 @@ type DataIDs = {
  * 通信エラー後処理情報に対応した、ボタンの文言を取得する
  *
  * @param postNetworkError 通信エラー後処理情報
- * @return ボタン文言
+ * @returns ボタン文言
  */
 function postNetowrkErrorLabel(postNetworkError: PostNetworkError) {
   switch (postNetworkError.type) {
@@ -44,7 +44,7 @@ function postNetowrkErrorLabel(postNetworkError: PostNetworkError) {
  *
  * @param ids data-idを集めたもの
  * @param postNetworkErrorLabel 通信エラー後処理ボタンの文言
- * @return innerHTML
+ * @returns innerHTML
  */
 function rootInnerHTML(ids: DataIDs, postNetworkErrorLabel: string): string {
   return `
@@ -66,7 +66,7 @@ type Elements = {
  *
  * @param root ルート要素
  * @param ids data-idを集めたもの
- * @return 抽出結果
+ * @returns 抽出結果
  */
 function extractElements(root: HTMLElement, ids: DataIDs): Elements {
   const postNetworkErrorButtonElement = root.querySelector(
@@ -148,7 +148,7 @@ export class NetworkErrorDialog implements DOMDialog {
   /**
    * ルートのHTML要素を取得する
    *
-   * @return 取得結果
+   * @returns 取得結果
    */
   getRootHTMLElement(): HTMLElement {
     return this.#root;
@@ -157,7 +157,7 @@ export class NetworkErrorDialog implements DOMDialog {
   /**
    * 通信エラー後処理の実行タイミングを通知する
    *
-   * @return 通知ストリーム
+   * @returns 通知ストリーム
    */
   notifyPostNetworkError(): Observable<PostNetworkError> {
     return this.#postNetworkErrorSource;

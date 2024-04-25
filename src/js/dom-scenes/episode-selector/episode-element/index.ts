@@ -43,7 +43,7 @@ export class EpisodeElement {
 
   /**
    * ルートHTML要素を取得する
-   * @return ルートHTML要素
+   * @returns ルートHTML要素
    */
   getRootHTMLElement(): HTMLElement {
     return this.#props.root;
@@ -51,7 +51,7 @@ export class EpisodeElement {
 
   /**
    * 選択通知
-   * @return 通知ストリーム
+   * @returns 通知ストリーム
    */
   selectionNotifier(): Observable<void> {
     return this.#props.select;
@@ -59,7 +59,7 @@ export class EpisodeElement {
 
   /**
    * チェックされているか否かを判定する
-   * @return trueでチェックされている
+   * @returns trueでチェックされている
    */
   isChecked(): boolean {
     return isChecked(this.#props);
@@ -83,7 +83,7 @@ export class EpisodeElement {
 
   /**
    * 表示されているか否かを判定する
-   * @return trueで表示されている
+   * @returns trueで表示されている
    */
   isVisible(): boolean {
     return isVisible(this.#props);

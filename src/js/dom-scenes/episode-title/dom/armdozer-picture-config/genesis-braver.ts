@@ -6,7 +6,7 @@ import { ArmdozerPictureConfig } from "./armdozer-picture-config";
 /**
  * ジェネシスブレイバー画像設定を生成する
  * @param resources リソース管理オブジェクト
- * @return 生成結果
+ * @returns 生成結果
  */
 export const genesisBraver = (resources: Resources): ArmdozerPictureConfig => ({
   stand: {

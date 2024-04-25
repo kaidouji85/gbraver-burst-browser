@@ -18,7 +18,7 @@ export type HUDLayer = Omit<HUDLayerProps, "overlap" | "gameObjectAction"> & {
 
   /**
    * 戦闘シーンアクション通知
-   * @return 通知ストリーム
+   * @returns 通知ストリーム
    */
   battleActionNotifier(): Observable<BattleSceneAction>;
 };
@@ -29,7 +29,7 @@ type HUDLayerCreatorParams = HUDLayerPropsCreatorParams;
 /**
  * HUDLayerを生成する
  * @param params 生成パラメータ
- * @return 生成結果
+ * @returns 生成結果
  */
 export function createHUDLayer(params: HUDLayerCreatorParams): HUDLayer {
   const props = createHUDLayerProps(params);

@@ -25,7 +25,7 @@ export class InterruptScenes {
   /**
    * 本クラスに含まれるルートHTML要素を返す
    *
-   * @return 取得結果
+   * @returns 取得結果
    */
   getRootHTMLElement(): HTMLElement {
     return this.#root;

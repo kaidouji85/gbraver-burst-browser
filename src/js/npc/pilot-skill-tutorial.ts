@@ -49,7 +49,7 @@ const defenseRoutine: SimpleRoutine = (data) => {
 
 /**
  * パイロットスキルチュートリアル用ウィングドーザNPC
- * @return NPC
+ * @returns NPC
  */
 export function pilotSkillTutorialNPC(): NPC {
   const armdozer =

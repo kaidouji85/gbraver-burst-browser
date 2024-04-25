@@ -38,7 +38,7 @@ const defenseRoutine: SimpleRoutine = (data) => {
 /**
  * バッテリーシステムチュートリアル用NPC
  *
- * @return NPC
+ * @returns NPC
  */
 export function batterySystemTutorialNPC(): NPC {
   const origin =

@@ -3,7 +3,7 @@ import { CustomStateAnimation } from "../../../td-scenes/battle/custom-battle-ev
 /**
  * ツバサ先輩のパイロットスキル発動か否かを判定する
  * @param props イベントプロパティ
- * @return trueでツバサ先輩がスキル発動
+ * @returns trueでツバサ先輩がスキル発動
  */
 export function isPilotSkillActivatedByTsubasa(
   props: Readonly<CustomStateAnimation>,

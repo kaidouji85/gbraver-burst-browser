@@ -18,7 +18,7 @@ export type Resize = {
 /**
  * リサイズストリームを生成する
  *
- * @return ストリーム
+ * @returns ストリーム
  */
 export function resizeStream(): Observable<Resize> {
   return new Observable<Resize>((subscriber) => {

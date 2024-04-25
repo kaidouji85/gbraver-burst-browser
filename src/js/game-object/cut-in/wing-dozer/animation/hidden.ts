@@ -5,7 +5,7 @@ import { WingDozerCutInAnimationProps } from "./animation-props";
 /**
  * カットインを消す
  * @param props アニメーションプロパティ
- * @return アニメーション
+ * @returns アニメーション
  */
 export function hidden(props: WingDozerCutInAnimationProps): Animate {
   const { model } = props;

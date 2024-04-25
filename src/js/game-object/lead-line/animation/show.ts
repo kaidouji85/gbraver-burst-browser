@@ -6,7 +6,7 @@ import { LeadLineModel } from "../model/lead-line-model";
 /**
  * 引き出し線を表示する
  * @param model モデル
- * @return アニメーション
+ * @returns アニメーション
  */
 export function show(model: LeadLineModel): Animate {
   return onStart(() => {

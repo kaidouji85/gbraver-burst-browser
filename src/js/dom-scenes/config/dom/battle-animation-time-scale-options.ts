@@ -8,7 +8,7 @@ import { ROOT_CLASS } from "./class-name";
 /**
  * 戦闘アニメ再生速度のラジオボタン要素HTMLを生成する
  * @param selected 選択中の戦闘アニメ再生速度
- * @return 生成結果
+ * @returns 生成結果
  */
 export const battleAnimationTimeScaleOptions = (
   selected: BattleAnimationTimeScale,

@@ -11,7 +11,7 @@ export type PropsCreatorParams = {
 /**
  * LightningDozerCutInPropsを生成する
  * @param params 生成パラメータ
- * @return 生成したLightningDozerCutInProps
+ * @returns 生成したLightningDozerCutInProps
  */
 export function createLightningDozerCutInProps(
   params: PropsCreatorParams,

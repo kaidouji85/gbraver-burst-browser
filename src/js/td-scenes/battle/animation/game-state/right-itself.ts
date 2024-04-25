@@ -10,7 +10,7 @@ import type { StateAnimationProps } from "./state-animation-props";
  *
  * @param props 戦闘シーンプロパティ
  * @param gameState ゲーム状態
- * @return アニメーション
+ * @returns アニメーション
  */
 export function rightItselfAnimation(
   props: StateAnimationProps,
@@ -39,7 +39,7 @@ export function rightItselfAnimation(
  *
  * @param sprite スプライト
  * @param battleResult 戦闘結果
- * @return アニメーション
+ * @returns アニメーション
  */
 function getMotion(
   sprite: ArmdozerSprite,

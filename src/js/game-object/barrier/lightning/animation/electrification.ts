@@ -9,7 +9,7 @@ import { LightningBarrierAnimationProps } from "./animation-props";
  * 帯電
  * @param props アニメーションプロパティ
  * @param group Tweenグループ
- * @return アニメーション
+ * @returns アニメーション
  */
 export function electrification(
   props: LightningBarrierAnimationProps,

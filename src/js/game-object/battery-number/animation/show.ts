@@ -7,7 +7,7 @@ import { BatteryNumberProps } from "../props/battery-number-props";
  * バッテリー数字を表示する
  * @param props アニメーションプロパティ
  * @param battery バッテリー値
- * @return アニメーション
+ * @returns アニメーション
  */
 export function show(props: BatteryNumberProps, battery: number): Animate {
   const { model } = props;

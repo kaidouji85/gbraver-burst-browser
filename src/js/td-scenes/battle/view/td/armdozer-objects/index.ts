@@ -14,7 +14,7 @@ import { enemyWingDozerTD, playerWingDozerTD } from "./wing-dozer";
 /**
  * プレイヤー側  3Dレイヤー アームドーザ固有オブジェクト
  * @param params 生成パラメータ
- * @return 生成結果
+ * @returns 生成結果
  */
 export function playerTDArmdozer(
   params: TDLayerObjectCreatorParams,
@@ -39,7 +39,7 @@ export function playerTDArmdozer(
 /**
  * 敵側  3Dレイヤー アームドーザ固有オブジェクト
  * @param params 生成パラメータ
- * @return 生成結果
+ * @returns 生成結果
  */
 export function enemyTDArmdozer(
   params: TDLayerObjectCreatorParams,

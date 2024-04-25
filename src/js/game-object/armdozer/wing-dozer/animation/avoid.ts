@@ -8,7 +8,7 @@ import { WingDozerAnimationProps } from "./animation-props";
 /**
  * 避け
  * @param props アニメーションプロパティ
- * @return アニメーション
+ * @returns アニメーション
  */
 export function avoid(props: WingDozerAnimationProps): Animate {
   const { model, sounds, se } = props;

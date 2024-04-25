@@ -35,7 +35,7 @@ export class NeoLandozerHUD implements HUDArmdozerObjects {
 /**
  * プレイヤー側 HUDレイヤー ネオランドーザ固有オブジェクト
  * @param params 生成パラメータ
- * @return 生成結果
+ * @returns 生成結果
  */
 export function playerNeoLandozerHUD(
   params: HUDLayerObjectCreatorParams,
@@ -47,7 +47,7 @@ export function playerNeoLandozerHUD(
 /**
  * 敵側 HUDレイヤー ネオランドーザ固有オブジェクト
  * @param params 生成パラメータ
- * @return 生成結果
+ * @returns 生成結果
  */
 export function enemyNeoLandozerHUD(
   params: HUDLayerObjectCreatorParams,

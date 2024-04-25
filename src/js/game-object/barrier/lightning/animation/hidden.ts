@@ -5,7 +5,7 @@ import { LightningBarrierAnimationProps } from "./animation-props";
 /**
  * バリアを消す
  * @param props アニメーションプロパティ
- * @return アニメーション
+ * @returns アニメーション
  */
 export function hidden(props: LightningBarrierAnimationProps): Animate {
   const { model } = props;

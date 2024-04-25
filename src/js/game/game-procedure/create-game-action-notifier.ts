@@ -6,7 +6,7 @@ import { GameProps } from "../game-props";
 /**
  * ゲームアクション通知ストリームを生成する
  * @param props ゲームプロパティ
- * @return ゲームアクション通知ストリーム
+ * @returns ゲームアクション通知ストリーム
  */
 export function createGameActionNotifier(
   props: Readonly<GameProps>,

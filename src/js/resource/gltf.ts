@@ -50,7 +50,7 @@ const loader = new GLTFLoader();
  *
  * @param resourceRoot リソースルート
  * @param config 設定
- * @return glTFリソース
+ * @returns glTFリソース
  */
 export function loadGlTF(
   resourceRoot: ResourceRoot,

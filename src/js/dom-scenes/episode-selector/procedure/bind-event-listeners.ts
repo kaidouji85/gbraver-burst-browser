@@ -11,7 +11,7 @@ import { onSideEpisodeTabSelected } from "./on-side-episode-tab-selected";
 /**
  * 画面にイベントリスナをバインドする
  * @param props 画面プロパティ
- * @return バインドしたイベントリスナのアンサブスクライバ
+ * @returns バインドしたイベントリスナのアンサブスクライバ
  */
 export function bindEventListeners(
   props: Readonly<EpisodeSelectorProps>,

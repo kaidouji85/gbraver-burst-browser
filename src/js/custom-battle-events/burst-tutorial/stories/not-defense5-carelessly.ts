@@ -6,7 +6,7 @@ import { scrollRightMessages } from "../../scroll-messages";
 /**
  * ストーリー うっかり5防御以外を選択
  * @param props イベントプロパティ
- * @return ストーリーが完了したら発火するPromise
+ * @returns ストーリーが完了したら発火するPromise
  */
 export const notDefense5Carelessly = async (props: CustomBattleEventProps) => {
   activeRightMessageWindowWithFace(props, "Shinya");

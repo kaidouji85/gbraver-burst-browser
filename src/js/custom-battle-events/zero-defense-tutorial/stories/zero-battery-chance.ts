@@ -9,7 +9,7 @@ import { scrollRightMessages } from "../../scroll-messages";
 /**
  * ストーリー 0バッテリーチャンス
  * @param props イベントプロパティ
- * @return ストーリーが完了したら発火するPromise
+ * @returns ストーリーが完了したら発火するPromise
  */
 export const zeroBatteryChance = async (props: CustomBattleEventProps) => {
   activeRightMessageWindowWithFace(props, "Tsubasa");

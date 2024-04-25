@@ -9,7 +9,7 @@ import { executePostNPCBattleIfNeeded } from "./execute-post-npc-baattle-if-need
  * 戦闘終了時の処理
  * @param props ゲームプロパティ
  * @param action アクション
- * @return 処理が完了したら発火するPromise
+ * @returns 処理が完了したら発火するPromise
  */
 export async function onEndBattle(
   props: GameProps,

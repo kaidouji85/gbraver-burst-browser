@@ -7,7 +7,7 @@ import type { FaderModel } from "../model/fader-model";
  * フェードイン
  *
  * @param model モデル
- * @return アニメーション
+ * @returns アニメーション
  */
 export function fadeIn(model: FaderModel): Animate {
   return onStart(() => {

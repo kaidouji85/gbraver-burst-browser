@@ -4,7 +4,7 @@ import { GBraverBurstBrowserConfig } from "./browser-config";
  * 音量関係の設定が変更されたか否かを判定する
  * @param origin オリジナルの設定
  * @param update 更新後の設定
- * @return 判定結果、trueで設定変更された
+ * @returns 判定結果、trueで設定変更された
  */
 export function isSoundConfigChanged(
   origin: GBraverBurstBrowserConfig,
@@ -19,7 +19,7 @@ export function isSoundConfigChanged(
  * 設定が変更されたか否かを判定する
  * @param origin オリジナルの設定
  * @param update 更新後の設定
- * @return 判定結果、trueで設定変更された
+ * @returns 判定結果、trueで設定変更された
  */
 export function isConfigChanged(
   origin: GBraverBurstBrowserConfig,

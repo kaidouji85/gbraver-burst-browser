@@ -37,7 +37,7 @@ export class PlainHUDCamera {
   /**
    * カメラを取得する
    *
-   * @return カメラ
+   * @returns カメラ
    */
   getCamera(): THREE.Camera {
     return this.#camera;

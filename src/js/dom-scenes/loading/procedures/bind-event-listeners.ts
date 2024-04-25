@@ -8,7 +8,7 @@ import { onLoadingProgress } from "./on-loading-progress";
  * 画面にイベントリストを関連付ける
  * @param props 画面プロパティ
  * @param loading ローディングストリーム
- * @return アンサブスクライバ
+ * @returns アンサブスクライバ
  */
 export function bindEventListeners(
   props: Readonly<LoadingProps>,

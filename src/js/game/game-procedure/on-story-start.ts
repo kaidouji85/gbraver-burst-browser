@@ -6,7 +6,7 @@ import { startEpisodeSelector } from "./start-episode-selector";
  * ストーリーモード開始時の処理
  * 本関数にはpropsを変更する副作用がある
  * @param props ゲームプロパティ
- * @return 処理が完了したら発火するPromise
+ * @returns 処理が完了したら発火するPromise
  */
 export async function onStoryStart(props: GameProps): Promise<void> {
   if (!props.isFullResourceLoaded) {

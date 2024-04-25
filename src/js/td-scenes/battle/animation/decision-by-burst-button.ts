@@ -6,7 +6,7 @@ import { BattleSceneView } from "../view";
 /**
  * バーストボタンによる決定アニメーション
  * @param view ビュー
- * @return アニメーション
+ * @returns アニメーション
  */
 export function decisionByBurstButton(
   view: Readonly<BattleSceneView>,

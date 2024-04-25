@@ -31,7 +31,7 @@ export class Game {
 
   /**
    * ゲームの初期化を行う
-   * @return 処理が完了したら発火するPromise
+   * @returns 処理が完了したら発火するPromise
    */
   async initialize(): Promise<void> {
     await initialize(this.#props);

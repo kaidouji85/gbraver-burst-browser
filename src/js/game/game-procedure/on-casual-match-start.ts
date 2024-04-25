@@ -8,7 +8,7 @@ import { loadFullResource } from "./load-full-resource";
  * カジュアルマッチ開始
  * 本関数にはpropsを変更する副作用がある
  * @param props ゲームプロパティ
- * @return 処理が完了したら発火するPromise
+ * @returns 処理が完了したら発火するPromise
  */
 export async function onCasualMatchStart(props: GameProps): Promise<void> {
   props.domDialogBinder.hidden();

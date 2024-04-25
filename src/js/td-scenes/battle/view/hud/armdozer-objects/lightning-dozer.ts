@@ -33,7 +33,7 @@ export class LightningDozerHUD implements HUDArmdozerObjects {
   /**
    * シーンに追加するオブジェクトを取得する
    *
-   * @return シーンに追加するオブジェクト
+   * @returns シーンに追加するオブジェクト
    */
   getObject3Ds(): THREE.Object3D[] {
     return [this.cutIn.getObject3D()];
@@ -43,7 +43,7 @@ export class LightningDozerHUD implements HUDArmdozerObjects {
 /**
  * プレイヤー HUDレイヤー ライトニングドーザ固有オブジェクト
  * @param params 生成パラメータ
- * @return 生成結果
+ * @returns 生成結果
  */
 export function playerLightningDozerHUD(
   params: HUDLayerObjectCreatorParams,
@@ -58,7 +58,7 @@ export function playerLightningDozerHUD(
 /**
  * 敵 HUDレイヤー ライトニングドーザ固有オブジェクト
  * @param params 生成パラメータ
- * @return 生成結果
+ * @returns 生成結果
  */
 export function enemyLightningDozerHUD(
   params: HUDLayerObjectCreatorParams,

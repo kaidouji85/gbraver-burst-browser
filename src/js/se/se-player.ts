@@ -33,7 +33,7 @@ class SimpleSEPlayer implements SEPlayer {
 
 /**
  * SEPlayerを生成する
- * @return 生成したSEPlayer
+ * @returns 生成したSEPlayer
  */
 export const createSEPlayer = (): SEPlayer => new SimpleSEPlayer();
 

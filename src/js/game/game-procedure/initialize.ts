@@ -15,7 +15,7 @@ import { startTitle } from "./start-title";
  * 本関数にはpropsを変更する副作用がある
  *
  * @param props ゲームプロパティ
- * @return 処理が完了したら発火するPromise
+ * @returns 処理が完了したら発火するPromise
  */
 export async function initialize(props: GameProps): Promise<void> {
   const startTime = Date.now();

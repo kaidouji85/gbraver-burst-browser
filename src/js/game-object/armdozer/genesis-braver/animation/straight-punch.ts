@@ -6,7 +6,7 @@ import { GenesisBraverAnimationProps } from "./animation-props";
 /**
  * ストレートパンチ
  * @param props アニメーションプロパティ
- * @return アニメーション
+ * @returns アニメーション
  */
 export function straightPunch(props: GenesisBraverAnimationProps): Animate {
   const { model } = props;

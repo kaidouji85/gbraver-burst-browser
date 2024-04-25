@@ -18,7 +18,7 @@ import { enemyWingDozerHUD, playerWingDozerHUD } from "./wing-dozer";
 /**
  * プレイヤー側 HUDアームドーザ
  * @param params 生成パラメータ
- * @return HUDアームドーザ
+ * @returns HUDアームドーザ
  */
 export function playerArmdozerHUD(
   params: HUDLayerObjectCreatorParams,
@@ -43,7 +43,7 @@ export function playerArmdozerHUD(
 /**
  * 敵側 HUDアームドーザ
  * @param params 生成パラメータ
- * @return HUDアームドーザ
+ * @returns HUDアームドーザ
  */
 export function enemyArmdozerHUD(
   params: HUDLayerObjectCreatorParams,

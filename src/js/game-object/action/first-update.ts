@@ -7,7 +7,7 @@ import type { GameObjectAction } from "./game-object-action";
  * 初回だけ発火するUpdateストリームを生成する
  *
  * @param gameObjectAction ストリーム生成元
- * @return 生成結果
+ * @returns 生成結果
  */
 export function firstUpdate(
   gameObjectAction: Observable<GameObjectAction>,

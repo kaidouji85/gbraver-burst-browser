@@ -12,7 +12,7 @@ import { scrollLeftMessages, scrollRightMessages } from "../../scroll-messages";
 /**
  * ストーリー プレイヤーの勝利
  * @param props イベントプロパティ
- * @return ストーリーが完了したら発火するPromise
+ * @returns ストーリーが完了したら発火するPromise
  */
 export const playerWin = async (props: CustomBattleEventProps) => {
   activeLeftMessageWindowWithFace(props, "Gai");

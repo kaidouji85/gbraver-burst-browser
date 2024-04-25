@@ -3,7 +3,7 @@ import rootInnerHTMLTemplate from "./root-inner-html.hbs";
 
 /**
  * ルート要素のinnerHTML
- * @return innerHTML
+ * @returns innerHTML
  */
 export function rootInnerHTML(): string {
   return rootInnerHTMLTemplate({

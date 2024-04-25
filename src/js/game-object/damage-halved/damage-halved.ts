@@ -50,7 +50,7 @@ export class DamageHalved {
 
   /**
    * ポップアップ
-   * @return アニメーション
+   * @returns アニメーション
    */
   popUp(): Animate {
     return popUp(this.#props);
@@ -58,7 +58,7 @@ export class DamageHalved {
 
   /**
    * シーンに追加するオブジェクトを取得する
-   * @return シーンに追加するオブジェクト
+   * @returns シーンに追加するオブジェクト
    */
   getObject3D(): THREE.Object3D {
     return this.#props.view.getObject3D();

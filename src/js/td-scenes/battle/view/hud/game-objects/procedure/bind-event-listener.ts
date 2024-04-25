@@ -5,7 +5,7 @@ import { HUDGameObjectsProps } from "../props";
 /**
  * イベントをバインドする
  * @param props プロパティ
- * @return アンサブスクライバ
+ * @returns アンサブスクライバ
  */
 export function bindEventListener(
   props: HUDGameObjectsProps,

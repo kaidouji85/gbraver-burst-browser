@@ -12,7 +12,7 @@ import { shinyaPilotSkill } from "./shinya-pilot-skill";
 /**
  * ステートアニメ終了後に呼ばれるアニメーション
  * @param props イベントプロパティ
- * @return アニメーション
+ * @returns アニメーション
  */
 export function afterStateAnimation(
   props: Readonly<CustomStateAnimation & ZeroDefenseTutorialProps>,

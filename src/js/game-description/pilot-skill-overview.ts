@@ -9,7 +9,7 @@ import type {
 /**
  * バッテリー回復概要
  * @param skill スキル情報
- * @return 説明文
+ * @returns 説明文
  */
 function recoverBatterySkill(skill: RecoverBatterySkill): string {
   return `バッテリー${skill.recoverBattery}回復`;
@@ -18,7 +18,7 @@ function recoverBatterySkill(skill: RecoverBatterySkill): string {
 /**
  * 攻撃バフ概要
  * @param skill スキル情報
- * @return 説明文
+ * @returns 説明文
  */
 function buffPowerSkill(skill: BuffPowerSkill): string {
   return `攻撃+${skill.buffPower}`;
@@ -27,7 +27,7 @@ function buffPowerSkill(skill: BuffPowerSkill): string {
 /**
  * バッテリー増強概要
  * @param skill スキル情報
- * @return 説明文
+ * @returns 説明文
  */
 function batteryEnchantmentSkill(skill: BatteryEnchantmentSkill): string {
   return `自分が出したバッテリー+${skill.batteryEnchantment}`;
@@ -35,7 +35,7 @@ function batteryEnchantmentSkill(skill: BatteryEnchantmentSkill): string {
 
 /**
  * ダメージ半減概要
- * @return 説明文
+ * @returns 説明文
  */
 function damageHalvedSkill(): string {
   return `被ダメージ1/2`;
@@ -44,7 +44,7 @@ function damageHalvedSkill(): string {
 /**
  * バッテリーブースト概要
  * @param skill スキル情報
- * @return 説明文
+ * @returns 説明文
  */
 function batteryBoostSkill(skill: BatteryBoostSkill): string {
   return `バッテリー${skill.recoverBattery}回復、ターン開始のバッテリー回復をスキップ`;
@@ -53,7 +53,7 @@ function batteryBoostSkill(skill: BatteryBoostSkill): string {
 /**
  * パイロットスキル概要
  * @param skill スキル情報
- * @return 説明文
+ * @returns 説明文
  */
 export function pilotSkillOverview(skill: PilotSkill): string {
   switch (skill.type) {

@@ -4,7 +4,7 @@ import { ResourceRoot } from "./resource-root";
 /**
  * 空のリソース管理オブジェクトを生成する
  * @param resourceRoot リソースルート
- * @return リソース管理オブジェクト
+ * @returns リソース管理オブジェクト
  */
 
 export function emptyResources(resourceRoot: ResourceRoot): Resources {

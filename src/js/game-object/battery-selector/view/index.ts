@@ -102,7 +102,7 @@ export class BatterySelectorView {
 
   /**
    * OKボタン押下通知
-   * @return 通知ストリーム
+   * @returns 通知ストリーム
    */
   okButtonPushNotifier(): Observable<Event> {
     return this.#button.pushNotifier();
@@ -110,7 +110,7 @@ export class BatterySelectorView {
 
   /**
    * +ボタン押下通知
-   * @return 通知ストリーム
+   * @returns 通知ストリーム
    */
   plusButtonPushNotifier(): Observable<unknown> {
     return this.#plus.pushNotifier();
@@ -118,7 +118,7 @@ export class BatterySelectorView {
 
   /**
    * -ボタン押下通知
-   * @return 通知ストリーム
+   * @returns 通知ストリーム
    */
   minusButtonPushNotifier(): Observable<unknown> {
     return this.#minus.pushNotifier();

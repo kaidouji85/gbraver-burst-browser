@@ -6,7 +6,7 @@ import { BurstButtonAnimationProps } from "./animation-props";
 /**
  * 決定アニメーション
  * @param props アニメーションプロパティ
- * @return アニメーション
+ * @returns アニメーション
  */
 export function decide(props: BurstButtonAnimationProps): Animate {
   const { model, se } = props;

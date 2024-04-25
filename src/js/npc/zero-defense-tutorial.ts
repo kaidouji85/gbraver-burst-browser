@@ -42,7 +42,7 @@ const defenseRoutine: SimpleRoutine = (data) => {
 /**
  * ゼロ防御チュートリアル用ネオランドーザNPC
  *
- * @return NPC
+ * @returns NPC
  */
 export function zeroDefenseTutorialNPC(): NPC {
   const armdozer =

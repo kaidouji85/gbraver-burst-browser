@@ -27,7 +27,7 @@ export interface NPC {
    * NPCルーチン関数
    * NPCが出すコマンドを計算する
    * @param params パラメータ
-   * @return NPCが出すコマンド
+   * @returns NPCが出すコマンド
    */
   routine(params: NPCRoutineParams): Command;
 }

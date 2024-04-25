@@ -17,7 +17,7 @@ export type HUDPlayer = HUDPlayerProps & {
   /**
    * シーンに追加するオブジェクトを取得する
    *
-   * @return シーンに追加するオブジェクト
+   * @returns シーンに追加するオブジェクト
    */
   getObject3Ds(): THREE.Object3D[];
 };
@@ -25,7 +25,7 @@ export type HUDPlayer = HUDPlayerProps & {
 /**
  * HUDPlayerを生成する
  * @param props プロパティ
- * @return 生成結果
+ * @returns 生成結果
  */
 function createHUDPlayer(props: HUDPlayerProps): HUDPlayer {
   return {
@@ -38,7 +38,7 @@ function createHUDPlayer(props: HUDPlayerProps): HUDPlayer {
 /**
  * プレイヤー側 HUDプレイヤーオブジェクト
  * @param params 生成パラメータ
- * @return 生成結果
+ * @returns 生成結果
  */
 export function playerHUDObjects(
   params: HUDLayerObjectCreatorParams,
@@ -50,7 +50,7 @@ export function playerHUDObjects(
 /**
  * 敵側 HUDプレイヤーオブジェクト
  * @param params 生成パラメータ
- * @return 生成結果
+ * @returns 生成結果
  */
 export function enemyHUDObjects(
   params: HUDLayerObjectCreatorParams,

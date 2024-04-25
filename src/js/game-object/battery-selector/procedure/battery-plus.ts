@@ -8,7 +8,7 @@ import { batteryChange } from "./battery-change";
  * バッテリープラス
  * メモリ最大値の場合は何もしない
  * @param props ゲームオブジェクトプロパティ
- * @return 処理が完了したら発火するPromise
+ * @returns 処理が完了したら発火するPromise
  */
 export async function batteryPlus(props: BatterySelectorProps): Promise<void> {
   const { batteryPlusTween, model } = props;

@@ -7,7 +7,7 @@ import type { GameAction } from "../game-actions";
  * @template X DOMフローターのデータ型
  * @param floater DOMフローター
  * @param gameAction ゲームアクション通知
- * @return アンサブスクライバ
+ * @returns アンサブスクライバ
  */
 export type DomFloaterActionConnector<X> = (
   floater: X,

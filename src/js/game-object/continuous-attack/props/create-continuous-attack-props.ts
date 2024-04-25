@@ -15,7 +15,7 @@ export type PropsCreatorParams = ResourcesContainer &
 /**
  * ContinuousAttackPropsを生成する
  * @param params 生成パラメータ
- * @return 生成したContinuousAttackProps
+ * @returns 生成したContinuousAttackProps
  */
 export function createContinuousAttackProps(
   params: PropsCreatorParams,

@@ -18,7 +18,7 @@ import { yoroshikuOnegaiShimasu } from "../../yoroshiku-onegai-shimasu";
 /**
  * ストーリー 冒頭
  * @param props イベントプロパティ
- * @return ストーリーが完了したら発火するPromise
+ * @returns ストーリーが完了したら発火するPromise
  */
 export async function introduction(props: CustomBattleEventProps) {
   activeLeftMessageWindowWithFace(props, "Tsubasa");

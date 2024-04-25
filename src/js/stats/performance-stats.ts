@@ -33,7 +33,7 @@ export class PerformanceStats {
 
   /**
    * ルート要素を取得する
-   * @return ルート要素
+   * @returns ルート要素
    */
   getRootHTMLElement(): HTMLElement {
     return this.#stats.dom;

@@ -8,7 +8,7 @@ import { GenesisBraverCutInAnimationProps } from "./animation-props";
 /**
  * カットインを表示する
  * @param props アニメーションプロパティ
- * @return アニメーション
+ * @returns アニメーション
  */
 export function show(props: GenesisBraverCutInAnimationProps): Animate {
   const { model } = props;

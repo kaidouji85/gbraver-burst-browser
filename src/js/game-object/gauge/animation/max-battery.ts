@@ -9,7 +9,7 @@ import { getBatteryGaugeUnitOpacity } from "../model/get-battery-gauge-unit-opac
  * バッテリー最大値を変更するアニメーション
  * @param model モデル
  * @param value バッテリー最大値
- * @return アニメーション
+ * @returns アニメーション
  */
 export function maxBattery(model: GaugeModel, value: number): Animate {
   return all(

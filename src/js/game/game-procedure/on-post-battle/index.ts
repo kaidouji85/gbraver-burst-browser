@@ -12,7 +12,7 @@ import { gotoTitleIfNeeded } from "./goto-title-if-needed";
  *
  * @param props ゲームプロパティ
  * @param action アクション
- * @return 処理が完了したら発火するPromise
+ * @returns 処理が完了したら発火するPromise
  */
 export async function onPostBattleAction(
   props: GameProps,

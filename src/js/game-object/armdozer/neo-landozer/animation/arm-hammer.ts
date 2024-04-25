@@ -6,7 +6,7 @@ import { NeoLandozerAnimationProps } from "./animation-props";
 /**
  * アームハンマー
  * @param props アニメーションプロパティ
- * @return アニメーション
+ * @returns アニメーション
  */
 export function armHammer(props: NeoLandozerAnimationProps): Animate {
   const { model } = props;

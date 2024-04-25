@@ -15,7 +15,7 @@ import { onSEVolumeChange } from "./on-se-volume-change";
  * 設定画面にイベントリスナをバインドする
  *
  * @param props 画面プロパティ
- * @return バインドしたイベントリスナのアンサブスクライバ
+ * @returns バインドしたイベントリスナのアンサブスクライバ
  */
 export function bindEventListeners(props: ConfigProps): Unsubscribable[] {
   return [

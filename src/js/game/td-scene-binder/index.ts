@@ -73,7 +73,7 @@ export class TDSceneBinder {
   /**
    * ゲームアクション通知を取得する
    *
-   * @return イベント通知ストリーム
+   * @returns イベント通知ストリーム
    */
   gameActionNotifier(): Observable<GameAction> {
     return this.#gameAction;
@@ -89,7 +89,7 @@ export class TDSceneBinder {
   /**
    * DOMレイヤーのルートHTML要素を取得する
    *
-   * @return 取得結果
+   * @returns 取得結果
    */
   getDOMLayerElements(): HTMLElement[] {
     return [this.#domLayerElement];

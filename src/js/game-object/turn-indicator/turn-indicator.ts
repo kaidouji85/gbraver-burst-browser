@@ -62,7 +62,7 @@ export class TurnIndicator {
   /**
    * ターンインジケータを表示する
    * @param isPlayerTurn プレイヤーターンか否かのフラグ、trueでプレイヤーターン
-   * @return アニメーション
+   * @returns アニメーション
    */
   show(isPlayerTurn: boolean): Animate {
     return all(
@@ -75,7 +75,7 @@ export class TurnIndicator {
 
   /**
    * 非表示にする
-   * @return アニメーション
+   * @returns アニメーション
    */
   invisible(): Animate {
     return all(
@@ -88,7 +88,7 @@ export class TurnIndicator {
 
   /**
    * ターンインジケーターで使うthree.jsオブジェクトを返す
-   * @return 取得結果
+   * @returns 取得結果
    */
   getObject3D(): THREE.Object3D {
     return this.#view.getObject3D();

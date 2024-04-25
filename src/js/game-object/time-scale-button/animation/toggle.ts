@@ -10,7 +10,7 @@ import { TimeScaleAnimationProps } from "./animation-props";
  * @param props アニメーションプロパティ
  * @param group TWEENグループ
  * @param timeScale タイムスケール
- * @return アニメーション
+ * @returns アニメーション
  */
 export function toggle(
   props: TimeScaleAnimationProps,

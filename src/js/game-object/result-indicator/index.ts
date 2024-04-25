@@ -12,7 +12,7 @@ import { winIndicatorView } from "./view/win-indicator-view";
  *
  * @param resources リソース管理オブジェクト
  * @param gameObjectAction ゲームオブジェクトアクション
- * @return 生成結果
+ * @returns 生成結果
  */
 export function winIndicator(
   resources: Resources,
@@ -27,7 +27,7 @@ export function winIndicator(
  *
  * @param resources リソース管理オブジェクト
  * @param gameObjectAction ゲームオブジェクトアクション
- * @return 生成結果
+ * @returns 生成結果
  */
 export function loseIndicator(
   resources: Resources,
@@ -42,7 +42,7 @@ export function loseIndicator(
  *
  * @param resources リソース管理オブジェクト
  * @param gameObjectAction ゲームオブジェクトアクション
- * @return 生成結果
+ * @returns 生成結果
  */
 export function drawIndicator(
   resources: Resources,

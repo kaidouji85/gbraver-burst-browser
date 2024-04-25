@@ -10,7 +10,7 @@ import { progressGame } from "./progress-game";
  * ミニコントローラーでバーストボタンが押された時の処理
  * @param props 戦闘シーンプロパティ
  * @param action アクション
- * @return 処理が完了したら発火するPromise
+ * @returns 処理が完了したら発火するPromise
  */
 export function onBurstByMiniController(
   props: Readonly<BattleSceneProps>,

@@ -16,7 +16,7 @@ type Params = {
  * 指定した画像のシルエットを抽出する
  * 透明色以外を指定した色で塗りつぶし、抽出結果は新規作成したCanvasとして返す
  * @param param パラメータ
- * @return 生成したCanvas
+ * @returns 生成したCanvas
  */
 export function toSilhouette(params: Params): HTMLCanvasElement {
   const { image, r, g, b } = params;

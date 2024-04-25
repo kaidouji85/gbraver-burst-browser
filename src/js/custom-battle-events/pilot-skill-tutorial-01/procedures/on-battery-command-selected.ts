@@ -10,7 +10,7 @@ import { noZeroDefense } from "../stories/no-zero-defense";
 /**
  * 条件を満たした場合「0防御は即死」を再生する
  * @param props イベントプロパティ
- * @return 再生した否か、trueで再生した
+ * @returns 再生した否か、trueで再生した
  */
 async function executeNoZeroDefenseIfNeeded(
   props: Readonly<BatteryCommandSelected>,
@@ -51,7 +51,7 @@ type Ret = {
 /**
  * バッテリーコマンド選択イベント
  * @param props イベントプロパティ
- * @return イベント終了情報
+ * @returns イベント終了情報
  */
 export async function onBatteryCommandSelected(
   props: Readonly<BatteryCommandSelected & PilotSkillTutorial01Props>,

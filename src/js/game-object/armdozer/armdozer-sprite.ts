@@ -11,7 +11,7 @@ export interface ArmdozerSprite {
 
   /**
    * シーンに追加するオブジェクトを取得する
-   * @return 取得結果
+   * @returns 取得結果
    */
   getObject3D(): THREE.Object3D;
 
@@ -23,79 +23,79 @@ export interface ArmdozerSprite {
 
   /**
    * アクティブ状態開始
-   * @return アニメーション
+   * @returns アニメーション
    */
   startActive(): Animate;
 
   /**
    * アクティブ状態終了
-   * @return アニメーション
+   * @returns アニメーション
    */
   endActive(): Animate;
 
   /**
    * ノックバック
-   * @return アニメーション
+   * @returns アニメーション
    */
   knockBack(): Animate;
 
   /**
    * ノックバック -> 立ちポーズ
-   * @return アニメーション
+   * @returns アニメーション
    */
   knockBackToStand(): Animate;
 
   /**
    * ガード
-   * @return アニメーション
+   * @returns アニメーション
    */
   guard(): Animate;
 
   /**
    * ガード -> 立ちポーズ
-   * @return アニメーション
+   * @returns アニメーション
    */
   guardToStand(): Animate;
 
   /**
    * 避け
-   * @return アニメーション
+   * @returns アニメーション
    */
   avoid(): Animate;
 
   /**
    * 避け -> 立ち
-   * @return アニメーション
+   * @returns アニメーション
    */
   avoidToStand(): Animate;
 
   /**
    * ダウン
-   * @return アニメーション
+   * @returns アニメーション
    */
   down(): Animate;
 
   /**
    * 気をつけ
-   * @return アニメーション
+   * @returns アニメーション
    */
   upright(): Animate;
 
   /**
    * 気をつけ -> 立ち
-   * @return アニメーション
+   * @returns アニメーション
    */
   uprightToStand(): Animate;
 
   /**
    * 礼（倒れる）
-   * @return アニメーション
+   * @returns アニメーション
    */
   bowDown(): Animate;
 
   /**
    * 礼（起き上がる）
-   * @return アニメーション
+   * @returns アニメーション
    */
   bowUp(): Animate;
 }

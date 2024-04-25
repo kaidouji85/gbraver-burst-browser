@@ -8,7 +8,7 @@ import type { LightningDozerModel } from "./lightning-dozer-model";
 /**
  * ライトニングドーザモデルの初期値を生成する
  *
- * @return 初期値
+ * @returns 初期値
  */
 export function createInitialValue(): LightningDozerModel {
   return {

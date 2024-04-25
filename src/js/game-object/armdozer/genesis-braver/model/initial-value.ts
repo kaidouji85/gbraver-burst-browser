@@ -7,7 +7,7 @@ import type { GenesisBraverModel } from "./genesis-braver-model";
 
 /**
  * ジェネシスブレイバーモデル初期値生成
- * @return 生成結果
+ * @returns 生成結果
  */
 export function createInitialValue(): GenesisBraverModel {
   return {

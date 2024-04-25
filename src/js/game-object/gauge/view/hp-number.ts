@@ -73,7 +73,7 @@ export class HpNumber {
   /**
    * シーンに追加するオブジェクトを取得する
    *
-   * @return シーンに追加するオブジェクト
+   * @returns シーンに追加するオブジェクト
    */
   getObject3D(): THREE.Object3D {
     return this.#group;
@@ -83,7 +83,7 @@ export class HpNumber {
    * HP数字を表示できる範囲に補正する
    *
    * @param value 補正前
-   * @return 補正結果
+   * @returns 補正結果
    */
   #correctValue(value: number): number {
     if (value < MIN_HP) {

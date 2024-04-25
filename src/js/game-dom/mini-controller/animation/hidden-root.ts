@@ -13,7 +13,7 @@ type Model = {
 /**
  * ルート要素を非表示にする
  * @param props コンポネントプロパティ
- * @return アニメーション
+ * @returns アニメーション
  */
 export function hiddenRoot(props: MiniControllerProps): Animate {
   const setUpdateHandler = (t: TWEEN.Tween<Model>): TWEEN.Tween<Model> =>

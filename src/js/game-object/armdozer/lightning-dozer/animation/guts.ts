@@ -7,7 +7,7 @@ import { LightningDozerAnimationProps } from "./animation-props";
 /**
  * ガッツ
  * @param props アニメーションプロパティ
- * @return アニメーション
+ * @returns アニメーション
  */
 export function guts(props: LightningDozerAnimationProps): Animate {
   const { model, sounds, se } = props;

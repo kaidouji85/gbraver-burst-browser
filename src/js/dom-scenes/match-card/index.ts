@@ -28,7 +28,7 @@ export class MatchCard implements DOMScene {
 
   /**
    * 各種リソースの読み込みが完了するまで待つ
-   * @return 待機結果
+   * @returns 待機結果
    */
   async waitUntilLoaded(): Promise<void> {
     await Promise.all([this.#props.isPlayerLoaded, this.#props.isEnemyLoaded]);

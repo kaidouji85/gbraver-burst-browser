@@ -8,7 +8,7 @@ import { batteryChange } from "./battery-change";
 /**
  * プラスボタンアニメーション
  * @param props ゲームオブジェクトプロパティ
- * @return 処理が完了したら発火するPromise
+ * @returns 処理が完了したら発火するPromise
  */
 async function plusButton(props: BatterySelectorProps): Promise<void> {
   const { batteryPlusTween, model } = props;
@@ -23,7 +23,7 @@ async function plusButton(props: BatterySelectorProps): Promise<void> {
 /**
  * マイナスボタンアニメーション
  * @param props ゲームオブジェクトプロパティ
- * @return 処理が完了したら発火するPromise
+ * @returns 処理が完了したら発火するPromise
  */
 async function minusButton(props: BatterySelectorProps): Promise<void> {
   const { batteryMinusTween, model } = props;
@@ -40,7 +40,7 @@ async function minusButton(props: BatterySelectorProps): Promise<void> {
  * @param props ゲームオブジェクトプロパティ
  * @param battery バッテリー設定値
  * @param duration ボタンを押す間隔（ミリ秒）
- * @return 処理が完了したら発火するPromise
+ * @returns 処理が完了したら発火するPromise
  */
 export async function toBatterySilently(
   props: BatterySelectorProps,

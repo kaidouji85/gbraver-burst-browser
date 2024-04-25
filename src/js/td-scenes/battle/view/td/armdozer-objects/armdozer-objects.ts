@@ -17,13 +17,13 @@ export interface TDArmdozerObjects {
 
   /**
    * アームドーザスプライトにダウンキャストする
-   * @return アームドーザスプライト
+   * @returns アームドーザスプライト
    */
   sprite(): ArmdozerSprite;
 
   /**
    * シーンに追加するオブジェクトを取得する
-   * @return シーンに追加するオブジェクト
+   * @returns シーンに追加するオブジェクト
    */
   getObject3Ds(): THREE.Object3D[];
 }

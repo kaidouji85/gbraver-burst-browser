@@ -5,7 +5,7 @@ import { playerPilotOnlyShout } from "../../pilot-shout";
 /**
  * シンヤ叫び 即死を避けるためにパイロットスキル発動
  * @param props イベントプロパティ
- * @return アニメーション
+ * @returns アニメーション
  */
 export const shinyaPilotSkillShoutToAvoidDeath = (
   props: Readonly<CustomBattleEventProps>,

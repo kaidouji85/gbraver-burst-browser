@@ -17,7 +17,7 @@ export type RecoverBatteryCreatorParams = ResourcesContainer &
 /**
  * プレイヤー側 バッテリー回復
  * @param params 生成パラメータ
- * @return バッテリー回復
+ * @returns バッテリー回復
  */
 export function playerRecoverBattery(
   params: RecoverBatteryCreatorParams,
@@ -30,7 +30,7 @@ export function playerRecoverBattery(
 /**
  * 敵側 バッテリー回復
  * @param params 生成パラメータ
- * @return バッテリー回復
+ * @returns バッテリー回復
  */
 export function enemyRecoverBattery(
   params: RecoverBatteryCreatorParams,

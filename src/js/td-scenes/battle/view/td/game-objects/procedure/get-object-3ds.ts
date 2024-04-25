@@ -5,7 +5,7 @@ import { TDGameObjectsProps } from "../props";
 /**
  * シーンに追加するオブジェクトを取得する
  * @param props プロパティ
- * @return シーンに追加するオブジェクト
+ * @returns シーンに追加するオブジェクト
  */
 export function getObject3Ds(props: TDGameObjectsProps): THREE.Object3D[] {
   return [

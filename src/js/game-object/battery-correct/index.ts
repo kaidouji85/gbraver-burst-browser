@@ -15,7 +15,7 @@ export type BatteryCorrectCreatorParams = ResourcesContainer & {
 /**
  * プレイヤー側 バッテリー補正
  * @param params パラメータ
- * @return バッテリー補正
+ * @returns バッテリー補正
  */
 export function playerBatteryCorrect(
   params: BatteryCorrectCreatorParams,
@@ -28,7 +28,7 @@ export function playerBatteryCorrect(
 /**
  * 敵側 バッテリー補正
  * @param params パラメータ
- * @return バッテリー補正
+ * @returns バッテリー補正
  */
 export function enemyBatteryCorrect(
   params: BatteryCorrectCreatorParams,

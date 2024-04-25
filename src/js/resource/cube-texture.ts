@@ -45,7 +45,7 @@ export const CUBE_TEXTURE_CONFIGS: CubeTextureConfig[] = [
  *
  * @param resourceRoot リソースルート
  * @param config キューブテクスチャ設定
- * @return キューブテクスチャリソース
+ * @returns キューブテクスチャリソース
  */
 export function loadCubeTexture(
   resourceRoot: ResourceRoot,

@@ -95,7 +95,7 @@ export class PlayerShinBraverCutInView implements ShinBraverCutInView {
   /**
    * シーンに追加するオブジェクトを取得する
    *
-   * @return シーンに追加するオブジェクト
+   * @returns シーンに追加するオブジェクト
    */
   getObject3D(): THREE.Object3D {
     return this.#group;
@@ -104,7 +104,7 @@ export class PlayerShinBraverCutInView implements ShinBraverCutInView {
   /**
    * 本クラスが管理する全メッシュを取得する
    *
-   * @return 管理する全メッシュ
+   * @returns 管理する全メッシュ
    */
   #getMeshes(): HorizontalAnimationMesh[] {
     return [this.#cutInUp, this.#cutInDown];
@@ -114,7 +114,7 @@ export class PlayerShinBraverCutInView implements ShinBraverCutInView {
    * 指定したアニメーションタイプに対応したメッシュを返す
    *
    * @param type アニメーションタイプ
-   * @return メッシュ
+   * @returns メッシュ
    */
   #getActiveMesh(type: AnimationType): HorizontalAnimationMesh {
     switch (type) {

@@ -55,7 +55,7 @@ export class DOMDialogBinder {
   /**
    * ゲームアクション通知
    *
-   * @return イベント通知ストリーム
+   * @returns イベント通知ストリーム
    */
   gameActionNotifier(): Observable<GameAction> {
     return this.#gameAction;
@@ -64,7 +64,7 @@ export class DOMDialogBinder {
   /**
    * 本クラスのルートHTML要素を取得する
    *
-   * @return 取得結果
+   * @returns 取得結果
    */
   getRootHTMLElement(): HTMLElement {
     return this.#root;

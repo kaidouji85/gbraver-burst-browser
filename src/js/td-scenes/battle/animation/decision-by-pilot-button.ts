@@ -6,7 +6,7 @@ import { BattleSceneView } from "../view";
 /**
  * パイロットボタンによる決定アニメーション
  * @param view ビュー
- * @return アニメーション
+ * @returns アニメーション
  */
 export function decisionByPilotButton(
   view: Readonly<BattleSceneView>,

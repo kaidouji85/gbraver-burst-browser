@@ -4,7 +4,7 @@ import { MessageWindowProps } from "../props";
 /**
  * メッセージを上スクロールする
  * @param props コンポネントプロパティ
- * @return アニメーションが完了したら発火するPromise
+ * @returns アニメーションが完了したら発火するPromise
  */
 export async function scrollUp(
   props: Readonly<MessageWindowProps>,

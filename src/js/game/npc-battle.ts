@@ -48,7 +48,7 @@ export type NPCBattleState = {
  * @param armdozerId プレイヤーが選択したアームドーザID
  * @param pilotId プレイヤーが選択したパイロットID
  * @param stages 全ステージ
- * @return NPCバトルステート
+ * @returns NPCバトルステート
  */
 export function createNPCBattleState(
   playerId: PlayerId,
@@ -74,7 +74,7 @@ export function createNPCBattleState(
  * 現在のNPCステージレベルを取得する
  *
  * @param state NPCバトルステート
- * @return ステージレベル
+ * @returns ステージレベル
  */
 export function getNPCStageLevel(state: NPCBattleState): number {
   return state.stageIndex + 1;
@@ -85,7 +85,7 @@ export function getNPCStageLevel(state: NPCBattleState): number {
  * ステージが取得できない場合はnullを返す
  *
  * @param origin NPCバトルステート
- * @return ステージ
+ * @returns ステージ
  */
 export function getCurrentNPCStage(
   origin: NPCBattleState,
@@ -101,7 +101,7 @@ export type NPCBattleResult = "StageClear" | "StageMiss" | "NPCBattleComplete";
  *
  * @param isStageClear ステージクリアしたか否かのフラグ、trueでステージクリア
  * @param isLastStage ラストステージか否かのフラグ、trueでラストステージ
- * @return 判定結果
+ * @returns 判定結果
  */
 function getNPCBattleResult(
   isStageClear: boolean,
@@ -130,7 +130,7 @@ export type UpdatedNPCBattleState = {
  *
  * @param origin 更新前のステート
  * @param gameEndResult 戦闘結果
- * @return NPCバトル更新結果
+ * @returns NPCバトル更新結果
  */
 export function updateNPCBattleState(
   origin: Readonly<NPCBattleState>,

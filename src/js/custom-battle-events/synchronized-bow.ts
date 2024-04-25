@@ -6,7 +6,7 @@ import { CustomBattleEventProps } from "../td-scenes/battle/custom-battle-event"
 /**
  * 互いに礼をする
  * @param props カスタムイベントプロパティ
- * @return アニメーション
+ * @returns アニメーション
  */
 export function synchronizedBow(props: CustomBattleEventProps): Animate {
   return all(

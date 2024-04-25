@@ -17,7 +17,7 @@ export type BatteryEnchantmentCreatorParams = ResourcesContainer &
 /**
  * プレイヤー バッテリー増強 ポップアップ
  * @param params 生成パラメータ
- * @return 生成結果
+ * @returns 生成結果
  */
 export function playerBatteryEnchantment(
   params: BatteryEnchantmentCreatorParams,
@@ -30,7 +30,7 @@ export function playerBatteryEnchantment(
 /**
  * 敵 バッテリー増強 ポップアップ
  * @param params 生成パラメータ
- * @return 生成結果
+ * @returns 生成結果
  */
 export function enemyBatteryEnchantment(
   params: BatteryEnchantmentCreatorParams,

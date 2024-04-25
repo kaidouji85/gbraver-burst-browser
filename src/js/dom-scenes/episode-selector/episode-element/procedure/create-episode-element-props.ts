@@ -10,7 +10,7 @@ import { rootInnerHTML } from "../dom/root-inner-html";
  * EpisodeElementPropsを生成する
  * @param resources リソース管理オブジェクト
  * @param episode エピソード情報
- * @return 生成結果
+ * @returns 生成結果
  */
 export function createEpisodeElementProps(
   resources: Resources,

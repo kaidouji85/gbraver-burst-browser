@@ -16,7 +16,7 @@ type Params = {
 /**
  * イベントリスナーを登録する
  * @param props ログインダイアログのプロパティ
- * @return アンサブスクライバ
+ * @returns アンサブスクライバ
  */
 export function bindEventListeners(params: Params): Unsubscribable[] {
   const { props, gameObjectAction } = params;

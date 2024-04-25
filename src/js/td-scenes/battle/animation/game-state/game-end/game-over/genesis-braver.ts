@@ -7,7 +7,7 @@ import { GameOverParamX } from "./game-over-param";
 /**
  * ジェネシスブレイバー 勝利
  * @param param パラメータ
- * @return アニメーション
+ * @returns アニメーション
  */
 export function genesisBraverWin(
   param: GameOverParamX<GenesisBraverTD>,

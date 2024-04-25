@@ -41,7 +41,7 @@ export class WingDozerTD implements TDArmdozerObjects {
 /**
  * プレイヤー 3Dレイヤー ウィングドーザ 3Dレイヤー
  * @param params 生成パラメータ
- * @return 生成結果
+ * @returns 生成結果
  */
 export function playerWingDozerTD(
   params: TDLayerObjectCreatorParams,
@@ -53,7 +53,7 @@ export function playerWingDozerTD(
 /**
  * 敵 3Dレイヤー ウィングドーザ 3Dレイヤー
  * @param params 生成パラメータ
- * @return 生成結果
+ * @returns 生成結果
  */
 export function enemyWingDozerTD(
   params: TDLayerObjectCreatorParams,

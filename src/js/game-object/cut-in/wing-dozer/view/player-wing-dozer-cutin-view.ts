@@ -74,7 +74,7 @@ export class PlayerWingDozerCutInView implements WingDozerCutInView {
   /**
    * シーンに追加するオブジェクトを取得する
    *
-   * @return シーンに追加するオブジェクト
+   * @returns シーンに追加するオブジェクト
    */
   getObject3D(): THREE.Object3D {
     return this.#group;
@@ -108,7 +108,7 @@ export class PlayerWingDozerCutInView implements WingDozerCutInView {
   /**
    * 本クラスに含まれる全メッシュを取得する
    *
-   * @return 取得結果
+   * @returns 取得結果
    */
   #getAllMeshes(): HorizontalAnimationMesh[] {
     return [this.#burstUp, this.#burstDown];
@@ -118,7 +118,7 @@ export class PlayerWingDozerCutInView implements WingDozerCutInView {
    * アニメーションタイプに応じたメッシュを返す
    *
    * @param type アニメーションタイプ
-   * @return アニメーションタイプに応じたメッシュ
+   * @returns アニメーションタイプに応じたメッシュ
    */
   #getActiveMesh(type: AnimationType): HorizontalAnimationMesh {
     switch (type) {

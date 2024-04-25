@@ -31,7 +31,7 @@ export class RaitoHUD implements HUDPilotObjects {
   /**
    * シーンに追加するオブジェクトを取得する
    *
-   * @return シーンに追加するオブジェクト
+   * @returns シーンに追加するオブジェクト
    */
   getObject3Ds(): THREE.Object3D[] {
     return [this.cutIn.getObject3D()];
@@ -41,7 +41,7 @@ export class RaitoHUD implements HUDPilotObjects {
 /**
  * プレイヤー側 ライトHUD
  * @param params 生成パラメータ
- * @return ライトHUD
+ * @returns ライトHUD
  */
 export function playerRaitoHUD(params: HUDLayerObjectCreatorParams): RaitoHUD {
   const { player } = params;
@@ -51,7 +51,7 @@ export function playerRaitoHUD(params: HUDLayerObjectCreatorParams): RaitoHUD {
 /**
  * 敵側 ライトHUD
  * @param params 生成パラメータ
- * @return ライトHUD
+ * @returns ライトHUD
  */
 export function enemyRaitoHUD(params: HUDLayerObjectCreatorParams): RaitoHUD {
   const { enemy } = params;

@@ -20,7 +20,7 @@ type Param = ResourcesContainer & {
  * プレイヤーゲージを生成する
  *
  * @param param パラメータ
- * @return ゲージ
+ * @returns ゲージ
  */
 export function playerGauge(param: Param): Gauge {
   const view = new PlayerGaugeView(param.resources);
@@ -36,7 +36,7 @@ export function playerGauge(param: Param): Gauge {
  * 敵ゲージを生成する
  *
  * @param param パラメータ
- * @return ゲージ
+ * @returns ゲージ
  */
 export function enemyGauge(param: Param): Gauge {
   const view = new EnemyGaugeView(param.resources);

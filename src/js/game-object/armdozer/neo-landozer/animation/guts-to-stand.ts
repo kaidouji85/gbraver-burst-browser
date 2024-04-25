@@ -7,7 +7,7 @@ import { NeoLandozerAnimationProps } from "./animation-props";
 /**
  * ターンスタート -> 立ち
  * @param props アニメーションプロパティ
- * @return アニメーション
+ * @returns アニメーション
  */
 export function gutsToStand(props: NeoLandozerAnimationProps): Animate {
   const { model, sounds, se } = props;

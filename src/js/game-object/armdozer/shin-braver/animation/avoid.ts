@@ -8,7 +8,7 @@ import { ShinBraverAnimationProps } from "./animation-props";
 /**
  * 避ける
  * @param props アニメーションプロパティ
- * @return アニメーション
+ * @returns アニメーション
  */
 export function avoid(props: ShinBraverAnimationProps): Animate {
   const { model, sounds, se } = props;

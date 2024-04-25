@@ -5,7 +5,7 @@ import type { BGM } from "./bgm";
 /**
  * BGMオペレータ
  * @param bgm 現在のBGM
- * @return オペレーション後のBGM
+ * @returns オペレーション後のBGM
  */
 export type BGMOperator = (bgm: BGM) => Promise<BGM>;
 
@@ -52,7 +52,7 @@ export const stop = async (bgm: BGM): Promise<BGM> => {
  * BGMの音量を変更する
  * 本関数には設定画面における音量設定を指定すること
  * @param bgmVolume BGMの音量、0〜1の範囲
- * @return BGMオペレータ
+ * @returns BGMオペレータ
  */
 export const changeVolume =
   (bgmVolume: number) =>
@@ -71,7 +71,7 @@ export const changeVolume =
  * BGMを再生する
  * BGMがすでに再生されている場合、強制的に停止して新しいBGMを再生する
  * @param resource 再生するBGMの音リソース
- * @return BGMオペレータ
+ * @returns BGMオペレータ
  */
 export const play =
   (resource: SoundResource): BGMOperator =>

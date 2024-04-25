@@ -17,7 +17,7 @@ export type DamageHalvedCreatorParams = ResourcesContainer &
 /**
  * プレイヤー ダメージ半減 ポップアップ
  * @param params 生成パラメータ
- * @return 生成結果
+ * @returns 生成結果
  */
 export function playerDamageHalved(
   params: DamageHalvedCreatorParams,
@@ -30,7 +30,7 @@ export function playerDamageHalved(
 /**
  * 敵 ダメージ半減 ポップアップ
  * @param params 生成パラメータ
- * @return 生成結果
+ * @returns 生成結果
  */
 export function enemyDamageHalved(
   params: DamageHalvedCreatorParams,

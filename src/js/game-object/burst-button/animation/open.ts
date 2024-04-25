@@ -6,7 +6,7 @@ import { BurstButtonAnimationProps } from "./animation-props";
 /**
  * バーストボタンを表示する
  * @param props アニメーションプロパティ
- * @return アニメーション
+ * @returns アニメーション
  */
 export function open(
   props: BurstButtonAnimationProps,

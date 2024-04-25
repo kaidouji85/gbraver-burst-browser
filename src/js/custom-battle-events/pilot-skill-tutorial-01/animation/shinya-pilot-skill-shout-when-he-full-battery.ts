@@ -5,7 +5,7 @@ import { playerPilotOnlyShout } from "../../pilot-shout";
 /**
  * シンヤ バッテリー満タンでパイロットスキル 叫び
  * @param props イベントプロパティ
- * @return アニメーション
+ * @returns アニメーション
  */
 export const shinyaPilotSkillShoutWhenHeFullBattery = (
   props: Readonly<CustomBattleEventProps>,

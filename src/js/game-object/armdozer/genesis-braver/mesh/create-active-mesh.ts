@@ -19,7 +19,7 @@ const ACTIVE_COLOR_B = 128;
 /**
  * アクティブ用にシルエット化したテクスチャを生成する
  * @param texture 加工前のテクスチャ
- * @return シルエット化したテクスチャ
+ * @returns シルエット化したテクスチャ
  */
 function createActiveSilhouetteTexture(texture: THREE.Texture): THREE.Texture {
   const canvas = toSilhouette({
@@ -43,7 +43,7 @@ type Params = ResourcesContainer & {
 /**
  * ジェネシスブレイバーのアクティブメッシュを生成する
  * @param params パラメータ
- * @return 生成結果
+ * @returns 生成結果
  */
 export function createGenesisBraverActiveMesh(
   params: Params,

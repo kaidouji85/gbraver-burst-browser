@@ -84,7 +84,7 @@ export type PropsCreatorParams = BGMManagerContainer &
 /**
  * 設定画面プロパティを生成する
  * @param params パラメータ
- * @return 生成した設定画面プロパティ
+ * @returns 生成した設定画面プロパティ
  */
 export function createConfigProps(params: PropsCreatorParams): ConfigProps {
   const { resources, config, bgm, se } = params;

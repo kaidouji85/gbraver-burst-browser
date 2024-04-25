@@ -7,7 +7,7 @@ import { LightningAnimationProps } from "./animation-props";
 /**
  * エフェクトを一瞬だけ表示する
  * @param props アニメーションプロパティ
- * @return アニメーション
+ * @returns アニメーション
  */
 export function popUp(props: LightningAnimationProps): Animate {
   const { model, sounds, se } = props;

@@ -17,7 +17,7 @@ export type TsubasaCutInCreatorParams = ResourcesContainer &
 /**
  * プレイヤー側 ツバサ カットイン
  * @param params 生成パラメータ
- * @return ツバサ カットイン
+ * @returns ツバサ カットイン
  */
 export function playerTsubasaCutIn(
   params: TsubasaCutInCreatorParams,
@@ -30,7 +30,7 @@ export function playerTsubasaCutIn(
 /**
  * 敵側 ツバサ カットイン
  * @param params 生成パラメータ
- * @return ツバサ カットイン
+ * @returns ツバサ カットイン
  */
 export function enemyTsubasaCutIn(
   params: TsubasaCutInCreatorParams,

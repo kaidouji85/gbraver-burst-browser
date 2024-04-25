@@ -10,7 +10,7 @@ import { showCommand } from "./show-command";
  * コマンド入力フェイズのアニメーション
  * @param props 戦闘シーンビュー
  * @param gameState ゲーム状態
- * @return アニメーション
+ * @returns アニメーション
  */
 export function inputCommandAnimation(
   props: StateAnimationProps,

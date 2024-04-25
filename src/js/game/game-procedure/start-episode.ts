@@ -14,7 +14,7 @@ import { GameProps } from "../game-props";
  * エピソードを開始するヘルパー関数
  * @param props ゲームプロパティ
  * @param episode エピソード
- * @return 処理が完了したら発火するPromise
+ * @returns 処理が完了したら発火するPromise
  */
 export async function startEpisode(
   props: Readonly<GameProps>,

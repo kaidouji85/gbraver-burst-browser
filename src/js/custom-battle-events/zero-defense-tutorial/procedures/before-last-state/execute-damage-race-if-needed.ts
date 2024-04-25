@@ -7,7 +7,7 @@ import { damageRace } from "../../stories/damage-race";
 /**
  * 条件を満たした場合、ダメージレースストーリーを再生する
  * @param props イベントプロパティ
- * @return ステート更新結果
+ * @returns ステート更新結果
  */
 export async function executeDamageRaceIfNeeded(
   props: Readonly<LastState & ZeroDefenseTutorialProps>,

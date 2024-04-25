@@ -10,7 +10,7 @@ import type { GameAction } from "../game-actions";
  * @template X ダイアログのデータ型
  * @param dialog ダイアログ
  * @param gameAction ゲームアクションストリーム
- * @return ゲームションションのアンサブスクライブ
+ * @returns ゲームションションのアンサブスクライブ
  */
 export type DomDialogActionConnector<X extends DOMDialog> = (
   dialog: X,

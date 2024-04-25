@@ -33,7 +33,7 @@ export type PropsCreatorParams = ResourcesContainer &
 /**
  * EpisodeSelectorPropsを生成する
  * @param params 生成パラメータ
- * @return 生成したEpisodeSelectorProps
+ * @returns 生成したEpisodeSelectorProps
  */
 export function createEpisodeSelectorProps(
   params: PropsCreatorParams,

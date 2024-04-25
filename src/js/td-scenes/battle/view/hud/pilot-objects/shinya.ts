@@ -31,7 +31,7 @@ export class ShinyaHUD implements HUDPilotObjects {
   /**
    * シーンに追加するオブジェクトを取得する
    *
-   * @return シーンに追加するオブジェクト
+   * @returns シーンに追加するオブジェクト
    */
   getObject3Ds(): THREE.Object3D[] {
     return [this.cutIn.getObject3D()];
@@ -41,7 +41,7 @@ export class ShinyaHUD implements HUDPilotObjects {
 /**
  * プレイヤー側 シンヤHUD
  * @param params 生成パラメータ
- * @return シンヤHUD
+ * @returns シンヤHUD
  */
 export function playerShinyaHUD(
   params: HUDLayerObjectCreatorParams,
@@ -53,7 +53,7 @@ export function playerShinyaHUD(
 /**
  * 敵側 シンヤHUD
  * @param params 生成パラメータ
- * @return シンヤHUD
+ * @returns シンヤHUD
  */
 export function enemyShinyaHUD(params: HUDLayerObjectCreatorParams): ShinyaHUD {
   const { enemy } = params;

@@ -17,7 +17,7 @@ type GenesisBraverCreatorParams = ResourcesContainer &
 /**
  * プレイヤージェネシスブレイバーを生成
  * @param params 生成パラメータ
- * @return 生成結果
+ * @returns 生成結果
  */
 export function PlayerGenesisBraver(
   params: GenesisBraverCreatorParams,
@@ -30,7 +30,7 @@ export function PlayerGenesisBraver(
 /**
  * 敵ジェネシスブレイバーを生成
  * @param params 生成パラメータ
- * @return 生成結果
+ * @returns 生成結果
  */
 export function EnemyGenesisBraver(
   params: GenesisBraverCreatorParams,

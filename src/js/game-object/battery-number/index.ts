@@ -15,7 +15,7 @@ export type BatteryNumberCreatorParams = ResourcesContainer & {
 /**
  * プレイヤーのバッテリービュー
  * @param params 生成パラメータ
- * @return バッテリービュー
+ * @returns バッテリービュー
  */
 export function playerBatteryNumber(
   params: BatteryNumberCreatorParams,
@@ -28,7 +28,7 @@ export function playerBatteryNumber(
 /**
  * 敵のバッテリービュー
  * @param params 生成パラメータ
- * @return バッテリービュー
+ * @returns バッテリービュー
  */
 export function enemyBatteryNumber(
   params: BatteryNumberCreatorParams,

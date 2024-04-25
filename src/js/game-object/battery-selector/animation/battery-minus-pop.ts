@@ -9,7 +9,7 @@ import { BatterySelectorAnimationProps } from "./animation-props";
  * マイナスボタン ポップ 無音
  * @param props アニメーションプロパティ
  * @param group Tweenグループ
- * @return アニメーション
+ * @returns アニメーション
  */
 export function silentlyBatteryMinusPop(
   props: BatterySelectorAnimationProps,
@@ -45,7 +45,7 @@ export function silentlyBatteryMinusPop(
  * マイナスボタン ポップ
  * @param props アニメーションプロパティ
  * @param group Tweenグループ
- * @return アニメーション
+ * @returns アニメーション
  */
 export function batteryMinusPop(
   props: BatterySelectorAnimationProps,

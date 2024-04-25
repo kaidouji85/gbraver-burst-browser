@@ -35,7 +35,7 @@ export class LoginDialog implements DOMDialog {
 
   /**
    * ルートHTML要素を取得する
-   * @return 取得結果
+   * @returns 取得結果
    */
   getRootHTMLElement(): HTMLElement {
     return this.#props.root;
@@ -43,7 +43,7 @@ export class LoginDialog implements DOMDialog {
 
   /**
    * ダイアログ閉じる通知
-   * @return 通知ストリーム
+   * @returns 通知ストリーム
    */
   notifyClosed(): Observable<void> {
     return this.#props.closeDialog;
@@ -51,7 +51,7 @@ export class LoginDialog implements DOMDialog {
 
   /**
    * ログイン実行通知
-   * @return 通知ストリーム
+   * @returns 通知ストリーム
    */
   notifyLogin(): Observable<void> {
     return this.#props.login;

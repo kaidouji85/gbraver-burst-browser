@@ -9,7 +9,7 @@ const duration = 200;
 /**
  * アクティブ状態を開始する
  * @param props アニメーションプロパティ
- * @return アニメーション
+ * @returns アニメーション
  */
 export function startActive(props: GenesisBraverAnimationProps): Animate {
   const { model } = props;

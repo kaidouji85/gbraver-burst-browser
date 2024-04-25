@@ -99,7 +99,7 @@ export class Animate {
    *
    * @param next 結合後に最終用として扱われる後続アニメーション
    * @param pararells 後続アニメーション
-   * @return 結合後アニメーション
+   * @returns 結合後アニメーション
    */
   chain(next: Animate, ...pararells: Animate[]): Animate {
     const pararellTweens = pararells.map((v) => v._start);
@@ -115,7 +115,7 @@ export class Animate {
    * アニメーション再生時間をスケールする
    *
    * @param scale スケール比率
-   * @return 再生時間をスケールしたアニメーション
+   * @returns 再生時間をスケールしたアニメーション
    */
   timeScale(scale: number): Animate {
     this._time = this._time * scale;

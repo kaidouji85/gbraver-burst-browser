@@ -53,7 +53,7 @@ export class Fader {
   /**
    * フェードイン
    *
-   * @return アニメーション
+   * @returns アニメーション
    */
   fadeIn(): Animate {
     return fadeIn(this.#model);
@@ -62,7 +62,7 @@ export class Fader {
   /**
    * フェードアウト
    *
-   * @return アニメーション
+   * @returns アニメーション
    */
   fadeOut(): Animate {
     return fadeOut(this.#model);
@@ -73,7 +73,7 @@ export class Fader {
    *
    * @param value 不透明度
    * @param duration アニメーション時間
-   * @return アニメーション
+   * @returns アニメーション
    */
   opacity(value: number, duration: number): Animate {
     return opacity(this.#model, value, duration);
@@ -82,7 +82,7 @@ export class Fader {
   /**
    * シーンに追加するオブジェクトを取得する
    *
-   * @return シーンに追加するオブジェクト
+   * @returns シーンに追加するオブジェクト
    */
   getObject3D(): THREE.Object3D {
     return this.#view.getObject3D();

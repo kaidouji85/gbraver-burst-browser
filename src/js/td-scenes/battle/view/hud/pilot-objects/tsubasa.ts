@@ -31,7 +31,7 @@ export class TsubasaHUD implements HUDPilotObjects {
   /**
    * シーンに追加するオブジェクトを取得する
    *
-   * @return シーンに追加するオブジェクト
+   * @returns シーンに追加するオブジェクト
    */
   getObject3Ds(): THREE.Object3D[] {
     return [this.cutIn.getObject3D()];
@@ -41,7 +41,7 @@ export class TsubasaHUD implements HUDPilotObjects {
 /**
  * プレイヤー側 ツバサHUD
  * @param params 生成パラメータ
- * @return ツバサHUD
+ * @returns ツバサHUD
  */
 export function playerTsubasaHUD(
   params: HUDLayerObjectCreatorParams,
@@ -53,7 +53,7 @@ export function playerTsubasaHUD(
 /**
  * 敵側 ツバサHUD
  * @param params 生成パラメータ
- * @return ツバサHUD
+ * @returns ツバサHUD
  */
 export function enemyTsubasaHUD(
   params: HUDLayerObjectCreatorParams,

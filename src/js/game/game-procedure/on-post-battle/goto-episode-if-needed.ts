@@ -7,7 +7,7 @@ import { startEpisode } from "../start-episode";
  * 条件を満たしていればエピソードに遷移する
  * @param props ゲームプロパティ
  * @param action アクション
- * @return 遷移した場合はtrue、遷移しなかった場合はfalse
+ * @returns 遷移した場合はtrue、遷移しなかった場合はfalse
  */
 export async function gotoEpisodeIfNeeded(
   props: Readonly<GameProps>,

@@ -9,7 +9,7 @@ import { normalizeMaxBattery } from "./normalize-max-battery";
  * 初期値を生成する
  * @param hp 最大HP
  * @param battery 最大バッテリー
- * @return 生成した初期値
+ * @returns 生成した初期値
  */
 export function initialValue(hp: number, battery: number): GaugeModel {
   const maxBattery = normalizeMaxBattery(battery);

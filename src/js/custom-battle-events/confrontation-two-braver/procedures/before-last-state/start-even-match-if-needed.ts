@@ -8,7 +8,7 @@ import { shinyaMonologueWhenEvenMatch } from "../../stories/shinya-monologue-whe
 /**
  * 条件を満たした場合、チャプター「イーブンマッチ」を開始する
  * @param props イベントプロパティ
- * @return チャプターを開始した場合、trueを返す
+ * @returns チャプターを開始した場合、trueを返す
  */
 export async function startEvenMatchIfNeeded(
   props: Readonly<CustomBattleEventProps & ConfrontationTwoBraverProps>,

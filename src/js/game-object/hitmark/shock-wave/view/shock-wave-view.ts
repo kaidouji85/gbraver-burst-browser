@@ -28,7 +28,7 @@ export interface ShockWaveView {
   /**
    * シーンに追加するオブジェクトを返す
    *
-   * @return シーンに追加するオブジェクト
+   * @returns シーンに追加するオブジェクト
    */
   getObject3D(): THREE.Object3D;
 }

@@ -53,7 +53,7 @@ export class PilotButton {
 
   /**
    * シーンに追加するオブジェクトを取得する
-   * @return シーンに追加するオブジェクト
+   * @returns シーンに追加するオブジェクト
    */
   getObject3D(): THREE.Object3D {
     return this.#props.view.getObject3D();
@@ -62,7 +62,7 @@ export class PilotButton {
   /**
    * パイロットボタン を表示する
    * @param canPilot ボタン利用フラグ、trueで利用可能
-   * @return アニメーション
+   * @returns アニメーション
    */
   open(canPilot: boolean): Animate {
     return open(this.#props, canPilot);
@@ -70,7 +70,7 @@ export class PilotButton {
 
   /**
    * ボタンクリック
-   * @return アニメーション
+   * @returns アニメーション
    */
   decide(): Animate {
     return decide(this.#props);
@@ -78,7 +78,7 @@ export class PilotButton {
 
   /**
    * パイロットボタンを非表示にする
-   * @return アニメーション
+   * @returns アニメーション
    */
   close(): Animate {
     return close(this.#props);
@@ -86,7 +86,7 @@ export class PilotButton {
 
   /**
    * ボタン押下通知
-   * @return 通知ストリーム
+   * @returns 通知ストリーム
    */
   notifyPressed(): Observable<Event> {
     return this.#props.pushButton;
@@ -102,7 +102,7 @@ export class PilotButton {
 
   /**
    * パイロットボタンが操作不可能であるか否かを取得する
-   * @return trueで操作不可能
+   * @returns trueで操作不可能
    */
   isDisabled(): boolean {
     return this.#props.model.disabled;

@@ -15,7 +15,7 @@ import { tweenDuration } from "./duration";
  * @param model tweenさせるオブジェクト
  * @param create Tween生成関数
  * @param group Tweenグループ
- * @return アニメーション
+ * @returns アニメーション
  */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 export function tween<T extends Record<string, any>>(

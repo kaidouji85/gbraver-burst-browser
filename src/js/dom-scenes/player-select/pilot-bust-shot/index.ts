@@ -36,7 +36,7 @@ export class PilotBustShotContainer {
 
   /**
    * ルートHTML要素を取得する
-   * @return 取得結果
+   * @returns 取得結果
    */
   getRootHTMLElement(): HTMLElement {
     return this.#root;
@@ -65,7 +65,7 @@ export class PilotBustShotContainer {
 
   /**
    * 退場
-   * @return アニメーション
+   * @returns アニメーション
    */
   async exit(): Promise<void> {
     const target = this.#bustShots.find(
@@ -89,7 +89,7 @@ export class PilotBustShotContainer {
 
   /**
    * リソース読み込みが完了するまで待つ
-   * @return 待機結果
+   * @returns 待機結果
    */
   async waitUntilLoaded(): Promise<void> {
     await Promise.all(

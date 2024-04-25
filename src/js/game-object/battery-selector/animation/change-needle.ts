@@ -13,7 +13,7 @@ const MAX_DURATION = 500;
  * @param props アニメーションプロパティ
  * @param group Tweenグループ
  * @param needle メーター針の値
- * @return アニメーション
+ * @returns アニメーション
  */
 export function changeNeedle(
   props: BatterySelectorAnimationProps,

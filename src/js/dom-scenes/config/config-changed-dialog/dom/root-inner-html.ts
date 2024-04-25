@@ -8,7 +8,7 @@ import type { DataIDs } from "./data-ids";
  *
  * @param resources リソース管理オブジェクト
  * @param ids data-idを集めたもの
- * @return innerHTML
+ * @returns innerHTML
  */
 export function rootInnerHTML(resources: Resources, ids: DataIDs): string {
   const closerPath =

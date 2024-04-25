@@ -62,7 +62,7 @@ export class GenesisBraverCutIn implements HUDTracking {
 
   /**
    * シーンに追加するオブジェクトを取得する
-   * @return 取得結果
+   * @returns 取得結果
    */
   getObject3D(): THREE.Object3D {
     return this.#props.view.getObject3D();
@@ -70,7 +70,7 @@ export class GenesisBraverCutIn implements HUDTracking {
 
   /**
    * カットインを表示する
-   * @return アニメーション
+   * @returns アニメーション
    */
   show(): Animate {
     return show(this.#props);
@@ -78,7 +78,7 @@ export class GenesisBraverCutIn implements HUDTracking {
 
   /**
    * カットインを非表示にする
-   * @return アニメーション
+   * @returns アニメーション
    */
   hidden(): Animate {
     return hidden(this.#props);

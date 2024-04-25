@@ -44,7 +44,7 @@ export class PrivateMatchHostDialog implements DOMDialog {
 
   /**
    * ダイアログ閉じる通知
-   * @return 通知ストリーム
+   * @returns 通知ストリーム
    */
   notifyDialogClosed(): Observable<void> {
     return this.#props.dialogClosed;

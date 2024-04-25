@@ -17,7 +17,7 @@ export type GaiCutInCreatorParams = ResourcesContainer &
 /**
  * プレイヤー側 ガイ カットイン
  * @param params 生成パラメータ
- * @return ガイ カットイン
+ * @returns ガイ カットイン
  */
 export function playerGaiCutIn(params: GaiCutInCreatorParams): GaiCutIn {
   const { resources } = params;
@@ -28,7 +28,7 @@ export function playerGaiCutIn(params: GaiCutInCreatorParams): GaiCutIn {
 /**
  * 敵側 ガイ カットイン
  * @param params 生成パラメータ
- * @return ガイ カットイン
+ * @returns ガイ カットイン
  */
 export function enemyGaiCutIn(params: GaiCutInCreatorParams): GaiCutIn {
   const { resources } = params;

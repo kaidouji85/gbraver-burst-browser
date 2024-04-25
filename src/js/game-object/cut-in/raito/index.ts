@@ -17,7 +17,7 @@ export type RaitoCutInCreatorParams = ResourcesContainer &
 /**
  * プレイヤー側 ライト カットイン
  * @param params 生成パラメータ
- * @return ライト カットイン
+ * @returns ライト カットイン
  */
 export function playerRaitoCutIn(params: RaitoCutInCreatorParams): RaitoCutIn {
   const { resources } = params;
@@ -28,7 +28,7 @@ export function playerRaitoCutIn(params: RaitoCutInCreatorParams): RaitoCutIn {
 /**
  * 敵側 ライト カットイン
  * @param params 生成パラメータ
- * @return ライト カットイン
+ * @returns ライト カットイン
  */
 export function enemyRaitoCutIn(params: RaitoCutInCreatorParams): RaitoCutIn {
   const { resources } = params;

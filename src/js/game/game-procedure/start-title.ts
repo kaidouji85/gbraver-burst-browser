@@ -14,7 +14,7 @@ import type { GameProps } from "../game-props";
  * に同じ値をセットするために、ヘルパーメソッド化した
  *
  * @param props ゲームプロパティ
- * @return 開始したタイトル画面
+ * @returns 開始したタイトル画面
  */
 export async function startTitle(props: Readonly<GameProps>): Promise<Title> {
   const createLoggedInAccount = async (): Promise<LoggedInAccount> => {

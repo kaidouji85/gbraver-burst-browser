@@ -7,7 +7,7 @@ import { battleResult, correctedBattery } from "gbraver-burst-core";
  * @param attackBattery 攻撃側が出すバッテリー
  * @param defender 防御側のステータス
  * @param defenseBattery 防御側が出すバッテリー
- * @return 戦闘結果
+ * @returns 戦闘結果
  */
 export function getBattleResult(
   attacker: PlayerState,

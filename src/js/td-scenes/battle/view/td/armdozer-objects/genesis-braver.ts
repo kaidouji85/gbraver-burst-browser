@@ -41,7 +41,7 @@ export class GenesisBraverTD implements TDArmdozerObjects {
 /**
  * プレイヤー ジェネシスブレイバー 3Dレイヤー
  * @param params 生成パラメータ
- * @return 生成結果
+ * @returns 生成結果
  */
 export function playerGenesisBraverTD(
   params: TDLayerObjectCreatorParams,
@@ -53,7 +53,7 @@ export function playerGenesisBraverTD(
 /**
  * 敵 ジェネシスブレイバー 3Dレイヤー
  * @param params 生成パラメータ
- * @return 生成結果
+ * @returns 生成結果
  */
 export function enemyGenesisBraverTD(
   params: TDLayerObjectCreatorParams,

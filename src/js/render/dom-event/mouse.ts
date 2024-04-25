@@ -22,7 +22,7 @@ export type MouseUp = {
  * マウスダウンストリームを生成する
  *
  * @param renderDom レンダラのDOM
- * @return ストリーム
+ * @returns ストリーム
  */
 export function createMouseDownStream(
   renderDom: HTMLElement,
@@ -42,7 +42,7 @@ export function createMouseDownStream(
  * マウスムーブストリームを生成する
  *
  * @param renderDom レンダラのDOM
- * @return ストリーム
+ * @returns ストリーム
  */
 export function createMouseMoveStream(
   renderDom: HTMLElement,
@@ -62,7 +62,7 @@ export function createMouseMoveStream(
  * マウスアップストリームを生成する
  *
  * @param renderDom レンダラのDOM
- * @return ストリーム
+ * @returns ストリーム
  */
 export function createMouseUpStream(
   renderDom: HTMLElement,

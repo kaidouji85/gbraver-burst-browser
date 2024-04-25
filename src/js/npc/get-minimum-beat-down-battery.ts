@@ -23,7 +23,7 @@ type Result = Exist | NotExist;
  * @param attacker 攻撃側ステータス
  * @param defender 防御側ステータス
  * @param defenderBattery 防御側バッテリー
- * @return 計算結果
+ * @returns 計算結果
  */
 export function getMinimumBeatDownBattery(
   attacker: PlayerState,

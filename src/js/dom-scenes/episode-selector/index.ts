@@ -51,7 +51,7 @@ export class EpisodeSelector implements DOMScene {
 
   /**
    * 各種リソースの読み込みが完了するまで待つ
-   * @return 待機結果
+   * @returns 待機結果
    */
   async waitUntilLoaded(): Promise<void> {
     await this.#props.isImageCutsLoaded;
@@ -59,7 +59,7 @@ export class EpisodeSelector implements DOMScene {
 
   /**
    * 戻るボタン押下通知
-   * @return 通知ストリーム
+   * @returns 通知ストリーム
    */
   notifyPrev(): Observable<void> {
     return this.#props.prev;
@@ -67,7 +67,7 @@ export class EpisodeSelector implements DOMScene {
 
   /**
    * 選択通知
-   * @return 通知ストリーム
+   * @returns 通知ストリーム
    */
   notifySelection(): Observable<EpisodeSelect> {
     return this.#props.episodeSelect;

@@ -15,7 +15,7 @@ export type SoundConfig = {
   /**
    * 素材のパス
    * @param resourceRoot リソースルート
-   * @return 素材のパス
+   * @returns 素材のパス
    */
   path: (resourceRoot: ResourceRoot) => string;
 };

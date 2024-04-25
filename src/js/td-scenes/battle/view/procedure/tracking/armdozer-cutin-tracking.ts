@@ -15,7 +15,7 @@ import { TrackingParams } from "./tracking-params";
 /**
  * アームドーザカットインを抽出する
  * @param hudArmdozer 取得元
- * @return 取得結果、抽出できない場合はnullを返す
+ * @returns 取得結果、抽出できない場合はnullを返す
  */
 function extractArmdozerCutIn(hudArmdozer: Readonly<HUDArmdozerObjects>) {
   if (
@@ -36,7 +36,7 @@ function extractArmdozerCutIn(hudArmdozer: Readonly<HUDArmdozerObjects>) {
  * @param tdCamera 3Dレイヤーのカメラ
  * @param rendererDOM レンダラDOM
  * @param sprite トラッキングするスプライト
- * @return 変換結果
+ * @returns 変換結果
  */
 function toCutInHUDPos(
   tdCamera: Readonly<THREE.PerspectiveCamera>,

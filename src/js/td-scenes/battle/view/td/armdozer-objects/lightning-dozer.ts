@@ -47,7 +47,7 @@ export class LightningDozerTD implements TDArmdozerObjects {
 /**
  * プレイヤー 3Dレイヤー ライトニングドーザ固有オブジェクト
  * @param params 生成パラメータ
- * @return 生成結果
+ * @returns 生成結果
  */
 export function playerLightningDozerTD(
   params: TDLayerObjectCreatorParams,
@@ -63,7 +63,7 @@ export function playerLightningDozerTD(
 /**
  * 敵 3Dレイヤー ライトニングドーザ固有オブジェクト
  * @param params 生成パラメータ
- * @return 生成結果
+ * @returns 生成結果
  */
 export function enemyLightningDozerTD(
   params: TDLayerObjectCreatorParams,

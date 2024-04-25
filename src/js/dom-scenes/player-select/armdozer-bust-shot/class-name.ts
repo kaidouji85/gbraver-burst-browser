@@ -15,7 +15,7 @@ const ArmdozerBustShotClassNames: Record<ArmdozerId, string> = {
 /**
  * アームドーザIDに対応するバストショットのclass属性を取得する
  * @param armdozerId アームドーザID
- * @return class属性
+ * @returns class属性
  */
 export const getArmdozerBustShotClassName = (armdozerId: ArmdozerId): string =>
   ArmdozerBustShotClassNames[armdozerId] ??

@@ -12,7 +12,7 @@ import { scrollRightMessages } from "../../scroll-messages";
 /**
  * ストーリー 試合終了の礼
  * @param props イベントプロパティ
- * @return ストーリーが完了したら発火するPromise
+ * @returns ストーリーが完了したら発火するPromise
  */
 export const gameEndThanks = async (props: CustomBattleEventProps) => {
   activeRightMessageWindowWithFace(props, "Tsubasa");

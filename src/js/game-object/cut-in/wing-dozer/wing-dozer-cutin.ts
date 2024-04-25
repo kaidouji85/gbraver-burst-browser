@@ -51,7 +51,7 @@ export class WingDozerCutIn implements HUDTracking {
 
   /**
    * シーンに追加するオブジェクトを取得する
-   * @return シーンに追加するオブジェクト
+   * @returns シーンに追加するオブジェクト
    */
   getObject3D(): THREE.Object3D {
     return this.#props.view.getObject3D();
@@ -59,7 +59,7 @@ export class WingDozerCutIn implements HUDTracking {
 
   /**
    * カットインを表示する
-   * @return アニメーション
+   * @returns アニメーション
    */
   show(): Animate {
     return show(this.#props);
@@ -67,7 +67,7 @@ export class WingDozerCutIn implements HUDTracking {
 
   /**
    * カットインを消す
-   * @return アニメーション
+   * @returns アニメーション
    */
   hidden(): Animate {
     return hidden(this.#props);

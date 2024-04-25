@@ -3,7 +3,7 @@ import type { ReflectIndocatorModel } from "./reflect-indocator-model";
 /**
  * モデルの初期値を生成する
  *
- * @return 初期値
+ * @returns 初期値
  */
 export function createInitialValue(): ReflectIndocatorModel {
   return {

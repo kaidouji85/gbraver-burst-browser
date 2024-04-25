@@ -9,7 +9,7 @@ import { yuuyaShoutWhenYuuyaVictory } from "../../stories/yuuya-shout-when-yuuya
 /**
  * 条件を満たした場合、ゲーム終了時のシナリオを再生する
  * @param props イベントプロパティ
- * @return ゲーム終了時のシナリオを再生した場合、trueを返す
+ * @returns ゲーム終了時のシナリオを再生した場合、trueを返す
  */
 export async function endGameIfNeeded(
   props: Readonly<LastState>,

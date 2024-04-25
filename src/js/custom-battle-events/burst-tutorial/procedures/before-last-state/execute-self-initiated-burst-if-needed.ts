@@ -5,7 +5,7 @@ import { selfInitiatedBurst } from "../../stories/self-initiated-burst";
 /**
  * 条件を満たした場合、「プレイヤーが自主的にバーストを発動した」を再生する
  * @param props イベントプロパティ
- * @return 処理が完了したら発火するPromise
+ * @returns 処理が完了したら発火するPromise
  */
 export async function executeSelfInitiatedBurstIfNeeded(
   props: Readonly<LastState & BurstTutorialProps>,

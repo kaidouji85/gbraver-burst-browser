@@ -62,7 +62,7 @@ export type PilotSkillAnimationParam = PilotSkillAnimationParamX<
  *
  * @param props 戦闘シーンプロパティ
  * @param gameState ゲームステート
- * @return 変換結果
+ * @returns 変換結果
  */
 export function toPilotSkillAnimationParam(
   props: StateAnimationProps,

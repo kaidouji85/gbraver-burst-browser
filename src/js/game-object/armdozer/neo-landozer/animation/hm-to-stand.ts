@@ -7,7 +7,7 @@ import { NeoLandozerAnimationProps } from "./animation-props";
 /**
  * アームハンマー -> 立ち
  * @param props アニメーションプロパティ
- * @return アニメーション
+ * @returns アニメーション
  */
 export function hmToStand(props: NeoLandozerAnimationProps): Animate {
   const { model, sounds, se } = props;

@@ -5,7 +5,7 @@ import { scrollRightMessages } from "../../scroll-messages";
 /**
  * シンヤ敗北時のシンヤ独白
  * @param props イベントプロパティ
- * @return ストーリーが完了したら発火するPromise
+ * @returns ストーリーが完了したら発火するPromise
  */
 export async function shinyaMonologueWhenHeLose(
   props: Readonly<CustomBattleEventProps>,

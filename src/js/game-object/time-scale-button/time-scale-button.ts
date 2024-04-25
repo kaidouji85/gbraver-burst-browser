@@ -57,7 +57,7 @@ export class TimeScaleButton {
 
   /**
    * シーンに追加するオブジェクトを取得する
-   * @return シーンに追加するオブジェクト
+   * @returns シーンに追加するオブジェクト
    */
   getObject3D(): THREE.Object3D {
     return this.#props.view.getObject3D();
@@ -65,7 +65,7 @@ export class TimeScaleButton {
 
   /**
    * タイムスケール変更通知
-   * @return 通知ストリーム
+   * @returns 通知ストリーム
    */
   notifyToggled(): Observable<number> {
     return this.#props.toggleNotify;
@@ -81,7 +81,7 @@ export class TimeScaleButton {
 
   /**
    * 操作不可能であるか否かを判定する
-   * @return trueで操作不可能
+   * @returns trueで操作不可能
    */
   isDisabled(): boolean {
     return this.#props.model.disabled;
@@ -90,7 +90,7 @@ export class TimeScaleButton {
   /**
    * ボタンを表示する
    * @param timeScale タイムスケール値
-   * @return アニメーション
+   * @returns アニメーション
    */
   open(timeScale: number): Animate {
     return open(this.#props, timeScale);
@@ -98,7 +98,7 @@ export class TimeScaleButton {
 
   /**
    * ボタンを非表示にする
-   * @return アニメーション
+   * @returns アニメーション
    */
   close(): Animate {
     return close(this.#props);

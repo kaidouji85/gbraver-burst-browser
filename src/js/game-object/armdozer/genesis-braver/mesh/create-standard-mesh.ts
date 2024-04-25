@@ -18,7 +18,7 @@ type Params = ResourcesContainer & {
 /**
  * 標準メッシュを生成する
  * @param params パラメータ
- * @return 生成結果
+ * @returns 生成結果
  */
 export function createStandardMesh(params: Params): ArmdozerAnimation {
   const { resources, textureId, maxAnimation } = params;

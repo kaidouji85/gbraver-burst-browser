@@ -15,7 +15,7 @@ export type ShinBraverCutInCreatorParams = ResourcesContainer & {
 /**
  * プレイヤー側 シンブレイバー カットイン
  * @param params 生成パラメータ
- * @return 生成結果
+ * @returns 生成結果
  */
 export function playerShinBraverCutIn(
   params: ShinBraverCutInCreatorParams,
@@ -28,7 +28,7 @@ export function playerShinBraverCutIn(
 /**
  * 敵側 シンブレイバー カットイン
  * @param params 生成パラメータ
- * @return 生成結果
+ * @returns 生成結果
  */
 export function enemyShinBraverCutIn(
   params: ShinBraverCutInCreatorParams,

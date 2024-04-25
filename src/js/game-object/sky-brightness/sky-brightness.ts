@@ -41,7 +41,7 @@ export class SkyBrightness {
    *
    * @param value 空の明るさ
    * @param duration アニメーション時間
-   * @return アニメーション
+   * @returns アニメーション
    */
   brightness(value: number, duration: number): Animate {
     return brightness(this.#model, value, duration);
@@ -50,7 +50,7 @@ export class SkyBrightness {
   /**
    * シーンに追加するオブジェクトを取得する
    *
-   * @return シーンに追加するオブジェクト
+   * @returns シーンに追加するオブジェクト
    */
   getObject3D(): THREE.Object3D {
     return this.#view.getObject3D();

@@ -14,7 +14,7 @@ import { onToggleTimeScale } from "./on-toggle-time-scale";
 /**
  * 戦闘シーンイにベントリスナーをバインドする
  * @param props 戦闘シーンプロパティ
- * @return アンサブスクライバ
+ * @returns アンサブスクライバ
  */
 export function bindEventListeners(props: BattleSceneProps): Unsubscribable[] {
   return [

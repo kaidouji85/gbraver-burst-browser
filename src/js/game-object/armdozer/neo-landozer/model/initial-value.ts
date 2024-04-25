@@ -7,7 +7,7 @@ import type { NeoLandozerModel } from "./neo-landozer-model";
 
 /**
  * モデルの初期値を生成する
- * @return 生成結果
+ * @returns 生成結果
  */
 export function createInitialValue(): NeoLandozerModel {
   return {

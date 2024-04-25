@@ -15,7 +15,7 @@ const ArmdozerIconPathIds: Record<ArmdozerId, PathId> = {
 /**
  * アームドーザIDに対応するアイコンのパスIDを返す
  * @param armdozerId アームドーザID
- * @return パスID
+ * @returns パスID
  */
 export const getArmdozerIconPathId = (armdozerId: ArmdozerId): PathId =>
   ArmdozerIconPathIds[armdozerId] ?? PathIds.SHIN_BRAVER_ICON;

@@ -21,7 +21,7 @@ import { yoroshikuOnegaiShimasu } from "../../yoroshiku-onegai-shimasu";
 /**
  * ストーリー 冒頭
  * @param props イベントプロパティ
- * @return ストーリーが完了したら発火するPromise
+ * @returns ストーリーが完了したら発火するPromise
  */
 export const introduction = async (props: CustomBattleEventProps) => {
   activeLeftMessageWindowWithFace(props, "Raito");

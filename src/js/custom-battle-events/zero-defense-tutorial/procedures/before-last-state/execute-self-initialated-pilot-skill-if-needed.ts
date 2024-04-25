@@ -6,7 +6,7 @@ import { selfInitiatedPilotSkill } from "../../stories/self-intiated-pilot-skill
 /**
  * 条件を満たした場合、「自発的にパイロットスキル発動」を再生する
  * @param props イベントプロパティ
- * @return ステート更新結果
+ * @returns ステート更新結果
  */
 export async function executeSelfInitiatedPilotSkillIfNeeded(
   props: Readonly<LastState & ZeroDefenseTutorialProps>,

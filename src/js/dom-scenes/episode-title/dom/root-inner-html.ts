@@ -20,7 +20,7 @@ export type RootInnerHTMLParams = ResourcesContainer & {
  * ルート要素のinnerHTML
  *
  * @param params パラメータ
- * @return innerHTML
+ * @returns innerHTML
  */
 export function rootInnerHtml(params: RootInnerHTMLParams): string {
   const { resources, armdozerId } = params;

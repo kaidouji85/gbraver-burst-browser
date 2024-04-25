@@ -5,7 +5,7 @@ import { empty } from "./delay";
  * 全てのアニメーションが完了してから次に進む
  *
  * @param animations 再生待ちをするアニメーション
- * @return アニメーション
+ * @returns アニメーション
  */
 export function all(...animations: Animate[]): Animate {
   const next = animations.reduce(

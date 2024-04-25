@@ -20,7 +20,7 @@ const OUTLINE_COLOR_B = 255;
 /**
  * アウトライン用にシルエット化したテクスチャを生成する
  * @param texture 加工前のテクスチャ
- * @return シルエット化したテクスチャ
+ * @returns シルエット化したテクスチャ
  */
 function createOutlineSilhouetteTexture(texture: THREE.Texture): THREE.Texture {
   const canvas = toSilhouette({
@@ -44,7 +44,7 @@ type Params = ResourcesContainer & {
 /**
  * アウトラインメッシュを生成する
  * @param params パラメータ
- * @return 生成結果
+ * @returns 生成結果
  */
 export function createOutlineMesh(params: Params): ArmdozerAnimation {
   const { resources, textureId, maxAnimation } = params;

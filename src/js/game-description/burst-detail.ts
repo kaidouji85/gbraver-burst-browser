@@ -10,7 +10,7 @@ import type {
 /**
  * バースト詳細を生成する
  * @param burst 情報
- * @return 説明文
+ * @returns 説明文
  */
 export function burstDetail(burst: Burst): string[] {
   switch (burst.type) {
@@ -32,7 +32,7 @@ export function burstDetail(burst: Burst): string[] {
 /**
  * バッテリー回復詳細
  * @param burst バースト情報
- * @return 説明文
+ * @returns 説明文
  */
 function recoverBatteryDetail(burst: RecoverBattery): string[] {
   return [`バッテリーを${burst.recoverBattery}回復する。`];
@@ -41,7 +41,7 @@ function recoverBatteryDetail(burst: RecoverBattery): string[] {
 /**
  * 攻撃バフ詳細
  * @param burst バースト情報
- * @return 説明文
+ * @returns 説明文
  */
 function powerBuffDetail(burst: BuffPower): string[] {
   return [
@@ -53,7 +53,7 @@ function powerBuffDetail(burst: BuffPower): string[] {
 /**
  * ダメージ反射詳細
  * @param burst バースト情報
- * @return 説明文
+ * @returns 説明文
  */
 function lightningBarrierDetail(burst: LightningBarrier): string[] {
   return [
@@ -65,7 +65,7 @@ function lightningBarrierDetail(burst: LightningBarrier): string[] {
 /**
  * 連続攻撃詳細
  * @param burst バースト情報
- * @return 説明文
+ * @returns 説明文
  */
 function continuousAttackDetail(burst: ContinuousAttack): string[] {
   return [
@@ -77,7 +77,7 @@ function continuousAttackDetail(burst: ContinuousAttack): string[] {
 /**
  * バッテリーリミットブレイク詳細
  * @param burst バースト情報
- * @return 説明文
+ * @returns 説明文
  */
 function batteryLimitBreakDetail(burst: BatteryLimitBreak): string[] {
   return [

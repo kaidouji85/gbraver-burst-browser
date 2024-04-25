@@ -8,7 +8,7 @@ import { ShinBraverAnimationProps } from "./animation-props";
 /**
  * ノックバック
  * @param props アニメーションプロパティ
- * @return アニメーション
+ * @returns アニメーション
  */
 export function knockBack(props: ShinBraverAnimationProps): Animate {
   const { model } = props;

@@ -8,7 +8,7 @@ import { doPilotSkill } from "../stories/do-pilot-skill";
 /**
  * 条件を満たせば「パイロットスキル発動を推奨」を再生する
  * @param props イベントプロパティ
- * @return ストーリーを再生したか否か、trueで再生した
+ * @returns ストーリーを再生したか否か、trueで再生した
  */
 export async function executeDoPilotSkillIfNeeded(
   props: Readonly<LastState & PilotSkillTutorial02Props>,

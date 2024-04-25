@@ -54,7 +54,7 @@ export type GamePropsGeneratorParam = {
  * ゲームプロパティを生成する
  *
  * @param param パラメータ
- * @return 生成結果
+ * @returns 生成結果
  */
 export function generateGameProps(param: GamePropsGeneratorParam): GameProps {
   const resize = resizeStream();

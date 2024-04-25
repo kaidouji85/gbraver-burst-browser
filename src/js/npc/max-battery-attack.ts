@@ -42,7 +42,7 @@ const defenseRoutine: SimpleRoutine = (data) => {
 /**
  * 全力攻撃、ウィングドーザNPC
  *
- * @return NPC
+ * @returns NPC
  */
 export function maxBatteryAttackWingDozerNPC(): NPC {
   const armdozer =
@@ -54,7 +54,7 @@ export function maxBatteryAttackWingDozerNPC(): NPC {
 /**
  * 全力攻撃、シンブレイバーNPC
  *
- * @return NPC
+ * @returns NPC
  */
 export function maxBatteryAttackShinBraverNPC(): NPC {
   const armdozer =

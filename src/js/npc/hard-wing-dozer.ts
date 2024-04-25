@@ -70,7 +70,7 @@ const defenseRoutine: SimpleRoutine = (data) => {
 
 /**
  * ハードコース ウィングドーザ NPC
- * @return NPC
+ * @returns NPC
  */
 export function hardWingDozer(): NPC {
   const armdozer =

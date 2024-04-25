@@ -9,7 +9,7 @@ import { attackDescription } from "../stories/attack-description";
 /**
  * 最終ステートイベント
  * @param props イベントプロパティ
- * @return ステート更新結果
+ * @returns ステート更新結果
  */
 export async function onLastState(
   props: Readonly<LastState & BatterySystemTutorialProps>,

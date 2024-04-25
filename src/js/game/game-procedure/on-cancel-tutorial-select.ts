@@ -4,7 +4,7 @@ import { startTitle } from "./start-title";
 /**
  * チュートリアル選択キャンセル
  *
- * @return 処理が完了したら発火するPromise
+ * @returns 処理が完了したら発火するPromise
  */
 export async function onCancelTutorialSelect(
   props: Readonly<GameProps>,

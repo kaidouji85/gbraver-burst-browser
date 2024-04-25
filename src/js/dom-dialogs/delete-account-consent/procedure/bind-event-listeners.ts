@@ -10,7 +10,7 @@ import { onPushOutsideOfDialog } from "./on-push-outside-of-dialog";
 /**
  * ダイアログにイベントリスナを関連づける
  * @param props ダイアログのプロパティ
- * @return アンサブスクライバ
+ * @returns アンサブスクライバ
  */
 export function bindEventListeners(
   props: DeleteAccountConsentDialogProps,

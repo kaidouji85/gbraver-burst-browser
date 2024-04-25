@@ -17,7 +17,7 @@ export type ContinuousAttackCreatorParams = ResourcesContainer &
 /**
  * プレイヤー側 連続攻撃
  * @param params 生成パラメータ
- * @return 生成結果
+ * @returns 生成結果
  */
 export function playerContinuousAttack(
   params: ContinuousAttackCreatorParams,
@@ -30,7 +30,7 @@ export function playerContinuousAttack(
 /**
  * 敵側 連続攻撃
  * @param params 生成パラメータ
- * @return 生成結果
+ * @returns 生成結果
  */
 export function enemyContinuousAttack(
   params: ContinuousAttackCreatorParams,

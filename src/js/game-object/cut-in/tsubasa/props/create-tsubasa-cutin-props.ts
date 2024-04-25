@@ -15,7 +15,7 @@ export type PropsCreatorParams = ResourcesContainer &
 /**
  * TsubasaCutInPropsを生成する
  * @param params パラメータ
- * @return 生成されたTsubasaCutInProps
+ * @returns 生成されたTsubasaCutInProps
  */
 export function createTsubasaCutInProps(
   params: PropsCreatorParams,

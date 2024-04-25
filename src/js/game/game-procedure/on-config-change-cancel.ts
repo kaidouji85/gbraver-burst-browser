@@ -5,7 +5,7 @@ import { startTitle } from "./start-title";
 /**
  * 設定変更キャンセル時の処理
  * @param props ゲームプロパティ
- * @return 処理が完了したら発火するPromise
+ * @returns 処理が完了したら発火するPromise
  */
 export async function onConfigChangeCancel(
   props: Readonly<GameProps>,

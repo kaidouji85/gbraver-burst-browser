@@ -42,7 +42,7 @@ export class PlayerSelect implements DOMScene {
 
   /**
    * ルートHTML要素を取得する
-   * @return 取得結果
+   * @returns 取得結果
    */
   getRootHTMLElement(): HTMLElement {
     return this.#props.root;
@@ -50,7 +50,7 @@ export class PlayerSelect implements DOMScene {
 
   /**
    * リソース読み込みが完了するまで待つ
-   * @return 読み込み完了したら発火するPromise
+   * @returns 読み込み完了したら発火するPromise
    */
   async waitUntilLoaded(): Promise<void> {
     await waitUntilLoaded(this.#props);
@@ -58,7 +58,7 @@ export class PlayerSelect implements DOMScene {
 
   /**
    * 選択完了通知
-   * @return 通知ストリーム
+   * @returns 通知ストリーム
    */
   notifySelectCompletion(): Observable<PlayerDecide> {
     return this.#props.playerDecide;
@@ -66,7 +66,7 @@ export class PlayerSelect implements DOMScene {
 
   /**
    * 戻る通知
-   * @return 通知ストリーム
+   * @returns 通知ストリーム
    */
   notifyPrev(): Observable<void> {
     return this.#props.prev;

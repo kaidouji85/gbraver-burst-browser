@@ -18,7 +18,7 @@ export type EpisodeDetail = {
  * EpisodeからEpisodeDetailを生成する
  * @param resources リソース管理オブジェクト
  * @param origin エピソード情報
- * @return 生成結果
+ * @returns 生成結果
  */
 export function createEpisodeDetail(
   resources: Resources,

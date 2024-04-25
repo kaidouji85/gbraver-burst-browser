@@ -9,7 +9,7 @@ import { SimpleIndicatorView } from "./simple-result-indicator";
  * WINビューを生成する
  *
  * @param resources リソース管理オブジェクト
- * @return 生成結果
+ * @returns 生成結果
  */
 export function winIndicatorView(resources: Resources): ResultIndicatorView {
   const texture =

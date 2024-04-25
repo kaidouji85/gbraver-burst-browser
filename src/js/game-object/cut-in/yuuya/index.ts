@@ -17,7 +17,7 @@ export type YuuyaCutInCreatorParams = ResourcesContainer &
 /**
  * プレイヤー側 ユウヤ カットイン
  * @param params 生成パラメータ
- * @return ユウヤ カットイン
+ * @returns ユウヤ カットイン
  */
 export function playerYuuyaCutIn(params: YuuyaCutInCreatorParams): YuuyaCutIn {
   const { resources } = params;
@@ -28,7 +28,7 @@ export function playerYuuyaCutIn(params: YuuyaCutInCreatorParams): YuuyaCutIn {
 /**
  * 敵側 ユウヤ カットイン
  * @param params 生成パラメータ
- * @return ユウヤ カットイン
+ * @returns ユウヤ カットイン
  */
 export function enemyYuuyaCutIn(params: YuuyaCutInCreatorParams): YuuyaCutIn {
   const { resources } = params;

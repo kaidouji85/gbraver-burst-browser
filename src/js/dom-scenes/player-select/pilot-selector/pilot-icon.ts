@@ -71,7 +71,7 @@ export class PilotIcon {
 
   /**
    * リソース読み込みが完了するまで待つ
-   * @return 待機結果
+   * @returns 待機結果
    */
   async waitUntilLoaded(): Promise<void> {
     await Promise.all([this.#isImageLoaded, this.#isCheckLoaded]);
@@ -79,7 +79,7 @@ export class PilotIcon {
 
   /**
    * ルートHTMLを取得する
-   * @return 取得結果
+   * @returns 取得結果
    */
   getRootHTMLElement(): HTMLElement {
     return this.#root;
@@ -87,7 +87,7 @@ export class PilotIcon {
 
   /**
    * アイコン選択通知
-   * @return 通知ストリーム
+   * @returns 通知ストリーム
    */
   notifySelection(): Observable<PushDOM> {
     return this.#select;
@@ -95,7 +95,7 @@ export class PilotIcon {
 
   /**
    * ポップアニメーション
-   * @return アニメーション
+   * @returns アニメーション
    */
   async pop(): Promise<void> {
     await pop(this.#image);

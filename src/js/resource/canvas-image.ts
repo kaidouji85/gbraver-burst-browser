@@ -140,7 +140,7 @@ export const CANVAS_IMAGE_CONFIGS: CanvasImageConfig[] = [
  *
  * @param resourceRoot リソースルート
  * @param config 読み込み設定
- * @return 読み込み結果
+ * @returns 読み込み結果
  */
 export function loadCanvasImage(
   resourceRoot: ResourceRoot,

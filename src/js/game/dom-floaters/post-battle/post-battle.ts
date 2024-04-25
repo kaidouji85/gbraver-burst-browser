@@ -65,7 +65,7 @@ export class PostBattleFloater {
   /**
    * ルートHTML要素を取得する
    *
-   * @return 取得結果
+   * @returns 取得結果
    */
   getRootHTMLElement(): HTMLElement {
     return this.#root;
@@ -75,7 +75,7 @@ export class PostBattleFloater {
    * アニメーション付きでフローターを表示する
    *
    * @param params 表示パラメータ
-   * @return アニメーションが完了したら発火するPromise
+   * @returns アニメーションが完了したら発火するPromise
    */
   async show(params: ShowParams): Promise<void> {
     await this.#exclusive.execute(async () => {
@@ -100,7 +100,7 @@ export class PostBattleFloater {
    * 選択完了通知
    * ストリームには選択した戦闘終了後の挙動が渡される
    *
-   * @return 通知ストリーム
+   * @returns 通知ストリーム
    */
   selectionCompleteNotifier(): Observable<PostBattle> {
     return this.#selectionComplete;
@@ -109,7 +109,7 @@ export class PostBattleFloater {
   /**
    * 本フローターをボトムアップ表示する
    *
-   * @return アニメーションが完了したら発火するプロミス
+   * @returns アニメーションが完了したら発火するプロミス
    */
   async #bottomUp(): Promise<void> {
     this.#root.style.display = "flex";
@@ -134,7 +134,7 @@ export class PostBattleFloater {
   /**
    * 戦闘後アクションボタンを生成する
    * @param params 生成パラメータ
-   * @return 生成結果
+   * @returns 生成結果
    */
   #createActionButtons(params: ShowParams): ActionButton[] {
     const { resources, se, buttons } = params;

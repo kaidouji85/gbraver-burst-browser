@@ -55,7 +55,7 @@ class ConfrontationTwoBraverEvent extends EmptyCustomBattleEvent {
 
 /**
  * 「対決、二人のブレイバー！！」のカスタムバトルイベントを生成する
- * @return 生成したカスタムバトルイベント
+ * @returns 生成したカスタムバトルイベント
  */
 export function createConfrontationTwoBraverEvent(): CustomBattleEvent {
   return new ConfrontationTwoBraverEvent();

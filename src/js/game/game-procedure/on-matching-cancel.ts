@@ -6,7 +6,7 @@ import type { GameProps } from "../game-props";
  * マッチング中止
  *
  * @param props ゲームプロパティ
- * @return 処理が完了したら発火するPromise
+ * @returns 処理が完了したら発火するPromise
  */
 export async function onMatchingCanceled(
   props: Readonly<GameProps>,

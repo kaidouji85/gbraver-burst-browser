@@ -43,7 +43,7 @@ export class DOMSceneBinder {
   /**
    * ゲームアクション通知
    *
-   * @return 通知ストリーム
+   * @returns 通知ストリーム
    */
   gameActionNotifier(): Observable<GameAction> {
     return this.#props.gameAction;
@@ -60,7 +60,7 @@ export class DOMSceneBinder {
   /**
    * 本クラスのルートHTML要素を取得する
    *
-   * @return 取得結果
+   * @returns 取得結果
    */
   getRootHTMLElement(): HTMLElement {
     return this.#props.root;

@@ -14,7 +14,7 @@ import { playerAttack } from "../../stories/player-attack";
 /**
  * 条件を満たした場合にバトルの説明をする
  * @param props イベントプロパティ
- * @return 説明をした場合はステート更新結果、そうでない場合はnull
+ * @returns 説明をした場合はステート更新結果、そうでない場合はnull
  */
 export async function doBattleDescriptionIfNeeded(
   props: Readonly<LastState & BatterySystemTutorialProps>,

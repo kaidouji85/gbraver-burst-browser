@@ -25,7 +25,7 @@ type DataIDs = {
  *
  * @param ids data-idを集めたもの
  * @param resources リソース管理オブジェクト
- * @return innerHTML
+ * @returns innerHTML
  */
 function rootInnerHTML(ids: DataIDs, resources: Resources): string {
   const closerPath =
@@ -49,7 +49,7 @@ type Elements = {
  *
  * @param root ルート要素
  * @param ids data-idを集めたもの
- * @return 抽出結果
+ * @returns 抽出結果
  */
 function extractElements(root: HTMLElement, ids: DataIDs): Elements {
   const closerElement = root.querySelector(`[data-id="${ids.closer}"]`);
@@ -124,7 +124,7 @@ export class MatchingDialog implements DOMDialog {
 
   /**
    * マッチングキャンセル通知
-   * @return 通知ストリーム
+   * @returns 通知ストリーム
    */
   notifyMatchingCanceled(): Observable<void> {
     return this.#matchingCanceled;

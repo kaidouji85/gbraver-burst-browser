@@ -84,7 +84,7 @@ export type CreateTitlePropsParams = RootInnerHTMLParams &
  * タイトル画面プロパティを生成する
  *
  * @param params 生成パラメータ
- * @return 生成結果
+ * @returns 生成結果
  */
 export function createTitleProps(params: CreateTitlePropsParams): TitleProps {
   const dataIDs: DataIDs = {

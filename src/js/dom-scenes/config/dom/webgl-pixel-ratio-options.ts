@@ -8,7 +8,7 @@ import webglPixelRatioTemplate from "./webgl-pixel-ratio.hbs";
 /**
  * 戦闘画面ピクセルレートのラジオボタン要素HTMLを生成する
  * @param selected 選択中の戦闘画面のピクセルレート
- * @return 生成結果
+ * @returns 生成結果
  */
 export const webGLPixelRatioOptions = (selected: WebGLPixelRatio) =>
   WebGLPixelRatios.map((value) => {

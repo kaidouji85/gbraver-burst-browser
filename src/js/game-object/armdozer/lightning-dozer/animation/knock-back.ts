@@ -7,7 +7,7 @@ import { LightningDozerAnimationProps } from "./animation-props";
 /**
  * ノックバック
  * @param props アニメーションプロパティ
- * @return アニメーション
+ * @returns アニメーション
  */
 export function knockBack(props: LightningDozerAnimationProps): Animate {
   const { model } = props;

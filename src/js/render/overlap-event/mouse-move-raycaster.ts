@@ -16,7 +16,7 @@ export type MouseMoveRaycaster = {
  * MouseMoveからMouseMoveRaycasterに変換
  *
  * @param origin 変換元
- * @return 変換結果
+ * @returns 変換結果
  */
 export function toMouseMoveRaycaster(
   origin: MouseMove,

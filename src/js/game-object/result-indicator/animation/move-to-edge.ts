@@ -9,7 +9,7 @@ import type { ResultIndicatorModel } from "../model/result-indicator-model";
  * 画面端に移動する
  *
  * @param model モデル
- * @return アニメーション
+ * @returns アニメーション
  */
 export function moveToEdge(model: ResultIndicatorModel): Animate {
   const duration = 400;

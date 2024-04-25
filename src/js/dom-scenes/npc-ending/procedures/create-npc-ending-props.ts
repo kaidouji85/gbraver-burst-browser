@@ -21,7 +21,7 @@ export type PropsCreatorParams = BGMManagerContainer &
 /**
  * NPCEndingPropsを生成する
  * @param params 生成パラメータ
- * @return 生成結果
+ * @returns 生成結果
  */
 export function createNPCEndingProps(
   params: PropsCreatorParams,

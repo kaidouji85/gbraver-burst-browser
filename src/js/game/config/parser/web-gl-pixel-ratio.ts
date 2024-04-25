@@ -13,7 +13,7 @@ export const WebGLPixelRatioSchema = z.preprocess(
  * パースできない場合はnullを返す
  *
  * @param origin パース元
- * @return パース結果
+ * @returns パース結果
  */
 export function parseWebGLPixelRatio(origin: unknown): WebGLPixelRatio | null {
   const result = WebGLPixelRatioSchema.safeParse(origin);

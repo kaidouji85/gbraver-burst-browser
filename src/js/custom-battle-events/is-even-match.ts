@@ -13,7 +13,7 @@ type Players = {
 /**
  * プレイヤー、敵がイーブンであるかを判定する
  * @param players ゲーム参加プレイヤー
- * @return イーブンの場合、trueを返す
+ * @returns イーブンの場合、trueを返す
  */
 export function isEvenMatch(players: Players): boolean {
   const { player, enemy } = players;

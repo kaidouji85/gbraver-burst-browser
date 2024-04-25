@@ -7,7 +7,7 @@ import { ShinBraverAnimationProps } from "./animation-props";
 /**
  * バースト -> 立ち
  * @param props アニメーションプロパティ
- * @return アニメーション
+ * @returns アニメーション
  */
 export function burstToStand(props: ShinBraverAnimationProps): Animate {
   const { model, sounds, se } = props;

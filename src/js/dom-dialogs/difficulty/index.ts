@@ -40,7 +40,7 @@ export class DifficultyDialog implements DOMDialog {
   /**
    * 難易度選択完了通知
    *
-   * @return 通知ストリーム
+   * @returns 通知ストリーム
    */
   notifySelectionComplete(): Observable<NPCBattleCourseDifficulty> {
     return this.#props.selectionComplete;
@@ -49,7 +49,7 @@ export class DifficultyDialog implements DOMDialog {
   /**
    * ダイアログを閉じる通知
    *
-   * @return 通知ストリーム
+   * @returns 通知ストリーム
    */
   notifyClosed(): Observable<void> {
     return this.#props.closeDialog;

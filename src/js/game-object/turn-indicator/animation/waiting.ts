@@ -11,7 +11,7 @@ import type { TurnIndicatorModel } from "../model/turn-indicator-model";
  *
  * @param model モデル
  * @param group Tweenグループ
- * @return アニメーション
+ * @returns アニメーション
  */
 export function waiting(
   model: TurnIndicatorModel,

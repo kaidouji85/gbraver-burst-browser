@@ -16,7 +16,7 @@ type Params = {
 /**
  * イベントリスナを登録する
  * @param params パラメータ
- * @return アンサブスクライバ
+ * @returns アンサブスクライバ
  */
 export function bindEventListeners(params: Params): Unsubscribable[] {
   const { props, gameObjectAction } = params;

@@ -56,7 +56,7 @@ export class PilotSelector {
 
   /**
    * リソース読み込みが完了するまで待つ
-   * @return 待機結果
+   * @returns 待機結果
    */
   async waitUntilLoaded(): Promise<void> {
     await waitUntilLoaded(this.#props);
@@ -64,7 +64,7 @@ export class PilotSelector {
 
   /**
    * ルートHTML要素を取得する
-   * @return 取得結果
+   * @returns 取得結果
    */
   getRootHTMLElement(): HTMLElement {
     return this.#props.root;
@@ -72,7 +72,7 @@ export class PilotSelector {
 
   /**
    * パイロット変更通知
-   * @return 通知ストリーム
+   * @returns 通知ストリーム
    */
   notifyChanges(): Observable<PilotId> {
     return this.#props.change;
@@ -80,7 +80,7 @@ export class PilotSelector {
 
   /**
    * パイロット選択通知
-   * @return 通知ストリーム
+   * @returns 通知ストリーム
    */
   notifyDecision(): Observable<PilotId> {
     return this.#props.decide;
@@ -88,7 +88,7 @@ export class PilotSelector {
 
   /**
    * 戻る 通知
-   * @return 通知ストリーム
+   * @returns 通知ストリーム
    */
   notifyPrev(): Observable<void> {
     return this.#props.prev;

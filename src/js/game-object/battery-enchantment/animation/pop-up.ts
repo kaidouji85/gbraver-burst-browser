@@ -7,7 +7,7 @@ import { BatteryEnchantmentAnimationProps } from "./animation-props";
 /**
  * ポップアップ
  * @param props アニメーションプロパティ
- * @return アニメーション
+ * @returns アニメーション
  */
 export function popUp(props: BatteryEnchantmentAnimationProps): Animate {
   const { model, sounds, se } = props;

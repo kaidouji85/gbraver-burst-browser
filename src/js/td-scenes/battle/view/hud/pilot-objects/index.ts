@@ -11,7 +11,7 @@ import { enemyYuuyaHUD, playerYuuyaHUD } from "./yuuya";
 /**
  * プレイヤー側 HUDパイロット
  * @param params 生成パラメータ
- * @return HUDパイロット
+ * @returns HUDパイロット
  */
 export function playerHUDPilotObjects(
   params: HUDLayerObjectCreatorParams,
@@ -36,7 +36,7 @@ export function playerHUDPilotObjects(
 /**
  * 敵側 HUDパイロット
  * @param params 生成パラメータ
- * @return HUDパイロット
+ * @returns HUDパイロット
  */
 export function enemyHUDPilotObjects(
   params: HUDLayerObjectCreatorParams,

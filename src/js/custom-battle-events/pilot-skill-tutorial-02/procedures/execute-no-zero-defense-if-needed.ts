@@ -4,7 +4,7 @@ import { noZeroDefense } from "../stories/no-zero-defense";
 /**
  * 条件を満たした場合「0防御しない」を再生する
  * @param props イベントプロパティ
- * @return 再生した否か、trueで再生した
+ * @returns 再生した否か、trueで再生した
  */
 export async function executeNoZeroDefenseIfNeeded(
   props: Readonly<BatteryCommandSelected>,

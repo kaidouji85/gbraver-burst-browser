@@ -11,7 +11,7 @@ import { onDiscardPush } from "./on-discard-push";
  * ダイアログにイベントリスナをバインドする
  *
  * @param props 画面プロパティ
- * @return バインドしたイベントリスナのアンサブスクライバ
+ * @returns バインドしたイベントリスナのアンサブスクライバ
  */
 export function bindEventListeners(
   props: ConfigChangedDialogProps,

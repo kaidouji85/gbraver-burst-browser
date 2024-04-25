@@ -31,7 +31,7 @@ export class GaiHUD implements HUDPilotObjects {
   /**
    * シーンに追加するオブジェクトを取得する
    *
-   * @return シーンに追加するオブジェクト
+   * @returns シーンに追加するオブジェクト
    */
   getObject3Ds(): THREE.Object3D[] {
     return [this.cutIn.getObject3D()];
@@ -41,7 +41,7 @@ export class GaiHUD implements HUDPilotObjects {
 /**
  * プレイヤー側 ガイHUD
  * @param params 生成パラメータ
- * @return ガイHUD
+ * @returns ガイHUD
  */
 export function playerGaiHUD(params: HUDLayerObjectCreatorParams): GaiHUD {
   const { player } = params;
@@ -51,7 +51,7 @@ export function playerGaiHUD(params: HUDLayerObjectCreatorParams): GaiHUD {
 /**
  * 敵側 ガイHUD
  * @param params 生成パラメータ
- * @return ガイHUD
+ * @returns ガイHUD
  */
 export function enemyGaiHUD(params: HUDLayerObjectCreatorParams): GaiHUD {
   const { enemy } = params;

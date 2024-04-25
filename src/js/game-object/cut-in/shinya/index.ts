@@ -17,7 +17,7 @@ export type ShinyaCutInCreatorParams = ResourcesContainer &
 /**
  * プレイヤー側 シンヤ カットイン
  * @param params 生成パラメータ
- * @return シンヤ カットイン
+ * @returns シンヤ カットイン
  */
 export function playerShinyaCutIn(
   params: ShinyaCutInCreatorParams,
@@ -30,7 +30,7 @@ export function playerShinyaCutIn(
 /**
  * 敵側 シンヤ カットイン
  * @param params 生成パラメータ
- * @return シンヤ カットイン
+ * @returns シンヤ カットイン
  */
 export function enemyShinyaCutIn(
   params: ShinyaCutInCreatorParams,

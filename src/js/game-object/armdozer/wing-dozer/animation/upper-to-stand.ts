@@ -7,7 +7,7 @@ import { WingDozerAnimationProps } from "./animation-props";
 /**
  * アッパー -> 立ち
  * @param props アニメーションプロパティ
- * @return アニメーション
+ * @returns アニメーション
  */
 export function upperToStand(props: WingDozerAnimationProps): Animate {
   const { model, sounds, se } = props;
