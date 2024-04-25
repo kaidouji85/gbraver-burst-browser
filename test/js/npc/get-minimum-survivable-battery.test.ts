@@ -22,7 +22,7 @@ const defender: PlayerState = {
 /**
  * 攻撃側プレイヤーを生成する
  * @param power 攻撃
- * @return 攻撃側プレイヤー
+ * @returns 攻撃側プレイヤー
  */
 const createAttacker = (power: number): PlayerState => ({
   ...EMPTY_PLAYER_STATE,

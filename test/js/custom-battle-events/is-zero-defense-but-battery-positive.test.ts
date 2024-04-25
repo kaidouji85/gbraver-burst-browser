@@ -11,7 +11,7 @@ const attacker = {
 /**
  * 防御側プレイヤーを生成する
  * @param battery 防御側バッテリー
- * @return 防御側プレイヤー
+ * @returns 防御側プレイヤー
  */
 const createDefender = (battery: number) => ({
   ...EMPTY_PLAYER_STATE,
