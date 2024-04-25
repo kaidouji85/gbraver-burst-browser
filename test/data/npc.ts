@@ -32,7 +32,7 @@ class SimpleEmptyNPC implements NPC {
 
 /**
  * 空NPCを生成する
- * @return 生成結果
+ * @returns 生成結果
  */
 export function createEmptyNPC(): NPC {
   return new SimpleEmptyNPC();
