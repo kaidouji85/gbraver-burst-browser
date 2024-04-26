@@ -1,7 +1,7 @@
 import { Observable, Unsubscribable } from "rxjs";
 
 import { TDScene } from "../td-scene";
-import { BattleEnd, BattleSceneProps } from "./battle-scene-props";
+import { BattleEnd, BattleSceneProps } from "./props";
 import { bindEventListeners } from "./procedure/bind-event-listeners";
 import {
   BattleScenePropsCreatorParams,

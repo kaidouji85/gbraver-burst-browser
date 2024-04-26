@@ -1,5 +1,5 @@
 import type { ToggleTimeScale } from "../actions/toggle-time-scale";
-import type { BattleSceneProps } from "../battle-scene-props";
+import type { BattleSceneProps } from "../props";
 
 /**
  * タイムスケール変更時の処理

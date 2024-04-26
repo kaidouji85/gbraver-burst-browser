@@ -14,10 +14,10 @@ import { SEPlayerContainer } from "../../../se/se-player";
 import { PushWindow } from "../../../window/push-window";
 import { Resize } from "../../../window/resize";
 import { BattleProgress } from "../battle-progress";
-import { BattleSceneProps } from "../battle-scene-props";
+import { BattleSceneProps } from "../props";
 import { BattleControllerType } from "../controller-type";
 import { CustomBattleEvent } from "../custom-battle-event";
-import { BattleSceneSounds } from "../sounds/sounds";
+import { BattleSceneSounds } from "../sounds";
 import { createBattleSceneView } from "../view";
 
 /** 戦闘シーンで利用するレンダラ */

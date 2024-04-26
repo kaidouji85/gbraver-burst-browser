@@ -1,6 +1,6 @@
 import { Unsubscribable } from "rxjs";
 
-import { BattleSceneProps } from "../battle-scene-props";
+import { BattleSceneProps } from "../props";
 import { onBurst } from "./on-burst";
 import { onBurstByMiniController } from "./on-burst-by-mini-controller";
 import { onDecideBattery } from "./on-decide-battery";

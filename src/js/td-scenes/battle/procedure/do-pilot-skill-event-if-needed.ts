@@ -1,6 +1,6 @@
 import { PilotSkillCommand } from "gbraver-burst-core";
 
-import { BattleSceneProps } from "../battle-scene-props";
+import { BattleSceneProps } from "../props";
 import { CommandCanceled } from "../custom-battle-event";
 
 /**

@@ -3,7 +3,7 @@ import { GameState } from "gbraver-burst-core";
 import { all } from "../../../animation/all";
 import { empty } from "../../../animation/delay";
 import { stateAnimation } from "../animation/game-state";
-import { BattleSceneProps } from "../battle-scene-props";
+import { BattleSceneProps } from "../props";
 
 /**
  * 同時再生する効果

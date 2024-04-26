@@ -3,7 +3,7 @@ import { Observable } from "rxjs";
 import type { MessageWindow } from "../game-dom/message-window";
 import { SEPlayer } from "../se/se-player";
 import type { CustomBattleEventProps } from "../td-scenes/battle/custom-battle-event";
-import { BattleSceneSounds } from "../td-scenes/battle/sounds/sounds";
+import { BattleSceneSounds } from "../td-scenes/battle/sounds";
 import type { PushWindow } from "../window/push-window";
 import { waitUntilWindowPushWithStream } from "./wait-until-window-push";
 
