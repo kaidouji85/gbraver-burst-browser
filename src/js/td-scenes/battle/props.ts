@@ -9,7 +9,7 @@ import { PushWindow } from "../../window/push-window";
 import { BattleProgress } from "./battle-progress";
 import { BattleControllerType } from "./controller-type";
 import { CustomBattleEvent } from "./custom-battle-event";
-import { BattleSceneSounds } from "./sounds/sounds";
+import { BattleSceneSounds } from "./sounds";
 import { BattleSceneView } from "./view";
 
 /** バトル終了情報 */

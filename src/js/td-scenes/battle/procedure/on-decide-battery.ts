@@ -2,7 +2,7 @@ import { BatteryCommand } from "gbraver-burst-core";
 
 import { DecideBattery } from "../actions/decide-battery";
 import { decisionByBatterySelector } from "../animation/decision-by-battery-selector";
-import { BattleSceneProps } from "../battle-scene-props";
+import { BattleSceneProps } from "../props";
 import { doBatteryEventIfNeeded } from "./do-battery-event-if-needed";
 import { progressGame } from "./progress-game";
 

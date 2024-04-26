@@ -10,7 +10,7 @@ import { Observable } from "rxjs";
 import { Animate } from "../../animation/animate";
 import { SEPlayerContainer } from "../../se/se-player";
 import type { PushWindow } from "../../window/push-window";
-import { BattleSceneSounds } from "./sounds/sounds";
+import { BattleSceneSounds } from "./sounds";
 import { BattleSceneView } from "./view";
 
 /**

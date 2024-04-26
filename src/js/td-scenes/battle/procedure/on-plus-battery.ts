@@ -1,4 +1,4 @@
-import type { BattleSceneProps } from "../battle-scene-props";
+import type { BattleSceneProps } from "../props";
 
 /**
  * バッテリーセレクタ プラス押下時の処理

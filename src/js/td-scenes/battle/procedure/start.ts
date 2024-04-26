@@ -1,5 +1,5 @@
 import { play } from "../../../bgm/bgm-operators";
-import type { BattleSceneProps } from "../battle-scene-props";
+import type { BattleSceneProps } from "../props";
 import { playStateHistory } from "./play-state-history";
 
 /**

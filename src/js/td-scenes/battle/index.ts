@@ -1,13 +1,13 @@
 import { Observable, Unsubscribable } from "rxjs";
 
 import { TDScene } from "../td-scene";
-import { BattleEnd, BattleSceneProps } from "./battle-scene-props";
 import { bindEventListeners } from "./procedure/bind-event-listeners";
 import {
   BattleScenePropsCreatorParams,
   createBattleSceneProps,
 } from "./procedure/create-battle-scene-props";
 import { start } from "./procedure/start";
+import { BattleEnd, BattleSceneProps } from "./props";
 
 /** コンストラクタのパラメータ */
 type BattleSceneParams = BattleScenePropsCreatorParams & {

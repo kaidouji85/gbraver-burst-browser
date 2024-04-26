@@ -1,7 +1,7 @@
 import { BatteryCommand } from "gbraver-burst-core";
 
-import { BattleSceneProps } from "../battle-scene-props";
 import { CommandCanceled } from "../custom-battle-event";
+import { BattleSceneProps } from "../props";
 
 /**
  * カスタムバトルイベントがセットされていれば onBatteryCommandSelected を実行する

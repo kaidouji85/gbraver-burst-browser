@@ -4,7 +4,7 @@ import { AnimatePlayer } from "../../../../animation/animate-player";
 import { BGMManagerContainer } from "../../../../bgm/bgm-manager";
 import { SEPlayerContainer } from "../../../../se/se-player";
 import { BattleControllerType } from "../../controller-type";
-import { BattleSceneSounds } from "../../sounds/sounds";
+import { BattleSceneSounds } from "../../sounds";
 import { BattleSceneView } from "../../view";
 
 /**
