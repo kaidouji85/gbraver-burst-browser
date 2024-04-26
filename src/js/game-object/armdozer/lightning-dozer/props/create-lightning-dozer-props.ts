@@ -1,7 +1,7 @@
 import { ResourcesContainer } from "../../../../resource";
 import { SEPlayerContainer } from "../../../../se/se-player";
 import { createInitialValue } from "../model/initial-value";
-import { LightningDozerSounds } from "../sounds/lightning-dozer-sounds";
+import { createLightningDozerSounds } from "../sounds/lightning-dozer-sounds";
 import { LightningDozerView } from "../view/lightning-dozer-view";
 import { LightningDozerProps } from "./lightning-dozer-props";
 
@@ -20,10 +20,9 @@ export type PropsCreatorParams = ResourcesContainer &
 export function createLightningDozerProps(
   params: PropsCreatorParams,
 ): LightningDozerProps {
-  const { resources } = params;
   return {
     ...params,
     model: createInitialValue(),
-    sounds: new LightningDozerSounds(resources),
+    sounds: createLightningDozerSounds(params),
   };
 }
