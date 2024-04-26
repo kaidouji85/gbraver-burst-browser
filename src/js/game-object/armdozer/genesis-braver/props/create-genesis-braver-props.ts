@@ -20,10 +20,9 @@ export type PropsCreatorParams = ResourcesContainer &
 export function createGenesisBraverProps(
   params: PropsCreatorParams,
 ): GenesisBraverProps {
-  const { resources } = params;
   return {
     ...params,
-    sounds: createGenesisBraverSounds(resources),
+    sounds: createGenesisBraverSounds(params),
     model: createInitialValue(),
   };
 }
