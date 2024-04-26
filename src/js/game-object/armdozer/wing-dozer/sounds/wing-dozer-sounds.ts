@@ -1,21 +1,27 @@
-import type { Resources } from "../../../../resource";
+import { ResourcesContainer } from "../../../../resource";
 import { createEmptySoundResource } from "../../../../resource/sound/empty-sound-resource";
 import { SOUND_IDS } from "../../../../resource/sound/ids";
 import { SoundResource } from "../../../../resource/sound/resource";
 
-/** ウィングドーザ関連の音 */
-export class WingDozerSounds {
+/** ウィングドーザ効果音 */
+export type WingDozerSounds = {
   /** モーター音 */
   motor: SoundResource;
+};
 
-  /**
-   * コンストラクタ
-   *
-   * @param resources リソース管理オブジェクト
-   */
-  constructor(resources: Resources) {
-    this.motor =
+/** 生成パラメータ */
+type CreatorParams = ResourcesContainer;
+
+/**
+ * WingDozerSoundsを生成する
+ * @param params 生成パラメータ
+ * @returns 生成結果
+ */
+export function createWingDozerSounds(params: CreatorParams): WingDozerSounds {
+  const { resources } = params;
+  return {
+    motor:
       resources.sounds.find((v) => v.id === SOUND_IDS.MOTOR) ??
-      createEmptySoundResource();
-  }
+      createEmptySoundResource(),
+  };
 }
