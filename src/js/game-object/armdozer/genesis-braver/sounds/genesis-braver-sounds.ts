@@ -18,7 +18,7 @@ type CreatorParams = ResourcesContainer;
  * @returns 生成結果
  */
 export function createGenesisBraverSounds(
-  params: CreatorParams
+  params: CreatorParams,
 ): GenesisBraverSounds {
   const { resources } = params;
   const motor =
