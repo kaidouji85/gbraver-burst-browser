@@ -14,10 +14,10 @@ import { SEPlayerContainer } from "../../../se/se-player";
 import { PushWindow } from "../../../window/push-window";
 import { Resize } from "../../../window/resize";
 import { BattleProgress } from "../battle-progress";
-import { BattleSceneProps } from "../props";
 import { BattleControllerType } from "../controller-type";
 import { CustomBattleEvent } from "../custom-battle-event";
-import { BattleSceneSounds } from "../sounds";
+import { BattleSceneProps } from "../props";
+import { createBattleSceneSounds } from "../sounds";
 import { createBattleSceneView } from "../view";
 
 /** 戦闘シーンで利用するレンダラ */
@@ -76,6 +76,6 @@ export function createBattleSceneProps(
     endBattle: new Subject(),
     customBattleEvent: params.customBattleEvent ?? null,
     view: createBattleSceneView(params),
-    sounds: new BattleSceneSounds(params.resources, params.playingBGM),
+    sounds: createBattleSceneSounds(params),
   };
 }

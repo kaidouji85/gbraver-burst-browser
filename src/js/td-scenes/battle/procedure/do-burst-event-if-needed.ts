@@ -1,7 +1,7 @@
 import { BurstCommand } from "gbraver-burst-core";
 
-import { BattleSceneProps } from "../props";
 import { CommandCanceled } from "../custom-battle-event";
+import { BattleSceneProps } from "../props";
 
 /**
  * カスタムバトルイベントがセットされていれば onBurstCommandSelected を実行する
