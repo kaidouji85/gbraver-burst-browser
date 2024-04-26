@@ -75,7 +75,7 @@ export class EnemyGaugeView implements GaugeView {
     this.#group.add(this.#batteryGauge.getObject3D());
   }
 
-  /** デストラクタ */
+  /** @override */
   destructor(): void {
     this.#hpFrame.destructor();
     this.#hpBar.destructor();
@@ -85,12 +85,7 @@ export class EnemyGaugeView implements GaugeView {
     this.#batteryGauge.destructor();
   }
 
-  /**
-   * モデルをビューに反映させる
-   *
-   * @param model モデル
-   * @param preRender プリレンダー
-   */
+  /** @override */
   engage(model: GaugeModel, preRender: PreRender): void {
     const devicePerScale = HUDUIScale(
       preRender.rendererDOM,
@@ -117,8 +112,13 @@ export class EnemyGaugeView implements GaugeView {
     this.#group.quaternion.copy(preRender.camera.quaternion);
   }
 
-  /** シーンに追加するオブジェクトを取得する */
+  /** @override */
   getObject3D(): THREE.Object3D {
     return this.#group;
+  }
+
+  /** @override */
+  addObject3D(object: THREE.Object3D): void {
+    this.#group.add(object);
   }
 }
