@@ -1,7 +1,7 @@
 import { ResourcesContainer } from "../../../../resource";
 import { SEPlayerContainer } from "../../../../se/se-player";
 import { createInitialValue } from "../model/initial-value";
-import { NeoLandozerSounds } from "../sounds/neo-landozer-sounds";
+import { createNeoLandozerSounds } from "../sounds/neo-landozer-sounds";
 import { NeoLandozerView } from "../view/neo-landozer-view";
 import { NeoLandozerProps } from "./neo-landozer-props";
 
@@ -20,10 +20,9 @@ export type PropsCreatorParams = ResourcesContainer &
 export function createNeoLandozerProps(
   params: PropsCreatorParams,
 ): NeoLandozerProps {
-  const { resources } = params;
   return {
     ...params,
     model: createInitialValue(),
-    sounds: new NeoLandozerSounds(resources),
+    sounds: createNeoLandozerSounds(params),
   };
 }
