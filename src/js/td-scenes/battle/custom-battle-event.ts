@@ -8,15 +8,16 @@ import type {
 import { Observable } from "rxjs";
 
 import { Animate } from "../../animation/animate";
+import { SEPlayerContainer } from "../../se/se-player";
 import type { PushWindow } from "../../window/push-window";
-import { BattleSceneSounds } from "./sounds/sounds";
+import { BattleSceneSounds } from "./sounds";
 import { BattleSceneView } from "./view";
 
 /**
  * 全カスタムイベントで利用できるプロパティ
  * BattleScenePropsからカスタムバトルイベントで利用可能なプロパティを抜粋した
  */
-export type CustomBattleEventProps = {
+export type CustomBattleEventProps = SEPlayerContainer & {
   /** 戦闘画面を開いているプレイヤーのID */
   readonly playerId: PlayerId;
   /** 戦闘シーンビュー */
@@ -84,7 +85,7 @@ export interface CustomBattleEvent {
    * 最終ステート以外のステートアニメーション再生時に、本メソッドが呼び出さる
    * 戻り値のアニメーションが完了するまで、次のステートアニメーションは再生されない
    * @param props イベントプロパティ
-   * @return カスタムステートアニメーション
+   * @returns カスタムステートアニメーション
    */
   onStateAnimation(props: CustomStateAnimation): Animate;
 
@@ -93,14 +94,14 @@ export interface CustomBattleEvent {
    * 最終ステート以外のステートアニメーション再生後に、本メソッドが呼び出さる
    * 戻り値のアニメーションが完了しなくても、次のステートアニメーションは再生される
    * @param props イベントプロパティ
-   * @return カスタムステートアニメーション
+   * @returns カスタムステートアニメーション
    */
   afterStateAnimation(props: CustomStateAnimation): Animate;
 
   /**
    * 最終ステート直前イベント
    * @param props イベントプロパティ
-   * @return 処理が完了したら発火するPromise
+   * @returns 処理が完了したら発火するPromise
    */
   beforeLastState(props: LastState): Promise<void>;
 
@@ -108,21 +109,21 @@ export interface CustomBattleEvent {
    * 最終ステートイベント
    * 本イベントは最終ステート再生と同時に行われる
    * @param props イベントプロパティ
-   * @return 処理が完了したら発火するPromise
+   * @returns 処理が完了したら発火するPromise
    */
   onLastState(props: LastState): Promise<void>;
 
   /**
    * 最終ステート完了後イベント
    * @param props イベントプロパティ
-   * @return 処理が完了したら発火するPromise
+   * @returns 処理が完了したら発火するPromise
    */
   afterLastState(props: LastState): Promise<void>;
 
   /**
    * バッテリーコマンド選択イベント
    * @param props イベントプロパティ
-   * @return コマンドキャンセル情報
+   * @returns コマンドキャンセル情報
    */
   onBatteryCommandSelected(
     props: BatteryCommandSelected,
@@ -131,14 +132,14 @@ export interface CustomBattleEvent {
   /**
    * バーストコマンド選択イベント
    * @param props イベントプロパティ
-   * @return コマンドキャンセル情報
+   * @returns コマンドキャンセル情報
    */
   onBurstCommandSelected(props: BurstCommandSelected): Promise<CommandCanceled>;
 
   /**
    * パイロットスキルコマンド選択イベント
    * @param props イベントプロパティ
-   * @return コマンドキャンセル情報
+   * @returns コマンドキャンセル情報
    */
   onPilotSkillCommandSelected(
     props: PilotSkillCommandSelected,

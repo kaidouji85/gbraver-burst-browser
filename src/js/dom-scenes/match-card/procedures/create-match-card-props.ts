@@ -1,7 +1,7 @@
 import { ArmdozerId } from "gbraver-burst-core";
 
 import { getArmdozerIconPathId } from "../../../path/armdozer-icon-path";
-import { Resources } from "../../../resource";
+import { ResourcesContainer } from "../../../resource";
 import { domUuid } from "../../../uuid/dom-uuid";
 import { waitElementLoaded } from "../../../wait/wait-element-loaded";
 import { extractElements } from "../dom/elements";
@@ -9,9 +9,7 @@ import { rootInnerHTML } from "../dom/root-inner-html";
 import { MatchCardProps } from "../props";
 
 /** マッチカード画面プロパティの生成パラメータ */
-export type GenerateMatchCardPropsParams = {
-  /** リソース管理オブジェクト */
-  resources: Resources;
+export type PropsCreatorParams = ResourcesContainer & {
   /** プレイヤー情報 */
   player: ArmdozerId;
   /** 敵情報 */
@@ -23,10 +21,10 @@ export type GenerateMatchCardPropsParams = {
 /**
  * マッチカード画面プロパティを生成する
  * @params params パラメータ
- * @return 生成結果
+ * @returns 生成結果
  */
 export function createMatchCardProps(
-  params: GenerateMatchCardPropsParams,
+  params: PropsCreatorParams,
 ): MatchCardProps {
   const ids = { player: domUuid(), enemy: domUuid() };
   const root = document.createElement("div");

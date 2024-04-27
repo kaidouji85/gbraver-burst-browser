@@ -1,13 +1,10 @@
-import { Observable } from "rxjs";
-
 import { delay } from "../src/js/animation/delay";
-import { GameObjectAction } from "../src/js/game-object/action/game-object-action";
 import {
   enemyShockWave,
   playerShockWave,
+  ShockWaveCreatorParams,
 } from "../src/js/game-object/hitmark/shock-wave";
 import { ShockWave } from "../src/js/game-object/hitmark/shock-wave/shock-wave";
-import { Resources } from "../src/js/resource";
 import { TDGameObjectStub } from "./stub/td-game-object-stub";
 
 export default {
@@ -18,19 +15,16 @@ export default {
  * 衝撃波ストーリー
  * @param generator 衝撃波生成オブジェクト
  * @param fn 衝撃波を操作する関数
- * @return story
+ * @returns story
  */
 const shockWaveStory =
   (
-    generator: (
-      resources: Resources,
-      gameObjectAction: Observable<GameObjectAction>,
-    ) => ShockWave,
+    generator: (params: ShockWaveCreatorParams) => ShockWave,
     fn: (shockWave: ShockWave) => void,
   ) =>
   () => {
-    const stub = new TDGameObjectStub(({ resources, gameObjectAction }) => {
-      const shockWave = generator(resources, gameObjectAction);
+    const stub = new TDGameObjectStub((params) => {
+      const shockWave = generator(params);
       fn(shockWave);
       return {
         objects: [shockWave.getObject3D()],

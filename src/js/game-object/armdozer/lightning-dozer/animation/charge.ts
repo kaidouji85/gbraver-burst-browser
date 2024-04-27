@@ -2,25 +2,21 @@ import { Animate } from "../../../../animation/animate";
 import { onStart } from "../../../../animation/on-start";
 import { tween } from "../../../../animation/tween";
 import { ARMDOZER_SPRITE_STANDARD_Z } from "../../position";
-import type { LightningDozerModel } from "../model/lightning-dozer-model";
-import { LightningDozerSounds } from "../sounds/lightning-dozer-sounds";
+import { LightningDozerAnimationProps } from "./animation-props";
 
 /**
  * チャージ
  *
- * @param model モデル
- * @param sounds 音
- * @return アニメーション
+ * @param props アニメーションプロパティ
+ * @returns アニメーション
  */
-export function charge(
-  model: LightningDozerModel,
-  sounds: LightningDozerSounds,
-): Animate {
+export function charge(props: LightningDozerAnimationProps): Animate {
+  const { model, sounds, se } = props;
   return onStart(() => {
     model.animation.type = "HM_CHARGE";
     model.animation.frame = 0;
     model.position.z = ARMDOZER_SPRITE_STANDARD_Z;
-    sounds.motor.play();
+    se.play(sounds.motor);
   }).chain(
     tween(model.animation, (t) =>
       t.to(

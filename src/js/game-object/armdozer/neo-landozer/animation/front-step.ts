@@ -3,26 +3,22 @@ import { Animate } from "../../../../animation/animate";
 import { delay } from "../../../../animation/delay";
 import { onStart } from "../../../../animation/on-start";
 import { tween } from "../../../../animation/tween";
-import type { NeoLandozerModel } from "../model/neo-landozer-model";
-import { NeoLandozerSounds } from "../sounds/neo-landozer-sounds";
+import { NeoLandozerAnimationProps } from "./animation-props";
 
 /**
  * フロントステップ
- *
- * @param model モデル
- * @param sounds 効果音
- * @param distance 移動距離を絶対値で指定する
- * @return アニメーション
+ * @param props アニメーションプロパティ
+ * @returns アニメーション
  */
 export function frontStep(
-  model: NeoLandozerModel,
-  sounds: NeoLandozerSounds,
+  props: NeoLandozerAnimationProps,
   distance = 100,
 ): Animate {
+  const { model, sounds, se } = props;
   return onStart(() => {
     model.animation.type = "FRONT_STEP";
     model.animation.frame = 0;
-    sounds.motor.play();
+    se.play(sounds.motor);
   })
     .chain(
       all(
@@ -47,7 +43,7 @@ export function frontStep(
     .chain(delay(300))
     .chain(
       onStart(() => {
-        sounds.motor.play();
+        se.play(sounds.motor);
       }),
     )
     .chain(

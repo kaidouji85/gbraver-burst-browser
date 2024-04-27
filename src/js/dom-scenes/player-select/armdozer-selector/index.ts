@@ -1,13 +1,18 @@
 import { ArmdozerId } from "gbraver-burst-core";
 import { Observable, Unsubscribable } from "rxjs";
 
-import { Resources } from "../../../resource";
 import { bindEventListener } from "./procedure/bind-event-listener";
-import { createArmdozerSelectorProps } from "./procedure/create-armdozer-selector-props";
+import {
+  createArmdozerSelectorProps,
+  PropsCreatorParams,
+} from "./procedure/create-armdozer-selector-props";
 import { hidden } from "./procedure/hidden";
 import { show } from "./procedure/show";
 import { waitUntilLoaded } from "./procedure/wait-until-loaded";
 import { ArmdozerSelectorProps } from "./props";
+
+/** コンストラクタのパラメータ */
+export type ArmdozerSelectorParams = PropsCreatorParams;
 
 /** アームドーザセレクタ */
 export class ArmdozerSelector {
@@ -18,20 +23,10 @@ export class ArmdozerSelector {
 
   /**
    * コンストラクタ
-   * @param resources リソース管理オブジェクト
-   * @param armdozerIds アームドーザIDリスト
-   * @param initialArmdozerId アームドーザID初期値
+   * @param params パラメータ
    */
-  constructor(
-    resources: Resources,
-    armdozerIds: ArmdozerId[],
-    initialArmdozerId: ArmdozerId,
-  ) {
-    this.#props = createArmdozerSelectorProps(
-      resources,
-      armdozerIds,
-      initialArmdozerId,
-    );
+  constructor(params: ArmdozerSelectorParams) {
+    this.#props = createArmdozerSelectorProps(params);
     this.#unsubscribers = bindEventListener(this.#props);
   }
 
@@ -60,7 +55,7 @@ export class ArmdozerSelector {
 
   /**
    * リソース読み込みが完了するまで待つ
-   * @return 待機結果
+   * @returns 待機結果
    */
   async waitUntilLoaded(): Promise<void> {
     await waitUntilLoaded(this.#props);
@@ -68,7 +63,7 @@ export class ArmdozerSelector {
 
   /**
    * ルートHTML要素を取得する
-   * @return ルートHTML要素
+   * @returns ルートHTML要素
    */
   getRootHTMLElement(): HTMLElement {
     return this.#props.root;
@@ -76,7 +71,7 @@ export class ArmdozerSelector {
 
   /**
    * アームドーザ選択の通知
-   * @return イベント通知ストリーム
+   * @returns イベント通知ストリーム
    */
   notifyChanges(): Observable<ArmdozerId> {
     return this.#props.change;
@@ -84,7 +79,7 @@ export class ArmdozerSelector {
 
   /**
    * アームドーザ決定通知ストリームを取得する
-   * @return アームドーザ決定通知ストリーム
+   * @returns アームドーザ決定通知ストリーム
    */
   notifyDecision(): Observable<ArmdozerId> {
     return this.#props.decide;
@@ -92,7 +87,7 @@ export class ArmdozerSelector {
 
   /**
    * 戻る 通知
-   * @return 通知ストリーム
+   * @returns 通知ストリーム
    */
   notifyPrev(): Observable<void> {
     return this.#props.prev;

@@ -1,35 +1,39 @@
 import { Observable } from "rxjs";
 
-import { Resources } from "../../../resource";
+import { ResourcesContainer } from "../../../resource";
 import { GameObjectAction } from "../../action/game-object-action";
 import { GenesisBraverCutIn } from "./genesis-braver-cutin";
 import { EnemyGenesisBraverCutInView } from "./view/enemy-genesis-braver-cutin-view";
 import { PlayerGenesisBraverCutInView } from "./view/player-genesis-braver-cutin-view";
 
+/** ジェネシスブレイバー カットイン生成パラメータ */
+export type GenesisBraverCutInCreatorParams = ResourcesContainer & {
+  /** ゲームオブジェクトアクション */
+  gameObjectAction: Observable<GameObjectAction>;
+};
+
 /**
  * プレイヤー ジェネシスブレイバー カットイン を生成する
- * @param resources リソース管理オブジェクト
- * @param gameObjectAction ゲームオブジェクトアクション
- * @return 生成結果
+ * @param params 生成パラメータ
+ * @returns 生成結果
  */
 export function playerGenesisBraverCutIn(
-  resources: Resources,
-  gameObjectAction: Observable<GameObjectAction>,
+  params: GenesisBraverCutInCreatorParams,
 ): GenesisBraverCutIn {
+  const { resources } = params;
   const view = new PlayerGenesisBraverCutInView(resources);
-  return new GenesisBraverCutIn(view, gameObjectAction);
+  return new GenesisBraverCutIn({ ...params, view });
 }
 
 /**
  * 敵 ジェネシスブレイバー カットイン を生成する
- * @param resources リソース管理オブジェクト
- * @param gameObjectAction ゲームオブジェクトアクション
- * @return 生成結果
+ * @param params 生成パラメータ
+ * @returns 生成結果
  */
 export function enemyGenesisBraverCutIn(
-  resources: Resources,
-  gameObjectAction: Observable<GameObjectAction>,
+  params: GenesisBraverCutInCreatorParams,
 ): GenesisBraverCutIn {
+  const { resources } = params;
   const view = new EnemyGenesisBraverCutInView(resources);
-  return new GenesisBraverCutIn(view, gameObjectAction);
+  return new GenesisBraverCutIn({ ...params, view });
 }

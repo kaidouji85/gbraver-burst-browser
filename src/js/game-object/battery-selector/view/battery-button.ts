@@ -3,7 +3,7 @@ import * as THREE from "three";
 
 import { HorizontalAnimationMesh } from "../../../mesh/horizontal-animation";
 import { SimpleImageMesh } from "../../../mesh/simple-image-mesh";
-import type { Resources } from "../../../resource";
+import type { ResourcesContainer } from "../../../resource";
 import { CANVAS_IMAGE_IDS } from "../../../resource/canvas-image";
 import { TEXTURE_IDS } from "../../../resource/texture/ids";
 import type { GameObjectAction } from "../../action/game-object-action";
@@ -15,9 +15,7 @@ import type { BatterySelectorModel } from "../model";
 const BATTERY_VALUE_MAX_ANIMATION = 16;
 
 /** コンストラクタのパラメータ */
-type Param = {
-  /** リソース管理オブジェクト */
-  resources: Resources;
+type Param = ResourcesContainer & {
   /** ゲームオブジェクトアクション */
   gameObjectAction: Observable<GameObjectAction>;
 };
@@ -125,7 +123,7 @@ export class BatteryButton {
 
   /**
    * シーンに追加するオブジェクトを取得する
-   * @return シーンに追加するオブジェクト
+   * @returns シーンに追加するオブジェクト
    */
   getObject3D(): THREE.Object3D {
     return this.#group;
@@ -133,7 +131,7 @@ export class BatteryButton {
 
   /**
    * ボタン押下通知
-   * @return 通知ストリーム
+   * @returns 通知ストリーム
    */
   pushNotifier(): Observable<Event> {
     return this.#pushDetector.notifyPressed();

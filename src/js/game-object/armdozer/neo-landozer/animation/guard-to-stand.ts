@@ -1,18 +1,19 @@
 import { Animate } from "../../../../animation/animate";
 import { onStart } from "../../../../animation/on-start";
 import { tween } from "../../../../animation/tween";
-import type { NeoLandozerModel } from "../model/neo-landozer-model";
-import type { NeoLandozerSounds } from "../sounds/neo-landozer-sounds";
+import { NeoLandozerAnimationProps } from "./animation-props";
 
-/** ガード -> 立ち */
-export function guardToStand(
-  model: NeoLandozerModel,
-  sounds: NeoLandozerSounds,
-): Animate {
+/**
+ * ガード -> 立ち
+ * @param props アニメーションプロパティ
+ * @returns アニメーション
+ */
+export function guardToStand(props: NeoLandozerAnimationProps): Animate {
+  const { model, sounds, se } = props;
   return onStart(() => {
     model.animation.frame = 1;
     model.animation.type = "GUARD";
-    sounds.motor.play();
+    se.play(sounds.motor);
   })
     .chain(
       tween(model.animation, (t) =>

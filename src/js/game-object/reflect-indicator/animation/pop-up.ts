@@ -8,7 +8,7 @@ import type { ReflectIndocatorModel } from "../model/reflect-indocator-model";
  * ポップアップ
  *
  * @param model モデル
- * @return アニメーション
+ * @returns アニメーション
  */
 export function popUp(model: ReflectIndocatorModel): Animate {
   return onStart(() => {

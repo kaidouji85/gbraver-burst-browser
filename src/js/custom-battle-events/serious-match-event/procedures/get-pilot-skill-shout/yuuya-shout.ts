@@ -5,7 +5,7 @@ import { PilotSkillShout } from "./pilot-skill-shout";
 /**
  * ユウヤ攻撃時の叫び
  * @param player プレイヤー情報
- * @return パイロット叫び情報
+ * @returns パイロット叫び情報
  */
 export const yuuyaAttackShout = (player: PlayerState): PilotSkillShout => ({
   face: "Yuuya",
@@ -14,7 +14,7 @@ export const yuuyaAttackShout = (player: PlayerState): PilotSkillShout => ({
 
 /**
  * ユウヤ防御時の叫び
- * @return パイロット叫び情報
+ * @returns パイロット叫び情報
  */
 export const yuuyaDefenseShout = (player: PlayerState): PilotSkillShout => ({
   face: "Yuuya",

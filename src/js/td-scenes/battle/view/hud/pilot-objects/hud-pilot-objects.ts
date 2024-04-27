@@ -1,9 +1,7 @@
 import type { PlayerId } from "gbraver-burst-core";
 import * as THREE from "three";
 
-/**
- * HUD パイロット関連オブジェクト
- */
+/** HUD パイロットオブジェクト */
 export interface HUDPilotObjects {
   /** プレイヤーID */
   playerId: PlayerId;
@@ -15,7 +13,7 @@ export interface HUDPilotObjects {
 
   /**
    * シーンに追加するオブジェクトを取得する
-   * @return シーンに追加するオブジェクト
+   * @returns シーンに追加するオブジェクト
    */
   getObject3Ds(): THREE.Object3D[];
 }

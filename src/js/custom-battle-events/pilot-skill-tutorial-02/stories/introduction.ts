@@ -18,7 +18,7 @@ import { yoroshikuOnegaiShimasu } from "../../yoroshiku-onegai-shimasu";
 /**
  * イントロダクション
  * @param props イベントプロパティ
- * @return ストーリーが完了したら発火するPromise
+ * @returns ストーリーが完了したら発火するPromise
  */
 export async function introduction(props: Readonly<CustomBattleEventProps>) {
   activeRightMessageWindowWithFace(props, "Shinya");
@@ -45,7 +45,7 @@ export async function introduction(props: Readonly<CustomBattleEventProps>) {
   await synchronizedUpright(props).play();
   props.view.dom.rightMessageWindow.nextMessageIconVisible(true);
   await waitUntilWindowPush(props);
-  props.sounds.sendMessage.sound.play();
+  props.se.play(props.sounds.sendMessage);
   props.view.dom.rightMessageWindow.nextMessageIconVisible(false);
   props.view.dom.rightMessageWindow.scrollUp();
   props.view.dom.rightMessageWindow.messages(["礼！！」"]);

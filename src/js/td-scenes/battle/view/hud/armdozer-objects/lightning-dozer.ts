@@ -1,42 +1,27 @@
-import type { Player, PlayerId } from "gbraver-burst-core";
-import { Observable } from "rxjs";
+import { PlayerId } from "gbraver-burst-core";
 import * as THREE from "three";
 
-import type { GameObjectAction } from "../../../../../game-object/action/game-object-action";
 import {
-  enemyLightningiDozerCutIn,
+  enemyLightningDozerCutIn,
   playerLightningDozerCutIn,
 } from "../../../../../game-object/cut-in/lightning-dozer";
 import { LightningDozerCutIn } from "../../../../../game-object/cut-in/lightning-dozer/lightning-dozer-cutin";
-import type { Resources } from "../../../../../resource";
-import type { HUDArmdozerObjects } from "./hud-armdozer-ibjects";
-
-/**
- * HUDレイヤー ライトニングドーザ固有オブジェクト フィールド
- */
-interface LightningDozerHUDField {
-  cutIn: LightningDozerCutIn;
-}
+import { HUDLayerObjectCreatorParams } from "../creator-params";
+import { HUDArmdozerObjects } from "./hud-armdozer-objects";
 
 /**
  * HUDレイヤー ライトニングドーザ固有オブジェクト
  */
-export class LightningDozerHUD
-  implements HUDArmdozerObjects, LightningDozerHUDField
-{
-  playerId: PlayerId;
-  cutIn: LightningDozerCutIn;
-
+export class LightningDozerHUD implements HUDArmdozerObjects {
   /**
    * コンストラクタ
-   *
    * @param playerId プレイヤーID
-   * @param param フィールド
+   * @param cutIn カットイン
    */
-  constructor(playerId: PlayerId, param: LightningDozerHUDField) {
-    this.playerId = playerId;
-    this.cutIn = param.cutIn;
-  }
+  constructor(
+    readonly playerId: PlayerId,
+    readonly cutIn: LightningDozerCutIn,
+  ) {}
 
   /**
    * デストラクタ相当の処理
@@ -48,7 +33,7 @@ export class LightningDozerHUD
   /**
    * シーンに追加するオブジェクトを取得する
    *
-   * @return シーンに追加するオブジェクト
+   * @returns シーンに追加するオブジェクト
    */
   getObject3Ds(): THREE.Object3D[] {
     return [this.cutIn.getObject3D()];
@@ -57,36 +42,30 @@ export class LightningDozerHUD
 
 /**
  * プレイヤー HUDレイヤー ライトニングドーザ固有オブジェクト
- *
- * @param resources リソース管理オブジェクト
- * @param gameObjectAction ゲームオブジェクトアクション
- * @param state プレイヤー情報
- * @return 生成結果
+ * @param params 生成パラメータ
+ * @returns 生成結果
  */
 export function playerLightningDozerHUD(
-  resources: Resources,
-  gameObjectAction: Observable<GameObjectAction>,
-  state: Player,
+  params: HUDLayerObjectCreatorParams,
 ): LightningDozerHUD {
-  return new LightningDozerHUD(state.playerId, {
-    cutIn: playerLightningDozerCutIn(resources, gameObjectAction),
-  });
+  const { player } = params;
+  return new LightningDozerHUD(
+    player.playerId,
+    playerLightningDozerCutIn(params),
+  );
 }
 
 /**
  * 敵 HUDレイヤー ライトニングドーザ固有オブジェクト
- *
- * @param resources リソース管理オブジェクト
- * @param gameObjectAction ゲームオブジェクトアクション
- * @param state プレイヤー情報
- * @return 生成結果
+ * @param params 生成パラメータ
+ * @returns 生成結果
  */
 export function enemyLightningDozerHUD(
-  resources: Resources,
-  gameObjectAction: Observable<GameObjectAction>,
-  state: Player,
+  params: HUDLayerObjectCreatorParams,
 ): LightningDozerHUD {
-  return new LightningDozerHUD(state.playerId, {
-    cutIn: enemyLightningiDozerCutIn(resources, gameObjectAction),
-  });
+  const { enemy } = params;
+  return new LightningDozerHUD(
+    enemy.playerId,
+    enemyLightningDozerCutIn(params),
+  );
 }

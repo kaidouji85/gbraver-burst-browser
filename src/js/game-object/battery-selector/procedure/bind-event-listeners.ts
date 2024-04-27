@@ -1,7 +1,7 @@
 import { Observable, Unsubscribable } from "rxjs";
 
 import { GameObjectAction } from "../../action/game-object-action";
-import { BatterySelectorProps } from "../props";
+import { BatterySelectorProps } from "../props/battery-selector-props";
 import { onBatteryMinusPush } from "./on-battery-minus-push";
 import { onBatteryPlusPush } from "./on-battery-plus-push";
 import { onOKPush } from "./on-ok-push";
@@ -12,7 +12,7 @@ import { onUpdate } from "./on-update";
  * イベントリスナーをバインドする
  * @param props ゲームオブジェクトプロパティ
  * @param gameObjectAction ゲームオブジェクトアクション
- * @return アンサブスクライバ
+ * @returns アンサブスクライバ
  */
 export function bindEventListeners(
   props: BatterySelectorProps,

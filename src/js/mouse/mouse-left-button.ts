@@ -3,7 +3,7 @@
  * trueで左ボタンを押している
  *
  * @param event マウスイベント
- * @return 判定結果
+ * @returns 判定結果
  */
 export function isMouseLeftButtonPushed(event: MouseEvent): boolean {
   return event.buttons === 1;

@@ -13,7 +13,7 @@ import { onVeryHardPush } from "./on-very-hard-push";
  * 難易度選択ダイアログにイベントリスナをバインドする
  *
  * @param props ダイアログプロパティ
- * @return バインドしたイベントリスナのアンサブスクライバ
+ * @returns バインドしたイベントリスナのアンサブスクライバ
  */
 export function bindEventListeners(
   props: DifficultyDialogProps,

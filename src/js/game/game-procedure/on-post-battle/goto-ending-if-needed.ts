@@ -9,7 +9,7 @@ import { GameProps } from "../../game-props";
  * 条件を満たした場合、エンディングに遷移する
  * @param props ゲームプロパティ
  * @param action アクション
- * @return 遷移した場合はtrue、遷移しなかった場合はfalse
+ * @returns 遷移した場合はtrue、遷移しなかった場合はfalse
  */
 export async function gotoEndingIfNeeded(
   props: Readonly<GameProps>,
@@ -22,7 +22,7 @@ export async function gotoEndingIfNeeded(
   props.domFloaters.hiddenPostBattle();
   await props.fader.fadeOut();
   props.tdBinder.hidden();
-  const scene = new NPCEnding(props.resources, props.bgm);
+  const scene = new NPCEnding(props);
   props.domSceneBinder.bind(scene, npcEndingConnector);
   await Promise.race([scene.waitUntilLoaded(), waitTime(MAX_LOADING_TIME)]);
   await props.fader.fadeIn();

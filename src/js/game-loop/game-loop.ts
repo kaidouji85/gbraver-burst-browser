@@ -9,7 +9,7 @@ export type GameLoop = {
 /**
  * ゲームループのストリームを生成する
  *
- * @return ゲームループストリーム
+ * @returns ゲームループストリーム
  */
 export function gameLoopStream(): Observable<GameLoop> {
   const source = new Subject<GameLoop>();

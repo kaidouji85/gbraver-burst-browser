@@ -6,7 +6,7 @@ import { ArmdozerSelectorProps } from "../props";
  * アームドーザアイコンが選択された際の処理
  * @param props プロパティ
  * @param armdozerId 選択されたアームドーザID
- * @return 処理結果
+ * @returns 処理結果
  */
 export function onArmdozerSelect(
   props: ArmdozerSelectorProps,
@@ -19,17 +19,17 @@ export function onArmdozerSelect(
       props.change.next(props.armdozerId);
     }
 
-    props.changeValueSound.play();
+    props.se.play(props.changeValueSound);
     props.armdozerIcons
-      .filter((v) => v.armdozerId === armdozerId)
-      .forEach((v) => {
-        v.icon.pop();
-        v.icon.selected(true);
+      .filter((icon) => icon.armdozerId === armdozerId)
+      .forEach((icon) => {
+        icon.pop();
+        icon.selected(true);
       });
     props.armdozerIcons
-      .filter((v) => v.armdozerId !== armdozerId)
-      .forEach((v) => {
-        v.icon.selected(false);
+      .filter((icon) => icon.armdozerId !== armdozerId)
+      .forEach((icon) => {
+        icon.selected(false);
       });
   });
 }

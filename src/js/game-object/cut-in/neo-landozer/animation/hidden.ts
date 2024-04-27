@@ -1,14 +1,14 @@
 import { Animate } from "../../../../animation/animate";
 import { tween } from "../../../../animation/tween";
-import type { NeoLandozerCutInModel } from "../model/neo-landozer-cutin-model";
+import { NeoLandozerCutInAnimationProps } from "./animation-props";
 
 /**
  * カットインを非表示にする
- *
- * @param model モデル
- * @return アニメーション
+ * @param props アニメーションプロパティ
+ * @returns アニメーション
  */
-export function hidden(model: NeoLandozerCutInModel): Animate {
+export function hidden(props: NeoLandozerCutInAnimationProps): Animate {
+  const { model } = props;
   return tween(model, (t) =>
     t.to(
       {

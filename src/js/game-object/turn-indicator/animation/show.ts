@@ -7,7 +7,7 @@ import type { TurnIndicatorModel } from "../model/turn-indicator-model";
  * ターンインジケータを表示する
  * @param isPlayerTurn プレイヤーターンであるか否か、trueでプレイヤーターン
  * @param model モデル
- * @return アニメーション
+ * @returns アニメーション
  */
 export function show(
   isPlayerTurn: boolean,

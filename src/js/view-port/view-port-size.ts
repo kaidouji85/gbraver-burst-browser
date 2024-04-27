@@ -1,7 +1,7 @@
 /**
  * ビューポート幅を取得する
  *
- * @return ビューポート幅(ピクセル)
+ * @returns ビューポート幅(ピクセル)
  */
 export function getViewPortWidth(): number {
   return window.innerWidth;
@@ -10,7 +10,7 @@ export function getViewPortWidth(): number {
 /**
  * ビューポート高を取得する
  *
- * @return ビューポート高(ピクセル)
+ * @returns ビューポート高(ピクセル)
  */
 export function getViewPortHeight(): number {
   return window.innerHeight;

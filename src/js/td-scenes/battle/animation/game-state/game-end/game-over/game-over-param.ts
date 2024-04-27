@@ -25,13 +25,13 @@ export type GameOverParam = GameOverParamX<TDArmdozerObjects>;
  *
  * @param props 戦闘シーンプロパティ
  * @param gameOver ゲームオーバー情報
- * @return 変換結果
+ * @returns 変換結果
  */
 export function toGameOverParam(
   props: StateAnimationProps,
   gameOver: GameOver,
 ): GameOverParam | null | undefined {
-  const winnerArmdozer = props.view.td.armdozerObjects.find(
+  const winnerArmdozer = props.view.td.armdozers.find(
     (v) => v.playerId === gameOver.winner,
   );
 

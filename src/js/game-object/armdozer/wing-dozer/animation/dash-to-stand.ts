@@ -1,24 +1,19 @@
 import { Animate } from "../../../../animation/animate";
 import { onStart } from "../../../../animation/on-start";
 import { tween } from "../../../../animation/tween";
-import type { WingDozerModel } from "../model/wing-dozer-model";
-import { WingDozerSounds } from "../sounds/wing-dozer-sounds";
+import { WingDozerAnimationProps } from "./animation-props";
 
 /**
  * ダッシュ -> 立ち
- *
- * @param model モデル
- * @param sounds 音
- * @return アニメーション
+ * @param props アニメーションプロパティ
+ * @returns アニメーション
  */
-export function dashToStand(
-  model: WingDozerModel,
-  sounds: WingDozerSounds,
-): Animate {
+export function dashToStand(props: WingDozerAnimationProps): Animate {
+  const { model, sounds, se } = props;
   return onStart(() => {
     model.animation.type = "DASH_TO_STAND";
     model.animation.frame = 0;
-    sounds.motor.play();
+    se.play(sounds.motor);
   })
     .chain(
       tween(model.animation, (t) =>

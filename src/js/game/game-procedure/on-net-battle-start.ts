@@ -11,14 +11,17 @@ import { GameProps } from "../game-props";
 /**
  * ログインチェックAPIを呼び出す
  * @param props ゲームプロパティ
- * @return API実行結果、trueでログインしている
+ * @returns API実行結果、trueでログインしている
  */
 async function callLoginCheckAPI(props: Readonly<GameProps>): Promise<boolean> {
   try {
     return await props.api.isLogin();
   } catch (e) {
-    const dialog = new NetworkErrorDialog(props.resources, {
-      type: "Close",
+    const dialog = new NetworkErrorDialog({
+      ...props,
+      postNetworkError: {
+        type: "Close",
+      },
     });
     props.domDialogBinder.bind(dialog, networkErrorDialogConnector);
     throw e;
@@ -28,7 +31,7 @@ async function callLoginCheckAPI(props: Readonly<GameProps>): Promise<boolean> {
 /**
  * ネットバトル開始
  * @param props ゲームプロパティ
- * @return 処理が完了したら発火するPromise
+ * @returns 処理が完了したら発火するPromise
  */
 export async function onNetBattleStart(
   props: Readonly<GameProps>,
@@ -41,17 +44,17 @@ export async function onNetBattleStart(
   props.domDialogBinder.hidden();
   if (!isLogin) {
     props.domDialogBinder.bind(
-      new LoginDialog(
-        props.resources,
-        "ネット対戦をするにはログインをしてください",
-      ),
+      new LoginDialog({
+        ...props,
+        caption: "ネット対戦をするにはログインをしてください",
+      }),
       loginDialogConnector,
     );
     return;
   }
 
   props.domDialogBinder.bind(
-    new NetBattleSelectorDialog(props.resources),
+    new NetBattleSelectorDialog(props),
     netBattleSelectorDialogConnector,
   );
 }

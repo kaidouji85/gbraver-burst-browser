@@ -7,7 +7,7 @@ import { separatePlayersFromCurrentState } from "./separate-players";
  * 指定したプレイヤーがバーストを発動したかを判定する
  * @param state ゲームステート
  * @param playerId 判定対象のプレイヤー
- * @return trueでバーストを発動した
+ * @returns trueでバーストを発動した
  */
 function isBurstActivated(state: GameState, playerId: PlayerId): boolean {
   return (
@@ -18,7 +18,7 @@ function isBurstActivated(state: GameState, playerId: PlayerId): boolean {
 /**
  * 現在のステートからプレイヤーがバーストを発動したかを判定する
  * @param props カスタムバトルイベントプロパティ
- * @return trueでバーストを発動した
+ * @returns trueでバーストを発動した
  */
 export function isPlayerBurstActivated(props: CustomStateAnimation): boolean {
   return isBurstActivated(props.currentState, props.playerId);
@@ -27,7 +27,7 @@ export function isPlayerBurstActivated(props: CustomStateAnimation): boolean {
 /**
  * 現在のステートから敵がバーストを発動したかを判定する
  * @param props カスタムバトルイベントプロパティ
- * @return trueでバーストを発動した
+ * @returns trueでバーストを発動した
  */
 export function isEnemyBurstActivated(props: CustomStateAnimation): boolean {
   const enemy = separatePlayersFromCurrentState(props)?.enemy;

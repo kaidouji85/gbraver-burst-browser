@@ -3,7 +3,7 @@ import type { ShinBraverCutInModel } from "./shin-braver-cutin-model";
 /**
  * モデルの初期値を生成する
  *
- * @return 生成した初期値
+ * @returns 生成した初期値
  */
 export function createInitialValue(): ShinBraverCutInModel {
   return {

@@ -4,7 +4,6 @@ import { all } from "../../../../animation/all";
 import { Animate } from "../../../../animation/animate";
 import { delay, empty } from "../../../../animation/delay";
 import { onStart } from "../../../../animation/on-start";
-import { BattleSceneSounds } from "../../sounds/sounds";
 import type { TDPlayer } from "../../view/td/player";
 import type { StateAnimationProps } from "./state-animation-props";
 
@@ -13,7 +12,7 @@ import type { StateAnimationProps } from "./state-animation-props";
  *
  * @param td 3Dレイヤーのプレイヤーオブジェクト
  * @param value バッテリー値
- * @return アニメーション
+ * @returns アニメーション
  */
 function declaration(td: TDPlayer, value: number): Animate {
   return td.batteryNumber.show(value).chain(delay(800));
@@ -23,13 +22,13 @@ function declaration(td: TDPlayer, value: number): Animate {
  * バッテリー宣言の効果音
  * プレイヤー、敵側で同時再生したくないので、
  * declarationとは別関数に切り出している
- *
- * @param sounds 効果音
- * @return アニメーション
+ * @param props 戦闘シーンプロパティ
+ * @returns アニメーション
  */
-function declarationSound(sounds: BattleSceneSounds): Animate {
+function declarationSound(props: StateAnimationProps): Animate {
+  const { sounds, se } = props;
   return onStart(() => {
-    sounds.batteryDeclaration.play();
+    se.play(sounds.batteryDeclaration);
   });
 }
 
@@ -40,7 +39,7 @@ function declarationSound(sounds: BattleSceneSounds): Animate {
  * @param origin 本来のバッテリー
  * @param correct バッテリー補正値
  * @param value 出したバッテリー
- * @return アニメーション
+ * @returns アニメーション
  */
 function declarationWithCorrect(
   td: TDPlayer,
@@ -61,17 +60,18 @@ function declarationWithCorrect(
  * バッテリー補正ありの場合の効果音
  * declarationWithCorrectとタイミングを合わせている
  *
- * @param sounds 効果音
- * @return アニメーション
+ * @param props 戦闘シーンプロパティ
+ * @returns アニメーション
  */
-function declarationSoundWithCorrect(sounds: BattleSceneSounds): Animate {
+function declarationSoundWithCorrect(props: StateAnimationProps): Animate {
+  const { sounds, se } = props;
   return onStart(() => {
-    sounds.batteryDeclaration.play();
+    se.play(sounds.batteryDeclaration);
   })
     .chain(delay(600))
     .chain(
       onStart(() => {
-        sounds.batteryDeclaration.play();
+        se.play(sounds.batteryDeclaration);
       }),
     );
 }
@@ -81,7 +81,7 @@ function declarationSoundWithCorrect(sounds: BattleSceneSounds): Animate {
  *
  * @param props 戦闘シーンプロパティ
  * @param gameState ゲームの状態
- * @return アニメーション
+ * @returns アニメーション
  */
 export function batteryDeclarationAnimation(
   props: StateAnimationProps,
@@ -101,7 +101,7 @@ export function batteryDeclarationAnimation(
   const attackerTD = props.view.td.players.find(
     (v) => v.playerId === attacker.playerId,
   );
-  const attackerTDArmdozer = props.view.td.armdozerObjects.find(
+  const attackerTDArmdozer = props.view.td.armdozers.find(
     (v) => v.playerId === attacker.playerId,
   );
   const attackerHUD = props.view.hud.players.find(
@@ -153,8 +153,8 @@ export function batteryDeclarationAnimation(
       : declaration(defenderTD, defenderBattery);
   const sound =
     attackerCorrect !== 0 || defenderCorrect !== 0
-      ? declarationSoundWithCorrect(props.sounds)
-      : declarationSound(props.sounds);
+      ? declarationSoundWithCorrect(props)
+      : declarationSound(props);
   return all(
     sound,
     props.view.td.gameObjects.turnIndicator.show(isAttacker),

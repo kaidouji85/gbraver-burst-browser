@@ -6,7 +6,7 @@ import { scrollLeftMessages } from "../../scroll-messages";
 /**
  * バッテリーが残っているのに0防御した場合のストーリー
  * @param props イベントプロパティ
- * @return ストーリーが完了したら発火するPromise
+ * @returns ストーリーが完了したら発火するPromise
  */
 export async function zeroDefenseButPositiveBattery(
   props: Readonly<CustomBattleEventProps>,

@@ -1,7 +1,5 @@
-import { Observable } from "rxjs";
-
-import { GameObjectAction } from "../src/js/game-object/action/game-object-action";
 import {
+  BurstButtonCreatorParams,
   genesisBraverBurstButton,
   lightningDozerBurstButton,
   neoLandozerBurstButton,
@@ -9,7 +7,6 @@ import {
   wingDozerBurstButton,
 } from "../src/js/game-object/burst-button";
 import { BurstButton } from "../src/js/game-object/burst-button/burst-button";
-import { Resources } from "../src/js/resource";
 import { HUDGameObjectStub } from "./stub/hud-game-object-stub";
 
 export default {
@@ -18,25 +15,21 @@ export default {
 
 /**
  * バーストボタン生成関数
- * @param resources リソース管理オブジェクト
- * @param gameObjectAction ゲームオブジェクトアクション
- * @return バーストボタン
+ * @param params 生成パラメータ
+ * @returns バーストボタン
  */
-type BurstButtonGenerator = (
-  resources: Resources,
-  gameObjectAction: Observable<GameObjectAction>,
-) => BurstButton;
+type BurstButtonGenerator = (params: BurstButtonCreatorParams) => BurstButton;
 
 /**
  * バーストボタンストーリー
  * @param generator バーストボタン生成関数
- * @param burstButton バーストボタン操作関数
+ * @param fn バーストボタンに対する処理
  */
 const buttonStory =
   (generator: BurstButtonGenerator, fn: (burstButton: BurstButton) => void) =>
   () => {
-    const stub = new HUDGameObjectStub(({ resources, gameObjectAction }) => {
-      const burstButton = generator(resources, gameObjectAction);
+    const stub = new HUDGameObjectStub((params) => {
+      const burstButton = generator(params);
       fn(burstButton);
       return [burstButton.getObject3D()];
     });

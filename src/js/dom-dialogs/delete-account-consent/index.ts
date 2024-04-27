@@ -1,10 +1,12 @@
 import { Observable, Unsubscribable } from "rxjs";
 
-import { Resources } from "../../resource";
 import { DOMDialog } from "../dialog";
 import { bindEventListeners } from "./procedure/bind-event-listeners";
-import { createProps } from "./procedure/create-props";
+import { createProps, PropsCreatorParams } from "./procedure/create-props";
 import { DeleteAccountConsentDialogProps } from "./props";
+
+/** コンストラクタのパラメータ */
+export type DeleteAccountConsentDialogParams = PropsCreatorParams;
 
 /** アカウント削除同意ダイアログ */
 export class DeleteAccountConsentDialog implements DOMDialog {
@@ -15,10 +17,10 @@ export class DeleteAccountConsentDialog implements DOMDialog {
 
   /**
    * コンストラクタ
-   * @param resources リソース管理オブジェクト
+   * @param params パラメータ
    */
-  constructor(resources: Resources) {
-    this.#props = createProps(resources);
+  constructor(params: DeleteAccountConsentDialogParams) {
+    this.#props = createProps(params);
     this.#unsubscribers = bindEventListeners(this.#props);
   }
 
@@ -36,7 +38,7 @@ export class DeleteAccountConsentDialog implements DOMDialog {
 
   /**
    * アカウント削除通知
-   * @return 通知ストリーム
+   * @returns 通知ストリーム
    */
   notifyAccountDeletion(): Observable<void> {
     return this.#props.deleteAccount;
@@ -44,7 +46,7 @@ export class DeleteAccountConsentDialog implements DOMDialog {
 
   /**
    * ダイアログを閉じる通知
-   * @return 通知ストリーム
+   * @returns 通知ストリーム
    */
   notifyClosed(): Observable<void> {
     return this.#props.closeDialog;

@@ -7,7 +7,7 @@ import { onButtonPush } from "./on-button-push";
 /**
  * バーストボタンにイベントを関連付ける
  * @param props コンポネントプロパティ
- * @return アンサブスクライバ
+ * @returns アンサブスクライバ
  */
 export function bindEventListeners(props: BurstButtonProps): Unsubscribable[] {
   return [

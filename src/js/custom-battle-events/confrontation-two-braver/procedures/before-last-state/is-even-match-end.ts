@@ -5,7 +5,7 @@ import { ConfrontationTwoBraverProps } from "../../props";
 /**
  * チャプター「イーブンマッチ」が終了したか
  * @param props イベントプロパティ
- * @return trueで終了した
+ * @returns trueで終了した
  */
 export function isEvenMatchEnd(
   props: Readonly<CustomBattleEventProps & ConfrontationTwoBraverProps>,

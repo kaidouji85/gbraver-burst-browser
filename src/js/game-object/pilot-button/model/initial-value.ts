@@ -3,14 +3,14 @@ import type { PilotButtonModel } from "./pilot-button-model";
 /**
  * パイロットボタン モデル 初期値を生成する
  *
- * @return 初期値
+ * @returns 初期値
  */
 export function createInitialValue(): PilotButtonModel {
   return {
     opacity: 0,
-    isPushNotifierDisabled: true,
+    shouldPushNotifierStop: true,
     disabled: false,
     scale: 1,
-    canPilot: true,
+    canActivatePilotSkill: true,
   };
 }

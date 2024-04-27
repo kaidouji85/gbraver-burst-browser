@@ -14,7 +14,7 @@ export function onCloseButtonPush(
   props.exclusive.execute(async () => {
     action.event.stopPropagation();
     action.event.preventDefault();
-    props.pushButton.sound.play();
+    props.se.play(props.pushButton);
     await pop(props.closeButton, 1.05);
     props.dialogClosed.next();
   });

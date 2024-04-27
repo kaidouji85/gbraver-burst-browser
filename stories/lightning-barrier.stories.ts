@@ -9,15 +9,12 @@ export default {
 /**
  * 電撃バリアストーリー
  * @param fn 電撃バリア操作関数
- * @return story
+ * @returns story
  */
 const lightningBarrierStory =
   (fn: (lightningBarrier: LightningBarrierGameEffect) => void) => () => {
-    const stub = new TDGameObjectStub(({ resources, gameObjectAction }) => {
-      const barrier = new LightningBarrierGameEffect(
-        resources,
-        gameObjectAction,
-      );
+    const stub = new TDGameObjectStub((params) => {
+      const barrier = new LightningBarrierGameEffect(params);
       fn(barrier);
       return {
         objects: [barrier.getObject3D()],

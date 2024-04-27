@@ -7,7 +7,7 @@
  *
  * @param offset 任意のテクスチャオフセットの座標軸
  * @param maxAnimation アニメーションの最大数
- * @return 正規化したオフセット値
+ * @returns 正規化したオフセット値
  */
 export function normalizeTextureOffset(
   offset: number,

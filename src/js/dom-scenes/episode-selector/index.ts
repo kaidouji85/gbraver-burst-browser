@@ -1,14 +1,20 @@
 import { Observable, Unsubscribable } from "rxjs";
 
 import { EpisodeID } from "../../game/episodes/episode";
-import { Resources } from "../../resource";
 import { DOMScene } from "../dom-scene";
-import { Episode } from "./episode";
 import { EpisodeSelect } from "./episode-element/episode-select";
 import { bindEventListeners } from "./procedure/bind-event-listeners";
-import { createEpisodeSelectorProps } from "./procedure/create-episode-selector-props";
+import {
+  createEpisodeSelectorProps,
+  PropsCreatorParams,
+} from "./procedure/create-episode-selector-props";
 import { initialize } from "./procedure/initialize";
 import { EpisodeSelectorProps } from "./props";
+
+/** コンストラクタのパラメータ */
+export type EpisodeSelectorParams = PropsCreatorParams & {
+  initialSelectedEpisodeID?: EpisodeID;
+};
 
 /** エピソードセレクト画面 */
 export class EpisodeSelector implements DOMScene {
@@ -19,16 +25,11 @@ export class EpisodeSelector implements DOMScene {
 
   /**
    * コンストラクタ
-   * @param resources リソース管理オブジェクト
-   * @param episodes エピソード情報
-   * @param initialSelectedEpisodeID 初期選択エピソードID
+   * @param params パラメータ
    */
-  constructor(
-    resources: Resources,
-    episodes: Episode[],
-    initialSelectedEpisodeID?: EpisodeID,
-  ) {
-    this.#props = createEpisodeSelectorProps(resources, episodes);
+  constructor(params: EpisodeSelectorParams) {
+    const { initialSelectedEpisodeID } = params;
+    this.#props = createEpisodeSelectorProps(params);
     this.#unsubscribers = bindEventListeners(this.#props);
     initialize(this.#props, initialSelectedEpisodeID);
   }
@@ -50,7 +51,7 @@ export class EpisodeSelector implements DOMScene {
 
   /**
    * 各種リソースの読み込みが完了するまで待つ
-   * @return 待機結果
+   * @returns 待機結果
    */
   async waitUntilLoaded(): Promise<void> {
     await this.#props.isImageCutsLoaded;
@@ -58,7 +59,7 @@ export class EpisodeSelector implements DOMScene {
 
   /**
    * 戻るボタン押下通知
-   * @return 通知ストリーム
+   * @returns 通知ストリーム
    */
   notifyPrev(): Observable<void> {
     return this.#props.prev;
@@ -66,7 +67,7 @@ export class EpisodeSelector implements DOMScene {
 
   /**
    * 選択通知
-   * @return 通知ストリーム
+   * @returns 通知ストリーム
    */
   notifySelection(): Observable<EpisodeSelect> {
     return this.#props.episodeSelect;

@@ -3,7 +3,7 @@ import { BatteryDeclaration, GameStateX } from "gbraver-burst-core";
 /**
  * バーストが使えるのに0防御したかを判定する
  * @param batteryDeclaration バッテリー宣言
- * @return 判定結果、trueでバーストが使えるのに0防御した
+ * @returns 判定結果、trueでバーストが使えるのに0防御した
  */
 export function isZeroDefenseButEnableBurst(
   batteryDeclaration: Readonly<GameStateX<BatteryDeclaration>>,

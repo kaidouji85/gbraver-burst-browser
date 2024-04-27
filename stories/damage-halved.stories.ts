@@ -1,13 +1,10 @@
-import { Observable } from "rxjs";
-
 import { delay } from "../src/js/animation/delay";
-import { GameObjectAction } from "../src/js/game-object/action/game-object-action";
 import {
+  DamageHalvedCreatorParams,
   enemyDamageHalved,
   playerDamageHalved,
 } from "../src/js/game-object/damage-halved";
 import { DamageHalved } from "../src/js/game-object/damage-halved/damage-halved";
-import { Resources } from "../src/js/resource";
 import { TDGameObjectStub } from "./stub/td-game-object-stub";
 
 export default {
@@ -18,19 +15,16 @@ export default {
  * ダメージ半減インジケータのストーリー
  * @param generator ダメージ半減インジケータ生成関数
  * @param fn ダメージ半減インジケータ操作関数
- * @return story
+ * @returns story
  */
 const damageHalvedStory =
   (
-    generator: (
-      resources: Resources,
-      gameObjectAction: Observable<GameObjectAction>,
-    ) => DamageHalved,
+    generator: (param: DamageHalvedCreatorParams) => DamageHalved,
     fn: (damageHavled: DamageHalved) => void,
   ) =>
   () => {
-    const stub = new TDGameObjectStub(({ resources, gameObjectAction }) => {
-      const damageHalved = generator(resources, gameObjectAction);
+    const stub = new TDGameObjectStub((params) => {
+      const damageHalved = generator(params);
       fn(damageHalved);
       return {
         objects: [damageHalved.getObject3D()],

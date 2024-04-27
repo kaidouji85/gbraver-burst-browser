@@ -27,7 +27,7 @@ const nextTimeScales: NextTimeScale[] = [
  * タイムスケールの現在値からトグル後の値を取得する
  *
  * @param timeScale 現在値
- * @return トグル後の値
+ * @returns トグル後の値
  */
 export function getNextTimeScale(timeScale: number): number {
   return nextTimeScales.find((v) => v.current === timeScale)?.next ?? 1;

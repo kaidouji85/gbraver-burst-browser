@@ -3,26 +3,23 @@ import { Animate } from "../../../../animation/animate";
 import { delay } from "../../../../animation/delay";
 import { onStart } from "../../../../animation/on-start";
 import { tween } from "../../../../animation/tween";
-import type { LightningDozerModel } from "../model/lightning-dozer-model";
-import { LightningDozerSounds } from "../sounds/lightning-dozer-sounds";
+import { LightningDozerAnimationProps } from "./animation-props";
 
 /**
  * フロントステップ
- *
- * @param model モデル
- * @param sounds 音
+ * @param props アニメーションプロパティ
  * @param distance 移動距離を絶対値で指定する
- * @return アニメーション
+ * @returns アニメーション
  */
 export function frontStep(
-  model: LightningDozerModel,
-  sounds: LightningDozerSounds,
+  props: LightningDozerAnimationProps,
   distance = 100,
 ): Animate {
+  const { model, sounds, se } = props;
   return onStart(() => {
     model.animation.type = "FRONT_STEP";
     model.animation.frame = 0;
-    sounds.motor.play();
+    se.play(sounds.motor);
   })
     .chain(
       all(
@@ -47,7 +44,7 @@ export function frontStep(
     .chain(delay(300))
     .chain(
       onStart(() => {
-        sounds.motor.play();
+        se.play(sounds.motor);
       }),
     )
     .chain(

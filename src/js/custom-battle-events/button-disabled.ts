@@ -12,7 +12,7 @@ type OperatableButton = {
 /**
  * イベントプロパティから設定対象ボタンを取得する
  * @param props イベントプロパティ
- * @return 設定対象ボタン
+ * @returns 設定対象ボタン
  */
 function getOperatableButtons(
   props: Readonly<CustomBattleEventProps>,

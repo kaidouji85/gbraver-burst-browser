@@ -8,7 +8,7 @@ import { getBatteryGaugeUnitBrightness } from "../model/get-battery-gauge-unit-b
  * バッテリーを変更するアニメーション
  * @param model モデル
  * @param value バッテリー値
- * @return アニメーション
+ * @returns アニメーション
  */
 export function battery(model: GaugeModel, value: number): Animate {
   return all(

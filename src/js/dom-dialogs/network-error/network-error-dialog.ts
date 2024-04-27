@@ -1,12 +1,14 @@
-import { Howl } from "howler";
 import { Observable, Subject, Unsubscribable } from "rxjs";
 
 import { pop } from "../../dom/pop";
 import { domPushStream, PushDOM } from "../../dom/push-dom";
 import { Exclusive } from "../../exclusive/exclusive";
 import type { PostNetworkError } from "../../game/post-network-error";
-import type { Resources } from "../../resource";
-import { SOUND_IDS } from "../../resource/sound";
+import type { ResourcesContainer } from "../../resource";
+import { createEmptySoundResource } from "../../resource/sound/empty-sound-resource";
+import { SOUND_IDS } from "../../resource/sound/ids";
+import { SoundResource } from "../../resource/sound/resource";
+import { SEPlayer, SEPlayerContainer } from "../../se/se-player";
 import { domUuid } from "../../uuid/dom-uuid";
 import type { DOMDialog } from "../dialog";
 
@@ -22,7 +24,7 @@ type DataIDs = {
  * 通信エラー後処理情報に対応した、ボタンの文言を取得する
  *
  * @param postNetworkError 通信エラー後処理情報
- * @return ボタン文言
+ * @returns ボタン文言
  */
 function postNetowrkErrorLabel(postNetworkError: PostNetworkError) {
   switch (postNetworkError.type) {
@@ -42,7 +44,7 @@ function postNetowrkErrorLabel(postNetworkError: PostNetworkError) {
  *
  * @param ids data-idを集めたもの
  * @param postNetworkErrorLabel 通信エラー後処理ボタンの文言
- * @return innerHTML
+ * @returns innerHTML
  */
 function rootInnerHTML(ids: DataIDs, postNetworkErrorLabel: string): string {
   return `
@@ -64,7 +66,7 @@ type Elements = {
  *
  * @param root ルート要素
  * @param ids data-idを集めたもの
- * @return 抽出結果
+ * @returns 抽出結果
  */
 function extractElements(root: HTMLElement, ids: DataIDs): Elements {
   const postNetworkErrorButtonElement = root.querySelector(
@@ -79,23 +81,39 @@ function extractElements(root: HTMLElement, ids: DataIDs): Elements {
   };
 }
 
+/** コンストラクタのパラメータ */
+export type NetworkErrorDialogParams = ResourcesContainer &
+  SEPlayerContainer & {
+    /** 通信エラーの後処理 */
+    postNetworkError: PostNetworkError;
+  };
+
 /** 通信エラー ダイアログ */
 export class NetworkErrorDialog implements DOMDialog {
+  /** ルート要素 */
   #root: HTMLElement;
+  /** 通信エラーの後処理実行ボタン */
   #postNetworkErrorButton: HTMLButtonElement;
+  /** 通信エラーの後処理 */
   #postNetworkError: PostNetworkError;
+  /** 通信エラーの後処理実行通知 */
   #postNetworkErrorSource: Subject<PostNetworkError>;
-  #pushButton: Howl;
+  /** ボタン押下通知 */
+  #pushButton: SoundResource;
+  /** アンサブスクライバ */
   #unsubscribers: Unsubscribable[];
+  /** 排他制御 */
   #exclusive: Exclusive;
+  /** SE再生オブジェクト */
+  #se: SEPlayer;
 
   /**
    * コンストラクタ
-   *
-   * @param resources リソース管理オブジェクト
-   * @param postNetworkError 通信エラーの後処理情報
+   * @param params パラメータ
    */
-  constructor(resources: Resources, postNetworkError: PostNetworkError) {
+  constructor(params: NetworkErrorDialogParams) {
+    const { resources, se, postNetworkError } = params;
+    this.#se = se;
     this.#postNetworkError = postNetworkError;
     const dataIDs = {
       postNetworkErrorButton: domUuid(),
@@ -114,8 +132,8 @@ export class NetworkErrorDialog implements DOMDialog {
     ];
     this.#exclusive = new Exclusive();
     this.#pushButton =
-      resources.sounds.find((v) => v.id === SOUND_IDS.PUSH_BUTTON)?.sound ??
-      new Howl({ src: "" });
+      resources.sounds.find((v) => v.id === SOUND_IDS.PUSH_BUTTON) ??
+      createEmptySoundResource();
   }
 
   /**
@@ -130,7 +148,7 @@ export class NetworkErrorDialog implements DOMDialog {
   /**
    * ルートのHTML要素を取得する
    *
-   * @return 取得結果
+   * @returns 取得結果
    */
   getRootHTMLElement(): HTMLElement {
     return this.#root;
@@ -139,7 +157,7 @@ export class NetworkErrorDialog implements DOMDialog {
   /**
    * 通信エラー後処理の実行タイミングを通知する
    *
-   * @return 通知ストリーム
+   * @returns 通知ストリーム
    */
   notifyPostNetworkError(): Observable<PostNetworkError> {
     return this.#postNetworkErrorSource;
@@ -153,10 +171,8 @@ export class NetworkErrorDialog implements DOMDialog {
   #onPostNetworkErrorButtonPush(action: PushDOM): void {
     this.#exclusive.execute(async () => {
       action.event.preventDefault();
-      await Promise.all([
-        this.#pushButton.play(),
-        pop(this.#postNetworkErrorButton),
-      ]);
+      this.#se.play(this.#pushButton);
+      await pop(this.#postNetworkErrorButton);
       this.#postNetworkErrorSource.next(this.#postNetworkError);
     });
   }

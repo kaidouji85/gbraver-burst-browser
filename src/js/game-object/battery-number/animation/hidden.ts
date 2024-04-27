@@ -1,14 +1,14 @@
 import { Animate } from "../../../animation/animate";
 import { tween } from "../../../animation/tween";
-import type { BatteryNumberModel } from "../model/battery-number-model";
+import { BatteryNumberProps } from "../props/battery-number-props";
 
 /**
  * バッテリー数字を消す
- *
- * @param model モデル
- * @return アニメーション
+ * @param props アニメーションプロパティ
+ * @returns アニメーション
  */
-export function hidden(model: BatteryNumberModel): Animate {
+export function hidden(props: BatteryNumberProps): Animate {
+  const { model } = props;
   return tween(model, (t) =>
     t.to(
       {

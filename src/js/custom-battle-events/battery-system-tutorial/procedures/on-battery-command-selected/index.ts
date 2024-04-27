@@ -10,7 +10,7 @@ import { doZeroBatteryIdNeeded } from "./do-zero-battery-if-needed";
 /**
  * バッテリーコマンド選択イベント
  * @param props イベントプロパティ
- * @return 終了情報
+ * @returns 終了情報
  */
 export async function onBatteryCommandSelected(
   props: Readonly<BatteryCommandSelected & BatterySystemTutorialProps>,

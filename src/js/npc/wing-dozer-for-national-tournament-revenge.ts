@@ -109,7 +109,7 @@ const defenseRoutine: SimpleRoutine = (data) => {
 
 /**
  * サイドエピソード「全国大会のリベンジ」 ウィングドーザ NPC
- * @return NPC
+ * @returns NPC
  */
 export function wingDozerNPCForNationalTournamentRevenge(): NPC {
   const armdozer =

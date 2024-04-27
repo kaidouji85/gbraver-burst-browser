@@ -17,7 +17,8 @@ export function onConfigChangeButtonPush(
   action.event.stopPropagation();
   props.exclusive.execute(async () => {
     setInputDisabled(props);
-    await Promise.all([pop(props.configChangeButton), props.pushButton.play()]);
+    props.se.play(props.pushButton);
+    await pop(props.configChangeButton);
     const config = parseConfig(props);
     props.configChange.next(config);
   });

@@ -6,7 +6,7 @@ import { GameProps } from "../../game-props";
  * 条件を満たした場合、チュートリアル終了後処理を実行する
  * @param props ゲームプロパティ
  * @param action アクション
- * @return チュートリアル終了後処理を実行したか否か、trueで実行した
+ * @returns チュートリアル終了後処理を実行したか否か、trueで実行した
  */
 export async function executePostEpisodeIfNeeded(
   props: Readonly<GameProps>,
@@ -20,6 +20,9 @@ export async function executePostEpisodeIfNeeded(
     return false;
   }
 
-  await props.domFloaters.showPostBattle(props.resources, PostEpisodeButtons);
+  await props.domFloaters.showPostBattle({
+    ...props,
+    buttons: PostEpisodeButtons,
+  });
   return true;
 }

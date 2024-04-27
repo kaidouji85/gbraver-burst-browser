@@ -1,17 +1,17 @@
 import { Animate } from "../../../animation/animate";
 import { onStart } from "../../../animation/on-start";
 import { tween } from "../../../animation/tween";
-import type { PilotButtonModel } from "../model/pilot-button-model";
+import { PilotButtonAnimationProps } from "./animation-props";
 
 /**
  * パイロットボタンを非表示にする
- *
- * @param model モデル
- * @return アニメーション
+ * @param props アニメーションプロパティ
+ * @returns アニメーション
  */
-export function close(model: PilotButtonModel): Animate {
+export function close(props: PilotButtonAnimationProps): Animate {
+  const { model } = props;
   return onStart(() => {
-    model.isPushNotifierDisabled = true;
+    model.shouldPushNotifierStop = true;
     model.opacity = 1;
   }).chain(
     tween(model, (t) =>

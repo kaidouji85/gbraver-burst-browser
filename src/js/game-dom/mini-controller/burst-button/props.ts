@@ -12,7 +12,7 @@ export type BurstButtonProps = {
 
 /**
  * バーストボタンプロパティを生成する
- * @return 生成結果
+ * @returns 生成結果
  */
 export function createBurstButtonProps(): BurstButtonProps {
   const root = document.createElement("button");

@@ -2,7 +2,7 @@ import { GenesisBraverCutInModel } from "./genesis-braver-cutin-model";
 
 /**
  * モデルの初期化を生成する
- * @return 生成結果
+ * @returns 生成結果
  */
 export function createInitialValue(): GenesisBraverCutInModel {
   return {

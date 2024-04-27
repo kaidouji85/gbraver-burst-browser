@@ -17,7 +17,7 @@ type Ret = {
 /**
  * パイロットスキルコマンド選択イベント
  * @param props イベントプロパティ
- * @return イベント終了情報
+ * @returns イベント終了情報
  */
 export async function onPilotSkillCommandSelected(
   props: Readonly<PilotSkillCommandSelected & BatterySystemTutorialProps>,

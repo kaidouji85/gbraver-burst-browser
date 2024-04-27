@@ -24,7 +24,7 @@ import { yuuyaHasAdvantage } from "./yuuya-has-advantage";
 /**
  * カスタムステートアニメーション
  * @param props イベントプロパティ
- * @return アニメーション
+ * @returns アニメーション
  */
 export function onStateAnimation(
   props: Readonly<CustomStateAnimation & ConfrontationTwoBraverProps>,

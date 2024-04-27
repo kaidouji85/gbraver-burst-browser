@@ -1,16 +1,17 @@
 import { Observable, Subject, Unsubscribable } from "rxjs";
 
-import type { Resources } from "../../resource";
 import type { GameAction } from "../game-actions";
 import type { DomFloaterActionConnector } from "./dom-floater-action-connector";
-import { PostBattleFloater } from "./post-battle/post-battle";
-import type { PostBattleButtonConfig } from "./post-battle/post-battle-button-config";
+import { PostBattleFloater, ShowParams } from "./post-battle/post-battle";
 
 /** コンストラクタのパラメータ */
-type Params = {
+type DOMFloatersParams = {
   /** バトル終了後行動選択フローターのアクションコネクタ */
   postBattleConnector: DomFloaterActionConnector<PostBattleFloater>;
 };
+
+/** showPostBattleメソッドのパラメータ */
+type ShowPostBattleParams = ShowParams;
 
 /** DOMフローター管理オブジェクト */
 export class DOMFloaters {
@@ -30,7 +31,7 @@ export class DOMFloaters {
    * コンストラクタ
    * @param params パラメータ
    */
-  constructor(params: Params) {
+  constructor(params: DOMFloatersParams) {
     this.#root = document.createElement("div");
     this.#gameAction = new Subject();
     this.#postBattle = new PostBattleFloater();
@@ -52,7 +53,7 @@ export class DOMFloaters {
 
   /**
    * 本クラスのルートHTML要素を取得する
-   * @return 取得結果
+   * @returns 取得結果
    */
   getRootHTMLElement(): HTMLElement {
     return this.#root;
@@ -60,7 +61,7 @@ export class DOMFloaters {
 
   /**
    * ゲームアクション通知
-   * @return 通知ストリーム
+   * @returns 通知ストリーム
    */
   gameActionNotifier(): Observable<GameAction> {
     return this.#gameAction;
@@ -68,15 +69,11 @@ export class DOMFloaters {
 
   /**
    * バトル終了後行動選択フローターをアニメ付きで表示する
-   * @param resources リソース管理オブジェクト
-   * @param buttons アクションボタン設定
-   * @return アニメが完了したら発火するPromise
+   * @param params パラメータ
+   * @returns アニメが完了したら発火するPromise
    */
-  async showPostBattle(
-    resources: Resources,
-    buttons: PostBattleButtonConfig[],
-  ): Promise<void> {
-    await this.#postBattle.show(resources, buttons);
+  async showPostBattle(params: ShowPostBattleParams): Promise<void> {
+    await this.#postBattle.show(params);
   }
 
   /**

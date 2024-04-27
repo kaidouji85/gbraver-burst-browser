@@ -11,13 +11,15 @@ import type {
   NeoLandozerCutInModel,
 } from "../model/neo-landozer-cutin-model";
 import type { NeoLandozerCutInView } from "./neo-landozer-cutin-view";
+
+/** アニメーション枚数 */
 export const MAX_ANIMATION = 4;
+/** 幅 */
 export const WIDTH = 800;
+/** 高 */
 export const HEIGHT = 800;
 
-/**
- * プレイヤー側 ネオランドーザ カットイン ビュー
- */
+/** プレイヤー側 ネオランドーザ カットイン ビュー */
 export class PlayerNeoLandozerCutInView implements NeoLandozerCutInView {
   #group: THREE.Group;
   #cutInUp: HorizontalAnimationMesh;
@@ -90,7 +92,7 @@ export class PlayerNeoLandozerCutInView implements NeoLandozerCutInView {
   /**
    * シーンに追加するオブジェクトを取得する
    *
-   * @return シーンに追加するオブジェクト
+   * @returns シーンに追加するオブジェクト
    */
   getObject3D(): THREE.Object3D {
     return this.#group;
@@ -99,7 +101,7 @@ export class PlayerNeoLandozerCutInView implements NeoLandozerCutInView {
   /**
    * 本クラスの全メッシュを取得する
    *
-   * @return 本クラスの全メッシュ
+   * @returns 本クラスの全メッシュ
    */
   #getAllMeshes(): HorizontalAnimationMesh[] {
     return [this.#cutInUp, this.#cutInDown];
@@ -109,7 +111,7 @@ export class PlayerNeoLandozerCutInView implements NeoLandozerCutInView {
    * アニメーションタイプに対応したメッシュを返す
    *
    * @param type アニメーションタイプ
-   * @return 対応するメッシュ
+   * @returns 対応するメッシュ
    */
   #getActiveMesh(type: AnimationType): HorizontalAnimationMesh {
     switch (type) {

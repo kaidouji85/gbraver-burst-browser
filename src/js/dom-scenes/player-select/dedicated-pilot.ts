@@ -3,7 +3,7 @@ import { ArmdozerId, ArmdozerIds, PilotId, PilotIds } from "gbraver-burst-core";
 /**
  * アームドーザの専用パイロットを取得する
  * @param armdozerId アームドーザ
- * @return 専用パイロット
+ * @returns 専用パイロット
  */
 export function getDedicatedPilot(armdozerId: ArmdozerId): PilotId {
   switch (armdozerId) {

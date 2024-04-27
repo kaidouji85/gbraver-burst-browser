@@ -6,7 +6,7 @@ import type { TurnIndicatorModel } from "../model/turn-indicator-model";
  * ターンインジケータを非表示にする
  *
  * @param model モデル
- * @return アニメーション
+ * @returns アニメーション
  */
 export function invisible(model: TurnIndicatorModel): Animate {
   return tween(model, (t) =>

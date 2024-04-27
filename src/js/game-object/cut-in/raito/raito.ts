@@ -3,39 +3,35 @@ import * as THREE from "three";
 
 import { Animate } from "../../../animation/animate";
 import type { PreRender } from "../../../game-loop/pre-render";
-import type { Resources } from "../../../resource";
 import type { GameObjectAction } from "../../action/game-object-action";
 import { hidden } from "./animation/hidden";
 import { show } from "./animation/show";
-import { createInitialValue } from "./model/initial-value";
-import type { RaitoModel } from "./model/raito-model";
-import { RaitoSounds } from "./sounds/raito-sounds";
-import type { RaitoView } from "./view/raito-view";
+import {
+  createRaitoCutInProps,
+  PropsCreatorParams,
+} from "./props/create-raito-cutin-props";
+import { RaitoCutInProps } from "./props/raito-cutin-props";
 
-/**
- * ライト カットイン
- */
+/** コンストラクタのパラメータ */
+export type RaitoCutInParams = PropsCreatorParams & {
+  /** ゲームオブジェクトアクション */
+  gameObjectAction: Observable<GameObjectAction>;
+};
+
+/** ライト カットイン */
 export class RaitoCutIn {
-  #model: RaitoModel;
-  #view: RaitoView;
-  #sounds: RaitoSounds;
+  /** プロパティ */
+  #props: RaitoCutInProps;
+  /** アンサブスクライバ */
   #unsubscriber: Unsubscribable;
 
   /**
    * コンストラクタ
-   *
-   * @param view ビュー
-   * @param resources リソース管理オブジェクト
-   * @param gameObjectAction ゲームオブジェクトアクション
+   * @param params パラメータ
    */
-  constructor(
-    view: RaitoView,
-    resources: Resources,
-    gameObjectAction: Observable<GameObjectAction>,
-  ) {
-    this.#model = createInitialValue();
-    this.#view = view;
-    this.#sounds = new RaitoSounds(resources);
+  constructor(params: RaitoCutInParams) {
+    const { gameObjectAction } = params;
+    this.#props = createRaitoCutInProps(params);
     this.#unsubscriber = gameObjectAction.subscribe((action) => {
       if (action.type === "PreRender") {
         this.#onPreRender(action);
@@ -47,35 +43,35 @@ export class RaitoCutIn {
    * デストラクタ相当の処理
    */
   destructor(): void {
-    this.#view.destructor();
+    this.#props.view.destructor();
     this.#unsubscriber.unsubscribe();
   }
 
   /**
    * カットインを表示する
    *
-   * @return アニメーション
+   * @returns アニメーション
    */
   show(): Animate {
-    return show(this.#model, this.#sounds);
+    return show(this.#props);
   }
 
   /**
    * カットインを非表示にする
    *
-   * @return アニメーション
+   * @returns アニメーション
    */
   hidden(): Animate {
-    return hidden(this.#model);
+    return hidden(this.#props);
   }
 
   /**
    * シーンに追加するオブジェクトを取得する
    *
-   * @return シーンに追加するオブジェクト
+   * @returns シーンに追加するオブジェクト
    */
   getObject3D(): THREE.Object3D {
-    return this.#view.getObject3D();
+    return this.#props.view.getObject3D();
   }
 
   /**
@@ -84,6 +80,6 @@ export class RaitoCutIn {
    * @param action アクション
    */
   #onPreRender(action: PreRender): void {
-    this.#view.engage(this.#model, action);
+    this.#props.view.engage(this.#props.model, action);
   }
 }

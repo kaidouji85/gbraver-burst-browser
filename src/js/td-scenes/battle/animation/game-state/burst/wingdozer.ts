@@ -23,7 +23,7 @@ export type WingDozerBurst<BURST extends Burst> = BurstAnimationParamX<
  * ウィングドーザのバーストアニメーション
  *
  * @param param パラメータ
- * @return アニメーション
+ * @returns アニメーション
  */
 export function wingDozerBurst(param: WingDozerBurst<Burst>): Animate {
   if (param.burst.type === "ContinuousAttack") {
@@ -38,7 +38,7 @@ export function wingDozerBurst(param: WingDozerBurst<Burst>): Animate {
  * ウィングドーザ 連続攻撃
  *
  * @param param パラメータ
- * @return アニメーション
+ * @returns アニメーション
  */
 export function wingDozerContinuousAttack(
   param: WingDozerBurst<ContinuousAttack>,

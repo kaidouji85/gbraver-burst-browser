@@ -3,15 +3,15 @@ import { Animate } from "../../../../animation/animate";
 import { delay } from "../../../../animation/delay";
 import { onStart } from "../../../../animation/on-start";
 import { tween } from "../../../../animation/tween";
-import type { ShinBraverCutInModel } from "../model/shin-braver-cutin-model";
+import { ShinBraverCutInAnimationProps } from "./animation-props";
 
 /**
  * カットインを表示する
- *
- * @param model モデル
- * @return アニメーション
+ * @param props アニメーションプロパティ
+ * @returns アニメーション
  */
-export function show(model: ShinBraverCutInModel): Animate {
+export function show(props: ShinBraverCutInAnimationProps): Animate {
+  const { model } = props;
   return all(
     onStart(() => {
       model.animation.type = "CUT_IN_UP";

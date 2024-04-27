@@ -1,14 +1,15 @@
 import { Subject } from "rxjs";
 
 import { Exclusive } from "../../exclusive/exclusive";
-import { SoundResource } from "../../resource/sound";
+import { SoundResource } from "../../resource/sound/resource";
+import { SEPlayerContainer } from "../../se/se-player";
 import { EpisodeImageCut } from "./dom/episode-image-cut";
 import { EpisodeDetail } from "./episode-detail";
 import { EpisodeElement } from "./episode-element";
 import { EpisodeSelect } from "./episode-element/episode-select";
 
 /** エピソードセレクタ画面プロパティ */
-export type EpisodeSelectorProps = {
+export type EpisodeSelectorProps = SEPlayerContainer & {
   /** ルートHTML要素 */
   root: HTMLElement;
   /** エピソード要素をあつめたもの */

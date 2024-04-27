@@ -11,14 +11,14 @@ import { PlayerTurnStartView } from "./view/player-turn-start-view";
  *
  * @param resources リソース管理オブジェクト
  * @param gameObjectAction ゲームオブジェクトアクション
- * @return 生成結果
+ * @returns 生成結果
  */
 export function playerTurnStart(
   resources: Resources,
   gameObjectAction: Observable<GameObjectAction>,
 ): TurnStart {
   const view = new PlayerTurnStartView(resources);
-  return new TurnStart(view, resources, gameObjectAction);
+  return new TurnStart(view, gameObjectAction);
 }
 
 /**
@@ -26,12 +26,12 @@ export function playerTurnStart(
  *
  * @param resources リソース管理オブジェクト
  * @param gameObjectAction ゲームオブジェクトアクション
- * @return 生成結果
+ * @returns 生成結果
  */
 export function enemyTurnStart(
   resources: Resources,
   gameObjectAction: Observable<GameObjectAction>,
 ): TurnStart {
   const view = new EnemyTurnStartView(resources);
-  return new TurnStart(view, resources, gameObjectAction);
+  return new TurnStart(view, gameObjectAction);
 }

@@ -1,12 +1,11 @@
 import { Subject } from "rxjs";
 
 import { Exclusive } from "../../exclusive/exclusive";
-import { Resources } from "../../resource";
-import {
-  createEmptySoundResource,
-  SOUND_IDS,
-  SoundResource,
-} from "../../resource/sound";
+import { ResourcesContainer } from "../../resource";
+import { createEmptySoundResource } from "../../resource/sound/empty-sound-resource";
+import { SOUND_IDS } from "../../resource/sound/ids";
+import { SoundResource } from "../../resource/sound/resource";
+import { SEPlayerContainer } from "../../se/se-player";
 import { domUuid } from "../../uuid/dom-uuid";
 import { ROOT_CLASS } from "./dom/class-name";
 import { DataIDs } from "./dom/data-ids";
@@ -14,7 +13,7 @@ import { extractElements } from "./dom/elements";
 import { rootInnerHtml } from "./dom/root-inner-html";
 
 /** プライベートマッチゲストダイアログのプロパティ */
-export type PrivateMatchGuestDialogProps = {
+export type PrivateMatchGuestDialogProps = SEPlayerContainer & {
   /** ルートHTML要素 */
   root: HTMLElement;
   /** クロージャ */
@@ -38,14 +37,18 @@ export type PrivateMatchGuestDialogProps = {
   privateMatchStart: Subject<string>;
 };
 
+/** PrivateMatchGuestDialogProps生成パラメータ */
+export type PropsCreatorParams = ResourcesContainer & SEPlayerContainer;
+
 /**
  * PrivateMatchGuestDialogPropsを生成する
- * @param resources リソース管理オブジェクト
- * @return 生成結果
+ * @param params 生成パラメータ
+ * @returns 生成結果
  */
 export function createPrivateMatchGuestDialogProps(
-  resources: Resources,
+  params: PropsCreatorParams,
 ): PrivateMatchGuestDialogProps {
+  const { resources, se } = params;
   const root = document.createElement("div");
   root.className = ROOT_CLASS;
   const dataIDs: DataIDs = {
@@ -66,6 +69,7 @@ export function createPrivateMatchGuestDialogProps(
     pushButton:
       resources.sounds.find((v) => v.id === SOUND_IDS.PUSH_BUTTON) ??
       createEmptySoundResource(),
+    se,
     exclusive: new Exclusive(),
   };
 }

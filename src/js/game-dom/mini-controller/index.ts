@@ -1,13 +1,19 @@
 import { Observable } from "rxjs";
 
 import { Animate } from "../../animation/animate";
-import { Resources } from "../../resource";
 import { ButtonConfig } from "./button-config";
 import { decided } from "./procedure/decided";
 import { engageButtonConfig } from "./procedure/engage-button-config";
 import { hidden } from "./procedure/hidden";
 import { show } from "./procedure/show";
-import { createMiniControllerProps, MiniControllerProps } from "./props";
+import {
+  createMiniControllerProps,
+  MiniControllerProps,
+  PropsCreatorParams,
+} from "./props";
+
+/** コンストラクタのパラメータ */
+export type MiniControllerParams = PropsCreatorParams;
 
 /**
  * ミニコントローラ
@@ -19,10 +25,10 @@ export class MiniController {
 
   /**
    * コンストラクタ
-   * @param resources リソース管理オブジェクト
+   * @param params コンストラクタのパラメータ
    */
-  constructor(resources: Resources) {
-    this.#props = createMiniControllerProps(resources);
+  constructor(params: MiniControllerParams) {
+    this.#props = createMiniControllerProps(params);
   }
 
   /**
@@ -38,7 +44,7 @@ export class MiniController {
 
   /**
    * ルートHTML要素を取得する
-   * @return 取得結果
+   * @returns 取得結果
    */
   getRootHTMLElement(): HTMLElement {
     return this.#props.root;
@@ -46,7 +52,7 @@ export class MiniController {
 
   /**
    * ミニコントローラーを表示する
-   * @return アニメーション
+   * @returns アニメーション
    */
   show(): Animate {
     return show(this.#props);
@@ -62,7 +68,7 @@ export class MiniController {
 
   /**
    * ミニコントローラーを非表示にする
-   * @return アニメーション
+   * @returns アニメーション
    */
   hidden(): Animate {
     return hidden(this.#props);
@@ -70,7 +76,7 @@ export class MiniController {
 
   /**
    * コマンド決定アニメーション
-   * @return アニメーション
+   * @returns アニメーション
    */
   decided(): Animate {
     return decided(this.#props);
@@ -78,7 +84,7 @@ export class MiniController {
 
   /**
    * バッテリーボタン押下通知
-   * @return 通知ストリーム、numberはバッテリー値
+   * @returns 通知ストリーム、numberはバッテリー値
    */
   batteryPushNotifier(): Observable<number> {
     return this.#props.batteryPush;
@@ -86,7 +92,7 @@ export class MiniController {
 
   /**
    * バーストボタン押下通知
-   * @return 通知ストリーム
+   * @returns 通知ストリーム
    */
   burstPushNotifier(): Observable<void> {
     return this.#props.burstButton.pushNotifier();
@@ -94,7 +100,7 @@ export class MiniController {
 
   /**
    * パイロットボタン押下通知
-   * @return 通知ストリーム
+   * @returns 通知ストリーム
    */
   pilotPushNotifier(): Observable<void> {
     return this.#props.pilotButton.pushNotifier();

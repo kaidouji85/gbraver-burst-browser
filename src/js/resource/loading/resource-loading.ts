@@ -12,8 +12,9 @@ import { preLoadImage } from "../path/pre-load-image";
 import { PathConfig } from "../path/resource";
 import { toPath } from "../path/to-path";
 import type { ResourceRoot } from "../resource-root";
-import type { SoundConfig, SoundResource } from "../sound";
-import { loadSound } from "../sound";
+import { loadSound } from "../sound/load";
+import type { SoundResource } from "../sound/resource";
+import type { SoundConfig } from "../sound/resource";
 import { loadTexture } from "../texture/load";
 import type { TextureConfig, TextureResource } from "../texture/resource";
 import type { LoadingActions } from "./loading-actions";
@@ -60,7 +61,7 @@ type LoadingPromises = {
 /**
  * リソース読み込みを開始する
  * @param params パラメータ
- * @return リソース読み込み情報
+ * @returns リソース読み込み情報
  */
 function startLoading(params: LoadingStartParams): LoadingPromises {
   params.preLoadImages
@@ -88,7 +89,7 @@ function startLoading(params: LoadingStartParams): LoadingPromises {
 /**
  * 読み込みアクションストリームを生成する
  * @param loadings 読み込みPromise
- * @return 生成結果
+ * @returns 生成結果
  */
 function createLoadingActions(
   loadings: LoadingPromises,
@@ -119,7 +120,7 @@ function createLoadingActions(
  * リソース管理オブジェクトを生成するヘルパー関数
  * @param loading 読み込みPromise
  * @param resourceRoot リソースルート
- * @return 生成結果
+ * @returns 生成結果
  */
 async function createResources(
   loading: LoadingPromises,
@@ -159,7 +160,7 @@ export type ResourceLoading = {
 /**
  * リソースを読み込む
  * @param params 読み込みパラメータ
- * @return リソース読み込みオブジェクト
+ * @returns リソース読み込みオブジェクト
  */
 export function resourceLoading(
   params: ResourceLoadingParams,

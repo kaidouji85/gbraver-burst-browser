@@ -7,14 +7,18 @@ export default {
   title: "config",
 };
 
-export const Scene: DOMStubStory = domStub((resources) => {
-  const scene = new Config(resources, {
-    webGLPixelRatio: 2,
-    battleAnimationTimeScale: 1,
-    bgmVolume: 1,
-    seVolume: 1,
-    battleControllerType: "BigButton",
-    performanceStatsVisibility: "hidden",
+export const Scene: DOMStubStory = domStub((params) => {
+  const scene = new Config({
+    ...params,
+    config: {
+      playerSelectorType: "open",
+      webGLPixelRatio: 2,
+      battleAnimationTimeScale: 1,
+      bgmVolume: 1,
+      seVolume: 1,
+      battleControllerType: "BigButton",
+      performanceStatsVisibility: "hidden",
+    },
   });
   scene.notifyPrev().subscribe(() => {
     console.log("prev");
@@ -26,8 +30,8 @@ export const Scene: DOMStubStory = domStub((resources) => {
   return scene.getRootHTMLElement();
 });
 
-export const ConfigChanged: DOMStubStory = domStub((resources) => {
-  const dialog = new ConfigChangedDialog(resources);
+export const ConfigChanged: DOMStubStory = domStub((params) => {
+  const dialog = new ConfigChangedDialog(params);
   dialog.show();
   dialog.notifyClosed().subscribe(() => {
     console.log("on close");

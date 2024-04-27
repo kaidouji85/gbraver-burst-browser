@@ -2,21 +2,19 @@ import { Animate } from "../../../../animation/animate";
 import { delay } from "../../../../animation/delay";
 import { onStart } from "../../../../animation/on-start";
 import { tween } from "../../../../animation/tween";
-import type { WingDozerModel } from "../model/wing-dozer-model";
-import { WingDozerSounds } from "../sounds/wing-dozer-sounds";
+import { WingDozerAnimationProps } from "./animation-props";
 
 /**
  * ダッシュ
- *
- * @param model モデル
- * @param sounds 音
- * @return アニメーション
+ * @param props アニメーションプロパティ
+ * @returns アニメーション
  */
-export function dash(model: WingDozerModel, sounds: WingDozerSounds): Animate {
+export function dash(props: WingDozerAnimationProps): Animate {
+  const { model, sounds, se } = props;
   return onStart(() => {
     model.animation.type = "DASH_UP";
     model.animation.frame = 0;
-    sounds.motor.play();
+    se.play(sounds.motor);
   })
     .chain(
       tween(model.animation, (t) =>
@@ -33,7 +31,7 @@ export function dash(model: WingDozerModel, sounds: WingDozerSounds): Animate {
       onStart(() => {
         model.animation.type = "DASH_DOWN";
         model.animation.frame = 0;
-        sounds.motor.play();
+        se.play(sounds.motor);
       }),
     )
     .chain(

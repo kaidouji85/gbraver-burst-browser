@@ -48,7 +48,7 @@ const defenseRoutine: SimpleRoutine = (data) => {
 /**
  * バースト+5攻撃 ネオランドーザNPC
  *
- * @return NPC
+ * @returns NPC
  */
 export function burstAttack5NeoLandozer(): NPC {
   const armdozer =

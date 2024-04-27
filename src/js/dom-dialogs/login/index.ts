@@ -1,10 +1,12 @@
 import { Observable, Unsubscribable } from "rxjs";
 
-import { Resources } from "../../resource";
 import { DOMDialog } from "../dialog";
 import { bindEventListeners } from "./procedures/bind-event-listeners";
-import { createProps } from "./procedures/create-props";
+import { createProps, PropsCreatorParams } from "./procedures/create-props";
 import { LoginDialogProps } from "./props";
+
+/** コンストラクタのパラメータ */
+export type LoginDialogParams = PropsCreatorParams;
 
 /** ログイン ダイアログ */
 export class LoginDialog implements DOMDialog {
@@ -15,11 +17,10 @@ export class LoginDialog implements DOMDialog {
 
   /**
    * コンストラクタ
-   * @param resources リソース管理オブジェクト
-   * @param caption 入力フォームに表示されるメッセージ
+   * @param params パラメータ
    */
-  constructor(resources: Resources, caption: string) {
-    this.#props = createProps(resources, caption);
+  constructor(params: LoginDialogParams) {
+    this.#props = createProps(params);
     this.#unsubscribers = bindEventListeners(this.#props);
   }
 
@@ -34,7 +35,7 @@ export class LoginDialog implements DOMDialog {
 
   /**
    * ルートHTML要素を取得する
-   * @return 取得結果
+   * @returns 取得結果
    */
   getRootHTMLElement(): HTMLElement {
     return this.#props.root;
@@ -42,7 +43,7 @@ export class LoginDialog implements DOMDialog {
 
   /**
    * ダイアログ閉じる通知
-   * @return 通知ストリーム
+   * @returns 通知ストリーム
    */
   notifyClosed(): Observable<void> {
     return this.#props.closeDialog;
@@ -50,7 +51,7 @@ export class LoginDialog implements DOMDialog {
 
   /**
    * ログイン実行通知
-   * @return 通知ストリーム
+   * @returns 通知ストリーム
    */
   notifyLogin(): Observable<void> {
     return this.#props.login;

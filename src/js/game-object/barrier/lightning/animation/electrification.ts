@@ -3,19 +3,19 @@ import * as TWEEN from "@tweenjs/tween.js";
 import { Animate } from "../../../../animation/animate";
 import { onStart } from "../../../../animation/on-start";
 import { tween } from "../../../../animation/tween";
-import type { LightningBarrierModel } from "../model/lightning-barrier-model";
+import { LightningBarrierAnimationProps } from "./animation-props";
 
 /**
  * 帯電
- *
- * @param model モデル
+ * @param props アニメーションプロパティ
  * @param group Tweenグループ
- * @return アニメーション
+ * @returns アニメーション
  */
 export function electrification(
-  model: LightningBarrierModel,
+  props: LightningBarrierAnimationProps,
   group: TWEEN.Group,
 ): Animate {
+  const { model } = props;
   return onStart(() => {
     model.animation.frame = 0;
   }, group).chain(

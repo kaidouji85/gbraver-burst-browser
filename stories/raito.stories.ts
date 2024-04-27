@@ -20,8 +20,8 @@ const cutinAnimation = (pilot: RaitoCutIn) => {
 };
 
 export const player = (): HTMLElement => {
-  const stub = new HUDGameObjectStub(({ resources, gameObjectAction }) => {
-    const pilot = playerRaitoCutIn(resources, gameObjectAction);
+  const stub = new HUDGameObjectStub((params) => {
+    const pilot = playerRaitoCutIn(params);
     cutinAnimation(pilot);
     return [pilot.getObject3D()];
   });
@@ -30,8 +30,8 @@ export const player = (): HTMLElement => {
 };
 
 export const enemy = (): HTMLElement => {
-  const stub = new HUDGameObjectStub(({ resources, gameObjectAction }) => {
-    const pilot = enemyRaitoCutIn(resources, gameObjectAction);
+  const stub = new HUDGameObjectStub((params) => {
+    const pilot = enemyRaitoCutIn(params);
     cutinAnimation(pilot);
     return [pilot.getObject3D()];
   });

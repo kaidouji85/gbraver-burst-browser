@@ -16,7 +16,7 @@ export type BatterySystemTutorialProps = {
 /**
  * バッテリーシステムチュートリアル固有のプロパティを作成する
  * @param resources リソース管理オブジェクト
- * @return 生成結果
+ * @returns 生成結果
  */
 export function createBatterySystemTutorialProps(
   resources: Resources,

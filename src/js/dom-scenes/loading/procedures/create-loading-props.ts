@@ -5,7 +5,7 @@ import { LoadingProps } from "../props";
 
 /**
  * ローディング画面プロパティを生成する
- * @return 生成結果
+ * @returns 生成結果
  */
 export function createLoadingProps(): LoadingProps {
   const completedRate = 0;

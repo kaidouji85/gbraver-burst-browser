@@ -1,13 +1,10 @@
-import { Observable } from "rxjs";
-
 import { delay } from "../src/js/animation/delay";
-import { GameObjectAction } from "../src/js/game-object/action/game-object-action";
 import {
   enemyLightning,
+  LightningCreatorParams,
   playerLightning,
 } from "../src/js/game-object/hitmark/lightning";
 import { Lightning } from "../src/js/game-object/hitmark/lightning/lightning";
-import { Resources } from "../src/js/resource";
 import { TDGameObjectStub } from "./stub/td-game-object-stub";
 
 export default {
@@ -18,19 +15,16 @@ export default {
  * 電撃アタックストーリー
  * @param generator 電撃アタック生成関数
  * @param fn 電撃アタックを操作する関数
- * @return story
+ * @returns story
  */
 const lightingStory =
   (
-    generator: (
-      resources: Resources,
-      gameObjectAction: Observable<GameObjectAction>,
-    ) => Lightning,
+    generator: (params: LightningCreatorParams) => Lightning,
     fn: (lightning: Lightning) => void,
   ) =>
   () => {
-    const stub = new TDGameObjectStub(({ resources, gameObjectAction }) => {
-      const shockWave = generator(resources, gameObjectAction);
+    const stub = new TDGameObjectStub((params) => {
+      const shockWave = generator(params);
       fn(shockWave);
       return {
         objects: [shockWave.getObject3D()],

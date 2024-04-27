@@ -20,7 +20,7 @@ export type CreatePropsParams = RootInnerHTMLParams;
 /**
  * エピソードタイトル画面プロパティを生成する
  * @param params パラメータ
- * @return 生成した画面プロパティ
+ * @returns 生成した画面プロパティ
  */
 export function createEpisodeTitleProps(
   params: CreatePropsParams,

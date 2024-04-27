@@ -1,10 +1,11 @@
-import { Howl } from "howler";
 import { Subject } from "rxjs";
 
-import { BGMManager } from "../../../bgm/bgm-manager";
-import { Resources } from "../../../resource";
+import { BGMManagerContainer } from "../../../bgm/bgm-manager";
+import { ResourcesContainer } from "../../../resource";
 import { PathIds } from "../../../resource/path/ids";
-import { createEmptySoundResource, SOUND_IDS } from "../../../resource/sound";
+import { createEmptySoundResource } from "../../../resource/sound/empty-sound-resource";
+import { SOUND_IDS } from "../../../resource/sound/ids";
+import { SEPlayerContainer } from "../../../se/se-player";
 import { domUuid } from "../../../uuid/dom-uuid";
 import { waitElementLoaded } from "../../../wait/wait-element-loaded";
 import { ROOT_CLASS } from "../dom/class-name";
@@ -12,16 +13,20 @@ import { extractElements } from "../dom/elements";
 import { rootInnerHTML } from "../dom/root-inner-html";
 import { NPCEndingProps } from "../props";
 
+/** NPCEndingProps生成パラメータ */
+export type PropsCreatorParams = BGMManagerContainer &
+  ResourcesContainer &
+  SEPlayerContainer;
+
 /**
  * NPCEndingPropsを生成する
- * @param resources リソース管理オブジェクト
- * @param bgm BGM管理オブジェクト
- * @return 生成結果
+ * @param params 生成パラメータ
+ * @returns 生成結果
  */
 export function createNPCEndingProps(
-  resources: Resources,
-  bgm: BGMManager,
+  params: PropsCreatorParams,
 ): NPCEndingProps {
+  const { resources } = params;
   const ids = {
     end: domUuid(),
     logo: domUuid(),
@@ -43,18 +48,18 @@ export function createNPCEndingProps(
   elements.logo.src =
     resources.paths.find((v) => v.id === PathIds.LOGO)?.path ?? "";
   const pushButtonSound =
-    resources.sounds.find((v) => v.id === SOUND_IDS.PUSH_BUTTON)?.sound ??
-    new Howl({ src: "" });
+    resources.sounds.find((v) => v.id === SOUND_IDS.PUSH_BUTTON) ??
+    createEmptySoundResource();
   const endingBGM =
     resources.sounds.find((v) => v.id === SOUND_IDS.NPC_ENDING) ??
     createEmptySoundResource();
   return {
+    ...params,
     root,
     isEndCardLoaded,
     isEndLoaded,
     isLogoLoader,
     pushButtonSound,
-    bgm,
     endingBGM,
     canOperation: true,
     endNPCEnding: new Subject<void>(),

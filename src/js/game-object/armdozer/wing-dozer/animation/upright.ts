@@ -1,23 +1,19 @@
 import { Animate } from "../../../../animation/animate";
 import { onStart } from "../../../../animation/on-start";
 import { tween } from "../../../../animation/tween";
-import { WingDozerModel } from "../model/wing-dozer-model";
-import { WingDozerSounds } from "../sounds/wing-dozer-sounds";
+import { WingDozerAnimationProps } from "./animation-props";
 
 /**
  * 気をつけ
- * @param model ウィングドーザモデル
- * @param sounds ウィングドーザサウンド
- * @return アニメーション
+ * @param props アニメーションプロパティ
+ * @returns アニメーション
  */
-export function upright(
-  model: WingDozerModel,
-  sounds: WingDozerSounds,
-): Animate {
+export function upright(props: WingDozerAnimationProps): Animate {
+  const { model, sounds, se } = props;
   return onStart(() => {
     model.animation.type = "UPRIGHT";
     model.animation.frame = 0;
-    sounds.motor.play();
+    se.play(sounds.motor);
   }).chain(
     tween(model.animation, (t) =>
       t.to(

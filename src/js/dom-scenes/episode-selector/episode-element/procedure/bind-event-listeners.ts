@@ -7,7 +7,7 @@ import { onRootPush } from "./on-root-push";
 /**
  * イベントリスナを関連付ける
  * @param props プロパティ
- * @return サンサブスクライバ
+ * @returns サンサブスクライバ
  */
 export function bindEventListeners(
   props: Readonly<EpisodeElementProps>,

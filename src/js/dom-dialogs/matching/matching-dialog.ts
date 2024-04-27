@@ -1,12 +1,14 @@
-import { Howl } from "howler";
 import { Observable, Subject, Unsubscribable } from "rxjs";
 
 import { pop } from "../../dom/pop";
 import { domPushStream, PushDOM } from "../../dom/push-dom";
 import { Exclusive } from "../../exclusive/exclusive";
-import type { Resources } from "../../resource";
+import type { Resources, ResourcesContainer } from "../../resource";
 import { PathIds } from "../../resource/path/ids";
-import { SOUND_IDS } from "../../resource/sound";
+import { createEmptySoundResource } from "../../resource/sound/empty-sound-resource";
+import { SOUND_IDS } from "../../resource/sound/ids";
+import { SoundResource } from "../../resource/sound/resource";
+import { SEPlayer, SEPlayerContainer } from "../../se/se-player";
 import { domUuid } from "../../uuid/dom-uuid";
 import type { DOMDialog } from "../dialog";
 
@@ -23,7 +25,7 @@ type DataIDs = {
  *
  * @param ids data-idを集めたもの
  * @param resources リソース管理オブジェクト
- * @return innerHTML
+ * @returns innerHTML
  */
 function rootInnerHTML(ids: DataIDs, resources: Resources): string {
   const closerPath =
@@ -47,7 +49,7 @@ type Elements = {
  *
  * @param root ルート要素
  * @param ids data-idを集めたもの
- * @return 抽出結果
+ * @returns 抽出結果
  */
 function extractElements(root: HTMLElement, ids: DataIDs): Elements {
   const closerElement = root.querySelector(`[data-id="${ids.closer}"]`);
@@ -60,22 +62,32 @@ function extractElements(root: HTMLElement, ids: DataIDs): Elements {
   };
 }
 
+/** コンストラクタのパラメータ */
+export type MatchingDialogParams = ResourcesContainer & SEPlayerContainer;
+
 /** マッチング ダイアログ */
 export class MatchingDialog implements DOMDialog {
+  /** ルート要素 */
   #root: HTMLElement;
+  /** 閉じるボタン */
   #closer: HTMLImageElement;
-  #changeValue: Howl;
-  #pushButton: Howl;
+  /** 値変更効果音 */
+  #changeValue: SoundResource;
+  /** SE再生オブジェクト */
+  #se: SEPlayer;
+  /** 排他制御 */
   #exclusive: Exclusive;
+  /** マッチングキャンセル通知 */
   #matchingCanceled: Subject<void>;
+  /** アンサブスクライバ */
   #unsubscribers: Unsubscribable[];
 
   /**
    * コンストラクタ
-   *
-   * @param resources リソース管理オブジェクト
+   * @param params パラメータ
    */
-  constructor(resources: Resources) {
+  constructor(params: MatchingDialogParams) {
+    const { resources, se } = params;
     const ids = {
       closer: domUuid(),
       cancel: domUuid(),
@@ -86,11 +98,9 @@ export class MatchingDialog implements DOMDialog {
     const elements = extractElements(this.#root, ids);
     this.#closer = elements.closer;
     this.#changeValue =
-      resources.sounds.find((v) => v.id === SOUND_IDS.CHANGE_VALUE)?.sound ??
-      new Howl({ src: "" });
-    this.#pushButton =
-      resources.sounds.find((v) => v.id === SOUND_IDS.PUSH_BUTTON)?.sound ??
-      new Howl({ src: "" });
+      resources.sounds.find((v) => v.id === SOUND_IDS.CHANGE_VALUE) ??
+      createEmptySoundResource();
+    this.#se = se;
     this.#exclusive = new Exclusive();
     this.#matchingCanceled = new Subject();
     this.#unsubscribers = [
@@ -100,28 +110,21 @@ export class MatchingDialog implements DOMDialog {
     ];
   }
 
-  /**
-   * デストラクタ相当の処理
-   */
+  /** @override */
   destructor(): void {
     this.#unsubscribers.forEach((v) => {
       v.unsubscribe();
     });
   }
 
-  /**
-   * ルートのHTML要素を取得する
-   *
-   * @return 取得結果
-   */
+  /** @override */
   getRootHTMLElement(): HTMLElement {
     return this.#root;
   }
 
   /**
    * マッチングキャンセル通知
-   *
-   * @return 通知ストリーム
+   * @returns 通知ストリーム
    */
   notifyMatchingCanceled(): Observable<void> {
     return this.#matchingCanceled;
@@ -129,14 +132,13 @@ export class MatchingDialog implements DOMDialog {
 
   /**
    * クローザが押された際の処理
-   *
    * @param action アクション
    */
   #onCloserPush(action: PushDOM): void {
     action.event.preventDefault();
     action.event.stopPropagation();
     this.#exclusive.execute(async () => {
-      this.#changeValue.play();
+      this.#se.play(this.#changeValue);
       await pop(this.#closer, 1.3);
       this.#matchingCanceled.next();
     });

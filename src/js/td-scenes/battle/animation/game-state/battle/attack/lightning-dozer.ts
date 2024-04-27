@@ -27,7 +27,7 @@ export type LightningDozerBattle<RESULT extends BattleResult> =
  * attentionArmdozerよりもカメラ移動は控えめ
  * @param camera カメラ
  * @param attacker アタッカーのスプライト
- * @return アニメーション
+ * @returns アニメーション
  */
 function focusToAttacker(camera: TDCamera, attacker: LightningDozer): Animate {
   const duration = 400;
@@ -43,7 +43,7 @@ type AttackResult = NormalHit | CriticalHit;
 /**
  * 攻撃ヒットアニメ
  * @param param パラメータ
- * @return アニメーション
+ * @returns アニメーション
  */
 function attack(param: LightningDozerBattle<AttackResult>): Animate {
   return all(
@@ -66,7 +66,7 @@ function attack(param: LightningDozerBattle<AttackResult>): Animate {
 /**
  * ガード
  * @param param パラメータ
- * @return アニメーション
+ * @returns アニメーション
  */
 function guard(param: LightningDozerBattle<Guard>): Animate {
   return param.attackerSprite
@@ -87,7 +87,7 @@ function guard(param: LightningDozerBattle<Guard>): Animate {
 /**
  * ミス
  * @param param パラメータ
- * @return アニメーション
+ * @returns アニメーション
  */
 function miss(param: LightningDozerBattle<Miss>): Animate {
   return param.attackerSprite
@@ -106,7 +106,7 @@ type DownResult = NormalHit | Guard | CriticalHit;
 /**
  * とどめ
  * @param param パラメータ
- * @return アニメーション
+ * @returns アニメーション
  */
 function down(param: LightningDozerBattle<DownResult>): Animate {
   return all(
@@ -133,7 +133,7 @@ function down(param: LightningDozerBattle<DownResult>): Animate {
 /**
  * フェイント
  * @param param パラメータ
- * @return アニメーション
+ * @returns アニメーション
  */
 function feint(param: LightningDozerBattle<Feint>): Animate {
   if (!param.result.isDefenderMoved) {
@@ -146,7 +146,7 @@ function feint(param: LightningDozerBattle<Feint>): Animate {
 /**
  * ライトニングドーザ 戦闘アニメーション
  * @param param パラメーター
- * @return アニメーション
+ * @returns アニメーション
  */
 export function lightningDozerAttack(
   param: LightningDozerBattle<BattleResult>,

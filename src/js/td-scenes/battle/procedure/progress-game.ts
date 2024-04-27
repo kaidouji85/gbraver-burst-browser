@@ -1,7 +1,7 @@
 import type { Command, GameEnd, GameState } from "gbraver-burst-core";
 
 import { fadeOut, stop } from "../../../bgm/bgm-operators";
-import type { BattleSceneProps } from "../battle-scene-props";
+import type { BattleSceneProps } from "../props";
 import { playStateHistory } from "./play-state-history";
 
 /**
@@ -9,7 +9,7 @@ import { playStateHistory } from "./play-state-history";
  * 本関数ではprops.stateHistoryを更新する副作用がある
  * @param props 戦闘シーンプロパティ
  * @param command プレイヤーが入力したコマンド
- * @return 処理が完了したら発火するPromise
+ * @returns 処理が完了したら発火するPromise
  */
 const repeatProgressWhenUnselectable = async (
   props: BattleSceneProps,
@@ -47,7 +47,7 @@ const repeatProgressWhenUnselectable = async (
  * ゲームが終了した際の処理
  * @param props 戦闘シーンプロパティ
  * @param gameEnd ゲーム終了情報
- * @return 処理が完了したら発火するPromise
+ * @returns 処理が完了したら発火するPromise
  */
 const onGameEnd = async (
   props: Readonly<BattleSceneProps>,
@@ -65,7 +65,7 @@ const onGameEnd = async (
  * ゲームを進めるヘルパーメソッド
  * 本関数ではprops.stateHistoryを更新する副作用がある
  * @param command プレイヤーが入力したコマンド
- * @return 処理が完了したら発火するPromise
+ * @returns 処理が完了したら発火するPromise
  */
 export async function progressGame(
   props: BattleSceneProps,

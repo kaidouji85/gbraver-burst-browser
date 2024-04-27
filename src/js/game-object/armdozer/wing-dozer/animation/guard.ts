@@ -2,15 +2,15 @@ import { all } from "../../../../animation/all";
 import { Animate } from "../../../../animation/animate";
 import { onStart } from "../../../../animation/on-start";
 import { tween } from "../../../../animation/tween";
-import type { WingDozerModel } from "../model/wing-dozer-model";
+import { WingDozerAnimationProps } from "./animation-props";
 
 /**
  * ガード
- *
- * @model モデル
- * @return アニメーション
+ * @param props アニメーションプロパティ
+ * @returns アニメーション
  */
-export function guard(model: WingDozerModel): Animate {
+export function guard(props: WingDozerAnimationProps): Animate {
+  const { model } = props;
   const motion = onStart(() => {
     model.animation.frame = 1;
     model.animation.type = "GUARD";

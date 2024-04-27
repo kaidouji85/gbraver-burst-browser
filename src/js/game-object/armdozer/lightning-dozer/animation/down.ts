@@ -4,15 +4,15 @@ import { Animate } from "../../../../animation/animate";
 import { delay } from "../../../../animation/delay";
 import { onStart } from "../../../../animation/on-start";
 import { tween } from "../../../../animation/tween";
-import type { LightningDozerModel } from "../model/lightning-dozer-model";
+import { LightningDozerAnimationProps } from "./animation-props";
 
 /**
  * ダウン
- *
- * @param model モデル
- * @return アニメーション
+ * @param props アニメーションプロパティ
+ * @returns アニメーション
  */
-export function down(model: LightningDozerModel): Animate {
+export function down(props: LightningDozerAnimationProps): Animate {
+  const { model } = props;
   return onStart(() => {
     model.animation.type = "KNOCK_BACK";
     model.animation.frame = 1;

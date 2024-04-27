@@ -3,25 +3,23 @@ import { Animate } from "../../../../animation/animate";
 import { delay } from "../../../../animation/delay";
 import { onStart } from "../../../../animation/on-start";
 import { tween } from "../../../../animation/tween";
-import { GenesisBraverModel } from "../model/genesis-braver-model";
-import { GenesisBraverSounds } from "../sounds/genesis-braver-sounds";
+import { GenesisBraverAnimationProps } from "./animation-props";
 
 /**
- *  フロントステップ
- * @param model モデル
- * @param sounds 効果音
+ * フロントステップ
+ * @param props アニメーションプロパティ
  * @param distance 移動距離を絶対値で指定する
- * @return アニメーション
+ * @returns アニメーション
  */
 export function frontStep(
-  model: GenesisBraverModel,
-  sounds: GenesisBraverSounds,
+  props: GenesisBraverAnimationProps,
   distance = 100,
 ): Animate {
+  const { model, sounds, se } = props;
   return onStart(() => {
     model.animation.type = "FRONT_STEP";
     model.animation.frame = 0;
-    sounds.motor.sound.play();
+    se.play(sounds.motor);
   })
     .chain(
       all(
@@ -46,7 +44,7 @@ export function frontStep(
     .chain(delay(300))
     .chain(
       onStart(() => {
-        sounds.motor.sound.play();
+        se.play(sounds.motor);
       }),
     )
     .chain(

@@ -7,7 +7,7 @@ import { onPilotPush } from "./on-pilot-push";
 /**
  * パイロットボタンにイベントを関連付ける
  * @param props コンポネントプロパティ
- * @return アンサブスクライバ
+ * @returns アンサブスクライバ
  */
 export function bindEventListeners(
   props: Readonly<PilotButtonProps>,

@@ -1,11 +1,13 @@
 import { Observable, Unsubscribable } from "rxjs";
 
 import type { NPCBattleCourseDifficulty } from "../../game/npc-battle-courses";
-import type { Resources } from "../../resource";
 import type { DOMDialog } from "../dialog";
 import { bindEventListeners } from "./listeners";
-import type { DifficultyDialogProps } from "./props";
+import { DifficultyDialogProps, PropsCreatorParams } from "./props";
 import { createDifficultyDialogProps } from "./props";
+
+/** コンストラクタのパラメータ */
+export type DifficultyDialogParams = PropsCreatorParams;
 
 /** 難易度選択ダイアログ */
 export class DifficultyDialog implements DOMDialog {
@@ -16,11 +18,10 @@ export class DifficultyDialog implements DOMDialog {
 
   /**
    * コンストラクタ
-   *
-   * @param resources リソース管理オブジェクト
+   * @param params パラメータ
    */
-  constructor(resources: Resources) {
-    this.#props = createDifficultyDialogProps(resources);
+  constructor(params: DifficultyDialogParams) {
+    this.#props = createDifficultyDialogProps(params);
     this.#unsubscribers = bindEventListeners(this.#props);
   }
 
@@ -39,7 +40,7 @@ export class DifficultyDialog implements DOMDialog {
   /**
    * 難易度選択完了通知
    *
-   * @return 通知ストリーム
+   * @returns 通知ストリーム
    */
   notifySelectionComplete(): Observable<NPCBattleCourseDifficulty> {
     return this.#props.selectionComplete;
@@ -48,7 +49,7 @@ export class DifficultyDialog implements DOMDialog {
   /**
    * ダイアログを閉じる通知
    *
-   * @return 通知ストリーム
+   * @returns 通知ストリーム
    */
   notifyClosed(): Observable<void> {
     return this.#props.closeDialog;

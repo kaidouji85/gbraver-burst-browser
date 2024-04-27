@@ -5,7 +5,7 @@ import { ConfrontationTwoBraverProps } from "../../props";
 /**
  * チャプター「ユウヤ有利」が終了したか
  * @param props イベントプロパティ
- * @return trueで終了した
+ * @returns trueで終了した
  */
 export function isYuuyaAdvantageEnd(
   props: Readonly<CustomBattleEventProps & ConfrontationTwoBraverProps>,

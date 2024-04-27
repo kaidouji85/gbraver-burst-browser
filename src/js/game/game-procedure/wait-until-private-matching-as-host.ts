@@ -13,7 +13,7 @@ import { GameProps } from "../game-props";
  * プライベートマッチ（ホスト）でマッチング成立まで待つ
  * @param props ゲームプロパティ
  * @param action アクション
- * @return バトルSDK
+ * @returns バトルSDK
  */
 export async function waitUntilPrivateMatchingAsHost(
   props: Readonly<GameProps>,
@@ -29,14 +29,20 @@ export async function waitUntilPrivateMatchingAsHost(
       action.pilotId,
     );
     props.domDialogBinder.bind(
-      new PrivateMatchHostDialog(props.resources, room.roomID),
+      new PrivateMatchHostDialog({
+        ...props,
+        roomID: room.roomID,
+      }),
       privateMatchHostDialogConnector,
     );
     return await room.waitUntilMatching();
   } catch (e) {
     props.domDialogBinder.bind(
-      new NetworkErrorDialog(props.resources, {
-        type: "GotoTitle",
+      new NetworkErrorDialog({
+        ...props,
+        postNetworkError: {
+          type: "GotoTitle",
+        },
       }),
       networkErrorDialogConnector,
     );

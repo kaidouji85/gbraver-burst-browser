@@ -7,7 +7,7 @@ import { separatePlayersFromCurrentState } from "./separate-players";
  * 指定したプレイヤーがパイロットスキルを発動したかを判定する
  * @param state ゲームステート
  * @param playerId 判定対象のプレイヤー
- * @return trueでパイロットスキルを発動した
+ * @returns trueでパイロットスキルを発動した
  */
 export function isPilotSkillActivated(
   state: GameState,
@@ -22,7 +22,7 @@ export function isPilotSkillActivated(
 /**
  * 現在のステートからプレイヤーがパイロットスキルを発動したかを判定する
  * @param props カスタムバトルイベントプロパティ
- * @return trueでパイロットスキルを発動した
+ * @returns trueでパイロットスキルを発動した
  */
 export function isPlayerPilotSkillActivated(
   props: CustomStateAnimation,
@@ -33,7 +33,7 @@ export function isPlayerPilotSkillActivated(
 /**
  * 現在のステートから敵がパイロットスキルを発動したかを判定する
  * @param props カスタムバトルイベントプロパティ
- * @return trueでパイロットスキルを発動した
+ * @returns trueでパイロットスキルを発動した
  */
 export function isEnemyPilotSkillActivated(
   props: CustomStateAnimation,

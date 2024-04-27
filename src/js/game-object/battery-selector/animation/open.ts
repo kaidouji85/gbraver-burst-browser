@@ -2,21 +2,22 @@ import { Animate } from "../../../animation/animate";
 import { onStart } from "../../../animation/on-start";
 import { tween } from "../../../animation/tween";
 import { BatterySelectorOpenParam } from "../battery-selector-open-param";
-import type { BatterySelectorModel } from "../model";
 import { getNeedleValue } from "../model/needle-value";
+import { BatterySelectorAnimationProps } from "./animation-props";
 
 /**
  * ボタン表示アニメーション
- * @param model モデル
+ * @param props アニメーションプロパティ
  * @param param ボタン表示パラメータ
- * @return アニメーション
+ * @returns アニメーション
  */
 export function open(
-  model: BatterySelectorModel,
+  props: BatterySelectorAnimationProps,
   param: BatterySelectorOpenParam,
 ): Animate {
+  const { model } = props;
   return onStart(() => {
-    model.isPushNotifierDisabled = true;
+    model.shouldPushNotifierStop = true;
     model.opacity = 0;
     model.battery = param.initialValue;
     model.maxBattery = param.maxBattery;
@@ -36,7 +37,7 @@ export function open(
     )
     .chain(
       onStart(() => {
-        model.isPushNotifierDisabled = false;
+        model.shouldPushNotifierStop = false;
       }),
     );
 }

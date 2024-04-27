@@ -2,7 +2,7 @@ import { BurstCommand } from "gbraver-burst-core";
 
 import { DoBurst } from "../actions/do-burst";
 import { decisionByBurstButton } from "../animation/decision-by-burst-button";
-import { BattleSceneProps } from "../battle-scene-props";
+import { BattleSceneProps } from "../props";
 import { doBurstEventIfNeeded } from "./do-burst-event-if-needed";
 import { progressGame } from "./progress-game";
 
@@ -11,7 +11,7 @@ import { progressGame } from "./progress-game";
  *
  * @param props 戦闘シーンプロパティ
  * @param action バースト発動アクション
- * @return 処理が完了したら発火するPromise
+ * @returns 処理が完了したら発火するPromise
  */
 export function onBurst(
   props: Readonly<BattleSceneProps>,

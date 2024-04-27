@@ -1,5 +1,5 @@
 import { canBatteryMinus } from "../model/can-battery-minus";
-import { BatterySelectorProps } from "../props";
+import { BatterySelectorProps } from "../props/battery-selector-props";
 
 /**
  * バッテリーマイナスボタン押下時の処理
@@ -8,13 +8,14 @@ import { BatterySelectorProps } from "../props";
 export function onBatteryMinusPush(
   props: Readonly<BatterySelectorProps>,
 ): void {
+  const { model, batteryMinusPush } = props;
   if (
-    props.model.isPushNotifierDisabled ||
-    props.model.disabled ||
-    !canBatteryMinus(props.model)
+    model.shouldPushNotifierStop ||
+    model.disabled ||
+    !canBatteryMinus(model)
   ) {
     return;
   }
 
-  props.batteryMinusPush.next();
+  batteryMinusPush.next();
 }

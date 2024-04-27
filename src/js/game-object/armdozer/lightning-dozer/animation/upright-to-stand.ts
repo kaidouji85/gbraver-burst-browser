@@ -1,23 +1,19 @@
 import { Animate } from "../../../../animation/animate";
 import { onStart } from "../../../../animation/on-start";
 import { tween } from "../../../../animation/tween";
-import { LightningDozerModel } from "../model/lightning-dozer-model";
-import { LightningDozerSounds } from "../sounds/lightning-dozer-sounds";
+import { LightningDozerAnimationProps } from "./animation-props";
 
 /**
  * 気をつけ -> 立ち
- * @param model ライトニングドーザモデル
- * @param sounds ライトニングドーザサウンド
- * @return アニメーション
+ * @param props アニメーションプロパティ
+ * @returns アニメーション
  */
-export function uprightToStand(
-  model: LightningDozerModel,
-  sounds: LightningDozerSounds,
-): Animate {
+export function uprightToStand(props: LightningDozerAnimationProps): Animate {
+  const { model, sounds, se } = props;
   return onStart(() => {
     model.animation.type = "UPRIGHT";
     model.animation.frame = 1;
-    sounds.motor.play();
+    se.play(sounds.motor);
   })
     .chain(
       tween(model.animation, (t) =>

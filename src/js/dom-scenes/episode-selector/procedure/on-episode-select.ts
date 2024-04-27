@@ -21,5 +21,5 @@ export function onEpisodeSelect(
 
   selectEpisodeElement(props, episodeElement.id);
   setEpisodeDetail(props, episodeDetail);
-  props.changeValueSound.sound.play();
+  props.se.play(props.changeValueSound);
 }

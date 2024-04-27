@@ -2,14 +2,15 @@ import { all } from "../../../../animation/all";
 import { Animate } from "../../../../animation/animate";
 import { onStart } from "../../../../animation/on-start";
 import { tween } from "../../../../animation/tween";
-import { GenesisBraverModel } from "../model/genesis-braver-model";
+import { GenesisBraverAnimationProps } from "./animation-props";
 
 /**
  * ガード
- * @param model モデル
- * @return アニメーション
+ * @param props アニメーションプロパティ
+ * @returns アニメーション
  */
-export function guard(model: GenesisBraverModel): Animate {
+export function guard(props: GenesisBraverAnimationProps): Animate {
+  const { model } = props;
   const motion = onStart(() => {
     model.animation.frame = 1;
     model.animation.type = "GUARD";

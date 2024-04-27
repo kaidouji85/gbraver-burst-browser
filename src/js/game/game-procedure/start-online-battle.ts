@@ -5,7 +5,7 @@ import { createSeriousMatchEvent } from "../../custom-battle-events/serious-matc
 import { NetworkErrorDialog } from "../../dom-dialogs/network-error/network-error-dialog";
 import { WaitingDialog } from "../../dom-dialogs/waiting/waiting-dialog";
 import { MatchCard } from "../../dom-scenes/match-card";
-import { SOUND_IDS } from "../../resource/sound";
+import { SOUND_IDS } from "../../resource/sound/ids";
 import { BattleScene } from "../../td-scenes/battle";
 import { BattleProgress } from "../../td-scenes/battle/battle-progress";
 import { waitAnimationFrame } from "../../wait/wait-animation-frame";
@@ -21,7 +21,7 @@ import { GameProps } from "../game-props";
  * BattleProgressを生成するヘルパー関数
  * @param props ゲームプロパティ
  * @param battle バトルSDK
- * @return 生成結果
+ * @returns 生成結果
  */
 function createBattleProgress(
   props: Readonly<GameProps>,
@@ -36,8 +36,11 @@ function createBattleProgress(
         props.domDialogBinder.hidden();
         return update;
       } catch (e) {
-        const dialog = new NetworkErrorDialog(props.resources, {
-          type: "GotoTitle",
+        const dialog = new NetworkErrorDialog({
+          ...props,
+          postNetworkError: {
+            type: "GotoTitle",
+          },
         });
         props.domDialogBinder.bind(dialog, networkErrorDialogConnector);
         throw e;
@@ -79,18 +82,13 @@ export async function startOnlineBattle(
   const config = await props.config.load();
   props.renderer.setPixelRatio(config.webGLPixelRatio);
   const battleScene = new BattleScene({
-    resources: props.resources,
-    bgm: props.bgm,
+    ...props,
     playingBGM: SOUND_IDS.BATTLE_BGM_01,
     initialAnimationTimeScale: config.battleAnimationTimeScale,
     battleProgress,
     player: battle.player,
     enemy: battle.enemy,
     initialState: battle.initialState,
-    resize: props.resize,
-    pushWindow: props.pushWindow,
-    gameLoop: props.gameLoop,
-    renderer: props.renderer,
     controllerType: config.battleControllerType,
     emergencyStop: battle.suddenlyBattleNotifier(),
     customBattleEvent: createSeriousMatchEvent(),

@@ -148,7 +148,7 @@ const defenseRoutine: SimpleRoutine = (data) => {
 
 /**
  * ジェネシスブレイバーNPC
- * @return NPC
+ * @returns NPC
  */
 export function genesisBraverNPC(): NPC {
   const armdozer =

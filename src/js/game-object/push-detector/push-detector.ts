@@ -21,13 +21,13 @@ export interface PushDetector {
 
   /**
    * シーンに追加するオブジェクトを取得する
-   * @return 取得結果
+   * @returns 取得結果
    */
   getObject3D(): THREE.Object3D;
 
   /**
    * 押されたことを通知する
-   * @return 通知ストリーム
+   * @returns 通知ストリーム
    */
   notifyPressed(): Observable<Event>;
 }
@@ -147,7 +147,7 @@ type CirclePushDetectorParam = {
  * 円形プッシュ検出を生成する
  *
  * @param param パラメータ
- * @return プッシュ検出
+ * @returns プッシュ検出
  */
 export function circlePushDetector(
   param: CirclePushDetectorParam,

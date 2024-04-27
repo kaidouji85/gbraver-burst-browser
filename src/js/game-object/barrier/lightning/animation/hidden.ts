@@ -1,14 +1,14 @@
 import { Animate } from "../../../../animation/animate";
 import { tween } from "../../../../animation/tween";
-import type { LightningBarrierModel } from "../model/lightning-barrier-model";
+import { LightningBarrierAnimationProps } from "./animation-props";
 
 /**
  * バリアを消す
- *
- * @param model モデル
- * @return アニメーション
+ * @param props アニメーションプロパティ
+ * @returns アニメーション
  */
-export function hidden(model: LightningBarrierModel): Animate {
+export function hidden(props: LightningBarrierAnimationProps): Animate {
+  const { model } = props;
   return tween(model, (t) =>
     t.to(
       {

@@ -1,3 +1,4 @@
+import { changeVolume } from "../../../bgm/bgm-operators";
 import type { InputDOM } from "../../../dom/input-dom";
 import { parseSoundVolume } from "../../../game/config/parser/sound-volume";
 import { soundVolumeLabel } from "../dom/sound-volume-label";
@@ -18,5 +19,6 @@ export function onBGMVolumeChange(
   props.exclusive.execute(async () => {
     const value = parseSoundVolume(props.bgmVolumeSelector.value) ?? 1;
     props.bgmVolumeValue.innerText = soundVolumeLabel(value);
+    await props.bgm.do(changeVolume(value));
   });
 }

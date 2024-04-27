@@ -26,7 +26,7 @@ export type GenesisBraverBattle<RESULT extends BattleResult> =
  * アタッカーにフォーカスを合わせる
  * @param camera カメラ
  * @param attacker スプライト
- * @return アニメーション
+ * @returns アニメーション
  */
 function focusToAttacker(camera: TDCamera, attacker: GenesisBraver): Animate {
   const duration = 400;
@@ -42,7 +42,7 @@ type DownResult = NormalHit | CriticalHit | Guard;
 /**
  * とどめ
  * @param param パラメータ
- * @return アニメーション
+ * @returns アニメーション
  */
 function down(param: GenesisBraverBattle<DownResult>): Animate {
   return all(
@@ -72,7 +72,7 @@ type AttackResult = NormalHit | CriticalHit;
 /**
  * 攻撃ヒット
  * @param param パラメータ
- * @return アニメーション
+ * @returns アニメーション
  */
 function attack(param: GenesisBraverBattle<AttackResult>): Animate {
   return all(
@@ -95,7 +95,7 @@ function attack(param: GenesisBraverBattle<AttackResult>): Animate {
 /**
  * ガード
  * @param param パラメータ
- * @return アニメーション
+ * @returns アニメーション
  */
 function guard(param: GenesisBraverBattle<Guard>): Animate {
   return param.attackerSprite
@@ -116,7 +116,7 @@ function guard(param: GenesisBraverBattle<Guard>): Animate {
 /**
  * ミス
  * @param param パラメータ
- * @return アニメーション
+ * @returns アニメーション
  */
 function miss(param: GenesisBraverBattle<Miss>): Animate {
   return param.attackerSprite
@@ -132,7 +132,7 @@ function miss(param: GenesisBraverBattle<Miss>): Animate {
 /**
  * フェイント
  * @param param パラメータ
- * @return アニメーション
+ * @returns アニメーション
  */
 function feint(param: GenesisBraverBattle<Feint>): Animate {
   if (!param.result.isDefenderMoved) {
@@ -145,7 +145,7 @@ function feint(param: GenesisBraverBattle<Feint>): Animate {
 /**
  * ジェネシスブレイバー 攻撃アニメーション
  * @param param パラメータ
- * @return アニメーション
+ * @returns アニメーション
  */
 export function genesisBraverAttack(
   param: GenesisBraverBattle<BattleResult>,

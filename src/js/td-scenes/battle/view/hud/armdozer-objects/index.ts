@@ -1,14 +1,12 @@
-import { ArmdozerIds, Player } from "gbraver-burst-core";
-import { Observable } from "rxjs";
+import { ArmdozerIds } from "gbraver-burst-core";
 
-import type { GameObjectAction } from "../../../../../game-object/action/game-object-action";
-import type { Resources } from "../../../../../resource";
+import { HUDLayerObjectCreatorParams } from "../creator-params";
 import { EmptyHUDArmdozer } from "./empty";
 import {
   enemyGenesisBraverHUD,
   playerGenesisBraverHUD,
 } from "./genesis-braver";
-import type { HUDArmdozerObjects } from "./hud-armdozer-ibjects";
+import { HUDArmdozerObjects } from "./hud-armdozer-objects";
 import {
   enemyLightningDozerHUD,
   playerLightningDozerHUD,
@@ -19,58 +17,50 @@ import { enemyWingDozerHUD, playerWingDozerHUD } from "./wing-dozer";
 
 /**
  * プレイヤー側 HUDアームドーザ
- *
- * @param resources リソース管理オブジェクト
- * @param gameObjectAction ゲームオブジェクトアクション
- * @param state プレイヤー状態
- * @return HUDアームドーザ
+ * @param params 生成パラメータ
+ * @returns HUDアームドーザ
  */
 export function playerArmdozerHUD(
-  resources: Resources,
-  gameObjectAction: Observable<GameObjectAction>,
-  state: Player,
+  params: HUDLayerObjectCreatorParams,
 ): HUDArmdozerObjects {
-  switch (state.armdozer.id) {
+  const { player } = params;
+  switch (player.armdozer.id) {
     case ArmdozerIds.SHIN_BRAVER:
-      return playerShinBraverHUD(resources, gameObjectAction, state);
+      return playerShinBraverHUD(params);
     case ArmdozerIds.NEO_LANDOZER:
-      return playerNeoLandozerHUD(resources, gameObjectAction, state);
+      return playerNeoLandozerHUD(params);
     case ArmdozerIds.LIGHTNING_DOZER:
-      return playerLightningDozerHUD(resources, gameObjectAction, state);
+      return playerLightningDozerHUD(params);
     case ArmdozerIds.WING_DOZER:
-      return playerWingDozerHUD(resources, gameObjectAction, state);
+      return playerWingDozerHUD(params);
     case ArmdozerIds.GENESIS_BRAVER:
-      return playerGenesisBraverHUD(resources, gameObjectAction, state);
+      return playerGenesisBraverHUD(params);
     default:
-      return new EmptyHUDArmdozer(state);
+      return new EmptyHUDArmdozer(player);
   }
 }
 
 /**
  * 敵側 HUDアームドーザ
- *
- * @param resources リソース管理オブジェクト
- * @param gameObjectAction ゲームオブジェクトアクション
- * @param state プレイヤー状態
- * @return HUDアームドーザ
+ * @param params 生成パラメータ
+ * @returns HUDアームドーザ
  */
 export function enemyArmdozerHUD(
-  resources: Resources,
-  gameObjectAction: Observable<GameObjectAction>,
-  state: Player,
+  params: HUDLayerObjectCreatorParams,
 ): HUDArmdozerObjects {
-  switch (state.armdozer.id) {
+  const { enemy } = params;
+  switch (enemy.armdozer.id) {
     case ArmdozerIds.SHIN_BRAVER:
-      return enemyShinBraverHUD(resources, gameObjectAction, state);
+      return enemyShinBraverHUD(params);
     case ArmdozerIds.NEO_LANDOZER:
-      return enemyNeoLandozerHUD(resources, gameObjectAction, state);
+      return enemyNeoLandozerHUD(params);
     case ArmdozerIds.LIGHTNING_DOZER:
-      return enemyLightningDozerHUD(resources, gameObjectAction, state);
+      return enemyLightningDozerHUD(params);
     case ArmdozerIds.WING_DOZER:
-      return enemyWingDozerHUD(resources, gameObjectAction, state);
+      return enemyWingDozerHUD(params);
     case ArmdozerIds.GENESIS_BRAVER:
-      return enemyGenesisBraverHUD(resources, gameObjectAction, state);
+      return enemyGenesisBraverHUD(params);
     default:
-      return new EmptyHUDArmdozer(state);
+      return new EmptyHUDArmdozer(enemy);
   }
 }

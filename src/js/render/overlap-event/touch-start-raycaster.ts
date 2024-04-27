@@ -19,7 +19,7 @@ export type TouchStartRaycaster = {
  * TouchStartからTouchStartRaycasterに変換する
  *
  * @param origin 変換元
- * @return 変換結果
+ * @returns 変換結果
  */
 export function toTouchStartRaycaster(
   origin: TouchStart,

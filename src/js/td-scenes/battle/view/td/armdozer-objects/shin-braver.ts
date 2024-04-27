@@ -1,40 +1,26 @@
-import type { Player, PlayerId } from "gbraver-burst-core";
-import { Observable } from "rxjs";
+import { PlayerId } from "gbraver-burst-core";
 import * as THREE from "three";
 
-import type { GameObjectAction } from "../../../../../game-object/action/game-object-action";
-import type { ArmdozerSprite } from "../../../../../game-object/armdozer/armdozer-sprite";
+import { ArmdozerSprite } from "../../../../../game-object/armdozer/armdozer-sprite";
 import {
   EnemyShinBraver,
   PlayerShinBraver,
 } from "../../../../../game-object/armdozer/shin-braver";
 import { ShinBraver } from "../../../../../game-object/armdozer/shin-braver/shin-braver";
-import type { Resources } from "../../../../../resource";
-import type { TDArmdozerObjects } from "./armdozer-objects";
-
-/**3Dレイヤー シンブレイバー 3Dレイヤー フィールド */
-interface ShinBraverTDField {
-  /** シンブレイバー */
-  shinBraver: ShinBraver;
-}
+import { TDLayerObjectCreatorParams } from "../creator-params";
+import { TDArmdozerObjects } from "./armdozer-objects";
 
 /** シンブレイバー 3Dレイヤー */
-export class ShinBraverTD implements ShinBraverTDField, TDArmdozerObjects {
-  /** @override */
-  playerId: PlayerId;
-
-  /** @override */
-  shinBraver: ShinBraver;
-
+export class ShinBraverTD implements TDArmdozerObjects {
   /**
    * コンストラクタ
    * @param playerId プレイヤーID
-   * @param field フィールド
+   * @param shinBraver スプライト
    */
-  constructor(playerId: PlayerId, field: ShinBraverTDField) {
-    this.playerId = playerId;
-    this.shinBraver = field.shinBraver;
-  }
+  constructor(
+    readonly playerId: PlayerId,
+    readonly shinBraver: ShinBraver,
+  ) {}
 
   /** @override */
   destructor(): void {
@@ -54,34 +40,24 @@ export class ShinBraverTD implements ShinBraverTDField, TDArmdozerObjects {
 
 /**
  * プレイヤー シンブレイバー 3Dレイヤー
- * @param resources リソース管理オブジェクト
- * @param gameObjectAction ゲームオブジェクトアクション
- * @param state プレイヤー情報
- * @return 生成結果
+ * @param params 生成パラメータ
+ * @returns 生成結果
  */
 export function playerShinBraverTD(
-  resources: Resources,
-  gameObjectAction: Observable<GameObjectAction>,
-  state: Player,
+  params: TDLayerObjectCreatorParams,
 ): ShinBraverTD {
-  return new ShinBraverTD(state.playerId, {
-    shinBraver: PlayerShinBraver(resources, gameObjectAction),
-  });
+  const { player } = params;
+  return new ShinBraverTD(player.playerId, PlayerShinBraver(params));
 }
 
 /**
  * 敵 シンブレイバー 3Dレイヤー
- * @param resources リソース管理オブジェクト
- * @param gameObjectAction ゲームオブジェクトアクション
- * @param state プレイヤー情報
- * @return 生成結果
+ * @param params 生成パラメータ
+ * @returns 生成結果
  */
 export function enemyShinBraverTD(
-  resources: Resources,
-  gameObjectAction: Observable<GameObjectAction>,
-  state: Player,
+  params: TDLayerObjectCreatorParams,
 ): ShinBraverTD {
-  return new ShinBraverTD(state.playerId, {
-    shinBraver: EnemyShinBraver(resources, gameObjectAction),
-  });
+  const { enemy } = params;
+  return new ShinBraverTD(enemy.playerId, EnemyShinBraver(params));
 }

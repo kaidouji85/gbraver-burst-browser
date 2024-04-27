@@ -1,13 +1,10 @@
-import { Observable } from "rxjs";
-
 import { delay } from "../src/js/animation/delay";
-import { GameObjectAction } from "../src/js/game-object/action/game-object-action";
 import {
+  BatteryNumberCreatorParams,
   enemyBatteryNumber,
   playerBatteryNumber,
 } from "../src/js/game-object/battery-number";
 import { BatteryNumber } from "../src/js/game-object/battery-number/battery-number";
-import { Resources } from "../src/js/resource";
 import { TDGameObjectStub } from "./stub/td-game-object-stub";
 
 export default {
@@ -18,19 +15,16 @@ export default {
  * バッテリーナンバーのストーリー
  * @param generator バッテリーナンバー生成関数
  * @param fn バッテリーナンバー操作関数
- * @return story
+ * @returns story
  */
 const batteryNumberStory =
   (
-    generator: (
-      resources: Resources,
-      gameObjectAction: Observable<GameObjectAction>,
-    ) => BatteryNumber,
+    generator: (params: BatteryNumberCreatorParams) => BatteryNumber,
     fn: (batteryNumber: BatteryNumber) => void,
   ) =>
   () => {
-    const stub = new TDGameObjectStub(({ resources, gameObjectAction }) => {
-      const sprite = generator(resources, gameObjectAction);
+    const stub = new TDGameObjectStub((params) => {
+      const sprite = generator(params);
       fn(sprite);
       return {
         objects: [sprite.getObject3D()],
@@ -43,7 +37,7 @@ const batteryNumberStory =
 /**
  * バッテリーナンバー表示
  * @param value バッテリー値
- * @return バッテリーナンバー操作関数
+ * @returns バッテリーナンバー操作関数
  */
 const popUp = (value: number) => (batteryNumber: BatteryNumber) => {
   delay(1000)

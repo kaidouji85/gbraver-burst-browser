@@ -2,7 +2,7 @@ import { PilotSkillCommand } from "gbraver-burst-core";
 
 import { DoPilotSkill } from "../actions/do-pilot-skill";
 import { decisionByPilotButton } from "../animation/decision-by-pilot-button";
-import { BattleSceneProps } from "../battle-scene-props";
+import { BattleSceneProps } from "../props";
 import { doPilotSkillEventIfNeeded } from "./do-pilot-skill-event-if-needed";
 import { progressGame } from "./progress-game";
 
@@ -11,7 +11,7 @@ import { progressGame } from "./progress-game";
  *
  * @param props 戦闘シーンプロパティ
  * @param action パイロットスキル発動アクション
- * @return 処理が完了したら発火するPromise
+ * @returns 処理が完了したら発火するPromise
  */
 export function onPilotSkill(
   props: Readonly<BattleSceneProps>,

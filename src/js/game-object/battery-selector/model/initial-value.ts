@@ -4,7 +4,7 @@ import { MIN_BATTERY } from "./index";
 /**
  * モデルの初期値を生成する
  *
- * @return 生成した初期値
+ * @returns 生成した初期値
  */
 export function initialValue(): BatterySelectorModel {
   return {
@@ -17,7 +17,7 @@ export function initialValue(): BatterySelectorModel {
     minusButtonScale: 1,
     plusButtonScale: 1,
     batteryButtonScale: 1,
-    isPushNotifierDisabled: true,
+    shouldPushNotifierStop: true,
     disabled: false,
   };
 }

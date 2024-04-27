@@ -2,34 +2,38 @@ import { Observable } from "rxjs";
 
 import { GameObjectAction } from "../../src/js/game-object/action/game-object-action";
 import { ArmdozerSprite } from "../../src/js/game-object/armdozer/armdozer-sprite";
-import { Resources } from "../../src/js/resource";
+import { ResourcesContainer } from "../../src/js/resource";
+import { SEPlayerContainer } from "../../src/js/se/se-player";
 import { TDGameObjectStub } from "./td-game-object-stub";
+
+/** アームドーザスプライト ジェネレータ パラメータ */
+type GeneratorParams = ResourcesContainer &
+  SEPlayerContainer & {
+    /** ゲームオブジェクトアクション */
+    gameObjectAction: Observable<GameObjectAction>;
+  };
 
 /**
  * アームドーザスプライト ジェネレータ
  * @template X スプライトのデータ型
- * @param resources リソース管理オブジェクト
- * @param gameObjectAction ゲームオブジェクトアクション
- * @return アームドーザスプライト
+ * @param params ジェネレータパラメータ
+ * @returns アームドーザスプライト
  */
-type SpriteGenerator<X extends ArmdozerSprite> = (
-  resources: Resources,
-  gameObjectAction: Observable<GameObjectAction>,
-) => X;
+type SpriteGenerator<X extends ArmdozerSprite> = (params: GeneratorParams) => X;
 
 /**
  * アームドーザスプライト スタブ
  * @template X スプライトのデータ型
  * @param generator スプライトジェネレータ
  * @param fn スプライト操作関数
- * @return ルートHTML要素
+ * @returns ルートHTML要素
  */
 export const armdozerSpriteStub = <X extends ArmdozerSprite>(
   generator: SpriteGenerator<X>,
   fn: (sprite: X) => void,
 ): HTMLElement => {
-  const stub = new TDGameObjectStub(({ resources, gameObjectAction }) => {
-    const sprite = generator(resources, gameObjectAction);
+  const stub = new TDGameObjectStub((params) => {
+    const sprite = generator(params);
     fn(sprite);
     return {
       objects: [sprite.getObject3D()],

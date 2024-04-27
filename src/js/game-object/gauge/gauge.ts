@@ -3,6 +3,7 @@ import * as THREE from "three";
 
 import { Animate } from "../../animation/animate";
 import type { PreRender } from "../../game-loop/pre-render";
+import { HUDCoordinate } from "../../tracking/coordinate";
 import type { HUDTracking } from "../../tracking/hud-tracking";
 import type { GameObjectAction } from "../action/game-object-action";
 import { battery } from "./animation/battery";
@@ -55,7 +56,7 @@ export class Gauge implements HUDTracking {
   /**
    * HP変更
    * @param value 変更値
-   * @return アニメーション
+   * @returns アニメーション
    */
   hp(value: number): Animate {
     return hp(this.#model, value);
@@ -64,7 +65,7 @@ export class Gauge implements HUDTracking {
   /**
    * バッテリー変更
    * @param value 変更値
-   * @return アニメーション
+   * @returns アニメーション
    */
   battery(value: number): Animate {
     return battery(this.#model, value);
@@ -73,26 +74,22 @@ export class Gauge implements HUDTracking {
   /**
    * 最大バッテリー変更
    * @param value 変更値
-   * @return アニメーション
+   * @returns アニメーション
    */
   maxBattery(value: number): Animate {
     return maxBattery(this.#model, value);
   }
 
-  /**
-   * 3Dレイヤーのオブジェクをトラッキングする
-   * 座標にはHUDレイヤー系座標に変換したものを指定する
-   * @param x x座標
-   * @param y y座標
-   */
-  tracking(x: number, y: number): void {
+  /** @override */
+  tracking(coordinate: HUDCoordinate): void {
+    const { x, y } = coordinate;
     this.#model.tracking.x = x;
     this.#model.tracking.y = y;
   }
 
   /**
    * ゲージで使われているthree.jsオブジェクトを取得する
-   * @return 取得結果
+   * @returns 取得結果
    */
   getObject3D(): THREE.Object3D {
     return this.#view.getObject3D();

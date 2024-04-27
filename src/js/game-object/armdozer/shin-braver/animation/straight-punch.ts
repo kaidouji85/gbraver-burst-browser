@@ -1,15 +1,15 @@
 import { Animate } from "../../../../animation/animate";
 import { onStart } from "../../../../animation/on-start";
 import { tween } from "../../../../animation/tween";
-import type { ShinBraverModel } from "../model/shin-braver-model";
+import { ShinBraverAnimationProps } from "./animation-props";
 
 /**
  * ストレートパンチ
- *
- * @param model モデル
- * @return アニメーション
+ * @param props アニメーションプロパティ
+ * @returns アニメーション
  */
-export function straightPunch(model: ShinBraverModel): Animate {
+export function straightPunch(props: ShinBraverAnimationProps): Animate {
+  const { model } = props;
   return onStart(() => {
     model.animation.type = "SP_ATTACK";
     model.animation.frame = 0;

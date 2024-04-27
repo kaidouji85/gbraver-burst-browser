@@ -1,35 +1,41 @@
+import { ArmdozerId } from "gbraver-burst-core";
+
 import { waitFinishAnimation } from "../../../dom/wait-finish-animation";
+import { getArmdozerBustShotPathId } from "../../../path/armdozer-bust-shot-path";
+import { Resources } from "../../../resource";
 import { waitElementLoaded } from "../../../wait/wait-element-loaded";
+import { getArmdozerBustShotClassName } from "./class-name";
 
-/**
- * cssクラス名のプレフィックス
- */
-export const CLASS_NAME_PREFIX = "armdozer-bust-shot";
-
-/**
- * アームドーザバストショット
- */
+/** アームドーザバストショット */
 export class ArmdozerBustShot {
-  #image: HTMLImageElement;
-  #isLoaded: Promise<void>;
+  /** アームドーザID */
+  readonly armdozerId: ArmdozerId;
+  /** 画像要素 */
+  readonly #image: HTMLImageElement;
+  /** 画像の読みこみが完了したら発火するPromise */
+  readonly #isLoaded: Promise<void>;
 
   /**
    * コンストラクタ
-   *
-   * @param path 画像パス
-   * @param className cssクラス名
+   * @param resources リソース管理オブジェクト
+   * @param armdozerId アームドーザID
    */
-  constructor(path: string, className: string) {
+  constructor(resources: Resources, armdozerId: ArmdozerId) {
+    this.armdozerId = armdozerId;
+
     this.#image = document.createElement("img");
-    this.#image.src = path;
-    this.#image.className = className;
+    this.#image.src =
+      resources.paths.find(
+        (p) => p.id === getArmdozerBustShotPathId(armdozerId),
+      )?.path ?? "";
+    this.#image.className = getArmdozerBustShotClassName(armdozerId);
+
     this.#isLoaded = waitElementLoaded(this.#image);
   }
 
   /**
    * ルートHTML要素を取得する
-   *
-   * @return ルートHTML要素
+   * @returns ルートHTML要素
    */
   getRootHTMLElement(): HTMLElement {
     return this.#image;
@@ -37,8 +43,7 @@ export class ArmdozerBustShot {
 
   /**
    * 読み込みが完了するまで待つ
-   *
-   * @return 待機結果
+   * @returns 待機結果
    */
   waitUntilLoaded(): Promise<void> {
     return this.#isLoaded;
@@ -59,9 +64,8 @@ export class ArmdozerBustShot {
   }
 
   /**
-   * アニメーションさせる
-   *
-   * @return アニメーション
+   * 移動する
+   * @returns アニメーション
    */
   move(): Promise<void> {
     const animation = this.#image.animate(

@@ -2,7 +2,7 @@ import { PilotSkillCommand } from "gbraver-burst-core";
 
 import { decisionByMiniController } from "../animation/decision-by-mini-controller";
 import { decisionByPilotButton } from "../animation/decision-by-pilot-button";
-import { BattleSceneProps } from "../battle-scene-props";
+import { BattleSceneProps } from "../props";
 import { doPilotSkillEventIfNeeded } from "./do-pilot-skill-event-if-needed";
 import { progressGame } from "./progress-game";
 
@@ -10,7 +10,7 @@ import { progressGame } from "./progress-game";
  * ミニコントローラーでパイロットボタンが押された時の処理
  * @param props 戦闘シーンプロパティ
  * @param action アクション
- * @return 処理が完了したら発火するPromise
+ * @returns 処理が完了したら発火するPromise
  */
 export function onPilotSkillByMiniController(
   props: Readonly<BattleSceneProps>,

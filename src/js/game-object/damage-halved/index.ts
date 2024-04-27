@@ -1,37 +1,41 @@
 import { Observable } from "rxjs";
 
-import type { Resources } from "../../resource";
+import type { ResourcesContainer } from "../../resource";
+import { SEPlayerContainer } from "../../se/se-player";
 import type { GameObjectAction } from "../action/game-object-action";
 import { DamageHalved } from "./damage-halved";
 import { EnemyDamageHalvedView } from "./view/enemy-damage-halved-view";
 import { PlayerDamageHalvedView } from "./view/player-damage-halved-view";
 
+/** ダメージ半減生成パラメータ */
+export type DamageHalvedCreatorParams = ResourcesContainer &
+  SEPlayerContainer & {
+    /** ゲームオブジェクトアクション */
+    gameObjectAction: Observable<GameObjectAction>;
+  };
+
 /**
  * プレイヤー ダメージ半減 ポップアップ
- *
- * @param resources リソース管理オブジェクト
- * @param gameObjectAction ゲームオブジェクトアクション
- * @return 生成結果
+ * @param params 生成パラメータ
+ * @returns 生成結果
  */
 export function playerDamageHalved(
-  resources: Resources,
-  gameObjectAction: Observable<GameObjectAction>,
+  params: DamageHalvedCreatorParams,
 ): DamageHalved {
+  const { resources } = params;
   const view = new PlayerDamageHalvedView(resources);
-  return new DamageHalved(view, resources, gameObjectAction);
+  return new DamageHalved({ ...params, view });
 }
 
 /**
  * 敵 ダメージ半減 ポップアップ
- *
- * @param resources リソース管理オブジェクト
- * @param gameObjectAction ゲームオブジェクトアクション
- * @return 生成結果
+ * @param params 生成パラメータ
+ * @returns 生成結果
  */
 export function enemyDamageHalved(
-  resources: Resources,
-  gameObjectAction: Observable<GameObjectAction>,
+  params: DamageHalvedCreatorParams,
 ): DamageHalved {
+  const { resources } = params;
   const view = new EnemyDamageHalvedView(resources);
-  return new DamageHalved(view, resources, gameObjectAction);
+  return new DamageHalved({ ...params, view });
 }

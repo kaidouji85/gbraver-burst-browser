@@ -8,7 +8,7 @@ import type { TurnStartModel } from "../model/turn-start-model";
  * 表示アニメーション
  *
  * @param model モデル
- * @return アニメーション
+ * @returns アニメーション
  */
 export function show(model: TurnStartModel): Animate {
   return onStart(() => {

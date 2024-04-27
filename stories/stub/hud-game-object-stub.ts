@@ -11,28 +11,27 @@ import { gameObjectStream } from "../../src/js/game-object/action/game-object-ac
 import { PlainHUDCamera } from "../../src/js/game-object/camera/plain-hud/plain-hud-camera";
 import { Renderer } from "../../src/js/render";
 import type { OverlapEvent } from "../../src/js/render/overlap-event/overlap-event";
-import type { Resources } from "../../src/js/resource";
+import type { ResourcesContainer } from "../../src/js/resource";
 import { developingFullResourceLoading } from "../../src/js/resource/loading/full-resource-loading";
 import type { SafeAreaInset } from "../../src/js/safe-area/safe-area-inset";
 import { createSafeAreaInset } from "../../src/js/safe-area/safe-area-inset";
+import { createSEPlayer, SEPlayerContainer } from "../../src/js/se/se-player";
 import type { Resize } from "../../src/js/window/resize";
 import { resizeStream } from "../../src/js/window/resize";
 import { StorybookResourceRoot } from "../storybook-resource-root";
 
 /** Object3D生成関数パラメータ */
-type Object3DParams = {
-  /** リソース管理オブジェクト */
-  resources: Resources;
-
-  /** ゲームオブジェクトアクション */
-  gameObjectAction: Observable<GameObjectAction>;
-};
+type Object3DParams = ResourcesContainer &
+  SEPlayerContainer & {
+    /** ゲームオブジェクトアクション */
+    gameObjectAction: Observable<GameObjectAction>;
+  };
 
 /**
  * Object3D生成関数
  *
  * @param params パラメータ
- * @return シーンに追加するObject3D
+ * @returns シーンに追加するObject3D
  */
 export type Object3DCreator = (params: Object3DParams) => THREE.Object3D[];
 
@@ -84,7 +83,7 @@ export class HUDGameObjectStub {
   /**
    * シーンを開始する
    *
-   * @return 実行結果
+   * @returns 実行結果
    */
   async start(): Promise<void> {
     const resourceRoot = new StorybookResourceRoot();
@@ -93,6 +92,7 @@ export class HUDGameObjectStub {
 
     const object3Ds = this._creator({
       resources,
+      se: createSEPlayer(),
       gameObjectAction: this._gameObjectAction,
     });
 
@@ -104,7 +104,7 @@ export class HUDGameObjectStub {
   /**
    * レンダリング対象のHTML要素を取得する
    *
-   * @return {HTMLElement}
+   * @returns {HTMLElement}
    */
   domElement(): HTMLElement {
     return this._renderer.getRendererDOM();

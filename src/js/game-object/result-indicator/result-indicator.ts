@@ -47,7 +47,7 @@ export class ResultIndicator {
   /**
    * シーンに追加するオブジェクトを取得する
    *
-   * @return 取得結果
+   * @returns 取得結果
    */
   getObject3D(): THREE.Object3D {
     return this.#view.getObject3D();
@@ -56,7 +56,7 @@ export class ResultIndicator {
   /**
    * スライドイン表示
    *
-   * @return アニメーション
+   * @returns アニメーション
    */
   slideIn(): Animate {
     return slideIn(this.#model);
@@ -65,7 +65,7 @@ export class ResultIndicator {
   /**
    * 画面端に移動する
    *
-   * @return アニメーション
+   * @returns アニメーション
    */
   moveToEdge(): Animate {
     return moveToEdge(this.#model);
@@ -74,7 +74,7 @@ export class ResultIndicator {
   /**
    * 非表示
    *
-   * @return アニメーション
+   * @returns アニメーション
    */
   hidden(): Animate {
     return hidden(this.#model);

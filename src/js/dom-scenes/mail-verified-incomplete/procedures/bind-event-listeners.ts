@@ -8,7 +8,7 @@ import { onReloadButtonPush } from "./on-reload-button-push";
 /**
  * 画面にイベントリスナを関連付ける
  * @param props 画面プロパティ
- * @return アンサブスクライバ
+ * @returns アンサブスクライバ
  */
 export function bindEventListeners(
   props: Readonly<MailVerifiedIncompleteProps>,

@@ -5,7 +5,7 @@ import { enemyPilotOnlyShout } from "../../pilot-shout";
 /**
  * 最初の戦闘 ユウヤ 叫び
  * @param props イベントプロパティ
- * @return アニメーション
+ * @returns アニメーション
  */
 export const yuuyaShoutWhenFirstBattle = (
   props: Readonly<CustomBattleEventProps>,

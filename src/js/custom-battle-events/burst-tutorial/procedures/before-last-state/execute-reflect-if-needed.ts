@@ -7,7 +7,7 @@ import { successReflectDamage } from "../../stories/success-reflect-damage";
 /**
  * 条件を満たした場合、ダメージ反射ストーリーを再生する
  * @param props イベントプロパティ
- * @return 処理が完了したら発火するPromise
+ * @returns 処理が完了したら発火するPromise
  */
 export async function executeReflectIfNeeded(
   props: Readonly<LastState>,

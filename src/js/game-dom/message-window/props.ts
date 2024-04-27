@@ -1,5 +1,5 @@
 import { replaceDOM } from "../../dom/replace-dom";
-import { Resources } from "../../resource";
+import { ResourcesContainer } from "../../resource";
 import { domUuid } from "../../uuid/dom-uuid";
 import { NEXT_MESSAGE_ICON_CLASS_INVISIBLE } from "./dom/class-name";
 import { extractElements } from "./dom/elements";
@@ -23,9 +23,7 @@ export type MessageWindowProps = {
 };
 
 /** プロパティ生成パラメータ */
-export type GenerateParams = {
-  /** リソース管理オブジェクト */
-  resources: Resources;
+export type PropsCreatorParams = ResourcesContainer & {
   /** ウインドウタイプ */
   type?: WindowType;
   /** 顔画像位置 */
@@ -37,10 +35,10 @@ export type GenerateParams = {
 /**
  * MessageWindowPropsを生成する
  * @param params 生成パラメータ
- * @return 生成結果
+ * @returns 生成結果
  */
 export function createMessageWindowProps(
-  params: GenerateParams,
+  params: PropsCreatorParams,
 ): MessageWindowProps {
   const ids = {
     messages: domUuid(),

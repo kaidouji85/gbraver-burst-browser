@@ -1,12 +1,11 @@
 import { Subject } from "rxjs";
 
 import { Exclusive } from "../../exclusive/exclusive";
-import { Resources } from "../../resource";
-import {
-  createEmptySoundResource,
-  SOUND_IDS,
-  SoundResource,
-} from "../../resource/sound";
+import { ResourcesContainer } from "../../resource";
+import { createEmptySoundResource } from "../../resource/sound/empty-sound-resource";
+import { SOUND_IDS } from "../../resource/sound/ids";
+import { SoundResource } from "../../resource/sound/resource";
+import { SEPlayerContainer } from "../../se/se-player";
 import { domUuid } from "../../uuid/dom-uuid";
 import { ROOT_CLASS } from "./dom/class-name";
 import { DataIDs } from "./dom/data-ids";
@@ -14,7 +13,7 @@ import { extractElements } from "./dom/elements";
 import { rootInnerHTML } from "./dom/root-inner-html";
 
 /** ネットバトルセレクターダイアログのプロパティ */
-export type NetBattleSelectorDialogProps = {
+export type NetBattleSelectorDialogProps = SEPlayerContainer & {
   /** ルートHTML要素 */
   root: HTMLElement;
   /** 背景 */
@@ -43,14 +42,18 @@ export type NetBattleSelectorDialogProps = {
   exclusive: Exclusive;
 };
 
+/** NetBattleSelectorDialogProps生成パラメータ */
+export type PropsCreatorParams = ResourcesContainer & SEPlayerContainer;
+
 /**
  * NetBattleSelectrPropsを生成する
- * @param resources リソース管理オブジェクト
- * @return 生成結果
+ * @param params 生成パラメータ
+ * @returns 生成結果
  */
 export function createNetBattleSelectrProps(
-  resources: Resources,
+  params: PropsCreatorParams,
 ): NetBattleSelectorDialogProps {
+  const { resources } = params;
   const root = document.createElement("div");
   root.className = ROOT_CLASS;
   const dataIDs: DataIDs = {
@@ -63,6 +66,7 @@ export function createNetBattleSelectrProps(
   root.innerHTML = rootInnerHTML(resources, dataIDs);
   const elements = extractElements(root, dataIDs);
   return {
+    ...params,
     root,
     backGround: elements.backGround,
     closer: elements.closer,

@@ -11,7 +11,7 @@ const attacker = {
 /**
  * 防御側プレイヤーを生成する
  * @param enableBurst バースト発動可能か否か、trueでバースト発動可能
- * @return 防御側プレイヤー
+ * @returns 防御側プレイヤー
  */
 const createDefender = (enableBurst: boolean) => ({
   ...EMPTY_PLAYER_STATE,

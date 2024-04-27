@@ -1,18 +1,21 @@
 import { Animate } from "../../../animation/animate";
 import { onStart } from "../../../animation/on-start";
 import { tween } from "../../../animation/tween";
-import type { BurstButtonModel } from "../model/burst-button-model";
+import { BurstButtonAnimationProps } from "./animation-props";
 
 /**
  * バーストボタンを表示する
- *
- * @param model モデル
- * @return アニメーション
+ * @param props アニメーションプロパティ
+ * @returns アニメーション
  */
-export function open(model: BurstButtonModel, canBurst: boolean): Animate {
+export function open(
+  props: BurstButtonAnimationProps,
+  canBurst: boolean,
+): Animate {
+  const { model } = props;
   return onStart(() => {
-    model.isPushNotifierDisabled = true;
-    model.canBurst = canBurst;
+    model.shouldPushNotifierStop = true;
+    model.canActivateBurst = canBurst;
     model.opacity = 0;
   })
     .chain(
@@ -27,7 +30,7 @@ export function open(model: BurstButtonModel, canBurst: boolean): Animate {
     )
     .chain(
       onStart(() => {
-        model.isPushNotifierDisabled = false;
+        model.shouldPushNotifierStop = false;
       }),
     );
 }

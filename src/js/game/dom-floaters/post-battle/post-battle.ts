@@ -1,12 +1,13 @@
-import { Howl } from "howler";
 import { Observable, Subject, Unsubscribable } from "rxjs";
 
 import { pop } from "../../../dom/pop";
 import { domPushStream } from "../../../dom/push-dom";
 import { waitFinishAnimation } from "../../../dom/wait-finish-animation";
 import { Exclusive } from "../../../exclusive/exclusive";
-import type { Resources } from "../../../resource";
-import { SOUND_IDS } from "../../../resource/sound";
+import type { ResourcesContainer } from "../../../resource";
+import { createEmptySoundResource } from "../../../resource/sound/empty-sound-resource";
+import { SOUND_IDS } from "../../../resource/sound/ids";
+import { SEPlayerContainer } from "../../../se/se-player";
 import type { PostBattle } from "../../post-battle";
 import type {
   ButtonStyle,
@@ -20,10 +21,16 @@ const ROOT_CLASS = "post-battle";
 type ActionButton = {
   /** ボタンのHTML要素 */
   button: HTMLButtonElement;
-
   /** ボタンイベントのUnsubscriber */
   unsubscriber: Unsubscribable;
 };
+
+/** showメソッドのパラメータ */
+export type ShowParams = ResourcesContainer &
+  SEPlayerContainer & {
+    /** アクションボタン設定 */
+    buttons: PostBattleButtonConfig[];
+  };
 
 /** バトル終了後行動選択フローター */
 export class PostBattleFloater {
@@ -58,7 +65,7 @@ export class PostBattleFloater {
   /**
    * ルートHTML要素を取得する
    *
-   * @return 取得結果
+   * @returns 取得結果
    */
   getRootHTMLElement(): HTMLElement {
     return this.#root;
@@ -67,16 +74,12 @@ export class PostBattleFloater {
   /**
    * アニメーション付きでフローターを表示する
    *
-   * @param resources リソース管理オブジェクト
-   * @param buttons アクションボタン設定
-   * @return アニメーションが完了したら発火するPromise
+   * @param params 表示パラメータ
+   * @returns アニメーションが完了したら発火するPromise
    */
-  async show(
-    resources: Resources,
-    buttons: PostBattleButtonConfig[],
-  ): Promise<void> {
+  async show(params: ShowParams): Promise<void> {
     await this.#exclusive.execute(async () => {
-      const actionButtons = this.#createActionButtons(resources, buttons);
+      const actionButtons = this.#createActionButtons(params);
       actionButtons.forEach((v) => {
         this.#root.appendChild(v.button);
       });
@@ -97,7 +100,7 @@ export class PostBattleFloater {
    * 選択完了通知
    * ストリームには選択した戦闘終了後の挙動が渡される
    *
-   * @return 通知ストリーム
+   * @returns 通知ストリーム
    */
   selectionCompleteNotifier(): Observable<PostBattle> {
     return this.#selectionComplete;
@@ -106,7 +109,7 @@ export class PostBattleFloater {
   /**
    * 本フローターをボトムアップ表示する
    *
-   * @return アニメーションが完了したら発火するプロミス
+   * @returns アニメーションが完了したら発火するプロミス
    */
   async #bottomUp(): Promise<void> {
     this.#root.style.display = "flex";
@@ -130,21 +133,17 @@ export class PostBattleFloater {
 
   /**
    * 戦闘後アクションボタンを生成する
-   *
-   * @param resources リソース管理オブジェクト
-   * @param buttons ボタン設定
-   * @return 生成結果
+   * @param params 生成パラメータ
+   * @returns 生成結果
    */
-  #createActionButtons(
-    resources: Resources,
-    buttons: PostBattleButtonConfig[],
-  ): ActionButton[] {
+  #createActionButtons(params: ShowParams): ActionButton[] {
+    const { resources, se, buttons } = params;
     const pushButton =
-      resources.sounds.find((v) => v.id === SOUND_IDS.PUSH_BUTTON)?.sound ??
-      new Howl({ src: "" });
+      resources.sounds.find((v) => v.id === SOUND_IDS.PUSH_BUTTON) ??
+      createEmptySoundResource();
     const changeValue =
-      resources.sounds.find((v) => v.id === SOUND_IDS.CHANGE_VALUE)?.sound ??
-      new Howl({ src: "" });
+      resources.sounds.find((v) => v.id === SOUND_IDS.CHANGE_VALUE) ??
+      createEmptySoundResource();
 
     const createButtonStyle = (style: ButtonStyle) => {
       switch (style) {
@@ -172,7 +171,7 @@ export class PostBattleFloater {
         this.#exclusive.execute(async () => {
           event.preventDefault();
           event.stopPropagation();
-          sound.play();
+          se.play(sound);
           await pop(button);
           this.#selectionComplete.next(action);
         });

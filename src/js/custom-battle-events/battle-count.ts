@@ -3,7 +3,7 @@ import { Battle, GameState, GameStateX, PlayerId } from "gbraver-burst-core";
 /**
  * ステートヒストリーから戦闘を抽出する
  * @param stateHistory ステートヒストリー
- * @return 抽出結果
+ * @returns 抽出結果
  */
 function extractBattle(stateHistory: GameState[]): GameStateX<Battle>[] {
   return stateHistory.reduce(
@@ -18,7 +18,7 @@ function extractBattle(stateHistory: GameState[]): GameStateX<Battle>[] {
 /**
  * 戦闘回数を計算するヘルパー関数
  * @param stateHistory ステートヒストリー
- * @return 戦闘回数
+ * @returns 戦闘回数
  */
 export function battleCount(stateHistory: GameState[]): number {
   return extractBattle(stateHistory).length;
@@ -28,7 +28,7 @@ export function battleCount(stateHistory: GameState[]): number {
  * 指定したプレイヤーの戦闘回数を計算するヘルパー関数
  * @param stateHistory ステートヒストリー
  * @param playerId プレイヤーID
- * @return 戦闘回数
+ * @returns 戦闘回数
  */
 export function playerBattleCount(
   stateHistory: GameState[],

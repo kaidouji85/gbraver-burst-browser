@@ -1,13 +1,14 @@
 import { PilotId } from "gbraver-burst-core";
-import { Howl } from "howler";
 import { Subject } from "rxjs";
 
 import { Exclusive } from "../../../exclusive/exclusive";
+import { SoundResource } from "../../../resource/sound/resource";
+import { SEPlayerContainer } from "../../../se/se-player";
 import { PilotIcon } from "./pilot-icon";
 import { PilotStatus } from "./pilot-status";
 
 /** パイロットセレクタのプロパティ */
-export type PilotSelectorProps = {
+export type PilotSelectorProps = SEPlayerContainer & {
   /** 現在選択中のパイロットID */
   pilotId: PilotId;
   /** 排他制御 */
@@ -17,20 +18,15 @@ export type PilotSelectorProps = {
   /** パイロットステータス */
   pilotStatus: PilotStatus;
   /** パイロットアイコンをあつめたもの */
-  pilotIcons: Array<{
-    /** パイロットID */
-    pilotId: PilotId;
-    /** パイロットアイコン */
-    icon: PilotIcon;
-  }>;
+  pilotIcons: PilotIcon[];
   /** OKボタン */
   okButton: HTMLElement;
   /** 戻るボタン */
   prevButton: HTMLElement;
   /** 値変更 効果音 */
-  changeValueSound: Howl;
+  changeValueSound: SoundResource;
   /** 決定 効果音 */
-  decideSound: Howl;
+  decideSound: SoundResource;
   /** パイロット変更通知ストリーム */
   change: Subject<PilotId>;
   /** パイロット決定通知ストリーム */

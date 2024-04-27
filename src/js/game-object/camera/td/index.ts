@@ -57,7 +57,7 @@ export class TDCamera {
    *
    * @param position 移動先座標
    * @param duration 移動時間
-   * @return アニメーション
+   * @returns アニメーション
    */
   lookAt(position: Position, duration: number): Animate {
     return lookAt(this.#model, position, duration);
@@ -68,7 +68,7 @@ export class TDCamera {
    *
    * @param position 移動先座標
    * @param duration 移動時間
-   * @return アニメーション
+   * @returns アニメーション
    */
   move(position: Position, duration: number): Animate {
     return move(this.#model, position, duration);
@@ -77,7 +77,7 @@ export class TDCamera {
   /**
    * カメラを取得する
    *
-   * @return カメラ
+   * @returns カメラ
    */
   getCamera(): THREE.PerspectiveCamera {
     return this.#camera;

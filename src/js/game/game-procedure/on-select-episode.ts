@@ -9,7 +9,7 @@ import { startEpisode } from "./start-episode";
  * 本関数にはinProgressを変更する副作用がある
  * @param props ゲームプロパティ
  * @param action アクション
- * @return 処理が完了したら発火するPromise
+ * @returns 処理が完了したら発火するPromise
  */
 export async function onSelectEpisode(
   props: GameProps,

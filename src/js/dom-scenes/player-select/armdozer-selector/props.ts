@@ -1,21 +1,14 @@
 import { ArmdozerId } from "gbraver-burst-core";
-import { Howl } from "howler";
 import { Subject } from "rxjs";
 
 import { Exclusive } from "../../../exclusive/exclusive";
+import { SoundResource } from "../../../resource/sound/resource";
+import { SEPlayerContainer } from "../../../se/se-player";
 import { ArmdozerIcon } from "./armdozer-icon";
 import { ArmdozerStatus } from "./armdozer-status";
 
-/** アームドーザアイコン関連オブジェクト */
-type IconObjects = {
-  /** アームドーザID */
-  armdozerId: ArmdozerId;
-  /** アームドーザアイコン */
-  icon: ArmdozerIcon;
-};
-
 /** アームドーザセレクタのプロパティ */
-export type ArmdozerSelectorProps = {
+export type ArmdozerSelectorProps = SEPlayerContainer & {
   /** 現在選択中のアームドーザID */
   armdozerId: ArmdozerId;
   /** 排他制御 */
@@ -25,15 +18,15 @@ export type ArmdozerSelectorProps = {
   /** アームドーザステータス */
   armdozerStatus: ArmdozerStatus;
   /** アームドーザアイコンをあつめたもの */
-  armdozerIcons: IconObjects[];
+  armdozerIcons: ArmdozerIcon[];
   /** OKボタン */
   okButton: HTMLElement;
   /** 戻るボタン */
   prevButton: HTMLElement;
   /** 値変更 効果音 */
-  changeValueSound: Howl;
+  changeValueSound: SoundResource;
   /** 決定 効果音 */
-  decideSound: Howl;
+  decideSound: SoundResource;
   /** 選択変更通知ストリーム */
   change: Subject<ArmdozerId>;
   /** 決定通知ストリーム */

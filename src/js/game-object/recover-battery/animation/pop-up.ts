@@ -2,43 +2,37 @@ import { Animate } from "../../../animation/animate";
 import { delay } from "../../../animation/delay";
 import { onStart } from "../../../animation/on-start";
 import { tween } from "../../../animation/tween";
-import type { RecoverBatteryModel } from "../model/recover-battery-model";
-import { RecoverBatterySounds } from "../sounds/recover-battery-sounds";
+import { RecoverBatteryAnimationProps } from "./animation-props";
 
 /**
  * バッテリー回復 ポップアップ
- *
- * @param model モデル
- * @param sounds 効果音
+ * @param props アニメーションプロパティ
  * @param value 回復値
- * @return アニメーション
+ * @returns アニメーション
  */
 export function popUp(
-  model: RecoverBatteryModel,
-  sounds: RecoverBatterySounds,
+  props: RecoverBatteryAnimationProps,
   value: number,
 ): Animate {
-  return show(model, sounds, value).chain(delay(600)).chain(hidden(model));
+  return show(props, value).chain(delay(600)).chain(hidden(props));
 }
 
 /**
  * 表示
- *
- * @param model モデル
- * @param sounds 効果音
+ * @param props アニメーションプロパティ
  * @param value 回復値
- * @return アニメーション
+ * @returns アニメーション
  */
 export function show(
-  model: RecoverBatteryModel,
-  sounds: RecoverBatterySounds,
+  props: RecoverBatteryAnimationProps,
   value: number,
 ): Animate {
+  const { model, sounds, se } = props;
   return onStart(() => {
     model.scale = 1.2;
     model.value = value;
     model.opacity = 0;
-    sounds.recoverBattery.play();
+    se.play(sounds.recoverBattery);
   }).chain(
     tween(model, (t) =>
       t.to(
@@ -54,11 +48,11 @@ export function show(
 
 /**
  * 非表示
- *
- * @param model モデル
- * @return アニメーション
+ * @param props アニメーションプロパティ
+ * @returns アニメーション
  */
-export function hidden(model: RecoverBatteryModel): Animate {
+export function hidden(props: RecoverBatteryAnimationProps): Animate {
+  const { model } = props;
   return tween(model, (t) =>
     t.to(
       {

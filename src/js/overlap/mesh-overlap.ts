@@ -5,7 +5,7 @@ import * as THREE from "three";
  *
  * @param raycaster レイキャスト
  * @param mesh メッシュ
- * @return 判定結果
+ * @returns 判定結果
  */
 export function isMeshOverlap(
   raycaster: THREE.Raycaster,

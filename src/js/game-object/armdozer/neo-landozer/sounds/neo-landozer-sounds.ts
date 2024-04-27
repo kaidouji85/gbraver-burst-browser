@@ -1,18 +1,29 @@
-import { Howl } from "howler";
+import { ResourcesContainer } from "../../../../resource";
+import { createEmptySoundResource } from "../../../../resource/sound/empty-sound-resource";
+import { SOUND_IDS } from "../../../../resource/sound/ids";
+import { SoundResource } from "../../../../resource/sound/resource";
 
-import type { Resources } from "../../../../resource";
-import { SOUND_IDS } from "../../../../resource/sound";
+/** ネオランドーザ効果音 */
+export type NeoLandozerSounds = {
+  /** モーター音 */
+  motor: SoundResource;
+};
+
+/** 生成パラメータ */
+type CreatorParams = ResourcesContainer;
 
 /**
- * ネオランドーザ 音
+ * NeoLandozerSoundsを生成する
+ * @param params 生成パラメータ
+ * @returns 生成結果
  */
-export class NeoLandozerSounds {
-  motor: Howl;
-
-  constructor(resources: Resources) {
-    const motorResource = resources.sounds.find(
-      (v) => v.id === SOUND_IDS.MOTOR,
-    );
-    this.motor = motorResource ? motorResource.sound : new Howl({ src: "" });
-  }
+export function createNeoLandozerSounds(
+  params: CreatorParams,
+): NeoLandozerSounds {
+  const { resources } = params;
+  return {
+    motor:
+      resources.sounds.find((v) => v.id === SOUND_IDS.MOTOR) ??
+      createEmptySoundResource(),
+  };
 }

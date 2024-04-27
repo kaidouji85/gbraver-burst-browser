@@ -15,7 +15,7 @@ export type BatteryButtonProps = {
 /**
  * バッテリープロパティを生成する
  * @param battery バッテリー値
- * @return 生成結果
+ * @returns 生成結果
  */
 export function createBatteryButtonProps(battery: number): BatteryButtonProps {
   const root = document.createElement("button");

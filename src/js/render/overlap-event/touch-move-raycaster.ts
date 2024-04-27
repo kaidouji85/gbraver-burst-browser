@@ -14,7 +14,7 @@ export type TouchMoveRaycaster = {
  * TouchMoveからTouchMoveRaycasterに変換する
  *
  * @param origin 変換元
- * @return 変換結果
+ * @returns 変換結果
  */
 export function toTouchMoveRaycaster(
   origin: TouchMove,

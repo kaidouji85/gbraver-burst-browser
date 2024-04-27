@@ -13,7 +13,7 @@ import type {
  * 数字表示だけをする戦闘アニメーション
  *
  * @param param パラメータ
- * @return アニメーション
+ * @returns アニメーション
  */
 export function emptyAttackAnimation(param: BattleAnimationParam): Animate {
   if (param.result.name === "NormalHit") {
@@ -41,7 +41,7 @@ type ViewDamageResult = NormalHit | CriticalHit | Guard;
  * ダメージ数字だけを表示する
  *
  * @param param アニメーションパラメータ
- * @return アニメーション
+ * @returns アニメーション
  */
 function viewDamage(
   param: BattleAnimationParamX<ArmdozerSprite, ViewDamageResult>,

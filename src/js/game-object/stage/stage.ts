@@ -8,7 +8,7 @@ export interface Stage {
   /**
    * シーンに追加するオブジェクトを取得する
    *
-   * @return シーンに追加するオブジェクト
+   * @returns シーンに追加するオブジェクト
    */
   getThreeJsObjects(): THREE.Object3D[];
 }

@@ -11,7 +11,7 @@ import { onPushOutsideOfDialog } from "./on-push-outside-of-dialog";
 /**
  * イベントリスナーを登録する
  * @param props ログインダイアログのプロパティ
- * @return アンサブスクライバ
+ * @returns アンサブスクライバ
  */
 export function bindEventListeners(props: LoginDialogProps): Unsubscribable[] {
   const backGround = extractBackGround(props.root);

@@ -1,40 +1,25 @@
-import type { Player, PlayerId } from "gbraver-burst-core";
-import { Observable } from "rxjs";
+import { PlayerId } from "gbraver-burst-core";
 import * as THREE from "three";
 
-import type { GameObjectAction } from "../../../../../game-object/action/game-object-action";
 import {
   enemyShinyaCutIn,
   playerShinyaCutIn,
 } from "../../../../../game-object/cut-in/shinya";
 import { ShinyaCutIn } from "../../../../../game-object/cut-in/shinya/shinya";
-import type { Resources } from "../../../../../resource";
-import type { HUDPilotObjects } from "./hud-pilot-objects";
+import { HUDLayerObjectCreatorParams } from "../creator-params";
+import { HUDPilotObjects } from "./hud-pilot-objects";
 
-/**
- * コンストラクタのパラメータ
- */
-type Params = {
-  playerId: PlayerId;
-  cutIn: ShinyaCutIn;
-};
-
-/**
- * HUDレイヤー シンヤ固有のオブジェクトをあつめたもの
- */
+/** シンヤ HUDオブジェクト */
 export class ShinyaHUD implements HUDPilotObjects {
-  playerId: PlayerId;
-  cutIn: ShinyaCutIn;
-
   /**
    * コンストラクタ
-   *
-   * @param params パラメータ
+   * @param playerId プレイヤーID
+   * @param cutIn カットイン
    */
-  constructor(params: Params) {
-    this.playerId = params.playerId;
-    this.cutIn = params.cutIn;
-  }
+  constructor(
+    readonly playerId: PlayerId,
+    readonly cutIn: ShinyaCutIn,
+  ) {}
 
   /**
    * デストラクタ相当の処理
@@ -46,7 +31,7 @@ export class ShinyaHUD implements HUDPilotObjects {
   /**
    * シーンに追加するオブジェクトを取得する
    *
-   * @return シーンに追加するオブジェクト
+   * @returns シーンに追加するオブジェクト
    */
   getObject3Ds(): THREE.Object3D[] {
     return [this.cutIn.getObject3D()];
@@ -55,38 +40,22 @@ export class ShinyaHUD implements HUDPilotObjects {
 
 /**
  * プレイヤー側 シンヤHUD
- *
- * @param resources リソース管理オブジェクト
- * @param gameObjectAction ゲームオブジェクトアクション
- * @param state プレイヤーの状態
- * @return シンヤHUD
+ * @param params 生成パラメータ
+ * @returns シンヤHUD
  */
 export function playerShinyaHUD(
-  resources: Resources,
-  gameObjectAction: Observable<GameObjectAction>,
-  state: Player,
+  params: HUDLayerObjectCreatorParams,
 ): ShinyaHUD {
-  return new ShinyaHUD({
-    playerId: state.playerId,
-    cutIn: playerShinyaCutIn(resources, gameObjectAction),
-  });
+  const { player } = params;
+  return new ShinyaHUD(player.playerId, playerShinyaCutIn(params));
 }
 
 /**
  * 敵側 シンヤHUD
- *
- * @param resources リソース管理オブジェクト
- * @param gameObjectAction ゲームオブジェクトアクション
- * @param state プレイヤーの状態
- * @return シンヤHUD
+ * @param params 生成パラメータ
+ * @returns シンヤHUD
  */
-export function enemyShinyaHUD(
-  resources: Resources,
-  gameObjectAction: Observable<GameObjectAction>,
-  state: Player,
-): ShinyaHUD {
-  return new ShinyaHUD({
-    playerId: state.playerId,
-    cutIn: enemyShinyaCutIn(resources, gameObjectAction),
-  });
+export function enemyShinyaHUD(params: HUDLayerObjectCreatorParams): ShinyaHUD {
+  const { enemy } = params;
+  return new ShinyaHUD(enemy.playerId, enemyShinyaCutIn(params));
 }

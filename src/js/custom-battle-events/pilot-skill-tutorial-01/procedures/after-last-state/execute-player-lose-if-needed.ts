@@ -5,7 +5,7 @@ import { playerLose } from "../../stories/player-lose";
 /**
  * 条件を満たした場合「プレイヤー敗北ストーリー」を再生する
  * @param props イベントプロパティ
- * @return trueでストーリーを再生した
+ * @returns trueでストーリーを再生した
  */
 export async function executePlayerLoseIfNeeded(
   props: Readonly<LastState>,

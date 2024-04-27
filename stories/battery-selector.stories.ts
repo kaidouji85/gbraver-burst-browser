@@ -9,15 +9,12 @@ export default {
 /**
  * バッテリーセレクタストーリー
  * @param fn バッテリーセレクタ操作関数
- * @return story
+ * @returns story
  */
 const batterySelectorStory =
   (fn: (selector: BatterySelector) => void) => () => {
-    const stub = new HUDGameObjectStub(({ resources, gameObjectAction }) => {
-      const selector: BatterySelector = new BatterySelector({
-        resources: resources,
-        gameObjectAction: gameObjectAction,
-      });
+    const stub = new HUDGameObjectStub((params) => {
+      const selector: BatterySelector = new BatterySelector(params);
       fn(selector);
       return [selector.getObject3D()];
     });
@@ -29,7 +26,7 @@ const batterySelectorStory =
  * バッテリーセレクタを操作可能な状態に設定する
  * @param maxBattery 最大バッテリー
  * @param label ボタンラベル
- * @return バッテリーセレクタ操作関数
+ * @returns バッテリーセレクタ操作関数
  */
 const enabled =
   (maxBattery: number, label: ButtonLabel) =>
@@ -78,7 +75,7 @@ export const defense8 = batterySelectorStory(enabled(8, "Defense"));
  * バッテリーセレクタを操作不可能な状態に設定する
  * @param maxBattery 最大バッテリー
  * @param label ボタンラベル
- * @return バッテリーセレクタ操作関数
+ * @returns バッテリーセレクタ操作関数
  */
 const disabled =
   (maxBattery: number, label: ButtonLabel) =>
@@ -95,7 +92,7 @@ export const attack5Disabled = batterySelectorStory(disabled(5, "Attack"));
  * @param battery 設定値
  * @param maxBattery 最大バッテリー
  * @param label ボタンラベル
- * @return バッテリーセレクタ操作関数
+ * @returns バッテリーセレクタ操作関数
  */
 const toBattery =
   (battery: number, maxBattery: number, label: ButtonLabel) =>

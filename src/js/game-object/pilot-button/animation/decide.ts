@@ -1,23 +1,18 @@
 import { Animate } from "../../../animation/animate";
 import { onStart } from "../../../animation/on-start";
 import { tween } from "../../../animation/tween";
-import type { PilotButtonModel } from "../model/pilot-button-model";
-import { PilotButtonSounds } from "../sounds/pilot-button-sounds";
+import { PilotButtonAnimationProps } from "./animation-props";
 
 /**
  * ボタンクリック
- *
- * @param model モデル
- * @param sounds 効果音
- * @return アニメーション
+ * @param props アニメーションプロパティ
+ * @returns アニメーション
  */
-export function decide(
-  model: PilotButtonModel,
-  sounds: PilotButtonSounds,
-): Animate {
+export function decide(props: PilotButtonAnimationProps): Animate {
+  const { model, sounds, se } = props;
   return onStart(() => {
-    model.isPushNotifierDisabled = true;
-    sounds.pushButton.play();
+    model.shouldPushNotifierStop = true;
+    se.play(sounds.pushButton);
   })
     .chain(
       tween(model, (t) =>

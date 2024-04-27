@@ -9,7 +9,7 @@ import { ResourceLoading, resourceLoading } from "./resource-loading";
 /**
  * フルリソースを読み込む
  * @param resourceRoot リソースルート
- * @return リソース読み込みオブジェクト
+ * @returns リソース読み込みオブジェクト
  */
 export function fullResourceLoading(
   resourceRoot: ResourceRoot,
@@ -24,7 +24,7 @@ export function fullResourceLoading(
 /**
  * 開発中素材も含めたフルリソースを読み込む
  * @param resourceRoot リソースルート
- * @return リソース読み込みオブジェクト
+ * @returns リソース読み込みオブジェクト
  */
 export function developingFullResourceLoading(
   resourceRoot: ResourceRoot,

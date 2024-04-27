@@ -1,5 +1,5 @@
 import { PreRender } from "../../../game-loop/pre-render";
-import { BatterySelectorProps } from "../props";
+import { BatterySelectorProps } from "../props/battery-selector-props";
 
 /**
  * プリレンダー
@@ -10,5 +10,6 @@ export function onPreRender(
   props: Readonly<BatterySelectorProps>,
   action: PreRender,
 ): void {
-  props.view.engage(props.model, action);
+  const { view, model } = props;
+  view.engage(model, action);
 }

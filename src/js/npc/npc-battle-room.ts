@@ -35,7 +35,7 @@ export class NPCBattleRoom {
 
   /**
    * ステートヒストリーを取得する
-   * @return 取得結果
+   * @returns 取得結果
    */
   stateHistory(): GameState[] {
     return this.#core.stateHistory();
@@ -44,7 +44,7 @@ export class NPCBattleRoom {
   /**
    * バトルを進める
    * @param command プレイヤーが入力したコマンド
-   * @return 更新されたステート
+   * @returns 更新されたステート
    */
   async progress(command: Command): Promise<GameState[]> {
     const playerCommand: PlayerCommand = {

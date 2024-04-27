@@ -8,7 +8,7 @@ import type { GameOverParamX } from "./game-over-param";
  * ウィングドーザ 勝利
  *
  * @param param パラメータ
- * @return アニメーション
+ * @returns アニメーション
  */
 export function wingDozerWin(param: GameOverParamX<WingDozerTD>): Animate {
   return all(

@@ -1,8 +1,10 @@
 import { Subject } from "rxjs";
 
 import { Exclusive } from "../../../exclusive/exclusive";
-import { Resources } from "../../../resource";
-import { createEmptySoundResource, SOUND_IDS } from "../../../resource/sound";
+import { ResourcesContainer } from "../../../resource";
+import { createEmptySoundResource } from "../../../resource/sound/empty-sound-resource";
+import { SOUND_IDS } from "../../../resource/sound/ids";
+import { SEPlayerContainer } from "../../../se/se-player";
 import { BLOCK } from "../dom/class-name";
 import { createEpisodeImageCut } from "../dom/episode-image-cut";
 import {
@@ -21,16 +23,22 @@ import { createEpisodeDetail } from "../episode-detail";
 import { EpisodeElement } from "../episode-element";
 import { EpisodeSelectorProps } from "../props";
 
+/** EpisodeSelectorProps生成パラメータ */
+export type PropsCreatorParams = ResourcesContainer &
+  SEPlayerContainer & {
+    /** エピソード */
+    episodes: Episode[];
+  };
+
 /**
  * EpisodeSelectorPropsを生成する
- * @param resources リソース管理オブジェクト
- * @param episodes エピソード
- * @return 生成したEpisodeSelectorProps
+ * @param params 生成パラメータ
+ * @returns 生成したEpisodeSelectorProps
  */
 export function createEpisodeSelectorProps(
-  resources: Resources,
-  episodes: Episode[],
+  params: PropsCreatorParams,
 ): EpisodeSelectorProps {
+  const { resources, episodes } = params;
   const root = document.createElement("div");
   root.className = BLOCK;
   root.innerHTML = rootInnerHTML();
@@ -51,6 +59,7 @@ export function createEpisodeSelectorProps(
     episodeImageCutContainer.appendChild(episodeImageCut.image);
   });
   return {
+    ...params,
     root,
     episodeElements,
     episodeImageCuts,

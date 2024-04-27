@@ -1,12 +1,11 @@
 import { Subject } from "rxjs";
 
 import { Exclusive } from "../../exclusive/exclusive";
-import { Resources } from "../../resource";
-import {
-  createEmptySoundResource,
-  SOUND_IDS,
-  SoundResource,
-} from "../../resource/sound";
+import { ResourcesContainer } from "../../resource";
+import { createEmptySoundResource } from "../../resource/sound/empty-sound-resource";
+import { SOUND_IDS } from "../../resource/sound/ids";
+import { SoundResource } from "../../resource/sound/resource";
+import { SEPlayerContainer } from "../../se/se-player";
 import { domUuid } from "../../uuid/dom-uuid";
 import { ROOT_CLASS } from "./dom/class-name";
 import { DataIDs } from "./dom/data-ids";
@@ -14,7 +13,7 @@ import { extractElements } from "./dom/elements";
 import { rootInnerHTML } from "./dom/root-inner-html";
 
 /** プライベートマッチホストダイアログのプロパティ */
-export type PrivateMatchHostDialogProps = {
+export type PrivateMatchHostDialogProps = SEPlayerContainer & {
   /** ルート要素HTML */
   root: HTMLElement;
   /** クロージャ */
@@ -27,16 +26,22 @@ export type PrivateMatchHostDialogProps = {
   dialogClosed: Subject<void>;
 };
 
+/** PrivateMatchHostDialogProps生成パラメータ */
+export type PropsCreatorParams = ResourcesContainer &
+  SEPlayerContainer & {
+    /** ルームID */
+    roomID: string;
+  };
+
 /**
  * PrivateMatchHostDialogPropsを生成する
- * @param resources リソース管理オブジェクト
- * @param roomID ルームID
- * @return 生成結果
+ * @param params 生成パラメータ
+ * @returns 生成結果
  */
 export function createPrivateMatchHostDialogProps(
-  resources: Resources,
-  roomID: string,
+  params: PropsCreatorParams,
 ): PrivateMatchHostDialogProps {
+  const { resources, roomID } = params;
   const ids: DataIDs = {
     closer: domUuid(),
   };
@@ -45,6 +50,7 @@ export function createPrivateMatchHostDialogProps(
   root.innerHTML = rootInnerHTML(resources, ids, roomID);
   const elements = extractElements(root, ids);
   return {
+    ...params,
     root,
     closer: elements.closer,
     changeValue:

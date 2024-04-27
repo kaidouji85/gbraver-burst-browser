@@ -1,7 +1,7 @@
 import * as THREE from "three";
 
 import { toSilhouette } from "../../../../canvas/to-silhouette";
-import { Resources } from "../../../../resource";
+import { ResourcesContainer } from "../../../../resource";
 import { TextureId } from "../../../../resource/texture/resource";
 import { CanvasDisposeTexture } from "../../../../texture/canvas-dispose-texture";
 import { ArmdozerAnimation } from "../../mesh/armdozer-animation";
@@ -19,7 +19,7 @@ const ACTIVE_COLOR_B = 128;
 /**
  * アクティブ用にシルエット化したテクスチャを生成する
  * @param texture 加工前のテクスチャ
- * @return シルエット化したテクスチャ
+ * @returns シルエット化したテクスチャ
  */
 function createActiveSilhouetteTexture(texture: THREE.Texture): THREE.Texture {
   const canvas = toSilhouette({
@@ -33,9 +33,7 @@ function createActiveSilhouetteTexture(texture: THREE.Texture): THREE.Texture {
 }
 
 /** パラメータ */
-type Params = {
-  /** リソース管理オブジェクト */
-  resources: Resources;
+type Params = ResourcesContainer & {
   /** テクスチャID */
   textureId: TextureId;
   /** 最大アニメーション枚数 */
@@ -45,7 +43,7 @@ type Params = {
 /**
  * ジェネシスブレイバーのアクティブメッシュを生成する
  * @param params パラメータ
- * @return 生成結果
+ * @returns 生成結果
  */
 export function createGenesisBraverActiveMesh(
   params: Params,

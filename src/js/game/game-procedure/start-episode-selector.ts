@@ -10,7 +10,7 @@ import { getEpisodes } from "./get-episodes";
  * エピソードセレクタ画面を開始するヘルパー関数
  * @param props ゲームプロパティ
  * @param initialSelectedEpisodeID 初期選択エピソードID
- * @return 処理が完了したら発火するPromise
+ * @returns 処理が完了したら発火するPromise
  */
 export async function startEpisodeSelector(
   props: Readonly<GameProps>,
@@ -18,11 +18,11 @@ export async function startEpisodeSelector(
 ) {
   await props.fader.fadeOut();
   const episodes = getEpisodes(props);
-  const scene = new EpisodeSelector(
-    props.resources,
+  const scene = new EpisodeSelector({
+    ...props,
     episodes,
     initialSelectedEpisodeID,
-  );
+  });
   props.domSceneBinder.bind(scene, tutorialSelectorConnector);
   await Promise.race([scene.waitUntilLoaded(), waitTime(MAX_LOADING_TIME)]);
   await props.fader.fadeIn();

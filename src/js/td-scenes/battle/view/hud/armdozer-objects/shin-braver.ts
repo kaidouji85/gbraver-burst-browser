@@ -1,46 +1,32 @@
-import type { Player, PlayerId } from "gbraver-burst-core";
-import { Observable } from "rxjs";
+import { PlayerId } from "gbraver-burst-core";
 import * as THREE from "three";
 
-import type { GameObjectAction } from "../../../../../game-object/action/game-object-action";
 import {
   enemyShinBraverCutIn,
   playerShinBraverCutIn,
 } from "../../../../../game-object/cut-in/shin-braver";
 import { ShinBraverCutIn } from "../../../../../game-object/cut-in/shin-braver/shin-braver-cutin";
-import type { Resources } from "../../../../../resource";
-import type { HUDArmdozerObjects } from "./hud-armdozer-ibjects";
+import { HUDLayerObjectCreatorParams } from "../creator-params";
+import { HUDArmdozerObjects } from "./hud-armdozer-objects";
 
-/** コンストラクタのパラメータ */
-type Param = {
-  playerId: PlayerId;
-  cutIn: ShinBraverCutIn;
-};
-
-/**
- * HUDレイヤー シンブレイバー固有のオブジェクトをあつめたもの
- */
+/** HUDレイヤー シンブレイバー固有のオブジェクトをあつめたもの */
 export class ShinBraverHUD implements HUDArmdozerObjects {
-  playerId: PlayerId;
-  cutIn: ShinBraverCutIn;
-
-  constructor(param: Param) {
-    this.playerId = param.playerId;
-    this.cutIn = param.cutIn;
-  }
-
   /**
-   * デストラクタ相当の処理
+   * コンストラクタ
+   * @param playerId プレイヤーID
+   * @param cutIn カットイン
    */
+  constructor(
+    readonly playerId: PlayerId,
+    readonly cutIn: ShinBraverCutIn,
+  ) {}
+
+  /** @override */
   destructor(): void {
     this.cutIn.destructor();
   }
 
-  /**
-   * シーンに追加するオブジェクトを取得する
-   *
-   * @return シーンに追加するオブジェクト
-   */
+  /** @override */
   getObject3Ds(): THREE.Object3D[] {
     return [this.cutIn.getObject3D()];
   }
@@ -48,38 +34,24 @@ export class ShinBraverHUD implements HUDArmdozerObjects {
 
 /**
  * プレイヤー側 シンブレイバーHUD
- *
- * @param resources リソース管理オブジェクト
- * @param gameObjectAction ゲームオブジェクトアクション
- * @param state プレイヤーの状態
- * @return シンブレイバーHUD
+ * @param params 生成パラメータ
+ * @returns シンブレイバーHUD
  */
 export function playerShinBraverHUD(
-  resources: Resources,
-  gameObjectAction: Observable<GameObjectAction>,
-  state: Player,
+  params: HUDLayerObjectCreatorParams,
 ): HUDArmdozerObjects {
-  return new ShinBraverHUD({
-    playerId: state.playerId,
-    cutIn: playerShinBraverCutIn(resources, gameObjectAction),
-  });
+  const { player } = params;
+  return new ShinBraverHUD(player.playerId, playerShinBraverCutIn(params));
 }
 
 /**
  * 敵側 シンブレイバーHUD
- *
- * @param resources リソース管理オブジェクト
- * @param gameObjectAction ゲームオブジェクトアクション
- * @param state プレイヤーの状態
- * @return シンブレイバーHUD
+ * @param params 生成パラメータ
+ * @returns シンブレイバーHUD
  */
 export function enemyShinBraverHUD(
-  resources: Resources,
-  gameObjectAction: Observable<GameObjectAction>,
-  state: Player,
+  params: HUDLayerObjectCreatorParams,
 ): HUDArmdozerObjects {
-  return new ShinBraverHUD({
-    playerId: state.playerId,
-    cutIn: enemyShinBraverCutIn(resources, gameObjectAction),
-  });
+  const { enemy } = params;
+  return new ShinBraverHUD(enemy.playerId, enemyShinBraverCutIn(params));
 }

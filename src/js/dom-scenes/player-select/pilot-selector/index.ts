@@ -1,13 +1,18 @@
 import { PilotId } from "gbraver-burst-core";
 import { Observable, Unsubscribable } from "rxjs";
 
-import { Resources } from "../../../resource";
 import { bindEventListeners } from "./procedure/bind-event-lienters";
-import { createPilotSelectorProps } from "./procedure/create-pilot-selector-props";
+import {
+  createPilotSelectorProps,
+  PropsCreatorParams,
+} from "./procedure/create-pilot-selector-props";
 import { hidden } from "./procedure/hidden";
 import { show } from "./procedure/show";
 import { waitUntilLoaded } from "./procedure/wait-until-loaded";
 import { PilotSelectorProps } from "./props";
+
+/** コンストラクタのパラメータ */
+export type PilotSelectorParams = PropsCreatorParams;
 
 /**パイロットセレクタ */
 export class PilotSelector {
@@ -18,16 +23,10 @@ export class PilotSelector {
 
   /**
    * コンストラクタ
-   * @param resources リソース管理オブジェクト
-   * @param pilotIds 選択可能なパイロットIDリスト
-   * @param initialPilotId パイロットIDの初期値
+   * @param params パラメータ
    */
-  constructor(
-    resources: Resources,
-    pilotIds: PilotId[],
-    initialPilotId: PilotId,
-  ) {
-    this.#props = createPilotSelectorProps(resources, pilotIds, initialPilotId);
+  constructor(params: PilotSelectorParams) {
+    this.#props = createPilotSelectorProps(params);
     this.#unsubscribers = bindEventListeners(this.#props);
   }
 
@@ -57,7 +56,7 @@ export class PilotSelector {
 
   /**
    * リソース読み込みが完了するまで待つ
-   * @return 待機結果
+   * @returns 待機結果
    */
   async waitUntilLoaded(): Promise<void> {
     await waitUntilLoaded(this.#props);
@@ -65,7 +64,7 @@ export class PilotSelector {
 
   /**
    * ルートHTML要素を取得する
-   * @return 取得結果
+   * @returns 取得結果
    */
   getRootHTMLElement(): HTMLElement {
     return this.#props.root;
@@ -73,7 +72,7 @@ export class PilotSelector {
 
   /**
    * パイロット変更通知
-   * @return 通知ストリーム
+   * @returns 通知ストリーム
    */
   notifyChanges(): Observable<PilotId> {
     return this.#props.change;
@@ -81,7 +80,7 @@ export class PilotSelector {
 
   /**
    * パイロット選択通知
-   * @return 通知ストリーム
+   * @returns 通知ストリーム
    */
   notifyDecision(): Observable<PilotId> {
     return this.#props.decide;
@@ -89,7 +88,7 @@ export class PilotSelector {
 
   /**
    * 戻る 通知
-   * @return 通知ストリーム
+   * @returns 通知ストリーム
    */
   notifyPrev(): Observable<void> {
     return this.#props.prev;

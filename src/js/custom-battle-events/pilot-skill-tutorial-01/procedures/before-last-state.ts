@@ -10,7 +10,7 @@ import { introduction } from "../stories/introduction";
 /**
  * 最終ステート直前イベント
  * @param props イベントプロパティ
- * @return ステート更新結果
+ * @returns ステート更新結果
  */
 export async function beforeLastState(
   props: Readonly<LastState & PilotSkillTutorial01Props>,

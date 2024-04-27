@@ -5,8 +5,8 @@ export default {
   title: "reject-private-match-entry",
 };
 
-export const dialog: DOMStubStory = domStub((resources) => {
-  const dialog = new RejectPrivateMatchEntryDialog(resources);
+export const dialog: DOMStubStory = domStub((params) => {
+  const dialog = new RejectPrivateMatchEntryDialog(params);
   dialog.notifyDialogClosed().subscribe(() => {
     console.log("dialog closed");
   });

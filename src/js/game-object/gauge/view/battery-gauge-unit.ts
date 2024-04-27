@@ -59,7 +59,7 @@ export class BatteryGaugeUnit {
 
   /**
    * シーンに追加するオブジェクトを取得する
-   * @return シーンに追加するオブジェクト
+   * @returns シーンに追加するオブジェクト
    */
   getObject3D(): THREE.Object3D {
     return this.#group;
@@ -67,7 +67,7 @@ export class BatteryGaugeUnit {
 
   /**
    * バッテリー値を取得
-   * @return バッテリー値
+   * @returns バッテリー値
    */
   getValue(): number {
     return this.#value;

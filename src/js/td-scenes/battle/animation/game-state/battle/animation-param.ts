@@ -52,7 +52,7 @@ export type BattleAnimationParam = BattleAnimationParamX<
  *
  * @param props 戦闘シーンプロパティ
  * @param gameState ゲームステート
- * @return 戦闘アニメパラメータ
+ * @returns 戦闘アニメパラメータ
  */
 export function toBattleAnimationParam(
   props: StateAnimationProps,
@@ -68,7 +68,7 @@ export function toBattleAnimationParam(
   const attackerHUD = props.view.hud.players.find(
     (v) => v.playerId === battle.attacker,
   );
-  const attackerArmdozer = props.view.td.armdozerObjects.find(
+  const attackerArmdozer = props.view.td.armdozers.find(
     (v) => v.playerId === battle.attacker,
   );
   const defenderState = gameState.players.find(
@@ -80,7 +80,7 @@ export function toBattleAnimationParam(
   const defenderHUD = props.view.hud.players.find(
     (v) => v.playerId !== battle.attacker,
   );
-  const defenderArmdozer = props.view.td.armdozerObjects.find(
+  const defenderArmdozer = props.view.td.armdozers.find(
     (v) => v.playerId !== battle.attacker,
   );
 

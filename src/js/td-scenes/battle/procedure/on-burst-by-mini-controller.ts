@@ -2,7 +2,7 @@ import { BurstCommand } from "gbraver-burst-core";
 
 import { decisionByBurstButton } from "../animation/decision-by-burst-button";
 import { decisionByMiniController } from "../animation/decision-by-mini-controller";
-import { BattleSceneProps } from "../battle-scene-props";
+import { BattleSceneProps } from "../props";
 import { doBurstEventIfNeeded } from "./do-burst-event-if-needed";
 import { progressGame } from "./progress-game";
 
@@ -10,7 +10,7 @@ import { progressGame } from "./progress-game";
  * ミニコントローラーでバーストボタンが押された時の処理
  * @param props 戦闘シーンプロパティ
  * @param action アクション
- * @return 処理が完了したら発火するPromise
+ * @returns 処理が完了したら発火するPromise
  */
 export function onBurstByMiniController(
   props: Readonly<BattleSceneProps>,

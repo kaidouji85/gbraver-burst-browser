@@ -1,37 +1,39 @@
 import { Observable } from "rxjs";
 
-import type { Resources } from "../../resource";
+import type { ResourcesContainer } from "../../resource";
 import type { GameObjectAction } from "../action/game-object-action";
 import { BatteryNumber } from "./battery-number";
 import { EnemyBatteryNumberView } from "./view/enemy-battery-number-view";
 import { PlayerBatteryNumberView } from "./view/player-battery-number-view";
 
+/** 生成パラメータ */
+export type BatteryNumberCreatorParams = ResourcesContainer & {
+  /** ゲームオブジェクトアクション */
+  gameObjectAction: Observable<GameObjectAction>;
+};
+
 /**
  * プレイヤーのバッテリービュー
- *
- * @param resources リソース管理オブジェクト
- * @param gameObjectAction ゲームオブジェクトアクション
- * @return バッテリービュー
+ * @param params 生成パラメータ
+ * @returns バッテリービュー
  */
 export function playerBatteryNumber(
-  resources: Resources,
-  gameObjectAction: Observable<GameObjectAction>,
+  params: BatteryNumberCreatorParams,
 ): BatteryNumber {
+  const { resources } = params;
   const view = new PlayerBatteryNumberView(resources);
-  return new BatteryNumber(view, gameObjectAction);
+  return new BatteryNumber({ ...params, view });
 }
 
 /**
  * 敵のバッテリービュー
- *
- * @param resources リソース管理オブジェクト
- * @param gameObjectAction ゲームオブジェクトアクション
- * @return バッテリービュー
+ * @param params 生成パラメータ
+ * @returns バッテリービュー
  */
 export function enemyBatteryNumber(
-  resources: Resources,
-  gameObjectAction: Observable<GameObjectAction>,
+  params: BatteryNumberCreatorParams,
 ): BatteryNumber {
+  const { resources } = params;
   const view = new EnemyBatteryNumberView(resources);
-  return new BatteryNumber(view, gameObjectAction);
+  return new BatteryNumber({ ...params, view });
 }

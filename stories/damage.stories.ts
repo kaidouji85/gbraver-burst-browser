@@ -1,13 +1,10 @@
-import { Observable } from "rxjs";
-
 import { delay } from "../src/js/animation/delay";
-import { GameObjectAction } from "../src/js/game-object/action/game-object-action";
 import {
+  DamageIndicatorCreatprParams,
   enemyDamageIndicator,
   playerDamageIndicator,
 } from "../src/js/game-object/damage-indicator";
 import { DamageIndicator } from "../src/js/game-object/damage-indicator/damage-indicator";
-import { Resources } from "../src/js/resource";
 import { TDGameObjectStub } from "./stub/td-game-object-stub";
 
 export default {
@@ -18,19 +15,16 @@ export default {
  * ダメージインジケータのストーリー
  * @param generator ダメージインジケータ生成関数
  * @param fn ダメージインジケータ操作関数
- * @return story
+ * @returns story
  */
 const damageIndicatorStory =
   (
-    generator: (
-      resources: Resources,
-      gameObjectAction: Observable<GameObjectAction>,
-    ) => DamageIndicator,
+    generator: (params: DamageIndicatorCreatprParams) => DamageIndicator,
     fn: (damageIndicator: DamageIndicator) => void,
   ) =>
   () => {
-    const stub = new TDGameObjectStub(({ resources, gameObjectAction }) => {
-      const damageIndicator = generator(resources, gameObjectAction);
+    const stub = new TDGameObjectStub((params) => {
+      const damageIndicator = generator(params);
       fn(damageIndicator);
       return {
         objects: [damageIndicator.getObject3D()],

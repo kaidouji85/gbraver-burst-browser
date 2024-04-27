@@ -2,18 +2,19 @@ import { Animate } from "../../../../animation/animate";
 import { onStart } from "../../../../animation/on-start";
 import { tween } from "../../../../animation/tween";
 import { ARMDOZER_SPRITE_STANDARD_Z } from "../../position";
-import type { NeoLandozerModel } from "../model/neo-landozer-model";
-import { NeoLandozerSounds } from "../sounds/neo-landozer-sounds";
+import { NeoLandozerAnimationProps } from "./animation-props";
 
-/** アームハンマー -> 立ち */
-export function hmToStand(
-  model: NeoLandozerModel,
-  sounds: NeoLandozerSounds,
-): Animate {
+/**
+ * アームハンマー -> 立ち
+ * @param props アニメーションプロパティ
+ * @returns アニメーション
+ */
+export function hmToStand(props: NeoLandozerAnimationProps): Animate {
+  const { model, sounds, se } = props;
   return onStart(() => {
     model.animation.type = "HM_TO_STAND";
     model.animation.frame = 0;
-    sounds.motor.play();
+    se.play(sounds.motor);
   })
     .chain(
       tween(model.animation, (t) =>

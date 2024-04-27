@@ -21,7 +21,7 @@ type Elements = {
  *
  * @param root ルート要素
  * @param ids data-idを集めたもの
- * @return 抽出結果
+ * @returns 抽出結果
  */
 export function extractElements(root: HTMLElement, ids: DataIDs): Elements {
   const login: HTMLElement =

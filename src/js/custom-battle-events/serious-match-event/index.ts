@@ -29,7 +29,7 @@ class SeriousMatchEvent extends EmptyCustomBattleEvent {
 
 /**
  * 真剣勝負のカスタムバトルイベントを生成する
- * @return 生成結果
+ * @returns 生成結果
  */
 export function createSeriousMatchEvent(): CustomBattleEvent {
   return new SeriousMatchEvent();

@@ -7,7 +7,7 @@ import type {
 
 import { PlainHUDCamera } from "../../../../../game-object/camera/plain-hud/plain-hud-camera";
 import { TDCamera } from "../../../../../game-object/camera/td";
-import type { HUDArmdozerObjects } from "../../../view/hud/armdozer-objects/hud-armdozer-ibjects";
+import type { HUDArmdozerObjects } from "../../../view/hud/armdozer-objects/hud-armdozer-objects";
 import type { HUDGameObjects } from "../../../view/hud/game-objects";
 import { HUDPlayer } from "../../../view/hud/player";
 import type { TDArmdozerObjects } from "../../../view/td/armdozer-objects/armdozer-objects";
@@ -66,7 +66,7 @@ export type BurstAnimationParam = BurstAnimationParamX<
  *
  * @param props 戦闘シーンプロパティ
  * @param gameState ゲームステート
- * @return バーストアニメーションパラメータ
+ * @returns バーストアニメーションパラメータ
  */
 export function toBurstAnimationParam(
   props: StateAnimationProps,
@@ -85,13 +85,13 @@ export function toBurstAnimationParam(
   const burstArmdozerHUD = props.view.hud.armdozers.find(
     (v) => v.playerId === effect.burstPlayer,
   );
-  const burstArmdozerTD = props.view.td.armdozerObjects.find(
+  const burstArmdozerTD = props.view.td.armdozers.find(
     (v) => v.playerId === effect.burstPlayer,
   );
-  const anotherArmdozerTD = props.view.td.armdozerObjects.find(
+  const anotherArmdozerTD = props.view.td.armdozers.find(
     (v) => v.playerId !== effect.burstPlayer,
   );
-  const activeArmdozerTD = props.view.td.armdozerObjects.find(
+  const activeArmdozerTD = props.view.td.armdozers.find(
     (v) => v.playerId === gameState.activePlayerId,
   );
 

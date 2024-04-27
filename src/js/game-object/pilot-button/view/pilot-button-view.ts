@@ -112,10 +112,10 @@ export class PilotButtonView {
    */
   engage(model: PilotButtonModel, preRender: PreRender): void {
     this.#button.setOpacity(model.opacity);
-    const labelOpacity = model.canPilot ? model.opacity : 0;
+    const labelOpacity = model.canActivatePilotSkill ? model.opacity : 0;
     this.#label.setOpacity(labelOpacity);
     this.#pilotIcon.setOpacity(labelOpacity);
-    const disabledOpacity = model.canPilot ? 0 : model.opacity;
+    const disabledOpacity = model.canActivatePilotSkill ? 0 : model.opacity;
     this.#buttonDisabled.setOpacity(disabledOpacity);
     const devicePerScale = HUDUIScale(
       preRender.rendererDOM,
@@ -141,7 +141,7 @@ export class PilotButtonView {
   /**
    * シーンに追加するオブジェクトを取得する
    *
-   * @return シーンに追加するオブジェクト
+   * @returns シーンに追加するオブジェクト
    */
   getObject3D(): THREE.Object3D {
     return this.#group;
@@ -150,7 +150,7 @@ export class PilotButtonView {
   /**
    * ボタン押下通知
    *
-   * @return 通知ストリーム
+   * @returns 通知ストリーム
    */
   notifyPressed(): Observable<Event> {
     return this.#pushButton;

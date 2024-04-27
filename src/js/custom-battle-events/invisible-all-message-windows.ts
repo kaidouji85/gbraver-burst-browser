@@ -23,7 +23,7 @@ export function invisibleAllMessageWindows(
  *
  * @param props イベントプロパティ
  * @param wait 待ち時間
- * @return 仕切り直しが完了したら発火するPromise
+ * @returns 仕切り直しが完了したら発火するPromise
  */
 export const refreshConversation = async (
   props: CustomBattleEventProps,

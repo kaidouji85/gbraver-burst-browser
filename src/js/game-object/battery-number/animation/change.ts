@@ -1,16 +1,16 @@
 import { Animate } from "../../../animation/animate";
 import { onStart } from "../../../animation/on-start";
 import { tween } from "../../../animation/tween";
-import type { BatteryNumberModel } from "../model/battery-number-model";
+import { BatteryNumberProps } from "../props/battery-number-props";
 
 /**
  * 数字を変更する
- *
- * @param model モデル
+ * @param props アニメーションプロパティ
  * @param battery 変更する値
- * @return アニメーション
+ * @returns アニメーション
  */
-export function change(model: BatteryNumberModel, battery: number): Animate {
+export function change(props: BatteryNumberProps, battery: number): Animate {
+  const { model } = props;
   return onStart(() => {
     model.battery = battery;
   })

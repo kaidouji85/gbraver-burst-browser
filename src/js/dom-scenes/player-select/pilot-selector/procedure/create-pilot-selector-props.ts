@@ -1,12 +1,12 @@
 import { PilotId } from "gbraver-burst-core";
-import { Howl } from "howler";
 import { Subject } from "rxjs";
 
 import { replaceDOM } from "../../../../dom/replace-dom";
 import { Exclusive } from "../../../../exclusive/exclusive";
-import { Resources } from "../../../../resource";
-import { SOUND_IDS } from "../../../../resource/sound";
-import { createPilotIcon } from "../create-pilot-icon";
+import { ResourcesContainer } from "../../../../resource";
+import { createEmptySoundResource } from "../../../../resource/sound/empty-sound-resource";
+import { SOUND_IDS } from "../../../../resource/sound/ids";
+import { SEPlayerContainer } from "../../../../se/se-player";
 import { BLOCK } from "../dom/class-name";
 import {
   extractDummyStatus,
@@ -15,21 +15,28 @@ import {
   extractPrevButton,
 } from "../dom/extract-element";
 import { rootInnerHTML } from "../dom/root-inner-html";
+import { PilotIcon } from "../pilot-icon";
 import { PilotStatus } from "../pilot-status";
 import { PilotSelectorProps } from "../props";
 
+/** PilotSelectorProps生成パラメータ */
+export type PropsCreatorParams = ResourcesContainer &
+  SEPlayerContainer & {
+    /** 選択可能なパイロットIDリスト */
+    pilotIds: PilotId[];
+    /** パイロットIDの初期値 */
+    initialPilotId: PilotId;
+  };
+
 /**
  * PilotSelectorPropsを生成する
- * @param resources リソース管理オブジェクト
- * @param pilotIds 選択可能なパイロットIDリスト
- * @param initialPilotId パイロットIDの初期値
- * @return 生成結果
+ * @param params 生成パラメータ
+ * @returns 生成結果
  */
 export function createPilotSelectorProps(
-  resources: Resources,
-  pilotIds: PilotId[],
-  initialPilotId: PilotId,
+  params: PropsCreatorParams,
 ): PilotSelectorProps {
+  const { resources, pilotIds, initialPilotId } = params;
   const root = document.createElement("div");
   root.className = BLOCK;
   root.innerHTML = rootInnerHTML();
@@ -39,17 +46,15 @@ export function createPilotSelectorProps(
   const dummyStatus = extractDummyStatus(root);
   replaceDOM(dummyStatus, pilotStatus.getRootHTMLElement());
 
-  const pilotIcons = pilotIds.map((v) => ({
-    pilotId: v,
-    icon: createPilotIcon(resources, v),
-  }));
+  const pilotIcons = pilotIds.map((id) => new PilotIcon(resources, id));
   const icons = extractIcons(root);
-  pilotIcons.forEach((v) => {
-    v.icon.selected(v.pilotId === initialPilotId);
-    icons.appendChild(v.icon.getRootHTMLElement());
+  pilotIcons.forEach((icon) => {
+    icon.selected(icon.pilotId === initialPilotId);
+    icons.appendChild(icon.getRootHTMLElement());
   });
 
   return {
+    ...params,
     pilotId: initialPilotId,
     exclusive: new Exclusive(),
     root,
@@ -58,11 +63,11 @@ export function createPilotSelectorProps(
     okButton: extractOkButton(root),
     prevButton: extractPrevButton(root),
     changeValueSound:
-      resources.sounds.find((v) => v.id === SOUND_IDS.CHANGE_VALUE)?.sound ??
-      new Howl({ src: "" }),
+      resources.sounds.find((v) => v.id === SOUND_IDS.CHANGE_VALUE) ??
+      createEmptySoundResource(),
     decideSound:
-      resources.sounds.find((v) => v.id === SOUND_IDS.PUSH_BUTTON)?.sound ??
-      new Howl({ src: "" }),
+      resources.sounds.find((v) => v.id === SOUND_IDS.PUSH_BUTTON) ??
+      createEmptySoundResource(),
     change: new Subject(),
     decide: new Subject(),
     prev: new Subject(),

@@ -8,7 +8,7 @@ export type PilotSkillTutorial02Props = {
 
 /**
  * パイロットスキルチュートリアル（後半）用のプロパティを生成する
- * @return 生成結果
+ * @returns 生成結果
  */
 export function createPilotSkillTutorial02Props(): PilotSkillTutorial02Props {
   const state = {

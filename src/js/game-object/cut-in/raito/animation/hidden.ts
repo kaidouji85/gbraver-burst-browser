@@ -2,17 +2,18 @@ import { all } from "../../../../animation/all";
 import { Animate } from "../../../../animation/animate";
 import { onStart } from "../../../../animation/on-start";
 import { tween } from "../../../../animation/tween";
-import type { RaitoModel } from "../model/raito-model";
+import { RaitoCutInAnimationProps } from "./animation-props";
 
 /** アニメ時間 */
 const duration = 200;
 
 /**
  * カットインを非表示にする
- * @param model モデル
- * @return アニメーション
+ * @param props アニメーションプロパティ
+ * @returns アニメーション
  */
-export function hidden(model: RaitoModel): Animate {
+export function hidden(props: RaitoCutInAnimationProps): Animate {
+  const { model } = props;
   return onStart(() => {
     model.opacity = 1;
   }).chain(

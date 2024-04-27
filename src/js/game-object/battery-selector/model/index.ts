@@ -18,11 +18,11 @@ export type BatterySelectorModel = {
   /** 不透明度 1〜0で指定して1で完全不透明 */
   opacity: number;
   /**
-   * 押下通知が無効であるか否か、trueで通知不可能
+   * 押下通知を止めるか否か、trueで通知を止める
    * 表示、非表示アニメーション再生中、あるいは非表示時に本プロパティにtrueをセットして、
    * バッテリーセレクタが反応しないようにする
    */
-  isPushNotifierDisabled: boolean;
+  shouldPushNotifierStop: boolean;
   /** 操作不可能であるか否か、trueで操作不可能 */
   disabled: boolean;
   /** -ボタン 拡大率 */

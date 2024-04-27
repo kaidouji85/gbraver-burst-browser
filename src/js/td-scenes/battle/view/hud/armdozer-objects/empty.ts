@@ -1,31 +1,27 @@
-import type { Player, PlayerId } from "gbraver-burst-core";
+import { Player, PlayerId } from "gbraver-burst-core";
 import * as THREE from "three";
 
-import type { HUDArmdozerObjects } from "./hud-armdozer-ibjects";
+import { HUDArmdozerObjects } from "./hud-armdozer-objects";
 
-/**
- * 空のHUDレイヤーアームドーザ固有オブジェクト
- */
+/**空のHUDレイヤーアームドーザオブジェクト */
 export class EmptyHUDArmdozer implements HUDArmdozerObjects {
-  /** プレイヤーID */
+  /** @override */
   playerId: PlayerId;
 
+  /**
+   * コンストラクタ
+   * @param state プレイヤーステート
+   */
   constructor(state: Player) {
     this.playerId = state.playerId;
   }
 
-  /**
-   * デストラクタ相当の処理
-   */
+  /** @override */
   destructor(): void {
     // NOP
   }
 
-  /**
-   * シーンに追加するオブジェクトを取得する
-   *
-   * @return シーンに追加するオブジェクト
-   */
+  /** @override */
   getObject3Ds(): THREE.Object3D[] {
     return [];
   }

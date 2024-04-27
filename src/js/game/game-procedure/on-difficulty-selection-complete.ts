@@ -20,7 +20,7 @@ import { startNPCBattleStage } from "./start-npc-battle-stage";
  *
  * @param props ゲームプロパティ
  * @param action アクション
- * @return 処理が完了したら発火するPromise
+ * @returns 処理が完了したら発火するPromise
  */
 export async function onDifficultySelectionComplete(
   props: GameProps,

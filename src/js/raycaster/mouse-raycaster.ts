@@ -14,7 +14,7 @@ export type MouseRaycaster = {
  * @param event マウスイベント
  * @param rendererDOM レンダラがバインドされているHTML要素
  * @param camera カメラ
- * @return マウスのレイキャスト
+ * @returns マウスのレイキャスト
  */
 export function createMouseRaycaster(
   event: MouseEvent,

@@ -1,16 +1,16 @@
 import { Animate } from "../../../animation/animate";
 import { onStart } from "../../../animation/on-start";
 import { tween } from "../../../animation/tween";
-import type { BatteryNumberModel } from "../model/battery-number-model";
+import { BatteryNumberProps } from "../props/battery-number-props";
 
 /**
  * バッテリー数字を表示する
- *
- * @param model モデル
+ * @param props アニメーションプロパティ
  * @param battery バッテリー値
- * @return アニメーション
+ * @returns アニメーション
  */
-export function show(model: BatteryNumberModel, battery: number): Animate {
+export function show(props: BatteryNumberProps, battery: number): Animate {
+  const { model } = props;
   return onStart(() => {
     model.opacity = 0;
     model.scale = 1.2;

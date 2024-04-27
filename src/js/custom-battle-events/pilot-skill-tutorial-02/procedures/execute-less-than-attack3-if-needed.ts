@@ -5,7 +5,7 @@ import { lessThanAttack3 } from "../stories/less-than-attack3";
 /**
  * 条件を満たした場合「3未満攻撃だと警告」を再生する
  * @param props イベントプロパティ
- * @return 再生した否か、trueで再生した
+ * @returns 再生した否か、trueで再生した
  */
 export async function executeLessThanAttack3IfNeeded(
   props: Readonly<BatteryCommandSelected & PilotSkillTutorial02Props>,

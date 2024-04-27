@@ -52,18 +52,13 @@ export async function startNPCBattleStage(
   const config = await props.config.load();
   props.renderer.setPixelRatio(config.webGLPixelRatio);
   const battleScene = new BattleScene({
-    resources: props.resources,
-    bgm: props.bgm,
+    ...props,
     playingBGM: stage.bgm,
     initialAnimationTimeScale: config.battleAnimationTimeScale,
     battleProgress,
     player: npcBattle.player,
     enemy: npcBattle.enemy,
     initialState: npcBattle.stateHistory(),
-    resize: props.resize,
-    pushWindow: props.pushWindow,
-    gameLoop: props.gameLoop,
-    renderer: props.renderer,
     controllerType: config.battleControllerType,
     customBattleEvent: createSeriousMatchEvent(),
   });

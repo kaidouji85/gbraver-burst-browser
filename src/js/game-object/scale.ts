@@ -4,7 +4,7 @@ import type { SafeAreaInset } from "../safe-area/safe-area-inset";
  * HUDレイヤー カットインのスケール
  * @param rendererDOM レンダリング対象HTML要素
  * @param safeAreaInset セーフエリア情報
- * @return スケール
+ * @returns スケール
  */
 export function HUDCutInScale(
   rendererDOM: HTMLElement,
@@ -21,7 +21,7 @@ export function HUDCutInScale(
  * HUDレイヤー ユーザインタフェースのスケール
  * @param rendererDOM レンダリング対象HTML要素
  * @param safeAreaInset セーフエリア情報
- * @return スケール
+ * @returns スケール
  */
 export function HUDUIScale(
   rendererDOM: HTMLElement,
@@ -40,7 +40,7 @@ export function HUDUIScale(
  * HUDレイヤー 引き出し線のスケール
  * @param rendererDOM レンダリング対象HTML要素
  * @param safeAreaInset セーフエリア情報
- * @return スケール
+ * @returns スケール
  */
 export function HUDLeadLineScale(
   rendererDOM: HTMLElement,

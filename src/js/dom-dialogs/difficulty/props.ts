@@ -1,75 +1,65 @@
-import { Howl } from "howler";
 import { Subject } from "rxjs";
 
 import { Exclusive } from "../../exclusive/exclusive";
 import type { NPCBattleCourseDifficulty } from "../../game/npc-battle-courses";
-import type { Resources } from "../../resource";
-import { SOUND_IDS } from "../../resource/sound";
+import type { ResourcesContainer } from "../../resource";
+import { createEmptySoundResource } from "../../resource/sound/empty-sound-resource";
+import { SOUND_IDS } from "../../resource/sound/ids";
+import { SoundResource } from "../../resource/sound/resource";
+import { SEPlayerContainer } from "../../se/se-player";
 import { domUuid } from "../../uuid/dom-uuid";
 import { ROOT_CLASS } from "./dom/class-name";
 import { extractElements } from "./dom/elements";
 import { rootInnerHTML } from "./dom/root-inner-html";
 
 /** 難易度選択ダイアログ プロパティ */
-export type DifficultyDialogProps = {
+export type DifficultyDialogProps = SEPlayerContainer & {
   /** ルートHTML要素 */
   root: HTMLElement;
-
   /** クロージャHTML要素 */
   closer: HTMLElement;
-
   /** 背景HTML要素 */
   backGround: HTMLElement;
-
   /** Easyロゴ */
   easy: HTMLElement;
-
   /** Easyボタン */
   easyButton: HTMLElement;
-
   /** Normalロゴ */
   normal: HTMLElement;
-
   /** Normalボタン */
   normalButton: HTMLElement;
-
   /** Hardロゴ */
   hard: HTMLElement;
-
   /** Hardボタン */
   hardButton: HTMLElement;
-
   /** VeryHardロゴ */
   veryHard: HTMLElement;
-
   /** VertHardボタン */
   veryHardButton: HTMLElement;
-
   /** 排他制御 */
   exclusive: Exclusive;
-
   /** 選択完了通知ストリーム */
   selectionComplete: Subject<NPCBattleCourseDifficulty>;
-
   /** ダイアログ閉じ通知ストリーム */
   closeDialog: Subject<void>;
-
   /** 効果音 値変更 */
-  changeValue: Howl;
-
+  changeValue: SoundResource;
   /** 効果音 ボタン押下 */
-  pushButton: Howl;
+  pushButton: SoundResource;
 };
+
+/** 生成パラメータ */
+export type PropsCreatorParams = ResourcesContainer & SEPlayerContainer;
 
 /**
  * 難易度選択ダイアログプロパティを生成する
- *
- * @param resources リソース管理オブジェクト
- * @return 生成したプロパティ
+ * @param params 生成パラメータ
+ * @returns 生成したプロパティ
  */
 export function createDifficultyDialogProps(
-  resources: Resources,
+  params: PropsCreatorParams,
 ): DifficultyDialogProps {
+  const { resources } = params;
   const ids = {
     backGround: domUuid(),
     closer: domUuid(),
@@ -100,12 +90,13 @@ export function createDifficultyDialogProps(
   const closeDialog = new Subject<void>();
   const exclusive = new Exclusive();
   const changeValue =
-    resources.sounds.find((v) => v.id === SOUND_IDS.CHANGE_VALUE)?.sound ??
-    new Howl({ src: "" });
+    resources.sounds.find((v) => v.id === SOUND_IDS.CHANGE_VALUE) ??
+    createEmptySoundResource();
   const pushButton =
-    resources.sounds.find((v) => v.id === SOUND_IDS.PUSH_BUTTON)?.sound ??
-    new Howl({ src: "" });
+    resources.sounds.find((v) => v.id === SOUND_IDS.PUSH_BUTTON) ??
+    createEmptySoundResource();
   return {
+    ...params,
     root,
     closer,
     backGround,

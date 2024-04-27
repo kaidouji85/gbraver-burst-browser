@@ -18,7 +18,7 @@ export function onAvatarPush(
 
   if (!isAccountMenuOpen(props)) {
     action.event.stopPropagation();
-    props.changeValue.play();
+    props.se.play(props.changeValue);
     pop(props.avatar, 1.2);
     openAccountMenu(props);
   }

@@ -6,7 +6,7 @@ import { startTitle } from "./start-title";
  * 本関数はpropsを変更する副作用がある
  *
  * @param props ゲームプロパティ
- * @return 処理が完了すると発火するPromise
+ * @returns 処理が完了すると発火するPromise
  */
 export async function onSelectionCancel(props: GameProps): Promise<void> {
   props.inProgress = {

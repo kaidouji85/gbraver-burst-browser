@@ -13,7 +13,7 @@ type Players = {
 /**
  * プレイヤー有利かを判定する
  * @param players ゲーム参加プレイヤー
- * @return プレイヤー有利の場合、trueを返す
+ * @returns プレイヤー有利の場合、trueを返す
  */
 export function isPlayerAdvantage(players: Players): boolean {
   const { player, enemy } = players;

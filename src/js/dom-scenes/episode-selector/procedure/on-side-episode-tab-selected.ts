@@ -23,7 +23,7 @@ export function onSideEpisodeTabSelected(
     return;
   }
 
-  props.changeValueSound.sound.play();
+  props.se.play(props.changeValueSound);
   const episodeType: EpisodeType = "Side Episode";
   switchEpisodeTab(props, episodeType);
   setEpisodesVisible(props, episodeType);

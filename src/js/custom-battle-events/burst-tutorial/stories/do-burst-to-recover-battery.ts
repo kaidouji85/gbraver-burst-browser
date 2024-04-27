@@ -9,7 +9,7 @@ import { scrollRightMessages } from "../../scroll-messages";
 /**
  * ストーリー バーストでバッテリー回復
  * @param props イベントプロパティ
- * @return ストーリーが完了したら発火するPromise
+ * @returns ストーリーが完了したら発火するPromise
  */
 export const doBurstToRecoverBattery = async (
   props: CustomBattleEventProps,

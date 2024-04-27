@@ -58,6 +58,7 @@
   margin: calc(var(--responsive-font-size) * 0.5) 0;
 }
 
+.config__player-selector-type-title,
 .config__battle-animation-time-scale-caption,
 .config__webgl-pixel-ratio-caption,
 .config__battle-controller-type-caption,
@@ -69,6 +70,7 @@
   padding: calc(var(--responsive-font-size) * 0.3);
 }
 
+.config__player-selector-type-description,
 .config__battle-animation-time-scale-description,
 .config__webgl-pixel-ratio-description,
 .config__battle-controller-type-description,
@@ -84,6 +86,7 @@
   gap: calc(var(--responsive-font-size) * 2);
 }
 
+.config__player-selector-type-selector,
 .config__battle-controller-type-selector {
   font-size: var(--font-size);
   display: flex;
@@ -91,6 +94,7 @@
   gap: calc(var(--font-size) * 1);
 }
 
+.config__player-selector-type-label,
 .config__battle-animation-time-scale-label,
 .config__webgl-pixel-ratio-selector-label,
 .config__battle-controller-type-label,
@@ -99,6 +103,7 @@
   align-items: center;
 }
 
+.config__player-selector-type-radio,
 .config__battle-animation-time-scale-radio,
 .config__webgl-pixel-ratio-selector-radio,
 .config__battle-controller-type-radio,
@@ -108,6 +113,7 @@
   width: var(--font-size);
 }
 
+.config__player-selector-type-detail,
 .config__big-button-detail,
 .config__mini-controller-detail {
   padding-left: calc(var(--responsive-font-size) * 1);

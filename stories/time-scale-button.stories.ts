@@ -8,15 +8,12 @@ export default {
 /**
  * タイムスケールボタンのストーリー
  * @param fn タイムスケールボタン操作関数
- * @return story
+ * @returns story
  */
 const timeScaleButtonStory =
   (fn: (timeScaleButton: TimeScaleButton) => void) => () => {
-    const stub = new HUDGameObjectStub(({ resources, gameObjectAction }) => {
-      const timeScaleButton: TimeScaleButton = new TimeScaleButton(
-        resources,
-        gameObjectAction,
-      );
+    const stub = new HUDGameObjectStub((params) => {
+      const timeScaleButton: TimeScaleButton = new TimeScaleButton(params);
       fn(timeScaleButton);
       return [timeScaleButton.getObject3D()];
     });

@@ -8,7 +8,7 @@ import { scrollLeftMessages, scrollRightMessages } from "../../scroll-messages";
 /**
  * ストーリー バッテリー基本ルール説明
  * @param props イベントプロパティ
- * @return ストーリーが完了したら発火するPromise
+ * @returns ストーリーが完了したら発火するPromise
  */
 export const batteryRuleDescription = async (props: CustomBattleEventProps) => {
   activeLeftMessageWindowWithFace(props, "Tsubasa");

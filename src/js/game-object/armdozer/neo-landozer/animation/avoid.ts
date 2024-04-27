@@ -3,18 +3,19 @@ import { Animate } from "../../../../animation/animate";
 import { delay } from "../../../../animation/delay";
 import { onStart } from "../../../../animation/on-start";
 import { tween } from "../../../../animation/tween";
-import type { NeoLandozerModel } from "../model/neo-landozer-model";
-import type { NeoLandozerSounds } from "../sounds/neo-landozer-sounds";
+import { NeoLandozerAnimationProps } from "./animation-props";
 
-/** 避ける */
-export function avoid(
-  model: NeoLandozerModel,
-  sounds: NeoLandozerSounds,
-): Animate {
+/**
+ * 避ける
+ * @param props アニメーションプロパティ
+ * @returns アニメーション
+ */
+export function avoid(props: NeoLandozerAnimationProps): Animate {
+  const { model, sounds, se } = props;
   return onStart(() => {
     model.animation.type = "BACK_STEP";
     model.animation.frame = 0;
-    sounds.motor.play();
+    se.play(sounds.motor);
   })
     .chain(
       all(
@@ -39,7 +40,7 @@ export function avoid(
     .chain(delay(300))
     .chain(
       onStart(() => {
-        sounds.motor.play();
+        se.play(sounds.motor);
       }),
     )
     .chain(

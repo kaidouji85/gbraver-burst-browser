@@ -5,7 +5,7 @@ import { enemyPilotOnlyShout } from "../../pilot-shout";
 /**
  * チャプター シンヤ有利 ユウヤ叫び1
  * @param props イベントプロパティ
- * @return アニメーション
+ * @returns アニメーション
  */
 export const yuuyaShout1WhenShinyaHasAdvantage = (
   props: Readonly<CustomBattleEventProps>,

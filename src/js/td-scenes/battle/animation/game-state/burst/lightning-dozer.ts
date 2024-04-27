@@ -23,7 +23,7 @@ export type LightningDozerBurst<BURST extends Burst> = BurstAnimationParamX<
  * ライトニングドーザ バーストアニメーション
  *
  * @param param パラメータ
- * @return アニメーション
+ * @returns アニメーション
  */
 export function lightningDozerBurst(
   param: LightningDozerBurst<Burst>,
@@ -40,7 +40,7 @@ export function lightningDozerBurst(
  * 電撃バリア
  *
  * @param param パラメータ
- * @return アニメーション
+ * @returns アニメーション
  */
 function lightningBarrier(
   param: LightningDozerBurst<LightningBarrier>,

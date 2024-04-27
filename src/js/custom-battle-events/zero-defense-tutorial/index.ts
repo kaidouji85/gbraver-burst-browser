@@ -93,7 +93,7 @@ class ZeroDefenseTutorialEvent extends EmptyCustomBattleEvent {
 
 /**
  * ゼロ防御チュートリアル用のカスタムバトルイベントを生成する
- * @return 生成したカスタムバトルイベント
+ * @returns 生成したカスタムバトルイベント
  */
 export function createZeroDefenseTutorialEvent(): CustomBattleEvent {
   return new ZeroDefenseTutorialEvent();

@@ -6,7 +6,7 @@ import { HorizontalAnimationMesh } from "../../../mesh/horizontal-animation";
  * バッテリーセレクタ数字のCanvasMeshを生成するヘルパー関数
  * @param value 数字の値
  * @param texture テクスチャ
- * @return バッテリーセレクタ数字
+ * @returns バッテリーセレクタ数字
  */
 export function batteryNumber(
   value: number,
@@ -33,7 +33,7 @@ type Position = {
  * バッテリーセレクタ数字の座標を計算する
  * @param battery バッテリー数字
  * @param maxBattery 最大バッテリー
- * @return 計算結果
+ * @returns 計算結果
  */
 export function batteryNumberPosition(
   battery: number,
@@ -51,7 +51,7 @@ export function batteryNumberPosition(
  * バッテリーセレクタ数字のスケールを計算する
  * @param battery
  * @param maxBattery
- * @return 計算結果
+ * @returns 計算結果
  */
 export function batteryNumberScale(
   battery: number,

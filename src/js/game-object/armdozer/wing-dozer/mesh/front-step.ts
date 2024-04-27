@@ -11,7 +11,7 @@ export const MAX_ANIMATION = 4;
 /**
  * フロントステップ
  * @param resources リソース管理オブジェクト
- * @return 生成結果
+ * @returns 生成結果
  */
 export function frontStep(resources: Resources): AnimationMesh[] {
   return createAnimationMeshes({

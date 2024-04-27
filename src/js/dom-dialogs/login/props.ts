@@ -1,10 +1,11 @@
-import { Howl } from "howler";
 import { Subject } from "rxjs";
 
 import { Exclusive } from "../../exclusive/exclusive";
+import { SoundResource } from "../../resource/sound/resource";
+import { SEPlayerContainer } from "../../se/se-player";
 
 /** ログインダイアログのプロパティ */
-export type LoginDialogProps = {
+export type LoginDialogProps = SEPlayerContainer & {
   /** ルートHTML要素 */
   root: HTMLElement;
   /** クローザー */
@@ -18,9 +19,9 @@ export type LoginDialogProps = {
   /** ログイン通知 */
   login: Subject<void>;
   /** 効果音 値変更 */
-  changeValue: Howl;
+  changeValue: SoundResource;
   /** 効果音 ボタン押下 */
-  pushButton: Howl;
+  pushButton: SoundResource;
   /** 排他制御 */
   exclusive: Exclusive;
 };

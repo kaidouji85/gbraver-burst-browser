@@ -11,7 +11,7 @@ import type { StateAnimationProps } from "./state-animation-props";
  *
  * @param props 戦闘シーンプロパティ
  * @param gameState ゲームの状態
- * @return アニメーション
+ * @returns アニメーション
  */
 export function updateRemainingTurnAnimation(
   props: StateAnimationProps,
@@ -21,7 +21,7 @@ export function updateRemainingTurnAnimation(
     (end) =>
       end.effect.type === "TryReflect" && end.effect.effect === "Lightning",
   );
-  const endLightningBarrierAnimates: Animate[] = props.view.td.armdozerObjects
+  const endLightningBarrierAnimates: Animate[] = props.view.td.armdozers
     .filter((td) =>
       endLightningBarrier.find((end) => end.playerId === td.playerId),
     )

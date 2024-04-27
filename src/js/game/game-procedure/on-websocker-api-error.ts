@@ -13,8 +13,11 @@ export function onWebSocketAPIError(
   props: Readonly<GameProps>,
   action: WebSocketAPIError,
 ): void {
-  const dialog = new NetworkErrorDialog(props.resources, {
-    type: "GotoTitle",
+  const dialog = new NetworkErrorDialog({
+    ...props,
+    postNetworkError: {
+      type: "GotoTitle",
+    },
   });
   props.domDialogBinder.bind(dialog, networkErrorDialogConnector);
   throw action;

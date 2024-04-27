@@ -3,7 +3,7 @@ import { BatteryCommand } from "gbraver-burst-core";
 import { DecideBatteryByMiniController } from "../actions/decide-battery-by-mini-controller";
 import { decisionByBatterySelector } from "../animation/decision-by-battery-selector";
 import { decisionByMiniController } from "../animation/decision-by-mini-controller";
-import { BattleSceneProps } from "../battle-scene-props";
+import { BattleSceneProps } from "../props";
 import { doBatteryEventIfNeeded } from "./do-battery-event-if-needed";
 import { progressGame } from "./progress-game";
 
@@ -11,7 +11,7 @@ import { progressGame } from "./progress-game";
  * ミニコントローラーでバッテリーボタンが押された時の処理
  * @param props 戦闘シーンプロパティ
  * @param action アクション
- * @return 処理が完了したら発火するPromise
+ * @returns 処理が完了したら発火するPromise
  */
 export function onDecideBatteryByMiniController(
   props: Readonly<BattleSceneProps>,

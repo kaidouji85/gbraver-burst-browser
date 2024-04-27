@@ -1,40 +1,40 @@
 import { Observable } from "rxjs";
 
-import type { Resources } from "../../../resource";
+import type { ResourcesContainer } from "../../../resource";
+import { SEPlayerContainer } from "../../../se/se-player";
 import type { GameObjectAction } from "../../action/game-object-action";
 import { initialValue } from "./model/initial-value";
 import { ShockWave } from "./shock-wave";
 import { EnemyShockWaveView } from "./view/enemy-shock-wave-view";
 import { PlayerShockWaveView } from "./view/player-shock-wave-view";
 
+/** 生成パラメータ */
+export type ShockWaveCreatorParams = ResourcesContainer &
+  SEPlayerContainer & {
+    /** ゲームオブジェクトアクション */
+    gameObjectAction: Observable<GameObjectAction>;
+  };
+
 /**
  * プレイヤーの衝撃波を生成する
- *
- * @param resources リソース管理オブジェクト
- * @param gameObjectAction ゲームオブジェクトアクション
- * @return 衝撃波
+ * @param params 生成パラメータ
+ * @returns 衝撃波
  */
-export function playerShockWave(
-  resources: Resources,
-  gameObjectAction: Observable<GameObjectAction>,
-): ShockWave {
-  const model = initialValue();
-  const view = new PlayerShockWaveView(resources, model);
-  return new ShockWave(view, model, resources, gameObjectAction);
+export function playerShockWave(params: ShockWaveCreatorParams): ShockWave {
+  const { resources } = params;
+  const initialModel = initialValue();
+  const view = new PlayerShockWaveView(resources, initialModel);
+  return new ShockWave({ ...params, view, initialModel });
 }
 
 /**
  * 敵の衝撃波を生成する
- *
- * @param resources リソース管理オブジェクト
- * @param gameObjectAction ゲームオブジェクトアクション
- * @return 衝撃波
+ * @param params 生成パラメータ
+ * @returns 衝撃波
  */
-export function enemyShockWave(
-  resources: Resources,
-  gameObjectAction: Observable<GameObjectAction>,
-): ShockWave {
-  const model = initialValue();
-  const view = new EnemyShockWaveView(resources, model);
-  return new ShockWave(view, model, resources, gameObjectAction);
+export function enemyShockWave(params: ShockWaveCreatorParams): ShockWave {
+  const { resources } = params;
+  const initialModel = initialValue();
+  const view = new EnemyShockWaveView(resources, initialModel);
+  return new ShockWave({ ...params, view, initialModel });
 }

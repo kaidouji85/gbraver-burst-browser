@@ -5,7 +5,7 @@ import { zeroDefenseButPositiveBattery } from "../../stories/zero-defense-but-po
 /**
  * 条件を満たした場合、バッテリーが残っているのに0防御したストーリーを再生する
  * @param props イベントプロパティ
- * @return ストーリーを再生したらtrueを返す
+ * @returns ストーリーを再生したらtrueを返す
  */
 export async function playZeroDefenseButPositiveBatteryIfNeeded(
   props: Readonly<LastState>,

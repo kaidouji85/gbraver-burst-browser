@@ -1,11 +1,13 @@
 import { Observable, Unsubscribable } from "rxjs";
 
 import type { GBraverBurstBrowserConfig } from "../../game/config/browser-config";
-import type { Resources } from "../../resource";
 import type { DOMScene } from "../dom-scene";
 import { bindEventListeners } from "./listeners";
-import type { ConfigProps } from "./props";
+import type { ConfigProps, PropsCreatorParams } from "./props";
 import { createConfigProps } from "./props";
+
+/** コンストラクタのパラメータ */
+type ConfigParams = PropsCreatorParams;
 
 /** 設定画面 */
 export class Config implements DOMScene {
@@ -14,12 +16,13 @@ export class Config implements DOMScene {
 
   /**
    * コンストラクタ
-   *
    * @param resources リソース管理オブジェクト
    * @param config Gブレイバーバースト ブラウザ側設定項目
+   * @param bgm BGM管理オブジェクト
+   * @param se SE再生オブジェクト
    */
-  constructor(resources: Resources, config: GBraverBurstBrowserConfig) {
-    this.#props = createConfigProps(resources, config);
+  constructor(params: ConfigParams) {
+    this.#props = createConfigProps(params);
     this.#unsubscriber = bindEventListeners(this.#props);
   }
 
@@ -38,8 +41,7 @@ export class Config implements DOMScene {
 
   /**
    * 戻る通知
-   *
-   * @return 通知ストリーム
+   * @returns 通知ストリーム
    */
   notifyPrev(): Observable<void> {
     return this.#props.prev;
@@ -47,8 +49,7 @@ export class Config implements DOMScene {
 
   /**
    * 設定変更通知
-   *
-   * @return 通知ストリーム
+   * @returns 通知ストリーム
    */
   notifyConfigChanges(): Observable<GBraverBurstBrowserConfig> {
     return this.#props.configChange;

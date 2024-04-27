@@ -8,7 +8,7 @@ import type { PushWindow } from "../window/push-window";
  * 本関数は他ヘルパー関数で利用することを想定している
  *
  * @param pushWindow 画面押下ストリーム
- * @return 画面押下したら発火するPromise
+ * @returns 画面押下したら発火するPromise
  */
 export function waitUntilWindowPushWithStream(
   pushWindow: Observable<PushWindow>,
@@ -27,7 +27,7 @@ export function waitUntilWindowPushWithStream(
  * 本関数はカスタムバトルイベントで利用することを想定している
  *
  * @param props イベントプロパティ
- * @return 画面押下したら発火するPromise
+ * @returns 画面押下したら発火するPromise
  */
 export async function waitUntilWindowPush(
   props: CustomBattleEventProps,

@@ -1,6 +1,6 @@
 import { Unsubscribable } from "rxjs";
 
-import { BattleSceneProps } from "../battle-scene-props";
+import { BattleSceneProps } from "../props";
 import { onBurst } from "./on-burst";
 import { onBurstByMiniController } from "./on-burst-by-mini-controller";
 import { onDecideBattery } from "./on-decide-battery";
@@ -14,7 +14,7 @@ import { onToggleTimeScale } from "./on-toggle-time-scale";
 /**
  * 戦闘シーンイにベントリスナーをバインドする
  * @param props 戦闘シーンプロパティ
- * @return アンサブスクライバ
+ * @returns アンサブスクライバ
  */
 export function bindEventListeners(props: BattleSceneProps): Unsubscribable[] {
   return [

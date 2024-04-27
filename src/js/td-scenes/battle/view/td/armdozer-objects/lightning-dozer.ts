@@ -1,49 +1,29 @@
-import type { Player, PlayerId } from "gbraver-burst-core";
-import { Observable } from "rxjs";
+import { PlayerId } from "gbraver-burst-core";
 import * as THREE from "three";
 
-import type { GameObjectAction } from "../../../../../game-object/action/game-object-action";
-import type { ArmdozerSprite } from "../../../../../game-object/armdozer/armdozer-sprite";
+import { ArmdozerSprite } from "../../../../../game-object/armdozer/armdozer-sprite";
 import {
   EnemyLightningDozer,
   PlayerLightningDozer,
 } from "../../../../../game-object/armdozer/lightning-dozer";
 import { LightningDozer } from "../../../../../game-object/armdozer/lightning-dozer/lightning-dozer";
 import { LightningBarrierGameEffect } from "../../../../../game-object/barrier/lightning/lightning-barrier";
-import type { Resources } from "../../../../../resource";
-import type { TDArmdozerObjects } from "./armdozer-objects";
-
-/** ライトニングドーザ 3Dレイヤー フィールド */
-interface LightningDozerTDField {
-  /** ライトニングドーザ */
-  lightningDozer: LightningDozer;
-
-  /** 電撃バリア */
-  lightningBarrier: LightningBarrierGameEffect;
-}
+import { TDLayerObjectCreatorParams } from "../creator-params";
+import { TDArmdozerObjects } from "./armdozer-objects";
 
 /** ライトニングドーザ 3Dレイヤー */
-export class LightningDozerTD
-  implements TDArmdozerObjects, LightningDozerTDField
-{
-  /** @override */
-  playerId: PlayerId;
-
-  /** @override */
-  lightningDozer: LightningDozer;
-
-  /** @override */
-  lightningBarrier: LightningBarrierGameEffect;
-
+export class LightningDozerTD implements TDArmdozerObjects {
   /**
    * コンストラクタ
    * @param playerId プレイヤーID
-   * @param filed フィールド
+   * @param lightningDozer スプライト
+   * @param lightningBarrier 電撃バリア
    */
-  constructor(playerId: PlayerId, filed: LightningDozerTDField) {
-    this.playerId = playerId;
-    this.lightningDozer = filed.lightningDozer;
-    this.lightningBarrier = filed.lightningBarrier;
+  constructor(
+    readonly playerId: PlayerId,
+    readonly lightningDozer: LightningDozer,
+    readonly lightningBarrier: LightningBarrierGameEffect,
+  ) {
     this.lightningDozer.addObject3D(this.lightningBarrier.getObject3D());
   }
 
@@ -66,42 +46,32 @@ export class LightningDozerTD
 
 /**
  * プレイヤー 3Dレイヤー ライトニングドーザ固有オブジェクト
- * @param resources リソース管理オブジェクト
- * @param gameObjectAction ゲームオブジェクトアクション
- * @param state プレイヤー情報
- * @return 生成結果
+ * @param params 生成パラメータ
+ * @returns 生成結果
  */
 export function playerLightningDozerTD(
-  resources: Resources,
-  gameObjectAction: Observable<GameObjectAction>,
-  state: Player,
+  params: TDLayerObjectCreatorParams,
 ): LightningDozerTD {
-  return new LightningDozerTD(state.playerId, {
-    lightningDozer: PlayerLightningDozer(resources, gameObjectAction),
-    lightningBarrier: new LightningBarrierGameEffect(
-      resources,
-      gameObjectAction,
-    ),
-  });
+  const { player } = params;
+  return new LightningDozerTD(
+    player.playerId,
+    PlayerLightningDozer(params),
+    new LightningBarrierGameEffect(params),
+  );
 }
 
 /**
  * 敵 3Dレイヤー ライトニングドーザ固有オブジェクト
- * @param resources リソース管理オブジェクト
- * @param gameObjectAction ゲームオブジェクトアクション
- * @param state プレイヤー情報
- * @return 生成結果
+ * @param params 生成パラメータ
+ * @returns 生成結果
  */
 export function enemyLightningDozerTD(
-  resources: Resources,
-  gameObjectAction: Observable<GameObjectAction>,
-  state: Player,
+  params: TDLayerObjectCreatorParams,
 ): LightningDozerTD {
-  return new LightningDozerTD(state.playerId, {
-    lightningDozer: EnemyLightningDozer(resources, gameObjectAction),
-    lightningBarrier: new LightningBarrierGameEffect(
-      resources,
-      gameObjectAction,
-    ),
-  });
+  const { enemy } = params;
+  return new LightningDozerTD(
+    enemy.playerId,
+    EnemyLightningDozer(params),
+    new LightningBarrierGameEffect(params),
+  );
 }

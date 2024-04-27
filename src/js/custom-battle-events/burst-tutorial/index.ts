@@ -90,7 +90,7 @@ class BurstTutorial extends EmptyCustomBattleEvent {
 
 /**
  * バーストチュートリアル用のカスタムバトルイベントを生成する
- * @return 生成したカスタムバトルイベント
+ * @returns 生成したカスタムバトルイベント
  */
 export function createBurstTutorialEvent(): CustomBattleEvent {
   return new BurstTutorial();

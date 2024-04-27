@@ -8,6 +8,6 @@ import type { GameProps } from "../game-props";
  * @param props ゲームプロパティ
  */
 export function onAccountDeleteConsent(props: Readonly<GameProps>): void {
-  const dialog = new DeleteAccountConsentDialog(props.resources);
+  const dialog = new DeleteAccountConsentDialog(props);
   props.domDialogBinder.bind(dialog, deleteAccountConsentDialogConnector);
 }

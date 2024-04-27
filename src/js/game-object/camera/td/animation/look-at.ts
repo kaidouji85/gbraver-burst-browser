@@ -9,7 +9,7 @@ import type { Position } from "../position";
  * @param model モデル
  * @param duration 移動時間
  * @param position 移動先座標
- * @return アニメーション
+ * @returns アニメーション
  */
 export function lookAt(
   model: Battle3DCameraModel,

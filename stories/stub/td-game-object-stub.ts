@@ -11,25 +11,23 @@ import { gameObjectStream } from "../../src/js/game-object/action/game-object-ac
 import { TDCamera } from "../../src/js/game-object/camera/td";
 import { Renderer } from "../../src/js/render";
 import type { OverlapEvent } from "../../src/js/render/overlap-event/overlap-event";
-import type { Resources } from "../../src/js/resource";
+import type { ResourcesContainer } from "../../src/js/resource";
 import { developingFullResourceLoading } from "../../src/js/resource/loading/full-resource-loading";
 import type { SafeAreaInset } from "../../src/js/safe-area/safe-area-inset";
 import { createSafeAreaInset } from "../../src/js/safe-area/safe-area-inset";
+import { createSEPlayer, SEPlayerContainer } from "../../src/js/se/se-player";
 import type { Resize } from "../../src/js/window/resize";
 import { resizeStream } from "../../src/js/window/resize";
 import { StorybookResourceRoot } from "../storybook-resource-root";
 
 /** Object3D生成関数パラメータ */
-type Object3DCreatorParams = {
-  /** リソース管理オブジェクト */
-  resources: Resources;
-
-  /** ゲームオブジェクトアクション */
-  gameObjectAction: Observable<GameObjectAction>;
-
-  /** カメラ */
-  camera: TDCamera;
-};
+type Object3DCreatorParams = ResourcesContainer &
+  SEPlayerContainer & {
+    /** ゲームオブジェクトアクション */
+    gameObjectAction: Observable<GameObjectAction>;
+    /** カメラ */
+    camera: TDCamera;
+  };
 
 /** スタブに追加するthree.jsオブジェクト */
 type Object3Ds = {
@@ -44,7 +42,7 @@ type Object3Ds = {
  * Object3D生成関数
  *
  * @param params パラメータ
- * @return シーンに追加するObject3D
+ * @returns シーンに追加するObject3D
  */
 type Object3DCreator = (params: Object3DCreatorParams) => Object3Ds;
 
@@ -96,7 +94,7 @@ export class TDGameObjectStub {
   /**
    * シーンを開始する
    *
-   * @return 実行結果
+   * @returns 実行結果
    */
   async start(): Promise<void> {
     const resourceRoot = new StorybookResourceRoot();
@@ -105,6 +103,7 @@ export class TDGameObjectStub {
 
     const { objects, skyBox } = this._creator({
       resources,
+      se: createSEPlayer(),
       gameObjectAction: this._gameObjectAction,
       camera: this._camera,
     });
@@ -118,7 +117,7 @@ export class TDGameObjectStub {
   /**
    * レンダリング対象のHTML要素を取得する
    *
-   * @return レンダリング対象HTML要素
+   * @returns レンダリング対象HTML要素
    */
   domElement(): HTMLElement {
     return this._renderer.getRendererDOM();

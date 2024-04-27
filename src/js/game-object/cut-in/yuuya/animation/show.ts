@@ -2,19 +2,18 @@ import { all } from "../../../../animation/all";
 import { Animate } from "../../../../animation/animate";
 import { onStart } from "../../../../animation/on-start";
 import { tween } from "../../../../animation/tween";
-import type { YuuyaModel } from "../model/yuuya-model";
-import { YuuyaSounds } from "../sounds/yuuya-sounds";
+import { YuuyaCutInAnimationProps } from "./animation-props";
 
 /** アニメ時間 */
 const duration = 400;
 
 /**
  * カットインを表示する
- * @param model モデル
- * @param sounds 効果音
- * @return アニメーション
+ * @param props アニメーションプロパティ
+ * @returns アニメーション
  */
-export function show(model: YuuyaModel, sounds: YuuyaSounds): Animate {
+export function show(props: YuuyaCutInAnimationProps): Animate {
+  const { model, sounds, se } = props;
   return onStart(() => {
     model.opacity = 0;
     model.position.x = -25;
@@ -41,7 +40,7 @@ export function show(model: YuuyaModel, sounds: YuuyaSounds): Animate {
     )
     .chain(
       onStart(() => {
-        sounds.benefitEffect.play();
+        se.play(sounds.benefitEffect);
       }),
     );
 }

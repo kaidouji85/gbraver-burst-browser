@@ -27,7 +27,7 @@ export type ShinBraverBattle<RESULT extends BattleResult> =
  * アタッカーにフォーカスを合わせる
  * @param camera カメラ
  * @param attacker スプライト
- * @return アニメーション
+ * @returns アニメーション
  */
 function focusToAttacker(camera: TDCamera, attacker: ShinBraver): Animate {
   const duration = 400;
@@ -43,7 +43,7 @@ type AttackResult = NormalHit | CriticalHit;
 /**
  * 攻撃ヒット
  * @param param パラメータ
- * @return アニメーション
+ * @returns アニメーション
  */
 function attack(param: ShinBraverBattle<AttackResult>): Animate {
   return all(
@@ -68,7 +68,7 @@ function attack(param: ShinBraverBattle<AttackResult>): Animate {
 /**
  * ガード
  * @param param パラメータ
- * @return アニメーション
+ * @returns アニメーション
  */
 function guard(param: ShinBraverBattle<Guard>): Animate {
   return param.attackerSprite
@@ -91,7 +91,7 @@ function guard(param: ShinBraverBattle<Guard>): Animate {
 /**
  * ミス
  * @param param パラメータ
- * @return アニメーション
+ * @returns アニメーション
  */
 function miss(param: ShinBraverBattle<Miss>): Animate {
   return param.attackerSprite
@@ -107,7 +107,7 @@ function miss(param: ShinBraverBattle<Miss>): Animate {
 /**
  * フェイント
  * @param param パラメータ
- * @return アニメーション
+ * @returns アニメーション
  */
 function feint(param: ShinBraverBattle<Feint>): Animate {
   if (!param.result.isDefenderMoved) {
@@ -123,7 +123,7 @@ type DownResult = NormalHit | CriticalHit | Guard;
 /**
  * とどめ
  * @param param パラメータ
- * @return アニメーション
+ * @returns アニメーション
  */
 function down(param: ShinBraverBattle<DownResult>): Animate {
   return all(
@@ -152,7 +152,7 @@ function down(param: ShinBraverBattle<DownResult>): Animate {
 /**
  * シンブレイバーの攻撃アニメーション
  * @param param パラメータ
- * @return アニメーション
+ * @returns アニメーション
  */
 export function shinBraverAttack(
   param: ShinBraverBattle<BattleResult>,

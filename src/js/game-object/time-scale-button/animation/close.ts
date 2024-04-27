@@ -1,17 +1,17 @@
 import type { Animate } from "../../../animation/animate";
 import { onStart } from "../../../animation/on-start";
 import { tween } from "../../../animation/tween";
-import type { TimeScaleButtonModel } from "../model/time-scale-button-model";
+import { TimeScaleAnimationProps } from "./animation-props";
 
 /**
  * ボタンを非表示にする
- *
- * @param model モデル
- * @return アニメーション
+ * @param props アニメーションプロパティ
+ * @returns アニメーション
  */
-export function close(model: TimeScaleButtonModel): Animate {
+export function close(props: TimeScaleAnimationProps): Animate {
+  const { model } = props;
   return onStart(() => {
-    model.isPushNotifierDisabled = true;
+    model.shouldPushNotifierStop = true;
     model.opacity = 1;
   }).chain(
     tween(model, (t) =>

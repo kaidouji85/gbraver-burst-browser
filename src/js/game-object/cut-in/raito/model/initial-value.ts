@@ -3,7 +3,7 @@ import type { RaitoModel } from "./raito-model";
 /**
  * モデルの初期値を生成する
  *
- * @return モデルの初期値
+ * @returns モデルの初期値
  */
 export function createInitialValue(): RaitoModel {
   return {

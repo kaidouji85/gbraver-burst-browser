@@ -7,28 +7,32 @@ import type { GameObjectAction } from "../action/game-object-action";
 import { change } from "./animation/change";
 import { hidden } from "./animation/hidden";
 import { show } from "./animation/show";
-import type { BatteryNumberModel } from "./model/battery-number-model";
-import { createInitialValue } from "./model/initial-value";
-import type { BatteryNumberView } from "./view/battery-number-view";
+import { BatteryNumberProps } from "./props/battery-number-props";
+import {
+  createBatteryNumberProps,
+  PropsCreatorParams,
+} from "./props/create-battery-number-props";
+
+/** コンストラクタのパラメータ */
+type BatteryNumberParams = PropsCreatorParams & {
+  /** ゲームオブジェクトアクション */
+  gameObjectAction: Observable<GameObjectAction>;
+};
 
 /** バッテリー数字 */
 export class BatteryNumber {
-  #model: BatteryNumberModel;
-  #view: BatteryNumberView;
+  /** プロパティ */
+  #props: BatteryNumberProps;
+  /** アンサブスクライバ */
   #unsubscriber: Unsubscribable;
 
   /**
    * コンストラクタ
-   *
-   * @param view ビュー
-   * @param gameObjectAction ゲームオブジェクトアクション
+   * @param params パラメータ
    */
-  constructor(
-    view: BatteryNumberView,
-    gameObjectAction: Observable<GameObjectAction>,
-  ) {
-    this.#model = createInitialValue();
-    this.#view = view;
+  constructor(params: BatteryNumberParams) {
+    const { gameObjectAction } = params;
+    this.#props = createBatteryNumberProps(params);
     this.#unsubscriber = gameObjectAction.subscribe((action) => {
       if (action.type === "Update") {
         this.#update();
@@ -40,7 +44,7 @@ export class BatteryNumber {
 
   /** デストラクタ */
   destructor(): void {
-    this.#view.destructor();
+    this.#props.view.destructor();
     this.#unsubscriber.unsubscribe();
   }
 
@@ -48,43 +52,43 @@ export class BatteryNumber {
    * バッテリー数字を表示する
    *
    * @param battery バッテリー値
-   * @return アニメーション
+   * @returns アニメーション
    */
   show(battery: number): Animate {
-    return show(this.#model, battery);
+    return show(this.#props, battery);
   }
 
   /**
    * 数字を変更する
    *
    * @param battery 変更する値
-   * @return アニメーション
+   * @returns アニメーション
    */
   change(battery: number): Animate {
-    return change(this.#model, battery);
+    return change(this.#props, battery);
   }
 
   /**
    * バッテリー数字を消す
    *
-   * @return アニメーション
+   * @returns アニメーション
    */
   hidden(): Animate {
-    return hidden(this.#model);
+    return hidden(this.#props);
   }
 
   /** シーンに追加するオブジェクトを返す */
   getObject3D(): THREE.Object3D {
-    return this.#view.getObject3D();
+    return this.#props.view.getObject3D();
   }
 
   /** 状態更新 */
   #update(): void {
-    this.#view.engage(this.#model);
+    this.#props.view.engage(this.#props.model);
   }
 
   /** プリレンダー */
   #preRender(action: PreRender): void {
-    this.#view.lookAt(action.camera);
+    this.#props.view.lookAt(action.camera);
   }
 }

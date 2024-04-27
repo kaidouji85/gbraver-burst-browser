@@ -13,16 +13,16 @@ export default {
  * @param number エピソード番号
  * @param title タイトル
  * @param armdozerId アームドーザID
- * @return ストーリー
+ * @returns ストーリー
  */
 const episodeTitleStory = (
   number: EpisodeNumber,
   title: string,
   armdozerId: ArmdozerId,
 ) =>
-  domStub((resources) => {
+  domStub((params) => {
     const scene = new EpisodeTitle({
-      resources,
+      ...params,
       number,
       title,
       armdozerId,

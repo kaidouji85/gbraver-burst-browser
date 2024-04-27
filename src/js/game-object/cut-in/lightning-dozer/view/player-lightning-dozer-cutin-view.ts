@@ -99,7 +99,7 @@ export class PlayerLightningDozerCutInView implements LightningDozerCutInView {
   /**
    * シーンに追加するオブジェクトを取得する
    *
-   * @return シーンに追加するオブジェクト
+   * @returns シーンに追加するオブジェクト
    */
   getObject3D(): THREE.Object3D {
     return this.#group;
@@ -108,7 +108,7 @@ export class PlayerLightningDozerCutInView implements LightningDozerCutInView {
   /**
    * 本クラスに含まれる全メッシュを取得する
    *
-   * @return 取得結果
+   * @returns 取得結果
    */
   #getMeshes(): HorizontalAnimationMesh[] {
     return [this.#cutInUp, this.#cutInDown];
@@ -118,7 +118,7 @@ export class PlayerLightningDozerCutInView implements LightningDozerCutInView {
    * アニメーションタイプに対応したメッシュを返す
    *
    * @param type アニメーションタイプ
-   * @return 対応したメッシュ
+   * @returns 対応したメッシュ
    */
   #getActiveMesh(type: AnimationType): HorizontalAnimationMesh {
     switch (type) {

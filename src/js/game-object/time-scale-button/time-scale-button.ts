@@ -1,45 +1,36 @@
-import * as TWEEN from "@tweenjs/tween.js";
-import { Observable, Subject, Unsubscribable } from "rxjs";
+import { Observable, Unsubscribable } from "rxjs";
 import * as THREE from "three";
 
 import type { Animate } from "../../animation/animate";
 import type { PreRender } from "../../game-loop/pre-render";
 import type { Update } from "../../game-loop/update";
-import type { Resources } from "../../resource";
-import type { GameObjectAction } from "../action/game-object-action";
 import { close } from "./animation/close";
 import { open } from "./animation/open";
 import { toggle } from "./animation/toggle";
-import { createInitialValue } from "./model/initial-value";
 import { getNextTimeScale } from "./model/next-time-scale";
-import type { TimeScaleButtonModel } from "./model/time-scale-button-model";
-import type { TimeScaleButtonSounds } from "./sounds/time-scale-sounds";
-import { createTimeScaleButtonSounds } from "./sounds/time-scale-sounds";
-import { TimeScaleButtonView } from "./view/time-scale-button-view";
+import {
+  createTimeScaleButtonProps,
+  PropsCreatorParams,
+} from "./props/create-time-scale-button-props";
+import { TimeScaleButtonProps } from "./props/time-scale-button-props";
+
+/** コンストラクタのパラメータ */
+type TimeScaleButtonParams = PropsCreatorParams;
 
 /** アニメーションタイムスケールボタン */
 export class TimeScaleButton {
-  #model: TimeScaleButtonModel;
-  #view: TimeScaleButtonView;
-  #sounds: TimeScaleButtonSounds;
-  #toggleTween: TWEEN.Group;
-  #toggle: Subject<number>;
+  /** プロパティ */
+  #props: TimeScaleButtonProps;
+  /** アンサブスクライバ */
   #unsubscribers: Unsubscribable[];
 
   /**
    * コンストラクタ
-   * @param resources リソース管理オブジェクト
-   * @param gameObjectAction ゲームオブジェクトアクション
+   * @param params パラメータ
    */
-  constructor(
-    resources: Resources,
-    gameObjectAction: Observable<GameObjectAction>,
-  ) {
-    this.#model = createInitialValue();
-    this.#view = new TimeScaleButtonView(resources, gameObjectAction);
-    this.#sounds = createTimeScaleButtonSounds(resources);
-    this.#toggleTween = new TWEEN.Group();
-    this.#toggle = new Subject();
+  constructor(params: TimeScaleButtonParams) {
+    const { gameObjectAction } = params;
+    this.#props = createTimeScaleButtonProps(params);
     this.#unsubscribers = [
       gameObjectAction.subscribe((action) => {
         if (action.type === "Update") {
@@ -48,7 +39,7 @@ export class TimeScaleButton {
           this.#onPreRender(action);
         }
       }),
-      this.#view.notifyPressed().subscribe(() => {
+      this.#props.view.notifyPressed().subscribe(() => {
         this.#onButtonPush();
       }),
     ];
@@ -58,7 +49,7 @@ export class TimeScaleButton {
    * デストラクタ相当の処理
    */
   destructor(): void {
-    this.#view.destructor();
+    this.#props.view.destructor();
     this.#unsubscribers.forEach((v) => {
       v.unsubscribe();
     });
@@ -66,18 +57,18 @@ export class TimeScaleButton {
 
   /**
    * シーンに追加するオブジェクトを取得する
-   * @return シーンに追加するオブジェクト
+   * @returns シーンに追加するオブジェクト
    */
   getObject3D(): THREE.Object3D {
-    return this.#view.getObject3D();
+    return this.#props.view.getObject3D();
   }
 
   /**
    * タイムスケール変更通知
-   * @return 通知ストリーム
+   * @returns 通知ストリーム
    */
   notifyToggled(): Observable<number> {
-    return this.#toggle;
+    return this.#props.toggleNotify;
   }
 
   /**
@@ -85,32 +76,32 @@ export class TimeScaleButton {
    * @param isDisabled trueで操作不可能
    */
   disabled(isDisabled: boolean): void {
-    this.#model.disabled = isDisabled;
+    this.#props.model.disabled = isDisabled;
   }
 
   /**
    * 操作不可能であるか否かを判定する
-   * @return trueで操作不可能
+   * @returns trueで操作不可能
    */
   isDisabled(): boolean {
-    return this.#model.disabled;
+    return this.#props.model.disabled;
   }
 
   /**
    * ボタンを表示する
    * @param timeScale タイムスケール値
-   * @return アニメーション
+   * @returns アニメーション
    */
   open(timeScale: number): Animate {
-    return open(this.#model, timeScale);
+    return open(this.#props, timeScale);
   }
 
   /**
    * ボタンを非表示にする
-   * @return アニメーション
+   * @returns アニメーション
    */
   close(): Animate {
-    return close(this.#model);
+    return close(this.#props);
   }
 
   /**
@@ -118,7 +109,7 @@ export class TimeScaleButton {
    * @param action アクション
    */
   #onUpdate(action: Update): void {
-    this.#toggleTween.update(action.time);
+    this.#props.toggleTween.update(action.time);
   }
 
   /**
@@ -126,21 +117,22 @@ export class TimeScaleButton {
    * @param action アクション
    */
   #onPreRender(action: PreRender): void {
-    this.#view.engage(this.#model, action);
+    this.#props.view.engage(this.#props.model, action);
   }
 
   /**
    * ボタン押下時の処理
    */
   #onButtonPush(): void {
-    if (this.#model.isPushNotifierDisabled || this.#model.disabled) {
+    const { model, toggleTween, toggleNotify } = this.#props;
+    if (model.shouldPushNotifierStop || model.disabled) {
       return;
     }
 
-    this.#toggleTween.update();
-    this.#toggleTween.removeAll();
-    const nextTimeScale = getNextTimeScale(this.#model.timeScale);
-    toggle(this.#model, this.#sounds, this.#toggleTween, nextTimeScale).play();
-    this.#toggle.next(nextTimeScale);
+    toggleTween.update();
+    toggleTween.removeAll();
+    const nextTimeScale = getNextTimeScale(model.timeScale);
+    toggle(this.#props, toggleTween, nextTimeScale).play();
+    toggleNotify.next(nextTimeScale);
   }
 }

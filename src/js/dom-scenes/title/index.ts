@@ -33,7 +33,7 @@ export class Title implements DOMScene {
   /**
    * ログインボタン押下通知
    *
-   * @return イベント通知ストリーム
+   * @returns イベント通知ストリーム
    */
   notifyLogin(): Observable<void> {
     return this.#props.pushLogin;
@@ -42,7 +42,7 @@ export class Title implements DOMScene {
   /**
    * アカウント削除ボタン押下通知
    *
-   * @return イベント通知ストリーム
+   * @returns イベント通知ストリーム
    */
   notifyAccountDeletion(): Observable<void> {
     return this.#props.pushDeleteAccount;
@@ -51,7 +51,7 @@ export class Title implements DOMScene {
   /**
    * ログアウトボタン押下通知
    *
-   * @return イベント通知ストリーム
+   * @returns イベント通知ストリーム
    */
   notifyLogout(): Observable<void> {
     return this.#props.pushLogout;
@@ -60,7 +60,7 @@ export class Title implements DOMScene {
   /**
    * チュートリアルボタン押下通知
    *
-   * @return イベント通知ストリーム
+   * @returns イベント通知ストリーム
    */
   notifyTutorial(): Observable<void> {
     return this.#props.pushTutorial;
@@ -69,7 +69,7 @@ export class Title implements DOMScene {
   /**
    * アーケードボタン押下通知
    *
-   * @return イベント通知ストリーム
+   * @returns イベント通知ストリーム
    */
   notifyArcade(): Observable<void> {
     return this.#props.pushArcade;
@@ -78,7 +78,7 @@ export class Title implements DOMScene {
   /**
    * ネット対戦ボタン押下通知
    *
-   * @return イベント通知ストリーム
+   * @returns イベント通知ストリーム
    */
   notifyNetBattle(): Observable<void> {
     return this.#props.pushNetBattle;
@@ -87,7 +87,7 @@ export class Title implements DOMScene {
   /**
    * 設定ボタン押下通知
    *
-   * @return イベント通知ストリーム
+   * @returns イベント通知ストリーム
    */
   notifyConfig(): Observable<void> {
     return this.#props.pushConfig;
@@ -96,7 +96,7 @@ export class Title implements DOMScene {
   /**
    * ルートHTML要素を取得する
    *
-   * @return 取得結果
+   * @returns 取得結果
    */
   getRootHTMLElement(): HTMLElement {
     return this.#props.root;
@@ -105,7 +105,7 @@ export class Title implements DOMScene {
   /**
    * 各種リソースの読み込みが完了するまで待つ
    *
-   * @return 待機結果
+   * @returns 待機結果
    */
   async waitUntilLoaded(): Promise<void> {
     await Promise.all([

@@ -1,42 +1,26 @@
-import type { Player, PlayerId } from "gbraver-burst-core";
-import { Observable } from "rxjs";
+import { PlayerId } from "gbraver-burst-core";
 import * as THREE from "three";
 
-import type { GameObjectAction } from "../../../../../game-object/action/game-object-action";
-import type { ArmdozerSprite } from "../../../../../game-object/armdozer/armdozer-sprite";
+import { ArmdozerSprite } from "../../../../../game-object/armdozer/armdozer-sprite";
 import {
   EnemyGenesisBraver,
   PlayerGenesisBraver,
 } from "../../../../../game-object/armdozer/genesis-braver";
 import { GenesisBraver } from "../../../../../game-object/armdozer/genesis-braver/genesis-braver";
-import type { Resources } from "../../../../../resource";
-import type { TDArmdozerObjects } from "./armdozer-objects";
-
-/** ジェネシスブレイバー 3Dレイヤー フィールド */
-interface GenesisBraverTDField {
-  /** スプライト */
-  genesisBraver: GenesisBraver;
-}
+import { TDLayerObjectCreatorParams } from "../creator-params";
+import { TDArmdozerObjects } from "./armdozer-objects";
 
 /** ジェネシスブレイバー 3Dレイヤー */
-export class GenesisBraverTD
-  implements GenesisBraverTDField, TDArmdozerObjects
-{
-  /** @override */
-  playerId: PlayerId;
-
-  /** @override */
-  genesisBraver: GenesisBraver;
-
+export class GenesisBraverTD implements TDArmdozerObjects {
   /**
    * コンストラクタ
    * @param playerId プレイヤーID
-   * @param field フィールド
+   * @param genesisBraver スプライト
    */
-  constructor(playerId: PlayerId, field: GenesisBraverTDField) {
-    this.playerId = playerId;
-    this.genesisBraver = field.genesisBraver;
-  }
+  constructor(
+    readonly playerId: PlayerId,
+    readonly genesisBraver: GenesisBraver,
+  ) {}
 
   /** @override */
   destructor(): void {
@@ -56,34 +40,24 @@ export class GenesisBraverTD
 
 /**
  * プレイヤー ジェネシスブレイバー 3Dレイヤー
- * @param resources リソース管理オブジェクト
- * @param gameObjectAction ゲームオブジェクトアクション
- * @param state プレイヤー情報
- * @return 生成結果
+ * @param params 生成パラメータ
+ * @returns 生成結果
  */
 export function playerGenesisBraverTD(
-  resources: Resources,
-  gameObjectAction: Observable<GameObjectAction>,
-  state: Player,
+  params: TDLayerObjectCreatorParams,
 ): GenesisBraverTD {
-  return new GenesisBraverTD(state.playerId, {
-    genesisBraver: PlayerGenesisBraver(resources, gameObjectAction),
-  });
+  const { player } = params;
+  return new GenesisBraverTD(player.playerId, PlayerGenesisBraver(params));
 }
 
 /**
  * 敵 ジェネシスブレイバー 3Dレイヤー
- * @param resources リソース管理オブジェクト
- * @param gameObjectAction ゲームオブジェクトアクション
- * @param state プレイヤー情報
- * @return 生成結果
+ * @param params 生成パラメータ
+ * @returns 生成結果
  */
 export function enemyGenesisBraverTD(
-  resources: Resources,
-  gameObjectAction: Observable<GameObjectAction>,
-  state: Player,
+  params: TDLayerObjectCreatorParams,
 ): GenesisBraverTD {
-  return new GenesisBraverTD(state.playerId, {
-    genesisBraver: EnemyGenesisBraver(resources, gameObjectAction),
-  });
+  const { enemy } = params;
+  return new GenesisBraverTD(enemy.playerId, EnemyGenesisBraver(params));
 }

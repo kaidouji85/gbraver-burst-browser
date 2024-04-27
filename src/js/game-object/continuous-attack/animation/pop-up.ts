@@ -2,24 +2,19 @@ import { Animate } from "../../../animation/animate";
 import { delay } from "../../../animation/delay";
 import { onStart } from "../../../animation/on-start";
 import { tween } from "../../../animation/tween";
-import type { ContinuousAttackModel } from "../model/continuous-attack-model";
-import { ContinuousAttackSounds } from "../sounds/continuous-attack-sounds";
+import { ContinuousAttackAnimationProps } from "./animation-props";
 
 /**
  * ポップアップ
- *
- * @param model モデル
- * @param sounds 効果音
- * @return アニメーション
+ * @param props アニメーションプロパティ
+ * @returns アニメーション
  */
-export function popUp(
-  model: ContinuousAttackModel,
-  sounds: ContinuousAttackSounds,
-): Animate {
+export function popUp(props: ContinuousAttackAnimationProps): Animate {
+  const { model, sounds, se } = props;
   return onStart(() => {
     model.opacity = 0;
     model.scale = 1.2;
-    sounds.benefitEffect.play();
+    se.play(sounds.benefitEffect);
   })
     .chain(
       tween(model, (t) =>

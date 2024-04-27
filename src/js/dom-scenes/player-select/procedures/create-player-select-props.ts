@@ -1,7 +1,8 @@
 import { ArmdozerId, ArmdozerIds, PilotId, PilotIds } from "gbraver-burst-core";
 import { Subject } from "rxjs";
 
-import { Resources } from "../../../resource";
+import { ResourcesContainer } from "../../../resource";
+import { SEPlayerContainer } from "../../../se/se-player";
 import { domUuid } from "../../../uuid/dom-uuid";
 import { ArmdozerBustShotContainer } from "../armdozer-bust-shot";
 import { ArmdozerSelector } from "../armdozer-selector";
@@ -13,19 +14,18 @@ import { PlayerDecide } from "../player-decide";
 import { PlayerSelectProps } from "../props";
 
 /** 生成パラメータ */
-export type CreatePlayerSelectPropsParams = {
-  /** ソース管理オブジェクト */
-  resources: Resources;
-  /** プレイアブルなアームドーザのID */
-  armdozerIds: ArmdozerId[];
-  /** プレイアブルなパイロットのID */
-  pilotIds: PilotId[];
-};
+export type CreatePlayerSelectPropsParams = ResourcesContainer &
+  SEPlayerContainer & {
+    /** プレイアブルなアームドーザのID */
+    armdozerIds: ArmdozerId[];
+    /** プレイアブルなパイロットのID */
+    pilotIds: PilotId[];
+  };
 
 /**
  * プレイヤーセレクト画面プロパティを生成する
  * @param params パラメータ
- * @return 生成結果
+ * @returns 生成結果
  */
 export function createPlayerSelectProps(
   params: CreatePlayerSelectPropsParams,
@@ -60,14 +60,17 @@ export function createPlayerSelectProps(
   pilotBustShot.hidden();
   elements.working.appendChild(pilotBustShot.getRootHTMLElement());
 
-  const armdozerSelector = new ArmdozerSelector(
-    resources,
-    armdozerIds,
-    armdozerId,
-  );
+  const armdozerSelector = new ArmdozerSelector({
+    ...params,
+    initialArmdozerId: armdozerId,
+  });
   elements.selector.appendChild(armdozerSelector.getRootHTMLElement());
 
-  const pilotSelector = new PilotSelector(resources, pilotIds, pilotId);
+  const pilotSelector = new PilotSelector({
+    ...params,
+    pilotIds,
+    initialPilotId: pilotId,
+  });
   pilotSelector.hidden();
   elements.selector.appendChild(pilotSelector.getRootHTMLElement());
 

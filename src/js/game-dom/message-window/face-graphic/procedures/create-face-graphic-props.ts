@@ -6,7 +6,7 @@ import { FaceGraphicProps } from "../props";
 /**
  * FaceGraphicPropsを生成する
  * @param resources リソース管理オブジェクト
- * @return 生成結果
+ * @returns 生成結果
  */
 export function createFaceGraphicProps(resources: Resources): FaceGraphicProps {
   const root = document.createElement("div");

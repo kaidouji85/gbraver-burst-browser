@@ -5,7 +5,7 @@ import { ConfrontationTwoBraverProps } from "../../props";
 /**
  * チャプター「生き延びるためにユウヤがスキルを発動する」を終了するか判定する
  * @param props イベントプロパティ
- * @return trueで終了する
+ * @returns trueで終了する
  */
 export function isYuuyaActivateSkillToSurviveEnd(
   props: Readonly<CustomBattleEventProps & ConfrontationTwoBraverProps>,

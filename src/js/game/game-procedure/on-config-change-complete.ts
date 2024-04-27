@@ -1,8 +1,8 @@
 import { isSoundConfigChanged } from "../config/config-changed";
 import { ConfigChangeComplete } from "../game-actions/config-change-complete";
 import type { GameProps } from "../game-props";
-import { reflectSoundVolume } from "../reflect-sound-volume";
 import { reflectPerformanceStatsVisibility } from "./reflect-performance-stats-visibility";
+import { reflectSoundVolume } from "./reflect-sound-volume";
 import { startTitle } from "./start-title";
 
 /**
@@ -10,7 +10,7 @@ import { startTitle } from "./start-title";
  *
  * @param props ゲームプロパティ
  * @param action アクション
- * @return 処理が完了したら発火するPromise
+ * @returns 処理が完了したら発火するPromise
  */
 export async function onConfigChangeComplete(
   props: Readonly<GameProps>,
@@ -18,14 +18,20 @@ export async function onConfigChangeComplete(
 ): Promise<void> {
   await props.fader.fadeOut();
   const origin = await props.config.load();
-  isSoundConfigChanged(origin, action.config) &&
-    reflectSoundVolume(props.resources, action.config);
-  origin.performanceStatsVisibility !==
-    action.config.performanceStatsVisibility &&
+  if (isSoundConfigChanged(origin, action.config)) {
+    await reflectSoundVolume(props, action.config);
+  }
+
+  if (
+    origin.performanceStatsVisibility !==
+    action.config.performanceStatsVisibility
+  ) {
     reflectPerformanceStatsVisibility(
       props,
       action.config.performanceStatsVisibility,
     );
+  }
+
   await props.config.save(action.config);
   await startTitle(props);
   await props.fader.fadeIn();

@@ -1,30 +1,40 @@
-import { waitFinishAnimation } from "../../../dom/wait-finish-animation";
-import { waitElementLoaded } from "../../../wait/wait-element-loaded";
+import { PilotId } from "gbraver-burst-core";
 
-/**
- * パイロットバストショット
- */
+import { waitFinishAnimation } from "../../../dom/wait-finish-animation";
+import { getPilotSkillCutinPathId } from "../../../path/pilot-skill-cutin-path";
+import { Resources } from "../../../resource";
+import { waitElementLoaded } from "../../../wait/wait-element-loaded";
+import { getPilotBustShotClassName } from "./class-name";
+
+/** パイロットバストショット */
 export class PilotBustShot {
+  /** パイロットID */
+  pilotId: PilotId;
+  /** 画像要素 */
   #image: HTMLImageElement;
+  /** 画像が読みこみ完了したら発火するPromise */
   #isLoaded: Promise<void>;
 
   /**
    * コンストラクタ
-   *
-   * @param path 画像パス
-   * @param className cssクラス名
+   * @param resources リソース管理オブジェクト
+   * @param pilotId パイロットID
    */
-  constructor(path: string, className: string) {
+  constructor(resources: Resources, pilotId: PilotId) {
+    this.pilotId = pilotId;
+
     this.#image = document.createElement("img");
-    this.#image.src = path;
-    this.#image.className = className;
+    this.#image.src =
+      resources.paths.find((p) => p.id === getPilotSkillCutinPathId(pilotId))
+        ?.path ?? "";
+    this.#image.className = getPilotBustShotClassName(pilotId);
+
     this.#isLoaded = waitElementLoaded(this.#image);
   }
 
   /**
    * ルートHTML要素を取得する
-   *
-   * @return ルートHTML要素
+   * @returns ルートHTML要素
    */
   getRootHTMLElement(): HTMLElement {
     return this.#image;
@@ -32,8 +42,7 @@ export class PilotBustShot {
 
   /**
    * 読み込みが完了するまで待つ
-   *
-   * @return 待機結果
+   * @returns 待機結果
    */
   waitUntilLoaded(): Promise<void> {
     return this.#isLoaded;
@@ -55,8 +64,7 @@ export class PilotBustShot {
 
   /**
    * 入場
-   *
-   * @return アニメーション
+   * @returns アニメーション
    */
   enter(): Promise<void> {
     const animation = this.#image.animate(
@@ -79,8 +87,7 @@ export class PilotBustShot {
 
   /**
    * 退場
-   *
-   * @return アニメーション
+   * @returns アニメーション
    */
   exit(): Promise<void> {
     const animation = this.#image.animate(

@@ -1,37 +1,37 @@
 import { Observable } from "rxjs";
 
-import type { Resources } from "../../../resource";
+import type { ResourcesContainer } from "../../../resource";
+import { SEPlayerContainer } from "../../../se/se-player";
 import type { GameObjectAction } from "../../action/game-object-action";
 import { RaitoCutIn } from "./raito";
 import { EnemyRaitoView } from "./view/enemy-raito-view";
 import { PlayerRaitoView } from "./view/player-raito-view";
 
+/** 生成パラメータ */
+export type RaitoCutInCreatorParams = ResourcesContainer &
+  SEPlayerContainer & {
+    /** ゲームオブジェクトアクション */
+    gameObjectAction: Observable<GameObjectAction>;
+  };
+
 /**
  * プレイヤー側 ライト カットイン
- *
- * @param resources リソース管理オブジェクト
- * @param gameObjectAction ゲームオブジェクトアクション
- * @return ライト カットイン
+ * @param params 生成パラメータ
+ * @returns ライト カットイン
  */
-export function playerRaitoCutIn(
-  resources: Resources,
-  gameObjectAction: Observable<GameObjectAction>,
-): RaitoCutIn {
+export function playerRaitoCutIn(params: RaitoCutInCreatorParams): RaitoCutIn {
+  const { resources } = params;
   const view = new PlayerRaitoView(resources);
-  return new RaitoCutIn(view, resources, gameObjectAction);
+  return new RaitoCutIn({ ...params, view });
 }
 
 /**
  * 敵側 ライト カットイン
- *
- * @param resources リソース管理オブジェクト
- * @param gameObjectAction ゲームオブジェクトアクション
- * @return ライト カットイン
+ * @param params 生成パラメータ
+ * @returns ライト カットイン
  */
-export function enemyRaitoCutIn(
-  resources: Resources,
-  gameObjectAction: Observable<GameObjectAction>,
-): RaitoCutIn {
+export function enemyRaitoCutIn(params: RaitoCutInCreatorParams): RaitoCutIn {
+  const { resources } = params;
   const view = new EnemyRaitoView(resources);
-  return new RaitoCutIn(view, resources, gameObjectAction);
+  return new RaitoCutIn({ ...params, view });
 }

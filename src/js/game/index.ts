@@ -9,7 +9,7 @@ import {
 } from "./game-props/generate-game-props";
 
 /** コンストラクタのパラメータ */
-type Param = GamePropsGeneratorParam;
+type GameParam = GamePropsGeneratorParam;
 
 /** ゲーム管理オブジェクト */
 export class Game {
@@ -20,7 +20,7 @@ export class Game {
    * コンストラクタ
    * @param param パラメータ
    */
-  constructor(param: Param) {
+  constructor(param: GameParam) {
     this.#props = generateGameProps(param);
     appendChildrenToBody(this.#props);
     const gameActionNotifier = createGameActionNotifier(this.#props);
@@ -31,7 +31,7 @@ export class Game {
 
   /**
    * ゲームの初期化を行う
-   * @return 処理が完了したら発火するPromise
+   * @returns 処理が完了したら発火するPromise
    */
   async initialize(): Promise<void> {
     await initialize(this.#props);

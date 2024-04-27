@@ -1,9 +1,7 @@
-import type { Resources } from "../../../../resource";
-import type { SoundResource } from "../../../../resource/sound";
-import {
-  createEmptySoundResource,
-  SOUND_IDS,
-} from "../../../../resource/sound";
+import { ResourcesContainer } from "../../../../resource";
+import { createEmptySoundResource } from "../../../../resource/sound/empty-sound-resource";
+import { SOUND_IDS } from "../../../../resource/sound/ids";
+import { SoundResource } from "../../../../resource/sound/resource";
 
 /** ジェネシスブレイバー 効果音 */
 export type GenesisBraverSounds = {
@@ -11,14 +9,18 @@ export type GenesisBraverSounds = {
   motor: SoundResource;
 };
 
+/** 生成パラメータ */
+type CreatorParams = ResourcesContainer;
+
 /**
  * ジェネシスブレイバー効果音を生成する
- * @param resources リソース管理オブジェクト
- * @return 生成結果
+ * @param params 生成パラメータ
+ * @returns 生成結果
  */
 export function createGenesisBraverSounds(
-  resources: Resources,
+  params: CreatorParams,
 ): GenesisBraverSounds {
+  const { resources } = params;
   const motor =
     resources.sounds.find((v) => v.id === SOUND_IDS.MOTOR) ??
     createEmptySoundResource();

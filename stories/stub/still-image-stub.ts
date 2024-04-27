@@ -2,7 +2,7 @@ import { Observable, Subject } from "rxjs";
 import * as THREE from "three";
 
 import type { GameObjectAction } from "../../src/js/game-object/action/game-object-action";
-import type { Resources } from "../../src/js/resource";
+import type { ResourcesContainer } from "../../src/js/resource";
 import { developingFullResourceLoading } from "../../src/js/resource/loading/full-resource-loading";
 import { StorybookResourceRoot } from "../storybook-resource-root";
 
@@ -55,10 +55,7 @@ type Object3Ds = {
 };
 
 /** three.jsオブジェクトジェネレータのパラメータ */
-export type Object3DsGeneratorParams = {
-  /** リソース管理オブジェクト */
-  resources: Resources;
-
+export type Object3DsGeneratorParams = ResourcesContainer & {
   /** 空のゲームオブジェクトアクション */
   emptyGameObjectAction: Observable<GameObjectAction>;
 };
@@ -67,7 +64,7 @@ export type Object3DsGeneratorParams = {
  * three.jsオブジェクトジェネレータ
  *
  * @param params パラメータ
- * @return スタブに追加するオブジェクト群
+ * @returns スタブに追加するオブジェクト群
  */
 export type Object3DsGenerator = (
   params: Object3DsGeneratorParams,
@@ -89,7 +86,7 @@ type StubParams = {
  * 静止画スタブ
  *
  * @param params パラメータ
- * @return storybookが利用するHTMLElement
+ * @returns storybookが利用するHTMLElement
  */
 export function stillImageStub(params: StubParams): HTMLElement {
   const renderer = new THREE.WebGLRenderer();

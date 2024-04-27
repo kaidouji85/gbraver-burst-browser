@@ -1,14 +1,13 @@
 import { Observable, Unsubscribable } from "rxjs";
 
-import type { TDScene } from "../td-scene";
-import type {
-  BattleEnd,
-  BattleSceneProps,
-  BattleScenePropsCreatorParams,
-} from "./battle-scene-props";
-import { createBattleSceneProps } from "./battle-scene-props";
+import { TDScene } from "../td-scene";
 import { bindEventListeners } from "./procedure/bind-event-listeners";
+import {
+  BattleScenePropsCreatorParams,
+  createBattleSceneProps,
+} from "./procedure/create-battle-scene-props";
 import { start } from "./procedure/start";
+import { BattleEnd, BattleSceneProps } from "./props";
 
 /** コンストラクタのパラメータ */
 type BattleSceneParams = BattleScenePropsCreatorParams & {
@@ -57,7 +56,7 @@ export class BattleScene implements TDScene {
 
   /**
    * ゲーム終了通知
-   * @return 通知ストリーム
+   * @returns 通知ストリーム
    */
   gameEndNotifier(): Observable<BattleEnd> {
     return this.#props.endBattle;
@@ -66,7 +65,7 @@ export class BattleScene implements TDScene {
   /**
    * 戦闘シーンを開始する
    * 画面遷移などが完了したら、本メソッドを呼ぶ想定
-   * @return 処理が完了したら発火するPromise
+   * @returns 処理が完了したら発火するPromise
    */
   async start(): Promise<void> {
     await start(this.#props);

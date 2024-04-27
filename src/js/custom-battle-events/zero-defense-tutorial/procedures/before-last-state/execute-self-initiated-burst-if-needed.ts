@@ -6,7 +6,7 @@ import { selfInitiatedBurst } from "../../stories/self-initiated-burst";
 /**
  * 条件を満たした場合、「自発的にバースト発動」を再生する
  * @param props イベントプロパティ
- * @return ステート更新結果
+ * @returns ステート更新結果
  */
 export async function executeSelfInitiatedBurstIfNeeded(
   props: Readonly<LastState & ZeroDefenseTutorialProps>,

@@ -17,7 +17,7 @@ export const DevelopingPlayableArmdozers: ArmdozerId[] = [...PlayableArmdozers];
 /**
  * プレイアブルアームドーザを取得するヘルパー関数
  * @param props ゲームプロパティ
- * @return 取得結果
+ * @returns 取得結果
  */
 export function getPlayableArmdozers(props: Readonly<GameProps>): ArmdozerId[] {
   return props.canPlayDevelopingArmdozer

@@ -3,38 +3,34 @@ import * as THREE from "three";
 
 import { Animate } from "../../animation/animate";
 import type { PreRender } from "../../game-loop/pre-render";
-import type { Resources } from "../../resource";
 import type { GameObjectAction } from "../action/game-object-action";
 import { popUp } from "./animation/pop-up";
-import { createInitialValue } from "./model/initial-value";
-import type { PowerUpModel } from "./model/power-up-model";
-import { PowerUpSounds } from "./sounds/power-up-sounds";
-import type { PowerUpView } from "./view/power-up-view";
+import {
+  createPowerUpProps,
+  PropsCreatorParams,
+} from "./props/create-power-up-props";
+import { PowerUpProps } from "./props/power-up-props";
 
-/**
- * 攻撃アップ
- */
+/** コンストラクタのパラメータ */
+export type PowerUpParams = PropsCreatorParams & {
+  /** ゲームオブジェクトアクション */
+  gameObjectAction: Observable<GameObjectAction>;
+};
+
+/** 攻撃アップ */
 export class PowerUp {
-  #model: PowerUpModel;
-  #view: PowerUpView;
-  #sounds: PowerUpSounds;
+  /** プロパティ */
+  #props: PowerUpProps;
+  /** アンサブスクライバ */
   #unsubscriber: Unsubscribable;
 
   /**
    * コンストラクタ
-   *
-   * @param view ビュー
-   * @param resources リソース管理オブジェクト
-   * @param gameObjectAction ゲームオブジェクトアクション
+   * @param params パラメータ
    */
-  constructor(
-    view: PowerUpView,
-    resources: Resources,
-    gameObjectAction: Observable<GameObjectAction>,
-  ) {
-    this.#model = createInitialValue();
-    this.#view = view;
-    this.#sounds = new PowerUpSounds(resources);
+  constructor(params: PowerUpParams) {
+    const { gameObjectAction } = params;
+    this.#props = createPowerUpProps(params);
     this.#unsubscriber = gameObjectAction.subscribe((action) => {
       if (action.type === "Update") {
         this.#onUpdate();
@@ -46,33 +42,33 @@ export class PowerUp {
 
   /** デストラクタ相当の処理 */
   destructor(): void {
-    this.#view.destructor();
+    this.#props.view.destructor();
     this.#unsubscriber.unsubscribe();
   }
 
   /**
    * ポップアップ
    *
-   * @return アニメーション
+   * @returns アニメーション
    */
   popUp(): Animate {
-    return popUp(this.#model, this.#sounds);
+    return popUp(this.#props);
   }
 
   /**
    * シーンに追加するオブジェクトを取得する
    *
-   * @return シーンに追加するオブジェクト
+   * @returns シーンに追加するオブジェクト
    */
   getObject3D(): THREE.Object3D {
-    return this.#view.getObject3D();
+    return this.#props.view.getObject3D();
   }
 
   /**
    * アップデート時の処理
    */
   #onUpdate(): void {
-    this.#view.engage(this.#model);
+    this.#props.view.engage(this.#props.model);
   }
 
   /**
@@ -81,6 +77,6 @@ export class PowerUp {
    * @param action アクション
    */
   #onPreRender(action: PreRender): void {
-    this.#view.lookAt(action.camera);
+    this.#props.view.lookAt(action.camera);
   }
 }

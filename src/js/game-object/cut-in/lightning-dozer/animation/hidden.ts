@@ -1,14 +1,14 @@
 import { Animate } from "../../../../animation/animate";
 import { tween } from "../../../../animation/tween";
-import type { LightningDozerCutInModel } from "../model/lightning-dozer-cutin-model";
+import { LightningDozerCutInAnimationProps } from "./animation-props";
 
 /**
  * カットインを非表示にする
- *
- * @param model モデル
- * @return アニメーション
+ * @param props アニメーションプロパティ
+ * @returns アニメーション
  */
-export function hidden(model: LightningDozerCutInModel): Animate {
+export function hidden(props: LightningDozerCutInAnimationProps): Animate {
+  const { model } = props;
   return tween(model, (t) =>
     t.to(
       {

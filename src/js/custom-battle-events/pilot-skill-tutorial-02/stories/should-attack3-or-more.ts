@@ -6,7 +6,7 @@ import { scrollLeftMessages } from "../../scroll-messages";
 /**
  * 3以上で攻撃する
  * @param props イベントプロパティ
- * @return ストーリーが完了したら発火するPromise
+ * @returns ストーリーが完了したら発火するPromise
  */
 export async function shouldAttack3OrMore(
   props: Readonly<CustomBattleEventProps>,

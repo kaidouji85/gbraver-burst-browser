@@ -10,13 +10,13 @@ import type { StateAnimationProps } from "./state-animation-props";
  *
  * @param props 戦闘シーンプロパティ
  * @param gameState ゲームの状態
- * @return アニメーション
+ * @returns アニメーション
  */
 export function startGameAnimation(
   props: StateAnimationProps,
   gameState: GameStateX<StartGame>,
 ): Animate {
-  const activeTDArmdozer = props.view.td.armdozerObjects.find(
+  const activeTDArmdozer = props.view.td.armdozers.find(
     (v) => v.playerId === gameState.activePlayerId,
   );
   const activeHUDPlayer = props.view.hud.players.find(
@@ -30,7 +30,7 @@ export function startGameAnimation(
   return empty().chain(
     delay(800),
     onStart(() => {
-      props.sounds.batteryRecover.play();
+      props.se.play(props.sounds.batteryRecover);
     }),
     activeHUDPlayer.turnStart
       .show()

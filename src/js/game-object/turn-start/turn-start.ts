@@ -3,7 +3,6 @@ import * as THREE from "three";
 
 import { Animate } from "../../animation/animate";
 import type { PreRender } from "../../game-loop/pre-render";
-import type { Resources } from "../../resource";
 import type { GameObjectAction } from "../action/game-object-action";
 import { hidden } from "./animation/hidden";
 import { show } from "./animation/show";
@@ -21,14 +20,11 @@ export class TurnStart {
 
   /**
    * コンストラクタ
-   *
    * @param view ビュー
-   * @param resources リソース管理オブジェクト
    * @param gameObjectAction ゲームオブジェクトアクション
    */
   constructor(
     view: TurnStartView,
-    resources: Resources,
     gameObjectAction: Observable<GameObjectAction>,
   ) {
     this.#model = createInitialValue();
@@ -49,7 +45,7 @@ export class TurnStart {
   /**
    * 表示する
    *
-   * @return アニメーション
+   * @returns アニメーション
    */
   show(): Animate {
     return show(this.#model);
@@ -58,7 +54,7 @@ export class TurnStart {
   /**
    * 非表示にする
    *
-   * @return アニメーション
+   * @returns アニメーション
    */
   hidden(): Animate {
     return hidden(this.#model);
@@ -67,7 +63,7 @@ export class TurnStart {
   /**
    * シーンに追加するオブジェクトを取得する
    *
-   * @return シーンに追加するオブジェクト
+   * @returns シーンに追加するオブジェクト
    */
   getObject3D(): THREE.Object3D {
     return this.#view.getObject3D();

@@ -10,14 +10,14 @@ export default {
   title: "title",
 };
 
-export const guestAccount: DOMStubStory = domStub((resources) => {
+export const guestAccount: DOMStubStory = domStub((params) => {
   const account: GuestAccount = {
     type: "GuestAccount",
   };
   const scene = new Title({
-    resources,
+    ...params,
     account,
-    isApiServerEnable: true,
+    isAPIServerEnable: true,
     howToPlayURL: "how-to-play",
     termsOfServiceURL: "terms-of-service",
     privacyPolicyURL: "privacy-policy",
@@ -26,16 +26,16 @@ export const guestAccount: DOMStubStory = domStub((resources) => {
   return scene.getRootHTMLElement();
 });
 
-export const loggedInAccount: DOMStubStory = domStub((resources) => {
+export const loggedInAccount: DOMStubStory = domStub((params) => {
   const account: LoggedInAccount = {
     type: "LoggedInAccount",
     name: "test-account",
     pictureURL: "test-picture",
   };
   const scene = new Title({
-    resources,
+    ...params,
     account,
-    isApiServerEnable: true,
+    isAPIServerEnable: true,
     howToPlayURL: "how-to-play",
     termsOfServiceURL: "terms-of-service",
     privacyPolicyURL: "privacy-policy",

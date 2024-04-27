@@ -9,13 +9,10 @@ export default {
 };
 
 export const commands = (): HTMLElement => {
-  const stub = new HUDGameObjectStub(({ resources, gameObjectAction }) => {
-    const batterySelector = new BatterySelector({
-      resources: resources,
-      gameObjectAction: gameObjectAction,
-    });
-    const burstButton = shinBraverBurstButton(resources, gameObjectAction);
-    const pilotButton = shinyaPilotButton(resources, gameObjectAction);
+  const stub = new HUDGameObjectStub((params) => {
+    const batterySelector = new BatterySelector(params);
+    const burstButton = shinBraverBurstButton(params);
+    const pilotButton = shinyaPilotButton(params);
     all(
       batterySelector.open({
         initialValue: 1,

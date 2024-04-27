@@ -1,39 +1,25 @@
-import type { Player, PlayerId } from "gbraver-burst-core";
-import { Observable } from "rxjs";
+import { PlayerId } from "gbraver-burst-core";
 import * as THREE from "three";
 
-import type { GameObjectAction } from "../../../../../game-object/action/game-object-action";
 import {
   enemyGenesisBraverCutIn,
   playerGenesisBraverCutIn,
 } from "../../../../../game-object/cut-in/genesis-braver";
 import { GenesisBraverCutIn } from "../../../../../game-object/cut-in/genesis-braver/genesis-braver-cutin";
-import type { Resources } from "../../../../../resource";
-import type { HUDArmdozerObjects } from "./hud-armdozer-ibjects";
-
-/** コンストラクタのパラメータ */
-type Param = {
-  /** プレイヤーID */
-  playerId: PlayerId;
-  /** カットイン */
-  cutIn: GenesisBraverCutIn;
-};
+import { HUDLayerObjectCreatorParams } from "../creator-params";
+import { HUDArmdozerObjects } from "./hud-armdozer-objects";
 
 /** HUDレイヤー ジェネシスブレイバー固有オブジェクト */
 export class GenesisBraverHUD implements HUDArmdozerObjects {
-  /** @override */
-  playerId: PlayerId;
-  /** カットイン */
-  cutIn: GenesisBraverCutIn;
-
   /**
    * コンストラクタ
    * @param param パラメータ
+   * @param cutIn カットイン
    */
-  constructor(param: Param) {
-    this.playerId = param.playerId;
-    this.cutIn = param.cutIn;
-  }
+  constructor(
+    readonly playerId: PlayerId,
+    readonly cutIn: GenesisBraverCutIn,
+  ) {}
 
   /** @override */
   destructor(): void {
@@ -48,36 +34,27 @@ export class GenesisBraverHUD implements HUDArmdozerObjects {
 
 /**
  * プレイヤー ジェネシスブレイバーHUD を生成する
- * @param resources リソース管理オブジェクト
- * @param gameObjectAction ゲームオブジェクトアクション
- * @param state プレイヤーの状態
- * @return 生成結果
+ * @param params 生成パラメータ
+ * @returns 生成結果
  */
 export function playerGenesisBraverHUD(
-  resources: Resources,
-  gameObjectAction: Observable<GameObjectAction>,
-  state: Player,
+  params: HUDLayerObjectCreatorParams,
 ): HUDArmdozerObjects {
-  return new GenesisBraverHUD({
-    playerId: state.playerId,
-    cutIn: playerGenesisBraverCutIn(resources, gameObjectAction),
-  });
+  const { player } = params;
+  return new GenesisBraverHUD(
+    player.playerId,
+    playerGenesisBraverCutIn(params),
+  );
 }
 
 /**
  * 敵 ジェネシスブレイバーHUD を生成する
- * @param resources リソース管理オブジェクト
- * @param gameObjectAction ゲームオブジェクトアクション
- * @param state プレイヤーの状態
- * @return 生成結果
+ * @param params 生成パラメータ
+ * @returns 生成結果
  */
 export function enemyGenesisBraverHUD(
-  resources: Resources,
-  gameObjectAction: Observable<GameObjectAction>,
-  state: Player,
+  params: HUDLayerObjectCreatorParams,
 ): HUDArmdozerObjects {
-  return new GenesisBraverHUD({
-    playerId: state.playerId,
-    cutIn: enemyGenesisBraverCutIn(resources, gameObjectAction),
-  });
+  const { enemy } = params;
+  return new GenesisBraverHUD(enemy.playerId, enemyGenesisBraverCutIn(params));
 }

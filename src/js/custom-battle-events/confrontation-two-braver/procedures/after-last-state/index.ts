@@ -7,7 +7,7 @@ import { playZeroDefenseButPositiveBatteryIfNeeded } from "./play-zero-defense-b
 /**
  * 最終ステート完了後イベント
  * @param props イベントプロパティ
- * @return 処理が完了したら発火するPromise
+ * @returns 処理が完了したら発火するPromise
  */
 export async function afterLastState(
   props: Readonly<LastState>,

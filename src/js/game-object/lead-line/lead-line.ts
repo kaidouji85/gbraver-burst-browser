@@ -60,7 +60,7 @@ export class LeadLine {
   /**
    * 引き出し線を表示する
    * @param model モデル
-   * @return アニメーション
+   * @returns アニメーション
    */
   show(): Animate {
     return show(this.#model);
@@ -69,7 +69,7 @@ export class LeadLine {
   /**
    * 引き出し線を消す
    * @param model モデル
-   * @return アニメーション
+   * @returns アニメーション
    */
   hidden(): Animate {
     return hidden(this.#model);
@@ -77,7 +77,7 @@ export class LeadLine {
 
   /**
    * シーンに追加するオブジェクトを取得する
-   * @return シーンに追加するオブジェクト
+   * @returns シーンに追加するオブジェクト
    */
   getObject3D(): THREE.Object3D {
     return this.#view.getObject3D();

@@ -11,7 +11,7 @@ type Players = {
 /**
  * バースト発動後のプレイヤーステートを取得する
  * @param players ゲーム参加プレイヤー
- * @return バースト発動後のプレイヤーステート
+ * @returns バースト発動後のプレイヤーステート
  */
 export function getStateAfterBurst(players: Players): Players {
   const { invoker, other } = players;

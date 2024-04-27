@@ -9,7 +9,7 @@ import { scrollLeftMessages, scrollRightMessages } from "../../scroll-messages";
  * ストーリー プレイヤーの勝利
  *
  * @param props イベントプロパティ
- * @return ストーリーが完了したら発火するPromise
+ * @returns ストーリーが完了したら発火するPromise
  */
 export async function victory(props: CustomBattleEventProps) {
   activeRightMessageWindowWithFace(props, "Shinya");

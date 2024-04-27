@@ -1,40 +1,25 @@
-import type { Player, PlayerId } from "gbraver-burst-core";
-import { Observable } from "rxjs";
+import { PlayerId } from "gbraver-burst-core";
 import * as THREE from "three";
 
-import type { GameObjectAction } from "../../../../../game-object/action/game-object-action";
 import {
   enemyRaitoCutIn,
   playerRaitoCutIn,
 } from "../../../../../game-object/cut-in/raito";
 import { RaitoCutIn } from "../../../../../game-object/cut-in/raito/raito";
-import type { Resources } from "../../../../../resource";
-import type { HUDPilotObjects } from "./hud-pilot-objects";
+import { HUDLayerObjectCreatorParams } from "../creator-params";
+import { HUDPilotObjects } from "./hud-pilot-objects";
 
-/**
- * コンストラクタのパラメータ
- */
-type Params = {
-  playerId: PlayerId;
-  cutIn: RaitoCutIn;
-};
-
-/**
- * ライトHUD
- */
+/** ライトHUDオブジェクト */
 export class RaitoHUD implements HUDPilotObjects {
-  playerId: PlayerId;
-  cutIn: RaitoCutIn;
-
   /**
    * コンストラクタ
-   *
-   * @param params パラメータ
+   * @param pilotId パイロットID
+   * @param cutIn カットイン
    */
-  constructor(params: Params) {
-    this.playerId = params.playerId;
-    this.cutIn = params.cutIn;
-  }
+  constructor(
+    readonly playerId: PlayerId,
+    readonly cutIn: RaitoCutIn,
+  ) {}
 
   /**
    * デストラクタ相当の処理
@@ -46,7 +31,7 @@ export class RaitoHUD implements HUDPilotObjects {
   /**
    * シーンに追加するオブジェクトを取得する
    *
-   * @return シーンに追加するオブジェクト
+   * @returns シーンに追加するオブジェクト
    */
   getObject3Ds(): THREE.Object3D[] {
     return [this.cutIn.getObject3D()];
@@ -55,38 +40,20 @@ export class RaitoHUD implements HUDPilotObjects {
 
 /**
  * プレイヤー側 ライトHUD
- *
- * @param resources リソース管理オブジェクト
- * @param gameObjectAction ゲームオブジェクトアクション
- * @param state プレイヤーの状態
- * @return ライトHUD
+ * @param params 生成パラメータ
+ * @returns ライトHUD
  */
-export function playerRaitoHUD(
-  resources: Resources,
-  gameObjectAction: Observable<GameObjectAction>,
-  state: Player,
-): RaitoHUD {
-  return new RaitoHUD({
-    playerId: state.playerId,
-    cutIn: playerRaitoCutIn(resources, gameObjectAction),
-  });
+export function playerRaitoHUD(params: HUDLayerObjectCreatorParams): RaitoHUD {
+  const { player } = params;
+  return new RaitoHUD(player.playerId, playerRaitoCutIn(params));
 }
 
 /**
  * 敵側 ライトHUD
- *
- * @param resources リソース管理オブジェクト
- * @param gameObjectAction ゲームオブジェクトアクション
- * @param state プレイヤーの状態
- * @return ライトHUD
+ * @param params 生成パラメータ
+ * @returns ライトHUD
  */
-export function enemyRaitoHUD(
-  resources: Resources,
-  gameObjectAction: Observable<GameObjectAction>,
-  state: Player,
-): RaitoHUD {
-  return new RaitoHUD({
-    playerId: state.playerId,
-    cutIn: enemyRaitoCutIn(resources, gameObjectAction),
-  });
+export function enemyRaitoHUD(params: HUDLayerObjectCreatorParams): RaitoHUD {
+  const { enemy } = params;
+  return new RaitoHUD(enemy.playerId, enemyRaitoCutIn(params));
 }

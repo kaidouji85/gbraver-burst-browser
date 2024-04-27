@@ -41,7 +41,7 @@ export class FutureSuddenlyBattleEnd {
   /**
    * バトル強制終了ストリームを取得する
    *
-   * @return 通知ストリーム
+   * @returns 通知ストリーム
    */
   stream(): Observable<void> {
     return this.#notifier;

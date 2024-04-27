@@ -39,7 +39,7 @@ export class BurstButton {
 
   /**
    * ボタン押下通知
-   * @return 通知ストリーム
+   * @returns 通知ストリーム
    */
   pushNotifier(): Observable<void> {
     return this.#props.push;

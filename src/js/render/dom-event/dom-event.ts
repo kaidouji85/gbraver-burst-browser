@@ -26,7 +26,7 @@ export type RendererDOMEvent =
  * three.js Renderer要素のイベントストリームを生成する
  *
  * @param renderDom three.jsを描画するHTML要素
- * @return ストリーム
+ * @returns ストリーム
  */
 export function createDOMEventStream(
   renderDom: HTMLElement,

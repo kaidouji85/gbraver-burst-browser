@@ -3,14 +3,15 @@ import { Animate } from "../../../../animation/animate";
 import { delay } from "../../../../animation/delay";
 import { onStart } from "../../../../animation/on-start";
 import { tween } from "../../../../animation/tween";
-import { GenesisBraverCutInModel } from "../model/genesis-braver-cutin-model";
+import { GenesisBraverCutInAnimationProps } from "./animation-props";
 
 /**
  * カットインを表示する
- * @param model モデル
- * @return アニメーション
+ * @param props アニメーションプロパティ
+ * @returns アニメーション
  */
-export function show(model: GenesisBraverCutInModel): Animate {
+export function show(props: GenesisBraverCutInAnimationProps): Animate {
+  const { model } = props;
   return all(
     onStart(() => {
       model.animation.type = "BURST_UP";

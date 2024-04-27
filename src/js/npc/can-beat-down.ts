@@ -8,7 +8,7 @@ import { getBattleResult } from "./get-battle-result";
  * @param attackBattery 攻撃側が出すバッテリー
  * @param defender 防御側のステータス
  * @param defenseBattery 防御側が出すバッテリー
- * @return 判定結果、trueで確実に倒せる
+ * @returns 判定結果、trueで確実に倒せる
  */
 export function canBeatDown(
   attacker: PlayerState,

@@ -1,35 +1,41 @@
 import { Observable } from "rxjs";
 
-import type { Resources } from "../../../resource";
+import type { ResourcesContainer } from "../../../resource";
+import { SEPlayerContainer } from "../../../se/se-player";
 import type { GameObjectAction } from "../../action/game-object-action";
 import { GenesisBraver } from "./genesis-braver";
 import { EnemyGenesisBraverView } from "./view/enemy-genesis-braver-view";
 import { PlayerGenesisBraverView } from "./view/player-genesis-braver-view";
 
+/** ジェネシスブレイバー生成関数パラメータ */
+type GenesisBraverCreatorParams = ResourcesContainer &
+  SEPlayerContainer & {
+    /** ゲームオブジェクトアクション */
+    gameObjectAction: Observable<GameObjectAction>;
+  };
+
 /**
  * プレイヤージェネシスブレイバーを生成
- * @param resources リソース管理オブジェクト
- * @param gameObjectAction ゲームオブジェクトアクション
- * @return 生成結果
+ * @param params 生成パラメータ
+ * @returns 生成結果
  */
 export function PlayerGenesisBraver(
-  resources: Resources,
-  gameObjectAction: Observable<GameObjectAction>,
+  params: GenesisBraverCreatorParams,
 ): GenesisBraver {
+  const { resources } = params;
   const view = new PlayerGenesisBraverView(resources);
-  return new GenesisBraver(view, resources, gameObjectAction);
+  return new GenesisBraver({ ...params, view });
 }
 
 /**
  * 敵ジェネシスブレイバーを生成
- * @param resources リソース管理オブジェクト
- * @param gameObjectAction ゲームオブジェクトアクション
- * @return 生成結果
+ * @param params 生成パラメータ
+ * @returns 生成結果
  */
 export function EnemyGenesisBraver(
-  resources: Resources,
-  gameObjectAction: Observable<GameObjectAction>,
+  params: GenesisBraverCreatorParams,
 ): GenesisBraver {
+  const { resources } = params;
   const view = new EnemyGenesisBraverView(resources);
-  return new GenesisBraver(view, resources, gameObjectAction);
+  return new GenesisBraver({ ...params, view });
 }

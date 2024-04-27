@@ -4,6 +4,8 @@ import { GBraverBurstBrowserConfigRepository } from "./repository";
 
 /** 設定項目名とLocalStorageキーのマッピング */
 const Keys = {
+  /** ロボ、パイロット選択タイプ */
+  PlayerSelectorType: "PlayerSelectorType",
   /** WebGLのピクセルレート */
   WebGLPixelRatio: "WebGLPixelRatio",
   /** 戦闘アニメタイムスケール */
@@ -24,6 +26,7 @@ class LocalStorageConfigRepository
 {
   /** @override */
   async save(config: GBraverBurstBrowserConfig): Promise<void> {
+    localStorage.setItem(Keys.PlayerSelectorType, config.playerSelectorType);
     localStorage.setItem(Keys.WebGLPixelRatio, `${config.webGLPixelRatio}`);
     localStorage.setItem(
       Keys.BattleAnimationTimeScale,
@@ -44,6 +47,7 @@ class LocalStorageConfigRepository
   /** @override */
   async load(): Promise<GBraverBurstBrowserConfig> {
     return parseBrowserConfig({
+      playerSelectorType: localStorage.getItem(Keys.PlayerSelectorType),
       webGLPixelRatio: localStorage.getItem(Keys.WebGLPixelRatio),
       battleAnimationTimeScale: localStorage.getItem(
         Keys.BattleAnimationTimeScale,
@@ -60,7 +64,7 @@ class LocalStorageConfigRepository
 
 /**
  * ブラウザ設定リポジトリLocalStorage実装を生成する
- * @return 生成結果
+ * @returns 生成結果
  */
 export function createLocalStorageConfigRepository(): GBraverBurstBrowserConfigRepository {
   return new LocalStorageConfigRepository();

@@ -13,7 +13,7 @@ type Model = {
 /**
  * ルート要素を表示する
  * @param props コンポネントプロパティ
- * @return アニメーション
+ * @returns アニメーション
  */
 export function showRoot(props: MiniControllerProps): Animate {
   const setUpdateHandler = (t: TWEEN.Tween<Model>): TWEEN.Tween<Model> =>

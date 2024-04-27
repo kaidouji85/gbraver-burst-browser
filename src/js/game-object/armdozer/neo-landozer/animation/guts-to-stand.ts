@@ -2,24 +2,19 @@ import { Animate } from "../../../../animation/animate";
 import { delay } from "../../../../animation/delay";
 import { onStart } from "../../../../animation/on-start";
 import { tween } from "../../../../animation/tween";
-import type { NeoLandozerModel } from "../model/neo-landozer-model";
-import { NeoLandozerSounds } from "../sounds/neo-landozer-sounds";
+import { NeoLandozerAnimationProps } from "./animation-props";
 
 /**
  * ターンスタート -> 立ち
- *
- * @param model モデル
- * @param sounds 音
- * @return アニメーション
+ * @param props アニメーションプロパティ
+ * @returns アニメーション
  */
-export function gutsToStand(
-  model: NeoLandozerModel,
-  sounds: NeoLandozerSounds,
-): Animate {
+export function gutsToStand(props: NeoLandozerAnimationProps): Animate {
+  const { model, sounds, se } = props;
   return onStart(() => {
     model.animation.type = "GUTS_DOWN";
     model.animation.frame = 1;
-    sounds.motor.play();
+    se.play(sounds.motor);
   })
     .chain(
       tween(model.animation, (t) =>
@@ -40,7 +35,7 @@ export function gutsToStand(
     .chain(delay(500))
     .chain(
       onStart(() => {
-        sounds.motor.play();
+        se.play(sounds.motor);
       }),
     )
     .chain(

@@ -7,7 +7,7 @@ import { invisibleAllMessageWindows } from "../../invisible-all-message-windows"
 /**
  * ステートアニメ終了後に呼ばれるアニメーション
  * @param props イベントプロパティ
- * @return アニメーション
+ * @returns アニメーション
  */
 export function afterStateAnimation(
   props: Readonly<CustomStateAnimation>,

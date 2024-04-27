@@ -15,7 +15,7 @@ import { wingDozerAttack } from "./wing-dozer";
 /**
  * 攻撃側スプライトに応じて、戦闘アニメーションを切り替える
  * @param param 戦闘アニメパラメータ
- * @return アニメーション
+ * @returns アニメーション
  */
 export function attackAnimation(param: BattleAnimationParam): Animate {
   if (param.attackerSprite instanceof ShinBraver) {

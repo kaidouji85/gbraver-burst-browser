@@ -10,7 +10,7 @@ import { showCommand } from "./show-command";
  * コマンド入力フェイズのアニメーション
  * @param props 戦闘シーンビュー
  * @param gameState ゲーム状態
- * @return アニメーション
+ * @returns アニメーション
  */
 export function inputCommandAnimation(
   props: StateAnimationProps,
@@ -27,7 +27,7 @@ export function inputCommandAnimation(
   const enemyHUD = props.view.hud.players.find(
     (v) => v.playerId !== props.playerId,
   );
-  const activeTDArmdozer = props.view.td.armdozerObjects.find(
+  const activeTDArmdozer = props.view.td.armdozers.find(
     (v) => v.playerId === gameState.activePlayerId,
   );
 

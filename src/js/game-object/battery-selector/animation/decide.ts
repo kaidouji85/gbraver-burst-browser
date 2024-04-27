@@ -1,21 +1,17 @@
 import { Animate } from "../../../animation/animate";
 import { onStart } from "../../../animation/on-start";
 import { tween } from "../../../animation/tween";
-import type { BatterySelectorModel } from "../model";
-import { BatterySelectorSounds } from "../sounds/battery-selector-sounds";
+import { BatterySelectorAnimationProps } from "./animation-props";
 
 /**
  * バッテリー決定アニメーション
- * @param model モデル
- * @param sounds サウンド
- * @return アニメーション
+ * @param props アニメーションプロパティ
+ * @returns アニメーション
  */
-export function decide(
-  model: BatterySelectorModel,
-  sounds: BatterySelectorSounds,
-): Animate {
+export function decide(props: BatterySelectorAnimationProps): Animate {
+  const { model, sounds, se } = props;
   return onStart(() => {
-    sounds.pushButtonSound.play();
+    se.play(sounds.pushButtonSound);
   })
     .chain(
       tween(model, (t) =>

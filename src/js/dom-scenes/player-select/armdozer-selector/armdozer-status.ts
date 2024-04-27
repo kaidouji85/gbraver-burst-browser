@@ -1,10 +1,10 @@
 import { ArmdozerId, Armdozers } from "gbraver-burst-core";
 
+import { burstDetail } from "../../../game-description/burst-detail";
+import { burstOverview } from "../../../game-description/burst-overview";
 import { Resources } from "../../../resource";
 import { PathIds } from "../../../resource/path/ids";
 import { domUuid } from "../../../uuid/dom-uuid";
-import { burstDetail } from "./burst-detail";
-import { burstOverview } from "./burst-overview";
 
 /**ルート要素のクラス名 */
 const ROOT_CLASS_NAME = "armdozer-status";
@@ -25,7 +25,7 @@ type DataIDs = {
  *
  * @param ids data-idを集めたもの
  * @param resources リソース管理オブジェクト
- * @return innerHTML
+ * @returns innerHTML
  */
 function rootInnerHTML(ids: DataIDs, resources: Resources): string {
   const batteryIconPath =
@@ -73,7 +73,7 @@ type Elements = {
  *
  * @param root ルート要素
  * @param ids data-idを集めたもの
- * @return 抽出結果
+ * @returns 抽出結果
  */
 function extractElements(root: HTMLElement, ids: DataIDs): Elements {
   const name: HTMLElement =
@@ -149,7 +149,7 @@ export class ArmdozerStatus {
   /**
    * ルートHTML要素を取得する
    *
-   * @return ルートHTML要素
+   * @returns ルートHTML要素
    */
   getRootHTMLElement(): HTMLElement {
     return this.#root;

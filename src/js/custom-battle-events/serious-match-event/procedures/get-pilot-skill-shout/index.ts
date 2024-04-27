@@ -35,7 +35,7 @@ const pilotShouts = {
  * 状況に応じたパイロット叫び情報を取得する
  * @param pilotSkillInvoker スキル発動者のステート
  * @param isPilotSkillInvokerActive パイロットスキル発動者のターンか、trueで発動者のターン
- * @return 取得結果、見つからない場合はnullを返す
+ * @returns 取得結果、見つからない場合はnullを返す
  */
 export function getPilotSkillShout(
   pilotSkillInvoker: PlayerState,

@@ -4,7 +4,6 @@ import type { DifficultyDialogProps } from "../props";
 
 /**
  * Normalが押された際の処理
- *
  * @param props ダイアログプロパティ
  * @param action アクション
  */
@@ -15,7 +14,7 @@ export function onNormalPush(
   action.event.preventDefault();
   action.event.stopPropagation();
   props.exclusive.execute(async () => {
-    props.pushButton.play();
+    props.se.play(props.pushButton);
     await pop(props.normalButton);
     props.selectionComplete.next("Normal");
   });

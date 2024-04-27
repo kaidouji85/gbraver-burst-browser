@@ -1,5 +1,5 @@
 import { Update } from "../../../game-loop/update";
-import { BatterySelectorProps } from "../props";
+import { BatterySelectorProps } from "../props/battery-selector-props";
 
 /**
  * Update時の処理
@@ -10,7 +10,8 @@ export function onUpdate(
   props: Readonly<BatterySelectorProps>,
   action: Update,
 ): void {
-  props.batteryMinusTween.update(action.time);
-  props.batteryPlusTween.update(action.time);
-  props.batteryChangeTween.update(action.time);
+  const { batteryMinusTween, batteryPlusTween, batteryChangeTween } = props;
+  batteryMinusTween.update(action.time);
+  batteryPlusTween.update(action.time);
+  batteryChangeTween.update(action.time);
 }

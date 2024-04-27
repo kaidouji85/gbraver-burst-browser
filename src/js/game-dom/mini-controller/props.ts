@@ -1,12 +1,11 @@
 import * as R from "ramda";
 import { merge, Observable } from "rxjs";
 
-import { Resources } from "../../resource";
-import {
-  createEmptySoundResource,
-  SOUND_IDS,
-  SoundResource,
-} from "../../resource/sound";
+import { ResourcesContainer } from "../../resource";
+import { createEmptySoundResource } from "../../resource/sound/empty-sound-resource";
+import { SOUND_IDS } from "../../resource/sound/ids";
+import { SoundResource } from "../../resource/sound/resource";
+import { SEPlayerContainer } from "../../se/se-player";
 import { domUuid } from "../../uuid/dom-uuid";
 import { BatteryButton } from "./battery-button";
 import { BurstButton } from "./burst-button";
@@ -19,7 +18,7 @@ import { PilotButton } from "./pilot-button";
 const MAX_BATTERY_BUTTON = 9;
 
 /** ミニコントローラープロパティ */
-export type MiniControllerProps = {
+export type MiniControllerProps = SEPlayerContainer & {
   /** ルートHTML要素 */
   root: HTMLElement;
   /** 全バッテリーボタン */
@@ -34,14 +33,18 @@ export type MiniControllerProps = {
   pushButtonSound: SoundResource;
 };
 
+/** 生成パラメータ */
+export type PropsCreatorParams = ResourcesContainer & SEPlayerContainer;
+
 /**
  * ミニコントローラープロパティを生成する
- * @param resources リソース管理オブジェクト
- * @return 生成結果
+ * @param params 生成パラメータ
+ * @returns 生成結果
  */
 export function createMiniControllerProps(
-  resources: Resources,
+  params: PropsCreatorParams,
 ): MiniControllerProps {
+  const { resources, se } = params;
   const root = document.createElement("div");
   root.className = ROOT_INVISIBLE;
   const ids = { batteries: domUuid(), burst: domUuid(), pilot: domUuid() };
@@ -71,5 +74,6 @@ export function createMiniControllerProps(
     burstButton: burst,
     pilotButton: pilot,
     pushButtonSound,
+    se,
   };
 }

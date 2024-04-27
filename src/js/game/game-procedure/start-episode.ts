@@ -14,7 +14,7 @@ import { GameProps } from "../game-props";
  * エピソードを開始するヘルパー関数
  * @param props ゲームプロパティ
  * @param episode エピソード
- * @return 処理が完了したら発火するPromise
+ * @returns 処理が完了したら発火するPromise
  */
 export async function startEpisode(
   props: Readonly<GameProps>,
@@ -40,8 +40,7 @@ export async function startEpisode(
   const config = await props.config.load();
   props.renderer.setPixelRatio(config.webGLPixelRatio);
   const battleScene = new BattleScene({
-    resources: props.resources,
-    bgm: props.bgm,
+    ...props,
     playingBGM: episode.bgm,
     initialAnimationTimeScale: config.battleAnimationTimeScale,
     battleProgress: npcBattle,
@@ -49,10 +48,6 @@ export async function startEpisode(
     enemy: npcBattle.enemy,
     initialState: npcBattle.stateHistory(),
     customBattleEvent: episode.event(props.resources),
-    resize: props.resize,
-    pushWindow: props.pushWindow,
-    gameLoop: props.gameLoop,
-    renderer: props.renderer,
     controllerType: "BigButton",
   });
   props.tdBinder.bind(battleScene, battleSceneConnector);

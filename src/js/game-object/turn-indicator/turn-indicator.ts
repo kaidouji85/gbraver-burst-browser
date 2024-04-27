@@ -7,7 +7,7 @@ import { Animate } from "../../animation/animate";
 import { onStart } from "../../animation/on-start";
 import type { PreRender } from "../../game-loop/pre-render";
 import type { Update } from "../../game-loop/update";
-import type { Resources } from "../../resource";
+import type { ResourcesContainer } from "../../resource";
 import type { GameObjectAction } from "../action/game-object-action";
 import { invisible } from "./animation/invisible";
 import { show } from "./animation/show";
@@ -17,9 +17,7 @@ import type { TurnIndicatorModel } from "./model/turn-indicator-model";
 import { TurnIndicatorView } from "./view/turn-indicator-view";
 
 /** コンストラクタのパラメータ */
-type Param = {
-  /** リソース管理オブジェクト */
-  resources: Resources;
+type Param = ResourcesContainer & {
   /** ゲームオブジェクトアクション */
   gameObjectAction: Observable<GameObjectAction>;
 };
@@ -64,7 +62,7 @@ export class TurnIndicator {
   /**
    * ターンインジケータを表示する
    * @param isPlayerTurn プレイヤーターンか否かのフラグ、trueでプレイヤーターン
-   * @return アニメーション
+   * @returns アニメーション
    */
   show(isPlayerTurn: boolean): Animate {
     return all(
@@ -77,7 +75,7 @@ export class TurnIndicator {
 
   /**
    * 非表示にする
-   * @return アニメーション
+   * @returns アニメーション
    */
   invisible(): Animate {
     return all(
@@ -90,7 +88,7 @@ export class TurnIndicator {
 
   /**
    * ターンインジケーターで使うthree.jsオブジェクトを返す
-   * @return 取得結果
+   * @returns 取得結果
    */
   getObject3D(): THREE.Object3D {
     return this.#view.getObject3D();

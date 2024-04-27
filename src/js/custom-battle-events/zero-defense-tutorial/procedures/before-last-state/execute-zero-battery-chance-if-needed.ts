@@ -8,7 +8,7 @@ import { zeroBatteryChance } from "../../stories/zero-battery-chance";
 /**
  * 条件を満たした場合、0バッテリーチャンスを再生する
  * @param props イベントプロパティ
- * @return ステート更新結果
+ * @returns ステート更新結果
  */
 export async function executeZeroBatteryChanceIfNeeded(
   props: Readonly<LastState & ZeroDefenseTutorialProps>,

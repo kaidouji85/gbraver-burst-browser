@@ -5,7 +5,7 @@ import { delay } from "./delay";
 /**
  * 終了時間ぞろえする
  * @param animations 終了時間ぞろえするアニメーション
- * @return アニメーション
+ * @returns アニメーション
  */
 export function alignEnd(...animations: Animate[]): Animate {
   const maxDuration = Math.max(

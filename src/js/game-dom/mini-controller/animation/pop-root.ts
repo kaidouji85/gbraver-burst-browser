@@ -13,7 +13,7 @@ type Model = {
 /**
  * ルート要素をpopさせるアニメーション
  * @param props コンポネントプロパティ
- * @return アニメーション
+ * @returns アニメーション
  */
 export function popRoot(props: MiniControllerProps): Animate {
   const setUpdateHandler = (t: TWEEN.Tween<Model>): TWEEN.Tween<Model> =>

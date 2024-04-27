@@ -5,8 +5,9 @@ import { DOMFader } from "../../components/dom-fader/dom-fader";
 import { CssHUDUIScale } from "../../css/hud-ui-scale";
 import { gameLoopStream } from "../../game-loop/game-loop";
 import { Renderer } from "../../render";
-import { emptyResources } from "../../resource";
+import { emptyResources } from "../../resource/empty-resources";
 import type { ResourceRoot } from "../../resource/resource-root";
+import { createSEPlayer } from "../../se/se-player";
 import { pushWindowsStream } from "../../window/push-window";
 import { resizeStream } from "../../window/resize";
 import { postBattleConnector } from "../action-connector/post-battle-connector";
@@ -53,7 +54,7 @@ export type GamePropsGeneratorParam = {
  * ゲームプロパティを生成する
  *
  * @param param パラメータ
- * @return 生成結果
+ * @returns 生成結果
  */
 export function generateGameProps(param: GamePropsGeneratorParam): GameProps {
   const resize = resizeStream();
@@ -93,6 +94,7 @@ export function generateGameProps(param: GamePropsGeneratorParam): GameProps {
     tdBinder: new TDSceneBinder(renderer, hudUIScale),
     serviceWorker: null,
     bgm: createBGMManager(),
+    se: createSEPlayer(),
     canPlayEpisodeInDevelopment: param.canPlayEpisodeInDevelopment,
     shouldLoadDevelopingResource: param.shouldLoadDevelopingResource,
     canPlayDevelopingArmdozer: param.canPlayDevelopingArmdozer,

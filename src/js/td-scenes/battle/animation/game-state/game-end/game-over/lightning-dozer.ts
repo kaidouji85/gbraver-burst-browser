@@ -8,7 +8,7 @@ import type { GameOverParamX } from "./game-over-param";
  * ライトニングドーザ  勝利
  *
  * @param param パラメータ
- * @return アニメーション
+ * @returns アニメーション
  */
 export function lightningDozerWin(
   param: GameOverParamX<LightningDozerTD>,

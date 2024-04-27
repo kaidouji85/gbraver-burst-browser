@@ -2,7 +2,7 @@ import { Observable } from "rxjs";
 import * as THREE from "three";
 
 import type { PreRender } from "../../../game-loop/pre-render";
-import type { Resources } from "../../../resource";
+import type { ResourcesContainer } from "../../../resource";
 import type { GameObjectAction } from "../../action/game-object-action";
 import { HUDUIScale } from "../../scale";
 import type { BatterySelectorModel } from "../model";
@@ -12,9 +12,7 @@ import { BatteryMinus } from "./battery-minus";
 import { BatteryPlus } from "./battery-plus";
 
 /** コンストラクタのパラメータ */
-type Param = {
-  /** リソース管理オブジェクト */
-  resources: Resources;
+type Param = ResourcesContainer & {
   /** ゲームオブジェクトアクション */
   gameObjectAction: Observable<GameObjectAction>;
 };
@@ -104,7 +102,7 @@ export class BatterySelectorView {
 
   /**
    * OKボタン押下通知
-   * @return 通知ストリーム
+   * @returns 通知ストリーム
    */
   okButtonPushNotifier(): Observable<Event> {
     return this.#button.pushNotifier();
@@ -112,7 +110,7 @@ export class BatterySelectorView {
 
   /**
    * +ボタン押下通知
-   * @return 通知ストリーム
+   * @returns 通知ストリーム
    */
   plusButtonPushNotifier(): Observable<unknown> {
     return this.#plus.pushNotifier();
@@ -120,7 +118,7 @@ export class BatterySelectorView {
 
   /**
    * -ボタン押下通知
-   * @return 通知ストリーム
+   * @returns 通知ストリーム
    */
   minusButtonPushNotifier(): Observable<unknown> {
     return this.#minus.pushNotifier();

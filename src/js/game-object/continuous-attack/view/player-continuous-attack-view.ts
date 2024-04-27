@@ -10,11 +10,11 @@ import {
 } from "../../armdozer/position";
 import type { ContinuousAttackModel } from "../model/continuous-attack-model";
 import type { ContinuousAttackView } from "./continuous-attack-view";
+
+/** メッシュサイズ */
 export const MESH_SIZE = 300;
 
-/**
- * プレイヤー 連続攻撃 ビュー
- */
+/**プレイヤー 連続攻撃 ビュー */
 export class PlayerContinuousAttackView implements ContinuousAttackView {
   #mesh: HorizontalAnimationMesh;
 
@@ -41,7 +41,7 @@ export class PlayerContinuousAttackView implements ContinuousAttackView {
   /**
    * シーンに追加するオブジェクトを取得する
    *
-   * @return シーンに追加するオブジェクト
+   * @returns シーンに追加するオブジェクト
    */
   getObject3D(): THREE.Object3D {
     return this.#mesh.getObject3D();

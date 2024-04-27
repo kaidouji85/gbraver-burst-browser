@@ -1,5 +1,6 @@
 import type { ResourceRoot } from "../resource-root";
-import { SOUND_CONFIGS, SOUND_IDS } from "../sound";
+import { SOUND_CONFIGS } from "../sound/configs";
+import { SOUND_IDS } from "../sound/ids";
 import type { ResourceLoading } from "./resource-loading";
 import { resourceLoading } from "./resource-loading";
 
@@ -14,7 +15,7 @@ const TITLE_SOUND_IDS = [
  * タイトルで利用するリソースを読み込む
  *
  * @param resourceRoot リソースルート
- * @return リソース読み込みオブジェクト
+ * @returns リソース読み込みオブジェクト
  */
 export function titleResourceLoading(
   resourceRoot: ResourceRoot,

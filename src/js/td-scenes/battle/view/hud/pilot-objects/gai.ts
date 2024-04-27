@@ -1,40 +1,25 @@
-import type { Player, PlayerId } from "gbraver-burst-core";
-import { Observable } from "rxjs";
+import { PlayerId } from "gbraver-burst-core";
 import * as THREE from "three";
 
-import type { GameObjectAction } from "../../../../../game-object/action/game-object-action";
 import {
   enemyGaiCutIn,
   playerGaiCutIn,
 } from "../../../../../game-object/cut-in/gai";
 import { GaiCutIn } from "../../../../../game-object/cut-in/gai/gai";
-import type { Resources } from "../../../../../resource";
-import type { HUDPilotObjects } from "./hud-pilot-objects";
+import { HUDLayerObjectCreatorParams } from "../creator-params";
+import { HUDPilotObjects } from "./hud-pilot-objects";
 
-/**
- * コンストラクタのパラメータ
- */
-type Params = {
-  playerId: PlayerId;
-  cutIn: GaiCutIn;
-};
-
-/**
- * HUDレイヤー ガイ固有のオブジェクトをあつめたもの
- */
+/** HUDレイヤー ガイ固有のオブジェクトをあつめたもの */
 export class GaiHUD implements HUDPilotObjects {
-  playerId: PlayerId;
-  cutIn: GaiCutIn;
-
   /**
    * コンストラクタ
-   *
-   * @param params パラメータ
+   * @param playerId プレイヤーID
+   * @param cutIn カットイン
    */
-  constructor(params: Params) {
-    this.playerId = params.playerId;
-    this.cutIn = params.cutIn;
-  }
+  constructor(
+    readonly playerId: PlayerId,
+    readonly cutIn: GaiCutIn,
+  ) {}
 
   /**
    * デストラクタ相当の処理
@@ -46,7 +31,7 @@ export class GaiHUD implements HUDPilotObjects {
   /**
    * シーンに追加するオブジェクトを取得する
    *
-   * @return シーンに追加するオブジェクト
+   * @returns シーンに追加するオブジェクト
    */
   getObject3Ds(): THREE.Object3D[] {
     return [this.cutIn.getObject3D()];
@@ -55,38 +40,20 @@ export class GaiHUD implements HUDPilotObjects {
 
 /**
  * プレイヤー側 ガイHUD
- *
- * @param resources リソース管理オブジェクト
- * @param gameObjectAction ゲームオブジェクトアクション
- * @param state プレイヤーの状態
- * @return ガイHUD
+ * @param params 生成パラメータ
+ * @returns ガイHUD
  */
-export function playerGaiHUD(
-  resources: Resources,
-  gameObjectAction: Observable<GameObjectAction>,
-  state: Player,
-): GaiHUD {
-  return new GaiHUD({
-    playerId: state.playerId,
-    cutIn: playerGaiCutIn(resources, gameObjectAction),
-  });
+export function playerGaiHUD(params: HUDLayerObjectCreatorParams): GaiHUD {
+  const { player } = params;
+  return new GaiHUD(player.playerId, playerGaiCutIn(params));
 }
 
 /**
  * 敵側 ガイHUD
- *
- * @param resources リソース管理オブジェクト
- * @param gameObjectAction ゲームオブジェクトアクション
- * @param state プレイヤーの状態
- * @return ガイHUD
+ * @param params 生成パラメータ
+ * @returns ガイHUD
  */
-export function enemyGaiHUD(
-  resources: Resources,
-  gameObjectAction: Observable<GameObjectAction>,
-  state: Player,
-): GaiHUD {
-  return new GaiHUD({
-    playerId: state.playerId,
-    cutIn: enemyGaiCutIn(resources, gameObjectAction),
-  });
+export function enemyGaiHUD(params: HUDLayerObjectCreatorParams): GaiHUD {
+  const { enemy } = params;
+  return new GaiHUD(enemy.playerId, enemyGaiCutIn(params));
 }

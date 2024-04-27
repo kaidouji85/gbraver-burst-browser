@@ -1,12 +1,14 @@
 import { EpisodeSelector } from "../src/js/dom-scenes/episode-selector";
+import { Episode } from "../src/js/dom-scenes/episode-selector/episode";
 import { PathIds } from "../src/js/resource/path/ids";
 import type { DOMStubStory } from "./stub/dom-stub";
 import { domStub } from "./stub/dom-stub";
+
 export default {
   title: "episode-selector",
 };
-export const scene: DOMStubStory = domStub((resources) => {
-  const scene = new EpisodeSelector(resources, [
+export const scene: DOMStubStory = domStub((params) => {
+  const episodes: Episode[] = [
     {
       id: "01",
       type: "Episode",
@@ -31,7 +33,11 @@ export const scene: DOMStubStory = domStub((resources) => {
       introduction: "導入",
       imageCutPathId: PathIds.IMAGE_CUT_BURST,
     },
-  ]);
+  ];
+  const scene = new EpisodeSelector({
+    ...params,
+    episodes,
+  });
   scene.notifyPrev().subscribe(() => {
     console.log("prev");
   });

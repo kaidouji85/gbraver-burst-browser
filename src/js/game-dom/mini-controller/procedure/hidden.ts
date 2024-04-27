@@ -7,7 +7,7 @@ import { MiniControllerProps } from "../props";
 /**
  * ミニコントローラーを非表示にする
  * @param props コンポネントプロパティ
- * @return 処理が完了したら発火するPromise
+ * @returns 処理が完了したら発火するPromise
  */
 export function hidden(props: Readonly<MiniControllerProps>): Animate {
   return hiddenRoot(props).chain(

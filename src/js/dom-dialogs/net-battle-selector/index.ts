@@ -1,7 +1,6 @@
 import { Observable, Unsubscribable } from "rxjs";
 
 import { domPushStream } from "../../dom/push-dom";
-import { Resources } from "../../resource";
 import { DOMDialog } from "../dialog";
 import { onBackgroundPush } from "./listeners/on-background-push";
 import { onCasualMatchSelect } from "./listeners/on-casual-match-select";
@@ -11,7 +10,11 @@ import { onPrivateMatchHostSelect } from "./listeners/on-private-match-host-sele
 import {
   createNetBattleSelectrProps,
   NetBattleSelectorDialogProps,
+  PropsCreatorParams,
 } from "./props";
+
+/** コンストラクタのパラメータ */
+export type NetBattleSelectorDialogParams = PropsCreatorParams;
 
 /** ネットバトルセレクターダイアログ */
 export class NetBattleSelectorDialog implements DOMDialog {
@@ -22,10 +25,10 @@ export class NetBattleSelectorDialog implements DOMDialog {
 
   /**
    * コンストラクタ
-   * @param resources リソース管理オブジェクト
+   * @param params コンストラクタのパラメータ
    */
-  constructor(resources: Resources) {
-    this.#props = createNetBattleSelectrProps(resources);
+  constructor(params: NetBattleSelectorDialogParams) {
+    this.#props = createNetBattleSelectrProps(params);
     this.#unsubscribers = [
       domPushStream(this.#props.casualMatchButton).subscribe((action) =>
         onCasualMatchSelect(this.#props, action),
@@ -59,7 +62,7 @@ export class NetBattleSelectorDialog implements DOMDialog {
 
   /**
    * カジュアルマッチを選択したことを通知する
-   * @return 通知ストリーム
+   * @returns 通知ストリーム
    */
   notifyCasualMatchSelection(): Observable<void> {
     return this.#props.casualMatchSelection;
@@ -67,7 +70,7 @@ export class NetBattleSelectorDialog implements DOMDialog {
 
   /**
    * プライベートマッチ（ホスト）を選択したことを通知する
-   * @return 通知ストリーム
+   * @returns 通知ストリーム
    */
   notifyPrivateMatchHostSelection(): Observable<void> {
     return this.#props.privateMatchHostSelection;
@@ -75,7 +78,7 @@ export class NetBattleSelectorDialog implements DOMDialog {
 
   /**
    * プライベートマッチ（ゲスト）を選択したことを通知する
-   * @return 通知ストリーム
+   * @returns 通知ストリーム
    */
   notifyPrivateMatchGuestSelection(): Observable<void> {
     return this.#props.privateMatchGuestSelection;
@@ -83,7 +86,7 @@ export class NetBattleSelectorDialog implements DOMDialog {
 
   /**
    * ダイアログクローズを通知する
-   * @return 通知ストリーム
+   * @returns 通知ストリーム
    */
   notifyClosed(): Observable<void> {
     return this.#props.dialogClosed;

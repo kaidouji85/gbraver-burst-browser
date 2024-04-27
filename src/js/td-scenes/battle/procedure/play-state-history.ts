@@ -3,7 +3,7 @@ import { GameState } from "gbraver-burst-core";
 import { all } from "../../../animation/all";
 import { empty } from "../../../animation/delay";
 import { stateAnimation } from "../animation/game-state";
-import { BattleSceneProps } from "../battle-scene-props";
+import { BattleSceneProps } from "../props";
 
 /**
  * 同時再生する効果
@@ -20,7 +20,7 @@ const parallelPlayEffects = [
  * 本関数を呼び出す前にprops.stateHistoryを最新化すること
  * @param props 戦闘シーンプロパティ
  * @param gameStateHistory 再生するゲームステートヒストリー
- * @return アニメーション
+ * @returns アニメーション
  */
 export async function playStateHistory(
   props: Readonly<BattleSceneProps>,

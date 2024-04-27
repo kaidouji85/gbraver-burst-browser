@@ -16,7 +16,7 @@ import { victory } from "../stories/victory";
  * 最終ステート完了後イベント
  *
  * @param props イベントプロパティ
- * @return ステート更新結果
+ * @returns ステート更新結果
  */
 export async function afterLastState(
   props: Readonly<LastState & BatterySystemTutorialProps>,

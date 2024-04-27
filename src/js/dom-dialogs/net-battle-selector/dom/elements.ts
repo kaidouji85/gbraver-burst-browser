@@ -18,7 +18,7 @@ export type Elements = {
  * ルート要素から子孫要素を抽出する
  * @param root ルート要素
  * @param ids data-idを集めたもの
- * @return 抽出結果
+ * @returns 抽出結果
  */
 export function extractElements(root: HTMLElement, ids: DataIDs): Elements {
   const backGround: HTMLElement =

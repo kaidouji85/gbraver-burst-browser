@@ -9,7 +9,7 @@ import { scrollLeftMessages, scrollRightMessages } from "../../scroll-messages";
 /**
  * プレイヤー敗北ストーリー
  * @param props イベントプロパティ
- * @return ストーリーが完了したら発火するPromise
+ * @returns ストーリーが完了したら発火するPromise
  */
 export async function playerLose(
   props: Readonly<CustomBattleEventProps>,
