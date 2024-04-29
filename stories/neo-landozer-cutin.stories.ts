@@ -5,12 +5,16 @@ import {
   playerNeoLandozerCutIn,
 } from "../src/js/game-object/cut-in/neo-landozer";
 import { NeoLandozerCutIn } from "../src/js/game-object/cut-in/neo-landozer/neo-landozer-cutin";
-import { HUDGameObjectStub } from "./stub/hud-game-object-stub";
+import { hudGameObjectStory } from "./stub/hud-game-object-stub";
 
 export default {
   title: "neo-landozer-cutin",
 };
 
+/**
+ * ネオランドーザ カットイン アニメ
+ * @param cutIn カットイン
+ */
 function cutInAnimation(cutIn: NeoLandozerCutIn): Animate {
   return cutIn
     .show()
@@ -19,22 +23,16 @@ function cutInAnimation(cutIn: NeoLandozerCutIn): Animate {
     .chain(delay(2000));
 }
 
-export const Player = (): HTMLElement => {
-  const stub = new HUDGameObjectStub((params) => {
-    const cutIn = playerNeoLandozerCutIn(params);
-    cutInAnimation(cutIn).loop();
-    return [cutIn.getObject3D()];
-  });
-  stub.start();
-  return stub.domElement();
-};
+/** ネオランドーザ カットイン プレイヤー側 */
+export const player = hudGameObjectStory((params) => {
+  const cutIn = playerNeoLandozerCutIn(params);
+  cutInAnimation(cutIn).loop();
+  return [cutIn.getObject3D()];
+});
 
-export const Enemy = (): HTMLElement => {
-  const stub = new HUDGameObjectStub((params) => {
-    const cutIn = enemyNeoLandozerCutIn(params);
-    cutInAnimation(cutIn).loop();
-    return [cutIn.getObject3D()];
-  });
-  stub.start();
-  return stub.domElement();
-};
+/** ネオランドーザ カットイン 敵側 */
+export const enemy = hudGameObjectStory((params) => {
+  const cutIn = enemyNeoLandozerCutIn(params);
+  cutInAnimation(cutIn).loop();
+  return [cutIn.getObject3D()];
+});

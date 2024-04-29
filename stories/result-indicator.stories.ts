@@ -9,7 +9,7 @@ import {
 } from "../src/js/game-object/result-indicator";
 import { ResultIndicator } from "../src/js/game-object/result-indicator/result-indicator";
 import { Resources } from "../src/js/resource";
-import { HUDGameObjectStub } from "./stub/hud-game-object-stub";
+import { hudGameObjectStory } from "./stub/hud-game-object-stub";
 
 export default {
   title: "result-indicator",
@@ -21,23 +21,18 @@ export default {
  * @param fn リザルトインジケータ操作関数
  * @returns story
  */
-const resultIndicatorStory =
-  (
-    generator: (
-      resources: Resources,
-      gameObjectAction: Observable<GameObjectAction>,
-    ) => ResultIndicator,
-    fn: (indicator: ResultIndicator) => void,
-  ) =>
-  () => {
-    const stub = new HUDGameObjectStub(({ resources, gameObjectAction }) => {
-      const indicator = generator(resources, gameObjectAction);
-      fn(indicator);
-      return [indicator.getObject3D()];
-    });
-    stub.start();
-    return stub.domElement();
-  };
+const resultIndicatorStory = (
+  generator: (
+    resources: Resources,
+    gameObjectAction: Observable<GameObjectAction>,
+  ) => ResultIndicator,
+  fn: (indicator: ResultIndicator) => void,
+) =>
+  hudGameObjectStory(({ resources, gameObjectAction }) => {
+    const indicator = generator(resources, gameObjectAction);
+    fn(indicator);
+    return [indicator.getObject3D()];
+  });
 
 /**
  * 表示

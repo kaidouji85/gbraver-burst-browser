@@ -8,7 +8,7 @@ import {
   yuuyaPilotButton,
 } from "../src/js/game-object/pilot-button";
 import { PilotButton } from "../src/js/game-object/pilot-button/pilot-button";
-import { HUDGameObjectStub } from "./stub/hud-game-object-stub";
+import { hudGameObjectStory } from "./stub/hud-game-object-stub";
 
 export default {
   title: "pilot-button",
@@ -20,20 +20,15 @@ export default {
  * @param fn パイロットボタン操作関数
  * @returns story
  */
-const pilotButtonStory =
-  (
-    generator: (params: PilotButtonCreatorParams) => PilotButton,
-    fn: (button: PilotButton) => void,
-  ) =>
-  () => {
-    const stub = new HUDGameObjectStub((params) => {
-      const button = generator(params);
-      fn(button);
-      return [button.getObject3D()];
-    });
-    stub.start();
-    return stub.domElement();
-  };
+const pilotButtonStory = (
+  generator: (params: PilotButtonCreatorParams) => PilotButton,
+  fn: (button: PilotButton) => void,
+) =>
+  hudGameObjectStory((params) => {
+    const button = generator(params);
+    fn(button);
+    return [button.getObject3D()];
+  });
 
 /**
  * 操作可能なパイロットボタン
