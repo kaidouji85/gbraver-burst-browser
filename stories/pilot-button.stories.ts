@@ -1,3 +1,5 @@
+import { StoryFn } from "@storybook/html";
+
 import { delay } from "../src/js/animation/delay";
 import {
   gaiPilotButton,
@@ -49,19 +51,22 @@ const operatable = (button: PilotButton) => {
 };
 
 /** シンヤ */
-export const shinya = pilotButtonStory(shinyaPilotButton, operatable);
+export const shinya: StoryFn = pilotButtonStory(shinyaPilotButton, operatable);
 
 /** ガイ */
-export const gai = pilotButtonStory(gaiPilotButton, operatable);
+export const gai: StoryFn = pilotButtonStory(gaiPilotButton, operatable);
 
 /** ライト */
-export const raito = pilotButtonStory(raitoPilotButton, operatable);
+export const raito: StoryFn = pilotButtonStory(raitoPilotButton, operatable);
 
 /** ツバサ */
-export const tsubasa = pilotButtonStory(tsubasaPilotButton, operatable);
+export const tsubasa: StoryFn = pilotButtonStory(
+  tsubasaPilotButton,
+  operatable,
+);
 
 /** ユウヤ */
-export const yuuya = pilotButtonStory(yuuyaPilotButton, operatable);
+export const yuuya: StoryFn = pilotButtonStory(yuuyaPilotButton, operatable);
 
 /**
  * 操作不可能なパイロットボタン
@@ -73,4 +78,7 @@ const dislabed = (button: PilotButton) => {
 };
 
 /** 操作不能 シンヤ */
-export const disabledShinya = pilotButtonStory(shinyaPilotButton, dislabed);
+export const disabledShinya: StoryFn = pilotButtonStory(
+  shinyaPilotButton,
+  dislabed,
+);

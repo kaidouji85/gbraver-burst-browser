@@ -1,3 +1,5 @@
+import { StoryFn } from "@storybook/html";
+
 import { TimeScaleButton } from "../src/js/game-object/time-scale-button/time-scale-button";
 import { hudGameObjectStory } from "./stub/hud-game-object-stub";
 
@@ -21,7 +23,7 @@ const timeScaleButtonStory = (fn: (timeScaleButton: TimeScaleButton) => void) =>
  * 操作可能なタイムスケールボタン
  * @param timeScaleButton タイムスケールボタン
  */
-const operatable = (timeScaleButton: TimeScaleButton) => {
+const operable = (timeScaleButton: TimeScaleButton) => {
   timeScaleButton.notifyToggled().subscribe((timeScale) => {
     console.log("push", timeScale);
   });
@@ -29,7 +31,7 @@ const operatable = (timeScaleButton: TimeScaleButton) => {
 };
 
 /** 操作可能 タイムスケールボタン */
-export const operatableButton = timeScaleButtonStory(operatable);
+export const operableButton: StoryFn = timeScaleButtonStory(operable);
 
 /**
  * 操作不可能なタイムスケールボタン
@@ -37,8 +39,8 @@ export const operatableButton = timeScaleButtonStory(operatable);
  */
 const disabled = (timeScaleButton: TimeScaleButton) => {
   timeScaleButton.disabled(true);
-  operatable(timeScaleButton);
+  operable(timeScaleButton);
 };
 
 /** 操作不可能 タイムスケールボタン */
-export const disabledButton = timeScaleButtonStory(disabled);
+export const disabledButton: StoryFn = timeScaleButtonStory(disabled);

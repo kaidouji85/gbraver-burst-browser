@@ -1,3 +1,5 @@
+import { StoryFn } from "@storybook/html";
+
 import { delay } from "../src/js/animation/delay";
 import {
   enemyLightningDozerCutIn,
@@ -24,14 +26,14 @@ function loopAnimation(cutIn: LightningDozerCutIn): void {
 }
 
 /** ライトニングドーザ カットイン プレイヤー側 */
-export const player = hudGameObjectStory((params) => {
+export const player: StoryFn = hudGameObjectStory((params) => {
   const cutIn = playerLightningDozerCutIn(params);
   loopAnimation(cutIn);
   return [cutIn.getObject3D()];
 });
 
 /** ライトニングドーザ カットイン 敵側 */
-export const Enemy = hudGameObjectStory((params) => {
+export const Enemy: StoryFn = hudGameObjectStory((params) => {
   const cutIn = enemyLightningDozerCutIn(params);
   loopAnimation(cutIn);
   return [cutIn.getObject3D()];

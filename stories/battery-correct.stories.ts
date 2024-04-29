@@ -1,3 +1,5 @@
+import { StoryFn } from "@storybook/html";
+
 import { delay } from "../src/js/animation/delay";
 import {
   enemyBatteryCorrect,
@@ -10,7 +12,7 @@ export default {
 };
 
 /** バッテリー補正 プレイヤー側 */
-export const player = tdGameObjectStory((params) => {
+export const player: StoryFn = tdGameObjectStory((params) => {
   const batteryCorrect = playerBatteryCorrect(params);
   batteryCorrect
     .popUp(1)
@@ -24,7 +26,7 @@ export const player = tdGameObjectStory((params) => {
 });
 
 /** バッテリー補正 敵側 */
-export const enemy = tdGameObjectStory((params) => {
+export const enemy: StoryFn = tdGameObjectStory((params) => {
   const batteryCorrect = enemyBatteryCorrect(params);
   batteryCorrect
     .popUp(1)
