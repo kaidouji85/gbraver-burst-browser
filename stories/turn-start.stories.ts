@@ -8,7 +8,7 @@ import {
 } from "../src/js/game-object/turn-start";
 import { TurnStart } from "../src/js/game-object/turn-start/turn-start";
 import { Resources } from "../src/js/resource";
-import { HUDGameObjectStub } from "./stub/hud-game-object-stub";
+import { hudGameObjectStory } from "./stub/hud-game-object-stub";
 
 export default {
   title: "TurnStart",
@@ -20,23 +20,18 @@ export default {
  * @param fn ターンスタート操作関数
  * @returns story
  */
-const turnStartStory =
-  (
-    generator: (
-      resources: Resources,
-      gameObjectAction: Observable<GameObjectAction>,
-    ) => TurnStart,
-    fn: (turnStart: TurnStart) => void,
-  ) =>
-  () => {
-    const stub = new HUDGameObjectStub(({ resources, gameObjectAction }) => {
-      const turnStart = generator(resources, gameObjectAction);
-      fn(turnStart);
-      return [turnStart.getObject3D()];
-    });
-    stub.start();
-    return stub.domElement();
-  };
+const turnStartStory = (
+  generator: (
+    resources: Resources,
+    gameObjectAction: Observable<GameObjectAction>,
+  ) => TurnStart,
+  fn: (turnStart: TurnStart) => void,
+) =>
+  hudGameObjectStory(({ resources, gameObjectAction }) => {
+    const turnStart = generator(resources, gameObjectAction);
+    fn(turnStart);
+    return [turnStart.getObject3D()];
+  });
 
 /**
  * ポップアップ

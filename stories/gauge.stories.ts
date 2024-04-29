@@ -3,12 +3,16 @@ import { Animate } from "../src/js/animation/animate";
 import { delay } from "../src/js/animation/delay";
 import { enemyGauge, playerGauge } from "../src/js/game-object/gauge";
 import { Gauge } from "../src/js/game-object/gauge/gauge";
-import { HUDGameObjectStub } from "./stub/hud-game-object-stub";
+import { hudGameObjectStory } from "./stub/hud-game-object-stub";
 
 export default {
   title: "gauge",
 };
 
+/**
+ * ゲージ変更
+ * @param gauge ゲージ
+ */
 function gaugeChange(gauge: Gauge): Animate {
   return delay(1000)
     .chain(gauge.hp(1000))
@@ -21,6 +25,10 @@ function gaugeChange(gauge: Gauge): Animate {
     .chain(gauge.battery(5));
 }
 
+/**
+ * 最大バッテリー変更
+ * @param gauge ゲージ
+ */
 function maxBatteryChange(gauge: Gauge): Animate {
   return delay(1000)
     .chain(gauge.battery(1))
@@ -33,23 +41,21 @@ function maxBatteryChange(gauge: Gauge): Animate {
     .chain(delay(1000));
 }
 
-export const player = (): HTMLElement => {
-  const stub = new HUDGameObjectStub(({ resources, gameObjectAction }) => {
-    const gauge = playerGauge({
-      resources,
-      gameObjectAction,
-      hp: 3100,
-      battery: 5,
-    });
-    gaugeChange(gauge).loop();
-    return [gauge.getObject3D()];
+/** ゲージ プレイヤー側 */
+export const player = hudGameObjectStory(({ resources, gameObjectAction }) => {
+  const gauge = playerGauge({
+    resources,
+    gameObjectAction,
+    hp: 3100,
+    battery: 5,
   });
-  stub.start();
-  return stub.domElement();
-};
+  gaugeChange(gauge).loop();
+  return [gauge.getObject3D()];
+});
 
-export const playerMaxBatteryChange = (): HTMLElement => {
-  const stub = new HUDGameObjectStub(({ resources, gameObjectAction }) => {
+/** ゲージ バッテリー最大値変更 プレイヤー側 */
+export const playerMaxBatteryChange = hudGameObjectStory(
+  ({ resources, gameObjectAction }) => {
     const gauge = playerGauge({
       resources,
       gameObjectAction,
@@ -58,28 +64,24 @@ export const playerMaxBatteryChange = (): HTMLElement => {
     });
     maxBatteryChange(gauge).loop();
     return [gauge.getObject3D()];
-  });
-  stub.start();
-  return stub.domElement();
-};
+  },
+);
 
-export const enemy = (): HTMLElement => {
-  const stub = new HUDGameObjectStub(({ resources, gameObjectAction }) => {
-    const gauge = enemyGauge({
-      resources,
-      gameObjectAction,
-      hp: 3100,
-      battery: 5,
-    });
-    gaugeChange(gauge).loop();
-    return [gauge.getObject3D()];
+/** ゲージ 敵側 */
+export const enemy = hudGameObjectStory(({ resources, gameObjectAction }) => {
+  const gauge = enemyGauge({
+    resources,
+    gameObjectAction,
+    hp: 3100,
+    battery: 5,
   });
-  stub.start();
-  return stub.domElement();
-};
+  gaugeChange(gauge).loop();
+  return [gauge.getObject3D()];
+});
 
-export const enemyMaxBatteryChange = (): HTMLElement => {
-  const stub = new HUDGameObjectStub(({ resources, gameObjectAction }) => {
+/** ゲージ バッテリー最大値変更 敵側 */
+export const enemyMaxBatteryChange = hudGameObjectStory(
+  ({ resources, gameObjectAction }) => {
     const gauge = enemyGauge({
       resources,
       gameObjectAction,
@@ -88,7 +90,5 @@ export const enemyMaxBatteryChange = (): HTMLElement => {
     });
     maxBatteryChange(gauge).loop();
     return [gauge.getObject3D()];
-  });
-  stub.start();
-  return stub.domElement();
-};
+  },
+);

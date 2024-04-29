@@ -2,22 +2,24 @@ import * as TWEEN from "@tweenjs/tween.js";
 import { Observable, Subject, Unsubscribable } from "rxjs";
 import * as THREE from "three";
 
-import type { GameLoop } from "../../src/js/game-loop/game-loop";
-import { gameLoopStream } from "../../src/js/game-loop/game-loop";
-import type { PreRender } from "../../src/js/game-loop/pre-render";
-import type { Update } from "../../src/js/game-loop/update";
-import type { GameObjectAction } from "../../src/js/game-object/action/game-object-action";
-import { gameObjectStream } from "../../src/js/game-object/action/game-object-action";
+import { GameLoop, gameLoopStream } from "../../src/js/game-loop/game-loop";
+import { PreRender } from "../../src/js/game-loop/pre-render";
+import { Update } from "../../src/js/game-loop/update";
+import {
+  GameObjectAction,
+  gameObjectStream,
+} from "../../src/js/game-object/action/game-object-action";
 import { PlainHUDCamera } from "../../src/js/game-object/camera/plain-hud/plain-hud-camera";
 import { Renderer } from "../../src/js/render";
-import type { OverlapEvent } from "../../src/js/render/overlap-event/overlap-event";
-import type { ResourcesContainer } from "../../src/js/resource";
+import { OverlapEvent } from "../../src/js/render/overlap-event/overlap-event";
+import { ResourcesContainer } from "../../src/js/resource";
 import { developingFullResourceLoading } from "../../src/js/resource/loading/full-resource-loading";
-import type { SafeAreaInset } from "../../src/js/safe-area/safe-area-inset";
-import { createSafeAreaInset } from "../../src/js/safe-area/safe-area-inset";
+import {
+  createSafeAreaInset,
+  SafeAreaInset,
+} from "../../src/js/safe-area/safe-area-inset";
 import { createSEPlayer, SEPlayerContainer } from "../../src/js/se/se-player";
-import type { Resize } from "../../src/js/window/resize";
-import { resizeStream } from "../../src/js/window/resize";
+import { Resize, resizeStream } from "../../src/js/window/resize";
 import { StorybookResourceRoot } from "../storybook-resource-root";
 
 /** Object3D生成関数パラメータ */
@@ -29,7 +31,6 @@ type Object3DParams = ResourcesContainer &
 
 /**
  * Object3D生成関数
- *
  * @param params パラメータ
  * @returns シーンに追加するObject3D
  */
@@ -37,52 +38,62 @@ export type Object3DCreator = (params: Object3DParams) => THREE.Object3D[];
 
 /** HUDレイヤー ゲームオブジェクト スタブ */
 export class HUDGameObjectStub {
-  _creator: Object3DCreator;
-  _safeAreaInset: SafeAreaInset;
-  _resize: Observable<Resize>;
-  _gameLoop: Observable<GameLoop>;
-  _update: Subject<Update>;
-  _preRender: Subject<PreRender>;
-  _renderer: Renderer;
-  _camera: PlainHUDCamera;
-  _scene: THREE.Scene;
-  _overlap: Observable<OverlapEvent>;
-  _gameObjectAction: Observable<GameObjectAction>;
-  _unsubscriber: Unsubscribable[];
+  /** 3Dオブジェクト生成関数 */
+  #creator: Object3DCreator;
+  /** セーフエリアインセット */
+  #safeAreaInset: SafeAreaInset;
+  /** リサイズ */
+  #resize: Observable<Resize>;
+  /** ゲームループ */
+  #gameLoop: Observable<GameLoop>;
+  /** アップデート */
+  #update: Subject<Update>;
+  /** プリレンダー */
+  #preRender: Subject<PreRender>;
+  /** レンダラー */
+  #renderer: Renderer;
+  /** カメラ */
+  #camera: PlainHUDCamera;
+  /** シーン */
+  #scene: THREE.Scene;
+  /** オーバーラップ */
+  #overlap: Observable<OverlapEvent>;
+  /** ゲームオブジェクトアクション */
+  #gameObjectAction: Observable<GameObjectAction>;
+  /** アンサブスクライバー */
+  #unsubscriber: Unsubscribable[];
 
   /**
    * コンストラクタ
-   *
    * @param creator Object3D生成関数
    */
   constructor(creator: Object3DCreator) {
-    this._creator = creator;
-    this._safeAreaInset = createSafeAreaInset();
-    this._resize = resizeStream();
-    this._gameLoop = gameLoopStream();
-    this._update = new Subject();
-    this._preRender = new Subject();
-    this._renderer = new Renderer(this._resize);
-    this._scene = new THREE.Scene();
-    this._camera = new PlainHUDCamera(this._resize);
-    this._overlap = this._renderer.createOverlapNotifier(
-      this._camera.getCamera(),
+    this.#creator = creator;
+    this.#safeAreaInset = createSafeAreaInset();
+    this.#resize = resizeStream();
+    this.#gameLoop = gameLoopStream();
+    this.#update = new Subject();
+    this.#preRender = new Subject();
+    this.#renderer = new Renderer(this.#resize);
+    this.#scene = new THREE.Scene();
+    this.#camera = new PlainHUDCamera(this.#resize);
+    this.#overlap = this.#renderer.createOverlapNotifier(
+      this.#camera.getCamera(),
     );
-    this._gameObjectAction = gameObjectStream(
-      this._update,
-      this._preRender,
-      this._overlap,
+    this.#gameObjectAction = gameObjectStream(
+      this.#update,
+      this.#preRender,
+      this.#overlap,
     );
-    this._unsubscriber = [
-      this._gameLoop.subscribe((v) => {
-        this._onGameLoop(v);
+    this.#unsubscriber = [
+      this.#gameLoop.subscribe((v) => {
+        this.#onGameLoop(v);
       }),
     ];
   }
 
   /**
    * シーンを開始する
-   *
    * @returns 実行結果
    */
   async start(): Promise<void> {
@@ -90,14 +101,14 @@ export class HUDGameObjectStub {
     const resourceLoading = developingFullResourceLoading(resourceRoot);
     const resources = await resourceLoading.resources;
 
-    const object3Ds = this._creator({
+    const object3Ds = this.#creator({
       resources,
       se: createSEPlayer(),
-      gameObjectAction: this._gameObjectAction,
+      gameObjectAction: this.#gameObjectAction,
     });
 
     object3Ds.forEach((object3D) => {
-      this._scene.add(object3D);
+      this.#scene.add(object3D);
     });
   }
 
@@ -107,29 +118,40 @@ export class HUDGameObjectStub {
    * @returns {HTMLElement}
    */
   domElement(): HTMLElement {
-    return this._renderer.getRendererDOM();
+    return this.#renderer.getRendererDOM();
   }
 
   /**
    * ゲームループの処理
-   *
    * @param action アクション
    */
-  _onGameLoop(action: GameLoop): void {
+  #onGameLoop(action: GameLoop): void {
     TWEEN.update(action.time);
 
-    this._update.next({
+    this.#update.next({
       type: "Update",
       time: action.time,
     });
 
-    this._preRender.next({
+    this.#preRender.next({
       type: "PreRender",
-      camera: this._camera.getCamera(),
-      rendererDOM: this._renderer.getRendererDOM(),
-      safeAreaInset: this._safeAreaInset,
+      camera: this.#camera.getCamera(),
+      rendererDOM: this.#renderer.getRendererDOM(),
+      safeAreaInset: this.#safeAreaInset,
     });
 
-    this._renderer.rendering(this._scene, this._camera.getCamera());
+    this.#renderer.rendering(this.#scene, this.#camera.getCamera());
   }
 }
+
+/**
+ * HUDレイヤー ゲームオブジェクト ストーリー
+ * @param creator 3Dオブジェクト生成関数
+ * @returns ストーリー
+ */
+export const hudGameObjectStory =
+  (creator: Object3DCreator) => (): HTMLElement => {
+    const stub = new HUDGameObjectStub(creator);
+    stub.start();
+    return stub.domElement();
+  };

@@ -5,7 +5,7 @@ import {
   YuuyaCutInCreatorParams,
 } from "../src/js/game-object/cut-in/yuuya";
 import { YuuyaCutIn } from "../src/js/game-object/cut-in/yuuya/yuuya";
-import { HUDGameObjectStub } from "./stub/hud-game-object-stub";
+import { hudGameObjectStory } from "./stub/hud-game-object-stub";
 
 export default {
   title: "yuuya-cutin",
@@ -25,17 +25,15 @@ type CutInGenerator = (params: YuuyaCutInCreatorParams) => YuuyaCutIn;
  * @param fn カットイン操作関数
  * @returns ルートHTML要素
  */
-const cutInStory =
-  (generator: CutInGenerator, fn: (cutIn: YuuyaCutIn) => void) =>
-  (): HTMLElement => {
-    const stub = new HUDGameObjectStub((params) => {
-      const cutIn = generator(params);
-      fn(cutIn);
-      return [cutIn.getObject3D()];
-    });
-    stub.start();
-    return stub.domElement();
-  };
+const cutInStory = (
+  generator: CutInGenerator,
+  fn: (cutIn: YuuyaCutIn) => void,
+) =>
+  hudGameObjectStory((params) => {
+    const cutIn = generator(params);
+    fn(cutIn);
+    return [cutIn.getObject3D()];
+  });
 
 /**
  * カットインを表示する
