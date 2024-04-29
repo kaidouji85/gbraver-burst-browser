@@ -3,27 +3,28 @@ import ShoppingStreet from "../src/js/game-object/stage/shopping-street/shopping
 import { createSkyBox } from "../src/js/td-scenes/battle/view/td/sky-box";
 import type { Object3DsGeneratorParams } from "./stub/still-image-stub";
 import { stillImageStub } from "./stub/still-image-stub";
-import { TDGameObjectStub } from "./stub/td-game-object-stub";
+import { tdGameObjectStory } from "./stub/td-game-object-stub";
+
 export default {
   title: "shopping-street",
 };
-export const game = (): HTMLElement => {
-  const stub = new TDGameObjectStub(({ resources, gameObjectAction }) => {
-    const illumination = new Illumination(gameObjectAction);
-    const shoppingStreet = new ShoppingStreet(resources);
-    const objects = [
-      ...shoppingStreet.getThreeJsObjects(),
-      ...illumination.getObject3Ds(),
-    ];
-    const skyBox = createSkyBox(resources);
-    return {
-      objects,
-      skyBox,
-    };
-  });
-  stub.start();
-  return stub.domElement();
-};
+
+/** ゲーム画面での表示 */
+export const game = tdGameObjectStory(({ resources, gameObjectAction }) => {
+  const illumination = new Illumination(gameObjectAction);
+  const shoppingStreet = new ShoppingStreet(resources);
+  const objects = [
+    ...shoppingStreet.getThreeJsObjects(),
+    ...illumination.getObject3Ds(),
+  ];
+  const skyBox = createSkyBox(resources);
+  return {
+    objects,
+    skyBox,
+  };
+});
+
+/** 静止画 ハイレゾリューション */
 export const highResolutionStillImage = (): HTMLElement => {
   const renderer = {
     width: 7680,

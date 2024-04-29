@@ -5,7 +5,7 @@ import {
   playerContinuousAttack,
 } from "../src/js/game-object/continuous-attack";
 import { ContinuousAttackIndicator } from "../src/js/game-object/continuous-attack/continuous-attack-indicator";
-import { TDGameObjectStub } from "./stub/td-game-object-stub";
+import { tdGameObjectStory } from "./stub/td-game-object-stub";
 
 export default {
   title: "continuous-attack",
@@ -17,24 +17,19 @@ export default {
  * @param fn 連続攻撃インジケータ操作関数
  * @returns story
  */
-const continuousAttackStory =
-  (
-    generator: (
-      params: ContinuousAttackCreatorParams,
-    ) => ContinuousAttackIndicator,
-    fn: (continuousAttack: ContinuousAttackIndicator) => void,
-  ) =>
-  () => {
-    const stub = new TDGameObjectStub((params) => {
-      const continuousAttack = generator(params);
-      fn(continuousAttack);
-      return {
-        objects: [continuousAttack.getObject3D()],
-      };
-    });
-    stub.start();
-    return stub.domElement();
-  };
+const continuousAttackStory = (
+  generator: (
+    params: ContinuousAttackCreatorParams,
+  ) => ContinuousAttackIndicator,
+  fn: (continuousAttack: ContinuousAttackIndicator) => void,
+) =>
+  tdGameObjectStory((params) => {
+    const continuousAttack = generator(params);
+    fn(continuousAttack);
+    return {
+      objects: [continuousAttack.getObject3D()],
+    };
+  });
 
 /**
  * ポップアップ
