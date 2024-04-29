@@ -1,3 +1,5 @@
+import { StoryFn } from "@storybook/html";
+
 import { delay } from "../src/js/animation/delay";
 import {
   EnemyLightningDozer,
@@ -5,16 +7,18 @@ import {
 } from "../src/js/game-object/armdozer/lightning-dozer";
 import { LightningDozer } from "../src/js/game-object/armdozer/lightning-dozer/lightning-dozer";
 import { armdozerSpriteStub } from "./stub/armdozer-sprite-stub";
-import {StoryFn} from "@storybook/html";
 
 export default {
   title: "lightning-dozer",
 };
 
 /** プレイヤー 立ち */
-export const playerStand: StoryFn = armdozerSpriteStub(PlayerLightningDozer, () => {
-  // NOP
-});
+export const playerStand: StoryFn = armdozerSpriteStub(
+  PlayerLightningDozer,
+  () => {
+    // NOP
+  },
+);
 
 /** プレイヤー アクティブ 立ち */
 export const playerActiveStand: StoryFn = armdozerSpriteStub(
@@ -25,9 +29,12 @@ export const playerActiveStand: StoryFn = armdozerSpriteStub(
 );
 
 /** 敵 立ち */
-export const enemyStand: StoryFn = armdozerSpriteStub(EnemyLightningDozer, () => {
-  // NOP
-});
+export const enemyStand: StoryFn = armdozerSpriteStub(
+  EnemyLightningDozer,
+  () => {
+    // NOP
+  },
+);
 
 /** 敵 アクティブ 立ち */
 export const enemyActiveStand: StoryFn = armdozerSpriteStub(
@@ -107,7 +114,10 @@ const activeAvoid = (sprite: LightningDozer) => {
 };
 
 /** プレイヤー 回避 */
-export const playerAvoid: StoryFn = armdozerSpriteStub(PlayerLightningDozer, avoid);
+export const playerAvoid: StoryFn = armdozerSpriteStub(
+  PlayerLightningDozer,
+  avoid,
+);
 
 /** プレイヤー アクティブ 回避 */
 export const playerActiveAvoid: StoryFn = armdozerSpriteStub(
@@ -116,7 +126,10 @@ export const playerActiveAvoid: StoryFn = armdozerSpriteStub(
 );
 
 /** 敵 回避 */
-export const enemyAvoid: StoryFn = armdozerSpriteStub(EnemyLightningDozer, avoid);
+export const enemyAvoid: StoryFn = armdozerSpriteStub(
+  EnemyLightningDozer,
+  avoid,
+);
 
 /** 敵 アクティブ 回避 */
 export const enemyActiveAvoid: StoryFn = armdozerSpriteStub(
@@ -146,7 +159,10 @@ const activeGuard = (sprite: LightningDozer) => {
 };
 
 /** プレイヤー ガード */
-export const playerGuard: StoryFn = armdozerSpriteStub(PlayerLightningDozer, guard);
+export const playerGuard: StoryFn = armdozerSpriteStub(
+  PlayerLightningDozer,
+  guard,
+);
 
 /** プレイヤー アクティブ ガード */
 export const playerActiveGuard: StoryFn = armdozerSpriteStub(
@@ -155,7 +171,10 @@ export const playerActiveGuard: StoryFn = armdozerSpriteStub(
 );
 
 /** 敵 ガード */
-export const enemyGuard: StoryFn = armdozerSpriteStub(EnemyLightningDozer, guard);
+export const enemyGuard: StoryFn = armdozerSpriteStub(
+  EnemyLightningDozer,
+  guard,
+);
 
 /** 敵 アクティブ ガード */
 export const enemyActiveGuard: StoryFn = armdozerSpriteStub(
@@ -230,7 +249,10 @@ const activeGuts = (sprite: LightningDozer) => {
 };
 
 /** プレイヤー ガッツ */
-export const playerGuts: StoryFn = armdozerSpriteStub(PlayerLightningDozer, guts);
+export const playerGuts: StoryFn = armdozerSpriteStub(
+  PlayerLightningDozer,
+  guts,
+);
 
 /** プレイヤー アクティブ ガッツ */
 export const playerActiveGuts: StoryFn = armdozerSpriteStub(
@@ -265,7 +287,10 @@ const activeDown = (sprite: LightningDozer) => {
 };
 
 /** プレイヤー ダウン */
-export const playerDown: StoryFn = armdozerSpriteStub(PlayerLightningDozer, down);
+export const playerDown: StoryFn = armdozerSpriteStub(
+  PlayerLightningDozer,
+  down,
+);
 
 /** プレイヤー アクティブ ダウン */
 export const playerActiveDown: StoryFn = armdozerSpriteStub(

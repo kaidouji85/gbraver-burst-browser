@@ -1,4 +1,4 @@
-import {StoryFn} from "@storybook/html";
+import { StoryFn } from "@storybook/html";
 
 import { DifficultyDialog } from "../src/js/dom-dialogs/difficulty";
 import { domStub } from "./stub/dom-stub";
