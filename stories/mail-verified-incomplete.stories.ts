@@ -1,12 +1,14 @@
+import { StoryFn } from "@storybook/html";
+
 import { MailVerifiedIncomplete } from "../src/js/dom-scenes/mail-verified-incomplete";
-import type { DOMStubStory } from "./stub/dom-stub";
 import { domStub } from "./stub/dom-stub";
 
 export default {
   title: "mail-verified-incomplete",
 };
 
-export const scene: DOMStubStory = domStub(() => {
+/** シーン表示 */
+export const scene: StoryFn = domStub(() => {
   const scene = new MailVerifiedIncomplete("test@mail.address.com");
   scene.notifyTitleTransition().subscribe(() => {
     console.log("goto title");

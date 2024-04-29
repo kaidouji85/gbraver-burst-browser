@@ -1,14 +1,15 @@
+import { StoryFn } from "@storybook/html";
 import { ArmdozerIds } from "gbraver-burst-core";
 
 import { MatchCard } from "../src/js/dom-scenes/match-card";
-import type { DOMStubStory } from "./stub/dom-stub";
 import { domStub } from "./stub/dom-stub";
 
 export default {
   title: "match-card",
 };
 
-export const Scene: DOMStubStory = domStub((params) => {
+/** シーン表示 */
+export const Scene: StoryFn = domStub((params) => {
   const scene = new MatchCard({
     ...params,
     player: ArmdozerIds.LIGHTNING_DOZER,

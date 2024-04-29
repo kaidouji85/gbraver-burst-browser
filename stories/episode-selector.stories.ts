@@ -1,13 +1,16 @@
+import { StoryFn } from "@storybook/html";
+
 import { EpisodeSelector } from "../src/js/dom-scenes/episode-selector";
 import { Episode } from "../src/js/dom-scenes/episode-selector/episode";
 import { PathIds } from "../src/js/resource/path/ids";
-import type { DOMStubStory } from "./stub/dom-stub";
 import { domStub } from "./stub/dom-stub";
 
 export default {
   title: "episode-selector",
 };
-export const scene: DOMStubStory = domStub((params) => {
+
+/** シーン表示 */
+export const scene: StoryFn = domStub((params) => {
   const episodes: Episode[] = [
     {
       id: "01",

@@ -1,3 +1,5 @@
+import { StoryFn } from "@storybook/html";
+
 import { delay } from "../src/js/animation/delay";
 import {
   enemyPowerUp,
@@ -38,7 +40,7 @@ const popUp = (powerUp: PowerUp) => {
 };
 
 /** プレイヤー 攻撃アップ ポップアップ */
-export const playerPopUp = powerUpStory(playerPowerUp, popUp);
+export const playerPopUp: StoryFn = powerUpStory(playerPowerUp, popUp);
 
 /** 敵 攻撃アップ ポップアップ */
-export const enemyPopUp = powerUpStory(enemyPowerUp, popUp);
+export const enemyPopUp: StoryFn = powerUpStory(enemyPowerUp, popUp);

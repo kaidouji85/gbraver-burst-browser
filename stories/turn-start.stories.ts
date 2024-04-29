@@ -1,3 +1,4 @@
+import { StoryFn } from "@storybook/html";
 import { Observable } from "rxjs";
 
 import { delay } from "../src/js/animation/delay";
@@ -46,7 +47,7 @@ const popUp = (turnStart: TurnStart) => {
 };
 
 /** プレイヤー ターンスタート ポップアップ */
-export const playerPopUp = turnStartStory(playerTurnStart, popUp);
+export const playerPopUp: StoryFn = turnStartStory(playerTurnStart, popUp);
 
 /** 敵 ターンスタート ポップアップ */
-export const enemyPopUp = turnStartStory(enemyTurnStart, popUp);
+export const enemyPopUp: StoryFn = turnStartStory(enemyTurnStart, popUp);
