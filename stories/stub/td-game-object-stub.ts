@@ -15,8 +15,8 @@ import { OverlapEvent } from "../../src/js/render/overlap-event/overlap-event";
 import { ResourcesContainer } from "../../src/js/resource";
 import { developingFullResourceLoading } from "../../src/js/resource/loading/full-resource-loading";
 import {
-  SafeAreaInset,
   createSafeAreaInset,
+  SafeAreaInset,
 } from "../../src/js/safe-area/safe-area-inset";
 import { createSEPlayer, SEPlayerContainer } from "../../src/js/se/se-player";
 import { Resize, resizeStream } from "../../src/js/window/resize";
@@ -160,8 +160,9 @@ export class TDGameObjectStub {
  * @param creator 3Dオブジェクト生成関数
  * @returns ストーリー
  */
-export const tdGameObjectStory = (creator: Object3DCreator): HTMLElement => {
-  const stub = new TDGameObjectStub(creator);
-  stub.start();
-  return stub.domElement();
-}
+export const tdGameObjectStory =
+  (creator: Object3DCreator) => (): HTMLElement => {
+    const stub = new TDGameObjectStub(creator);
+    stub.start();
+    return stub.domElement();
+  };
