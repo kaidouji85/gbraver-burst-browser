@@ -65,7 +65,7 @@ const straightPunch = (sprite: GenesisBraver) => {
  */
 const activeStraightPunch = (sprite: GenesisBraver) => {
   straightPunch(sprite);
-  sprite.startActive().loop();
+  sprite.startActive().play();
 };
 
 /** プレイヤー ストレートパンチ */
@@ -111,7 +111,7 @@ const knockBack = (sprite: GenesisBraver) => {
  */
 const activeKnockBack = (sprite: GenesisBraver) => {
   knockBack(sprite);
-  sprite.startActive().loop();
+  sprite.startActive().play();
 };
 
 /** プレイヤー ノックバック */
@@ -157,7 +157,7 @@ const guard = (sprite: GenesisBraver) => {
  */
 const activeGuard = (sprite: GenesisBraver) => {
   guard(sprite);
-  sprite.startActive().loop();
+  sprite.startActive().play();
 };
 
 /** プレイヤー ガード */
