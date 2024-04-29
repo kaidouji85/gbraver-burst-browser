@@ -5,6 +5,6 @@ import { PredicatedDamageProps } from "../props/predicated-damage-props";
  * @param props ゲームオブジェクトプロパティ
  */
 export function onUpdate(props: PredicatedDamageProps) {
-  const {model, view} = props;
+  const { model, view } = props;
   view.engage(model);
 }

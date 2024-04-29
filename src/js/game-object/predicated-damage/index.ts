@@ -1,7 +1,10 @@
 import { Observable, Unsubscribable } from "rxjs";
 import * as THREE from "three";
 
+import { Animate } from "../../animation/animate";
 import { GameObjectAction } from "../action/game-object-action";
+import { hidden } from "./animation/hidden";
+import { show } from "./animation/show";
 import { bindEventListener } from "./procedure/bind-event-listener";
 import {
   createPredicatedDamageProps,
@@ -50,5 +53,22 @@ export class PredicatedDamage {
    */
   getObject3D(): THREE.Object3D {
     return this.#props.view.getObject3D();
+  }
+
+  /**
+   * 表示
+   * @param damage ダメージ
+   * @returns アニメーション
+   */
+  show(damage: number): Animate {
+    return show(this.#props, damage);
+  }
+
+  /**
+   * 非表示
+   * @returns アニメーション
+   */
+  hidden(): Animate {
+    return hidden(this.#props);
   }
 }

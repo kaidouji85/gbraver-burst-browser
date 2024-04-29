@@ -6,6 +6,7 @@ import { PredicatedDamageModel } from "./predicated-damage-model";
  */
 export function initialValue(): PredicatedDamageModel {
   return {
-    damage: 2000
-  }
+    damage: 2000,
+    opacity: 0,
+  };
 }

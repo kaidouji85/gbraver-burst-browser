@@ -20,10 +20,10 @@ type Params = {
 export function bindEventListener(params: Params): Unsubscribable[] {
   const { props, gameObjectAction } = params;
   return [
-    gameObjectAction.subscribe(action => {
+    gameObjectAction.subscribe((action) => {
       if (action.type === "Update") {
         onUpdate(props);
       }
-    })
+    }),
   ];
 }

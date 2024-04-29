@@ -77,7 +77,7 @@ export class PredicatedDamageView {
    * @param model モデル
    */
   engage(model: PredicatedDamageModel): void {
-    const { damage } = model;
+    const { damage, opacity } = model;
 
     this.#numbers.forEach((n) => {
       n.opacity(0);
@@ -94,7 +94,7 @@ export class PredicatedDamageView {
       }))
       .forEach(({ mesh, value }) => {
         mesh.animate(value / MAX_ANIMATION);
-        mesh.opacity(1);
+        mesh.opacity(opacity);
       });
   }
 
