@@ -10,7 +10,10 @@ import { PredicatedDamageModel } from "../model/predicated-damage-model";
 const MAX_ANIMATION = 16;
 
 /** メッシュサイズ */
-const MESH_SIZE = 64;
+const MESH_SIZE = 128;
+
+/** メッシュ間隔 */
+const MESH_INTERVAL = 64;
 
 /** 数字の最大桁数 */
 const NUMBER_OF_DIGITS = 5;
@@ -52,7 +55,7 @@ export class PredicatedDamageView {
         width: MESH_SIZE,
         height: MESH_SIZE,
       });
-      mesh.getObject3D().position.x = -v * 32;
+      mesh.getObject3D().position.x = -v * MESH_INTERVAL;
       return mesh;
     }, NUMBER_OF_DIGITS);
     this.#numbers.forEach((n) => {
