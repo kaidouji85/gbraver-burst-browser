@@ -41,8 +41,9 @@ export class PredicatedDamageView {
     this.#group = new THREE.Group();
 
     const texture =
-      resources.textures.find((t) => t.id === TEXTURE_IDS.HP_NUMBER)?.texture ??
-      new THREE.Texture();
+      resources.textures.find(
+        (t) => t.id === TEXTURE_IDS.PREDICATED_DAMAGE_NUMBER,
+      )?.texture ?? new THREE.Texture();
 
     this.#numbers = R.times((v) => {
       const mesh = new HorizontalAnimationMesh({
