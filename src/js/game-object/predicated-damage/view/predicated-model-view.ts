@@ -15,7 +15,7 @@ const MESH_SIZE = 128;
 /** メッシュ間隔 */
 const MESH_INTERVAL = 64;
 
-/** 数字の最大桁数 */
+/** マイナス符号も含めた数字の最大桁数 */
 const NUMBER_OF_DIGITS = 5;
 
 /** 最大ダメージ */
@@ -82,6 +82,7 @@ export class PredicatedDamageView {
     this.#numbers.forEach((n) => {
       n.opacity(0);
     });
+
     const correctDamage = Math.max(MIN_DAMAGE, Math.min(damage, MAX_DAMAGE));
     const values = String(correctDamage)
       .split("")
@@ -96,6 +97,12 @@ export class PredicatedDamageView {
         mesh.animate(value / MAX_ANIMATION);
         mesh.opacity(opacity);
       });
+
+    const sign = this.#numbers.at(values.length);
+    if (sign) {
+      sign.opacity(opacity);
+      sign.animate(10 / MAX_ANIMATION);
+    }
   }
 
   /**
