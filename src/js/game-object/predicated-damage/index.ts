@@ -13,7 +13,7 @@ import {
 import { PredicatedDamageProps } from "./props/predicated-damage-props";
 
 /** コンストラクタのパラメータ */
-type PredicatedDamageConstructParams = PredicatedDamagePropsCreatorParams & {
+export type PredicatedDamageConstructParams = PredicatedDamagePropsCreatorParams & {
   /** ゲームオブジェクトアクション */
   gameObjectAction: Observable<GameObjectAction>;
 };
