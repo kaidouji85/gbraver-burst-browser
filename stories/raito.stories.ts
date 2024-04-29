@@ -11,7 +11,7 @@ export default {
 };
 
 /**
- * ライト　カットイン
+ * ライト カットイン
  * @param pilot カットイン
  * @return アニメーション
  */
