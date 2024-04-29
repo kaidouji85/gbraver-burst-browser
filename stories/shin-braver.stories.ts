@@ -11,28 +11,30 @@ export default {
 };
 
 /** プレイヤー 立ち */
-export const playerStand = () =>
-  armdozerSpriteStub(PlayerShinBraver, () => {
-    // NOP
-  });
+export const playerStand = armdozerSpriteStub(PlayerShinBraver, () => {
+  // NOP
+});
 
 /** プレイヤー アクティブ 立ち */
-export const playerActiveStand = () =>
-  armdozerSpriteStub(PlayerShinBraver, (sprite) => {
+export const playerActiveStand = armdozerSpriteStub(
+  PlayerShinBraver,
+  (sprite) => {
     sprite.startActive().play();
-  });
+  },
+);
 
 /** 敵 立ち */
-export const enemyStand = () =>
-  armdozerSpriteStub(EnemyShinBraver, () => {
-    // NOP
-  });
+export const enemyStand = armdozerSpriteStub(EnemyShinBraver, () => {
+  // NOP
+});
 
 /** 敵 アクティブ 立ち */
-export const enemyActiveStand = () =>
-  armdozerSpriteStub(EnemyShinBraver, (sprite) => {
+export const enemyActiveStand = armdozerSpriteStub(
+  EnemyShinBraver,
+  (sprite) => {
     sprite.startActive().play();
-  });
+  },
+);
 
 /**
  * ストレートパンチ
@@ -58,20 +60,28 @@ const activeStraightPunch = (sprite: ShinBraver) => {
 };
 
 /** プレイヤー ストレートパンチ */
-export const playerStraightPunch = () =>
-  armdozerSpriteStub(PlayerShinBraver, straightPunch);
+export const playerStraightPunch = armdozerSpriteStub(
+  PlayerShinBraver,
+  straightPunch,
+);
 
 /** プレイヤー アクティブ ストレートパンチ */
-export const playerActiveStraightPunch = () =>
-  armdozerSpriteStub(PlayerShinBraver, activeStraightPunch);
+export const playerActiveStraightPunch = armdozerSpriteStub(
+  PlayerShinBraver,
+  activeStraightPunch,
+);
 
 /** 敵 ストレートパンチ */
-export const enemyStraightPunch = () =>
-  armdozerSpriteStub(EnemyShinBraver, straightPunch);
+export const enemyStraightPunch = armdozerSpriteStub(
+  EnemyShinBraver,
+  straightPunch,
+);
 
 /** 敵 アクティブ ストレートパンチ */
-export const enemyActiveStraightPunch = () =>
-  armdozerSpriteStub(EnemyShinBraver, activeStraightPunch);
+export const enemyActiveStraightPunch = armdozerSpriteStub(
+  EnemyShinBraver,
+  activeStraightPunch,
+);
 
 /**
  * ガッツ
@@ -96,18 +106,19 @@ const activeGuts = (sprite: ShinBraver) => {
 };
 
 /** プレイヤー ガッツ */
-export const playerGuts = () => armdozerSpriteStub(PlayerShinBraver, guts);
+export const playerGuts = armdozerSpriteStub(PlayerShinBraver, guts);
 
 /** プレイヤー アクティブ ガッツ */
-export const playerActiveGuts = () =>
-  armdozerSpriteStub(PlayerShinBraver, activeGuts);
+export const playerActiveGuts = armdozerSpriteStub(
+  PlayerShinBraver,
+  activeGuts,
+);
 
 /** 敵 ガッツ */
-export const enemyGuts = () => armdozerSpriteStub(EnemyShinBraver, guts);
+export const enemyGuts = armdozerSpriteStub(EnemyShinBraver, guts);
 
 /** 敵 アクティブ ガッツ */
-export const enemyActiveGuts = () =>
-  armdozerSpriteStub(EnemyShinBraver, activeGuts);
+export const enemyActiveGuts = armdozerSpriteStub(EnemyShinBraver, activeGuts);
 
 /**
  * バースト
@@ -132,18 +143,22 @@ const activeBurst = (sprite: ShinBraver) => {
 };
 
 /** プレイヤー バースト */
-export const playerBurst = () => armdozerSpriteStub(PlayerShinBraver, burst);
+export const playerBurst = armdozerSpriteStub(PlayerShinBraver, burst);
 
 /** プレイヤー アクティブ バースト */
-export const playerActiveBurst = () =>
-  armdozerSpriteStub(PlayerShinBraver, activeBurst);
+export const playerActiveBurst = armdozerSpriteStub(
+  PlayerShinBraver,
+  activeBurst,
+);
 
 /** 敵 バースト */
-export const enemyBurst = () => armdozerSpriteStub(EnemyShinBraver, burst);
+export const enemyBurst = armdozerSpriteStub(EnemyShinBraver, burst);
 
 /** 敵 アクティブ バースト */
-export const enemyActiveBurst = () =>
-  armdozerSpriteStub(EnemyShinBraver, activeBurst);
+export const enemyActiveBurst = armdozerSpriteStub(
+  EnemyShinBraver,
+  activeBurst,
+);
 
 /**
  * ノックバック
@@ -168,20 +183,22 @@ const activeKnockBack = (sprite: ShinBraver) => {
 };
 
 /** プレイヤー ノックバック */
-export const playerKnockBack = () =>
-  armdozerSpriteStub(PlayerShinBraver, knockBack);
+export const playerKnockBack = armdozerSpriteStub(PlayerShinBraver, knockBack);
 
 /** プレイヤー アクティブ ノックバック */
-export const playerActiveKnockBack = () =>
-  armdozerSpriteStub(PlayerShinBraver, activeKnockBack);
+export const playerActiveKnockBack = armdozerSpriteStub(
+  PlayerShinBraver,
+  activeKnockBack,
+);
 
 /** 敵 ノックバック */
-export const enemyKnockBack = () =>
-  armdozerSpriteStub(EnemyShinBraver, knockBack);
+export const enemyKnockBack = armdozerSpriteStub(EnemyShinBraver, knockBack);
 
 /** 敵 アクティブ ノックバック */
-export const enemyActiveKnockBack = () =>
-  armdozerSpriteStub(EnemyShinBraver, activeKnockBack);
+export const enemyActiveKnockBack = armdozerSpriteStub(
+  EnemyShinBraver,
+  activeKnockBack,
+);
 
 /**
  * ガード
@@ -206,18 +223,22 @@ const activeGuard = (sprite: ShinBraver) => {
 };
 
 /** プレイヤー ガード */
-export const playerGuard = () => armdozerSpriteStub(PlayerShinBraver, guard);
+export const playerGuard = armdozerSpriteStub(PlayerShinBraver, guard);
 
 /** プレイヤー アクティブ ガード */
-export const playerActiveGuard = () =>
-  armdozerSpriteStub(PlayerShinBraver, activeGuard);
+export const playerActiveGuard = armdozerSpriteStub(
+  PlayerShinBraver,
+  activeGuard,
+);
 
 /** 敵 ガード */
-export const enemyGuard = () => armdozerSpriteStub(EnemyShinBraver, guard);
+export const enemyGuard = armdozerSpriteStub(EnemyShinBraver, guard);
 
 /** 敵 アクティブ ガード */
-export const enemyActiveGuard = () =>
-  armdozerSpriteStub(EnemyShinBraver, activeGuard);
+export const enemyActiveGuard = armdozerSpriteStub(
+  EnemyShinBraver,
+  activeGuard,
+);
 
 /**
  * 回避
@@ -242,18 +263,22 @@ const activeAvoid = (sprite: ShinBraver) => {
 };
 
 /** プレイヤー 回避 */
-export const playerAvoid = () => armdozerSpriteStub(PlayerShinBraver, avoid);
+export const playerAvoid = armdozerSpriteStub(PlayerShinBraver, avoid);
 
 /** プレイヤー アクティブ 回避 */
-export const playerActiveAvoid = () =>
-  armdozerSpriteStub(PlayerShinBraver, activeAvoid);
+export const playerActiveAvoid = armdozerSpriteStub(
+  PlayerShinBraver,
+  activeAvoid,
+);
 
 /** 敵 回避 */
-export const enemyAvoid = () => armdozerSpriteStub(EnemyShinBraver, avoid);
+export const enemyAvoid = armdozerSpriteStub(EnemyShinBraver, avoid);
 
 /** 敵 アクティブ 回避 */
-export const enemyActiveAvoid = () =>
-  armdozerSpriteStub(EnemyShinBraver, activeAvoid);
+export const enemyActiveAvoid = armdozerSpriteStub(
+  EnemyShinBraver,
+  activeAvoid,
+);
 
 /**
  * ダウン
@@ -273,18 +298,19 @@ const activeDown = (sprite: ShinBraver) => {
 };
 
 /** プレイヤー ダウン */
-export const playerDown = () => armdozerSpriteStub(PlayerShinBraver, down);
+export const playerDown = armdozerSpriteStub(PlayerShinBraver, down);
 
 /** プレイヤー アクティブ ダウン */
-export const playerActiveDown = () =>
-  armdozerSpriteStub(PlayerShinBraver, activeDown);
+export const playerActiveDown = armdozerSpriteStub(
+  PlayerShinBraver,
+  activeDown,
+);
 
 /** 敵 ダウン */
-export const enemyDown = () => armdozerSpriteStub(EnemyShinBraver, down);
+export const enemyDown = armdozerSpriteStub(EnemyShinBraver, down);
 
 /** 敵 アクティブ ダウン */
-export const enemyActiveDown = () =>
-  armdozerSpriteStub(EnemyShinBraver, activeDown);
+export const enemyActiveDown = armdozerSpriteStub(EnemyShinBraver, activeDown);
 
 /**
  * 気をつけ、礼
@@ -303,12 +329,13 @@ const uprightBow = (sprite: ShinBraver) => {
 };
 
 /** プレイヤー 気をつけ、礼 */
-export const playerUprightBow = () =>
-  armdozerSpriteStub(PlayerShinBraver, uprightBow);
+export const playerUprightBow = armdozerSpriteStub(
+  PlayerShinBraver,
+  uprightBow,
+);
 
 /** 敵 気をつけ、礼 */
-export const enemyUprightBow = () =>
-  armdozerSpriteStub(EnemyShinBraver, uprightBow);
+export const enemyUprightBow = armdozerSpriteStub(EnemyShinBraver, uprightBow);
 
 /**
  * アクティブ 気をつけ、礼
@@ -320,9 +347,13 @@ const activeUprightBow = (sprite: ShinBraver) => {
 };
 
 /** プレイヤー アクティブ 気をつけ、礼 */
-export const playerActiveUprightBow = () =>
-  armdozerSpriteStub(PlayerShinBraver, activeUprightBow);
+export const playerActiveUprightBow = armdozerSpriteStub(
+  PlayerShinBraver,
+  activeUprightBow,
+);
 
 /** 敵 アクティブ 気をつけ、礼 */
-export const enemyActiveUprightBow = () =>
-  armdozerSpriteStub(EnemyShinBraver, activeUprightBow);
+export const enemyActiveUprightBow = armdozerSpriteStub(
+  EnemyShinBraver,
+  activeUprightBow,
+);
