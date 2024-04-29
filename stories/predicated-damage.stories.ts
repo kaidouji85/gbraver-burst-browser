@@ -8,8 +8,8 @@ export default {
 
 /**
  * 点滅
- * @param predicatedDamage
- * @param damage
+ * @param predicatedDamage ダメージ予想
+ * @param damage 表示ダメージ
  */
 const flash = (predicatedDamage: PredicatedDamage, damage: number) => {
   predicatedDamage.show(damage)
