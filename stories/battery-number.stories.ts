@@ -5,7 +5,7 @@ import {
   playerBatteryNumber,
 } from "../src/js/game-object/battery-number";
 import { BatteryNumber } from "../src/js/game-object/battery-number/battery-number";
-import { TDGameObjectStub } from "./stub/td-game-object-stub";
+import { tdGameObjectStory } from "./stub/td-game-object-stub";
 
 export default {
   title: "battery-number",
@@ -17,22 +17,17 @@ export default {
  * @param fn バッテリーナンバー操作関数
  * @returns story
  */
-const batteryNumberStory =
-  (
-    generator: (params: BatteryNumberCreatorParams) => BatteryNumber,
-    fn: (batteryNumber: BatteryNumber) => void,
-  ) =>
-  () => {
-    const stub = new TDGameObjectStub((params) => {
-      const sprite = generator(params);
-      fn(sprite);
-      return {
-        objects: [sprite.getObject3D()],
-      };
-    });
-    stub.start();
-    return stub.domElement();
-  };
+const batteryNumberStory = (
+  generator: (params: BatteryNumberCreatorParams) => BatteryNumber,
+  fn: (batteryNumber: BatteryNumber) => void,
+) =>
+  tdGameObjectStory((params) => {
+    const sprite = generator(params);
+    fn(sprite);
+    return {
+      objects: [sprite.getObject3D()],
+    };
+  });
 
 /**
  * バッテリーナンバー表示

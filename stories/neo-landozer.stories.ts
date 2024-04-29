@@ -11,28 +11,30 @@ export default {
 };
 
 /** プレイヤー 立ち */
-export const playerStand = () =>
-  armdozerSpriteStub(PlayerNeoLandozer, () => {
-    // NOP
-  });
+export const playerStand = armdozerSpriteStub(PlayerNeoLandozer, () => {
+  // NOP
+});
 
 /** プレイヤー アクティブ 立ち */
-export const playerActiveStand = () =>
-  armdozerSpriteStub(PlayerNeoLandozer, (sprite) => {
+export const playerActiveStand = armdozerSpriteStub(
+  PlayerNeoLandozer,
+  (sprite) => {
     sprite.startActive().play();
-  });
+  },
+);
 
 /** 敵 立ち */
-export const enemyStand = () =>
-  armdozerSpriteStub(EnemyNeoLandozer, () => {
-    // NOP
-  });
+export const enemyStand = armdozerSpriteStub(EnemyNeoLandozer, () => {
+  // NOP
+});
 
 /** 敵 アクティブ 立ち */
-export const enemyActiveStand = () =>
-  armdozerSpriteStub(EnemyNeoLandozer, (sprite) => {
+export const enemyActiveStand = armdozerSpriteStub(
+  EnemyNeoLandozer,
+  (sprite) => {
     sprite.startActive().play();
-  });
+  },
+);
 
 /**
  * 回避
@@ -56,18 +58,22 @@ const activeAvoid = (sprite: NeoLandozer) => {
 };
 
 /** プレイヤー 回避 */
-export const playerAvoid = () => armdozerSpriteStub(PlayerNeoLandozer, avoid);
+export const playerAvoid = armdozerSpriteStub(PlayerNeoLandozer, avoid);
 
 /** プレイヤー アクティブ 回避 */
-export const playerActiveAvoid = () =>
-  armdozerSpriteStub(PlayerNeoLandozer, activeAvoid);
+export const playerActiveAvoid = armdozerSpriteStub(
+  PlayerNeoLandozer,
+  activeAvoid,
+);
 
 /** 敵 回避 */
-export const enemyAvoid = () => armdozerSpriteStub(EnemyNeoLandozer, avoid);
+export const enemyAvoid = armdozerSpriteStub(EnemyNeoLandozer, avoid);
 
 /** 敵 アクティブ 回避 */
-export const enemyActiveAvoid = () =>
-  armdozerSpriteStub(EnemyNeoLandozer, activeAvoid);
+export const enemyActiveAvoid = armdozerSpriteStub(
+  EnemyNeoLandozer,
+  activeAvoid,
+);
 
 /**
  * ガード
@@ -91,18 +97,22 @@ const activeGuard = (sprite: NeoLandozer) => {
 };
 
 /** プレイヤー ガード */
-export const playerGuard = () => armdozerSpriteStub(PlayerNeoLandozer, guard);
+export const playerGuard = armdozerSpriteStub(PlayerNeoLandozer, guard);
 
 /** プレイヤー アクティブ ガード */
-export const playerActiveGuard = () =>
-  armdozerSpriteStub(PlayerNeoLandozer, activeGuard);
+export const playerActiveGuard = armdozerSpriteStub(
+  PlayerNeoLandozer,
+  activeGuard,
+);
 
 /** 敵 ガード */
-export const enemyGuard = () => armdozerSpriteStub(EnemyNeoLandozer, guard);
+export const enemyGuard = armdozerSpriteStub(EnemyNeoLandozer, guard);
 
 /** 敵 アクティブ ガード */
-export const enemyActiveGuard = () =>
-  armdozerSpriteStub(EnemyNeoLandozer, activeGuard);
+export const enemyActiveGuard = armdozerSpriteStub(
+  EnemyNeoLandozer,
+  activeGuard,
+);
 
 /**
  * ノックバック
@@ -126,20 +136,22 @@ const activeKnockBack = (sprite: NeoLandozer) => {
 };
 
 /** プレイヤー ノックバック */
-export const playerKnockBack = () =>
-  armdozerSpriteStub(PlayerNeoLandozer, knockBack);
+export const playerKnockBack = armdozerSpriteStub(PlayerNeoLandozer, knockBack);
 
 /** プレイヤー アクティブ ノックバック */
-export const playerActiveKnockBack = () =>
-  armdozerSpriteStub(PlayerNeoLandozer, activeKnockBack);
+export const playerActiveKnockBack = armdozerSpriteStub(
+  PlayerNeoLandozer,
+  activeKnockBack,
+);
 
 /** 敵 ノックバック */
-export const enemyKnockBack = () =>
-  armdozerSpriteStub(EnemyNeoLandozer, knockBack);
+export const enemyKnockBack = armdozerSpriteStub(EnemyNeoLandozer, knockBack);
 
 /** 敵 アクティブ ノックバック */
-export const enemyActiveKnockBack = () =>
-  armdozerSpriteStub(EnemyNeoLandozer, activeKnockBack);
+export const enemyActiveKnockBack = armdozerSpriteStub(
+  EnemyNeoLandozer,
+  activeKnockBack,
+);
 
 /**
  * ガッツ
@@ -163,18 +175,19 @@ const activeGuts = (sprite: NeoLandozer) => {
 };
 
 /** プレイヤー ガッツ */
-export const playerGuts = () => armdozerSpriteStub(PlayerNeoLandozer, guts);
+export const playerGuts = armdozerSpriteStub(PlayerNeoLandozer, guts);
 
 /** プレイヤー アクティブ ガッツ */
-export const playerActiveGuts = () =>
-  armdozerSpriteStub(PlayerNeoLandozer, activeGuts);
+export const playerActiveGuts = armdozerSpriteStub(
+  PlayerNeoLandozer,
+  activeGuts,
+);
 
 /** 敵 ガッツ */
-export const enemyGuts = () => armdozerSpriteStub(EnemyNeoLandozer, guts);
+export const enemyGuts = armdozerSpriteStub(EnemyNeoLandozer, guts);
 
 /** 敵 アクティブ ガッツ */
-export const enemyActiveGuts = () =>
-  armdozerSpriteStub(EnemyNeoLandozer, activeGuts);
+export const enemyActiveGuts = armdozerSpriteStub(EnemyNeoLandozer, activeGuts);
 
 /**
  * アームハンマー
@@ -200,20 +213,22 @@ const activeArmHammer = (sprite: NeoLandozer) => {
 };
 
 /** プレイヤー アームハンマー */
-export const playerArmHammer = () =>
-  armdozerSpriteStub(PlayerNeoLandozer, armHammer);
+export const playerArmHammer = armdozerSpriteStub(PlayerNeoLandozer, armHammer);
 
 /** プレイヤー アクティブ アームハンマー */
-export const playerActiveArmHammer = () =>
-  armdozerSpriteStub(PlayerNeoLandozer, activeArmHammer);
+export const playerActiveArmHammer = armdozerSpriteStub(
+  PlayerNeoLandozer,
+  activeArmHammer,
+);
 
 /** 敵 アームハンマー */
-export const enemyArmHammer = () =>
-  armdozerSpriteStub(EnemyNeoLandozer, armHammer);
+export const enemyArmHammer = armdozerSpriteStub(EnemyNeoLandozer, armHammer);
 
 /** 敵 アクティブ アームハンマー */
-export const enemyActiveAtmHammer = () =>
-  armdozerSpriteStub(EnemyNeoLandozer, activeArmHammer);
+export const enemyActiveAtmHammer = armdozerSpriteStub(
+  EnemyNeoLandozer,
+  activeArmHammer,
+);
 
 /**
  * ダウン
@@ -233,18 +248,19 @@ const activeDown = (sprite: NeoLandozer) => {
 };
 
 /** プレイヤー ダウン */
-export const playerDown = () => armdozerSpriteStub(PlayerNeoLandozer, down);
+export const playerDown = armdozerSpriteStub(PlayerNeoLandozer, down);
 
 /** プレイヤー アクティブ ダウン */
-export const playerActiveDown = () =>
-  armdozerSpriteStub(PlayerNeoLandozer, activeDown);
+export const playerActiveDown = armdozerSpriteStub(
+  PlayerNeoLandozer,
+  activeDown,
+);
 
 /** 敵 ダウン */
-export const enemyDown = () => armdozerSpriteStub(EnemyNeoLandozer, down);
+export const enemyDown = armdozerSpriteStub(EnemyNeoLandozer, down);
 
 /** 敵 アクティブ ダウン */
-export const enemyActiveDown = () =>
-  armdozerSpriteStub(EnemyNeoLandozer, activeDown);
+export const enemyActiveDown = armdozerSpriteStub(EnemyNeoLandozer, activeDown);
 
 /**
  * 気をつけ、礼
@@ -263,12 +279,13 @@ const uprightBow = (sprite: NeoLandozer) => {
 };
 
 /** プレイヤー 気をつけ、礼 */
-export const playerUprightBow = () =>
-  armdozerSpriteStub(PlayerNeoLandozer, uprightBow);
+export const playerUprightBow = armdozerSpriteStub(
+  PlayerNeoLandozer,
+  uprightBow,
+);
 
 /** 敵 気をつけ、礼 */
-export const enemyUprightBow = () =>
-  armdozerSpriteStub(EnemyNeoLandozer, uprightBow);
+export const enemyUprightBow = armdozerSpriteStub(EnemyNeoLandozer, uprightBow);
 
 /**
  * アクティブ 気をつけ、礼
@@ -280,9 +297,13 @@ const activeUprightBow = (sprite: NeoLandozer) => {
 };
 
 /** プレイヤー アクティブ 気をつけ、礼 */
-export const playerActiveUprightBow = () =>
-  armdozerSpriteStub(PlayerNeoLandozer, activeUprightBow);
+export const playerActiveUprightBow = armdozerSpriteStub(
+  PlayerNeoLandozer,
+  activeUprightBow,
+);
 
 /** 敵 アクティブ 気をつけ、礼 */
-export const enemyActiveUprightBow = () =>
-  armdozerSpriteStub(EnemyNeoLandozer, activeUprightBow);
+export const enemyActiveUprightBow = armdozerSpriteStub(
+  EnemyNeoLandozer,
+  activeUprightBow,
+);
