@@ -1,3 +1,5 @@
+import { StoryFn } from "@storybook/html";
+
 import { delay } from "../src/js/animation/delay";
 import {
   ContinuousAttackCreatorParams,
@@ -40,7 +42,13 @@ const popUp = (continuousAttack: ContinuousAttackIndicator) => {
 };
 
 /** プレイヤー 連続攻撃インジケータ ポップアップ */
-export const playerPopUp = continuousAttackStory(playerContinuousAttack, popUp);
+export const playerPopUp: StoryFn = continuousAttackStory(
+  playerContinuousAttack,
+  popUp,
+);
 
 /** 敵 連続攻撃インジケータ ポップアップ */
-export const enemyPopUp = continuousAttackStory(enemyContinuousAttack, popUp);
+export const enemyPopUp: StoryFn = continuousAttackStory(
+  enemyContinuousAttack,
+  popUp,
+);

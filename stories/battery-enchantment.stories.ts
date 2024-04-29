@@ -1,3 +1,5 @@
+import { StoryFn } from "@storybook/html";
+
 import { delay } from "../src/js/animation/delay";
 import {
   BatteryEnchantmentCreatorParams,
@@ -38,13 +40,13 @@ const popUp = (batteryEnchantment: BatteryEnchantment) => {
 };
 
 /** プレイヤー バッテリー増強インジケータ ポップアップ */
-export const playerPopUp = batteryEnchantmentStory(
+export const playerPopUp: StoryFn = batteryEnchantmentStory(
   playerBatteryEnchantment,
   popUp,
 );
 
 /** 敵 バッテリー増強インジケータ ポップアップ */
-export const enemyPopUP = batteryEnchantmentStory(
+export const enemyPopUP: StoryFn = batteryEnchantmentStory(
   enemyBatteryEnchantment,
   popUp,
 );

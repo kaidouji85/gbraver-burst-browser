@@ -1,11 +1,14 @@
+import { StoryFn } from "@storybook/html";
+
 import { LoginDialog } from "../src/js/dom-dialogs/login";
-import type { DOMStubStory } from "./stub/dom-stub";
 import { domStub } from "./stub/dom-stub";
 
 export default {
   title: "login-dialog",
 };
-export const dialog: DOMStubStory = domStub((params) => {
+
+/** ダイアログ表示 */
+export const dialog: StoryFn = domStub((params) => {
   const dialog = new LoginDialog({
     ...params,
     caption: "ネット対戦をするにはログインしてください",

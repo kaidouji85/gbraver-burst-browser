@@ -1,3 +1,5 @@
+import { StoryFn } from "@storybook/html";
+
 import { delay } from "../src/js/animation/delay";
 import {
   DamageIndicatorCreatprParams,
@@ -38,7 +40,13 @@ const popUp = (damageIndicator: DamageIndicator) => {
 };
 
 /** プレイヤー ダメージインジケータ ポップアップ */
-export const playerPopUp = damageIndicatorStory(playerDamageIndicator, popUp);
+export const playerPopUp: StoryFn = damageIndicatorStory(
+  playerDamageIndicator,
+  popUp,
+);
 
 /** 敵 ダメージインジケータ ポップアップ */
-export const enemyPopUp = damageIndicatorStory(enemyDamageIndicator, popUp);
+export const enemyPopUp: StoryFn = damageIndicatorStory(
+  enemyDamageIndicator,
+  popUp,
+);

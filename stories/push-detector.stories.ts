@@ -1,3 +1,5 @@
+import { StoryFn } from "@storybook/html";
+
 import { circlePushDetector } from "../src/js/game-object/push-detector/push-detector";
 import { hudGameObjectStory } from "./stub/hud-game-object-stub";
 
@@ -6,7 +8,7 @@ export default {
 };
 
 /** あたり判定 円形 */
-export const circle = hudGameObjectStory(({ gameObjectAction }) => {
+export const circle: StoryFn = hudGameObjectStory(({ gameObjectAction }) => {
   const pushDetector = circlePushDetector({
     radius: 32,
     segments: 32,

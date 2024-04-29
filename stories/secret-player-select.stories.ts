@@ -1,3 +1,4 @@
+import { StoryFn } from "@storybook/html";
 import { ArmdozerIds, PilotIds } from "gbraver-burst-core";
 
 import { SecretPlayerSelect } from "../src/js/dom-scenes/secret-player-select";
@@ -8,7 +9,7 @@ export default {
 };
 
 /** シーン通常表示 */
-export const scene = domStub((params) => {
+export const scene: StoryFn = domStub((params) => {
   const scene = new SecretPlayerSelect({
     ...params,
     armdozerIds: [

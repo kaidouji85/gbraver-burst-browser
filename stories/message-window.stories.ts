@@ -1,16 +1,17 @@
+import { StoryFn } from "@storybook/html";
+
 import { attackBatteryCaptionInnerHtml } from "../src/js/custom-battle-events/battery-system-tutorial/dom/attack-battery-caption-inner-html";
 import { defenseBatteryCaptionInnerHtml } from "../src/js/custom-battle-events/battery-system-tutorial/dom/defense-battery-caption-inner-html";
 import { yoroshikuOnegaiShimasu } from "../src/js/custom-battle-events/yoroshiku-onegai-shimasu";
 import { MessageWindow } from "../src/js/game-dom/message-window";
 import { ROOT_CLASS } from "../src/js/game-dom/message-window/dom/class-name";
-import type { DOMStubStory } from "./stub/dom-stub";
 import { domStub } from "./stub/dom-stub";
 
 export default {
   title: "message-window",
 };
 
-export const threeLine: DOMStubStory = domStub((params) => {
+export const threeLine: StoryFn = domStub((params) => {
   const dom = new MessageWindow(params);
   dom.visible(true);
   dom.messages([
@@ -21,28 +22,28 @@ export const threeLine: DOMStubStory = domStub((params) => {
   return dom.getRootHTMLElement();
 });
 
-export const twoLine: DOMStubStory = domStub((params) => {
+export const twoLine: StoryFn = domStub((params) => {
   const dom = new MessageWindow(params);
   dom.visible(true);
   dom.messages(["2行表示します", "よっこいしょ"]);
   return dom.getRootHTMLElement();
 });
 
-export const oneLine: DOMStubStory = domStub((params) => {
+export const oneLine: StoryFn = domStub((params) => {
   const dom = new MessageWindow(params);
   dom.visible(true);
   dom.messages(["1行だけ表示"]);
   return dom.getRootHTMLElement();
 });
 
-export const zeroLine: DOMStubStory = domStub((params) => {
+export const zeroLine: StoryFn = domStub((params) => {
   const dom = new MessageWindow(params);
   dom.visible(true);
   dom.messages([]);
   return dom.getRootHTMLElement();
 });
 
-export const left: DOMStubStory = domStub((params) => {
+export const left: StoryFn = domStub((params) => {
   const dom = new MessageWindow({
     ...params,
     type: "Left",
@@ -52,7 +53,7 @@ export const left: DOMStubStory = domStub((params) => {
   return dom.getRootHTMLElement();
 });
 
-export const right: DOMStubStory = domStub((params) => {
+export const right: StoryFn = domStub((params) => {
   const dom = new MessageWindow({
     ...params,
     type: "Right",
@@ -62,7 +63,7 @@ export const right: DOMStubStory = domStub((params) => {
   return dom.getRootHTMLElement();
 });
 
-export const shinya: DOMStubStory = domStub((params) => {
+export const shinya: StoryFn = domStub((params) => {
   const dom = new MessageWindow({
     ...params,
     type: "Right",
@@ -76,7 +77,7 @@ export const shinya: DOMStubStory = domStub((params) => {
   return dom.getRootHTMLElement();
 });
 
-export const shinyaRight: DOMStubStory = domStub((params) => {
+export const shinyaRight: StoryFn = domStub((params) => {
   const dom = new MessageWindow({
     ...params,
     type: "Left",
@@ -90,7 +91,7 @@ export const shinyaRight: DOMStubStory = domStub((params) => {
   return dom.getRootHTMLElement();
 });
 
-export const gai: DOMStubStory = domStub((params) => {
+export const gai: StoryFn = domStub((params) => {
   const dom = new MessageWindow({
     ...params,
     type: "Right",
@@ -104,7 +105,7 @@ export const gai: DOMStubStory = domStub((params) => {
   return dom.getRootHTMLElement();
 });
 
-export const gaiRight: DOMStubStory = domStub((params) => {
+export const gaiRight: StoryFn = domStub((params) => {
   const dom = new MessageWindow({
     ...params,
     type: "Left",
@@ -118,7 +119,7 @@ export const gaiRight: DOMStubStory = domStub((params) => {
   return dom.getRootHTMLElement();
 });
 
-export const raito: DOMStubStory = domStub((params) => {
+export const raito: StoryFn = domStub((params) => {
   const dom = new MessageWindow({
     ...params,
     type: "Right",
@@ -132,7 +133,7 @@ export const raito: DOMStubStory = domStub((params) => {
   return dom.getRootHTMLElement();
 });
 
-export const raitoRight: DOMStubStory = domStub((params) => {
+export const raitoRight: StoryFn = domStub((params) => {
   const dom = new MessageWindow({
     ...params,
     type: "Left",
@@ -146,7 +147,7 @@ export const raitoRight: DOMStubStory = domStub((params) => {
   return dom.getRootHTMLElement();
 });
 
-export const tsubasa: DOMStubStory = domStub((params) => {
+export const tsubasa: StoryFn = domStub((params) => {
   const dom = new MessageWindow({
     ...params,
     type: "Right",
@@ -160,7 +161,7 @@ export const tsubasa: DOMStubStory = domStub((params) => {
   return dom.getRootHTMLElement();
 });
 
-export const tsubasaRight: DOMStubStory = domStub((params) => {
+export const tsubasaRight: StoryFn = domStub((params) => {
   const dom = new MessageWindow({
     ...params,
     type: "Left",
@@ -174,7 +175,7 @@ export const tsubasaRight: DOMStubStory = domStub((params) => {
   return dom.getRootHTMLElement();
 });
 
-export const yuuya: DOMStubStory = domStub((params) => {
+export const yuuya: StoryFn = domStub((params) => {
   const dom = new MessageWindow({
     ...params,
     type: "Right",
@@ -191,7 +192,7 @@ export const yuuya: DOMStubStory = domStub((params) => {
   return dom.getRootHTMLElement();
 });
 
-export const yuuyaRight: DOMStubStory = domStub((params) => {
+export const yuuyaRight: StoryFn = domStub((params) => {
   const dom = new MessageWindow({
     ...params,
     type: "Left",
@@ -208,7 +209,7 @@ export const yuuyaRight: DOMStubStory = domStub((params) => {
   return dom.getRootHTMLElement();
 });
 
-export const doubleMessageWindows: DOMStubStory = domStub((params) => {
+export const doubleMessageWindows: StoryFn = domStub((params) => {
   const root = document.createElement("div");
   const rightMessageWindow = new MessageWindow({
     ...params,
@@ -236,7 +237,7 @@ export const doubleMessageWindows: DOMStubStory = domStub((params) => {
   return root;
 });
 
-export const playerShout: DOMStubStory = domStub((params) => {
+export const playerShout: StoryFn = domStub((params) => {
   const dom = new MessageWindow({
     ...params,
     type: "PlayerShout",
@@ -250,7 +251,7 @@ export const playerShout: DOMStubStory = domStub((params) => {
   return dom.getRootHTMLElement();
 });
 
-export const enemyShout: DOMStubStory = domStub((params) => {
+export const enemyShout: StoryFn = domStub((params) => {
   const dom = new MessageWindow({
     ...params,
     type: "EnemyShout",
@@ -264,7 +265,7 @@ export const enemyShout: DOMStubStory = domStub((params) => {
   return dom.getRootHTMLElement();
 });
 
-export const messagesInInnerHTML: DOMStubStory = domStub((params) => {
+export const messagesInInnerHTML: StoryFn = domStub((params) => {
   const dom = new MessageWindow(params);
   dom.visible(true);
   dom.messagesInInnerHTML(`
@@ -274,7 +275,7 @@ export const messagesInInnerHTML: DOMStubStory = domStub((params) => {
   return dom.getRootHTMLElement();
 });
 
-export const attackBatteryCaption: DOMStubStory = domStub((params) => {
+export const attackBatteryCaption: StoryFn = domStub((params) => {
   const { resources } = params;
   const dom = new MessageWindow(params);
   dom.visible(true);
@@ -282,7 +283,7 @@ export const attackBatteryCaption: DOMStubStory = domStub((params) => {
   return dom.getRootHTMLElement();
 });
 
-export const defenseBatteryCaption: DOMStubStory = domStub((params) => {
+export const defenseBatteryCaption: StoryFn = domStub((params) => {
   const { resources } = params;
   const dom = new MessageWindow(params);
   dom.visible(true);
@@ -290,7 +291,7 @@ export const defenseBatteryCaption: DOMStubStory = domStub((params) => {
   return dom.getRootHTMLElement();
 });
 
-export const playerYorosikuOnegaishimasu: DOMStubStory = domStub((params) => {
+export const playerYorosikuOnegaishimasu: StoryFn = domStub((params) => {
   const dom = new MessageWindow({
     ...params,
     type: "PlayerShout",

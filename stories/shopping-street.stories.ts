@@ -1,3 +1,5 @@
+import { StoryFn } from "@storybook/html";
+
 import { Illumination } from "../src/js/game-object/illumination/illumination";
 import ShoppingStreet from "../src/js/game-object/stage/shopping-street/shopping-street";
 import { createSkyBox } from "../src/js/td-scenes/battle/view/td/sky-box";
@@ -10,22 +12,24 @@ export default {
 };
 
 /** ゲーム画面での表示 */
-export const game = tdGameObjectStory(({ resources, gameObjectAction }) => {
-  const illumination = new Illumination(gameObjectAction);
-  const shoppingStreet = new ShoppingStreet(resources);
-  const objects = [
-    ...shoppingStreet.getThreeJsObjects(),
-    ...illumination.getObject3Ds(),
-  ];
-  const skyBox = createSkyBox(resources);
-  return {
-    objects,
-    skyBox,
-  };
-});
+export const game: StoryFn = tdGameObjectStory(
+  ({ resources, gameObjectAction }) => {
+    const illumination = new Illumination(gameObjectAction);
+    const shoppingStreet = new ShoppingStreet(resources);
+    const objects = [
+      ...shoppingStreet.getThreeJsObjects(),
+      ...illumination.getObject3Ds(),
+    ];
+    const skyBox = createSkyBox(resources);
+    return {
+      objects,
+      skyBox,
+    };
+  },
+);
 
 /** 静止画 ハイレゾリューション */
-export const highResolutionStillImage = (): HTMLElement => {
+export const highResolutionStillImage: StoryFn = (): HTMLElement => {
   const renderer = {
     width: 7680,
     height: 4320,

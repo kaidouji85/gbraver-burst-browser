@@ -1,13 +1,14 @@
+import { StoryFn } from "@storybook/html";
+
 import { Config } from "../src/js/dom-scenes/config";
 import { ConfigChangedDialog } from "../src/js/dom-scenes/config/config-changed-dialog";
-import type { DOMStubStory } from "./stub/dom-stub";
 import { domStub } from "./stub/dom-stub";
 
 export default {
   title: "config",
 };
 
-export const Scene: DOMStubStory = domStub((params) => {
+export const Scene: StoryFn = domStub((params) => {
   const scene = new Config({
     ...params,
     config: {
@@ -30,7 +31,7 @@ export const Scene: DOMStubStory = domStub((params) => {
   return scene.getRootHTMLElement();
 });
 
-export const ConfigChanged: DOMStubStory = domStub((params) => {
+export const ConfigChanged: StoryFn = domStub((params) => {
   const dialog = new ConfigChangedDialog(params);
   dialog.show();
   dialog.notifyClosed().subscribe(() => {

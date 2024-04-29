@@ -1,3 +1,5 @@
+import { StoryFn } from "@storybook/html";
+
 import { Animate } from "../src/js/animation/animate";
 import { delay } from "../src/js/animation/delay";
 import {
@@ -24,14 +26,14 @@ function cutInAnimation(cutIn: NeoLandozerCutIn): Animate {
 }
 
 /** ネオランドーザ カットイン プレイヤー側 */
-export const player = hudGameObjectStory((params) => {
+export const player: StoryFn = hudGameObjectStory((params) => {
   const cutIn = playerNeoLandozerCutIn(params);
   cutInAnimation(cutIn).loop();
   return [cutIn.getObject3D()];
 });
 
 /** ネオランドーザ カットイン 敵側 */
-export const enemy = hudGameObjectStory((params) => {
+export const enemy: StoryFn = hudGameObjectStory((params) => {
   const cutIn = enemyNeoLandozerCutIn(params);
   cutInAnimation(cutIn).loop();
   return [cutIn.getObject3D()];

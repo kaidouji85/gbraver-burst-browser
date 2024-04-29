@@ -1,3 +1,5 @@
+import { StoryFn } from "@storybook/html";
+
 import {
   BurstButtonCreatorParams,
   genesisBraverBurstButton,
@@ -47,22 +49,31 @@ const operatable = (burstButton: BurstButton) => {
 };
 
 /** シンブレイバー */
-export const shinBraver = buttonStory(shinBraverBurstButton, operatable);
+export const shinBraver: StoryFn = buttonStory(
+  shinBraverBurstButton,
+  operatable,
+);
 
 /** ネオランドーザ */
-export const neoLandozer = buttonStory(neoLandozerBurstButton, operatable);
+export const neoLandozer: StoryFn = buttonStory(
+  neoLandozerBurstButton,
+  operatable,
+);
 
 /** ライトニングドーザ */
-export const lightningDozer = buttonStory(
+export const lightningDozer: StoryFn = buttonStory(
   lightningDozerBurstButton,
   operatable,
 );
 
 /** ウィングドーザ */
-export const wingDozer = buttonStory(wingDozerBurstButton, operatable);
+export const wingDozer: StoryFn = buttonStory(wingDozerBurstButton, operatable);
 
 /** ジェネシスブレイバー */
-export const genesisBraver = buttonStory(genesisBraverBurstButton, operatable);
+export const genesisBraver: StoryFn = buttonStory(
+  genesisBraverBurstButton,
+  operatable,
+);
 
 /**
  * バースト不可能
@@ -76,7 +87,7 @@ const canNotBurst = (burstButton: BurstButton) => {
 };
 
 /** シンブレイバー バースト不可能 */
-export const canNotBurstShinBraver = buttonStory(
+export const canNotBurstShinBraver: StoryFn = buttonStory(
   shinBraverBurstButton,
   canNotBurst,
 );
@@ -91,4 +102,7 @@ const disabled = (burstButton: BurstButton) => {
 };
 
 /** シンブレイバー 操作不可能 */
-export const disabledShinBraver = buttonStory(shinBraverBurstButton, disabled);
+export const disabledShinBraver: StoryFn = buttonStory(
+  shinBraverBurstButton,
+  disabled,
+);

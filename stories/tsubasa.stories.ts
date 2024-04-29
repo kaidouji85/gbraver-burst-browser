@@ -1,3 +1,5 @@
+import { StoryFn } from "@storybook/html";
+
 import { delay } from "../src/js/animation/delay";
 import {
   enemyTsubasaCutIn,
@@ -10,7 +12,7 @@ export default {
 };
 
 /** ツバサ カットイン プレイヤー側 */
-export const player = hudGameObjectStory((params) => {
+export const player: StoryFn = hudGameObjectStory((params) => {
   const pilot = playerTsubasaCutIn(params);
   pilot
     .show()
@@ -22,7 +24,7 @@ export const player = hudGameObjectStory((params) => {
 });
 
 /** ツバサ カットイン 敵側 */
-export const enemy = hudGameObjectStory((params) => {
+export const enemy: StoryFn = hudGameObjectStory((params) => {
   const pilot = enemyTsubasaCutIn(params);
   pilot
     .show()

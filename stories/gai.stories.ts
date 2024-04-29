@@ -1,3 +1,5 @@
+import { StoryFn } from "@storybook/html";
+
 import { delay } from "../src/js/animation/delay";
 import {
   enemyGaiCutIn,
@@ -10,7 +12,7 @@ export default {
 };
 
 /** ガイ カットイン プレイヤー側 */
-export const player = hudGameObjectStory((params) => {
+export const player: StoryFn = hudGameObjectStory((params) => {
   const pilot = playerGaiCutIn(params);
   pilot
     .show()
@@ -22,7 +24,7 @@ export const player = hudGameObjectStory((params) => {
 });
 
 /** ガイ カットイン 敵側 */
-export const enemy = hudGameObjectStory((params) => {
+export const enemy: StoryFn = hudGameObjectStory((params) => {
   const pilot = enemyGaiCutIn(params);
   pilot
     .show()
