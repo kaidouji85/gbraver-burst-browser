@@ -4,7 +4,7 @@ import { GameObjectAction } from "../../src/js/game-object/action/game-object-ac
 import { ArmdozerSprite } from "../../src/js/game-object/armdozer/armdozer-sprite";
 import { ResourcesContainer } from "../../src/js/resource";
 import { SEPlayerContainer } from "../../src/js/se/se-player";
-import { TDGameObjectStub } from "./td-game-object-stub";
+import { tdGameObjectStory } from "./td-game-object-stub";
 
 /** アームドーザスプライト ジェネレータ パラメータ */
 type GeneratorParams = ResourcesContainer &
@@ -31,14 +31,11 @@ type SpriteGenerator<X extends ArmdozerSprite> = (params: GeneratorParams) => X;
 export const armdozerSpriteStub = <X extends ArmdozerSprite>(
   generator: SpriteGenerator<X>,
   fn: (sprite: X) => void,
-): HTMLElement => {
-  const stub = new TDGameObjectStub((params) => {
+) =>
+  tdGameObjectStory((params) => {
     const sprite = generator(params);
     fn(sprite);
     return {
       objects: [sprite.getObject3D()],
     };
   });
-  stub.start();
-  return stub.domElement();
-};

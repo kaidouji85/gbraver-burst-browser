@@ -5,7 +5,7 @@ import {
   PowerUpCreatorParams,
 } from "../src/js/game-object/power-up";
 import { PowerUp } from "../src/js/game-object/power-up/power-up";
-import { TDGameObjectStub } from "./stub/td-game-object-stub";
+import { tdGameObjectStory } from "./stub/td-game-object-stub";
 
 export default {
   title: "power-up",
@@ -17,22 +17,17 @@ export default {
  * @param fn 攻撃アップ操作関数
  * @returns story
  */
-const powerUpStory =
-  (
-    generator: (params: PowerUpCreatorParams) => PowerUp,
-    fn: (powerUp: PowerUp) => void,
-  ) =>
-  () => {
-    const stub = new TDGameObjectStub((params) => {
-      const powerUp = generator(params);
-      fn(powerUp);
-      return {
-        objects: [powerUp.getObject3D()],
-      };
-    });
-    stub.start();
-    return stub.domElement();
-  };
+const powerUpStory = (
+  generator: (params: PowerUpCreatorParams) => PowerUp,
+  fn: (powerUp: PowerUp) => void,
+) =>
+  tdGameObjectStory((params) => {
+    const powerUp = generator(params);
+    fn(powerUp);
+    return {
+      objects: [powerUp.getObject3D()],
+    };
+  });
 
 /**
  * ポップアップ

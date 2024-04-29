@@ -5,7 +5,7 @@ import {
   playerBatteryEnchantment,
 } from "../src/js/game-object/battery-enchantment";
 import { BatteryEnchantment } from "../src/js/game-object/battery-enchantment/battery-enchantment";
-import { TDGameObjectStub } from "./stub/td-game-object-stub";
+import { tdGameObjectStory } from "./stub/td-game-object-stub";
 
 export default {
   title: "battery-enchantment",
@@ -17,22 +17,17 @@ export default {
  * @param fn バッテリー増強インジケータ操作関数
  * @returns story
  */
-const batteryEnchantmentStory =
-  (
-    generator: (params: BatteryEnchantmentCreatorParams) => BatteryEnchantment,
-    fn: (batteryEnchantment: BatteryEnchantment) => void,
-  ) =>
-  () => {
-    const stub = new TDGameObjectStub((params) => {
-      const batteryEnchantment = generator(params);
-      fn(batteryEnchantment);
-      return {
-        objects: [batteryEnchantment.getObject3D()],
-      };
-    });
-    stub.start();
-    return stub.domElement();
-  };
+const batteryEnchantmentStory = (
+  generator: (params: BatteryEnchantmentCreatorParams) => BatteryEnchantment,
+  fn: (batteryEnchantment: BatteryEnchantment) => void,
+) =>
+  tdGameObjectStory((params) => {
+    const batteryEnchantment = generator(params);
+    fn(batteryEnchantment);
+    return {
+      objects: [batteryEnchantment.getObject3D()],
+    };
+  });
 
 /**
  * ポップアップ

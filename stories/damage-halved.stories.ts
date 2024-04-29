@@ -5,7 +5,7 @@ import {
   playerDamageHalved,
 } from "../src/js/game-object/damage-halved";
 import { DamageHalved } from "../src/js/game-object/damage-halved/damage-halved";
-import { TDGameObjectStub } from "./stub/td-game-object-stub";
+import { tdGameObjectStory } from "./stub/td-game-object-stub";
 
 export default {
   title: "damage-halved",
@@ -17,22 +17,17 @@ export default {
  * @param fn ダメージ半減インジケータ操作関数
  * @returns story
  */
-const damageHalvedStory =
-  (
-    generator: (param: DamageHalvedCreatorParams) => DamageHalved,
-    fn: (damageHavled: DamageHalved) => void,
-  ) =>
-  () => {
-    const stub = new TDGameObjectStub((params) => {
-      const damageHalved = generator(params);
-      fn(damageHalved);
-      return {
-        objects: [damageHalved.getObject3D()],
-      };
-    });
-    stub.start();
-    return stub.domElement();
-  };
+const damageHalvedStory = (
+  generator: (param: DamageHalvedCreatorParams) => DamageHalved,
+  fn: (damageHavled: DamageHalved) => void,
+) =>
+  tdGameObjectStory((params) => {
+    const damageHalved = generator(params);
+    fn(damageHalved);
+    return {
+      objects: [damageHalved.getObject3D()],
+    };
+  });
 
 /**
  * ポップアップ
