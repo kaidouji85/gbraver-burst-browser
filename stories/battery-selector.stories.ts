@@ -1,6 +1,6 @@
 import { BatterySelector } from "../src/js/game-object/battery-selector";
 import { ButtonLabel } from "../src/js/game-object/battery-selector/model/button-label";
-import { HUDGameObjectStub } from "./stub/hud-game-object-stub";
+import { hudGameObjectStory } from "./stub/hud-game-object-stub";
 
 export default {
   title: "battery-selector",
@@ -11,16 +11,12 @@ export default {
  * @param fn バッテリーセレクタ操作関数
  * @returns story
  */
-const batterySelectorStory =
-  (fn: (selector: BatterySelector) => void) => () => {
-    const stub = new HUDGameObjectStub((params) => {
-      const selector: BatterySelector = new BatterySelector(params);
-      fn(selector);
-      return [selector.getObject3D()];
-    });
-    stub.start();
-    return stub.domElement();
-  };
+const batterySelectorStory = (fn: (selector: BatterySelector) => void) =>
+  hudGameObjectStory((params) => {
+    const selector: BatterySelector = new BatterySelector(params);
+    fn(selector);
+    return [selector.getObject3D()];
+  });
 
 /**
  * バッテリーセレクタを操作可能な状態に設定する

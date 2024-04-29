@@ -2,22 +2,24 @@ import * as TWEEN from "@tweenjs/tween.js";
 import { Observable, Subject, Unsubscribable } from "rxjs";
 import * as THREE from "three";
 
-import type { GameLoop } from "../../src/js/game-loop/game-loop";
-import { gameLoopStream } from "../../src/js/game-loop/game-loop";
-import type { PreRender } from "../../src/js/game-loop/pre-render";
-import type { Update } from "../../src/js/game-loop/update";
-import type { GameObjectAction } from "../../src/js/game-object/action/game-object-action";
-import { gameObjectStream } from "../../src/js/game-object/action/game-object-action";
+import { GameLoop, gameLoopStream } from "../../src/js/game-loop/game-loop";
+import { PreRender } from "../../src/js/game-loop/pre-render";
+import { Update } from "../../src/js/game-loop/update";
+import {
+  GameObjectAction,
+  gameObjectStream,
+} from "../../src/js/game-object/action/game-object-action";
 import { PlainHUDCamera } from "../../src/js/game-object/camera/plain-hud/plain-hud-camera";
 import { Renderer } from "../../src/js/render";
-import type { OverlapEvent } from "../../src/js/render/overlap-event/overlap-event";
-import type { ResourcesContainer } from "../../src/js/resource";
+import { OverlapEvent } from "../../src/js/render/overlap-event/overlap-event";
+import { ResourcesContainer } from "../../src/js/resource";
 import { developingFullResourceLoading } from "../../src/js/resource/loading/full-resource-loading";
-import type { SafeAreaInset } from "../../src/js/safe-area/safe-area-inset";
-import { createSafeAreaInset } from "../../src/js/safe-area/safe-area-inset";
+import {
+  createSafeAreaInset,
+  SafeAreaInset,
+} from "../../src/js/safe-area/safe-area-inset";
 import { createSEPlayer, SEPlayerContainer } from "../../src/js/se/se-player";
-import type { Resize } from "../../src/js/window/resize";
-import { resizeStream } from "../../src/js/window/resize";
+import { Resize, resizeStream } from "../../src/js/window/resize";
 import { StorybookResourceRoot } from "../storybook-resource-root";
 
 /** Object3D生成関数パラメータ */
@@ -147,8 +149,9 @@ export class HUDGameObjectStub {
  * @param creator 3Dオブジェクト生成関数
  * @returns ストーリー
  */
-export const hudObjectStory = (creator: Object3DCreator) => {
-  const stub = new HUDGameObjectStub(creator);
-  stub.start();
-  return stub.domElement();
-};
+export const hudGameObjectStory =
+  (creator: Object3DCreator) => (): HTMLElement => {
+    const stub = new HUDGameObjectStub(creator);
+    stub.start();
+    return stub.domElement();
+  };
