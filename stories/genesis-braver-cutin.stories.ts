@@ -4,7 +4,7 @@ import {
   playerGenesisBraverCutIn,
 } from "../src/js/game-object/cut-in/genesis-braver";
 import { GenesisBraverCutIn } from "../src/js/game-object/cut-in/genesis-braver/genesis-braver-cutin";
-import { HUDGameObjectStub } from "./stub/hud-game-object-stub";
+import { hudGameObjectStory } from "./stub/hud-game-object-stub";
 
 export default {
   title: "genesis-braver-cut-in",
@@ -23,23 +23,15 @@ const story = (cutIn: GenesisBraverCutIn) => {
 };
 
 /** プレイヤーカットイン */
-export const playerCutIn = () => {
-  const stub = new HUDGameObjectStub((params) => {
-    const cutIn = playerGenesisBraverCutIn(params);
-    story(cutIn);
-    return [cutIn.getObject3D()];
-  });
-  stub.start();
-  return stub.domElement();
-};
+export const playerCutIn = hudGameObjectStory((params) => {
+  const cutIn = playerGenesisBraverCutIn(params);
+  story(cutIn);
+  return [cutIn.getObject3D()];
+});
 
 /** 敵カットイン */
-export const enemyCutIn = () => {
-  const stub = new HUDGameObjectStub((params) => {
-    const cutIn = enemyGenesisBraverCutIn(params);
-    story(cutIn);
-    return [cutIn.getObject3D()];
-  });
-  stub.start();
-  return stub.domElement();
-};
+export const enemyCutIn = hudGameObjectStory((params) => {
+  const cutIn = enemyGenesisBraverCutIn(params);
+  story(cutIn);
+  return [cutIn.getObject3D()];
+});

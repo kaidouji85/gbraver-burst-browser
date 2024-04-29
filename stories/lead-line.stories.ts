@@ -4,7 +4,7 @@ import * as THREE from "three";
 import { GameObjectAction } from "../src/js/game-object/action/game-object-action";
 import { LeadLine } from "../src/js/game-object/lead-line/lead-line";
 import { LeadLineView } from "../src/js/game-object/lead-line/view/lead-line-view";
-import { HUDGameObjectStub } from "./stub/hud-game-object-stub";
+import { hudGameObjectStory } from "./stub/hud-game-object-stub";
 
 export default {
   title: "lead-line",
@@ -44,15 +44,12 @@ type Fn = (leadLine: LeadLine, a: THREE.Mesh, b: THREE.Mesh) => void;
  * @param generator 引き出し線生成関数
  * @param fn 引き出し線操作関数
  */
-const leadLineStory = (generator: Generator, fn: Fn) => () => {
-  const stub = new HUDGameObjectStub(({ gameObjectAction }) => {
+const leadLineStory = (generator: Generator, fn: Fn) =>
+  hudGameObjectStory(({ gameObjectAction }) => {
     const [leadLine, a, b] = generator(gameObjectAction);
     fn(leadLine, a, b);
     return [leadLine.getObject3D(), a, b];
   });
-  stub.start();
-  return stub.domElement();
-};
 
 /** 青線 */
 const blueLine: Generator = (gameObjectAction) => {

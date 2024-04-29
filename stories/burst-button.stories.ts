@@ -7,7 +7,7 @@ import {
   wingDozerBurstButton,
 } from "../src/js/game-object/burst-button";
 import { BurstButton } from "../src/js/game-object/burst-button/burst-button";
-import { HUDGameObjectStub } from "./stub/hud-game-object-stub";
+import { hudGameObjectStory } from "./stub/hud-game-object-stub";
 
 export default {
   title: "burst-button",
@@ -25,17 +25,15 @@ type BurstButtonGenerator = (params: BurstButtonCreatorParams) => BurstButton;
  * @param generator バーストボタン生成関数
  * @param fn バーストボタンに対する処理
  */
-const buttonStory =
-  (generator: BurstButtonGenerator, fn: (burstButton: BurstButton) => void) =>
-  () => {
-    const stub = new HUDGameObjectStub((params) => {
-      const burstButton = generator(params);
-      fn(burstButton);
-      return [burstButton.getObject3D()];
-    });
-    stub.start();
-    return stub.domElement();
-  };
+const buttonStory = (
+  generator: BurstButtonGenerator,
+  fn: (burstButton: BurstButton) => void,
+) =>
+  hudGameObjectStory((params) => {
+    const burstButton = generator(params);
+    fn(burstButton);
+    return [burstButton.getObject3D()];
+  });
 
 /**
  * 操作可能
