@@ -14,8 +14,8 @@ import { HUDPlayer } from "../../../view/hud/player";
 export const updateGauge = (
   hudPlayers: HUDPlayer[],
   players: PlayerState[],
-): Animate[] =>
-  hudPlayers.map((hud) => {
+): Animate => all(
+  ...hudPlayers.map((hud) => {
     const player = players.find((p) => p.playerId === hud.playerId);
     return player
       ? all(
@@ -23,4 +23,5 @@ export const updateGauge = (
           hud.gauge.battery(player.armdozer.battery),
         )
       : empty();
-  });
+  })
+);

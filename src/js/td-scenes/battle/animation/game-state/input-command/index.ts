@@ -4,6 +4,7 @@ import { all } from "../../../../../animation/all";
 import { Animate } from "../../../../../animation/animate";
 import { empty } from "../../../../../animation/delay";
 import { StateAnimationProps } from "../state-animation-props";
+import { activeArmdozerSprite } from "./active-armdozer-sprite";
 import { showCommand } from "./show-command";
 import { updateGauge } from "./update-gauge";
 
@@ -22,10 +23,7 @@ export function inputCommandAnimation(
 
   const player = players.find((v) => v.playerId === playerId);
   const playerCommand = effect.players.find((v) => v.playerId === playerId);
-  const activeTDArmdozer = view.td.armdozers.find(
-    (v) => v.playerId === activePlayerId,
-  );
-  if (!player || !playerCommand || !activeTDArmdozer) {
+  if (!player || !playerCommand) {
     return empty();
   }
 
@@ -35,7 +33,7 @@ export function inputCommandAnimation(
 
   const isPlayerTurn = playerId === activePlayerId;
   return all(
-    ...updateGauge(view.hud.players, players),
+    updateGauge(view.hud.players, players),
     showCommand({
       view,
       isPlayerTurn,
@@ -44,6 +42,6 @@ export function inputCommandAnimation(
       controllerType,
     }),
     view.hud.gameObjects.timeScaleButton.open(animatePlayer.timeScale),
-    activeTDArmdozer.sprite().startActive(),
+    activeArmdozerSprite(view.td.armdozers, activePlayerId),
   );
 }
