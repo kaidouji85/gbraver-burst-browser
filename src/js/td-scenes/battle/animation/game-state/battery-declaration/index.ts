@@ -9,6 +9,7 @@ import {
   declarationSoundWithCorrect,
   declarationWithCorrect,
 } from "./declaration-with-correct";
+import { extract } from "./extract";
 
 /**
  * バッテリー宣言アニメーション
@@ -21,38 +22,22 @@ export function batteryDeclarationAnimation(
   gameState: GameStateX<BatteryDeclaration>,
 ): Animate {
   const { view, playerId } = props;
-  const { players, effect } = gameState;
+  const { effect } = gameState;
 
-  const attacker = players.find((v) => v.playerId === effect.attacker);
-  const defender = players.find((v) => v.playerId !== effect.attacker);
-  if (!attacker || !defender) {
+  const extracted = extract(props, gameState);
+  if (!extracted) {
     return empty();
   }
 
-  const attackerTD = view.td.players.find(
-    (v) => v.playerId === attacker.playerId,
-  );
-  const attackerTDArmdozer = view.td.armdozers.find(
-    (v) => v.playerId === attacker.playerId,
-  );
-  const attackerHUD = view.hud.players.find(
-    (v) => v.playerId === attacker.playerId,
-  );
-  const defenderTD = view.td.players.find(
-    (v) => v.playerId === defender.playerId,
-  );
-  const defenderHUD = view.hud.players.find(
-    (v) => v.playerId === defender.playerId,
-  );
-  if (
-    !attackerTD ||
-    !attackerTDArmdozer ||
-    !attackerHUD ||
-    !defenderTD ||
-    !defenderHUD
-  ) {
-    return empty();
-  }
+  const {
+    attacker,
+    attackerTD,
+    attackerHUD,
+    attackerTDArmdozer,
+    defender,
+    defenderTD,
+    defenderHUD,
+  } = extracted;
 
   const { attackerBattery, originalBatteryOfAttacker } = effect;
   const attackerCorrect = attackerBattery - originalBatteryOfAttacker;
@@ -74,8 +59,7 @@ export function batteryDeclarationAnimation(
     correct: defenderCorrect,
   };
 
-  const shouldSoundCorrect =
-    shouldAttackerCorrect || shouldDefenderCorrect;
+  const shouldSoundCorrect = shouldAttackerCorrect || shouldDefenderCorrect;
 
   const isPlayerAttacker = effect.attacker === playerId;
   return all(
