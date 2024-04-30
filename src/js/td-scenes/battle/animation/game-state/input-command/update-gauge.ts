@@ -14,14 +14,15 @@ import { HUDPlayer } from "../../../view/hud/player";
 export const updateGauge = (
   hudPlayers: HUDPlayer[],
   players: PlayerState[],
-): Animate => all(
-  ...hudPlayers.map((hud) => {
-    const player = players.find((p) => p.playerId === hud.playerId);
-    return player
-      ? all(
-          hud.gauge.hp(player.armdozer.hp),
-          hud.gauge.battery(player.armdozer.battery),
-        )
-      : empty();
-  })
-);
+): Animate =>
+  all(
+    ...hudPlayers.map((hud) => {
+      const player = players.find((p) => p.playerId === hud.playerId);
+      return player
+        ? all(
+            hud.gauge.hp(player.armdozer.hp),
+            hud.gauge.battery(player.armdozer.battery),
+          )
+        : empty();
+    }),
+  );
