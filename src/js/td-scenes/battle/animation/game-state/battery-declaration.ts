@@ -7,13 +7,21 @@ import { onStart } from "../../../../animation/on-start";
 import { TDPlayer } from "../../view/td/player";
 import { StateAnimationProps } from "./state-animation-props";
 
+/** バッテリー宣言アニメーションのパラメータ */
+type DeclarationParams = {
+  /** 3Dプレイヤーオブジェクト */
+  td: TDPlayer;
+  /** 宣言したバッテリー値 */
+  value: number;
+};
+
 /**
  * バッテリー宣言アニメーション
- * @param td 3Dレイヤーのプレイヤーオブジェクト
- * @param value バッテリー値
+ * @param params パラメータ
  * @returns アニメーション
  */
-function declaration(td: TDPlayer, value: number): Animate {
+function declaration(params: DeclarationParams): Animate {
+  const { td, value } = params;
   return td.batteryNumber.show(value).chain(delay(800));
 }
 
@@ -31,20 +39,21 @@ function declarationSound(props: StateAnimationProps): Animate {
   });
 }
 
+/** 補正ありバッテリー宣言のパラメータ */
+type DeclarationWithCorrectParams = DeclarationParams & {
+  /** 本来出したバッテリー値 */
+  origin: number;
+  /** バッテリーの補正値 */
+  correct: number;
+};
+
 /**
  * 補正ありのバッテリー宣言
- * @param td 3Dレイヤーのプレイヤーオブジェクト
- * @param origin 本来のバッテリー
- * @param correct バッテリー補正値
- * @param value 出したバッテリー
+ * @param params パラメータ
  * @returns アニメーション
  */
-function declarationWithCorrect(
-  td: TDPlayer,
-  origin: number,
-  correct: number,
-  value: number,
-): Animate {
+function declarationWithCorrect(params: DeclarationWithCorrectParams): Animate {
+  const { td, value, origin, correct } = params;
   return td.batteryNumber
     .show(origin)
     .chain(delay(300))
@@ -117,17 +126,25 @@ export function batteryDeclarationAnimation(
     return empty();
   }
 
-  const {
-    attackerBattery,
-    originalBatteryOfAttacker,
-    defenderBattery,
-    originalBatteryOfDefender,
-  } = effect;
+  const { attackerBattery, originalBatteryOfAttacker } = effect;
   const attackerCorrect = attackerBattery - originalBatteryOfAttacker;
   const shouldAttackerCorrect = attackerCorrect !== 0;
+  const attackerDeclarationParams = {
+    td: attackerTD,
+    value: attackerBattery,
+    origin: originalBatteryOfAttacker,
+    correct: attackerCorrect,
+  };
 
+  const { defenderBattery, originalBatteryOfDefender } = effect;
   const defenderCorrect = defenderBattery - originalBatteryOfDefender;
   const shouldDefenderCorrect = defenderCorrect !== 0;
+  const defenderDeclarationParams = {
+    td: defenderTD,
+    value: defenderBattery,
+    origin: originalBatteryOfDefender,
+    correct: defenderCorrect,
+  };
 
   const shouldCorrectSoundPlayer =
     shouldAttackerCorrect || shouldDefenderCorrect;
@@ -140,22 +157,12 @@ export function batteryDeclarationAnimation(
     attackerTDArmdozer.sprite().endActive(),
 
     shouldAttackerCorrect
-      ? declarationWithCorrect(
-          attackerTD,
-          originalBatteryOfAttacker,
-          attackerCorrect,
-          attackerBattery,
-        )
-      : declaration(attackerTD, attackerBattery),
+      ? declarationWithCorrect(attackerDeclarationParams)
+      : declaration(attackerDeclarationParams),
 
     shouldDefenderCorrect
-      ? declarationWithCorrect(
-          defenderTD,
-          originalBatteryOfDefender,
-          defenderCorrect,
-          defenderBattery,
-        )
-      : declaration(defenderTD, defenderBattery),
+      ? declarationWithCorrect(defenderDeclarationParams)
+      : declaration(defenderDeclarationParams),
 
     shouldCorrectSoundPlayer
       ? declarationSoundWithCorrect(props)
