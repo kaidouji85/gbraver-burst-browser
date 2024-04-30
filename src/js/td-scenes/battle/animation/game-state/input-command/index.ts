@@ -5,6 +5,7 @@ import { Animate } from "../../../../../animation/animate";
 import { empty } from "../../../../../animation/delay";
 import { StateAnimationProps } from "../state-animation-props";
 import { showCommand } from "./show-command";
+import { updateGauge } from "./update-gauge";
 
 /**
  * コマンド入力フェイズのアニメーション
@@ -21,20 +22,10 @@ export function inputCommandAnimation(
 
   const player = players.find((v) => v.playerId === playerId);
   const playerCommand = effect.players.find((v) => v.playerId === playerId);
-  const playerHUD = view.hud.players.find((v) => v.playerId === playerId);
-  const enemy = players.find((v) => v.playerId !== playerId);
-  const enemyHUD = view.hud.players.find((v) => v.playerId !== playerId);
   const activeTDArmdozer = view.td.armdozers.find(
     (v) => v.playerId === activePlayerId,
   );
-  if (
-    !player ||
-    !playerCommand ||
-    !playerHUD ||
-    !enemy ||
-    !enemyHUD ||
-    !activeTDArmdozer
-  ) {
+  if (!player || !playerCommand || !activeTDArmdozer) {
     return empty();
   }
 
@@ -44,10 +35,7 @@ export function inputCommandAnimation(
 
   const isPlayerTurn = playerId === activePlayerId;
   return all(
-    playerHUD.gauge.hp(player.armdozer.hp),
-    playerHUD.gauge.battery(player.armdozer.battery),
-    enemyHUD.gauge.hp(enemy.armdozer.hp),
-    enemyHUD.gauge.battery(enemy.armdozer.battery),
+    ...updateGauge(view.hud.players, players),
     showCommand({
       view,
       isPlayerTurn,
