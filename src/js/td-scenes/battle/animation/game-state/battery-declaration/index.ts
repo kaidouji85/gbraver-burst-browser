@@ -1,11 +1,11 @@
 import { BatteryDeclaration, GameStateX } from "gbraver-burst-core";
 
-import { all } from "../../../../animation/all";
-import { Animate } from "../../../../animation/animate";
-import { delay, empty } from "../../../../animation/delay";
-import { onStart } from "../../../../animation/on-start";
-import { TDPlayer } from "../../view/td/player";
-import { StateAnimationProps } from "./state-animation-props";
+import { all } from "../../../../../animation/all";
+import { Animate } from "../../../../../animation/animate";
+import { delay, empty } from "../../../../../animation/delay";
+import { onStart } from "../../../../../animation/on-start";
+import { TDPlayer } from "../../../view/td/player";
+import { StateAnimationProps } from "../state-animation-props";
 
 /** バッテリー宣言アニメーションのパラメータ */
 type DeclarationParams = {
