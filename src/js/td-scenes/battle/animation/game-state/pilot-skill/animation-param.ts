@@ -101,11 +101,11 @@ export function toPilotSkillAnimationParam(
 
   return {
     skill: effect.skill,
-    pilot: pilot,
+    pilot,
     invokerState: invokerState,
     invokerSprite: invokerArmdozer.sprite(),
-    invokerTD: invokerTD,
-    invokerHUD: invokerHUD,
+    invokerTD,
+    invokerHUD,
     attackerTDArmdozer,
     tdObjects: props.view.td.gameObjects,
     hudObjects: props.view.hud.gameObjects,
