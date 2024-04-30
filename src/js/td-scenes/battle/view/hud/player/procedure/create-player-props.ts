@@ -22,8 +22,8 @@ export function createPlayerProps(
   });
 
   const predicatedDamage = new PredicatedDamage(params);
-  predicatedDamage.getObject3D().position.x = -150;
-  predicatedDamage.getObject3D().position.y = 70;
+  predicatedDamage.getObject3D().position.x = -120;
+  predicatedDamage.getObject3D().position.y = 110;
   gauge.addObject3D(predicatedDamage.getObject3D());
 
   return {
