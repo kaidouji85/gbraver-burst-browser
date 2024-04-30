@@ -11,26 +11,8 @@ import { PilotSkillAnimationParamX } from "./animation-param";
  * パイロットスキル ライト アニメーションパラメータ
  * @template SKILL パイロットスキル
  */
-export type RaitoAnimationParamX<SKILL extends PilotSkill> =
+export type RaitoAnimationParam<SKILL extends PilotSkill> =
   PilotSkillAnimationParamX<SKILL, RaitoHUD>;
-
-/** パイロットスキル ライト アニメーションパラメータ */
-export type RaitoAnimationParam = RaitoAnimationParamX<PilotSkill>;
-
-/**
- * ライト パイロットスキルアニメーション
- *
- * @param param パラメータ
- * @returns アニメーション
- */
-export function raitoAnimation(param: RaitoAnimationParam): Animate {
-  if (param.skill.type === "DamageHalvedSkill") {
-    const skill: DamageHalvedSkill = param.skill;
-    return raitoDamageHalved({ ...param, skill });
-  }
-
-  return empty();
-}
 
 /** イン アニメーション時間 */
 const inDuration = 400;
@@ -39,12 +21,11 @@ const outDuration = 400;
 
 /**
  * ライト ダメージ半減 アニメーション
- *
  * @param param パラメータ
  * @returns アニメーション
  */
 function raitoDamageHalved(
-  param: RaitoAnimationParamX<DamageHalvedSkill>,
+  param: RaitoAnimationParam<DamageHalvedSkill>,
 ): Animate {
   return all(
     param.pilot.cutIn.show(),
@@ -70,4 +51,20 @@ function raitoDamageHalved(
       ),
     )
     .chain(delay(200));
+}
+
+/**
+ * ライト パイロットスキル アニメーション
+ * @param param パラメータ
+ * @returns アニメーション
+ */
+export function raitoAnimation(
+  param: RaitoAnimationParam<PilotSkill>,
+): Animate {
+  if (param.skill.type === "DamageHalvedSkill") {
+    const skill: DamageHalvedSkill = param.skill;
+    return raitoDamageHalved({ ...param, skill });
+  }
+
+  return empty();
 }

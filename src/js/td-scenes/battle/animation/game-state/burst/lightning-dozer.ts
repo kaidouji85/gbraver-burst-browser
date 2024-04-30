@@ -1,4 +1,4 @@
-import type { Burst, LightningBarrier } from "gbraver-burst-core";
+import { Burst, LightningBarrier } from "gbraver-burst-core";
 
 import { all } from "../../../../../animation/all";
 import { Animate } from "../../../../../animation/animate";
@@ -6,11 +6,10 @@ import { delay, empty } from "../../../../../animation/delay";
 import { LightningDozerHUD } from "../../../view/hud/armdozer-objects/lightning-dozer";
 import { LightningDozerTD } from "../../../view/td/armdozer-objects/lightning-dozer";
 import { dolly, toInitial, track } from "../../td-camera";
-import type { BurstAnimationParamX } from "./animation-param";
+import { BurstAnimationParamX } from "./animation-param";
 
 /**
- * ライトニングドーザ バーストアニメーションパラメータ
- *
+ * ライトニングドーザ バースト アニメーションパラメータ
  * @template BURST バースト
  */
 export type LightningDozerBurst<BURST extends Burst> = BurstAnimationParamX<
@@ -20,25 +19,7 @@ export type LightningDozerBurst<BURST extends Burst> = BurstAnimationParamX<
 >;
 
 /**
- * ライトニングドーザ バーストアニメーション
- *
- * @param param パラメータ
- * @returns アニメーション
- */
-export function lightningDozerBurst(
-  param: LightningDozerBurst<Burst>,
-): Animate {
-  if (param.burst.type === "LightningBarrier") {
-    const burst: LightningBarrier = param.burst;
-    return lightningBarrier({ ...param, burst });
-  }
-
-  return empty();
-}
-
-/**
- * 電撃バリア
- *
+ * ライトニングドーザ 電撃バリア アニメーション
  * @param param パラメータ
  * @returns アニメーション
  */
@@ -91,4 +72,20 @@ function lightningBarrier(
       ),
     )
     .chain(delay(200));
+}
+
+/**
+ * ライトニングドーザ バーストアニメーション
+ * @param param パラメータ
+ * @returns アニメーション
+ */
+export function lightningDozerBurst(
+  param: LightningDozerBurst<Burst>,
+): Animate {
+  if (param.burst.type === "LightningBarrier") {
+    const burst: LightningBarrier = param.burst;
+    return lightningBarrier({ ...param, burst });
+  }
+
+  return empty();
 }
