@@ -1,4 +1,4 @@
-import type { Burst, RecoverBattery } from "gbraver-burst-core";
+import { Burst, RecoverBattery } from "gbraver-burst-core";
 
 import { all } from "../../../../../animation/all";
 import { Animate } from "../../../../../animation/animate";
@@ -6,7 +6,7 @@ import { delay, empty } from "../../../../../animation/delay";
 import { ShinBraverHUD } from "../../../view/hud/armdozer-objects/shin-braver";
 import { ShinBraverTD } from "../../../view/td/armdozer-objects/shin-braver";
 import { dolly, toInitial, track } from "../../td-camera";
-import type { BurstAnimationParamX } from "./animation-param";
+import { BurstAnimationParamX } from "./animation-param";
 
 /**
  * シンブレイバー バーストアニメーション パラメータ
@@ -19,24 +19,8 @@ export type ShinBraverBurst<BURST extends Burst> = BurstAnimationParamX<
 >;
 
 /**
- * シンブレイバーのバーストアニメーション
- *
- * @param param バーストアニメーションパラメータ
- * @returns バーストアニメーション
- */
-export function shinBraverBurst(param: ShinBraverBurst<Burst>): Animate {
-  if (param.burst.type === "RecoverBattery") {
-    const burst: RecoverBattery = param.burst;
-    return recoverBattery({ ...param, burst });
-  }
-
-  return empty();
-}
-
-/**
- * バッテリー回復バースト
- *
- * @param param アニメーションパラメータ
+ * シンブレイバー バッテリー回復 アニメーション
+ * @param param パラメータ
  * @returns アニメーション
  */
 function recoverBattery(param: ShinBraverBurst<RecoverBattery>): Animate {
@@ -79,4 +63,18 @@ function recoverBattery(param: ShinBraverBurst<RecoverBattery>): Animate {
       ),
     )
     .chain(delay(200));
+}
+
+/**
+ * シンブレイバー バースト アニメーション
+ * @param param パラメータ
+ * @returns アニメーション
+ */
+export function shinBraverBurst(param: ShinBraverBurst<Burst>): Animate {
+  if (param.burst.type === "RecoverBattery") {
+    const burst: RecoverBattery = param.burst;
+    return recoverBattery({ ...param, burst });
+  }
+
+  return empty();
 }
