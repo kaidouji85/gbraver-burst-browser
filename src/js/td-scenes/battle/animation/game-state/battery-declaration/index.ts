@@ -2,85 +2,13 @@ import { BatteryDeclaration, GameStateX } from "gbraver-burst-core";
 
 import { all } from "../../../../../animation/all";
 import { Animate } from "../../../../../animation/animate";
-import { delay, empty } from "../../../../../animation/delay";
-import { onStart } from "../../../../../animation/on-start";
-import { TDPlayer } from "../../../view/td/player";
+import { empty } from "../../../../../animation/delay";
 import { StateAnimationProps } from "../state-animation-props";
-
-/** バッテリー宣言アニメーションのパラメータ */
-type DeclarationParams = {
-  /** 3Dプレイヤーオブジェクト */
-  td: TDPlayer;
-  /** 宣言したバッテリー値 */
-  value: number;
-};
-
-/**
- * バッテリー宣言アニメーション
- * @param params パラメータ
- * @returns アニメーション
- */
-function declaration(params: DeclarationParams): Animate {
-  const { td, value } = params;
-  return td.batteryNumber.show(value).chain(delay(800));
-}
-
-/**
- * バッテリー宣言の効果音
- * プレイヤー、敵側で同時再生したくないので、
- * declarationとは別関数に切り出している
- * @param props 戦闘シーンプロパティ
- * @returns アニメーション
- */
-function declarationSound(props: StateAnimationProps): Animate {
-  const { sounds, se } = props;
-  return onStart(() => {
-    se.play(sounds.batteryDeclaration);
-  });
-}
-
-/** 補正ありバッテリー宣言のパラメータ */
-type DeclarationWithCorrectParams = DeclarationParams & {
-  /** 本来出したバッテリー値 */
-  origin: number;
-  /** バッテリーの補正値 */
-  correct: number;
-};
-
-/**
- * 補正ありのバッテリー宣言
- * @param params パラメータ
- * @returns アニメーション
- */
-function declarationWithCorrect(params: DeclarationWithCorrectParams): Animate {
-  const { td, value, origin, correct } = params;
-  return td.batteryNumber
-    .show(origin)
-    .chain(delay(300))
-    .chain(
-      all(td.batteryNumber.change(value), td.batteryCorrect.popUp(correct)),
-    )
-    .chain(delay(200));
-}
-
-/**
- * バッテリー補正ありの場合の効果音
- * declarationWithCorrectとタイミングを合わせている
- * @param props 戦闘シーンプロパティ
- * @returns アニメーション
- */
-function declarationSoundWithCorrect(props: StateAnimationProps): Animate {
-  const { sounds, se } = props;
-  return onStart(() => {
-    se.play(sounds.batteryDeclaration);
-  })
-    .chain(delay(600))
-    .chain(
-      onStart(() => {
-        se.play(sounds.batteryDeclaration);
-      }),
-    );
-}
+import { declaration, declarationSound } from "./declaration";
+import {
+  declarationSoundWithCorrect,
+  declarationWithCorrect,
+} from "./declaration-with-correct";
 
 /**
  * バッテリー宣言アニメーション
