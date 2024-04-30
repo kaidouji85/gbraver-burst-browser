@@ -1,10 +1,12 @@
-import type { GameStateX, InputCommand } from "gbraver-burst-core";
+import { GameStateX, InputCommand } from "gbraver-burst-core";
 
 import { all } from "../../../../../animation/all";
 import { Animate } from "../../../../../animation/animate";
 import { empty } from "../../../../../animation/delay";
-import type { StateAnimationProps } from "../state-animation-props";
+import { StateAnimationProps } from "../state-animation-props";
+import { activeArmdozerSprite } from "./active-armdozer-sprite";
 import { showCommand } from "./show-command";
+import { updateGauge } from "./update-gauge";
 
 /**
  * コマンド入力フェイズのアニメーション
@@ -16,29 +18,12 @@ export function inputCommandAnimation(
   props: StateAnimationProps,
   gameState: GameStateX<InputCommand>,
 ): Animate {
-  const player = gameState.players.find((v) => v.playerId === props.playerId);
-  const playerCommand = gameState.effect.players.find(
-    (v) => v.playerId === props.playerId,
-  );
-  const playerHUD = props.view.hud.players.find(
-    (v) => v.playerId === props.playerId,
-  );
-  const enemy = gameState.players.find((v) => v.playerId !== props.playerId);
-  const enemyHUD = props.view.hud.players.find(
-    (v) => v.playerId !== props.playerId,
-  );
-  const activeTDArmdozer = props.view.td.armdozers.find(
-    (v) => v.playerId === gameState.activePlayerId,
-  );
+  const { playerId, view, controllerType, animatePlayer } = props;
+  const { players, effect, activePlayerId } = gameState;
 
-  if (
-    !player ||
-    !playerCommand ||
-    !playerHUD ||
-    !enemy ||
-    !enemyHUD ||
-    !activeTDArmdozer
-  ) {
+  const player = players.find((v) => v.playerId === playerId);
+  const playerCommand = effect.players.find((v) => v.playerId === playerId);
+  if (!player || !playerCommand) {
     return empty();
   }
 
@@ -46,22 +31,17 @@ export function inputCommandAnimation(
     return empty();
   }
 
-  const isPlayerTurn = props.playerId === gameState.activePlayerId;
+  const isPlayerTurn = playerId === activePlayerId;
   return all(
-    playerHUD.gauge.hp(player.armdozer.hp),
-    playerHUD.gauge.battery(player.armdozer.battery),
-    enemyHUD.gauge.hp(enemy.armdozer.hp),
-    enemyHUD.gauge.battery(enemy.armdozer.battery),
+    updateGauge(view.hud.players, players),
     showCommand({
-      view: props.view,
+      view,
       isPlayerTurn,
       maxBattery: player.armdozer.maxBattery,
       commands: playerCommand.command,
-      controllerType: props.controllerType,
+      controllerType,
     }),
-    props.view.hud.gameObjects.timeScaleButton.open(
-      props.animatePlayer.timeScale,
-    ),
-    activeTDArmdozer.sprite().startActive(),
+    view.hud.gameObjects.timeScaleButton.open(animatePlayer.timeScale),
+    activeArmdozerSprite(view.td.armdozers, activePlayerId),
   );
 }
