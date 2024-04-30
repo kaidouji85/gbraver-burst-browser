@@ -19,7 +19,7 @@ export type GenesisBraverBurst<BURST extends Burst> = BurstAnimationParamX<
 >;
 
 /**
- * ジェネシスブレイバー バッテリーブレイク
+ * ジェネシスブレイバー バッテリーリミットブレイク アニメーション
  * @param param パラメータ
  * @returns アニメーション
  */
