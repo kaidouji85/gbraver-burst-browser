@@ -42,7 +42,7 @@ export type BurstAnimationParamX<
 
   /** 攻撃側3Dアームドーザ */
   attackerArmdozerTD: TDArmdozerObjects;
-  
+
   /** 3Dレイヤーオブジェクト */
   tdObjects: TDGameObjects;
   /** 3Dカメラ */
