@@ -74,7 +74,7 @@ export function batteryDeclarationAnimation(
     correct: defenderCorrect,
   };
 
-  const shouldCorrectSoundPlayer =
+  const shouldSoundCorrect =
     shouldAttackerCorrect || shouldDefenderCorrect;
 
   const isPlayerAttacker = effect.attacker === playerId;
@@ -92,7 +92,7 @@ export function batteryDeclarationAnimation(
       ? declarationWithCorrect(defenderDeclarationParams)
       : declaration(defenderDeclarationParams),
 
-    shouldCorrectSoundPlayer
+    shouldSoundCorrect
       ? declarationSoundWithCorrect(props)
       : declarationSound(props),
   ).chain(
