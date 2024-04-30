@@ -124,39 +124,42 @@ export function batteryDeclarationAnimation(
     originalBatteryOfDefender,
   } = effect;
   const attackerCorrect = attackerBattery - originalBatteryOfAttacker;
-  const attackerDeclaration =
-    attackerCorrect !== 0
+  const shouldAttackerCorrect = attackerCorrect !== 0;
+
+  const defenderCorrect = defenderBattery - originalBatteryOfDefender;
+  const shouldDefenderCorrect = defenderCorrect !== 0;
+
+  const shouldCorrectSoundPlayer =
+    shouldAttackerCorrect || shouldDefenderCorrect;
+
+  const isPlayerAttacker = effect.attacker === playerId;
+  return all(
+    view.td.gameObjects.turnIndicator.show(isPlayerAttacker),
+    attackerHUD.gauge.battery(attacker.armdozer.battery),
+    defenderHUD.gauge.battery(defender.armdozer.battery),
+    attackerTDArmdozer.sprite().endActive(),
+
+    shouldAttackerCorrect
       ? declarationWithCorrect(
           attackerTD,
           originalBatteryOfAttacker,
           attackerCorrect,
           attackerBattery,
         )
-      : declaration(attackerTD, attackerBattery);
-  const defenderCorrect = defenderBattery - originalBatteryOfDefender;
-  const defenderDeclaration =
-    defenderCorrect !== 0
+      : declaration(attackerTD, attackerBattery),
+
+    shouldDefenderCorrect
       ? declarationWithCorrect(
           defenderTD,
           originalBatteryOfDefender,
           defenderCorrect,
           defenderBattery,
         )
-      : declaration(defenderTD, defenderBattery);
-  const sound =
-    attackerCorrect !== 0 || defenderCorrect !== 0
-      ? declarationSoundWithCorrect(props)
-      : declarationSound(props);
+      : declaration(defenderTD, defenderBattery),
 
-  const isAttacker = effect.attacker === playerId;
-  return all(
-    sound,
-    view.td.gameObjects.turnIndicator.show(isAttacker),
-    attackerHUD.gauge.battery(attacker.armdozer.battery),
-    attackerDeclaration,
-    defenderHUD.gauge.battery(defender.armdozer.battery),
-    defenderDeclaration,
-    attackerTDArmdozer.sprite().endActive(),
+    shouldCorrectSoundPlayer
+      ? declarationSoundWithCorrect(props)
+      : declarationSound(props),
   ).chain(
     empty(),
     attackerTD.batteryNumber.hidden(),
