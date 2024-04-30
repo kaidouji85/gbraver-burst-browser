@@ -54,7 +54,7 @@ function yuuyaBatteryBoost(
     dolly(param.tdCamera, "-20", inDuration),
     param.tdObjects.skyBrightness.brightness(0.2, inDuration),
     param.tdObjects.illumination.intensity(0.2, inDuration),
-    param.activeTDArmdozer.sprite().endActive(),
+    param.attackerTDArmdozer.sprite().endActive(),
   )
     .chain(delay(800))
     .chain(param.pilot.cutIn.hidden())
