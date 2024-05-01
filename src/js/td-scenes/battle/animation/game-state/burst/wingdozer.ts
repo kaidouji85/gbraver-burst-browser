@@ -39,6 +39,7 @@ export function wingDozerContinuousAttack(
     param.tdObjects.illumination.intensity(0.2, 500),
     param.hudObjects.rearmostFader.opacity(0.6, 500),
     param.attackerArmdozerTD.sprite().endActive(),
+    param.defenderHUD.predicatedDamage.hidden(),
   )
     .chain(delay(800))
     .chain(

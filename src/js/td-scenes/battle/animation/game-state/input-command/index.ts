@@ -6,6 +6,7 @@ import { empty } from "../../../../../animation/delay";
 import { StateAnimationProps } from "../state-animation-props";
 import { activeArmdozerSprite } from "./active-armdozer-sprite";
 import { showCommand } from "./show-command";
+import { showPredicatedDamage } from "./show-predicated-damage";
 import { updateGauge } from "./update-gauge";
 
 /**
@@ -43,5 +44,6 @@ export function inputCommandAnimation(
     }),
     view.hud.gameObjects.timeScaleButton.open(animatePlayer.timeScale),
     activeArmdozerSprite(view.td.armdozers, activePlayerId),
+    showPredicatedDamage(view.hud.players, players, activePlayerId),
   );
 }

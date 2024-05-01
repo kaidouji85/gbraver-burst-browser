@@ -10,6 +10,7 @@ import { LightingTextureConfigs } from "./lightning";
 import { LightningBarrierTextureConfigs } from "./lightning-barrier";
 import { LightningDozerTextureConfigs } from "./lightning-dozer";
 import { NeoLandozerTextureConfigs } from "./neo-landozer";
+import { PredicatedDamageTextureConfigs } from "./predicated-damage";
 import { RaitoTextureConfigs } from "./raito";
 import { ResultTextureConfigs } from "./result";
 import { ShinBraverTextureConfigs } from "./shin-braver";
@@ -42,6 +43,7 @@ export const TEXTURE_CONFIGS: TextureConfig[] = [
   ...EffectLabelTextureConfigs,
   ...ResultTextureConfigs,
   ...YuuyaTextureConfigs,
+  ...PredicatedDamageTextureConfigs,
 ];
 
 /** 開発中のテクスチャリソース設定をあつめたもの */

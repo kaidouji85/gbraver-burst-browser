@@ -1,4 +1,5 @@
 import { playerGauge } from "../../../../../../game-object/gauge";
+import { PredicatedDamage } from "../../../../../../game-object/predicated-damage";
 import { winIndicator } from "../../../../../../game-object/result-indicator";
 import { playerTurnStart } from "../../../../../../game-object/turn-start";
 import { HUDLayerObjectCreatorParams } from "../../creator-params";
@@ -13,14 +14,22 @@ export function createPlayerProps(
   params: HUDLayerObjectCreatorParams,
 ): HUDPlayerProps {
   const { resources, player, gameObjectAction } = params;
+
+  const gauge = playerGauge({
+    ...params,
+    hp: player.armdozer.maxHp,
+    battery: player.armdozer.maxBattery,
+  });
+
+  const predicatedDamage = new PredicatedDamage(params);
+  predicatedDamage.getObject3D().position.x = -120;
+  predicatedDamage.getObject3D().position.y = 110;
+  gauge.addObject3D(predicatedDamage.getObject3D());
+
   return {
     playerId: player.playerId,
-    gauge: playerGauge({
-      resources: resources,
-      gameObjectAction: gameObjectAction,
-      hp: player.armdozer.maxHp,
-      battery: player.armdozer.maxBattery,
-    }),
+    gauge,
+    predicatedDamage,
     turnStart: playerTurnStart(resources, gameObjectAction),
     resultIndicator: winIndicator(resources, gameObjectAction),
   };
