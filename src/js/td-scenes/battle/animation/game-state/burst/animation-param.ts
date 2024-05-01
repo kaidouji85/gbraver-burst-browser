@@ -96,7 +96,6 @@ export function toBurstAnimationParam(
   const defenderHUD = props.view.hud.players.find(
     (v) => v.playerId !== gameState.activePlayerId,
   );
-
   if (
     !burstPlayerState ||
     !burstPlayerTD ||

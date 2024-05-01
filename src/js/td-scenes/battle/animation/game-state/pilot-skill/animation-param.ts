@@ -40,6 +40,9 @@ export type PilotSkillAnimationParamX<
   /** 攻撃側アームドーザスプライト */
   attackerTDArmdozer: TDArmdozerObjects;
 
+  /** 防御側HUDプレイヤーオブジェクト */
+  defenderHUD: HUDPlayer;
+
   /** 3Dゲームオブジェクト */
   tdObjects: TDGameObjects;
   /** HUDオブジェクト */
@@ -87,14 +90,17 @@ export function toPilotSkillAnimationParam(
   const attackerTDArmdozer = props.view.td.armdozers.find(
     (v) => v.playerId === gameState.activePlayerId,
   );
-
+  const defenderHUD = props.view.hud.players.find(
+    (v) => v.playerId !== gameState.activePlayerId,
+  );
   if (
     !invokerState ||
     !pilot ||
     !invokerArmdozer ||
     !invokerTD ||
     !invokerHUD ||
-    !attackerTDArmdozer
+    !attackerTDArmdozer ||
+    !defenderHUD
   ) {
     return null;
   }
@@ -107,6 +113,7 @@ export function toPilotSkillAnimationParam(
     invokerTD,
     invokerHUD,
     attackerTDArmdozer,
+    defenderHUD,
     tdObjects: props.view.td.gameObjects,
     hudObjects: props.view.hud.gameObjects,
     tdCamera: props.view.td.camera,
