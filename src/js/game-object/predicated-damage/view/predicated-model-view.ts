@@ -13,7 +13,7 @@ const MAX_ANIMATION = 16;
 const MESH_SIZE = 128;
 
 /** メッシュ間隔 */
-const MESH_INTERVAL = 64;
+const MESH_INTERVAL = 72;
 
 /** マイナス符号も含めた数字の最大桁数 */
 const NUMBER_OF_DIGITS = 5;
