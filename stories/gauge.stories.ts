@@ -113,7 +113,7 @@ export const payerWithPredicatedDamage: StoryFn = hudGameObjectStory(
     const predicatedDamage = new PredicatedDamage({ ...params });
     predicatedDamage.show(2000).play();
     predicatedDamage.getObject3D().position.x = -120;
-    predicatedDamage.getObject3D().position.y = 110;
+    predicatedDamage.getObject3D().position.y = 90;
     gauge.addObject3D(predicatedDamage.getObject3D());
 
     return [gauge.getObject3D()];
@@ -133,7 +133,7 @@ export const enemyWithPredicatedDamage: StoryFn = hudGameObjectStory(
     const predicatedDamage = new PredicatedDamage({ ...params });
     predicatedDamage.show(2000).play();
     predicatedDamage.getObject3D().position.x = 365;
-    predicatedDamage.getObject3D().position.y = 110;
+    predicatedDamage.getObject3D().position.y = 90;
     gauge.addObject3D(predicatedDamage.getObject3D());
 
     return [gauge.getObject3D()];
