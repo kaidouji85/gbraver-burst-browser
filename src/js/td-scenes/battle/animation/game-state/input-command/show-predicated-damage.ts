@@ -16,9 +16,9 @@ export function showPredicatedDamage(
   players: PlayerState[],
   activePlayerId: PlayerId,
 ): Animate {
-  const attacker = players.find(p => p.playerId === activePlayerId);
-  const defender = players.find(p => p.playerId !== activePlayerId);
-  const defenderHUD = hudPlayers.find(h => h.playerId !== activePlayerId);
+  const attacker = players.find((p) => p.playerId === activePlayerId);
+  const defender = players.find((p) => p.playerId !== activePlayerId);
+  const defenderHUD = hudPlayers.find((h) => h.playerId !== activePlayerId);
   if (!attacker || !defender || !defenderHUD) {
     return empty();
   }

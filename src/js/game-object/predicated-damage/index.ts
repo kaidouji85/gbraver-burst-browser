@@ -13,10 +13,11 @@ import {
 import { PredicatedDamageProps } from "./props/predicated-damage-props";
 
 /** コンストラクタのパラメータ */
-export type PredicatedDamageConstructParams = PredicatedDamagePropsCreatorParams & {
-  /** ゲームオブジェクトアクション */
-  gameObjectAction: Observable<GameObjectAction>;
-};
+export type PredicatedDamageConstructParams =
+  PredicatedDamagePropsCreatorParams & {
+    /** ゲームオブジェクトアクション */
+    gameObjectAction: Observable<GameObjectAction>;
+  };
 
 /** ダメージ予想 */
 export class PredicatedDamage {
