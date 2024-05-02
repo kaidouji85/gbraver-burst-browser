@@ -9,7 +9,7 @@ export type TrackingParams = {
   readonly td: TDLayer;
   /** HUDレイヤー */
   readonly hud: HUDLayer;
-  /** アクティブプレイヤー */
+  /** アクティブ プレイヤー */
   readonly activePlayerId: PlayerId;
   /** レンダリング対象のDOM */
   readonly rendererDOM: HTMLElement;
