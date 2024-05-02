@@ -5,7 +5,7 @@ import { PreRender } from "../../../game-loop/pre-render";
 import { HorizontalAnimationMesh } from "../../../mesh/horizontal-animation";
 import { ResourcesContainer } from "../../../resource";
 import { TEXTURE_IDS } from "../../../resource/texture/ids";
-import { HUDUIScale } from "../../scale";
+import { hudScale } from "../../scale";
 import { PredicatedDamageModel } from "../model/predicated-damage-model";
 
 /** 最大アニメーション枚数 */
@@ -86,7 +86,7 @@ export class PredicatedDamageView {
     const { damage, opacity } = model;
     const { safeAreaInset, rendererDOM } = preRender;
 
-    const scale = HUDUIScale(rendererDOM, safeAreaInset) * BASE_SCALE;
+    const scale = hudScale(rendererDOM, safeAreaInset) * BASE_SCALE;
     this.#group.scale.set(scale, scale, scale);
 
     const correctDamage = Math.max(MIN_DAMAGE, Math.min(damage, MAX_DAMAGE));
