@@ -2,7 +2,7 @@ import { Observable, Unsubscribable } from "rxjs";
 
 import { GameObjectAction } from "../../action/game-object-action";
 import { PredicatedDamageProps } from "../props/predicated-damage-props";
-import { onPreRender } from "./on-update";
+import { onPreRender } from "./on-pre-render";
 
 /** パラメータ */
 type Params = {
