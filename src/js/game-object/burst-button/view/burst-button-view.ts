@@ -8,7 +8,7 @@ import { CANVAS_IMAGE_IDS } from "../../../resource/canvas-image";
 import type { GameObjectAction } from "../../action/game-object-action";
 import type { PushDetector } from "../../push-detector/push-detector";
 import { circlePushDetector } from "../../push-detector/push-detector";
-import { HUDUIScale } from "../../scale";
+import { hudUIScale } from "../../scale";
 import type { BurstButtonModel } from "../model/burst-button-model";
 import type { ArmdozerIcon } from "./armdozer-icon";
 
@@ -111,7 +111,7 @@ export class BurstButtonView {
     this.#label.getObject3D().position.y = -80;
     const disabledOpacity = model.canActivateBurst ? 0 : model.opacity;
     this.#buttonDisabled.setOpacity(disabledOpacity);
-    const devicePerScale = HUDUIScale(
+    const devicePerScale = hudUIScale(
       preRender.rendererDOM,
       preRender.safeAreaInset,
     );
