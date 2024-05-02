@@ -67,7 +67,6 @@ export function batteryDeclarationAnimation(
     attackerHUD.gauge.battery(attacker.armdozer.battery),
     defenderHUD.gauge.battery(defender.armdozer.battery),
     attackerTDArmdozer.sprite().endActive(),
-    defenderHUD.predicatedDamage.hidden(),
 
     shouldAttackerCorrect
       ? declarationWithCorrect(attackerDeclarationParams)

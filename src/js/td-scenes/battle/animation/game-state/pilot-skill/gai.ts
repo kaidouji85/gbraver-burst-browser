@@ -36,7 +36,6 @@ function gaiBuffPower(param: GaiAnimationParam<BuffPowerSkill>): Animate {
     param.tdObjects.skyBrightness.brightness(0.2, inDuration),
     param.tdObjects.illumination.intensity(0.2, inDuration),
     param.attackerTDArmdozer.sprite().endActive(),
-    param.defenderHUD.predicatedDamage.hidden(),
   )
     .chain(delay(800))
     .chain(param.pilot.cutIn.hidden())
