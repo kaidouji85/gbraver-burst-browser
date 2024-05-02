@@ -1,9 +1,11 @@
 import * as R from "ramda";
 import * as THREE from "three";
 
+import { PreRender } from "../../../game-loop/pre-render";
 import { HorizontalAnimationMesh } from "../../../mesh/horizontal-animation";
 import { ResourcesContainer } from "../../../resource";
 import { TEXTURE_IDS } from "../../../resource/texture/ids";
+import { hudScale } from "../../scale";
 import { PredicatedDamageModel } from "../model/predicated-damage-model";
 
 /** 最大アニメーション枚数 */
@@ -23,6 +25,9 @@ const MAX_DAMAGE = 9999;
 
 /** 最小ダメージ */
 const MIN_DAMAGE = 0;
+
+/** 基本拡大率 */
+const BASE_SCALE = 0.3;
 
 /** コンストラクタのパラメータ */
 export type PredicatedDamageViewConstructParams = ResourcesContainer;
@@ -48,16 +53,16 @@ export class PredicatedDamageView {
         (t) => t.id === TEXTURE_IDS.PREDICATED_DAMAGE_NUMBER,
       )?.texture ?? new THREE.Texture();
 
-    this.#numbers = R.times((v) => {
-      const mesh = new HorizontalAnimationMesh({
-        texture,
-        maxAnimation: MAX_ANIMATION,
-        width: MESH_SIZE,
-        height: MESH_SIZE,
-      });
-      mesh.getObject3D().position.x = -v * MESH_INTERVAL;
-      return mesh;
-    }, NUMBER_OF_DIGITS);
+    this.#numbers = R.times(
+      () =>
+        new HorizontalAnimationMesh({
+          texture,
+          maxAnimation: MAX_ANIMATION,
+          width: MESH_SIZE,
+          height: MESH_SIZE,
+        }),
+      NUMBER_OF_DIGITS,
+    );
     this.#numbers.forEach((n) => {
       this.#group.add(n.getObject3D());
     });
@@ -75,19 +80,26 @@ export class PredicatedDamageView {
   /**
    * モデルをビューに反映させる
    * @param model モデル
+   * @param preRender プリレンダリング情報
    */
-  engage(model: PredicatedDamageModel): void {
+  engage(model: PredicatedDamageModel, preRender: PreRender): void {
     const { damage, opacity } = model;
+    const { safeAreaInset, rendererDOM } = preRender;
 
-    this.#numbers.forEach((n) => {
-      n.opacity(0);
-    });
+    const scale = hudScale(rendererDOM, safeAreaInset) * BASE_SCALE;
+    this.#group.scale.set(scale, scale, scale);
 
     const correctDamage = Math.max(MIN_DAMAGE, Math.min(damage, MAX_DAMAGE));
     const values = String(correctDamage)
       .split("")
       .reverse()
       .map((v) => Number(v));
+    const digits = values.length + 1;
+    this.#numbers.forEach((mesh, i) => {
+      mesh.opacity(0);
+      mesh.getObject3D().position.x = (-i + digits / 2) * MESH_INTERVAL;
+    });
+
     R.zip(this.#numbers, values)
       .map((n) => ({
         mesh: n[0],

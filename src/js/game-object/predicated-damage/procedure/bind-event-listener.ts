@@ -2,7 +2,7 @@ import { Observable, Unsubscribable } from "rxjs";
 
 import { GameObjectAction } from "../../action/game-object-action";
 import { PredicatedDamageProps } from "../props/predicated-damage-props";
-import { onUpdate } from "./on-update";
+import { onPreRender } from "./on-pre-render";
 
 /** パラメータ */
 type Params = {
@@ -21,8 +21,8 @@ export function bindEventListener(params: Params): Unsubscribable[] {
   const { props, gameObjectAction } = params;
   return [
     gameObjectAction.subscribe((action) => {
-      if (action.type === "Update") {
-        onUpdate(props);
+      if (action.type === "PreRender") {
+        onPreRender(props, action);
       }
     }),
   ];

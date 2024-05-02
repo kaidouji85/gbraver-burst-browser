@@ -55,7 +55,7 @@ export const single: StoryFn = hudGameObjectStory((params) => [
 /** ダメージ予想の複数表示 */
 export const multi: StoryFn = hudGameObjectStory((params) => [
   createPredicatedDamage({ ...params, damage: 2000, y: 0 }),
-  createPredicatedDamage({ ...params, damage: 200, y: 100 }),
-  createPredicatedDamage({ ...params, damage: 20, y: 200 }),
-  createPredicatedDamage({ ...params, damage: 20, y: 300 }),
+  createPredicatedDamage({ ...params, damage: 200, y: 50 }),
+  createPredicatedDamage({ ...params, damage: 20, y: 100 }),
+  createPredicatedDamage({ ...params, damage: 2, y: 150 }),
 ]);

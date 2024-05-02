@@ -5,7 +5,6 @@ import { Animate } from "../src/js/animation/animate";
 import { delay } from "../src/js/animation/delay";
 import { enemyGauge, playerGauge } from "../src/js/game-object/gauge";
 import { Gauge } from "../src/js/game-object/gauge/gauge";
-import { PredicatedDamage } from "../src/js/game-object/predicated-damage";
 import { hudGameObjectStory } from "./stub/hud-game-object-stub";
 
 export default {
@@ -96,46 +95,6 @@ export const enemyMaxBatteryChange: StoryFn = hudGameObjectStory(
       battery: 4,
     });
     maxBatteryChange(gauge).loop();
-    return [gauge.getObject3D()];
-  },
-);
-
-/** ゲージ ダメージ予想と一緒に表示 プレイヤー側 */
-export const payerWithPredicatedDamage: StoryFn = hudGameObjectStory(
-  (params) => {
-    const gauge = playerGauge({
-      ...params,
-      hp: 3100,
-      battery: 5,
-    });
-    gaugeChange(gauge).loop();
-
-    const predicatedDamage = new PredicatedDamage({ ...params });
-    predicatedDamage.show(2000).play();
-    predicatedDamage.getObject3D().position.x = -120;
-    predicatedDamage.getObject3D().position.y = 90;
-    gauge.addObject3D(predicatedDamage.getObject3D());
-
-    return [gauge.getObject3D()];
-  },
-);
-
-/** ゲージ ダメージ予想と一緒に表示 敵側 */
-export const enemyWithPredicatedDamage: StoryFn = hudGameObjectStory(
-  (params) => {
-    const gauge = enemyGauge({
-      ...params,
-      hp: 3100,
-      battery: 5,
-    });
-    gaugeChange(gauge).loop();
-
-    const predicatedDamage = new PredicatedDamage({ ...params });
-    predicatedDamage.show(2000).play();
-    predicatedDamage.getObject3D().position.x = 365;
-    predicatedDamage.getObject3D().position.y = 90;
-    gauge.addObject3D(predicatedDamage.getObject3D());
-
     return [gauge.getObject3D()];
   },
 );
