@@ -58,9 +58,9 @@ function enemyPredicatedDamageTracking(params: PredicatedDamageTrackingParams) {
  * @param params パラメータ
  */
 export function predicatedDamageTracking(params: TrackingParams) {
-  const { td, hud, rendererDOM, activePlayerId } = params;
-  hud.players.forEach(({ playerId, predicatedDamage }) => {
-    const isPlayer = playerId === activePlayerId;
+  const { td, hud, rendererDOM, playerId } = params;
+  hud.players.forEach(({ playerId: currentPlayerId, predicatedDamage }) => {
+    const isPlayer = currentPlayerId === playerId;
     const trackingParams = {
       tdCamera: td.camera.getCamera(),
       rendererDOM,

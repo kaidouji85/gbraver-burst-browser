@@ -42,7 +42,7 @@ export function onGameLoop(props: BattleSceneViewProps, action: GameLoop) {
   tracking({
     td,
     hud,
-    activePlayerId: playerId,
+    playerId,
     rendererDOM: renderer.getRendererDOM(),
   });
   preRenderHUD.next({
