@@ -17,5 +17,8 @@ export function decisionByMiniController(
       .chain(delay(200))
       .chain(view.dom.miniController.hidden()),
     view.hud.gameObjects.timeScaleButton.close(),
+    ...view.hud.players.map(({ predicatedDamage }) =>
+      predicatedDamage.hidden(),
+    ),
   );
 }

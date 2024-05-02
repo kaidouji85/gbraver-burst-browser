@@ -18,6 +18,9 @@ export function decisionByBurstButton(
     view.hud.gameObjects.pilotButton.close(),
     view.hud.gameObjects.pilotButtonLeadLine.hidden(),
     view.hud.gameObjects.timeScaleButton.close(),
+    ...view.hud.players.map(({ predicatedDamage }) =>
+      predicatedDamage.hidden(),
+    ),
   )
     .chain(delay(500))
     .chain(
