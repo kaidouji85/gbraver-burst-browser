@@ -5,7 +5,7 @@ import { HorizontalAnimationMesh } from "../../../../mesh/horizontal-animation";
 import type { Resources } from "../../../../resource";
 import { TEXTURE_IDS } from "../../../../resource/texture/ids";
 import { HUD_CUT_IN_ZNIDEX } from "../../../hud-zindex";
-import { HUDCutInScale } from "../../../scale";
+import { scaleBasedOnIPhoneXLandscapeHeight } from "../../../scale";
 import type { YuuyaModel } from "../model/yuuya-model";
 import type { YuuyaView } from "./yuuya-view";
 
@@ -49,8 +49,10 @@ export class PlayerYuuyaView implements YuuyaView {
   /** @override */
   engage(model: YuuyaModel, preRender: PreRender): void {
     const scale =
-      HUDCutInScale(preRender.rendererDOM, preRender.safeAreaInset) *
-      model.scale;
+      scaleBasedOnIPhoneXLandscapeHeight(
+        preRender.rendererDOM,
+        preRender.safeAreaInset,
+      ) * model.scale;
     const x =
       preRender.rendererDOM.clientWidth / 2 +
       (model.position.x - PADDING_RIGHT) * scale;

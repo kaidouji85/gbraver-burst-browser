@@ -4,7 +4,7 @@ import type { PreRender } from "../../../game-loop/pre-render";
 import { HorizontalAnimationMesh } from "../../../mesh/horizontal-animation";
 import type { Resources } from "../../../resource";
 import { TEXTURE_IDS } from "../../../resource/texture/ids";
-import { HUDCutInScale } from "../../scale";
+import { scaleBasedOnIPhoneXLandscapeHeight } from "../../scale";
 import type { TurnStartModel } from "../model/turn-start-model";
 import type { TurnStartView } from "./turn-start-view";
 
@@ -52,7 +52,7 @@ export class PlayerTurnStartView implements TurnStartView {
    */
   engage(model: TurnStartModel, preRender: PreRender): void {
     const target = this.#mesh.getObject3D();
-    const devicePerScale = HUDCutInScale(
+    const devicePerScale = scaleBasedOnIPhoneXLandscapeHeight(
       preRender.rendererDOM,
       preRender.safeAreaInset,
     );

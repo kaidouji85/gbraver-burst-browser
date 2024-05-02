@@ -3,7 +3,7 @@ import * as THREE from "three";
 import { PreRender } from "../../../../game-loop/pre-render";
 import { Resources } from "../../../../resource";
 import { HUD_CUT_IN_ZNIDEX } from "../../../hud-zindex";
-import { HUDCutInScale } from "../../../scale";
+import { scaleBasedOnIPhoneXLandscapeHeight } from "../../../scale";
 import { GenesisBraverCutInModel } from "../model/genesis-braver-cutin-model";
 import { AnimationMeshMapping } from "./animation-mesh-mapping";
 import { GenesisBraverCutInView } from "./genesis-braver-cutin-view";
@@ -55,8 +55,10 @@ export class PlayerGenesisBraverCutInView implements GenesisBraverCutInView {
       });
 
     const scale =
-      HUDCutInScale(preRender.rendererDOM, preRender.safeAreaInset) *
-      model.scale;
+      scaleBasedOnIPhoneXLandscapeHeight(
+        preRender.rendererDOM,
+        preRender.safeAreaInset,
+      ) * model.scale;
     this.#group.position.x = model.tracking.x;
     this.#group.position.y = model.tracking.y - BASE_PADDING_TOP * scale;
     this.#group.position.z = HUD_CUT_IN_ZNIDEX;

@@ -1,7 +1,7 @@
 import * as THREE from "three";
 
 import { PreRender } from "../../../game-loop/pre-render";
-import { HUDLeadLineScale } from "../../scale";
+import { scaleBasedOnIPhoneXLandscapeHeight } from "../../scale";
 import { LeadLineModel } from "../model/lead-line-model";
 import { BaseLineLength } from "./base-line-length";
 import { createEdge, EdgeMesh } from "./edge";
@@ -69,7 +69,7 @@ export class LeadLineView {
       (model.end.x - model.start.x) ** 2 + (model.end.y - model.start.y) ** 2,
     );
     this.#group.scale.x = length / BaseLineLength;
-    this.#group.scale.y = HUDLeadLineScale(
+    this.#group.scale.y = scaleBasedOnIPhoneXLandscapeHeight(
       preRender.rendererDOM,
       preRender.safeAreaInset,
     );
