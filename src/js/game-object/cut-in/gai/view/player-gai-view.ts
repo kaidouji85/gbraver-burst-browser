@@ -5,7 +5,7 @@ import { HorizontalAnimationMesh } from "../../../../mesh/horizontal-animation";
 import type { Resources } from "../../../../resource";
 import { TEXTURE_IDS } from "../../../../resource/texture/ids";
 import { HUD_CUT_IN_ZNIDEX } from "../../../hud-zindex";
-import { scaleBasedOnIPhoneXLandscapeHeight } from "../../../scale";
+import { hudScale } from "../../../scale";
 import type { GaiModel } from "../model/gai-model";
 import type { GaiView } from "./gai-view";
 
@@ -57,10 +57,7 @@ export class PlayerGaiView implements GaiView {
    */
   engage(model: GaiModel, preRender: PreRender): void {
     const scale =
-      scaleBasedOnIPhoneXLandscapeHeight(
-        preRender.rendererDOM,
-        preRender.safeAreaInset,
-      ) * model.scale;
+      hudScale(preRender.rendererDOM, preRender.safeAreaInset) * model.scale;
     const x =
       preRender.rendererDOM.clientWidth / 2 +
       (model.position.x - PADDING_RIGHT) * scale;

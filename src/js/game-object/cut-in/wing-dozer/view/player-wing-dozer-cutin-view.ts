@@ -5,7 +5,7 @@ import { HorizontalAnimationMesh } from "../../../../mesh/horizontal-animation";
 import type { Resources } from "../../../../resource";
 import { TEXTURE_IDS } from "../../../../resource/texture/ids";
 import { HUD_CUT_IN_ZNIDEX } from "../../../hud-zindex";
-import { scaleBasedOnIPhoneXLandscapeHeight } from "../../../scale";
+import { hudScale } from "../../../scale";
 import type {
   AnimationType,
   WingDozerCutInModel,
@@ -97,10 +97,7 @@ export class PlayerWingDozerCutInView implements WingDozerCutInView {
       v.opacity(0);
     });
     const scale =
-      scaleBasedOnIPhoneXLandscapeHeight(
-        preRender.rendererDOM,
-        preRender.safeAreaInset,
-      ) * model.scale;
+      hudScale(preRender.rendererDOM, preRender.safeAreaInset) * model.scale;
     this.#group.scale.set(scale, scale, scale);
     this.#group.position.x = model.tracking.x;
     this.#group.position.y = model.tracking.y - BASE_PADDING_TOP * scale;

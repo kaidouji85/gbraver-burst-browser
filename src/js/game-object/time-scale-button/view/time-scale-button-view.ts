@@ -8,7 +8,7 @@ import { CANVAS_IMAGE_IDS } from "../../../resource/canvas-image";
 import type { GameObjectAction } from "../../action/game-object-action";
 import type { PushDetector } from "../../push-detector/push-detector";
 import { circlePushDetector } from "../../push-detector/push-detector";
-import { HUDUIScale } from "../../scale";
+import { hudUIScale } from "../../scale";
 import type { TimeScaleButtonModel } from "../model/time-scale-button-model";
 
 /** canvasサイズ */
@@ -167,7 +167,7 @@ export class TimeScaleButtonView {
       timeScale.setOpacity(opacity);
     });
     this.#button.setOpacity(model.opacity);
-    const devicePerScale = HUDUIScale(
+    const devicePerScale = hudUIScale(
       preRender.rendererDOM,
       preRender.safeAreaInset,
     );

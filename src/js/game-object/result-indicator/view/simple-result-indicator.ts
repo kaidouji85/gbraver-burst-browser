@@ -3,7 +3,7 @@ import * as THREE from "three";
 import type { PreRender } from "../../../game-loop/pre-render";
 import { HorizontalAnimationMesh } from "../../../mesh/horizontal-animation";
 import { HUD_RESULT_INDICATOR_ZINDEX } from "../../hud-zindex";
-import { scaleBasedOnIPhoneXLandscapeHeight } from "../../scale";
+import { hudScale } from "../../scale";
 import type { ResultIndicatorModel } from "../model/result-indicator-model";
 import type { ResultIndicatorView } from "./result-indicator-view";
 
@@ -42,7 +42,7 @@ export class SimpleIndicatorView implements ResultIndicatorView {
   /** @override */
   engage(model: ResultIndicatorModel, preRender: PreRender): void {
     const target = this.#mesh.getObject3D();
-    const devicePerScale = scaleBasedOnIPhoneXLandscapeHeight(
+    const devicePerScale = hudScale(
       preRender.rendererDOM,
       preRender.safeAreaInset,
     );

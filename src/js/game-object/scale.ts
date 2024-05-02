@@ -1,13 +1,13 @@
 import type { SafeAreaInset } from "../safe-area/safe-area-inset";
 
 /**
- * 画面の高さを基準としたスケールを計算する
- * スケールの基準となるのはiPhoneXランドスケープ時の高さである
+ * HUDレイヤーのゲームオブジェクトが利用するスケール
+ *   スケール = 現在開いている画面の高さ / iPhoneXランドスケープ時の高さ
  * @param rendererDOM レンダリング対象HTML要素
  * @param safeAreaInset セーフエリア情報
  * @returns スケール
  */
-export function scaleBasedOnIPhoneXLandscapeHeight(
+export function hudScale(
   rendererDOM: HTMLElement,
   safeAreaInset: SafeAreaInset,
 ): number {
@@ -19,12 +19,13 @@ export function scaleBasedOnIPhoneXLandscapeHeight(
 }
 
 /**
- * HUDレイヤー ユーザインタフェースのスケール
+ * HUDレイヤーのユーザインタフェースで利用するスケール
+ *   スケール = 現在開いている画面の高さ / バッテリーセレクタの高さに * 調整定数
  * @param rendererDOM レンダリング対象HTML要素
  * @param safeAreaInset セーフエリア情報
  * @returns スケール
  */
-export function HUDUIScale(
+export function hudUIScale(
   rendererDOM: HTMLElement,
   safeAreaInset: SafeAreaInset,
 ): number {
