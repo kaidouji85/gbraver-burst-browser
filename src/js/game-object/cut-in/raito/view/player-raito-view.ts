@@ -5,7 +5,7 @@ import { HorizontalAnimationMesh } from "../../../../mesh/horizontal-animation";
 import type { Resources } from "../../../../resource";
 import { TEXTURE_IDS } from "../../../../resource/texture/ids";
 import { HUD_CUT_IN_ZNIDEX } from "../../../hud-zindex";
-import { HUDCutInScale } from "../../../scale";
+import { hudScale } from "../../../scale";
 import type { RaitoModel } from "../model/raito-model";
 import type { RaitoView } from "./raito-view";
 
@@ -56,8 +56,7 @@ export class PlayerRaitoView implements RaitoView {
    */
   engage(model: RaitoModel, preRender: PreRender): void {
     const scale =
-      HUDCutInScale(preRender.rendererDOM, preRender.safeAreaInset) *
-      model.scale;
+      hudScale(preRender.rendererDOM, preRender.safeAreaInset) * model.scale;
     const x =
       preRender.rendererDOM.clientWidth / 2 +
       (model.position.x - PADDING_RIGHT) * scale;

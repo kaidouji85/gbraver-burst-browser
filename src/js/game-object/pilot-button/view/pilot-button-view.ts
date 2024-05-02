@@ -8,7 +8,7 @@ import { CANVAS_IMAGE_IDS } from "../../../resource/canvas-image";
 import type { GameObjectAction } from "../../action/game-object-action";
 import type { PushDetector } from "../../push-detector/push-detector";
 import { circlePushDetector } from "../../push-detector/push-detector";
-import { HUDUIScale } from "../../scale";
+import { hudUIScale } from "../../scale";
 import type { PilotButtonModel } from "../model/pilot-button-model";
 import type { PilotIcon } from "./pilot-icon";
 
@@ -117,7 +117,7 @@ export class PilotButtonView {
     this.#pilotIcon.setOpacity(labelOpacity);
     const disabledOpacity = model.canActivatePilotSkill ? 0 : model.opacity;
     this.#buttonDisabled.setOpacity(disabledOpacity);
-    const devicePerScale = HUDUIScale(
+    const devicePerScale = hudUIScale(
       preRender.rendererDOM,
       preRender.safeAreaInset,
     );

@@ -4,7 +4,7 @@ import * as THREE from "three";
 import type { PreRender } from "../../../game-loop/pre-render";
 import type { ResourcesContainer } from "../../../resource";
 import type { GameObjectAction } from "../../action/game-object-action";
-import { HUDUIScale } from "../../scale";
+import { hudUIScale } from "../../scale";
 import type { BatterySelectorModel } from "../model";
 import { BatteryButton } from "./battery-button";
 import { BatteryMeter } from "./battery-merter";
@@ -79,7 +79,7 @@ export class BatterySelectorView {
     this.#button.update(model);
     this.#plus.update(model);
     this.#minus.update(model);
-    const devicePerScale = HUDUIScale(
+    const devicePerScale = hudUIScale(
       preRender.rendererDOM,
       preRender.safeAreaInset,
     );
