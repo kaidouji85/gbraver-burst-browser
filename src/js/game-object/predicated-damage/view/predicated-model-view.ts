@@ -1,9 +1,11 @@
 import * as R from "ramda";
 import * as THREE from "three";
 
+import { PreRender } from "../../../game-loop/pre-render";
 import { HorizontalAnimationMesh } from "../../../mesh/horizontal-animation";
 import { ResourcesContainer } from "../../../resource";
 import { TEXTURE_IDS } from "../../../resource/texture/ids";
+import { HUDUIScale } from "../../scale";
 import { PredicatedDamageModel } from "../model/predicated-damage-model";
 
 /** 最大アニメーション枚数 */
@@ -45,7 +47,6 @@ export class PredicatedDamageView {
     const { resources } = params;
 
     this.#group = new THREE.Group();
-    this.#group.scale.set(BASE_SCALE, BASE_SCALE, BASE_SCALE);
 
     const texture =
       resources.textures.find(
@@ -79,9 +80,14 @@ export class PredicatedDamageView {
   /**
    * モデルをビューに反映させる
    * @param model モデル
+   * @param preRender プリレンダリング情報
    */
-  engage(model: PredicatedDamageModel): void {
+  engage(model: PredicatedDamageModel, preRender: PreRender): void {
     const { damage, opacity } = model;
+    const { safeAreaInset, rendererDOM } = preRender;
+
+    const scale = HUDUIScale(rendererDOM, safeAreaInset) * BASE_SCALE;
+    this.#group.scale.set(scale, scale, scale);
 
     const correctDamage = Math.max(MIN_DAMAGE, Math.min(damage, MAX_DAMAGE));
     const values = String(correctDamage)
