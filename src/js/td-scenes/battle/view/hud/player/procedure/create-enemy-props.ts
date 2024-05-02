@@ -22,9 +22,6 @@ export function createEnemyProps(
   });
 
   const predicatedDamage = new PredicatedDamage(params);
-  predicatedDamage.getObject3D().position.x = 365;
-  predicatedDamage.getObject3D().position.y = 90;
-  gauge.addObject3D(predicatedDamage.getObject3D());
 
   return {
     playerId: enemy.playerId,

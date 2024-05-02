@@ -24,6 +24,9 @@ const MAX_DAMAGE = 9999;
 /** 最小ダメージ */
 const MIN_DAMAGE = 0;
 
+/** 基本拡大率 */
+const BASE_SCALE = 0.3;
+
 /** コンストラクタのパラメータ */
 export type PredicatedDamageViewConstructParams = ResourcesContainer;
 
@@ -42,6 +45,7 @@ export class PredicatedDamageView {
     const { resources } = params;
 
     this.#group = new THREE.Group();
+    this.#group.scale.set(BASE_SCALE, BASE_SCALE, BASE_SCALE);
 
     const texture =
       resources.textures.find(
