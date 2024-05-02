@@ -56,10 +56,10 @@ function enemyGaugeTracking(
  * @param params パラメータ
  */
 export function gaugeTracking(params: TrackingParams): void {
-  const { td, hud, activePlayerId, rendererDOM } = params;
-  hud.players.forEach(({ playerId, gauge }) => {
-    const tracking =
-      playerId === activePlayerId ? playerGaugeTracking : enemyGaugeTracking;
+  const { td, hud, playerId, rendererDOM } = params;
+  hud.players.forEach(({ playerId: currentPlayerId, gauge }) => {
+    const isPlayer = currentPlayerId === playerId;
+    const tracking = isPlayer ? playerGaugeTracking : enemyGaugeTracking;
     tracking(gauge, td.camera.getCamera(), rendererDOM);
   });
 }
