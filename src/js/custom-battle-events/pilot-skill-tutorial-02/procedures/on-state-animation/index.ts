@@ -5,6 +5,7 @@ import { getAnimationIfConditionMet } from "../../../get-animation-if-conditiona
 import { PilotSkillTutorial02Props } from "../../props";
 import { gaiShout } from "./gai-shout";
 import { tsubasaShout } from "./tsubasa-shout";
+import { invisibleShoutMessageWindowWhenTurnChange } from "../../../invisible-shout-message-window";
 
 /**
  * カスタムステートアニメーション
@@ -14,6 +15,10 @@ import { tsubasaShout } from "./tsubasa-shout";
 export function onStateAnimation(
   props: Readonly<CustomStateAnimation & PilotSkillTutorial02Props>,
 ): Animate {
-  const conditionalAnimations = [...gaiShout, ...tsubasaShout];
+  const conditionalAnimations = [
+    ...gaiShout,
+    ...tsubasaShout,
+    invisibleShoutMessageWindowWhenTurnChange,
+  ];
   return getAnimationIfConditionMet(props, conditionalAnimations) ?? empty();
 }
