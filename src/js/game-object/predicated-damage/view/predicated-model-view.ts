@@ -94,10 +94,9 @@ export class PredicatedDamageView {
       .split("")
       .reverse()
       .map((v) => Number(v));
-    const digits = values.length + 1;
     this.#numbers.forEach((mesh, i) => {
       mesh.opacity(0);
-      mesh.getObject3D().position.x = (-i + digits / 2) * MESH_INTERVAL;
+      mesh.getObject3D().position.x = (-i + values.length / 2) * MESH_INTERVAL;
     });
 
     R.zip(this.#numbers, values)
