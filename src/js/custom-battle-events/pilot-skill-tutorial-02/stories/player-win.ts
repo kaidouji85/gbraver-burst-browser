@@ -17,6 +17,7 @@ import { scrollLeftMessages, scrollRightMessages } from "../../scroll-messages";
 export async function playerWin(
   props: Readonly<CustomBattleEventProps>,
 ): Promise<void> {
+  invisibleAllMessageWindows(props);
   activeRightMessageWindowWithFace(props, "Gai");
   await scrollRightMessages(props, [
     ["ガイ", "「見たかシンヤ"],
