@@ -12,7 +12,7 @@ export const gaiShout: ConditionalAnimation<
   (props) => (isPlayerPilotSkillActivated(props) ? gaiPilotSkill(props) : null),
   (props) => {
     const { currentState } = props;
-    return currentState.effect.name === "Battle" &&
+    return currentState.effect.name === "BatteryDeclaration" &&
       currentState.effect.attacker === props.playerId
       ? gaiFinishBlow(props)
       : null;

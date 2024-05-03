@@ -4,6 +4,7 @@ import { CustomStateAnimation } from "../../../../td-scenes/battle/custom-battle
 import { getAnimationIfConditionMet } from "../../../get-animation-if-conditional-met";
 import { PilotSkillTutorial02Props } from "../../props";
 import { gaiShout } from "./gai-shout";
+import { tsubasaShout } from "./tsubasa-shout";
 
 /**
  * カスタムステートアニメーション
@@ -13,6 +14,6 @@ import { gaiShout } from "./gai-shout";
 export function onStateAnimation(
   props: Readonly<CustomStateAnimation & PilotSkillTutorial02Props>,
 ): Animate {
-  const conditionalAnimations = [...gaiShout];
+  const conditionalAnimations = [...gaiShout, ...tsubasaShout];
   return getAnimationIfConditionMet(props, conditionalAnimations) ?? empty();
 }

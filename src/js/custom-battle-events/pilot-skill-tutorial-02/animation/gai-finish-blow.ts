@@ -9,5 +9,5 @@ import { playerPilotOnlyShout } from "../../pilot-shout";
  */
 export const gaiFinishBlow = (props: Readonly<CustomBattleEventProps>) =>
   onStart(() => {
-    playerPilotOnlyShout(props, "Gai", "やってやるぞ");
+    playerPilotOnlyShout(props, "Gai", "やってやる ……やってやるぞ！！");
   });
