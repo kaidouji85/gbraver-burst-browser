@@ -7,7 +7,7 @@ import { playerPilotOnlyShout } from "../../pilot-shout";
  * @param props イベントプロパティ
  * @returns アニメーション
  */
-export const gaiShout = (props: Readonly<CustomBattleEventProps>) =>
+export const gaiPilotSkill = (props: Readonly<CustomBattleEventProps>) =>
   onStart(() => {
     playerPilotOnlyShout(props, "Gai", "俺の根性 見せてやる");
   });
