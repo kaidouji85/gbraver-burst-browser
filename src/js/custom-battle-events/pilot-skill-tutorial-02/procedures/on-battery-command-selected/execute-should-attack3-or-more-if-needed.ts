@@ -1,9 +1,9 @@
 import { totalCorrectPower } from "gbraver-burst-core";
 
-import { LastState } from "../../../td-scenes/battle/custom-battle-event";
-import { turnCount } from "../../turn-count";
-import { PilotSkillTutorial02Props } from "../props";
-import { shouldAttack3OrMore } from "../stories/should-attack3-or-more";
+import { LastState } from "../../../../td-scenes/battle/custom-battle-event";
+import { turnCount } from "../../../turn-count";
+import { PilotSkillTutorial02Props } from "../../props";
+import { shouldAttack3OrMore } from "../../stories/should-attack3-or-more";
 
 /**
  * 条件を満たせば「3以上で攻撃する」を再生する

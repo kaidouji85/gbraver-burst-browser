@@ -1,12 +1,12 @@
-import { LastState } from "../../../td-scenes/battle/custom-battle-event";
-import { invisibleAllMessageWindows } from "../../invisible-all-message-windows";
-import { invisibleShoutMessageWindowWhenInputCommand } from "../../invisible-shout-message-window";
-import { turnCount } from "../../turn-count";
-import { PilotSkillTutorial02Props } from "../props";
-import { PilotSkillTutorial02State } from "../state";
-import { introduction } from "../stories/introduction";
+import { LastState } from "../../../../td-scenes/battle/custom-battle-event";
+import { invisibleAllMessageWindows } from "../../../invisible-all-message-windows";
+import { invisibleShoutMessageWindowWhenInputCommand } from "../../../invisible-shout-message-window";
+import { turnCount } from "../../../turn-count";
+import { PilotSkillTutorial02Props } from "../../props";
+import { PilotSkillTutorial02State } from "../../state";
+import { introduction } from "../../stories/introduction";
 import { executeDoPilotSkillIfNeeded } from "./execute-do-pilot-skill-if-needed";
-import { executeShouldAttack3OrMoreIfNeeded } from "./execute-should-attack3-or-more-if-needed";
+import { executeShouldAttack3OrMoreIfNeeded } from "../on-battery-command-selected/execute-should-attack3-or-more-if-needed";
 
 /**
  * 最終ステート直前イベント

@@ -1,6 +1,6 @@
-import { BatteryCommandSelected } from "../../../td-scenes/battle/custom-battle-event";
-import { PilotSkillTutorial02Props } from "../props";
-import { lessThanAttack3 } from "../stories/less-than-attack3";
+import { BatteryCommandSelected } from "../../../../td-scenes/battle/custom-battle-event";
+import { PilotSkillTutorial02Props } from "../../props";
+import { lessThanAttack3 } from "../../stories/less-than-attack3";
 
 /**
  * 条件を満たした場合「3未満攻撃だと警告」を再生する

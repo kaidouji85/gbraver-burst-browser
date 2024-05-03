@@ -1,5 +1,5 @@
-import { BatteryCommandSelected } from "../../../td-scenes/battle/custom-battle-event";
-import { noZeroDefense } from "../stories/no-zero-defense";
+import { BatteryCommandSelected } from "../../../../td-scenes/battle/custom-battle-event";
+import { noZeroDefense } from "../../stories/no-zero-defense";
 
 /**
  * 条件を満たした場合「0防御しない」を再生する
