@@ -5,8 +5,8 @@ import { turnCount } from "../../../turn-count";
 import { PilotSkillTutorial02Props } from "../../props";
 import { PilotSkillTutorial02State } from "../../state";
 import { introduction } from "../../stories/introduction";
-import { executeDoPilotSkillIfNeeded } from "./execute-do-pilot-skill-if-needed";
 import { executeShouldAttack3OrMoreIfNeeded } from "../on-battery-command-selected/execute-should-attack3-or-more-if-needed";
+import { executeDoPilotSkillIfNeeded } from "./execute-do-pilot-skill-if-needed";
 
 /**
  * 最終ステート直前イベント
