@@ -1,9 +1,9 @@
 import { totalCorrectPower } from "gbraver-burst-core";
 
-import { LastState } from "../../../td-scenes/battle/custom-battle-event";
-import { turnCount } from "../../turn-count";
-import { PilotSkillTutorial02Props } from "../props";
-import { doPilotSkill } from "../stories/do-pilot-skill";
+import { LastState } from "../../../../td-scenes/battle/custom-battle-event";
+import { turnCount } from "../../../turn-count";
+import { PilotSkillTutorial02Props } from "../../props";
+import { doPilotSkill } from "../../stories/do-pilot-skill";
 
 /**
  * 条件を満たせば「パイロットスキル発動を推奨」を再生する
