@@ -2,9 +2,9 @@ import { Observable } from "rxjs";
 
 import { MessageWindow } from "../game-dom/message-window";
 import { SEPlayer } from "../se/se-player";
-import  { CustomBattleEventProps } from "../td-scenes/battle/custom-battle-event";
+import { CustomBattleEventProps } from "../td-scenes/battle/custom-battle-event";
 import { BattleSceneSounds } from "../td-scenes/battle/sounds";
-import {waitUntilWindowPushWithStream} from "../wait/wait-until-window-push-with-stream";
+import { waitUntilWindowPushWithStream } from "../wait/wait-until-window-push-with-stream";
 import { PushWindow } from "../window/push-window";
 
 /** メッセージウインドウのパラグラフ */

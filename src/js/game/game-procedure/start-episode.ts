@@ -4,6 +4,7 @@ import { NPCBattleRoom } from "../../npc/npc-battle-room";
 import { BattleScene } from "../../td-scenes/battle";
 import { waitAnimationFrame } from "../../wait/wait-animation-frame";
 import { waitTime } from "../../wait/wait-time";
+import { waitUntilWindowPushWithStream } from "../../wait/wait-until-window-push-with-stream";
 import { battleSceneConnector } from "../action-connector/battle-scene-connector";
 import { tutorialTitleConnector } from "../action-connector/tutorial-title-connector";
 import { MAX_LOADING_TIME } from "../dom-scene-binder/max-loading-time";
@@ -53,7 +54,10 @@ export async function startEpisode(
   props.tdBinder.bind(battleScene, battleSceneConnector);
   await waitAnimationFrame();
   const latency = Date.now() - startTutorialStageTime;
-  await waitTime(3000 - latency);
+  await Promise.race([
+    waitTime(3000 - latency),
+    waitUntilWindowPushWithStream(props.pushWindow),
+  ]);
   await props.fader.fadeOut();
   props.domSceneBinder.hidden();
   await props.fader.fadeIn();
