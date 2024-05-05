@@ -15,7 +15,8 @@
     background-color: var(--background-color);
     color: var(--font-color);
     box-sizing: border-box;
-    padding: var(--screen-padding-top) var(--screen-padding-right) var(--screen-padding-bottom) var(--screen-padding-left);
+    padding: var(--screen-padding-top) var(--screen-padding-right)
+      var(--screen-padding-bottom) var(--screen-padding-left);
     background-size: cover;
     background-position: 50% 0;
   }
@@ -116,5 +117,5 @@
   position: absolute;
   left: max(var(--safe-area-left), calc(var(--font-size) * 2));
   bottom: max(var(--safe-area-bottom), calc(var(--font-size) * 2));
-  font-size: var(--font-size);
+  font-size: calc(var(--responsive-font-size) * 1.5);
 }
