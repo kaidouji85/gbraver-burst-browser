@@ -57,11 +57,11 @@
   font-weight: bold;
 }
 
-.episode-title__caption {
+.episode-title__episode-name {
   margin-left: calc(var(--responsive-font-size) * 2);
 }
 
-.episode-title__caption::first-letter {
+.episode-title__episode-name::first-letter {
   font-size: calc(var(--font-size) * 1.5);
   font-weight: bold;
   white-space: nowrap;
