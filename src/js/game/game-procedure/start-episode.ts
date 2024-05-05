@@ -6,7 +6,7 @@ import { waitAnimationFrame } from "../../wait/wait-animation-frame";
 import { waitTime } from "../../wait/wait-time";
 import { waitUntilWindowPushWithStream } from "../../wait/wait-until-window-push-with-stream";
 import { battleSceneConnector } from "../action-connector/battle-scene-connector";
-import { tutorialTitleConnector } from "../action-connector/tutorial-title-connector";
+import { episodeTitleConnector } from "../action-connector/episode-title-connector";
 import { MAX_LOADING_TIME } from "../dom-scene-binder/max-loading-time";
 import { Episode } from "../episodes/episode";
 import { GameProps } from "../game-props";
@@ -34,7 +34,7 @@ export async function startEpisode(
     resources: props.resources,
     armdozerId: episode.player.armdozer.id,
   });
-  props.domSceneBinder.bind(scene, tutorialTitleConnector);
+  props.domSceneBinder.bind(scene, episodeTitleConnector);
   await Promise.race([scene.waitUntilLoaded(), waitTime(MAX_LOADING_TIME)]);
   await props.fader.fadeIn();
   const startTutorialStageTime = Date.now();
