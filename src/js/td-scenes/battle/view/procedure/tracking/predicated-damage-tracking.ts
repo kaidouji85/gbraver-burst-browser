@@ -28,8 +28,8 @@ function playerPredicatedDamageTracking(
 ) {
   const { predicatedDamage, tdCamera, rendererDOM } = params;
   const origin = {
-    x: ARMDOZER_EFFECT_STANDARD_X - 60,
-    y: ARMDOZER_EFFECT_STANDARD_Y + 30,
+    x: ARMDOZER_EFFECT_STANDARD_X - 90,
+    y: ARMDOZER_EFFECT_STANDARD_Y,
     z: ARMDOZER_EFFECT_STANDARD_Z,
   };
   const hudCoordinate = toHUDCoordinate(origin, tdCamera, rendererDOM);
