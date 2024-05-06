@@ -3,9 +3,8 @@
  */
 @media (orientation: landscape) {
   .match-card {
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    display: grid;
+    place-items: center;
     width: 100vw;
     width: 100dvw;
     height: 100vh;
@@ -13,8 +12,7 @@
     background-color: var(--background-color);
     color: var(--font-color);
     box-sizing: border-box;
-    padding: var(--screen-padding-top) var(--screen-padding-right)
-      var(--screen-padding-bottom) var(--screen-padding-left);
+    padding: var(--screen-padding-top) var(--screen-padding-right) var(--screen-padding-bottom) var(--screen-padding-left);
   }
 }
 
@@ -24,34 +22,44 @@
   }
 }
 
-.match-card__caption {
-  display: flex;
-  flex-direction: row;
+.match-card__contents {
+  display: grid;
+  grid-template-columns: auto auto auto;
+  justify-items: center;
   align-items: center;
-  justify-content: center;
+}
+
+.match-card__caption {
+  grid-row: 1;
+  grid-column: 1 / 4;
   font-size: calc(var(--responsive-font-size) * 1.5);
   margin-bottom: var(--responsive-font-size);
 }
 
-.match-card__cards {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: center;
+.match-card__enemy-card {
+  grid-row: 2;
+  grid-column: 1;
+  object-fit: cover;
+  width: 30vw;
+  transform: scale(-1, 1);
 }
 
 .match-card__vs {
+  grid-row: 2;
+  grid-column: 2;
   font-size: calc(var(--responsive-font-size) * 3);
   margin: 0 calc(var(--responsive-font-size) * 5);
 }
 
-.match-card__enemy-card {
+.match-card__player-card {
+  grid-row: 2;
+  grid-column: 3;
   object-fit: cover;
-  width: 30%;
-  transform: scale(-1, 1);
+  width: 30vw;
 }
 
-.match-card__player-card {
-  object-fit: cover;
-  width: 30%;
+.match-card__now-loading {
+  grid-row: 3;
+  grid-column: 1 / 4;
+  font-size: calc(var(--responsive-font-size) * 1.5);
 }
