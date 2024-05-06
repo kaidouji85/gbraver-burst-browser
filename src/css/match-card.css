@@ -12,7 +12,8 @@
     background-color: var(--background-color);
     color: var(--font-color);
     box-sizing: border-box;
-    padding: var(--screen-padding-top) var(--screen-padding-right) var(--screen-padding-bottom) var(--screen-padding-left);
+    padding: var(--screen-padding-top) var(--screen-padding-right)
+      var(--screen-padding-bottom) var(--screen-padding-left);
   }
 }
 
@@ -26,12 +27,11 @@
   height: 100%;
   display: grid;
   grid-template-areas:
-      "c c c"
-      "e v p"
-      "l l l";
+    "c c c"
+    "e v p"
+    "l l l";
   grid-template-rows: 1fr auto 1fr;
-  justify-items: center;
-  align-items: center;
+  place-items: center center;
 }
 
 .match-card__caption {
