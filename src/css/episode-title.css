@@ -115,7 +115,10 @@
 
 .episode-title__loading {
   position: absolute;
-  left: max(var(--safe-area-left), calc(var(--font-size) * 2));
+  left: max(
+    var(--safe-area-left),
+    calc(var(--font-size) * 2 + var(--responsive-font-size) * 2)
+  );
   bottom: max(var(--safe-area-bottom), calc(var(--font-size) * 2));
   font-size: calc(var(--responsive-font-size) * 1.5);
 }

@@ -3,9 +3,8 @@
  */
 @media (orientation: landscape) {
   .match-card {
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    display: grid;
+    place-items: center;
     width: 100vw;
     width: 100dvw;
     height: 100vh;
@@ -24,34 +23,45 @@
   }
 }
 
+.match-card__contents {
+  height: 100%;
+  display: grid;
+  grid-template-areas:
+    "c c c"
+    "e v p"
+    "l l l";
+  grid-template-rows: 1fr auto 1fr;
+  place-items: center center;
+}
+
 .match-card__caption {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: center;
+  grid-area: c;
+  align-self: end;
   font-size: calc(var(--responsive-font-size) * 1.5);
   margin-bottom: var(--responsive-font-size);
 }
 
-.match-card__cards {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: center;
+.match-card__enemy-card {
+  grid-area: e;
+  object-fit: cover;
+  width: 30vh;
+  transform: scale(-1, 1);
 }
 
 .match-card__vs {
+  grid-area: v;
   font-size: calc(var(--responsive-font-size) * 3);
   margin: 0 calc(var(--responsive-font-size) * 5);
 }
 
-.match-card__enemy-card {
+.match-card__player-card {
+  grid-area: p;
   object-fit: cover;
-  width: 30%;
-  transform: scale(-1, 1);
+  width: 30vh;
 }
 
-.match-card__player-card {
-  object-fit: cover;
-  width: 30%;
+.match-card__now-loading {
+  grid-area: l;
+  font-size: calc(var(--responsive-font-size) * 1.5);
+  justify-self: end;
 }
