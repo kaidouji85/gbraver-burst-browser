@@ -5,21 +5,21 @@ import { Animate } from "../../animation/animate";
 import type { PreRender } from "../../game-loop/pre-render";
 import type { GameObjectAction } from "../action/game-object-action";
 import { popUp } from "./animation/pop-up";
-import { BatteryEnchantmentProps } from "./props/battery-enchantment-props";
+import { BatteryEnhancementProps } from "./props/battery-enhancement-props";
 import {
-  createBatteryEnchantmentProps,
+  createBatteryEnhancementProps,
   PropsCreatorParams,
-} from "./props/create-battery-enchantment-props";
+} from "./props/create-battery-enhancement-props";
 
 /** コンストラクタのパラメータ */
-type BatteryEnchantmentParams = PropsCreatorParams & {
+type BatteryEnhancementParams = PropsCreatorParams & {
   gameObjectAction: Observable<GameObjectAction>;
 };
 
 /** バッテリー増強 */
-export class BatteryEnchantment {
+export class BatteryEnhancement {
   /** プロパティ */
-  #props: BatteryEnchantmentProps;
+  #props: BatteryEnhancementProps;
   /** アンサブスクライバ */
   #unsubscriber: Unsubscribable;
 
@@ -27,9 +27,9 @@ export class BatteryEnchantment {
    * コンストラクタ
    * @param params パラメータ
    */
-  constructor(params: BatteryEnchantmentParams) {
+  constructor(params: BatteryEnhancementParams) {
     const { gameObjectAction } = params;
-    this.#props = createBatteryEnchantmentProps(params);
+    this.#props = createBatteryEnhancementProps(params);
     this.#unsubscriber = gameObjectAction.subscribe((action) => {
       if (action.type === "Update") {
         this.#onUpdate();

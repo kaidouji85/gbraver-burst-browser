@@ -1,6 +1,6 @@
 import type {
   BatteryBoostSkill,
-  BatteryEnchantmentSkill,
+  BatteryEnhancementSkill,
   BuffPowerSkill,
   DamageHalvedSkill,
   PilotSkill,
@@ -30,11 +30,11 @@ function buffPowerSkillDetail(skill: BuffPowerSkill): string[] {
  * @param skill スキル情報
  * @returns 説明文
  */
-function batteryEnchantmentSkillDetail(
-  skill: BatteryEnchantmentSkill,
+function batteryEnhancementSkillDetail(
+  skill: BatteryEnhancementSkill,
 ): string[] {
   return [
-    `${skill.duration}ターンだけ、0より大きいバッテリーを出した場合にバッテリー+${skill.batteryEnchantment}する。`,
+    `${skill.duration}ターンだけ、0より大きいバッテリーを出した場合にバッテリー+${skill.batteryEnhancement}する。`,
     `ただしバーストによる攻撃力アップが半減する。`,
   ];
 }
@@ -73,8 +73,8 @@ export function pilotSkillDetail(skill: PilotSkill): string[] {
       return recoverBatterySkillDetail(skill);
     case "BuffPowerSkill":
       return buffPowerSkillDetail(skill);
-    case "BatteryEnchantmentSkill":
-      return batteryEnchantmentSkillDetail(skill);
+    case "BatteryEnhancementSkill":
+      return batteryEnhancementSkillDetail(skill);
     case "DamageHalvedSkill":
       return damageHalvedSkillDetail(skill);
     case "BatteryBoostSkill":
