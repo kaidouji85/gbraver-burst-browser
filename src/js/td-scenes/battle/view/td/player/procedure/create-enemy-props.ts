@@ -1,5 +1,5 @@
 import { enemyBatteryCorrect } from "../../../../../../game-object/battery-correct";
-import { enemyBatteryEnchantment } from "../../../../../../game-object/battery-enchantment";
+import { enemyBatteryEnhancement } from "../../../../../../game-object/battery-enhancement";
 import { enemyBatteryNumber } from "../../../../../../game-object/battery-number";
 import { enemyContinuousAttack } from "../../../../../../game-object/continuous-attack";
 import { enemyDamageHalved } from "../../../../../../game-object/damage-halved";
@@ -32,7 +32,7 @@ export function createEnemyProps(
       reflect: enemyReflectIndicator(resources, gameObjectAction),
       continuousAttack: enemyContinuousAttack(params),
       damageHalved: enemyDamageHalved(params),
-      batteryEnchantment: enemyBatteryEnchantment(params),
+      batteryEnhancement: enemyBatteryEnhancement(params),
     },
     batteryNumber: enemyBatteryNumber(params),
     batteryCorrect: enemyBatteryCorrect(params),

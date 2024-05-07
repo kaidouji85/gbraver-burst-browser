@@ -20,7 +20,7 @@ export const EffectLabelTextureConfigs: TextureConfig[] = [
     path: "effect-label/damage-halved.webp",
   },
   {
-    id: TEXTURE_IDS.BATTERY_ENCHANTMENT,
-    path: "effect-label/battery-enchantment.webp",
+    id: TEXTURE_IDS.BATTERY_ENHANCEMENT,
+    path: "effect-label/battery-enhancement.webp",
   },
 ];

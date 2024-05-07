@@ -1,11 +1,11 @@
 import type { Resources } from "../../../resource";
-import type { BatteryEnchantmentModel } from "../model/battery-enchantment-model";
-import { PlayerBatteryEnchantmentView } from "./player-battery-enchantment-view";
+import type { BatteryEnhancementModel } from "../model/battery-enhancement-model";
+import { PlayerBatteryEnhancementView } from "./player-battery-enhancement-view";
 
 /**
  * 敵 バッテリー増強 ビュー
  */
-export class EnemyBatteryEnchantmentView extends PlayerBatteryEnchantmentView {
+export class EnemyBatteryEnhancementView extends PlayerBatteryEnhancementView {
   /**
    * コンストラクタ
    * @param resources リソース管理オブジェクト
@@ -19,7 +19,7 @@ export class EnemyBatteryEnchantmentView extends PlayerBatteryEnchantmentView {
    *
    * @param model モデル
    */
-  engage(model: BatteryEnchantmentModel): void {
+  engage(model: BatteryEnhancementModel): void {
     super.engage(model);
     const target = super.getObject3D();
     target.position.x *= -1;

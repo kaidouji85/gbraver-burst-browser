@@ -8,19 +8,19 @@ import {
   ARMDOZER_EFFECT_STANDARD_Y,
   ARMDOZER_EFFECT_STANDARD_Z,
 } from "../../armdozer/position";
-import type { BatteryEnchantmentModel } from "../model/battery-enchantment-model";
-import type { BatteryEnchantmentView } from "./battery-enchantment-view";
+import type { BatteryEnhancementModel } from "../model/battery-enhancement-model";
+import type { BatteryEnhancementView } from "./battery-enhancement-view";
 export const MESH_SIZE = 300;
 
 /**
  * プレイヤー バッテリー増強 ビュー
  */
-export class PlayerBatteryEnchantmentView implements BatteryEnchantmentView {
+export class PlayerBatteryEnhancementView implements BatteryEnhancementView {
   #mesh: HorizontalAnimationMesh;
 
   constructor(resources: Resources) {
     const playerTurnResource = resources.textures.find(
-      (v) => v.id === TEXTURE_IDS.BATTERY_ENCHANTMENT,
+      (v) => v.id === TEXTURE_IDS.BATTERY_ENHANCEMENT,
     );
     const playerTurn = playerTurnResource
       ? playerTurnResource.texture
@@ -52,7 +52,7 @@ export class PlayerBatteryEnchantmentView implements BatteryEnchantmentView {
    *
    * @param model モデル
    */
-  engage(model: BatteryEnchantmentModel): void {
+  engage(model: BatteryEnhancementModel): void {
     const target = this.#mesh.getObject3D();
     this.#mesh.opacity(model.opacity);
     target.position.x = ARMDOZER_EFFECT_STANDARD_X;

@@ -4,7 +4,7 @@ import { SOUND_IDS } from "../../../resource/sound/ids";
 import { SoundResource } from "../../../resource/sound/resource";
 
 /** バッテリー増強 効果音 */
-export class BatteryEnchantmentSounds {
+export class BatteryEnhancementSounds {
   /** メリット効果 */
   benefitEffect: SoundResource;
 

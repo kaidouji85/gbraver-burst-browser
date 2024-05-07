@@ -2,14 +2,14 @@ import { Animate } from "../../../animation/animate";
 import { delay } from "../../../animation/delay";
 import { onStart } from "../../../animation/on-start";
 import { tween } from "../../../animation/tween";
-import { BatteryEnchantmentAnimationProps } from "./animation-props";
+import { BatteryEnhancementAnimationProps } from "./animation-props";
 
 /**
  * ポップアップ
  * @param props アニメーションプロパティ
  * @returns アニメーション
  */
-export function popUp(props: BatteryEnchantmentAnimationProps): Animate {
+export function popUp(props: BatteryEnhancementAnimationProps): Animate {
   const { model, sounds, se } = props;
   return onStart(() => {
     model.opacity = 0;

@@ -2,16 +2,16 @@ import { createInitialValue } from "../model/initial-value";
 import { BatteryNumberView } from "../view/battery-number-view";
 import { BatteryNumberProps } from "./battery-number-props";
 
-/** BatteryEnchantmentProps生成パラメータ */
+/** BatteryNumberProps生成パラメータ */
 export type PropsCreatorParams = {
   /** ビュー */
   view: BatteryNumberView;
 };
 
 /**
- * BatteryEnchantmentPropsを生成する
+ * BatteryNumberPropsを生成する
  * @param params 生成パラメータ
- * @returns 生成したBatteryEnchantmentProps
+ * @returns 生成したBatteryNumberProps
  */
 export function createBatteryNumberProps(
   params: PropsCreatorParams,

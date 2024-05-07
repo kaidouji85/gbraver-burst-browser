@@ -1,6 +1,6 @@
 import type {
   BatteryBoostSkill,
-  BatteryEnchantmentSkill,
+  BatteryEnhancementSkill,
   BuffPowerSkill,
   PilotSkill,
   RecoverBatterySkill,
@@ -29,8 +29,8 @@ function buffPowerSkill(skill: BuffPowerSkill): string {
  * @param skill スキル情報
  * @returns 説明文
  */
-function batteryEnchantmentSkill(skill: BatteryEnchantmentSkill): string {
-  return `自分が出したバッテリー+${skill.batteryEnchantment}`;
+function batteryEnhancementSkill(skill: BatteryEnhancementSkill): string {
+  return `自分が出したバッテリー+${skill.batteryEnhancement}`;
 }
 
 /**
@@ -61,8 +61,8 @@ export function pilotSkillOverview(skill: PilotSkill): string {
       return recoverBatterySkill(skill);
     case "BuffPowerSkill":
       return buffPowerSkill(skill);
-    case "BatteryEnchantmentSkill":
-      return batteryEnchantmentSkill(skill);
+    case "BatteryEnhancementSkill":
+      return batteryEnhancementSkill(skill);
     case "DamageHalvedSkill":
       return damageHalvedSkill();
     case "BatteryBoostSkill":

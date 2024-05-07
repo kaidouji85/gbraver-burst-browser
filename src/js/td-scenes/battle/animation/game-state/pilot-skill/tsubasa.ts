@@ -1,4 +1,4 @@
-import { BatteryEnchantmentSkill, PilotSkill } from "gbraver-burst-core";
+import { BatteryEnhancementSkill, PilotSkill } from "gbraver-burst-core";
 
 import { all } from "../../../../../animation/all";
 import { Animate } from "../../../../../animation/animate";
@@ -20,12 +20,12 @@ const inDuration = 400;
 const outDuration = 400;
 
 /**
- * ツバサ バッテリー回復 アニメーション
+ * ツバサ バッテリー増強 アニメーション
  * @param param パラメータ
  * @returns アニメーション
  */
-function tsubasaBatteryEnchantment(
-  param: TsubasaAnimationParam<BatteryEnchantmentSkill>,
+function tsubasaBatteryEnhancement(
+  param: TsubasaAnimationParam<BatteryEnhancementSkill>,
 ): Animate {
   return all(
     param.pilot.cutIn.show(),
@@ -42,7 +42,7 @@ function tsubasaBatteryEnchantment(
     .chain(delay(800))
     .chain(param.pilot.cutIn.hidden())
     .chain(delay(200))
-    .chain(param.invokerTD.armdozerEffects.batteryEnchantment.popUp())
+    .chain(param.invokerTD.armdozerEffects.batteryEnhancement.popUp())
     .chain(
       all(
         toInitial(param.tdCamera, outDuration),
@@ -61,9 +61,9 @@ function tsubasaBatteryEnchantment(
 export function tsubasaAnimation(
   param: TsubasaAnimationParam<PilotSkill>,
 ): Animate {
-  if (param.skill.type === "BatteryEnchantmentSkill") {
-    const skill: BatteryEnchantmentSkill = param.skill;
-    return tsubasaBatteryEnchantment({ ...param, skill });
+  if (param.skill.type === "BatteryEnhancementSkill") {
+    const skill: BatteryEnhancementSkill = param.skill;
+    return tsubasaBatteryEnhancement({ ...param, skill });
   }
 
   return empty();
