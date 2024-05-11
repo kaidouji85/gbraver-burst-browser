@@ -10,7 +10,7 @@
   "dependencies": {
     "@gbraver-burst-network/browser-sdk": "^1.11.0",
     "@tweenjs/tween.js": "^23.1.2",
-    "gbraver-burst-core": "1.28.0",
+    "gbraver-burst-core": "1.29.0",
     "handlebars": "^4.7.8",
     "howler": "^2.2.4",
     "ramda": "^0.30.0",
@@ -23,7 +23,7 @@
     "workbox-precaching": "^7.1.0",
     "workbox-routing": "^7.1.0",
     "workbox-strategies": "^7.1.0",
-    "zod": "^3.23.6"
+    "zod": "^3.23.8"
   },
   "devDependencies": {
     "@html-eslint/eslint-plugin": "^0.24.1",
@@ -44,8 +44,8 @@
     "eslint": "^8.57.0",
     "eslint-plugin-jest": "^28.5.0",
     "eslint-plugin-simple-import-sort": "^12.1.0",
-    "glob": "^10.3.12",
-    "globals": "^15.1.0",
+    "glob": "^10.3.14",
+    "globals": "^15.2.0",
     "handlebars-loader": "^1.7.3",
     "html-webpack-plugin": "^5.6.0",
     "http-server": "^14.1.1",
@@ -59,7 +59,7 @@
     "postcss-loader": "^8.1.1",
     "postcss-preset-env": "^9.5.11",
     "prettier": "3.2.5",
-    "rimraf": "^5.0.5",
+    "rimraf": "^5.0.6",
     "sharp": "^0.33.3",
     "storybook": "^8.0.10",
     "style-loader": "^4.0.0",
