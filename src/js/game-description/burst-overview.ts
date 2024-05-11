@@ -4,36 +4,15 @@ import type {
   Burst,
   ContinuousAttack,
   LightningBarrier,
+  RecoverBattery,
 } from "gbraver-burst-core";
-
-/**
- * バースト概要を生成する
- * @param burst バースト情報
- * @returns 説明文
- */
-export function burstOverview(burst: Burst): string {
-  switch (burst.type) {
-    case "RecoverBattery":
-      return recoverBatteryOverview();
-    case "BuffPower":
-      return powerBuffOverview(burst);
-    case "LightningBarrier":
-      return lightningBarrierOverview(burst);
-    case "ContinuousAttack":
-      return continuousAttackOverview(burst);
-    case "BatteryLimitBreak":
-      return batteryLimitBreakOverview(burst);
-    default:
-      return "";
-  }
-}
 
 /**
  * バッテリー回復概要
  * @returns 説明文
  */
-function recoverBatteryOverview(): string {
-  return `バッテリー全回復`;
+function recoverBatteryOverview(burst: RecoverBattery): string {
+  return `バッテリー全回復、次ターンにバッテリー${burst.turnStartBatteryCorrect}回復`;
 }
 
 /**
@@ -70,4 +49,26 @@ function continuousAttackOverview(burst: ContinuousAttack): string {
  */
 function batteryLimitBreakOverview(burst: BatteryLimitBreak): string {
   return `バッテリー最大値を${burst.maxBattery}にして、バッテリー${burst.recoverBattery}回復`;
+}
+
+/**
+ * バースト概要を生成する
+ * @param burst バースト情報
+ * @returns 説明文
+ */
+export function burstOverview(burst: Burst): string {
+  switch (burst.type) {
+    case "RecoverBattery":
+      return recoverBatteryOverview(burst);
+    case "BuffPower":
+      return powerBuffOverview(burst);
+    case "LightningBarrier":
+      return lightningBarrierOverview(burst);
+    case "ContinuousAttack":
+      return continuousAttackOverview(burst);
+    case "BatteryLimitBreak":
+      return batteryLimitBreakOverview(burst);
+    default:
+      return "";
+  }
 }
