@@ -11,4 +11,8 @@ export const WingDozerPathConfigs: PathConfig[] = [
     id: PathIds.WING_DOZER_BUST_SHOT,
     path: (root) => `${root.get()}/armdozer/wing-dozer/bust-shot.webp`,
   },
+  {
+    id: PathIds.WING_DOZER_STAND,
+    path: (root) => `${root.get()}/armdozer/wing-dozer/stand.webp`,
+  },
 ];

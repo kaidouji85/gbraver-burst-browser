@@ -8,7 +8,7 @@ export default {
 };
 
 /** ダイアログ表示 */
-export const dialog: StoryFn = domStub(() => {
-  const simulator = new BattleSimulator();
+export const dialog: StoryFn = domStub((params) => {
+  const simulator = new BattleSimulator(params);
   return simulator.getRootHTMLElement();
 });

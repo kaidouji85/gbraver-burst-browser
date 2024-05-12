@@ -1,6 +1,12 @@
 import { DOMDialog } from "../dialog";
-import { createBattleSimulatorProps } from "./procedure/create-battle-simulator-props";
+import {
+  BattleSimulatorPropsCreatorParams,
+  createBattleSimulatorProps,
+} from "./procedure/create-battle-simulator-props";
 import { BattleSimulatorProps } from "./props";
+
+/** コンストラクタのパラメータ */
+type BattleSimulatorConstructParams = BattleSimulatorPropsCreatorParams;
 
 /** 戦闘シミュレーター */
 export class BattleSimulator implements DOMDialog {
@@ -9,9 +15,10 @@ export class BattleSimulator implements DOMDialog {
 
   /**
    * コンストラクタ
+   * @param params パラメータ
    */
-  constructor() {
-    this.#props = createBattleSimulatorProps();
+  constructor(params: BattleSimulatorConstructParams) {
+    this.#props = createBattleSimulatorProps(params);
   }
 
   /** @override */
