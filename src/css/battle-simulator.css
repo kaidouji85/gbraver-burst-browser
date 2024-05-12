@@ -3,6 +3,9 @@
   .battle-simulator {
     --closer-width: 48px;
     --closer-height: 48px;
+    --dialog-padding: var(--responsive-font-size);
+    --armdozer-size: calc(var(--responsive-font-size) * 10);
+    --turn-indicator-size: calc(var(--responsive-font-size) * 6);
 
     display: block;
   }
@@ -26,8 +29,6 @@
 }
 
 .battle-simulator__dialog {
-  --dialog-padding: var(--responsive-font-size);
-
   top: 50vh;
   top: 50dvh;
   left: 50vw;
@@ -41,6 +42,36 @@
   border-radius: var(--dialog-border-radius);
   z-index: var(--zindex-dialog);
   box-sizing: border-box;
-  padding: var(--closer-height) var(--dialog-padding) var(--dialog-padding)
-    var(--dialog-padding);
+  padding: calc(var(--closer-height) / 2) var(--dialog-padding)
+    var(--dialog-padding) var(--dialog-padding);
+  display: grid;
+  grid-template-areas: "enemy turnIndicator player";
+  place-items: center;
+}
+
+.battle-simulator__closer {
+  width: var(--closer-width);
+  height: var(--closer-height);
+  position: absolute;
+  top: calc(var(--closer-width) * -0.5);
+  left: calc(var(--closer-height) * -0.5);
+}
+
+.battle-simulator__player-armdozer {
+  grid-area: player;
+  width: var(--armdozer-size);
+  height: var(--armdozer-size);
+}
+
+.battle-simulator__enemy-armdozer {
+  grid-area: enemy;
+  width: var(--armdozer-size);
+  height: var(--armdozer-size);
+  transform: scale(-1, 1);
+}
+
+.battle-simulator__turn-indicator {
+  grid-area: turnIndicator;
+  width: var(--turn-indicator-size);
+  height: var(--turn-indicator-size);
 }

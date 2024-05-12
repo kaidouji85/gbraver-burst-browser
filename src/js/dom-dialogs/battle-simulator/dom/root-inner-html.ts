@@ -15,11 +15,15 @@ export function rootInnerHTML(params: RootInnerHtmlParams) {
   const playerArmdozerPath =
     resources.paths.find((p) => p.id === PathIds.SHIN_BRAVER_STAND)?.path ?? "";
   const enemyArmdozerPath =
-    resources.paths.find((p) => p.id === PathIds.NEO_LANDOZER_STAND)?.path ?? "";
+    resources.paths.find((p) => p.id === PathIds.NEO_LANDOZER_STAND)?.path ??
+    "";
   const turnIndicatorPath =
     resources.paths.find((p) => p.id === PathIds.TURN_INDICATOR)?.path ?? "";
+  const closerPath =
+    resources.paths.find((p) => p.id === PathIds.CLOSER)?.path ?? "";
   return template({
     ROOT,
+    closerPath,
     playerArmdozerPath,
     enemyArmdozerPath,
     turnIndicatorPath,
