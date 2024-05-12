@@ -1,0 +1,46 @@
+/** 戦闘シミュレーター */
+@media (orientation: landscape) {
+  .battle-simulator {
+    --closer-width: 48px;
+    --closer-height: 48px;
+
+    display: block;
+  }
+}
+
+@media (orientation: portrait) {
+  .battle-simulator {
+    display: none;
+  }
+}
+
+.battle-simulator__background {
+  position: absolute;
+  width: 100vw;
+  width: 100dvw;
+  height: 100vh;
+  height: 100dvh;
+  background-color: #000;
+  opacity: 0.5;
+  z-index: var(--zindex-background);
+}
+
+.battle-simulator__dialog {
+  --dialog-padding: var(--responsive-font-size);
+
+  top: 50vh;
+  top: 50dvh;
+  left: 50vw;
+  left: 50dvw;
+  transform: translate(-50%, -50%);
+  color: var(--font-color);
+  font-size: var(--responsive-font-size);
+  background-color: var(--background-color);
+  position: absolute;
+  border: var(--dialog-border);
+  border-radius: var(--dialog-border-radius);
+  z-index: var(--zindex-dialog);
+  box-sizing: border-box;
+  padding: var(--closer-height) var(--dialog-padding) var(--dialog-padding)
+    var(--dialog-padding);
+}
