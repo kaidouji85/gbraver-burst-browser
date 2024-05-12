@@ -60,10 +60,20 @@
   left: calc(var(--closer-height) * -0.5);
 }
 
-.battle-simulator__player-armdozer {
+.battle-simulator__player {
+  position: relative;
   grid-area: player;
   width: var(--player-area-size);
   height: var(--player-area-size);
+}
+
+.battle-simulator__player-armdozer {
+  position: absolute;
+  width: var(--armdozer-size);
+  height: var(--armdozer-size);
+  top:50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 
 .battle-simulator__enemy {
