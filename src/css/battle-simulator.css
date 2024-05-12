@@ -94,6 +94,19 @@
   transform: translate(-50%, -50%) scale(-1, 1);
 }
 
+.battle-simulator__player-battery-value,
+.battle-simulator__enemy-battery-value {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: calc(var(--responsive-font-size) * 4);
+  font-weight: bold;
+  color: #ff0;
+  text-shadow: #f5deb3 1px 0 4px;
+  -webkit-text-stroke: 1px #715c1f;
+}
+
 .battle-simulator__middle {
   position: relative;
   grid-area: middle;
