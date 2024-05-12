@@ -4,9 +4,11 @@
     --closer-width: 48px;
     --closer-height: 48px;
     --dialog-padding: var(--responsive-font-size);
-    --player-area-size: calc(var(--responsive-font-size) * 9);
-    --armdozer-size: calc(var(--responsive-font-size) * 13);
-    --turn-indicator-size: calc(var(--responsive-font-size) * 6);
+    --player-area-width: calc(var(--responsive-font-size) * 15);
+    --player-area-height: calc(var(--responsive-font-size) * 10);
+    --armdozer-size: calc(var(--responsive-font-size) * 19);
+    --middle-area-size: calc(var(--responsive-font-size) * 2);
+    --tun-indicator-size: calc(var(--responsive-font-size) * 6);
 
     display: block;
   }
@@ -47,7 +49,7 @@
     var(--dialog-padding) var(--dialog-padding);
   display: grid;
   grid-template-areas:
-    "enemy turnIndicator player"
+    "enemy middle player"
     "enemy-battery _ player-battery";
   place-items: center;
 }
@@ -63,8 +65,8 @@
 .battle-simulator__player {
   position: relative;
   grid-area: player;
-  width: var(--player-area-size);
-  height: var(--player-area-size);
+  width: var(--player-area-width);
+  height: var(--player-area-height);
 }
 
 .battle-simulator__player-armdozer {
@@ -79,8 +81,8 @@
 .battle-simulator__enemy {
   position: relative;
   grid-area: enemy;
-  width: var(--player-area-size);
-  height: var(--player-area-size);
+  width: var(--player-area-width);
+  height: var(--player-area-height);
 }
 
 .battle-simulator__enemy-armdozer {
@@ -92,10 +94,20 @@
   transform: translate(-50%, -50%) scale(-1, 1);
 }
 
+.battle-simulator__middle {
+  position: relative;
+  grid-area: middle;
+  width: var(--middle-area-size);
+  height: var(--middle-area-size);
+}
+
 .battle-simulator__turn-indicator {
-  grid-area: turnIndicator;
-  width: var(--turn-indicator-size);
-  height: var(--turn-indicator-size);
+  position: absolute;
+  width: var(--tun-indicator-size);
+  height: var(--tun-indicator-size);
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 
 .battle-simulator__player-battery {
