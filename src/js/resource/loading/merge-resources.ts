@@ -1,9 +1,9 @@
-import type { Resources } from "..";
+import { Resources } from "..";
 
 /**
  * 読みこんだリソースをマージする
  * @param resources マージ前のリソース
- * @param loading 読みこまれたリソース
+ * @param loaded 読みこまれたリソース
  * @returns マージ結果
  */
 export async function mergeResources(
