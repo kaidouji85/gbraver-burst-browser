@@ -4,6 +4,7 @@
     --closer-width: 48px;
     --closer-height: 48px;
     --dialog-padding: var(--responsive-font-size);
+    --player-area-size: calc(var(--responsive-font-size) * 6);
     --armdozer-size: calc(var(--responsive-font-size) * 10);
     --turn-indicator-size: calc(var(--responsive-font-size) * 6);
 
@@ -45,7 +46,9 @@
   padding: calc(var(--closer-height) / 2) var(--dialog-padding)
     var(--dialog-padding) var(--dialog-padding);
   display: grid;
-  grid-template-areas: "enemy turnIndicator player";
+  grid-template-areas:
+    "enemy turnIndicator player"
+    "enemy-battery _ player-battery";
   place-items: center;
 }
 
@@ -59,19 +62,49 @@
 
 .battle-simulator__player-armdozer {
   grid-area: player;
-  width: var(--armdozer-size);
-  height: var(--armdozer-size);
+  width: var(--player-area-size);
+  height: var(--player-area-size);
+}
+
+.battle-simulator__enemy {
+  position: relative;
+  grid-area: enemy;
+  width: var(--player-area-size);
+  height: var(--player-area-size);
 }
 
 .battle-simulator__enemy-armdozer {
-  grid-area: enemy;
+  position: absolute;
   width: var(--armdozer-size);
   height: var(--armdozer-size);
-  transform: scale(-1, 1);
+  top:50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(-1, 1);
 }
 
 .battle-simulator__turn-indicator {
   grid-area: turnIndicator;
   width: var(--turn-indicator-size);
   height: var(--turn-indicator-size);
+}
+
+.battle-simulator__player-battery {
+  grid-area: player-battery;
+}
+
+.battle-simulator__enemy-battery {
+  grid-area: enemy-battery;
+}
+
+.battle-simulator__player-battery-minus,
+.battle-simulator__player-battery-plus,
+.battle-simulator__enemy-battery-minus,
+.battle-simulator__enemy-battery-plus {
+  width: calc(var(--responsive-font-size) * 3);
+  height: calc(var(--responsive-font-size) * 3);
+  font-size: calc(var(--responsive-font-size) * 0.9);
+  border-radius: var(--button-border-radius);
+  color: var(--button-font-color);
+  border: var(--button-border);
+  background-color: var(--sub-button-background-color);
 }
