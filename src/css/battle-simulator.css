@@ -4,8 +4,8 @@
     --closer-width: 48px;
     --closer-height: 48px;
     --dialog-padding: var(--responsive-font-size);
-    --player-area-size: calc(var(--responsive-font-size) * 6);
-    --armdozer-size: calc(var(--responsive-font-size) * 10);
+    --player-area-size: calc(var(--responsive-font-size) * 9);
+    --armdozer-size: calc(var(--responsive-font-size) * 13);
     --turn-indicator-size: calc(var(--responsive-font-size) * 6);
 
     display: block;
@@ -71,7 +71,7 @@
   position: absolute;
   width: var(--armdozer-size);
   height: var(--armdozer-size);
-  top:50%;
+  top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
 }
@@ -87,7 +87,7 @@
   position: absolute;
   width: var(--armdozer-size);
   height: var(--armdozer-size);
-  top:50%;
+  top: 50%;
   left: 50%;
   transform: translate(-50%, -50%) scale(-1, 1);
 }
@@ -100,10 +100,12 @@
 
 .battle-simulator__player-battery {
   grid-area: player-battery;
+  white-space: nowrap;
 }
 
 .battle-simulator__enemy-battery {
   grid-area: enemy-battery;
+  white-space: nowrap;
 }
 
 .battle-simulator__player-battery-minus,
@@ -112,7 +114,7 @@
 .battle-simulator__enemy-battery-plus {
   width: calc(var(--responsive-font-size) * 3);
   height: calc(var(--responsive-font-size) * 3);
-  font-size: calc(var(--responsive-font-size) * 0.9);
+  font-size: calc(var(--responsive-font-size) * 1.5);
   border-radius: var(--button-border-radius);
   color: var(--button-font-color);
   border: var(--button-border);
