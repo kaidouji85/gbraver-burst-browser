@@ -96,6 +96,14 @@ export class Gauge implements HUDTracking {
   }
 
   /**
+   * ゲージ配下にオブジェクトを追加する
+   * @param object 追加対象のオブジェクト
+   */
+  addObject3D(object: THREE.Object3D): void {
+    this.#view.addObject3D(object);
+  }
+
+  /**
    * プリレンダー時の処理
    * @param action アクション
    */

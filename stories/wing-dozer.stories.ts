@@ -1,3 +1,5 @@
+import { StoryFn } from "@storybook/html";
+
 import { delay } from "../src/js/animation/delay";
 import {
   EnemyWingDozer,
@@ -11,28 +13,30 @@ export default {
 };
 
 /** プレイヤー 立ち */
-export const playerStand = () =>
-  armdozerSpriteStub(PlayerWingDozer, () => {
-    // NOP
-  });
+export const playerStand: StoryFn = armdozerSpriteStub(PlayerWingDozer, () => {
+  // NOP
+});
 
 /** プレイヤー 立ち */
-export const playerActiveStand = () =>
-  armdozerSpriteStub(PlayerWingDozer, (sprite) => {
+export const playerActiveStand: StoryFn = armdozerSpriteStub(
+  PlayerWingDozer,
+  (sprite) => {
     sprite.startActive().play();
-  });
+  },
+);
 
 /** 敵 立ち */
-export const enemyStand = () =>
-  armdozerSpriteStub(EnemyWingDozer, () => {
-    // NOP
-  });
+export const enemyStand: StoryFn = armdozerSpriteStub(EnemyWingDozer, () => {
+  // NOP
+});
 
 /** 敵 アクティブ 立ち */
-export const enemyActiveStand = () =>
-  armdozerSpriteStub(EnemyWingDozer, (sprite) => {
+export const enemyActiveStand: StoryFn = armdozerSpriteStub(
+  EnemyWingDozer,
+  (sprite) => {
     sprite.startActive().play();
-  });
+  },
+);
 
 /**
  * アッパー
@@ -59,18 +63,22 @@ const activeUpper = (sprite: WingDozer) => {
 };
 
 /** プレイヤー アッパー */
-export const playerUpper = () => armdozerSpriteStub(PlayerWingDozer, upper);
+export const playerUpper: StoryFn = armdozerSpriteStub(PlayerWingDozer, upper);
 
 /** プレイヤー アクティブ アッパー */
-export const playerActiveUpper = () =>
-  armdozerSpriteStub(PlayerWingDozer, activeUpper);
+export const playerActiveUpper: StoryFn = armdozerSpriteStub(
+  PlayerWingDozer,
+  activeUpper,
+);
 
 /** 敵 アッパー */
-export const enemyUpper = () => armdozerSpriteStub(EnemyWingDozer, upper);
+export const enemyUpper: StoryFn = armdozerSpriteStub(EnemyWingDozer, upper);
 
 /** 敵 アクティブ アッパー */
-export const enemyActiveUpper = () =>
-  armdozerSpriteStub(EnemyWingDozer, activeUpper);
+export const enemyActiveUpper: StoryFn = armdozerSpriteStub(
+  EnemyWingDozer,
+  activeUpper,
+);
 
 /**
  * ダッシュ
@@ -95,18 +103,22 @@ const activeDash = (sprite: WingDozer) => {
 };
 
 /** プレイヤー ダッシュ */
-export const playerDash = () => armdozerSpriteStub(PlayerWingDozer, dash);
+export const playerDash: StoryFn = armdozerSpriteStub(PlayerWingDozer, dash);
 
 /** プレイヤー アクティブ ダッシュ */
-export const playerActiveDash = () =>
-  armdozerSpriteStub(PlayerWingDozer, activeDash);
+export const playerActiveDash: StoryFn = armdozerSpriteStub(
+  PlayerWingDozer,
+  activeDash,
+);
 
 /** 敵 ダッシュ */
-export const enemyDash = () => armdozerSpriteStub(EnemyWingDozer, dash);
+export const enemyDash: StoryFn = armdozerSpriteStub(EnemyWingDozer, dash);
 
 /** 敵 アクティブ ダッシュ */
-export const enemyActiveDash = () =>
-  armdozerSpriteStub(EnemyWingDozer, activeDash);
+export const enemyActiveDash: StoryFn = armdozerSpriteStub(
+  EnemyWingDozer,
+  activeDash,
+);
 
 /**
  * ダウン
@@ -126,18 +138,22 @@ const activeDown = (sprite: WingDozer) => {
 };
 
 /** プレイヤー ダウン */
-export const playerDown = () => armdozerSpriteStub(PlayerWingDozer, down);
+export const playerDown: StoryFn = armdozerSpriteStub(PlayerWingDozer, down);
 
 /** プレイヤー アクティブ ダウン */
-export const playerActiveDown = () =>
-  armdozerSpriteStub(PlayerWingDozer, activeDown);
+export const playerActiveDown: StoryFn = armdozerSpriteStub(
+  PlayerWingDozer,
+  activeDown,
+);
 
 /** 敵 ダウン */
-export const enemyDown = () => armdozerSpriteStub(EnemyWingDozer, down);
+export const enemyDown: StoryFn = armdozerSpriteStub(EnemyWingDozer, down);
 
 /** 敵 アクティブ ダウン */
-export const enemyActiveDown = () =>
-  armdozerSpriteStub(EnemyWingDozer, activeDown);
+export const enemyActiveDown: StoryFn = armdozerSpriteStub(
+  EnemyWingDozer,
+  activeDown,
+);
 
 /**
  * 回避
@@ -161,18 +177,22 @@ const activeAvoid = (sprite: WingDozer) => {
 };
 
 /** プレイヤー 回避 */
-export const playerAvoid = () => armdozerSpriteStub(PlayerWingDozer, avoid);
+export const playerAvoid: StoryFn = armdozerSpriteStub(PlayerWingDozer, avoid);
 
 /** プレイヤー アクティブ 回避 */
-export const playerActiveAvoid = () =>
-  armdozerSpriteStub(PlayerWingDozer, activeAvoid);
+export const playerActiveAvoid: StoryFn = armdozerSpriteStub(
+  PlayerWingDozer,
+  activeAvoid,
+);
 
 /** 敵 回避 */
-export const enemyAvoid = () => armdozerSpriteStub(EnemyWingDozer, avoid);
+export const enemyAvoid: StoryFn = armdozerSpriteStub(EnemyWingDozer, avoid);
 
 /** 敵 アクティブ 回避 */
-export const enemyActiveAvoid = () =>
-  armdozerSpriteStub(EnemyWingDozer, activeAvoid);
+export const enemyActiveAvoid: StoryFn = armdozerSpriteStub(
+  EnemyWingDozer,
+  activeAvoid,
+);
 
 /**
  * ガード
@@ -196,18 +216,22 @@ const activeGuard = (sprite: WingDozer) => {
 };
 
 /** プレイヤー ガード */
-export const playerGuard = () => armdozerSpriteStub(PlayerWingDozer, guard);
+export const playerGuard: StoryFn = armdozerSpriteStub(PlayerWingDozer, guard);
 
 /** プレイヤー アクティブ ガード */
-export const playerActiveGuard = () =>
-  armdozerSpriteStub(PlayerWingDozer, activeGuard);
+export const playerActiveGuard: StoryFn = armdozerSpriteStub(
+  PlayerWingDozer,
+  activeGuard,
+);
 
 /** 敵 ガード */
-export const enemyGuard = () => armdozerSpriteStub(EnemyWingDozer, guard);
+export const enemyGuard: StoryFn = armdozerSpriteStub(EnemyWingDozer, guard);
 
 /** 敵 アクティブ ガード */
-export const enemyActiveGuard = () =>
-  armdozerSpriteStub(EnemyWingDozer, activeGuard);
+export const enemyActiveGuard: StoryFn = armdozerSpriteStub(
+  EnemyWingDozer,
+  activeGuard,
+);
 
 /**
  * ノックバック
@@ -231,20 +255,28 @@ const activeKnockBack = (sprite: WingDozer) => {
 };
 
 /** プレイヤー ノックバック */
-export const playerKnockBack = () =>
-  armdozerSpriteStub(PlayerWingDozer, knockBack);
+export const playerKnockBack: StoryFn = armdozerSpriteStub(
+  PlayerWingDozer,
+  knockBack,
+);
 
 /** プレイヤー アクティブ ノックバック */
-export const playerActiveKnockBack = () =>
-  armdozerSpriteStub(PlayerWingDozer, activeKnockBack);
+export const playerActiveKnockBack: StoryFn = armdozerSpriteStub(
+  PlayerWingDozer,
+  activeKnockBack,
+);
 
 /** 敵 ノックバック */
-export const enemyKnockBack = () =>
-  armdozerSpriteStub(EnemyWingDozer, knockBack);
+export const enemyKnockBack: StoryFn = armdozerSpriteStub(
+  EnemyWingDozer,
+  knockBack,
+);
 
 /** 敵 アクティブ ノックバック */
-export const enemyActiveKnockBack = () =>
-  armdozerSpriteStub(EnemyWingDozer, activeKnockBack);
+export const enemyActiveKnockBack: StoryFn = armdozerSpriteStub(
+  EnemyWingDozer,
+  activeKnockBack,
+);
 
 /**
  * 気をつけ、礼
@@ -263,12 +295,16 @@ const uprightBow = (sprite: WingDozer) => {
 };
 
 /** プレイヤー 気をつけ、礼 */
-export const playerUprightBow = () =>
-  armdozerSpriteStub(PlayerWingDozer, uprightBow);
+export const playerUprightBow: StoryFn = armdozerSpriteStub(
+  PlayerWingDozer,
+  uprightBow,
+);
 
 /** 敵 気をつけ、礼 */
-export const enemyUprightBow = () =>
-  armdozerSpriteStub(EnemyWingDozer, uprightBow);
+export const enemyUprightBow: StoryFn = armdozerSpriteStub(
+  EnemyWingDozer,
+  uprightBow,
+);
 
 /**
  * アクティブ 気をつけ、礼
@@ -280,9 +316,13 @@ const activeUprightBow = (sprite: WingDozer) => {
 };
 
 /** プレイヤー アクティブ 気をつけ、礼 */
-export const playerActiveUprightBow = () =>
-  armdozerSpriteStub(PlayerWingDozer, activeUprightBow);
+export const playerActiveUprightBow: StoryFn = armdozerSpriteStub(
+  PlayerWingDozer,
+  activeUprightBow,
+);
 
 /** 敵 アクティブ 気をつけ、礼 */
-export const enemyActiveUprightBow = () =>
-  armdozerSpriteStub(EnemyWingDozer, activeUprightBow);
+export const enemyActiveUprightBow: StoryFn = armdozerSpriteStub(
+  EnemyWingDozer,
+  activeUprightBow,
+);

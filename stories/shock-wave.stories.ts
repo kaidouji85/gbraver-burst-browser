@@ -1,3 +1,5 @@
+import { StoryFn } from "@storybook/html";
+
 import { delay } from "../src/js/animation/delay";
 import {
   enemyShockWave,
@@ -5,7 +7,7 @@ import {
   ShockWaveCreatorParams,
 } from "../src/js/game-object/hitmark/shock-wave";
 import { ShockWave } from "../src/js/game-object/hitmark/shock-wave/shock-wave";
-import { TDGameObjectStub } from "./stub/td-game-object-stub";
+import { tdGameObjectStory } from "./stub/td-game-object-stub";
 
 export default {
   title: "shock-wave",
@@ -17,22 +19,17 @@ export default {
  * @param fn 衝撃波を操作する関数
  * @returns story
  */
-const shockWaveStory =
-  (
-    generator: (params: ShockWaveCreatorParams) => ShockWave,
-    fn: (shockWave: ShockWave) => void,
-  ) =>
-  () => {
-    const stub = new TDGameObjectStub((params) => {
-      const shockWave = generator(params);
-      fn(shockWave);
-      return {
-        objects: [shockWave.getObject3D()],
-      };
-    });
-    stub.start();
-    return stub.domElement();
-  };
+const shockWaveStory = (
+  generator: (params: ShockWaveCreatorParams) => ShockWave,
+  fn: (shockWave: ShockWave) => void,
+) =>
+  tdGameObjectStory((params) => {
+    const shockWave = generator(params);
+    fn(shockWave);
+    return {
+      objects: [shockWave.getObject3D()],
+    };
+  });
 
 /**
  * ポップアップ
@@ -43,7 +40,7 @@ const popUp = (shockWave: ShockWave) => {
 };
 
 /** プレイヤー衝撃波 ポップアップ */
-export const player = shockWaveStory(playerShockWave, popUp);
+export const player: StoryFn = shockWaveStory(playerShockWave, popUp);
 
 /** 敵衝撃波 ポップアップ */
-export const enemy = shockWaveStory(enemyShockWave, popUp);
+export const enemy: StoryFn = shockWaveStory(enemyShockWave, popUp);

@@ -1,15 +1,22 @@
+import { StoryFn } from "@storybook/html";
+
 import { delay } from "../src/js/animation/delay";
 import {
   enemyRaitoCutIn,
   playerRaitoCutIn,
 } from "../src/js/game-object/cut-in/raito";
 import { RaitoCutIn } from "../src/js/game-object/cut-in/raito/raito";
-import { HUDGameObjectStub } from "./stub/hud-game-object-stub";
+import { hudGameObjectStory } from "./stub/hud-game-object-stub";
 
 export default {
   title: "raito-cutin",
 };
 
+/**
+ * ライト カットイン
+ * @param pilot カットイン
+ * @return アニメーション
+ */
 const cutinAnimation = (pilot: RaitoCutIn) => {
   pilot
     .show()
@@ -19,22 +26,16 @@ const cutinAnimation = (pilot: RaitoCutIn) => {
     .loop();
 };
 
-export const player = (): HTMLElement => {
-  const stub = new HUDGameObjectStub((params) => {
-    const pilot = playerRaitoCutIn(params);
-    cutinAnimation(pilot);
-    return [pilot.getObject3D()];
-  });
-  stub.start();
-  return stub.domElement();
-};
+/** ライト カットイン プレイヤー側 */
+export const player: StoryFn = hudGameObjectStory((params) => {
+  const pilot = playerRaitoCutIn(params);
+  cutinAnimation(pilot);
+  return [pilot.getObject3D()];
+});
 
-export const enemy = (): HTMLElement => {
-  const stub = new HUDGameObjectStub((params) => {
-    const pilot = enemyRaitoCutIn(params);
-    cutinAnimation(pilot);
-    return [pilot.getObject3D()];
-  });
-  stub.start();
-  return stub.domElement();
-};
+/** ライト カットイン 敵側 */
+export const enemy: StoryFn = hudGameObjectStory((params) => {
+  const pilot = enemyRaitoCutIn(params);
+  cutinAnimation(pilot);
+  return [pilot.getObject3D()];
+});

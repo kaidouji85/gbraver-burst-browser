@@ -19,19 +19,10 @@ export type GenesisBraverBurst<BURST extends Burst> = BurstAnimationParamX<
 >;
 
 /**
- * ジェネシスブレイバー バーストアニネーション
+ * ジェネシスブレイバー バッテリーリミットブレイク アニメーション
  * @param param パラメータ
  * @returns アニメーション
  */
-export function genesisBraverBurst(param: GenesisBraverBurst<Burst>): Animate {
-  if (param.burst.type === "BatteryLimitBreak") {
-    const burst: BatteryLimitBreak = param.burst;
-    return batteryLimitBreak({ ...param, burst });
-  }
-
-  return empty();
-}
-
 function batteryLimitBreak(
   param: GenesisBraverBurst<BatteryLimitBreak>,
 ): Animate {
@@ -47,7 +38,7 @@ function batteryLimitBreak(
     param.tdObjects.skyBrightness.brightness(0.2, 500),
     param.tdObjects.illumination.intensity(0.2, 500),
     param.hudObjects.rearmostFader.opacity(0.6, 500),
-    param.activeArmdozerTD.sprite().endActive(),
+    param.attackerArmdozerTD.sprite().endActive(),
   )
     .chain(delay(800))
     .chain(
@@ -75,4 +66,18 @@ function batteryLimitBreak(
       ),
     )
     .chain(delay(200));
+}
+
+/**
+ * ジェネシスブレイバー バースト アニメーション
+ * @param param パラメータ
+ * @returns アニメーション
+ */
+export function genesisBraverBurst(param: GenesisBraverBurst<Burst>): Animate {
+  if (param.burst.type === "BatteryLimitBreak") {
+    const burst: BatteryLimitBreak = param.burst;
+    return batteryLimitBreak({ ...param, burst });
+  }
+
+  return empty();
 }

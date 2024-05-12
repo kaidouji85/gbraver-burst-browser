@@ -5,7 +5,10 @@ import { HUDPlayerProps } from "../props";
  * @param props プロパティ
  */
 export function destructor(props: HUDPlayerProps) {
-  props.gauge.destructor();
-  props.turnStart.destructor();
-  props.resultIndicator.destructor();
+  const { gauge, predicatedDamage, turnStart, resultIndicator } = props;
+
+  gauge.destructor();
+  predicatedDamage.destructor();
+  turnStart.destructor();
+  resultIndicator.destructor();
 }

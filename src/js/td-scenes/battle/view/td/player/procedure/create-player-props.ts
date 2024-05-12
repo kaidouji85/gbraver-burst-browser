@@ -1,5 +1,5 @@
 import { playerBatteryCorrect } from "../../../../../../game-object/battery-correct";
-import { playerBatteryEnchantment } from "../../../../../../game-object/battery-enchantment";
+import { playerBatteryEnhancement } from "../../../../../../game-object/battery-enhancement";
 import { playerBatteryNumber } from "../../../../../../game-object/battery-number";
 import { playerContinuousAttack } from "../../../../../../game-object/continuous-attack";
 import { playerDamageHalved } from "../../../../../../game-object/damage-halved";
@@ -32,7 +32,7 @@ export function createPlayerProps(
       reflect: playerReflectIndicator(resources, gameObjectAction),
       continuousAttack: playerContinuousAttack(params),
       damageHalved: playerDamageHalved(params),
-      batteryEnchantment: playerBatteryEnchantment(params),
+      batteryEnhancement: playerBatteryEnhancement(params),
     },
     batteryNumber: playerBatteryNumber(params),
     batteryCorrect: playerBatteryCorrect(params),

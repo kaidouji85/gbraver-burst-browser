@@ -5,7 +5,7 @@ import { HorizontalAnimationMesh } from "../../../../mesh/horizontal-animation";
 import type { Resources } from "../../../../resource";
 import { TEXTURE_IDS } from "../../../../resource/texture/ids";
 import { HUD_CUT_IN_ZNIDEX } from "../../../hud-zindex";
-import { HUDCutInScale } from "../../../scale";
+import { hudScale } from "../../../scale";
 import type {
   AnimationType,
   NeoLandozerCutInModel,
@@ -82,8 +82,7 @@ export class PlayerNeoLandozerCutInView implements NeoLandozerCutInView {
         v.opacity(0);
       });
     const scale =
-      model.scale *
-      HUDCutInScale(preRender.rendererDOM, preRender.safeAreaInset);
+      model.scale * hudScale(preRender.rendererDOM, preRender.safeAreaInset);
     this.#group.scale.set(scale, scale, scale);
     this.#group.position.x = model.tracking.x;
     this.#group.position.y = model.tracking.y;

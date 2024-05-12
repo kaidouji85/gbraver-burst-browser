@@ -1,19 +1,19 @@
-import type {
+import {
   GameStateX,
   PilotSkill,
   PilotSkillEffect,
   PlayerState,
 } from "gbraver-burst-core";
 
-import type { ArmdozerSprite } from "../../../../../game-object/armdozer/armdozer-sprite";
+import { ArmdozerSprite } from "../../../../../game-object/armdozer/armdozer-sprite";
 import { TDCamera } from "../../../../../game-object/camera/td";
 import { HUDGameObjects } from "../../../view/hud/game-objects";
-import type { HUDPilotObjects } from "../../../view/hud/pilot-objects/hud-pilot-objects";
+import { HUDPilotObjects } from "../../../view/hud/pilot-objects/hud-pilot-objects";
 import { HUDPlayer } from "../../../view/hud/player";
 import { TDArmdozerObjects } from "../../../view/td/armdozer-objects/armdozer-objects";
 import { TDGameObjects } from "../../../view/td/game-objects";
-import type { TDPlayer } from "../../../view/td/player";
-import type { StateAnimationProps } from "../state-animation-props";
+import { TDPlayer } from "../../../view/td/player";
+import { StateAnimationProps } from "../state-animation-props";
 
 /**
  * パイロットスキル アニメーション パラメータ
@@ -36,10 +36,10 @@ export type PilotSkillAnimationParamX<
   invokerHUD: HUDPlayer;
   /** スキル発動側アームドーザスプライト */
   invokerSprite: ArmdozerSprite;
-  /** スキル発動側でないアームドーザスプライト */
-  anotherSprite: ArmdozerSprite;
-  /** このターン中アクティブなアームドーザのスプライト */
-  activeTDArmdozer: TDArmdozerObjects;
+
+  /** 攻撃側アームドーザスプライト */
+  attackerTDArmdozer: TDArmdozerObjects;
+
   /** 3Dゲームオブジェクト */
   tdObjects: TDGameObjects;
   /** HUDオブジェクト */
@@ -84,34 +84,28 @@ export function toPilotSkillAnimationParam(
   const invokerHUD = props.view.hud.players.find(
     (v) => v.playerId === effect.invokerId,
   );
-  const anotherArmdozer = props.view.td.armdozers.find(
-    (v) => v.playerId !== effect.invokerId,
-  );
-  const activeTDArmdozer = props.view.td.armdozers.find(
+  const attackerTDArmdozer = props.view.td.armdozers.find(
     (v) => v.playerId === gameState.activePlayerId,
   );
-
   if (
     !invokerState ||
     !pilot ||
     !invokerArmdozer ||
     !invokerTD ||
     !invokerHUD ||
-    !anotherArmdozer ||
-    !activeTDArmdozer
+    !attackerTDArmdozer
   ) {
     return null;
   }
 
   return {
     skill: effect.skill,
-    pilot: pilot,
+    pilot,
     invokerState: invokerState,
     invokerSprite: invokerArmdozer.sprite(),
-    invokerTD: invokerTD,
-    invokerHUD: invokerHUD,
-    anotherSprite: anotherArmdozer.sprite(),
-    activeTDArmdozer,
+    invokerTD,
+    invokerHUD,
+    attackerTDArmdozer,
     tdObjects: props.view.td.gameObjects,
     hudObjects: props.view.hud.gameObjects,
     tdCamera: props.view.td.camera,

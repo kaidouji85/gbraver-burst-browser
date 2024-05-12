@@ -1,11 +1,14 @@
+import { StoryFn } from "@storybook/html";
+
 import { PrivateMatchHostDialog } from "../src/js/dom-dialogs/private-match-host";
-import { domStub, DOMStubStory } from "./stub/dom-stub";
+import { domStub } from "./stub/dom-stub";
 
 export default {
   title: "private-match-host",
 };
 
-export const dialog: DOMStubStory = domStub((params) => {
+/** ダイアログ表示 */
+export const dialog: StoryFn = domStub((params) => {
   const dialog = new PrivateMatchHostDialog({
     ...params,
     roomID: "V1StGXR8_Z5jdHi6B-myT",

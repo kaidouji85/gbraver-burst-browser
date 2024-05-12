@@ -1,7 +1,7 @@
 import { PlayerId } from "gbraver-burst-core";
 
 import { BatteryCorrect } from "../../../../../game-object/battery-correct/battery-correct";
-import { BatteryEnchantment } from "../../../../../game-object/battery-enchantment/battery-enchantment";
+import { BatteryEnhancement } from "../../../../../game-object/battery-enhancement/battery-enhancement";
 import { BatteryNumber } from "../../../../../game-object/battery-number/battery-number";
 import { ContinuousAttackIndicator } from "../../../../../game-object/continuous-attack/continuous-attack-indicator";
 import { DamageHalved } from "../../../../../game-object/damage-halved/damage-halved";
@@ -34,7 +34,7 @@ export interface TDPlayerProps {
     /** ダメージ半減 */
     damageHalved: DamageHalved;
     /** バッテリー増強 */
-    batteryEnchantment: BatteryEnchantment;
+    batteryEnhancement: BatteryEnhancement;
   };
   /** バッテリー数字 */
   batteryNumber: BatteryNumber;

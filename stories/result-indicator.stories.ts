@@ -1,3 +1,4 @@
+import { StoryFn } from "@storybook/html";
 import { Observable } from "rxjs";
 
 import { delay } from "../src/js/animation/delay";
@@ -9,7 +10,7 @@ import {
 } from "../src/js/game-object/result-indicator";
 import { ResultIndicator } from "../src/js/game-object/result-indicator/result-indicator";
 import { Resources } from "../src/js/resource";
-import { HUDGameObjectStub } from "./stub/hud-game-object-stub";
+import { hudGameObjectStory } from "./stub/hud-game-object-stub";
 
 export default {
   title: "result-indicator",
@@ -21,23 +22,18 @@ export default {
  * @param fn リザルトインジケータ操作関数
  * @returns story
  */
-const resultIndicatorStory =
-  (
-    generator: (
-      resources: Resources,
-      gameObjectAction: Observable<GameObjectAction>,
-    ) => ResultIndicator,
-    fn: (indicator: ResultIndicator) => void,
-  ) =>
-  () => {
-    const stub = new HUDGameObjectStub(({ resources, gameObjectAction }) => {
-      const indicator = generator(resources, gameObjectAction);
-      fn(indicator);
-      return [indicator.getObject3D()];
-    });
-    stub.start();
-    return stub.domElement();
-  };
+const resultIndicatorStory = (
+  generator: (
+    resources: Resources,
+    gameObjectAction: Observable<GameObjectAction>,
+  ) => ResultIndicator,
+  fn: (indicator: ResultIndicator) => void,
+) =>
+  hudGameObjectStory(({ resources, gameObjectAction }) => {
+    const indicator = generator(resources, gameObjectAction);
+    fn(indicator);
+    return [indicator.getObject3D()];
+  });
 
 /**
  * 表示
@@ -54,10 +50,16 @@ const visible = (indicator: ResultIndicator) => {
 };
 
 /** win 表示 */
-export const winVisible = resultIndicatorStory(winIndicator, visible);
+export const winVisible: StoryFn = resultIndicatorStory(winIndicator, visible);
 
 /** lose 表示 */
-export const loseVisible = resultIndicatorStory(loseIndicator, visible);
+export const loseVisible: StoryFn = resultIndicatorStory(
+  loseIndicator,
+  visible,
+);
 
 /** draw 表示 */
-export const drawVisible = resultIndicatorStory(drawIndicator, visible);
+export const drawVisible: StoryFn = resultIndicatorStory(
+  drawIndicator,
+  visible,
+);

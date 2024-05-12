@@ -18,7 +18,6 @@ type Param = ResourcesContainer & {
 
 /**
  * プレイヤーゲージを生成する
- *
  * @param param パラメータ
  * @returns ゲージ
  */
@@ -34,7 +33,6 @@ export function playerGauge(param: Param): Gauge {
 
 /**
  * 敵ゲージを生成する
- *
  * @param param パラメータ
  * @returns ゲージ
  */

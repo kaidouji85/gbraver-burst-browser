@@ -1,3 +1,4 @@
+import { StoryFn } from "@storybook/html";
 import { ArmdozerIds, PilotIds } from "gbraver-burst-core";
 
 import { PlayerSelect } from "../src/js/dom-scenes/player-select";
@@ -5,14 +6,13 @@ import { ArmdozerSelector } from "../src/js/dom-scenes/player-select/armdozer-se
 import { PilotSelector } from "../src/js/dom-scenes/player-select/pilot-selector";
 import { PlayableArmdozers } from "../src/js/game/playable-amdozers";
 import { PlayablePilots } from "../src/js/game/playable-pilots";
-import type { DOMStubStory } from "./stub/dom-stub";
 import { domStub } from "./stub/dom-stub";
 
 export default {
   title: "player-select",
 };
 
-export const scene: DOMStubStory = domStub((params) => {
+export const scene: StoryFn = domStub((params) => {
   const scene = new PlayerSelect({
     ...params,
     armdozerIds: PlayableArmdozers,
@@ -21,7 +21,7 @@ export const scene: DOMStubStory = domStub((params) => {
   return scene.getRootHTMLElement();
 });
 
-export const armdozerSelector: DOMStubStory = domStub((params) => {
+export const armdozerSelector: StoryFn = domStub((params) => {
   const armdozerIds = [
     ArmdozerIds.NEO_LANDOZER,
     ArmdozerIds.SHIN_BRAVER,
@@ -36,7 +36,7 @@ export const armdozerSelector: DOMStubStory = domStub((params) => {
   return component.getRootHTMLElement();
 });
 
-export const pilotSelector: DOMStubStory = domStub((params) => {
+export const pilotSelector: StoryFn = domStub((params) => {
   const pilotIds = [PilotIds.SHINYA, PilotIds.GAI];
   const component = new PilotSelector({
     ...params,

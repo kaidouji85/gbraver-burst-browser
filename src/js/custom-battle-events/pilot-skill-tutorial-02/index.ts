@@ -9,7 +9,6 @@ import {
 } from "../../td-scenes/battle/custom-battle-event";
 import { EmptyCustomBattleEvent } from "../empty-custom-battle-event";
 import { afterLastState } from "./procedures/after-last-state";
-import { afterStateAnimation } from "./procedures/after-state-animation";
 import { beforeLastState } from "./procedures/before-last-state";
 import { onBatteryCommandSelected } from "./procedures/on-battery-command-selected";
 import { onPilotSkillCommandSelected } from "./procedures/on-pilot-skill-command-selected";
@@ -34,12 +33,7 @@ class PilotSkillTutorial02 extends EmptyCustomBattleEvent {
 
   /** @override */
   onStateAnimation(props: CustomStateAnimation): Animate {
-    return onStateAnimation(props);
-  }
-
-  /** @override */
-  afterStateAnimation(props: CustomStateAnimation): Animate {
-    return afterStateAnimation(props);
+    return onStateAnimation({ ...props, ...this.props });
   }
 
   /** @override */

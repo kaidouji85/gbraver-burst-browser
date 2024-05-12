@@ -1,4 +1,4 @@
-import type { BuffPower, Burst } from "gbraver-burst-core";
+import { BuffPower, Burst } from "gbraver-burst-core";
 
 import { all } from "../../../../../animation/all";
 import { Animate } from "../../../../../animation/animate";
@@ -6,11 +6,10 @@ import { delay, empty } from "../../../../../animation/delay";
 import { NeoLandozerHUD } from "../../../view/hud/armdozer-objects/neo-landozer";
 import { NeoLandozerTD } from "../../../view/td/armdozer-objects/neo-landozer";
 import { dolly, toInitial, track } from "../../td-camera";
-import type { BurstAnimationParamX } from "./animation-param";
+import { BurstAnimationParamX } from "./animation-param";
 
 /**
  * ネオランドーザ バーストアニメーション パラメータ
- *
  * @template BURST バースト
  */
 type NeoLandozerBurst<BURST extends Burst> = BurstAnimationParamX<
@@ -20,23 +19,7 @@ type NeoLandozerBurst<BURST extends Burst> = BurstAnimationParamX<
 >;
 
 /**
- * ネオランドーザ バースト アニメーション
- *
- * @param param パラメータ
- * @returns アニメーション
- */
-export function neoLandozerBurst(param: NeoLandozerBurst<Burst>): Animate {
-  if (param.burst.type === "BuffPower") {
-    const burst: BuffPower = param.burst;
-    return neoLandozerBuffPower({ ...param, burst });
-  }
-
-  return empty();
-}
-
-/**
- * ネオランドーザ バフパワー
- *
+ * ネオランドーザ バフパワー アニメーション
  * @param param パラメータ
  * @returns アニメーション
  */
@@ -53,7 +36,7 @@ function neoLandozerBuffPower(param: NeoLandozerBurst<BuffPower>): Animate {
     param.tdObjects.skyBrightness.brightness(0.2, 500),
     param.tdObjects.illumination.intensity(0.2, 500),
     param.hudObjects.rearmostFader.opacity(0.6, 500),
-    param.activeArmdozerTD.sprite().endActive(),
+    param.attackerArmdozerTD.sprite().endActive(),
   )
     .chain(delay(800))
     .chain(
@@ -82,4 +65,18 @@ function neoLandozerBuffPower(param: NeoLandozerBurst<BuffPower>): Animate {
       ),
     )
     .chain(delay(200));
+}
+
+/**
+ * ネオランドーザ バースト アニメーション
+ * @param param パラメータ
+ * @returns アニメーション
+ */
+export function neoLandozerBurst(param: NeoLandozerBurst<Burst>): Animate {
+  if (param.burst.type === "BuffPower") {
+    const burst: BuffPower = param.burst;
+    return neoLandozerBuffPower({ ...param, burst });
+  }
+
+  return empty();
 }

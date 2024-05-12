@@ -1,16 +1,17 @@
+import { StoryFn } from "@storybook/html";
+
 import { Title } from "../src/js/dom-scenes/title";
 import {
   GuestAccount,
   LoggedInAccount,
 } from "../src/js/dom-scenes/title/title-account";
-import type { DOMStubStory } from "./stub/dom-stub";
 import { domStub } from "./stub/dom-stub";
 
 export default {
   title: "title",
 };
 
-export const guestAccount: DOMStubStory = domStub((params) => {
+export const guestAccount: StoryFn = domStub((params) => {
   const account: GuestAccount = {
     type: "GuestAccount",
   };
@@ -26,7 +27,7 @@ export const guestAccount: DOMStubStory = domStub((params) => {
   return scene.getRootHTMLElement();
 });
 
-export const loggedInAccount: DOMStubStory = domStub((params) => {
+export const loggedInAccount: StoryFn = domStub((params) => {
   const account: LoggedInAccount = {
     type: "LoggedInAccount",
     name: "test-account",

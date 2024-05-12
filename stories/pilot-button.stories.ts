@@ -1,3 +1,5 @@
+import { StoryFn } from "@storybook/html";
+
 import { delay } from "../src/js/animation/delay";
 import {
   gaiPilotButton,
@@ -8,7 +10,7 @@ import {
   yuuyaPilotButton,
 } from "../src/js/game-object/pilot-button";
 import { PilotButton } from "../src/js/game-object/pilot-button/pilot-button";
-import { HUDGameObjectStub } from "./stub/hud-game-object-stub";
+import { hudGameObjectStory } from "./stub/hud-game-object-stub";
 
 export default {
   title: "pilot-button",
@@ -20,20 +22,15 @@ export default {
  * @param fn パイロットボタン操作関数
  * @returns story
  */
-const pilotButtonStory =
-  (
-    generator: (params: PilotButtonCreatorParams) => PilotButton,
-    fn: (button: PilotButton) => void,
-  ) =>
-  () => {
-    const stub = new HUDGameObjectStub((params) => {
-      const button = generator(params);
-      fn(button);
-      return [button.getObject3D()];
-    });
-    stub.start();
-    return stub.domElement();
-  };
+const pilotButtonStory = (
+  generator: (params: PilotButtonCreatorParams) => PilotButton,
+  fn: (button: PilotButton) => void,
+) =>
+  hudGameObjectStory((params) => {
+    const button = generator(params);
+    fn(button);
+    return [button.getObject3D()];
+  });
 
 /**
  * 操作可能なパイロットボタン
@@ -54,19 +51,22 @@ const operatable = (button: PilotButton) => {
 };
 
 /** シンヤ */
-export const shinya = pilotButtonStory(shinyaPilotButton, operatable);
+export const shinya: StoryFn = pilotButtonStory(shinyaPilotButton, operatable);
 
 /** ガイ */
-export const gai = pilotButtonStory(gaiPilotButton, operatable);
+export const gai: StoryFn = pilotButtonStory(gaiPilotButton, operatable);
 
 /** ライト */
-export const raito = pilotButtonStory(raitoPilotButton, operatable);
+export const raito: StoryFn = pilotButtonStory(raitoPilotButton, operatable);
 
 /** ツバサ */
-export const tsubasa = pilotButtonStory(tsubasaPilotButton, operatable);
+export const tsubasa: StoryFn = pilotButtonStory(
+  tsubasaPilotButton,
+  operatable,
+);
 
 /** ユウヤ */
-export const yuuya = pilotButtonStory(yuuyaPilotButton, operatable);
+export const yuuya: StoryFn = pilotButtonStory(yuuyaPilotButton, operatable);
 
 /**
  * 操作不可能なパイロットボタン
@@ -78,4 +78,7 @@ const dislabed = (button: PilotButton) => {
 };
 
 /** 操作不能 シンヤ */
-export const disabledShinya = pilotButtonStory(shinyaPilotButton, dislabed);
+export const disabledShinya: StoryFn = pilotButtonStory(
+  shinyaPilotButton,
+  dislabed,
+);

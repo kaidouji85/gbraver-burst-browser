@@ -11,25 +11,8 @@ import { PilotSkillAnimationParamX } from "./animation-param";
  * パイロットスキル ガイ アニメーションパラメータ
  * @template SKILL パイロットスキル
  */
-export type GaiAnimationParamX<SKILL extends PilotSkill> =
+export type GaiAnimationParam<SKILL extends PilotSkill> =
   PilotSkillAnimationParamX<SKILL, GaiHUD>;
-
-/** パイロットスキル ガイ アニメーションパラメータ */
-export type GaiAnimationParam = GaiAnimationParamX<PilotSkill>;
-
-/**
- * ガイ パイロットスキルアニメーション
- * @param param パラメータ
- * @returns アニメーション
- */
-export function gaiAnimation(param: GaiAnimationParam): Animate {
-  if (param.skill.type === "BuffPowerSkill") {
-    const skill: BuffPowerSkill = param.skill;
-    return gaiBuffPower({ ...param, skill });
-  }
-
-  return empty();
-}
 
 /** イン アニメーション時間 */
 const inDuration = 400;
@@ -41,7 +24,7 @@ const outDuration = 400;
  * @param param パラメータ
  * @returns アニメーション
  */
-function gaiBuffPower(param: GaiAnimationParamX<BuffPowerSkill>): Animate {
+function gaiBuffPower(param: GaiAnimationParam<BuffPowerSkill>): Animate {
   return all(
     param.pilot.cutIn.show(),
     track(
@@ -52,7 +35,7 @@ function gaiBuffPower(param: GaiAnimationParamX<BuffPowerSkill>): Animate {
     dolly(param.tdCamera, "-20", inDuration),
     param.tdObjects.skyBrightness.brightness(0.2, inDuration),
     param.tdObjects.illumination.intensity(0.2, inDuration),
-    param.activeTDArmdozer.sprite().endActive(),
+    param.attackerTDArmdozer.sprite().endActive(),
   )
     .chain(delay(800))
     .chain(param.pilot.cutIn.hidden())
@@ -66,4 +49,18 @@ function gaiBuffPower(param: GaiAnimationParamX<BuffPowerSkill>): Animate {
       ),
     )
     .chain(delay(200));
+}
+
+/**
+ * ガイ パイロットスキル アニメーション
+ * @param param パラメータ
+ * @returns アニメーション
+ */
+export function gaiAnimation(param: GaiAnimationParam<PilotSkill>): Animate {
+  if (param.skill.type === "BuffPowerSkill") {
+    const skill: BuffPowerSkill = param.skill;
+    return gaiBuffPower({ ...param, skill });
+  }
+
+  return empty();
 }

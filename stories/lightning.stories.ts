@@ -1,3 +1,5 @@
+import { StoryFn } from "@storybook/html";
+
 import { delay } from "../src/js/animation/delay";
 import {
   enemyLightning,
@@ -5,7 +7,7 @@ import {
   playerLightning,
 } from "../src/js/game-object/hitmark/lightning";
 import { Lightning } from "../src/js/game-object/hitmark/lightning/lightning";
-import { TDGameObjectStub } from "./stub/td-game-object-stub";
+import { tdGameObjectStory } from "./stub/td-game-object-stub";
 
 export default {
   title: "lightning",
@@ -17,22 +19,17 @@ export default {
  * @param fn 電撃アタックを操作する関数
  * @returns story
  */
-const lightingStory =
-  (
-    generator: (params: LightningCreatorParams) => Lightning,
-    fn: (lightning: Lightning) => void,
-  ) =>
-  () => {
-    const stub = new TDGameObjectStub((params) => {
-      const shockWave = generator(params);
-      fn(shockWave);
-      return {
-        objects: [shockWave.getObject3D()],
-      };
-    });
-    stub.start();
-    return stub.domElement();
-  };
+const lightingStory = (
+  generator: (params: LightningCreatorParams) => Lightning,
+  fn: (lightning: Lightning) => void,
+) =>
+  tdGameObjectStory((params) => {
+    const shockWave = generator(params);
+    fn(shockWave);
+    return {
+      objects: [shockWave.getObject3D()],
+    };
+  });
 
 /**
  * ポップアップ
@@ -43,7 +40,7 @@ const popUp = (lightning: Lightning) => {
 };
 
 /** プレイヤー 電撃アタック ポップアップ */
-export const playerPopUp = lightingStory(playerLightning, popUp);
+export const playerPopUp: StoryFn = lightingStory(playerLightning, popUp);
 
 /** 敵 電撃アタック ポップアップ */
-export const enemyPopUp = lightingStory(enemyLightning, popUp);
+export const enemyPopUp: StoryFn = lightingStory(enemyLightning, popUp);

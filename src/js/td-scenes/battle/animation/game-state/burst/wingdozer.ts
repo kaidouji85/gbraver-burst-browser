@@ -1,4 +1,4 @@
-import type { Burst, ContinuousAttack } from "gbraver-burst-core";
+import { Burst, ContinuousAttack } from "gbraver-burst-core";
 
 import { all } from "../../../../../animation/all";
 import { Animate } from "../../../../../animation/animate";
@@ -6,11 +6,10 @@ import { delay, empty } from "../../../../../animation/delay";
 import { WingDozerHUD } from "../../../view/hud/armdozer-objects/wing-dozer";
 import { WingDozerTD } from "../../../view/td/armdozer-objects/wing-dozer";
 import { dolly, toInitial, track } from "../../td-camera";
-import type { BurstAnimationParamX } from "./animation-param";
+import { BurstAnimationParamX } from "./animation-param";
 
 /**
  * ウィングドーザ バーストアニメーション パラメータ
- *
  * @template BURST バースト
  */
 export type WingDozerBurst<BURST extends Burst> = BurstAnimationParamX<
@@ -20,23 +19,7 @@ export type WingDozerBurst<BURST extends Burst> = BurstAnimationParamX<
 >;
 
 /**
- * ウィングドーザのバーストアニメーション
- *
- * @param param パラメータ
- * @returns アニメーション
- */
-export function wingDozerBurst(param: WingDozerBurst<Burst>): Animate {
-  if (param.burst.type === "ContinuousAttack") {
-    const burst: ContinuousAttack = param.burst;
-    return wingDozerContinuousAttack({ ...param, burst });
-  }
-
-  return empty();
-}
-
-/**
  * ウィングドーザ 連続攻撃
- *
  * @param param パラメータ
  * @returns アニメーション
  */
@@ -55,7 +38,7 @@ export function wingDozerContinuousAttack(
     param.tdObjects.skyBrightness.brightness(0.2, 500),
     param.tdObjects.illumination.intensity(0.2, 500),
     param.hudObjects.rearmostFader.opacity(0.6, 500),
-    param.activeArmdozerTD.sprite().endActive(),
+    param.attackerArmdozerTD.sprite().endActive(),
   )
     .chain(delay(800))
     .chain(
@@ -84,4 +67,18 @@ export function wingDozerContinuousAttack(
       ),
     )
     .chain(delay(200));
+}
+
+/**
+ * ウィングドーザ バースト アニメーション
+ * @param param パラメータ
+ * @returns アニメーション
+ */
+export function wingDozerBurst(param: WingDozerBurst<Burst>): Animate {
+  if (param.burst.type === "ContinuousAttack") {
+    const burst: ContinuousAttack = param.burst;
+    return wingDozerContinuousAttack({ ...param, burst });
+  }
+
+  return empty();
 }

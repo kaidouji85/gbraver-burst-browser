@@ -8,34 +8,15 @@ import type {
 } from "gbraver-burst-core";
 
 /**
- * バースト詳細を生成する
- * @param burst 情報
- * @returns 説明文
- */
-export function burstDetail(burst: Burst): string[] {
-  switch (burst.type) {
-    case "RecoverBattery":
-      return recoverBatteryDetail(burst);
-    case "BuffPower":
-      return powerBuffDetail(burst);
-    case "LightningBarrier":
-      return lightningBarrierDetail(burst);
-    case "ContinuousAttack":
-      return continuousAttackDetail(burst);
-    case "BatteryLimitBreak":
-      return batteryLimitBreakDetail(burst);
-    default:
-      return [];
-  }
-}
-
-/**
  * バッテリー回復詳細
  * @param burst バースト情報
  * @returns 説明文
  */
 function recoverBatteryDetail(burst: RecoverBattery): string[] {
-  return [`バッテリーを${burst.recoverBattery}回復する。`];
+  return [
+    `バッテリーを${burst.recoverBattery}回復する。`,
+    `次の自分ターン開始時に、バッテリーを${burst.turnStartBatteryCorrect}回復する。`,
+  ];
 }
 
 /**
@@ -84,4 +65,26 @@ function batteryLimitBreakDetail(burst: BatteryLimitBreak): string[] {
     `ゲーム終了まで、最大バッテリーを${burst.maxBattery}にする。`,
     `バッテリーを${burst.recoverBattery}回復する。`,
   ];
+}
+
+/**
+ * バースト詳細を生成する
+ * @param burst 情報
+ * @returns 説明文
+ */
+export function burstDetail(burst: Burst): string[] {
+  switch (burst.type) {
+    case "RecoverBattery":
+      return recoverBatteryDetail(burst);
+    case "BuffPower":
+      return powerBuffDetail(burst);
+    case "LightningBarrier":
+      return lightningBarrierDetail(burst);
+    case "ContinuousAttack":
+      return continuousAttackDetail(burst);
+    case "BatteryLimitBreak":
+      return batteryLimitBreakDetail(burst);
+    default:
+      return [];
+  }
 }

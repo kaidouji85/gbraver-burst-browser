@@ -1,14 +1,19 @@
+import { StoryFn } from "@storybook/html";
+
 import { Illumination } from "../src/js/game-object/illumination/illumination";
 import ShoppingStreet from "../src/js/game-object/stage/shopping-street/shopping-street";
 import { createSkyBox } from "../src/js/td-scenes/battle/view/td/sky-box";
 import type { Object3DsGeneratorParams } from "./stub/still-image-stub";
 import { stillImageStub } from "./stub/still-image-stub";
-import { TDGameObjectStub } from "./stub/td-game-object-stub";
+import { tdGameObjectStory } from "./stub/td-game-object-stub";
+
 export default {
   title: "shopping-street",
 };
-export const game = (): HTMLElement => {
-  const stub = new TDGameObjectStub(({ resources, gameObjectAction }) => {
+
+/** ゲーム画面での表示 */
+export const game: StoryFn = tdGameObjectStory(
+  ({ resources, gameObjectAction }) => {
     const illumination = new Illumination(gameObjectAction);
     const shoppingStreet = new ShoppingStreet(resources);
     const objects = [
@@ -20,11 +25,11 @@ export const game = (): HTMLElement => {
       objects,
       skyBox,
     };
-  });
-  stub.start();
-  return stub.domElement();
-};
-export const highResolutionStillImage = (): HTMLElement => {
+  },
+);
+
+/** 静止画 ハイレゾリューション */
+export const highResolutionStillImage: StoryFn = (): HTMLElement => {
   const renderer = {
     width: 7680,
     height: 4320,

@@ -1,11 +1,15 @@
-import { DOMFader } from "../src/js/components/dom-fader/dom-fader";
+import { StoryFn } from "@storybook/html";
+
+import { DOMFader } from "../src/js/game-dom/dom-fader/dom-fader";
 import { waitTime } from "../src/js/wait/wait-time";
-import type { DOMStubStory } from "./stub/dom-stub";
 import { domStub } from "./stub/dom-stub";
+
 export default {
   title: "dom-fader",
 };
-export const Scene: DOMStubStory = domStub(() => {
+
+/** シーン表示 */
+export const Scene: StoryFn = domStub(() => {
   const fader = new DOMFader();
 
   (async () => {

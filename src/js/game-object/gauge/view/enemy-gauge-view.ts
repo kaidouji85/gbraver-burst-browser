@@ -4,7 +4,7 @@ import type { PreRender } from "../../../game-loop/pre-render";
 import { HorizontalAnimationMesh } from "../../../mesh/horizontal-animation";
 import type { Resources } from "../../../resource";
 import { TEXTURE_IDS } from "../../../resource/texture/ids";
-import { HUDUIScale } from "../../scale";
+import { hudUIScale } from "../../scale";
 import type { GaugeModel } from "../model/gauge-model";
 import { BATTERY_UNIT_GAUGE_PIXEL_WIDTH } from "./battery-gauge-unit";
 import { EnemyBatteryGauge } from "./enemy-battery-gauge";
@@ -75,7 +75,7 @@ export class EnemyGaugeView implements GaugeView {
     this.#group.add(this.#batteryGauge.getObject3D());
   }
 
-  /** デストラクタ */
+  /** @override */
   destructor(): void {
     this.#hpFrame.destructor();
     this.#hpBar.destructor();
@@ -85,14 +85,9 @@ export class EnemyGaugeView implements GaugeView {
     this.#batteryGauge.destructor();
   }
 
-  /**
-   * モデルをビューに反映させる
-   *
-   * @param model モデル
-   * @param preRender プリレンダー
-   */
+  /** @override */
   engage(model: GaugeModel, preRender: PreRender): void {
-    const devicePerScale = HUDUIScale(
+    const devicePerScale = hudUIScale(
       preRender.rendererDOM,
       preRender.safeAreaInset,
     );
@@ -117,8 +112,13 @@ export class EnemyGaugeView implements GaugeView {
     this.#group.quaternion.copy(preRender.camera.quaternion);
   }
 
-  /** シーンに追加するオブジェクトを取得する */
+  /** @override */
   getObject3D(): THREE.Object3D {
     return this.#group;
+  }
+
+  /** @override */
+  addObject3D(object: THREE.Object3D): void {
+    this.#group.add(object);
   }
 }

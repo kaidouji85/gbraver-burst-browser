@@ -1,10 +1,11 @@
+import { StoryFn } from "@storybook/html";
 import { Observable } from "rxjs";
 import * as THREE from "three";
 
 import { GameObjectAction } from "../src/js/game-object/action/game-object-action";
 import { LeadLine } from "../src/js/game-object/lead-line/lead-line";
 import { LeadLineView } from "../src/js/game-object/lead-line/view/lead-line-view";
-import { HUDGameObjectStub } from "./stub/hud-game-object-stub";
+import { hudGameObjectStory } from "./stub/hud-game-object-stub";
 
 export default {
   title: "lead-line",
@@ -44,15 +45,12 @@ type Fn = (leadLine: LeadLine, a: THREE.Mesh, b: THREE.Mesh) => void;
  * @param generator 引き出し線生成関数
  * @param fn 引き出し線操作関数
  */
-const leadLineStory = (generator: Generator, fn: Fn) => () => {
-  const stub = new HUDGameObjectStub(({ gameObjectAction }) => {
+const leadLineStory = (generator: Generator, fn: Fn) =>
+  hudGameObjectStory(({ gameObjectAction }) => {
     const [leadLine, a, b] = generator(gameObjectAction);
     fn(leadLine, a, b);
     return [leadLine.getObject3D(), a, b];
   });
-  stub.start();
-  return stub.domElement();
-};
 
 /** 青線 */
 const blueLine: Generator = (gameObjectAction) => {
@@ -66,7 +64,7 @@ const blueLine: Generator = (gameObjectAction) => {
 };
 
 /** 右上 */
-export const rightUpper = leadLineStory(blueLine, (leadLine, a, b) => {
+export const rightUpper: StoryFn = leadLineStory(blueLine, (leadLine, a, b) => {
   a.position.x = 30;
   a.position.y = 40;
   b.position.x = a.position.x + 200;
@@ -76,7 +74,7 @@ export const rightUpper = leadLineStory(blueLine, (leadLine, a, b) => {
 });
 
 /** 左上 */
-export const leftUpper = leadLineStory(blueLine, (leadLine, a, b) => {
+export const leftUpper: StoryFn = leadLineStory(blueLine, (leadLine, a, b) => {
   a.position.x = -30;
   a.position.y = 40;
   b.position.x = a.position.x - 200;
@@ -86,7 +84,7 @@ export const leftUpper = leadLineStory(blueLine, (leadLine, a, b) => {
 });
 
 /** 右下 */
-export const rightLover = leadLineStory(blueLine, (leadLine, a, b) => {
+export const rightLover: StoryFn = leadLineStory(blueLine, (leadLine, a, b) => {
   a.position.x = 30;
   a.position.y = -40;
   b.position.x = a.position.x + 200;
@@ -96,7 +94,7 @@ export const rightLover = leadLineStory(blueLine, (leadLine, a, b) => {
 });
 
 /** 左下 */
-export const leftLover = leadLineStory(blueLine, (leadLine, a, b) => {
+export const leftLover: StoryFn = leadLineStory(blueLine, (leadLine, a, b) => {
   a.position.x = -30;
   a.position.y = -40;
   b.position.x = a.position.x - 200;

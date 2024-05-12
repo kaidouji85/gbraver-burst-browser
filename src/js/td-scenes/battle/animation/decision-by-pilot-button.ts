@@ -18,6 +18,9 @@ export function decisionByPilotButton(
     view.hud.gameObjects.batterySelector.close(),
     view.hud.gameObjects.batterySelectorLeadLine.hidden(),
     view.hud.gameObjects.timeScaleButton.close(),
+    ...view.hud.players.map(({ predicatedDamage }) =>
+      predicatedDamage.hidden(),
+    ),
   )
     .chain(delay(500))
     .chain(
