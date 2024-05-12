@@ -2,8 +2,8 @@ import { BrowserSDK } from "@gbraver-burst-network/browser-sdk";
 import { Observable } from "rxjs";
 
 import { BGMManagerContainer } from "../../bgm/bgm-manager";
-import { DOMFader } from "../../components/dom-fader/dom-fader";
 import { CssHUDUIScale } from "../../css/hud-ui-scale";
+import { DOMFader } from "../../game-dom/dom-fader/dom-fader";
 import { GameLoop } from "../../game-loop/game-loop";
 import { Renderer } from "../../render";
 import { ResourcesContainer } from "../../resource";

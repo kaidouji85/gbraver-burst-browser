@@ -1,6 +1,6 @@
 import { StoryFn } from "@storybook/html";
 
-import { DOMFader } from "../src/js/components/dom-fader/dom-fader";
+import { DOMFader } from "../src/js/game-dom/dom-fader/dom-fader";
 import { waitTime } from "../src/js/wait/wait-time";
 import { domStub } from "./stub/dom-stub";
 
