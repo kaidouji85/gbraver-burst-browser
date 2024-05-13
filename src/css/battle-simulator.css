@@ -50,9 +50,9 @@
     var(--dialog-padding) var(--dialog-padding);
   display: grid;
   grid-template-areas:
-    "enemy-result a player-result"
-    "enemy middle player"
-    "enemy-battery b player-battery";
+    "enemy-result  a      player-result"
+    "enemy         middle player"
+    "enemy-battery b      player-battery";
   place-items: center;
 }
 
