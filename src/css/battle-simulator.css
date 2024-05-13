@@ -65,6 +65,13 @@
 
 .battle-simulator__player-result {
   grid-area: player-result;
+  justify-self: start;
+  padding-left: calc(var(--responsive-font-size) * 3);
+}
+
+.battle-simulator__player-damage,
+.battle-simulator__player-hp {
+  text-align: end;
 }
 
 .battle-simulator__enemy-result {
