@@ -4,7 +4,6 @@
     --closer-width: 48px;
     --closer-height: 48px;
     --dialog-padding: var(--responsive-font-size);
-    --battle-result-min-height: calc(var(--responsive-font-size) * 2);
     --player-area-width: calc(var(--responsive-font-size) * 15);
     --player-area-height: calc(var(--responsive-font-size) * 10);
     --armdozer-size: calc(var(--responsive-font-size) * 19);
@@ -66,12 +65,17 @@
 
 .battle-simulator__player-result {
   grid-area: player-result;
-  min-height: var(--battle-result-min-height);
 }
 
 .battle-simulator__enemy-result {
   grid-area: enemy-result;
-  min-height: var(--battle-result-min-height);
+  justify-self: end;
+  padding-right: calc(var(--responsive-font-size) * 3);
+}
+
+.battle-simulator__enemy-damage,
+.battle-simulator__enemy-hp {
+  text-align: end;
 }
 
 .battle-simulator__player {
