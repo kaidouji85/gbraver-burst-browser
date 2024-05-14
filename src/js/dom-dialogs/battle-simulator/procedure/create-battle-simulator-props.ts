@@ -4,10 +4,14 @@ import { ResourcesContainer } from "../../../resource";
 import { ROOT } from "../dom/class-name";
 import {
   extractEnemyBatteryCorrect,
+  extractEnemyBatteryMinus,
+  extractEnemyBatteryPlus,
   extractEnemyBatteryValue,
   extractEnemyDamage,
   extractEnemyHP,
   extractPlayerBatteryCorrect,
+  extractPlayerBatteryMinus,
+  extractPlayerBatteryPlus,
   extractPlayerBatteryValue,
   extractPlayerDamage,
   extractPlayerHP,
@@ -37,6 +41,8 @@ const createPlayerElements = (playerId: PlayerId, root: HTMLElement) => ({
   hp: extractPlayerHP(root),
   batteryValue: extractPlayerBatteryValue(root),
   batteryCorrect: extractPlayerBatteryCorrect(root),
+  batteryPlus: extractPlayerBatteryPlus(root),
+  batteryMinus: extractPlayerBatteryMinus(root),
 });
 
 /**
@@ -51,6 +57,8 @@ const createEnemyElements = (playerId: PlayerId, root: HTMLElement) => ({
   hp: extractEnemyHP(root),
   batteryValue: extractEnemyBatteryValue(root),
   batteryCorrect: extractEnemyBatteryCorrect(root),
+  batteryPlus: extractEnemyBatteryPlus(root),
+  batteryMinus: extractEnemyBatteryMinus(root),
 });
 
 /**

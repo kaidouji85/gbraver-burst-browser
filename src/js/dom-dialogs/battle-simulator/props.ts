@@ -12,7 +12,11 @@ export type PlayerElement = {
   batteryValue: HTMLElement;
   /** バッテリー補正 */
   batteryCorrect: HTMLElement;
-}
+  /** バッテリープラスボタン */
+  batteryPlus: HTMLElement;
+  /** バッテリーマイナスボタン */
+  batteryMinus: HTMLElement;
+};
 
 /** 戦闘シミュレータのプロパティ */
 export type BattleSimulatorProps = {
