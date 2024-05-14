@@ -143,6 +143,11 @@
   -webkit-text-stroke: 1px #715c1f;
 }
 
+.battle-simulator__player-battery-correct--hidden,
+.battle-simulator__enemy-battery-correct--hidden {
+  display: none;
+}
+
 .battle-simulator__middle {
   position: relative;
   grid-area: middle;

@@ -3,7 +3,11 @@ import { ArmdozerIds, PlayerId, PlayerState } from "gbraver-burst-core";
 import { getArmdozerStandPathId } from "../../../path/armdozer-stand-path";
 import { ResourcesContainer } from "../../../resource";
 import { PathIds } from "../../../resource/path/ids";
-import { ROOT } from "./class-name";
+import {
+  ENEMY_BATTERY_CORRECT_HIDDEN,
+  PLAYER_BATTERY_CORRECT_HIDDEN,
+  ROOT,
+} from "./class-name";
 import template from "./root-inner-html.hbs";
 
 /** 生成パラメータ */
@@ -42,6 +46,8 @@ export function rootInnerHTML(params: RootInnerHtmlParams) {
     resources.paths.find((p) => p.id === PathIds.CLOSER)?.path ?? "";
   return template({
     ROOT,
+    PLAYER_BATTERY_CORRECT_HIDDEN,
+    ENEMY_BATTERY_CORRECT_HIDDEN,
     closerPath,
     playerArmdozerPath,
     enemyArmdozerPath,
