@@ -6,12 +6,14 @@ import template from "./root-inner-html.hbs";
 /** 生成パラメータ */
 type RootInnerHtmlParams = ResourcesContainer;
 
+
 /**
  * ルート要素のinnerHTMLを生成する
  * @returns 生成結果
  */
 export function rootInnerHTML(params: RootInnerHtmlParams) {
   const { resources } = params;
+
   const playerArmdozerPath =
     resources.paths.find((p) => p.id === PathIds.SHIN_BRAVER_STAND)?.path ?? "";
   const enemyArmdozerPath =
