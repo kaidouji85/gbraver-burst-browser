@@ -1,4 +1,7 @@
+import { Unsubscribable } from "rxjs";
+
 import { DOMDialog } from "../dialog";
+import { bindEventListeners } from "./procedure/bind-event-listeners";
 import {
   BattleSimulatorPropsCreatorParams,
   createBattleSimulatorProps,
@@ -13,6 +16,8 @@ type BattleSimulatorConstructParams = BattleSimulatorPropsCreatorParams;
 export class BattleSimulator implements DOMDialog {
   /** プロパティ */
   #props: BattleSimulatorProps;
+  /** アンサブスクライバ */
+  #unsubscribers: Unsubscribable[];
 
   /**
    * コンストラクタ
@@ -21,11 +26,14 @@ export class BattleSimulator implements DOMDialog {
   constructor(params: BattleSimulatorConstructParams) {
     this.#props = createBattleSimulatorProps(params);
     initialize(this.#props);
+    this.#unsubscribers = bindEventListeners(this.#props);
   }
 
   /** @override */
   destructor(): void {
-    // NOP
+    this.#unsubscribers.forEach(u => {
+      u.unsubscribe();
+    })
   }
 
   /** @override */
