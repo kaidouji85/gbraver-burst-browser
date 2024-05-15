@@ -21,6 +21,8 @@ type PlayerCreatorParams = {
   playerId: PlayerId;
   /** アームドーザID */
   armdozerId: ArmdozerId;
+  /** バッテリー値 */
+  battery: number;
 };
 
 /**
@@ -29,7 +31,7 @@ type PlayerCreatorParams = {
  * @returns 生成結果
  */
 const createPlayerState = (params: PlayerCreatorParams): PlayerState => {
-  const { playerId, armdozerId } = params;
+  const { playerId, armdozerId, battery } = params;
   const armdozer = Armdozers.find((a) => a.id === armdozerId) ?? Armdozers[0];
   return {
     ...EMPTY_PLAYER_STATE,
@@ -37,28 +39,51 @@ const createPlayerState = (params: PlayerCreatorParams): PlayerState => {
     armdozer: {
       ...armdozer,
       hp: armdozer.maxHp,
-      battery: armdozer.maxBattery,
+      battery,
       enableBurst: true,
       effects: [],
     },
   };
 };
 
-/** ダイアログ表示 */
-export const dialog: StoryFn = domStub((params) => {
+/** プレイヤーのターン */
+export const playerTurn: StoryFn = domStub((params) => {
   const player = createPlayerState({
     playerId: "player",
     armdozerId: ArmdozerIds.SHIN_BRAVER,
+    battery: 3,
   });
   const enemy = createPlayerState({
     playerId: "enemy",
     armdozerId: ArmdozerIds.NEO_LANDOZER,
+    battery: 4,
   });
   const simulator = new BattleSimulator({
     ...params,
     player,
     enemy,
     isPlayerAttacker: true,
+  });
+  return simulator.getRootHTMLElement();
+});
+
+/** 敵のターン */
+export const enemyTurn: StoryFn = domStub((params) => {
+  const player = createPlayerState({
+    playerId: "player",
+    armdozerId: ArmdozerIds.WING_DOZER,
+    battery: 2,
+  });
+  const enemy = createPlayerState({
+    playerId: "enemy",
+    armdozerId: ArmdozerIds.LIGHTNING_DOZER,
+    battery: 3,
+  });
+  const simulator = new BattleSimulator({
+    ...params,
+    player,
+    enemy,
+    isPlayerAttacker: false,
   });
   return simulator.getRootHTMLElement();
 });

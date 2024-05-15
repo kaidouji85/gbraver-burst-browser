@@ -155,13 +155,21 @@
   height: var(--middle-area-size);
 }
 
-.battle-simulator__turn-indicator {
+.battle-simulator__turn-indicator,
+.battle-simulator__turn-indicator--enemy-turn {
   position: absolute;
   width: var(--turn-indicator-size);
   height: var(--turn-indicator-size);
   top: 50%;
   left: 50%;
+}
+
+.battle-simulator__turn-indicator {
   transform: translate(-50%, -50%);
+}
+
+.battle-simulator__turn-indicator--enemy-turn {
+  transform: translate(-50%, -50%) scale(-1, 1);
 }
 
 .battle-simulator__player-battery {

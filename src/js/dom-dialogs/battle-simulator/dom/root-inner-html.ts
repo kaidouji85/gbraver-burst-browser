@@ -7,6 +7,8 @@ import {
   ENEMY_BATTERY_CORRECT_HIDDEN,
   PLAYER_BATTERY_CORRECT_HIDDEN,
   ROOT,
+  TURN_INDICATOR,
+  TURN_INDICATOR_ENEMY,
 } from "./class-name";
 import template from "./root-inner-html.hbs";
 
@@ -16,6 +18,8 @@ type RootInnerHtmlParams = ResourcesContainer & {
   player: PlayerState;
   /** 敵のステート */
   enemy: PlayerState;
+  /** プレイヤーの攻撃ターンか否か、trueでプレイヤーの攻撃ターン */
+  isPlayerAttacker: boolean;
 };
 
 /**
@@ -23,7 +27,7 @@ type RootInnerHtmlParams = ResourcesContainer & {
  * @returns 生成結果
  */
 export function rootInnerHTML(params: RootInnerHtmlParams) {
-  const { resources, player, enemy } = params;
+  const { resources, player, enemy, isPlayerAttacker } = params;
 
   const playerArmdozerId = player?.armdozer.id ?? ArmdozerIds.SHIN_BRAVER;
   const playerArmdozerPath =
@@ -36,6 +40,10 @@ export function rootInnerHTML(params: RootInnerHtmlParams) {
     resources.paths.find(
       (p) => p.id === getArmdozerStandPathId(enemyArmdozerId),
     )?.path ?? "";
+  
+  const turnIndicatorClass = isPlayerAttacker
+    ? TURN_INDICATOR
+    : TURN_INDICATOR_ENEMY;
 
   const turnIndicatorPath =
     resources.paths.find((p) => p.id === PathIds.TURN_INDICATOR)?.path ?? "";
@@ -46,6 +54,7 @@ export function rootInnerHTML(params: RootInnerHtmlParams) {
     ROOT,
     PLAYER_BATTERY_CORRECT_HIDDEN,
     ENEMY_BATTERY_CORRECT_HIDDEN,
+    turnIndicatorClass,
     closerPath,
     playerArmdozerPath,
     enemyArmdozerPath,
