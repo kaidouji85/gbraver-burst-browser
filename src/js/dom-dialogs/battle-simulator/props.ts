@@ -1,20 +1,6 @@
 import { PlayerState } from "gbraver-burst-core";
 
-/** プレイヤーに関するHTML要素 */
-export type PlayerElements = {
-  /** ダメージ */
-  damage: HTMLElement;
-  /** HP */
-  hp: HTMLElement;
-  /** バッテリー値 */
-  batteryValue: HTMLElement;
-  /** バッテリー補正 */
-  batteryCorrect: HTMLElement;
-  /** バッテリープラスボタン */
-  batteryPlus: HTMLElement;
-  /** バッテリーマイナスボタン */
-  batteryMinus: HTMLElement;
-};
+import { PlayerElements } from "./dom/player-elements";
 
 /** 戦闘シミュレータのプロパティ */
 export type BattleSimulatorProps = {

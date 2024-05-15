@@ -40,7 +40,7 @@ export function rootInnerHTML(params: RootInnerHtmlParams) {
     resources.paths.find(
       (p) => p.id === getArmdozerStandPathId(enemyArmdozerId),
     )?.path ?? "";
-  
+
   const turnIndicatorClass = isPlayerAttacker
     ? TURN_INDICATOR
     : TURN_INDICATOR_ENEMY;

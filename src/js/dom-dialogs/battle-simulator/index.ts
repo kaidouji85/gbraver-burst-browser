@@ -3,6 +3,7 @@ import {
   BattleSimulatorPropsCreatorParams,
   createBattleSimulatorProps,
 } from "./procedure/create-battle-simulator-props";
+import { initialize } from "./procedure/initialize";
 import { BattleSimulatorProps } from "./props";
 
 /** コンストラクタのパラメータ */
@@ -19,6 +20,7 @@ export class BattleSimulator implements DOMDialog {
    */
   constructor(params: BattleSimulatorConstructParams) {
     this.#props = createBattleSimulatorProps(params);
+    initialize(this.#props);
   }
 
   /** @override */
