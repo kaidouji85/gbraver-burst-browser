@@ -1,4 +1,4 @@
-import { ArmdozerIds, PlayerId, PlayerState } from "gbraver-burst-core";
+import { ArmdozerIds, PlayerState } from "gbraver-burst-core";
 
 import { getArmdozerStandPathId } from "../../../path/armdozer-stand-path";
 import { ResourcesContainer } from "../../../resource";
@@ -12,10 +12,10 @@ import template from "./root-inner-html.hbs";
 
 /** 生成パラメータ */
 type RootInnerHtmlParams = ResourcesContainer & {
-  /** ゲームに参加しているプレイヤー */
-  players: [PlayerState, PlayerState];
-  /** 現在画面を開いているプレイヤーID */
-  playerId: PlayerId;
+  /** プレイヤーのステート */
+  player: PlayerState;
+  /** 敵のステート */
+  enemy: PlayerState;
 };
 
 /**
@@ -23,16 +23,14 @@ type RootInnerHtmlParams = ResourcesContainer & {
  * @returns 生成結果
  */
 export function rootInnerHTML(params: RootInnerHtmlParams) {
-  const { resources, players, playerId } = params;
+  const { resources, player, enemy } = params;
 
-  const player = players.find((p) => p.playerId === playerId);
   const playerArmdozerId = player?.armdozer.id ?? ArmdozerIds.SHIN_BRAVER;
   const playerArmdozerPath =
     resources.paths.find(
       (p) => p.id === getArmdozerStandPathId(playerArmdozerId),
     )?.path ?? "";
 
-  const enemy = players.find((p) => p.playerId !== playerId);
   const enemyArmdozerId = enemy?.armdozer.id ?? ArmdozerIds.SHIN_BRAVER;
   const enemyArmdozerPath =
     resources.paths.find(

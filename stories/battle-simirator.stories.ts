@@ -56,9 +56,9 @@ export const dialog: StoryFn = domStub((params) => {
   });
   const simulator = new BattleSimulator({
     ...params,
-    players: [player, enemy],
-    playerId: player.playerId,
-    activePlayerId: player.playerId,
+    player,
+    enemy,
+    isPlayerAttacker: true,
   });
   return simulator.getRootHTMLElement();
 });

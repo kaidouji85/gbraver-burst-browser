@@ -1,9 +1,7 @@
-import { PlayerId, PlayerState } from "gbraver-burst-core";
+import { PlayerState } from "gbraver-burst-core";
 
-/** プレイヤーに関する要素 */
-export type PlayerElement = {
-  /** プレイヤーID */
-  playerId: PlayerId;
+/** プレイヤーに関するHTML要素 */
+export type PlayerElements = {
   /** ダメージ */
   damage: HTMLElement;
   /** HP */
@@ -22,12 +20,19 @@ export type PlayerElement = {
 export type BattleSimulatorProps = {
   /** ルートのHTML要素 */
   root: HTMLElement;
-  /** プレイヤーに関する要素 */
-  playerElements: [PlayerElement, PlayerElement];
-  /** ゲームに参加しているプレイヤーのステート */
-  players: [PlayerState, PlayerState];
-  /** 画面を開いているプレイヤーID */
-  playerId: PlayerId;
-  /** 攻撃側プレイヤーID */
-  activePlayerId: PlayerId;
+  /** プレイヤーのHTML要素 */
+  playerElements: PlayerElements;
+  /** 敵のHTML要素 */
+  enemyElements: PlayerElements;
+
+  /** プレイヤーのステート */
+  player: PlayerState;
+  /** プレイヤーがダイアログ上で選択しているバッテリー値 */
+  playerBattery: number;
+  /** 敵のステート */
+  enemy: PlayerState;
+  /** 敵がダイアログ上で選択しているバッテリー値 */
+  enemyBattery: number;
+  /** プレイヤーが攻撃側か否か、trueで攻撃側 */
+  isPlayerAttacker: boolean;
 };

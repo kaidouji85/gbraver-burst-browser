@@ -1,4 +1,4 @@
-import { PlayerId, PlayerState } from "gbraver-burst-core";
+import { PlayerState } from "gbraver-burst-core";
 
 import { ResourcesContainer } from "../../../resource";
 import { ROOT } from "../dom/class-name";
@@ -21,22 +21,20 @@ import { BattleSimulatorProps } from "../props";
 
 /** 生成パラメータ */
 export type BattleSimulatorPropsCreatorParams = ResourcesContainer & {
-  /** ゲームに参加しているプレイヤーのステート */
-  players: [PlayerState, PlayerState];
-  /** 画面を開いているプレイヤーID */
-  playerId: PlayerId;
-  /** 攻撃側プレイヤーID */
-  activePlayerId: PlayerId;
+  /** プレイヤーのステート */
+  player: PlayerState;
+  /** 敵のステート */
+  enemy: PlayerState;
+  /** プレイヤーが攻撃側か否か、trueで攻撃側 */
+  isPlayerAttacker: boolean;
 };
 
 /**
  * プレイヤーのHTML要素を生成する
- * @param playerId プレイヤーID
  * @param root ルート要素
  * @returns 生成結果
  */
-const createPlayerElements = (playerId: PlayerId, root: HTMLElement) => ({
-  playerId,
+const createPlayerElements = (root: HTMLElement) => ({
   damage: extractPlayerDamage(root),
   hp: extractPlayerHP(root),
   batteryValue: extractPlayerBatteryValue(root),
@@ -47,12 +45,10 @@ const createPlayerElements = (playerId: PlayerId, root: HTMLElement) => ({
 
 /**
  * 敵のHTML要素を生成する
- * @param playerId プレイヤーID
  * @param root ルート要素
  * @returns 生成結果
  */
-const createEnemyElements = (playerId: PlayerId, root: HTMLElement) => ({
-  playerId,
+const createEnemyElements = (root: HTMLElement) => ({
   damage: extractEnemyDamage(root),
   hp: extractEnemyHP(root),
   batteryValue: extractEnemyBatteryValue(root),
@@ -68,20 +64,25 @@ const createEnemyElements = (playerId: PlayerId, root: HTMLElement) => ({
 export function createBattleSimulatorProps(
   params: BattleSimulatorPropsCreatorParams,
 ): BattleSimulatorProps {
-  const { players, playerId } = params;
+  const { player, enemy } = params;
 
   const root = document.createElement("div");
   root.className = ROOT;
   root.innerHTML = rootInnerHTML(params);
 
-  const enemyId =
-    players.find((p) => p.playerId !== params.playerId)?.playerId ?? "";
+  const playerElements = createPlayerElements(root);
+  const enemyElements = createEnemyElements(root);
+
+  const playerBattery = player.armdozer.battery;
+  const enemyBattery = enemy.armdozer.battery;
   return {
     ...params,
+
     root,
-    playerElements: [
-      createPlayerElements(playerId, root),
-      createEnemyElements(enemyId, root),
-    ],
+    playerElements,
+    enemyElements,
+
+    playerBattery,
+    enemyBattery,
   };
 }
