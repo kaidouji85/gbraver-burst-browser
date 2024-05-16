@@ -70,8 +70,8 @@
   position: relative;
   z-index: var(--result-area-z-index);
   grid-area: player-result;
-  justify-self: start;
-  padding-left: calc(var(--responsive-font-size) * 3);
+  justify-self: end;
+  padding-right: calc(var(--responsive-font-size) * 3);
 }
 
 .battle-simulator__player-damage,
