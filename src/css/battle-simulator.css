@@ -49,9 +49,9 @@
     var(--dialog-padding) var(--dialog-padding);
   display: grid;
   grid-template-areas:
-    "enemy-result  a      player-result"
-    "enemy         middle player"
-    "enemy-battery b      player-battery";
+    "enemy-result     a      player-result"
+    "enemy            middle player"
+    "enemy-controller b      player-controller";
   place-items: center;
 }
 
@@ -172,13 +172,13 @@
   transform: translate(-50%, -50%) scale(-1, 1);
 }
 
-.battle-simulator__player-battery {
-  grid-area: player-battery;
+.battle-simulator__player-controller {
+  grid-area: player-controller;
   white-space: nowrap;
 }
 
-.battle-simulator__enemy-battery {
-  grid-area: enemy-battery;
+.battle-simulator__enemy-controller {
+  grid-area: enemy-controller;
   white-space: nowrap;
 }
 
