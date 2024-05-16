@@ -31,9 +31,9 @@ export class BattleSimulator implements DOMDialog {
 
   /** @override */
   destructor(): void {
-    this.#unsubscribers.forEach(u => {
+    this.#unsubscribers.forEach((u) => {
       u.unsubscribe();
-    })
+    });
   }
 
   /** @override */

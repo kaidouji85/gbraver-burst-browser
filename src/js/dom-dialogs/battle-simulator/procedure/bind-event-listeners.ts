@@ -9,11 +9,13 @@ import { onPlayerBatteryPlusPush } from "./on-player-battery-plus-push";
  * @param props プロパティ
  * @returns アンサブスクライバ
  */
-export function bindEventListeners(props: BattleSimulatorProps): Unsubscribable[] {
+export function bindEventListeners(
+  props: BattleSimulatorProps,
+): Unsubscribable[] {
   const { playerElements } = props;
   return [
-    domPushStream(playerElements.batteryPlus).subscribe(action => {
+    domPushStream(playerElements.batteryPlus).subscribe((action) => {
       onPlayerBatteryPlusPush(props, action);
-    })
+    }),
   ];
 }
