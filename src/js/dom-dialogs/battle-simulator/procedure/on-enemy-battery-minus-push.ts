@@ -2,6 +2,7 @@ import { pop } from "../../../dom/pop";
 import { PushDOM } from "../../../dom/push-dom";
 import { updateBattery } from "../dom/update-battery";
 import { BattleSimulatorProps } from "../props";
+import { updateBattleResult } from "./update-battle-result";
 
 /**
  * 敵のバッテリーマイナスボタンが押された時の処理
@@ -26,4 +27,5 @@ export function onEnemyBatteryMinusPush(
   pop(enemyElements.batteryMinus);
   props.enemyBattery = nextEnemyBattery;
   updateBattery(enemyElements, nextEnemyBattery);
+  updateBattleResult(props);
 }

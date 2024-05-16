@@ -2,6 +2,7 @@ import { pop } from "../../../dom/pop";
 import { PushDOM } from "../../../dom/push-dom";
 import { updateBattery } from "../dom/update-battery";
 import { BattleSimulatorProps } from "../props";
+import { updateBattleResult } from "./update-battle-result";
 
 /**
  * プレイヤーのバッテリーマイナスボタンが押された時の処理
@@ -26,4 +27,5 @@ export function onPlayerBatteryMinusPush(
   pop(playerElements.batteryMinus);
   props.playerBattery = nextPlayerBattery;
   updateBattery(playerElements, nextPlayerBattery);
+  updateBattleResult(props);
 }
