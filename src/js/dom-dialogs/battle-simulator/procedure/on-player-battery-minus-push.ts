@@ -4,26 +4,26 @@ import { updateBattery } from "../dom/update-battery";
 import { BattleSimulatorProps } from "../props";
 
 /**
- * プレイヤーのバッテリープラスボタンが押された時の処理
+ * プレイヤーのバッテリーマイナスボタンが押された時の処理
  * @param props プロパティ
  * @param action アクション
  */
-export function onPlayerBatteryPlusPush(
+export function onPlayerBatteryMinusPush(
   props: BattleSimulatorProps,
   action: PushDOM,
 ) {
-  const { player, playerBattery, playerElements } = props;
+  const { playerBattery, playerElements } = props;
   const { event } = action;
 
   event.preventDefault();
   event.stopPropagation();
 
-  const nextPlayerBattery = playerBattery + 1;
-  if (player.armdozer.maxBattery < nextPlayerBattery) {
+  const nextPlayerBattery = playerBattery - 1;
+  if (nextPlayerBattery < 0) {
     return;
   }
 
-  pop(playerElements.batteryPlus);
+  pop(playerElements.batteryMinus);
   props.playerBattery = nextPlayerBattery;
   updateBattery(playerElements, nextPlayerBattery);
 }

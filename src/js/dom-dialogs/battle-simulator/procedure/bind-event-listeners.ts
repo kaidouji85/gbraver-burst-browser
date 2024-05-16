@@ -2,6 +2,7 @@ import { Unsubscribable } from "rxjs";
 
 import { domPushStream } from "../../../dom/push-dom";
 import { BattleSimulatorProps } from "../props";
+import { onPlayerBatteryMinusPush } from "./on-player-battery-minus-push";
 import { onPlayerBatteryPlusPush } from "./on-player-battery-plus-push";
 
 /**
@@ -17,5 +18,8 @@ export function bindEventListeners(
     domPushStream(playerElements.batteryPlus).subscribe((action) => {
       onPlayerBatteryPlusPush(props, action);
     }),
+    domPushStream(playerElements.batteryMinus).subscribe(action => {
+      onPlayerBatteryMinusPush(props, action);
+    })
   ];
 }
