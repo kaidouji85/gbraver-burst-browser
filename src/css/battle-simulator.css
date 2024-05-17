@@ -71,6 +71,7 @@
   z-index: var(--result-area-z-index);
   grid-area: player-result;
   justify-self: end;
+  align-self: end;
   padding-right: calc(var(--responsive-font-size) * 3);
 }
 
@@ -84,6 +85,7 @@
   z-index: var(--result-area-z-index);
   grid-area: enemy-result;
   justify-self: end;
+  align-self: end;
   padding-right: calc(var(--responsive-font-size) * 3);
 }
 

@@ -51,6 +51,8 @@ export function rootInnerHTML(params: RootInnerHtmlParams) {
   const closerPath =
     resources.paths.find((p) => p.id === PathIds.CLOSER)?.path ?? "";
   return template({
+    player,
+    enemy,
     ROOT,
     PLAYER_BATTERY_CORRECT_HIDDEN,
     ENEMY_BATTERY_CORRECT_HIDDEN,
