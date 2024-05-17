@@ -53,15 +53,10 @@
     var(--dialog-padding) var(--dialog-padding) var(--dialog-padding);
   display: grid;
   grid-template-areas:
-    "enemy-battle-result a      player-state"
-    "enemy               middle player"
-    "enemy-controller    b      player-controller";
+    "enemy-state      a      player-state"
+    "enemy            middle player"
+    "enemy-controller b      player-controller";
   place-items: center;
-}
-
-.battle-simulator__battery-icon {
-  width: var(--battery-icon-size);
-  height: var(--battery-icon-size);
 }
 
 .battle-simulator__closer {
@@ -73,15 +68,24 @@
 }
 
 .battle-simulator__player-state {
+  grid-area: player-state;
+}
+
+.battle-simulator__enemy-state {
+  grid-area: enemy-state;
+}
+
+.battle-simulator__player-state,
+.battle-simulator__enemy-state {
   position: relative;
   z-index: var(--result-area-z-index);
-  grid-area: player-state;
   display: grid;
   grid-template-areas: "hp-label hp-value separator battery-icon battery";
   align-items: center;
 }
 
-.battle-simulator__player-damage {
+.battle-simulator__player-damage,
+.battle-simulator__enemy-damage {
   grid-area: hp-value;
   position: absolute;
   top: calc(var(--responsive-font-size) * -2);
@@ -90,51 +94,43 @@
   white-space: nowrap;
 }
 
-.battle-simulator__player-battle-result-name {
+.battle-simulator__player-battle-result-name,
+.battle-simulator__enemy-battle-result-name {
   grid-area: separator;
   position: absolute;
   white-space: nowrap;
   top: calc(var(--responsive-font-size) * -1.3);
 }
 
-.battle-simulator__player-hp-label {
+.battle-simulator__player-hp-label,
+.battle-simulator__enemy-hp-label {
   grid-area: hp-label;
   margin-right: calc(var(--responsive-font-size) * 0.3);
 }
 
-.battle-simulator__player-hp-value {
+.battle-simulator__player-hp-value,
+.battle-simulator__enemy-hp-value {
   grid-area: hp-value;
 }
 
-.battle-simulator__player-state-separator {
+.battle-simulator__player-state-separator,
+.battle-simulator__enemy-state-separator {
   grid-area: separator;
   margin-left: calc(var(--responsive-font-size) * 0.3);
   margin-right: calc(var(--responsive-font-size) * 0.1);
 }
 
-.battle-simulator__player-battery-icon {
+.battle-simulator__player-battery-icon,
+.battle-simulator__enemy-battery-icon {
   grid-area: battery-icon;
   justify-self: center;
   width: var(--battery-icon-size);
   height: var(--battery-icon-size);
 }
 
-.battle-simulator__player-battery {
-  grid-area: battery;
-}
-
-.battle-simulator__enemy-battle-result {
-  position: relative;
-  z-index: var(--result-area-z-index);
-  grid-area: enemy-battle-result;
-  place-self: end end;
-  padding-right: calc(var(--responsive-font-size) * 3);
-}
-
-.battle-simulator__enemy-damage,
-.battle-simulator__enemy-hp,
+.battle-simulator__player-battery,
 .battle-simulator__enemy-battery {
-  text-align: end;
+  grid-area: battery;
 }
 
 .battle-simulator__player {
