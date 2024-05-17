@@ -13,7 +13,6 @@
     --player-area-z-index: 1;
     --controller-z-index: 2;
     --result-area-z-index: 2;
-    --battle-result-column-gap: calc(var(--responsive-font-size) * 0.2);
 
     display: block;
   }
@@ -78,27 +77,31 @@
   z-index: var(--result-area-z-index);
   grid-area: player-state;
   display: grid;
-  grid-template-areas: 
-    "hp-label     hp-value"
-    "battery-icon battery";
+  grid-template-areas: "hp-label hp-value separator battery-icon battery";
   align-items: center;
-  column-gap: var(--battle-result-column-gap);
 }
 
 .battle-simulator__player-battle-result {
   grid-area: hp-value;
   position: absolute;
-  top: calc(var(--responsive-font-size) * -1);
+  top: calc(var(--responsive-font-size) * -1.4);
   justify-self: end;
   white-space: nowrap;
 }
 
 .battle-simulator__player-hp-label {
   grid-area: hp-label;
+  margin-right: calc(var(--responsive-font-size) * 0.3);
 }
 
 .battle-simulator__player-hp-value {
   grid-area: hp-value;
+}
+
+.battle-simulator__player-state-separator {
+  grid-area: separator;
+  margin-left: calc(var(--responsive-font-size) * 0.3);
+  margin-right: calc(var(--responsive-font-size) * 0.1);
 }
 
 .battle-simulator__player-battery-icon {
