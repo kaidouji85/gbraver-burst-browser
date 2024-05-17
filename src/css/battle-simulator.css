@@ -9,6 +9,7 @@
     --armdozer-size: calc(var(--responsive-font-size) * 19);
     --middle-area-size: calc(var(--responsive-font-size) * 2);
     --turn-indicator-size: calc(var(--responsive-font-size) * 6);
+    --battery-icon-size: calc(var(--responsive-font-size) * 0.9);
     --player-area-z-index: 1;
     --controller-z-index: 2;
     --result-area-z-index: 2;
@@ -58,6 +59,11 @@
   place-items: center;
 }
 
+.battle-simulator__battery-icon {
+  width: var(--battery-icon-size);
+  height: var(--battery-icon-size);
+}
+
 .battle-simulator__closer {
   width: var(--closer-width);
   height: var(--closer-height);
@@ -76,7 +82,8 @@
 }
 
 .battle-simulator__player-damage,
-.battle-simulator__player-hp {
+.battle-simulator__player-hp,
+.battle-simulator__player-battery {
   text-align: end;
 }
 
@@ -90,7 +97,8 @@
 }
 
 .battle-simulator__enemy-damage,
-.battle-simulator__enemy-hp {
+.battle-simulator__enemy-hp,
+.battle-simulator__enemy-battery {
   text-align: end;
 }
 
