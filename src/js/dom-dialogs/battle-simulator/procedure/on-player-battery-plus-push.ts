@@ -20,7 +20,7 @@ export function onPlayerBatteryPlusPush(
   event.stopPropagation();
 
   const nextPlayerBattery = playerBattery + 1;
-  if (player.armdozer.maxBattery < nextPlayerBattery) {
+  if (player.armdozer.battery < nextPlayerBattery) {
     return;
   }
 

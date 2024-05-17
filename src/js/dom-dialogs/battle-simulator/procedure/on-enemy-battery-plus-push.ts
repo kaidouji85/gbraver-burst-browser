@@ -20,7 +20,7 @@ export function onEnemyBatteryPlusPush(
   event.stopPropagation();
 
   const nextEnemyBattery = enemyBattery + 1;
-  if (enemy.armdozer.maxBattery < nextEnemyBattery) {
+  if (enemy.armdozer.battery < nextEnemyBattery) {
     return;
   }
 

@@ -51,12 +51,12 @@ export const playerTurn: StoryFn = domStub((params) => {
   const player = createPlayerState({
     playerId: "player",
     armdozerId: ArmdozerIds.SHIN_BRAVER,
-    battery: 3,
+    battery: 5,
   });
   const enemy = createPlayerState({
     playerId: "enemy",
     armdozerId: ArmdozerIds.NEO_LANDOZER,
-    battery: 4,
+    battery: 5,
   });
   const simulator = new BattleSimulator({
     ...params,
@@ -72,12 +72,12 @@ export const enemyTurn: StoryFn = domStub((params) => {
   const player = createPlayerState({
     playerId: "player",
     armdozerId: ArmdozerIds.WING_DOZER,
-    battery: 2,
+    battery: 5,
   });
   const enemy = createPlayerState({
     playerId: "enemy",
     armdozerId: ArmdozerIds.LIGHTNING_DOZER,
-    battery: 3,
+    battery: 5,
   });
   const simulator = new BattleSimulator({
     ...params,
