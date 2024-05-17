@@ -45,13 +45,11 @@
     />
   </div>
   <div class="{{ROOT}}__player-state">
-    <div class="{{ROOT}}__player-battle-result">
-      <span
-        class="{{ROOT}}__player-battle-result-name"
-        data-id="player-battle-result-name"
-      ></span>
-      <span class="{{ROOT}}__player-damage" data-id="player-damage"></span>
-    </div>
+    <span
+      class="{{ROOT}}__player-battle-result-name"
+      data-id="player-battle-result-name"
+    ></span>
+    <span class="{{ROOT}}__player-damage" data-id="player-damage"></span>
     <div class="{{ROOT}}__player-hp-label">HP</div>
     <div class="{{ROOT}}__player-hp-value">{{player.armdozer.hp}}</div>
     <div class="{{ROOT}}__player-state-separator">/</div>
@@ -81,20 +79,21 @@
     <button
       class="{{ROOT}}__enemy-battery-minus"
       data-id="enemy-battery-minus"
-    >-</button>
-    <button
-      class="{{ROOT}}__enemy-battery-plus"
-      data-id="enemy-battery-plus"
-    >+</button>
+    >-
+    </button>
+    <button class="{{ROOT}}__enemy-battery-plus" data-id="enemy-battery-plus">+
+    </button>
   </div>
   <div class="{{ROOT}}__player-controller">
     <button
       class="{{ROOT}}__player-battery-minus"
       data-id="player-battery-minus"
-    >-</button>
+    >-
+    </button>
     <button
       class="{{ROOT}}__player-battery-plus"
       data-id="player-battery-plus"
-    >+</button>
+    >+
+    </button>
   </div>
 </div>

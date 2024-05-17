@@ -49,8 +49,8 @@
   border-radius: var(--dialog-border-radius);
   z-index: var(--zindex-dialog);
   box-sizing: border-box;
-  padding: calc(var(--closer-height) / 2) var(--dialog-padding)
-    var(--dialog-padding) var(--dialog-padding);
+  padding: max(var(--closer-height) / 2, var(--responsive-font-size) * 3)
+    var(--dialog-padding) var(--dialog-padding) var(--dialog-padding);
   display: grid;
   grid-template-areas:
     "enemy-battle-result a      player-state"
@@ -81,12 +81,20 @@
   align-items: center;
 }
 
-.battle-simulator__player-battle-result {
+.battle-simulator__player-damage {
   grid-area: hp-value;
   position: absolute;
-  top: calc(var(--responsive-font-size) * -1.4);
+  top: calc(var(--responsive-font-size) * -2);
+  font-size: calc(var(--responsive-font-size) * 2);
   justify-self: end;
   white-space: nowrap;
+}
+
+.battle-simulator__player-battle-result-name {
+  grid-area: separator;
+  position: absolute;
+  white-space: nowrap;
+  top: calc(var(--responsive-font-size) * -1.3);
 }
 
 .battle-simulator__player-hp-label {
