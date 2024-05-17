@@ -5,9 +5,9 @@ import {
   PlayerState,
 } from "gbraver-burst-core";
 
+import { updateBattleResultName } from "../dom/update-battle-result-name";
 import { updateDamage } from "../dom/update-damage";
 import { BattleSimulatorProps } from "../props";
-import { updateBattleResultName } from "../dom/update-battle-result-name";
 
 /**
  * 補正されたバッテリーを取得する

@@ -3,13 +3,13 @@ import { BattleResult } from "gbraver-burst-core";
 import { PlayerElements } from "./player-elements";
 
 /** 戦闘結果名のマッピング */
-const battleResultNames: {[key: string]: string} = {
-  "NormalHit": "ヒット",
-  "Guard": "ガード",
-  "CriticalHit": "クリティカル",
-  "Feint": "フェイント",
-  "Miss": "ミス",
-}
+const battleResultNames: { [key: string]: string } = {
+  NormalHit: "ヒット",
+  Guard: "ガード",
+  CriticalHit: "クリティカル",
+  Feint: "フェイント",
+  Miss: "ミス",
+};
 
 /**
  * 戦闘結果名を更新する
@@ -22,4 +22,4 @@ export const updateBattleResultName = (
 ) => {
   const { battleResultName } = elements;
   battleResultName.innerText = battleResultNames[result.name] ?? "";
-}
+};

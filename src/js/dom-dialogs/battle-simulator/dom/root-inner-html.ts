@@ -50,9 +50,9 @@ export function rootInnerHTML(params: RootInnerHtmlParams) {
 
   const closerPath =
     resources.paths.find((p) => p.id === PathIds.CLOSER)?.path ?? "";
-  
+
   const batteryIconPath =
-  resources.paths.find((p) => p.id === PathIds.BATTERY_ICON)?.path ?? "";
+    resources.paths.find((p) => p.id === PathIds.BATTERY_ICON)?.path ?? "";
   return template({
     player,
     enemy,

@@ -7,12 +7,7 @@ import { updateBattleResult } from "./update-battle-result";
  * @param props プロパティ
  */
 export function initialize(props: BattleSimulatorProps) {
-  const {
-    playerElements,
-    playerBattery,
-    enemyElements,
-    enemyBattery,
-  } = props;
+  const { playerElements, playerBattery, enemyElements, enemyBattery } = props;
   updateBattery(playerElements, playerBattery);
   updateBattery(enemyElements, enemyBattery);
   updateBattleResult(props);

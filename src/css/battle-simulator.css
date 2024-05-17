@@ -76,8 +76,7 @@
   position: relative;
   z-index: var(--result-area-z-index);
   grid-area: player-battle-result;
-  justify-self: end;
-  align-self: end;
+  place-self: end end;
   padding-right: calc(var(--responsive-font-size) * 3);
 }
 
@@ -91,8 +90,7 @@
   position: relative;
   z-index: var(--result-area-z-index);
   grid-area: enemy-battle-result;
-  justify-self: end;
-  align-self: end;
+  place-self: end end;
   padding-right: calc(var(--responsive-font-size) * 3);
 }
 
