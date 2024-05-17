@@ -4,21 +4,17 @@ import {
   extractEnemyBatteryPlus,
   extractEnemyBatteryValue,
   extractEnemyDamage,
-  extractEnemyHP,
   extractPlayerBatteryCorrect,
   extractPlayerBatteryMinus,
   extractPlayerBatteryPlus,
   extractPlayerBatteryValue,
   extractPlayerDamage,
-  extractPlayerHP,
 } from "./extract-element";
 
 /** プレイヤーに関するHTML要素 */
 export type PlayerElements = {
   /** ダメージ */
   damage: HTMLElement;
-  /** HP */
-  hp: HTMLElement;
   /** バッテリー値 */
   batteryValue: HTMLElement;
   /** バッテリー補正 */
@@ -36,7 +32,6 @@ export type PlayerElements = {
  */
 export const createPlayerElements = (root: HTMLElement) => ({
   damage: extractPlayerDamage(root),
-  hp: extractPlayerHP(root),
   batteryValue: extractPlayerBatteryValue(root),
   batteryCorrect: extractPlayerBatteryCorrect(root),
   batteryPlus: extractPlayerBatteryPlus(root),
@@ -50,7 +45,6 @@ export const createPlayerElements = (root: HTMLElement) => ({
  */
 export const createEnemyElements = (root: HTMLElement) => ({
   damage: extractEnemyDamage(root),
-  hp: extractEnemyHP(root),
   batteryValue: extractEnemyBatteryValue(root),
   batteryCorrect: extractEnemyBatteryCorrect(root),
   batteryPlus: extractEnemyBatteryPlus(root),
