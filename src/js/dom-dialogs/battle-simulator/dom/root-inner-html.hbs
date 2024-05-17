@@ -6,8 +6,12 @@
     src="{{closerPath}}"
     data-id="{{ids.closer}}"
   />
-  <div class="{{ROOT}}__enemy-result">
-    <div class="{{ROOT}}__enemy-damage" data-id="enemy-damage"></div>
+  <div class="{{ROOT}}__enemy-battle-result">
+    <span
+      class="{{ROOT}}__enemy-battle-result-name"
+      data-id="enemy-battle-result-name"
+    ></span>
+    <span class="{{ROOT}}__enemy-damage" data-id="enemy-damage"></span>
     <div class="{{ROOT}}__enemy-hp">HP {{enemy.armdozer.hp}}</div>
     <div class="{{ROOT}}__enemy-battery">
       <img class="{{ROOT}}__battery-icon" src="{{batteryIconPath}}" />
@@ -36,8 +40,12 @@
       src="{{turnIndicatorPath}}"
     />
   </div>
-  <div class="{{ROOT}}__player-result">
-    <div class="{{ROOT}}__player-damage" data-id="player-damage"></div>
+  <div class="{{ROOT}}__player-battle-result">
+    <span
+      class="{{ROOT}}__player-battle-result-name"
+      data-id="player-battle-result-name"
+    ></span>
+    <span class="{{ROOT}}__player-damage" data-id="player-damage"></span>
     <div class="{{ROOT}}__player-hp">HP {{player.armdozer.hp}}</div>
     <div class="{{ROOT}}__player-battery">
       <img class="{{ROOT}}__battery-icon" src="{{batteryIconPath}}" />

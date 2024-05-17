@@ -1,55 +1,22 @@
-import {
-  BattleResult,
-  CriticalHit,
-  Guard,
-  NormalHit,
-} from "gbraver-burst-core";
+import { BattleResult } from "gbraver-burst-core";
 
 import { PlayerElements } from "./player-elements";
 
 /**
- * ヒットした時のダメージを更新する
- * @param damage ダメージのHTML要素
- * @param result 戦闘結果
+ * ダメージあり
+ * @param damage ダメージHTML要素 
+ * @param value ダメージ値
  */
-const normalHit = (damage: HTMLElement, result: NormalHit) => {
-  damage.innerText = `ヒット -${result.damage}`;
+const hasDamage = (damage: HTMLElement, value: number) => {
+  damage.innerText = `-${value}`;
 };
 
 /**
- * ガードした時のダメージを更新する
- * @param damage ダメージのHTML要素
- * @param result 戦闘結果
+ * ダメージなし
+ * @param damage ダメージHTML要素 
  */
-const guard = (damage: HTMLElement, result: Guard) => {
-  damage.innerText = `ガード -${result.damage}`;
-};
-
-/**
- * クリティカルヒットした時のダメージを更新する
- * @param damage ダメージのHTML要素
- * @param result 戦闘結果
- */
-const criticalHit = (damage: HTMLElement, result: CriticalHit) => {
-  damage.innerText = `クリティカル -${result.damage}`;
-};
-
-/**
- * ミスした時のダメージを更新する
- * @param damage ダメージのHTML要素
- * @param result 戦闘結果
- */
-const miss = (damage: HTMLElement) => {
-  damage.innerText = `ミス`;
-};
-
-/**
- * フェイントした時のダメージを更新する
- * @param damage ダメージのHTML要素
- * @param result 戦闘結果
- */
-const feint = (damage: HTMLElement) => {
-  damage.innerText = `フェイント`;
+const noDamage = (damage: HTMLElement) => {
+  damage.innerText = "0";
 };
 
 /**
@@ -62,15 +29,13 @@ export const updateDamage = (
   result: BattleResult,
 ) => {
   const { damage } = elements;
-  if (result.name === "NormalHit") {
-    normalHit(damage, result);
-  } else if (result.name === "Guard") {
-    guard(damage, result);
-  } else if (result.name === "CriticalHit") {
-    criticalHit(damage, result);
-  } else if (result.name === "Miss") {
-    miss(damage);
-  } else if (result.name === "Feint") {
-    feint(damage);
+  if (
+    result.name === "NormalHit" ||
+    result.name === "Guard" ||
+    result.name === "CriticalHit"
+  ) {
+    hasDamage(damage, result.damage);
+  } else {
+    noDamage(damage);
   }
 };

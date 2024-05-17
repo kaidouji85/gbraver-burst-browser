@@ -7,6 +7,7 @@ import {
 
 import { updateDamage } from "../dom/update-damage";
 import { BattleSimulatorProps } from "../props";
+import { updateBattleResultName } from "../dom/update-battle-result-name";
 
 /**
  * 補正されたバッテリーを取得する
@@ -65,5 +66,6 @@ export const updateBattleResult = (props: BattleSimulatorProps) => {
     ? getBattleResultOnPlayerAttacker(props)
     : getBattleResultOnEnemyAttacker(props);
   const defenderElements = isPlayerAttacker ? enemyElements : playerElements;
+  updateBattleResultName(defenderElements, battleResult);
   updateDamage(defenderElements, battleResult);
 };

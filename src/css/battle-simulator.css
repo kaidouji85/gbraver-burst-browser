@@ -53,9 +53,9 @@
     var(--dialog-padding) var(--dialog-padding);
   display: grid;
   grid-template-areas:
-    "enemy-result     a      player-result"
-    "enemy            middle player"
-    "enemy-controller b      player-controller";
+    "enemy-battle-result a      player-battle-result"
+    "enemy               middle player"
+    "enemy-controller    b      player-controller";
   place-items: center;
 }
 
@@ -72,10 +72,10 @@
   left: calc(var(--closer-height) * -0.5);
 }
 
-.battle-simulator__player-result {
+.battle-simulator__player-battle-result {
   position: relative;
   z-index: var(--result-area-z-index);
-  grid-area: player-result;
+  grid-area: player-battle-result;
   justify-self: end;
   align-self: end;
   padding-right: calc(var(--responsive-font-size) * 3);
@@ -87,10 +87,10 @@
   text-align: end;
 }
 
-.battle-simulator__enemy-result {
+.battle-simulator__enemy-battle-result {
   position: relative;
   z-index: var(--result-area-z-index);
-  grid-area: enemy-result;
+  grid-area: enemy-battle-result;
   justify-self: end;
   align-self: end;
   padding-right: calc(var(--responsive-font-size) * 3);

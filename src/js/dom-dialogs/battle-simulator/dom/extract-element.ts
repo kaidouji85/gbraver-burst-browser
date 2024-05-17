@@ -1,4 +1,13 @@
 /**
+ * プレイヤーの戦闘結果名を抽出する
+ * @param root 抽出対象となるルート要素
+ * @returns 抽出結果
+ */
+export const extractPlayerBattleResultName = (root: HTMLElement): HTMLElement =>
+  root.querySelector(`[data-id="player-battle-result-name"]`) ??
+  document.createElement("div");
+
+/**
  * プレイヤーのダメージを抽出する
  * @param root 抽出対象となるルート要素
  * @returns 抽出結果
@@ -41,6 +50,15 @@ export const extractPlayerBatteryPlus = (root: HTMLElement): HTMLElement =>
  */
 export const extractPlayerBatteryMinus = (root: HTMLElement): HTMLElement =>
   root.querySelector(`[data-id="player-battery-minus"]`) ??
+  document.createElement("div");
+
+/**
+ * 敵の戦闘結果名を抽出する
+ * @param root 抽出対象となるルート要素
+ * @returns 抽出結果
+ */
+export const extractEnemyBattleResultName = (root: HTMLElement): HTMLElement =>
+  root.querySelector(`[data-id="enemy-battle-result-name"]`) ??
   document.createElement("div");
 
 /**
