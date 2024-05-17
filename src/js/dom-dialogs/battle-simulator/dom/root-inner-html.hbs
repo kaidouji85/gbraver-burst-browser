@@ -44,21 +44,22 @@
       src="{{turnIndicatorPath}}"
     />
   </div>
-  <div class="{{ROOT}}__player-battle-result">
-    <span
-      class="{{ROOT}}__player-battle-result-name"
-      data-id="player-battle-result-name"
-    ></span>
-    <span class="{{ROOT}}__player-damage" data-id="player-damage"></span>
-    <div class="{{ROOT}}__player-hp">HP {{player.armdozer.hp}}</div>
-    <div class="{{ROOT}}__player-battery">
-      <img
-        class="{{ROOT}}__battery-icon"
-        alt="バッテリーアイコン"
-        src="{{batteryIconPath}}"
-      />
-      {{player.armdozer.battery}}
+  <div class="{{ROOT}}__player-state">
+    <div class="{{ROOT}}__player-battle-result">
+      <span
+        class="{{ROOT}}__player-battle-result-name"
+        data-id="player-battle-result-name"
+      ></span>
+      <span class="{{ROOT}}__player-damage" data-id="player-damage"></span>
     </div>
+    <div class="{{ROOT}}__player-hp-label">HP</div>
+    <div class="{{ROOT}}__player-hp-value">{{player.armdozer.hp}}</div>
+    <img
+      class="{{ROOT}}__player-battery-icon"
+      alt="バッテリーアイコン"
+      src="{{batteryIconPath}}"
+    />
+    <div class="{{ROOT}}__player-battery">{{player.armdozer.battery}}</div>
   </div>
   <div class="{{ROOT}}__player">
     <img
