@@ -1,8 +1,8 @@
 import { PlayerState } from "gbraver-burst-core";
 
+import { SoundResource } from "../../resource/sound/resource";
+import { SEPlayer } from "../../se/se-player";
 import { PlayerElements } from "./dom/player-elements";
-import {SoundResource} from "../../resource/sound/resource";
-import {SEPlayer} from "../../se/se-player";
 
 /** 戦闘シミュレータのプロパティ */
 export type BattleSimulatorProps = {
