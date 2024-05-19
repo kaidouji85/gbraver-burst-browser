@@ -13,7 +13,7 @@ export function onPlayerBatteryMinusPush(
   props: BattleSimulatorProps,
   action: PushDOM,
 ) {
-  const { playerBattery, playerElements } = props;
+  const { playerBattery, playerElements, se, changeValue } = props;
   const { event } = action;
 
   event.preventDefault();
@@ -24,6 +24,7 @@ export function onPlayerBatteryMinusPush(
     return;
   }
 
+  se.play(changeValue);
   pop(playerElements.batteryMinus);
   props.playerBattery = nextPlayerBattery;
   updateBattery(playerElements, nextPlayerBattery);

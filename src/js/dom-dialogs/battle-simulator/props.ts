@@ -1,6 +1,8 @@
 import { PlayerState } from "gbraver-burst-core";
 
 import { PlayerElements } from "./dom/player-elements";
+import {SoundResource} from "../../resource/sound/resource";
+import {SEPlayer} from "../../se/se-player";
 
 /** 戦闘シミュレータのプロパティ */
 export type BattleSimulatorProps = {
@@ -10,6 +12,11 @@ export type BattleSimulatorProps = {
   playerElements: PlayerElements;
   /** 敵のHTML要素 */
   enemyElements: PlayerElements;
+
+  /** 効果音再生オブジェクト */
+  se: SEPlayer;
+  /** 効果音 値変更 */
+  changeValue: SoundResource;
 
   /** プレイヤーのステート */
   player: PlayerState;
