@@ -64,6 +64,9 @@ export const playerTurn: StoryFn = domStub((params) => {
     enemy,
     isPlayerAttacker: true,
   });
+  simulator.notifyClose().subscribe(() => {
+    console.log("close");
+  });
   return simulator.getRootHTMLElement();
 });
 
@@ -84,6 +87,9 @@ export const enemyTurn: StoryFn = domStub((params) => {
     player,
     enemy,
     isPlayerAttacker: false,
+  });
+  simulator.notifyClose().subscribe(() => {
+    console.log("close");
   });
   return simulator.getRootHTMLElement();
 });

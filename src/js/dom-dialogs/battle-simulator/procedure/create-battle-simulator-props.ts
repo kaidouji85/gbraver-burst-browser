@@ -1,10 +1,12 @@
 import { PlayerState } from "gbraver-burst-core";
+import { Subject } from "rxjs";
 
 import { ResourcesContainer } from "../../../resource";
 import { createEmptySoundResource } from "../../../resource/sound/empty-sound-resource";
 import { SOUND_IDS } from "../../../resource/sound/ids";
 import { SEPlayerContainer } from "../../../se/se-player";
 import { ROOT } from "../dom/class-name";
+import { extractCloser } from "../dom/extract-element";
 import {
   createEnemyElements,
   createPlayerElements,
@@ -40,6 +42,9 @@ export function createBattleSimulatorProps(
     resources.sounds.find((s) => s.id == SOUND_IDS.CHANGE_VALUE) ??
     createEmptySoundResource();
 
+  const closeDialog = new Subject<void>();
+
+  const closer = extractCloser(root);
   const playerElements = createPlayerElements(root);
   const enemyElements = createEnemyElements(root);
 
@@ -49,10 +54,13 @@ export function createBattleSimulatorProps(
     ...params,
 
     root,
+    closer,
     playerElements,
     enemyElements,
 
     changeValue,
+
+    closeDialog,
 
     playerBattery,
     enemyBattery,

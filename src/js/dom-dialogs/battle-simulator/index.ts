@@ -1,4 +1,4 @@
-import { Unsubscribable } from "rxjs";
+import { Observable, Unsubscribable } from "rxjs";
 
 import { DOMDialog } from "../dialog";
 import { bindEventListeners } from "./procedure/bind-event-listeners";
@@ -39,5 +39,13 @@ export class BattleSimulator implements DOMDialog {
   /** @override */
   getRootHTMLElement(): HTMLElement {
     return this.#props.root;
+  }
+
+  /**
+   * ダイアログを閉じたことを通知する
+   * @returns 通知ストリーム
+   */
+  notifyClose(): Observable<void> {
+    return this.#props.closeDialog;
   }
 }
