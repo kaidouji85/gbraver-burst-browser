@@ -32,7 +32,7 @@ export async function introduction(props: Readonly<CustomBattleEventProps>) {
   await refreshConversation(props);
   activeRightMessageWindowWithFace(props, "Gai");
   await scrollRightMessages(props, [
-    ["ガイ", `"「勘違い${wbr}するなよ${wbr} シンヤ`],
+    ["ガイ", `「勘違い${wbr}するなよ${wbr} シンヤ`],
     [
       `俺は${wbr}シンブレイバーと${wbr}ウィングドーザの${wbr}情報が${wbr}欲しい${wbr}だけだ」`,
     ],
