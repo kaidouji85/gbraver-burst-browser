@@ -23,7 +23,7 @@ import { yoroshikuOnegaiShimasu } from "../../yoroshiku-onegai-shimasu";
 export async function introduction(props: CustomBattleEventProps) {
   activeLeftMessageWindowWithFace(props, "Tsubasa");
   await scrollLeftMessages(props, [
-    ["ツバサ", "「これより 操縦訓練を開始する"],
+    ["ツバサ", "「これより操縦訓練を開始する"],
   ]);
   props.view.dom.leftMessageWindow.messages(["姿勢を正して"]);
   await synchronizedUpright(props).play();
@@ -41,17 +41,17 @@ export async function introduction(props: CustomBattleEventProps) {
   await refreshConversation(props, 100);
   activeLeftMessageWindowWithFace(props, "Tsubasa");
   await scrollLeftMessages(props, [
-    ["ツバサ", "「いい返事だな では早速はじめよう"],
-    ["試合の基本は攻撃側 防御側でのバッテリーの出し合いだ"],
-    ["大きいバッテリーを出した側の行動が成功するのだが"],
+    ["ツバサ", "「いい返事だな<wbr> では早速はじめよう"],
+    ["試合の基本は<wbr>攻撃側<wbr> 防御側でのバッテリー<wbr>の出し合いだ"],
+    ["大きいバッテリー<wbr>を出した側の<wbr>行動が成功するのだが"],
     ["これは実際にやってみた方が早いな"],
-    ["シンヤ 私が防御に回るから 好きなように攻撃してくれ」"],
+    ["シンヤ 私が防御に回るから<wbr> 好きなように攻撃してくれ」"],
   ]);
   props.view.dom.leftMessageWindow.darken();
   activeRightMessageWindowWithFace(props, "Shinya");
   await scrollRightMessages(props, [
     ["シンヤ", "「了解ッス"],
-    ["それじゃ遠慮なく行くッスよ ツバサ先輩」"],
+    ["それじゃ遠慮なく行くッスよ<wbr> ツバサ先輩」"],
   ]);
   props.view.dom.rightMessageWindow.darken();
 }
