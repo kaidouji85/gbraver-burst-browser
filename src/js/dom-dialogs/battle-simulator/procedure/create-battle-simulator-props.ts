@@ -13,6 +13,7 @@ import {
 } from "../dom/player-elements";
 import { rootInnerHTML } from "../dom/root-inner-html";
 import { BattleSimulatorProps } from "../props";
+import {Exclusive} from "../../../exclusive/exclusive";
 
 /** 生成パラメータ */
 export type BattleSimulatorPropsCreatorParams = ResourcesContainer &
@@ -38,6 +39,8 @@ export function createBattleSimulatorProps(
   root.className = ROOT;
   root.innerHTML = rootInnerHTML(params);
 
+  const exclusive = new Exclusive();
+
   const changeValue =
     resources.sounds.find((s) => s.id == SOUND_IDS.CHANGE_VALUE) ??
     createEmptySoundResource();
@@ -57,6 +60,8 @@ export function createBattleSimulatorProps(
     closer,
     playerElements,
     enemyElements,
+
+    exclusive,
 
     changeValue,
 

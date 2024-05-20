@@ -8,13 +8,15 @@ import { BattleSimulatorProps } from "../props";
  * @param action アクション
  */
 export function onCloserPush(props: BattleSimulatorProps, action: PushDOM) {
-  const { closer, se, changeValue } = props;
+  const { exclusive, closer, se, changeValue } = props;
   const { event } = action;
 
   event.stopPropagation();
   event.preventDefault();
 
-  pop(closer);
-  se.play(changeValue);
-  props.closeDialog.next();
+  exclusive.execute(async () => {
+    await pop(closer, 1.3);
+    se.play(changeValue);
+    props.closeDialog.next();
+  });
 }

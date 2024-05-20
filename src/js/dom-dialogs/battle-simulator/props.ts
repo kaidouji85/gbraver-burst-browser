@@ -4,6 +4,7 @@ import { Subject } from "rxjs";
 import { SoundResource } from "../../resource/sound/resource";
 import { SEPlayer } from "../../se/se-player";
 import { PlayerElements } from "./dom/player-elements";
+import {Exclusive} from "../../exclusive/exclusive";
 
 /** 戦闘シミュレータのプロパティ */
 export type BattleSimulatorProps = {
@@ -15,6 +16,9 @@ export type BattleSimulatorProps = {
   playerElements: PlayerElements;
   /** 敵のHTML要素 */
   enemyElements: PlayerElements;
+
+  /** 排他制御 */
+  exclusive: Exclusive;
 
   /** 効果音再生オブジェクト */
   se: SEPlayer;
