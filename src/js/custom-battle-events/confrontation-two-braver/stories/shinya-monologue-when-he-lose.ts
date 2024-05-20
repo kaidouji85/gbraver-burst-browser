@@ -1,3 +1,4 @@
+import { wbr } from "../../../dom/wbr";
 import { CustomBattleEventProps } from "../../../td-scenes/battle/custom-battle-event";
 import { activeRightMessageWindowWithFace } from "../../active-message-window";
 import { scrollRightMessages } from "../../scroll-messages";
@@ -14,7 +15,9 @@ export async function shinyaMonologueWhenHeLose(
   activeRightMessageWindowWithFace(props, "Shinya");
   await scrollRightMessages(props, [
     ["シンヤ", "「……完敗ッス"],
-    ["俺は今までユウヤさんに憧れて　ユウヤさんの真似してきたけど"],
-    ["こんなんじゃダメッス」"],
+    [
+      `俺は${wbr}今まで${wbr}ユウヤさんに${wbr}憧れて${wbr} ユウヤさんの${wbr}真似を${wbr}してきたけど`,
+    ],
+    [`こんなんじゃ${wbr}ダメッス」`],
   ]);
 }
