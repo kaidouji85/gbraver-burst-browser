@@ -1,3 +1,4 @@
+import { wbr } from "../../../dom/wbr";
 import { CustomBattleEventProps } from "../../../td-scenes/battle/custom-battle-event";
 import { activeRightMessageWindowWithFace } from "../../active-message-window";
 import { scrollRightMessages } from "../../scroll-messages";
@@ -12,6 +13,6 @@ export async function noZeroDefense(
 ): Promise<void> {
   activeRightMessageWindowWithFace(props, "Shinya");
   await scrollRightMessages(props, [
-    ["シンヤ", "「0防御は即死 瞬殺されるところだったッス」"],
+    ["シンヤ", `「0防御は${wbr}即死${wbr} 瞬殺${wbr}される${wbr}ところ${wbr}だったッス」`],
   ]);
 }
