@@ -1,5 +1,6 @@
 import type { BattleResult } from "gbraver-burst-core";
 
+import { wbr } from "../../../dom/wbr";
 import type { CustomBattleEventProps } from "../../../td-scenes/battle/custom-battle-event";
 import {
   activeLeftMessageWindowWithFace,
@@ -20,7 +21,9 @@ export async function playerAttackHit(props: CustomBattleEventProps) {
   activeLeftMessageWindowWithFace(props, "Tsubasa");
   await scrollLeftMessages(props, [
     ["ツバサ", "「見事な攻撃だな シンヤ"],
-    ["君が私よりも大きいバッテリーを出したので 攻撃がヒットしたぞ」"],
+    [
+      `君が私よりも${wbr}大きいバッテリー${wbr}を出したので${wbr}攻撃がヒット${wbr}したぞ」`,
+    ],
   ]);
   props.view.dom.leftMessageWindow.darken();
 }
@@ -38,8 +41,8 @@ export async function playerAttackGuarded(props: CustomBattleEventProps) {
   activeLeftMessageWindowWithFace(props, "Tsubasa");
   await scrollLeftMessages(props, [
     ["ツバサ", "「甘いぞ シンヤ"],
-    ["君は私と同じバッテリーを出したので攻撃をガード"],
-    ["ダメージを半減させてもらった」"],
+    [`君は私と同じ${wbr}バッテリーを${wbr}出したので${wbr}攻撃をガード`],
+    [`ダメージを半減${wbr}させてもらった」`],
   ]);
   props.view.dom.leftMessageWindow.darken();
 }
@@ -56,8 +59,8 @@ export async function playerAttackMiss(props: CustomBattleEventProps) {
   activeLeftMessageWindowWithFace(props, "Tsubasa");
   await scrollLeftMessages(props, [
     ["ツバサ", "「まだまだ だな シンヤ"],
-    ["私の方が君より大きいバッテリーを出したので"],
-    ["攻撃を回避させてもらった」"],
+    [`私の方が君より${wbr}大きいバッテリーを${wbr}出したので`],
+    [`攻撃を回避${wbr}させてもらった」`],
   ]);
   props.view.dom.leftMessageWindow.darken();
 }

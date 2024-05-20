@@ -1,5 +1,6 @@
 import type { BattleResult } from "gbraver-burst-core";
 
+import { wbr } from "../../../dom/wbr";
 import type { CustomBattleEventProps } from "../../../td-scenes/battle/custom-battle-event";
 import {
   activeLeftMessageWindowWithFace,
@@ -19,8 +20,10 @@ export async function enemyAttackMiss(props: CustomBattleEventProps) {
   props.view.dom.rightMessageWindow.darken();
   activeLeftMessageWindowWithFace(props, "Tsubasa");
   await scrollLeftMessages(props, [
-    ["ツバサ", "「素晴らしいマニューバだ シンヤ"],
-    ["私よりも君の方が大きいバッテリーを出したので 攻撃を回避したぞ」"],
+    ["ツバサ", `「素晴らしい${wbr}マニューバだ${wbr} シンヤ`],
+    [
+      `私よりも${wbr}君の方が${wbr}大きいバッテリー${wbr}を出したので${wbr} 攻撃を回避したぞ」`,
+    ],
   ]);
   props.view.dom.leftMessageWindow.darken();
 }
@@ -34,14 +37,17 @@ export async function enemyAttackMiss(props: CustomBattleEventProps) {
 export async function enemyAttackGuarded(props: CustomBattleEventProps) {
   activeRightMessageWindowWithFace(props, "Shinya");
   await scrollRightMessages(props, [
-    ["シンヤ", "「クッ 避けられなかった"],
-    ["けど思った程のダメージじゃないッスね」"],
+    ["シンヤ", `「クッ 避けられ${wbr}なかった`],
+    [`けど思った程の${wbr}ダメージじゃないッスね」`],
   ]);
   props.view.dom.rightMessageWindow.darken();
   activeLeftMessageWindowWithFace(props, "Tsubasa");
   await scrollLeftMessages(props, [
-    ["ツバサ", "「私と君が同じバッテリーを出したので 攻撃をガード"],
-    ["ダメージが半減されたぞ」"],
+    [
+      "ツバサ",
+      `「私と君が${wbr}同じバッテリー${wbr}を出したので${wbr} 攻撃をガード`,
+    ],
+    [`ダメージが${wbr}半減されたぞ」`],
   ]);
   props.view.dom.leftMessageWindow.darken();
 }
@@ -56,13 +62,15 @@ export async function enemyAttackHit(props: CustomBattleEventProps) {
   activeRightMessageWindowWithFace(props, "Shinya");
   await scrollRightMessages(props, [
     ["シンヤ", "「すごいダメージ ッス"],
-    ["ツバサ先輩 少しは加減してくださいッスよ"],
+    [`ツバサ先輩${wbr} 少しは加減${wbr}してください${wbr}ッスよ`],
   ]);
   props.view.dom.rightMessageWindow.darken();
   activeLeftMessageWindowWithFace(props, "Tsubasa");
   await scrollLeftMessages(props, [
-    ["ツバサ", "「すまない これでも手心を加えたのだがな"],
-    ["私の方が君よりも大きいバッテリーを出したので 攻撃がヒットしたぞ」"],
+    ["ツバサ", `「すまない${wbr} これでも${wbr}手心を加えたのだがな`],
+    [
+      `私の方が君よりも${wbr}大きいバッテリー${wbr}を出したので${wbr} 攻撃がヒット${wbr}したぞ」`,
+    ],
   ]);
   props.view.dom.leftMessageWindow.darken();
 }

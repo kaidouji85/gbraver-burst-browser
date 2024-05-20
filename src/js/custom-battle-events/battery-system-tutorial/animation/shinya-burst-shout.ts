@@ -1,4 +1,5 @@
 import { onStart } from "../../../animation/on-start";
+import { wbr } from "../../../dom/wbr";
 import { CustomBattleEventProps } from "../../../td-scenes/battle/custom-battle-event";
 import { playerPilotOnlyShout } from "../../pilot-shout";
 
@@ -12,6 +13,6 @@ export const shinyaBurstShout = (props: Readonly<CustomBattleEventProps>) =>
     playerPilotOnlyShout(
       props,
       "Shinya",
-      "シンブレイバーのパワーが急上昇してるッス",
+      `シンブレイバーの${wbr}パワーが${wbr}急上昇${wbr}してるッス`,
     );
   });
