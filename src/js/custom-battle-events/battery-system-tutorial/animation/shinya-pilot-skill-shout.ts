@@ -1,4 +1,5 @@
 import { onStart } from "../../../animation/on-start";
+import { wbr } from "../../../dom/wbr";
 import { CustomBattleEventProps } from "../../../td-scenes/battle/custom-battle-event";
 import { playerPilotOnlyShout } from "../../pilot-shout";
 
@@ -14,6 +15,6 @@ export const shinyaPilotSkillShout = (
     playerPilotOnlyShout(
       props,
       "Shinya",
-      "なぜか<wbr>無性に<wbr>やる気が<wbr>出てきたッス",
+      `なぜか${wbr}無性に${wbr}やる気が${wbr}出てきたッス`,
     );
   });

@@ -19,5 +19,5 @@ export const shinyaAttackShout = (): PilotSkillShout => ({
  */
 export const shinyaDefenseShout = (player: PlayerState): PilotSkillShout => ({
   face: "Shinya",
-  message: `${player.armdozer.name}${wbr} ここは<wbr>堪えるッス`,
+  message: `${player.armdozer.name}${wbr} ここは${wbr}堪えるッス`,
 });
