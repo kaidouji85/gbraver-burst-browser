@@ -1,3 +1,4 @@
+import { wbr } from "../../../dom/wbr";
 import type { CustomBattleEventProps } from "../../../td-scenes/battle/custom-battle-event";
 import { activeLeftMessageWindowWithFace } from "../../active-message-window";
 import { invisibleAllMessageWindows } from "../../invisible-all-message-windows";
@@ -11,8 +12,8 @@ import { scrollLeftMessages } from "../../scroll-messages";
 export const successReflectDamage = async (props: CustomBattleEventProps) => {
   activeLeftMessageWindowWithFace(props, "Raito");
   await scrollLeftMessages(props, [
-    ["ライト", "「かかったな エース君"],
-    ["これぞ奥義 電撃バリアや」"],
+    ["ライト", `「かかったな${wbr} エース君`],
+    [`これぞ${wbr}奥義${wbr} 電撃バリアや」`],
   ]);
   invisibleAllMessageWindows(props);
 };
