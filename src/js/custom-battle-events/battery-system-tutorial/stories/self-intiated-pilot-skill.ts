@@ -1,3 +1,4 @@
+import { wbr } from "../../../dom/wbr";
 import { CustomBattleEventProps } from "../../../td-scenes/battle/custom-battle-event";
 import { activeLeftMessageWindowWithFace } from "../../active-message-window";
 import { invisibleAllMessageWindows } from "../../invisible-all-message-windows";
@@ -13,11 +14,14 @@ export async function selfInitiatedPilotSkill(
 ): Promise<void> {
   activeLeftMessageWindowWithFace(props, "Tsubasa");
   await scrollLeftMessages(props, [
-    ["ツバサ", "「もうパイロットスキルを<wbr>発動できるとは<wbr> 将来有望だな"],
     [
-      "パイロットスキルは<wbr>一試合に<wbr>一回だけ<wbr>パイロット<wbr>固有のスキルを<wbr>発動できるんだ",
+      "ツバサ",
+      `「もうパイロットスキルを${wbr}発動できるとは${wbr} 将来有望だな`,
     ],
-    ["ちなみに<wbr>君のパイロットスキル<wbr>は バッテリー<wbr>2回復だ」"],
+    [
+      `パイロットスキルは${wbr}一試合に${wbr}一回だけ${wbr}パイロット固有の${wbr}スキルを${wbr}発動できるんだ`,
+    ],
+    [`ちなみに${wbr}君のパイロットスキルは${wbr} バッテリー${wbr}2回復だ」`],
   ]);
   invisibleAllMessageWindows(props);
 }

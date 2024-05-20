@@ -1,3 +1,4 @@
+import { wbr } from "../../../dom/wbr";
 import type { CustomBattleEventProps } from "../../../td-scenes/battle/custom-battle-event";
 import { activeLeftMessageWindowWithFace } from "../../active-message-window";
 import { scrollLeftMessages } from "../../scroll-messages";
@@ -12,10 +13,10 @@ export const completeAttackAndDefense = async (
 ) => {
   activeLeftMessageWindowWithFace(props, "Tsubasa");
   await scrollLeftMessages(props, [
-    ["ツバサ", "「これで<wbr>攻撃・防御<wbr>を一通り体験<wbr>したな"],
-    ["以降は<wbr>どちらかのHPが0<wbr>になるまで これを<wbr>繰り返すんだ"],
-    ["以上で<wbr>基本ルールの<wbr>説明は<wbr>終了だ"],
-    ["ここから先は<wbr>好きなように<wbr>戦ってくれ」"],
+    ["ツバサ", `「これで${wbr}攻撃・防御${wbr}を一通り体験${wbr}したな`],
+    [`以降は${wbr}どちらかのHPが0に${wbr}なるまで これを${wbr}繰り返すんだ`],
+    [`以上で${wbr}基本ルールの${wbr}説明は${wbr}終了だ`],
+    [`ここから先は${wbr}好きなように${wbr}戦ってくれ」`],
   ]);
   props.view.dom.leftMessageWindow.darken();
 };

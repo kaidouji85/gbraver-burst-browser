@@ -1,3 +1,4 @@
+import { wbr } from "../../../../dom/wbr";
 import { PilotSkillShout } from "./pilot-skill-shout";
 
 /**
@@ -6,7 +7,7 @@ import { PilotSkillShout } from "./pilot-skill-shout";
  */
 export const raitoAttackShout = (): PilotSkillShout => ({
   face: "Raito",
-  message: `ここは様子見や`,
+  message: `ここは${wbr}様子見や`,
 });
 
 /**
