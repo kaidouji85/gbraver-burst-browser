@@ -12,5 +12,9 @@ export const tsubasaVictoryDeclaration = (
   props: Readonly<CustomBattleEventProps>,
 ) =>
   onStart(() => {
-    enemyPilotOnlyShout(props, "Tsubasa", `この瞬間${wbr} 私の${wbr}勝利が${wbr}確定した`);
+    enemyPilotOnlyShout(
+      props,
+      "Tsubasa",
+      `この瞬間${wbr} 私の${wbr}勝利が${wbr}確定した`,
+    );
   });

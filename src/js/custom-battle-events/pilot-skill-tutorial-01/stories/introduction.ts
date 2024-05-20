@@ -43,9 +43,15 @@ export async function introduction(
   activeLeftMessageWindowWithFace(props, "Tsubasa");
   await scrollLeftMessages(props, [
     ["ツバサ", `「気合い${wbr}十分だな${wbr} シンヤ`],
-    [`それでは${wbr}早速だが${wbr} パイロットスキルに${wbr}ついて${wbr}レクチャーする`],
-    [`ロボと${wbr}パイロットは${wbr}自由に${wbr}組み合わせる${wbr}ことが${wbr}できるが`],
-    [`この相性で${wbr}勝負が${wbr}決まると${wbr}言っても${wbr}過言では${wbr}ない`],
+    [
+      `それでは${wbr}早速だが${wbr} パイロットスキルに${wbr}ついて${wbr}レクチャーする`,
+    ],
+    [
+      `ロボと${wbr}パイロットは${wbr}自由に${wbr}組み合わせる${wbr}ことが${wbr}できるが`,
+    ],
+    [
+      `この相性で${wbr}勝負が${wbr}決まると${wbr}言っても${wbr}過言では${wbr}ない`,
+    ],
     [`……と言われても${wbr}実感が${wbr}湧かないと${wbr}思うので`],
     [`まずは${wbr}試合を${wbr}進めて${wbr}みよう」`],
   ]);

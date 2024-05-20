@@ -12,5 +12,9 @@ export const shinyaFirstAttackShout = (
   props: Readonly<CustomBattleEventProps>,
 ) =>
   onStart(() => {
-    playerPilotOnlyShout(props, "Shinya", `そんな${wbr} 0防御だと${wbr}思ったのに！？`);
+    playerPilotOnlyShout(
+      props,
+      "Shinya",
+      `そんな${wbr} 0防御だと${wbr}思ったのに！？`,
+    );
   });

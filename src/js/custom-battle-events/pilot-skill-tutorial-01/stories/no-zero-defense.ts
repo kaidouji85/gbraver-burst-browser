@@ -13,6 +13,9 @@ export async function noZeroDefense(
 ): Promise<void> {
   activeRightMessageWindowWithFace(props, "Shinya");
   await scrollRightMessages(props, [
-    ["シンヤ", `「0防御は${wbr}即死${wbr} 瞬殺${wbr}される${wbr}ところ${wbr}だったッス」`],
+    [
+      "シンヤ",
+      `「0防御は${wbr}即死${wbr} 瞬殺${wbr}される${wbr}ところ${wbr}だったッス」`,
+    ],
   ]);
 }
