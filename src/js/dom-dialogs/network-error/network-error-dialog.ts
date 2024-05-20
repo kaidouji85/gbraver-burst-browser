@@ -20,24 +20,11 @@ type DataIDs = {
   postNetworkErrorButton: string;
 };
 
-/**
- * 通信エラー後処理情報に対応した、ボタンの文言を取得する
- *
- * @param postNetworkError 通信エラー後処理情報
- * @returns ボタン文言
- */
-function postNetowrkErrorLabel(postNetworkError: PostNetworkError) {
-  switch (postNetworkError.type) {
-    case "Close":
-      return "閉じる";
-
-    case "GotoTitle":
-      return "タイトルへ";
-
-    default:
-      return "";
-  }
-}
+/** 通信エラー後処理ボタンの文言 */
+const postNetworkErrorLabels = {
+  Close: "閉じる",
+  GotoTitle: "タイトルへ",
+};
 
 /**
  * ルート要素のinnerHTML
@@ -120,7 +107,7 @@ export class NetworkErrorDialog implements DOMDialog {
     };
     this.#root = document.createElement("div");
     this.#root.className = ROOT_CLASS_NAME;
-    const label = postNetowrkErrorLabel(this.#postNetworkError);
+    const label = postNetworkErrorLabels[postNetworkError.type] ?? "";
     this.#root.innerHTML = rootInnerHTML(dataIDs, label);
     const elements = extractElements(this.#root, dataIDs);
     this.#postNetworkErrorButton = elements.postNetworkErrorButton;
