@@ -16,7 +16,9 @@ export async function selfInitiatedBurst(
     ["ツバサ", "「素晴らしいぞ<wbr>シンヤ さっそくバーストを<wbr>試したのか"],
     ["バーストは<wbr>一試合に<wbr>一回だけ<wbr>使える大技で"],
     ["ターン消費<wbr>なしで<wbr>バッテリーを<wbr>大幅回復<wbr>できるんだ"],
-    ["さらに<wbr>ロボ毎に<wbr>固有の追加効果も<wbr>あるが それは追々解説<wbr>しよう」"],
+    [
+      "さらに<wbr>ロボ毎に<wbr>固有の追加効果も<wbr>あるが それは追々解説<wbr>しよう」",
+    ],
   ]);
   invisibleAllMessageWindows(props);
 }

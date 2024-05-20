@@ -22,9 +22,7 @@ import { yoroshikuOnegaiShimasu } from "../../yoroshiku-onegai-shimasu";
  */
 export async function introduction(props: CustomBattleEventProps) {
   activeLeftMessageWindowWithFace(props, "Tsubasa");
-  await scrollLeftMessages(props, [
-    ["ツバサ", "「これより操縦訓練を開始する"],
-  ]);
+  await scrollLeftMessages(props, [["ツバサ", "「これより操縦訓練を開始する"]]);
   props.view.dom.leftMessageWindow.messages(["姿勢を正して"]);
   await synchronizedUpright(props).play();
   props.view.dom.leftMessageWindow.nextMessageIconVisible(true);

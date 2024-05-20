@@ -25,7 +25,9 @@ export const batteryRuleDescription = async (props: CustomBattleEventProps) => {
   props.view.dom.leftMessageWindow.lighten();
   await scrollLeftMessages(props, [
     ["ツバサ", "「バッテリーの攻防配分<wbr> これが基本かつ奥義だ"],
-    ["では 今度は<wbr>私が攻撃を仕掛けるので<wbr> 同じ要領で<wbr>回避してくれ」"],
+    [
+      "では 今度は<wbr>私が攻撃を仕掛けるので<wbr> 同じ要領で<wbr>回避してくれ」",
+    ],
   ]);
   props.view.dom.leftMessageWindow.darken();
 };

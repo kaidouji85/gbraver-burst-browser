@@ -13,10 +13,7 @@ export async function selfInitiatedPilotSkill(
 ): Promise<void> {
   activeLeftMessageWindowWithFace(props, "Tsubasa");
   await scrollLeftMessages(props, [
-    [
-      "ツバサ",
-      "「もうパイロットスキルを<wbr>発動できるとは<wbr> 将来有望だな",
-    ],
+    ["ツバサ", "「もうパイロットスキルを<wbr>発動できるとは<wbr> 将来有望だな"],
     [
       "パイロットスキルは<wbr>一試合に<wbr>一回だけ<wbr>パイロット<wbr>固有のスキルを<wbr>発動できるんだ",
     ],
