@@ -13,20 +13,23 @@ export function onEnemyBatteryPlusPush(
   props: BattleSimulatorProps,
   action: PushDOM,
 ) {
-  const { enemy, enemyBattery, enemyElements, se, changeValue } = props;
+  const { exclusive, enemy, enemyBattery, enemyElements, se, changeValue } =
+    props;
   const { event } = action;
 
   event.preventDefault();
   event.stopPropagation();
 
-  const nextEnemyBattery = enemyBattery + 1;
-  if (enemy.armdozer.battery < nextEnemyBattery) {
-    return;
-  }
+  exclusive.execute(async () => {
+    const nextEnemyBattery = enemyBattery + 1;
+    if (enemy.armdozer.battery < nextEnemyBattery) {
+      return;
+    }
 
-  se.play(changeValue);
-  pop(enemyElements.batteryPlus);
-  props.enemyBattery = nextEnemyBattery;
-  updateBattery(enemyElements, nextEnemyBattery);
-  updateBattleResult(props);
+    se.play(changeValue);
+    pop(enemyElements.batteryPlus);
+    props.enemyBattery = nextEnemyBattery;
+    updateBattery(enemyElements, nextEnemyBattery);
+    updateBattleResult(props);
+  });
 }

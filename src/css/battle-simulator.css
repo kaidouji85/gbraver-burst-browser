@@ -90,7 +90,7 @@
 .battle-simulator__enemy-damage {
   grid-area: hp-value;
   position: absolute;
-  top: calc(var(--responsive-font-size) * -2);
+  top: calc(var(--responsive-font-size) * -2.4);
   font-size: calc(var(--responsive-font-size) * 2);
   justify-self: end;
   white-space: nowrap;
