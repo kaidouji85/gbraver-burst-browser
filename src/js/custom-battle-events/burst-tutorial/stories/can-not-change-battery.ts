@@ -1,3 +1,4 @@
+import { wbr } from "../../../dom/wbr";
 import type { CustomBattleEventProps } from "../../../td-scenes/battle/custom-battle-event";
 import { activeRightMessageWindowWithFace } from "../../active-message-window";
 import {
@@ -14,14 +15,20 @@ import { scrollRightMessages } from "../../scroll-messages";
 export const canNotChangeBattery = async (props: CustomBattleEventProps) => {
   activeRightMessageWindowWithFace(props, "Shinya");
   await scrollRightMessages(props, [
-    ["シンヤ", "「でもツバサ先輩 俺のバッテリーは5もないッスよ」"],
+    [
+      "シンヤ",
+      `「でも${wbr}ツバサ先輩${wbr} 俺の${wbr}バッテリーは${wbr}5も${wbr}ないッスよ」`,
+    ],
   ]);
   await refreshConversation(props, 100);
   activeRightMessageWindowWithFace(props, "Tsubasa");
   await scrollRightMessages(props, [
-    ["ツバサ", "「ならばバースト発動だ ……と言いたいところだが発動済か"],
-    ["こうなればパイロットスキル ……も使い切ったか"],
-    ["すまんシンヤ これ以上打つ手なしだ」"],
+    [
+      "ツバサ",
+      `「ならば${wbr}バースト${wbr}発動だ ……と${wbr}言いたい${wbr}ところだが${wbr}発動済か`,
+    ],
+    [`こうなれば${wbr}パイロットスキル${wbr} ……も${wbr}使い${wbr}切ったか`],
+    [`すまん${wbr}シンヤ${wbr} これ以上${wbr}打つ手${wbr}なしだ」`],
   ]);
   invisibleAllMessageWindows(props);
 };

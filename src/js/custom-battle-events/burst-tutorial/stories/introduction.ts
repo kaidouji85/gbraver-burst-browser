@@ -1,4 +1,5 @@
 import { delay } from "../../../animation/delay";
+import { wbr } from "../../../dom/wbr";
 import type { CustomBattleEventProps } from "../../../td-scenes/battle/custom-battle-event";
 import {
   activeLeftMessageWindowWithFace,
@@ -26,17 +27,22 @@ import { yoroshikuOnegaiShimasu } from "../../yoroshiku-onegai-shimasu";
 export const introduction = async (props: CustomBattleEventProps) => {
   activeLeftMessageWindowWithFace(props, "Raito");
   await scrollLeftMessages(props, [
-    ["ライト", "「さすがは大田高校 一瞬で勝負がついてしもたな"],
-    ["どや まだ道路の占有時間も残っとるし ワイともう一戦やりまへんか」"],
+    [
+      "ライト",
+      `「さすがは${wbr}大田高校${wbr} 一瞬で${wbr}勝負が${wbr}ついて${wbr}しもたな`,
+    ],
+    [
+      `どや${wbr} まだ道路の${wbr}占有時間も${wbr}残っとるし${wbr} ワイと${wbr}もう一戦${wbr}やりまへんか」`,
+    ],
   ]);
   props.view.dom.leftMessageWindow.darken();
   activeRightMessageWindowWithFace(props, "Tsubasa");
-  await scrollRightMessages(props, [["ツバサ", "「少し待ってくれ」"]]);
+  await scrollRightMessages(props, [["ツバサ", `「少し${wbr}待ってくれ」`]]);
   await refreshConversation(props);
   activeRightMessageWindowWithFace(props, "Tsubasa");
   await scrollRightMessages(props, [
-    ["ツバサ", "「監督からもGoサインが出た"],
-    ["シンヤ 悪いがもう一戦だけ頑張ってくれ」"],
+    ["ツバサ", `「監督からも${wbr}Goサインが${wbr}出た`],
+    [`シンヤ${wbr} 悪いが${wbr}もう一戦だけ${wbr}頑張って${wbr}くれ」`],
   ]);
   await refreshConversation(props, 100);
   activeRightMessageWindowWithFace(props, "Shinya");

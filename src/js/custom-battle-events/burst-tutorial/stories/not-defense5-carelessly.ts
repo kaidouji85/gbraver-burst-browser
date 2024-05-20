@@ -1,3 +1,4 @@
+import { wbr } from "../../../dom/wbr";
 import type { CustomBattleEventProps } from "../../../td-scenes/battle/custom-battle-event";
 import { activeRightMessageWindowWithFace } from "../../active-message-window";
 import { invisibleAllMessageWindows } from "../../invisible-all-message-windows";
@@ -11,7 +12,7 @@ import { scrollRightMessages } from "../../scroll-messages";
 export const notDefense5Carelessly = async (props: CustomBattleEventProps) => {
   activeRightMessageWindowWithFace(props, "Shinya");
   await scrollRightMessages(props, [
-    ["シンヤ", "「すみません うっかりしてたッス」"],
+    ["シンヤ", `「すみません${wbr} うっかり${wbr}してたッス」`],
   ]);
   invisibleAllMessageWindows(props);
 };

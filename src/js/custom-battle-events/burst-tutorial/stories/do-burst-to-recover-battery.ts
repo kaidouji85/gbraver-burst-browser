@@ -1,3 +1,4 @@
+import { wbr } from "../../../dom/wbr";
 import type { CustomBattleEventProps } from "../../../td-scenes/battle/custom-battle-event";
 import { activeRightMessageWindowWithFace } from "../../active-message-window";
 import {
@@ -16,13 +17,18 @@ export const doBurstToRecoverBattery = async (
 ) => {
   activeRightMessageWindowWithFace(props, "Shinya");
   await scrollRightMessages(props, [
-    ["シンヤ", "「でもツバサ先輩 俺のバッテリーは5もないッスよ」"],
+    [
+      "シンヤ",
+      `「でも${wbr}ツバサ先輩${wbr} 俺の${wbr}バッテリーは${wbr}5も${wbr}ないッスよ」`,
+    ],
   ]);
   await refreshConversation(props, 100);
   activeRightMessageWindowWithFace(props, "Tsubasa");
   await scrollRightMessages(props, [
-    ["ツバサ", "「ならばバーストを発動させよう"],
-    ["バーストは1試合に1回しか使えないが 一気にバッテリーを回復できるんだ」"],
+    ["ツバサ", `「ならば${wbr}バーストを${wbr}発動${wbr}させよう`],
+    [
+      `バーストは${wbr}1試合に${wbr}1回しか${wbr}使え${wbr}ないが${wbr} 一気に${wbr}バッテリーを${wbr}回復${wbr}できるんだ」`,
+    ],
   ]);
   invisibleAllMessageWindows(props);
 };
