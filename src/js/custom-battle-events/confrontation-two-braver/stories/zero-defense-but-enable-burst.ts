@@ -1,3 +1,4 @@
+import { wbr } from "../../../dom/wbr";
 import { CustomBattleEventProps } from "../../../td-scenes/battle/custom-battle-event";
 import { activeLeftMessageWindowWithFace } from "../../active-message-window";
 import { invisibleAllMessageWindows } from "../../invisible-all-message-windows";
@@ -13,8 +14,10 @@ export async function zeroDefenseButEnableBurst(
 ): Promise<void> {
   activeLeftMessageWindowWithFace(props, "Yuuya");
   await scrollLeftMessages(props, [
-    ["ユウヤ", "「0防御だと"],
-    ["何故バーストを使わない 俺をバカにしているのか シンヤ」"],
+    ["ユウヤ", `「0防御${wbr}だと`],
+    [
+      `何故${wbr}バーストを${wbr}使わない${wbr} 俺を${wbr}バカに${wbr}しているのか${wbr} シンヤ」`,
+    ],
   ]);
   invisibleAllMessageWindows(props);
 }

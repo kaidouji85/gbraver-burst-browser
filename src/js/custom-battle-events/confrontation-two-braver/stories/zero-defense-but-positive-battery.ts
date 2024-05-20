@@ -1,3 +1,4 @@
+import { wbr } from "../../../dom/wbr";
 import { CustomBattleEventProps } from "../../../td-scenes/battle/custom-battle-event";
 import { activeLeftMessageWindowWithFace } from "../../active-message-window";
 import { invisibleAllMessageWindows } from "../../invisible-all-message-windows";
@@ -13,8 +14,8 @@ export async function zeroDefenseButPositiveBattery(
 ): Promise<void> {
   activeLeftMessageWindowWithFace(props, "Yuuya");
   await scrollLeftMessages(props, [
-    ["ユウヤ", "「バッテリーが残っているのに0防御しただと"],
-    ["俺を愚弄する気か シンヤ」"],
+    ["ユウヤ", `「バッテリーが${wbr}残っているのに${wbr}0防御${wbr}しただと`],
+    [`俺を${wbr}愚弄${wbr}する気か${wbr} シンヤ」`],
   ]);
   invisibleAllMessageWindows(props);
 }
