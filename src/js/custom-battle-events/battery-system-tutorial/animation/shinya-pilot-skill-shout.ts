@@ -11,5 +11,9 @@ export const shinyaPilotSkillShout = (
   props: Readonly<CustomBattleEventProps>,
 ) =>
   onStart(() => {
-    playerPilotOnlyShout(props, "Shinya", "なぜか無性にやる気が出てきたッス");
+    playerPilotOnlyShout(
+      props,
+      "Shinya",
+      "なぜか<wbr>無性に<wbr>やる気が<wbr>出てきたッス",
+    );
   });

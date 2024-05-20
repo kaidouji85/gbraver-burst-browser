@@ -12,6 +12,6 @@ export const shinyaBurstShout = (props: Readonly<CustomBattleEventProps>) =>
     playerPilotOnlyShout(
       props,
       "Shinya",
-      "シンブレイバーのパワーが急上昇してるッス",
+      "シンブレイバーの<wbr>パワーが<wbr>急上昇<wbr>してるッス",
     );
   });

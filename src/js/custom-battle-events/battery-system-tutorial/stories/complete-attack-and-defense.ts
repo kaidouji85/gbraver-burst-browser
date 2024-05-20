@@ -12,10 +12,10 @@ export const completeAttackAndDefense = async (
 ) => {
   activeLeftMessageWindowWithFace(props, "Tsubasa");
   await scrollLeftMessages(props, [
-    ["ツバサ", "「これで攻撃 防御を一通り体験したな"],
-    ["以降はどちらかのHPが0になるまで これを繰り返すんだ"],
-    ["以上で基本ルールの説明は終了だ"],
-    ["ここから先は好きなように戦ってくれ」"],
+    ["ツバサ", "「これで<wbr>攻撃・防御<wbr>を一通り体験<wbr>したな"],
+    ["以降は<wbr>どちらかのHPが0<wbr>になるまで これを<wbr>繰り返すんだ"],
+    ["以上で<wbr>基本ルールの<wbr>説明は<wbr>終了だ"],
+    ["ここから先は<wbr>好きなように<wbr>戦ってくれ」"],
   ]);
   props.view.dom.leftMessageWindow.darken();
 };

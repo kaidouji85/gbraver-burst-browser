@@ -14,13 +14,13 @@ import { scrollLeftMessages, scrollRightMessages } from "../../scroll-messages";
 export async function victory(props: CustomBattleEventProps) {
   activeRightMessageWindowWithFace(props, "Shinya");
   await scrollRightMessages(props, [
-    ["シンヤ", "「俺の勝ちッスよ ツバサ先輩」"],
+    ["シンヤ", "「俺の勝ちッスよ<wbr> ツバサ先輩」"],
   ]);
   props.view.dom.rightMessageWindow.darken();
   activeLeftMessageWindowWithFace(props, "Tsubasa");
   await scrollLeftMessages(props, [
-    ["ツバサ", "「見事だ シンヤ"],
-    ["この調子で新人戦も頑張ってくれ」"],
+    ["ツバサ", "「見事だ<wbr> シンヤ"],
+    ["この調子で<wbr>新人戦も<wbr>頑張ってくれ」"],
   ]);
   props.view.dom.leftMessageWindow.darken();
 }
