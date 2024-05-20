@@ -36,7 +36,7 @@ export async function enemyAttackMiss(props: CustomBattleEventProps) {
 export async function enemyAttackGuarded(props: CustomBattleEventProps) {
   activeRightMessageWindowWithFace(props, "Shinya");
   await scrollRightMessages(props, [
-    ["シンヤ", "「クッ 避けられなかった"],
+    ["シンヤ", "「クッ 避けられ<wbr>なかった"],
     ["けど思った程の<wbr>ダメージじゃないッスね」"],
   ]);
   props.view.dom.rightMessageWindow.darken();
@@ -61,7 +61,7 @@ export async function enemyAttackHit(props: CustomBattleEventProps) {
   activeRightMessageWindowWithFace(props, "Shinya");
   await scrollRightMessages(props, [
     ["シンヤ", "「すごいダメージ ッス"],
-    ["ツバサ先輩<wbr> 少しは加減<wbr>してくださいッスよ"],
+    ["ツバサ先輩<wbr> 少しは加減<wbr>してください<wbr>ッスよ"],
   ]);
   props.view.dom.rightMessageWindow.darken();
   activeLeftMessageWindowWithFace(props, "Tsubasa");

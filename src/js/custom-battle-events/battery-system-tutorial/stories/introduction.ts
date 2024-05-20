@@ -22,7 +22,9 @@ import { yoroshikuOnegaiShimasu } from "../../yoroshiku-onegai-shimasu";
  */
 export async function introduction(props: CustomBattleEventProps) {
   activeLeftMessageWindowWithFace(props, "Tsubasa");
-  await scrollLeftMessages(props, [["ツバサ", "「これより操縦訓練を開始する"]]);
+  await scrollLeftMessages(props, [
+    ["ツバサ", "「これより操縦訓練を<wbr>開始する"],
+  ]);
   props.view.dom.leftMessageWindow.messages(["姿勢を正して"]);
   await synchronizedUpright(props).play();
   props.view.dom.leftMessageWindow.nextMessageIconVisible(true);
@@ -40,16 +42,16 @@ export async function introduction(props: CustomBattleEventProps) {
   activeLeftMessageWindowWithFace(props, "Tsubasa");
   await scrollLeftMessages(props, [
     ["ツバサ", "「いい返事だな<wbr> では早速はじめよう"],
-    ["試合の基本は<wbr>攻撃側<wbr> 防御側でのバッテリー<wbr>の出し合いだ"],
-    ["大きいバッテリー<wbr>を出した側の<wbr>行動が成功するのだが"],
-    ["これは実際にやってみた方が早いな"],
-    ["シンヤ 私が防御に回るから<wbr> 好きなように攻撃してくれ」"],
+    ["試合の基本は<wbr>攻撃側・防御側での<wbr>バッテリーの<wbr>出し合いだ"],
+    ["大きいバッテリー<wbr>を出した側の<wbr>行動が成功する<wbr>のだが"],
+    ["これは実際に<wbr>やってみた方が<wbr>早いな"],
+    ["シンヤ 私が防御に<wbr>回るから<wbr> 好きなように<wbr>攻撃してくれ」"],
   ]);
   props.view.dom.leftMessageWindow.darken();
   activeRightMessageWindowWithFace(props, "Shinya");
   await scrollRightMessages(props, [
     ["シンヤ", "「了解ッス"],
-    ["それじゃ遠慮なく行くッスよ<wbr> ツバサ先輩」"],
+    ["それじゃ遠慮なく<wbr>行くッスよ<wbr> ツバサ先輩」"],
   ]);
   props.view.dom.rightMessageWindow.darken();
 }

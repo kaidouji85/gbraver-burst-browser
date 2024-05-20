@@ -14,7 +14,7 @@ export const completeAttackAndDefense = async (
   await scrollLeftMessages(props, [
     ["ツバサ", "「これで<wbr>攻撃・防御<wbr>を一通り体験<wbr>したな"],
     ["以降は<wbr>どちらかのHPが0<wbr>になるまで これを<wbr>繰り返すんだ"],
-    ["以上で<wbr>基本ルールの説明<wbr>は終了だ"],
+    ["以上で<wbr>基本ルールの<wbr>説明は<wbr>終了だ"],
     ["ここから先は<wbr>好きなように<wbr>戦ってくれ」"],
   ]);
   props.view.dom.leftMessageWindow.darken();
