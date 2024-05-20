@@ -1,5 +1,6 @@
 import { PlayerState } from "gbraver-burst-core";
 
+import { wbr } from "../../../../dom/wbr";
 import { PilotSkillShout } from "./pilot-skill-shout";
 
 /**
@@ -9,7 +10,7 @@ import { PilotSkillShout } from "./pilot-skill-shout";
  */
 export const yuuyaAttackShout = (player: PlayerState): PilotSkillShout => ({
   face: "Yuuya",
-  message: `限界突破だ ${player.armdozer.name}`,
+  message: `限界突破だ${wbr} ${player.armdozer.name}`,
 });
 
 /**
@@ -18,5 +19,5 @@ export const yuuyaAttackShout = (player: PlayerState): PilotSkillShout => ({
  */
 export const yuuyaDefenseShout = (player: PlayerState): PilotSkillShout => ({
   face: "Yuuya",
-  message: `${player.armdozer.name} お前の力はそんなものか`,
+  message: `${player.armdozer.name}${wbr} お前の力は<wbr>そんなものか`,
 });

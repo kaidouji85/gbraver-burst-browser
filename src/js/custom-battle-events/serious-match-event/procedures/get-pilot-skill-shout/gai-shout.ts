@@ -1,5 +1,6 @@
 import { PlayerState } from "gbraver-burst-core";
 
+import { wbr } from "../../../../dom/wbr";
 import { PilotSkillShout } from "./pilot-skill-shout";
 
 /**
@@ -9,7 +10,7 @@ import { PilotSkillShout } from "./pilot-skill-shout";
  */
 export const gaiAttackShout = (player: PlayerState): PilotSkillShout => ({
   face: "Gai",
-  message: `${player.armdozer.name} パワー全開`,
+  message: `${player.armdozer.name}${wbr} パワー全開`,
 });
 
 /**
@@ -18,5 +19,5 @@ export const gaiAttackShout = (player: PlayerState): PilotSkillShout => ({
  */
 export const gaiDefenseShout = (): PilotSkillShout => ({
   face: "Gai",
-  message: `次のターン お前の命はないぞ`,
+  message: `次のターン${wbr} お前の命は${wbr}ないぞ`,
 });
