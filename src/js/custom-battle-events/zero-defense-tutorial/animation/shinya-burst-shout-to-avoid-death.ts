@@ -1,4 +1,5 @@
 import { onStart } from "../../../animation/on-start";
+import { wbr } from "../../../dom/wbr";
 import { CustomBattleEventProps } from "../../../td-scenes/battle/custom-battle-event";
 import { playerPilotOnlyShout } from "../../pilot-shout";
 
@@ -11,5 +12,9 @@ export const shinyaBurstShoutToAvoidDeath = (
   props: Readonly<CustomBattleEventProps>,
 ) =>
   onStart(() => {
-    playerPilotOnlyShout(props, "Shinya", "シンブレイバー バーストON！！");
+    playerPilotOnlyShout(
+      props,
+      "Shinya",
+      `シンブレイバー${wbr} バーストON！！`,
+    );
   });
