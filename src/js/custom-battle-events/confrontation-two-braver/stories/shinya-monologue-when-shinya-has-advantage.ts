@@ -1,3 +1,4 @@
+import { wbr } from "../../../dom/wbr";
 import { CustomBattleEventProps } from "../../../td-scenes/battle/custom-battle-event";
 import { activeRightMessageWindowWithFace } from "../../active-message-window";
 import { invisibleAllMessageWindows } from "../../invisible-all-message-windows";
@@ -13,8 +14,8 @@ export async function shinyaMonologueWhenShinyaHasAdvantage(
 ): Promise<void> {
   activeRightMessageWindowWithFace(props, "Shinya");
   await scrollRightMessages(props, [
-    ["シンヤ", "「Gブレイバー相手に リードをとった"],
-    ["この勝負 いただきッス」"],
+    ["シンヤ", `「Gブレイバー相手に${wbr}リードを${wbr}とった`],
+    [`この勝負${wbr} いただきッス」`],
   ]);
   invisibleAllMessageWindows(props);
 }
