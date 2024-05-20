@@ -1,3 +1,4 @@
+import { wbr } from "../../../dom/wbr";
 import { CustomBattleEventProps } from "../../../td-scenes/battle/custom-battle-event";
 import { activeLeftMessageWindowWithFace } from "../../active-message-window";
 import { invisibleAllMessageWindows } from "../../invisible-all-message-windows";
@@ -13,10 +14,14 @@ export async function selfInitiatedBurst(
 ): Promise<void> {
   activeLeftMessageWindowWithFace(props, "Tsubasa");
   await scrollLeftMessages(props, [
-    ["ツバサ", "「今 君が発動したのはバーストといい"],
-    ["一試合に一回だけバッテリー回復をしつつ ロボ固有の追加効果を得られるんだ"],
-    ["シンブレイバーに追加効果はないが バッテリーを全回復することができる"],
-    ["使いこなせば どんな相手とも渡り合えるぞ」"],
+    ["ツバサ", `「いま${wbr}君が${wbr}発動したのは${wbr}バーストと${wbr}いい`],
+    [
+      `一試合に${wbr}一回だけ${wbr}バッテリー回復を${wbr}しつつ${wbr} ロボ固有の${wbr}追加効果を${wbr}得られるんだ`,
+    ],
+    [
+      `シンブレイバーに${wbr}追加効果は${wbr}ないが${wbr} バッテリーを${wbr}全回復${wbr}することが${wbr}できる`,
+    ],
+    [`使いこなせば${wbr} どんな${wbr}相手とも${wbr}渡り${wbr}合えるぞ」`],
   ]);
   invisibleAllMessageWindows(props);
 }
