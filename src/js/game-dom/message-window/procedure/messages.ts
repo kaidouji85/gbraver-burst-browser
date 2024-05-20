@@ -14,7 +14,7 @@ export function messages(
   const createParagraph = (message: string) => {
     const div = document.createElement("div");
     div.className = `${ROOT_CLASS}__paragraph`;
-    div.innerText = message;
+    div.innerHTML = message;
     return div;
   };
 
