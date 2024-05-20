@@ -10,6 +10,7 @@
     --middle-area-size: calc(var(--responsive-font-size) * 2);
     --turn-indicator-size: calc(var(--responsive-font-size) * 6);
     --battery-icon-size: calc(var(--responsive-font-size) * 0.9);
+    --closer-z-index: 3;
     --player-area-z-index: 1;
     --controller-z-index: 2;
     --result-area-z-index: 2;
@@ -60,6 +61,7 @@
 }
 
 .battle-simulator__closer {
+  z-index: var(--closer-z-index);
   width: var(--closer-width);
   height: var(--closer-height);
   position: absolute;

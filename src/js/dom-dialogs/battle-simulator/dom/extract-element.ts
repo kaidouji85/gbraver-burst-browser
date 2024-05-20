@@ -3,8 +3,17 @@
  * @param root 抽出対象となるルート要素
  * @returns 抽出結果
  */
-export const extractCloser = (root: HTMLElement): HTMLElement =>
-  root.querySelector(`[data-id="closer"]`) ?? document.createElement("div");
+export const extractCloser = (root: HTMLElement): HTMLImageElement =>
+  root.querySelector(`[data-id="closer"]`) ?? document.createElement("img");
+
+/**
+ * 背景を抽出する
+ * @param root 抽出対象となるルート要素
+ * @returns 抽出結果
+ */
+export const extractBackGround = (root: HTMLElement): HTMLElement =>
+  root.querySelector(`[data-id="back-ground"]`) ??
+  document.createElement("div");
 
 /**
  * プレイヤーの戦闘結果名を抽出する

@@ -1,17 +1,19 @@
 import { PlayerState } from "gbraver-burst-core";
 import { Subject } from "rxjs";
 
+import { Exclusive } from "../../exclusive/exclusive";
 import { SoundResource } from "../../resource/sound/resource";
 import { SEPlayer } from "../../se/se-player";
 import { PlayerElements } from "./dom/player-elements";
-import {Exclusive} from "../../exclusive/exclusive";
 
 /** 戦闘シミュレータのプロパティ */
 export type BattleSimulatorProps = {
   /** ルートのHTML要素 */
   root: HTMLElement;
+  /** 背景のHTML要素 */
+  backGround: HTMLElement;
   /** 閉じるアイコンのHTML要素 */
-  closer: HTMLElement;
+  closer: HTMLImageElement;
   /** プレイヤーのHTML要素 */
   playerElements: PlayerElements;
   /** 敵のHTML要素 */
