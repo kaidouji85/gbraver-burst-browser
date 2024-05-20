@@ -1,3 +1,4 @@
+import { wbr } from "../../../dom/wbr";
 import type { CustomBattleEventProps } from "../../../td-scenes/battle/custom-battle-event";
 import { activeRightMessageWindowWithFace } from "../../active-message-window";
 import {
@@ -14,8 +15,8 @@ import { scrollRightMessages } from "../../scroll-messages";
 export const noZeroBattery = async (props: CustomBattleEventProps) => {
   activeRightMessageWindowWithFace(props, "Tsubasa");
   await scrollRightMessages(props, [
-    ["ツバサ", "「待てシンヤ 0防御はまずい"],
-    ["HPが満タンでも 即死するぞ」"],
+    ["ツバサ", `「待て${wbr}シンヤ${wbr} 0防御は${wbr}まずい`],
+    [`HPが${wbr}満タンでも${wbr} 即死${wbr}するぞ」`],
   ]);
 };
 
@@ -32,7 +33,7 @@ export const cancelZeroBatteryDefense = async (
   activeRightMessageWindowWithFace(props, "Shinya");
   await scrollRightMessages(props, [
     ["シンヤ", "「了解ッス"],
-    ["危うく瞬殺されるところだったッス」"],
+    [`危うく${wbr}瞬殺される${wbr}ところ${wbr}だったッス」`],
   ]);
   invisibleAllMessageWindows(props);
 };
@@ -49,14 +50,17 @@ export const doBurstBecauseZeroBattery = async (
   await refreshConversation(props, 100);
   activeRightMessageWindowWithFace(props, "Shinya");
   await scrollRightMessages(props, [
-    ["シンヤ", "「でもツバサ先輩 俺のバッテリーはもう0ッスよ」"],
+    [
+      "シンヤ",
+      `「でも${wbr}ツバサ先輩${wbr} 俺の${wbr}バッテリーは${wbr}もう${wbr}0ッスよ」`,
+    ],
   ]);
   await refreshConversation(props, 100);
   activeRightMessageWindowWithFace(props, "Tsubasa");
   await scrollRightMessages(props, [
-    ["ツバサ", "「こういう時はバーストだ"],
-    ["バーストは1試合に1回しか使えないが"],
-    ["発動すればバッテリーを大幅に回復できるんだ」"],
+    ["ツバサ", `「こういう時は${wbr}バーストだ`],
+    [`バーストは${wbr}1試合に${wbr}1回しか${wbr}使えないが`],
+    [`発動すれば${wbr}バッテリーを${wbr}大幅に${wbr}回復${wbr}できるんだ」`],
   ]);
   await refreshConversation(props, 100);
 };
@@ -73,14 +77,20 @@ export const doPilotSkillBecauseZeroBattery = async (
   await refreshConversation(props, 100);
   activeRightMessageWindowWithFace(props, "Shinya");
   await scrollRightMessages(props, [
-    ["シンヤ", "「でもツバサ先輩 俺のバッテリーはもう0ッスよ」"],
+    [
+      "シンヤ",
+      `「でも${wbr}ツバサ先輩${wbr} 俺の${wbr}バッテリーは${wbr}もう${wbr}0ッスよ」`,
+    ],
   ]);
   await refreshConversation(props, 100);
   activeRightMessageWindowWithFace(props, "Tsubasa");
   await scrollRightMessages(props, [
-    ["ツバサ", "「こういう時はバーストで一気にバッテリーを回復させるんだ"],
-    ["……と言いたい所だが バーストは使用済みか"],
-    ["ならばパイロットスキルを発動するんだ」"],
+    [
+      "ツバサ",
+      `「こういう時は${wbr}バーストで${wbr}一気に${wbr}バッテリーを${wbr}回復${wbr}させるんだ`,
+    ],
+    [`……と言いたい${wbr}所だが${wbr} バーストは${wbr}使用済みか`],
+    [`ならば${wbr}パイロットスキルを${wbr}発動${wbr}するんだ」`],
   ]);
   await refreshConversation(props, 100);
   activeRightMessageWindowWithFace(props, "Shinya");
@@ -88,8 +98,11 @@ export const doPilotSkillBecauseZeroBattery = async (
   await refreshConversation(props, 100);
   activeRightMessageWindowWithFace(props, "Tsubasa");
   await scrollRightMessages(props, [
-    ["ツバサ", "「君のパイロットスキルでは バッテリーを少しだけ回復できる"],
-    ["それで急場を凌ぐんだ」"],
+    [
+      "ツバサ",
+      `「君の${wbr}パイロットスキルでは${wbr} バッテリーを${wbr}少しだけ${wbr}回復できる`,
+    ],
+    [`それで${wbr}急場を${wbr}凌ぐんだ」`],
   ]);
   await refreshConversation(props, 100);
 };
@@ -106,16 +119,22 @@ export const zeroBatteryDefenseBecauseNoBatteryRecover = async (
   await refreshConversation(props, 100);
   activeRightMessageWindowWithFace(props, "Shinya");
   await scrollRightMessages(props, [
-    ["シンヤ", "「でもツバサ先輩 俺のバッテリーはもう0ッスよ」"],
+    [
+      "シンヤ",
+      `「でも${wbr}ツバサ先輩${wbr} 俺の${wbr}バッテリーは${wbr}もう${wbr}0ッスよ」`,
+    ],
   ]);
   await refreshConversation(props, 100);
   activeRightMessageWindowWithFace(props, "Tsubasa");
   await scrollRightMessages(props, [
-    ["ツバサ", "「こういう時はバーストで一気にバッテリーを回復させるんだ"],
-    ["……と言いたい所だが、バーストは使用済みか"],
-    ["ならばパイロットスキル"],
-    ["……も発動済みか"],
-    ["すまない これ以上は打つ手がない」"],
+    [
+      "ツバサ",
+      `「こういう時は${wbr}バーストで${wbr}一気に${wbr}バッテリーを${wbr}回復${wbr}させるんだ`,
+    ],
+    [`……と言いたい${wbr}所だが${wbr} バーストは${wbr}使用済みか`],
+    [`ならば${wbr}パイロットスキル`],
+    [`……も${wbr}発動済みか`],
+    [`すまない${wbr} これ以上は${wbr}打つ手がない」`],
   ]);
   invisibleAllMessageWindows(props);
 };

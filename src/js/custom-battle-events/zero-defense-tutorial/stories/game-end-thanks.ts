@@ -1,3 +1,4 @@
+import { wbr } from "../../../dom/wbr";
 import type { CustomBattleEventProps } from "../../../td-scenes/battle/custom-battle-event";
 import {
   activeLeftMessageWindowWithFace,
@@ -17,17 +18,22 @@ import { scrollRightMessages } from "../../scroll-messages";
 export const gameEndThanks = async (props: CustomBattleEventProps) => {
   activeRightMessageWindowWithFace(props, "Tsubasa");
   await scrollRightMessages(props, [
-    ["ツバサ", "「これにて台東高校 大田高校の合同練習試合を終了する"],
-    ["一同 姿勢を正して 礼!!」"],
+    [
+      "ツバサ",
+      `「これにて${wbr}台東高校・${wbr}大田高校の${wbr}合同練習試合を${wbr}終了する`,
+    ],
+    [`一同${wbr} 姿勢を正して${wbr} 礼!!」`],
   ]);
   await refreshConversation(props, 100);
   activeLeftMessageWindowWithFace(props, "Gai");
   props.view.dom.leftMessageWindow.messages([
     "ガイ",
-    "「ありがとうございました」",
+    `「ありがとう${wbr}ございました」`,
   ]);
   props.view.dom.leftMessageWindow.scrollUp();
   activeRightMessageWindowWithFace(props, "Shinya");
-  await scrollRightMessages(props, [["シンヤ", "「ありがとうございました」"]]);
+  await scrollRightMessages(props, [
+    ["シンヤ", `「ありがとう${wbr}ございました」`],
+  ]);
   invisibleAllMessageWindows(props);
 };
