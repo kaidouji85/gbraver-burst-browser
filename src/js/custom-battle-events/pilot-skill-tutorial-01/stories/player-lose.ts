@@ -1,3 +1,4 @@
+import { wbr } from "../../../dom/wbr";
 import { CustomBattleEventProps } from "../../../td-scenes/battle/custom-battle-event";
 import {
   activeLeftMessageWindowWithFace,
@@ -16,13 +17,16 @@ export async function playerLose(
 ): Promise<void> {
   activeRightMessageWindowWithFace(props, "Shinya");
   await scrollRightMessages(props, [
-    ["シンヤ", "「あと少しで勝てそうだったのに」"],
+    ["シンヤ", `「あと少しで${wbr}勝てそう${wbr}だったのに」`],
   ]);
   props.view.dom.rightMessageWindow.darken();
   activeLeftMessageWindowWithFace(props, "Tsubasa");
   await scrollLeftMessages(props, [
-    ["ツバサ", "「残念だが君とシンブレイバーの組み合わせでは"],
-    ["絶対に私を倒すことができない」"],
+    [
+      "ツバサ",
+      `「残念だが${wbr}君と${wbr}シンブレイバーの${wbr}組み合わせ${wbr}では`,
+    ],
+    [`絶対に${wbr}私を${wbr}倒すことが${wbr}できない」`],
   ]);
   props.view.dom.leftMessageWindow.darken();
   activeRightMessageWindowWithFace(props, "Shinya");
@@ -30,36 +34,46 @@ export async function playerLose(
   props.view.dom.rightMessageWindow.darken();
   activeLeftMessageWindowWithFace(props, "Tsubasa");
   await scrollLeftMessages(props, [
-    ["ツバサ", "「君がすべてのバッテリーを防御に回したとしても"],
-    ["私の攻撃に耐えることはできない」"],
+    [
+      "ツバサ",
+      `「君が${wbr}すべての${wbr}バッテリーを${wbr}防御に${wbr}回したと${wbr}しても`,
+    ],
+    [`私の${wbr}攻撃に${wbr}耐える${wbr}ことは${wbr}できない」`],
   ]);
   props.view.dom.leftMessageWindow.darken();
   activeRightMessageWindowWithFace(props, "Shinya");
   await scrollRightMessages(props, [
-    ["シンヤ", "「なら 攻撃にバッテリーを集中させたらどうッスか」"],
+    [
+      "シンヤ",
+      `「なら${wbr} 攻撃に${wbr}バッテリーを${wbr}集中させたら${wbr}どうッスか」`,
+    ],
   ]);
   props.view.dom.rightMessageWindow.darken();
   activeLeftMessageWindowWithFace(props, "Tsubasa");
   await scrollLeftMessages(props, [
-    ["ツバサ", "「良い発想だが それも難しいな"],
-    ["君が後攻なので 私を一撃で倒せなければ負けが確定するが"],
-    ["シンブレイバーの5攻撃で ウィングドーザを即死させることはできないんだ」"],
+    ["ツバサ", `「良い発想だが${wbr} それも${wbr}難しいな`],
+    [
+      `君が${wbr}後攻${wbr}なので${wbr} 私を${wbr}一撃で${wbr}倒せなければ${wbr}負けが${wbr}確定するが`,
+    ],
+    [
+      `シンブレイバーの${wbr}5攻撃で${wbr} ウィングドーザを${wbr}即死${wbr}させることは${wbr}できないんだ」`,
+    ],
   ]);
   props.view.dom.leftMessageWindow.darken();
   activeRightMessageWindowWithFace(props, "Shinya");
   await scrollRightMessages(props, [
     ["シンヤ", "「そんな！！"],
-    ["ツバサ先輩 もう詰みッスか」"],
+    [`ツバサ先輩${wbr} もう${wbr}詰みッスか」`],
   ]);
   props.view.dom.rightMessageWindow.darken();
   activeLeftMessageWindowWithFace(props, "Tsubasa");
   await scrollLeftMessages(props, [
-    ["ツバサ", "「案ずるなシンヤ そのためのパイロットスキルだ」"],
+    ["ツバサ", `「案ずるな${wbr} そのための${wbr}パイロットスキルだ」`],
   ]);
   await refreshConversation(props);
   activeLeftMessageWindowWithFace(props, "Tsubasa");
   await scrollLeftMessages(props, [
-    ["ツバサ", "「ガイ君 そこに居るんだろう」"],
+    ["ツバサ", `「ガイ君${wbr} そこに${wbr}居るんだろう」`],
   ]);
   props.view.dom.leftMessageWindow.darken();
   activeRightMessageWindowWithFace(props, "Gai");
@@ -67,7 +81,10 @@ export async function playerLose(
   props.view.dom.rightMessageWindow.darken();
   activeLeftMessageWindowWithFace(props, "Tsubasa");
   await scrollLeftMessages(props, [
-    ["ツバサ", "「すまないが 我々の練習に協力してくれないか」"],
+    [
+      "ツバサ",
+      `「すまないが${wbr} 我々の${wbr}練習に${wbr}協力${wbr}してくれないか」`,
+    ],
   ]);
   props.view.dom.leftMessageWindow.darken();
 }

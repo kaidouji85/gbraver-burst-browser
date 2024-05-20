@@ -1,3 +1,4 @@
+import { wbr } from "../../../dom/wbr";
 import { CustomBattleEventProps } from "../../../td-scenes/battle/custom-battle-event";
 import { activeLeftMessageWindowWithFace } from "../../active-message-window";
 import { focusInPilotButton } from "../../focus";
@@ -14,7 +15,7 @@ export async function doPilotSkill(
 ): Promise<void> {
   activeLeftMessageWindowWithFace(props, "Tsubasa");
   await scrollLeftMessages(props, [
-    ["ツバサ", "「いまだガイ君 パイロットスキル発動だ」"],
+    ["ツバサ", `「いまだ${wbr}ガイ君${wbr} パイロットスキル${wbr}発動だ」`],
   ]);
   await focusInPilotButton(props, shouldPilotSkill);
 }
