@@ -1,4 +1,5 @@
 import { onStart } from "../../../animation/on-start";
+import { wbr } from "../../../dom/wbr";
 import { CustomBattleEventProps } from "../../../td-scenes/battle/custom-battle-event";
 import { enemyPilotOnlyShout } from "../../pilot-shout";
 
@@ -9,5 +10,9 @@ import { enemyPilotOnlyShout } from "../../pilot-shout";
  */
 export const tsubasaBurstShout = (props: Readonly<CustomBattleEventProps>) =>
   onStart(() => {
-    enemyPilotOnlyShout(props, "Tsubasa", "ウィングドーザ バーストON！！");
+    enemyPilotOnlyShout(
+      props,
+      "Tsubasa",
+      `ウィングドーザ${wbr} バーストON！！`,
+    );
   });

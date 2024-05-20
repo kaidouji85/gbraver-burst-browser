@@ -1,3 +1,4 @@
+import { wbr } from "../../../dom/wbr";
 import type { CustomBattleEventProps } from "../../../td-scenes/battle/custom-battle-event";
 import { activeRightMessageWindowWithFace } from "../../active-message-window";
 import {
@@ -14,25 +15,28 @@ import { scrollRightMessages } from "../../scroll-messages";
 export const zeroBatteryChance = async (props: CustomBattleEventProps) => {
   activeRightMessageWindowWithFace(props, "Tsubasa");
   await scrollRightMessages(props, [
-    ["ツバサ", "「ガイ君のバッテリーが0になった"],
-    ["シンヤ 今こそ攻撃のチャンスだ」"],
+    ["ツバサ", `「ガイ君の${wbr}バッテリーが${wbr}0になった`],
+    [`シンヤ${wbr} 今こそ${wbr}攻撃の${wbr}チャンスだ」`],
   ]);
   await refreshConversation(props, 100);
   activeRightMessageWindowWithFace(props, "Shinya");
   await scrollRightMessages(props, [
-    ["シンヤ", "「……どうして相手のバッテリーが0だとチャンスなんスか」"],
+    [
+      "シンヤ",
+      `「……どうして${wbr}相手の${wbr}バッテリーが${wbr}0だと${wbr}チャンス${wbr}なんスか」`,
+    ],
   ]);
   await refreshConversation(props, 100);
   activeRightMessageWindowWithFace(props, "Tsubasa");
   await scrollRightMessages(props, [
-    ["ツバサ", "「いい質問だな シンヤ"],
-    ["0防御すると HPが満タンでも即死するんだ」"],
+    ["ツバサ", `「いい質問だな${wbr} シンヤ`],
+    [`0防御${wbr}すると${wbr} HPが${wbr}満タンでも${wbr}即死${wbr}するんだ」`],
   ]);
   await refreshConversation(props, 100);
   activeRightMessageWindowWithFace(props, "Shinya");
   await scrollRightMessages(props, [
     ["シンヤ", "「了解ッス"],
-    ["じゃあ このまま一気に決めるッス」"],
+    [`じゃあ${wbr} このまま${wbr}一気に${wbr}決めるッス」`],
   ]);
   invisibleAllMessageWindows(props);
 };

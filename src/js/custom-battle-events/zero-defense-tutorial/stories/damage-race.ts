@@ -1,3 +1,4 @@
+import { wbr } from "../../../dom/wbr";
 import type { CustomBattleEventProps } from "../../../td-scenes/battle/custom-battle-event";
 import { activeLeftMessageWindowWithFace } from "../../active-message-window";
 import { refreshConversation } from "../../invisible-all-message-windows";
@@ -11,8 +12,8 @@ import { scrollLeftMessages } from "../../scroll-messages";
 const damageRaceEven = async (props: CustomBattleEventProps) => {
   activeLeftMessageWindowWithFace(props, "Gai");
   await scrollLeftMessages(props, [
-    ["ガイ", "「ダメージレースはイーブンか"],
-    ["面白い そうこなくてはな」"],
+    ["ガイ", `「ダメージレースは${wbr}イーブンか`],
+    [`面白い${wbr} そう${wbr}こなくてはな」`],
   ]);
   await refreshConversation(props);
 };
@@ -25,8 +26,11 @@ const damageRaceEven = async (props: CustomBattleEventProps) => {
 const damageRaceAdvantage = async (props: CustomBattleEventProps) => {
   activeLeftMessageWindowWithFace(props, "Gai");
   await scrollLeftMessages(props, [
-    ["ガイ", "「何？ 俺がダメージレースで負けているだと"],
-    ["少しは本気を出さんとな」"],
+    [
+      "ガイ",
+      `「何？${wbr} 俺が${wbr}ダメージレースで${wbr}負けて${wbr}いるだと`,
+    ],
+    [`少しは${wbr}本気を${wbr}出さんとな」`],
   ]);
   await refreshConversation(props);
 };
@@ -39,9 +43,9 @@ const damageRaceAdvantage = async (props: CustomBattleEventProps) => {
 const damageRaceDisadvantage = async (props: CustomBattleEventProps) => {
   activeLeftMessageWindowWithFace(props, "Gai");
   await scrollLeftMessages(props, [
-    ["ガイ", "「フハハハハ 見ろシンヤ！！"],
-    ["ダメージレースは俺の優勢"],
-    ["このまま勝利をいただくぞ」"],
+    ["ガイ", `「フハハハハ${wbr} 見ろ${wbr}シンヤ！！`],
+    [`ダメージレースは${wbr}俺の${wbr}優勢`],
+    [`このまま${wbr}勝利を${wbr}いただくぞ」`],
   ]);
   await refreshConversation(props);
 };

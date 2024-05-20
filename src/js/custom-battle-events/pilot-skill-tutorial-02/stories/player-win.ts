@@ -1,3 +1,4 @@
+import { wbr } from "../../../dom/wbr";
 import { CustomBattleEventProps } from "../../../td-scenes/battle/custom-battle-event";
 import {
   activeLeftMessageWindowWithFace,
@@ -20,44 +21,54 @@ export async function playerWin(
   invisibleAllMessageWindows(props);
   activeRightMessageWindowWithFace(props, "Gai");
   await scrollRightMessages(props, [
-    ["ガイ", "「見たかシンヤ"],
-    ["ツバサ先輩に勝ったぞ"],
+    ["ガイ", `「見たか${wbr}シンヤ`],
+    [`ツバサ先輩に${wbr}勝ったぞ`],
   ]);
   props.view.dom.rightMessageWindow.darken();
   activeLeftMessageWindowWithFace(props, "Tsubasa");
   await scrollLeftMessages(props, [
-    ["ツバサ", "「見事だ ガイ君"],
-    ["シンブレイバーの攻撃力をガイ君のスキルで底上げしたから"],
-    ["ウィングドーザを一撃で倒すことができたんだ」"],
+    ["ツバサ", `「見事だ${wbr} ガイ君`],
+    [
+      `シンブレイバーの${wbr}攻撃力を${wbr}ガイ君の${wbr}スキルで${wbr}底上げ${wbr}したから`,
+    ],
+    [`ウィングドーザを${wbr}一撃で${wbr}倒す${wbr}ことが${wbr}できたんだ」`],
   ]);
   props.view.dom.leftMessageWindow.darken();
   activeRightMessageWindowWithFace(props, "Shinya");
   await scrollRightMessages(props, [
     ["シンヤ", "「なるほど"],
-    ["これがロボとパイロットの相性ってことッスね」"],
+    [`これが${wbr}ロボと${wbr}パイロットの${wbr}相性って${wbr}ことッスね」`],
   ]);
   props.view.dom.rightMessageWindow.darken();
   activeLeftMessageWindowWithFace(props, "Tsubasa");
   await scrollLeftMessages(props, [
-    ["ツバサ", "「パイロットスキルの効果はバーストに比べると小さいが"],
-    ["普段ならギリギリ倒しきれない相手にとどめを刺せるなど"],
-    ["相手の意表を突くことができるんだ」"],
+    [
+      "ツバサ",
+      `「パイロットスキルの${wbr}効果は${wbr}バーストに${wbr}比べると${wbr}小さいが`,
+    ],
+    [
+      `普段なら${wbr}ギリギリ${wbr}倒しきれない${wbr}相手に${wbr}とどめを刺せる${wbr}など`,
+    ],
+    [`相手の${wbr}意表を${wbr}突く${wbr}ことが${wbr}できるんだ」`],
   ]);
   activeLeftMessageWindowWithFace(props, "Tsubasa");
   await scrollLeftMessages(props, [
-    ["(そしてパイロットスキルを使いこなせば"],
-    ["奴にも ……Gブレイバーにも届きうる)"],
+    [`(そして${wbr}パイロットスキルを${wbr}使い${wbr}こなせば`],
+    [`奴にも${wbr} ……Gブレイバーにも${wbr}届きうる)`],
   ]);
   await refreshConversation(props);
   activeLeftMessageWindowWithFace(props, "Raito");
   await scrollLeftMessages(props, [
-    ["ライト", "「こないなところにおったんか 大田高校のエース君"],
-    ["あんさんに会いたがっとる人を連れてきたで」"],
+    [
+      "ライト",
+      `「こないなところに${wbr}おったんか${wbr} 大田高校の${wbr}エース君`,
+    ],
+    [`あんさんに${wbr}会いたがっとる${wbr}人を${wbr}連れて${wbr}きたで」`],
   ]);
   await refreshConversation(props);
   activeLeftMessageWindowWithFace(props, "Yuuya");
   await scrollLeftMessages(props, [
-    ["ユウヤ", "「俺は京都府立洛内高校 三年生 ユウヤだ」"],
+    ["ユウヤ", `「俺は${wbr}京都府立${wbr}洛内高校の${wbr}ユウヤだ」`],
   ]);
   props.view.dom.leftMessageWindow.darken();
   activeRightMessageWindowWithFace(props, "Shinya");
@@ -65,7 +76,10 @@ export async function playerWin(
   props.view.dom.rightMessageWindow.darken();
   activeLeftMessageWindowWithFace(props, "Yuuya");
   await scrollLeftMessages(props, [
-    ["ユウヤ", "「早速だがシンヤ この俺様と勝負してもらおうか」"],
+    [
+      "ユウヤ",
+      `「早速だが${wbr}シンヤ${wbr} この俺様と${wbr}勝負して${wbr}もらおうか」`,
+    ],
   ]);
   invisibleAllMessageWindows(props);
 }
