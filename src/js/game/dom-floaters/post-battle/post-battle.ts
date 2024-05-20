@@ -9,10 +9,7 @@ import { createEmptySoundResource } from "../../../resource/sound/empty-sound-re
 import { SOUND_IDS } from "../../../resource/sound/ids";
 import { SEPlayerContainer } from "../../../se/se-player";
 import type { PostBattle } from "../../post-battle";
-import type {
-  ButtonStyle,
-  PostBattleButtonConfig,
-} from "./post-battle-button-config";
+import type { PostBattleButtonConfig } from "./post-battle-button-config";
 
 /** ルートHTML要素のclass属性 */
 const ROOT_CLASS = "post-battle";
@@ -145,27 +142,21 @@ export class PostBattleFloater {
       resources.sounds.find((v) => v.id === SOUND_IDS.CHANGE_VALUE) ??
       createEmptySoundResource();
 
-    const createButtonStyle = (style: ButtonStyle) => {
-      switch (style) {
-        case "MainButton":
-          return {
-            className: `${ROOT_CLASS}__main-action`,
-            sound: pushButton,
-          };
-
-        case "SubButton":
-        default:
-          return {
-            className: `${ROOT_CLASS}__sub-action`,
-            sound: changeValue,
-          };
-      }
+    const buttonStyles = {
+      MainButton: {
+        className: `${ROOT_CLASS}__main-action`,
+        sound: pushButton,
+      },
+      SubButton: {
+        className: `${ROOT_CLASS}__sub-action`,
+        sound: changeValue,
+      },
     };
-
     return buttons.map(({ style, action, label }) => {
       const button = document.createElement("button");
       button.innerText = label;
-      const { className, sound } = createButtonStyle(style);
+      const { className, sound } =
+        buttonStyles[style] ?? buttonStyles["SubButton"];
       button.className = className;
       const unsubscriber = domPushStream(button).subscribe(({ event }) => {
         this.#exclusive.execute(async () => {
