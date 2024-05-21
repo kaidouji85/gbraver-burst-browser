@@ -7,11 +7,11 @@
     data-id="closer"
   />
   <div class="{{ROOT}}__enemy-state">
+    <div class="{{ROOT}}__enemy-damage" data-id="enemy-damage"></div>
     <div
       class="{{ROOT}}__enemy-battle-result-name"
       data-id="enemy-battle-result-name"
     ></div>
-    <div class="{{ROOT}}__enemy-damage" data-id="enemy-damage"></div>
     <div class="{{ROOT}}__enemy-hp-label">HP</div>
     <div class="{{ROOT}}__enemy-hp-value">{{enemy.armdozer.hp}}</div>
     <div class="{{ROOT}}__enemy-state-separator-1"></div>
@@ -22,7 +22,7 @@
     />
     <div class="{{ROOT}}__enemy-battery">{{enemy.armdozer.battery}}</div>
     <div class="{{ROOT}}__enemy-power-label">攻撃</div>
-    <div class="{{ROOT}}__enemy-power-value">{{enemy.armdozer.power}}</div>
+    <div class="{{ROOT}}__enemy-power-value">{{enemyPower}}</div>
     <div class="{{ROOT}}__enemy-state-separator-2"></div>
     <div class="{{ROOR}}__enemy-speed-label">機動</div>
     <div class="{{ROOR}}__enemy-speed-value">{{enemy.armdozer.speed}}</div>
@@ -65,7 +65,7 @@
     />
     <div class="{{ROOT}}__player-battery">{{player.armdozer.battery}}</div>
     <div class="{{ROOT}}__player-power-label">攻撃</div>
-    <div class="{{ROOT}}__player-power-value">{{player.armdozer.power}}</div>
+    <div class="{{ROOT}}__player-power-value">{{playerPower}}</div>
     <div class="{{ROOT}}__player-state-separator-2"></div>
     <div class="{{ROOR}}__player-speed-label">機動</div>
     <div class="{{ROOR}}__player-speed-value">{{player.armdozer.speed}}</div>

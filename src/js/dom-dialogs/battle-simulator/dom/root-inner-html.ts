@@ -1,4 +1,4 @@
-import { ArmdozerIds, PlayerState } from "gbraver-burst-core";
+import {ArmdozerIds, correctPower, PlayerState} from "gbraver-burst-core";
 
 import { getArmdozerStandPathId } from "../../../path/armdozer-stand-path";
 import { ResourcesContainer } from "../../../resource";
@@ -29,6 +29,9 @@ type RootInnerHtmlParams = ResourcesContainer & {
 export function rootInnerHTML(params: RootInnerHtmlParams) {
   const { resources, player, enemy, isPlayerAttacker } = params;
 
+  const playerPower = player.armdozer.power + correctPower(player.armdozer.effects);
+  const enemyPower = enemy.armdozer.power + correctPower(enemy.armdozer.effects);
+
   const playerArmdozerId = player?.armdozer.id ?? ArmdozerIds.SHIN_BRAVER;
   const playerArmdozerPath =
     resources.paths.find(
@@ -55,7 +58,9 @@ export function rootInnerHTML(params: RootInnerHtmlParams) {
     resources.paths.find((p) => p.id === PathIds.BATTERY_ICON)?.path ?? "";
   return template({
     player,
+    playerPower,
     enemy,
+    enemyPower,
     ROOT,
     PLAYER_BATTERY_CORRECT_HIDDEN,
     ENEMY_BATTERY_CORRECT_HIDDEN,
