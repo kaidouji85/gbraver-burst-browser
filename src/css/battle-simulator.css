@@ -82,7 +82,9 @@
   position: relative;
   z-index: var(--result-area-z-index);
   display: grid;
-  grid-template-areas: "hp-label hp-value separator battery-icon battery";
+  grid-template-areas:
+      "hp-label    hp-value    separator-1 battery-icon battery"
+      "power-label power-value separator-2 speed-label  speed-value";
   align-items: center;
 }
 
@@ -98,7 +100,7 @@
 
 .battle-simulator__player-battle-result-name,
 .battle-simulator__enemy-battle-result-name {
-  grid-area: separator;
+  grid-area: separator-1;
   position: absolute;
   white-space: nowrap;
   top: calc(var(--responsive-font-size) * -1.3);
@@ -115,9 +117,9 @@
   grid-area: hp-value;
 }
 
-.battle-simulator__player-state-separator,
-.battle-simulator__enemy-state-separator {
-  grid-area: separator;
+.battle-simulator__player-state-separator-1,
+.battle-simulator__enemy-state-separator-1 {
+  grid-area: separator-1;
   margin-left: calc(var(--responsive-font-size) * 0.3);
   margin-right: calc(var(--responsive-font-size) * 0.1);
 }
@@ -133,6 +135,33 @@
 .battle-simulator__player-battery,
 .battle-simulator__enemy-battery {
   grid-area: battery;
+}
+
+.battle-simulator__player-power-label,
+.battle-simulator__enemy-power-label {
+  grid-area: power-label;
+}
+
+.battle-simulator__player-power-value,
+.battle-simulator__enemy-power-value {
+  grid-area: power-value;
+}
+
+.battle-simulator__player-separator-2,
+.battle-simulator__enemy-separator-2 {
+  grid-area: separator-2;
+  margin-left: calc(var(--responsive-font-size) * 0.3);
+  margin-right: calc(var(--responsive-font-size) * 0.1);
+}
+
+.battle-simulator__player-speed-label,
+.battle-simulator__enemy-speed-label {
+  grid-area: speed-label;
+}
+
+.battle-simulator__player-speed-value,
+.battle-simulator__enemy-speed-value {
+  grid-area: speed-value;
 }
 
 .battle-simulator__player {

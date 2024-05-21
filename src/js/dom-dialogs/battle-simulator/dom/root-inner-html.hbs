@@ -14,13 +14,18 @@
     <div class="{{ROOT}}__enemy-damage" data-id="enemy-damage"></div>
     <div class="{{ROOT}}__enemy-hp-label">HP</div>
     <div class="{{ROOT}}__enemy-hp-value">{{enemy.armdozer.hp}}</div>
-    <div class="{{ROOT}}__enemy-state-separator">/</div>
+    <div class="{{ROOT}}__enemy-state-separator-1">/</div>
     <img
       class="{{ROOT}}__enemy-battery-icon"
       alt="バッテリーアイコン"
       src="{{batteryIconPath}}"
     />
-    <span class="{{ROOT}}__enemy-battery">{{enemy.armdozer.battery}}</span>
+    <div class="{{ROOT}}__enemy-battery">{{enemy.armdozer.battery}}</div>
+    <div class="{{ROOT}}__enemy-power-label">攻撃</div>
+    <div class="{{ROOT}}__enemy-power-value">{{enemy.armdozer.power}}</div>
+    <div class="{{ROOT}}__enemy-state-separator-2">/</div>
+    <div class="{{ROOR}}__enemy-speed-label">機動</div>
+    <div class="{{ROOR}}__enemy-speed-value">{{enemy.armdozer.speed}}</div>
   </div>
   <div class="{{ROOT}}__enemy">
     <img
@@ -52,13 +57,18 @@
     <div class="{{ROOT}}__player-damage" data-id="player-damage"></div>
     <div class="{{ROOT}}__player-hp-label">HP</div>
     <div class="{{ROOT}}__player-hp-value">{{player.armdozer.hp}}</div>
-    <div class="{{ROOT}}__player-state-separator">/</div>
+    <div class="{{ROOT}}__player-state-separator-1">/</div>
     <img
       class="{{ROOT}}__player-battery-icon"
       alt="バッテリーアイコン"
       src="{{batteryIconPath}}"
     />
     <div class="{{ROOT}}__player-battery">{{player.armdozer.battery}}</div>
+    <div class="{{ROOT}}__player-power-label">攻撃</div>
+    <div class="{{ROOT}}__player-power-value">{{player.armdozer.power}}</div>
+    <div class="{{ROOT}}__player-state-separator-2">/</div>
+    <div class="{{ROOR}}__player-speed-label">機動</div>
+    <div class="{{ROOR}}__player-speed-value">{{player.armdozer.speed}}</div>
   </div>
   <div class="{{ROOT}}__player">
     <img
