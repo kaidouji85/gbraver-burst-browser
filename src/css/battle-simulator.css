@@ -81,6 +81,7 @@
 .battle-simulator__enemy-state {
   position: relative;
   z-index: var(--result-area-z-index);
+  gap: 0 calc(var(--responsive-font-size) * 0.2);
   display: grid;
   grid-template-areas:
       "hp-label    hp-value    separator-1 battery-icon battery"
@@ -109,19 +110,11 @@
 .battle-simulator__player-hp-label,
 .battle-simulator__enemy-hp-label {
   grid-area: hp-label;
-  margin-right: calc(var(--responsive-font-size) * 0.3);
 }
 
 .battle-simulator__player-hp-value,
 .battle-simulator__enemy-hp-value {
   grid-area: hp-value;
-}
-
-.battle-simulator__player-state-separator-1,
-.battle-simulator__enemy-state-separator-1 {
-  grid-area: separator-1;
-  margin-left: calc(var(--responsive-font-size) * 0.3);
-  margin-right: calc(var(--responsive-font-size) * 0.1);
 }
 
 .battle-simulator__player-battery-icon,
@@ -145,13 +138,6 @@
 .battle-simulator__player-power-value,
 .battle-simulator__enemy-power-value {
   grid-area: power-value;
-}
-
-.battle-simulator__player-separator-2,
-.battle-simulator__enemy-separator-2 {
-  grid-area: separator-2;
-  margin-left: calc(var(--responsive-font-size) * 0.3);
-  margin-right: calc(var(--responsive-font-size) * 0.1);
 }
 
 .battle-simulator__player-speed-label,
