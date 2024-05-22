@@ -7,6 +7,7 @@ import {
   BatteryCorrection,
   CorrectPower,
   EMPTY_PLAYER_STATE,
+  HalveCorrectPower,
   PlayerId,
   PlayerState,
 } from "gbraver-burst-core";
@@ -45,6 +46,15 @@ const correctPower = (value: number): CorrectPower => ({
     remainingTurn: 1,
   },
 });
+
+/** 攻撃力補正半減 */
+const halveCorrectPower: HalveCorrectPower = {
+  type: "HalveCorrectPower",
+  period: {
+    type: "TurnLimit",
+    remainingTurn: 1,
+  },
+};
 
 /** プレイヤー生成パラメータ */
 type PlayerCreatorParams = {
@@ -196,6 +206,38 @@ export const enemyCorrectPower: StoryFn = battleSimulatorStory({
     armdozerId: ArmdozerIds.SHIN_BRAVER,
     battery: 5,
     effects: [correctPower(600)],
+  }),
+  isPlayerAttacker: false,
+});
+
+/** プレイヤーの複合効果 */
+export const playerMultiEffects: StoryFn = battleSimulatorStory({
+  player: createPlayerState({
+    playerId: "player",
+    armdozerId: ArmdozerIds.NEO_LANDOZER,
+    battery: 5,
+    effects: [correctPower(1000), halveCorrectPower, batteryCorrection(1)],
+  }),
+  enemy: createPlayerState({
+    playerId: "enemy",
+    armdozerId: ArmdozerIds.WING_DOZER,
+    battery: 5,
+  }),
+  isPlayerAttacker: true,
+});
+
+/** 敵の複合効果 */
+export const enemyMultiEffects: StoryFn = battleSimulatorStory({
+  player: createPlayerState({
+    playerId: "player",
+    armdozerId: ArmdozerIds.GENESIS_BRAVER,
+    battery: 8,
+  }),
+  enemy: createPlayerState({
+    playerId: "enemy",
+    armdozerId: ArmdozerIds.NEO_LANDOZER,
+    battery: 5,
+    effects: [correctPower(1000), halveCorrectPower, batteryCorrection(1)],
   }),
   isPlayerAttacker: false,
 });
