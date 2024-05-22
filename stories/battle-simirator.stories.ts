@@ -5,6 +5,7 @@ import {
   ArmdozerIds,
   Armdozers,
   BatteryCorrection,
+  CorrectPower,
   EMPTY_PLAYER_STATE,
   PlayerId,
   PlayerState,
@@ -25,6 +26,20 @@ export default {
 const batteryCorrection = (value: number): BatteryCorrection => ({
   type: "BatteryCorrection",
   batteryCorrection: value,
+  period: {
+    type: "TurnLimit",
+    remainingTurn: 1,
+  },
+});
+
+/**
+ * 攻撃補正を生成する
+ * @param value 補正値
+ * @returns 生成結果
+ */
+const correctPower = (value: number): CorrectPower => ({
+  type: "CorrectPower",
+  power: value,
   period: {
     type: "TurnLimit",
     remainingTurn: 1,
@@ -141,7 +156,7 @@ export const playerBatteryCorrect: StoryFn = battleSimulatorStory({
 export const enemyBatteryCorrect: StoryFn = battleSimulatorStory({
   player: createPlayerState({
     playerId: "player",
-    armdozerId: ArmdozerIds.NEO_LANDOZER,
+    armdozerId: ArmdozerIds.SHIN_BRAVER,
     battery: 5,
   }),
   enemy: createPlayerState({
@@ -150,5 +165,37 @@ export const enemyBatteryCorrect: StoryFn = battleSimulatorStory({
     battery: 5,
     effects: [batteryCorrection(1)],
   }),
+  isPlayerAttacker: false,
+});
+
+/** プレイヤーの攻撃補正 */
+export const playerCorrectPower: StoryFn = battleSimulatorStory({
+  player: createPlayerState({
+    playerId: "player",
+    armdozerId: ArmdozerIds.NEO_LANDOZER,
+    battery: 5,
+    effects: [correctPower(1000)],
+  }),
+  enemy: createPlayerState({
+    playerId: "enemy",
+    armdozerId: ArmdozerIds.LIGHTNING_DOZER,
+    battery: 5,
+  }),
   isPlayerAttacker: true,
+});
+
+/** 敵の攻撃補正 */
+export const enemyCorrectPower: StoryFn = battleSimulatorStory({
+  player: createPlayerState({
+    playerId: "player",
+    armdozerId: ArmdozerIds.WING_DOZER,
+    battery: 5,
+  }),
+  enemy: createPlayerState({
+    playerId: "enemy",
+    armdozerId: ArmdozerIds.SHIN_BRAVER,
+    battery: 5,
+    effects: [correctPower(600)],
+  }),
+  isPlayerAttacker: false,
 });
