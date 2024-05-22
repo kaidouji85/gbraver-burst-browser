@@ -56,18 +56,28 @@ export const extractPlayerBatteryCorrect = (root: HTMLElement): HTMLElement =>
  * @param root 抽出対象となるルート要素
  * @returns 抽出結果
  */
-export const extractPlayerBatteryPlus = (root: HTMLElement): HTMLElement =>
-  root.querySelector(`[data-id="player-battery-plus"]`) ??
-  document.createElement("div");
+export const extractPlayerBatteryPlus = (
+  root: HTMLElement,
+): HTMLButtonElement => {
+  const founded = root.querySelector(`[data-id="player-battery-plus"]`);
+  return founded instanceof HTMLButtonElement
+    ? founded
+    : document.createElement("button");
+};
 
 /**
  * プレイヤーのバッテリーマイナスを抽出する
  * @param root 抽出対象となるルート要素
  * @returns 抽出結果
  */
-export const extractPlayerBatteryMinus = (root: HTMLElement): HTMLElement =>
-  root.querySelector(`[data-id="player-battery-minus"]`) ??
-  document.createElement("div");
+export const extractPlayerBatteryMinus = (
+  root: HTMLElement,
+): HTMLButtonElement => {
+  const founded = root.querySelector(`[data-id="player-battery-minus"]`);
+  return founded instanceof HTMLButtonElement
+    ? founded
+    : document.createElement("button");
+};
 
 /**
  * 敵の戦闘結果名を抽出する
@@ -110,15 +120,25 @@ export const extractEnemyBatteryCorrect = (root: HTMLElement): HTMLElement =>
  * @param root 抽出対象となるルート要素
  * @returns 抽出結果
  */
-export const extractEnemyBatteryPlus = (root: HTMLElement): HTMLElement =>
-  root.querySelector(`[data-id="enemy-battery-plus"]`) ??
-  document.createElement("div");
+export const extractEnemyBatteryPlus = (
+  root: HTMLElement,
+): HTMLButtonElement => {
+  const founded = root.querySelector(`[data-id="enemy-battery-plus"]`);
+  return founded instanceof HTMLButtonElement
+    ? founded
+    : document.createElement("button");
+};
 
 /**
  * 敵のバッテリーマイナスを抽出する
  * @param root 抽出対象となるルート要素
  * @returns 抽出結果
  */
-export const extractEnemyBatteryMinus = (root: HTMLElement): HTMLElement =>
-  root.querySelector(`[data-id="enemy-battery-minus"]`) ??
-  document.createElement("div");
+export const extractEnemyBatteryMinus = (
+  root: HTMLElement,
+): HTMLButtonElement => {
+  const founded = root.querySelector(`[data-id="enemy-battery-minus"]`);
+  return founded instanceof HTMLButtonElement
+    ? founded
+    : document.createElement("button");
+};

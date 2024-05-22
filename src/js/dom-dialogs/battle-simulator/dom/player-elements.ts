@@ -24,9 +24,9 @@ export type PlayerElements = {
   /** バッテリー補正 */
   batteryCorrect: HTMLElement;
   /** バッテリープラスボタン */
-  batteryPlus: HTMLElement;
+  batteryPlus: HTMLButtonElement;
   /** バッテリーマイナスボタン */
-  batteryMinus: HTMLElement;
+  batteryMinus: HTMLButtonElement;
 };
 
 /**

@@ -2,6 +2,7 @@ import { pop } from "../../../dom/pop";
 import { PushDOM } from "../../../dom/push-dom";
 import { updateBattery } from "../dom/update-battery";
 import { BattleSimulatorProps } from "../props";
+import { updateBatteryButtons } from "./update-battery-buttons";
 import { updateBattleResult } from "./update-battle-result";
 
 /**
@@ -21,14 +22,11 @@ export function onPlayerBatteryMinusPush(
 
   exclusive.execute(async () => {
     const nextPlayerBattery = playerBattery - 1;
-    if (nextPlayerBattery < 0) {
-      return;
-    }
-
     se.play(changeValue);
     pop(playerElements.batteryMinus);
     props.playerBattery = nextPlayerBattery;
     updateBattery(playerElements, nextPlayerBattery);
     updateBattleResult(props);
+    updateBatteryButtons(props);
   });
 }

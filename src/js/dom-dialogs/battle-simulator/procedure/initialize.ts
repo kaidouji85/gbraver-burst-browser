@@ -1,5 +1,6 @@
 import { updateBattery } from "../dom/update-battery";
 import { BattleSimulatorProps } from "../props";
+import { updateBatteryButtons } from "./update-battery-buttons";
 import { updateBattleResult } from "./update-battle-result";
 
 /**
@@ -11,4 +12,5 @@ export function initialize(props: BattleSimulatorProps) {
   updateBattery(playerElements, playerBattery);
   updateBattery(enemyElements, enemyBattery);
   updateBattleResult(props);
+  updateBatteryButtons(props);
 }
