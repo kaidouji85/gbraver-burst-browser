@@ -1,15 +1,9 @@
-import {ArmdozerIds, correctPower, PlayerState} from "gbraver-burst-core";
+import { ArmdozerIds, correctPower, PlayerState } from "gbraver-burst-core";
 
 import { getArmdozerStandPathId } from "../../../path/armdozer-stand-path";
 import { ResourcesContainer } from "../../../resource";
 import { PathIds } from "../../../resource/path/ids";
-import {
-  ENEMY_BATTERY_CORRECT_HIDDEN,
-  PLAYER_BATTERY_CORRECT_HIDDEN,
-  ROOT,
-  TURN_INDICATOR,
-  TURN_INDICATOR_ENEMY,
-} from "./class-name";
+import { ROOT, TURN_INDICATOR, TURN_INDICATOR_ENEMY } from "./class-name";
 import template from "./root-inner-html.hbs";
 
 /** 生成パラメータ */
@@ -29,8 +23,10 @@ type RootInnerHtmlParams = ResourcesContainer & {
 export function rootInnerHTML(params: RootInnerHtmlParams) {
   const { resources, player, enemy, isPlayerAttacker } = params;
 
-  const playerPower = player.armdozer.power + correctPower(player.armdozer.effects);
-  const enemyPower = enemy.armdozer.power + correctPower(enemy.armdozer.effects);
+  const playerPower =
+    player.armdozer.power + correctPower(player.armdozer.effects);
+  const enemyPower =
+    enemy.armdozer.power + correctPower(enemy.armdozer.effects);
 
   const playerArmdozerId = player?.armdozer.id ?? ArmdozerIds.SHIN_BRAVER;
   const playerArmdozerPath =
@@ -62,8 +58,6 @@ export function rootInnerHTML(params: RootInnerHtmlParams) {
     enemy,
     enemyPower,
     ROOT,
-    PLAYER_BATTERY_CORRECT_HIDDEN,
-    ENEMY_BATTERY_CORRECT_HIDDEN,
     turnIndicatorClass,
     closerPath,
     playerArmdozerPath,

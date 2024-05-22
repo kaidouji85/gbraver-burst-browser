@@ -1,10 +1,10 @@
 import {
-  BattleResult,
   battleResult,
   correctedBattery,
   PlayerState,
 } from "gbraver-burst-core";
 
+import { updateBatteryCorrect } from "../dom/update-battery-correct";
 import { updateBattleResultName } from "../dom/update-battle-result-name";
 import { updateDamage } from "../dom/update-damage";
 import { BattleSimulatorProps } from "../props";
@@ -25,35 +25,55 @@ const getCorrectedBattery = (player: PlayerState, battery: number) =>
   );
 
 /**
- * プレイヤーが攻撃側の場合の戦闘結果を取得する
+ * プレイヤーが攻撃側の場合、各種オブジェクトを攻撃、防御側に分割する
  * @param props プロパティ
- * @returns 戦闘結果
+ * @returns 分割結果
  */
-const getBattleResultOnPlayerAttacker = (
-  props: BattleSimulatorProps,
-): BattleResult => {
-  const { player, playerBattery, enemy, enemyBattery } = props;
-  const attacker = player;
-  const attackerBattery = getCorrectedBattery(player, playerBattery);
-  const defender = enemy;
-  const defenderBattery = getCorrectedBattery(enemy, enemyBattery);
-  return battleResult(attacker, attackerBattery, defender, defenderBattery);
+const divideOnPlayerAttacker = (props: BattleSimulatorProps) => {
+  const {
+    player,
+    playerBattery,
+    playerElements,
+    enemy,
+    enemyBattery,
+    enemyElements,
+  } = props;
+  return {
+    attacker: player,
+    originAttackerBattery: playerBattery,
+    attackerBattery: getCorrectedBattery(player, playerBattery),
+    attackerElements: playerElements,
+    defender: enemy,
+    originDefenderBattery: enemyBattery,
+    defenderBattery: getCorrectedBattery(enemy, enemyBattery),
+    defenderElements: enemyElements,
+  };
 };
 
 /**
- * 敵が攻撃側の場合の戦闘結果を取得する
+ * 敵が攻撃側の場合、各種オブジェクトを攻撃、防御側に分割する
  * @param props プロパティ
- * @returns 戦闘結果
+ * @returns 分割結果
  */
-const getBattleResultOnEnemyAttacker = (
-  props: BattleSimulatorProps,
-): BattleResult => {
-  const { player, playerBattery, enemy, enemyBattery } = props;
-  const attacker = enemy;
-  const attackerBattery = getCorrectedBattery(enemy, enemyBattery);
-  const defender = player;
-  const defenderBattery = getCorrectedBattery(player, playerBattery);
-  return battleResult(attacker, attackerBattery, defender, defenderBattery);
+const divideOnEnemyAttacker = (props: BattleSimulatorProps) => {
+  const {
+    player,
+    playerBattery,
+    playerElements,
+    enemy,
+    enemyBattery,
+    enemyElements,
+  } = props;
+  return {
+    attacker: enemy,
+    originAttackerBattery: enemyBattery,
+    attackerBattery: getCorrectedBattery(enemy, enemyBattery),
+    attackerElements: enemyElements,
+    defender: player,
+    originDefenderBattery: playerBattery,
+    defenderBattery: getCorrectedBattery(player, playerBattery),
+    defenderElements: playerElements,
+  };
 };
 
 /**
@@ -61,11 +81,31 @@ const getBattleResultOnEnemyAttacker = (
  * @param props プロパティ
  */
 export const updateBattleResult = (props: BattleSimulatorProps) => {
-  const { isPlayerAttacker, playerElements, enemyElements } = props;
-  const battleResult = isPlayerAttacker
-    ? getBattleResultOnPlayerAttacker(props)
-    : getBattleResultOnEnemyAttacker(props);
-  const defenderElements = isPlayerAttacker ? enemyElements : playerElements;
-  updateBattleResultName(defenderElements, battleResult);
-  updateDamage(defenderElements, battleResult);
+  const { isPlayerAttacker } = props;
+  const {
+    attacker,
+    originAttackerBattery,
+    attackerBattery,
+    attackerElements,
+    defender,
+    originDefenderBattery,
+    defenderBattery,
+    defenderElements,
+  } = isPlayerAttacker
+    ? divideOnPlayerAttacker(props)
+    : divideOnEnemyAttacker(props);
+  const result = battleResult(
+    attacker,
+    attackerBattery,
+    defender,
+    defenderBattery,
+  );
+  updateBattleResultName(defenderElements, result);
+  updateDamage(defenderElements, result);
+
+  const attackerBatteryCorrect = attackerBattery - originAttackerBattery;
+  updateBatteryCorrect(attackerElements, attackerBatteryCorrect);
+
+  const defenderBatteryCorrect = defenderBattery - originDefenderBattery;
+  updateBatteryCorrect(defenderElements, defenderBatteryCorrect);
 };

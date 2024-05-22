@@ -23,7 +23,7 @@ const positiveBatteryCorrect = (batteryCorrect: HTMLElement, value: number) => {
  * @param value バッテリー補正
  */
 const negativeBatteryCorrect = (batteryCorrect: HTMLElement, value: number) => {
-  batteryCorrect.innerText = `${value}`;
+  batteryCorrect.innerText = `-${value}`;
 };
 
 /**
@@ -40,7 +40,7 @@ export const updateBatteryCorrect = (
     positiveBatteryCorrect(batteryCorrect, value);
   } else if (value < 0) {
     negativeBatteryCorrect(batteryCorrect, value);
+  } else {
+    hiddenBatteryCorrect(batteryCorrect);
   }
-
-  hiddenBatteryCorrect(batteryCorrect);
 };

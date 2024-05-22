@@ -1,8 +1,10 @@
 import { StoryFn } from "@storybook/html";
 import {
+  ArmdozerEffect,
   ArmdozerId,
   ArmdozerIds,
   Armdozers,
+  BatteryCorrection,
   EMPTY_PLAYER_STATE,
   PlayerId,
   PlayerState,
@@ -15,6 +17,20 @@ export default {
   title: "battle-simulator",
 };
 
+/**
+ * バッテリー補正を生成する
+ * @param value 補正値
+ * @returns 生成結果
+ */
+const batteryCorrection = (value: number): BatteryCorrection => ({
+  type: "BatteryCorrection",
+  batteryCorrection: value,
+  period: {
+    type: "TurnLimit",
+    remainingTurn: 1,
+  },
+});
+
 /** プレイヤー生成パラメータ */
 type PlayerCreatorParams = {
   /** プレイヤーID */
@@ -23,6 +39,8 @@ type PlayerCreatorParams = {
   armdozerId: ArmdozerId;
   /** バッテリー値 */
   battery: number;
+  /** アームドーザエフェクト */
+  effects?: ArmdozerEffect[];
 };
 
 /**
@@ -31,7 +49,7 @@ type PlayerCreatorParams = {
  * @returns 生成結果
  */
 const createPlayerState = (params: PlayerCreatorParams): PlayerState => {
-  const { playerId, armdozerId, battery } = params;
+  const { playerId, armdozerId, battery, effects } = params;
   const armdozer = Armdozers.find((a) => a.id === armdozerId) ?? Armdozers[0];
   return {
     ...EMPTY_PLAYER_STATE,
@@ -41,7 +59,7 @@ const createPlayerState = (params: PlayerCreatorParams): PlayerState => {
       hp: armdozer.maxHp,
       battery,
       enableBurst: true,
-      effects: [],
+      effects: effects ?? [],
     },
   };
 };
@@ -87,6 +105,31 @@ export const enemyTurn: StoryFn = domStub((params) => {
     player,
     enemy,
     isPlayerAttacker: false,
+  });
+  simulator.notifyClose().subscribe(() => {
+    console.log("close");
+  });
+  return simulator.getRootHTMLElement();
+});
+
+/** プレイヤーのバッテリー補正 */
+export const playerBatteryCorrect: StoryFn = domStub((params) => {
+  const player = createPlayerState({
+    playerId: "player",
+    armdozerId: ArmdozerIds.GENESIS_BRAVER,
+    battery: 5,
+    effects: [batteryCorrection(1)],
+  });
+  const enemy = createPlayerState({
+    playerId: "enemy",
+    armdozerId: ArmdozerIds.WING_DOZER,
+    battery: 5,
+  });
+  const simulator = new BattleSimulator({
+    ...params,
+    player,
+    enemy,
+    isPlayerAttacker: true,
   });
   simulator.notifyClose().subscribe(() => {
     console.log("close");

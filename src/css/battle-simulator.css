@@ -84,8 +84,8 @@
   gap: 0 calc(var(--responsive-font-size) * 0.2);
   display: grid;
   grid-template-areas:
-      "hp-label    hp-value    separator-1 battery-icon battery"
-      "power-label power-value separator-2 speed-label  speed-value";
+    "hp-label    hp-value    separator-1 battery-icon battery"
+    "power-label power-value separator-2 speed-label  speed-value";
   align-items: center;
 }
 
@@ -210,11 +210,6 @@
   -webkit-text-stroke: 1px #715c1f;
 }
 
-.battle-simulator__player-battery-correct--hidden,
-.battle-simulator__enemy-battery-correct--hidden {
-  display: none;
-}
-
 .battle-simulator__middle {
   position: relative;
   grid-area: middle;
@@ -271,7 +266,6 @@
 .battle-simulator__enemy-battery-plus:enabled {
   color: var(--button-font-color);
 }
-
 
 .battle-simulator__player-battery-minus:disabled,
 .battle-simulator__player-battery-plus:disabled,
