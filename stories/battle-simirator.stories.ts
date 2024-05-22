@@ -136,3 +136,19 @@ export const playerBatteryCorrect: StoryFn = battleSimulatorStory({
   }),
   isPlayerAttacker: true,
 });
+
+/** 敵のバッテリー補正 */
+export const enemyBatteryCorrect: StoryFn = battleSimulatorStory({
+  player: createPlayerState({
+    playerId: "player",
+    armdozerId: ArmdozerIds.NEO_LANDOZER,
+    battery: 5,
+  }),
+  enemy: createPlayerState({
+    playerId: "enemy",
+    armdozerId: ArmdozerIds.LIGHTNING_DOZER,
+    battery: 5,
+    effects: [batteryCorrection(1)],
+  }),
+  isPlayerAttacker: true,
+});
