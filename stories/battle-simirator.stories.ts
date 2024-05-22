@@ -64,75 +64,75 @@ const createPlayerState = (params: PlayerCreatorParams): PlayerState => {
   };
 };
 
+/** バトルシミュレータストーリーのパラメータ */
+type BattleSimulatorStoryParams = {
+  /** プレイヤー */
+  player: PlayerState;
+  /** 敵 */
+  enemy: PlayerState;
+  /** プレイヤーが攻撃側か否か */
+  isPlayerAttacker: boolean;
+};
+
+/**
+ * バトルシミュレータストーリー
+ * @param storyParams パラメータ
+ * @returns ストーリー関数
+ */
+const battleSimulatorStory = (storyParams: BattleSimulatorStoryParams) =>
+  domStub((stubParams) => {
+    const simulator = new BattleSimulator({
+      ...storyParams,
+      ...stubParams,
+    });
+    simulator.notifyClose().subscribe(() => {
+      console.log("close");
+    });
+    return simulator.getRootHTMLElement();
+  });
+
 /** プレイヤーのターン */
-export const playerTurn: StoryFn = domStub((params) => {
-  const player = createPlayerState({
+export const playerTurn: StoryFn = battleSimulatorStory({
+  player: createPlayerState({
     playerId: "player",
     armdozerId: ArmdozerIds.SHIN_BRAVER,
     battery: 5,
-  });
-  const enemy = createPlayerState({
+  }),
+  enemy: createPlayerState({
     playerId: "enemy",
     armdozerId: ArmdozerIds.NEO_LANDOZER,
     battery: 5,
-  });
-  const simulator = new BattleSimulator({
-    ...params,
-    player,
-    enemy,
-    isPlayerAttacker: true,
-  });
-  simulator.notifyClose().subscribe(() => {
-    console.log("close");
-  });
-  return simulator.getRootHTMLElement();
+  }),
+  isPlayerAttacker: true,
 });
 
 /** 敵のターン */
-export const enemyTurn: StoryFn = domStub((params) => {
-  const player = createPlayerState({
+export const enemyTurn: StoryFn = battleSimulatorStory({
+  player: createPlayerState({
     playerId: "player",
     armdozerId: ArmdozerIds.WING_DOZER,
     battery: 5,
-  });
-  const enemy = createPlayerState({
+  }),
+  enemy: createPlayerState({
     playerId: "enemy",
     armdozerId: ArmdozerIds.LIGHTNING_DOZER,
     battery: 5,
-  });
-  const simulator = new BattleSimulator({
-    ...params,
-    player,
-    enemy,
-    isPlayerAttacker: false,
-  });
-  simulator.notifyClose().subscribe(() => {
-    console.log("close");
-  });
-  return simulator.getRootHTMLElement();
+  }),
+  isPlayerAttacker: false,
 });
 
 /** プレイヤーのバッテリー補正 */
-export const playerBatteryCorrect: StoryFn = domStub((params) => {
-  const player = createPlayerState({
+export const playerBatteryCorrect: StoryFn = battleSimulatorStory({
+  player: createPlayerState({
     playerId: "player",
     armdozerId: ArmdozerIds.GENESIS_BRAVER,
-    battery: 5,
+    battery: 4,
     effects: [batteryCorrection(1)],
-  });
-  const enemy = createPlayerState({
+  }),
+  enemy: createPlayerState({
     playerId: "enemy",
     armdozerId: ArmdozerIds.WING_DOZER,
     battery: 5,
-  });
-  const simulator = new BattleSimulator({
-    ...params,
-    player,
-    enemy,
-    isPlayerAttacker: true,
-  });
-  simulator.notifyClose().subscribe(() => {
-    console.log("close");
-  });
-  return simulator.getRootHTMLElement();
+  }),
+  isPlayerAttacker: true,
 });
