@@ -1,0 +1,109 @@
+<div class="{{ROOT}}__background" data-id="back-ground"></div>
+<div class="{{ROOT}}__dialog">
+  <img
+    class="{{ROOT}}__closer"
+    alt="閉じる"
+    src="{{closerPath}}"
+    data-id="closer"
+  />
+  <div class="{{ROOT}}__enemy-state">
+    <div class="{{ROOT}}__enemy-damage" data-id="enemy-damage"></div>
+    <div
+      class="{{ROOT}}__enemy-battle-result-name"
+      data-id="enemy-battle-result-name"
+    ></div>
+    <div class="{{ROOT}}__enemy-hp-label">HP</div>
+    <div class="{{ROOT}}__enemy-hp-value">{{enemy.armdozer.hp}}</div>
+    <div class="{{ROOT}}__enemy-state-separator-1"></div>
+    <img
+      class="{{ROOT}}__enemy-battery-icon"
+      alt="バッテリーアイコン"
+      src="{{batteryIconPath}}"
+    />
+    <div class="{{ROOT}}__enemy-battery">{{enemy.armdozer.battery}}</div>
+    <div class="{{ROOT}}__enemy-power-label">攻撃</div>
+    <div class="{{ROOT}}__enemy-power-value">{{enemyPower}}</div>
+    <div class="{{ROOT}}__enemy-state-separator-2"></div>
+    <div class="{{ROOR}}__enemy-speed-label">機動</div>
+    <div class="{{ROOR}}__enemy-speed-value">{{enemy.armdozer.speed}}</div>
+  </div>
+  <div class="{{ROOT}}__enemy">
+    <img
+      class="{{ROOT}}__enemy-armdozer"
+      alt="敵のアームドーザ"
+      src="{{enemyArmdozerPath}}"
+    />
+    <span
+      class="{{ROOT}}__enemy-battery-value"
+      data-id="enemy-battery-value"
+    ></span>
+    <span
+      class="{{ROOT}}__enemy-battery-correct"
+      data-id="enemy-battery-correct"
+    ></span>
+  </div>
+  <div class="{{ROOT}}__middle">
+    <img
+      class="{{turnIndicatorClass}}"
+      alt="ターンインジケーター"
+      src="{{turnIndicatorPath}}"
+    />
+  </div>
+  <div class="{{ROOT}}__player-state">
+    <div
+      class="{{ROOT}}__player-battle-result-name"
+      data-id="player-battle-result-name"
+    ></div>
+    <div class="{{ROOT}}__player-damage" data-id="player-damage"></div>
+    <div class="{{ROOT}}__player-hp-label">HP</div>
+    <div class="{{ROOT}}__player-hp-value">{{player.armdozer.hp}}</div>
+    <div class="{{ROOT}}__player-state-separator-1"></div>
+    <img
+      class="{{ROOT}}__player-battery-icon"
+      alt="バッテリーアイコン"
+      src="{{batteryIconPath}}"
+    />
+    <div class="{{ROOT}}__player-battery">{{player.armdozer.battery}}</div>
+    <div class="{{ROOT}}__player-power-label">攻撃</div>
+    <div class="{{ROOT}}__player-power-value">{{playerPower}}</div>
+    <div class="{{ROOT}}__player-state-separator-2"></div>
+    <div class="{{ROOR}}__player-speed-label">機動</div>
+    <div class="{{ROOR}}__player-speed-value">{{player.armdozer.speed}}</div>
+  </div>
+  <div class="{{ROOT}}__player">
+    <img
+      class="{{ROOT}}__player-armdozer"
+      alt="プレイヤーのアームドーザ"
+      src="{{playerArmdozerPath}}"
+    />
+    <span
+      class="{{ROOT}}__player-battery-value"
+      data-id="player-battery-value"
+    ></span>
+    <span
+      class="{{ROOT}}__player-battery-correct"
+      data-id="player-battery-correct"
+    ></span>
+  </div>
+  <div class="{{ROOT}}__enemy-controller">
+    <button
+      class="{{ROOT}}__enemy-battery-minus"
+      data-id="enemy-battery-minus"
+    >-
+    </button>
+    <button class="{{ROOT}}__enemy-battery-plus" data-id="enemy-battery-plus">+
+    </button>
+  </div>
+  <div class="{{ROOT}}__player-controller">
+    <button
+      class="{{ROOT}}__player-battery-minus"
+      data-id="player-battery-minus"
+    >-
+    </button>
+    <button
+      class="{{ROOT}}__player-battery-plus"
+      data-id="player-battery-plus"
+    >+
+    </button>
+  </div>
+</div>

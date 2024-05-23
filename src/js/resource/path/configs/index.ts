@@ -18,6 +18,7 @@ import { RaitoPathConfigs } from "./raito";
 import { ShinBraverPathConfigs } from "./shin-braver";
 import { TitleBackPathConfigs } from "./title-back";
 import { TsubasaPathConfigs } from "./tsubasa";
+import { TurnIndicatorConfigs } from "./turn-indicator";
 import { WingDozerPathConfigs } from "./wing-dozer";
 import { YuuyaPathConfigs } from "./yuuya";
 
@@ -44,6 +45,7 @@ export const PathConfigs: PathConfig[] = [
   ...BatteryIconPathConfigs,
   ...HelpIconPathConfigs,
   ...MessageWindowPathConfigs,
+  ...TurnIndicatorConfigs,
 ];
 
 /** プリロード対象となるパス設定 */

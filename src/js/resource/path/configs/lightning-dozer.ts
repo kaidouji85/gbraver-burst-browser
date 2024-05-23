@@ -11,4 +11,8 @@ export const LightningDozerPathConfigs: PathConfig[] = [
     id: PathIds.LIGHTNING_DOZER_BUST_SHOT,
     path: (root) => `${root.get()}/armdozer/lightning-dozer/bust-shot.webp`,
   },
+  {
+    id: PathIds.LIGHTNING_DOZER_STAND,
+    path: (root) => `${root.get()}/armdozer/lightning-dozer/stand.webp`,
+  },
 ];
