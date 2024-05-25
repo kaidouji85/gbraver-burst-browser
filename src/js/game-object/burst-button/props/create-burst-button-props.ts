@@ -30,6 +30,7 @@ export function createBurstButtonProps(
   const { resources } = params;
   return {
     ...params,
+    disabled: false,
     model: createInitialValue(),
     view: new BurstButtonView(params),
     pushButtonSound:

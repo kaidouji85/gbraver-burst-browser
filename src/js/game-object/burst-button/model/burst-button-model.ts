@@ -8,8 +8,6 @@ export type BurstButtonModel = {
    * バーストボタンが反応しないようにする
    */
   shouldPushNotifierStop: boolean;
-  /** バーストボタンが操作不可能であるか否か、trueで操作不可能である */
-  disabled: boolean;
   /** 拡大率 */
   scale: number;
   /** ゲーム的にバースト発動可能であるか否か、trueで発動可能 */
