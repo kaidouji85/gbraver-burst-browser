@@ -4,12 +4,12 @@ import * as THREE from "three";
 import { GameObjectAction } from "../action/game-object-action";
 import { createPushDetector, PushDetector } from "./index";
 
-/** 円形プッシュ検出生成のパラメータ */
-type CirclePushDetectorParam = {
-  /** 円半径 */
-  radius: number;
-  /** 円分割数 */
-  segments: number;
+/** 平面プッシュ検出生成のパラメータ */
+type PlanePushDetectorParam = {
+  /** 平面幅 */
+  width: number;
+  /** 平面高さ */
+  height: number;
   /** ゲームオブジェクトアクション */
   gameObjectAction: Observable<GameObjectAction>;
   /**
@@ -20,15 +20,13 @@ type CirclePushDetectorParam = {
 };
 
 /**
- * 円形プッシュ検出を生成する
+ * 平面プッシュ検出を生成する
  * @param param パラメータ
  * @returns プッシュ検出
  */
-export function circlePushDetector(
-  param: CirclePushDetectorParam,
-): PushDetector {
-  const { radius, segments } = param;
-  const geometry = new THREE.CircleGeometry(radius, segments);
+export function planePushDetector(param: PlanePushDetectorParam): PushDetector {
+  const { width, height } = param;
+  const geometry = new THREE.PlaneGeometry(width, height);
   return createPushDetector({
     ...param,
     geometry,
