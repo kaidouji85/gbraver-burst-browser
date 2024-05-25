@@ -12,4 +12,6 @@ export type TimeScaleButtonProps = TimeScaleAnimationProps & {
   toggleTween: TWEEN.Group;
   /** トグル通知 */
   toggleNotify: Subject<number>;
+  /** 操作不可能であるか否か、trueで操作不可能 */
+  disabled: boolean;
 };
