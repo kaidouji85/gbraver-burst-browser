@@ -23,8 +23,6 @@ export type BatterySelectorModel = {
    * バッテリーセレクタが反応しないようにする
    */
   shouldPushNotifierStop: boolean;
-  /** 操作不可能であるか否か、trueで操作不可能 */
-  disabled: boolean;
   /** -ボタン 拡大率 */
   minusButtonScale: number;
   /** +ボタン 拡大率 */

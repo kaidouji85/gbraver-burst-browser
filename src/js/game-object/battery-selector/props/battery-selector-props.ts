@@ -7,6 +7,8 @@ import { BatterySelectorView } from "../view";
 export type BatterySelectorProps = BatterySelectorAnimationProps & {
   /** ビュー */
   view: BatterySelectorView;
+  /** 操作不可能であるか否か、trueで操作不可能 */
+  disabled: boolean;
   /** バッテリー変更TweenGroup */
   batteryChangeTween: TWEEN.Group;
   /** -ボタンTweenGroup */

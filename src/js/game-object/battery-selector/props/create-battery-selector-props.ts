@@ -27,6 +27,7 @@ export function createBatterySelectorProps(
   return {
     ...param,
     model: initialValue(),
+    disabled: false,
     batteryChangeTween: new TWEEN.Group(),
     batteryMinusTween: new TWEEN.Group(),
     batteryPlusTween: new TWEEN.Group(),
