@@ -11,6 +11,7 @@ import {
   createBurstButtonProps,
   PropsCreatorParams,
 } from "./props/create-burst-button-props";
+import { notifyPressed } from "./procedure/notify-pressed";
 
 /** コンストラクタのパラメータ */
 type BurstButtonParams = PropsCreatorParams;
@@ -34,9 +35,6 @@ export class BurstButton {
         if (action.type === "PreRender") {
           this.#onPreRender(action);
         }
-      }),
-      this.#props.view.notifyPush().subscribe((event) => {
-        this.#onPush(event);
       }),
     ];
   }
@@ -89,7 +87,7 @@ export class BurstButton {
    * @returns 通知ストリーム
    */
   notifyPressed(): Observable<Event> {
-    return this.#props.pushButton;
+    return notifyPressed(this.#props);
   }
 
   /**
@@ -114,21 +112,5 @@ export class BurstButton {
    */
   #onPreRender(action: PreRender): void {
     this.#props.view.engage(this.#props.model, action);
-  }
-
-  /**
-   * ボタンを押した時の処理
-   * @param event イベント
-   */
-  #onPush(event: Event): void {
-    if (
-      this.#props.model.shouldPushNotifierStop ||
-      this.#props.model.disabled ||
-      !this.#props.model.canActivateBurst
-    ) {
-      return;
-    }
-
-    this.#props.pushButton.next(event);
   }
 }
