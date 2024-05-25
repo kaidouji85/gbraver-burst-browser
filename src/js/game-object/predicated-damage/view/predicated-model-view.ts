@@ -86,7 +86,7 @@ export class PredicatedDamageView {
       ...params,
       width: PUSH_DETECTOR_WIDTH,
       height: PUSH_DETECTOR_HEIGHT,
-      visible: true,
+      visible: false,
     });
     this.#group.add(this.#pushDetector.getObject3D());
   }

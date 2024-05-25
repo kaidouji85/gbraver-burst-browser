@@ -17,8 +17,11 @@ export function show(
   return onStart(() => {
     model.damage = damage;
     model.shouldPushNotifierStop = true;
-  }).chain(tween(model, (t) => t.to({ opacity: 1 }, 200)))
-    .chain(onStart(() => {
-      model.shouldPushNotifierStop = false;
-    }));
+  })
+    .chain(tween(model, (t) => t.to({ opacity: 1 }, 200)))
+    .chain(
+      onStart(() => {
+        model.shouldPushNotifierStop = false;
+      }),
+    );
 }
