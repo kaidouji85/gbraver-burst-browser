@@ -62,7 +62,7 @@ export class TimeScaleButton {
    * @param isDisabled trueで操作不可能
    */
   disabled(isDisabled: boolean): void {
-    this.#props.model.disabled = isDisabled;
+    this.#props.disabled = isDisabled;
   }
 
   /**
@@ -70,7 +70,7 @@ export class TimeScaleButton {
    * @returns trueで操作不可能
    */
   isDisabled(): boolean {
-    return this.#props.model.disabled;
+    return this.#props.disabled;
   }
 
   /**

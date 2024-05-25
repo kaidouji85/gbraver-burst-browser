@@ -7,8 +7,8 @@ import { TimeScaleButtonProps } from "../props/time-scale-button-props";
  * @param props プロパティ
  */
 export function onButtonPush(props: TimeScaleButtonProps) {
-  const { model, toggleTween, toggleNotify } = props;
-  if (model.shouldPushNotifierStop || model.disabled) {
+  const { model, toggleTween, toggleNotify, disabled } = props;
+  if (model.shouldPushNotifierStop || disabled) {
     return;
   }
 

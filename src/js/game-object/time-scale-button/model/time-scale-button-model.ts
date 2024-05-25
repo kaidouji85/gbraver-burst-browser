@@ -12,6 +12,4 @@ export type TimeScaleButtonModel = {
    * タイムスケールボタンが反応しないようにする
    */
   shouldPushNotifierStop: boolean;
-  /** 操作不可能であるか否か、trueで操作不可能 */
-  disabled: boolean;
 };

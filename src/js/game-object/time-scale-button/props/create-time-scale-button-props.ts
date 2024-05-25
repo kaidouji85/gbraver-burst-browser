@@ -27,6 +27,7 @@ export function createTimeScaleButtonProps(
   const { resources, gameObjectAction } = params;
   return {
     ...params,
+    disabled: false,
     model: createInitialValue(),
     view: new TimeScaleButtonView(resources, gameObjectAction),
     sounds: createTimeScaleButtonSounds(resources),
