@@ -1,6 +1,6 @@
 import { StoryFn } from "@storybook/html";
 
-import { circlePushDetector } from "../src/js/game-object/push-detector/push-detector";
+import { circlePushDetector } from "../src/js/game-object/push-detector/circle-push-detector";
 import { hudGameObjectStory } from "./stub/hud-game-object-stub";
 
 export default {
