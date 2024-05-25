@@ -117,7 +117,7 @@ export class BatterySelector {
    * @param isDisabled trueで操作不可能となる
    */
   disabled(isDisabled: boolean): void {
-    this.#props.model.disabled = isDisabled;
+    this.#props.disabled = isDisabled;
   }
 
   /**
@@ -125,7 +125,7 @@ export class BatterySelector {
    * @returns 判定結果
    */
   isDisabled(): boolean {
-    return this.#props.model.disabled;
+    return this.#props.disabled;
   }
 
   /**

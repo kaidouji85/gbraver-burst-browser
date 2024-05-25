@@ -12,5 +12,4 @@ export const EMPTY_BATTERY_SELECTOR: BatterySelectorModel = {
   plusButtonScale: 1,
   batteryButtonScale: 1,
   shouldPushNotifierStop: false,
-  disabled: false,
 };

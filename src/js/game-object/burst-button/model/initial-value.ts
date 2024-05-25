@@ -10,6 +10,5 @@ export function createInitialValue(): BurstButtonModel {
     shouldPushNotifierStop: true,
     scale: 1,
     canActivateBurst: false,
-    disabled: false,
   };
 }

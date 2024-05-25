@@ -29,6 +29,7 @@ export function createPilotButtonProps(
   const { resources, pilotIcon, gameObjectAction } = params;
   return {
     ...params,
+    disabled: false,
     model: createInitialValue(),
     sounds: new PilotButtonSounds(resources),
     view: new PilotButtonView(resources, pilotIcon, gameObjectAction),

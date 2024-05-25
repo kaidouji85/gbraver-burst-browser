@@ -7,4 +7,6 @@ export type PredicatedDamageProps = {
   model: PredicatedDamageModel;
   /** ビュー */
   view: PredicatedDamageView;
+  /** 操作不可能であるか否か、trueで操作不可能 */
+  disabled: boolean;
 };

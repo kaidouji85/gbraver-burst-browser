@@ -8,9 +8,9 @@ import { BatterySelectorProps } from "../props/battery-selector-props";
  * @returns 通知ストリーム
  */
 export function notifyDecision(props: BatterySelectorProps): Observable<Event> {
-  const { view, model } = props;
+  const { view, model, disabled } = props;
   return view.okButtonPushNotifier().pipe(
     filter(() => !model.shouldPushNotifierStop),
-    filter(() => !model.disabled),
+    filter(() => !disabled),
   );
 }
