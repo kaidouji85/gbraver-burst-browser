@@ -9,6 +9,9 @@ import { BatterySelectorOpenParam } from "./battery-selector-open-param";
 import { batteryMinus } from "./procedure/battery-minus";
 import { batteryPlus } from "./procedure/battery-plus";
 import { bindEventListeners } from "./procedure/bind-event-listeners";
+import { notifyBatteryMinus } from "./procedure/notify-battery-minus";
+import { notifyBatteryPlus } from "./procedure/notify-battery-plus";
+import { notifyDecision } from "./procedure/notify-decision";
 import { toBatterySilently } from "./procedure/to-battery-silently";
 import { BatterySelectorProps } from "./props/battery-selector-props";
 import {
@@ -138,22 +141,22 @@ export class BatterySelector {
    * @returns 通知ストリーム
    */
   notifyDecision(): Observable<Event> {
-    return this.#props.decidePush;
+    return notifyDecision(this.#props);
   }
 
   /**
    * バッテリープラスボタン押下ストリーム
    * @returns 通知ストリーム
    */
-  notifyBatteryPlus(): Observable<void> {
-    return this.#props.batteryPlusPush;
+  notifyBatteryPlus(): Observable<unknown> {
+    return notifyBatteryPlus(this.#props);
   }
 
   /**
    * バッテリーマイナスボタン押下ストリーム
    * @returns 通知ストリーム
    */
-  notifyBatteryMinus(): Observable<void> {
-    return this.#props.batteryMinusPush;
+  notifyBatteryMinus(): Observable<unknown> {
+    return notifyBatteryMinus(this.#props);
   }
 }
