@@ -50,9 +50,24 @@ const createPredicatedDamage = (params: CreatorParams): THREE.Object3D => {
   return predicatedDamage.getObject3D();
 };
 
-/** ダメージ予想の単体表示 */
-export const single: StoryFn = hudGameObjectStory((params) => [
+/** ダメージ予想の４桁単体表示 */
+export const fourDigitNumber: StoryFn = hudGameObjectStory((params) => [
   createPredicatedDamage({ ...params, damage: 2000 }),
+]);
+
+/** ダメージ予想の3桁単体表示 */
+export const threeDigitNumber: StoryFn = hudGameObjectStory((params) => [
+  createPredicatedDamage({ ...params, damage: 650 }),
+]);
+
+/** ダメージ予想の2桁単体表示 */
+export const twoDigitNumber: StoryFn = hudGameObjectStory((params) => [
+  createPredicatedDamage({ ...params, damage: 10 }),
+]);
+
+/** ダメージ予想の1桁単体表示 */
+export const oneDigitNumber: StoryFn = hudGameObjectStory((params) => [
+  createPredicatedDamage({ ...params, damage: 1 }),
 ]);
 
 /** ダメージ予想の複数表示 */
