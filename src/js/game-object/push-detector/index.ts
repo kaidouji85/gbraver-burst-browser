@@ -36,10 +36,8 @@ export interface PushDetector {
 type SimplePushDetectorParam = {
   /** 当たり判定のジオメトリー */
   geometry: THREE.BufferGeometry;
-
   /** ゲームオブジェクトアクション */
   gameObjectAction: Observable<GameObjectAction>;
-
   /**
    * デバッグ用途で当たり判定を表示・非表示するフラグ
    * trueで当たり判定を表示する
@@ -49,8 +47,11 @@ type SimplePushDetectorParam = {
 
 /** プッシュ検出のシンプルな実装 */
 class SimplePushDetector implements PushDetector {
+  /** メッシュ */
   #mesh: THREE.Mesh<THREE.BufferGeometry, THREE.MeshBasicMaterial>;
+  /** プッシュ通知 */
   #push: Subject<Event>;
+  /** アンサブスクライバ */
   #unsubscriber: Unsubscribable;
 
   /**
@@ -97,7 +98,6 @@ class SimplePushDetector implements PushDetector {
 
   /**
    * マウスダウン時の処理
-   *
    * @param action アクション
    */
   #mouseDownRaycaster(action: MouseDownRaycaster): void {
@@ -115,7 +115,6 @@ class SimplePushDetector implements PushDetector {
       isMeshOverlap(v.raycaster, this.#mesh),
     );
     const isTouchOverlap = 0 < overlapTouches.length;
-
     if (isTouchOverlap) {
       this.#push.next(action.event);
     }
