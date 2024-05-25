@@ -2,9 +2,9 @@ import { Observable, Subject, Unsubscribable } from "rxjs";
 import * as THREE from "three";
 
 import { isMeshOverlap } from "../../overlap/mesh-overlap";
-import type { MouseDownRaycaster } from "../../render/overlap-event/mouse-down-raycaster";
-import type { TouchStartRaycaster } from "../../render/overlap-event/touch-start-raycaster";
-import type { GameObjectAction } from "../action/game-object-action";
+import { MouseDownRaycaster } from "../../render/overlap-event/mouse-down-raycaster";
+import { TouchStartRaycaster } from "../../render/overlap-event/touch-start-raycaster";
+import { GameObjectAction } from "../action/game-object-action";
 
 /** プッシュ検出 */
 export interface PushDetector {
@@ -48,7 +48,6 @@ type SimplePushDetectorParam = {
 };
 
 /** プッシュ検出のシンプルな実装 */
-
 class SimplePushDetector implements PushDetector {
   #mesh: THREE.Mesh<THREE.BufferGeometry, THREE.MeshBasicMaterial>;
   #push: Subject<Event>;
@@ -109,7 +108,6 @@ class SimplePushDetector implements PushDetector {
 
   /**
    * タッチスタート時の処理
-   *
    * @param action アクション
    */
   #touchStartRaycaster(action: TouchStartRaycaster): void {
@@ -124,38 +122,16 @@ class SimplePushDetector implements PushDetector {
   }
 }
 
-/** 円形プッシュ検出生成のパラメータ */
-
-type CirclePushDetectorParam = {
-  /** 円半径 */
-  radius: number;
-
-  /** 円分割数 */
-  segments: number;
-
-  /** ゲームオブジェクトアクション */
-  gameObjectAction: Observable<GameObjectAction>;
-
-  /**
-   * デバッグ用途で当たり判定を表示・非表示するフラグ
-   * trueで当たり判定を表示する
-   */
-  visible?: boolean;
-};
+/** プッシュ検出生成のパラメータ */
+type PushDetectorCreatorParams = SimplePushDetectorParam;
 
 /**
- * 円形プッシュ検出を生成する
- *
+ * プッシュ検出を生成する
  * @param param パラメータ
- * @returns プッシュ検出
+ * @returns 生成結果
  */
-export function circlePushDetector(
-  param: CirclePushDetectorParam,
+export function createPushDetector(
+  param: PushDetectorCreatorParams,
 ): PushDetector {
-  const geometry = new THREE.CircleGeometry(param.radius, param.segments);
-  return new SimplePushDetector({
-    geometry: geometry,
-    gameObjectAction: param.gameObjectAction,
-    visible: param.visible,
-  });
+  return new SimplePushDetector(param);
 }
