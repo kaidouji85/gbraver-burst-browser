@@ -81,4 +81,12 @@ export class PredicatedDamage {
   notifyPush(): Observable<Event> {
     return notifyPush(this.#props);
   }
+
+  /**
+   * 操作不可能フラグを設定する
+   * @param isDisabled trueで操作不可能となる
+   */
+  disabled(isDisabled: boolean): void {
+    this.#props.disabled = isDisabled;
+  }
 }
