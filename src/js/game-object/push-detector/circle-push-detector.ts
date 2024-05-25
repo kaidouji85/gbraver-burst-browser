@@ -27,10 +27,10 @@ type CirclePushDetectorParam = {
 export function circlePushDetector(
   param: CirclePushDetectorParam,
 ): PushDetector {
-  const geometry = new THREE.CircleGeometry(param.radius, param.segments);
+  const { radius, segments } = param;
+  const geometry = new THREE.CircleGeometry(radius, segments);
   return createPushDetector({
-    geometry: geometry,
-    gameObjectAction: param.gameObjectAction,
-    visible: param.visible,
+    ...param,
+    geometry,
   });
 }

@@ -25,11 +25,10 @@ type PlanePushDetectorParam = {
  * @returns プッシュ検出
  */
 export function planePushDetector(param: PlanePushDetectorParam): PushDetector {
-  const { width, height, gameObjectAction, visible } = param;
+  const { width, height } = param;
   const geometry = new THREE.PlaneGeometry(width, height);
   return createPushDetector({
-    geometry: geometry,
-    gameObjectAction,
-    visible,
+    ...param,
+    geometry,
   });
 }
