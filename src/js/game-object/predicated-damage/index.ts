@@ -6,6 +6,7 @@ import { GameObjectAction } from "../action/game-object-action";
 import { hidden } from "./animation/hidden";
 import { show } from "./animation/show";
 import { bindEventListener } from "./procedure/bind-event-listener";
+import { notifyPush } from "./procedure/notify-push";
 import {
   createPredicatedDamageProps,
   PredicatedDamagePropsCreatorParams,
@@ -78,6 +79,6 @@ export class PredicatedDamage {
    * @returns 通知ストリーム
    */
   notifyPush(): Observable<Event> {
-    return this.#props.view.notifyPush();
+    return notifyPush(this.#props);
   }
 }

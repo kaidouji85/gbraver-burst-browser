@@ -1,4 +1,5 @@
 import { Animate } from "../../../animation/animate";
+import { onStart } from "../../../animation/on-start";
 import { tween } from "../../../animation/tween";
 import { PredicatedDamageAnimationProps } from "./animation-props";
 
@@ -9,5 +10,7 @@ import { PredicatedDamageAnimationProps } from "./animation-props";
  */
 export function hidden(props: PredicatedDamageAnimationProps): Animate {
   const { model } = props;
-  return tween(model, (t) => t.to({ opacity: 0 }, 200));
+  return onStart(() => {
+    model.shouldPushNotifierStop = true;
+  }).chain(tween(model, (t) => t.to({ opacity: 0 }, 200)));
 }

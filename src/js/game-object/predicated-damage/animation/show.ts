@@ -16,5 +16,9 @@ export function show(
   const { model } = props;
   return onStart(() => {
     model.damage = damage;
-  }).chain(tween(model, (t) => t.to({ opacity: 1 }, 200)));
+    model.shouldPushNotifierStop = true;
+  }).chain(tween(model, (t) => t.to({ opacity: 1 }, 200)))
+    .chain(onStart(() => {
+      model.shouldPushNotifierStop = false;
+    }));
 }
