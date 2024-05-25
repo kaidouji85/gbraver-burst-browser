@@ -11,6 +11,7 @@ import {
   PropsCreatorParams,
 } from "./props/create-pilot-button-props";
 import { PilotButtonProps } from "./props/pilot-button-props";
+import {notifyPressed} from "./procedure/notify-pressed";
 
 /** コンストラクタのパラメータ */
 type PilotButtonParams = PropsCreatorParams;
@@ -34,9 +35,6 @@ export class PilotButton {
         if (action.type === "PreRender") {
           this.#onPreRender(action);
         }
-      }),
-      this.#props.view.notifyPressed().subscribe((event) => {
-        this.#onPush(event);
       }),
     ];
   }
@@ -89,7 +87,7 @@ export class PilotButton {
    * @returns 通知ストリーム
    */
   notifyPressed(): Observable<Event> {
-    return this.#props.pushButton;
+    return notifyPressed(this.#props);
   }
 
   /**
@@ -114,19 +112,5 @@ export class PilotButton {
    */
   #onPreRender(action: PreRender): void {
     this.#props.view.engage(this.#props.model, action);
-  }
-
-  /**
-   * ボタン押下時の処理
-   * @param event イベント
-   */
-  #onPush(event: Event): void {
-    if (
-      !this.#props.model.shouldPushNotifierStop &&
-      !this.#props.model.disabled &&
-      this.#props.model.canActivatePilotSkill
-    ) {
-      this.#props.pushButton.next(event);
-    }
   }
 }
