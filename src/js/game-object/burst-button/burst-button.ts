@@ -2,10 +2,11 @@ import { Observable, Unsubscribable } from "rxjs";
 import * as THREE from "three";
 
 import { Animate } from "../../animation/animate";
-import type { PreRender } from "../../game-loop/pre-render";
 import { close } from "./animation/close";
 import { decide } from "./animation/decide";
 import { open } from "./animation/open";
+import { bindEventListener } from "./procedure/bind-event-listener";
+import { notifyPressed } from "./procedure/notify-pressed";
 import { BurstButtonProps } from "./props/burst-button-props";
 import {
   createBurstButtonProps,
@@ -29,16 +30,7 @@ export class BurstButton {
   constructor(params: BurstButtonParams) {
     const { gameObjectAction } = params;
     this.#props = createBurstButtonProps(params);
-    this.#unsubscribers = [
-      gameObjectAction.subscribe((action) => {
-        if (action.type === "PreRender") {
-          this.#onPreRender(action);
-        }
-      }),
-      this.#props.view.notifyPush().subscribe((event) => {
-        this.#onPush(event);
-      }),
-    ];
+    this.#unsubscribers = bindEventListener(this.#props, gameObjectAction);
   }
 
   /**
@@ -89,7 +81,7 @@ export class BurstButton {
    * @returns 通知ストリーム
    */
   notifyPressed(): Observable<Event> {
-    return this.#props.pushButton;
+    return notifyPressed(this.#props);
   }
 
   /**
@@ -106,29 +98,5 @@ export class BurstButton {
    */
   isDisabled(): boolean {
     return this.#props.model.disabled;
-  }
-
-  /**
-   * プリレンダー時の処理
-   * @param action プリレンダー情報
-   */
-  #onPreRender(action: PreRender): void {
-    this.#props.view.engage(this.#props.model, action);
-  }
-
-  /**
-   * ボタンを押した時の処理
-   * @param event イベント
-   */
-  #onPush(event: Event): void {
-    if (
-      this.#props.model.shouldPushNotifierStop ||
-      this.#props.model.disabled ||
-      !this.#props.model.canActivateBurst
-    ) {
-      return;
-    }
-
-    this.#props.pushButton.next(event);
   }
 }
