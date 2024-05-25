@@ -2,16 +2,16 @@ import { Observable, Unsubscribable } from "rxjs";
 import * as THREE from "three";
 
 import { Animate } from "../../animation/animate";
-import type { PreRender } from "../../game-loop/pre-render";
 import { close } from "./animation/close";
 import { decide } from "./animation/decide";
 import { open } from "./animation/open";
+import { bindEventListener } from "./procedure/bind-event-listner";
+import { notifyPressed } from "./procedure/notify-pressed";
 import {
   createPilotButtonProps,
   PropsCreatorParams,
 } from "./props/create-pilot-button-props";
 import { PilotButtonProps } from "./props/pilot-button-props";
-import {notifyPressed} from "./procedure/notify-pressed";
 
 /** コンストラクタのパラメータ */
 type PilotButtonParams = PropsCreatorParams;
@@ -30,13 +30,7 @@ export class PilotButton {
   constructor(params: PilotButtonParams) {
     const { gameObjectAction } = params;
     this.#props = createPilotButtonProps(params);
-    this.#unsubscribers = [
-      gameObjectAction.subscribe((action) => {
-        if (action.type === "PreRender") {
-          this.#onPreRender(action);
-        }
-      }),
-    ];
+    this.#unsubscribers = bindEventListener(this.#props, gameObjectAction);
   }
 
   /**
@@ -104,13 +98,5 @@ export class PilotButton {
    */
   isDisabled(): boolean {
     return this.#props.model.disabled;
-  }
-
-  /**
-   * プリレンダー時の処理
-   * @param action アクション
-   */
-  #onPreRender(action: PreRender): void {
-    this.#props.view.engage(this.#props.model, action);
   }
 }
