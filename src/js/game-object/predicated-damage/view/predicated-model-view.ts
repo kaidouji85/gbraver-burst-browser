@@ -98,6 +98,7 @@ export class PredicatedDamageView {
     this.#numbers.forEach((n) => {
       n.destructor();
     });
+    this.#pushDetector.destructor();
   }
 
   /**
@@ -139,6 +140,9 @@ export class PredicatedDamageView {
       sign.opacity(opacity);
       sign.animate(10 / MAX_ANIMATION);
     }
+
+    const damageDigit = values.length + 1;
+    this.#pushDetector.getObject3D().scale.x = damageDigit / NUMBER_OF_DIGITS;
   }
 
   /**
