@@ -1,4 +1,4 @@
-import { Observable, Subject } from "rxjs";
+import { Observable } from "rxjs";
 
 import { ResourcesContainer } from "../../../resource";
 import { SEPlayerContainer } from "../../../se/se-player";
@@ -32,6 +32,5 @@ export function createPilotButtonProps(
     model: createInitialValue(),
     sounds: new PilotButtonSounds(resources),
     view: new PilotButtonView(resources, pilotIcon, gameObjectAction),
-    pushButton: new Subject(),
   };
 }
