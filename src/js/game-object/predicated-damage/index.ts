@@ -72,4 +72,12 @@ export class PredicatedDamage {
   hidden(): Animate {
     return hidden(this.#props);
   }
+
+  /**
+   * 押下通知
+   * @returns 通知ストリーム
+   */
+  notifyPush(): Observable<Event> {
+    return this.#props.view.notifyPush();
+  }
 }

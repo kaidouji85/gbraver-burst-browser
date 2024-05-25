@@ -44,6 +44,9 @@ const createPredicatedDamage = (params: CreatorParams): THREE.Object3D => {
   const predicatedDamage = new PredicatedDamage(params);
   predicatedDamage.getObject3D().position.y = params.y ?? 0;
   flash(predicatedDamage, damage);
+  predicatedDamage.notifyPush().subscribe(() => {
+    console.log("push");
+  });
   return predicatedDamage.getObject3D();
 };
 
