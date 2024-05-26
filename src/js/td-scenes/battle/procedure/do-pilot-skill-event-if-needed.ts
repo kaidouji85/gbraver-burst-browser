@@ -7,7 +7,7 @@ import { BattleSceneProps } from "../props";
  * カスタムバトルイベントがセットされていれば onPilotSkillCommandSelected を実行する
  * 実行結果としてコマンドキャンセル情報を返す
  * @param props 戦闘シーンプロパティ
- * @param battery パイロットスキルコマンド
+ * @param pilot パイロットスキルコマンド
  * @returns コマンドキャンセル情報
  */
 export async function doPilotSkillEventIfNeeded(

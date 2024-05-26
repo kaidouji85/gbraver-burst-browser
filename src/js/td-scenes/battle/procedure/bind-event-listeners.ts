@@ -1,6 +1,7 @@
 import { Unsubscribable } from "rxjs";
 
 import { BattleSceneProps } from "../props";
+import { onBattleSimulator } from "./on-battle-simulator";
 import { onBurst } from "./on-burst";
 import { onBurstByMiniController } from "./on-burst-by-mini-controller";
 import { onDecideBattery } from "./on-decide-battery";
@@ -37,6 +38,8 @@ export function bindEventListeners(props: BattleSceneProps): Unsubscribable[] {
         onBurstByMiniController(props);
       } else if (action.type === "doPilotSkillByMiniController") {
         onPilotSkillByMiniController(props);
+      } else if (action.type === "doBattleSimulator") {
+        onBattleSimulator(props);
       }
     }),
   ];
