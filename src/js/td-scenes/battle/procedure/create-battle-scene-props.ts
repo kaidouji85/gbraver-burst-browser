@@ -67,15 +67,21 @@ export function createBattleSceneProps(
 ): BattleSceneProps {
   return {
     ...params,
+
     playerId: params.player.playerId,
+    stateHistory: params.initialState,
+
     animatePlayer: createAnimatePlayer({
       timeScale: params.initialAnimationTimeScale,
     }),
-    exclusive: new Exclusive(),
-    stateHistory: params.initialState,
-    endBattle: new Subject(),
+
     customBattleEvent: params.customBattleEvent ?? null,
+    exclusive: new Exclusive(),
+
     view: createBattleSceneView(params),
     sounds: createBattleSceneSounds(params),
+
+    endBattle: new Subject(),
+    battleSimulate: new Subject(),
   };
 }

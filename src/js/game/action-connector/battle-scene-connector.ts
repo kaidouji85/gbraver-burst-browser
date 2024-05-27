@@ -9,7 +9,7 @@ export const battleSceneConnector: TDSceneActionConnector<BattleScene> = (
   scene: BattleScene,
   gameAction: Subject<GameAction>,
 ) => [
-  scene.gameEndNotifier().subscribe((v) => {
+  scene.notifyGameEnd().subscribe((v) => {
     gameAction.next({
       type: "EndBattle",
       gameEnd: v.gameEnd,
