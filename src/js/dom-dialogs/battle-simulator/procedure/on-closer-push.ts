@@ -15,8 +15,8 @@ export function onCloserPush(props: BattleSimulatorProps, action: PushDOM) {
   event.preventDefault();
 
   exclusive.execute(async () => {
-    await pop(closer, 1.3);
     se.play(changeValue);
+    await pop(closer, 1.3);
     props.closeDialog.next();
   });
 }

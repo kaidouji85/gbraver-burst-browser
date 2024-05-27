@@ -1,19 +1,24 @@
 import { Subject } from "rxjs";
 
 import { BattleScene } from "../../td-scenes/battle";
-import type { GameAction } from "../game-actions";
-import type { TDSceneActionConnector } from "../td-scene-binder/td-scene-action-connector";
+import { GameAction } from "../game-actions";
+import { TDSceneActionConnector } from "../td-scene-binder/td-scene-action-connector";
 
 /** 戦闘シーンとゲームアクションを関連付ける */
 export const battleSceneConnector: TDSceneActionConnector<BattleScene> = (
   scene: BattleScene,
   gameAction: Subject<GameAction>,
 ) => [
-  scene.gameEndNotifier().subscribe((v) => {
+  scene.notifyGameEnd().subscribe((n) => {
     gameAction.next({
+      ...n,
       type: "EndBattle",
-      gameEnd: v.gameEnd,
-      animationTimeScale: v.animationTimeScale,
+    });
+  }),
+  scene.notifyBattleSimulate().subscribe((n) => {
+    gameAction.next({
+      ...n,
+      type: "BattleSimulatorStart",
     });
   }),
 ];

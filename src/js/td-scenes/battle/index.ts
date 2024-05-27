@@ -1,6 +1,7 @@
 import { Observable, Unsubscribable } from "rxjs";
 
 import { TDScene } from "../td-scene";
+import { BattleSimulateNotify } from "./battle-simuralate-notify";
 import { bindEventListeners } from "./procedure/bind-event-listeners";
 import {
   BattleScenePropsCreatorParams,
@@ -58,8 +59,16 @@ export class BattleScene implements TDScene {
    * ゲーム終了通知
    * @returns 通知ストリーム
    */
-  gameEndNotifier(): Observable<BattleEnd> {
+  notifyGameEnd(): Observable<BattleEnd> {
     return this.#props.endBattle;
+  }
+
+  /**
+   * 戦闘シミュレーション通知
+   * @returns 通知ストリーム
+   */
+  notifyBattleSimulate(): Observable<BattleSimulateNotify> {
+    return this.#props.battleSimulate;
   }
 
   /**

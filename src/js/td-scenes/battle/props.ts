@@ -7,6 +7,7 @@ import { Exclusive } from "../../exclusive/exclusive";
 import { SEPlayerContainer } from "../../se/se-player";
 import { PushWindow } from "../../window/push-window";
 import { BattleProgress } from "./battle-progress";
+import { BattleSimulateNotify } from "./battle-simuralate-notify";
 import { BattleControllerType } from "./controller-type";
 import { CustomBattleEvent } from "./custom-battle-event";
 import { BattleSceneSounds } from "./sounds";
@@ -25,24 +26,31 @@ export type BattleSceneProps = BGMManagerContainer &
   SEPlayerContainer & {
     /** 画面を開いているプレイヤーのID */
     readonly playerId: PlayerId;
-    /** アニメーションプレイヤー */
-    readonly animatePlayer: AnimatePlayer;
     /** ゲームステートヒストリー */
     stateHistory: GameState[];
-    /** バトル終了ストリーム */
-    readonly endBattle: Subject<BattleEnd>;
+
+    /** アニメーションプレイヤー */
+    readonly animatePlayer: AnimatePlayer;
+
     /** バトル進行オブジェクト */
     readonly battleProgress: BattleProgress;
     /** カスタムバトルイベント */
     readonly customBattleEvent: CustomBattleEvent | null;
     /** 排他制御オブジェクト */
     readonly exclusive: Exclusive;
+
     /** 戦闘シーンビュー */
     readonly view: BattleSceneView;
-    /** ウインドウ押下ストリーム */
-    readonly pushWindow: Observable<PushWindow>;
-    /** 戦闘シーン効果音 */
-    readonly sounds: BattleSceneSounds;
     /** コントローラータイプ */
     readonly controllerType: BattleControllerType;
+
+    /** 戦闘シーン効果音 */
+    readonly sounds: BattleSceneSounds;
+
+    /** バトル終了ストリーム */
+    readonly endBattle: Subject<BattleEnd>;
+    /** ウインドウ押下ストリーム */
+    readonly pushWindow: Observable<PushWindow>;
+    /** 戦闘シミュレーション通知ストリーム */
+    readonly battleSimulate: Subject<BattleSimulateNotify>;
   };
