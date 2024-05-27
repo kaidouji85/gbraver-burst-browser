@@ -1,10 +1,12 @@
-import { PlayerId, PlayerState } from "gbraver-burst-core";
+import { PlayerState } from "gbraver-burst-core";
 
 /** 戦闘シミュレーター開始 */
 export type BattleSimulatorStart = {
   type: "BattleSimulatorStart";
-  /** 画面を開いているプレイヤーID */
-  playerId: PlayerId;
-  /** ゲームに参加しているプレイヤーのステート */
-  players: PlayerState[];
+  /** プレイヤー */
+  player: PlayerState;
+  /** 敵 */
+  enemy: PlayerState;
+  /** プレイヤーが攻撃側か否か、trueで攻撃側 */
+  isPlayerAttacker: boolean;
 };

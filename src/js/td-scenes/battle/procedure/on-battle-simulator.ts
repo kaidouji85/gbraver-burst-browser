@@ -5,8 +5,24 @@ import { BattleSceneProps } from "../props";
  * @param props 戦闘シーンプロパティ
  */
 export function onBattleSimulator(props: BattleSceneProps) {
-  const { exclusive } = props;
+  const { exclusive, playerId, stateHistory, battleSimulate } = props;
   exclusive.execute(async () => {
-    // TODO 処理を追加する
+    const lastState = stateHistory.at(-1);
+    if (!lastState) {
+      return;
+    }
+
+    const player = lastState.players.find((p) => p.playerId === playerId);
+    const enemy = lastState.players.find((p) => p.playerId !== playerId);
+    if (!player || !enemy) {
+      return;
+    }
+
+    const isPlayerAttacker = lastState.activePlayerId === playerId;
+    battleSimulate.next({
+      player,
+      enemy,
+      isPlayerAttacker,
+    });
   });
 }
