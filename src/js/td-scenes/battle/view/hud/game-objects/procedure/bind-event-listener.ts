@@ -1,22 +1,19 @@
-import { Unsubscribable } from "rxjs";
+import { Subject, Unsubscribable } from "rxjs";
 
+import { BattleSceneAction } from "../../../../actions";
 import { HUDGameObjectsProps } from "../props";
 
 /**
  * イベントをバインドする
  * @param props プロパティ
+ * @param battleAction 戦闘シーンアクション通知
  * @returns アンサブスクライバ
  */
 export function bindEventListener(
   props: HUDGameObjectsProps,
+  battleAction: Subject<BattleSceneAction>,
 ): Unsubscribable[] {
-  const {
-    batterySelector,
-    burstButton,
-    pilotButton,
-    timeScaleButton,
-    battleAction,
-  } = props;
+  const { batterySelector, burstButton, pilotButton, timeScaleButton } = props;
   return [
     batterySelector.notifyBatteryPlus().subscribe(() => {
       battleAction.next({
