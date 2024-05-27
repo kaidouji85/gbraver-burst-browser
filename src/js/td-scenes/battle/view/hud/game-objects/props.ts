@@ -1,5 +1,3 @@
-import { Subject } from "rxjs";
-
 import { BatterySelector } from "../../../../../game-object/battery-selector";
 import { BurstButton } from "../../../../../game-object/burst-button/burst-button";
 import { Fader } from "../../../../../game-object/fader/fader";
@@ -7,7 +5,6 @@ import { LeadLine } from "../../../../../game-object/lead-line/lead-line";
 import { PilotButton } from "../../../../../game-object/pilot-button/pilot-button";
 import { ResultIndicator } from "../../../../../game-object/result-indicator/result-indicator";
 import { TimeScaleButton } from "../../../../../game-object/time-scale-button/time-scale-button";
-import { BattleSceneAction } from "../../../actions";
 
 /** HUDレイヤーゲームオブジェクト プロパティ */
 export type HUDGameObjectsProps = {
@@ -31,6 +28,4 @@ export type HUDGameObjectsProps = {
   rearmostFader: Fader;
   /** 引き分けインジケータ */
   drawIndicator: ResultIndicator;
-  /** バトルアクション通知 */
-  battleAction: Subject<BattleSceneAction>;
 };

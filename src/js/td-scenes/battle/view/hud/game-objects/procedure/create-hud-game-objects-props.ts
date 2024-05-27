@@ -1,5 +1,3 @@
-import { Subject } from "rxjs";
-
 import { BatterySelector } from "../../../../../../game-object/battery-selector";
 import {
   frontmostFader,
@@ -27,7 +25,6 @@ export function createHUDGameObjectsProps(
 ): HUDGameObjectsProps {
   const { resources, gameObjectAction } = params;
   return {
-    battleAction: new Subject(),
     batterySelector: new BatterySelector(params),
     batterySelectorLeadLine: batterySelectorLeadLine(gameObjectAction),
     burstButton: createBurstButton(params),
