@@ -1,6 +1,9 @@
+import { Observable, Subject } from "rxjs";
 import * as THREE from "three";
 
+import { BattleSceneAction } from "../../../actions";
 import { HUDLayerObjectCreatorParams } from "../creator-params";
+import { bindEventListener } from "./procedure/bind-event-listenr";
 import { createEnemyProps } from "./procedure/create-enemy-props";
 import { createPlayerProps } from "./procedure/create-player-props";
 import { destructor } from "./procedure/destructor";
@@ -16,10 +19,15 @@ export type HUDPlayer = HUDPlayerProps & {
 
   /**
    * シーンに追加するオブジェクトを取得する
-   *
    * @returns シーンに追加するオブジェクト
    */
   getObject3Ds(): THREE.Object3D[];
+
+  /**
+   * 戦闘シーンアクションを通知する
+   * @returns 通知ストリーム
+   */
+  battleActionNotifier(): Observable<BattleSceneAction>;
 };
 
 /**
@@ -28,10 +36,18 @@ export type HUDPlayer = HUDPlayerProps & {
  * @returns 生成結果
  */
 function createHUDPlayer(props: HUDPlayerProps): HUDPlayer {
+  const battleAction = new Subject<BattleSceneAction>();
+  const unsubscrribers = bindEventListener(props, battleAction);
   return {
     ...props,
-    destructor: () => destructor(props),
+    destructor: () => {
+      destructor(props);
+      unsubscrribers.forEach((u) => {
+        u.unsubscribe();
+      });
+    },
     getObject3Ds: () => getObject3Ds(props),
+    battleActionNotifier: () => battleAction,
   };
 }
 
