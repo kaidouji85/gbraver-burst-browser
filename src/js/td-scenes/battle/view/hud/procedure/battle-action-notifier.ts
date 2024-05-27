@@ -1,4 +1,4 @@
-import { merge,Observable } from "rxjs";
+import { merge, Observable } from "rxjs";
 
 import { BattleSceneAction } from "../../../actions";
 import { HUDLayerProps } from "../props";
@@ -14,6 +14,6 @@ export function battleActionNotifier(
   const { gameObjects, players } = props;
   return merge(
     gameObjects.battleActionNotifier(),
-    ...players.map(p => p.battleActionNotifier()),
+    ...players.map((p) => p.battleActionNotifier()),
   );
 }

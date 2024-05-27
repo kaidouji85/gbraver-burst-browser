@@ -1,3 +1,5 @@
+import { BattleSimulator } from "../../dom-dialogs/battle-simulator";
+import { battleSimulatorConnector } from "../action-connector/battle-simulator-connector";
 import { BattleSimulatorStart } from "../game-actions/battle-simulator-start";
 import { GameProps } from "../game-props";
 
@@ -10,5 +12,12 @@ export function onBattleSimulatorStart(
   props: GameProps,
   action: BattleSimulatorStart,
 ) {
-  // TODO 処理を書く
+  const { domDialogBinder } = props;
+  domDialogBinder.bind(
+    new BattleSimulator({
+      ...props,
+      ...action,
+    }),
+    battleSimulatorConnector,
+  );
 }
