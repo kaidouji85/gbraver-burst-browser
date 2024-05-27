@@ -1,4 +1,4 @@
-import { Observable } from "rxjs";
+import { Observable, Subject } from "rxjs";
 import * as THREE from "three";
 
 import { BattleSceneAction } from "../../../actions";
@@ -10,7 +10,7 @@ import { getObject3Ds } from "./procedure/get-object-3ds";
 import { HUDGameObjectsProps } from "./props";
 
 /** HUDレイヤーのゲームオブジェクト */
-export type HUDGameObjects = Omit<HUDGameObjectsProps, "battleAction"> & {
+export type HUDGameObjects = HUDGameObjectsProps & {
   /**
    * デスタラクタ相当の処理
    */
@@ -38,7 +38,8 @@ export function createHUDGameObjects(
   params: HUDLayerObjectCreatorParams,
 ): HUDGameObjects {
   const props = createHUDGameObjectsProps(params);
-  const unsubscrribers = bindEventListener(props);
+  const battleAction = new Subject<BattleSceneAction>();
+  const unsubscrribers = bindEventListener(props, battleAction);
   return {
     ...props,
     destructor: () => {
@@ -48,6 +49,6 @@ export function createHUDGameObjects(
       });
     },
     getObject3Ds: () => getObject3Ds(props),
-    battleActionNotifier: () => props.battleAction,
+    battleActionNotifier: () => battleAction,
   };
 }
