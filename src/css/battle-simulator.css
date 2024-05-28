@@ -234,25 +234,30 @@
   transform: translate(-50%, -50%) scale(-1, 1);
 }
 
-.battle-simulator__player-controller {
-  position: relative;
-  z-index: var(--controller-z-index);
-  grid-area: player-controller;
-  white-space: nowrap;
-}
-
+.battle-simulator__player-controller,
 .battle-simulator__enemy-controller {
   position: relative;
   z-index: var(--controller-z-index);
+  display: grid;
+  grid-template-columns: auto auto;
+  gap: calc(var(--responsive-font-size) * 0.5);
+}
+
+.battle-simulator__player-controller {
+  grid-area: player-controller;
+}
+
+.battle-simulator__enemy-controller {
   grid-area: enemy-controller;
-  white-space: nowrap;
 }
 
 .battle-simulator__player-battery-minus,
 .battle-simulator__player-battery-plus,
 .battle-simulator__enemy-battery-minus,
 .battle-simulator__enemy-battery-plus {
-  width: calc(var(--responsive-font-size) * 3);
+  display: grid;
+  place-items: center;
+  width: calc(var(--responsive-font-size) * 5);
   height: calc(var(--responsive-font-size) * 3);
   font-size: calc(var(--responsive-font-size) * 1.5);
   border-radius: var(--button-border-radius);
