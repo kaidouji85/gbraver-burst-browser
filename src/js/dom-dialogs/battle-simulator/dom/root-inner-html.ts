@@ -3,7 +3,13 @@ import { ArmdozerIds, correctPower, PlayerState } from "gbraver-burst-core";
 import { getArmdozerStandPathId } from "../../../path/armdozer-stand-path";
 import { ResourcesContainer } from "../../../resource";
 import { PathIds } from "../../../resource/path/ids";
-import { ROOT, TURN_INDICATOR, TURN_INDICATOR_ENEMY } from "./class-name";
+import {
+  BATTLE_RESULT_NAME,
+  DAMAGE,
+  ROOT,
+  TURN_INDICATOR,
+  TURN_INDICATOR_ENEMY,
+} from "./class-name";
 import template from "./root-inner-html.hbs";
 
 /** 生成パラメータ */
@@ -58,6 +64,8 @@ export function rootInnerHTML(params: RootInnerHtmlParams) {
     enemy,
     enemyPower,
     ROOT,
+    DAMAGE,
+    BATTLE_RESULT_NAME,
     turnIndicatorClass,
     closerPath,
     playerArmdozerPath,

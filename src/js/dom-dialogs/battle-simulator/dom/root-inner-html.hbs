@@ -7,9 +7,9 @@
     data-id="closer"
   />
   <div class="{{ROOT}}__enemy-state">
-    <div class="{{ROOT}}__damage" data-id="enemy-damage"></div>
+    <div class="{{DAMAGE}}" data-id="enemy-damage"></div>
     <div
-      class="{{ROOT}}__battle-result-name"
+      class="{{BATTLE_RESULT_NAME}}"
       data-id="enemy-battle-result-name"
     ></div>
     <div class="{{ROOT}}__hp-label">HP</div>
@@ -50,11 +50,11 @@
     />
   </div>
   <div class="{{ROOT}}__player-state">
+    <div class="{{DAMAGE}}" data-id="player-damage"></div>
     <div
-      class="{{ROOT}}__battle-result-name"
+      class="{{BATTLE_RESULT_NAME}}"
       data-id="player-battle-result-name"
     ></div>
-    <div class="{{ROOT}}__damage" data-id="player-damage"></div>
     <div class="{{ROOT}}__hp-label">HP</div>
     <div class="{{ROOT}}__hp-value">{{player.armdozer.hp}}</div>
     <div class="{{ROOT}}__state-separator-1"></div>
