@@ -21,9 +21,16 @@ export function onPlayerBatteryMinusPush(
   event.stopPropagation();
 
   exclusive.execute(async () => {
+    const targetBatteryButton = playerElements.batteryMinus;
+    // iPhone、iPadでは、disabled属性が付与されているボタンを押下しても、
+    // touchstartが発火するため、disabled属性のチェックが必要
+    if (targetBatteryButton.disabled) {
+      return;
+    }
+
     const nextPlayerBattery = playerBattery - 1;
     se.play(changeValue);
-    pop(playerElements.batteryMinus);
+    pop(targetBatteryButton);
     props.playerBattery = nextPlayerBattery;
     updateBattery(playerElements, nextPlayerBattery);
     updateBattleResult(props);
