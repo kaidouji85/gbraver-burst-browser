@@ -21,16 +21,9 @@ export function onEnemyBatteryPlusPush(
   event.stopPropagation();
 
   exclusive.execute(async () => {
-    const targetBatteryButton = enemyElements.batteryPlus;
-    // iPhone、iPadでは、disabled属性が付与されているボタンを押下しても、
-    // touchstartが発火するため、disabled属性のチェックが必要
-    if (targetBatteryButton.disabled) {
-      return;
-    }
-
     const nextEnemyBattery = enemyBattery + 1;
     se.play(changeValue);
-    pop(targetBatteryButton);
+    pop(enemyElements.batteryPlus);
     props.enemyBattery = nextEnemyBattery;
     updateBattery(enemyElements, nextEnemyBattery);
     updateBattleResult(props);

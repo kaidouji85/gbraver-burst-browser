@@ -4,7 +4,7 @@ import { fromEvent, map, merge, Observable } from "rxjs";
 export type PushDOM = {
   type: "PushDOM";
   /** イベントオブジェクト */
-  event: Event;
+  event: MouseEvent | TouchEvent;
 };
 
 /**
@@ -12,44 +12,22 @@ export type PushDOM = {
  * @param dom 押下判定のHTML要素
  * @returns ストリーム
  */
-export function domPushStream(dom: HTMLElement): Observable<PushDOM> {
-  const mouseDown: Observable<PushDOM> = fromEvent<MouseEvent>(
-    dom,
-    "mousedown",
-  ).pipe(
-    map((event) => {
-      return {
-        type: "PushDOM",
-        event,
-      };
-    }),
+export const domPushStream = (dom: HTMLElement): Observable<PushDOM> =>
+  merge(
+    fromEvent<MouseEvent>(dom, "mousedown").pipe(
+      map((event) => ({ type: "PushDOM", event }) as const),
+    ),
+    fromEvent<TouchEvent>(dom, "touchstart").pipe(
+      map((event) => ({ type: "PushDOM", event }) as const),
+    ),
   );
-  const touchStart: Observable<PushDOM> = fromEvent<TouchEvent>(
-    dom,
-    "touchstart",
-  ).pipe(
-    map((event) => {
-      return {
-        type: "PushDOM",
-        event,
-      };
-    }),
-  );
-  return merge(mouseDown, touchStart);
-}
 
 /**
  * HTMLクリックストリーム
  * @param dom 押下判定のHTML要素
  * @returns ストリーム
  */
-export function domClickStream(dom: HTMLElement): Observable<PushDOM> {
-  return fromEvent<MouseEvent>(dom, "click").pipe(
-    map((event) => {
-      return {
-        type: "PushDOM",
-        event,
-      };
-    }),
+export const domClickStream = (dom: HTMLElement): Observable<PushDOM> =>
+  fromEvent<MouseEvent>(dom, "click").pipe(
+    map((event) => ({ type: "PushDOM", event })),
   );
-}
