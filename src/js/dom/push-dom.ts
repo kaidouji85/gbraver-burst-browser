@@ -29,8 +29,5 @@ export const domPushStream = (dom: HTMLElement): Observable<PushDOM> =>
  */
 export const domClickStream = (dom: HTMLElement): Observable<PushDOM> =>
   fromEvent<MouseEvent>(dom, "click").pipe(
-    map((event) => ({
-      type: "PushDOM",
-      event,
-    })),
+    map((event) => ({ type: "PushDOM", event })),
   );
