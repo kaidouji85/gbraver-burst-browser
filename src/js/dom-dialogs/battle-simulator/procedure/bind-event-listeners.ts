@@ -1,4 +1,4 @@
-import { filter,Unsubscribable } from "rxjs";
+import { filter, Unsubscribable } from "rxjs";
 
 import { domPushStream } from "../../../dom/push-dom";
 import { BattleSimulatorProps } from "../props";
