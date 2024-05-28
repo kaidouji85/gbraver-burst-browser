@@ -8,6 +8,6 @@ export function initialValue(): PredicatedDamageModel {
   return {
     damage: 2000,
     opacity: 0,
-    shouldPushNotifierStop: false,
+    shouldPushNotifierStop: true,
   };
 }
