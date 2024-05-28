@@ -8,9 +8,9 @@ import { PredicatedDamageProps } from "../props/predicated-damage-props";
  * @returns 通知ストリーム
  */
 export function notifyPush(props: PredicatedDamageProps): Observable<Event> {
-  const { view, model, disabled } = props;
+  const { view, model } = props;
   return view.notifyPush().pipe(
     filter(() => !model.shouldPushNotifierStop),
-    filter(() => !disabled),
+    filter(() => !props.disabled),
   );
 }
