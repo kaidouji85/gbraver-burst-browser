@@ -1,9 +1,10 @@
 import { BattleResult } from "gbraver-burst-core";
 
+import { BATTLE_RESULT_NAME, BATTLE_RESULT_NAME_IS_DEATH } from "./class-name";
 import { PlayerElements } from "./player-elements";
 
 /** 戦闘結果名のマッピング */
-const battleResultNames: { [key: string]: string } = {
+const battleResultNames = {
   NormalHit: "ヒット",
   Guard: "ガード",
   CriticalHit: "クリティカル",
@@ -11,15 +12,27 @@ const battleResultNames: { [key: string]: string } = {
   Miss: "ミス",
 };
 
+/** 更新パラメータ */
+type BattleResultNameUpdaterParams = {
+  /** プレイヤーのHTML要素 */
+  elements: PlayerElements;
+  /** 戦闘結果名 */
+  result: BattleResult;
+  /** 死亡したか否か、trueで死亡 */
+  isDeath: boolean;
+};
+
 /**
  * 戦闘結果名を更新する
- * @param elements プレイヤーのHTML要素
- * @param result 戦闘結果
+ * @param params パラメータ
  */
 export const updateBattleResultName = (
-  elements: PlayerElements,
-  result: BattleResult,
+  params: BattleResultNameUpdaterParams,
 ) => {
+  const { elements, result, isDeath } = params;
   const { battleResultName } = elements;
   battleResultName.innerText = battleResultNames[result.name] ?? "";
+  battleResultName.className = isDeath
+    ? BATTLE_RESULT_NAME_IS_DEATH
+    : BATTLE_RESULT_NAME;
 };

@@ -114,7 +114,11 @@ export const updateBattleResult = (props: BattleSimulatorProps) => {
   );
   const damage = getDamageValue(result);
   const isDeath = defender.armdozer.hp <= damage;
-  updateBattleResultName(defenderElements, result);
+  updateBattleResultName({
+    elements: defenderElements,
+    result,
+    isDeath,
+  });
   updateDamage({
     elements: defenderElements,
     value: damage,
