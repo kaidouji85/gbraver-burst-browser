@@ -14,7 +14,7 @@ import { battleSceneConnector } from "../action-connector/battle-scene-connector
 import { matchCardConnector } from "../action-connector/match-card-connector";
 import { networkErrorDialogConnector } from "../action-connector/network-error-dialog-connector";
 import { waitingDialogConnector } from "../action-connector/waiting-dialog-connector";
-import { MAX_LOADING_TIME } from "../dom-scene-binder/max-loading-time";
+import { MAX_LOADING_TIME } from "../../dom-scenes/dom-scene-binder/max-loading-time";
 import { GameProps } from "../game-props";
 
 /**

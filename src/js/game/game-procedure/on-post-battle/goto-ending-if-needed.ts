@@ -1,7 +1,7 @@
 import { NPCEnding } from "../../../dom-scenes/npc-ending";
 import { waitTime } from "../../../wait/wait-time";
 import { npcEndingConnector } from "../../action-connector/npc-ending-connector";
-import { MAX_LOADING_TIME } from "../../dom-scene-binder/max-loading-time";
+import { MAX_LOADING_TIME } from "../../../dom-scenes/dom-scene-binder/max-loading-time";
 import { PostBattleAction } from "../../game-actions/post-battle-action";
 import { GameProps } from "../../game-props";
 

@@ -1,7 +1,7 @@
 import { Subject, Unsubscribable } from "rxjs";
 
-import type { DOMScene } from "../../dom-scenes/dom-scene";
-import type { GameAction } from "../game-actions";
+import { GameAction } from "../../game/game-actions";
+import { DOMScene } from "../dom-scene";
 
 /**
  * ゲームアクションコネクタ

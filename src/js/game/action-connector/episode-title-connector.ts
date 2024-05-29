@@ -1,5 +1,5 @@
 import { EpisodeTitle } from "../../dom-scenes/episode-title";
-import { DOMSceneActionConnector } from "../dom-scene-binder/dom-scene-action-connector";
+import { DOMSceneActionConnector } from "../../dom-scenes/dom-scene-binder/action-connector";
 
 /** アクションコネクタのデータ型 */
 type Connector = DOMSceneActionConnector<EpisodeTitle>;

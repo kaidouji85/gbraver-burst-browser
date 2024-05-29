@@ -1,5 +1,5 @@
 import { NPCEnding } from "../../dom-scenes/npc-ending";
-import type { DOMSceneActionConnector } from "../dom-scene-binder/dom-scene-action-connector";
+import type { DOMSceneActionConnector } from "../../dom-scenes/dom-scene-binder/action-connector";
 
 /** アクションコネクタのデータ型 */
 type Connector = DOMSceneActionConnector<NPCEnding>;
