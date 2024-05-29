@@ -16,7 +16,7 @@ export function bindEventListener(
   const { predicatedDamage } = props;
   return [
     predicatedDamage.notifyPush().subscribe(() => {
-      battleAction.next({ type: "doBattleSimulator" });
+      battleAction.next({ type: "battleSimulatorStart" });
     }),
   ];
 }
