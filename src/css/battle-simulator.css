@@ -109,9 +109,8 @@
 
 .battle-simulator__damage--is-death,
 .battle-simulator__battle-result-name--is-death {
-  color: #ff2828;
-  -webkit-text-stroke: 1px #1a0d08;
-  font-weight: bold;
+  color: #ff2929;
+  text-shadow: #b31d1d 1px 0 2px;
 }
 
 .battle-simulator__hp-label {
