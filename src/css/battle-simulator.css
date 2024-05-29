@@ -14,7 +14,7 @@
     --player-area-z-index: 1;
     --controller-z-index: 2;
     --result-area-z-index: 2;
-    --is-death-color: #ff4500;
+    --is-death-color: #ff2828;
 
     display: block;
   }
