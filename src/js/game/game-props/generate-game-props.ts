@@ -21,25 +21,11 @@ import { TDSceneBinder } from "../td-scene-binder";
 import { GameProps } from "./index";
 
 /** GamePropsジェネレータパラメータ */
-export type GamePropsGeneratorParam = {
-  /** リソースルート */
-  resourceRoot: ResourceRoot;
-  /** 遊び方スライドのURL */
-  howToPlayURL: string;
-  /** 利用規約ページのURL */
-  termsOfServiceURL: string;
-  /** 問い合わせページのURL */
-  contactURL: string;
-  /** プライバシーポリシーページのURL */
-  privacyPolicyURL: string;
+export type GamePropsGeneratorParams = {
   /** サービスワーカーを利用するか否か、trueで利用する */
   isServiceWorkerUsed: boolean;
   /** APIサーバ系機能が利用可能か否か、trueで利用可能 */
   isAPIServerEnable: boolean;
-  /** APIサーバのSDK */
-  api: BrowserSDK;
-  /** ブラウザ設定リポジトリ */
-  config: GBraverBurstBrowserConfigRepository;
   /** 開発中のエピソードをプレイできるか否かのフラグ、trueでプレイできる */
   canPlayEpisodeInDevelopment: boolean;
   /** 開発中のリソースをロードするか否かのフラグ、trueでロードする */
@@ -48,31 +34,43 @@ export type GamePropsGeneratorParam = {
   canPlayDevelopingArmdozer: boolean;
   /** 開発中のパイロットを選択できるか否かのフラグ、trueで選択できる */
   canPlayDevelopingPilot: boolean;
+
+  /** 遊び方スライドのURL */
+  howToPlayURL: string;
+  /** 利用規約ページのURL */
+  termsOfServiceURL: string;
+  /** 問い合わせページのURL */
+  contactURL: string;
+  /** プライバシーポリシーページのURL */
+  privacyPolicyURL: string;
+
+  /** ブラウザ設定リポジトリ */
+  config: GBraverBurstBrowserConfigRepository;
+
+  /** APIサーバのSDK */
+  api: BrowserSDK;
+
+  /** リソースルート */
+  resourceRoot: ResourceRoot;
 };
 
 /**
  * ゲームプロパティを生成する
  *
- * @param param パラメータ
+ * @params params パラメータ
  * @returns 生成結果
  */
-export function generateGameProps(param: GamePropsGeneratorParam): GameProps {
+export function generateGameProps(params: GamePropsGeneratorParams): GameProps {
   const resize = resizeStream();
   const pushWindow = pushWindowsStream();
   const renderer = new Renderer(resize);
   const gameLoop = gameLoopStream();
   const hudUIScale = new CssHUDUIScale(renderer.getRendererDOM(), resize);
   return {
+    ...params,
     performanceStats: null,
-    resourceRoot: param.resourceRoot,
-    resources: emptyResources(param.resourceRoot),
+    resources: emptyResources(params.resourceRoot),
     isFullResourceLoaded: false,
-    isServiceWorkerUsed: param.isServiceWorkerUsed,
-    howToPlayURL: param.howToPlayURL,
-    termsOfServiceURL: param.termsOfServiceURL,
-    privacyPolicyURL: param.privacyPolicyURL,
-    contactURL: param.contactURL,
-    isAPIServerEnable: param.isAPIServerEnable,
     inProgress: {
       type: "None",
     },
@@ -80,8 +78,6 @@ export function generateGameProps(param: GamePropsGeneratorParam): GameProps {
     pushWindow,
     gameLoop,
     hudUIScale: new CssHUDUIScale(renderer.getRendererDOM(), resize),
-    api: param.api,
-    config: param.config,
     suddenlyBattleEnd: new FutureSuddenlyBattleEnd(),
     fader: new DOMFader(),
     interruptScenes: new InterruptScenes(),
@@ -95,9 +91,5 @@ export function generateGameProps(param: GamePropsGeneratorParam): GameProps {
     serviceWorker: null,
     bgm: createBGMManager(),
     se: createSEPlayer(),
-    canPlayEpisodeInDevelopment: param.canPlayEpisodeInDevelopment,
-    shouldLoadDevelopingResource: param.shouldLoadDevelopingResource,
-    canPlayDevelopingArmdozer: param.canPlayDevelopingArmdozer,
-    canPlayDevelopingPilot: param.canPlayDevelopingPilot,
   };
 }
