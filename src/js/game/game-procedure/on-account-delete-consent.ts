@@ -9,5 +9,5 @@ import type { GameProps } from "../game-props";
  */
 export function onAccountDeleteConsent(props: Readonly<GameProps>): void {
   const dialog = new DeleteAccountConsentDialog(props);
-  props.domDialogBinder.bind(dialog, deleteAccountConsentDialogConnector);
+  props.domDialogBinder.bind(dialog, deleteAccountConsentDialogConnector(props.gameAction));
 }

@@ -4,6 +4,7 @@ import { fadeOut, stop } from "../../bgm/bgm-operators";
 import { createSeriousMatchEvent } from "../../custom-battle-events/serious-match-event";
 import { NetworkErrorDialog } from "../../dom-dialogs/network-error/network-error-dialog";
 import { WaitingDialog } from "../../dom-dialogs/waiting/waiting-dialog";
+import { MAX_LOADING_TIME } from "../../dom-scenes/dom-scene-binder/max-loading-time";
 import { MatchCard } from "../../dom-scenes/match-card";
 import { SOUND_IDS } from "../../resource/sound/ids";
 import { BattleScene } from "../../td-scenes/battle";
@@ -14,7 +15,6 @@ import { battleSceneConnector } from "../action-connector/battle-scene-connector
 import { matchCardConnector } from "../action-connector/match-card-connector";
 import { networkErrorDialogConnector } from "../action-connector/network-error-dialog-connector";
 import { waitingDialogConnector } from "../action-connector/waiting-dialog-connector";
-import { MAX_LOADING_TIME } from "../../dom-scenes/dom-scene-binder/max-loading-time";
 import { GameProps } from "../game-props";
 
 /**
@@ -42,7 +42,10 @@ function createBattleProgress(
             type: "GotoTitle",
           },
         });
-        props.domDialogBinder.bind(dialog, networkErrorDialogConnector);
+        props.domDialogBinder.bind(
+          dialog,
+          networkErrorDialogConnector(props.gameAction),
+        );
         throw e;
       }
     },

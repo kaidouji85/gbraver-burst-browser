@@ -19,6 +19,9 @@ export function onWebSocketAPIError(
       type: "GotoTitle",
     },
   });
-  props.domDialogBinder.bind(dialog, networkErrorDialogConnector);
+  props.domDialogBinder.bind(
+    dialog,
+    networkErrorDialogConnector(props.gameAction),
+  );
   throw action;
 }
