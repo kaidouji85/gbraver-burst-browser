@@ -17,7 +17,4 @@ export const battleSceneConnector =
   (scene: BattleScene) =>
     gameAction.connect([
       scene.notifyGameEnd().pipe(map((a) => ({ ...a, type: "EndBattle" }))),
-      scene
-        .notifyBattleSimulate()
-        .pipe(map((a) => ({ ...a, type: "BattleSimulatorStart" }))),
     ]);
