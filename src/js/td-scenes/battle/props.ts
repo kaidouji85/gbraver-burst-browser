@@ -57,7 +57,7 @@ export type BattleSceneProps = ResourcesContainer &
     readonly endBattle: Subject<BattleEnd>;
     /** ウインドウ押下ストリーム */
     readonly pushWindow: Observable<PushWindow>;
-    /** 
+    /**
      * 戦闘シーンアクション管理オブジェクト
      * 動的生成されるダイアログからの通知を購読するために利用する
      */
