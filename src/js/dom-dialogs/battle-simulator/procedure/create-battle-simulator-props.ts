@@ -22,6 +22,8 @@ export type BattleSimulatorPropsCreatorParams = ResourcesContainer &
     player: PlayerState;
     /** 敵のステート */
     enemy: PlayerState;
+    /** プレイヤーの初期選択バッテリー */
+    initialPlayerBattery: number;
     /** プレイヤーが攻撃側か否か、trueで攻撃側 */
     isPlayerAttacker: boolean;
   };
@@ -33,7 +35,7 @@ export type BattleSimulatorPropsCreatorParams = ResourcesContainer &
 export function createBattleSimulatorProps(
   params: BattleSimulatorPropsCreatorParams,
 ): BattleSimulatorProps {
-  const { player, enemy, resources } = params;
+  const { player, enemy, initialPlayerBattery, resources } = params;
 
   const root = document.createElement("div");
   root.className = ROOT;
@@ -52,7 +54,7 @@ export function createBattleSimulatorProps(
   const playerElements = createPlayerElements(root);
   const enemyElements = createEnemyElements(root);
 
-  const playerBattery = player.armdozer.battery;
+  const playerBattery = Math.min(initialPlayerBattery, player.armdozer.battery);
   const enemyBattery = enemy.armdozer.battery;
   return {
     ...params,
