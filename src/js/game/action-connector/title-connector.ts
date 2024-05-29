@@ -10,26 +10,13 @@ export const titleConnector =
   (gameAction: ActionManager<GameAction>): DOMSceneActionConnector<Title> =>
   (scene) =>
     gameAction.connect([
-      scene.notifyLogin().pipe(
-        map(() => ({ type: "UniversalLogin" }))
-      ),
-      scene.notifyLogout().pipe(
-        map(() => ({ type: "Logout" }))
-      ),
-      scene.notifyAccountDeletion().pipe(
-        map(() => ({ type: "AccountDeleteConsent" }))
-      ),
-      scene.notifyArcade().pipe(
-        map(() => ({ type: "ArcadeStart" }))
-      ),
-      scene.notifyNetBattle().pipe(
-        map(() => ({ type: "NetBattleStart" }))
-      ),
-      scene.notifyConfig().pipe(
-        map(() => ({ type: "ConfigChangeStart" }))
-      ),
-      scene.notifyTutorial().pipe(
-        map(() => ({ type: "StoryStart" }))
-      ),
+      scene.notifyLogin().pipe(map(() => ({ type: "UniversalLogin" }))),
+      scene.notifyLogout().pipe(map(() => ({ type: "Logout" }))),
+      scene
+        .notifyAccountDeletion()
+        .pipe(map(() => ({ type: "AccountDeleteConsent" }))),
+      scene.notifyArcade().pipe(map(() => ({ type: "ArcadeStart" }))),
+      scene.notifyNetBattle().pipe(map(() => ({ type: "NetBattleStart" }))),
+      scene.notifyConfig().pipe(map(() => ({ type: "ConfigChangeStart" }))),
+      scene.notifyTutorial().pipe(map(() => ({ type: "StoryStart" }))),
     ]);
-

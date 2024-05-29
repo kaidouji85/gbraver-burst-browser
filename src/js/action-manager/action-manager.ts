@@ -1,6 +1,6 @@
 import { Observable, Subject, Unsubscribable } from "rxjs";
 
-/** 
+/**
  * アクション管理オブジェクト
  * @template X 通知オブジェクトのデータ型
  */

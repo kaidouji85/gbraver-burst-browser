@@ -16,12 +16,10 @@ export const networkErrorDialogConnector =
   ): DomDialogActionConnector<NetworkErrorDialog> =>
   (dialog) =>
     gameAction.connect([
-      dialog
-        .notifyPostNetworkError()
-        .pipe(
-          map((postNetworkError) => ({
-            type: "EndNetworkError",
-            postNetworkError,
-          })),
-        ),
+      dialog.notifyPostNetworkError().pipe(
+        map((postNetworkError) => ({
+          type: "EndNetworkError",
+          postNetworkError,
+        })),
+      ),
     ]);

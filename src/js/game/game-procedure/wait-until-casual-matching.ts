@@ -30,7 +30,10 @@ export async function waitUntilCasualMatching(
         type: "GotoTitle",
       },
     });
-    props.domDialogBinder.bind(dialog, networkErrorDialogConnector(props.gameAction));
+    props.domDialogBinder.bind(
+      dialog,
+      networkErrorDialogConnector(props.gameAction),
+    );
     throw e;
   }
 }

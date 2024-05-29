@@ -2,6 +2,7 @@ import type { Command, Player } from "gbraver-burst-core";
 
 import { fadeOut, stop } from "../../bgm/bgm-operators";
 import { createSeriousMatchEvent } from "../../custom-battle-events/serious-match-event";
+import { MAX_LOADING_TIME } from "../../dom-scenes/dom-scene-binder/max-loading-time";
 import { StageTitle } from "../../dom-scenes/stage-title";
 import { NPCBattleRoom } from "../../npc/npc-battle-room";
 import { BattleScene } from "../../td-scenes/battle";
@@ -10,7 +11,6 @@ import { waitTime } from "../../wait/wait-time";
 import { waitUntilWindowPushWithStream } from "../../wait/wait-until-window-push-with-stream";
 import { battleSceneConnector } from "../action-connector/battle-scene-connector";
 import { stageTitleConnector } from "../action-connector/stage-title-connector";
-import { MAX_LOADING_TIME } from "../../dom-scenes/dom-scene-binder/max-loading-time";
 import { GameProps } from "../game-props";
 import { NPCBattleStage } from "../npc-battle";
 

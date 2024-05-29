@@ -5,7 +5,7 @@ import { DeleteAccountConsentDialog } from "../../dom-dialogs/delete-account-con
 import { DomDialogActionConnector } from "../../dom-dialogs/dom-dialog-binder/action-connector";
 import { GameAction } from "../game-actions";
 
-/** 
+/**
  * アカウント削除同意ダイアログのアクションコネクタを生成する
  * @param gameAction アクション管理オブジェクト
  * @returns アクションコネクタ
@@ -16,10 +16,10 @@ export const deleteAccountConsentDialogConnector =
   ): DomDialogActionConnector<DeleteAccountConsentDialog> =>
   (dialog) =>
     gameAction.connect([
-      dialog.notifyAccountDeletion().pipe(
-        map(() => ({ type: "DeleteAccount" }))
-      ),
-      dialog.notifyClosed().pipe(
-        map(() => ({ type: "CancelAccountDeletion" }))
-      )
+      dialog
+        .notifyAccountDeletion()
+        .pipe(map(() => ({ type: "DeleteAccount" }))),
+      dialog
+        .notifyClosed()
+        .pipe(map(() => ({ type: "CancelAccountDeletion" }))),
     ]);

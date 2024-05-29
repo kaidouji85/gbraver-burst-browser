@@ -16,14 +16,12 @@ export const difficultyDialogConnector =
   ): DomDialogActionConnector<DifficultyDialog> =>
   (dialog) =>
     gameAction.connect([
-      dialog
-        .notifySelectionComplete()
-        .pipe(
-          map((difficulty) => ({
-            type: "DifficultySelectionComplete",
-            difficulty,
-          })),
-        ),
+      dialog.notifySelectionComplete().pipe(
+        map((difficulty) => ({
+          type: "DifficultySelectionComplete",
+          difficulty,
+        })),
+      ),
       dialog
         .notifyClosed()
         .pipe(map(() => ({ type: "DifficultySelectionCancel" }))),
