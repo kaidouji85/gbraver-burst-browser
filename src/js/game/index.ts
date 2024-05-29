@@ -4,12 +4,12 @@ import { initialize } from "./game-procedure/initialize";
 import { onGameAction } from "./game-procedure/on-game-action";
 import { GameProps } from "./game-props";
 import {
-  GamePropsGeneratorParam,
+  GamePropsGeneratorParams,
   generateGameProps,
 } from "./game-props/generate-game-props";
 
 /** コンストラクタのパラメータ */
-type GameParam = GamePropsGeneratorParam;
+type GameParam = GamePropsGeneratorParams;
 
 /** ゲーム管理オブジェクト */
 export class Game {

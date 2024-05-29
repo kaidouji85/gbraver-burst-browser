@@ -29,10 +29,19 @@ export interface GameProps
   extends BGMManagerContainer,
     ResourcesContainer,
     SEPlayerContainer {
-  /** パフォーマンス統計、表示されていない場合はnullが入る */
-  performanceStats: PerformanceStats | null;
   /** サービスワーカーを利用するか否か、trueで利用する */
   isServiceWorkerUsed: boolean;
+  /** APIサーバ系機能が利用可能か否か、trueで利用可能 */
+  isAPIServerEnable: boolean;
+  /** 開発中のエピソードをプレイできるか否かのフラグ、trueでプレイできる */
+  canPlayEpisodeInDevelopment: boolean;
+  /** 開発中のリソースをロードするか否かのフラグ、trueでロードする */
+  shouldLoadDevelopingResource: boolean;
+  /** 開発中のアームドーザを選択できるか否かのフラグ、trueで選択できる */
+  canPlayDevelopingArmdozer: boolean;
+  /** 開発中のパイロットを選択できるか否かのフラグ、trueで選択できる */
+  canPlayDevelopingPilot: boolean;
+
   /** 遊び方スライドのURL */
   howToPlayURL: string;
   /** 利用規約ページのURL */
@@ -41,24 +50,33 @@ export interface GameProps
   privacyPolicyURL: string;
   /** 問い合わせページのURL */
   contactURL: string;
-  /** APIサーバ系機能が利用可能か否か、trueで利用可能 */
-  isAPIServerEnable: boolean;
-  /** 現在進行中のフロー */
-  inProgress: InProgress;
-  /** APIサーバのSDK */
-  api: BrowserSDK;
+
+  /** パフォーマンス統計、表示されていない場合はnullが入る */
+  performanceStats: PerformanceStats | null;
+  /** ServiceWorkerRegistrationのキャッシュ */
+  serviceWorker: ServiceWorkerRegistration | null | undefined;
+
   /** ブラウザ設定リポジトリ */
   config: GBraverBurstBrowserConfigRepository;
+
+  /** 現在進行中のフロー */
+  inProgress: InProgress;
+
+  /** APIサーバのSDK */
+  api: BrowserSDK;
   /** バトル強制終了監視 */
   suddenlyBattleEnd: FutureSuddenlyBattleEnd;
+
   /** リサイズ */
   resize: Observable<Resize>;
   /** window押下 */
   pushWindow: Observable<PushWindow>;
   /** ゲームループ */
   gameLoop: Observable<GameLoop>;
+
   /** cssカスタムプロパティ --hud-ui-scale */
   hudUIScale: CssHUDUIScale;
+
   /** DOMフェーダ */
   fader: DOMFader;
   /** 強制割込シーン管理オブジェクト */
@@ -69,22 +87,14 @@ export interface GameProps
   domDialogBinder: DOMDialogBinder;
   /** DOMフローター管理オブジェクト */
   domFloaters: DOMFloaters;
+
   /** レンダラ管理オブジェクト */
   renderer: Renderer;
   /** 3Dシーンバインダー */
   tdBinder: TDSceneBinder;
+
   /** リソースルート */
   resourceRoot: ResourceRoot;
   /** 全リソースを読み込んだか否かのフラグ、trueで全リソースを読み込んだ */
   isFullResourceLoaded: boolean;
-  /** ServiceWorkerRegistrationのキャッシュ */
-  serviceWorker: ServiceWorkerRegistration | null | undefined;
-  /** 開発中のエピソードをプレイできるか否かのフラグ、trueでプレイできる */
-  canPlayEpisodeInDevelopment: boolean;
-  /** 開発中のリソースをロードするか否かのフラグ、trueでロードする */
-  shouldLoadDevelopingResource: boolean;
-  /** 開発中のアームドーザを選択できるか否かのフラグ、trueで選択できる */
-  canPlayDevelopingArmdozer: boolean;
-  /** 開発中のパイロットを選択できるか否かのフラグ、trueで選択できる */
-  canPlayDevelopingPilot: boolean;
 }
