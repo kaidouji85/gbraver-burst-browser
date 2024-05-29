@@ -31,7 +31,7 @@ export function createGameActionNotifier(
     "visibilitychange",
   ).pipe(map(() => ({ type: "VisibilityChange" })));
   return merge(
-    props.tdBinder.gameActionNotifier(),
+    props.gameAction.notify(),
     props.domSceneBinder.gameActionNotifier(),
     props.domDialogBinder.gameActionNotifier(),
     props.domFloaters.gameActionNotifier(),

@@ -1,13 +1,5 @@
 import { Observable, Subject, Unsubscribable } from "rxjs";
 
-/**
- * アクション接続関数
- * @template X 通知オブジェクトのデータ型
- * @param action アクションのサブジェクト
- * @returns 通知ストリーム
- */
-export type ActionConnector<X> = (action: Subject<X>) => Observable<X>[];
-
 /** 
  * アクション管理オブジェクト
  * @template X 通知オブジェクトのデータ型
@@ -15,10 +7,10 @@ export type ActionConnector<X> = (action: Subject<X>) => Observable<X>[];
 export interface ActionManager<X> {
   /**
    * アクションを接続する
-   * @param fn 接続関数
+   * @param actions 接続するアクション
    * @returns アンサブスクライバ
    */
-  connect(fn: ActionConnector<X>): Unsubscribable[];
+  connect(actions: Observable<X>[]): Unsubscribable[];
 
   /**
    * アクションを通知する
@@ -40,8 +32,8 @@ class SimpleActionManager<X> implements ActionManager<X> {
   }
 
   /** @override */
-  connect(fn: ActionConnector<X>) {
-    return fn(this.#action).map((s) => s.subscribe(this.#action));
+  connect(actions: Observable<X>[]) {
+    return actions.map((a) => a.subscribe(this.#action));
   }
 
   /** @override */

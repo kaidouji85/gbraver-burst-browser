@@ -1,6 +1,7 @@
 import { BrowserSDK } from "@gbraver-burst-network/browser-sdk";
 import { Observable } from "rxjs";
 
+import { ActionManager } from "../../action-manager/action-manager";
 import { BGMManagerContainer } from "../../bgm/bgm-manager";
 import { CssHUDUIScale } from "../../css/hud-ui-scale";
 import { DOMFader } from "../../game-dom/dom-fader/dom-fader";
@@ -10,6 +11,7 @@ import { ResourcesContainer } from "../../resource";
 import { ResourceRoot } from "../../resource/resource-root";
 import { SEPlayerContainer } from "../../se/se-player";
 import { PerformanceStats } from "../../stats/performance-stats";
+import { TDSceneBinder } from "../../td-scenes/td-scene-binder";
 import { PushWindow } from "../../window/push-window";
 import { Resize } from "../../window/resize";
 import { GBraverBurstBrowserConfigRepository } from "../config/repository/repository";
@@ -17,9 +19,9 @@ import { DOMDialogBinder } from "../dom-dialog-binder";
 import { DOMFloaters } from "../dom-floaters/dom-floaters";
 import { DOMSceneBinder } from "../dom-scene-binder";
 import { FutureSuddenlyBattleEnd } from "../future-suddenly-battle-end";
+import { GameAction } from "../game-actions";
 import { InProgress } from "../in-progress/in-progress";
 import { InterruptScenes } from "../innterrupt-scenes";
-import { TDSceneBinder } from "../../td-scenes/td-scene-binder";
 
 /**
  * ゲームプロパティ
@@ -73,6 +75,8 @@ export interface GameProps
   pushWindow: Observable<PushWindow>;
   /** ゲームループ */
   gameLoop: Observable<GameLoop>;
+  /** ゲームアクション */
+  gameAction: ActionManager<GameAction>;
 
   /** cssカスタムプロパティ --hud-ui-scale */
   hudUIScale: CssHUDUIScale;
