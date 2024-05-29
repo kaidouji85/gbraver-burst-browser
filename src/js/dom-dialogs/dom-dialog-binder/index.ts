@@ -1,8 +1,8 @@
 import { Observable, Subject, Unsubscribable } from "rxjs";
 
-import type { DOMDialog } from "../../dom-dialogs/dialog";
-import type { GameAction } from "../game-actions";
-import type { DomDialogActionConnector } from "./dom-dialog-action-connector";
+import type { DOMDialog } from "../dialog";
+import type { GameAction } from "../../game/game-actions";
+import type { DomDialogActionConnector } from "./action-connector";
 
 /** HTMLダイアログバインダー */
 export class DOMDialogBinder {

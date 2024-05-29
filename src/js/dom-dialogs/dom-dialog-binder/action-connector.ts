@@ -1,7 +1,7 @@
 import { Subject, Unsubscribable } from "rxjs";
 
-import type { DOMDialog } from "../../dom-dialogs/dialog";
-import type { GameAction } from "../game-actions";
+import type { DOMDialog } from "../dialog";
+import type { GameAction } from "../../game/game-actions";
 
 /**
  * ゲームアクションコネクタ

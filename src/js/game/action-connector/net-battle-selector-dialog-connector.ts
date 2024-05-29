@@ -1,5 +1,5 @@
 import { NetBattleSelectorDialog } from "../../dom-dialogs/net-battle-selector";
-import { DomDialogActionConnector } from "../dom-dialog-binder/dom-dialog-action-connector";
+import { DomDialogActionConnector } from "../../dom-dialogs/dom-dialog-binder/action-connector";
 
 /** コネクタのデータ型 */
 type Connector = DomDialogActionConnector<NetBattleSelectorDialog>;

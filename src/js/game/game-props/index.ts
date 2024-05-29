@@ -15,7 +15,7 @@ import { TDSceneBinder } from "../../td-scenes/td-scene-binder";
 import { PushWindow } from "../../window/push-window";
 import { Resize } from "../../window/resize";
 import { GBraverBurstBrowserConfigRepository } from "../config/repository/repository";
-import { DOMDialogBinder } from "../dom-dialog-binder";
+import { DOMDialogBinder } from "../../dom-dialogs/dom-dialog-binder";
 import { DOMFloaters } from "../dom-floaters/dom-floaters";
 import { DOMSceneBinder } from "../../dom-scenes/dom-scene-binder";
 import { FutureSuddenlyBattleEnd } from "../future-suddenly-battle-end";
