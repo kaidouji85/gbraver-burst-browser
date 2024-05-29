@@ -1,4 +1,5 @@
 import { fadeOut, stop } from "../../bgm/bgm-operators";
+import { MAX_LOADING_TIME } from "../../dom-scenes/dom-scene-binder/max-loading-time";
 import { EpisodeTitle } from "../../dom-scenes/episode-title";
 import { NPCBattleRoom } from "../../npc/npc-battle-room";
 import { BattleScene } from "../../td-scenes/battle";
@@ -7,7 +8,6 @@ import { waitTime } from "../../wait/wait-time";
 import { waitUntilWindowPushWithStream } from "../../wait/wait-until-window-push-with-stream";
 import { battleSceneConnector } from "../action-connector/battle-scene-connector";
 import { episodeTitleConnector } from "../action-connector/episode-title-connector";
-import { MAX_LOADING_TIME } from "../dom-scene-binder/max-loading-time";
 import { Episode } from "../episodes/episode";
 import { GameProps } from "../game-props";
 
@@ -51,7 +51,7 @@ export async function startEpisode(
     customBattleEvent: episode.event(props.resources),
     controllerType: "BigButton",
   });
-  props.tdBinder.bind(battleScene, battleSceneConnector);
+  props.tdBinder.bind(battleScene, battleSceneConnector(props.gameAction));
   await waitAnimationFrame();
   const latency = Date.now() - startTutorialStageTime;
   await Promise.race([

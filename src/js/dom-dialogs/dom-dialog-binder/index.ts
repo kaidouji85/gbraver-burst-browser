@@ -1,21 +1,15 @@
-import { Observable, Subject, Unsubscribable } from "rxjs";
+import { Unsubscribable } from "rxjs";
 
-import type { DOMDialog } from "../../dom-dialogs/dialog";
-import type { GameAction } from "../game-actions";
-import type { DomDialogActionConnector } from "./dom-dialog-action-connector";
+import { DOMDialog } from "../dialog";
+import { DomDialogActionConnector } from "./action-connector";
 
 /** HTMLダイアログバインダー */
 export class DOMDialogBinder {
   /** ルートHTML要素 */
   #root: HTMLElement;
-
   /** 現在表示しているダイアログ、何も表示していない場合はnullがセットされる */
   #dialog: DOMDialog | null;
-
-  /** ゲームアクションストリーム */
-  #gameAction: Subject<GameAction>;
-
-  /** 案サブスクライバ */
+  /** アンサブスクライバ */
   #unsubscribers: Unsubscribable[];
 
   /**
@@ -24,13 +18,11 @@ export class DOMDialogBinder {
   constructor() {
     this.#root = document.createElement("div");
     this.#dialog = null;
-    this.#gameAction = new Subject();
     this.#unsubscribers = [];
   }
 
   /**
    * DOMダイアログをバインドする
-   *
    * @template X ダイアログデータ型
    * @param dialog ダイアログ
    * @param connector アクションコネクタ
@@ -40,7 +32,7 @@ export class DOMDialogBinder {
     connector: DomDialogActionConnector<X>,
   ): void {
     this.#removeCurrentDialog();
-    this.#unsubscribers = connector(dialog, this.#gameAction);
+    this.#unsubscribers = connector(dialog);
     this.#root.appendChild(dialog.getRootHTMLElement());
     this.#dialog = dialog;
   }
@@ -50,15 +42,6 @@ export class DOMDialogBinder {
    */
   hidden(): void {
     this.#removeCurrentDialog();
-  }
-
-  /**
-   * ゲームアクション通知
-   *
-   * @returns イベント通知ストリーム
-   */
-  gameActionNotifier(): Observable<GameAction> {
-    return this.#gameAction;
   }
 
   /**

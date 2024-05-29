@@ -1,21 +1,23 @@
+import { map } from "rxjs";
+
+import { ActionManager } from "../../action-manager/action-manager";
+import { DOMSceneActionConnector } from "../../dom-scenes/dom-scene-binder/action-connector";
 import { PlayerSelect } from "../../dom-scenes/player-select";
-import type { DOMSceneActionConnector } from "../dom-scene-binder/dom-scene-action-connector";
+import { GameAction } from "../game-actions";
 
-/** アクションコネクタのデータ型 */
-type Connector = DOMSceneActionConnector<PlayerSelect>;
-
-/** プレイヤーセレクト画面とゲームアクションを関連付ける */
-export const playerSelectConnector: Connector = (scene, gameAction) => [
-  scene.notifySelectCompletion().subscribe((v) => {
-    gameAction.next({
-      type: "SelectionComplete",
-      armdozerId: v.armdozerId,
-      pilotId: v.pilotId,
-    });
-  }),
-  scene.notifyPrev().subscribe(() => {
-    gameAction.next({
-      type: "SelectionCancel",
-    });
-  }),
-];
+/**
+ * プレイヤーセレクト画面のアクションコネクタを生成する
+ * @param gameAction アクション管理オブジェクト
+ * @returns アクションコネクタ
+ */
+export const playerSelectConnector =
+  (
+    gameAction: ActionManager<GameAction>,
+  ): DOMSceneActionConnector<PlayerSelect> =>
+  (scene) =>
+    gameAction.connect([
+      scene
+        .notifySelectCompletion()
+        .pipe(map((a) => ({ ...a, type: "SelectionComplete" }))),
+      scene.notifyPrev().pipe(map(() => ({ type: "SelectionCancel" }))),
+    ]);

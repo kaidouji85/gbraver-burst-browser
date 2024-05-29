@@ -17,7 +17,10 @@ export async function onSuddenlyEndBattle(
       type: "GotoTitle",
     },
   });
-  props.domDialogBinder.bind(dialog, networkErrorDialogConnector);
+  props.domDialogBinder.bind(
+    dialog,
+    networkErrorDialogConnector(props.gameAction),
+  );
   props.suddenlyBattleEnd.unbind();
   await props.api.disconnectWebsocket();
 }

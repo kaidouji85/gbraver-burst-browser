@@ -31,9 +31,7 @@ export function createGameActionNotifier(
     "visibilitychange",
   ).pipe(map(() => ({ type: "VisibilityChange" })));
   return merge(
-    props.tdBinder.gameActionNotifier(),
-    props.domSceneBinder.gameActionNotifier(),
-    props.domDialogBinder.gameActionNotifier(),
+    props.gameAction.notify(),
     props.domFloaters.gameActionNotifier(),
     suddenlyBattleEnd,
     webSocketAPIError,

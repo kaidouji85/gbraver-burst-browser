@@ -1,34 +1,25 @@
-import { Observable, Subject, Unsubscribable } from "rxjs";
+import { Unsubscribable } from "rxjs";
 
 import { CssHUDUIScale } from "../../css/hud-ui-scale";
 import { Renderer } from "../../render";
-import type { TDScene } from "../../td-scenes/td-scene";
-import type { GameAction } from "../game-actions";
-import type { TDSceneActionConnector } from "./td-scene-action-connector";
+import { TDScene } from "../td-scene";
+import { TDSceneActionConnector } from "./action-connector";
 
 /** three.js系シーンをバインドする */
 export class TDSceneBinder {
-  /** ゲームアクション */
-  #gameAction: Subject<GameAction>;
-
   /** DOMレイヤーをバインドするHTML要素 */
   #domLayerElement: HTMLElement;
-
   /** 現在表示中のシーン、何も表示していない場合はnullがセットされる */
   #scene: TDScene | null;
-
   /** cssカスタムプロパティ --hud-ui-scale */
   #hudUIScale: CssHUDUIScale;
-
   /** レンダラ管理オブジェクト */
   #renderer: Renderer;
-
   /** アンサブスクライバ */
   #unsubscribers: Unsubscribable[];
 
   /**
    * コンストラクタ
-   *
    * @param renderer レンダラ管理オブジェクト
    * @param hudUIScale cssカスタムプロパティ --hud-ui-scale
    */
@@ -36,7 +27,6 @@ export class TDSceneBinder {
     this.#renderer = renderer;
     this.#hudUIScale = hudUIScale;
     this.#scene = null;
-    this.#gameAction = new Subject();
     this.#domLayerElement = document.createElement("div");
     this.#unsubscribers = [];
   }
@@ -51,7 +41,6 @@ export class TDSceneBinder {
 
   /**
    * 3D系シーンをバインドする
-   *
    * @param scene バインドするシーン
    * @param connector ゲームアクションコネクタ
    */
@@ -64,19 +53,10 @@ export class TDSceneBinder {
     scene.getDOMLayerElements().forEach((element) => {
       this.#domLayerElement.appendChild(element);
     });
-    this.#unsubscribers = connector(scene, this.#gameAction);
+    this.#unsubscribers = connector(scene);
     // iPadOS 15.7で--hud-ui-scaleに正しい値がセットされないことがあった
     // なので、3Dシーンが始まる前に強制的に値を更新している
     this.#hudUIScale.update();
-  }
-
-  /**
-   * ゲームアクション通知を取得する
-   *
-   * @returns イベント通知ストリーム
-   */
-  gameActionNotifier(): Observable<GameAction> {
-    return this.#gameAction;
   }
 
   /**
@@ -88,7 +68,6 @@ export class TDSceneBinder {
 
   /**
    * DOMレイヤーのルートHTML要素を取得する
-   *
    * @returns 取得結果
    */
   getDOMLayerElements(): HTMLElement[] {

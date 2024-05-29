@@ -1,11 +1,20 @@
-import { BattleSimulator } from "../../dom-dialogs/battle-simulator";
-import { DomDialogActionConnector } from "../dom-dialog-binder/dom-dialog-action-connector";
+import { map } from "rxjs";
 
-/** 戦闘シミュレーターとゲームアクションを関連付ける */
-export const battleSimulatorConnector: DomDialogActionConnector<
-  BattleSimulator
-> = (dialog, gameAction) => [
-  dialog.notifyClose().subscribe(() => {
-    gameAction.next({ type: "BattleSimulatorEnd" });
-  }),
-];
+import { ActionManager } from "../../action-manager/action-manager";
+import { BattleSimulator } from "../../dom-dialogs/battle-simulator";
+import { DomDialogActionConnector } from "../../dom-dialogs/dom-dialog-binder/action-connector";
+import { GameAction } from "../game-actions";
+
+/**
+ * 戦闘シミュレーターのアクションコネクタを生成する
+ * @param gameAction アクション管理オブジェクト
+ * @returns アクションコネクタ
+ */
+export const battleSimulatorConnector =
+  (
+    gameAction: ActionManager<GameAction>,
+  ): DomDialogActionConnector<BattleSimulator> =>
+  (dialog) =>
+    gameAction.connect([
+      dialog.notifyClose().pipe(map(() => ({ type: "BattleSimulatorEnd" }))),
+    ]);

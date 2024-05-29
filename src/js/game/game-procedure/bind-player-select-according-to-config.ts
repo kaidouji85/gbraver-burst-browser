@@ -32,7 +32,7 @@ type SceneBinder = (params: SceneBinderParams) => Promise<void>;
 const bindPlayerSelect: SceneBinder = async (params) => {
   const { domSceneBinder } = params;
   const scene = new PlayerSelect(params);
-  domSceneBinder.bind(scene, playerSelectConnector);
+  domSceneBinder.bind(scene, playerSelectConnector(params.gameAction));
   await scene.waitUntilLoaded();
 };
 
@@ -44,7 +44,7 @@ const bindPlayerSelect: SceneBinder = async (params) => {
 const bindSecretPlayerSelect: SceneBinder = async (params) => {
   const { domSceneBinder } = params;
   const scene = new SecretPlayerSelect(params);
-  domSceneBinder.bind(scene, secretPlayerSelectConnector);
+  domSceneBinder.bind(scene, secretPlayerSelectConnector(params.gameAction));
   await scene.waitUntilLoaded();
 };
 

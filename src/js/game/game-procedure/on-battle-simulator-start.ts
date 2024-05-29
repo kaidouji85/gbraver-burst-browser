@@ -12,12 +12,12 @@ export function onBattleSimulatorStart(
   props: GameProps,
   action: BattleSimulatorStart,
 ) {
-  const { domDialogBinder } = props;
+  const { domDialogBinder, gameAction } = props;
   domDialogBinder.bind(
     new BattleSimulator({
       ...props,
       ...action,
     }),
-    battleSimulatorConnector,
+    battleSimulatorConnector(gameAction),
   );
 }

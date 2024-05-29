@@ -1,15 +1,12 @@
-import { Observable } from "rxjs";
-
-import type { DOMScene } from "../../dom-scenes/dom-scene";
-import type { GameAction } from "../game-actions";
+import { DOMScene } from "../dom-scene";
+import { DOMSceneActionConnector } from "./action-connector";
 import { bind } from "./bind";
 import { discardCurrentScene } from "./discard-current-scene";
-import type { DOMSceneActionConnector } from "./dom-scene-action-connector";
-import type { DOMSceneBinderProps } from "./props";
-import { createDOMSceneBinderProps } from "./props";
+import { createDOMSceneBinderProps, DOMSceneBinderProps } from "./props";
 
 /** DOMシーンバインダー */
 export class DOMSceneBinder {
+  /** プロパティ */
   #props: DOMSceneBinderProps;
 
   /**
@@ -28,7 +25,6 @@ export class DOMSceneBinder {
 
   /**
    * DOMシーンをバインドする
-   *
    * @template X シーンのデータ型
    * @param scene バインドするシーン
    * @param connector ゲームアクションコネクタ
@@ -41,15 +37,6 @@ export class DOMSceneBinder {
   }
 
   /**
-   * ゲームアクション通知
-   *
-   * @returns 通知ストリーム
-   */
-  gameActionNotifier(): Observable<GameAction> {
-    return this.#props.gameAction;
-  }
-
-  /**
    * 本クラス配下のシーンを全て非表示にする
    * 本メソッドは、3Dシーンを表示する前に呼ばれる想定である
    */
@@ -59,7 +46,6 @@ export class DOMSceneBinder {
 
   /**
    * 本クラスのルートHTML要素を取得する
-   *
    * @returns 取得結果
    */
   getRootHTMLElement(): HTMLElement {
