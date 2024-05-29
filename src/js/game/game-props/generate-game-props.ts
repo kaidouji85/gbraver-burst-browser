@@ -17,7 +17,7 @@ import { DOMFloaters } from "../dom-floaters/dom-floaters";
 import { DOMSceneBinder } from "../dom-scene-binder";
 import { FutureSuddenlyBattleEnd } from "../future-suddenly-battle-end";
 import { InterruptScenes } from "../innterrupt-scenes";
-import { TDSceneBinder } from "../../binder/td-scene-binder";
+import { TDSceneBinder } from "../../td-scenes/td-scene-binder";
 import { GameProps } from "./index";
 
 /** GamePropsジェネレータパラメータ */

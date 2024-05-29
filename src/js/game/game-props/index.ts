@@ -19,7 +19,7 @@ import { DOMSceneBinder } from "../dom-scene-binder";
 import { FutureSuddenlyBattleEnd } from "../future-suddenly-battle-end";
 import { InProgress } from "../in-progress/in-progress";
 import { InterruptScenes } from "../innterrupt-scenes";
-import { TDSceneBinder } from "../../binder/td-scene-binder";
+import { TDSceneBinder } from "../../td-scenes/td-scene-binder";
 
 /**
  * ゲームプロパティ

@@ -1,28 +1,23 @@
 import { Observable, Subject, Unsubscribable } from "rxjs";
 
 import { CssHUDUIScale } from "../../css/hud-ui-scale";
+import { GameAction } from "../../game/game-actions";
 import { Renderer } from "../../render";
-import type { TDScene } from "../../td-scenes/td-scene";
-import type { GameAction } from "../../game/game-actions";
-import type { TDSceneActionConnector } from "./td-scene-action-connector";
+import { TDScene } from "../td-scene";
+import { TDSceneActionConnector } from "./td-scene-action-connector";
 
 /** three.js系シーンをバインドする */
 export class TDSceneBinder {
   /** ゲームアクション */
   #gameAction: Subject<GameAction>;
-
   /** DOMレイヤーをバインドするHTML要素 */
   #domLayerElement: HTMLElement;
-
   /** 現在表示中のシーン、何も表示していない場合はnullがセットされる */
   #scene: TDScene | null;
-
   /** cssカスタムプロパティ --hud-ui-scale */
   #hudUIScale: CssHUDUIScale;
-
   /** レンダラ管理オブジェクト */
   #renderer: Renderer;
-
   /** アンサブスクライバ */
   #unsubscribers: Unsubscribable[];
 
