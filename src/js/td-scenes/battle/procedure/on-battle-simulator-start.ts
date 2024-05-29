@@ -8,6 +8,7 @@ import { BattleSceneProps } from "../props";
  */
 export function onBattleSimulatorStart(props: BattleSceneProps) {
   const {
+    view,
     exclusive,
     playerId,
     stateHistory,
@@ -30,10 +31,13 @@ export function onBattleSimulatorStart(props: BattleSceneProps) {
 
     se.play(sounds.changeValue);
     const isPlayerAttacker = lastState.activePlayerId === playerId;
+    const initialPlayerBattery =
+      view.hud.gameObjects.batterySelector.getBattery();
     const dialog = new BattleSimulator({
       ...props,
       player,
       enemy,
+      initialPlayerBattery,
       isPlayerAttacker,
     });
     domDialogBinder.bind(dialog, battleSimulatorConnector(battleSceneAction));

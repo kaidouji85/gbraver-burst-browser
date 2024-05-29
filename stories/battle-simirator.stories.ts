@@ -106,9 +106,11 @@ type BattleSimulatorStoryParams = {
  */
 const battleSimulatorStory = (storyParams: BattleSimulatorStoryParams) =>
   domStub((stubParams) => {
+    const { player } = storyParams;
     const simulator = new BattleSimulator({
       ...storyParams,
       ...stubParams,
+      initialPlayerBattery: player.armdozer.battery,
     });
     simulator.notifyClose().subscribe(() => {
       console.log("close");
