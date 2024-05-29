@@ -5,7 +5,11 @@ import { BattleScene } from "../../td-scenes/battle";
 import { TDSceneActionConnector } from "../../td-scenes/td-scene-binder/action-connector";
 import { GameAction } from "../game-actions";
 
-/** 戦闘シーンとゲームアクションを関連付ける */
+/** 
+ * 戦闘シーンのゲームアクションコネクタを生成する
+ * @param gameAction アクション管理オブジェクト
+ * @returns ゲームアクションコネクタ
+ */
 export const battleSceneConnector =
   (
     gameAction: ActionManager<GameAction>,
@@ -14,8 +18,8 @@ export const battleSceneConnector =
     gameAction.connect([
       scene
         .notifyGameEnd()
-        .pipe(map((a) => ({ ...a, type: "EndBattle" }) as const)),
+        .pipe(map((a) => ({ ...a, type: "EndBattle" }))),
       scene
         .notifyBattleSimulate()
-        .pipe(map((a) => ({ ...a, type: "BattleSimulatorStart" }) as const)),
+        .pipe(map((a) => ({ ...a, type: "BattleSimulatorStart" }))),
     ]);
