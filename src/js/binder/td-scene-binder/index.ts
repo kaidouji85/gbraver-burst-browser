@@ -3,7 +3,7 @@ import { Observable, Subject, Unsubscribable } from "rxjs";
 import { CssHUDUIScale } from "../../css/hud-ui-scale";
 import { Renderer } from "../../render";
 import type { TDScene } from "../../td-scenes/td-scene";
-import type { GameAction } from "../game-actions";
+import type { GameAction } from "../../game/game-actions";
 import type { TDSceneActionConnector } from "./td-scene-action-connector";
 
 /** three.js系シーンをバインドする */

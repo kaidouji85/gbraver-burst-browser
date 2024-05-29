@@ -1,8 +1,8 @@
 import { Subject } from "rxjs";
 
+import { TDSceneActionConnector } from "../../binder/td-scene-binder/td-scene-action-connector";
 import { BattleScene } from "../../td-scenes/battle";
 import { GameAction } from "../game-actions";
-import { TDSceneActionConnector } from "../td-scene-binder/td-scene-action-connector";
 
 /** 戦闘シーンとゲームアクションを関連付ける */
 export const battleSceneConnector: TDSceneActionConnector<BattleScene> = (
