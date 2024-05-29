@@ -1,6 +1,5 @@
-import { Subject, Unsubscribable } from "rxjs";
+import { Unsubscribable } from "rxjs";
 
-import { GameAction } from "../../game/game-actions";
 import { DOMScene } from "../dom-scene";
 
 /**
@@ -9,10 +8,8 @@ import { DOMScene } from "../dom-scene";
  *
  * @template X シーンのデータ型
  * @param scene DOMシーン
- * @param gameAction ゲームアクションストリーム
  * @returns ゲームションションのアンサブスクライブ
  */
 export type DOMSceneActionConnector<X extends DOMScene> = (
   scene: X,
-  gameAction: Subject<GameAction>,
 ) => Unsubscribable[];

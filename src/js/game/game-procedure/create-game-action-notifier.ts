@@ -32,7 +32,6 @@ export function createGameActionNotifier(
   ).pipe(map(() => ({ type: "VisibilityChange" })));
   return merge(
     props.gameAction.notify(),
-    props.domSceneBinder.gameActionNotifier(),
     props.domDialogBinder.gameActionNotifier(),
     props.domFloaters.gameActionNotifier(),
     suddenlyBattleEnd,

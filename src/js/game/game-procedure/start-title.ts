@@ -1,3 +1,4 @@
+import { MAX_LOADING_TIME } from "../../dom-scenes/dom-scene-binder/max-loading-time";
 import { Title } from "../../dom-scenes/title";
 import {
   LoggedInAccount,
@@ -5,8 +6,7 @@ import {
 } from "../../dom-scenes/title/title-account";
 import { waitTime } from "../../wait/wait-time";
 import { titleConnector } from "../action-connector/title-connector";
-import { MAX_LOADING_TIME } from "../../dom-scenes/dom-scene-binder/max-loading-time";
-import type { GameProps } from "../game-props";
+import { GameProps } from "../game-props";
 
 /**
  * タイトル画面を開始するヘルパー関数
@@ -39,7 +39,7 @@ export async function startTitle(props: Readonly<GameProps>): Promise<Title> {
     ...props,
     account,
   });
-  props.domSceneBinder.bind(scene, titleConnector);
+  props.domSceneBinder.bind(scene, titleConnector(props.gameAction));
   await Promise.race([scene.waitUntilLoaded(), waitTime(MAX_LOADING_TIME)]);
   return scene;
 }

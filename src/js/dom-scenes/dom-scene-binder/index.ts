@@ -1,6 +1,3 @@
-import { Observable } from "rxjs";
-
-import { GameAction } from "../../game/game-actions";
 import { DOMScene } from "../dom-scene";
 import { DOMSceneActionConnector } from "./action-connector";
 import { bind } from "./bind";
@@ -9,6 +6,7 @@ import { createDOMSceneBinderProps, DOMSceneBinderProps } from "./props";
 
 /** DOMシーンバインダー */
 export class DOMSceneBinder {
+  /** プロパティ */
   #props: DOMSceneBinderProps;
 
   /**
@@ -36,14 +34,6 @@ export class DOMSceneBinder {
     connector: DOMSceneActionConnector<X>,
   ): void {
     bind(this.#props, scene, connector);
-  }
-
-  /**
-   * ゲームアクション通知
-   * @returns 通知ストリーム
-   */
-  gameActionNotifier(): Observable<GameAction> {
-    return this.#props.gameAction;
   }
 
   /**

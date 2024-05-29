@@ -1,8 +1,8 @@
+import { DOMSceneActionConnector } from "../../dom-scenes/dom-scene-binder/action-connector";
 import { Loading } from "../../dom-scenes/loading";
-import type { DOMSceneActionConnector } from "../../dom-scenes/dom-scene-binder/action-connector";
 
-/** アクションコネクタのデータ型 */
-type Connector = DOMSceneActionConnector<Loading>;
-
-/** ローディング画面とゲームアクションを関連付ける */
-export const loadingConnector: Connector = () => [];
+/**
+ * ローディング画面のアクションコネクタを生成する
+ * @returns アクションコネクタ
+ */
+export const loadingConnector: DOMSceneActionConnector<Loading> = () => [];

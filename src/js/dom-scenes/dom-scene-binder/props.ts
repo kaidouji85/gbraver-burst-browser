@@ -1,6 +1,5 @@
-import { Subject, Unsubscribable } from "rxjs";
+import { Unsubscribable } from "rxjs";
 
-import { GameAction } from "../../game/game-actions";
 import { DOMScene } from "../dom-scene";
 
 /** DomSceneBinderプロパティ */
@@ -9,8 +8,6 @@ export type DOMSceneBinderProps = {
   root: HTMLElement;
   /** 現在表示しているシーン、シーンが表示されていない場合はnullをセットする */
   scene: DOMScene | null | undefined;
-  /** ゲームアクション通知ストリーム */
-  gameAction: Subject<GameAction>;
   /** ゲームアクション通知ノアンサブスクライバ */
   unsubscribers: Unsubscribable[];
 };
@@ -21,11 +18,9 @@ export type DOMSceneBinderProps = {
  */
 export function createDOMSceneBinderProps(): DOMSceneBinderProps {
   const root = document.createElement("div");
-  const gameAction = new Subject<GameAction>();
   const scene = null;
   return {
     root,
-    gameAction,
     scene,
     unsubscribers: [],
   };

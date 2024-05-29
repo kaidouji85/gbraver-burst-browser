@@ -18,5 +18,5 @@ export function bind<X extends DOMScene>(
   discardCurrentScene(props);
   props.scene = scene;
   props.root.appendChild(scene.getRootHTMLElement());
-  props.unsubscribers = connector(scene, props.gameAction);
+  props.unsubscribers = connector(scene);
 }

@@ -1,44 +1,35 @@
-import { Title } from "../../dom-scenes/title";
-import type { DOMSceneActionConnector } from "../../dom-scenes/dom-scene-binder/action-connector";
+import { map } from "rxjs";
 
-/** アクションコネクタのデータ型 */
-type Connector = DOMSceneActionConnector<Title>;
+import { ActionManager } from "../../action-manager/action-manager";
+import { DOMSceneActionConnector } from "../../dom-scenes/dom-scene-binder/action-connector";
+import { Title } from "../../dom-scenes/title";
+import { GameAction } from "../game-actions";
 
 /** タイトル画面とゲームアクションを関連付ける */
-export const titleConnector: Connector = (scene, gameAction) => [
-  scene.notifyLogin().subscribe(() => {
-    gameAction.next({
-      type: "UniversalLogin",
-    });
-  }),
-  scene.notifyLogout().subscribe(() => {
-    gameAction.next({
-      type: "Logout",
-    });
-  }),
-  scene.notifyAccountDeletion().subscribe(() => {
-    gameAction.next({
-      type: "AccountDeleteConsent",
-    });
-  }),
-  scene.notifyArcade().subscribe(() => {
-    gameAction.next({
-      type: "ArcadeStart",
-    });
-  }),
-  scene.notifyNetBattle().subscribe(() => {
-    gameAction.next({
-      type: "NetBattleStart",
-    });
-  }),
-  scene.notifyConfig().subscribe(() => {
-    gameAction.next({
-      type: "ConfigChangeStart",
-    });
-  }),
-  scene.notifyTutorial().subscribe(() => {
-    gameAction.next({
-      type: "StoryStart",
-    });
-  }),
-];
+export const titleConnector =
+  (gameAction: ActionManager<GameAction>): DOMSceneActionConnector<Title> =>
+  (scene) =>
+    gameAction.connect([
+      scene.notifyLogin().pipe(
+        map(() => ({ type: "UniversalLogin" }))
+      ),
+      scene.notifyLogout().pipe(
+        map(() => ({ type: "Logout" }))
+      ),
+      scene.notifyAccountDeletion().pipe(
+        map(() => ({ type: "AccountDeleteConsent" }))
+      ),
+      scene.notifyArcade().pipe(
+        map(() => ({ type: "ArcadeStart" }))
+      ),
+      scene.notifyNetBattle().pipe(
+        map(() => ({ type: "NetBattleStart" }))
+      ),
+      scene.notifyConfig().pipe(
+        map(() => ({ type: "ConfigChangeStart" }))
+      ),
+      scene.notifyTutorial().pipe(
+        map(() => ({ type: "StoryStart" }))
+      ),
+    ]);
+
