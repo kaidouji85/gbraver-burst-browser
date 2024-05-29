@@ -23,7 +23,6 @@ export class TDSceneBinder {
 
   /**
    * コンストラクタ
-   *
    * @param renderer レンダラ管理オブジェクト
    * @param hudUIScale cssカスタムプロパティ --hud-ui-scale
    */
@@ -46,7 +45,6 @@ export class TDSceneBinder {
 
   /**
    * 3D系シーンをバインドする
-   *
    * @param scene バインドするシーン
    * @param connector ゲームアクションコネクタ
    */
@@ -67,7 +65,6 @@ export class TDSceneBinder {
 
   /**
    * ゲームアクション通知を取得する
-   *
    * @returns イベント通知ストリーム
    */
   gameActionNotifier(): Observable<GameAction> {
@@ -83,7 +80,6 @@ export class TDSceneBinder {
 
   /**
    * DOMレイヤーのルートHTML要素を取得する
-   *
    * @returns 取得結果
    */
   getDOMLayerElements(): HTMLElement[] {
