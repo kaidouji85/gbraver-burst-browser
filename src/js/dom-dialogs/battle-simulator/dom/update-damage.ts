@@ -1,21 +1,23 @@
-import { BattleResult } from "gbraver-burst-core";
-
+import { DAMAGE, DAMAGE_IS_DEATH } from "./class-name";
 import { PlayerElements } from "./player-elements";
+
+/** 更新パラメータ */
+type DamageUpdaterParams = {
+  /** 更新対象の要素 */
+  elements: PlayerElements;
+  /** ダメージ値 */
+  value: number;
+  /** 死亡するか否か、trueで死亡 */
+  isDeath: boolean;
+};
 
 /**
  * ダメージを更新する
- * @param elements プレイヤー関連のHTML要素
- * @param result 戦闘結果
+ * @param params パラメータ
  */
-export const updateDamage = (
-  elements: PlayerElements,
-  result: BattleResult,
-) => {
+export const updateDamage = (params: DamageUpdaterParams) => {
+  const { elements, value, isDeath } = params;
   const { damage } = elements;
-  damage.innerText =
-    result.name === "NormalHit" ||
-    result.name === "Guard" ||
-    result.name === "CriticalHit"
-      ? `-${result.damage}`
-      : "0";
+  damage.innerText = 0 < value ? `-${value}` : "0";
+  damage.className = isDeath ? DAMAGE_IS_DEATH : DAMAGE;
 };

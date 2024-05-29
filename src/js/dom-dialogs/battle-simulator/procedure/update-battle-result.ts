@@ -1,4 +1,5 @@
 import {
+  BattleResult,
   battleResult,
   correctedBattery,
   PlayerState,
@@ -77,6 +78,17 @@ const divideOnEnemyAttacker = (props: BattleSimulatorProps) => {
 };
 
 /**
+ * ダメージ数字を取得する
+ * @param result
+ */
+const getDamageValue = (result: BattleResult) =>
+  result.name === "NormalHit" ||
+  result.name === "CriticalHit" ||
+  result.name === "Guard"
+    ? result.damage
+    : 0;
+
+/**
  * 現在の画面入力内容から戦闘結果を更新する
  * @param props プロパティ
  */
@@ -100,8 +112,14 @@ export const updateBattleResult = (props: BattleSimulatorProps) => {
     defender,
     defenderBattery,
   );
+  const damage = getDamageValue(result);
+  const isDeath = defender.armdozer.hp <= damage;
   updateBattleResultName(defenderElements, result);
-  updateDamage(defenderElements, result);
+  updateDamage({
+    elements: defenderElements,
+    value: damage,
+    isDeath,
+  });
 
   const attackerBatteryCorrect = attackerBattery - originAttackerBattery;
   updateBatteryCorrect(attackerElements, attackerBatteryCorrect);
