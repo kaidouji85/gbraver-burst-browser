@@ -1,6 +1,7 @@
-import type { DecideBattery } from "./decide-battery";
+import { BattleSimulatorEnd } from "./battle-simulator-end";
+import { BattleSimulatorStart } from "./battle-simulator-start";
+import { DecideBattery } from "./decide-battery";
 import { DecideBatteryByMiniController } from "./decide-battery-by-mini-controller";
-import { DoBattleSimulator } from "./do-battle-simulator";
 import { DoBurst } from "./do-burst";
 import { DoBurstByMiniController } from "./do-burst-by-mini-controller";
 import { DoPilotSkill } from "./do-pilot-skill";
@@ -22,4 +23,5 @@ export type BattleSceneAction =
   | DecideBatteryByMiniController
   | DoBurstByMiniController
   | DoPilotSkillByMiniController
-  | DoBattleSimulator;
+  | BattleSimulatorStart
+  | BattleSimulatorEnd;

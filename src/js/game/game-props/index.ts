@@ -75,7 +75,10 @@ export interface GameProps
   pushWindow: Observable<PushWindow>;
   /** ゲームループ */
   gameLoop: Observable<GameLoop>;
-  /** ゲームアクション */
+  /**
+   * ゲームアクション管理オブジェクト
+   * 動的生成されるシーン、ダイアログの通知を購読するために利用する
+   */
   gameAction: ActionManager<GameAction>;
 
   /** cssカスタムプロパティ --hud-ui-scale */
