@@ -14,6 +14,7 @@
     --player-area-z-index: 1;
     --controller-z-index: 2;
     --result-area-z-index: 2;
+    --is-death-color: #ff2828;
 
     display: block;
   }
@@ -89,7 +90,8 @@
   align-items: center;
 }
 
-.battle-simulator__damage {
+.battle-simulator__damage,
+.battle-simulator__damage--is-death {
   grid-area: hp-value;
   position: absolute;
   bottom: calc(var(--responsive-font-size) * 1.1);
@@ -98,11 +100,20 @@
   white-space: nowrap;
 }
 
-.battle-simulator__battle-result-name {
+.battle-simulator__damage--is-death {
+  color: var(--is-death-color);
+}
+
+.battle-simulator__battle-result-name,
+.battle-simulator__battle-result-name--is-death {
   grid-area: separator-1;
   position: absolute;
   white-space: nowrap;
   bottom: calc(var(--responsive-font-size) * 1.1);
+}
+
+.battle-simulator__battle-result-name--is-death {
+  color: var(--is-death-color);
 }
 
 .battle-simulator__hp-label {
