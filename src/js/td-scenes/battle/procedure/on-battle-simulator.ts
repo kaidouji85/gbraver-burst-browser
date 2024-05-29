@@ -5,7 +5,7 @@ import { BattleSceneProps } from "../props";
  * @param props 戦闘シーンプロパティ
  */
 export function onBattleSimulator(props: BattleSceneProps) {
-  const { exclusive, playerId, stateHistory, battleSimulate, sounds, se } =
+  const { exclusive, playerId, stateHistory, sounds, se } =
     props;
   exclusive.execute(async () => {
     const lastState = stateHistory.at(-1);
@@ -21,10 +21,5 @@ export function onBattleSimulator(props: BattleSceneProps) {
 
     se.play(sounds.changeValue);
     const isPlayerAttacker = lastState.activePlayerId === playerId;
-    battleSimulate.next({
-      player,
-      enemy,
-      isPlayerAttacker,
-    });
   });
 }

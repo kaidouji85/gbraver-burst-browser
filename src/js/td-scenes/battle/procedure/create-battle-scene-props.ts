@@ -82,6 +82,5 @@ export function createBattleSceneProps(
     sounds: createBattleSceneSounds(params),
 
     endBattle: new Subject(),
-    battleSimulate: new Subject(),
   };
 }

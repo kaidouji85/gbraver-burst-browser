@@ -7,7 +7,6 @@ import { Exclusive } from "../../exclusive/exclusive";
 import { SEPlayerContainer } from "../../se/se-player";
 import { PushWindow } from "../../window/push-window";
 import { BattleProgress } from "./battle-progress";
-import { BattleSimulateNotify } from "./battle-simuralate-notify";
 import { BattleControllerType } from "./controller-type";
 import { CustomBattleEvent } from "./custom-battle-event";
 import { BattleSceneSounds } from "./sounds";
@@ -51,6 +50,4 @@ export type BattleSceneProps = BGMManagerContainer &
     readonly endBattle: Subject<BattleEnd>;
     /** ウインドウ押下ストリーム */
     readonly pushWindow: Observable<PushWindow>;
-    /** 戦闘シミュレーション通知ストリーム */
-    readonly battleSimulate: Subject<BattleSimulateNotify>;
   };
