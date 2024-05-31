@@ -1,9 +1,6 @@
 import { map, merge, Observable } from "rxjs";
 
 import { BattleSceneAction } from "../../../actions";
-import { DecideBatteryByMiniController } from "../../../actions/decide-battery-by-mini-controller";
-import { DoBurstByMiniController } from "../../../actions/do-burst-by-mini-controller";
-import { DoPilotSkillByMiniController } from "../../../actions/do-pilot-skill-by-mini-controller";
 import { DOMLayerProps } from "../props";
 
 /**
@@ -16,27 +13,19 @@ export function notifyBattleAction(
 ): Observable<BattleSceneAction> {
   const { miniController } = props;
   return merge(
-    miniController.batteryPushNotifier().pipe(
-      map(
-        (v): DecideBatteryByMiniController => ({
-          type: "decideBatteryByMiniController",
-          battery: v,
-        }),
+    miniController
+      .batteryPushNotifier()
+      .pipe(
+        map(
+          (battery) =>
+            ({ type: "decideBatteryByMiniController", battery }) as const,
+        ),
       ),
-    ),
-    miniController.burstPushNotifier().pipe(
-      map(
-        (): DoBurstByMiniController => ({
-          type: "doBurstByMiniController",
-        }),
-      ),
-    ),
-    miniController.pilotPushNotifier().pipe(
-      map(
-        (): DoPilotSkillByMiniController => ({
-          type: "doPilotSkillByMiniController",
-        }),
-      ),
-    ),
+    miniController
+      .burstPushNotifier()
+      .pipe(map(() => ({ type: "doBurstByMiniController" }) as const)),
+    miniController
+      .pilotPushNotifier()
+      .pipe(map(() => ({ type: "doPilotSkillByMiniController" }) as const)),
   );
 }
