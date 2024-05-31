@@ -13,7 +13,7 @@ export function battleActionNotifier(
 ): Observable<BattleSceneAction> {
   const { gameObjects, players } = props;
   return merge(
-    gameObjects.battleActionNotifier(),
-    ...players.map((p) => p.battleActionNotifier()),
+    gameObjects.notifyBattleAction(),
+    ...players.map((p) => p.notifyBattleAction()),
   );
 }

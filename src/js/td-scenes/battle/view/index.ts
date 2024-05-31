@@ -1,12 +1,12 @@
 import { Observable } from "rxjs";
 
 import { BattleSceneAction } from "../actions";
-import { battleActionNotifier } from "./procedure/battle-action-notifier";
 import {
   BattleSceneViewPropsCreatorParams,
   createBattleSceneViewProps,
 } from "./procedure/create-battle-scene-props";
 import { destructor } from "./procedure/destructor";
+import { battleActionNotifier as notifyBattleAction } from "./procedure/notify-battle-action";
 import { onGameLoop } from "./procedure/on-game-loop";
 import { BattleSceneLayers } from "./props";
 
@@ -21,7 +21,7 @@ export type BattleSceneView = BattleSceneLayers & {
    * 戦闘シーンアクションを通知する
    * @returns 通知ストリーム
    */
-  battleActionNotifier(): Observable<BattleSceneAction>;
+  notifyBattleAction(): Observable<BattleSceneAction>;
 };
 
 /** 生成パラメータ */
@@ -46,6 +46,6 @@ export function createBattleSceneView(
       destructor(props);
       unsubscriber.unsubscribe();
     },
-    battleActionNotifier: () => battleActionNotifier(props),
+    notifyBattleAction: () => notifyBattleAction(props),
   };
 }
