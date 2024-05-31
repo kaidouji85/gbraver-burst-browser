@@ -21,7 +21,7 @@ import { onToggleTimeScale } from "./on-toggle-time-scale";
 export function bindEventListeners(props: BattleSceneProps): Unsubscribable[] {
   const { view, battleSceneAction } = props;
   return [
-    merge(view.battleActionNotifier(), battleSceneAction.notify()).subscribe(
+    merge(view.notifyBattleAction(), battleSceneAction.notify()).subscribe(
       (action) => {
         if (action.type === "plusBattery") {
           onPlusBattery(props);
