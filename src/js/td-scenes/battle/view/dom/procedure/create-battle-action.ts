@@ -7,11 +7,11 @@ import { DoPilotSkillByMiniController } from "../../../actions/do-pilot-skill-by
 import { DOMLayerProps } from "../props";
 
 /**
- * 戦闘シーンアクション通知を生成する
+ * 戦闘シーンアクションを通知する
  * @param props レイヤープロパティ
  * @returns 生成結果
  */
-export function createBattleAction(
+export function notifyBattleAction(
   props: DOMLayerProps,
 ): Observable<BattleSceneAction> {
   const { miniController } = props;

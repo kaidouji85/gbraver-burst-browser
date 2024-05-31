@@ -12,5 +12,5 @@ export function battleActionNotifier(
   props: BattleSceneViewProps,
 ): Observable<BattleSceneAction> {
   const { hud, dom } = props;
-  return merge(hud.battleActionNotifier(), dom.battleActionNotifier());
+  return merge(hud.battleActionNotifier(), dom.notifyBattleAction());
 }
