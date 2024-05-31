@@ -2,10 +2,10 @@ import { Observable } from "rxjs";
 
 import { BattleSceneAction } from "../../actions";
 import { BattleViewCreatorParams } from "../creator-params";
-import { notifyBattleAction } from "./procedure/create-battle-action";
 import { createDOMLayerProps } from "./procedure/create-dom-layer-props";
 import { destructor } from "./procedure/destructor";
 import { getHTMLElements } from "./procedure/get-html-elements";
+import { notifyBattleAction } from "./procedure/notify-battle-action";
 import { DOMLayerProps } from "./props";
 
 /** DOMレイヤー */

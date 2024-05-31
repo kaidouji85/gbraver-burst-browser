@@ -26,7 +26,7 @@ export type HUDGameObjects = HUDGameObjectsProps & {
    * 戦闘シーンアクションを通知する
    * @returns 通知ストリーム
    */
-  battleActionNotifier(): Observable<BattleSceneAction>;
+  notifyBattleAction(): Observable<BattleSceneAction>;
 };
 
 /**
@@ -49,6 +49,6 @@ export function createHUDGameObjects(
       });
     },
     getObject3Ds: () => getObject3Ds(props),
-    battleActionNotifier: () => battleAction,
+    notifyBattleAction: () => battleAction,
   };
 }
