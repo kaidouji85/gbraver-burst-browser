@@ -14,6 +14,6 @@ export function battleActionNotifier(
   const { gameObjects, players } = props;
   return merge(
     gameObjects.notifyBattleAction(),
-    ...players.map((p) => p.battleActionNotifier()),
+    ...players.map((p) => p.notifyBattleAction()),
   );
 }
