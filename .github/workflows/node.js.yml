@@ -28,7 +28,7 @@ jobs:
           cache: npm
       - run: shellcheck *.bash
       - run: npm ci
-      - run: npm run detect-circular
+      - run: npm run dependency-check
       - run: npm run lint
   codeFormatCheck:
     runs-on: ubuntu-latest
