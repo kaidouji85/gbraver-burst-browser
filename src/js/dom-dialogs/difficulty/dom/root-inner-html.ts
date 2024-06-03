@@ -6,12 +6,13 @@ import { DataIDs } from "./data-ids";
 import template from "./root-inner-html.hbs";
 
 /**
- * リソースからパスを取得
+ * リソースからパスを取得するヘルパー関数
+ * 見つからない場合は空文字を返す
  * @param resources リソース管理オブジェクト
  * @param id パスID
- * @returns 取得結果、見つからない場合は空文字を返す
+ * @returns 取得したパス
  */
-const findPath = (resources: Resources, id: PathId) =>
+const findPathOrEmpty = (resources: Resources, id: PathId) =>
   resources.paths.find((v) => v.id === id)?.path ?? "";
 
 /**
@@ -21,11 +22,11 @@ const findPath = (resources: Resources, id: PathId) =>
  * @returns innerHTML
  */
 export function rootInnerHTML(resources: Resources, ids: DataIDs): string {
-  const closerPath = findPath(resources, PathIds.CLOSER);
-  const easyIconPath = findPath(resources, PathIds.NPC_COURSE_EASY_ICON);
-  const normalIconPath = findPath(resources, PathIds.NPC_COURSE_NORMAL_ICON);
-  const hardIconPath = findPath(resources, PathIds.NPC_COURSE_HARD_ICON);
-  const veryHardIconPath = findPath(
+  const closerPath = findPathOrEmpty(resources, PathIds.CLOSER);
+  const easyIconPath = findPathOrEmpty(resources, PathIds.NPC_COURSE_EASY_ICON);
+  const normalIconPath = findPathOrEmpty(resources, PathIds.NPC_COURSE_NORMAL_ICON);
+  const hardIconPath = findPathOrEmpty(resources, PathIds.NPC_COURSE_HARD_ICON);
+  const veryHardIconPath = findPathOrEmpty(
     resources,
     PathIds.NPC_COURSE_VERY_HARD_ICON,
   );
