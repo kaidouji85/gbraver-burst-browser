@@ -1,67 +1,103 @@
 import type { DataIDs } from "./data-ids";
 
-/** ルート要素の子孫要素 */
-type Elements = {
-  backGround: HTMLElement;
-  closer: HTMLElement;
-  easy: HTMLElement;
-  easyButton: HTMLElement;
-  normal: HTMLElement;
-  normalButton: HTMLElement;
-  hard: HTMLElement;
-  hardButton: HTMLElement;
-  veryHard: HTMLElement;
-  veryHardButton: HTMLElement;
-};
+/**
+ * data-idから要素を抽出する
+ * @param root ルート要素
+ * @param id  抽出要素のdata-id
+ * @returns 抽出結果、見つからない場合は新規作成したdiv要素を返す
+ */
+const extractHTMLElementByDataID = (
+  root: HTMLElement,
+  id: string,
+): HTMLElement =>
+  root.querySelector(`[data-id="${id}"]`) ?? document.createElement("div");
 
 /**
- * ルート要素から子孫要素を抽出する
- *
- * @param root ルート要素
- * @param ids data-idを集めたもの
- * @returns 抽出結果
+ * 背景を抽出する
+ * @param root
+ * @param ids
+ * @returns
  */
-export function extractElements(root: HTMLElement, ids: DataIDs): Elements {
-  const backGround: HTMLElement =
-    root.querySelector(`[data-id="${ids.backGround}"]`) ??
-    document.createElement("div");
-  const closer: HTMLElement =
-    root.querySelector(`[data-id="${ids.closer}"]`) ??
-    document.createElement("div");
-  const easy: HTMLElement =
-    root.querySelector(`[data-id="${ids.easy}"]`) ??
-    document.createElement("div");
-  const easyButton: HTMLElement =
-    root.querySelector(`[data-id="${ids.easyButton}"]`) ??
-    document.createElement("div");
-  const normal: HTMLElement =
-    root.querySelector(`[data-id="${ids.normal}"]`) ??
-    document.createElement("div");
-  const normalButton: HTMLElement =
-    root.querySelector(`[data-id="${ids.normalButton}"]`) ??
-    document.createElement("div");
-  const hard: HTMLElement =
-    root.querySelector(`[data-id="${ids.hard}"]`) ??
-    document.createElement("div");
-  const hardButton: HTMLElement =
-    root.querySelector(`[data-id="${ids.hardButton}"]`) ??
-    document.createElement("div");
-  const veryHard: HTMLElement =
-    root.querySelector(`[data-id="${ids.veryHard}"]`) ??
-    document.createElement("div");
-  const veryHardButton: HTMLElement =
-    root.querySelector(`[data-id="${ids.veryHardButton}"]`) ??
-    document.createElement("div");
-  return {
-    backGround,
-    closer,
-    easy,
-    easyButton,
-    normal,
-    normalButton,
-    hard,
-    hardButton,
-    veryHard,
-    veryHardButton,
-  };
-}
+export const extractBackGround = (root: HTMLElement, ids: DataIDs) =>
+  extractHTMLElementByDataID(root, ids.backGround);
+
+/**
+ * クローザーを抽出する
+ * @param root ルート要素
+ * @param id  抽出要素のdata-id
+ * @returns 抽出結果、見つからない場合は新規作成したdiv要素を返す
+ */
+export const extractCloser = (root: HTMLElement, ids: DataIDs) =>
+  extractHTMLElementByDataID(root, ids.closer);
+
+/**
+ * 易アイコンを抽出する
+ * @param root ルート要素
+ * @param id  抽出要素のdata-id
+ * @returns 抽出結果、見つからない場合は新規作成したdiv要素を返す
+ */
+export const extractEasy = (root: HTMLElement, ids: DataIDs) =>
+  extractHTMLElementByDataID(root, ids.easy);
+
+/**
+ * 易ボタンを抽出する
+ * @param root ルート要素
+ * @param id  抽出要素のdata-id
+ * @returns 抽出結果、見つからない場合は新規作成したdiv要素を返す
+ */
+export const extractEasyButton = (root: HTMLElement, ids: DataIDs) =>
+  extractHTMLElementByDataID(root, ids.easyButton);
+
+/**
+ * 普通アイコンを抽出する
+ * @param root ルート要素
+ * @param id  抽出要素のdata-id
+ * @returns 抽出結果、見つからない場合は新規作成したdiv要素を返す
+ */
+export const extractNormal = (root: HTMLElement, ids: DataIDs) =>
+  extractHTMLElementByDataID(root, ids.normal);
+
+/**
+ * 普通ボタンを抽出する
+ * @param root ルート要素
+ * @param id  抽出要素のdata-id
+ * @returns 抽出結果、見つからない場合は新規作成したdiv要素を返す
+ */
+export const extractNormalButton = (root: HTMLElement, ids: DataIDs) =>
+  extractHTMLElementByDataID(root, ids.normalButton);
+
+/**
+ * 難アイコンを抽出する
+ * @param root ルート要素
+ * @param id  抽出要素のdata-id
+ * @returns 抽出結果、見つからない場合は新規作成したdiv要素を返す
+ */
+export const extractHard = (root: HTMLElement, ids: DataIDs) =>
+  extractHTMLElementByDataID(root, ids.hard);
+
+/**
+ * 難ボタンを抽出する
+ * @param root ルート要素
+ * @param id  抽出要素のdata-id
+ * @returns 抽出結果、見つからない場合は新規作成したdiv要素を返す
+ */
+export const extractHardButton = (root: HTMLElement, ids: DataIDs) =>
+  extractHTMLElementByDataID(root, ids.hardButton);
+
+/**
+ * 激アイコンを抽出する
+ * @param root ルート要素
+ * @param id  抽出要素のdata-id
+ * @returns 抽出結果、見つからない場合は新規作成したdiv要素を返す
+ */
+export const extractVeryHard = (root: HTMLElement, ids: DataIDs) =>
+  extractHTMLElementByDataID(root, ids.veryHard);
+
+/**
+ * 激ボタンを抽出する
+ * @param root ルート要素
+ * @param id  抽出要素のdata-id
+ * @returns 抽出結果、見つからない場合は新規作成したdiv要素を返す
+ */
+export const extractVeryHardButton = (root: HTMLElement, ids: DataIDs) =>
+  extractHTMLElementByDataID(root, ids.veryHardButton);
