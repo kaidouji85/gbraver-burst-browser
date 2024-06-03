@@ -1,5 +1,3 @@
-import { Subject } from "rxjs";
-
 import { BurstButtonAnimationProps } from "../animation/animation-props";
 import { BurstButtonView } from "../view/burst-button-view";
 
@@ -7,6 +5,6 @@ import { BurstButtonView } from "../view/burst-button-view";
 export type BurstButtonProps = BurstButtonAnimationProps & {
   /** ビュー */
   view: BurstButtonView;
-  /** ボタン押下通知 */
-  pushButton: Subject<Event>;
+  /** バーストボタンが操作不可能であるか否か、trueで操作不可能である */
+  disabled: boolean;
 };

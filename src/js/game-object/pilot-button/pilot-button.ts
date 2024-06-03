@@ -2,10 +2,11 @@ import { Observable, Unsubscribable } from "rxjs";
 import * as THREE from "three";
 
 import { Animate } from "../../animation/animate";
-import type { PreRender } from "../../game-loop/pre-render";
 import { close } from "./animation/close";
 import { decide } from "./animation/decide";
 import { open } from "./animation/open";
+import { bindEventListener } from "./procedure/bind-event-listner";
+import { notifyPressed } from "./procedure/notify-pressed";
 import {
   createPilotButtonProps,
   PropsCreatorParams,
@@ -29,16 +30,7 @@ export class PilotButton {
   constructor(params: PilotButtonParams) {
     const { gameObjectAction } = params;
     this.#props = createPilotButtonProps(params);
-    this.#unsubscribers = [
-      gameObjectAction.subscribe((action) => {
-        if (action.type === "PreRender") {
-          this.#onPreRender(action);
-        }
-      }),
-      this.#props.view.notifyPressed().subscribe((event) => {
-        this.#onPush(event);
-      }),
-    ];
+    this.#unsubscribers = bindEventListener(this.#props, gameObjectAction);
   }
 
   /**
@@ -89,7 +81,7 @@ export class PilotButton {
    * @returns 通知ストリーム
    */
   notifyPressed(): Observable<Event> {
-    return this.#props.pushButton;
+    return notifyPressed(this.#props);
   }
 
   /**
@@ -97,7 +89,7 @@ export class PilotButton {
    * @param isDisabled trueで操作不可能
    */
   disabled(isDisabled: boolean): void {
-    this.#props.model.disabled = isDisabled;
+    this.#props.disabled = isDisabled;
   }
 
   /**
@@ -105,28 +97,6 @@ export class PilotButton {
    * @returns trueで操作不可能
    */
   isDisabled(): boolean {
-    return this.#props.model.disabled;
-  }
-
-  /**
-   * プリレンダー時の処理
-   * @param action アクション
-   */
-  #onPreRender(action: PreRender): void {
-    this.#props.view.engage(this.#props.model, action);
-  }
-
-  /**
-   * ボタン押下時の処理
-   * @param event イベント
-   */
-  #onPush(event: Event): void {
-    if (
-      !this.#props.model.shouldPushNotifierStop &&
-      !this.#props.model.disabled &&
-      this.#props.model.canActivatePilotSkill
-    ) {
-      this.#props.pushButton.next(event);
-    }
+    return this.#props.disabled;
   }
 }

@@ -1,3 +1,4 @@
+import { wbr } from "../../../dom/wbr";
 import type { CustomBattleEventProps } from "../../../td-scenes/battle/custom-battle-event";
 import {
   activeLeftMessageWindowWithFace,
@@ -16,8 +17,8 @@ export async function noZeroBatteryDefense(props: CustomBattleEventProps) {
   invisibleAllMessageWindows(props);
   activeLeftMessageWindowWithFace(props, "Tsubasa");
   await scrollLeftMessages(props, [
-    ["ツバサ", "「待て シンヤ!!"],
-    ["0防御はまずい たとえHPが満タンでも即死するぞ」"],
+    ["ツバサ", `「待て${wbr} シンヤ!!`],
+    [`0防御はまずい${wbr} たとえHPが${wbr}満タンでも${wbr}即死するぞ」`],
   ]);
   props.view.dom.leftMessageWindow.darken();
 }
@@ -32,8 +33,8 @@ export async function cancelZeroBatteryDefense(props: CustomBattleEventProps) {
   await noZeroBatteryDefense(props);
   activeRightMessageWindowWithFace(props, "Shinya");
   await scrollRightMessages(props, [
-    ["シンヤ", "「えっ それはマズイッスね"],
-    ["今のは無かったことにして欲しいッス」"],
+    ["シンヤ", `「えっ${wbr} それはマズイッスね`],
+    [`今のは${wbr}無かったことに${wbr}して欲しいッス」`],
   ]);
   props.view.dom.rightMessageWindow.darken();
 }
@@ -48,14 +49,14 @@ export async function doBurstBecauseZeroBattery(props: CustomBattleEventProps) {
   await noZeroBatteryDefense(props);
   activeRightMessageWindowWithFace(props, "Shinya");
   await scrollRightMessages(props, [
-    ["シンヤ", "「でもツバサ先輩 俺のバッテリーはもう0ッスよ」"],
+    ["シンヤ", `「でもツバサ先輩${wbr} 俺のバッテリーは${wbr}もう0ッスよ」`],
   ]);
   props.view.dom.rightMessageWindow.darken();
   activeLeftMessageWindowWithFace(props, "Tsubasa");
   await scrollLeftMessages(props, [
-    ["ツバサ", "「シンヤ こういう時はバーストだ"],
-    ["バーストは1試合に1回しか使えないが"],
-    ["発動すればバッテリーを大幅に回復できるんだ」"],
+    ["ツバサ", `「シンヤ${wbr} こういう時は${wbr}バーストだ`],
+    [`バーストは${wbr}1試合に1回しか${wbr}使えないが`],
+    [`発動すれば${wbr}バッテリーを${wbr}大幅に${wbr}回復できるんだ」`],
   ]);
   props.view.dom.leftMessageWindow.darken();
 }
@@ -72,14 +73,21 @@ export async function doPilotSkillBecauseZeroBattery(
   await noZeroBatteryDefense(props);
   activeRightMessageWindowWithFace(props, "Shinya");
   await scrollRightMessages(props, [
-    ["シンヤ", "「でもツバサ先輩 俺のバッテリーはもう0ッスよ"],
+    ["シンヤ", `「でもツバサ先輩${wbr} 俺のバッテリーは${wbr}もう0ッスよ」`],
   ]);
   props.view.dom.rightMessageWindow.darken();
   activeLeftMessageWindowWithFace(props, "Tsubasa");
   await scrollLeftMessages(props, [
-    ["ツバサ", "「こういう時はバーストでバッテリーを回復するんだ"],
-    ["……と言いたいところが もうバーストは使ってしまったか"],
-    ["ならば 最後の手段 パイロットスキルを発動するんだ」"],
+    [
+      "ツバサ",
+      `「こういう時は${wbr}バーストで${wbr}バッテリーを${wbr}回復${wbr}するんだ`,
+    ],
+    [
+      `……と${wbr}言いたい${wbr}ところだが${wbr} もう${wbr}バーストは${wbr}使って${wbr}しまったか`,
+    ],
+    [
+      `ならば${wbr}最後の手段${wbr} パイロットスキルを${wbr}発動${wbr}するんだ」`,
+    ],
   ]);
   props.view.dom.leftMessageWindow.darken();
   activeRightMessageWindowWithFace(props, "Shinya");
@@ -87,8 +95,11 @@ export async function doPilotSkillBecauseZeroBattery(
   props.view.dom.rightMessageWindow.darken();
   activeLeftMessageWindowWithFace(props, "Tsubasa");
   await scrollLeftMessages(props, [
-    ["ツバサ", "「君のパイロットスキルで バッテリーを少しだけ回復できる"],
-    ["これで急場を凌ぐんだ」"],
+    [
+      "ツバサ",
+      `「君の${wbr}パイロットスキルで${wbr} バッテリーを${wbr}少しだけ${wbr}回復${wbr}できる`,
+    ],
+    [`これで${wbr}急場を${wbr}凌ぐんだ」`],
   ]);
   props.view.dom.leftMessageWindow.darken();
 }
@@ -104,21 +115,28 @@ export async function zeroBatteryDefenseBecauseNoBatteryRecover(
   await noZeroBatteryDefense(props);
   activeRightMessageWindowWithFace(props, "Shinya");
   await scrollRightMessages(props, [
-    ["シンヤ", "「でもツバサ先輩 俺のバッテリーはもう0ッスよ」"],
+    ["シンヤ", `「でもツバサ先輩${wbr} 俺のバッテリーは${wbr}もう0ッスよ」`],
   ]);
   props.view.dom.rightMessageWindow.darken();
   activeLeftMessageWindowWithFace(props, "Tsubasa");
   await scrollLeftMessages(props, [
-    ["ツバサ", "「こういう時はバーストでバッテリーを回復するんだ"],
-    ["……と言いたいところが もうバーストは使ってしまったか"],
-    ["ならば 最後のパイロットスキル"],
-    ["……も既に使い果たしたか"],
+    [
+      "ツバサ",
+      `「こういう時は${wbr}バーストで${wbr}バッテリーを${wbr}回復${wbr}するんだ`,
+    ],
+    [
+      `……と${wbr}言いたいところだが${wbr} もうバーストは${wbr}使って${wbr}しまったか`,
+    ],
+    [`ならば${wbr} 最後手段の${wbr}パイロットスキル`],
+    [`……も${wbr}既に${wbr}使い${wbr}果たしたか`],
   ]);
   props.view.dom.leftMessageWindow.darken();
   activeRightMessageWindowWithFace(props, "Shinya");
   await scrollRightMessages(props, [["シンヤ", "「センパーイ」"]]);
   props.view.dom.rightMessageWindow.darken();
   activeLeftMessageWindowWithFace(props, "Tsubasa");
-  await scrollLeftMessages(props, [["ツバサ", "「残念ながら万策尽きた」"]]);
+  await scrollLeftMessages(props, [
+    ["ツバサ", `「残念ながら${wbr}万策${wbr}尽きた」`],
+  ]);
   props.view.dom.leftMessageWindow.darken();
 }

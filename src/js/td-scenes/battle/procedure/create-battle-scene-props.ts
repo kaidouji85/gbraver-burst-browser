@@ -1,8 +1,10 @@
 import { GameState, Player } from "gbraver-burst-core";
 import { Observable, Subject } from "rxjs";
 
+import { createActionManager } from "../../../action-manager/action-manager";
 import { createAnimatePlayer } from "../../../animation/animate-player";
 import { BGMManagerContainer } from "../../../bgm/bgm-manager";
+import { DOMDialogBinder } from "../../../dom-dialogs/dom-dialog-binder";
 import { Exclusive } from "../../../exclusive/exclusive";
 import { GameLoop } from "../../../game-loop/game-loop";
 import { OverlapNotifier } from "../../../render/overlap-notifier";
@@ -13,6 +15,7 @@ import { SoundId } from "../../../resource/sound/resource";
 import { SEPlayerContainer } from "../../../se/se-player";
 import { PushWindow } from "../../../window/push-window";
 import { Resize } from "../../../window/resize";
+import { BattleSceneAction } from "../actions";
 import { BattleProgress } from "../battle-progress";
 import { BattleControllerType } from "../controller-type";
 import { CustomBattleEvent } from "../custom-battle-event";
@@ -33,28 +36,37 @@ export type BattleScenePropsCreatorParams = BGMManagerContainer &
   Readonly<{
     /** 再生するBGM ID */
     playingBGM: SoundId;
+
     /** レンダラ */
     renderer: OwnRenderer;
+
+    /** DOMダイアログバインダー */
+    domDialogBinder: DOMDialogBinder;
+
+    /** コントローラータイプ */
+    controllerType: BattleControllerType;
+
     /** バトル進行オブジェクト */
     battleProgress: BattleProgress;
+    /** カスタムバトルイベント */
+    customBattleEvent?: CustomBattleEvent;
+
     /** アニメーションスケールの初期値 */
     initialAnimationTimeScale: number;
+
     /** 初期ゲームステート */
     initialState: GameState[];
     /** プレイヤー情報 */
     player: Player;
     /** 敵情報 */
     enemy: Player;
+
     /** ゲームループストリーム */
     gameLoop: Observable<GameLoop>;
     /** リサイズストリーム */
     resize: Observable<Resize>;
     /** window押下ストリーム */
     pushWindow: Observable<PushWindow>;
-    /** カスタムバトルイベント */
-    customBattleEvent?: CustomBattleEvent;
-    /** コントローラータイプ */
-    controllerType: BattleControllerType;
   }>;
 
 /**
@@ -67,15 +79,21 @@ export function createBattleSceneProps(
 ): BattleSceneProps {
   return {
     ...params,
+
     playerId: params.player.playerId,
+    stateHistory: params.initialState,
+
     animatePlayer: createAnimatePlayer({
       timeScale: params.initialAnimationTimeScale,
     }),
-    exclusive: new Exclusive(),
-    stateHistory: params.initialState,
-    endBattle: new Subject(),
+
     customBattleEvent: params.customBattleEvent ?? null,
+    exclusive: new Exclusive(),
+
     view: createBattleSceneView(params),
     sounds: createBattleSceneSounds(params),
+
+    endBattle: new Subject(),
+    battleSceneAction: createActionManager<BattleSceneAction>(),
   };
 }

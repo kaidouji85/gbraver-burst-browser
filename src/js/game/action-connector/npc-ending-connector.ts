@@ -1,14 +1,18 @@
+import { map } from "rxjs";
+
+import { ActionManager } from "../../action-manager/action-manager";
+import { DOMSceneActionConnector } from "../../dom-scenes/dom-scene-binder/action-connector";
 import { NPCEnding } from "../../dom-scenes/npc-ending";
-import type { DOMSceneActionConnector } from "../dom-scene-binder/dom-scene-action-connector";
+import { GameAction } from "../game-actions";
 
-/** アクションコネクタのデータ型 */
-type Connector = DOMSceneActionConnector<NPCEnding>;
-
-/** NPCルートエンディング画面とゲームアクションを関連付ける */
-export const npcEndingConnector: Connector = (scene, gameAction) => [
-  scene.notifyFinish().subscribe(() => {
-    gameAction.next({
-      type: "EndNPCEnding",
-    });
-  }),
-];
+/**
+ * NPCルートエンディング画面のアクションコネクタを生成する
+ * @param gameAction アクション管理オブジェクト
+ * @returns アクションコネクタ
+ */
+export const npcEndingConnector =
+  (gameAction: ActionManager<GameAction>): DOMSceneActionConnector<NPCEnding> =>
+  (scene) =>
+    gameAction.connect([
+      scene.notifyFinish().pipe(map(() => ({ type: "EndNPCEnding" }))),
+    ]);

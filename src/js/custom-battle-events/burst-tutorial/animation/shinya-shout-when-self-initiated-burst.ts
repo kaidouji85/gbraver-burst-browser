@@ -1,4 +1,5 @@
 import { onStart } from "../../../animation/on-start";
+import { wbr } from "../../../dom/wbr";
 import { CustomBattleEventProps } from "../../../td-scenes/battle/custom-battle-event";
 import { playerPilotOnlyShout } from "../../pilot-shout";
 
@@ -10,6 +11,6 @@ export const shinyaShoutWhenSelfInitiatedBurst = (
     playerPilotOnlyShout(
       props,
       "Shinya",
-      "バーストON？ 何なんすかこのレバーは？",
+      `バーストON？${wbr} 何なんすか${wbr}この${wbr}レバーは？`,
     );
   });

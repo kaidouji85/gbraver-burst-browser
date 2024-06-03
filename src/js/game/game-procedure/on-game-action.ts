@@ -1,5 +1,5 @@
-import type { GameAction } from "../game-actions";
-import type { GameProps } from "../game-props";
+import { GameAction } from "../game-actions";
+import { GameProps } from "../game-props";
 import { onAccountDeleteConsent } from "./on-account-delete-consent";
 import { onArcadeStart } from "./on-arcade-start";
 import { onCancelAccountDeletion } from "./on-cancel-account-deletion";

@@ -58,7 +58,7 @@ export class BattleScene implements TDScene {
    * ゲーム終了通知
    * @returns 通知ストリーム
    */
-  gameEndNotifier(): Observable<BattleEnd> {
+  notifyGameEnd(): Observable<BattleEnd> {
     return this.#props.endBattle;
   }
 

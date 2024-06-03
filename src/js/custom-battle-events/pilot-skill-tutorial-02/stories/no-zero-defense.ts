@@ -1,3 +1,4 @@
+import { wbr } from "../../../dom/wbr";
 import { CustomBattleEventProps } from "../../../td-scenes/battle/custom-battle-event";
 import { activeRightMessageWindowWithFace } from "../../active-message-window";
 import { invisibleAllMessageWindows } from "../../invisible-all-message-windows";
@@ -13,7 +14,10 @@ export async function noZeroDefense(
 ): Promise<void> {
   activeRightMessageWindowWithFace(props, "Gai");
   await scrollRightMessages(props, [
-    ["ガイ", "「0防御は即死 何度も同じ轍を踏むものか」"],
+    [
+      "ガイ",
+      `「0防御は${wbr}即死${wbr} 何度も${wbr}同じ${wbr}轍を${wbr}踏む${wbr}ものか」`,
+    ],
   ]);
   invisibleAllMessageWindows(props);
 }

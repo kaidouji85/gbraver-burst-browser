@@ -1,0 +1,278 @@
+/** 戦闘シミュレーター */
+@media (orientation: landscape) {
+  .battle-simulator {
+    --closer-width: 48px;
+    --closer-height: 48px;
+    --dialog-padding: var(--responsive-font-size);
+    --player-area-width: calc(var(--responsive-font-size) * 15);
+    --player-area-height: calc(var(--responsive-font-size) * 10);
+    --armdozer-size: calc(var(--responsive-font-size) * 19);
+    --middle-area-size: calc(var(--responsive-font-size) * 2);
+    --turn-indicator-size: calc(var(--responsive-font-size) * 6);
+    --battery-icon-size: calc(var(--responsive-font-size) * 0.9);
+    --closer-z-index: 3;
+    --player-area-z-index: 1;
+    --controller-z-index: 2;
+    --result-area-z-index: 2;
+
+    display: block;
+  }
+}
+
+@media (orientation: portrait) {
+  .battle-simulator {
+    display: none;
+  }
+}
+
+.battle-simulator__background {
+  position: absolute;
+  width: 100vw;
+  width: 100dvw;
+  height: 100vh;
+  height: 100dvh;
+  background-color: #000;
+  opacity: 0.5;
+  z-index: var(--zindex-background);
+}
+
+.battle-simulator__dialog {
+  top: 50vh;
+  top: 50dvh;
+  left: 50vw;
+  left: 50dvw;
+  transform: translate(-50%, -50%);
+  color: var(--font-color);
+  font-size: var(--responsive-font-size);
+  background-color: var(--background-color);
+  position: absolute;
+  border: var(--dialog-border);
+  border-radius: var(--dialog-border-radius);
+  z-index: var(--zindex-dialog);
+  box-sizing: border-box;
+  padding: max(var(--closer-height) / 2, var(--responsive-font-size) * 3)
+    var(--dialog-padding) var(--dialog-padding) var(--dialog-padding);
+  display: grid;
+  grid-template-areas:
+    "enemy-state      a      player-state"
+    "enemy            middle player"
+    "enemy-controller b      player-controller";
+  place-items: center;
+}
+
+.battle-simulator__closer {
+  z-index: var(--closer-z-index);
+  width: var(--closer-width);
+  height: var(--closer-height);
+  position: absolute;
+  top: calc(var(--closer-width) * -0.5);
+  left: calc(var(--closer-height) * -0.5);
+}
+
+.battle-simulator__player-state {
+  grid-area: player-state;
+}
+
+.battle-simulator__enemy-state {
+  grid-area: enemy-state;
+}
+
+.battle-simulator__player-state,
+.battle-simulator__enemy-state {
+  position: relative;
+  z-index: var(--result-area-z-index);
+  gap: 0 calc(var(--responsive-font-size) * 0.2);
+  display: grid;
+  grid-template-areas:
+    "hp-label    hp-value    separator-1 battery-icon battery"
+    "power-label power-value separator-2 speed-label  speed-value";
+  align-items: center;
+}
+
+.battle-simulator__damage,
+.battle-simulator__damage--is-death {
+  grid-area: hp-value;
+  position: absolute;
+  bottom: calc(var(--responsive-font-size) * 1.1);
+  font-size: calc(var(--responsive-font-size) * 2);
+  justify-self: end;
+  white-space: nowrap;
+}
+
+.battle-simulator__battle-result-name,
+.battle-simulator__battle-result-name--is-death {
+  grid-area: separator-1;
+  position: absolute;
+  white-space: nowrap;
+  bottom: calc(var(--responsive-font-size) * 1.1);
+}
+
+.battle-simulator__damage--is-death,
+.battle-simulator__battle-result-name--is-death {
+  color: #ff2929;
+  text-shadow: #b31d1d 1px 0 2px;
+}
+
+.battle-simulator__hp-label {
+  grid-area: hp-label;
+}
+
+.battle-simulator__hp-value {
+  grid-area: hp-value;
+}
+
+.battle-simulator__battery-icon {
+  grid-area: battery-icon;
+  justify-self: center;
+  width: var(--battery-icon-size);
+  height: var(--battery-icon-size);
+}
+
+.battle-simulator__battery {
+  grid-area: battery;
+}
+
+.battle-simulator__power-label {
+  grid-area: power-label;
+}
+
+.battle-simulator__power-value {
+  grid-area: power-value;
+}
+
+.battle-simulator__speed-label {
+  grid-area: speed-label;
+}
+
+.battle-simulator__speed-value {
+  grid-area: speed-value;
+}
+
+.battle-simulator__player {
+  position: relative;
+  z-index: var(--player-area-z-index);
+  grid-area: player;
+  width: var(--player-area-width);
+  height: var(--player-area-height);
+}
+
+.battle-simulator__player-armdozer {
+  position: absolute;
+  width: var(--armdozer-size);
+  height: var(--armdozer-size);
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.battle-simulator__enemy {
+  position: relative;
+  z-index: var(--player-area-z-index);
+  grid-area: enemy;
+  width: var(--player-area-width);
+  height: var(--player-area-height);
+}
+
+.battle-simulator__enemy-armdozer {
+  position: absolute;
+  width: var(--armdozer-size);
+  height: var(--armdozer-size);
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(-1, 1);
+}
+
+.battle-simulator__player-battery-value,
+.battle-simulator__enemy-battery-value {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: calc(var(--responsive-font-size) * 4);
+  font-weight: bold;
+  color: #ff0;
+  text-shadow: #f5deb3 1px 0 4px;
+  -webkit-text-stroke: 1px #715c1f;
+}
+
+.battle-simulator__player-battery-correct,
+.battle-simulator__enemy-battery-correct {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(50%, -100%);
+  font-size: calc(var(--responsive-font-size) * 2);
+  font-weight: bold;
+  color: #ff0;
+  text-shadow: #f5deb3 1px 0 4px;
+  -webkit-text-stroke: 1px #715c1f;
+}
+
+.battle-simulator__middle {
+  position: relative;
+  grid-area: middle;
+  width: var(--middle-area-size);
+  height: var(--middle-area-size);
+}
+
+.battle-simulator__turn-indicator,
+.battle-simulator__turn-indicator--enemy-turn {
+  position: absolute;
+  width: var(--turn-indicator-size);
+  height: var(--turn-indicator-size);
+  top: 50%;
+  left: 50%;
+}
+
+.battle-simulator__turn-indicator {
+  transform: translate(-50%, -50%);
+}
+
+.battle-simulator__turn-indicator--enemy-turn {
+  transform: translate(-50%, -50%) scale(-1, 1);
+}
+
+.battle-simulator__player-controller,
+.battle-simulator__enemy-controller {
+  position: relative;
+  z-index: var(--controller-z-index);
+  display: grid;
+  grid-template-columns: auto auto;
+  gap: calc(var(--responsive-font-size) * 0.5);
+}
+
+.battle-simulator__player-controller {
+  grid-area: player-controller;
+}
+
+.battle-simulator__enemy-controller {
+  grid-area: enemy-controller;
+}
+
+.battle-simulator__player-battery-minus,
+.battle-simulator__player-battery-plus,
+.battle-simulator__enemy-battery-minus,
+.battle-simulator__enemy-battery-plus {
+  display: grid;
+  place-items: center;
+  width: calc(var(--responsive-font-size) * 5);
+  height: calc(var(--responsive-font-size) * 3);
+  font-size: calc(var(--responsive-font-size) * 1.5);
+  border-radius: var(--button-border-radius);
+  border: var(--button-border);
+  background-color: var(--sub-button-background-color);
+}
+
+.battle-simulator__player-battery-minus:enabled,
+.battle-simulator__player-battery-plus:enabled,
+.battle-simulator__enemy-battery-minus:enabled,
+.battle-simulator__enemy-battery-plus:enabled {
+  color: var(--button-font-color);
+}
+
+.battle-simulator__player-battery-minus:disabled,
+.battle-simulator__player-battery-plus:disabled,
+.battle-simulator__enemy-battery-minus:disabled,
+.battle-simulator__enemy-battery-plus:disabled {
+  color: var(--disabled-button-font-color);
+}

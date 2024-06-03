@@ -1,9 +1,9 @@
+import { MAX_LOADING_TIME } from "../../dom-scenes/dom-scene-binder/max-loading-time";
 import { EpisodeSelector } from "../../dom-scenes/episode-selector";
 import { waitTime } from "../../wait/wait-time";
 import { tutorialSelectorConnector } from "../action-connector/tutorial-selector-connection";
-import { MAX_LOADING_TIME } from "../dom-scene-binder/max-loading-time";
 import { EpisodeID } from "../episodes/episode";
-import type { GameProps } from "../game-props";
+import { GameProps } from "../game-props";
 import { getEpisodes } from "./get-episodes";
 
 /**
@@ -23,7 +23,7 @@ export async function startEpisodeSelector(
     episodes,
     initialSelectedEpisodeID,
   });
-  props.domSceneBinder.bind(scene, tutorialSelectorConnector);
+  props.domSceneBinder.bind(scene, tutorialSelectorConnector(props.gameAction));
   await Promise.race([scene.waitUntilLoaded(), waitTime(MAX_LOADING_TIME)]);
   await props.fader.fadeIn();
 }

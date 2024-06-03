@@ -1,4 +1,5 @@
 import { delay } from "../../../animation/delay";
+import { wbr } from "../../../dom/wbr";
 import { CustomBattleEventProps } from "../../../td-scenes/battle/custom-battle-event";
 import {
   activeLeftMessageWindowWithFace,
@@ -23,20 +24,27 @@ import { yoroshikuOnegaiShimasu } from "../../yoroshiku-onegai-shimasu";
 export async function introduction(props: Readonly<CustomBattleEventProps>) {
   activeRightMessageWindowWithFace(props, "Shinya");
   await scrollRightMessages(props, [
-    ["シンヤ", "「ガイ 練習を手伝ってくれて ありがとうッス」"],
+    [
+      "シンヤ",
+      `「ガイ${wbr} 練習を${wbr}手伝って${wbr}くれて ありがとう${wbr}ッス」`,
+    ],
   ]);
   await refreshConversation(props);
   activeRightMessageWindowWithFace(props, "Gai");
   await scrollRightMessages(props, [
-    ["ガイ", "「勘違いするなよ シンヤ"],
-    ["俺はシンブレイバーとウィングドーザの情報が欲しいだけだ」"],
+    ["ガイ", `「勘違い${wbr}するなよ${wbr} シンヤ`],
+    [
+      `俺は${wbr}シンブレイバーと${wbr}ウィングドーザの${wbr}情報が${wbr}欲しい${wbr}だけだ」`,
+    ],
   ]);
   props.view.dom.rightMessageWindow.darken();
   activeLeftMessageWindowWithFace(props, "Tsubasa");
   await scrollLeftMessages(props, [
-    ["ツバサ", "「それではガイ君 練習をはじめようか"],
-    ["私は先程と全く同じ戦術で戦うが"],
-    ["君のスキルなら勝利を掴むことができるだろう」"],
+    ["ツバサ", `「それでは${wbr}ガイ君${wbr} 練習を${wbr}はじめようか`],
+    [`私は${wbr}先程と${wbr}全く同じ${wbr}戦術で${wbr}戦うが`],
+    [
+      `君の${wbr}スキルなら${wbr}勝利を${wbr}掴む${wbr}ことが${wbr}できるだろう」`,
+    ],
   ]);
   props.view.dom.leftMessageWindow.darken();
   await refreshConversation(props);

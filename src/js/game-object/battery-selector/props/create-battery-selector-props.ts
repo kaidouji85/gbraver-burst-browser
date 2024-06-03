@@ -1,5 +1,5 @@
 import * as TWEEN from "@tweenjs/tween.js";
-import { Observable, Subject } from "rxjs";
+import { Observable } from "rxjs";
 
 import { ResourcesContainer } from "../../../resource";
 import { SEPlayerContainer } from "../../../se/se-player";
@@ -27,12 +27,10 @@ export function createBatterySelectorProps(
   return {
     ...param,
     model: initialValue(),
+    disabled: false,
     batteryChangeTween: new TWEEN.Group(),
     batteryMinusTween: new TWEEN.Group(),
     batteryPlusTween: new TWEEN.Group(),
-    decidePush: new Subject(),
-    batteryMinusPush: new Subject(),
-    batteryPlusPush: new Subject(),
     sounds: createBatterySelectorSounds(param.resources),
     view: new BatterySelectorView({
       resources: param.resources,

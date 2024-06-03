@@ -1,3 +1,4 @@
+import { wbr } from "../../../dom/wbr";
 import { CustomBattleEventProps } from "../../../td-scenes/battle/custom-battle-event";
 import { activeRightMessageWindowWithFace } from "../../active-message-window";
 import { invisibleAllMessageWindows } from "../../invisible-all-message-windows";
@@ -13,7 +14,10 @@ export async function lessThanAttack3(
 ): Promise<void> {
   activeRightMessageWindowWithFace(props, "Gai");
   await scrollRightMessages(props, [
-    ["ガイ", "「おっと このターンは3攻撃以上するんだったな」"],
+    [
+      "ガイ",
+      `「おっと${wbr} このターンは${wbr}3攻撃${wbr}以上${wbr}するん${wbr}だったな」`,
+    ],
   ]);
   invisibleAllMessageWindows(props);
 }

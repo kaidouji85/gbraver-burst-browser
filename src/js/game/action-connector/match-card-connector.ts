@@ -1,8 +1,8 @@
+import { DOMSceneActionConnector } from "../../dom-scenes/dom-scene-binder/action-connector";
 import { MatchCard } from "../../dom-scenes/match-card";
-import type { DOMSceneActionConnector } from "../dom-scene-binder/dom-scene-action-connector";
 
-/** アクションコネクタのデータ型 */
-type Connector = DOMSceneActionConnector<MatchCard>;
-
-/** 対戦カード画面とゲームアクションを関連付ける */
-export const matchCardConnector: Connector = () => [];
+/**
+ * 対戦カード画のアクションコネクタを生成する
+ * @returns アクションコネクタ
+ */
+export const matchCardConnector: DOMSceneActionConnector<MatchCard> = () => [];

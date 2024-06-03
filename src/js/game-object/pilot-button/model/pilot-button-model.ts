@@ -8,8 +8,6 @@ export type PilotButtonModel = {
    * パイロットボタンが反応しないようにする
    */
   shouldPushNotifierStop: boolean;
-  /** パイロットボタンが操作不可能であるか否か、trueで操作不可能である */
-  disabled: boolean;
   /** 拡大率 */
   scale: number;
   /** ゲーム的にパイロットスキルが発動可能であるか否か、trueで発動可能である */

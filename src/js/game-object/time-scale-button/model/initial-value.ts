@@ -11,6 +11,5 @@ export function createInitialValue(): TimeScaleButtonModel {
     scale: 1,
     opacity: 0,
     shouldPushNotifierStop: true,
-    disabled: false,
   };
 }

@@ -1,4 +1,5 @@
 import { onStart } from "../../../animation/on-start";
+import { wbr } from "../../../dom/wbr";
 import { CustomBattleEventProps } from "../../../td-scenes/battle/custom-battle-event";
 import { enemyPilotOnlyShout } from "../../pilot-shout";
 
@@ -11,5 +12,9 @@ export const yuuyaAttackShoutWhenShinyaHPIsFull = (
   props: Readonly<CustomBattleEventProps>,
 ) =>
   onStart(() => {
-    enemyPilotOnlyShout(props, "Yuuya", "シンヤ これが躱せるかな");
+    enemyPilotOnlyShout(
+      props,
+      "Yuuya",
+      `シンヤ${wbr} これが${wbr}躱せる${wbr}かな`,
+    );
   });

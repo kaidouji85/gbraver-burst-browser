@@ -1,4 +1,5 @@
 import { delay } from "../../../animation/delay";
+import { wbr } from "../../../dom/wbr";
 import { CustomBattleEventProps } from "../../../td-scenes/battle/custom-battle-event";
 import {
   activeLeftMessageWindowWithFace,
@@ -28,22 +29,27 @@ export async function introduction(
 ): Promise<void> {
   activeRightMessageWindowWithFace(props, "Shinya");
   await scrollRightMessages(props, [
-    ["シンヤ", "「全国大会の覇者 ユウヤさん"],
-    ["その搭乗機 G（ジェネシス）ブレイバー"],
-    ["……俺はこの人に憧れて 機動倶楽部を始めたんだ」"],
+    ["シンヤ", `「全国大会の${wbr}覇者${wbr} ユウヤさん`],
+    [`その搭乗機${wbr} G（ジェネシス）ブレイバー`],
+    [`……俺は${wbr}この人に${wbr}憧れて${wbr} 機動倶楽部を${wbr}始めたんだ」`],
   ]);
   props.view.dom.rightMessageWindow.darken();
   activeLeftMessageWindowWithFace(props, "Yuuya");
   await scrollLeftMessages(props, [
     ["ユウヤ", "「シンブレイバーか"],
-    ["……本来ブレイバーの称号は 日本で一番強いロボに与えられるもの"],
-    ["それを こんなひよっ子が名乗るとは"],
-    ["面白い 気に入ったぜ シンヤ」"],
+    [
+      `……本来${wbr}ブレイバーの${wbr}称号は${wbr} 日本で${wbr}一番強い${wbr}ロボに${wbr}与えられる${wbr}もの`,
+    ],
+    [`それを${wbr} こんな${wbr}ひよっ子が${wbr}名乗る${wbr}とは`],
+    [`面白い${wbr} 気に入ったぜ シンヤ」`],
   ]);
   await refreshConversation(props, 100);
   activeRightMessageWindowWithFace(props, "Tsubasa");
   await scrollRightMessages(props, [
-    ["ツバサ", "「間もなく 都立大田高校 府立洛内高校 の練習試合を行う"],
+    [
+      "ツバサ",
+      `「間もなく${wbr} 都立大田高校・府立洛内高校の${wbr}練習試合を${wbr}行う`,
+    ],
   ]);
   props.view.dom.rightMessageWindow.messages(["姿勢を正して"]);
   await synchronizedUpright(props).play();

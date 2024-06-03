@@ -1,12 +1,12 @@
 import { Observable } from "rxjs";
 
 import { BattleSceneAction } from "../../actions";
-import { battleActionNotifier } from "./procedure/battle-action-notifier";
 import {
   createHUDLayerProps,
   HUDLayerPropsCreatorParams,
 } from "./procedure/create-hud-layer-props";
 import { destructor } from "./procedure/destructor";
+import { battleActionNotifier as notifyBattleAction } from "./procedure/notify-battle-action";
 import { HUDLayerProps } from "./props";
 
 /** HUDレイヤーで使用するオブジェクトを全て集めたもの */
@@ -17,10 +17,10 @@ export type HUDLayer = Omit<HUDLayerProps, "overlap" | "gameObjectAction"> & {
   destructor(): void;
 
   /**
-   * 戦闘シーンアクション通知
+   * 戦闘シーンアクションを通知する
    * @returns 通知ストリーム
    */
-  battleActionNotifier(): Observable<BattleSceneAction>;
+  notifyBattleAction(): Observable<BattleSceneAction>;
 };
 
 /** 生成パラメータ */
@@ -36,6 +36,6 @@ export function createHUDLayer(params: HUDLayerCreatorParams): HUDLayer {
   return {
     ...props,
     destructor: () => destructor(props),
-    battleActionNotifier: () => battleActionNotifier(props),
+    notifyBattleAction: () => notifyBattleAction(props),
   };
 }

@@ -35,7 +35,7 @@ export async function startPrivateMatchGuestIfNeeded(
 
   props.domDialogBinder.bind(
     new PrivateMatchGuestDialog(props),
-    privateMatchGuestDialogConnector,
+    privateMatchGuestDialogConnector(props.gameAction),
   );
   return {
     isStarted: true,

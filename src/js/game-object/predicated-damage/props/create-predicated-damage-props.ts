@@ -20,5 +20,6 @@ export function createPredicatedDamageProps(
   return {
     model: initialValue(),
     view: new PredicatedDamageView(params),
+    disabled: false,
   };
 }

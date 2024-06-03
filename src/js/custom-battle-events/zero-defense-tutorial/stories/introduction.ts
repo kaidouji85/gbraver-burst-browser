@@ -1,4 +1,5 @@
 import { delay } from "../../../animation/delay";
+import { wbr } from "../../../dom/wbr";
 import type { CustomBattleEventProps } from "../../../td-scenes/battle/custom-battle-event";
 import {
   activeLeftMessageWindowWithFace,
@@ -23,19 +24,24 @@ import { yoroshikuOnegaiShimasu } from "../../yoroshiku-onegai-shimasu";
 export const introduction = async (props: CustomBattleEventProps) => {
   activeRightMessageWindowWithFace(props, "Shinya");
   await scrollRightMessages(props, [
-    ["シンヤ", "「俺 都立大田高校のシンヤ"],
-    ["同じ一年生同士 よろしく頼むッス」"],
+    ["シンヤ", `「俺${wbr} 都立${wbr}大田高校の${wbr}シンヤ`],
+    [`同じ${wbr}一年生同士${wbr} よろしく${wbr}頼むッス」`],
   ]);
   props.view.dom.rightMessageWindow.darken();
   activeLeftMessageWindowWithFace(props, "Gai");
   await scrollLeftMessages(props, [
-    ["ガイ", "「都立台東高校のガイだ"],
-    ["こんな気の抜けた奴が出てくるなんて 大田高校も噂程ではないな」"],
+    ["ガイ", `「都立${wbr}台東高校の${wbr}ガイだ`],
+    [
+      `こんな${wbr}気の抜けた${wbr}奴が${wbr}出てくる${wbr}なんて${wbr} 大田高校も${wbr}噂程では${wbr}ないな」`,
+    ],
   ]);
   await refreshConversation(props);
   activeRightMessageWindowWithFace(props, "Tsubasa");
   await scrollRightMessages(props, [
-    ["ツバサ", "「間もなく 台東高校 大田高校の合同練習試合を開始する"],
+    [
+      "ツバサ",
+      `「間もなく${wbr} 台東高校${wbr}・大田高校の${wbr}合同練習試合を${wbr}開始する`,
+    ],
   ]);
   props.view.dom.rightMessageWindow.messages(["一同 姿勢を正して"]);
   await synchronizedUpright(props).play();

@@ -1,8 +1,11 @@
 import { BrowserSDK } from "@gbraver-burst-network/browser-sdk";
 import { Observable } from "rxjs";
 
+import { ActionManager } from "../../action-manager/action-manager";
 import { BGMManagerContainer } from "../../bgm/bgm-manager";
 import { CssHUDUIScale } from "../../css/hud-ui-scale";
+import { DOMDialogBinder } from "../../dom-dialogs/dom-dialog-binder";
+import { DOMSceneBinder } from "../../dom-scenes/dom-scene-binder";
 import { DOMFader } from "../../game-dom/dom-fader/dom-fader";
 import { GameLoop } from "../../game-loop/game-loop";
 import { Renderer } from "../../render";
@@ -10,16 +13,15 @@ import { ResourcesContainer } from "../../resource";
 import { ResourceRoot } from "../../resource/resource-root";
 import { SEPlayerContainer } from "../../se/se-player";
 import { PerformanceStats } from "../../stats/performance-stats";
+import { TDSceneBinder } from "../../td-scenes/td-scene-binder";
 import { PushWindow } from "../../window/push-window";
 import { Resize } from "../../window/resize";
 import { GBraverBurstBrowserConfigRepository } from "../config/repository/repository";
-import { DOMDialogBinder } from "../dom-dialog-binder";
 import { DOMFloaters } from "../dom-floaters/dom-floaters";
-import { DOMSceneBinder } from "../dom-scene-binder";
 import { FutureSuddenlyBattleEnd } from "../future-suddenly-battle-end";
+import { GameAction } from "../game-actions";
 import { InProgress } from "../in-progress/in-progress";
 import { InterruptScenes } from "../innterrupt-scenes";
-import { TDSceneBinder } from "../td-scene-binder";
 
 /**
  * ゲームプロパティ
@@ -29,10 +31,19 @@ export interface GameProps
   extends BGMManagerContainer,
     ResourcesContainer,
     SEPlayerContainer {
-  /** パフォーマンス統計、表示されていない場合はnullが入る */
-  performanceStats: PerformanceStats | null;
   /** サービスワーカーを利用するか否か、trueで利用する */
   isServiceWorkerUsed: boolean;
+  /** APIサーバ系機能が利用可能か否か、trueで利用可能 */
+  isAPIServerEnable: boolean;
+  /** 開発中のエピソードをプレイできるか否かのフラグ、trueでプレイできる */
+  canPlayEpisodeInDevelopment: boolean;
+  /** 開発中のリソースをロードするか否かのフラグ、trueでロードする */
+  shouldLoadDevelopingResource: boolean;
+  /** 開発中のアームドーザを選択できるか否かのフラグ、trueで選択できる */
+  canPlayDevelopingArmdozer: boolean;
+  /** 開発中のパイロットを選択できるか否かのフラグ、trueで選択できる */
+  canPlayDevelopingPilot: boolean;
+
   /** 遊び方スライドのURL */
   howToPlayURL: string;
   /** 利用規約ページのURL */
@@ -41,24 +52,38 @@ export interface GameProps
   privacyPolicyURL: string;
   /** 問い合わせページのURL */
   contactURL: string;
-  /** APIサーバ系機能が利用可能か否か、trueで利用可能 */
-  isAPIServerEnable: boolean;
-  /** 現在進行中のフロー */
-  inProgress: InProgress;
-  /** APIサーバのSDK */
-  api: BrowserSDK;
+
+  /** パフォーマンス統計、表示されていない場合はnullが入る */
+  performanceStats: PerformanceStats | null;
+  /** ServiceWorkerRegistrationのキャッシュ */
+  serviceWorker: ServiceWorkerRegistration | null | undefined;
+
   /** ブラウザ設定リポジトリ */
   config: GBraverBurstBrowserConfigRepository;
+
+  /** 現在進行中のフロー */
+  inProgress: InProgress;
+
+  /** APIサーバのSDK */
+  api: BrowserSDK;
   /** バトル強制終了監視 */
   suddenlyBattleEnd: FutureSuddenlyBattleEnd;
+
   /** リサイズ */
   resize: Observable<Resize>;
   /** window押下 */
   pushWindow: Observable<PushWindow>;
   /** ゲームループ */
   gameLoop: Observable<GameLoop>;
+  /**
+   * ゲームアクション管理オブジェクト
+   * 動的生成されるシーン、ダイアログの通知を購読するために利用する
+   */
+  gameAction: ActionManager<GameAction>;
+
   /** cssカスタムプロパティ --hud-ui-scale */
   hudUIScale: CssHUDUIScale;
+
   /** DOMフェーダ */
   fader: DOMFader;
   /** 強制割込シーン管理オブジェクト */
@@ -69,22 +94,14 @@ export interface GameProps
   domDialogBinder: DOMDialogBinder;
   /** DOMフローター管理オブジェクト */
   domFloaters: DOMFloaters;
+
   /** レンダラ管理オブジェクト */
   renderer: Renderer;
   /** 3Dシーンバインダー */
   tdBinder: TDSceneBinder;
+
   /** リソースルート */
   resourceRoot: ResourceRoot;
   /** 全リソースを読み込んだか否かのフラグ、trueで全リソースを読み込んだ */
   isFullResourceLoaded: boolean;
-  /** ServiceWorkerRegistrationのキャッシュ */
-  serviceWorker: ServiceWorkerRegistration | null | undefined;
-  /** 開発中のエピソードをプレイできるか否かのフラグ、trueでプレイできる */
-  canPlayEpisodeInDevelopment: boolean;
-  /** 開発中のリソースをロードするか否かのフラグ、trueでロードする */
-  shouldLoadDevelopingResource: boolean;
-  /** 開発中のアームドーザを選択できるか否かのフラグ、trueで選択できる */
-  canPlayDevelopingArmdozer: boolean;
-  /** 開発中のパイロットを選択できるか否かのフラグ、trueで選択できる */
-  canPlayDevelopingPilot: boolean;
 }

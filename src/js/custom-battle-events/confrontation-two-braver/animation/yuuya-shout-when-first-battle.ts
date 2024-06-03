@@ -1,4 +1,5 @@
 import { onStart } from "../../../animation/on-start";
+import { wbr } from "../../../dom/wbr";
 import { CustomBattleEventProps } from "../../../td-scenes/battle/custom-battle-event";
 import { enemyPilotOnlyShout } from "../../pilot-shout";
 
@@ -14,6 +15,6 @@ export const yuuyaShoutWhenFirstBattle = (
     enemyPilotOnlyShout(
       props,
       "Yuuya",
-      "見せてもらおうか シンブレイバーの実力を",
+      `見せて${wbr}もらおうか${wbr} シンブレイバーの${wbr}実力を`,
     );
   });

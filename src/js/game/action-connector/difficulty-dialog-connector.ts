@@ -1,20 +1,28 @@
+import { map } from "rxjs";
+
+import { ActionManager } from "../../action-manager/action-manager";
 import { DifficultyDialog } from "../../dom-dialogs/difficulty";
-import type { DomDialogActionConnector } from "../dom-dialog-binder/dom-dialog-action-connector";
+import { DomDialogActionConnector } from "../../dom-dialogs/dom-dialog-binder/action-connector";
+import { GameAction } from "../game-actions";
 
-/** コネクタのデータ型 */
-type Connector = DomDialogActionConnector<DifficultyDialog>;
-
-/** 難易度選択ダイアログとゲームアクションを関連付ける */
-export const difficultyDialogConnector: Connector = (dialog, gameAction) => [
-  dialog.notifySelectionComplete().subscribe((difficulty) => {
-    gameAction.next({
-      type: "DifficultySelectionComplete",
-      difficulty,
-    });
-  }),
-  dialog.notifyClosed().subscribe(() => {
-    gameAction.next({
-      type: "DifficultySelectionCancel",
-    });
-  }),
-];
+/**
+ * 難易度選択ダイアログのアクションコネクタを生成する
+ * @param gameAction アクション管理オブジェクト
+ * @returns アクションコネクタ
+ */
+export const difficultyDialogConnector =
+  (
+    gameAction: ActionManager<GameAction>,
+  ): DomDialogActionConnector<DifficultyDialog> =>
+  (dialog) =>
+    gameAction.connect([
+      dialog.notifySelectionComplete().pipe(
+        map((difficulty) => ({
+          type: "DifficultySelectionComplete",
+          difficulty,
+        })),
+      ),
+      dialog
+        .notifyClosed()
+        .pipe(map(() => ({ type: "DifficultySelectionCancel" }))),
+    ]);

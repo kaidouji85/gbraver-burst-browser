@@ -1,5 +1,3 @@
-import { Subject } from "rxjs";
-
 import { PilotButtonAnimationProps } from "../animation/animation-props";
 import { PilotButtonView } from "../view/pilot-button-view";
 
@@ -7,6 +5,6 @@ import { PilotButtonView } from "../view/pilot-button-view";
 export type PilotButtonProps = PilotButtonAnimationProps & {
   /** ビュー */
   view: PilotButtonView;
-  /** ボタン押下通知 */
-  pushButton: Subject<Event>;
+  /** パイロットボタンが操作不可能であるか否か、trueで操作不可能である */
+  disabled: boolean;
 };

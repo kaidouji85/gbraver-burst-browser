@@ -1,3 +1,4 @@
+import { wbr } from "../../../dom/wbr";
 import type { CustomBattleEventProps } from "../../../td-scenes/battle/custom-battle-event";
 import {
   activeLeftMessageWindowWithFace,
@@ -20,12 +21,12 @@ export const zeroDefenseWin = async (props: CustomBattleEventProps) => {
   await refreshConversation(props);
   activeRightMessageWindowWithFace(props, "Shinya");
   await scrollRightMessages(props, [
-    ["シンヤ", "「やった デビュー戦で勝てたッス」"],
+    ["シンヤ", `「やった${wbr} デビュー戦で${wbr}勝てた${wbr}ッス」`],
   ]);
   props.view.dom.rightMessageWindow.darken();
   activeLeftMessageWindowWithFace(props, "Gai");
   await scrollLeftMessages(props, [
-    ["ガイ", "「バカな この俺が負けるなんて」"],
+    ["ガイ", `「バカな${wbr} この俺が${wbr}負ける${wbr}なんて」`],
   ]);
   props.view.dom.leftMessageWindow.darken();
 };

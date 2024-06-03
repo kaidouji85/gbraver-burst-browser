@@ -1,13 +1,15 @@
-import type { DecideBattery } from "./decide-battery";
+import { BattleSimulatorEnd } from "./battle-simulator-end";
+import { BattleSimulatorStart } from "./battle-simulator-start";
+import { DecideBattery } from "./decide-battery";
 import { DecideBatteryByMiniController } from "./decide-battery-by-mini-controller";
-import type { DoBurst } from "./do-burst";
+import { DoBurst } from "./do-burst";
 import { DoBurstByMiniController } from "./do-burst-by-mini-controller";
-import type { DoPilotSkill } from "./do-pilot-skill";
+import { DoPilotSkill } from "./do-pilot-skill";
 import { DoPilotSkillByMiniController } from "./do-pilot-skill-by-mini-controller";
-import type { MinusBattery } from "./minus-battery";
-import type { PlusBattery } from "./plus-battery";
-import type { StartBattleScene } from "./start-battle-scene";
-import type { ToggleTimeScale } from "./toggle-time-scale";
+import { MinusBattery } from "./minus-battery";
+import { PlusBattery } from "./plus-battery";
+import { StartBattleScene } from "./start-battle-scene";
+import { ToggleTimeScale } from "./toggle-time-scale";
 
 /** 戦闘シーンアクション */
 export type BattleSceneAction =
@@ -20,4 +22,6 @@ export type BattleSceneAction =
   | ToggleTimeScale
   | DecideBatteryByMiniController
   | DoBurstByMiniController
-  | DoPilotSkillByMiniController;
+  | DoPilotSkillByMiniController
+  | BattleSimulatorStart
+  | BattleSimulatorEnd;

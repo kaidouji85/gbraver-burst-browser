@@ -1,3 +1,4 @@
+import { wbr } from "../../../dom/wbr";
 import { CustomBattleEventProps } from "../../../td-scenes/battle/custom-battle-event";
 import { activeLeftMessageWindowWithFace } from "../../active-message-window";
 import { scrollLeftMessages } from "../../scroll-messages";
@@ -12,7 +13,7 @@ export async function yuuyaShoutWhenYuuyaNarrowVictory(
 ): Promise<void> {
   activeLeftMessageWindowWithFace(props, "Yuuya");
   await scrollLeftMessages(props, [
-    ["ユウヤ", "「全力を出さなければ やられていた"],
-    ["こいつ本当に新入生か」"],
+    ["ユウヤ", `「全力を${wbr}出さなければ${wbr} やられて${wbr}いた`],
+    [`こいつ${wbr}本当に${wbr}新入生か」`],
   ]);
 }

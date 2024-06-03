@@ -17,11 +17,13 @@ type OperatableButton = {
 function getOperatableButtons(
   props: Readonly<CustomBattleEventProps>,
 ): OperatableButton[] {
+  const { view } = props;
   return [
-    props.view.hud.gameObjects.batterySelector,
-    props.view.hud.gameObjects.burstButton,
-    props.view.hud.gameObjects.pilotButton,
-    props.view.hud.gameObjects.timeScaleButton,
+    view.hud.gameObjects.batterySelector,
+    view.hud.gameObjects.burstButton,
+    view.hud.gameObjects.pilotButton,
+    view.hud.gameObjects.timeScaleButton,
+    ...view.hud.players.map((p) => p.predicatedDamage),
   ];
 }
 

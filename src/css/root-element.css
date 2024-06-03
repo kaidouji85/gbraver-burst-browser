@@ -32,6 +32,7 @@
   --button-background-color: #007bbb;
   --sub-button-background-color: #595857;
   --button-font-color: rgb(240 240 240);
+  --disabled-button-font-color: #a9a9a9;
   --button-border-radius: calc(var(--responsive-font-size) * 0.5);
   --button-border: none;
   --button-box-shadow: 0 0 0.5em rgb(25 25 25);

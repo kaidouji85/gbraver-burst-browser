@@ -1,21 +1,31 @@
 import * as R from "ramda";
+import { Observable } from "rxjs";
 import * as THREE from "three";
 
 import { PreRender } from "../../../game-loop/pre-render";
 import { HorizontalAnimationMesh } from "../../../mesh/horizontal-animation";
 import { ResourcesContainer } from "../../../resource";
 import { TEXTURE_IDS } from "../../../resource/texture/ids";
+import { GameObjectAction } from "../../action/game-object-action";
+import { PushDetector } from "../../push-detector";
+import { planePushDetector } from "../../push-detector/square-push-detector";
 import { hudScale } from "../../scale";
 import { PredicatedDamageModel } from "../model/predicated-damage-model";
 
 /** 最大アニメーション枚数 */
 const MAX_ANIMATION = 16;
 
-/** メッシュサイズ */
-const MESH_SIZE = 128;
+/** 数字メッシュサイズ */
+const NUMBER_MESH_SIZE = 128;
 
-/** メッシュ間隔 */
-const MESH_INTERVAL = 72;
+/** 数字メッシュ間隔 */
+const NUMBER_MESH_INTERVAL = 72;
+
+/** プッシュ検出器幅 */
+const PUSH_DETECTOR_WIDTH = 384;
+
+/** プッシュ検出器高さ */
+const PUSH_DETECTOR_HEIGHT = 128;
 
 /** マイナス符号も含めた数字の最大桁数 */
 const NUMBER_OF_DIGITS = 5;
@@ -30,7 +40,10 @@ const MIN_DAMAGE = 0;
 const BASE_SCALE = 0.3;
 
 /** コンストラクタのパラメータ */
-export type PredicatedDamageViewConstructParams = ResourcesContainer;
+export type PredicatedDamageViewConstructParams = ResourcesContainer & {
+  /** ゲームオブジェクトアクション */
+  gameObjectAction: Observable<GameObjectAction>;
+};
 
 /** ダメージ予想 ビュー */
 export class PredicatedDamageView {
@@ -38,6 +51,8 @@ export class PredicatedDamageView {
   #group: THREE.Group;
   /** 数字メッシュをあつめたもの */
   #numbers: HorizontalAnimationMesh[];
+  /** ボタン押下検知 */
+  #pushDetector: PushDetector;
 
   /**
    * コンストラクタ
@@ -58,14 +73,22 @@ export class PredicatedDamageView {
         new HorizontalAnimationMesh({
           texture,
           maxAnimation: MAX_ANIMATION,
-          width: MESH_SIZE,
-          height: MESH_SIZE,
+          width: NUMBER_MESH_SIZE,
+          height: NUMBER_MESH_SIZE,
         }),
       NUMBER_OF_DIGITS,
     );
     this.#numbers.forEach((n) => {
       this.#group.add(n.getObject3D());
     });
+
+    this.#pushDetector = planePushDetector({
+      ...params,
+      width: PUSH_DETECTOR_WIDTH,
+      height: PUSH_DETECTOR_HEIGHT,
+      visible: false,
+    });
+    this.#group.add(this.#pushDetector.getObject3D());
   }
 
   /**
@@ -75,6 +98,7 @@ export class PredicatedDamageView {
     this.#numbers.forEach((n) => {
       n.destructor();
     });
+    this.#pushDetector.destructor();
   }
 
   /**
@@ -97,7 +121,8 @@ export class PredicatedDamageView {
     const intervalCount = values.length;
     this.#numbers.forEach((mesh, i) => {
       mesh.opacity(0);
-      mesh.getObject3D().position.x = (-i + intervalCount / 2) * MESH_INTERVAL;
+      mesh.getObject3D().position.x =
+        (-i + intervalCount / 2) * NUMBER_MESH_INTERVAL;
     });
 
     R.zip(this.#numbers, values)
@@ -115,13 +140,24 @@ export class PredicatedDamageView {
       sign.opacity(opacity);
       sign.animate(10 / MAX_ANIMATION);
     }
+
+    const damageDigit = values.length + 1;
+    this.#pushDetector.getObject3D().scale.x = damageDigit / NUMBER_OF_DIGITS;
   }
 
   /**
    * シーンに追加するオブジェクトを取得する
-   * @return 取得結果
+   * @returns 取得結果
    */
   getObject3D(): THREE.Object3D {
     return this.#group;
+  }
+
+  /**
+   * 押下通知
+   * @returns 通知ストリーム
+   */
+  notifyPush(): Observable<Event> {
+    return this.#pushDetector.notifyPressed();
   }
 }

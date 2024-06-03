@@ -2,12 +2,9 @@ import { Observable, Unsubscribable } from "rxjs";
 import * as THREE from "three";
 
 import type { Animate } from "../../animation/animate";
-import type { PreRender } from "../../game-loop/pre-render";
-import type { Update } from "../../game-loop/update";
 import { close } from "./animation/close";
 import { open } from "./animation/open";
-import { toggle } from "./animation/toggle";
-import { getNextTimeScale } from "./model/next-time-scale";
+import { bindEventListener } from "./procedure/bind-event-listener";
 import {
   createTimeScaleButtonProps,
   PropsCreatorParams,
@@ -31,18 +28,7 @@ export class TimeScaleButton {
   constructor(params: TimeScaleButtonParams) {
     const { gameObjectAction } = params;
     this.#props = createTimeScaleButtonProps(params);
-    this.#unsubscribers = [
-      gameObjectAction.subscribe((action) => {
-        if (action.type === "Update") {
-          this.#onUpdate(action);
-        } else if (action.type === "PreRender") {
-          this.#onPreRender(action);
-        }
-      }),
-      this.#props.view.notifyPressed().subscribe(() => {
-        this.#onButtonPush();
-      }),
-    ];
+    this.#unsubscribers = bindEventListener(this.#props, gameObjectAction);
   }
 
   /**
@@ -76,7 +62,7 @@ export class TimeScaleButton {
    * @param isDisabled trueで操作不可能
    */
   disabled(isDisabled: boolean): void {
-    this.#props.model.disabled = isDisabled;
+    this.#props.disabled = isDisabled;
   }
 
   /**
@@ -84,7 +70,7 @@ export class TimeScaleButton {
    * @returns trueで操作不可能
    */
   isDisabled(): boolean {
-    return this.#props.model.disabled;
+    return this.#props.disabled;
   }
 
   /**
@@ -102,37 +88,5 @@ export class TimeScaleButton {
    */
   close(): Animate {
     return close(this.#props);
-  }
-
-  /**
-   * アップデート時の処理
-   * @param action アクション
-   */
-  #onUpdate(action: Update): void {
-    this.#props.toggleTween.update(action.time);
-  }
-
-  /**
-   * プリレンダー時の処理
-   * @param action アクション
-   */
-  #onPreRender(action: PreRender): void {
-    this.#props.view.engage(this.#props.model, action);
-  }
-
-  /**
-   * ボタン押下時の処理
-   */
-  #onButtonPush(): void {
-    const { model, toggleTween, toggleNotify } = this.#props;
-    if (model.shouldPushNotifierStop || model.disabled) {
-      return;
-    }
-
-    toggleTween.update();
-    toggleTween.removeAll();
-    const nextTimeScale = getNextTimeScale(model.timeScale);
-    toggle(this.#props, toggleTween, nextTimeScale).play();
-    toggleNotify.next(nextTimeScale);
   }
 }

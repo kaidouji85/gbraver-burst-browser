@@ -1,4 +1,4 @@
-import { Observable, Subject } from "rxjs";
+import { Observable } from "rxjs";
 
 import { ResourcesContainer } from "../../../resource";
 import { createEmptySoundResource } from "../../../resource/sound/empty-sound-resource";
@@ -30,11 +30,11 @@ export function createBurstButtonProps(
   const { resources } = params;
   return {
     ...params,
+    disabled: false,
     model: createInitialValue(),
     view: new BurstButtonView(params),
     pushButtonSound:
       resources.sounds.find((v) => v.id === SOUND_IDS.PUSH_BUTTON) ??
       createEmptySoundResource(),
-    pushButton: new Subject(),
   };
 }

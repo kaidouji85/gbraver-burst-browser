@@ -2,10 +2,10 @@ import { Observable } from "rxjs";
 
 import { BattleSceneAction } from "../../actions";
 import { BattleViewCreatorParams } from "../creator-params";
-import { createBattleAction } from "./procedure/create-battle-action";
 import { createDOMLayerProps } from "./procedure/create-dom-layer-props";
 import { destructor } from "./procedure/destructor";
 import { getHTMLElements } from "./procedure/get-html-elements";
+import { notifyBattleAction } from "./procedure/notify-battle-action";
 import { DOMLayerProps } from "./props";
 
 /** DOMレイヤー */
@@ -16,10 +16,10 @@ export interface DOMLayer extends DOMLayerProps {
   destructor(): void;
 
   /**
-   * 戦闘シーンアクション通知
+   * 戦闘シーンアクションを通知する
    * @returns 通知ストリーム
    */
-  battleActionNotifier(): Observable<BattleSceneAction>;
+  notifyBattleAction(): Observable<BattleSceneAction>;
 
   /**
    * シーンに追加するHTML要素群を取得する
@@ -35,11 +35,10 @@ export interface DOMLayer extends DOMLayerProps {
  */
 export function createDOMLayer(params: BattleViewCreatorParams): DOMLayer {
   const props = createDOMLayerProps(params);
-  const battleAction = createBattleAction(props);
   return {
     ...props,
     destructor: () => destructor(props),
-    battleActionNotifier: () => battleAction,
+    notifyBattleAction: () => notifyBattleAction(props),
     getHTMLElements: () => getHTMLElements(props),
   };
 }

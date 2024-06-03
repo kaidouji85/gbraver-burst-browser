@@ -5,8 +5,8 @@ import { SimpleImageMesh } from "../../../mesh/simple-image-mesh";
 import type { ResourcesContainer } from "../../../resource";
 import { CANVAS_IMAGE_IDS } from "../../../resource/canvas-image";
 import type { GameObjectAction } from "../../action/game-object-action";
-import type { PushDetector } from "../../push-detector/push-detector";
-import { circlePushDetector } from "../../push-detector/push-detector";
+import type { PushDetector } from "../../push-detector";
+import { circlePushDetector } from "../../push-detector/circle-push-detector";
 import type { BatterySelectorModel } from "../model";
 import { canBatteryPlus } from "../model/can-battery-plus";
 

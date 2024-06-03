@@ -1,8 +1,8 @@
 import { Observable } from "rxjs";
 
-import type { ResourcesContainer } from "../../resource";
+import { ResourcesContainer } from "../../resource";
 import { SEPlayerContainer } from "../../se/se-player";
-import type { GameObjectAction } from "../action/game-object-action";
+import { GameObjectAction } from "../action/game-object-action";
 import { PilotButton } from "./pilot-button";
 import { GaiIcon } from "./view/gai";
 import { RaitoIcon } from "./view/raito";
@@ -69,8 +69,7 @@ export function tsubasaPilotButton(
 
 /**
  * ユウヤ パイロットボタン を生成する
- * @param resources リソース管理オブジェクト
- * @param gameObjectAction ゲームオブジェクトアクション
+ * @param params 生成パラメータ
  * @returns パイロットボタン
  */
 export function yuuyaPilotButton(

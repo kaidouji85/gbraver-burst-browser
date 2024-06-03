@@ -33,7 +33,7 @@ export async function waitUntilPrivateMatchingAsHost(
         ...props,
         roomID: room.roomID,
       }),
-      privateMatchHostDialogConnector,
+      privateMatchHostDialogConnector(props.gameAction),
     );
     return await room.waitUntilMatching();
   } catch (e) {
@@ -44,7 +44,7 @@ export async function waitUntilPrivateMatchingAsHost(
           type: "GotoTitle",
         },
       }),
-      networkErrorDialogConnector,
+      networkErrorDialogConnector(props.gameAction),
     );
     throw e;
   }

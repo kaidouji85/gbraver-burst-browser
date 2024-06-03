@@ -17,6 +17,6 @@ export async function onConfigChangeStart(
     ...props,
     config,
   });
-  props.domSceneBinder.bind(scene, configConnector);
+  props.domSceneBinder.bind(scene, configConnector(props.gameAction));
   await props.fader.fadeIn();
 }

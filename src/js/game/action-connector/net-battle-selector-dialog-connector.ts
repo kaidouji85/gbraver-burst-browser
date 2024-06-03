@@ -1,24 +1,29 @@
+import { map } from "rxjs";
+
+import { ActionManager } from "../../action-manager/action-manager";
+import { DomDialogActionConnector } from "../../dom-dialogs/dom-dialog-binder/action-connector";
 import { NetBattleSelectorDialog } from "../../dom-dialogs/net-battle-selector";
-import { DomDialogActionConnector } from "../dom-dialog-binder/dom-dialog-action-connector";
+import { GameAction } from "../game-actions";
 
-/** コネクタのデータ型 */
-type Connector = DomDialogActionConnector<NetBattleSelectorDialog>;
-
-/** ネットバトルセレクターダイアログとゲームアクションを関連付ける */
-export const netBattleSelectorDialogConnector: Connector = (
-  dialog,
-  gameAction,
-) => [
-  dialog.notifyCasualMatchSelection().subscribe(() => {
-    gameAction.next({ type: "CasualMatchStart" });
-  }),
-  dialog.notifyPrivateMatchHostSelection().subscribe(() => {
-    gameAction.next({ type: "PrivateMatchHostStart" });
-  }),
-  dialog.notifyPrivateMatchGuestSelection().subscribe(() => {
-    gameAction.next({ type: "PrivateMatchGuestStart" });
-  }),
-  dialog.notifyClosed().subscribe(() => {
-    gameAction.next({ type: "NetBattleCancel" });
-  }),
-];
+/**
+ * ネットバトルセレクターダイアログのアクションコネクタを生成する
+ * @param gameAction アクション管理オブジェクト
+ * @returns アクションコネクタ
+ */
+export const netBattleSelectorDialogConnector =
+  (
+    gameAction: ActionManager<GameAction>,
+  ): DomDialogActionConnector<NetBattleSelectorDialog> =>
+  (dialog) =>
+    gameAction.connect([
+      dialog
+        .notifyCasualMatchSelection()
+        .pipe(map(() => ({ type: "CasualMatchStart" }))),
+      dialog
+        .notifyPrivateMatchHostSelection()
+        .pipe(map(() => ({ type: "PrivateMatchHostStart" }))),
+      dialog
+        .notifyPrivateMatchGuestSelection()
+        .pipe(map(() => ({ type: "PrivateMatchGuestStart" }))),
+      dialog.notifyClosed().pipe(map(() => ({ type: "NetBattleCancel" }))),
+    ]);

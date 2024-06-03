@@ -1,14 +1,22 @@
+import { map } from "rxjs";
+
+import { ActionManager } from "../../action-manager/action-manager";
+import { DomDialogActionConnector } from "../../dom-dialogs/dom-dialog-binder/action-connector";
 import { MatchingDialog } from "../../dom-dialogs/matching/matching-dialog";
-import type { DomDialogActionConnector } from "../dom-dialog-binder/dom-dialog-action-connector";
+import { GameAction } from "../game-actions";
 
-/** コネクタのデータ型 */
-type Connector = DomDialogActionConnector<MatchingDialog>;
-
-/** マッチングダイアログとゲームアクションを関連付ける */
-export const matchingDialogConnector: Connector = (dialog, gameAction) => [
-  dialog.notifyMatchingCanceled().subscribe(() => {
-    gameAction.next({
-      type: "MatchingCanceled",
-    });
-  }),
-];
+/**
+ * マッチングダイアログのアクションコネクタを生成する
+ * @param gameAction アクション管理オブジェクト
+ * @returns アクションコネクタ
+ */
+export const matchingDialogConnector =
+  (
+    gameAction: ActionManager<GameAction>,
+  ): DomDialogActionConnector<MatchingDialog> =>
+  (dialog) =>
+    gameAction.connect([
+      dialog
+        .notifyMatchingCanceled()
+        .pipe(map(() => ({ type: "MatchingCanceled" }))),
+    ]);
