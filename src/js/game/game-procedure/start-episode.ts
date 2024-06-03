@@ -51,7 +51,7 @@ export async function startEpisode(
     customBattleEvent: episode.event(props.resources),
     controllerType: "BigButton",
   });
-  props.tdBinder.bind(battleScene, battleSceneConnector(props.gameAction));
+  props.tdBinder.bind(battleScene, battleSceneConnector(props));
   await waitAnimationFrame();
   const latency = Date.now() - startTutorialStageTime;
   await Promise.race([

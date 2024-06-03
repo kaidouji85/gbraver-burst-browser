@@ -96,7 +96,7 @@ export async function startOnlineBattle(
     emergencyStop: battle.suddenlyBattleNotifier(),
     customBattleEvent: createSeriousMatchEvent(),
   });
-  props.tdBinder.bind(battleScene, battleSceneConnector(props.gameAction));
+  props.tdBinder.bind(battleScene, battleSceneConnector(props));
   await waitAnimationFrame();
   await props.fader.fadeOut();
   props.domSceneBinder.hidden();

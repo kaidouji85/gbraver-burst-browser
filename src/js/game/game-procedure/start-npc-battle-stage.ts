@@ -63,7 +63,7 @@ export async function startNPCBattleStage(
     controllerType: config.battleControllerType,
     customBattleEvent: createSeriousMatchEvent(),
   });
-  props.tdBinder.bind(battleScene, battleSceneConnector(props.gameAction));
+  props.tdBinder.bind(battleScene, battleSceneConnector(props));
   await waitAnimationFrame();
   const latency = Date.now() - startNPCStageTitleTime;
   await Promise.race([
