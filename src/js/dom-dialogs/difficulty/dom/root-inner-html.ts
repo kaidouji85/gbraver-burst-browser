@@ -24,7 +24,10 @@ const findPathOrEmpty = (resources: Resources, id: PathId) =>
 export function rootInnerHTML(resources: Resources, ids: DataIDs): string {
   const closerPath = findPathOrEmpty(resources, PathIds.CLOSER);
   const easyIconPath = findPathOrEmpty(resources, PathIds.NPC_COURSE_EASY_ICON);
-  const normalIconPath = findPathOrEmpty(resources, PathIds.NPC_COURSE_NORMAL_ICON);
+  const normalIconPath = findPathOrEmpty(
+    resources,
+    PathIds.NPC_COURSE_NORMAL_ICON,
+  );
   const hardIconPath = findPathOrEmpty(resources, PathIds.NPC_COURSE_HARD_ICON);
   const veryHardIconPath = findPathOrEmpty(
     resources,
