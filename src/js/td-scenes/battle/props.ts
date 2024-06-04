@@ -1,7 +1,6 @@
 import { GameEnd, GameState, PlayerId } from "gbraver-burst-core";
 import { Observable, Subject } from "rxjs";
 
-import { ActionManager } from "../../action-manager/action-manager";
 import { AnimatePlayer } from "../../animation/animate-player";
 import { BGMManagerContainer } from "../../bgm/bgm-manager";
 import { DOMDialogBinder } from "../../dom-dialogs/dom-dialog-binder";
@@ -9,8 +8,8 @@ import { Exclusive } from "../../exclusive/exclusive";
 import { ResourcesContainer } from "../../resource";
 import { SEPlayerContainer } from "../../se/se-player";
 import { PushWindow } from "../../window/push-window";
-import { BattleSceneAction } from "./actions";
 import { BattleProgress } from "./battle-progress";
+import { BattleSceneActionManageContainer } from "./battle-scene-action-manage-container";
 import { BattleControllerType } from "./controller-type";
 import { CustomBattleEvent } from "./custom-battle-event";
 import { BattleSceneSounds } from "./sounds";
@@ -27,7 +26,8 @@ export type BattleEnd = {
 /** 戦闘シーンプロパティ */
 export type BattleSceneProps = ResourcesContainer &
   BGMManagerContainer &
-  SEPlayerContainer & {
+  SEPlayerContainer &
+  BattleSceneActionManageContainer & {
     /** 画面を開いているプレイヤーのID */
     readonly playerId: PlayerId;
     /** ゲームステートヒストリー */
@@ -57,9 +57,4 @@ export type BattleSceneProps = ResourcesContainer &
     readonly endBattle: Subject<BattleEnd>;
     /** ウインドウ押下ストリーム */
     readonly pushWindow: Observable<PushWindow>;
-    /**
-     * 戦闘シーンアクション管理オブジェクト
-     * 動的生成されるダイアログからの通知を購読するために利用する
-     */
-    readonly battleSceneAction: ActionManager<BattleSceneAction>;
   };
