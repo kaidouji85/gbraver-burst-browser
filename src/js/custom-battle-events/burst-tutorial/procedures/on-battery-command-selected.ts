@@ -18,7 +18,6 @@ import { shouldDefense5Again } from "../stories/should-defense5-again";
 /**
  * 初回、2回目以降で「5防御しないと負け」を切り替えるヘルパー関数
  * @param props イベントプロパティ
- * @param state ステート
  * @returns 処理が完了したら発火するPromise
  */
 async function defense5(
@@ -38,6 +37,18 @@ type Ret = {
 };
 
 /**
+ * バッテリーコマンドが選択されていない場合のイベント終了情報
+ * @param props イベントプロパティ
+ * @returns イベント終了情報
+ */
+const notRunning = (
+  props: Readonly<BatteryCommandSelected & BurstTutorialProps>,
+): Ret => ({
+  state: props.state,
+  cancel: { isCommandCanceled: false },
+});
+
+/**
  * バッテリーコマンド選択イベント
  * @param props イベントプロパティ
  * @returns イベント終了情報
@@ -45,41 +56,21 @@ type Ret = {
 export async function onBatteryCommandSelected(
   props: Readonly<BatteryCommandSelected & BurstTutorialProps>,
 ): Promise<Ret> {
+  const lastState = props.stateHistory.at(-1);
+  const player = lastState?.players.find((v) => v.playerId === props.playerId);
+  const enemy = lastState?.players.find((v) => v.playerId !== props.playerId);
+  if (!player || !enemy) {
+    return notRunning(props);
+  }
+
+  const isPlayerTurn = lastState?.activePlayerId === props.playerId;
   const isBattery5Command = props.battery.battery === 5;
-  const foundLastState = props.stateHistory[props.stateHistory.length - 1];
-  if (!foundLastState || isBattery5Command) {
-    return {
-      state: props.state,
-      cancel: {
-        isCommandCanceled: false,
-      },
-    };
-  }
-
-  const lastState: GameState = foundLastState;
-  const isPlayerTurn = lastState.activePlayerId === props.playerId;
-  const player = lastState.players.find((v) => v.playerId === props.playerId);
-  const enemy = lastState.players.find((v) => v.playerId !== props.playerId);
-  if (isPlayerTurn || !player || !enemy) {
-    return {
-      state: props.state,
-      cancel: {
-        isCommandCanceled: false,
-      },
-    };
-  }
-
   const isEnemyPowerLessThanPlayerHP =
     enemy.armdozer.power < player.armdozer.hp;
   const isNotEnemyFullBattery =
     enemy.armdozer.battery !== enemy.armdozer.maxBattery;
-  if (isEnemyPowerLessThanPlayerHP || isNotEnemyFullBattery) {
-    return {
-      state: props.state,
-      cancel: {
-        isCommandCanceled: false,
-      },
-    };
+  if (isPlayerTurn || isBattery5Command || isEnemyPowerLessThanPlayerHP || isNotEnemyFullBattery) {
+    return notRunning(props);
   }
 
   const isPlayerFullBattery =
@@ -91,13 +82,8 @@ export async function onBatteryCommandSelected(
     await doBurstToRecoverBattery(props);
     await focusInBurstButton(props, shouldBurst);
     return {
-      state: {
-        ...props.state,
-        isLoseIfNoDefense5Complete: true,
-      },
-      cancel: {
-        isCommandCanceled: true,
-      },
+      state: { ...props.state,  isLoseIfNoDefense5Complete: true },
+      cancel: { isCommandCanceled: true },
     };
   }
 
@@ -106,9 +92,7 @@ export async function onBatteryCommandSelected(
     await canNotChangeBattery(props);
     return {
       state: { ...props.state, isLoseIfNoDefense5Complete: true },
-      cancel: {
-        isCommandCanceled: false,
-      },
+      cancel: { isCommandCanceled: false },
     };
   }
 
@@ -120,16 +104,12 @@ export async function onBatteryCommandSelected(
       : await redoBatterySelect(props);
     return {
       state: { ...props.state, isLoseIfNoDefense5Complete: true },
-      cancel: {
-        isCommandCanceled: true,
-      },
+      cancel: { isCommandCanceled: true },
     };
   }
 
   return {
     state: props.state,
-    cancel: {
-      isCommandCanceled: false,
-    },
+    cancel: { isCommandCanceled: false },
   };
 }
