@@ -1,15 +1,18 @@
 import { map } from "rxjs";
 
-import { ActionManager } from "../../action-manager/action-manager";
 import { DOMSceneActionConnector } from "../../dom-scenes/dom-scene-binder/action-connector";
 import { Title } from "../../dom-scenes/title";
-import { GameAction } from "../game-actions";
+import { GameActionManageContainer } from "../game-props/game-action-manage-container";
 
-/** タイトル画面とゲームアクションを関連付ける */
+/**
+ * タイトル画面とゲームアクションを関連付ける
+ * @param props ゲームアクション管理コンテナ
+ * @returns アクションコネクタ
+ */
 export const titleConnector =
-  (gameAction: ActionManager<GameAction>): DOMSceneActionConnector<Title> =>
+  (props: GameActionManageContainer): DOMSceneActionConnector<Title> =>
   (scene) =>
-    gameAction.connect([
+    props.gameAction.connect([
       scene.notifyLogin().pipe(map(() => ({ type: "UniversalLogin" }))),
       scene.notifyLogout().pipe(map(() => ({ type: "Logout" }))),
       scene

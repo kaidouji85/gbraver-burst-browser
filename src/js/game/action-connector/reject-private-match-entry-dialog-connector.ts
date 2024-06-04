@@ -1,21 +1,20 @@
 import { map } from "rxjs";
 
-import { ActionManager } from "../../action-manager/action-manager";
 import { DomDialogActionConnector } from "../../dom-dialogs/dom-dialog-binder/action-connector";
 import { RejectPrivateMatchEntryDialog } from "../../dom-dialogs/reject-private-match-entry";
-import { GameAction } from "../game-actions";
+import { GameActionManageContainer } from "../game-props/game-action-manage-container";
 
 /**
  * プライベートマッチエントリ拒否ダイアログのアクションコネクタを生成する
- * @param gameAction アクション管理オブジェクト
+ * @param props ゲームアクション管理コンテナ
  * @returns アクションコネクタ
  */
 export const rejectPrivateMatchEntryDialogConnector =
   (
-    gameAction: ActionManager<GameAction>,
+    props: GameActionManageContainer,
   ): DomDialogActionConnector<RejectPrivateMatchEntryDialog> =>
   (dialog) =>
-    gameAction.connect([
+    props.gameAction.connect([
       dialog
         .notifyDialogClosed()
         .pipe(map(() => ({ type: "MatchingCanceled" }))),

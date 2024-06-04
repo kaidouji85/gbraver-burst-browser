@@ -1,21 +1,20 @@
 import { map } from "rxjs";
 
-import { ActionManager } from "../../action-manager/action-manager";
 import { DomDialogActionConnector } from "../../dom-dialogs/dom-dialog-binder/action-connector";
 import { NetBattleSelectorDialog } from "../../dom-dialogs/net-battle-selector";
-import { GameAction } from "../game-actions";
+import { GameActionManageContainer } from "../game-props/game-action-manage-container";
 
 /**
  * ネットバトルセレクターダイアログのアクションコネクタを生成する
- * @param gameAction アクション管理オブジェクト
+ * @param props ゲームアクション管理コンテナ
  * @returns アクションコネクタ
  */
 export const netBattleSelectorDialogConnector =
   (
-    gameAction: ActionManager<GameAction>,
+    props: GameActionManageContainer,
   ): DomDialogActionConnector<NetBattleSelectorDialog> =>
   (dialog) =>
-    gameAction.connect([
+    props.gameAction.connect([
       dialog
         .notifyCasualMatchSelection()
         .pipe(map(() => ({ type: "CasualMatchStart" }))),

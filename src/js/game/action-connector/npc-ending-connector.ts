@@ -1,18 +1,17 @@
 import { map } from "rxjs";
 
-import { ActionManager } from "../../action-manager/action-manager";
 import { DOMSceneActionConnector } from "../../dom-scenes/dom-scene-binder/action-connector";
 import { NPCEnding } from "../../dom-scenes/npc-ending";
-import { GameAction } from "../game-actions";
+import { GameActionManageContainer } from "../game-props/game-action-manage-container";
 
 /**
  * NPCルートエンディング画面のアクションコネクタを生成する
- * @param gameAction アクション管理オブジェクト
+ * @param props ゲームアクション管理コンテナ
  * @returns アクションコネクタ
  */
 export const npcEndingConnector =
-  (gameAction: ActionManager<GameAction>): DOMSceneActionConnector<NPCEnding> =>
+  (props: GameActionManageContainer): DOMSceneActionConnector<NPCEnding> =>
   (scene) =>
-    gameAction.connect([
+    props.gameAction.connect([
       scene.notifyFinish().pipe(map(() => ({ type: "EndNPCEnding" }))),
     ]);

@@ -1,17 +1,20 @@
 import { map } from "rxjs";
 
-import { ActionManager } from "../../action-manager/action-manager";
 import { DOMSceneActionConnector } from "../../dom-scenes/dom-scene-binder/action-connector";
 import { EpisodeSelector } from "../../dom-scenes/episode-selector";
-import { GameAction } from "../game-actions";
+import { GameActionManageContainer } from "../game-props/game-action-manage-container";
 
-/** チュートリアルステージセレクト画面とゲームアクションを関連付ける */
+/**
+ * チュートリアルステージセレクト画面とゲームアクションを関連付ける
+ * @param props ゲームアクション管理コンテナ
+ * @returns アクションコネクタ
+ */
 export const tutorialSelectorConnector =
   (
-    gameAction: ActionManager<GameAction>,
+    props: GameActionManageContainer,
   ): DOMSceneActionConnector<EpisodeSelector> =>
   (scene) =>
-    gameAction.connect([
+    props.gameAction.connect([
       scene.notifyPrev().pipe(map(() => ({ type: "CancelTutorialSelect" }))),
       scene
         .notifySelection()

@@ -39,7 +39,7 @@ export async function startTitle(props: Readonly<GameProps>): Promise<Title> {
     ...props,
     account,
   });
-  props.domSceneBinder.bind(scene, titleConnector(props.gameAction));
+  props.domSceneBinder.bind(scene, titleConnector(props));
   await Promise.race([scene.waitUntilLoaded(), waitTime(MAX_LOADING_TIME)]);
   return scene;
 }

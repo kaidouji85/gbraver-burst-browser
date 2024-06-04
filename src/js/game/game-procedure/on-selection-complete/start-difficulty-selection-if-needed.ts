@@ -24,7 +24,7 @@ export async function startDifficultySelectionIfNeeded(
   };
   props.domDialogBinder.bind(
     new DifficultyDialog(props),
-    difficultyDialogConnector(props.gameAction),
+    difficultyDialogConnector(props),
   );
   return true;
 }

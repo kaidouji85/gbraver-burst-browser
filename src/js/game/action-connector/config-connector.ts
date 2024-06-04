@@ -1,19 +1,18 @@
 import { map } from "rxjs";
 
-import { ActionManager } from "../../action-manager/action-manager";
 import { Config } from "../../dom-scenes/config";
 import { DOMSceneActionConnector } from "../../dom-scenes/dom-scene-binder/action-connector";
-import { GameAction } from "../game-actions";
+import { GameActionManageContainer } from "../game-props/game-action-manage-container";
 
 /**
  * 設定画面のアクションコネクタを生成する
- * @param gameAction アクション管理オブジェクト
+ * @param props ゲームアクション管理コンテナ
  * @returns アクションコネクタ
  */
 export const configConnector =
-  (gameAction: ActionManager<GameAction>): DOMSceneActionConnector<Config> =>
+  (props: GameActionManageContainer): DOMSceneActionConnector<Config> =>
   (scene) =>
-    gameAction.connect([
+    props.gameAction.connect([
       scene.notifyPrev().pipe(map(() => ({ type: "ConfigChangeCancel" }))),
       scene
         .notifyConfigChanges()

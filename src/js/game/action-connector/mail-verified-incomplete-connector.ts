@@ -1,21 +1,20 @@
 import { map } from "rxjs";
 
-import { ActionManager } from "../../action-manager/action-manager";
 import { DOMSceneActionConnector } from "../../dom-scenes/dom-scene-binder/action-connector";
 import { MailVerifiedIncomplete } from "../../dom-scenes/mail-verified-incomplete";
-import { GameAction } from "../game-actions";
+import { GameActionManageContainer } from "../game-props/game-action-manage-container";
 
 /**
  * メール認証未完了画面のアクションコネクタを生成する
- * @param gameAction アクション管理オブジェクト
+ * @param props ゲームアクション管理コンテナ
  * @returns アクションコネクタ
  */
 export const mailVerifiedIncompleteConnector =
   (
-    gameAction: ActionManager<GameAction>,
+    props: GameActionManageContainer,
   ): DOMSceneActionConnector<MailVerifiedIncomplete> =>
   (scene) =>
-    gameAction.connect([
+    props.gameAction.connect([
       scene
         .notifyTitleTransition()
         .pipe(map(() => ({ type: "ExitMailVerifiedIncomplete" }))),

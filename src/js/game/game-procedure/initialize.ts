@@ -30,10 +30,7 @@ export async function initialize(props: GameProps): Promise<void> {
   if (isLogin && !isMailVerified) {
     const mailAddress = await props.api.getMail();
     const scene = new MailVerifiedIncomplete(mailAddress);
-    props.domSceneBinder.bind(
-      scene,
-      mailVerifiedIncompleteConnector(props.gameAction),
-    );
+    props.domSceneBinder.bind(scene, mailVerifiedIncompleteConnector(props));
     invisibleFirstView();
     await props.fader.fadeIn();
     return;

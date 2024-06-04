@@ -11,6 +11,6 @@ export function onAccountDeleteConsent(props: Readonly<GameProps>): void {
   const dialog = new DeleteAccountConsentDialog(props);
   props.domDialogBinder.bind(
     dialog,
-    deleteAccountConsentDialogConnector(props.gameAction),
+    deleteAccountConsentDialogConnector(props),
   );
 }

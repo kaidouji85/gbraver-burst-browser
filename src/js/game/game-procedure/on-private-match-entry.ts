@@ -26,7 +26,7 @@ export async function onPrivateMatchEntry(
 
   props.domDialogBinder.bind(
     new MatchingDialog(props),
-    matchingDialogConnector(props.gameAction),
+    matchingDialogConnector(props),
   );
   await props.api.disconnectWebsocket();
   const { armdozerId, pilotId } = props.inProgress.privateMatchGuest;
@@ -38,7 +38,7 @@ export async function onPrivateMatchEntry(
   if (!battle) {
     props.domDialogBinder.bind(
       new RejectPrivateMatchEntryDialog(props),
-      rejectPrivateMatchEntryDialogConnector(props.gameAction),
+      rejectPrivateMatchEntryDialogConnector(props),
     );
     return;
   }

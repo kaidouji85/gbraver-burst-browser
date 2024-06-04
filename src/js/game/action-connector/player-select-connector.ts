@@ -1,21 +1,18 @@
 import { map } from "rxjs";
 
-import { ActionManager } from "../../action-manager/action-manager";
 import { DOMSceneActionConnector } from "../../dom-scenes/dom-scene-binder/action-connector";
 import { PlayerSelect } from "../../dom-scenes/player-select";
-import { GameAction } from "../game-actions";
+import { GameActionManageContainer } from "../game-props/game-action-manage-container";
 
 /**
  * プレイヤーセレクト画面のアクションコネクタを生成する
- * @param gameAction アクション管理オブジェクト
+ * @param props ゲームアクション管理コンテナ
  * @returns アクションコネクタ
  */
 export const playerSelectConnector =
-  (
-    gameAction: ActionManager<GameAction>,
-  ): DOMSceneActionConnector<PlayerSelect> =>
+  (props: GameActionManageContainer): DOMSceneActionConnector<PlayerSelect> =>
   (scene) =>
-    gameAction.connect([
+    props.gameAction.connect([
       scene
         .notifySelectCompletion()
         .pipe(map((a) => ({ ...a, type: "SelectionComplete" }))),
