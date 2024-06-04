@@ -1,21 +1,18 @@
 import { map } from "rxjs";
 
-import { ActionManager } from "../../action-manager/action-manager";
 import { DomDialogActionConnector } from "../../dom-dialogs/dom-dialog-binder/action-connector";
 import { LoginDialog } from "../../dom-dialogs/login";
-import { GameAction } from "../game-actions";
+import { GameActionManageContainer } from "../game-props/game-action-manage-container";
 
 /**
  * ログインダイアログのアクションコネクタを生成する
- * @param gameAction アクション管理オブジェクト
+ * @param props ゲームアクション管理コンテナ
  * @returns アクションコネクタ
  */
 export const loginDialogConnector =
-  (
-    gameAction: ActionManager<GameAction>,
-  ): DomDialogActionConnector<LoginDialog> =>
+  (props: GameActionManageContainer): DomDialogActionConnector<LoginDialog> =>
   (dialog) =>
-    gameAction.connect([
+    props.gameAction.connect([
       dialog.notifyLogin().pipe(map(() => ({ type: "UniversalLogin" }))),
       dialog.notifyClosed().pipe(map(() => ({ type: "LoginCancel" }))),
     ]);

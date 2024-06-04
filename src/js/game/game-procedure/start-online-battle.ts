@@ -42,10 +42,7 @@ function createBattleProgress(
             type: "GotoTitle",
           },
         });
-        props.domDialogBinder.bind(
-          dialog,
-          networkErrorDialogConnector(props.gameAction),
-        );
+        props.domDialogBinder.bind(dialog, networkErrorDialogConnector(props));
         throw e;
       }
     },

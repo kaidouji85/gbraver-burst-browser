@@ -1,21 +1,20 @@
 import { map } from "rxjs";
 
-import { ActionManager } from "../../action-manager/action-manager";
 import { DifficultyDialog } from "../../dom-dialogs/difficulty";
 import { DomDialogActionConnector } from "../../dom-dialogs/dom-dialog-binder/action-connector";
-import { GameAction } from "../game-actions";
+import { GameActionManageContainer } from "../game-props/game-action-manage-container";
 
 /**
  * 難易度選択ダイアログのアクションコネクタを生成する
- * @param gameAction アクション管理オブジェクト
+ * @param props ゲームアクション管理コンテナ
  * @returns アクションコネクタ
  */
 export const difficultyDialogConnector =
   (
-    gameAction: ActionManager<GameAction>,
+    props: GameActionManageContainer,
   ): DomDialogActionConnector<DifficultyDialog> =>
   (dialog) =>
-    gameAction.connect([
+    props.gameAction.connect([
       dialog.notifySelectionComplete().pipe(
         map((difficulty) => ({
           type: "DifficultySelectionComplete",

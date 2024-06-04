@@ -1,21 +1,20 @@
 import { map } from "rxjs";
 
-import { ActionManager } from "../../action-manager/action-manager";
 import { DOMSceneActionConnector } from "../../dom-scenes/dom-scene-binder/action-connector";
 import { SecretPlayerSelect } from "../../dom-scenes/secret-player-select";
-import { GameAction } from "../game-actions";
+import { GameActionManageContainer } from "../game-props/game-action-manage-container";
 
 /**
  * シークレットプレイヤー画面のアクションコネクタを生成する
- * @param gameAction アクション管理オブジェクト
+ * @param props ゲームアクション管理コンテナ
  * @returns アクションコネクタ
  */
 export const secretPlayerSelectConnector =
   (
-    gameAction: ActionManager<GameAction>,
+    props: GameActionManageContainer,
   ): DOMSceneActionConnector<SecretPlayerSelect> =>
   (scene) =>
-    gameAction.connect([
+    props.gameAction.connect([
       scene.notifyOK().pipe(map((a) => ({ ...a, type: "SelectionComplete" }))),
       scene.notifyPrev().pipe(map(() => ({ type: "SelectionCancel" }))),
     ]);

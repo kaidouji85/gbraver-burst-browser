@@ -20,7 +20,7 @@ export async function waitUntilCasualMatching(
   try {
     props.domDialogBinder.bind(
       new MatchingDialog(props),
-      matchingDialogConnector(props.gameAction),
+      matchingDialogConnector(props),
     );
     return await props.api.startCasualMatch(action.armdozerId, action.pilotId);
   } catch (e) {
@@ -30,10 +30,7 @@ export async function waitUntilCasualMatching(
         type: "GotoTitle",
       },
     });
-    props.domDialogBinder.bind(
-      dialog,
-      networkErrorDialogConnector(props.gameAction),
-    );
+    props.domDialogBinder.bind(dialog, networkErrorDialogConnector(props));
     throw e;
   }
 }

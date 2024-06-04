@@ -1,21 +1,20 @@
 import { map } from "rxjs";
 
-import { ActionManager } from "../../action-manager/action-manager";
 import { DomDialogActionConnector } from "../../dom-dialogs/dom-dialog-binder/action-connector";
 import { NetworkErrorDialog } from "../../dom-dialogs/network-error/network-error-dialog";
-import { GameAction } from "../game-actions";
+import { GameActionManageContainer } from "../game-props/game-action-manage-container";
 
 /**
  * 通信エラーダイアログのアクションコネクタを生成する
- * @param gameAction アクション管理オブジェクト
+ * @param props ゲームアクション管理コンテナ
  * @returns アクションコネクタ
  */
 export const networkErrorDialogConnector =
   (
-    gameAction: ActionManager<GameAction>,
+    props: GameActionManageContainer,
   ): DomDialogActionConnector<NetworkErrorDialog> =>
   (dialog) =>
-    gameAction.connect([
+    props.gameAction.connect([
       dialog.notifyPostNetworkError().pipe(
         map((postNetworkError) => ({
           type: "EndNetworkError",
