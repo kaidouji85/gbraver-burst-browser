@@ -1,13 +1,11 @@
-import type { GameState } from "gbraver-burst-core";
-
-import type {
+import {
   BatteryCommandSelected,
   CommandCanceled,
 } from "../../../td-scenes/battle/custom-battle-event";
 import { focusInBurstButton } from "../../focus";
 import { shouldBurst } from "../captions";
 import { BurstTutorialProps } from "../props";
-import type { BurstTutorialState } from "../state";
+import { BurstTutorialState } from "../state";
 import { canNotChangeBattery } from "../stories/can-not-change-battery";
 import { doBurstToRecoverBattery } from "../stories/do-burst-to-recover-battery";
 import { notDefense5Carelessly } from "../stories/not-defense5-carelessly";
@@ -59,35 +57,40 @@ export async function onBatteryCommandSelected(
   const lastState = props.stateHistory.at(-1);
   const player = lastState?.players.find((v) => v.playerId === props.playerId);
   const enemy = lastState?.players.find((v) => v.playerId !== props.playerId);
-  if (!player || !enemy) {
+  if (!lastState || !player || !enemy) {
     return notRunning(props);
   }
 
-  const isPlayerTurn = lastState?.activePlayerId === props.playerId;
-  const isBattery5Command = props.battery.battery === 5;
-  const isEnemyPowerLessThanPlayerHP =
-    enemy.armdozer.power < player.armdozer.hp;
-  const isNotEnemyFullBattery =
-    enemy.armdozer.battery !== enemy.armdozer.maxBattery;
-  if (isPlayerTurn || isBattery5Command || isEnemyPowerLessThanPlayerHP || isNotEnemyFullBattery) {
-    return notRunning(props);
-  }
+  const isEnemyTurn = lastState.activePlayerId !== props.playerId;
+  const isNotBattery5Command = props.battery.battery !== 5;
+  const isEnemyPowerGreaterThanPlayerHP =
+    player.armdozer.hp <= enemy.armdozer.power;
+  const isEnemyFullBattery =
+    enemy.armdozer.battery === enemy.armdozer.maxBattery;
+  const willPlayerDeath =
+    isEnemyTurn &&
+    isNotBattery5Command &&
+    isEnemyPowerGreaterThanPlayerHP &&
+    isEnemyFullBattery;
 
   const isPlayerFullBattery =
     player.armdozer.battery === player.armdozer.maxBattery;
-  const enableBurst = player.armdozer.enableBurst;
-  const enablePilotSkill = player.pilot.enableSkill;
-  if (!isPlayerFullBattery && enableBurst) {
+  if (willPlayerDeath && !isPlayerFullBattery && player.armdozer.enableBurst) {
     await defense5(props);
     await doBurstToRecoverBattery(props);
     await focusInBurstButton(props, shouldBurst);
     return {
-      state: { ...props.state,  isLoseIfNoDefense5Complete: true },
+      state: { ...props.state, isLoseIfNoDefense5Complete: true },
       cancel: { isCommandCanceled: true },
     };
   }
 
-  if (!isPlayerFullBattery && !enableBurst && !enablePilotSkill) {
+  if (
+    willPlayerDeath &&
+    !isPlayerFullBattery &&
+    !player.armdozer.enableBurst &&
+    !player.pilot.enableSkill
+  ) {
     await defense5(props);
     await canNotChangeBattery(props);
     return {
@@ -108,8 +111,5 @@ export async function onBatteryCommandSelected(
     };
   }
 
-  return {
-    state: props.state,
-    cancel: { isCommandCanceled: false },
-  };
+  return notRunning(props);
 }
