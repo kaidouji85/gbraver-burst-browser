@@ -1,3 +1,5 @@
+import { BatteryCommand, GameState, PlayerState } from "gbraver-burst-core";
+
 import {
   BatteryCommandSelected,
   CommandCanceled,
@@ -12,6 +14,36 @@ import { notDefense5Carelessly } from "../stories/not-defense5-carelessly";
 import { redoBatterySelect } from "../stories/redo-battery-select";
 import { shouldDefense5 } from "../stories/should-defense5";
 import { shouldDefense5Again } from "../stories/should-defense5-again";
+
+/**
+ * このターンにプレイヤーが死亡するか否かを判定する
+ * @param params プレイヤー死亡判定パラメータ
+ * @returns プレイヤーが死亡する場合はtrue、そうでない場合はfalse
+ */
+function isPlayerDeath(params: {
+  /** 最終ステート */
+  lastState: GameState;
+  /** プレイヤーステート */
+  player: PlayerState;
+  /** 敵ステート */
+  enemy: PlayerState;
+  /** プレイヤーが出したバッテリーコマンド */
+  command: BatteryCommand;
+}) {
+  const { lastState, player, enemy, command } = params;
+  const isEnemyTurn = lastState.activePlayerId !== player.playerId;
+  const isNotBattery5Command = command.battery !== 5;
+  const isEnemyPowerGreaterThanPlayerHP =
+    player.armdozer.hp <= enemy.armdozer.power;
+  const isEnemyFullBattery =
+    enemy.armdozer.battery === enemy.armdozer.maxBattery;
+  return (
+    isEnemyTurn &&
+    isNotBattery5Command &&
+    isEnemyPowerGreaterThanPlayerHP &&
+    isEnemyFullBattery
+  );
+}
 
 /**
  * 初回、2回目以降で「5防御しないと負け」を切り替えるヘルパー関数
@@ -61,18 +93,12 @@ export async function onBatteryCommandSelected(
     return notRunning(props);
   }
 
-  const isEnemyTurn = lastState.activePlayerId !== props.playerId;
-  const isNotBattery5Command = props.battery.battery !== 5;
-  const isEnemyPowerGreaterThanPlayerHP =
-    player.armdozer.hp <= enemy.armdozer.power;
-  const isEnemyFullBattery =
-    enemy.armdozer.battery === enemy.armdozer.maxBattery;
-  const willPlayerDeath =
-    isEnemyTurn &&
-    isNotBattery5Command &&
-    isEnemyPowerGreaterThanPlayerHP &&
-    isEnemyFullBattery;
-
+  const willPlayerDeath = isPlayerDeath({
+    lastState,
+    player,
+    enemy,
+    command: props.battery,
+  });
   const isPlayerFullBattery =
     player.armdozer.battery === player.armdozer.maxBattery;
   if (willPlayerDeath && !isPlayerFullBattery && player.armdozer.enableBurst) {
@@ -99,7 +125,7 @@ export async function onBatteryCommandSelected(
     };
   }
 
-  if (isPlayerFullBattery) {
+  if (willPlayerDeath && isPlayerFullBattery) {
     props.view.hud.gameObjects.batterySelector.toBatterySilently(5);
     await defense5(props);
     props.state.isLoseIfNoDefense5Complete
