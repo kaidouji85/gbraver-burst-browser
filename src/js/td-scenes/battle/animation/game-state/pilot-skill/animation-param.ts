@@ -66,7 +66,7 @@ function extractInvoker(
 ) {
   const { effect, players } = gameState;
   const pilot = props.view.hud.pilots.find(
-    (v) => v.playerId === effect.invokerId,
+    (p) => p.playerId === effect.invokerId,
   );
   const invokerState = players.find((p) => p.playerId === effect.invokerId);
   const invokerArmdozer = props.view.td.armdozers.find(
