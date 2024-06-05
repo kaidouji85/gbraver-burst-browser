@@ -8,10 +8,10 @@ import { PilotButtonProps } from "../props/pilot-button-props";
  * @returns 通知ストリーム
  */
 export function notifyPressed(props: PilotButtonProps): Observable<Event> {
-  const { view, model, disabled } = props;
+  const { view, model } = props;
   return view.notifyPressed().pipe(
     filter(() => !model.shouldPushNotifierStop),
-    filter(() => !disabled),
+    filter(() => !props.disabled),
     filter(() => model.canActivatePilotSkill),
   );
 }

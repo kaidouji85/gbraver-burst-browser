@@ -8,10 +8,10 @@ import { BurstButtonProps } from "../props/burst-button-props";
  * @returns 通知ストリーム
  */
 export function notifyPressed(props: BurstButtonProps): Observable<Event> {
-  const { view, model, disabled } = props;
+  const { view, model } = props;
   return view.notifyPush().pipe(
     filter(() => !model.shouldPushNotifierStop),
-    filter(() => !disabled),
+    filter(() => !props.disabled),
     filter(() => model.canActivateBurst),
   );
 }
