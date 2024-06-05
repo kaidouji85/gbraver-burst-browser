@@ -76,7 +76,7 @@ export async function onBatteryCommandSelected(
       ? await notDefense5Carelessly(props)
       : await redoBatterySelect(props);
     result = {
-      state: { ...props.state, isLoseIfNoDefense5Complete: true },
+      state: { ...result.state, isLoseIfNoDefense5Complete: true },
       cancel: {
         isCommandCanceled: true,
       },
