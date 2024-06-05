@@ -15,7 +15,6 @@ export function onBattleSimulatorStart(props: BattleSceneProps) {
     sounds,
     se,
     domDialogBinder,
-    battleSceneAction,
   } = props;
   exclusive.execute(async () => {
     const lastState = stateHistory.at(-1);
@@ -40,6 +39,6 @@ export function onBattleSimulatorStart(props: BattleSceneProps) {
       initialPlayerBattery,
       isPlayerAttacker,
     });
-    domDialogBinder.bind(dialog, battleSimulatorConnector(battleSceneAction));
+    domDialogBinder.bind(dialog, battleSimulatorConnector(props));
   });
 }

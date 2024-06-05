@@ -131,3 +131,6 @@ shfmt -l -w *.bash
 
 ### 楽曲提供
 本作は[魔王魂](https://maou.audio)様の楽曲を利用させて頂いております。
+
+## License
+MIT

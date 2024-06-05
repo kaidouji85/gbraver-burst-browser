@@ -1,20 +1,19 @@
 import { map } from "rxjs";
 
-import { ActionManager } from "../../../action-manager/action-manager";
 import { BattleSimulator } from "../../../dom-dialogs/battle-simulator";
 import { DomDialogActionConnector } from "../../../dom-dialogs/dom-dialog-binder/action-connector";
-import { BattleSceneAction } from "../actions";
+import { BattleSceneActionManageContainer } from "../battle-scene-action-manage-container";
 
 /**
  * 戦闘シミュレーションダイアログのアクションコネクタを生成する
- * @param battleSceneAction アクション管理オブジェクト
+ * @param props 戦闘シーンアクション管理コンテナ
  * @returns アクションコネクタ
  */
 export const battleSimulatorConnector =
   (
-    battleSceneAction: ActionManager<BattleSceneAction>,
+    props: BattleSceneActionManageContainer,
   ): DomDialogActionConnector<BattleSimulator> =>
   (dialog) =>
-    battleSceneAction.connect([
+    props.battleSceneAction.connect([
       dialog.notifyClose().pipe(map(() => ({ type: "battleSimulatorEnd" }))),
     ]);

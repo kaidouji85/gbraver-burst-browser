@@ -23,10 +23,7 @@ async function callLoginCheckAPI(props: Readonly<GameProps>): Promise<boolean> {
         type: "Close",
       },
     });
-    props.domDialogBinder.bind(
-      dialog,
-      networkErrorDialogConnector(props.gameAction),
-    );
+    props.domDialogBinder.bind(dialog, networkErrorDialogConnector(props));
     throw e;
   }
 }
@@ -51,13 +48,13 @@ export async function onNetBattleStart(
         ...props,
         caption: "ネット対戦をするにはログインをしてください",
       }),
-      loginDialogConnector(props.gameAction),
+      loginDialogConnector(props),
     );
     return;
   }
 
   props.domDialogBinder.bind(
     new NetBattleSelectorDialog(props),
-    netBattleSelectorDialogConnector(props.gameAction),
+    netBattleSelectorDialogConnector(props),
   );
 }

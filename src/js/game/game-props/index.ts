@@ -1,7 +1,6 @@
 import { BrowserSDK } from "@gbraver-burst-network/browser-sdk";
 import { Observable } from "rxjs";
 
-import { ActionManager } from "../../action-manager/action-manager";
 import { BGMManagerContainer } from "../../bgm/bgm-manager";
 import { CssHUDUIScale } from "../../css/hud-ui-scale";
 import { DOMDialogBinder } from "../../dom-dialogs/dom-dialog-binder";
@@ -19,9 +18,9 @@ import { Resize } from "../../window/resize";
 import { GBraverBurstBrowserConfigRepository } from "../config/repository/repository";
 import { DOMFloaters } from "../dom-floaters/dom-floaters";
 import { FutureSuddenlyBattleEnd } from "../future-suddenly-battle-end";
-import { GameAction } from "../game-actions";
 import { InProgress } from "../in-progress/in-progress";
 import { InterruptScenes } from "../innterrupt-scenes";
+import { GameActionManageContainer } from "./game-action-manage-container";
 
 /**
  * ゲームプロパティ
@@ -30,7 +29,8 @@ import { InterruptScenes } from "../innterrupt-scenes";
 export interface GameProps
   extends BGMManagerContainer,
     ResourcesContainer,
-    SEPlayerContainer {
+    SEPlayerContainer,
+    GameActionManageContainer {
   /** サービスワーカーを利用するか否か、trueで利用する */
   isServiceWorkerUsed: boolean;
   /** APIサーバ系機能が利用可能か否か、trueで利用可能 */
@@ -75,11 +75,6 @@ export interface GameProps
   pushWindow: Observable<PushWindow>;
   /** ゲームループ */
   gameLoop: Observable<GameLoop>;
-  /**
-   * ゲームアクション管理オブジェクト
-   * 動的生成されるシーン、ダイアログの通知を購読するために利用する
-   */
-  gameAction: ActionManager<GameAction>;
 
   /** cssカスタムプロパティ --hud-ui-scale */
   hudUIScale: CssHUDUIScale;

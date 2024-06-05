@@ -9,7 +9,18 @@ import { SoundResource } from "../../resource/sound/resource";
 import { SEPlayerContainer } from "../../se/se-player";
 import { domUuid } from "../../uuid/dom-uuid";
 import { ROOT_CLASS } from "./dom/class-name";
-import { extractElements } from "./dom/elements";
+import {
+  extractBackGround,
+  extractCloser,
+  extractEasy,
+  extractEasyButton,
+  extractHard,
+  extractHardButton,
+  extractNormal,
+  extractNormalButton,
+  extractVeryHard,
+  extractVeryHardButton,
+} from "./dom/elements";
 import { rootInnerHTML } from "./dom/root-inner-html";
 
 /** 難易度選択ダイアログ プロパティ */
@@ -75,17 +86,16 @@ export function createDifficultyDialogProps(
   const root = document.createElement("div");
   root.className = ROOT_CLASS;
   root.innerHTML = rootInnerHTML(resources, ids);
-  const elements = extractElements(root, ids);
-  const closer = elements.closer;
-  const backGround = elements.backGround;
-  const easy = elements.easy;
-  const easyButton = elements.easyButton;
-  const normal = elements.normal;
-  const normalButton = elements.normalButton;
-  const hard = elements.hard;
-  const hardButton = elements.hardButton;
-  const veryHard = elements.veryHard;
-  const veryHardButton = elements.veryHardButton;
+  const closer = extractCloser(root, ids);
+  const backGround = extractBackGround(root, ids);
+  const easy = extractEasy(root, ids);
+  const easyButton = extractEasyButton(root, ids);
+  const normal = extractNormal(root, ids);
+  const normalButton = extractNormalButton(root, ids);
+  const hard = extractHard(root, ids);
+  const hardButton = extractHardButton(root, ids);
+  const veryHard = extractVeryHard(root, ids);
+  const veryHardButton = extractVeryHardButton(root, ids);
   const selectionComplete = new Subject<NPCBattleCourseDifficulty>();
   const closeDialog = new Subject<void>();
   const exclusive = new Exclusive();

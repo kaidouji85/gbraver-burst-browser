@@ -23,7 +23,7 @@ export async function startEpisodeSelector(
     episodes,
     initialSelectedEpisodeID,
   });
-  props.domSceneBinder.bind(scene, tutorialSelectorConnector(props.gameAction));
+  props.domSceneBinder.bind(scene, tutorialSelectorConnector(props));
   await Promise.race([scene.waitUntilLoaded(), waitTime(MAX_LOADING_TIME)]);
   await props.fader.fadeIn();
 }

@@ -11,10 +11,10 @@ import { BatterySelectorProps } from "../props/battery-selector-props";
 export function notifyBatteryMinus(
   props: BatterySelectorProps,
 ): Observable<unknown> {
-  const { view, model, disabled } = props;
+  const { view, model } = props;
   return view.minusButtonPushNotifier().pipe(
     filter(() => !model.shouldPushNotifierStop),
-    filter(() => !disabled),
+    filter(() => !props.disabled),
     filter(() => canBatteryMinus(model)),
   );
 }

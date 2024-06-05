@@ -1,21 +1,20 @@
 import { map } from "rxjs";
 
-import { ActionManager } from "../../action-manager/action-manager";
 import { DeleteAccountConsentDialog } from "../../dom-dialogs/delete-account-consent";
 import { DomDialogActionConnector } from "../../dom-dialogs/dom-dialog-binder/action-connector";
-import { GameAction } from "../game-actions";
+import { GameActionManageContainer } from "../game-props/game-action-manage-container";
 
 /**
  * アカウント削除同意ダイアログのアクションコネクタを生成する
- * @param gameAction アクション管理オブジェクト
+ * @param porps ゲームアクション管理コンテナ
  * @returns アクションコネクタ
  */
 export const deleteAccountConsentDialogConnector =
   (
-    gameAction: ActionManager<GameAction>,
+    props: GameActionManageContainer,
   ): DomDialogActionConnector<DeleteAccountConsentDialog> =>
   (dialog) =>
-    gameAction.connect([
+    props.gameAction.connect([
       dialog
         .notifyAccountDeletion()
         .pipe(map(() => ({ type: "DeleteAccount" }))),
