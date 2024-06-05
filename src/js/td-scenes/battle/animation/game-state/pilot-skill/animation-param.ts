@@ -17,8 +17,8 @@ import { StateAnimationProps } from "../state-animation-props";
 
 /**
  * パイロットスキル アニメーション パラメータ
- * @type SKILL パイロットスキル
- * @type PILOT HUDパイロット
+ * @template SKILL パイロットスキル
+ * @template PILOT HUDパイロット
  */
 export type PilotSkillAnimationParamX<
   SKILL extends PilotSkill,
