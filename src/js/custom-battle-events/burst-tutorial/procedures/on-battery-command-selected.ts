@@ -53,12 +53,9 @@ export async function onBatteryCommandSelected(
     return result;
   }
 
-  const isEnemyTurn = lastState.activePlayerId !== props.playerId;
-  const isEnemyFullBattery =
-    enemy.armdozer.battery === enemy.armdozer.maxBattery;
   const willPlayerDeath =
-    isEnemyTurn &&
-    isEnemyFullBattery &&
+    lastState.activePlayerId === enemy.playerId &&
+    enemy.armdozer.battery === enemy.armdozer.maxBattery &&
     props.battery.battery !== 5 &&
     player.armdozer.hp <= enemy.armdozer.power;
   const isPlayerFullBattery =
