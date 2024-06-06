@@ -1,6 +1,6 @@
 import { ArmdozerIds, Armdozers, PilotIds, Pilots } from "gbraver-burst-core";
 
-import { EmptyCustomBattleEvent } from "../../custom-battle-events/empty-custom-battle-event";
+import { createQueenOfTragedy } from "../../custom-battle-events/queen-of-tragedy";
 import { wingDozerNPCForNationalTournamentRevenge } from "../../npc/wing-dozer-for-national-tournament-revenge";
 import { PathIds } from "../../resource/path/ids";
 import { SOUND_IDS } from "../../resource/sound/ids";
@@ -27,6 +27,6 @@ export const QueenOfTragedy: Episode = {
     pilot: Pilots.find((v) => v.id === PilotIds.YUUYA) ?? Pilots[0],
   },
   npc: wingDozerNPCForNationalTournamentRevenge(),
-  event: () => new EmptyCustomBattleEvent(),
+  event: () => createQueenOfTragedy(),
   bgm: SOUND_IDS.BATTLE_BGM_01,
 };
