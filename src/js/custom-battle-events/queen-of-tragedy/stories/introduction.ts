@@ -1,4 +1,5 @@
 import { delay } from "../../../animation/delay";
+import { wbr } from "../../../dom/wbr";
 import { CustomBattleEventProps } from "../../../td-scenes/battle/custom-battle-event";
 import {
   activeLeftMessageWindowWithFace,
@@ -17,7 +18,6 @@ import { synchronizedBow } from "../../synchronized-bow";
 import { synchronizedUpright } from "../../synchronized-upright";
 import { waitUntilWindowPush } from "../../wait-until-window-push";
 import { yoroshikuOnegaiShimasu } from "../../yoroshiku-onegai-shimasu";
-import {wbr} from "../../../dom/wbr";
 
 /**
  * イントロダクション

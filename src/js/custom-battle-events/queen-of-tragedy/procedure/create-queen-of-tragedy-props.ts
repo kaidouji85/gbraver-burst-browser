@@ -8,4 +8,4 @@ export const createQueenOfTragedyProps = (): QueenOfTragedyProps => ({
   state: {
     isIntroductionComplete: false,
   },
-})
+});
