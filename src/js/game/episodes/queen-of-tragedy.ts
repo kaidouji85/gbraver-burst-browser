@@ -11,12 +11,12 @@ import { EpisodeIDs } from "./episode-ids";
 /** 導入 */
 const introduction = `あとで考える`;
 
-/** 全国大会のリベンジ */
-export const nationalTournamentRevenge: Episode = {
+/** 悲劇の女王 */
+export const QueenOfTragedy: Episode = {
   id: EpisodeIDs.NATIONAL_TOURNAMENT_REVENGE,
   type: "Side Episode",
   number: "4.1",
-  title: "（開発中）全国大会のリベンジ",
+  title: "（開発中）悲劇の女王",
   introduction,
   imageCutPathId: PathIds.IMAGE_CUT_PILOT_SKILL_02,
   player: {
