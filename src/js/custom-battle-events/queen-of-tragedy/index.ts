@@ -1,8 +1,30 @@
-import { CustomBattleEvent } from "../../td-scenes/battle/custom-battle-event";
+import {
+  CustomBattleEvent,
+  LastState,
+} from "../../td-scenes/battle/custom-battle-event";
 import { EmptyCustomBattleEvent } from "../empty-custom-battle-event";
+import { beforeLastState } from "./procedure/before-last-state";
+import { createQueenOfTragedyProps } from "./procedure/create-queen-of-tragedy-props";
+import { QueenOfTragedyProps } from "./props";
 
 /** 悲劇の女王 イベント */
-class QueenOfTragedy extends EmptyCustomBattleEvent {}
+class QueenOfTragedy extends EmptyCustomBattleEvent {
+  /** プロパティ */
+  #props: QueenOfTragedyProps;
+
+  /**
+   * コンストラクタ
+   */
+  constructor() {
+    super();
+    this.#props = createQueenOfTragedyProps();
+  }
+
+  /** @override */
+  async beforeLastState(props: LastState): Promise<void> {
+    this.#props.state = await beforeLastState({ ...props, ...this.#props });
+  }
+}
 
 /**
  * 悲劇の女王イベント用のカスタムバトルイベントを作成する
