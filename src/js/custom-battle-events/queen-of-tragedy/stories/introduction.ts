@@ -17,6 +17,7 @@ import { synchronizedBow } from "../../synchronized-bow";
 import { synchronizedUpright } from "../../synchronized-upright";
 import { waitUntilWindowPush } from "../../wait-until-window-push";
 import { yoroshikuOnegaiShimasu } from "../../yoroshiku-onegai-shimasu";
+import {wbr} from "../../../dom/wbr";
 
 /**
  * イントロダクション
@@ -26,15 +27,15 @@ export async function introduction(props: CustomBattleEventProps) {
   activeLeftMessageWindowWithFace(props, "Tsubasa");
   await scrollLeftMessages(props, [
     ["ツバサ", `「時間はまだある`],
-    [`ユウヤ 私とも手合わせ願おうか」`],
+    [`ユウヤ 私とも${wbr}手合わせ願おうか」`],
   ]);
   props.view.dom.leftMessageWindow.darken();
 
   activeRightMessageWindowWithFace(props, "Yuuya");
   await scrollRightMessages(props, [
     ["ユウヤ", `「いいぜ`],
-    [`この前の全国大会決勝戦は不完全燃焼だったからな`],
-    [`今日は楽しませてくれよ」`],
+    [`この前の${wbr}全国大会${wbr}決勝戦は${wbr}不完全燃焼${wbr}だったからな`],
+    [`今日は${wbr}楽しませて${wbr}くれよ」`],
   ]);
 
   await refreshConversation(props, 100);
