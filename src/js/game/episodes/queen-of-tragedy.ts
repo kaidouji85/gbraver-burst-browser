@@ -28,5 +28,5 @@ export const QueenOfTragedy: Episode = {
   },
   npc: wingDozerNPCForNationalTournamentRevenge(),
   event: () => createQueenOfTragedy(),
-  bgm: SOUND_IDS.BATTLE_BGM_01,
+  bgm: SOUND_IDS.QUEEN_OF_TRAGEDY,
 };

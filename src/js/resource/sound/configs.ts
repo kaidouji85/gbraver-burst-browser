@@ -91,6 +91,11 @@ export const SOUND_CONFIGS: SoundConfig[] = [
     volumeScale: 0.2,
   },
   {
+    id: SOUND_IDS.QUEEN_OF_TRAGEDY,
+    path: (resourceRoot) => `${resourceRoot.get()}/sounds/queen-of-tragedy.mp3`,
+    volumeScale: 0.2,
+  },
+  {
     id: SOUND_IDS.NPC_ENDING,
     path: (resourceRoot) => `${resourceRoot.get()}/sounds/npc-ending.mp3`,
     volumeScale: 0.2,
