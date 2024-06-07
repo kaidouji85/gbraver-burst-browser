@@ -34,14 +34,23 @@ export async function introduction(props: CustomBattleEventProps) {
   activeRightMessageWindowWithFace(props, "Yuuya");
   await scrollRightMessages(props, [
     ["ユウヤ", `「いいぜ`],
-    [`この前の${wbr}全国大会${wbr}決勝戦は${wbr}不完全燃焼${wbr}だったからな`],
-    [`今日は${wbr}楽しませて${wbr}くれよ」`],
+    [`去年は${wbr}一瞬で${wbr}ケリが${wbr}ついた${wbr}からな`],
+    [`俺も${wbr}不完全燃焼${wbr}だったんだ」`],
+  ]);
+  props.view.dom.rightMessageWindow.darken();
+
+  await refreshConversation(props, 100);
+  activeRightMessageWindowWithFace(props, "Gai");
+  await scrollRightMessages(props, [
+    ["ガイ", `「すごいぞ`],
+    [
+      `こんな所で${wbr}全国大会${wbr}1位と${wbr}2位の${wbr}戦いが${wbr}観られるなんて」`,
+    ],
   ]);
 
   await refreshConversation(props, 100);
-
   activeRightMessageWindowWithFace(props, "Raito");
-  props.view.dom.rightMessageWindow.messages(["姿勢を正して"]);
+  props.view.dom.rightMessageWindow.messages(["ライト", "「双方 姿勢を正して"]);
   await synchronizedUpright(props).play();
   props.view.dom.rightMessageWindow.nextMessageIconVisible(true);
   await waitUntilWindowPush(props);
