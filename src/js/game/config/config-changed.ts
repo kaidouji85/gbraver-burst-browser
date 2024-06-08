@@ -16,6 +16,19 @@ export function isSoundConfigChanged(
 }
 
 /**
+ * パフォーマンス統計の表示設定が変更されたか否かを判定する
+ * @param origin オリジナルの設定
+ * @param update 更新後の設定
+ * @returns 判定結果、trueで設定変更された
+ */
+export function isPerformanceStatsVisibilityChanged(
+  origin: GBraverBurstBrowserConfig,
+  update: GBraverBurstBrowserConfig,
+): boolean {
+  return origin.performanceStatsVisibility !== update.performanceStatsVisibility;
+}
+
+/**
  * 設定が変更されたか否かを判定する
  * @param origin オリジナルの設定
  * @param update 更新後の設定

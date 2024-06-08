@@ -1,4 +1,7 @@
-import { isSoundConfigChanged } from "../../config/config-changed";
+import {
+  isPerformanceStatsVisibilityChanged,
+  isSoundConfigChanged,
+} from "../../config/config-changed";
 import { GameAction } from "../../game-actions";
 import { ConfigChangeComplete } from "../../game-actions/config-change-complete";
 import { GameProps } from "../../game-props";
@@ -22,10 +25,7 @@ async function onConfigChangeComplete(
     await reflectSoundVolume(props, action.config);
   }
 
-  if (
-    origin.performanceStatsVisibility !==
-    action.config.performanceStatsVisibility
-  ) {
+  if (isPerformanceStatsVisibilityChanged(origin, action.config)) {
     reflectPerformanceStatsVisibility(
       props,
       action.config.performanceStatsVisibility,
