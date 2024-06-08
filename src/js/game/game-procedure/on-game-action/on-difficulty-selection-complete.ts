@@ -22,7 +22,7 @@ import { startNPCBattleStage } from "../start-npc-battle-stage";
  * @param action アクション
  * @returns 処理が完了したら発火するPromise
  */
-export async function onDifficultySelectionComplete(
+async function onDifficultySelectionComplete(
   props: GameProps,
   action: DifficultySelectionComplete,
 ): Promise<void> {

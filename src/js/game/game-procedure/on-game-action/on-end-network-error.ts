@@ -6,47 +6,47 @@ import { playTitleBGM } from "../play-title-bgm";
 import { startTitle } from "../start-title";
 
 /**
+ * ダイアログを閉じる
+ * @param props ゲームプロパティ
+ */
+const close = async (props: GameProps) => {
+  props.domDialogBinder.hidden();
+};
+
+/**
+ * タイトル画面に遷移する
+ * @param props ゲームプロパティ
+ */
+const gotoTitle = async (props: GameProps) => {
+  props.domDialogBinder.hidden();
+  await Promise.all([
+    (async () => {
+      await props.fader.fadeOut();
+      props.tdBinder.hidden();
+      return await startTitle(props);
+    })(),
+    (async () => {
+      await props.bgm.do(fadeOut);
+      await props.bgm.do(stop);
+    })(),
+  ]);
+  await props.fader.fadeIn();
+  playTitleBGM(props);
+};
+
+/**
  * 通信エラーダイアログを閉じる
  * 本関数にはpropsを変更する副作用がある
  * @param props ゲームプロパティ
  * @param action アクション
  * @returns 処理が完了したら発火するPromise
  */
-async function onEndNetworkError(
-  props: GameProps,
-  action: EndNetworkError,
-): Promise<void> {
-  const close = async () => {
-    props.inProgress = {
-      type: "None",
-    };
-    props.domDialogBinder.hidden();
-  };
-
-  const gotoTitle = async () => {
-    props.inProgress = {
-      type: "None",
-    };
-    props.domDialogBinder.hidden();
-    await Promise.all([
-      (async () => {
-        await props.fader.fadeOut();
-        props.tdBinder.hidden();
-        return await startTitle(props);
-      })(),
-      (async () => {
-        await props.bgm.do(fadeOut);
-        await props.bgm.do(stop);
-      })(),
-    ]);
-    await props.fader.fadeIn();
-    playTitleBGM(props);
-  };
-
+async function onEndNetworkError(props: GameProps, action: EndNetworkError) {
+  props.inProgress = { type: "None" };
   if (action.postNetworkError.type === "Close") {
-    await close();
+    await close(props);
   } else if (action.postNetworkError.type === "GotoTitle") {
-    await gotoTitle();
+    await gotoTitle(props);
   }
 }
 
