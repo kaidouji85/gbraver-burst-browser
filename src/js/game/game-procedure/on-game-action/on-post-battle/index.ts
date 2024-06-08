@@ -1,6 +1,7 @@
 import { GameAction } from "../../../game-actions";
 import { PostBattleAction } from "../../../game-actions/post-battle-action";
 import { GameProps } from "../../../game-props";
+import { InProgress } from "../../../in-progress/in-progress";
 import { gotoEndingIfNeeded } from "./goto-ending-if-needed";
 import { gotoEpisodeIfNeeded } from "./goto-episode-if-needed";
 import { gotoEpisodeSelectorIfNeeded } from "./goto-episode-selector-if-needed";
@@ -18,37 +19,22 @@ async function onPostBattleAction(
   props: GameProps,
   action: PostBattleAction,
 ): Promise<void> {
+  let updated: InProgress = props.inProgress;
   if (await gotoTitleIfNeeded(props, action)) {
-    props.inProgress = {
-      type: "None",
-    };
-    return;
-  }
-
-  if (await gotoEndingIfNeeded(props, action)) {
-    props.inProgress = {
-      type: "None",
-    };
-    return;
-  }
-
-  if (await gotoNPCBattleStageIfNeeded(props, action)) {
-    return;
-  }
-
-  if (await gotoEpisodeIfNeeded(props, action)) {
-    return;
-  }
-
-  if (await gotoEpisodeSelectorIfNeeded(props, action)) {
-    props.inProgress = {
+    updated = { type: "None" };
+  } else if (await gotoEndingIfNeeded(props, action)) {
+    updated = { type: "None" };
+  } else if (await gotoNPCBattleStageIfNeeded(props, action)) {
+    updated = props.inProgress;
+  } else if (await gotoEpisodeIfNeeded(props, action)) {
+    updated = props.inProgress;
+  } else if (await gotoEpisodeSelectorIfNeeded(props, action)) {
+    updated = {
       type: "Story",
-      story: {
-        type: "EpisodeSelect",
-      },
+      story: { type: "EpisodeSelect" },
     };
-    return;
   }
+  props.inProgress = updated;
 }
 
 /** アクションタイプ */
