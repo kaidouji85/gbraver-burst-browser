@@ -6,6 +6,7 @@ import { loginDialogConnector } from "../../action-connector/login-dialog-connec
 import { netBattleSelectorDialogConnector } from "../../action-connector/net-battle-selector-dialog-connector";
 import { networkErrorDialogConnector } from "../../action-connector/network-error-dialog-connector";
 import { waitingDialogConnector } from "../../action-connector/waiting-dialog-connector";
+import { GameAction } from "../../game-actions";
 import { GameProps } from "../../game-props";
 
 /**
@@ -33,9 +34,7 @@ async function callLoginCheckAPI(props: Readonly<GameProps>): Promise<boolean> {
  * @param props ゲームプロパティ
  * @returns 処理が完了したら発火するPromise
  */
-export async function onNetBattleStart(
-  props: Readonly<GameProps>,
-): Promise<void> {
+async function onNetBattleStart(props: Readonly<GameProps>): Promise<void> {
   props.domDialogBinder.bind(
     new WaitingDialog("ログインチェック中......"),
     waitingDialogConnector,
@@ -58,3 +57,13 @@ export async function onNetBattleStart(
     netBattleSelectorDialogConnector(props),
   );
 }
+
+/** アクションタイプ */
+const actionType = "NetBattleStart";
+
+/** ネットバトル開始時のイベントリスナーコンテナ */
+export const netBattleStartContainer = {
+  [actionType]: (props: GameProps, action: GameAction) => {
+    action.type === actionType && onNetBattleStart(props);
+  },
+};

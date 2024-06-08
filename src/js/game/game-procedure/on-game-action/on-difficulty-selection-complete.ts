@@ -1,5 +1,5 @@
 import { playerUuid } from "../../../uuid/player";
-import {GameAction} from "../../game-actions";
+import { GameAction } from "../../game-actions";
 import { DifficultySelectionComplete } from "../../game-actions/difficulty-selection-complete";
 import { GameProps } from "../../game-props";
 import { DifficultySelect, NPCBattle } from "../../in-progress/npc-battle";
@@ -68,4 +68,4 @@ export const difficultySelectionCompleteContainer = {
   [actionType]: (props: GameProps, action: GameAction) => {
     action.type === actionType && onDifficultySelectionComplete(props, action);
   },
-}
+};

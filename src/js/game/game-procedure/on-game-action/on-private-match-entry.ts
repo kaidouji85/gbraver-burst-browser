@@ -2,6 +2,7 @@ import { MatchingDialog } from "../../../dom-dialogs/matching/matching-dialog";
 import { RejectPrivateMatchEntryDialog } from "../../../dom-dialogs/reject-private-match-entry";
 import { matchingDialogConnector } from "../../action-connector/matching-dialog-connector";
 import { rejectPrivateMatchEntryDialogConnector } from "../../action-connector/reject-private-match-entry-dialog-connector";
+import { GameAction } from "../../game-actions";
 import { PrivateMatchEntry } from "../../game-actions/private-match-entry";
 import { GameProps } from "../../game-props";
 import { startOnlineBattle } from "../start-online-battle";
@@ -11,7 +12,7 @@ import { startOnlineBattle } from "../start-online-battle";
  * @param props ゲームプロパティ
  * @param action アクション
  */
-export async function onPrivateMatchEntry(
+async function onPrivateMatchEntry(
   props: GameProps,
   action: PrivateMatchEntry,
 ): Promise<void> {
@@ -46,3 +47,13 @@ export async function onPrivateMatchEntry(
   props.inProgress.privateMatchGuest = { type: "Battle" };
   await startOnlineBattle(props, battle, "PRIVATE MATCH");
 }
+
+/** アクションタイプ */
+const actionType = "PrivateMatchEntry";
+
+/** プライベートマッチエントリ時のイベントリスナーコンテナ */
+export const privateMatchEntryContainer = {
+  [actionType]: (props: GameProps, action: GameAction) => {
+    action.type === actionType && onPrivateMatchEntry(props, action);
+  },
+};

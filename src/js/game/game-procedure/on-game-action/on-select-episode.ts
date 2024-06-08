@@ -1,6 +1,7 @@
+import { GameAction } from "../../game-actions";
 import { SelectEpisode } from "../../game-actions/select-episode";
-import type { GameProps } from "../../game-props";
-import type { Story } from "../../in-progress/story";
+import { GameProps } from "../../game-props";
+import { Story } from "../../in-progress/story";
 import { getEpisodes } from "../get-episodes";
 import { startEpisode } from "../start-episode";
 
@@ -11,7 +12,7 @@ import { startEpisode } from "../start-episode";
  * @param action アクション
  * @returns 処理が完了したら発火するPromise
  */
-export async function onSelectEpisode(
+async function onSelectEpisode(
   props: GameProps,
   action: SelectEpisode,
 ): Promise<void> {
@@ -31,3 +32,13 @@ export async function onSelectEpisode(
   };
   await startEpisode(props, episode);
 }
+
+/** アクションタイプ */
+const actionType = "SelectEpisode";
+
+/** エピソード選択時のイベントリスナーコンテナ */
+export const selectEpisodeContainer = {
+  [actionType]: (props: GameProps, action: GameAction) => {
+    action.type === actionType && onSelectEpisode(props, action);
+  },
+};

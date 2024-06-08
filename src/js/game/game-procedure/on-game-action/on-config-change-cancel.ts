@@ -1,4 +1,5 @@
-import type { GameProps } from "../../game-props";
+import { GameAction } from "../../game-actions";
+import { GameProps } from "../../game-props";
 import { reflectSoundVolume } from "../reflect-sound-volume";
 import { startTitle } from "../start-title";
 
@@ -7,12 +8,20 @@ import { startTitle } from "../start-title";
  * @param props ゲームプロパティ
  * @returns 処理が完了したら発火するPromise
  */
-export async function onConfigChangeCancel(
-  props: Readonly<GameProps>,
-): Promise<void> {
+async function onConfigChangeCancel(props: Readonly<GameProps>): Promise<void> {
   await props.fader.fadeOut();
   const config = await props.config.load();
   await reflectSoundVolume(props, config);
   await startTitle(props);
   await props.fader.fadeIn();
 }
+
+/** アクションタイプ */
+const actionType = "ConfigChangeCancel";
+
+/** 設定変更キャンセル時のイベントリスナーコンテナ */
+export const configChangeCancelContainer = {
+  [actionType]: (props: GameProps, action: GameAction) => {
+    action.type === actionType && onConfigChangeCancel(props);
+  },
+};

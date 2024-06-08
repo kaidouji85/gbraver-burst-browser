@@ -1,18 +1,18 @@
 import { isSoundConfigChanged } from "../../config/config-changed";
+import { GameAction } from "../../game-actions";
 import { ConfigChangeComplete } from "../../game-actions/config-change-complete";
-import type { GameProps } from "../../game-props";
+import { GameProps } from "../../game-props";
 import { reflectPerformanceStatsVisibility } from "../reflect-performance-stats-visibility";
 import { reflectSoundVolume } from "../reflect-sound-volume";
 import { startTitle } from "../start-title";
 
 /**
  * 設定変更完了時の処理
- *
  * @param props ゲームプロパティ
  * @param action アクション
  * @returns 処理が完了したら発火するPromise
  */
-export async function onConfigChangeComplete(
+async function onConfigChangeComplete(
   props: Readonly<GameProps>,
   action: ConfigChangeComplete,
 ): Promise<void> {
@@ -36,3 +36,13 @@ export async function onConfigChangeComplete(
   await startTitle(props);
   await props.fader.fadeIn();
 }
+
+/** アクションタイプ */
+const actionType = "ConfigChangeComplete";
+
+/** 設定変更完了時のイベントリスナーコンテナ */
+export const configChangeCompleteContainer = {
+  [actionType]: (props: GameProps, action: GameAction) => {
+    action.type === actionType && onConfigChangeComplete(props, action);
+  },
+};
