@@ -1,7 +1,7 @@
 import { GameAction } from "../../../game-actions";
 import { PostBattleAction } from "../../../game-actions/post-battle-action";
 import { GameProps } from "../../../game-props";
-import { InProgress } from "../../../in-progress/in-progress";
+import { InProgress } from "../../../in-progress";
 import { gotoEndingIfNeeded } from "./goto-ending-if-needed";
 import { gotoEpisodeIfNeeded } from "./goto-episode-if-needed";
 import { gotoEpisodeSelectorIfNeeded } from "./goto-episode-selector-if-needed";
