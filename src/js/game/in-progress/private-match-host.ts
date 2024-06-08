@@ -18,7 +18,7 @@ export type PrivateMatchHostSubFlow = PlayerSelect | Battle;
 export type PrivateMatchHostX<X extends PrivateMatchHostSubFlow> = {
   type: "PrivateMatchHost";
   /** サブフロー */
-  privateMatchHost: X;
+  readonly privateMatchHost: X;
 };
 
 /** プライベートマッチ（ホスト） */

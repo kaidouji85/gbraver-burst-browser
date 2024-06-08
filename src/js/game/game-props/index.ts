@@ -18,7 +18,7 @@ import { Resize } from "../../window/resize";
 import { GBraverBurstBrowserConfigRepository } from "../config/repository/repository";
 import { DOMFloaters } from "../dom-floaters/dom-floaters";
 import { FutureSuddenlyBattleEnd } from "../future-suddenly-battle-end";
-import { InProgress } from "../in-progress/in-progress";
+import { InProgress } from "../in-progress";
 import { InterruptScenes } from "../innterrupt-scenes";
 import { GameActionManageContainer } from "./game-action-manage-container";
 

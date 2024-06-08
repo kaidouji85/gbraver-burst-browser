@@ -1,6 +1,6 @@
 import { SelectionComplete } from "../../../game-actions/selection-complete";
 import { GameProps } from "../../../game-props";
-import { InProgress } from "../../../in-progress/in-progress";
+import { InProgress } from "../../../in-progress";
 import { startOnlineBattle } from "../../start-online-battle";
 import { waitUntilCasualMatching } from "../../wait-until-casual-matching";
 

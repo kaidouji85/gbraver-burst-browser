@@ -2,7 +2,7 @@ import { PrivateMatchGuestDialog } from "../../../../dom-dialogs/private-match-g
 import { privateMatchGuestDialogConnector } from "../../../action-connector/private-match-guest-dialog-connector";
 import { SelectionComplete } from "../../../game-actions/selection-complete";
 import { GameProps } from "../../../game-props";
-import { InProgress } from "../../../in-progress/in-progress";
+import { InProgress } from "../../../in-progress";
 
 /** プライベートマッチ（ゲスト）を開始した */
 type IsPrivateMatchGuestStarted = {
