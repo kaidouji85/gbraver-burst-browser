@@ -13,7 +13,7 @@ async function onExitMailVerifiedIncomplete(
 }
 
 /** アクションタイプ */
-const actionType = "ExitMailVerifiedIncomplete" as const;
+const actionType = "ExitMailVerifiedIncomplete";
 
 /** メール認証未完了画面を抜ける時のリスナー */
 export const exitMailVerifiedIncompleteListener = {

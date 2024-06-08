@@ -13,7 +13,7 @@ async function onReloadRequest(props: Readonly<GameProps>): Promise<void> {
 }
 
 /** アクションタイプ */
-const actionType = "ReloadRequest" as const;
+const actionType = "ReloadRequest";
 
 /** 画面リロード依頼時のリスナー */
 export const reloadRequestListener: { [key: string]: GameActionListener } = {

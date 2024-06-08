@@ -1,3 +1,4 @@
+import { GameAction } from "../../../game-actions";
 import { PostBattleAction } from "../../../game-actions/post-battle-action";
 import { GameProps } from "../../../game-props";
 import { gotoEndingIfNeeded } from "./goto-ending-if-needed";
@@ -9,12 +10,11 @@ import { gotoTitleIfNeeded } from "./goto-title-if-needed";
 /**
  * 戦闘終了後アクション決定時の処理
  * 本関数にはpropsを変更する副作用がある
- *
  * @param props ゲームプロパティ
  * @param action アクション
  * @returns 処理が完了したら発火するPromise
  */
-export async function onPostBattleAction(
+async function onPostBattleAction(
   props: GameProps,
   action: PostBattleAction,
 ): Promise<void> {
@@ -50,3 +50,13 @@ export async function onPostBattleAction(
     return;
   }
 }
+
+/** アクションタイプ */
+const actionType = "PostBattleAction";
+
+/** 戦闘終了後アクションのリスナー */
+export const postBattleActionLister = {
+  [actionType]: (props: GameProps, action: GameAction) => {
+    action.type === actionType && onPostBattleAction(props, action);
+  },
+};

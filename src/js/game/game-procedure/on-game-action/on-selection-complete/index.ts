@@ -1,5 +1,6 @@
+import { GameAction } from "../../../game-actions";
 import { SelectionComplete } from "../../../game-actions/selection-complete";
-import type { GameProps } from "../../../game-props";
+import { GameProps } from "../../../game-props";
 import { startCasualMatchIfNeeded } from "./start-casual-match-start-if-needed";
 import { startDifficultySelectionIfNeeded } from "./start-difficulty-selection-if-needed";
 import { startPrivateMatchGuestIfNeeded } from "./start-private-match-guest-if-needed";
@@ -12,7 +13,7 @@ import { startPrivateMatchHostIfNeeded } from "./start-private-match-host-if-nee
  * @param action アクション
  * @returns 処理が完了したら発火するPromise
  */
-export async function onSelectionComplete(
+async function onSelectionComplete(
   props: GameProps,
   action: Readonly<SelectionComplete>,
 ): Promise<void> {
@@ -42,3 +43,13 @@ export async function onSelectionComplete(
     return;
   }
 }
+
+/** アクションタイプ */
+const actionType = "SelectionComplete";
+
+/** プレイヤーキャラクター選択完了のリスナー */
+export const selectionCompleteListener = {
+  [actionType]: (props: GameProps, action: GameAction) => {
+    action.type === actionType && onSelectionComplete(props, action);
+  },
+};

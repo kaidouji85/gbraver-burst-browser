@@ -3,6 +3,7 @@ import { waitTime } from "../../../wait/wait-time";
 import { GameProps } from "../../game-props";
 import { bindPlayerSelectAccordingToConfig } from "../bind-player-select-according-to-config";
 import { loadFullResource } from "../load-full-resource";
+import {GameAction} from "../../game-actions";
 
 /**
  * アーケードモード開始
@@ -29,3 +30,13 @@ export async function onArcadeStart(props: GameProps): Promise<void> {
   ]);
   await props.fader.fadeIn();
 }
+
+/** アクションタイプ */
+const actionType = "ArcadeStart";
+
+/** アーケードモード開始のリスナー */
+export const arcadeStartListener = {
+  [actionType]: (props: GameProps, action: GameAction) => {
+    action.type === actionType && onArcadeStart(props);
+  },
+};
