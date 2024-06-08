@@ -46,6 +46,6 @@ export function isConfigChanged(
     origin.battleAnimationTimeScale !== update.battleAnimationTimeScale ||
     origin.battleControllerType !== update.battleControllerType ||
     isSoundConfigChanged(origin, update) ||
-    origin.performanceStatsVisibility !== update.performanceStatsVisibility
+    isPerformanceStatsVisibilityChanged(origin, update)
   );
 }
