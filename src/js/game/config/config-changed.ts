@@ -25,7 +25,9 @@ export function isPerformanceStatsVisibilityChanged(
   origin: GBraverBurstBrowserConfig,
   update: GBraverBurstBrowserConfig,
 ): boolean {
-  return origin.performanceStatsVisibility !== update.performanceStatsVisibility;
+  return (
+    origin.performanceStatsVisibility !== update.performanceStatsVisibility
+  );
 }
 
 /**
