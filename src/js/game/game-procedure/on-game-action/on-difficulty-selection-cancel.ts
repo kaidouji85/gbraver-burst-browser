@@ -8,21 +8,15 @@ import { GameProps } from "../../game-props";
  */
 function onDifficultySelectionCancel(props: GameProps): void {
   if (
-    !(
-      props.inProgress.type === "NPCBattle" &&
-      props.inProgress.npcBattle.type === "DifficultySelect"
-    )
+    props.inProgress.type === "NPCBattle" &&
+    props.inProgress.npcBattle.type === "DifficultySelect"
   ) {
-    return;
+    props.inProgress = {
+      ...props.inProgress,
+      npcBattle: { type: "PlayerSelect" },
+    };
+    props.domDialogBinder.hidden();
   }
-
-  props.inProgress = {
-    ...props.inProgress,
-    npcBattle: {
-      type: "PlayerSelect",
-    },
-  };
-  props.domDialogBinder.hidden();
 }
 
 /** アクションタイプ */
