@@ -19,9 +19,7 @@ async function onCasualMatchStart(props: GameProps): Promise<void> {
 
   props.inProgress = {
     type: "CasualMatch",
-    casualMatch: {
-      type: "PlayerSelect",
-    },
+    casualMatch: { type: "PlayerSelect" },
   };
   await props.fader.fadeOut();
   const config = await props.config.load();
