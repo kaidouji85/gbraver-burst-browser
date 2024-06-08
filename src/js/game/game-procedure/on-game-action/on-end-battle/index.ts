@@ -1,6 +1,7 @@
 import { parseBrowserConfig } from "../../../config/parser/browser-config";
+import { GameAction } from "../../../game-actions";
 import { EndBattle } from "../../../game-actions/end-battle";
-import type { GameProps } from "../../../game-props";
+import { GameProps } from "../../../game-props";
 import { executePostEpisodeIfNeeded } from "./execute-post-episode-if-needed";
 import { executePostNetBattleIfNeeded } from "./execute-post-net-battle-if-needed";
 import { executePostNPCBattleIfNeeded } from "./execute-post-npc-baattle-if-needed";
@@ -11,7 +12,7 @@ import { executePostNPCBattleIfNeeded } from "./execute-post-npc-baattle-if-need
  * @param action アクション
  * @returns 処理が完了したら発火するPromise
  */
-export async function onEndBattle(
+async function onEndBattle(
   props: GameProps,
   action: Readonly<EndBattle>,
 ): Promise<void> {
@@ -41,3 +42,13 @@ export async function onEndBattle(
     return;
   }
 }
+
+/** アクションタイプ */
+const actionType = "EndBattle" as const;
+
+/** 戦闘終了時のリスナー */
+export const endBattleListener = {
+  [actionType]: (props: GameProps, action: GameAction) => {
+    action.type === actionType && onEndBattle(props, action);
+  },
+};

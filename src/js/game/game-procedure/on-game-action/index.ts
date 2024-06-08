@@ -1,5 +1,6 @@
 import { GameAction } from "../../game-actions";
 import { GameProps } from "../../game-props";
+import { GameActionListener } from "./game-action-listener";
 import { onAccountDeleteConsent } from "./on-account-delete-consent";
 import { onArcadeStart } from "./on-arcade-start";
 import { onCancelAccountDeletion } from "./on-cancel-account-deletion";
@@ -11,10 +12,10 @@ import { onConfigChangeStart } from "./on-config-change-start";
 import { onDeleteAccount } from "./on-delete-account";
 import { onDifficultySelectionCancel } from "./on-difficulty-selection-cancel";
 import { onDifficultySelectionComplete } from "./on-difficulty-selection-complete";
-import { onEndBattle } from "./on-end-battle";
+import { endBattleListener } from "./on-end-battle";
 import { onEndNetworkError } from "./on-end-network-error";
 import { onEndNPCEnding } from "./on-end-npc-ending";
-import { onExitMailVerifiedIncomplete } from "./on-exit-mai-verified-incomplete";
+import { exitMailVerifiedIncompleteListener } from "./on-exit-mai-verified-incomplete";
 import { onLoginCancel } from "./on-login-cancel";
 import { onLogout } from "./on-logout";
 import { onMatchingCanceled } from "./on-matching-cancel";
@@ -24,7 +25,7 @@ import { onPostBattleAction } from "./on-post-battle";
 import { onPrivateMatchEntry } from "./on-private-match-entry";
 import { onPrivateMatchGuestStart } from "./on-private-match-guest-start";
 import { onPrivateMatchHostStart } from "./on-private-match-host-start";
-import { onReloadRequest } from "./on-reload-request";
+import { reloadRequestListener } from "./on-reload-request";
 import { onSelectEpisode } from "./on-select-episode";
 import { onSelectionCancel } from "./on-selection-cancel";
 import { onSelectionComplete } from "./on-selection-complete";
@@ -35,20 +36,22 @@ import { onVisibilityChange } from "./on-visibility-change";
 import { onWebSocketAPIError } from "./on-websocker-api-error";
 import { onWithdrawPrivateMatchEntry } from "./on-withdraw-private-match-entry";
 
+/** ゲームアクションリスナーをあつめたもの */
+const gameActionListeners: { [key in string]: GameActionListener } = {
+  ...reloadRequestListener,
+  ...exitMailVerifiedIncompleteListener,
+  ...endBattleListener,
+};
+
 /**
  * ゲームアクション発生時の処理
- *
  * @param props ゲームプロパティ
  * @param action 発生したアクション
  */
 export function onGameAction(props: GameProps, action: GameAction) {
-  if (action.type === "ReloadRequest") {
-    onReloadRequest(props);
-  } else if (action.type === "ExitMailVerifiedIncomplete") {
-    onExitMailVerifiedIncomplete(props);
-  } else if (action.type === "EndBattle") {
-    onEndBattle(props, action);
-  } else if (action.type === "SuddenlyBattleEnd") {
+  gameActionListeners[action.type]?.(props, action);
+
+  if (action.type === "SuddenlyBattleEnd") {
     onSuddenlyEndBattle(props);
   } else if (action.type === "PostBattleAction") {
     onPostBattleAction(props, action);
