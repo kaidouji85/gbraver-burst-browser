@@ -2,35 +2,35 @@ import { GameAction } from "../../game-actions";
 import { GameProps } from "../../game-props";
 import { GameActionListener } from "./game-action-listener";
 import { onAccountDeleteConsent } from "./on-account-delete-consent";
-import { arcadeStartListener } from "./on-arcade-start";
+import { arcadeStartContainer } from "./on-arcade-start";
 import { onCancelAccountDeletion } from "./on-cancel-account-deletion";
 import { onCancelTutorialSelect } from "./on-cancel-tutorial-select";
-import { casualMatchStartListener } from "./on-casual-match-start";
+import { casualMatchStartContainer } from "./on-casual-match-start";
 import { onConfigChangeCancel } from "./on-config-change-cancel";
 import { onConfigChangeComplete } from "./on-config-change-complete";
 import { onConfigChangeStart } from "./on-config-change-start";
 import { onDeleteAccount } from "./on-delete-account";
 import { onDifficultySelectionCancel } from "./on-difficulty-selection-cancel";
-import { difficultySelectionCompleteListener } from "./on-difficulty-selection-complete";
-import { endBattleListener } from "./on-end-battle";
+import { difficultySelectionCompleteContainer } from "./on-difficulty-selection-complete";
+import { endBattleContainer } from "./on-end-battle";
 import { onEndNetworkError } from "./on-end-network-error";
 import { onEndNPCEnding } from "./on-end-npc-ending";
-import { exitMailVerifiedIncompleteListener } from "./on-exit-mai-verified-incomplete";
+import { exitMailVerifiedIncompleteContainer } from "./on-exit-mai-verified-incomplete";
 import { onLoginCancel } from "./on-login-cancel";
 import { onLogout } from "./on-logout";
-import { matchingCanceledListener } from "./on-matching-cancel";
+import { matchingCanceledContainer } from "./on-matching-cancel";
 import { onNetBattleCancel } from "./on-net-battle-cancel";
 import { onNetBattleStart } from "./on-net-battle-start";
-import { postBattleActionLister } from "./on-post-battle";
+import { postBattleActionContainer } from "./on-post-battle";
 import { onPrivateMatchEntry } from "./on-private-match-entry";
 import { onPrivateMatchGuestStart } from "./on-private-match-guest-start";
 import { onPrivateMatchHostStart } from "./on-private-match-host-start";
-import { reloadRequestListener } from "./on-reload-request";
+import { reloadRequestContainer } from "./on-reload-request";
 import { onSelectEpisode } from "./on-select-episode";
-import { selectionCancelListener } from "./on-selection-cancel";
-import { selectionCompleteListener } from "./on-selection-complete";
+import { selectionCancelContainer } from "./on-selection-cancel";
+import { selectionCompleteContainer } from "./on-selection-complete";
 import { onStoryStart } from "./on-story-start";
-import { suddenlyBattleEndListener } from "./on-suddenly-battle-end";
+import { suddenlyBattleEndContainer } from "./on-suddenly-battle-end";
 import { onUniversalLogin } from "./on-universal-login";
 import { onVisibilityChange } from "./on-visibility-change";
 import { onWebSocketAPIError } from "./on-websocker-api-error";
@@ -38,17 +38,17 @@ import { onWithdrawPrivateMatchEntry } from "./on-withdraw-private-match-entry";
 
 /** ゲームアクションリスナーをあつめたもの */
 const gameActionListeners: { [key in string]: GameActionListener } = {
-  ...reloadRequestListener,
-  ...exitMailVerifiedIncompleteListener,
-  ...endBattleListener,
-  ...suddenlyBattleEndListener,
-  ...postBattleActionLister,
-  ...arcadeStartListener,
-  ...casualMatchStartListener,
-  ...matchingCanceledListener,
-  ...selectionCompleteListener,
-  ...selectionCancelListener,
-  ...difficultySelectionCompleteListener,
+  ...reloadRequestContainer,
+  ...exitMailVerifiedIncompleteContainer,
+  ...endBattleContainer,
+  ...suddenlyBattleEndContainer,
+  ...postBattleActionContainer,
+  ...arcadeStartContainer,
+  ...casualMatchStartContainer,
+  ...matchingCanceledContainer,
+  ...selectionCompleteContainer,
+  ...selectionCancelContainer,
+  ...difficultySelectionCompleteContainer,
 };
 
 /**

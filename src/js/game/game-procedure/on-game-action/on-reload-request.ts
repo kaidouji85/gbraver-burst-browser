@@ -15,8 +15,8 @@ async function onReloadRequest(props: Readonly<GameProps>): Promise<void> {
 /** アクションタイプ */
 const actionType = "ReloadRequest";
 
-/** 画面リロード依頼時のリスナー */
-export const reloadRequestListener: { [key: string]: GameActionListener } = {
+/** 画面リロード依頼時のリスナーコンテナ */
+export const reloadRequestContainer: { [key: string]: GameActionListener } = {
   [actionType]: (props: GameProps, action: GameAction) => {
     action.type === actionType && onReloadRequest(props);
   },

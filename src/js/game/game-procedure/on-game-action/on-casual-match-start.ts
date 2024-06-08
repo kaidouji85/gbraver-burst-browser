@@ -35,8 +35,8 @@ async function onCasualMatchStart(props: GameProps): Promise<void> {
 /** アクションタイプ */
 export const actionType = "CasualMatchStart";
 
-/** カジュアルマッチ開始のリスナー */
-export const casualMatchStartListener = {
+/** カジュアルマッチ開始のリスナーコンテナ */
+export const casualMatchStartContainer = {
   [actionType]: (props: GameProps, action: GameAction) => {
     action.type === actionType && onCasualMatchStart(props);
   },

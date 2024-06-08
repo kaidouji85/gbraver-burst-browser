@@ -20,8 +20,8 @@ async function onMatchingCanceled(
 /** アクションタイプ */
 const actionType = "MatchingCanceled";
 
-/** マッチング中止のリスナー */
-export const matchingCanceledListener = {
+/** マッチング中止のリスナーコンテナ */
+export const matchingCanceledContainer = {
   [actionType]: (props: GameProps, action: GameAction) => {
     action.type === actionType && onMatchingCanceled(props);
   },

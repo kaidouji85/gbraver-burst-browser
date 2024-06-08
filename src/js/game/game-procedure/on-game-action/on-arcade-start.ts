@@ -34,8 +34,8 @@ export async function onArcadeStart(props: GameProps): Promise<void> {
 /** アクションタイプ */
 const actionType = "ArcadeStart";
 
-/** アーケードモード開始のリスナー */
-export const arcadeStartListener = {
+/** アーケードモード開始のリスナーコンテナ */
+export const arcadeStartContainer = {
   [actionType]: (props: GameProps, action: GameAction) => {
     action.type === actionType && onArcadeStart(props);
   },

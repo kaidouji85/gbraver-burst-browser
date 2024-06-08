@@ -47,8 +47,8 @@ async function onSelectionComplete(
 /** アクションタイプ */
 const actionType = "SelectionComplete";
 
-/** プレイヤーキャラクター選択完了のリスナー */
-export const selectionCompleteListener = {
+/** プレイヤーキャラクター選択完了のリスナーコンテナ */
+export const selectionCompleteContainer = {
   [actionType]: (props: GameProps, action: GameAction) => {
     action.type === actionType && onSelectionComplete(props, action);
   },

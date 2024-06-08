@@ -20,8 +20,8 @@ async function onSelectionCancel(props: GameProps): Promise<void> {
 /** アクションタイプ */
 const actionType = "SelectionCancel";
 
-/** プレイヤー選択がキャンセルされた時のイベントリスナー */
-export const selectionCancelListener = {
+/** プレイヤー選択がキャンセルされた時のイベントリスナーコンテナ */
+export const selectionCancelContainer = {
   [actionType]: (props: GameProps, action: GameAction) => {
     action.type === actionType && onSelectionCancel(props);
   },

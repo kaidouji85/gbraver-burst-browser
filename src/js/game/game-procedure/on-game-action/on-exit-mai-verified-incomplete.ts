@@ -15,8 +15,8 @@ async function onExitMailVerifiedIncomplete(
 /** アクションタイプ */
 const actionType = "ExitMailVerifiedIncomplete";
 
-/** メール認証未完了画面を抜ける時のリスナー */
-export const exitMailVerifiedIncompleteListener = {
+/** メール認証未完了画面抜け処理のリスナーコンテナ */
+export const exitMailVerifiedIncompleteContainer = {
   [actionType]: (props: GameProps, action: GameAction) => {
     action.type === actionType && onExitMailVerifiedIncomplete(props);
   },

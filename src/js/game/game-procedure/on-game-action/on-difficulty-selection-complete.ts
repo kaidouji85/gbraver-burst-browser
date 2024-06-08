@@ -63,8 +63,8 @@ export async function onDifficultySelectionComplete(
 /** アクションタイプ */
 const actionType = "DifficultySelectionComplete";
 
-/** 難易度選択完了時のイベントリスナー */
-export const difficultySelectionCompleteListener = {
+/** 難易度選択完了時イベントのリスナーコンテナ */
+export const difficultySelectionCompleteContainer = {
   [actionType]: (props: GameProps, action: GameAction) => {
     action.type === actionType && onDifficultySelectionComplete(props, action);
   },

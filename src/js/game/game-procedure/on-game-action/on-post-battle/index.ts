@@ -54,8 +54,8 @@ async function onPostBattleAction(
 /** アクションタイプ */
 const actionType = "PostBattleAction";
 
-/** 戦闘終了後アクションのリスナー */
-export const postBattleActionLister = {
+/** 戦闘終了後アクションのリスナーコンテナ */
+export const postBattleActionContainer = {
   [actionType]: (props: GameProps, action: GameAction) => {
     action.type === actionType && onPostBattleAction(props, action);
   },
