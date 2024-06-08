@@ -17,10 +17,8 @@ async function onPrivateMatchEntry(
   action: PrivateMatchEntry,
 ): Promise<void> {
   if (
-    !(
-      props.inProgress.type === "PrivateMatchGuest" &&
-      props.inProgress.privateMatchGuest.type === "Entry"
-    )
+    props.inProgress.type !== "PrivateMatchGuest" ||
+    props.inProgress.privateMatchGuest.type !== "Entry"
   ) {
     return;
   }
