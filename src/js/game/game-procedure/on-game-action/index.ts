@@ -11,7 +11,7 @@ import { onConfigChangeComplete } from "./on-config-change-complete";
 import { onConfigChangeStart } from "./on-config-change-start";
 import { onDeleteAccount } from "./on-delete-account";
 import { onDifficultySelectionCancel } from "./on-difficulty-selection-cancel";
-import { onDifficultySelectionComplete } from "./on-difficulty-selection-complete";
+import { difficultySelectionCompleteListener } from "./on-difficulty-selection-complete";
 import { endBattleListener } from "./on-end-battle";
 import { onEndNetworkError } from "./on-end-network-error";
 import { onEndNPCEnding } from "./on-end-npc-ending";
@@ -27,7 +27,7 @@ import { onPrivateMatchGuestStart } from "./on-private-match-guest-start";
 import { onPrivateMatchHostStart } from "./on-private-match-host-start";
 import { reloadRequestListener } from "./on-reload-request";
 import { onSelectEpisode } from "./on-select-episode";
-import { onSelectionCancel } from "./on-selection-cancel";
+import { selectionCancelListener } from "./on-selection-cancel";
 import { selectionCompleteListener } from "./on-selection-complete";
 import { onStoryStart } from "./on-story-start";
 import { suddenlyBattleEndListener } from "./on-suddenly-battle-end";
@@ -47,6 +47,8 @@ const gameActionListeners: { [key in string]: GameActionListener } = {
   ...casualMatchStartListener,
   ...matchingCanceledListener,
   ...selectionCompleteListener,
+  ...selectionCancelListener,
+  ...difficultySelectionCompleteListener,
 };
 
 /**
@@ -57,11 +59,7 @@ const gameActionListeners: { [key in string]: GameActionListener } = {
 export function onGameAction(props: GameProps, action: GameAction) {
   gameActionListeners[action.type]?.(props, action);
 
-  if (action.type === "SelectionCancel") {
-    onSelectionCancel(props);
-  } else if (action.type === "DifficultySelectionComplete") {
-    onDifficultySelectionComplete(props, action);
-  } else if (action.type === "DifficultySelectionCancel") {
+  if (action.type === "DifficultySelectionCancel") {
     onDifficultySelectionCancel(props);
   } else if (action.type === "EndNPCEnding") {
     onEndNPCEnding(props);
