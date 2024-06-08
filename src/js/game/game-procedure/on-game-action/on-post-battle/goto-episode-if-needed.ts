@@ -13,16 +13,16 @@ export async function gotoEpisodeIfNeeded(
   props: Readonly<GameProps>,
   action: Readonly<PostBattleAction>,
 ): Promise<boolean> {
+  let isDone = false;
   if (
-    action.action.type !== "Retry" ||
-    props.inProgress.type !== "Story" ||
-    props.inProgress.story.type !== "PlayingEpisode"
+    action.action.type === "Retry" &&
+    props.inProgress.type === "Story" &&
+    props.inProgress.story.type === "PlayingEpisode"
   ) {
-    return false;
+    const playingEpisode: PlayingEpisode = props.inProgress.story;
+    props.domFloaters.hiddenPostBattle();
+    await startEpisode(props, playingEpisode.episode);
+    isDone = true;
   }
-
-  const playingEpisode: PlayingEpisode = props.inProgress.story;
-  props.domFloaters.hiddenPostBattle();
-  await startEpisode(props, playingEpisode.episode);
-  return true;
+  return isDone;
 }

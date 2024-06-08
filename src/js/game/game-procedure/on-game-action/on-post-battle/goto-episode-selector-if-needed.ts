@@ -14,20 +14,17 @@ export async function gotoEpisodeSelectorIfNeeded(
   props: Readonly<GameProps>,
   action: Readonly<PostBattleAction>,
 ): Promise<boolean> {
-  if (action.action.type !== "GotoEpisodeSelect") {
-    return false;
-  }
-
+  let isDone = false;
   if (
-    props.inProgress.type !== "Story" ||
-    props.inProgress.story.type !== "PlayingEpisode"
+    action.action.type === "GotoEpisodeSelect" &&
+    props.inProgress.type === "Story" &&
+    props.inProgress.story.type === "PlayingEpisode"
   ) {
-    return false;
+    const playingEpisode: PlayingEpisode = props.inProgress.story;
+    props.domFloaters.hiddenPostBattle();
+    await startEpisodeSelector(props, playingEpisode.episode.id);
+    playTitleBGM(props);
+    isDone = true;
   }
-
-  const playingEpisode: PlayingEpisode = props.inProgress.story;
-  props.domFloaters.hiddenPostBattle();
-  await startEpisodeSelector(props, playingEpisode.episode.id);
-  playTitleBGM(props);
-  return true;
+  return isDone;
 }
