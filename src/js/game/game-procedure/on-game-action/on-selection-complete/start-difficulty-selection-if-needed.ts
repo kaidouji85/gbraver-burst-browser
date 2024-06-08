@@ -10,17 +10,16 @@ import { GameProps } from "../../../game-props";
  * @returns 難易度選択を開始したか否か、trueで開始した
  */
 export async function startDifficultySelectionIfNeeded(
-  props: Readonly<GameProps>,
-  action: Readonly<SelectionComplete>,
+  props: GameProps,
+  action: SelectionComplete,
 ): Promise<boolean> {
   if (props.inProgress.type !== "NPCBattle") {
     return false;
   }
 
-  props.inProgress.npcBattle = {
-    type: "DifficultySelect",
-    armdozerId: action.armdozerId,
-    pilotId: action.pilotId,
+  props.inProgress = {
+    ...props.inProgress,
+    npcBattle: { ...action, type: "DifficultySelect" },
   };
   props.domDialogBinder.bind(
     new DifficultyDialog(props),

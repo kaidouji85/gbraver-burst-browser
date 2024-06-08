@@ -1,14 +1,4 @@
-import type { Episode } from "../episodes/episode";
-
-/** ストーリーモード */
-export type Story = {
-  type: "Story";
-  /** サブフロー */
-  story: StorySubFLow;
-};
-
-/** ストーリーモードのサブフロー */
-type StorySubFLow = EpisodeSelect | PlayingEpisode;
+import { Episode } from "../episodes/episode";
 
 /** エピソード選択 */
 export type EpisodeSelect = {
@@ -19,5 +9,15 @@ export type EpisodeSelect = {
 export type PlayingEpisode = {
   type: "PlayingEpisode";
   /** プレイ中のエピソード */
-  episode: Episode;
+  readonly episode: Episode;
+};
+
+/** ストーリーモードのサブフロー */
+type StorySubFLow = EpisodeSelect | PlayingEpisode;
+
+/** ストーリーモード */
+export type Story = {
+  type: "Story";
+  /** サブフロー */
+  readonly story: StorySubFLow;
 };

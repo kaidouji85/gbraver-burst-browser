@@ -42,7 +42,10 @@ async function onPrivateMatchEntry(
     return;
   }
 
-  props.inProgress.privateMatchGuest = { type: "Battle" };
+  props.inProgress = {
+    ...props.inProgress,
+    privateMatchGuest: { type: "Battle" },
+  };
   await startOnlineBattle(props, battle, "PRIVATE MATCH");
 }
 

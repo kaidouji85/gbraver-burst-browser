@@ -11,15 +11,15 @@ export type PlayerSelect = {
 export type DifficultySelect = {
   type: "DifficultySelect";
   /** 選択したアームドーザ */
-  armdozerId: ArmdozerId;
+  readonly armdozerId: ArmdozerId;
   /** 選択したパイロット */
-  pilotId: PilotId;
+  readonly pilotId: PilotId;
 };
 
 /** NPCバトルプレイ中 */
 export type PlayingNPCBattle = {
   type: "PlayingNPCBattle";
-  state: NPCBattleState;
+  readonly state: NPCBattleState;
 };
 
 /** NPCバトルのサブフロー */
@@ -35,7 +35,7 @@ export type NPCBattleSubFlow =
 export type NPCBattleX<X> = {
   type: "NPCBattle";
   /** サブフロー */
-  npcBattle: X;
+  readonly npcBattle: X;
 };
 
 /** NPCバトル */
