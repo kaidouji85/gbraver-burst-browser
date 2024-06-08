@@ -18,21 +18,19 @@ export async function gotoNPCBattleStageIfNeeded(
   props: Readonly<GameProps>,
   action: Readonly<PostBattleAction>,
 ): Promise<boolean> {
+  let isDone = false;
   if (
-    !(
-      props.inProgress.type === "NPCBattle" &&
-      props.inProgress.npcBattle.type === "PlayingNPCBattle"
-    ) ||
-    !(action.action.type === "NextStage" || action.action.type === "Retry")
+    props.inProgress.type === "NPCBattle" &&
+    props.inProgress.npcBattle.type === "PlayingNPCBattle" &&
+    (action.action.type === "NextStage" || action.action.type === "Retry")
   ) {
-    return false;
+    const state: NPCBattleState = props.inProgress.npcBattle.state;
+    const stage = getCurrentNPCStage(state) ?? DefaultStage;
+    const level = getNPCStageLevel(state);
+    const player = state.player;
+    props.domFloaters.hiddenPostBattle();
+    await startNPCBattleStage(props, player, stage, level);
+    isDone = true;
   }
-
-  const state: NPCBattleState = props.inProgress.npcBattle.state;
-  const stage = getCurrentNPCStage(state) ?? DefaultStage;
-  const level = getNPCStageLevel(state);
-  const player = state.player;
-  props.domFloaters.hiddenPostBattle();
-  await startNPCBattleStage(props, player, stage, level);
-  return true;
+  return isDone;
 }
