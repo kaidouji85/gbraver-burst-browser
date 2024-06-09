@@ -2,13 +2,14 @@ import { Animate } from "../../animation/animate";
 import {
   CustomBattleEvent,
   CustomStateAnimation,
-  LastState, StateUpdateStarted,
+  LastState,
+  StateUpdateStarted,
 } from "../../td-scenes/battle/custom-battle-event";
 import { EmptyCustomBattleEvent } from "../empty-custom-battle-event";
 import { beforeLastState } from "./procedure/before-last-state";
 import { createQueenOfTragedyProps } from "./procedure/create-queen-of-tragedy-props";
 import { onStateAnimation } from "./procedure/on-state-animation";
-import {onStateUpdateStarted} from "./procedure/on-state-update-started";
+import { onStateUpdateStarted } from "./procedure/on-state-update-started";
 import { QueenOfTragedyProps } from "./props";
 
 /** 悲劇の女王 イベント */
@@ -26,7 +27,10 @@ class QueenOfTragedy extends EmptyCustomBattleEvent {
 
   /** @override */
   async onStateUpdateStarted(props: StateUpdateStarted) {
-    this.#props.state = await onStateUpdateStarted({ ...props, ...this.#props });
+    this.#props.state = await onStateUpdateStarted({
+      ...props,
+      ...this.#props,
+    });
   }
 
   /** @override */
