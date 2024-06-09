@@ -33,7 +33,7 @@ export async function playStateHistory(
   props.customBattleEvent?.onStateUpdateStarted({
     ...props,
     update: gameStateHistory,
-    lastState
+    lastState,
   });
   const stateHistoryWithLastRemoved = gameStateHistory.slice(0, -1);
   await props.animatePlayer.play(
