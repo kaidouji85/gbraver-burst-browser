@@ -1,9 +1,9 @@
 import { CustomStateAnimation } from "../../../../td-scenes/battle/custom-battle-event";
+import { playerBattleCount } from "../../../battle-count";
 import { ConditionalAnimation } from "../../../get-animation-if-conditional-met";
 import { separatePlayersFromCurrentState } from "../../../separate-players";
-import { QueenOfTragedyProps } from "../../props";
-import { playerBattleCount } from "../../../battle-count";
 import { tsubasaFirstAttackShout } from "../../animation/tsubasa-first-attack-shout";
+import { QueenOfTragedyProps } from "../../props";
 
 /** ツバサ 攻撃 */
 export const tsubasaAttack: ConditionalAnimation<
