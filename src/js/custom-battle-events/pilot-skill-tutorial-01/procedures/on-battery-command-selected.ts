@@ -15,11 +15,7 @@ import { noZeroDefense } from "../stories/no-zero-defense";
 async function executeNoZeroDefenseIfNeeded(
   props: Readonly<BatteryCommandSelected>,
 ): Promise<boolean> {
-  const lastState = props.stateHistory[props.stateHistory.length - 1];
-  if (!lastState) {
-    return false;
-  }
-
+  const { lastState } = props;
   const player = lastState.players.find((v) => v.playerId === props.playerId);
   if (!player) {
     return false;

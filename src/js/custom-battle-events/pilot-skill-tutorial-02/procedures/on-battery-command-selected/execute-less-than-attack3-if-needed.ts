@@ -10,11 +10,7 @@ import { lessThanAttack3 } from "../../stories/less-than-attack3";
 export async function executeLessThanAttack3IfNeeded(
   props: Readonly<BatteryCommandSelected & PilotSkillTutorial02Props>,
 ): Promise<boolean> {
-  const lastState = props.stateHistory.at(-1);
-  if (lastState === undefined) {
-    return false;
-  }
-
+  const { lastState } = props;
   const player = lastState.players.find((p) => p.playerId === props.playerId);
   if (player === undefined) {
     return false;

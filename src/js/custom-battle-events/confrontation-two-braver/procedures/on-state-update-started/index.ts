@@ -13,7 +13,7 @@ import { isYuuyaSkillActivated } from "./is-yuuya-skill-activated";
 export function onStateUpdateStarted(
   props: Readonly<StateUpdateStarted & ConfrontationTwoBraverProps>,
 ): ConfrontationTwoBraverState {
-  const lastState = props.stateHistory.at(-1);
+  const { lastState } = props;
   const isPlayerTurn = lastState?.activePlayerId === props.playerId;
   if (
     isYuuyaSkillActivated(props) &&

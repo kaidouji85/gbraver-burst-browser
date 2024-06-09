@@ -13,11 +13,7 @@ import { doPilotSkill } from "../../stories/do-pilot-skill";
 export async function executeDoPilotSkillIfNeeded(
   props: Readonly<LastState & PilotSkillTutorial02Props>,
 ): Promise<boolean> {
-  const lastState = props.update.at(-1);
-  if (lastState === undefined) {
-    return false;
-  }
-
+  const { lastState } = props;
   const player = lastState.players.find((v) => v.playerId === props.playerId);
   if (player === undefined) {
     return false;

@@ -31,11 +31,7 @@ export async function doZeroBatteryIdNeeded(
     return null;
   }
 
-  const lastState = props.stateHistory.at(-1);
-  if (!lastState) {
-    return null;
-  }
-
+  const { lastState } = props;
   const separatedPlayers = separatePlayers(props, lastState);
   if (!separatedPlayers) {
     return null;

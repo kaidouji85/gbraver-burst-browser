@@ -13,11 +13,7 @@ import { shouldAttack3OrMore } from "../../stories/should-attack3-or-more";
 export async function executeShouldAttack3OrMoreIfNeeded(
   props: Readonly<LastState & PilotSkillTutorial02Props>,
 ): Promise<boolean> {
-  const lastState = props.update.at(-1);
-  if (lastState === undefined) {
-    return false;
-  }
-
+  const { lastState } = props;
   const player = lastState.players.find((v) => v.playerId === props.playerId);
   if (player === undefined) {
     return false;
