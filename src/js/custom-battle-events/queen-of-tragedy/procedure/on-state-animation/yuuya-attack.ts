@@ -2,7 +2,7 @@ import { Animate } from "../../../../animation/animate";
 import { CustomStateAnimation } from "../../../../td-scenes/battle/custom-battle-event";
 import { playerBattleCount } from "../../../battle-count";
 import { ConditionalAnimation } from "../../../get-animation-if-conditional-met";
-import { separatePlayersFromCurrentState } from "../../../separate-players";
+import { separatePlayers } from "../../../separate-players";
 import { yuuyaFirstAttackShout1 } from "../../animation/yuuya-first-attack-shout1";
 import { yuuyaFirstAttackShout2 } from "../../animation/yuuya-first-attack-shout2";
 import { yuuyaFullBatteryAttackOnTraumaOfLastYear } from "../../animation/yuuya-full-battery-attack-on-trauma-of-last-year";
@@ -13,38 +13,35 @@ export const yuuyaAttack: ConditionalAnimation<
   CustomStateAnimation & QueenOfTragedyProps
 >[] = [
   (props) => {
-    const player = separatePlayersFromCurrentState(props)?.player;
-    if (!player) {
+    const { stateHistory, currentState } = props;
+    const separatedPlayers = separatePlayers(props, currentState);
+    const player = separatedPlayers?.player;
+    const enemy = separatedPlayers?.enemy;
+    const isEnemyTurn = currentState.activePlayerId === enemy?.playerId;
+    if (!player || isEnemyTurn) {
       return null;
     }
 
     let result: Animate | null = null;
-    const { stateHistory, currentState } = props;
     const { chapter } = props.state;
-    const yuuyaBattleCount = playerBattleCount(stateHistory, player.playerId);
-    const isPlayerBatteryDeclaration =
-      currentState.effect.name === "BatteryDeclaration" &&
-      currentState.activePlayerId === player.playerId;
-    const isPlayerBattle =
-      currentState.effect.name === "Battle" &&
-      currentState.activePlayerId === player.playerId;
+    const battleCount = playerBattleCount(stateHistory, player.playerId);
 
     if (
-      yuuyaBattleCount === 1 &&
-      isPlayerBatteryDeclaration &&
-      chapter.type === "TraumaOfLastYear"
+      chapter.type === "TraumaOfLastYear" &&
+      battleCount === 1 &&
+      currentState.effect.name === "BatteryDeclaration"
     ) {
       result = yuuyaFullBatteryAttackOnTraumaOfLastYear(props);
     } else if (
-      yuuyaBattleCount === 1 &&
-      isPlayerBatteryDeclaration &&
-      chapter.type === "None"
+      chapter.type === "None" &&
+      battleCount === 1 &&
+      currentState.effect.name === "BatteryDeclaration"
     ) {
       result = yuuyaFirstAttackShout1(props);
     } else if (
-      yuuyaBattleCount === 1 &&
-      isPlayerBattle &&
-      chapter.type === "None"
+      chapter.type === "None" &&
+      battleCount === 1 &&
+      currentState.effect.name === "Battle"
     ) {
       result = yuuyaFirstAttackShout2(props);
     }
