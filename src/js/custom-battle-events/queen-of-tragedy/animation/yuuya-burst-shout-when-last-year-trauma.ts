@@ -4,17 +4,16 @@ import { CustomBattleEventProps } from "../../../td-scenes/battle/custom-battle-
 import { playerPilotOnlyShout } from "../../pilot-shout";
 
 /**
- * ユウヤ ファーストアタック 叫び1
- * @param props イベントプロパティ
- * @returns アニメーション
+ * ユウヤ バースト 叫び 去年のトラウマ
+ * @param props
  */
-export const yuuyaFirstAttackShout1 = (
+export const yuuyaBurstShoutWhenLastYearTrauma = (
   props: Readonly<CustomBattleEventProps>,
 ) =>
   onStart(() => {
     playerPilotOnlyShout(
       props,
       "Yuuya",
-      `この前から${wbr}どれほど${wbr}腕を${wbr}上げたのか`,
+      `どうだ 決勝戦の${wbr}トラウマが${wbr}蘇ったか`,
     );
   });

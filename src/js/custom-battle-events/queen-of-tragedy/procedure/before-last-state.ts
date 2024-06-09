@@ -19,18 +19,23 @@ export async function beforeLastState(
   let updated: QueenOfTragedyState = props.state;
 
   const { stateHistory } = props;
-  const lastState = stateHistory.at(-1);
   const separatedPlayers = separatePlayersFromLastState(props);
-  if (!lastState || !separatedPlayers) {
+  if (!separatedPlayers) {
     return updated;
   }
 
-  const { enemy } = separatedPlayers;
-  const turn = turnCount(props.stateHistory);
+  const { player, enemy } = separatedPlayers;
+  const turn = turnCount(stateHistory);
 
   if (turn === 1 && !updated.isIntroductionComplete) {
     await introduction(props);
     updated = { ...updated, isIntroductionComplete: true };
+  } else if (
+    turn === 2 &&
+    updated.chapter.type === "None" &&
+    player.armdozer.battery === 8
+  ) {
+    updated = { ...updated, chapter: { type: "TraumaOfLastYear" } };
   } else if (
     turn === 3 &&
     enemy.armdozer.hp <= 100 &&

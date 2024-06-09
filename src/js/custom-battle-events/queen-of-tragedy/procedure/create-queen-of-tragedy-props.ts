@@ -8,5 +8,6 @@ export const createQueenOfTragedyProps = (): QueenOfTragedyProps => ({
   state: {
     isIntroductionComplete: false,
     isNotRepeatMistakeComplete: false,
+    chapter: { type: "None" },
   },
 });
