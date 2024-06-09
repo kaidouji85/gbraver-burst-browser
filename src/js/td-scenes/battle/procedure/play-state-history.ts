@@ -26,13 +26,14 @@ export async function playStateHistory(
   props: Readonly<BattleSceneProps>,
   gameStateHistory: GameState[],
 ): Promise<void> {
-  if (gameStateHistory.length <= 0) {
+  const lastState = gameStateHistory.at(-1);
+  if (!lastState) {
     return;
   }
-
   props.customBattleEvent?.onStateUpdateStarted({
     ...props,
     update: gameStateHistory,
+    lastState,
   });
   const stateHistoryWithLastRemoved = gameStateHistory.slice(0, -1);
   await props.animatePlayer.play(
@@ -72,7 +73,6 @@ export async function playStateHistory(
       ),
   );
 
-  const lastState = gameStateHistory[gameStateHistory.length - 1];
   const eventProps = { ...props, update: gameStateHistory, lastState };
   await props.customBattleEvent?.beforeLastState(eventProps);
   await Promise.all([
