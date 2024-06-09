@@ -16,34 +16,28 @@ export async function beforeLastState(
   props: LastState & QueenOfTragedyProps,
 ): Promise<QueenOfTragedyState> {
   invisibleShoutMessageWindowWhenInputCommand(props);
-  let updated: QueenOfTragedyState = props.state;
+  let result: QueenOfTragedyState = props.state;
 
   const { stateHistory } = props;
   const separatedPlayers = separatePlayersFromLastState(props);
   if (!separatedPlayers) {
-    return updated;
+    return result;
   }
 
-  const { player, enemy } = separatedPlayers;
+  const { enemy } = separatedPlayers;
   const turn = turnCount(stateHistory);
 
-  if (turn === 1 && !updated.isIntroductionComplete) {
+  if (turn === 1 && !result.isIntroductionComplete) {
     await introduction(props);
-    updated = { ...updated, isIntroductionComplete: true };
-  } else if (
-    turn === 2 &&
-    updated.chapter.type === "None" &&
-    player.armdozer.battery === 8
-  ) {
-    updated = { ...updated, chapter: { type: "TraumaOfLastYear" } };
+    result = { ...result, isIntroductionComplete: true };
   } else if (
     turn === 3 &&
     enemy.armdozer.hp <= 100 &&
-    !updated.isNotRepeatMistakeComplete
+    !result.isNotRepeatMistakeComplete
   ) {
     await notRepeatMistake(props);
-    updated = { ...updated, isNotRepeatMistakeComplete: true };
+    result = { ...result, isNotRepeatMistakeComplete: true };
   }
 
-  return updated;
+  return result;
 }
