@@ -73,7 +73,7 @@ export async function playStateHistory(
   );
 
   const lastState = gameStateHistory[gameStateHistory.length - 1];
-  const eventProps = { ...props, update: gameStateHistory };
+  const eventProps = { ...props, update: gameStateHistory, lastState };
   await props.customBattleEvent?.beforeLastState(eventProps);
   await Promise.all([
     props.animatePlayer.play(stateAnimation(props, lastState)),

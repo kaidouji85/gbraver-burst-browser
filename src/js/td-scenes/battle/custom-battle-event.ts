@@ -46,6 +46,8 @@ export type CustomStateAnimation = CustomBattleEventProps & {
 export type LastState = CustomBattleEventProps & {
   /** コマンド入力から最終ステートまでのステート更新履歴 */
   readonly update: GameState[];
+  /** 最終ステート */
+  readonly lastState: GameState;
 };
 
 /** バッテリーコマンド選択イベントのプロパティ */
