@@ -30,6 +30,12 @@ export type CustomBattleEventProps = SEPlayerContainer & {
   readonly stateHistory: GameState[];
 };
 
+/** 最終ステートコンテナ */
+export type LastStateContainer = {
+  /** 最終ステート */
+  readonly lastState: GameState;
+};
+
 /** ステート更新開始イベントのプロパティ */
 export type StateUpdateStarted = CustomBattleEventProps & {
   /** コマンド入力から最終ステートまでのステート更新履歴 */
@@ -43,36 +49,32 @@ export type CustomStateAnimation = CustomBattleEventProps & {
 };
 
 /** 最終ステート系イベントのプロパティ */
-export type LastState = CustomBattleEventProps & {
-  /** コマンド入力から最終ステートまでのステート更新履歴 */
-  readonly update: GameState[];
-  /** 最終ステート */
-  readonly lastState: GameState;
-};
+export type LastState = CustomBattleEventProps &
+  LastStateContainer & {
+    /** コマンド入力から最終ステートまでのステート更新履歴 */
+    readonly update: GameState[];
+  };
 
 /** バッテリーコマンド選択イベントのプロパティ */
-export type BatteryCommandSelected = CustomBattleEventProps & {
-  /** プレイヤーが選択したバッテリーコマンド */
-  readonly battery: BatteryCommand;
-  /** 最終ステート */
-  readonly lastState: GameState;
-};
+export type BatteryCommandSelected = CustomBattleEventProps &
+  LastStateContainer & {
+    /** プレイヤーが選択したバッテリーコマンド */
+    readonly battery: BatteryCommand;
+  };
 
 /** バーストコマンド選択イベントのプロパティ */
-export type BurstCommandSelected = CustomBattleEventProps & {
-  /** プレイヤーが選択したバーストコマンド */
-  readonly burst: BurstCommand;
-  /** 最終ステート */
-  readonly lastState: GameState;
-};
+export type BurstCommandSelected = CustomBattleEventProps &
+  LastStateContainer & {
+    /** プレイヤーが選択したバーストコマンド */
+    readonly burst: BurstCommand;
+  };
 
 /** パイロットスキル選択イベントのプロパティ */
-export type PilotSkillCommandSelected = CustomBattleEventProps & {
-  /** プレイヤーが選択したパイロットスキルコマンド */
-  readonly pilot: PilotSkillCommand;
-  /** 最終ステート */
-  readonly lastState: GameState;
-};
+export type PilotSkillCommandSelected = CustomBattleEventProps &
+  LastStateContainer & {
+    /** プレイヤーが選択したパイロットスキルコマンド */
+    readonly pilot: PilotSkillCommand;
+  };
 
 /** コマンドキャンセル情報 */
 export type CommandCanceled = {

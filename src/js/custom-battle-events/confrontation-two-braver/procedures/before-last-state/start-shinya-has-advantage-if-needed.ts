@@ -1,4 +1,7 @@
-import { CustomBattleEventProps } from "../../../../td-scenes/battle/custom-battle-event";
+import {
+  CustomBattleEventProps,
+  LastStateContainer,
+} from "../../../../td-scenes/battle/custom-battle-event";
 import { isPlayerAdvantage } from "../../../is-player-advantage";
 import { separatePlayersFromLastState } from "../../../separate-players";
 import { turnCount } from "../../../turn-count";
@@ -11,7 +14,9 @@ import { shinyaMonologueWhenShinyaHasAdvantage } from "../../stories/shinya-mono
  * @returns チャプターを開始した場合、trueを返す
  */
 export async function startShinyaHasAdvantageIfNeeded(
-  props: Readonly<CustomBattleEventProps & ConfrontationTwoBraverProps>,
+  props: Readonly<
+    CustomBattleEventProps & LastStateContainer & ConfrontationTwoBraverProps
+  >,
 ): Promise<boolean> {
   const separatedPlayers = separatePlayersFromLastState(props);
   if (!separatedPlayers) {
