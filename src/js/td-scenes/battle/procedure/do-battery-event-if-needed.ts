@@ -14,10 +14,12 @@ export async function doBatteryEventIfNeeded(
   props: Readonly<BattleSceneProps>,
   battery: Readonly<BatteryCommand>,
 ): Promise<CommandCanceled> {
-  return props.customBattleEvent
+  const lastState = props.stateHistory.at(-1);
+  return props.customBattleEvent && lastState
     ? await props.customBattleEvent.onBatteryCommandSelected({
         ...props,
         battery,
+        lastState,
       })
     : { isCommandCanceled: false };
 }

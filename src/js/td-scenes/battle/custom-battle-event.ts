@@ -54,18 +54,24 @@ export type LastState = CustomBattleEventProps & {
 export type BatteryCommandSelected = CustomBattleEventProps & {
   /** プレイヤーが選択したバッテリーコマンド */
   readonly battery: BatteryCommand;
+  /** 最終ステート */
+  readonly lastState: GameState;
 };
 
 /** バーストコマンド選択イベントのプロパティ */
 export type BurstCommandSelected = CustomBattleEventProps & {
   /** プレイヤーが選択したバーストコマンド */
   readonly burst: BurstCommand;
+  /** 最終ステート */
+  readonly lastState: GameState;
 };
 
 /** パイロットスキル選択イベントのプロパティ */
 export type PilotSkillCommandSelected = CustomBattleEventProps & {
   /** プレイヤーが選択したパイロットスキルコマンド */
   readonly pilot: PilotSkillCommand;
+  /** 最終ステート */
+  readonly lastState: GameState;
 };
 
 /** コマンドキャンセル情報 */
