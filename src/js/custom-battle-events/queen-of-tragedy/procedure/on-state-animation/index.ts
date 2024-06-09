@@ -8,6 +8,7 @@ import { tsubasaAttack } from "./tsubasa-attack";
 import { tsubasaBurst } from "./tsubasa-burst";
 import { tsubasaPilotSkill } from "./tsubasa-pilot-skill";
 import { yuuyaAttack } from "./yuuya-attack";
+import {yuuyaBurst} from "./yuuya-burst";
 
 /**
  * カスタムステートアニメーション
@@ -20,6 +21,7 @@ export function onStateAnimation(
     ...tsubasaPilotSkill,
     ...tsubasaBurst,
     ...tsubasaAttack,
+    ...yuuyaBurst,
     ...yuuyaAttack,
     invisibleShoutMessageWindowWhenTurnChange,
   ];
