@@ -14,7 +14,7 @@ export function onStateUpdateStarted(
   props: Readonly<StateUpdateStarted & ConfrontationTwoBraverProps>,
 ): ConfrontationTwoBraverState {
   const { lastState } = props;
-  const isPlayerTurn = lastState?.activePlayerId === props.playerId;
+  const isPlayerTurn = lastState.activePlayerId === props.playerId;
   if (
     isYuuyaSkillActivated(props) &&
     props.state.chapter.type !== "YuuyaActivateSkillToSurvive" &&

@@ -47,9 +47,9 @@ export async function onBatteryCommandSelected(
   };
 
   const { lastState } = props;
-  const player = lastState?.players.find((p) => p.playerId === props.playerId);
-  const enemy = lastState?.players.find((p) => p.playerId !== props.playerId);
-  if (!lastState || !player || !enemy) {
+  const player = lastState.players.find((p) => p.playerId === props.playerId);
+  const enemy = lastState.players.find((p) => p.playerId !== props.playerId);
+  if (!player || !enemy) {
     return result;
   }
 
