@@ -38,16 +38,16 @@ export async function introduction(props: CustomBattleEventProps) {
   ]);
   props.view.dom.rightMessageWindow.darken();
 
-  await refreshConversation(props, 100);
+  await refreshConversation(props);
   activeRightMessageWindowWithFace(props, "Gai");
   await scrollRightMessages(props, [
-    ["ガイ", `「すごいぞ`],
+    ["ガイ", `「……すごい`],
     [
       `こんな所で${wbr}全国大会${wbr}1位と${wbr}2位の${wbr}戦いが${wbr}観られるなんて」`,
     ],
   ]);
 
-  await refreshConversation(props, 100);
+  await refreshConversation(props);
   activeRightMessageWindowWithFace(props, "Raito");
   props.view.dom.rightMessageWindow.messages(["ライト", "「双方 姿勢を正して"]);
   await synchronizedUpright(props).play();
