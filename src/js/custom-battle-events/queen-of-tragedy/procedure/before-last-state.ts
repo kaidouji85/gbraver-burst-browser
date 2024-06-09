@@ -1,6 +1,6 @@
 import { LastState } from "../../../td-scenes/battle/custom-battle-event";
 import { invisibleShoutMessageWindowWhenInputCommand } from "../../invisible-shout-message-window";
-import { separatePlayersFromLastState } from "../../separate-players";
+import { separatePlayers } from "../../separate-players";
 import { turnCount } from "../../turn-count";
 import { QueenOfTragedyProps } from "../props";
 import { QueenOfTragedyState } from "../state";
@@ -20,8 +20,8 @@ export async function beforeLastState(
 
   const { stateHistory } = props;
   const lastState = stateHistory.at(-1);
-  const separatedPlayers = separatePlayersFromLastState(props);
-  if (!lastState || !separatedPlayers) {
+  const separatedPlayers = lastState ? separatePlayers(props, lastState) : null;
+  if (!separatedPlayers) {
     return updated;
   }
 
