@@ -5,7 +5,9 @@ import { getAnimationIfConditionMet } from "../../../get-animation-if-conditiona
 import { invisibleShoutMessageWindowWhenTurnChange } from "../../../invisible-shout-message-window";
 import { QueenOfTragedyProps } from "../../props";
 import { tsubasaAttack } from "./tsubasa-attack";
+import { tsubasaBurst } from "./tsubasa-burst";
 import { tsubasaPilotSkill } from "./tsubasa-pilot-skill";
+import { yuuyaAttack } from "./yuuya-attack";
 
 /**
  * カスタムステートアニメーション
@@ -16,7 +18,9 @@ export function onStateAnimation(
 ): Animate {
   const conditionalAnimations = [
     ...tsubasaPilotSkill,
+    ...tsubasaBurst,
     ...tsubasaAttack,
+    ...yuuyaAttack,
     invisibleShoutMessageWindowWhenTurnChange,
   ];
   return getAnimationIfConditionMet(props, conditionalAnimations) ?? empty();
