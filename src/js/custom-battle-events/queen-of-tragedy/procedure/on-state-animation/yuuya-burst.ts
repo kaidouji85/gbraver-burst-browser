@@ -3,8 +3,8 @@ import { CustomStateAnimation } from "../../../../td-scenes/battle/custom-battle
 import { playerBattleCount } from "../../../battle-count";
 import { ConditionalAnimation } from "../../../get-animation-if-conditional-met";
 import { separatePlayersFromCurrentState } from "../../../separate-players";
-import { QueenOfTragedyProps } from "../../props";
 import { yuuyaBurstShoutWhenLastYearTrauma } from "../../animation/yuuya-burst-shout-when-last-year-trauma";
+import { QueenOfTragedyProps } from "../../props";
 
 /** ユウヤ バースト */
 export const yuuyaBurst: ConditionalAnimation<
