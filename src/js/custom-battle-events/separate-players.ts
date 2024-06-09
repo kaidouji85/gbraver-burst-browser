@@ -33,7 +33,6 @@ export function separatePlayers(
 }
 
 /**
- * @deprecated
  * 最終ステートからプレイヤーを自キャラ、敵に分割する
  * @param props カスタムバトルイベントプロパティ
  * @returns 分割されたプレイヤー、分割できない場合null
@@ -46,7 +45,6 @@ export function separatePlayersFromLastState(
 }
 
 /**
- * @deprecated
  * 現在ステートからプレイヤーを自キャラ、敵に分割する
  * @param props カスタムバトルイベントプロパティ
  * @returns 分割されたプレイヤー、分割できない場合null
