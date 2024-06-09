@@ -37,10 +37,11 @@ export type LastStateContainer = {
 };
 
 /** ステート更新開始イベントのプロパティ */
-export type StateUpdateStarted = CustomBattleEventProps & {
-  /** コマンド入力から最終ステートまでのステート更新履歴 */
-  readonly update: GameState[];
-};
+export type StateUpdateStarted = CustomBattleEventProps &
+  LastStateContainer & {
+    /** コマンド入力から最終ステートまでのステート更新履歴 */
+    readonly update: GameState[];
+  };
 
 /** カスタムステートアニメーションのプロパティ */
 export type CustomStateAnimation = CustomBattleEventProps & {
