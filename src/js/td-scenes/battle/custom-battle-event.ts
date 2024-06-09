@@ -33,7 +33,7 @@ export type CustomBattleEventProps = SEPlayerContainer & {
 /** ステート更新開始イベントのプロパティ */
 export type StateUpdateStarted = CustomBattleEventProps & {
   /** コマンド入力から最終ステートまでのステート更新履歴 */
-  update: GameState[];
+  readonly update: GameState[];
 };
 
 /** カスタムステートアニメーションのプロパティ */
@@ -45,31 +45,31 @@ export type CustomStateAnimation = CustomBattleEventProps & {
 /** 最終ステート系イベントのプロパティ */
 export type LastState = CustomBattleEventProps & {
   /** コマンド入力から最終ステートまでのステート更新履歴 */
-  update: GameState[];
+  readonly update: GameState[];
 };
 
 /** バッテリーコマンド選択イベントのプロパティ */
 export type BatteryCommandSelected = CustomBattleEventProps & {
   /** プレイヤーが選択したバッテリーコマンド */
-  battery: BatteryCommand;
+  readonly battery: BatteryCommand;
 };
 
 /** バーストコマンド選択イベントのプロパティ */
 export type BurstCommandSelected = CustomBattleEventProps & {
   /** プレイヤーが選択したバーストコマンド */
-  burst: BurstCommand;
+  readonly burst: BurstCommand;
 };
 
 /** パイロットスキル選択イベントのプロパティ */
 export type PilotSkillCommandSelected = CustomBattleEventProps & {
   /** プレイヤーが選択したパイロットスキルコマンド */
-  pilot: PilotSkillCommand;
+  readonly pilot: PilotSkillCommand;
 };
 
 /** コマンドキャンセル情報 */
 export type CommandCanceled = {
   /** プレイヤーが決定したコマンドをキャンセルするか、trueでキャンセルする */
-  isCommandCanceled: boolean;
+  readonly isCommandCanceled: boolean;
 };
 
 /** カスタムバトルイベント */
