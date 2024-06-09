@@ -46,10 +46,10 @@ export async function onBatteryCommandSelected(
     cancel: { isCommandCanceled: false },
   };
 
-  const lastState = props.stateHistory.at(-1);
-  const player = lastState?.players.find((p) => p.playerId === props.playerId);
-  const enemy = lastState?.players.find((p) => p.playerId !== props.playerId);
-  if (!lastState || !player || !enemy) {
+  const { lastState } = props;
+  const player = lastState.players.find((p) => p.playerId === props.playerId);
+  const enemy = lastState.players.find((p) => p.playerId !== props.playerId);
+  if (!player || !enemy) {
     return result;
   }
 

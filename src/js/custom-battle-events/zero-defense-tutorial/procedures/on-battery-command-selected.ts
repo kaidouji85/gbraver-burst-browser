@@ -1,6 +1,4 @@
-import type { GameState } from "gbraver-burst-core";
-
-import type {
+import {
   BatteryCommandSelected,
   CommandCanceled,
 } from "../../../td-scenes/battle/custom-battle-event";
@@ -12,7 +10,7 @@ import { focusInBurstButton, focusInPilotButton } from "../../focus";
 import { refreshConversation } from "../../invisible-all-message-windows";
 import { shouldBurst, shouldPilotSkill } from "../captions";
 import { ZeroDefenseTutorialProps } from "../props";
-import type { ZeroDefenseTutorialState } from "../state";
+import { ZeroDefenseTutorialState } from "../state";
 import {
   cancelZeroBatteryDefense,
   doBurstBecauseZeroBattery,
@@ -36,9 +34,8 @@ type Ret = {
 export async function onBatteryCommandSelected(
   props: Readonly<BatteryCommandSelected & ZeroDefenseTutorialProps>,
 ): Promise<Ret> {
-  const foundLastState = props.stateHistory[props.stateHistory.length - 1];
   const isNotZeroBatteryCommand = props.battery.battery !== 0;
-  if (!foundLastState || isNotZeroBatteryCommand) {
+  if (isNotZeroBatteryCommand) {
     return {
       state: props.state,
       cancel: {
@@ -47,7 +44,7 @@ export async function onBatteryCommandSelected(
     };
   }
 
-  const lastState: GameState = foundLastState;
+  const { lastState } = props;
   const iPlayerTurn = lastState.activePlayerId === props.playerId;
   const player = lastState.players.find((v) => v.playerId === props.playerId);
   if (iPlayerTurn || !player) {
