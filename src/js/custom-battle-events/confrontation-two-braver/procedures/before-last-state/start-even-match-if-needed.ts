@@ -1,4 +1,7 @@
-import { CustomBattleEventProps } from "../../../../td-scenes/battle/custom-battle-event";
+import {
+  CustomBattleEventProps,
+  LastStateContainer,
+} from "../../../../td-scenes/battle/custom-battle-event";
 import { isEvenMatch } from "../../../is-even-match";
 import { separatePlayersFromLastState } from "../../../separate-players";
 import { turnCount } from "../../../turn-count";
@@ -11,7 +14,9 @@ import { shinyaMonologueWhenEvenMatch } from "../../stories/shinya-monologue-whe
  * @returns チャプターを開始した場合、trueを返す
  */
 export async function startEvenMatchIfNeeded(
-  props: Readonly<CustomBattleEventProps & ConfrontationTwoBraverProps>,
+  props: Readonly<
+    CustomBattleEventProps & LastStateContainer & ConfrontationTwoBraverProps
+  >,
 ): Promise<boolean> {
   const separatedPlayers = separatePlayersFromLastState(props);
   if (!separatedPlayers) {

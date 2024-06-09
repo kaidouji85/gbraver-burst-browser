@@ -41,11 +41,7 @@ export function invisibleShoutMessageWindowWhenTurnChange(
 export function invisibleShoutMessageWindowWhenInputCommand(
   props: Readonly<LastState>,
 ): void {
-  const lastState = props.update.at(-1);
-  if (!lastState) {
-    return;
-  }
-
+  const { lastState } = props;
   if (lastState.effect.name !== "InputCommand") {
     return;
   }
@@ -70,11 +66,7 @@ export function invisibleShoutMessageWindowWhenInputCommand(
 export function invisibleShoutMessageWindowWhenGameEnd(
   props: Readonly<LastState>,
 ): void {
-  const lastState = props.update.at(-1);
-  if (!lastState) {
-    return;
-  }
-
+  const { lastState } = props;
   if (lastState.effect.name === "GameEnd") {
     invisibleShoutMessageWindow(props);
   }
