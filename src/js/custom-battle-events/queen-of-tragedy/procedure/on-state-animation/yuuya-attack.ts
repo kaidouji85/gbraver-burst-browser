@@ -2,7 +2,6 @@ import { Animate } from "../../../../animation/animate";
 import { CustomStateAnimation } from "../../../../td-scenes/battle/custom-battle-event";
 import { playerBattleCount } from "../../../battle-count";
 import { ConditionalAnimation } from "../../../get-animation-if-conditional-met";
-import { separatePlayersFromCurrentState } from "../../../separate-players";
 import { yuuyaFirstAttackShout1 } from "../../animation/yuuya-first-attack-shout1";
 import { yuuyaFirstAttackShout2 } from "../../animation/yuuya-first-attack-shout2";
 import { yuuyaFullBatteryAttackOnTraumaOfLastYear } from "../../animation/yuuya-full-battery-attack-on-trauma-of-last-year";
@@ -13,18 +12,11 @@ export const yuuyaAttack: ConditionalAnimation<
   CustomStateAnimation & QueenOfTragedyProps
 >[] = [
   (props) => {
-    const { stateHistory, currentState } = props;
-    const separatedPlayers = separatePlayersFromCurrentState(props);
-    const player = separatedPlayers?.player;
-    const enemy = separatedPlayers?.enemy;
-    const isEnemyTurn = currentState.activePlayerId === enemy?.playerId;
-    if (!player || isEnemyTurn) {
-      return null;
-    }
-
     let result: Animate | null = null;
+
+    const { stateHistory, currentState, playerId } = props;
     const { chapter } = props.state;
-    const battleCount = playerBattleCount(stateHistory, player.playerId);
+    const battleCount = playerBattleCount(stateHistory, playerId);
 
     if (
       chapter.type === "TraumaOfLastYear" &&
