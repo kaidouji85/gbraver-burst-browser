@@ -23,8 +23,8 @@ export function onStateAnimation(
     tsubasaBurst,
     tsubasaAttack,
     yuuyaBurst,
-    yuuyaAttack,
     yuuyaAttackOnTraumaOfLastYear,
+    yuuyaAttack,
     invisibleShoutMessageWindowWhenTurnChange,
   ];
   return getAnimationIfConditionMet(props, conditionalAnimations) ?? empty();
