@@ -20,6 +20,8 @@ import { BattleSceneView } from "./view";
 export type CustomBattleEventProps = SEPlayerContainer & {
   /** 戦闘画面を開いているプレイヤーのID */
   readonly playerId: PlayerId;
+  /** 敵プレイヤーのID */
+  readonly enemyId: PlayerId;
   /** 戦闘シーンビュー */
   readonly view: BattleSceneView;
   /** window押下ストリーム */

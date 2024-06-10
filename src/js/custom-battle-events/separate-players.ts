@@ -25,7 +25,7 @@ export function separatePlayers(
   state: Readonly<GameState>,
 ): SeparatedPlayers | null {
   const player = state.players.find((p) => p.playerId === props.playerId);
-  const enemy = state.players.find((p) => p.playerId !== props.playerId);
+  const enemy = state.players.find((p) => p.playerId === props.enemyId);
   return player && enemy ? { player, enemy } : null;
 }
 
