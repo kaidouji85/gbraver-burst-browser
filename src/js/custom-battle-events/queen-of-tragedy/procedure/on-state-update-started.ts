@@ -13,20 +13,25 @@ export async function onStateUpdateStarted(
   props: StateUpdateStarted & QueenOfTragedyProps,
 ): Promise<QueenOfTragedyState> {
   let result: QueenOfTragedyState = props.state;
-  const separatedPlayers = separatePlayersFromLastState(props);
-  if (!separatedPlayers) {
-    return result;
-  }
 
-  const { player } = separatedPlayers;
+  const separatedPlayers = separatePlayersFromLastState(props);
+  const player = separatedPlayers?.player;
   const { stateHistory } = props;
   const turn = turnCount(stateHistory);
+
   if (
     turn === 2 &&
     result.chapter.type === "None" &&
-    player.armdozer.battery === 8
+    player?.armdozer.battery === 8
   ) {
-    result = { ...result, chapter: { type: "TraumaOfLastYear" } };
+    const chapter = { type: "TraumaOfLastYear", startTurn: turn } as const;
+    result = { ...result, chapter };
+  } else if (
+    result.chapter.type === "TraumaOfLastYear" &&
+    result.chapter.startTurn < turn
+  ) {
+    const chapter = { type: "None" } as const;
+    result = { ...result, chapter };
   }
 
   return result;
