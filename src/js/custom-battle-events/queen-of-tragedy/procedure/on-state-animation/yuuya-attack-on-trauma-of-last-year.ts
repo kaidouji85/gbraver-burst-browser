@@ -1,26 +1,25 @@
 import { Animate } from "../../../../animation/animate";
 import { CustomStateAnimation } from "../../../../td-scenes/battle/custom-battle-event";
-import { playerBattleCount } from "../../../battle-count";
 import { ConditionalAnimation } from "../../../get-animation-if-conditional-met";
-import { tsubasaFirstAttackShout } from "../../animation/tsubasa-first-attack-shout";
+import { yuuyaFullBatteryAttackOnTraumaOfLastYear } from "../../animation/yuuya-full-battery-attack-on-trauma-of-last-year";
 import { QueenOfTragedyProps } from "../../props";
 
-/** ツバサ 攻撃 */
-export const tsubasaAttack: ConditionalAnimation<
+/** ユウヤ 攻撃 1年前のトラウマ */
+export const yuuyaAttackOnTraumaOfLastYear: ConditionalAnimation<
   CustomStateAnimation & QueenOfTragedyProps
 > = (props) => {
   let result: Animate | null = null;
 
-  const { enemyId, stateHistory } = props;
+  const { playerId } = props;
   const { effect } = props.currentState;
-  const battleCount = playerBattleCount(stateHistory, enemyId);
+  const { chapter } = props.state;
 
   if (
-    battleCount === 1 &&
+    chapter.type === "TraumaOfLastYear" &&
     effect.name === "BatteryDeclaration" &&
-    effect.attacker === enemyId
+    effect.attacker === playerId
   ) {
-    result = tsubasaFirstAttackShout(props);
+    result = yuuyaFullBatteryAttackOnTraumaOfLastYear(props);
   }
 
   return result;

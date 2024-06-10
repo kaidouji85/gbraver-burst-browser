@@ -8,6 +8,7 @@ import { tsubasaAttack } from "./tsubasa-attack";
 import { tsubasaBurst } from "./tsubasa-burst";
 import { tsubasaPilotSkill } from "./tsubasa-pilot-skill";
 import { yuuyaAttack } from "./yuuya-attack";
+import { yuuyaAttackOnTraumaOfLastYear } from "./yuuya-attack-on-trauma-of-last-year";
 import { yuuyaBurst } from "./yuuya-burst";
 
 /**
@@ -18,11 +19,12 @@ export function onStateAnimation(
   props: CustomStateAnimation & QueenOfTragedyProps,
 ): Animate {
   const conditionalAnimations = [
-    ...tsubasaPilotSkill,
-    ...tsubasaBurst,
-    ...tsubasaAttack,
-    ...yuuyaBurst,
-    ...yuuyaAttack,
+    tsubasaPilotSkill,
+    tsubasaBurst,
+    tsubasaAttack,
+    yuuyaBurst,
+    yuuyaAttack,
+    yuuyaAttackOnTraumaOfLastYear,
     invisibleShoutMessageWindowWhenTurnChange,
   ];
   return getAnimationIfConditionMet(props, conditionalAnimations) ?? empty();

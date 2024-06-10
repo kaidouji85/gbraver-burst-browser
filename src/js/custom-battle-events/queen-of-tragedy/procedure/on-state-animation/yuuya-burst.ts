@@ -9,25 +9,23 @@ import { QueenOfTragedyProps } from "../../props";
 /** ユウヤ バースト */
 export const yuuyaBurst: ConditionalAnimation<
   CustomStateAnimation & QueenOfTragedyProps
->[] = [
-  (props) => {
-    const separatedPlayers = separatePlayersFromCurrentState(props);
-    if (!separatedPlayers) {
-      return null;
-    }
+> = (props) => {
+  const separatedPlayers = separatePlayersFromCurrentState(props);
+  if (!separatedPlayers) {
+    return null;
+  }
 
-    let result: Animate | null = null;
-    const { player, enemy } = separatedPlayers;
-    const { stateHistory, currentState } = props;
-    const tsubasaBattleCount = playerBattleCount(stateHistory, enemy.playerId);
-    const isPlayerBurstActivated =
-      currentState.effect.name === "BurstEffect" &&
-      currentState.activePlayerId === player.playerId;
+  let result: Animate | null = null;
+  const { player, enemy } = separatedPlayers;
+  const { stateHistory, currentState } = props;
+  const tsubasaBattleCount = playerBattleCount(stateHistory, enemy.playerId);
+  const isPlayerBurstActivated =
+    currentState.effect.name === "BurstEffect" &&
+    currentState.activePlayerId === player.playerId;
 
-    if (tsubasaBattleCount === 1 && isPlayerBurstActivated) {
-      result = yuuyaBurstShoutWhenLastYearTrauma(props);
-    }
+  if (tsubasaBattleCount === 1 && isPlayerBurstActivated) {
+    result = yuuyaBurstShoutWhenLastYearTrauma(props);
+  }
 
-    return result;
-  },
-];
+  return result;
+};
