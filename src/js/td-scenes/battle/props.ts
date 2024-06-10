@@ -30,6 +30,8 @@ export type BattleSceneProps = ResourcesContainer &
   BattleSceneActionManageContainer & {
     /** 画面を開いているプレイヤーのID */
     readonly playerId: PlayerId;
+    /** 敵プレイヤーのID */
+    readonly enemyId: PlayerId;
     /** ゲームステートヒストリー */
     stateHistory: GameState[];
 

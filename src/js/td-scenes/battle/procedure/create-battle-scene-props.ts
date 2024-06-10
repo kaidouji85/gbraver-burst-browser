@@ -81,6 +81,7 @@ export function createBattleSceneProps(
     ...params,
 
     playerId: params.player.playerId,
+    enemyId: params.enemy.playerId,
     stateHistory: params.initialState,
 
     animatePlayer: createAnimatePlayer({
