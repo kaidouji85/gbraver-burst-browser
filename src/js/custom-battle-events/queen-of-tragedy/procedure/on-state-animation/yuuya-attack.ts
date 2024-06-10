@@ -10,34 +10,32 @@ import { QueenOfTragedyProps } from "../../props";
 /** ユウヤ 攻撃 */
 export const yuuyaAttack: ConditionalAnimation<
   CustomStateAnimation & QueenOfTragedyProps
->[] = [
-  (props) => {
-    let result: Animate | null = null;
+> = (props) => {
+  let result: Animate | null = null;
 
-    const { stateHistory, currentState, playerId } = props;
-    const { chapter } = props.state;
-    const battleCount = playerBattleCount(stateHistory, playerId);
+  const { stateHistory, currentState, playerId } = props;
+  const { chapter } = props.state;
+  const battleCount = playerBattleCount(stateHistory, playerId);
 
-    if (
-      chapter.type === "TraumaOfLastYear" &&
-      battleCount === 1 &&
-      currentState.effect.name === "BatteryDeclaration"
-    ) {
-      result = yuuyaFullBatteryAttackOnTraumaOfLastYear(props);
-    } else if (
-      chapter.type === "None" &&
-      battleCount === 1 &&
-      currentState.effect.name === "BatteryDeclaration"
-    ) {
-      result = yuuyaFirstAttackShout1(props);
-    } else if (
-      chapter.type === "None" &&
-      battleCount === 1 &&
-      currentState.effect.name === "Battle"
-    ) {
-      result = yuuyaFirstAttackShout2(props);
-    }
+  if (
+    chapter.type === "TraumaOfLastYear" &&
+    battleCount === 1 &&
+    currentState.effect.name === "BatteryDeclaration"
+  ) {
+    result = yuuyaFullBatteryAttackOnTraumaOfLastYear(props);
+  } else if (
+    chapter.type === "None" &&
+    battleCount === 1 &&
+    currentState.effect.name === "BatteryDeclaration"
+  ) {
+    result = yuuyaFirstAttackShout1(props);
+  } else if (
+    chapter.type === "None" &&
+    battleCount === 1 &&
+    currentState.effect.name === "Battle"
+  ) {
+    result = yuuyaFirstAttackShout2(props);
+  }
 
-    return result;
-  },
-];
+  return result;
+};

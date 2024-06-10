@@ -7,6 +7,4 @@ import { QueenOfTragedyProps } from "../../props";
 /** ツバサ バースト */
 export const tsubasaBurst: ConditionalAnimation<
   CustomStateAnimation & QueenOfTragedyProps
->[] = [
-  (props) => (isEnemyBurstActivated(props) ? tsubasaBurstShout(props) : null),
-];
+> = (props) => (isEnemyBurstActivated(props) ? tsubasaBurstShout(props) : null);

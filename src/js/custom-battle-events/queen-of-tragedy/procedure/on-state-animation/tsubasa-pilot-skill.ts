@@ -7,7 +7,5 @@ import { QueenOfTragedyProps } from "../../props";
 /** ツバサ パイロットスキル */
 export const tsubasaPilotSkill: ConditionalAnimation<
   CustomStateAnimation & QueenOfTragedyProps
->[] = [
-  (props) =>
-    isEnemyPilotSkillActivated(props) ? tsubasaPilotSkillShout(props) : null,
-];
+> = (props) =>
+  isEnemyPilotSkillActivated(props) ? tsubasaPilotSkillShout(props) : null;

@@ -18,11 +18,11 @@ export function onStateAnimation(
   props: CustomStateAnimation & QueenOfTragedyProps,
 ): Animate {
   const conditionalAnimations = [
-    ...tsubasaPilotSkill,
-    ...tsubasaBurst,
-    ...tsubasaAttack,
-    ...yuuyaBurst,
-    ...yuuyaAttack,
+    tsubasaPilotSkill,
+    tsubasaBurst,
+    tsubasaAttack,
+    yuuyaBurst,
+    yuuyaAttack,
     invisibleShoutMessageWindowWhenTurnChange,
   ];
   return getAnimationIfConditionMet(props, conditionalAnimations) ?? empty();
