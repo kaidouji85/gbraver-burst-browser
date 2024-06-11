@@ -1,6 +1,6 @@
 import { CustomStateAnimation } from "../../../../td-scenes/battle/custom-battle-event";
 import { ConditionalAnimation } from "../../../get-animation-if-conditional-met";
-import { isEnemyBurstActivated } from "../../../is-burst-activated";
+import { isEnemyBurstActivatedFromCurrentState } from "../../../is-burst-activated";
 import { yuuyaShout1WhenYuuyaHasAdvantage } from "../../animation/yuuya-shout1-when-yuuya-has-advantage";
 import { yuuyaShout2WhenYuuyaHasAdvantage } from "../../animation/yuuya-shout2-when-yuuya-has-advantage";
 import { ConfrontationTwoBraverProps } from "../../props";
@@ -11,7 +11,7 @@ export const yuuyaHasAdvantage: ConditionalAnimation<
 >[] = [
   (props) => {
     return props.state.chapter.type === "YuuyaHasAdvantage" &&
-      isEnemyBurstActivated(props)
+      isEnemyBurstActivatedFromCurrentState(props)
       ? yuuyaShout1WhenYuuyaHasAdvantage(props)
       : null;
   },
