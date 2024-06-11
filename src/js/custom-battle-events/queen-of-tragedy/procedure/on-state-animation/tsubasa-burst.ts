@@ -1,5 +1,6 @@
 import { CustomStateAnimation } from "../../../../td-scenes/battle/custom-battle-event";
 import { ConditionalAnimation } from "../../../get-animation-if-conditional-met";
+import { isEnemyBurstActivatedFromCurrentState } from "../../../is-burst-activated";
 import { tsubasaBurstShout } from "../../animation/tsubasa-burst-shout";
 import { QueenOfTragedyProps } from "../../props";
 
@@ -7,7 +8,6 @@ import { QueenOfTragedyProps } from "../../props";
 export const tsubasaBurst: ConditionalAnimation<
   CustomStateAnimation & QueenOfTragedyProps
 > = (props) =>
-  props.currentState.effect.name === "BurstEffect" &&
-  props.currentState.effect.burstPlayer === props.enemyId
+  isEnemyBurstActivatedFromCurrentState(props)
     ? tsubasaBurstShout(props)
     : null;
