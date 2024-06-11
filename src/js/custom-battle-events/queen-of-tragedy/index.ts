@@ -27,7 +27,7 @@ class QueenOfTragedy extends EmptyCustomBattleEvent {
 
   /** @override */
   onStateUpdateStarted(props: StateUpdateStarted) {
-    this.#eventProps.state = onStateUpdateStarted({
+    this.#eventProps.eventState = onStateUpdateStarted({
       ...props,
       ...this.#eventProps,
     });
@@ -35,7 +35,7 @@ class QueenOfTragedy extends EmptyCustomBattleEvent {
 
   /** @override */
   async beforeLastState(props: LastState): Promise<void> {
-    this.#eventProps.state = await beforeLastState({ ...props, ...this.#eventProps });
+    this.#eventProps.eventState = await beforeLastState({ ...props, ...this.#eventProps });
   }
 
   /** @override */

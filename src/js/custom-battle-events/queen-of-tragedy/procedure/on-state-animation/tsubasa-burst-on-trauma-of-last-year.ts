@@ -9,6 +9,6 @@ export const tsubasaBurstOnTraumaOfLastYear: ConditionalAnimation<
   CustomStateAnimation & QueenOfTragedyProps
 > = (props) =>
   isEnemyBurstActivatedFromCurrentState(props) &&
-  props.state.chapter.type === "TraumaOfLastYear"
+  props.eventState.chapter.type === "TraumaOfLastYear"
     ? tsubasaBurstShoutOnTraumaOfLastYear(props)
     : null;

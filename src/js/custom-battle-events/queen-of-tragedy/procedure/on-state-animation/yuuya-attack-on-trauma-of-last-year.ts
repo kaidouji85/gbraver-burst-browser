@@ -12,7 +12,7 @@ export const yuuyaAttackOnTraumaOfLastYear: ConditionalAnimation<
 
   const { playerId } = props;
   const { effect } = props.currentState;
-  const { chapter } = props.state;
+  const { chapter } = props.eventState;
 
   if (
     chapter.type === "TraumaOfLastYear" &&
