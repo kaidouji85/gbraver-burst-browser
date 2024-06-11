@@ -81,7 +81,7 @@
     "gbraver-burst",
     "three.js"
   ],
-  "license": "MIT",
+  "license": "CC-BY-4.0",
   "main": "src/js/index.js",
   "repository": "https://github.com/kaidouji85/study-three-js",
   "scripts": {
