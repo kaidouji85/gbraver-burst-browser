@@ -11,21 +11,21 @@ import { zeroBatteryChance } from "../../stories/zero-battery-chance";
 export async function executeZeroBatteryChanceIfNeeded(
   props: Readonly<LastState & ZeroDefenseTutorialProps>,
 ): Promise<ZeroDefenseTutorialState> {
-  if (props.state.isZeroBatteryChangeComplete) {
-    return props.state;
+  if (props.eventState.isZeroBatteryChangeComplete) {
+    return props.eventState;
   }
 
   const { lastState } = props;
   const enemy = lastState.players.find((v) => v.playerId !== props.playerId);
   if (!enemy) {
-    return props.state;
+    return props.eventState;
   }
 
   const isPlayerTurn = lastState.activePlayerId === props.playerId;
   if (isPlayerTurn && enemy.armdozer.battery === 0 && 0 < enemy.armdozer.hp) {
     await zeroBatteryChance(props);
-    return { ...props.state, isZeroBatteryChangeComplete: true };
+    return { ...props.eventState, isZeroBatteryChangeComplete: true };
   }
 
-  return props.state;
+  return props.eventState;
 }
