@@ -12,6 +12,7 @@ import { yuuyaAttack } from "./yuuya-attack";
 import { yuuyaAttackWhenTraumaOfLastYear } from "./yuuya-attack-when-trauma-of-last-year";
 import { yuuyaBurst } from "./yuuya-burst";
 import { yuuyaBurstWhenTraumaOfLastYear } from "./yuuya-burst-when-trauma-of-last-year";
+import { yuuyaPilotSkill } from "./yuuya-pilot-skill";
 
 /**
  * カスタムステートアニメーション
@@ -29,6 +30,7 @@ export function onStateAnimation(
     yuuyaBurst,
     yuuyaAttackWhenTraumaOfLastYear,
     yuuyaAttack,
+    yuuyaPilotSkill,
     invisibleShoutMessageWindowWhenTurnChange,
   ];
   return getAnimationIfConditionMet(props, conditionalAnimations) ?? empty();
