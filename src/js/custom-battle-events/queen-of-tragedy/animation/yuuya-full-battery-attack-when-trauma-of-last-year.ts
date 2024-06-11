@@ -12,5 +12,5 @@ export const yuuyaFullBatteryAttackWhenTraumaOfLastYear = (
   props: Readonly<CustomBattleEventProps>,
 ) =>
   onStart(() => {
-    playerPilotOnlyShout(props, "Yuuya", `ツバサ これで${wbr}終わりだ`);
+    playerPilotOnlyShout(props, "Yuuya", `これで${wbr}終わりだ`);
   });
