@@ -13,7 +13,7 @@ export const shinyaBurst: ConditionalAnimation<
     if (!isPlayerBurstActivatedFromCurrentState(props)) {
       return null;
     }
-    return props.state.isLoseIfNoDefense5Complete
+    return props.eventState.isLoseIfNoDefense5Complete
       ? shinyaBurstShout(props)
       : shinyaShoutWhenSelfInitiatedBurst(props);
   },
