@@ -1,5 +1,6 @@
 import { CustomStateAnimation } from "../../../../td-scenes/battle/custom-battle-event";
 import { ConditionalAnimation } from "../../../get-animation-if-conditional-met";
+import { isEnemyBurstActivatedFromCurrentState } from "../../../is-burst-activated";
 import { tsubasaBurstShoutOnTraumaOfLastYear } from "../../animation/tsubasa-burst-shout-on-trauma-of-last-year";
 import { QueenOfTragedyProps } from "../../props";
 
@@ -7,8 +8,7 @@ import { QueenOfTragedyProps } from "../../props";
 export const tsubasaBurstOnTraumaOfLastYear: ConditionalAnimation<
   CustomStateAnimation & QueenOfTragedyProps
 > = (props) =>
-  props.currentState.effect.name === "BurstEffect" &&
-  props.currentState.effect.burstPlayer === props.enemyId &&
+  isEnemyBurstActivatedFromCurrentState(props) &&
   props.state.chapter.type === "TraumaOfLastYear"
     ? tsubasaBurstShoutOnTraumaOfLastYear(props)
     : null;

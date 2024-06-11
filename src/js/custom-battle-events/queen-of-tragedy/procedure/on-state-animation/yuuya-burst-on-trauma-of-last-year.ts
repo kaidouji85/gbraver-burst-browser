@@ -1,5 +1,6 @@
 import { CustomStateAnimation } from "../../../../td-scenes/battle/custom-battle-event";
 import { ConditionalAnimation } from "../../../get-animation-if-conditional-met";
+import { isPlayerBurstActivatedFromCurrentState } from "../../../is-burst-activated";
 import { yuuyaBurstShoutWhenLastYearTrauma } from "../../animation/yuuya-burst-shout-when-last-year-trauma";
 import { QueenOfTragedyProps } from "../../props";
 
@@ -7,8 +8,7 @@ import { QueenOfTragedyProps } from "../../props";
 export const yuuyaBurstOnTraumaOfLastYear: ConditionalAnimation<
   CustomStateAnimation & QueenOfTragedyProps
 > = (props) =>
-  props.currentState.effect.name === "BurstEffect" &&
-  props.currentState.effect.burstPlayer === props.playerId &&
+  isPlayerBurstActivatedFromCurrentState(props) &&
   props.state.chapter.type === "TraumaOfLastYear"
     ? yuuyaBurstShoutWhenLastYearTrauma(props)
     : null;

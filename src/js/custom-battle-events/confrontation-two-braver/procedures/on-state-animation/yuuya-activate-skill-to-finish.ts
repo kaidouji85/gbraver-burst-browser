@@ -1,6 +1,6 @@
 import { CustomStateAnimation } from "../../../../td-scenes/battle/custom-battle-event";
 import { ConditionalAnimation } from "../../../get-animation-if-conditional-met";
-import { isEnemyPilotSkillActivated } from "../../../is-pilot-skill-activated";
+import { isEnemyPilotSkillActivatedFromCurrentState } from "../../../is-pilot-skill-activated";
 import { yuuyaShout1WhenYuuyaActivateSkillToFinish } from "../../animation/yuuya-shout1-when-yuuya-activate-skill-to-finish";
 import { yuuyaShout2WhenYuuyaActivateSkillToFinish } from "../../animation/yuuya-shout2-when-yuuya-activate-skill-to-finish";
 import { ConfrontationTwoBraverProps } from "../../props";
@@ -11,7 +11,7 @@ export const yuuyaActivateSkillToFinish: ConditionalAnimation<
 >[] = [
   (props) => {
     return props.state.chapter.type === "YuuyaActivateSkillToFinish" &&
-      isEnemyPilotSkillActivated(props)
+      isEnemyPilotSkillActivatedFromCurrentState(props)
       ? yuuyaShout1WhenYuuyaActivateSkillToFinish(props)
       : null;
   },

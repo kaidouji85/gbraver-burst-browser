@@ -2,7 +2,7 @@ import { CustomStateAnimation } from "../../../../td-scenes/battle/custom-battle
 import { ConditionalAnimation } from "../../../get-animation-if-conditional-met";
 import { isEnemyAdvantage } from "../../../is-enemy-advantage";
 import { isEvenMatch } from "../../../is-even-match";
-import { isPlayerPilotSkillActivated } from "../../../is-pilot-skill-activated";
+import { isPlayerPilotSkillActivatedFromCurrentState } from "../../../is-pilot-skill-activated";
 import { isPlayerAdvantage } from "../../../is-player-advantage";
 import { separatePlayersFromCurrentState } from "../../../separate-players";
 import { shinyaPilotSkillWhenEvenMatch } from "../../animation/shinya-pilot-skill-when-even-match";
@@ -16,7 +16,7 @@ export const shinyaPilotSkill: ConditionalAnimation<
 >[] = [
   (props) => {
     const separatedPlayers = separatePlayersFromCurrentState(props);
-    return isPlayerPilotSkillActivated(props) &&
+    return isPlayerPilotSkillActivatedFromCurrentState(props) &&
       separatedPlayers &&
       isPlayerAdvantage(separatedPlayers)
       ? shinyaPilotSkillWhenShinyaHasAdvantage(props)
@@ -24,7 +24,7 @@ export const shinyaPilotSkill: ConditionalAnimation<
   },
   (props) => {
     const separatedPlayers = separatePlayersFromCurrentState(props);
-    return isPlayerPilotSkillActivated(props) &&
+    return isPlayerPilotSkillActivatedFromCurrentState(props) &&
       separatedPlayers &&
       isEnemyAdvantage(separatedPlayers)
       ? shinyaPilotSkillWhenYuuyaHasAdvantage(props)
@@ -32,7 +32,7 @@ export const shinyaPilotSkill: ConditionalAnimation<
   },
   (props) => {
     const separatedPlayers = separatePlayersFromCurrentState(props);
-    return isPlayerPilotSkillActivated(props) &&
+    return isPlayerPilotSkillActivatedFromCurrentState(props) &&
       separatedPlayers &&
       isEvenMatch(separatedPlayers)
       ? shinyaPilotSkillWhenEvenMatch(props)
