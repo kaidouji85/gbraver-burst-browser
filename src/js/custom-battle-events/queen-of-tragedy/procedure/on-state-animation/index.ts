@@ -10,6 +10,7 @@ import { tsubasaPilotSkill } from "./tsubasa-pilot-skill";
 import { yuuyaAttack } from "./yuuya-attack";
 import { yuuyaAttackOnTraumaOfLastYear } from "./yuuya-attack-on-trauma-of-last-year";
 import { yuuyaBurst } from "./yuuya-burst";
+import { tsubasaBurstOnTraumaOfLastYear } from "./tsubasa-burst-on-trauma-of-last-year";
 
 /**
  * カスタムステートアニメーション
@@ -20,6 +21,7 @@ export function onStateAnimation(
 ): Animate {
   const conditionalAnimations = [
     tsubasaPilotSkill,
+    tsubasaBurstOnTraumaOfLastYear,
     tsubasaBurst,
     tsubasaAttack,
     yuuyaBurst,
