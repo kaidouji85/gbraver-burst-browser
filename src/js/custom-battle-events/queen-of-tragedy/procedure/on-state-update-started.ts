@@ -1,5 +1,4 @@
 import { StateUpdateStarted } from "../../../td-scenes/battle/custom-battle-event";
-import { separatePlayersFromLastState } from "../../separate-players";
 import { turnCount } from "../../turn-count";
 import { QueenOfTragedyProps } from "../props";
 import { QueenOfTragedyState } from "../state";
@@ -9,30 +8,20 @@ import { QueenOfTragedyState } from "../state";
  * @param props イベントプロパティ
  * @returns ステート更新結果
  */
-export async function onStateUpdateStarted(
+export function onStateUpdateStarted(
   props: StateUpdateStarted & QueenOfTragedyProps,
-): Promise<QueenOfTragedyState> {
+): QueenOfTragedyState {
   let result: QueenOfTragedyState = props.state;
 
-  const separatedPlayers = separatePlayersFromLastState(props);
-  const player = separatedPlayers?.player;
-  const { stateHistory } = props;
+  const { stateHistory, update, playerId } = props;
   const turn = turnCount(stateHistory);
+  const willPlayerBurst = update.some(
+    (s) => s.effect.name === "BurstEffect" && s.effect.burstPlayer === playerId,
+  );
 
-  if (
-    turn === 2 &&
-    result.chapter.type === "None" &&
-    player?.armdozer.battery === 8
-  ) {
+  if (turn === 2 && willPlayerBurst) {
     const chapter = { type: "TraumaOfLastYear", startTurn: turn } as const;
     result = { ...result, chapter };
-  } else if (
-    result.chapter.type === "TraumaOfLastYear" &&
-    result.chapter.startTurn < turn
-  ) {
-    const chapter = { type: "None" } as const;
-    result = { ...result, chapter };
   }
-
   return result;
 }
