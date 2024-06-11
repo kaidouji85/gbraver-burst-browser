@@ -10,13 +10,13 @@ export const yuuyaHasAdvantage: ConditionalAnimation<
   CustomStateAnimation & ConfrontationTwoBraverProps
 >[] = [
   (props) => {
-    return props.state.chapter.type === "YuuyaHasAdvantage" &&
+    return props.eventState.chapter.type === "YuuyaHasAdvantage" &&
       isEnemyBurstActivatedFromCurrentState(props)
       ? yuuyaShout1WhenYuuyaHasAdvantage(props)
       : null;
   },
   (props) => {
-    return props.state.chapter.type === "YuuyaHasAdvantage" &&
+    return props.eventState.chapter.type === "YuuyaHasAdvantage" &&
       props.currentState.effect.name === "BatteryDeclaration"
       ? yuuyaShout2WhenYuuyaHasAdvantage(props)
       : null;

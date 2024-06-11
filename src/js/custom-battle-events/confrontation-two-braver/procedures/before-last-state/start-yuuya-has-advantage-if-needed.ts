@@ -26,7 +26,7 @@ export async function startYuuyaHasAdvantageIfNeeded(
   const { player, enemy } = separatedPlayers;
   const turn = turnCount(props.stateHistory);
   if (
-    props.state.chapter.type !== "YuuyaHasAdvantage" &&
+    props.eventState.chapter.type !== "YuuyaHasAdvantage" &&
     turn === 3 &&
     isEnemyAdvantage({ player, enemy })
   ) {

@@ -16,25 +16,25 @@ import { ConfrontationTwoBraverProps } from "./props";
 
 /** 「対決、二人のブレイバー！！」カスタムバトルイベント */
 class ConfrontationTwoBraverEvent extends EmptyCustomBattleEvent {
-  /** プロパティ */
-  #props: ConfrontationTwoBraverProps;
+  /** イベントプロパティ */
+  #eventProps: ConfrontationTwoBraverProps;
 
   /**
    * コンストラクタ
    */
   constructor() {
     super();
-    this.#props = createConfrontationTwoBraverProps();
+    this.#eventProps = createConfrontationTwoBraverProps();
   }
 
   /** @override */
   onStateUpdateStarted(props: StateUpdateStarted): void {
-    this.#props.state = onStateUpdateStarted({ ...props, ...this.#props });
+    this.#eventProps.eventState = onStateUpdateStarted({ ...props, ...this.#eventProps });
   }
 
   /** @override */
   async beforeLastState(props: LastState): Promise<void> {
-    this.#props.state = await beforeLastState({ ...props, ...this.#props });
+    this.#eventProps.eventState = await beforeLastState({ ...props, ...this.#eventProps });
   }
 
   /** @override */
@@ -44,12 +44,12 @@ class ConfrontationTwoBraverEvent extends EmptyCustomBattleEvent {
 
   /** @override */
   onStateAnimation(props: CustomStateAnimation): Animate {
-    return onStateAnimation({ ...props, ...this.#props });
+    return onStateAnimation({ ...props, ...this.#eventProps });
   }
 
   /** @override */
   afterStateAnimation(props: CustomStateAnimation): Animate {
-    return afterStateAnimation({ ...props, ...this.#props });
+    return afterStateAnimation({ ...props, ...this.#eventProps });
   }
 }
 

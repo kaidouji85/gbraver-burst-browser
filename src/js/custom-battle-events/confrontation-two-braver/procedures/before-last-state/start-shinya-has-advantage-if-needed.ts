@@ -26,7 +26,7 @@ export async function startShinyaHasAdvantageIfNeeded(
   const { player, enemy } = separatedPlayers;
   const turn = turnCount(props.stateHistory);
   if (
-    props.state.chapter.type !== "ShinyaHasAdvantage" &&
+    props.eventState.chapter.type !== "ShinyaHasAdvantage" &&
     turn === 3 &&
     isPlayerAdvantage({ player, enemy })
   ) {

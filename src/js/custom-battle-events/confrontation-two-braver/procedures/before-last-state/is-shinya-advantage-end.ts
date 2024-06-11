@@ -11,5 +11,5 @@ export function isShinyaAdvantageEnd(
   props: Readonly<CustomBattleEventProps & ConfrontationTwoBraverProps>,
 ): boolean {
   const turn = turnCount(props.stateHistory);
-  return 3 < turn && props.state.chapter.type === "ShinyaHasAdvantage";
+  return 3 < turn && props.eventState.chapter.type === "ShinyaHasAdvantage";
 }

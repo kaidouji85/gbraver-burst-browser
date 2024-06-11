@@ -10,13 +10,13 @@ export const evenMatch: ConditionalAnimation<
   CustomStateAnimation & ConfrontationTwoBraverProps
 >[] = [
   (props) => {
-    return props.state.chapter.type === "EvenMatch" &&
+    return props.eventState.chapter.type === "EvenMatch" &&
       isEnemyBurstActivatedFromCurrentState(props)
       ? yuuyaShout1WhenEvenMatch(props)
       : null;
   },
   (props) => {
-    return props.state.chapter.type === "EvenMatch" &&
+    return props.eventState.chapter.type === "EvenMatch" &&
       props.currentState.effect.name === "BatteryDeclaration"
       ? yuuyaShout2WhenEvenMatch(props)
       : null;

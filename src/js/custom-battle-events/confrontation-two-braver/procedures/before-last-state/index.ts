@@ -21,17 +21,17 @@ export async function beforeLastState(
   props: Readonly<LastState & ConfrontationTwoBraverProps>,
 ): Promise<ConfrontationTwoBraverState> {
   invisibleShoutMessageWindowWhenInputCommand(props);
-  if (!props.state.isIntroductionComplete) {
+  if (!props.eventState.isIntroductionComplete) {
     await introduction(props);
     return {
-      ...props.state,
+      ...props.eventState,
       isIntroductionComplete: true,
     };
   }
 
   if (await startShinyaHasAdvantageIfNeeded(props)) {
     return {
-      ...props.state,
+      ...props.eventState,
       chapter: {
         type: "ShinyaHasAdvantage",
       },
@@ -40,7 +40,7 @@ export async function beforeLastState(
 
   if (await startYuuyaHasAdvantageIfNeeded(props)) {
     return {
-      ...props.state,
+      ...props.eventState,
       chapter: {
         type: "YuuyaHasAdvantage",
       },
@@ -49,7 +49,7 @@ export async function beforeLastState(
 
   if (await startEvenMatchIfNeeded(props)) {
     return {
-      ...props.state,
+      ...props.eventState,
       chapter: {
         type: "EvenMatch",
       },
@@ -64,12 +64,12 @@ export async function beforeLastState(
     isYuuyaActivateSkillToFinishEnd(props)
   ) {
     return {
-      ...props.state,
+      ...props.eventState,
       chapter: {
         type: "None",
       },
     };
   }
 
-  return props.state;
+  return props.eventState;
 }

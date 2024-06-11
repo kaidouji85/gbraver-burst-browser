@@ -26,7 +26,7 @@ export async function startEvenMatchIfNeeded(
   const { player, enemy } = separatedPlayers;
   const turn = turnCount(props.stateHistory);
   if (
-    props.state.chapter.type !== "EvenMatch" &&
+    props.eventState.chapter.type !== "EvenMatch" &&
     turn === 3 &&
     isEvenMatch({ player, enemy })
   ) {

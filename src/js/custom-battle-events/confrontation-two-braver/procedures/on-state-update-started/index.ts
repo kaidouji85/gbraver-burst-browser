@@ -17,11 +17,11 @@ export function onStateUpdateStarted(
   const isPlayerTurn = lastState.activePlayerId === props.playerId;
   if (
     isYuuyaSkillActivated(props) &&
-    props.state.chapter.type !== "YuuyaActivateSkillToSurvive" &&
+    props.eventState.chapter.type !== "YuuyaActivateSkillToSurvive" &&
     isPlayerTurn
   ) {
     return {
-      ...props.state,
+      ...props.eventState,
       chapter: {
         type: "YuuyaActivateSkillToSurvive",
         startTurn: turnCount(props.stateHistory),
@@ -31,11 +31,11 @@ export function onStateUpdateStarted(
 
   if (
     isYuuyaSkillActivated(props) &&
-    props.state.chapter.type !== "YuuyaActivateSkillToFinish" &&
+    props.eventState.chapter.type !== "YuuyaActivateSkillToFinish" &&
     !isPlayerTurn
   ) {
     return {
-      ...props.state,
+      ...props.eventState,
       chapter: {
         type: "YuuyaActivateSkillToFinish",
         startTurn: turnCount(props.stateHistory),
@@ -43,5 +43,5 @@ export function onStateUpdateStarted(
     };
   }
 
-  return props.state;
+  return props.eventState;
 }
