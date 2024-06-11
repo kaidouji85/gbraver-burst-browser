@@ -5,7 +5,7 @@ import { yuuyaBurstShoutWhenLastYearTrauma } from "../../animation/yuuya-burst-s
 import { QueenOfTragedyProps } from "../../props";
 
 /** ユウヤ バースト 去年のトラウマ */
-export const yuuyaBurstOnTraumaOfLastYear: ConditionalAnimation<
+export const yuuyaBurstWhenTraumaOfLastYear: ConditionalAnimation<
   CustomStateAnimation & QueenOfTragedyProps
 > = (props) =>
   isPlayerBurstActivatedFromCurrentState(props) &&

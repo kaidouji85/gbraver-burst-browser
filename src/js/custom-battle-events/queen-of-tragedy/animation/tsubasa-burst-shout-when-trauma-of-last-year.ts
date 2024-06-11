@@ -8,7 +8,7 @@ import { enemyPilotOnlyShout } from "../../pilot-shout";
  * @param props イベントプロパティ
  * @returns アニメーション
  */
-export const tsubasaBurstShoutOnTraumaOfLastYear = (
+export const tsubasaBurstShoutWhenTraumaOfLastYear = (
   props: Readonly<CustomBattleEventProps>,
 ) =>
   onStart(() => {

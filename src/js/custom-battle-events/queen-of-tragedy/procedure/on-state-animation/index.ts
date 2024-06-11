@@ -6,11 +6,12 @@ import { invisibleShoutMessageWindowWhenTurnChange } from "../../../invisible-sh
 import { QueenOfTragedyProps } from "../../props";
 import { tsubasaAttack } from "./tsubasa-attack";
 import { tsubasaBurst } from "./tsubasa-burst";
-import { tsubasaBurstOnTraumaOfLastYear } from "./tsubasa-burst-on-trauma-of-last-year";
+import { tsubasaBurstWhenTraumaOfLastYear } from "./tsubasa-burst-when-trauma-of-last-year";
 import { tsubasaPilotSkill } from "./tsubasa-pilot-skill";
 import { yuuyaAttack } from "./yuuya-attack";
-import { yuuyaAttackOnTraumaOfLastYear } from "./yuuya-attack-on-trauma-of-last-year";
-import { yuuyaBurstOnTraumaOfLastYear } from "./yuuya-burst-on-trauma-of-last-year";
+import { yuuyaAttackWhenTraumaOfLastYear } from "./yuuya-attack-when-trauma-of-last-year";
+import { yuuyaBurst } from "./yuuya-burst";
+import { yuuyaBurstWhenTraumaOfLastYear } from "./yuuya-burst-when-trauma-of-last-year";
 
 /**
  * カスタムステートアニメーション
@@ -21,11 +22,12 @@ export function onStateAnimation(
 ): Animate {
   const conditionalAnimations = [
     tsubasaPilotSkill,
-    tsubasaBurstOnTraumaOfLastYear,
+    tsubasaBurstWhenTraumaOfLastYear,
     tsubasaBurst,
     tsubasaAttack,
-    yuuyaBurstOnTraumaOfLastYear,
-    yuuyaAttackOnTraumaOfLastYear,
+    yuuyaBurstWhenTraumaOfLastYear,
+    yuuyaBurst,
+    yuuyaAttackWhenTraumaOfLastYear,
     yuuyaAttack,
     invisibleShoutMessageWindowWhenTurnChange,
   ];

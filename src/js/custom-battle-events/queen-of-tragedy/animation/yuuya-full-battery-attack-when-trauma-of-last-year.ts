@@ -8,7 +8,7 @@ import { playerPilotOnlyShout } from "../../pilot-shout";
  * @param props イベントプロパティ
  * @returns アニメーション
  */
-export const yuuyaFullBatteryAttackOnTraumaOfLastYear = (
+export const yuuyaFullBatteryAttackWhenTraumaOfLastYear = (
   props: Readonly<CustomBattleEventProps>,
 ) =>
   onStart(() => {
