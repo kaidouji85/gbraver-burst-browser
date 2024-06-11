@@ -20,7 +20,7 @@ export async function executeLessThanAttack3IfNeeded(
   if (
     isPlayerTurn &&
     3 <= player.armdozer.battery &&
-    props.state.isShouldAttack3OrMoreComplete &&
+    props.eventState.isShouldAttack3OrMoreComplete &&
     props.battery.battery < 3
   ) {
     props.view.hud.gameObjects.batterySelector.toBatterySilently(3);
