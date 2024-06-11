@@ -13,7 +13,7 @@ export async function doSelfInitiatedBurstIfNeeded(
   const hasBurst = props.update.some(
     (state) => state.effect.name === "BurstEffect",
   );
-  if (hasBurst && !props.state.isExplainedBurstAtZeroBurst) {
+  if (hasBurst && !props.eventState.isExplainedBurstAtZeroBurst) {
     await selfInitiatedBurst(props);
     return true;
   }

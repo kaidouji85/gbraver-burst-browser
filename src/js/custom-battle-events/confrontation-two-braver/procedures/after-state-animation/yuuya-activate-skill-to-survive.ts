@@ -8,7 +8,7 @@ export const yuuyaActivateSkillToSurvive: ConditionalAnimation<
   CustomStateAnimation & ConfrontationTwoBraverProps
 >[] = [
   (props) => {
-    return props.state.chapter.type === "YuuyaActivateSkillToSurvive" &&
+    return props.eventState.chapter.type === "YuuyaActivateSkillToSurvive" &&
       props.currentState.effect.name === "BatteryDeclaration"
       ? onStart(() => {
           props.view.dom.enemyShoutMessageWindow.visible(false);

@@ -47,16 +47,16 @@ export async function doBattleDescriptionIfNeeded(
   if (turn === 2) {
     await waitTime(200);
     await batteryRuleDescription(props);
-    return props.state;
+    return props.eventState;
   } else if (turn === 3) {
     await waitTime(200);
     await completeAttackAndDefense(props);
     invisibleAllMessageWindows(props);
     return {
-      ...props.state,
+      ...props.eventState,
       isBatterySystemDescriptionComplete: true,
     };
   } else {
-    return props.state;
+    return props.eventState;
   }
 }

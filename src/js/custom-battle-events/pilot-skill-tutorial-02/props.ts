@@ -2,8 +2,8 @@ import { PilotSkillTutorial02State } from "./state";
 
 /** パイロットスキルチュートリアル（後半） プロパティ */
 export type PilotSkillTutorial02Props = {
-  /** ステート */
-  state: PilotSkillTutorial02State;
+  /** イベントステート */
+  eventState: PilotSkillTutorial02State;
 };
 
 /**
@@ -11,10 +11,10 @@ export type PilotSkillTutorial02Props = {
  * @returns 生成結果
  */
 export function createPilotSkillTutorial02Props(): PilotSkillTutorial02Props {
-  const state = {
+  const eventState = {
     isIntroductionComplete: false,
     isDoPilotSkillComplete: false,
     isShouldAttack3OrMoreComplete: false,
   };
-  return { state };
+  return { eventState };
 }

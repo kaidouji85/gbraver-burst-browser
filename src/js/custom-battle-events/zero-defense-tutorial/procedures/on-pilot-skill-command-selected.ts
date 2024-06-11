@@ -25,7 +25,7 @@ export async function onPilotSkillCommandSelected(
   if (isPilotButtonFocused(props)) {
     focusOutPilotButton(props);
     return {
-      state: props.state,
+      state: props.eventState,
       cancel: {
         isCommandCanceled: false,
       },
@@ -33,7 +33,7 @@ export async function onPilotSkillCommandSelected(
   }
 
   return {
-    state: props.state,
+    state: props.eventState,
     cancel: {
       isCommandCanceled: false,
     },

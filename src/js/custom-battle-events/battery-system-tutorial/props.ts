@@ -6,7 +6,7 @@ import { BatterySystemTutorialState } from "./state";
 /** バッテリーシステムチュートリアル固有のプロパティ */
 export type BatterySystemTutorialProps = {
   /** チュートリアルのステート */
-  state: BatterySystemTutorialState;
+  eventState: BatterySystemTutorialState;
   /** 攻撃バッテリー注釈 innerHTML */
   readonly attackBatteryCaption: string;
   /** 防御バッテリー注釈 innerHTML */
@@ -21,13 +21,13 @@ export type BatterySystemTutorialProps = {
 export function createBatterySystemTutorialProps(
   resources: Resources,
 ): BatterySystemTutorialProps {
-  const state = {
+  const eventState = {
     isBatterySystemDescriptionComplete: false,
     isExplainedBurstAtZeroBurst: false,
     isExplainedPilotSkillAtZeroBattery: false,
   };
   return {
-    state,
+    eventState,
     attackBatteryCaption: attackBatteryCaptionInnerHtml(resources),
     defenseBatteryCaption: defenseBatteryCaptionInnerHtml(resources),
   };

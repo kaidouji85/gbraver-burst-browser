@@ -16,7 +16,7 @@ export async function beforeLastState(
   props: LastState & QueenOfTragedyProps,
 ): Promise<QueenOfTragedyState> {
   invisibleShoutMessageWindowWhenInputCommand(props);
-  let result: QueenOfTragedyState = props.state;
+  let result: QueenOfTragedyState = props.eventState;
 
   const { stateHistory } = props;
   const separatedPlayers = separatePlayersFromLastState(props);

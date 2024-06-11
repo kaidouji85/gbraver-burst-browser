@@ -14,8 +14,8 @@ export async function afterLastState(
 ): Promise<PilotSkillTutorial01State> {
   invisibleShoutMessageWindowWhenGameEnd(props);
   if (await executePlayerLoseIfNeeded(props)) {
-    return props.state;
+    return props.eventState;
   }
 
-  return props.state;
+  return props.eventState;
 }

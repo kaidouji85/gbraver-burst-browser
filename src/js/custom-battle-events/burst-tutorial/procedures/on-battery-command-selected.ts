@@ -20,7 +20,7 @@ import { shouldDefense5Again } from "../stories/should-defense5-again";
 async function defense5(
   props: Readonly<BatteryCommandSelected & BurstTutorialProps>,
 ): Promise<void> {
-  props.state.isLoseIfNoDefense5Complete
+  props.eventState.isLoseIfNoDefense5Complete
     ? await shouldDefense5Again(props)
     : await shouldDefense5(props);
 }
@@ -42,7 +42,7 @@ export async function onBatteryCommandSelected(
   props: Readonly<BatteryCommandSelected & BurstTutorialProps>,
 ): Promise<BatteryEventResult> {
   let result: BatteryEventResult = {
-    state: props.state,
+    state: props.eventState,
     cancel: { isCommandCanceled: false },
   };
 

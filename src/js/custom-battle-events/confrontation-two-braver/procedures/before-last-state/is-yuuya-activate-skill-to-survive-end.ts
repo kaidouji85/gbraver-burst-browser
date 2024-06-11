@@ -12,7 +12,7 @@ export function isYuuyaActivateSkillToSurviveEnd(
 ): boolean {
   const turn = turnCount(props.stateHistory);
   return (
-    props.state.chapter.type === "YuuyaActivateSkillToSurvive" &&
-    props.state.chapter.startTurn < turn
+    props.eventState.chapter.type === "YuuyaActivateSkillToSurvive" &&
+    props.eventState.chapter.startTurn < turn
   );
 }

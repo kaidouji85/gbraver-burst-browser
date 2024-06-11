@@ -27,7 +27,7 @@ export async function onBurstCommandSelected(
   if (isBurstButtonFocused(props)) {
     focusOutBurstButton(props);
     return {
-      state: props.state,
+      state: props.eventState,
       cancel: {
         isCommandCanceled: false,
       },
@@ -38,7 +38,7 @@ export async function onBurstCommandSelected(
   if (player && player.armdozer.battery === player.armdozer.maxBattery) {
     await burstIsTrumpCard(props);
     return {
-      state: props.state,
+      state: props.eventState,
       cancel: {
         isCommandCanceled: true,
       },
@@ -46,7 +46,7 @@ export async function onBurstCommandSelected(
   }
 
   return {
-    state: props.state,
+    state: props.eventState,
     cancel: {
       isCommandCanceled: false,
     },

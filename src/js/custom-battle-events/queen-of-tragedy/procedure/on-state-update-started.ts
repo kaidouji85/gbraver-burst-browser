@@ -11,7 +11,7 @@ import { QueenOfTragedyState } from "../state";
 export function onStateUpdateStarted(
   props: StateUpdateStarted & QueenOfTragedyProps,
 ): QueenOfTragedyState {
-  let result: QueenOfTragedyState = props.state;
+  let result: QueenOfTragedyState = props.eventState;
 
   const { stateHistory, update, playerId } = props;
   const turn = turnCount(stateHistory);

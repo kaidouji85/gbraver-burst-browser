@@ -17,17 +17,17 @@ export async function afterLastState(
   const foundGameEnd = props.update.find((v) => v.effect.name === "GameEnd");
 
   if (!foundGameEnd || foundGameEnd.effect.name !== "GameEnd") {
-    return props.state;
+    return props.eventState;
   }
 
   const gameEnd: GameEnd = foundGameEnd.effect;
 
   if (gameEnd.result.type !== "GameOver") {
-    return props.state;
+    return props.eventState;
   }
 
   const gameOver: GameOver = gameEnd.result;
   const isPayerWin = gameOver.winner === props.playerId;
   isPayerWin ? await playerWin(props) : await playerLose(props);
-  return props.state;
+  return props.eventState;
 }

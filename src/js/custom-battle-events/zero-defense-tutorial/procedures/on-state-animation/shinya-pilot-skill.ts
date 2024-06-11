@@ -13,7 +13,7 @@ export const shinyaPilotSkill: ConditionalAnimation<
     if (!isPlayerPilotSkillActivatedFromCurrentState(props)) {
       return null;
     }
-    return props.state.isExplainedPilotSkillAtZeroBattery
+    return props.eventState.isExplainedPilotSkillAtZeroBattery
       ? shinyaPilotSkillShoutToAvoidDeath(props)
       : shinyaPilotSkillShout(props);
   },

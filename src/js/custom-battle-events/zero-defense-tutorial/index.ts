@@ -23,35 +23,41 @@ import {
 
 /** ゼロ防御チュートリアル */
 class ZeroDefenseTutorialEvent extends EmptyCustomBattleEvent {
-  /** プロパティ */
-  props: ZeroDefenseTutorialProps;
+  /** イベントプロパティ */
+  #eventProps: ZeroDefenseTutorialProps;
 
   /**
    * コンストラクタ
    */
   constructor() {
     super();
-    this.props = createZeroDefenseTutorialProps();
+    this.#eventProps = createZeroDefenseTutorialProps();
   }
 
   /** @override */
   onStateAnimation(props: CustomStateAnimation): Animate {
-    return onStateAnimation({ ...props, ...this.props });
+    return onStateAnimation({ ...props, ...this.#eventProps });
   }
 
   /** @override */
   afterStateAnimation(props: CustomStateAnimation): Animate {
-    return afterStateAnimation({ ...props, ...this.props });
+    return afterStateAnimation({ ...props, ...this.#eventProps });
   }
 
   /** @override */
   async beforeLastState(props: LastState): Promise<void> {
-    this.props.state = await beforeLastState({ ...props, ...this.props });
+    this.#eventProps.eventState = await beforeLastState({
+      ...props,
+      ...this.#eventProps,
+    });
   }
 
   /** @override */
   async afterLastState(props: LastState): Promise<void> {
-    this.props.state = await afterLastState({ ...props, ...this.props });
+    this.#eventProps.eventState = await afterLastState({
+      ...props,
+      ...this.#eventProps,
+    });
   }
 
   /** @override */
@@ -60,9 +66,9 @@ class ZeroDefenseTutorialEvent extends EmptyCustomBattleEvent {
   ): Promise<CommandCanceled> {
     const { state, cancel } = await onBatteryCommandSelected({
       ...props,
-      ...this.props,
+      ...this.#eventProps,
     });
-    this.props.state = state;
+    this.#eventProps.eventState = state;
     return cancel;
   }
 
@@ -72,9 +78,9 @@ class ZeroDefenseTutorialEvent extends EmptyCustomBattleEvent {
   ): Promise<CommandCanceled> {
     const { state, cancel } = await onBurstCommandSelected({
       ...props,
-      ...this.props,
+      ...this.#eventProps,
     });
-    this.props.state = state;
+    this.#eventProps.eventState = state;
     return cancel;
   }
 
@@ -84,9 +90,9 @@ class ZeroDefenseTutorialEvent extends EmptyCustomBattleEvent {
   ): Promise<CommandCanceled> {
     const { state, cancel } = await onPilotSkillCommandSelected({
       ...props,
-      ...this.props,
+      ...this.#eventProps,
     });
-    this.props.state = state;
+    this.#eventProps.eventState = state;
     return cancel;
   }
 }

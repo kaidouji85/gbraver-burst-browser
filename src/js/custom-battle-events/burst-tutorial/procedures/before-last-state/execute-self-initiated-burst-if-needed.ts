@@ -15,7 +15,7 @@ export async function executeSelfInitiatedBurstIfNeeded(
       state.effect.name === "BurstEffect" &&
       state.effect.burstPlayer === props.playerId,
   );
-  if (hasPlayerBurst && !props.state.isLoseIfNoDefense5Complete) {
+  if (hasPlayerBurst && !props.eventState.isLoseIfNoDefense5Complete) {
     await selfInitiatedBurst(props);
   }
 }

@@ -2,8 +2,8 @@ import { BurstTutorialState } from "./state";
 
 /** バッテリーチュートリアル プロパティ */
 export type BurstTutorialProps = {
-  /** ステート */
-  state: BurstTutorialState;
+  /** イベントステート */
+  eventState: BurstTutorialState;
 };
 
 /**
@@ -11,9 +11,9 @@ export type BurstTutorialProps = {
  * @returns 生成結果
  */
 export function createBurstTutorialProps() {
-  const state = {
+  const eventState = {
     isIntroductionComplete: false,
     isLoseIfNoDefense5Complete: false,
   };
-  return { state };
+  return { eventState };
 }

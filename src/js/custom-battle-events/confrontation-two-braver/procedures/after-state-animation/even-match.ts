@@ -8,7 +8,7 @@ export const evenMatch: ConditionalAnimation<
   CustomStateAnimation & ConfrontationTwoBraverProps
 >[] = [
   (props) => {
-    return props.state.chapter.type === "EvenMatch" &&
+    return props.eventState.chapter.type === "EvenMatch" &&
       props.currentState.effect.name === "BatteryDeclaration"
       ? onStart(() => {
           props.view.dom.enemyShoutMessageWindow.visible(false);

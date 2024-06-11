@@ -18,7 +18,7 @@ export async function beforeLastState(
   const turn = turnCount(props.stateHistory);
   if (turn === 1) {
     await introduction(props);
-    return props.state;
+    return props.eventState;
   }
 
   const doneBattleDescription = await doBattleDescriptionIfNeeded(props);
@@ -27,12 +27,12 @@ export async function beforeLastState(
   }
 
   if (await doSelfInitiatedBurstIfNeeded(props)) {
-    return props.state;
+    return props.eventState;
   }
 
   if (await doSelfInitiatedPilotSkillIfNeeded(props)) {
-    return props.state;
+    return props.eventState;
   }
 
-  return props.state;
+  return props.eventState;
 }

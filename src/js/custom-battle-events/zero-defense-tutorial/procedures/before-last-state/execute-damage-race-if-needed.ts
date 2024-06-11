@@ -12,26 +12,26 @@ import { damageRace } from "../../stories/damage-race";
 export async function executeDamageRaceIfNeeded(
   props: Readonly<LastState & ZeroDefenseTutorialProps>,
 ): Promise<ZeroDefenseTutorialState> {
-  if (props.state.isDamageRaceComplete) {
-    return props.state;
+  if (props.eventState.isDamageRaceComplete) {
+    return props.eventState;
   }
 
   const battle = props.update.find((state) => state.effect.name === "Battle");
   if (!battle || battle.effect.name !== "Battle") {
-    return props.state;
+    return props.eventState;
   }
 
   const separatedPlayers = separatePlayers(props, battle);
   if (!separatedPlayers) {
-    return props.state;
+    return props.eventState;
   }
 
   const { player, enemy } = separatedPlayers;
   const isEnemyAttack = battle.effect.attacker === enemy.playerId;
   if (isEnemyAttack) {
     await damageRace(props, player.armdozer.hp, enemy.armdozer.hp);
-    return { ...props.state, isDamageRaceComplete: true };
+    return { ...props.eventState, isDamageRaceComplete: true };
   }
 
-  return props.state;
+  return props.eventState;
 }

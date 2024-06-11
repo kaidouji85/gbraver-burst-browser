@@ -9,6 +9,6 @@ export const yuuyaBurstOnTraumaOfLastYear: ConditionalAnimation<
   CustomStateAnimation & QueenOfTragedyProps
 > = (props) =>
   isPlayerBurstActivatedFromCurrentState(props) &&
-  props.state.chapter.type === "TraumaOfLastYear"
+  props.eventState.chapter.type === "TraumaOfLastYear"
     ? yuuyaBurstShoutWhenLastYearTrauma(props)
     : null;

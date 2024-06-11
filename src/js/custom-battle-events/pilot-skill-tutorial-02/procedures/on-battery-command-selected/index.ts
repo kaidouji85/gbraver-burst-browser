@@ -26,7 +26,7 @@ export async function onBatteryCommandSelected(
   const isNoZeroDefenseExecuted = await executeNoZeroDefenseIfNeeded(props);
   if (isNoZeroDefenseExecuted) {
     return {
-      state: props.state,
+      state: props.eventState,
       cancel: {
         isCommandCanceled: true,
       },
@@ -36,7 +36,7 @@ export async function onBatteryCommandSelected(
   const isLessThanAttack3Executed = await executeLessThanAttack3IfNeeded(props);
   if (isLessThanAttack3Executed) {
     return {
-      state: props.state,
+      state: props.eventState,
       cancel: {
         isCommandCanceled: true,
       },
@@ -44,7 +44,7 @@ export async function onBatteryCommandSelected(
   }
 
   return {
-    state: props.state,
+    state: props.eventState,
     cancel: {
       isCommandCanceled: false,
     },

@@ -6,7 +6,7 @@ import { ConfrontationTwoBraverProps } from "../props";
  */
 export function createConfrontationTwoBraverProps(): ConfrontationTwoBraverProps {
   return {
-    state: {
+    eventState: {
       isIntroductionComplete: false,
       chapter: {
         type: "None",

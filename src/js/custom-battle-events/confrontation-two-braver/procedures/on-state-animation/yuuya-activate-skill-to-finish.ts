@@ -10,13 +10,13 @@ export const yuuyaActivateSkillToFinish: ConditionalAnimation<
   CustomStateAnimation & ConfrontationTwoBraverProps
 >[] = [
   (props) => {
-    return props.state.chapter.type === "YuuyaActivateSkillToFinish" &&
+    return props.eventState.chapter.type === "YuuyaActivateSkillToFinish" &&
       isEnemyPilotSkillActivatedFromCurrentState(props)
       ? yuuyaShout1WhenYuuyaActivateSkillToFinish(props)
       : null;
   },
   (props) => {
-    return props.state.chapter.type === "YuuyaActivateSkillToFinish" &&
+    return props.eventState.chapter.type === "YuuyaActivateSkillToFinish" &&
       props.currentState.effect.name === "BatteryDeclaration"
       ? yuuyaShout2WhenYuuyaActivateSkillToFinish(props)
       : null;

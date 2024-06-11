@@ -13,7 +13,7 @@ export async function doSelfInitiatedPilotSkillIfNeeded(
   const hasPilotSkill = props.update.some(
     (state) => state.effect.name === "PilotSkillEffect",
   );
-  if (hasPilotSkill && !props.state.isExplainedPilotSkillAtZeroBattery) {
+  if (hasPilotSkill && !props.eventState.isExplainedPilotSkillAtZeroBattery) {
     await selfInitiatedPilotSkill(props);
     return true;
   }
