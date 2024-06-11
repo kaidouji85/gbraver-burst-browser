@@ -58,7 +58,7 @@ export async function onBatteryCommandSelected(
       cancel: {
         isCommandCanceled: true,
       },
-      state: props.state,
+      state: props.eventState,
     };
   }
 
@@ -66,6 +66,6 @@ export async function onBatteryCommandSelected(
     cancel: {
       isCommandCanceled: false,
     },
-    state: props.state,
+    state: props.eventState,
   };
 }
