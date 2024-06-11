@@ -1,16 +1,20 @@
 import { onStart } from "../../../animation/on-start";
 import { wbr } from "../../../dom/wbr";
 import { CustomBattleEventProps } from "../../../td-scenes/battle/custom-battle-event";
-import { playerPilotOnlyShout } from "../../pilot-shout";
+import { enemyPilotOnlyShout } from "../../pilot-shout";
 
 /**
- * ユウヤ フルバッテリー攻撃 2ターン目
+ * ツバサ バースト 叫び 去年のトラウマ
  * @param props イベントプロパティ
  * @returns アニメーション
  */
-export const yuuyaFullBatteryAttackOnTraumaOfLastYear = (
+export const tsubasaBurstShoutWhenTraumaOfLastYear = (
   props: Readonly<CustomBattleEventProps>,
 ) =>
   onStart(() => {
-    playerPilotOnlyShout(props, "Yuuya", `ツバサ これで${wbr}終わりだ`);
+    enemyPilotOnlyShout(
+      props,
+      "Tsubasa",
+      `言ったはずだ 去年の${wbr}私とは${wbr}違うと`,
+    );
   });

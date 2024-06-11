@@ -1,11 +1,11 @@
 import { Animate } from "../../../../animation/animate";
 import { CustomStateAnimation } from "../../../../td-scenes/battle/custom-battle-event";
 import { ConditionalAnimation } from "../../../get-animation-if-conditional-met";
-import { yuuyaFullBatteryAttackOnTraumaOfLastYear } from "../../animation/yuuya-full-battery-attack-on-trauma-of-last-year";
+import { yuuyaFullBatteryAttackWhenTraumaOfLastYear } from "../../animation/yuuya-full-battery-attack-when-trauma-of-last-year";
 import { QueenOfTragedyProps } from "../../props";
 
 /** ユウヤ 攻撃 1年前のトラウマ */
-export const yuuyaAttackOnTraumaOfLastYear: ConditionalAnimation<
+export const yuuyaAttackWhenTraumaOfLastYear: ConditionalAnimation<
   CustomStateAnimation & QueenOfTragedyProps
 > = (props) => {
   let result: Animate | null = null;
@@ -19,7 +19,7 @@ export const yuuyaAttackOnTraumaOfLastYear: ConditionalAnimation<
     effect.name === "BatteryDeclaration" &&
     effect.attacker === playerId
   ) {
-    result = yuuyaFullBatteryAttackOnTraumaOfLastYear(props);
+    result = yuuyaFullBatteryAttackWhenTraumaOfLastYear(props);
   }
 
   return result;
