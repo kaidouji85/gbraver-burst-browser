@@ -9,8 +9,8 @@ import { executeNoZeroDefenseIfNeeded } from "./execute-no-zero-defense-if-neede
 
 /** イベント終了情報 */
 type Ret = {
-  /** ステート更新結果 */
-  state: PilotSkillTutorial02State;
+  /** イベントステート更新結果 */
+  eventState: PilotSkillTutorial02State;
   /** コマンドキャンセル情報 */
   cancel: CommandCanceled;
 };
@@ -26,7 +26,7 @@ export async function onBatteryCommandSelected(
   const isNoZeroDefenseExecuted = await executeNoZeroDefenseIfNeeded(props);
   if (isNoZeroDefenseExecuted) {
     return {
-      state: props.eventState,
+      eventState: props.eventState,
       cancel: {
         isCommandCanceled: true,
       },
@@ -36,7 +36,7 @@ export async function onBatteryCommandSelected(
   const isLessThanAttack3Executed = await executeLessThanAttack3IfNeeded(props);
   if (isLessThanAttack3Executed) {
     return {
-      state: props.eventState,
+      eventState: props.eventState,
       cancel: {
         isCommandCanceled: true,
       },
@@ -44,7 +44,7 @@ export async function onBatteryCommandSelected(
   }
 
   return {
-    state: props.eventState,
+    eventState: props.eventState,
     cancel: {
       isCommandCanceled: false,
     },

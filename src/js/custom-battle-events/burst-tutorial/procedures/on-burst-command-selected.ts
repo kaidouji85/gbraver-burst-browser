@@ -10,8 +10,8 @@ import { burstIsTrumpCard } from "../stories/burst-is-trump-card";
 
 /** イベント終了情報 */
 type Ret = {
-  /** ステート更新結果 */
-  state: BurstTutorialState;
+  /** イベントステート更新結果 */
+  eventState: BurstTutorialState;
   /** コマンドキャンセル情報 */
   cancel: CommandCanceled;
 };
@@ -27,7 +27,7 @@ export async function onBurstCommandSelected(
   if (isBurstButtonFocused(props)) {
     focusOutBurstButton(props);
     return {
-      state: props.eventState,
+      eventState: props.eventState,
       cancel: {
         isCommandCanceled: false,
       },
@@ -38,7 +38,7 @@ export async function onBurstCommandSelected(
   if (player && player.armdozer.battery === player.armdozer.maxBattery) {
     await burstIsTrumpCard(props);
     return {
-      state: props.eventState,
+      eventState: props.eventState,
       cancel: {
         isCommandCanceled: true,
       },
@@ -46,7 +46,7 @@ export async function onBurstCommandSelected(
   }
 
   return {
-    state: props.eventState,
+    eventState: props.eventState,
     cancel: {
       isCommandCanceled: false,
     },
