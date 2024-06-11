@@ -25,7 +25,7 @@ export async function onBurstCommandSelected(
   if (isBurstButtonFocused(props)) {
     focusOutBurstButton(props);
     return {
-      state: props.state,
+      state: props.eventState,
       cancel: {
         isCommandCanceled: false,
       },
@@ -33,7 +33,7 @@ export async function onBurstCommandSelected(
   }
 
   return {
-    state: props.state,
+    state: props.eventState,
     cancel: {
       isCommandCanceled: false,
     },

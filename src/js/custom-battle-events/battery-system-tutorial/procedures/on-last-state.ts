@@ -12,13 +12,13 @@ import { attackDescription } from "../stories/attack-description";
 export async function onLastState(
   props: Readonly<LastState & BatterySystemTutorialProps>,
 ): Promise<BatterySystemTutorialState> {
-  if (props.state.isBatterySystemDescriptionComplete) {
-    return props.state;
+  if (props.eventState.isBatterySystemDescriptionComplete) {
+    return props.eventState;
   }
 
   const { lastState } = props;
   if (lastState.effect.name !== "InputCommand") {
-    return props.state;
+    return props.eventState;
   }
 
   const isMyTurn = lastState.activePlayerId === props.playerId;
@@ -31,5 +31,5 @@ export async function onLastState(
     );
   }
 
-  return props.state;
+  return props.eventState;
 }

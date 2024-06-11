@@ -24,7 +24,7 @@ export async function afterLastState(
   const extractedGameEnd = extractGameEnd(props.update);
 
   if (!extractedGameEnd) {
-    return props.state;
+    return props.eventState;
   }
 
   const gameEnd: GameStateX<GameEnd> = extractedGameEnd;
@@ -35,5 +35,5 @@ export async function afterLastState(
   await refreshConversation(props);
   await tutorialEnd(props);
   invisibleAllMessageWindows(props);
-  return props.state;
+  return props.eventState;
 }
