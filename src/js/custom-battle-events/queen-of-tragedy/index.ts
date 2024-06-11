@@ -14,33 +14,33 @@ import { QueenOfTragedyProps } from "./props";
 
 /** 悲劇の女王 イベント */
 class QueenOfTragedy extends EmptyCustomBattleEvent {
-  /** プロパティ */
-  #props: QueenOfTragedyProps;
+  /** イベントプロパティ */
+  #eventProps: QueenOfTragedyProps;
 
   /**
    * コンストラクタ
    */
   constructor() {
     super();
-    this.#props = createQueenOfTragedyProps();
+    this.#eventProps = createQueenOfTragedyProps();
   }
 
   /** @override */
   onStateUpdateStarted(props: StateUpdateStarted) {
-    this.#props.state = onStateUpdateStarted({
+    this.#eventProps.state = onStateUpdateStarted({
       ...props,
-      ...this.#props,
+      ...this.#eventProps,
     });
   }
 
   /** @override */
   async beforeLastState(props: LastState): Promise<void> {
-    this.#props.state = await beforeLastState({ ...props, ...this.#props });
+    this.#eventProps.state = await beforeLastState({ ...props, ...this.#eventProps });
   }
 
   /** @override */
   onStateAnimation(props: CustomStateAnimation): Animate {
-    return onStateAnimation({ ...props, ...this.#props });
+    return onStateAnimation({ ...props, ...this.#eventProps });
   }
 }
 
