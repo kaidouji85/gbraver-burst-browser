@@ -8,8 +8,8 @@ import type { BatterySystemTutorialState } from "../state";
 
 /** イベント終了情報 */
 type Ret = {
-  /** ステート更新結果 */
-  state: BatterySystemTutorialState;
+  /** イベントステート更新結果 */
+  eventState: BatterySystemTutorialState;
   /** コマンドキャンセル情報 */
   cancel: CommandCanceled;
 };
@@ -25,7 +25,7 @@ export async function onPilotSkillCommandSelected(
   if (isPilotButtonFocused(props)) {
     focusOutPilotButton(props);
     return {
-      state: props.eventState,
+      eventState: props.eventState,
       cancel: {
         isCommandCanceled: false,
       },
@@ -33,7 +33,7 @@ export async function onPilotSkillCommandSelected(
   }
 
   return {
-    state: props.eventState,
+    eventState: props.eventState,
     cancel: {
       isCommandCanceled: false,
     },
