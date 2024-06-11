@@ -43,12 +43,18 @@ class BurstTutorial extends EmptyCustomBattleEvent {
 
   /** @override */
   async beforeLastState(props: LastState): Promise<void> {
-    this.#eventProps.eventState = await beforeLastState({ ...props, ...this.#eventProps });
+    this.#eventProps.eventState = await beforeLastState({
+      ...props,
+      ...this.#eventProps,
+    });
   }
 
   /** @override */
   async afterLastState(props: LastState): Promise<void> {
-    this.#eventProps.eventState = await afterLastState({ ...props, ...this.#eventProps });
+    this.#eventProps.eventState = await afterLastState({
+      ...props,
+      ...this.#eventProps,
+    });
   }
 
   /** @override */

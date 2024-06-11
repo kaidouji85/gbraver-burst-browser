@@ -35,7 +35,10 @@ class QueenOfTragedy extends EmptyCustomBattleEvent {
 
   /** @override */
   async beforeLastState(props: LastState): Promise<void> {
-    this.#eventProps.eventState = await beforeLastState({ ...props, ...this.#eventProps });
+    this.#eventProps.eventState = await beforeLastState({
+      ...props,
+      ...this.#eventProps,
+    });
   }
 
   /** @override */

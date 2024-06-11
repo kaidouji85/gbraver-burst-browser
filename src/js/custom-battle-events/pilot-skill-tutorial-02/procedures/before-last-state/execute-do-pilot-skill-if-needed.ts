@@ -21,7 +21,11 @@ export async function executeDoPilotSkillIfNeeded(
 
   const correctPower = totalCorrectPower(player.armdozer.effects);
   const turn = turnCount(props.stateHistory);
-  if (correctPower <= 0 && turn === 2 && !props.eventState.isDoPilotSkillComplete) {
+  if (
+    correctPower <= 0 &&
+    turn === 2 &&
+    !props.eventState.isDoPilotSkillComplete
+  ) {
     await doPilotSkill(props);
     return true;
   }

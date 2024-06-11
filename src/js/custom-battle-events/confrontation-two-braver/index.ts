@@ -29,12 +29,18 @@ class ConfrontationTwoBraverEvent extends EmptyCustomBattleEvent {
 
   /** @override */
   onStateUpdateStarted(props: StateUpdateStarted): void {
-    this.#eventProps.eventState = onStateUpdateStarted({ ...props, ...this.#eventProps });
+    this.#eventProps.eventState = onStateUpdateStarted({
+      ...props,
+      ...this.#eventProps,
+    });
   }
 
   /** @override */
   async beforeLastState(props: LastState): Promise<void> {
-    this.#eventProps.eventState = await beforeLastState({ ...props, ...this.#eventProps });
+    this.#eventProps.eventState = await beforeLastState({
+      ...props,
+      ...this.#eventProps,
+    });
   }
 
   /** @override */
