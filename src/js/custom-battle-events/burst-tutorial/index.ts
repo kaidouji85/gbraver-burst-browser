@@ -21,34 +21,34 @@ import { BurstTutorialProps, createBurstTutorialProps } from "./props";
 /** バーストチュートリアル用のカスタムバトルイベント */
 class BurstTutorial extends EmptyCustomBattleEvent {
   /** イベントプロパティ */
-  eventProps: BurstTutorialProps;
+  #eventProps: BurstTutorialProps;
 
   /**
    * コンストラクタ
    */
   constructor() {
     super();
-    this.eventProps = createBurstTutorialProps();
+    this.#eventProps = createBurstTutorialProps();
   }
 
   /** @override */
   onStateAnimation(props: CustomStateAnimation): Animate {
-    return onStateAnimation({ ...props, ...this.eventProps });
+    return onStateAnimation({ ...props, ...this.#eventProps });
   }
 
   /** @override */
   afterStateAnimation(props: CustomStateAnimation): Animate {
-    return afterStateAnimation({ ...props, ...this.eventProps });
+    return afterStateAnimation({ ...props, ...this.#eventProps });
   }
 
   /** @override */
   async beforeLastState(props: LastState): Promise<void> {
-    this.eventProps.eventState = await beforeLastState({ ...props, ...this.eventProps });
+    this.#eventProps.eventState = await beforeLastState({ ...props, ...this.#eventProps });
   }
 
   /** @override */
   async afterLastState(props: LastState): Promise<void> {
-    this.eventProps.eventState = await afterLastState({ ...props, ...this.eventProps });
+    this.#eventProps.eventState = await afterLastState({ ...props, ...this.#eventProps });
   }
 
   /** @override */
@@ -57,9 +57,9 @@ class BurstTutorial extends EmptyCustomBattleEvent {
   ): Promise<CommandCanceled> {
     const { state, cancel } = await onBatteryCommandSelected({
       ...props,
-      ...this.eventProps,
+      ...this.#eventProps,
     });
-    this.eventProps.eventState = state;
+    this.#eventProps.eventState = state;
     return cancel;
   }
 
@@ -69,9 +69,9 @@ class BurstTutorial extends EmptyCustomBattleEvent {
   ): Promise<CommandCanceled> {
     const { state, cancel } = await onBurstCommandSelected({
       ...props,
-      ...this.eventProps,
+      ...this.#eventProps,
     });
-    this.eventProps.eventState = state;
+    this.#eventProps.eventState = state;
     return cancel;
   }
 
@@ -81,9 +81,9 @@ class BurstTutorial extends EmptyCustomBattleEvent {
   ): Promise<CommandCanceled> {
     const { state, cancel } = await onPilotSkillCommandSelected({
       ...props,
-      ...this.eventProps,
+      ...this.#eventProps,
     });
-    this.eventProps.eventState = state;
+    this.#eventProps.eventState = state;
     return cancel;
   }
 }
