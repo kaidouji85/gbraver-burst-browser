@@ -64,11 +64,11 @@ class ZeroDefenseTutorialEvent extends EmptyCustomBattleEvent {
   async onBatteryCommandSelected(
     props: BatteryCommandSelected,
   ): Promise<CommandCanceled> {
-    const { state, cancel } = await onBatteryCommandSelected({
+    const { eventState, cancel } = await onBatteryCommandSelected({
       ...props,
       ...this.#eventProps,
     });
-    this.#eventProps.eventState = state;
+    this.#eventProps.eventState = eventState;
     return cancel;
   }
 
@@ -76,11 +76,11 @@ class ZeroDefenseTutorialEvent extends EmptyCustomBattleEvent {
   async onBurstCommandSelected(
     props: BurstCommandSelected,
   ): Promise<CommandCanceled> {
-    const { state, cancel } = await onBurstCommandSelected({
+    const { eventState, cancel } = await onBurstCommandSelected({
       ...props,
       ...this.#eventProps,
     });
-    this.#eventProps.eventState = state;
+    this.#eventProps.eventState = eventState;
     return cancel;
   }
 
@@ -88,11 +88,11 @@ class ZeroDefenseTutorialEvent extends EmptyCustomBattleEvent {
   async onPilotSkillCommandSelected(
     props: PilotSkillCommandSelected,
   ): Promise<CommandCanceled> {
-    const { state, cancel } = await onPilotSkillCommandSelected({
+    const { eventState, cancel } = await onPilotSkillCommandSelected({
       ...props,
       ...this.#eventProps,
     });
-    this.#eventProps.eventState = state;
+    this.#eventProps.eventState = eventState;
     return cancel;
   }
 }
