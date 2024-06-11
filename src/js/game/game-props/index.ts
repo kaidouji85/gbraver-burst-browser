@@ -18,7 +18,7 @@ import { Resize } from "../../window/resize";
 import { GBraverBurstBrowserConfigRepository } from "../config/repository/repository";
 import { DOMFloaters } from "../dom-floaters/dom-floaters";
 import { FutureSuddenlyBattleEnd } from "../future-suddenly-battle-end";
-import { InProgress } from "../in-progress/in-progress";
+import { InProgress } from "../in-progress";
 import { InterruptScenes } from "../innterrupt-scenes";
 import { GameActionManageContainer } from "./game-action-manage-container";
 
@@ -32,71 +32,71 @@ export interface GameProps
     SEPlayerContainer,
     GameActionManageContainer {
   /** サービスワーカーを利用するか否か、trueで利用する */
-  isServiceWorkerUsed: boolean;
+  readonly isServiceWorkerUsed: boolean;
   /** APIサーバ系機能が利用可能か否か、trueで利用可能 */
-  isAPIServerEnable: boolean;
+  readonly isAPIServerEnable: boolean;
   /** 開発中のエピソードをプレイできるか否かのフラグ、trueでプレイできる */
-  canPlayEpisodeInDevelopment: boolean;
+  readonly canPlayEpisodeInDevelopment: boolean;
   /** 開発中のリソースをロードするか否かのフラグ、trueでロードする */
-  shouldLoadDevelopingResource: boolean;
+  readonly shouldLoadDevelopingResource: boolean;
   /** 開発中のアームドーザを選択できるか否かのフラグ、trueで選択できる */
-  canPlayDevelopingArmdozer: boolean;
+  readonly canPlayDevelopingArmdozer: boolean;
   /** 開発中のパイロットを選択できるか否かのフラグ、trueで選択できる */
-  canPlayDevelopingPilot: boolean;
+  readonly canPlayDevelopingPilot: boolean;
 
   /** 遊び方スライドのURL */
-  howToPlayURL: string;
+  readonly howToPlayURL: string;
   /** 利用規約ページのURL */
-  termsOfServiceURL: string;
+  readonly termsOfServiceURL: string;
   /** プライバシーポリシーページのURL */
-  privacyPolicyURL: string;
+  readonly privacyPolicyURL: string;
   /** 問い合わせページのURL */
-  contactURL: string;
+  readonly contactURL: string;
 
   /** パフォーマンス統計、表示されていない場合はnullが入る */
   performanceStats: PerformanceStats | null;
   /** ServiceWorkerRegistrationのキャッシュ */
-  serviceWorker: ServiceWorkerRegistration | null | undefined;
+  serviceWorker: ServiceWorkerRegistration | null;
 
   /** ブラウザ設定リポジトリ */
-  config: GBraverBurstBrowserConfigRepository;
+  readonly config: GBraverBurstBrowserConfigRepository;
 
   /** 現在進行中のフロー */
   inProgress: InProgress;
 
   /** APIサーバのSDK */
-  api: BrowserSDK;
+  readonly api: BrowserSDK;
   /** バトル強制終了監視 */
-  suddenlyBattleEnd: FutureSuddenlyBattleEnd;
+  readonly suddenlyBattleEnd: FutureSuddenlyBattleEnd;
 
   /** リサイズ */
-  resize: Observable<Resize>;
+  readonly resize: Observable<Resize>;
   /** window押下 */
-  pushWindow: Observable<PushWindow>;
+  readonly pushWindow: Observable<PushWindow>;
   /** ゲームループ */
-  gameLoop: Observable<GameLoop>;
+  readonly gameLoop: Observable<GameLoop>;
 
   /** cssカスタムプロパティ --hud-ui-scale */
-  hudUIScale: CssHUDUIScale;
+  readonly hudUIScale: CssHUDUIScale;
 
   /** DOMフェーダ */
-  fader: DOMFader;
+  readonly fader: DOMFader;
   /** 強制割込シーン管理オブジェクト */
-  interruptScenes: InterruptScenes;
+  readonly interruptScenes: InterruptScenes;
   /** DOMシーンバインダー */
-  domSceneBinder: DOMSceneBinder;
+  readonly domSceneBinder: DOMSceneBinder;
   /** DOMダイアログバインダー */
-  domDialogBinder: DOMDialogBinder;
+  readonly domDialogBinder: DOMDialogBinder;
   /** DOMフローター管理オブジェクト */
-  domFloaters: DOMFloaters;
+  readonly domFloaters: DOMFloaters;
 
   /** レンダラ管理オブジェクト */
-  renderer: Renderer;
+  readonly renderer: Renderer;
   /** 3Dシーンバインダー */
-  tdBinder: TDSceneBinder;
+  readonly tdBinder: TDSceneBinder;
 
   /** リソースルート */
-  resourceRoot: ResourceRoot;
+  readonly resourceRoot: ResourceRoot;
   /** 全リソースを読み込んだか否かのフラグ、trueで全リソースを読み込んだ */
   isFullResourceLoaded: boolean;
 }

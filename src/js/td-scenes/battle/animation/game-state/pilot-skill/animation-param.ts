@@ -17,8 +17,8 @@ import { StateAnimationProps } from "../state-animation-props";
 
 /**
  * パイロットスキル アニメーション パラメータ
- * @type SKILL パイロットスキル
- * @type PILOT HUDパイロット
+ * @template SKILL パイロットスキル
+ * @template PILOT HUDパイロット
  */
 export type PilotSkillAnimationParamX<
   SKILL extends PilotSkill,
@@ -48,18 +48,81 @@ export type PilotSkillAnimationParamX<
   tdCamera: TDCamera;
 };
 
-/**
- * パイロットスキル アニメーション パラメータ
- */
+/** パイロットスキル アニメーション パラメータ */
 export type PilotSkillAnimationParam = PilotSkillAnimationParamX<
   PilotSkill,
   HUDPilotObjects
 >;
 
 /**
+ * パイロットスキル アニメーション スキル発動者パラメータを抽出する
+ * @param props 戦闘シーンプロパティ
+ * @param gameState ゲームステート
+ * @returns 抽出結果、抽出できない場合はnullを返す
+ */
+function extractInvoker(
+  props: StateAnimationProps,
+  gameState: GameStateX<PilotSkillEffect>,
+) {
+  const { effect, players } = gameState;
+  const pilot = props.view.hud.pilots.find(
+    (p) => p.playerId === effect.invokerId,
+  );
+  const invokerState = players.find((p) => p.playerId === effect.invokerId);
+  const invokerArmdozer = props.view.td.armdozers.find(
+    (a) => a.playerId === effect.invokerId,
+  );
+  const invokerTD = props.view.td.players.find(
+    (p) => p.playerId === effect.invokerId,
+  );
+  const invokerHUD = props.view.hud.players.find(
+    (h) => h.playerId === effect.invokerId,
+  );
+  return pilot && invokerState && invokerArmdozer && invokerTD && invokerHUD
+    ? {
+        skill: effect.skill,
+        pilot,
+        invokerState,
+        invokerTD,
+        invokerHUD,
+        invokerSprite: invokerArmdozer.sprite(),
+      }
+    : null;
+}
+
+/**
+ * パイロットスキル アニメーション 攻撃側パラメータを抽出する
+ * @param props 戦闘シーンプロパティ
+ * @param gameState ゲームステート
+ * @returns 抽出結果、抽出できない場合はnullを返す
+ */
+function extractAttacker(
+  props: StateAnimationProps,
+  gameState: GameStateX<PilotSkillEffect>,
+) {
+  const { activePlayerId } = gameState;
+  const attackerTDArmdozer = props.view.td.armdozers.find(
+    (a) => a.playerId === activePlayerId,
+  );
+  return attackerTDArmdozer ? { attackerTDArmdozer } : null;
+}
+
+/**
+ * パイロットスキル アニメーション その他パラメータを抽出する
+ * @param props 戦闘シーンプロパティ
+ * @returns 抽出結果
+ */
+function extractOthers(props: StateAnimationProps) {
+  return {
+    tdObjects: props.view.td.gameObjects,
+    hudObjects: props.view.hud.gameObjects,
+    tdCamera: props.view.td.camera,
+  };
+}
+
+/**
  * パイロットスキル アニメーション パラメータに変換する
  * 変換できない場合はnullを返す
- *
  * @param props 戦闘シーンプロパティ
  * @param gameState ゲームステート
  * @returns 変換結果
@@ -67,47 +130,11 @@ export type PilotSkillAnimationParam = PilotSkillAnimationParamX<
 export function toPilotSkillAnimationParam(
   props: StateAnimationProps,
   gameState: GameStateX<PilotSkillEffect>,
-): PilotSkillAnimationParam | null | undefined {
-  const effect: PilotSkillEffect = gameState.effect;
-  const invokerState = gameState.players.find(
-    (v) => v.playerId === effect.invokerId,
-  );
-  const invokerArmdozer = props.view.td.armdozers.find(
-    (v) => v.playerId === effect.invokerId,
-  );
-  const pilot = props.view.hud.pilots.find(
-    (v) => v.playerId === effect.invokerId,
-  );
-  const invokerTD = props.view.td.players.find(
-    (v) => v.playerId === effect.invokerId,
-  );
-  const invokerHUD = props.view.hud.players.find(
-    (v) => v.playerId === effect.invokerId,
-  );
-  const attackerTDArmdozer = props.view.td.armdozers.find(
-    (v) => v.playerId === gameState.activePlayerId,
-  );
-  if (
-    !invokerState ||
-    !pilot ||
-    !invokerArmdozer ||
-    !invokerTD ||
-    !invokerHUD ||
-    !attackerTDArmdozer
-  ) {
-    return null;
-  }
-
-  return {
-    skill: effect.skill,
-    pilot,
-    invokerState: invokerState,
-    invokerSprite: invokerArmdozer.sprite(),
-    invokerTD,
-    invokerHUD,
-    attackerTDArmdozer,
-    tdObjects: props.view.td.gameObjects,
-    hudObjects: props.view.hud.gameObjects,
-    tdCamera: props.view.td.camera,
-  };
+): PilotSkillAnimationParam | null {
+  const invokerProps = extractInvoker(props, gameState);
+  const attackerProps = extractAttacker(props, gameState);
+  const otherProps = extractOthers(props);
+  return invokerProps && attackerProps
+    ? { ...invokerProps, ...attackerProps, ...otherProps }
+    : null;
 }

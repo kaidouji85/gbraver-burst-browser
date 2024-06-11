@@ -20,6 +20,8 @@ import { BattleSceneView } from "./view";
 export type CustomBattleEventProps = SEPlayerContainer & {
   /** 戦闘画面を開いているプレイヤーのID */
   readonly playerId: PlayerId;
+  /** 敵プレイヤーのID */
+  readonly enemyId: PlayerId;
   /** 戦闘シーンビュー */
   readonly view: BattleSceneView;
   /** window押下ストリーム */
@@ -30,11 +32,18 @@ export type CustomBattleEventProps = SEPlayerContainer & {
   readonly stateHistory: GameState[];
 };
 
-/** ステート更新開始イベントのプロパティ */
-export type StateUpdateStarted = CustomBattleEventProps & {
-  /** コマンド入力から最終ステートまでのステート更新履歴 */
-  update: GameState[];
+/** 最終ステートコンテナ */
+export type LastStateContainer = {
+  /** 最終ステート */
+  readonly lastState: GameState;
 };
+
+/** ステート更新開始イベントのプロパティ */
+export type StateUpdateStarted = CustomBattleEventProps &
+  LastStateContainer & {
+    /** コマンド入力から最終ステートまでのステート更新履歴 */
+    readonly update: GameState[];
+  };
 
 /** カスタムステートアニメーションのプロパティ */
 export type CustomStateAnimation = CustomBattleEventProps & {
@@ -43,33 +52,37 @@ export type CustomStateAnimation = CustomBattleEventProps & {
 };
 
 /** 最終ステート系イベントのプロパティ */
-export type LastState = CustomBattleEventProps & {
-  /** コマンド入力から最終ステートまでのステート更新履歴 */
-  update: GameState[];
-};
+export type LastState = CustomBattleEventProps &
+  LastStateContainer & {
+    /** コマンド入力から最終ステートまでのステート更新履歴 */
+    readonly update: GameState[];
+  };
 
 /** バッテリーコマンド選択イベントのプロパティ */
-export type BatteryCommandSelected = CustomBattleEventProps & {
-  /** プレイヤーが選択したバッテリーコマンド */
-  battery: BatteryCommand;
-};
+export type BatteryCommandSelected = CustomBattleEventProps &
+  LastStateContainer & {
+    /** プレイヤーが選択したバッテリーコマンド */
+    readonly battery: BatteryCommand;
+  };
 
 /** バーストコマンド選択イベントのプロパティ */
-export type BurstCommandSelected = CustomBattleEventProps & {
-  /** プレイヤーが選択したバーストコマンド */
-  burst: BurstCommand;
-};
+export type BurstCommandSelected = CustomBattleEventProps &
+  LastStateContainer & {
+    /** プレイヤーが選択したバーストコマンド */
+    readonly burst: BurstCommand;
+  };
 
 /** パイロットスキル選択イベントのプロパティ */
-export type PilotSkillCommandSelected = CustomBattleEventProps & {
-  /** プレイヤーが選択したパイロットスキルコマンド */
-  pilot: PilotSkillCommand;
-};
+export type PilotSkillCommandSelected = CustomBattleEventProps &
+  LastStateContainer & {
+    /** プレイヤーが選択したパイロットスキルコマンド */
+    readonly pilot: PilotSkillCommand;
+  };
 
 /** コマンドキャンセル情報 */
 export type CommandCanceled = {
   /** プレイヤーが決定したコマンドをキャンセルするか、trueでキャンセルする */
-  isCommandCanceled: boolean;
+  readonly isCommandCanceled: boolean;
 };
 
 /** カスタムバトルイベント */

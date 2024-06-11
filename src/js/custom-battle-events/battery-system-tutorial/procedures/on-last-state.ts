@@ -1,9 +1,7 @@
-import type { GameState } from "gbraver-burst-core";
-
-import type { LastState } from "../../../td-scenes/battle/custom-battle-event";
+import { LastState } from "../../../td-scenes/battle/custom-battle-event";
 import { focusInBatterySelector } from "../../focus";
 import { BatterySystemTutorialProps } from "../props";
-import type { BatterySystemTutorialState } from "../state";
+import { BatterySystemTutorialState } from "../state";
 import { attackDescription } from "../stories/attack-description";
 
 /**
@@ -18,12 +16,7 @@ export async function onLastState(
     return props.state;
   }
 
-  const foundLastState = props.update[props.update.length - 1];
-  if (!foundLastState) {
-    return props.state;
-  }
-
-  const lastState: GameState = foundLastState;
+  const { lastState } = props;
   if (lastState.effect.name !== "InputCommand") {
     return props.state;
   }

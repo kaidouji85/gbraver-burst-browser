@@ -14,10 +14,12 @@ export async function doPilotSkillEventIfNeeded(
   props: Readonly<BattleSceneProps>,
   pilot: Readonly<PilotSkillCommand>,
 ): Promise<CommandCanceled> {
-  return props.customBattleEvent
+  const lastState = props.stateHistory.at(-1);
+  return props.customBattleEvent && lastState
     ? await props.customBattleEvent.onPilotSkillCommandSelected({
         ...props,
         pilot,
+        lastState,
       })
     : { isCommandCanceled: false };
 }

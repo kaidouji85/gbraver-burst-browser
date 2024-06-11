@@ -9,11 +9,7 @@ import { noZeroDefense } from "../../stories/no-zero-defense";
 export async function executeNoZeroDefenseIfNeeded(
   props: Readonly<BatteryCommandSelected>,
 ): Promise<boolean> {
-  const lastState = props.stateHistory.at(-1);
-  if (lastState === undefined) {
-    return false;
-  }
-
+  const { lastState } = props;
   const player = lastState.players.find((p) => p.playerId === props.playerId);
   if (player === undefined) {
     return false;

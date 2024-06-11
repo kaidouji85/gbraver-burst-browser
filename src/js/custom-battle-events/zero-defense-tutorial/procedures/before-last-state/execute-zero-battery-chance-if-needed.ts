@@ -1,5 +1,3 @@
-import { GameState } from "gbraver-burst-core";
-
 import { LastState } from "../../../../td-scenes/battle/custom-battle-event";
 import { ZeroDefenseTutorialProps } from "../../props";
 import { ZeroDefenseTutorialState } from "../../state";
@@ -17,12 +15,7 @@ export async function executeZeroBatteryChanceIfNeeded(
     return props.state;
   }
 
-  const foundLastState = props.update[props.update.length - 1];
-  if (!foundLastState) {
-    return props.state;
-  }
-
-  const lastState: GameState = foundLastState;
+  const { lastState } = props;
   const enemy = lastState.players.find((v) => v.playerId !== props.playerId);
   if (!enemy) {
     return props.state;
