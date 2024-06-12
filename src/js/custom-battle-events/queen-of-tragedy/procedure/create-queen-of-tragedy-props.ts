@@ -7,7 +7,7 @@ import { QueenOfTragedyProps } from "../props";
 export const createQueenOfTragedyProps = (): QueenOfTragedyProps => ({
   eventState: {
     isIntroductionComplete: false,
-    isNotRepeatMistakeComplete: false,
+    isStoryOfTurn3Complete: false,
     chapter: { type: "None" },
   },
 });
