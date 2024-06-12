@@ -13,14 +13,14 @@ export function onStateUpdateStarted(
 ): QueenOfTragedyState {
   let result: QueenOfTragedyState = props.eventState;
 
-  const { stateHistory, update, eventState, playerId } = props;
+  const { stateHistory, update, playerId } = props;
   const turn = turnCount(stateHistory);
   const willPlayerBurst = update.some(
     (s) => s.effect.name === "BurstEffect" && s.effect.burstPlayer === playerId,
   );
 
   if (turn === 2 && willPlayerBurst) {
-    const chapter = { type: "TraumaOfLastYear", startTurn: turn } as const;
+    const chapter = { type: "TraumaOfLastYear" } as const;
     result = { ...result, chapter };
   }
 
