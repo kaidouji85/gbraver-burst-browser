@@ -31,7 +31,7 @@ export async function startOfTurn3(
   activeRightMessageWindowWithFace(props, "Raito");
   await scrollRightMessages(props, [
     ["ライト", `「ガイ ここから先が${wbr}本番や`],
-    [`目ん玉ひん剥いて その光景を焼きつけるんや」`],
+    [`その光景を${wbr}しかと${wbr}焼きつけるんや」`],
   ]);
   props.view.dom.rightMessageWindow.darken();
 
