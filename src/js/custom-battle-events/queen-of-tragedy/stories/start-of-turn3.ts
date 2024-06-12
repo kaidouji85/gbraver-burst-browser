@@ -25,7 +25,7 @@ export async function startOfTurn3(
   activeLeftMessageWindowWithFace(props, "Gai");
   await scrollLeftMessages(props, [
     ["ガイ", `「……！！`],
-    [`あの${wbr}ツバサ先輩が${wbr}2ターンで！！」`]
+    [`あの${wbr}ツバサ先輩が${wbr}2ターンで！！」`],
   ]);
   props.view.dom.leftMessageWindow.darken();
 
