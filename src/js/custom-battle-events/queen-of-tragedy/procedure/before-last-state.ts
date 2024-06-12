@@ -34,10 +34,12 @@ export async function beforeLastState(
     enemy.armdozer.hp <= 100
   ) {
     await notRepeatMistake(props);
-    result = { ...result, isStoryOfTurn3Complete: true };
+    const chapter = { type: "None" } as const;
+    result = { ...result, isStoryOfTurn3Complete: true, chapter };
   } else if (turn === 3 && !result.isStoryOfTurn3Complete) {
     await startOfTurn3(props);
-    result = { ...result, isStoryOfTurn3Complete: true };
+    const chapter = { type: "None" } as const;
+    result = { ...result, isStoryOfTurn3Complete: true, chapter };
   }
 
   return result;

@@ -13,7 +13,7 @@ export function onStateUpdateStarted(
 ): QueenOfTragedyState {
   let result: QueenOfTragedyState = props.eventState;
 
-  const { stateHistory, update, playerId } = props;
+  const { stateHistory, update, eventState, playerId } = props;
   const turn = turnCount(stateHistory);
   const willPlayerBurst = update.some(
     (s) => s.effect.name === "BurstEffect" && s.effect.burstPlayer === playerId,
@@ -23,5 +23,6 @@ export function onStateUpdateStarted(
     const chapter = { type: "TraumaOfLastYear", startTurn: turn } as const;
     result = { ...result, chapter };
   }
+
   return result;
 }
