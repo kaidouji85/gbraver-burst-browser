@@ -6,6 +6,6 @@ export type QueenOfTragedyState = {
   readonly chapter: QueenOfTragedyChapter;
   /** イントロダクションが完了したか否か、trueで完了 */
   readonly isIntroductionComplete: boolean;
-  /** 過ちを繰り返さないが完了したか否か、trueで完了 */
-  readonly isNotRepeatMistakeComplete: boolean;
+  /** 3ターン開始時に再生されるいずれかのストーリーが完了したか否か、trueで完了 */
+  readonly isStoryOfTurn3Complete: boolean;
 };

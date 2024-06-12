@@ -6,6 +6,7 @@ import { QueenOfTragedyProps } from "../props";
 import { QueenOfTragedyState } from "../state";
 import { introduction } from "../stories/introduction";
 import { notRepeatMistake } from "../stories/not-repeat-mistake";
+import { startOfTurn3 } from "../stories/start-of-turn3";
 
 /**
  * 最終ステート直前イベント
@@ -20,11 +21,7 @@ export async function beforeLastState(
 
   const { stateHistory } = props;
   const separatedPlayers = separatePlayersFromLastState(props);
-  if (!separatedPlayers) {
-    return result;
-  }
-
-  const { enemy } = separatedPlayers;
+  const enemy = separatedPlayers?.enemy;
   const turn = turnCount(stateHistory);
 
   if (turn === 1 && !result.isIntroductionComplete) {
@@ -32,11 +29,15 @@ export async function beforeLastState(
     result = { ...result, isIntroductionComplete: true };
   } else if (
     turn === 3 &&
-    enemy.armdozer.hp <= 100 &&
-    !result.isNotRepeatMistakeComplete
+    !result.isStoryOfTurn3Complete &&
+    enemy &&
+    enemy.armdozer.hp <= 100
   ) {
     await notRepeatMistake(props);
-    result = { ...result, isNotRepeatMistakeComplete: true };
+    result = { ...result, isStoryOfTurn3Complete: true };
+  } else if (turn === 3 && !result.isStoryOfTurn3Complete) {
+    await startOfTurn3(props);
+    result = { ...result, isStoryOfTurn3Complete: true };
   }
 
   return result;
