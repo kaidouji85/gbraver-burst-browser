@@ -24,14 +24,15 @@ export async function startOfTurn3(
 
   activeLeftMessageWindowWithFace(props, "Gai");
   await scrollLeftMessages(props, [
-    ["ガイ", `「あのツバサ先輩${wbr}が2ターンで！！」`],
+    ["ガイ", `「……！！`],
+    [`あの${wbr}ツバサ先輩が${wbr}2ターンで！！」`],
   ]);
   props.view.dom.leftMessageWindow.darken();
 
   activeRightMessageWindowWithFace(props, "Raito");
   await scrollRightMessages(props, [
     ["ライト", `「ガイ ここから先が${wbr}本番や`],
-    [`その光景を${wbr}しかと${wbr}焼きつけるんや」`],
+    [`その光景 しかと${wbr}目に${wbr}焼きつけ${wbr}るんや」`],
   ]);
   props.view.dom.rightMessageWindow.darken();
 

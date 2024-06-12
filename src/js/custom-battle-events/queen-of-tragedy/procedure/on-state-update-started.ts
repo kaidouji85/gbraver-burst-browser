@@ -20,8 +20,9 @@ export function onStateUpdateStarted(
   );
 
   if (turn === 2 && willPlayerBurst) {
-    const chapter = { type: "TraumaOfLastYear", startTurn: turn } as const;
+    const chapter = { type: "TraumaOfLastYear" } as const;
     result = { ...result, chapter };
   }
+
   return result;
 }
