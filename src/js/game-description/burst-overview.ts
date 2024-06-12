@@ -12,7 +12,7 @@ import type {
  * @returns 説明文
  */
 function recoverBatteryOverview(burst: RecoverBattery): string {
-  return `バッテリー全回復、次ターンにバッテリー${burst.turnStartBatteryCorrect}回復`;
+  return `バッテリー${burst.recoverBattery}回復、次自分ターンにバッテリー${burst.turnStartBatteryCorrect}回復`;
 }
 
 /**
