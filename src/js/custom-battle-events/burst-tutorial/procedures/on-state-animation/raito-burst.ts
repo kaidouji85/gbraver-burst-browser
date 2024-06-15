@@ -1,6 +1,6 @@
 import { CustomStateAnimation } from "../../../../td-scenes/battle/custom-battle-event";
 import { ConditionalAnimation } from "../../../get-animation-if-conditional-met";
-import { isEnemyBurstActivated } from "../../../is-burst-activated";
+import { isEnemyBurstActivatedFromCurrentState } from "../../../is-burst-activated";
 import { raitoBurstShout } from "../../animation/raito-burst-shout";
 import { BurstTutorialProps } from "../../props";
 
@@ -8,5 +8,8 @@ import { BurstTutorialProps } from "../../props";
 export const raitoBurst: ConditionalAnimation<
   CustomStateAnimation & BurstTutorialProps
 >[] = [
-  (props) => (isEnemyBurstActivated(props) ? raitoBurstShout(props) : null),
+  (props) =>
+    isEnemyBurstActivatedFromCurrentState(props)
+      ? raitoBurstShout(props)
+      : null,
 ];

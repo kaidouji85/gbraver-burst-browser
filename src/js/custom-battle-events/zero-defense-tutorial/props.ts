@@ -2,8 +2,8 @@ import { ZeroDefenseTutorialState } from "./state";
 
 /** ゼロ防御チュートリアル プロパティ */
 export type ZeroDefenseTutorialProps = {
-  /** ステート */
-  state: ZeroDefenseTutorialState;
+  /** イベントステート */
+  eventState: ZeroDefenseTutorialState;
 };
 
 /**
@@ -18,5 +18,5 @@ export function createZeroDefenseTutorialProps(): ZeroDefenseTutorialProps {
     isExplainedBurstAtZeroBattery: false,
     isExplainedPilotSkillAtZeroBattery: false,
   };
-  return { state };
+  return { eventState: state };
 }

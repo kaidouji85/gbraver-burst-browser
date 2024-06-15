@@ -24,7 +24,7 @@ export async function onBatteryCommandSelected(
     focusOutBatterySelector(props);
   }
   return {
-    state: props.state,
+    eventState: props.eventState,
     cancel: {
       isCommandCanceled: false,
     },

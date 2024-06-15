@@ -11,5 +11,5 @@ export function isYuuyaAdvantageEnd(
   props: Readonly<CustomBattleEventProps & ConfrontationTwoBraverProps>,
 ): boolean {
   const turn = turnCount(props.stateHistory);
-  return 3 < turn && props.state.chapter.type === "YuuyaHasAdvantage";
+  return 3 < turn && props.eventState.chapter.type === "YuuyaHasAdvantage";
 }

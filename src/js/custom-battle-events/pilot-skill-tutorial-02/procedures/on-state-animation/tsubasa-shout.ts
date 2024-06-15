@@ -1,6 +1,6 @@
 import { CustomStateAnimation } from "../../../../td-scenes/battle/custom-battle-event";
 import { ConditionalAnimation } from "../../../get-animation-if-conditional-met";
-import { isEnemyBurstActivated } from "../../../is-burst-activated";
+import { isEnemyBurstActivatedFromCurrentState } from "../../../is-burst-activated";
 import { tsubasaBurst } from "../../animation/tsubasa-burst";
 import { tsubasaFirstBattle } from "../../animation/tsubasa-first-battle";
 import { PilotSkillTutorial02Props } from "../../props";
@@ -9,7 +9,8 @@ import { PilotSkillTutorial02Props } from "../../props";
 export const tsubasaShout: ConditionalAnimation<
   CustomStateAnimation & PilotSkillTutorial02Props
 >[] = [
-  (props) => (isEnemyBurstActivated(props) ? tsubasaBurst(props) : null),
+  (props) =>
+    isEnemyBurstActivatedFromCurrentState(props) ? tsubasaBurst(props) : null,
   (props) => {
     const { currentState } = props;
     return currentState.effect.name === "BatteryDeclaration" &&

@@ -8,8 +8,8 @@ import type { ZeroDefenseTutorialState } from "../state";
 
 /** イベント終了情報 */
 type Ret = {
-  /** ステート更新結果 */
-  state: ZeroDefenseTutorialState;
+  /** イベントステート更新結果 */
+  eventState: ZeroDefenseTutorialState;
   /** コマンドキャンセル情報 */
   cancel: CommandCanceled;
 };
@@ -25,7 +25,7 @@ export async function onBurstCommandSelected(
   if (isBurstButtonFocused(props)) {
     focusOutBurstButton(props);
     return {
-      state: props.state,
+      eventState: props.eventState,
       cancel: {
         isCommandCanceled: false,
       },
@@ -33,7 +33,7 @@ export async function onBurstCommandSelected(
   }
 
   return {
-    state: props.state,
+    eventState: props.eventState,
     cancel: {
       isCommandCanceled: false,
     },

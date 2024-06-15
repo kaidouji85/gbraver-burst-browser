@@ -3,8 +3,8 @@ import { BatterySystemTutorialState } from "../../state";
 
 /** onBatteryCommandSelected 終了情報  */
 export type BatteryCommandSelectedEnd = {
-  /** ステート更新結果 */
-  state: BatterySystemTutorialState;
+  /** イベントステート更新結果 */
+  eventState: BatterySystemTutorialState;
   /** コマンドキャンセル情報 */
   cancel: CommandCanceled;
 };

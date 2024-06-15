@@ -38,8 +38,8 @@ async function executeNoZeroDefenseIfNeeded(
 
 /** イベント終了情報 */
 type Ret = {
-  /** ステート更新結果 */
-  state: PilotSkillTutorial01State;
+  /** イベントステート更新結果 */
+  eventState: PilotSkillTutorial01State;
   /** コマンドキャンセル情報 */
   cancel: CommandCanceled;
 };
@@ -58,7 +58,7 @@ export async function onBatteryCommandSelected(
       cancel: {
         isCommandCanceled: true,
       },
-      state: props.state,
+      eventState: props.eventState,
     };
   }
 
@@ -66,6 +66,6 @@ export async function onBatteryCommandSelected(
     cancel: {
       isCommandCanceled: false,
     },
-    state: props.state,
+    eventState: props.eventState,
   };
 }

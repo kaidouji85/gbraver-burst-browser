@@ -1,6 +1,6 @@
 import { CustomStateAnimation } from "../../../../td-scenes/battle/custom-battle-event";
 import { ConditionalAnimation } from "../../../get-animation-if-conditional-met";
-import { isPlayerBurstActivated } from "../../../is-burst-activated";
+import { isPlayerBurstActivatedFromCurrentState } from "../../../is-burst-activated";
 import { turnCount } from "../../../turn-count";
 import { earlyShinyaBurstShout } from "../../animation/early-shinya-burst-shout";
 import { shinyaBurstShout } from "../../animation/shinya-burst-shout";
@@ -15,13 +15,13 @@ export const shinyaBurst: ConditionalAnimation<
 >[] = [
   (props) => {
     return turnCount(props.stateHistory) <= EARLY_TURN_LIMIT &&
-      isPlayerBurstActivated(props)
+      isPlayerBurstActivatedFromCurrentState(props)
       ? earlyShinyaBurstShout(props)
       : null;
   },
   (props) => {
     return EARLY_TURN_LIMIT < turnCount(props.stateHistory) &&
-      isPlayerBurstActivated(props)
+      isPlayerBurstActivatedFromCurrentState(props)
       ? shinyaBurstShout(props)
       : null;
   },

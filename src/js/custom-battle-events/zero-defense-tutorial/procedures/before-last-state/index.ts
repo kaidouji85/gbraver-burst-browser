@@ -19,12 +19,12 @@ export async function beforeLastState(
     (state) => state.effect.name === "GameEnd",
   );
   if (hasGameEnd) {
-    return props.state;
+    return props.eventState;
   }
 
-  if (!props.state.isIntroductionComplete) {
+  if (!props.eventState.isIntroductionComplete) {
     await introduction(props);
-    return { ...props.state, isIntroductionComplete: true };
+    return { ...props.eventState, isIntroductionComplete: true };
   }
 
   const executors = [
@@ -35,6 +35,6 @@ export async function beforeLastState(
   ];
   return await executors.reduce(async (acc, executor) => {
     const state = await acc;
-    return await executor({ ...props, state });
-  }, Promise.resolve(props.state));
+    return await executor({ ...props, eventState: state });
+  }, Promise.resolve(props.eventState));
 }

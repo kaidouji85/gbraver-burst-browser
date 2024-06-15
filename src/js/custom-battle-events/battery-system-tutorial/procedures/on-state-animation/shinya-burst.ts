@@ -1,6 +1,6 @@
 import { CustomStateAnimation } from "../../../../td-scenes/battle/custom-battle-event";
 import { ConditionalAnimation } from "../../../get-animation-if-conditional-met";
-import { isPlayerBurstActivated } from "../../../is-burst-activated";
+import { isPlayerBurstActivatedFromCurrentState } from "../../../is-burst-activated";
 import { shinyaBurstShout } from "../../animation/shinya-burst-shout";
 import { BatterySystemTutorialProps } from "../../props";
 
@@ -8,5 +8,8 @@ import { BatterySystemTutorialProps } from "../../props";
 export const shinyaBurst: ConditionalAnimation<
   CustomStateAnimation & BatterySystemTutorialProps
 >[] = [
-  (props) => (isPlayerBurstActivated(props) ? shinyaBurstShout(props) : null),
+  (props) =>
+    isPlayerBurstActivatedFromCurrentState(props)
+      ? shinyaBurstShout(props)
+      : null,
 ];

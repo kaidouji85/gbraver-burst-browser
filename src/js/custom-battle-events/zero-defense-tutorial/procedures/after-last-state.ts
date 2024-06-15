@@ -29,7 +29,7 @@ export async function afterLastState(
   const extractedGameEnd = extractGameEnd(props.update);
 
   if (!extractedBatteryDeclaration || !extractedGameEnd) {
-    return props.state;
+    return props.eventState;
   }
 
   const batteryDeclaration: GameStateX<BatteryDeclaration> =
@@ -37,7 +37,7 @@ export async function afterLastState(
   const gameEnd: GameStateX<GameEnd> = extractedGameEnd;
 
   if (gameEnd.effect.result.type !== "GameOver") {
-    return props.state;
+    return props.eventState;
   }
 
   const gameOver: GameOver = gameEnd.effect.result;
@@ -49,15 +49,15 @@ export async function afterLastState(
     await zeroDefenseWin(props);
     await refreshConversation(props);
     await gameEndThanks(props);
-    return props.state;
+    return props.eventState;
   }
 
   if (!isPlayerWin) {
     await playerLose(props);
     await refreshConversation(props);
     await gameEndThanks(props);
-    return props.state;
+    return props.eventState;
   }
 
-  return props.state;
+  return props.eventState;
 }

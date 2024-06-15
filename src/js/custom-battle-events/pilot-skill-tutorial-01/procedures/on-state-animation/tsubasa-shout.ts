@@ -2,8 +2,8 @@ import { CustomStateAnimation } from "../../../../td-scenes/battle/custom-battle
 import { playerBattleCount } from "../../../battle-count";
 import { ConditionalAnimation } from "../../../get-animation-if-conditional-met";
 import { hasDeliveredFinishBlow } from "../../../has-delivered-finish-blow";
-import { isEnemyBurstActivated } from "../../../is-burst-activated";
-import { isEnemyPilotSkillActivated } from "../../../is-pilot-skill-activated";
+import { isEnemyBurstActivatedFromCurrentState } from "../../../is-burst-activated";
+import { isEnemyPilotSkillActivatedFromCurrentState } from "../../../is-pilot-skill-activated";
 import { separatePlayersFromCurrentState } from "../../../separate-players";
 import { tsubasaBurstShout } from "../../animation/tsubasa-burst-shout";
 import { tsubasaFinishBlowShout } from "../../animation/tsubasa-finish-blow-shout";
@@ -16,8 +16,13 @@ export const tsubasaShout: ConditionalAnimation<
   CustomStateAnimation & PilotSkillTutorial01Props
 >[] = [
   (props) =>
-    isEnemyPilotSkillActivated(props) ? tsubasaVictoryDeclaration(props) : null,
-  (props) => (isEnemyBurstActivated(props) ? tsubasaBurstShout(props) : null),
+    isEnemyPilotSkillActivatedFromCurrentState(props)
+      ? tsubasaVictoryDeclaration(props)
+      : null,
+  (props) =>
+    isEnemyBurstActivatedFromCurrentState(props)
+      ? tsubasaBurstShout(props)
+      : null,
   (props) => {
     const players = separatePlayersFromCurrentState(props);
     if (!players) {

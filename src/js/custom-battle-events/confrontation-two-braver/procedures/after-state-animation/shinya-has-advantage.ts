@@ -8,7 +8,7 @@ export const shinyaHasAdvantage: ConditionalAnimation<
   CustomStateAnimation & ConfrontationTwoBraverProps
 >[] = [
   (props) => {
-    return props.state.chapter.type === "ShinyaHasAdvantage" &&
+    return props.eventState.chapter.type === "ShinyaHasAdvantage" &&
       props.currentState.effect.name === "BatteryDeclaration"
       ? onStart(() => {
           props.view.dom.enemyShoutMessageWindow.visible(false);

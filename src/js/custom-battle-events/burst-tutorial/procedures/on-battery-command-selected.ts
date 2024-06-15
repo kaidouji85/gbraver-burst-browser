@@ -20,15 +20,15 @@ import { shouldDefense5Again } from "../stories/should-defense5-again";
 async function defense5(
   props: Readonly<BatteryCommandSelected & BurstTutorialProps>,
 ): Promise<void> {
-  props.state.isLoseIfNoDefense5Complete
+  props.eventState.isLoseIfNoDefense5Complete
     ? await shouldDefense5Again(props)
     : await shouldDefense5(props);
 }
 
 /** イベント終了情報 */
 type BatteryEventResult = {
-  /** ステート更新結果 */
-  state: BurstTutorialState;
+  /** イベントステート更新結果 */
+  eventState: BurstTutorialState;
   /** コマンドキャンセル情報 */
   cancel: CommandCanceled;
 };
@@ -42,7 +42,7 @@ export async function onBatteryCommandSelected(
   props: Readonly<BatteryCommandSelected & BurstTutorialProps>,
 ): Promise<BatteryEventResult> {
   let result: BatteryEventResult = {
-    state: props.state,
+    eventState: props.eventState,
     cancel: { isCommandCanceled: false },
   };
 
@@ -66,17 +66,17 @@ export async function onBatteryCommandSelected(
     await doBurstToRecoverBattery(props);
     await focusInBurstButton(props, shouldBurst);
     result = {
-      state: { ...result.state, isLoseIfNoDefense5Complete: true },
+      eventState: { ...result.eventState, isLoseIfNoDefense5Complete: true },
       cancel: { isCommandCanceled: true },
     };
   } else if (willPlayerDeath && isPlayerFullBattery) {
     props.view.hud.gameObjects.batterySelector.toBatterySilently(5);
     await defense5(props);
-    result.state.isLoseIfNoDefense5Complete
+    result.eventState.isLoseIfNoDefense5Complete
       ? await notDefense5Carelessly(props)
       : await redoBatterySelect(props);
     result = {
-      state: { ...result.state, isLoseIfNoDefense5Complete: true },
+      eventState: { ...result.eventState, isLoseIfNoDefense5Complete: true },
       cancel: {
         isCommandCanceled: true,
       },

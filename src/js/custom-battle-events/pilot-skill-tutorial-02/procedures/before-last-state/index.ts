@@ -19,19 +19,19 @@ export async function beforeLastState(
   invisibleShoutMessageWindowWhenInputCommand(props);
 
   const turn = turnCount(props.stateHistory);
-  if (turn === 1 && !props.state.isIntroductionComplete) {
+  if (turn === 1 && !props.eventState.isIntroductionComplete) {
     await introduction(props);
     invisibleAllMessageWindows(props);
-    return { ...props.state, isIntroductionComplete: true };
+    return { ...props.eventState, isIntroductionComplete: true };
   }
 
   if (await executeDoPilotSkillIfNeeded(props)) {
-    return { ...props.state, isDoPilotSkillComplete: true };
+    return { ...props.eventState, isDoPilotSkillComplete: true };
   }
 
   if (await executeShouldAttack3OrMoreIfNeeded(props)) {
-    return { ...props.state, isShouldAttack3OrMoreComplete: true };
+    return { ...props.eventState, isShouldAttack3OrMoreComplete: true };
   }
 
-  return props.state;
+  return props.eventState;
 }

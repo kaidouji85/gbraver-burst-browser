@@ -12,17 +12,19 @@ export const yuuyaAttack: ConditionalAnimation<
 > = (props) => {
   let result: Animate | null = null;
 
-  const { stateHistory, currentState, playerId } = props;
+  const { stateHistory, currentState, playerId, eventState } = props;
   const { effect } = currentState;
   const battleCount = playerBattleCount(stateHistory, playerId);
 
   if (
+    eventState.chapter.type === "None" &&
     battleCount === 1 &&
     effect.name === "BatteryDeclaration" &&
     effect.attacker === playerId
   ) {
     result = yuuyaFirstAttackShout1(props);
   } else if (
+    eventState.chapter.type === "None" &&
     battleCount === 1 &&
     effect.name === "Battle" &&
     effect.attacker === playerId

@@ -17,17 +17,17 @@ export async function beforeLastState(
 ): Promise<PilotSkillTutorial01State> {
   invisibleShoutMessageWindowWhenInputCommand(props);
   const turn = turnCount(props.stateHistory);
-  if (turn === 1 && !props.state.isIntroductionComplete) {
+  if (turn === 1 && !props.eventState.isIntroductionComplete) {
     await introduction(props);
     invisibleAllMessageWindows(props);
-    return { ...props.state, isIntroductionComplete: true };
+    return { ...props.eventState, isIntroductionComplete: true };
   }
 
-  if (turn === 3 && !props.state.isGaiInspectingComplete) {
+  if (turn === 3 && !props.eventState.isGaiInspectingComplete) {
     await gaiInspecting(props);
     invisibleAllMessageWindows(props);
-    return { ...props.state, isGaiInspectingComplete: true };
+    return { ...props.eventState, isGaiInspectingComplete: true };
   }
 
-  return props.state;
+  return props.eventState;
 }

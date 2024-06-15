@@ -15,6 +15,6 @@ export const yuuyaFirstAttackShout1 = (
     playerPilotOnlyShout(
       props,
       "Yuuya",
-      `この前から${wbr}どれほど${wbr}腕を${wbr}上げたのか`,
+      `去年から${wbr}どれほど${wbr}腕が${wbr}あがったか`,
     );
   });

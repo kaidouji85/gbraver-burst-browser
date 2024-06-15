@@ -24,7 +24,7 @@ export async function executeShouldAttack3OrMoreIfNeeded(
   if (
     0 < correctPower &&
     turn === 2 &&
-    !props.state.isShouldAttack3OrMoreComplete
+    !props.eventState.isShouldAttack3OrMoreComplete
   ) {
     await shouldAttack3OrMore(props);
     return true;

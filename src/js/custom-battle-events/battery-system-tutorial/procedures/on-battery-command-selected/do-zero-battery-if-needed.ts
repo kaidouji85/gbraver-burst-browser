@@ -50,7 +50,7 @@ export async function doZeroBatteryIdNeeded(
     await zeroBatteryDefenseBecauseNoBatteryRecover(props);
     refreshConversation(props);
     return {
-      state: props.state,
+      eventState: props.eventState,
       cancel: {
         isCommandCanceled: false,
       },
@@ -62,8 +62,8 @@ export async function doZeroBatteryIdNeeded(
     refreshConversation(props);
     await focusInPilotButton(props, pilotSkillCaption);
     return {
-      state: {
-        ...props.state,
+      eventState: {
+        ...props.eventState,
         isExplainedPilotSkillAtZeroBattery: true,
       },
       cancel: {
@@ -78,8 +78,8 @@ export async function doZeroBatteryIdNeeded(
     unattentionBurstButton(props);
     await focusInBurstButton(props, burstCaption);
     return {
-      state: {
-        ...props.state,
+      eventState: {
+        ...props.eventState,
         isExplainedBurstAtZeroBurst: true,
       },
       cancel: {
@@ -99,7 +99,7 @@ export async function doZeroBatteryIdNeeded(
   }
 
   return {
-    state: props.state,
+    eventState: props.eventState,
     cancel: {
       isCommandCanceled: true,
     },

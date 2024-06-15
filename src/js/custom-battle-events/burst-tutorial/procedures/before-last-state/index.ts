@@ -14,13 +14,13 @@ import { executeSelfInitiatedPilotSkillIfNeeded } from "./execute-self-initiated
 export async function beforeLastState(
   props: Readonly<LastState & BurstTutorialProps>,
 ): Promise<BurstTutorialState> {
-  if (!props.state.isIntroductionComplete) {
+  if (!props.eventState.isIntroductionComplete) {
     await introduction(props);
-    return { ...props.state, isIntroductionComplete: true };
+    return { ...props.eventState, isIntroductionComplete: true };
   }
 
   await executeSelfInitiatedBurstIfNeeded(props);
   await executeSelfInitiatedPilotSkillIfNeeded(props);
   await executeReflectIfNeeded(props);
-  return props.state;
+  return props.eventState;
 }

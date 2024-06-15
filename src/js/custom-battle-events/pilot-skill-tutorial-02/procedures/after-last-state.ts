@@ -14,7 +14,7 @@ export async function afterLastState(
 ): Promise<PilotSkillTutorial02State> {
   const foundGameEnd = props.update.find((v) => v.effect.name === "GameEnd");
   if (!foundGameEnd || foundGameEnd.effect.name !== "GameEnd") {
-    return props.state;
+    return props.eventState;
   }
 
   if (
@@ -23,8 +23,8 @@ export async function afterLastState(
   ) {
     await playerWin(props);
     invisibleAllMessageWindows(props);
-    return props.state;
+    return props.eventState;
   }
 
-  return props.state;
+  return props.eventState;
 }
