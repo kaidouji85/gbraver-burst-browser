@@ -1,15 +1,16 @@
+import { GameEnd, PlayerState } from "gbraver-burst-core";
+
 import { LastState } from "../../../../td-scenes/battle/custom-battle-event";
 import { invisibleAllMessageWindows } from "../../../invisible-all-message-windows";
 import { separatePlayersFromLastState } from "../../../separate-players";
 import { shinyaMonologueWhenHeLose } from "../../stories/shinya-monologue-when-he-lose";
+import { shinyaVictory } from "../../stories/shinya-vistory";
 import { yuuyaShoutWhenYuuyaCompleteVictory } from "../../stories/yuuya-shout-when-yuuya-complete-victory";
 import { yuuyaShoutWhenYuuyaNarrowVictory } from "../../stories/yuuya-shout-when-yuuya-narrow-victory";
 import { yuuyaShoutWhenYuuyaVictory } from "../../stories/yuuya-shout-when-yuuya-victory";
-import { GameEnd, PlayerState } from "gbraver-burst-core";
-import { shinyaVictory } from "../../stories/shinya-vistory";
 
-/** 条件判断オブジェクト */
-type Deccision = {
+/** 条件オブジェクト */
+type Conditions = {
   /** ユウヤのステート */
   yuuya: PlayerState;
   /** ゲーム終了情報 */
@@ -17,11 +18,11 @@ type Deccision = {
 };
 
 /**
- * 条件判断オブジェクトを生成する
+ * 条件オブジェクトを生成する
  * @param props イベントプロパティ
  * @returns 条件判断オブジェクト
  */
-function createDecision(props: Readonly<LastState>): Deccision | null {
+function createDecision(props: Readonly<LastState>): Conditions | null {
   const effectName = "GameEnd";
   const gameEnd = props.update.find(
     (state) => state.effect.name == effectName,
