@@ -1,12 +1,12 @@
-import { LastState } from "../../../td-scenes/battle/custom-battle-event";
-import { invisibleShoutMessageWindowWhenInputCommand } from "../../invisible-shout-message-window";
-import { separatePlayersFromLastState } from "../../separate-players";
-import { turnCount } from "../../turn-count";
-import { QueenOfTragedyProps } from "../props";
-import { QueenOfTragedyState } from "../state";
-import { introduction } from "../stories/introduction";
-import { notRepeatMistake } from "../stories/not-repeat-mistake";
-import { startOfTurn3 } from "../stories/start-of-turn3";
+import { LastState } from "../../../../td-scenes/battle/custom-battle-event";
+import { invisibleShoutMessageWindowWhenInputCommand } from "../../../invisible-shout-message-window";
+import { separatePlayersFromLastState } from "../../../separate-players";
+import { turnCount } from "../../../turn-count";
+import { QueenOfTragedyProps } from "../../props";
+import { QueenOfTragedyState } from "../../state";
+import { introduction } from "../../stories/introduction";
+import { notRepeatMistake } from "../../stories/not-repeat-mistake";
+import { startOfTurn3 } from "../../stories/start-of-turn3";
 
 /**
  * 最終ステート直前イベント
