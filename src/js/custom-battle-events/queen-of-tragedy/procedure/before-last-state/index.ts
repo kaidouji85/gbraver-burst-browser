@@ -5,7 +5,43 @@ import { QueenOfTragedyState } from "../../state";
 import { introduction } from "../../stories/introduction";
 import { notRepeatMistake } from "../../stories/not-repeat-mistake";
 import { startOfTurn3 } from "../../stories/start-of-turn3";
+import { Conditions } from "./conditions";
 import { createConditions } from "./create-conditions";
+
+/**
+ * イントロダクションを再生するべきか判定する
+ * @param latestEventState 最新のイベントステート
+ * @param conditions 条件オブジェクト
+ * @returns 再生するべきならtrue
+ */
+const shouldPlayIntroduction = (
+  latestEventState: QueenOfTragedyState,
+  conditions: Conditions,
+): boolean => conditions.turn === 1 && !latestEventState.isIntroductionComplete;
+
+/**
+ * 間違いを繰り返さないを再生するべきか判定する
+ * @param latestEventState 最新のイベントステート
+ * @param conditions 条件オブジェクト
+ * @returns 再生するべきならtrue
+ */
+const shouldPlayNotRepeatMistake = (
+  latestEventState: QueenOfTragedyState,
+  conditions: Conditions,
+): boolean =>
+  conditions.turn === 3 &&
+  !latestEventState.isStoryOfTurn3Complete &&
+  conditions.enemy.armdozer.hp <= 100;
+
+/**
+ * ターン3の開始を再生するべきか判定する
+ * @param latestEventState 最新のイベントステート
+ * @param conditions 条件オブジェクト
+ */
+const shouldPlayStartOfTurn3 = (
+  latestEventState: QueenOfTragedyState,
+  conditions: Conditions,
+): boolean => conditions.turn === 3 && !latestEventState.isStoryOfTurn3Complete;
 
 /**
  * 最終ステート直前イベント
@@ -17,29 +53,30 @@ export async function beforeLastState(
 ): Promise<QueenOfTragedyState> {
   invisibleShoutMessageWindowWhenInputCommand(props);
 
-  let result: QueenOfTragedyState = props.eventState;
+  let latestEventState: QueenOfTragedyState = props.eventState;
   const conditions = createConditions(props);
   if (!conditions) {
-    return result;
+    return latestEventState;
   }
 
-  const { turn, enemy } = conditions;
-  if (turn === 1 && !result.isIntroductionComplete) {
+  if (shouldPlayIntroduction(latestEventState, conditions)) {
     await introduction(props);
-    result = { ...result, isIntroductionComplete: true };
-  } else if (
-    turn === 3 &&
-    !result.isStoryOfTurn3Complete &&
-    enemy.armdozer.hp <= 100
-  ) {
+    latestEventState = { ...latestEventState, isIntroductionComplete: true };
+  } else if (shouldPlayNotRepeatMistake(latestEventState, conditions)) {
     await notRepeatMistake(props);
-    const chapter = { type: "None" } as const;
-    result = { ...result, isStoryOfTurn3Complete: true, chapter };
-  } else if (turn === 3 && !result.isStoryOfTurn3Complete) {
+    latestEventState = {
+      ...latestEventState,
+      isStoryOfTurn3Complete: true,
+      chapter: { type: "None" },
+    };
+  } else if (shouldPlayStartOfTurn3(latestEventState, conditions)) {
     await startOfTurn3(props);
-    const chapter = { type: "None" } as const;
-    result = { ...result, isStoryOfTurn3Complete: true, chapter };
+    latestEventState = {
+      ...latestEventState,
+      isStoryOfTurn3Complete: true,
+      chapter: { type: "None" },
+    };
   }
 
-  return result;
+  return latestEventState;
 }
