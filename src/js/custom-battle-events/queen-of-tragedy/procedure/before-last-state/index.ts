@@ -5,43 +5,10 @@ import { QueenOfTragedyState } from "../../state";
 import { introduction } from "../../stories/introduction";
 import { notRepeatMistake } from "../../stories/not-repeat-mistake";
 import { startOfTurn3 } from "../../stories/start-of-turn3";
-import { Conditions } from "./conditions";
 import { createConditions } from "./create-conditions";
-
-/**
- * イントロダクションを再生するべきか判定する
- * @param latestEventState 最新のイベントステート
- * @param conditions 条件オブジェクト
- * @returns 再生するべきならtrue
- */
-const shouldPlayIntroduction = (
-  latestEventState: QueenOfTragedyState,
-  conditions: Conditions,
-): boolean => conditions.turn === 1 && !latestEventState.isIntroductionComplete;
-
-/**
- * 間違いを繰り返さないを再生するべきか判定する
- * @param latestEventState 最新のイベントステート
- * @param conditions 条件オブジェクト
- * @returns 再生するべきならtrue
- */
-const shouldPlayNotRepeatMistake = (
-  latestEventState: QueenOfTragedyState,
-  conditions: Conditions,
-): boolean =>
-  conditions.turn === 3 &&
-  !latestEventState.isStoryOfTurn3Complete &&
-  conditions.enemy.armdozer.hp <= 100;
-
-/**
- * ターン3の開始を再生するべきか判定する
- * @param latestEventState 最新のイベントステート
- * @param conditions 条件オブジェクト
- */
-const shouldPlayStartOfTurn3 = (
-  latestEventState: QueenOfTragedyState,
-  conditions: Conditions,
-): boolean => conditions.turn === 3 && !latestEventState.isStoryOfTurn3Complete;
+import { shouldPlayIntroduction } from "./should-play-introduction";
+import { shouldPlayNotRepeatMistake } from "./should-play-not-repeat-mistake";
+import { shouldPlayStartOfTurn3 } from "./should-play-start-of-turn3";
 
 /**
  * 最終ステート直前イベント
