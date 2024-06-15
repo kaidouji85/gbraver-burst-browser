@@ -1,7 +1,7 @@
-import { StateUpdateStarted } from "../../../td-scenes/battle/custom-battle-event";
-import { turnCount } from "../../turn-count";
-import { QueenOfTragedyProps } from "../props";
-import { QueenOfTragedyState } from "../state";
+import { StateUpdateStarted } from "../../../../td-scenes/battle/custom-battle-event";
+import { turnCount } from "../../../turn-count";
+import { QueenOfTragedyProps } from "../../props";
+import { QueenOfTragedyState } from "../../state";
 
 /**
  * ステート更新が開始された時に呼ばれるイベント
