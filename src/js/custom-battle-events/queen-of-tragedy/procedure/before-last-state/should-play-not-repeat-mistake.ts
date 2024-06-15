@@ -1,5 +1,5 @@
-import {QueenOfTragedyState} from "../../state";
-import {Conditions} from "./conditions";
+import { QueenOfTragedyState } from "../../state";
+import { Conditions } from "./conditions";
 
 /**
  * 間違いを繰り返さないを再生するべきか判定する

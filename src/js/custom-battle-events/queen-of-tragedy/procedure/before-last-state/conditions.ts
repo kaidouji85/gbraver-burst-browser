@@ -1,4 +1,4 @@
-import {PlayerState} from "gbraver-burst-core";
+import { PlayerState } from "gbraver-burst-core";
 
 /** 条件オブジェクト */
 export type Conditions = {

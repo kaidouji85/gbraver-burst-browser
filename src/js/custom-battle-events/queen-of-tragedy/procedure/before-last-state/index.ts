@@ -9,6 +9,9 @@ import { createConditions } from "./create-conditions";
 import { shouldPlayIntroduction } from "./should-play-introduction";
 import { shouldPlayNotRepeatMistake } from "./should-play-not-repeat-mistake";
 import { shouldPlayStartOfTurn3 } from "./should-play-start-of-turn3";
+import { updateEventStateAfterIntroduction } from "./update-event-state-after-introduction";
+import { updateEventStateAfterNotRepeatMistake } from "./update-event-state-after-not-repeat-mistake";
+import { updateEventStateAfterStartOfTurn3 } from "./update-event-state-after-start-of-turn3";
 
 /**
  * 最終ステート直前イベント
@@ -28,21 +31,13 @@ export async function beforeLastState(
 
   if (shouldPlayIntroduction(latestEventState, conditions)) {
     await introduction(props);
-    latestEventState = { ...latestEventState, isIntroductionComplete: true };
+    latestEventState = updateEventStateAfterIntroduction(latestEventState);
   } else if (shouldPlayNotRepeatMistake(latestEventState, conditions)) {
     await notRepeatMistake(props);
-    latestEventState = {
-      ...latestEventState,
-      isStoryOfTurn3Complete: true,
-      chapter: { type: "None" },
-    };
+    latestEventState = updateEventStateAfterNotRepeatMistake(latestEventState);
   } else if (shouldPlayStartOfTurn3(latestEventState, conditions)) {
     await startOfTurn3(props);
-    latestEventState = {
-      ...latestEventState,
-      isStoryOfTurn3Complete: true,
-      chapter: { type: "None" },
-    };
+    latestEventState = updateEventStateAfterStartOfTurn3(latestEventState);
   }
 
   return latestEventState;
