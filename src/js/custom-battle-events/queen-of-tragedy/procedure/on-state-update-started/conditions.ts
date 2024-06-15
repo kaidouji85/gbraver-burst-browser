@@ -4,4 +4,4 @@ export type Conditions = {
   turn: number;
   /** プレイヤーがバーストするか、true: バーストする */
   willPlayerBurst: boolean;
-}
+};
