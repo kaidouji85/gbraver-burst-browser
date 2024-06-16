@@ -17,6 +17,7 @@ import { shinyaPilotSkill } from "./shinya-pilot-skill";
 import { yuuyaActivateSkillToFinish } from "./yuuya-activate-skill-to-finish";
 import { yuuyaActivateSkillToSurvive } from "./yuuya-activate-skill-to-survive";
 import { yuuyaBattleWhenShinyaHPIsFull } from "./yuuya-battle-when-shinya-hp-is-full";
+import { yuuyaBattleWhenZeroAttack } from "./yuuya-battle-when-zero-attack";
 import { yuuyaFinishBlow } from "./yuuya-finish-blow";
 import { yuuyaFirstBattle } from "./yuuya-first-battle";
 import { yuuyaHasAdvantage } from "./yuuya-has-advantage";
@@ -45,6 +46,7 @@ export function onStateAnimation(
     ...shinyaBattleWhenYuuyaHPIsFull,
     ...shinyaBattleWhenYuuyaTakesDamage,
     ...yuuyaBattleWhenShinyaHPIsFull,
+    ...yuuyaBattleWhenZeroAttack,
     invisibleShoutMessageWindowWhenTurnChange,
   ];
   return getAnimationIfConditionMet(props, conditionalAnimations) ?? empty();
