@@ -12,7 +12,7 @@ import { scrollLeftMessages, scrollRightMessages } from "../../scroll-messages";
  */
 export async function shinyaVictory(props: CustomBattleEventProps) {
   activeLeftMessageWindowWithFace(props, "Yuuya");
-  await scrollLeftMessages(props, [["ユウヤ", `ありえない この俺が」`]]);
+  await scrollLeftMessages(props, [["ユウヤ", `「ありえない この俺が」`]]);
   props.view.dom.leftMessageWindow.darken();
 
   activeRightMessageWindowWithFace(props, "Shinya");
