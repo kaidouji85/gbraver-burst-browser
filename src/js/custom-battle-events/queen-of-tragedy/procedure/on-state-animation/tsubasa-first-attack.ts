@@ -5,8 +5,8 @@ import { ConditionalAnimation } from "../../../get-animation-if-conditional-met"
 import { tsubasaFirstAttackShout } from "../../animation/tsubasa-first-attack-shout";
 import { QueenOfTragedyProps } from "../../props";
 
-/** ツバサ 攻撃 */
-export const tsubasaAttack: ConditionalAnimation<
+/** ツバサ ファーストアタック */
+export const tsubasaFirstAttack: ConditionalAnimation<
   CustomStateAnimation & QueenOfTragedyProps
 > = (props) => {
   let result: Animate | null = null;

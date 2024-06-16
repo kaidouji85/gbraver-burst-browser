@@ -4,9 +4,11 @@ import { CustomStateAnimation } from "../../../../td-scenes/battle/custom-battle
 import { getAnimationIfConditionMet } from "../../../get-animation-if-conditional-met";
 import { invisibleShoutMessageWindowWhenTurnChange } from "../../../invisible-shout-message-window";
 import { QueenOfTragedyProps } from "../../props";
-import { tsubasaAttack } from "./tsubasa-attack";
 import { tsubasaBurst } from "./tsubasa-burst";
 import { tsubasaBurstWhenTraumaOfLastYear } from "./tsubasa-burst-when-trauma-of-last-year";
+import { tsubasaFeintFail } from "./tsubasa-feint-fail";
+import { tsubasaFeintSuccess } from "./tsubasa-feint-success";
+import { tsubasaFirstAttack } from "./tsubasa-first-attack";
 import { tsubasaPilotSkill } from "./tsubasa-pilot-skill";
 import { yuuyaAttack } from "./yuuya-attack";
 import { yuuyaAttackWhenTraumaOfLastYear } from "./yuuya-attack-when-trauma-of-last-year";
@@ -25,7 +27,9 @@ export function onStateAnimation(
     tsubasaPilotSkill,
     tsubasaBurstWhenTraumaOfLastYear,
     tsubasaBurst,
-    tsubasaAttack,
+    tsubasaFirstAttack,
+    tsubasaFeintSuccess,
+    tsubasaFeintFail,
     yuuyaBurstWhenTraumaOfLastYear,
     yuuyaBurst,
     yuuyaAttackWhenTraumaOfLastYear,
