@@ -17,6 +17,6 @@ export async function shinyaVictory(props: CustomBattleEventProps) {
 
   activeRightMessageWindowWithFace(props, "Shinya");
   await scrollRightMessages(props, [
-    ["シンヤ", `やった ユウヤさんに${wbr}勝ったッス`],
+    ["シンヤ", `「やった ユウヤさんに${wbr}勝ったッス」`],
   ]);
 }
