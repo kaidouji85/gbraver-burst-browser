@@ -1,26 +1,25 @@
 import { Animate } from "../../../../animation/animate";
 import { CustomStateAnimation } from "../../../../td-scenes/battle/custom-battle-event";
-import { playerBattleCount } from "../../../battle-count";
 import { ConditionalAnimation } from "../../../get-animation-if-conditional-met";
-import { tsubasaFirstAttackShout } from "../../animation/tsubasa-first-attack-shout";
+import { tsubasaFeintFailShout } from "../../animation/tsubasa-feint-fail-shout";
 import { QueenOfTragedyProps } from "../../props";
 
-/** ツバサ 攻撃 */
-export const tsubasaAttack: ConditionalAnimation<
+/** ツバサ フェイント 失敗 */
+export const tsubasaFeintFail: ConditionalAnimation<
   CustomStateAnimation & QueenOfTragedyProps
 > = (props) => {
   let result: Animate | null = null;
 
-  const { enemyId, stateHistory } = props;
+  const { enemyId } = props;
   const { effect } = props.currentState;
-  const battleCount = playerBattleCount(stateHistory, enemyId);
 
   if (
-    battleCount === 1 &&
     effect.name === "BatteryDeclaration" &&
-    effect.attacker === enemyId
+    effect.attacker === enemyId &&
+    effect.attackerBattery === 0 &&
+    effect.defenderBattery === 0
   ) {
-    result = tsubasaFirstAttackShout(props);
+    result = tsubasaFeintFailShout(props);
   }
 
   return result;
