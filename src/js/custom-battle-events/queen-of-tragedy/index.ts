@@ -6,6 +6,7 @@ import {
   StateUpdateStarted,
 } from "../../td-scenes/battle/custom-battle-event";
 import { EmptyCustomBattleEvent } from "../empty-custom-battle-event";
+import { afterLastState } from "./procedure/after-last-state";
 import { beforeLastState } from "./procedure/before-last-state";
 import { createQueenOfTragedyProps } from "./procedure/create-queen-of-tragedy-props";
 import { onStateAnimation } from "./procedure/on-state-animation";
@@ -39,6 +40,11 @@ class QueenOfTragedy extends EmptyCustomBattleEvent {
       ...props,
       ...this.#eventProps,
     });
+  }
+
+  /** @override */
+  async afterLastState(props: LastState): Promise<void> {
+    await afterLastState({ ...props, ...this.#eventProps });
   }
 
   /** @override */
