@@ -48,8 +48,9 @@ export async function introduction(
   await scrollRightMessages(props, [
     [
       "ツバサ",
-      `「間もなく${wbr} 都立大田高校・府立洛内高校の${wbr}練習試合を${wbr}行う`,
+      `「間もなく${wbr}都立大田高校・府立洛内高校の`,
     ],
+    [`練習試合を${wbr}行う`]
   ]);
   props.view.dom.rightMessageWindow.messages(["姿勢を正して"]);
   await synchronizedUpright(props).play();
