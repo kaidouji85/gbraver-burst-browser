@@ -13,6 +13,6 @@ export const tsubasaBurstShout = (props: Readonly<CustomBattleEventProps>) =>
     enemyPilotOnlyShout(
       props,
       "Tsubasa",
-      `これで${wbr}終わりではないぞ ユウヤ`,
+      `これで${wbr}終わりでは${wbr}ないぞ ユウヤ`,
     );
   });
