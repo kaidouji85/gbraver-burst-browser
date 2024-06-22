@@ -2,12 +2,12 @@ import { LoginDialog } from "../../../dom-dialogs/login";
 import { NetBattleSelectorDialog } from "../../../dom-dialogs/net-battle-selector";
 import { NetworkErrorDialog } from "../../../dom-dialogs/network-error/network-error-dialog";
 import { WaitingDialog } from "../../../dom-dialogs/waiting/waiting-dialog";
-import { netBattleSelectorDialogConnector } from "../../action-connector/net-battle-selector-dialog-connector";
 import { networkErrorDialogConnector } from "../../action-connector/network-error-dialog-connector";
 import { waitingDialogConnector } from "../../action-connector/waiting-dialog-connector";
 import { GameAction } from "../../game-actions";
 import { GameProps } from "../../game-props";
 import { switchLoginDialog } from "../switch-dialog/switch-login-dialog";
+import { switchNetBattleSelectorDialog } from "../switch-dialog/switch-net-battle-selector-dialog";
 
 /**
  * ログインチェックAPIを呼び出す
@@ -52,10 +52,7 @@ async function onNetBattleStart(props: Readonly<GameProps>): Promise<void> {
     return;
   }
 
-  props.domDialogBinder.bind(
-    new NetBattleSelectorDialog(props),
-    netBattleSelectorDialogConnector(props),
-  );
+  switchNetBattleSelectorDialog(props, new NetBattleSelectorDialog(props));
 }
 
 /** アクションタイプ */
