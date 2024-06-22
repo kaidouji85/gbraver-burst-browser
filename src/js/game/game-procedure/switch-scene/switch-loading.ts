@@ -7,4 +7,4 @@ import { GameProps } from "../../game-props";
  * @param scene ローディング画面
  */
 export const switchLoading = (props: GameProps, scene: Loading) =>
-  props.domSceneBinder.bind(scene, () => []);
+  props.domSceneBinder.bind(scene, []);

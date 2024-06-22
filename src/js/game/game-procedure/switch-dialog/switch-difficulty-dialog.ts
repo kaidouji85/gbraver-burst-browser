@@ -12,7 +12,8 @@ export const switchDifficultyDialog = (
   props: GameProps,
   dialog: DifficultyDialog,
 ) =>
-  props.domDialogBinder.bind(dialog, () =>
+  props.domDialogBinder.bind(
+    dialog,
     props.gameAction.connect([
       dialog.notifySelectionComplete().pipe(
         map((difficulty) => ({

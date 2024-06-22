@@ -12,7 +12,8 @@ export const switchPrivateMatchHostDialog = (
   props: GameProps,
   dialog: PrivateMatchHostDialog,
 ) =>
-  props.domDialogBinder.bind(dialog, () =>
+  props.domDialogBinder.bind(
+    dialog,
     props.gameAction.connect([
       dialog
         .notifyDialogClosed()

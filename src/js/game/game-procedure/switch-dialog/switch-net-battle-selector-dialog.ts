@@ -12,7 +12,8 @@ export const switchNetBattleSelectorDialog = (
   props: GameProps,
   dialog: NetBattleSelectorDialog,
 ) =>
-  props.domDialogBinder.bind(dialog, () =>
+  props.domDialogBinder.bind(
+    dialog,
     props.gameAction.connect([
       dialog
         .notifyCasualMatchSelection()

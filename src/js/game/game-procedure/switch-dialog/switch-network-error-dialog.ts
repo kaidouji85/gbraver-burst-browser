@@ -12,7 +12,8 @@ export const switchNetworkErrorDialog = (
   props: GameProps,
   dialog: NetworkErrorDialog,
 ) =>
-  props.domDialogBinder.bind(dialog, () =>
+  props.domDialogBinder.bind(
+    dialog,
     props.gameAction.connect([
       dialog.notifyPostNetworkError().pipe(
         map((postNetworkError) => ({

@@ -9,7 +9,8 @@ import { GameProps } from "../../game-props";
  * @param dialog ログインダイアログ
  */
 export const switchLoginDialog = (props: GameProps, dialog: LoginDialog) =>
-  props.domDialogBinder.bind(dialog, () =>
+  props.domDialogBinder.bind(
+    dialog,
     props.gameAction.connect([
       dialog.notifyLogin().pipe(map(() => ({ type: "UniversalLogin" }))),
       dialog.notifyClosed().pipe(map(() => ({ type: "LoginCancel" }))),

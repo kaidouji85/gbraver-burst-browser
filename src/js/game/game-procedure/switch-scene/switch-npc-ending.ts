@@ -9,7 +9,8 @@ import { GameProps } from "../../game-props";
  * @param scene NPCルートエンディング画面
  */
 export const switchNpcEnding = (props: GameProps, scene: NPCEnding) =>
-  props.domSceneBinder.bind(scene, () =>
+  props.domSceneBinder.bind(
+    scene,
     props.gameAction.connect([
       scene.notifyFinish().pipe(map(() => ({ type: "EndNPCEnding" }))),
     ]),

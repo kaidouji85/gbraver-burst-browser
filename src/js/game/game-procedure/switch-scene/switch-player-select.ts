@@ -9,7 +9,8 @@ import { GameProps } from "../../game-props";
  * @param scene プレイヤーセレクト画面
  */
 export const switchPlayerSelect = (props: GameProps, scene: PlayerSelect) =>
-  props.domSceneBinder.bind(scene, () =>
+  props.domSceneBinder.bind(
+    scene,
     props.gameAction.connect([
       scene
         .notifySelectCompletion()

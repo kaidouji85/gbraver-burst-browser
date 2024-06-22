@@ -12,7 +12,8 @@ export const switchAccountConsentDialog = (
   props: GameProps,
   dialog: DeleteAccountConsentDialog,
 ) =>
-  props.domDialogBinder.bind(dialog, () =>
+  props.domDialogBinder.bind(
+    dialog,
     props.gameAction.connect([
       dialog
         .notifyAccountDeletion()

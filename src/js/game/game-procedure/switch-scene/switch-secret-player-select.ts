@@ -12,7 +12,8 @@ export const switchSecretPlayerSelect = (
   props: GameProps,
   scene: SecretPlayerSelect,
 ) =>
-  props.domSceneBinder.bind(scene, () =>
+  props.domSceneBinder.bind(
+    scene,
     props.gameAction.connect([
       scene.notifyOK().pipe(map((a) => ({ ...a, type: "SelectionComplete" }))),
       scene.notifyPrev().pipe(map(() => ({ type: "SelectionCancel" }))),
