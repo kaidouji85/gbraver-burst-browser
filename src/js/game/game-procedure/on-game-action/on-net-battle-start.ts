@@ -2,12 +2,12 @@ import { LoginDialog } from "../../../dom-dialogs/login";
 import { NetBattleSelectorDialog } from "../../../dom-dialogs/net-battle-selector";
 import { NetworkErrorDialog } from "../../../dom-dialogs/network-error/network-error-dialog";
 import { WaitingDialog } from "../../../dom-dialogs/waiting/waiting-dialog";
-import { loginDialogConnector } from "../../action-connector/login-dialog-connector";
 import { netBattleSelectorDialogConnector } from "../../action-connector/net-battle-selector-dialog-connector";
 import { networkErrorDialogConnector } from "../../action-connector/network-error-dialog-connector";
 import { waitingDialogConnector } from "../../action-connector/waiting-dialog-connector";
 import { GameAction } from "../../game-actions";
 import { GameProps } from "../../game-props";
+import { switchLoginDialog } from "../switch-dialog/switch-login-dialog";
 
 /**
  * ログインチェックAPIを呼び出す
@@ -42,12 +42,12 @@ async function onNetBattleStart(props: Readonly<GameProps>): Promise<void> {
   const isLogin = await callLoginCheckAPI(props);
   props.domDialogBinder.hidden();
   if (!isLogin) {
-    props.domDialogBinder.bind(
+    switchLoginDialog(
+      props,
       new LoginDialog({
         ...props,
         caption: "ネット対戦をするにはログインをしてください",
       }),
-      loginDialogConnector(props),
     );
     return;
   }
