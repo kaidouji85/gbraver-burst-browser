@@ -1,7 +1,7 @@
 import { DifficultyDialog } from "../../../../dom-dialogs/difficulty";
-import { difficultyDialogConnector } from "../../../action-connector/difficulty-dialog-connector";
 import { SelectionComplete } from "../../../game-actions/selection-complete";
 import { GameProps } from "../../../game-props";
+import { switchDifficultyDialog } from "../../switch-dialog/switch-difficulty-dialog";
 
 /**
  * 条件を満たした場合、難易度選択を開始する
@@ -21,9 +21,6 @@ export async function startDifficultySelectionIfNeeded(
     ...props.inProgress,
     npcBattle: { ...action, type: "DifficultySelect" },
   };
-  props.domDialogBinder.bind(
-    new DifficultyDialog(props),
-    difficultyDialogConnector(props),
-  );
+  switchDifficultyDialog(props, new DifficultyDialog(props));
   return true;
 }
