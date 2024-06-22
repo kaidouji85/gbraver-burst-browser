@@ -6,10 +6,10 @@ import { BattleScene } from "../../td-scenes/battle";
 import { waitAnimationFrame } from "../../wait/wait-animation-frame";
 import { waitTime } from "../../wait/wait-time";
 import { waitUntilWindowPushWithStream } from "../../wait/wait-until-window-push-with-stream";
-import { switchBattleScene } from "./switch-scene/switch-battle-scene";
-import { episodeTitleConnector } from "../action-connector/episode-title-connector";
 import { Episode } from "../episodes/episode";
 import { GameProps } from "../game-props";
+import { switchBattleScene } from "./switch-scene/switch-battle-scene";
+import { switchEpisodeTitle } from "./switch-scene/switch-episode-title";
 
 /**
  * エピソードを開始するヘルパー関数
@@ -34,7 +34,7 @@ export async function startEpisode(
     resources: props.resources,
     armdozerId: episode.player.armdozer.id,
   });
-  props.domSceneBinder.bind(scene, episodeTitleConnector);
+  switchEpisodeTitle(props, scene);
   await Promise.race([scene.waitUntilLoaded(), waitTime(MAX_LOADING_TIME)]);
   await props.fader.fadeIn();
   const startTutorialStageTime = Date.now();
