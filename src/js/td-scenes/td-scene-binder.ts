@@ -1,9 +1,8 @@
 import { Unsubscribable } from "rxjs";
 
-import { CssHUDUIScale } from "../../css/hud-ui-scale";
-import { Renderer } from "../../render";
-import { TDScene } from "../td-scene";
-import { TDSceneActionConnector } from "./action-connector";
+import { CssHUDUIScale } from "../css/hud-ui-scale";
+import { Renderer } from "../render";
+import { TDScene } from "./td-scene";
 
 /** three.js系シーンをバインドする */
 export class TDSceneBinder {
@@ -42,18 +41,18 @@ export class TDSceneBinder {
   /**
    * 3D系シーンをバインドする
    * @param scene バインドするシーン
-   * @param connector ゲームアクションコネクタ
+   * @param unsubscribers バインドするシーンに関連するアンサブスクライバ
    */
   bind<X extends TDScene>(
     scene: X,
-    connector: TDSceneActionConnector<X>,
+    unsubscribers: Unsubscribable[],
   ): void {
     this.#disposeScene();
     this.#scene = scene;
     scene.getDOMLayerElements().forEach((element) => {
       this.#domLayerElement.appendChild(element);
     });
-    this.#unsubscribers = connector(scene);
+    this.#unsubscribers = unsubscribers;
     // iPadOS 15.7で--hud-ui-scaleに正しい値がセットされないことがあった
     // なので、3Dシーンが始まる前に強制的に値を更新している
     this.#hudUIScale.update();
