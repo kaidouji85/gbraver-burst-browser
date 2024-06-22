@@ -1,7 +1,7 @@
 import { WaitingDialog } from "../../../dom-dialogs/waiting/waiting-dialog";
-import { switchWaitingDialog } from "../switch-dialog/switch-waiting-dialog";
 import { GameAction } from "../../game-actions";
 import { GameProps } from "../../game-props";
+import { switchWaitingDialog } from "../switch-dialog/switch-waiting-dialog";
 
 /**
  * アカウント削除

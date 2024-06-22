@@ -32,7 +32,7 @@ async function onPrivateMatchEntry(
     pilotId,
   );
   if (!battle) {
-    const dialog =new RejectPrivateMatchEntryDialog(props);
+    const dialog = new RejectPrivateMatchEntryDialog(props);
     switchRejectPrivateMatchEntryDialog(props, dialog);
     return;
   }

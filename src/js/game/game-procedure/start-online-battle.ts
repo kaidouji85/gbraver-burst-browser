@@ -11,9 +11,9 @@ import { BattleScene } from "../../td-scenes/battle";
 import { BattleProgress } from "../../td-scenes/battle/battle-progress";
 import { waitAnimationFrame } from "../../wait/wait-animation-frame";
 import { waitTime } from "../../wait/wait-time";
-import { switchWaitingDialog } from "./switch-dialog/switch-waiting-dialog";
 import { GameProps } from "../game-props";
 import { switchNetworkErrorDialog } from "./switch-dialog/switch-network-error-dialog";
+import { switchWaitingDialog } from "./switch-dialog/switch-waiting-dialog";
 import { switchBattleScene } from "./switch-scene/switch-battle-scene";
 import { switchMatchCard } from "./switch-scene/switch-match-card";
 

@@ -8,10 +8,7 @@ import { GameProps } from "../../game-props";
  * @param props ゲームプロパティ
  * @param scene 戦闘シーン
  */
-export const switchBattleScene = (
-  props: GameProps,
-  scene: BattleScene,
-) => {
+export const switchBattleScene = (props: GameProps, scene: BattleScene) => {
   props.tdBinder.bind(scene, () =>
     props.gameAction.connect([
       scene.notifyGameEnd().pipe(map((a) => ({ ...a, type: "EndBattle" }))),

@@ -2,12 +2,12 @@ import { LoginDialog } from "../../../dom-dialogs/login";
 import { NetBattleSelectorDialog } from "../../../dom-dialogs/net-battle-selector";
 import { NetworkErrorDialog } from "../../../dom-dialogs/network-error/network-error-dialog";
 import { WaitingDialog } from "../../../dom-dialogs/waiting/waiting-dialog";
-import { switchWaitingDialog } from "../switch-dialog/switch-waiting-dialog";
 import { GameAction } from "../../game-actions";
 import { GameProps } from "../../game-props";
 import { switchLoginDialog } from "../switch-dialog/switch-login-dialog";
 import { switchNetBattleSelectorDialog } from "../switch-dialog/switch-net-battle-selector-dialog";
 import { switchNetworkErrorDialog } from "../switch-dialog/switch-network-error-dialog";
+import { switchWaitingDialog } from "../switch-dialog/switch-waiting-dialog";
 
 /**
  * ログインチェックAPIを呼び出す

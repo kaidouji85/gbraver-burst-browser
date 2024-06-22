@@ -3,11 +3,11 @@ import { Battle as BattleSDK } from "@gbraver-burst-network/browser-sdk";
 import { NetworkErrorDialog } from "../../dom-dialogs/network-error/network-error-dialog";
 import { PrivateMatchHostDialog } from "../../dom-dialogs/private-match-host";
 import { WaitingDialog } from "../../dom-dialogs/waiting/waiting-dialog";
-import { switchWaitingDialog } from "./switch-dialog/switch-waiting-dialog";
 import { SelectionComplete } from "../game-actions/selection-complete";
 import { GameProps } from "../game-props";
 import { switchNetworkErrorDialog } from "./switch-dialog/switch-network-error-dialog";
 import { switchPrivateMatchHostDialog } from "./switch-dialog/switch-private-match-host-dialog";
+import { switchWaitingDialog } from "./switch-dialog/switch-waiting-dialog";
 
 /**
  * プライベートマッチ（ホスト）でマッチング成立まで待つ

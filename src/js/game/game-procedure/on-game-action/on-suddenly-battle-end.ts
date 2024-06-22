@@ -1,7 +1,7 @@
 import { NetworkErrorDialog } from "../../../dom-dialogs/network-error/network-error-dialog";
-import { switchNetworkErrorDialog } from "../switch-dialog/switch-network-error-dialog";
 import { GameAction } from "../../game-actions";
 import { GameProps } from "../../game-props";
+import { switchNetworkErrorDialog } from "../switch-dialog/switch-network-error-dialog";
 
 /**
  * バトル強制終了時の処理
