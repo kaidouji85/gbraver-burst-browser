@@ -2,12 +2,12 @@ import { LoginDialog } from "../../../dom-dialogs/login";
 import { NetBattleSelectorDialog } from "../../../dom-dialogs/net-battle-selector";
 import { NetworkErrorDialog } from "../../../dom-dialogs/network-error/network-error-dialog";
 import { WaitingDialog } from "../../../dom-dialogs/waiting/waiting-dialog";
-import { networkErrorDialogConnector } from "../../action-connector/network-error-dialog-connector";
 import { waitingDialogConnector } from "../../action-connector/waiting-dialog-connector";
 import { GameAction } from "../../game-actions";
 import { GameProps } from "../../game-props";
 import { switchLoginDialog } from "../switch-dialog/switch-login-dialog";
 import { switchNetBattleSelectorDialog } from "../switch-dialog/switch-net-battle-selector-dialog";
+import { switchNetworkErrorDialog } from "../switch-dialog/switch-network-error-dialog";
 
 /**
  * ログインチェックAPIを呼び出す
@@ -20,11 +20,9 @@ async function callLoginCheckAPI(props: Readonly<GameProps>): Promise<boolean> {
   } catch (e) {
     const dialog = new NetworkErrorDialog({
       ...props,
-      postNetworkError: {
-        type: "Close",
-      },
+      postNetworkError: { type: "Close" },
     });
-    props.domDialogBinder.bind(dialog, networkErrorDialogConnector(props));
+    switchNetworkErrorDialog(props, dialog);
     throw e;
   }
 }

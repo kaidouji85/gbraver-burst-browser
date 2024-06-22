@@ -11,9 +11,9 @@ import { BattleScene } from "../../td-scenes/battle";
 import { BattleProgress } from "../../td-scenes/battle/battle-progress";
 import { waitAnimationFrame } from "../../wait/wait-animation-frame";
 import { waitTime } from "../../wait/wait-time";
-import { networkErrorDialogConnector } from "../action-connector/network-error-dialog-connector";
 import { waitingDialogConnector } from "../action-connector/waiting-dialog-connector";
 import { GameProps } from "../game-props";
+import { switchNetworkErrorDialog } from "./switch-dialog/switch-network-error-dialog";
 import { switchBattleScene } from "./switch-scene/switch-battle-scene";
 import { switchMatchCard } from "./switch-scene/switch-match-card";
 
@@ -42,7 +42,7 @@ function createBattleProgress(
             type: "GotoTitle",
           },
         });
-        props.domDialogBinder.bind(dialog, networkErrorDialogConnector(props));
+        switchNetworkErrorDialog(props, dialog);
         throw e;
       }
     },

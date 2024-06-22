@@ -3,11 +3,11 @@ import { Battle as BattleSDK } from "@gbraver-burst-network/browser-sdk";
 import { NetworkErrorDialog } from "../../dom-dialogs/network-error/network-error-dialog";
 import { PrivateMatchHostDialog } from "../../dom-dialogs/private-match-host";
 import { WaitingDialog } from "../../dom-dialogs/waiting/waiting-dialog";
-import { networkErrorDialogConnector } from "../action-connector/network-error-dialog-connector";
 import { privateMatchHostDialogConnector } from "../action-connector/private-match-host-dialog-connector";
 import { waitingDialogConnector } from "../action-connector/waiting-dialog-connector";
 import { SelectionComplete } from "../game-actions/selection-complete";
 import { GameProps } from "../game-props";
+import { switchNetworkErrorDialog } from "./switch-dialog/switch-network-error-dialog";
 
 /**
  * プライベートマッチ（ホスト）でマッチング成立まで待つ
@@ -37,15 +37,11 @@ export async function waitUntilPrivateMatchingAsHost(
     );
     return await room.waitUntilMatching();
   } catch (e) {
-    props.domDialogBinder.bind(
-      new NetworkErrorDialog({
-        ...props,
-        postNetworkError: {
-          type: "GotoTitle",
-        },
-      }),
-      networkErrorDialogConnector(props),
-    );
+    const errorDialog = new NetworkErrorDialog({
+      ...props,
+      postNetworkError: { type: "GotoTitle" },
+    });
+    switchNetworkErrorDialog(props, errorDialog);
     throw e;
   }
 }

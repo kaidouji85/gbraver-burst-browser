@@ -2,10 +2,10 @@ import type { Battle as BattleSDK } from "@gbraver-burst-network/browser-sdk";
 
 import { MatchingDialog } from "../../dom-dialogs/matching/matching-dialog";
 import { NetworkErrorDialog } from "../../dom-dialogs/network-error/network-error-dialog";
-import { switchMatchingDialog } from "./switch-dialog/switch-matching-dialog";
-import { networkErrorDialogConnector } from "../action-connector/network-error-dialog-connector";
 import { SelectionComplete } from "../game-actions/selection-complete";
 import { GameProps } from "../game-props";
+import { switchMatchingDialog } from "./switch-dialog/switch-matching-dialog";
+import { switchNetworkErrorDialog } from "./switch-dialog/switch-network-error-dialog";
 
 /**
  * カジュアルマッチングするまで待機するヘルパー関数
@@ -27,7 +27,7 @@ export async function waitUntilCasualMatching(
         type: "GotoTitle",
       },
     });
-    props.domDialogBinder.bind(dialog, networkErrorDialogConnector(props));
+    switchNetworkErrorDialog(props, dialog);
     throw e;
   }
 }
