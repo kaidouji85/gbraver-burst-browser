@@ -43,10 +43,7 @@ export class TDSceneBinder {
    * @param scene バインドするシーン
    * @param unsubscribers バインドするシーンに関連するアンサブスクライバ
    */
-  bind<X extends TDScene>(
-    scene: X,
-    unsubscribers: Unsubscribable[],
-  ): void {
+  bind<X extends TDScene>(scene: X, unsubscribers: Unsubscribable[]): void {
     this.#disposeScene();
     this.#scene = scene;
     scene.getDOMLayerElements().forEach((element) => {

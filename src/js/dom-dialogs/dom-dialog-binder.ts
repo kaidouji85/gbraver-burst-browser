@@ -26,10 +26,7 @@ export class DOMDialogBinder {
    * @param dialog ダイアログ
    * @param unsubscribers バインドするダイアログに関するアンサブスクライバ
    */
-  bind<X extends DOMDialog>(
-    dialog: X,
-    unsubscribers:Unsubscribable[]
-  ): void {
+  bind<X extends DOMDialog>(dialog: X, unsubscribers: Unsubscribable[]): void {
     this.#removeCurrentDialog();
     this.#unsubscribers = unsubscribers;
     this.#root.appendChild(dialog.getRootHTMLElement());
