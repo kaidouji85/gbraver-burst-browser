@@ -7,15 +7,7 @@ import { switchBattleSimulator } from "./switch-battle-simulator";
  * @param props 戦闘シーンプロパティ
  */
 export function onBattleSimulatorStart(props: BattleSceneProps) {
-  const {
-    view,
-    exclusive,
-    playerId,
-    stateHistory,
-    sounds,
-    se,
-    domDialogBinder,
-  } = props;
+  const { view, exclusive, playerId, stateHistory, sounds, se } = props;
   exclusive.execute(async () => {
     const lastState = stateHistory.at(-1);
     if (!lastState) {

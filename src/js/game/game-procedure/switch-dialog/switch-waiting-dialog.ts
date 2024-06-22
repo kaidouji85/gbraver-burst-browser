@@ -7,4 +7,4 @@ import { GameProps } from "../../game-props";
  * @param dialog 作業待ちダイアログ
  */
 export const switchWaitingDialog = (props: GameProps, dialog: WaitingDialog) =>
-  props.domDialogBinder.bind(dialog, () => []);
+  props.domDialogBinder.bind(dialog, []);

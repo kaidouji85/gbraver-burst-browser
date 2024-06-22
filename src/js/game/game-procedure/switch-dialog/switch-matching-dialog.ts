@@ -12,7 +12,8 @@ export const switchMatchingDialog = (
   props: GameProps,
   dialog: MatchingDialog,
 ) =>
-  props.domDialogBinder.bind(dialog, () =>
+  props.domDialogBinder.bind(
+    dialog,
     props.gameAction.connect([
       dialog
         .notifyMatchingCanceled()

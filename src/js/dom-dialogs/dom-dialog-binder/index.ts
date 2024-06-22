@@ -1,7 +1,6 @@
 import { Unsubscribable } from "rxjs";
 
 import { DOMDialog } from "../dialog";
-import { DomDialogActionConnector } from "./action-connector";
 
 /** HTMLダイアログバインダー */
 export class DOMDialogBinder {
@@ -25,14 +24,14 @@ export class DOMDialogBinder {
    * DOMダイアログをバインドする
    * @template X ダイアログデータ型
    * @param dialog ダイアログ
-   * @param connector アクションコネクタ
+   * @param unsubscribers バインドするダイアログに関するアンサブスクライバ
    */
   bind<X extends DOMDialog>(
     dialog: X,
-    connector: DomDialogActionConnector<X>,
+    unsubscribers:Unsubscribable[]
   ): void {
     this.#removeCurrentDialog();
-    this.#unsubscribers = connector(dialog);
+    this.#unsubscribers = unsubscribers;
     this.#root.appendChild(dialog.getRootHTMLElement());
     this.#dialog = dialog;
   }

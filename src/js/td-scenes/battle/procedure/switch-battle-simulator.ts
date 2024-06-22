@@ -12,7 +12,8 @@ export const switchBattleSimulator = (
   props: BattleSceneProps,
   dialog: BattleSimulator,
 ) =>
-  props.domDialogBinder.bind(dialog, () =>
+  props.domDialogBinder.bind(
+    dialog,
     props.battleSceneAction.connect([
       dialog.notifyClose().pipe(map(() => ({ type: "battleSimulatorEnd" }))),
     ]),

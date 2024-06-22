@@ -12,7 +12,8 @@ export const switchRejectPrivateMatchEntryDialog = (
   props: GameProps,
   dialog: RejectPrivateMatchEntryDialog,
 ) =>
-  props.domDialogBinder.bind(dialog, () =>
+  props.domDialogBinder.bind(
+    dialog,
     props.gameAction.connect([
       dialog
         .notifyDialogClosed()
