@@ -3,7 +3,7 @@ import { NPCEnding } from "../../../../dom-scenes/npc-ending";
 import { waitTime } from "../../../../wait/wait-time";
 import { PostBattleAction } from "../../../game-actions/post-battle-action";
 import { GameProps } from "../../../game-props";
-import { npcEndingConnector } from "../../switch-scene/npc-ending-connector";
+import { switchNpcEnding } from "../../switch-scene/switch-npc-ending";
 
 /**
  * 条件を満たした場合、エンディングに遷移する
@@ -23,7 +23,7 @@ export async function gotoEndingIfNeeded(
   await props.fader.fadeOut();
   props.tdBinder.hidden();
   const scene = new NPCEnding(props);
-  npcEndingConnector(props, scene);
+  switchNpcEnding(props, scene);
   await Promise.race([scene.waitUntilLoaded(), waitTime(MAX_LOADING_TIME)]);
   await props.fader.fadeIn();
   scene.playBGM();
