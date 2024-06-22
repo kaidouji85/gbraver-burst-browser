@@ -1,6 +1,6 @@
 import { BattleSimulator } from "../../../dom-dialogs/battle-simulator";
-import { battleSimulatorConnector } from "../action-connectors/battle-simulator-conenctor";
 import { BattleSceneProps } from "../props";
+import { switchBattleSimulator } from "./switch-battle-simulator";
 
 /**
  * バトルシミュレータ開始時の処理
@@ -39,6 +39,6 @@ export function onBattleSimulatorStart(props: BattleSceneProps) {
       initialPlayerBattery,
       isPlayerAttacker,
     });
-    domDialogBinder.bind(dialog, battleSimulatorConnector(props));
+    switchBattleSimulator(props, dialog);
   });
 }
