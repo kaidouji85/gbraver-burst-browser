@@ -1,6 +1,6 @@
 import { Unsubscribable } from "rxjs";
 
-import { DOMDialog } from "../dialog";
+import { DOMDialog } from "./dialog";
 
 /** HTMLダイアログバインダー */
 export class DOMDialogBinder {
