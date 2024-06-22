@@ -12,7 +12,8 @@ export const switchEpisodeSelector = (
   props: GameProps,
   scene: EpisodeSelector,
 ) =>
-  props.domSceneBinder.bind(scene, () =>
+  props.domSceneBinder.bind(
+    scene,
     props.gameAction.connect([
       scene.notifyPrev().pipe(map(() => ({ type: "CancelTutorialSelect" }))),
       scene

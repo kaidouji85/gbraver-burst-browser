@@ -9,7 +9,8 @@ import { GameProps } from "../../game-props";
  * @param scene タイトル画面
  */
 export const switchTitle = (props: GameProps, scene: Title) =>
-  props.domSceneBinder.bind(scene, () =>
+  props.domSceneBinder.bind(
+    scene,
     props.gameAction.connect([
       scene.notifyLogin().pipe(map(() => ({ type: "UniversalLogin" }))),
       scene.notifyLogout().pipe(map(() => ({ type: "Logout" }))),

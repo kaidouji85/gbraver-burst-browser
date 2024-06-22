@@ -9,7 +9,8 @@ import { GameProps } from "../../game-props";
  * @param scene 設定画面
  */
 export const switchConfig = (props: GameProps, scene: Config) =>
-  props.domSceneBinder.bind(scene, () =>
+  props.domSceneBinder.bind(
+    scene,
     props.gameAction.connect([
       scene.notifyPrev().pipe(map(() => ({ type: "ConfigChangeCancel" }))),
       scene

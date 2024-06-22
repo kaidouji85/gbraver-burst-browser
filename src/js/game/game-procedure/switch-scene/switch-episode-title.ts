@@ -7,4 +7,4 @@ import { GameProps } from "../../game-props";
  * @param scene エピソードタイトル画面
  */
 export const switchEpisodeTitle = (props: GameProps, scene: EpisodeTitle) =>
-  props.domSceneBinder.bind(scene, () => []);
+  props.domSceneBinder.bind(scene, []);

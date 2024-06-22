@@ -7,4 +7,4 @@ import { GameProps } from "../../game-props";
  * @param scene 対戦カード画面
  */
 export const switchMatchCard = (props: GameProps, scene: MatchCard) =>
-  props.domSceneBinder.bind(scene, () => []);
+  props.domSceneBinder.bind(scene, []);

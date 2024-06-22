@@ -7,4 +7,4 @@ import { GameProps } from "../../game-props";
  * @param scene ステージタイトル画面
  */
 export const switchStageTitle = (props: GameProps, scene: StageTitle) =>
-  props.domSceneBinder.bind(scene, () => []);
+  props.domSceneBinder.bind(scene, []);

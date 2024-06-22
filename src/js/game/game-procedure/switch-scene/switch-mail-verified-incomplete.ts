@@ -12,7 +12,8 @@ export const switchMailVerifiedIncomplete = (
   props: GameProps,
   scene: MailVerifiedIncomplete,
 ) =>
-  props.domSceneBinder.bind(scene, () =>
+  props.domSceneBinder.bind(
+    scene,
     props.gameAction.connect([
       scene
         .notifyTitleTransition()
