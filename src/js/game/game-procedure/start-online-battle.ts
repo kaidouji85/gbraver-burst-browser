@@ -11,11 +11,11 @@ import { BattleScene } from "../../td-scenes/battle";
 import { BattleProgress } from "../../td-scenes/battle/battle-progress";
 import { waitAnimationFrame } from "../../wait/wait-animation-frame";
 import { waitTime } from "../../wait/wait-time";
-import { battleSceneConnector } from "../action-connector/battle-scene-connector";
 import { matchCardConnector } from "../action-connector/match-card-connector";
 import { networkErrorDialogConnector } from "../action-connector/network-error-dialog-connector";
 import { waitingDialogConnector } from "../action-connector/waiting-dialog-connector";
 import { GameProps } from "../game-props";
+import { switchBattleScene } from "./switch/switch-battle-scene";
 
 /**
  * BattleProgressを生成するヘルパー関数
@@ -93,7 +93,7 @@ export async function startOnlineBattle(
     emergencyStop: battle.suddenlyBattleNotifier(),
     customBattleEvent: createSeriousMatchEvent(),
   });
-  props.tdBinder.bind(battleScene, battleSceneConnector(props));
+  switchBattleScene(props, battleScene);
   await waitAnimationFrame();
   await props.fader.fadeOut();
   props.domSceneBinder.hidden();

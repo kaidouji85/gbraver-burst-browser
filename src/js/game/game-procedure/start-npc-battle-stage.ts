@@ -1,4 +1,4 @@
-import type { Command, Player } from "gbraver-burst-core";
+import { Command, Player } from "gbraver-burst-core";
 
 import { fadeOut, stop } from "../../bgm/bgm-operators";
 import { createSeriousMatchEvent } from "../../custom-battle-events/serious-match-event";
@@ -9,10 +9,10 @@ import { BattleScene } from "../../td-scenes/battle";
 import { waitAnimationFrame } from "../../wait/wait-animation-frame";
 import { waitTime } from "../../wait/wait-time";
 import { waitUntilWindowPushWithStream } from "../../wait/wait-until-window-push-with-stream";
-import { battleSceneConnector } from "../action-connector/battle-scene-connector";
 import { stageTitleConnector } from "../action-connector/stage-title-connector";
 import { GameProps } from "../game-props";
 import { NPCBattleStage } from "../npc-battle";
+import { switchBattleScene } from "./switch/switch-battle-scene";
 
 /**
  * NPCバトルのステージを開始するヘルパー関数
@@ -63,7 +63,7 @@ export async function startNPCBattleStage(
     controllerType: config.battleControllerType,
     customBattleEvent: createSeriousMatchEvent(),
   });
-  props.tdBinder.bind(battleScene, battleSceneConnector(props));
+  switchBattleScene(props, battleScene);
   await waitAnimationFrame();
   const latency = Date.now() - startNPCStageTitleTime;
   await Promise.race([

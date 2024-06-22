@@ -6,7 +6,7 @@ import { BattleScene } from "../../td-scenes/battle";
 import { waitAnimationFrame } from "../../wait/wait-animation-frame";
 import { waitTime } from "../../wait/wait-time";
 import { waitUntilWindowPushWithStream } from "../../wait/wait-until-window-push-with-stream";
-import { battleSceneConnector } from "../action-connector/battle-scene-connector";
+import { switchBattleScene } from "./switch/switch-battle-scene";
 import { episodeTitleConnector } from "../action-connector/episode-title-connector";
 import { Episode } from "../episodes/episode";
 import { GameProps } from "../game-props";
@@ -51,7 +51,7 @@ export async function startEpisode(
     customBattleEvent: episode.event(props.resources),
     controllerType: "BigButton",
   });
-  props.tdBinder.bind(battleScene, battleSceneConnector(props));
+  switchBattleScene(props, battleScene);
   await waitAnimationFrame();
   const latency = Date.now() - startTutorialStageTime;
   await Promise.race([
