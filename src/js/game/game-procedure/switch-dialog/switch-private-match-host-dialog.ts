@@ -4,7 +4,7 @@ import { PrivateMatchHostDialog } from "../../../dom-dialogs/private-match-host"
 import { GameProps } from "../../game-props";
 
 /**
- * プライベートマッチ（ホスト）ダイアログとゲームアクションを関連付ける
+ * プライベートマッチ（ホスト）ダイアログに切り替える
  * @param props ゲームプロパティ
  * @param dialog プライベートマッチ（ホスト）ダイアログ
  */
