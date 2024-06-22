@@ -11,11 +11,11 @@ import { BattleScene } from "../../td-scenes/battle";
 import { BattleProgress } from "../../td-scenes/battle/battle-progress";
 import { waitAnimationFrame } from "../../wait/wait-animation-frame";
 import { waitTime } from "../../wait/wait-time";
-import { matchCardConnector } from "../action-connector/match-card-connector";
 import { networkErrorDialogConnector } from "../action-connector/network-error-dialog-connector";
 import { waitingDialogConnector } from "../action-connector/waiting-dialog-connector";
 import { GameProps } from "../game-props";
 import { switchBattleScene } from "./switch-scene/switch-battle-scene";
+import { switchMatchCard } from "./switch-scene/switch-match-card";
 
 /**
  * BattleProgressを生成するヘルパー関数
@@ -75,7 +75,7 @@ export async function startOnlineBattle(
     enemy: battle.enemy.armdozer.id,
     caption,
   });
-  props.domSceneBinder.bind(scene, matchCardConnector);
+  switchMatchCard(props, scene);
   await Promise.race([scene.waitUntilLoaded(), waitTime(MAX_LOADING_TIME)]);
   await props.fader.fadeIn();
   const battleProgress = createBattleProgress(props, battle);

@@ -7,7 +7,6 @@ import { GameProps } from "../../game-props";
  * メール認証未完了画面に切り替える
  * @param props ゲームプロパティ
  * @param scene メール認証未完了画面
- * @returns アクションコネクタ
  */
 export const switchMailVerifiedIncomplete = (
   props: GameProps,
