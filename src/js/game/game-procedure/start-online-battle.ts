@@ -15,7 +15,7 @@ import { matchCardConnector } from "../action-connector/match-card-connector";
 import { networkErrorDialogConnector } from "../action-connector/network-error-dialog-connector";
 import { waitingDialogConnector } from "../action-connector/waiting-dialog-connector";
 import { GameProps } from "../game-props";
-import { switchBattleScene } from "./switch/switch-battle-scene";
+import { switchBattleScene } from "./switch-scene/switch-battle-scene";
 
 /**
  * BattleProgressを生成するヘルパー関数

@@ -12,7 +12,7 @@ import { waitUntilWindowPushWithStream } from "../../wait/wait-until-window-push
 import { stageTitleConnector } from "../action-connector/stage-title-connector";
 import { GameProps } from "../game-props";
 import { NPCBattleStage } from "../npc-battle";
-import { switchBattleScene } from "./switch/switch-battle-scene";
+import { switchBattleScene } from "./switch-scene/switch-battle-scene";
 
 /**
  * NPCバトルのステージを開始するヘルパー関数
