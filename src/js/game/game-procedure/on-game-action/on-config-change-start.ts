@@ -1,7 +1,7 @@
 import { Config } from "../../../dom-scenes/config";
-import { configConnector } from "../../action-connector/config-connector";
 import { GameAction } from "../../game-actions";
 import { GameProps } from "../../game-props";
+import { switchConfig } from "../switch-scene/switch-config";
 
 /**
  * 設定変更開始時の処理
@@ -15,7 +15,7 @@ async function onConfigChangeStart(props: Readonly<GameProps>): Promise<void> {
     ...props,
     config,
   });
-  props.domSceneBinder.bind(scene, configConnector(props));
+  switchConfig(props, scene);
   await props.fader.fadeIn();
 }
 
