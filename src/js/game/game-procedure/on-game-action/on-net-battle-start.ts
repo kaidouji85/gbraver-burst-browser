@@ -2,7 +2,7 @@ import { LoginDialog } from "../../../dom-dialogs/login";
 import { NetBattleSelectorDialog } from "../../../dom-dialogs/net-battle-selector";
 import { NetworkErrorDialog } from "../../../dom-dialogs/network-error/network-error-dialog";
 import { WaitingDialog } from "../../../dom-dialogs/waiting/waiting-dialog";
-import { waitingDialogConnector } from "../../action-connector/waiting-dialog-connector";
+import { switchWaitingDialog } from "../switch-dialog/switch-waiting-dialog";
 import { GameAction } from "../../game-actions";
 import { GameProps } from "../../game-props";
 import { switchLoginDialog } from "../switch-dialog/switch-login-dialog";
@@ -33,10 +33,7 @@ async function callLoginCheckAPI(props: Readonly<GameProps>): Promise<boolean> {
  * @returns 処理が完了したら発火するPromise
  */
 async function onNetBattleStart(props: Readonly<GameProps>): Promise<void> {
-  props.domDialogBinder.bind(
-    new WaitingDialog("ログインチェック中......"),
-    waitingDialogConnector,
-  );
+  switchWaitingDialog(props, new WaitingDialog("ログインチェック中......"));
   const isLogin = await callLoginCheckAPI(props);
   props.domDialogBinder.hidden();
   if (!isLogin) {

@@ -3,7 +3,7 @@ import { Battle as BattleSDK } from "@gbraver-burst-network/browser-sdk";
 import { NetworkErrorDialog } from "../../dom-dialogs/network-error/network-error-dialog";
 import { PrivateMatchHostDialog } from "../../dom-dialogs/private-match-host";
 import { WaitingDialog } from "../../dom-dialogs/waiting/waiting-dialog";
-import { waitingDialogConnector } from "../action-connector/waiting-dialog-connector";
+import { switchWaitingDialog } from "./switch-dialog/switch-waiting-dialog";
 import { SelectionComplete } from "../game-actions/selection-complete";
 import { GameProps } from "../game-props";
 import { switchNetworkErrorDialog } from "./switch-dialog/switch-network-error-dialog";
@@ -20,10 +20,7 @@ export async function waitUntilPrivateMatchingAsHost(
   action: SelectionComplete,
 ): Promise<BattleSDK> {
   try {
-    props.domDialogBinder.bind(
-      new WaitingDialog("ルーム作成中......"),
-      waitingDialogConnector,
-    );
+    switchWaitingDialog(props, new WaitingDialog("ルーム作成中......"));
     const room = await props.api.createPrivateMatchRoom(
       action.armdozerId,
       action.pilotId,

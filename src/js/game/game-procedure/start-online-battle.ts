@@ -11,7 +11,7 @@ import { BattleScene } from "../../td-scenes/battle";
 import { BattleProgress } from "../../td-scenes/battle/battle-progress";
 import { waitAnimationFrame } from "../../wait/wait-animation-frame";
 import { waitTime } from "../../wait/wait-time";
-import { waitingDialogConnector } from "../action-connector/waiting-dialog-connector";
+import { switchWaitingDialog } from "./switch-dialog/switch-waiting-dialog";
 import { GameProps } from "../game-props";
 import { switchNetworkErrorDialog } from "./switch-dialog/switch-network-error-dialog";
 import { switchBattleScene } from "./switch-scene/switch-battle-scene";
@@ -31,7 +31,7 @@ function createBattleProgress(
     progress: async (v) => {
       try {
         const dialog = new WaitingDialog("通信中......");
-        props.domDialogBinder.bind(dialog, waitingDialogConnector);
+        switchWaitingDialog(props, dialog);
         const update = await battle.progress(v);
         props.domDialogBinder.hidden();
         return update;
