@@ -9,10 +9,10 @@ import { BattleScene } from "../../td-scenes/battle";
 import { waitAnimationFrame } from "../../wait/wait-animation-frame";
 import { waitTime } from "../../wait/wait-time";
 import { waitUntilWindowPushWithStream } from "../../wait/wait-until-window-push-with-stream";
-import { stageTitleConnector } from "../action-connector/stage-title-connector";
 import { GameProps } from "../game-props";
 import { NPCBattleStage } from "../npc-battle";
 import { switchBattleScene } from "./switch-scene/switch-battle-scene";
+import { switchStageTitle } from "./switch-scene/switch-stage-title";
 
 /**
  * NPCバトルのステージを開始するヘルパー関数
@@ -43,7 +43,7 @@ export async function startNPCBattleStage(
     caption: stage.caption,
     armdozerId: npcBattle.enemy.armdozer.id,
   });
-  props.domSceneBinder.bind(scene, stageTitleConnector);
+  switchStageTitle(props, scene);
   await Promise.race([scene.waitUntilLoaded(), waitTime(MAX_LOADING_TIME)]);
   await props.fader.fadeIn();
   const startNPCStageTitleTime = Date.now();
