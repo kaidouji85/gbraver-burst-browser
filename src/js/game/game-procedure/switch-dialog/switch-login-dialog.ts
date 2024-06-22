@@ -7,7 +7,6 @@ import { GameProps } from "../../game-props";
  * ログインダイアログに切り替える
  * @param props ゲームプロパティ
  * @param dialog ログインダイアログ
- * @returns アクションコネクタ
  */
 export const switchLoginDialog = (props: GameProps, dialog: LoginDialog) =>
   props.domDialogBinder.bind(dialog, () =>

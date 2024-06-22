@@ -7,7 +7,6 @@ import { GameProps } from "../../game-props";
  * 難易度選択ダイアログに切り替える
  * @param props ゲームプロパティ
  * @param dialog 難易度選択ダイアログ
- * @returns アクションコネクタ
  */
 export const switchDifficultyDialog = (
   props: GameProps,

@@ -7,7 +7,6 @@ import { GameProps } from "../../game-props";
  * エピソードセレクト画面に切り替える
  * @param props ゲームプロパティ
  * @param scene チュートリアルステージセレクト画面
- * @returns アクションコネクタ
  */
 export const switchEpisodeSelector = (
   props: GameProps,
