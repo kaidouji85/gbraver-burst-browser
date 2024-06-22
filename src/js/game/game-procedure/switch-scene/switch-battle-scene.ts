@@ -5,7 +5,7 @@ import { GameProps } from "../../game-props";
 
 /**
  * 戦闘シーンに切り替える
- * @param props ゲームアクション管理コンテナ
+ * @param props ゲームプロパティ
  * @param scene 戦闘シーン
  */
 export const switchBattleScene = (
