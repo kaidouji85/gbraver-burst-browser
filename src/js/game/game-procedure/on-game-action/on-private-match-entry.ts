@@ -1,11 +1,11 @@
 import { MatchingDialog } from "../../../dom-dialogs/matching/matching-dialog";
 import { RejectPrivateMatchEntryDialog } from "../../../dom-dialogs/reject-private-match-entry";
-import { matchingDialogConnector } from "../../action-connector/matching-dialog-connector";
 import { rejectPrivateMatchEntryDialogConnector } from "../../action-connector/reject-private-match-entry-dialog-connector";
 import { GameAction } from "../../game-actions";
 import { PrivateMatchEntry } from "../../game-actions/private-match-entry";
 import { GameProps } from "../../game-props";
 import { startOnlineBattle } from "../start-online-battle";
+import { switchMatchingDialog } from "../switch-dialog/switch-matching-dialog";
 
 /**
  * ゲストがプライベートマッチにエントリする
@@ -23,10 +23,7 @@ async function onPrivateMatchEntry(
     return;
   }
 
-  props.domDialogBinder.bind(
-    new MatchingDialog(props),
-    matchingDialogConnector(props),
-  );
+  switchMatchingDialog(props, new MatchingDialog(props));
   await props.api.disconnectWebsocket();
   const { armdozerId, pilotId } = props.inProgress.privateMatchGuest;
   const battle = await props.api.enterPrivateMatchRoom(
