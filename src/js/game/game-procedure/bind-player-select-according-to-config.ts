@@ -2,12 +2,12 @@ import { ArmdozerId, PilotId } from "gbraver-burst-core";
 
 import { PlayerSelect } from "../../dom-scenes/player-select";
 import { SecretPlayerSelect } from "../../dom-scenes/secret-player-select";
-import { playerSelectConnector } from "../action-connector/player-select-connector";
-import { secretPlayerSelectConnector } from "../action-connector/secret-player-select-connector";
 import { PlayerSelectorType } from "../config/browser-config";
 import { GameProps } from "../game-props";
 import { getPlayableArmdozers } from "../playable-amdozers";
 import { getPlayablePilots } from "../playable-pilots";
+import { switchPlayerSelect } from "./switch-scene/switch-player-select";
+import { switchSecretPlayerSelect } from "./switch-scene/switch-secret-player-select";
 
 /** シーンバインダーのパラメータ */
 type SceneBinderParams = GameProps & {
@@ -30,9 +30,8 @@ type SceneBinder = (params: SceneBinderParams) => Promise<void>;
  * @returns 画面の素材読み込みまで完了したら発火するPromise
  */
 const bindPlayerSelect: SceneBinder = async (params) => {
-  const { domSceneBinder } = params;
   const scene = new PlayerSelect(params);
-  domSceneBinder.bind(scene, playerSelectConnector(params));
+  switchPlayerSelect(params, scene);
   await scene.waitUntilLoaded();
 };
 
@@ -42,9 +41,8 @@ const bindPlayerSelect: SceneBinder = async (params) => {
  * @returns 画面の素材読み込みまで完了したら発火するPromise
  */
 const bindSecretPlayerSelect: SceneBinder = async (params) => {
-  const { domSceneBinder } = params;
   const scene = new SecretPlayerSelect(params);
-  domSceneBinder.bind(scene, secretPlayerSelectConnector(params));
+  switchSecretPlayerSelect(params, scene);
   await scene.waitUntilLoaded();
 };
 

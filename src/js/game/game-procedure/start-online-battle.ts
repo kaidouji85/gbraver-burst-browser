@@ -11,11 +11,11 @@ import { BattleScene } from "../../td-scenes/battle";
 import { BattleProgress } from "../../td-scenes/battle/battle-progress";
 import { waitAnimationFrame } from "../../wait/wait-animation-frame";
 import { waitTime } from "../../wait/wait-time";
-import { battleSceneConnector } from "../action-connector/battle-scene-connector";
-import { matchCardConnector } from "../action-connector/match-card-connector";
-import { networkErrorDialogConnector } from "../action-connector/network-error-dialog-connector";
-import { waitingDialogConnector } from "../action-connector/waiting-dialog-connector";
 import { GameProps } from "../game-props";
+import { switchNetworkErrorDialog } from "./switch-dialog/switch-network-error-dialog";
+import { switchWaitingDialog } from "./switch-dialog/switch-waiting-dialog";
+import { switchBattleScene } from "./switch-scene/switch-battle-scene";
+import { switchMatchCard } from "./switch-scene/switch-match-card";
 
 /**
  * BattleProgressを生成するヘルパー関数
@@ -31,7 +31,7 @@ function createBattleProgress(
     progress: async (v) => {
       try {
         const dialog = new WaitingDialog("通信中......");
-        props.domDialogBinder.bind(dialog, waitingDialogConnector);
+        switchWaitingDialog(props, dialog);
         const update = await battle.progress(v);
         props.domDialogBinder.hidden();
         return update;
@@ -42,7 +42,7 @@ function createBattleProgress(
             type: "GotoTitle",
           },
         });
-        props.domDialogBinder.bind(dialog, networkErrorDialogConnector(props));
+        switchNetworkErrorDialog(props, dialog);
         throw e;
       }
     },
@@ -75,7 +75,7 @@ export async function startOnlineBattle(
     enemy: battle.enemy.armdozer.id,
     caption,
   });
-  props.domSceneBinder.bind(scene, matchCardConnector);
+  switchMatchCard(props, scene);
   await Promise.race([scene.waitUntilLoaded(), waitTime(MAX_LOADING_TIME)]);
   await props.fader.fadeIn();
   const battleProgress = createBattleProgress(props, battle);
@@ -93,7 +93,7 @@ export async function startOnlineBattle(
     emergencyStop: battle.suddenlyBattleNotifier(),
     customBattleEvent: createSeriousMatchEvent(),
   });
-  props.tdBinder.bind(battleScene, battleSceneConnector(props));
+  switchBattleScene(props, battleScene);
   await waitAnimationFrame();
   await props.fader.fadeOut();
   props.domSceneBinder.hidden();

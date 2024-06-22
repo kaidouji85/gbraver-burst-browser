@@ -1,8 +1,8 @@
 import { PrivateMatchGuestDialog } from "../../../../dom-dialogs/private-match-guest";
-import { privateMatchGuestDialogConnector } from "../../../action-connector/private-match-guest-dialog-connector";
 import { SelectionComplete } from "../../../game-actions/selection-complete";
 import { GameProps } from "../../../game-props";
 import { InProgress } from "../../../in-progress";
+import { switchPrivateMatchGuestDialog } from "../../switch-dialog/switch-private-match-guest-dialog";
 
 /** プライベートマッチ（ゲスト）を開始した */
 type IsPrivateMatchGuestStarted = {
@@ -33,10 +33,7 @@ export async function startPrivateMatchGuestIfNeeded(
     return { isStarted: false };
   }
 
-  props.domDialogBinder.bind(
-    new PrivateMatchGuestDialog(props),
-    privateMatchGuestDialogConnector(props),
-  );
+  switchPrivateMatchGuestDialog(props, new PrivateMatchGuestDialog(props));
   return {
     isStarted: true,
     inProgress: {

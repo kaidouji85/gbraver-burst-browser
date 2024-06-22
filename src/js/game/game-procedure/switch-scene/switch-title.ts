@@ -1,17 +1,15 @@
 import { map } from "rxjs";
 
-import { DOMSceneActionConnector } from "../../dom-scenes/dom-scene-binder/action-connector";
-import { Title } from "../../dom-scenes/title";
-import { GameActionManageContainer } from "../game-props/game-action-manage-container";
+import { Title } from "../../../dom-scenes/title";
+import { GameProps } from "../../game-props";
 
 /**
- * タイトル画面とゲームアクションを関連付ける
- * @param props ゲームアクション管理コンテナ
- * @returns アクションコネクタ
+ * タイトル画面に切り替える
+ * @param props ゲームプロパティ
+ * @param scene タイトル画面
  */
-export const titleConnector =
-  (props: GameActionManageContainer): DOMSceneActionConnector<Title> =>
-  (scene) =>
+export const switchTitle = (props: GameProps, scene: Title) =>
+  props.domSceneBinder.bind(scene, () =>
     props.gameAction.connect([
       scene.notifyLogin().pipe(map(() => ({ type: "UniversalLogin" }))),
       scene.notifyLogout().pipe(map(() => ({ type: "Logout" }))),
@@ -22,4 +20,5 @@ export const titleConnector =
       scene.notifyNetBattle().pipe(map(() => ({ type: "NetBattleStart" }))),
       scene.notifyConfig().pipe(map(() => ({ type: "ConfigChangeStart" }))),
       scene.notifyTutorial().pipe(map(() => ({ type: "StoryStart" }))),
-    ]);
+    ]),
+  );

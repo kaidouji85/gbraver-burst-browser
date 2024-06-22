@@ -3,9 +3,9 @@ import {
   developingFullResourceDifferentialLoad,
   fullResourceDifferentialLoad,
 } from "../../resource/loading/full-resource-differential-load";
-import { loadingConnector } from "../action-connector/loading-connector";
 import type { GameProps } from "../game-props";
 import { reflectSoundVolume } from "./reflect-sound-volume";
+import { switchLoading } from "./switch-scene/switch-loading";
 
 /**
  * フルリソース読み込みを行うヘルパー関数
@@ -20,7 +20,7 @@ export async function loadFullResource(props: GameProps): Promise<void> {
     ? developingFullResourceDifferentialLoad(props.resources)
     : fullResourceDifferentialLoad(props.resources);
   const scene = new Loading(resourceLoading.loading);
-  props.domSceneBinder.bind(scene, loadingConnector);
+  switchLoading(props, scene);
   await props.fader.fadeIn();
   props.resources = await resourceLoading.resources;
   const config = await props.config.load();

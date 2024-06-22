@@ -3,12 +3,12 @@ import { invisibleFirstView } from "../../first-view/first-view-visible";
 import { titleResourceLoading } from "../../resource/loading/title-resource-loading";
 import { loadServiceWorker } from "../../service-worker/load-service-worker";
 import { waitTime } from "../../wait/wait-time";
-import { mailVerifiedIncompleteConnector } from "../action-connector/mail-verified-incomplete-connector";
-import type { GameProps } from "../game-props";
+import { GameProps } from "../game-props";
 import { playTitleBGM } from "./play-title-bgm";
 import { reflectPerformanceStatsVisibility } from "./reflect-performance-stats-visibility";
 import { reflectSoundVolume } from "./reflect-sound-volume";
 import { startTitle } from "./start-title";
+import { switchMailVerifiedIncomplete } from "./switch-scene/switch-mail-verified-incomplete";
 
 /**
  * ゲームの初期化
@@ -30,7 +30,7 @@ export async function initialize(props: GameProps): Promise<void> {
   if (isLogin && !isMailVerified) {
     const mailAddress = await props.api.getMail();
     const scene = new MailVerifiedIncomplete(mailAddress);
-    props.domSceneBinder.bind(scene, mailVerifiedIncompleteConnector(props));
+    switchMailVerifiedIncomplete(props, scene);
     invisibleFirstView();
     await props.fader.fadeIn();
     return;
