@@ -7,7 +7,6 @@ import { GameProps } from "../../game-props";
  * プライベートマッチ（ゲスト）ダイアログに切り替える
  * @param props ゲームプロパティ
  * @param dialog プライベートマッチ（ゲスト）ダイアログ
- * @returns アクションコネクタ
  */
 export const switchPrivateMatchGuestDialog = (
   props: GameProps,
