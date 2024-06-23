@@ -15,6 +15,7 @@ import { yuuyaAttack } from "./yuuya-attack";
 import { yuuyaAttackWhenTraumaOfLastYear } from "./yuuya-attack-when-trauma-of-last-year";
 import { yuuyaBurst } from "./yuuya-burst";
 import { yuuyaBurstWhenTraumaOfLastYear } from "./yuuya-burst-when-trauma-of-last-year";
+import { yuuyaFinish } from "./yuuya-finish";
 import { yuuyaPilotSkill } from "./yuuya-pilot-skill";
 
 /**
@@ -32,6 +33,7 @@ export function onStateAnimation(
     tsubasaFeintSuccess,
     tsubasaFeintFail,
     tsubasaAttackWhenContinuousAttack,
+    yuuyaFinish,
     yuuyaBurstWhenTraumaOfLastYear,
     yuuyaBurst,
     yuuyaAttackWhenTraumaOfLastYear,
