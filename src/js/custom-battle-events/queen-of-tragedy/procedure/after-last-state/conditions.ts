@@ -4,6 +4,8 @@ import { GameEnd, PlayerId } from "gbraver-burst-core";
 export type Conditions = {
   /** プレイヤーID */
   playerId: PlayerId;
+  /** 敵ID */
+  enemyId: PlayerId;
   /** updateから抽出したゲーム終了情報、存在しない場合はnull */
   gameEnd: GameEnd | null;
 };
