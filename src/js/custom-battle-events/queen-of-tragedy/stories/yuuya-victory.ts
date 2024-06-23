@@ -19,10 +19,10 @@ export async function yuuyaVictory(
   await scrollRightMessages(props, [
     [
       "ユウヤ",
-      `「お前の${wbr}行動は${wbr}合理的で${wbr}まったく${wbr}隙が${wbr}ない`,
+      `「お前の${wbr}動きは${wbr}合理的で${wbr}まったく${wbr}隙が${wbr}ない`,
     ],
-    [`美しい${wbr}とすら${wbr}言える${wbr}レベルだ`],
-    [`ゆえに${wbr}次の${wbr}行動が${wbr}予想${wbr}しやすい」`],
+    [`美しい${wbr}とすら${wbr}言える`],
+    [`ゆえに${wbr}次の${wbr}行動が${wbr}予想が${wbr}しやすい」`],
   ]);
   props.view.dom.rightMessageWindow.darken();
 
