@@ -1,3 +1,5 @@
+import { GameEnd } from "gbraver-burst-core";
+
 import { LastState } from "../../../../td-scenes/battle/custom-battle-event";
 import { separatePlayersFromLastState } from "../../../separate-players";
 import { turnCount } from "../../../turn-count";
@@ -14,5 +16,10 @@ export function createConditions(
 ): Conditions | null {
   const separatedPlayers = separatePlayersFromLastState(props);
   const turn = turnCount(props.stateHistory);
-  return separatedPlayers ? { ...separatedPlayers, turn } : null;
+  const foundGameEnd = props.stateHistory
+    .map((s) => s.effect)
+    .find((e) => e.name === "GameEnd");
+  const gameEnd: GameEnd | null =
+    foundGameEnd && foundGameEnd.name === "GameEnd" ? foundGameEnd : null;
+  return separatedPlayers ? { ...separatedPlayers, turn, gameEnd } : null;
 }
