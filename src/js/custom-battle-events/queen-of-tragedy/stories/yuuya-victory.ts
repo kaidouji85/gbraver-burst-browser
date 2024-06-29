@@ -17,19 +17,17 @@ export async function yuuyaVictory(
 ) {
   activeRightMessageWindowWithFace(props, "Yuuya");
   await scrollRightMessages(props, [
-    [
-      "ユウヤ",
-      `「お前の${wbr}動きは${wbr}合理的で${wbr}まったく${wbr}隙が${wbr}ない`,
-    ],
-    [`美しい${wbr}とすら${wbr}言える`],
-    [`ゆえに${wbr}次の${wbr}行動が${wbr}予想が${wbr}しやすい」`],
+    ["ユウヤ", `「ツバサ お前の${wbr}動きは${wbr}合理的で${wbr}美しい`],
+    [`ゆえに${wbr}次の${wbr}行動が${wbr}手に取る${wbr}ように${wbr}分かる」`],
   ]);
   props.view.dom.rightMessageWindow.darken();
 
   activeLeftMessageWindowWithFace(props, "Tsubasa");
   await scrollLeftMessages(props, [
-    ["ツバサ", `「やはり こちらの${wbr}行動は${wbr}筒抜けか`],
-    [`ユウヤに${wbr}勝つには${wbr}意表を${wbr}突く${wbr}しかない」`],
+    [
+      "ツバサ",
+      `「やはりユウヤに${wbr}勝つには${wbr}意表を${wbr}突く${wbr}しかない」`,
+    ],
   ]);
   props.view.dom.leftMessageWindow.darken();
 
