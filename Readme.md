@@ -54,11 +54,8 @@ npm start
 
 ### 開発環境設定
 
-* [GブレイバーバーストAPIサーバ](https://github.com/kaidouji85/gbraver-burst-network)の開発環境をデプロイする
-*
-
-以下の[Parameter Store](https://docs.aws.amazon.com/ja_jp/systems-manager/latest/userguide/systems-manager-parameter-store.html)
-を作成する
+1. [GブレイバーバーストAPIサーバ](https://github.com/kaidouji85/gbraver-burst-network)の開発環境をデプロイする
+2. 以下のParameter Storeを作成する
 
 | 名前                                      | 種類     | 値                                   |
 |-----------------------------------------|--------|-------------------------------------|
@@ -75,8 +72,7 @@ npm start
 | /GbraverBurst/dev/isAPIServerEnable     | String | APIサーバが利用できるか否かのフラグ、```true```で利用可能 |
 | /GbraverBurst/dev/cognitoHostedUIDomain | String | cognito Hosted UI のドメイン             |
 
-* CodeBuildを以下設定で構築する
-    * Buildspecには```buildspec.yml```を指定する
+3. BuildSpecには```buildspec.yml```を指定したCodeBuildを構築する
 
 ### 本番環境設定
 
