@@ -117,8 +117,9 @@ npm run start-storybook
 本プロジェクトは、以下ツールでコード解析が可能です。
 以下ツールはpackage.jsonには含まれていないので、何らかの方法で作業端末にインストールしてください。
 
-*
-* [fixpad](https://www.npmjs.com/package/fixpack#configuration)
+* shfmt
+* shellcheck
+* [fixpack](https://www.npmjs.com/package/fixpack#configuration)
 
 ### fixpad
 
