@@ -15,7 +15,6 @@ import { difficultySelectionCompleteContainer } from "./on-difficulty-selection-
 import { endBattleContainer } from "./on-end-battle";
 import { endNetworkErrorContainer } from "./on-end-network-error";
 import { endNPCEndingContainer } from "./on-end-npc-ending";
-import { exitMailVerifiedIncompleteContainer } from "./on-exit-mai-verified-incomplete";
 import { loginCancelContainer } from "./on-login-cancel";
 import { logoutContainer } from "./on-logout";
 import { matchingCanceledContainer } from "./on-matching-cancel";
@@ -39,7 +38,6 @@ import { withdrawPrivateMatchEntryContainer } from "./on-withdraw-private-match-
 /** ゲームアクションリスナーをあつめたもの */
 const gameActionListeners: { [key in string]: GameActionListener } = {
   ...reloadRequestContainer,
-  ...exitMailVerifiedIncompleteContainer,
   ...endBattleContainer,
   ...suddenlyBattleEndContainer,
   ...postBattleActionContainer,
