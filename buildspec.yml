@@ -22,9 +22,9 @@ env:
     PRIVACY_POLICY_URL: /GbraverBurst/dev/privacyPolicyUrl
     CONTACT_URL: /GbraverBurst/dev/contactURL
     IS_API_SERVER_ENABLE: /GbraverBurst/dev/isAPIServerEnable
-    AUTH0_DOMAIN: /GbraverBurst/dev/auth0Domain
-    AUTH0_CLIENT_ID: /GbraverBurst/dev/auth0ClientId
-    AUTH0_AUDIENCE: /GbraverBurst/dev/auth0Audience
+    COGNITO_USER_POOL_ID: /GbraverBurst/dev/cognitoUserPoolId
+    COGNITO_CLIENT_ID: /GbraverBurst/dev/cognitoClientId
+    COGNITO_HOSTED_UI_DOMAIN: /GbraverBurst/dev/cognitoHostedUIDomain
 phases:
   install:
     runtime-versions:
