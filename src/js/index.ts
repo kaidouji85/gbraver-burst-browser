@@ -1,6 +1,9 @@
 import "../css/style.css";
 
-import { createBrowserSDK } from "@gbraver-burst-network/browser-sdk";
+import {
+  createBrowserSDK,
+  initializeBrowserSDK,
+} from "@gbraver-burst-network/browser-sdk";
 import * as THREE from "three";
 
 import { isMobile } from "./device-ditect/is-mobile";
@@ -15,13 +18,12 @@ declare let GBRAVER_BURST_HOW_TO_PLAY: string;
 declare let GBRAVER_BURST_TERMS_OF_SERVICE_URL: string;
 declare let GBRAVER_BURST_PRIVACY_POLICY_URL: string;
 declare let GBRAVER_BURST_CONTACT_URL: string;
-declare let GBRAVER_BURST_REST_API_URL: string;
 declare let GBRAVER_BURST_WEBSOCKET_API_URL: string;
 declare let GBRAVER_BURST_IS_SERVICE_WORKER_USED: string;
 declare let GBRAVER_BURST_IS_API_SERVER_ENABLE: string;
-declare let GBRAVER_BURST_AUTH0_DOMAIN: string;
-declare let GBRAVER_BURST_AUTH0_CLIENT_ID: string;
-declare let GBRAVER_BURST_AUTH0_AUDIENCE: string;
+declare let GBRAVER_BURST_COGNITO_USER_POOL_ID: string;
+declare let GBRAVER_BURST_COGNITO_CLIENT_ID: string;
+declare let GBRAVER_BURST_COGNITO_HOSTED_UI_DOMAIN: string;
 declare let GBRAVER_BURST_CAN_PLAY_EPISODE_IN_DEVELOPMENT: string;
 declare let GBRAVER_BURST_SHOULD_LOAD_DEVELOPING_RESOURCE: string;
 declare let GBRAVER_BURST_CAN_PLAY_DEVELOPING_ARMDOZER: string;
@@ -33,19 +35,13 @@ THREE.ColorManagement.enabled = false;
  * Gブレイバーバーストのエントリポイント
  */
 async function main(): Promise<void> {
-  const api = await createBrowserSDK(
-    GBRAVER_BURST_OWN_ROOT_URL,
-    GBRAVER_BURST_REST_API_URL,
-    GBRAVER_BURST_WEBSOCKET_API_URL,
-    GBRAVER_BURST_AUTH0_DOMAIN,
-    GBRAVER_BURST_AUTH0_CLIENT_ID,
-    GBRAVER_BURST_AUTH0_AUDIENCE,
-  );
-
-  if (api.isLoginSuccessRedirect()) {
-    await api.afterLoginSuccess();
-  }
-
+  initializeBrowserSDK({
+    userPoolId: GBRAVER_BURST_COGNITO_USER_POOL_ID,
+    userPoolClientId: GBRAVER_BURST_COGNITO_CLIENT_ID,
+    hostedUIDomain: GBRAVER_BURST_COGNITO_HOSTED_UI_DOMAIN,
+    ownURL: GBRAVER_BURST_OWN_ROOT_URL,
+  });
+  const api = await createBrowserSDK(GBRAVER_BURST_WEBSOCKET_API_URL);
   const resourceRoot = isMobile()
     ? {
         get: () => GBRAVER_BURST_MOBILE_RESOURCE_ROOT,

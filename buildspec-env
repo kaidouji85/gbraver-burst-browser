@@ -10,11 +10,6 @@ STACK_FILE=".tmp-api-stack"
 
 aws cloudformation describe-stacks --stack-name "${STACK_NAME}" > "${STACK_FILE}"
 
-if [ -z "${REST_API_URL}" ]; then
-  REST_API_URL_FILTER='.Stacks[] | .Outputs[] | select(.OutputKey == "HttpApiUrl") | .OutputValue'
-  REST_API_URL=`jq -r "${REST_API_URL_FILTER}" "${STACK_FILE}"`
-fi
-
 if [ -z "${WEBSOCKET_API_URL}" ]; then
   WEBSOCKET_API_URL_FILTER='.Stacks[] | .Outputs[] | select(.OutputKey == "ServiceEndpointWebsocket") | .OutputValue'
   WEBSOCKET_API_URL=`jq -r "${WEBSOCKET_API_URL_FILTER}" "${STACK_FILE}"`

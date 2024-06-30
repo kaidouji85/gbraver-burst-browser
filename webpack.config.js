@@ -119,15 +119,18 @@ module.exports = {
       GBRAVER_BURST_IS_API_SERVER_ENABLE: JSON.stringify(
         process.env.IS_API_SERVER_ENABLE,
       ),
-      GBRAVER_BURST_REST_API_URL: JSON.stringify(process.env.REST_API_URL),
       GBRAVER_BURST_WEBSOCKET_API_URL: JSON.stringify(
         process.env.WEBSOCKET_API_URL,
       ),
-      GBRAVER_BURST_AUTH0_DOMAIN: JSON.stringify(process.env.AUTH0_DOMAIN),
-      GBRAVER_BURST_AUTH0_CLIENT_ID: JSON.stringify(
-        process.env.AUTH0_CLIENT_ID,
+      GBRAVER_BURST_COGNITO_USER_POOL_ID: JSON.stringify(
+        process.env.COGNITO_USER_POOL_ID,
       ),
-      GBRAVER_BURST_AUTH0_AUDIENCE: JSON.stringify(process.env.AUTH0_AUDIENCE),
+      GBRAVER_BURST_COGNITO_CLIENT_ID: JSON.stringify(
+        process.env.COGNITO_CLIENT_ID,
+      ),
+      GBRAVER_BURST_COGNITO_HOSTED_UI_DOMAIN: JSON.stringify(
+        process.env.COGNITO_HOSTED_UI_DOMAIN,
+      ),
       GBRAVER_BURST_CAN_PLAY_EPISODE_IN_DEVELOPMENT: JSON.stringify(
         process.env.CAN_PLAY_EPISODE_IN_DEVELOPMENT,
       ),
