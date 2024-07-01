@@ -44,11 +44,11 @@ export async function main(): Promise<void> {
   const api = await createBrowserSDK(GBRAVER_BURST_WEBSOCKET_API_URL);
   const resourceRoot = isMobile()
     ? {
-      get: () => GBRAVER_BURST_MOBILE_RESOURCE_ROOT,
-    }
+        get: () => GBRAVER_BURST_MOBILE_RESOURCE_ROOT,
+      }
     : {
-      get: () => GBRAVER_BURST_DESKTOP_RESOURCE_ROOT,
-    };
+        get: () => GBRAVER_BURST_DESKTOP_RESOURCE_ROOT,
+      };
   const game = new Game({
     resourceRoot,
     api: api,
