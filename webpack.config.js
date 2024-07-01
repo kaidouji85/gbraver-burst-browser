@@ -21,7 +21,7 @@ module.exports = {
   },
   output: {
     path: path.resolve(__dirname, BUILD_ROOT),
-    filename: '[name].js',
+    filename: "[name].js",
   },
   devServer: {
     static: path.resolve(__dirname, BUILD_ROOT),
