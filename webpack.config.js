@@ -16,7 +16,7 @@ const MOBILE_RESOURCE_ROOT = `${RESOURCE_ROOT}/mobile`;
 module.exports = {
   mode: "development",
   entry: {
-    index: path.resolve(__dirname, "src/js/index.ts"),
+    "index": path.resolve(__dirname, "src/js/index.ts"),
     "first-view": path.resolve(__dirname, "src/js/first-view.ts"),
   },
   output: {
