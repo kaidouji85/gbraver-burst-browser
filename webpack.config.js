@@ -12,14 +12,16 @@ const RESOURCE_HASH = uuid.v4();
 const RESOURCE_ROOT = `resources/${RESOURCE_HASH}`;
 const DESKTOP_RESOURCE_ROOT = `${RESOURCE_ROOT}/desktop`;
 const MOBILE_RESOURCE_ROOT = `${RESOURCE_ROOT}/mobile`;
-const OUTPUT_JS_NAME = `index.js`;
 
 module.exports = {
   mode: "development",
-  entry: path.resolve(__dirname, "src/js/index.ts"),
+  entry: {
+    index: path.resolve(__dirname, "src/js/index.ts"),
+    "first-view": path.resolve(__dirname, "src/js/first-view.ts"),
+  },
   output: {
     path: path.resolve(__dirname, BUILD_ROOT),
-    filename: OUTPUT_JS_NAME,
+    filename: '[name].js',
   },
   devServer: {
     static: path.resolve(__dirname, BUILD_ROOT),
@@ -58,7 +60,6 @@ module.exports = {
       filename: path.resolve(__dirname, `${BUILD_ROOT}/index.html`),
       template: "src/index.html",
       templateParameters: {
-        INDEX_JS_PATH: OUTPUT_JS_NAME,
         OWN_ROOT_URL: process.env.OWN_ROOT_URL,
         TWITTER_SITE: process.env.TWITTER_SITE,
         IS_SEARCH_ENGINE_NO_INDEX:
@@ -66,7 +67,7 @@ module.exports = {
         GOOGLE_MEASUREMENT_ID: process.env.GOOGLE_MEASUREMENT_ID,
         APP_DESCRIPTION: appDescription,
       },
-      inject: false,
+      inject: true,
     }),
     new CopyWebpackPlugin({
       patterns: [
