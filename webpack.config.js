@@ -24,7 +24,7 @@ const MOBILE_RESOURCE_ROOT = `${RESOURCE_ROOT}/mobile`;
 const readCSS = (path) => {
   const css = fs.readFileSync(path, "utf-8");
   return new CleanCSS({}).minify(css).styles;
-}
+};
 
 module.exports = {
   mode: "development",
