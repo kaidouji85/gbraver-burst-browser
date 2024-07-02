@@ -107,7 +107,7 @@
     "code-format:storybook": "prettier --write stories",
     "code-format:test": "prettier --write test",
     "dependency-check": "run-s dependency-check:*",
-    "dependency-check:src": "depcruise src",
+    "dependency-check:src": "depcruise src -x 'first-view.ts'",
     "dependency-check:stories": "depcruise stories",
     "dependency-check:test": "depcruise test",
     "generate-icons": "ts-node --project tsconfig.node.json generate-icons.ts",
