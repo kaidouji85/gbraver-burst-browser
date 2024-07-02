@@ -12,10 +12,6 @@ PreCaching.precacheAndRoute([
     revision: GBRAVER_BURST_SW_BUILD_HASH,
   },
   {
-    url: "./first-view.js",
-    revision: GBRAVER_BURST_SW_BUILD_HASH,
-  },
-  {
     url: "./manifest.json",
     revision: GBRAVER_BURST_SW_BUILD_HASH,
   },
