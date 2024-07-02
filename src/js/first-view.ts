@@ -1,5 +1,3 @@
-import "../css/first-view.css";
-
 window.addEventListener("load", () => {
   setTimeout(() => {
     const initializeIsSlow =
