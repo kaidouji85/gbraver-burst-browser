@@ -1,10 +1,13 @@
 require("dotenv").config();
 
+const fs = require("fs");
+const CleanCSS = require("clean-css");
 const path = require("path");
 const webpack = require("webpack");
 const uuid = require("uuid");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const CopyWebpackPlugin = require("copy-webpack-plugin");
+
 const { appDescription } = require("./app-description");
 
 const BUILD_ROOT = "build/production";
@@ -12,6 +15,16 @@ const RESOURCE_HASH = uuid.v4();
 const RESOURCE_ROOT = `resources/${RESOURCE_HASH}`;
 const DESKTOP_RESOURCE_ROOT = `${RESOURCE_ROOT}/desktop`;
 const MOBILE_RESOURCE_ROOT = `${RESOURCE_ROOT}/mobile`;
+
+/**
+ * CSSを読み込んでminifyする
+ * @param {string} path CSSファイルのパス
+ * @returns {string} minifyされたCSS
+ */
+const readCSS = (path) => {
+  const css = fs.readFileSync(path, "utf-8");
+  return new CleanCSS({}).minify(css).styles;
+}
 
 module.exports = {
   mode: "development",
@@ -66,6 +79,7 @@ module.exports = {
           process.env.IS_SEARCH_ENGINE_NO_INDEX === "true",
         GOOGLE_MEASUREMENT_ID: process.env.GOOGLE_MEASUREMENT_ID,
         APP_DESCRIPTION: appDescription,
+        FIRST_VIEW_CSS: readCSS(path.resolve(__dirname, "src/first-view.css")),
       },
       inject: true,
     }),
