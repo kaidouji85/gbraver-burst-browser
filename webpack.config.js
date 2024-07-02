@@ -91,6 +91,7 @@ module.exports = {
         APP_DESCRIPTION: appDescription,
         FIRST_VIEW_JS: readJS(path.resolve(__dirname, "src/first-view.js")),
         FIRST_VIEW_CSS: readCSS(path.resolve(__dirname, "src/first-view.css")),
+        GTAG_JS: readJS(path.resolve(__dirname, "src/gtag.js")),
       },
       inject: true,
     }),
