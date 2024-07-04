@@ -12,7 +12,6 @@ env:
     SERVICE: /GbraverBurst/dev/service
     STAGE: /GbraverBurst/dev/stage
     ASSETLINKS_JSON_URI: /GbraverBurst/dev/assetlinksJsonURI
-    GOOGLE_MEASUREMENT_ID: /GbraverBurst/dev/googleMeasurementID
     S3_BUCKET: /GbraverBurst/dev/s3Bucket
     DISTRIBUTION_ID: /GbraverBurst/dev/distributionId
     OWN_ROOT_URL: /GbraverBurst/dev/ownRootUrl
