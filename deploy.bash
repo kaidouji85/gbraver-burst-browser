@@ -16,6 +16,7 @@ npm run build:sw
 npm run build:clear-sw
 npm run generate-icons
 npm run scale-down-mobile-images
+npm run add-csp
 aws s3 cp "${ASSETLINKS_JSON_URI}" ./build/production/.well-known/assetlinks.json
 ./upload-module.bash "${S3_BUCKET}"
 ./clear-cdn.bash "${DISTRIBUTION_ID}"
