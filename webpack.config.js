@@ -18,16 +18,6 @@ const DESKTOP_RESOURCE_ROOT = `${RESOURCE_ROOT}/desktop`;
 const MOBILE_RESOURCE_ROOT = `${RESOURCE_ROOT}/mobile`;
 
 /**
- * JSを読み込んでminifyする
- * @param {string} path {string} JSファイルのパス
- * @returns {string} minifyされたJS
- */
-const readJS = (path) => {
-  const js = fs.readFileSync(path, "utf8");
-  return UglifyJS.minify(js).code;
-};
-
-/**
  * CSSを読み込んでminifyする
  * @param {string} path CSSファイルのパス
  * @returns {string} minifyされたCSS
@@ -41,6 +31,7 @@ module.exports = {
   mode: "development",
   entry: {
     index: path.resolve(__dirname, "src/js/index.ts"),
+    "first-view": path.resolve(__dirname, "src/first-view.js"),
   },
   output: {
     path: path.resolve(__dirname, BUILD_ROOT),
@@ -88,7 +79,6 @@ module.exports = {
         IS_SEARCH_ENGINE_NO_INDEX:
           process.env.IS_SEARCH_ENGINE_NO_INDEX === "true",
         APP_DESCRIPTION: appDescription,
-        FIRST_VIEW_JS: readJS(path.resolve(__dirname, "src/first-view.js")),
         FIRST_VIEW_CSS: readCSS(path.resolve(__dirname, "src/first-view.css")),
       },
       inject: true,

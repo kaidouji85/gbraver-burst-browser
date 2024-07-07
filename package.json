@@ -37,6 +37,7 @@
     "@types/three": "^0.166.0",
     "@types/uuid": "^10.0.0",
     "autoprefixer": "^10.4.19",
+    "cheerio": "^1.0.0-rc.12",
     "clean-css": "^5.3.3",
     "copy-webpack-plugin": "^12.0.2",
     "css-loader": "^7.1.2",
@@ -87,6 +88,7 @@
   "main": "src/js/index.js",
   "repository": "https://github.com/kaidouji85/study-three-js",
   "scripts": {
+    "add-csp": "node add-csp.js",
     "build": "run-s build:*",
     "build:clear-sw": "webpack --config webpack.clear.sw.js",
     "build:production": "webpack --mode=production",
