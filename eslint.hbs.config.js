@@ -12,6 +12,7 @@ module.exports = [
       parser,
     },
     rules: {
+      "@html-eslint/attrs-newline": "off",
       "@html-eslint/require-doctype": "off",
       "@html-eslint/indent": ["error", 2],
       "@html-eslint/require-closing-tags": [

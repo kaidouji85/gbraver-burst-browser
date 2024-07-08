@@ -1,7 +1,7 @@
 import { DeleteAccountConsentDialog } from "../../../dom-dialogs/delete-account-consent";
-import { deleteAccountConsentDialogConnector } from "../../action-connector/delete-account-consent-dialog-connector";
 import { GameAction } from "../../game-actions";
 import { GameProps } from "../../game-props";
+import { switchAccountConsentDialog } from "../switch-dialog/switch-account-consent-dialog";
 
 /**
  * アカウント削除同意
@@ -9,10 +9,7 @@ import { GameProps } from "../../game-props";
  */
 function onAccountDeleteConsent(props: Readonly<GameProps>): void {
   const dialog = new DeleteAccountConsentDialog(props);
-  props.domDialogBinder.bind(
-    dialog,
-    deleteAccountConsentDialogConnector(props),
-  );
+  switchAccountConsentDialog(props, dialog);
 }
 
 /** アクションタイプ */

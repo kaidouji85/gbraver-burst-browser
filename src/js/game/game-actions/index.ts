@@ -12,7 +12,6 @@ import { DifficultySelectionComplete } from "./difficulty-selection-complete";
 import { EndBattle } from "./end-battle";
 import { EndNetworkError } from "./end-network-error";
 import { EndNPCEnding } from "./end-npc-ending";
-import { ExitMailVerifiedIncomplete } from "./exit-mail-verified-incomplete";
 import { LoginCancel } from "./login-cancel";
 import { Logout } from "./logout";
 import { MatchingCanceled } from "./matching-canceled";
@@ -36,7 +35,6 @@ import { WithdrawPrivateMatchEntry } from "./withdraw-private-match-entry";
 /** ゲーム全体で利用するアクション */
 export type GameAction =
   | ReloadRequest
-  | ExitMailVerifiedIncomplete
   | ArcadeStart
   | NetBattleStart
   | NetBattleCancel

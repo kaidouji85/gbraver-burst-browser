@@ -1,7 +1,7 @@
 import { NetworkErrorDialog } from "../../../dom-dialogs/network-error/network-error-dialog";
-import { networkErrorDialogConnector } from "../../action-connector/network-error-dialog-connector";
 import { GameAction } from "../../game-actions";
 import { GameProps } from "../../game-props";
+import { switchNetworkErrorDialog } from "../switch-dialog/switch-network-error-dialog";
 
 /**
  * バトル強制終了時の処理
@@ -11,11 +11,9 @@ import { GameProps } from "../../game-props";
 async function onSuddenlyEndBattle(props: Readonly<GameProps>): Promise<void> {
   const dialog = new NetworkErrorDialog({
     ...props,
-    postNetworkError: {
-      type: "GotoTitle",
-    },
+    postNetworkError: { type: "GotoTitle" },
   });
-  props.domDialogBinder.bind(dialog, networkErrorDialogConnector(props));
+  switchNetworkErrorDialog(props, dialog);
   props.suddenlyBattleEnd.unbind();
   await props.api.disconnectWebsocket();
 }

@@ -31,6 +31,8 @@
 .episode-title__title {
   position: absolute;
   font-size: var(--font-size);
+  text-shadow: #16160e 1px 1px 10px;
+  -webkit-text-stroke: thin #d3d3d3;
   z-index: var(--zindex-title);
   left: max(var(--safe-area-left), calc(var(--font-size) * 2));
   top: max(var(--safe-area-top), calc(var(--font-size) * 2));
@@ -121,4 +123,6 @@
   );
   bottom: max(var(--safe-area-bottom), calc(var(--font-size) * 2));
   font-size: calc(var(--responsive-font-size) * 1.5);
+  text-shadow: #16160e 1px 1px 10px;
+  -webkit-text-stroke: thin #d3d3d3;
 }

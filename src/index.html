@@ -21,71 +21,7 @@
   <link rel="apple-touch-icon" href="app-icon-180x180.png" />
   <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png" />
   <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png" />
-  <link rel="preload" href="<%= INDEX_JS_PATH %>" as="script" />
-  <style>
-    html, body {
-      display: block;
-      width: 100%;
-      height: 100%;
-      overflow: hidden;
-      position: fixed;
-      top: 0;
-      left: 0;
-      margin: 0;
-      padding: 0;
-      user-select: none;
-      color: rgb(240, 240, 240);
-      background-color: rgb(23, 23, 23);
-    }
-
-    .first-view {
-      position: absolute;
-      z-index: 1;
-      background-color: rgb(23, 23, 23);
-    }
-
-    .first-view--invisible {
-      display: none;
-    }
-
-    .first-view__initializing {
-      width: 100vw;
-      height: 100vh;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      font-size: 2em;
-    }
-
-    .first-view__initializing--invisible {
-      display: none;
-    }
-
-    .first-view__pegass85 {
-      --icon-with: min(100vw, 18em);
-      width: var(--icon-with);
-      height: calc(var(--icon-with) * 9 / 16);
-    }
-
-    .first-view__initialize-is-slow {
-      width: 100vw;
-      height: 100vh;
-      display: flex;
-      flex-direction: column;
-      padding: 1em;
-      box-sizing: border-box;
-    }
-
-    .first-view__initialize-is-slow--invisible {
-      display: none;
-    }
-
-    .first-view__initialize-is-slow__title {
-      font-size: 2em;
-      margin-bottom: 1em;
-    }
-  </style>
+  <style><%= FIRST_VIEW_CSS %></style>
 </head>
 <body>
 <div id="first-view" class="first-view">
@@ -107,25 +43,5 @@
     </div>
   </div>
 </div>
-<script>
-  window.addEventListener('load', () => {
-    setTimeout(() => {
-      const initializeIsSlow = document.getElementById("first-view__initialize-is-slow") || document.createElement('div');
-      initializeIsSlow.className = 'first-view__initialize-is-slow';
-
-      const firstViewInitializing = document.getElementById("first-view__initializing") || document.createElement('div');
-      firstViewInitializing.className = 'first-view__initializing--invisible';
-    }, 15000);
-  });
-</script>
-<script defer src="<%= INDEX_JS_PATH %>"></script>
-<!-- Global site tag (gtag.js) - Google Analytics -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=<%= GOOGLE_MEASUREMENT_ID %>"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag() {dataLayer.push(arguments);}
-  gtag('js', new Date());
-  gtag('config', '<%= GOOGLE_MEASUREMENT_ID %>');
-</script>
 </body>
 </html>

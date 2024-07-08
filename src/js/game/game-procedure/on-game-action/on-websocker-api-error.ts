@@ -1,8 +1,8 @@
 import { NetworkErrorDialog } from "../../../dom-dialogs/network-error/network-error-dialog";
-import { networkErrorDialogConnector } from "../../action-connector/network-error-dialog-connector";
 import { GameAction } from "../../game-actions";
 import { WebSocketAPIError } from "../../game-actions/web-socket-api-error";
 import { GameProps } from "../../game-props";
+import { switchNetworkErrorDialog } from "../switch-dialog/switch-network-error-dialog";
 
 /**
  * WebSocketAPIエラー時の処理
@@ -16,11 +16,9 @@ function onWebSocketAPIError(
 ): void {
   const dialog = new NetworkErrorDialog({
     ...props,
-    postNetworkError: {
-      type: "GotoTitle",
-    },
+    postNetworkError: { type: "GotoTitle" },
   });
-  props.domDialogBinder.bind(dialog, networkErrorDialogConnector(props));
+  switchNetworkErrorDialog(props, dialog);
   throw action;
 }
 

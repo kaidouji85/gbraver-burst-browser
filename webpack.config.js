@@ -1,10 +1,14 @@
 require("dotenv").config();
 
+const fs = require("fs");
+const UglifyJS = require("uglify-js");
+const CleanCSS = require("clean-css");
 const path = require("path");
 const webpack = require("webpack");
 const uuid = require("uuid");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const CopyWebpackPlugin = require("copy-webpack-plugin");
+
 const { appDescription } = require("./app-description");
 
 const BUILD_ROOT = "build/production";
@@ -12,14 +16,26 @@ const RESOURCE_HASH = uuid.v4();
 const RESOURCE_ROOT = `resources/${RESOURCE_HASH}`;
 const DESKTOP_RESOURCE_ROOT = `${RESOURCE_ROOT}/desktop`;
 const MOBILE_RESOURCE_ROOT = `${RESOURCE_ROOT}/mobile`;
-const OUTPUT_JS_NAME = `index.js`;
+
+/**
+ * CSSを読み込んでminifyする
+ * @param {string} path CSSファイルのパス
+ * @returns {string} minifyされたCSS
+ */
+const readCSS = (path) => {
+  const css = fs.readFileSync(path, "utf-8");
+  return new CleanCSS({}).minify(css).styles;
+};
 
 module.exports = {
   mode: "development",
-  entry: path.resolve(__dirname, "src/js/index.ts"),
+  entry: {
+    index: path.resolve(__dirname, "src/js/index.ts"),
+    "first-view": path.resolve(__dirname, "src/first-view.js"),
+  },
   output: {
     path: path.resolve(__dirname, BUILD_ROOT),
-    filename: OUTPUT_JS_NAME,
+    filename: "[name].js",
   },
   devServer: {
     static: path.resolve(__dirname, BUILD_ROOT),
@@ -58,15 +74,14 @@ module.exports = {
       filename: path.resolve(__dirname, `${BUILD_ROOT}/index.html`),
       template: "src/index.html",
       templateParameters: {
-        INDEX_JS_PATH: OUTPUT_JS_NAME,
         OWN_ROOT_URL: process.env.OWN_ROOT_URL,
         TWITTER_SITE: process.env.TWITTER_SITE,
         IS_SEARCH_ENGINE_NO_INDEX:
           process.env.IS_SEARCH_ENGINE_NO_INDEX === "true",
-        GOOGLE_MEASUREMENT_ID: process.env.GOOGLE_MEASUREMENT_ID,
         APP_DESCRIPTION: appDescription,
+        FIRST_VIEW_CSS: readCSS(path.resolve(__dirname, "src/first-view.css")),
       },
-      inject: false,
+      inject: true,
     }),
     new CopyWebpackPlugin({
       patterns: [
@@ -119,15 +134,18 @@ module.exports = {
       GBRAVER_BURST_IS_API_SERVER_ENABLE: JSON.stringify(
         process.env.IS_API_SERVER_ENABLE,
       ),
-      GBRAVER_BURST_REST_API_URL: JSON.stringify(process.env.REST_API_URL),
       GBRAVER_BURST_WEBSOCKET_API_URL: JSON.stringify(
         process.env.WEBSOCKET_API_URL,
       ),
-      GBRAVER_BURST_AUTH0_DOMAIN: JSON.stringify(process.env.AUTH0_DOMAIN),
-      GBRAVER_BURST_AUTH0_CLIENT_ID: JSON.stringify(
-        process.env.AUTH0_CLIENT_ID,
+      GBRAVER_BURST_COGNITO_USER_POOL_ID: JSON.stringify(
+        process.env.COGNITO_USER_POOL_ID,
       ),
-      GBRAVER_BURST_AUTH0_AUDIENCE: JSON.stringify(process.env.AUTH0_AUDIENCE),
+      GBRAVER_BURST_COGNITO_CLIENT_ID: JSON.stringify(
+        process.env.COGNITO_CLIENT_ID,
+      ),
+      GBRAVER_BURST_COGNITO_HOSTED_UI_DOMAIN: JSON.stringify(
+        process.env.COGNITO_HOSTED_UI_DOMAIN,
+      ),
       GBRAVER_BURST_CAN_PLAY_EPISODE_IN_DEVELOPMENT: JSON.stringify(
         process.env.CAN_PLAY_EPISODE_IN_DEVELOPMENT,
       ),

@@ -46,10 +46,8 @@ export async function introduction(
   await refreshConversation(props, 100);
   activeRightMessageWindowWithFace(props, "Tsubasa");
   await scrollRightMessages(props, [
-    [
-      "ツバサ",
-      `「間もなく${wbr} 都立大田高校・府立洛内高校の${wbr}練習試合を${wbr}行う`,
-    ],
+    ["ツバサ", `「間もなく${wbr}都立大田高校・府立洛内高校の`],
+    [`練習試合を${wbr}行う`],
   ]);
   props.view.dom.rightMessageWindow.messages(["姿勢を正して"]);
   await synchronizedUpright(props).play();

@@ -12,7 +12,6 @@ env:
     SERVICE: /GbraverBurst/prod/service
     STAGE: /GbraverBurst/prod/stage
     ASSETLINKS_JSON_URI: /GbraverBurst/prod/assetlinksJsonURI
-    GOOGLE_MEASUREMENT_ID: /GbraverBurst/prod/googleMeasurementID
     S3_BUCKET: /GbraverBurst/prod/s3Bucket
     DISTRIBUTION_ID: /GbraverBurst/prod/distributionId
     OWN_ROOT_URL: /GbraverBurst/prod/ownRootUrl
@@ -22,9 +21,9 @@ env:
     PRIVACY_POLICY_URL: /GbraverBurst/prod/privacyPolicyUrl
     CONTACT_URL: /GbraverBurst/prod/contactURL
     IS_API_SERVER_ENABLE: /GbraverBurst/prod/isAPIServerEnable
-    AUTH0_DOMAIN: /GbraverBurst/prod/auth0Domain
-    AUTH0_CLIENT_ID: /GbraverBurst/prod/auth0ClientId
-    AUTH0_AUDIENCE: /GbraverBurst/prod/auth0Audience
+    COGNITO_USER_POOL_ID: /GbraverBurst/prod/cognitoUserPoolId
+    COGNITO_CLIENT_ID: /GbraverBurst/prod/cognitoClientId
+    COGNITO_HOSTED_UI_DOMAIN: /GbraverBurst/prod/cognitoHostedUIDomain
 phases:
   install:
     runtime-versions:

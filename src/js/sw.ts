@@ -8,10 +8,6 @@ declare let GBRAVER_BURST_SW_BUILD_HASH: string;
 
 PreCaching.precacheAndRoute([
   {
-    url: "./index.html",
-    revision: GBRAVER_BURST_SW_BUILD_HASH,
-  },
-  {
     url: "./manifest.json",
     revision: GBRAVER_BURST_SW_BUILD_HASH,
   },
@@ -49,6 +45,18 @@ Routing.registerRoute(
   /\.(?:js)$/,
   new Strategies.NetworkFirst({
     cacheName: "js-cache",
+    plugins: [
+      new ExpirationPlugin({
+        maxAgeSeconds: 3 * 24 * 60 * 60,
+      }),
+    ],
+  }),
+);
+
+Routing.registerRoute(
+  /(\/|index\.html)$/,
+  new Strategies.NetworkFirst({
+    cacheName: "index-html-cache",
     plugins: [
       new ExpirationPlugin({
         maxAgeSeconds: 3 * 24 * 60 * 60,

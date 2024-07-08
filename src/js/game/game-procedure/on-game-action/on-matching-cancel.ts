@@ -1,7 +1,7 @@
 import { WaitingDialog } from "../../../dom-dialogs/waiting/waiting-dialog";
-import { waitingDialogConnector } from "../../action-connector/waiting-dialog-connector";
 import { GameAction } from "../../game-actions";
 import { GameProps } from "../../game-props";
+import { switchWaitingDialog } from "../switch-dialog/switch-waiting-dialog";
 
 /**
  * マッチング中止
@@ -10,7 +10,7 @@ import { GameProps } from "../../game-props";
  */
 async function onMatchingCanceled(props: Readonly<GameProps>): Promise<void> {
   const dialog = new WaitingDialog("通信中......");
-  props.domDialogBinder.bind(dialog, waitingDialogConnector);
+  switchWaitingDialog(props, dialog);
   await props.api.disconnectWebsocket();
   props.domDialogBinder.hidden();
 }

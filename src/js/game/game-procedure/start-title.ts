@@ -5,8 +5,8 @@ import {
   TitleAccount,
 } from "../../dom-scenes/title/title-account";
 import { waitTime } from "../../wait/wait-time";
-import { titleConnector } from "../action-connector/title-connector";
 import { GameProps } from "../game-props";
+import { switchTitle } from "./switch-scene/switch-title";
 
 /**
  * タイトル画面を開始するヘルパー関数
@@ -39,7 +39,7 @@ export async function startTitle(props: Readonly<GameProps>): Promise<Title> {
     ...props,
     account,
   });
-  props.domSceneBinder.bind(scene, titleConnector(props));
+  switchTitle(props, scene);
   await Promise.race([scene.waitUntilLoaded(), waitTime(MAX_LOADING_TIME)]);
   return scene;
 }

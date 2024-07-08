@@ -2,12 +2,12 @@ import { LoginDialog } from "../../../dom-dialogs/login";
 import { NetBattleSelectorDialog } from "../../../dom-dialogs/net-battle-selector";
 import { NetworkErrorDialog } from "../../../dom-dialogs/network-error/network-error-dialog";
 import { WaitingDialog } from "../../../dom-dialogs/waiting/waiting-dialog";
-import { loginDialogConnector } from "../../action-connector/login-dialog-connector";
-import { netBattleSelectorDialogConnector } from "../../action-connector/net-battle-selector-dialog-connector";
-import { networkErrorDialogConnector } from "../../action-connector/network-error-dialog-connector";
-import { waitingDialogConnector } from "../../action-connector/waiting-dialog-connector";
 import { GameAction } from "../../game-actions";
 import { GameProps } from "../../game-props";
+import { switchLoginDialog } from "../switch-dialog/switch-login-dialog";
+import { switchNetBattleSelectorDialog } from "../switch-dialog/switch-net-battle-selector-dialog";
+import { switchNetworkErrorDialog } from "../switch-dialog/switch-network-error-dialog";
+import { switchWaitingDialog } from "../switch-dialog/switch-waiting-dialog";
 
 /**
  * ログインチェックAPIを呼び出す
@@ -20,11 +20,9 @@ async function callLoginCheckAPI(props: Readonly<GameProps>): Promise<boolean> {
   } catch (e) {
     const dialog = new NetworkErrorDialog({
       ...props,
-      postNetworkError: {
-        type: "Close",
-      },
+      postNetworkError: { type: "Close" },
     });
-    props.domDialogBinder.bind(dialog, networkErrorDialogConnector(props));
+    switchNetworkErrorDialog(props, dialog);
     throw e;
   }
 }
@@ -35,27 +33,21 @@ async function callLoginCheckAPI(props: Readonly<GameProps>): Promise<boolean> {
  * @returns 処理が完了したら発火するPromise
  */
 async function onNetBattleStart(props: Readonly<GameProps>): Promise<void> {
-  props.domDialogBinder.bind(
-    new WaitingDialog("ログインチェック中......"),
-    waitingDialogConnector,
-  );
+  switchWaitingDialog(props, new WaitingDialog("ログインチェック中......"));
   const isLogin = await callLoginCheckAPI(props);
   props.domDialogBinder.hidden();
   if (!isLogin) {
-    props.domDialogBinder.bind(
+    switchLoginDialog(
+      props,
       new LoginDialog({
         ...props,
         caption: "ネット対戦をするにはログインをしてください",
       }),
-      loginDialogConnector(props),
     );
     return;
   }
 
-  props.domDialogBinder.bind(
-    new NetBattleSelectorDialog(props),
-    netBattleSelectorDialogConnector(props),
-  );
+  switchNetBattleSelectorDialog(props, new NetBattleSelectorDialog(props));
 }
 
 /** アクションタイプ */

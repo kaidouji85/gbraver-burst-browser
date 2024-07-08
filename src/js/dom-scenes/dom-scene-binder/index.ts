@@ -1,5 +1,6 @@
+import { Unsubscribable } from "rxjs";
+
 import { DOMScene } from "../dom-scene";
-import { DOMSceneActionConnector } from "./action-connector";
 import { bind } from "./bind";
 import { discardCurrentScene } from "./discard-current-scene";
 import { createDOMSceneBinderProps, DOMSceneBinderProps } from "./props";
@@ -27,13 +28,10 @@ export class DOMSceneBinder {
    * DOMシーンをバインドする
    * @template X シーンのデータ型
    * @param scene バインドするシーン
-   * @param connector ゲームアクションコネクタ
+   * @param unsubscribers バインドするシーンに関連するアンサブスクライバ
    */
-  bind<X extends DOMScene>(
-    scene: X,
-    connector: DOMSceneActionConnector<X>,
-  ): void {
-    bind(this.#props, scene, connector);
+  bind<X extends DOMScene>(scene: X, unsubscribers: Unsubscribable[]): void {
+    bind(this.#props, scene, unsubscribers);
   }
 
   /**

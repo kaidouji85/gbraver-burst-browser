@@ -1,21 +1,13 @@
 import { BattleSimulator } from "../../../dom-dialogs/battle-simulator";
-import { battleSimulatorConnector } from "../action-connectors/battle-simulator-conenctor";
 import { BattleSceneProps } from "../props";
+import { switchBattleSimulator } from "./switch-battle-simulator";
 
 /**
  * バトルシミュレータ開始時の処理
  * @param props 戦闘シーンプロパティ
  */
 export function onBattleSimulatorStart(props: BattleSceneProps) {
-  const {
-    view,
-    exclusive,
-    playerId,
-    stateHistory,
-    sounds,
-    se,
-    domDialogBinder,
-  } = props;
+  const { view, exclusive, playerId, stateHistory, sounds, se } = props;
   exclusive.execute(async () => {
     const lastState = stateHistory.at(-1);
     if (!lastState) {
@@ -39,6 +31,6 @@ export function onBattleSimulatorStart(props: BattleSceneProps) {
       initialPlayerBattery,
       isPlayerAttacker,
     });
-    domDialogBinder.bind(dialog, battleSimulatorConnector(props));
+    switchBattleSimulator(props, dialog);
   });
 }
