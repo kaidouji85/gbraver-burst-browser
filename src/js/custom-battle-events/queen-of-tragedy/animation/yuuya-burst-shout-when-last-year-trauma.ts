@@ -14,6 +14,6 @@ export const yuuyaBurstShoutWhenLastYearTrauma = (
     playerPilotOnlyShout(
       props,
       "Yuuya",
-      `ツバサ 去年は${wbr}このあと${wbr}一瞬で${wbr}終わったな`,
+      `ここまでは${wbr}去年と${wbr}同じ${wbr}展開だな ツバサ`,
     );
   });
