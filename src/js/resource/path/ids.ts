@@ -1,5 +1,6 @@
 /** パスIDを集めたもの */
 export const PathIds = {
+  DEFAULT_USER_ICON: "DEFAULT_USER_ICON",
   TITLE_BACK: "TITLE_BACK",
   LOGO: "LOGO",
   SHIN_BRAVER_ICON: "SHIN_BRAVER_ICON",

@@ -19,11 +19,13 @@ import { ShinBraverPathConfigs } from "./shin-braver";
 import { TitleBackPathConfigs } from "./title-back";
 import { TsubasaPathConfigs } from "./tsubasa";
 import { TurnIndicatorConfigs } from "./turn-indicator";
+import { UserConfigs } from "./user";
 import { WingDozerPathConfigs } from "./wing-dozer";
 import { YuuyaPathConfigs } from "./yuuya";
 
 /** すべてのパス設定をあつめたもの */
 export const PathConfigs: PathConfig[] = [
+  ...UserConfigs,
   ...TitleBackPathConfigs,
   ...LogoPathConfigs,
   ...ShinBraverPathConfigs,
