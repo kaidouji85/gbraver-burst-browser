@@ -41,6 +41,7 @@ async function resizeWebp(origin: string, scale: number): Promise<void> {
 
   const webpImages = "build/production/resources/**/mobile/**/*.webp";
   const ignoreWebpImages = [
+    "build/production/resources/**/mobile/default-user-icon.webp",
     "build/production/resources/**/mobile/armdozer/shin-braver/cutin-down.webp",
     "build/production/resources/**/mobile/armdozer/shin-braver/cutin-up.webp",
     "build/production/resources/**/mobile/armdozer/neo-landozer/cutin-down.webp",
