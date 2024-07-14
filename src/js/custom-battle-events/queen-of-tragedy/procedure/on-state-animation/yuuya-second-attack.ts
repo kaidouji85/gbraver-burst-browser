@@ -12,7 +12,7 @@ export const yuuyaSecondAttack: ConditionalAnimation<
 > = (props) => {
   let result: Animate | null = null;
 
-  const { stateHistory, currentState, playerId, eventState } = props;
+  const { stateHistory, currentState, playerId } = props;
   const { effect } = currentState;
   const battleCount = playerBattleCount(stateHistory, playerId);
 
