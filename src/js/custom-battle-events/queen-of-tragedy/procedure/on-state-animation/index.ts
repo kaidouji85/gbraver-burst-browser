@@ -10,13 +10,15 @@ import { tsubasaBurstWhenTraumaOfLastYear } from "./tsubasa-burst-when-trauma-of
 import { tsubasaFeintFail } from "./tsubasa-feint-fail";
 import { tsubasaFeintSuccess } from "./tsubasa-feint-success";
 import { tsubasaFirstAttack } from "./tsubasa-first-attack";
+import { tsubasaFourthAttack } from "./tsubasa-fourth-attack";
 import { tsubasaPilotSkill } from "./tsubasa-pilot-skill";
-import { yuuyaAttack } from "./yuuya-attack";
 import { yuuyaAttackWhenTraumaOfLastYear } from "./yuuya-attack-when-trauma-of-last-year";
 import { yuuyaBurst } from "./yuuya-burst";
 import { yuuyaBurstWhenTraumaOfLastYear } from "./yuuya-burst-when-trauma-of-last-year";
 import { yuuyaFinish } from "./yuuya-finish";
+import { yuuyaFirstAttack } from "./yuuya-first-attack";
 import { yuuyaPilotSkill } from "./yuuya-pilot-skill";
+import { yuuyaSecondAttack } from "./yuuya-second-attack";
 
 /**
  * カスタムステートアニメーション
@@ -29,15 +31,17 @@ export function onStateAnimation(
     tsubasaPilotSkill,
     tsubasaBurstWhenTraumaOfLastYear,
     tsubasaBurst,
-    tsubasaFirstAttack,
     tsubasaFeintSuccess,
     tsubasaFeintFail,
     tsubasaAttackWhenContinuousAttack,
+    tsubasaFirstAttack,
+    tsubasaFourthAttack,
     yuuyaFinish,
     yuuyaBurstWhenTraumaOfLastYear,
     yuuyaBurst,
     yuuyaAttackWhenTraumaOfLastYear,
-    yuuyaAttack,
+    yuuyaFirstAttack,
+    yuuyaSecondAttack,
     yuuyaPilotSkill,
     invisibleShoutMessageWindowWhenTurnChange,
   ];
