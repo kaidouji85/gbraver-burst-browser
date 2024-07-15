@@ -12,6 +12,7 @@ import { tsubasaFeintSuccess } from "./tsubasa-feint-success";
 import { tsubasaFirstAttack } from "./tsubasa-first-attack";
 import { tsubasaFourthAttack } from "./tsubasa-fourth-attack";
 import { tsubasaPilotSkill } from "./tsubasa-pilot-skill";
+import { tsubasaFinish } from "./tusbasa-finish";
 import { yuuyaAttackWhenTraumaOfLastYear } from "./yuuya-attack-when-trauma-of-last-year";
 import { yuuyaBurst } from "./yuuya-burst";
 import { yuuyaBurstWhenTraumaOfLastYear } from "./yuuya-burst-when-trauma-of-last-year";
@@ -28,6 +29,7 @@ export function onStateAnimation(
   props: CustomStateAnimation & QueenOfTragedyProps,
 ): Animate {
   const conditionalAnimations = [
+    tsubasaFinish,
     tsubasaPilotSkill,
     tsubasaBurstWhenTraumaOfLastYear,
     tsubasaBurst,

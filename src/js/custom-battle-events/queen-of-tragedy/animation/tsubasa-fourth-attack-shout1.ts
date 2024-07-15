@@ -12,5 +12,9 @@ export const tsubasaFourthAttackShout1 = (
   props: Readonly<CustomBattleEventProps>,
 ) =>
   onStart(() => {
-    enemyPilotOnlyShout(props, "Tsubasa", `ウィングドーザは${wbr}短期決戦${wbr}タイプ`);
+    enemyPilotOnlyShout(
+      props,
+      "Tsubasa",
+      `ウィングドーザは${wbr}短期決戦${wbr}タイプ`,
+    );
   });
