@@ -12,5 +12,5 @@ export const tsubasaAttackShout2WhenSheHasDisadvantage = (
   props: Readonly<CustomBattleEventProps>,
 ) =>
   onStart(() => {
-    enemyPilotOnlyShout(props, "Tsubasa", `さすがは${wbr}ユウヤ `);
+    enemyPilotOnlyShout(props, "Tsubasa", `さすがは${wbr}ユウヤ`);
   });
