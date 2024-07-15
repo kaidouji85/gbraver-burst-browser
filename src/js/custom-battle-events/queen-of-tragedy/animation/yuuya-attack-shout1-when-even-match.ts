@@ -15,6 +15,6 @@ export const yuuyaAttackShout1WhenEvenMatch = (
     playerPilotOnlyShout(
       props,
       "Yuuya",
-      `たった一年で${wbr}ここまで${wbr}実力を${wbr}あげたか`,
+      `たった一年で${wbr}ここまで${wbr}実力を${wbr}つけたか`,
     );
   });
