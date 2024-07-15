@@ -13,20 +13,20 @@ export const tsubasaAttackWhenEvenMatch: ConditionalAnimation<
   const { enemyId } = props;
   const { effect } = props.currentState;
   const separatedPlayers = separatePlayersFromCurrentState(props);
-  const isEvenMatchGa = separatedPlayers
+  const isEvenMatchGame = separatedPlayers
     ? isEvenMatch(separatedPlayers)
     : false;
 
   if (
     effect.name === "BatteryDeclaration" &&
     effect.attacker === enemyId &&
-    isEvenMatchGa
+    isEvenMatchGame
   ) {
     return tsubasaAttackShoutWhenEvenMatch(props);
   } else if (
     effect.name === "Battle" &&
     effect.attacker === enemyId &&
-    isEvenMatchGa
+    isEvenMatchGame
   ) {
     return empty();
   }
