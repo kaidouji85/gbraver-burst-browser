@@ -5,6 +5,9 @@ import { getAnimationIfConditionMet } from "../../../get-animation-if-conditiona
 import { invisibleShoutMessageWindowWhenTurnChange } from "../../../invisible-shout-message-window";
 import { QueenOfTragedyProps } from "../../props";
 import { tsubasaAttackWhenContinuousAttack } from "./tsubasa-attack-when-continuous-attack";
+import { tsubasaAttackWhenEvenMatch } from "./tsubasa-attack-when-even-match";
+import { tsubasaAttackWhenSheHadAdvantage } from "./tsubasa-attack-when-she-had-advantage";
+import { tsubasaAttackWhenSheHadDisadvantage } from "./tsubasa-attack-when-she-had-disadvantage";
 import { tsubasaBurst } from "./tsubasa-burst";
 import { tsubasaBurstWhenTraumaOfLastYear } from "./tsubasa-burst-when-trauma-of-last-year";
 import { tsubasaFeintFail } from "./tsubasa-feint-fail";
@@ -41,6 +44,9 @@ export function onStateAnimation(
     tsubasaAttackWhenContinuousAttack,
     tsubasaFirstAttack,
     tsubasaFourthAttack,
+    tsubasaAttackWhenSheHadAdvantage,
+    tsubasaAttackWhenEvenMatch,
+    tsubasaAttackWhenSheHadDisadvantage,
     yuuyaFinish,
     yuuyaBurstWhenTraumaOfLastYear,
     yuuyaBurst,
