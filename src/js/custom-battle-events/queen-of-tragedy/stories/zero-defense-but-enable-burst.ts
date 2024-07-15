@@ -13,7 +13,7 @@ export async function zeroDefenseButEnableBurst(props: CustomBattleEventProps) {
   activeLeftMessageWindowWithFace(props, "Tsubasa");
   await scrollLeftMessages(props, [
     ["ツバサ", `「なぜ${wbr}バーストを${wbr}使わない`],
-    [`私を${wbr}愚弄する${wbr}のか ユウヤ」`],
+    [`本気で${wbr}戦え ユウヤ」`],
   ]);
   invisibleAllMessageWindows(props);
 }
