@@ -5,19 +5,18 @@ import { invisibleAllMessageWindows } from "../../invisible-all-message-windows"
 import { scrollLeftMessages } from "../../scroll-messages";
 
 /**
- * バーストが使えるのに0防御した場合のストーリー
+ * バッテリーが残っているのに0防御した場合のストーリー
  * @param props イベントプロパティ
  * @returns ストーリーが完了したら発火するPromise
  */
-export async function zeroDefenseButEnableBurst(
-  props: Readonly<CustomBattleEventProps>,
-): Promise<void> {
-  activeLeftMessageWindowWithFace(props, "Yuuya");
+export async function zeroDefenseButPositiveBattery(
+  props: CustomBattleEventProps,
+) {
+  activeLeftMessageWindowWithFace(props, "Tsubasa");
   await scrollLeftMessages(props, [
-    ["ユウヤ", `「0防御${wbr}だと`],
-    [
-      `何故${wbr}バーストを${wbr}使わない${wbr} 俺を${wbr}バカに${wbr}しているのか${wbr} シンヤ」`,
-    ],
+    ["ツバサ", `「バッテリーが${wbr}残って${wbr}いるのに${wbr}0防御${wbr}だと`],
+    [`私には${wbr}戦う${wbr}価値も${wbr}ない`],
+    [`そう${wbr}言いたい${wbr}のか ユウヤ」`],
   ]);
   invisibleAllMessageWindows(props);
 }

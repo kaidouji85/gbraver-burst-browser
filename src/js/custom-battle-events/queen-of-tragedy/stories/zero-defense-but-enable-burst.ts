@@ -9,15 +9,11 @@ import { scrollLeftMessages } from "../../scroll-messages";
  * @param props イベントプロパティ
  * @returns ストーリーが完了したら発火するPromise
  */
-export async function zeroDefenseButEnableBurst(
-  props: Readonly<CustomBattleEventProps>,
-): Promise<void> {
-  activeLeftMessageWindowWithFace(props, "Yuuya");
+export async function zeroDefenseButEnableBurst(props: CustomBattleEventProps) {
+  activeLeftMessageWindowWithFace(props, "Tsubasa");
   await scrollLeftMessages(props, [
-    ["ユウヤ", `「0防御${wbr}だと`],
-    [
-      `何故${wbr}バーストを${wbr}使わない${wbr} 俺を${wbr}バカに${wbr}しているのか${wbr} シンヤ」`,
-    ],
+    ["ツバサ", `「なぜ${wbr}バーストを${wbr}使わない`],
+    [`本気で${wbr}戦え ユウヤ」`],
   ]);
   invisibleAllMessageWindows(props);
 }
