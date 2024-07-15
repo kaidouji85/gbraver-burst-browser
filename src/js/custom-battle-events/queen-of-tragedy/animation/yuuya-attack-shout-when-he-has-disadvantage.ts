@@ -12,5 +12,9 @@ export const yuuyaAttackShoutWhenHeHasDisadvantage = (
   props: Readonly<CustomBattleEventProps>,
 ) =>
   onStart(() => {
-    playerPilotOnlyShout(props, "Yuuya", `バカな この俺が${wbr}押されて${wbr}いるだと`);
+    playerPilotOnlyShout(
+      props,
+      "Yuuya",
+      `バカな この俺が${wbr}押されて${wbr}いるだと`,
+    );
   });

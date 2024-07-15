@@ -11,9 +11,5 @@ export const tsubasaAttackShout1WhenSheHasDisadvantage = (
   props: Readonly<CustomBattleEventProps>,
 ) =>
   onStart(() => {
-    enemyPilotOnlyShout(
-      props,
-      "Tsubasa",
-      `まだリードを保つとは `,
-    );
+    enemyPilotOnlyShout(props, "Tsubasa", `まだリードを保つとは `);
   });
