@@ -15,6 +15,6 @@ export const tsubasaFourthAttackShout2 = (
     enemyPilotOnlyShout(
       props,
       "Tsubasa",
-      `自分の${wbr}心配を${wbr}したら${wbr}どうなんだ${wbr}ユウヤ`,
+      `長期戦は${wbr}不利だ`,
     );
   });

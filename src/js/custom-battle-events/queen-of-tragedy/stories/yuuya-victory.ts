@@ -19,7 +19,7 @@ export async function yuuyaVictory(
   await scrollRightMessages(props, [
     [
       "ユウヤ",
-      `「ツバサ お前の${wbr}動きは${wbr}合理的で${wbr}まったく${wbr}隙が${wbr}ない`,
+      `「お前の${wbr}動きは${wbr}合理的で${wbr}まったく${wbr}隙が${wbr}ない`,
     ],
     [`美しい${wbr}とすら${wbr}言える${wbr}レベルだ`],
     [`ゆえに${wbr}次の${wbr}行動が${wbr}簡単に${wbr}予測できる」`],
