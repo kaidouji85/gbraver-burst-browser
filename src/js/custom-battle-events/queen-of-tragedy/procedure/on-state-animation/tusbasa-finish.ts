@@ -1,28 +1,31 @@
 import { empty } from "../../../../animation/delay";
 import { CustomStateAnimation } from "../../../../td-scenes/battle/custom-battle-event";
 import { ConditionalAnimation } from "../../../get-animation-if-conditional-met";
-import { tsubasaFeintSuccessShout } from "../../animation/tsubasa-feint-success-shout";
+import { hasDeliveredFinishBlow } from "../../../has-delivered-finish-blow";
+import { tsubasaFinishShout } from "../../animation/tsubasa-finish-shout";
 import { QueenOfTragedyProps } from "../../props";
 
-/** ツバサ フェイント 成功 */
-export const tsubasaFeintSuccess: ConditionalAnimation<
+/** ツバサ トドメの一撃 */
+export const tsubasaFinish: ConditionalAnimation<
   CustomStateAnimation & QueenOfTragedyProps
 > = (props) => {
-  const { enemyId } = props;
-  const { effect } = props.currentState;
+  const { stateHistory, currentState, enemyId } = props;
+  const { effect } = currentState;
+  const hasEnemyDeliveredFinishBlow = hasDeliveredFinishBlow(
+    stateHistory,
+    enemyId,
+  );
 
   if (
     effect.name === "BatteryDeclaration" &&
     effect.attacker === enemyId &&
-    effect.attackerBattery === 0 &&
-    0 < effect.defenderBattery
+    hasEnemyDeliveredFinishBlow
   ) {
-    return tsubasaFeintSuccessShout(props);
+    return tsubasaFinishShout(props);
   } else if (
     effect.name === "Battle" &&
     effect.attacker === enemyId &&
-    effect.result.name === "Feint" &&
-    effect.result.isDefenderMoved
+    hasEnemyDeliveredFinishBlow
   ) {
     return empty();
   }

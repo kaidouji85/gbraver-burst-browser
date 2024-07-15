@@ -1,28 +1,32 @@
 import { empty } from "../../../../animation/delay";
 import { CustomStateAnimation } from "../../../../td-scenes/battle/custom-battle-event";
 import { ConditionalAnimation } from "../../../get-animation-if-conditional-met";
-import { tsubasaFeintSuccessShout } from "../../animation/tsubasa-feint-success-shout";
+import { isEvenMatch } from "../../../is-even-match";
+import { separatePlayersFromCurrentState } from "../../../separate-players";
+import { tsubasaAttackShoutWhenEvenMatch } from "../../animation/tsubasa-attack-shout-when-even-match";
 import { QueenOfTragedyProps } from "../../props";
 
-/** ツバサ フェイント 成功 */
-export const tsubasaFeintSuccess: ConditionalAnimation<
+/** ツバサ 攻撃（イーブンマッチ） */
+export const tsubasaAttackWhenEvenMatch: ConditionalAnimation<
   CustomStateAnimation & QueenOfTragedyProps
 > = (props) => {
   const { enemyId } = props;
   const { effect } = props.currentState;
+  const separatedPlayers = separatePlayersFromCurrentState(props);
+  const isEvenMatchGame = separatedPlayers
+    ? isEvenMatch(separatedPlayers)
+    : false;
 
   if (
     effect.name === "BatteryDeclaration" &&
     effect.attacker === enemyId &&
-    effect.attackerBattery === 0 &&
-    0 < effect.defenderBattery
+    isEvenMatchGame
   ) {
-    return tsubasaFeintSuccessShout(props);
+    return tsubasaAttackShoutWhenEvenMatch(props);
   } else if (
     effect.name === "Battle" &&
     effect.attacker === enemyId &&
-    effect.result.name === "Feint" &&
-    effect.result.isDefenderMoved
+    isEvenMatchGame
   ) {
     return empty();
   }

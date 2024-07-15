@@ -4,17 +4,13 @@ import { CustomBattleEventProps } from "../../../td-scenes/battle/custom-battle-
 import { enemyPilotOnlyShout } from "../../pilot-shout";
 
 /**
- * ツバサ 4回目攻撃 叫び1
+ * ツバサ 攻撃 叫び2（ツバサ不利）
  * @param props イベントプロパティ
  * @returns アニメーション
  */
-export const tsubasaFourthAttackShout1 = (
+export const tsubasaAttackShout2WhenSheHasDisadvantage = (
   props: Readonly<CustomBattleEventProps>,
 ) =>
   onStart(() => {
-    enemyPilotOnlyShout(
-      props,
-      "Tsubasa",
-      `ウィングドーザは${wbr}短期決戦${wbr}タイプ`,
-    );
+    enemyPilotOnlyShout(props, "Tsubasa", `さすがは${wbr}ユウヤ`);
   });

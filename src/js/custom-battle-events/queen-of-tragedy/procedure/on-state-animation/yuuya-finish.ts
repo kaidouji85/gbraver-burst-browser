@@ -1,4 +1,5 @@
 import { Animate } from "../../../../animation/animate";
+import { empty } from "../../../../animation/delay";
 import { CustomStateAnimation } from "../../../../td-scenes/battle/custom-battle-event";
 import { ConditionalAnimation } from "../../../get-animation-if-conditional-met";
 import { hasDeliveredFinishBlow } from "../../../has-delivered-finish-blow";
@@ -24,6 +25,12 @@ export const yuuyaFinish: ConditionalAnimation<
     hasPlayerDeliveredFinishBlow
   ) {
     result = yuuyaFinishShout(props);
+  } else if (
+    effect.name === "Battle" &&
+    effect.attacker === playerId &&
+    hasPlayerDeliveredFinishBlow
+  ) {
+    result = empty();
   }
 
   return result;

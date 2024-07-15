@@ -1,20 +1,20 @@
 import { onStart } from "../../../animation/on-start";
 import { wbr } from "../../../dom/wbr";
 import { CustomBattleEventProps } from "../../../td-scenes/battle/custom-battle-event";
-import { enemyPilotOnlyShout } from "../../pilot-shout";
+import { playerPilotOnlyShout } from "../../pilot-shout";
 
 /**
- * ツバサ 4回目攻撃 叫び1
+ * ユウヤ 攻撃 叫び（ユウヤ不利）
  * @param props イベントプロパティ
  * @returns アニメーション
  */
-export const tsubasaFourthAttackShout1 = (
+export const yuuyaAttackShoutWhenHeHasDisadvantage = (
   props: Readonly<CustomBattleEventProps>,
 ) =>
   onStart(() => {
-    enemyPilotOnlyShout(
+    playerPilotOnlyShout(
       props,
-      "Tsubasa",
-      `ウィングドーザは${wbr}短期決戦${wbr}タイプ`,
+      "Yuuya",
+      `バカな この俺が${wbr}押されて${wbr}いるだと`,
     );
   });
