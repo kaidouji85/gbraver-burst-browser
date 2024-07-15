@@ -1,4 +1,5 @@
 import { onStart } from "../../../animation/on-start";
+import { wbr } from "../../../dom/wbr";
 import { CustomBattleEventProps } from "../../../td-scenes/battle/custom-battle-event";
 import { enemyPilotOnlyShout } from "../../pilot-shout";
 
@@ -11,5 +12,9 @@ export const tsubasaAttackShout1WhenSheHasDisadvantage = (
   props: Readonly<CustomBattleEventProps>,
 ) =>
   onStart(() => {
-    enemyPilotOnlyShout(props, "Tsubasa", `まだリードを保つとは `);
+    enemyPilotOnlyShout(
+      props,
+      "Tsubasa",
+      `まだ${wbr}リードを${wbr}保つ${wbr}とは`,
+    );
   });
