@@ -13,6 +13,9 @@ import { tsubasaFirstAttack } from "./tsubasa-first-attack";
 import { tsubasaFourthAttack } from "./tsubasa-fourth-attack";
 import { tsubasaPilotSkill } from "./tsubasa-pilot-skill";
 import { tsubasaFinish } from "./tusbasa-finish";
+import { yuuyaAttackWhenEvenMatch } from "./yuuya-attack-when-even-match";
+import { yuuyaAttackWhenHeHasAdvantage } from "./yuuya-attack-when-he-has-advantage";
+import { yuuyaAttackWhenHeHasDisadvantage } from "./yuuya-attack-when-he-has-disadvantage";
 import { yuuyaAttackWhenTraumaOfLastYear } from "./yuuya-attack-when-trauma-of-last-year";
 import { yuuyaBurst } from "./yuuya-burst";
 import { yuuyaBurstWhenTraumaOfLastYear } from "./yuuya-burst-when-trauma-of-last-year";
@@ -45,6 +48,9 @@ export function onStateAnimation(
     yuuyaFirstAttack,
     yuuyaSecondAttack,
     yuuyaPilotSkill,
+    yuuyaAttackWhenHeHasAdvantage,
+    yuuyaAttackWhenEvenMatch,
+    yuuyaAttackWhenHeHasDisadvantage,
     invisibleShoutMessageWindowWhenTurnChange,
   ];
   return getAnimationIfConditionMet(props, conditionalAnimations) ?? empty();
