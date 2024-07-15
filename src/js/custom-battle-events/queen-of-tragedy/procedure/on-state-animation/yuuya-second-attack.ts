@@ -1,17 +1,14 @@
-import { Animate } from "../../../../animation/animate";
+import { empty } from "../../../../animation/delay";
 import { CustomStateAnimation } from "../../../../td-scenes/battle/custom-battle-event";
 import { playerBattleCount } from "../../../battle-count";
 import { ConditionalAnimation } from "../../../get-animation-if-conditional-met";
-import { yuuyaSecondAttackShout1 } from "../../animation/yuuya-second-attack-shout1";
-import { yuuyaSecondAttackShout2 } from "../../animation/yuuya-second-attack-shout2";
+import { yuuyaSecondAttackShout } from "../../animation/yuuya-second-attack-shout";
 import { QueenOfTragedyProps } from "../../props";
 
 /** ユウヤ セカンドアタック */
 export const yuuyaSecondAttack: ConditionalAnimation<
   CustomStateAnimation & QueenOfTragedyProps
 > = (props) => {
-  let result: Animate | null = null;
-
   const { stateHistory, currentState, playerId } = props;
   const { effect } = currentState;
   const battleCount = playerBattleCount(stateHistory, playerId);
@@ -21,14 +18,14 @@ export const yuuyaSecondAttack: ConditionalAnimation<
     effect.name === "BatteryDeclaration" &&
     effect.attacker === playerId
   ) {
-    result = yuuyaSecondAttackShout1(props);
+    return yuuyaSecondAttackShout(props);
   } else if (
     battleCount === 2 &&
     effect.name === "Battle" &&
     effect.attacker === playerId
   ) {
-    result = yuuyaSecondAttackShout2(props);
+    return empty();
   }
 
-  return result;
+  return null;
 };
