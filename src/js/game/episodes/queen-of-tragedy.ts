@@ -13,7 +13,6 @@ const introduction = `〜Episode4 対決、二人のブレイバー！！ から
 
 一年前の全国大会決勝戦、ツバサは惨敗した。ほかの年なら優勝確実と言われてたツバサだが、G（ジェネシス）ブレイバーが規格外すぎたのだ。いつしか彼女は悲劇の女王と呼ばれるようになった。`;
 
-
 /** 悲劇の女王 */
 export const QueenOfTragedy: Episode = {
   id: EpisodeIDs.NATIONAL_TOURNAMENT_REVENGE,
@@ -21,7 +20,7 @@ export const QueenOfTragedy: Episode = {
   number: "4.1",
   title: "（開発中）悲劇の女王",
   introduction,
-  imageCutPathId: PathIds.IMAGE_CUT_PILOT_SKILL_02,
+  imageCutPathId: PathIds.IMAGE_CUT_QUEEN_OF_TRAGEDY,
   player: {
     playerId: playerUuid(),
     armdozer:

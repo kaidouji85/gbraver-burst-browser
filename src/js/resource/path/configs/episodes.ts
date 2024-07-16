@@ -28,4 +28,8 @@ export const EpisodePathConfigs: PathConfig[] = [
     path: (root) =>
       `${root.get()}/episodes/image-cut-confrontation-two-braver.webp`,
   },
+  {
+    id: PathIds.IMAGE_CUT_QUEEN_OF_TRAGEDY,
+    path: (root) => `${root.get()}/episodes/image-cut-queen-of-tragedy.webp`,
+  },
 ];
