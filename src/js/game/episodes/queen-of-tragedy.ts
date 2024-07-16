@@ -9,7 +9,10 @@ import { Episode } from "./episode";
 import { EpisodeIDs } from "./episode-ids";
 
 /** 導入 */
-const introduction = `あとで考える`;
+const introduction = `〜Episode4 対決、二人のブレイバー！！ からの続き〜
+
+一年前の全国大会決勝戦、ツバサは惨敗した。ほかの年なら優勝確実と言われてたツバサだが、G（ジェネシス）ブレイバーが規格外すぎたのだ。いつしか彼女は悲劇の女王と呼ばれるようになった。`;
+
 
 /** 悲劇の女王 */
 export const QueenOfTragedy: Episode = {
