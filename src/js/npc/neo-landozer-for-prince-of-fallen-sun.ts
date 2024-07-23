@@ -6,12 +6,14 @@ import {
   Pilots,
 } from "gbraver-burst-core";
 
+import { findBatteryCommand } from "./find-battery-command";
+import { findBurstCommand } from "./find-burst-command";
+import { findPilotSkillCommand } from "./find-pilot-skill-command";
 import { getMinimumBatteryToHitOrCritical } from "./get-minimum-battery-to-hit-or-critical";
 import { getMinimumBeatDownBattery } from "./get-minimum-beat-down-battery";
 import { getMinimumSurvivableBattery } from "./get-minimum-survivable-battery";
 import { NPC } from "./npc";
-import { SimpleRoutine } from "./simple-npc";
-import { SimpleNPC } from "./simple-npc";
+import { SimpleNPC, SimpleRoutine, SimpleRoutineData } from "./simple-npc";
 
 /** 0バッテリー */
 const ZERO_BATTERY: Command = {
@@ -20,60 +22,57 @@ const ZERO_BATTERY: Command = {
 };
 
 /**
+ * 攻撃ルーチンの条件オブジェクトを生成する
+ * @param data ルーチンに渡すデータ
+ * @returns 攻撃ルーチンの条件オブジェクト
+ */
+const getAttackRoutineCondition = (data: SimpleRoutineData) => ({
+  battery5: findBatteryCommand(5, data.commands),
+  burst: findBurstCommand(data.commands),
+  pilot: findPilotSkillCommand(data.commands),
+  minimumBeatDownBattery: getMinimumBeatDownBattery(
+    data.enemy,
+    data.player,
+    data.player.armdozer.battery,
+  ),
+  minimumBatteryToHitOrCritical: getMinimumBatteryToHitOrCritical(
+    data.enemy,
+    data.player,
+    data.player.armdozer.battery,
+  ),
+});
+
+/**
  * @override
  * 攻撃ルーチン
  */
 const attackRoutine: SimpleRoutine = (data) => {
-  const battery5 = data.commands.find(
-    (command) => command.type === "BATTERY_COMMAND" && command.battery === 5,
-  );
-  const burst = data.commands.find(
-    (command) => command.type === "BURST_COMMAND",
-  );
-  const pilot = data.commands.find(
-    (command) => command.type === "PILOT_SKILL_COMMAND",
-  );
-  const minimumBeatDownBattery = getMinimumBeatDownBattery(
-    data.enemy,
-    data.player,
-    data.player.armdozer.battery,
-  );
-  const minimumBatteryToHitOrCritical = getMinimumBatteryToHitOrCritical(
-    data.enemy,
-    data.player,
-    data.player.armdozer.battery,
-  );
-  const hasContinuousActivePlayer = data.enemy.armdozer.effects.some(
-    (effect) => effect.type === "ContinuousActivePlayer",
-  );
+  const {
+    battery5,
+    burst,
+    pilot,
+    minimumBeatDownBattery,
+    minimumBatteryToHitOrCritical,
+  } = getAttackRoutineCondition(data);
 
+  let selectedCommand: Command = ZERO_BATTERY;
   if (pilot) {
-    return pilot;
-  }
-
-  if (battery5 && burst) {
-    return battery5;
-  }
-
-  if (hasContinuousActivePlayer) {
-    return ZERO_BATTERY;
-  }
-
-  if (minimumBeatDownBattery.isExist) {
-    return {
+    selectedCommand = pilot;
+  } else if (battery5 && burst) {
+    selectedCommand = battery5;
+  } else if (minimumBeatDownBattery.isExist) {
+    selectedCommand = {
       type: "BATTERY_COMMAND",
       battery: minimumBeatDownBattery.value,
     };
-  }
-
-  if (minimumBatteryToHitOrCritical.isExist) {
-    return {
+  } else if (minimumBatteryToHitOrCritical.isExist) {
+    selectedCommand = {
       type: "BATTERY_COMMAND",
       battery: minimumBatteryToHitOrCritical.value,
     };
   }
 
-  return ZERO_BATTERY;
+  return selectedCommand;
 };
 
 /**
