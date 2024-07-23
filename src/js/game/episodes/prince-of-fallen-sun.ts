@@ -1,7 +1,7 @@
 import { ArmdozerIds, Armdozers, PilotIds, Pilots } from "gbraver-burst-core";
 
-import { createQueenOfTragedy } from "../../custom-battle-events/queen-of-tragedy";
-import { wingDozerNPCForQueenOfTragedy } from "../../npc/wing-dozer-for-queen-of-tragedy";
+import { EmptyCustomBattleEvent } from "../../custom-battle-events/empty-custom-battle-event";
+import { neoLandozerNPCForPrinceOfFallenSun } from "../../npc/neo-landozer-for-prince-of-fallen-sun";
 import { PathIds } from "../../resource/path/ids";
 import { SOUND_IDS } from "../../resource/sound/ids";
 import { playerUuid } from "../../uuid/player";
@@ -16,7 +16,7 @@ export const PrinceOfFallenSun: Episode = {
   id: EpisodeIDs.PRINCE_OF_FALLEN_SUN,
   type: "Side Episode",
   number: "4.2",
-  title: "落日の王子",
+  title: "（開発中）落日の王子",
   introduction,
   imageCutPathId: PathIds.IMAGE_CUT_QUEEN_OF_TRAGEDY,
   player: {
@@ -26,7 +26,7 @@ export const PrinceOfFallenSun: Episode = {
       Armdozers[0],
     pilot: Pilots.find((v) => v.id === PilotIds.YUUYA) ?? Pilots[0],
   },
-  npc: wingDozerNPCForQueenOfTragedy(),
-  event: () => createQueenOfTragedy(),
+  npc: neoLandozerNPCForPrinceOfFallenSun(),
+  event: () => new EmptyCustomBattleEvent(),
   bgm: SOUND_IDS.QUEEN_OF_TRAGEDY,
 };
