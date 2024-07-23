@@ -14,8 +14,6 @@ import { ShinBraver } from "../../../../../../game-object/armdozer/shin-braver/s
 import { TDCamera } from "../../../../../../game-object/camera/td";
 import { dolly, toInitial, track } from "../../../td-camera";
 import { BattleAnimationParamX } from "../animation-param";
-import { onStart } from "../../../../../../animation/on-start";
-import {stop} from "../../../../../../bgm/bgm-operators";
 
 /**
  * シンブレイバー 戦闘アニメーション パラメータ
@@ -134,10 +132,7 @@ function down(param: ShinBraverBattle<DownResult>): Animate {
     .chain(param.attackerSprite.straightPunch())
     .chain(
       all(
-        onStart(() => {
-          param.bgm.do(stop);
-        }),
-        delay(1800)
+        delay(1500)
           .chain(param.attackerSprite.punchToStand())
           .chain(delay(500)),
         param.attackerHUD.resultIndicator

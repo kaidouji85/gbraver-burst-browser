@@ -24,7 +24,7 @@ export function down(props: WingDozerAnimationProps): Animate {
             {
               x: "+70",
             },
-            500,
+            700,
           )
           .easing(TWEEN.Easing.Quadratic.Out),
       ),
