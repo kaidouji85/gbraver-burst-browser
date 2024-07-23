@@ -142,7 +142,7 @@ function down(param: ShinBraverBattle<DownResult>): Animate {
           .chain(delay(500)),
         param.attackerHUD.resultIndicator
           .slideIn()
-          .chain(delay(900))
+          .chain(delay(600))
           .chain(param.attackerHUD.resultIndicator.moveToEdge()),
         toInitial(param.tdCamera, 100),
         param.defenderTD.damageIndicator.popUp(param.result.damage),
