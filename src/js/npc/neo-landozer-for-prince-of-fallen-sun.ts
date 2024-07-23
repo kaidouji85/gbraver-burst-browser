@@ -82,7 +82,10 @@ const attackRoutine: SimpleRoutine = (data) => {
  */
 const defenseRoutine: SimpleRoutine = (data) => {
   const battery1 = data.commands.find(
-    (command) => command.type === "BATTERY_COMMAND" && command.battery === 1,
+    (c) => c.type === "BATTERY_COMMAND" && c.battery === 1,
+  );
+  const battery3 = data.commands.find(
+    (c) => c.type === "BATTERY_COMMAND" && c.battery === 3,
   );
   const burst = data.commands.find(
     (command) => command.type === "BURST_COMMAND",
@@ -92,8 +95,14 @@ const defenseRoutine: SimpleRoutine = (data) => {
     data.player,
     data.player.armdozer.battery,
   );
+  const isFullBattery =
+    data.enemy.armdozer.battery === data.enemy.armdozer.maxBattery;
 
-  if (burst) {
+  if (isFullBattery && burst && battery3) {
+    return battery3;
+  }
+
+  if (data.enemy.armdozer.battery === 0 && burst) {
     return burst;
   }
 
