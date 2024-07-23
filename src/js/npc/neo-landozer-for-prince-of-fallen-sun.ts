@@ -82,7 +82,10 @@ const attackRoutine: SimpleRoutine = (data) => {
  */
 const defenseRoutine: SimpleRoutine = (data) => {
   const battery1 = data.commands.find(
-    (command) => command.type === "BATTERY_COMMAND" && command.battery === 1,
+    (c) => c.type === "BATTERY_COMMAND" && c.battery === 1,
+  );
+  const battery3 = data.commands.find(
+    (c) => c.type === "BATTERY_COMMAND" && c.battery === 3,
   );
   const burst = data.commands.find(
     (command) => command.type === "BURST_COMMAND",
@@ -92,8 +95,14 @@ const defenseRoutine: SimpleRoutine = (data) => {
     data.player,
     data.player.armdozer.battery,
   );
+  const isFullBattery =
+    data.enemy.armdozer.battery === data.enemy.armdozer.maxBattery;
 
-  if (burst) {
+  if (isFullBattery && burst && battery3) {
+    return battery3;
+  }
+
+  if (data.enemy.armdozer.battery === 0 && burst) {
     return burst;
   }
 
@@ -108,12 +117,12 @@ const defenseRoutine: SimpleRoutine = (data) => {
 };
 
 /**
- * サイドエピソード「全国大会のリベンジ」 ウィングドーザ NPC
+ * サイドエピソード「落日の王子」 ネオランドーザ NPC
  * @returns NPC
  */
-export function wingDozerNPCForNationalTournamentRevenge(): NPC {
+export function neoLandozerNPCForPrinceOfFallenSun(): NPC {
   const armdozer =
-    Armdozers.find((v) => v.id === ArmdozerIds.WING_DOZER) ?? Armdozers[0];
-  const pilot = Pilots.find((v) => v.id === PilotIds.TSUBASA) ?? Pilots[0];
+    Armdozers.find((v) => v.id === ArmdozerIds.NEO_LANDOZER) ?? Armdozers[0];
+  const pilot = Pilots.find((v) => v.id === PilotIds.GAI) ?? Pilots[0];
   return new SimpleNPC(armdozer, pilot, attackRoutine, defenseRoutine);
 }
