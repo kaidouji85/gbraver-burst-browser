@@ -5,7 +5,6 @@ import {
   PlayerState,
 } from "gbraver-burst-core";
 
-import { BGMManager } from "../../../../../bgm/bgm-manager";
 import { ArmdozerSprite } from "../../../../../game-object/armdozer/armdozer-sprite";
 import { PlainHUDCamera } from "../../../../../game-object/camera/plain-hud/plain-hud-camera";
 import { TDCamera } from "../../../../../game-object/camera/td";
@@ -51,9 +50,6 @@ export type BattleAnimationParamX<
   hudObjects: HUDGameObjects;
   /** HUDカメラ */
   hudCamera: PlainHUDCamera;
-
-  /** BGM管理オブジェクト */
-  bgm: BGMManager;
 
   /** 死亡フラグ */
   isDeath: boolean;
@@ -134,7 +130,6 @@ function extractOthers(
     hudCamera: hud.camera,
     isDeath: battle.isDeath,
     result: battle.result,
-    bgm: props.bgm,
   };
 }
 
