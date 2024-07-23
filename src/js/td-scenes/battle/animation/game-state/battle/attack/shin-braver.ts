@@ -13,11 +13,12 @@ import { delay, empty } from "../../../../../../animation/delay";
 import { ShinBraver } from "../../../../../../game-object/armdozer/shin-braver/shin-braver";
 import { TDCamera } from "../../../../../../game-object/camera/td";
 import { dolly, toInitial, track } from "../../../td-camera";
-import type { BattleAnimationParamX } from "../animation-param";
+import { BattleAnimationParamX } from "../animation-param";
+import { onStart } from "../../../../../../animation/on-start";
+import {stop} from "../../../../../../bgm/bgm-operators";
 
 /**
  * シンブレイバー 戦闘アニメーション パラメータ
- *
  * @template RESULT 戦闘結果
  */
 export type ShinBraverBattle<RESULT extends BattleResult> =
@@ -133,6 +134,9 @@ function down(param: ShinBraverBattle<DownResult>): Animate {
     .chain(param.attackerSprite.straightPunch())
     .chain(
       all(
+        onStart(() => {
+          param.bgm.do(stop);
+        }),
         delay(1500)
           .chain(param.attackerSprite.punchToStand())
           .chain(delay(500)),
