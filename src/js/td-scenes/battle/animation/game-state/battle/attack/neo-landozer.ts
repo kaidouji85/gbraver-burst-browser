@@ -131,7 +131,7 @@ function down(param: NeoLandozerBattle<DownResult>): Animate {
         delay(1500).chain(param.attackerSprite.hmToStand()).chain(delay(500)),
         param.attackerHUD.resultIndicator
           .slideIn()
-          .chain(delay(500))
+          .chain(delay(600))
           .chain(param.attackerHUD.resultIndicator.moveToEdge()),
         toInitial(param.tdCamera, 100),
         param.defenderTD.damageIndicator.popUp(param.result.damage),
