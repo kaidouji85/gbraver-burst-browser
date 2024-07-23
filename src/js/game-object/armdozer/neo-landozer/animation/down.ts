@@ -24,7 +24,7 @@ export function down(props: NeoLandozerAnimationProps): Animate {
             {
               x: "+70",
             },
-            500,
+            1000,
           )
           .easing(TWEEN.Easing.Quadratic.Out),
       ),
