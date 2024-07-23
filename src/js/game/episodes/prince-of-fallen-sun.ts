@@ -9,16 +9,14 @@ import { Episode } from "./episode";
 import { EpisodeIDs } from "./episode-ids";
 
 /** 導入 */
-const introduction = `〜Episode4 対決、二人のブレイバー！！ からの続き〜
+const introduction = `あとで考える`;
 
-一年前の全国大会決勝戦、ツバサは惨敗した。例年なら優勝確実と言われていたツバサだったが、G（ジェネシス）ブレイバーは規格外すぎた。それから一年後の今日、ツバサは秘策を携え再びGブレイバーに挑む。`;
-
-/** 悲劇の女王 */
-export const QueenOfTragedy: Episode = {
-  id: EpisodeIDs.QUEEN_OF_TRAGEDY,
+/** 落日の王子 */
+export const PrinceOfFallenSun: Episode = {
+  id: EpisodeIDs.PRINCE_OF_FALLEN_SUN,
   type: "Side Episode",
-  number: "4.1",
-  title: "悲劇の女王",
+  number: "4.2",
+  title: "落日の王子",
   introduction,
   imageCutPathId: PathIds.IMAGE_CUT_QUEEN_OF_TRAGEDY,
   player: {
