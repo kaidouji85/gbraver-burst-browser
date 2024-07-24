@@ -13,7 +13,7 @@ import type { ResultIndicatorModel } from "../model/result-indicator-model";
  * @returns アニメーション
  */
 export function slideIn(model: ResultIndicatorModel): Animate {
-  const duration = 200;
+  const duration = 100;
   const distance = 50;
   return onStart(() => {
     model.opacity = 0;
