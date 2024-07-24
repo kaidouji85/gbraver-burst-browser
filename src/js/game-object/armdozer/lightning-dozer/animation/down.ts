@@ -24,7 +24,7 @@ export function down(props: LightningDozerAnimationProps): Animate {
             {
               x: "+70",
             },
-            700,
+            500,
           )
           .easing(TWEEN.Easing.Quadratic.Out),
       ),
