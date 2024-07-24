@@ -76,26 +76,29 @@ const attackRoutine: SimpleRoutine = (data) => {
 };
 
 /**
+ * 防御ルーチンの条件オブジェクトを生成する
+ * @param data ルーチンに渡すデータ
+ * @returns 防御ルーチンの条件オブジェクト
+ */
+const getDefenseRoutineCondition = (data: SimpleRoutineData) => ({
+  battery1: findBatteryCommand(1, data.commands),
+  battery3: findBatteryCommand(3, data.commands),
+  burst: findBurstCommand(data.commands),
+  minimumSurvivableBattery: getMinimumSurvivableBattery(
+    data.enemy,
+    data.player,
+    data.player.armdozer.battery,
+  ),
+  isFullBattery: data.enemy.armdozer.battery === data.enemy.armdozer.maxBattery,
+});
+
+/**
  * @override
  * 防御ルーチン
  */
 const defenseRoutine: SimpleRoutine = (data) => {
-  const battery1 = data.commands.find(
-    (c) => c.type === "BATTERY_COMMAND" && c.battery === 1,
-  );
-  const battery3 = data.commands.find(
-    (c) => c.type === "BATTERY_COMMAND" && c.battery === 3,
-  );
-  const burst = data.commands.find(
-    (command) => command.type === "BURST_COMMAND",
-  );
-  const minimumSurvivableBattery = getMinimumSurvivableBattery(
-    data.enemy,
-    data.player,
-    data.player.armdozer.battery,
-  );
-  const isFullBattery =
-    data.enemy.armdozer.battery === data.enemy.armdozer.maxBattery;
+  const { battery1, battery3, burst, minimumSurvivableBattery, isFullBattery } =
+    getDefenseRoutineCondition(data);
 
   if (isFullBattery && burst && battery3) {
     return battery3;
