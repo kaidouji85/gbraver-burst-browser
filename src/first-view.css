@@ -9,6 +9,7 @@ body {
   left: 0;
   margin: 0;
   padding: 0;
+  -webkit-user-select: none;
   user-select: none;
   color: rgb(240 240 240);
   background-color: rgb(23 23 23);
