@@ -13,9 +13,7 @@ export function getChildTween(tween: Tween<any>): Tween<any>[] {
   /* eslint-disable @typescript-eslint/no-explicit-any */
   const chainedTweens: Tween<any>[] = (tween as any)._chainedTweens;
   /* eslint-enable */
-  const children = chainedTweens.flatMap((child: Tween<any>) =>
-    getChildTween(child),
-  );
 
+  const children = chainedTweens.flatMap((child) => getChildTween(child));
   return [tween, ...children];
 }

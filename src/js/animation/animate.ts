@@ -4,14 +4,6 @@ import { scaleTweenDuration } from "./duration";
 import { getChildTween } from "./get-child-tweens";
 import { GlobalTweenGroup } from "./global-tween-group";
 
-/** ループ再生時のパラメータ */
-type LoopParams = {
-  /** 再生開始時間 */
-  time?: number;
-  /** アニメーショングループ */
-  group?: Group;
-};
-
 /**
  * アニメーション
  * tween.jsではアニメーションのモジュール化の機能が十分でないので、それを補うべく本クラスを作成した
