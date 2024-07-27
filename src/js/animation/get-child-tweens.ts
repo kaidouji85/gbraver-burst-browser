@@ -5,13 +5,15 @@ import { Tween } from "@tweenjs/tween.js";
  * @param tween 取得対象のTween
  * @returns 子孫のTween
  */
+
 /* eslint-disable @typescript-eslint/no-explicit-any */
 export function getChildTween(tween: Tween<any>): Tween<any>[] {
   /* eslint-enable */
 
   /* eslint-disable @typescript-eslint/no-explicit-any */
-  const children = (tween as any)._chainedTweens.flatMap((child: Tween<any>) =>
-    /* eslint-enable */
+  const chainedTweens: Tween<any>[] = (tween as any)._chainedTweens;
+  /* eslint-enable */
+  const children = chainedTweens.flatMap((child: Tween<any>) =>
     getChildTween(child),
   );
 
