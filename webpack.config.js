@@ -1,13 +1,11 @@
 require("dotenv").config();
 
-const fs = require("fs");
-const UglifyJS = require("uglify-js");
-const CleanCSS = require("clean-css");
 const path = require("path");
 const webpack = require("webpack");
 const uuid = require("uuid");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const CopyWebpackPlugin = require("copy-webpack-plugin");
+const { createCriticalCSS } = require("./create-critical-css");
 
 const { appDescription } = require("./app-description");
 
@@ -17,17 +15,7 @@ const RESOURCE_ROOT = `resources/${RESOURCE_HASH}`;
 const DESKTOP_RESOURCE_ROOT = `${RESOURCE_ROOT}/desktop`;
 const MOBILE_RESOURCE_ROOT = `${RESOURCE_ROOT}/mobile`;
 
-/**
- * CSSを読み込んでminifyする
- * @param {string} path CSSファイルのパス
- * @returns {string} minifyされたCSS
- */
-const readCSS = (path) => {
-  const css = fs.readFileSync(path, "utf-8");
-  return new CleanCSS({}).minify(css).styles;
-};
-
-module.exports = {
+module.exports = async () => ({
   mode: "development",
   entry: {
     index: path.resolve(__dirname, "src/js/index.ts"),
@@ -79,7 +67,9 @@ module.exports = {
         IS_SEARCH_ENGINE_NO_INDEX:
           process.env.IS_SEARCH_ENGINE_NO_INDEX === "true",
         APP_DESCRIPTION: appDescription,
-        FIRST_VIEW_CSS: readCSS(path.resolve(__dirname, "src/first-view.css")),
+        FIRST_VIEW_CSS: await createCriticalCSS(
+          path.resolve(__dirname, "src/first-view.css"),
+        ),
       },
       inject: true,
     }),
@@ -160,4 +150,4 @@ module.exports = {
       ),
     }),
   ],
-};
+});
