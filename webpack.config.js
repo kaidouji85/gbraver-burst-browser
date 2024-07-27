@@ -1,7 +1,6 @@
 require("dotenv").config();
 
 const fs = require("fs");
-const UglifyJS = require("uglify-js");
 const CleanCSS = require("clean-css");
 const path = require("path");
 const webpack = require("webpack");
