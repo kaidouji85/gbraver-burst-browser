@@ -25,8 +25,8 @@ export class Game {
     appendChildrenToBody(this.#props);
     // TODO この処理はどこかに移動する
     if (document.body) {
-      document.body.addEventListener("touchstart", (e) => {
-        console.log("touchstart", e);
+      document.body.addEventListener("dblclick", (e) => {
+        console.log("double click or tap", e);
         e.preventDefault();
       });
     }
