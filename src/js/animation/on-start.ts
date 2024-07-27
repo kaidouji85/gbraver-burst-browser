@@ -1,4 +1,4 @@
-import * as TWEEN from "@tweenjs/tween.js";
+import { Group } from "@tweenjs/tween.js";
 
 import { Animate } from "./animate";
 import { tween } from "./tween";
@@ -9,7 +9,7 @@ import { tween } from "./tween";
  * @param group TWeenGroup
  * @returns アニメーション
  */
-export function onStart(fn: () => void, group?: TWEEN.Group): Animate {
+export function onStart(fn: () => void, group?: Group): Animate {
   return tween(
     {},
     (t) =>

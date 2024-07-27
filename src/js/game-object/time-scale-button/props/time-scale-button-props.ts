@@ -1,4 +1,4 @@
-import * as TWEEN from "@tweenjs/tween.js";
+import { Group } from "@tweenjs/tween.js";
 import { Subject } from "rxjs";
 
 import { TimeScaleAnimationProps } from "../animation/animation-props";
@@ -9,7 +9,7 @@ export type TimeScaleButtonProps = TimeScaleAnimationProps & {
   /** ビュー */
   view: TimeScaleButtonView;
   /** トグルTweenグループ */
-  toggleTween: TWEEN.Group;
+  toggleTween: Group;
   /** トグル通知 */
   toggleNotify: Subject<number>;
   /** 操作不可能であるか否か、trueで操作不可能 */

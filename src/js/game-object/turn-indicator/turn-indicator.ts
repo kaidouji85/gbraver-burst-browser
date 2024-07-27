@@ -1,4 +1,4 @@
-import * as TWEEN from "@tweenjs/tween.js";
+import { Group } from "@tweenjs/tween.js";
 import { Observable, Unsubscribable } from "rxjs";
 import * as THREE from "three";
 
@@ -24,7 +24,7 @@ type Param = ResourcesContainer & {
 
 /** ターンインジケーター */
 export class TurnIndicator {
-  #tweenGroup: TWEEN.Group;
+  #tweenGroup: Group;
   #model: TurnIndicatorModel;
   #view: TurnIndicatorView;
   #unsubscribers: Unsubscribable[];
@@ -34,7 +34,7 @@ export class TurnIndicator {
    * @param param パラメータ
    */
   constructor(param: Param) {
-    this.#tweenGroup = new TWEEN.Group();
+    this.#tweenGroup = new Group();
     this.#model = createInitialValue();
     this.#view = new TurnIndicatorView(param.resources);
     this.#unsubscribers = [

@@ -1,4 +1,4 @@
-import * as TWEEN from "@tweenjs/tween.js";
+import { Tween } from "@tweenjs/tween.js";
 
 import { scaleTweenDuration } from "./duration";
 
@@ -51,8 +51,8 @@ import { scaleTweenDuration } from "./duration";
  */
 export class Animate {
   /* eslint-disable @typescript-eslint/no-explicit-any */
-  _start: TWEEN.Tween<any>;
-  _end: TWEEN.Tween<any>;
+  _start: Tween<any>;
+  _end: Tween<any>;
   /* eslint-enable */
   _time: number;
 
@@ -64,7 +64,7 @@ export class Animate {
    * @param time 全体の再生時間
    */
   /* eslint-disable @typescript-eslint/no-explicit-any */
-  constructor(start: TWEEN.Tween<any>, end: TWEEN.Tween<any>, time: number) {
+  constructor(start: Tween<any>, end: Tween<any>, time: number) {
     /* eslint-enable */
     this._start = start;
     this._end = end;

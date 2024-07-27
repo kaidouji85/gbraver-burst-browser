@@ -1,4 +1,4 @@
-import * as TWEEN from "@tweenjs/tween.js";
+import { Group } from "@tweenjs/tween.js";
 
 import { Animate } from "../../../animation/animate";
 import { tween } from "../../../animation/tween";
@@ -17,7 +17,7 @@ const MAX_DURATION = 500;
  */
 export function changeNeedle(
   props: BatterySelectorAnimationProps,
-  group: TWEEN.Group,
+  group: Group,
   needle: number,
 ): Animate {
   const { model } = props;

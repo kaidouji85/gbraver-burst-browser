@@ -1,4 +1,4 @@
-import * as TWEEN from "@tweenjs/tween.js";
+import { Group } from "@tweenjs/tween.js";
 
 import { Animate } from "../../../../animation/animate";
 import { onStart } from "../../../../animation/on-start";
@@ -13,7 +13,7 @@ import { LightningBarrierAnimationProps } from "./animation-props";
  */
 export function electrification(
   props: LightningBarrierAnimationProps,
-  group: TWEEN.Group,
+  group: Group,
 ): Animate {
   const { model } = props;
   return onStart(() => {

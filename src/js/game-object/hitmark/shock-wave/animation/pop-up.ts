@@ -1,4 +1,4 @@
-import * as TWEEN from "@tweenjs/tween.js";
+import { Easing } from "@tweenjs/tween.js";
 
 import { all } from "../../../../animation/all";
 import { Animate } from "../../../../animation/animate";
@@ -47,7 +47,7 @@ function lineAnimation(model: ShockWaveLineModel): Animate {
           },
           DURATION,
         )
-        .easing(TWEEN.Easing.Quadratic.Out),
+        .easing(Easing.Quadratic.Out),
     ),
   );
 }
@@ -72,7 +72,7 @@ function ringAnimation(model: ShockWaveRingModel): Animate {
           },
           DURATION,
         )
-        .easing(TWEEN.Easing.Quadratic.Out),
+        .easing(Easing.Quadratic.Out),
     ),
   );
 }

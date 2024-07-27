@@ -1,4 +1,4 @@
-import * as TWEEN from "@tweenjs/tween.js";
+import { Group } from "@tweenjs/tween.js";
 
 import type { Animate } from "../../../animation/animate";
 import { onStart } from "../../../animation/on-start";
@@ -14,7 +14,7 @@ import { TimeScaleAnimationProps } from "./animation-props";
  */
 export function toggle(
   props: TimeScaleAnimationProps,
-  group: TWEEN.Group,
+  group: Group,
   timeScale: number,
 ): Animate {
   const { model, sounds, se } = props;

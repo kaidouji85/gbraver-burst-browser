@@ -1,4 +1,4 @@
-import * as TWEEN from "@tweenjs/tween.js";
+import { Group } from "@tweenjs/tween.js";
 
 import { Animate } from "../../../animation/animate";
 import { onStart } from "../../../animation/on-start";
@@ -13,7 +13,7 @@ import { BatterySelectorAnimationProps } from "./animation-props";
  */
 export function silentlyBatteryMinusPop(
   props: BatterySelectorAnimationProps,
-  group: TWEEN.Group,
+  group: Group,
 ): Animate {
   const { model } = props;
   return tween(
@@ -49,7 +49,7 @@ export function silentlyBatteryMinusPop(
  */
 export function batteryMinusPop(
   props: BatterySelectorAnimationProps,
-  group: TWEEN.Group,
+  group: Group,
 ): Animate {
   const { sounds, se } = props;
   return onStart(() => {

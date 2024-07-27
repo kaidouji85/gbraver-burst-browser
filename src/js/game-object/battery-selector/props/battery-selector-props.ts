@@ -1,4 +1,4 @@
-import * as TWEEN from "@tweenjs/tween.js";
+import { Group } from "@tweenjs/tween.js";
 
 import { BatterySelectorAnimationProps } from "../animation/animation-props";
 import { BatterySelectorView } from "../view";
@@ -10,9 +10,9 @@ export type BatterySelectorProps = BatterySelectorAnimationProps & {
   /** 操作不可能であるか否か、trueで操作不可能 */
   disabled: boolean;
   /** バッテリー変更TweenGroup */
-  batteryChangeTween: TWEEN.Group;
+  batteryChangeTween: Group;
   /** -ボタンTweenGroup */
-  batteryMinusTween: TWEEN.Group;
+  batteryMinusTween: Group;
   /** +ボタンTweenGroup */
-  batteryPlusTween: TWEEN.Group;
+  batteryPlusTween: Group;
 };

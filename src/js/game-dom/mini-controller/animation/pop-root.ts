@@ -1,4 +1,4 @@
-import * as TWEEN from "@tweenjs/tween.js";
+import { Tween } from "@tweenjs/tween.js";
 
 import { Animate } from "../../../animation/animate";
 import { tween } from "../../../animation/tween";
@@ -16,7 +16,7 @@ type Model = {
  * @returns アニメーション
  */
 export function popRoot(props: MiniControllerProps): Animate {
-  const setUpdateHandler = (t: TWEEN.Tween<Model>): TWEEN.Tween<Model> =>
+  const setUpdateHandler = (t: Tween<Model>): Tween<Model> =>
     t.onUpdate((model) => {
       props.root.style.transform = `scale(${model.scale})`;
     });
