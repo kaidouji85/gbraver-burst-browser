@@ -26,7 +26,6 @@ export class Game {
     // TODO この処理はどこかに移動する
     if (document.body) {
       document.body.addEventListener("dblclick", (e) => {
-        console.log("double click or tap", e);
         e.preventDefault();
       });
     }
