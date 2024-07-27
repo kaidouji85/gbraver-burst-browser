@@ -26,6 +26,7 @@ export class Game {
     // TODO この処理はどこかに移動する
     if (document.body) {
       document.body.addEventListener("touchstart", (e) => {
+        console.log("touchstart", e);
         e.preventDefault();
       });
     }
