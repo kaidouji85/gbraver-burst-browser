@@ -12,25 +12,21 @@ export function silentlyBatteryMinusPop(
   props: BatterySelectorAnimationProps,
 ): Animate {
   const { model } = props;
-  return tween(
-    model,
-    (t) =>
+  return tween(model, (t) =>
+    t.to(
+      {
+        minusButtonScale: 1.1,
+      },
+      100,
+    ),
+  ).chain(
+    tween(model, (t) =>
       t.to(
         {
-          minusButtonScale: 1.1,
+          minusButtonScale: 1,
         },
         100,
       ),
-  ).chain(
-    tween(
-      model,
-      (t) =>
-        t.to(
-          {
-            minusButtonScale: 1,
-          },
-          100,
-        ),
     ),
   );
 }
@@ -40,9 +36,7 @@ export function silentlyBatteryMinusPop(
  * @param props アニメーションプロパティ
  * @returns アニメーション
  */
-export function batteryMinusPop(
-  props: BatterySelectorAnimationProps,
-): Animate {
+export function batteryMinusPop(props: BatterySelectorAnimationProps): Animate {
   const { sounds, se } = props;
   return onStart(() => {
     se.play(sounds.batteryChangeSound);

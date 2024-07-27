@@ -18,14 +18,12 @@ export function changeNeedle(
 ): Animate {
   const { model } = props;
   const duration = Math.abs(model.needle - needle) * MAX_DURATION;
-  return tween(
-    model,
-    (t) =>
-      t.to(
-        {
-          needle: needle,
-        },
-        duration,
-      ),
+  return tween(model, (t) =>
+    t.to(
+      {
+        needle: needle,
+      },
+      duration,
+    ),
   );
 }

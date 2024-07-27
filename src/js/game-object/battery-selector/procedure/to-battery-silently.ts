@@ -30,7 +30,7 @@ async function minusButton(props: BatterySelectorProps): Promise<void> {
   batteryMinusTween.removeAll();
   await Promise.all([
     silentlyBatteryMinusPop(props).play(batteryMinusTween),
-    batteryChange(props, model.battery - 1)
+    batteryChange(props, model.battery - 1),
   ]);
 }
 

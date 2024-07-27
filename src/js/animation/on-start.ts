@@ -7,11 +7,9 @@ import { tween } from "./tween";
  * @returns アニメーション
  */
 export function onStart(fn: () => void): Animate {
-  return tween(
-    {},
-    (t) =>
-      t.to({}, 0).onStart(() => {
-        fn();
-      }),
+  return tween({}, (t) =>
+    t.to({}, 0).onStart(() => {
+      fn();
+    }),
   );
 }
