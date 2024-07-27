@@ -103,16 +103,15 @@ export class Animate {
 
   /**
    * アニメーションを無限ループ再生する
-   * @param params ループ再生時のパラメータ
+   * @param group アニメーショングループ
    */
-  loop(params?: LoopParams): void {
-    const { time, group } = params ?? {};
+  loop(group?: Group): void {
     const targetGroup = group ?? GlobalTweenGroup;
     getChildTween(this._start).forEach((tween) => {
       targetGroup.add(tween);
     });
     this._end.chain(this._start);
-    this._start.start(time);
+    this._start.start();
   }
 
   /**

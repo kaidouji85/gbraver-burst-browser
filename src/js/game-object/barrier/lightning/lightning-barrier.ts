@@ -91,9 +91,7 @@ export class LightningBarrierGameEffect {
    * 初回のアップデート処理
    */
   #onFirstUpdate(): void {
-    electrification(this.#props).loop({
-      group: this.#props.tweenGroup,
-    });
+    electrification(this.#props).loop(this.#props.tweenGroup);
   }
 
   /**
