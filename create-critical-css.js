@@ -1,4 +1,4 @@
-const fs = require("fs");
+const fs = require("fs").promises;
 const CleanCSS = require("clean-css");
 const postcss = require("postcss");
 const postcssPresetEnv = require("postcss-preset-env");
@@ -9,7 +9,7 @@ const postcssPresetEnv = require("postcss-preset-env");
  * @returns {Promise<string>} クリティカルCSS
  */
 module.exports.createCriticalCSS = async function (cssFilePath) {
-  const css = fs.readFileSync(cssFilePath, "utf-8");
+  const css = await fs.readFile(cssFilePath, "utf-8");
   const afterPostCSS = await postcss([postcssPresetEnv()]).process(css, {
     from: cssFilePath,
   });
