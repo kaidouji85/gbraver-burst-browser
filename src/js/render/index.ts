@@ -1,6 +1,5 @@
 import { Observable, Unsubscribable } from "rxjs";
 import * as THREE from "three";
-import { WebGLInfo } from "three";
 
 import {
   getViewPortHeight,
@@ -57,14 +56,6 @@ export class Renderer implements OverlapNotifier, RendererDomGetter, Rendering {
    */
   createOverlapNotifier(camera: THREE.Camera): Observable<OverlapEvent> {
     return toOverlapStream(this.#domEvent, this.getRendererDOM(), camera);
-  }
-
-  /**
-   * デバッグ用情報を返す
-   * @returns デバッグ用情報
-   */
-  info(): WebGLInfo {
-    return this.#threeJsRender.info;
   }
 
   /**
