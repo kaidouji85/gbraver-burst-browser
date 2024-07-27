@@ -1,4 +1,3 @@
-import { all } from "../../../animation/all";
 import { waitTime } from "../../../wait/wait-time";
 import { silentlyBatteryMinusPop } from "../animation/battery-minus-pop";
 import { silentlyBatteryPlusPop } from "../animation/battery-plus-pop";
@@ -14,10 +13,10 @@ async function plusButton(props: BatterySelectorProps): Promise<void> {
   const { batteryPlusTween, model } = props;
   batteryPlusTween.update();
   batteryPlusTween.removeAll();
-  await all(
-    silentlyBatteryPlusPop(props, batteryPlusTween),
+  await Promise.all([
+    silentlyBatteryPlusPop(props).play(batteryPlusTween),
     batteryChange(props, model.battery + 1),
-  ).play();
+  ]);
 }
 
 /**
@@ -29,10 +28,10 @@ async function minusButton(props: BatterySelectorProps): Promise<void> {
   const { batteryMinusTween, model } = props;
   batteryMinusTween.update();
   batteryMinusTween.removeAll();
-  await all(
-    silentlyBatteryMinusPop(props, batteryMinusTween),
-    batteryChange(props, model.battery - 1),
-  ).play();
+  await Promise.all([
+    silentlyBatteryMinusPop(props).play(batteryMinusTween),
+    batteryChange(props, model.battery - 1)
+  ]);
 }
 
 /**

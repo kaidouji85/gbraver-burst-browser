@@ -1,6 +1,16 @@
-import { Tween } from "@tweenjs/tween.js";
+import { Group, Tween } from "@tweenjs/tween.js";
 
 import { scaleTweenDuration } from "./duration";
+import { getChildTween } from "./get-child-tweens";
+import { GlobalTweenGroup } from "./global-tween-group";
+
+/** ループ再生時のパラメータ */
+type LoopParams = {
+  /** 再生開始時間 */
+  time?: number;
+  /** アニメーショングループ */
+  group?: Group;
+};
 
 /**
  * アニメーション
@@ -63,6 +73,7 @@ export class Animate {
    * @param end 連続したTweenの最後
    * @param time 全体の再生時間
    */
+
   /* eslint-disable @typescript-eslint/no-explicit-any */
   constructor(start: Tween<any>, end: Tween<any>, time: number) {
     /* eslint-enable */
@@ -71,8 +82,16 @@ export class Animate {
     this._time = time;
   }
 
-  /** アニメーションを再生する */
-  play(): Promise<void> {
+  /**
+   * アニメーションを再生する
+   * @param group アニメーショングループ
+   * @returns アニメーション再生完了後に呼び出されるPromise
+   */
+  play(group?: Group): Promise<void> {
+    const targetGroup = group ?? GlobalTweenGroup;
+    getChildTween(this._start).forEach((tween) => {
+      targetGroup.add(tween);
+    });
     return new Promise((resolve) => {
       this._start.start();
 
@@ -84,11 +103,15 @@ export class Animate {
 
   /**
    * アニメーションを無限ループ再生する
-   * @param time 再生開始時間
+   * @param params ループ再生時のパラメータ
    */
-  loop(time?: number): void {
+  loop(params?: LoopParams): void {
+    const { time, group } = params ?? {};
+    const targetGroup = group ?? GlobalTweenGroup;
+    getChildTween(this._start).forEach((tween) => {
+      targetGroup.add(tween);
+    });
     this._end.chain(this._start);
-
     this._start.start(time);
   }
 

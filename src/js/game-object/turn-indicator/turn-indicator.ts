@@ -68,7 +68,9 @@ export class TurnIndicator {
     return all(
       show(isPlayerTurn, this.#model),
       onStart(() => {
-        waiting(this.#model, this.#tweenGroup).loop();
+        waiting(this.#model).loop({
+          group: this.#tweenGroup,
+        });
       }),
     );
   }

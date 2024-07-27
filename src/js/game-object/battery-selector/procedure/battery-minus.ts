@@ -1,4 +1,3 @@
-import { all } from "../../../animation/all";
 import { batteryMinusPop } from "../animation/battery-minus-pop";
 import { canBatteryMinus } from "../model/can-battery-minus";
 import { BatterySelectorProps } from "../props/battery-selector-props";
@@ -18,8 +17,8 @@ export async function batteryMinus(props: BatterySelectorProps): Promise<void> {
 
   batteryMinusTween.update();
   batteryMinusTween.removeAll();
-  await all(
-    batteryMinusPop(props, batteryMinusTween),
+  await Promise.all([
+    batteryMinusPop(props).play(batteryMinusTween),
     batteryChange(props, model.battery - 1),
-  ).play();
+  ]);
 }
