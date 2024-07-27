@@ -112,7 +112,7 @@
     "dependency-check:stories": "depcruise stories",
     "dependency-check:test": "depcruise test",
     "generate-icons": "ts-node --project tsconfig.node.json generate-icons.ts",
-    "lint": "run-s lint:src lint:*",
+    "lint": "run-s lint:*",
     "lint-fix": "run-s lint-fix:*",
     "lint-fix:css": "stylelint --fix --max-warnings 0 \"src/**/*.css\"",
     "lint-fix:hbs": "eslint --fix --max-warnings 0 -c eslint.hbs.config.js src/js",
