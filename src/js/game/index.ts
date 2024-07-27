@@ -23,6 +23,12 @@ export class Game {
   constructor(param: GameParam) {
     this.#props = generateGameProps(param);
     appendChildrenToBody(this.#props);
+    // TODO この処理はどこかに移動する
+    if (document.body) {
+      document.body.addEventListener("touchstart", (e) => {
+        e.preventDefault();
+      });
+    }
     const gameActionNotifier = createGameActionNotifier(this.#props);
     gameActionNotifier.subscribe((action) => {
       onGameAction(this.#props, action);
