@@ -7,11 +7,11 @@ module.exports = async () => {
   const config = await productionWebpackConfig();
   return {
     mode: "production",
-      entry: path.resolve(__dirname, "src/js/sw.ts"),
+    entry: path.resolve(__dirname, "src/js/sw.ts"),
     output: {
-    path: config.output.path,
+      path: config.output.path,
       filename: "sw.js",
-  },
+    },
     module: {
       rules: [
         {
@@ -26,8 +26,8 @@ module.exports = async () => {
         GBRAVER_BURST_SW_BUILD_HASH: JSON.stringify(uuid.v4()),
       }),
     ],
-      resolve: {
-    extensions: [".js", ".ts"],
-  },
-  }
+    resolve: {
+      extensions: [".js", ".ts"],
+    },
+  };
 };
