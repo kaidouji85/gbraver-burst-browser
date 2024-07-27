@@ -11,6 +11,7 @@ body {
   user-select: none;
   color: rgb(240 240 240);
   background-color: rgb(23 23 23);
+  touch-action: manipulation;
 }
 
 .first-view {
