@@ -5,7 +5,7 @@ import { Animate } from "../../../../../animation/animate";
 import { delay, empty } from "../../../../../animation/delay";
 import { NeoLandozerHUD } from "../../../view/hud/armdozer-objects/neo-landozer";
 import { NeoLandozerTD } from "../../../view/td/armdozer-objects/neo-landozer";
-import { dolly, toInitial, track } from "../../td-camera";
+import { toInitial } from "../../td-camera";
 import { BurstAnimationParamX } from "./animation-param";
 
 /**
@@ -19,6 +19,21 @@ type NeoLandozerBurst<BURST extends Burst> = BurstAnimationParamX<
 >;
 
 /**
+ * バースト発動側プレイヤーにフォーカスを合わせる
+ * @param param パラメータ
+ * @returns アニメーション
+ */
+function focusToBurstPlayer(param: NeoLandozerBurst<Burst>) {
+  const duration = 500;
+  const x = param.burstArmdozerTD.neoLandozer.getObject3D().position.x;
+  const z = "-60";
+  return all(
+    param.tdCamera.move({ x, z }, duration),
+    param.tdCamera.lookAt({ x, z }, duration),
+  );
+}
+
+/**
  * ネオランドーザ バフパワー アニメーション
  * @param param パラメータ
  * @returns アニメーション
@@ -27,12 +42,7 @@ function neoLandozerBuffPower(param: NeoLandozerBurst<BuffPower>): Animate {
   return all(
     param.burstArmdozerTD.neoLandozer.guts(),
     param.burstArmdozerHUD.cutIn.show(),
-    track(
-      param.tdCamera,
-      param.burstArmdozerTD.neoLandozer.getObject3D().position.x,
-      500,
-    ),
-    dolly(param.tdCamera, "-60", 500),
+    focusToBurstPlayer(param),
     param.tdObjects.skyBrightness.brightness(0.2, 500),
     param.tdObjects.illumination.intensity(0.2, 500),
     param.hudObjects.rearmostFader.opacity(0.6, 500),
