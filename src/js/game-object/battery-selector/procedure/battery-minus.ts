@@ -4,21 +4,31 @@ import { BatterySelectorProps } from "../props/battery-selector-props";
 import { batteryChange } from "./battery-change";
 
 /**
+ * batteryMinusPopアニメーションを再生する
+ * @param props ゲームオブジェクトプロパティ
+ * @returns 処理が完了したら発火するPromise
+ */
+async function playBatteryMinusPop(props: BatterySelectorProps) {
+  const { batteryMinusTween } = props;
+  batteryMinusTween.update();
+  batteryMinusTween.removeAll();
+  await batteryMinusPop(props).play(batteryMinusTween);
+}
+
+/**
  * バッテリーマイナス
  * メモリ最小値の場合は何もしない
  * @param props ゲームオブジェクトプロパティ
  * @returns 処理が完了したら発火するPromise
  */
 export async function batteryMinus(props: BatterySelectorProps): Promise<void> {
-  const { batteryMinusTween, model } = props;
+  const { model } = props;
   if (!canBatteryMinus(model)) {
     return;
   }
 
-  batteryMinusTween.update();
-  batteryMinusTween.removeAll();
   await Promise.all([
-    batteryMinusPop(props).play(batteryMinusTween),
+    playBatteryMinusPop(props),
     batteryChange(props, model.battery - 1),
   ]);
 }
