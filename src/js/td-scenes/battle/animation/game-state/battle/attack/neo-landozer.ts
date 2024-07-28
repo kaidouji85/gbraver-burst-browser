@@ -12,7 +12,7 @@ import { Animate } from "../../../../../../animation/animate";
 import { delay, empty } from "../../../../../../animation/delay";
 import { NeoLandozer } from "../../../../../../game-object/armdozer/neo-landozer/neo-landozer";
 import { TDCamera } from "../../../../../../game-object/camera/td";
-import { dolly, toInitial, track } from "../../../td-camera";
+import { toInitial } from "../../../td-camera";
 import type { BattleAnimationParamX } from "../animation-param";
 
 /**
@@ -30,9 +30,11 @@ export type NeoLandozerBattle<RESULT extends BattleResult> =
  */
 function focusToAttacker(camera: TDCamera, attacker: NeoLandozer): Animate {
   const duration = 400;
+  const x = attacker.getObject3D().position.x * 0.6;
+  const z = "-30";
   return all(
-    track(camera, attacker.getObject3D().position.x * 0.6, duration),
-    dolly(camera, "-30", duration),
+    camera.move({ x, z }, duration),
+    camera.lookAt({ x, z }, duration),
   );
 }
 
