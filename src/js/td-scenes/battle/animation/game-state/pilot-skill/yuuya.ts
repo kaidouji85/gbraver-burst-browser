@@ -4,7 +4,7 @@ import { all } from "../../../../../animation/all";
 import { Animate } from "../../../../../animation/animate";
 import { delay, empty } from "../../../../../animation/delay";
 import { YuuyaHUD } from "../../../view/hud/pilot-objects/yuuya";
-import { dolly, toInitial, track } from "../../td-camera";
+import { toInitial } from "../../td-camera";
 import { PilotSkillAnimationParamX } from "./animation-param";
 
 /**
@@ -20,6 +20,20 @@ const inDuration = 400;
 const outDuration = 400;
 
 /**
+ * パイロットスキル発動側プレイヤーにフォーカスを合わせる
+ * @param param パラメータ
+ * @returns アニメーション
+ */
+function focusToPilotSkillPlayer(param: YuuyaAnimationParam<PilotSkill>): Animate {
+  const x = param.invokerSprite.getObject3D().position.x;
+  const z = "-20";
+  return all(
+    param.tdCamera.move({ x, z }, inDuration),
+    param.tdCamera.lookAt({ x, z }, inDuration),
+  );
+}
+
+/**
  * ユウヤ バッテリーブースト アニメーション
  * @param param パラメータ
  * @returns アニメーション
@@ -29,12 +43,7 @@ function yuuyaBatteryBoost(
 ): Animate {
   return all(
     param.pilot.cutIn.show(),
-    track(
-      param.tdCamera,
-      param.invokerSprite.getObject3D().position.x,
-      inDuration,
-    ),
-    dolly(param.tdCamera, "-20", inDuration),
+    focusToPilotSkillPlayer(param),
     param.tdObjects.skyBrightness.brightness(0.2, inDuration),
     param.tdObjects.illumination.intensity(0.2, inDuration),
     param.attackerTDArmdozer.sprite().endActive(),
