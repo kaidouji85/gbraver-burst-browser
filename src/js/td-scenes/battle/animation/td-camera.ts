@@ -49,6 +49,7 @@ export function toInitial(camera: TDCamera, duration: number): Animate {
 }
 
 /**
+ * @deprecated
  * ドリー
  *
  * @param camera カメラ
@@ -78,6 +79,7 @@ export function dolly(
 }
 
 /**
+ * @deprecated
  * トラック
  *
  * @param camera カメラ
