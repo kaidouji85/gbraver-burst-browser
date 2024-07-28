@@ -1,4 +1,4 @@
-import * as TWEEN from "@tweenjs/tween.js";
+import { Easing } from "@tweenjs/tween.js";
 
 import { all } from "../../../animation/all";
 import { Animate } from "../../../animation/animate";
@@ -23,7 +23,7 @@ export function moveToEdge(model: ResultIndicatorModel): Animate {
           },
           duration,
         )
-        .easing(TWEEN.Easing.Quadratic.InOut),
+        .easing(Easing.Quadratic.InOut),
     ),
     tween(model, (t) =>
       t
@@ -33,7 +33,7 @@ export function moveToEdge(model: ResultIndicatorModel): Animate {
           },
           duration,
         )
-        .easing(TWEEN.Easing.Quadratic.InOut),
+        .easing(Easing.Quadratic.InOut),
     ),
   );
 }

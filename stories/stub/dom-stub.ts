@@ -1,7 +1,6 @@
 import "../../src/css/style.css";
 
-import * as TWEEN from "@tweenjs/tween.js";
-
+import { GlobalTweenGroup } from "../../src/js/animation/global-tween-group";
 import {
   BGMManagerContainer,
   createBGMManager,
@@ -53,7 +52,7 @@ export const domStub =
       root.appendChild(component);
     });
     gameLoopStream().subscribe((action) => {
-      TWEEN.update(action.time);
+      GlobalTweenGroup.update(action.time);
     });
     return root;
   };

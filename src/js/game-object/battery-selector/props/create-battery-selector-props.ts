@@ -1,4 +1,4 @@
-import * as TWEEN from "@tweenjs/tween.js";
+import { Group } from "@tweenjs/tween.js";
 import { Observable } from "rxjs";
 
 import { ResourcesContainer } from "../../../resource";
@@ -28,9 +28,9 @@ export function createBatterySelectorProps(
     ...param,
     model: initialValue(),
     disabled: false,
-    batteryChangeTween: new TWEEN.Group(),
-    batteryMinusTween: new TWEEN.Group(),
-    batteryPlusTween: new TWEEN.Group(),
+    batteryChangeTween: new Group(),
+    batteryMinusTween: new Group(),
+    batteryPlusTween: new Group(),
     sounds: createBatterySelectorSounds(param.resources),
     view: new BatterySelectorView({
       resources: param.resources,

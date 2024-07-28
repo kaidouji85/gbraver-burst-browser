@@ -1,4 +1,4 @@
-import * as TWEEN from "@tweenjs/tween.js";
+import { Group } from "@tweenjs/tween.js";
 import { Observable, Subject } from "rxjs";
 
 import { ResourcesContainer } from "../../../resource";
@@ -31,7 +31,7 @@ export function createTimeScaleButtonProps(
     model: createInitialValue(),
     view: new TimeScaleButtonView(resources, gameObjectAction),
     sounds: createTimeScaleButtonSounds(resources),
-    toggleTween: new TWEEN.Group(),
+    toggleTween: new Group(),
     toggleNotify: new Subject(),
   };
 }

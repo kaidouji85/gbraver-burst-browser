@@ -1,4 +1,4 @@
-import * as TWEEN from "@tweenjs/tween.js";
+import { Easing } from "@tweenjs/tween.js";
 
 import { Animate } from "../../../../animation/animate";
 import { delay } from "../../../../animation/delay";
@@ -26,7 +26,7 @@ export function down(props: GenesisBraverAnimationProps): Animate {
             },
             500,
           )
-          .easing(TWEEN.Easing.Quadratic.Out),
+          .easing(Easing.Quadratic.Out),
       ),
     )
     .chain(delay(100))
