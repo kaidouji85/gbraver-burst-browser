@@ -24,8 +24,5 @@ function focusToWingDozer(param: GameOverParamX<WingDozerTD>): Animate {
  * @returns アニメーション
  */
 export function wingDozerWin(param: GameOverParamX<WingDozerTD>): Animate {
-  return all(
-    param.winnerTdArmdozer.wingDozer.dash(),
-    focusToWingDozer(param),
-  );
+  return all(param.winnerTdArmdozer.wingDozer.dash(), focusToWingDozer(param));
 }

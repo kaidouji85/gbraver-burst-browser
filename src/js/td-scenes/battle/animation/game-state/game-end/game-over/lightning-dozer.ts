@@ -8,7 +8,9 @@ import type { GameOverParamX } from "./game-over-param";
  * @param param パラメータ
  * @returns アニメーション
  */
-function focusToLightningDozer(param: GameOverParamX<LightningDozerTD>): Animate {
+function focusToLightningDozer(
+  param: GameOverParamX<LightningDozerTD>,
+): Animate {
   const duration = 800;
   const x = param.winnerTdArmdozer.lightningDozer.getObject3D().position.x;
   const z = "-60";

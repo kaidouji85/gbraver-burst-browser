@@ -24,7 +24,9 @@ const outDuration = 400;
  * @param param パラメータ
  * @returns アニメーション
  */
-function focusToPilotSkillPlayer(param: YuuyaAnimationParam<PilotSkill>): Animate {
+function focusToPilotSkillPlayer(
+  param: YuuyaAnimationParam<PilotSkill>,
+): Animate {
   const x = param.invokerSprite.getObject3D().position.x;
   const z = "-20";
   return all(

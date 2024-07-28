@@ -16,7 +16,6 @@ function focusToGenesisBraver(param: GameOverParamX<GenesisBraverTD>): Animate {
     param.tdCamera.move({ x, z }, duration),
     param.tdCamera.lookAt({ x, z }, duration),
   );
-
 }
 
 /**
