@@ -1,12 +1,27 @@
 import { all } from "../../../../../../animation/all";
 import { Animate } from "../../../../../../animation/animate";
 import { LightningDozerTD } from "../../../../view/td/armdozer-objects/lightning-dozer";
-import { dolly, track } from "../../../td-camera";
 import type { GameOverParamX } from "./game-over-param";
 
 /**
+ * ライトニングドーザにフォーカスを合わせる
+ * @param param パラメータ
+ * @returns アニメーション
+ */
+function focusToLightningDozer(
+  param: GameOverParamX<LightningDozerTD>,
+): Animate {
+  const duration = 800;
+  const x = param.winnerTdArmdozer.lightningDozer.getObject3D().position.x;
+  const z = "-60";
+  return all(
+    param.tdCamera.move({ x, z }, duration),
+    param.tdCamera.lookAt({ x, z }, duration),
+  );
+}
+
+/**
  * ライトニングドーザ  勝利
- *
  * @param param パラメータ
  * @returns アニメーション
  */
@@ -15,11 +30,6 @@ export function lightningDozerWin(
 ): Animate {
   return all(
     param.winnerTdArmdozer.lightningDozer.guts(),
-    track(
-      param.tdCamera,
-      param.winnerTdArmdozer.lightningDozer.getObject3D().position.x,
-      800,
-    ),
-    dolly(param.tdCamera, "-60", 800),
+    focusToLightningDozer(param),
   );
 }
