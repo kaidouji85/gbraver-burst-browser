@@ -1,8 +1,8 @@
 import { waitTime } from "../../../wait/wait-time";
-import { silentlyBatteryMinusPop } from "../animation/battery-minus-pop";
-import { silentlyBatteryPlusPop } from "../animation/battery-plus-pop";
 import { BatterySelectorProps } from "../props/battery-selector-props";
 import { batteryChange } from "./battery-change";
+import { playSilentlyBatteryMinusPop } from "./play-silently-battery-minus-pop";
+import { playSilentlyBatteryPlusPop } from "./play-silently-battery-plus-pop";
 
 /**
  * プラスボタンアニメーション
@@ -10,11 +10,9 @@ import { batteryChange } from "./battery-change";
  * @returns 処理が完了したら発火するPromise
  */
 async function plusButton(props: BatterySelectorProps): Promise<void> {
-  const { batteryPlusTween, model } = props;
-  batteryPlusTween.update();
-  batteryPlusTween.removeAll();
+  const { model } = props;
   await Promise.all([
-    silentlyBatteryPlusPop(props).play(batteryPlusTween),
+    playSilentlyBatteryPlusPop(props),
     batteryChange(props, model.battery + 1),
   ]);
 }
@@ -25,11 +23,9 @@ async function plusButton(props: BatterySelectorProps): Promise<void> {
  * @returns 処理が完了したら発火するPromise
  */
 async function minusButton(props: BatterySelectorProps): Promise<void> {
-  const { batteryMinusTween, model } = props;
-  batteryMinusTween.update();
-  batteryMinusTween.removeAll();
+  const { model } = props;
   await Promise.all([
-    silentlyBatteryMinusPop(props).play(batteryMinusTween),
+    playSilentlyBatteryMinusPop(props),
     batteryChange(props, model.battery - 1),
   ]);
 }

@@ -1,19 +1,7 @@
-import { batteryMinusPop } from "../animation/battery-minus-pop";
 import { canBatteryMinus } from "../model/can-battery-minus";
 import { BatterySelectorProps } from "../props/battery-selector-props";
 import { batteryChange } from "./battery-change";
-
-/**
- * batteryMinusPopアニメーションを再生する
- * @param props ゲームオブジェクトプロパティ
- * @returns 処理が完了したら発火するPromise
- */
-async function playBatteryMinusPop(props: BatterySelectorProps) {
-  const { batteryMinusTween } = props;
-  batteryMinusTween.update();
-  batteryMinusTween.removeAll();
-  await batteryMinusPop(props).play(batteryMinusTween);
-}
+import { playBatteryMinusPop } from "./play-battery-minus-pop";
 
 /**
  * バッテリーマイナス
