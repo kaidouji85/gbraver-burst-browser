@@ -25,12 +25,11 @@ const outDuration = 400;
  * @returns アニメーション
  */
 function focusToPilotSkillPlayer(param: ShinyaAnimationParam<PilotSkill>): Animate {
-  const duration = 500;
   const x = param.invokerSprite.getObject3D().position.x;
   const z = "-20"
   return all(
-    param.tdCamera.move({ x, z }, duration),
-    param.tdCamera.lookAt({ x, z },duration),
+    param.tdCamera.move({ x, z }, inDuration),
+    param.tdCamera.lookAt({ x, z },inDuration),
   );
 }
 
