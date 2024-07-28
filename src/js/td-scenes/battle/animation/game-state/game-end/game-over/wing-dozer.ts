@@ -16,7 +16,6 @@ function focusToWingDozer(param: GameOverParamX<WingDozerTD>): Animate {
     param.tdCamera.move({ x, z }, duration),
     param.tdCamera.lookAt({ x, z }, duration),
   );
-
 }
 
 /**
