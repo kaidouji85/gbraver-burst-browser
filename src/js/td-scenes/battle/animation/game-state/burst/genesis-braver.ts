@@ -19,6 +19,21 @@ export type GenesisBraverBurst<BURST extends Burst> = BurstAnimationParamX<
 >;
 
 /**
+ * バースト発動側プレイヤーにフォーカスを合わせる
+ * @param param パラメータ
+ * @returns アニメーション
+ */
+function focusToBurstPlayer(param: GenesisBraverBurst<Burst>) {
+  const duration = 500;
+  const x = param.burstArmdozerTD.genesisBraver.getObject3D().position.x;
+  const z = "-60";
+  return all(
+    param.tdCamera.move({ x, z }, duration),
+    param.tdCamera.lookAt({ x, z }, duration),
+  );
+}
+
+/**
  * ジェネシスブレイバー バッテリーリミットブレイク アニメーション
  * @param param パラメータ
  * @returns アニメーション
@@ -29,12 +44,7 @@ function batteryLimitBreak(
   return all(
     param.burstArmdozerHUD.cutIn.show(),
     param.burstArmdozerTD.genesisBraver.burst(),
-    track(
-      param.tdCamera,
-      param.burstArmdozerTD.genesisBraver.getObject3D().position.x,
-      500,
-    ),
-    dolly(param.tdCamera, "-60", 500),
+    focusToBurstPlayer(param),
     param.tdObjects.skyBrightness.brightness(0.2, 500),
     param.tdObjects.illumination.intensity(0.2, 500),
     param.hudObjects.rearmostFader.opacity(0.6, 500),
