@@ -16,11 +16,12 @@ export function frontStep(
   distance = 100,
 ): Animate {
   const { model, sounds, se } = props;
-  return onStart(() => {
-    model.animation.type = "FRONT_STEP";
-    model.animation.frame = 0;
-    se.play(sounds.motor);
-  })
+  return tween(model.animation, (t) =>
+    t.to({ frame: 0 }, 0).onStart(() => {
+      model.animation.type = "FRONT_STEP";
+      se.play(sounds.motor);
+    }),
+  )
     .chain(
       all(
         tween(model.animation, (t) =>
@@ -58,9 +59,10 @@ export function frontStep(
       ),
     )
     .chain(
-      onStart(() => {
-        model.animation.type = "STAND";
-        model.animation.frame = 0;
-      }),
+      tween(model.animation, (t) =>
+        t.to({ frame: 0 }, 0).onStart(() => {
+          model.animation.type = "STAND";
+        }),
+      ),
     );
 }
