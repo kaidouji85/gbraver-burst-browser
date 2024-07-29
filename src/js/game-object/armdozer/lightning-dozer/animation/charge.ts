@@ -1,5 +1,4 @@
 import { Animate } from "../../../../animation/animate";
-import { onStart } from "../../../../animation/on-start";
 import { tween } from "../../../../animation/tween";
 import { ARMDOZER_SPRITE_STANDARD_Z } from "../../position";
 import { LightningDozerAnimationProps } from "./animation-props";
@@ -12,12 +11,20 @@ import { LightningDozerAnimationProps } from "./animation-props";
  */
 export function charge(props: LightningDozerAnimationProps): Animate {
   const { model, sounds, se } = props;
-  return onStart(() => {
-    model.animation.type = "HM_CHARGE";
-    model.animation.frame = 0;
-    model.position.z = ARMDOZER_SPRITE_STANDARD_Z;
-    se.play(sounds.motor);
-  }).chain(
+  return tween(model, (t) =>
+    t
+      .to(
+        {
+          animation: { frame: 0 },
+          position: { z: ARMDOZER_SPRITE_STANDARD_Z },
+        },
+        0,
+      )
+      .onStart(() => {
+        model.animation.type = "HM_CHARGE";
+        se.play(sounds.motor);
+      }),
+  ).chain(
     tween(model.animation, (t) =>
       t.to(
         {
