@@ -25,5 +25,5 @@ export function tween<T extends Record<string, any>>(
   /* eslint-enable */
   const origin = new Tween(model);
   const t = create(origin);
-  return new Animate(t, t, tweenDuration(origin));
+  return new Animate(t, t, [t], tweenDuration(origin));
 }
