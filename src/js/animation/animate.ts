@@ -127,12 +127,8 @@ export class Animate {
     const parallelStartTweens = parallels.map((v) => v._start);
     this._end.chain(next._start, ...parallelStartTweens);
 
-    const parallelAllTweens = parallels.flatMap(a => a._tweens);
-    this._tweens = [
-      ...this._tweens,
-      ...next._tweens,
-      ...parallelAllTweens,
-    ];
+    const parallelAllTweens = parallels.flatMap((a) => a._tweens);
+    this._tweens = [...this._tweens, ...next._tweens, ...parallelAllTweens];
 
     this._end = next._end;
     this._time += next._time;
