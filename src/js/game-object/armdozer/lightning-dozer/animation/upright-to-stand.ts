@@ -1,5 +1,4 @@
 import { Animate } from "../../../../animation/animate";
-import { onStart } from "../../../../animation/on-start";
 import { tween } from "../../../../animation/tween";
 import { LightningDozerAnimationProps } from "./animation-props";
 
@@ -10,11 +9,12 @@ import { LightningDozerAnimationProps } from "./animation-props";
  */
 export function uprightToStand(props: LightningDozerAnimationProps): Animate {
   const { model, sounds, se } = props;
-  return onStart(() => {
-    model.animation.type = "UPRIGHT";
-    model.animation.frame = 1;
-    se.play(sounds.motor);
-  })
+  return tween(model.animation, (t) =>
+    t.to({ frame: 1 }, 0).onStart(() => {
+      model.animation.type = "UPRIGHT";
+      se.play(sounds.motor);
+    }),
+  )
     .chain(
       tween(model.animation, (t) =>
         t.to(
@@ -26,9 +26,10 @@ export function uprightToStand(props: LightningDozerAnimationProps): Animate {
       ),
     )
     .chain(
-      onStart(() => {
-        model.animation.type = "STAND";
-        model.animation.frame = 0;
-      }),
+      tween(model.animation, (t) =>
+        t.to({ frame: 0 }, 0).onStart(() => {
+          model.animation.type = "STAND";
+        }),
+      ),
     );
 }
