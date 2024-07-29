@@ -1,6 +1,5 @@
 import { Animate } from "../../../../animation/animate";
 import { delay } from "../../../../animation/delay";
-import { onStart } from "../../../../animation/on-start";
 import { tween } from "../../../../animation/tween";
 import { GenesisBraverAnimationProps } from "./animation-props";
 
@@ -11,11 +10,12 @@ import { GenesisBraverAnimationProps } from "./animation-props";
  */
 export function burst(props: GenesisBraverAnimationProps): Animate {
   const { model, sounds, se } = props;
-  return onStart(() => {
-    model.animation.type = "BURST_UP";
-    model.animation.frame = 0;
-    se.play(sounds.motor);
-  })
+  return tween(model.animation, (t) =>
+    t.to({ frame: 0 }, 0).onStart(() => {
+      model.animation.type = "BURST_UP";
+      se.play(sounds.motor);
+    }),
+  )
     .chain(
       tween(model.animation, (t) =>
         t.to(
@@ -28,11 +28,12 @@ export function burst(props: GenesisBraverAnimationProps): Animate {
     )
     .chain(delay(500))
     .chain(
-      onStart(() => {
-        model.animation.type = "BURST_DOWN";
-        model.animation.frame = 0;
-        se.play(sounds.motor);
-      }),
+      tween(model.animation, (t) =>
+        t.to({ frame: 0 }, 0).onStart(() => {
+          model.animation.type = "BURST_DOWN";
+          se.play(sounds.motor);
+        }),
+      ),
     )
     .chain(
       tween(model.animation, (t) =>

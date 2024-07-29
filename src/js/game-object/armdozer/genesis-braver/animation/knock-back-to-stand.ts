@@ -1,5 +1,4 @@
 import { Animate } from "../../../../animation/animate";
-import { onStart } from "../../../../animation/on-start";
 import { tween } from "../../../../animation/tween";
 import { GenesisBraverAnimationProps } from "./animation-props";
 
@@ -10,11 +9,12 @@ import { GenesisBraverAnimationProps } from "./animation-props";
  */
 export function knockBackToStand(props: GenesisBraverAnimationProps): Animate {
   const { model, sounds, se } = props;
-  return onStart(() => {
-    model.animation.frame = 1;
-    model.animation.type = "KNOCK_BACK";
-    se.play(sounds.motor);
-  })
+  return tween(model.animation, (t) =>
+    t.to({ frame: 1 }, 0).onStart(() => {
+      model.animation.type = "KNOCK_BACK";
+      se.play(sounds.motor);
+    }),
+  )
     .chain(
       tween(model.animation, (t) =>
         t.to(
@@ -26,9 +26,10 @@ export function knockBackToStand(props: GenesisBraverAnimationProps): Animate {
       ),
     )
     .chain(
-      onStart(() => {
-        model.animation.frame = 0;
-        model.animation.type = "STAND";
-      }),
+      tween(model.animation, (t) =>
+        t.to({ frame: 0 }, 0).onStart(() => {
+          model.animation.type = "STAND";
+        }),
+      ),
     );
 }
