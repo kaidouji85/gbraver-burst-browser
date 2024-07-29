@@ -12,10 +12,13 @@ export function charge(props: GenesisBraverAnimationProps): Animate {
   const { model, sounds, se } = props;
   return tween(model, (t) =>
     t
-      .to({
-        animation: { frame: 0 },
-        position: { z: ARMDOZER_SPRITE_ATTACKER_Z },
-      }, 0)
+      .to(
+        {
+          animation: { frame: 0 },
+          position: { z: ARMDOZER_SPRITE_ATTACKER_Z },
+        },
+        0,
+      )
       .onStart(() => {
         model.animation.type = "SP_CHARGE";
         se.play(sounds.motor);
