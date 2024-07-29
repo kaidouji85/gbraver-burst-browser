@@ -1,7 +1,5 @@
 import { Group, Tween } from "@tweenjs/tween.js";
 
-import { scaleTweenDuration } from "./duration";
-import { getChildTween } from "./get-child-tweens";
 import { GlobalTweenGroup } from "./global-tween-group";
 
 /**
@@ -53,9 +51,14 @@ import { GlobalTweenGroup } from "./global-tween-group";
  */
 export class Animate {
   /* eslint-disable @typescript-eslint/no-explicit-any */
+  /** 開始Tween */
   _start: Tween<any>;
+  /** 終了Tween */
   _end: Tween<any>;
+  /** このアニメーションが保持するすべてのTween */
+  _tweens: Tween<any>[];
   /* eslint-enable */
+  /** 全体の再生時間 */
   _time: number;
 
   /**
@@ -67,10 +70,16 @@ export class Animate {
    */
 
   /* eslint-disable @typescript-eslint/no-explicit-any */
-  constructor(start: Tween<any>, end: Tween<any>, time: number) {
+  constructor(
+    start: Tween<any>,
+    end: Tween<any>,
+    tweens: Tween<any>[],
+    time: number,
+  ) {
     /* eslint-enable */
     this._start = start;
     this._end = end;
+    this._tweens = tweens;
     this._time = time;
   }
 
@@ -81,12 +90,11 @@ export class Animate {
    */
   play(group?: Group): Promise<void> {
     const targetGroup = group ?? GlobalTweenGroup;
-    getChildTween(this._start).forEach((tween) => {
+    this._tweens.forEach((tween) => {
       targetGroup.add(tween);
     });
     return new Promise((resolve) => {
       this._start.start();
-
       this._end.onComplete(() => {
         resolve();
       });
@@ -99,7 +107,7 @@ export class Animate {
    */
   loop(group?: Group): void {
     const targetGroup = group ?? GlobalTweenGroup;
-    getChildTween(this._start).forEach((tween) => {
+    this._tweens.forEach((tween) => {
       targetGroup.add(tween);
     });
     this._end.chain(this._start);
@@ -112,13 +120,15 @@ export class Animate {
    * 後続アニメーションは複数可能だが、nextが最終要素として扱われる
    *
    * @param next 結合後に最終用として扱われる後続アニメーション
-   * @param pararells 後続アニメーション
+   * @param parallels 後続アニメーション
    * @returns 結合後アニメーション
    */
-  chain(next: Animate, ...pararells: Animate[]): Animate {
-    const pararellTweens = pararells.map((v) => v._start);
+  chain(next: Animate, ...parallels: Animate[]): Animate {
+    const parallelStartTweens = parallels.map((v) => v._start);
+    this._end.chain(next._start, ...parallelStartTweens);
 
-    this._end.chain(next._start, ...pararellTweens);
+    const parallelAllTweens = parallels.flatMap((a) => a._tweens);
+    this._tweens = [...this._tweens, ...next._tweens, ...parallelAllTweens];
 
     this._end = next._end;
     this._time += next._time;
@@ -133,7 +143,11 @@ export class Animate {
    */
   timeScale(scale: number): Animate {
     this._time = this._time * scale;
-    scaleTweenDuration(this._start, scale);
+    this._tweens.forEach((tween) => {
+      /* eslint-disable @typescript-eslint/no-explicit-any */
+      (tween as any)._duration = (tween as any)._duration * scale;
+      /* eslint-enable */
+    });
     return this;
   }
 }
