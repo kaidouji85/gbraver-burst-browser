@@ -11,11 +11,12 @@ import { GenesisBraverAnimationProps } from "./animation-props";
  */
 export function burst(props: GenesisBraverAnimationProps): Animate {
   const { model, sounds, se } = props;
-  return onStart(() => {
-    model.animation.type = "BURST_UP";
-    model.animation.frame = 0;
-    se.play(sounds.motor);
-  })
+  return tween(model.animation, (t) =>
+    t.to({ frame: 0 }, 0).onStart(() => {
+      model.animation.type = "BURST_UP";
+      se.play(sounds.motor);
+    }),
+  )
     .chain(
       tween(model.animation, (t) =>
         t.to(
