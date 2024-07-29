@@ -92,6 +92,7 @@ export class Animate {
     const targetGroup = group ?? GlobalTweenGroup;
     this._tweens.forEach((tween) => {
       targetGroup.add(tween);
+      tween.onComplete(() => targetGroup.remove(tween));
     });
     return new Promise((resolve) => {
       this._start.start();
