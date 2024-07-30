@@ -14,15 +14,7 @@ const duration = 400;
  */
 export function show(props: GaiCutInAnimationProps): Animate {
   const { model, sounds, se } = props;
-  return tween(model, (t) =>
-    t.to(
-      {
-        opacity: 0,
-        position: { x: -25 },
-      },
-      0,
-    ),
-  )
+  return tween(model.position, (t) => t.to({ x: -25 }, 0))
     .chain(
       all(
         tween(model, (t) =>
