@@ -1,20 +1,19 @@
 import { Animate } from "../../../../animation/animate";
-import { onStart } from "../../../../animation/on-start";
 import { tween } from "../../../../animation/tween";
 import { WingDozerAnimationProps } from "./animation-props";
 
 /**
  * ノックバック
- *
- * @param model モデル
+ * @param props アニメーションプロパティ
  * @returns アニメーション
  */
 export function knockBack(props: WingDozerAnimationProps): Animate {
   const { model } = props;
-  return onStart(() => {
-    model.animation.frame = 1;
-    model.animation.type = "KNOCK_BACK";
-  })
+  return tween(model.animation, (t) =>
+    t.to({ frame: 1 }, 0).onStart(() => {
+      model.animation.type = "KNOCK_BACK";
+    }),
+  )
     .chain(
       tween(model.position, (t) =>
         t.to(
