@@ -1,5 +1,4 @@
 import { Animate } from "../../../../animation/animate";
-import { onStart } from "../../../../animation/on-start";
 import { tween } from "../../../../animation/tween";
 import { ShinBraverAnimationProps } from "./animation-props";
 
@@ -10,11 +9,12 @@ import { ShinBraverAnimationProps } from "./animation-props";
  */
 export function upright(props: ShinBraverAnimationProps): Animate {
   const { model, sounds, se } = props;
-  return onStart(() => {
-    model.animation.type = "UPRIGHT";
-    model.animation.frame = 0;
-    se.play(sounds.motor);
-  }).chain(
+  return tween(model.animation, (t) =>
+    t.to({ frame: 0 }, 0).onStart(() => {
+      model.animation.type = "UPRIGHT";
+      se.play(sounds.motor);
+    }),
+  ).chain(
     tween(model.animation, (t) =>
       t.to(
         {
