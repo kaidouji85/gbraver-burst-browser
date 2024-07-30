@@ -2,7 +2,6 @@ import { Easing } from "@tweenjs/tween.js";
 
 import { Animate } from "../../../../animation/animate";
 import { delay } from "../../../../animation/delay";
-import { onStart } from "../../../../animation/on-start";
 import { tween } from "../../../../animation/tween";
 import { WingDozerAnimationProps } from "./animation-props";
 
@@ -13,10 +12,11 @@ import { WingDozerAnimationProps } from "./animation-props";
  */
 export function down(props: WingDozerAnimationProps): Animate {
   const { model } = props;
-  return onStart(() => {
-    model.animation.type = "KNOCK_BACK";
-    model.animation.frame = 1;
-  })
+  return tween(model.animation, (t) =>
+    t.to({ frame: 1 }, 0).onStart(() => {
+      model.animation.type = "KNOCK_BACK";
+    }),
+  )
     .chain(
       tween(model.position, (t) =>
         t
@@ -31,10 +31,11 @@ export function down(props: WingDozerAnimationProps): Animate {
     )
     .chain(delay(100))
     .chain(
-      onStart(() => {
-        model.animation.type = "DOWN";
-        model.animation.frame = 0;
-      }),
+      tween(model.animation, (t) =>
+        t.to({ frame: 0 }, 0).onStart(() => {
+          model.animation.type = "DOWN";
+        }),
+      ),
     )
     .chain(
       tween(model.animation, (t) =>
