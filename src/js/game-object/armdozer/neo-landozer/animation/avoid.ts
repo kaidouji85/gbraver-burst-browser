@@ -12,11 +12,12 @@ import { NeoLandozerAnimationProps } from "./animation-props";
  */
 export function avoid(props: NeoLandozerAnimationProps): Animate {
   const { model, sounds, se } = props;
-  return onStart(() => {
-    model.animation.type = "BACK_STEP";
-    model.animation.frame = 0;
-    se.play(sounds.motor);
-  })
+  return tween(model.animation, (t) =>
+    t.to({ frame: 0 }, 0).onStart(() => {
+      model.animation.type = "BACK_STEP";
+      se.play(sounds.motor);
+    }),
+  )
     .chain(
       all(
         tween(model.animation, (t) =>
@@ -54,9 +55,10 @@ export function avoid(props: NeoLandozerAnimationProps): Animate {
       ),
     )
     .chain(
-      onStart(() => {
-        model.animation.type = "STAND";
-        model.animation.frame = 0;
-      }),
+      tween(model.animation, (t) =>
+        t.to({ frame: 0 }, 0).onStart(() => {
+          model.animation.type = "STAND";
+        }),
+      ),
     );
 }
