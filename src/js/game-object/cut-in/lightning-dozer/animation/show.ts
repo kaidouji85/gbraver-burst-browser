@@ -45,14 +45,12 @@ export function show(props: LightningDozerCutInAnimationProps): Animate {
           ),
         ),
       ),
-    tween(model, (t) => t.to({ opacity: 0 }, 0)).chain(
-      tween(model, (t) =>
-        t.to(
-          {
-            opacity: 1,
-          },
-          500,
-        ),
+    tween(model, (t) =>
+      t.to(
+        {
+          opacity: 1,
+        },
+        500,
       ),
     ),
     tween(model, (t) => t.to({ scale: 0.9 }, 0)).chain(
