@@ -55,7 +55,7 @@ export class Animate {
   _start: Tween<any>;
   /** 終了Tween */
   _end: Tween<any>;
-  /** このアニメーションが保持するすべてのTween */
+  /** このアニメーションが保持するすべてのTween（_start、_endを含む）*/
   _tweens: Tween<any>[];
   /* eslint-enable */
   /** 全体の再生時間 */
@@ -97,6 +97,8 @@ export class Animate {
     return new Promise((resolve) => {
       this._start.start();
       this._end.onComplete(() => {
+        // _endはonCompleteを上書きするため、TweenGroupから削除する処理を再度書いている
+        targetGroup.remove(this._end);
         resolve();
       });
     });
