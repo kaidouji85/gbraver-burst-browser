@@ -11,11 +11,12 @@ import { NeoLandozerAnimationProps } from "./animation-props";
  */
 export function gutsToStand(props: NeoLandozerAnimationProps): Animate {
   const { model, sounds, se } = props;
-  return onStart(() => {
-    model.animation.type = "GUTS_DOWN";
-    model.animation.frame = 1;
-    se.play(sounds.motor);
-  })
+  return tween(model.animation, (t) =>
+    t.to({ frame: 1 }, 0).onStart(() => {
+      model.animation.type = "GUTS_DOWN";
+      se.play(sounds.motor);
+    }),
+  )
     .chain(
       tween(model.animation, (t) =>
         t.to(
@@ -27,10 +28,11 @@ export function gutsToStand(props: NeoLandozerAnimationProps): Animate {
       ),
     )
     .chain(
-      onStart(() => {
-        model.animation.type = "GUTS_UP";
-        model.animation.frame = 1;
-      }),
+      tween(model.animation, (t) =>
+        t.to({ frame: 1 }, 0).onStart(() => {
+          model.animation.type = "GUTS_UP";
+        }),
+      ),
     )
     .chain(delay(500))
     .chain(
@@ -49,9 +51,10 @@ export function gutsToStand(props: NeoLandozerAnimationProps): Animate {
       ),
     )
     .chain(
-      onStart(() => {
-        model.animation.type = "STAND";
-        model.animation.frame = 0;
-      }),
+      tween(model.animation, (t) =>
+        t.to({ frame: 0 }, 0).onStart(() => {
+          model.animation.type = "STAND";
+        }),
+      ),
     );
 }
