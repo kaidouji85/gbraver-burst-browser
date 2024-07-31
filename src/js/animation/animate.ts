@@ -2,6 +2,22 @@ import { Group, Tween } from "@tweenjs/tween.js";
 
 import { GlobalTweenGroup } from "./global-tween-group";
 
+/** シーケンス番号付きTween */
+type SequentialTween = {
+  sequence: number;
+  /* eslint-disable @typescript-eslint/no-explicit-any */
+  tween: Tween<any>;
+  /* eslint-enable */
+};
+
+/**
+ * シーケンス番号でソートする
+ * @param tweens シーケンス番号付きTween
+ * @returns シーケンス番号でソートされたTween
+ */
+const sequentialSort = (tweens: SequentialTween[]): SequentialTween[] =>
+  tweens.sort((a, b) => a.sequence - b.sequence);
+
 /**
  * アニメーション
  * tween.jsではアニメーションのモジュール化の機能が十分でないので、それを補うべく本クラスを作成した
@@ -56,7 +72,7 @@ export class Animate {
   /** 終了Tween */
   _end: Tween<any>;
   /** このアニメーションが保持するすべてのTween（_start、_endを含む）*/
-  _tweens: Tween<any>[];
+  _tweens: SequentialTween[];
   /* eslint-enable */
   /** 全体の再生時間 */
   _time: number;
@@ -73,7 +89,7 @@ export class Animate {
   constructor(
     start: Tween<any>,
     end: Tween<any>,
-    tweens: Tween<any>[],
+    tweens: SequentialTween[],
     time: number,
   ) {
     /* eslint-enable */
@@ -90,7 +106,8 @@ export class Animate {
    */
   play(group?: Group): Promise<void> {
     const targetGroup = group ?? GlobalTweenGroup;
-    this._tweens.forEach((tween) => {
+    this._tweens = sequentialSort(this._tweens);
+    this._tweens.forEach(({ tween }) => {
       targetGroup.add(tween);
       tween.onComplete(() => targetGroup.remove(tween));
     });
@@ -110,7 +127,8 @@ export class Animate {
    */
   loop(group?: Group): void {
     const targetGroup = group ?? GlobalTweenGroup;
-    this._tweens.forEach((tween) => {
+    this._tweens = sequentialSort(this._tweens);
+    this._tweens.forEach(({ tween }) => {
       targetGroup.add(tween);
     });
     this._end.chain(this._start);

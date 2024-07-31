@@ -2,6 +2,7 @@ import { Tween } from "@tweenjs/tween.js";
 
 import { Animate } from "./animate";
 import { tweenDuration } from "./duration";
+import { generateSequence } from "./sequence";
 
 /**
  * Tween単体からTweenAnimationを生成する
@@ -25,5 +26,6 @@ export function tween<T extends Record<string, any>>(
   /* eslint-enable */
   const origin = new Tween(model);
   const t = create(origin);
-  return new Animate(t, t, [t], tweenDuration(origin));
+  const tweens = [{ tween: t, sequence: generateSequence() }];
+  return new Animate(t, t, tweens, tweenDuration(origin));
 }
