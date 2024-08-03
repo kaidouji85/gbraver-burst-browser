@@ -93,13 +93,12 @@ export class Animate {
     const targetGroup = group ?? GlobalTweenGroup;
     this._tweens.forEach((tween) => {
       targetGroup.add(tween);
+      tween.onStart(() => targetGroup.add(tween));
       tween.onComplete(() => targetGroup.remove(tween));
     });
     return new Promise((resolve) => {
       this._start.start();
       this._end.onComplete(() => {
-        // _endはonCompleteを上書きするため、TweenGroupから削除する処理を再度書いている
-        targetGroup.remove(this._end);
         resolve();
       });
     });
@@ -113,6 +112,8 @@ export class Animate {
     const targetGroup = group ?? GlobalTweenGroup;
     this._tweens.forEach((tween) => {
       targetGroup.add(tween);
+      tween.onStart(() => targetGroup.add(tween));
+      tween.onComplete(() => targetGroup.remove(tween));
     });
     this._end.chain(this._start);
     this._start.start();

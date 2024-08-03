@@ -5,17 +5,16 @@ import { Tween } from "@tweenjs/tween.js";
 export type UnknownProps = Record<string, any>;
 /* eslint-enable */
 
-/** コールバック関数のデータ型 */
-type CallBack<T extends UnknownProps> = (object: T) => void;
-
 /* eslint-disable @typescript-eslint/no-explicit-any */
 export class MultiEventTween<T extends UnknownProps = any> extends Tween<T> {
   /* eslint-enable */
 
   /** onStartコールバックをあつめたもの */
-  #onStartCallbacks: CallBack<T>[] = [];
+  #onStartCallbacks: Array<(object: T) => void> = [];
   /** onCompleteコールバックをあつめたもの */
-  #onCompleteCallbacks: CallBack<T>[] = [];
+  #onCompleteCallbacks: Array<(object: T) => void> = [];
+  /** onUpdateコールバックをあつめたもの */
+  #onUpdateCallbacks: Array<(object: T, elapsed: number) => void> = [];
 
   /**
    * コンストラクタ
@@ -33,10 +32,15 @@ export class MultiEventTween<T extends UnknownProps = any> extends Tween<T> {
         fn(object);
       });
     });
+    super.onUpdate((object, elapsed) => {
+      this.#onUpdateCallbacks.forEach((fn) => {
+        fn(object, elapsed);
+      });
+    });
   }
 
   /** @override */
-  onStart(callback?: CallBack<T>): this {
+  onStart(callback?: (object: T) => void): this {
     if (callback) {
       this.#onStartCallbacks = [...this.#onStartCallbacks, callback];
     }
@@ -47,6 +51,14 @@ export class MultiEventTween<T extends UnknownProps = any> extends Tween<T> {
   onComplete(callback?: (object: T) => void): this {
     if (callback) {
       this.#onCompleteCallbacks = [...this.#onCompleteCallbacks, callback];
+    }
+    return this;
+  }
+
+  /** @override */
+  onUpdate(callback?: (object: T, elapsed: number) => void): this {
+    if (callback) {
+      this.#onUpdateCallbacks = [...this.#onUpdateCallbacks, callback];
     }
     return this;
   }
