@@ -1,6 +1,5 @@
-import { Tween } from "@tweenjs/tween.js";
-
 import { Animate } from "../../../animation/animate";
+import { MultiEventTween } from "../../../animation/multi-event-tween";
 import { tween } from "../../../animation/tween";
 import { MiniControllerProps } from "../props";
 
@@ -16,7 +15,9 @@ type Model = {
  * @returns アニメーション
  */
 export function hiddenRoot(props: MiniControllerProps): Animate {
-  const setUpdateHandler = (t: Tween<Model>): Tween<Model> =>
+  const setUpdateHandler = (
+    t: MultiEventTween<Model>,
+  ): MultiEventTween<Model> =>
     t.onUpdate((model) => {
       props.root.style.opacity = `${model.opacity}`;
     });
