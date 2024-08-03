@@ -1,7 +1,7 @@
 import { Group } from "@tweenjs/tween.js";
 
+import { GBTween } from "./gb-tween";
 import { GlobalTweenGroup } from "./global-tween-group";
-import { MultiEventTween } from "./multi-event-tween";
 
 /**
  * アニメーション
@@ -53,11 +53,11 @@ import { MultiEventTween } from "./multi-event-tween";
 export class Animate {
   /* eslint-disable @typescript-eslint/no-explicit-any */
   /** 開始Tween */
-  _start: MultiEventTween<any>;
+  _start: GBTween<any>;
   /** 終了Tween */
-  _end: MultiEventTween<any>;
+  _end: GBTween<any>;
   /** このアニメーションが保持するすべてのTween（_start、_endを含む）*/
-  _tweens: MultiEventTween<any>[];
+  _tweens: GBTween<any>[];
   /* eslint-enable */
   /** 全体の再生時間 */
   _time: number;
@@ -72,9 +72,9 @@ export class Animate {
 
   /* eslint-disable @typescript-eslint/no-explicit-any */
   constructor(
-    start: MultiEventTween<any>,
-    end: MultiEventTween<any>,
-    tweens: MultiEventTween<any>[],
+    start: GBTween<any>,
+    end: GBTween<any>,
+    tweens: GBTween<any>[],
     time: number,
   ) {
     /* eslint-enable */

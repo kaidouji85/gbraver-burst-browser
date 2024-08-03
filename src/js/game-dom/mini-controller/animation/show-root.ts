@@ -1,5 +1,5 @@
 import { Animate } from "../../../animation/animate";
-import { MultiEventTween } from "../../../animation/multi-event-tween";
+import { GBTween } from "../../../animation/gb-tween";
 import { tween } from "../../../animation/tween";
 import { MiniControllerProps } from "../props";
 
@@ -15,9 +15,7 @@ type Model = {
  * @returns アニメーション
  */
 export function showRoot(props: MiniControllerProps): Animate {
-  const setUpdateHandler = (
-    t: MultiEventTween<Model>,
-  ): MultiEventTween<Model> =>
+  const setUpdateHandler = (t: GBTween<Model>): GBTween<Model> =>
     t.onUpdate((model) => {
       props.root.style.opacity = `${model.opacity}`;
     });

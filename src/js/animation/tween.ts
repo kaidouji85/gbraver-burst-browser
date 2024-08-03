@@ -1,6 +1,6 @@
 import { Animate } from "./animate";
 import { tweenDuration } from "./duration";
-import { MultiEventTween } from "./multi-event-tween";
+import { GBTween } from "./gb-tween";
 
 /**
  * Tween単体からTweenAnimationを生成する
@@ -19,10 +19,10 @@ import { MultiEventTween } from "./multi-event-tween";
 /* eslint-disable @typescript-eslint/no-explicit-any */
 export function tween<T extends Record<string, any>>(
   model: T,
-  create: (t: MultiEventTween<any>) => MultiEventTween<any>,
+  create: (t: GBTween<any>) => GBTween<any>,
 ): Animate {
   /* eslint-enable */
-  const origin = new MultiEventTween(model);
+  const origin = new GBTween(model);
   const t = create(origin);
   return new Animate(t, t, [t], tweenDuration(origin));
 }
