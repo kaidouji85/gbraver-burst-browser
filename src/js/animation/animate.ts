@@ -96,6 +96,8 @@ export class Animate {
       tween.onComplete(() => {
         targetGroup.remove(tween);
         tween.getChainedTweens().forEach((chainedTween) => {
+          // chain先のTweenを確実にアップデートするために、Groupに追加している
+          // （Group.updateでは同メソッド実行中に追加されたTweenはアップデートされる）
           targetGroup.add(chainedTween);
         });
       });
@@ -116,8 +118,13 @@ export class Animate {
     const targetGroup = group ?? GlobalTweenGroup;
     this._tweens.forEach((tween) => {
       targetGroup.add(tween);
-      tween.onStart(() => targetGroup.add(tween));
-      tween.onComplete(() => targetGroup.remove(tween));
+      tween.onComplete(() => {
+        tween.getChainedTweens().forEach((chainedTween) => {
+          // chain先のTweenを確実にアップデートするために、Groupに追加している
+          // （Group.updateでは同メソッド実行中に追加されたTweenはアップデートされる）
+          targetGroup.add(chainedTween);
+        });
+      });
     });
     this._end.chain(this._start);
     this._start.start();
