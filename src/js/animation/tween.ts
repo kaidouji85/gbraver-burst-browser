@@ -1,7 +1,6 @@
-import { Tween } from "@tweenjs/tween.js";
-
 import { Animate } from "./animate";
 import { tweenDuration } from "./duration";
+import { GBTween } from "./gb-tween";
 
 /**
  * Tween単体からTweenAnimationを生成する
@@ -20,10 +19,10 @@ import { tweenDuration } from "./duration";
 /* eslint-disable @typescript-eslint/no-explicit-any */
 export function tween<T extends Record<string, any>>(
   model: T,
-  create: (t: Tween<any>) => Tween<any>,
+  create: (t: GBTween<any>) => GBTween<any>,
 ): Animate {
   /* eslint-enable */
-  const origin = new Tween(model);
+  const origin = new GBTween(model);
   const t = create(origin);
   return new Animate(t, t, [t], tweenDuration(origin));
 }

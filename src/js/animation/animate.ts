@@ -1,5 +1,6 @@
-import { Group, Tween } from "@tweenjs/tween.js";
+import { Group } from "@tweenjs/tween.js";
 
+import { GBTween } from "./gb-tween";
 import { GlobalTweenGroup } from "./global-tween-group";
 
 /**
@@ -52,11 +53,11 @@ import { GlobalTweenGroup } from "./global-tween-group";
 export class Animate {
   /* eslint-disable @typescript-eslint/no-explicit-any */
   /** 開始Tween */
-  _start: Tween<any>;
+  _start: GBTween<any>;
   /** 終了Tween */
-  _end: Tween<any>;
+  _end: GBTween<any>;
   /** このアニメーションが保持するすべてのTween（_start、_endを含む）*/
-  _tweens: Tween<any>[];
+  _tweens: GBTween<any>[];
   /* eslint-enable */
   /** 全体の再生時間 */
   _time: number;
@@ -71,9 +72,9 @@ export class Animate {
 
   /* eslint-disable @typescript-eslint/no-explicit-any */
   constructor(
-    start: Tween<any>,
-    end: Tween<any>,
-    tweens: Tween<any>[],
+    start: GBTween<any>,
+    end: GBTween<any>,
+    tweens: GBTween<any>[],
     time: number,
   ) {
     /* eslint-enable */
@@ -92,13 +93,18 @@ export class Animate {
     const targetGroup = group ?? GlobalTweenGroup;
     this._tweens.forEach((tween) => {
       targetGroup.add(tween);
-      tween.onComplete(() => targetGroup.remove(tween));
+      tween.onComplete(() => {
+        targetGroup.remove(tween);
+        tween.getChainedTweens().forEach((chainedTween) => {
+          // chain先のTweenを確実にアップデートするために、Groupに追加している
+          // （Group.updateでは同メソッド実行中に追加されたTweenはアップデートされる）
+          targetGroup.add(chainedTween);
+        });
+      });
     });
     return new Promise((resolve) => {
       this._start.start();
       this._end.onComplete(() => {
-        // _endはonCompleteを上書きするため、TweenGroupから削除する処理を再度書いている
-        targetGroup.remove(this._end);
         resolve();
       });
     });
@@ -112,6 +118,13 @@ export class Animate {
     const targetGroup = group ?? GlobalTweenGroup;
     this._tweens.forEach((tween) => {
       targetGroup.add(tween);
+      tween.onComplete(() => {
+        tween.getChainedTweens().forEach((chainedTween) => {
+          // chain先のTweenを確実にアップデートするために、Groupに追加している
+          // （Group.updateでは同メソッド実行中に追加されたTweenはアップデートされる）
+          targetGroup.add(chainedTween);
+        });
+      });
     });
     this._end.chain(this._start);
     this._start.start();
