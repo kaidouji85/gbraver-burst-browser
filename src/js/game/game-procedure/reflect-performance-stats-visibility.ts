@@ -46,7 +46,9 @@ export function reflectPerformanceStatsVisibility(
   props: GameProps,
   statsVisibility: PerformanceStatsVisibility,
 ): void {
-  statsVisibility === "visible"
-    ? visiblePerformanceStats(props)
-    : hiddenPerformanceStats(props);
+  if (statsVisibility === "visible") {
+    visiblePerformanceStats(props);
+  } else {
+    hiddenPerformanceStats(props);
+  }
 }
