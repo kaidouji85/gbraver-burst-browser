@@ -8,7 +8,7 @@
     "email": "kaidouji85@gmail.com"
   },
   "dependencies": {
-    "@gbraver-burst-network/browser-sdk": "^1.15.2",
+    "@gbraver-burst-network/browser-sdk": "^1.15.3",
     "@tweenjs/tween.js": "^25.0.0",
     "gbraver-burst-core": "1.31.1",
     "handlebars": "^4.7.8",
@@ -43,7 +43,7 @@
     "dependency-cruiser": "^16.3.10",
     "dotenv": "^16.4.5",
     "eslint": "^8.57.0",
-    "eslint-plugin-jest": "^28.6.0",
+    "eslint-plugin-jest": "^28.7.0",
     "eslint-plugin-simple-import-sort": "^12.1.1",
     "glob": "^11.0.0",
     "globals": "^15.9.0",
@@ -57,7 +57,7 @@
     "postcss": "^8.4.40",
     "postcss-import": "^16.1.0",
     "postcss-loader": "^8.1.1",
-    "postcss-preset-env": "^9.6.0",
+    "postcss-preset-env": "^10.0.0",
     "prettier": "3.3.3",
     "rimraf": "^6.0.1",
     "sharp": "^0.33.4",
