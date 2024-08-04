@@ -49,7 +49,7 @@ export class PlayerBatteryGauge {
       const gauge = this.#gaugeList.find(
         (gauge) => gauge.getValue() === v.value,
       );
-      gauge && gauge.engage(v);
+      gauge?.engage(v);
     });
   }
 
