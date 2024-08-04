@@ -28,6 +28,8 @@ const actionType = "WebSocketAPIError";
 /** WebSocketAPIエラー時のイベントリスナーコンテナ */
 export const webSocketAPIErrorContainer = {
   [actionType]: (props: GameProps, action: GameAction) => {
-    action.type === actionType && onWebSocketAPIError(props, action);
+    if (action.type === actionType) {
+      onWebSocketAPIError(props, action);
+    }
   },
 };

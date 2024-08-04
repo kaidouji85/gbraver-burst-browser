@@ -17,6 +17,8 @@ const actionType = "UniversalLogin";
 /** ユニバーサルログイン時のイベントリスナーコンテナ */
 export const universalLoginContainer = {
   [actionType]: (props: GameProps, action: GameAction) => {
-    action.type == actionType && onUniversalLogin(props);
+    if (action.type == actionType) {
+      onUniversalLogin(props);
+    }
   },
 };
