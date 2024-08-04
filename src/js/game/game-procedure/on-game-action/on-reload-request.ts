@@ -18,6 +18,8 @@ const actionType = "ReloadRequest";
 /** 画面リロード依頼時のリスナーコンテナ */
 export const reloadRequestContainer: { [key: string]: GameActionListener } = {
   [actionType]: (props: GameProps, action: GameAction) => {
-    action.type === actionType && onReloadRequest(props);
+    if (action.type === actionType) {
+      onReloadRequest(props);
+    }
   },
 };

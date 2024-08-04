@@ -21,6 +21,8 @@ const actionType = "CancelTutorialSelect";
 /** チュートリアル選択キャンセル時のイベントリスナーコンテナ */
 export const cancelTutorialSelectContainer = {
   [actionType]: (props: GameProps, action: GameAction) => {
-    action.type === actionType && onCancelTutorialSelect(props);
+    if (action.type === actionType) {
+      onCancelTutorialSelect(props);
+    }
   },
 };

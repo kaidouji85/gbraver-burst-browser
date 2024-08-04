@@ -17,6 +17,8 @@ const actionType = "Logout";
 /** ログアウト時のイベントリスナーコンテナ */
 export const logoutContainer = {
   [actionType]: (props: GameProps, action: GameAction) => {
-    action.type === actionType && onLogout(props);
+    if (action.type === actionType) {
+      onLogout(props);
+    }
   },
 };

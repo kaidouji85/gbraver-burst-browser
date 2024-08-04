@@ -38,7 +38,9 @@ export async function executeReflectIfNeeded(
         v.effect.name === "Reflect" &&
         v.effect.damagedPlayer === props.playerId,
     ).length > 0;
-  reflectSuccessful
-    ? await successReflectDamage(props)
-    : await failReflectDamage(props);
+  if (reflectSuccessful) {
+    await successReflectDamage(props);
+  } else {
+    await failReflectDamage(props);
+  }
 }

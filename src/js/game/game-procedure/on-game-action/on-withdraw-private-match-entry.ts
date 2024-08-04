@@ -15,6 +15,8 @@ const actionType = "WithdrawPrivateMatchEntry";
 /** プライベートマッチエントリ取り下げ時のイベントリスナーコンテナ */
 export const withdrawPrivateMatchEntryContainer = {
   [actionType]: (props: GameProps, action: GameAction) => {
-    action.type === actionType && onWithdrawPrivateMatchEntry(props);
+    if (action.type === actionType) {
+      onWithdrawPrivateMatchEntry(props);
+    }
   },
 };

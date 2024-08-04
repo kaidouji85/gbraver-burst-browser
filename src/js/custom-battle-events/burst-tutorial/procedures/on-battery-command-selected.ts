@@ -20,9 +20,11 @@ import { shouldDefense5Again } from "../stories/should-defense5-again";
 async function defense5(
   props: Readonly<BatteryCommandSelected & BurstTutorialProps>,
 ): Promise<void> {
-  props.eventState.isLoseIfNoDefense5Complete
-    ? await shouldDefense5Again(props)
-    : await shouldDefense5(props);
+  if (props.eventState.isLoseIfNoDefense5Complete) {
+    await shouldDefense5Again(props);
+  } else {
+    await shouldDefense5(props);
+  }
 }
 
 /** イベント終了情報 */
@@ -72,9 +74,11 @@ export async function onBatteryCommandSelected(
   } else if (willPlayerDeath && isPlayerFullBattery) {
     props.view.hud.gameObjects.batterySelector.toBatterySilently(5);
     await defense5(props);
-    result.eventState.isLoseIfNoDefense5Complete
-      ? await notDefense5Carelessly(props)
-      : await redoBatterySelect(props);
+    if (result.eventState.isLoseIfNoDefense5Complete) {
+      await notDefense5Carelessly(props);
+    } else {
+      await redoBatterySelect(props);
+    }
     result = {
       eventState: { ...result.eventState, isLoseIfNoDefense5Complete: true },
       cancel: {

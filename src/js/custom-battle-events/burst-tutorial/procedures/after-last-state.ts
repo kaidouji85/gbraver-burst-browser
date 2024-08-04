@@ -28,6 +28,10 @@ export async function afterLastState(
 
   const gameOver: GameOver = gameEnd.result;
   const isPayerWin = gameOver.winner === props.playerId;
-  isPayerWin ? await playerWin(props) : await playerLose(props);
+  if (isPayerWin) {
+    await playerWin(props);
+  } else {
+    await playerLose(props);
+  }
   return props.eventState;
 }

@@ -50,6 +50,8 @@ const actionType = "PrivateMatchEntry";
 /** プライベートマッチエントリ時のイベントリスナーコンテナ */
 export const privateMatchEntryContainer = {
   [actionType]: (props: GameProps, action: GameAction) => {
-    action.type === actionType && onPrivateMatchEntry(props, action);
+    if (action.type === actionType) {
+      onPrivateMatchEntry(props, action);
+    }
   },
 };

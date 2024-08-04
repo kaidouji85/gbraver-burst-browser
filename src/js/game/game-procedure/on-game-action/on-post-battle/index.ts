@@ -43,6 +43,8 @@ const actionType = "PostBattleAction";
 /** 戦闘終了後アクションのリスナーコンテナ */
 export const postBattleActionContainer = {
   [actionType]: (props: GameProps, action: GameAction) => {
-    action.type === actionType && onPostBattleAction(props, action);
+    if (action.type === actionType) {
+      onPostBattleAction(props, action);
+    }
   },
 };

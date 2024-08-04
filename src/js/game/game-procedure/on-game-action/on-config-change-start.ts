@@ -25,6 +25,8 @@ const actionType = "ConfigChangeStart";
 /** 設定変更開始時のイベントリスナーコンテナ */
 export const configChangeStartContainer = {
   [actionType]: (props: GameProps, action: GameAction) => {
-    action.type === actionType && onConfigChangeStart(props);
+    if (action.type === actionType) {
+      onConfigChangeStart(props);
+    }
   },
 };

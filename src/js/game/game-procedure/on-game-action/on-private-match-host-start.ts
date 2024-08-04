@@ -38,6 +38,8 @@ export const actionType = "PrivateMatchHostStart";
 /** プライベートマッチ（ホスト）スタート時のイベントリスナーコンテナ */
 export const privateMatchHostStartContainer = {
   [actionType]: (props: GameProps, action: GameAction) => {
-    action.type === actionType && onPrivateMatchHostStart(props);
+    if (action.type === actionType) {
+      onPrivateMatchHostStart(props);
+    }
   },
 };

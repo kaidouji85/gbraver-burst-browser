@@ -53,8 +53,8 @@ export class DOMDialogBinder {
    * 現在表示しているダイアログを取り除く
    */
   #removeCurrentDialog(): void {
-    this.#dialog && this.#dialog.destructor();
-    this.#dialog && this.#dialog.getRootHTMLElement().remove();
+    this.#dialog?.destructor();
+    this.#dialog?.getRootHTMLElement().remove();
     this.#dialog = null;
     this.#unsubscribers.forEach((v) => {
       v.unsubscribe();

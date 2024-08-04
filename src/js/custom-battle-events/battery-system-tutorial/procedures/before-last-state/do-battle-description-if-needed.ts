@@ -40,9 +40,11 @@ export async function doBattleDescriptionIfNeeded(
   const battle: Battle = foundBattle.effect;
   const turn = turnCount(props.stateHistory);
   const isPlayerAttack = battle.attacker === props.playerId;
-  isPlayerAttack
-    ? await playerAttack(props, battle.result)
-    : await enemyAttack(props, battle.result);
+  if (isPlayerAttack) {
+    await playerAttack(props, battle.result);
+  } else {
+    await enemyAttack(props, battle.result);
+  }
   invisibleAllMessageWindows(props);
   if (turn === 2) {
     await waitTime(200);

@@ -29,6 +29,8 @@ const actionType = "StoryStart";
 /** ストーリーモード開始時のイベントリスナーコンテナ */
 export const storyStartContainer = {
   [actionType]: (props: GameProps, action: GameAction) => {
-    action.type === actionType && onStoryStart(props);
+    if (action.type === actionType) {
+      onStoryStart(props);
+    }
   },
 };
