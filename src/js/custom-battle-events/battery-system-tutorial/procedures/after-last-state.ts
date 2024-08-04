@@ -31,7 +31,11 @@ export async function afterLastState(
   const result = gameEnd.effect.result;
   const isVictory =
     result.type === "GameOver" && result.winner === props.playerId;
-  isVictory ? await victory(props) : await lose(props);
+  if (isVictory) {
+    await victory(props);
+  } else {
+    await lose(props);
+  }
   await refreshConversation(props);
   await tutorialEnd(props);
   invisibleAllMessageWindows(props);
