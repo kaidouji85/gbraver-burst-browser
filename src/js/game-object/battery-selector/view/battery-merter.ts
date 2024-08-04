@@ -134,9 +134,8 @@ export class BatteryMeter {
       numberMesh.getObject3D().position.y = y;
       const scale = batteryNumberScale(value, model.maxBattery);
       numberMesh.getObject3D().scale.set(scale, scale, 1);
-      value <= model.enableMaxBattery
-        ? numberMesh.opacity(model.opacity)
-        : numberMesh.opacity(0);
+      const opacity = value <= model.enableMaxBattery ? model.opacity : 0;
+      numberMesh.opacity(opacity);
     });
     this.#disActiveNumbers.forEach((numberMesh, value) => {
       const { x, y } = batteryNumberPosition(value, model.maxBattery);
@@ -144,9 +143,11 @@ export class BatteryMeter {
       numberMesh.getObject3D().position.y = y;
       const scale = batteryNumberScale(value, model.maxBattery);
       numberMesh.getObject3D().scale.set(scale, scale, 1);
-      model.enableMaxBattery < value && value <= model.maxBattery
-        ? numberMesh.opacity(model.opacity)
-        : numberMesh.opacity(0);
+      const opacity =
+        model.enableMaxBattery < value && value <= model.maxBattery
+          ? model.opacity
+          : 0;
+      numberMesh.opacity(opacity);
     });
   }
 
