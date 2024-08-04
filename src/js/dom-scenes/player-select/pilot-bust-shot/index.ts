@@ -29,7 +29,11 @@ export class PilotBustShotContainer {
 
     this.#bustShots = pilotIds.map((id) => new PilotBustShot(resources, id));
     this.#bustShots.forEach((bustShot) => {
-      bustShot.pilotId === this.#pilotId ? bustShot.show() : bustShot.hidden();
+      if (bustShot.pilotId === this.#pilotId) {
+        bustShot.show();
+      } else {
+        bustShot.hidden();
+      }
       this.#root.appendChild(bustShot.getRootHTMLElement());
     });
   }
