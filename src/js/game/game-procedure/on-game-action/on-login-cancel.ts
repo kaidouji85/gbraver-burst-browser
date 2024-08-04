@@ -15,6 +15,8 @@ const actionType = "LoginCancel";
 /** ログイン中断時のイベントリスナーコンテナ */
 export const loginCancelContainer = {
   [actionType]: (props: GameProps, action: GameAction) => {
-    action.type === actionType && onLoginCancel(props);
+    if (action.type === actionType) {
+      onLoginCancel(props);
+    }
   },
 };

@@ -49,6 +49,8 @@ const actionType = "EndBattle" as const;
 /** 戦闘終了時のリスナーコンテナ */
 export const endBattleContainer = {
   [actionType]: (props: GameProps, action: GameAction) => {
-    action.type === actionType && onEndBattle(props, action);
+    if (action.type === actionType) {
+      onEndBattle(props, action);
+    }
   },
 };

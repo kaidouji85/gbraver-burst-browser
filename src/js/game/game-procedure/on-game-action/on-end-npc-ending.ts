@@ -30,6 +30,8 @@ const actionType = "EndNPCEnding";
 /** NPCバトルエンディング終了時のイベントリスナーコンテナ */
 export const endNPCEndingContainer = {
   [actionType]: (props: GameProps, action: GameAction) => {
-    action.type === actionType && onEndNPCEnding(props);
+    if (action.type === actionType) {
+      onEndNPCEnding(props);
+    }
   },
 };

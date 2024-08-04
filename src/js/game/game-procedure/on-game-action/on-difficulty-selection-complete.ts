@@ -66,6 +66,8 @@ const actionType = "DifficultySelectionComplete";
 /** 難易度選択完了時イベントのリスナーコンテナ */
 export const difficultySelectionCompleteContainer = {
   [actionType]: (props: GameProps, action: GameAction) => {
-    action.type === actionType && onDifficultySelectionComplete(props, action);
+    if (action.type === actionType) {
+      onDifficultySelectionComplete(props, action);
+    }
   },
 };

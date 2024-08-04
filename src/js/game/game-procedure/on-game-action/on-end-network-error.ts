@@ -56,6 +56,8 @@ const actionType = "EndNetworkError";
 /** 通信エラー終了時のイベントリスナーコンテナ */
 export const endNetworkErrorContainer = {
   [actionType]: (props: GameProps, action: GameAction) => {
-    action.type === actionType && onEndNetworkError(props, action);
+    if (action.type === actionType) {
+      onEndNetworkError(props, action);
+    }
   },
 };

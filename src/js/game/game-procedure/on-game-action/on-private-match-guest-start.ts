@@ -38,6 +38,8 @@ const actionType = "PrivateMatchGuestStart";
 /** プライベートマッチ（ゲスト）スタート時のイベントリスナーコンテナ */
 export const privateMatchGuestStartContainer = {
   [actionType]: (props: GameProps, action: GameAction) => {
-    action.type === actionType && onPrivateMatchGuestStart(props);
+    if (action.type === actionType) {
+      onPrivateMatchGuestStart(props);
+    }
   },
 };

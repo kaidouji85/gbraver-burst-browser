@@ -50,6 +50,8 @@ const actionType = "SelectionComplete";
 /** プレイヤーキャラクター選択完了のリスナーコンテナ */
 export const selectionCompleteContainer = {
   [actionType]: (props: GameProps, action: GameAction) => {
-    action.type === actionType && onSelectionComplete(props, action);
+    if (action.type === actionType) {
+      onSelectionComplete(props, action);
+    }
   },
 };

@@ -15,6 +15,8 @@ const actionType = "NetBattleCancel";
 /** ネット対戦キャンセル時のイベントリスナーコンテナ */
 export const netBattleCancelContainer = {
   [actionType]: (props: GameProps, action: GameAction) => {
-    action.type === actionType && onNetBattleCancel(props);
+    if (action.type === actionType) {
+      onNetBattleCancel(props);
+    }
   },
 };
