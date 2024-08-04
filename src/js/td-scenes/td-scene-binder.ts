@@ -74,7 +74,7 @@ export class TDSceneBinder {
    * 現在表示しているシーンを破棄する
    */
   #disposeScene(): void {
-    this.#scene && this.#scene.destructor();
+    this.#scene?.destructor();
     this.#renderer.disposeRenders();
     this.#domLayerElement.innerHTML = "";
     this.#unsubscribers.forEach((v) => {
