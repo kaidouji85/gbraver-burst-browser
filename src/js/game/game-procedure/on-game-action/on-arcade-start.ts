@@ -37,6 +37,8 @@ const actionType = "ArcadeStart";
 /** アーケードモード開始のリスナーコンテナ */
 export const arcadeStartContainer = {
   [actionType]: (props: GameProps, action: GameAction) => {
-    action.type === actionType && onArcadeStart(props);
+    if (action.type === actionType) {
+      onArcadeStart(props);
+    }
   },
 };
