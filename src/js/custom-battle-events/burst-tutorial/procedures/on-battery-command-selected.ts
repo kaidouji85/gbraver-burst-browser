@@ -20,9 +20,11 @@ import { shouldDefense5Again } from "../stories/should-defense5-again";
 async function defense5(
   props: Readonly<BatteryCommandSelected & BurstTutorialProps>,
 ): Promise<void> {
-  props.eventState.isLoseIfNoDefense5Complete
-    ? await shouldDefense5Again(props)
-    : await shouldDefense5(props);
+  if (props.eventState.isLoseIfNoDefense5Complete) {
+    await shouldDefense5Again(props);
+  } else {
+    await shouldDefense5(props);
+  }
 }
 
 /** イベント終了情報 */
