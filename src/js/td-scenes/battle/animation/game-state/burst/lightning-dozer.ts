@@ -5,7 +5,7 @@ import { Animate } from "../../../../../animation/animate";
 import { delay, empty } from "../../../../../animation/delay";
 import { LightningDozerHUD } from "../../../view/hud/armdozer-objects/lightning-dozer";
 import { LightningDozerTD } from "../../../view/td/armdozer-objects/lightning-dozer";
-import { dolly, toInitial, track } from "../../td-camera";
+import { toInitial } from "../../td-camera";
 import { BurstAnimationParamX } from "./animation-param";
 
 /**
@@ -19,6 +19,21 @@ export type LightningDozerBurst<BURST extends Burst> = BurstAnimationParamX<
 >;
 
 /**
+ * バースト発動側プレイヤーにフォーカスを合わせる
+ * @param param パラメータ
+ * @returns アニメーション
+ */
+function focusToBurstPlayer(param: LightningDozerBurst<Burst>) {
+  const duration = 500;
+  const x = param.burstArmdozerTD.lightningDozer.getObject3D().position.x;
+  const z = "-60";
+  return all(
+    param.tdCamera.move({ x, z }, duration),
+    param.tdCamera.lookAt({ x, z }, duration),
+  );
+}
+
+/**
  * ライトニングドーザ 電撃バリア アニメーション
  * @param param パラメータ
  * @returns アニメーション
@@ -29,12 +44,7 @@ function lightningBarrier(
   return all(
     param.burstArmdozerTD.lightningDozer.guts(),
     param.burstArmdozerHUD.cutIn.show(),
-    track(
-      param.tdCamera,
-      param.burstArmdozerTD.lightningDozer.getObject3D().position.x,
-      500,
-    ),
-    dolly(param.tdCamera, "-60", 500),
+    focusToBurstPlayer(param),
     param.tdObjects.skyBrightness.brightness(0.2, 500),
     param.tdObjects.illumination.intensity(0.2, 500),
     param.hudObjects.rearmostFader.opacity(0.6, 500),

@@ -66,8 +66,10 @@ export function predicatedDamageTracking(params: TrackingParams) {
       rendererDOM,
       predicatedDamage,
     };
-    isPlayer
-      ? playerPredicatedDamageTracking(trackingParams)
-      : enemyPredicatedDamageTracking(trackingParams);
+    if (isPlayer) {
+      playerPredicatedDamageTracking(trackingParams);
+    } else {
+      enemyPredicatedDamageTracking(trackingParams);
+    }
   });
 }

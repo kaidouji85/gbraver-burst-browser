@@ -1,5 +1,4 @@
 import { Animate } from "../../../../animation/animate";
-import { onStart } from "../../../../animation/on-start";
 import { tween } from "../../../../animation/tween";
 import { WingDozerAnimationProps } from "./animation-props";
 
@@ -10,10 +9,11 @@ import { WingDozerAnimationProps } from "./animation-props";
  */
 export function upper(props: WingDozerAnimationProps): Animate {
   const { model } = props;
-  return onStart(() => {
-    model.animation.type = "UPPER_ATTACK";
-    model.animation.frame = 0;
-  }).chain(
+  return tween(model.animation, (t) =>
+    t.to({ frame: 0 }, 0).onStart(() => {
+      model.animation.type = "UPPER_ATTACK";
+    }),
+  ).chain(
     tween(model.animation, (t) =>
       t.to(
         {

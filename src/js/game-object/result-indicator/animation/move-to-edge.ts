@@ -1,4 +1,4 @@
-import * as TWEEN from "@tweenjs/tween.js";
+import { Easing } from "@tweenjs/tween.js";
 
 import { all } from "../../../animation/all";
 import { Animate } from "../../../animation/animate";
@@ -12,7 +12,7 @@ import type { ResultIndicatorModel } from "../model/result-indicator-model";
  * @returns アニメーション
  */
 export function moveToEdge(model: ResultIndicatorModel): Animate {
-  const duration = 400;
+  const duration = 300;
   return all(
     tween(model.worldCoordinate, (t) =>
       t
@@ -23,7 +23,7 @@ export function moveToEdge(model: ResultIndicatorModel): Animate {
           },
           duration,
         )
-        .easing(TWEEN.Easing.Quadratic.InOut),
+        .easing(Easing.Quadratic.InOut),
     ),
     tween(model, (t) =>
       t
@@ -33,7 +33,7 @@ export function moveToEdge(model: ResultIndicatorModel): Animate {
           },
           duration,
         )
-        .easing(TWEEN.Easing.Quadratic.InOut),
+        .easing(Easing.Quadratic.InOut),
     ),
   );
 }

@@ -21,6 +21,8 @@ const actionType = "MatchingCanceled";
 /** マッチング中止のリスナーコンテナ */
 export const matchingCanceledContainer = {
   [actionType]: (props: GameProps, action: GameAction) => {
-    action.type === actionType && onMatchingCanceled(props);
+    if (action.type === actionType) {
+      onMatchingCanceled(props);
+    }
   },
 };

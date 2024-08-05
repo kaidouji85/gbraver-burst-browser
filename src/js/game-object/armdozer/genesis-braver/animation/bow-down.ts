@@ -1,5 +1,4 @@
 import { Animate } from "../../../../animation/animate";
-import { onStart } from "../../../../animation/on-start";
 import { tween } from "../../../../animation/tween";
 import { GenesisBraverAnimationProps } from "./animation-props";
 
@@ -10,11 +9,12 @@ import { GenesisBraverAnimationProps } from "./animation-props";
  */
 export function bowDown(props: GenesisBraverAnimationProps): Animate {
   const { model, sounds, se } = props;
-  return onStart(() => {
-    model.animation.type = "BOW";
-    model.animation.frame = 0;
-    se.play(sounds.motor);
-  }).chain(
+  return tween(model.animation, (t) =>
+    t.to({ frame: 0 }, 0).onStart(() => {
+      model.animation.type = "BOW";
+      se.play(sounds.motor);
+    }),
+  ).chain(
     tween(model.animation, (t) =>
       t.to(
         {

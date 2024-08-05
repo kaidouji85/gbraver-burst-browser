@@ -6,8 +6,8 @@ import type { DOMSceneBinderProps } from "./props";
  * @param props DomSceneBinderプロパティ
  */
 export function discardCurrentScene(props: DOMSceneBinderProps): void {
-  props.scene && props.scene.destructor();
-  props.scene && props.scene.getRootHTMLElement().remove();
+  props.scene?.destructor();
+  props.scene?.getRootHTMLElement().remove();
   props.scene = null;
   props.unsubscribers.forEach((v) => {
     v.unsubscribe();

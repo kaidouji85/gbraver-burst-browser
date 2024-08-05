@@ -1,5 +1,4 @@
 import { Animate } from "../../../../animation/animate";
-import { onStart } from "../../../../animation/on-start";
 import { tween } from "../../../../animation/tween";
 import { ARMDOZER_SPRITE_STANDARD_Z } from "../../position";
 import { WingDozerAnimationProps } from "./animation-props";
@@ -11,11 +10,12 @@ import { WingDozerAnimationProps } from "./animation-props";
  */
 export function upperToStand(props: WingDozerAnimationProps): Animate {
   const { model, sounds, se } = props;
-  return onStart(() => {
-    model.animation.type = "UPPER_TO_STAND";
-    model.animation.frame = 0;
-    se.play(sounds.motor);
-  })
+  return tween(model.animation, (t) =>
+    t.to({ frame: 0 }, 0).onStart(() => {
+      model.animation.type = "UPPER_TO_STAND";
+      se.play(sounds.motor);
+    }),
+  )
     .chain(
       tween(model.animation, (t) =>
         t.to(
@@ -27,10 +27,18 @@ export function upperToStand(props: WingDozerAnimationProps): Animate {
       ),
     )
     .chain(
-      onStart(() => {
-        model.animation.type = "STAND";
-        model.animation.frame = 0;
-        model.position.z = ARMDOZER_SPRITE_STANDARD_Z;
-      }),
+      tween(model, (t) =>
+        t
+          .to(
+            {
+              animation: { frame: 0 },
+              position: { z: ARMDOZER_SPRITE_STANDARD_Z },
+            },
+            0,
+          )
+          .onStart(() => {
+            model.animation.type = "STAND";
+          }),
+      ),
     );
 }

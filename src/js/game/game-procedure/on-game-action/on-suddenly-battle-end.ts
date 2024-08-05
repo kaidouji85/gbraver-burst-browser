@@ -24,6 +24,8 @@ const actionType = "SuddenlyBattleEnd";
 /** バトル強制終了処理のリスナーコンテナ */
 export const suddenlyBattleEndContainer = {
   [actionType]: (props: GameProps, action: GameAction) => {
-    action.type === actionType && onSuddenlyEndBattle(props);
+    if (action.type === actionType) {
+      onSuddenlyEndBattle(props);
+    }
   },
 };

@@ -22,6 +22,8 @@ const actionType = "DeleteAccount";
 /** アカウント削除時のイベントリスナーコンテナ */
 export const deleteAccountContainer = {
   [actionType]: (props: GameProps, action: GameAction) => {
-    action.type === actionType && onDeleteAccount(props);
+    if (action.type === actionType) {
+      onDeleteAccount(props);
+    }
   },
 };

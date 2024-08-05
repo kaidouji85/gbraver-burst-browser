@@ -25,6 +25,8 @@ const actionType = "DifficultySelectionCancel";
 /** 難易度選択キャンセル時のイベントリスナーコンテナ */
 export const difficultySelectionCancelContainer = {
   [actionType]: (props: GameProps, action: GameAction) => {
-    action.type === actionType && onDifficultySelectionCancel(props);
+    if (action.type === actionType) {
+      onDifficultySelectionCancel(props);
+    }
   },
 };

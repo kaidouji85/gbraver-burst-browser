@@ -41,7 +41,9 @@ export const fadeIn: BGMOperator = async (bgm: BGM): Promise<BGM> => {
 
 /** BGM停止 */
 export const stop = async (bgm: BGM): Promise<BGM> => {
-  bgm.type === "NowPlayingBGM" && bgm.resource.sound.stop();
+  if (bgm.type === "NowPlayingBGM") {
+    bgm.resource.sound.stop();
+  }
   return {
     ...bgm,
     type: "NoBGM",
@@ -76,7 +78,9 @@ export const changeVolume =
 export const play =
   (resource: SoundResource): BGMOperator =>
   async (bgm: BGM): Promise<BGM> => {
-    bgm.type === "NowPlayingBGM" && bgm.resource.sound.stop();
+    if (bgm.type === "NowPlayingBGM") {
+      bgm.resource.sound.stop();
+    }
     resource.sound.play();
     resource.sound.loop(true);
     resource.sound.volume(bgm.bgmVolume * resource.volumeScale);

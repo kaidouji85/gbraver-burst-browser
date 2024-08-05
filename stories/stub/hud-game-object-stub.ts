@@ -1,7 +1,7 @@
-import * as TWEEN from "@tweenjs/tween.js";
 import { Observable, Subject, Unsubscribable } from "rxjs";
 import * as THREE from "three";
 
+import { GlobalTweenGroup } from "../../src/js/animation/global-tween-group";
 import { GameLoop, gameLoopStream } from "../../src/js/game-loop/game-loop";
 import { PreRender } from "../../src/js/game-loop/pre-render";
 import { Update } from "../../src/js/game-loop/update";
@@ -126,7 +126,7 @@ export class HUDGameObjectStub {
    * @param action アクション
    */
   #onGameLoop(action: GameLoop): void {
-    TWEEN.update(action.time);
+    GlobalTweenGroup.update(action.time);
 
     this.#update.next({
       type: "Update",

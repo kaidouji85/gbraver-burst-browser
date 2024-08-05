@@ -1,5 +1,4 @@
 import { all } from "../../../animation/all";
-import { Animate } from "../../../animation/animate";
 import { onStart } from "../../../animation/on-start";
 import { changeNeedle } from "../animation/change-needle";
 import { getNeedleValue } from "../model/needle-value";
@@ -14,7 +13,7 @@ import { BatterySelectorProps } from "../props/battery-selector-props";
 export function batteryChange(
   props: BatterySelectorProps,
   battery: number,
-): Animate {
+): Promise<void> {
   const { batteryChangeTween, model } = props;
   batteryChangeTween.update();
   batteryChangeTween.removeAll();
@@ -23,6 +22,6 @@ export function batteryChange(
     onStart(() => {
       model.battery = battery;
     }),
-    changeNeedle(props, batteryChangeTween, needle),
-  );
+    changeNeedle(props, needle),
+  ).play(batteryChangeTween);
 }

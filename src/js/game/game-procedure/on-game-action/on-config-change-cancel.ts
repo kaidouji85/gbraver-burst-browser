@@ -22,6 +22,8 @@ const actionType = "ConfigChangeCancel";
 /** 設定変更キャンセル時のイベントリスナーコンテナ */
 export const configChangeCancelContainer = {
   [actionType]: (props: GameProps, action: GameAction) => {
-    action.type === actionType && onConfigChangeCancel(props);
+    if (action.type === actionType) {
+      onConfigChangeCancel(props);
+    }
   },
 };

@@ -152,4 +152,4 @@ shfmt -l -w *.bash
 
 ## License
 
-MIT
+CC BY 4.0

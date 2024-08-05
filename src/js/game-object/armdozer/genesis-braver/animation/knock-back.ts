@@ -1,6 +1,5 @@
 import { all } from "../../../../animation/all";
 import { Animate } from "../../../../animation/animate";
-import { onStart } from "../../../../animation/on-start";
 import { tween } from "../../../../animation/tween";
 import { GenesisBraverAnimationProps } from "./animation-props";
 
@@ -12,10 +11,11 @@ import { GenesisBraverAnimationProps } from "./animation-props";
 export function knockBack(props: GenesisBraverAnimationProps): Animate {
   const { model } = props;
   return all(
-    onStart(() => {
-      model.animation.type = "KNOCK_BACK";
-      model.animation.frame = 1;
-    }),
+    tween(model.animation, (t) =>
+      t.to({ frame: 1 }, 0).onStart(() => {
+        model.animation.type = "KNOCK_BACK";
+      }),
+    ),
     tween(model.position, (t) =>
       t.to(
         {

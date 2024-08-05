@@ -1,4 +1,4 @@
-import * as TWEEN from "@tweenjs/tween.js";
+import { Group } from "@tweenjs/tween.js";
 
 import { ResourcesContainer } from "../../../../resource";
 import { SEPlayerContainer } from "../../../../se/se-player";
@@ -24,6 +24,6 @@ export function createLightningBarrierProps(
     model: createInitialValue(),
     view: new LightningBarrierView(resources),
     sounds: new LightningBarrierSounds(resources),
-    tweenGroup: new TWEEN.Group(),
+    tweenGroup: new Group(),
   };
 }

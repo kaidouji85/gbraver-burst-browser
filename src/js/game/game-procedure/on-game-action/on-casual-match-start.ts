@@ -36,6 +36,8 @@ export const actionType = "CasualMatchStart";
 /** カジュアルマッチ開始のリスナーコンテナ */
 export const casualMatchStartContainer = {
   [actionType]: (props: GameProps, action: GameAction) => {
-    action.type === actionType && onCasualMatchStart(props);
+    if (action.type === actionType) {
+      onCasualMatchStart(props);
+    }
   },
 };

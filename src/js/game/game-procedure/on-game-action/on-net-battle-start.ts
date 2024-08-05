@@ -56,6 +56,8 @@ const actionType = "NetBattleStart";
 /** ネットバトル開始時のイベントリスナーコンテナ */
 export const netBattleStartContainer = {
   [actionType]: (props: GameProps, action: GameAction) => {
-    action.type === actionType && onNetBattleStart(props);
+    if (action.type === actionType) {
+      onNetBattleStart(props);
+    }
   },
 };

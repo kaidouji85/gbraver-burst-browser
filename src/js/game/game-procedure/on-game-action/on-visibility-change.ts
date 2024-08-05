@@ -17,6 +17,8 @@ const actionType = "VisibilityChange";
 /** VisibilityChange時のイベントリスナーコンテナ */
 export const visibilityChangeContainer = {
   [actionType]: (props: GameProps, action: GameAction) => {
-    action.type === actionType && onVisibilityChange();
+    if (action.type === actionType) {
+      onVisibilityChange();
+    }
   },
 };

@@ -1,4 +1,4 @@
-import { Animate } from "../../../../animation/animate";
+import { empty } from "../../../../animation/delay";
 import { CustomStateAnimation } from "../../../../td-scenes/battle/custom-battle-event";
 import { ConditionalAnimation } from "../../../get-animation-if-conditional-met";
 import { tsubasaFeintFailShout } from "../../animation/tsubasa-feint-fail-shout";
@@ -8,8 +8,6 @@ import { QueenOfTragedyProps } from "../../props";
 export const tsubasaFeintFail: ConditionalAnimation<
   CustomStateAnimation & QueenOfTragedyProps
 > = (props) => {
-  let result: Animate | null = null;
-
   const { enemyId } = props;
   const { effect } = props.currentState;
 
@@ -19,8 +17,15 @@ export const tsubasaFeintFail: ConditionalAnimation<
     effect.attackerBattery === 0 &&
     effect.defenderBattery === 0
   ) {
-    result = tsubasaFeintFailShout(props);
+    return tsubasaFeintFailShout(props);
+  } else if (
+    effect.name === "Battle" &&
+    effect.attacker === enemyId &&
+    effect.result.name === "Feint" &&
+    !effect.result.isDefenderMoved
+  ) {
+    return empty();
   }
 
-  return result;
+  return null;
 };

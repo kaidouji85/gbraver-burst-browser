@@ -12,7 +12,7 @@ import { Animate } from "../../../../../../animation/animate";
 import { delay, empty } from "../../../../../../animation/delay";
 import { WingDozer } from "../../../../../../game-object/armdozer/wing-dozer/wing-dozer";
 import { TDCamera } from "../../../../../../game-object/camera/td";
-import { dolly, toInitial, track } from "../../../td-camera";
+import { toInitial } from "../../../td-camera";
 import type { BattleAnimationParamX } from "../animation-param";
 
 /**
@@ -31,9 +31,11 @@ export type WingDozerBattle<Result extends BattleResult> =
  */
 function focusToAttacker(camera: TDCamera, attacker: WingDozer): Animate {
   const duration = 400;
+  const x = attacker.getObject3D().position.x * 0.6;
+  const z = "-20";
   return all(
-    track(camera, attacker.getObject3D().position.x * 0.6, duration),
-    dolly(camera, "-20", duration),
+    camera.move({ x, z }, duration),
+    camera.lookAt({ x, z }, duration),
   );
 }
 

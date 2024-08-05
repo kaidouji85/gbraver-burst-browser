@@ -1,8 +1,7 @@
-import { all } from "../../../animation/all";
-import { batteryMinusPop } from "../animation/battery-minus-pop";
 import { canBatteryMinus } from "../model/can-battery-minus";
 import { BatterySelectorProps } from "../props/battery-selector-props";
 import { batteryChange } from "./battery-change";
+import { playBatteryMinusPop } from "./play-battery-minus-pop";
 
 /**
  * バッテリーマイナス
@@ -11,15 +10,13 @@ import { batteryChange } from "./battery-change";
  * @returns 処理が完了したら発火するPromise
  */
 export async function batteryMinus(props: BatterySelectorProps): Promise<void> {
-  const { batteryMinusTween, model } = props;
+  const { model } = props;
   if (!canBatteryMinus(model)) {
     return;
   }
 
-  batteryMinusTween.update();
-  batteryMinusTween.removeAll();
-  await all(
-    batteryMinusPop(props, batteryMinusTween),
+  await Promise.all([
+    playBatteryMinusPop(props),
     batteryChange(props, model.battery - 1),
-  ).play();
+  ]);
 }

@@ -6,8 +6,8 @@ import { yuuyaFirstAttackShout1 } from "../../animation/yuuya-first-attack-shout
 import { yuuyaFirstAttackShout2 } from "../../animation/yuuya-first-attack-shout2";
 import { QueenOfTragedyProps } from "../../props";
 
-/** ユウヤ 攻撃 */
-export const yuuyaAttack: ConditionalAnimation<
+/** ユウヤ ファーストアタック */
+export const yuuyaFirstAttack: ConditionalAnimation<
   CustomStateAnimation & QueenOfTragedyProps
 > = (props) => {
   let result: Animate | null = null;

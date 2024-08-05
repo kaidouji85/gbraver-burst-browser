@@ -1,5 +1,4 @@
-import * as TWEEN from "@tweenjs/tween.js";
-
+import { GlobalTweenGroup } from "../../../../animation/global-tween-group";
 import { GameLoop } from "../../../../game-loop/game-loop";
 import { BattleSceneViewProps } from "../props";
 import { tracking } from "./tracking";
@@ -21,7 +20,7 @@ export function onGameLoop(props: BattleSceneViewProps, action: GameLoop) {
     renderer,
     safeAreaInset,
   } = props;
-  TWEEN.update(action.time);
+  GlobalTweenGroup.update(action.time);
 
   updateTD.next({
     type: "Update",

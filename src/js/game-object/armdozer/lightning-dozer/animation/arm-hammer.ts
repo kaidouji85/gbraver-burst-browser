@@ -1,6 +1,5 @@
 import { all } from "../../../../animation/all";
 import { Animate } from "../../../../animation/animate";
-import { onStart } from "../../../../animation/on-start";
 import { tween } from "../../../../animation/tween";
 import { LightningDozerAnimationProps } from "./animation-props";
 
@@ -12,10 +11,11 @@ import { LightningDozerAnimationProps } from "./animation-props";
 export function armHammer(props: LightningDozerAnimationProps): Animate {
   const { model } = props;
   return all(
-    onStart(() => {
-      model.animation.type = "HM_ATTACK";
-      model.animation.frame = 0;
-    }).chain(
+    tween(model.animation, (t) =>
+      t.to({ frame: 0 }, 0).onStart(() => {
+        model.animation.type = "HM_ATTACK";
+      }),
+    ).chain(
       tween(model.animation, (t) =>
         t.to(
           {

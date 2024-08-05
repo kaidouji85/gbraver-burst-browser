@@ -18,6 +18,8 @@ const actionType = "AccountDeleteConsent";
 /** アカウント削除同意時のイベントリスナーコンテナ */
 export const accountDeleteConsentContainer = {
   [actionType]: (props: GameProps, action: GameAction) => {
-    action.type === actionType && onAccountDeleteConsent(props);
+    if (action.type === actionType) {
+      onAccountDeleteConsent(props);
+    }
   },
 };

@@ -43,6 +43,8 @@ const actionType = "ConfigChangeComplete";
 /** 設定変更完了時のイベントリスナーコンテナ */
 export const configChangeCompleteContainer = {
   [actionType]: (props: GameProps, action: GameAction) => {
-    action.type === actionType && onConfigChangeComplete(props, action);
+    if (action.type === actionType) {
+      onConfigChangeComplete(props, action);
+    }
   },
 };

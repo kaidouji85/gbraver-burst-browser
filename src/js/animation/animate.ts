@@ -1,6 +1,7 @@
-import * as TWEEN from "@tweenjs/tween.js";
+import { Group } from "@tweenjs/tween.js";
 
-import { scaleTweenDuration } from "./duration";
+import { GBTween } from "./gb-tween";
+import { GlobalTweenGroup } from "./global-tween-group";
 
 /**
  * アニメーション
@@ -51,9 +52,14 @@ import { scaleTweenDuration } from "./duration";
  */
 export class Animate {
   /* eslint-disable @typescript-eslint/no-explicit-any */
-  _start: TWEEN.Tween<any>;
-  _end: TWEEN.Tween<any>;
+  /** 開始Tween */
+  _start: GBTween<any>;
+  /** 終了Tween */
+  _end: GBTween<any>;
+  /** このアニメーションが保持するすべてのTween（_start、_endを含む）*/
+  _tweens: GBTween<any>[];
   /* eslint-enable */
+  /** 全体の再生時間 */
   _time: number;
 
   /**
@@ -63,19 +69,41 @@ export class Animate {
    * @param end 連続したTweenの最後
    * @param time 全体の再生時間
    */
+
   /* eslint-disable @typescript-eslint/no-explicit-any */
-  constructor(start: TWEEN.Tween<any>, end: TWEEN.Tween<any>, time: number) {
+  constructor(
+    start: GBTween<any>,
+    end: GBTween<any>,
+    tweens: GBTween<any>[],
+    time: number,
+  ) {
     /* eslint-enable */
     this._start = start;
     this._end = end;
+    this._tweens = tweens;
     this._time = time;
   }
 
-  /** アニメーションを再生する */
-  play(): Promise<void> {
+  /**
+   * アニメーションを再生する
+   * @param group アニメーショングループ
+   * @returns アニメーション再生完了後に呼び出されるPromise
+   */
+  play(group?: Group): Promise<void> {
+    const targetGroup = group ?? GlobalTweenGroup;
+    this._tweens.forEach((tween) => {
+      targetGroup.add(tween);
+      tween.onComplete(() => {
+        targetGroup.remove(tween);
+        tween.getChainedTweens().forEach((chainedTween) => {
+          // chain先のTweenを確実にアップデートするために、Groupに追加している
+          // （Group.updateでは同メソッド実行中に追加されたTweenはアップデートされる）
+          targetGroup.add(chainedTween);
+        });
+      });
+    });
     return new Promise((resolve) => {
       this._start.start();
-
       this._end.onComplete(() => {
         resolve();
       });
@@ -84,12 +112,22 @@ export class Animate {
 
   /**
    * アニメーションを無限ループ再生する
-   * @param time 再生開始時間
+   * @param group アニメーショングループ
    */
-  loop(time?: number): void {
+  loop(group?: Group): void {
+    const targetGroup = group ?? GlobalTweenGroup;
+    this._tweens.forEach((tween) => {
+      targetGroup.add(tween);
+      tween.onComplete(() => {
+        tween.getChainedTweens().forEach((chainedTween) => {
+          // chain先のTweenを確実にアップデートするために、Groupに追加している
+          // （Group.updateでは同メソッド実行中に追加されたTweenはアップデートされる）
+          targetGroup.add(chainedTween);
+        });
+      });
+    });
     this._end.chain(this._start);
-
-    this._start.start(time);
+    this._start.start();
   }
 
   /**
@@ -98,13 +136,15 @@ export class Animate {
    * 後続アニメーションは複数可能だが、nextが最終要素として扱われる
    *
    * @param next 結合後に最終用として扱われる後続アニメーション
-   * @param pararells 後続アニメーション
+   * @param parallels 後続アニメーション
    * @returns 結合後アニメーション
    */
-  chain(next: Animate, ...pararells: Animate[]): Animate {
-    const pararellTweens = pararells.map((v) => v._start);
+  chain(next: Animate, ...parallels: Animate[]): Animate {
+    const parallelStartTweens = parallels.map((v) => v._start);
+    this._end.chain(next._start, ...parallelStartTweens);
 
-    this._end.chain(next._start, ...pararellTweens);
+    const parallelAllTweens = parallels.flatMap((a) => a._tweens);
+    this._tweens = [...this._tweens, ...next._tweens, ...parallelAllTweens];
 
     this._end = next._end;
     this._time += next._time;
@@ -119,7 +159,11 @@ export class Animate {
    */
   timeScale(scale: number): Animate {
     this._time = this._time * scale;
-    scaleTweenDuration(this._start, scale);
+    this._tweens.forEach((tween) => {
+      /* eslint-disable @typescript-eslint/no-explicit-any */
+      (tween as any)._duration = (tween as any)._duration * scale;
+      /* eslint-enable */
+    });
     return this;
   }
 }

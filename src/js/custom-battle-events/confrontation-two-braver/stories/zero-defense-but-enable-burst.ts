@@ -5,7 +5,7 @@ import { invisibleAllMessageWindows } from "../../invisible-all-message-windows"
 import { scrollLeftMessages } from "../../scroll-messages";
 
 /**
- * バッテリーが使えるのに0防御した場合のストーリー
+ * バーストが使えるのに0防御した場合のストーリー
  * @param props イベントプロパティ
  * @returns ストーリーが完了したら発火するPromise
  */

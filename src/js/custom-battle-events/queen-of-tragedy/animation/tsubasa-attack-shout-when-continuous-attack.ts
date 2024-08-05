@@ -11,5 +11,5 @@ export const tsubasaAttackShoutWhenContinuousAttack = (
   props: Readonly<CustomBattleEventProps>,
 ) =>
   onStart(() => {
-    enemyPilotOnlyShout(props, "Tsubasa", `これでどうだ ユウヤ`);
+    enemyPilotOnlyShout(props, "Tsubasa", `これが本命だ ユウヤ`);
   });

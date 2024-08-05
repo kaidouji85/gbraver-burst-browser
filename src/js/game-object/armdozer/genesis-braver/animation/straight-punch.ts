@@ -1,5 +1,4 @@
 import { Animate } from "../../../../animation/animate";
-import { onStart } from "../../../../animation/on-start";
 import { tween } from "../../../../animation/tween";
 import { GenesisBraverAnimationProps } from "./animation-props";
 
@@ -10,10 +9,11 @@ import { GenesisBraverAnimationProps } from "./animation-props";
  */
 export function straightPunch(props: GenesisBraverAnimationProps): Animate {
   const { model } = props;
-  return onStart(() => {
-    model.animation.type = "SP_ATTACK";
-    model.animation.frame = 0;
-  }).chain(
+  return tween(model.animation, (t) =>
+    t.to({ frame: 0 }, 0).onStart(() => {
+      model.animation.type = "SP_ATTACK";
+    }),
+  ).chain(
     tween(model.animation, (t) =>
       t.to(
         {

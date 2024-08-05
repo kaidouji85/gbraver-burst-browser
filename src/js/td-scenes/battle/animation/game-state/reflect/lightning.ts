@@ -5,7 +5,6 @@ import type { ReflectAnimationParam } from "./animation-param";
 
 /**
  * 電撃バリア
- *
  * @param param パラメータ
  * @returns アニメーション
  */
@@ -27,7 +26,6 @@ export function lightning(param: ReflectAnimationParam): Animate {
 
 /**
  * 電撃バリア 死亡
- *
  * @param param パラメータ
  * @returns アニメーション
  */
@@ -35,7 +33,7 @@ export function deathLightning(param: ReflectAnimationParam): Animate {
   return all(
     param.reflecting.hud.resultIndicator
       .slideIn()
-      .chain(delay(500))
+      .chain(delay(700))
       .chain(param.reflecting.hud.resultIndicator.moveToEdge()),
     delay(700).chain(param.damaged.hud.resultIndicator.hidden()),
     param.damaged.td.hitMark.lightning.popUp(),

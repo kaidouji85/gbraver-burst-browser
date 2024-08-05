@@ -15,15 +15,15 @@ import { QueenOfTragedyProps } from "../props";
 export async function tsubasaVictory(
   props: CustomBattleEventProps & QueenOfTragedyProps,
 ) {
-  activeRightMessageWindowWithFace(props, "Yuuya");
-  await scrollRightMessages(props, [["ユウヤ", `「ありえない この俺が」`]]);
-  props.view.dom.rightMessageWindow.darken();
-
   activeLeftMessageWindowWithFace(props, "Tsubasa");
   await scrollLeftMessages(props, [
     ["ツバサ", `「ユウヤ 去年の${wbr}雪辱は${wbr}果たしたぞ」`],
   ]);
   props.view.dom.leftMessageWindow.darken();
+
+  activeRightMessageWindowWithFace(props, "Yuuya");
+  await scrollRightMessages(props, [["ユウヤ", `「ありえない この俺が」`]]);
+  props.view.dom.rightMessageWindow.darken();
 
   invisibleAllMessageWindows(props);
 }

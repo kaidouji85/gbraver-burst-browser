@@ -39,6 +39,8 @@ const actionType = "SelectEpisode";
 /** エピソード選択時のイベントリスナーコンテナ */
 export const selectEpisodeContainer = {
   [actionType]: (props: GameProps, action: GameAction) => {
-    action.type === actionType && onSelectEpisode(props, action);
+    if (action.type === actionType) {
+      onSelectEpisode(props, action);
+    }
   },
 };

@@ -12,12 +12,11 @@ import { Animate } from "../../../../../../animation/animate";
 import { delay, empty } from "../../../../../../animation/delay";
 import { ShinBraver } from "../../../../../../game-object/armdozer/shin-braver/shin-braver";
 import { TDCamera } from "../../../../../../game-object/camera/td";
-import { dolly, toInitial, track } from "../../../td-camera";
-import type { BattleAnimationParamX } from "../animation-param";
+import { toInitial } from "../../../td-camera";
+import { BattleAnimationParamX } from "../animation-param";
 
 /**
  * シンブレイバー 戦闘アニメーション パラメータ
- *
  * @template RESULT 戦闘結果
  */
 export type ShinBraverBattle<RESULT extends BattleResult> =
@@ -31,9 +30,11 @@ export type ShinBraverBattle<RESULT extends BattleResult> =
  */
 function focusToAttacker(camera: TDCamera, attacker: ShinBraver): Animate {
   const duration = 400;
+  const x = attacker.getObject3D().position.x * 0.6;
+  const z = "-30";
   return all(
-    track(camera, attacker.getObject3D().position.x * 0.6, duration),
-    dolly(camera, "-30", duration),
+    camera.move({ x, z }, duration),
+    camera.lookAt({ x, z }, duration),
   );
 }
 
