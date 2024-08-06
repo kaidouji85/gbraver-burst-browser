@@ -25,7 +25,7 @@ type Result = Exist | NotExist;
  * @param defenderBattery 防御側が出すバッテリー
  * @returns 計算結果
  */
-export function getMinimumBatteryToGuard(
+export function getMinimumGuardBattery(
   attacker: PlayerState,
   defender: PlayerState,
   defenderBattery: number,

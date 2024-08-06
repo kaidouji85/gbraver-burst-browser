@@ -4,7 +4,7 @@ import {
   PlayerState,
 } from "gbraver-burst-core";
 
-import { getMinimumBatteryToGuard } from "../../../src/js/npc/get-minimum-battery-to-guard";
+import { getMinimumGuardBattery } from "../../../src/js/npc/get-minimum-guard-battery";
 
 /** 攻撃側プレイヤー */
 const attacker: PlayerState = {
@@ -32,14 +32,14 @@ const defender: PlayerState = {
 };
 
 test("ガードする最小バッテリーを正しく計算できる", () => {
-  expect(getMinimumBatteryToGuard(attacker, defender, 2)).toEqual({
+  expect(getMinimumGuardBattery(attacker, defender, 2)).toEqual({
     isExist: true,
     value: 2,
   });
 });
 
 test("ガードできない場合はisExist=falseを返す", () => {
-  expect(getMinimumBatteryToGuard(attacker, defender, 5)).toEqual({
+  expect(getMinimumGuardBattery(attacker, defender, 5)).toEqual({
     isExist: false,
   });
 });
