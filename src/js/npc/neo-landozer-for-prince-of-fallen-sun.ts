@@ -4,9 +4,9 @@ import {
   Command,
   PilotIds,
   Pilots,
-  totalCorrectPower,
 } from "gbraver-burst-core";
 
+import { canBeatDown } from "./can-beat-down";
 import { findBatteryCommand } from "./find-battery-command";
 import { findBurstCommand } from "./find-burst-command";
 import { findPilotSkillCommand } from "./find-pilot-skill-command";
@@ -29,6 +29,7 @@ const ZERO_BATTERY: Command = {
  */
 const getAttackRoutineCondition = (data: SimpleRoutineData) => ({
   battery5: findBatteryCommand(5, data.commands),
+  fullBattery: findBatteryCommand(data.enemy.armdozer.battery, data.commands),
   burst: findBurstCommand(data.commands),
   pilot: findPilotSkillCommand(data.commands),
   minimumBeatDownBattery: getMinimumBeatDownBattery(
@@ -41,7 +42,12 @@ const getAttackRoutineCondition = (data: SimpleRoutineData) => ({
     data.player,
     data.player.armdozer.battery,
   ),
-  hasCorrectPower: 0 < totalCorrectPower(data.enemy.armdozer.effects),
+  canBeatDownOnFullBattery: canBeatDown(
+    data.enemy,
+    data.enemy.armdozer.battery,
+    data.player,
+    data.player.armdozer.battery,
+  ),
 });
 
 /**
@@ -52,11 +58,12 @@ const attackRoutine: SimpleRoutine = (data) => {
   const { player } = data;
   const {
     battery5,
+    fullBattery,
     burst,
     pilot,
     minimumBeatDownBattery,
     minimumBatteryToHitOrCritical,
-    hasCorrectPower,
+    canBeatDownOnFullBattery,
   } = getAttackRoutineCondition(data);
 
   let selectedCommand: Command = ZERO_BATTERY;
@@ -64,8 +71,8 @@ const attackRoutine: SimpleRoutine = (data) => {
     selectedCommand = pilot;
   } else if (player.armdozer.battery <= 4 && burst) {
     selectedCommand = burst;
-  } else if (player.armdozer.battery <= 4 && battery5 && hasCorrectPower) {
-    selectedCommand = battery5;
+  } else if (canBeatDownOnFullBattery && fullBattery) {
+    selectedCommand = fullBattery;
   } else if (battery5 && burst) {
     selectedCommand = battery5;
   } else if (minimumBeatDownBattery.isExist) {
