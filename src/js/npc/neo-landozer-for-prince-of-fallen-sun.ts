@@ -9,7 +9,6 @@ import {
 import { findBatteryCommand } from "./find-battery-command";
 import { findBurstCommand } from "./find-burst-command";
 import { findPilotSkillCommand } from "./find-pilot-skill-command";
-import { getMinimumBatteryToHitOrCritical } from "./get-minimum-battery-to-hit-or-critical";
 import { getMinimumBeatDownBattery } from "./get-minimum-beat-down-battery";
 import { getMinimumSurvivableBattery } from "./get-minimum-survivable-battery";
 import { NPC } from "./npc";
@@ -27,15 +26,10 @@ const ZERO_BATTERY: Command = {
  * @returns 攻撃ルーチンの条件オブジェクト
  */
 const getAttackRoutineCondition = (data: SimpleRoutineData) => ({
-  battery5: findBatteryCommand(5, data.commands),
+  battery1: findBatteryCommand(1, data.commands),
   burst: findBurstCommand(data.commands),
   pilot: findPilotSkillCommand(data.commands),
   minimumBeatDownBattery: getMinimumBeatDownBattery(
-    data.enemy,
-    data.player,
-    data.player.armdozer.battery,
-  ),
-  minimumBatteryToHitOrCritical: getMinimumBatteryToHitOrCritical(
     data.enemy,
     data.player,
     data.player.armdozer.battery,
@@ -48,12 +42,8 @@ const getAttackRoutineCondition = (data: SimpleRoutineData) => ({
  */
 const attackRoutine: SimpleRoutine = (data) => {
   const { player } = data;
-  const {
-    burst,
-    pilot,
-    minimumBeatDownBattery,
-    minimumBatteryToHitOrCritical,
-  } = getAttackRoutineCondition(data);
+  const { battery1, burst, pilot, minimumBeatDownBattery } =
+    getAttackRoutineCondition(data);
 
   let selectedCommand: Command = ZERO_BATTERY;
   if (pilot) {
@@ -65,11 +55,8 @@ const attackRoutine: SimpleRoutine = (data) => {
       type: "BATTERY_COMMAND",
       battery: minimumBeatDownBattery.value,
     };
-  } else if (minimumBatteryToHitOrCritical.isExist) {
-    selectedCommand = {
-      type: "BATTERY_COMMAND",
-      battery: minimumBatteryToHitOrCritical.value,
-    };
+  } else if (burst && battery1) {
+    selectedCommand = battery1;
   }
 
   return selectedCommand;
@@ -90,7 +77,6 @@ const getDefenseRoutineCondition = (data: SimpleRoutineData) => ({
     data.player,
     data.player.armdozer.battery,
   ),
-  isFullBattery: data.enemy.armdozer.battery === data.enemy.armdozer.maxBattery,
 });
 
 /**
@@ -98,14 +84,13 @@ const getDefenseRoutineCondition = (data: SimpleRoutineData) => ({
  * 防御ルーチン
  */
 const defenseRoutine: SimpleRoutine = (data) => {
-  const { battery1, battery5, burst, minimumSurvivableBattery, isFullBattery } =
+  const { enemy } = data;
+  const { battery1, battery5, burst, minimumSurvivableBattery } =
     getDefenseRoutineCondition(data);
 
   let selectedCommand: Command = battery1 ?? ZERO_BATTERY;
-  if (isFullBattery && burst && battery5) {
+  if (enemy.armdozer.battery === 5 && burst && battery5) {
     selectedCommand = battery5;
-  } else if (data.enemy.armdozer.battery === 0 && burst) {
-    selectedCommand = burst;
   } else if (minimumSurvivableBattery.isExist) {
     selectedCommand = {
       type: "BATTERY_COMMAND",
