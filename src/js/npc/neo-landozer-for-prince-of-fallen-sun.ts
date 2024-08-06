@@ -4,6 +4,7 @@ import {
   Command,
   PilotIds,
   Pilots,
+  totalCorrectPower,
 } from "gbraver-burst-core";
 
 import { findBatteryCommand } from "./find-battery-command";
@@ -40,6 +41,7 @@ const getAttackRoutineCondition = (data: SimpleRoutineData) => ({
     data.player,
     data.player.armdozer.battery,
   ),
+  hasCorrectPower: 0 < totalCorrectPower(data.enemy.armdozer.effects),
 });
 
 /**
@@ -47,17 +49,23 @@ const getAttackRoutineCondition = (data: SimpleRoutineData) => ({
  * 攻撃ルーチン
  */
 const attackRoutine: SimpleRoutine = (data) => {
+  const { player } = data;
   const {
     battery5,
     burst,
     pilot,
     minimumBeatDownBattery,
     minimumBatteryToHitOrCritical,
+    hasCorrectPower,
   } = getAttackRoutineCondition(data);
 
   let selectedCommand: Command = ZERO_BATTERY;
   if (pilot) {
     selectedCommand = pilot;
+  } else if (player.armdozer.battery <= 4 && burst) {
+    selectedCommand = burst;
+  } else if (player.armdozer.battery <= 4 && battery5 && hasCorrectPower) {
+    selectedCommand = battery5;
   } else if (battery5 && burst) {
     selectedCommand = battery5;
   } else if (minimumBeatDownBattery.isExist) {
