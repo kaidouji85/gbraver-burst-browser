@@ -45,7 +45,7 @@ test("クリティカルする最小バッテリーを正しく計算できる",
   });
 });
 
-test("ヒット、クリティカルできない場合はnullを返す", () => {
+test("ヒット、クリティカルできない場合はisExist=falseを返す", () => {
   expect(getMinimumBatteryToHitOrCritical(attacker, defender, 5)).toEqual({
     isExist: false,
   });

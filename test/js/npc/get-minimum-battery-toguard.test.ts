@@ -4,7 +4,7 @@ import {
   PlayerState,
 } from "gbraver-burst-core";
 
-import { getMinimumBeatDownBattery } from "../../../src/js/npc/get-minimum-beat-down-battery";
+import { getMinimumBatteryToGuard } from "../../../src/js/npc/get-minimum-battery-to-guard";
 
 /** 攻撃側プレイヤー */
 const attacker: PlayerState = {
@@ -31,15 +31,15 @@ const defender: PlayerState = {
   },
 };
 
-test("相手を倒せる最小限のバッテリーを正しく計算できる", () => {
-  expect(getMinimumBeatDownBattery(attacker, defender, 2)).toEqual({
+test("ガードする最小バッテリーを正しく計算できる", () => {
+  expect(getMinimumBatteryToGuard(attacker, defender, 2)).toEqual({
     isExist: true,
-    value: 4,
+    value: 2,
   });
 });
 
-test("相手を倒せない場合はisExist=falseを返す", () => {
-  expect(getMinimumBeatDownBattery(attacker, defender, 5)).toEqual({
+test("ガードできない場合はisExist=falseを返す", () => {
+  expect(getMinimumBatteryToGuard(attacker, defender, 5)).toEqual({
     isExist: false,
   });
 });
