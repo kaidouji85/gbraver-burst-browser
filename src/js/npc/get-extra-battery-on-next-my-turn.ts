@@ -9,5 +9,5 @@ export function getExtraBatteryOnNextMyTurn(player: PlayerState): number {
   const { battery, maxBattery } = player.armdozer;
   const nextTurnRecoverBattery =
     recoverBatteryOnTurnStart(player).recoverBattery;
-  return battery + nextTurnRecoverBattery - maxBattery;
+  return Math.max(battery + nextTurnRecoverBattery - maxBattery, 0);
 }
