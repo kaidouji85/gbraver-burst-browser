@@ -110,6 +110,8 @@ const defenseRoutine: SimpleRoutine = (data) => {
   let selectedCommand: Command = battery1 ?? ZERO_BATTERY;
   if (enemy.armdozer.battery === 5 && burst && battery5) {
     selectedCommand = battery5;
+  } else if (burst && fullBattery) {
+    selectedCommand = fullBattery;
   } else if (minimumSurvivableBattery.isExist) {
     selectedCommand = {
       type: "BATTERY_COMMAND",
