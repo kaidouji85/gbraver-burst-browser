@@ -90,15 +90,15 @@ export async function introduction(props: CustomBattleEventProps) {
 
   await refreshConversation(props);
 
-  activeLeftMessageWindowWithFace(props, "Raito");
-  props.view.dom.leftMessageWindow.messages(["ライト", "「姿勢を正して"]);
+  activeRightMessageWindowWithFace(props, "Raito");
+  props.view.dom.rightMessageWindow.messages(["ライト", "「姿勢を正して"]);
   await synchronizedUpright(props).play();
-  props.view.dom.leftMessageWindow.nextMessageIconVisible(true);
+  props.view.dom.rightMessageWindow.nextMessageIconVisible(true);
   await waitUntilWindowPush(props);
   props.se.play(props.sounds.sendMessage);
-  props.view.dom.leftMessageWindow.nextMessageIconVisible(false);
-  props.view.dom.leftMessageWindow.scrollUp();
-  props.view.dom.leftMessageWindow.messages(["礼！！」"]);
+  props.view.dom.rightMessageWindow.nextMessageIconVisible(false);
+  props.view.dom.rightMessageWindow.scrollUp();
+  props.view.dom.rightMessageWindow.messages(["礼！！」"]);
   await delay(500).play();
 
   await refreshConversation(props);
