@@ -26,23 +26,27 @@ import { yoroshikuOnegaiShimasu } from "../../yoroshiku-onegai-shimasu";
 export async function introduction(props: CustomBattleEventProps) {
   activeRightMessageWindowWithFace(props, "Yuuya");
   await scrollRightMessages(props, [
-    ["ユウヤ", `「久しぶりだなライト`],
-    [`積もる話もあるだろうが`],
-    [`ここはパイロット同士 試合で語ろうじゃないか」`],
+    ["ユウヤ", `「久しぶり${wbr}だな${wbr}ライト`],
+    [`積もる話も${wbr}あるだろうが`],
+    [`ここは${wbr}パイロット同士 試合で${wbr}語ろうじゃ${wbr}ないか」`],
   ]);
   props.view.dom.rightMessageWindow.darken();
 
   activeLeftMessageWindowWithFace(props, "Raito");
   await scrollLeftMessages(props, [
-    ["ライト", `「悪いがお断りや`],
-    [`本番前にワイの手の内を見してたまるかいな」`],
+    ["ライト", `「悪いが${wbr}お断りや`],
+    [
+      `本番前に${wbr}ワイの${wbr}手の内を${wbr}見して${wbr}たまる${wbr}かいな」`,
+    ],
   ]);
   props.view.dom.leftMessageWindow.darken();
 
   activeRightMessageWindowWithFace(props, "Yuuya");
   await scrollRightMessages(props, [
     ["ユウヤ", `「つれないな`],
-    [`かつては同じチームで切磋琢磨してきた仲じゃないか」`],
+    [
+      `かつては${wbr}同じチームで${wbr}切磋琢磨${wbr}してきた仲${wbr}じゃないか」`,
+    ],
   ]);
   props.view.dom.rightMessageWindow.darken();
 
@@ -58,24 +62,29 @@ export async function introduction(props: CustomBattleEventProps) {
   activeRightMessageWindowWithFace(props, "Raito");
   await scrollRightMessages(props, [
     ["ライト", `「ダメや！！`],
-    [`ユウヤの強さの根源は 相手の戦術を読み切る力や`],
-    [`たとえ勝ったとしても`],
-    [`大会前に手の内を明かすなんて自殺行為や」`],
+    [
+      `ユウヤの${wbr}強さの${wbr}根源は 相手の${wbr}戦術を${wbr}読み切る${wbr}力や`,
+    ],
+    [`たとえ${wbr}勝ったと${wbr}しても`],
+    [`大会前に${wbr}手の内を${wbr}明かすなんて${wbr}自殺行為や」`],
   ]);
   props.view.dom.rightMessageWindow.darken();
 
   activeLeftMessageWindowWithFace(props, "Gai");
   await scrollLeftMessages(props, [
-    ["ガイ", `「それでも俺は逃げる訳にはいかないんです`],
-    [`巨大ロボ創業家の人間として」`],
+    [
+      "ガイ",
+      `「それでも${wbr}俺は${wbr}逃げる訳には${wbr}いかないん${wbr}です`,
+    ],
+    [`巨大ロボ${wbr}創業家の${wbr}人間として」`],
   ]);
   props.view.dom.leftMessageWindow.darken();
 
   activeRightMessageWindowWithFace(props, "Raito");
   await scrollRightMessages(props, [
     ["ライト", `「……`],
-    [`あんたん覚悟はわかった`],
-    [`ガイ 存分に暴れて来いや」`],
+    [`あんたん${wbr}覚悟は${wbr}わかった`],
+    [`ガイ 存分に${wbr}暴れて${wbr}来いや」`],
   ]);
   props.view.dom.rightMessageWindow.darken();
 
