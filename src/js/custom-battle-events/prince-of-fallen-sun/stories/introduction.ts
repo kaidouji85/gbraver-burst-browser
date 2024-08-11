@@ -26,22 +26,23 @@ import { yoroshikuOnegaiShimasu } from "../../yoroshiku-onegai-shimasu";
 export async function introduction(props: CustomBattleEventProps) {
   activeRightMessageWindowWithFace(props, "Yuuya");
   await scrollRightMessages(props, [
-    ["ユウヤ", `「せっかくだ${wbr}ライト`],
-    [`久しぶりに${wbr}旧交でも${wbr}温めないか」`],
+    ["ユウヤ", `「久しぶりだなライト`],
+    [`積もる話もあるだろうが`],
+    [`ここはパイロット同士 試合で語らないか」`]
   ]);
   props.view.dom.rightMessageWindow.darken();
 
   activeLeftMessageWindowWithFace(props, "Raito");
   await scrollLeftMessages(props, [
-    ["ライト", `「すまんな`],
-    [`ライトニングドーザが${wbr}整備中や」`],
+    ["ライト", `「悪いがお断りや`],
+    [`本番前にワイの手の内を見してたまるかいな」`]
   ]);
   props.view.dom.leftMessageWindow.darken();
 
   activeRightMessageWindowWithFace(props, "Yuuya");
   await scrollRightMessages(props, [
-    ["ユウヤ", `「つれないなぁ`],
-    [`かつての${wbr}チームメイト${wbr}じゃないか」`],
+    ["ユウヤ", `「つれないな`],
+    [`かつては同じチームで切磋琢磨してきた仲じゃないか」`],
   ]);
   props.view.dom.rightMessageWindow.darken();
 
@@ -52,11 +53,10 @@ export async function introduction(props: CustomBattleEventProps) {
     ["ガイ", `「ライト先輩`],
     [`ここは${wbr}俺に${wbr}やらせて${wbr}ください」`],
   ]);
+  props.view.dom.leftMessageWindow.darken();
 
-  await refreshConversation(props);
-
-  activeLeftMessageWindowWithFace(props, "Raito");
-  await scrollLeftMessages(props, [
+  activeRightMessageWindowWithFace(props, "Raito");
+  await scrollRightMessages(props, [
     ["ライト", `「監督から許可が出た`],
     [`ガイ この前${wbr}教えた${wbr}通りに${wbr}やるんやで」`],
   ]);
@@ -64,8 +64,8 @@ export async function introduction(props: CustomBattleEventProps) {
   await refreshConversation(props);
 
   await refreshConversation(props);
-  activeLeftMessageWindowWithFace(props, "Raito");
-  props.view.dom.leftMessageWindow.messages(["ライト", "「姿勢を正して"]);
+  activeRightMessageWindowWithFace(props, "Raito");
+  props.view.dom.rightMessageWindow.messages(["ライト", "「姿勢を正して"]);
   await synchronizedUpright(props).play();
   props.view.dom.rightMessageWindow.nextMessageIconVisible(true);
   await waitUntilWindowPush(props);
