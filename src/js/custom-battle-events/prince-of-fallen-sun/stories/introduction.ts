@@ -83,7 +83,8 @@ export async function introduction(props: CustomBattleEventProps) {
   activeRightMessageWindowWithFace(props, "Raito");
   await scrollRightMessages(props, [
     ["ライト", `「……`],
-    [`あんたん${wbr}覚悟は${wbr}わかった`],
+    [`ジブンにも${wbr}譲れない${wbr}ものが${wbr}あるん${wbr}やな`],
+    [`わかった 監督には${wbr}ワイから${wbr}話を${wbr}つける`],
     [`ガイ 存分に${wbr}暴れて${wbr}来いや」`],
   ]);
   props.view.dom.rightMessageWindow.darken();
