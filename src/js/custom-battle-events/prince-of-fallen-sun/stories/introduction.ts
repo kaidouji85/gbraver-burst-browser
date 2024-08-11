@@ -53,7 +53,7 @@ export async function introduction(props: CustomBattleEventProps) {
     [`ここは${wbr}俺に${wbr}やらせて${wbr}ください」`],
   ]);
 
-  await refreshConversation(props, 400);
+  await refreshConversation(props);
 
   activeLeftMessageWindowWithFace(props, "Raito");
   await scrollLeftMessages(props, [
@@ -64,8 +64,8 @@ export async function introduction(props: CustomBattleEventProps) {
   await refreshConversation(props);
 
   await refreshConversation(props);
-  activeRightMessageWindowWithFace(props, "Raito");
-  props.view.dom.rightMessageWindow.messages(["ライト", "「姿勢を正して"]);
+  activeLeftMessageWindowWithFace(props, "Raito");
+  props.view.dom.leftMessageWindow.messages(["ライト", "「姿勢を正して"]);
   await synchronizedUpright(props).play();
   props.view.dom.rightMessageWindow.nextMessageIconVisible(true);
   await waitUntilWindowPush(props);

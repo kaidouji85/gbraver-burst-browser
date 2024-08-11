@@ -3,7 +3,7 @@ import {
   LastState,
 } from "../../td-scenes/battle/custom-battle-event";
 import { EmptyCustomBattleEvent } from "../empty-custom-battle-event";
-import { beforeLastState } from "./procedure/before-last-state/before-last-state";
+import { beforeLastState } from "./procedure/before-last-state";
 import { createPrinceOfFallenSunProps } from "./procedure/create-prince-of-fallen-sun-props";
 import { PrinceOfFallenSunProps } from "./props";
 
