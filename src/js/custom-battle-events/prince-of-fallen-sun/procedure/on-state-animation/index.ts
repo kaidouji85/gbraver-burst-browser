@@ -1,7 +1,9 @@
 import { Animate } from "../../../../animation/animate";
 import { empty } from "../../../../animation/delay";
-import { CustomBattleEventProps } from "../../../../td-scenes/battle/custom-battle-event";
+import { CustomStateAnimation } from "../../../../td-scenes/battle/custom-battle-event";
+import { getAnimationIfConditionMet } from "../../../get-animation-if-conditional-met";
 import { PrinceOfFallenSunProps } from "../../props";
+import { yuuyaFirstAttack } from "./yuuya-first-attack";
 
 /**
  * カスタムステートアニメーション
@@ -9,7 +11,8 @@ import { PrinceOfFallenSunProps } from "../../props";
  * @returns アニメーション
  */
 export function onStateAnimation(
-  props: CustomBattleEventProps & PrinceOfFallenSunProps,
+  props: CustomStateAnimation & PrinceOfFallenSunProps,
 ): Animate {
-  return empty();
+  const conditionalAnimations = [yuuyaFirstAttack];
+  return getAnimationIfConditionMet(props, conditionalAnimations) ?? empty();
 }
