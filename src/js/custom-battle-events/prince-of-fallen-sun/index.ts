@@ -1,10 +1,13 @@
+import { Animate } from "../../animation/animate";
 import {
   CustomBattleEvent,
+  CustomStateAnimation,
   LastState,
 } from "../../td-scenes/battle/custom-battle-event";
 import { EmptyCustomBattleEvent } from "../empty-custom-battle-event";
 import { beforeLastState } from "./procedure/before-last-state";
 import { createPrinceOfFallenSunProps } from "./procedure/create-prince-of-fallen-sun-props";
+import { onStateAnimation } from "./procedure/on-state-animation";
 import { PrinceOfFallenSunProps } from "./props";
 
 /** 落日の王子 イベント */
@@ -26,6 +29,11 @@ class PrinceOfFallenSun extends EmptyCustomBattleEvent {
       ...props,
       ...this.#eventProps,
     });
+  }
+
+  /** @override */
+  onStateAnimation(props: CustomStateAnimation): Animate {
+    return onStateAnimation({ ...props, ...this.#eventProps });
   }
 }
 
