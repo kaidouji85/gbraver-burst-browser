@@ -73,23 +73,23 @@ export async function introduction(props: CustomBattleEventProps) {
 
   activeRightMessageWindowWithFace(props, "Raito");
   await scrollRightMessages(props, [
-    ["ライト", `「……あんたん覚悟はわかった`],
+    ["ライト", `「……`],
+    [`あんたん覚悟はわかった`],
     [`ガイ 存分に暴れて来いや」`],
   ]);
   props.view.dom.rightMessageWindow.darken();
 
   await refreshConversation(props);
 
-  await refreshConversation(props);
-  activeRightMessageWindowWithFace(props, "Raito");
-  props.view.dom.rightMessageWindow.messages(["ライト", "「姿勢を正して"]);
+  activeLeftMessageWindowWithFace(props, "Raito");
+  props.view.dom.leftMessageWindow.messages(["ライト", "「姿勢を正して"]);
   await synchronizedUpright(props).play();
-  props.view.dom.rightMessageWindow.nextMessageIconVisible(true);
+  props.view.dom.leftMessageWindow.nextMessageIconVisible(true);
   await waitUntilWindowPush(props);
   props.se.play(props.sounds.sendMessage);
-  props.view.dom.rightMessageWindow.nextMessageIconVisible(false);
-  props.view.dom.rightMessageWindow.scrollUp();
-  props.view.dom.rightMessageWindow.messages(["礼！！」"]);
+  props.view.dom.leftMessageWindow.nextMessageIconVisible(false);
+  props.view.dom.leftMessageWindow.scrollUp();
+  props.view.dom.leftMessageWindow.messages(["礼！！」"]);
   await delay(500).play();
 
   await refreshConversation(props);
