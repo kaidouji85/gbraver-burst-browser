@@ -28,14 +28,14 @@ export async function introduction(props: CustomBattleEventProps) {
   await scrollRightMessages(props, [
     ["ユウヤ", `「久しぶりだなライト`],
     [`積もる話もあるだろうが`],
-    [`ここはパイロット同士 試合で語らないか」`]
+    [`ここはパイロット同士 試合で語ろうじゃないか」`],
   ]);
   props.view.dom.rightMessageWindow.darken();
 
   activeLeftMessageWindowWithFace(props, "Raito");
   await scrollLeftMessages(props, [
     ["ライト", `「悪いがお断りや`],
-    [`本番前にワイの手の内を見してたまるかいな」`]
+    [`本番前にワイの手の内を見してたまるかいな」`],
   ]);
   props.view.dom.leftMessageWindow.darken();
 
@@ -57,9 +57,26 @@ export async function introduction(props: CustomBattleEventProps) {
 
   activeRightMessageWindowWithFace(props, "Raito");
   await scrollRightMessages(props, [
-    ["ライト", `「監督から許可が出た`],
-    [`ガイ この前${wbr}教えた${wbr}通りに${wbr}やるんやで」`],
+    ["ライト", `「ダメや！！`],
+    [`ユウヤの強さの根源は 相手の戦術を読み切る力や`],
+    [`たとえ勝ったとしても`],
+    [`大会前に手の内を明かすなんて自殺行為や」`],
   ]);
+  props.view.dom.rightMessageWindow.darken();
+
+  activeLeftMessageWindowWithFace(props, "Gai");
+  await scrollLeftMessages(props, [
+    ["ガイ", `「それでも俺は逃げる訳にはいかないんです`],
+    [`巨大ロボ創業家の人間として」`],
+  ]);
+  props.view.dom.leftMessageWindow.darken();
+
+  activeRightMessageWindowWithFace(props, "Raito");
+  await scrollRightMessages(props, [
+    ["ライト", `「……あんたん覚悟はわかった`],
+    [`ガイ 存分に暴れて来いや」`],
+  ]);
+  props.view.dom.rightMessageWindow.darken();
 
   await refreshConversation(props);
 
