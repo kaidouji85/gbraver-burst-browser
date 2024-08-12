@@ -4,17 +4,13 @@ import { CustomBattleEventProps } from "../../../td-scenes/battle/custom-battle-
 import { playerPilotOnlyShout } from "../../pilot-shout";
 
 /**
- * ユウヤ ファーストアタック 叫び2
+ * ユウヤ ファーストアタック 叫び
  * @param props イベントプロパティ
  * @returns アニメーション
  */
-export const yuuyaFirstAttackShout2 = (
+export const yuuyaFirstAttackShout = (
   props: Readonly<CustomBattleEventProps>,
 ) =>
   onStart(() => {
-    playerPilotOnlyShout(
-      props,
-      "Yuuya",
-      `面白い${wbr}展開に${wbr}なってきたな`,
-    );
+    playerPilotOnlyShout(props, "Yuuya", `これは${wbr}挨拶${wbr}代わりだ ガイ`);
   });
