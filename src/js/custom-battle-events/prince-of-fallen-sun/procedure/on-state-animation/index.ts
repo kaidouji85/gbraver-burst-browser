@@ -4,9 +4,9 @@ import { CustomStateAnimation } from "../../../../td-scenes/battle/custom-battle
 import { getAnimationIfConditionMet } from "../../../get-animation-if-conditional-met";
 import { invisibleShoutMessageWindowWhenTurnChange } from "../../../invisible-shout-message-window";
 import { PrinceOfFallenSunProps } from "../../props";
-import { yuuyaFirstAttack } from "./yuuya-first-attack";
 import { gaiBurst } from "./gai-burst";
 import { gaiPilotSkill } from "./gai-pilot-skill";
+import { yuuyaFirstAttack } from "./yuuya-first-attack";
 
 /**
  * カスタムステートアニメーション
