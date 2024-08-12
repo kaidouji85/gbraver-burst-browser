@@ -8,7 +8,9 @@ import { enemyPilotOnlyShout } from "../../pilot-shout";
  * @param props イベントプロパティ
  * @returns アニメーション
  */
-export const gaiBurstShoutWhenEnemy4OrLessBattery = (props: Readonly<CustomBattleEventProps>) =>
+export const gaiBurstShoutWhenEnemy4OrLessBattery = (
+  props: Readonly<CustomBattleEventProps>,
+) =>
   onStart(() => {
-    enemyPilotOnlyShout(props, "Gai", `勝負だ${wbr}Gブレイバー`);
+    enemyPilotOnlyShout(props, "Gai", `隙を${wbr}見せたな Gブレイバー`);
   });

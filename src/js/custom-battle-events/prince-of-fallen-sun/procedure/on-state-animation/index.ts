@@ -5,6 +5,8 @@ import { getAnimationIfConditionMet } from "../../../get-animation-if-conditiona
 import { invisibleShoutMessageWindowWhenTurnChange } from "../../../invisible-shout-message-window";
 import { PrinceOfFallenSunProps } from "../../props";
 import { yuuyaFirstAttack } from "./yuuya-first-attack";
+import { gaiBurst } from "./gai-burst";
+import { gaiPilotSkill } from "./gai-pilot-skill";
 
 /**
  * カスタムステートアニメーション
@@ -16,6 +18,8 @@ export function onStateAnimation(
 ): Animate {
   const conditionalAnimations = [
     yuuyaFirstAttack,
+    gaiPilotSkill,
+    gaiBurst,
     invisibleShoutMessageWindowWhenTurnChange,
   ];
   return getAnimationIfConditionMet(props, conditionalAnimations) ?? empty();
