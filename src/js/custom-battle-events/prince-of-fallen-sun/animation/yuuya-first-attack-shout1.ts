@@ -12,5 +12,5 @@ export const yuuyaFirstAttackShout1 = (
   props: Readonly<CustomBattleEventProps>,
 ) =>
   onStart(() => {
-    playerPilotOnlyShout(props, "Yuuya", `少し${wbr}予定は${wbr}狂ったが`);
+    playerPilotOnlyShout(props, "Yuuya", `これは${wbr}挨拶${wbr}代わりだ ガイ`);
   });

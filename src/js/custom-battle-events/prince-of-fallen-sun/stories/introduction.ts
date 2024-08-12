@@ -65,7 +65,9 @@ export async function introduction(props: CustomBattleEventProps) {
     [
       `ユウヤの${wbr}強さの${wbr}根源は 相手の${wbr}戦術を${wbr}読み切る${wbr}力`,
     ],
-    [`大会前に${wbr}手の内を${wbr}明かすなんて${wbr}自殺行為や」`],
+    [
+      `せやさかい${wbr}大会前に${wbr}手の内を${wbr}明かすなんて${wbr}自殺行為や」`,
+    ],
   ]);
   props.view.dom.rightMessageWindow.darken();
 
