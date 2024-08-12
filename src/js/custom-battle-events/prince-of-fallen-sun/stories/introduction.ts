@@ -63,10 +63,11 @@ export async function introduction(props: CustomBattleEventProps) {
   await scrollRightMessages(props, [
     ["ライト", `「ダメや！！`],
     [
-      `ユウヤの${wbr}強さの${wbr}根源は 相手の${wbr}戦術を${wbr}読み切る${wbr}力や`,
+      `ユウヤの${wbr}強さの${wbr}根源は 相手の${wbr}戦術を${wbr}読み切る${wbr}力`,
     ],
-    [`たとえ${wbr}勝ったと${wbr}しても`],
-    [`大会前に${wbr}手の内を${wbr}明かすなんて${wbr}自殺行為や」`],
+    [
+      `せやさかい${wbr}大会前に${wbr}手の内を${wbr}明かすなんて${wbr}自殺行為や」`,
+    ],
   ]);
   props.view.dom.rightMessageWindow.darken();
 
@@ -82,8 +83,11 @@ export async function introduction(props: CustomBattleEventProps) {
 
   activeRightMessageWindowWithFace(props, "Raito");
   await scrollRightMessages(props, [
-    ["ライト", `「……`],
-    [`あんたん${wbr}覚悟は${wbr}わかった`],
+    [
+      "ライト",
+      `「……${wbr}ジブンにも${wbr}譲れない${wbr}ものが${wbr}あるん${wbr}やな`,
+    ],
+    [`わかった 監督には${wbr}ワイから${wbr}話を${wbr}つける`],
     [`ガイ 存分に${wbr}暴れて${wbr}来いや」`],
   ]);
   props.view.dom.rightMessageWindow.darken();
