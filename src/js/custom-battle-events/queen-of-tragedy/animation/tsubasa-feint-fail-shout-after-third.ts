@@ -15,6 +15,6 @@ export const tsubasaFeintFailShoutAfterThird = (
     enemyPilotOnlyShout(
       props,
       "Tsubasa",
-      `ユウヤに${wbr}0攻撃は${wbr}通用しない${wbr}のか`,
+      `なんて奴だ ここまで${wbr}読むのか`,
     );
   });

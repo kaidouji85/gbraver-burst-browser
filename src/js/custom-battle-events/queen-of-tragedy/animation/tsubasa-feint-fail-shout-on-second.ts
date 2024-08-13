@@ -12,5 +12,5 @@ export const tsubasaFeintFailShoutOnSecond = (
   props: Readonly<CustomBattleEventProps>,
 ) =>
   onStart(() => {
-    enemyPilotOnlyShout(props, "Tsubasa", `またしても${wbr}0攻撃${wbr}を`);
+    enemyPilotOnlyShout(props, "Tsubasa", `くっ またしても${wbr}0攻撃${wbr}を`);
   });
