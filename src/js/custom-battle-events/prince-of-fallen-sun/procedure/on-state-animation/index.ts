@@ -4,6 +4,9 @@ import { CustomStateAnimation } from "../../../../td-scenes/battle/custom-battle
 import { getAnimationIfConditionMet } from "../../../get-animation-if-conditional-met";
 import { invisibleShoutMessageWindowWhenTurnChange } from "../../../invisible-shout-message-window";
 import { PrinceOfFallenSunProps } from "../../props";
+import { gaiBurst } from "./gai-burst";
+import { gaiFinish } from "./gai-finish";
+import { gaiPilotSkill } from "./gai-pilot-skill";
 import { yuuyaFirstAttack } from "./yuuya-first-attack";
 
 /**
@@ -16,6 +19,9 @@ export function onStateAnimation(
 ): Animate {
   const conditionalAnimations = [
     yuuyaFirstAttack,
+    gaiPilotSkill,
+    gaiBurst,
+    gaiFinish,
     invisibleShoutMessageWindowWhenTurnChange,
   ];
   return getAnimationIfConditionMet(props, conditionalAnimations) ?? empty();

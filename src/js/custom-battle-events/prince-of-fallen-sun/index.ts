@@ -5,6 +5,7 @@ import {
   LastState,
 } from "../../td-scenes/battle/custom-battle-event";
 import { EmptyCustomBattleEvent } from "../empty-custom-battle-event";
+import { afterLastState } from "./procedure/after-last-state";
 import { beforeLastState } from "./procedure/before-last-state";
 import { createPrinceOfFallenSunProps } from "./procedure/create-prince-of-fallen-sun-props";
 import { onStateAnimation } from "./procedure/on-state-animation";
@@ -29,6 +30,11 @@ class PrinceOfFallenSun extends EmptyCustomBattleEvent {
       ...props,
       ...this.#eventProps,
     });
+  }
+
+  /** @override */
+  async afterLastState(props: LastState): Promise<void> {
+    await afterLastState({ ...props, ...this.#eventProps });
   }
 
   /** @override */
