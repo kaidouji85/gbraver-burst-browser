@@ -1,4 +1,5 @@
 import { onStart } from "../../../animation/on-start";
+import { wbr } from "../../../dom/wbr";
 import { CustomBattleEventProps } from "../../../td-scenes/battle/custom-battle-event";
 import { enemyPilotOnlyShout } from "../../pilot-shout";
 
@@ -11,5 +12,5 @@ export const tsubasaFeintSuccessShoutOnSecond = (
   props: Readonly<CustomBattleEventProps>,
 ) =>
   onStart(() => {
-    enemyPilotOnlyShout(props, "Tsubasa", `また かかったな`);
+    enemyPilotOnlyShout(props, "Tsubasa", `また かかったな${wbr}ユウヤ`);
   });
