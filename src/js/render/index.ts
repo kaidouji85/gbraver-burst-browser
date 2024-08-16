@@ -16,8 +16,11 @@ import type { Rendering } from "./rendering";
 
 /** レンダラ管理オブジェクト */
 export class Renderer implements OverlapNotifier, RendererDomGetter, Rendering {
+  /** three.jsレンダラ */
   #threeJsRender: THREE.WebGLRenderer;
+  /** DOMイベント */
   #domEvent: Observable<RendererDOMEvent>;
+  /** アンサブスクライバー */
   #unsubscriber: Unsubscribable[];
 
   /**
@@ -39,6 +42,14 @@ export class Renderer implements OverlapNotifier, RendererDomGetter, Rendering {
         this.#resize(action);
       }),
     ];
+  }
+
+  /**
+   * デストラクタ相当の処理
+   */
+  destructor(): void {
+    this.#unsubscriber.forEach((v) => v.unsubscribe());
+    this.disposeRenders();
   }
 
   /**

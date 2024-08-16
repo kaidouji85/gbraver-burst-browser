@@ -1,4 +1,4 @@
-import { Observable, Subject, Unsubscribable } from "rxjs";
+import { Observable, Subject } from "rxjs";
 import * as THREE from "three";
 
 import { GlobalTweenGroup } from "../../src/js/animation/global-tween-group";
@@ -70,8 +70,6 @@ export class TDGameObjectStub {
   #overlap: Observable<OverlapEvent>;
   /** ゲームオブジェクトアクション */
   #gameObjectAction: Observable<GameObjectAction>;
-  /** アンサブスクライバー */
-  #unsubscriber: Unsubscribable[];
 
   /**
    * コンストラクタ
@@ -95,11 +93,9 @@ export class TDGameObjectStub {
       this.#preRender,
       this.#overlap,
     );
-    this.#unsubscriber = [
-      this.#gameLoop.subscribe((v) => {
-        this.#onGameLoop(v);
-      }),
-    ];
+    this.#gameLoop.subscribe((v) => {
+      this.#onGameLoop(v);
+    });
   }
 
   /**
