@@ -9,6 +9,7 @@ import { gaiFeintSuccess } from "./gai-feint-success";
 import { gaiFinish } from "./gai-finish";
 import { gaiPilotSkill } from "./gai-pilot-skill";
 import { yuuyaBurstWhenGaiActivatedSkill } from "./yuuya-burst-when-gai-activated-skill";
+import { yuuyaBurstWhenOneTurn } from "./yuuya-burst-when-one-turn";
 import { yuuyaFirstAttack } from "./yuuya-first-attack";
 
 /**
@@ -22,6 +23,7 @@ export function onStateAnimation(
   const conditionalAnimations = [
     yuuyaFirstAttack,
     yuuyaBurstWhenGaiActivatedSkill,
+    yuuyaBurstWhenOneTurn,
     gaiPilotSkill,
     gaiBurst,
     gaiFinish,
