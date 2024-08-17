@@ -7,6 +7,7 @@ import { PrinceOfFallenSunProps } from "../../props";
 import { gaiBurst } from "./gai-burst";
 import { gaiFeintSuccess } from "./gai-feint-success";
 import { gaiFinish } from "./gai-finish";
+import { gaiFirstAttack } from "./gai-first-attack";
 import { gaiPilotSkill } from "./gai-pilot-skill";
 import { yuuyaBurstWhenGaiActivatedSkill } from "./yuuya-burst-when-gai-activated-skill";
 import { yuuyaBurstWhenOneTurn } from "./yuuya-burst-when-one-turn";
@@ -26,6 +27,7 @@ export function onStateAnimation(
     yuuyaFirstAttack,
     yuuyaBurstWhenGaiActivatedSkill,
     yuuyaBurstWhenOneTurn,
+    gaiFirstAttack,
     gaiPilotSkill,
     gaiBurst,
     gaiFinish,
