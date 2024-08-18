@@ -80,16 +80,14 @@ export async function introduction(props: CustomBattleEventProps) {
     [`巨大ロボ${wbr}創業家の${wbr}人間として」`],
   ]);
   props.view.dom.leftMessageWindow.darken();
-
+  
   activeRightMessageWindowWithFace(props, "Raito");
   await scrollRightMessages(props, [
-    [
-      "ライト",
-      `「……${wbr}ジブンにも${wbr}譲れない${wbr}ものが${wbr}あるん${wbr}やな`,
-    ],
-    [`わかった 監督には${wbr}ワイから${wbr}話を${wbr}つける`],
+    ["ライト", `「……わかった`],
+    [`監督には${wbr}ワイから${wbr}話を${wbr}つける`],
     [`ガイ 存分に${wbr}暴れて${wbr}来いや」`],
   ]);
+
   props.view.dom.rightMessageWindow.darken();
 
   await refreshConversation(props);
