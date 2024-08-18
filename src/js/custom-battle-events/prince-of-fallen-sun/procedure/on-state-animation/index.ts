@@ -15,6 +15,7 @@ import { yuuyaBurstWhenGaiActivatedSkill } from "./yuuya-burst-when-gai-activate
 import { yuuyaBurstWhenOneTurn } from "./yuuya-burst-when-one-turn";
 import { yuuyaFeintWhenFirstBattle } from "./yuuya-feint-when-first-battle";
 import { yuuyaFirstAttack } from "./yuuya-first-attack";
+import { yuuyaPilotSkill } from "./yuuya-pilot-skill";
 
 /**
  * カスタムステートアニメーション
@@ -30,6 +31,7 @@ export function onStateAnimation(
     yuuyaBurstWhenGaiActivatedSkill,
     yuuyaBurstWhenOneTurn,
     yuuyaBurst,
+    yuuyaPilotSkill,
     gaiPilotSkillWhenYuuyaBatteryIsOver5,
     gaiPilotSkill,
     gaiBurst,
