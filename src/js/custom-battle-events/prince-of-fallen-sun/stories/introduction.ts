@@ -80,7 +80,7 @@ export async function introduction(props: CustomBattleEventProps) {
     [`巨大ロボ${wbr}創業家の${wbr}人間として」`],
   ]);
   props.view.dom.leftMessageWindow.darken();
-  
+
   activeRightMessageWindowWithFace(props, "Raito");
   await scrollRightMessages(props, [
     ["ライト", `「……わかった`],
