@@ -12,5 +12,9 @@ export const gaiPilotSkillShoutWhenYuuyaBatteryIsOver5 = (
   props: Readonly<CustomBattleEventProps>,
 ) =>
   onStart(() => {
-    enemyPilotOnlyShout(props, "Gai", `バッテリーゲージが${wbr}8だと`);
+    enemyPilotOnlyShout(
+      props,
+      "Gai",
+      `バッテリーが${wbr}2倍に${wbr}なっただと`,
+    );
   });
