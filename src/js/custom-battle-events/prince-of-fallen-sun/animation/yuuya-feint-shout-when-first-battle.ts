@@ -12,5 +12,5 @@ export const yuuyaFeintShoutWhenFirstBattle = (
   props: Readonly<CustomBattleEventProps>,
 ) =>
   onStart(() => {
-    playerPilotOnlyShout(props, "Yuuya", `まずは${wbr}様子見${wbr}だな`);
+    playerPilotOnlyShout(props, "Yuuya", `まずは${wbr}様子見`);
   });
