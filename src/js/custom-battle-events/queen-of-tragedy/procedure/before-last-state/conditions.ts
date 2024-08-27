@@ -2,7 +2,8 @@ import { PlayerState } from "gbraver-burst-core";
 
 /**
  * 条件オブジェクト
- * beforeLastStateで不変なものだけをあつめたのでステートは含まない
+ * beforeLastStateにおいてストーリー分岐に必要な情報を持つ
+ * 本オブジェクトは不変なものだけを集めたのでステートは含まない
  */
 export type Conditions = {
   /** ターン数 */

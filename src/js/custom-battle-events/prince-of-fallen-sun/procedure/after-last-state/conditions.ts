@@ -2,7 +2,8 @@ import { GameEnd, PlayerId } from "gbraver-burst-core";
 
 /**
  * 条件オブジェクト
- * afterLastStateで不変なものだけをあつめたのでステートは含まない
+ * afterLastStateにおいてストーリー分岐に必要な情報を持つ
+ * 本オブジェクトは不変なものだけを集めたのでステートは含まない
  */
 export type Conditions = {
   /** 敵ID */
