@@ -15,15 +15,30 @@ export async function sunOfNoble(props: CustomBattleEventProps) {
   activeRightMessageWindowWithFace(props, "Yuuya");
   await scrollRightMessages(props, [
     ["ユウヤ", `「思い出したぞ`],
-    [`お前は${wbr}業界2位 浅草重工の${wbr}御曹司様${wbr}だな」`],
+    [`その顔は 浅草重工の${wbr}御曹司様だな」`],
   ]);
   props.view.dom.rightMessageWindow.darken();
 
   activeLeftMessageWindowWithFace(props, "Gai");
   await scrollLeftMessages(props, [
-    ["ガイ", `「うちが${wbr}業界2位だと ふざけるな！！`],
-    [`Gブレイバー お前を${wbr}倒して${wbr}再び${wbr}トップに${wbr}返り咲く」`],
+    ["ガイ", `「お坊ちゃん${wbr}扱いは${wbr}やめろ」`],
   ]);
+  props.view.dom.leftMessageWindow.darken();
+
+  activeRightMessageWindowWithFace(props, "Yuuya");
+  await scrollRightMessages(props, [
+    [
+      "ユウヤ",
+      `「浅草重工は${wbr}${wbr}世界で${wbr}初めて${wbr}巨大ロボを${wbr}製造した${wbr}企業`,
+    ],
+    [
+      `創業家の${wbr}人間と${wbr}手合わせ${wbr}できる${wbr}なんて${wbr}感激だな」`,
+    ],
+  ]);
+  props.view.dom.rightMessageWindow.darken();
+
+  activeLeftMessageWindowWithFace(props, "Gai");
+  await scrollLeftMessages(props, [["ガイ", `「……」`]]);
   props.view.dom.leftMessageWindow.darken();
 
   invisibleAllMessageWindows(props);
