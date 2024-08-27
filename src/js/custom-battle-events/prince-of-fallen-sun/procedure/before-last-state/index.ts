@@ -3,8 +3,10 @@ import { invisibleShoutMessageWindowWhenInputCommand } from "../../../invisible-
 import { PrinceOfFallenSunProps } from "../../props";
 import { PrinceOfFallenSunState } from "../../state";
 import { introduction } from "../../stories/introduction";
+import { sunOfNoble } from "../../stories/san-of-noble";
 import { createConditions } from "./create-conditions";
 import { shouldPlayIntroduction } from "./should-play-introduction";
+import { shouldPlaySunOfNoble } from "./should-play-sun-of-noble";
 
 /**
  * 最終ステート直前イベント
@@ -21,6 +23,9 @@ export async function beforeLastState(
   if (shouldPlayIntroduction(latestEventState, conditions)) {
     await introduction(props);
     latestEventState = { ...latestEventState, isIntroductionComplete: true };
+  } else if (shouldPlaySunOfNoble(latestEventState, conditions)) {
+    await sunOfNoble(props);
+    latestEventState = { ...latestEventState, isSunOfNoblePlay: true };
   }
 
   return latestEventState;
