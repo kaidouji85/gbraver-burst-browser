@@ -66,8 +66,10 @@ export async function introduction(props: CustomBattleEventProps) {
 
   activeLeftMessageWindowWithFace(props, "Gai");
   await scrollLeftMessages(props, [
-    ["ガイ", `「ここで${wbr}逃げたら`],
-    [`浅草重工の${wbr}沽券に${wbr}関わります」`]
+    [
+      "ガイ",
+      `「ここで${wbr}逃げたら${wbr}浅草重工の${wbr}沽券に${wbr}関わります」`,
+    ],
   ]);
   props.view.dom.leftMessageWindow.darken();
 
