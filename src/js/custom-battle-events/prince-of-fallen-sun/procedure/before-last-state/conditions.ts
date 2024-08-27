@@ -1,5 +1,8 @@
-/** 条件オブジェクト */
+/**
+ * 条件オブジェクト
+ * beforeLastStateで不変なものだけをあつめたのでステートは含まない
+ */
 export type Conditions = {
   /** ターン数 */
-  turn: number;
+  readonly turn: number;
 };
