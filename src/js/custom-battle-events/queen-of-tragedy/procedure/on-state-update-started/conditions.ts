@@ -1,7 +1,10 @@
-/** 条件判断オブジェクト */
+/**
+ * 条件オブジェクト
+ * onStateUpdateStartedで不変なものだけをあつめたのでステートは含まない
+ */
 export type Conditions = {
   /** ターン数 */
-  turn: number;
+  readonly turn: number;
   /** プレイヤーがバーストするか、true: バーストする */
-  willPlayerBurst: boolean;
+  readonly willPlayerBurst: boolean;
 };
