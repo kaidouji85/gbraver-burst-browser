@@ -4,6 +4,7 @@ import {
   activeLeftMessageWindowWithFace,
   activeRightMessageWindowWithFace,
 } from "../../active-message-window";
+import { invisibleAllMessageWindows } from "../../invisible-all-message-windows";
 import { scrollLeftMessages, scrollRightMessages } from "../../scroll-messages";
 
 /**
@@ -24,4 +25,6 @@ export async function sunOfNoble(props: CustomBattleEventProps) {
     [`Gブレイバー お前を${wbr}倒して${wbr}再び${wbr}トップに${wbr}返り咲く」`],
   ]);
   props.view.dom.leftMessageWindow.darken();
+
+  invisibleAllMessageWindows(props);
 }
