@@ -31,7 +31,9 @@ export async function sunOfNoble(props: CustomBattleEventProps) {
       "ユウヤ",
       `「浅草重工は${wbr}${wbr}世界で${wbr}初めて${wbr}巨大ロボを${wbr}製造した${wbr}企業`,
     ],
-    [`創業家の${wbr}人間と${wbr}手合わせ${wbr}できる${wbr}なんて${wbr}感激だな」`],
+    [
+      `創業家の${wbr}人間と${wbr}手合わせ${wbr}できる${wbr}なんて${wbr}感激だな」`,
+    ],
   ]);
   props.view.dom.rightMessageWindow.darken();
 
