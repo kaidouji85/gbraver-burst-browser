@@ -27,14 +27,14 @@ export async function introduction(props: CustomBattleEventProps) {
   activeRightMessageWindowWithFace(props, "Yuuya");
   await scrollRightMessages(props, [
     ["ユウヤ", `「久しぶり${wbr}だな${wbr}ライト`],
-    [`積もる話も${wbr}あるだろうが`],
-    [`ここは${wbr}パイロット同士 試合で${wbr}語ろうじゃ${wbr}ないか」`],
+    [`積もる話も${wbr}あるが`],
+    [`パイロット同士 試合で${wbr}語ろうぜ」`],
   ]);
   props.view.dom.rightMessageWindow.darken();
 
   activeLeftMessageWindowWithFace(props, "Raito");
   await scrollLeftMessages(props, [
-    ["ライト", `「悪いが${wbr}お断りや`],
+    ["ライト", `「お断りや`],
     [
       `本番前に${wbr}ワイの${wbr}手の内を${wbr}見して${wbr}たまる${wbr}かいな」`,
     ],
@@ -44,9 +44,7 @@ export async function introduction(props: CustomBattleEventProps) {
   activeRightMessageWindowWithFace(props, "Yuuya");
   await scrollRightMessages(props, [
     ["ユウヤ", `「つれないな`],
-    [
-      `かつては${wbr}同じチームで${wbr}切磋琢磨${wbr}してきた仲${wbr}じゃないか」`,
-    ],
+    [`かつて${wbr}同じチームで${wbr}切磋琢磨${wbr}した仲${wbr}じゃないか」`],
   ]);
   props.view.dom.rightMessageWindow.darken();
 
@@ -62,22 +60,14 @@ export async function introduction(props: CustomBattleEventProps) {
   activeRightMessageWindowWithFace(props, "Raito");
   await scrollRightMessages(props, [
     ["ライト", `「ダメや！！`],
-    [
-      `ユウヤの${wbr}強さの${wbr}根源は 相手の${wbr}戦術を${wbr}読み切る${wbr}力`,
-    ],
-    [
-      `せやさかい${wbr}大会前に${wbr}手の内を${wbr}明かすなんて${wbr}自殺行為や」`,
-    ],
+    [`公式戦の${wbr}前に${wbr}手の内を${wbr}明かすなんて${wbr}自殺行為や」`],
   ]);
   props.view.dom.rightMessageWindow.darken();
 
   activeLeftMessageWindowWithFace(props, "Gai");
   await scrollLeftMessages(props, [
-    [
-      "ガイ",
-      `「それでも${wbr}俺は${wbr}逃げる訳には${wbr}いかないん${wbr}です`,
-    ],
-    [`巨大ロボ${wbr}創業家の${wbr}人間として」`],
+    ["ガイ", `「ここで${wbr}逃げたら`],
+    [`浅草重工の${wbr}沽券に${wbr}関わります」`]
   ]);
   props.view.dom.leftMessageWindow.darken();
 
@@ -85,7 +75,7 @@ export async function introduction(props: CustomBattleEventProps) {
   await scrollRightMessages(props, [
     ["ライト", `「……`],
     [`監督には${wbr}ワイから${wbr}話を${wbr}つける`],
-    [`ガイ 存分に${wbr}暴れて${wbr}来いや」`],
+    [`あとは${wbr}好きに${wbr}せえ」`],
   ]);
 
   props.view.dom.rightMessageWindow.darken();
