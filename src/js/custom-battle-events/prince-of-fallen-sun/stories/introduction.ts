@@ -66,18 +66,15 @@ export async function introduction(props: CustomBattleEventProps) {
 
   activeLeftMessageWindowWithFace(props, "Gai");
   await scrollLeftMessages(props, [
-    [
-      "ガイ",
-      `「ここで${wbr}逃げたら${wbr}浅草重工の${wbr}沽券に${wbr}関わります」`,
-    ],
+    ["ガイ", `「宿敵を${wbr}目の前に${wbr}して${wbr}逃げ出す${wbr}なんて`],
+    [`俺には${wbr}できません」`],
   ]);
   props.view.dom.leftMessageWindow.darken();
 
   activeRightMessageWindowWithFace(props, "Raito");
   await scrollRightMessages(props, [
     ["ライト", `「……`],
-    [`監督には${wbr}ワイから${wbr}話を${wbr}つける`],
-    [`あとは${wbr}好きに${wbr}せえ」`],
+    [`分かった あとは${wbr}好きに${wbr}せえ」`],
   ]);
 
   props.view.dom.rightMessageWindow.darken();
