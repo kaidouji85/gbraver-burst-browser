@@ -21,7 +21,7 @@ export async function sunOfNoble(props: CustomBattleEventProps) {
 
   activeLeftMessageWindowWithFace(props, "Gai");
   await scrollLeftMessages(props, [
-    ["ガイ", `「お坊ちゃん${wbr}扱い${wbr}するな」`],
+    ["ガイ", `「お坊ちゃん${wbr}扱いは${wbr}やめろ」`],
   ]);
   props.view.dom.leftMessageWindow.darken();
 
