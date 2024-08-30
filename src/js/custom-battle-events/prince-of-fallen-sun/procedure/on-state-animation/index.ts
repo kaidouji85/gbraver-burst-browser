@@ -13,7 +13,6 @@ import { gaiPilotSkillWhenYuuyaBatteryIsOver5 } from "./gai-pilot-skill-when-yuu
 import { yuuyaBurst } from "./yuuya-burst";
 import { yuuyaBurstWhenGaiActivatedSkill } from "./yuuya-burst-when-gai-activated-skill";
 import { yuuyaBurstWhenOneTurn } from "./yuuya-burst-when-one-turn";
-import { yuuyaFeintWhenFirstBattle } from "./yuuya-feint-when-first-battle";
 import { yuuyaFirstAttack } from "./yuuya-first-attack";
 import { yuuyaPilotSkill } from "./yuuya-pilot-skill";
 
@@ -26,7 +25,6 @@ export function onStateAnimation(
   props: CustomStateAnimation & PrinceOfFallenSunProps,
 ): Animate {
   const conditionalAnimations = [
-    yuuyaFeintWhenFirstBattle,
     yuuyaFirstAttack,
     yuuyaBurstWhenGaiActivatedSkill,
     yuuyaBurstWhenOneTurn,

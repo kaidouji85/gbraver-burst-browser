@@ -12,5 +12,5 @@ export const yuuyaBurstShoutWhenGaiActivatedSkill = (
   props: Readonly<CustomBattleEventProps>,
 ) =>
   onStart(() => {
-    playerPilotOnlyShout(props, "Yuuya", `望む${wbr}ところだ ガイ`);
+    playerPilotOnlyShout(props, "Yuuya", `面白い 全力で${wbr}受けて${wbr}立つ`);
   });
