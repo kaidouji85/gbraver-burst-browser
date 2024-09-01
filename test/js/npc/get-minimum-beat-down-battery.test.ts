@@ -38,7 +38,7 @@ test("相手を倒せる最小限のバッテリーを正しく計算できる",
   });
 });
 
-test("相手を倒せない場合はnullを返す", () => {
+test("相手を倒せない場合はisExist=falseを返す", () => {
   expect(getMinimumBeatDownBattery(attacker, defender, 5)).toEqual({
     isExist: false,
   });

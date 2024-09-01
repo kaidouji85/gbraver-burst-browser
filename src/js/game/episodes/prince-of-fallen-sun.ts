@@ -1,6 +1,6 @@
 import { ArmdozerIds, Armdozers, PilotIds, Pilots } from "gbraver-burst-core";
 
-import { EmptyCustomBattleEvent } from "../../custom-battle-events/empty-custom-battle-event";
+import { createPrinceOfFallenSun } from "../../custom-battle-events/prince-of-fallen-sun";
 import { neoLandozerNPCForPrinceOfFallenSun } from "../../npc/neo-landozer-for-prince-of-fallen-sun";
 import { PathIds } from "../../resource/path/ids";
 import { SOUND_IDS } from "../../resource/sound/ids";
@@ -27,6 +27,6 @@ export const PrinceOfFallenSun: Episode = {
     pilot: Pilots.find((v) => v.id === PilotIds.YUUYA) ?? Pilots[0],
   },
   npc: neoLandozerNPCForPrinceOfFallenSun(),
-  event: () => new EmptyCustomBattleEvent(),
-  bgm: SOUND_IDS.QUEEN_OF_TRAGEDY,
+  event: () => createPrinceOfFallenSun(),
+  bgm: SOUND_IDS.GAI_BATTLE,
 };

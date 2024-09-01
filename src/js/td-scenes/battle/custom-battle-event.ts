@@ -49,6 +49,8 @@ export type StateUpdateStarted = CustomBattleEventProps &
 export type CustomStateAnimation = CustomBattleEventProps & {
   /** 再生するステート */
   readonly currentState: GameState;
+  /** コマンド入力から最終ステートまでのステート更新履歴 */
+  readonly update: GameState[];
 };
 
 /** 最終ステート系イベントのプロパティ */

@@ -60,7 +60,7 @@ test("相手が0攻撃の場合、0防御でも生き残れる", () => {
   });
 });
 
-test("生き延びられない場合はnullを返す", () => {
+test("生き延びられない場合はisExist=falseを返す", () => {
   expect(
     getMinimumSurvivableBattery(defender, createAttacker(2000), 5),
   ).toEqual({

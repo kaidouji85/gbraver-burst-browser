@@ -30,6 +30,7 @@ import { yuuyaSecondAttack } from "./yuuya-second-attack";
 /**
  * カスタムステートアニメーション
  * @param props イベントプロパティ
+ * @returns アニメーション
  */
 export function onStateAnimation(
   props: CustomStateAnimation & QueenOfTragedyProps,

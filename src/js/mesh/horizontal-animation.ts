@@ -27,10 +27,6 @@ export class HorizontalAnimationMesh {
   #texture: THREE.Texture;
   /** メッシュ */
   #mesh: THREE.Mesh<THREE.PlaneGeometry, THREE.MeshBasicMaterial>;
-  /** 横幅 */
-  #width: number;
-  /** 高 */
-  #height: number;
   /** アニメーション枚数 */
   #maxAnimation: number;
 
@@ -39,8 +35,6 @@ export class HorizontalAnimationMesh {
    * @param param パラメータ
    */
   constructor(param: HorizontalAnimationMeshParam) {
-    this.#width = param.width;
-    this.#height = param.height;
     this.#texture = param.texture.clone();
     animatedTexture(this.#texture, param.maxAnimation, 1);
     this.#texture.needsUpdate = true;
