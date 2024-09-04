@@ -6,10 +6,12 @@ import { createEmptySoundResource } from "../../resource/sound/empty-sound-resou
 import { SOUND_IDS } from "../../resource/sound/ids";
 import { SoundResource } from "../../resource/sound/resource";
 import { SEPlayerContainer } from "../../se/se-player";
-import { domUuid } from "../../uuid/dom-uuid";
 import { ROOT_CLASS } from "./dom/class-name";
-import { DataIDs } from "./dom/data-ids";
-import { extractElements } from "./dom/elements";
+import {
+  extractCloser,
+  extractEnterButton,
+  extractRoomID,
+} from "./dom/elements";
 import { rootInnerHtml } from "./dom/root-inner-html";
 
 /** プライベートマッチゲストダイアログのプロパティ */
@@ -51,15 +53,11 @@ export function createPrivateMatchGuestDialogProps(
   const { resources, se } = params;
   const root = document.createElement("div");
   root.className = ROOT_CLASS;
-  const dataIDs: DataIDs = {
-    closer: domUuid(),
-    roomID: domUuid(),
-    enterButton: domUuid(),
-  };
-  root.innerHTML = rootInnerHtml(resources, dataIDs);
-  const elements = extractElements(root, dataIDs);
+  root.innerHTML = rootInnerHtml(resources);
   return {
-    ...elements,
+    closer: extractCloser(root),
+    roomID: extractRoomID(root),
+    enterButton: extractEnterButton(root),
     root,
     dialogClosed: new Subject(),
     privateMatchStart: new Subject(),
