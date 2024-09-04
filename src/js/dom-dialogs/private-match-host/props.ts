@@ -6,10 +6,8 @@ import { createEmptySoundResource } from "../../resource/sound/empty-sound-resou
 import { SOUND_IDS } from "../../resource/sound/ids";
 import { SoundResource } from "../../resource/sound/resource";
 import { SEPlayerContainer } from "../../se/se-player";
-import { domUuid } from "../../uuid/dom-uuid";
 import { ROOT_CLASS } from "./dom/class-name";
-import { DataIDs } from "./dom/data-ids";
-import { extractElements } from "./dom/elements";
+import { extractCloser } from "./dom/elements";
 import { rootInnerHTML } from "./dom/root-inner-html";
 
 /** プライベートマッチホストダイアログのプロパティ */
@@ -42,17 +40,14 @@ export function createPrivateMatchHostDialogProps(
   params: PropsCreatorParams,
 ): PrivateMatchHostDialogProps {
   const { resources, roomID } = params;
-  const ids: DataIDs = {
-    closer: domUuid(),
-  };
   const root = document.createElement("div");
   root.className = ROOT_CLASS;
-  root.innerHTML = rootInnerHTML(resources, ids, roomID);
-  const elements = extractElements(root, ids);
+  root.innerHTML = rootInnerHTML(resources, roomID);
+  const closer = extractCloser(root);
   return {
     ...params,
     root,
-    closer: elements.closer,
+    closer,
     changeValue:
       resources.sounds.find((v) => v.id === SOUND_IDS.CHANGE_VALUE) ??
       createEmptySoundResource(),
