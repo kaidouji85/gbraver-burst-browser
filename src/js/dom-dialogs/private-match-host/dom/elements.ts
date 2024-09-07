@@ -11,11 +11,11 @@ export const extractCloser = (root: HTMLElement): HTMLElement =>
  * @param root ルート要素
  * @returns 抽出結果
  */
-export const extractQrCode = (root: HTMLElement): HTMLCanvasElement => {
-  const extractedQrCode = root.querySelector(
+export const extractQRCode = (root: HTMLElement): HTMLCanvasElement => {
+  const extractedQRCode = root.querySelector(
     `[data-id="qr-code"]`,
   ) as HTMLCanvasElement;
-  return extractedQrCode instanceof HTMLCanvasElement
-    ? extractedQrCode
+  return extractedQRCode instanceof HTMLCanvasElement
+    ? extractedQRCode
     : document.createElement("canvas");
 };

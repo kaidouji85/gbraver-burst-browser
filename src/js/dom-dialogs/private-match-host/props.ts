@@ -8,7 +8,7 @@ import { SOUND_IDS } from "../../resource/sound/ids";
 import { SoundResource } from "../../resource/sound/resource";
 import { SEPlayerContainer } from "../../se/se-player";
 import { ROOT_CLASS } from "./dom/class-name";
-import {extractCloser, extractQrCode} from "./dom/elements";
+import {extractCloser, extractQRCode} from "./dom/elements";
 import { rootInnerHTML } from "./dom/root-inner-html";
 
 /** プライベートマッチホストダイアログのプロパティ */
@@ -45,7 +45,7 @@ export function createPrivateMatchHostDialogProps(
   root.className = ROOT_CLASS;
   root.innerHTML = rootInnerHTML(resources, roomID);
   const closer = extractCloser(root);
-  const qrCode = extractQrCode(root);
+  const qrCode = extractQRCode(root);
   QRCode.toCanvas(qrCode, roomID);
   return {
     ...params,
