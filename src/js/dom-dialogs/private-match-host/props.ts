@@ -1,14 +1,14 @@
-import QRCode from "qrcode";
 import { Subject } from "rxjs";
 
 import { Exclusive } from "../../exclusive/exclusive";
+import { drawPrivateMatchQRCode } from "../../qr-code/private-match-qr-code";
 import { ResourcesContainer } from "../../resource";
 import { createEmptySoundResource } from "../../resource/sound/empty-sound-resource";
 import { SOUND_IDS } from "../../resource/sound/ids";
 import { SoundResource } from "../../resource/sound/resource";
 import { SEPlayerContainer } from "../../se/se-player";
 import { ROOT_CLASS } from "./dom/class-name";
-import {extractCloser, extractQRCode} from "./dom/elements";
+import { extractCloser, extractQRCode } from "./dom/elements";
 import { rootInnerHTML } from "./dom/root-inner-html";
 
 /** プライベートマッチホストダイアログのプロパティ */
@@ -46,7 +46,7 @@ export function createPrivateMatchHostDialogProps(
   root.innerHTML = rootInnerHTML(resources, roomID);
   const closer = extractCloser(root);
   const qrCode = extractQRCode(root);
-  QRCode.toCanvas(qrCode, roomID);
+  drawPrivateMatchQRCode(qrCode, roomID);
   return {
     ...params,
     root,
