@@ -26,3 +26,12 @@ export const extractRoomID = (root: HTMLElement): HTMLInputElement => {
 export const extractEnterButton = (root: HTMLElement): HTMLElement =>
   root.querySelector(`[data-id="enterButton"]`) ??
   document.createElement("div");
+
+/**
+ * QRコードリーダースターターを抽出する
+ * @param root ルート要素
+ * @returns 抽出結果
+ */
+export const extractStartQRCodeReader = (root: HTMLElement): HTMLElement =>
+  root.querySelector(`[data-id="start-qr-code-reader"]`) ??
+  document.createElement("div");

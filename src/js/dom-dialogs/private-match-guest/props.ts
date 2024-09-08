@@ -11,8 +11,11 @@ import {
   extractCloser,
   extractEnterButton,
   extractRoomID,
+  extractStartQRCodeReader,
 } from "./dom/elements";
 import { rootInnerHtml } from "./dom/root-inner-html";
+import {PrivateMatchQRCodeReader} from "./qr-code-reader";
+import {replaceDOM} from "../../dom/replace-dom";
 
 /** プライベートマッチゲストダイアログのプロパティ */
 export type PrivateMatchGuestDialogProps = SEPlayerContainer & {
@@ -24,12 +27,18 @@ export type PrivateMatchGuestDialogProps = SEPlayerContainer & {
   roomID: HTMLInputElement;
   /** プライベートマット開始ボタン */
   enterButton: HTMLElement;
+
+  /** QRコードリーダー */
+  qrCodeReader: PrivateMatchQRCodeReader;
+
   /** 排他制御 */
   exclusive: Exclusive;
+
   /** 効果音 値変更 */
   changeValue: SoundResource;
   /** 効果音 ボタンプッシュ */
   pushButton: SoundResource;
+
   /** ダイアログ閉じる通知 */
   dialogClosed: Subject<void>;
   /**
@@ -51,23 +60,34 @@ export function createPrivateMatchGuestDialogProps(
   params: PropsCreatorParams,
 ): PrivateMatchGuestDialogProps {
   const { resources, se } = params;
+
   const root = document.createElement("div");
   root.className = ROOT_CLASS;
   root.innerHTML = rootInnerHtml(resources);
+
+  const qrCodeReader = new PrivateMatchQRCodeReader();
+  const qrCodeReaderStarter = extractStartQRCodeReader(root);
+  replaceDOM(qrCodeReaderStarter, qrCodeReader.getRootHTMLElement());
+  qrCodeReader.start();
   return {
+    root,
     closer: extractCloser(root),
     roomID: extractRoomID(root),
     enterButton: extractEnterButton(root),
-    root,
+
+    qrCodeReader,
+
+    exclusive: new Exclusive(),
+
     dialogClosed: new Subject(),
     privateMatchStart: new Subject(),
+
+    se,
     changeValue:
       resources.sounds.find((v) => v.id === SOUND_IDS.CHANGE_VALUE) ??
       createEmptySoundResource(),
     pushButton:
       resources.sounds.find((v) => v.id === SOUND_IDS.PUSH_BUTTON) ??
       createEmptySoundResource(),
-    se,
-    exclusive: new Exclusive(),
   };
 }
