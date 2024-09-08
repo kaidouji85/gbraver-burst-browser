@@ -35,3 +35,19 @@ export const extractEnterButton = (root: HTMLElement): HTMLElement =>
 export const extractDummyQRCodeReader = (root: HTMLElement): HTMLElement =>
   root.querySelector(`[data-id="dummy-qr-code-reader"]`) ??
   document.createElement("div");
+
+/**
+ * ダミーQRコードリーダーボタンを抽出する
+ * @param root ルート要素
+ * @returns 抽出結果
+ */
+export const extractStartQRCodeReader = (
+  root: HTMLElement,
+): HTMLButtonElement => {
+  const extractedStartQRCodeReader = root.querySelector(
+    `[data-id="start-qr-code-reader"]`,
+  );
+  return extractedStartQRCodeReader instanceof HTMLButtonElement
+    ? extractedStartQRCodeReader
+    : document.createElement("button");
+};

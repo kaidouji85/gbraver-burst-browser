@@ -10,9 +10,10 @@ import { SEPlayerContainer } from "../../se/se-player";
 import { ROOT_CLASS } from "./dom/class-name";
 import {
   extractCloser,
+  extractDummyQRCodeReader,
   extractEnterButton,
   extractRoomID,
-  extractDummyQRCodeReader,
+  extractStartQRCodeReader,
 } from "./dom/elements";
 import { rootInnerHtml } from "./dom/root-inner-html";
 import { PrivateMatchQRCodeReader } from "./qr-code-reader";
@@ -23,8 +24,10 @@ export type PrivateMatchGuestDialogProps = SEPlayerContainer & {
   root: HTMLElement;
   /** クロージャ */
   closer: HTMLElement;
-  /** ルームID入力フォーム */
+  /** ルームIDテキスト入力フォーム */
   roomID: HTMLInputElement;
+  /** QRコードリーダー開始ボタン */
+  startQRCodeReader: HTMLButtonElement;
   /** プライベートマット開始ボタン */
   enterButton: HTMLElement;
 
@@ -72,6 +75,7 @@ export function createPrivateMatchGuestDialogProps(
     root,
     closer: extractCloser(root),
     roomID: extractRoomID(root),
+    startQRCodeReader: extractStartQRCodeReader(root),
     enterButton: extractEnterButton(root),
 
     qrCodeReader,

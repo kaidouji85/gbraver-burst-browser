@@ -4,6 +4,7 @@ import { domPushStream } from "../../dom/push-dom";
 import { DOMDialog } from "../dialog";
 import { onCloserPush } from "./listeners/on-closer-push";
 import { onEnterButtonPush } from "./listeners/on-enter-button-push";
+import { onStartQrCodeReaderPush } from "./listeners/on-start-qr-code-reader-push";
 import {
   createPrivateMatchGuestDialogProps,
   PrivateMatchGuestDialogProps,
@@ -29,6 +30,9 @@ export class PrivateMatchGuestDialog implements DOMDialog {
     this.#unsubscribers = [
       domPushStream(this.#props.closer).subscribe((action) => {
         onCloserPush(this.#props, action);
+      }),
+      domPushStream(this.#props.startQRCodeReader).subscribe(() => {
+        onStartQrCodeReaderPush(this.#props);
       }),
       domPushStream(this.#props.enterButton).subscribe((action) => {
         onEnterButtonPush(this.#props, action);
