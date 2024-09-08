@@ -12,7 +12,7 @@ import {
   extractCloser,
   extractEnterButton,
   extractRoomID,
-  extractStartQRCodeReader,
+  extractDummyQRCodeReader,
 } from "./dom/elements";
 import { rootInnerHtml } from "./dom/root-inner-html";
 import { PrivateMatchQRCodeReader } from "./qr-code-reader";
@@ -66,9 +66,8 @@ export function createPrivateMatchGuestDialogProps(
   root.innerHTML = rootInnerHtml(resources);
 
   const qrCodeReader = new PrivateMatchQRCodeReader();
-  const qrCodeReaderStarter = extractStartQRCodeReader(root);
+  const qrCodeReaderStarter = extractDummyQRCodeReader(root);
   replaceDOM(qrCodeReaderStarter, qrCodeReader.getRootHTMLElement());
-  qrCodeReader.start();
   return {
     root,
     closer: extractCloser(root),
