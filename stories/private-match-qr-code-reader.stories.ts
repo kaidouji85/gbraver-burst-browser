@@ -13,6 +13,7 @@ export const qrCodeReadr: StoryFn = domStub(() => {
   reader.start();
   reader.notifyReadQRCode().subscribe((roomID) => {
     console.log("read QR code", roomID);
+    reader.stop();
   });
   return reader.getRootHTMLElement();
 });

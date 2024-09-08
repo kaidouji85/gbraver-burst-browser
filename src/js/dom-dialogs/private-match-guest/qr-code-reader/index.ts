@@ -30,16 +30,6 @@ export class PrivateMatchQRCodeReader {
   }
 
   /**
-   * デストラクタ相当の処理
-   */
-  destructor(): void {
-    this.#unsubscribers.forEach((u) => {
-      u.unsubscribe();
-    });
-    stopCamera(this.#props);
-  }
-
-  /**
    * プライベートマッチQRコードリーダーを開始する
    */
   async start() {
@@ -49,6 +39,17 @@ export class PrivateMatchQRCodeReader {
         onGameLoop(this.#props);
       }),
     ];
+  }
+
+  /**
+   * プライベートマッチQRコードリーダーを停止する
+   * デストラクタ等でリソースを廃棄する場合も、本メソッドを呼び出すこと
+   */
+  stop(): void {
+    this.#unsubscribers.forEach((u) => {
+      u.unsubscribe();
+    });
+    stopCamera(this.#props);
   }
 
   /**
