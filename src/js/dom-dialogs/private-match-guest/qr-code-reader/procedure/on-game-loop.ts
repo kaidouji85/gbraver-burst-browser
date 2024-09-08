@@ -6,7 +6,7 @@ import { PrivateMatchQRCodeReaderProps } from "../props";
  * ゲームループ内での処理を行う
  * @param props プロパティ
  */
-export function onUpdate(props: PrivateMatchQRCodeReaderProps) {
+export function onGameLoop(props: PrivateMatchQRCodeReaderProps) {
   const { root, canvas, video } = props;
   if (video.readyState !== video.HAVE_ENOUGH_DATA) {
     return;
