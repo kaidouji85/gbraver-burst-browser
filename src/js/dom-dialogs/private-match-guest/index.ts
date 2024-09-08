@@ -10,6 +10,7 @@ import {
   PrivateMatchGuestDialogProps,
   PropsCreatorParams,
 } from "./props";
+import { onQRCodeRead } from "./listeners/on-qr-code-read";
 
 /** コンストラクタのパラメータ */
 export type PrivateMatchGuestDialogParams = PropsCreatorParams;
@@ -33,6 +34,9 @@ export class PrivateMatchGuestDialog implements DOMDialog {
       }),
       domPushStream(this.#props.startQRCodeReader).subscribe(() => {
         onStartQrCodeReaderPush(this.#props);
+      }),
+      this.#props.qrCodeReader.notifyReadQRCode().subscribe((roomID) => {
+        onQRCodeRead(this.#props, roomID);
       }),
       domPushStream(this.#props.enterButton).subscribe((action) => {
         onEnterButtonPush(this.#props, action);
