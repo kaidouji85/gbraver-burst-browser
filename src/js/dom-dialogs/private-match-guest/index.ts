@@ -4,13 +4,13 @@ import { domPushStream } from "../../dom/push-dom";
 import { DOMDialog } from "../dialog";
 import { onCloserPush } from "./listeners/on-closer-push";
 import { onEnterButtonPush } from "./listeners/on-enter-button-push";
+import { onQRCodeRead } from "./listeners/on-qr-code-read";
 import { onStartQrCodeReaderPush } from "./listeners/on-start-qr-code-reader-push";
 import {
   createPrivateMatchGuestDialogProps,
   PrivateMatchGuestDialogProps,
   PropsCreatorParams,
 } from "./props";
-import { onQRCodeRead } from "./listeners/on-qr-code-read";
 
 /** コンストラクタのパラメータ */
 export type PrivateMatchGuestDialogParams = PropsCreatorParams;

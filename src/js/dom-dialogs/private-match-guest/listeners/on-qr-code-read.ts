@@ -1,6 +1,6 @@
 import { waitAnimationFrame } from "../../../wait/wait-animation-frame";
+import { waitTime } from "../../../wait/wait-time";
 import { PrivateMatchGuestDialogProps } from "../props";
-import {waitTime} from "../../../wait/wait-time";
 
 /**
  * QRコード読み取りに成功した時の処理
