@@ -41,7 +41,7 @@
   box-sizing: border-box;
   padding: max(var(--dialog-padding), calc(var(--closer-height) / 2))
     var(--dialog-padding) var(--dialog-padding) var(--dialog-padding);
-  min-width: calc(var(--responsive-font-size) * 20);
+  min-width: calc(var(--responsive-font-size) * 35);
   min-height: 30vh;
   display: grid;
   grid-template-rows: auto 1fr auto auto;
@@ -64,14 +64,30 @@
   font-size: calc(var(--responsive-font-size) * 0.8);
 }
 
+.private-match-guest__room-id-form {
+  display: flex;
+  margin-bottom: calc(var(--responsive-font-size) * 0.5);
+  gap: calc(var(--responsive-font-size) * 0.5);
+}
+
 .private-match-guest__room-id {
+  flex: 1;
   font-size: calc(var(--responsive-font-size) * 1);
   height: calc(var(--responsive-font-size) * 3);
   border: var(--button-border);
   border-radius: var(--button-border-radius);
   padding: var(--button-border-radius);
-  margin-bottom: calc(var(--responsive-font-size) * 0.5);
   box-sizing: border-box;
+}
+
+.private-match-guest__start-qr-code-reader {
+  font-size: calc(var(--responsive-font-size) * 1);
+  color: var(--button-font-color);
+  background-color: var(--sub-button-background-color);
+  border-radius: var(--button-border-radius);
+  border: var(--button-border);
+  height: calc(var(--responsive-font-size) * 3);
+  min-width: calc(var(--responsive-font-size) * 7);
 }
 
 .private-match-guest__enter {
