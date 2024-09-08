@@ -9,15 +9,15 @@ import {borderingOnQrCode} from "./bordering-on-qr-code";
  * @param props プロパティ
  */
 export function onGameLoop(props: PrivateMatchQRCodeReaderProps) {
-  const { root, canvas, video } = props;
+  const { canvasElement, canvas, video } = props;
   if (video.readyState !== video.HAVE_ENOUGH_DATA) {
     return;
   }
 
-  root.height = video.videoHeight;
-  root.width = video.videoWidth;
-  canvas.drawImage(video, 0, 0, root.width, root.height);
-  const imageData = canvas.getImageData(0, 0, root.width, root.height);
+  canvasElement.height = video.videoHeight;
+  canvasElement.width = video.videoWidth;
+  canvas.drawImage(video, 0, 0, canvasElement.width, canvasElement.height);
+  const imageData = canvas.getImageData(0, 0, canvasElement.width, canvasElement.height);
   const code = jsQR(imageData.data, imageData.width, imageData.height, {
     inversionAttempts: "dontInvert",
   });

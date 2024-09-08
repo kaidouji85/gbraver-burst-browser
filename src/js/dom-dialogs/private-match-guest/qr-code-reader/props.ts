@@ -2,8 +2,10 @@ import { Subject } from "rxjs";
 
 /** プライベートマッチのQRコードリーダーのプロパティ */
 export type PrivateMatchQRCodeReaderProps = {
-  /** ルート要素となるCanvas */
-  root: HTMLCanvasElement;
+  /** ルートHTML要素 */
+  root: HTMLElement;
+  /** Canvas要素 */
+  canvasElement: HTMLCanvasElement;
   /** Canvasの2D描画コンテキスト */
   canvas: CanvasRenderingContext2D;
   /** カメラ要素になるVideo */

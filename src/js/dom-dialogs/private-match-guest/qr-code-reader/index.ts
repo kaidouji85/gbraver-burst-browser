@@ -64,7 +64,7 @@ export class PrivateMatchQRCodeReader {
    * ルートHTML要素を取得する
    * @returns ルートHTML要素
    */
-  getRootHTMLElement(): HTMLCanvasElement {
+  getRootHTMLElement(): HTMLElement {
     return this.#props.root;
   }
 }
