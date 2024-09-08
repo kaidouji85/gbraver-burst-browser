@@ -5,3 +5,7 @@
   height: 100dvh;
   object-fit: cover;
 }
+
+.private-match-qr-code-reader--hidden {
+  display: none;
+}

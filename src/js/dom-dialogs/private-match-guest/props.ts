@@ -1,5 +1,6 @@
 import { Subject } from "rxjs";
 
+import { replaceDOM } from "../../dom/replace-dom";
 import { Exclusive } from "../../exclusive/exclusive";
 import { ResourcesContainer } from "../../resource";
 import { createEmptySoundResource } from "../../resource/sound/empty-sound-resource";
@@ -14,8 +15,7 @@ import {
   extractStartQRCodeReader,
 } from "./dom/elements";
 import { rootInnerHtml } from "./dom/root-inner-html";
-import {PrivateMatchQRCodeReader} from "./qr-code-reader";
-import {replaceDOM} from "../../dom/replace-dom";
+import { PrivateMatchQRCodeReader } from "./qr-code-reader";
 
 /** プライベートマッチゲストダイアログのプロパティ */
 export type PrivateMatchGuestDialogProps = SEPlayerContainer & {

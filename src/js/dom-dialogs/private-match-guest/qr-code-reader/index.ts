@@ -3,7 +3,9 @@ import { Observable, Unsubscribable } from "rxjs";
 import { gameLoopStream } from "../../../game-loop/game-loop";
 import { GameObjectAction } from "../../../game-object/action/game-object-action";
 import { createPrivateMatchQRCodeReaderProps } from "./procedure/create-private-match-qr-code-reader-props";
+import { hidden } from "./procedure/hidden";
 import { onGameLoop } from "./procedure/on-game-loop";
+import { show } from "./procedure/show";
 import { startCamera } from "./procedure/start-camera";
 import { stopCamera } from "./procedure/stop-camera";
 import { PrivateMatchQRCodeReaderProps } from "./props";
@@ -34,6 +36,7 @@ export class PrivateMatchQRCodeReader {
    */
   async start() {
     await startCamera(this.#props);
+    show(this.#props);
     this.#unsubscribers = [
       gameLoopStream().subscribe(() => {
         onGameLoop(this.#props);
@@ -50,6 +53,7 @@ export class PrivateMatchQRCodeReader {
       u.unsubscribe();
     });
     stopCamera(this.#props);
+    hidden(this.#props);
   }
 
   /**

@@ -1,6 +1,6 @@
 import { Subject } from "rxjs";
 
-import { ROOT } from "../dom/class-name";
+import { ROOT_HIDDEN } from "../dom/class-name";
 import { PrivateMatchQRCodeReaderProps } from "../props";
 
 /**
@@ -9,7 +9,7 @@ import { PrivateMatchQRCodeReaderProps } from "../props";
  */
 export function createPrivateMatchQRCodeReaderProps(): PrivateMatchQRCodeReaderProps {
   const root = document.createElement("canvas");
-  root.className = ROOT;
+  root.className = ROOT_HIDDEN;
 
   const canvas =
     root.getContext("2d", { willReadFrequently: true }) ??

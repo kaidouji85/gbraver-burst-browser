@@ -9,7 +9,6 @@ import {
   PrivateMatchGuestDialogProps,
   PropsCreatorParams,
 } from "./props";
-import {replaceDOM} from "../../dom/replace-dom";
 
 /** コンストラクタのパラメータ */
 export type PrivateMatchGuestDialogParams = PropsCreatorParams;
