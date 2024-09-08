@@ -53,6 +53,12 @@ export class PrivateMatchQRCodeReader {
       u.unsubscribe();
     });
     stopCamera(this.#props);
+  }
+
+  /**
+   * プライベートマッチQRコードリーダーを非表示にする
+   */
+  hidden(): void {
     hidden(this.#props);
   }
 
