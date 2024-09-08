@@ -52,6 +52,14 @@ export class PrivateMatchQRCodeReader {
   }
 
   /**
+   * QRコード読み取りを通知する
+   * @returns QRコード読み取りの通知
+   */
+  notifyReadQRCode(): Observable<string> {
+    return this.#props.notificationOfReadQRCode;
+  }
+
+  /**
    * ルートHTML要素を取得する
    * @returns ルートHTML要素
    */

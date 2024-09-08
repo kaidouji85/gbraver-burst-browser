@@ -1,3 +1,5 @@
+import { Subject } from "rxjs";
+
 import { PrivateMatchQRCodeReaderProps } from "../props";
 
 /**
@@ -10,5 +12,6 @@ export function createPrivateMatchQRCodeReaderProps(): PrivateMatchQRCodeReaderP
     root.getContext("2d", { willReadFrequently: true }) ??
     new CanvasRenderingContext2D();
   const video = document.createElement("video");
-  return { root, canvas, video };
+  const notificationOfReadQRCode = new Subject<string>();
+  return { root, canvas, video, notificationOfReadQRCode };
 }

@@ -11,5 +11,8 @@ export default {
 export const qrCodeReadr: StoryFn = domStub(() => {
   const reader = new PrivateMatchQRCodeReader();
   reader.start();
+  reader.notifyReadQRCode().subscribe((roomID) => {
+    console.log("read QR code", roomID);
+  });
   return reader.getRootHTMLElement();
 });

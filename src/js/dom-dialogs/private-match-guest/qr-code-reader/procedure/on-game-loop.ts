@@ -1,5 +1,6 @@
 import jsQR from "jsqr";
 
+import { extractRoomIDFromPrivateMatchQRCodeText } from "../../../../qr-code/private-match-qr-code";
 import { PrivateMatchQRCodeReaderProps } from "../props";
 
 /**
@@ -19,5 +20,14 @@ export function onGameLoop(props: PrivateMatchQRCodeReaderProps) {
   const code = jsQR(imageData.data, imageData.width, imageData.height, {
     inversionAttempts: "dontInvert",
   });
-  console.log(code?.data); // TODO 開発が終わったら削除する
+  if (!code) {
+    return;
+  }
+
+  const roomID = extractRoomIDFromPrivateMatchQRCodeText(code.data);
+  if (roomID === null) {
+    return;
+  }
+
+  props.notificationOfReadQRCode.next(roomID);
 }
