@@ -8,5 +8,6 @@ import { PrivateMatchGuestDialogProps } from "../props";
 export function onStartQrCodeReaderPush(props: PrivateMatchGuestDialogProps) {
   props.exclusive.execute(async () => {
     await pop(props.startQRCodeReader);
+    await props.qrCodeReader.start();
   });
 }

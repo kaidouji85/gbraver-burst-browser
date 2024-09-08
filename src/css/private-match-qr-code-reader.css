@@ -1,4 +1,6 @@
 .private-match-qr-code-reader {
+  position: absolute;
+  z-index: var(--zindex-qr-code-reader);
   width: 100vw;
   width: 100dvw;
   height: 100vh;
