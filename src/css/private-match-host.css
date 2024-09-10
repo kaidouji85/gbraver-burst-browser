@@ -22,7 +22,10 @@
   width: 100dvw;
   height: 100vh;
   height: 100dvh;
-  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
   color: var(--font-color);
   background-color: var(--background-color);
   position: absolute;
@@ -36,8 +39,8 @@
   width: var(--closer-width);
   height: var(--closer-height);
   position: absolute;
-  top: calc(var(--closer-width) * -0.5);
-  left: calc(var(--closer-height) * -0.5);
+  top: calc(var(--closer-width) * 0.25);
+  left: calc(var(--closer-height) * 0.25);
 }
 
 .private-match-host__title {
@@ -45,8 +48,8 @@
 }
 
 .private-match-host__description {
-  margin-bottom: calc(var(--responsive-font-size) * 1);
-  font-size: calc(var(--responsive-font-size) * 0.8);
+  margin-bottom: calc(var(--responsive-font-size) * 2);
+  font-size: calc(var(--responsive-font-size) * 1);
 }
 
 .private-match-host__qr-code {

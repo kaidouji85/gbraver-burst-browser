@@ -13,7 +13,7 @@ export function rootInnerHTML(resources: Resources, roomID: string): string {
   const closerPath =
     resources.paths.find((v) => v.id === PathIds.CLOSER)?.path ?? "";
   const description =
-    "プライベートマッチしたい人に、以下のルームIDを共有してください。";
+    "プライベートマッチしたい人に、以下のQRコードまたはルームIDを共有してください。";
   return template({
     ROOT_CLASS,
     closerPath,
