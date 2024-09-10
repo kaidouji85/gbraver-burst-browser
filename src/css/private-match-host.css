@@ -39,8 +39,8 @@
   width: var(--closer-width);
   height: var(--closer-height);
   position: absolute;
-  top: calc(var(--closer-width) * 0.25);
-  left: calc(var(--closer-height) * 0.25);
+  top: max(var(--safe-area-top), calc(var(--closer-width) * 0.3));
+  left: max(var(--safe-area-left), calc(var(--closer-height) * 0.3));
 }
 
 .private-match-host__title {
