@@ -15,31 +15,17 @@
   }
 }
 
-.private-match-host__background {
-  position: absolute;
+.private-match-host__dialog {
+  --dialog-padding: calc(var(--responsive-font-size) * 2);
+
   width: 100vw;
   width: 100dvw;
   height: 100vh;
   height: 100dvh;
-  background-color: #000;
-  opacity: 0.5;
-  z-index: var(--zindex-background);
-}
-
-.private-match-host__dialog {
-  --dialog-padding: calc(var(--responsive-font-size) * 2);
-
-  top: 50vh;
-  top: 50dvh;
-  left: 50vw;
-  left: 50dvw;
   text-align: center;
-  transform: translate(-50%, -50%);
   color: var(--font-color);
   background-color: var(--background-color);
   position: absolute;
-  border: var(--dialog-border);
-  border-radius: var(--dialog-border-radius);
   z-index: var(--zindex-dialog);
   box-sizing: border-box;
   padding: max(var(--dialog-padding), calc(var(--closer-height) / 2))
