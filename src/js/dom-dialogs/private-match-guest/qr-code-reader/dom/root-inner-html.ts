@@ -8,7 +8,7 @@ import template from "./root-inner-html.hbs";
  * @param resources リソース管理オブジェクト
  * @returns 生成結果
  */
-export function rootInnerHtml(resources: Resources): string {
+export function rootInnerHTML(resources: Resources): string {
   const closerPath =
     resources.paths.find((p) => p.id === PathIds.CLOSER)?.path ?? "";
   return template({

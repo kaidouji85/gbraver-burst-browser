@@ -1,6 +1,24 @@
-.private-match-qr-code-reader {
-  position: absolute;
-  z-index: var(--zindex-qr-code-reader);
+@media (orientation: landscape) {
+  .private-match-qr-code-reader {
+    --closer-width: 48px;
+    --closer-height: 48px;
+
+    position: absolute;
+    z-index: var(--zindex-qr-code-reader);
+  }
+}
+
+@media (orientation: portrait) {
+  .private-match-qr-code-reader {
+    display: none;
+  }
+}
+
+.private-match-qr-code-reader--hidden {
+  display: none;
+}
+
+.private-match-qr-code-reader__camera-canvas {
   width: 100vw;
   width: 100dvw;
   height: 100vh;
@@ -8,6 +26,10 @@
   object-fit: cover;
 }
 
-.private-match-qr-code-reader--hidden {
-  display: none;
+.private-match-qr-code-reader__closer {
+  width: var(--closer-width);
+  height: var(--closer-height);
+  position: absolute;
+  top: max(var(--safe-area-top), calc(var(--closer-width) * 0.3));
+  left: max(var(--safe-area-left), calc(var(--closer-height) * 0.3));
 }
