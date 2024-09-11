@@ -1,13 +1,21 @@
 import { Subject } from "rxjs";
 
-import { ROOT_HIDDEN } from "../dom/class-name";
+import { ResourcesContainer } from "../../../../resource";
+import { PathIds } from "../../../../resource/path/ids";
+import { ROOT, ROOT_HIDDEN } from "../dom/class-name";
 import { PrivateMatchQRCodeReaderProps } from "../props";
+
+/** プライベートマッチQRコードリーダーのパラメータ */
+export type PropsCreatorParams = ResourcesContainer;
 
 /**
  * PrivateMatchQRCodeReaderPropsを生成する
+ * @param params 生成パラメータ
  * @returns 生成結果
  */
-export function createPrivateMatchQRCodeReaderProps(): PrivateMatchQRCodeReaderProps {
+export function createPrivateMatchQRCodeReaderProps(
+  params: PropsCreatorParams,
+): PrivateMatchQRCodeReaderProps {
   const root = document.createElement("canvas");
   root.className = ROOT_HIDDEN;
 
@@ -16,6 +24,12 @@ export function createPrivateMatchQRCodeReaderProps(): PrivateMatchQRCodeReaderP
     new CanvasRenderingContext2D();
 
   const video = document.createElement("video");
+
+  const closer = document.createElement("img");
+  closer.className = `${ROOT}__closer`;
+  closer.src =
+    params.resources.paths.find((p) => p.id === PathIds.CLOSER)?.path ?? "";
+  root.appendChild(closer);
 
   const notificationOfReadQRCode = new Subject<string>();
 

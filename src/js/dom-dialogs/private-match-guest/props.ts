@@ -16,7 +16,10 @@ import {
   extractStartQRCodeReader,
 } from "./dom/elements";
 import { rootInnerHtml } from "./dom/root-inner-html";
-import { PrivateMatchQRCodeReader } from "./qr-code-reader";
+import {
+  PrivateMatchQRCodeReader,
+  PrivateMatchQRCodeReaderParams,
+} from "./qr-code-reader";
 
 /** プライベートマッチゲストダイアログのプロパティ */
 export type PrivateMatchGuestDialogProps = SEPlayerContainer & {
@@ -52,7 +55,9 @@ export type PrivateMatchGuestDialogProps = SEPlayerContainer & {
 };
 
 /** PrivateMatchGuestDialogProps生成パラメータ */
-export type PropsCreatorParams = ResourcesContainer & SEPlayerContainer;
+export type PropsCreatorParams = ResourcesContainer &
+  SEPlayerContainer &
+  PrivateMatchQRCodeReaderParams;
 
 /**
  * PrivateMatchGuestDialogPropsを生成する
@@ -68,7 +73,7 @@ export function createPrivateMatchGuestDialogProps(
   root.className = ROOT_CLASS;
   root.innerHTML = rootInnerHtml(resources);
 
-  const qrCodeReader = new PrivateMatchQRCodeReader();
+  const qrCodeReader = new PrivateMatchQRCodeReader(params);
   const qrCodeReaderStarter = extractDummyQRCodeReader(root);
   replaceDOM(qrCodeReaderStarter, qrCodeReader.getRootHTMLElement());
   return {

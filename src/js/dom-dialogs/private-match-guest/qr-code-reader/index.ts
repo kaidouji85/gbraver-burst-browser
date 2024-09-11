@@ -1,8 +1,10 @@
 import { Observable, Unsubscribable } from "rxjs";
 
 import { gameLoopStream } from "../../../game-loop/game-loop";
-import { GameObjectAction } from "../../../game-object/action/game-object-action";
-import { createPrivateMatchQRCodeReaderProps } from "./procedure/create-private-match-qr-code-reader-props";
+import {
+  createPrivateMatchQRCodeReaderProps,
+  PropsCreatorParams,
+} from "./procedure/create-private-match-qr-code-reader-props";
 import { hidden } from "./procedure/hidden";
 import { onGameLoop } from "./procedure/on-game-loop";
 import { show } from "./procedure/show";
@@ -11,10 +13,7 @@ import { stopCamera } from "./procedure/stop-camera";
 import { PrivateMatchQRCodeReaderProps } from "./props";
 
 /** プライベートマッチQRコードリーダーのパラメータ */
-export type PrivateMatchQRCodeReaderParams = {
-  /** ゲームオブジェクトアクション */
-  gameObjectAction: Observable<GameObjectAction>;
-};
+export type PrivateMatchQRCodeReaderParams = PropsCreatorParams;
 
 /** プライベートマッチQRコードリーダー */
 export class PrivateMatchQRCodeReader {
@@ -25,9 +24,10 @@ export class PrivateMatchQRCodeReader {
 
   /**
    * コンストラクタ
+   * @param params パラメータ
    */
-  constructor() {
-    this.#props = createPrivateMatchQRCodeReaderProps();
+  constructor(params: PrivateMatchQRCodeReaderParams) {
+    this.#props = createPrivateMatchQRCodeReaderProps(params);
     this.#unsubscribers = [];
   }
 

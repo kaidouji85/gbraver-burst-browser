@@ -9,8 +9,8 @@ export default {
 };
 
 /** QRコードリーダー */
-export const qrCodeReadr: StoryFn = domStub(() => {
-  const reader = new PrivateMatchQRCodeReader();
+export const qrCodeReadr: StoryFn = domStub((params) => {
+  const reader = new PrivateMatchQRCodeReader(params);
   reader.start();
   reader.notifyReadQRCode().subscribe(async (roomID) => {
     console.log("read QR code", roomID);
