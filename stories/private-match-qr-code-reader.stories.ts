@@ -18,5 +18,9 @@ export const qrCodeReadr: StoryFn = domStub((params) => {
     await waitTime(500);
     reader.hidden();
   });
+  reader.notifyClose().subscribe(() => {
+    console.log("close");
+    reader.hidden();
+  });
   return reader.getRootHTMLElement();
 });

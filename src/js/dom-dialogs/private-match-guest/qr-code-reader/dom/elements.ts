@@ -4,7 +4,7 @@
  * @returns 取得結果
  */
 export const extractCloser = (root: HTMLElement): HTMLElement =>
-  root.querySelector(`[data-id="closer"]`) ?? document.createElement("div");
+  root.querySelector(`[data-id="qr-code-reader-closer"]`) ?? document.createElement("div");
 
 /**
  * カメラキャンバスを取得する

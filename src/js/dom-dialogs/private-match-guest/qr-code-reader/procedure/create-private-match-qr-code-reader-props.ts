@@ -1,8 +1,9 @@
 import { Subject } from "rxjs";
 
+import { Exclusive } from "../../../../exclusive/exclusive";
 import { ResourcesContainer } from "../../../../resource";
 import { ROOT_HIDDEN } from "../dom/class-name";
-import { extractCameraCanvas } from "../dom/elements";
+import { extractCameraCanvas, extractCloser } from "../dom/elements";
 import { rootInnerHTML } from "../dom/root-inner-html";
 import { PrivateMatchQRCodeReaderProps } from "../props";
 
@@ -28,7 +29,24 @@ export function createPrivateMatchQRCodeReaderProps(
 
   const video = document.createElement("video");
 
-  const notificationOfReadQRCode = new Subject<string>();
+  const closer = extractCloser(root);
 
-  return { root, cameraCanvas, canvas, video, notificationOfReadQRCode };
+  const notificationOfReadQRCode = new Subject<string>();
+  const notificationOfClose = new Subject<void>();
+
+  const exclusive = new Exclusive();
+  return {
+    root,
+
+    cameraCanvas,
+    canvas,
+    video,
+
+    closer,
+
+    notificationOfReadQRCode,
+    notificationOfClose,
+
+    exclusive,
+  };
 }
