@@ -2,10 +2,10 @@ import { Subject } from "rxjs";
 
 import { Exclusive } from "../../../exclusive/exclusive";
 import { SoundResource } from "../../../resource/sound/resource";
-import { SEPlayer } from "../../../se/se-player";
+import { SEPlayerContainer } from "../../../se/se-player";
 
 /** プライベートマッチのQRコードリーダーのプロパティ */
-export type PrivateMatchQRCodeReaderProps = {
+export type PrivateMatchQRCodeReaderProps = SEPlayerContainer & {
   /** ルートHTML要素 */
   root: HTMLElement;
 
@@ -19,8 +19,6 @@ export type PrivateMatchQRCodeReaderProps = {
   /** クロージャー */
   closer: HTMLElement;
 
-  /** 効果音再生機 */
-  se: SEPlayer;
   /** 効果音（値変更） */
   changeValue: SoundResource;
 
