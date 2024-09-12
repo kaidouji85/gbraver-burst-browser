@@ -7,6 +7,7 @@ import { PrivateMatchQRCodeReaderProps } from "../props";
  */
 export function onCloserPush(props: PrivateMatchQRCodeReaderProps) {
   props.exclusive.execute(async () => {
+    props.se.play(props.changeValue);
     await pop(props.closer, 1.3);
     props.notificationOfClose.next();
   });
