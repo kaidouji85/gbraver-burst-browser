@@ -6,6 +6,7 @@ import { PrivateMatchGuestDialogProps } from "../props";
  */
 export function onQrCodeReaderClose(props: PrivateMatchGuestDialogProps) {
   props.exclusive.execute(async () => {
+    props.qrCodeReader.stop();
     props.qrCodeReader.hidden();
   });
 }

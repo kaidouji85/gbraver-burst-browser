@@ -6,7 +6,7 @@ import { onCloserPush } from "./on-closer-push";
 import { onEnterButtonPush } from "./on-enter-button-push";
 import { onQRCodeRead } from "./on-qr-code-read";
 import { onQrCodeReaderClose } from "./on-qr-code-reader-close";
-import { onStartQrCodeReaderPush } from "./on-start-qr-code-reader-push";
+import { onQrCodeReaderStart } from "./on-qr-code-reader-start";
 
 /**
  * イベントリスナーをバインドする
@@ -20,7 +20,7 @@ export function bindEvenListeners(
       onCloserPush(props, action);
     }),
     domPushStream(props.startQRCodeReader).subscribe(() => {
-      onStartQrCodeReaderPush(props);
+      onQrCodeReaderStart(props);
     }),
     props.qrCodeReader.notifyReadQRCode().subscribe((roomID) => {
       onQRCodeRead(props, roomID);
