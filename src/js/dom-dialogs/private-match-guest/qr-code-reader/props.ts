@@ -1,7 +1,8 @@
 import { Subject } from "rxjs";
-import {Exclusive} from "../../../exclusive/exclusive";
-import {SoundResource} from "../../../resource/sound/resource";
-import {SEPlayer} from "../../../se/se-player";
+
+import { Exclusive } from "../../../exclusive/exclusive";
+import { SoundResource } from "../../../resource/sound/resource";
+import { SEPlayer } from "../../../se/se-player";
 
 /** プライベートマッチのQRコードリーダーのプロパティ */
 export type PrivateMatchQRCodeReaderProps = {

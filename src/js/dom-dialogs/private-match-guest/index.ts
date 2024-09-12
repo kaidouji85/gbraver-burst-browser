@@ -1,16 +1,12 @@
 import { Observable, Unsubscribable } from "rxjs";
 
-import { domPushStream } from "../../dom/push-dom";
 import { DOMDialog } from "../dialog";
-import { onCloserPush } from "./listeners/on-closer-push";
-import { onEnterButtonPush } from "./listeners/on-enter-button-push";
-import { onQRCodeRead } from "./listeners/on-qr-code-read";
-import { onStartQrCodeReaderPush } from "./listeners/on-start-qr-code-reader-push";
+import { bindEvenListeners } from "./procedure/bind-even-listeners";
 import {
   createPrivateMatchGuestDialogProps,
-  PrivateMatchGuestDialogProps,
   PropsCreatorParams,
-} from "./props";
+} from "./procedure/create-private-match-guest-dialog-props";
+import { PrivateMatchGuestDialogProps } from "./props";
 
 /** コンストラクタのパラメータ */
 export type PrivateMatchGuestDialogParams = PropsCreatorParams;
@@ -28,20 +24,7 @@ export class PrivateMatchGuestDialog implements DOMDialog {
    */
   constructor(params: PrivateMatchGuestDialogParams) {
     this.#props = createPrivateMatchGuestDialogProps(params);
-    this.#unsubscribers = [
-      domPushStream(this.#props.closer).subscribe((action) => {
-        onCloserPush(this.#props, action);
-      }),
-      domPushStream(this.#props.startQRCodeReader).subscribe(() => {
-        onStartQrCodeReaderPush(this.#props);
-      }),
-      this.#props.qrCodeReader.notifyReadQRCode().subscribe((roomID) => {
-        onQRCodeRead(this.#props, roomID);
-      }),
-      domPushStream(this.#props.enterButton).subscribe((action) => {
-        onEnterButtonPush(this.#props, action);
-      }),
-    ];
+    this.#unsubscribers = bindEvenListeners(this.#props);
   }
 
   /** @override */
