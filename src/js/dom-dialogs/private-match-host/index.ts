@@ -15,9 +15,9 @@ export type PrivateMatchHostDialogParams = PropsCreatorParams;
 /** プライベートマッチホストダイアログ */
 export class PrivateMatchHostDialog implements DOMDialog {
   /** プロパティ */
-  #props: PrivateMatchHostDialogProps;
+  readonly #props: PrivateMatchHostDialogProps;
   /** アンサブスクライバ */
-  #unsubscribers: Unsubscribable[];
+  readonly #unsubscribers: Unsubscribable[];
 
   /**
    * コンストラクタ

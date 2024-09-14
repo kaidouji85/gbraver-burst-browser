@@ -11,10 +11,8 @@ import template from "./root-inner-html.hbs";
 export function rootInnerHtml(resources: Resources): string {
   const closerPath =
     resources.paths.find((v) => v.id === PathIds.CLOSER)?.path ?? "";
-  const entryDescription = "ホストから共有されたルームIDを、入力してください。";
   return template({
     ROOT_CLASS,
     closerPath,
-    entryDescription,
   });
 }

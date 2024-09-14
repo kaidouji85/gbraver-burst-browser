@@ -1,27 +1,28 @@
 import { Subject } from "rxjs";
 
 import { Exclusive } from "../../exclusive/exclusive";
+import { drawPrivateMatchQRCode } from "../../qr-code/private-match-qr-code";
 import { ResourcesContainer } from "../../resource";
 import { createEmptySoundResource } from "../../resource/sound/empty-sound-resource";
 import { SOUND_IDS } from "../../resource/sound/ids";
 import { SoundResource } from "../../resource/sound/resource";
 import { SEPlayerContainer } from "../../se/se-player";
 import { ROOT_CLASS } from "./dom/class-name";
-import { extractCloser } from "./dom/elements";
+import { extractCloser, extractQRCode } from "./dom/elements";
 import { rootInnerHTML } from "./dom/root-inner-html";
 
 /** プライベートマッチホストダイアログのプロパティ */
 export type PrivateMatchHostDialogProps = SEPlayerContainer & {
   /** ルート要素HTML */
-  root: HTMLElement;
+  readonly root: HTMLElement;
   /** クロージャ */
-  closer: HTMLElement;
+  readonly closer: HTMLElement;
   /** 効果音 値変更 */
-  changeValue: SoundResource;
+  readonly changeValue: SoundResource;
   /** 排他制御 */
-  exclusive: Exclusive;
+  readonly exclusive: Exclusive;
   /** ダイアログ閉じる通知 */
-  dialogClosed: Subject<void>;
+  readonly dialogClosed: Subject<void>;
 };
 
 /** PrivateMatchHostDialogProps生成パラメータ */
@@ -44,6 +45,8 @@ export function createPrivateMatchHostDialogProps(
   root.className = ROOT_CLASS;
   root.innerHTML = rootInnerHTML(resources, roomID);
   const closer = extractCloser(root);
+  const qrCode = extractQRCode(root);
+  drawPrivateMatchQRCode(qrCode, roomID);
   return {
     ...params,
     root,

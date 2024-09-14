@@ -1,73 +1,39 @@
 import { Subject } from "rxjs";
 
 import { Exclusive } from "../../exclusive/exclusive";
-import { ResourcesContainer } from "../../resource";
-import { createEmptySoundResource } from "../../resource/sound/empty-sound-resource";
-import { SOUND_IDS } from "../../resource/sound/ids";
 import { SoundResource } from "../../resource/sound/resource";
 import { SEPlayerContainer } from "../../se/se-player";
-import { ROOT_CLASS } from "./dom/class-name";
-import {
-  extractCloser,
-  extractEnterButton,
-  extractRoomID,
-} from "./dom/elements";
-import { rootInnerHtml } from "./dom/root-inner-html";
+import { PrivateMatchQRCodeReader } from "./qr-code-reader";
 
 /** プライベートマッチゲストダイアログのプロパティ */
 export type PrivateMatchGuestDialogProps = SEPlayerContainer & {
   /** ルートHTML要素 */
-  root: HTMLElement;
+  readonly root: HTMLElement;
   /** クロージャ */
-  closer: HTMLElement;
-  /** ルームID入力フォーム */
-  roomID: HTMLInputElement;
+  readonly closer: HTMLElement;
+  /** ルームIDテキスト入力フォーム */
+  readonly roomID: HTMLInputElement;
+  /** QRコードリーダー開始ボタン */
+  readonly startQRCodeReader: HTMLButtonElement;
   /** プライベートマット開始ボタン */
-  enterButton: HTMLElement;
+  readonly enterButton: HTMLElement;
+
+  /** QRコードリーダー */
+  readonly qrCodeReader: PrivateMatchQRCodeReader;
+
   /** 排他制御 */
-  exclusive: Exclusive;
+  readonly exclusive: Exclusive;
+
   /** 効果音 値変更 */
-  changeValue: SoundResource;
+  readonly changeValue: SoundResource;
   /** 効果音 ボタンプッシュ */
-  pushButton: SoundResource;
+  readonly pushButton: SoundResource;
+
   /** ダイアログ閉じる通知 */
-  dialogClosed: Subject<void>;
+  readonly dialogClosed: Subject<void>;
   /**
    * プライベートマッチ開始通知
    * ユーザが入力したルームIDをストリームとして渡す
    */
-  privateMatchStart: Subject<string>;
+  readonly privateMatchStart: Subject<string>;
 };
-
-/** PrivateMatchGuestDialogProps生成パラメータ */
-export type PropsCreatorParams = ResourcesContainer & SEPlayerContainer;
-
-/**
- * PrivateMatchGuestDialogPropsを生成する
- * @param params 生成パラメータ
- * @returns 生成結果
- */
-export function createPrivateMatchGuestDialogProps(
-  params: PropsCreatorParams,
-): PrivateMatchGuestDialogProps {
-  const { resources, se } = params;
-  const root = document.createElement("div");
-  root.className = ROOT_CLASS;
-  root.innerHTML = rootInnerHtml(resources);
-  return {
-    closer: extractCloser(root),
-    roomID: extractRoomID(root),
-    enterButton: extractEnterButton(root),
-    root,
-    dialogClosed: new Subject(),
-    privateMatchStart: new Subject(),
-    changeValue:
-      resources.sounds.find((v) => v.id === SOUND_IDS.CHANGE_VALUE) ??
-      createEmptySoundResource(),
-    pushButton:
-      resources.sounds.find((v) => v.id === SOUND_IDS.PUSH_BUTTON) ??
-      createEmptySoundResource(),
-    se,
-    exclusive: new Exclusive(),
-  };
-}
