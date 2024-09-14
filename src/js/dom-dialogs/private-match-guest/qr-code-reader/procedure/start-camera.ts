@@ -9,6 +9,7 @@ export async function startCamera(props: PrivateMatchQRCodeReaderProps) {
   video.srcObject = await navigator.mediaDevices.getUserMedia({
     video: { facingMode: "environment" },
   });
+  // videoタグのplaysinline属性には値がないので、2番目の引数は空文字である
   video.setAttribute("playsinline", "");
   await video.play();
 }
