@@ -44,20 +44,8 @@
   left: max(var(--safe-area-left), calc(var(--closer-height) * 0.3));
 }
 
-.private-match-host__title {
-  font-size: calc(var(--responsive-font-size) * 1.3);
-  margin-bottom: calc(var(--responsive-font-size) * 2);
-}
-
 .private-match-host__qr-code-description {
   margin-bottom: calc(var(--responsive-font-size) * 0.5);
-}
-
-.private-match-host__qr-code {
-  --qr-code-size: calc(var(--responsive-font-size) * 4);
-
-  width: var(--qr-code-size);
-  height: var(--qr-code-size);
 }
 
 .private-match-host__separator {
