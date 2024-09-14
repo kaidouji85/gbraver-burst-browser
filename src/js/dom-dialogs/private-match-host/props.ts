@@ -14,15 +14,15 @@ import { rootInnerHTML } from "./dom/root-inner-html";
 /** プライベートマッチホストダイアログのプロパティ */
 export type PrivateMatchHostDialogProps = SEPlayerContainer & {
   /** ルート要素HTML */
-  root: HTMLElement;
+  readonly root: HTMLElement;
   /** クロージャ */
-  closer: HTMLElement;
+  readonly closer: HTMLElement;
   /** 効果音 値変更 */
-  changeValue: SoundResource;
+  readonly changeValue: SoundResource;
   /** 排他制御 */
-  exclusive: Exclusive;
+  readonly exclusive: Exclusive;
   /** ダイアログ閉じる通知 */
-  dialogClosed: Subject<void>;
+  readonly dialogClosed: Subject<void>;
 };
 
 /** PrivateMatchHostDialogProps生成パラメータ */

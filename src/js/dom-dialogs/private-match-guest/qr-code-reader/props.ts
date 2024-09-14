@@ -7,26 +7,26 @@ import { SEPlayerContainer } from "../../../se/se-player";
 /** プライベートマッチのQRコードリーダーのプロパティ */
 export type PrivateMatchQRCodeReaderProps = SEPlayerContainer & {
   /** ルートHTML要素 */
-  root: HTMLElement;
+  readonly root: HTMLElement;
 
   /** カメラ映像を描画するキャンバス要素 */
-  cameraCanvas: HTMLCanvasElement;
+  readonly cameraCanvas: HTMLCanvasElement;
   /** Canvasの2D描画コンテキスト */
-  canvas: CanvasRenderingContext2D;
+  readonly canvas: CanvasRenderingContext2D;
   /** カメラのストリームを関連づけるビデオ要素 */
-  video: HTMLVideoElement;
+  readonly video: HTMLVideoElement;
 
   /** クロージャー */
-  closer: HTMLElement;
+  readonly closer: HTMLElement;
 
   /** 効果音（値変更） */
-  changeValue: SoundResource;
+  readonly changeValue: SoundResource;
 
   /** QRコード読み取りの通知 */
-  notificationOfReadQRCode: Subject<string>;
+  readonly notificationOfReadQRCode: Subject<string>;
   /** 閉じる通知 */
-  notificationOfClose: Subject<void>;
+  readonly notificationOfClose: Subject<void>;
 
   /** 排他制御 */
-  exclusive: Exclusive;
+  readonly exclusive: Exclusive;
 };

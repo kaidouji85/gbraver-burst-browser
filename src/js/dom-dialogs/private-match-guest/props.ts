@@ -8,32 +8,32 @@ import { PrivateMatchQRCodeReader } from "./qr-code-reader";
 /** プライベートマッチゲストダイアログのプロパティ */
 export type PrivateMatchGuestDialogProps = SEPlayerContainer & {
   /** ルートHTML要素 */
-  root: HTMLElement;
+  readonly root: HTMLElement;
   /** クロージャ */
-  closer: HTMLElement;
+  readonly closer: HTMLElement;
   /** ルームIDテキスト入力フォーム */
-  roomID: HTMLInputElement;
+  readonly roomID: HTMLInputElement;
   /** QRコードリーダー開始ボタン */
-  startQRCodeReader: HTMLButtonElement;
+  readonly startQRCodeReader: HTMLButtonElement;
   /** プライベートマット開始ボタン */
-  enterButton: HTMLElement;
+  readonly enterButton: HTMLElement;
 
   /** QRコードリーダー */
-  qrCodeReader: PrivateMatchQRCodeReader;
+  readonly qrCodeReader: PrivateMatchQRCodeReader;
 
   /** 排他制御 */
-  exclusive: Exclusive;
+  readonly exclusive: Exclusive;
 
   /** 効果音 値変更 */
-  changeValue: SoundResource;
+  readonly changeValue: SoundResource;
   /** 効果音 ボタンプッシュ */
-  pushButton: SoundResource;
+  readonly pushButton: SoundResource;
 
   /** ダイアログ閉じる通知 */
-  dialogClosed: Subject<void>;
+  readonly dialogClosed: Subject<void>;
   /**
    * プライベートマッチ開始通知
    * ユーザが入力したルームIDをストリームとして渡す
    */
-  privateMatchStart: Subject<string>;
+  readonly privateMatchStart: Subject<string>;
 };
