@@ -12,12 +12,9 @@ import template from "./root-inner-html.hbs";
 export function rootInnerHTML(resources: Resources, roomID: string): string {
   const closerPath =
     resources.paths.find((v) => v.id === PathIds.CLOSER)?.path ?? "";
-  const description =
-    "プライベートマッチしたい人に、以下のQRコードまたはルームIDを共有してください。";
   return template({
     ROOT_CLASS,
     closerPath,
     roomID,
-    description,
   });
 }
