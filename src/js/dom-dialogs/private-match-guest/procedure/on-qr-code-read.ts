@@ -15,7 +15,7 @@ export function onQRCodeRead(
     props.qrCodeReader.stop();
     await waitAnimationFrame();
     await waitTime(800);
-    props.roomID.value = roomID;
     props.qrCodeReader.hidden();
+    props.privateMatchStart.next(roomID);
   });
 }
