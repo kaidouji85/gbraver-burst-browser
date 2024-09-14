@@ -1,15 +1,16 @@
 <div class="{{ROOT_CLASS}}__background"></div>
 <div class="{{ROOT_CLASS}}__dummy-qr-code-reader" data-id="dummy-qr-code-reader"></div>
 <div class="{{ROOT_CLASS}}__dialog">
-  <img class="{{ROOT_CLASS}}__closer" alt="閉じる" src="{{closerPath}}" data-id="closer" />
+  <img class="{{ROOT_CLASS}}__closer" alt="閉じる" src="{{closerPath}}" data-id="closer"/>
   <div class="{{ROOT_CLASS}}__entry-title">プライベートマッチ（ゲスト）</div>
-  <div class="{{ROOT_CLASS}}__entry-description">{{entryDescription}}</div>
+  <div class="{{ROOT_CLASS}}__qr-code-description">QRコードを読み込んでプライベートマッチ開始</div>
+  <button class="{{ROOT_CLASS}}__start-qr-code-reader" data-id="start-qr-code-reader">
+    カメラを起動
+  </button>
+  <div class="{{ROOT_CLASS}}__separator">or</div>
+  <div class="{{ROOT_CLASS}}__room-id-description">ルームIDを入力してプライベートマッチ開始</div>
   <div class="{{ROOT_CLASS}}__room-id-form">
-    <input class="{{ROOT_CLASS}}__room-id" type="text" data-id="roomID" />
-    <button class="{{ROOT_CLASS}}__start-qr-code-reader" data-id="start-qr-code-reader">QR
-      <wbr />
-      コード
-    </button>
+    <input class="{{ROOT_CLASS}}__room-id" type="text" data-id="roomID"/>
+    <button class="{{ROOT_CLASS}}__enter" data-id="enterButton">入室</button>
   </div>
-  <button class="{{ROOT_CLASS}}__enter" data-id="enterButton">プライベートマッチ開始</button>
 </div>
