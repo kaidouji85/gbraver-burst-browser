@@ -2,7 +2,7 @@ import jsQR from "jsqr";
 
 import { extractRoomIDFromPrivateMatchQRCodeText } from "../../../../qr-code/private-match-qr-code";
 import { PrivateMatchQRCodeReaderProps } from "../props";
-import { borderingOnQrCode } from "./bordering-on-qr-code";
+import { drawQRCodeBorder } from "./draw-qr-code-border";
 
 /**
  * ゲームループ内での処理を行う
@@ -30,7 +30,7 @@ export function onGameLoop(props: PrivateMatchQRCodeReaderProps) {
     return;
   }
 
-  borderingOnQrCode(canvas, code);
+  drawQRCodeBorder(canvas, code);
   const roomID = extractRoomIDFromPrivateMatchQRCodeText(code.data);
   if (roomID === null) {
     return;

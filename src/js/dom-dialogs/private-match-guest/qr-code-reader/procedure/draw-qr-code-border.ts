@@ -19,22 +19,30 @@ function drawLine(canvas: CanvasRenderingContext2D, begin: Point, end: Point) {
 /**
  * QRコードに枠を描画する
  * @param canvas 描画先のキャンバス
- * @param code QRコード
+ * @param qrCode QRコード
  */
-export function borderingOnQrCode(
+export function drawQRCodeBorder(
   canvas: CanvasRenderingContext2D,
-  code: QRCode,
+  qrCode: QRCode,
 ) {
-  drawLine(canvas, code.location.topLeftCorner, code.location.topRightCorner);
   drawLine(
     canvas,
-    code.location.topRightCorner,
-    code.location.bottomRightCorner,
+    qrCode.location.topLeftCorner,
+    qrCode.location.topRightCorner,
   );
   drawLine(
     canvas,
-    code.location.bottomRightCorner,
-    code.location.bottomLeftCorner,
+    qrCode.location.topRightCorner,
+    qrCode.location.bottomRightCorner,
   );
-  drawLine(canvas, code.location.bottomLeftCorner, code.location.topLeftCorner);
+  drawLine(
+    canvas,
+    qrCode.location.bottomRightCorner,
+    qrCode.location.bottomLeftCorner,
+  );
+  drawLine(
+    canvas,
+    qrCode.location.bottomLeftCorner,
+    qrCode.location.topLeftCorner,
+  );
 }

@@ -17,7 +17,7 @@ export type PrivateMatchQRCodeReaderParams = PropsCreatorParams;
 /** プライベートマッチQRコードリーダー */
 export class PrivateMatchQRCodeReader {
   /** プロパティ */
-  #props: PrivateMatchQRCodeReaderProps;
+  readonly #props: PrivateMatchQRCodeReaderProps;
   /** アンサブスクライバ */
   #unsubscribers: Unsubscribable[];
 
