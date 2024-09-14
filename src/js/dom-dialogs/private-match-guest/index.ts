@@ -14,9 +14,9 @@ export type PrivateMatchGuestDialogParams = PropsCreatorParams;
 /** プライベートマッチゲストダイアログ */
 export class PrivateMatchGuestDialog implements DOMDialog {
   /** プロパティ */
-  #props: PrivateMatchGuestDialogProps;
+  readonly #props: PrivateMatchGuestDialogProps;
   /** アンサブスクライバ */
-  #unsubscribers: Unsubscribable[];
+  readonly #unsubscribers: Unsubscribable[];
 
   /**
    * コンストラクタ
@@ -32,6 +32,7 @@ export class PrivateMatchGuestDialog implements DOMDialog {
     this.#unsubscribers.forEach((v) => {
       v.unsubscribe();
     });
+    this.#props.qrCodeReader.stop();
   }
 
   /** @override */
