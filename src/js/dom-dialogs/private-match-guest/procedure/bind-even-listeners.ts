@@ -11,6 +11,7 @@ import { onQrCodeReaderStart } from "./on-qr-code-reader-start";
 /**
  * イベントリスナーをバインドする
  * @param props プロパティ
+ * @returns アンサブスクライバ
  */
 export function bindEvenListeners(
   props: PrivateMatchGuestDialogProps,
