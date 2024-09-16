@@ -1,5 +1,6 @@
 import { pop } from "../../../dom/pop";
 import { PrivateMatchGuestDialogProps } from "../props";
+import { disableAllControllers } from "./disable-all-controllers";
 
 /**
  * QRコードリーダーボタンが押された時の処理
@@ -7,6 +8,7 @@ import { PrivateMatchGuestDialogProps } from "../props";
  */
 export function onQrCodeReaderStart(props: PrivateMatchGuestDialogProps) {
   props.exclusive.execute(async () => {
+    disableAllControllers(props);
     props.se.play(props.changeValue);
     await pop(props.startQRCodeReader, 1.07);
     await props.qrCodeReader.start();
