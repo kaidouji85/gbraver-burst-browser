@@ -9,7 +9,7 @@ export function onCopyRoomIdPush(props: PrivateMatchHostDialogProps): void {
   props.exclusive.execute(async () => {
     props.se.play(props.changeValue);
     await Promise.all([
-      pop(props.copyRoomID, 1.3),
+      pop(props.copyRoomID),
       navigator.clipboard.writeText(props.roomID),
     ]);
   });
