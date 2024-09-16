@@ -12,15 +12,15 @@ export async function flushSuccessCopyRoomId(
   const { successCopyRoomID } = props;
   const animation = successCopyRoomID.animate(
     [
-      { transform: "translate(0, 0)" },
-      { transform: "translate(0, -105%)", opacity: 1, offset: 0.25 },
-      { opacity: 1, offset: 0.75 },
-      { transform: "translate(0, -105%)", opacity: 0 },
+      { transform: "translate(0, -100%)" },
+      { transform: "translate(0, -120%)", opacity: 1, offset: 0.2 },
+      { opacity: 1, offset: 0.8 },
+      { transform: "translate(0, -120%)", opacity: 0 },
     ],
     {
-      duration: 3000,
+      duration: 1500,
       fill: "forwards",
-      easing: "ease",
+      easing: "linear",
     },
   );
   await waitFinishAnimation(animation);
