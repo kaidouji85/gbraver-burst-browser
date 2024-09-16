@@ -1,7 +1,7 @@
 import { Observable, Unsubscribable } from "rxjs";
 
 import { DOMDialog } from "../dialog";
-import { bindEvenListeners } from "./procedure/bind-even-listeners";
+import { bindEventListeners } from "./procedure/bind-event-listeners";
 import {
   createPrivateMatchGuestDialogProps,
   PropsCreatorParams,
@@ -24,7 +24,7 @@ export class PrivateMatchGuestDialog implements DOMDialog {
    */
   constructor(params: PrivateMatchGuestDialogParams) {
     this.#props = createPrivateMatchGuestDialogProps(params);
-    this.#unsubscribers = bindEvenListeners(this.#props);
+    this.#unsubscribers = bindEventListeners(this.#props);
   }
 
   /** @override */

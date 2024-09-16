@@ -13,7 +13,7 @@ import { onQrCodeReaderStart } from "./on-qr-code-reader-start";
  * @param props プロパティ
  * @returns アンサブスクライバ
  */
-export function bindEvenListeners(
+export function bindEventListeners(
   props: PrivateMatchGuestDialogProps,
 ): Unsubscribable[] {
   return [

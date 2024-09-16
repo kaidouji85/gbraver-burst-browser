@@ -1,9 +1,9 @@
-import {Subject} from "rxjs";
+import { Subject } from "rxjs";
 
-import {Exclusive} from "../../exclusive/exclusive";
-import {ResourcesContainer} from "../../resource";
-import {SoundResource} from "../../resource/sound/resource";
-import {SEPlayerContainer} from "../../se/se-player";
+import { Exclusive } from "../../exclusive/exclusive";
+import { ResourcesContainer } from "../../resource";
+import { SoundResource } from "../../resource/sound/resource";
+import { SEPlayerContainer } from "../../se/se-player";
 
 /** プライベートマッチホストダイアログのプロパティ */
 export type PrivateMatchHostDialogProps = SEPlayerContainer & {
@@ -32,4 +32,3 @@ export type PropsCreatorParams = ResourcesContainer &
     /** ルームID */
     roomID: string;
   };
-

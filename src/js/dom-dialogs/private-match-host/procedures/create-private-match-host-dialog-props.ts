@@ -1,12 +1,17 @@
-import {ROOT_CLASS} from "../dom/class-name";
-import {rootInnerHTML} from "../dom/root-inner-html";
-import {extractCloser, extractCopyRoomID, extractQRCode} from "../dom/elements";
-import {drawPrivateMatchQRCode} from "../../../qr-code/private-match-qr-code";
-import {SOUND_IDS} from "../../../resource/sound/ids";
-import {createEmptySoundResource} from "../../../resource/sound/empty-sound-resource";
-import {Subject} from "rxjs";
-import {Exclusive} from "../../../exclusive/exclusive";
-import {PrivateMatchHostDialogProps, PropsCreatorParams} from "../props";
+import { Subject } from "rxjs";
+
+import { Exclusive } from "../../../exclusive/exclusive";
+import { drawPrivateMatchQRCode } from "../../../qr-code/private-match-qr-code";
+import { createEmptySoundResource } from "../../../resource/sound/empty-sound-resource";
+import { SOUND_IDS } from "../../../resource/sound/ids";
+import { ROOT_CLASS } from "../dom/class-name";
+import {
+  extractCloser,
+  extractCopyRoomID,
+  extractQRCode,
+} from "../dom/elements";
+import { rootInnerHTML } from "../dom/root-inner-html";
+import { PrivateMatchHostDialogProps, PropsCreatorParams } from "../props";
 
 /**
  * PrivateMatchHostDialogPropsを生成する
@@ -16,7 +21,7 @@ import {PrivateMatchHostDialogProps, PropsCreatorParams} from "../props";
 export function createPrivateMatchHostDialogProps(
   params: PropsCreatorParams,
 ): PrivateMatchHostDialogProps {
-  const {resources, roomID} = params;
+  const { resources, roomID } = params;
   const root = document.createElement("div");
   root.className = ROOT_CLASS;
   root.innerHTML = rootInnerHTML(resources, roomID);
