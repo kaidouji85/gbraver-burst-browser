@@ -1,3 +1,4 @@
+import { pop } from "../../../dom/pop";
 import { PrivateMatchHostDialogProps } from "../props";
 
 /**
@@ -5,5 +6,11 @@ import { PrivateMatchHostDialogProps } from "../props";
  * @param props プロパティ
  */
 export function onCopyRoomIdPush(props: PrivateMatchHostDialogProps): void {
-  console.log("onCopyRoomIdPush", props); // TODO 開発が終わったら削除する
+  props.exclusive.execute(async () => {
+    props.se.play(props.changeValue);
+    await Promise.all([
+      pop(props.copyRoomID, 1.3),
+      navigator.clipboard.writeText(props.roomID),
+    ]);
+  });
 }
