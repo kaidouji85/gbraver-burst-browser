@@ -1,5 +1,6 @@
 import { pop } from "../../../dom/pop";
 import { PrivateMatchHostDialogProps } from "../props";
+import { flushSuccessCopyRoomId } from "./flush-success-copy-room-id";
 
 /**
  * ルームIDコピーが押されたときの処理
@@ -12,5 +13,6 @@ export function onCopyRoomIdPush(props: PrivateMatchHostDialogProps): void {
       pop(props.copyRoomID),
       navigator.clipboard.writeText(props.roomID),
     ]);
+    flushSuccessCopyRoomId(props);
   });
 }
