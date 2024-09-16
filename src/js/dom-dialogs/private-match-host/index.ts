@@ -5,10 +5,10 @@ import { DOMDialog } from "../dialog";
 import { onCloserPush } from "./procedures/on-closer-push";
 import { onCopyRoomIdPush } from "./procedures/on-copy-room-id-push";
 import {
-  createPrivateMatchHostDialogProps,
   PrivateMatchHostDialogProps,
   PropsCreatorParams,
 } from "./props";
+import {createPrivateMatchHostDialogProps} from "./procedures/create-private-match-host-dialog-props";
 
 /** コンストラクタのパラメータ */
 export type PrivateMatchHostDialogParams = PropsCreatorParams;
