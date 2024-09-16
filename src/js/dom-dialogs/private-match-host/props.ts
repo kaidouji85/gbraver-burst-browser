@@ -16,6 +16,8 @@ export type PrivateMatchHostDialogProps = SEPlayerContainer & {
   readonly closer: HTMLElement;
   /** ルームIDコピー */
   readonly copyRoomID: HTMLElement;
+  /** ルームIDコピー成功フラッシュメッセージ */
+  readonly successCopyRoomID: HTMLElement;
 
   /** 効果音 値変更 */
   readonly changeValue: SoundResource;

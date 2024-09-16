@@ -9,6 +9,7 @@ import {
   extractCloser,
   extractCopyRoomID,
   extractQRCode,
+  extractSuccessCopyRoomID,
 } from "../dom/elements";
 import { rootInnerHTML } from "../dom/root-inner-html";
 import { PrivateMatchHostDialogProps, PropsCreatorParams } from "../props";
@@ -29,6 +30,7 @@ export function createPrivateMatchHostDialogProps(
   const closer = extractCloser(root);
   const qrCode = extractQRCode(root);
   const copyRoomID = extractCopyRoomID(root);
+  const successCopyRoomID = extractSuccessCopyRoomID(root);
 
   drawPrivateMatchQRCode(qrCode, roomID);
   return {
@@ -36,6 +38,7 @@ export function createPrivateMatchHostDialogProps(
     root,
     closer,
     copyRoomID,
+    successCopyRoomID,
 
     changeValue:
       resources.sounds.find((v) => v.id === SOUND_IDS.CHANGE_VALUE) ??
