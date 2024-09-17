@@ -19,3 +19,21 @@ export const extractQRCode = (root: HTMLElement): HTMLCanvasElement => {
     ? extractedQRCode
     : document.createElement("canvas");
 };
+
+/**
+ * ルームIDコピーを抽出する
+ * @param root ルート要素
+ * @returns 抽出結果
+ */
+export const extractCopyRoomID = (root: HTMLElement): HTMLElement =>
+  root.querySelector(`[data-id="copy-room-id"]`) ??
+  document.createElement("div");
+
+/**
+ * ルームIDコピー成功フラッシュメッセージを抽出する
+ * @param root ルート要素
+ * @returns 抽出結果
+ */
+export const extractSuccessCopyRoomID = (root: HTMLElement): HTMLElement =>
+  root.querySelector(`[data-id="success-copy-room-id"]`) ??
+  document.createElement("div");

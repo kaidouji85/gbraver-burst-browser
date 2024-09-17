@@ -53,8 +53,49 @@
 }
 
 .private-match-host__room-id {
+  display: grid;
+  grid-template-areas:
+    "description copy"
+    "value       copy";
+  gap: 0 calc(var(--responsive-font-size) * 0.5);
+}
+
+.private-match-host__room-id-description {
+  text-align: right;
+  grid-area: description;
+  font-size: calc(var(--responsive-font-size) * 1);
+}
+
+.private-match-host__room-id-value {
+  grid-area: value;
   white-space: nowrap;
   user-select: text;
   font-size: calc(var(--responsive-font-size) * 2);
   font-weight: bold;
+}
+
+.private-match-host__copy-room-id {
+  grid-area: copy;
+  position: relative;
+  font-size: calc(var(--responsive-font-size) * 1);
+  color: var(--button-font-color);
+  min-width: calc(var(--responsive-font-size) * 9);
+  background-color: var(--sub-button-background-color);
+  border-radius: var(--button-border-radius);
+  border: var(--button-border);
+}
+
+.private-match-host__success-copy-room-id {
+  position: absolute;
+  display: grid;
+  place-items: center;
+  font-size: calc(var(--responsive-font-size) * 0.8);
+  min-width: calc(var(--responsive-font-size) * 9);
+  min-height: calc(var(--responsive-font-size) * 2);
+  left: 0;
+  top: 0;
+  background-color: #2e8b57;
+  border-left: #006400 solid thick;
+  box-sizing: border-box;
+  opacity: 0;
 }

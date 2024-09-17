@@ -1,13 +1,9 @@
 import { Observable, Unsubscribable } from "rxjs";
 
-import { domPushStream } from "../../dom/push-dom";
 import { DOMDialog } from "../dialog";
-import { onCloserPush } from "./listeners/on-closer-push";
-import {
-  createPrivateMatchHostDialogProps,
-  PrivateMatchHostDialogProps,
-  PropsCreatorParams,
-} from "./props";
+import { bindEventListeners } from "./procedures/bind-event-listeners";
+import { createPrivateMatchHostDialogProps } from "./procedures/create-private-match-host-dialog-props";
+import { PrivateMatchHostDialogProps, PropsCreatorParams } from "./props";
 
 /** コンストラクタのパラメータ */
 export type PrivateMatchHostDialogParams = PropsCreatorParams;
@@ -25,11 +21,7 @@ export class PrivateMatchHostDialog implements DOMDialog {
    */
   constructor(params: PrivateMatchHostDialogParams) {
     this.#props = createPrivateMatchHostDialogProps(params);
-    this.#unsubscribers = [
-      domPushStream(this.#props.closer).subscribe((action) => {
-        onCloserPush(this.#props, action);
-      }),
-    ];
+    this.#unsubscribers = bindEventListeners(this.#props);
   }
 
   /** @override */

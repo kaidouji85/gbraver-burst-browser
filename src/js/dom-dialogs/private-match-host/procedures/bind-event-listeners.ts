@@ -1,10 +1,9 @@
 import { Unsubscribable } from "rxjs";
 
-import { domPushStream } from "../../../../dom/push-dom";
-import { gameLoopStream } from "../../../../game-loop/game-loop";
-import { PrivateMatchQRCodeReaderProps } from "../props";
+import { domClickStream, domPushStream } from "../../../dom/push-dom";
+import { PrivateMatchHostDialogProps } from "../props";
 import { onCloserPush } from "./on-closer-push";
-import { onGameLoop } from "./on-game-loop";
+import { onCopyRoomIdPush } from "./on-copy-room-id-push";
 
 /**
  * イベントリスナーをバインドする
@@ -12,14 +11,14 @@ import { onGameLoop } from "./on-game-loop";
  * @returns アンサブスクライバ
  */
 export function bindEventListeners(
-  props: PrivateMatchQRCodeReaderProps,
+  props: PrivateMatchHostDialogProps,
 ): Unsubscribable[] {
   return [
-    gameLoopStream().subscribe(() => {
-      onGameLoop(props);
-    }),
     domPushStream(props.closer).subscribe((action) => {
       onCloserPush(props, action);
+    }),
+    domClickStream(props.copyRoomID).subscribe((action) => {
+      onCopyRoomIdPush(props, action);
     }),
   ];
 }
