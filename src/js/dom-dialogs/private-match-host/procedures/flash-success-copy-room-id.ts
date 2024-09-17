@@ -6,7 +6,7 @@ import { PrivateMatchHostDialogProps } from "../props";
  * @param props プロパティ
  * @returns アニメーションが完了したら発火するPromise
  */
-export async function flushSuccessCopyRoomId(
+export async function flashSuccessCopyRoomId(
   props: PrivateMatchHostDialogProps,
 ) {
   const { successCopyRoomID } = props;
