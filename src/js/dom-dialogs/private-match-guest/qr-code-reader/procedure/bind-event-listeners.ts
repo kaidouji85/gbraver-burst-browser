@@ -18,8 +18,8 @@ export function bindEventListeners(
     gameLoopStream().subscribe(() => {
       onGameLoop(props);
     }),
-    domPushStream(props.closer).subscribe(() => {
-      onCloserPush(props);
+    domPushStream(props.closer).subscribe((action) => {
+      onCloserPush(props, action);
     }),
   ];
 }

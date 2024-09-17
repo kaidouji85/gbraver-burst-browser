@@ -11,9 +11,9 @@ export function onCloserPush(
   props: PrivateMatchGuestDialogProps,
   action: PushDOM,
 ): void {
+  action.event.stopPropagation();
+  action.event.preventDefault();
   props.exclusive.execute(async () => {
-    action.event.stopPropagation();
-    action.event.preventDefault();
     props.se.play(props.changeValue);
     await pop(props.closer, 1.3);
     props.dialogClosed.next();

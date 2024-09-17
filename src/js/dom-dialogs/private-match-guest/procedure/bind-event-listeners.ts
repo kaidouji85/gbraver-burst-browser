@@ -1,6 +1,6 @@
 import { Unsubscribable } from "rxjs";
 
-import { domPushStream } from "../../../dom/push-dom";
+import { domClickStream, domPushStream } from "../../../dom/push-dom";
 import { PrivateMatchGuestDialogProps } from "../props";
 import { onCloserPush } from "./on-closer-push";
 import { onEnterButtonPush } from "./on-enter-button-push";
@@ -20,8 +20,8 @@ export function bindEventListeners(
     domPushStream(props.closer).subscribe((action) => {
       onCloserPush(props, action);
     }),
-    domPushStream(props.startQRCodeReader).subscribe(() => {
-      onQrCodeReaderStart(props);
+    domClickStream(props.startQRCodeReader).subscribe((action) => {
+      onQrCodeReaderStart(props, action);
     }),
     props.qrCodeReader.notifyReadQRCode().subscribe((roomID) => {
       onQRCodeRead(props, roomID);
