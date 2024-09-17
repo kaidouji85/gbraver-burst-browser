@@ -17,8 +17,8 @@ export function bindEventListeners(
     domPushStream(props.closer).subscribe((action) => {
       onCloserPush(props, action);
     }),
-    domPushStream(props.copyRoomID).subscribe(() => {
-      onCopyRoomIdPush(props);
+    domPushStream(props.copyRoomID).subscribe((action) => {
+      onCopyRoomIdPush(props, action);
     }),
   ];
 }
