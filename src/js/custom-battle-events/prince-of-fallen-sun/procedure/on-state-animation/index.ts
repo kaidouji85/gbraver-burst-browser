@@ -14,6 +14,7 @@ import { yuuyaBurstWhenGaiActivatedSkill } from "./yuuya-burst-when-gai-activate
 import { yuuyaBurstWhenOneTurn } from "./yuuya-burst-when-one-turn";
 import { yuuyaFirstAttack } from "./yuuya-first-attack";
 import { yuuyaPilotSkill } from "./yuuya-pilot-skill";
+import { yuuyaSecondAttack } from "./yuuya-second-attack";
 
 /**
  * カスタムステートアニメーション
@@ -25,6 +26,7 @@ export function onStateAnimation(
 ): Animate {
   const conditionalAnimations = [
     yuuyaFirstAttack,
+    yuuyaSecondAttack,
     yuuyaBurstWhenGaiActivatedSkill,
     yuuyaBurstWhenOneTurn,
     yuuyaBurst,

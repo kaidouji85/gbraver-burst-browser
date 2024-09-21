@@ -15,6 +15,6 @@ export const yuuyaFirstAttackShout = (
     playerPilotOnlyShout(
       props,
       "Yuuya",
-      `君とは${wbr}初対面の${wbr}はず${wbr}だが`,
+      `ガイ お前${wbr}とは${wbr}初対面の${wbr}はず${wbr}だが`,
     );
   });
