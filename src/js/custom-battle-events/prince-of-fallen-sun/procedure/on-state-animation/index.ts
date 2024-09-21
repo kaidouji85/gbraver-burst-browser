@@ -5,6 +5,7 @@ import { getAnimationIfConditionMet } from "../../../get-animation-if-conditiona
 import { invisibleShoutMessageWindowWhenTurnChange } from "../../../invisible-shout-message-window";
 import { PrinceOfFallenSunProps } from "../../props";
 import { gaiBattleWhenFirstGuard } from "./gai-battle-when-first-guard";
+import { gaiBattleWhenSecondGuard } from "./gai-battle-when-second-guard";
 import { gaiBurst } from "./gai-burst";
 import { gaiFeintSuccess } from "./gai-feint-success";
 import { gaiFinish } from "./gai-finish";
@@ -22,7 +23,6 @@ import { yuuyaFinish } from "./yuuya-finish";
 import { yuuyaFirstAttack } from "./yuuya-first-attack";
 import { yuuyaPilotSkill } from "./yuuya-pilot-skill";
 import { yuuyaSecondAttack } from "./yuuya-second-attack";
-import { gaiBattleWhenSecondGuard } from "./gai-battle-when-second-guard";
 
 /**
  * カスタムステートアニメーション
