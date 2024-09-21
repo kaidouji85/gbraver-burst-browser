@@ -2,32 +2,32 @@ import { Animate } from "../../../../animation/animate";
 import { empty } from "../../../../animation/delay";
 import { CustomStateAnimation } from "../../../../td-scenes/battle/custom-battle-event";
 import { ConditionalAnimation } from "../../../get-animation-if-conditional-met";
+import { yuuyaBattleShoutWhenNormalHit } from "../../animation/yuuya-battle-shout-when-normal-hit";
 import { PrinceOfFallenSunProps } from "../../props";
-import {yuuyaAttackShoutWhenGuard} from "../../animation/yuuya-attack-shout-when-guard";
 
-/** ユウヤ ガード */
-export const yuuyaAttackWhenGuard: ConditionalAnimation<
+/** ユウヤ 攻撃ヒット */
+export const yuuyaBattleWhenNormalHit: ConditionalAnimation<
   CustomStateAnimation & PrinceOfFallenSunProps
 > = (props) => {
   let result: Animate | null = null;
 
   const { update, currentState, playerId } = props;
   const { effect } = currentState;
-  const hasPlayerGuard = update.some(
+  const hasPlayerNormalHit = update.some(
     (s) =>
       s.effect.name === "Battle" &&
       s.effect.attacker === playerId &&
-      s.effect.result.name === "Guard",
+      s.effect.result.name === "NormalHit",
   );
 
   if (
-    hasPlayerGuard &&
+    hasPlayerNormalHit &&
     effect.name === "BatteryDeclaration" &&
     effect.attacker === playerId
   ) {
-    result = yuuyaAttackShoutWhenGuard(props);
+    result = yuuyaBattleShoutWhenNormalHit(props);
   } else if (
-    hasPlayerGuard &&
+    hasPlayerNormalHit &&
     effect.name === "Battle" &&
     effect.attacker === playerId
   ) {

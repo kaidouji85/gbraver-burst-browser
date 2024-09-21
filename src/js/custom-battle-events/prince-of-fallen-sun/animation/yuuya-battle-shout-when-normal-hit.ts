@@ -8,11 +8,9 @@ import { playerPilotOnlyShout } from "../../pilot-shout";
  * @param props イベントプロパティ
  * @returns アニメーション
  */
-export const yuuyaAttackShoutWhenNormalHit = (props: Readonly<CustomBattleEventProps>) =>
+export const yuuyaBattleShoutWhenNormalHit = (
+  props: Readonly<CustomBattleEventProps>,
+) =>
   onStart(() => {
-    playerPilotOnlyShout(
-      props,
-      "Yuuya",
-      `どうした 足元が${wbr}おぼつかないぞ`,
-    );
+    playerPilotOnlyShout(props, "Yuuya", `どうした 足元が${wbr}おぼつかないぞ`);
   });
