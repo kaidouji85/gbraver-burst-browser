@@ -11,7 +11,7 @@ import { scrollLeftMessages } from "../../scroll-messages";
 export async function gaiVictory(props: CustomBattleEventProps) {
   activeLeftMessageWindowWithFace(props, "Gai");
   await scrollLeftMessages(props, [
-    ["ガイ", `「やったよ父さん`],
+    ["ガイ", `「見たか Gブレイバー`],
     [`これで${wbr}うちは${wbr}名実ともに${wbr}ナンバーワンだ」`],
   ]);
   props.view.dom.leftMessageWindow.darken();
