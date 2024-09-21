@@ -12,5 +12,9 @@ export const yuuyaBattleShoutWhenGuard = (
   props: Readonly<CustomBattleEventProps>,
 ) =>
   onStart(() => {
-    playerPilotOnlyShout(props, "Yuuya", `ガード${wbr}されたか やるなガイ`);
+    playerPilotOnlyShout(
+      props,
+      "Yuuya",
+      `俺の${wbr}攻撃を${wbr}ガードする${wbr}とはな`,
+    );
   });
