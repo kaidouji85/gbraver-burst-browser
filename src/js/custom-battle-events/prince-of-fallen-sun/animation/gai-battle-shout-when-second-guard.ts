@@ -4,17 +4,17 @@ import { CustomBattleEventProps } from "../../../td-scenes/battle/custom-battle-
 import { enemyPilotOnlyShout } from "../../pilot-shout";
 
 /**
- * ガイ 戦闘 ガード1回目 叫び
+ * ガイ 戦闘 ガード2回目 叫び
  * @param props イベントプロパティ
  * @returns アニメーション
  */
-export const gaiBattleShoutWhenFirstGuard = (
+export const gaiBattleShoutWhenSecondGuard = (
   props: Readonly<CustomBattleEventProps>,
 ) =>
   onStart(() => {
     enemyPilotOnlyShout(
       props,
       "Gai",
-      `やはり${wbr}牽制では${wbr}ガード${wbr}されるか`,
+      `よし 確実に${wbr}ダメージが${wbr}蓄積して${wbr}きて${wbr}いるぞ`,
     );
   });

@@ -4,11 +4,11 @@ import { Animate } from "../../../../animation/animate";
 import { empty } from "../../../../animation/delay";
 import { CustomStateAnimation } from "../../../../td-scenes/battle/custom-battle-event";
 import { ConditionalAnimation } from "../../../get-animation-if-conditional-met";
-import { gaiBattleShoutWhenFirstGuard } from "../../animation/gai-battle-shout-when-first-guard";
+import { gaiBattleShoutWhenSecondGuard } from "../../animation/gai-battle-shout-when-second-guard";
 import { PrinceOfFallenSunProps } from "../../props";
 
-/** ガイ 戦闘 ガード1回目 */
-export const gaiBattleWhenFirstGuard: ConditionalAnimation<
+/** ガイ 戦闘 ガード2回目 */
+export const gaiBattleWhenSecondGuard: ConditionalAnimation<
   CustomStateAnimation & PrinceOfFallenSunProps
 > = (props) => {
   let result: Animate | null = null;
@@ -21,16 +21,16 @@ export const gaiBattleWhenFirstGuard: ConditionalAnimation<
     s.effect.result.name === "Guard";
   const hasEnemyGuard = update.some(isEnemyGuard);
   const enemyGuardCount = stateHistory.filter(isEnemyGuard).length;
-  const isEnemyFirstGuard = hasEnemyGuard && enemyGuardCount === 1;
+  const isEnemySecondGuard = hasEnemyGuard && enemyGuardCount === 2;
 
   if (
-    isEnemyFirstGuard &&
+    isEnemySecondGuard &&
     effect.name === "BatteryDeclaration" &&
     effect.attacker === enemyId
   ) {
-    result = gaiBattleShoutWhenFirstGuard(props);
+    result = gaiBattleShoutWhenSecondGuard(props);
   } else if (
-    isEnemyFirstGuard &&
+    isEnemySecondGuard &&
     effect.name === "Battle" &&
     effect.attacker === enemyId
   ) {

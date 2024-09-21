@@ -22,6 +22,7 @@ import { yuuyaFinish } from "./yuuya-finish";
 import { yuuyaFirstAttack } from "./yuuya-first-attack";
 import { yuuyaPilotSkill } from "./yuuya-pilot-skill";
 import { yuuyaSecondAttack } from "./yuuya-second-attack";
+import { gaiBattleWhenSecondGuard } from "./gai-battle-when-second-guard";
 
 /**
  * カスタムステートアニメーション
@@ -50,6 +51,7 @@ export function onStateAnimation(
     gaiFirstAttack,
     gaiSecondAttack,
     gaiBattleWhenFirstGuard,
+    gaiBattleWhenSecondGuard,
     invisibleShoutMessageWindowWhenTurnChange,
   ];
   return getAnimationIfConditionMet(props, conditionalAnimations) ?? empty();
