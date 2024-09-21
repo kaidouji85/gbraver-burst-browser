@@ -10,6 +10,7 @@ import { gaiFinish } from "./gai-finish";
 import { gaiFirstAttack } from "./gai-first-attack";
 import { gaiPilotSkill } from "./gai-pilot-skill";
 import { gaiSecondAttack } from "./gai-second-attack";
+import { yuuyaBattleWhenFeint } from "./yuuya-battle-when-feint";
 import { yuuyaBattleWhenGuard } from "./yuuya-battle-when-guard";
 import { yuuyaBattleWhenMiss } from "./yuuya-battle-when-miss";
 import { yuuyaBattleWhenNormalHit } from "./yuuya-battle-when-normal-hit";
@@ -40,6 +41,7 @@ export function onStateAnimation(
     yuuyaBattleWhenNormalHit,
     yuuyaBattleWhenGuard,
     yuuyaBattleWhenMiss,
+    yuuyaBattleWhenFeint,
     gaiPilotSkill,
     gaiBurst,
     gaiFinish,

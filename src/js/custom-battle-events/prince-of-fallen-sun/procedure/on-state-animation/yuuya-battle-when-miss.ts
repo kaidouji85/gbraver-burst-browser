@@ -5,7 +5,7 @@ import { ConditionalAnimation } from "../../../get-animation-if-conditional-met"
 import { yuuyaBattleShoutWhenMiss } from "../../animation/yuuya-battle-shout-when-miss";
 import { PrinceOfFallenSunProps } from "../../props";
 
-/** ユウヤ ミス */
+/** ユウヤ 戦闘 ミス */
 export const yuuyaBattleWhenMiss: ConditionalAnimation<
   CustomStateAnimation & PrinceOfFallenSunProps
 > = (props) => {

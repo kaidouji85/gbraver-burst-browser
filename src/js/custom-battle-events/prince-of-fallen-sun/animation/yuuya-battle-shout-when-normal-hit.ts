@@ -4,7 +4,7 @@ import { CustomBattleEventProps } from "../../../td-scenes/battle/custom-battle-
 import { playerPilotOnlyShout } from "../../pilot-shout";
 
 /**
- * ユウヤ 攻撃ヒット 叫び
+ * ユウヤ 戦闘 通常ヒット 叫び
  * @param props イベントプロパティ
  * @returns アニメーション
  */

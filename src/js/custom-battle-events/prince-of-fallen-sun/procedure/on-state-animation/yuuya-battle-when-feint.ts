@@ -2,32 +2,32 @@ import { Animate } from "../../../../animation/animate";
 import { empty } from "../../../../animation/delay";
 import { CustomStateAnimation } from "../../../../td-scenes/battle/custom-battle-event";
 import { ConditionalAnimation } from "../../../get-animation-if-conditional-met";
-import { yuuyaBattleShoutWhenNormalHit } from "../../animation/yuuya-battle-shout-when-normal-hit";
+import { yuuyaBattleShoutWhenFeint } from "../../animation/yuuya-battle-shout-when-feint";
 import { PrinceOfFallenSunProps } from "../../props";
 
-/** ユウヤ 戦闘 通常ヒット */
-export const yuuyaBattleWhenNormalHit: ConditionalAnimation<
+/** ユウヤ 戦闘 フェイント */
+export const yuuyaBattleWhenFeint: ConditionalAnimation<
   CustomStateAnimation & PrinceOfFallenSunProps
 > = (props) => {
   let result: Animate | null = null;
 
   const { update, currentState, playerId } = props;
   const { effect } = currentState;
-  const hasPlayerNormalHit = update.some(
+  const hasPlayerFeint = update.some(
     (s) =>
       s.effect.name === "Battle" &&
       s.effect.attacker === playerId &&
-      s.effect.result.name === "NormalHit",
+      s.effect.result.name === "Feint",
   );
 
   if (
-    hasPlayerNormalHit &&
+    hasPlayerFeint &&
     effect.name === "BatteryDeclaration" &&
     effect.attacker === playerId
   ) {
-    result = yuuyaBattleShoutWhenNormalHit(props);
+    result = yuuyaBattleShoutWhenFeint(props);
   } else if (
-    hasPlayerNormalHit &&
+    hasPlayerFeint &&
     effect.name === "Battle" &&
     effect.attacker === playerId
   ) {
