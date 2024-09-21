@@ -1,21 +1,23 @@
 import { pop } from "../../../dom/pop";
 import { PushDOM } from "../../../dom/push-dom";
 import { PrivateMatchGuestDialogProps } from "../props";
+import { disableAllControllers } from "./disable-all-controllers";
 
 /**
- * クロージャが押された時の処理
+ * QRコードリーダーボタンが押された時の処理
  * @param props ダイアログプロパティ
  * @param action アクション
  */
-export function onCloserPush(
+export function onQrCodeReaderStart(
   props: PrivateMatchGuestDialogProps,
   action: PushDOM,
 ): void {
+  action.event.preventDefault();
+  action.event.stopPropagation();
   props.exclusive.execute(async () => {
-    action.event.stopPropagation();
-    action.event.preventDefault();
+    disableAllControllers(props);
     props.se.play(props.changeValue);
-    await pop(props.closer, 1.3);
-    props.dialogClosed.next();
+    await pop(props.startQRCodeReader, 1.07);
+    await props.qrCodeReader.start();
   });
 }

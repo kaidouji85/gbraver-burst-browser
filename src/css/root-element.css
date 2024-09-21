@@ -25,8 +25,9 @@
   --zindex-background: 8;
   --zindex-dialog: 9;
   --zindex-close: 10;
-  --zindex-fader: 11;
-  --zindex-play-in-landscape: 12;
+  --zindex-qr-code-reader: 11;
+  --zindex-fader: 12;
+  --zindex-play-in-landscape: 13;
 
   /** ボタン */
   --button-background-color: #007bbb;

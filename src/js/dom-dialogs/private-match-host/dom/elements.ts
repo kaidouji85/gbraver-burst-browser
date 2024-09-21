@@ -1,21 +1,39 @@
-import { DataIDs } from "./data-ids";
+/**
+ * クロージャーを抽出する
+ * @param root ルート要素
+ * @returns 抽出結果
+ */
+export const extractCloser = (root: HTMLElement): HTMLElement =>
+  root.querySelector(`[data-id="closer"]`) ?? document.createElement("div");
 
-/** ルート要素の子孫要素 */
-export type Elements = {
-  /** クロージャ */
-  closer: HTMLElement;
+/**
+ * QRコード表示キャンバスを抽出する
+ * @param root ルート要素
+ * @returns 抽出結果
+ */
+export const extractQRCode = (root: HTMLElement): HTMLCanvasElement => {
+  const extractedQRCode = root.querySelector(
+    `[data-id="qr-code"]`,
+  ) as HTMLCanvasElement;
+  return extractedQRCode instanceof HTMLCanvasElement
+    ? extractedQRCode
+    : document.createElement("canvas");
 };
 
 /**
- * ルート要素から子孫要素を抽出する
- *
+ * ルームIDコピーを抽出する
  * @param root ルート要素
- * @param ids data-idを集めたもの
  * @returns 抽出結果
  */
-export function extractElements(root: HTMLElement, ids: DataIDs): Elements {
-  const closer: HTMLElement =
-    root.querySelector(`[data-id="${ids.closer}"]`) ??
-    document.createElement("div");
-  return { closer };
-}
+export const extractCopyRoomID = (root: HTMLElement): HTMLElement =>
+  root.querySelector(`[data-id="copy-room-id"]`) ??
+  document.createElement("div");
+
+/**
+ * ルームIDコピー成功フラッシュメッセージを抽出する
+ * @param root ルート要素
+ * @returns 抽出結果
+ */
+export const extractSuccessCopyRoomID = (root: HTMLElement): HTMLElement =>
+  root.querySelector(`[data-id="success-copy-room-id"]`) ??
+  document.createElement("div");

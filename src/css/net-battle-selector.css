@@ -33,8 +33,13 @@
   top: 50dvh;
   left: 50vw;
   left: 50dvw;
-  min-width: 90vw;
-  min-width: 90dvw;
+  width: min(
+    calc(
+      100vw - var(--safe-area-right) - var(--safe-area-left) -
+        var(--closer-width) * 0.5
+    ),
+    90vw
+  );
   transform: translate(-50%, -50%);
   color: var(--font-color);
   background-color: var(--background-color);

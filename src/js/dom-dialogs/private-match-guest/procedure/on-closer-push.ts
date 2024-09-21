@@ -1,19 +1,19 @@
 import { pop } from "../../../dom/pop";
 import { PushDOM } from "../../../dom/push-dom";
-import { PrivateMatchHostDialogProps } from "../props";
+import { PrivateMatchGuestDialogProps } from "../props";
 
 /**
- * クロージャを押した時の処理
+ * クロージャが押された時の処理
  * @param props ダイアログプロパティ
  * @param action アクション
  */
 export function onCloserPush(
-  props: PrivateMatchHostDialogProps,
+  props: PrivateMatchGuestDialogProps,
   action: PushDOM,
 ): void {
+  action.event.stopPropagation();
+  action.event.preventDefault();
   props.exclusive.execute(async () => {
-    action.event.preventDefault();
-    action.event.stopPropagation();
     props.se.play(props.changeValue);
     await pop(props.closer, 1.3);
     props.dialogClosed.next();

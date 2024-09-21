@@ -1,14 +1,12 @@
 import { Observable, Unsubscribable } from "rxjs";
 
-import { domPushStream } from "../../dom/push-dom";
 import { DOMDialog } from "../dialog";
-import { onCloserPush } from "./listeners/on-closer-push";
-import { onEnterButtonPush } from "./listeners/on-enter-button-push";
+import { bindEventListeners } from "./procedure/bind-event-listeners";
 import {
   createPrivateMatchGuestDialogProps,
-  PrivateMatchGuestDialogProps,
   PropsCreatorParams,
-} from "./props";
+} from "./procedure/create-private-match-guest-dialog-props";
+import { PrivateMatchGuestDialogProps } from "./props";
 
 /** コンストラクタのパラメータ */
 export type PrivateMatchGuestDialogParams = PropsCreatorParams;
@@ -16,9 +14,9 @@ export type PrivateMatchGuestDialogParams = PropsCreatorParams;
 /** プライベートマッチゲストダイアログ */
 export class PrivateMatchGuestDialog implements DOMDialog {
   /** プロパティ */
-  #props: PrivateMatchGuestDialogProps;
+  readonly #props: PrivateMatchGuestDialogProps;
   /** アンサブスクライバ */
-  #unsubscribers: Unsubscribable[];
+  readonly #unsubscribers: Unsubscribable[];
 
   /**
    * コンストラクタ
@@ -26,14 +24,7 @@ export class PrivateMatchGuestDialog implements DOMDialog {
    */
   constructor(params: PrivateMatchGuestDialogParams) {
     this.#props = createPrivateMatchGuestDialogProps(params);
-    this.#unsubscribers = [
-      domPushStream(this.#props.closer).subscribe((action) => {
-        onCloserPush(this.#props, action);
-      }),
-      domPushStream(this.#props.enterButton).subscribe((action) => {
-        onEnterButtonPush(this.#props, action);
-      }),
-    ];
+    this.#unsubscribers = bindEventListeners(this.#props);
   }
 
   /** @override */
@@ -41,6 +32,7 @@ export class PrivateMatchGuestDialog implements DOMDialog {
     this.#unsubscribers.forEach((v) => {
       v.unsubscribe();
     });
+    this.#props.qrCodeReader.stop();
   }
 
   /** @override */

@@ -1,33 +1,53 @@
-import { DataIDs } from "./data-ids";
+/**
+ * クロージャを抽出する
+ * @param root ルート要素
+ * @returns 抽出結果
+ */
+export const extractCloser = (root: HTMLElement): HTMLElement =>
+  root.querySelector(`[data-id="closer"]`) ?? document.createElement("div");
 
-/** ルート要素の子孫要素 */
-export type Elements = {
-  /** クロージャ */
-  closer: HTMLElement;
-  /** ルームID入力フォーム */
-  roomID: HTMLInputElement;
-  /** プライベートマット開始ボタン */
-  enterButton: HTMLElement;
+/**
+ * ルームID入力フォームを抽出する
+ * @param root ルート要素
+ * @returns 抽出結果
+ */
+export const extractRoomID = (root: HTMLElement): HTMLInputElement => {
+  const extractedRoomID = root.querySelector(`[data-id="roomID"]`);
+  return extractedRoomID instanceof HTMLInputElement
+    ? extractedRoomID
+    : document.createElement("input");
 };
 
 /**
- * ルート要素から子孫要素を抽出する
- *
+ * プライベートマッチ開始ボタンを抽出する
  * @param root ルート要素
- * @param ids data-idを集めたもの
  * @returns 抽出結果
  */
-export function extractElements(root: HTMLElement, ids: DataIDs): Elements {
-  const closer: HTMLElement =
-    root.querySelector(`[data-id="${ids.closer}"]`) ??
-    document.createElement("div");
-  const foundRoomID = root.querySelector(`[data-id="${ids.roomID}"]`);
-  const roomID: HTMLInputElement =
-    foundRoomID instanceof HTMLInputElement
-      ? foundRoomID
-      : document.createElement("input");
-  const enterButton: HTMLElement =
-    root.querySelector(`[data-id="${ids.enterButton}"]`) ??
-    document.createElement("div");
-  return { closer, roomID, enterButton };
-}
+export const extractEnterButton = (root: HTMLElement): HTMLElement =>
+  root.querySelector(`[data-id="enterButton"]`) ??
+  document.createElement("div");
+
+/**
+ * QRコードリーダーのダミーを抽出する
+ * @param root ルート要素
+ * @returns 抽出結果
+ */
+export const extractDummyQRCodeReader = (root: HTMLElement): HTMLElement =>
+  root.querySelector(`[data-id="dummy-qr-code-reader"]`) ??
+  document.createElement("div");
+
+/**
+ * ダミーQRコードリーダーボタンを抽出する
+ * @param root ルート要素
+ * @returns 抽出結果
+ */
+export const extractStartQRCodeReader = (
+  root: HTMLElement,
+): HTMLButtonElement => {
+  const extractedStartQRCodeReader = root.querySelector(
+    `[data-id="start-qr-code-reader"]`,
+  );
+  return extractedStartQRCodeReader instanceof HTMLButtonElement
+    ? extractedStartQRCodeReader
+    : document.createElement("button");
+};
