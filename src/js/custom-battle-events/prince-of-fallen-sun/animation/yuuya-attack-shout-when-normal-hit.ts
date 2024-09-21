@@ -4,11 +4,15 @@ import { CustomBattleEventProps } from "../../../td-scenes/battle/custom-battle-
 import { playerPilotOnlyShout } from "../../pilot-shout";
 
 /**
- * ユウヤ ガード 叫び
+ * ユウヤ 攻撃ヒット 叫び
  * @param props イベントプロパティ
  * @returns アニメーション
  */
-export const yuuyaGuardShout = (props: Readonly<CustomBattleEventProps>) =>
+export const yuuyaAttackShoutWhenNormalHit = (props: Readonly<CustomBattleEventProps>) =>
   onStart(() => {
-    playerPilotOnlyShout(props, "Yuuya", `ガード${wbr}されたか やるなガイ`);
+    playerPilotOnlyShout(
+      props,
+      "Yuuya",
+      `どうした 足元が${wbr}おぼつかないぞ`,
+    );
   });

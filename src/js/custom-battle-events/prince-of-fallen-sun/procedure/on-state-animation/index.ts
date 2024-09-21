@@ -10,15 +10,15 @@ import { gaiFinish } from "./gai-finish";
 import { gaiFirstAttack } from "./gai-first-attack";
 import { gaiPilotSkill } from "./gai-pilot-skill";
 import { gaiSecondAttack } from "./gai-second-attack";
+import { yuuyaAttackWhenGuard } from "./yuuya-attack-when-guard";
+import { yuuyaAttackWhenNormalHit } from "./yuuya-attack-when-normal-hit";
 import { yuuyaBurst } from "./yuuya-burst";
 import { yuuyaBurstWhenGaiActivatedSkill } from "./yuuya-burst-when-gai-activated-skill";
 import { yuuyaBurstWhenOneTurn } from "./yuuya-burst-when-one-turn";
 import { yuuyaFinish } from "./yuuya-finish";
 import { yuuyaFirstAttack } from "./yuuya-first-attack";
-import { yuuyaNormalHit } from "./yuuya-normal-hit";
 import { yuuyaPilotSkill } from "./yuuya-pilot-skill";
 import { yuuyaSecondAttack } from "./yuuya-second-attack";
-import { yuuyaGuard } from "./yuuya-guard";
 
 /**
  * カスタムステートアニメーション
@@ -36,8 +36,8 @@ export function onStateAnimation(
     yuuyaBurstWhenOneTurn,
     yuuyaBurst,
     yuuyaPilotSkill,
-    yuuyaNormalHit,
-    yuuyaGuard,
+    yuuyaAttackWhenNormalHit,
+    yuuyaAttackWhenGuard,
     gaiPilotSkill,
     gaiBurst,
     gaiFinish,
