@@ -4,6 +4,7 @@ import { CustomStateAnimation } from "../../../../td-scenes/battle/custom-battle
 import { getAnimationIfConditionMet } from "../../../get-animation-if-conditional-met";
 import { invisibleShoutMessageWindowWhenTurnChange } from "../../../invisible-shout-message-window";
 import { PrinceOfFallenSunProps } from "../../props";
+import { gaiBattleWhenFirstGuard } from "./gai-battle-when-first-guard";
 import { gaiBurst } from "./gai-burst";
 import { gaiFeintSuccess } from "./gai-feint-success";
 import { gaiFinish } from "./gai-finish";
@@ -48,6 +49,7 @@ export function onStateAnimation(
     gaiFeintSuccess,
     gaiFirstAttack,
     gaiSecondAttack,
+    gaiBattleWhenFirstGuard,
     invisibleShoutMessageWindowWhenTurnChange,
   ];
   return getAnimationIfConditionMet(props, conditionalAnimations) ?? empty();
