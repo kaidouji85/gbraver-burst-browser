@@ -2,6 +2,7 @@ import { Animate } from "../../../../animation/animate";
 import { empty } from "../../../../animation/delay";
 import { CustomStateAnimation } from "../../../../td-scenes/battle/custom-battle-event";
 import { ConditionalAnimation } from "../../../get-animation-if-conditional-met";
+import { hasNormalHit } from "../../../has-normal-hit";
 import { yuuyaNormalHitShout } from "../../animation/yuuya-normal-hit-shout";
 import { PrinceOfFallenSunProps } from "../../props";
 
@@ -13,12 +14,7 @@ export const yuuyaNormalHit: ConditionalAnimation<
 
   const { update, currentState, playerId } = props;
   const { effect } = currentState;
-  const hasPlayerNormalHit = update.some(
-    (s) =>
-      s.effect.name === "Battle" &&
-      s.effect.attacker === playerId &&
-      s.effect.result.name === "NormalHit",
-  );
+  const hasPlayerNormalHit = hasNormalHit(update, playerId);
 
   if (
     hasPlayerNormalHit &&
