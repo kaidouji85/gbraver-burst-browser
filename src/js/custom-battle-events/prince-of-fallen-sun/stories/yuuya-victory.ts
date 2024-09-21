@@ -8,31 +8,25 @@ import { invisibleAllMessageWindows } from "../../invisible-all-message-windows"
 import { scrollLeftMessages, scrollRightMessages } from "../../scroll-messages";
 
 /**
- * 御曹司
+ * ユウヤの勝利
  * @param props イベントプロパティ
  */
-export async function sunOfNoble(props: CustomBattleEventProps) {
-  activeRightMessageWindowWithFace(props, "Yuuya");
-  await scrollRightMessages(props, [
-    ["ユウヤ", `「思い出したぞ`],
-    [`その顔 浅草重工の${wbr}御曹司${wbr}だな」`],
-  ]);
-  props.view.dom.rightMessageWindow.darken();
-
+export async function yuuyaVictory(props: CustomBattleEventProps) {
   activeLeftMessageWindowWithFace(props, "Gai");
   await scrollLeftMessages(props, [
-    ["ガイ", `「お坊ちゃん${wbr}扱いは${wbr}やめろ」`],
+    ["ガイ", `「何故だ`],
+    [`うちじゃ${wbr}Gブレイバーに${wbr}勝てない${wbr}のか」`],
   ]);
   props.view.dom.leftMessageWindow.darken();
 
   activeRightMessageWindowWithFace(props, "Yuuya");
   await scrollRightMessages(props, [
-    ["ユウヤ", `「感激だな`],
+    ["ユウヤ", `「一つだけ${wbr}教えてやろう`],
+    [`ロボの${wbr}スペックは${wbr}もちろん${wbr}大切だが`],
     [
-      `まさか${wbr}巨大ロボの${wbr}創業家の${wbr}人間と${wbr}手合わせ${wbr}できる${wbr}とはな」`,
+      `最終的には${wbr}パイロットの${wbr}読み合いが${wbr}勝敗を${wbr}分けるん${wbr}だぜ」`,
     ],
   ]);
-  props.view.dom.rightMessageWindow.darken();
 
   invisibleAllMessageWindows(props);
 }

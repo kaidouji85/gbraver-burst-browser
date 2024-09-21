@@ -1,20 +1,20 @@
 import { onStart } from "../../../animation/on-start";
 import { wbr } from "../../../dom/wbr";
 import { CustomBattleEventProps } from "../../../td-scenes/battle/custom-battle-event";
-import { enemyPilotOnlyShout } from "../../pilot-shout";
+import { playerPilotOnlyShout } from "../../pilot-shout";
 
 /**
- * ガイ パイロットスキル（ユウヤのバッテリーが5以上） 叫び
+ * ユウヤ ファーストアタック 叫び
  * @param props イベントプロパティ
  * @returns アニメーション
  */
-export const gaiPilotSkillShoutWhenYuuyaBatteryIsOver5 = (
+export const yuuyaFirstAttackShout = (
   props: Readonly<CustomBattleEventProps>,
 ) =>
   onStart(() => {
-    enemyPilotOnlyShout(
+    playerPilotOnlyShout(
       props,
-      "Gai",
-      `バッテリーが${wbr}2倍に${wbr}なっただと`,
+      "Yuuya",
+      `ガイ お前${wbr}とは${wbr}初対面の${wbr}はず${wbr}だが`,
     );
   });

@@ -4,11 +4,15 @@ import { CustomBattleEventProps } from "../../../td-scenes/battle/custom-battle-
 import { enemyPilotOnlyShout } from "../../pilot-shout";
 
 /**
- * ガイ ファーストアタック 叫び2
+ * ガイ ファーストアタック 叫び
  * @param props イベントプロパティ
  * @returns アニメーション
  */
-export const gaiFirstAttackShout2 = (props: Readonly<CustomBattleEventProps>) =>
+export const gaiFirstAttackShout = (props: Readonly<CustomBattleEventProps>) =>
   onStart(() => {
-    enemyPilotOnlyShout(props, "Gai", `反則的な${wbr}バッテリーだ`);
+    enemyPilotOnlyShout(
+      props,
+      "Gai",
+      `さすが${wbr}Gブレイバー 反則的な${wbr}バッテリーだ`,
+    );
   });
