@@ -9,7 +9,6 @@ import { gaiFeintSuccess } from "./gai-feint-success";
 import { gaiFinish } from "./gai-finish";
 import { gaiFirstAttack } from "./gai-first-attack";
 import { gaiPilotSkill } from "./gai-pilot-skill";
-import { gaiPilotSkillWhenYuuyaBatteryIsOver5 } from "./gai-pilot-skill-when-yuuya-battery-is-over-5";
 import { yuuyaBurst } from "./yuuya-burst";
 import { yuuyaBurstWhenGaiActivatedSkill } from "./yuuya-burst-when-gai-activated-skill";
 import { yuuyaBurstWhenOneTurn } from "./yuuya-burst-when-one-turn";
@@ -30,7 +29,6 @@ export function onStateAnimation(
     yuuyaBurstWhenOneTurn,
     yuuyaBurst,
     yuuyaPilotSkill,
-    gaiPilotSkillWhenYuuyaBatteryIsOver5,
     gaiPilotSkill,
     gaiBurst,
     gaiFinish,
