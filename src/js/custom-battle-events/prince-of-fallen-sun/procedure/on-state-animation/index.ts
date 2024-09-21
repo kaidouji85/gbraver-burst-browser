@@ -12,6 +12,7 @@ import { gaiPilotSkill } from "./gai-pilot-skill";
 import { yuuyaBurst } from "./yuuya-burst";
 import { yuuyaBurstWhenGaiActivatedSkill } from "./yuuya-burst-when-gai-activated-skill";
 import { yuuyaBurstWhenOneTurn } from "./yuuya-burst-when-one-turn";
+import { yuuyaFinish } from "./yuuya-finish";
 import { yuuyaFirstAttack } from "./yuuya-first-attack";
 import { yuuyaPilotSkill } from "./yuuya-pilot-skill";
 import { yuuyaSecondAttack } from "./yuuya-second-attack";
@@ -25,6 +26,7 @@ export function onStateAnimation(
   props: CustomStateAnimation & PrinceOfFallenSunProps,
 ): Animate {
   const conditionalAnimations = [
+    yuuyaFinish,
     yuuyaFirstAttack,
     yuuyaSecondAttack,
     yuuyaBurstWhenGaiActivatedSkill,

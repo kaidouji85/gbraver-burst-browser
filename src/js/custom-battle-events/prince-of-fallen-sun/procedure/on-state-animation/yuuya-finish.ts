@@ -1,31 +1,34 @@
 import { Animate } from "../../../../animation/animate";
 import { empty } from "../../../../animation/delay";
 import { CustomStateAnimation } from "../../../../td-scenes/battle/custom-battle-event";
-import { playerBattleCount } from "../../../battle-count";
 import { ConditionalAnimation } from "../../../get-animation-if-conditional-met";
-import { gaiFirstAttackShout } from "../../animation/gai-first-attack-shout";
+import { hasDeliveredFinishBlow } from "../../../has-delivered-finish-blow";
+import { yuuyaFinishShout } from "../../animation/yuuya-finish-shout";
 import { PrinceOfFallenSunProps } from "../../props";
 
-/** ガイ ファーストアタック */
-export const gaiFirstAttack: ConditionalAnimation<
+/** ユウヤ とどめ */
+export const yuuyaFinish: ConditionalAnimation<
   CustomStateAnimation & PrinceOfFallenSunProps
 > = (props) => {
   let result: Animate | null = null;
 
-  const { stateHistory, currentState, enemyId } = props;
+  const { stateHistory, currentState, playerId } = props;
   const { effect } = currentState;
-  const battleCount = playerBattleCount(stateHistory, enemyId);
+  const hasPlayerDeliveredFinishBlow = hasDeliveredFinishBlow(
+    stateHistory,
+    playerId,
+  );
 
   if (
-    battleCount === 1 &&
+    hasPlayerDeliveredFinishBlow &&
     effect.name === "BatteryDeclaration" &&
-    effect.attacker === enemyId
+    effect.attacker === playerId
   ) {
-    result = gaiFirstAttackShout(props);
+    result = yuuyaFinishShout(props);
   } else if (
-    battleCount === 1 &&
+    hasPlayerDeliveredFinishBlow &&
     effect.name === "Battle" &&
-    effect.attacker === enemyId
+    effect.attacker === playerId
   ) {
     result = empty();
   }
