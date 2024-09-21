@@ -12,7 +12,7 @@ export async function gaiVictory(props: CustomBattleEventProps) {
   activeLeftMessageWindowWithFace(props, "Gai");
   await scrollLeftMessages(props, [
     ["ガイ", `「見たか Gブレイバー`],
-    [`これで${wbr}うちは${wbr}名実ともに${wbr}ナンバーワンだ」`],
+    [`これで${wbr}うちが${wbr}名実ともに${wbr}ナンバーワンだ」`],
   ]);
   props.view.dom.leftMessageWindow.darken();
 

@@ -15,6 +15,7 @@ import { yuuyaBurstWhenGaiActivatedSkill } from "./yuuya-burst-when-gai-activate
 import { yuuyaBurstWhenOneTurn } from "./yuuya-burst-when-one-turn";
 import { yuuyaFinish } from "./yuuya-finish";
 import { yuuyaFirstAttack } from "./yuuya-first-attack";
+import {yuuyaNormalHit} from "./yuuya-normal-hit";
 import { yuuyaPilotSkill } from "./yuuya-pilot-skill";
 import { yuuyaSecondAttack } from "./yuuya-second-attack";
 
@@ -34,6 +35,7 @@ export function onStateAnimation(
     yuuyaBurstWhenOneTurn,
     yuuyaBurst,
     yuuyaPilotSkill,
+    yuuyaNormalHit,
     gaiPilotSkill,
     gaiBurst,
     gaiFinish,

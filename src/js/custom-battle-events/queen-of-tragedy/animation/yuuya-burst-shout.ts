@@ -12,6 +12,6 @@ export const yuuyaBurstShout = (props: Readonly<CustomBattleEventProps>) =>
     playerPilotOnlyShout(
       props,
       "Yuuya",
-      `ジェネシスブレイバー バースト${wbr}ON！！`,
+      `Gブレイバー バースト${wbr}ON！！`,
     );
   });
