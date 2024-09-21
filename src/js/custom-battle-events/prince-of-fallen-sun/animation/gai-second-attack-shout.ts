@@ -1,14 +1,14 @@
 import { onStart } from "../../../animation/on-start";
 import { wbr } from "../../../dom/wbr";
 import { CustomBattleEventProps } from "../../../td-scenes/battle/custom-battle-event";
-import { playerPilotOnlyShout } from "../../pilot-shout";
+import { enemyPilotOnlyShout } from "../../pilot-shout";
 
 /**
- * ユウヤ バースト 叫び
+ * ガイ セカンドアタック 叫び
  * @param props イベントプロパティ
  * @returns アニメーション
  */
-export const yuuyaBurstShout = (props: Readonly<CustomBattleEventProps>) =>
+export const gaiSecondAttackShout = (props: Readonly<CustomBattleEventProps>) =>
   onStart(() => {
-    playerPilotOnlyShout(props, "Yuuya", `Gブレイバー バースト${wbr}ON！！`);
+    enemyPilotOnlyShout(props, "Gai", `なんて奴だ 一分の${wbr}隙もない`);
   });

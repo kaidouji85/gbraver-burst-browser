@@ -9,6 +9,11 @@ import { gaiFeintSuccess } from "./gai-feint-success";
 import { gaiFinish } from "./gai-finish";
 import { gaiFirstAttack } from "./gai-first-attack";
 import { gaiPilotSkill } from "./gai-pilot-skill";
+import { gaiSecondAttack } from "./gai-second-attack";
+import { yuuyaBattleWhenFeint } from "./yuuya-battle-when-feint";
+import { yuuyaBattleWhenGuard } from "./yuuya-battle-when-guard";
+import { yuuyaBattleWhenMiss } from "./yuuya-battle-when-miss";
+import { yuuyaBattleWhenNormalHit } from "./yuuya-battle-when-normal-hit";
 import { yuuyaBurst } from "./yuuya-burst";
 import { yuuyaBurstWhenGaiActivatedSkill } from "./yuuya-burst-when-gai-activated-skill";
 import { yuuyaBurstWhenOneTurn } from "./yuuya-burst-when-one-turn";
@@ -33,11 +38,16 @@ export function onStateAnimation(
     yuuyaBurstWhenOneTurn,
     yuuyaBurst,
     yuuyaPilotSkill,
+    yuuyaBattleWhenNormalHit,
+    yuuyaBattleWhenGuard,
+    yuuyaBattleWhenMiss,
+    yuuyaBattleWhenFeint,
     gaiPilotSkill,
     gaiBurst,
     gaiFinish,
     gaiFeintSuccess,
     gaiFirstAttack,
+    gaiSecondAttack,
     invisibleShoutMessageWindowWhenTurnChange,
   ];
   return getAnimationIfConditionMet(props, conditionalAnimations) ?? empty();
