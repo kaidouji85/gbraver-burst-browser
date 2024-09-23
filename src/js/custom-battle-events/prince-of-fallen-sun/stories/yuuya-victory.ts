@@ -21,11 +21,10 @@ export async function yuuyaVictory(props: CustomBattleEventProps) {
 
   activeRightMessageWindowWithFace(props, "Yuuya");
   await scrollRightMessages(props, [
-    ["ユウヤ", `「一つだけ${wbr}教えてやろう`],
-    [`ロボの${wbr}スペックは${wbr}もちろん${wbr}大切だが`],
-    [
-      `最終的には${wbr}パイロットの${wbr}読み合いが${wbr}勝敗を${wbr}分けるん${wbr}だぜ」`,
-    ],
+    ["ユウヤ", `「ネオランドーザは${wbr}素晴らしい${wbr}ロボだ`],
+    [`特に${wbr}攻撃力は ずば抜けて${wbr}高い`],
+    [`だが ロボの${wbr}性能だけで${wbr}試合は${wbr}決まらない`],
+    [`最終的に${wbr}勝敗を${wbr}分けるのは パイロット同士の${wbr}読み合いだ」`],
   ]);
 
   invisibleAllMessageWindows(props);
