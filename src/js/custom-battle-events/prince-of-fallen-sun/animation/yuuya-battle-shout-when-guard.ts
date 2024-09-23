@@ -15,6 +15,6 @@ export const yuuyaBattleShoutWhenGuard = (
     playerPilotOnlyShout(
       props,
       "Yuuya",
-      `この耐久力 さすがは${wbr}創業家${wbr}謹製の${wbr}ロボだ`,
+      `この耐久力 さすがは${wbr}創業家謹製${wbr}だな`,
     );
   });
