@@ -10,5 +10,5 @@ import { playerPilotOnlyShout } from "../../pilot-shout";
  */
 export const yuuyaFinishShout = (props: Readonly<CustomBattleEventProps>) =>
   onStart(() => {
-    playerPilotOnlyShout(props, "Yuuya", `ガイ 俺の${wbr}勝ちだ`);
+    playerPilotOnlyShout(props, "Yuuya", `よし 創業家に${wbr}勝った`);
   });
