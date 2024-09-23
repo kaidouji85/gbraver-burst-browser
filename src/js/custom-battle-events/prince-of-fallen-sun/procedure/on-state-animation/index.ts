@@ -4,9 +4,9 @@ import { CustomStateAnimation } from "../../../../td-scenes/battle/custom-battle
 import { getAnimationIfConditionMet } from "../../../get-animation-if-conditional-met";
 import { invisibleShoutMessageWindowWhenTurnChange } from "../../../invisible-shout-message-window";
 import { PrinceOfFallenSunProps } from "../../props";
-import { gaiBattleWhenFirstGuard } from "./gai-battle-when-first-guard";
+import { gaiBattleWhenGuardAndEnemyFullHP } from "./gai-battle-when-guard-and-enemy-full-h-p";
 import { gaiBattleWhenMiss } from "./gai-battle-when-miss";
-import { gaiBattleWhenSecondGuard } from "./gai-battle-when-second-guard";
+import { gaiBattleWhenGuardAndEnemyDamaged } from "./gai-battle-when-guard-and-enemy-damaged";
 import { gaiBurst } from "./gai-burst";
 import { gaiFeintSuccess } from "./gai-feint-success";
 import { gaiFinish } from "./gai-finish";
@@ -51,8 +51,8 @@ export function onStateAnimation(
     gaiFeintSuccess,
     gaiFirstAttack,
     gaiSecondAttack,
-    gaiBattleWhenFirstGuard,
-    gaiBattleWhenSecondGuard,
+    gaiBattleWhenGuardAndEnemyFullHP,
+    gaiBattleWhenGuardAndEnemyDamaged,
     gaiBattleWhenMiss,
     invisibleShoutMessageWindowWhenTurnChange,
   ];

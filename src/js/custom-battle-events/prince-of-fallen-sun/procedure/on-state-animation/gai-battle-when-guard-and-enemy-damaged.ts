@@ -1,36 +1,46 @@
-import { GameState } from "gbraver-burst-core";
-
 import { Animate } from "../../../../animation/animate";
 import { empty } from "../../../../animation/delay";
 import { CustomStateAnimation } from "../../../../td-scenes/battle/custom-battle-event";
 import { ConditionalAnimation } from "../../../get-animation-if-conditional-met";
+import { separatePlayers } from "../../../separate-players";
 import { gaiBattleShoutWhenGuardAndEnemyDamaged } from "../../animation/gai-battle-shout-when-guard-and-enemy-damaged";
 import { PrinceOfFallenSunProps } from "../../props";
 
-/** ガイ 戦闘 ガード2回目 */
-export const gaiBattleWhenSecondGuard: ConditionalAnimation<
+/** ガイ 戦闘 ガード 敵がダメージを受けている */
+export const gaiBattleWhenGuardAndEnemyDamaged: ConditionalAnimation<
   CustomStateAnimation & PrinceOfFallenSunProps
 > = (props) => {
   let result: Animate | null = null;
 
-  const { update, stateHistory, currentState, enemyId } = props;
+  const { update, currentState, enemyId } = props;
   const { effect } = currentState;
-  const isEnemyGuard = (s: GameState) =>
-    s.effect.name === "Battle" &&
-    s.effect.attacker === enemyId &&
-    s.effect.result.name === "Guard";
-  const hasEnemyGuard = update.some(isEnemyGuard);
-  const enemyGuardCount = stateHistory.filter(isEnemyGuard).length;
-  const isEnemySecondGuard = hasEnemyGuard && enemyGuardCount === 2;
+  const start = update.at(0);
+  if (!start) {
+    return null;
+  }
+  const players = separatePlayers(props, start);
+  if (!players) {
+    return null;
+  }
 
+  const { enemy } = players;
+  const isEnemyDamaged = enemy.armdozer.hp < enemy.armdozer.maxHp;
+  const hasEnemyGuard = update.some(
+    (s) =>
+      s.effect.name === "Battle" &&
+      s.effect.attacker === enemyId &&
+      s.effect.result.name === "Guard",
+  );
   if (
-    isEnemySecondGuard &&
+    isEnemyDamaged &&
+    hasEnemyGuard &&
     effect.name === "BatteryDeclaration" &&
     effect.attacker === enemyId
   ) {
     result = gaiBattleShoutWhenGuardAndEnemyDamaged(props);
   } else if (
-    isEnemySecondGuard &&
+    isEnemyDamaged &&
+    hasEnemyGuard &&
     effect.name === "Battle" &&
     effect.attacker === enemyId
   ) {
