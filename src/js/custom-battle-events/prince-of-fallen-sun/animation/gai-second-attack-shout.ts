@@ -13,6 +13,6 @@ export const gaiSecondAttackShout = (props: Readonly<CustomBattleEventProps>) =>
     enemyPilotOnlyShout(
       props,
       "Gai",
-      `お前を${wbr}倒して 今日こそ${wbr}トップに${wbr}返り咲く`,
+      `お前を${wbr}倒して うちが${wbr}トップに${wbr}返り咲く`,
     );
   });
