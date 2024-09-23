@@ -4,17 +4,13 @@ import { CustomBattleEventProps } from "../../../td-scenes/battle/custom-battle-
 import { enemyPilotOnlyShout } from "../../pilot-shout";
 
 /**
- * ガイ 戦闘 ガード 敵HPが満タン 叫び
+ * ガイ 戦闘 ガード
  * @param props イベントプロパティ
  * @returns アニメーション
  */
-export const gaiBattleShoutWhenGuardAndEnemyFullHP = (
+export const gaiBattleShoutWhenGuard = (
   props: Readonly<CustomBattleEventProps>,
 ) =>
   onStart(() => {
-    enemyPilotOnlyShout(
-      props,
-      "Gai",
-      `まずは${wbr}一発だ`,
-    );
+    enemyPilotOnlyShout(props, "Gai", `ダメージが${wbr}蓄積したな Gブレイバー`);
   });

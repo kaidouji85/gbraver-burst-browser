@@ -4,13 +4,13 @@ import { CustomBattleEventProps } from "../../../td-scenes/battle/custom-battle-
 import { enemyPilotOnlyShout } from "../../pilot-shout";
 
 /**
- * ガイ 戦闘 最低限のバッテリーで回避
+ * ガイ 戦闘 ミス
  * @param props イベントプロパティ
  * @returns アニメーション
  */
-export const gaiBattleShoutWhenMinimalBatteryAvoid = (
+export const gaiBattleShoutWhenMiss = (
   props: Readonly<CustomBattleEventProps>,
 ) =>
   onStart(() => {
-    enemyPilotOnlyShout(props, "Gai", `クッ 最小限で${wbr}躱された`);
+    enemyPilotOnlyShout(props, "Gai", `よし バッテリーを${wbr}消耗させたぞ`);
   });
