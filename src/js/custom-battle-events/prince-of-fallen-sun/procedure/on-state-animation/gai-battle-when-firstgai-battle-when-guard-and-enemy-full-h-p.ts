@@ -4,7 +4,7 @@ import { Animate } from "../../../../animation/animate";
 import { empty } from "../../../../animation/delay";
 import { CustomStateAnimation } from "../../../../td-scenes/battle/custom-battle-event";
 import { ConditionalAnimation } from "../../../get-animation-if-conditional-met";
-import { gaiBattleShoutWhenFirstGuard } from "../../animation/gai-battle-shout-when-first-guard";
+import { gaiBattleShoutWhenGuardAndEnemyFullHP } from "../../animation/gai-battle-shout-when-guard-and-enemy-full-h-p";
 import { PrinceOfFallenSunProps } from "../../props";
 
 /** ガイ 戦闘 ガード1回目 */
@@ -28,7 +28,7 @@ export const gaiBattleWhenFirstGuard: ConditionalAnimation<
     effect.name === "BatteryDeclaration" &&
     effect.attacker === enemyId
   ) {
-    result = gaiBattleShoutWhenFirstGuard(props);
+    result = gaiBattleShoutWhenGuardAndEnemyFullHP(props);
   } else if (
     isEnemyFirstGuard &&
     effect.name === "Battle" &&

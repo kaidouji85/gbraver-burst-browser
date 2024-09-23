@@ -2,7 +2,7 @@ import { Animate } from "../../../../animation/animate";
 import { empty } from "../../../../animation/delay";
 import { CustomStateAnimation } from "../../../../td-scenes/battle/custom-battle-event";
 import { ConditionalAnimation } from "../../../get-animation-if-conditional-met";
-import { gaiBattleShoutWhenMiss } from "../../animation/gai-battle-shout-when-miss";
+import { gaiBattleShoutWhenMinimalBatteryAvoid } from "../../animation/gai-battle-shout-when-minimal-battery-avoid";
 import { PrinceOfFallenSunProps } from "../../props";
 
 /** ガイ 戦闘 ミス */
@@ -25,7 +25,7 @@ export const gaiBattleWhenMiss: ConditionalAnimation<
     effect.name === "BatteryDeclaration" &&
     effect.attacker === enemyId
   ) {
-    result = gaiBattleShoutWhenMiss(props);
+    result = gaiBattleShoutWhenMinimalBatteryAvoid(props);
   } else if (
     hasEnemyMiss &&
     effect.name === "Battle" &&
