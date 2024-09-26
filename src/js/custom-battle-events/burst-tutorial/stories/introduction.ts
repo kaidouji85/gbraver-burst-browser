@@ -32,7 +32,7 @@ export const introduction = async (props: CustomBattleEventProps) => {
       `「さすがは${wbr}大田高校${wbr} 一瞬で${wbr}勝負が${wbr}ついて${wbr}しもたな`,
     ],
     [
-      `どや${wbr} まだ道路の${wbr}占有時間も${wbr}残っとるし${wbr} ワイと${wbr}もう一戦${wbr}やりまへんか」`,
+      `どや${wbr} まだ道路の${wbr}占有時間も${wbr}残っとるし${wbr} ワイと${wbr}もう一戦${wbr}やらへんか」`,
     ],
   ]);
   props.view.dom.leftMessageWindow.darken();
