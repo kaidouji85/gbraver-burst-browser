@@ -5,17 +5,15 @@ import { invisibleAllMessageWindows } from "../../invisible-all-message-windows"
 import { scrollLeftMessages } from "../../scroll-messages";
 
 /**
- * バッテリーが残っているのに0防御した場合のストーリー
+ * バーストが使えるのに0防御した場合のストーリー
  * @param props イベントプロパティ
  * @returns ストーリーが完了したら発火するPromise
  */
-export async function zeroDefenseButPositiveBattery(
-  props: CustomBattleEventProps,
-) {
+export async function zeroDefenseButEnableBurst(props: CustomBattleEventProps) {
   activeLeftMessageWindowWithFace(props, "Gai");
   await scrollLeftMessages(props, [
-    ["ガイ", `「バッテリーが${wbr}残っているのに なぜ${wbr}0防御した`],
-    [`本気で${wbr}戦え Gブレイバー」`],
+    ["ガイ", `「バーストが${wbr}残っているのに 0防御だと`],
+    [`ふざけるな Gブレイバー」`],
   ]);
   invisibleAllMessageWindows(props);
 }

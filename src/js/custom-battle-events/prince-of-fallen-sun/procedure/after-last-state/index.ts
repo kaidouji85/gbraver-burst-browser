@@ -1,9 +1,11 @@
 import { LastState } from "../../../../td-scenes/battle/custom-battle-event";
 import { invisibleShoutMessageWindowWhenGameEnd } from "../../../invisible-shout-message-window";
 import { isZeroDefenseButBatteryPositiveFromLastState } from "../../../is-zero-defense-but-battery-positive";
+import { isZeroDefenseButEnableBurstFromLastState } from "../../../is-zero-defense-but-enable-burst";
 import { PrinceOfFallenSunProps } from "../../props";
 import { gaiVictory } from "../../stories/gai-victory";
 import { yuuyaVictory } from "../../stories/yuuya-victory";
+import { zeroDefenseButEnableBurst } from "../../stories/zero-defense-but-enable-burst";
 import { zeroDefenseButPositiveBattery } from "../../stories/zero-defense-but-positive-battery";
 import { createConditions } from "./create-conditions";
 import { shouldGaiVictory } from "./should-gai-victory";
@@ -21,6 +23,8 @@ export async function afterLastState(
   const conditions = createConditions(props);
   if (isZeroDefenseButBatteryPositiveFromLastState(props)) {
     await zeroDefenseButPositiveBattery(props);
+  } else if (isZeroDefenseButEnableBurstFromLastState(props)) {
+    await zeroDefenseButEnableBurst(props);
   } else if (shouldGaiVictory(conditions)) {
     await gaiVictory(props);
   } else if (shouldYuuyaVictory(conditions)) {
