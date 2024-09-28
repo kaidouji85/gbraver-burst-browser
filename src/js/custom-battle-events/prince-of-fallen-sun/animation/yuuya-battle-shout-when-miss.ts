@@ -15,6 +15,6 @@ export const yuuyaBattleShoutWhenMiss = (
     playerPilotOnlyShout(
       props,
       "Yuuya",
-      `俺の${wbr}攻撃を${wbr}躱すとは やるな${wbr}ガイ`,
+      `ほう 俺の${wbr}攻撃を${wbr}躱したか`,
     );
   });

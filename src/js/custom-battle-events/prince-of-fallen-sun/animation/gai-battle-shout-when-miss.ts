@@ -1,5 +1,4 @@
 import { onStart } from "../../../animation/on-start";
-import { wbr } from "../../../dom/wbr";
 import { CustomBattleEventProps } from "../../../td-scenes/battle/custom-battle-event";
 import { enemyPilotOnlyShout } from "../../pilot-shout";
 
@@ -12,5 +11,5 @@ export const gaiBattleShoutWhenMiss = (
   props: Readonly<CustomBattleEventProps>,
 ) =>
   onStart(() => {
-    enemyPilotOnlyShout(props, "Gai", `よし バッテリーを${wbr}消耗させたぞ`);
+    enemyPilotOnlyShout(props, "Gai", `外したか まあいい`);
   });

@@ -12,5 +12,9 @@ export const gaiBattleShoutWhenGuard = (
   props: Readonly<CustomBattleEventProps>,
 ) =>
   onStart(() => {
-    enemyPilotOnlyShout(props, "Gai", `ダメージが${wbr}蓄積したな Gブレイバー`);
+    enemyPilotOnlyShout(
+      props,
+      "Gai",
+      `いいぞ ダメージが${wbr}確実に${wbr}蓄積している`,
+    );
   });
