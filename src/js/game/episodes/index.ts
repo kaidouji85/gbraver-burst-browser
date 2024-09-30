@@ -21,13 +21,11 @@ export const SideEpisodes: Episode[] = [
   pilotSkillTutorial01,
   pilotSkillTutorial02,
   QueenOfTragedy,
+  PrinceOfFallenSun,
 ];
 
 /** エピソードを集めたもの */
 export const Episodes: Episode[] = [...MainEpisodes, ...SideEpisodes];
 
 /** 開発中のエピソードをあつめたもの */
-export const EpisodesInDevelopment: Episode[] = [
-  ...Episodes,
-  PrinceOfFallenSun,
-];
+export const EpisodesInDevelopment: Episode[] = Episodes;
