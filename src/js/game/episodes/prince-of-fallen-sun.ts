@@ -16,7 +16,7 @@ export const PrinceOfFallenSun: Episode = {
   id: EpisodeIDs.PRINCE_OF_FALLEN_SUN,
   type: "Side Episode",
   number: "4.2",
-  title: "（開発中）創業家の御曹司",
+  title: "創業家の御曹司",
   introduction,
   imageCutPathId: PathIds.IMAGE_CUT_PRINCE_OF_FALLEN_SUN,
   player: {
