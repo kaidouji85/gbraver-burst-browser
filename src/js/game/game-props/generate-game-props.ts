@@ -39,6 +39,8 @@ export type GamePropsGeneratorParams = {
 
   /** 遊び方スライドのURL */
   howToPlayURL: string;
+  /** ロボ、パイロット説明スライドのURL */
+  characterDescriptionURL: string;
   /** 利用規約ページのURL */
   termsOfServiceURL: string;
   /** 問い合わせページのURL */

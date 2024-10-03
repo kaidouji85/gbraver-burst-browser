@@ -162,6 +162,7 @@
 }
 
 .title__how-to-play,
+.title__character-description,
 .title__trailer,
 .title__terms-of-service,
 .title__privacy-policy,
@@ -172,6 +173,7 @@
 }
 
 .title__how-to-play:hover,
+.title__character-description:hover,
 .title__trailer:hover,
 .title__terms-of-service:hover,
 .title__privacy-policy:hover,

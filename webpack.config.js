@@ -110,7 +110,12 @@ module.exports = async () => ({
       ),
       GBRAVER_BURST_MOBILE_RESOURCE_ROOT: JSON.stringify(MOBILE_RESOURCE_ROOT),
       GBRAVER_BURST_OWN_ROOT_URL: JSON.stringify(process.env.OWN_ROOT_URL),
-      GBRAVER_BURST_HOW_TO_PLAY: JSON.stringify(process.env.HOW_TO_PLAY_URL),
+      GBRAVER_BURST_HOW_TO_PLAY_URL: JSON.stringify(
+        process.env.HOW_TO_PLAY_URL,
+      ),
+      GBRAVER_BURST_CHARACTER_DESCRIPTION_URL: JSON.stringify(
+        process.env.CHARACTER_DESCRIPTION_URL,
+      ),
       GBRAVER_BURST_TERMS_OF_SERVICE_URL: JSON.stringify(
         process.env.TERMS_OF_SERVICE_URL,
       ),

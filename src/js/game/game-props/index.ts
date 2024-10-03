@@ -46,6 +46,8 @@ export interface GameProps
 
   /** 遊び方スライドのURL */
   readonly howToPlayURL: string;
+  /** ロボ、パイロット説明スライドのURL */
+  characterDescriptionURL: string;
   /** 利用規約ページのURL */
   readonly termsOfServiceURL: string;
   /** プライバシーポリシーページのURL */

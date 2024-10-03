@@ -17,6 +17,7 @@ env:
     OWN_ROOT_URL: /GbraverBurst/prod/ownRootUrl
     TWITTER_SITE: /GbraverBurst/prod/twitterSite
     HOW_TO_PLAY_URL: /GbraverBurst/prod/howToPlayUrl
+    CHARACTER_DESCRIPTION_URL: /GbraverBurst/prod/characterDescriptionUrl
     TERMS_OF_SERVICE_URL: /GbraverBurst/prod/termsOfServiceUrl
     PRIVACY_POLICY_URL: /GbraverBurst/prod/privacyPolicyUrl
     CONTACT_URL: /GbraverBurst/prod/contactURL
