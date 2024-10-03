@@ -21,6 +21,8 @@ export type RootInnerHTMLParams = {
   isAPIServerEnable: boolean;
   /** 遊び方スライドのURL */
   howToPlayURL: string;
+  /** ロボ、パイロット説明スライドのURL */
+  characterDescriptionURL: string;
   /** 利用規約ページのURL */
   termsOfServiceURL: string;
   /** プライバシーポリシーページのURL */
