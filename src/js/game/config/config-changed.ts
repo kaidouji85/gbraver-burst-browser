@@ -43,6 +43,7 @@ export function isConfigChanged(
   return (
     origin.playerSelectorType !== update.playerSelectorType ||
     origin.webGLPixelRatio !== update.webGLPixelRatio ||
+    origin.battleWindowFontSize !== update.battleWindowFontSize ||
     origin.battleAnimationTimeScale !== update.battleAnimationTimeScale ||
     origin.battleControllerType !== update.battleControllerType ||
     isSoundConfigChanged(origin, update) ||
