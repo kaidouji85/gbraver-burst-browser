@@ -5,6 +5,7 @@ const origin: GBraverBurstBrowserConfig = {
   playerSelectorType: "open",
   webGLPixelRatio: 2,
   battleAnimationTimeScale: 1,
+  battleFontSize: 1.3,
   bgmVolume: 1,
   seVolume: 1,
   battleControllerType: "BigButton",
