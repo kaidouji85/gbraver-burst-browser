@@ -35,6 +35,7 @@ test("複数項目が変更されても、パフォーマンス統計表示設�
     ...origin,
     webGLPixelRatio: 1,
     battleAnimationTimeScale: 0.25,
+    battleWindowFontSize: "large",
     bgmVolume: 0.5,
     battleControllerType: "MiniController",
     performanceStatsVisibility: "visible",

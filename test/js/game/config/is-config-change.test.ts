@@ -65,6 +65,7 @@ test("複数項目の変更を正しく検知できる", () => {
     playerSelectorType: "secret",
     webGLPixelRatio: 1,
     battleAnimationTimeScale: 0.25,
+    battleWindowFontSize: "large",
     bgmVolume: 0.5,
     seVolume: 0.2,
     battleControllerType: "MiniController",
