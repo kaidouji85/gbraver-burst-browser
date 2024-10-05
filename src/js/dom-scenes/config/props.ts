@@ -13,6 +13,7 @@ import { ROOT_CLASS } from "./dom/class-name";
 import {
   extractBattleAnimationTimeScaleSelector,
   extractBattleControllerTypeSelector,
+  extractBattleWindowFontSizeSelector,
   extractBgmVolumeSelector,
   extractBgmVolumeValue,
   extractConfigChange,
@@ -37,6 +38,8 @@ export type ConfigProps = BGMManagerContainer &
     playerSelectorType: HTMLElement;
     /** 戦闘アニメ速度セレクタ */
     battleAnimationTimeScaleSelector: HTMLElement;
+    /** 戦闘ウインドウ フォントサイズ セレクタ */
+    battleWindowFontSizeSelector: HTMLElement;
     /** webglピクセルレートセレクタ */
     webGLPixelRatioSelector: HTMLElement;
     /** 戦闘画面コントローラセレクタ */
@@ -102,6 +105,7 @@ export function createConfigProps(params: PropsCreatorParams): ConfigProps {
       extractBattleAnimationTimeScaleSelector(root),
     webGLPixelRatioSelector: extractWebGLPixelRatioSelector(root),
     bgmVolumeSelector: extractBgmVolumeSelector(root),
+    battleWindowFontSizeSelector: extractBattleWindowFontSizeSelector(root),
     battleControllerTypeSelector: extractBattleControllerTypeSelector(root),
     bgmVolumeValue: extractBgmVolumeValue(root),
     seVolumeSelector: extractSeVolumeSelector(root),

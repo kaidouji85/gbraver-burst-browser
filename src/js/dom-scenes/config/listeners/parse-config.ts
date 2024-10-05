@@ -15,6 +15,7 @@ export function parseConfig(props: ConfigProps): GBraverBurstBrowserConfig {
     foundPlayerSelectorType instanceof HTMLInputElement
       ? foundPlayerSelectorType.value
       : null;
+
   const foundBattleAnimationTimeScale =
     props.battleAnimationTimeScaleSelector.querySelector(
       'input[type="radio"]:checked',
@@ -23,6 +24,16 @@ export function parseConfig(props: ConfigProps): GBraverBurstBrowserConfig {
     foundBattleAnimationTimeScale instanceof HTMLInputElement
       ? foundBattleAnimationTimeScale.value
       : null;
+
+  const foundBattleWindowFontSize =
+    props.battleWindowFontSizeSelector.querySelector(
+      'input[type="radio"]:checked',
+    );
+  const battleWindowFontSize =
+    foundBattleWindowFontSize instanceof HTMLInputElement
+      ? foundBattleWindowFontSize.value
+      : null;
+
   const foundWebGLPixelRatio = props.webGLPixelRatioSelector.querySelector(
     'input[type="radio"]:checked',
   );
@@ -30,6 +41,7 @@ export function parseConfig(props: ConfigProps): GBraverBurstBrowserConfig {
     foundWebGLPixelRatio instanceof HTMLInputElement
       ? foundWebGLPixelRatio.value
       : null;
+
   const foundBattleControllerType =
     props.battleControllerTypeSelector.querySelector(
       'input[type="radio"]:checked',
@@ -38,6 +50,7 @@ export function parseConfig(props: ConfigProps): GBraverBurstBrowserConfig {
     foundBattleControllerType instanceof HTMLInputElement
       ? foundBattleControllerType.value
       : null;
+
   const foundPerformanceStatsVisibility =
     props.performanceStatsVisibilitySelector.querySelector(
       'input[type="radio"]:checked',
@@ -46,9 +59,11 @@ export function parseConfig(props: ConfigProps): GBraverBurstBrowserConfig {
     foundPerformanceStatsVisibility instanceof HTMLInputElement
       ? foundPerformanceStatsVisibility.value
       : null;
+
   return parseBrowserConfig({
     playerSelectorType,
     battleAnimationTimeScale,
+    battleWindowFontSize,
     webGLPixelRatio,
     battleControllerType,
     bgmVolume: props.bgmVolumeSelector.value,

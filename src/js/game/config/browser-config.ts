@@ -43,7 +43,7 @@ export type GBraverBurstBrowserConfig = {
   webGLPixelRatio: WebGLPixelRatio;
   /** 戦闘アニメタイムスケール */
   battleAnimationTimeScale: BattleAnimationTimeScale;
-  /** 戦闘ウインドウフォントサイズ */
+  /** 戦闘ウインドウ フォントサイズ */
   battleWindowFontSize: BattleWindowFontSize;
   /** BGM音量 */
   bgmVolume: SoundVolume;
