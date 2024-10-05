@@ -17,7 +17,7 @@ export const Scene: StoryFn = domStub((params) => {
       battleAnimationTimeScale: 1,
       bgmVolume: 1,
       seVolume: 1,
-      battleFontSize: 1.3,
+      battleWindowFontSize: "normal",
       battleControllerType: "BigButton",
       performanceStatsVisibility: "hidden",
     },

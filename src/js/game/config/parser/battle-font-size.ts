@@ -1,4 +1,8 @@
 import { z } from "zod";
 
-/** バトルフォントサイズ zod schema */
-export const BattleFontSizeSchema = z.number();
+/** バトルウィンドウフォントサイズ zod schema */
+export const BattleWindowFontSizeSchema = z.union([
+  z.literal("small"),
+  z.literal("normal"),
+  z.literal("large"),
+]);
