@@ -73,7 +73,7 @@
 
 .config__player-selector-type-description,
 .config__battle-animation-time-scale-description,
-.config__battle-window-font-size-caption-description,
+.config__battle-window-font-size-description,
 .config__webgl-pixel-ratio-description,
 .config__battle-controller-type-description,
 .config__bgm-volume-description,
@@ -83,6 +83,7 @@
 }
 
 .config__battle-animation-time-scale-selector,
+.config__battle-window-font-size-selector,
 .config__webgl-pixel-ratio-selector {
   display: flex;
   gap: calc(var(--responsive-font-size) * 2);
@@ -98,6 +99,7 @@
 
 .config__player-selector-type-label,
 .config__battle-animation-time-scale-label,
+.config__battle-window-font-size-label,
 .config__webgl-pixel-ratio-selector-label,
 .config__battle-controller-type-label,
 .config__performance-stats-visibility-label {
@@ -107,6 +109,7 @@
 
 .config__player-selector-type-radio,
 .config__battle-animation-time-scale-radio,
+.config__battle-window-font-size-radio,
 .config__webgl-pixel-ratio-selector-radio,
 .config__battle-controller-type-radio,
 .config__performance-stats-visibility-radio {
