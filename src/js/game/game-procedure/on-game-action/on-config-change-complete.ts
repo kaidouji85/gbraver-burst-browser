@@ -5,8 +5,8 @@ import {
 import { GameAction } from "../../game-actions";
 import { ConfigChangeComplete } from "../../game-actions/config-change-complete";
 import { GameProps } from "../../game-props";
-import { reflectPerformanceStatsVisibility } from "../reflect-performance-stats-visibility";
-import { reflectSoundVolume } from "../reflect-sound-volume";
+import { applyPerformanceStatsVisibility } from "../apply-performance-stats-visibility";
+import { applySoundVolume } from "../apply-sound-volume";
 import { startTitle } from "../start-title";
 
 /**
@@ -22,11 +22,11 @@ async function onConfigChangeComplete(
   await props.fader.fadeOut();
   const origin = await props.config.load();
   if (isSoundConfigChanged(origin, action.config)) {
-    await reflectSoundVolume(props, action.config);
+    await applySoundVolume(props, action.config);
   }
 
   if (isPerformanceStatsVisibilityChanged(origin, action.config)) {
-    reflectPerformanceStatsVisibility(
+    applyPerformanceStatsVisibility(
       props,
       action.config.performanceStatsVisibility,
     );
