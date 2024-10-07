@@ -3,6 +3,7 @@ import { titleResourceLoading } from "../../resource/loading/title-resource-load
 import { loadServiceWorker } from "../../service-worker/load-service-worker";
 import { waitTime } from "../../wait/wait-time";
 import { GameProps } from "../game-props";
+import { applyBattleWindowFontSize } from "./apply-battle-window-font-size";
 import { applyPerformanceStatsVisibility } from "./apply-performance-stats-visibility";
 import { applySoundVolume } from "./apply-sound-volume";
 import { playTitleBGM } from "./play-title-bgm";
@@ -25,6 +26,7 @@ export async function initialize(props: GameProps): Promise<void> {
   props.resources = await resourceLoading.resources;
   const config = await props.config.load();
   applyPerformanceStatsVisibility(props, config.performanceStatsVisibility);
+  applyBattleWindowFontSize(config.battleWindowFontSize);
   await applySoundVolume(props, config);
   await startTitle(props);
   props.interruptScenes.bind(props.resources);
