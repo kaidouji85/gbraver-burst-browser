@@ -3,9 +3,9 @@ import { titleResourceLoading } from "../../resource/loading/title-resource-load
 import { loadServiceWorker } from "../../service-worker/load-service-worker";
 import { waitTime } from "../../wait/wait-time";
 import { GameProps } from "../game-props";
+import { applyPerformanceStatsVisibility } from "./apply-performance-stats-visibility";
+import { applySoundVolume } from "./apply-sound-volume";
 import { playTitleBGM } from "./play-title-bgm";
-import { reflectPerformanceStatsVisibility } from "./reflect-performance-stats-visibility";
-import { reflectSoundVolume } from "./reflect-sound-volume";
 import { startTitle } from "./start-title";
 
 /**
@@ -24,8 +24,8 @@ export async function initialize(props: GameProps): Promise<void> {
   const resourceLoading = titleResourceLoading(props.resourceRoot);
   props.resources = await resourceLoading.resources;
   const config = await props.config.load();
-  reflectPerformanceStatsVisibility(props, config.performanceStatsVisibility);
-  await reflectSoundVolume(props, config);
+  applyPerformanceStatsVisibility(props, config.performanceStatsVisibility);
+  await applySoundVolume(props, config);
   await startTitle(props);
   props.interruptScenes.bind(props.resources);
   const latency = Date.now() - startTime;

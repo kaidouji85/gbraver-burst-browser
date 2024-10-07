@@ -1,6 +1,6 @@
 import { GameAction } from "../../game-actions";
 import { GameProps } from "../../game-props";
-import { reflectSoundVolume } from "../reflect-sound-volume";
+import { applySoundVolume } from "../apply-sound-volume";
 import { startTitle } from "../start-title";
 
 /**
@@ -11,7 +11,7 @@ import { startTitle } from "../start-title";
 async function onConfigChangeCancel(props: Readonly<GameProps>): Promise<void> {
   await props.fader.fadeOut();
   const config = await props.config.load();
-  await reflectSoundVolume(props, config);
+  await applySoundVolume(props, config);
   await startTitle(props);
   await props.fader.fadeIn();
 }
