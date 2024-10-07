@@ -2,7 +2,7 @@ import { BattleWindowFontSize } from "../../../game/config/browser-config";
 import template from "./battle-window-font-size-item.hbs";
 import { ROOT_CLASS } from "./class-name";
 
-/** 戦闘ウインドウ フォントサイズ 値に対応するラベル */
+/** 戦闘ウインドウのフォントサイズ値に対応するラベル */
 const battleWindowFontSizeLabel = {
   small: "小さい",
   normal: "普通",
@@ -11,7 +11,7 @@ const battleWindowFontSizeLabel = {
 
 /** パラメータ */
 type Params = {
-  /** 戦闘ウインドウ フォントサイズ 値 */
+  /** 戦闘ウインドウのフォントサイズ値 */
   value: BattleWindowFontSize;
   /** 選択されているか否か、選択されている場合はtrue */
   isChecked: boolean;

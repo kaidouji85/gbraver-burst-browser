@@ -21,7 +21,7 @@ export const extractBattleAnimationTimeScaleSelector = (
   document.createElement("select");
 
 /**
- * 戦闘ウインドウ フォントサイズ セレクタを抽出する
+ * 戦闘ウインドウのフォントサイズセレクタを抽出する
  * @param root 抽出対象となるルート要素
  * @returns 抽出結果
  */

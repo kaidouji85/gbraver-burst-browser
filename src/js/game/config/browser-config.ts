@@ -21,7 +21,7 @@ export type BattleAnimationTimeScale =
 
 export const BattleWindowFontSizes = ["small", "normal", "large"] as const;
 
-/** 戦闘ウインドウ フォントサイズ */
+/** 戦闘ウインドウのフォントサイズ */
 export type BattleWindowFontSize = (typeof BattleWindowFontSizes)[number];
 
 /** 有効な音量 */
@@ -43,7 +43,7 @@ export type GBraverBurstBrowserConfig = {
   webGLPixelRatio: WebGLPixelRatio;
   /** 戦闘アニメタイムスケール */
   battleAnimationTimeScale: BattleAnimationTimeScale;
-  /** 戦闘ウインドウ フォントサイズ */
+  /** 戦闘ウインドウのフォントサイズ */
   battleWindowFontSize: BattleWindowFontSize;
   /** BGM音量 */
   bgmVolume: SoundVolume;

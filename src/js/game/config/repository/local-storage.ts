@@ -10,7 +10,7 @@ const Keys = {
   WebGLPixelRatio: "WebGLPixelRatio",
   /** 戦闘アニメタイムスケール */
   BattleAnimationTimeScale: "BattleAnimationTimeScale",
-  /** 戦闘ウインドウ フォントサイズ */
+  /** 戦闘ウインドウのフォントサイズ */
   BattleWindowFontSize: "BattleWindowFontSize",
   /** 戦闘画面コントローラータイプ */
   BattleControllerType: "BattleControllerType",

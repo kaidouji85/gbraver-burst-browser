@@ -38,7 +38,7 @@ export type ConfigProps = BGMManagerContainer &
     playerSelectorType: HTMLElement;
     /** 戦闘アニメ速度セレクタ */
     battleAnimationTimeScaleSelector: HTMLElement;
-    /** 戦闘ウインドウ フォントサイズ セレクタ */
+    /** 戦闘ウインドウのフォントサイズセレクタ */
     battleWindowFontSizeSelector: HTMLElement;
     /** webglピクセルレートセレクタ */
     webGLPixelRatioSelector: HTMLElement;
