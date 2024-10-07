@@ -18,7 +18,7 @@
   /** 戦闘メッセージウインドウ フォントサイズ */
   --battle-window-font-small: calc(var(--responsive-font-size) * 1);
   --battle-window-font-normal: calc(var(--responsive-font-size) * 1.2);
-  --battle-window-font-large: calc(var(--responsive-font-size) * 1.8);
+  --battle-window-font-large: calc(var(--responsive-font-size) * 1.5);
 
   /**
    * 戦闘メッセージ ウインドウフォントサイズの現在値

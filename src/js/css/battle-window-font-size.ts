@@ -22,6 +22,9 @@ type BattleWindowFontSizeValue =
  */
 export const setBattleWindowFontSize = (value: BattleWindowFontSizeValue) => {
   if (document.documentElement) {
-    document.documentElement.style.setProperty(BATTLE_WINDOW_FONT_SIZE, value);
+    document.documentElement.style.setProperty(
+      BATTLE_WINDOW_FONT_SIZE,
+      `var(${value})`,
+    );
   }
 };
