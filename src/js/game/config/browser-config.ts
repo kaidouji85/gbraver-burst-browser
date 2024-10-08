@@ -19,6 +19,7 @@ export const BattleAnimationTimeScales = [1, 0.5, 0.25] as const;
 export type BattleAnimationTimeScale =
   (typeof BattleAnimationTimeScales)[number];
 
+/** 有効な戦闘ウインドウのフォントサイズ */
 export const BattleWindowFontSizes = ["small", "normal", "large"] as const;
 
 /** 戦闘ウインドウのフォントサイズ */

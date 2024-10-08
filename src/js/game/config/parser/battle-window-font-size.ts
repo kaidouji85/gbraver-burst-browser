@@ -1,5 +1,7 @@
 import { z } from "zod";
 
+import { BattleWindowFontSize } from "../browser-config";
+
 /** 戦闘ウィンドウ フォントサイズ zod schema */
 export const BattleWindowFontSizeSchema = z.union([
   z.literal("small"),
@@ -14,7 +16,7 @@ export const BattleWindowFontSizeSchema = z.union([
  */
 export function parseBattleWindowFontSize(
   origin: unknown,
-): "small" | "normal" | "large" | null {
+): BattleWindowFontSize | null {
   const result = BattleWindowFontSizeSchema.safeParse(origin);
   return result.success ? result.data : null;
 }
