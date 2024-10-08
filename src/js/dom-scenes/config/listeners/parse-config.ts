@@ -3,71 +3,106 @@ import { parseBrowserConfig } from "../../../game/config/parser/browser-config";
 import { ConfigProps } from "../props";
 
 /**
- * 画面の入力値から設定オブジェクトをパースするヘルパー関数
- * @param props 画面の入力値
- * @returns パース結果
+ * 画面の入力値からプレイヤーセレクタータイプをパースする
+ * @param props ゲームプロパティ
+ * @returns パース結果、パースできなかった場合はnull
  */
-export function parseConfig(props: ConfigProps): GBraverBurstBrowserConfig {
+const parsePlayerSelectorType = (props: ConfigProps) => {
   const foundPlayerSelectorType = props.playerSelectorType.querySelector(
     'input[type="radio"]:checked',
   );
-  const playerSelectorType =
-    foundPlayerSelectorType instanceof HTMLInputElement
-      ? foundPlayerSelectorType.value
-      : null;
+  return foundPlayerSelectorType instanceof HTMLInputElement
+    ? foundPlayerSelectorType.value
+    : null;
+};
 
+/**
+ * 画面の入力値からバトルアニメーションのタイムスケールをパースする
+ * @param props ゲームプロパティ
+ * @returns パース結果、パースできなかった場合はnull
+ */
+const parseBattleAnimationTimeScale = (props: ConfigProps) => {
   const foundBattleAnimationTimeScale =
     props.battleAnimationTimeScaleSelector.querySelector(
       'input[type="radio"]:checked',
     );
-  const battleAnimationTimeScale =
-    foundBattleAnimationTimeScale instanceof HTMLInputElement
-      ? foundBattleAnimationTimeScale.value
-      : null;
+  return foundBattleAnimationTimeScale instanceof HTMLInputElement
+    ? foundBattleAnimationTimeScale.value
+    : null;
+};
 
+/**
+ * 画面の入力値からバトルウィンドウのフォントサイズをパースする
+ * @param props ゲームプロパティ
+ * @returns パース結果、パースできなかった場合はnull
+ */
+const parseBattleWindowFontSize = (props: ConfigProps) => {
   const foundBattleWindowFontSize =
     props.battleWindowFontSizeSelector.querySelector(
       'input[type="radio"]:checked',
     );
-  const battleWindowFontSize =
-    foundBattleWindowFontSize instanceof HTMLInputElement
-      ? foundBattleWindowFontSize.value
-      : null;
+  return foundBattleWindowFontSize instanceof HTMLInputElement
+    ? foundBattleWindowFontSize.value
+    : null;
+};
 
+/**
+ * 画面の入力値からWebGLのピクセル比をパースする
+ * @param props ゲームプロパティ
+ * @returns パース結果、パースできなかった場合はnull
+ */
+const parseWebGLPixelRatio = (props: ConfigProps) => {
   const foundWebGLPixelRatio = props.webGLPixelRatioSelector.querySelector(
     'input[type="radio"]:checked',
   );
-  const webGLPixelRatio =
-    foundWebGLPixelRatio instanceof HTMLInputElement
-      ? foundWebGLPixelRatio.value
-      : null;
+  return foundWebGLPixelRatio instanceof HTMLInputElement
+    ? foundWebGLPixelRatio.value
+    : null;
+};
 
+/**
+ * 画面の入力値からバトルコントローラータイプをパースする
+ * @param props ゲームプロパティ
+ * @returns パース結果、パースできなかった場合はnull
+ */
+const parseBattleControllerType = (props: ConfigProps) => {
   const foundBattleControllerType =
     props.battleControllerTypeSelector.querySelector(
       'input[type="radio"]:checked',
     );
-  const battleControllerType =
-    foundBattleControllerType instanceof HTMLInputElement
-      ? foundBattleControllerType.value
-      : null;
+  return foundBattleControllerType instanceof HTMLInputElement
+    ? foundBattleControllerType.value
+    : null;
+};
 
+/**
+ * 画面の入力値からパフォーマンス統計の表示状態をパースする
+ * @param props ゲームプロパティ
+ * @returns パース結果、パースできなかった場合はnull
+ */
+const parsePerformanceStatsVisibility = (props: ConfigProps) => {
   const foundPerformanceStatsVisibility =
     props.performanceStatsVisibilitySelector.querySelector(
       'input[type="radio"]:checked',
     );
-  const performanceStatsVisibility =
-    foundPerformanceStatsVisibility instanceof HTMLInputElement
-      ? foundPerformanceStatsVisibility.value
-      : null;
+  return foundPerformanceStatsVisibility instanceof HTMLInputElement
+    ? foundPerformanceStatsVisibility.value
+    : null;
+};
 
-  return parseBrowserConfig({
-    playerSelectorType,
-    battleAnimationTimeScale,
-    battleWindowFontSize,
-    webGLPixelRatio,
-    battleControllerType,
+/**
+ * 画面の入力値から設定オブジェクトをパースするヘルパー関数
+ * @param props 画面の入力値
+ * @returns パース結果
+ */
+export const parseConfig = (props: ConfigProps): GBraverBurstBrowserConfig =>
+  parseBrowserConfig({
+    playerSelectorType: parsePlayerSelectorType(props),
+    battleAnimationTimeScale: parseBattleAnimationTimeScale(props),
+    battleWindowFontSize: parseBattleWindowFontSize(props),
+    webGLPixelRatio: parseWebGLPixelRatio(props),
+    battleControllerType: parseBattleControllerType(props),
     bgmVolume: props.bgmVolumeSelector.value,
     seVolume: props.seVolumeSelector.value,
-    performanceStatsVisibility,
+    performanceStatsVisibility: parsePerformanceStatsVisibility(props),
   });
-}
