@@ -5,6 +5,7 @@ const origin: GBraverBurstBrowserConfig = {
   playerSelectorType: "open",
   webGLPixelRatio: 2,
   battleAnimationTimeScale: 1,
+  battleWindowFontSize: "normal",
   bgmVolume: 1,
   seVolume: 1,
   battleControllerType: "BigButton",
@@ -28,6 +29,14 @@ test("戦闘アニメ再生速度の変更を正しく検知できる", () => {
   const update: GBraverBurstBrowserConfig = {
     ...origin,
     battleAnimationTimeScale: 0.5,
+  };
+  expect(isConfigChanged(origin, update)).toBe(true);
+});
+
+test("戦闘ウインドウのフォントサイズの変更を正しく検知できる", () => {
+  const update: GBraverBurstBrowserConfig = {
+    ...origin,
+    battleWindowFontSize: "small",
   };
   expect(isConfigChanged(origin, update)).toBe(true);
 });
@@ -64,6 +73,7 @@ test("複数項目の変更を正しく検知できる", () => {
     playerSelectorType: "secret",
     webGLPixelRatio: 1,
     battleAnimationTimeScale: 0.25,
+    battleWindowFontSize: "large",
     bgmVolume: 0.5,
     seVolume: 0.2,
     battleControllerType: "MiniController",

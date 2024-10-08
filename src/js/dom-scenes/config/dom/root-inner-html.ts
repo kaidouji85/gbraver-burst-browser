@@ -1,6 +1,10 @@
-import { GBraverBurstBrowserConfig } from "../../../game/config/browser-config";
+import {
+  BattleWindowFontSizes,
+  GBraverBurstBrowserConfig,
+} from "../../../game/config/browser-config";
 import { battleAnimationTimeScaleOptions } from "./battle-animation-time-scale-options";
 import { battleControllerTypeItems } from "./battle-controller-type-items";
+import { battleWindowFontSizeItem } from "./battle-window-font-size-item";
 import { ROOT_CLASS } from "./class-name";
 import { playerSelectorTypeItems } from "./player-selector-types";
 import rootInnerHTMLTemplate from "./root-inner-html.hbs";
@@ -24,6 +28,12 @@ export function rootInnerHTML(config: GBraverBurstBrowserConfig): string {
   const battleControllerTypes = battleControllerTypeItems(
     config.battleControllerType,
   );
+  const battleWindowFontSizes = BattleWindowFontSizes.map((value) =>
+    battleWindowFontSizeItem({
+      value,
+      isChecked: value === config.battleWindowFontSize,
+    }),
+  ).join("");
   const bgmVolumeLabel = soundVolumeLabel(config.bgmVolume);
   const seVolumeLabel = soundVolumeLabel(config.seVolume);
   return rootInnerHTMLTemplate({
@@ -33,6 +43,7 @@ export function rootInnerHTML(config: GBraverBurstBrowserConfig): string {
     battleAnimationTimeScales,
     webGLPixelRatios,
     battleControllerTypes,
+    battleWindowFontSizes,
     bgmVolumeLabel,
     seVolumeLabel,
     checkedOfStatsVisible:

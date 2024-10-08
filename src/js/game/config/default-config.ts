@@ -5,6 +5,7 @@ export const DefaultConfig = {
   battleAnimationTimeScale: 1,
   bgmVolume: 1,
   seVolume: 1,
+  battleWindowFontSize: "normal",
   battleControllerType: "BigButton",
   performanceStatsVisibility: "hidden",
 } as const;

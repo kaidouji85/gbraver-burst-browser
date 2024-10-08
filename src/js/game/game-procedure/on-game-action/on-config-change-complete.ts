@@ -1,10 +1,7 @@
-import {
-  isPerformanceStatsVisibilityChanged,
-  isSoundConfigChanged,
-} from "../../config/config-changed";
 import { GameAction } from "../../game-actions";
 import { ConfigChangeComplete } from "../../game-actions/config-change-complete";
 import { GameProps } from "../../game-props";
+import { applyBattleWindowFontSize } from "../apply-battle-window-font-size";
 import { applyPerformanceStatsVisibility } from "../apply-performance-stats-visibility";
 import { applySoundVolume } from "../apply-sound-volume";
 import { startTitle } from "../start-title";
@@ -20,18 +17,12 @@ async function onConfigChangeComplete(
   action: ConfigChangeComplete,
 ): Promise<void> {
   await props.fader.fadeOut();
-  const origin = await props.config.load();
-  if (isSoundConfigChanged(origin, action.config)) {
-    await applySoundVolume(props, action.config);
-  }
-
-  if (isPerformanceStatsVisibilityChanged(origin, action.config)) {
-    applyPerformanceStatsVisibility(
-      props,
-      action.config.performanceStatsVisibility,
-    );
-  }
-
+  await applySoundVolume(props, action.config);
+  applyPerformanceStatsVisibility(
+    props,
+    action.config.performanceStatsVisibility,
+  );
+  applyBattleWindowFontSize(action.config.battleWindowFontSize);
   await props.config.save(action.config);
   await startTitle(props);
   await props.fader.fadeIn();
