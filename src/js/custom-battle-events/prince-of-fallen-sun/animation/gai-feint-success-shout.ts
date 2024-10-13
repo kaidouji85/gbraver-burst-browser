@@ -10,5 +10,9 @@ import { enemyPilotOnlyShout } from "../../pilot-shout";
  */
 export const gaiFeintSuccessShout = (props: Readonly<CustomBattleEventProps>) =>
   onStart(() => {
-    enemyPilotOnlyShout(props, "Gai", `なんだと まだ${wbr}そんな手を`);
+    enemyPilotOnlyShout(
+      props,
+      "Gai",
+      `さすが${wbr}Gブレイバー 全く${wbr}隙がない`,
+    );
   });
