@@ -8,7 +8,7 @@ import { GameProps } from "../game-props";
  * @param props ゲームプロパティ
  * @param config 反映するブラウザ設定
  */
-export async function reflectSoundVolume(
+export async function applySoundVolume(
   props: GameProps,
   config: GBraverBurstBrowserConfig,
 ): Promise<void> {

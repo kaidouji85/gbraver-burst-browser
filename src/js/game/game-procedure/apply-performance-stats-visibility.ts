@@ -42,7 +42,7 @@ function hiddenPerformanceStats(props: GameProps): void {
  * @param props ゲームプロパティ
  * @param statsVisibility パフォーマンス統計表示設定
  */
-export function reflectPerformanceStatsVisibility(
+export function applyPerformanceStatsVisibility(
   props: GameProps,
   statsVisibility: PerformanceStatsVisibility,
 ): void {

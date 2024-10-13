@@ -35,7 +35,7 @@ function batteryEnhancementSkillDetail(
 ): string[] {
   return [
     `${skill.duration}ターンだけ、0より大きいバッテリーを出した場合にバッテリー+${skill.batteryEnhancement}する。`,
-    `ただしバーストによる攻撃力アップが半減する。`,
+    `ただしバーストによって攻撃アップの効果を得ている場合、その効果は半分になる。`,
   ];
 }
 

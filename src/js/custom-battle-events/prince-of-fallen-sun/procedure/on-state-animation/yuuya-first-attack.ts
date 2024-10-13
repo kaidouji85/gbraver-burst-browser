@@ -1,9 +1,9 @@
 import { Animate } from "../../../../animation/animate";
+import { empty } from "../../../../animation/delay";
 import { CustomStateAnimation } from "../../../../td-scenes/battle/custom-battle-event";
 import { playerBattleCount } from "../../../battle-count";
 import { ConditionalAnimation } from "../../../get-animation-if-conditional-met";
-import { yuuyaFirstAttackShout1 } from "../../animation/yuuya-first-attack-shout1";
-import { yuuyaFirstAttackShout2 } from "../../animation/yuuya-first-attack-shout2";
+import { yuuyaFirstAttackShout } from "../../animation/yuuya-first-attack-shout";
 import { PrinceOfFallenSunProps } from "../../props";
 
 /** ユウヤ ファーストアタック */
@@ -21,13 +21,13 @@ export const yuuyaFirstAttack: ConditionalAnimation<
     effect.name === "BatteryDeclaration" &&
     effect.attacker === playerId
   ) {
-    result = yuuyaFirstAttackShout1(props);
+    result = yuuyaFirstAttackShout(props);
   } else if (
     battleCount === 1 &&
     effect.name === "Battle" &&
     effect.attacker === playerId
   ) {
-    result = yuuyaFirstAttackShout2(props);
+    result = empty();
   }
 
   return result;

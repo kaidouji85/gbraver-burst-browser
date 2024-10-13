@@ -14,7 +14,17 @@
   /** フォント */
   --font-color: rgb(240 240 240);
   --responsive-font-size: 10px;
-  --battle-window-font-size: calc(var(--responsive-font-size) * 1.3);
+
+  /** 戦闘メッセージウインドウ フォントサイズ */
+  --battle-window-font-small: calc(var(--responsive-font-size) * 1);
+  --battle-window-font-normal: calc(var(--responsive-font-size) * 1.2);
+  --battle-window-font-large: calc(var(--responsive-font-size) * 1.5);
+
+  /**
+   * 戦闘メッセージ ウインドウフォントサイズの現在値
+   * 本カスタムプロパティはJavaScriptにより操作される
+   */
+  --battle-window-font-size: var(--battle-window-font-normal);
 
   /** 背景 */
   --background-color: rgb(23 23 23);

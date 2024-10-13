@@ -15,7 +15,7 @@ export async function sunOfNoble(props: CustomBattleEventProps) {
   activeRightMessageWindowWithFace(props, "Yuuya");
   await scrollRightMessages(props, [
     ["ユウヤ", `「思い出したぞ`],
-    [`その顔は 浅草重工の${wbr}御曹司${wbr}だな」`],
+    [`その顔 浅草重工の${wbr}御曹司${wbr}だな」`],
   ]);
   props.view.dom.rightMessageWindow.darken();
 
@@ -27,12 +27,9 @@ export async function sunOfNoble(props: CustomBattleEventProps) {
 
   activeRightMessageWindowWithFace(props, "Yuuya");
   await scrollRightMessages(props, [
+    ["ユウヤ", `「感激だな`],
     [
-      "ユウヤ",
-      `「浅草重工は${wbr}世界で${wbr}初めて${wbr}巨大ロボを${wbr}製造した${wbr}企業`,
-    ],
-    [
-      `まさか${wbr}創業家の${wbr}人間と${wbr}手合わせ${wbr}できる${wbr}とはな」`,
+      `まさか${wbr}巨大ロボの${wbr}創業家の${wbr}人間と${wbr}手合わせ${wbr}できる${wbr}とはな」`,
     ],
   ]);
   props.view.dom.rightMessageWindow.darken();

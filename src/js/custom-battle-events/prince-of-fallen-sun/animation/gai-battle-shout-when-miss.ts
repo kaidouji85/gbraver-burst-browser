@@ -1,16 +1,16 @@
 import { onStart } from "../../../animation/on-start";
 import { wbr } from "../../../dom/wbr";
 import { CustomBattleEventProps } from "../../../td-scenes/battle/custom-battle-event";
-import { playerPilotOnlyShout } from "../../pilot-shout";
+import { enemyPilotOnlyShout } from "../../pilot-shout";
 
 /**
- * ユウヤ ファーストアタック 叫び2
+ * ガイ 戦闘 ミス
  * @param props イベントプロパティ
  * @returns アニメーション
  */
-export const yuuyaFirstAttackShout2 = (
+export const gaiBattleShoutWhenMiss = (
   props: Readonly<CustomBattleEventProps>,
 ) =>
   onStart(() => {
-    playerPilotOnlyShout(props, "Yuuya", `君とは${wbr}初対面の${wbr}はずだが`);
+    enemyPilotOnlyShout(props, "Gai", `クッ ここは${wbr}牽制攻撃だ`);
   });

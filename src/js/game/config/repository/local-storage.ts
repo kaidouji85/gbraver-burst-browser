@@ -10,6 +10,8 @@ const Keys = {
   WebGLPixelRatio: "WebGLPixelRatio",
   /** 戦闘アニメタイムスケール */
   BattleAnimationTimeScale: "BattleAnimationTimeScale",
+  /** 戦闘ウインドウのフォントサイズ */
+  BattleWindowFontSize: "BattleWindowFontSize",
   /** 戦闘画面コントローラータイプ */
   BattleControllerType: "BattleControllerType",
   /** BGM音量 */
@@ -33,6 +35,10 @@ class LocalStorageConfigRepository
       `${config.battleAnimationTimeScale}`,
     );
     localStorage.setItem(
+      Keys.BattleWindowFontSize,
+      config.battleWindowFontSize,
+    );
+    localStorage.setItem(
       Keys.BattleControllerType,
       config.battleControllerType,
     );
@@ -53,6 +59,7 @@ class LocalStorageConfigRepository
         Keys.BattleAnimationTimeScale,
       ),
       battleControllerType: localStorage.getItem(Keys.BattleControllerType),
+      battleWindowFontSize: localStorage.getItem(Keys.BattleWindowFontSize),
       bgmVolume: localStorage.getItem(Keys.BGMVolume),
       seVolume: localStorage.getItem(Keys.SEVolume),
       performanceStatsVisibility: localStorage.getItem(

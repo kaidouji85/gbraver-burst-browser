@@ -6,6 +6,8 @@ import { GameEnd, PlayerId } from "gbraver-burst-core";
  * 本オブジェクトは不変なものだけを集めたのでステートは含まない
  */
 export type Conditions = {
+  /** プレイヤーID */
+  readonly playerId: PlayerId;
   /** 敵ID */
   readonly enemyId: PlayerId;
   /** updateから抽出したGameEnd情報、存在しない場合はnull */

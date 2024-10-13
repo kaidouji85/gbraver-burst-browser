@@ -10,9 +10,5 @@ import { playerPilotOnlyShout } from "../../pilot-shout";
  */
 export const yuuyaBurstShout = (props: Readonly<CustomBattleEventProps>) =>
   onStart(() => {
-    playerPilotOnlyShout(
-      props,
-      "Yuuya",
-      `ジェネシスブレイバー バースト${wbr}ON！！`,
-    );
+    playerPilotOnlyShout(props, "Yuuya", `Gブレイバー バースト${wbr}ON！！`);
   });

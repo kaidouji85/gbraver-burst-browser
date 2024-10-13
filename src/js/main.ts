@@ -14,7 +14,8 @@ import { Game } from "./game/index";
 declare let GBRAVER_BURST_DESKTOP_RESOURCE_ROOT: string;
 declare let GBRAVER_BURST_MOBILE_RESOURCE_ROOT: string;
 declare let GBRAVER_BURST_OWN_ROOT_URL: string;
-declare let GBRAVER_BURST_HOW_TO_PLAY: string;
+declare let GBRAVER_BURST_HOW_TO_PLAY_URL: string;
+declare let GBRAVER_BURST_CHARACTER_DESCRIPTION_URL: string;
 declare let GBRAVER_BURST_TERMS_OF_SERVICE_URL: string;
 declare let GBRAVER_BURST_PRIVACY_POLICY_URL: string;
 declare let GBRAVER_BURST_CONTACT_URL: string;
@@ -53,7 +54,8 @@ export async function main(): Promise<void> {
     resourceRoot,
     api: api,
     config: createLocalStorageConfigRepository(),
-    howToPlayURL: GBRAVER_BURST_HOW_TO_PLAY,
+    howToPlayURL: GBRAVER_BURST_HOW_TO_PLAY_URL,
+    characterDescriptionURL: GBRAVER_BURST_CHARACTER_DESCRIPTION_URL,
     termsOfServiceURL: GBRAVER_BURST_TERMS_OF_SERVICE_URL,
     privacyPolicyURL: GBRAVER_BURST_PRIVACY_POLICY_URL,
     contactURL: GBRAVER_BURST_CONTACT_URL,
