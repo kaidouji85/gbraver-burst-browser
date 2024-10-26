@@ -12,5 +12,9 @@ export const yuuyaBattleShoutWhenMiss = (
   props: Readonly<CustomBattleEventProps>,
 ) =>
   onStart(() => {
-    playerPilotOnlyShout(props, "Yuuya", `ほう 俺の${wbr}攻撃を${wbr}躱したか`);
+    playerPilotOnlyShout(
+      props,
+      "Yuuya",
+      `さすが${wbr}創業家 一筋縄では${wbr}いかないな`,
+    );
   });
