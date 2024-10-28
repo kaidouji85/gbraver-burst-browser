@@ -49,15 +49,15 @@ export class Renderer implements OverlapNotifier, RendererDomGetter, Rendering {
    */
   destructor(): void {
     this.#unsubscriber.forEach((v) => v.unsubscribe());
-    this.disposeRenders();
+    this.dispose();
   }
 
   /**
-   * レンダラが内部的に持つリソースを破棄する
+   * レンダラの持つリソースを解放する
    * シーン終了時に呼ばれる想定
    */
-  disposeRenders(): void {
-    this.#threeJsRender.renderLists.dispose();
+  dispose(): void {
+    this.#threeJsRender.dispose();
   }
 
   /**
