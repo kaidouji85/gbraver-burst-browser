@@ -75,7 +75,7 @@ export class TDSceneBinder {
    */
   #disposeScene(): void {
     this.#scene?.destructor();
-    this.#renderer.disposeRenders();
+    this.#renderer.dispose();
     this.#domLayerElement.innerHTML = "";
     this.#unsubscribers.forEach((v) => {
       v.unsubscribe();
