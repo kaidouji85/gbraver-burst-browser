@@ -8,6 +8,7 @@ import { switchEpisodeSelector } from "./switch-scene/switch-episode-selector";
 
 /**
  * エピソードセレクタ画面を開始するヘルパー関数
+ * 本関数ではフェードアウト、フェードイン、3Dシーンのdisposeを行う
  * @param props ゲームプロパティ
  * @param initialSelectedEpisodeID 初期選択エピソードID
  * @returns 処理が完了したら発火するPromise
@@ -17,6 +18,7 @@ export async function startEpisodeSelector(
   initialSelectedEpisodeID?: EpisodeID,
 ) {
   await props.fader.fadeOut();
+  props.tdBinder.hidden();
   const episodes = getEpisodes(props);
   const scene = new EpisodeSelector({
     ...props,

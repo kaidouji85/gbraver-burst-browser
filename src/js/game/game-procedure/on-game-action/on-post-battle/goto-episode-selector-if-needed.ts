@@ -14,7 +14,6 @@ export async function gotoEpisodeSelectorIfNeeded(
   props: Readonly<GameProps>,
   action: Readonly<PostBattleAction>,
 ): Promise<boolean> {
-  let isDone = false;
   if (
     action.action.type === "GotoEpisodeSelect" &&
     props.inProgress.type === "Story" &&
@@ -24,7 +23,8 @@ export async function gotoEpisodeSelectorIfNeeded(
     props.domFloaters.hiddenPostBattle();
     await startEpisodeSelector(props, playingEpisode.episode.id);
     playTitleBGM(props);
-    isDone = true;
+    return true;
   }
-  return isDone;
+
+  return false;
 }

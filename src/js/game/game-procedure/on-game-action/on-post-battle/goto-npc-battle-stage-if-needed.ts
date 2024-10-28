@@ -18,7 +18,6 @@ export async function gotoNPCBattleStageIfNeeded(
   props: Readonly<GameProps>,
   action: Readonly<PostBattleAction>,
 ): Promise<boolean> {
-  let isDone = false;
   if (
     props.inProgress.type === "NPCBattle" &&
     props.inProgress.npcBattle.type === "PlayingNPCBattle" &&
@@ -30,7 +29,8 @@ export async function gotoNPCBattleStageIfNeeded(
     const player = state.player;
     props.domFloaters.hiddenPostBattle();
     await startNPCBattleStage(props, player, stage, level);
-    isDone = true;
+    return true;
   }
-  return isDone;
+
+  return false;
 }
