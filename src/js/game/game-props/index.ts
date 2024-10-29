@@ -95,7 +95,7 @@ export interface GameProps
   /** レンダラ管理オブジェクト */
   readonly renderer: Renderer;
   /** 3Dシーンバインダー */
-  readonly tdBinder: TDSceneBinder;
+  readonly tdSceneBinder: TDSceneBinder;
 
   /** リソースルート */
   readonly resourceRoot: ResourceRoot;

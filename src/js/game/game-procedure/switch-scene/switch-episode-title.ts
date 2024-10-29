@@ -1,5 +1,6 @@
 import { EpisodeTitle } from "../../../dom-scenes/episode-title";
 import { GameProps } from "../../game-props";
+import { switchDOMScene } from "./switch-dom-scene";
 
 /**
  * エピソードタイトル画面に切り替える
@@ -7,4 +8,4 @@ import { GameProps } from "../../game-props";
  * @param scene エピソードタイトル画面
  */
 export const switchEpisodeTitle = (props: GameProps, scene: EpisodeTitle) =>
-  props.domSceneBinder.bind(scene, []);
+  switchDOMScene({ ...props, scene, unsubscribers: [] });
