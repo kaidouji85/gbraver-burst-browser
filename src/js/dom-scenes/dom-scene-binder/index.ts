@@ -42,4 +42,12 @@ export class DOMSceneBinder {
   getRootHTMLElement(): HTMLElement {
     return this.#props.root;
   }
+
+  /**
+   * シーンがバインドされているかを判定する
+   * @returns シーンがバインドされている場合はtrue、そうでない場合はfalse
+   */
+  isSceneBound(): boolean {
+    return this.#props.scene !== null;
+  }
 }

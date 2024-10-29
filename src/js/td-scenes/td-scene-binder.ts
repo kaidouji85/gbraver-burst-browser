@@ -68,4 +68,12 @@ export class TDSceneBinder {
   getDOMLayerElements(): HTMLElement[] {
     return [this.#domLayerElement];
   }
+
+  /**
+   * シーンがバインドされているかを判定する
+   * @returns シーンがバインドされている場合はtrue、そうでない場合はfalse
+   */
+  isSceneBound(): boolean {
+    return this.#scene !== null;
+  }
 }
