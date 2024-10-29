@@ -72,7 +72,7 @@ export async function startNPCBattleStage(
     waitUntilWindowPushWithStream(props.pushWindow),
   ]);
   await props.fader.fadeOut();
-  props.domSceneBinder.hidden();
+  props.domSceneBinder.dispose();
   await props.fader.fadeIn();
   await battleScene.start();
 }

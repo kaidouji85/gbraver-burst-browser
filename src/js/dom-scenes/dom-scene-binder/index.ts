@@ -2,7 +2,7 @@ import { Unsubscribable } from "rxjs";
 
 import { DOMScene } from "../dom-scene";
 import { bind } from "./bind";
-import { discardCurrentScene } from "./discard-current-scene";
+import { dispose } from "./dispose";
 import { createDOMSceneBinderProps, DOMSceneBinderProps } from "./props";
 
 /** DOMシーンバインダー */
@@ -18,13 +18,6 @@ export class DOMSceneBinder {
   }
 
   /**
-   * デストラクタ相当の処理
-   */
-  destructor() {
-    discardCurrentScene(this.#props);
-  }
-
-  /**
    * DOMシーンをバインドする
    * @template X シーンのデータ型
    * @param scene バインドするシーン
@@ -35,11 +28,11 @@ export class DOMSceneBinder {
   }
 
   /**
-   * 本クラス配下のシーンを全て非表示にする
-   * 本メソッドは、3Dシーンを表示する前に呼ばれる想定である
+   * バインドしているシーンを破棄する
+   * 本メソッドはDOMシーンから3Dシーンに切り替わる際に呼ばれる想定
    */
-  hidden(): void {
-    discardCurrentScene(this.#props);
+  dispose(): void {
+    dispose(this.#props);
   }
 
   /**
