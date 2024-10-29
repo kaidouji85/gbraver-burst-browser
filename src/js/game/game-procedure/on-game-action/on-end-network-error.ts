@@ -22,7 +22,7 @@ const gotoTitle = async (props: GameProps) => {
   await Promise.all([
     (async () => {
       await props.fader.fadeOut();
-      props.tdBinder.hidden();
+      props.tdBinder.dispose();
       return await startTitle(props);
     })(),
     (async () => {

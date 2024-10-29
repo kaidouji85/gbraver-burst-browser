@@ -5,7 +5,7 @@ import { InProgress } from "../../../in-progress";
 import { gotoEndingIfNeeded } from "./goto-ending-if-needed";
 import { gotoEpisodeIfNeeded } from "./goto-episode-if-needed";
 import { gotoEpisodeSelectorIfNeeded } from "./goto-episode-selector-if-needed";
-import { gotoNPCBattleStageIfNeeded } from "./goto-npc-battle-stage";
+import { gotoNPCBattleStageIfNeeded } from "./goto-npc-battle-stage-if-needed";
 import { gotoTitleIfNeeded } from "./goto-title-if-needed";
 
 /**

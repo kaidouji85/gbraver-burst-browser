@@ -96,7 +96,7 @@ export async function startOnlineBattle(
   switchBattleScene(props, battleScene);
   await waitAnimationFrame();
   await props.fader.fadeOut();
-  props.domSceneBinder.hidden();
+  props.domSceneBinder.dispose();
   await props.fader.fadeIn();
   await battleScene.start();
 }
