@@ -16,7 +16,7 @@ import { switchStageTitle } from "./switch-scene/switch-stage-title";
 
 /**
  * NPCバトルのステージを開始するヘルパー関数
- * 本関数ではフェードアウト、フェードイン、3Dシーンのdisposeを行う
+ * 本関数ではフェードアウト、フェードインを行う
  * @param props ゲームプロパティ
  * @param player プレイヤー
  * @param stage NPCバトルステージ
@@ -36,7 +36,6 @@ export async function startNPCBattleStage(
       await props.bgm.do(stop);
     })(),
   ]);
-  props.tdSceneBinder.dispose();
   props.domDialogBinder.hidden();
   const scene = new StageTitle({
     resources: props.resources,

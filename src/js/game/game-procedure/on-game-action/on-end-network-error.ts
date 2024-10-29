@@ -22,7 +22,6 @@ const gotoTitle = async (props: GameProps) => {
   await Promise.all([
     (async () => {
       await props.fader.fadeOut();
-      props.tdSceneBinder.dispose();
       return await startTitle(props);
     })(),
     (async () => {
