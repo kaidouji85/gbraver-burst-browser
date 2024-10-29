@@ -31,14 +31,6 @@ export class TDSceneBinder {
   }
 
   /**
-   * デストラクタ相当の処理
-   */
-  destructor(): void {
-    this.dispose();
-    this.#hudUIScale.destructor();
-  }
-
-  /**
    * 3D系シーンをバインドする
    * @param scene バインドするシーン
    * @param unsubscribers バインドするシーンに関連するアンサブスクライバ
@@ -57,7 +49,7 @@ export class TDSceneBinder {
 
   /**
    * バインドされたシーンを破棄する
-   * 本メソッドは3Dシーンから2Dシーンに切り替わる際に呼ばれる想定
+   * 本メソッドは3DシーンからDOMシーンに切り替わる際に呼ばれる想定
    */
   dispose(): void {
     this.#scene?.destructor();
