@@ -11,7 +11,7 @@ import { GameProps } from "../../game-props";
  * @param scene DOMシーン
  * @param unsubscribers バインドするシーンに関連するアンサブスクライバ
  */
-export const switchDomScene = (
+export const switchDOMScene = (
   props: GameProps,
   scene: DOMScene,
   unsubscribers: Unsubscribable[],
