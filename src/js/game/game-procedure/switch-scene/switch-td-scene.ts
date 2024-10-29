@@ -22,7 +22,7 @@ type Params = {
  * 本関数はこのフォルダ以外では呼び出してはならない
  * @param params シーン切り替えパラメータ
  */
-export const switchTdScene = (params: Params) => {
+export const switchTDScene = (params: Params) => {
   const { tdSceneBinder, domSceneBinder, scene, unsubscribers } = params;
   if (domSceneBinder.isSceneBound()) {
     domSceneBinder.dispose();

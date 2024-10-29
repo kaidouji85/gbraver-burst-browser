@@ -2,6 +2,7 @@ import { map } from "rxjs";
 
 import { BattleScene } from "../../../td-scenes/battle";
 import { GameProps } from "../../game-props";
+import { switchTDScene } from "./switch-td-scene";
 
 /**
  * 戦闘シーンに切り替える
@@ -9,10 +10,11 @@ import { GameProps } from "../../game-props";
  * @param scene 戦闘シーン
  */
 export const switchBattleScene = (props: GameProps, scene: BattleScene) => {
-  props.tdSceneBinder.bind(
+  switchTDScene({
+    ...props,
     scene,
-    props.gameAction.connect([
+    unsubscribers: props.gameAction.connect([
       scene.notifyGameEnd().pipe(map((a) => ({ ...a, type: "EndBattle" }))),
     ]),
-  );
+  });
 };

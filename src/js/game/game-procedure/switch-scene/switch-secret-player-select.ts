@@ -2,6 +2,7 @@ import { map } from "rxjs";
 
 import { SecretPlayerSelect } from "../../../dom-scenes/secret-player-select";
 import { GameProps } from "../../game-props";
+import { switchDOMScene } from "./switch-dom-scene";
 
 /**
  * シークレットプレイヤー画面のアクションコネクタを生成する
@@ -12,10 +13,11 @@ export const switchSecretPlayerSelect = (
   props: GameProps,
   scene: SecretPlayerSelect,
 ) =>
-  props.domSceneBinder.bind(
+  switchDOMScene({
+    ...props,
     scene,
-    props.gameAction.connect([
+    unsubscribers: props.gameAction.connect([
       scene.notifyOK().pipe(map((a) => ({ ...a, type: "SelectionComplete" }))),
       scene.notifyPrev().pipe(map(() => ({ type: "SelectionCancel" }))),
     ]),
-  );
+  });
