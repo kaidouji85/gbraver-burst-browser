@@ -1,23 +1,31 @@
 import { Unsubscribable } from "rxjs";
 
+import { DOMSceneBinder } from "../../../dom-scenes/dom-scene-binder";
 import { TDScene } from "../../../td-scenes/td-scene";
-import { GameProps } from "../../game-props";
+import { TDSceneBinder } from "../../../td-scenes/td-scene-binder";
+
+/** シーン切り替えパラメータ */
+type Params = {
+  /** 3Dシーンバインダ */
+  tdSceneBinder: TDSceneBinder;
+  /** DOMシーンバインダ */
+  domSceneBinder: DOMSceneBinder;
+  /** 切り替え先の3Dシーン */
+  scene: TDScene;
+  /** バインドするシーンに関連するアンサブスクライバ */
+  unsubscribers: Unsubscribable[];
+};
 
 /**
  * 3Dシーンに切り替える
  * 切り替え前にDOMシーンを表示していた場合、そのシーンを破棄する
  * 本関数はこのフォルダ以外では呼び出してはならない
- * @param props ゲームプロパティ
- * @param scene 3Dシーン
- * @param unsubscribers バインドするシーンに関連するアンサブスクライバ
+ * @param params シーン切り替えパラメータ
  */
-export const switchTdScene = (
-  props: GameProps,
-  scene: TDScene,
-  unsubscribers: Unsubscribable[],
-) => {
-  if (props.domSceneBinder.isSceneBound()) {
-    props.domSceneBinder.dispose();
+export const switchTdScene = (params: Params) => {
+  const { tdSceneBinder, domSceneBinder, scene, unsubscribers } = params;
+  if (domSceneBinder.isSceneBound()) {
+    domSceneBinder.dispose();
   }
-  props.tdSceneBinder.bind(scene, unsubscribers);
+  tdSceneBinder.bind(scene, unsubscribers);
 };
