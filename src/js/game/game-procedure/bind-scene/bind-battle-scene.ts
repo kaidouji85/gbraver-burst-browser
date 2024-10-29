@@ -2,19 +2,17 @@ import { map } from "rxjs";
 
 import { BattleScene } from "../../../td-scenes/battle";
 import { GameProps } from "../../game-props";
-import { switchTDScene } from "./switch-td-scene";
 
 /**
- * 戦闘シーンに切り替える
+ * 戦闘シーンをバインドする
  * @param props ゲームプロパティ
  * @param scene 戦闘シーン
  */
-export const switchBattleScene = (props: GameProps, scene: BattleScene) => {
-  switchTDScene({
-    ...props,
+export const bindBattleScene = (props: GameProps, scene: BattleScene) => {
+  props.tdSceneBinder.bind(
     scene,
-    unsubscribers: props.gameAction.connect([
+    props.gameAction.connect([
       scene.notifyGameEnd().pipe(map((a) => ({ ...a, type: "EndBattle" }))),
     ]),
-  });
+  );
 };

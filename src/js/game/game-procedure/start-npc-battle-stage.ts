@@ -11,7 +11,7 @@ import { waitTime } from "../../wait/wait-time";
 import { waitUntilWindowPushWithStream } from "../../wait/wait-until-window-push-with-stream";
 import { GameProps } from "../game-props";
 import { NPCBattleStage } from "../npc-battle";
-import { switchBattleScene } from "./switch-scene/switch-battle-scene";
+import { bindBattleScene } from "./bind-scene/bind-battle-scene";
 import { switchStageTitle } from "./switch-scene/switch-stage-title";
 
 /**
@@ -63,7 +63,7 @@ export async function startNPCBattleStage(
     controllerType: config.battleControllerType,
     customBattleEvent: createSeriousMatchEvent(),
   });
-  switchBattleScene(props, battleScene);
+  bindBattleScene(props, battleScene);
   await waitAnimationFrame();
   const latency = Date.now() - startNPCStageTitleTime;
   await Promise.race([
