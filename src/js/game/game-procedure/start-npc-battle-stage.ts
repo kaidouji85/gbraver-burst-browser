@@ -36,7 +36,7 @@ export async function startNPCBattleStage(
       await props.bgm.do(stop);
     })(),
   ]);
-  props.tdBinder.dispose();
+  props.tdSceneBinder.dispose();
   props.domDialogBinder.hidden();
   const scene = new StageTitle({
     resources: props.resources,

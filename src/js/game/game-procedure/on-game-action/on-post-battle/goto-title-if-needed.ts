@@ -22,7 +22,7 @@ export async function gotoTitleIfNeeded(
   await Promise.all([
     (async () => {
       await props.fader.fadeOut();
-      props.tdBinder.dispose();
+      props.tdSceneBinder.dispose();
       return await startTitle(props);
     })(),
     (async () => {

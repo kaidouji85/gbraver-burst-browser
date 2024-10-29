@@ -18,7 +18,7 @@ export async function startEpisodeSelector(
   initialSelectedEpisodeID?: EpisodeID,
 ) {
   await props.fader.fadeOut();
-  props.tdBinder.dispose();
+  props.tdSceneBinder.dispose();
   const episodes = getEpisodes(props);
   const scene = new EpisodeSelector({
     ...props,

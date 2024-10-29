@@ -19,5 +19,5 @@ export const switchTdScene = (
   if (props.domSceneBinder.isSceneBound()) {
     props.domSceneBinder.dispose();
   }
-  props.tdBinder.bind(scene, unsubscribers);
+  props.tdSceneBinder.bind(scene, unsubscribers);
 };

@@ -16,8 +16,8 @@ export const switchDomScene = (
   scene: DOMScene,
   unsubscribers: Unsubscribable[],
 ): void => {
-  if (props.tdBinder.isSceneBound()) {
-    props.tdBinder.dispose();
+  if (props.tdSceneBinder.isSceneBound()) {
+    props.tdSceneBinder.dispose();
   }
   props.domSceneBinder.bind(scene, unsubscribers);
 };

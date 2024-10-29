@@ -92,7 +92,7 @@ export function generateGameProps(params: GamePropsGeneratorParams): GameProps {
       postBattleConnector,
     }),
     renderer,
-    tdBinder: new TDSceneBinder(renderer, hudUIScale),
+    tdSceneBinder: new TDSceneBinder(renderer, hudUIScale),
     serviceWorker: null,
     bgm: createBGMManager(),
     se: createSEPlayer(),
