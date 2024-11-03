@@ -1,7 +1,7 @@
 import { Unsubscribable } from "rxjs";
 
 import { DOMScene } from "../dom-scene";
-import { discardCurrentScene } from "./discard-current-scene";
+import { dispose } from "./dispose";
 import { DOMSceneBinderProps } from "./props";
 
 /**
@@ -16,7 +16,7 @@ export function bind<X extends DOMScene>(
   scene: X,
   unsubscribers: Unsubscribable[],
 ) {
-  discardCurrentScene(props);
+  dispose(props);
   props.scene = scene;
   props.root.appendChild(scene.getRootHTMLElement());
   props.unsubscribers = unsubscribers;

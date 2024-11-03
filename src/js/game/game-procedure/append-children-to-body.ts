@@ -13,7 +13,7 @@ export function appendChildrenToBody(props: Readonly<GameProps>): void {
     props.domSceneBinder.getRootHTMLElement(),
     props.domFloaters.getRootHTMLElement(),
     props.renderer.getRendererDOM(),
-    ...props.tdBinder.getDOMLayerElements(),
+    ...props.tdSceneBinder.getDOMLayerElements(),
   ];
   elements.forEach((element) => {
     body.appendChild(element);

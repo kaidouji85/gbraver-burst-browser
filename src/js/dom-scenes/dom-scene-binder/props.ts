@@ -7,8 +7,8 @@ export type DOMSceneBinderProps = {
   /** DomSceneBinderルートHTML要素、本要素にシーンをバインドする */
   root: HTMLElement;
   /** 現在表示しているシーン、シーンが表示されていない場合はnullをセットする */
-  scene: DOMScene | null | undefined;
-  /** ゲームアクション通知ノアンサブスクライバ */
+  scene: DOMScene | null;
+  /** ゲームアクション通知のアンサブスクライバ */
   unsubscribers: Unsubscribable[];
 };
 

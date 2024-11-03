@@ -2,6 +2,7 @@ import { map } from "rxjs";
 
 import { NPCEnding } from "../../../dom-scenes/npc-ending";
 import { GameProps } from "../../game-props";
+import { switchDOMScene } from "./switch-dom-scene";
 
 /**
  * NPCルートエンディング画面に切り替える
@@ -9,9 +10,10 @@ import { GameProps } from "../../game-props";
  * @param scene NPCルートエンディング画面
  */
 export const switchNpcEnding = (props: GameProps, scene: NPCEnding) =>
-  props.domSceneBinder.bind(
+  switchDOMScene({
+    ...props,
     scene,
-    props.gameAction.connect([
+    unsubscribers: props.gameAction.connect([
       scene.notifyFinish().pipe(map(() => ({ type: "EndNPCEnding" }))),
     ]),
-  );
+  });

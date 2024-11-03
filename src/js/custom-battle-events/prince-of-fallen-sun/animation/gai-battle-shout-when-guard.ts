@@ -15,6 +15,6 @@ export const gaiBattleShoutWhenGuard = (
     enemyPilotOnlyShout(
       props,
       "Gai",
-      `いいぞ ダメージが${wbr}確実に${wbr}蓄積している`,
+      `このまま${wbr}ダメージを${wbr}蓄積させれば`,
     );
   });

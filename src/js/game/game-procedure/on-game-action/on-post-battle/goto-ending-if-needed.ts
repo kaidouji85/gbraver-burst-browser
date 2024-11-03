@@ -21,7 +21,6 @@ export async function gotoEndingIfNeeded(
 
   props.domFloaters.hiddenPostBattle();
   await props.fader.fadeOut();
-  props.tdBinder.hidden();
   const scene = new NPCEnding(props);
   switchNpcEnding(props, scene);
   await Promise.race([scene.waitUntilLoaded(), waitTime(MAX_LOADING_TIME)]);

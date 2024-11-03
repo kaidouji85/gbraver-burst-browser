@@ -2,6 +2,7 @@ import { map } from "rxjs";
 
 import { EpisodeSelector } from "../../../dom-scenes/episode-selector";
 import { GameProps } from "../../game-props";
+import { switchDOMScene } from "./switch-dom-scene";
 
 /**
  * エピソードセレクト画面に切り替える
@@ -12,12 +13,13 @@ export const switchEpisodeSelector = (
   props: GameProps,
   scene: EpisodeSelector,
 ) =>
-  props.domSceneBinder.bind(
+  switchDOMScene({
+    ...props,
     scene,
-    props.gameAction.connect([
+    unsubscribers: props.gameAction.connect([
       scene.notifyPrev().pipe(map(() => ({ type: "CancelTutorialSelect" }))),
       scene
         .notifySelection()
         .pipe(map((a) => ({ ...a, type: "SelectEpisode" }))),
     ]),
-  );
+  });

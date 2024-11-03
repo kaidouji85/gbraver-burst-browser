@@ -12,9 +12,9 @@ import { BattleProgress } from "../../td-scenes/battle/battle-progress";
 import { waitAnimationFrame } from "../../wait/wait-animation-frame";
 import { waitTime } from "../../wait/wait-time";
 import { GameProps } from "../game-props";
+import { bindBattleScene } from "./bind-scene/bind-battle-scene";
 import { switchNetworkErrorDialog } from "./switch-dialog/switch-network-error-dialog";
 import { switchWaitingDialog } from "./switch-dialog/switch-waiting-dialog";
-import { switchBattleScene } from "./switch-scene/switch-battle-scene";
 import { switchMatchCard } from "./switch-scene/switch-match-card";
 
 /**
@@ -93,10 +93,10 @@ export async function startOnlineBattle(
     emergencyStop: battle.suddenlyBattleNotifier(),
     customBattleEvent: createSeriousMatchEvent(),
   });
-  switchBattleScene(props, battleScene);
+  bindBattleScene(props, battleScene);
   await waitAnimationFrame();
   await props.fader.fadeOut();
-  props.domSceneBinder.hidden();
+  props.domSceneBinder.dispose();
   await props.fader.fadeIn();
   await battleScene.start();
 }

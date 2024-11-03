@@ -2,6 +2,7 @@ import { map } from "rxjs";
 
 import { Title } from "../../../dom-scenes/title";
 import { GameProps } from "../../game-props";
+import { switchDOMScene } from "./switch-dom-scene";
 
 /**
  * タイトル画面に切り替える
@@ -9,9 +10,10 @@ import { GameProps } from "../../game-props";
  * @param scene タイトル画面
  */
 export const switchTitle = (props: GameProps, scene: Title) =>
-  props.domSceneBinder.bind(
+  switchDOMScene({
+    ...props,
     scene,
-    props.gameAction.connect([
+    unsubscribers: props.gameAction.connect([
       scene.notifyLogin().pipe(map(() => ({ type: "UniversalLogin" }))),
       scene.notifyLogout().pipe(map(() => ({ type: "Logout" }))),
       scene
@@ -22,4 +24,4 @@ export const switchTitle = (props: GameProps, scene: Title) =>
       scene.notifyConfig().pipe(map(() => ({ type: "ConfigChangeStart" }))),
       scene.notifyTutorial().pipe(map(() => ({ type: "StoryStart" }))),
     ]),
-  );
+  });

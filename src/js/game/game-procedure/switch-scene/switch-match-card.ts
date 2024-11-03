@@ -1,5 +1,6 @@
 import { MatchCard } from "../../../dom-scenes/match-card";
 import { GameProps } from "../../game-props";
+import { switchDOMScene } from "./switch-dom-scene";
 
 /**
  * 対戦カード画面に切り替える
@@ -7,4 +8,4 @@ import { GameProps } from "../../game-props";
  * @param scene 対戦カード画面
  */
 export const switchMatchCard = (props: GameProps, scene: MatchCard) =>
-  props.domSceneBinder.bind(scene, []);
+  switchDOMScene({ ...props, scene, unsubscribers: [] });

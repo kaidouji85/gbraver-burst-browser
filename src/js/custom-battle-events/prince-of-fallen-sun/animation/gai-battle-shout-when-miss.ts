@@ -12,5 +12,5 @@ export const gaiBattleShoutWhenMiss = (
   props: Readonly<CustomBattleEventProps>,
 ) =>
   onStart(() => {
-    enemyPilotOnlyShout(props, "Gai", `クッ ここは${wbr}牽制攻撃だ`);
+    enemyPilotOnlyShout(props, "Gai", `当たらなくとも 牽制に${wbr}なる`);
   });

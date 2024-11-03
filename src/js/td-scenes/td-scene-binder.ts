@@ -31,20 +31,12 @@ export class TDSceneBinder {
   }
 
   /**
-   * デストラクタ相当の処理
-   */
-  destructor(): void {
-    this.#disposeScene();
-    this.#hudUIScale.destructor();
-  }
-
-  /**
    * 3D系シーンをバインドする
    * @param scene バインドするシーン
    * @param unsubscribers バインドするシーンに関連するアンサブスクライバ
    */
   bind<X extends TDScene>(scene: X, unsubscribers: Unsubscribable[]): void {
-    this.#disposeScene();
+    this.dispose();
     this.#scene = scene;
     scene.getDOMLayerElements().forEach((element) => {
       this.#domLayerElement.appendChild(element);
@@ -56,10 +48,17 @@ export class TDSceneBinder {
   }
 
   /**
-   * 3Dシーンを非表示にする
+   * バインドされたシーンを破棄する
+   * 本メソッドは3DシーンからDOMシーンに切り替わる際に呼ばれる想定
    */
-  hidden(): void {
-    this.#disposeScene();
+  dispose(): void {
+    this.#scene?.destructor();
+    this.#scene = null;
+    this.#renderer.dispose();
+    this.#domLayerElement.innerHTML = "";
+    this.#unsubscribers.forEach((v) => {
+      v.unsubscribe();
+    });
   }
 
   /**
@@ -71,14 +70,10 @@ export class TDSceneBinder {
   }
 
   /**
-   * 現在表示しているシーンを破棄する
+   * シーンがバインドされているかを判定する
+   * @returns シーンがバインドされている場合はtrue、そうでない場合はfalse
    */
-  #disposeScene(): void {
-    this.#scene?.destructor();
-    this.#renderer.disposeRenders();
-    this.#domLayerElement.innerHTML = "";
-    this.#unsubscribers.forEach((v) => {
-      v.unsubscribe();
-    });
+  isSceneBound(): boolean {
+    return this.#scene !== null;
   }
 }
