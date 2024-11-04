@@ -1,6 +1,6 @@
 import { ResourcesContainer } from "../../../resource";
 import { PathIds } from "../../../resource/path/ids";
-import { MENU_HIDDEN, ROOT } from "../dom/class-name";
+import { MENU_HIDDEN, ROOT } from "./class-name";
 import template from "./root-inner-html.hbs";
 
 /** innerHTML生成パラメーター */

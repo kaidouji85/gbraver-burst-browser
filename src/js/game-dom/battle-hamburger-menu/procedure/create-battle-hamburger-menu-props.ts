@@ -1,7 +1,7 @@
 import { ROOT } from "../dom/class-name";
 import { extractHamburgerIcon, extractMenu } from "../dom/extract-element";
+import { rootInnerHTML, RootInnerHTMLParams } from "../dom/root-inner-html";
 import { BattleHamburgerMenuProps } from "../props";
-import { rootInnerHTML, RootInnerHTMLParams } from "./root-inner-html";
 
 /** BattleHamburgerMenuProps生成パラメーター */
 export type BattleHamburgerMenuPropsCreatorParams = RootInnerHTMLParams;
