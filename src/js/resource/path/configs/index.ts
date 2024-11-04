@@ -1,6 +1,7 @@
 import { ShinyaPathConfigs } from "../../texture/configs/shinya";
 import { PathConfig } from "../resource";
 import { BatteryIconPathConfigs } from "./battery-icon";
+import { BattleHamburgerMenuConfigs } from "./battle-hamburger-menu";
 import { CheckPathConfigs } from "./check";
 import { DialogPathConfig } from "./dialog";
 import { EndingPathConfigs } from "./ending";
@@ -22,7 +23,6 @@ import { TurnIndicatorConfigs } from "./turn-indicator";
 import { UserConfigs } from "./user";
 import { WingDozerPathConfigs } from "./wing-dozer";
 import { YuuyaPathConfigs } from "./yuuya";
-import { BattleHamburgerMenuConfigs } from "./battle-hamburger-menu";
 
 /** すべてのパス設定をあつめたもの */
 export const PathConfigs: PathConfig[] = [

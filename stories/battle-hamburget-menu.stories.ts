@@ -6,7 +6,7 @@ export default {
 };
 
 /** 戦闘画面用のハンバーガーメニュー */
-export const menu = domStub(() => {
-  const menu = new BattleHamburgerMenu();
+export const menu = domStub((params) => {
+  const menu = new BattleHamburgerMenu(params);
   return menu.getRootHTMLElement();
 });
