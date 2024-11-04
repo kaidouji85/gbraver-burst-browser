@@ -37,6 +37,10 @@
   text-align: left;
 }
 
+.battle-hamburger-menu__menu--hidden {
+  display: none;
+}
+
 .battle-hamburger-menu__retry:hover,
 .battle-hamburger-menu__end-battle:hover {
   background-color: var(--button-background-color);
