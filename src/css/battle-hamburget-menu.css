@@ -1,6 +1,8 @@
 /** 戦闘画面用ハンバーガーメニュー */
 @media (orientation: landscape) {
   .battle-hamburger-menu {
+    --icon-size: calc(var(--responsive-font-size) * 3);
+
     display: block;
   }
 }
@@ -9,4 +11,12 @@
   .battle-hamburger-menu {
     display: none;
   }
+}
+
+.battle-hamburger-menu__hamburger-menu-icon {
+  position: fixed;
+  top: var(--safe-area-top);
+  right: var(--safe-area-right);
+  width: var(--icon-size);
+  height: var(--icon-size);
 }
