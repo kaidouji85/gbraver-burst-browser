@@ -1,3 +1,6 @@
+import { Unsubscribable } from "rxjs";
+
+import { bindEventListeners } from "./procedure/bind-event-listeners";
 import {
   BattleHamburgerMenuPropsCreatorParams,
   createBattleHamburgerMenuProps,
@@ -11,6 +14,8 @@ type BattleHamburgerMenuParams = BattleHamburgerMenuPropsCreatorParams;
 export class BattleHamburgerMenu {
   /** プロパティ */
   #props: BattleHamburgerMenuProps;
+  /** アンサブスクライバー */
+  #unsubscribers: Unsubscribable[];
 
   /**
    * コンストラクタ
@@ -18,6 +23,14 @@ export class BattleHamburgerMenu {
    */
   constructor(params: BattleHamburgerMenuParams) {
     this.#props = createBattleHamburgerMenuProps(params);
+    this.#unsubscribers = bindEventListeners(this.#props);
+  }
+
+  /**
+   * デストラクタ相当の処理
+   */
+  destructor(): void {
+    this.#unsubscribers.forEach((unsubscriber) => unsubscriber.unsubscribe());
   }
 
   /**
