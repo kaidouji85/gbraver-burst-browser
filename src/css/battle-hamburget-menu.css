@@ -1,0 +1,12 @@
+/** 戦闘画面用ハンバーガーメニュー */
+@media (orientation: landscape) {
+  .battle-hamburger-menu {
+    display: block;
+  }
+}
+
+@media (orientation: portrait) {
+  .battle-hamburger-menu {
+    display: none;
+  }
+}
