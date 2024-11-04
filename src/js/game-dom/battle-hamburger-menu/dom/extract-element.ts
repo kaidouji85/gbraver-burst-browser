@@ -1,4 +1,13 @@
 /**
+ * ルート要素からハンバーガーアイコンを抽出する
+ * @param root ルート要素
+ * @returns 抽出結果
+ */
+export const extractHamburgerIcon = (root: HTMLElement): HTMLElement =>
+  root.querySelector(`[data-id="hamburger-icon"]`) ??
+  document.createElement("div");
+
+/**
  * ルート要素からメニューを抽出する
  * @param root ルート要素
  * @returns 抽出結果

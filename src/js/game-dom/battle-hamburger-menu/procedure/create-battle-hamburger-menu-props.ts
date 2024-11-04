@@ -1,4 +1,5 @@
 import { ROOT } from "../dom/class-name";
+import { extractHamburgerIcon, extractMenu } from "../dom/extract-element";
 import { BattleHamburgerMenuProps } from "../props";
 import { rootInnerHTML, RootInnerHTMLParams } from "./root-inner-html";
 
@@ -16,5 +17,9 @@ export function createBattleHamburgerMenuProps(
   const root = document.createElement("div");
   root.className = ROOT;
   root.innerHTML = rootInnerHTML(params);
-  return { root };
+
+  const hamburgerIcon = extractHamburgerIcon(root);
+  const menu = extractMenu(root);
+
+  return { root, hamburgerIcon, menu };
 }
