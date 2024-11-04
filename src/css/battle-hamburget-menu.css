@@ -21,3 +21,23 @@
   width: var(--icon-size);
   height: var(--icon-size);
 }
+
+.battle-hamburger-menu__menu {
+  display: flex;
+  flex-direction: column;
+  gap: calc(var(--responsive-font-size) * 1);
+  color: var(--font-color);
+  font-size: var(--responsive-font-size);
+  background-color: var(--background-color);
+  border: var(--dialog-border);
+  border-radius: var(--dialog-border-radius);
+  box-sizing: border-box;
+  padding: calc(var(--responsive-font-size) * 1)
+    calc(var(--responsive-font-size) * 1.5);
+  text-align: left;
+}
+
+.battle-hamburger-menu__retry:hover,
+.battle-hamburger-menu__end-battle:hover {
+  background-color: var(--button-background-color);
+}
