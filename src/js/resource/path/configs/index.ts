@@ -22,6 +22,7 @@ import { TurnIndicatorConfigs } from "./turn-indicator";
 import { UserConfigs } from "./user";
 import { WingDozerPathConfigs } from "./wing-dozer";
 import { YuuyaPathConfigs } from "./yuuya";
+import { BattleHamburgerMenuConfigs } from "./battle-hamburger-menu";
 
 /** すべてのパス設定をあつめたもの */
 export const PathConfigs: PathConfig[] = [
@@ -48,6 +49,7 @@ export const PathConfigs: PathConfig[] = [
   ...HelpIconPathConfigs,
   ...MessageWindowPathConfigs,
   ...TurnIndicatorConfigs,
+  ...BattleHamburgerMenuConfigs,
 ];
 
 /** プリロード対象となるパス設定 */

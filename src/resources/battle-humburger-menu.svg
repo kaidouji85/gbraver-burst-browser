@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="a" data-name="レイヤー 1" xmlns="http://www.w3.org/2000/svg" width="256" height="256" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 256 256">
+  <defs>
+    <filter id="b" data-name="outer-glow-1" x="23" y="23" width="210" height="210" filterUnits="userSpaceOnUse">
+      <feOffset dx="0" dy="0"/>
+      <feGaussianBlur result="c" stdDeviation="16.15"/>
+      <feFlood flood-color="#000" flood-opacity=".75"/>
+      <feComposite in2="c" operator="in"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+  </defs>
+  <rect x="23" y="23" width="210" height="210" rx="8.3" ry="8.3" style="fill: #595857; filter: url(#b);"/>
+  <g>
+    <rect x="57.49" y="172.79" width="141.02" height="10.42" rx="4.46" ry="4.46" style="fill: #f0f0f0;"/>
+    <rect x="57.49" y="122.79" width="141.02" height="10.42" rx="4.46" ry="4.46" style="fill: #f0f0f0;"/>
+    <rect x="57.49" y="72.79" width="141.02" height="10.42" rx="4.46" ry="4.46" style="fill: #f0f0f0;"/>
+  </g>
+</svg>
