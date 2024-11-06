@@ -1,4 +1,4 @@
-import { NPCBattleCourseDifficulty } from "../npc-battle-courses";
+import { NPCBattleCourseDifficulty } from "../npc-battle/npc-battle-course";
 
 /** 難易度選択完了 */
 export type DifficultySelectionComplete = {
