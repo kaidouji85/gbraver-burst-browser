@@ -1,7 +1,8 @@
 import { EMPTY_PLAYER } from "gbraver-burst-core";
 
 import { updateNPCBattleState } from "../../../src/js/game/npc-battle/npc-battle";
-import { DefaultStage } from "../../../src/js/game/npc-battle/npc-battle-courses";
+
+import {DefaultStage} from "../../../src/js/game/npc-battle/npc-battle-stage";
 
 const player = { ...EMPTY_PLAYER, playerId: "npc-battle-player" };
 const stages = [DefaultStage, DefaultStage, DefaultStage];

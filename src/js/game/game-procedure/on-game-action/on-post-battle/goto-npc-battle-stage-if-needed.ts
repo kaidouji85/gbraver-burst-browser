@@ -5,8 +5,8 @@ import {
   getNPCStageLevel,
   NPCBattleState,
 } from "../../../npc-battle/npc-battle";
-import { DefaultStage } from "../../../npc-battle/npc-battle-courses";
 import { startNPCBattleStage } from "../../start-npc-battle-stage";
+import {DefaultStage} from "../../../npc-battle/npc-battle-stage";
 
 /**
  * 条件を満たした場合、NPCバトルステージに遷移する

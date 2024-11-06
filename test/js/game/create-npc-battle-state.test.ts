@@ -1,7 +1,8 @@
 import { ArmdozerIds, Armdozers, PilotIds, Pilots } from "gbraver-burst-core";
 
 import { createNPCBattleState } from "../../../src/js/game/npc-battle/npc-battle";
-import { DefaultStage } from "../../../src/js/game/npc-battle/npc-battle-courses";
+
+import {DefaultStage} from "../../../src/js/game/npc-battle/npc-battle-stage";
 test("NPCバトルステートを正しく作ることができる", () => {
   const playerId = "test-player";
   const armdozerId = ArmdozerIds.SHIN_BRAVER;

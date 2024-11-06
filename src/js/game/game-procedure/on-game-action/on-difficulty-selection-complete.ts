@@ -9,11 +9,11 @@ import {
   getNPCStageLevel,
 } from "../../npc-battle/npc-battle";
 import {
-  DefaultStage,
   DefaultStages,
   NPCBattleCourses,
 } from "../../npc-battle/npc-battle-courses";
 import { startNPCBattleStage } from "../start-npc-battle-stage";
+import {DefaultStage} from "../../npc-battle/npc-battle-stage";
 
 /**
  * 難易度選択完了時のイベント
