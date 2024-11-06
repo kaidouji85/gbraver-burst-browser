@@ -3,17 +3,14 @@ import { GameAction } from "../../game-actions";
 import { DifficultySelectionComplete } from "../../game-actions/difficulty-selection-complete";
 import { GameProps } from "../../game-props";
 import { DifficultySelect, NPCBattle } from "../../in-progress/npc-battle";
+import { DefaultStages, NPCBattleCourses } from "../../npc-battle/courses";
+import { DefaultStage } from "../../npc-battle/courses/npc-battle-stage";
 import {
   createNPCBattleState,
   getCurrentNPCStage,
   getNPCStageLevel,
 } from "../../npc-battle/npc-battle";
-import {
-  DefaultStages,
-  NPCBattleCourses,
-} from "../../npc-battle/npc-battle-courses";
 import { startNPCBattleStage } from "../start-npc-battle-stage";
-import {DefaultStage} from "../../npc-battle/npc-battle-stage";
 
 /**
  * 難易度選択完了時のイベント

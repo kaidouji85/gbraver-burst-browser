@@ -1,15 +1,18 @@
 import { ArmdozerIds } from "gbraver-burst-core";
 
-import { SOUND_IDS } from "../../resource/sound/ids";
-import type { NPCBattleStage } from "./npc-battle";
-import { NPCBattleCourse } from "./npc-battle-course";
+import { SOUND_IDS } from "../../../resource/sound/ids";
+import type { NPCBattleStage } from "../npc-battle";
+import { NPCBattleCourse } from "../npc-battle-course";
+import { NeoLandozerEasy } from "./neo-landozer-easy";
+import { NeoLandozerHard } from "./neo-landozer-hard";
+import { NeoLandozerNormal } from "./neo-landozer-normal";
+import { NeoLandozerVeryHard } from "./neo-landozer-very-hard";
 import {
   Attack3Defense2LightningDozerStage,
   Attack3Defense2ShinBraverStage,
   Attack4Defense1LightningDozerStage,
   Attack4Defense1ShinBraverStage,
   BurstAttack5NeoLandozderStage,
-  FullAttackWingDozerStage,
   HardLightningDozer,
   HardNeoLandozerStage,
   HardShinBraverStage,
@@ -17,7 +20,6 @@ import {
   MaxAttackShinBraverStage,
   MaxAttackWingDozerStage,
   OneBatteryNeoLandozerStage,
-  OneBatteryShinBraverStage,
   PrioritizeDefenseShinBraverStage,
   PrioritizeDefenseWingDozerStage,
   VeryHardLightningDozer,
@@ -26,13 +28,9 @@ import {
   VeryHardWingDozer,
 } from "./npc-battle-stage";
 import { ShinBraverEasy } from "./shin-braver-easy";
+import { ShinBraverHard } from "./shin-braver-hard";
 import { ShinBraverNormal } from "./shin-braver-normal";
-import {ShinBraverHard} from "./shin-braver-hard";
-import {ShinBraverVeryHard} from "./shin-braver-very-hard";
-import {NeoLandozerEasy} from "./neo-landozer-easy";
-import {NeoLandozerNormal} from "./neo-landozer-normal";
-import {NeoLandozerHard} from "./neo-landozer-hard";
-import {NeoLandozerVeryHard} from "./neo-landozer-very-hard";
+import { ShinBraverVeryHard } from "./shin-braver-very-hard";
 
 /** デフォルトのステージ集合 */
 export const DefaultStages: NPCBattleStage[] = [

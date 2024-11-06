@@ -1,7 +1,7 @@
 import { ArmdozerIds } from "gbraver-burst-core";
 
-import { SOUND_IDS } from "../../resource/sound/ids";
-import { NPCBattleCourse } from "./npc-battle-course";
+import { SOUND_IDS } from "../../../resource/sound/ids";
+import { NPCBattleCourse } from "../npc-battle-course";
 import {
   HardLightningDozer,
   HardShinBraverStage,

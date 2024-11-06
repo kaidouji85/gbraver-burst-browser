@@ -1,12 +1,12 @@
 import { PostBattleAction } from "../../../game-actions/post-battle-action";
 import { GameProps } from "../../../game-props";
+import { DefaultStage } from "../../../npc-battle/courses/npc-battle-stage";
 import {
   getCurrentNPCStage,
   getNPCStageLevel,
   NPCBattleState,
 } from "../../../npc-battle/npc-battle";
 import { startNPCBattleStage } from "../../start-npc-battle-stage";
-import {DefaultStage} from "../../../npc-battle/npc-battle-stage";
 
 /**
  * 条件を満たした場合、NPCバトルステージに遷移する
