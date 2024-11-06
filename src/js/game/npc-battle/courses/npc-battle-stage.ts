@@ -8,6 +8,7 @@ import {
 } from "../../../npc/attack-4-defense-1";
 import { burstAttack5NeoLandozer } from "../../../npc/burst-attack-5-neo-landozer";
 import { fullAttackWingDozer } from "../../../npc/full-attack-wing-dozer";
+import { genesisBraverNPC } from "../../../npc/genesis-braver";
 import { hardLightningDozer } from "../../../npc/hard-lightning-dozer";
 import { hardNeoLandozer } from "../../../npc/hard-neo-landozer";
 import { hardShinBraver } from "../../../npc/hard-shin-braver";
@@ -149,6 +150,12 @@ export const VeryHardNeoLandozer = {
 export const VeryHardLightningDozer = {
   caption: ["不屈の守護神、ライトニングドーザ"],
   npc: veryHardLightningDozer(),
+};
+
+/** ベリーハードコース ジェネシスブレイバー */
+export const VeryHardGenesisBraver = {
+  caption: ["偉大な勇者、Gブレイバー"],
+  npc: genesisBraverNPC(),
 };
 
 /** デフォルトのステージ */
