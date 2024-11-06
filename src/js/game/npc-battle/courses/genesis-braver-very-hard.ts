@@ -4,6 +4,7 @@ import { SOUND_IDS } from "../../../resource/sound/ids";
 import { NPCBattleCourse } from "../npc-battle-course";
 import {
   VeryHardLightningDozer,
+  VeryHardNeoLandozer,
   VeryHardShinBraver,
   VeryHardWingDozer,
 } from "./npc-battle-stage";
@@ -15,6 +16,7 @@ export const GenesisBraverVeryHard: NPCBattleCourse = {
   stages: [
     { ...VeryHardLightningDozer, bgm: SOUND_IDS.BATTLE_BGM_01 },
     { ...VeryHardShinBraver, bgm: SOUND_IDS.BATTLE_BGM_02 },
-    { ...VeryHardWingDozer, bgm: SOUND_IDS.BATTLE_BGM_03 },
+    { ...VeryHardNeoLandozer, bgm: SOUND_IDS.BATTLE_BGM_03 },
+    { ...VeryHardWingDozer, bgm: SOUND_IDS.QUEEN_OF_TRAGEDY },
   ],
 };
