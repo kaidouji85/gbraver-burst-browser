@@ -1,7 +1,6 @@
 import { Subject } from "rxjs";
 
 import { Exclusive } from "../../exclusive/exclusive";
-import type { NPCBattleCourseDifficulty } from "../../game/npc-battle/npc-battle-courses";
 import type { ResourcesContainer } from "../../resource";
 import { createEmptySoundResource } from "../../resource/sound/empty-sound-resource";
 import { SOUND_IDS } from "../../resource/sound/ids";
@@ -22,6 +21,7 @@ import {
   extractVeryHardButton,
 } from "./dom/elements";
 import { rootInnerHTML } from "./dom/root-inner-html";
+import {NPCBattleCourseDifficulty} from "../../game/npc-battle/npc-battle-course";
 
 /** 難易度選択ダイアログ プロパティ */
 export type DifficultyDialogProps = SEPlayerContainer & {

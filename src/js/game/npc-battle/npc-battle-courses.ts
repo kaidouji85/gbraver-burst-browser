@@ -1,55 +1,23 @@
-import { ArmdozerId, ArmdozerIds } from "gbraver-burst-core";
+import {ArmdozerIds} from "gbraver-burst-core";
 
-import {
-  attack3Defense2LightningDozerNPC,
-  attack3Defense2ShinBraverNPC,
-} from "../../npc/attack-3-defense-2";
-import {
-  attack4Defense1LightningDozerNPC,
-  attack4Defense1ShinBraverNPC,
-} from "../../npc/attack-4-defense-1";
-import { burstAttack5NeoLandozer } from "../../npc/burst-attack-5-neo-landozer";
-import { fullAttackWingDozer } from "../../npc/full-attack-wing-dozer";
-import { hardLightningDozer } from "../../npc/hard-lightning-dozer";
-import { hardNeoLandozer } from "../../npc/hard-neo-landozer";
-import { hardShinBraver } from "../../npc/hard-shin-braver";
-import { hardWingDozer } from "../../npc/hard-wing-dozer";
-import {
-  maxBatteryAttackShinBraverNPC,
-  maxBatteryAttackWingDozerNPC,
-} from "../../npc/max-battery-attack";
-import {
-  oneBatteryNeoLandozerNPC,
-  oneBatteryShinBraverNPC,
-} from "../../npc/one-battery";
-import {
-  prioritizeDefenseShinBraverNPC,
-  prioritizeDefenseWingDozer,
-} from "../../npc/prioritize-defense";
-import { veryHardLightningDozer } from "../../npc/very-hard-lightning-dozer";
-import { veryHardNeoLandozer } from "../../npc/very-hard-neo-landozer";
-import { veryHardShinBraver } from "../../npc/very-hard-shin-braver";
-import { veryHardWingDozerNPC } from "../../npc/very-hard-wing-dozer";
-import { SOUND_IDS } from "../../resource/sound/ids";
-import type { NPCBattleStage } from "./npc-battle";
-
-/** NPCバトルコース難易度 */
-export type NPCBattleCourseDifficulty = "Easy" | "Normal" | "Hard" | "VeryHard";
-
-/**
- * NPCバトルコースマスタ
- * 本データはプレイヤー状況とそれに対応したコースの組み合わせである
- */
-export type NPCBattleCourse = {
-  /** プレイヤーが選択したアームドーザID */
-  armdozerId: ArmdozerId;
-
-  /** プレイヤーが選択した難易度 */
-  difficulty: NPCBattleCourseDifficulty;
-
-  /** 本コースの全ステージ */
-  stages: NPCBattleStage[];
-};
+import {attack3Defense2LightningDozerNPC, attack3Defense2ShinBraverNPC,} from "../../npc/attack-3-defense-2";
+import {attack4Defense1LightningDozerNPC, attack4Defense1ShinBraverNPC,} from "../../npc/attack-4-defense-1";
+import {burstAttack5NeoLandozer} from "../../npc/burst-attack-5-neo-landozer";
+import {fullAttackWingDozer} from "../../npc/full-attack-wing-dozer";
+import {hardLightningDozer} from "../../npc/hard-lightning-dozer";
+import {hardNeoLandozer} from "../../npc/hard-neo-landozer";
+import {hardShinBraver} from "../../npc/hard-shin-braver";
+import {hardWingDozer} from "../../npc/hard-wing-dozer";
+import {maxBatteryAttackShinBraverNPC, maxBatteryAttackWingDozerNPC,} from "../../npc/max-battery-attack";
+import {oneBatteryNeoLandozerNPC, oneBatteryShinBraverNPC,} from "../../npc/one-battery";
+import {prioritizeDefenseShinBraverNPC, prioritizeDefenseWingDozer,} from "../../npc/prioritize-defense";
+import {veryHardLightningDozer} from "../../npc/very-hard-lightning-dozer";
+import {veryHardNeoLandozer} from "../../npc/very-hard-neo-landozer";
+import {veryHardShinBraver} from "../../npc/very-hard-shin-braver";
+import {veryHardWingDozerNPC} from "../../npc/very-hard-wing-dozer";
+import {SOUND_IDS} from "../../resource/sound/ids";
+import type {NPCBattleStage} from "./npc-battle";
+import {NPCBattleCourse} from "./npc-battle-course";
 
 /** 1バッテリー ネオランドーザ */
 const OneBatteryNeoLandozerStage = {
