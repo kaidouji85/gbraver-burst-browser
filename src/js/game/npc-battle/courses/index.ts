@@ -1,36 +1,31 @@
-import { ArmdozerIds } from "gbraver-burst-core";
-
 import { SOUND_IDS } from "../../../resource/sound/ids";
-import type { NPCBattleStage } from "../npc-battle";
+import { NPCBattleStage } from "../npc-battle";
 import { NPCBattleCourse } from "../npc-battle-course";
+import { GenesisBraverEasy } from "./genesis-braver-easy";
+import { GenesisBraverHard } from "./genesis-braver-hard";
+import { GenesisBraverNormal } from "./genesis-braver-normal";
+import { GenesisBraverVeryHard } from "./genesis-braver-very-hard";
+import { LightningDozerEasy } from "./lightning-dozer-easy";
+import { LightningDozerHard } from "./lightning-dozer-hard";
+import { LightningDozerNormal } from "./lightning-dozer-normal";
+import { LightningDozerVeryHard } from "./lightning-dozer-very-hard";
 import { NeoLandozerEasy } from "./neo-landozer-easy";
 import { NeoLandozerHard } from "./neo-landozer-hard";
 import { NeoLandozerNormal } from "./neo-landozer-normal";
 import { NeoLandozerVeryHard } from "./neo-landozer-very-hard";
 import {
   Attack3Defense2LightningDozerStage,
-  Attack3Defense2ShinBraverStage,
-  Attack4Defense1LightningDozerStage,
-  Attack4Defense1ShinBraverStage,
-  BurstAttack5NeoLandozderStage,
-  HardLightningDozer,
-  HardNeoLandozerStage,
-  HardShinBraverStage,
-  HardWingDozerStage,
-  MaxAttackShinBraverStage,
   MaxAttackWingDozerStage,
   OneBatteryNeoLandozerStage,
-  PrioritizeDefenseShinBraverStage,
-  PrioritizeDefenseWingDozerStage,
-  VeryHardLightningDozer,
-  VeryHardNeoLandozer,
-  VeryHardShinBraver,
-  VeryHardWingDozer,
 } from "./npc-battle-stage";
 import { ShinBraverEasy } from "./shin-braver-easy";
 import { ShinBraverHard } from "./shin-braver-hard";
 import { ShinBraverNormal } from "./shin-braver-normal";
 import { ShinBraverVeryHard } from "./shin-braver-very-hard";
+import { WingDozerEasy } from "./wing-dozer-easy";
+import { WingDozerHard } from "./wing-dozer-hard";
+import { WingDozerNormal } from "./wing-dozer-normal";
+import { WingDozerVeryHard } from "./wing-dozer-very-hard";
 
 /** デフォルトのステージ集合 */
 export const DefaultStages: NPCBattleStage[] = [
@@ -49,112 +44,16 @@ export const NPCBattleCourses: NPCBattleCourse[] = [
   NeoLandozerNormal,
   NeoLandozerHard,
   NeoLandozerVeryHard,
-  {
-    armdozerId: ArmdozerIds.LIGHTNING_DOZER,
-    difficulty: "Easy",
-    stages: [
-      { ...OneBatteryNeoLandozerStage, bgm: SOUND_IDS.BATTLE_BGM_01 },
-      { ...MaxAttackWingDozerStage, bgm: SOUND_IDS.BATTLE_BGM_02 },
-      { ...Attack3Defense2ShinBraverStage, bgm: SOUND_IDS.BATTLE_BGM_03 },
-    ],
-  },
-  {
-    armdozerId: ArmdozerIds.LIGHTNING_DOZER,
-    difficulty: "Normal",
-    stages: [
-      { ...Attack4Defense1ShinBraverStage, bgm: SOUND_IDS.BATTLE_BGM_01 },
-      { ...PrioritizeDefenseWingDozerStage, bgm: SOUND_IDS.BATTLE_BGM_02 },
-      { ...BurstAttack5NeoLandozderStage, bgm: SOUND_IDS.BATTLE_BGM_03 },
-    ],
-  },
-  {
-    armdozerId: ArmdozerIds.LIGHTNING_DOZER,
-    difficulty: "Hard",
-    stages: [
-      { ...HardNeoLandozerStage, bgm: SOUND_IDS.BATTLE_BGM_01 },
-      { ...HardShinBraverStage, bgm: SOUND_IDS.BATTLE_BGM_02 },
-      { ...HardWingDozerStage, bgm: SOUND_IDS.BATTLE_BGM_03 },
-    ],
-  },
-  {
-    armdozerId: ArmdozerIds.LIGHTNING_DOZER,
-    difficulty: "VeryHard",
-    stages: [
-      { ...VeryHardNeoLandozer, bgm: SOUND_IDS.BATTLE_BGM_01 },
-      { ...VeryHardShinBraver, bgm: SOUND_IDS.BATTLE_BGM_02 },
-      { ...VeryHardWingDozer, bgm: SOUND_IDS.BATTLE_BGM_03 },
-    ],
-  },
-  {
-    armdozerId: ArmdozerIds.WING_DOZER,
-    difficulty: "Easy",
-    stages: [
-      { ...OneBatteryNeoLandozerStage, bgm: SOUND_IDS.BATTLE_BGM_01 },
-      { ...MaxAttackShinBraverStage, bgm: SOUND_IDS.BATTLE_BGM_02 },
-      { ...Attack3Defense2LightningDozerStage, bgm: SOUND_IDS.BATTLE_BGM_03 },
-    ],
-  },
-  {
-    armdozerId: ArmdozerIds.WING_DOZER,
-    difficulty: "Normal",
-    stages: [
-      { ...Attack4Defense1LightningDozerStage, bgm: SOUND_IDS.BATTLE_BGM_01 },
-      { ...PrioritizeDefenseShinBraverStage, bgm: SOUND_IDS.BATTLE_BGM_02 },
-      { ...BurstAttack5NeoLandozderStage, bgm: SOUND_IDS.BATTLE_BGM_03 },
-    ],
-  },
-  {
-    armdozerId: ArmdozerIds.WING_DOZER,
-    difficulty: "Hard",
-    stages: [
-      { ...HardNeoLandozerStage, bgm: SOUND_IDS.BATTLE_BGM_01 },
-      { ...HardShinBraverStage, bgm: SOUND_IDS.BATTLE_BGM_02 },
-      { ...HardLightningDozer, bgm: SOUND_IDS.BATTLE_BGM_03 },
-    ],
-  },
-  {
-    armdozerId: ArmdozerIds.WING_DOZER,
-    difficulty: "VeryHard",
-    stages: [
-      { ...VeryHardLightningDozer, bgm: SOUND_IDS.BATTLE_BGM_01 },
-      { ...VeryHardShinBraver, bgm: SOUND_IDS.BATTLE_BGM_02 },
-      { ...VeryHardNeoLandozer, bgm: SOUND_IDS.BATTLE_BGM_03 },
-    ],
-  },
-  {
-    armdozerId: ArmdozerIds.SHIN_BRAVER,
-    difficulty: "Easy",
-    stages: [
-      { ...OneBatteryNeoLandozerStage, bgm: SOUND_IDS.BATTLE_BGM_01 },
-      { ...MaxAttackWingDozerStage, bgm: SOUND_IDS.BATTLE_BGM_02 },
-      { ...Attack3Defense2LightningDozerStage, bgm: SOUND_IDS.BATTLE_BGM_03 },
-    ],
-  },
-  {
-    armdozerId: ArmdozerIds.GENESIS_BRAVER,
-    difficulty: "Normal",
-    stages: [
-      { ...Attack4Defense1LightningDozerStage, bgm: SOUND_IDS.BATTLE_BGM_01 },
-      { ...PrioritizeDefenseWingDozerStage, bgm: SOUND_IDS.BATTLE_BGM_02 },
-      { ...BurstAttack5NeoLandozderStage, bgm: SOUND_IDS.BATTLE_BGM_03 },
-    ],
-  },
-  {
-    armdozerId: ArmdozerIds.GENESIS_BRAVER,
-    difficulty: "Hard",
-    stages: [
-      { ...HardNeoLandozerStage, bgm: SOUND_IDS.BATTLE_BGM_01 },
-      { ...HardWingDozerStage, bgm: SOUND_IDS.BATTLE_BGM_02 },
-      { ...HardLightningDozer, bgm: SOUND_IDS.BATTLE_BGM_03 },
-    ],
-  },
-  {
-    armdozerId: ArmdozerIds.GENESIS_BRAVER,
-    difficulty: "VeryHard",
-    stages: [
-      { ...VeryHardLightningDozer, bgm: SOUND_IDS.BATTLE_BGM_01 },
-      { ...VeryHardShinBraver, bgm: SOUND_IDS.BATTLE_BGM_02 },
-      { ...VeryHardWingDozer, bgm: SOUND_IDS.BATTLE_BGM_03 },
-    ],
-  },
+  LightningDozerEasy,
+  LightningDozerNormal,
+  LightningDozerHard,
+  LightningDozerVeryHard,
+  WingDozerEasy,
+  WingDozerNormal,
+  WingDozerHard,
+  WingDozerVeryHard,
+  GenesisBraverEasy,
+  GenesisBraverNormal,
+  GenesisBraverHard,
+  GenesisBraverVeryHard,
 ];
