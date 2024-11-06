@@ -4,8 +4,8 @@ import {
   getCurrentNPCStage,
   getNPCStageLevel,
   NPCBattleState,
-} from "../../../npc-battle";
-import { DefaultStage } from "../../../npc-battle-courses";
+} from "../../../npc-battle/npc-battle";
+import { DefaultStage } from "../../../npc-battle/npc-battle-courses";
 import { startNPCBattleStage } from "../../start-npc-battle-stage";
 
 /**
