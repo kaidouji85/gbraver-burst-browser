@@ -1,5 +1,5 @@
 import { SOUND_IDS } from "../../../resource/sound/ids";
-import {NPCBattleStage} from "../stages/npc-battle-stage";
+import { NPCBattleStage } from "../stages/npc-battle-stage";
 import {
   Attack3Defense2LightningDozerStage,
   MaxAttackWingDozerStage,

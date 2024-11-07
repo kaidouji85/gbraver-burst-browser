@@ -1,6 +1,6 @@
 import { ArmdozerIds, Armdozers, PilotIds, Pilots } from "gbraver-burst-core";
 
-import { createNPCBattleState } from "../../../../src/js/game/npc-battle/npc-battle";
+import { createNPCBattleState } from "../../../../src/js/game/npc-battle/create-npc-battle-state";
 import { DefaultStage } from "../../../../src/js/game/npc-battle/stages/npc-battle-stages";
 
 test("NPCバトルステートを正しく作ることができる", () => {

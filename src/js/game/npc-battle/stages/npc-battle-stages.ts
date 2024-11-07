@@ -30,7 +30,7 @@ import { veryHardNeoLandozer } from "../../../npc/very-hard-neo-landozer";
 import { veryHardShinBraver } from "../../../npc/very-hard-shin-braver";
 import { veryHardWingDozerNPC } from "../../../npc/very-hard-wing-dozer";
 import { SOUND_IDS } from "../../../resource/sound/ids";
-import {NPCBattleStage} from "./npc-battle-stage";
+import { NPCBattleStage } from "./npc-battle-stage";
 
 /** 1バッテリー ネオランドーザ */
 export const OneBatteryNeoLandozerStage = {
