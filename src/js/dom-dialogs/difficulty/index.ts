@@ -1,6 +1,6 @@
 import { Observable, Unsubscribable } from "rxjs";
 
-import { NPCBattleCourseDifficulty } from "../../game/npc-battle/npc-battle-course";
+import { NPCBattleCourseDifficulty } from "../../game/npc-battle/courses/npc-battle-course";
 import type { DOMDialog } from "../dialog";
 import { bindEventListeners } from "./listeners";
 import { DifficultyDialogProps, PropsCreatorParams } from "./props";

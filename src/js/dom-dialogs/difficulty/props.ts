@@ -1,7 +1,7 @@
 import { Subject } from "rxjs";
 
 import { Exclusive } from "../../exclusive/exclusive";
-import { NPCBattleCourseDifficulty } from "../../game/npc-battle/npc-battle-course";
+import { NPCBattleCourseDifficulty } from "../../game/npc-battle/courses/npc-battle-course";
 import type { ResourcesContainer } from "../../resource";
 import { createEmptySoundResource } from "../../resource/sound/empty-sound-resource";
 import { SOUND_IDS } from "../../resource/sound/ids";

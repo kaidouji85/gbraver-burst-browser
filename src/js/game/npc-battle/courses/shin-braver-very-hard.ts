@@ -1,13 +1,11 @@
 import { ArmdozerIds } from "gbraver-burst-core";
 
 import { SOUND_IDS } from "../../../resource/sound/ids";
-import { NPCBattleCourse } from "../npc-battle-course";
-import {
-  VeryHardGenesisBraver,
-  VeryHardLightningDozer,
-  VeryHardNeoLandozer,
-  VeryHardWingDozer,
-} from "./npc-battle-stage";
+import { VeryHardGenesisBraver } from "../stages/very-hard-genesis-braver";
+import { VeryHardLightningDozer } from "../stages/very-hard-lightning-dozer";
+import { VeryHardNeoLandozer } from "../stages/very-hard-neo-landozer";
+import { VeryHardWingDozer } from "../stages/very-hard-wing-dozer";
+import { NPCBattleCourse } from "./npc-battle-course";
 
 /** シンブレイバー NPCバトル VeryHard */
 export const ShinBraverVeryHard: NPCBattleCourse = {

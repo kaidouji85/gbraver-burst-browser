@@ -7,10 +7,8 @@ import {
 import { EndBattle } from "../../../game-actions/end-battle";
 import { GameProps } from "../../../game-props";
 import { InProgress } from "../../../in-progress";
-import {
-  NPCBattleResult,
-  updateNPCBattleState,
-} from "../../../npc-battle/npc-battle";
+import { NPCBattleResult } from "../../../npc-battle/npc-battle-result";
+import { updateNPCBattleState } from "../../../npc-battle/updated-npc-battle-state";
 
 /**
  * NPCバトル終了後に表示するアクションボタンを求める
