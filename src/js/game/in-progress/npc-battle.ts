@@ -1,6 +1,6 @@
 import { ArmdozerId, PilotId } from "gbraver-burst-core";
 
-import { NPCBattleState } from "../npc-battle/npc-battle";
+import { NPCBattleState } from "../npc-battle/npc-battle-state";
 
 /** プレイヤー選択 */
 export type PlayerSelect = {

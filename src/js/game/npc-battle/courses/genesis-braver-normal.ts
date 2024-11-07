@@ -1,12 +1,10 @@
 import { ArmdozerIds } from "gbraver-burst-core";
 
 import { SOUND_IDS } from "../../../resource/sound/ids";
-import { NPCBattleCourse } from "../npc-battle-course";
-import {
-  Attack4Defense1LightningDozerStage,
-  BurstAttack5NeoLandozderStage,
-  PrioritizeDefenseWingDozerStage,
-} from "./npc-battle-stage";
+import { Attack4Defense1LightningDozerStage } from "../stages/attack4-defense1-lightning-dozer-stage";
+import { BurstAttack5NeoLandozderStage } from "../stages/burst-attack5-neo-landozder-stage";
+import { PrioritizeDefenseWingDozerStage } from "../stages/prioritize-defense-wing-dozer-stage";
+import { NPCBattleCourse } from "./npc-battle-course";
 
 /** NPCバトル ジェネシスブレイバー Normal */
 export const GenesisBraverNormal: NPCBattleCourse = {
