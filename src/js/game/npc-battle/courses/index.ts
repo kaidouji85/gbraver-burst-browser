@@ -1,10 +1,8 @@
 import { SOUND_IDS } from "../../../resource/sound/ids";
+import { Attack3Defense2LightningDozerStage } from "../stages/attack3-defense2-lightning-dozer-stage";
+import { MaxAttackWingDozerStage } from "../stages/max-attack-wing-dozer-stage";
 import { NPCBattleStage } from "../stages/npc-battle-stage";
-import {
-  Attack3Defense2LightningDozerStage,
-  MaxAttackWingDozerStage,
-  OneBatteryNeoLandozerStage,
-} from "../stages/npc-battle-stages";
+import { OneBatteryNeoLandozerStage } from "../stages/one-battery-neo-landozer-stage";
 import { GenesisBraverEasy } from "./genesis-braver-easy";
 import { GenesisBraverHard } from "./genesis-braver-hard";
 import { GenesisBraverNormal } from "./genesis-braver-normal";

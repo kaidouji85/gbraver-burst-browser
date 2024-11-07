@@ -1,11 +1,9 @@
 import { ArmdozerIds } from "gbraver-burst-core";
 
 import { SOUND_IDS } from "../../../resource/sound/ids";
-import {
-  Attack4Defense1ShinBraverStage,
-  BurstAttack5NeoLandozderStage,
-  PrioritizeDefenseWingDozerStage,
-} from "../stages/npc-battle-stages";
+import { Attack4Defense1ShinBraverStage } from "../stages/attack4-defense1-shin-braver-stage";
+import { BurstAttack5NeoLandozderStage } from "../stages/burst-attack5-neo-landozder-stage";
+import { PrioritizeDefenseWingDozerStage } from "../stages/prioritize-defense-wing-dozer-stage";
 import { NPCBattleCourse } from "./npc-battle-course";
 
 /** NPCバトル ライトニングドーザ Normal */

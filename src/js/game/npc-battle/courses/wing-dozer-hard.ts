@@ -1,11 +1,9 @@
 import { ArmdozerIds } from "gbraver-burst-core";
 
 import { SOUND_IDS } from "../../../resource/sound/ids";
-import {
-  HardLightningDozer,
-  HardNeoLandozerStage,
-  HardShinBraverStage,
-} from "../stages/npc-battle-stages";
+import { HardLightningDozer } from "../stages/hard-lightning-dozer";
+import { HardNeoLandozerStage } from "../stages/hard-neo-landozer-stage";
+import { HardShinBraverStage } from "../stages/hard-shin-braver-stage";
 import { NPCBattleCourse } from "./npc-battle-course";
 
 /** ウィングドーザー NPCバトル Hard */

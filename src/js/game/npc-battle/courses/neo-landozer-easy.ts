@@ -1,11 +1,9 @@
 import { ArmdozerIds } from "gbraver-burst-core";
 
 import { SOUND_IDS } from "../../../resource/sound/ids";
-import {
-  Attack3Defense2LightningDozerStage,
-  MaxAttackWingDozerStage,
-  OneBatteryShinBraverStage,
-} from "../stages/npc-battle-stages";
+import { Attack3Defense2LightningDozerStage } from "../stages/attack3-defense2-lightning-dozer-stage";
+import { MaxAttackWingDozerStage } from "../stages/max-attack-wing-dozer-stage";
+import { OneBatteryShinBraverStage } from "../stages/one-battery-shin-braver-stage";
 import { NPCBattleCourse } from "./npc-battle-course";
 
 /** ネオランドーザー NPCバトル Easy */

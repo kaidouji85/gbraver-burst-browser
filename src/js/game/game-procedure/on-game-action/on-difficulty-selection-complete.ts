@@ -7,7 +7,7 @@ import { DefaultStages, NPCBattleCourses } from "../../npc-battle/courses";
 import { createNPCBattleState } from "../../npc-battle/create-npc-battle-state";
 import { getCurrentNPCStage } from "../../npc-battle/get-current-npc-stage";
 import { getNPCStageLevel } from "../../npc-battle/get-npc-stage-level";
-import { DefaultStage } from "../../npc-battle/stages/npc-battle-stages";
+import { DefaultStage } from "../../npc-battle/stages/default-stage";
 import { startNPCBattleStage } from "../start-npc-battle-stage";
 
 /**
