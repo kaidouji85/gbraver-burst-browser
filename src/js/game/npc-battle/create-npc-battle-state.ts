@@ -11,7 +11,6 @@ import { NPCBattleStage } from "./stages/npc-battle-stage";
 
 /**
  * NPCバトル開始直後のステートを生成する
- *
  * @param playerId プレイヤーID
  * @param armdozerId プレイヤーが選択したアームドーザID
  * @param pilotId プレイヤーが選択したパイロットID
