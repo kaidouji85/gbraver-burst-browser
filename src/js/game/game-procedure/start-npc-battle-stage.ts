@@ -10,7 +10,7 @@ import { waitAnimationFrame } from "../../wait/wait-animation-frame";
 import { waitTime } from "../../wait/wait-time";
 import { waitUntilWindowPushWithStream } from "../../wait/wait-until-window-push-with-stream";
 import { GameProps } from "../game-props";
-import { NPCBattleStage } from "../npc-battle/npc-battle";
+import {NPCBattleStage} from "../npc-battle/stages/npc-battle-stage";
 import { bindBattleScene } from "./bind-scene/bind-battle-scene";
 import { switchStageTitle } from "./switch-scene/switch-stage-title";
 

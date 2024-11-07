@@ -1,6 +1,6 @@
 import { ArmdozerId } from "gbraver-burst-core";
 
-import { NPCBattleStage } from "./npc-battle";
+import { NPCBattleStage } from "../stages/npc-battle-stage";
 
 /** NPCバトルコース難易度 */
 export type NPCBattleCourseDifficulty = "Easy" | "Normal" | "Hard" | "VeryHard";
@@ -11,10 +11,8 @@ export type NPCBattleCourseDifficulty = "Easy" | "Normal" | "Hard" | "VeryHard";
 export type NPCBattleCourse = {
   /** プレイヤーが選択したアームドーザID */
   armdozerId: ArmdozerId;
-
   /** プレイヤーが選択した難易度 */
   difficulty: NPCBattleCourseDifficulty;
-
   /** 本コースの全ステージ */
   stages: NPCBattleStage[];
 };

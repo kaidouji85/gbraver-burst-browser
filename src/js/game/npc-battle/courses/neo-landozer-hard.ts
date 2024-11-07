@@ -1,12 +1,12 @@
 import { ArmdozerIds } from "gbraver-burst-core";
 
 import { SOUND_IDS } from "../../../resource/sound/ids";
-import { NPCBattleCourse } from "../npc-battle-course";
 import {
   HardLightningDozer,
   HardShinBraverStage,
   HardWingDozerStage,
-} from "./npc-battle-stage";
+} from "../stages/npc-battle-stages";
+import { NPCBattleCourse } from "./npc-battle-course";
 
 /** ネオランドーザー NPCバトル Hard */
 export const NeoLandozerHard: NPCBattleCourse = {

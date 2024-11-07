@@ -1,12 +1,12 @@
 import { ArmdozerIds } from "gbraver-burst-core";
 
 import { SOUND_IDS } from "../../../resource/sound/ids";
-import { NPCBattleCourse } from "../npc-battle-course";
 import {
   Attack4Defense1LightningDozerStage,
   BurstAttack5NeoLandozderStage,
   PrioritizeDefenseWingDozerStage,
-} from "./npc-battle-stage";
+} from "../stages/npc-battle-stages";
+import { NPCBattleCourse } from "./npc-battle-course";
 
 /** NPCバトル シンブレイバー Normal */
 export const ShinBraverNormal: NPCBattleCourse = {

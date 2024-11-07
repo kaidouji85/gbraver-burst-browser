@@ -1,6 +1,10 @@
 import { SOUND_IDS } from "../../../resource/sound/ids";
-import { NPCBattleStage } from "../npc-battle";
-import { NPCBattleCourse } from "../npc-battle-course";
+import {NPCBattleStage} from "../stages/npc-battle-stage";
+import {
+  Attack3Defense2LightningDozerStage,
+  MaxAttackWingDozerStage,
+  OneBatteryNeoLandozerStage,
+} from "../stages/npc-battle-stages";
 import { GenesisBraverEasy } from "./genesis-braver-easy";
 import { GenesisBraverHard } from "./genesis-braver-hard";
 import { GenesisBraverNormal } from "./genesis-braver-normal";
@@ -13,11 +17,7 @@ import { NeoLandozerEasy } from "./neo-landozer-easy";
 import { NeoLandozerHard } from "./neo-landozer-hard";
 import { NeoLandozerNormal } from "./neo-landozer-normal";
 import { NeoLandozerVeryHard } from "./neo-landozer-very-hard";
-import {
-  Attack3Defense2LightningDozerStage,
-  MaxAttackWingDozerStage,
-  OneBatteryNeoLandozerStage,
-} from "./npc-battle-stage";
+import { NPCBattleCourse } from "./npc-battle-course";
 import { ShinBraverEasy } from "./shin-braver-easy";
 import { ShinBraverHard } from "./shin-braver-hard";
 import { ShinBraverNormal } from "./shin-braver-normal";

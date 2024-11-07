@@ -1,27 +1,6 @@
-import {
-  ArmdozerId,
-  Armdozers,
-  GameEndResult,
-  PilotId,
-  Pilots,
-  Player,
-  PlayerId,
-} from "gbraver-burst-core";
+import {ArmdozerId, Armdozers, GameEndResult, PilotId, Pilots, Player, PlayerId,} from "gbraver-burst-core";
 
-import type { NPC } from "../../npc/npc";
-import type { SoundId } from "../../resource/sound/resource";
-
-/** NPCバトル ステージ */
-export type NPCBattleStage = {
-  /** ステージ名 */
-  caption: string[];
-
-  /** 対戦相手 */
-  npc: NPC;
-
-  /** 再生するBGMのID */
-  bgm: SoundId;
-};
+import {NPCBattleStage} from "./stages/npc-battle-stage";
 
 /** NPCバトルの状態 */
 export type NPCBattleState = {
