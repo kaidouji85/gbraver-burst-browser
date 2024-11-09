@@ -51,6 +51,14 @@ export class BattleHamburgerMenu {
   }
 
   /**
+   * バトル終了通知
+   * @returns 通知ストリーム
+   */
+  notifyEndBattle(): Observable<void> {
+    return this.#props.endBattleNotifier;
+  }
+
+  /**
    * デストラクタ相当の処理
    */
   destructor(): void {

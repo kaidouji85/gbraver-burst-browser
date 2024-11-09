@@ -12,5 +12,8 @@ export const menu = domStub((params) => {
   menu.notifyRetry().subscribe(() => {
     console.log("retry");
   });
+  menu.notifyEndBattle().subscribe(() => {
+    console.log("end battle");
+  });
   return menu.getRootHTMLElement();
 });

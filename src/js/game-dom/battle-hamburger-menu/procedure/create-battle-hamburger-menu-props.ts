@@ -63,6 +63,7 @@ export function createBattleHamburgerMenuProps(
   const exclusive = new Exclusive();
 
   const retryNotifier = new Subject<void>();
+  const endBattleNotifier = new Subject<void>();
 
   return {
     ...params,
@@ -87,5 +88,6 @@ export function createBattleHamburgerMenuProps(
     exclusive,
 
     retryNotifier,
+    endBattleNotifier,
   };
 }

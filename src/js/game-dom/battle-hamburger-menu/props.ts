@@ -44,4 +44,6 @@ export type BattleHamburgerMenuProps = {
 
   /** リトライ通知 */
   retryNotifier: Subject<void>;
+  /** バトル終了通知 */
+  endBattleNotifier: Subject<void>;
 };
