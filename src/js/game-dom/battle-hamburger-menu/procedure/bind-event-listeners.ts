@@ -2,12 +2,13 @@ import { Unsubscribable } from "rxjs";
 
 import { domPushStream } from "../../../dom/push-dom";
 import { pushWindowsStream } from "../../../window/push-window";
-import { extractRetry } from "../dom/extract-element";
+import { extractBackGround, extractRetry } from "../dom/extract-element";
 import { BattleHamburgerMenuProps } from "../props";
 import { onHamburgerIconPush } from "./on-hamburger-icon-push";
 import { onMenuOutsidePush } from "./on-menu-outside-push";
 import { onRetryConfirmDialogCloserPush } from "./on-retry-confirm-dialog-closer-push";
 import { onRetryPush } from "./on-retry-push";
+import { onBackgroundPush } from "./on-background-push";
 
 /**
  * イベントリスナーをバインドする
@@ -29,6 +30,9 @@ export function bindEventListeners(
     }),
     domPushStream(props.retryConfirmDialogCloser).subscribe((action) => {
       onRetryConfirmDialogCloserPush(props, action);
+    }),
+    domPushStream(extractBackGround(props.root)).subscribe((action) => {
+      onBackgroundPush(props, action);
     }),
   ];
 }
