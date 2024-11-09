@@ -1,3 +1,5 @@
+import { Subject } from "rxjs";
+
 import { Exclusive } from "../../../exclusive/exclusive";
 import { createEmptySoundResource } from "../../../resource/sound/empty-sound-resource";
 import { SOUND_IDS } from "../../../resource/sound/ids";
@@ -6,7 +8,9 @@ import { ROOT_HIDDEN } from "../dom/class-name";
 import {
   extractBackGround,
   extractHamburgerIcon,
-  extractMenu, extractRetryButton, extractRetryCancelButton,
+  extractMenu,
+  extractRetryButton,
+  extractRetryCancelButton,
   extractRetryConfirmDialog,
   extractRetryConfirmDialogCloser,
 } from "../dom/extract-element";
@@ -42,8 +46,13 @@ export function createBattleHamburgerMenuProps(
   const changeValueSound =
     params.resources.sounds.find((s) => s.id === SOUND_IDS.CHANGE_VALUE) ??
     createEmptySoundResource();
+  const decideSound =
+    params.resources.sounds.find((s) => s.id === SOUND_IDS.PUSH_BUTTON) ??
+    createEmptySoundResource();
 
   const exclusive = new Exclusive();
+
+  const retryNotifier = new Subject<void>();
 
   return {
     ...params,
@@ -58,7 +67,10 @@ export function createBattleHamburgerMenuProps(
     retryCancelButton,
 
     changeValueSound,
+    decideSound,
 
     exclusive,
+
+    retryNotifier,
   };
 }

@@ -1,4 +1,4 @@
-import { Unsubscribable } from "rxjs";
+import { Observable, Unsubscribable } from "rxjs";
 
 import { bindEventListeners } from "./procedure/bind-event-listeners";
 import {
@@ -40,6 +40,14 @@ export class BattleHamburgerMenu {
    */
   hidden() {
     hidden(this.#props);
+  }
+
+  /**
+   * リトライ通知
+   * @returns 通知ストリーム
+   */
+  notifyRetry(): Observable<void> {
+    return this.#props.retryNotifier;
   }
 
   /**

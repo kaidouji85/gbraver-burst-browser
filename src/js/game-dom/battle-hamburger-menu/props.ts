@@ -1,6 +1,7 @@
 import { Exclusive } from "../../exclusive/exclusive";
 import { SoundResource } from "../../resource/sound/resource";
 import { SEPlayer } from "../../se/se-player";
+import { Subject } from "rxjs";
 
 /** 専用画面用ハンバーガーメニューのプロパティ */
 export type BattleHamburgerMenuProps = {
@@ -26,7 +27,12 @@ export type BattleHamburgerMenuProps = {
   readonly se: SEPlayer;
   /** 効果音 値変更 */
   readonly changeValueSound: SoundResource;
+  /** 効果音 決定 */
+  readonly decideSound: SoundResource;
 
   /** 排他制御 */
   readonly exclusive: Exclusive;
+
+  /** リトライ通知 */
+  retryNotifier: Subject<void>;
 };

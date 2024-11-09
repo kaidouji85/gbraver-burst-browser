@@ -9,5 +9,8 @@ export default {
 export const menu = domStub((params) => {
   const menu = new BattleHamburgerMenu(params);
   menu.show();
+  menu.notifyRetry().subscribe(() => {
+    console.log("retry");
+  });
   return menu.getRootHTMLElement();
 });
