@@ -95,6 +95,10 @@
   padding: calc(var(--responsive-font-size) * 2);
 }
 
+.battle-hamburger-menu__retry-confirm-dialog--hidden {
+  display: none;
+}
+
 .battle-hamburger-menu__retry-confirm-caption {
   grid-area: caption;
 }

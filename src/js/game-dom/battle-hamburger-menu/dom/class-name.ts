@@ -15,3 +15,9 @@ export const MENU = `${ROOT}__menu`;
 
 /** メニュー(非表示) */
 export const MENU_HIDDEN = `${MENU}--hidden`;
+
+/** リトライ確認ダイアログ */
+export const RETRY_CONFIRM_DIALOG = `${ROOT}__retry-confirm-dialog`;
+
+/** リトライ確認ダイアログ(非表示) */
+export const RETRY_CONFIRM_DIALOG_HIDDEN = `${RETRY_CONFIRM_DIALOG}--hidden`;
