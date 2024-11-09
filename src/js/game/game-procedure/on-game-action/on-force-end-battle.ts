@@ -1,11 +1,11 @@
 import { fadeOut, stop } from "../../../bgm/bgm-operators";
+import { WaitingDialog } from "../../../dom-dialogs/waiting/waiting-dialog";
 import { GameAction } from "../../game-actions";
 import { GameProps } from "../../game-props";
 import { PlayingEpisode } from "../../in-progress/story";
 import { playTitleBGM } from "../play-title-bgm";
 import { startEpisodeSelector } from "../start-episode-selector";
 import { startTitle } from "../start-title";
-import { WaitingDialog } from "../../../dom-dialogs/waiting/waiting-dialog";
 import { switchWaitingDialog } from "../switch-dialog/switch-waiting-dialog";
 
 /**
