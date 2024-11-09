@@ -1,10 +1,14 @@
+import { createEmptySoundResource } from "../../../resource/sound/empty-sound-resource";
+import { SOUND_IDS } from "../../../resource/sound/ids";
+import { SEPlayerContainer } from "../../../se/se-player";
 import { ROOT } from "../dom/class-name";
 import { extractHamburgerIcon, extractMenu } from "../dom/extract-element";
 import { rootInnerHTML, RootInnerHTMLParams } from "../dom/root-inner-html";
 import { BattleHamburgerMenuProps } from "../props";
 
 /** BattleHamburgerMenuProps生成パラメーター */
-export type BattleHamburgerMenuPropsCreatorParams = RootInnerHTMLParams;
+export type BattleHamburgerMenuPropsCreatorParams = RootInnerHTMLParams &
+  SEPlayerContainer;
 
 /**
  * BattleHamburgerMenuPropsを生成する
@@ -21,5 +25,9 @@ export function createBattleHamburgerMenuProps(
   const hamburgerIcon = extractHamburgerIcon(root);
   const menu = extractMenu(root);
 
-  return { root, hamburgerIcon, menu };
+  const changeValueSound =
+    params.resources.sounds.find((s) => s.id === SOUND_IDS.CHANGE_VALUE) ??
+    createEmptySoundResource();
+
+  return { ...params, root, hamburgerIcon, menu, changeValueSound };
 }
