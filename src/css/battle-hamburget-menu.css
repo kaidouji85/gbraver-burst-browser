@@ -8,6 +8,7 @@
     top: max(var(--safe-area-top), calc(var(--responsive-font-size) * 0.6));
     right: max(var(--safe-area-right), calc(var(--responsive-font-size) * 0.6));
     text-align: right;
+    z-index: var(--zindex-battle-hamburger-menu);
   }
 }
 
