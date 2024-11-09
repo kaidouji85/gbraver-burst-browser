@@ -1,10 +1,10 @@
 import { BurstCommand } from "gbraver-burst-core";
 
-import { DoBurst } from "../actions/do-burst";
-import { decisionByBurstButton } from "../animation/decision-by-burst-button";
-import { BattleSceneProps } from "../props";
-import { doBurstEventIfNeeded } from "./do-burst-event-if-needed";
-import { progressGame } from "./progress-game";
+import { DoBurst } from "../../actions/do-burst";
+import { decisionByBurstButton } from "../../animation/decision-by-burst-button";
+import { BattleSceneProps } from "../../props";
+import { doBurstEventIfNeeded } from "../do-burst-event-if-needed";
+import { progressGame } from "../progress-game";
 
 /**
  * バースト時の処理

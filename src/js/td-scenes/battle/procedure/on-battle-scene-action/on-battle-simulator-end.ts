@@ -1,4 +1,4 @@
-import { BattleSceneProps } from "../props";
+import { BattleSceneProps } from "../../props";
 
 /**
  * 戦闘シミュレーション終了時の処理

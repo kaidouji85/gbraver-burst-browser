@@ -1,10 +1,10 @@
 import { BatteryCommand } from "gbraver-burst-core";
 
-import { DecideBattery } from "../actions/decide-battery";
-import { decisionByBatterySelector } from "../animation/decision-by-battery-selector";
-import { BattleSceneProps } from "../props";
-import { doBatteryEventIfNeeded } from "./do-battery-event-if-needed";
-import { progressGame } from "./progress-game";
+import { DecideBattery } from "../../actions/decide-battery";
+import { decisionByBatterySelector } from "../../animation/decision-by-battery-selector";
+import { BattleSceneProps } from "../../props";
+import { doBatteryEventIfNeeded } from "../do-battery-event-if-needed";
+import { progressGame } from "../progress-game";
 
 /**
  * バッテリー決定時の処理

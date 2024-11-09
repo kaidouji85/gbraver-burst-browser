@@ -1,10 +1,10 @@
 import { PilotSkillCommand } from "gbraver-burst-core";
 
-import { decisionByMiniController } from "../animation/decision-by-mini-controller";
-import { decisionByPilotButton } from "../animation/decision-by-pilot-button";
-import { BattleSceneProps } from "../props";
-import { doPilotSkillEventIfNeeded } from "./do-pilot-skill-event-if-needed";
-import { progressGame } from "./progress-game";
+import { decisionByMiniController } from "../../animation/decision-by-mini-controller";
+import { decisionByPilotButton } from "../../animation/decision-by-pilot-button";
+import { BattleSceneProps } from "../../props";
+import { doPilotSkillEventIfNeeded } from "../do-pilot-skill-event-if-needed";
+import { progressGame } from "../progress-game";
 
 /**
  * ミニコントローラーでパイロットボタンが押された時の処理

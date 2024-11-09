@@ -1,10 +1,10 @@
 import { BurstCommand } from "gbraver-burst-core";
 
-import { decisionByBurstButton } from "../animation/decision-by-burst-button";
-import { decisionByMiniController } from "../animation/decision-by-mini-controller";
-import { BattleSceneProps } from "../props";
-import { doBurstEventIfNeeded } from "./do-burst-event-if-needed";
-import { progressGame } from "./progress-game";
+import { decisionByBurstButton } from "../../animation/decision-by-burst-button";
+import { decisionByMiniController } from "../../animation/decision-by-mini-controller";
+import { BattleSceneProps } from "../../props";
+import { doBurstEventIfNeeded } from "../do-burst-event-if-needed";
+import { progressGame } from "../progress-game";
 
 /**
  * ミニコントローラーでバーストボタンが押された時の処理
