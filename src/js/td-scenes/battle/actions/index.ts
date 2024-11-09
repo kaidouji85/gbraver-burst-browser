@@ -6,6 +6,8 @@ import { DoBurst } from "./do-burst";
 import { DoBurstByMiniController } from "./do-burst-by-mini-controller";
 import { DoPilotSkill } from "./do-pilot-skill";
 import { DoPilotSkillByMiniController } from "./do-pilot-skill-by-mini-controller";
+import { ForceEndBattle } from "./force-end-battle";
+import { ForceRetry } from "./force-retry";
 import { MinusBattery } from "./minus-battery";
 import { PlusBattery } from "./plus-battery";
 import { StartBattleScene } from "./start-battle-scene";
@@ -24,4 +26,6 @@ export type BattleSceneAction =
   | DoBurstByMiniController
   | DoPilotSkillByMiniController
   | BattleSimulatorStart
-  | BattleSimulatorEnd;
+  | BattleSimulatorEnd
+  | ForceEndBattle
+  | ForceRetry;

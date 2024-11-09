@@ -1,7 +1,8 @@
+import { Subject } from "rxjs";
+
 import { Exclusive } from "../../exclusive/exclusive";
 import { SoundResource } from "../../resource/sound/resource";
 import { SEPlayer } from "../../se/se-player";
-import { Subject } from "rxjs";
 
 /** 専用画面用ハンバーガーメニューのプロパティ */
 export type BattleHamburgerMenuProps = {
