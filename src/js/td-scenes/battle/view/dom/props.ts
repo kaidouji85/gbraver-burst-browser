@@ -1,6 +1,6 @@
+import { BattleHamburgerMenu } from "../../../../game-dom/battle-hamburger-menu";
 import { MessageWindow } from "../../../../game-dom/message-window";
 import { MiniController } from "../../../../game-dom/mini-controller";
-import { BattleHamburgerMenu } from "../../../../game-dom/battle-hamburger-menu";
 
 /** DOMレイヤーのプロパティ */
 export type DOMLayerProps = {
