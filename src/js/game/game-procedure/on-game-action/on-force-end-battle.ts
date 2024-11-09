@@ -1,7 +1,9 @@
 import { fadeOut, stop } from "../../../bgm/bgm-operators";
 import { GameAction } from "../../game-actions";
 import { GameProps } from "../../game-props";
+import { PlayingEpisode } from "../../in-progress/story";
 import { playTitleBGM } from "../play-title-bgm";
+import { startEpisodeSelector } from "../start-episode-selector";
 import { startTitle } from "../start-title";
 
 /**
@@ -14,7 +16,6 @@ async function forceEndNPCBattle(props: GameProps) {
   await Promise.all([
     (async () => {
       await props.fader.fadeOut();
-      props.tdSceneBinder.dispose();
       await startTitle(props);
     })(),
     (async () => {
@@ -27,12 +28,44 @@ async function forceEndNPCBattle(props: GameProps) {
 }
 
 /**
+ * 条件を満たした場合、ストーリーモードバトルを強制終了する
+ * @param props ゲームプロパティ
+ */
+async function forceEndEpisodeIfNeeded(props: Readonly<GameProps>) {
+  if (
+    props.inProgress.type === "Story" &&
+    props.inProgress.story.type === "PlayingEpisode"
+  ) {
+    const playingEpisode: PlayingEpisode = props.inProgress.story;
+    await Promise.all([
+      (async () => {
+        props.domFloaters.hiddenPostBattle();
+        await startEpisodeSelector(props, playingEpisode.episode.id);
+      })(),
+      (async () => {
+        await props.bgm.do(fadeOut);
+        await props.bgm.do(stop);
+      })(),
+    ]);
+
+    playTitleBGM(props);
+    return true;
+  }
+
+  return false;
+}
+
+/**
  * プレイヤーによるバトル強制終了
  * 本関数にはinProgressを更新する副作用がある
  * @param props ゲームプロパティ
  */
 async function onForceEndBattle(props: GameProps) {
-  await forceEndNPCBattle(props); // TODO inProgressに応じて個別処理をする
+  if (await forceEndEpisodeIfNeeded(props)) {
+    return;
+  } else {
+    await forceEndNPCBattle(props);
+  }
 }
 
 /** アクションタイプ */
