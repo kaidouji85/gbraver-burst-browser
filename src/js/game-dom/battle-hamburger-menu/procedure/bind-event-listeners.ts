@@ -9,6 +9,7 @@ import {
 } from "../dom/extract-element";
 import { BattleHamburgerMenuProps } from "../props";
 import { onBackgroundPush } from "./on-background-push";
+import { onEndBattleConfirmDialogCloserPush } from "./on-end-battle-confirm-dialog-closer-push";
 import { onEndBattlePush } from "./on-end-battle-push";
 import { onHamburgerIconPush } from "./on-hamburger-icon-push";
 import { onMenuOutsidePush } from "./on-menu-outside-push";
@@ -49,6 +50,9 @@ export function bindEventListeners(
     }),
     domPushStream(extractEndBattle(props.root)).subscribe((action) => {
       onEndBattlePush(props, action);
+    }),
+    domPushStream(props.endBattleConfirmDialogCloser).subscribe((action) => {
+      onEndBattleConfirmDialogCloserPush(props, action);
     }),
   ];
 }
