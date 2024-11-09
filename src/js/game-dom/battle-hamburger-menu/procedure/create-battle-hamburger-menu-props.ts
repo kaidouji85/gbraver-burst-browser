@@ -6,7 +6,7 @@ import { ROOT_HIDDEN } from "../dom/class-name";
 import {
   extractBackGround,
   extractHamburgerIcon,
-  extractMenu,
+  extractMenu, extractRetryButton, extractRetryCancelButton,
   extractRetryConfirmDialog,
   extractRetryConfirmDialogCloser,
 } from "../dom/extract-element";
@@ -33,8 +33,11 @@ export function createBattleHamburgerMenuProps(
   const menu = extractMenu(root);
 
   const background = extractBackGround(root);
+
   const retryConfirmDialog = extractRetryConfirmDialog(root);
   const retryConfirmDialogCloser = extractRetryConfirmDialogCloser(root);
+  const retryButton = extractRetryButton(root);
+  const retryCancelButton = extractRetryCancelButton(root);
 
   const changeValueSound =
     params.resources.sounds.find((s) => s.id === SOUND_IDS.CHANGE_VALUE) ??
@@ -47,10 +50,12 @@ export function createBattleHamburgerMenuProps(
     root,
     hamburgerIcon,
     menu,
-
     background,
+
     retryConfirmDialog,
     retryConfirmDialogCloser,
+    retryButton,
+    retryCancelButton,
 
     changeValueSound,
 

@@ -1,4 +1,4 @@
-import {Exclusive} from "../../exclusive/exclusive";
+import { Exclusive } from "../../exclusive/exclusive";
 import { SoundResource } from "../../resource/sound/resource";
 import { SEPlayer } from "../../se/se-player";
 
@@ -10,13 +10,17 @@ export type BattleHamburgerMenuProps = {
   readonly hamburgerIcon: HTMLElement;
   /** メニュー */
   readonly menu: HTMLElement;
-
   /** バックグラウンド */
   readonly background: HTMLElement;
+
   /** リトライ確認ダイアログ */
   readonly retryConfirmDialog: HTMLElement;
   /** リトライ確認ダイアログ 閉じるボタン */
   readonly retryConfirmDialogCloser: HTMLElement;
+  /** リトライ確認ダイアログ リトライボタン */
+  readonly retryButton: HTMLElement;
+  /** リトライ確認ダイアログ キャンセルボタン */
+  readonly retryCancelButton: HTMLElement;
 
   /** SE再生オブジェクト */
   readonly se: SEPlayer;
