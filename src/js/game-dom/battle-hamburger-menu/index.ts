@@ -5,6 +5,8 @@ import {
   BattleHamburgerMenuPropsCreatorParams,
   createBattleHamburgerMenuProps,
 } from "./procedure/create-battle-hamburger-menu-props";
+import { hidden } from "./procedure/hidden";
+import { show } from "./procedure/show";
 import { BattleHamburgerMenuProps } from "./props";
 
 /** 戦闘画面用ハンバーガーメニュー生成パラメーター */
@@ -24,6 +26,20 @@ export class BattleHamburgerMenu {
   constructor(params: BattleHamburgerMenuParams) {
     this.#props = createBattleHamburgerMenuProps(params);
     this.#unsubscribers = bindEventListeners(this.#props);
+  }
+
+  /**
+   * ハンバーガーメニューを表示する
+   */
+  show() {
+    show(this.#props);
+  }
+
+  /**
+   * ハンバーガーメニューを非表示にする
+   */
+  hidden() {
+    hidden(this.#props);
   }
 
   /**
