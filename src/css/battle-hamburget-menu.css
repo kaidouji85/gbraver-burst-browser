@@ -96,7 +96,8 @@
   padding: calc(var(--responsive-font-size) * 2);
 }
 
-.battle-hamburger-menu__retry-confirm-dialog--hidden {
+.battle-hamburger-menu__retry-confirm-dialog--hidden,
+.battle-hamburger-menu__end-battle-confirm-dialog--hidden {
   display: none;
 }
 

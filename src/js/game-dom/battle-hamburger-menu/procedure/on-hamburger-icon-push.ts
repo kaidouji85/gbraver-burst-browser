@@ -32,10 +32,13 @@ export function onHamburgerIconPush(
 ) {
   action.event.preventDefault();
   action.event.stopPropagation();
-  const isMenuOpen = props.menu.className === MENU;
-  if (isMenuOpen) {
-    closeMenu(props);
-  } else {
-    openMenu(props);
-  }
+
+  props.exclusive.execute(async () => {
+    const isMenuOpen = props.menu.className === MENU;
+    if (isMenuOpen) {
+      closeMenu(props);
+    } else {
+      openMenu(props);
+    }
+  });
 }

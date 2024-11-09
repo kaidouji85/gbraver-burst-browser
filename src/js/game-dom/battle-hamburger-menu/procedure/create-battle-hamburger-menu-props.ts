@@ -7,6 +7,10 @@ import { SEPlayerContainer } from "../../../se/se-player";
 import { ROOT_HIDDEN } from "../dom/class-name";
 import {
   extractBackGround,
+  extractEndBattleButton,
+  extractEndBattleCancelButton,
+  extractEndBattleConfirmDialog,
+  extractEndBattleConfirmDialogCloser,
   extractHamburgerIcon,
   extractMenu,
   extractRetryButton,
@@ -43,6 +47,12 @@ export function createBattleHamburgerMenuProps(
   const retryButton = extractRetryButton(root);
   const retryCancelButton = extractRetryCancelButton(root);
 
+  const endBattleConfirmDialog = extractEndBattleConfirmDialog(root);
+  const endBattleConfirmDialogCloser =
+    extractEndBattleConfirmDialogCloser(root);
+  const endBattleButton = extractEndBattleButton(root);
+  const endBattleCancelButton = extractEndBattleCancelButton(root);
+
   const changeValueSound =
     params.resources.sounds.find((s) => s.id === SOUND_IDS.CHANGE_VALUE) ??
     createEmptySoundResource();
@@ -65,6 +75,11 @@ export function createBattleHamburgerMenuProps(
     retryConfirmDialogCloser,
     retryButton,
     retryCancelButton,
+
+    endBattleConfirmDialog,
+    endBattleConfirmDialogCloser,
+    endBattleButton,
+    endBattleCancelButton,
 
     changeValueSound,
     decideSound,

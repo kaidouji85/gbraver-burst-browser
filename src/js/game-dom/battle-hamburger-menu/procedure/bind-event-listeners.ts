@@ -2,9 +2,14 @@ import { Unsubscribable } from "rxjs";
 
 import { domPushStream } from "../../../dom/push-dom";
 import { pushWindowsStream } from "../../../window/push-window";
-import { extractBackGround, extractRetry } from "../dom/extract-element";
+import {
+  extractBackGround,
+  extractEndBattle,
+  extractRetry,
+} from "../dom/extract-element";
 import { BattleHamburgerMenuProps } from "../props";
 import { onBackgroundPush } from "./on-background-push";
+import { onEndBattlePush } from "./on-end-battle-push";
 import { onHamburgerIconPush } from "./on-hamburger-icon-push";
 import { onMenuOutsidePush } from "./on-menu-outside-push";
 import { onRetryButtonPush } from "./on-retry-button-push";
@@ -41,6 +46,9 @@ export function bindEventListeners(
     }),
     domPushStream(props.retryButton).subscribe((action) => {
       onRetryButtonPush(props, action);
+    }),
+    domPushStream(extractEndBattle(props.root)).subscribe((action) => {
+      onEndBattlePush(props, action);
     }),
   ];
 }

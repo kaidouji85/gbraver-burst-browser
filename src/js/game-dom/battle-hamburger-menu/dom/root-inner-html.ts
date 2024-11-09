@@ -1,7 +1,7 @@
 import { ResourcesContainer } from "../../../resource";
 import { PathIds } from "../../../resource/path/ids";
 import {
-  BACKGROUND_HIDDEN,
+  BACKGROUND_HIDDEN, END_BATTLE_CONFIRM_DIALOG_HIDDEN,
   MENU_HIDDEN,
   RETRY_CONFIRM_DIALOG_HIDDEN,
   ROOT,
@@ -27,6 +27,7 @@ export function rootInnerHTML(params: RootInnerHTMLParams): string {
     BACKGROUND_HIDDEN,
     MENU_HIDDEN,
     RETRY_CONFIRM_DIALOG_HIDDEN,
+    END_BATTLE_CONFIRM_DIALOG_HIDDEN,
     battleHamburgerMenuPath,
     closerPath,
   });

@@ -21,3 +21,9 @@ export const RETRY_CONFIRM_DIALOG = `${ROOT}__retry-confirm-dialog`;
 
 /** リトライ確認ダイアログ(非表示) */
 export const RETRY_CONFIRM_DIALOG_HIDDEN = `${RETRY_CONFIRM_DIALOG}--hidden`;
+
+/** バトル終了確認ダイアログ */
+export const END_BATTLE_CONFIRM_DIALOG = `${ROOT}__end-battle-confirm-dialog`;
+
+/** バトル終了確認ダイアログ(非表示) */
+export const END_BATTLE_CONFIRM_DIALOG_HIDDEN = `${END_BATTLE_CONFIRM_DIALOG}--hidden`;

@@ -23,6 +23,15 @@ export type BattleHamburgerMenuProps = {
   /** リトライ確認ダイアログ キャンセルボタン */
   readonly retryCancelButton: HTMLElement;
 
+  /** バトル終了確認ダイアログ */
+  readonly endBattleConfirmDialog: HTMLElement;
+  /** バトル終了確認ダイアログ 閉じるボタン */
+  readonly endBattleConfirmDialogCloser: HTMLElement;
+  /** バトル終了確認ダイアログ バトル終了ボタン */
+  readonly endBattleButton: HTMLElement;
+  /** バトル終了確認ダイアログ キャンセルボタン */
+  readonly endBattleCancelButton: HTMLElement;
+
   /** SE再生オブジェクト */
   readonly se: SEPlayer;
   /** 効果音 値変更 */

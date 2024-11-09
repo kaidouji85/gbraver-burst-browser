@@ -6,5 +6,7 @@ import { BattleHamburgerMenuProps } from "../props";
  * @param props プロパティ
  */
 export function onMenuOutsidePush(props: BattleHamburgerMenuProps): void {
-  props.menu.className = MENU_HIDDEN;
+  props.exclusive.execute(async () => {
+    props.menu.className = MENU_HIDDEN;
+  });
 }
