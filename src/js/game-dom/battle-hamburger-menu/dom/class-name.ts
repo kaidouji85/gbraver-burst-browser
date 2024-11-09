@@ -1,6 +1,12 @@
 /** ルート要素のclass属性 */
 export const ROOT = "battle-hamburger-menu";
 
+/** バックグラウド */
+export const BACKGROUND = `${ROOT}__background`;
+
+/** バックグラウンド(非表示) */
+export const BACKGROUND_HIDDEN = `${BACKGROUND}--hidden`;
+
 /** メニュー */
 export const MENU = `${ROOT}__menu`;
 

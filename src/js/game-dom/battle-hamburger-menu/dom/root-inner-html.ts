@@ -1,6 +1,6 @@
 import { ResourcesContainer } from "../../../resource";
 import { PathIds } from "../../../resource/path/ids";
-import { MENU_HIDDEN, ROOT } from "./class-name";
+import { BACKGROUND_HIDDEN, MENU_HIDDEN, ROOT } from "./class-name";
 import template from "./root-inner-html.hbs";
 
 /** innerHTML生成パラメーター */
@@ -17,6 +17,7 @@ export function rootInnerHTML(params: RootInnerHTMLParams): string {
     "";
   return template({
     ROOT,
+    BACKGROUND_HIDDEN,
     MENU_HIDDEN,
     battleHamburgerMenuPath,
   });

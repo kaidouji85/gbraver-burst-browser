@@ -18,6 +18,23 @@
   }
 }
 
+.battle-hamburger-menu__background {
+  position: fixed;
+  width: 100vw;
+  width: 100dvw;
+  height: 100vh;
+  height: 100dvh;
+  background-color: #000;
+  opacity: 0.5;
+  z-index: var(--zindex-background);
+  top: 0;
+  left: 0;
+}
+
+.battle-hamburger-menu__background--hidden {
+  display: none;
+}
+
 .battle-hamburger-menu__hamburger-icon {
   width: var(--icon-size);
   height: var(--icon-size);
