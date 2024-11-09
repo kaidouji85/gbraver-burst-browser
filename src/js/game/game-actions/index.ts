@@ -12,6 +12,8 @@ import { DifficultySelectionComplete } from "./difficulty-selection-complete";
 import { EndBattle } from "./end-battle";
 import { EndNetworkError } from "./end-network-error";
 import { EndNPCEnding } from "./end-npc-ending";
+import { ForceEndBattle } from "./force-end-battle";
+import { ForceRetry } from "./force-retry";
 import { LoginCancel } from "./login-cancel";
 import { Logout } from "./logout";
 import { MatchingCanceled } from "./matching-canceled";
@@ -66,4 +68,6 @@ export type GameAction =
   | StoryStart
   | CancelTutorialSelect
   | SelectEpisode
-  | VisibilityChange;
+  | VisibilityChange
+  | ForceEndBattle
+  | ForceRetry;

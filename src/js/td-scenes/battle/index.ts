@@ -67,7 +67,7 @@ export class BattleScene implements TDScene {
    * @returns 通知ストリーム
    */
   notifyForceGameEnd(): Observable<void> {
-    return this.#props.forceEndBattle;
+    return this.#props.view.dom.hamburgerMenu.notifyEndBattle();
   }
 
   /**
@@ -75,7 +75,7 @@ export class BattleScene implements TDScene {
    * @returns 通知ストリーム
    */
   notifyForceRetry(): Observable<void> {
-    return this.#props.forceRetry;
+    return this.#props.view.dom.hamburgerMenu.notifyRetry();
   }
 
   /**

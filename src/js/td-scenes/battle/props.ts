@@ -59,8 +59,4 @@ export type BattleSceneProps = ResourcesContainer &
     readonly endBattle: Subject<BattleEnd>;
     /** ウインドウ押下ストリーム */
     readonly pushWindow: Observable<PushWindow>;
-    /** 強制バトル終了通知ストリーム */
-    readonly forceEndBattle: Subject<void>;
-    /** 強制リトライ通知ストリーム */
-    readonly forceRetry: Subject<void>;
   };

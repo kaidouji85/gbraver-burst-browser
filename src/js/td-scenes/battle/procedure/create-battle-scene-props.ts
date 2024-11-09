@@ -96,7 +96,5 @@ export function createBattleSceneProps(
 
     endBattle: new Subject(),
     battleSceneAction: createActionManager<BattleSceneAction>(),
-    forceEndBattle: new Subject(),
-    forceRetry: new Subject(),
   };
 }
