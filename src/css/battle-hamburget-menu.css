@@ -22,23 +22,6 @@
   }
 }
 
-.battle-hamburger-menu__background {
-  position: fixed;
-  width: 100vw;
-  width: 100dvw;
-  height: 100vh;
-  height: 100dvh;
-  background-color: #000;
-  opacity: 0.5;
-  z-index: var(--zindex-background);
-  top: 0;
-  left: 0;
-}
-
-.battle-hamburger-menu__background--hidden {
-  display: none;
-}
-
 .battle-hamburger-menu__hamburger-icon {
   width: var(--icon-size);
   height: var(--icon-size);
@@ -66,4 +49,69 @@
 .battle-hamburger-menu__retry:hover,
 .battle-hamburger-menu__end-battle:hover {
   background-color: var(--button-background-color);
+}
+
+.battle-hamburger-menu__background {
+  position: fixed;
+  width: 100vw;
+  width: 100dvw;
+  height: 100vh;
+  height: 100dvh;
+  background-color: #000;
+  opacity: 0.5;
+  z-index: var(--zindex-background);
+  top: 0;
+  left: 0;
+}
+
+.battle-hamburger-menu__background--hidden {
+  display: none;
+}
+
+.battle-hamburger-menu__retry-confirm-dialog {
+  position: fixed;
+  top: 50vh;
+  top: 50dvh;
+  left: 50vw;
+  left: 50dvw;
+  min-width: calc(var(--responsive-font-size) * 20);
+  min-height: calc(var(--responsive-font-size) * 15);
+  transform: translate(-50%, -50%);
+  display: grid;
+  grid-template:
+    "caption" 1fr
+    "retry" auto
+    "cancel" auto;
+  gap: calc(var(--responsive-font-size) * 0.4);
+  color: var(--font-color);
+  font-size: var(--responsive-font-size);
+  background-color: var(--background-color);
+  border: var(--dialog-border);
+  border-radius: var(--dialog-border-radius);
+  box-sizing: border-box;
+  text-align: left;
+  padding: calc(var(--responsive-font-size) * 2);
+}
+
+.battle-hamburger-menu__retry-confirm-caption {
+  grid-area: caption;
+}
+
+.battle-hamburger-menu__retry-button {
+  grid-area: retry;
+  background-color: var(--button-background-color);
+}
+
+.battle-hamburger-menu__retry-cancel-button {
+  grid-area: cancel;
+  background-color: var(--sub-button-background-color);
+}
+
+.battle-hamburger-menu__retry-button,
+.battle-hamburger-menu__retry-cancel-button {
+  height: calc(var(--responsive-font-size) * 3);
+  font-size: var(--responsive-font-size);
+  border-radius: var(--button-border-radius);
+  color: var(--button-font-color);
+  border: var(--button-border);
 }
