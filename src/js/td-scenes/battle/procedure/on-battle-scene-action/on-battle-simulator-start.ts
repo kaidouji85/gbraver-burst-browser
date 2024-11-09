@@ -1,6 +1,6 @@
-import { BattleSimulator } from "../../../dom-dialogs/battle-simulator";
-import { BattleSceneProps } from "../props";
-import { switchBattleSimulator } from "./switch-battle-simulator";
+import { BattleSimulator } from "../../../../dom-dialogs/battle-simulator";
+import { BattleSceneProps } from "../../props";
+import { switchBattleSimulator } from "../switch-battle-simulator";
 
 /**
  * バトルシミュレータ開始時の処理
