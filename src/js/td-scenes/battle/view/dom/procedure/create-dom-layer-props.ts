@@ -2,6 +2,7 @@ import { MessageWindow } from "../../../../../game-dom/message-window";
 import { MiniController } from "../../../../../game-dom/mini-controller";
 import { BattleViewCreatorParams } from "../../creator-params";
 import { DOMLayerProps } from "../props";
+import { BattleHamburgerMenu } from "../../../../../game-dom/battle-hamburger-menu";
 
 /**
  * DOMLayerPropsを生成する
@@ -68,6 +69,8 @@ export function createDOMLayerProps(
   });
   enemyShoutMessageWindow.visible(false);
 
+  const hamburgerMenu = new BattleHamburgerMenu(params);
+
   const miniController = new MiniController(params);
   return {
     rightMessageWindow,
@@ -77,6 +80,9 @@ export function createDOMLayerProps(
     nearPilotButtonMessageWindow,
     playerShoutMessageWindow,
     enemyShoutMessageWindow,
+
+    hamburgerMenu,
+
     miniController,
   };
 }

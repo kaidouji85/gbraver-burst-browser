@@ -1,5 +1,6 @@
 import { MessageWindow } from "../../../../game-dom/message-window";
 import { MiniController } from "../../../../game-dom/mini-controller";
+import { BattleHamburgerMenu } from "../../../../game-dom/battle-hamburger-menu";
 
 /** DOMレイヤーのプロパティ */
 export type DOMLayerProps = {
@@ -17,6 +18,10 @@ export type DOMLayerProps = {
   playerShoutMessageWindow: MessageWindow;
   /** 叫びメッセージウインドウ 敵 */
   enemyShoutMessageWindow: MessageWindow;
+
+  /** ハンバーガーメニュー */
+  hamburgerMenu: BattleHamburgerMenu;
+
   /** ミニコントローラー */
   miniController: MiniController;
 };
