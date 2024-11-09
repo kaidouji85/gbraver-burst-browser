@@ -15,10 +15,13 @@ export function rootInnerHTML(params: RootInnerHTMLParams): string {
   const battleHamburgerMenuPath =
     resources.paths.find((p) => p.id === PathIds.BATTLE_HAMBURGER_MENU)?.path ??
     "";
+  const closerPath =
+    resources.paths.find((p) => p.id === PathIds.CLOSER)?.path ?? "";
   return template({
     ROOT,
     BACKGROUND_HIDDEN,
     MENU_HIDDEN,
     battleHamburgerMenuPath,
+    closerPath,
   });
 }
