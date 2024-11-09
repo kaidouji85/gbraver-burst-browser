@@ -1,3 +1,4 @@
+import { Exclusive } from "../../../exclusive/exclusive";
 import { createEmptySoundResource } from "../../../resource/sound/empty-sound-resource";
 import { SOUND_IDS } from "../../../resource/sound/ids";
 import { SEPlayerContainer } from "../../../se/se-player";
@@ -7,6 +8,7 @@ import {
   extractHamburgerIcon,
   extractMenu,
   extractRetryConfirmDialog,
+  extractRetryConfirmDialogCloser,
 } from "../dom/extract-element";
 import { rootInnerHTML, RootInnerHTMLParams } from "../dom/root-inner-html";
 import { BattleHamburgerMenuProps } from "../props";
@@ -32,10 +34,13 @@ export function createBattleHamburgerMenuProps(
 
   const background = extractBackGround(root);
   const retryConfirmDialog = extractRetryConfirmDialog(root);
+  const retryConfirmDialogCloser = extractRetryConfirmDialogCloser(root);
 
   const changeValueSound =
     params.resources.sounds.find((s) => s.id === SOUND_IDS.CHANGE_VALUE) ??
     createEmptySoundResource();
+
+  const exclusive = new Exclusive();
 
   return {
     ...params,
@@ -45,7 +50,10 @@ export function createBattleHamburgerMenuProps(
 
     background,
     retryConfirmDialog,
+    retryConfirmDialogCloser,
 
     changeValueSound,
+
+    exclusive,
   };
 }

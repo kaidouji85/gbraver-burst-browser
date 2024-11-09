@@ -2,10 +2,11 @@ import { Unsubscribable } from "rxjs";
 
 import { domPushStream } from "../../../dom/push-dom";
 import { pushWindowsStream } from "../../../window/push-window";
+import { extractRetry } from "../dom/extract-element";
 import { BattleHamburgerMenuProps } from "../props";
 import { onHamburgerIconPush } from "./on-hamburger-icon-push";
 import { onMenuOutsidePush } from "./on-menu-outside-push";
-import { extractRetry } from "../dom/extract-element";
+import { onRetryConfirmDialogCloserPush } from "./on-retry-confirm-dialog-closer-push";
 import { onRetryPush } from "./on-retry-push";
 
 /**
@@ -25,6 +26,9 @@ export function bindEventListeners(
     }),
     domPushStream(extractRetry(props.root)).subscribe((action) => {
       onRetryPush(props, action);
+    }),
+    domPushStream(props.retryConfirmDialogCloser).subscribe((action) => {
+      onRetryConfirmDialogCloserPush(props, action);
     }),
   ];
 }
