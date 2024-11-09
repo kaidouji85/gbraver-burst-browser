@@ -1,11 +1,11 @@
 import { BatteryCommand } from "gbraver-burst-core";
 
-import { DecideBatteryByMiniController } from "../actions/decide-battery-by-mini-controller";
-import { decisionByBatterySelector } from "../animation/decision-by-battery-selector";
-import { decisionByMiniController } from "../animation/decision-by-mini-controller";
-import { BattleSceneProps } from "../props";
-import { doBatteryEventIfNeeded } from "./do-battery-event-if-needed";
-import { progressGame } from "./progress-game";
+import { DecideBatteryByMiniController } from "../../actions/decide-battery-by-mini-controller";
+import { decisionByBatterySelector } from "../../animation/decision-by-battery-selector";
+import { decisionByMiniController } from "../../animation/decision-by-mini-controller";
+import { BattleSceneProps } from "../../props";
+import { doBatteryEventIfNeeded } from "../do-battery-event-if-needed";
+import { progressGame } from "../progress-game";
 
 /**
  * ミニコントローラーでバッテリーボタンが押された時の処理

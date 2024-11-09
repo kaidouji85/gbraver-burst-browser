@@ -1,10 +1,10 @@
 import { PilotSkillCommand } from "gbraver-burst-core";
 
-import { DoPilotSkill } from "../actions/do-pilot-skill";
-import { decisionByPilotButton } from "../animation/decision-by-pilot-button";
-import { BattleSceneProps } from "../props";
-import { doPilotSkillEventIfNeeded } from "./do-pilot-skill-event-if-needed";
-import { progressGame } from "./progress-game";
+import { DoPilotSkill } from "../../actions/do-pilot-skill";
+import { decisionByPilotButton } from "../../animation/decision-by-pilot-button";
+import { BattleSceneProps } from "../../props";
+import { doPilotSkillEventIfNeeded } from "../do-pilot-skill-event-if-needed";
+import { progressGame } from "../progress-game";
 
 /**
  * パイロットスキル発動時の処理
