@@ -70,7 +70,8 @@
   display: none;
 }
 
-.battle-hamburger-menu__retry-confirm-dialog {
+.battle-hamburger-menu__retry-confirm-dialog,
+.battle-hamburger-menu__end-battle-confirm-dialog {
   position: fixed;
   z-index: var(--zindex-dialog);
   top: 50vh;
@@ -92,7 +93,6 @@
   border: var(--dialog-border);
   border-radius: var(--dialog-border-radius);
   box-sizing: border-box;
-  text-align: left;
   padding: calc(var(--responsive-font-size) * 2);
 }
 
@@ -100,22 +100,28 @@
   display: none;
 }
 
-.battle-hamburger-menu__retry-confirm-caption {
+.battle-hamburger-menu__retry-confirm-caption,
+.battle-hamburger-menu__end-battle-confirm-caption {
   grid-area: caption;
+  text-align: center;
 }
 
-.battle-hamburger-menu__retry-button {
+.battle-hamburger-menu__retry-button,
+.battle-hamburger-menu__end-battle-button {
   grid-area: retry;
   background-color: var(--button-background-color);
 }
 
-.battle-hamburger-menu__retry-cancel-button {
+.battle-hamburger-menu__retry-cancel-button,
+.battle-hamburger-menu__end-battle-cancel-button {
   grid-area: cancel;
   background-color: var(--sub-button-background-color);
 }
 
 .battle-hamburger-menu__retry-button,
-.battle-hamburger-menu__retry-cancel-button {
+.battle-hamburger-menu__retry-cancel-button,
+.battle-hamburger-menu__end-battle-button,
+.battle-hamburger-menu__end-battle-cancel-button {
   height: calc(var(--responsive-font-size) * 3);
   font-size: var(--responsive-font-size);
   border-radius: var(--button-border-radius);
@@ -123,7 +129,8 @@
   border: var(--button-border);
 }
 
-.battle-hamburger-menu__retry-confirm-dialog-closer {
+.battle-hamburger-menu__retry-confirm-dialog-closer,
+.battle-hamburger-menu__end-battle-confirm-dialog-closer {
   position: absolute;
   top: calc(var(--closer-height) * -0.5);
   left: calc(var(--closer-width) * -0.5);
