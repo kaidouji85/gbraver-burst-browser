@@ -1,7 +1,7 @@
 import { createEmptySoundResource } from "../../../resource/sound/empty-sound-resource";
 import { SOUND_IDS } from "../../../resource/sound/ids";
 import { SEPlayerContainer } from "../../../se/se-player";
-import { ROOT } from "../dom/class-name";
+import { ROOT_HIDDEN } from "../dom/class-name";
 import { extractHamburgerIcon, extractMenu } from "../dom/extract-element";
 import { rootInnerHTML, RootInnerHTMLParams } from "../dom/root-inner-html";
 import { BattleHamburgerMenuProps } from "../props";
@@ -19,7 +19,7 @@ export function createBattleHamburgerMenuProps(
   params: BattleHamburgerMenuPropsCreatorParams,
 ): BattleHamburgerMenuProps {
   const root = document.createElement("div");
-  root.className = ROOT;
+  root.className = ROOT_HIDDEN;
   root.innerHTML = rootInnerHTML(params);
 
   const hamburgerIcon = extractHamburgerIcon(root);
