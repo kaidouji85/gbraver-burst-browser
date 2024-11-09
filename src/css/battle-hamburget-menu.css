@@ -5,8 +5,8 @@
 
     display: block;
     position: fixed;
-    top: var(--safe-area-top);
-    right: var(--safe-area-right);
+    top: max(var(--safe-area-top), calc(var(--responsive-font-size) * 0.3));
+    right: max(var(--safe-area-right), calc(var(--responsive-font-size) * 0.3));
     text-align: right;
   }
 }
