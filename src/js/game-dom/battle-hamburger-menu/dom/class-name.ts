@@ -5,4 +5,4 @@ export const ROOT = "battle-hamburger-menu";
 export const MENU = `${ROOT}__menu`;
 
 /** メニュー(非表示) */
-export const MENU_HIDDEN = `${ROOT}__menu--hidden`;
+export const MENU_HIDDEN = `${MENU}--hidden`;

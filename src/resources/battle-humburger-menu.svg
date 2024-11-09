@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <svg id="a" data-name="レイヤー 1" xmlns="http://www.w3.org/2000/svg" width="256" height="256" viewBox="0 0 256 256">
-  <rect x="23" y="23" width="210" height="210" rx="18.15" ry="18.15" style="fill: #595857;"/>
+  <rect x="0" width="256" height="256" rx="22.13" ry="22.13" style="fill: #595857;"/>
   <g>
-    <rect x="57.49" y="172.79" width="141.02" height="10.42" rx="4.46" ry="4.46" style="fill: #f0f0f0;"/>
-    <rect x="57.49" y="122.79" width="141.02" height="10.42" rx="4.46" ry="4.46" style="fill: #f0f0f0;"/>
-    <rect x="57.49" y="72.79" width="141.02" height="10.42" rx="4.46" ry="4.46" style="fill: #f0f0f0;"/>
+    <rect x="38" y="179.28" width="180" height="10.42" rx="5.04" ry="5.04" style="fill: #f0f0f0;"/>
+    <rect x="38" y="122.79" width="180" height="10.42" rx="5.04" ry="5.04" style="fill: #f0f0f0;"/>
+    <rect x="38" y="66.3" width="180" height="10.42" rx="5.04" ry="5.04" style="fill: #f0f0f0;"/>
   </g>
 </svg>
