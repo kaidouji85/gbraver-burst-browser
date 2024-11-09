@@ -10,6 +10,11 @@ export type BattleHamburgerMenuProps = {
   /** メニュー */
   readonly menu: HTMLElement;
 
+  /** バックグラウンド */
+  readonly background: HTMLElement;
+  /** リトライ確認ダイアログ */
+  readonly retryConfirmDialog: HTMLElement;
+
   /** SE再生オブジェクト */
   readonly se: SEPlayer;
   /** 効果音 値変更 */

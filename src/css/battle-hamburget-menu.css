@@ -72,6 +72,7 @@
 
 .battle-hamburger-menu__retry-confirm-dialog {
   position: fixed;
+  z-index: var(--zindex-dialog);
   top: 50vh;
   top: 50dvh;
   left: 50vw;

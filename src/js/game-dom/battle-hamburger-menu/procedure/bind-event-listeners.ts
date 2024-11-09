@@ -5,6 +5,8 @@ import { pushWindowsStream } from "../../../window/push-window";
 import { BattleHamburgerMenuProps } from "../props";
 import { onHamburgerIconPush } from "./on-hamburger-icon-push";
 import { onMenuOutsidePush } from "./on-menu-outside-push";
+import { extractRetry } from "../dom/extract-element";
+import { onRetryPush } from "./on-retry-push";
 
 /**
  * イベントリスナーをバインドする
@@ -20,6 +22,9 @@ export function bindEventListeners(
     }),
     pushWindowsStream().subscribe(() => {
       onMenuOutsidePush(props);
+    }),
+    domPushStream(extractRetry(props.root)).subscribe((action) => {
+      onRetryPush(props, action);
     }),
   ];
 }
