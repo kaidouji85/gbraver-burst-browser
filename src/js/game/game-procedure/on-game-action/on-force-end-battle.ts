@@ -104,11 +104,13 @@ async function forceEndNetBattleIfNeeded(props: GameProps): Promise<boolean> {
 async function onForceEndBattle(props: GameProps) {
   if (await forceEndEpisodeIfNeeded(props)) {
     return;
-  } else if (await forceEndNetBattleIfNeeded(props)) {
-    return;
-  } else {
-    await forceEndNPCBattle(props);
   }
+
+  if (await forceEndNetBattleIfNeeded(props)) {
+    return;
+  }
+
+  await forceEndNPCBattle(props);
 }
 
 /** アクションタイプ */
