@@ -34,7 +34,7 @@
   flex-direction: column;
   gap: calc(var(--responsive-font-size) * 1);
   color: var(--font-color);
-  font-size: var(--responsive-font-size);
+  font-size: calc(var(--responsive-font-size) * 1.3);
   background-color: var(--background-color);
   border: var(--dialog-border);
   border-radius: var(--dialog-border-radius);
