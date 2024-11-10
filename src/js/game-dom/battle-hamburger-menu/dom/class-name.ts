@@ -4,6 +4,12 @@ export const ROOT = "battle-hamburger-menu";
 /** ルート要素(非表示) */
 export const ROOT_HIDDEN = `${ROOT}--hidden`;
 
+/** リトライ */
+export const RETRY = `${ROOT}__retry`;
+
+/** リトライ(選択不能) */
+export const RETRY_DISABLED = `${RETRY}--disabled`;
+
 /** バックグラウド */
 export const BACKGROUND = `${ROOT}__background`;
 

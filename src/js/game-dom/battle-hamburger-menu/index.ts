@@ -10,7 +10,7 @@ import { show } from "./procedure/show";
 import { BattleHamburgerMenuProps } from "./props";
 
 /** 戦闘画面用ハンバーガーメニュー生成パラメーター */
-type BattleHamburgerMenuParams = BattleHamburgerMenuPropsCreatorParams;
+export type BattleHamburgerMenuParams = BattleHamburgerMenuPropsCreatorParams;
 
 /** 戦闘画面用ハンバーガーメニュー */
 export class BattleHamburgerMenu {
