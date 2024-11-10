@@ -14,10 +14,10 @@
 
 .face-graphic__shinya,
 .face-graphic__shinya--right {
-  --hamburger-icon-size: calc(var(--responsive-font-size) * 8);
+  --icon-size: calc(var(--responsive-font-size) * 8);
 
-  width: var(--hamburger-icon-size);
-  height: var(--hamburger-icon-size);
+  width: var(--icon-size);
+  height: var(--icon-size);
 }
 
 .face-graphic__shinya {
@@ -30,10 +30,10 @@
 
 .face-graphic__gai,
 .face-graphic__gai--right {
-  --hamburger-icon-size: calc(var(--responsive-font-size) * 8.5);
+  --icon-size: calc(var(--responsive-font-size) * 8.5);
 
-  width: var(--hamburger-icon-size);
-  height: var(--hamburger-icon-size);
+  width: var(--icon-size);
+  height: var(--icon-size);
 }
 
 .face-graphic__gai {
@@ -46,10 +46,10 @@
 
 .face-graphic__raito,
 .face-graphic__raito--right {
-  --hamburger-icon-size: calc(var(--responsive-font-size) * 8.5);
+  --icon-size: calc(var(--responsive-font-size) * 8.5);
 
-  width: var(--hamburger-icon-size);
-  height: var(--hamburger-icon-size);
+  width: var(--icon-size);
+  height: var(--icon-size);
 }
 
 .face-graphic__raito {
@@ -62,10 +62,10 @@
 
 .face-graphic__tsubasa,
 .face-graphic__tsubasa--right {
-  --hamburger-icon-size: calc(var(--responsive-font-size) * 9.5);
+  --icon-size: calc(var(--responsive-font-size) * 9.5);
 
-  width: var(--hamburger-icon-size);
-  height: var(--hamburger-icon-size);
+  width: var(--icon-size);
+  height: var(--icon-size);
 }
 
 .face-graphic__tsubasa {
@@ -78,11 +78,11 @@
 
 .face-graphic__yuuya,
 .face-graphic__yuuya--right {
-  --hamburger-icon-size: calc(var(--responsive-font-size) * 9.5);
+  --icon-size: calc(var(--responsive-font-size) * 9.5);
   --translate-y: 10%;
 
-  width: var(--hamburger-icon-size);
-  height: var(--hamburger-icon-size);
+  width: var(--icon-size);
+  height: var(--icon-size);
 }
 
 .face-graphic__yuuya {
