@@ -63,6 +63,22 @@ export class BattleScene implements TDScene {
   }
 
   /**
+   * プレイヤーによるゲーム強制終了の通知
+   * @returns 通知ストリーム
+   */
+  notifyForceGameEnd(): Observable<void> {
+    return this.#props.view.dom.hamburgerMenu.notifyEndBattle();
+  }
+
+  /**
+   * プレイヤーによるゲーム強制リトライの通知
+   * @returns 通知ストリーム
+   */
+  notifyForceRetry(): Observable<void> {
+    return this.#props.view.dom.hamburgerMenu.notifyRetry();
+  }
+
+  /**
    * 戦闘シーンを開始する
    * 画面遷移などが完了したら、本メソッドを呼ぶ想定
    * @returns 処理が完了したら発火するPromise

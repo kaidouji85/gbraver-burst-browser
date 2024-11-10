@@ -1,6 +1,7 @@
 import { all } from "../../../animation/all";
 import { Animate } from "../../../animation/animate";
 import { delay } from "../../../animation/delay";
+import { onStart } from "../../../animation/on-start";
 import { BattleSceneView } from "../view";
 
 /**
@@ -15,7 +16,14 @@ export function decisionByMiniController(
     view.dom.miniController
       .decided()
       .chain(delay(200))
-      .chain(view.dom.miniController.hidden()),
+      .chain(
+        all(
+          view.dom.miniController.hidden(),
+          onStart(() => {
+            view.dom.hamburgerMenu.hidden();
+          }),
+        ),
+      ),
     view.hud.gameObjects.timeScaleButton.close(),
     ...view.hud.players.map(({ predicatedDamage }) =>
       predicatedDamage.hidden(),

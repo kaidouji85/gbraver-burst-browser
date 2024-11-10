@@ -13,6 +13,8 @@ export const bindBattleScene = (props: GameProps, scene: BattleScene) => {
     scene,
     props.gameAction.connect([
       scene.notifyGameEnd().pipe(map((a) => ({ ...a, type: "EndBattle" }))),
+      scene.notifyForceGameEnd().pipe(map(() => ({ type: "ForceEndBattle" }))),
+      scene.notifyForceRetry().pipe(map(() => ({ type: "ForceRetry" }))),
     ]),
   );
 };
