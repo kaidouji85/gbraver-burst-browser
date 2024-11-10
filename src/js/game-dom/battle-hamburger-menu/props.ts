@@ -6,6 +6,9 @@ import { SEPlayer } from "../../se/se-player";
 
 /** 専用画面用ハンバーガーメニューのプロパティ */
 export type BattleHamburgerMenuProps = {
+  /** リトライ可能かどうか、trueで可能 */
+  readonly canRetry: boolean;
+
   /** ルート要素 */
   readonly root: HTMLElement;
   /** ハンバーガーアイコン */

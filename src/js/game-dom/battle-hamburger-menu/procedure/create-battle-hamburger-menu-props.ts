@@ -67,6 +67,7 @@ export function createBattleHamburgerMenuProps(
 
   return {
     ...params,
+
     root,
     hamburgerIcon,
     menu,

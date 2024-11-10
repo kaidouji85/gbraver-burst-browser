@@ -17,8 +17,14 @@ export function onRetryPush(
 ): void {
   action.event.stopPropagation();
   action.event.preventDefault();
-  props.se.play(props.changeValueSound);
-  props.background.className = BACKGROUND;
-  props.retryConfirmDialog.className = RETRY_CONFIRM_DIALOG;
-  props.menu.className = MENU_HIDDEN;
+  if (!props.canRetry) {
+    return;
+  }
+
+  props.exclusive.execute(async () => {
+    props.se.play(props.changeValueSound);
+    props.background.className = BACKGROUND;
+    props.retryConfirmDialog.className = RETRY_CONFIRM_DIALOG;
+    props.menu.className = MENU_HIDDEN;
+  });
 }

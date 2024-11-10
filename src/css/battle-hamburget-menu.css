@@ -53,6 +53,10 @@
   background-color: var(--button-background-color);
 }
 
+.battle-hamburger-menu__retry--disabled {
+  color: #a0a0a0;
+}
+
 .battle-hamburger-menu__background {
   position: fixed;
   width: 100vw;
