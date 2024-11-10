@@ -46,6 +46,9 @@ export type BattleScenePropsCreatorParams = BGMManagerContainer &
     /** コントローラータイプ */
     controllerType: BattleControllerType;
 
+    /** リトライ可能かどうか、trueで可能 */
+    canRetry: boolean;
+
     /** バトル進行オブジェクト */
     battleProgress: BattleProgress;
     /** カスタムバトルイベント */

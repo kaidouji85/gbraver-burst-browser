@@ -17,4 +17,6 @@ export type BattleViewCreatorParams = ResourcesContainer &
     gameLoop: Observable<GameLoop>;
     /** リサイズ */
     resize: Observable<Resize>;
+    /** リトライ可能かどうか、trueで可能 */
+    canRetry: boolean;
   };

@@ -69,7 +69,7 @@ export function createDOMLayerProps(
   });
   enemyShoutMessageWindow.visible(false);
 
-  const hamburgerMenu = new BattleHamburgerMenu({ ...params, canRetry: true });
+  const hamburgerMenu = new BattleHamburgerMenu(params);
 
   const miniController = new MiniController(params);
   return {

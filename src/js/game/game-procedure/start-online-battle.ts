@@ -92,6 +92,7 @@ export async function startOnlineBattle(
     controllerType: config.battleControllerType,
     emergencyStop: battle.suddenlyBattleNotifier(),
     customBattleEvent: createSeriousMatchEvent(),
+    canRetry: false,
   });
   bindBattleScene(props, battleScene);
   await waitAnimationFrame();

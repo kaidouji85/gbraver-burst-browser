@@ -62,6 +62,7 @@ export async function startNPCBattleStage(
     initialState: npcBattle.stateHistory(),
     controllerType: config.battleControllerType,
     customBattleEvent: createSeriousMatchEvent(),
+    canRetry: true,
   });
   bindBattleScene(props, battleScene);
   await waitAnimationFrame();

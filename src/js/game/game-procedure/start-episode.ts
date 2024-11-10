@@ -50,6 +50,7 @@ export async function startEpisode(
     initialState: npcBattle.stateHistory(),
     customBattleEvent: episode.event(props.resources),
     controllerType: "BigButton",
+    canRetry: true,
   });
   bindBattleScene(props, battleScene);
   await waitAnimationFrame();
