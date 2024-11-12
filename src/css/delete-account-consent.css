@@ -60,13 +60,8 @@
     var(--dialog-padding) var(--dialog-padding) var(--dialog-padding);
 }
 
-.delete-account-consent__title {
-  font-size: calc(var(--responsive-font-size) * 1.3);
-}
-
 .delete-account-consent__caption {
   margin-bottom: calc(var(--responsive-font-size) * 2);
-  font-size: calc(var(--responsive-font-size) * 0.8);
 }
 
 .delete-account-consent__close {
