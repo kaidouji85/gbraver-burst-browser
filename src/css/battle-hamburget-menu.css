@@ -1,7 +1,7 @@
 /** 戦闘画面用ハンバーガーメニュー */
 @media (orientation: landscape) {
   .battle-hamburger-menu {
-    --hamburger-icon-size: 48px;
+    --hamburger-icon-size: max(48px, calc(var(--responsive-font-size) * 3));
     --closer-width: 48px;
     --closer-height: 48px;
 
