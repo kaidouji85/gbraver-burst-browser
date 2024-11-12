@@ -60,7 +60,12 @@
     var(--dialog-padding) var(--dialog-padding) var(--dialog-padding);
 }
 
+.delete-account-consent__title {
+  font-size: calc(var(--responsive-font-size) * 1);
+}
+
 .delete-account-consent__caption {
+  font-size: calc(var(--responsive-font-size) * 0.8);
   margin-bottom: calc(var(--responsive-font-size) * 2);
 }
 
