@@ -56,10 +56,6 @@
   left: calc(var(--closer-height) * -0.5);
 }
 
-.reject-private-match-entry__title {
-  font-size: calc(var(--responsive-font-size) * 1.3);
-}
-
 .reject-private-match-entry__description {
   font-size: calc(var(--responsive-font-size) * 0.8);
   margin-bottom: calc(var(--responsive-font-size) * 2);
