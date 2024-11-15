@@ -15,6 +15,8 @@ import { difficultySelectionCompleteContainer } from "./on-difficulty-selection-
 import { endBattleContainer } from "./on-end-battle";
 import { endNetworkErrorContainer } from "./on-end-network-error";
 import { endNPCEndingContainer } from "./on-end-npc-ending";
+import { forceEndBattleContainer } from "./on-force-end-battle";
+import { forceRetryContainer } from "./on-force-retry";
 import { loginCancelContainer } from "./on-login-cancel";
 import { logoutContainer } from "./on-logout";
 import { matchingCanceledContainer } from "./on-matching-cancel";
@@ -70,6 +72,8 @@ const gameActionListeners: { [key in string]: GameActionListener } = {
   ...withdrawPrivateMatchEntryContainer,
   ...privateMatchEntryContainer,
   ...visibilityChangeContainer,
+  ...forceEndBattleContainer,
+  ...forceRetryContainer,
 };
 
 /**

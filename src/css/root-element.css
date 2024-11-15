@@ -31,6 +31,7 @@
   --sub-background-color: #383c3c;
 
   /** z-index */
+  --zindex-battle-hamburger-menu: 7;
   --zindex-mini-controller: 7;
   --zindex-background: 8;
   --zindex-dialog: 9;

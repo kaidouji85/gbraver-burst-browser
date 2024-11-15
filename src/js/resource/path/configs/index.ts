@@ -1,6 +1,7 @@
 import { ShinyaPathConfigs } from "../../texture/configs/shinya";
 import { PathConfig } from "../resource";
 import { BatteryIconPathConfigs } from "./battery-icon";
+import { BattleHamburgerMenuConfigs } from "./battle-hamburger-menu";
 import { CheckPathConfigs } from "./check";
 import { DialogPathConfig } from "./dialog";
 import { EndingPathConfigs } from "./ending";
@@ -48,6 +49,7 @@ export const PathConfigs: PathConfig[] = [
   ...HelpIconPathConfigs,
   ...MessageWindowPathConfigs,
   ...TurnIndicatorConfigs,
+  ...BattleHamburgerMenuConfigs,
 ];
 
 /** プリロード対象となるパス設定 */

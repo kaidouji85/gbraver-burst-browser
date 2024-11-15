@@ -3,16 +3,11 @@ import { GameAction } from "../../game-actions";
 import { DifficultySelectionComplete } from "../../game-actions/difficulty-selection-complete";
 import { GameProps } from "../../game-props";
 import { DifficultySelect, NPCBattle } from "../../in-progress/npc-battle";
-import {
-  createNPCBattleState,
-  getCurrentNPCStage,
-  getNPCStageLevel,
-} from "../../npc-battle";
-import {
-  DefaultStage,
-  DefaultStages,
-  NPCBattleCourses,
-} from "../../npc-battle-courses";
+import { DefaultStages, NPCBattleCourses } from "../../npc-battle/courses";
+import { createNPCBattleState } from "../../npc-battle/create-npc-battle-state";
+import { getCurrentNPCStage } from "../../npc-battle/get-current-npc-stage";
+import { getNPCStageLevel } from "../../npc-battle/get-npc-stage-level";
+import { DefaultStage } from "../../npc-battle/stages/default-stage";
 import { startNPCBattleStage } from "../start-npc-battle-stage";
 
 /**

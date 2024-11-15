@@ -1,3 +1,4 @@
+import { wbr } from "../../../dom/wbr";
 import { Resources } from "../../../resource";
 import { PathIds } from "../../../resource/path/ids";
 import { ROOT_CLASS } from "./class-name";
@@ -18,7 +19,7 @@ export function rootInnerHTML(resources: Resources, ids: DataIDs) {
     <div class="${ROOT_CLASS}__background" data-id="${ids.background}"></div>
     <div class="${ROOT_CLASS}__dialog">
       <img class="${ROOT_CLASS}__closer" src="${closerPath}" alt="閉じる" data-id="${ids.closer}">
-      <div class="${ROOT_CLASS}__title">マッチメイク失敗</div>
+      <div class="${ROOT_CLASS}__title">マッチメイクに${wbr}失敗しました。</div>
       <div class="${ROOT_CLASS}__description">${description}</div>
       <button class="${ROOT_CLASS}__close-dialog" data-id="${ids.closeButton}">閉じる</button>
     </div>

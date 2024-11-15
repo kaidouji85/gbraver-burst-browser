@@ -5,5 +5,6 @@ import { DOMLayerProps } from "../props";
  * @param props レイヤープロパティ
  */
 export function destructor(props: DOMLayerProps): void {
+  props.hamburgerMenu.destructor();
   props.miniController.destructor();
 }

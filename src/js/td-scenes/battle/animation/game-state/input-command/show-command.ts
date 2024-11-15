@@ -2,6 +2,7 @@ import { Command } from "gbraver-burst-core";
 
 import { all } from "../../../../../animation/all";
 import { Animate } from "../../../../../animation/animate";
+import { onStart } from "../../../../../animation/on-start";
 import { ButtonConfig } from "../../../../../game-dom/mini-controller/button-config";
 import { canBurstButtonPush } from "../../../can-burst-button-push";
 import { canPilotButtonPush } from "../../../can-pilot-button-push";
@@ -64,6 +65,9 @@ function showButtons(param: Readonly<AnimationParam>): Animate {
     param.view.hud.gameObjects.burstButtonLeadLine.show(),
     param.view.hud.gameObjects.pilotButton.open(canPilotSkill),
     param.view.hud.gameObjects.pilotButtonLeadLine.show(),
+    onStart(() => {
+      param.view.dom.hamburgerMenu.show();
+    }),
   );
 }
 
@@ -75,7 +79,12 @@ function showButtons(param: Readonly<AnimationParam>): Animate {
 function showMiniController(param: AnimationParam): Animate {
   const miniControllerConfig = toMiniControllerConfig(param);
   param.view.dom.miniController.engage(miniControllerConfig);
-  return param.view.dom.miniController.show();
+  return all(
+    param.view.dom.miniController.show(),
+    onStart(() => {
+      param.view.dom.hamburgerMenu.show();
+    }),
+  );
 }
 
 /** コマンド表示パラメータ */
