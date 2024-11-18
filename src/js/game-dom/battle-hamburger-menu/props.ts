@@ -46,8 +46,10 @@ export type BattleHamburgerMenuProps = {
   /** 排他制御 */
   readonly exclusive: Exclusive;
 
+  /** バトルシミュレーター開始通知 */
+  readonly battleSimulatorStartNotifier: Subject<void>;
   /** リトライ通知 */
-  retryNotifier: Subject<void>;
+  readonly retryNotifier: Subject<void>;
   /** バトル終了通知 */
-  endBattleNotifier: Subject<void>;
+  readonly endBattleNotifier: Subject<void>;
 };

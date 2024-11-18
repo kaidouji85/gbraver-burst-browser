@@ -11,7 +11,7 @@ import { DOMLayerProps } from "../props";
 export function notifyBattleAction(
   props: DOMLayerProps,
 ): Observable<BattleSceneAction> {
-  const { miniController } = props;
+  const { miniController, hamburgerMenu } = props;
   return merge(
     miniController
       .batteryPushNotifier()
@@ -27,5 +27,8 @@ export function notifyBattleAction(
     miniController
       .pilotPushNotifier()
       .pipe(map(() => ({ type: "doPilotSkillByMiniController" }) as const)),
+    hamburgerMenu
+      .notifyBattleSimulatorStart()
+      .pipe(map(() => ({ type: "battleSimulatorStart" }) as const)),
   );
 }
