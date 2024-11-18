@@ -14,7 +14,6 @@ export function onBattleSimulatorPush(
   action.event.preventDefault();
   action.event.stopPropagation();
   props.exclusive.execute(async () => {
-    props.se.play(props.changeValueSound);
     props.menu.className = MENU_HIDDEN;
     props.battleSimulatorStartNotifier.next();
   });
