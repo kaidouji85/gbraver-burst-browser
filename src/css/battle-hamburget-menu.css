@@ -48,6 +48,13 @@
   display: none;
 }
 
+.battle-hamburger-menu__separation {
+  height: 0;
+  border-top: solid #626262 1px;
+}
+
+
+.battle-hamburger-menu__battle-simulator:hover,
 .battle-hamburger-menu__retry:hover,
 .battle-hamburger-menu__end-battle:hover {
   background-color: var(--button-background-color);
