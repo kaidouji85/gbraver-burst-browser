@@ -13,6 +13,7 @@ export function onBattleSimulatorPush(
   action.event.preventDefault();
   action.event.stopPropagation();
   props.exclusive.execute(async () => {
-    console.log("onBattleSimulatorPush");
+    props.se.play(props.changeValueSound);
+    props.battleSimulatorStartNotifier.next();
   });
 }

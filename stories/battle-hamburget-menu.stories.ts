@@ -16,6 +16,9 @@ const hamburgerMenuStory = (canRetry: boolean) =>
   domStub((params) => {
     const menu = new BattleHamburgerMenu({ ...params, canRetry });
     menu.show();
+    menu.notifyBattleSimulatorStart().subscribe(() => {
+      console.log("battle simulator start");
+    });
     menu.notifyRetry().subscribe(() => {
       console.log("retry");
     });

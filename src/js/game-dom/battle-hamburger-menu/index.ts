@@ -43,6 +43,14 @@ export class BattleHamburgerMenu {
   }
 
   /**
+   * バトルシミュレーター開始通知
+   * @returns 通知ストリーム
+   */
+  notifyBattleSimulatorStart(): Observable<void> {
+    return this.#props.battleSimulatorStartNotifier;
+  }
+
+  /**
    * リトライ通知
    * @returns 通知ストリーム
    */
