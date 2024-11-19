@@ -57,7 +57,7 @@ export class Renderer implements OverlapNotifier, RendererDomGetter, Rendering {
    * シーン終了時に呼ばれる想定
    */
   dispose(): void {
-    this.#threeJsRender.dispose();
+    this.#threeJsRender.renderLists.dispose();
   }
 
   /**
