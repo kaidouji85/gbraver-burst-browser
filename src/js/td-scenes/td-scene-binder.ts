@@ -1,7 +1,6 @@
 import { Unsubscribable } from "rxjs";
 
 import { CssHUDUIScale } from "../css/hud-ui-scale";
-import { Renderer } from "../render";
 import { TDScene } from "./td-scene";
 
 /** three.js系シーンをバインドする */
@@ -12,18 +11,14 @@ export class TDSceneBinder {
   #scene: TDScene | null;
   /** cssカスタムプロパティ --hud-ui-scale */
   #hudUIScale: CssHUDUIScale;
-  /** レンダラ管理オブジェクト */
-  #renderer: Renderer;
   /** アンサブスクライバ */
   #unsubscribers: Unsubscribable[];
 
   /**
    * コンストラクタ
-   * @param renderer レンダラ管理オブジェクト
    * @param hudUIScale cssカスタムプロパティ --hud-ui-scale
    */
-  constructor(renderer: Renderer, hudUIScale: CssHUDUIScale) {
-    this.#renderer = renderer;
+  constructor(hudUIScale: CssHUDUIScale) {
     this.#hudUIScale = hudUIScale;
     this.#scene = null;
     this.#domLayerElement = document.createElement("div");
@@ -54,7 +49,6 @@ export class TDSceneBinder {
   dispose(): void {
     this.#scene?.destructor();
     this.#scene = null;
-    this.#renderer.dispose();
     this.#domLayerElement.innerHTML = "";
     this.#unsubscribers.forEach((v) => {
       v.unsubscribe();
