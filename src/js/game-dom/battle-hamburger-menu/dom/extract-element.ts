@@ -16,6 +16,15 @@ export const extractMenu = (root: HTMLElement): HTMLElement =>
   root.querySelector(`[data-id="menu"]`) ?? document.createElement("div");
 
 /**
+ * ルート要素からバトルシミュレーターを抽出する
+ * @param root ルート要素
+ * @returns 抽出結果
+ */
+export const extractBattleSimulator = (root: HTMLElement): HTMLElement =>
+  root.querySelector(`[data-id="battle-simulator"]`) ??
+  document.createElement("div");
+
+/**
  * ルート要素からリトライを抽出する
  * @param root ルート要素
  * @returns 抽出結果

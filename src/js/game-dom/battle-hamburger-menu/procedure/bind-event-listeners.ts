@@ -4,11 +4,13 @@ import { domPushStream } from "../../../dom/push-dom";
 import { pushWindowsStream } from "../../../window/push-window";
 import {
   extractBackGround,
+  extractBattleSimulator,
   extractEndBattle,
   extractRetry,
 } from "../dom/extract-element";
 import { BattleHamburgerMenuProps } from "../props";
 import { onBackgroundPush } from "./on-background-push";
+import { onBattleSimulatorPush } from "./on-battle-simulator-push";
 import { onEndBattleButtonPush } from "./on-end-battle-button-push";
 import { onEndBattleCancelPush } from "./on-end-battle-cancel-push";
 import { onEndBattleConfirmDialogCloserPush } from "./on-end-battle-confirm-dialog-closer-push";
@@ -49,6 +51,9 @@ export function bindEventListeners(
     }),
     domPushStream(props.retryButton).subscribe((action) => {
       onRetryButtonPush(props, action);
+    }),
+    domPushStream(extractBattleSimulator(props.root)).subscribe((action) => {
+      onBattleSimulatorPush(props, action);
     }),
     domPushStream(extractEndBattle(props.root)).subscribe((action) => {
       onEndBattlePush(props, action);
