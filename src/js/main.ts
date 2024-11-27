@@ -7,8 +7,8 @@ import {
 import * as THREE from "three";
 
 import { isMobile } from "./device-ditect/is-mobile";
+import { Game } from "./game";
 import { createLocalStorageConfigRepository } from "./game/config/repository/local-storage";
-import { Game } from "./game/index";
 
 /** webpack.config.js Webpack Define Pluginで定義したグローバル変数 */
 declare let GBRAVER_BURST_DESKTOP_RESOURCE_ROOT: string;
@@ -30,6 +30,12 @@ declare let GBRAVER_BURST_SHOULD_LOAD_DEVELOPING_RESOURCE: string;
 declare let GBRAVER_BURST_CAN_PLAY_DEVELOPING_ARMDOZER: string;
 declare let GBRAVER_BURST_CAN_PLAY_DEVELOPING_PILOT: string;
 
+/** モバイル用リソースルート */
+const mobileResourceRoot = { get: () => GBRAVER_BURST_MOBILE_RESOURCE_ROOT };
+
+/** デスクトップ用リソースルート */
+const desktopResourceRoot = { get: () => GBRAVER_BURST_DESKTOP_RESOURCE_ROOT };
+
 THREE.ColorManagement.enabled = false;
 
 /**
@@ -43,13 +49,7 @@ export async function main(): Promise<void> {
     ownURL: GBRAVER_BURST_OWN_ROOT_URL,
   });
   const api = await createBrowserSDK(GBRAVER_BURST_WEBSOCKET_API_URL);
-  const resourceRoot = isMobile()
-    ? {
-        get: () => GBRAVER_BURST_MOBILE_RESOURCE_ROOT,
-      }
-    : {
-        get: () => GBRAVER_BURST_DESKTOP_RESOURCE_ROOT,
-      };
+  const resourceRoot = isMobile() ? mobileResourceRoot : desktopResourceRoot;
   const game = new Game({
     resourceRoot,
     api: api,
