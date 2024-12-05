@@ -8,7 +8,7 @@
     "email": "kaidouji85@gmail.com"
   },
   "dependencies": {
-    "@gbraver-burst-network/browser-sdk": "^1.16.9",
+    "@gbraver-burst-network/browser-sdk": "^1.16.10",
     "@tweenjs/tween.js": "^25.0.0",
     "gbraver-burst-core": "1.32.1",
     "handlebars": "^4.7.8",
@@ -73,7 +73,7 @@
     "ts-node": "^10.9.2",
     "typescript": "^5.7.2",
     "typescript-eslint": "^8.17.0",
-    "webpack": "^5.97.0",
+    "webpack": "^5.97.1",
     "webpack-cli": "^5.1.4",
     "webpack-dev-server": "^5.1.0"
   },
