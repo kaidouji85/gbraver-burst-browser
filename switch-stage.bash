@@ -11,4 +11,4 @@ readonly UPDATED_ORIGIN_PATH="switch-stage__updated-origin-path.json"
 
 aws cloudfront get-distribution-config --id "${DISTRIBUTION_ID}" >"${ORIGIN}"
 jq .DistributionConfig "${ORIGIN}" >"${DISTRIBUTION_CONFIG}"
-jq "(.Origins.Items[] | select(.Id == \"${ORIGIN_ID}\") | .OriginPath) |= \"/${STAGE}\"" "${UPDATE_DISTRIBUTION_CONFIG}" >"${UPDATED_ORIGIN_PATH}"
+jq "(.Origins.Items[] | select(.Id == \"${ORIGIN_ID}\") | .OriginPath) |= \"/${STAGE}\"" "${DISTRIBUTION_CONFIG}" >"${UPDATED_ORIGIN_PATH}"
