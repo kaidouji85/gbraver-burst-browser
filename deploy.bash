@@ -1,16 +1,12 @@
 #!/bin/bash
+
 set -Ceu
+readonly USAGE="Usage: $0 <S3_BUCKET> <DISTRIBUTION_ID> <ASSETLINKS_JSON_URI>"
+readonly S3_BUCKET="${1?"${USAGE}"}"
+readonly DISTRIBUTION_ID="${2?"${USAGE}"}"
+readonly ASSETLINKS_JSON_URI="${3?"${USAGE}"}"
+
 cd "$(dirname "${0}")"
-
-if [ $# != 3 ]; then
-  echo 'invalid param'
-  exit 1
-fi
-
-S3_BUCKET=$1
-DISTRIBUTION_ID=$2
-ASSETLINKS_JSON_URI=$3
-
 npm run build:production
 npm run build:sw
 npm run build:clear-sw
