@@ -44,7 +44,16 @@ npm start
 ### デプロイコマンド
 
 ```shell script
-./deploy.bash <アップロードするS3バケット名> <CloudFrontのdistributionId> <assetlinks.jsonのS3 URI>
+# デプロイ
+./deploy.bash <アップロードするS3バケット名> <ステージ名>
+
+# ステージ切り替え
+# 内部的にはCloudFrontのオリジンパスを切り替えている
+./switch-stage.bash <CloudFrontのdistributionId> <CloudFrontのs3バケットのオリジン名> <ステージ名>
+
+# CDNのキャッシュをクリア
+# デプロイ、ステージ切り替えなどの一連の操作が終わったら実行する
+./clear-cdn.bash <CloudFrontのdistributionId>
 ```
 
 ## CodeBuild設定
@@ -63,6 +72,7 @@ npm start
 | /GbraverBurst/dev/googleMeasurementID     | String | 開発環境用のGoogle Analytics 測定ID         |
 | /GbraverBurst/dev/s3Bucket                | String | デプロイ対象となるS3バケット名                    |
 | /GbraverBurst/dev/distributionId          | String | デプロイ対象のCloudFrontのdistrubution ID   |
+| /GbraverBurst/dev/cloudFrontOriginName    | String | CloudFrontのs3バケットのオリジン名             |
 | /GbraverBurst/dev/ownRootUrl              | String | 開発環境を公開しているURL                      |
 | /GbraverBurst/dev/twitterSite             | String | OGP twitter:site で使うtwitterアカウント    |
 | /GbraverBurst/dev/howToPlayUrl            | String | 遊び方スライドのURL                         |
@@ -86,6 +96,7 @@ npm start
 | /GbraverBurst/prod/googleMeasurementID     | String | 本番環境用のGoogle Analytics 測定ID         |
 | /GbraverBurst/prod/s3Bucket                | String | デプロイ対象となるS3バケット名                    |
 | /GbraverBurst/prod/distributionId          | String | デプロイ対象のCloudFrontのdistrubution ID   |
+| /GbraverBurst/prod/cloudFrontOriginName    | String | CloudFrontのs3バケットのオリジン名             |
 | /GbraverBurst/prod/ownRootUrl              | String | 本番環境を公開しているURL                      |
 | /GbraverBurst/prod/twitterSite             | String | OGP twitter:site で使うtwitterアカウント    |
 | /GbraverBurst/prod/howToPlayUrl            | String | 遊び方スライドのURL                         |

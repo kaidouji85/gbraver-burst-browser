@@ -35,4 +35,5 @@ phases:
   build:
     commands:
       - . ./buildspec-env
-      - ./deploy.bash "${S3_BUCKET}" "${STAGE}" "${DISTRIBUTION_ID}" "${ASSETLINKS_JSON_URI}"
+      - ./deploy.bash "${S3_BUCKET}" "${STAGE}" "${ASSETLINKS_JSON_URI}"
+      - ./clear-cdn.bash "${DISTRIBUTION_ID}"
