@@ -1,0 +1,13 @@
+version: 0.2
+env:
+  parameter-store:
+    DISTRIBUTION_ID: /GbraverBurst/prod/distributionId
+    CLOUD_FRONT_ORIGIN_NAME: /GbraverBurst/prod/cloudFrontOriginName
+phases:
+  install:
+    runtime-versions:
+      nodejs: 22
+  build:
+    commands:
+      - ./switch-stage.bash "${DISTRIBUTION_ID}" "${CLOUD_FRONT_ORIGIN_NAME}" "${STAGE}"
+      - ./clear-cdn.bash "${DISTRIBUTION_ID}"
