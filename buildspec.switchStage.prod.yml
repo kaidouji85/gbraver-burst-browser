@@ -9,4 +9,5 @@ phases:
       nodejs: 22
   build:
     commands:
-      - ./clear-cdn.bash "${DISTRIBUTION_ID}" "${CLOUD_FRONT_ORIGIN_NAME}" "${STAGE}"
+      - ./switch-stage.bash "${DISTRIBUTION_ID}" "${CLOUD_FRONT_ORIGIN_NAME}" "${STAGE}"
+      - ./clear-cdn.bash "${DISTRIBUTION_ID}"
