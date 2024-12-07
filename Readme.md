@@ -107,7 +107,7 @@ npm start
 | /GbraverBurst/prod/isAPIServerEnable       | String | APIサーバが利用できるか否かのフラグ、```true```で利用可能 |
 | /GbraverBurst/prod/cognitoHostedUIDomain   | String | cognito Hosted UI のドメイン             |
 
-3. BuildSpecに```prod.buildspec.yml```を指定したCodeBuildを構築する
+3. BuildSpecに```buildspec.prod.yml```を指定したCodeBuildを構築する
 
 ## storybookを動かす
 
