@@ -9,6 +9,12 @@ readonly ORIGIN="switch-stage__origin.json"
 readonly DISTRIBUTION_CONFIG="switch-stage__distribution-config.json"
 readonly UPDATED_ORIGIN_PATH="switch-stage__updated-origin-path.json"
 
+if [ -z "${DISTRIBUTION_ID}" ] || [ -z "${ORIGIN_NAME}" ] || [ -z "${STAGE}" ]; then
+  echo "Error: One or more required variables are empty."
+  echo "${USAGE}"
+  exit 1
+fi
+
 aws cloudfront get-distribution-config --id "${DISTRIBUTION_ID}" >"${ORIGIN}"
 jq .DistributionConfig "${ORIGIN}" >"${DISTRIBUTION_CONFIG}"
 jq "(.Origins.Items[] | select(.Id == \"${ORIGIN_NAME}\") | .OriginPath) |= \"/${STAGE}\"" "${DISTRIBUTION_CONFIG}" >"${UPDATED_ORIGIN_PATH}"
