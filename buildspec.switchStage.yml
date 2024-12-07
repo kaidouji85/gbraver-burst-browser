@@ -7,9 +7,6 @@ phases:
   install:
     runtime-versions:
       nodejs: 22
-  pre_build:
-    commands:
-      - npm ci
   build:
     commands:
       - ./clear-cdn.bash "${DISTRIBUTION_ID}" "${CLOUD_FRONT_ORIGIN_NAME}" "${STAGE}"
