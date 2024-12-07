@@ -6,6 +6,12 @@ readonly S3_BUCKET="${1?"${USAGE}"}"
 readonly STAGE="${2?"${USAGE}"}"
 readonly ASSETLINKS_JSON_URI="${3?"${USAGE}"}"
 
+if [ -z "${S3_BUCKET}" ] || [ -z "${STAGE}" ] || [ -z "${ASSETLINKS_JSON_URI}" ]; then
+  echo "Error: One or more required variables are empty."
+  echo "${USAGE}"
+  exit 1
+fi
+
 cd "$(dirname "${0}")"
 npm run build:production
 npm run build:sw
