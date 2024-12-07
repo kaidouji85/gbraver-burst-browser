@@ -56,12 +56,9 @@ npm start
 ./clear-cdn.bash <CloudFrontのdistributionId>
 ```
 
-## CodeBuild設定
+## AWS環境設定
 
-ビルド環境は[aws/codebuild/standard:7.0](https://github.com/aws/aws-codebuild-docker-images/tree/master/ubuntu/standard/7.0)
-を利用してください。
-
-### 開発環境設定
+### 開発環境
 
 1. [GブレイバーバーストAPIサーバ](https://github.com/kaidouji85/gbraver-burst-network)の開発環境をデプロイする
 2. 以下のParameter Storeを作成する
@@ -83,9 +80,14 @@ npm start
 | /GbraverBurst/dev/isAPIServerEnable       | String | APIサーバが利用できるか否かのフラグ、```true```で利用可能 |
 | /GbraverBurst/dev/cognitoHostedUIDomain   | String | cognito Hosted UI のドメイン             |
 
-3. BuildSpecに```buildspec.yml```を指定したCodeBuildを構築する
+3. 以下のCodeBuildを構築する
 
-### 本番環境設定
+| 役割       | buildspec                 | 環境                                                                                                               |
+|----------|---------------------------|------------------------------------------------------------------------------------------------------------------|
+| ビルド      | buildspec.yml             | [aws/codebuild/standard:7.0](https://github.com/aws/aws-codebuild-docker-images/tree/master/ubuntu/standard/7.0) |
+| ステージ切り替え | buildspec.switchStage.yml | [aws/codebuild/standard:7.0](https://github.com/aws/aws-codebuild-docker-images/tree/master/ubuntu/standard/7.0) |
+
+### 本番環境
 
 1. [GブレイバーバーストAPIサーバ](https://github.com/kaidouji85/gbraver-burst-network)の本番環境をデプロイする
 2. 以下のParameter Store を作成する
@@ -107,7 +109,12 @@ npm start
 | /GbraverBurst/prod/isAPIServerEnable       | String | APIサーバが利用できるか否かのフラグ、```true```で利用可能 |
 | /GbraverBurst/prod/cognitoHostedUIDomain   | String | cognito Hosted UI のドメイン             |
 
-3. BuildSpecに```buildspec.prod.yml```を指定したCodeBuildを構築する
+3. 以下のCodeBuildを構築する
+
+| 役割       | buildspec                      | 環境                                                                                                               |
+|----------|--------------------------------|------------------------------------------------------------------------------------------------------------------|
+| ビルド      | buildspec.prod.yml             | [aws/codebuild/standard:7.0](https://github.com/aws/aws-codebuild-docker-images/tree/master/ubuntu/standard/7.0) |
+| ステージ切り替え | buildspec.prod.switchStage.yml | [aws/codebuild/standard:7.0](https://github.com/aws/aws-codebuild-docker-images/tree/master/ubuntu/standard/7.0) |
 
 ## storybookを動かす
 
