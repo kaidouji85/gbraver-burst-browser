@@ -15,6 +15,7 @@ if [ -z "${DISTRIBUTION_ID}" ] || [ -z "${ORIGIN_NAME}" ] || [ -z "${STAGE}" ]; 
   exit 1
 fi
 
+cd "$(dirname "${0}")"
 aws cloudfront get-distribution-config --id "${DISTRIBUTION_ID}" >"${ORIGIN}"
 jq .DistributionConfig "${ORIGIN}" >"${DISTRIBUTION_CONFIG}"
 jq "(.Origins.Items[] | select(.Id == \"${ORIGIN_NAME}\") | .OriginPath) |= \"/${STAGE}\"" "${DISTRIBUTION_CONFIG}" >"${UPDATED_ORIGIN_PATH}"
