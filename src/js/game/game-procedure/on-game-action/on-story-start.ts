@@ -14,7 +14,7 @@ type Options = {
 /**
  * ストーリーモード開始時の処理
  * 本関数にはpropsを変更する副作用がある
- * @param props ゲームプロパティ
+ * @param options オプション
  * @returns 処理が完了したら発火するPromise
  */
 export async function onStoryStart(options: Options): Promise<void> {

@@ -20,8 +20,7 @@ type Options = {
 /**
  * 難易度選択完了時のイベント
  * 本関数はpropsを変更する副作用がある
- * @param props ゲームプロパティ
- * @param action アクション
+ * @param options オプション
  * @returns 処理が完了したら発火するPromise
  */
 export async function onDifficultySelectionComplete(

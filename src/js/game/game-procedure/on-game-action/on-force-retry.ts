@@ -61,7 +61,7 @@ type OnForceRetryOptions = {
 
 /**
  * プレイヤーによるバトルのリトライ
- * @param props ゲームプロパティ
+ * @param options オプション
  */
 export async function onForceRetry(options: OnForceRetryOptions) {
   const { props } = options;

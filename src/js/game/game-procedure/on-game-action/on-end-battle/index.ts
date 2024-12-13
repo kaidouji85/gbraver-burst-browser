@@ -14,8 +14,7 @@ type Options = {
 
 /**
  * 戦闘終了時の処理
- * @param props ゲームプロパティ
- * @param action アクション
+ * @param options オプション
  * @returns 処理が完了したら発火するPromise
  */
 export async function onEndBattle(options: Options): Promise<void> {

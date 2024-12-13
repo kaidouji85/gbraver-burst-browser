@@ -37,7 +37,7 @@ type OnNetBattleStartOptions = {
 
 /**
  * ネットバトル開始
- * @param props ゲームプロパティ
+ * @param options オプション
  * @returns 処理が完了したら発火するPromise
  */
 export async function onNetBattleStart(

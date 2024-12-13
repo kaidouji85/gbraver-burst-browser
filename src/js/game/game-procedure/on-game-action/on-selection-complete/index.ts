@@ -16,8 +16,7 @@ type Options = {
 /**
  * プレイヤーキャラクター 選択完了時の処理
  * 本関数にはpropsを変更する副作用がある
- * @param props ゲームプロパティ
- * @param action アクション
+ * @param options オプション
  * @returns 処理が完了したら発火するPromise
  */
 export async function onSelectionComplete(options: Options): Promise<void> {
