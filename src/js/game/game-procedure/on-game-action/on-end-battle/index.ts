@@ -1,10 +1,16 @@
 import { parseBrowserConfig } from "../../../config/parser/browser-config";
-import { GameAction } from "../../../game-actions";
 import { EndBattle } from "../../../game-actions/end-battle";
 import { GameProps } from "../../../game-props";
 import { executePostEpisodeIfNeeded } from "./execute-post-episode-if-needed";
 import { executePostNetBattleIfNeeded } from "./execute-post-net-battle-if-needed";
 import { executePostNPCBattleIfNeeded } from "./execute-post-npc-baattle-if-needed";
+
+type Options = {
+  /** ゲームプロパティ */
+  props: GameProps;
+  /** アクション */
+  action: Readonly<EndBattle>;
+};
 
 /**
  * 戦闘終了時の処理
@@ -12,10 +18,8 @@ import { executePostNPCBattleIfNeeded } from "./execute-post-npc-baattle-if-need
  * @param action アクション
  * @returns 処理が完了したら発火するPromise
  */
-async function onEndBattle(
-  props: GameProps,
-  action: Readonly<EndBattle>,
-): Promise<void> {
+export async function onEndBattle(options: Options): Promise<void> {
+  const { props, action } = options;
   const config = await props.config.load();
   await props.config.save(
     parseBrowserConfig({
@@ -42,15 +46,3 @@ async function onEndBattle(
     return;
   }
 }
-
-/** アクションタイプ */
-const actionType = "EndBattle" as const;
-
-/** 戦闘終了時のリスナーコンテナ */
-export const endBattleContainer = {
-  [actionType]: (props: GameProps, action: GameAction) => {
-    if (action.type === actionType) {
-      onEndBattle(props, action);
-    }
-  },
-};

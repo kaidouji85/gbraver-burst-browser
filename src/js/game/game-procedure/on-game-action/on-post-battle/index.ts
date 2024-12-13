@@ -1,4 +1,3 @@
-import { GameAction } from "../../../game-actions";
 import { PostBattleAction } from "../../../game-actions/post-battle-action";
 import { GameProps } from "../../../game-props";
 import { InProgress } from "../../../in-progress";
@@ -8,17 +7,22 @@ import { gotoEpisodeSelectorIfNeeded } from "./goto-episode-selector-if-needed";
 import { gotoNPCBattleStageIfNeeded } from "./goto-npc-battle-stage-if-needed";
 import { gotoTitleIfNeeded } from "./goto-title-if-needed";
 
+/** オプション */
+type Options = {
+  /** ゲームプロパティ */
+  props: GameProps;
+  /** アクション */
+  action: Readonly<PostBattleAction>;
+};
+
 /**
  * 戦闘終了後アクション決定時の処理
  * 本関数にはpropsを変更する副作用がある
- * @param props ゲームプロパティ
- * @param action アクション
+ * @param options オプション
  * @returns 処理が完了したら発火するPromise
  */
-async function onPostBattleAction(
-  props: GameProps,
-  action: PostBattleAction,
-): Promise<void> {
+export async function onPostBattleAction(options: Options): Promise<void> {
+  const { props, action } = options;
   let updated: InProgress = props.inProgress;
   if (await gotoTitleIfNeeded(props, action)) {
     updated = { type: "None" };
@@ -36,15 +40,3 @@ async function onPostBattleAction(
   }
   props.inProgress = updated;
 }
-
-/** アクションタイプ */
-const actionType = "PostBattleAction";
-
-/** 戦闘終了後アクションのリスナーコンテナ */
-export const postBattleActionContainer = {
-  [actionType]: (props: GameProps, action: GameAction) => {
-    if (action.type === actionType) {
-      onPostBattleAction(props, action);
-    }
-  },
-};

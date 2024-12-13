@@ -1,4 +1,4 @@
-import { GameAction } from "../../game-actions";
+import { ForceRetry } from "../../game-actions/force-retry";
 import { GameProps } from "../../game-props";
 import { PlayingEpisode } from "../../in-progress/story";
 import { getCurrentNPCStage } from "../../npc-battle/get-current-npc-stage";
@@ -51,11 +51,20 @@ async function forceRetryStory(props: Readonly<GameProps>): Promise<boolean> {
   return false;
 }
 
+/** onForceRetryオプション */
+type OnForceRetryOptions = {
+  /** ゲームプロパティ */
+  props: Readonly<GameProps>;
+  /** アクション */
+  action: ForceRetry;
+};
+
 /**
  * プレイヤーによるバトルのリトライ
  * @param props ゲームプロパティ
  */
-async function onForceRetry(props: Readonly<GameProps>) {
+export async function onForceRetry(options: OnForceRetryOptions) {
+  const { props } = options;
   if (await forceRetryNPCBattleIfNeeded(props)) {
     return;
   }
@@ -64,15 +73,3 @@ async function onForceRetry(props: Readonly<GameProps>) {
     return;
   }
 }
-
-/** アクションタイプ */
-const actionType = "ForceRetry";
-
-/** プレイヤーによるバトルのリトライのイベントリスナーコンテナ */
-export const forceRetryContainer = {
-  [actionType]: (props: GameProps, action: GameAction) => {
-    if (action.type === actionType) {
-      onForceRetry(props);
-    }
-  },
-};

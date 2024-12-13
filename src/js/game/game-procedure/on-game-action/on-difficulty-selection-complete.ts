@@ -1,5 +1,4 @@
 import { playerUuid } from "../../../uuid/player";
-import { GameAction } from "../../game-actions";
 import { DifficultySelectionComplete } from "../../game-actions/difficulty-selection-complete";
 import { GameProps } from "../../game-props";
 import { DifficultySelect, NPCBattle } from "../../in-progress/npc-battle";
@@ -10,6 +9,14 @@ import { getNPCStageLevel } from "../../npc-battle/get-npc-stage-level";
 import { DefaultStage } from "../../npc-battle/stages/default-stage";
 import { startNPCBattleStage } from "../start-npc-battle-stage";
 
+/** オプション */
+type Options = {
+  /** ゲームプロパティ */
+  props: GameProps;
+  /** アクション */
+  action: DifficultySelectionComplete;
+};
+
 /**
  * 難易度選択完了時のイベント
  * 本関数はpropsを変更する副作用がある
@@ -17,10 +24,10 @@ import { startNPCBattleStage } from "../start-npc-battle-stage";
  * @param action アクション
  * @returns 処理が完了したら発火するPromise
  */
-async function onDifficultySelectionComplete(
-  props: GameProps,
-  action: DifficultySelectionComplete,
+export async function onDifficultySelectionComplete(
+  options: Options,
 ): Promise<void> {
+  const { props, action } = options;
   if (
     !(
       props.inProgress.type === "NPCBattle" &&
@@ -54,15 +61,3 @@ async function onDifficultySelectionComplete(
   const level = getNPCStageLevel(npcBattleState);
   await startNPCBattleStage(props, npcBattleState.player, stage, level);
 }
-
-/** アクションタイプ */
-const actionType = "DifficultySelectionComplete";
-
-/** 難易度選択完了時イベントのリスナーコンテナ */
-export const difficultySelectionCompleteContainer = {
-  [actionType]: (props: GameProps, action: GameAction) => {
-    if (action.type === actionType) {
-      onDifficultySelectionComplete(props, action);
-    }
-  },
-};

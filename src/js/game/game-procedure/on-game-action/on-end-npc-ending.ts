@@ -1,15 +1,24 @@
 import { fadeOut, stop } from "../../../bgm/bgm-operators";
-import { GameAction } from "../../game-actions";
+import { EndNPCEnding } from "../../game-actions/end-npc-ending";
 import { GameProps } from "../../game-props";
 import { playTitleBGM } from "../play-title-bgm";
 import { startTitle } from "../start-title";
+
+/** オプション */
+type Options = {
+  /** ゲームプロパティ */
+  props: Readonly<GameProps>;
+  /** アクション */
+  action: EndNPCEnding;
+};
 
 /**
  * NPCバトルエンディングが終了した際の処理
  * @param props ゲームプロパティ
  * @returns 処理が完了したら発火するPromise
  */
-async function onEndNPCEnding(props: Readonly<GameProps>): Promise<void> {
+export async function onEndNPCEnding(options: Options): Promise<void> {
+  const { props } = options;
   await Promise.all([
     (async () => {
       await props.fader.fadeOut();
@@ -23,15 +32,3 @@ async function onEndNPCEnding(props: Readonly<GameProps>): Promise<void> {
   await props.fader.fadeIn();
   playTitleBGM(props);
 }
-
-/** アクションタイプ */
-const actionType = "EndNPCEnding";
-
-/** NPCバトルエンディング終了時のイベントリスナーコンテナ */
-export const endNPCEndingContainer = {
-  [actionType]: (props: GameProps, action: GameAction) => {
-    if (action.type === actionType) {
-      onEndNPCEnding(props);
-    }
-  },
-};

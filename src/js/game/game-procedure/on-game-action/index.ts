@@ -1,80 +1,40 @@
 import { GameAction } from "../../game-actions";
 import { GameProps } from "../../game-props";
-import { GameActionListener } from "./game-action-listener";
-import { accountDeleteConsentContainer } from "./on-account-delete-consent";
-import { arcadeStartContainer } from "./on-arcade-start";
-import { cancelAccountDeletionContainer } from "./on-cancel-account-deletion";
-import { cancelTutorialSelectContainer } from "./on-cancel-tutorial-select";
-import { casualMatchStartContainer } from "./on-casual-match-start";
-import { configChangeCancelContainer } from "./on-config-change-cancel";
-import { configChangeCompleteContainer } from "./on-config-change-complete";
-import { configChangeStartContainer } from "./on-config-change-start";
-import { deleteAccountContainer } from "./on-delete-account";
-import { difficultySelectionCancelContainer } from "./on-difficulty-selection-cancel";
-import { difficultySelectionCompleteContainer } from "./on-difficulty-selection-complete";
-import { endBattleContainer } from "./on-end-battle";
-import { endNetworkErrorContainer } from "./on-end-network-error";
-import { endNPCEndingContainer } from "./on-end-npc-ending";
-import { forceEndBattleContainer } from "./on-force-end-battle";
-import { forceRetryContainer } from "./on-force-retry";
-import { loginCancelContainer } from "./on-login-cancel";
-import { logoutContainer } from "./on-logout";
-import { matchingCanceledContainer } from "./on-matching-cancel";
-import { netBattleCancelContainer } from "./on-net-battle-cancel";
-import { netBattleStartContainer } from "./on-net-battle-start";
-import { postBattleActionContainer } from "./on-post-battle";
-import { privateMatchEntryContainer } from "./on-private-match-entry";
-import { privateMatchGuestStartContainer } from "./on-private-match-guest-start";
-import { privateMatchHostStartContainer } from "./on-private-match-host-start";
-import { reloadRequestContainer } from "./on-reload-request";
-import { selectEpisodeContainer } from "./on-select-episode";
-import { selectionCancelContainer } from "./on-selection-cancel";
-import { selectionCompleteContainer } from "./on-selection-complete";
-import { storyStartContainer } from "./on-story-start";
-import { suddenlyBattleEndContainer } from "./on-suddenly-battle-end";
-import { universalLoginContainer } from "./on-universal-login";
-import { visibilityChangeContainer } from "./on-visibility-change";
-import { webSocketAPIErrorContainer } from "./on-websocker-api-error";
-import { withdrawPrivateMatchEntryContainer } from "./on-withdraw-private-match-entry";
-
-/** ゲームアクションリスナーをあつめたもの */
-const gameActionListeners: { [key in string]: GameActionListener } = {
-  ...reloadRequestContainer,
-  ...endBattleContainer,
-  ...suddenlyBattleEndContainer,
-  ...postBattleActionContainer,
-  ...arcadeStartContainer,
-  ...casualMatchStartContainer,
-  ...matchingCanceledContainer,
-  ...selectionCompleteContainer,
-  ...selectionCancelContainer,
-  ...difficultySelectionCompleteContainer,
-  ...difficultySelectionCancelContainer,
-  ...endNPCEndingContainer,
-  ...universalLoginContainer,
-  ...logoutContainer,
-  ...accountDeleteConsentContainer,
-  ...deleteAccountContainer,
-  ...cancelAccountDeletionContainer,
-  ...loginCancelContainer,
-  ...endNetworkErrorContainer,
-  ...webSocketAPIErrorContainer,
-  ...configChangeStartContainer,
-  ...configChangeCancelContainer,
-  ...configChangeCompleteContainer,
-  ...storyStartContainer,
-  ...cancelTutorialSelectContainer,
-  ...selectEpisodeContainer,
-  ...netBattleStartContainer,
-  ...netBattleCancelContainer,
-  ...privateMatchHostStartContainer,
-  ...privateMatchGuestStartContainer,
-  ...withdrawPrivateMatchEntryContainer,
-  ...privateMatchEntryContainer,
-  ...visibilityChangeContainer,
-  ...forceEndBattleContainer,
-  ...forceRetryContainer,
-};
+import { onAccountDeleteConsent } from "./on-account-delete-consent";
+import { onArcadeStart } from "./on-arcade-start";
+import { onCancelAccountDeletion } from "./on-cancel-account-deletion";
+import { onCancelTutorialSelect } from "./on-cancel-tutorial-select";
+import { onCasualMatchStart } from "./on-casual-match-start";
+import { onConfigChangeCancel } from "./on-config-change-cancel";
+import { onConfigChangeComplete } from "./on-config-change-complete";
+import { onConfigChangeStart } from "./on-config-change-start";
+import { onDeleteAccount } from "./on-delete-account";
+import { onDifficultySelectionCancel } from "./on-difficulty-selection-cancel";
+import { onDifficultySelectionComplete } from "./on-difficulty-selection-complete";
+import { onEndBattle } from "./on-end-battle";
+import { onEndNetworkError } from "./on-end-network-error";
+import { onEndNPCEnding } from "./on-end-npc-ending";
+import { onForceEndBattle } from "./on-force-end-battle";
+import { onForceRetry } from "./on-force-retry";
+import { onLoginCancel } from "./on-login-cancel";
+import { onLogout } from "./on-logout";
+import { onMatchingCanceled } from "./on-matching-cancel";
+import { onNetBattleCancel } from "./on-net-battle-cancel";
+import { onNetBattleStart } from "./on-net-battle-start";
+import { onPostBattleAction } from "./on-post-battle";
+import { onPrivateMatchEntry } from "./on-private-match-entry";
+import { onPrivateMatchGuestStart } from "./on-private-match-guest-start";
+import { onPrivateMatchHostStart } from "./on-private-match-host-start";
+import { onReloadRequest } from "./on-reload-request";
+import { onSelectEpisode } from "./on-select-episode";
+import { onSelectionCancel } from "./on-selection-cancel";
+import { onSelectionComplete } from "./on-selection-complete";
+import { onStoryStart } from "./on-story-start";
+import { onSuddenlyEndBattle } from "./on-suddenly-battle-end";
+import { onUniversalLogin } from "./on-universal-login";
+import { onVisibilityChange } from "./on-visibility-change";
+import { onWebSocketAPIError } from "./on-websocker-api-error";
+import { onWithdrawPrivateMatchEntry } from "./on-withdraw-private-match-entry";
 
 /**
  * ゲームアクション発生時の処理
@@ -82,5 +42,76 @@ const gameActionListeners: { [key in string]: GameActionListener } = {
  * @param action 発生したアクション
  */
 export function onGameAction(props: GameProps, action: GameAction) {
-  gameActionListeners[action.type]?.(props, action);
+  switch (action.type) {
+    case "ReloadRequest":
+      return onReloadRequest({ props, action });
+    case "EndBattle":
+      return onEndBattle({ props, action });
+    case "SuddenlyBattleEnd":
+      return onSuddenlyEndBattle({ props, action });
+    case "PostBattleAction":
+      return onPostBattleAction({ props, action });
+    case "ArcadeStart":
+      return onArcadeStart({ props, action });
+    case "CasualMatchStart":
+      return onCasualMatchStart({ props, action });
+    case "MatchingCanceled":
+      return onMatchingCanceled({ props, action });
+    case "SelectionComplete":
+      return onSelectionComplete({ props, action });
+    case "SelectionCancel":
+      return onSelectionCancel({ props, action });
+    case "DifficultySelectionComplete":
+      return onDifficultySelectionComplete({ props, action });
+    case "DifficultySelectionCancel":
+      return onDifficultySelectionCancel({ props, action });
+    case "EndNPCEnding":
+      return onEndNPCEnding({ props, action });
+    case "UniversalLogin":
+      return onUniversalLogin({ props, action });
+    case "Logout":
+      return onLogout({ props, action });
+    case "AccountDeleteConsent":
+      return onAccountDeleteConsent({ props, action });
+    case "DeleteAccount":
+      return onDeleteAccount({ props, action });
+    case "CancelAccountDeletion":
+      return onCancelAccountDeletion({ props, action });
+    case "LoginCancel":
+      return onLoginCancel({ props, action });
+    case "EndNetworkError":
+      return onEndNetworkError({ props, action });
+    case "WebSocketAPIError":
+      return onWebSocketAPIError({ props, action });
+    case "ConfigChangeStart":
+      return onConfigChangeStart({ props, action });
+    case "ConfigChangeCancel":
+      return onConfigChangeCancel({ props, action });
+    case "ConfigChangeComplete":
+      return onConfigChangeComplete({ props, action });
+    case "StoryStart":
+      return onStoryStart({ props, action });
+    case "CancelTutorialSelect":
+      return onCancelTutorialSelect({ props, action });
+    case "SelectEpisode":
+      return onSelectEpisode({ props, action });
+    case "NetBattleStart":
+      return onNetBattleStart({ props, action });
+    case "NetBattleCancel":
+      return onNetBattleCancel({ props, action });
+    case "PrivateMatchHostStart":
+      return onPrivateMatchHostStart({ props, action });
+    case "PrivateMatchGuestStart":
+      return onPrivateMatchGuestStart({ props, action });
+    case "WithdrawPrivateMatchEntry":
+      return onWithdrawPrivateMatchEntry({ props, action });
+    case "PrivateMatchEntry":
+      return onPrivateMatchEntry({ props, action });
+    case "VisibilityChange":
+      return onVisibilityChange();
+    case "ForceEndBattle":
+      return onForceEndBattle({ props, action });
+    case "ForceRetry":
+      return onForceRetry({ props, action });
+  }
 }

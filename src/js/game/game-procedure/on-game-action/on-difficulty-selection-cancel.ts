@@ -1,12 +1,21 @@
-import { GameAction } from "../../game-actions";
+import { DifficultySelectionCancel } from "../../game-actions/difficulty-selection-cancel";
 import { GameProps } from "../../game-props";
+
+/** オプション */
+type Options = {
+  /** ゲームプロパティ */
+  props: GameProps;
+  /** アクション */
+  action: DifficultySelectionCancel;
+};
 
 /**
  * 難易度選択キャンセル時のイベント
  * 本関数にはpropsを変更する副作用がある
- * @param props ゲームプロパティ
+ * @param options オプション
  */
-function onDifficultySelectionCancel(props: GameProps): void {
+export function onDifficultySelectionCancel(options: Options): void {
+  const { props } = options;
   if (
     props.inProgress.type === "NPCBattle" &&
     props.inProgress.npcBattle.type === "DifficultySelect"
@@ -18,15 +27,3 @@ function onDifficultySelectionCancel(props: GameProps): void {
     props.domDialogBinder.hidden();
   }
 }
-
-/** アクションタイプ */
-const actionType = "DifficultySelectionCancel";
-
-/** 難易度選択キャンセル時のイベントリスナーコンテナ */
-export const difficultySelectionCancelContainer = {
-  [actionType]: (props: GameProps, action: GameAction) => {
-    if (action.type === actionType) {
-      onDifficultySelectionCancel(props);
-    }
-  },
-};

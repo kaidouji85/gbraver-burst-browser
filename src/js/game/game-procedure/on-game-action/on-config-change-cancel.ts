@@ -1,15 +1,24 @@
-import { GameAction } from "../../game-actions";
+import { ConfigChangeCancel } from "../../game-actions/config-change-cancel";
 import { GameProps } from "../../game-props";
 import { applyBattleWindowFontSize } from "../apply-battle-window-font-size";
 import { applySoundVolume } from "../apply-sound-volume";
 import { startTitle } from "../start-title";
 
+/** オプション */
+type Options = {
+  /** ゲームプロパティ */
+  props: Readonly<GameProps>;
+  /** アクション */
+  action: ConfigChangeCancel;
+};
+
 /**
  * 設定変更キャンセル時の処理
- * @param props ゲームプロパティ
+ * @param options オプション
  * @returns 処理が完了したら発火するPromise
  */
-async function onConfigChangeCancel(props: Readonly<GameProps>): Promise<void> {
+export async function onConfigChangeCancel(options: Options): Promise<void> {
+  const { props } = options;
   await props.fader.fadeOut();
   const config = await props.config.load();
   applyBattleWindowFontSize(config.battleWindowFontSize);
@@ -17,15 +26,3 @@ async function onConfigChangeCancel(props: Readonly<GameProps>): Promise<void> {
   await startTitle(props);
   await props.fader.fadeIn();
 }
-
-/** アクションタイプ */
-const actionType = "ConfigChangeCancel";
-
-/** 設定変更キャンセル時のイベントリスナーコンテナ */
-export const configChangeCancelContainer = {
-  [actionType]: (props: GameProps, action: GameAction) => {
-    if (action.type === actionType) {
-      onConfigChangeCancel(props);
-    }
-  },
-};
