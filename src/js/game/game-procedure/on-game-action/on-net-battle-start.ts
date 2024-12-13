@@ -2,7 +2,7 @@ import { LoginDialog } from "../../../dom-dialogs/login";
 import { NetBattleSelectorDialog } from "../../../dom-dialogs/net-battle-selector";
 import { NetworkErrorDialog } from "../../../dom-dialogs/network-error/network-error-dialog";
 import { WaitingDialog } from "../../../dom-dialogs/waiting/waiting-dialog";
-import { GameAction } from "../../game-actions";
+import { NetBattleStart } from "../../game-actions/net-battle-start";
 import { GameProps } from "../../game-props";
 import { switchLoginDialog } from "../switch-dialog/switch-login-dialog";
 import { switchNetBattleSelectorDialog } from "../switch-dialog/switch-net-battle-selector-dialog";
@@ -27,12 +27,23 @@ async function callLoginCheckAPI(props: Readonly<GameProps>): Promise<boolean> {
   }
 }
 
+/** onNetBattleStartオプション */
+type OnNetBattleStartOptions = {
+  /** ゲームプロパティ */
+  props: Readonly<GameProps>;
+  /** アクション */
+  action: NetBattleStart;
+};
+
 /**
  * ネットバトル開始
- * @param props ゲームプロパティ
+ * @param options オプション
  * @returns 処理が完了したら発火するPromise
  */
-async function onNetBattleStart(props: Readonly<GameProps>): Promise<void> {
+export async function onNetBattleStart(
+  options: OnNetBattleStartOptions,
+): Promise<void> {
+  const { props } = options;
   switchWaitingDialog(props, new WaitingDialog("ログインチェック中......"));
   const isLogin = await callLoginCheckAPI(props);
   props.domDialogBinder.hidden();
@@ -49,15 +60,3 @@ async function onNetBattleStart(props: Readonly<GameProps>): Promise<void> {
 
   switchNetBattleSelectorDialog(props, new NetBattleSelectorDialog(props));
 }
-
-/** アクションタイプ */
-const actionType = "NetBattleStart";
-
-/** ネットバトル開始時のイベントリスナーコンテナ */
-export const netBattleStartContainer = {
-  [actionType]: (props: GameProps, action: GameAction) => {
-    if (action.type === actionType) {
-      onNetBattleStart(props);
-    }
-  },
-};

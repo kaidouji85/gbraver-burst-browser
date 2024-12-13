@@ -1,29 +1,26 @@
 import { WaitingDialog } from "../../../dom-dialogs/waiting/waiting-dialog";
-import { GameAction } from "../../game-actions";
+import { DeleteAccount } from "../../game-actions/delete-account";
 import { GameProps } from "../../game-props";
 import { switchWaitingDialog } from "../switch-dialog/switch-waiting-dialog";
 
+/** オプション */
+type Options = {
+  /** ゲームプロパティ */
+  props: Readonly<GameProps>;
+  /** アクション */
+  action: DeleteAccount;
+};
+
 /**
  * アカウント削除
- * @param props ゲームプロパティ
+ * @param options オプション
  * @returns 処理が完了したら発火するPromise
  */
-async function onDeleteAccount(props: Readonly<GameProps>): Promise<void> {
+export async function onDeleteAccount(options: Options): Promise<void> {
+  const { props } = options;
   const dialog = new WaitingDialog("アカウント削除中");
   switchWaitingDialog(props, dialog);
   await props.api.deleteLoggedInUser();
   await props.fader.fadeOut();
   await props.api.logout();
 }
-
-/** アクションタイプ */
-const actionType = "DeleteAccount";
-
-/** アカウント削除時のイベントリスナーコンテナ */
-export const deleteAccountContainer = {
-  [actionType]: (props: GameProps, action: GameAction) => {
-    if (action.type === actionType) {
-      onDeleteAccount(props);
-    }
-  },
-};

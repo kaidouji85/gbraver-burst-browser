@@ -1,28 +1,25 @@
 import { WaitingDialog } from "../../../dom-dialogs/waiting/waiting-dialog";
-import { GameAction } from "../../game-actions";
+import { MatchingCanceled } from "../../game-actions/matching-canceled";
 import { GameProps } from "../../game-props";
 import { switchWaitingDialog } from "../switch-dialog/switch-waiting-dialog";
 
+/** オプション */
+type Options = {
+  /** ゲームプロパティ */
+  props: Readonly<GameProps>;
+  /** アクション */
+  action: MatchingCanceled;
+};
+
 /**
  * マッチング中止
- * @param props ゲームプロパティ
+ * @param options オプション
  * @returns 処理が完了したら発火するPromise
  */
-async function onMatchingCanceled(props: Readonly<GameProps>): Promise<void> {
+export async function onMatchingCanceled(options: Options): Promise<void> {
+  const { props } = options;
   const dialog = new WaitingDialog("通信中......");
   switchWaitingDialog(props, dialog);
   await props.api.disconnectWebsocket();
   props.domDialogBinder.hidden();
 }
-
-/** アクションタイプ */
-const actionType = "MatchingCanceled";
-
-/** マッチング中止のリスナーコンテナ */
-export const matchingCanceledContainer = {
-  [actionType]: (props: GameProps, action: GameAction) => {
-    if (action.type === actionType) {
-      onMatchingCanceled(props);
-    }
-  },
-};

@@ -1,17 +1,26 @@
 import { MAX_LOADING_TIME } from "../../../dom-scenes/dom-scene-binder/max-loading-time";
 import { waitTime } from "../../../wait/wait-time";
-import { GameAction } from "../../game-actions";
+import { ArcadeStart } from "../../game-actions/arcade-start";
 import { GameProps } from "../../game-props";
 import { bindPlayerSelectAccordingToConfig } from "../bind-player-select-according-to-config";
 import { loadFullResource } from "../load-full-resource";
 
+/** オプション */
+type Options = {
+  /** ゲームプロパティ */
+  props: GameProps;
+  /** アクション */
+  action: ArcadeStart;
+};
+
 /**
  * アーケードモード開始
  * 本関数にはpropsを変更する副作用がある
- * @param props ゲームプロパティ
+ * @param options オプション
  * @returns 処理が完了したら発火するPromise
  */
-export async function onArcadeStart(props: GameProps): Promise<void> {
+export async function onArcadeStart(options: Options): Promise<void> {
+  const { props } = options;
   if (!props.isFullResourceLoaded) {
     await loadFullResource(props);
   }
@@ -30,15 +39,3 @@ export async function onArcadeStart(props: GameProps): Promise<void> {
   ]);
   await props.fader.fadeIn();
 }
-
-/** アクションタイプ */
-const actionType = "ArcadeStart";
-
-/** アーケードモード開始のリスナーコンテナ */
-export const arcadeStartContainer = {
-  [actionType]: (props: GameProps, action: GameAction) => {
-    if (action.type === actionType) {
-      onArcadeStart(props);
-    }
-  },
-};

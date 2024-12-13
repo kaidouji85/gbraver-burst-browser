@@ -1,4 +1,3 @@
-import { GameAction } from "../../../game-actions";
 import { SelectionComplete } from "../../../game-actions/selection-complete";
 import { GameProps } from "../../../game-props";
 import { startCasualMatchIfNeeded } from "./start-casual-match-start-if-needed";
@@ -6,17 +5,22 @@ import { startDifficultySelectionIfNeeded } from "./start-difficulty-selection-i
 import { startPrivateMatchGuestIfNeeded } from "./start-private-match-guest-if-needed";
 import { startPrivateMatchHostIfNeeded } from "./start-private-match-host-if-needed";
 
+/** オプション */
+type Options = {
+  /** ゲームプロパティ */
+  props: GameProps;
+  /** アクション */
+  action: Readonly<SelectionComplete>;
+};
+
 /**
  * プレイヤーキャラクター 選択完了時の処理
  * 本関数にはpropsを変更する副作用がある
- * @param props ゲームプロパティ
- * @param action アクション
+ * @param options オプション
  * @returns 処理が完了したら発火するPromise
  */
-async function onSelectionComplete(
-  props: GameProps,
-  action: Readonly<SelectionComplete>,
-): Promise<void> {
+export async function onSelectionComplete(options: Options): Promise<void> {
+  const { props, action } = options;
   const isDifficultySelectionStarted = await startDifficultySelectionIfNeeded(
     props,
     action,
@@ -43,15 +47,3 @@ async function onSelectionComplete(
     return;
   }
 }
-
-/** アクションタイプ */
-const actionType = "SelectionComplete";
-
-/** プレイヤーキャラクター選択完了のリスナーコンテナ */
-export const selectionCompleteContainer = {
-  [actionType]: (props: GameProps, action: GameAction) => {
-    if (action.type === actionType) {
-      onSelectionComplete(props, action);
-    }
-  },
-};

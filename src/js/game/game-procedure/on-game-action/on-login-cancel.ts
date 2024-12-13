@@ -1,22 +1,19 @@
-import { GameAction } from "../../game-actions";
+import { LoginCancel } from "../../game-actions/login-cancel";
 import { GameProps } from "../../game-props";
+
+/** オプション */
+type Options = {
+  /** ゲームプロパティ */
+  props: Readonly<GameProps>;
+  /** アクション */
+  action: LoginCancel;
+};
 
 /**
  * ログイン中断
- * @param props ゲームプロパティ
+ * @param options オプション
  */
-function onLoginCancel(props: Readonly<GameProps>): void {
+export function onLoginCancel(options: Options): void {
+  const { props } = options;
   props.domDialogBinder.hidden();
 }
-
-/** アクションタイプ */
-const actionType = "LoginCancel";
-
-/** ログイン中断時のイベントリスナーコンテナ */
-export const loginCancelContainer = {
-  [actionType]: (props: GameProps, action: GameAction) => {
-    if (action.type === actionType) {
-      onLoginCancel(props);
-    }
-  },
-};
