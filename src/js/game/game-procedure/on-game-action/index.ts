@@ -108,7 +108,7 @@ export function onGameAction(props: GameProps, action: GameAction) {
     case "PrivateMatchEntry":
       return onPrivateMatchEntry({ props, action });
     case "VisibilityChange":
-      return onVisibilityChange();
+      return onVisibilityChange({ props, action });
     case "ForceEndBattle":
       return onForceEndBattle({ props, action });
     case "ForceRetry":
