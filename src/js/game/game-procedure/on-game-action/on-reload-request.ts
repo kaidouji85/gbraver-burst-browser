@@ -7,7 +7,7 @@ type Options = {
   props: Readonly<GameProps>;
   /** アクション */
   action: ReloadRequest;
-}
+};
 
 /**
  * 画面リロード依頼時の処理
