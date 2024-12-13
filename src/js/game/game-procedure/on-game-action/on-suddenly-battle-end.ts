@@ -16,7 +16,7 @@ type Options = {
  * @param options オプション
  * @returns 処理が終了すると発火するPromise
  */
-export async function onSuddenlyEndBattle(options: Options): Promise<void> {
+export async function onSuddenlyBattleEnd(options: Options): Promise<void> {
   const { props } = options;
   const dialog = new NetworkErrorDialog({
     ...props,

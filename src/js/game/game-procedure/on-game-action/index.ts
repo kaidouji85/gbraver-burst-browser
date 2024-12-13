@@ -30,7 +30,7 @@ import { onSelectEpisode } from "./on-select-episode";
 import { onSelectionCancel } from "./on-selection-cancel";
 import { onSelectionComplete } from "./on-selection-complete";
 import { onStoryStart } from "./on-story-start";
-import { onSuddenlyEndBattle } from "./on-suddenly-battle-end";
+import { onSuddenlyBattleEnd } from "./on-suddenly-battle-end";
 import { onUniversalLogin } from "./on-universal-login";
 import { onVisibilityChange } from "./on-visibility-change";
 import { onWebSocketAPIError } from "./on-websocker-api-error";
@@ -48,7 +48,7 @@ export function onGameAction(props: GameProps, action: GameAction) {
     case "EndBattle":
       return onEndBattle({ props, action });
     case "SuddenlyBattleEnd":
-      return onSuddenlyEndBattle({ props, action });
+      return onSuddenlyBattleEnd({ props, action });
     case "PostBattleAction":
       return onPostBattleAction({ props, action });
     case "ArcadeStart":
