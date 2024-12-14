@@ -10,5 +10,11 @@ export function createInitialValue(): GranDozerModel {
       type: "STAND",
       frame: 0,
     },
+    standard: {
+      colorStrength: 1,
+    },
+    outline: {
+      opacity: 0,
+    },
   };
 }

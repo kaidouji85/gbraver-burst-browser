@@ -9,4 +9,14 @@ export type GranDozerModel = {
     /** 0〜1で指定するアニメーションフレーム */
     frame: number;
   };
+  /** 標準スプライト */
+  standard: {
+    /** 色の強さ */
+    colorStrength: number;
+  };
+  /** アウトライン */
+  outline: {
+    /** 不透明度 */
+    opacity: number;
+  };
 };
