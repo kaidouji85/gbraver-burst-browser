@@ -8,6 +8,7 @@ import { EndingPathConfigs } from "./ending";
 import { EpisodePathConfigs } from "./episodes";
 import { GaiPathConfigs } from "./gai";
 import { GenesisBraverPathConfigs } from "./genesis-braver";
+import { GranDozerPathConfigs } from "./gran-dozer";
 import { HelpIconPathConfigs } from "./help-icon";
 import { LightningDozerPathConfigs } from "./lightning-dozer";
 import { LogoPathConfigs } from "./logo";
@@ -34,6 +35,7 @@ export const PathConfigs: PathConfig[] = [
   ...LightningDozerPathConfigs,
   ...WingDozerPathConfigs,
   ...GenesisBraverPathConfigs,
+  ...GranDozerPathConfigs,
   ...ShinyaPathConfigs,
   ...GaiPathConfigs,
   ...RaitoPathConfigs,
