@@ -12,7 +12,10 @@ export const PlayableArmdozers: ArmdozerId[] = [
 ];
 
 /** 開発中も含めたプレイアブルアームドーザ */
-export const DevelopingPlayableArmdozers: ArmdozerId[] = [...PlayableArmdozers];
+export const DevelopingPlayableArmdozers: ArmdozerId[] = [
+  ...PlayableArmdozers,
+  ArmdozerIds.GRAN_DOZER,
+];
 
 /**
  * プレイアブルアームドーザを取得するヘルパー関数
