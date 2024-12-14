@@ -20,6 +20,7 @@ import { TsubasaTextureConfigs } from "./tsubasa";
 import { TurnTexureConfigs } from "./turn";
 import { WingDozerTextureConfigs } from "./wing-dozer";
 import { YuuyaTextureConfigs } from "./yuuya";
+import { GranDozerTextureConfigs } from "./gran-dozer";
 
 /** テクスチャ設定をまとめたもの */
 export const TEXTURE_CONFIGS: TextureConfig[] = [
@@ -47,4 +48,6 @@ export const TEXTURE_CONFIGS: TextureConfig[] = [
 ];
 
 /** 開発中のテクスチャリソース設定をあつめたもの */
-export const DEVELOPING_TEXTURE_CONFIGS: TextureConfig[] = [];
+export const DEVELOPING_TEXTURE_CONFIGS: TextureConfig[] = [
+  ...GranDozerTextureConfigs,
+];
