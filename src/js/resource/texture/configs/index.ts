@@ -6,6 +6,7 @@ import { EffectLabelTextureConfigs } from "./effect-label";
 import { GaiTextureConfigs } from "./gai";
 import { GaugeTextureConfigs } from "./gauge";
 import { GenesisBraverTextureConfigs } from "./genesis-braver";
+import { GranDozerTextureConfigs } from "./gran-dozer";
 import { LightingTextureConfigs } from "./lightning";
 import { LightningBarrierTextureConfigs } from "./lightning-barrier";
 import { LightningDozerTextureConfigs } from "./lightning-dozer";
@@ -20,7 +21,6 @@ import { TsubasaTextureConfigs } from "./tsubasa";
 import { TurnTexureConfigs } from "./turn";
 import { WingDozerTextureConfigs } from "./wing-dozer";
 import { YuuyaTextureConfigs } from "./yuuya";
-import { GranDozerTextureConfigs } from "./gran-dozer";
 
 /** テクスチャ設定をまとめたもの */
 export const TEXTURE_CONFIGS: TextureConfig[] = [
