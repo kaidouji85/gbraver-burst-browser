@@ -13,6 +13,6 @@ export const GranDozerPathConfigs: PathConfig[] = [
   },
   {
     id: PathIds.GRAN_DOZER_ICON,
-    path: (root) => `${root.get()}/armdozer/genesis-braver/player-select.webp`,
+    path: (root) => `${root.get()}/armdozer/gran-dozer/player-select.webp`,
   },
 ];

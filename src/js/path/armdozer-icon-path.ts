@@ -10,6 +10,7 @@ const ArmdozerIconPathIds: Record<ArmdozerId, PathId> = {
   [ArmdozerIds.LIGHTNING_DOZER]: PathIds.LIGHTNING_DOZER_ICON,
   [ArmdozerIds.WING_DOZER]: PathIds.WING_DOZER_ICON,
   [ArmdozerIds.GENESIS_BRAVER]: PathIds.GENESIS_BRAVER_ICON,
+  [ArmdozerIds.GRAN_DOZER]: PathIds.GRAN_DOZER_ICON,
 };
 
 /**

@@ -10,6 +10,7 @@ const ArmdozerBurstShotPathIds: Record<ArmdozerId, PathId> = {
   [ArmdozerIds.NEO_LANDOZER]: PathIds.NEO_LANDOZER_BUST_SHOT,
   [ArmdozerIds.LIGHTNING_DOZER]: PathIds.LIGHTNING_DOZER_BUST_SHOT,
   [ArmdozerIds.GENESIS_BRAVER]: PathIds.GENESIS_BRAVER_BUST_SHOT,
+  [ArmdozerIds.GRAN_DOZER]: PathIds.GRAN_DOZER_BUST_SHOT,
 };
 
 /**
