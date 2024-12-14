@@ -178,6 +178,6 @@ export class ArmdozerStatus {
         (v) =>
           `<span class="${ROOT_CLASS_NAME}__burst__content__line">${v}</span>`,
       )
-      .reduce((a, b) => a + b);
+      .reduce((a, b) => a + b, "");
   }
 }
