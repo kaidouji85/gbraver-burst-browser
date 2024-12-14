@@ -10,6 +10,7 @@ const ArmdozerBustShotClassNames: Record<ArmdozerId, string> = {
   [ArmdozerIds.NEO_LANDOZER]: `${CLASS_NAME_PREFIX}__neo-landozer`,
   [ArmdozerIds.LIGHTNING_DOZER]: `${CLASS_NAME_PREFIX}__lightning-dozer`,
   [ArmdozerIds.GENESIS_BRAVER]: `${CLASS_NAME_PREFIX}__genesis-braver`,
+  [ArmdozerIds.GRAN_DOZER]: `${CLASS_NAME_PREFIX}__gran-dozer`,
 };
 
 /**
