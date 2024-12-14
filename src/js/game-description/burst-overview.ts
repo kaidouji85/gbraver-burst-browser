@@ -3,6 +3,7 @@ import type {
   BuffPower,
   Burst,
   ContinuousAttack,
+  ForceTurnEnd,
   LightningBarrier,
   RecoverBattery,
 } from "gbraver-burst-core";
@@ -52,6 +53,15 @@ function batteryLimitBreakOverview(burst: BatteryLimitBreak): string {
 }
 
 /**
+ * 強制ターンエンド概要
+ * @param burst バースト情報
+ * @returns 説明文
+ */
+function forceTurnEndOverview(burst: ForceTurnEnd): string {
+  return `バッテリー${burst.recoverBattery}回復、強制的に自分ターンにする`;
+}
+
+/**
  * バースト概要を生成する
  * @param burst バースト情報
  * @returns 説明文
@@ -68,6 +78,8 @@ export function burstOverview(burst: Burst): string {
       return continuousAttackOverview(burst);
     case "BatteryLimitBreak":
       return batteryLimitBreakOverview(burst);
+    case "ForceTurnEnd":
+      return forceTurnEndOverview(burst);
     default:
       return "";
   }
