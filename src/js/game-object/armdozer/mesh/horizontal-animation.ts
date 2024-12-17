@@ -8,6 +8,7 @@ import type { ArmdozerAnimation } from "./armdozer-animation";
 type CreatorParam = HorizontalAnimationMeshParam;
 
 /**
+ * @deprecated
  * HorizontalArmdozerAnimationを生成する
  * @param param パラメータ
  * @returns 生成結果
