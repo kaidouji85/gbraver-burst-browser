@@ -15,8 +15,11 @@ type Options = ResourcesContainer & {
   width: number;
   /** メッシュ高 */
   height: number;
-  /** メッシュY座標 */
-  y: number;
+  /** オフセット */
+  offset: {
+    /** オフセット Y座標 */
+    y: number;
+  };
 };
 
 /**
@@ -25,7 +28,7 @@ type Options = ResourcesContainer & {
  * @returns 生成結果
  */
 export function createStandardMesh(options: Options): ArmdozerAnimation {
-  const { resources, textureId, y } = options;
+  const { resources, textureId, offset } = options;
   const texture =
     resources.textures.find((v) => v.id === textureId)?.texture ??
     new THREE.Texture();
@@ -34,6 +37,6 @@ export function createStandardMesh(options: Options): ArmdozerAnimation {
     texture,
   });
   const object = ret.getObject3D();
-  object.position.y = y;
+  object.position.y = offset.y;
   return ret;
 }

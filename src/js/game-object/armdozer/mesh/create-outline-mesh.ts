@@ -81,6 +81,8 @@ export function createOutlineMesh(
   });
   const ret = new HorizontalAnimationMesh({
     ...options,
+    width: options.width + options.outlineWidth,
+    height: options.height + options.outlineWidth,
     texture: silhouetteTexture,
     maxAnimation,
     blending: THREE.AdditiveBlending,
