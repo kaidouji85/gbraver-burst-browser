@@ -4,6 +4,7 @@
     position: fixed;
     bottom: max(var(--safe-area-bottom), var(--screen-padding-bottom));
     right: max(var(--safe-area-right), var(--screen-padding-right));
+    gap: calc(var(--responsive-font-size) * 0.5);
   }
 }
 
@@ -15,14 +16,13 @@
 
 .post-battle__main-action,
 .post-battle__sub-action {
-  width: max(var(--responsive-font-size) * 10, 25vw);
-  height: calc(var(--responsive-font-size) * 3.5);
-  font-size: var(--responsive-font-size);
+  width: max(var(--responsive-font-size) * 10, 30vw);
+  height: calc(var(--responsive-font-size) * 4);
+  font-size: calc(var(--responsive-font-size) * 1.3);
   border-radius: var(--button-border-radius);
   color: var(--button-font-color);
   border: var(--button-border);
   box-shadow: var(--button-box-shadow);
-  margin: calc(var(--responsive-font-size) * 0.5);
 }
 
 .post-battle__sub-action {
