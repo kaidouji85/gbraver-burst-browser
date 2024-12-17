@@ -89,6 +89,6 @@ export function createOutlineMesh(
   });
   const object = ret.getObject3D();
   object.position.y = offset.y;
-  object.position.z = -1;
+  object.position.z = -0.01;
   return ret;
 }
