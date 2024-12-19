@@ -18,7 +18,7 @@
 
 .post-battle__main-action,
 .post-battle__sub-action {
-  width: calc(var(--font-size) * 15);
+  width: min(calc(var(--font-size) * 13), 45vw);
   height: calc(var(--font-size) * 3);
   font-size: var(--font-size);
   border-radius: var(--button-border-radius);
