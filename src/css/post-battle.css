@@ -1,6 +1,8 @@
 /** バトル終了後行動選択フローター */
 @media (orientation: landscape) {
   .post-battle {
+    --font-size: calc(var(--responsive-font-size) * 1.2);
+
     position: fixed;
     bottom: max(var(--safe-area-bottom), var(--screen-padding-bottom));
     right: max(var(--safe-area-right), var(--screen-padding-right));
@@ -16,9 +18,9 @@
 
 .post-battle__main-action,
 .post-battle__sub-action {
-  width: max(var(--responsive-font-size) * 10, 30vw);
-  height: calc(var(--responsive-font-size) * 4);
-  font-size: calc(var(--responsive-font-size) * 1.3);
+  width: min(calc(var(--font-size) * 13), 45vw);
+  height: calc(var(--font-size) * 3);
+  font-size: var(--font-size);
   border-radius: var(--button-border-radius);
   color: var(--button-font-color);
   border: var(--button-border);
