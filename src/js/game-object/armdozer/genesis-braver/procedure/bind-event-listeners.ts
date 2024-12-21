@@ -5,8 +5,8 @@ import { GenesisBraverProps } from "../props/genesis-braver-props";
 import { onPreRender } from "./on-pre-render";
 import { onUpdate } from "./on-update";
 
-/** パラメータ */
-type Params = {
+/** オプション */
+type Options = {
   /** ゲームオブジェクトプロパティ */
   props: GenesisBraverProps;
   /** ゲームオブジェクトアクション */
@@ -15,11 +15,11 @@ type Params = {
 
 /**
  * イベントリスナーを登録する
- * @param props ログインダイアログのプロパティ
+ * @param options オプション
  * @returns アンサブスクライバ
  */
-export function bindEventListeners(params: Params): Unsubscribable[] {
-  const { props, gameObjectAction } = params;
+export function bindEventListeners(options: Options): Unsubscribable[] {
+  const { props, gameObjectAction } = options;
   return [
     gameObjectAction.subscribe((action) => {
       if (action.type === "PreRender") {
