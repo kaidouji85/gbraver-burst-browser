@@ -16,7 +16,7 @@ type Options = ResourcesContainer & {
  * @param options オプション
  * @returns 生成結果
  */
-export function playerGranDozer(options: Options): GranDozer {
+export function PlayerGranDozer(options: Options): GranDozer {
   const view = new PlayerGranDozerView(options.resources);
   return new GranDozer({ ...options, view });
 }
@@ -26,7 +26,7 @@ export function playerGranDozer(options: Options): GranDozer {
  * @param options オプション
  * @returns 生成結果
  */
-export function enemyGranDozer(options: Options): GranDozer {
+export function EnemyGranDozer(options: Options): GranDozer {
   const view = new PlayerGranDozerView(options.resources);
   return new GranDozer({ ...options, view });
 }

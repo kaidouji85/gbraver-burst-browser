@@ -6,6 +6,7 @@ import { bindEventListeners } from "./procedure/bind-event-listeners";
 import { createGranDozerProps } from "./props/create-gran-dozer-props";
 import { GranDozerProps } from "./props/gran-dozer-props";
 import { GranDozerView } from "./view/gran-dozer-view";
+import * as THREE from "three";
 
 /** オプション */
 type Options = {
@@ -43,5 +44,15 @@ export class GranDozer extends EmptyArmdozerSprite {
     this.#unsubscribers.forEach((unsubscribe) => {
       unsubscribe.unsubscribe();
     });
+  }
+
+  /** @override */
+  getObject3D(): THREE.Object3D {
+    return this.#props.view.getObject3D();
+  }
+
+  /** @override */
+  addObject3D(object: THREE.Object3D): void {
+    this.#props.view.addObject3D(object);
   }
 }
