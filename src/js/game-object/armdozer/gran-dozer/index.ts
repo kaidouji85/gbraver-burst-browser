@@ -1,9 +1,15 @@
+import { Observable } from "rxjs";
+
 import { ResourcesContainer } from "../../../resource";
+import { GameObjectAction } from "../../action/game-object-action";
 import { GranDozer } from "./gran-dozer";
 import { PlayerGranDozerView } from "./view/player-gran-dozer-view";
 
 /** オプション */
-type Options = ResourcesContainer;
+type Options = ResourcesContainer & {
+  /** ゲームオブジェクトアクション */
+  gameObjectAction: Observable<GameObjectAction>;
+};
 
 /**
  * プレイヤー用グランドーザーを生成する
@@ -12,7 +18,7 @@ type Options = ResourcesContainer;
  */
 export function playerGranDozer(options: Options): GranDozer {
   const view = new PlayerGranDozerView(options.resources);
-  return new GranDozer(view);
+  return new GranDozer({ ...options, view });
 }
 
 /**
@@ -22,5 +28,5 @@ export function playerGranDozer(options: Options): GranDozer {
  */
 export function enemyGranDozer(options: Options): GranDozer {
   const view = new PlayerGranDozerView(options.resources);
-  return new GranDozer(view);
+  return new GranDozer({ ...options, view });
 }
