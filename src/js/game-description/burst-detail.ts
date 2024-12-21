@@ -77,7 +77,7 @@ function forceTurnEndDetail(burst: ForceTurnEnd): string[] {
   return [
     `バッテリーを${burst.recoverBattery}回復する。`,
     `現在のターンを終了し、バッテリー回復なしで自分ターンを開始する。`,
-    `この効果でターン終了した場合、すべてのプレイヤーは「ターン終了時に発動する効果」が無効となる。`,
+    `この効果でターン終了した場合、「ターン終了時に発動する効果」は発動しない。`,
   ];
 }
 
