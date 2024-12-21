@@ -9,6 +9,12 @@ export type GranDozerModel = {
     /** 0〜1で指定するアニメーションフレーム */
     frame: number;
   };
+  /** 座標 */
+  position: {
+    x: number;
+    y: number;
+    z: number;
+  };
   /** 標準スプライト */
   standard: {
     /** 色の強さ */

@@ -1,3 +1,8 @@
+import {
+  ARMDOZER_SPRITE_STANDARD_X,
+  ARMDOZER_SPRITE_STANDARD_Y,
+  ARMDOZER_SPRITE_STANDARD_Z,
+} from "../../position";
 import { GranDozerModel } from "./gran-dozer-model";
 
 /**
@@ -9,6 +14,11 @@ export function createInitialValue(): GranDozerModel {
     animation: {
       type: "STAND",
       frame: 0,
+    },
+    position: {
+      x: ARMDOZER_SPRITE_STANDARD_X,
+      y: ARMDOZER_SPRITE_STANDARD_Y,
+      z: ARMDOZER_SPRITE_STANDARD_Z,
     },
     standard: {
       colorStrength: 1,
