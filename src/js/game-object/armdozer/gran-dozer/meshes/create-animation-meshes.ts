@@ -6,14 +6,15 @@ import { AnimationType } from "../model/animation-type";
 import { AnimationMesh } from "./animation-mesh";
 
 /** メッシュ幅 */
-const MESH_WIDTH = 600;
+const MESH_WIDTH = 700;
 
 /** メッシュ高 */
-const MESH_HEIGHT = 600;
+const MESH_HEIGHT = 700;
 
 /** オフセット座標 */
 const OFFSET = {
-  y: 160,
+  x: 220,
+  y: 155,
 };
 
 /** アウトラインの太さ */
