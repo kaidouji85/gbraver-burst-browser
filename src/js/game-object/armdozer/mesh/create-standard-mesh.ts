@@ -17,8 +17,10 @@ type Options = ResourcesContainer & {
   height: number;
   /** オフセット */
   offset: {
+    /** オフセット X座標 */
+    x?: number;
     /** オフセット Y座標 */
-    y: number;
+    y?: number;
   };
 };
 
@@ -37,6 +39,7 @@ export function createStandardMesh(options: Options): ArmdozerAnimation {
     texture,
   });
   const object = ret.getObject3D();
-  object.position.y = offset.y;
+  object.position.x = offset.x ?? 0;
+  object.position.y = offset.y ?? 0;
   return ret;
 }
