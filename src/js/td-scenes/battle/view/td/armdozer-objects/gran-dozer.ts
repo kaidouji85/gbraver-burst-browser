@@ -43,7 +43,7 @@ export class GranDozerTD implements TDArmdozerObjects {
  * @param params 生成パラメータ
  * @returns 生成結果
  */
-export function playerGenesisBraverTD(
+export function playerGranDozerTD(
   params: TDLayerObjectCreatorParams,
 ): GranDozerTD {
   const { player } = params;
@@ -55,7 +55,7 @@ export function playerGenesisBraverTD(
  * @param params 生成パラメータ
  * @returns 生成結果
  */
-export function enemyGenesisBraverTD(
+export function enemyGranDozerTD(
   params: TDLayerObjectCreatorParams,
 ): GranDozerTD {
   const { enemy } = params;

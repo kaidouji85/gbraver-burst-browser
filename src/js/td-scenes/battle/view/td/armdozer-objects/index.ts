@@ -3,6 +3,7 @@ import { ArmdozerIds } from "gbraver-burst-core";
 import { TDLayerObjectCreatorParams } from "../creator-params";
 import type { TDArmdozerObjects } from "./armdozer-objects";
 import { enemyGenesisBraverTD, playerGenesisBraverTD } from "./genesis-braver";
+import { enemyGranDozerTD, playerGranDozerTD } from "./gran-dozer";
 import {
   enemyLightningDozerTD,
   playerLightningDozerTD,
@@ -31,6 +32,8 @@ export function playerTDArmdozer(
       return playerNeoLandozerTD(params);
     case ArmdozerIds.GENESIS_BRAVER:
       return playerGenesisBraverTD(params);
+    case ArmdozerIds.GRAN_DOZER:
+      return playerGranDozerTD(params);
     default:
       return playerShinBraverTD(params);
   }
@@ -56,6 +59,8 @@ export function enemyTDArmdozer(
       return enemyNeoLandozerTD(params);
     case ArmdozerIds.GENESIS_BRAVER:
       return enemyGenesisBraverTD(params);
+    case ArmdozerIds.GRAN_DOZER:
+      return enemyGranDozerTD(params);
     default:
       return enemyShinBraverTD(params);
   }
