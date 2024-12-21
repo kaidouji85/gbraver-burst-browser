@@ -39,6 +39,10 @@ export class PlayerGranDozerView implements GranDozerView {
 
   /** @override */
   engage(model: GranDozerModel): void {
+    this.#group.position.x = model.position.x;
+    this.#group.position.y = model.position.y;
+    this.#group.position.z = model.position.z;
+
     const currentStandardMesh = this.#meshes.find(
       (v) =>
         v.meshType === "STANDARD" && v.animationType === model.animation.type,
