@@ -6,6 +6,7 @@ import { EffectLabelTextureConfigs } from "./effect-label";
 import { GaiTextureConfigs } from "./gai";
 import { GaugeTextureConfigs } from "./gauge";
 import { GenesisBraverTextureConfigs } from "./genesis-braver";
+import { GranDozerTextureConfigs } from "./gran-dozer";
 import { LightingTextureConfigs } from "./lightning";
 import { LightningBarrierTextureConfigs } from "./lightning-barrier";
 import { LightningDozerTextureConfigs } from "./lightning-dozer";
@@ -47,4 +48,6 @@ export const TEXTURE_CONFIGS: TextureConfig[] = [
 ];
 
 /** 開発中のテクスチャリソース設定をあつめたもの */
-export const DEVELOPING_TEXTURE_CONFIGS: TextureConfig[] = [];
+export const DEVELOPING_TEXTURE_CONFIGS: TextureConfig[] = [
+  ...GranDozerTextureConfigs,
+];
