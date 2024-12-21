@@ -27,3 +27,11 @@ export const playerActiveStand: StoryFn = armdozerSpriteStub(
 export const enemyStand: StoryFn = armdozerSpriteStub(EnemyGranDozer, () => {
   // NOP
 });
+
+/** 敵 アクティブ 立ち */
+export const enemyActiveStand: StoryFn = armdozerSpriteStub(
+  EnemyGranDozer,
+  (sprite) => {
+    sprite.startActive().play();
+  },
+);
