@@ -6,7 +6,7 @@ import { AnimationMesh } from "../meshes/animation-mesh";
 import { GranDozerModel } from "../model/gran-dozer-model";
 import { GranDozerView } from "./gran-dozer-view";
 
-/** プレイヤー ジェネシスブレイバービュー */
+/** プレイヤー グランドーザービュー */
 export class PlayerGranDozerView implements GranDozerView {
   /** グループ */
   #group: THREE.Group;
