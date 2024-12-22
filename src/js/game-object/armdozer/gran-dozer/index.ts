@@ -1,16 +1,18 @@
 import { Observable } from "rxjs";
 
 import { ResourcesContainer } from "../../../resource";
+import { SEPlayerContainer } from "../../../se/se-player";
 import { GameObjectAction } from "../../action/game-object-action";
 import { GranDozer } from "./gran-dozer";
 import { EnemyGranDozerView } from "./view/enemy-gran-dozer-view";
 import { PlayerGranDozerView } from "./view/player-gran-dozer-view";
 
 /** オプション */
-type Options = ResourcesContainer & {
-  /** ゲームオブジェクトアクション */
-  gameObjectAction: Observable<GameObjectAction>;
-};
+type Options = ResourcesContainer &
+  SEPlayerContainer & {
+    /** ゲームオブジェクトアクション */
+    gameObjectAction: Observable<GameObjectAction>;
+  };
 
 /**
  * プレイヤー用グランドーザーを生成する

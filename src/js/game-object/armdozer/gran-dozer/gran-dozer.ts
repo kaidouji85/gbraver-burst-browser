@@ -7,14 +7,14 @@ import { EmptyArmdozerSprite } from "../empty-armdozer-sprite";
 import { endActive } from "./animation/end-active";
 import { startActive } from "./animation/start-active";
 import { bindEventListeners } from "./procedure/bind-event-listeners";
-import { createGranDozerProps } from "./props/create-gran-dozer-props";
+import {
+  createGranDozerProps,
+  GranDozerPropsCreatorOptions,
+} from "./props/create-gran-dozer-props";
 import { GranDozerProps } from "./props/gran-dozer-props";
-import { GranDozerView } from "./view/gran-dozer-view";
 
 /** オプション */
-type Options = {
-  /** ビュー */
-  view: GranDozerView;
+type Options = GranDozerPropsCreatorOptions & {
   /** ゲームオブジェクトアクション */
   gameObjectAction: Observable<GameObjectAction>;
 };
@@ -31,9 +31,8 @@ export class GranDozer extends EmptyArmdozerSprite {
    * @param options オプション
    */
   constructor(options: Options) {
-    const { view } = options;
     super();
-    this.#props = createGranDozerProps(view);
+    this.#props = createGranDozerProps(options);
     this.#unsubscribers = bindEventListeners({
       ...options,
       props: this.#props,
@@ -44,6 +43,7 @@ export class GranDozer extends EmptyArmdozerSprite {
    * デストラクタ相当の処理
    */
   destructor() {
+    this.#props.view.destructor();
     this.#unsubscribers.forEach((unsubscribe) => {
       unsubscribe.unsubscribe();
     });
