@@ -63,10 +63,10 @@ npm start
 2. 「[Parameter Store（テスト環境）](#parameter-storeテスト環境)」を参考にParameter Storeに値を設定する
 3. 以下のCode Build（ソースコードは本リポジトリに設定したもの）を構築する
 
-| 役割 | buildspec | 環境 | IAM Role ポリシー |
+| 役割 | buildspec | 環境 | IAM ポリシー |
 |-|-|-|-|
-| ビルド | buildspec.yml | [aws/codebuild/standard:7.0](https://github.com/aws/aws-codebuild-docker-images/tree/master/ubuntu/standard/7.0) | [Code Build（ビルド）用ポリシー](#code-buildビルド用ポリシー) |
-| ステージ切り替え | buildspec.switchStage.yml | [aws/codebuild/standard:7.0](https://github.com/aws/aws-codebuild-docker-images/tree/master/ubuntu/standard/7.0) | [AdministratorAccess](https://docs.aws.amazon.com/aws-managed-policy/latest/reference/AdministratorAccess.html) |
+| ビルド | buildspec.yml | [aws/codebuild/standard:7.0](https://github.com/aws/aws-codebuild-docker-images/tree/master/ubuntu/standard/7.0) | [ビルド用IAMポリシー](#ビルド用iamポリシー) |
+| ステージ切り替え | buildspec.switchStage.yml | [aws/codebuild/standard:7.0](https://github.com/aws/aws-codebuild-docker-images/tree/master/ubuntu/standard/7.0) | [ステージ切り替え用IAM ポリシー](#ステージ切り替え用iam-ポリシー) |
 
 ### 本番環境
 
@@ -74,10 +74,10 @@ npm start
 2. 「[Parameter Store（本番環境）](#parameter-store本番環境)」を参考にParameter Storeに値を設定する
 3. 以下のCode Build（ソースコードは本リポジトリに設定したもの）を構築する
 
-| 役割 | buildspec | 環境 | IAM Role ポリシー |
+| 役割 | buildspec | 環境 | IAM ポリシー |
 |-|-|-|-|
-| ビルド | buildspec.prod.yml | [aws/codebuild/standard:7.0](https://github.com/aws/aws-codebuild-docker-images/tree/master/ubuntu/standard/7.0) | [Code Build（ビルド）用ポリシー](#code-buildビルド用ポリシー) |
-| ステージ切り替え | buildspec.prod.switchStage.yml | [aws/codebuild/standard:7.0](https://github.com/aws/aws-codebuild-docker-images/tree/master/ubuntu/standard/7.0) | [AdministratorAccess](https://docs.aws.amazon.com/aws-managed-policy/latest/reference/AdministratorAccess.html) |
+| ビルド | buildspec.prod.yml | [aws/codebuild/standard:7.0](https://github.com/aws/aws-codebuild-docker-images/tree/master/ubuntu/standard/7.0) | [ビルド用IAMポリシー](#ビルド用iamポリシー) |
+| ステージ切り替え | buildspec.prod.switchStage.yml | [aws/codebuild/standard:7.0](https://github.com/aws/aws-codebuild-docker-images/tree/master/ubuntu/standard/7.0) | [ステージ切り替え用IAM ポリシー](#ステージ切り替え用iam-ポリシー) |
 
 ## storybookを動かす
 
@@ -177,10 +177,10 @@ shfmt -l -w *.bash
 | /GbraverBurst/prod/isAPIServerEnable       | String | APIサーバが利用できるか否かのフラグ、```true```で利用可能 |
 | /GbraverBurst/prod/cognitoHostedUIDomain   | String | cognito Hosted UI のドメイン             |
 
-### IAM Role
-本節では各手順で必要とされるIAM Roleのポリシー詳細を記載します。
+### IAM ポリシー
+本節では各手順で必要とされるIAM ポリシー詳細を記載します。
 
-### Code Build（ビルド）用ポリシー
+#### ビルド用IAMポリシー
 
 ```json
 {
@@ -231,6 +231,35 @@ shfmt -l -w *.bash
             "Resource": "*"
         }
     ]
+}
+```
+
+#### ステージ切り替え用IAM ポリシー
+
+```json
+{
+	"Version": "2012-10-17",
+	"Statement": [
+		{
+			"Effect": "Allow",
+			"Action": "logs:CreateLogStream",
+			"Resource": "*"
+		},
+		{
+			"Effect": "Allow",
+			"Action": "ssm:GetParameters",
+			"Resource": "*"
+		},
+		{
+			"Effect": "Allow",
+			"Action": [
+			    "cloudfront:CreateInvalidation",
+				"cloudfront:GetDistributionConfig",
+				"cloudfront:UpdateDistribution"
+			],
+			"Resource": "*"
+		}
+	]
 }
 ```
 
