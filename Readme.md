@@ -146,7 +146,7 @@ shfmt -l -w *.bash
 | /GbraverBurst/dev/assetlinksJsonURI       | String | 開発環境用のassetlinks.jsonのS3 URI        |
 | /GbraverBurst/dev/googleMeasurementID     | String | 開発環境用のGoogle Analytics 測定ID         |
 | /GbraverBurst/dev/s3Bucket                | String | デプロイ対象となるS3バケット名                    |
-| /GbraverBurst/dev/distributionId          | String | デプロイ対象のCloudFrontのdistrubution ID   |
+| /GbraverBurst/dev/distributionId          | String | デプロイ対象のCloudFrontのdistribution ID   |
 | /GbraverBurst/dev/cloudFrontOriginName    | String | CloudFrontのs3バケットのオリジン名             |
 | /GbraverBurst/dev/ownRootUrl              | String | 開発環境を公開しているURL                      |
 | /GbraverBurst/dev/twitterSite             | String | OGP twitter:site で使うtwitterアカウント    |
@@ -165,7 +165,7 @@ shfmt -l -w *.bash
 | /GbraverBurst/prod/assetlinksJsonURI       | String | 本番環境用のassetlinks.jsonのS3 URI        |
 | /GbraverBurst/prod/googleMeasurementID     | String | 本番環境用のGoogle Analytics 測定ID         |
 | /GbraverBurst/prod/s3Bucket                | String | デプロイ対象となるS3バケット名                    |
-| /GbraverBurst/prod/distributionId          | String | デプロイ対象のCloudFrontのdistrubution ID   |
+| /GbraverBurst/prod/distributionId          | String | デプロイ対象のCloudFrontのdistribution ID   |
 | /GbraverBurst/prod/cloudFrontOriginName    | String | CloudFrontのs3バケットのオリジン名             |
 | /GbraverBurst/prod/ownRootUrl              | String | 本番環境を公開しているURL                      |
 | /GbraverBurst/prod/twitterSite             | String | OGP twitter:site で使うtwitterアカウント    |
