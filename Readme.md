@@ -36,7 +36,7 @@ npm start
 ### 事前準備
 
 1. [aws cli](https://aws.amazon.com/jp/cli/)をインストールする
-2. ```aws confiure```を[完了させる](https://docs.aws.amazon.com/ja_jp/cli/latest/userguide/cli-configure-quickstart.html)
+2. ```aws configure```を[完了させる](https://docs.aws.amazon.com/ja_jp/cli/latest/userguide/cli-configure-quickstart.html)
 3. [aseetlinks.json](https://developers.google.com/digital-asset-links/v1/getting-started)を作成し、任意のS3バケットに配置する
 4. デプロイ対象のS3バケットを用意する
 
