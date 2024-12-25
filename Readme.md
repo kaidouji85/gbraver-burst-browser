@@ -63,10 +63,10 @@ npm start
 2. 「[Parameter Store（テスト環境）](#parameter-storeテスト環境)」を参考にParameter Storeに値を設定する
 3. 以下のCode Build（ソースコードは本リポジトリに設定したもの）を構築する
 
-| 役割 | buildspec | 環境 | IAM ポリシー |
+| 役割 | buildspec | 環境 | IAMポリシー |
 |-|-|-|-|
 | ビルド | buildspec.yml | [aws/codebuild/standard:7.0](https://github.com/aws/aws-codebuild-docker-images/tree/master/ubuntu/standard/7.0) | [ビルド用IAMポリシー](#ビルド用iamポリシー) |
-| ステージ切り替え | buildspec.switchStage.yml | [aws/codebuild/standard:7.0](https://github.com/aws/aws-codebuild-docker-images/tree/master/ubuntu/standard/7.0) | [ステージ切り替え用IAM ポリシー](#ステージ切り替え用iam-ポリシー) |
+| ステージ切り替え | buildspec.switchStage.yml | [aws/codebuild/standard:7.0](https://github.com/aws/aws-codebuild-docker-images/tree/master/ubuntu/standard/7.0) | [ステージ切り替え用IAMポリシー](#ステージ切り替え用iamポリシー) |
 
 ### 本番環境
 
@@ -74,10 +74,10 @@ npm start
 2. 「[Parameter Store（本番環境）](#parameter-store本番環境)」を参考にParameter Storeに値を設定する
 3. 以下のCode Build（ソースコードは本リポジトリに設定したもの）を構築する
 
-| 役割 | buildspec | 環境 | IAM ポリシー |
+| 役割 | buildspec | 環境 | IAMポリシー |
 |-|-|-|-|
 | ビルド | buildspec.prod.yml | [aws/codebuild/standard:7.0](https://github.com/aws/aws-codebuild-docker-images/tree/master/ubuntu/standard/7.0) | [ビルド用IAMポリシー](#ビルド用iamポリシー) |
-| ステージ切り替え | buildspec.prod.switchStage.yml | [aws/codebuild/standard:7.0](https://github.com/aws/aws-codebuild-docker-images/tree/master/ubuntu/standard/7.0) | [ステージ切り替え用IAM ポリシー](#ステージ切り替え用iam-ポリシー) |
+| ステージ切り替え | buildspec.prod.switchStage.yml | [aws/codebuild/standard:7.0](https://github.com/aws/aws-codebuild-docker-images/tree/master/ubuntu/standard/7.0) | [ステージ切り替え用IAMポリシー](#ステージ切り替え用iamポリシー) |
 
 ## storybookを動かす
 
@@ -177,8 +177,8 @@ shfmt -l -w *.bash
 | /GbraverBurst/prod/isAPIServerEnable       | String | APIサーバが利用できるか否かのフラグ、```true```で利用可能 |
 | /GbraverBurst/prod/cognitoHostedUIDomain   | String | cognito Hosted UI のドメイン             |
 
-### IAM ポリシー
-本節では各手順で必要とされるIAM ポリシー詳細を記載します。
+### IAMポリシー
+本節では各手順で必要とされるIAMポリシー詳細を記載します。
 
 #### ビルド用IAMポリシー
 
@@ -234,7 +234,7 @@ shfmt -l -w *.bash
 }
 ```
 
-#### ステージ切り替え用IAM ポリシー
+#### ステージ切り替え用IAMポリシー
 
 ```json
 {
