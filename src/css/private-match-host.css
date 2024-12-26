@@ -82,7 +82,7 @@
   min-width: calc(var(--responsive-font-size) * 9);
   background-color: var(--sub-button-background-color);
   border-radius: var(--button-border-radius);
-  border: var(--button-border);
+  border: var(--sub-button-border);
 }
 
 .private-match-host__success-copy-room-id {
