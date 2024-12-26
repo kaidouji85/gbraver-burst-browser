@@ -1,6 +1,5 @@
 @import url("root-element.css");
 @import url("play-in-landscape.css");
-@import url("mail-verified-incomplete.css");
 @import url("fader.css");
 @import url("loading.css");
 @import url("title.css");
@@ -39,4 +38,4 @@
 @import url("secret-player-select.css");
 @import url("battle-simulator.css");
 @import url("private-match-qr-code-reader.css");
-@import url("battle-hamburget-menu.css");
+@import url("battle-hamburger-menu.css");

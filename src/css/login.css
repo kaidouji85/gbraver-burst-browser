@@ -68,7 +68,7 @@
   border-radius: var(--button-border-radius);
   background-color: var(--sub-button-background-color);
   color: var(--button-font-color);
-  border: var(--button-border);
+  border: var(--sub-button-border);
   box-shadow: var(--button-box-shadow);
 }
 

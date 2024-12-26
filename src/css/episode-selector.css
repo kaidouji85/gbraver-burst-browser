@@ -116,7 +116,6 @@
   font-size: var(--responsive-font-size);
   border-radius: var(--button-border-radius);
   color: var(--button-font-color);
-  border: var(--button-border);
   box-shadow: var(--button-box-shadow);
   z-index: var(--controllers-z-index);
   word-break: keep-all;
@@ -124,9 +123,11 @@
 }
 
 .episode-selector__prev {
+  border: var(--sub-button-border);
   background-color: var(--sub-button-background-color);
 }
 
 .episode-selector__play-episode {
+  border: var(--button-border);
   background-color: var(--button-background-color);
 }
