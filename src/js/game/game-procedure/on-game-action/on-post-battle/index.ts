@@ -3,7 +3,7 @@ import { PostBattleAction } from "../../../game-actions/post-battle-action";
 import { GameProps } from "../../../game-props";
 import { InProgress } from "../../../in-progress";
 import { gotoEnding } from "./goto-ending";
-import { gotoEpisodeIfNeeded } from "./goto-episode-if-needed";
+import { retryEpisode } from "./retry-episode";
 import { gotoEpisodeSelect } from "./goto-episode-select";
 import { gotoNPCBattleStage } from "./goto-npc-battle-stage";
 import { gotoTitle, gotoTitleIfNeeded } from "./goto-title";
@@ -31,9 +31,9 @@ export async function onPostBattleAction(options: Options): Promise<void> {
         return gotoTitle({ props, postAction });
       case "GotoEnding":
         return gotoEnding({ props, postAction });
-      case "NextStage":
-      case "Retry":
-        return gotoNPCBattleStage({ props, postAction });
+      // case "NextStage":
+      // case "Retry":
+      //   return gotoNPCBattleStage({ props, postAction });
       case "GotoEpisodeSelect":
         return gotoEpisodeSelect({ props, postAction });
       default:
