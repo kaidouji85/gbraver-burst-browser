@@ -1,5 +1,6 @@
 import { PostBattleButtonConfig } from "../../../dom-floaters/post-battle/post-battle-button-config";
 import {
+  PostEpisodeButtons,
   PostEpisodeLoseButtons,
   PostEpisodeWinButtons,
 } from "../../../dom-floaters/post-battle/post-battle-buttons";
@@ -47,14 +48,14 @@ export async function executePostEpisode(
         buttons: PostEpisodeWinButtons,
         story: { type: "GoingToNextEpisode", nextEpisode },
       };
-    } else if (!isPlayerWin) {
+    } else if (!isPlayerWin && !currentEpisode.isLosingEvent) {
       return {
         buttons: PostEpisodeLoseButtons,
         story: inProgress.story,
       };
     } else {
       return {
-        buttons: PostEpisodeLoseButtons,
+        buttons: PostEpisodeButtons,
         story: inProgress.story,
       };
     }
