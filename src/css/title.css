@@ -4,8 +4,7 @@
 @media (orientation: landscape) {
   .title {
     display: flex;
-    align-items: center;
-    justify-content: center;
+    flex-direction: column;
     width: 100vw;
     width: 100dvw;
     height: 100vh;
@@ -13,8 +12,6 @@
     background-color: var(--background-color);
     color: var(--font-color);
     box-sizing: border-box;
-    padding: var(--screen-padding-top) var(--screen-padding-right)
-      var(--screen-padding-bottom) var(--screen-padding-left);
     background-size: cover;
     background-position: 50% 0;
     position: relative;
@@ -182,10 +179,14 @@
 }
 
 .title__contents {
+  flex: 1;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: flex-end;
+  box-sizing: border-box;
+  padding: var(--screen-padding-top) var(--screen-padding-right)
+    var(--screen-padding-bottom) var(--screen-padding-left);
 }
 
 .title__logo {
@@ -194,18 +195,17 @@
 }
 
 .title__game-menu {
-  width: 100vw;
-  width: 100dvw;
+  width: 100%;
   display: flex;
   flex-direction: row;
   justify-content: center;
   padding-top: calc(var(--responsive-font-size) * 2);
+  gap: calc(var(--responsive-font-size) * 1);
 }
 
 .title__game-menu button {
-  width: calc(var(--responsive-font-size) * 10);
+  flex: 1;
   height: calc(var(--responsive-font-size) * 3);
-  margin: 0 calc(var(--responsive-font-size) * 0.5);
   font-size: calc(var(--responsive-font-size));
   border-radius: var(--button-border-radius);
   color: var(--button-font-color);
@@ -229,7 +229,6 @@
 }
 
 .title__footer {
-  position: absolute;
   left: 0;
   bottom: 0;
   box-sizing: border-box;
