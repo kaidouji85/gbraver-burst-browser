@@ -1,8 +1,8 @@
 import { GameProps } from "../../../game-props";
 import { InProgress } from "../../../in-progress";
 import { Retry } from "../../../post-battle";
-import { retryEpisode } from "./retry-episode";
 import { gotoNPCBattleStage } from "./goto-npc-battle-stage";
+import { retryEpisode } from "./retry-episode";
 
 /** オプション */
 type Options = {
@@ -37,5 +37,5 @@ export async function retry(options: Options): Promise<InProgress> {
     await retryEpisode({ ...props, inProgress: { ...inProgress, story } });
   }
 
-  return props.inProgress;
+  return inProgress;
 }

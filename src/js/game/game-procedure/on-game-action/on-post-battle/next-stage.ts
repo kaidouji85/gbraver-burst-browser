@@ -21,6 +21,7 @@ export async function nextStage(options: Options): Promise<InProgress> {
   const { props } = options;
   const { inProgress } = props;
   let ret = inProgress;
+
   if (
     inProgress.type === "NPCBattle" &&
     inProgress.npcBattle.type === "PlayingNPCBattle"
