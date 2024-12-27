@@ -30,4 +30,5 @@ export const QueenOfTragedy: Episode = {
   npc: wingDozerNPCForQueenOfTragedy(),
   event: () => createQueenOfTragedy(),
   bgm: SOUND_IDS.QUEEN_OF_TRAGEDY,
+  isLosingEvent: false,
 };

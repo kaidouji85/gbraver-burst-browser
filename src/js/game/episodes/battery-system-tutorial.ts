@@ -29,4 +29,5 @@ export const batterySystemTutorial: Episode = {
   npc: batterySystemTutorialNPC(),
   event: createBatterySystemTutorialEvent,
   bgm: SOUND_IDS.TUTORIAL_BGM,
+  isLosingEvent: false,
 };

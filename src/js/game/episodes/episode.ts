@@ -45,6 +45,8 @@ export type Episode = {
   player: Player;
   /** 再生するBGMのID */
   bgm: SoundId;
+  /** 負けイベントか否か、trueで負けイベント */
+  isLosingEvent: boolean;
   /**
    * カスタムバトルイベント生成関数、カスタムバトルイベントは状態を持つので都度生成する
    * @param resources リソース管理オブジェクト
