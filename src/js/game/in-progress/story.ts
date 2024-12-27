@@ -20,7 +20,7 @@ export type GoingToNextEpisode = {
 };
 
 /** ストーリーモードのサブフロー */
-type StorySubFLow = EpisodeSelect | PlayingEpisode | GoingToNextEpisode;
+export type StorySubFLow = EpisodeSelect | PlayingEpisode | GoingToNextEpisode;
 
 /** ストーリーモード */
 export type Story = {

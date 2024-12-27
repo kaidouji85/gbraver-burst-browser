@@ -1,8 +1,13 @@
-import { PostEpisodeButtons } from "../../../dom-floaters/post-battle/post-battle-buttons";
+import { PostBattleButtonConfig } from "../../../dom-floaters/post-battle/post-battle-button-config";
+import {
+  PostEpisodeLoseButtons,
+  PostEpisodeWinButtons,
+} from "../../../dom-floaters/post-battle/post-battle-buttons";
 import { EndBattle } from "../../../game-actions/end-battle";
 import { GameProps } from "../../../game-props";
 import { InProgress } from "../../../in-progress";
-import { Story } from "../../../in-progress/story";
+import { Story, StorySubFLow } from "../../../in-progress/story";
+import { getEpisodes } from "../../get-episodes";
 
 /**
  * エピソード終了後処理を実行する
@@ -23,9 +28,37 @@ export async function executePostEpisode(
     return inProgress;
   }
 
-  await props.domFloaters.showPostBattle({
-    ...props,
-    buttons: PostEpisodeButtons,
-  });
-  return inProgress;
+  const currentEpisode = inProgress.story.episode;
+  const currentPlayer = currentEpisode.player;
+  const isPlayerWin =
+    gameEnd.result.type === "GameOver" &&
+    gameEnd.result.winner === currentPlayer.playerId;
+  const episodes = getEpisodes(props).filter(
+    (e) => e.type === currentEpisode.type,
+  );
+  const currentEpisodeIndex = episodes.indexOf(currentEpisode);
+  const nextEpisode = episodes.at(currentEpisodeIndex + 1);
+  const { buttons, story } = ((): {
+    story: StorySubFLow;
+    buttons: PostBattleButtonConfig[];
+  } => {
+    if ((isPlayerWin || currentEpisode.isLosingEvent) && nextEpisode) {
+      return {
+        buttons: PostEpisodeWinButtons,
+        story: { type: "GoingToNextEpisode", nextEpisode },
+      };
+    } else if (!isPlayerWin) {
+      return {
+        buttons: PostEpisodeLoseButtons,
+        story: inProgress.story,
+      };
+    } else {
+      return {
+        buttons: PostEpisodeLoseButtons,
+        story: inProgress.story,
+      };
+    }
+  })();
+  await props.domFloaters.showPostBattle({ ...props, buttons });
+  return { ...inProgress, story };
 }
