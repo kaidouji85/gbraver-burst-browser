@@ -8,7 +8,7 @@ export const postBattleConnector: DomFloaterActionConnector<
   floater.selectionCompleteNotifier().subscribe((postBattle) => {
     gameAction.next({
       type: "PostBattleAction",
-      action: postBattle,
+      postAction: postBattle,
     });
   }),
 ];

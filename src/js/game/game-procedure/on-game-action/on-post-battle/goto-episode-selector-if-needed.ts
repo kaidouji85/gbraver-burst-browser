@@ -15,7 +15,7 @@ export async function gotoEpisodeSelectorIfNeeded(
   action: Readonly<PostBattleAction>,
 ): Promise<boolean> {
   if (
-    action.action.type === "GotoEpisodeSelect" &&
+    action.postAction.type === "GotoEpisodeSelect" &&
     props.inProgress.type === "Story" &&
     props.inProgress.story.type === "PlayingEpisode"
   ) {

@@ -19,7 +19,7 @@ export async function gotoNPCBattleStageIfNeeded(
   if (
     props.inProgress.type === "NPCBattle" &&
     props.inProgress.npcBattle.type === "PlayingNPCBattle" &&
-    (action.action.type === "NextStage" || action.action.type === "Retry")
+    (action.postAction.type === "NextStage" || action.postAction.type === "Retry")
   ) {
     const state: NPCBattleState = props.inProgress.npcBattle.state;
     const stage = getCurrentNPCStage(state) ?? DefaultStage;

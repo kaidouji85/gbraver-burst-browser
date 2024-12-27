@@ -14,7 +14,7 @@ export async function gotoTitleIfNeeded(
   props: Readonly<GameProps>,
   action: Readonly<PostBattleAction>,
 ): Promise<boolean> {
-  if (action.action.type !== "GotoTitle") {
+  if (action.postAction.type !== "GotoTitle") {
     return false;
   }
 

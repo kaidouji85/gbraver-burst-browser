@@ -15,7 +15,7 @@ export async function gotoEndingIfNeeded(
   props: Readonly<GameProps>,
   action: Readonly<PostBattleAction>,
 ): Promise<boolean> {
-  if (action.action.type !== "GotoEnding") {
+  if (action.postAction.type !== "GotoEnding") {
     return false;
   }
 
