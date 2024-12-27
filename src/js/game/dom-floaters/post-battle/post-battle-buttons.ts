@@ -52,7 +52,7 @@ export const PostNetworkBattleButtons: PostBattleButtonConfig[] = [
 ];
 
 /** エピソード後（プレイヤーの勝利）のアクションボタン */
-export const PostEpisodeButtonsWhenWin: PostBattleButtonConfig[] = [
+export const PostEpisodeWinButtons: PostBattleButtonConfig[] = [
   {
     style: "SubButton",
     action: {
@@ -70,7 +70,7 @@ export const PostEpisodeButtonsWhenWin: PostBattleButtonConfig[] = [
 ];
 
 /** エピソード後（プレイヤーの敗北）のアクションボタン */
-export const PostEpisodeButtonsWhenLose: PostBattleButtonConfig[] = [
+export const PostEpisodeLoseButtons: PostBattleButtonConfig[] = [
   {
     style: "SubButton",
     action: {
