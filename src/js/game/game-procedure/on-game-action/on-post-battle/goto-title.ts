@@ -1,23 +1,25 @@
 import { fadeOut, stop } from "../../../../bgm/bgm-operators";
-import { PostBattleAction } from "../../../game-actions/post-battle-action";
 import { GameProps } from "../../../game-props";
+import { InProgress } from "../../../in-progress";
+import { GotoTitle } from "../../../post-network-error";
 import { playTitleBGM } from "../../play-title-bgm";
 import { startTitle } from "../../start-title";
 
-/**
- * 条件を満たしていればタイトルに遷移する
- * @param props ゲームプロパティ
- * @param action アクション
- * @returns 遷移した場合はtrue、遷移しなかった場合はfalse
- */
-export async function gotoTitleIfNeeded(
-  props: Readonly<GameProps>,
-  action: Readonly<PostBattleAction>,
-): Promise<boolean> {
-  if (action.postAction.type !== "GotoTitle") {
-    return false;
-  }
+/** オプション */
+type Options = {
+  /** ゲームプロパティ */
+  props: Readonly<GameProps>;
+  /** アクション */
+  postAction: Readonly<GotoTitle>;
+};
 
+/**
+ * タイトルに遷移する
+ * @param options オプション
+ * @returns 更新後のInProgress
+ */
+export async function gotoTitle(options: Options): Promise<InProgress> {
+  const { props } = options;
   props.domFloaters.hiddenPostBattle();
   await Promise.all([
     (async () => {
@@ -31,5 +33,5 @@ export async function gotoTitleIfNeeded(
   ]);
   await props.fader.fadeIn();
   playTitleBGM(props);
-  return true;
+  return { type: "None" };
 }

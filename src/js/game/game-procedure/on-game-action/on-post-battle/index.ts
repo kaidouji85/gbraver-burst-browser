@@ -1,11 +1,12 @@
+import { Processor } from "glob/dist/commonjs/processor";
 import { PostBattleAction } from "../../../game-actions/post-battle-action";
 import { GameProps } from "../../../game-props";
 import { InProgress } from "../../../in-progress";
-import { gotoEndingIfNeeded } from "./goto-ending-if-needed";
+import { gotoEnding } from "./goto-ending";
 import { gotoEpisodeIfNeeded } from "./goto-episode-if-needed";
 import { gotoEpisodeSelectorIfNeeded } from "./goto-episode-selector-if-needed";
 import { gotoNPCBattleStageIfNeeded } from "./goto-npc-battle-stage-if-needed";
-import { gotoTitleIfNeeded } from "./goto-title-if-needed";
+import { gotoTitle, gotoTitleIfNeeded } from "./goto-title";
 
 /** オプション */
 type Options = {
@@ -23,6 +24,19 @@ type Options = {
  */
 export async function onPostBattleAction(options: Options): Promise<void> {
   const { props, action } = options;
+  const { postAction } = action;
+  props.inProgress = await (() => {
+    switch (postAction.type) {
+      case "GotoTitle":
+        return gotoTitle({ props, postAction });
+      case "GotoEnding":
+        return gotoEnding({ props, postAction });
+      default:
+        return props.inProgress;
+    }
+  })();
+
+  /*
   let updated: InProgress = props.inProgress;
   if (await gotoTitleIfNeeded(props, action)) {
     updated = { type: "None" };
@@ -39,4 +53,5 @@ export async function onPostBattleAction(options: Options): Promise<void> {
     };
   }
   props.inProgress = updated;
+  */
 }
