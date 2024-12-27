@@ -54,31 +54,33 @@ export async function executePostNPCBattleIfNeeded(
   props: Readonly<GameProps>,
   action: Readonly<EndBattle>,
 ): Promise<Ret> {
+  const { inProgress, domFloaters } = props;
+  const { gameEnd } = action;
   if (
-    props.inProgress.type !== "NPCBattle" ||
-    props.inProgress.npcBattle.type !== "PlayingNPCBattle"
+    inProgress.type !== "NPCBattle" ||
+    inProgress.npcBattle.type !== "PlayingNPCBattle"
   ) {
     return { isExecuted: false };
   }
 
   const updated = updateNPCBattleState(
-    props.inProgress.npcBattle.state,
-    action.gameEnd.result,
+    inProgress.npcBattle.state,
+    gameEnd.result,
   );
   if (!updated) {
     return { isExecuted: false };
   }
 
-  await props.domFloaters.showPostBattle({
+  await domFloaters.showPostBattle({
     ...props,
     buttons: postNPCBattleButtons(updated.result),
   });
   return {
     isExecuted: true,
     inProgress: {
-      ...props.inProgress,
+      ...inProgress,
       npcBattle: {
-        ...props.inProgress.npcBattle,
+        ...inProgress.npcBattle,
         state: updated.state,
       },
     },
