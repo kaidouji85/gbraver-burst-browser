@@ -120,12 +120,14 @@
 .battle-hamburger-menu__retry-button,
 .battle-hamburger-menu__end-battle-button {
   grid-area: retry;
+  border: var(--button-border);
   background-color: var(--button-background-color);
 }
 
 .battle-hamburger-menu__retry-cancel-button,
 .battle-hamburger-menu__end-battle-cancel-button {
   grid-area: cancel;
+  border: var(--sub-button-border);
   background-color: var(--sub-button-background-color);
 }
 
@@ -137,7 +139,6 @@
   font-size: var(--responsive-font-size);
   border-radius: var(--button-border-radius);
   color: var(--button-font-color);
-  border: var(--button-border);
 }
 
 .battle-hamburger-menu__retry-confirm-dialog-closer,
