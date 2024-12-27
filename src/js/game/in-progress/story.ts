@@ -12,15 +12,8 @@ export type PlayingEpisode = {
   readonly episode: Episode;
 };
 
-/** 次のエピソードへ向かう */
-export type GoingToNextEpisode = {
-  type: "GoingToNextEpisode";
-  /** 次のエピソード */
-  readonly nextEpisode: Episode;
-};
-
 /** ストーリーモードのサブフロー */
-export type StorySubFLow = EpisodeSelect | PlayingEpisode | GoingToNextEpisode;
+export type StorySubFLow = EpisodeSelect | PlayingEpisode;
 
 /** ストーリーモード */
 export type Story = {
