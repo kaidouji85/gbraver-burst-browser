@@ -56,10 +56,10 @@ export async function executePostNPCBattleIfNeeded(
 ): Promise<Ret> {
   const { inProgress, domFloaters } = props;
   const { gameEnd } = action;
-  if (
-    inProgress.type !== "NPCBattle" ||
-    inProgress.npcBattle.type !== "PlayingNPCBattle"
-  ) {
+  const isNPCPostBattle =
+    inProgress.type === "NPCBattle" &&
+    inProgress.npcBattle.type === "PlayingNPCBattle";
+  if (!isNPCPostBattle) {
     return { isExecuted: false };
   }
 
