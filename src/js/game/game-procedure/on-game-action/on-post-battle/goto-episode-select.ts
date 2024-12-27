@@ -1,21 +1,27 @@
-import { PostBattleAction } from "../../../game-actions/post-battle-action";
 import { GameProps } from "../../../game-props";
+import { InProgress } from "../../../in-progress";
 import { PlayingEpisode } from "../../../in-progress/story";
+import { GotoEpisodeSelect } from "../../../post-battle";
 import { playTitleBGM } from "../../play-title-bgm";
 import { startEpisodeSelector } from "../../start-episode-selector";
 
+/** オプション */
+type Options = {
+  /** ゲームプロパティ */
+  props: Readonly<GameProps>;
+  /** アクション */
+  postAction: Readonly<GotoEpisodeSelect>;
+};
+
 /**
- * 条件を満たした場合、エピソード選択画面に遷移する
+ * エピソード選択画面に遷移する
  * @param props ゲームプロパティ
  * @param action アクション
- * @returns 遷移した場合はtrue、遷移しなかった場合はfalse
+ * @returns 更新後のInProgress
  */
-export async function gotoEpisodeSelectorIfNeeded(
-  props: Readonly<GameProps>,
-  action: Readonly<PostBattleAction>,
-): Promise<boolean> {
+export async function gotoEpisodeSelect(options: Options): Promise<InProgress> {
+  const { props } = options;
   if (
-    action.action.type === "GotoEpisodeSelect" &&
     props.inProgress.type === "Story" &&
     props.inProgress.story.type === "PlayingEpisode"
   ) {
@@ -23,8 +29,8 @@ export async function gotoEpisodeSelectorIfNeeded(
     props.domFloaters.hiddenPostBattle();
     await startEpisodeSelector(props, playingEpisode.episode.id);
     playTitleBGM(props);
-    return true;
+    return { type: "Story", story: { type: "EpisodeSelect" } };
   }
 
-  return false;
+  return props.inProgress;
 }
