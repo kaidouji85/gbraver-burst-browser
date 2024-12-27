@@ -186,12 +186,17 @@
   justify-content: flex-end;
   box-sizing: border-box;
   padding: var(--screen-padding-top) var(--screen-padding-right)
-    var(--screen-padding-bottom) var(--screen-padding-left);
+    calc(var(--responsive-font-size) * 0.5) var(--screen-padding-left);
+}
+
+.title__logo-container {
+  display: grid;
+  place-items: center;
+  flex: 1;
 }
 
 .title__logo {
-  height: 45vh;
-  object-fit: contain;
+  height: 35vh;
 }
 
 .title__game-menu {
@@ -199,8 +204,7 @@
   display: flex;
   flex-direction: row;
   justify-content: center;
-  padding-top: calc(var(--responsive-font-size) * 2);
-  gap: calc(var(--responsive-font-size) * 1);
+  gap: calc(var(--responsive-font-size) * 0.5);
 }
 
 .title__game-menu button {
