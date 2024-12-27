@@ -4,5 +4,5 @@ import { PostBattle } from "../post-battle";
 export type PostBattleAction = {
   type: "PostBattleAction";
   /** 決定したアクション */
-  action: PostBattle;
+  postAction: PostBattle;
 };
