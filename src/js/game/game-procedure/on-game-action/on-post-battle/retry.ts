@@ -37,5 +37,5 @@ export async function retry(options: Options): Promise<InProgress> {
     await retryEpisode({ ...props, inProgress: { ...inProgress, story } });
   }
 
-  return props.inProgress;
+  return inProgress;
 }

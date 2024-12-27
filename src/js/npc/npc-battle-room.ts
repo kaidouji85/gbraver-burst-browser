@@ -12,9 +12,13 @@ import { NPC } from "./npc";
 
 /** NPCバトルルーム */
 export class NPCBattleRoom {
+  /** プレイヤー */
   player: Player;
+  /** 敵 */
   enemy: Player;
+  /** Gブレイバーバーストコア */
   #core: GBraverBurstCore;
+  /** NPC */
   #npc: NPC;
 
   /**
