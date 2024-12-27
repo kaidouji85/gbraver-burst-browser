@@ -3,7 +3,7 @@ import { GoingNextEpisode, Story } from "../../../in-progress/story";
 import { startEpisode } from "../../start-episode";
 
 /**
- * エピソードをリトライする
+ * 次のエピソードに画面遷移する
  * @param props ゲームプロパティ
  * @returns 処理が完了したら発火するPromise
  */
