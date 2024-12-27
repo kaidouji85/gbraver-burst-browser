@@ -1,7 +1,7 @@
 import { GameProps } from "../../../game-props";
 import { InProgress } from "../../../in-progress";
 import { NextStage } from "../../../post-battle";
-import { gotoEpisode } from "./goto-episode";
+import { gotoNextEpisode } from "./goto-next-episode";
 import { gotoNPCBattleStage } from "./goto-npc-battle-stage";
 
 /** オプション */
@@ -20,6 +20,7 @@ type Options = {
 export async function nextStage(options: Options): Promise<InProgress> {
   const { props } = options;
   const { inProgress } = props;
+  let ret = inProgress;
   if (
     inProgress.type === "NPCBattle" &&
     inProgress.npcBattle.type === "PlayingNPCBattle"
@@ -29,13 +30,18 @@ export async function nextStage(options: Options): Promise<InProgress> {
       ...props,
       inProgress: { ...inProgress, npcBattle },
     });
+    ret = inProgress;
   } else if (
     inProgress.type === "Story" &&
-    inProgress.story.type === "PlayingEpisode"
+    inProgress.story.type === "GoingNextEpisode"
   ) {
     const { story } = inProgress;
-    await gotoEpisode({ ...props, inProgress: { ...inProgress, story } });
+    await gotoNextEpisode({ ...props, inProgress: { ...inProgress, story } });
+    ret = {
+      type: "Story",
+      story: { type: "PlayingEpisode", episode: story.nextEpisode },
+    };
   }
 
-  return props.inProgress;
+  return ret;
 }

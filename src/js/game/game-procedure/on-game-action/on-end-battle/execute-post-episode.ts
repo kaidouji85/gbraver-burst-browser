@@ -46,7 +46,7 @@ export async function executePostEpisode(
     if ((isPlayerWin || currentEpisode.isLosingEvent) && nextEpisode) {
       return {
         buttons: PostEpisodeWinButtons,
-        story: { ...inProgress.story, episode: nextEpisode },
+        story: { type: "GoingNextEpisode", currentEpisode, nextEpisode },
       };
     } else if (!isPlayerWin && !currentEpisode.isLosingEvent) {
       return {

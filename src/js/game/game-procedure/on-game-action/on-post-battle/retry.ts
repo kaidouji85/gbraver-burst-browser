@@ -1,7 +1,7 @@
 import { GameProps } from "../../../game-props";
 import { InProgress } from "../../../in-progress";
 import { Retry } from "../../../post-battle";
-import { gotoEpisode } from "./goto-episode";
+import { retryEpisode } from "./retry-episode";
 import { gotoNPCBattleStage } from "./goto-npc-battle-stage";
 
 /** オプション */
@@ -34,7 +34,7 @@ export async function retry(options: Options): Promise<InProgress> {
     inProgress.story.type === "PlayingEpisode"
   ) {
     const { story } = inProgress;
-    await gotoEpisode({ ...props, inProgress: { ...inProgress, story } });
+    await retryEpisode({ ...props, inProgress: { ...inProgress, story } });
   }
 
   return props.inProgress;
