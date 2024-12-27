@@ -5,10 +5,7 @@ import { PostBattleFloater } from "../dom-floaters/post-battle/post-battle";
 export const postBattleConnector: DomFloaterActionConnector<
   PostBattleFloater
 > = (floater, gameAction) => [
-  floater.selectionCompleteNotifier().subscribe((postBattle) => {
-    gameAction.next({
-      type: "PostBattleAction",
-      postAction: postBattle,
-    });
+  floater.selectionCompleteNotifier().subscribe((postAction) => {
+    gameAction.next({ type: "PostBattleAction", postAction });
   }),
 ];
