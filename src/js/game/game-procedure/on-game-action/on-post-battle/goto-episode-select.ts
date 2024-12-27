@@ -19,9 +19,7 @@ type Options = {
  * @param action アクション
  * @returns 更新後のInProgress
  */
-export async function gotoEpisodeSelect(
-  options: Options,
-): Promise<InProgress> {
+export async function gotoEpisodeSelect(options: Options): Promise<InProgress> {
   const { props } = options;
   if (
     props.inProgress.type === "Story" &&

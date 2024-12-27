@@ -1,23 +1,22 @@
 import { GameProps } from "../../../game-props";
 import { InProgress } from "../../../in-progress";
-import { Retry } from "../../../post-battle";
+import { NextStage } from "../../../post-battle";
 import { gotoNPCBattleStage } from "./goto-npc-battle-stage";
-import { retryEpisode } from "./retry-episode";
 
 /** オプション */
 type Options = {
   /** ゲームプロパティ */
   props: Readonly<GameProps>;
   /** アクション */
-  postAction: Readonly<Retry>;
+  postAction: Readonly<NextStage>;
 };
 
 /**
- * リトライ
+ * 次のステージ
  * @param options オプション
  * @returns 更新後のInProgress
  */
-export async function retry(options: Options): Promise<InProgress> {
+export async function nextStage(options: Options): Promise<InProgress> {
   const { props } = options;
   const { inProgress } = props;
   if (
@@ -29,12 +28,6 @@ export async function retry(options: Options): Promise<InProgress> {
       ...props,
       inProgress: { ...inProgress, npcBattle },
     });
-  } else if (
-    inProgress.type === "Story" &&
-    inProgress.story.type === "PlayingEpisode"
-  ) {
-    const { story } = inProgress;
-    await retryEpisode({ ...props, inProgress: { ...inProgress, story } });
   }
 
   return props.inProgress;

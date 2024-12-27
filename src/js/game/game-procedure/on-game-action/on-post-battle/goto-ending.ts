@@ -19,9 +19,7 @@ type Options = {
  * @param options オプション
  * @returns 更新後のInProgress
  */
-export async function gotoEnding(
-  options: Options,
-): Promise<InProgress> {
+export async function gotoEnding(options: Options): Promise<InProgress> {
   const { props } = options;
   props.domFloaters.hiddenPostBattle();
   await props.fader.fadeOut();

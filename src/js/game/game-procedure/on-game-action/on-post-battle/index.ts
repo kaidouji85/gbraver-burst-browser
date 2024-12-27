@@ -1,12 +1,10 @@
-import { Processor } from "glob/dist/commonjs/processor";
 import { PostBattleAction } from "../../../game-actions/post-battle-action";
 import { GameProps } from "../../../game-props";
-import { InProgress } from "../../../in-progress";
 import { gotoEnding } from "./goto-ending";
-import { retryEpisode } from "./retry-episode";
 import { gotoEpisodeSelect } from "./goto-episode-select";
-import { gotoNPCBattleStage } from "./goto-npc-battle-stage";
-import { gotoTitle, gotoTitleIfNeeded } from "./goto-title";
+import { gotoTitle } from "./goto-title";
+import { nextStage } from "./next-stage";
+import { retry } from "./retry";
 
 /** オプション */
 type Options = {
@@ -31,32 +29,14 @@ export async function onPostBattleAction(options: Options): Promise<void> {
         return gotoTitle({ props, postAction });
       case "GotoEnding":
         return gotoEnding({ props, postAction });
-      // case "NextStage":
-      // case "Retry":
-      //   return gotoNPCBattleStage({ props, postAction });
+      case "Retry":
+        return retry({ props, postAction });
+      case "NextStage":
+        return nextStage({ props, postAction });
       case "GotoEpisodeSelect":
         return gotoEpisodeSelect({ props, postAction });
       default:
         return props.inProgress;
     }
   })();
-
-  /*
-  let updated: InProgress = props.inProgress;
-  if (await gotoTitleIfNeeded(props, action)) {
-    updated = { type: "None" };
-  } else if (await gotoEndingIfNeeded(props, action)) {
-    updated = { type: "None" };
-  } else if (await gotoNPCBattleStageIfNeeded(props, action)) {
-    updated = props.inProgress;
-  } else if (await gotoEpisodeIfNeeded(props, action)) {
-    updated = props.inProgress;
-  } else if (await gotoEpisodeSelectorIfNeeded(props, action)) {
-    updated = {
-      type: "Story",
-      story: { type: "EpisodeSelect" },
-    };
-  }
-  props.inProgress = updated;
-  */
 }
