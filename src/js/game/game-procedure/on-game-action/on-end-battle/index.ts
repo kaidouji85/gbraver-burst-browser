@@ -3,7 +3,7 @@ import { EndBattle } from "../../../game-actions/end-battle";
 import { GameProps } from "../../../game-props";
 import { executePostEpisodeIfNeeded } from "./execute-post-episode-if-needed";
 import { executePostNetBattleIfNeeded } from "./execute-post-net-battle-if-needed";
-import { executePostNPCBattleIfNeeded } from "./execute-post-npc-baattle-if-needed";
+import { executePostNPCBattleIfNeeded } from "./execute-post-npc-battle-if-needed";
 
 /** オプション */
 type Options = {
