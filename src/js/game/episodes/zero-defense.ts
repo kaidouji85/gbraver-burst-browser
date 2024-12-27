@@ -28,4 +28,5 @@ export const zeroDefenseTutorial: Episode = {
   npc: zeroDefenseTutorialNPC(),
   event: createZeroDefenseTutorialEvent,
   bgm: SOUND_IDS.BATTLE_BGM_01,
+  isLosingEvent: false,
 };
