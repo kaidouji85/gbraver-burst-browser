@@ -9,19 +9,20 @@ import { GameProps } from "../../../game-props";
 export async function executePostNetBattleIfNeeded(
   props: Readonly<GameProps>,
 ): Promise<boolean> {
-  if (
-    props.inProgress.type === "CasualMatch" ||
-    props.inProgress.type === "PrivateMatchHost" ||
-    props.inProgress.type === "PrivateMatchGuest"
-  ) {
-    props.suddenlyBattleEnd.unbind();
-    await props.api.disconnectWebsocket();
-    await props.domFloaters.showPostBattle({
-      ...props,
-      buttons: PostNetworkBattleButtons,
-    });
-    return true;
+  const { inProgress } = props;
+  const isPostNetBattle =
+    inProgress.type === "CasualMatch" ||
+    inProgress.type === "PrivateMatchHost" ||
+    inProgress.type === "PrivateMatchGuest";
+  if (!isPostNetBattle) {
+    return false;
   }
 
-  return false;
+  props.suddenlyBattleEnd.unbind();
+  await props.api.disconnectWebsocket();
+  await props.domFloaters.showPostBattle({
+    ...props,
+    buttons: PostNetworkBattleButtons,
+  });
+  return true;
 }
