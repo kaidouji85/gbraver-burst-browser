@@ -71,18 +71,11 @@ export async function executePostNPCBattleIfNeeded(
     return { isExecuted: false };
   }
 
-  await domFloaters.showPostBattle({
-    ...props,
-    buttons: postNPCBattleButtons(updated.result),
-  });
-  return {
-    isExecuted: true,
-    inProgress: {
-      ...inProgress,
-      npcBattle: {
-        ...inProgress.npcBattle,
-        state: updated.state,
-      },
-    },
+  const buttons = postNPCBattleButtons(updated.result);
+  await domFloaters.showPostBattle({ ...props, buttons });
+  const updatedInProgress = {
+    ...inProgress,
+    npcBattle: { ...inProgress.npcBattle, state: updated.state },
   };
+  return { isExecuted: true, inProgress: updatedInProgress };
 }

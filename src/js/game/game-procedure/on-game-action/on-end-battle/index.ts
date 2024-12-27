@@ -5,6 +5,7 @@ import { executePostEpisodeIfNeeded } from "./execute-post-episode-if-needed";
 import { executePostNetBattleIfNeeded } from "./execute-post-net-battle-if-needed";
 import { executePostNPCBattleIfNeeded } from "./execute-post-npc-baattle-if-needed";
 
+/** オプション */
 type Options = {
   /** ゲームプロパティ */
   props: GameProps;
