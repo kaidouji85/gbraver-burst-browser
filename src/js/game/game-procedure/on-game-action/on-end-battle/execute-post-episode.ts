@@ -55,16 +55,17 @@ const createPostEpisodeResult = (
     gameEnd.result.winner === currentPlayer.playerId;
   const currentEpisodeIndex = sameTypeEpisodes.indexOf(currentEpisode);
   const nextEpisode = sameTypeEpisodes.at(currentEpisodeIndex + 1);
+
+  let ret: PostEpisodeResult = { buttons: PostEpisodeButtons, story };
   if ((isPlayerWin || currentEpisode.isLosingEvent) && nextEpisode) {
-    return {
+    ret = {
       buttons: PostEpisodeWinButtons,
       story: { type: "GoingNextEpisode", currentEpisode, nextEpisode },
     };
   } else if (!isPlayerWin && !currentEpisode.isLosingEvent) {
-    return { buttons: PostEpisodeLoseButtons, story };
-  } else {
-    return { buttons: PostEpisodeButtons, story };
+    ret = { buttons: PostEpisodeLoseButtons, story };
   }
+  return ret;
 };
 
 /**
