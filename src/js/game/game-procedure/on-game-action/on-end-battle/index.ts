@@ -3,8 +3,9 @@ import { EndBattle } from "../../../game-actions/end-battle";
 import { GameProps } from "../../../game-props";
 import { executePostEpisodeIfNeeded } from "./execute-post-episode-if-needed";
 import { executePostNetBattleIfNeeded } from "./execute-post-net-battle-if-needed";
-import { executePostNPCBattleIfNeeded } from "./execute-post-npc-baattle-if-needed";
+import { executePostNPCBattleIfNeeded } from "./execute-post-npc-battle-if-needed";
 
+/** オプション */
 type Options = {
   /** ゲームプロパティ */
   props: GameProps;
@@ -32,16 +33,11 @@ export async function onEndBattle(options: Options): Promise<void> {
     return;
   }
 
-  const isPostNetBattleExecuted = await executePostNetBattleIfNeeded(props);
-  if (isPostNetBattleExecuted) {
+  if (await executePostNetBattleIfNeeded(props)) {
     return;
   }
 
-  const isPostTutorialBattleExecuted = await executePostEpisodeIfNeeded(
-    props,
-    action,
-  );
-  if (isPostTutorialBattleExecuted) {
+  if (await executePostEpisodeIfNeeded(props, action)) {
     return;
   }
 }
