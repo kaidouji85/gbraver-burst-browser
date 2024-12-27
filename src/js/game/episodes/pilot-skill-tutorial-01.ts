@@ -29,4 +29,5 @@ export const pilotSkillTutorial01: Episode = {
   npc: pilotSkillTutorialNPC(),
   event: createPilotSkillTutorial01Event,
   bgm: SOUND_IDS.BATTLE_BGM_01,
+  isLosingEvent: true,
 };
