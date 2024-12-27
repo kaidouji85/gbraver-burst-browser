@@ -29,4 +29,5 @@ export const PrinceOfFallenSun: Episode = {
   npc: neoLandozerNPCForPrinceOfFallenSun(),
   event: () => createPrinceOfFallenSun(),
   bgm: SOUND_IDS.GAI_BATTLE,
+  isLosingEvent: false,
 };
