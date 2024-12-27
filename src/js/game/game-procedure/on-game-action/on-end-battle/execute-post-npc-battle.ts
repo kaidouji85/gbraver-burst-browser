@@ -7,6 +7,7 @@ import {
 import { EndBattle } from "../../../game-actions/end-battle";
 import { GameProps } from "../../../game-props";
 import { InProgress } from "../../../in-progress";
+import { NPCBattle } from "../../../in-progress/npc-battle";
 import { NPCBattleResult } from "../../../npc-battle/npc-battle-result";
 import { updateNPCBattleState } from "../../../npc-battle/updated-npc-battle-state";
 
@@ -29,38 +30,20 @@ const postNPCBattleButtons = (
   }
 };
 
-/** NPCバトル終了後処理が実行された時の情報 */
-type IsExecuted = {
-  isExecuted: true;
-  /** inProgress更新結果 */
-  inProgress: InProgress;
-};
-
-/** NPCバトル終了後処理が実行されなかった時の情報 */
-type IsNotExecuted = {
-  isExecuted: false;
-};
-
-/** NPCバトル終了処理の実行情報 */
-type Ret = IsExecuted | IsNotExecuted;
-
 /**
- * 条件を満たした場合、NPCバトル終了後処理を実行する
+ * NPCバトル終了後処理を実行する
  * @param props ゲームプロパティ
  * @param action アクション
- * @returns NPCバトル終了処理の実行情報
+ * @returns inProgress更新結果
  */
-export async function executePostNPCBattleIfNeeded(
-  props: Readonly<GameProps>,
+export async function executePostNPCBattle(
+  props: Readonly<GameProps & { inProgress: NPCBattle }>,
   action: Readonly<EndBattle>,
-): Promise<Ret> {
+): Promise<InProgress> {
   const { inProgress, domFloaters } = props;
   const { gameEnd } = action;
-  const isNPCPostBattle =
-    inProgress.type === "NPCBattle" &&
-    inProgress.npcBattle.type === "PlayingNPCBattle";
-  if (!isNPCPostBattle) {
-    return { isExecuted: false };
+  if (inProgress.npcBattle.type !== "PlayingNPCBattle") {
+    return inProgress;
   }
 
   const updated = updateNPCBattleState(
@@ -68,14 +51,13 @@ export async function executePostNPCBattleIfNeeded(
     gameEnd.result,
   );
   if (!updated) {
-    return { isExecuted: false };
+    return inProgress;
   }
 
   const buttons = postNPCBattleButtons(updated.result);
   await domFloaters.showPostBattle({ ...props, buttons });
-  const updatedInProgress = {
+  return {
     ...inProgress,
     npcBattle: { ...inProgress.npcBattle, state: updated.state },
   };
-  return { isExecuted: true, inProgress: updatedInProgress };
 }

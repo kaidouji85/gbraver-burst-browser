@@ -1,9 +1,9 @@
 import { parseBrowserConfig } from "../../../config/parser/browser-config";
 import { EndBattle } from "../../../game-actions/end-battle";
 import { GameProps } from "../../../game-props";
-import { executePostEpisodeIfNeeded } from "./execute-post-episode-if-needed";
-import { executePostNetBattleIfNeeded } from "./execute-post-net-battle-if-needed";
-import { executePostNPCBattleIfNeeded } from "./execute-post-npc-battle-if-needed";
+import { executePostEpisode } from "./execute-post-episode";
+import { executePostNetBattle } from "./execute-post-net-battle";
+import { executePostNPCBattle } from "./execute-post-npc-battle";
 
 /** オプション */
 type Options = {
@@ -15,6 +15,7 @@ type Options = {
 
 /**
  * 戦闘終了時の処理
+ * 本関数にはprops.inProgressを変更する副作用がある
  * @param options オプション
  * @returns 処理が完了したら発火するPromise
  */
@@ -27,17 +28,20 @@ export async function onEndBattle(options: Options): Promise<void> {
       battleAnimationTimeScale: action.animationTimeScale,
     }),
   );
-  const postNPCBattle = await executePostNPCBattleIfNeeded(props, action);
-  if (postNPCBattle.isExecuted) {
-    props.inProgress = postNPCBattle.inProgress;
-    return;
-  }
 
-  if (await executePostNetBattleIfNeeded(props)) {
-    return;
-  }
-
-  if (await executePostEpisodeIfNeeded(props, action)) {
-    return;
-  }
+  const inProgress = props.inProgress;
+  props.inProgress = await (() => {
+    switch (inProgress.type) {
+      case "NPCBattle":
+        return executePostNPCBattle({ ...props, inProgress }, action);
+      case "CasualMatch":
+      case "PrivateMatchHost":
+      case "PrivateMatchGuest":
+        return executePostNetBattle({ ...props, inProgress });
+      case "Story":
+        return executePostEpisode({ ...props, inProgress }, action);
+      default:
+        return inProgress;
+    }
+  })();
 }
