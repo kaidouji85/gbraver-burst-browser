@@ -1,30 +1,31 @@
 import { PostEpisodeButtons } from "../../../dom-floaters/post-battle/post-battle-buttons";
 import { EndBattle } from "../../../game-actions/end-battle";
 import { GameProps } from "../../../game-props";
+import { InProgress } from "../../../in-progress";
+import { Story } from "../../../in-progress/story";
 
 /**
- * 条件を満たした場合、エピソード終了後処理を実行する
+ * エピソード終了後処理を実行する
  * @param props ゲームプロパティ
  * @param action アクション
- * @returns エピソード終了後処理を実行したか否か、trueで実行した
+ * @returns inProgress更新結果
  */
-export async function executePostEpisodeIfNeeded(
-  props: Readonly<GameProps>,
+export async function executePostEpisode(
+  props: Readonly<GameProps & { inProgress: Story }>,
   action: Readonly<EndBattle>,
-): Promise<boolean> {
+): Promise<InProgress> {
   const { inProgress } = props;
   const { gameEnd } = action;
   const isPostEpisode =
-    inProgress.type === "Story" &&
     inProgress.story.type === "PlayingEpisode" &&
     gameEnd.result.type === "GameOver";
   if (!isPostEpisode) {
-    return false;
+    return inProgress;
   }
 
   await props.domFloaters.showPostBattle({
     ...props,
     buttons: PostEpisodeButtons,
   });
-  return true;
+  return inProgress;
 }
