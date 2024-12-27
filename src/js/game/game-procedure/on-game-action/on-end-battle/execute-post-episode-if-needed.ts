@@ -13,16 +13,16 @@ export async function executePostEpisodeIfNeeded(
   action: Readonly<EndBattle>,
 ): Promise<boolean> {
   if (
-    props.inProgress.type !== "Story" ||
-    props.inProgress.story.type !== "PlayingEpisode" ||
-    action.gameEnd.result.type !== "GameOver"
+    props.inProgress.type === "Story" &&
+    props.inProgress.story.type === "PlayingEpisode" &&
+    action.gameEnd.result.type === "GameOver"
   ) {
-    return false;
+    await props.domFloaters.showPostBattle({
+      ...props,
+      buttons: PostEpisodeButtons,
+    });
+    return true;
   }
 
-  await props.domFloaters.showPostBattle({
-    ...props,
-    buttons: PostEpisodeButtons,
-  });
-  return true;
+  return false;
 }

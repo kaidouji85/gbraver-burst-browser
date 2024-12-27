@@ -32,16 +32,11 @@ export async function onEndBattle(options: Options): Promise<void> {
     return;
   }
 
-  const isPostNetBattleExecuted = await executePostNetBattleIfNeeded(props);
-  if (isPostNetBattleExecuted) {
+  if (await executePostNetBattleIfNeeded(props)) {
     return;
   }
 
-  const isPostTutorialBattleExecuted = await executePostEpisodeIfNeeded(
-    props,
-    action,
-  );
-  if (isPostTutorialBattleExecuted) {
+  if (await executePostEpisodeIfNeeded(props, action)) {
     return;
   }
 }
