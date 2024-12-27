@@ -1,25 +1,32 @@
-import { PostBattleAction } from "../../../game-actions/post-battle-action";
 import { GameProps } from "../../../game-props";
+import { InProgress } from "../../../in-progress";
 import { getCurrentNPCStage } from "../../../npc-battle/get-current-npc-stage";
 import { getNPCStageLevel } from "../../../npc-battle/get-npc-stage-level";
 import { NPCBattleState } from "../../../npc-battle/npc-battle-state";
 import { DefaultStage } from "../../../npc-battle/stages/default-stage";
+import { NextStage, Retry } from "../../../post-battle";
 import { startNPCBattleStage } from "../../start-npc-battle-stage";
 
+/** オプション */
+type Options = {
+  /** ゲームプロパティ */
+  props: Readonly<GameProps>;
+  /** アクション */
+  postAction: Readonly<NextStage | Retry>;
+};
+
 /**
- * 条件を満たした場合、NPCバトルステージに遷移する
- * @param props ゲームプロパティ
- * @param action 戦闘終了後アクション
+ * NPCバトルステージに遷移する
+ * @param options オプション
  * @returns 遷移した場合はtrue
  */
-export async function gotoNPCBattleStageIfNeeded(
-  props: Readonly<GameProps>,
-  action: Readonly<PostBattleAction>,
-): Promise<boolean> {
+export async function gotoNPCBattleStage(
+  options: Options,
+): Promise<InProgress> {
+  const { props } = options;
   if (
     props.inProgress.type === "NPCBattle" &&
-    props.inProgress.npcBattle.type === "PlayingNPCBattle" &&
-    (action.postAction.type === "NextStage" || action.postAction.type === "Retry")
+    props.inProgress.npcBattle.type === "PlayingNPCBattle"
   ) {
     const state: NPCBattleState = props.inProgress.npcBattle.state;
     const stage = getCurrentNPCStage(state) ?? DefaultStage;
@@ -27,8 +34,7 @@ export async function gotoNPCBattleStageIfNeeded(
     const player = state.player;
     props.domFloaters.hiddenPostBattle();
     await startNPCBattleStage(props, player, stage, level);
-    return true;
   }
 
-  return false;
+  return props.inProgress;
 }
