@@ -76,20 +76,26 @@
 }
 
 .episode-selector__episode-detail {
+  display: flex;
+  flex-direction: column;
   grid-area: detail;
   border-radius: var(--button-border-radius);
   box-sizing: border-box;
   font-size: var(--responsive-font-size);
   padding: calc(var(--responsive-font-size) * 0.5);
   background-color: var(--sub-background-color);
-  overflow: auto;
 }
 
 .episode-selector__episode-title {
-  margin-bottom: calc(var(--responsive-font-size) * 1);
+  margin-bottom: calc(var(--responsive-font-size) * 0.5);
   border-bottom: dashed 1px var(--font-color);
   word-break: keep-all;
   overflow-wrap: anywhere;
+}
+
+.episode-selector__contents {
+  flex: 1;
+  overflow-y: scroll;
 }
 
 .episode-selector__episode-image-cut {
