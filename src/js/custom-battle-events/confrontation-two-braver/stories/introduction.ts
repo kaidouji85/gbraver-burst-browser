@@ -27,40 +27,41 @@ import { yoroshikuOnegaiShimasu } from "../../yoroshiku-onegai-shimasu";
 export async function introduction(
   props: CustomBattleEventProps,
 ): Promise<void> {
-  activeRightMessageWindowWithFace(props, "Shinya");
-  await scrollRightMessages(props, [
-    ["シンヤ", `「全国大会の${wbr}覇者${wbr} ユウヤさん`],
-    [`その搭乗機${wbr} G（ジェネシス）ブレイバー`],
-    [`……俺は${wbr}この人に${wbr}憧れて${wbr} 機動倶楽部を${wbr}始めたんだ」`],
-  ]);
-  props.view.dom.rightMessageWindow.darken();
-  activeLeftMessageWindowWithFace(props, "Yuuya");
-  await scrollLeftMessages(props, [
-    ["ユウヤ", "「シンブレイバーか"],
-    [
-      `……本来${wbr}ブレイバーの${wbr}称号は${wbr} 日本で${wbr}一番強い${wbr}ロボに${wbr}与えられる${wbr}もの`,
-    ],
-    [`それを${wbr} こんな${wbr}ひよっ子が${wbr}名乗る${wbr}とは`],
-    [`面白い${wbr} 気に入ったぜ シンヤ」`],
-  ]);
-  await refreshConversation(props, 100);
+  // activeRightMessageWindowWithFace(props, "Shinya");
+  // await scrollRightMessages(props, [
+  //   ["シンヤ", `「全国大会の${wbr}覇者${wbr} ユウヤさん`],
+  //   [`その搭乗機${wbr} G（ジェネシス）ブレイバー`],
+  //   [`……俺は${wbr}この人に${wbr}憧れて${wbr} 機動倶楽部を${wbr}始めたんだ」`],
+  // ]);
+  // props.view.dom.rightMessageWindow.darken();
+  // activeLeftMessageWindowWithFace(props, "Yuuya");
+  // await scrollLeftMessages(props, [
+  //   ["ユウヤ", "「シンブレイバーか"],
+  //   [
+  //     `……本来${wbr}ブレイバーの${wbr}称号は${wbr} 日本で${wbr}一番強い${wbr}ロボに${wbr}与えられる${wbr}もの`,
+  //   ],
+  //   [`それを${wbr} こんな${wbr}ひよっ子が${wbr}名乗る${wbr}とは`],
+  //   [`面白い${wbr} 気に入ったぜ シンヤ」`],
+  // ]);
+  // await refreshConversation(props, 100);
+  // activeRightMessageWindowWithFace(props, "Tsubasa");
+  // await scrollRightMessages(props, [
+  //   ["ツバサ", `「間もなく${wbr}都立大田高校・府立洛内高校の`],
+  //   [`練習試合を${wbr}行う`],
+  // ]);
   activeRightMessageWindowWithFace(props, "Tsubasa");
-  await scrollRightMessages(props, [
-    ["ツバサ", `「間もなく${wbr}都立大田高校・府立洛内高校の`],
-    [`練習試合を${wbr}行う`],
-  ]);
-  props.view.dom.rightMessageWindow.messages(["姿勢を正して"]);
+  props.view.dom.rightMessageWindow.messages(["ツバサ", "「姿勢を正して"]);
   await synchronizedUpright(props).play();
   props.view.dom.rightMessageWindow.nextMessageIconVisible(true);
   await waitUntilWindowPush(props);
   props.se.play(props.sounds.sendMessage);
   props.view.dom.rightMessageWindow.nextMessageIconVisible(false);
   props.view.dom.rightMessageWindow.scrollUp();
-  props.view.dom.rightMessageWindow.messages(["礼！！」"]);
+  props.view.dom.rightMessageWindow.messages(["2024年も一年間」"]);
   await delay(500).play();
   await refreshConversation(props);
-  playerPilotShoutInInnerHTML(props, "Shinya", yoroshikuOnegaiShimasu());
-  enemyPilotShoutInInnerHTML(props, "Yuuya", yoroshikuOnegaiShimasu());
+  playerPilotShoutInInnerHTML(props, "Shinya", "ありがとうございました");
+  enemyPilotShoutInInnerHTML(props, "Yuuya", "ありがとうございました");
   await synchronizedBow(props).chain(delay(500)).play();
   invisibleAllMessageWindows(props);
 }
