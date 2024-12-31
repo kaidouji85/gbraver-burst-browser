@@ -197,14 +197,15 @@
   flex: 1;
 }
 
-.title__logo {
+.title__title-logo {
   height: 35vh;
 }
 
 .title__copy-rights,
 .title__music {
   font-size: calc(var(--responsive-font-size) * 0.8);
-  text-shadow: 1px 1px 2px #000;
+  font-weight: bold;
+  text-shadow: 1px 1px 4px black;
 }
 
 .title__game-menu {
