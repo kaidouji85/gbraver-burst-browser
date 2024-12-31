@@ -30,6 +30,8 @@
 .episode-selector__selector {
   display: flex;
   flex-direction: column;
+  background-color: var(--sub-background-color);
+  padding: calc(var(--responsive-font-size) * 0.5);
 }
 
 .episode-selector__episode-type-tabs {
@@ -70,8 +72,6 @@
   flex-direction: column;
   z-index: var(--controllers-z-index);
   border-radius: 0 0 var(--button-border-radius) var(--button-border-radius);
-  background-color: var(--sub-background-color);
-  padding: calc(var(--responsive-font-size) * 0.5);
   overflow-y: scroll;
 }
 
@@ -104,12 +104,10 @@
 
 .episode-selector__prev,
 .episode-selector__play-episode {
-  flex: 1;
   min-height: calc(var(--responsive-font-size) * 3);
   font-size: var(--responsive-font-size);
   border-radius: var(--button-border-radius);
   color: var(--button-font-color);
-  box-shadow: var(--button-box-shadow);
   z-index: var(--controllers-z-index);
   word-break: keep-all;
   overflow-wrap: anywhere;
