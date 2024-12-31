@@ -6,10 +6,10 @@
   --safe-area-right: env(safe-area-inset-right);
   --safe-area-bottom: env(safe-area-inset-bottom);
   --safe-area-left: env(safe-area-inset-left);
-  --screen-padding-top: calc(var(--safe-area-top) + 1rem);
-  --screen-padding-left: calc(var(--safe-area-left) + 1rem);
-  --screen-padding-right: calc(var(--safe-area-right) + 1rem);
-  --screen-padding-bottom: calc(var(--safe-area-bottom) + 1rem);
+  --screen-padding-top: max(var(--safe-area-top), 1rem);
+  --screen-padding-left: max(var(--safe-area-left), 1rem);
+  --screen-padding-right: max(var(--safe-area-right), 1rem);
+  --screen-padding-bottom: max(var(--safe-area-bottom), 1rem);
 
   /** フォント */
   --font-color: rgb(240 240 240);
