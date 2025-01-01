@@ -4,10 +4,10 @@
   .net-battle-selector {
     --closer-width: 48px;
     --closer-height: 48px;
-    --casual-match-color: #009924;
-    --casual-match-border: 2px solid #00330c;
-    --private-match-color: #8900ba;
-    --private-match-border: 2px solid #250033;
+    --casual-match-color: #00cc30;
+    --casual-match-border: 2px solid #00cc30;
+    --private-match-color: #d500ff;
+    --private-match-border: 2px solid #d500ff;
 
     display: block;
   }
@@ -71,19 +71,25 @@
 
 .net-battle-selector__casual-match {
   grid-area: casual-match;
-  background-color: var(--casual-match-color);
+  color: var(--casual-match-color);
+  font-weight: bold;
+  background-color: var(--sub-background-color);
   border: var(--casual-match-border);
 }
 
 .net-battle-selector__private-match-host {
   grid-area: private-match-host;
-  background-color: var(--private-match-color);
+  color: var(--private-match-color);
+  font-weight: bold;
+  background-color: var(--sub-background-color);
   border: var(--private-match-border);
 }
 
 .net-battle-selector__private-match-guest {
   grid-area: private-match-guest;
-  background-color: var(--private-match-color);
+  color: var(--private-match-color);
+  font-weight: bold;
+  background-color: var(--sub-background-color);
   border: var(--private-match-border);
 }
 
@@ -92,7 +98,6 @@
 .net-battle-selector__private-match-guest {
   min-height: calc(var(--responsive-font-size) * 1);
   border-radius: var(--button-border-radius);
-  color: var(--button-font-color);
   padding: calc(var(--responsive-font-size) * 1)
     calc(var(--responsive-font-size) * 2);
   text-align: left;
@@ -101,11 +106,12 @@
 .net-battle-selector__casual-match-title,
 .net-battle-selector__private-match-host-title,
 .net-battle-selector__private-match-guest-title {
-  font-size: calc(var(--responsive-font-size) * 1);
+  font-size: calc(var(--responsive-font-size) * 1.2);
 }
 
 .net-battle-selector__casual-match-description,
 .net-battle-selector__private-match-host-description,
 .net-battle-selector__private-match-guest-description {
+  color: var(--button-font-color);
   font-size: calc(var(--responsive-font-size) * 0.6);
 }
