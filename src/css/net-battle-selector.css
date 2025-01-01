@@ -4,6 +4,10 @@
   .net-battle-selector {
     --closer-width: 48px;
     --closer-height: 48px;
+    --casual-match-color: #009924;
+    --casual-match-border: 2px solid #00330c;
+    --private-match-color: #8900ba;
+    --private-match-border: 2px solid #250033;
 
     display: block;
   }
@@ -67,16 +71,22 @@
 .net-battle-selector__casual-match {
   grid-column: 1;
   grid-row: 1/3;
+  background-color: var(--casual-match-color);
+  border: var(--casual-match-border);
 }
 
 .net-battle-selector__private-match-host {
   grid-column: 2;
   grid-row: 1;
+  background-color: var(--private-match-color);
+  border: var(--private-match-border);
 }
 
 .net-battle-selector__private-match-guest {
   grid-column: 2;
   grid-row: 2;
+  background-color: var(--private-match-color);
+  border: var(--private-match-border);
 }
 
 .net-battle-selector__casual-match,
@@ -85,8 +95,6 @@
   min-height: calc(var(--responsive-font-size) * 1);
   border-radius: var(--button-border-radius);
   color: var(--button-font-color);
-  border: var(--sub-button-border);
-  background-color: var(--sub-button-background-color);
   padding: calc(var(--responsive-font-size) * 1)
     calc(var(--responsive-font-size) * 2);
   text-align: left;
