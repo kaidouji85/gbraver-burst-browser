@@ -6,8 +6,8 @@
     --closer-height: 48px;
     --casual-match-color: #00cc30;
     --casual-match-border: 2px solid #00cc30;
-    --private-match-color: #d500ff;
-    --private-match-border: 2px solid #d500ff;
+    --private-match-color: #e666ff;
+    --private-match-border: 2px solid #e666ff;
 
     display: block;
   }
