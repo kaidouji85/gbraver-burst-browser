@@ -4,9 +4,9 @@
   .net-battle-selector {
     --closer-width: 48px;
     --closer-height: 48px;
-    --casual-match-color: #00cc30;
+    --casual-match-background-color: #001a06;
     --casual-match-border: 2px solid #00cc30;
-    --private-match-color: #e666ff;
+    --private-match-background-color: #170a1a;
     --private-match-border: 2px solid #e666ff;
 
     display: block;
@@ -71,25 +71,22 @@
 
 .net-battle-selector__casual-match {
   grid-area: casual-match;
-  color: var(--casual-match-color);
-  font-weight: bold;
-  background-color: var(--sub-background-color);
+  color: var(--button-font-color);
+  background-color: var(--casual-match-background-color);
   border: var(--casual-match-border);
 }
 
 .net-battle-selector__private-match-host {
   grid-area: private-match-host;
-  color: var(--private-match-color);
-  font-weight: bold;
-  background-color: var(--sub-background-color);
+  color: var(--button-font-color);
+  background-color: var(--private-match-background-color);
   border: var(--private-match-border);
 }
 
 .net-battle-selector__private-match-guest {
   grid-area: private-match-guest;
-  color: var(--private-match-color);
-  font-weight: bold;
-  background-color: var(--sub-background-color);
+  color: var(--button-font-color);
+  background-color: var(--private-match-background-color);
   border: var(--private-match-border);
 }
 
@@ -107,6 +104,7 @@
 .net-battle-selector__private-match-host-title,
 .net-battle-selector__private-match-guest-title {
   font-size: calc(var(--responsive-font-size) * 1.2);
+  font-weight: bold;
   overflow-wrap: anywhere;
   word-break: normal;
   line-break: strict;
