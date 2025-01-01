@@ -55,8 +55,9 @@
   padding: max(var(--dialog-padding), calc(var(--closer-height) / 2))
     var(--dialog-padding) var(--dialog-padding) var(--dialog-padding);
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  grid-template-rows: 1fr 1fr;
+  grid-template:
+    "casual-match private-match-host" 1fr
+    "casual-match private-match-guest" 1fr / 1fr 1fr;
   grid-gap: calc(var(--responsive-font-size) * 0.3);
 }
 
@@ -69,22 +70,19 @@
 }
 
 .net-battle-selector__casual-match {
-  grid-column: 1;
-  grid-row: 1/3;
+  grid-area: casual-match;
   background-color: var(--casual-match-color);
   border: var(--casual-match-border);
 }
 
 .net-battle-selector__private-match-host {
-  grid-column: 2;
-  grid-row: 1;
+  grid-area: private-match-host;
   background-color: var(--private-match-color);
   border: var(--private-match-border);
 }
 
 .net-battle-selector__private-match-guest {
-  grid-column: 2;
-  grid-row: 2;
+  grid-area: private-match-guest;
   background-color: var(--private-match-color);
   border: var(--private-match-border);
 }
