@@ -107,6 +107,9 @@
 .net-battle-selector__private-match-host-title,
 .net-battle-selector__private-match-guest-title {
   font-size: calc(var(--responsive-font-size) * 1.2);
+  overflow-wrap: anywhere;
+  word-break: normal;
+  line-break: strict;
 }
 
 .net-battle-selector__casual-match-description,
