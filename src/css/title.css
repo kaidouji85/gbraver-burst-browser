@@ -210,9 +210,10 @@
 
 .title__game-menu {
   width: 100%;
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
+  display: grid;
+  grid-template:
+    ".      .          .      tutorial" 1fr
+    "config net-battle arcade story" 1fr / 1fr 1fr 1fr 1fr;
   gap: calc(var(--responsive-font-size) * 0.5);
 }
 
@@ -225,14 +226,32 @@
   box-shadow: var(--button-box-shadow);
 }
 
-.title__config,
-.title__arcade,
+.title__config {
+  grid-area: config;
+  border: var(--sub-button-border);
+  background-color: var(--sub-button-background-color);
+}
+
 .title__net-battle {
+  grid-area: net-battle;
+  border: var(--sub-button-border);
+  background-color: var(--sub-button-background-color);
+}
+
+.title__arcade {
+  grid-area: arcade;
   border: var(--sub-button-border);
   background-color: var(--sub-button-background-color);
 }
 
 .title__story {
+  grid-area: story;
+  border: var(--sub-button-border);
+  background-color: var(--sub-button-background-color);
+}
+
+.title__tutorial {
+  grid-area: tutorial;
   border: var(--button-border);
   background-color: var(--button-background-color);
 }
