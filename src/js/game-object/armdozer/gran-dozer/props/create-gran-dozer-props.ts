@@ -8,6 +8,7 @@ import { GranDozerProps } from "./gran-dozer-props";
 /** グランドーザプロパティ生成オプション */
 export type GranDozerPropsCreatorOptions = SEPlayerContainer &
   ResourcesContainer & {
+    /** ビュー */
     view: GranDozerView;
   };
 
