@@ -38,6 +38,8 @@ export type TitleProps = SEPlayerContainer & {
   helpMenu: HTMLElement;
   /** チュートリアル */
   tutorial: HTMLElement;
+  /** ストーリー */
+  story: HTMLElement;
   /** アーケード */
   arcade: HTMLElement;
   /** ネット対戦 */
@@ -67,6 +69,8 @@ export type TitleProps = SEPlayerContainer & {
   pushLogout: Subject<void>;
   /** チュートリアル押下ストリーム */
   pushTutorial: Subject<void>;
+  /** ストーリー押下ストリーム */
+  pushStory: Subject<void>;
   /** アーケード押下ストリーム */
   pushArcade: Subject<void>;
   /** ネット対戦押下ストリーム */
@@ -96,6 +100,7 @@ export function createTitleProps(params: CreateTitlePropsParams): TitleProps {
     deleteAccount: domUuid(),
     logout: domUuid(),
     logo: domUuid(),
+    story: domUuid(),
     tutorial: domUuid(),
     arcade: domUuid(),
     netBattle: domUuid(),
@@ -126,19 +131,10 @@ export function createTitleProps(params: CreateTitlePropsParams): TitleProps {
     params.resources.paths.find((v) => v.id === PathIds.HELP_ICON)?.path ?? "";
   return {
     ...params,
+    ...elements,
     exclusive: new Exclusive(),
     root,
-    login: elements.login,
-    accountMenu: elements.accountMenu,
     avatar,
-    deleteAccount: elements.deleteAccount,
-    logout: elements.logout,
-    helpIcon: elements.helpIcon,
-    helpMenu: elements.helpMenu,
-    tutorial: elements.tutorial,
-    arcade: elements.arcade,
-    netBattle: elements.netBattle,
-    config: elements.config,
     isLogoLoaded,
     isAvatarLoaded,
     isTitleBackLoaded,
@@ -153,6 +149,7 @@ export function createTitleProps(params: CreateTitlePropsParams): TitleProps {
     pushDeleteAccount: new Subject(),
     pushLogout: new Subject(),
     pushTutorial: new Subject(),
+    pushStory: new Subject(),
     pushArcade: new Subject(),
     pushNetBattle: new Subject(),
     pushConfig: new Subject(),

@@ -12,6 +12,7 @@ import { onLogoutPush } from "./on-logout-push";
 import { onNetBattlePush } from "./on-net-battle-push";
 import { onPushDeleteAccount } from "./on-push-delete-account";
 import { onRootPush } from "./on-root-push";
+import { onStoryPush } from "./on-story-push";
 import { onTutorialPush } from "./on-tutorial-push";
 
 /**
@@ -47,6 +48,9 @@ export function bindEventListeners(props: TitleProps): Unsubscribable[] {
     }),
     domPushStream(props.tutorial).subscribe((action) => {
       onTutorialPush(props, action);
+    }),
+    domPushStream(props.story).subscribe((action) => {
+      onStoryPush(props, action);
     }),
     domPushStream(props.arcade).subscribe((action) => {
       onArcadePush(props, action);
