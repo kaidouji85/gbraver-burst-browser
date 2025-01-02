@@ -31,6 +31,7 @@ import { onSelectionCancel } from "./on-selection-cancel";
 import { onSelectionComplete } from "./on-selection-complete";
 import { onStoryStart } from "./on-story-start";
 import { onSuddenlyBattleEnd } from "./on-suddenly-battle-end";
+import { onTutorialStart } from "./on-tutorial-start";
 import { onUniversalLogin } from "./on-universal-login";
 import { onVisibilityChange } from "./on-visibility-change";
 import { onWebSocketAPIError } from "./on-websocker-api-error";
@@ -89,6 +90,8 @@ export function onGameAction(props: GameProps, action: GameAction) {
       return onConfigChangeCancel({ props, action });
     case "ConfigChangeComplete":
       return onConfigChangeComplete({ props, action });
+    case "TutorialStart":
+      return onTutorialStart({ props, action });
     case "StoryStart":
       return onStoryStart({ props, action });
     case "CancelTutorialSelect":
