@@ -96,6 +96,7 @@ export function createTitleProps(params: CreateTitlePropsParams): TitleProps {
     deleteAccount: domUuid(),
     logout: domUuid(),
     logo: domUuid(),
+    story: domUuid(),
     tutorial: domUuid(),
     arcade: domUuid(),
     netBattle: domUuid(),
