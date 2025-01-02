@@ -67,6 +67,8 @@ export type TitleProps = SEPlayerContainer & {
   pushDeleteAccount: Subject<void>;
   /** ログアウト押下ストリーム */
   pushLogout: Subject<void>;
+  /** チュートリアル押下ストリーム */
+  pushTutorial: Subject<void>;
   /** ストーリー押下ストリーム */
   pushStory: Subject<void>;
   /** アーケード押下ストリーム */
@@ -146,6 +148,7 @@ export function createTitleProps(params: CreateTitlePropsParams): TitleProps {
     pushLogin: new Subject(),
     pushDeleteAccount: new Subject(),
     pushLogout: new Subject(),
+    pushTutorial: new Subject(),
     pushStory: new Subject(),
     pushArcade: new Subject(),
     pushNetBattle: new Subject(),

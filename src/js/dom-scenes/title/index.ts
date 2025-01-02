@@ -54,6 +54,14 @@ export class Title implements DOMScene {
   }
 
   /**
+   * チュートリアルボタン押下通知
+   * @returns イベント通知ストリーム
+   */
+  notifyTutorial(): Observable<void> {
+    return this.#props.pushTutorial;
+  }
+
+  /**
    * ストーリーボタン押下通知
    * @returns イベント通知ストリーム
    */
