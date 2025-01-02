@@ -218,7 +218,6 @@
 }
 
 .title__game-menu button {
-  flex: 1;
   min-height: calc(var(--responsive-font-size) * 3);
   font-size: calc(var(--responsive-font-size));
   border-radius: var(--button-border-radius);
@@ -238,6 +237,10 @@
   background-color: var(--sub-button-background-color);
 }
 
+.title__net-battle--invisible {
+  display: none;
+}
+
 .title__arcade {
   grid-area: arcade;
   border: var(--sub-button-border);
@@ -252,10 +255,7 @@
 
 .title__tutorial {
   grid-area: tutorial;
-  border: var(--button-border);
-  background-color: var(--button-background-color);
-}
-
-.title__net-battle--invisible {
-  display: none;
+  border: 2px solid #00b0e6;
+  background-color: #003b4d;
+  font-weight: bold;
 }
