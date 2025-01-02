@@ -217,7 +217,12 @@
   gap: calc(var(--responsive-font-size) * 0.5);
 }
 
-.title__game-menu button {
+.title__config,
+.title__net-battle,
+.title__arcade,
+.title__story {
+  border: var(--sub-button-border);
+  background-color: var(--sub-button-background-color);
   min-height: calc(var(--responsive-font-size) * 3);
   font-size: calc(var(--responsive-font-size));
   border-radius: var(--button-border-radius);
@@ -227,14 +232,10 @@
 
 .title__config {
   grid-area: config;
-  border: var(--sub-button-border);
-  background-color: var(--sub-button-background-color);
 }
 
 .title__net-battle {
   grid-area: net-battle;
-  border: var(--sub-button-border);
-  background-color: var(--sub-button-background-color);
 }
 
 .title__net-battle--invisible {
@@ -243,18 +244,19 @@
 
 .title__arcade {
   grid-area: arcade;
-  border: var(--sub-button-border);
-  background-color: var(--sub-button-background-color);
 }
 
 .title__story {
   grid-area: story;
-  border: var(--sub-button-border);
-  background-color: var(--sub-button-background-color);
 }
 
 .title__tutorial {
   grid-area: tutorial;
+  min-height: calc(var(--responsive-font-size) * 3);
+  font-size: calc(var(--responsive-font-size) * 1.1);
+  border-radius: var(--button-border-radius);
+  color: var(--button-font-color);
+  box-shadow: var(--button-box-shadow);
   border: 2px solid #00b0e6;
   background-color: #003b4d;
   font-weight: bold;
