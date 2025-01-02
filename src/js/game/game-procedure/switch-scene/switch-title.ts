@@ -22,6 +22,6 @@ export const switchTitle = (props: GameProps, scene: Title) =>
       scene.notifyArcade().pipe(map(() => ({ type: "ArcadeStart" }))),
       scene.notifyNetBattle().pipe(map(() => ({ type: "NetBattleStart" }))),
       scene.notifyConfig().pipe(map(() => ({ type: "ConfigChangeStart" }))),
-      scene.notifyTutorial().pipe(map(() => ({ type: "StoryStart" }))),
+      scene.notifyStory().pipe(map(() => ({ type: "StoryStart" }))),
     ]),
   });
