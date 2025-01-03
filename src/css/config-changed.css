@@ -68,7 +68,7 @@
   font-size: var(--responsive-font-size);
   border-radius: var(--button-border-radius);
   color: var(--button-font-color);
-  box-shadow: var(--button-box-shadow);
+  box-shadow: var(--sub-button-box-shadow);
 }
 
 .config-changed__discard {

@@ -45,7 +45,7 @@
   --button-border: 2px solid #00b0e6;
   --sub-button-background-color: #1a1919;
   --sub-button-border: 2px solid #e6e3e1;
-  --button-box-shadow: 0 0 0.5em rgb(25 25 25);
+  --sub-button-box-shadow: 0 0 0.5em rgb(25 25 25);
   --button-font-color: #fff;
   --disabled-button-font-color: #a9a9a9;
   --button-border-radius: calc(var(--responsive-font-size) * 0.5);

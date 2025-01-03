@@ -69,7 +69,7 @@
   background-color: var(--sub-button-background-color);
   color: var(--button-font-color);
   border: var(--sub-button-border);
-  box-shadow: var(--button-box-shadow);
+  box-shadow: var(--sub-button-box-shadow);
 }
 
 .login__login {
@@ -79,6 +79,6 @@
   background-color: var(--button-background-color);
   color: var(--button-font-color);
   border: var(--button-border);
-  box-shadow: var(--button-box-shadow);
+  box-shadow: var(--sub-button-box-shadow);
   margin-bottom: calc(var(--responsive-font-size) * 0.3);
 }
