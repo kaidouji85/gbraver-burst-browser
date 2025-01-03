@@ -56,5 +56,5 @@
   background-color: var(--button-background-color);
   color: var(--button-font-color);
   border: var(--button-border);
-  box-shadow: var(--sub-button-box-shadow);
+  box-shadow: var(--button-box-shadow);
 }

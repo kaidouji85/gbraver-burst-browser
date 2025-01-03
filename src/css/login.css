@@ -79,6 +79,6 @@
   background-color: var(--button-background-color);
   color: var(--button-font-color);
   border: var(--button-border);
-  box-shadow: var(--sub-button-box-shadow);
-  margin-bottom: calc(var(--responsive-font-size) * 0.3);
+  box-shadow: var(--button-box-shadow);
+  margin-bottom: calc(var(--responsive-font-size) * 0.5);
 }
