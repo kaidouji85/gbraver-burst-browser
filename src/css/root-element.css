@@ -51,6 +51,9 @@
   --disabled-button-font-color: #a9a9a9;
   --button-border-radius: calc(var(--responsive-font-size) * 0.5);
 
+  /** ホバー */
+  --hovered-back-ground-color: #007599;
+
   /** ダイアログ */
   --dialog-border: solid #a9a9a9 1px;
   --dialog-border-radius: calc(var(--responsive-font-size) * 0.5);

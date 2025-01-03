@@ -56,7 +56,7 @@
 .battle-hamburger-menu__battle-simulator:hover,
 .battle-hamburger-menu__retry:hover,
 .battle-hamburger-menu__end-battle:hover {
-  background-color: var(--button-background-color);
+  background-color: var(--hovered-back-ground-color);
 }
 
 .battle-hamburger-menu__retry--disabled {

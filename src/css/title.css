@@ -112,7 +112,7 @@
 
 .title__delete-account:hover,
 .title__logout:hover {
-  background-color: var(--button-background-color);
+  background-color: var(--hovered-back-ground-color);
 }
 
 .title__help {
@@ -175,7 +175,7 @@
 .title__terms-of-service:hover,
 .title__privacy-policy:hover,
 .title__contact:hover {
-  background-color: var(--button-background-color);
+  background-color: var(--hovered-back-ground-color);
 }
 
 .title__contents {
