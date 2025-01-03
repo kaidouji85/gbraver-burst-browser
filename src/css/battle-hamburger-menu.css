@@ -56,7 +56,7 @@
 .battle-hamburger-menu__battle-simulator:hover,
 .battle-hamburger-menu__retry:hover,
 .battle-hamburger-menu__end-battle:hover {
-  background-color: var(--button-background-color);
+  background-color: var(--hovered-back-ground-color);
 }
 
 .battle-hamburger-menu__retry--disabled {
@@ -96,7 +96,7 @@
     "caption" 1fr
     "retry" auto
     "cancel" auto;
-  gap: calc(var(--responsive-font-size) * 0.4);
+  gap: calc(var(--responsive-font-size) * 0.5);
   color: var(--font-color);
   font-size: var(--responsive-font-size);
   background-color: var(--background-color);
@@ -122,6 +122,7 @@
   grid-area: retry;
   border: var(--button-border);
   background-color: var(--button-background-color);
+  box-shadow: var(--button-box-shadow);
 }
 
 .battle-hamburger-menu__retry-cancel-button,
@@ -129,6 +130,7 @@
   grid-area: cancel;
   border: var(--sub-button-border);
   background-color: var(--sub-button-background-color);
+  box-shadow: var(--sub-button-box-shadow);
 }
 
 .battle-hamburger-menu__retry-button,

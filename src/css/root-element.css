@@ -28,7 +28,7 @@
 
   /** 背景 */
   --background-color: rgb(23 23 23);
-  --sub-background-color: #383c3c;
+  --sub-background-color: #2d3333;
 
   /** z-index */
   --zindex-battle-hamburger-menu: 7;
@@ -41,14 +41,22 @@
   --zindex-play-in-landscape: 13;
 
   /** ボタン */
-  --button-background-color: #0090bb;
-  --sub-button-background-color: #595857;
+  --button-background-color: #00141a;
+  --button-border: 2px solid #00b0e6;
+  --button-box-shadow: 0 0 0.5em #009ccc;
+  --sub-button-background-color: #1a1919;
+  --sub-button-border: 2px solid #e6e3e1;
+  --sub-button-box-shadow: 0 0 0.5em rgb(25 25 25);
   --button-font-color: #fff;
   --disabled-button-font-color: #a9a9a9;
   --button-border-radius: calc(var(--responsive-font-size) * 0.5);
-  --button-border: 2px solid #004e66;
-  --sub-button-border: 2px solid #333232;
-  --button-box-shadow: 0 0 0.5em rgb(25 25 25);
+
+  /** ホバー */
+  --hovered-back-ground-color: #007599;
+
+  /** ラベル */
+  --label-border: 1px solid #00b0e6;
+  --sub-label-border: 1px solid #e6e3e1;
 
   /** ダイアログ */
   --dialog-border: solid #a9a9a9 1px;

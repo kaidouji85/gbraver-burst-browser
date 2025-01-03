@@ -22,7 +22,7 @@
     grid-template-rows: 1fr 1fr;
     gap: var(--gap);
     padding: var(--gap);
-    box-shadow: var(--button-box-shadow);
+    box-shadow: var(--sub-button-box-shadow);
   }
 }
 

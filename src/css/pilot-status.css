@@ -30,8 +30,10 @@
 
 .pilot-status__skill-overview-label {
   background-color: var(--button-background-color);
+  border: var(--label-border);
 }
 
 .pilot-status__skill-detail-label {
   background-color: var(--sub-button-background-color);
+  border: var(--sub-label-border);
 }

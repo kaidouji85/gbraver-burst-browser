@@ -72,7 +72,7 @@
   background-color: var(--sub-button-background-color);
   color: var(--button-font-color);
   border: var(--sub-button-border);
-  box-shadow: var(--button-box-shadow);
+  box-shadow: var(--sub-button-box-shadow);
 }
 
 .delete-account-consent__delete-account {

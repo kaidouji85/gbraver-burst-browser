@@ -46,6 +46,7 @@
 .armdozer-status__speed-label {
   min-width: var(--parameter-label-width);
   background-color: var(--button-background-color);
+  border: var(--label-border);
   text-align: center;
   border-radius: calc(var(--responsive-font-size) * 0.2);
 }
@@ -85,8 +86,10 @@
 
 .armdozer-status__burst-overview-label {
   background-color: var(--button-background-color);
+  border: var(--label-border);
 }
 
 .armdozer-status__burst-detail-label {
   background-color: var(--sub-button-background-color);
+  border: var(--sub-label-border);
 }
