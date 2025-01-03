@@ -88,7 +88,7 @@
 
 .episode-selector__episode-title {
   margin-bottom: calc(var(--responsive-font-size) * 0.5);
-  border-bottom: dashed 1px var(--font-color);
+  border-bottom: solid 1px var(--font-color);
   word-break: keep-all;
   overflow-wrap: anywhere;
 }
