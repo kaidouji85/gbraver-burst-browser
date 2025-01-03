@@ -34,5 +34,5 @@
 .post-battle__main-action {
   border: var(--button-border);
   background-color: var(--button-background-color);
-  box-shadow: var(--button-box-shadow);
+  box-shadow: var(--sub-button-box-shadow);
 }
