@@ -54,6 +54,10 @@
   /** ホバー */
   --hovered-back-ground-color: #007599;
 
+  /** ラベル */
+  --label-border: 1px solid #00b0e6;
+  --sub-label-border: 1px solid #e6e3e1;
+
   /** ダイアログ */
   --dialog-border: solid #a9a9a9 1px;
   --dialog-border-radius: calc(var(--responsive-font-size) * 0.5);
