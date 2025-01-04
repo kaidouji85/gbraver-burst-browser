@@ -15,7 +15,7 @@ body {
 
 .first-view {
   position: absolute;
-  z-index: 1;
+  z-index: 6;
   background-color: rgb(23 23 23);
 }
 
