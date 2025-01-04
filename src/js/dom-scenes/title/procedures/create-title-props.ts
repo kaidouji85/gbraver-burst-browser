@@ -55,12 +55,6 @@ export function createTitleProps(params: CreateTitlePropsParams): TitleProps {
   const isLogoLoaded = waitElementLoaded(elements.logo);
   elements.logo.src =
     params.resources.paths.find((v) => v.id === PathIds.LOGO)?.path ?? "";
-  const titleBackImage = new Image();
-  const isTitleBackLoaded = waitElementLoaded(titleBackImage).then(() => {
-    root.style.backgroundImage = `url(${titleBackImage.src})`;
-  });
-  titleBackImage.src =
-    params.resources.paths.find((v) => v.id === PathIds.TITLE_BACK)?.path ?? "";
   const isHelpIconLoaded = waitElementLoaded(elements.helpIcon);
   elements.helpIcon.src =
     params.resources.paths.find((v) => v.id === PathIds.HELP_ICON)?.path ?? "";
@@ -72,7 +66,6 @@ export function createTitleProps(params: CreateTitlePropsParams): TitleProps {
     avatar,
     isLogoLoaded,
     isAvatarLoaded,
-    isTitleBackLoaded,
     isHelpIconLoaded,
     pushButton:
       params.resources.sounds.find((v) => v.id === SOUND_IDS.PUSH_BUTTON) ??
