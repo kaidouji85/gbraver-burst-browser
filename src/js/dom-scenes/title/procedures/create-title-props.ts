@@ -1,17 +1,18 @@
-import {DataIDs} from "../dom/data-ids";
-import {domUuid} from "../../../uuid/dom-uuid";
-import {rootInnerHTML, RootInnerHTMLParams} from "../dom/root-inner-html";
-import {ROOT_CLASS} from "../dom/class-name";
-import {extractElements} from "../dom/elements";
-import {waitElementLoaded} from "../../../wait/wait-element-loaded";
-import {PathIds} from "../../../resource/path/ids";
-import {Exclusive} from "../../../exclusive/exclusive";
-import {SOUND_IDS} from "../../../resource/sound/ids";
-import {createEmptySoundResource} from "../../../resource/sound/empty-sound-resource";
-import {Subject} from "rxjs";
-import {ResourcesContainer} from "../../../resource";
-import {SEPlayerContainer} from "../../../se/se-player";
-import {TitleProps} from "../props";
+import { Subject } from "rxjs";
+
+import { Exclusive } from "../../../exclusive/exclusive";
+import { ResourcesContainer } from "../../../resource";
+import { PathIds } from "../../../resource/path/ids";
+import { createEmptySoundResource } from "../../../resource/sound/empty-sound-resource";
+import { SOUND_IDS } from "../../../resource/sound/ids";
+import { SEPlayerContainer } from "../../../se/se-player";
+import { domUuid } from "../../../uuid/dom-uuid";
+import { waitElementLoaded } from "../../../wait/wait-element-loaded";
+import { ROOT_CLASS } from "../dom/class-name";
+import { DataIDs } from "../dom/data-ids";
+import { extractElements } from "../dom/elements";
+import { rootInnerHTML, RootInnerHTMLParams } from "../dom/root-inner-html";
+import { TitleProps } from "../props";
 
 /** タイトル画面プロパティ生成パラメータ */
 export type CreateTitlePropsParams = RootInnerHTMLParams &
