@@ -1,16 +1,21 @@
 import { Observable, Unsubscribable } from "rxjs";
 
-import type { DOMScene } from "../dom-scene";
-import { bindEventListeners } from "./listeners";
-import type { CreateTitlePropsParams, TitleProps } from "./props";
-import { createTitleProps } from "./props";
+import { DOMScene } from "../dom-scene";
+import { bindEventListeners } from "./procedures";
+import {
+  createTitleProps,
+  CreateTitlePropsParams,
+} from "./procedures/create-title-props";
+import { TitleProps } from "./props";
 
 /** タイトル画面コンストラクタパラメータ */
 export type TitleParams = CreateTitlePropsParams;
 
 /** タイトル */
 export class Title implements DOMScene {
+  /** プロパティ */
   #props: TitleProps;
+  /** アンサブスクライバ */
   #unsubscribers: Unsubscribable[];
 
   /**
