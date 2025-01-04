@@ -1,4 +1,5 @@
 import { ResourcesContainer } from "../../../resource";
+import { PathIds } from "../../../resource/path/ids";
 import { TitleAccount } from "../title-account";
 import {
   ACCOUNT_CLASS,
@@ -13,7 +14,6 @@ import {
 } from "./class-name";
 import { DataIDs } from "./data-ids";
 import template from "./root-inner-html.hbs";
-import { PathIds } from "../../../resource/path/ids";
 
 /** data-id以外のinnerHTMLジェネレータパラメータ */
 export type RootInnerHTMLParams = ResourcesContainer & {
