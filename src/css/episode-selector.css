@@ -1,7 +1,6 @@
 /** エピソードセレクト画面 */
 @media (orientation: landscape) {
   .episode-selector {
-    --controllers-z-index: 1;
     --gap: calc(var(--responsive-font-size) * 0.4);
 
     width: 100vw;
@@ -71,7 +70,6 @@
   flex: 1;
   display: flex;
   flex-direction: column;
-  z-index: var(--controllers-z-index);
   overflow-y: scroll;
 }
 

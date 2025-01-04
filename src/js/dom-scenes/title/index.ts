@@ -112,10 +112,11 @@ export class Title implements DOMScene {
    */
   async waitUntilLoaded(): Promise<void> {
     await Promise.all([
-      this.#props.isTitleBackLoaded,
       this.#props.isAvatarLoaded,
       this.#props.isLogoLoaded,
       this.#props.isHelpIconLoaded,
+      this.#props.isNeoLandozerLoaded,
+      this.#props.isShinBraverLoaded,
     ]);
   }
 }

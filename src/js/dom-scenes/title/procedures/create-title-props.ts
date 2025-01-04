@@ -40,6 +40,8 @@ export function createTitleProps(params: CreateTitlePropsParams): TitleProps {
     arcade: domUuid(),
     netBattle: domUuid(),
     config: domUuid(),
+    neoLandozer: domUuid(),
+    shinBraver: domUuid(),
   };
   const root = document.createElement("div");
   root.innerHTML = rootInnerHTML(dataIDs, params);
@@ -55,15 +57,11 @@ export function createTitleProps(params: CreateTitlePropsParams): TitleProps {
   const isLogoLoaded = waitElementLoaded(elements.logo);
   elements.logo.src =
     params.resources.paths.find((v) => v.id === PathIds.LOGO)?.path ?? "";
-  const titleBackImage = new Image();
-  const isTitleBackLoaded = waitElementLoaded(titleBackImage).then(() => {
-    root.style.backgroundImage = `url(${titleBackImage.src})`;
-  });
-  titleBackImage.src =
-    params.resources.paths.find((v) => v.id === PathIds.TITLE_BACK)?.path ?? "";
   const isHelpIconLoaded = waitElementLoaded(elements.helpIcon);
   elements.helpIcon.src =
     params.resources.paths.find((v) => v.id === PathIds.HELP_ICON)?.path ?? "";
+  const isNeoLandozerLoaded = waitElementLoaded(elements.neoLandozer);
+  const isShinBraverLoaded = waitElementLoaded(elements.shinBraver);
   return {
     ...params,
     ...elements,
@@ -72,8 +70,9 @@ export function createTitleProps(params: CreateTitlePropsParams): TitleProps {
     avatar,
     isLogoLoaded,
     isAvatarLoaded,
-    isTitleBackLoaded,
     isHelpIconLoaded,
+    isNeoLandozerLoaded,
+    isShinBraverLoaded,
     pushButton:
       params.resources.sounds.find((v) => v.id === SOUND_IDS.PUSH_BUTTON) ??
       createEmptySoundResource(),
