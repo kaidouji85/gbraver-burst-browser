@@ -31,14 +31,18 @@
   --sub-background-color: #2d3333;
 
   /** z-index */
-  --zindex-battle-hamburger-menu: 7;
-  --zindex-mini-controller: 7;
-  --zindex-background: 8;
-  --zindex-dialog: 9;
-  --zindex-close: 10;
-  --zindex-qr-code-reader: 11;
-  --zindex-fader: 12;
-  --zindex-play-in-landscape: 13;
+  --zindex-title-armdozers: 0;
+  --zindex-title-help: 1;
+  --zindex-title-account: 1;
+  --zindex-title-contents: 2;
+  --zindex-battle-hamburger-menu: 3;
+  --zindex-mini-controller: 3;
+  --zindex-background: 100;
+  --zindex-dialog: 101;
+  --zindex-close: 102;
+  --zindex-qr-code-reader: 103;
+  --zindex-fader: 1000;
+  --zindex-play-in-landscape: 10000;
 
   /** ボタン */
   --button-background-color: #00141a;

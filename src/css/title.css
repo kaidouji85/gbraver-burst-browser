@@ -3,11 +3,6 @@
  */
 @media (orientation: landscape) {
   .title {
-    --zindex-armdozer: 0;
-    --zindex-help: 1;
-    --zindex-account: 1;
-    --zindex-contents: 2;
-
     display: flex;
     flex-direction: column;
     width: 100vw;
@@ -30,7 +25,7 @@
 }
 
 .title__account-controller {
-  z-index: var(--zindex-account);
+  z-index: var(--zindex-title-account);
   position: absolute;
   top: var(--screen-padding-top);
   right: var(--screen-padding-right);
@@ -122,7 +117,7 @@
 }
 
 .title__help {
-  z-index: var(--zindex-help);
+  z-index: var(--zindex-title-help);
   position: absolute;
   top: var(--screen-padding-top);
   left: var(--screen-padding-left);
@@ -186,7 +181,7 @@
 }
 
 .title__armdozers {
-  z-index: var(--zindex-armdozer);
+  z-index: var(--zindex-title-armdozers);
 }
 
 .title__neo-landozer {
@@ -211,7 +206,7 @@
 }
 
 .title__contents {
-  z-index: var(--zindex-contents);
+  z-index: var(--zindex-title-contents);
   flex: 1;
   display: flex;
   flex-direction: column;
