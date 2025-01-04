@@ -1,4 +1,5 @@
-import type { TitleAccount } from "../title-account";
+import { ResourcesContainer } from "../../../resource";
+import { TitleAccount } from "../title-account";
 import {
   ACCOUNT_CLASS,
   INVISIBLE__HELP_MENU_CLASS,
@@ -10,11 +11,12 @@ import {
   NET_BATTLE_CLASS,
   ROOT_CLASS,
 } from "./class-name";
-import type { DataIDs } from "./data-ids";
+import { DataIDs } from "./data-ids";
 import template from "./root-inner-html.hbs";
+import { PathIds } from "../../../resource/path/ids";
 
 /** data-id以外のinnerHTMLジェネレータパラメータ */
-export type RootInnerHTMLParams = {
+export type RootInnerHTMLParams = ResourcesContainer & {
   /** アカウント情報 */
   account: TitleAccount;
   /** APIサーバが利用可能か否か、trueで利用可能である */
@@ -54,6 +56,12 @@ export function rootInnerHTML(
   const netBattleClassName = params.isAPIServerEnable
     ? NET_BATTLE_CLASS
     : INVISIBLE_NET_BATTLE_CLASS;
+  const shinBraverPath =
+    params.resources.paths.find((p) => p.id === PathIds.SHIN_BRAVER_BUST_SHOT)
+      ?.path ?? "";
+  const neoLandozerPath =
+    params.resources.paths.find((p) => p.id === PathIds.NEO_LANDOZER_BUST_SHOT)
+      ?.path ?? "";
   return template({
     ROOT_CLASS,
     INVISIBLE__HELP_MENU_CLASS,
@@ -64,5 +72,7 @@ export function rootInnerHTML(
     accountName,
     accountClassName,
     netBattleClassName,
+    shinBraverPath,
+    neoLandozerPath,
   });
 }

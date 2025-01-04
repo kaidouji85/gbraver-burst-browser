@@ -3,6 +3,11 @@
  */
 @media (orientation: landscape) {
   .title {
+    --zindex-armdozer: 0;
+    --zindex-help: 1;
+    --zindex-account: 1;
+    --zindex-contents: 2;
+
     display: flex;
     flex-direction: column;
     width: 100vw;
@@ -25,6 +30,7 @@
 }
 
 .title__account-controller {
+  z-index: var(--zindex-account);
   position: absolute;
   top: var(--screen-padding-top);
   right: var(--screen-padding-right);
@@ -116,6 +122,7 @@
 }
 
 .title__help {
+  z-index: var(--zindex-help);
   position: absolute;
   top: var(--screen-padding-top);
   left: var(--screen-padding-left);
@@ -178,7 +185,22 @@
   background-color: var(--hovered-back-ground-color);
 }
 
+.title__armdozers {
+  z-index: var(--zindex-armdozer);
+}
+
+.title__neo-landozer {
+  --size: 150vh;
+
+  position: fixed;
+  top: 0;
+  left: calc(50vw - 150vh / 2);
+  width: var(--size);
+  height: var(--size);
+}
+
 .title__contents {
+  z-index: var(--zindex-contents);
   flex: 1;
   display: flex;
   flex-direction: column;
