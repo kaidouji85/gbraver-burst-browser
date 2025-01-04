@@ -9,10 +9,8 @@ export type GuestAccount = {
 /** ログインアカウント */
 export type LoggedInAccount = {
   type: "LoggedInAccount";
-
   /** アカウント名 */
   name: string;
-
   /** 画像URL */
   pictureURL: string;
 };
