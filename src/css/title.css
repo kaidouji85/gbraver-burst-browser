@@ -215,12 +215,13 @@
   box-sizing: border-box;
   padding: var(--screen-padding-top) var(--screen-padding-right)
     var(--screen-padding-bottom) var(--screen-padding-left);
+  gap: calc(var(--responsive-font-size) * 1.6);
 }
 
 .title__title {
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-end;
   align-items: center;
   flex: 1;
 }
