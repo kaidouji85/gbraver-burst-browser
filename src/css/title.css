@@ -194,7 +194,7 @@
 
   position: fixed;
   top: 0;
-  left: calc(50vw - 150vh / 2);
+  left: calc(50vw - 120vh);
   width: var(--size);
   height: var(--size);
 }
