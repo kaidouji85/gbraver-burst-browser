@@ -18,7 +18,6 @@ import { NPCCoursePathConfigs } from "./npc-course";
 import { PlayInLandscapePathConfigs } from "./play-in-landscape";
 import { RaitoPathConfigs } from "./raito";
 import { ShinBraverPathConfigs } from "./shin-braver";
-import { TitleBackPathConfigs } from "./title-back";
 import { TsubasaPathConfigs } from "./tsubasa";
 import { TurnIndicatorConfigs } from "./turn-indicator";
 import { UserConfigs } from "./user";
@@ -28,7 +27,6 @@ import { YuuyaPathConfigs } from "./yuuya";
 /** すべてのパス設定をあつめたもの */
 export const PathConfigs: PathConfig[] = [
   ...UserConfigs,
-  ...TitleBackPathConfigs,
   ...LogoPathConfigs,
   ...ShinBraverPathConfigs,
   ...NeoLandozerPathConfigs,
