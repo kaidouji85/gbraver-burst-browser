@@ -60,6 +60,8 @@ export function createTitleProps(params: CreateTitlePropsParams): TitleProps {
   const isHelpIconLoaded = waitElementLoaded(elements.helpIcon);
   elements.helpIcon.src =
     params.resources.paths.find((v) => v.id === PathIds.HELP_ICON)?.path ?? "";
+  const isNeoLandozerLoaded = waitElementLoaded(elements.neoLandozer);
+  const isShinBraverLoaded = waitElementLoaded(elements.shinBraver);
   return {
     ...params,
     ...elements,
@@ -69,6 +71,8 @@ export function createTitleProps(params: CreateTitlePropsParams): TitleProps {
     isLogoLoaded,
     isAvatarLoaded,
     isHelpIconLoaded,
+    isNeoLandozerLoaded,
+    isShinBraverLoaded,
     pushButton:
       params.resources.sounds.find((v) => v.id === SOUND_IDS.PUSH_BUTTON) ??
       createEmptySoundResource(),

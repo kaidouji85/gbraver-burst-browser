@@ -36,6 +36,10 @@ export type TitleProps = SEPlayerContainer & {
   /** 設定 */
   config: HTMLElement;
 
+  /** ネオランドーザ画像を読み込んだら発火するPromise */
+  isNeoLandozerLoaded: Promise<void>;
+  /** シンブレイバー画像を読み込んだら発火するPromise */
+  isShinBraverLoaded: Promise<void>;
   /** アバター画像を読み込んだら発火するPromise */
   isAvatarLoaded: Promise<void>;
   /** ロゴ画像を読み込んだら発火するPromise */
