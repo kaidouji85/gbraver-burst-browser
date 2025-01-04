@@ -28,6 +28,10 @@ type Elements = {
   netBattle: HTMLElement;
   /** 設定 */
   config: HTMLElement;
+  /** ネオランドーザ画像 */
+  neoLandozer: HTMLImageElement;
+  /** シンブレイバー画像 */
+  shinBraver: HTMLImageElement;
 };
 
 /**
@@ -79,6 +83,14 @@ export function extractElements(root: HTMLElement, ids: DataIDs): Elements {
   const config: HTMLElement =
     root.querySelector(`[data-id="${ids.config}"]`) ??
     document.createElement("div");
+  const foundNeoLandozer = root.querySelector(`[data-id="${ids.neoLandozer}"]`);
+  const neoLandozer: HTMLImageElement =
+    foundNeoLandozer instanceof HTMLImageElement
+      ? foundNeoLandozer
+      : new Image();
+  const foundShinBraver = root.querySelector(`[data-id="${ids.shinBraver}"]`);
+  const shinBraver: HTMLImageElement =
+    foundShinBraver instanceof HTMLImageElement ? foundShinBraver : new Image();
   return {
     login,
     accountMenu,
@@ -93,5 +105,7 @@ export function extractElements(root: HTMLElement, ids: DataIDs): Elements {
     arcade,
     netBattle,
     config,
+    neoLandozer,
+    shinBraver,
   };
 }
