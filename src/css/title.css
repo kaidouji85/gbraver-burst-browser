@@ -199,6 +199,17 @@
   height: var(--size);
 }
 
+.title__shin-braver {
+  --size: 150vh;
+
+  position: fixed;
+  top: 0;
+  left: calc(50vw - 30vh);
+  transform: scaleX(-1);
+  width: var(--size);
+  height: var(--size);
+}
+
 .title__contents {
   z-index: var(--zindex-contents);
   flex: 1;
