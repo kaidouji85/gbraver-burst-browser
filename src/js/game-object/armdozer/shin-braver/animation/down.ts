@@ -19,14 +19,7 @@ export function down(props: ShinBraverAnimationProps): Animate {
   )
     .chain(
       tween(model.position, (t) =>
-        t
-          .to(
-            {
-              x: "+70",
-            },
-            500,
-          )
-          .easing(Easing.Quadratic.Out),
+        t.to({ x: "+70" }, 500).easing(Easing.Quadratic.Out),
       ),
     )
     .chain(delay(100))
@@ -37,14 +30,5 @@ export function down(props: ShinBraverAnimationProps): Animate {
         }),
       ),
     )
-    .chain(
-      tween(model.animation, (t) =>
-        t.to(
-          {
-            frame: 1,
-          },
-          300,
-        ),
-      ),
-    );
+    .chain(tween(model.animation, (t) => t.to({ frame: 1 }, 300)));
 }
