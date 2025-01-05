@@ -2,9 +2,8 @@ import { Observable, Unsubscribable } from "rxjs";
 import * as THREE from "three";
 
 import { Animate } from "../../../animation/animate";
-import { onStart } from "../../../animation/on-start";
-import type { PreRender } from "../../../game-loop/pre-render";
-import type { GameObjectAction } from "../../action/game-object-action";
+import { PreRender } from "../../../game-loop/pre-render";
+import { GameObjectAction } from "../../action/game-object-action";
 import { popUp } from "./animation/pop-up";
 import {
   createShockWaveProps,
