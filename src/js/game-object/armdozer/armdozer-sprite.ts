@@ -71,9 +71,10 @@ export interface ArmdozerSprite {
 
   /**
    * ダウン
+   * @param hitStop ヒットストップ時間(ミリ秒)
    * @returns アニメーション
    */
-  down(): Animate;
+  down(hitStop?: number): Animate;
 
   /**
    * 気をつけ
