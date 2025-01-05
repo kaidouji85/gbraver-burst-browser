@@ -57,6 +57,9 @@ function ringAnimation(model: ShockWaveRingModel): Animate {
 export function popUp(props: ShockWaveAnimationProps): Animate {
   const { model } = props;
   return all(
+    onStart(() => {
+      props.se.play(props.hitSound);
+    }),
     ...model.lines.map((v) => lineAnimation(v)),
     ringAnimation(model.ring),
   );

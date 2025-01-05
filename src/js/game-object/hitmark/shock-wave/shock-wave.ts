@@ -54,9 +54,7 @@ export class ShockWave {
    * @returns アニメーション
    */
   popUp(): Animate {
-    return onStart(() => {
-      this.#props.se.play(this.#props.hitSound);
-    }).chain(popUp(this.#props.model));
+    return popUp(this.#props);
   }
 
   /**
