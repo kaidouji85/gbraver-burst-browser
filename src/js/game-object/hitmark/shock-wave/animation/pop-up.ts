@@ -4,31 +4,17 @@ import { all } from "../../../../animation/all";
 import { Animate } from "../../../../animation/animate";
 import { onStart } from "../../../../animation/on-start";
 import { tween } from "../../../../animation/tween";
-import type {
+import {
   ShockWaveLineModel,
-  ShockWaveModel,
   ShockWaveRingModel,
 } from "../model/shock-wave-model";
+import { ShockWaveAnimationProps } from "./animation-props";
 
 /** アニメーション再生時間 */
 export const DURATION = 800;
 
 /**
- * 衝撃波アニメーション
- *
- * @param model モデル
- * @returns アニメーション
- */
-export function popUp(model: ShockWaveModel): Animate {
-  return all(
-    ...model.lines.map((v) => lineAnimation(v)),
-    ringAnimation(model.ring),
-  );
-}
-
-/**
  * 衝撃波軌跡アニメーション
- *
  * @param model モデル
  * @returns アニメーション
  */
@@ -40,13 +26,7 @@ function lineAnimation(model: ShockWaveLineModel): Animate {
   }).chain(
     tween(model, (t) =>
       t
-        .to(
-          {
-            opacity: 0,
-            scale: model.toScale,
-          },
-          DURATION,
-        )
+        .to({ opacity: 0, scale: model.toScale }, DURATION)
         .easing(Easing.Quadratic.Out),
     ),
   );
@@ -64,15 +44,20 @@ function ringAnimation(model: ShockWaveRingModel): Animate {
     model.scale = 0;
   }).chain(
     tween(model, (t) =>
-      t
-        .to(
-          {
-            opacity: 0,
-            scale: 1,
-          },
-          DURATION,
-        )
-        .easing(Easing.Quadratic.Out),
+      t.to({ opacity: 0, scale: 1 }, DURATION).easing(Easing.Quadratic.Out),
     ),
+  );
+}
+
+/**
+ * 衝撃波アニメーション
+ * @param props プロパティ
+ * @returns アニメーション
+ */
+export function popUp(props: ShockWaveAnimationProps): Animate {
+  const { model } = props;
+  return all(
+    ...model.lines.map((v) => lineAnimation(v)),
+    ringAnimation(model.ring),
   );
 }
