@@ -34,8 +34,9 @@ const oneBatteryRoutine: SimpleRoutine = (data) => {
 export function oneBatteryNeoLandozerNPC(): NPC {
   const armdozer =
     Armdozers.find((v) => v.id === ArmdozerIds.NEO_LANDOZER) ?? Armdozers[0];
+  const fixedArmdozer = {...armdozer, maxHp: 1000}; // TODO 開発が終わったら戻す
   const pilot = Pilots.find((v) => v.id === PilotIds.GAI) ?? Pilots[0];
-  return new SimpleNPC(armdozer, pilot, oneBatteryRoutine, oneBatteryRoutine);
+  return new SimpleNPC(fixedArmdozer, pilot, oneBatteryRoutine, oneBatteryRoutine);
 }
 
 /**
