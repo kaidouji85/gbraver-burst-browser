@@ -194,7 +194,11 @@ shfmt -l -w *.bash
     },
     {
       "Effect": "Allow",
-      "Action": "logs:CreateLogStream",
+      "Action": [
+        "logs:CreateLogGroup",
+        "logs:CreateLogStream",
+        "logs:PutLogEvents"
+      ],
       "Resource": "*"
     },
     {
@@ -235,7 +239,11 @@ shfmt -l -w *.bash
   "Statement": [
     {
       "Effect": "Allow",
-      "Action": "logs:CreateLogStream",
+      "Action": [
+        "logs:CreateLogGroup",
+        "logs:CreateLogStream",
+        "logs:PutLogEvents"
+      ],
       "Resource": "*"
     },
     {
