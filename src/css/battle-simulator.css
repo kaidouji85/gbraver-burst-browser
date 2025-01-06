@@ -259,7 +259,7 @@
   height: calc(var(--responsive-font-size) * 3);
   font-size: calc(var(--responsive-font-size) * 1.5);
   border-radius: var(--button-border-radius);
-  border: var(--button-border);
+  border: var(--sub-button-border);
   background-color: var(--sub-button-background-color);
 }
 

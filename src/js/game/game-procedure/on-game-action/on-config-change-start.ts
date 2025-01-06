@@ -1,14 +1,23 @@
 import { Config } from "../../../dom-scenes/config";
-import { GameAction } from "../../game-actions";
+import { ConfigChangeStart } from "../../game-actions/config-change-start";
 import { GameProps } from "../../game-props";
 import { switchConfig } from "../switch-scene/switch-config";
 
+/** オプション */
+type Options = {
+  /** ゲームプロパティ */
+  props: Readonly<GameProps>;
+  /** アクション */
+  action: ConfigChangeStart;
+};
+
 /**
  * 設定変更開始時の処理
- * @param props ゲームプロパティ
+ * @param options オプション
  * @returns 処理が完了したら発火するPromise
  */
-async function onConfigChangeStart(props: Readonly<GameProps>): Promise<void> {
+export async function onConfigChangeStart(options: Options): Promise<void> {
+  const { props } = options;
   await props.fader.fadeOut();
   const config = await props.config.load();
   const scene = new Config({
@@ -18,15 +27,3 @@ async function onConfigChangeStart(props: Readonly<GameProps>): Promise<void> {
   switchConfig(props, scene);
   await props.fader.fadeIn();
 }
-
-/** アクションタイプ */
-const actionType = "ConfigChangeStart";
-
-/** 設定変更開始時のイベントリスナーコンテナ */
-export const configChangeStartContainer = {
-  [actionType]: (props: GameProps, action: GameAction) => {
-    if (action.type === actionType) {
-      onConfigChangeStart(props);
-    }
-  },
-};

@@ -1,21 +1,25 @@
 import { Observable, Unsubscribable } from "rxjs";
 
-import type { DOMScene } from "../dom-scene";
-import { bindEventListeners } from "./listeners";
-import type { CreateTitlePropsParams, TitleProps } from "./props";
-import { createTitleProps } from "./props";
+import { DOMScene } from "../dom-scene";
+import { bindEventListeners } from "./procedures";
+import {
+  createTitleProps,
+  CreateTitlePropsParams,
+} from "./procedures/create-title-props";
+import { TitleProps } from "./props";
 
 /** タイトル画面コンストラクタパラメータ */
 export type TitleParams = CreateTitlePropsParams;
 
 /** タイトル */
 export class Title implements DOMScene {
+  /** プロパティ */
   #props: TitleProps;
+  /** アンサブスクライバ */
   #unsubscribers: Unsubscribable[];
 
   /**
    * コンストラクタ
-   *
    * @param params パラメータ
    */
   constructor(params: TitleParams) {
@@ -32,7 +36,6 @@ export class Title implements DOMScene {
 
   /**
    * ログインボタン押下通知
-   *
    * @returns イベント通知ストリーム
    */
   notifyLogin(): Observable<void> {
@@ -41,7 +44,6 @@ export class Title implements DOMScene {
 
   /**
    * アカウント削除ボタン押下通知
-   *
    * @returns イベント通知ストリーム
    */
   notifyAccountDeletion(): Observable<void> {
@@ -50,7 +52,6 @@ export class Title implements DOMScene {
 
   /**
    * ログアウトボタン押下通知
-   *
    * @returns イベント通知ストリーム
    */
   notifyLogout(): Observable<void> {
@@ -59,7 +60,6 @@ export class Title implements DOMScene {
 
   /**
    * チュートリアルボタン押下通知
-   *
    * @returns イベント通知ストリーム
    */
   notifyTutorial(): Observable<void> {
@@ -67,8 +67,15 @@ export class Title implements DOMScene {
   }
 
   /**
+   * ストーリーボタン押下通知
+   * @returns イベント通知ストリーム
+   */
+  notifyStory(): Observable<void> {
+    return this.#props.pushStory;
+  }
+
+  /**
    * アーケードボタン押下通知
-   *
    * @returns イベント通知ストリーム
    */
   notifyArcade(): Observable<void> {
@@ -77,7 +84,6 @@ export class Title implements DOMScene {
 
   /**
    * ネット対戦ボタン押下通知
-   *
    * @returns イベント通知ストリーム
    */
   notifyNetBattle(): Observable<void> {
@@ -86,7 +92,6 @@ export class Title implements DOMScene {
 
   /**
    * 設定ボタン押下通知
-   *
    * @returns イベント通知ストリーム
    */
   notifyConfig(): Observable<void> {
@@ -95,7 +100,6 @@ export class Title implements DOMScene {
 
   /**
    * ルートHTML要素を取得する
-   *
    * @returns 取得結果
    */
   getRootHTMLElement(): HTMLElement {
@@ -104,15 +108,15 @@ export class Title implements DOMScene {
 
   /**
    * 各種リソースの読み込みが完了するまで待つ
-   *
    * @returns 待機結果
    */
   async waitUntilLoaded(): Promise<void> {
     await Promise.all([
-      this.#props.isTitleBackLoaded,
       this.#props.isAvatarLoaded,
       this.#props.isLogoLoaded,
       this.#props.isHelpIconLoaded,
+      this.#props.isNeoLandozerLoaded,
+      this.#props.isShinBraverLoaded,
     ]);
   }
 }

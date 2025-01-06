@@ -1,17 +1,28 @@
 import { MAX_LOADING_TIME } from "../../../dom-scenes/dom-scene-binder/max-loading-time";
 import { waitTime } from "../../../wait/wait-time";
-import { GameAction } from "../../game-actions";
+import { PrivateMatchGuestStart } from "../../game-actions/private-match-guest-start";
 import { GameProps } from "../../game-props";
 import { bindPlayerSelectAccordingToConfig } from "../bind-player-select-according-to-config";
 import { loadFullResource } from "../load-full-resource";
 
+/** オプション */
+type Options = {
+  /** ゲームプロパティ */
+  props: GameProps;
+  /** アクション */
+  action: PrivateMatchGuestStart;
+};
+
 /**
  * プライベートマッチ（ゲスト）スタート
  * 本関数にはpropsを変更する副作用がある
- * @param props ゲームプロパティ
+ * @param options オプション
  * @returns 処理が完了したら発火するPromise
  */
-async function onPrivateMatchGuestStart(props: GameProps): Promise<void> {
+export async function onPrivateMatchGuestStart(
+  options: Options,
+): Promise<void> {
+  const { props } = options;
   props.domDialogBinder.hidden();
   if (!props.isFullResourceLoaded) {
     await loadFullResource(props);
@@ -31,15 +42,3 @@ async function onPrivateMatchGuestStart(props: GameProps): Promise<void> {
   ]);
   await props.fader.fadeIn();
 }
-
-/** アクションタイプ */
-const actionType = "PrivateMatchGuestStart";
-
-/** プライベートマッチ（ゲスト）スタート時のイベントリスナーコンテナ */
-export const privateMatchGuestStartContainer = {
-  [actionType]: (props: GameProps, action: GameAction) => {
-    if (action.type === actionType) {
-      onPrivateMatchGuestStart(props);
-    }
-  },
-};

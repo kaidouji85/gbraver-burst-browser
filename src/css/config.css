@@ -67,8 +67,9 @@
 .config__se-volume-caption,
 .config__performance-stats-visibility-caption {
   background-color: var(--sub-button-background-color);
+  border: var(--sub-label-border);
   border-radius: calc(var(--responsive-font-size) * 0.5);
-  padding: calc(var(--responsive-font-size) * 0.3);
+  padding: calc(var(--responsive-font-size) * 0.5);
 }
 
 .config__player-selector-type-description,
@@ -193,14 +194,16 @@
   font-size: var(--responsive-font-size);
   border-radius: var(--button-border-radius);
   color: var(--button-font-color);
-  border: var(--button-border);
-  box-shadow: var(--button-box-shadow);
 }
 
 .config__config-change {
+  border: var(--button-border);
   background-color: var(--button-background-color);
+  box-shadow: var(--button-box-shadow);
 }
 
 .config__prev {
+  border: var(--sub-button-border);
   background-color: var(--sub-button-background-color);
+  box-shadow: var(--sub-button-box-shadow);
 }

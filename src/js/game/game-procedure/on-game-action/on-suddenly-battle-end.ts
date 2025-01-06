@@ -1,14 +1,23 @@
 import { NetworkErrorDialog } from "../../../dom-dialogs/network-error/network-error-dialog";
-import { GameAction } from "../../game-actions";
+import { SuddenlyBattleEnd } from "../../game-actions/suddenly-battle-end";
 import { GameProps } from "../../game-props";
 import { switchNetworkErrorDialog } from "../switch-dialog/switch-network-error-dialog";
 
+/** オプション */
+type Options = {
+  /** ゲームプロパティ */
+  props: Readonly<GameProps>;
+  /** アクション */
+  action: SuddenlyBattleEnd;
+};
+
 /**
  * バトル強制終了時の処理
- * @param props ゲームプロパティ
+ * @param options オプション
  * @returns 処理が終了すると発火するPromise
  */
-async function onSuddenlyEndBattle(props: Readonly<GameProps>): Promise<void> {
+export async function onSuddenlyBattleEnd(options: Options): Promise<void> {
+  const { props } = options;
   const dialog = new NetworkErrorDialog({
     ...props,
     postNetworkError: { type: "GotoTitle" },
@@ -17,15 +26,3 @@ async function onSuddenlyEndBattle(props: Readonly<GameProps>): Promise<void> {
   props.suddenlyBattleEnd.unbind();
   await props.api.disconnectWebsocket();
 }
-
-/** アクションタイプ */
-const actionType = "SuddenlyBattleEnd";
-
-/** バトル強制終了処理のリスナーコンテナ */
-export const suddenlyBattleEndContainer = {
-  [actionType]: (props: GameProps, action: GameAction) => {
-    if (action.type === actionType) {
-      onSuddenlyEndBattle(props);
-    }
-  },
-};

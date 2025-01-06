@@ -1,21 +1,25 @@
 import { MatchingDialog } from "../../../dom-dialogs/matching/matching-dialog";
 import { RejectPrivateMatchEntryDialog } from "../../../dom-dialogs/reject-private-match-entry";
-import { GameAction } from "../../game-actions";
 import { PrivateMatchEntry } from "../../game-actions/private-match-entry";
 import { GameProps } from "../../game-props";
 import { startOnlineBattle } from "../start-online-battle";
 import { switchMatchingDialog } from "../switch-dialog/switch-matching-dialog";
 import { switchRejectPrivateMatchEntryDialog } from "../switch-dialog/switch-reject-private-match-entry-dialog";
 
+/** オプション */
+type Options = {
+  /** ゲームプロパティ */
+  props: GameProps;
+  /** アクション */
+  action: PrivateMatchEntry;
+};
+
 /**
  * ゲストがプライベートマッチにエントリする
- * @param props ゲームプロパティ
- * @param action アクション
+ * @param options オプション
  */
-async function onPrivateMatchEntry(
-  props: GameProps,
-  action: PrivateMatchEntry,
-): Promise<void> {
+export async function onPrivateMatchEntry(options: Options): Promise<void> {
+  const { props, action } = options;
   if (
     props.inProgress.type !== "PrivateMatchGuest" ||
     props.inProgress.privateMatchGuest.type !== "Entry"
@@ -43,15 +47,3 @@ async function onPrivateMatchEntry(
   };
   await startOnlineBattle(props, battle, "PRIVATE MATCH");
 }
-
-/** アクションタイプ */
-const actionType = "PrivateMatchEntry";
-
-/** プライベートマッチエントリ時のイベントリスナーコンテナ */
-export const privateMatchEntryContainer = {
-  [actionType]: (props: GameProps, action: GameAction) => {
-    if (action.type === actionType) {
-      onPrivateMatchEntry(props, action);
-    }
-  },
-};

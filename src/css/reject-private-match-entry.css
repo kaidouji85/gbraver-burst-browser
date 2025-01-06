@@ -67,5 +67,6 @@
   background-color: var(--button-background-color);
   border-radius: var(--button-border-radius);
   border: var(--button-border);
+  box-shadow: var(--button-box-shadow);
   height: calc(var(--responsive-font-size) * 3);
 }

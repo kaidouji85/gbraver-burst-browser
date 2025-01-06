@@ -7,6 +7,10 @@ import { GenesisBraverEasy } from "./genesis-braver-easy";
 import { GenesisBraverHard } from "./genesis-braver-hard";
 import { GenesisBraverNormal } from "./genesis-braver-normal";
 import { GenesisBraverVeryHard } from "./genesis-braver-very-hard";
+import { GranDozerEasy } from "./gran-dozer-easy";
+import { GranDozerHard } from "./gran-dozer-hard";
+import { GranDozerNormal } from "./gran-dozer-normal";
+import { GranDozerVeryHard } from "./gran-dozer-very-hard";
 import { LightningDozerEasy } from "./lightning-dozer-easy";
 import { LightningDozerHard } from "./lightning-dozer-hard";
 import { LightningDozerNormal } from "./lightning-dozer-normal";
@@ -54,4 +58,8 @@ export const NPCBattleCourses: NPCBattleCourse[] = [
   GenesisBraverNormal,
   GenesisBraverHard,
   GenesisBraverVeryHard,
+  GranDozerEasy,
+  GranDozerNormal,
+  GranDozerHard,
+  GranDozerVeryHard,
 ];

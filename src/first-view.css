@@ -15,8 +15,13 @@ body {
 
 .first-view {
   position: absolute;
-  z-index: 1;
   background-color: rgb(23 23 23);
+
+  /**
+   * 以下の条件を満たすxをセットすること
+   * --zindex-background <= x < --zindex-fader
+   */
+  z-index: 100;
 }
 
 .first-view--invisible {

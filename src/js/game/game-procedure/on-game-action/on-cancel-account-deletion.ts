@@ -1,22 +1,19 @@
-import { GameAction } from "../../game-actions";
+import { CancelAccountDeletion } from "../../game-actions/cancel-account-deletion";
 import { GameProps } from "../../game-props";
+
+/** オプション */
+type Options = {
+  /** ゲームプロパティ */
+  props: Readonly<GameProps>;
+  /** アクション */
+  action: CancelAccountDeletion;
+};
 
 /**
  * アカウント削除キャンセル
- * @param props ゲームプロパティ
+ * @param options オプション
  */
-function onCancelAccountDeletion(props: Readonly<GameProps>): void {
+export function onCancelAccountDeletion(options: Options): void {
+  const { props } = options;
   props.domDialogBinder.hidden();
 }
-
-/** アクションタイプ */
-const actionType = "CancelAccountDeletion";
-
-/** アカウント削除キャンセル時のイベントリスナーコンテナ */
-export const cancelAccountDeletionContainer = {
-  [actionType]: (props: GameProps, action: GameAction) => {
-    if (action.type === actionType) {
-      onCancelAccountDeletion(props);
-    }
-  },
-};

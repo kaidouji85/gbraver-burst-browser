@@ -4,6 +4,12 @@
   .net-battle-selector {
     --closer-width: 48px;
     --closer-height: 48px;
+    --casual-match-background-color: #001a06;
+    --casual-match-border: 2px solid #00cc30;
+    --casual-match-box-shadow: 0 0 0.5em #00b32a;
+    --private-match-background-color: #170a1a;
+    --private-match-border: 2px solid #e666ff;
+    --private-match-box-shadow: 0 0 0.5em #cf5ce6;
 
     display: block;
   }
@@ -51,9 +57,10 @@
   padding: max(var(--dialog-padding), calc(var(--closer-height) / 2))
     var(--dialog-padding) var(--dialog-padding) var(--dialog-padding);
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  grid-template-rows: 1fr 1fr;
-  grid-gap: calc(var(--responsive-font-size) * 0.3);
+  grid-template:
+    "casual-match private-match-host" 1fr
+    "casual-match private-match-guest" 1fr / 1fr 1fr;
+  grid-gap: calc(var(--responsive-font-size) * 0.6);
 }
 
 .net-battle-selector__closer {
@@ -65,18 +72,27 @@
 }
 
 .net-battle-selector__casual-match {
-  grid-column: 1;
-  grid-row: 1/3;
+  grid-area: casual-match;
+  color: var(--button-font-color);
+  background-color: var(--casual-match-background-color);
+  border: var(--casual-match-border);
+  box-shadow: var(--casual-match-box-shadow);
 }
 
 .net-battle-selector__private-match-host {
-  grid-column: 2;
-  grid-row: 1;
+  grid-area: private-match-host;
+  color: var(--button-font-color);
+  background-color: var(--private-match-background-color);
+  border: var(--private-match-border);
+  box-shadow: var(--private-match-box-shadow);
 }
 
 .net-battle-selector__private-match-guest {
-  grid-column: 2;
-  grid-row: 2;
+  grid-area: private-match-guest;
+  color: var(--button-font-color);
+  background-color: var(--private-match-background-color);
+  border: var(--private-match-border);
+  box-shadow: var(--private-match-box-shadow);
 }
 
 .net-battle-selector__casual-match,
@@ -84,9 +100,6 @@
 .net-battle-selector__private-match-guest {
   min-height: calc(var(--responsive-font-size) * 1);
   border-radius: var(--button-border-radius);
-  color: var(--button-font-color);
-  border: var(--button-border);
-  background-color: var(--sub-button-background-color);
   padding: calc(var(--responsive-font-size) * 1)
     calc(var(--responsive-font-size) * 2);
   text-align: left;
@@ -95,11 +108,16 @@
 .net-battle-selector__casual-match-title,
 .net-battle-selector__private-match-host-title,
 .net-battle-selector__private-match-guest-title {
-  font-size: calc(var(--responsive-font-size) * 1);
+  font-size: calc(var(--responsive-font-size) * 1.2);
+  font-weight: bold;
+  overflow-wrap: anywhere;
+  word-break: normal;
+  line-break: strict;
 }
 
 .net-battle-selector__casual-match-description,
 .net-battle-selector__private-match-host-description,
 .net-battle-selector__private-match-guest-description {
+  color: var(--button-font-color);
   font-size: calc(var(--responsive-font-size) * 0.6);
 }

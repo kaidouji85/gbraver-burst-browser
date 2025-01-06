@@ -1,7 +1,6 @@
 /** エピソードセレクト画面 */
 @media (orientation: landscape) {
   .episode-selector {
-    --controllers-z-index: 1;
     --gap: calc(var(--responsive-font-size) * 0.4);
 
     width: 100vw;
@@ -14,9 +13,10 @@
     padding: var(--screen-padding-top) var(--screen-padding-right)
       var(--screen-padding-bottom) var(--screen-padding-left);
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    grid-template-rows: minmax(calc(var(--responsive-font-size) * 7), 1fr) auto;
-    grid-gap: var(--gap);
+    grid-template:
+      "tabs     detail" auto
+      "episodes detail" 1fr / 1fr 1fr;
+    grid-gap: 0 var(--gap);
   }
 }
 
@@ -26,40 +26,16 @@
   }
 }
 
-.episode-selector__episode-detail {
-  grid-row: 1 / 3;
-  grid-column: 1;
-  border-radius: var(--button-border-radius);
-  box-sizing: border-box;
-  font-size: var(--responsive-font-size);
-  padding: calc(var(--responsive-font-size) * 0.5);
-  background-color: var(--sub-background-color);
-  overflow: auto;
-}
-
-.episode-selector__episode-title {
-  margin-bottom: calc(var(--responsive-font-size) * 1);
-  border-bottom: dashed 1px var(--font-color);
-  word-break: keep-all;
-  overflow-wrap: anywhere;
-}
-
-.episode-selector__episode-image-cut {
-  width: 100%;
-  border-radius: var(--button-border-radius);
-  filter: brightness(0.7);
-}
-
-.episode-selector__episode-image-cut--invisible {
-  display: none;
-}
-
 .episode-selector__selector {
   display: flex;
   flex-direction: column;
+  background-color: var(--sub-background-color);
+  padding: calc(var(--responsive-font-size) * 0.5);
+  border-radius: 0 0 var(--button-border-radius) var(--button-border-radius);
 }
 
 .episode-selector__episode-type-tabs {
+  grid-area: tabs;
   display: flex;
 }
 
@@ -90,43 +66,64 @@
 }
 
 .episode-selector__episodes {
+  grid-area: episodes;
   flex: 1;
-  grid-row: 1;
-  grid-column: 2;
   display: flex;
   flex-direction: column;
-  z-index: var(--controllers-z-index);
-  border-radius: 0 0 var(--button-border-radius) var(--button-border-radius);
-  background-color: var(--sub-background-color);
-  padding: calc(var(--responsive-font-size) * 0.5);
   overflow-y: scroll;
 }
 
-.episode-selector__controllers {
-  grid-row: 2;
-  grid-column: 2;
+.episode-selector__episode-detail {
   display: flex;
-  gap: var(--gap);
+  flex-direction: column;
+  grid-area: detail;
+  border-radius: var(--button-border-radius);
+  box-sizing: border-box;
+  font-size: var(--responsive-font-size);
+  padding: calc(var(--responsive-font-size) * 0.5);
+  background-color: var(--sub-background-color);
+}
+
+.episode-selector__episode-title {
+  margin-bottom: calc(var(--responsive-font-size) * 0.5);
+  border-bottom: solid 1px var(--font-color);
+  word-break: keep-all;
+  overflow-wrap: anywhere;
+}
+
+.episode-selector__contents {
+  flex: 1;
+  overflow-y: scroll;
+}
+
+.episode-selector__episode-image-cut {
+  width: 100%;
+  border-radius: var(--button-border-radius);
+  filter: brightness(0.7);
+}
+
+.episode-selector__episode-image-cut--invisible {
+  display: none;
 }
 
 .episode-selector__prev,
 .episode-selector__play-episode {
-  flex: 1;
   min-height: calc(var(--responsive-font-size) * 3);
   font-size: var(--responsive-font-size);
   border-radius: var(--button-border-radius);
   color: var(--button-font-color);
-  border: var(--button-border);
-  box-shadow: var(--button-box-shadow);
-  z-index: var(--controllers-z-index);
   word-break: keep-all;
   overflow-wrap: anywhere;
 }
 
 .episode-selector__prev {
+  border: var(--sub-button-border);
   background-color: var(--sub-button-background-color);
+  box-shadow: var(--sub-button-box-shadow);
 }
 
 .episode-selector__play-episode {
+  border: var(--button-border);
   background-color: var(--button-background-color);
+  box-shadow: var(--button-box-shadow);
 }

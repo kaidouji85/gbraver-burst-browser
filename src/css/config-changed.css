@@ -68,15 +68,17 @@
   font-size: var(--responsive-font-size);
   border-radius: var(--button-border-radius);
   color: var(--button-font-color);
-  border: var(--button-border);
-  box-shadow: var(--button-box-shadow);
 }
 
 .config-changed__discard {
+  border: var(--sub-button-border);
   background-color: var(--sub-button-background-color);
+  box-shadow: var(--sub-button-box-shadow);
 }
 
 .config-changed__accept {
+  border: var(--button-border);
   background-color: var(--button-background-color);
   margin-bottom: calc(var(--responsive-font-size) * 0.5);
+  box-shadow: var(--button-box-shadow);
 }

@@ -1,50 +1,42 @@
-import { GameAction } from "../../../game-actions";
 import { PostBattleAction } from "../../../game-actions/post-battle-action";
 import { GameProps } from "../../../game-props";
-import { InProgress } from "../../../in-progress";
-import { gotoEndingIfNeeded } from "./goto-ending-if-needed";
-import { gotoEpisodeIfNeeded } from "./goto-episode-if-needed";
-import { gotoEpisodeSelectorIfNeeded } from "./goto-episode-selector-if-needed";
-import { gotoNPCBattleStageIfNeeded } from "./goto-npc-battle-stage-if-needed";
-import { gotoTitleIfNeeded } from "./goto-title-if-needed";
+import { gotoEnding } from "./goto-ending";
+import { gotoEpisodeSelect } from "./goto-episode-select";
+import { gotoTitle } from "./goto-title";
+import { nextStage } from "./next-stage";
+import { retry } from "./retry";
+
+/** オプション */
+type Options = {
+  /** ゲームプロパティ */
+  props: GameProps;
+  /** アクション */
+  action: Readonly<PostBattleAction>;
+};
 
 /**
  * 戦闘終了後アクション決定時の処理
  * 本関数にはpropsを変更する副作用がある
- * @param props ゲームプロパティ
- * @param action アクション
+ * @param options オプション
  * @returns 処理が完了したら発火するPromise
  */
-async function onPostBattleAction(
-  props: GameProps,
-  action: PostBattleAction,
-): Promise<void> {
-  let updated: InProgress = props.inProgress;
-  if (await gotoTitleIfNeeded(props, action)) {
-    updated = { type: "None" };
-  } else if (await gotoEndingIfNeeded(props, action)) {
-    updated = { type: "None" };
-  } else if (await gotoNPCBattleStageIfNeeded(props, action)) {
-    updated = props.inProgress;
-  } else if (await gotoEpisodeIfNeeded(props, action)) {
-    updated = props.inProgress;
-  } else if (await gotoEpisodeSelectorIfNeeded(props, action)) {
-    updated = {
-      type: "Story",
-      story: { type: "EpisodeSelect" },
-    };
-  }
-  props.inProgress = updated;
-}
-
-/** アクションタイプ */
-const actionType = "PostBattleAction";
-
-/** 戦闘終了後アクションのリスナーコンテナ */
-export const postBattleActionContainer = {
-  [actionType]: (props: GameProps, action: GameAction) => {
-    if (action.type === actionType) {
-      onPostBattleAction(props, action);
+export async function onPostBattleAction(options: Options): Promise<void> {
+  const { props, action } = options;
+  const { postAction } = action;
+  props.inProgress = await (() => {
+    switch (postAction.type) {
+      case "GotoTitle":
+        return gotoTitle({ props, postAction });
+      case "GotoEnding":
+        return gotoEnding({ props, postAction });
+      case "Retry":
+        return retry({ props, postAction });
+      case "NextStage":
+        return nextStage({ props, postAction });
+      case "GotoEpisodeSelect":
+        return gotoEpisodeSelect({ props, postAction });
+      default:
+        return props.inProgress;
     }
-  },
-};
+  })();
+}

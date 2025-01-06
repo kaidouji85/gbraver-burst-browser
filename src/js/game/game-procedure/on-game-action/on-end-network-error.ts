@@ -1,5 +1,4 @@
 import { fadeOut, stop } from "../../../bgm/bgm-operators";
-import { GameAction } from "../../game-actions";
 import { EndNetworkError } from "../../game-actions/end-network-error";
 import { GameProps } from "../../game-props";
 import { playTitleBGM } from "../play-title-bgm";
@@ -33,14 +32,22 @@ const gotoTitle = async (props: GameProps) => {
   playTitleBGM(props);
 };
 
+/** onEndNetworkErrorオプション */
+type OnEndBNetworkErrorOptions = {
+  /** ゲームプロパティ */
+  props: GameProps;
+  /** アクション */
+  action: EndNetworkError;
+};
+
 /**
  * 通信エラーダイアログを閉じる
  * 本関数にはpropsを変更する副作用がある
- * @param props ゲームプロパティ
- * @param action アクション
+ * @param options オプション
  * @returns 処理が完了したら発火するPromise
  */
-async function onEndNetworkError(props: GameProps, action: EndNetworkError) {
+export async function onEndNetworkError(options: OnEndBNetworkErrorOptions) {
+  const { props, action } = options;
   props.inProgress = { type: "None" };
   if (action.postNetworkError.type === "Close") {
     await close(props);
@@ -48,15 +55,3 @@ async function onEndNetworkError(props: GameProps, action: EndNetworkError) {
     await gotoTitle(props);
   }
 }
-
-/** アクションタイプ */
-const actionType = "EndNetworkError";
-
-/** 通信エラー終了時のイベントリスナーコンテナ */
-export const endNetworkErrorContainer = {
-  [actionType]: (props: GameProps, action: GameAction) => {
-    if (action.type === actionType) {
-      onEndNetworkError(props, action);
-    }
-  },
-};

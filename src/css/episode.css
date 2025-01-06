@@ -10,7 +10,7 @@
     padding: calc(var(--responsive-font-size) * 0.1);
     color: var(--font-color);
     background-color: var(--sub-background-color);
-    border-bottom: dashed 1px var(--font-color);
+    border-bottom: solid 1px #fff;
     margin-bottom: calc(var(--responsive-font-size) * 0.7) 0;
   }
 
@@ -48,5 +48,5 @@
 }
 
 .episode__checker + .episode__title {
-  background-color: var(--sub-button-background-color);
+  background-color: #5f6666;
 }

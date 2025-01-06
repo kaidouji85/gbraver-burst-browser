@@ -1,6 +1,6 @@
 import { fadeOut, stop } from "../../../bgm/bgm-operators";
 import { WaitingDialog } from "../../../dom-dialogs/waiting/waiting-dialog";
-import { GameAction } from "../../game-actions";
+import { ForceEndBattle } from "../../game-actions/force-end-battle";
 import { GameProps } from "../../game-props";
 import { PlayingEpisode } from "../../in-progress/story";
 import { playTitleBGM } from "../play-title-bgm";
@@ -96,12 +96,21 @@ async function forceEndNetBattleIfNeeded(props: GameProps): Promise<boolean> {
   return false;
 }
 
+/** onForceEndBattleオプション */
+type ForceEndBattleOptions = {
+  /** ゲームプロパティ */
+  props: GameProps;
+  /** アクション */
+  action: ForceEndBattle;
+};
+
 /**
  * プレイヤーによるバトル強制終了
  * 本関数にはinProgressを更新する副作用がある
- * @param props ゲームプロパティ
+ * @param options オプション
  */
-async function onForceEndBattle(props: GameProps) {
+export async function onForceEndBattle(options: ForceEndBattleOptions) {
+  const { props } = options;
   if (await forceEndEpisodeIfNeeded(props)) {
     return;
   }
@@ -112,15 +121,3 @@ async function onForceEndBattle(props: GameProps) {
 
   await forceEndNPCBattle(props);
 }
-
-/** アクションタイプ */
-const actionType = "ForceEndBattle";
-
-/** プレイヤーによるバトル強制終了のイベントリスナーコンテナ */
-export const forceEndBattleContainer = {
-  [actionType]: (props: GameProps, action: GameAction) => {
-    if (action.type === actionType) {
-      onForceEndBattle(props);
-    }
-  },
-};

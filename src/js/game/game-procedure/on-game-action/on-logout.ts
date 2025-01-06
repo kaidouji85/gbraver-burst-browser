@@ -1,24 +1,21 @@
-import { GameAction } from "../../game-actions";
+import { Logout } from "../../game-actions/logout";
 import { GameProps } from "../../game-props";
+
+/** オプション */
+type Options = {
+  /** ゲームプロパティ */
+  props: Readonly<GameProps>;
+  /** アクション */
+  action: Logout;
+};
 
 /**
  * ログアウト
- * @param props ゲームプロパティ
+ * @param options オプション
  * @returns 処理が完了したら発火するPromise
  */
-async function onLogout(props: Readonly<GameProps>): Promise<void> {
+export async function onLogout(options: Options): Promise<void> {
+  const { props } = options;
   await props.fader.fadeOut();
   await props.api.logout();
 }
-
-/** アクションタイプ */
-const actionType = "Logout";
-
-/** ログアウト時のイベントリスナーコンテナ */
-export const logoutContainer = {
-  [actionType]: (props: GameProps, action: GameAction) => {
-    if (action.type === actionType) {
-      onLogout(props);
-    }
-  },
-};

@@ -1,22 +1,19 @@
-import { GameAction } from "../../game-actions";
+import { WithdrawPrivateMatchEntry } from "../../game-actions/withdraw-private-match-entry";
 import { GameProps } from "../../game-props";
+
+/** オプション */
+type Options = {
+  /** ゲームプロパティ */
+  props: Readonly<GameProps>;
+  /** アクション */
+  action: WithdrawPrivateMatchEntry;
+};
 
 /**
  * ゲストがプライベートマッチエントリを取り下げる
- * @param props ゲームプロパティ
+ * @param options オプション
  */
-function onWithdrawPrivateMatchEntry(props: Readonly<GameProps>): void {
+export function onWithdrawPrivateMatchEntry(options: Options): void {
+  const { props } = options;
   props.domDialogBinder.hidden();
 }
-
-/** アクションタイプ */
-const actionType = "WithdrawPrivateMatchEntry";
-
-/** プライベートマッチエントリ取り下げ時のイベントリスナーコンテナ */
-export const withdrawPrivateMatchEntryContainer = {
-  [actionType]: (props: GameProps, action: GameAction) => {
-    if (action.type === actionType) {
-      onWithdrawPrivateMatchEntry(props);
-    }
-  },
-};

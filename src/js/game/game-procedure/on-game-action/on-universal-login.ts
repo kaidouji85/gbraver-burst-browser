@@ -1,24 +1,21 @@
-import { GameAction } from "../../game-actions";
+import { UniversalLogin } from "../../game-actions/universal-login";
 import { GameProps } from "../../game-props";
+
+/** オプション */
+type Options = {
+  /** ゲームプロパティ */
+  props: Readonly<GameProps>;
+  /** アクション */
+  action: UniversalLogin;
+};
 
 /**
  * ユニバーサルログイン
- * @param props ゲームプロパティ
+ * @param options オプション
  * @returns 処理が完了したら発火するPromise
  */
-async function onUniversalLogin(props: Readonly<GameProps>): Promise<void> {
+export async function onUniversalLogin(options: Options): Promise<void> {
+  const { props } = options;
   await props.fader.fadeOut();
   await props.api.gotoLoginPage();
 }
-
-/** アクションタイプ */
-const actionType = "UniversalLogin";
-
-/** ユニバーサルログイン時のイベントリスナーコンテナ */
-export const universalLoginContainer = {
-  [actionType]: (props: GameProps, action: GameAction) => {
-    if (action.type == actionType) {
-      onUniversalLogin(props);
-    }
-  },
-};

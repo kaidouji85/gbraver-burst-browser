@@ -68,8 +68,8 @@
   border-radius: var(--button-border-radius);
   background-color: var(--sub-button-background-color);
   color: var(--button-font-color);
-  border: var(--button-border);
-  box-shadow: var(--button-box-shadow);
+  border: var(--sub-button-border);
+  box-shadow: var(--sub-button-box-shadow);
 }
 
 .login__login {
@@ -80,5 +80,5 @@
   color: var(--button-font-color);
   border: var(--button-border);
   box-shadow: var(--button-box-shadow);
-  margin-bottom: calc(var(--responsive-font-size) * 0.3);
+  margin-bottom: calc(var(--responsive-font-size) * 0.5);
 }

@@ -113,10 +113,10 @@ export class PostBattleFloater {
     const animation = this.#root.animate(
       [
         {
-          transform: "translate(-50%, 100%)",
+          transform: "translateY(100%)",
         },
         {
-          transform: "translate(-50%, 0)",
+          transform: "translateY(0)",
         },
       ],
       {

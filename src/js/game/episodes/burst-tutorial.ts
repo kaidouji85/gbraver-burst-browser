@@ -28,4 +28,5 @@ export const burstTutorial: Episode = {
   npc: burstTutorialNPC(),
   event: createBurstTutorialEvent,
   bgm: SOUND_IDS.BATTLE_BGM_03,
+  isLosingEvent: false,
 };
