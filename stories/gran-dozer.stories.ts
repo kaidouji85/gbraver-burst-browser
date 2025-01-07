@@ -44,9 +44,9 @@ export const enemyActiveStand: StoryFn = armdozerSpriteStub(
  */
 const armHammer = (sprite: GranDozer) => {
   delay(1000)
-    .chain(sprite.hmCharge())
+    .chain(sprite.armHammerCharge())
     .chain(delay(1000))
-    .chain(sprite.hmAttack())
+    .chain(sprite.armHammerAttack())
     .chain(delay(1000))
     .chain(sprite.hmToStand())
     .loop();

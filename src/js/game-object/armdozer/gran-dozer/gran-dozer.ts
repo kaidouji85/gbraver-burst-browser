@@ -4,9 +4,9 @@ import * as THREE from "three";
 import { Animate } from "../../../animation/animate";
 import { GameObjectAction } from "../../action/game-object-action";
 import { EmptyArmdozerSprite } from "../empty-armdozer-sprite";
+import { armHammerAttack } from "./animation/arm-hammer-attack";
+import { armHammerCharge } from "./animation/arm-hammer-charge";
 import { endActive } from "./animation/end-active";
-import { hmAttack } from "./animation/hm-attack";
-import { hmCharge } from "./animation/hm-charge";
 import { hmToStand } from "./animation/hm-to-stand";
 import { startActive } from "./animation/start-active";
 import { bindEventListeners } from "./procedure/bind-event-listeners";
@@ -53,19 +53,19 @@ export class GranDozer extends EmptyArmdozerSprite {
   }
 
   /**
-   * アームハンマーチャージ
+   * アームハンマー チャージ
    * @returns アニメーション
    */
-  hmCharge(): Animate {
-    return hmCharge(this.#props);
+  armHammerCharge(): Animate {
+    return armHammerCharge(this.#props);
   }
 
   /**
-   * アームハンマーアタック
+   * アームハンマー アタック
    * @returns アニメーション
    */
-  hmAttack(): Animate {
-    return hmAttack(this.#props);
+  armHammerAttack(): Animate {
+    return armHammerAttack(this.#props);
   }
 
   /**

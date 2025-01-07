@@ -3,11 +3,11 @@ import { tween } from "../../../../animation/tween";
 import { GranDozerAnimationProps } from "./animation-props";
 
 /**
- * アームハンマー
+ * アームハンマー アタック
  * @param props アニメーションプロパティ
  * @returns アニメーション
  */
-export function hmAttack(props: GranDozerAnimationProps): Animate {
+export function armHammerAttack(props: GranDozerAnimationProps): Animate {
   const { model } = props;
   return tween(model.animation, (t) =>
     t.to({ frame: 0 }, 0).onStart(() => {

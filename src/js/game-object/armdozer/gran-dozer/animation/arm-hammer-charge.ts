@@ -4,11 +4,11 @@ import { ARMDOZER_SPRITE_ATTACKER_Z } from "../../position";
 import { GranDozerAnimationProps } from "./animation-props";
 
 /**
- * アームハンマーチャージ
+ * アームハンマー チャージ
  * @param props アニメーションプロパティ
  * @returns アニメーション
  */
-export function hmCharge(props: GranDozerAnimationProps): Animate {
+export function armHammerCharge(props: GranDozerAnimationProps): Animate {
   const { model, sounds, se } = props;
   return tween(model, (t) =>
     t
