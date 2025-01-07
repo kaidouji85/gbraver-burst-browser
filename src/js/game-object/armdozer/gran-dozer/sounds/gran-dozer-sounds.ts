@@ -13,7 +13,7 @@ export type GranDozerSounds = {
 type Options = ResourcesContainer;
 
 /**
- * ジェネシスブレイバー効果音を生成する
+ * グランドーザ効果音を生成する
  * @param options オプション
  * @returns 生成結果
  */
