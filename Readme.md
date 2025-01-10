@@ -55,6 +55,17 @@ npm start
 ./clear-cdn.bash <CloudFrontのdistributionId>
 ```
 
+## GitHub Actions設定
+
+### Secrets設定
+[ここ](https://docs.github.com/ja/actions/security-guides/using-secrets-in-github-actions)を参考にGitHub ActionsのSecretsを設定する。
+以下が設定内容である。
+
+**secrets**
+| シークレット名 | 値 |
+|-------|----|
+| CC_TEST_REPORTER_ID | code climate reporter id |
+
 ## AWS環境設定
 
 ### 開発環境
