@@ -110,6 +110,7 @@
     "code-format:src": "prettier --write \"src/**/*.ts\" \"src/**/*.js\"",
     "code-format:storybook": "prettier --write stories",
     "code-format:test": "prettier --write test",
+    "coverage": "jest --coverage",
     "dependency-check": "run-s dependency-check:*",
     "dependency-check:src": "depcruise src",
     "dependency-check:stories": "depcruise stories",
