@@ -7,13 +7,13 @@ import type {
   NormalHit,
 } from "gbraver-burst-core";
 
-import { all } from "../../../../../../animation/all";
-import { Animate } from "../../../../../../animation/animate";
-import { delay, empty } from "../../../../../../animation/delay";
-import { WingDozer } from "../../../../../../game-object/armdozer/wing-dozer/wing-dozer";
-import { TDCamera } from "../../../../../../game-object/camera/td";
-import { toInitial } from "../../../td-camera";
-import type { BattleAnimationParamX } from "../animation-param";
+import { all } from "../../../../../../../animation/all";
+import { Animate } from "../../../../../../../animation/animate";
+import { delay, empty } from "../../../../../../../animation/delay";
+import { WingDozer } from "../../../../../../../game-object/armdozer/wing-dozer/wing-dozer";
+import { TDCamera } from "../../../../../../../game-object/camera/td";
+import { toInitial } from "../../../../td-camera";
+import type { BattleAnimationParamX } from "../../animation-param";
 
 /**
  * ウィングドーザ 戦闘アニメーション パラメータ
