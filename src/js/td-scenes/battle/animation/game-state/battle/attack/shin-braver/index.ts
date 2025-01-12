@@ -17,27 +17,22 @@ import { ShinBraverBattle } from "./shin-braver-battle";
 export function shinBraverAttack(
   param: ShinBraverBattle<BattleResult>,
 ): Animate {
-  let ret = empty();
-
   const { result } = param;
-  if (
-    param.isDeath &&
-    (result.name === "NormalHit" ||
-      result.name === "CriticalHit" ||
-      result.name === "Guard")
-  ) {
-    ret = down({ ...param, result });
-  } else if (result.name === "NormalHit") {
-    ret = attack({ ...param, result });
-  } else if (result.name === "CriticalHit") {
-    ret = attack({ ...param, result });
-  } else if (result.name === "Guard") {
-    return guard({ ...param, result });
-  } else if (result.name === "Miss") {
-    ret = miss({ ...param, result });
-  } else if (result.name === "Feint") {
-    ret = feint({ ...param, result });
+  switch (result.name) {
+    case "NormalHit":
+    case "CriticalHit":
+      return param.isDeath
+        ? down({ ...param, result })
+        : attack({ ...param, result });
+    case "Guard":
+      return param.isDeath
+        ? down({ ...param, result })
+        : guard({ ...param, result });
+    case "Miss":
+      return miss({ ...param, result });
+    case "Feint":
+      return feint({ ...param, result });
+    default:
+      return empty();
   }
-
-  return ret;
 }
