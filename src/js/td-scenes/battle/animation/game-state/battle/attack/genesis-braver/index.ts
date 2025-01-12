@@ -1,11 +1,4 @@
-import {
-  BattleResult,
-  CriticalHit,
-  Feint,
-  Guard,
-  Miss,
-  NormalHit,
-} from "gbraver-burst-core";
+import { BattleResult } from "gbraver-burst-core";
 
 import { Animate } from "../../../../../../../animation/animate";
 import { empty } from "../../../../../../../animation/delay";
@@ -24,45 +17,22 @@ import { miss } from "./miss";
 export function genesisBraverAttack(
   param: GenesisBraverBattle<BattleResult>,
 ): Animate {
-  if (param.isDeath && param.result.name === "NormalHit") {
-    const result: NormalHit = param.result;
-    return down({ ...param, result });
+  const { result } = param;
+  switch (result.name) {
+    case "NormalHit":
+    case "CriticalHit":
+      return param.isDeath
+        ? down({ ...param, result })
+        : attack({ ...param, result });
+    case "Guard":
+      return param.isDeath
+        ? down({ ...param, result })
+        : guard({ ...param, result });
+    case "Miss":
+      return miss({ ...param, result });
+    case "Feint":
+      return feint({ ...param, result });
+    default:
+      return empty();
   }
-
-  if (param.result.name === "NormalHit") {
-    const result: NormalHit = param.result;
-    return attack({ ...param, result });
-  }
-
-  if (param.isDeath && param.result.name === "CriticalHit") {
-    const result: CriticalHit = param.result;
-    return down({ ...param, result });
-  }
-
-  if (param.result.name === "CriticalHit") {
-    const result: CriticalHit = param.result;
-    return attack({ ...param, result });
-  }
-
-  if (param.isDeath && param.result.name === "Guard") {
-    const result: Guard = param.result;
-    return down({ ...param, result });
-  }
-
-  if (param.result.name === "Guard") {
-    const result: Guard = param.result;
-    return guard({ ...param, result });
-  }
-
-  if (param.result.name === "Miss") {
-    const result: Miss = param.result;
-    return miss({ ...param, result });
-  }
-
-  if (param.result.name === "Feint") {
-    const result: Feint = param.result;
-    return feint({ ...param, result });
-  }
-
-  return empty();
 }
