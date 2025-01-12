@@ -20,16 +20,17 @@ export function neoLandozerAttack(
   let ret = empty();
 
   const { result } = param;
-  if (param.isDeath && result.name === "NormalHit") {
+  if (
+    param.isDeath &&
+    (result.name === "NormalHit" ||
+      result.name === "CriticalHit" ||
+      result.name === "Guard")
+  ) {
     ret = down({ ...param, result });
   } else if (result.name === "NormalHit") {
     ret = attack({ ...param, result });
-  } else if (param.isDeath && result.name === "CriticalHit") {
-    ret = down({ ...param, result });
   } else if (result.name === "CriticalHit") {
     ret = attack({ ...param, result });
-  } else if (param.isDeath && result.name === "Guard") {
-    ret = down({ ...param, result });
   } else if (result.name === "Guard") {
     ret = guard({ ...param, result });
   } else if (result.name === "Miss") {
