@@ -7,13 +7,13 @@ import type {
   NormalHit,
 } from "gbraver-burst-core";
 
-import { all } from "../../../../../../animation/all";
-import { Animate } from "../../../../../../animation/animate";
-import { delay, empty } from "../../../../../../animation/delay";
-import { NeoLandozer } from "../../../../../../game-object/armdozer/neo-landozer/neo-landozer";
-import { TDCamera } from "../../../../../../game-object/camera/td";
-import { toInitial } from "../../../td-camera";
-import type { BattleAnimationParamX } from "../animation-param";
+import { all } from "../../../../../../../animation/all";
+import { Animate } from "../../../../../../../animation/animate";
+import { delay, empty } from "../../../../../../../animation/delay";
+import { NeoLandozer } from "../../../../../../../game-object/armdozer/neo-landozer/neo-landozer";
+import { TDCamera } from "../../../../../../../game-object/camera/td";
+import { toInitial } from "../../../../td-camera";
+import type { BattleAnimationParamX } from "../../animation-param";
 
 /**
  * ネオランドーザ 戦闘アニメーション パラメータ
