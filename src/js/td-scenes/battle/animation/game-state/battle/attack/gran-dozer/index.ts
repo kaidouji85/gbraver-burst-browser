@@ -6,6 +6,7 @@ import { attack } from "./attack";
 import { GranDozerBattle } from "./gran-dozer-battle";
 import { guard } from "./guard";
 import { miss } from "./miss";
+import { feint } from "./feint";
 
 /**
  * グランドーザ 攻撃アニメーション
@@ -22,6 +23,8 @@ export function granDozerAttack(param: GranDozerBattle<BattleResult>): Animate {
       return guard({ ...param, result });
     case "Miss":
       return miss({ ...param, result });
+    case "Feint":
+      return feint({ ...param, result });
     default:
       return empty();
   }
