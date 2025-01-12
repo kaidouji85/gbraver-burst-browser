@@ -5,6 +5,7 @@ import { empty } from "../../../../../../../animation/delay";
 import { attack } from "./attack";
 import { GranDozerBattle } from "./gran-dozer-battle";
 import { guard } from "./guard";
+import { miss } from "./miss";
 
 /**
  * グランドーザ 攻撃アニメーション
@@ -19,6 +20,8 @@ export function granDozerAttack(param: GranDozerBattle<BattleResult>): Animate {
       return attack({ ...param, result });
     case "Guard":
       return guard({ ...param, result });
+    case "Miss":
+      return miss({ ...param, result });
     default:
       return empty();
   }
