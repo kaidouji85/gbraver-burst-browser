@@ -4,6 +4,7 @@ import type {
   Burst,
   ContinuousAttack,
   ForceTurnEnd,
+  Ineffective,
   LightningBarrier,
   RecoverBattery,
 } from "gbraver-burst-core";
@@ -82,6 +83,18 @@ function forceTurnEndDetail(burst: ForceTurnEnd): string[] {
 }
 
 /**
+ * 効果無効化詳細
+ * @param burst バースト情報
+ * @returns 説明文
+ */
+function ineffectiveDetail(burst: Ineffective): string[] {
+  return [
+    `バッテリーを${burst.recoverBattery}回復する。`,
+    `1ターンだけ、戦闘中に相手の効果が無効化される。`,
+  ];
+}
+
+/**
  * バースト詳細を生成する
  * @param burst 情報
  * @returns 説明文
@@ -100,6 +113,8 @@ export function burstDetail(burst: Burst): string[] {
       return batteryLimitBreakDetail(burst);
     case "ForceTurnEnd":
       return forceTurnEndDetail(burst);
+    case "Ineffective":
+      return ineffectiveDetail(burst);
     default:
       return [];
   }
