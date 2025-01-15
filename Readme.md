@@ -299,7 +299,7 @@ developブランチにpushされた時に、CodeBuildが実行されるように
     - **これらの条件でビルドを開始する**
       | タイプ | パターン |
       |--------|---------|
-      | BASE_REF | ^refs/heads/develop$ |
+      | HEAD_REF | ^refs/heads/develop$ |
     - **これらの条件でビルドを開始しない**
       - なし
 
@@ -318,7 +318,7 @@ masterブランチにpushされた時に、CodeBuildが実行されるように�
     - **これらの条件でビルドを開始する**
       | タイプ | パターン |
       |--------|---------|
-      | BASE_REF | ^refs/heads/master$ |
+      | HEAD_REF | ^refs/heads/master$ |
     - **これらの条件でビルドを開始しない**
       - なし
 
