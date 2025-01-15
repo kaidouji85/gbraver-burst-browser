@@ -58,6 +58,7 @@ npm start
 ## GitHub Actions設定
 
 ### Secrets設定
+
 [ここ](https://docs.github.com/ja/actions/security-guides/using-secrets-in-github-actions)を参考にGitHub ActionsのSecretsを設定する。
 以下が設定内容である。
 
@@ -74,10 +75,10 @@ npm start
 2. 「[Parameter Store（テスト環境）](#parameter-storeテスト環境)」を参考にParameter Storeに値を設定する
 3. 以下のCode Build（ソースコードは本リポジトリに設定したもの）を構築する
 
-| 役割             | buildspec                 | 環境                                                                                                             | IAMポリシー                                                     |
-| ---------------- | ------------------------- | ---------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------- |
-| ビルド           | buildspec.yml             | [aws/codebuild/standard:7.0](https://github.com/aws/aws-codebuild-docker-images/tree/master/ubuntu/standard/7.0) | [ビルド用IAMポリシー](#ビルド用iamポリシー)                     |
-| ステージ切り替え | buildspec.switchStage.yml | [aws/codebuild/standard:7.0](https://github.com/aws/aws-codebuild-docker-images/tree/master/ubuntu/standard/7.0) | [ステージ切り替え用IAMポリシー](#ステージ切り替え用iamポリシー) |
+| 役割             | buildspec                 | 環境                                                                                                             | IAMポリシー                                                     | webhook                                                 |
+| ---------------- | ------------------------- | ---------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------- | ------------------------------------------------------- |
+| ビルド           | buildspec.yml             | [aws/codebuild/standard:7.0](https://github.com/aws/aws-codebuild-docker-images/tree/master/ubuntu/standard/7.0) | [ビルド用IAMポリシー](#ビルド用iamポリシー)                     | [テスト環境ビルド用Webhook](#テスト環境ビルド用webhook) |
+| ステージ切り替え | buildspec.switchStage.yml | [aws/codebuild/standard:7.0](https://github.com/aws/aws-codebuild-docker-images/tree/master/ubuntu/standard/7.0) | [ステージ切り替え用IAMポリシー](#ステージ切り替え用iamポリシー) | 設定なし                                                |
 
 ### 本番環境
 
@@ -85,10 +86,10 @@ npm start
 2. 「[Parameter Store（本番環境）](#parameter-store本番環境)」を参考にParameter Storeに値を設定する
 3. 以下のCode Build（ソースコードは本リポジトリに設定したもの）を構築する
 
-| 役割             | buildspec                      | 環境                                                                                                             | IAMポリシー                                                     |
-| ---------------- | ------------------------------ | ---------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------- |
-| ビルド           | buildspec.prod.yml             | [aws/codebuild/standard:7.0](https://github.com/aws/aws-codebuild-docker-images/tree/master/ubuntu/standard/7.0) | [ビルド用IAMポリシー](#ビルド用iamポリシー)                     |
-| ステージ切り替え | buildspec.prod.switchStage.yml | [aws/codebuild/standard:7.0](https://github.com/aws/aws-codebuild-docker-images/tree/master/ubuntu/standard/7.0) | [ステージ切り替え用IAMポリシー](#ステージ切り替え用iamポリシー) |
+| 役割             | buildspec                      | 環境                                                                                                             | IAMポリシー                                                     | webhook                                             |
+| ---------------- | ------------------------------ | ---------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------- | --------------------------------------------------- |
+| ビルド           | buildspec.prod.yml             | [aws/codebuild/standard:7.0](https://github.com/aws/aws-codebuild-docker-images/tree/master/ubuntu/standard/7.0) | [ビルド用IAMポリシー](#ビルド用iamポリシー)                     | [本番環境ビルド用Webhook](#本番環境ビルド用webhook) |
+| ステージ切り替え | buildspec.prod.switchStage.yml | [aws/codebuild/standard:7.0](https://github.com/aws/aws-codebuild-docker-images/tree/master/ubuntu/standard/7.0) | [ステージ切り替え用IAMポリシー](#ステージ切り替え用iamポリシー) | 設定なし                                            |
 
 ## storybookを動かす
 
@@ -274,6 +275,52 @@ shfmt -l -w *.bash
   ]
 }
 ```
+
+### CodeBuild Webhook設定
+
+本節ではCodeBuildのWebhook設定の詳細を解説します。
+設定画面の操作方法は、以下を参照してください。
+
+**GitHub ウェブフックイベントのフィルタリング (コンソール)**  
+https://docs.aws.amazon.com/ja_jp/codebuild/latest/userguide/github-webhook-events-console.html
+
+#### テスト環境ビルド用Webhook
+
+developブランチにプルリクエストがマージされた際にのみ、CodeBuildが実行されるように設定します。以下に、その設定内容を記載します。
+
+- **コードの変更がこのレポジトリにプッシュされるたびに再構築する**
+  - チェックを入れる
+- **ビルドタイプ**
+  - 単一ビルド
+- **ウェブフックイベントフィルタグループ**
+  - **フィルタグループ 1**
+    - **イベントタイプ**
+      - PULL_REQUEST_MERGED
+    - **これらの条件でビルドを開始する**
+      | タイプ | パターン |
+      |--------|---------|
+      | BASE_REF | ^refs/heads/develop$ |
+    - **これらの条件でビルドを開始しない**
+      - なし
+
+#### 本番環境ビルド用Webhook
+
+masterブランチにプルリクエストがマージされた際にのみ、CodeBuildが実行されるように設定します。以下に、その設定内容を記載します。
+
+- **コードの変更がこのレポジトリにプッシュされるたびに再構築する**
+  - チェックを入れる
+- **ビルドタイプ**
+  - 単一ビルド
+- **ウェブフックイベントフィルタグループ**
+  - **フィルタグループ 1**
+    - **イベントタイプ**
+      - PULL_REQUEST_MERGED
+    - **これらの条件でビルドを開始する**
+      | タイプ | パターン |
+      |--------|---------|
+      | BASE_REF | ^refs/heads/master$ |
+    - **これらの条件でビルドを開始しない**
+      - なし
 
 ## License
 
