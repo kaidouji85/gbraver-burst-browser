@@ -81,11 +81,11 @@
 .battle-simulator__enemy-state {
   position: relative;
   z-index: var(--result-area-z-index);
-  gap: 0 calc(var(--responsive-font-size) * 0.2);
+  gap: calc(var(--responsive-font-size) * 0.2);
   display: grid;
   grid-template-areas:
-    "hp-label    hp-value    separator-1 battery-icon battery"
-    "power-label power-value separator-2 speed-label  speed-value";
+    "hp-label    hp-value    separator-1 battery-label battery"
+    "power-label power-value separator-2 speed-label   speed-value";
   align-items: center;
 }
 
@@ -93,7 +93,7 @@
 .battle-simulator__damage--is-death {
   grid-area: hp-value;
   position: absolute;
-  bottom: calc(var(--responsive-font-size) * 1.1);
+  bottom: calc(var(--responsive-font-size) * 1.2);
   font-size: calc(var(--responsive-font-size) * 2);
   justify-self: end;
   white-space: nowrap;
@@ -104,13 +104,26 @@
   grid-area: separator-1;
   position: absolute;
   white-space: nowrap;
-  bottom: calc(var(--responsive-font-size) * 1.1);
+  bottom: calc(var(--responsive-font-size) * 1.8);
 }
 
 .battle-simulator__damage--is-death,
 .battle-simulator__battle-result-name--is-death {
   color: #ff2929;
   text-shadow: #b31d1d 1px 0 2px;
+}
+
+.battle-simulator__hp-label,
+.battle-simulator__battery-label,
+.battle-simulator__power-label,
+.battle-simulator__speed-label {
+  background-color: var(--button-background-color);
+  border: var(--label-border);
+  border-radius: calc(var(--responsive-font-size) * 0.2);
+  width: 100%;
+  height: 100%;
+  display: grid;
+  place-items: center;
 }
 
 .battle-simulator__hp-label {
@@ -121,9 +134,11 @@
   grid-area: hp-value;
 }
 
+.battle-simulator__battery-label {
+  grid-area: battery-label;
+}
+
 .battle-simulator__battery-icon {
-  grid-area: battery-icon;
-  justify-self: center;
   width: var(--battery-icon-size);
   height: var(--battery-icon-size);
 }
