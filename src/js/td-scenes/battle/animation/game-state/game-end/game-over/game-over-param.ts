@@ -6,23 +6,19 @@ import type { StateAnimationProps } from "../../state-animation-props";
 
 /**
  * ゲームオーバー アニメーションパラメータ
- *
- * @type TD_ARMDOZER 3Dレイヤー アームドーザ固有オブジェクト
+ * @param TD_ARMDOZER 3Dレイヤー アームドーザ固有オブジェクト
  */
 export type GameOverParamX<TD_ARMDOZER extends TDArmdozerObjects> = {
   winnerTdArmdozer: TD_ARMDOZER;
   tdCamera: TDCamera;
 };
 
-/**
- * ゲームオーバー アニメーションパラメータ
- */
+/** ゲームオーバー アニメーションパラメータ */
 export type GameOverParam = GameOverParamX<TDArmdozerObjects>;
 
 /**
  * ゲームオーバー アニメーションパラメータに変換する
  * 変換できない場合はnullを返す
- *
  * @param props 戦闘シーンプロパティ
  * @param gameOver ゲームオーバー情報
  * @returns 変換結果
@@ -30,18 +26,11 @@ export type GameOverParam = GameOverParamX<TDArmdozerObjects>;
 export function toGameOverParam(
   props: StateAnimationProps,
   gameOver: GameOver,
-): GameOverParam | null | undefined {
-  const winnerArmdozer = props.view.td.armdozers.find(
+): GameOverParam | null {
+  const winnerTdArmdozer = props.view.td.armdozers.find(
     (v) => v.playerId === gameOver.winner,
   );
-
-  if (!winnerArmdozer) {
-    return null;
-  }
-
-  const tdArmdozer: TDArmdozerObjects = winnerArmdozer;
-  return {
-    winnerTdArmdozer: tdArmdozer,
-    tdCamera: props.view.td.camera,
-  };
+  return winnerTdArmdozer
+    ? { winnerTdArmdozer, tdCamera: props.view.td.camera }
+    : null;
 }
