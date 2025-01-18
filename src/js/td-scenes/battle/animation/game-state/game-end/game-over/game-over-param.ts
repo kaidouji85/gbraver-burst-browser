@@ -1,12 +1,12 @@
-import type { GameOver } from "gbraver-burst-core";
+import { GameOver } from "gbraver-burst-core";
 
 import { TDCamera } from "../../../../../../game-object/camera/td";
-import type { TDArmdozerObjects } from "../../../../view/td/armdozer-objects/armdozer-objects";
-import type { StateAnimationProps } from "../../state-animation-props";
+import { TDArmdozerObjects } from "../../../../view/td/armdozer-objects/armdozer-objects";
+import { StateAnimationProps } from "../../state-animation-props";
 
 /**
  * ゲームオーバー アニメーションパラメータ
- * @param TD_ARMDOZER 3Dレイヤー アームドーザ固有オブジェクト
+ * @template TD_ARMDOZER 3Dレイヤー アームドーザ固有オブジェクト
  */
 export type GameOverParamX<TD_ARMDOZER extends TDArmdozerObjects> = {
   winnerTdArmdozer: TD_ARMDOZER;
