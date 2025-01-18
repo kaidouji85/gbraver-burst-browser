@@ -4,7 +4,7 @@ import { Animate } from "../../../../../animation/animate";
 import { empty } from "../../../../../animation/delay";
 import { StateAnimationProps } from "../state-animation-props";
 import { createReflectAnimationParam } from "./create-reflect-animation-param";
-import { deathLightning, lightning } from "./lightning";
+import { lightning } from "./lightning";
 
 /**
  * ダメージ反射のアニメーション
@@ -25,9 +25,7 @@ export function reflectAnimation(
   const { effect } = gameState;
   switch (effect.effect) {
     case "Lightning":
-      return effect.isDeath
-        ? deathLightning(animationParam)
-        : lightning(animationParam);
+      return lightning(animationParam);
     default:
       return empty();
   }
