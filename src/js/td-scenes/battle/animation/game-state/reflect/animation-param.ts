@@ -24,6 +24,8 @@ export type ReflectAnimationParam = {
   };
   /** ダメージ反射をした側 */
   readonly reflecting: {
+    /** ダメージ反射後のステート */
+    readonly state: PlayerState;
     /** HUDプレイヤーオブジェクト */
     readonly hud: HUDPlayer;
   };

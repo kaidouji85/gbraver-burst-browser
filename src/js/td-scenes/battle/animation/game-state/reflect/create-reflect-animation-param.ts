@@ -27,6 +27,9 @@ export function createReflectAnimationParam(
   const hudPlayerOfDamaged = view.hud.players.find(
     (v) => v.playerId === effect.damagedPlayer,
   );
+  const stateOfReflecting = players.find(
+    (v) => v.playerId !== effect.damagedPlayer,
+  );
   const hudPlayerOfReflecting = view.hud.players.find(
     (v) => v.playerId !== effect.damagedPlayer,
   );
@@ -35,6 +38,7 @@ export function createReflectAnimationParam(
     !tdArmdozerOfDamaged ||
     !tdPlayerOfDamaged ||
     !hudPlayerOfDamaged ||
+    !stateOfReflecting ||
     !hudPlayerOfReflecting
   ) {
     return null;
@@ -48,6 +52,7 @@ export function createReflectAnimationParam(
     hud: hudPlayerOfDamaged,
   };
   const reflecting = {
+    state: stateOfReflecting,
     hud: hudPlayerOfReflecting,
   };
   return { effect, drawIndicator, damaged, reflecting };
