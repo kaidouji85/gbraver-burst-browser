@@ -1,11 +1,10 @@
-import type { GameEnd, GameStateX } from "gbraver-burst-core";
+import { GameEnd, GameStateX } from "gbraver-burst-core";
 
 import { Animate } from "../../../../../animation/animate";
 import { empty } from "../../../../../animation/delay";
-import type { StateAnimationProps } from "../state-animation-props";
+import { StateAnimationProps } from "../state-animation-props";
 import { evenMatchAnimation } from "./even-match/even-match";
 import { gameOverAnimation } from "./game-over/game-over";
-import { toGameOverParam } from "./game-over/game-over-param";
 
 /**
  * ゲーム終了アニメーション
@@ -18,18 +17,16 @@ export function gameEndAnimation(
   props: StateAnimationProps,
   gameState: GameStateX<GameEnd>,
 ): Animate {
-  if (gameState.effect.result.type === "EvenMatch") {
-    return evenMatchAnimation(props);
+  const { result } = gameState.effect;
+  switch (result.type) {
+    case "EvenMatch":
+      return evenMatchAnimation(props);
+    case "GameOver":
+      return gameOverAnimation(props, {
+        ...gameState,
+        effect: { ...gameState.effect, result },
+      });
+    default:
+      return empty();
   }
-
-  const gameOverParam =
-    gameState.effect.result.type === "GameOver"
-      ? toGameOverParam(props, gameState.effect.result)
-      : null;
-
-  if (gameOverParam) {
-    return gameOverAnimation(gameOverParam);
-  }
-
-  return empty();
 }
