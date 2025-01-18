@@ -40,6 +40,7 @@ export function createReflectAnimationParam(
     return null;
   }
 
+  const { drawIndicator } = view.hud.gameObjects;
   const damaged = {
     state: stateOfDamaged,
     sprite: tdArmdozerOfDamaged.sprite(),
@@ -49,5 +50,5 @@ export function createReflectAnimationParam(
   const reflecting = {
     hud: hudPlayerOfReflecting,
   };
-  return { effect, damaged, reflecting };
+  return { effect, drawIndicator, damaged, reflecting };
 }
