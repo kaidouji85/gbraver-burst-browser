@@ -8,8 +8,8 @@ import { ReflectAnimationParam } from "../animation-param";
  * @param param アニメーションパラメータ
  * @returns アニメーション
  */
-export function normalLightning(param: ReflectAnimationParam): Animate {
-  return all(
+export const normalLightning = (param: ReflectAnimationParam): Animate =>
+  all(
     param.damaged.td.hitMark.lightning.popUp(),
     delay(100).chain(
       all(
@@ -22,4 +22,3 @@ export function normalLightning(param: ReflectAnimationParam): Animate {
       ),
     ),
   );
-}

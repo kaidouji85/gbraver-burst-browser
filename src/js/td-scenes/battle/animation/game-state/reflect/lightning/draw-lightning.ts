@@ -8,8 +8,8 @@ import { ReflectAnimationParam } from "../animation-param";
  * @param param アニメーションパラメータ
  * @returns アニメーション
  */
-export function drawLightning(param: ReflectAnimationParam): Animate {
-  return all(
+export const drawLightning = (param: ReflectAnimationParam): Animate =>
+  all(
     param.drawIndicator
       .slideIn()
       .chain(delay(700))
@@ -18,10 +18,9 @@ export function drawLightning(param: ReflectAnimationParam): Animate {
     param.damaged.td.hitMark.lightning.popUp(),
     delay(100).chain(
       all(
-        param.damaged.sprite.knockBack(),
+        param.damaged.sprite.down(),
         param.damaged.td.damageIndicator.popUp(param.effect.damage),
         param.damaged.hud.gauge.hp(param.damaged.state.armdozer.hp),
       ),
     ),
   );
-}

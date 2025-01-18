@@ -8,8 +8,8 @@ import { ReflectAnimationParam } from "../animation-param";
  * @param param アニメーションパラメータ
  * @returns アニメーション
  */
-export function deathLightning(param: ReflectAnimationParam): Animate {
-  return all(
+export const deathLightning = (param: ReflectAnimationParam): Animate =>
+  all(
     param.reflecting.hud.resultIndicator
       .slideIn()
       .chain(delay(700))
@@ -23,4 +23,3 @@ export function deathLightning(param: ReflectAnimationParam): Animate {
       ),
     ),
   );
-}
