@@ -1,3 +1,5 @@
+import { GameEndX, GameOver, GameStateX } from "gbraver-burst-core";
+
 import { Animate } from "../../../../../../animation/animate";
 import { empty } from "../../../../../../animation/delay";
 import { GenesisBraverTD } from "../../../../view/td/armdozer-objects/genesis-braver";
@@ -5,14 +7,13 @@ import { LightningDozerTD } from "../../../../view/td/armdozer-objects/lightning
 import { NeoLandozerTD } from "../../../../view/td/armdozer-objects/neo-landozer";
 import { ShinBraverTD } from "../../../../view/td/armdozer-objects/shin-braver";
 import { WingDozerTD } from "../../../../view/td/armdozer-objects/wing-dozer";
+import { StateAnimationProps } from "../../state-animation-props";
 import { toGameOverParam } from "./game-over-param";
 import { genesisBraverWin } from "./genesis-braver";
 import { lightningDozerWin } from "./lightning-dozer";
 import { neoLandozerWin } from "./neo-landozer";
 import { shinBraverWin } from "./shin-braver";
 import { wingDozerWin } from "./wing-dozer";
-import { StateAnimationProps } from "../../state-animation-props";
-import { GameEndX, GameOver, GameStateX } from "gbraver-burst-core";
 
 /**
  * ゲームオーバアニメーション
@@ -29,26 +30,19 @@ export function gameOverAnimation(
     return empty();
   }
 
+  let animation = empty();
   const { winnerTdArmdozer } = param;
   if (winnerTdArmdozer instanceof ShinBraverTD) {
-    return shinBraverWin({ ...param, winnerTdArmdozer });
+    animation = shinBraverWin({ ...param, winnerTdArmdozer });
+  } else if (winnerTdArmdozer instanceof NeoLandozerTD) {
+    animation = neoLandozerWin({ ...param, winnerTdArmdozer });
+  } else if (winnerTdArmdozer instanceof LightningDozerTD) {
+    animation = lightningDozerWin({ ...param, winnerTdArmdozer });
+  } else if (winnerTdArmdozer instanceof WingDozerTD) {
+    animation = wingDozerWin({ ...param, winnerTdArmdozer });
+  } else if (winnerTdArmdozer instanceof GenesisBraverTD) {
+    animation = genesisBraverWin({ ...param, winnerTdArmdozer });
   }
 
-  if (winnerTdArmdozer instanceof NeoLandozerTD) {
-    return neoLandozerWin({ ...param, winnerTdArmdozer });
-  }
-
-  if (winnerTdArmdozer instanceof LightningDozerTD) {
-    return lightningDozerWin({ ...param, winnerTdArmdozer });
-  }
-
-  if (winnerTdArmdozer instanceof WingDozerTD) {
-    return wingDozerWin({ ...param, winnerTdArmdozer });
-  }
-
-  if (winnerTdArmdozer instanceof GenesisBraverTD) {
-    return genesisBraverWin({ ...param, winnerTdArmdozer });
-  }
-
-  return empty();
+  return animation;
 }
