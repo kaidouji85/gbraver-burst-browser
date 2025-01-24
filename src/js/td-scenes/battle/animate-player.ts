@@ -1,5 +1,3 @@
-import { Group } from "@tweenjs/tween.js";
-
 import { Animate } from "../../animation/animate";
 
 /** AnimatePlayerのプロパティ */
@@ -9,17 +7,16 @@ interface AnimatePlayerProps {
 }
 
 /**
- * Animateを再生するプレイヤー
+ * 戦闘画面でのAnimateプレイヤー
  * タイムスケールなどシーン全体での設定を保持、適用するために利用される
  */
 export interface AnimatePlayer extends AnimatePlayerProps {
   /**
    * アニメーションを再生する
    * @param animate アニメーション
-   * @param group アニメーショングループ
    * @returns アニメーションが完了したら発火するPromise
    */
-  play(animate: Animate, group?: Group): Promise<void>;
+  play(animate: Animate): Promise<void>;
 }
 
 /** AnimatePlayerのシンプルな実装 */
@@ -36,8 +33,8 @@ class SimpleAnimatePlayer implements AnimatePlayer {
   }
 
   /** @override */
-  play(animate: Animate, group?: Group) {
-    return animate.timeScale(this.timeScale).play(group);
+  play(animate: Animate) {
+    return animate.timeScale(this.timeScale).play();
   }
 }
 
