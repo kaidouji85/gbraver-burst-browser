@@ -2,7 +2,6 @@ import { GameState, Player } from "gbraver-burst-core";
 import { Observable, Subject } from "rxjs";
 
 import { createActionManager } from "../../../action-manager/action-manager";
-import { createAnimatePlayer } from "../../../animation/animate-player";
 import { BGMManagerContainer } from "../../../bgm/bgm-manager";
 import { DOMDialogBinder } from "../../../dom-dialogs/dom-dialog-binder";
 import { Exclusive } from "../../../exclusive/exclusive";
@@ -16,6 +15,7 @@ import { SEPlayerContainer } from "../../../se/se-player";
 import { PushWindow } from "../../../window/push-window";
 import { Resize } from "../../../window/resize";
 import { BattleSceneAction } from "../actions";
+import { createAnimatePlayer } from "../animate-player";
 import { BattleProgress } from "../battle-progress";
 import { BattleControllerType } from "../controller-type";
 import { CustomBattleEvent } from "../custom-battle-event";
