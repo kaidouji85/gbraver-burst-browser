@@ -7,7 +7,6 @@ import { Exclusive } from "../../exclusive/exclusive";
 import { ResourcesContainer } from "../../resource";
 import { SEPlayerContainer } from "../../se/se-player";
 import { PushWindow } from "../../window/push-window";
-import { AnimatePlayer } from "./animate-player";
 import { AnimationTimeScaleContainer } from "./animation-time-scale-container";
 import { BattleProgress } from "./battle-progress";
 import { BattleSceneActionManageContainer } from "./battle-scene-action-manage-container";
@@ -39,9 +38,6 @@ export type BattleSceneProps = ResourcesContainer &
 
     /** DOMダイアログバインダー */
     readonly domDialogBinder: DOMDialogBinder;
-
-    /** @deprecated アニメーションプレイヤー */
-    readonly animatePlayer: AnimatePlayer;
 
     /** バトル進行オブジェクト */
     readonly battleProgress: BattleProgress;
