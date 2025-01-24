@@ -1,8 +1,8 @@
 import { PlayerId } from "gbraver-burst-core";
 
-import { AnimatePlayer } from "../../animate-player";
 import { BGMManagerContainer } from "../../../../bgm/bgm-manager";
 import { SEPlayerContainer } from "../../../../se/se-player";
+import { AnimatePlayer } from "../../animate-player";
 import { BattleControllerType } from "../../controller-type";
 import { BattleSceneSounds } from "../../sounds";
 import { BattleSceneView } from "../../view";
