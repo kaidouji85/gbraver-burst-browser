@@ -14,7 +14,6 @@ export interface AnimatePlayer extends AnimatePlayerProps {
   /**
    * アニメーションを再生する
    * @param animate アニメーション
-   * @param options 再生オプション
    * @returns アニメーションが完了したら発火するPromise
    */
   play(animate: Animate): Promise<void>;
