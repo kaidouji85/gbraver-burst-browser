@@ -2,6 +2,7 @@ import { PilotSkillCommand } from "gbraver-burst-core";
 
 import { DoPilotSkill } from "../../actions/do-pilot-skill";
 import { decisionByPilotButton } from "../../animation/decision-by-pilot-button";
+import { createAnimationPlay } from "../../play-animation";
 import { BattleSceneProps } from "../../props";
 import { doPilotSkillEventIfNeeded } from "../do-pilot-skill-event-if-needed";
 import { progressGame } from "../progress-game";
@@ -30,7 +31,8 @@ export function onPilotSkill(
       return;
     }
 
-    await props.animatePlayer.play(decisionByPilotButton(props.view));
+    const playAnimation = createAnimationPlay(props);
+    await playAnimation(decisionByPilotButton(props.view));
     await progressGame(props, pilotSkillCommand);
   });
 }

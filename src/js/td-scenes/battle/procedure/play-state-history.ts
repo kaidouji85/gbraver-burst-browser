@@ -4,6 +4,7 @@ import { all } from "../../../animation/all";
 import { empty } from "../../../animation/delay";
 import { stateAnimation } from "../animation/game-state";
 import { BattleSceneProps } from "../props";
+import { createAnimationPlay } from "../play-animation";
 
 /**
  * 同時再生する効果
@@ -35,8 +36,9 @@ export async function playStateHistory(
     update: gameStateHistory,
     lastState,
   });
+  const playAnimation = createAnimationPlay(props);
   const stateHistoryWithLastRemoved = gameStateHistory.slice(0, -1);
-  await props.animatePlayer.play(
+  await playAnimation(
     stateHistoryWithLastRemoved
       .map((gameState, index) => {
         const next = stateHistoryWithLastRemoved[index + 1];
@@ -77,7 +79,7 @@ export async function playStateHistory(
   const eventProps = { ...props, update: gameStateHistory, lastState };
   await props.customBattleEvent?.beforeLastState(eventProps);
   await Promise.all([
-    props.animatePlayer.play(stateAnimation(props, lastState)),
+    playAnimation(stateAnimation(props, lastState)),
     props.customBattleEvent?.onLastState(eventProps) ?? Promise.resolve(),
   ]);
   await props.customBattleEvent?.afterLastState(eventProps);

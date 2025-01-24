@@ -90,6 +90,7 @@ export function createBattleSceneProps(
     animatePlayer: createAnimatePlayer({
       timeScale: params.initialAnimationTimeScale,
     }),
+    animationTimeScale: params.initialAnimationTimeScale,
 
     customBattleEvent: params.customBattleEvent ?? null,
     exclusive: new Exclusive(),
