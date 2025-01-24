@@ -23,5 +23,5 @@ export function batteryChange(
       model.battery = battery;
     }),
     changeNeedle(props, needle),
-  ).play({group: batteryChangeTween});
+  ).play({ group: batteryChangeTween });
 }

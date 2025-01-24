@@ -10,5 +10,5 @@ export async function playBatteryPlusPop(props: BatterySelectorProps) {
   const { batteryPlusTween } = props;
   batteryPlusTween.update();
   batteryPlusTween.removeAll();
-  await batteryPlusPop(props).play({ group: batteryPlusTween});
+  await batteryPlusPop(props).play({ group: batteryPlusTween });
 }
