@@ -1,7 +1,7 @@
 import { GameEnd, GameState, PlayerId } from "gbraver-burst-core";
 import { Observable, Subject } from "rxjs";
 
-import { AnimatePlayer } from "../../animation/animate-player";
+import { AnimatePlayer } from "./animate-player";
 import { BGMManagerContainer } from "../../bgm/bgm-manager";
 import { DOMDialogBinder } from "../../dom-dialogs/dom-dialog-binder";
 import { Exclusive } from "../../exclusive/exclusive";

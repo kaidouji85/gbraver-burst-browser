@@ -2,7 +2,7 @@ import { GameState, Player } from "gbraver-burst-core";
 import { Observable, Subject } from "rxjs";
 
 import { createActionManager } from "../../../action-manager/action-manager";
-import { createAnimatePlayer } from "../../../animation/animate-player";
+import { createAnimatePlayer } from "../animate-player";
 import { BGMManagerContainer } from "../../../bgm/bgm-manager";
 import { DOMDialogBinder } from "../../../dom-dialogs/dom-dialog-binder";
 import { Exclusive } from "../../../exclusive/exclusive";
