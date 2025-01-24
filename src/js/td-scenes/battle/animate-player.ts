@@ -37,7 +37,7 @@ class SimpleAnimatePlayer implements AnimatePlayer {
 
   /** @override */
   play(animate: Animate, group?: Group) {
-    return animate.timeScale(this.timeScale).play(group);
+    return animate.timeScale(this.timeScale).play({ group });
   }
 }
 

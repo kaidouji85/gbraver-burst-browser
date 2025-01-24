@@ -15,6 +15,6 @@ export function onButtonPush(props: TimeScaleButtonProps) {
   toggleTween.update();
   toggleTween.removeAll();
   const nextTimeScale = getNextTimeScale(model.timeScale);
-  toggle(props, nextTimeScale).play(toggleTween);
+  toggle(props, nextTimeScale).play({ group: toggleTween });
   toggleNotify.next(nextTimeScale);
 }
