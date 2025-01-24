@@ -3,6 +3,12 @@ import { Group } from "@tweenjs/tween.js";
 import { GBTween } from "./gb-tween";
 import { GlobalTweenGroup } from "./global-tween-group";
 
+/** アニメーション再生オプション */
+export type AnimationPlayOptions = {
+  /** Tweenグループ */
+  group?: Group;
+};
+
 /**
  * アニメーション
  * tween.jsではアニメーションのモジュール化の機能が十分でないので、それを補うべく本クラスを作成した
@@ -86,10 +92,11 @@ export class Animate {
 
   /**
    * アニメーションを再生する
-   * @param group アニメーショングループ
+   * @param options 再生オプション
    * @returns アニメーション再生完了後に呼び出されるPromise
    */
-  play(group?: Group): Promise<void> {
+  play(options?: AnimationPlayOptions): Promise<void> {
+    const group = options?.group;
     const targetGroup = group ?? GlobalTweenGroup;
     this._tweens.forEach((tween) => {
       targetGroup.add(tween);
