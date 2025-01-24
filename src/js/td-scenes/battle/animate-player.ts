@@ -1,4 +1,4 @@
-import { Animate, AnimationPlayOptions } from "../../animation/animate";
+import { Animate } from "../../animation/animate";
 
 /** AnimatePlayerのプロパティ */
 interface AnimatePlayerProps {
@@ -7,7 +7,7 @@ interface AnimatePlayerProps {
 }
 
 /**
- * Animateを再生するプレイヤー
+ * 戦闘画面でのAnimateプレイヤー
  * タイムスケールなどシーン全体での設定を保持、適用するために利用される
  */
 export interface AnimatePlayer extends AnimatePlayerProps {
@@ -17,7 +17,7 @@ export interface AnimatePlayer extends AnimatePlayerProps {
    * @param options 再生オプション
    * @returns アニメーションが完了したら発火するPromise
    */
-  play(animate: Animate, options?: AnimationPlayOptions): Promise<void>;
+  play(animate: Animate): Promise<void>;
 }
 
 /** AnimatePlayerのシンプルな実装 */
@@ -34,8 +34,8 @@ class SimpleAnimatePlayer implements AnimatePlayer {
   }
 
   /** @override */
-  play(animate: Animate, options?: AnimationPlayOptions) {
-    return animate.timeScale(this.timeScale).play(options);
+  play(animate: Animate) {
+    return animate.timeScale(this.timeScale).play();
   }
 }
 
