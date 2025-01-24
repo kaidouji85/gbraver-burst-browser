@@ -1,6 +1,6 @@
 import { Group } from "@tweenjs/tween.js";
 
-import { Animate } from "./animate";
+import { Animate } from "../../animation/animate";
 
 /** AnimatePlayerのプロパティ */
 interface AnimatePlayerProps {
