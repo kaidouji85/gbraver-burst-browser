@@ -57,7 +57,7 @@ const onGameEnd = async (
   await props.bgm.do(stop);
   props.endBattle.next({
     gameEnd,
-    animationTimeScale: props.animatePlayer.timeScale,
+    animationTimeScale: props.animationTimeScale,
   });
 };
 

@@ -15,7 +15,6 @@ import { SEPlayerContainer } from "../../../se/se-player";
 import { PushWindow } from "../../../window/push-window";
 import { Resize } from "../../../window/resize";
 import { BattleSceneAction } from "../actions";
-import { createAnimatePlayer } from "../animate-player";
 import { BattleProgress } from "../battle-progress";
 import { BattleControllerType } from "../controller-type";
 import { CustomBattleEvent } from "../custom-battle-event";
@@ -87,9 +86,7 @@ export function createBattleSceneProps(
     enemyId: params.enemy.playerId,
     stateHistory: params.initialState,
 
-    animatePlayer: createAnimatePlayer({
-      timeScale: params.initialAnimationTimeScale,
-    }),
+    animationTimeScale: params.initialAnimationTimeScale,
 
     customBattleEvent: params.customBattleEvent ?? null,
     exclusive: new Exclusive(),

@@ -2,6 +2,7 @@ import { BurstCommand } from "gbraver-burst-core";
 
 import { decisionByBurstButton } from "../../animation/decision-by-burst-button";
 import { decisionByMiniController } from "../../animation/decision-by-mini-controller";
+import { createAnimationPlay } from "../../play-animation";
 import { BattleSceneProps } from "../../props";
 import { doBurstEventIfNeeded } from "../do-burst-event-if-needed";
 import { progressGame } from "../progress-game";
@@ -33,7 +34,8 @@ export function onBurstByMiniController(
       props.controllerType === "BigButton"
         ? decisionByBurstButton(props.view)
         : decisionByMiniController(props.view);
-    await props.animatePlayer.play(decisionAnimation);
+    const playAnimation = createAnimationPlay(props);
+    await playAnimation(decisionAnimation);
     await progressGame(props, burstCommand);
   });
 }
