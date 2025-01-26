@@ -96,5 +96,7 @@ export function createBattleSceneProps(
 
     endBattle: new Subject(),
     battleSceneAction: createActionManager<BattleSceneAction>(),
+
+    abortController: new AbortController(),
   };
 }
