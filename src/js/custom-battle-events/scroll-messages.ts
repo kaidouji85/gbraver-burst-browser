@@ -1,5 +1,6 @@
 import { Observable } from "rxjs";
 
+import { SignalContainer } from "../abort-cntroller/signal-container";
 import { MessageWindow } from "../game-dom/message-window";
 import { SEPlayer } from "../se/se-player";
 import { CustomBattleEventProps } from "../td-scenes/battle/custom-battle-event";
@@ -21,13 +22,15 @@ type Paragraph = string[];
  * @param options.paragraphs 表示するメッセージ
  * @returns 処理が完了したら発火するPromise
  */
-async function scrollMessages(options: {
-  messageWindow: MessageWindow;
-  pushWindow: Observable<PushWindow>;
-  sounds: BattleSceneSounds;
-  se: SEPlayer;
-  paragraphs: Paragraph[];
-}): Promise<void> {
+async function scrollMessages(
+  options: Partial<SignalContainer> & {
+    messageWindow: MessageWindow;
+    pushWindow: Observable<PushWindow>;
+    sounds: BattleSceneSounds;
+    se: SEPlayer;
+    paragraphs: Paragraph[];
+  },
+): Promise<void> {
   const { messageWindow, pushWindow, sounds, se, paragraphs } = options;
   messageWindow.nextMessageIconVisible(true);
 
@@ -35,7 +38,7 @@ async function scrollMessages(options: {
     se.play(sounds.sendMessage);
     messageWindow.scrollUp();
     messageWindow.messages(paragraphs[i]);
-    await waitUntilWindowPushWithStream(pushWindow);
+    await waitUntilWindowPushWithStream(pushWindow, options);
   }
 
   messageWindow.nextMessageIconVisible(false);
