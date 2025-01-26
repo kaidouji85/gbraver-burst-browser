@@ -19,7 +19,7 @@ export function inputCommandAnimation(
   props: StateAnimationProps,
   gameState: GameStateX<InputCommand>,
 ): Animate {
-  const { playerId, view, controllerType, animatePlayer } = props;
+  const { playerId, view, controllerType, animationTimeScale } = props;
   const { players, effect, activePlayerId } = gameState;
 
   const player = players.find((v) => v.playerId === playerId);
@@ -28,7 +28,7 @@ export function inputCommandAnimation(
     return empty();
   }
 
-  if (playerCommand.selectable === false) {
+  if (!playerCommand.selectable) {
     return empty();
   }
 
@@ -42,7 +42,7 @@ export function inputCommandAnimation(
       commands: playerCommand.command,
       controllerType,
     }),
-    view.hud.gameObjects.timeScaleButton.open(animatePlayer.timeScale),
+    view.hud.gameObjects.timeScaleButton.open(animationTimeScale),
     activeArmdozerSprite(view.td.armdozers, activePlayerId),
     showPredicatedDamage(view.hud.players, players, activePlayerId),
   );

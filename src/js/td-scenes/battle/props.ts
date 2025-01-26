@@ -7,7 +7,7 @@ import { Exclusive } from "../../exclusive/exclusive";
 import { ResourcesContainer } from "../../resource";
 import { SEPlayerContainer } from "../../se/se-player";
 import { PushWindow } from "../../window/push-window";
-import { AnimatePlayer } from "./animate-player";
+import { AnimationTimeScaleContainer } from "./animation-time-scale-container";
 import { BattleProgress } from "./battle-progress";
 import { BattleSceneActionManageContainer } from "./battle-scene-action-manage-container";
 import { BattleControllerType } from "./controller-type";
@@ -27,7 +27,8 @@ export type BattleEnd = {
 export type BattleSceneProps = ResourcesContainer &
   BGMManagerContainer &
   SEPlayerContainer &
-  BattleSceneActionManageContainer & {
+  BattleSceneActionManageContainer &
+  AnimationTimeScaleContainer & {
     /** 画面を開いているプレイヤーのID */
     readonly playerId: PlayerId;
     /** 敵プレイヤーのID */
@@ -37,9 +38,6 @@ export type BattleSceneProps = ResourcesContainer &
 
     /** DOMダイアログバインダー */
     readonly domDialogBinder: DOMDialogBinder;
-
-    /** アニメーションプレイヤー */
-    readonly animatePlayer: AnimatePlayer;
 
     /** バトル進行オブジェクト */
     readonly battleProgress: BattleProgress;

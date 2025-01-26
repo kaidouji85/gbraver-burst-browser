@@ -2,6 +2,7 @@ import { BatteryCommand } from "gbraver-burst-core";
 
 import { DecideBattery } from "../../actions/decide-battery";
 import { decisionByBatterySelector } from "../../animation/decision-by-battery-selector";
+import { createAnimationPlay } from "../../play-animation";
 import { BattleSceneProps } from "../../props";
 import { doBatteryEventIfNeeded } from "../do-battery-event-if-needed";
 import { progressGame } from "../progress-game";
@@ -32,7 +33,8 @@ export function onDecideBattery(
       return;
     }
 
-    await props.animatePlayer.play(decisionByBatterySelector(props.view));
+    const playAnimation = createAnimationPlay(props);
+    await playAnimation(decisionByBatterySelector(props.view));
     await progressGame(props, batteryCommand);
   });
 }

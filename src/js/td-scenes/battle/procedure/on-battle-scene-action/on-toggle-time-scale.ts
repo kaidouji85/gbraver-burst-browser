@@ -1,5 +1,5 @@
-import type { ToggleTimeScale } from "../../actions/toggle-time-scale";
-import type { BattleSceneProps } from "../../props";
+import { ToggleTimeScale } from "../../actions/toggle-time-scale";
+import { BattleSceneProps } from "../../props";
 
 /**
  * タイムスケール変更時の処理
@@ -12,5 +12,5 @@ export function onToggleTimeScale(
   props: BattleSceneProps,
   action: ToggleTimeScale,
 ): void {
-  props.animatePlayer.timeScale = action.timeScale;
+  props.animationTimeScale = action.timeScale;
 }
