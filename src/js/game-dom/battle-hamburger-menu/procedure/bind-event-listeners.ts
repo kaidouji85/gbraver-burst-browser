@@ -21,6 +21,7 @@ import { onRetryButtonPush } from "./on-retry-button-push";
 import { onRetryCancelButtonPush } from "./on-retry-cancel-button-push";
 import { onRetryConfirmDialogCloserPush } from "./on-retry-confirm-dialog-closer-push";
 import { onRetryPush } from "./on-retry-push";
+import { onRootPush } from "./on-root-push";
 
 /**
  * イベントリスナーをバインドする
@@ -31,6 +32,9 @@ export function bindEventListeners(
   props: BattleHamburgerMenuProps,
 ): Unsubscribable[] {
   return [
+    domPushStream(props.root).subscribe((action) => {
+      onRootPush(props, action);
+    }),
     domPushStream(props.hamburgerIcon).subscribe((action) => {
       onHamburgerIconPush(props, action);
     }),
