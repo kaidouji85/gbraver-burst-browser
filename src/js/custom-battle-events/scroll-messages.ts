@@ -14,21 +14,21 @@ type Paragraph = string[];
  * 複数メッセージをスクロール表示する
  * 画面押下したら、次のメッセージがスクロール表示される
  * 全てのメッセージを表示した後に画面押下したら、本関数の処理が完了する
- *
- * @param messageWindow メッセージウインドウ
- * @param pushWindow 画面押下ストリーム
- * @param sounds 戦闘シーンで利用する音声データ
- * @param se SE再生オブジェクト
- * @param paragraphs 表示するメッセージ
+ * @param options.messageWindow メッセージウインドウ
+ * @param options.pushWindow 画面押下ストリーム
+ * @param options.sounds 戦闘シーンで利用する音声データ
+ * @param options.se SE再生オブジェクト
+ * @param options.paragraphs 表示するメッセージ
  * @returns 処理が完了したら発火するPromise
  */
-async function scrollMessages(
-  messageWindow: MessageWindow,
-  pushWindow: Observable<PushWindow>,
-  sounds: BattleSceneSounds,
-  se: SEPlayer,
-  paragraphs: Paragraph[],
-): Promise<void> {
+async function scrollMessages(options: {
+  messageWindow: MessageWindow;
+  pushWindow: Observable<PushWindow>;
+  sounds: BattleSceneSounds;
+  se: SEPlayer;
+  paragraphs: Paragraph[];
+}): Promise<void> {
+  const { messageWindow, pushWindow, sounds, se, paragraphs } = options;
   messageWindow.nextMessageIconVisible(true);
 
   for (let i = 0; i < paragraphs.length; i++) {
@@ -43,7 +43,6 @@ async function scrollMessages(
 
 /**
  * 左側メッセージウインドウで複数メッセージスクロール表示をする
- *
  * @param props イベントプロパティ
  * @param paragraphs 表示するメッセージ
  * @returns 処理が完了したら発火するPromise
@@ -52,18 +51,12 @@ export async function scrollLeftMessages(
   props: CustomBattleEventProps,
   paragraphs: Paragraph[],
 ): Promise<void> {
-  await scrollMessages(
-    props.view.dom.leftMessageWindow,
-    props.pushWindow,
-    props.sounds,
-    props.se,
-    paragraphs,
-  );
+  const messageWindow = props.view.dom.leftMessageWindow;
+  await scrollMessages({ ...props, messageWindow, paragraphs });
 }
 
 /**
  * 右側メッセージウインドウで複数メッセージスクロール表示をする
- *
  * @param props イベントプロパティ
  * @param paragraphs 表示するメッセージ
  * @returns 処理が完了したら発火するPromise
@@ -72,11 +65,6 @@ export async function scrollRightMessages(
   props: CustomBattleEventProps,
   paragraphs: Paragraph[],
 ): Promise<void> {
-  await scrollMessages(
-    props.view.dom.rightMessageWindow,
-    props.pushWindow,
-    props.sounds,
-    props.se,
-    paragraphs,
-  );
+  const messageWindow = props.view.dom.rightMessageWindow;
+  await scrollMessages({ ...props, messageWindow, paragraphs });
 }
