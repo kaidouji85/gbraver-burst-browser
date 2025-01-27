@@ -11,6 +11,7 @@ import { AbortControllerContainer } from "../../abort-cntroller/abort-controller
 import { Animate } from "../../animation/animate";
 import { SEPlayerContainer } from "../../se/se-player";
 import { PushWindow } from "../../window/push-window";
+import { AnimationTimeScaleContainer } from "./animation-time-scale-container";
 import { BattleSceneSounds } from "./sounds";
 import { BattleSceneView } from "./view";
 
@@ -19,6 +20,7 @@ import { BattleSceneView } from "./view";
  * BattleScenePropsからカスタムバトルイベントで利用可能なプロパティを抜粋した
  */
 export type CustomBattleEventProps = SEPlayerContainer &
+  AnimationTimeScaleContainer &
   AbortControllerContainer & {
     /** 戦闘画面を開いているプレイヤーのID */
     readonly playerId: PlayerId;
