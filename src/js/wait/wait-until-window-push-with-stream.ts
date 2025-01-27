@@ -22,6 +22,7 @@ export function waitUntilWindowPushWithStream(
   return new Promise<void>((resolve, reject) => {
     if (signal?.aborted) {
       reject(signal.reason);
+      return;
     }
 
     onAbort = () => reject(signal?.reason);
