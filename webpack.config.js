@@ -31,7 +31,7 @@ module.exports = async () => ({
     host: "0.0.0.0",
     client: {
       overlay: false,
-    }
+    },
   },
   module: {
     rules: [
