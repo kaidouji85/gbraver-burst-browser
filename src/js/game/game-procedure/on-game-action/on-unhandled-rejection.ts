@@ -15,10 +15,11 @@ type Options = {
  * @param options オプション
  */
 export function onUnhandledRejection(options: Options): void {
-  const reason = options.action.event.reason;
-  if (isAbortError(reason)) {
+  const event = options.action.event;
+  event.preventDefault();
+  if (isAbortError(event.reason)) {
     return;
   }
 
-  throw reason;
+  throw event.reason;
 }

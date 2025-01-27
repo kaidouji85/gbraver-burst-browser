@@ -21,11 +21,16 @@ export function createGameActionNotifier(
     document,
     "visibilitychange",
   ).pipe(map(() => ({ type: "VisibilityChange" })));
+  const unhandledrejection: Observable<GameAction> =
+    fromEvent<PromiseRejectionEvent>(window, "unhandledrejection").pipe(
+      map((event) => ({ type: "UnhandledRejection", event })),
+    );
   return merge(
     props.gameAction.notify(),
     props.domFloaters.gameActionNotifier(),
     suddenlyBattleEnd,
     webSocketAPIError,
     visibilityChange,
+    unhandledrejection,
   );
 }
