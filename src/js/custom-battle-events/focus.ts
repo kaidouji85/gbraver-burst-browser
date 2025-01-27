@@ -1,4 +1,5 @@
-import type { CustomBattleEventProps } from "../td-scenes/battle/custom-battle-event";
+import { CustomBattleEventProps } from "../td-scenes/battle/custom-battle-event";
+import { createAnimationPlay } from "../td-scenes/battle/play-animation";
 import {
   activeNearBatterySelectorMessageWindow,
   activeNearBurstButtonMessageWindow,
@@ -23,12 +24,15 @@ import { invisibleAllMessageWindows } from "./invisible-all-message-windows";
  * @returns 処理が完了したら発火するPromise
  */
 export const focusInBatterySelector = async (props: CustomBattleEventProps) => {
+  const playAnimation = createAnimationPlay(props);
   unAttentionAllButtons(props);
   disabledAllButtons(props);
   attentionBatterySelector(props);
   props.view.hud.gameObjects.batterySelector.disabled(false);
   invisibleAllMessageWindows(props);
-  await props.view.hud.gameObjects.frontmostFader.opacity(0.7, 200).play();
+  await playAnimation(
+    props.view.hud.gameObjects.frontmostFader.opacity(0.7, 200),
+  );
   activeNearBatterySelectorMessageWindow(props);
 };
 
@@ -55,8 +59,11 @@ export const isBatterySelectorFocused = (
 export const focusOutBatterySelector = async (
   props: CustomBattleEventProps,
 ) => {
+  const playAnimation = createAnimationPlay(props);
   props.view.dom.nearBatterySelectorMessageWindow.visible(false);
-  await props.view.hud.gameObjects.frontmostFader.opacity(0, 200).play();
+  await playAnimation(
+    props.view.hud.gameObjects.frontmostFader.opacity(0, 200),
+  );
   unattentionBatterySelector(props);
   enabledAllButtons(props);
 };
@@ -72,12 +79,15 @@ export const focusInBurstButton = async (
   props: CustomBattleEventProps,
   caption: string[],
 ) => {
+  const playAnimation = createAnimationPlay(props);
   unAttentionAllButtons(props);
   disabledAllButtons(props);
   attentionBurstButton(props);
   props.view.hud.gameObjects.burstButton.disabled(false);
   invisibleAllMessageWindows(props);
-  await props.view.hud.gameObjects.frontmostFader.opacity(0.7, 200).play();
+  await playAnimation(
+    props.view.hud.gameObjects.frontmostFader.opacity(0.7, 200),
+  );
   activeNearBurstButtonMessageWindow(props);
   props.view.dom.nearBurstButtonMessageWindow.messages(caption);
 };
@@ -103,8 +113,11 @@ export const isBurstButtonFocused = (
  * @returns 処理が完了したら発火するPromise
  */
 export const focusOutBurstButton = async (props: CustomBattleEventProps) => {
+  const playAnimation = createAnimationPlay(props);
   props.view.dom.nearBurstButtonMessageWindow.visible(false);
-  await props.view.hud.gameObjects.frontmostFader.opacity(0, 200).play();
+  await playAnimation(
+    props.view.hud.gameObjects.frontmostFader.opacity(0, 200),
+  );
   unattentionBurstButton(props);
   enabledAllButtons(props);
 };
@@ -120,12 +133,15 @@ export const focusInPilotButton = async (
   props: CustomBattleEventProps,
   caption: string[],
 ) => {
+  const playAnimation = createAnimationPlay(props);
   unAttentionAllButtons(props);
   disabledAllButtons(props);
   attentionPilotButton(props);
   props.view.hud.gameObjects.pilotButton.disabled(false);
   invisibleAllMessageWindows(props);
-  await props.view.hud.gameObjects.frontmostFader.opacity(0.7, 200).play();
+  await playAnimation(
+    props.view.hud.gameObjects.frontmostFader.opacity(0.7, 200),
+  );
   activeNearPilotButtonMessageWindow(props);
   props.view.dom.nearPilotButtonMessageWindow.messages(caption);
 };
@@ -151,8 +167,11 @@ export const isPilotButtonFocused = (
  * @returns 処理が完了したら発火するPromise
  */
 export const focusOutPilotButton = async (props: CustomBattleEventProps) => {
+  const playAnimation = createAnimationPlay(props);
   props.view.dom.nearPilotButtonMessageWindow.visible(false);
-  await props.view.hud.gameObjects.frontmostFader.opacity(0, 200).play();
+  await playAnimation(
+    props.view.hud.gameObjects.frontmostFader.opacity(0, 200),
+  );
   unattentionPilotButton(props);
   enabledAllButtons(props);
 };
