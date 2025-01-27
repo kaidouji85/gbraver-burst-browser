@@ -32,6 +32,7 @@ import { onSelectionComplete } from "./on-selection-complete";
 import { onStoryStart } from "./on-story-start";
 import { onSuddenlyBattleEnd } from "./on-suddenly-battle-end";
 import { onTutorialStart } from "./on-tutorial-start";
+import { onUnhandledRejection } from "./on-unhandled-rejection";
 import { onUniversalLogin } from "./on-universal-login";
 import { onVisibilityChange } from "./on-visibility-change";
 import { onWebSocketAPIError } from "./on-websocker-api-error";
@@ -116,5 +117,7 @@ export function onGameAction(props: GameProps, action: GameAction) {
       return onForceEndBattle({ props, action });
     case "ForceRetry":
       return onForceRetry({ props, action });
+    case "UnhandledRejection":
+      return onUnhandledRejection({ props, action });
   }
 }

@@ -30,6 +30,7 @@ import { SelectionComplete } from "./selection-complete";
 import { StoryStart } from "./story-start";
 import { SuddenlyBattleEnd } from "./suddenly-battle-end";
 import { TutorialStart } from "./tutorial-start";
+import { UnhandledRejection } from "./unhandled-rejection";
 import { UniversalLogin } from "./universal-login";
 import { VisibilityChange } from "./visibility-change";
 import { WebSocketAPIError } from "./web-socket-api-error";
@@ -72,4 +73,5 @@ export type GameAction =
   | SelectEpisode
   | VisibilityChange
   | ForceEndBattle
-  | ForceRetry;
+  | ForceRetry
+  | UnhandledRejection;

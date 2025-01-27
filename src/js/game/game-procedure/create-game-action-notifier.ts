@@ -13,19 +13,10 @@ export function createGameActionNotifier(
 ): Observable<GameAction> {
   const suddenlyBattleEnd: Observable<GameAction> = props.suddenlyBattleEnd
     .stream()
-    .pipe(
-      map(() => ({
-        type: "SuddenlyBattleEnd",
-      })),
-    );
+    .pipe(map(() => ({ type: "SuddenlyBattleEnd" })));
   const webSocketAPIError: Observable<GameAction> = props.api
     .websocketErrorNotifier()
-    .pipe(
-      map((error) => ({
-        type: "WebSocketAPIError",
-        error,
-      })),
-    );
+    .pipe(map((error) => ({ type: "WebSocketAPIError", error })));
   const visibilityChange: Observable<GameAction> = fromEvent(
     document,
     "visibilitychange",
