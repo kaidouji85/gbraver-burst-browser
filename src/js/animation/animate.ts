@@ -119,7 +119,10 @@ export class Animate {
         return;
       }
 
-      onAbort = () => reject(signal?.reason);
+      onAbort = () => {
+        reject(signal?.reason);
+        group.removeAll();
+      };
       signal?.addEventListener("abort", onAbort);
 
       onCleanupOfAbort = () =>
