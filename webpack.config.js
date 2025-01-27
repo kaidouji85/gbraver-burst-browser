@@ -29,6 +29,9 @@ module.exports = async () => ({
     static: path.resolve(__dirname, BUILD_ROOT),
     port: 8080,
     host: "0.0.0.0",
+    client: {
+      overlay: false,
+    }
   },
   module: {
     rules: [
