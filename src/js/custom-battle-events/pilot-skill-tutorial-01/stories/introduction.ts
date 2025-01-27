@@ -1,6 +1,7 @@
 import { delay } from "../../../animation/delay";
 import { wbr } from "../../../dom/wbr";
 import { CustomBattleEventProps } from "../../../td-scenes/battle/custom-battle-event";
+import { createAnimationPlay } from "../../../td-scenes/battle/play-animation";
 import {
   activeLeftMessageWindowWithFace,
   activeRightMessageWindowWithFace,
@@ -15,7 +16,6 @@ import { synchronizedBow } from "../../synchronized-bow";
 import { synchronizedUpright } from "../../synchronized-upright";
 import { waitUntilWindowPush } from "../../wait-until-window-push";
 import { yoroshikuOnegaiShimasu } from "../../yoroshiku-onegai-shimasu";
-import { createAnimationPlay } from "../../../td-scenes/battle/play-animation";
 
 /**
  * 序盤
