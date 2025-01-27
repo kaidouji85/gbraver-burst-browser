@@ -1,4 +1,4 @@
-import type {
+import {
   BatteryCommand,
   BurstCommand,
   GameState,
@@ -9,7 +9,8 @@ import { Observable } from "rxjs";
 
 import { Animate } from "../../animation/animate";
 import { SEPlayerContainer } from "../../se/se-player";
-import type { PushWindow } from "../../window/push-window";
+import { PushWindow } from "../../window/push-window";
+import { AnimationTimeScaleContainer } from "./animation-time-scale-container";
 import { BattleSceneSounds } from "./sounds";
 import { BattleSceneView } from "./view";
 
@@ -17,20 +18,21 @@ import { BattleSceneView } from "./view";
  * 全カスタムイベントで利用できるプロパティ
  * BattleScenePropsからカスタムバトルイベントで利用可能なプロパティを抜粋した
  */
-export type CustomBattleEventProps = SEPlayerContainer & {
-  /** 戦闘画面を開いているプレイヤーのID */
-  readonly playerId: PlayerId;
-  /** 敵プレイヤーのID */
-  readonly enemyId: PlayerId;
-  /** 戦闘シーンビュー */
-  readonly view: BattleSceneView;
-  /** window押下ストリーム */
-  readonly pushWindow: Observable<PushWindow>;
-  /** 戦闘シーン効果音 */
-  readonly sounds: BattleSceneSounds;
-  /** ステートヒストリー */
-  readonly stateHistory: GameState[];
-};
+export type CustomBattleEventProps = SEPlayerContainer &
+  AnimationTimeScaleContainer & {
+    /** 戦闘画面を開いているプレイヤーのID */
+    readonly playerId: PlayerId;
+    /** 敵プレイヤーのID */
+    readonly enemyId: PlayerId;
+    /** 戦闘シーンビュー */
+    readonly view: BattleSceneView;
+    /** window押下ストリーム */
+    readonly pushWindow: Observable<PushWindow>;
+    /** 戦闘シーン効果音 */
+    readonly sounds: BattleSceneSounds;
+    /** ステートヒストリー */
+    readonly stateHistory: GameState[];
+  };
 
 /** 最終ステートコンテナ */
 export type LastStateContainer = {
