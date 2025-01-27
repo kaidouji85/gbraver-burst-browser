@@ -1,6 +1,7 @@
 import { delay } from "../../../animation/delay";
 import { wbr } from "../../../dom/wbr";
 import { CustomBattleEventProps } from "../../../td-scenes/battle/custom-battle-event";
+import { createAnimationPlay } from "../../../td-scenes/battle/play-animation";
 import {
   activeLeftMessageWindowWithFace,
   activeRightMessageWindowWithFace,
@@ -27,6 +28,7 @@ import { yoroshikuOnegaiShimasu } from "../../yoroshiku-onegai-shimasu";
 export async function introduction(
   props: CustomBattleEventProps,
 ): Promise<void> {
+  const playAnimation = createAnimationPlay(props);
   activeRightMessageWindowWithFace(props, "Shinya");
   await scrollRightMessages(props, [
     ["シンヤ", `「全国大会の${wbr}覇者${wbr} ユウヤさん`],
@@ -50,17 +52,17 @@ export async function introduction(
     [`練習試合を${wbr}行う`],
   ]);
   props.view.dom.rightMessageWindow.messages(["姿勢を正して"]);
-  await synchronizedUpright(props).play();
+  await playAnimation(synchronizedUpright(props));
   props.view.dom.rightMessageWindow.nextMessageIconVisible(true);
   await waitUntilWindowPush(props);
   props.se.play(props.sounds.sendMessage);
   props.view.dom.rightMessageWindow.nextMessageIconVisible(false);
   props.view.dom.rightMessageWindow.scrollUp();
   props.view.dom.rightMessageWindow.messages(["礼！！」"]);
-  await delay(500).play();
+  await playAnimation(delay(500));
   await refreshConversation(props);
   playerPilotShoutInInnerHTML(props, "Shinya", yoroshikuOnegaiShimasu());
   enemyPilotShoutInInnerHTML(props, "Yuuya", yoroshikuOnegaiShimasu());
-  await synchronizedBow(props).chain(delay(500)).play();
+  await playAnimation(synchronizedBow(props).chain(delay(500)));
   invisibleAllMessageWindows(props);
 }
