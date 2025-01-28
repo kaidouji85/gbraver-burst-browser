@@ -111,7 +111,6 @@ export class Animate {
     });
 
     let onAbort: (() => void) | null = null;
-    let onCleanupOfAbort: (() => void) | null = null;
     const signal = options?.signal;
     return new Promise<void>((resolve, reject) => {
       if (signal?.aborted) {
@@ -125,15 +124,14 @@ export class Animate {
       };
       signal?.addEventListener("abort", onAbort);
 
-      onCleanupOfAbort = () =>
-        signal && onAbort && signal.removeEventListener("abort", onAbort);
-
       this._start.start();
       this._end.onComplete(() => {
         resolve();
       });
     }).finally(() => {
-      onCleanupOfAbort?.();
+      if(signal && onAbort) {
+        signal.removeEventListener("abort", onAbort);
+      }
     });
   }
 
