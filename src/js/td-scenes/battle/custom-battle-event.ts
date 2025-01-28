@@ -19,9 +19,9 @@ import { BattleSceneView } from "./view";
  * 全カスタムイベントで利用できるプロパティ
  * BattleScenePropsからカスタムバトルイベントで利用可能なプロパティを抜粋した
  */
-export type CustomBattleEventProps = SEPlayerContainer &
-  AnimationTimeScaleContainer &
-  AbortControllerContainer & {
+export type CustomBattleEventProps = Readonly<SEPlayerContainer> &
+  Readonly<AnimationTimeScaleContainer> &
+  Readonly<AbortControllerContainer> & {
     /** 戦闘画面を開いているプレイヤーのID */
     readonly playerId: PlayerId;
     /** 敵プレイヤーのID */

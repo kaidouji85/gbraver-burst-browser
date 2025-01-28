@@ -129,7 +129,7 @@ export class Animate {
         resolve();
       });
     }).finally(() => {
-      if(signal && onAbort) {
+      if (signal && onAbort) {
         signal.removeEventListener("abort", onAbort);
       }
     });
