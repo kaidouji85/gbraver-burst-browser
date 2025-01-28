@@ -10,5 +10,6 @@ import { waitUntilWindowPushWithStream } from "../wait/wait-until-window-push-wi
 export async function waitUntilWindowPush(
   props: CustomBattleEventProps,
 ): Promise<void> {
-  await waitUntilWindowPushWithStream(props.pushWindow);
+  const signal = props.abortController.signal;
+  await waitUntilWindowPushWithStream(props.pushWindow, { signal });
 }
