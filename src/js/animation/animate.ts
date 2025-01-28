@@ -121,7 +121,7 @@ export class Animate {
 
       onAbort = () => {
         reject(signal?.reason);
-        group.removeAll();
+        this._start.stop();
       };
       signal?.addEventListener("abort", onAbort);
 
