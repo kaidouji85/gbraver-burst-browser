@@ -120,8 +120,8 @@ export class Animate {
       }
 
       onAbort = () => {
-        reject(signal?.reason);
         this._start.stop();
+        reject(signal?.reason);
       };
       signal?.addEventListener("abort", onAbort);
 
