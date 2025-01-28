@@ -1,8 +1,8 @@
+import { SignalContainer } from "../../../abort-cntroller/signal-container";
 import { canBatteryMinus } from "../model/can-battery-minus";
 import { BatterySelectorProps } from "../props/battery-selector-props";
 import { batteryChange } from "./battery-change";
 import { playBatteryMinusPop } from "./play-battery-minus-pop";
-import { SignalContainer } from "../../../abort-cntroller/signal-container";
 
 /**
  * バッテリーマイナス
