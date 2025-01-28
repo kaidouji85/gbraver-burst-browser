@@ -1,7 +1,7 @@
 import { Observable, Unsubscribable } from "rxjs";
 import * as THREE from "three";
 
-import { SignalContainer } from "../../abort-cntroller/signal-container";
+import { SignalContainer } from "../../abort-controller/signal-container";
 import { Animate } from "../../animation/animate";
 import { close } from "./animation/close";
 import { decide } from "./animation/decide";

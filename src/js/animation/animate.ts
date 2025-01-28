@@ -1,6 +1,6 @@
 import { Group } from "@tweenjs/tween.js";
 
-import { SignalContainer } from "../abort-cntroller/signal-container";
+import { SignalContainer } from "../abort-controller/signal-container";
 import { GBTween } from "./gb-tween";
 import { GlobalTweenGroup } from "./global-tween-group";
 

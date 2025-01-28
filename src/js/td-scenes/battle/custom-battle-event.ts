@@ -7,7 +7,7 @@ import {
 } from "gbraver-burst-core";
 import { Observable } from "rxjs";
 
-import { AbortControllerContainer } from "../../abort-cntroller/abort-controller-container";
+import { AbortControllerContainer } from "../../abort-controller/abort-controller-container";
 import { Animate } from "../../animation/animate";
 import { SEPlayerContainer } from "../../se/se-player";
 import { PushWindow } from "../../window/push-window";

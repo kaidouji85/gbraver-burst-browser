@@ -1,4 +1,4 @@
-import { AbortControllerContainer } from "../../abort-cntroller/abort-controller-container";
+import { AbortControllerContainer } from "../../abort-controller/abort-controller-container";
 import { Animate } from "../../animation/animate";
 import { AnimationTimeScaleContainer } from "./animation-time-scale-container";
 

@@ -1,4 +1,4 @@
-import { SignalContainer } from "../abort-cntroller/signal-container";
+import { SignalContainer } from "../abort-controller/signal-container";
 
 /**
  * 指定した時間だけ待つ

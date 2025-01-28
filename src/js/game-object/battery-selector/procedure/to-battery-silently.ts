@@ -1,4 +1,4 @@
-import { SignalContainer } from "../../../abort-cntroller/signal-container";
+import { SignalContainer } from "../../../abort-controller/signal-container";
 import { waitTime } from "../../../wait/wait-time";
 import { BatterySelectorProps } from "../props/battery-selector-props";
 import { batteryChange } from "./battery-change";

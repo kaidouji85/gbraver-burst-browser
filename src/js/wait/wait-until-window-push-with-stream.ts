@@ -1,6 +1,6 @@
 import { first, Observable, Unsubscribable } from "rxjs";
 
-import { SignalContainer } from "../abort-cntroller/signal-container";
+import { SignalContainer } from "../abort-controller/signal-container";
 import { PushWindow } from "../window/push-window";
 
 /**

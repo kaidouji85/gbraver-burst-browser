@@ -1,4 +1,4 @@
-import { SignalContainer } from "../../../abort-cntroller/signal-container";
+import { SignalContainer } from "../../../abort-controller/signal-container";
 import { silentlyBatteryMinusPop } from "../animation/battery-minus-pop";
 import { BatterySelectorProps } from "../props/battery-selector-props";
 

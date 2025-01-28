@@ -1,6 +1,6 @@
 import { Observable, Unsubscribable } from "rxjs";
 
-import { createAbortError } from "../../abort-cntroller/abort-error";
+import { createAbortError } from "../../abort-controller/abort-error";
 import { TDScene } from "../td-scene";
 import { bindEventListeners } from "./procedure/bind-event-listeners";
 import {

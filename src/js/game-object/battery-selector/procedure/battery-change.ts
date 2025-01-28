@@ -1,4 +1,4 @@
-import { SignalContainer } from "../../../abort-cntroller/signal-container";
+import { SignalContainer } from "../../../abort-controller/signal-container";
 import { all } from "../../../animation/all";
 import { onStart } from "../../../animation/on-start";
 import { changeNeedle } from "../animation/change-needle";

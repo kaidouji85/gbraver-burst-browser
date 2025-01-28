@@ -1,6 +1,6 @@
 import { Observable } from "rxjs";
 
-import { SignalContainer } from "../abort-cntroller/signal-container";
+import { SignalContainer } from "../abort-controller/signal-container";
 import { MessageWindow } from "../game-dom/message-window";
 import { SEPlayer } from "../se/se-player";
 import { CustomBattleEventProps } from "../td-scenes/battle/custom-battle-event";
