@@ -1,7 +1,6 @@
 import { all } from "../../../animation/all";
 import { Animate } from "../../../animation/animate";
 import { delay } from "../../../animation/delay";
-import { onStart } from "../../../animation/on-start";
 import { BattleSceneView } from "../view";
 
 /**
@@ -22,9 +21,6 @@ export function decisionByBurstButton(
     ...view.hud.players.map(({ predicatedDamage }) =>
       predicatedDamage.hidden(),
     ),
-    onStart(() => {
-      view.dom.hamburgerMenu.hidden();
-    }),
   )
     .chain(delay(500))
     .chain(
