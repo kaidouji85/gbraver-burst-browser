@@ -1,10 +1,11 @@
 import { Group } from "@tweenjs/tween.js";
 
+import { SignalContainer } from "../abort-controller/signal-container";
 import { GBTween } from "./gb-tween";
 import { GlobalTweenGroup } from "./global-tween-group";
 
 /** アニメーション再生オプション */
-export type AnimationPlayOptions = {
+export type AnimationPlayOptions = Partial<SignalContainer> & {
   /** Tweenグループ */
   group?: Group;
 };
@@ -96,24 +97,41 @@ export class Animate {
    * @returns アニメーション再生完了後に呼び出されるPromise
    */
   play(options?: AnimationPlayOptions): Promise<void> {
-    const group = options?.group;
-    const targetGroup = group ?? GlobalTweenGroup;
+    const group = options?.group ?? GlobalTweenGroup;
     this._tweens.forEach((tween) => {
-      targetGroup.add(tween);
+      group.add(tween);
       tween.onComplete(() => {
-        targetGroup.remove(tween);
+        group.remove(tween);
         tween.getChainedTweens().forEach((chainedTween) => {
           // chain先のTweenを確実にアップデートするために、Groupに追加している
           // （Group.updateでは同メソッド実行中に追加されたTweenはアップデートされる）
-          targetGroup.add(chainedTween);
+          group.add(chainedTween);
         });
       });
     });
-    return new Promise((resolve) => {
+
+    let onAbort: (() => void) | null = null;
+    const signal = options?.signal;
+    return new Promise<void>((resolve, reject) => {
+      if (signal?.aborted) {
+        reject(signal.reason);
+        return;
+      }
+
+      onAbort = () => {
+        this._start.stop();
+        reject(signal?.reason);
+      };
+      signal?.addEventListener("abort", onAbort);
+
       this._start.start();
       this._end.onComplete(() => {
         resolve();
       });
+    }).finally(() => {
+      if (signal && onAbort) {
+        signal.removeEventListener("abort", onAbort);
+      }
     });
   }
 

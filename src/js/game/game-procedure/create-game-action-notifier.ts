@@ -37,6 +37,15 @@ const createVisibilityChange = (): Observable<GameAction> =>
   );
 
 /**
+ * unhandledrejectionイベント通知ストリームを生成する
+ * @returns unhandledrejectionイベント通知ストリーム
+ */
+const createUnhandledrejection = (): Observable<GameAction> =>
+  fromEvent<PromiseRejectionEvent>(window, "unhandledrejection").pipe(
+    map((event) => ({ type: "UnhandledRejection", event })),
+  );
+
+/**
  * ゲームアクション通知ストリームを生成する
  * @param props ゲームプロパティ
  * @returns ゲームアクション通知ストリーム
@@ -50,4 +59,5 @@ export const createGameActionNotifier = (
     createSuddenlyBattleEnd(props),
     createWebSocketAPIError(props),
     createVisibilityChange(),
+    createUnhandledrejection(),
   );

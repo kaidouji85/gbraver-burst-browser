@@ -7,6 +7,7 @@ import {
 } from "gbraver-burst-core";
 import { Observable } from "rxjs";
 
+import { AbortControllerContainer } from "../../abort-controller/abort-controller-container";
 import { Animate } from "../../animation/animate";
 import { SEPlayerContainer } from "../../se/se-player";
 import { PushWindow } from "../../window/push-window";
@@ -18,8 +19,9 @@ import { BattleSceneView } from "./view";
  * 全カスタムイベントで利用できるプロパティ
  * BattleScenePropsからカスタムバトルイベントで利用可能なプロパティを抜粋した
  */
-export type CustomBattleEventProps = SEPlayerContainer &
-  AnimationTimeScaleContainer & {
+export type CustomBattleEventProps = Readonly<SEPlayerContainer> &
+  Readonly<AnimationTimeScaleContainer> &
+  Readonly<AbortControllerContainer> & {
     /** 戦闘画面を開いているプレイヤーのID */
     readonly playerId: PlayerId;
     /** 敵プレイヤーのID */
