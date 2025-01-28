@@ -3,7 +3,8 @@ import { Animate } from "../../animation/animate";
 import { AnimationTimeScaleContainer } from "./animation-time-scale-container";
 
 /** 戦闘シーンプロパティから本関数で利用するものをピックアップしたもの */
-type Props = AnimationTimeScaleContainer & AbortControllerContainer;
+type Props = Readonly<AnimationTimeScaleContainer> &
+  Readonly<AbortControllerContainer>;
 
 /**
  * 戦闘シーン専用のアニメーション再生関数を生成する
