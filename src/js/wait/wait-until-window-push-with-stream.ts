@@ -17,8 +17,6 @@ export function waitUntilWindowPushWithStream(
   const signal = options?.signal;
   let unsubscriber: Unsubscribable | null = null;
   let onAbort: (() => void) | null = null;
-  let onCleanupOfAbort: (() => void) | null = null;
-
   return new Promise<void>((resolve, reject) => {
     if (signal?.aborted) {
       reject(signal.reason);
@@ -28,15 +26,14 @@ export function waitUntilWindowPushWithStream(
     onAbort = () => reject(signal?.reason);
     signal?.addEventListener("abort", onAbort);
 
-    onCleanupOfAbort = () =>
-      signal && onAbort && signal.removeEventListener("abort", onAbort);
-
     unsubscriber = pushWindow.pipe(first()).subscribe((action) => {
       action.event.preventDefault();
       resolve();
     });
   }).finally(() => {
-    onCleanupOfAbort?.();
+    if (signal && onAbort) {
+      signal.removeEventListener("abort", onAbort);
+    }
     unsubscriber?.unsubscribe();
   });
 }
