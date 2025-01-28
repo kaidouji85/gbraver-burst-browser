@@ -16,8 +16,10 @@ type Options = {
  */
 export function onUnhandledRejection(options: Options): void {
   const event = options.action.event;
-  event.preventDefault();
+
+  // AbortErrorの場合はPromiseを中断したとみなし、例外を握りつぶす
   if (isAbortError(event.reason)) {
+    event.preventDefault();
     return;
   }
 
