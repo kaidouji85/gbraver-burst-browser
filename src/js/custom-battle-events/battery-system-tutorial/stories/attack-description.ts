@@ -1,5 +1,6 @@
+import { delay } from "../../../animation/delay";
 import { LastState } from "../../../td-scenes/battle/custom-battle-event";
-import { waitTime } from "../../../wait/wait-time";
+import { createAnimationPlay } from "../../../td-scenes/battle/play-animation";
 import { focusInBatterySelector } from "../../focus";
 
 /**
@@ -16,12 +17,13 @@ export async function attackDescription(
   props.view.dom.nearBatterySelectorMessageWindow.messagesInInnerHTML(
     attackBatteryCaption,
   );
+  const playAnimation = createAnimationPlay(props);
   const signal = props.abortController.signal;
   await props.view.hud.gameObjects.batterySelector.batteryPlus({ signal });
-  await waitTime(200);
+  await playAnimation(delay(200));
   await props.view.hud.gameObjects.batterySelector.batteryPlus({ signal });
-  await waitTime(200);
+  await playAnimation(delay(200));
   await props.view.hud.gameObjects.batterySelector.batteryPlus({ signal });
-  await waitTime(200);
+  await playAnimation(delay(200));
   await props.view.hud.gameObjects.batterySelector.batteryMinus({ signal });
 }
