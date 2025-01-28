@@ -12,7 +12,6 @@ export function waitTime(
 ): Promise<void> {
   const signal = options?.signal;
   let onAbort: (() => void) | null = null;
-  let onCleanupOfAbort: (() => void) | null = null;
   return new Promise<void>((resolve, reject) => {
     if (signal?.aborted) {
       reject(signal.reason);
@@ -22,13 +21,12 @@ export function waitTime(
     onAbort = () => reject(signal?.reason);
     signal?.addEventListener("abort", onAbort);
 
-    onCleanupOfAbort = () =>
-      signal && onAbort && signal.removeEventListener("abort", onAbort);
-
     setTimeout(() => {
       resolve();
     }, ms);
   }).finally(() => {
-    onCleanupOfAbort?.();
+    if (signal && onAbort) {
+      signal.removeEventListener("abort", onAbort);
+    }
   });
 }
