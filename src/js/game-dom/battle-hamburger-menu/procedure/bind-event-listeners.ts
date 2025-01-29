@@ -4,7 +4,6 @@ import { domPushStream } from "../../../dom/push-dom";
 import { pushWindowsStream } from "../../../window/push-window";
 import {
   extractBackGround,
-  extractBattleSimulator,
   extractEndBattle,
   extractRetry,
 } from "../dom/extract-element";
@@ -57,7 +56,7 @@ export function bindEventListeners(
     domPushStream(props.retryButton).subscribe((action) => {
       onRetryButtonPush(props, action);
     }),
-    domPushStream(extractBattleSimulator(props.root)).subscribe((action) => {
+    domPushStream(props.battleSimulator).subscribe((action) => {
       onBattleSimulatorPush(props, action);
     }),
     domPushStream(props.endBattleConfirmDialog).subscribe((action) => {

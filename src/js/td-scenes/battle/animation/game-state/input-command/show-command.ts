@@ -66,7 +66,7 @@ function showButtons(param: Readonly<AnimationParam>): Animate {
     param.view.hud.gameObjects.pilotButton.open(canPilotSkill),
     param.view.hud.gameObjects.pilotButtonLeadLine.show(),
     onStart(() => {
-      param.view.dom.hamburgerMenu.show();
+      param.view.dom.hamburgerMenu.enableBattleSimulator();
     }),
   );
 }
@@ -82,7 +82,7 @@ function showMiniController(param: AnimationParam): Animate {
   return all(
     param.view.dom.miniController.show(),
     onStart(() => {
-      param.view.dom.hamburgerMenu.show();
+      param.view.dom.hamburgerMenu.enableBattleSimulator();
     }),
   );
 }

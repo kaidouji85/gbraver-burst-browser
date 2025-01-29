@@ -4,6 +4,12 @@ export const ROOT = "battle-hamburger-menu";
 /** ルート要素(非表示) */
 export const ROOT_HIDDEN = `${ROOT}--hidden`;
 
+/** バトルシミュレーター */
+export const BATTLE_SIMULATOR = `${ROOT}__battle-simulator`;
+
+/** バトルシミュレーター(選択不能) */
+export const BATTLE_SIMULATOR_DISABLED = `${BATTLE_SIMULATOR}--disabled`;
+
 /** リトライ */
 export const RETRY = `${ROOT}__retry`;
 
