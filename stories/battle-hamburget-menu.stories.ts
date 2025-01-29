@@ -9,12 +9,17 @@ export default {
 
 /**
  * 戦闘画面用ハンバーガーメニューのストーリー
- * @param canRetry リトライ可能かどうか、trueでリトライ可能
+ * @param isEnabled 操作可能かどうか、trueで操作可能
  * @returns ストーリー
  */
-const hamburgerMenuStory = (canRetry: boolean) =>
+const hamburgerMenuStory = (isEnabled: boolean) =>
   domStub((params) => {
-    const menu = new BattleHamburgerMenu({ ...params, canRetry });
+    const menu = new BattleHamburgerMenu({ ...params, canRetry: isEnabled });
+    if (isEnabled) {
+      menu.enableBattleSimulator();
+    } else {
+      menu.disableBattleSimulator();
+    }
     menu.show();
     menu.notifyBattleSimulatorStart().subscribe(() => {
       console.log("battle simulator start");
@@ -29,7 +34,7 @@ const hamburgerMenuStory = (canRetry: boolean) =>
   });
 
 /** すべてが操作可能 */
-export const operatable: StoryFn = hamburgerMenuStory(true);
+export const enabled: StoryFn = hamburgerMenuStory(true);
 
 /** 一部操作不可能 */
 export const disabled: StoryFn = hamburgerMenuStory(false);
