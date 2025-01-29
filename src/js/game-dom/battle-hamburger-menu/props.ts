@@ -19,6 +19,8 @@ export type BattleHamburgerMenuProps = {
   readonly menu: HTMLElement;
   /** バックグラウンド */
   readonly background: HTMLElement;
+  /** バトルシミュレーター */
+  readonly battleSimulator: HTMLElement;
 
   /** リトライ確認ダイアログ */
   readonly retryConfirmDialog: HTMLElement;

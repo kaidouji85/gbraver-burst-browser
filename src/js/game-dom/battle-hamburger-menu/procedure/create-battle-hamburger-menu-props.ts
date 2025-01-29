@@ -7,6 +7,7 @@ import { SEPlayerContainer } from "../../../se/se-player";
 import { ROOT_HIDDEN } from "../dom/class-name";
 import {
   extractBackGround,
+  extractBattleSimulator,
   extractEndBattleButton,
   extractEndBattleCancelButton,
   extractEndBattleConfirmDialog,
@@ -42,6 +43,8 @@ export function createBattleHamburgerMenuProps(
 
   const background = extractBackGround(root);
 
+  const battleSimulator = extractBattleSimulator(root);
+
   const retryConfirmDialog = extractRetryConfirmDialog(root);
   const retryConfirmDialogCloser = extractRetryConfirmDialogCloser(root);
   const retryButton = extractRetryButton(root);
@@ -75,6 +78,7 @@ export function createBattleHamburgerMenuProps(
     hamburgerIcon,
     menu,
     background,
+    battleSimulator,
 
     retryConfirmDialog,
     retryConfirmDialogCloser,
