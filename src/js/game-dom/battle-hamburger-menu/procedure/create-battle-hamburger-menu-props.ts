@@ -69,6 +69,8 @@ export function createBattleHamburgerMenuProps(
   return {
     ...params,
 
+    canBattleSimulatorStart: false,
+
     root,
     hamburgerIcon,
     menu,
