@@ -60,8 +60,8 @@
 }
 
 .battle-hamburger-menu__retry--disabled,
-.battle-hamburger-menu__battle-simulator {
-  color: var(--disabled-button-font-colo);
+.battle-hamburger-menu__battle-simulator--disabled {
+  color: var(--disabled-button-font-color);
 }
 
 .battle-hamburger-menu__background {
