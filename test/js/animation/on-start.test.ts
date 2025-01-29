@@ -4,5 +4,5 @@ test("onStartの再生時間は0である", () => {
   const v = onStart(() => {
     // NOP
   });
-  expect(v._time).toBe(0);
+  expect(v.time).toBe(0);
 });

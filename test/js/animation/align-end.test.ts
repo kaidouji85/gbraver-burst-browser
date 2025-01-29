@@ -6,5 +6,5 @@ test("alignEndだと、一番長いアニメーション時間で再生される
   const animation2 = delay(2000);
   const animation3 = delay(4000);
   const result = alignEnd(animation1, animation2, animation3);
-  expect(result._time).toBe(4000);
+  expect(result.time).toBe(4000);
 });
