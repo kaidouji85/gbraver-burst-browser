@@ -62,7 +62,7 @@ export class Animate {
   /** 開始Tween */
   private _start: GBTween<any>;
   /** 終了Tween */
-  _end: GBTween<any>;
+  private _end: GBTween<any>;
   /** このアニメーションが保持するすべてのTween（_start、_endを含む）*/
   private _tweens: GBTween<any>[];
   /* eslint-enable */
@@ -89,6 +89,16 @@ export class Animate {
     this._end = end;
     this._tweens = tweens;
     this._time = time;
+  }
+
+  /**
+   * 終了Tweenのgetter
+   * @returns 終了Tween
+   */
+  /* eslint-disable @typescript-eslint/no-explicit-any */
+  get end(): GBTween<any> {
+    /* eslint-enable */
+    return this._end;
   }
 
   /**
