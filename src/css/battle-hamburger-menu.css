@@ -59,8 +59,9 @@
   background-color: var(--hovered-back-ground-color);
 }
 
-.battle-hamburger-menu__retry--disabled {
-  color: #a0a0a0;
+.battle-hamburger-menu__retry--disabled,
+.battle-hamburger-menu__battle-simulator {
+  color: var(--disabled-button-font-colo);
 }
 
 .battle-hamburger-menu__background {
