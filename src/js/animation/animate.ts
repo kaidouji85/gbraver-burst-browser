@@ -60,11 +60,11 @@ export type AnimationPlayOptions = Partial<SignalContainer> & {
 export class Animate {
   /* eslint-disable @typescript-eslint/no-explicit-any */
   /** 開始Tween */
-  _start: GBTween<any>;
+  private _start: GBTween<any>;
   /** 終了Tween */
   _end: GBTween<any>;
   /** このアニメーションが保持するすべてのTween（_start、_endを含む）*/
-  _tweens: GBTween<any>[];
+  private _tweens: GBTween<any>[];
   /* eslint-enable */
   /** 全体の再生時間 */
   _time: number;
