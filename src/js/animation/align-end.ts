@@ -10,11 +10,11 @@ import { delay } from "./delay";
 export function alignEnd(...animations: Animate[]): Animate {
   const maxDuration = Math.max(
     0,
-    ...animations.map((animate) => animate._time),
+    ...animations.map((animate) => animate.time),
   );
   return all(
     ...animations.map((animate) =>
-      delay(maxDuration - animate._time).chain(animate),
+      delay(maxDuration - animate.time).chain(animate),
     ),
   );
 }

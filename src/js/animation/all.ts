@@ -9,7 +9,7 @@ import { empty } from "./delay";
  */
 export function all(...animations: Animate[]): Animate {
   const next = animations.reduce(
-    (a, b) => (a._time < b._time ? b : a),
+    (a, b) => (a.time < b.time ? b : a),
     empty(),
   );
   const parallels = animations.filter((v) => v !== next);

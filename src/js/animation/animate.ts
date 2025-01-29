@@ -67,7 +67,7 @@ export class Animate {
   private _tweens: GBTween<any>[];
   /* eslint-enable */
   /** 全体の再生時間 */
-  _time: number;
+  private _time: number;
 
   /**
    * 連続したTweenの最初、最後からTweenAnimatonを生成する
@@ -99,6 +99,14 @@ export class Animate {
   get end(): GBTween<any> {
     /* eslint-enable */
     return this._end;
+  }
+
+  /**
+   * 全体の再生時間のgetter
+   * @returns 全体の再生時間
+   */
+  get time(): number {
+    return this._time;
   }
 
   /**

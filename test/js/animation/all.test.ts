@@ -7,5 +7,5 @@ test("再生時間が一番長いものがnextに設定されている", () => {
   const p3 = tween({}, (t) => t.to({}, 1000));
   const v = all(p1, p2, p3);
   expect(v.end).toBe(p3.end);
-  expect(v._time).toBe(1000);
+  expect(v.time).toBe(1000);
 });
