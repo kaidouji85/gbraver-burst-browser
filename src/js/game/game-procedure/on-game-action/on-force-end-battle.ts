@@ -15,7 +15,7 @@ import { switchWaitingDialog } from "../switch-dialog/switch-waiting-dialog";
 /**
  * ストーリーモードバトルを強制終了する
  * @param props ゲームプロパティ
- * @returns バトルを強制終了した場合はtrue, それ以外はfalse
+ * @returns 処理が完了したら発火するPromise
  */
 async function forceEndStoryBattle(
   props: Readonly<GameProps & { inProgress: Story }>,
@@ -43,7 +43,7 @@ async function forceEndStoryBattle(
 /**
  * ネットバトルを強制終了する
  * @param props ゲームプロパティ
- * @returns バトルを強制終了した場合はtrue, それ以外はfalse
+ * @returns 処理が完了したら発火するPromise
  */
 async function forceEndNetBattle(
   props: Readonly<
@@ -75,6 +75,7 @@ async function forceEndNetBattle(
 /**
  * 汎用的なバトル強制終了
  * @param props ゲームプロパティ
+ * @returns 処理が完了したら発火するPromise
  */
 async function forceEndBattle(props: Readonly<GameProps>) {
   props.domFloaters.hiddenPostBattle();
@@ -104,6 +105,7 @@ type ForceEndBattleOptions = {
  * プレイヤーによるバトル強制終了
  * 本関数にはinProgressを更新する副作用がある
  * @param options オプション
+ * @returns 処理が完了したら発火するPromise
  */
 export async function onForceEndBattle(options: ForceEndBattleOptions) {
   const { props } = options;
