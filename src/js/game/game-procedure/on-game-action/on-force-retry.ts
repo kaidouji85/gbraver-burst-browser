@@ -58,7 +58,7 @@ type OnForceRetryOptions = {
   /** ゲームプロパティ */
   readonly props: Readonly<GameProps>;
   /** アクション */
-  readonly action: ForceRetry;
+  readonly action: Readonly<ForceRetry>;
 };
 
 /**
