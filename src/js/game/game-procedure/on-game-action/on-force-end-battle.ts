@@ -20,6 +20,8 @@ import { switchWaitingDialog } from "../switch-dialog/switch-waiting-dialog";
 async function forceEndStoryBattle(
   props: Readonly<GameProps & { inProgress: Story }>,
 ) {
+  props.domFloaters.hiddenPostBattle();
+
   const selectedEpisodeId =
     props.inProgress.story.type === "PlayingEpisode"
       ? props.inProgress.story.episode.id
@@ -50,11 +52,12 @@ async function forceEndNetBattle(
     }
   >,
 ) {
+  props.domFloaters.hiddenPostBattle();
+
   const dialog = new WaitingDialog("通信中......");
   switchWaitingDialog(props, dialog);
   await props.api.disconnectWebsocket();
   props.domDialogBinder.hidden();
-
   await Promise.all([
     (async () => {
       await props.fader.fadeOut();
@@ -74,6 +77,7 @@ async function forceEndNetBattle(
  * @param props ゲームプロパティ
  */
 async function forceEndBattle(props: Readonly<GameProps>) {
+  props.domFloaters.hiddenPostBattle();
   await Promise.all([
     (async () => {
       await props.fader.fadeOut();
