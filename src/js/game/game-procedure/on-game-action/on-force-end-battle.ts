@@ -75,6 +75,7 @@ async function forceEndNetBattle(
 /**
  * 汎用的なバトル強制終了
  * @param props ゲームプロパティ
+ * @returns 処理が完了したら発火するPromise
  */
 async function forceEndBattle(props: Readonly<GameProps>) {
   props.domFloaters.hiddenPostBattle();
@@ -104,6 +105,7 @@ type ForceEndBattleOptions = {
  * プレイヤーによるバトル強制終了
  * 本関数にはinProgressを更新する副作用がある
  * @param options オプション
+ * @returns 処理が完了したら発火するPromise
  */
 export async function onForceEndBattle(options: ForceEndBattleOptions) {
   const { props } = options;
