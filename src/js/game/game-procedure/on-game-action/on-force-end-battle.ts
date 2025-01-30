@@ -9,27 +9,6 @@ import { startTitle } from "../start-title";
 import { switchWaitingDialog } from "../switch-dialog/switch-waiting-dialog";
 
 /**
- * NPCバトルの強制終了
- * 本関数にはinProgressを更新する副作用がある
- * @param props ゲームプロパティ
- */
-async function forceEndNPCBattle(props: GameProps) {
-  props.inProgress = { type: "None" };
-  await Promise.all([
-    (async () => {
-      await props.fader.fadeOut();
-      await startTitle(props);
-    })(),
-    (async () => {
-      await props.bgm.do(fadeOut);
-      await props.bgm.do(stop);
-    })(),
-  ]);
-  await props.fader.fadeIn();
-  playTitleBGM(props);
-}
-
-/**
  * 条件を満たした場合、ストーリーモードバトルを強制終了する
  * @param props ゲームプロパティ
  * @returns バトルを強制終了した場合はtrue, それ以外はfalse
@@ -96,6 +75,29 @@ async function forceEndNetBattleIfNeeded(props: GameProps): Promise<boolean> {
   return false;
 }
 
+
+/**
+ * 汎用的なバトル強制終了
+ * 本関数にはinProgressを更新する副作用がある
+ * @param props ゲームプロパティ
+ */
+async function forceEndBattle(props: GameProps) {
+  props.inProgress = { type: "None" };
+  await Promise.all([
+    (async () => {
+      await props.fader.fadeOut();
+      await startTitle(props);
+    })(),
+    (async () => {
+      await props.bgm.do(fadeOut);
+      await props.bgm.do(stop);
+    })(),
+  ]);
+  await props.fader.fadeIn();
+  playTitleBGM(props);
+}
+
+
 /** onForceEndBattleオプション */
 type ForceEndBattleOptions = {
   /** ゲームプロパティ */
@@ -119,5 +121,5 @@ export async function onForceEndBattle(options: ForceEndBattleOptions) {
     return;
   }
 
-  await forceEndNPCBattle(props);
+  await forceEndBattle(props);
 }
