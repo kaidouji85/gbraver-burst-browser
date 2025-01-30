@@ -1,88 +1,60 @@
 import { fadeOut, stop } from "../../../bgm/bgm-operators";
 import { WaitingDialog } from "../../../dom-dialogs/waiting/waiting-dialog";
+import { batterySystemTutorial } from "../../episodes/battery-system-tutorial";
 import { ForceEndBattle } from "../../game-actions/force-end-battle";
 import { GameProps } from "../../game-props";
-import { PlayingEpisode } from "../../in-progress/story";
+import { CasualMatch } from "../../in-progress/casual-match";
+import { PrivateMatchGuest } from "../../in-progress/private-match-guest";
+import { PrivateMatchHost } from "../../in-progress/private-match-host";
+import { Story } from "../../in-progress/story";
 import { playTitleBGM } from "../play-title-bgm";
 import { startEpisodeSelector } from "../start-episode-selector";
 import { startTitle } from "../start-title";
 import { switchWaitingDialog } from "../switch-dialog/switch-waiting-dialog";
 
 /**
- * 条件を満たした場合、ストーリーモードバトルを強制終了する
+ * ストーリーモードバトルを強制終了する
  * @param props ゲームプロパティ
  * @returns バトルを強制終了した場合はtrue, それ以外はfalse
  */
-async function forceEndEpisodeIfNeeded(
-  props: Readonly<GameProps>,
-): Promise<boolean> {
-  if (
-    props.inProgress.type === "Story" &&
+async function forceEndStoryBattle(
+  props: Readonly<GameProps & { inProgress: Story }>,
+) {
+  const selectedEpisodeId =
     props.inProgress.story.type === "PlayingEpisode"
-  ) {
-    const playingEpisode: PlayingEpisode = props.inProgress.story;
-    await Promise.all([
-      (async () => {
-        props.domFloaters.hiddenPostBattle();
-        await startEpisodeSelector(props, playingEpisode.episode.id);
-      })(),
-      (async () => {
-        await props.bgm.do(fadeOut);
-        await props.bgm.do(stop);
-      })(),
-    ]);
+      ? props.inProgress.story.episode.id
+      : batterySystemTutorial.id;
+  await Promise.all([
+    (async () => {
+      props.domFloaters.hiddenPostBattle();
+      await startEpisodeSelector(props, selectedEpisodeId);
+    })(),
+    (async () => {
+      await props.bgm.do(fadeOut);
+      await props.bgm.do(stop);
+    })(),
+  ]);
 
-    playTitleBGM(props);
-    return true;
-  }
-
-  return false;
+  playTitleBGM(props);
 }
 
 /**
- * 条件を満たした場合、ネットバトルを強制終了する
- * 本関数にはinProgressを更新する副作用がある
+ * ネットバトルを強制終了する
  * @param props ゲームプロパティ
  * @returns バトルを強制終了した場合はtrue, それ以外はfalse
  */
-async function forceEndNetBattleIfNeeded(props: GameProps): Promise<boolean> {
-  if (
-    props.inProgress.type === "CasualMatch" ||
-    props.inProgress.type === "PrivateMatchHost" ||
-    props.inProgress.type === "PrivateMatchGuest"
-  ) {
-    props.inProgress = { type: "None" };
-    const dialog = new WaitingDialog("通信中......");
-    switchWaitingDialog(props, dialog);
-    await props.api.disconnectWebsocket();
-    props.domDialogBinder.hidden();
+async function forceEndNetBattle(
+  props: Readonly<
+    GameProps & {
+      inProgress: CasualMatch | PrivateMatchHost | PrivateMatchGuest;
+    }
+  >,
+) {
+  const dialog = new WaitingDialog("通信中......");
+  switchWaitingDialog(props, dialog);
+  await props.api.disconnectWebsocket();
+  props.domDialogBinder.hidden();
 
-    await Promise.all([
-      (async () => {
-        await props.fader.fadeOut();
-        await startTitle(props);
-      })(),
-      (async () => {
-        await props.bgm.do(fadeOut);
-        await props.bgm.do(stop);
-      })(),
-    ]);
-    await props.fader.fadeIn();
-    playTitleBGM(props);
-    return true;
-  }
-
-  return false;
-}
-
-
-/**
- * 汎用的なバトル強制終了
- * 本関数にはinProgressを更新する副作用がある
- * @param props ゲームプロパティ
- */
-async function forceEndBattle(props: GameProps) {
-  props.inProgress = { type: "None" };
   await Promise.all([
     (async () => {
       await props.fader.fadeOut();
@@ -97,6 +69,24 @@ async function forceEndBattle(props: GameProps) {
   playTitleBGM(props);
 }
 
+/**
+ * 汎用的なバトル強制終了
+ * @param props ゲームプロパティ
+ */
+async function forceEndBattle(props: Readonly<GameProps>) {
+  await Promise.all([
+    (async () => {
+      await props.fader.fadeOut();
+      await startTitle(props);
+    })(),
+    (async () => {
+      await props.bgm.do(fadeOut);
+      await props.bgm.do(stop);
+    })(),
+  ]);
+  await props.fader.fadeIn();
+  playTitleBGM(props);
+}
 
 /** onForceEndBattleオプション */
 type ForceEndBattleOptions = {
@@ -113,13 +103,21 @@ type ForceEndBattleOptions = {
  */
 export async function onForceEndBattle(options: ForceEndBattleOptions) {
   const { props } = options;
-  if (await forceEndEpisodeIfNeeded(props)) {
-    return;
+  const { inProgress } = props;
+
+  switch (inProgress.type) {
+    case "CasualMatch":
+    case "PrivateMatchHost":
+    case "PrivateMatchGuest":
+      await forceEndNetBattle({ ...props, inProgress });
+      break;
+    case "Story":
+      await forceEndStoryBattle({ ...props, inProgress });
+      break;
+    default:
+      forceEndBattle(props);
+      break;
   }
 
-  if (await forceEndNetBattleIfNeeded(props)) {
-    return;
-  }
-
-  await forceEndBattle(props);
+  props.inProgress = { type: "None" };
 }
