@@ -38,13 +38,13 @@ async function forceRetryNPCBattle(
 async function forceRetryStoryBattle(
   props: Readonly<GameProps & { inProgress: Story }>,
 ) {
-  const { inProgress } = props;
+  const { story } = props.inProgress;
   const episode = (() => {
-    switch (inProgress.story.type) {
+    switch (story.type) {
       case "PlayingEpisode":
-        return inProgress.story.episode;
+        return story.episode;
       case "GoingNextEpisode":
-        return inProgress.story.currentEpisode;
+        return story.currentEpisode;
       default:
         return batterySystemTutorial;
     }
