@@ -1,75 +1,80 @@
+import { batterySystemTutorial } from "../../episodes/battery-system-tutorial";
 import { ForceRetry } from "../../game-actions/force-retry";
 import { GameProps } from "../../game-props";
-import { PlayingEpisode } from "../../in-progress/story";
+import { NPCBattle } from "../../in-progress/npc-battle";
+import { Story } from "../../in-progress/story";
 import { getCurrentNPCStage } from "../../npc-battle/get-current-npc-stage";
 import { getNPCStageLevel } from "../../npc-battle/get-npc-stage-level";
-import { NPCBattleState } from "../../npc-battle/npc-battle-state";
 import { DefaultStage } from "../../npc-battle/stages/default-stage";
 import { startEpisode } from "../start-episode";
 import { startNPCBattleStage } from "../start-npc-battle-stage";
 
 /**
- * 条件を満たした場合、NPCバトルを最初からやり直す
+ * NPCバトルを最初からやり直す
  * @param props ゲームプロパティ
- * @returns バトルをリトライした場合はtrue, それ以外はfalse
+ * @returns 処理が完了したら発火するPromise
  */
-async function forceRetryNPCBattleIfNeeded(
-  props: Readonly<GameProps>,
-): Promise<boolean> {
-  if (
-    props.inProgress.type === "NPCBattle" &&
-    props.inProgress.npcBattle.type === "PlayingNPCBattle"
-  ) {
-    const state: NPCBattleState = props.inProgress.npcBattle.state;
-    const stage = getCurrentNPCStage(state) ?? DefaultStage;
-    const level = getNPCStageLevel(state);
-    const player = state.player;
-    props.domFloaters.hiddenPostBattle();
-    await startNPCBattleStage(props, player, stage, level);
-    return true;
+async function forceRetryNPCBattle(
+  props: Readonly<GameProps & { inProgress: NPCBattle }>,
+) {
+  const { inProgress } = props;
+  if (inProgress.npcBattle.type !== "PlayingNPCBattle") {
+    return;
   }
 
-  return false;
+  const { state } = inProgress.npcBattle;
+  const stage = getCurrentNPCStage(state) ?? DefaultStage;
+  const level = getNPCStageLevel(state);
+  const player = state.player;
+  props.domFloaters.hiddenPostBattle();
+  await startNPCBattleStage(props, player, stage, level);
 }
 
 /**
- * 条件を満たした場合、ストーリーモードバトルをリトライする
+ * ストーリーモードバトルをリトライする
  * @param props ゲームプロパティ
- * @returns バトルをリトライした場合はtrue, それ以外はfalse
+ * @returns 処理が完了したら発火するPromise
  */
-async function forceRetryStory(props: Readonly<GameProps>): Promise<boolean> {
-  if (
-    props.inProgress.type === "Story" &&
-    props.inProgress.story.type === "PlayingEpisode"
-  ) {
-    const playingEpisode: PlayingEpisode = props.inProgress.story;
-    props.domFloaters.hiddenPostBattle();
-    await startEpisode(props, playingEpisode.episode);
-    return true;
-  }
-
-  return false;
+async function forceRetryStoryBattle(
+  props: Readonly<GameProps & { inProgress: Story }>,
+) {
+  const { inProgress } = props;
+  const episode = (() => {
+    switch (inProgress.story.type) {
+      case "PlayingEpisode":
+        return inProgress.story.episode;
+      case "GoingNextEpisode":
+        return inProgress.story.currentEpisode;
+      default:
+        return batterySystemTutorial;
+    }
+  })();
+  props.domFloaters.hiddenPostBattle();
+  await startEpisode(props, episode);
 }
 
 /** onForceRetryオプション */
 type OnForceRetryOptions = {
   /** ゲームプロパティ */
-  props: Readonly<GameProps>;
+  readonly props: Readonly<GameProps>;
   /** アクション */
-  action: ForceRetry;
+  readonly action: ForceRetry;
 };
 
 /**
  * プレイヤーによるバトルのリトライ
  * @param options オプション
+ * @returns 処理が完了したら発火するPromise
  */
 export async function onForceRetry(options: OnForceRetryOptions) {
   const { props } = options;
-  if (await forceRetryNPCBattleIfNeeded(props)) {
-    return;
-  }
-
-  if (await forceRetryStory(props)) {
-    return;
+  const { inProgress } = props;
+  switch (inProgress.type) {
+    case "Story":
+      await forceRetryStoryBattle({ ...props, inProgress });
+      break;
+    case "NPCBattle":
+      await forceRetryNPCBattle({ ...props, inProgress });
+      break;
   }
 }
