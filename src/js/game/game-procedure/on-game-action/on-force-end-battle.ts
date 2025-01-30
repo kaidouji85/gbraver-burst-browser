@@ -15,7 +15,7 @@ import { switchWaitingDialog } from "../switch-dialog/switch-waiting-dialog";
 /**
  * ストーリーモードバトルを強制終了する
  * @param props ゲームプロパティ
- * @returns バトルを強制終了した場合はtrue, それ以外はfalse
+ * @returns 処理が完了したら発火するPromise
  */
 async function forceEndStoryBattle(
   props: Readonly<GameProps & { inProgress: Story }>,
@@ -43,7 +43,7 @@ async function forceEndStoryBattle(
 /**
  * ネットバトルを強制終了する
  * @param props ゲームプロパティ
- * @returns バトルを強制終了した場合はtrue, それ以外はfalse
+ * @returns 処理が完了したら発火するPromise
  */
 async function forceEndNetBattle(
   props: Readonly<
