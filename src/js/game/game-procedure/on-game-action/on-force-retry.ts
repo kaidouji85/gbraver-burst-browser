@@ -1,7 +1,7 @@
 import { batterySystemTutorial } from "../../episodes/battery-system-tutorial";
 import { ForceRetry } from "../../game-actions/force-retry";
 import { GameProps } from "../../game-props";
-import { NPCBattle } from "../../in-progress/npc-battle";
+import { NPCBattle, PlayingNPCBattle } from "../../in-progress/npc-battle";
 import { Story } from "../../in-progress/story";
 import { getCurrentNPCStage } from "../../npc-battle/get-current-npc-stage";
 import { getNPCStageLevel } from "../../npc-battle/get-npc-stage-level";
@@ -15,13 +15,11 @@ import { startNPCBattleStage } from "../start-npc-battle-stage";
  * @returns 処理が完了したら発火するPromise
  */
 async function forceRetryNPCBattle(
-  props: Readonly<GameProps & { inProgress: NPCBattle }>,
+  props: GameProps & {
+    inProgress: NPCBattle & { npcBattle: PlayingNPCBattle };
+  },
 ) {
   const { inProgress } = props;
-  if (inProgress.npcBattle.type !== "PlayingNPCBattle") {
-    return;
-  }
-
   const { state } = inProgress.npcBattle;
   const stage = getCurrentNPCStage(state) ?? DefaultStage;
   const level = getNPCStageLevel(state);
@@ -35,9 +33,7 @@ async function forceRetryNPCBattle(
  * @param props ゲームプロパティ
  * @returns 処理が完了したら発火するPromise
  */
-async function forceRetryStoryBattle(
-  props: Readonly<GameProps & { inProgress: Story }>,
-) {
+async function forceRetryStoryBattle(props: GameProps & { inProgress: Story }) {
   const { story } = props.inProgress;
   const episode = (() => {
     switch (story.type) {
@@ -56,9 +52,9 @@ async function forceRetryStoryBattle(
 /** onForceRetryオプション */
 type OnForceRetryOptions = {
   /** ゲームプロパティ */
-  readonly props: Readonly<GameProps>;
+  props: GameProps;
   /** アクション */
-  readonly action: Readonly<ForceRetry>;
+  action: ForceRetry;
 };
 
 /**
@@ -69,12 +65,16 @@ type OnForceRetryOptions = {
 export async function onForceRetry(options: OnForceRetryOptions) {
   const { props } = options;
   const { inProgress } = props;
-  switch (inProgress.type) {
-    case "Story":
-      await forceRetryStoryBattle({ ...props, inProgress });
-      break;
-    case "NPCBattle":
-      await forceRetryNPCBattle({ ...props, inProgress });
-      break;
+  if (inProgress.type === "Story") {
+    await forceRetryStoryBattle({ ...props, inProgress });
+  } else if (
+    inProgress.type === "NPCBattle" &&
+    inProgress.npcBattle.type === "PlayingNPCBattle"
+  ) {
+    const { npcBattle } = inProgress;
+    await forceRetryNPCBattle({
+      ...props,
+      inProgress: { ...inProgress, npcBattle },
+    });
   }
 }
