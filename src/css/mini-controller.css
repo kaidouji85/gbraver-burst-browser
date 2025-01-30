@@ -16,6 +16,7 @@
     right: max(calc(var(--responsive-font-size) * 1), var(--safe-area-right));
     background-color: #000;
     border-radius: var(--dialog-border-radius);
+    border: var(--dialog-border);
     z-index: var(--zindex-mini-controller);
     display: grid;
     grid-template-columns: 1fr 1fr;
