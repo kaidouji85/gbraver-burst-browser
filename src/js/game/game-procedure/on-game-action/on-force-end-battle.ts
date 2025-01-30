@@ -93,7 +93,7 @@ type ForceEndBattleOptions = {
   /** ゲームプロパティ */
   props: GameProps;
   /** アクション */
-  action: ForceEndBattle;
+  readonly action: ForceEndBattle;
 };
 
 /**
