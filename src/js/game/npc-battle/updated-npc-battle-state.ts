@@ -11,7 +11,9 @@ export function updateNPCBattleState(
   origin: Readonly<NPCBattleState>,
   result: NPCBattleResult,
 ): NPCBattleState {
-  const nextStageIndex =
-    result === "StageClear" ? origin.stageIndex + 1 : origin.stageIndex;
+  const nextStageIndex = Math.min(
+    result === "StageClear" ? origin.stageIndex + 1 : origin.stageIndex,
+    origin.stages.length - 1,
+  );
   return { ...origin, stageIndex: nextStageIndex };
 }

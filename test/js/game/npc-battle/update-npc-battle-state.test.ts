@@ -3,119 +3,31 @@ import { EMPTY_PLAYER } from "gbraver-burst-core";
 import { DefaultStage } from "../../../../src/js/game/npc-battle/stages/default-stage";
 import { updateNPCBattleState } from "../../../../src/js/game/npc-battle/updated-npc-battle-state";
 
+/** テストプレイヤー情報 */
 const player = { ...EMPTY_PLAYER, playerId: "npc-battle-player" };
+
+/** ステージ情報 */
 const stages = [DefaultStage, DefaultStage, DefaultStage];
 
-test("ステージクリアの処理が正しい", () => {
-  const state = {
-    player,
-    stages,
-    stageIndex: 0,
-  };
-  expect(
-    updateNPCBattleState(state, {
-      type: "GameOver",
-      winner: player.playerId,
-    }),
-  ).toEqual({
-    state: { ...state, stageIndex: 1 },
-    result: "StageClear",
+test("ステージクリアしたらインデックスに+1される", () => {
+  const state = { player, stages, stageIndex: 0 };
+  expect(updateNPCBattleState(state, "StageClear")).toEqual({
+    ...state,
+    stageIndex: 1,
   });
 });
 
-test("ステージミスの処理が正しい", () => {
-  const state = {
-    player,
-    stages,
-    stageIndex: 0,
-  };
-  expect(
-    updateNPCBattleState(state, {
-      type: "GameOver",
-      winner: "not-player",
-    }),
-  ).toEqual({
-    state,
-    result: "StageMiss",
-  });
+test("ステージミスしたらステートは変わらない", () => {
+  const state = { player, stages, stageIndex: 0 };
+  expect(updateNPCBattleState(state, "StageMiss")).toEqual(state);
 });
 
-test("引き分けはステージミスとみなす", () => {
-  const state = {
-    player,
-    stages,
-    stageIndex: 0,
-  };
-  expect(
-    updateNPCBattleState(state, {
-      type: "EvenMatch",
-    }),
-  ).toEqual({
-    state,
-    result: "StageMiss",
-  });
+test("最終ステージをクリアしてもインデックスに+1されず、結果としてステートは変わらない", () => {
+  const state = { player, stages, stageIndex: 2 };
+  expect(updateNPCBattleState(state, "StageClear")).toEqual(state);
 });
 
-test("最終ステージクリアの処理が正しい", () => {
-  const state = {
-    player,
-    stages,
-    stageIndex: 2,
-  };
-  expect(
-    updateNPCBattleState(state, {
-      type: "GameOver",
-      winner: player.playerId,
-    }),
-  ).toEqual({
-    state,
-    result: "NPCBattleComplete",
-  });
-});
-
-test("最終ステージミスの処理が正しい", () => {
-  const state = {
-    player,
-    stages,
-    stageIndex: 2,
-  };
-  expect(
-    updateNPCBattleState(state, {
-      type: "GameOver",
-      winner: "not-player",
-    }),
-  ).toEqual({
-    state,
-    result: "StageMiss",
-  });
-});
-
-test("最終ステージでも引き分けはミスとみなす", () => {
-  const state = {
-    player,
-    stages,
-    stageIndex: 2,
-  };
-  expect(
-    updateNPCBattleState(state, {
-      type: "EvenMatch",
-    }),
-  ).toEqual({
-    state,
-    result: "StageMiss",
-  });
-});
-
-test("ステート不整合の場合はnullを返す", () => {
-  const state = {
-    player,
-    stages,
-    stageIndex: 4,
-  };
-  expect(
-    updateNPCBattleState(state, {
-      type: "GameOver",
-      winner: player.playerId,
-    }),
-  ).toEqual(null);
+test("最終ステージでミスをしてもステートは変わらない", () => {
+  const state = { player, stages, stageIndex: 2 };
+  expect(updateNPCBattleState(state, "StageMiss")).toEqual(state);
 });
