@@ -53,6 +53,7 @@ const onGameEnd = async (
   props: Readonly<BattleSceneProps>,
   gameEnd: GameEnd,
 ): Promise<void> => {
+  props.view.dom.hamburgerMenu.hidden();
   await props.bgm.do(fadeOut);
   await props.bgm.do(stop);
   props.endBattle.next({
