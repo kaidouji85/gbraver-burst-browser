@@ -8,7 +8,10 @@ import { EndBattle } from "../../../game-actions/end-battle";
 import { GameProps } from "../../../game-props";
 import { InProgress } from "../../../in-progress";
 import { NPCBattle } from "../../../in-progress/npc-battle";
-import { NPCBattleResult } from "../../../npc-battle/npc-battle-result";
+import {
+  getNPCBattleResult,
+  NPCBattleResult,
+} from "../../../npc-battle/npc-battle-result";
 import { updateNPCBattleState } from "../../../npc-battle/updated-npc-battle-state";
 
 /**
@@ -46,18 +49,13 @@ export async function executePostNPCBattle(
     return inProgress;
   }
 
-  const updated = updateNPCBattleState(
-    inProgress.npcBattle.state,
-    gameEnd.result,
-  );
-  if (!updated) {
-    return inProgress;
-  }
-
-  const buttons = postNPCBattleButtons(updated.result);
+  const { npcBattle } = inProgress;
+  const npcBattleResult = getNPCBattleResult(npcBattle.state, gameEnd.result);
+  const updatedState = updateNPCBattleState(npcBattle.state, npcBattleResult);
+  const buttons = postNPCBattleButtons(npcBattleResult);
   await domFloaters.showPostBattle({ ...props, buttons });
   return {
     ...inProgress,
-    npcBattle: { ...inProgress.npcBattle, state: updated.state },
+    npcBattle: { ...inProgress.npcBattle, state: updatedState },
   };
 }
