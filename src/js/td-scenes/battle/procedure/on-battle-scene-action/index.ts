@@ -28,9 +28,9 @@ export function onBattleSceneAction(
   } else if (action.type === "decideBattery") {
     onDecideBattery(props, action);
   } else if (action.type === "doBurst") {
-    onBurst(props, action);
+    onBurst(props);
   } else if (action.type === "doPilotSkill") {
-    onPilotSkill(props, action);
+    onPilotSkill(props);
   } else if (action.type === "toggleTimeScale") {
     onToggleTimeScale(props, action);
   } else if (action.type === "decideBatteryByMiniController") {
