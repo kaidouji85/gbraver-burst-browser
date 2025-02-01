@@ -10,7 +10,7 @@
     --button-font-color: var(--font-color);
     --button-border-radius: calc(var(--dialog-border-radius) * 0.5);
 
-    min-width: calc(var(--responsive-font-size) * 15);
+    min-width: calc(var(--responsive-font-size) * 28);
     position: fixed;
     bottom: max(calc(var(--responsive-font-size) * 1), var(--safe-area-bottom));
     right: max(calc(var(--responsive-font-size) * 1), var(--safe-area-right));
