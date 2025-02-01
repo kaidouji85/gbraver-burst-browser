@@ -19,7 +19,6 @@ export function onDecideBattery(
   action: DecideBattery,
 ): void {
   props.exclusive.execute(async (): Promise<void> => {
-    action.event.stopPropagation();
     const batteryCommand: BatteryCommand = {
       type: "BATTERY_COMMAND",
       battery: action.battery,
