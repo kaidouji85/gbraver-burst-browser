@@ -29,10 +29,7 @@ export async function onSelectEpisode(options: Options): Promise<void> {
   const episode = episodes.find((v) => v.id === action.id) ?? episodes[0];
   props.inProgress = {
     ...inProgress,
-    story: {
-      type: "PlayingEpisode",
-      episode,
-    },
+    story: { type: "PlayingEpisode", episode },
   };
   await startEpisode(props, episode);
 }
