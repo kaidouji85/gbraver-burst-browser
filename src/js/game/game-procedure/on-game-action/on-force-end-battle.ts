@@ -116,14 +116,15 @@ export async function onForceEndBattle(options: ForceEndBattleOptions) {
     case "PrivateMatchHost":
     case "PrivateMatchGuest":
       await forceEndNetBattle({ ...props, inProgress });
+      props.inProgress = { type: "None" };
       break;
     case "Story":
       await forceEndStoryBattle({ ...props, inProgress });
+      props.inProgress = { type: "Story", story: { type: "EpisodeSelect" } };
       break;
     default:
-      forceEndBattle(props);
+      await forceEndBattle(props);
+      props.inProgress = { type: "None" };
       break;
   }
-
-  props.inProgress = { type: "None" };
 }
