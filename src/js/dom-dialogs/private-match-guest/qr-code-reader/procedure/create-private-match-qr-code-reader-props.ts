@@ -12,7 +12,9 @@ import { rootInnerHTML } from "../dom/root-inner-html";
 import { PrivateMatchQRCodeReaderProps } from "../props";
 
 /** プライベートマッチQRコードリーダーのパラメータ */
-export type PropsCreatorParams = ResourcesContainer & SEPlayerContainer & GameLoopContainer;
+export type PropsCreatorParams = ResourcesContainer &
+  SEPlayerContainer &
+  GameLoopContainer;
 
 /**
  * PrivateMatchQRCodeReaderPropsを生成する

@@ -23,6 +23,8 @@ export function createGameLoop(): Observable<GameLoop> {
 
   return source.pipe(
     map((time): GameLoop => ({ type: "GameLoop", time })),
+    // 各ゲームオブジェクト、シーンはグローバルTweenの更新後にゲームループを受け取るようにしたい
+    // そのため、ここでグローバルTweenの更新を行う
     tap((gameLoop) => GlobalTweenGroup.update(gameLoop.time)),
   );
 }
