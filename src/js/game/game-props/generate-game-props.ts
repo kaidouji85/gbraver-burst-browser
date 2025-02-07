@@ -6,7 +6,7 @@ import { CssHUDUIScale } from "../../css/hud-ui-scale";
 import { DOMDialogBinder } from "../../dom-dialogs/dom-dialog-binder";
 import { DOMSceneBinder } from "../../dom-scenes/dom-scene-binder";
 import { DOMFader } from "../../game-dom/dom-fader/dom-fader";
-import { gameLoopStream } from "../../game-loop/game-loop";
+import { createGameLoop } from "../../game-loop/game-loop";
 import { Renderer } from "../../render";
 import { emptyResources } from "../../resource/empty-resources";
 import { ResourceRoot } from "../../resource/resource-root";
@@ -68,7 +68,7 @@ export function generateGameProps(params: GamePropsGeneratorParams): GameProps {
   const resize = resizeStream();
   const pushWindow = pushWindowsStream();
   const renderer = new Renderer(resize);
-  const gameLoop = gameLoopStream();
+  const gameLoop = createGameLoop();
   const hudUIScale = new CssHUDUIScale(renderer.getRendererDOM(), resize);
   return {
     ...params,

@@ -1,11 +1,11 @@
 import "../../src/css/style.css";
 
-import { GlobalTweenGroup } from "../../src/js/animation/global-tween-group";
 import {
   BGMManagerContainer,
   createBGMManager,
 } from "../../src/js/bgm/bgm-manager";
-import { gameLoopStream } from "../../src/js/game-loop/game-loop";
+import { createGameLoop } from "../../src/js/game-loop/game-loop";
+import { GameLoopContainer } from "../../src/js/game-loop/game-loop-container";
 import { ResourcesContainer } from "../../src/js/resource";
 import { developingFullResourceLoading } from "../../src/js/resource/loading/full-resource-loading";
 import { createSEPlayer, SEPlayerContainer } from "../../src/js/se/se-player";
@@ -14,7 +14,8 @@ import { StorybookResourceRoot } from "../storybook-resource-root";
 /** 生成パラメータ */
 type DOMCreatorParams = BGMManagerContainer &
   ResourcesContainer &
-  SEPlayerContainer;
+  SEPlayerContainer &
+  GameLoopContainer;
 
 /**
  * HTML要素生成コールバック関数
@@ -48,11 +49,9 @@ export const domStub =
         resources,
         bgm: createBGMManager(),
         se: createSEPlayer(),
+        gameLoop: createGameLoop(),
       });
       root.appendChild(component);
-    });
-    gameLoopStream().subscribe((action) => {
-      GlobalTweenGroup.update(action.time);
     });
     return root;
   };

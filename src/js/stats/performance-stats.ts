@@ -1,25 +1,28 @@
 import { Unsubscribable } from "rxjs";
 import Stats from "stats.js";
 
-import { gameLoopStream } from "../game-loop/game-loop";
+import { GameLoopContainer } from "../game-loop/game-loop-container";
+
+/** パフォーマンス統計コンストラクタのパラメータ */
+type PerformanceStatsOptions = GameLoopContainer;
 
 /** パフォーマンス統計 */
 export class PerformanceStats {
   /** Statsインスタンス */
   #stats: Stats;
   /** アンサブスクライバ */
-  #unsusbscriber: Unsubscribable;
+  #unsubscriber: Unsubscribable;
 
   /**
    * コンストラクタ
    */
-  constructor() {
+  constructor(options: PerformanceStatsOptions) {
     this.#stats = new Stats();
     this.#stats.dom.style.position = "absolute";
     this.#stats.dom.style.top = "env(safe-area-inset-top)";
     this.#stats.dom.style.left = "max(env(safe-area-inset-left), 10vw)";
     this.#stats.dom.style.right = "auto";
-    this.#unsusbscriber = gameLoopStream().subscribe(() => {
+    this.#unsubscriber = options.gameLoop.subscribe(() => {
       this.#onUpdate();
     });
   }
@@ -28,7 +31,7 @@ export class PerformanceStats {
    * デストラクタ相当の処理
    */
   destructor() {
-    this.#unsusbscriber.unsubscribe();
+    this.#unsubscriber.unsubscribe();
   }
 
   /**

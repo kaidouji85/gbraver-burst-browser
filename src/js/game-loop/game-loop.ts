@@ -1,4 +1,6 @@
-import { Observable, Subject } from "rxjs";
+import { map, Observable, Subject, tap } from "rxjs";
+
+import { GlobalTweenGroup } from "../animation/global-tween-group";
 
 /** ゲームループ */
 export type GameLoop = {
@@ -8,20 +10,21 @@ export type GameLoop = {
 
 /**
  * ゲームループのストリームを生成する
- *
+ * 本ストリームは全体で1つのみ生成すること
  * @returns ゲームループストリーム
  */
-export function gameLoopStream(): Observable<GameLoop> {
-  const source = new Subject<GameLoop>();
-
+export function createGameLoop(): Observable<GameLoop> {
+  const source = new Subject<number>();
   const gameLoop = (time: number) => {
     requestAnimationFrame(gameLoop);
-    source.next({
-      type: "GameLoop",
-      time: time,
-    });
+    source.next(time);
   };
-
   requestAnimationFrame(gameLoop);
-  return source;
+
+  return source.pipe(
+    map((time): GameLoop => ({ type: "GameLoop", time })),
+    // 各ゲームオブジェクト、シーンはグローバルTweenの更新後にゲームループを受け取るようにしたい
+    // そのため、ここでグローバルTweenの更新を行う
+    tap((gameLoop) => GlobalTweenGroup.update(gameLoop.time)),
+  );
 }
