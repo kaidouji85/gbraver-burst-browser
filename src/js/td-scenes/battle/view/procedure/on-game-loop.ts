@@ -20,8 +20,6 @@ export function onGameLoop(props: BattleSceneViewProps, action: GameLoop) {
     renderer,
     safeAreaInset,
   } = props;
-  GlobalTweenGroup.update(action.time);
-
   updateTD.next({
     type: "Update",
     time: action.time,
