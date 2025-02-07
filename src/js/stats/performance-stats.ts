@@ -11,7 +11,7 @@ export class PerformanceStats {
   /** Statsインスタンス */
   #stats: Stats;
   /** アンサブスクライバ */
-  #unsusbscriber: Unsubscribable;
+  #unsubscriber: Unsubscribable;
 
   /**
    * コンストラクタ
@@ -22,7 +22,7 @@ export class PerformanceStats {
     this.#stats.dom.style.top = "env(safe-area-inset-top)";
     this.#stats.dom.style.left = "max(env(safe-area-inset-left), 10vw)";
     this.#stats.dom.style.right = "auto";
-    this.#unsusbscriber = options.gameLoop.subscribe(() => {
+    this.#unsubscriber = options.gameLoop.subscribe(() => {
       this.#onUpdate();
     });
   }
@@ -31,7 +31,7 @@ export class PerformanceStats {
    * デストラクタ相当の処理
    */
   destructor() {
-    this.#unsusbscriber.unsubscribe();
+    this.#unsubscriber.unsubscribe();
   }
 
   /**
