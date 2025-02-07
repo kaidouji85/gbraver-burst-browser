@@ -1,4 +1,6 @@
-import { map, Observable, Subject } from "rxjs";
+import { map, Observable, Subject, tap } from "rxjs";
+
+import { GlobalTweenGroup } from "../animation/global-tween-group";
 
 /** ゲームループ */
 export type GameLoop = {
@@ -18,5 +20,8 @@ export function createGameLoop(): Observable<GameLoop> {
   };
   requestAnimationFrame(gameLoop);
 
-  return source.pipe(map((time) => ({ type: "GameLoop", time })));
+  return source.pipe(
+    map((time): GameLoop => ({ type: "GameLoop", time })),
+    tap((gameLoop) => GlobalTweenGroup.update(gameLoop.time)),
+  );
 }
