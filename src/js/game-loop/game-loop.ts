@@ -10,6 +10,7 @@ export type GameLoop = {
 
 /**
  * ゲームループのストリームを生成する
+ * 本ストリームは全体で1つのみ生成すること
  * @returns ゲームループストリーム
  */
 export function createGameLoop(): Observable<GameLoop> {
