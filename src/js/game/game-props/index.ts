@@ -7,6 +7,7 @@ import { DOMDialogBinder } from "../../dom-dialogs/dom-dialog-binder";
 import { DOMSceneBinder } from "../../dom-scenes/dom-scene-binder";
 import { DOMFader } from "../../game-dom/dom-fader/dom-fader";
 import { GameLoopContainer } from "../../game-loop/game-loop-container";
+import { GameLoopTimeContainer } from "../../game-loop/game-loop-time-container";
 import { Renderer } from "../../render";
 import { ResourcesContainer } from "../../resource";
 import { ResourceRoot } from "../../resource/resource-root";
@@ -31,7 +32,8 @@ export interface GameProps
     ResourcesContainer,
     SEPlayerContainer,
     GameActionManageContainer,
-    Readonly<GameLoopContainer> {
+    Readonly<GameLoopContainer>,
+    Readonly<GameLoopTimeContainer> {
   /** サービスワーカーを利用するか否か、trueで利用する */
   readonly isServiceWorkerUsed: boolean;
   /** APIサーバ系機能が利用可能か否か、trueで利用可能 */

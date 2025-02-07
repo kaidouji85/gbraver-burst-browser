@@ -2,6 +2,7 @@ import { Observable, Subject } from "rxjs";
 import * as THREE from "three";
 
 import { createGameLoop, GameLoop } from "../../src/js/game-loop/game-loop";
+import { createGameLoopTime } from "../../src/js/game-loop/game-loop-time";
 import { PreRender } from "../../src/js/game-loop/pre-render";
 import { Update } from "../../src/js/game-loop/update";
 import {
@@ -78,7 +79,8 @@ export class TDGameObjectStub {
     this.#creator = creator;
     this.#safeAreaInset = createSafeAreaInset();
     this.#resize = resizeStream();
-    this.#gameLoop = createGameLoop();
+    const gameLoopTime = createGameLoopTime();
+    this.#gameLoop = createGameLoop(gameLoopTime);
     this.#update = new Subject();
     this.#preRender = new Subject();
     this.#renderer = new Renderer(this.#resize);

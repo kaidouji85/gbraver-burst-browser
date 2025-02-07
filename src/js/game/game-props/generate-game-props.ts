@@ -7,6 +7,7 @@ import { DOMDialogBinder } from "../../dom-dialogs/dom-dialog-binder";
 import { DOMSceneBinder } from "../../dom-scenes/dom-scene-binder";
 import { DOMFader } from "../../game-dom/dom-fader/dom-fader";
 import { createGameLoop } from "../../game-loop/game-loop";
+import { createGameLoopTime } from "../../game-loop/game-loop-time";
 import { Renderer } from "../../render";
 import { emptyResources } from "../../resource/empty-resources";
 import { ResourceRoot } from "../../resource/resource-root";
@@ -68,7 +69,8 @@ export function generateGameProps(params: GamePropsGeneratorParams): GameProps {
   const resize = resizeStream();
   const pushWindow = pushWindowsStream();
   const renderer = new Renderer(resize);
-  const gameLoop = createGameLoop();
+  const gameLoopTime = createGameLoopTime();
+  const gameLoop = createGameLoop(gameLoopTime);
   const hudUIScale = new CssHUDUIScale(renderer.getRendererDOM(), resize);
   return {
     ...params,
@@ -81,6 +83,7 @@ export function generateGameProps(params: GamePropsGeneratorParams): GameProps {
     resize,
     pushWindow,
     gameLoop,
+    gameLoopTime,
     gameAction: createActionManager<GameAction>(),
     hudUIScale: new CssHUDUIScale(renderer.getRendererDOM(), resize),
     suddenlyBattleEnd: new FutureSuddenlyBattleEnd(),
