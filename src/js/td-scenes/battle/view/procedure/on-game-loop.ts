@@ -1,4 +1,3 @@
-import { GlobalTweenGroup } from "../../../../animation/global-tween-group";
 import { GameLoop } from "../../../../game-loop/game-loop";
 import { BattleSceneViewProps } from "../props";
 import { tracking } from "./tracking";

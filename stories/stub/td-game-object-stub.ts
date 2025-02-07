@@ -1,7 +1,7 @@
 import { Observable, Subject } from "rxjs";
 import * as THREE from "three";
 
-import { createGameLoop,GameLoop } from "../../src/js/game-loop/game-loop";
+import { createGameLoop, GameLoop } from "../../src/js/game-loop/game-loop";
 import { PreRender } from "../../src/js/game-loop/pre-render";
 import { Update } from "../../src/js/game-loop/update";
 import {
