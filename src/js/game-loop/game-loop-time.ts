@@ -12,7 +12,7 @@ export interface GameLoopTime {
    * 本メソッドはrequestAnimationFrameのコールバック内で呼び出すことを想定している
    * @param now 現在時刻、requestAnimationFrameのコールバック内で取得した値を渡す
    */
-  tick: (now: number) => void;
+  tick(now: number): void;
 
   /**
    * ゲームループ上での現在時刻を取得する
