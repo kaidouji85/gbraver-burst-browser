@@ -6,7 +6,7 @@ import { CssHUDUIScale } from "../../css/hud-ui-scale";
 import { DOMDialogBinder } from "../../dom-dialogs/dom-dialog-binder";
 import { DOMSceneBinder } from "../../dom-scenes/dom-scene-binder";
 import { DOMFader } from "../../game-dom/dom-fader/dom-fader";
-import { GameLoop } from "../../game-loop/game-loop";
+import { GameLoopContainer } from "../../game-loop/game-loop-container";
 import { Renderer } from "../../render";
 import { ResourcesContainer } from "../../resource";
 import { ResourceRoot } from "../../resource/resource-root";
@@ -30,7 +30,8 @@ export interface GameProps
   extends BGMManagerContainer,
     ResourcesContainer,
     SEPlayerContainer,
-    GameActionManageContainer {
+    GameActionManageContainer,
+    Readonly<GameLoopContainer> {
   /** サービスワーカーを利用するか否か、trueで利用する */
   readonly isServiceWorkerUsed: boolean;
   /** APIサーバ系機能が利用可能か否か、trueで利用可能 */
@@ -75,8 +76,6 @@ export interface GameProps
   readonly resize: Observable<Resize>;
   /** window押下 */
   readonly pushWindow: Observable<PushWindow>;
-  /** ゲームループ */
-  readonly gameLoop: Observable<GameLoop>;
 
   /** cssカスタムプロパティ --hud-ui-scale */
   readonly hudUIScale: CssHUDUIScale;
