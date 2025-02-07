@@ -1,7 +1,7 @@
 import { Unsubscribable } from "rxjs";
 import Stats from "stats.js";
 
-import { gameLoopStream } from "../game-loop/game-loop";
+import { createGameLoop } from "../game-loop/game-loop";
 
 /** パフォーマンス統計 */
 export class PerformanceStats {
@@ -19,7 +19,7 @@ export class PerformanceStats {
     this.#stats.dom.style.top = "env(safe-area-inset-top)";
     this.#stats.dom.style.left = "max(env(safe-area-inset-left), 10vw)";
     this.#stats.dom.style.right = "auto";
-    this.#unsusbscriber = gameLoopStream().subscribe(() => {
+    this.#unsusbscriber = createGameLoop().subscribe(() => {
       this.#onUpdate();
     });
   }

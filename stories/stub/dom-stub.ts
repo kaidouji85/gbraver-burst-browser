@@ -5,7 +5,7 @@ import {
   BGMManagerContainer,
   createBGMManager,
 } from "../../src/js/bgm/bgm-manager";
-import { gameLoopStream } from "../../src/js/game-loop/game-loop";
+import { createGameLoop } from "../../src/js/game-loop/game-loop";
 import { ResourcesContainer } from "../../src/js/resource";
 import { developingFullResourceLoading } from "../../src/js/resource/loading/full-resource-loading";
 import { createSEPlayer, SEPlayerContainer } from "../../src/js/se/se-player";
@@ -51,7 +51,7 @@ export const domStub =
       });
       root.appendChild(component);
     });
-    gameLoopStream().subscribe((action) => {
+    createGameLoop().subscribe((action) => {
       GlobalTweenGroup.update(action.time);
     });
     return root;

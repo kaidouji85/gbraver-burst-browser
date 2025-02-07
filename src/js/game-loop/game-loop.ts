@@ -1,4 +1,4 @@
-import { Observable, Subject } from "rxjs";
+import { map, Observable, Subject } from "rxjs";
 
 /** ゲームループ */
 export type GameLoop = {
@@ -8,20 +8,15 @@ export type GameLoop = {
 
 /**
  * ゲームループのストリームを生成する
- *
  * @returns ゲームループストリーム
  */
-export function gameLoopStream(): Observable<GameLoop> {
-  const source = new Subject<GameLoop>();
-
+export function createGameLoop(): Observable<GameLoop> {
+  const source = new Subject<number>();
   const gameLoop = (time: number) => {
     requestAnimationFrame(gameLoop);
-    source.next({
-      type: "GameLoop",
-      time: time,
-    });
+    source.next(time);
   };
-
   requestAnimationFrame(gameLoop);
-  return source;
+
+  return source.pipe(map((time) => ({ type: "GameLoop", time })));
 }

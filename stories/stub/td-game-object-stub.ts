@@ -2,7 +2,7 @@ import { Observable, Subject } from "rxjs";
 import * as THREE from "three";
 
 import { GlobalTweenGroup } from "../../src/js/animation/global-tween-group";
-import { GameLoop, gameLoopStream } from "../../src/js/game-loop/game-loop";
+import { GameLoop, createGameLoop } from "../../src/js/game-loop/game-loop";
 import { PreRender } from "../../src/js/game-loop/pre-render";
 import { Update } from "../../src/js/game-loop/update";
 import {
@@ -79,7 +79,7 @@ export class TDGameObjectStub {
     this.#creator = creator;
     this.#safeAreaInset = createSafeAreaInset();
     this.#resize = resizeStream();
-    this.#gameLoop = gameLoopStream();
+    this.#gameLoop = createGameLoop();
     this.#update = new Subject();
     this.#preRender = new Subject();
     this.#renderer = new Renderer(this.#resize);
