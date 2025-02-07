@@ -1,6 +1,7 @@
 import { Subject } from "rxjs";
 
 import { Exclusive } from "../../../../exclusive/exclusive";
+import { GameLoopContainer } from "../../../../game-loop/game-loop-container";
 import { ResourcesContainer } from "../../../../resource";
 import { createEmptySoundResource } from "../../../../resource/sound/empty-sound-resource";
 import { SOUND_IDS } from "../../../../resource/sound/ids";
@@ -11,7 +12,7 @@ import { rootInnerHTML } from "../dom/root-inner-html";
 import { PrivateMatchQRCodeReaderProps } from "../props";
 
 /** プライベートマッチQRコードリーダーのパラメータ */
-export type PropsCreatorParams = ResourcesContainer & SEPlayerContainer;
+export type PropsCreatorParams = ResourcesContainer & SEPlayerContainer & GameLoopContainer;
 
 /**
  * PrivateMatchQRCodeReaderPropsを生成する
@@ -21,7 +22,7 @@ export type PropsCreatorParams = ResourcesContainer & SEPlayerContainer;
 export function createPrivateMatchQRCodeReaderProps(
   params: PropsCreatorParams,
 ): PrivateMatchQRCodeReaderProps {
-  const { resources, se } = params;
+  const { resources, se, gameLoop } = params;
   const root = document.createElement("div");
   root.innerHTML = rootInnerHTML(resources);
   root.className = ROOT_HIDDEN;
@@ -59,5 +60,6 @@ export function createPrivateMatchQRCodeReaderProps(
     notificationOfClose,
 
     exclusive,
+    gameLoop,
   };
 }
