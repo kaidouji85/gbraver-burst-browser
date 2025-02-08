@@ -20,6 +20,7 @@ export function onPilotSkill(
 ): void {
   props.exclusive.execute(async () => {
     action.event.stopPropagation();
+    props.view.dom.hamburgerMenu.close();
     const pilotSkillCommand: PilotSkillCommand = {
       type: "PILOT_SKILL_COMMAND",
     };

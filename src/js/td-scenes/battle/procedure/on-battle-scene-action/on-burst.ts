@@ -20,6 +20,7 @@ export function onBurst(
 ): void {
   props.exclusive.execute(async () => {
     action.event.stopPropagation();
+    props.view.dom.hamburgerMenu.close();
     const burstCommand: BurstCommand = {
       type: "BURST_COMMAND",
     };
