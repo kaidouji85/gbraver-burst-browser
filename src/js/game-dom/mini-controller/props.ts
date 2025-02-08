@@ -8,6 +8,7 @@ import { SoundResource } from "../../resource/sound/resource";
 import { SEPlayerContainer } from "../../se/se-player";
 import { domUuid } from "../../uuid/dom-uuid";
 import { BatteryButton } from "./battery-button";
+import { BatteryPush } from "./battery-button/props";
 import { BurstButton } from "./burst-button";
 import { ROOT_INVISIBLE } from "./dom/class-name";
 import { extractElements } from "./dom/elements";
@@ -27,8 +28,8 @@ export type MiniControllerProps = SEPlayerContainer & {
   burstButton: BurstButton;
   /** パイロットボタン */
   pilotButton: PilotButton;
-  /** バッテリーボタン押下ストリーム、numberはバッテリー値 */
-  batteryPush: Observable<number>;
+  /** バッテリーボタン押下ストリーム */
+  batteryPush: Observable<BatteryPush>;
   /** ボタン押下サウンド */
   pushButtonSound: SoundResource;
 };
