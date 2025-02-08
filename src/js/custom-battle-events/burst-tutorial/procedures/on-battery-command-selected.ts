@@ -64,6 +64,9 @@ export async function onBatteryCommandSelected(
     player.armdozer.battery === player.armdozer.maxBattery;
 
   if (willPlayerDeath && !isPlayerFullBattery && player.armdozer.enableBurst) {
+    props.event.stopPropagation();
+    props.event.preventDefault();
+
     await defense5(props);
     await doBurstToRecoverBattery(props);
     await focusInBurstButton(props, shouldBurst);
@@ -72,6 +75,9 @@ export async function onBatteryCommandSelected(
       cancel: { isCommandCanceled: true },
     };
   } else if (willPlayerDeath && isPlayerFullBattery) {
+    props.event.stopPropagation();
+    props.event.preventDefault();
+
     props.view.hud.gameObjects.batterySelector.toBatterySilently(5);
     await defense5(props);
     if (result.eventState.isLoseIfNoDefense5Complete) {
