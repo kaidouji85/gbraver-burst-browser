@@ -27,6 +27,9 @@ async function executeNoZeroDefenseIfNeeded(
     0 < player.armdozer.battery &&
     props.battery.battery <= 0
   ) {
+    props.event.preventDefault();
+    props.event.stopPropagation();
+
     props.view.hud.gameObjects.batterySelector.toBatterySilently(1);
     await noZeroDefense(props);
     invisibleAllMessageWindows(props);
@@ -52,20 +55,17 @@ type Ret = {
 export async function onBatteryCommandSelected(
   props: Readonly<BatteryCommandSelected & PilotSkillTutorial01Props>,
 ): Promise<Ret> {
+  const { eventState } = props;
   const isNoZeroDefenseExecuted = await executeNoZeroDefenseIfNeeded(props);
   if (isNoZeroDefenseExecuted) {
     return {
-      cancel: {
-        isCommandCanceled: true,
-      },
-      eventState: props.eventState,
+      cancel: { isCommandCanceled: true },
+      eventState,
     };
   }
 
   return {
-    cancel: {
-      isCommandCanceled: false,
-    },
-    eventState: props.eventState,
+    cancel: { isCommandCanceled: false },
+    eventState,
   };
 }
