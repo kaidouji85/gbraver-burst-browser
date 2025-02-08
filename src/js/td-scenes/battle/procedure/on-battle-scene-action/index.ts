@@ -28,17 +28,17 @@ export function onBattleSceneAction(
   } else if (action.type === "decideBattery") {
     onDecideBattery(props, action);
   } else if (action.type === "doBurst") {
-    onBurst(props);
+    onBurst(props, action);
   } else if (action.type === "doPilotSkill") {
-    onPilotSkill(props);
+    onPilotSkill(props, action);
   } else if (action.type === "toggleTimeScale") {
     onToggleTimeScale(props, action);
   } else if (action.type === "decideBatteryByMiniController") {
     onDecideBatteryByMiniController(props, action);
   } else if (action.type === "doBurstByMiniController") {
-    onBurstByMiniController(props);
+    onBurstByMiniController(props, action);
   } else if (action.type === "doPilotSkillByMiniController") {
-    onPilotSkillByMiniController(props);
+    onPilotSkillByMiniController(props, action);
   } else if (action.type === "battleSimulatorStart") {
     onBattleSimulatorStart(props);
   } else if (action.type === "battleSimulatorEnd") {

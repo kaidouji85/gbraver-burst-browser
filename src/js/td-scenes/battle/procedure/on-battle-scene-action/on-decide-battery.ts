@@ -9,7 +9,6 @@ import { progressGame } from "../progress-game";
 
 /**
  * バッテリー決定時の処理
- *
  * @param props 戦闘シーンプロパティ
  * @param action バッテリー決定アクション
  * @returns 処理が完了したら発火するPromise
@@ -19,15 +18,14 @@ export function onDecideBattery(
   action: DecideBattery,
 ): void {
   props.exclusive.execute(async (): Promise<void> => {
-    const batteryCommand: BatteryCommand = {
-      type: "BATTERY_COMMAND",
-      battery: action.battery,
-    };
+    const { battery, event } = action;
+    const batteryCommand: BatteryCommand = { type: "BATTERY_COMMAND", battery };
 
-    const { isCommandCanceled } = await doBatteryEventIfNeeded(
+    const { isCommandCanceled } = await doBatteryEventIfNeeded({
       props,
-      batteryCommand,
-    );
+      battery: batteryCommand,
+      event,
+    });
     if (isCommandCanceled) {
       return;
     }

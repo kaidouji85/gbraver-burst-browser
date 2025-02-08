@@ -19,14 +19,13 @@ export function onDecideBatteryByMiniController(
   action: Readonly<DecideBatteryByMiniController>,
 ): void {
   props.exclusive.execute(async () => {
-    const batteryCommand: BatteryCommand = {
-      type: "BATTERY_COMMAND",
-      battery: action.battery,
-    };
-    const { isCommandCanceled } = await doBatteryEventIfNeeded(
+    const { battery, event } = action;
+    const batteryCommand: BatteryCommand = { type: "BATTERY_COMMAND", battery };
+    const { isCommandCanceled } = await doBatteryEventIfNeeded({
       props,
-      batteryCommand,
-    );
+      battery: batteryCommand,
+      event,
+    });
     if (isCommandCanceled) {
       return;
     }

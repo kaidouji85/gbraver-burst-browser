@@ -1,5 +1,6 @@
 import { BurstCommand } from "gbraver-burst-core";
 
+import { DoBurstByMiniController } from "../../actions/do-burst-by-mini-controller";
 import { decisionByBurstButton } from "../../animation/decision-by-burst-button";
 import { decisionByMiniController } from "../../animation/decision-by-mini-controller";
 import { createAnimationPlay } from "../../play-animation";
@@ -15,15 +16,18 @@ import { progressGame } from "../progress-game";
  */
 export function onBurstByMiniController(
   props: Readonly<BattleSceneProps>,
+  action: Readonly<DoBurstByMiniController>,
 ): void {
   props.exclusive.execute(async () => {
+    const { event } = action;
     const burstCommand: BurstCommand = {
       type: "BURST_COMMAND",
     };
-    const { isCommandCanceled } = await doBurstEventIfNeeded(
+    const { isCommandCanceled } = await doBurstEventIfNeeded({
       props,
-      burstCommand,
-    );
+      burst: burstCommand,
+      event,
+    });
     if (isCommandCanceled) {
       return;
     }

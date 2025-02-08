@@ -1,5 +1,6 @@
 import { PilotSkillCommand } from "gbraver-burst-core";
 
+import { DoPilotSkillByMiniController } from "../../actions/do-pilot-skill-by-mini-controller";
 import { decisionByMiniController } from "../../animation/decision-by-mini-controller";
 import { decisionByPilotButton } from "../../animation/decision-by-pilot-button";
 import { createAnimationPlay } from "../../play-animation";
@@ -15,15 +16,18 @@ import { progressGame } from "../progress-game";
  */
 export function onPilotSkillByMiniController(
   props: Readonly<BattleSceneProps>,
+  action: Readonly<DoPilotSkillByMiniController>,
 ): void {
   props.exclusive.execute(async () => {
+    const { event } = action;
     const pilotSkillCommand: PilotSkillCommand = {
       type: "PILOT_SKILL_COMMAND",
     };
-    const { isCommandCanceled } = await doPilotSkillEventIfNeeded(
+    const { isCommandCanceled } = await doPilotSkillEventIfNeeded({
       props,
-      pilotSkillCommand,
-    );
+      pilot: pilotSkillCommand,
+      event,
+    });
     if (isCommandCanceled) {
       return;
     }
