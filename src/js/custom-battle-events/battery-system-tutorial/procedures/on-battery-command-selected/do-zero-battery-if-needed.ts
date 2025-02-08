@@ -43,6 +43,11 @@ export async function doZeroBatteryIdNeeded(
     return null;
   }
 
+  // 以降はなんらかしらのイベントが発生する想定なので、
+  // メッセージ即送りを防ぐためにイベント伝搬を止めている
+  props.event.preventDefault();
+  props.event.stopPropagation();
+
   const isZeroBattery = player.armdozer.battery === 0;
   const enableBurst = player.armdozer.enableBurst;
   const enablePilotSkill = player.pilot.enableSkill;
