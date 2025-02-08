@@ -13,14 +13,23 @@ export function notifyBattleAction(
 ): Observable<BattleSceneAction> {
   const { miniController, hamburgerMenu } = props;
   return merge(
-    miniController
-      .batteryPushNotifier()
-      .pipe(
-        map((v) => ({ type: "decideBatteryByMiniController", ...v }) as const),
+    miniController.batteryPushNotifier().pipe(
+      map(
+        ({ battery, event }) =>
+          ({
+            type: "decideBatteryByMiniController",
+            battery,
+            event,
+          }) as const,
       ),
+    ),
     miniController
       .burstPushNotifier()
-      .pipe(map(() => ({ type: "doBurstByMiniController" }) as const)),
+      .pipe(
+        map(
+          ({ event }) => ({ type: "doBurstByMiniController", event }) as const,
+        ),
+      ),
     miniController
       .pilotPushNotifier()
       .pipe(map(() => ({ type: "doPilotSkillByMiniController" }) as const)),

@@ -12,6 +12,7 @@ import {
   PropsCreatorParams,
 } from "./props";
 import { BatteryPush } from "./battery-button/props";
+import { BurstPush } from "./burst-button/props";
 
 /** コンストラクタのパラメータ */
 export type MiniControllerParams = PropsCreatorParams;
@@ -95,7 +96,7 @@ export class MiniController {
    * バーストボタン押下通知
    * @returns 通知ストリーム
    */
-  burstPushNotifier(): Observable<void> {
+  burstPushNotifier(): Observable<BurstPush> {
     return this.#props.burstButton.pushNotifier();
   }
 

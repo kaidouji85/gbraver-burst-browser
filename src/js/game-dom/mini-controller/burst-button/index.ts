@@ -3,7 +3,7 @@ import { Observable, Unsubscribable } from "rxjs";
 import { BurstButtonConfig } from "./config";
 import { bindEventListeners } from "./procedure/bind-event-listeners";
 import { engage } from "./procedure/engage";
-import { BurstButtonProps, createBurstButtonProps } from "./props";
+import { BurstButtonProps, BurstPush, createBurstButtonProps } from "./props";
 
 /** バーストボタン */
 export class BurstButton {
@@ -41,7 +41,7 @@ export class BurstButton {
    * ボタン押下通知
    * @returns 通知ストリーム
    */
-  pushNotifier(): Observable<void> {
+  pushNotifier(): Observable<BurstPush> {
     return this.#props.push;
   }
 
