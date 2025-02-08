@@ -10,7 +10,9 @@ export function onBatteryPush(
   props: Readonly<BatteryButtonProps>,
   action: Readonly<PushDOM>,
 ): void {
-  action.event.preventDefault();
-  action.event.stopPropagation();
-  props.batteryPush.next(props.battery);
+  const { battery, batteryPush } = props;
+  const { event } = action;
+  event.preventDefault();
+  event.stopPropagation();
+  batteryPush.next({ battery, event });
 }

@@ -13,6 +13,7 @@ import { ROOT_INVISIBLE } from "./dom/class-name";
 import { extractElements } from "./dom/elements";
 import { rootInnerHTML } from "./dom/root-inner-html";
 import { PilotButton } from "./pilot-button";
+import {BatteryPush} from "./battery-button/props";
 
 /** バッテリーボタン最大個数 */
 const MAX_BATTERY_BUTTON = 9;
@@ -27,8 +28,8 @@ export type MiniControllerProps = SEPlayerContainer & {
   burstButton: BurstButton;
   /** パイロットボタン */
   pilotButton: PilotButton;
-  /** バッテリーボタン押下ストリーム、numberはバッテリー値 */
-  batteryPush: Observable<number>;
+  /** バッテリーボタン押下ストリーム */
+  batteryPush: Observable<BatteryPush>;
   /** ボタン押下サウンド */
   pushButtonSound: SoundResource;
 };

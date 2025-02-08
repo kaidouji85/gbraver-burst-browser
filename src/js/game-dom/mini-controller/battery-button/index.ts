@@ -3,7 +3,11 @@ import { Observable, Unsubscribable } from "rxjs";
 import { BatteryButtonConfig } from "./config";
 import { bindEventListeners } from "./procedure/bind-event-lisnters";
 import { engage } from "./procedure/engage";
-import { BatteryButtonProps, createBatteryButtonProps } from "./props";
+import {
+  BatteryButtonProps,
+  BatteryPush,
+  createBatteryButtonProps,
+} from "./props";
 
 /** バッテリーボタン */
 export class BatteryButton {
@@ -39,10 +43,10 @@ export class BatteryButton {
   }
 
   /**
-   * バッテリー押下通知、numberはバッテリー値がセットされる
+   * バッテリー押下通知
    * @returns 通知ストリーム
    */
-  pushNotifier(): Observable<number> {
+  pushNotifier(): Observable<BatteryPush> {
     return this.#props.batteryPush;
   }
 

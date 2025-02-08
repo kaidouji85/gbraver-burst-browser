@@ -25,7 +25,7 @@ const miniControllerStory = (config: ButtonConfig) =>
         .chain(delay(2000))
         .chain(controller.show())
         .play();
-    controller.batteryPushNotifier().subscribe((battery) => {
+    controller.batteryPushNotifier().subscribe(({ battery }) => {
       console.log(`battery ${battery}`);
       decide();
     });

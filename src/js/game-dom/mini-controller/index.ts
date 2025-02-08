@@ -11,6 +11,7 @@ import {
   MiniControllerProps,
   PropsCreatorParams,
 } from "./props";
+import { BatteryPush } from "./battery-button/props";
 
 /** コンストラクタのパラメータ */
 export type MiniControllerParams = PropsCreatorParams;
@@ -84,9 +85,9 @@ export class MiniController {
 
   /**
    * バッテリーボタン押下通知
-   * @returns 通知ストリーム、numberはバッテリー値
+   * @returns 通知ストリーム
    */
-  batteryPushNotifier(): Observable<number> {
+  batteryPushNotifier(): Observable<BatteryPush> {
     return this.#props.batteryPush;
   }
 

@@ -16,10 +16,7 @@ export function notifyBattleAction(
     miniController
       .batteryPushNotifier()
       .pipe(
-        map(
-          (battery) =>
-            ({ type: "decideBatteryByMiniController", battery }) as const,
-        ),
+        map((v) => ({ type: "decideBatteryByMiniController", ...v }) as const),
       ),
     miniController
       .burstPushNotifier()
