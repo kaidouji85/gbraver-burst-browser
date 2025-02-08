@@ -20,6 +20,7 @@ export function onDecideBattery(
 ): void {
   props.exclusive.execute(async (): Promise<void> => {
     action.event.stopPropagation();
+    props.view.dom.hamburgerMenu.close();
     const batteryCommand: BatteryCommand = {
       type: "BATTERY_COMMAND",
       battery: action.battery,

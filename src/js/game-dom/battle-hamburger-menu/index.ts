@@ -1,6 +1,7 @@
 import { Observable, Unsubscribable } from "rxjs";
 
 import { bindEventListeners } from "./procedure/bind-event-listeners";
+import { close } from "./procedure/close";
 import {
   BattleHamburgerMenuPropsCreatorParams,
   createBattleHamburgerMenuProps,
@@ -42,6 +43,13 @@ export class BattleHamburgerMenu {
    */
   hidden() {
     hidden(this.#props);
+  }
+
+  /**
+   * メニューを閉じる
+   */
+  close() {
+    close(this.#props);
   }
 
   /**
