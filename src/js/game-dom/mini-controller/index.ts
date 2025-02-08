@@ -1,7 +1,10 @@
 import { Observable } from "rxjs";
 
 import { Animate } from "../../animation/animate";
+import { BatteryPush } from "./battery-button/props";
+import { BurstPush } from "./burst-button/props";
 import { ButtonConfig } from "./button-config";
+import { PilotPush } from "./pilot-button/props";
 import { decided } from "./procedure/decided";
 import { engageButtonConfig } from "./procedure/engage-button-config";
 import { hidden } from "./procedure/hidden";
@@ -11,9 +14,6 @@ import {
   MiniControllerProps,
   PropsCreatorParams,
 } from "./props";
-import { BatteryPush } from "./battery-button/props";
-import { BurstPush } from "./burst-button/props";
-import { PilotPush } from "./pilot-button/props";
 
 /** コンストラクタのパラメータ */
 export type MiniControllerParams = PropsCreatorParams;

@@ -8,12 +8,12 @@ import { SoundResource } from "../../resource/sound/resource";
 import { SEPlayerContainer } from "../../se/se-player";
 import { domUuid } from "../../uuid/dom-uuid";
 import { BatteryButton } from "./battery-button";
+import { BatteryPush } from "./battery-button/props";
 import { BurstButton } from "./burst-button";
 import { ROOT_INVISIBLE } from "./dom/class-name";
 import { extractElements } from "./dom/elements";
 import { rootInnerHTML } from "./dom/root-inner-html";
 import { PilotButton } from "./pilot-button";
-import {BatteryPush} from "./battery-button/props";
 
 /** バッテリーボタン最大個数 */
 const MAX_BATTERY_BUTTON = 9;
