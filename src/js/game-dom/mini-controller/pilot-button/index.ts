@@ -3,7 +3,7 @@ import { Observable, Unsubscribable } from "rxjs";
 import { PilotButtonConfig } from "./config";
 import { bindEventListeners } from "./procedure/bind-event-listeners";
 import { engage } from "./procedure/engage";
-import { createPilotButtonProps, PilotButtonProps } from "./props";
+import { createPilotButtonProps, PilotButtonProps, PilotPush } from "./props";
 
 /** パイロットボタン */
 export class PilotButton {
@@ -41,7 +41,7 @@ export class PilotButton {
    * ボタン押下通知
    * @returns 通知ストリーム
    */
-  pushNotifier(): Observable<void> {
+  pushNotifier(): Observable<PilotPush> {
     return this.#props.push;
   }
 

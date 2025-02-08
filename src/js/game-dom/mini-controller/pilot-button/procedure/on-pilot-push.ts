@@ -10,7 +10,9 @@ export function onPilotPush(
   props: Readonly<PilotButtonProps>,
   action: Readonly<PushDOM>,
 ): void {
-  action.event.preventDefault();
-  action.event.stopPropagation();
-  props.push.next();
+  const { push } = props;
+  const { event } = action;
+  event.preventDefault();
+  event.stopPropagation();
+  push.next({ event });
 }

@@ -13,6 +13,7 @@ import {
 } from "./props";
 import { BatteryPush } from "./battery-button/props";
 import { BurstPush } from "./burst-button/props";
+import { PilotPush } from "./pilot-button/props";
 
 /** コンストラクタのパラメータ */
 export type MiniControllerParams = PropsCreatorParams;
@@ -104,7 +105,7 @@ export class MiniController {
    * パイロットボタン押下通知
    * @returns 通知ストリーム
    */
-  pilotPushNotifier(): Observable<void> {
+  pilotPushNotifier(): Observable<PilotPush> {
     return this.#props.pilotButton.pushNotifier();
   }
 }

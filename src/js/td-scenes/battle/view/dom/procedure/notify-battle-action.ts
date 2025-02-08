@@ -32,7 +32,12 @@ export function notifyBattleAction(
       ),
     miniController
       .pilotPushNotifier()
-      .pipe(map(() => ({ type: "doPilotSkillByMiniController" }) as const)),
+      .pipe(
+        map(
+          ({ event }) =>
+            ({ type: "doPilotSkillByMiniController", event }) as const,
+        ),
+      ),
     hamburgerMenu
       .notifyBattleSimulatorStart()
       .pipe(map(() => ({ type: "battleSimulatorStart" }) as const)),
