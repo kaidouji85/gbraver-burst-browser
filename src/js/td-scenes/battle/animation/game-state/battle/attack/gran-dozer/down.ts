@@ -17,13 +17,18 @@ type DownResult = NormalHit | CriticalHit | Guard;
  */
 export function down(param: GranDozerBattle<DownResult>): Animate {
   return all(
-    param.attackerSprite.armHammerCharge().chain(delay(500)),
+    param.attackerSprite.charge().chain(delay(500)),
     focusToAttacker(param.tdCamera, param.attackerSprite),
-  )
-    .chain(param.attackerSprite.armHammerAttack())
-    .chain(
+  ).chain(
+    all(
+      param.attackerSprite
+        .tackle()
+        .chain(delay(1500))
+        .chain(param.attackerSprite.tackleToStand())
+        .chain(delay(500)),
+    ),
+    delay(100).chain(
       all(
-        delay(1500).chain(param.attackerSprite.hmToStand()).chain(delay(500)),
         param.attackerHUD.resultIndicator
           .slideIn()
           .chain(delay(500))
@@ -34,5 +39,6 @@ export function down(param: GranDozerBattle<DownResult>): Animate {
         param.defenderTD.hitMark.shockWave.popUp(),
         param.defenderHUD.gauge.hp(param.defenderState.armdozer.hp),
       ),
-    );
+    ),
+  );
 }
