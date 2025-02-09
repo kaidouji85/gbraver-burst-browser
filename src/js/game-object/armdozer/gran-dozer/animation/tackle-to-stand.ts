@@ -10,11 +10,23 @@ import { GranDozerAnimationProps } from "./animation-props";
  */
 export function tackleToStand(props: GranDozerAnimationProps): Animate {
   const { model, se, sounds } = props;
-  return tween(model.animation, (t) =>
-    t.to({ frame: 0 }, 300).onStart(() => {
+  return tween(model, (t) =>
+    t.to({ animation: { frame: 0 } }, 300).onStart(() => {
       se.play(sounds.motor);
     }),
   ).chain(
-    tween(model.position, (t) => t.to({ z: ARMDOZER_SPRITE_STANDARD_Z }, 0)),
+    tween(model, (t) =>
+      t
+        .to(
+          {
+            position: { z: ARMDOZER_SPRITE_STANDARD_Z },
+            animation: { frame: 0 },
+          },
+          0,
+        )
+        .onStart(() => {
+          model.animation.type = "STAND";
+        }),
+    ),
   );
 }

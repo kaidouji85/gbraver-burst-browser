@@ -1,6 +1,6 @@
 import { Animate } from "../../../../animation/animate";
 import { tween } from "../../../../animation/tween";
-import {ARMDOZER_SPRITE_ATTACKER_Z} from "../../position";
+import { ARMDOZER_SPRITE_ATTACKER_Z } from "../../position";
 import { GranDozerAnimationProps } from "./animation-props";
 
 /**
@@ -14,7 +14,7 @@ export function tackle(props: GranDozerAnimationProps): Animate {
     t
       .to(
         {
-          animation: { frame: 0 },
+          animation: { frame: 1 },
           position: { z: ARMDOZER_SPRITE_ATTACKER_Z },
         },
         0,
@@ -23,6 +23,6 @@ export function tackle(props: GranDozerAnimationProps): Animate {
         model.animation.type = "TACKLE";
       }),
   )
-    .chain(tween(model.position, (t) => t.to({ x: "-500" }, 300)))
-    .chain(tween(model.position, (t) => t.to({ x: "+500" }, 300)));
+    .chain(tween(model.position, (t) => t.to({ x: "-200" }, 100)))
+    .chain(tween(model.position, (t) => t.to({ x: "+100" }, 50)));
 }
