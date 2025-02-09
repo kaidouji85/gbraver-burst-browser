@@ -14,7 +14,7 @@ const MESH_HEIGHT = 920;
 /** オフセット座標 */
 const OFFSET = {
   x: 80,
-  y: 170,
+  y: 165,
 };
 
 /** アウトラインの太さ */
