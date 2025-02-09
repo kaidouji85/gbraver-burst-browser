@@ -84,3 +84,44 @@ export const enemyActiveArmHammer: StoryFn = armdozerSpriteStub(
   EnemyGranDozer,
   activeArmHammer,
 );
+
+/**
+ * チャージ
+ * @param sprite スプライト
+ */
+const tackle = (sprite: GranDozer) => {
+  delay(1000)
+    .chain(sprite.charge())
+    .chain(delay(1000))
+    .chain(sprite.tackle())
+    .chain(delay(1000))
+    .chain(sprite.tackleToStand())
+    .loop();
+};
+
+/** プレイヤー タックル */
+export const playerTackle: StoryFn = armdozerSpriteStub(
+  PlayerGranDozer,
+  tackle,
+);
+
+/** プレイヤー アクティブ タックル */
+export const playerActiveTackle: StoryFn = armdozerSpriteStub(
+  PlayerGranDozer,
+  (sprite) => {
+    tackle(sprite);
+    sprite.startActive().play();
+  },
+);
+
+/** 敵 タックル */
+export const enemyTackle: StoryFn = armdozerSpriteStub(EnemyGranDozer, tackle);
+
+/** 敵 アクティブ タックル */
+export const enemyActiveTackle: StoryFn = armdozerSpriteStub(
+  EnemyGranDozer,
+  (sprite) => {
+    tackle(sprite);
+    sprite.startActive().play();
+  },
+);
