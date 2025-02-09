@@ -9,8 +9,5 @@ import { tackle } from "./tackle";
  * @returns 生成結果
  */
 export function createAllMeshes(resources: Resources): AnimationMesh[] {
-  return [
-    ...stand(resources),
-    ...tackle(resources),
-  ];
+  return [...stand(resources), ...tackle(resources)];
 }
