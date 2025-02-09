@@ -19,16 +19,15 @@ export function down(param: GranDozerBattle<DownResult>): Animate {
   return all(
     param.attackerSprite.charge().chain(delay(500)),
     focusToAttacker(param.tdCamera, param.attackerSprite),
-  ).chain(
-    all(
-      param.attackerSprite
-        .tackle()
-        .chain(delay(1500))
-        .chain(param.attackerSprite.tackleToStand())
-        .chain(delay(500)),
-    ),
-    delay(100).chain(
+  )
+    .chain(param.attackerSprite.tackle())
+    .chain(
       all(
+        param.attackerSprite
+          .tackleRecoil()
+          .chain(delay(1500))
+          .chain(param.attackerSprite.tackleToStand())
+          .chain(delay(500)),
         param.attackerHUD.resultIndicator
           .slideIn()
           .chain(delay(500))
@@ -39,6 +38,5 @@ export function down(param: GranDozerBattle<DownResult>): Animate {
         param.defenderTD.hitMark.shockWave.popUp(),
         param.defenderHUD.gauge.hp(param.defenderState.armdozer.hp),
       ),
-    ),
-  );
+    );
 }
