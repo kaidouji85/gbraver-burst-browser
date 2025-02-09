@@ -15,6 +15,9 @@ import {
   GranDozerPropsCreatorOptions,
 } from "./props/create-gran-dozer-props";
 import { GranDozerProps } from "./props/gran-dozer-props";
+import { charge } from "./animation/charge";
+import { tackle } from "./animation/tackle";
+import { tackleToStand } from "./animation/tackle-to-stand";
 
 /** オプション */
 type Options = GranDozerPropsCreatorOptions & {
@@ -53,6 +56,31 @@ export class GranDozer extends EmptyArmdozerSprite {
   }
 
   /**
+   * チャージ
+   * @returns アニメーション
+   */
+  charge(): Animate {
+    return charge(this.#props);
+  }
+
+  /**
+   * タックル
+   * @returns アニメーション
+   */
+  tackle(): Animate {
+    return tackle(this.#props);
+  }
+
+  /**
+   * タックル -> 立ち
+   * @returns アニメーション
+   */
+  tackleToStand(): Animate {
+    return tackleToStand(this.#props);
+  }
+
+  /**
+   * @deprecated
    * アームハンマー チャージ
    * @returns アニメーション
    */
@@ -61,6 +89,7 @@ export class GranDozer extends EmptyArmdozerSprite {
   }
 
   /**
+   * @deprecated
    * アームハンマー アタック
    * @returns アニメーション
    */
@@ -69,6 +98,7 @@ export class GranDozer extends EmptyArmdozerSprite {
   }
 
   /**
+   * @deprecated
    * アームハンマー -> 立ち
    * @returns アニメーション
    */
