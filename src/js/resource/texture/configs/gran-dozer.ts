@@ -19,4 +19,8 @@ export const GranDozerTextureConfigs: TextureConfig[] = [
     id: TEXTURE_IDS.GRAN_DOZER_HM_TO_STAND,
     path: "armdozer/gran-dozer/hm-to-stand.webp",
   },
+  {
+    id: TEXTURE_IDS.GRAN_DOZER_TACKLE,
+    path: "armdozer/gran-dozer/tackle.webp",
+  },
 ];
