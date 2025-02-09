@@ -39,48 +39,43 @@ export const enemyActiveStand: StoryFn = armdozerSpriteStub(
 );
 
 /**
- * アームハンマー
+ * タックル
  * @param sprite スプライト
  */
-const armHammer = (sprite: GranDozer) => {
+const tackle = (sprite: GranDozer) => {
   delay(1000)
-    .chain(sprite.armHammerCharge())
+    .chain(sprite.charge())
     .chain(delay(1000))
-    .chain(sprite.armHammerAttack())
+    .chain(sprite.tackle())
+    .chain(sprite.tackleRecoil())
     .chain(delay(1000))
-    .chain(sprite.hmToStand())
+    .chain(sprite.tackleToStand())
     .loop();
 };
 
-/**
- * アクティブ アームハンマー
- * @param sprite スプライト
- */
-const activeArmHammer = (sprite: GranDozer) => {
-  armHammer(sprite);
-  sprite.startActive().play();
-};
-
-/** プレイヤー アームハンマー */
-export const playerArmHammer: StoryFn = armdozerSpriteStub(
+/** プレイヤー タックル */
+export const playerTackle: StoryFn = armdozerSpriteStub(
   PlayerGranDozer,
-  armHammer,
+  tackle,
 );
 
-/** プレイヤー アクティブ アームハンマー */
-export const playerActiveArmHammer: StoryFn = armdozerSpriteStub(
+/** プレイヤー アクティブ タックル */
+export const playerActiveTackle: StoryFn = armdozerSpriteStub(
   PlayerGranDozer,
-  activeArmHammer,
+  (sprite) => {
+    tackle(sprite);
+    sprite.startActive().play();
+  },
 );
 
-/** 敵 アームハンマー */
-export const enemyArmHammer: StoryFn = armdozerSpriteStub(
-  EnemyGranDozer,
-  armHammer,
-);
+/** 敵 タックル */
+export const enemyTackle: StoryFn = armdozerSpriteStub(EnemyGranDozer, tackle);
 
-/** 敵 アクティブ アームハンマー */
-export const enemyActiveArmHammer: StoryFn = armdozerSpriteStub(
+/** 敵 アクティブ タックル */
+export const enemyActiveTackle: StoryFn = armdozerSpriteStub(
   EnemyGranDozer,
-  activeArmHammer,
+  (sprite) => {
+    tackle(sprite);
+    sprite.startActive().play();
+  },
 );

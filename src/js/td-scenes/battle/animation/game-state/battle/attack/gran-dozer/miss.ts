@@ -11,11 +11,11 @@ import { GranDozerBattle } from "./gran-dozer-battle";
  */
 export function miss(param: GranDozerBattle<Miss>): Animate {
   return param.attackerSprite
-    .armHammerCharge()
+    .charge()
     .chain(delay(500))
-    .chain(param.attackerSprite.armHammerAttack())
+    .chain(param.attackerSprite.tackle())
     .chain(param.defenderSprite.avoid())
     .chain(delay(500))
-    .chain(param.attackerSprite.hmToStand())
+    .chain(param.attackerSprite.tackleToStand())
     .chain(delay(500));
 }

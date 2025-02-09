@@ -4,24 +4,23 @@ import { ARMDOZER_SPRITE_ATTACKER_Z } from "../../position";
 import { GranDozerAnimationProps } from "./animation-props";
 
 /**
- * アームハンマー チャージ
+ * タックル
  * @param props アニメーションプロパティ
  * @returns アニメーション
  */
-export function armHammerCharge(props: GranDozerAnimationProps): Animate {
-  const { model, sounds, se } = props;
+export function tackle(props: GranDozerAnimationProps): Animate {
+  const { model } = props;
   return tween(model, (t) =>
     t
       .to(
         {
-          animation: { frame: 0 },
+          animation: { frame: 1 },
           position: { z: ARMDOZER_SPRITE_ATTACKER_Z },
         },
         0,
       )
       .onStart(() => {
-        model.animation.type = "HM_CHARGE";
-        se.play(sounds.motor);
+        model.animation.type = "TACKLE";
       }),
-  ).chain(tween(model.animation, (t) => t.to({ frame: 1 }, 300)));
+  ).chain(tween(model.position, (t) => t.to({ x: "-200" }, 100)));
 }

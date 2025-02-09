@@ -4,11 +4,12 @@ import * as THREE from "three";
 import { Animate } from "../../../animation/animate";
 import { GameObjectAction } from "../../action/game-object-action";
 import { EmptyArmdozerSprite } from "../empty-armdozer-sprite";
-import { armHammerAttack } from "./animation/arm-hammer-attack";
-import { armHammerCharge } from "./animation/arm-hammer-charge";
+import { charge } from "./animation/charge";
 import { endActive } from "./animation/end-active";
-import { hmToStand } from "./animation/hm-to-stand";
 import { startActive } from "./animation/start-active";
+import { tackle } from "./animation/tackle";
+import { tackleRecoil } from "./animation/tackle-recoil";
+import { tackleToStand } from "./animation/tackle-to-stand";
 import { bindEventListeners } from "./procedure/bind-event-listeners";
 import {
   createGranDozerProps,
@@ -53,27 +54,35 @@ export class GranDozer extends EmptyArmdozerSprite {
   }
 
   /**
-   * アームハンマー チャージ
+   * チャージ
    * @returns アニメーション
    */
-  armHammerCharge(): Animate {
-    return armHammerCharge(this.#props);
+  charge(): Animate {
+    return charge(this.#props);
   }
 
   /**
-   * アームハンマー アタック
+   * タックル
    * @returns アニメーション
    */
-  armHammerAttack(): Animate {
-    return armHammerAttack(this.#props);
+  tackle(): Animate {
+    return tackle(this.#props);
   }
 
   /**
-   * アームハンマー -> 立ち
+   * タックル反動
    * @returns アニメーション
    */
-  hmToStand(): Animate {
-    return hmToStand(this.#props);
+  tackleRecoil(): Animate {
+    return tackleRecoil(this.#props);
+  }
+
+  /**
+   * タックル -> 立ち
+   * @returns アニメーション
+   */
+  tackleToStand(): Animate {
+    return tackleToStand(this.#props);
   }
 
   /** @override */

@@ -17,13 +17,17 @@ type AttackResult = NormalHit | CriticalHit;
  */
 export function attack(param: GranDozerBattle<AttackResult>): Animate {
   return all(
-    param.attackerSprite.armHammerCharge().chain(delay(500)),
+    param.attackerSprite.charge().chain(delay(500)),
     focusToAttacker(param.tdCamera, param.attackerSprite),
   )
-    .chain(param.attackerSprite.armHammerAttack())
+    .chain(param.attackerSprite.tackle())
     .chain(
       all(
-        delay(1000).chain(param.attackerSprite.hmToStand()).chain(delay(500)),
+        param.attackerSprite
+          .tackleRecoil()
+          .chain(delay(1000))
+          .chain(param.attackerSprite.tackleToStand())
+          .chain(delay(500)),
         toInitial(param.tdCamera, 100),
         param.defenderTD.damageIndicator.popUp(param.result.damage),
         param.defenderSprite.knockBack(),
