@@ -62,10 +62,10 @@
 
 .armdozer-bust-shot__gran-dozer {
   position: fixed;
-  top: -50vh;
-  top: -50dvh;
-  right: -80vh;
-  right: -80dvh;
+  top: -40vh;
+  top: -40dvh;
+  right: -70vh;
+  right: -70dvh;
   width: 250vh;
   width: 250dvh;
   height: 250vh;
