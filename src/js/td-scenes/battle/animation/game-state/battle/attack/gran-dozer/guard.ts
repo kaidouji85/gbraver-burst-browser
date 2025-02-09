@@ -4,6 +4,8 @@ import { all } from "../../../../../../../animation/all";
 import { Animate } from "../../../../../../../animation/animate";
 import { delay } from "../../../../../../../animation/delay";
 import { GranDozerBattle } from "./gran-dozer-battle";
+import { focusToAttacker } from "./focus-to-attacker";
+import { toInitial } from "../../../../td-camera";
 
 /**
  * ガード
@@ -11,17 +13,25 @@ import { GranDozerBattle } from "./gran-dozer-battle";
  * @returns アニメーション
  */
 export function guard(param: GranDozerBattle<Guard>): Animate {
-  return param.attackerSprite
-    .armHammerCharge()
-    .chain(delay(500))
-    .chain(param.attackerSprite.armHammerAttack())
-    .chain(
+  return all(
+    param.attackerSprite.charge().chain(delay(500)),
+    focusToAttacker(param.tdCamera, param.attackerSprite),
+  ).chain(
+    all(
+      param.attackerSprite
+        .tackle()
+        .chain(delay(1000))
+        .chain(param.attackerSprite.tackleToStand())
+        .chain(delay(500)),
+    ),
+    delay(100).chain(
       all(
-        delay(1000).chain(param.attackerSprite.hmToStand()).chain(delay(500)),
+        toInitial(param.tdCamera, 100),
         param.defenderTD.damageIndicator.popUp(param.result.damage),
         param.defenderSprite.guard(),
         param.defenderTD.hitMark.shockWave.popUp(),
         param.defenderHUD.gauge.hp(param.defenderState.armdozer.hp),
       ),
-    );
+    ),
+  );
 }
