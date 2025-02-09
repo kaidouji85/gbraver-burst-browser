@@ -1,6 +1,9 @@
 import { Animate } from "../../../../animation/animate";
 import { tween } from "../../../../animation/tween";
-import { ARMDOZER_SPRITE_STANDARD_Z } from "../../position";
+import {
+  ARMDOZER_EFFECT_STANDARD_X,
+  ARMDOZER_SPRITE_STANDARD_Z,
+} from "../../position";
 import { GranDozerAnimationProps } from "./animation-props";
 
 /**
@@ -11,9 +14,17 @@ import { GranDozerAnimationProps } from "./animation-props";
 export function tackleToStand(props: GranDozerAnimationProps): Animate {
   const { model, se, sounds } = props;
   return tween(model, (t) =>
-    t.to({ animation: { frame: 0 } }, 300).onStart(() => {
-      se.play(sounds.motor);
-    }),
+    t
+      .to(
+        {
+          animation: { frame: 0 },
+          position: { x: ARMDOZER_EFFECT_STANDARD_X },
+        },
+        300,
+      )
+      .onStart(() => {
+        se.play(sounds.motor);
+      }),
   ).chain(
     tween(model, (t) =>
       t

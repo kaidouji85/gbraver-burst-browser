@@ -94,6 +94,7 @@ const tackle = (sprite: GranDozer) => {
     .chain(sprite.charge())
     .chain(delay(1000))
     .chain(sprite.tackle())
+    .chain(sprite.tackleRecoil())
     .chain(delay(1000))
     .chain(sprite.tackleToStand())
     .loop();

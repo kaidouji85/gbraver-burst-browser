@@ -22,7 +22,5 @@ export function tackle(props: GranDozerAnimationProps): Animate {
       .onStart(() => {
         model.animation.type = "TACKLE";
       }),
-  )
-    .chain(tween(model.position, (t) => t.to({ x: "-200" }, 100)))
-    .chain(tween(model.position, (t) => t.to({ x: "+100" }, 50)));
+  ).chain(tween(model.position, (t) => t.to({ x: "-200" }, 100)));
 }

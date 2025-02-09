@@ -6,18 +6,19 @@ import { GameObjectAction } from "../../action/game-object-action";
 import { EmptyArmdozerSprite } from "../empty-armdozer-sprite";
 import { armHammerAttack } from "./animation/arm-hammer-attack";
 import { armHammerCharge } from "./animation/arm-hammer-charge";
+import { charge } from "./animation/charge";
 import { endActive } from "./animation/end-active";
 import { hmToStand } from "./animation/hm-to-stand";
 import { startActive } from "./animation/start-active";
+import { tackle } from "./animation/tackle";
+import { tackleRecoil } from "./animation/tackle-recoil";
+import { tackleToStand } from "./animation/tackle-to-stand";
 import { bindEventListeners } from "./procedure/bind-event-listeners";
 import {
   createGranDozerProps,
   GranDozerPropsCreatorOptions,
 } from "./props/create-gran-dozer-props";
 import { GranDozerProps } from "./props/gran-dozer-props";
-import { charge } from "./animation/charge";
-import { tackle } from "./animation/tackle";
-import { tackleToStand } from "./animation/tackle-to-stand";
 
 /** オプション */
 type Options = GranDozerPropsCreatorOptions & {
@@ -69,6 +70,14 @@ export class GranDozer extends EmptyArmdozerSprite {
    */
   tackle(): Animate {
     return tackle(this.#props);
+  }
+
+  /**
+   * タックル反動
+   * @returns アニメーション
+   */
+  tackleRecoil(): Animate {
+    return tackleRecoil(this.#props);
   }
 
   /**
