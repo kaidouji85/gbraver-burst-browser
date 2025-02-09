@@ -4,6 +4,7 @@ import { hmAttack } from "./hm-attack";
 import { hmCharge } from "./hm-charge";
 import { hmToStand } from "./hm-to-stand";
 import { stand } from "./stand";
+import { tackle } from "./tackle";
 
 /**
  * ビューで利用するすべてのメッシュを生成する
@@ -16,5 +17,6 @@ export function createAllMeshes(resources: Resources): AnimationMesh[] {
     ...hmCharge(resources),
     ...hmAttack(resources),
     ...hmToStand(resources),
+    ...tackle(resources),
   ];
 }
