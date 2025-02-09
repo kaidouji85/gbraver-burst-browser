@@ -4,11 +4,8 @@ import * as THREE from "three";
 import { Animate } from "../../../animation/animate";
 import { GameObjectAction } from "../../action/game-object-action";
 import { EmptyArmdozerSprite } from "../empty-armdozer-sprite";
-import { armHammerAttack } from "./animation/arm-hammer-attack";
-import { armHammerCharge } from "./animation/arm-hammer-charge";
 import { charge } from "./animation/charge";
 import { endActive } from "./animation/end-active";
-import { hmToStand } from "./animation/hm-to-stand";
 import { startActive } from "./animation/start-active";
 import { tackle } from "./animation/tackle";
 import { tackleRecoil } from "./animation/tackle-recoil";
@@ -86,33 +83,6 @@ export class GranDozer extends EmptyArmdozerSprite {
    */
   tackleToStand(): Animate {
     return tackleToStand(this.#props);
-  }
-
-  /**
-   * @deprecated
-   * アームハンマー チャージ
-   * @returns アニメーション
-   */
-  armHammerCharge(): Animate {
-    return armHammerCharge(this.#props);
-  }
-
-  /**
-   * @deprecated
-   * アームハンマー アタック
-   * @returns アニメーション
-   */
-  armHammerAttack(): Animate {
-    return armHammerAttack(this.#props);
-  }
-
-  /**
-   * @deprecated
-   * アームハンマー -> 立ち
-   * @returns アニメーション
-   */
-  hmToStand(): Animate {
-    return hmToStand(this.#props);
   }
 
   /** @override */
