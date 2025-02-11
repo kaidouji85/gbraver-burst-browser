@@ -4,15 +4,15 @@ import { AnimationMesh } from "./animation-mesh";
 import { createAnimationMeshes } from "./create-animation-meshes";
 
 /**
- * タックルメッシュを生成
+ * タックルアタック メッシュを生成
  * @param resources リソース管理オブジェクト
  * @returns 生成結果
  */
-export function tackle(resources: Resources): AnimationMesh[] {
+export function tackleAttack(resources: Resources): AnimationMesh[] {
   return createAnimationMeshes({
     resources,
-    animationType: "TACKLE",
-    textureId: TEXTURE_IDS.GRAN_DOZER_TACKLE,
+    animationType: "TACKLE_ATTACK",
+    textureId: TEXTURE_IDS.GRAN_DOZER_TACKLE_ATTACK,
     maxAnimation: 4,
   });
 }

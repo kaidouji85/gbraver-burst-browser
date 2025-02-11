@@ -12,15 +12,19 @@ export function tackle(props: GranDozerAnimationProps): Animate {
   const { model } = props;
   return tween(model, (t) =>
     t
+      .onStart(() => {
+        model.animation.type = "TACKLE_ATTACK";
+      })
       .to(
         {
-          animation: { frame: 1 },
+          animation: { frame: 0 },
           position: { z: ARMDOZER_SPRITE_ATTACKER_Z },
         },
         0,
-      )
-      .onStart(() => {
-        model.animation.type = "TACKLE";
-      }),
-  ).chain(tween(model.position, (t) => t.to({ x: "-200" }, 100)));
+      ),
+  ).chain(
+    tween(model, (t) =>
+      t.to({ animation: { frame: 1 }, position: { x: "-150" } }, 100),
+    ),
+  );
 }

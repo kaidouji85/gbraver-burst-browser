@@ -4,7 +4,6 @@ import { all } from "../../../../../../../animation/all";
 import { Animate } from "../../../../../../../animation/animate";
 import { delay } from "../../../../../../../animation/delay";
 import { toInitial } from "../../../../td-camera";
-import { focusToAttacker } from "./focus-to-attacker";
 import { GranDozerBattle } from "./gran-dozer-battle";
 
 /**
@@ -13,16 +12,13 @@ import { GranDozerBattle } from "./gran-dozer-battle";
  * @returns アニメーション
  */
 export function guard(param: GranDozerBattle<Guard>): Animate {
-  return all(
-    param.attackerSprite.charge().chain(delay(500)),
-    focusToAttacker(param.tdCamera, param.attackerSprite),
-  )
+  return param.attackerSprite
+    .charge()
+    .chain(delay(500))
     .chain(param.attackerSprite.tackle())
     .chain(
       all(
-        param.attackerSprite
-          .tackleRecoil()
-          .chain(delay(1000))
+        delay(1000)
           .chain(param.attackerSprite.tackleToStand())
           .chain(delay(500)),
         toInitial(param.tdCamera, 100),

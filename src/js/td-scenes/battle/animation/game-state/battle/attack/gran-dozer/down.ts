@@ -23,9 +23,7 @@ export function down(param: GranDozerBattle<DownResult>): Animate {
     .chain(param.attackerSprite.tackle())
     .chain(
       all(
-        param.attackerSprite
-          .tackleRecoil()
-          .chain(delay(1500))
+        delay(1500)
           .chain(param.attackerSprite.tackleToStand())
           .chain(delay(500)),
         param.attackerHUD.resultIndicator
