@@ -17,6 +17,6 @@ export function charge(props: GranDozerAnimationProps): Animate {
         se.play(sounds.motor);
       }),
     ).chain(tween(model.animation, (t) => t.to({ frame: 1 }, 300))),
-    tween(model.position, (t) => t.to({ x: "+100" }, 300)),
+    tween(model.position, (t) => t.to({ x: "+80" }, 300)),
   );
 }

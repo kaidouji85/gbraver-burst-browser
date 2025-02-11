@@ -10,7 +10,6 @@ import { endActive } from "./animation/end-active";
 import { frontStep } from "./animation/front-step";
 import { startActive } from "./animation/start-active";
 import { tackle } from "./animation/tackle";
-import { tackleRecoil } from "./animation/tackle-recoil";
 import { tackleToStand } from "./animation/tackle-to-stand";
 import { bindEventListeners } from "./procedure/bind-event-listeners";
 import {
@@ -69,15 +68,6 @@ export class GranDozer extends EmptyArmdozerSprite {
    */
   tackle(): Animate {
     return tackle(this.#props);
-  }
-
-  /**
-   * @deprecated
-   * タックル反動
-   * @returns アニメーション
-   */
-  tackleRecoil(): Animate {
-    return tackleRecoil(this.#props);
   }
 
   /**
