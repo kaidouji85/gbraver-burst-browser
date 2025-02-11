@@ -35,7 +35,7 @@ export function tackleToStand(props: GranDozerAnimationProps): Animate {
             animation: { frame: 1 },
             position: { x: ARMDOZER_SPRITE_STANDARD_X },
           },
-          500,
+          300,
         ),
       ),
     )
