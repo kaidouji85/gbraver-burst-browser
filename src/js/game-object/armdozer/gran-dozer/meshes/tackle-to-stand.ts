@@ -11,7 +11,7 @@ import { createAnimationMeshes } from "./create-animation-meshes";
 export function tackleToStand(resources: Resources): AnimationMesh[] {
   return createAnimationMeshes({
     resources,
-    animationType: "TACKLE_ATTACK",
+    animationType: "TACKLE_TO_STAND",
     textureId: TEXTURE_IDS.GRAN_DOZER_TACKLE_TO_STAND,
     maxAnimation: 4,
   });

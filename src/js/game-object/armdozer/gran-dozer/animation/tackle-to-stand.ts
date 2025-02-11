@@ -1,7 +1,8 @@
 import { Animate } from "../../../../animation/animate";
 import { tween } from "../../../../animation/tween";
 import {
-  ARMDOZER_EFFECT_STANDARD_X,
+  ARMDOZER_SPRITE_ATTACKER_Z,
+  ARMDOZER_SPRITE_STANDARD_X,
   ARMDOZER_SPRITE_STANDARD_Z,
 } from "../../position";
 import { GranDozerAnimationProps } from "./animation-props";
@@ -15,29 +16,42 @@ export function tackleToStand(props: GranDozerAnimationProps): Animate {
   const { model, se, sounds } = props;
   return tween(model, (t) =>
     t
+      .onStart(() => {
+        model.animation.type = "TACKLE_TO_STAND";
+        se.play(sounds.motor);
+      })
       .to(
         {
           animation: { frame: 0 },
-          position: { x: ARMDOZER_EFFECT_STANDARD_X },
+          position: { z: ARMDOZER_SPRITE_ATTACKER_Z },
         },
-        300,
-      )
-      .onStart(() => {
-        se.play(sounds.motor);
-      }),
-  ).chain(
-    tween(model, (t) =>
-      t
-        .to(
+        0,
+      ),
+  )
+    .chain(
+      tween(model, (t) =>
+        t.to(
           {
-            position: { z: ARMDOZER_SPRITE_STANDARD_Z },
-            animation: { frame: 0 },
+            animation: { frame: 1 },
+            position: { x: ARMDOZER_SPRITE_STANDARD_X },
           },
-          0,
-        )
-        .onStart(() => {
-          model.animation.type = "STAND";
-        }),
-    ),
-  );
+          300,
+        ),
+      ),
+    )
+    .chain(
+      tween(model, (t) =>
+        t
+          .onStart(() => {
+            model.animation.type = "STAND";
+          })
+          .to(
+            {
+              animation: { frame: 0 },
+              position: { z: ARMDOZER_SPRITE_STANDARD_Z },
+            },
+            0,
+          ),
+      ),
+    );
 }

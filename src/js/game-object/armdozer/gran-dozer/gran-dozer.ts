@@ -72,6 +72,7 @@ export class GranDozer extends EmptyArmdozerSprite {
   }
 
   /**
+   * @deprecated
    * タックル反動
    * @returns アニメーション
    */
