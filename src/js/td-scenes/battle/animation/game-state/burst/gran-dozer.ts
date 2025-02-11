@@ -44,15 +44,15 @@ function ineffective(param: GranDozerBurst<Ineffective>): Animate {
     param.tdObjects.skyBrightness.brightness(0.2, 500),
     param.tdObjects.illumination.intensity(0.2, 500),
     param.attackerArmdozerTD.sprite().endActive(),
-  )
-    .chain(
+    delay(200).chain(
       all(
         param.burstPlayerHUD.gauge.battery(
           param.burstPlayerState.armdozer.battery,
         ),
         param.burstPlayerTD.recoverBattery.popUp(param.burst.recoverBattery),
       ),
-    )
+    ),
+  )
     .chain(
       all(
         toInitial(param.tdCamera, 500),
