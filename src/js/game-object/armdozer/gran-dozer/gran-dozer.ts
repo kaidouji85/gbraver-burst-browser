@@ -4,8 +4,10 @@ import * as THREE from "three";
 import { Animate } from "../../../animation/animate";
 import { GameObjectAction } from "../../action/game-object-action";
 import { EmptyArmdozerSprite } from "../empty-armdozer-sprite";
+import { backStep } from "./animation/back-step";
 import { charge } from "./animation/charge";
 import { endActive } from "./animation/end-active";
+import { frontStep } from "./animation/front-step";
 import { startActive } from "./animation/start-active";
 import { tackle } from "./animation/tackle";
 import { tackleRecoil } from "./animation/tackle-recoil";
@@ -83,6 +85,16 @@ export class GranDozer extends EmptyArmdozerSprite {
    */
   tackleToStand(): Animate {
     return tackleToStand(this.#props);
+  }
+
+  /** @override */
+  avoid(): Animate {
+    return backStep(this.#props);
+  }
+
+  /** @override */
+  avoidToStand(): Animate {
+    return frontStep(this.#props);
   }
 
   /** @override */
