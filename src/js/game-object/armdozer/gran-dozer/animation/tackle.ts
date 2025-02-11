@@ -20,7 +20,7 @@ export function tackle(props: GranDozerAnimationProps): Animate {
         0,
       )
       .onStart(() => {
-        model.animation.type = "TACKLE";
+        model.animation.type = "TACKLE_CHARGE";
       }),
   ).chain(tween(model.position, (t) => t.to({ x: "-200" }, 100)));
 }

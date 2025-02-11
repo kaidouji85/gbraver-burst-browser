@@ -1,7 +1,9 @@
 import { Resources } from "../../../../resource";
 import { AnimationMesh } from "./animation-mesh";
 import { stand } from "./stand";
-import { tackle } from "./tackle";
+import { tackleAttack } from "./tackle-attack";
+import { tackleCharge } from "./tackle-charge";
+import { tackleToStand } from "./tackle-to-stand";
 
 /**
  * ビューで利用するすべてのメッシュを生成する
@@ -9,5 +11,10 @@ import { tackle } from "./tackle";
  * @returns 生成結果
  */
 export function createAllMeshes(resources: Resources): AnimationMesh[] {
-  return [...stand(resources), ...tackle(resources)];
+  return [
+    ...stand(resources),
+    ...tackleCharge(resources),
+    ...tackleAttack(resources),
+    ...tackleToStand(resources),
+  ];
 }
