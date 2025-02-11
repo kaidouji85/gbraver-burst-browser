@@ -4,8 +4,10 @@ import * as THREE from "three";
 import { Animate } from "../../../animation/animate";
 import { GameObjectAction } from "../../action/game-object-action";
 import { EmptyArmdozerSprite } from "../empty-armdozer-sprite";
+import { backStep } from "./animation/back-step";
 import { charge } from "./animation/charge";
 import { endActive } from "./animation/end-active";
+import { frontStep } from "./animation/front-step";
 import { startActive } from "./animation/start-active";
 import { tackle } from "./animation/tackle";
 import { tackleRecoil } from "./animation/tackle-recoil";
@@ -16,8 +18,6 @@ import {
   GranDozerPropsCreatorOptions,
 } from "./props/create-gran-dozer-props";
 import { GranDozerProps } from "./props/gran-dozer-props";
-import { backStep } from "./animation/back-step";
-import { frontStep } from "./animation/front-step";
 
 /** オプション */
 type Options = GranDozerPropsCreatorOptions & {
