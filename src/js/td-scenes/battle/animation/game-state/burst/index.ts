@@ -8,14 +8,16 @@ import { NeoLandozerHUD } from "../../../view/hud/armdozer-objects/neo-landozer"
 import { ShinBraverHUD } from "../../../view/hud/armdozer-objects/shin-braver";
 import { WingDozerHUD } from "../../../view/hud/armdozer-objects/wing-dozer";
 import { GenesisBraverTD } from "../../../view/td/armdozer-objects/genesis-braver";
+import { GranDozerTD } from "../../../view/td/armdozer-objects/gran-dozer";
 import { LightningDozerTD } from "../../../view/td/armdozer-objects/lightning-dozer";
 import { NeoLandozerTD } from "../../../view/td/armdozer-objects/neo-landozer";
 import { ShinBraverTD } from "../../../view/td/armdozer-objects/shin-braver";
 import { WingDozerTD } from "../../../view/td/armdozer-objects/wing-dozer";
-import type { StateAnimationProps } from "../state-animation-props";
-import type { BurstAnimationParam } from "./animation-param";
+import { StateAnimationProps } from "../state-animation-props";
+import { BurstAnimationParam } from "./animation-param";
 import { toBurstAnimationParam } from "./animation-param";
 import { genesisBraverBurst } from "./genesis-braver";
+import { granDozerBurst } from "./gran-dozer";
 import { lightningDozerBurst } from "./lightning-dozer";
 import { neoLandozerBurst } from "./neo-landozer";
 import { shinBraverBurst } from "./shin-braver";
@@ -70,6 +72,8 @@ function armdozerAnimation(param: BurstAnimationParam): Animate {
     burstArmdozerHUD instanceof GenesisBraverHUD
   ) {
     ret = genesisBraverBurst({ ...param, burstArmdozerTD, burstArmdozerHUD });
+  } else if (burstArmdozerTD instanceof GranDozerTD) {
+    ret = granDozerBurst({ ...param, burstArmdozerTD });
   }
 
   return ret;
