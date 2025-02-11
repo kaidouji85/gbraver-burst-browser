@@ -8,7 +8,15 @@ export const GranDozerTextureConfigs: TextureConfig[] = [
     path: "armdozer/gran-dozer/stand.webp",
   },
   {
-    id: TEXTURE_IDS.GRAN_DOZER_TACKLE,
-    path: "armdozer/gran-dozer/tackle.webp",
+    id: TEXTURE_IDS.GRAN_DOZER_TACKLE_CHARGE,
+    path: "armdozer/gran-dozer/tackle-charge.webp",
+  },
+  {
+    id: TEXTURE_IDS.GRAN_DOZER_TACKLE_ATTACK,
+    path: "armdozer/gran-dozer/tackle-attack.webp",
+  },
+  {
+    id: TEXTURE_IDS.GRAN_DOZER_TACKLE_TO_STAND,
+    path: "armdozer/gran-dozer/tackle-to-stand.webp",
   },
 ];

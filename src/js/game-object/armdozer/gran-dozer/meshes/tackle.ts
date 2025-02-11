@@ -12,7 +12,7 @@ export function tackle(resources: Resources): AnimationMesh[] {
   return createAnimationMeshes({
     resources,
     animationType: "TACKLE",
-    textureId: TEXTURE_IDS.GRAN_DOZER_TACKLE,
+    textureId: TEXTURE_IDS.GRAN_DOZER_TACKLE_CHARGE,
     maxAnimation: 4,
   });
 }
