@@ -92,10 +92,11 @@ function lightningBarrier(
 export function lightningDozerBurst(
   param: LightningDozerBurst<Burst>,
 ): Animate {
-  if (param.burst.type === "LightningBarrier") {
-    const burst: LightningBarrier = param.burst;
-    return lightningBarrier({ ...param, burst });
+  const { burst } = param;
+  let ret = empty();
+  if (burst.type === "LightningBarrier") {
+    ret = lightningBarrier({ ...param, burst });
   }
 
-  return empty();
+  return ret;
 }

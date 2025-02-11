@@ -84,10 +84,11 @@ function batteryLimitBreak(
  * @returns アニメーション
  */
 export function genesisBraverBurst(param: GenesisBraverBurst<Burst>): Animate {
-  if (param.burst.type === "BatteryLimitBreak") {
-    const burst: BatteryLimitBreak = param.burst;
-    return batteryLimitBreak({ ...param, burst });
+  const { burst } = param;
+  let ret = empty();
+  if (burst.type === "BatteryLimitBreak") {
+    ret = batteryLimitBreak({ ...param, burst });
   }
 
-  return empty();
+  return ret;
 }
