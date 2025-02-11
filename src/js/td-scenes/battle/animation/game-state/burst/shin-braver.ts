@@ -81,10 +81,11 @@ function recoverBattery(param: ShinBraverBurst<RecoverBattery>): Animate {
  * @returns アニメーション
  */
 export function shinBraverBurst(param: ShinBraverBurst<Burst>): Animate {
-  if (param.burst.type === "RecoverBattery") {
-    const burst: RecoverBattery = param.burst;
-    return recoverBattery({ ...param, burst });
+  const { burst } = param;
+  let ret = empty();
+  if (burst.type === "RecoverBattery") {
+    ret = recoverBattery({ ...param, burst });
   }
 
-  return empty();
+  return ret;
 }
