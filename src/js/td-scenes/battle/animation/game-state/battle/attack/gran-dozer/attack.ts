@@ -23,9 +23,7 @@ export function attack(param: GranDozerBattle<AttackResult>): Animate {
     .chain(param.attackerSprite.tackle())
     .chain(
       all(
-        param.attackerSprite
-          .tackleRecoil()
-          .chain(delay(1000))
+        delay(1000)
           .chain(param.attackerSprite.tackleToStand())
           .chain(delay(500)),
         toInitial(param.tdCamera, 100),
