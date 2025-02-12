@@ -17,16 +17,7 @@ export function gutsToStand(props: ShinBraverAnimationProps): Animate {
       se.play(sounds.motor);
     }),
   )
-    .chain(
-      tween(model.animation, (t) =>
-        t.to(
-          {
-            frame: 0,
-          },
-          200,
-        ),
-      ),
-    )
+    .chain(tween(model.animation, (t) => t.to({ frame: 0 }, 200)))
     .chain(
       tween(model.animation, (t) =>
         t.to({ frame: 1 }, 0).onStart(() => {
@@ -40,16 +31,7 @@ export function gutsToStand(props: ShinBraverAnimationProps): Animate {
         se.play(sounds.motor);
       }),
     )
-    .chain(
-      tween(model.animation, (t) =>
-        t.to(
-          {
-            frame: 0,
-          },
-          200,
-        ),
-      ),
-    )
+    .chain(tween(model.animation, (t) => t.to({ frame: 0 }, 200)))
     .chain(
       tween(model.animation, (t) =>
         t.to({ frame: 0 }, 0).onStart(() => {
