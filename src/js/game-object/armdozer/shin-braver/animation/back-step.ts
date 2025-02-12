@@ -6,11 +6,11 @@ import { tween } from "../../../../animation/tween";
 import { ShinBraverAnimationProps } from "./animation-props";
 
 /**
- * 避ける
+ * バックステップ
  * @param props アニメーションプロパティ
  * @returns アニメーション
  */
-export function avoid(props: ShinBraverAnimationProps): Animate {
+export function backStep(props: ShinBraverAnimationProps): Animate {
   const { model, sounds, se } = props;
   return tween(model.animation, (t) =>
     t.to({ frame: 0 }, 0).onStart(() => {
