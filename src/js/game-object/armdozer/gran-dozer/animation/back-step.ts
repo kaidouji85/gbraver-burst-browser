@@ -1,9 +1,9 @@
 import { all } from "../../../../animation/all";
 import { Animate } from "../../../../animation/animate";
+import { delay } from "../../../../animation/delay";
 import { onStart } from "../../../../animation/on-start";
 import { tween } from "../../../../animation/tween";
 import { GranDozerAnimationProps } from "./animation-props";
-import {delay} from "../../../../animation/delay";
 
 /**
  * バックステップ
@@ -19,9 +19,9 @@ export function backStep(props: GranDozerAnimationProps): Animate {
           model.animation.type = "STEP";
         })
         .to({ frame: 0 }, 0),
-    ).chain(tween(model.animation, (t) => t.to({ frame: 1 }, 200))),
+    ).chain(tween(model.animation, (t) => t.to({ frame: 1 }, 150))),
     tween(model.position, (t) =>
-      t.to({ x: "+100" }, 200).onStart(() => {
+      t.to({ x: "+100" }, 150).onStart(() => {
         se.play(sounds.motor);
       }),
     ),
