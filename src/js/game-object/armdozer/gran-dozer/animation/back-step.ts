@@ -6,7 +6,7 @@ import { GranDozerAnimationProps } from "./animation-props";
 import {delay} from "../../../../animation/delay";
 
 /**
- * 避ける
+ * バックステップ
  * @param props アニメーションプロパティ
  * @returns アニメーション
  */
