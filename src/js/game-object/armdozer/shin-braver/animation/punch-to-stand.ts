@@ -17,22 +17,8 @@ export function punchToStand(props: ShinBraverAnimationProps): Animate {
     }),
   )
     .chain(
-      tween(model.animation, (t) =>
-        t.to(
-          {
-            frame: 1,
-          },
-          400,
-        ),
-      ),
-      tween(model.position, (t) =>
-        t.to(
-          {
-            x: "+80",
-          },
-          400,
-        ),
-      ),
+      tween(model.animation, (t) => t.to({ frame: 1 }, 400)),
+      tween(model.position, (t) => t.to({ x: "+80" }, 400)),
     )
     .chain(
       tween(model, (t) =>

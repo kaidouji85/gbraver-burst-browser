@@ -16,16 +16,7 @@ export function burst(props: ShinBraverAnimationProps): Animate {
       se.play(sounds.motor);
     }),
   )
-    .chain(
-      tween(model.animation, (t) =>
-        t.to(
-          {
-            frame: 1,
-          },
-          200,
-        ),
-      ),
-    )
+    .chain(tween(model.animation, (t) => t.to({ frame: 1 }, 200)))
     .chain(delay(500))
     .chain(
       tween(model.animation, (t) =>
@@ -35,14 +26,5 @@ export function burst(props: ShinBraverAnimationProps): Animate {
         }),
       ),
     )
-    .chain(
-      tween(model.animation, (t) =>
-        t.to(
-          {
-            frame: 1,
-          },
-          200,
-        ),
-      ),
-    );
+    .chain(tween(model.animation, (t) => t.to({ frame: 1 }, 200)));
 }

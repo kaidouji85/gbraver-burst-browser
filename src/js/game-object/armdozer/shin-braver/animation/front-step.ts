@@ -24,21 +24,9 @@ export function frontStep(
   )
     .chain(
       all(
-        tween(model.animation, (t) =>
-          t.to(
-            {
-              frame: 1,
-            },
-            300,
-          ),
-        ),
+        tween(model.animation, (t) => t.to({ frame: 1 }, 300)),
         tween(model.position, (t) =>
-          t.to(
-            {
-              x: `-${Math.abs(distance)}`,
-            },
-            300,
-          ),
+          t.to({ x: `-${Math.abs(distance)}` }, 300),
         ),
       ),
     )
@@ -48,16 +36,7 @@ export function frontStep(
         se.play(sounds.motor);
       }),
     )
-    .chain(
-      tween(model.animation, (t) =>
-        t.to(
-          {
-            frame: 0,
-          },
-          300,
-        ),
-      ),
-    )
+    .chain(tween(model.animation, (t) => t.to({ frame: 0 }, 300)))
     .chain(
       tween(model.animation, (t) =>
         t.to({ frame: 0 }, 0).onStart(() => {

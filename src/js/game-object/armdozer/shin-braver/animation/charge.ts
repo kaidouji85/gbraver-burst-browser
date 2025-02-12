@@ -23,14 +23,5 @@ export function charge(props: ShinBraverAnimationProps): Animate {
         model.animation.type = "SP_CHARGE";
         se.play(sounds.motor);
       }),
-  ).chain(
-    tween(model.animation, (t) =>
-      t.to(
-        {
-          frame: 1,
-        },
-        250,
-      ),
-    ),
-  );
+  ).chain(tween(model.animation, (t) => t.to({ frame: 1 }, 250)));
 }
