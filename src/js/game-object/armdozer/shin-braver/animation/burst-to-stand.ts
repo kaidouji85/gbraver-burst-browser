@@ -17,16 +17,7 @@ export function burstToStand(props: ShinBraverAnimationProps): Animate {
       se.play(sounds.motor);
     }),
   )
-    .chain(
-      tween(model.animation, (t) =>
-        t.to(
-          {
-            frame: 0,
-          },
-          300,
-        ),
-      ),
-    )
+    .chain(tween(model.animation, (t) => t.to({ frame: 0 }, 300)))
     .chain(
       tween(model.animation, (t) =>
         t.to({ frame: 1 }, 0).onStart(() => {
@@ -35,21 +26,8 @@ export function burstToStand(props: ShinBraverAnimationProps): Animate {
       ),
     )
     .chain(delay(500))
-    .chain(
-      onStart(() => {
-        se.play(sounds.motor);
-      }),
-    )
-    .chain(
-      tween(model.animation, (t) =>
-        t.to(
-          {
-            frame: 0,
-          },
-          300,
-        ),
-      ),
-    )
+    .chain(onStart(() => se.play(sounds.motor)))
+    .chain(tween(model.animation, (t) => t.to({ frame: 0 }, 300)))
     .chain(
       tween(model.animation, (t) =>
         t.to({ frame: 0 }, 0).onStart(() => {
