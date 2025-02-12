@@ -16,16 +16,7 @@ export function upperToStand(props: WingDozerAnimationProps): Animate {
       se.play(sounds.motor);
     }),
   )
-    .chain(
-      tween(model.animation, (t) =>
-        t.to(
-          {
-            frame: 1,
-          },
-          400,
-        ),
-      ),
-    )
+    .chain(tween(model.animation, (t) => t.to({ frame: 1 }, 400)))
     .chain(
       tween(model, (t) =>
         t

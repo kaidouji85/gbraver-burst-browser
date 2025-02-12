@@ -15,16 +15,7 @@ export function dashToStand(props: WingDozerAnimationProps): Animate {
       se.play(sounds.motor);
     }),
   )
-    .chain(
-      tween(model.animation, (t) =>
-        t.to(
-          {
-            frame: 1,
-          },
-          400,
-        ),
-      ),
-    )
+    .chain(tween(model.animation, (t) => t.to({ frame: 1 }, 400)))
     .chain(
       tween(model.animation, (t) =>
         t.to({ frame: 0 }, 0).onStart(() => {

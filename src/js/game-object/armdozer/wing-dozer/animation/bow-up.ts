@@ -15,16 +15,7 @@ export function bowUp(props: WingDozerAnimationProps): Animate {
       se.play(sounds.motor);
     }),
   )
-    .chain(
-      tween(model.animation, (t) =>
-        t.to(
-          {
-            frame: 0,
-          },
-          200,
-        ),
-      ),
-    )
+    .chain(tween(model.animation, (t) => t.to({ frame: 0 }, 200)))
     .chain(
       tween(model.animation, (t) =>
         t.to({ frame: 1 }, 0).onStart(() => {

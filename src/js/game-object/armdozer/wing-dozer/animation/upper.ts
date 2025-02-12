@@ -13,14 +13,5 @@ export function upper(props: WingDozerAnimationProps): Animate {
     t.to({ frame: 0 }, 0).onStart(() => {
       model.animation.type = "UPPER_ATTACK";
     }),
-  ).chain(
-    tween(model.animation, (t) =>
-      t.to(
-        {
-          frame: 1,
-        },
-        150,
-      ),
-    ),
-  );
+  ).chain(tween(model.animation, (t) => t.to({ frame: 1 }, 150)));
 }

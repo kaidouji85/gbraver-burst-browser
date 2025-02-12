@@ -23,14 +23,5 @@ export function charge(props: WingDozerAnimationProps): Animate {
         model.animation.type = "UPPER_CHARGE";
         se.play(sounds.motor);
       }),
-  ).chain(
-    tween(model.animation, (t) =>
-      t.to(
-        {
-          frame: 1,
-        },
-        200,
-      ),
-    ),
-  );
+  ).chain(tween(model.animation, (t) => t.to({ frame: 1 }, 200)));
 }
