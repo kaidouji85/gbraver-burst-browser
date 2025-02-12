@@ -78,3 +78,40 @@ export const enemyActiveTackle: StoryFn = armdozerSpriteStub(
     sprite.startActive().play();
   },
 );
+
+/**
+ * 回避
+ * @param sprite スプライト
+ */
+const avoid = (sprite: GranDozer) => {
+  delay(1000)
+    .chain(sprite.avoid())
+    .chain(delay(1000))
+    .chain(sprite.avoidToStand())
+    .chain(delay(1000))
+    .loop();
+};
+
+/** プレイヤー 回避 */
+export const playerAvoid: StoryFn = armdozerSpriteStub(PlayerGranDozer, avoid);
+
+/** プレイヤー アクティブ 回避 */
+export const playerActiveAvoid: StoryFn = armdozerSpriteStub(
+  PlayerGranDozer,
+  (sprite) => {
+    avoid(sprite);
+    sprite.startActive().play();
+  },
+);
+
+/** 敵 回避 */
+export const enemyAvoid: StoryFn = armdozerSpriteStub(EnemyGranDozer, avoid);
+
+/** 敵 アクティブ 回避 */
+export const enemyActiveAvoid: StoryFn = armdozerSpriteStub(
+  EnemyGranDozer,
+  (sprite) => {
+    avoid(sprite);
+    sprite.startActive().play();
+  },
+);
