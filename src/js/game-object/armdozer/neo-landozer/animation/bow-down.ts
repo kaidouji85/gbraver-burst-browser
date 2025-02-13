@@ -1,7 +1,6 @@
 import { Animate } from "../../../../animation/animate";
 import { tween } from "../../../../animation/tween";
 import { NeoLandozerAnimationProps } from "./animation-props";
-
 /**
  * 礼（倒れる）
  * @param props アニメーションプロパティ
@@ -14,14 +13,5 @@ export function bowDown(props: NeoLandozerAnimationProps): Animate {
       model.animation.type = "BOW";
       se.play(sounds.motor);
     }),
-  ).chain(
-    tween(model.animation, (t) =>
-      t.to(
-        {
-          frame: 1,
-        },
-        200,
-      ),
-    ),
-  );
+  ).chain(tween(model.animation, (t) => t.to({ frame: 1 }, 200)));
 }
