@@ -16,22 +16,8 @@ export function knockBack(props: NeoLandozerAnimationProps): Animate {
       model.animation.type = "KNOCK_BACK";
     }),
   );
-  const position = tween(model.position, (t) =>
-    t.to(
-      {
-        x: "+20",
-      },
-      100,
-    ),
-  ).chain(
-    tween(model.position, (t) =>
-      t.to(
-        {
-          x: "-20",
-        },
-        100,
-      ),
-    ),
+  const position = tween(model.position, (t) => t.to({ x: "+20" }, 100)).chain(
+    tween(model.position, (t) => t.to({ x: "-20" }, 100)),
   );
   return empty().chain(all(motion, position));
 }

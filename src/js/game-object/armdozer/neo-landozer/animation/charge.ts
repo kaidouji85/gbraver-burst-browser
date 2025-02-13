@@ -23,14 +23,5 @@ export function charge(props: NeoLandozerAnimationProps): Animate {
         model.animation.type = "HM_CHARGE";
         se.play(sounds.motor);
       }),
-  ).chain(
-    tween(model.animation, (t) =>
-      t.to(
-        {
-          frame: 1,
-        },
-        300,
-      ),
-    ),
-  );
+  ).chain(tween(model.animation, (t) => t.to({ frame: 1 }, 300)));
 }
