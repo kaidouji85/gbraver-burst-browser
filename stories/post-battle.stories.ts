@@ -1,6 +1,6 @@
 import { StoryFn } from "@storybook/html";
 
-import { PostBattleFloater } from "../src/js/game/dom-floaters/post-battle/post-battle";
+import { PostBattleFloater } from "../src/js/game/dom-floaters/post-battle";
 import {
   PostNetworkBattleButtons,
   PostNPCBattleComplete,
