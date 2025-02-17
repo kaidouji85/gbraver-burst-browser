@@ -15,7 +15,7 @@ import { TDSceneBinder } from "../../td-scenes/td-scene-binder";
 import { pushWindowsStream } from "../../window/push-window";
 import { resizeStream } from "../../window/resize";
 import { GBraverBurstBrowserConfigRepository } from "../config/repository/repository";
-import { DOMFloaters } from "../dom-floaters/dom-floaters";
+import { DOMFloaters } from "../dom-floaters";
 import { FutureSuddenlyBattleEnd } from "../future-suddenly-battle-end";
 import { GameAction } from "../game-actions";
 import { InterruptScenes } from "../innterrupt-scenes";

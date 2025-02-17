@@ -1,8 +1,8 @@
 import { Observable, Subject, Unsubscribable } from "rxjs";
 
-import type { GameAction } from "../game-actions";
-import type { DomFloaterActionConnector } from "./dom-floater-action-connector";
-import { PostBattleFloater, ShowParams } from "./post-battle/post-battle";
+import { GameAction } from "../game-actions";
+import { DomFloaterActionConnector } from "./dom-floater-action-connector";
+import { PostBattleFloater, ShowParams } from "./post-battle";
 
 /** コンストラクタのパラメータ */
 type DOMFloatersParams = {
@@ -17,13 +17,10 @@ type ShowPostBattleParams = ShowParams;
 export class DOMFloaters {
   /** ルートHTML要素 */
   #root: HTMLElement;
-
   /** バトル終了後行動選択フローター */
   #postBattle: PostBattleFloater;
-
   /** ゲームアクションストリーム */
   #gameAction: Subject<GameAction>;
-
   /** アンサブスクライバ */
   #unsubscribers: Unsubscribable[];
 
