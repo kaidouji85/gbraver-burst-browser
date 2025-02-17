@@ -4,12 +4,12 @@ import { pop } from "../../../dom/pop";
 import { domPushStream } from "../../../dom/push-dom";
 import { waitFinishAnimation } from "../../../dom/wait-finish-animation";
 import { Exclusive } from "../../../exclusive/exclusive";
-import type { ResourcesContainer } from "../../../resource";
+import { ResourcesContainer } from "../../../resource";
 import { createEmptySoundResource } from "../../../resource/sound/empty-sound-resource";
 import { SOUND_IDS } from "../../../resource/sound/ids";
 import { SEPlayerContainer } from "../../../se/se-player";
-import type { PostBattle } from "../../post-battle";
-import type { PostBattleButtonConfig } from "./post-battle-button-config";
+import { PostBattle } from "../../post-battle";
+import { PostBattleButtonConfig } from "./post-battle-button-config";
 
 /** ルートHTML要素のclass属性 */
 const ROOT_CLASS = "post-battle";
