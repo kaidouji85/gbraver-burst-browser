@@ -1,16 +1,16 @@
-import { fadeOut, stop } from "../../../bgm/bgm-operators";
-import { WaitingDialog } from "../../../dom-dialogs/waiting/waiting-dialog";
-import { batterySystemTutorial } from "../../episodes/battery-system-tutorial";
-import { ForceEndBattle } from "../../game-actions/force-end-battle";
-import { GameProps } from "../../game-props";
-import { CasualMatch } from "../../in-progress/casual-match";
-import { PrivateMatchGuest } from "../../in-progress/private-match-guest";
-import { PrivateMatchHost } from "../../in-progress/private-match-host";
-import { Story } from "../../in-progress/story";
-import { playTitleBGM } from "../play-title-bgm";
-import { startEpisodeSelector } from "../start-episode-selector";
-import { startTitle } from "../start-title";
-import { switchWaitingDialog } from "../switch-dialog/switch-waiting-dialog";
+import { fadeOut, stop } from "../../../../bgm/bgm-operators";
+import { WaitingDialog } from "../../../../dom-dialogs/waiting/waiting-dialog";
+import { batterySystemTutorial } from "../../../episodes/battery-system-tutorial";
+import { ForceEndBattle } from "../../../game-actions/force-end-battle";
+import { GameProps } from "../../../game-props";
+import { CasualMatch } from "../../../in-progress/casual-match";
+import { PrivateMatchGuest } from "../../../in-progress/private-match-guest";
+import { PrivateMatchHost } from "../../../in-progress/private-match-host";
+import { Story } from "../../../in-progress/story";
+import { playTitleBGM } from "../../play-title-bgm";
+import { startEpisodeSelector } from "../../start-episode-selector";
+import { startTitle } from "../../start-title";
+import { switchWaitingDialog } from "../../switch-dialog/switch-waiting-dialog";
 
 /**
  * ストーリーモードバトルを強制終了する
