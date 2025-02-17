@@ -31,9 +31,13 @@ export type ShowParams = ResourcesContainer &
 
 /** バトル終了後行動選択フローター */
 export class PostBattleFloater {
+  /** ルートHTML要素 */
   #root: HTMLElement;
+  /** 排他制御 */
   #exclusive: Exclusive;
+  /** 選択完了通知 */
   #selectionComplete: Subject<PostBattle>;
+  /** アンサブスクライバ */
   #unsubscribers: Unsubscribable[];
 
   /**
