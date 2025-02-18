@@ -10,6 +10,7 @@ import { SOUND_IDS } from "../../../resource/sound/ids";
 import { SEPlayerContainer } from "../../../se/se-player";
 import { PostBattle } from "../../post-battle";
 import { PostBattleButtonConfig } from "./post-battle-button-config";
+import { PostBattleFloaterProps } from "./props";
 
 /** ルートHTML要素のclass属性 */
 const ROOT_CLASS = "post-battle";
@@ -31,12 +32,8 @@ export type ShowParams = ResourcesContainer &
 
 /** バトル終了後行動選択フローター */
 export class PostBattleFloater {
-  /** ルートHTML要素 */
-  #root: HTMLElement;
-  /** 排他制御 */
-  #exclusive: Exclusive;
-  /** 選択完了通知 */
-  #selectionComplete: Subject<PostBattle>;
+  /** プロパティ */
+  #props: PostBattleFloaterProps;
   /** アンサブスクライバ */
   #unsubscribers: Unsubscribable[];
 
@@ -45,11 +42,13 @@ export class PostBattleFloater {
    * 本クラスの初期表示は(display: none)である
    */
   constructor() {
-    this.#root = document.createElement("div");
-    this.#root.className = ROOT_CLASS;
-    this.#root.style.display = "none";
-    this.#exclusive = new Exclusive();
-    this.#selectionComplete = new Subject();
+    this.#props = {
+      root: document.createElement("div"),
+      exclusive: new Exclusive(),
+      selectionComplete: new Subject(),
+    };
+    this.#props.root.className = ROOT_CLASS;
+    this.#props.root.style.display = "none";
     this.#unsubscribers = [];
   }
 
@@ -60,7 +59,7 @@ export class PostBattleFloater {
     this.#unsubscribers.forEach((v) => {
       v.unsubscribe();
     });
-    this.#root.innerHTML = "";
+    this.#props.root.innerHTML = "";
   }
 
   /**
@@ -69,7 +68,7 @@ export class PostBattleFloater {
    * @returns 取得結果
    */
   getRootHTMLElement(): HTMLElement {
-    return this.#root;
+    return this.#props.root;
   }
 
   /**
@@ -79,10 +78,10 @@ export class PostBattleFloater {
    * @returns アニメーションが完了したら発火するPromise
    */
   async show(params: ShowParams): Promise<void> {
-    await this.#exclusive.execute(async () => {
+    await this.#props.exclusive.execute(async () => {
       const actionButtons = this.#createActionButtons(params);
       actionButtons.forEach((v) => {
-        this.#root.appendChild(v.button);
+        this.#props.root.appendChild(v.button);
       });
       this.#unsubscribers = actionButtons.map((v) => v.unsubscriber);
       await this.#bottomUp();
@@ -93,7 +92,7 @@ export class PostBattleFloater {
    * フローターを非表示にする
    */
   hidden(): void {
-    this.#root.style.display = "none";
+    this.#props.root.style.display = "none";
     this.destructor();
   }
 
@@ -104,7 +103,7 @@ export class PostBattleFloater {
    * @returns 通知ストリーム
    */
   selectionCompleteNotifier(): Observable<PostBattle> {
-    return this.#selectionComplete;
+    return this.#props.selectionComplete;
   }
 
   /**
@@ -113,8 +112,8 @@ export class PostBattleFloater {
    * @returns アニメーションが完了したら発火するプロミス
    */
   async #bottomUp(): Promise<void> {
-    this.#root.style.display = "flex";
-    const animation = this.#root.animate(
+    this.#props.root.style.display = "flex";
+    const animation = this.#props.root.animate(
       [
         {
           transform: "translateY(100%)",
@@ -163,12 +162,12 @@ export class PostBattleFloater {
         buttonStyles[style] ?? buttonStyles["SubButton"];
       button.className = className;
       const unsubscriber = domPushStream(button).subscribe(({ event }) => {
-        this.#exclusive.execute(async () => {
+        this.#props.exclusive.execute(async () => {
           event.preventDefault();
           event.stopPropagation();
           se.play(sound);
           await pop(button);
-          this.#selectionComplete.next(action);
+          this.#props.selectionComplete.next(action);
         });
       });
       return {
