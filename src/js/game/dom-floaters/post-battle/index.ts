@@ -4,31 +4,13 @@ import { pop } from "../../../dom/pop";
 import { domPushStream } from "../../../dom/push-dom";
 import { waitFinishAnimation } from "../../../dom/wait-finish-animation";
 import { Exclusive } from "../../../exclusive/exclusive";
-import { ResourcesContainer } from "../../../resource";
 import { createEmptySoundResource } from "../../../resource/sound/empty-sound-resource";
 import { SOUND_IDS } from "../../../resource/sound/ids";
-import { SEPlayerContainer } from "../../../se/se-player";
 import { PostBattle } from "../../post-battle";
-import { PostBattleButtonConfig } from "./post-battle-button-config";
+import { ActionButton } from "./action-button";
+import { ROOT_CLASS } from "./class-name";
 import { PostBattleFloaterProps } from "./props";
-
-/** ルートHTML要素のclass属性 */
-const ROOT_CLASS = "post-battle";
-
-/** アクションボタン */
-type ActionButton = {
-  /** ボタンのHTML要素 */
-  button: HTMLButtonElement;
-  /** ボタンイベントのUnsubscriber */
-  unsubscriber: Unsubscribable;
-};
-
-/** showメソッドのパラメータ */
-export type ShowParams = ResourcesContainer &
-  SEPlayerContainer & {
-    /** アクションボタン設定 */
-    buttons: PostBattleButtonConfig[];
-  };
+import { ShowParams } from "./show-params";
 
 /** バトル終了後行動選択フローター */
 export class PostBattleFloater {

@@ -11,4 +11,4 @@ export type PostBattleFloaterProps = {
   readonly exclusive: Exclusive;
   /** 選択完了通知 */
   readonly selectionComplete: Subject<PostBattle>;
-}
+};
