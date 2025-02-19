@@ -1,6 +1,6 @@
 import { Subject } from "rxjs";
 
-import { Exclusive } from "../../../../exclusive/exclusive";
+import { Exclusive } from "../../../exclusive/exclusive";
 import { ROOT_CLASS } from "../class-name";
 import { PostBattleFloaterProps } from "../props";
 

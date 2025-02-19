@@ -1,12 +1,12 @@
 import { StoryFn } from "@storybook/html";
 
-import { PostBattleFloater } from "../src/js/game/dom-floaters/post-battle";
+import { PostBattleFloater } from "../src/js/dom-floaters/post-battle";
 import {
   PostNetworkBattleButtons,
   PostNPCBattleComplete,
   PostNPCBattleLoseButtons,
   PostNPCBattleWinButtons,
-} from "../src/js/game/dom-floaters/post-battle/post-battle-buttons";
+} from "../src/js/dom-floaters/post-battle/post-battle-buttons";
 import { waitTime } from "../src/js/wait/wait-time";
 import { domStub } from "./stub/dom-stub";
 

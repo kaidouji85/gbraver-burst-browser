@@ -1,6 +1,6 @@
 import { Subject, Unsubscribable } from "rxjs";
 
-import type { GameAction } from "../game-actions";
+import type { GameAction } from "../game/game-actions";
 
 /**
  * DOMフローターとアクションを関連づける

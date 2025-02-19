@@ -1,9 +1,9 @@
-import { PostBattleButtonConfig } from "../../../dom-floaters/post-battle/post-battle-button-config";
+import { PostBattleButtonConfig } from "../../../../dom-floaters/post-battle/post-battle-button-config";
 import {
   PostNPCBattleComplete,
   PostNPCBattleLoseButtons,
   PostNPCBattleWinButtons,
-} from "../../../dom-floaters/post-battle/post-battle-buttons";
+} from "../../../../dom-floaters/post-battle/post-battle-buttons";
 import { EndBattle } from "../../../game-actions/end-battle";
 import { GameProps } from "../../../game-props";
 import { InProgress } from "../../../in-progress";

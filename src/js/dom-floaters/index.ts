@@ -1,6 +1,6 @@
 import { Observable, Subject, Unsubscribable } from "rxjs";
 
-import { GameAction } from "../game-actions";
+import { GameAction } from "../game/game-actions";
 import { DomFloaterActionConnector } from "./dom-floater-action-connector";
 import { PostBattleFloater } from "./post-battle";
 import { ShowParams } from "./post-battle/show-params";

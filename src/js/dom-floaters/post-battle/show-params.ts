@@ -1,5 +1,5 @@
-import { ResourcesContainer } from "../../../resource";
-import { SEPlayerContainer } from "../../../se/se-player";
+import { ResourcesContainer } from "../../resource";
+import { SEPlayerContainer } from "../../se/se-player";
 import { PostBattleButtonConfig } from "./post-battle-button-config";
 
 /** showメソッドのパラメータ */

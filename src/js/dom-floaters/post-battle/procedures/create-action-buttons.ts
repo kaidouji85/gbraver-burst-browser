@@ -1,7 +1,7 @@
-import { pop } from "../../../../dom/pop";
-import { domPushStream } from "../../../../dom/push-dom";
-import { createEmptySoundResource } from "../../../../resource/sound/empty-sound-resource";
-import { SOUND_IDS } from "../../../../resource/sound/ids";
+import { pop } from "../../../dom/pop";
+import { domPushStream } from "../../../dom/push-dom";
+import { createEmptySoundResource } from "../../../resource/sound/empty-sound-resource";
+import { SOUND_IDS } from "../../../resource/sound/ids";
 import { ActionButton } from "../action-button";
 import { ROOT_CLASS } from "../class-name";
 import { PostBattleFloaterProps } from "../props";
