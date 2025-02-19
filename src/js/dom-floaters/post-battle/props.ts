@@ -1,7 +1,7 @@
 import { Subject, Unsubscribable } from "rxjs";
 
-import { Exclusive } from "../../../exclusive/exclusive";
-import { PostBattle } from "../../post-battle";
+import { Exclusive } from "../../exclusive/exclusive";
+import { PostBattle } from "../../game/post-battle";
 
 /** PostBattleFloaterのプロパティ */
 export type PostBattleFloaterProps = {

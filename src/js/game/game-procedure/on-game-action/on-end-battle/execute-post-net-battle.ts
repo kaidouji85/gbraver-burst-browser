@@ -1,4 +1,4 @@
-import { PostNetworkBattleButtons } from "../../../dom-floaters/post-battle/post-battle-buttons";
+import { PostNetworkBattleButtons } from "../../../../dom-floaters/post-battle/post-battle-buttons";
 import { GameProps } from "../../../game-props";
 import { InProgress } from "../../../in-progress";
 import { CasualMatch } from "../../../in-progress/casual-match";
@@ -19,7 +19,7 @@ export async function executePostNetBattle(
   const { inProgress } = props;
   props.suddenlyBattleEnd.unbind();
   await props.api.disconnectWebsocket();
-  await props.domFloaters.showPostBattle({
+  await props.postBattle.show({
     ...props,
     buttons: PostNetworkBattleButtons,
   });

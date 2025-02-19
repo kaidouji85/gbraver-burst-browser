@@ -1,6 +1,6 @@
 import { Observable } from "rxjs";
 
-import { PostBattle } from "../../post-battle";
+import { PostBattle } from "../../game/post-battle";
 import { createPostBattleFloaterProps } from "./procedures/create-post-battle-floater-props";
 import { destructor } from "./procedures/destructor";
 import { hide } from "./procedures/hide";

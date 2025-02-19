@@ -24,7 +24,7 @@ async function forceRetryNPCBattle(
   const stage = getCurrentNPCStage(state) ?? DefaultStage;
   const level = getNPCStageLevel(state);
   const player = state.player;
-  props.domFloaters.hiddenPostBattle();
+  props.postBattle.hidden();
   await startNPCBattleStage(props, player, stage, level);
 }
 
@@ -45,7 +45,7 @@ async function forceRetryStoryBattle(props: GameProps & { inProgress: Story }) {
         return batterySystemTutorial;
     }
   })();
-  props.domFloaters.hiddenPostBattle();
+  props.postBattle.hidden();
   await startEpisode(props, episode);
 }
 

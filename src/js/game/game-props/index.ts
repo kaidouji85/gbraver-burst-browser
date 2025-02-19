@@ -4,6 +4,7 @@ import { Observable } from "rxjs";
 import { BGMManagerContainer } from "../../bgm/bgm-manager";
 import { CssHUDUIScale } from "../../css/hud-ui-scale";
 import { DOMDialogBinder } from "../../dom-dialogs/dom-dialog-binder";
+import { PostBattleFloater } from "../../dom-floaters/post-battle";
 import { DOMSceneBinder } from "../../dom-scenes/dom-scene-binder";
 import { DOMFader } from "../../game-dom/dom-fader/dom-fader";
 import { GameLoopContainer } from "../../game-loop/game-loop-container";
@@ -16,7 +17,6 @@ import { TDSceneBinder } from "../../td-scenes/td-scene-binder";
 import { PushWindow } from "../../window/push-window";
 import { Resize } from "../../window/resize";
 import { GBraverBurstBrowserConfigRepository } from "../config/repository/repository";
-import { DOMFloaters } from "../dom-floaters";
 import { FutureSuddenlyBattleEnd } from "../future-suddenly-battle-end";
 import { InProgress } from "../in-progress";
 import { InterruptScenes } from "../innterrupt-scenes";
@@ -88,8 +88,8 @@ export interface GameProps
   readonly domSceneBinder: DOMSceneBinder;
   /** DOMダイアログバインダー */
   readonly domDialogBinder: DOMDialogBinder;
-  /** DOMフローター管理オブジェクト */
-  readonly domFloaters: DOMFloaters;
+  /** ポストバトルフローター */
+  readonly postBattle: PostBattleFloater;
 
   /** レンダラ管理オブジェクト */
   readonly renderer: Renderer;

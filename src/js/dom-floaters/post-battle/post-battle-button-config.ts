@@ -1,4 +1,4 @@
-import type { PostBattle } from "../../post-battle";
+import type { PostBattle } from "../../game/post-battle";
 
 /** ボタンのスタイル */
 export type ButtonStyle = "MainButton" | "SubButton";

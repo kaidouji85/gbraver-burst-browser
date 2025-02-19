@@ -46,6 +46,21 @@ const createUnhandledrejection = (): Observable<GameAction> =>
   );
 
 /**
+ * ポストバトルアクション通知ストリームを生成する
+ * @param props ゲームプロパティ
+ * @returns ポストバトルアクション通知ストリーム
+ */
+const createPostBattleAction = (
+  props: Readonly<GameProps>,
+): Observable<GameAction> =>
+  props.postBattle.selectionCompleteNotifier().pipe(
+    map((postAction) => ({
+      type: "PostBattleAction",
+      postAction,
+    })),
+  );
+
+/**
  * ゲームアクション通知ストリームを生成する
  * @param props ゲームプロパティ
  * @returns ゲームアクション通知ストリーム
@@ -55,7 +70,7 @@ export const createGameActionNotifier = (
 ): Observable<GameAction> =>
   merge(
     props.gameAction.notify(),
-    props.domFloaters.gameActionNotifier(),
+    createPostBattleAction(props),
     createSuddenlyBattleEnd(props),
     createWebSocketAPIError(props),
     createVisibilityChange(),
