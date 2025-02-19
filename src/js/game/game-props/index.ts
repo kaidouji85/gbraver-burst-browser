@@ -4,7 +4,6 @@ import { Observable } from "rxjs";
 import { BGMManagerContainer } from "../../bgm/bgm-manager";
 import { CssHUDUIScale } from "../../css/hud-ui-scale";
 import { DOMDialogBinder } from "../../dom-dialogs/dom-dialog-binder";
-import { DOMFloaters } from "../../dom-floaters";
 import { PostBattleFloater } from "../../dom-floaters/post-battle";
 import { DOMSceneBinder } from "../../dom-scenes/dom-scene-binder";
 import { DOMFader } from "../../game-dom/dom-fader/dom-fader";
@@ -89,8 +88,6 @@ export interface GameProps
   readonly domSceneBinder: DOMSceneBinder;
   /** DOMダイアログバインダー */
   readonly domDialogBinder: DOMDialogBinder;
-  /** @deprecated DOMフローター管理オブジェクト */
-  readonly domFloaters: DOMFloaters;
   /** ポストバトルフローター */
   readonly postBattle: PostBattleFloater;
 

@@ -4,7 +4,6 @@ import { createActionManager } from "../../action-manager/action-manager";
 import { createBGMManager } from "../../bgm/bgm-manager";
 import { CssHUDUIScale } from "../../css/hud-ui-scale";
 import { DOMDialogBinder } from "../../dom-dialogs/dom-dialog-binder";
-import { DOMFloaters } from "../../dom-floaters";
 import { PostBattleFloater } from "../../dom-floaters/post-battle";
 import { DOMSceneBinder } from "../../dom-scenes/dom-scene-binder";
 import { DOMFader } from "../../game-dom/dom-fader/dom-fader";
@@ -21,7 +20,6 @@ import { FutureSuddenlyBattleEnd } from "../future-suddenly-battle-end";
 import { GameAction } from "../game-actions";
 import { InterruptScenes } from "../innterrupt-scenes";
 import { GameProps } from "./index";
-import { postBattleConnector } from "./post-battle-connector";
 
 /** GamePropsジェネレータパラメータ */
 export type GamePropsGeneratorParams = {
@@ -89,9 +87,6 @@ export function generateGameProps(params: GamePropsGeneratorParams): GameProps {
     interruptScenes: new InterruptScenes(),
     domSceneBinder: new DOMSceneBinder(),
     domDialogBinder: new DOMDialogBinder(),
-    domFloaters: new DOMFloaters({
-      postBattleConnector,
-    }),
     postBattle: new PostBattleFloater(),
     renderer,
     tdSceneBinder: new TDSceneBinder(hudUIScale),
