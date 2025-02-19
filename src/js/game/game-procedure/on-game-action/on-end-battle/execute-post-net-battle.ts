@@ -19,7 +19,7 @@ export async function executePostNetBattle(
   const { inProgress } = props;
   props.suddenlyBattleEnd.unbind();
   await props.api.disconnectWebsocket();
-  await props.domFloaters.showPostBattle({
+  await props.postBattle.show({
     ...props,
     buttons: PostNetworkBattleButtons,
   });

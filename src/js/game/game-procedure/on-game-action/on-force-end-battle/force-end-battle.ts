@@ -9,7 +9,7 @@ import { startTitle } from "../../start-title";
  * @returns 処理が完了したら発火するPromise
  */
 export async function forceEndBattle(props: Readonly<GameProps>) {
-  props.domFloaters.hiddenPostBattle();
+  props.postBattle.hidden();
   await Promise.all([
     (async () => {
       await props.fader.fadeOut();

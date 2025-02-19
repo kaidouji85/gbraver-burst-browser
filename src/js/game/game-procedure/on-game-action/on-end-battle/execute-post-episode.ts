@@ -89,6 +89,6 @@ export async function executePostEpisode(
     episodes: getEpisodes(props),
     gameEnd,
   });
-  await props.domFloaters.showPostBattle({ ...props, buttons });
+  await props.postBattle.show({ ...props, buttons });
   return { ...inProgress, story };
 }
