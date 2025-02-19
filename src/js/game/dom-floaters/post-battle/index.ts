@@ -1,14 +1,10 @@
-import { Observable, Subject, Unsubscribable } from "rxjs";
+import { Observable, Subject } from "rxjs";
 
-import { pop } from "../../../dom/pop";
-import { domPushStream } from "../../../dom/push-dom";
-import { waitFinishAnimation } from "../../../dom/wait-finish-animation";
 import { Exclusive } from "../../../exclusive/exclusive";
-import { createEmptySoundResource } from "../../../resource/sound/empty-sound-resource";
-import { SOUND_IDS } from "../../../resource/sound/ids";
 import { PostBattle } from "../../post-battle";
-import { ActionButton } from "./action-button";
 import { ROOT_CLASS } from "./class-name";
+import { hide } from "./procedures/hide";
+import { show } from "./procedures/show";
 import { PostBattleFloaterProps } from "./props";
 import { ShowParams } from "./show-params";
 
@@ -16,8 +12,6 @@ import { ShowParams } from "./show-params";
 export class PostBattleFloater {
   /** プロパティ */
   #props: PostBattleFloaterProps;
-  /** アンサブスクライバ */
-  #unsubscribers: Unsubscribable[];
 
   /**
    * コンストラクタ
@@ -28,17 +22,18 @@ export class PostBattleFloater {
       root: document.createElement("div"),
       exclusive: new Exclusive(),
       selectionComplete: new Subject(),
+      unsubscribers: [],
     };
     this.#props.root.className = ROOT_CLASS;
     this.#props.root.style.display = "none";
-    this.#unsubscribers = [];
+    this.#props.unsubscribers = [];
   }
 
   /**
    * デストラクタ相当の処理
    */
   destructor(): void {
-    this.#unsubscribers.forEach((v) => {
+    this.#props.unsubscribers.forEach((v) => {
       v.unsubscribe();
     });
     this.#props.root.innerHTML = "";
@@ -46,7 +41,6 @@ export class PostBattleFloater {
 
   /**
    * ルートHTML要素を取得する
-   *
    * @returns 取得結果
    */
   getRootHTMLElement(): HTMLElement {
@@ -55,107 +49,26 @@ export class PostBattleFloater {
 
   /**
    * アニメーション付きでフローターを表示する
-   *
    * @param params 表示パラメータ
    * @returns アニメーションが完了したら発火するPromise
    */
   async show(params: ShowParams): Promise<void> {
-    await this.#props.exclusive.execute(async () => {
-      const actionButtons = this.#createActionButtons(params);
-      actionButtons.forEach((v) => {
-        this.#props.root.appendChild(v.button);
-      });
-      this.#unsubscribers = actionButtons.map((v) => v.unsubscriber);
-      await this.#bottomUp();
-    });
+    await show(this.#props, params);
   }
 
   /**
    * フローターを非表示にする
    */
   hidden(): void {
-    this.#props.root.style.display = "none";
-    this.destructor();
+    hide(this.#props);
   }
 
   /**
    * 選択完了通知
    * ストリームには選択した戦闘終了後の挙動が渡される
-   *
    * @returns 通知ストリーム
    */
   selectionCompleteNotifier(): Observable<PostBattle> {
     return this.#props.selectionComplete;
-  }
-
-  /**
-   * 本フローターをボトムアップ表示する
-   *
-   * @returns アニメーションが完了したら発火するプロミス
-   */
-  async #bottomUp(): Promise<void> {
-    this.#props.root.style.display = "flex";
-    const animation = this.#props.root.animate(
-      [
-        {
-          transform: "translateY(100%)",
-        },
-        {
-          transform: "translateY(0)",
-        },
-      ],
-      {
-        duration: 400,
-        fill: "forwards",
-        easing: "ease",
-      },
-    );
-    await waitFinishAnimation(animation);
-  }
-
-  /**
-   * 戦闘後アクションボタンを生成する
-   * @param params 生成パラメータ
-   * @returns 生成結果
-   */
-  #createActionButtons(params: ShowParams): ActionButton[] {
-    const { resources, se, buttons } = params;
-    const pushButton =
-      resources.sounds.find((v) => v.id === SOUND_IDS.PUSH_BUTTON) ??
-      createEmptySoundResource();
-    const changeValue =
-      resources.sounds.find((v) => v.id === SOUND_IDS.CHANGE_VALUE) ??
-      createEmptySoundResource();
-
-    const buttonStyles = {
-      MainButton: {
-        className: `${ROOT_CLASS}__main-action`,
-        sound: pushButton,
-      },
-      SubButton: {
-        className: `${ROOT_CLASS}__sub-action`,
-        sound: changeValue,
-      },
-    };
-    return buttons.map(({ style, action, label }) => {
-      const button = document.createElement("button");
-      button.innerText = label;
-      const { className, sound } =
-        buttonStyles[style] ?? buttonStyles["SubButton"];
-      button.className = className;
-      const unsubscriber = domPushStream(button).subscribe(({ event }) => {
-        this.#props.exclusive.execute(async () => {
-          event.preventDefault();
-          event.stopPropagation();
-          se.play(sound);
-          await pop(button);
-          this.#props.selectionComplete.next(action);
-        });
-      });
-      return {
-        button,
-        unsubscriber,
-      };
-    });
   }
 }
