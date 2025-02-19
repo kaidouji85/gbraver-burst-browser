@@ -3,6 +3,7 @@ import { Observable } from "rxjs";
 import { PostBattle } from "../../post-battle";
 import { ROOT_CLASS } from "./class-name";
 import { createPostBattleFloaterProps } from "./procedures/create-post-battle-floater-props";
+import { destructor } from "./procedures/destructor";
 import { hide } from "./procedures/hide";
 import { show } from "./procedures/show";
 import { PostBattleFloaterProps } from "./props";
@@ -28,10 +29,7 @@ export class PostBattleFloater {
    * デストラクタ相当の処理
    */
   destructor(): void {
-    this.#props.unsubscribers.forEach((v) => {
-      v.unsubscribe();
-    });
-    this.#props.root.innerHTML = "";
+    destructor(this.#props);
   }
 
   /**
