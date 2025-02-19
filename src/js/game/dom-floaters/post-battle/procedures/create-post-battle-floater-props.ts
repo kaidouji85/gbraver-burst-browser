@@ -1,6 +1,7 @@
 import { Subject } from "rxjs";
 
 import { Exclusive } from "../../../../exclusive/exclusive";
+import { ROOT_CLASS } from "../class-name";
 import { PostBattleFloaterProps } from "../props";
 
 /**
@@ -8,8 +9,11 @@ import { PostBattleFloaterProps } from "../props";
  * @returns 生成結果
  */
 export function createPostBattleFloaterProps(): PostBattleFloaterProps {
+  const root = document.createElement("div");
+  root.className = ROOT_CLASS;
+  root.style.display = "none";
   return {
-    root: document.createElement("div"),
+    root,
     exclusive: new Exclusive(),
     selectionComplete: new Subject(),
     unsubscribers: [],

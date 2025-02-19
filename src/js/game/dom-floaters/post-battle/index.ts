@@ -1,7 +1,6 @@
 import { Observable } from "rxjs";
 
 import { PostBattle } from "../../post-battle";
-import { ROOT_CLASS } from "./class-name";
 import { createPostBattleFloaterProps } from "./procedures/create-post-battle-floater-props";
 import { destructor } from "./procedures/destructor";
 import { hide } from "./procedures/hide";
@@ -20,9 +19,6 @@ export class PostBattleFloater {
    */
   constructor() {
     this.#props = createPostBattleFloaterProps();
-    this.#props.root.className = ROOT_CLASS;
-    this.#props.root.style.display = "none";
-    this.#props.unsubscribers = [];
   }
 
   /**
@@ -54,6 +50,7 @@ export class PostBattleFloater {
    */
   hidden(): void {
     hide(this.#props);
+    destructor(this.#props);
   }
 
   /**
