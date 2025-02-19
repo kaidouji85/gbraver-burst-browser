@@ -11,7 +11,7 @@ export function appendChildrenToBody(props: Readonly<GameProps>): void {
     props.interruptScenes.getRootHTMLElement(),
     props.domDialogBinder.getRootHTMLElement(),
     props.domSceneBinder.getRootHTMLElement(),
-    props.domFloaters.getRootHTMLElement(),
+    props.postBattle.getRootHTMLElement(),
     props.renderer.getRendererDOM(),
     ...props.tdSceneBinder.getDOMLayerElements(),
   ];
