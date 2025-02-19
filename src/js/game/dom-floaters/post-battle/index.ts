@@ -1,8 +1,8 @@
-import { Observable, Subject } from "rxjs";
+import { Observable } from "rxjs";
 
-import { Exclusive } from "../../../exclusive/exclusive";
 import { PostBattle } from "../../post-battle";
 import { ROOT_CLASS } from "./class-name";
+import { createPostBattleFloaterProps } from "./procedures/create-post-battle-floater-props";
 import { hide } from "./procedures/hide";
 import { show } from "./procedures/show";
 import { PostBattleFloaterProps } from "./props";
@@ -18,12 +18,7 @@ export class PostBattleFloater {
    * 本クラスの初期表示は(display: none)である
    */
   constructor() {
-    this.#props = {
-      root: document.createElement("div"),
-      exclusive: new Exclusive(),
-      selectionComplete: new Subject(),
-      unsubscribers: [],
-    };
+    this.#props = createPostBattleFloaterProps();
     this.#props.root.className = ROOT_CLASS;
     this.#props.root.style.display = "none";
     this.#props.unsubscribers = [];
