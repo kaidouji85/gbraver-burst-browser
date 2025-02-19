@@ -88,7 +88,7 @@ export interface GameProps
   readonly domSceneBinder: DOMSceneBinder;
   /** DOMダイアログバインダー */
   readonly domDialogBinder: DOMDialogBinder;
-  /** DOMフローター管理オブジェクト */
+  /** @deprecated DOMフローター管理オブジェクト */
   readonly domFloaters: DOMFloaters;
 
   /** レンダラ管理オブジェクト */

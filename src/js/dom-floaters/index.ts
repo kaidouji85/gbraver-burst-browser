@@ -14,7 +14,7 @@ type DOMFloatersParams = {
 /** showPostBattleメソッドのパラメータ */
 type ShowPostBattleParams = ShowParams;
 
-/** DOMフローター管理オブジェクト */
+/** @deprecated DOMフローター管理オブジェクト */
 export class DOMFloaters {
   /** ルートHTML要素 */
   #root: HTMLElement;
