@@ -1,4 +1,4 @@
-import { PostNetworkBattleButtons } from "../../../../dom-floaters/post-battle/post-battle-buttons";
+import { PostNetworkBattleButtons } from "../../../post-battle-buttons";
 import { GameProps } from "../../../game-props";
 import { InProgress } from "../../../in-progress";
 import { CasualMatch } from "../../../in-progress/casual-match";

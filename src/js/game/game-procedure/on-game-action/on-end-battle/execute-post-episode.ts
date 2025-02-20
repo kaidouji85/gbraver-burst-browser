@@ -5,7 +5,7 @@ import {
   PostEpisodeButtons,
   PostEpisodeLoseButtons,
   PostEpisodeWinButtons,
-} from "../../../../dom-floaters/post-battle/post-battle-buttons";
+} from "../../../post-battle-buttons";
 import { Episode } from "../../../episodes/episode";
 import { EndBattle } from "../../../game-actions/end-battle";
 import { GameProps } from "../../../game-props";
