@@ -18,29 +18,25 @@ export function createActionButtons(
   params: ShowParams,
 ): ActionButton[] {
   const { resources, se, buttons } = params;
-  const pushButton =
-    resources.sounds.find((v) => v.id === SOUND_IDS.PUSH_BUTTON) ??
-    createEmptySoundResource();
-  const changeValue =
-    resources.sounds.find((v) => v.id === SOUND_IDS.CHANGE_VALUE) ??
-    createEmptySoundResource();
-
   const buttonStyles = {
     MainButton: {
       className: `${ROOT_CLASS}__main-action`,
-      sound: pushButton,
+      soundId: SOUND_IDS.PUSH_BUTTON,
     },
     SubButton: {
       className: `${ROOT_CLASS}__sub-action`,
-      sound: changeValue,
+      soundId: SOUND_IDS.CHANGE_VALUE,
     },
   };
   return buttons.map(({ style, action, label }) => {
     const button = document.createElement("button");
     button.innerText = label;
-    const { className, sound } =
+    const { className, soundId } =
       buttonStyles[style] ?? buttonStyles["SubButton"];
     button.className = className;
+    const sound =
+      resources.sounds.find((v) => v.id === soundId) ??
+      createEmptySoundResource();
     const unsubscriber = domPushStream(button).subscribe(({ event }) => {
       props.exclusive.execute(async () => {
         event.preventDefault();
