@@ -1,9 +1,9 @@
-import { PostNetworkBattleButtons } from "../../../post-battle-buttons";
 import { GameProps } from "../../../game-props";
 import { InProgress } from "../../../in-progress";
 import { CasualMatch } from "../../../in-progress/casual-match";
 import { PrivateMatchGuest } from "../../../in-progress/private-match-guest";
 import { PrivateMatchHost } from "../../../in-progress/private-match-host";
+import { PostNetworkBattleButtons } from "../../../post-battle-buttons";
 
 /** ネット対戦のサブフロー */
 type PostNetworkBattle = CasualMatch | PrivateMatchHost | PrivateMatchGuest;

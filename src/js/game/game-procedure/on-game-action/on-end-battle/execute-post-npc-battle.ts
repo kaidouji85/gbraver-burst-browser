@@ -1,9 +1,4 @@
 import { PostBattleButtonConfig } from "../../../../dom-floaters/post-battle/post-battle-button-config";
-import {
-  PostNPCBattleComplete,
-  PostNPCBattleLoseButtons,
-  PostNPCBattleWinButtons,
-} from "../../../post-battle-buttons";
 import { EndBattle } from "../../../game-actions/end-battle";
 import { GameProps } from "../../../game-props";
 import { InProgress } from "../../../in-progress";
@@ -13,6 +8,11 @@ import {
   NPCBattleResult,
 } from "../../../npc-battle/npc-battle-result";
 import { updateNPCBattleState } from "../../../npc-battle/updated-npc-battle-state";
+import {
+  PostNPCBattleComplete,
+  PostNPCBattleLoseButtons,
+  PostNPCBattleWinButtons,
+} from "../../../post-battle-buttons";
 
 /**
  * NPCバトル終了後に表示するアクションボタンを求める
