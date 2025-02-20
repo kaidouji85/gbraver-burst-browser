@@ -5,7 +5,7 @@ import { createEmptySoundResource } from "../../../resource/sound/empty-sound-re
 import { SOUND_IDS } from "../../../resource/sound/ids";
 import { SEPlayerContainer } from "../../../se/se-player";
 import { ActionButton } from "../action-button/action-button";
-import { ROOT_CLASS } from "../class-name";
+import { ROOT_CLASS } from "../dom/class-name";
 import { PostBattleButtonConfig } from "../post-battle-button-config";
 import { PostBattleFloaterProps } from "../props";
 
