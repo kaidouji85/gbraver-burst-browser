@@ -11,6 +11,7 @@ export function waitFinishAnimation(
   options?: Partial<SignalContainer>,
 ): Promise<void> {
   let onAbort: (() => void) | null = null;
+  let onFinish: (() => void) | null = null;
   const signal = options?.signal;
   return new Promise<void>((resolve, reject) => {
     if (signal?.aborted) {
@@ -24,12 +25,14 @@ export function waitFinishAnimation(
     };
     signal?.addEventListener("abort", onAbort);
 
-    animation.onfinish = () => {
-      resolve();
-    };
+    onFinish = () => resolve();
+    animation.addEventListener("finish", onFinish);
   }).finally(() => {
     if (signal && onAbort) {
       signal.removeEventListener("abort", onAbort);
+    }
+    if (onFinish) {
+      animation.removeEventListener("finish", onFinish);
     }
   });
 }
