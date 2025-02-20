@@ -29,7 +29,7 @@ type CreateActionButtonOptions = ResourcesContainer &
     /** プロパティ */
     props: PostBattleFloaterProps;
     /** ボタン設定 */
-    button: PostBattleButtonConfig;
+    buttonConfig: PostBattleButtonConfig;
   };
 
 /**
@@ -40,7 +40,7 @@ type CreateActionButtonOptions = ResourcesContainer &
 export function createActionButton(
   options: CreateActionButtonOptions,
 ): ActionButton {
-  const { resources, se, props, button: buttonConfig } = options;
+  const { resources, se, props, buttonConfig } = options;
   const { style, action, label } = buttonConfig;
   const button = document.createElement("button");
   button.innerText = label;
