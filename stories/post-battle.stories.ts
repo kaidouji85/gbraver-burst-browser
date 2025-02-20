@@ -6,7 +6,7 @@ import {
   PostNPCBattleComplete,
   PostNPCBattleLoseButtons,
   PostNPCBattleWinButtons,
-} from "../src/js/dom-floaters/post-battle/post-battle-buttons";
+} from "../src/js/game/post-battle-buttons";
 import { waitTime } from "../src/js/wait/wait-time";
 import { domStub } from "./stub/dom-stub";
 
@@ -14,6 +14,7 @@ export default {
   title: "post-battle",
 };
 
+/** NPCバトル勝利 */
 export const postNPCBattleWin: StoryFn = domStub((params) => {
   const floater = new PostBattleFloater();
   floater.show({ ...params, buttons: PostNPCBattleWinButtons });
@@ -23,6 +24,7 @@ export const postNPCBattleWin: StoryFn = domStub((params) => {
   return floater.getRootHTMLElement();
 });
 
+/** NPCバトル敗北 */
 export const postNPCBattleLose: StoryFn = domStub((params) => {
   const floater = new PostBattleFloater();
   floater.show({ ...params, buttons: PostNPCBattleLoseButtons });
@@ -32,6 +34,7 @@ export const postNPCBattleLose: StoryFn = domStub((params) => {
   return floater.getRootHTMLElement();
 });
 
+/** NPCバトル完全クリア */
 export const postNPCBattleComplete: StoryFn = domStub((params) => {
   const floater = new PostBattleFloater();
   floater.show({ ...params, buttons: PostNPCBattleComplete });
@@ -41,6 +44,7 @@ export const postNPCBattleComplete: StoryFn = domStub((params) => {
   return floater.getRootHTMLElement();
 });
 
+/** ネット対戦終了 */
 export const postNetworkBattle: StoryFn = domStub((params) => {
   const floater = new PostBattleFloater();
   floater.show({ ...params, buttons: PostNetworkBattleButtons });
@@ -50,9 +54,9 @@ export const postNetworkBattle: StoryFn = domStub((params) => {
   return floater.getRootHTMLElement();
 });
 
+/** 表示、非表示の繰り返し */
 export const showHidden: StoryFn = domStub((params) => {
   const floater = new PostBattleFloater();
-
   (async () => {
     await floater.show({ ...params, buttons: PostNPCBattleWinButtons });
     await waitTime(3000);

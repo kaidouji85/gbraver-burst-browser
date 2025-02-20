@@ -7,10 +7,8 @@ export type ButtonStyle = "MainButton" | "SubButton";
 export type PostBattleButtonConfig = {
   /** 戦闘終了後のアクション */
   action: PostBattle;
-
   /** ボタンのスタイル */
   style: ButtonStyle;
-
   /** ボタンの文言 */
   label: string;
 };

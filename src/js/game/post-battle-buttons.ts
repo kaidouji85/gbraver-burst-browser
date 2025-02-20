@@ -1,4 +1,4 @@
-import type { PostBattleButtonConfig } from "./post-battle-button-config";
+import type { PostBattleButtonConfig } from "../dom-floaters/post-battle/post-battle-button-config";
 
 /** NPCバトル勝利後のアクションボタン */
 export const PostNPCBattleWinButtons: PostBattleButtonConfig[] = [

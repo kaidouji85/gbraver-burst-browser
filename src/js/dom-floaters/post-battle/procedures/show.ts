@@ -1,7 +1,7 @@
+import { createActionButton } from "../action-button/create-action-button";
 import { PostBattleFloaterProps } from "../props";
 import { ShowParams } from "../show-params";
 import { bottomUp } from "./bottom-up";
-import { createActionButtons } from "./create-action-buttons";
 
 /**
  * アニメーション付きでフローターを表示する
@@ -14,7 +14,9 @@ export async function show(
   params: ShowParams,
 ): Promise<void> {
   await props.exclusive.execute(async () => {
-    const actionButtons = createActionButtons(props, params);
+    const actionButtons = params.buttons.map((buttonConfig) =>
+      createActionButton({ ...params, props, buttonConfig }),
+    );
     actionButtons.forEach((v) => {
       props.root.appendChild(v.button);
     });
