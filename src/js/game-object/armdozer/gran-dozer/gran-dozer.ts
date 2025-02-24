@@ -91,6 +91,18 @@ export class GranDozer extends EmptyArmdozerSprite {
   }
 
   /** @override */
+  guard(): Animate {
+    // TODO 専用アニメーションを実装する
+    return knockBack(this.#props);
+  }
+
+  /** @override */
+  guardToStand(): Animate {
+    // TODO 専用アニメーションを実装する
+    return knockBackToStand(this.#props);
+  }
+
+  /** @override */
   avoid(): Animate {
     return backStep(this.#props);
   }
