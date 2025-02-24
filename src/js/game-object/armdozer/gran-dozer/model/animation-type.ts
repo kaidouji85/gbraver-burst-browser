@@ -4,4 +4,5 @@ export type AnimationType =
   | "TACKLE_CHARGE"
   | "TACKLE_ATTACK"
   | "TACKLE_TO_STAND"
-  | "STEP";
+  | "STEP"
+  | "KNOCK_BACK";
