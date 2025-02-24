@@ -10,7 +10,9 @@ export function onButtonPush(
   props: Readonly<BurstButtonProps>,
   action: Readonly<PushDOM>,
 ): void {
-  action.event.preventDefault();
-  action.event.stopPropagation();
-  props.push.next();
+  const { push } = props;
+  const { event } = action;
+  event.preventDefault();
+  event.stopPropagation();
+  push.next({ event });
 }

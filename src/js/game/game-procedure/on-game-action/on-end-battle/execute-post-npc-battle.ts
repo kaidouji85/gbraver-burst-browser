@@ -1,15 +1,18 @@
-import { PostBattleButtonConfig } from "../../../dom-floaters/post-battle/post-battle-button-config";
-import {
-  PostNPCBattleComplete,
-  PostNPCBattleLoseButtons,
-  PostNPCBattleWinButtons,
-} from "../../../dom-floaters/post-battle/post-battle-buttons";
+import { PostBattleButtonConfig } from "../../../../dom-floaters/post-battle/post-battle-button-config";
 import { EndBattle } from "../../../game-actions/end-battle";
 import { GameProps } from "../../../game-props";
 import { InProgress } from "../../../in-progress";
 import { NPCBattle } from "../../../in-progress/npc-battle";
-import { NPCBattleResult } from "../../../npc-battle/npc-battle-result";
+import {
+  getNPCBattleResult,
+  NPCBattleResult,
+} from "../../../npc-battle/npc-battle-result";
 import { updateNPCBattleState } from "../../../npc-battle/updated-npc-battle-state";
+import {
+  PostNPCBattleComplete,
+  PostNPCBattleLoseButtons,
+  PostNPCBattleWinButtons,
+} from "../../../post-battle-buttons";
 
 /**
  * NPCバトル終了後に表示するアクションボタンを求める
@@ -40,24 +43,19 @@ export async function executePostNPCBattle(
   props: Readonly<GameProps & { inProgress: NPCBattle }>,
   action: Readonly<EndBattle>,
 ): Promise<InProgress> {
-  const { inProgress, domFloaters } = props;
+  const { inProgress, postBattle } = props;
   const { gameEnd } = action;
   if (inProgress.npcBattle.type !== "PlayingNPCBattle") {
     return inProgress;
   }
 
-  const updated = updateNPCBattleState(
-    inProgress.npcBattle.state,
-    gameEnd.result,
-  );
-  if (!updated) {
-    return inProgress;
-  }
-
-  const buttons = postNPCBattleButtons(updated.result);
-  await domFloaters.showPostBattle({ ...props, buttons });
+  const { npcBattle } = inProgress;
+  const npcBattleResult = getNPCBattleResult(npcBattle.state, gameEnd.result);
+  const updatedState = updateNPCBattleState(npcBattle.state, npcBattleResult);
+  const buttons = postNPCBattleButtons(npcBattleResult);
+  await postBattle.show({ ...props, buttons });
   return {
     ...inProgress,
-    npcBattle: { ...inProgress.npcBattle, state: updated.state },
+    npcBattle: { ...inProgress.npcBattle, state: updatedState },
   };
 }

@@ -2,6 +2,7 @@ import { ResourcesContainer } from "../../../resource";
 import { PathIds } from "../../../resource/path/ids";
 import {
   BACKGROUND_HIDDEN,
+  BATTLE_SIMULATOR_DISABLED,
   END_BATTLE_CONFIRM_DIALOG_HIDDEN,
   MENU_HIDDEN,
   RETRY,
@@ -33,6 +34,7 @@ export function rootInnerHTML(params: RootInnerHTMLParams): string {
     ROOT,
     BACKGROUND_HIDDEN,
     MENU_HIDDEN,
+    BATTLE_SIMULATOR_DISABLED,
     RETRY_CONFIRM_DIALOG_HIDDEN,
     END_BATTLE_CONFIRM_DIALOG_HIDDEN,
     retryClass,

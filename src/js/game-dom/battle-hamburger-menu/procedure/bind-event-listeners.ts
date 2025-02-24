@@ -4,7 +4,6 @@ import { domPushStream } from "../../../dom/push-dom";
 import { pushWindowsStream } from "../../../window/push-window";
 import {
   extractBackGround,
-  extractBattleSimulator,
   extractEndBattle,
   extractRetry,
 } from "../dom/extract-element";
@@ -14,12 +13,14 @@ import { onBattleSimulatorPush } from "./on-battle-simulator-push";
 import { onEndBattleButtonPush } from "./on-end-battle-button-push";
 import { onEndBattleCancelPush } from "./on-end-battle-cancel-push";
 import { onEndBattleConfirmDialogCloserPush } from "./on-end-battle-confirm-dialog-closer-push";
+import { onEndBattleConfirmDialogPush } from "./on-end-battle-confirm-dialog-push";
 import { onEndBattlePush } from "./on-end-battle-push";
 import { onHamburgerIconPush } from "./on-hamburger-icon-push";
 import { onMenuOutsidePush } from "./on-menu-outside-push";
 import { onRetryButtonPush } from "./on-retry-button-push";
 import { onRetryCancelButtonPush } from "./on-retry-cancel-button-push";
 import { onRetryConfirmDialogCloserPush } from "./on-retry-confirm-dialog-closer-push";
+import { onRetryConfirmDialogPush } from "./on-retry-confirm-dialog-push";
 import { onRetryPush } from "./on-retry-push";
 
 /**
@@ -37,6 +38,9 @@ export function bindEventListeners(
     pushWindowsStream().subscribe(() => {
       onMenuOutsidePush(props);
     }),
+    domPushStream(props.retryConfirmDialog).subscribe((action) => {
+      onRetryConfirmDialogPush(action);
+    }),
     domPushStream(extractRetry(props.root)).subscribe((action) => {
       onRetryPush(props, action);
     }),
@@ -52,8 +56,11 @@ export function bindEventListeners(
     domPushStream(props.retryButton).subscribe((action) => {
       onRetryButtonPush(props, action);
     }),
-    domPushStream(extractBattleSimulator(props.root)).subscribe((action) => {
+    domPushStream(props.battleSimulator).subscribe((action) => {
       onBattleSimulatorPush(props, action);
+    }),
+    domPushStream(props.endBattleConfirmDialog).subscribe((action) => {
+      onEndBattleConfirmDialogPush(action);
     }),
     domPushStream(extractEndBattle(props.root)).subscribe((action) => {
       onEndBattlePush(props, action);

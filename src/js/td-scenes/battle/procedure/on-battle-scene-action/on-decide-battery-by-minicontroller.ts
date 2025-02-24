@@ -3,6 +3,7 @@ import { BatteryCommand } from "gbraver-burst-core";
 import { DecideBatteryByMiniController } from "../../actions/decide-battery-by-mini-controller";
 import { decisionByBatterySelector } from "../../animation/decision-by-battery-selector";
 import { decisionByMiniController } from "../../animation/decision-by-mini-controller";
+import { createAnimationPlay } from "../../play-animation";
 import { BattleSceneProps } from "../../props";
 import { doBatteryEventIfNeeded } from "../do-battery-event-if-needed";
 import { progressGame } from "../progress-game";
@@ -36,7 +37,8 @@ export function onDecideBatteryByMiniController(
       props.controllerType === "BigButton"
         ? decisionByBatterySelector(props.view)
         : decisionByMiniController(props.view);
-    await props.animatePlayer.play(decisionAnimation);
+    const playAnimation = createAnimationPlay(props);
+    await playAnimation(decisionAnimation);
     await progressGame(props, batteryCommand);
   });
 }

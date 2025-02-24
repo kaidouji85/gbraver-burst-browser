@@ -14,21 +14,7 @@ export function straightPunch(props: ShinBraverAnimationProps): Animate {
       model.animation.type = "SP_ATTACK";
     }),
   ).chain(
-    tween(model.animation, (t) =>
-      t.to(
-        {
-          frame: 1,
-        },
-        150,
-      ),
-    ),
-    tween(model.position, (t) =>
-      t.to(
-        {
-          x: "-80",
-        },
-        150,
-      ),
-    ),
+    tween(model.animation, (t) => t.to({ frame: 1 }, 150)),
+    tween(model.position, (t) => t.to({ x: "-80" }, 150)),
   );
 }

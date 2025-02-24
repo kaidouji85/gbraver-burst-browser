@@ -2,10 +2,10 @@ import { Observable, Unsubscribable } from "rxjs";
 import * as THREE from "three";
 
 import { Animate } from "../../../animation/animate";
-import type { GameObjectAction } from "../../action/game-object-action";
-import type { ArmdozerSprite } from "../armdozer-sprite";
+import { GameObjectAction } from "../../action/game-object-action";
+import { ArmdozerSprite } from "../armdozer-sprite";
 import { EmptyArmdozerSprite } from "../empty-armdozer-sprite";
-import { avoid } from "./animation/avoid";
+import { backStep } from "./animation/back-step";
 import { bowDown } from "./animation/bow-down";
 import { bowUp } from "./animation/bow-up";
 import { burst } from "./animation/burst";
@@ -141,7 +141,7 @@ export class ShinBraver extends EmptyArmdozerSprite implements ArmdozerSprite {
 
   /** @override */
   avoid(): Animate {
-    return avoid(this.#props);
+    return backStep(this.#props);
   }
 
   /** @override */

@@ -1,11 +1,6 @@
 import { GameEnd } from "gbraver-burst-core";
 
-import { PostBattleButtonConfig } from "../../../dom-floaters/post-battle/post-battle-button-config";
-import {
-  PostEpisodeButtons,
-  PostEpisodeLoseButtons,
-  PostEpisodeWinButtons,
-} from "../../../dom-floaters/post-battle/post-battle-buttons";
+import { PostBattleButtonConfig } from "../../../../dom-floaters/post-battle/post-battle-button-config";
 import { Episode } from "../../../episodes/episode";
 import { EndBattle } from "../../../game-actions/end-battle";
 import { GameProps } from "../../../game-props";
@@ -15,6 +10,11 @@ import {
   Story,
   StorySubFLow,
 } from "../../../in-progress/story";
+import {
+  PostEpisodeButtons,
+  PostEpisodeLoseButtons,
+  PostEpisodeWinButtons,
+} from "../../../post-battle-buttons";
 import { getEpisodes } from "../../get-episodes";
 
 /** createPostEpisodeResultのオプション */
@@ -89,6 +89,6 @@ export async function executePostEpisode(
     episodes: getEpisodes(props),
     gameEnd,
   });
-  await props.domFloaters.showPostBattle({ ...props, buttons });
+  await props.postBattle.show({ ...props, buttons });
   return { ...inProgress, story };
 }

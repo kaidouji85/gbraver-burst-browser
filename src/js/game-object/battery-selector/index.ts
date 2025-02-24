@@ -1,6 +1,7 @@
 import { Observable, Unsubscribable } from "rxjs";
 import * as THREE from "three";
 
+import { SignalContainer } from "../../abort-controller/signal-container";
 import { Animate } from "../../animation/animate";
 import { close } from "./animation/close";
 import { decide } from "./animation/decide";
@@ -79,29 +80,36 @@ export class BatterySelector {
   /**
    * バッテリープラス
    * メモリ最大値の場合は何もしない
+   * @param options オプション
    * @returns 処理が完了したら発火するPromise
    */
-  async batteryPlus(): Promise<void> {
-    await batteryPlus(this.#props);
+  async batteryPlus(options?: Partial<SignalContainer>): Promise<void> {
+    await batteryPlus(this.#props, options);
   }
 
   /**
    * バッテリーマイナス
    * メモリ最小値の場合は何もしない
+   * @param options オプション
    * @returns 処理が完了したら発火するPromise
    */
-  async batteryMinus(): Promise<void> {
-    await batteryMinus(this.#props);
+  async batteryMinus(options?: Partial<SignalContainer>): Promise<void> {
+    await batteryMinus(this.#props, options);
   }
 
   /**
    * 無音でバッテリー値を設定する
    * @param battery バッテリー設定値
    * @param duration ボタンを押す間隔（ミリ秒）
+   * @param options オプション
    * @returns 処理が完了したら発火するPromise
    */
-  async toBatterySilently(battery: number, duration = 200): Promise<void> {
-    await toBatterySilently(this.#props, battery, duration);
+  async toBatterySilently(
+    battery: number,
+    duration = 200,
+    options?: Partial<SignalContainer>,
+  ): Promise<void> {
+    await toBatterySilently(this.#props, battery, duration, options);
   }
 
   /**

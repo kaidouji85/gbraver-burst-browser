@@ -16,16 +16,7 @@ export function dash(props: WingDozerAnimationProps): Animate {
       se.play(sounds.motor);
     }),
   )
-    .chain(
-      tween(model.animation, (t) =>
-        t.to(
-          {
-            frame: 1,
-          },
-          300,
-        ),
-      ),
-    )
+    .chain(tween(model.animation, (t) => t.to({ frame: 1 }, 300)))
     .chain(delay(500))
     .chain(
       tween(model.animation, (t) =>
@@ -35,14 +26,5 @@ export function dash(props: WingDozerAnimationProps): Animate {
         }),
       ),
     )
-    .chain(
-      tween(model.animation, (t) =>
-        t.to(
-          {
-            frame: 1,
-          },
-          300,
-        ),
-      ),
-    );
+    .chain(tween(model.animation, (t) => t.to({ frame: 1 }, 300)));
 }

@@ -1,7 +1,14 @@
 import { Group } from "@tweenjs/tween.js";
 
+import { SignalContainer } from "../abort-controller/signal-container";
 import { GBTween } from "./gb-tween";
 import { GlobalTweenGroup } from "./global-tween-group";
+
+/** アニメーション再生オプション */
+export type AnimationPlayOptions = Partial<SignalContainer> & {
+  /** Tweenグループ */
+  group?: Group;
+};
 
 /**
  * アニメーション
@@ -53,14 +60,14 @@ import { GlobalTweenGroup } from "./global-tween-group";
 export class Animate {
   /* eslint-disable @typescript-eslint/no-explicit-any */
   /** 開始Tween */
-  _start: GBTween<any>;
+  private _start: GBTween<any>;
   /** 終了Tween */
-  _end: GBTween<any>;
+  private _end: GBTween<any>;
   /** このアニメーションが保持するすべてのTween（_start、_endを含む）*/
-  _tweens: GBTween<any>[];
+  private _tweens: GBTween<any>[];
   /* eslint-enable */
   /** 全体の再生時間 */
-  _time: number;
+  private _time: number;
 
   /**
    * 連続したTweenの最初、最後からTweenAnimatonを生成する
@@ -85,28 +92,64 @@ export class Animate {
   }
 
   /**
+   * 終了Tweenのgetter
+   * @returns 終了Tween
+   */
+  /* eslint-disable @typescript-eslint/no-explicit-any */
+  get end(): GBTween<any> {
+    /* eslint-enable */
+    return this._end;
+  }
+
+  /**
+   * 全体の再生時間のgetter
+   * @returns 全体の再生時間
+   */
+  get time(): number {
+    return this._time;
+  }
+
+  /**
    * アニメーションを再生する
-   * @param group アニメーショングループ
+   * @param options 再生オプション
    * @returns アニメーション再生完了後に呼び出されるPromise
    */
-  play(group?: Group): Promise<void> {
-    const targetGroup = group ?? GlobalTweenGroup;
+  play(options?: AnimationPlayOptions): Promise<void> {
+    const group = options?.group ?? GlobalTweenGroup;
     this._tweens.forEach((tween) => {
-      targetGroup.add(tween);
+      group.add(tween);
       tween.onComplete(() => {
-        targetGroup.remove(tween);
+        group.remove(tween);
         tween.getChainedTweens().forEach((chainedTween) => {
           // chain先のTweenを確実にアップデートするために、Groupに追加している
           // （Group.updateでは同メソッド実行中に追加されたTweenはアップデートされる）
-          targetGroup.add(chainedTween);
+          group.add(chainedTween);
         });
       });
     });
-    return new Promise((resolve) => {
+
+    let onAbort: (() => void) | null = null;
+    const signal = options?.signal;
+    return new Promise<void>((resolve, reject) => {
+      if (signal?.aborted) {
+        reject(signal.reason);
+        return;
+      }
+
+      onAbort = () => {
+        this._start.stop();
+        reject(signal?.reason);
+      };
+      signal?.addEventListener("abort", onAbort);
+
       this._start.start();
       this._end.onComplete(() => {
         resolve();
       });
+    }).finally(() => {
+      if (signal && onAbort) {
+        signal.removeEventListener("abort", onAbort);
+      }
     });
   }
 

@@ -2,11 +2,10 @@ import { GameState, Player } from "gbraver-burst-core";
 import { Observable, Subject } from "rxjs";
 
 import { createActionManager } from "../../../action-manager/action-manager";
-import { createAnimatePlayer } from "../../../animation/animate-player";
 import { BGMManagerContainer } from "../../../bgm/bgm-manager";
 import { DOMDialogBinder } from "../../../dom-dialogs/dom-dialog-binder";
 import { Exclusive } from "../../../exclusive/exclusive";
-import { GameLoop } from "../../../game-loop/game-loop";
+import { GameLoopContainer } from "../../../game-loop/game-loop-container";
 import { OverlapNotifier } from "../../../render/overlap-notifier";
 import { RendererDomGetter } from "../../../render/renderer-dom-getter";
 import { Rendering } from "../../../render/rendering";
@@ -33,6 +32,7 @@ export interface OwnRenderer
 export type BattleScenePropsCreatorParams = BGMManagerContainer &
   ResourcesContainer &
   SEPlayerContainer &
+  Readonly<GameLoopContainer> &
   Readonly<{
     /** 再生するBGM ID */
     playingBGM: SoundId;
@@ -64,8 +64,6 @@ export type BattleScenePropsCreatorParams = BGMManagerContainer &
     /** 敵情報 */
     enemy: Player;
 
-    /** ゲームループストリーム */
-    gameLoop: Observable<GameLoop>;
     /** リサイズストリーム */
     resize: Observable<Resize>;
     /** window押下ストリーム */
@@ -87,9 +85,7 @@ export function createBattleSceneProps(
     enemyId: params.enemy.playerId,
     stateHistory: params.initialState,
 
-    animatePlayer: createAnimatePlayer({
-      timeScale: params.initialAnimationTimeScale,
-    }),
+    animationTimeScale: params.initialAnimationTimeScale,
 
     customBattleEvent: params.customBattleEvent ?? null,
     exclusive: new Exclusive(),
@@ -99,5 +95,7 @@ export function createBattleSceneProps(
 
     endBattle: new Subject(),
     battleSceneAction: createActionManager<BattleSceneAction>(),
+
+    abortController: new AbortController(),
   };
 }

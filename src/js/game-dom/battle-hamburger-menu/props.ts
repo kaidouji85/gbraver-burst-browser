@@ -8,6 +8,8 @@ import { SEPlayer } from "../../se/se-player";
 export type BattleHamburgerMenuProps = {
   /** リトライ可能かどうか、trueで可能 */
   readonly canRetry: boolean;
+  /** バトルシミュレーターが開始できるか否か、trueで可能 */
+  canBattleSimulatorStart: boolean;
 
   /** ルート要素 */
   readonly root: HTMLElement;
@@ -17,6 +19,8 @@ export type BattleHamburgerMenuProps = {
   readonly menu: HTMLElement;
   /** バックグラウンド */
   readonly background: HTMLElement;
+  /** バトルシミュレーター */
+  readonly battleSimulator: HTMLElement;
 
   /** リトライ確認ダイアログ */
   readonly retryConfirmDialog: HTMLElement;

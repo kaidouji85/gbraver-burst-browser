@@ -1,7 +1,10 @@
 import { Observable } from "rxjs";
 
 import { Animate } from "../../animation/animate";
+import { BatteryPush } from "./battery-button/props";
+import { BurstPush } from "./burst-button/props";
 import { ButtonConfig } from "./button-config";
+import { PilotPush } from "./pilot-button/props";
 import { decided } from "./procedure/decided";
 import { engageButtonConfig } from "./procedure/engage-button-config";
 import { hidden } from "./procedure/hidden";
@@ -84,9 +87,9 @@ export class MiniController {
 
   /**
    * バッテリーボタン押下通知
-   * @returns 通知ストリーム、numberはバッテリー値
+   * @returns 通知ストリーム
    */
-  batteryPushNotifier(): Observable<number> {
+  batteryPushNotifier(): Observable<BatteryPush> {
     return this.#props.batteryPush;
   }
 
@@ -94,7 +97,7 @@ export class MiniController {
    * バーストボタン押下通知
    * @returns 通知ストリーム
    */
-  burstPushNotifier(): Observable<void> {
+  burstPushNotifier(): Observable<BurstPush> {
     return this.#props.burstButton.pushNotifier();
   }
 
@@ -102,7 +105,7 @@ export class MiniController {
    * パイロットボタン押下通知
    * @returns 通知ストリーム
    */
-  pilotPushNotifier(): Observable<void> {
+  pilotPushNotifier(): Observable<PilotPush> {
     return this.#props.pilotButton.pushNotifier();
   }
 }

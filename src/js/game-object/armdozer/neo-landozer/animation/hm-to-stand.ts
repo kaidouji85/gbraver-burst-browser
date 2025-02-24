@@ -17,22 +17,8 @@ export function hmToStand(props: NeoLandozerAnimationProps): Animate {
     }),
   )
     .chain(
-      tween(model.animation, (t) =>
-        t.to(
-          {
-            frame: 1,
-          },
-          300,
-        ),
-      ),
-      tween(model.position, (t) =>
-        t.to(
-          {
-            x: "+100",
-          },
-          300,
-        ),
-      ),
+      tween(model.animation, (t) => t.to({ frame: 1 }, 300)),
+      tween(model.position, (t) => t.to({ x: "+100" }, 300)),
     )
     .chain(
       tween(model, (t) =>

@@ -20,22 +20,8 @@ export function avoid(props: NeoLandozerAnimationProps): Animate {
   )
     .chain(
       all(
-        tween(model.animation, (t) =>
-          t.to(
-            {
-              frame: 1,
-            },
-            300,
-          ),
-        ),
-        tween(model.position, (t) =>
-          t.to(
-            {
-              x: "+100",
-            },
-            300,
-          ),
-        ),
+        tween(model.animation, (t) => t.to({ frame: 1 }, 300)),
+        tween(model.position, (t) => t.to({ x: "+100" }, 300)),
       ),
     )
     .chain(delay(300))
@@ -44,16 +30,7 @@ export function avoid(props: NeoLandozerAnimationProps): Animate {
         se.play(sounds.motor);
       }),
     )
-    .chain(
-      tween(model.animation, (t) =>
-        t.to(
-          {
-            frame: 0,
-          },
-          300,
-        ),
-      ),
-    )
+    .chain(tween(model.animation, (t) => t.to({ frame: 0 }, 300)))
     .chain(
       tween(model.animation, (t) =>
         t.to({ frame: 0 }, 0).onStart(() => {

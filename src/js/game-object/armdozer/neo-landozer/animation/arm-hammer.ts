@@ -14,21 +14,7 @@ export function armHammer(props: NeoLandozerAnimationProps): Animate {
       model.animation.type = "HM_ATTACK";
     }),
   ).chain(
-    tween(model.animation, (t) =>
-      t.to(
-        {
-          frame: 1,
-        },
-        150,
-      ),
-    ),
-    tween(model.position, (t) =>
-      t.to(
-        {
-          x: "-100",
-        },
-        150,
-      ),
-    ),
+    tween(model.animation, (t) => t.to({ frame: 1 }, 150)),
+    tween(model.position, (t) => t.to({ x: "-100" }, 150)),
   );
 }

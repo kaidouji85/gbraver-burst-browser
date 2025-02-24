@@ -1,4 +1,4 @@
-import type { CustomBattleEventProps } from "../td-scenes/battle/custom-battle-event";
+import { CustomBattleEventProps } from "../td-scenes/battle/custom-battle-event";
 import { waitTime } from "../wait/wait-time";
 
 /**
@@ -30,5 +30,6 @@ export const refreshConversation = async (
   wait = 200,
 ) => {
   invisibleAllMessageWindows(props);
-  await waitTime(wait);
+  const { signal } = props.abortController;
+  await waitTime(wait, { signal });
 };

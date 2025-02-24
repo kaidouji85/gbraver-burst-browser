@@ -1,9 +1,10 @@
 import { Resources } from "../../../../resource";
 import { AnimationMesh } from "./animation-mesh";
-import { hmAttack } from "./hm-attack";
-import { hmCharge } from "./hm-charge";
-import { hmToStand } from "./hm-to-stand";
 import { stand } from "./stand";
+import { step } from "./step";
+import { tackleAttack } from "./tackle-attack";
+import { tackleCharge } from "./tackle-charge";
+import { tackleToStand } from "./tackle-to-stand";
 
 /**
  * ビューで利用するすべてのメッシュを生成する
@@ -13,8 +14,9 @@ import { stand } from "./stand";
 export function createAllMeshes(resources: Resources): AnimationMesh[] {
   return [
     ...stand(resources),
-    ...hmCharge(resources),
-    ...hmAttack(resources),
-    ...hmToStand(resources),
+    ...tackleCharge(resources),
+    ...tackleAttack(resources),
+    ...tackleToStand(resources),
+    ...step(resources),
   ];
 }

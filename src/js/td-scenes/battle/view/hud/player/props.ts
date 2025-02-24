@@ -15,6 +15,6 @@ export type HUDPlayerProps = {
   predicatedDamage: PredicatedDamage;
   /** ターン開始 */
   turnStart: TurnStart;
-  /** リザルト */
+  /** 対象プレイヤーが勝利した場合のリザルトインジケーター */
   resultIndicator: ResultIndicator;
 };

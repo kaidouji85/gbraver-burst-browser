@@ -1,10 +1,13 @@
 import { Observable, Unsubscribable } from "rxjs";
 
 import { bindEventListeners } from "./procedure/bind-event-listeners";
+import { close } from "./procedure/close";
 import {
   BattleHamburgerMenuPropsCreatorParams,
   createBattleHamburgerMenuProps,
 } from "./procedure/create-battle-hamburger-menu-props";
+import { disabledBattleSimulator } from "./procedure/disabled-battle-simulator";
+import { enableBattleSimulator } from "./procedure/enable-battle-simulator";
 import { hidden } from "./procedure/hidden";
 import { show } from "./procedure/show";
 import { BattleHamburgerMenuProps } from "./props";
@@ -40,6 +43,27 @@ export class BattleHamburgerMenu {
    */
   hidden() {
     hidden(this.#props);
+  }
+
+  /**
+   * メニューを閉じる
+   */
+  close() {
+    close(this.#props);
+  }
+
+  /**
+   * バトルシミュレーターを選択可能にする
+   */
+  enableBattleSimulator() {
+    enableBattleSimulator(this.#props);
+  }
+
+  /**
+   * バトルシミュレーターを選択不能にする
+   */
+  disableBattleSimulator() {
+    disabledBattleSimulator(this.#props);
   }
 
   /**

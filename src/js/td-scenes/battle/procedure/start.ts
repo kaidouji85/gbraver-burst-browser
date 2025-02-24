@@ -10,6 +10,7 @@ import { playStateHistory } from "./play-state-history";
  */
 export async function start(props: Readonly<BattleSceneProps>): Promise<void> {
   return props.exclusive.execute(async (): Promise<void> => {
+    props.view.dom.hamburgerMenu.show();
     props.bgm.do(play(props.sounds.bgm));
     await playStateHistory(props, props.stateHistory);
   });

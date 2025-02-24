@@ -15,7 +15,7 @@ function visiblePerformanceStats(props: GameProps): void {
     return;
   }
 
-  props.performanceStats = new PerformanceStats();
+  props.performanceStats = new PerformanceStats(props);
   document.body.appendChild(props.performanceStats.getRootHTMLElement());
 }
 

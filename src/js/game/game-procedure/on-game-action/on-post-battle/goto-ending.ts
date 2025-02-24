@@ -21,7 +21,7 @@ type Options = {
  */
 export async function gotoEnding(options: Options): Promise<InProgress> {
   const { props } = options;
-  props.domFloaters.hiddenPostBattle();
+  props.postBattle.hidden();
   await props.fader.fadeOut();
   const scene = new NPCEnding(props);
   switchNpcEnding(props, scene);

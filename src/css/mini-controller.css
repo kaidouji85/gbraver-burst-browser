@@ -4,24 +4,25 @@
 @media (orientation: landscape) {
   .mini-controller {
     --font-size: calc(var(--responsive-font-size) * 1);
-    --gap: 1px;
+    --gap: 2px;
+    --button-background-color: #4d4d4d;
     --button-padding: calc(var(--responsive-font-size) * 0.5);
     --button-font-color: var(--font-color);
-    --enabled-button-color: var(--sub-button-background-color);
-    --disabled-button-color: #a9a9a9;
+    --button-border-radius: calc(var(--dialog-border-radius) * 0.5);
 
-    min-width: calc(var(--responsive-font-size) * 15);
+    min-width: calc(var(--responsive-font-size) * 28);
     position: fixed;
     bottom: max(calc(var(--responsive-font-size) * 1), var(--safe-area-bottom));
     right: max(calc(var(--responsive-font-size) * 1), var(--safe-area-right));
-    background-color: var(--font-color);
+    background-color: #000;
     border-radius: var(--dialog-border-radius);
+    border: var(--dialog-border);
     z-index: var(--zindex-mini-controller);
     display: grid;
     grid-template-columns: 1fr 1fr;
     grid-template-rows: 1fr 1fr;
     gap: var(--gap);
-    padding: var(--gap);
+    padding: 6px;
     box-shadow: var(--sub-button-box-shadow);
   }
 }
@@ -57,19 +58,19 @@
 }
 
 .mini-controller__battery--enabled {
-  background-color: var(--enabled-button-color);
+  background-color: var(--button-background-color);
 }
 
 .mini-controller__battery--disabled {
-  background-color: var(--disabled-button-color);
+  background-color: var(--button-background-color);
 }
 
 .mini-controller__battery--first {
-  border-top-left-radius: var(--dialog-border-radius);
+  border-top-left-radius: var(--button-border-radius);
 }
 
 .mini-controller__battery--last {
-  border-top-right-radius: var(--dialog-border-radius);
+  border-top-right-radius: var(--button-border-radius);
 }
 
 .mini-controller__battery--invisible {
@@ -81,7 +82,7 @@
   grid-row: 2;
   color: var(--button-font-color);
   font-size: var(--font-size);
-  border-bottom-right-radius: var(--dialog-border-radius);
+  border-bottom-right-radius: var(--button-border-radius);
   padding: var(--button-padding);
   border: none;
   outline: none;
@@ -92,11 +93,11 @@
 }
 
 .mini-controller__burst--enabled {
-  background-color: var(--enabled-button-color);
+  background-color: var(--button-background-color);
 }
 
 .mini-controller__burst--disabled {
-  background-color: var(--disabled-button-color);
+  background-color: var(--button-background-color);
 }
 
 .mini-controller__pilot {
@@ -104,7 +105,7 @@
   grid-row: 2;
   color: var(--button-font-color);
   font-size: var(--font-size);
-  border-bottom-left-radius: var(--dialog-border-radius);
+  border-bottom-left-radius: var(--button-border-radius);
   padding: var(--button-padding);
   border: none;
   outline: none;
@@ -115,9 +116,9 @@
 }
 
 .mini-controller__pilot--enabled {
-  background-color: var(--enabled-button-color);
+  background-color: var(--button-background-color);
 }
 
 .mini-controller__pilot--disabled {
-  background-color: var(--disabled-button-color);
+  background-color: var(--button-background-color);
 }

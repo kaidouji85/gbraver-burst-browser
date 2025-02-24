@@ -23,7 +23,7 @@ export function decisionByBatterySelector(
       predicatedDamage.hidden(),
     ),
     onStart(() => {
-      view.dom.hamburgerMenu.hidden();
+      view.dom.hamburgerMenu.disableBattleSimulator();
     }),
   )
     .chain(delay(500))

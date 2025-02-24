@@ -85,10 +85,11 @@ export function wingDozerContinuousAttack(
  * @returns アニメーション
  */
 export function wingDozerBurst(param: WingDozerBurst<Burst>): Animate {
-  if (param.burst.type === "ContinuousAttack") {
-    const burst: ContinuousAttack = param.burst;
-    return wingDozerContinuousAttack({ ...param, burst });
+  const { burst } = param;
+  let ret = empty();
+  if (burst.type === "ContinuousAttack") {
+    ret = wingDozerContinuousAttack({ ...param, burst });
   }
 
-  return empty();
+  return ret;
 }

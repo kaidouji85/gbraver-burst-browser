@@ -14,14 +14,5 @@ export function upright(props: ShinBraverAnimationProps): Animate {
       model.animation.type = "UPRIGHT";
       se.play(sounds.motor);
     }),
-  ).chain(
-    tween(model.animation, (t) =>
-      t.to(
-        {
-          frame: 1,
-        },
-        200,
-      ),
-    ),
-  );
+  ).chain(tween(model.animation, (t) => t.to({ frame: 1 }, 200)));
 }

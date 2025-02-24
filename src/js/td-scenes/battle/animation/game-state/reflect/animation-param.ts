@@ -1,32 +1,32 @@
-import type { PlayerState, Reflect } from "gbraver-burst-core";
+import { PlayerState, Reflect } from "gbraver-burst-core";
 
-import type { ArmdozerSprite } from "../../../../../game-object/armdozer/armdozer-sprite";
+import { ArmdozerSprite } from "../../../../../game-object/armdozer/armdozer-sprite";
+import { ResultIndicator } from "../../../../../game-object/result-indicator/result-indicator";
 import { HUDPlayer } from "../../../view/hud/player";
-import type { TDPlayer } from "../../../view/td/player";
+import { TDPlayer } from "../../../view/td/player";
 
 /** ダメージ反射アニメーション パラメータ */
 export type ReflectAnimationParam = {
   /** ダメージ反射効果 */
-  effect: Reflect;
-
+  readonly effect: Reflect;
+  /** 引き分けのリザルトインジケーター */
+  readonly drawIndicator: ResultIndicator;
   /** ダメージを受けた側 */
-  damaged: {
+  readonly damaged: {
     /** ダメージ反射後のステート */
-    state: PlayerState;
-
+    readonly state: PlayerState;
     /** スプライト */
-    sprite: ArmdozerSprite;
-
+    readonly sprite: ArmdozerSprite;
     /** 3Dプレイヤーオブジェクト */
-    td: TDPlayer;
-
+    readonly td: TDPlayer;
     /** HUDプレイヤーオブジェクト */
-    hud: HUDPlayer;
+    readonly hud: HUDPlayer;
   };
-
   /** ダメージ反射をした側 */
-  reflecting: {
+  readonly reflecting: {
+    /** ダメージ反射後のステート */
+    readonly state: PlayerState;
     /** HUDプレイヤーオブジェクト */
-    hud: HUDPlayer;
+    readonly hud: HUDPlayer;
   };
 };

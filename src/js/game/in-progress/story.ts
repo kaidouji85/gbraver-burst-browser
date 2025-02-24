@@ -12,7 +12,10 @@ export type PlayingEpisode = {
   readonly episode: Episode;
 };
 
-/** 次のエピソードに進む */
+/**
+ * 次のエピソードに進む準備
+ * ステージクリアなど次エピソードにすすむことが確定した時に、本ステートに遷移する
+ */
 export type GoingNextEpisode = {
   type: "GoingNextEpisode";
   /** 現在のエピソード */

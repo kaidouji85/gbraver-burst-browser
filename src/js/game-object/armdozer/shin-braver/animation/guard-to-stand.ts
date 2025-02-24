@@ -15,16 +15,7 @@ export function guardToStand(props: ShinBraverAnimationProps): Animate {
       se.play(sounds.motor);
     }),
   )
-    .chain(
-      tween(model.animation, (t) =>
-        t.to(
-          {
-            frame: 0,
-          },
-          300,
-        ),
-      ),
-    )
+    .chain(tween(model.animation, (t) => t.to({ frame: 0 }, 300)))
     .chain(
       tween(model.animation, (t) =>
         t.to({ frame: 0 }, 0).onStart(() => {

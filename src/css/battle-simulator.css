@@ -259,7 +259,6 @@
   height: calc(var(--responsive-font-size) * 3);
   font-size: calc(var(--responsive-font-size) * 1.5);
   border-radius: var(--button-border-radius);
-  border: var(--sub-button-border);
   background-color: var(--sub-button-background-color);
 }
 
@@ -268,6 +267,7 @@
 .battle-simulator__enemy-battery-minus:enabled,
 .battle-simulator__enemy-battery-plus:enabled {
   color: var(--button-font-color);
+  border: var(--sub-button-border);
 }
 
 .battle-simulator__player-battery-minus:disabled,
@@ -275,4 +275,5 @@
 .battle-simulator__enemy-battery-minus:disabled,
 .battle-simulator__enemy-battery-plus:disabled {
   color: var(--disabled-button-font-color);
+  border: var(--disabled-button-border);
 }

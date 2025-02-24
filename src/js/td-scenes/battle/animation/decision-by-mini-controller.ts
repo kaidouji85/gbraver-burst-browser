@@ -16,14 +16,10 @@ export function decisionByMiniController(
     view.dom.miniController
       .decided()
       .chain(delay(200))
-      .chain(
-        all(
-          view.dom.miniController.hidden(),
-          onStart(() => {
-            view.dom.hamburgerMenu.hidden();
-          }),
-        ),
-      ),
+      .chain(view.dom.miniController.hidden()),
+    onStart(() => {
+      view.dom.hamburgerMenu.disableBattleSimulator();
+    }),
     view.hud.gameObjects.timeScaleButton.close(),
     ...view.hud.players.map(({ predicatedDamage }) =>
       predicatedDamage.hidden(),

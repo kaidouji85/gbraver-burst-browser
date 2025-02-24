@@ -83,10 +83,11 @@ function neoLandozerBuffPower(param: NeoLandozerBurst<BuffPower>): Animate {
  * @returns アニメーション
  */
 export function neoLandozerBurst(param: NeoLandozerBurst<Burst>): Animate {
-  if (param.burst.type === "BuffPower") {
-    const burst: BuffPower = param.burst;
-    return neoLandozerBuffPower({ ...param, burst });
+  const { burst } = param;
+  let ret = empty();
+  if (burst.type === "BuffPower") {
+    ret = neoLandozerBuffPower({ ...param, burst });
   }
 
-  return empty();
+  return ret;
 }

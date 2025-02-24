@@ -14,14 +14,5 @@ export function bowDown(props: WingDozerAnimationProps): Animate {
       model.animation.type = "BOW";
       se.play(sounds.motor);
     }),
-  ).chain(
-    tween(model.animation, (t) =>
-      t.to(
-        {
-          frame: 1,
-        },
-        200,
-      ),
-    ),
-  );
+  ).chain(tween(model.animation, (t) => t.to({ frame: 1 }, 200)));
 }
