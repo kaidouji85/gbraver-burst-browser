@@ -8,6 +8,8 @@ import { backStep } from "./animation/back-step";
 import { charge } from "./animation/charge";
 import { endActive } from "./animation/end-active";
 import { frontStep } from "./animation/front-step";
+import { knockBack } from "./animation/knock-back";
+import { knockBackToStand } from "./animation/knock-back-to-stand";
 import { startActive } from "./animation/start-active";
 import { tackle } from "./animation/tackle";
 import { tackleToStand } from "./animation/tackle-to-stand";
@@ -76,6 +78,16 @@ export class GranDozer extends EmptyArmdozerSprite {
    */
   tackleToStand(): Animate {
     return tackleToStand(this.#props);
+  }
+
+  /** @override */
+  knockBack(): Animate {
+    return knockBack(this.#props);
+  }
+
+  /** @override */
+  knockBackToStand(): Animate {
+    return knockBackToStand(this.#props);
   }
 
   /** @override */

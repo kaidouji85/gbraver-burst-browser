@@ -1,5 +1,6 @@
 import { Resources } from "../../../../resource";
 import { AnimationMesh } from "./animation-mesh";
+import { knockBack } from "./knock-back";
 import { stand } from "./stand";
 import { step } from "./step";
 import { tackleAttack } from "./tackle-attack";
@@ -18,5 +19,6 @@ export function createAllMeshes(resources: Resources): AnimationMesh[] {
     ...tackleAttack(resources),
     ...tackleToStand(resources),
     ...step(resources),
+    ...knockBack(resources),
   ];
 }
