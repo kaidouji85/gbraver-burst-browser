@@ -2,7 +2,7 @@ import { Observable } from "rxjs";
 
 import { PostBattle } from "../../game/post-battle";
 import { createPostBattleFloaterProps } from "./procedures/create-post-battle-floater-props";
-import { hidden } from "./procedures/hidden";
+import { hide } from "./procedures/hide";
 import { show } from "./procedures/show";
 import { PostBattleFloaterProps } from "./props";
 import { ShowParams } from "./show-params";
@@ -40,8 +40,8 @@ export class PostBattleFloater {
   /**
    * フローターを非表示にする
    */
-  hidden(): void {
-    hidden(this.#props);
+  hide(): void {
+    hide(this.#props);
   }
 
   /**

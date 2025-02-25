@@ -4,7 +4,7 @@ import { PostBattleFloaterProps } from "../props";
  * フローターを非表示にする
  * @param props プロパティ
  */
-export function hidden(props: PostBattleFloaterProps): void {
+export function hide(props: PostBattleFloaterProps): void {
   props.unsubscribers.forEach((v) => {
     v.unsubscribe();
   });

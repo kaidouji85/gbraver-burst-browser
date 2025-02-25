@@ -13,6 +13,6 @@ export async function gotoNextEpisode(
   >,
 ): Promise<void> {
   const playingEpisode = props.inProgress.story;
-  props.postBattle.hidden();
+  props.postBattle.hide();
   await startEpisode(props, playingEpisode.nextEpisode);
 }
