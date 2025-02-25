@@ -1,12 +1,13 @@
 import { PostBattleFloaterProps } from "../props";
 
 /**
- * デストラクタ相当の処理
+ * フローターを非表示にする
  * @param props プロパティ
  */
-export function destructor(props: PostBattleFloaterProps): void {
+export function hidden(props: Readonly<PostBattleFloaterProps>): void {
   props.unsubscribers.forEach((v) => {
     v.unsubscribe();
   });
   props.root.innerHTML = "";
+  props.abortController.abort();
 }

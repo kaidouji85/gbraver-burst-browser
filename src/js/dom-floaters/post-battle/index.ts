@@ -2,8 +2,7 @@ import { Observable } from "rxjs";
 
 import { PostBattle } from "../../game/post-battle";
 import { createPostBattleFloaterProps } from "./procedures/create-post-battle-floater-props";
-import { destructor } from "./procedures/destructor";
-import { hide } from "./procedures/hide";
+import { hidden } from "./procedures/hidden";
 import { show } from "./procedures/show";
 import { PostBattleFloaterProps } from "./props";
 import { ShowParams } from "./show-params";
@@ -19,13 +18,6 @@ export class PostBattleFloater {
    */
   constructor() {
     this.#props = createPostBattleFloaterProps();
-  }
-
-  /**
-   * デストラクタ相当の処理
-   */
-  destructor(): void {
-    destructor(this.#props);
   }
 
   /**
@@ -49,8 +41,7 @@ export class PostBattleFloater {
    * フローターを非表示にする
    */
   hidden(): void {
-    hide(this.#props);
-    destructor(this.#props);
+    hidden(this.#props);
   }
 
   /**
