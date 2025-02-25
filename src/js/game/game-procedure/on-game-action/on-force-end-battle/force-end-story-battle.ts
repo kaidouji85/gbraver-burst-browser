@@ -21,7 +21,6 @@ export async function forceEndStoryBattle(
       : batterySystemTutorial.id;
   await Promise.all([
     (async () => {
-      props.postBattle.hidden();
       await startEpisodeSelector(props, selectedEpisodeId);
     })(),
     (async () => {
