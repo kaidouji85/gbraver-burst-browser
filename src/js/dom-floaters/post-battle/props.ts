@@ -5,7 +5,7 @@ import { Exclusive } from "../../exclusive/exclusive";
 import { PostBattle } from "../../game/post-battle";
 
 /** PostBattleFloaterのプロパティ */
-export type PostBattleFloaterProps =  AbortControllerContainer & {
+export type PostBattleFloaterProps = AbortControllerContainer & {
   /** ルートHTML要素 */
   readonly root: HTMLElement;
   /** 排他制御 */
