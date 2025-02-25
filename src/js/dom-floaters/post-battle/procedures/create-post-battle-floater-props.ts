@@ -16,6 +16,7 @@ export function createPostBattleFloaterProps(): PostBattleFloaterProps {
     root,
     exclusive: new Exclusive(),
     selectionComplete: new Subject(),
+    abortController: new AbortController(),
     unsubscribers: [],
   };
 }

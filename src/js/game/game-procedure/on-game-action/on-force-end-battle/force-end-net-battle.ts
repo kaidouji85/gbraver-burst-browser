@@ -20,7 +20,7 @@ export async function forceEndNetBattle(
     }
   >,
 ) {
-  props.postBattle.hidden();
+  props.postBattle.hide();
 
   const dialog = new WaitingDialog("通信中......");
   switchWaitingDialog(props, dialog);

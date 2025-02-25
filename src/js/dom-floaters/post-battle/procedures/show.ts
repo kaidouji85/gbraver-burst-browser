@@ -11,16 +11,14 @@ import { bottomUp } from "./bottom-up";
  */
 export async function show(
   props: PostBattleFloaterProps,
-  params: ShowParams,
+  params: Readonly<ShowParams>,
 ): Promise<void> {
-  await props.exclusive.execute(async () => {
-    const actionButtons = params.buttons.map((buttonConfig) =>
-      createActionButton({ ...params, props, buttonConfig }),
-    );
-    actionButtons.forEach((v) => {
-      props.root.appendChild(v.button);
-    });
-    props.unsubscribers = actionButtons.map((v) => v.unsubscriber);
-    await bottomUp(props);
+  const actionButtons = params.buttons.map((buttonConfig) =>
+    createActionButton({ ...params, props, buttonConfig }),
+  );
+  actionButtons.forEach((v) => {
+    props.root.appendChild(v.button);
   });
+  props.unsubscribers = actionButtons.map((v) => v.unsubscriber);
+  await bottomUp(props);
 }

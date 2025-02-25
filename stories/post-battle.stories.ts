@@ -60,7 +60,7 @@ export const showHidden: StoryFn = domStub((params) => {
   (async () => {
     await floater.show({ ...params, buttons: PostNPCBattleWinButtons });
     await waitTime(3000);
-    floater.hidden();
+    floater.hide();
   })();
 
   return floater.getRootHTMLElement();

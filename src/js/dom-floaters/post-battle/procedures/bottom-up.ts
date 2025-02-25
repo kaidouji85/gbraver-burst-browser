@@ -9,19 +9,9 @@ import { PostBattleFloaterProps } from "../props";
 export async function bottomUp(props: PostBattleFloaterProps): Promise<void> {
   props.root.style.display = "flex";
   const animation = props.root.animate(
-    [
-      {
-        transform: "translateY(100%)",
-      },
-      {
-        transform: "translateY(0)",
-      },
-    ],
-    {
-      duration: 400,
-      fill: "forwards",
-      easing: "ease",
-    },
+    [{ transform: "translateY(100%)" }, { transform: "translateY(0)" }],
+    { duration: 400, fill: "forwards", easing: "ease" },
   );
-  await waitFinishAnimation(animation);
+  const { signal } = props.abortController;
+  await waitFinishAnimation(animation, { signal });
 }

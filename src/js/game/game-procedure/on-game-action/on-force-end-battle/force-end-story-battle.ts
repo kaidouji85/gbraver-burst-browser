@@ -13,7 +13,7 @@ import { startEpisodeSelector } from "../../start-episode-selector";
 export async function forceEndStoryBattle(
   props: Readonly<GameProps & { inProgress: Story }>,
 ) {
-  props.postBattle.hidden();
+  props.postBattle.hide();
 
   const selectedEpisodeId =
     props.inProgress.story.type === "PlayingEpisode"
@@ -21,7 +21,6 @@ export async function forceEndStoryBattle(
       : batterySystemTutorial.id;
   await Promise.all([
     (async () => {
-      props.postBattle.hidden();
       await startEpisodeSelector(props, selectedEpisodeId);
     })(),
     (async () => {
