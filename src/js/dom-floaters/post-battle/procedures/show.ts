@@ -11,7 +11,7 @@ import { bottomUp } from "./bottom-up";
  */
 export async function show(
   props: PostBattleFloaterProps,
-  params: ShowParams,
+  params: Readonly<ShowParams>,
 ): Promise<void> {
   const actionButtons = params.buttons.map((buttonConfig) =>
     createActionButton({ ...params, props, buttonConfig }),
@@ -20,7 +20,5 @@ export async function show(
     props.root.appendChild(v.button);
   });
   props.unsubscribers = actionButtons.map((v) => v.unsubscriber);
-
-  props.abortController = new AbortController();
   await bottomUp(props);
 }
