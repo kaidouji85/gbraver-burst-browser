@@ -16,7 +16,7 @@ export function backStep(props: GranDozerAnimationProps): Animate {
     tween(model.animation, (t) =>
       t
         .onStart(() => {
-          model.animation.type = "STEP";
+          model.animation.type = "BACK_STEP";
         })
         .to({ frame: 0 }, 0),
     ).chain(tween(model.animation, (t) => t.to({ frame: 1 }, 150))),
