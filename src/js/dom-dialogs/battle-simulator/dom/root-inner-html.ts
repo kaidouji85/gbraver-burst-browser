@@ -37,7 +37,7 @@ const getPath = (options: ResourcesContainer & { pathId: PathId }) => {
  * プレイヤーのステートを取得する
  * @param options オプション
  * @param options.player プレイヤーのステート
- * @returns 
+ * @returns
  */
 const getPlayerState = (
   options: ResourcesContainer & { player: PlayerState },
@@ -56,7 +56,7 @@ const getPlayerState = (
  * 敵のステートを取得する
  * @param options オプション
  * @param options.enemy 敵のステート
- * @returns 
+ * @returns
  */
 const getEnemyState = (
   options: ResourcesContainer & { enemy: PlayerState },
@@ -87,19 +87,10 @@ type RootInnerHtmlOptions = ResourcesContainer & {
  * @returns 生成結果
  */
 export function rootInnerHTML(options: RootInnerHtmlOptions) {
-  const { resources, isPlayerAttacker } = options;
+  const { isPlayerAttacker } = options;
   const turnIndicatorClass = isPlayerAttacker
     ? TURN_INDICATOR
     : TURN_INDICATOR_ENEMY;
-
-  const turnIndicatorPath =
-    resources.paths.find((p) => p.id === PathIds.TURN_INDICATOR)?.path ?? "";
-
-  const closerPath =
-    resources.paths.find((p) => p.id === PathIds.CLOSER)?.path ?? "";
-
-  const batteryIconPath =
-    resources.paths.find((p) => p.id === PathIds.BATTERY_ICON)?.path ?? "";
   return template({
     ...getPlayerState(options),
     ...getEnemyState(options),
@@ -107,8 +98,8 @@ export function rootInnerHTML(options: RootInnerHtmlOptions) {
     DAMAGE,
     BATTLE_RESULT_NAME,
     turnIndicatorClass,
-    closerPath,
-    turnIndicatorPath,
-    batteryIconPath,
+    closerPath: getPath({ ...options, pathId: PathIds.CLOSER }),
+    turnIndicatorPath: getPath({ ...options, pathId: PathIds.TURN_INDICATOR }),
+    batteryIconPath: getPath({ ...options, pathId: PathIds.BATTERY_ICON }),
   });
 }
