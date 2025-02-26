@@ -6,6 +6,7 @@ import { step } from "./step";
 import { tackleAttack } from "./tackle-attack";
 import { tackleCharge } from "./tackle-charge";
 import { tackleToStand } from "./tackle-to-stand";
+import { backStep } from "./back-step";
 
 /**
  * ビューで利用するすべてのメッシュを生成する
@@ -19,6 +20,7 @@ export function createAllMeshes(resources: Resources): AnimationMesh[] {
     ...tackleAttack(resources),
     ...tackleToStand(resources),
     ...step(resources),
+    ...backStep(resources),
     ...knockBack(resources),
   ];
 }

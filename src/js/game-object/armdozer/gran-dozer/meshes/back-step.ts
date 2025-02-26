@@ -12,7 +12,7 @@ export function backStep(resources: Resources): AnimationMesh[] {
   return createAnimationMeshes({
     resources,
     animationType: "BACK_STEP",
-    textureId: TEXTURE_IDS.GRAN_DOZER_STEP,
+    textureId: TEXTURE_IDS.GRAN_DOZER_BACK_STEP,
     maxAnimation: 4,
   });
 }
