@@ -4,15 +4,15 @@ import { AnimationMesh } from "./animation-mesh";
 import { createAnimationMeshes } from "./create-animation-meshes";
 
 /**
- * ステップ メッシュを生成
+ * フロントステップ メッシュを生成
  * @param resources リソース管理オブジェクト
  * @returns 生成結果
  */
-export function step(resources: Resources): AnimationMesh[] {
+export function frontStep(resources: Resources): AnimationMesh[] {
   return createAnimationMeshes({
     resources,
-    animationType: "STEP",
-    textureId: TEXTURE_IDS.GRAN_DOZER_STEP,
+    animationType: "FRONT_STEP",
+    textureId: TEXTURE_IDS.GRAN_DOZER_FRONT_STEP,
     maxAnimation: 4,
   });
 }

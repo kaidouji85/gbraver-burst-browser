@@ -20,8 +20,8 @@ export const GranDozerTextureConfigs: TextureConfig[] = [
     path: "armdozer/gran-dozer/tackle-to-stand.webp",
   },
   {
-    id: TEXTURE_IDS.GRAN_DOZER_STEP,
-    path: "armdozer/gran-dozer/step.webp",
+    id: TEXTURE_IDS.GRAN_DOZER_FRONT_STEP,
+    path: "armdozer/gran-dozer/front-step.webp",
   },
   {
     id: TEXTURE_IDS.GRAN_DOZER_BACK_STEP,
