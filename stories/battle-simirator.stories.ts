@@ -243,3 +243,33 @@ export const enemyMultiEffects: StoryFn = battleSimulatorStory({
   }),
   isPlayerAttacker: false,
 });
+
+/** プレイヤーのグランドーザ */
+export const playerGranDozer: StoryFn = battleSimulatorStory({
+  player: createPlayerState({
+    playerId: "player",
+    armdozerId: ArmdozerIds.GRAN_DOZER,
+    battery: 5,
+  }),
+  enemy: createPlayerState({
+    playerId: "enemy",
+    armdozerId: ArmdozerIds.SHIN_BRAVER,
+    battery: 5,
+  }),
+  isPlayerAttacker: true,
+});
+
+/** 敵のグランドーザ */
+export const enemyGranDozer: StoryFn = battleSimulatorStory({
+  player: createPlayerState({
+    playerId: "player",
+    armdozerId: ArmdozerIds.WING_DOZER,
+    battery: 5,
+  }),
+  enemy: createPlayerState({
+    playerId: "enemy",
+    armdozerId: ArmdozerIds.GRAN_DOZER,
+    battery: 5,
+  }),
+  isPlayerAttacker: true,
+});
