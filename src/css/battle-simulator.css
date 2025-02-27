@@ -6,7 +6,6 @@
     --dialog-padding: var(--responsive-font-size);
     --player-area-width: calc(var(--responsive-font-size) * 15);
     --player-area-height: calc(var(--responsive-font-size) * 10);
-    --armdozer-size: calc(var(--responsive-font-size) * 19);
     --middle-area-size: calc(var(--responsive-font-size) * 2);
     --turn-indicator-size: calc(var(--responsive-font-size) * 6);
     --battery-icon-size: calc(var(--responsive-font-size) * 0.9);
