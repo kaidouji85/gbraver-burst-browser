@@ -156,7 +156,12 @@
   height: var(--player-area-height);
 }
 
-.battle-simulator__player-armdozer {
+.battle-simulator__player-armdozer--shin-braver,
+.battle-simulator__player-armdozer--neo-landozer,
+.battle-simulator__player-armdozer--lightning-dozer,
+.battle-simulator__player-armdozer--wing-dozer,
+.battle-simulator__player-armdozer--genesis-braver,
+.battle-simulator__player-armdozer--gran-dozer {
   position: absolute;
   top: 50%;
   left: 50%;
@@ -171,7 +176,12 @@
   height: var(--player-area-height);
 }
 
-.battle-simulator__enemy-armdozer {
+.battle-simulator__enemy-armdozer--shin-braver,
+.battle-simulator__enemy-armdozer--neo-landozer,
+.battle-simulator__enemy-armdozer--lightning-dozer,
+.battle-simulator__enemy-armdozer--wing-dozer,
+.battle-simulator__enemy-armdozer--genesis-braver,
+.battle-simulator__enemy-armdozer--gran-dozer {
   position: absolute;
   top: 50%;
   left: 50%;
