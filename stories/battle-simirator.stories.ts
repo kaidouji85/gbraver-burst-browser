@@ -152,7 +152,7 @@ export const enemyTurn: StoryFn = battleSimulatorStory({
 export const playerBatteryCorrect: StoryFn = battleSimulatorStory({
   player: createPlayerState({
     playerId: "player",
-    armdozerId: ArmdozerIds.GENESIS_BRAVER,
+    armdozerId: ArmdozerIds.LIGHTNING_DOZER,
     battery: 4,
     effects: [batteryCorrection(1)],
   }),
@@ -222,7 +222,7 @@ export const playerMultiEffects: StoryFn = battleSimulatorStory({
   }),
   enemy: createPlayerState({
     playerId: "enemy",
-    armdozerId: ArmdozerIds.WING_DOZER,
+    armdozerId: ArmdozerIds.GENESIS_BRAVER,
     battery: 5,
   }),
   isPlayerAttacker: true,
