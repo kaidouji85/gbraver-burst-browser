@@ -20,7 +20,7 @@ export const BATTLE_RESULT_NAME = `${ROOT}__battle-result-name`;
 export const BATTLE_RESULT_NAME_IS_DEATH = `${BATTLE_RESULT_NAME}--is-death`;
 
 /** プレイヤーのアームドーザのclass属性 */
-export const PLAYER_ARMDOZER = `${ROOT}__player-armdozer`;
+const PLAYER_ARMDOZER = `${ROOT}__player-armdozer`;
 
 /** プレイヤーのアームドーザのclass属性（シンブレイバー） */
 export const PLAYER_SHIN_BRAVER = `${PLAYER_ARMDOZER}--shin-braver`;
@@ -41,7 +41,7 @@ export const PLAYER_GENESIS_BRAVER = `${PLAYER_ARMDOZER}--genesis-braver`;
 export const PLAYER_GRAN_DOZER = `${PLAYER_ARMDOZER}--gran-dozer`;
 
 /** 敵のアームドーザのclass属性 */
-export const ENEMY_ARMDOZER = `${ROOT}__enemy-armdozer`;
+const ENEMY_ARMDOZER = `${ROOT}__enemy-armdozer`;
 
 /** 敵のアームドーザのclass属性（シンブレイバー） */
 export const ENEMY_SHIN_BRAVER = `${ENEMY_ARMDOZER}--shin-braver`;

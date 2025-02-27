@@ -10,6 +10,10 @@ import {
   TURN_INDICATOR,
   TURN_INDICATOR_ENEMY,
 } from "./class-name";
+import {
+  getEnemyArmdozerClassName,
+  getPlayerArmdozerClassName,
+} from "./get-armdozer-class-name";
 import template from "./root-inner-html.hbs";
 
 /** 生成パラメータ */
@@ -35,12 +39,14 @@ export function rootInnerHTML(params: RootInnerHtmlParams) {
     enemy.armdozer.power + correctPower(enemy.armdozer.effects);
 
   const playerArmdozerId = player?.armdozer.id ?? ArmdozerIds.SHIN_BRAVER;
+  const playerArmdozerClass = getPlayerArmdozerClassName(playerArmdozerId);
   const playerArmdozerPath =
     resources.paths.find(
       (p) => p.id === getArmdozerStandPathId(playerArmdozerId),
     )?.path ?? "";
 
   const enemyArmdozerId = enemy?.armdozer.id ?? ArmdozerIds.SHIN_BRAVER;
+  const enemyArmdozerClass = getEnemyArmdozerClassName(enemyArmdozerId);
   const enemyArmdozerPath =
     resources.paths.find(
       (p) => p.id === getArmdozerStandPathId(enemyArmdozerId),
@@ -68,7 +74,9 @@ export function rootInnerHTML(params: RootInnerHtmlParams) {
     BATTLE_RESULT_NAME,
     turnIndicatorClass,
     closerPath,
+    playerArmdozerClass,
     playerArmdozerPath,
+    enemyArmdozerClass,
     enemyArmdozerPath,
     turnIndicatorPath,
     batteryIconPath,
