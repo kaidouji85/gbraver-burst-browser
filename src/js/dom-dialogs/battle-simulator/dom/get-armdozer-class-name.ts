@@ -30,7 +30,7 @@ const playerArmdozerClassNames = {
  * @param armdozerId アームドーザID
  * @returns クラス名
  */
-export const getPlayerArmdozerClassName = (armdozerId: string) =>
+export const getPlayerArmdozerClassName = (armdozerId: ArmdozerId) =>
   playerArmdozerClassNames[armdozerId] ?? PLAYER_SHIN_BRAVER;
 
 /** 敵のアームドーザのクラス名 */
