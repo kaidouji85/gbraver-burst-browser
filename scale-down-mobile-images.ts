@@ -1,5 +1,5 @@
 import { glob } from "glob";
-import { imageSize } from "image-size";
+import { imageSizeFromFile } from "image-size/fromFile";
 import sharp from "sharp";
 
 sharp.cache(false);
@@ -11,7 +11,7 @@ sharp.cache(false);
  * @return 大きさ変更が完了したら発火するPromise
  */
 async function resizePng(origin: string, scale: number): Promise<void> {
-  const size = imageSize(origin);
+  const size = await imageSizeFromFile(origin);
   const height = Math.floor((size.height ?? 0) * scale);
   const buffer = await sharp(origin).resize(null, height).png().toBuffer();
   await sharp(buffer).toFile(origin);
@@ -24,7 +24,7 @@ async function resizePng(origin: string, scale: number): Promise<void> {
  * @return 大きさ変更が完了したら発火するPromise
  */
 async function resizeWebp(origin: string, scale: number): Promise<void> {
-  const size = imageSize(origin);
+  const size = await imageSizeFromFile(origin);
   const height = Math.floor((size.height ?? 0) * scale);
   const buffer = await sharp(origin)
     .resize(null, height)
