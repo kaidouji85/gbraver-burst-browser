@@ -104,5 +104,12 @@
     /* Completeness */
     // "skipDefaultLibCheck": true,                      /* Skip type checking .d.ts files that are included with TypeScript. */
     "skipLibCheck": true                                 /* Skip type checking all .d.ts files. */
+  },
+  // 以下を参考にts-nodeではCommonJSを使うように設定した
+  // https://github.com/TypeStrong/ts-node?tab=readme-ov-file#commonjs
+  "ts-node": {
+    "compilerOptions": {
+      "module": "CommonJS"
+    }
   }
 }
