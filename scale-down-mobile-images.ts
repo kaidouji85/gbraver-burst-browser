@@ -1,5 +1,5 @@
 import { glob } from "glob";
-import { imageSizeFromFile  } from "image-size/fromFile";
+import { imageSizeFromFile } from "image-size/fromFile";
 import sharp from "sharp";
 
 sharp.cache(false);
