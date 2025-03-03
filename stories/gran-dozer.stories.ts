@@ -115,3 +115,38 @@ export const enemyActiveAvoid: StoryFn = armdozerSpriteStub(
     sprite.startActive().play();
   },
 );
+
+/**
+ * ダウン
+ * @param sprite スプライト
+ */
+const down = (sprite: GranDozer) => {
+  sprite.down().chain(delay(2000)).loop();
+};
+
+/**
+ * アクティブ ダウン
+ * @param sprite スプライト
+ */
+const activeDown = (sprite: GranDozer) => {
+  down(sprite);
+  sprite.startActive().play();
+};
+
+/** プレイヤー ダウン */
+export const playerDown: StoryFn = armdozerSpriteStub(PlayerGranDozer, down);
+
+/** プレイヤー アクティブ ダウン */
+export const playerActiveDown: StoryFn = armdozerSpriteStub(
+  PlayerGranDozer,
+  activeDown,
+);
+
+/** 敵 ダウン */
+export const enemyDown: StoryFn = armdozerSpriteStub(EnemyGranDozer, down);
+
+/** 敵 アクティブ ダウン */
+export const enemyActiveDown: StoryFn = armdozerSpriteStub(
+  EnemyGranDozer,
+  activeDown,
+);
