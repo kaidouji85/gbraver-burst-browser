@@ -18,7 +18,7 @@ export function tackleToStand(props: GranDozerAnimationProps): Animate {
   return tween(model, (t) =>
     t
       .onStart(() => {
-        model.animation.type = "TACKLE_TO_NEUTRAL";
+        model.animation.type = "TACKLE_TO_BACK_STEP";
         se.play(sounds.motor);
       })
       .to(
@@ -40,23 +40,25 @@ export function tackleToStand(props: GranDozerAnimationProps): Animate {
         ),
       ),
     )
+    .chain(
+      tween(model, (t) =>
+        t
+          .onStart(() => {
+            model.animation.type = "BACK_STEP";
+          })
+          .to({ animation: { frame: 1 } }, 0),
+      ),
+    )
     .chain(delay(300))
     .chain(
       tween(model, (t) =>
         t
           .onStart(() => {
-            model.animation.type = "NEUTRAL_TO_STAND";
             se.play(sounds.motor);
           })
-          .to(
-            {
-              animation: { frame: 0 },
-            },
-            0,
-          ),
+          .to({ animation: { frame: 0 } }, 200),
       ),
     )
-    .chain(tween(model, (t) => t.to({ animation: { frame: 1 } }, 200)))
     .chain(
       tween(model, (t) =>
         t

@@ -28,7 +28,7 @@ export const GranDozerTextureConfigs: TextureConfig[] = [
     path: "armdozer/gran-dozer/neutral-to-stand.webp",
   },
   {
-    id: TEXTURE_IDS.GRAN_DOZER_TACKLE_TO_NEUTRAL,
+    id: TEXTURE_IDS.GRAN_DOZER_TACKLE_TO_BACK_STEP,
     path: "armdozer/gran-dozer/tackle-to-back-step.webp",
   },
   {
