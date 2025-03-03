@@ -36,7 +36,7 @@ export function tackleToStand(props: GranDozerAnimationProps): Animate {
             animation: { frame: 1 },
             position: { x: ARMDOZER_SPRITE_STANDARD_X },
           },
-          300,
+          200,
         ),
       ),
     )
@@ -56,6 +56,7 @@ export function tackleToStand(props: GranDozerAnimationProps): Animate {
           ),
       ),
     )
+    .chain(tween(model, (t) => t.to({ animation: { frame: 1 } }, 200)))
     .chain(
       tween(model, (t) =>
         t

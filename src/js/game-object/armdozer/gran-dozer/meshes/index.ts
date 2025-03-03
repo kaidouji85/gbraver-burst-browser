@@ -8,6 +8,7 @@ import { neutralToStand } from "./neutral-to-stand";
 import { stand } from "./stand";
 import { tackleAttack } from "./tackle-attack";
 import { tackleCharge } from "./tackle-charge";
+import { tackleToBackStep } from "./tackle-to-back-step";
 import { tackleToNeutral } from "./tackle-to-neutral";
 import { tackleToStand } from "./tackle-to-stand";
 
@@ -24,6 +25,7 @@ export function createAllMeshes(resources: Resources): AnimationMesh[] {
     ...tackleToStand(resources),
     ...tackleToNeutral(resources),
     ...neutralToStand(resources),
+    ...tackleToBackStep(resources),
     ...frontStep(resources),
     ...backStep(resources),
     ...knockBack(resources),

@@ -6,6 +6,7 @@ export type AnimationType =
   | "TACKLE_TO_STAND"
   | "TACKLE_TO_NEUTRAL"
   | "NEUTRAL_TO_STAND"
+  | "TACKLE_TO_BACK_STEP"
   | "FRONT_STEP"
   | "BACK_STEP"
   | "KNOCK_BACK"
