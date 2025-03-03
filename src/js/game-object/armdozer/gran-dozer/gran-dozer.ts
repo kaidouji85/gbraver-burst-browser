@@ -6,6 +6,7 @@ import { GameObjectAction } from "../../action/game-object-action";
 import { EmptyArmdozerSprite } from "../empty-armdozer-sprite";
 import { backStep } from "./animation/back-step";
 import { charge } from "./animation/charge";
+import { down } from "./animation/down";
 import { endActive } from "./animation/end-active";
 import { frontStep } from "./animation/front-step";
 import { knockBack } from "./animation/knock-back";
@@ -88,6 +89,11 @@ export class GranDozer extends EmptyArmdozerSprite {
   /** @override */
   knockBackToStand(): Animate {
     return knockBackToStand(this.#props);
+  }
+
+  /** @override */
+  down(): Animate {
+    return down(this.#props);
   }
 
   /** @override */

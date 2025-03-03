@@ -1,6 +1,7 @@
 import { Resources } from "../../../../resource";
 import { AnimationMesh } from "./animation-mesh";
 import { backStep } from "./back-step";
+import { down } from "./down";
 import { frontStep } from "./front-step";
 import { knockBack } from "./knock-back";
 import { stand } from "./stand";
@@ -22,5 +23,6 @@ export function createAllMeshes(resources: Resources): AnimationMesh[] {
     ...frontStep(resources),
     ...backStep(resources),
     ...knockBack(resources),
+    ...down(resources),
   ];
 }
