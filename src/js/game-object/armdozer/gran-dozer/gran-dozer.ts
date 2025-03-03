@@ -6,6 +6,7 @@ import { GameObjectAction } from "../../action/game-object-action";
 import { EmptyArmdozerSprite } from "../empty-armdozer-sprite";
 import { backStep } from "./animation/back-step";
 import { charge } from "./animation/charge";
+import { down } from "./animation/down";
 import { endActive } from "./animation/end-active";
 import { frontStep } from "./animation/front-step";
 import { knockBack } from "./animation/knock-back";
@@ -19,7 +20,6 @@ import {
   GranDozerPropsCreatorOptions,
 } from "./props/create-gran-dozer-props";
 import { GranDozerProps } from "./props/gran-dozer-props";
-import { down } from "./animation/down";
 
 /** オプション */
 type Options = GranDozerPropsCreatorOptions & {
