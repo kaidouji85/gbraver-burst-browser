@@ -4,13 +4,10 @@ import { backStep } from "./back-step";
 import { down } from "./down";
 import { frontStep } from "./front-step";
 import { knockBack } from "./knock-back";
-import { neutralToStand } from "./neutral-to-stand";
 import { stand } from "./stand";
 import { tackleAttack } from "./tackle-attack";
 import { tackleCharge } from "./tackle-charge";
 import { tackleToBackStep } from "./tackle-to-back-step";
-import { tackleToNeutral } from "./tackle-to-neutral";
-import { tackleToStand } from "./tackle-to-stand";
 
 /**
  * ビューで利用するすべてのメッシュを生成する
@@ -22,9 +19,6 @@ export function createAllMeshes(resources: Resources): AnimationMesh[] {
     ...stand(resources),
     ...tackleCharge(resources),
     ...tackleAttack(resources),
-    ...tackleToStand(resources),
-    ...tackleToNeutral(resources),
-    ...neutralToStand(resources),
     ...tackleToBackStep(resources),
     ...frontStep(resources),
     ...backStep(resources),
