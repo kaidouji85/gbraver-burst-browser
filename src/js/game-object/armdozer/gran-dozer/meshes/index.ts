@@ -8,6 +8,8 @@ import { stand } from "./stand";
 import { tackleAttack } from "./tackle-attack";
 import { tackleCharge } from "./tackle-charge";
 import { tackleToStand } from "./tackle-to-stand";
+import { attackToNeutral } from "./attack-to-neutral";
+import { neutralToStand } from "./neutral-to-stand";
 
 /**
  * ビューで利用するすべてのメッシュを生成する
@@ -20,6 +22,8 @@ export function createAllMeshes(resources: Resources): AnimationMesh[] {
     ...tackleCharge(resources),
     ...tackleAttack(resources),
     ...tackleToStand(resources),
+    ...attackToNeutral(resources),
+    ...neutralToStand(resources),
     ...frontStep(resources),
     ...backStep(resources),
     ...knockBack(resources),
