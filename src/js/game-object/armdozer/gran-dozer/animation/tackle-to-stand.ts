@@ -1,4 +1,5 @@
 import { Animate } from "../../../../animation/animate";
+import { delay } from "../../../../animation/delay";
 import { tween } from "../../../../animation/tween";
 import {
   ARMDOZER_SPRITE_ATTACKER_Z,
@@ -17,7 +18,7 @@ export function tackleToStand(props: GranDozerAnimationProps): Animate {
   return tween(model, (t) =>
     t
       .onStart(() => {
-        model.animation.type = "TACKLE_TO_STAND";
+        model.animation.type = "TACKLE_TO_BACK_STEP";
         se.play(sounds.motor);
       })
       .to(
@@ -35,8 +36,27 @@ export function tackleToStand(props: GranDozerAnimationProps): Animate {
             animation: { frame: 1 },
             position: { x: ARMDOZER_SPRITE_STANDARD_X },
           },
-          300,
+          200,
         ),
+      ),
+    )
+    .chain(
+      tween(model, (t) =>
+        t
+          .onStart(() => {
+            model.animation.type = "BACK_STEP";
+          })
+          .to({ animation: { frame: 1 } }, 0),
+      ),
+    )
+    .chain(delay(300))
+    .chain(
+      tween(model, (t) =>
+        t
+          .onStart(() => {
+            se.play(sounds.motor);
+          })
+          .to({ animation: { frame: 0 } }, 200),
       ),
     )
     .chain(

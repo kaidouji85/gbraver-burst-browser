@@ -4,15 +4,15 @@ import { AnimationMesh } from "./animation-mesh";
 import { createAnimationMeshes } from "./create-animation-meshes";
 
 /**
- * タックル -> 立ち メッシュを生成
+ * タックル -> バックステップ メッシュを生成
  * @param resources リソース管理オブジェクト
  * @returns 生成結果
  */
-export function tackleToStand(resources: Resources): AnimationMesh[] {
+export function tackleToBackStep(resources: Resources): AnimationMesh[] {
   return createAnimationMeshes({
     resources,
-    animationType: "TACKLE_TO_STAND",
-    textureId: TEXTURE_IDS.GRAN_DOZER_TACKLE_TO_STAND,
+    animationType: "TACKLE_TO_BACK_STEP",
+    textureId: TEXTURE_IDS.GRAN_DOZER_TACKLE_TO_BACK_STEP,
     maxAnimation: 4,
   });
 }
