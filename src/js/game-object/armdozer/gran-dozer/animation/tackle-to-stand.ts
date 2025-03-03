@@ -18,7 +18,7 @@ export function tackleToStand(props: GranDozerAnimationProps): Animate {
   return tween(model, (t) =>
     t
       .onStart(() => {
-        model.animation.type = "ATTACK_TO_NEUTRAL";
+        model.animation.type = "TACKLE_TO_NEUTRAL";
         se.play(sounds.motor);
       })
       .to(

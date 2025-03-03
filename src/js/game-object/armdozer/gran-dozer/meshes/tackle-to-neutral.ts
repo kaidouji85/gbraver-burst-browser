@@ -4,15 +4,15 @@ import { AnimationMesh } from "./animation-mesh";
 import { createAnimationMeshes } from "./create-animation-meshes";
 
 /**
- * 攻撃 -> ニュートラル メッシュを生成
+ * タックル -> ニュートラル メッシュを生成
  * @param resources リソース管理オブジェクト
  * @returns 生成結果
  */
-export function attackToNeutral(resources: Resources): AnimationMesh[] {
+export function tackleToNeutral(resources: Resources): AnimationMesh[] {
   return createAnimationMeshes({
     resources,
-    animationType: "ATTACK_TO_NEUTRAL",
-    textureId: TEXTURE_IDS.GRAN_DOZER_ATTACK_TO_NEUTRAL,
+    animationType: "TACKLE_TO_NEUTRAL",
+    textureId: TEXTURE_IDS.GRAN_DOZER_TACKLE_TO_NEUTRAL,
     maxAnimation: 4,
   });
 }
