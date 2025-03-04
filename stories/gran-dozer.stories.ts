@@ -153,7 +153,12 @@ export const enemyActiveDown: StoryFn = armdozerSpriteStub(
 
 /** ガード */
 const guard = (sprite: GranDozer) => {
-  sprite.guard().chain(delay(2000)).loop();
+  sprite
+    .guard()
+    .chain(delay(2000))
+    .chain(sprite.guardToStand())
+    .chain(delay(2000))
+    .loop();
 };
 
 /** アクティブ ガード */

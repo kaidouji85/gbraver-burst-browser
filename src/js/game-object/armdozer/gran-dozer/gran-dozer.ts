@@ -9,6 +9,8 @@ import { charge } from "./animation/charge";
 import { down } from "./animation/down";
 import { endActive } from "./animation/end-active";
 import { frontStep } from "./animation/front-step";
+import { guard } from "./animation/guard";
+import { guardToStand } from "./animation/guard-to-stand";
 import { knockBack } from "./animation/knock-back";
 import { knockBackToStand } from "./animation/knock-back-to-stand";
 import { startActive } from "./animation/start-active";
@@ -98,14 +100,12 @@ export class GranDozer extends EmptyArmdozerSprite {
 
   /** @override */
   guard(): Animate {
-    // TODO 専用アニメーションを実装する
-    return knockBack(this.#props);
+    return guard(this.#props);
   }
 
   /** @override */
   guardToStand(): Animate {
-    // TODO 専用アニメーションを実装する
-    return knockBackToStand(this.#props);
+    return guardToStand(this.#props);
   }
 
   /** @override */
