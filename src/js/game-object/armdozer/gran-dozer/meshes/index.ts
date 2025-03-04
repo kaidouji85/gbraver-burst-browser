@@ -3,6 +3,7 @@ import { AnimationMesh } from "./animation-mesh";
 import { backStep } from "./back-step";
 import { down } from "./down";
 import { frontStep } from "./front-step";
+import { guard } from "./guard";
 import { knockBack } from "./knock-back";
 import { stand } from "./stand";
 import { tackleAttack } from "./tackle-attack";
@@ -24,5 +25,6 @@ export function createAllMeshes(resources: Resources): AnimationMesh[] {
     ...backStep(resources),
     ...knockBack(resources),
     ...down(resources),
+    ...guard(resources),
   ];
 }

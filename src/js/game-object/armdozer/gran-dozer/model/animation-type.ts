@@ -7,4 +7,5 @@ export type AnimationType =
   | "FRONT_STEP"
   | "BACK_STEP"
   | "KNOCK_BACK"
-  | "DOWN";
+  | "DOWN"
+  | "GUARD";

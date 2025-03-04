@@ -150,3 +150,37 @@ export const enemyActiveDown: StoryFn = armdozerSpriteStub(
   EnemyGranDozer,
   activeDown,
 );
+
+/** ガード */
+const guard = (sprite: GranDozer) => {
+  sprite
+    .guard()
+    .chain(delay(2000))
+    .chain(sprite.guardToStand())
+    .chain(delay(2000))
+    .loop();
+};
+
+/** アクティブ ガード */
+const activeGuard = (sprite: GranDozer) => {
+  guard(sprite);
+  sprite.startActive().play();
+};
+
+/** プレイヤー ガード */
+export const playerGuard: StoryFn = armdozerSpriteStub(PlayerGranDozer, guard);
+
+/** プレイヤー アクティブ ガード */
+export const playerActiveGuard: StoryFn = armdozerSpriteStub(
+  PlayerGranDozer,
+  activeGuard,
+);
+
+/** 敵 ガード */
+export const enemyGuard: StoryFn = armdozerSpriteStub(EnemyGranDozer, guard);
+
+/** 敵 アクティブ ガード */
+export const enemyActiveGuard: StoryFn = armdozerSpriteStub(
+  EnemyGranDozer,
+  activeGuard,
+);
