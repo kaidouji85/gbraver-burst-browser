@@ -117,6 +117,52 @@ export const enemyActiveAvoid: StoryFn = armdozerSpriteStub(
 );
 
 /**
+ * ノックバック
+ * @param sprite スプライト
+ */
+const knockBack = (sprite: GranDozer) => {
+  sprite
+    .knockBack()
+    .chain(delay(2000))
+    .chain(sprite.knockBackToStand())
+    .chain(delay(2000))
+    .loop();
+};
+
+/**
+ * アクティブ ノックバック
+ * @param sprite スプライト
+ */
+const activeKnockBack = (sprite: GranDozer) => {
+  knockBack(sprite);
+  sprite.startActive().play();
+};
+
+/** プレイヤー ノックバック */
+export const playerKnockBack: StoryFn = armdozerSpriteStub(
+  PlayerGranDozer,
+  knockBack,
+);
+
+/** プレイヤー アクティブ ノックバック */
+export const playerActiveKnockBack: StoryFn = armdozerSpriteStub(
+  PlayerGranDozer,
+  activeKnockBack,
+);
+
+/** 敵 ノックバック */
+export const enemyKnockBack: StoryFn = armdozerSpriteStub(
+  EnemyGranDozer,
+  knockBack,
+);
+
+/** 敵 アクティブ ノックバック */
+export const enemyActiveKnockBack: StoryFn = armdozerSpriteStub(
+  EnemyGranDozer,
+  activeKnockBack,
+);
+
+/**
  * ダウン
  * @param sprite スプライト
  */

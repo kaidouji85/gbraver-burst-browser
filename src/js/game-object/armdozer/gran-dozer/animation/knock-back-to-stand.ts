@@ -1,4 +1,5 @@
 import { Animate } from "../../../../animation/animate";
+import { onStart } from "../../../../animation/on-start";
 import { tween } from "../../../../animation/tween";
 import { GranDozerAnimationProps } from "./animation-props";
 
@@ -22,5 +23,29 @@ export function knockBackToStand(props: GranDozerAnimationProps): Animate {
           model.animation.type = "STAND";
         }),
       ),
+    )
+    .chain(
+      tween(model.animation, (t) =>
+        t
+          .onStart(() => {
+            model.animation.type = "FRONT_STEP";
+          })
+          .to({ frame: 0 }, 0),
+      ),
+    )
+    .chain(tween(model.animation, (t) => t.to({ frame: 1 }, 300)))
+    .chain(
+      tween(model.animation, (t) =>
+        t
+          .onStart(() => {
+            se.play(sounds.motor);
+          })
+          .to({ frame: 0 }, 300),
+      ),
+    )
+    .chain(
+      onStart(() => {
+        model.animation.type = "STAND";
+      }),
     );
 }
