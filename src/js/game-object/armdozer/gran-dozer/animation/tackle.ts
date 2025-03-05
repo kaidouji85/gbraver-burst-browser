@@ -24,7 +24,7 @@ export function tackle(props: GranDozerAnimationProps): Animate {
       ),
   ).chain(
     tween(model, (t) =>
-      t.to({ animation: { frame: 1 }, position: { x: "-100" } }, 100),
+      t.to({ animation: { frame: 1 }, position: { x: "-70" } }, 100),
     ),
   );
 }
