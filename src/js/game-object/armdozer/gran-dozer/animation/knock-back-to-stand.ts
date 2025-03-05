@@ -1,8 +1,7 @@
 import { Animate } from "../../../../animation/animate";
+import { onStart } from "../../../../animation/on-start";
 import { tween } from "../../../../animation/tween";
 import { GranDozerAnimationProps } from "./animation-props";
-import { onStart } from "../../../../animation/on-start";
-import { delay } from "../../../../animation/delay";
 
 /**
  * ノックバック -> 立ち
