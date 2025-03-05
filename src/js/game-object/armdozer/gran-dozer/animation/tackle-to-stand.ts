@@ -36,7 +36,7 @@ export function tackleToStand(props: GranDozerAnimationProps): Animate {
             animation: { frame: 1 },
             position: { x: ARMDOZER_SPRITE_STANDARD_X },
           },
-          200,
+          300,
         ),
       ),
     )
@@ -49,14 +49,14 @@ export function tackleToStand(props: GranDozerAnimationProps): Animate {
           .to({ animation: { frame: 1 } }, 0),
       ),
     )
-    .chain(delay(300))
+    .chain(delay(200))
     .chain(
       tween(model, (t) =>
         t
           .onStart(() => {
             se.play(sounds.motor);
           })
-          .to({ animation: { frame: 0 } }, 200),
+          .to({ animation: { frame: 0 } }, 300),
       ),
     )
     .chain(
