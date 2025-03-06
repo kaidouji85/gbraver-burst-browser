@@ -1,6 +1,5 @@
 import { Animate } from "../../../../animation/animate";
 import { delay } from "../../../../animation/delay";
-import { onStart } from "../../../../animation/on-start";
 import { tween } from "../../../../animation/tween";
 import { GranDozerAnimationProps } from "./animation-props";
 
