@@ -16,7 +16,7 @@ export function knockBackToStand(props: GranDozerAnimationProps): Animate {
       se.play(sounds.motor);
     }),
   )
-    .chain(tween(model.animation, (t) => t.to({ frame: 0 }, 200)))
+    .chain(tween(model.animation, (t) => t.to({ frame: 0 }, 250)))
     .chain(
       tween(model.animation, (t) =>
         t
@@ -35,15 +35,15 @@ export function knockBackToStand(props: GranDozerAnimationProps): Animate {
           .to({ frame: 0 }, 0),
       ),
     )
-    .chain(tween(model.animation, (t) => t.to({ frame: 1 }, 200)))
-    .chain(delay(100))
+    .chain(tween(model.animation, (t) => t.to({ frame: 1 }, 250)))
+    .chain(delay(200))
     .chain(
       tween(model.animation, (t) =>
         t
           .onStart(() => {
             se.play(sounds.motor);
           })
-          .to({ frame: 0 }, 200)
+          .to({ frame: 0 }, 300)
           .onComplete(() => {
             model.animation.type = "STAND";
           }),
