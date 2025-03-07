@@ -21,15 +21,6 @@ export function knockBackToStand(props: GranDozerAnimationProps): Animate {
       tween(model.animation, (t) =>
         t
           .onStart(() => {
-            model.animation.type = "STAND";
-          })
-          .to({ frame: 0 }, 0),
-      ),
-    )
-    .chain(
-      tween(model.animation, (t) =>
-        t
-          .onStart(() => {
             model.animation.type = "FRONT_STEP";
           })
           .to({ frame: 0 }, 0),
