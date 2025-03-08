@@ -31,5 +31,6 @@ export function down(props: GranDozerAnimationProps): Animate {
         }),
       ),
     )
+    .chain(delay(200))
     .chain(tween(model.animation, (t) => t.to({ frame: 1 }, 250)));
 }
