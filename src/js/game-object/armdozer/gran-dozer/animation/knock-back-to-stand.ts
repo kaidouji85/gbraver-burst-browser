@@ -27,7 +27,7 @@ export function knockBackToStand(props: GranDozerAnimationProps): Animate {
       ),
     )
     .chain(tween(model.animation, (t) => t.to({ frame: 1 }, 250)))
-    .chain(delay(200))
+    .chain(delay(300))
     .chain(
       tween(model.animation, (t) =>
         t
