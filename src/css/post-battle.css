@@ -18,21 +18,24 @@
 
 .post-battle__main-action,
 .post-battle__sub-action {
-  width: min(calc(var(--font-size) * 13), 45vw);
-  height: calc(var(--font-size) * 3);
-  font-size: var(--font-size);
+  height: calc(var(--font-size) * 4);
   border-radius: var(--button-border-radius);
   color: var(--button-font-color);
 }
 
 .post-battle__sub-action {
+  width: min(calc(var(--font-size) * 12), 35vw);
   border: var(--sub-button-border);
   background-color: var(--sub-button-background-color);
   box-shadow: var(--sub-button-box-shadow);
+  font-size: calc(var(--responsive-font-size) * 1);
 }
 
 .post-battle__main-action {
-  border: var(--button-border);
+  width: min(calc(var(--font-size) * 14), 45vw);
+  border: 4px solid #00b0e6;
   background-color: var(--button-background-color);
   box-shadow: var(--sub-button-box-shadow);
+  font-weight: bold;
+  font-size: calc(var(--font-size) * 1.2);
 }
