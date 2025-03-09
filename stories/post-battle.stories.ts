@@ -1,6 +1,7 @@
 import { StoryFn } from "@storybook/html";
 
 import { PostBattleFloater } from "../src/js/dom-floaters/post-battle";
+import type { PostBattleButtonConfig } from "../src/js/dom-floaters/post-battle/post-battle-button-config";
 import {
   PostNetworkBattleButtons,
   PostNPCBattleComplete,
@@ -14,45 +15,40 @@ export default {
   title: "post-battle",
 };
 
+/**
+ * ポストバトルのストーリーを生成する
+ * @param buttons ボタン設定
+ * @returns ストーリー
+ */
+const postBattleStory = (buttons: PostBattleButtonConfig[]) =>
+  domStub((params) => {
+    const floater = new PostBattleFloater();
+    floater.show({ ...params, buttons });
+    floater.selectionCompleteNotifier().subscribe((postBattle) => {
+      console.log(postBattle);
+    });
+    return floater.getRootHTMLElement();
+  });
+
 /** NPCバトル勝利 */
-export const postNPCBattleWin: StoryFn = domStub((params) => {
-  const floater = new PostBattleFloater();
-  floater.show({ ...params, buttons: PostNPCBattleWinButtons });
-  floater.selectionCompleteNotifier().subscribe((postBattle) => {
-    console.log(postBattle);
-  });
-  return floater.getRootHTMLElement();
-});
+export const postNPCBattleWin: StoryFn = postBattleStory(
+  PostNPCBattleWinButtons,
+);
 
-/** NPCバトル敗北 */
-export const postNPCBattleLose: StoryFn = domStub((params) => {
-  const floater = new PostBattleFloater();
-  floater.show({ ...params, buttons: PostNPCBattleLoseButtons });
-  floater.selectionCompleteNotifier().subscribe((postBattle) => {
-    console.log(postBattle);
-  });
-  return floater.getRootHTMLElement();
-});
+/** NPCバトル敗北 PostNPCBattleLoseButtons */
+export const postNPCBattleLose: StoryFn = postBattleStory(
+  PostNPCBattleLoseButtons,
+);
 
-/** NPCバトル完全クリア */
-export const postNPCBattleComplete: StoryFn = domStub((params) => {
-  const floater = new PostBattleFloater();
-  floater.show({ ...params, buttons: PostNPCBattleComplete });
-  floater.selectionCompleteNotifier().subscribe((postBattle) => {
-    console.log(postBattle);
-  });
-  return floater.getRootHTMLElement();
-});
+/** NPCバトル完全クリア  */
+export const postNPCBattleComplete: StoryFn = postBattleStory(
+  PostNPCBattleComplete,
+);
 
 /** ネット対戦終了 */
-export const postNetworkBattle: StoryFn = domStub((params) => {
-  const floater = new PostBattleFloater();
-  floater.show({ ...params, buttons: PostNetworkBattleButtons });
-  floater.selectionCompleteNotifier().subscribe((postBattle) => {
-    console.log(postBattle);
-  });
-  return floater.getRootHTMLElement();
-});
+export const postNetworkBattle: StoryFn = postBattleStory(
+  PostNetworkBattleButtons,
+);
 
 /** 表示、非表示の繰り返し */
 export const showHidden: StoryFn = domStub((params) => {
