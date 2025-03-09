@@ -31,10 +31,10 @@
 }
 
 .post-battle__main-action {
+  border: 3px solid #00b0e6;
   height: calc(var(--font-size) * 4);
   font-size: calc(var(--responsive-font-size) * 1.1);
-  border: 3px solid #00b0e6;
+  font-weight: bold;
   background-color: var(--button-background-color);
   box-shadow: var(--sub-button-box-shadow);
-  font-weight: bold;
 }
