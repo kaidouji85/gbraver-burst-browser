@@ -52,17 +52,23 @@ async function resizeWebp(origin: string, scale: number): Promise<void> {
     "build/production/resources/**/mobile/armdozer/wing-dozer/burst-up.webp",
     "build/production/resources/**/mobile/armdozer/genesis-braver/cutin-burst-up.webp",
     "build/production/resources/**/mobile/armdozer/genesis-braver/cutin-burst-up.webp",
+    "build/production/resources/**/mobile/armdozer/gran-dozer/**/*.webp",
   ];
+  const granDozerWebpImages =
+    "build/production/resources/**/mobile/armdozer/gran-dozer/**/*.webp";
   const pngModelTextures =
     "build/production/resources/**/mobile/**/model/**/*.png";
 
-  const [webpImagePaths, pngModelTexturePaths] = await Promise.all([
-    glob(webpImages, { ignore: ignoreWebpImages }),
-    glob(pngModelTextures),
-  ]);
+  const [webpImagePaths, granDozerImagePaths, pngModelTexturePaths] =
+    await Promise.all([
+      glob(webpImages, { ignore: ignoreWebpImages }),
+      glob(granDozerWebpImages),
+      glob(pngModelTextures),
+    ]);
   await Promise.all([
-    ...webpImagePaths.map((v) => resizeWebp(v, 0.5)),
-    ...pngModelTexturePaths.map((v) => resizePng(v, 0.25)),
+    ...webpImagePaths.map((p) => resizeWebp(p, 0.5)),
+    ...granDozerImagePaths.map((p) => resizeWebp(p, 0.25)),
+    ...pngModelTexturePaths.map((p) => resizePng(p, 0.25)),
   ]);
 
   console.log("complete scale down mobile images");
