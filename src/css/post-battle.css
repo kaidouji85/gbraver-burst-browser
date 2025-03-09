@@ -18,13 +18,12 @@
 
 .post-battle__main-action,
 .post-battle__sub-action {
-  height: calc(var(--font-size) * 4);
   border-radius: var(--button-border-radius);
   color: var(--button-font-color);
 }
 
 .post-battle__sub-action {
-  width: min(calc(var(--font-size) * 12), 35vw);
+  min-width: min(calc(var(--font-size) * 10), 30vw);
   border: var(--sub-button-border);
   background-color: var(--sub-button-background-color);
   box-shadow: var(--sub-button-box-shadow);
@@ -32,10 +31,11 @@
 }
 
 .post-battle__main-action {
-  width: min(calc(var(--font-size) * 14), 45vw);
+  min-width: min(calc(var(--font-size) * 15), 45vw);
+  height: calc(var(--font-size) * 4);
   border: 4px solid #00b0e6;
   background-color: var(--button-background-color);
   box-shadow: var(--sub-button-box-shadow);
   font-weight: bold;
-  font-size: calc(var(--font-size) * 1.2);
+  font-size: calc(var(--font-size) * 1.1);
 }
