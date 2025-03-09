@@ -3,6 +3,9 @@ import { StoryFn } from "@storybook/html";
 import { PostBattleFloater } from "../src/js/dom-floaters/post-battle";
 import type { PostBattleButtonConfig } from "../src/js/dom-floaters/post-battle/post-battle-button-config";
 import {
+  PostEpisodeButtons,
+  PostEpisodeLoseButtons,
+  PostEpisodeWinButtons,
   PostNetworkBattleButtons,
   PostNPCBattleComplete,
   PostNPCBattleLoseButtons,
@@ -49,6 +52,15 @@ export const postNPCBattleComplete: StoryFn = postBattleStory(
 export const postNetworkBattle: StoryFn = postBattleStory(
   PostNetworkBattleButtons,
 );
+
+/** エピソード終了 */
+export const postEpisode: StoryFn = postBattleStory(PostEpisodeButtons);
+
+/** エピソード終了（プレイヤーの勝利） */
+export const postEpisodeWin: StoryFn = postBattleStory(PostEpisodeWinButtons);
+
+/** エピソード終了（プレイヤーの敗北） */
+export const postEpisodeLose: StoryFn = postBattleStory(PostEpisodeLoseButtons);
 
 /** 表示、非表示の繰り返し */
 export const showHidden: StoryFn = domStub((params) => {
