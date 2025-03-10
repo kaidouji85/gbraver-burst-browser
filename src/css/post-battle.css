@@ -24,7 +24,7 @@
 
 .post-battle__sub-action {
   border: var(--sub-button-border);
-  font-size: calc(var(--responsive-font-size) * 1);
+  font-size: calc(var(--responsive-font-size) * 1.2);
   background-color: var(--sub-button-background-color);
   box-shadow: var(--sub-button-box-shadow);
 }
