@@ -34,40 +34,61 @@ async function resizeWebp(origin: string, scale: number): Promise<void> {
 }
 
 /**
+ * グランドーザの画像パスを取得する
+ * @return グランドーザの画像パス
+ */
+const getGranDozerWebpPaths = () =>
+  glob("build/production/resources/**/mobile/armdozer/gran-dozer/**/*.webp", {
+    ignore: [
+      "build/production/resources/**/mobile/armdozer/gran-dozer/bust-shot.webp",
+      "build/production/resources/**/mobile/armdozer/gran-dozer/player-select.webp",
+    ],
+  });
+
+/**
+ * pngモデルテクスチャのパスを取得する
+ * @return pngモデルテクスチャのパス
+ */
+const pngPngModelTexturrPaths = () =>
+  glob("build/production/resources/**/mobile/**/model/**/*.png");
+
+/**
+ * webp画像のパスを取得する
+ * @return webp画像のパス
+ */
+const getWebpPaths = () =>
+  glob("build/production/resources/**/mobile/**/*.webp", {
+    ignore: [
+      "build/production/resources/**/mobile/default-user-icon.webp",
+      "build/production/resources/**/mobile/armdozer/shin-braver/cutin-down.webp",
+      "build/production/resources/**/mobile/armdozer/shin-braver/cutin-up.webp",
+      "build/production/resources/**/mobile/armdozer/neo-landozer/cutin-down.webp",
+      "build/production/resources/**/mobile/armdozer/neo-landozer/cutin-up.webp",
+      "build/production/resources/**/mobile/armdozer/lightning-dozer/cutin-down.webp",
+      "build/production/resources/**/mobile/armdozer/lightning-dozer/cutin-up.webp",
+      "build/production/resources/**/mobile/armdozer/wing-dozer/burst-down.webp",
+      "build/production/resources/**/mobile/armdozer/wing-dozer/burst-up.webp",
+      "build/production/resources/**/mobile/armdozer/genesis-braver/cutin-burst-up.webp",
+      "build/production/resources/**/mobile/armdozer/genesis-braver/cutin-burst-up.webp",
+      "build/production/resources/**/mobile/armdozer/gran-dozer/**/*.webp",
+    ],
+  });
+
+/**
  * モバイル用画像をスケールダウンする
  */
 (async () => {
   console.log("start scale down mobile images");
 
-  const webpImages = "build/production/resources/**/mobile/**/*.webp";
-  const ignoreWebpImages = [
-    "build/production/resources/**/mobile/default-user-icon.webp",
-    "build/production/resources/**/mobile/armdozer/shin-braver/cutin-down.webp",
-    "build/production/resources/**/mobile/armdozer/shin-braver/cutin-up.webp",
-    "build/production/resources/**/mobile/armdozer/neo-landozer/cutin-down.webp",
-    "build/production/resources/**/mobile/armdozer/neo-landozer/cutin-up.webp",
-    "build/production/resources/**/mobile/armdozer/lightning-dozer/cutin-down.webp",
-    "build/production/resources/**/mobile/armdozer/lightning-dozer/cutin-up.webp",
-    "build/production/resources/**/mobile/armdozer/wing-dozer/burst-down.webp",
-    "build/production/resources/**/mobile/armdozer/wing-dozer/burst-up.webp",
-    "build/production/resources/**/mobile/armdozer/genesis-braver/cutin-burst-up.webp",
-    "build/production/resources/**/mobile/armdozer/genesis-braver/cutin-burst-up.webp",
-    "build/production/resources/**/mobile/armdozer/gran-dozer/**/*.webp",
-  ];
-  const granDozerWebpImages =
-    "build/production/resources/**/mobile/armdozer/gran-dozer/**/*.webp";
-  const pngModelTextures =
-    "build/production/resources/**/mobile/**/model/**/*.png";
-
-  const [webpImagePaths, granDozerImagePaths, pngModelTexturePaths] =
+  const [granDozerWebpPaths, pngModelTexturePaths, webpPaths] =
     await Promise.all([
-      glob(webpImages, { ignore: ignoreWebpImages }),
-      glob(granDozerWebpImages),
-      glob(pngModelTextures),
+      getGranDozerWebpPaths(),
+      pngPngModelTexturrPaths(),
+      getWebpPaths(),
     ]);
   await Promise.all([
-    ...webpImagePaths.map((p) => resizeWebp(p, 0.5)),
-    ...granDozerImagePaths.map((p) => resizeWebp(p, 0.25)),
+    ...webpPaths.map((p) => resizeWebp(p, 0.5)),
+    ...granDozerWebpPaths.map((p) => resizeWebp(p, 0.25)),
     ...pngModelTexturePaths.map((p) => resizePng(p, 0.25)),
   ]);
 
