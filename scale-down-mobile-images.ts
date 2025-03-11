@@ -90,8 +90,8 @@ const getWebpPaths = () =>
   console.log("start scale down mobile images");
 
   const [
-    granDozerWebpPathsFor25percent,
-    granDozerWebpPathsFor50percent,
+    granDozer25percentWebpPaths,
+    granDozer50percentWebpPaths,
     pngModelTexturePaths,
     webpPaths,
   ] = await Promise.all([
@@ -101,8 +101,8 @@ const getWebpPaths = () =>
     getWebpPaths(),
   ]);
   await Promise.all([
-    ...granDozerWebpPathsFor25percent.map((p) => resizeWebp(p, 0.25)),
-    ...granDozerWebpPathsFor50percent.map((p) => resizeWebp(p, 0.5)),
+    ...granDozer25percentWebpPaths.map((p) => resizeWebp(p, 0.25)),
+    ...granDozer50percentWebpPaths.map((p) => resizeWebp(p, 0.5)),
     ...pngModelTexturePaths.map((p) => resizePng(p, 0.25)),
     ...webpPaths.map((p) => resizeWebp(p, 0.5)),
   ]);
