@@ -34,35 +34,77 @@ async function resizeWebp(origin: string, scale: number): Promise<void> {
 }
 
 /**
+ * 25%縮小するグランドーザ画像パスを取得する
+ * @return グランドーザの画像パス
+ */
+const getGranDozerWebpPathsFor25Percent = () =>
+  glob("build/production/resources/**/mobile/armdozer/gran-dozer/**/*.webp", {
+    ignore: [
+      "build/production/resources/**/mobile/armdozer/gran-dozer/bust-shot.webp",
+      "build/production/resources/**/mobile/armdozer/gran-dozer/player-select.webp",
+    ],
+  });
+
+/**
+ * 50%縮小するグランドーザの画像パスを取得する
+ * @return グランドーザの画像パス
+ */
+const getGranDozerWebpPathsFor50Percent = () =>
+  glob(
+    "build/production/resources/**/mobile/armdozer/gran-dozer/**/player-select.webp",
+  );
+
+/**
+ * pngモデルテクスチャのパスを取得する
+ * @return pngモデルテクスチャのパス
+ */
+const getPngModelTexturePaths = () =>
+  glob("build/production/resources/**/mobile/**/model/**/*.png");
+
+/**
+ * webp画像のパスを取得する
+ * @return webp画像のパス
+ */
+const getWebpPaths = () =>
+  glob("build/production/resources/**/mobile/**/*.webp", {
+    ignore: [
+      "build/production/resources/**/mobile/default-user-icon.webp",
+      "build/production/resources/**/mobile/armdozer/shin-braver/cutin-down.webp",
+      "build/production/resources/**/mobile/armdozer/shin-braver/cutin-up.webp",
+      "build/production/resources/**/mobile/armdozer/neo-landozer/cutin-down.webp",
+      "build/production/resources/**/mobile/armdozer/neo-landozer/cutin-up.webp",
+      "build/production/resources/**/mobile/armdozer/lightning-dozer/cutin-down.webp",
+      "build/production/resources/**/mobile/armdozer/lightning-dozer/cutin-up.webp",
+      "build/production/resources/**/mobile/armdozer/wing-dozer/burst-down.webp",
+      "build/production/resources/**/mobile/armdozer/wing-dozer/burst-up.webp",
+      "build/production/resources/**/mobile/armdozer/genesis-braver/cutin-burst-up.webp",
+      "build/production/resources/**/mobile/armdozer/genesis-braver/cutin-burst-up.webp",
+      "build/production/resources/**/mobile/armdozer/gran-dozer/**/*.webp",
+    ],
+  });
+
+/**
  * モバイル用画像をスケールダウンする
  */
 (async () => {
   console.log("start scale down mobile images");
 
-  const webpImages = "build/production/resources/**/mobile/**/*.webp";
-  const ignoreWebpImages = [
-    "build/production/resources/**/mobile/default-user-icon.webp",
-    "build/production/resources/**/mobile/armdozer/shin-braver/cutin-down.webp",
-    "build/production/resources/**/mobile/armdozer/shin-braver/cutin-up.webp",
-    "build/production/resources/**/mobile/armdozer/neo-landozer/cutin-down.webp",
-    "build/production/resources/**/mobile/armdozer/neo-landozer/cutin-up.webp",
-    "build/production/resources/**/mobile/armdozer/lightning-dozer/cutin-down.webp",
-    "build/production/resources/**/mobile/armdozer/lightning-dozer/cutin-up.webp",
-    "build/production/resources/**/mobile/armdozer/wing-dozer/burst-down.webp",
-    "build/production/resources/**/mobile/armdozer/wing-dozer/burst-up.webp",
-    "build/production/resources/**/mobile/armdozer/genesis-braver/cutin-burst-up.webp",
-    "build/production/resources/**/mobile/armdozer/genesis-braver/cutin-burst-up.webp",
-  ];
-  const pngModelTextures =
-    "build/production/resources/**/mobile/**/model/**/*.png";
-
-  const [webpImagePaths, pngModelTexturePaths] = await Promise.all([
-    glob(webpImages, { ignore: ignoreWebpImages }),
-    glob(pngModelTextures),
+  const [
+    granDozer25percentWebpPaths,
+    granDozer50percentWebpPaths,
+    pngModelTexturePaths,
+    webpPaths,
+  ] = await Promise.all([
+    getGranDozerWebpPathsFor25Percent(),
+    getGranDozerWebpPathsFor50Percent(),
+    getPngModelTexturePaths(),
+    getWebpPaths(),
   ]);
   await Promise.all([
-    ...webpImagePaths.map((v) => resizeWebp(v, 0.5)),
-    ...pngModelTexturePaths.map((v) => resizePng(v, 0.25)),
+    ...granDozer25percentWebpPaths.map((p) => resizeWebp(p, 0.25)),
+    ...granDozer50percentWebpPaths.map((p) => resizeWebp(p, 0.5)),
+    ...pngModelTexturePaths.map((p) => resizePng(p, 0.25)),
+    ...webpPaths.map((p) => resizeWebp(p, 0.5)),
   ]);
 
   console.log("complete scale down mobile images");
