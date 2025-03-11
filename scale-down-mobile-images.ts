@@ -58,7 +58,7 @@ const getGranDozerWebpPathsFor50Percent = () =>
  * pngモデルテクスチャのパスを取得する
  * @return pngモデルテクスチャのパス
  */
-const pngPngModelTexturrPaths = () =>
+const getPngModelTexturePaths = () =>
   glob("build/production/resources/**/mobile/**/model/**/*.png");
 
 /**
@@ -97,7 +97,7 @@ const getWebpPaths = () =>
   ] = await Promise.all([
     getGranDozerWebpPathsFor25Percent(),
     getGranDozerWebpPathsFor50Percent(),
-    pngPngModelTexturrPaths(),
+    getPngModelTexturePaths(),
     getWebpPaths(),
   ]);
   await Promise.all([
