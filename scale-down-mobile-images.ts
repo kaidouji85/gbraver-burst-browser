@@ -34,16 +34,25 @@ async function resizeWebp(origin: string, scale: number): Promise<void> {
 }
 
 /**
- * グランドーザの画像パスを取得する
+ * 25%縮小するグランドーザ画像パスを取得する
  * @return グランドーザの画像パス
  */
-const getGranDozerWebpPaths = () =>
+const getGranDozerWebpPathsFor25Percent = () =>
   glob("build/production/resources/**/mobile/armdozer/gran-dozer/**/*.webp", {
     ignore: [
       "build/production/resources/**/mobile/armdozer/gran-dozer/bust-shot.webp",
       "build/production/resources/**/mobile/armdozer/gran-dozer/player-select.webp",
     ],
   });
+
+/**
+ * 50%縮小するグランドーザの画像パスを取得する
+ * @return グランドーザの画像パス
+ */
+const getGranDozerWebpPathsFor50Percent = () =>
+  glob(
+    "build/production/resources/**/mobile/armdozer/gran-dozer/**/player-select.webp",
+  );
 
 /**
  * pngモデルテクスチャのパスを取得する
@@ -80,16 +89,22 @@ const getWebpPaths = () =>
 (async () => {
   console.log("start scale down mobile images");
 
-  const [granDozerWebpPaths, pngModelTexturePaths, webpPaths] =
-    await Promise.all([
-      getGranDozerWebpPaths(),
-      pngPngModelTexturrPaths(),
-      getWebpPaths(),
-    ]);
+  const [
+    granDozerWebpPathsFor25percent,
+    granDozerWebpPathsFor50percent,
+    pngModelTexturePaths,
+    webpPaths,
+  ] = await Promise.all([
+    getGranDozerWebpPathsFor25Percent(),
+    getGranDozerWebpPathsFor50Percent(),
+    pngPngModelTexturrPaths(),
+    getWebpPaths(),
+  ]);
   await Promise.all([
-    ...webpPaths.map((p) => resizeWebp(p, 0.5)),
-    ...granDozerWebpPaths.map((p) => resizeWebp(p, 0.25)),
+    ...granDozerWebpPathsFor25percent.map((p) => resizeWebp(p, 0.25)),
+    ...granDozerWebpPathsFor50percent.map((p) => resizeWebp(p, 0.5)),
     ...pngModelTexturePaths.map((p) => resizePng(p, 0.25)),
+    ...webpPaths.map((p) => resizeWebp(p, 0.5)),
   ]);
 
   console.log("complete scale down mobile images");
