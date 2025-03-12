@@ -221,8 +221,8 @@
 
 .battle-simulator__player-armdozer--gran-dozer,
 .battle-simulator__enemy-armdozer--gran-dozer {
-  width: calc(var(--responsive-font-size) * 28);
-  height: calc(var(--responsive-font-size) * 28);
+  width: calc(var(--responsive-font-size) * 26);
+  height: calc(var(--responsive-font-size) * 26);
 }
 
 .battle-simulator__player-battery-value,
