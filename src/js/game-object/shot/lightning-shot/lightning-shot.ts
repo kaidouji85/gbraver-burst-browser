@@ -5,13 +5,21 @@ import {
   lightningShotPropsOptions,
 } from "./props/create-lightning-shot-props";
 import { LightningShotProps } from "./props/lightning-shot-props";
+import { Observable, Unsubscribable } from "rxjs";
+import { bindEventListeners } from "./procedures/bind-event-listeners";
+import { GameObjectAction } from "../../action/game-object-action";
 
-type LightningShotOptions = lightningShotPropsOptions;
+/** 電撃ショットオプション */
+type LightningShotOptions = lightningShotPropsOptions & {
+  gameObjectAction: Observable<GameObjectAction>;
+};
 
 /** 電撃ショット */
 export class LightningShot {
   /** プロパティ */
   #props: LightningShotProps;
+  /** アンサブスクライバー */
+  #unsubscribers: Unsubscribable[];
 
   /**
    * コンストラクタ
@@ -20,6 +28,10 @@ export class LightningShot {
    */
   constructor(options: LightningShotOptions) {
     this.#props = createLightningShotProps(options);
+    this.#unsubscribers = bindEventListeners({
+      ...options,
+      props: this.#props,
+    });
   }
 
   /**
@@ -27,6 +39,7 @@ export class LightningShot {
    */
   destructor(): void {
     this.#props.mesh.destructor();
+    this.#unsubscribers.forEach((unsubscriber) => unsubscriber.unsubscribe());
   }
 
   /**
