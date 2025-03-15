@@ -16,6 +16,7 @@ import { RaitoTextureConfigs } from "./raito";
 import { ResultTextureConfigs } from "./result";
 import { ShinBraverTextureConfigs } from "./shin-braver";
 import { ShockWaveTextureConfigs } from "./shock-wave";
+import { ShotTextureConfigs } from "./shot";
 import { ShinyaTextureConfigs } from "./sinya";
 import { TsubasaTextureConfigs } from "./tsubasa";
 import { TurnTexureConfigs } from "./turn";
@@ -50,4 +51,5 @@ export const TEXTURE_CONFIGS: TextureConfig[] = [
 /** 開発中のテクスチャリソース設定をあつめたもの */
 export const DEVELOPING_TEXTURE_CONFIGS: TextureConfig[] = [
   ...GranDozerTextureConfigs,
+  ...ShotTextureConfigs,
 ];
