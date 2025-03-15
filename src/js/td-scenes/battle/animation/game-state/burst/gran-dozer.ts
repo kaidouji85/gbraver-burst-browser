@@ -41,21 +41,24 @@ function focusToBurstPlayer(param: GranDozerBurst<Burst>) {
 function ineffective(param: GranDozerBurst<Ineffective>): Animate {
   return all(
     focusToBurstPlayer(param),
+    param.burstArmdozerTD.granDozer.burst(),
     param.tdObjects.skyBrightness.brightness(0.2, 500),
     param.tdObjects.illumination.intensity(0.2, 500),
     param.attackerArmdozerTD.sprite().endActive(),
-    delay(200).chain(
+  )
+    .chain(delay(800))
+    .chain(
       all(
         param.burstPlayerHUD.gauge.battery(
           param.burstPlayerState.armdozer.battery,
         ),
         param.burstPlayerTD.recoverBattery.popUp(param.burst.recoverBattery),
       ),
-    ),
-  )
+    )
     .chain(
       all(
         toInitial(param.tdCamera, 500),
+        param.burstArmdozerTD.granDozer.burstToStand(),
         param.tdObjects.skyBrightness.brightness(1, 500),
         param.tdObjects.illumination.intensity(1, 500),
       ),
