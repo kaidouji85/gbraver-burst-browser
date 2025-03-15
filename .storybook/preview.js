@@ -1,9 +1,9 @@
 const preview = {
   parameters: {
     layout: "fullscreen",
-    backgrounds: {
-      default: "Dark",
-    },
+  },
+  initialGlobals: {
+    backgrounds: { value: "dark", grid: true },
   },
 };
 
