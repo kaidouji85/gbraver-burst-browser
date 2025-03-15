@@ -8,6 +8,7 @@ import {
   GameObjectAction,
   gameObjectStream,
 } from "../../src/js/game-object/action/game-object-action";
+import { GameObjectActionContainer } from "../../src/js/game-object/action/game-object-action-container";
 import { TDCamera } from "../../src/js/game-object/camera/td";
 import { Renderer } from "../../src/js/render";
 import { OverlapEvent } from "../../src/js/render/overlap-event/overlap-event";
@@ -23,9 +24,8 @@ import { StorybookResourceRoot } from "../storybook-resource-root";
 
 /** Object3D生成関数パラメータ */
 type Object3DCreatorParams = ResourcesContainer &
-  SEPlayerContainer & {
-    /** ゲームオブジェクトアクション */
-    gameObjectAction: Observable<GameObjectAction>;
+  SEPlayerContainer &
+  GameObjectActionContainer & {
     /** カメラ */
     camera: TDCamera;
   };
