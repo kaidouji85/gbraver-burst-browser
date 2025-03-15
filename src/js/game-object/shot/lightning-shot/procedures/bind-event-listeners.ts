@@ -1,6 +1,6 @@
-import { Observable, Unsubscribable } from "rxjs";
+import { Unsubscribable } from "rxjs";
 
-import { GameObjectAction } from "../../../action/game-object-action";
+import { GameObjectActionContainer } from "../../../action/game-object-action-container";
 import { LightningShotProps } from "../props/lightning-shot-props";
 import { onUpdate } from "./on-update";
 
@@ -8,12 +8,12 @@ import { onUpdate } from "./on-update";
  * イベントリスナーをバインドする
  * @param options オプション
  * @param options.props プロパティ
- * @param options.action アクション
  */
-export function bindEventListeners(options: {
-  props: LightningShotProps;
-  gameObjectAction: Observable<GameObjectAction>;
-}): Unsubscribable[] {
+export function bindEventListeners(
+  options: GameObjectActionContainer & {
+    props: LightningShotProps;
+  },
+): Unsubscribable[] {
   const { props, gameObjectAction } = options;
   return [
     gameObjectAction.subscribe((action) => {

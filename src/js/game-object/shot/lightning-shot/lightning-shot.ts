@@ -1,18 +1,17 @@
+import { Unsubscribable } from "rxjs";
 import * as THREE from "three";
 
+import { GameObjectActionContainer } from "../../action/game-object-action-container";
+import { bindEventListeners } from "./procedures/bind-event-listeners";
 import {
   createLightningShotProps,
   lightningShotPropsOptions,
 } from "./props/create-lightning-shot-props";
 import { LightningShotProps } from "./props/lightning-shot-props";
-import { Observable, Unsubscribable } from "rxjs";
-import { bindEventListeners } from "./procedures/bind-event-listeners";
-import { GameObjectAction } from "../../action/game-object-action";
 
 /** 電撃ショットオプション */
-type LightningShotOptions = lightningShotPropsOptions & {
-  gameObjectAction: Observable<GameObjectAction>;
-};
+type LightningShotOptions = lightningShotPropsOptions &
+  GameObjectActionContainer;
 
 /** 電撃ショット */
 export class LightningShot {

@@ -1,7 +1,5 @@
-import { Observable } from "rxjs";
-
 import { ResourcesContainer } from "../../../resource";
-import { GameObjectAction } from "../../action/game-object-action";
+import { GameObjectActionContainer } from "../../action/game-object-action-container";
 import { LightningShot } from "./lightning-shot";
 import { PlayerLightningShotView } from "./view/player-lightning-shot-view";
 
@@ -11,9 +9,7 @@ import { PlayerLightningShotView } from "./view/player-lightning-shot-view";
  * @returns プレイヤーの電撃ショット
  */
 export function playerLightningShot(
-  options: ResourcesContainer & {
-    gameObjectAction: Observable<GameObjectAction>;
-  },
+  options: ResourcesContainer & GameObjectActionContainer,
 ): LightningShot {
   const view = new PlayerLightningShotView(options);
   return new LightningShot({ ...options, view });
