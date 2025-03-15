@@ -1,7 +1,7 @@
 import * as THREE from "three";
 
 import { HorizontalAnimationMesh } from "../../../mesh/horizontal-animation";
-import { Resources } from "../../../resource";
+import { ResourcesContainer } from "../../../resource";
 import { TEXTURE_IDS } from "../../../resource/texture/ids";
 
 /** 電撃ショット */
@@ -11,9 +11,10 @@ export class LightningShot {
 
   /**
    * コンストラクタ
-   * @param resources リソース管理オブジェクト
+   * @param options オプション
    */
-  constructor(resources: Resources) {
+  constructor(options: ResourcesContainer) {
+    const { resources } = options;
     const texture =
       resources.textures.find((t) => t.id === TEXTURE_IDS.LIGHTNING_SHOT)
         ?.texture ?? new THREE.Texture();
