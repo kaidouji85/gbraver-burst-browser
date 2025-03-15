@@ -1,36 +1,27 @@
 import * as THREE from "three";
 
-import { HorizontalAnimationMesh } from "../../../mesh/horizontal-animation";
 import { ResourcesContainer } from "../../../resource";
-import { TEXTURE_IDS } from "../../../resource/texture/ids";
+import { createLightningShotProps } from "./procedures/create-lightning-shot-props";
+import { LightningShotProps } from "./props";
 
 /** 電撃ショット */
 export class LightningShot {
-  /** メッシュ */
-  #mesh: HorizontalAnimationMesh;
+  /** プロパティ */
+  #props: LightningShotProps;
 
   /**
    * コンストラクタ
    * @param options オプション
    */
   constructor(options: ResourcesContainer) {
-    const { resources } = options;
-    const texture =
-      resources.textures.find((t) => t.id === TEXTURE_IDS.LIGHTNING_SHOT)
-        ?.texture ?? new THREE.Texture();
-    this.#mesh = new HorizontalAnimationMesh({
-      texture,
-      maxAnimation: 8,
-      width: 200,
-      height: 200,
-    });
+    this.#props = createLightningShotProps(options);
   }
 
   /**
    * デストラクタ相当の処理
    */
   destructor(): void {
-    this.#mesh.destructor();
+    this.#props.mesh.destructor();
   }
 
   /**
@@ -38,6 +29,6 @@ export class LightningShot {
    * @returns シーンに追加するオブジェクト
    */
   getObject3D(): THREE.Object3D {
-    return this.#mesh.getObject3D();
+    return this.#props.mesh.getObject3D();
   }
 }
